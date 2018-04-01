@@ -9,22 +9,22 @@ Pod::Spec.new do |s|
     s.source            = { :git => "https://github.com/pia-foss/client-library-apple.git", :tag => "v#{s.version}" }
 
     s.ios.deployment_target = "9.0"
-    s.osx.deployment_target = "10.11"
+    #s.osx.deployment_target = "10.11"
 
     s.default_subspecs = "Core", "Library"
 
     s.subspec "Core" do |p|
         p.source_files          = "PIALibrary/Sources/Core/**/*.swift"
-        p.osx.exclude_files     = "PIALibrary/Sources/Core/InApp",
-                                  "PIALibrary/Sources/Core/Account/InApp"
+        #p.osx.exclude_files     = "PIALibrary/Sources/Core/InApp",
+        #                          "PIALibrary/Sources/Core/Account/InApp"
     end
 
     s.subspec "Library" do |p|
         p.source_files          = "PIALibrary/Sources/Library/**/*.swift"
-        p.osx.exclude_files     = "PIALibrary/Sources/Library/InApp"
+        #p.osx.exclude_files     = "PIALibrary/Sources/Library/InApp"
         p.resources             = "PIALibrary/Resources/Library/**/*"
         p.ios.frameworks        = "UIKit"
-        p.osx.frameworks        = "Cocoa"
+        #p.osx.frameworks        = "Cocoa"
         p.dependency "PIALibrary/Core"
         p.dependency "PIALibrary/Util"
         p.dependency "Gloss", "~> 2"
@@ -68,10 +68,10 @@ Pod::Spec.new do |s|
         p.ios.private_header_files  = "PIALibrary/Sources/Util/iOS/*.h"
         p.ios.preserve_paths        = "PIALibrary/Sources/Util/iOS/*.modulemap"
         p.ios.pod_target_xcconfig   = { "SWIFT_INCLUDE_PATHS" => "${PODS_TARGET_SRCROOT}/PIALibrary/Sources/Util/iOS" }
-        p.osx.source_files          = "PIALibrary/Sources/Util/macOS/*.{h,m,swift}"
-        p.osx.private_header_files  = "PIALibrary/Sources/Util/macOS/*.h"
-        p.osx.preserve_paths        = "PIALibrary/Sources/Util/macOS/*.modulemap"
-        p.osx.pod_target_xcconfig   = { "SWIFT_INCLUDE_PATHS" => "${PODS_TARGET_SRCROOT}/PIALibrary/Sources/Util/macOS" }
+        #p.osx.source_files          = "PIALibrary/Sources/Util/macOS/*.{h,m,swift}"
+        #p.osx.private_header_files  = "PIALibrary/Sources/Util/macOS/*.h"
+        #p.osx.preserve_paths        = "PIALibrary/Sources/Util/macOS/*.modulemap"
+        #p.osx.pod_target_xcconfig   = { "SWIFT_INCLUDE_PATHS" => "${PODS_TARGET_SRCROOT}/PIALibrary/Sources/Util/macOS" }
         p.dependency "PIALibrary/Core"
     end
 end
