@@ -291,8 +291,6 @@ Generic utility classes and extensions.
 
 ## Known issues
 
-The code in this repository is still a Work In Progress (WIP) and as yet not contained in App Store releases.
-
 ### macOS support
 
 There is some overlooked difference between the iOS and macOS keychain that breaks the loading of the PIA public key, needed for servers verification.
