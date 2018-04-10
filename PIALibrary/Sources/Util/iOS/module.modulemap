@@ -1,0 +1,12 @@
+module __PIALibraryNative {
+    header "../Pinger.h"
+    header "../NSData+Compression.h"
+    header "../NSString+URL.h"
+    header "CMacros.h"
+    export *
+}
+
+module CCommonCrypto [system] {
+    header "/usr/include/CommonCrypto/CommonCrypto.h"
+    export *
+}

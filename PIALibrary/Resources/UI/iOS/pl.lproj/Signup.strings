@@ -1,0 +1,36 @@
+/* (No Comment) */
+"failure.message" = "Obecnie nie możemy utworzyć konta. Spróbuj ponownie później.";
+
+/* (No Comment) */
+"failure.submit" = "WSTECZ";
+
+/* (No Comment) */
+"failure.title" = "Błąd tworzenia konta";
+
+/* (No Comment) */
+"in_progress.message" = "Potwierdzamy zakup w naszym systemie. Poczekaj spokojnie, bo to może trochę potrwać.";
+
+/* (No Comment) */
+"success.message_format" = "Dziękujemy za rejestrację. Przesłaliśmy Twoją nazwę użytkownika i hasło na Twój adres e-mail: %@";
+
+/* (No Comment) */
+"success.password.caption" = "Hasło";
+
+/* (No Comment) */
+"success.submit" = "Rozpocznij";
+
+/* (No Comment) */
+"success.title" = "Zakup zakończony";
+
+/* (No Comment) */
+"success.username.caption" = "Nazwa użytkownika";
+
+/* (No Comment) */
+"unreachable.message" = "Nie znaleziono połączenia z internetem. Potwierdź, że masz połączenie z internetem i naciśnij „Spróbuj ponownie” poniżej..\n\nMożesz wrócić do aplikacji później, aby dokończyć proces.";
+
+/* (No Comment) */
+"unreachable.submit" = "SPRÓBUJ PONOWNIE";
+
+/* (No Comment) */
+"unreachable.title" = "Ups!";
+

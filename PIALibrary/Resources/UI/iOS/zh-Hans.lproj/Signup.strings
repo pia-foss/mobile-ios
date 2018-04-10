@@ -1,0 +1,36 @@
+/* (No Comment) */
+"failure.message" = "我们现在无法创建账号。\n请稍后再试。\n\n重新打开本应用将会再次尝试创建账号。";
+
+/* (No Comment) */
+"failure.submit" = "返回";
+
+/* (No Comment) */
+"failure.title" = "账户创建失败";
+
+/* (No Comment) */
+"in_progress.message" = "我们正在确认您在我们系统中的购买。这可能需要一点时间，请耐心等待。";
+
+/* (No Comment) */
+"success.message_format" = "感谢注册。我们已将您的用户名和密码发送至您的电子邮箱：%@";
+
+/* (No Comment) */
+"success.password.caption" = "密码";
+
+/* (No Comment) */
+"success.submit" = "开始体验";
+
+/* (No Comment) */
+"success.title" = "购买完成";
+
+/* (No Comment) */
+"success.username.caption" = "用户名";
+
+/* (No Comment) */
+"unreachable.message" = "未找到网络连接。请确认您已接入网络，然后点击下面的重试。\n\n您可在稍后再回到本应用完成该操作。";
+
+/* (No Comment) */
+"unreachable.submit" = "重试";
+
+/* (No Comment) */
+"unreachable.title" = "糟糕！";
+

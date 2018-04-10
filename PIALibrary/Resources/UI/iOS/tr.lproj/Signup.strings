@@ -1,0 +1,36 @@
+/* (No Comment) */
+"failure.message" = "Şu anda hesap oluşturamıyoruz.\nLütfen daha sonra tekrar deneyin.\n\nUygulama yeniden açıldığından hesap oluşturma tekrar denenecektir.";
+
+/* (No Comment) */
+"failure.submit" = "GERİ DÖN";
+
+/* (No Comment) */
+"failure.title" = "Hesap Oluşturma Hatası";
+
+/* (No Comment) */
+"in_progress.message" = "Sistemimizle satın alım işleminizi onaylıyoruz. Biraz zaman alabilir; lütfen bekleyin.";
+
+/* (No Comment) */
+"success.message_format" = "Bize kayıt olduğunuz için teşekkürler. Hesap kullanıcı adı ve parolanızı %@ e-posta adresinize gönderdik";
+
+/* (No Comment) */
+"success.password.caption" = "Şifre";
+
+/* (No Comment) */
+"success.submit" = "Başlarken";
+
+/* (No Comment) */
+"success.title" = "Satın Alma Tamamlandı";
+
+/* (No Comment) */
+"success.username.caption" = "Kullanıcı Adı";
+
+/* (No Comment) */
+"unreachable.message" = "İnternet bağlantısı yok. Lütfen İnternet bağlantınız olup olmadığını kontrol edin ve tekrar aşağıya tıklamayı deneyin.\n\nİşlemi bitirmek için uygulamaya daha sonra tekrar gelebilirsiniz.";
+
+/* (No Comment) */
+"unreachable.submit" = "TEKRAR DENE";
+
+/* (No Comment) */
+"unreachable.title" = "Heeey!";
+

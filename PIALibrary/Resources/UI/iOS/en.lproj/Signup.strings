@@ -1,0 +1,23 @@
+/* 
+  Signup.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
+"in_progress.message" = "We're confirming your purchase with our system. It could take a moment so hang in there.";
+
+"success.title" = "Purchase complete";
+"success.message_format" = "Thank you for signing up with us. We have sent your account username and password at your email address at %@";
+"success.username.caption" = "Username";
+"success.password.caption" = "Password";
+"success.submit" = "GET STARTED";
+
+"failure.title" = "Account creation failed";
+"failure.message" = "We're unable to create an account at this time. Please try again later. Reopening the app will re-attempt to create an account.";
+"failure.submit" = "GO BACK";
+
+"unreachable.title" = "Whoops!";
+"unreachable.message" = "No internet connection found. Please confirm that you have an internet connection and hit retry below.\n\nYou can come back to the app later to finish the process.";
+"unreachable.submit" = "TRY AGAIN";

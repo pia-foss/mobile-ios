@@ -1,0 +1,36 @@
+/* (No Comment) */
+"failure.message" = "Vi kunne ikke opprette en konto nå. Prøv på nytt senere.\n\nNår du åpner appen igjen, vil den prøve å opprette kontoen på nytt.";
+
+/* (No Comment) */
+"failure.submit" = "GÅ TILBAKE";
+
+/* (No Comment) */
+"failure.title" = "Kunne ikke opprette kontoen";
+
+/* (No Comment) */
+"in_progress.message" = "Vi bekrefter kjøpet i systemet vårt. Dette kan ta litt tid.";
+
+/* (No Comment) */
+"success.message_format" = "Takk for at du registrerte deg. Vi har sendt deg kontonavnet og passordet ditt til e-postadressen din %@";
+
+/* (No Comment) */
+"success.password.caption" = "Passord";
+
+/* (No Comment) */
+"success.submit" = "Komme i gang";
+
+/* (No Comment) */
+"success.title" = "Kjøp fullført";
+
+/* (No Comment) */
+"success.username.caption" = "Brukernavn";
+
+/* (No Comment) */
+"unreachable.message" = "Ingen internettilkobling. Bekreft at du er koblet til Internett og trykk på Prøv igjen nedenfor.\n\nDu kan komme tilbake til appen senere for å fullføre prosessen.";
+
+/* (No Comment) */
+"unreachable.submit" = "PRØV PÅ NYTT";
+
+/* (No Comment) */
+"unreachable.title" = "Ups!";
+

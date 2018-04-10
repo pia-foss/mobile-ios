@@ -1,0 +1,36 @@
+/* (No Comment) */
+"failure.message" = "ただ今アカウントを作成できません。後ほどもう一度お試しください。\n\nアプリを再起動すると、アカウント作成が再試行されます。";
+
+/* (No Comment) */
+"failure.submit" = "戻る";
+
+/* (No Comment) */
+"failure.title" = "アカウントの作成に失敗しました";
+
+/* (No Comment) */
+"in_progress.message" = "システムがご購入を確定しています。しばらく時間がかかることがありますので、そのままお待ちください。";
+
+/* (No Comment) */
+"success.message_format" = "サインアップありがとうございます。アカウントのユーザー名とパスワードをお客様のメールアドレス（%@）に送信いたしました。";
+
+/* (No Comment) */
+"success.password.caption" = "パスワード";
+
+/* (No Comment) */
+"success.submit" = "始める";
+
+/* (No Comment) */
+"success.title" = "購入完了";
+
+/* (No Comment) */
+"success.username.caption" = "ユーザー名";
+
+/* (No Comment) */
+"unreachable.message" = "インターネット接続が見つかりません。インターネットに接続していることを確認してから下の再試行をタップしてください。\n\n後ほどアプリでこのプロセスを完了することができます。";
+
+/* (No Comment) */
+"unreachable.submit" = "再試行";
+
+/* (No Comment) */
+"unreachable.title" = "おっと！";
+

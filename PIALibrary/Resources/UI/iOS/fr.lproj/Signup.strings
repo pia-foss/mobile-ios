@@ -1,0 +1,36 @@
+/* (No Comment) */
+"failure.message" = "Nous ne parvenons pas à créer un compte pour l'instant. Veuillez réessayer plus tard. \n\nRouvrir l'application engendrera une nouvelle tentative de création de compte.";
+
+/* (No Comment) */
+"failure.submit" = "REVENIR";
+
+/* (No Comment) */
+"failure.title" = "La création du compte a échoué";
+
+/* (No Comment) */
+"in_progress.message" = "Notre système est en train de confirmer votre achat. Cela pourrait prendre un moment, nous vous prions donc de patienter.";
+
+/* (No Comment) */
+"success.message_format" = "Merci pour votre inscription. L'identifiant et le mot de passe de votre compte ont été envoyés à votre adresse e-mail %@";
+
+/* (No Comment) */
+"success.password.caption" = "Mot de passe";
+
+/* (No Comment) */
+"success.submit" = "Commencer";
+
+/* (No Comment) */
+"success.title" = "Achat terminé";
+
+/* (No Comment) */
+"success.username.caption" = "Nom d'utilisateur";
+
+/* (No Comment) */
+"unreachable.message" = "Aucune connexion Internet trouvée. Veuillez confirmer que vous disposez d'une connexion Internet et cliquez de nouveau sur « Réessayer » ci-dessous.\n\nVous pourrez revenir dans l'application plus tard pour terminer le processus.";
+
+/* (No Comment) */
+"unreachable.submit" = "RÉESSAYER";
+
+/* (No Comment) */
+"unreachable.title" = "Oups !";
+

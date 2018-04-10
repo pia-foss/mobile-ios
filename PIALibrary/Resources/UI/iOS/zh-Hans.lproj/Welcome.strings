@@ -1,0 +1,93 @@
+/* (No Comment) */
+"iap.error.message.unavailable" = "Apple 服务器目前不可用。请稍后重试。";
+
+/* (No Comment) */
+"iap.error.title" = "错误";
+
+/* (No Comment) */
+"login.error.throttled" = "此用户名尝试登录的失败次数过多。请稍后再试。";
+
+/* (No Comment) */
+"login.error.title" = "登录";
+
+/* (No Comment) */
+"login.error.unauthorized" = "您的用户名或密码不正确。";
+
+/* (No Comment) */
+"login.error.validation" = "您必须输入用户名和密码";
+
+/* (No Comment) */
+"login.password.placeholder" = "密码";
+
+/* (No Comment) */
+"login.purchase.button" = "立即购买！";
+
+/* (No Comment) */
+"login.purchase.footer" = "还没有账户？";
+
+/* (No Comment) */
+"login.restore.button" = "无法获取套餐？";
+
+/* (No Comment) */
+"login.submit" = "登录";
+
+/* (No Comment) */
+"login.title" = "登录到您的帐户";
+
+/* (No Comment) */
+"login.username.placeholder" = "用户名 (p1234567)";
+
+/* (No Comment) */
+"plan.accessibility.per_month" = "每月";
+
+/* (No Comment) */
+"plan.best_value" = "最超值";
+
+/* (No Comment) */
+"plan.monthly.title" = "每月";
+
+/* (No Comment) */
+"plan.price_format" = "%@/每月";
+
+/* (No Comment) */
+"plan.yearly.detail_format" = "%@%@/每年";
+
+/* (No Comment) */
+"plan.yearly.title" = "每年";
+
+/* (No Comment) */
+"purchase.email.placeholder" = "电子邮件地址";
+
+/* (No Comment) */
+"purchase.error.title" = "购买";
+
+/* (No Comment) */
+"purchase.error.validation" = "您必须输入一个电子邮箱地址。";
+
+/* (No Comment) */
+"purchase.login.button" = "登录！";
+
+/* (No Comment) */
+"purchase.login.footer" = "已有帐号？";
+
+/* (No Comment) */
+"purchase.submit" = "立即购买";
+
+/* (No Comment) */
+"purchase.subtitle" = "选择 VPN 套餐";
+
+/* (No Comment) */
+"purchase.title" = "7 天退款保证";
+
+/* (No Comment) */
+"restore.email.placeholder" = "电子邮件地址";
+
+/* (No Comment) */
+"restore.submit" = "确认";
+
+/* (No Comment) */
+"restore.subtitle" = "如果您通过此 app 购买了套餐，但没有收到凭据，可以从这里重新发送。\n在此过程中您不会被收费。";
+
+/* (No Comment) */
+"restore.title" = "恢复未入账的购买";
+

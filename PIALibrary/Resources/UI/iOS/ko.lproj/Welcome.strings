@@ -1,0 +1,93 @@
+/* (No Comment) */
+"iap.error.message.unavailable" = "현재 Apple 서버를 이용할 수 없습니다. 나중에 다시 시도해주십시오.";
+
+/* (No Comment) */
+"iap.error.title" = "오류";
+
+/* (No Comment) */
+"login.error.throttled" = "이 사용자 이름으로 너무 많은 로그인 시도가 실패했습니다. 나중에 다시 시도해주십시오.";
+
+/* (No Comment) */
+"login.error.title" = "로그인";
+
+/* (No Comment) */
+"login.error.unauthorized" = "사용자명 또는 비밀번호가 틀립니다.";
+
+/* (No Comment) */
+"login.error.validation" = "사용자 이름 및 비밀번호를 입력하셔야 합니다.";
+
+/* (No Comment) */
+"login.password.placeholder" = "비밀번호";
+
+/* (No Comment) */
+"login.purchase.button" = "지금 구입!";
+
+/* (No Comment) */
+"login.purchase.footer" = "계정이 없으세요?";
+
+/* (No Comment) */
+"login.restore.button" = "이용 플랜이 확인되지 않습니까?";
+
+/* (No Comment) */
+"login.submit" = "로그인";
+
+/* (No Comment) */
+"login.title" = "계정에 로그인";
+
+/* (No Comment) */
+"login.username.placeholder" = "사용자 이름 (p1234567)";
+
+/* (No Comment) */
+"plan.accessibility.per_month" = "매월";
+
+/* (No Comment) */
+"plan.best_value" = "최저가";
+
+/* (No Comment) */
+"plan.monthly.title" = "월간";
+
+/* (No Comment) */
+"plan.price_format" = "%@/월";
+
+/* (No Comment) */
+"plan.yearly.detail_format" = "매년 %@%@";
+
+/* (No Comment) */
+"plan.yearly.title" = "연간";
+
+/* (No Comment) */
+"purchase.email.placeholder" = "이메일 주소";
+
+/* (No Comment) */
+"purchase.error.title" = "구매";
+
+/* (No Comment) */
+"purchase.error.validation" = "이메일 주소를 입력하셔야 합니다.";
+
+/* (No Comment) */
+"purchase.login.button" = "로그인!";
+
+/* (No Comment) */
+"purchase.login.footer" = "이미 계정이 있으세요?";
+
+/* (No Comment) */
+"purchase.submit" = "지금 구입";
+
+/* (No Comment) */
+"purchase.subtitle" = "VPN 플랜 선택";
+
+/* (No Comment) */
+"purchase.title" = "7일 이내 환불 보장";
+
+/* (No Comment) */
+"restore.email.placeholder" = "이메일 주소";
+
+/* (No Comment) */
+"restore.submit" = "확인";
+
+/* (No Comment) */
+"restore.subtitle" = "이 앱을 통해 요금 플랜을 구매하셨는데 자격 증명 정보를 받지 못하신 경우 이곳에서 다시 보내실 수 있습니다.\n이 과정 중 요금이 부과되지 않습니다.";
+
+/* (No Comment) */
+"restore.title" = "인정되지 않은 구매 항목 복원";
+

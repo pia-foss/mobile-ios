@@ -1,0 +1,93 @@
+/* (No Comment) */
+"iap.error.message.unavailable" = "Les serveurs Apple ne sont pas disponibles actuellement. Veuillez réessayer plus tard.";
+
+/* (No Comment) */
+"iap.error.title" = "Erreur";
+
+/* (No Comment) */
+"login.error.throttled" = "Trop de tentatives de connexion échouées avec ce nom d'utilisateur. Veuillez réessayer plus tard.";
+
+/* (No Comment) */
+"login.error.title" = "Connexion";
+
+/* (No Comment) */
+"login.error.unauthorized" = "Votre nom d'utilisateur ou mot de passe est incorrect.";
+
+/* (No Comment) */
+"login.error.validation" = "Vous devez saisir un nom d'utilisateur et un mot de passe.";
+
+/* (No Comment) */
+"login.password.placeholder" = "Mot de passe";
+
+/* (No Comment) */
+"login.purchase.button" = "Acheter maintenant !";
+
+/* (No Comment) */
+"login.purchase.footer" = "Pas de compte ?";
+
+/* (No Comment) */
+"login.restore.button" = "Vous n'avez pas pu obtenir votre forfait ?";
+
+/* (No Comment) */
+"login.submit" = "CONNEXION";
+
+/* (No Comment) */
+"login.title" = "Connectez-vous à votre compte";
+
+/* (No Comment) */
+"login.username.placeholder" = "Nom d'utilisateur (p1234567)";
+
+/* (No Comment) */
+"plan.accessibility.per_month" = "par mois";
+
+/* (No Comment) */
+"plan.best_value" = "Économique";
+
+/* (No Comment) */
+"plan.monthly.title" = "Mensuellement";
+
+/* (No Comment) */
+"plan.price_format" = "%@/mo";
+
+/* (No Comment) */
+"plan.yearly.detail_format" = "%@%@ par an";
+
+/* (No Comment) */
+"plan.yearly.title" = "Annuellement";
+
+/* (No Comment) */
+"purchase.email.placeholder" = "Adresse e-mail";
+
+/* (No Comment) */
+"purchase.error.title" = "Acheter";
+
+/* (No Comment) */
+"purchase.error.validation" = "Vous devez entrer une adresse e-mail.";
+
+/* (No Comment) */
+"purchase.login.button" = "Connectez-vous !";
+
+/* (No Comment) */
+"purchase.login.footer" = "Vous avez déjà un compte ?";
+
+/* (No Comment) */
+"purchase.submit" = "ACHETER MAINTENANT";
+
+/* (No Comment) */
+"purchase.subtitle" = "Sélectionnez un forfait VPN";
+
+/* (No Comment) */
+"purchase.title" = "7 jours pour être satisfait ou remboursé";
+
+/* (No Comment) */
+"restore.email.placeholder" = "Adresse e-mail";
+
+/* (No Comment) */
+"restore.submit" = "CONFIRMER";
+
+/* (No Comment) */
+"restore.subtitle" = "Si vous avez acheté un forfait via cette application et n'avez pas reçu vos identifiants, il est possible de les renvoyer à partir d'ici. Cette action ne vous sera pas facturée.";
+
+/* (No Comment) */
+"restore.title" = "Restaurer l'achat non crédité";
+

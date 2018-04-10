@@ -1,0 +1,93 @@
+/* (No Comment) */
+"iap.error.message.unavailable" = "Servidores da Apple indisponíveis no momento. Tente novamente mais tarde.";
+
+/* (No Comment) */
+"iap.error.title" = "Erro";
+
+/* (No Comment) */
+"login.error.throttled" = "Muitas tentativas de login malsucedidas com este nome de usuário. Tente novamente mais tarde.";
+
+/* (No Comment) */
+"login.error.title" = "Entrar";
+
+/* (No Comment) */
+"login.error.unauthorized" = "Seu nome de usuário ou senha está incorreto.";
+
+/* (No Comment) */
+"login.error.validation" = "Você deve inserir um nome de usuário e senha.";
+
+/* (No Comment) */
+"login.password.placeholder" = "Senha";
+
+/* (No Comment) */
+"login.purchase.button" = "Compre já!";
+
+/* (No Comment) */
+"login.purchase.footer" = "Não tem uma conta?";
+
+/* (No Comment) */
+"login.restore.button" = "Não consegue obter seu plano?";
+
+/* (No Comment) */
+"login.submit" = "ENTRAR";
+
+/* (No Comment) */
+"login.title" = "Entre na sua conta";
+
+/* (No Comment) */
+"login.username.placeholder" = "Nome de usuário (p1234567)";
+
+/* (No Comment) */
+"plan.accessibility.per_month" = "por mês";
+
+/* (No Comment) */
+"plan.best_value" = "Melhor valor";
+
+/* (No Comment) */
+"plan.monthly.title" = "Mensal";
+
+/* (No Comment) */
+"plan.price_format" = "%@/mês";
+
+/* (No Comment) */
+"plan.yearly.detail_format" = "%@%@ por ano";
+
+/* (No Comment) */
+"plan.yearly.title" = "Anual";
+
+/* (No Comment) */
+"purchase.email.placeholder" = "Endereço de e-mail";
+
+/* (No Comment) */
+"purchase.error.title" = "Comprar";
+
+/* (No Comment) */
+"purchase.error.validation" = "Você precisa inserir um endereço de e-mail.";
+
+/* (No Comment) */
+"purchase.login.button" = "Faça login!";
+
+/* (No Comment) */
+"purchase.login.footer" = "Já tem uma conta?";
+
+/* (No Comment) */
+"purchase.submit" = "COMPRAR AGORA";
+
+/* (No Comment) */
+"purchase.subtitle" = "Selecione um plano de VPN";
+
+/* (No Comment) */
+"purchase.title" = "Garantia do dinheiro de volta em até 7 dias";
+
+/* (No Comment) */
+"restore.email.placeholder" = "Endereço de e-mail";
+
+/* (No Comment) */
+"restore.submit" = "CONFIRMAR";
+
+/* (No Comment) */
+"restore.subtitle" = "Se você adquiriu um plano por este aplicativo e não recebeu as suas credenciais, você pode enviá-las novamente por aqui. Você não será cobrado durante esse processo.";
+
+/* (No Comment) */
+"restore.title" = "Restaurar compra não creditada";
+

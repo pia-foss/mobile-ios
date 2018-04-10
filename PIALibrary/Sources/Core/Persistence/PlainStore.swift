@@ -1,0 +1,52 @@
+//
+//  PlainStore.swift
+//  PIALibrary
+//
+//  Created by Davide De Rosa on 10/2/17.
+//  Copyright © 2017 London Trust Media. All rights reserved.
+//
+
+import Foundation
+
+protocol PlainStore: class {
+
+    // MARK: Account
+    
+    var username: String? { get set }
+    
+    var accountInfo: AccountInfo? { get set }
+    
+    var lastSignupEmail: String? { get set }
+
+    // MARK: Server
+    
+    var cachedServers: [Server] { get set }
+    
+    var preferredServer: Server? { get set }
+
+    var preferredPort: UInt16? { get set }
+    
+    func pings(forServerIdentifier identifier: String) -> [Int]
+    
+    func addPing(_ ping: Int, forServerIdentifier identifier: String)
+    
+    func serializePings()
+    
+    // MARK: VPN
+    
+    var vpnType: String? { get set }
+    
+    var vpnCustomConfigurationMaps: [String: [String: Any]]? { get set }
+
+    // MARK: Preferences
+    
+    var isPersistentConnection: Bool? { get set }
+    
+    var mace: Bool? { get set }
+    
+    // MARK: Lifecycle
+    
+    func reset()
+    
+    func clear()
+}

@@ -1,0 +1,93 @@
+clean:
+module: "PIALibrary"
+author: "Davide De Rosa @ London Trust Media, Inc."
+author_url: "https://www.privateinternetaccess.com"
+
+theme: fullwidth
+
+xcodebuild_arguments:
+    - "-workspace"
+    - "PIALibrary.xcworkspace"
+    - "-scheme"
+    - "PIALibrary-iOS"
+
+exclude:
+    - "**/Sources/Library/Account/**/*.swift"
+    - "**/Sources/Library/Daemons/**/*.swift"
+    - "**/Sources/Library/InApp/**/*.swift"
+    - "**/Sources/Library/Persistence/**/*.swift"
+    - "**/Sources/Library/Server/**/*.swift"
+    - "**/Sources/Library/WebServices/**/*.swift"
+
+custom_categories:
+    - name: Client
+      children:
+        - Client
+        - ClientError
+        - LibraryCallback
+        - SuccessLibraryCallback
+        - Notification
+        - NotificationKey
+    - name: Account
+      children:
+        - Credentials
+        - Plan
+        - AccountInfo
+        - UserAccount
+        - LoginRequest
+        - SignupRequest
+        - RenewRequest
+        - UpdateAccountRequest
+        - AccountProvider
+    - name: Store
+      children:
+        - InAppProduct
+        - InAppTransaction
+    - name: Server
+      children:
+        - Server
+        - ServersBundle
+        - ServerProvider
+        - ServerError
+    - name: VPN
+      children:
+        - VPNProfile
+        - VPNConfiguration
+        - VPNCustomConfiguration
+        - VPNStatus
+        - VPNProvider
+        - VPNAction
+        - NetworkExtensionProfile
+        - IPSecProfile
+        - PIATunnelProfile
+    - name: Debug
+      children:
+        - LogTarget
+        - DebugLog
+    - name: Mock
+      children:
+        - MockAccountProvider
+        - MockServerProvider
+        - MockVPNProvider
+    - name: Util
+      children:
+        - Keychain
+        - KeychainError
+        - Macros
+        - PingerProtocol
+    - name: UI
+      children:
+        - ActivityButton
+        - AutolayoutViewController
+        - BorderedTextField
+        - CircleProgressView
+        - ModalController
+        - OptionsViewController
+        - OptionsViewControllerDelegate
+        - PIAWelcomeViewController
+        - PIAWelcomeViewControllerDelegate
+        - Restylable
+        - Theme
+        - ThemeStrategy
+        - UIAlertController
+        - Validator

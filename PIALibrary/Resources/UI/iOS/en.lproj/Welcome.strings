@@ -1,0 +1,43 @@
+/* 
+  Welcome.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
+"login.title" = "Sign in to your account";
+"login.username.placeholder" = "Username (p1234567)";
+"login.password.placeholder" = "Password";
+"login.submit" = "LOGIN";
+"login.purchase.footer" = "Don’t have an account?";
+"login.purchase.button" = "Buy now!";
+"login.restore.button" = "Couldn't get your plan?";
+"login.error.title" = "Log in";
+"login.error.validation" = "You must enter an username and password.";
+"login.error.unauthorized" = "Your username or password is incorrect.";
+"login.error.throttled" = "Too many failed login attempts with this username. Please try again later.";
+
+"purchase.title" = "Select a VPN plan";
+"purchase.subtitle" = "7-day money back guarantee";
+"purchase.email.placeholder" = "Email address";
+"purchase.submit" = "BUY NOW";
+"purchase.login.footer" = "Already have an account?";
+"purchase.login.button" = "Sign in!";
+"purchase.error.title" = "Purchase";
+"purchase.error.validation" = "You must enter an email address.";
+
+"plan.monthly.title" = "Monthly";
+"plan.yearly.title" = "Yearly";
+"plan.yearly.detail_format" = "%@%@ per year";
+"plan.price_format" = "%@/mo";
+"plan.best_value" = "Best value";
+"plan.accessibility.per_month" = "per month";
+
+"restore.title" = "Restore uncredited purchase";
+"restore.subtitle" = "If you purchased a plan through this app and didn't receive your credentials, you can send them again from here.\nYou will not be charged during this process.";
+"restore.email.placeholder" = "Email address";
+"restore.submit" = "CONFIRM";
+
+"iap.error.message.unavailable" = "Apple servers currently unavailable. Please try again later.";
+"iap.error.title" = "Error";

@@ -1,0 +1,36 @@
+/* (No Comment) */
+"failure.message" = "يتعذر علينا إنشاء حساب في الوقت الحالي. يرجى إعادة المحاولة لاحقًا. \n\nعند إعادة فتح التطبيق سيتم إعادة محاولة إنشاء حساب.";
+
+/* (No Comment) */
+"failure.submit" = "عودة";
+
+/* (No Comment) */
+"failure.title" = "فشل إنشاء الحساب";
+
+/* (No Comment) */
+"in_progress.message" = "جارٍ تأكيد عملية الشراء مع نظامنا. يمكن أن يستغرق ذلك لحظة لذلك انتظر قليلًا.";
+
+/* (No Comment) */
+"success.message_format" = "شضكراً على اشتراكك معنا. لقد أرسلنا اسم المستخدم وكلمة المرور الخاصين بك إلى بريدك الإلكتروني %@";
+
+/* (No Comment) */
+"success.password.caption" = "كلمة المرور";
+
+/* (No Comment) */
+"success.submit" = "كيف تبدأ";
+
+/* (No Comment) */
+"success.title" = "تم الشراء";
+
+/* (No Comment) */
+"success.username.caption" = "اسم المستخدم";
+
+/* (No Comment) */
+"unreachable.message" = "لم يتم العثور على اتصال بالإنترنت. يرجى التأكد من اتصالك بالإنترنت وضغط زر إعادة المحاولة أدناه.\n\nيمكنك العودة إلى التطبيق في وقت لاحق لإنهاء العملية.";
+
+/* (No Comment) */
+"unreachable.submit" = "أعد المحاولة";
+
+/* (No Comment) */
+"unreachable.title" = "أوبس!";
+

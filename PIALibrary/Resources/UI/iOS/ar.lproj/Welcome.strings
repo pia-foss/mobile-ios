@@ -1,0 +1,93 @@
+/* (No Comment) */
+"iap.error.message.unavailable" = "خوادم أبل غير متاحة حاليًا. يرجى إعادة المحاولة لاحقًا.";
+
+/* (No Comment) */
+"iap.error.title" = "خطأ";
+
+/* (No Comment) */
+"login.error.throttled" = "لقد أجريت الكثير من المحاولات الفاشلة باسم المستخدم هذا. يرجى إعادة المحاولة لاحقًا.";
+
+/* (No Comment) */
+"login.error.title" = "تسجيل الدخول";
+
+/* (No Comment) */
+"login.error.unauthorized" = "اسم المستخدم أو كلمة المرور غير صحيحة.";
+
+/* (No Comment) */
+"login.error.validation" = "يجب إدخال اسم المستخدم وكلمة المرور";
+
+/* (No Comment) */
+"login.password.placeholder" = "كلمة المرور";
+
+/* (No Comment) */
+"login.purchase.button" = "اشترِ الآن!";
+
+/* (No Comment) */
+"login.purchase.footer" = "ليس لديك حساب؟";
+
+/* (No Comment) */
+"login.restore.button" = "لم تتمكن من الحصول على خطتك؟";
+
+/* (No Comment) */
+"login.submit" = "تسجيل الدخول";
+
+/* (No Comment) */
+"login.title" = "سجل الدخول إلى حسابك";
+
+/* (No Comment) */
+"login.username.placeholder" = "اسم المستخدم (p1234567)";
+
+/* (No Comment) */
+"plan.accessibility.per_month" = "في الشهر";
+
+/* (No Comment) */
+"plan.best_value" = "أفضل قيمة";
+
+/* (No Comment) */
+"plan.monthly.title" = "شهريًا";
+
+/* (No Comment) */
+"plan.price_format" = "%@ / شهر";
+
+/* (No Comment) */
+"plan.yearly.detail_format" = "%@%@ في السنة";
+
+/* (No Comment) */
+"plan.yearly.title" = "سنويًا";
+
+/* (No Comment) */
+"purchase.email.placeholder" = "البريد الإلكتروني";
+
+/* (No Comment) */
+"purchase.error.title" = "شراء";
+
+/* (No Comment) */
+"purchase.error.validation" = "يجب إدخال عنوان بريد إلكتروني.";
+
+/* (No Comment) */
+"purchase.login.button" = "تسجيل الدخول!";
+
+/* (No Comment) */
+"purchase.login.footer" = "لديك حساب بالفعل؟";
+
+/* (No Comment) */
+"purchase.submit" = "شراء الآن";
+
+/* (No Comment) */
+"purchase.subtitle" = "حدد خطة VPN";
+
+/* (No Comment) */
+"purchase.title" = "ضمان استرداد المال لمدة 7 أيام";
+
+/* (No Comment) */
+"restore.email.placeholder" = "البريد الإلكتروني";
+
+/* (No Comment) */
+"restore.submit" = "تأكيد";
+
+/* (No Comment) */
+"restore.subtitle" = "إذا اشتريت خطة من خلال هذا التطبيق ولم تصلك بيانات تسجيل دخولك، يمكنك إرسالها مرة أخرى من هنا.\nلن يتم تحصيل رسوم منك أثناء هذه العملية.";
+
+/* (No Comment) */
+"restore.title" = "استرداد الشراء غير المقيد في الحساب";
+

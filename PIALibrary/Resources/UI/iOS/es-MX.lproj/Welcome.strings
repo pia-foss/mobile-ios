@@ -1,0 +1,93 @@
+/* (No Comment) */
+"iap.error.message.unavailable" = "Actualmente, los servidores de Apple no están disponibles. Por favor, inténtalo de nuevo más tarde.";
+
+/* (No Comment) */
+"iap.error.title" = "Error";
+
+/* (No Comment) */
+"login.error.throttled" = "Demasiados intentos fallidos de inicio de sesión con este nombre de usuario. Por favor, inténtelo de nuevo más tarde.";
+
+/* (No Comment) */
+"login.error.title" = "Iniciar sesión";
+
+/* (No Comment) */
+"login.error.unauthorized" = "Tu nombre de usuario o contraseña son incorrectos.";
+
+/* (No Comment) */
+"login.error.validation" = "Debes ingresar un nombre de usuario y una contraseña.";
+
+/* (No Comment) */
+"login.password.placeholder" = "Contraseña ";
+
+/* (No Comment) */
+"login.purchase.button" = "¡Comprar ahora!";
+
+/* (No Comment) */
+"login.purchase.footer" = "¿No tienes una cuenta?";
+
+/* (No Comment) */
+"login.restore.button" = "¿No pudiste obtener tu plan? ";
+
+/* (No Comment) */
+"login.submit" = "INICIAR SESIÓN";
+
+/* (No Comment) */
+"login.title" = "Inicia sesión en tu cuenta";
+
+/* (No Comment) */
+"login.username.placeholder" = "Nombre de usuario (p1234567)";
+
+/* (No Comment) */
+"plan.accessibility.per_month" = "por mes";
+
+/* (No Comment) */
+"plan.best_value" = "Mejor oferta";
+
+/* (No Comment) */
+"plan.monthly.title" = "Mensual";
+
+/* (No Comment) */
+"plan.price_format" = "%@/m";
+
+/* (No Comment) */
+"plan.yearly.detail_format" = "%@%@ al año";
+
+/* (No Comment) */
+"plan.yearly.title" = "Anual";
+
+/* (No Comment) */
+"purchase.email.placeholder" = "Dirección de correo electrónico";
+
+/* (No Comment) */
+"purchase.error.title" = "Comprar";
+
+/* (No Comment) */
+"purchase.error.validation" = "Debes ingresar una dirección de email.";
+
+/* (No Comment) */
+"purchase.login.button" = "¡Inicia sesión!";
+
+/* (No Comment) */
+"purchase.login.footer" = "¿Ya tienes una cuenta?";
+
+/* (No Comment) */
+"purchase.submit" = "COMPRAR AHORA";
+
+/* (No Comment) */
+"purchase.subtitle" = "Selecciona un plan VPN";
+
+/* (No Comment) */
+"purchase.title" = "Garantía de devolución de 7 días";
+
+/* (No Comment) */
+"restore.email.placeholder" = "Correo electrónico";
+
+/* (No Comment) */
+"restore.submit" = "CONFIRMAR";
+
+/* (No Comment) */
+"restore.subtitle" = "Si compraste un plan con esta aplicación y no recibiste tus credenciales, puedes enviarlas de nuevo desde aquí.\nNo se te harán cargos durante este proceso.";
+
+/* (No Comment) */
+"restore.title" = "Restablecer compra no acreditada";
+

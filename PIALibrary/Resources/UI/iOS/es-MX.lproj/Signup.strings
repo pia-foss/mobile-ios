@@ -1,0 +1,36 @@
+/* (No Comment) */
+"failure.message" = "No pudimos crear una cuenta en este momento. Por favor, inténtalo de nuevo más tarde. \nSi vuelves a abrir la aplicación intentaremos crear una cuenta otra vez.";
+
+/* (No Comment) */
+"failure.submit" = "ATRÁS";
+
+/* (No Comment) */
+"failure.title" = "Falló la creación de la cuenta";
+
+/* (No Comment) */
+"in_progress.message" = "Estamos confirmando la compra en el sistema. Podrías tardar unos instantes, así que espera.";
+
+/* (No Comment) */
+"success.message_format" = "Gracias por registrarte con nosotros. Te enviamos el nombre de usuario y contraseña de tu cuenta a tu dirección de email en %@";
+
+/* (No Comment) */
+"success.password.caption" = "Contraseña ";
+
+/* (No Comment) */
+"success.submit" = "Empieza";
+
+/* (No Comment) */
+"success.title" = "Compra completa";
+
+/* (No Comment) */
+"success.username.caption" = "Nombre de usuario";
+
+/* (No Comment) */
+"unreachable.message" = "No se encontró conexión a Internet. Por favor, confirma que tienes una conexión a Internet y toca en intentar de nuevo más abajo.\n\nPuedes regresar después a la aplicación para terminar el proceso.";
+
+/* (No Comment) */
+"unreachable.submit" = "VOLVER A INTENTAR";
+
+/* (No Comment) */
+"unreachable.title" = "¡Ups!";
+

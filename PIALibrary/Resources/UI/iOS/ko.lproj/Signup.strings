@@ -1,0 +1,36 @@
+/* (No Comment) */
+"failure.message" = "지금은 계정을 생성할 수 없습니다. 나중에 다시 시도해주십시오.\n\n 앱을 다시 열면 계정 생성을 다시 시도합니다.";
+
+/* (No Comment) */
+"failure.submit" = "뒤로";
+
+/* (No Comment) */
+"failure.title" = "계정 생성 실패";
+
+/* (No Comment) */
+"in_progress.message" = "저희 시스템에서 고객님의 구매를 확인하고 있습니다. 약간 시간이 소요될 수 있으므로 양해 부탁드립니다.";
+
+/* (No Comment) */
+"success.message_format" = "회원으로 가입해 주셔서 감사합니다. 계정 사용자명과 비밀번호를 귀하의 이메일 주소(%@)로 발송했습니다.";
+
+/* (No Comment) */
+"success.password.caption" = "비밀번호";
+
+/* (No Comment) */
+"success.submit" = "시작하기";
+
+/* (No Comment) */
+"success.title" = "구매 완료";
+
+/* (No Comment) */
+"success.username.caption" = "사용자 이름";
+
+/* (No Comment) */
+"unreachable.message" = "인터넷에 연결되지 않았습니다. 인터넷에 연결되어 있는지 확인하신 후 아래에서 다시 시도를 누르십시오.\n\n나중에 앱에 다시 돌아와서 이 과정을 완료할 수 있습니다.";
+
+/* (No Comment) */
+"unreachable.submit" = "다시 시도";
+
+/* (No Comment) */
+"unreachable.title" = "앗!";
+

@@ -1,0 +1,14 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+abstract_target 'iOS' do
+    platform :ios, '9.0'
+
+    target 'Welcome-iOS' do
+        pod 'PIALibrary/UI', :path => '..'
+    end
+end
+
+abstract_target 'macOS' do
+    platform :osx, '10.11'
+end
