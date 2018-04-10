@@ -103,8 +103,8 @@
 "settings.encryption.handshake.title" = "Handshake";
 
 "settings.application_settings.title" = "APPLICATION SETTINGS";
-"settings.application_settings.persistent.title" = "Automatically reconnect";
-"settings.application_settings.persistent.footer.disabled" = "Disabling automatic reconnection may put your privacy at risk when your device does not have access to a stable network.";
+"settings.application_settings.persistent.title" = "VPN kill switch";
+"settings.application_settings.persistent.footer.disabled" = "The VPN kill switch disables your Internet connection when the VPN disconnects.";
 "settings.application_settings.dark_theme.title" = "Dark theme";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.mace.footer" = "PIA MACE™ blocks ads, trackers, and malware while you're connected to the VPN.";
