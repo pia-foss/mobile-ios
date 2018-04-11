@@ -36,9 +36,9 @@ class Flags: NSObject {
     
     @objc private var disablesMACEForOpenVPN = false
     
-    @objc private(set) var enablesEncryptionSettings = false
+    @objc private(set) var enablesEncryptionSettings = true
 
-    @objc private(set) var enablesRemotePortSetting = false
+    @objc private(set) var enablesRemotePortSetting = true
 
     @objc private(set) var enablesDevelopmentSettings = false
 
