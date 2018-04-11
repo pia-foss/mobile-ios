@@ -1,0 +1,173 @@
+// GLOBAL
+
+"global.ok" = "OK";
+"global.cancel" = "Cancel";
+"global.close" = "Close";
+"global.error" = "Error";
+"global.automatic" = "Automatic";
+
+// NOTIFICATIONS
+
+"notifications.disabled.title" = "Notifications disabled";
+"notifications.disabled.message" = "Enable notifications to get a reminder to renew your subscription before it expires.";
+"notifications.disabled.settings" = "Settings";
+
+"expiration.title" = "Renewal";
+"expiration.message" = "Your subscription expires soon. Renew to stay protected.";
+
+// SHORTCUTS
+
+"shortcuts.connect" = "Connect";
+"shortcuts.disconnect" = "Disconnect";
+"shortcuts.select_region" = "Select a region";
+
+// WALKTHROUGH
+
+"walkthrough.action.next" = "NEXT";
+"walkthrough.action.done" = "DONE";
+"walkthrough.action.skip" = "SKIP";
+
+"walkthrough.page.1.title" = "Support 5 devices at once";
+"walkthrough.page.1.description" = "Protect yourself on up to 5 devices at a time.";
+"walkthrough.page.2.title" = "Connect to any region easily";
+"walkthrough.page.2.description" = "With servers around the globe, you are always under protection.";
+"walkthrough.page.3.title" = "Protect yourself from ads";
+"walkthrough.page.3.description" = "Enabling our Content Blocker prevents ads from showing in Safari.";
+
+// RENEWAL
+
+"renewal.success.title" = "Thank you";
+"renewal.success.message" = "Your account was successfully renewed.";
+"renewal.failure.message" = "Your purchase receipt couldn't be submitted, please retry at a later time.";
+
+// MENU
+
+"menu.accessibility.item" = "Menu";
+"menu.accessibility.logged_as" = "Logged in as %@";
+"menu.expiration.expires_in" = "Subscription expires in";
+"menu.expiration.days" = "%d days";
+"menu.expiration.hours" = "%d hours";
+"menu.expiration.one_hour" = "one hour";
+"menu.expiration.upgrade" = "UPGRADE ACCOUNT";
+"menu.item.region" = "Region selection";
+"menu.item.about" = "About";
+"menu.item.account" = "Account";
+"menu.item.settings" = "Settings";
+"menu.item.logout" = "Log out";
+"menu.item.web.privacy" = "Privacy policy";
+"menu.item.web.home" = "Home page";
+"menu.item.web.support" = "Support";
+
+"menu.logout.title" = "Log out";
+"menu.logout.message" = "Logging out will disable the VPN and leave you unprotected.";
+"menu.logout.confirm" = "Log out";
+
+"menu.renewal.title" = "Renewal";
+"menu.renewal.purchase" = "Purchase";
+"menu.renewal.renew" = "Renew";
+"menu.renewal.message.trial" = "Trial accounts are not eligible for renewal. Please purchase a new account upon expiry to continue service.";
+"menu.renewal.message.website" = "Please use our website to renew your subscription.";
+"menu.renewal.message.unavailable" = "Apple servers currently unavailable. Please try again later.";
+
+// ACCOUNT
+
+"account.email.caption" = "Email";
+"account.email.placeholder" = "Email address";
+"account.username.caption" = "Username";
+"account.password.caption" = "Password";
+"account.eye.footer" = "Tap the eye icon to reveal or conceal your password.";
+"account.other.footer" = "Get the Private Internet Access app for your other devices and use the above username and password to login and secure your connection.";
+"account.restore.title" = "Restore uncredited purchase";
+"account.restore.description" = "If you renewed your plan but your account still says it's about to expire, you can restart the renewal from here. You will not be charged during this process.";
+"account.restore.button" = "RESTORE PURCHASE";
+"account.restore.failure.title" = "Restore purchase";
+"account.restore.failure.message" = "No redeemable purchase was found for renewal.";
+"account.save.item" = "Update";
+"account.save.prompt" = "Authenticate to save changes";
+"account.save.success" = "Your email address has been saved.";
+"account.reveal.prompt" = "Authenticate to reveal";
+"account.accessibility.eye" = "Eye icon";
+"account.accessibility.eye.hint.reveal" = "Tap to reveal password";
+"account.accessibility.eye.hint.conceal" = "Tap to conceal password";
+
+// SETTINGS
+
+"settings.connection.title" = "CONNECTION";
+"settings.connection.vpn_protocol.title" = "Protocol";
+"settings.connection.socket_protocol.title" = "Socket";
+"settings.connection.remote_port.title" = "Remote port";
+
+"settings.encryption.title" = "ENCRYPTION";
+"settings.encryption.cipher.title" = "Data encryption";
+"settings.encryption.digest.title" = "Data authentication";
+"settings.encryption.handshake.title" = "Handshake";
+
+"settings.application_settings.title" = "APPLICATION SETTINGS";
+"settings.application_settings.persistent.title" = "Automatically reconnect";
+"settings.application_settings.persistent.footer.disabled" = "Disabling automatic reconnection may put your privacy at risk when your device does not have access to a stable network.";
+"settings.application_settings.dark_theme.title" = "Dark theme";
+"settings.application_settings.mace.title" = "PIA MACE™";
+"settings.application_settings.mace.footer" = "PIA MACE™ blocks ads, trackers, and malware while you're connected to the VPN.";
+
+"settings.content_blocker.title" = "Safari Content Blocker";
+"settings.content_blocker.state.title" = "Current state";
+"settings.content_blocker.refresh.title" = "Refresh block list";
+"settings.content_blocker.footer" = "To enable or disable Content Blocker go to Settings > Safari > Content Blockers and toggle PIA VPN.";
+
+"settings.application_information.title" = "APPLICATION INFORMATION";
+"settings.application_information.debug.title" = "Send debug to support";
+"settings.application_information.debug.failure.title" = "Error during submission";
+"settings.application_information.debug.failure.message" = "Debug information could not be submitted. Please disconnect from the VPN and retry.";
+"settings.application_information.debug.empty.title" = "Empty debug information";
+"settings.application_information.debug.empty.message" = "Debug information is empty, please attempt a connection before retrying submission.";
+"settings.application_information.debug.success.title" = "Debug information submitted";
+"settings.application_information.debug.success.message" = "Debug information successfully submitted.\nID: %@\nPlease note this ID, as our support team will require this to locate your submission.";
+
+"settings.commit.messages.must_disconnect" = "The VPN must reconnect for some changes to take effect.";
+"settings.commit.messages.should_reconnect" = "Reconnect the VPN to apply changes.";
+"settings.commit.buttons.reconnect" = "Reconnect";
+"settings.commit.buttons.later" = "Later";
+
+"settings.reset.title" = "RESET";
+"settings.reset.defaults.title" = "Reset to default settings";
+"settings.reset.defaults.confirm.title" = "Reset settings";
+"settings.reset.defaults.confirm.message" = "This will bring the app back to default. You will lose all changes you have made.";
+"settings.reset.defaults.confirm.button" = "Reset";
+
+// CONTENT BLOCKER
+
+"content_blocker.title" = "Content Blocker";
+"content_blocker.body.subtitle" = "To enable our Content Blocker for use with Safari please go to Settings > Safari, and under General touch Content Blockers toggle on PIA VPN.";
+"content_blocker.body.footer" = "Please note: You do not need to be connected to the VPN for this Content Blocker to work, but it will only work while browsing with Safari.";
+
+// ABOUT
+
+"about.app" = "VPN by Private Internet Access";
+"about.intro" = "This program uses the following components:";
+"about.accessibility.component.expand" = "Tap to read full license";
+
+// DASHBOARD
+
+"dashboard.content_blocker.intro.message" = "This version replaces MACE with our Safari Content Blocker.\n\nCheck it out in the 'Settings' section.";
+
+"dashboard.status" = "Status";
+"dashboard.connection.region.caption" = "CURRENT REGION";
+"dashboard.connection.region.change" = "CHANGE REGION";
+"dashboard.connection.ip.caption" = "PUBLIC IP";
+"dashboard.connection.ip.unreachable" = "Internet unreachable";
+
+"dashboard.vpn.disconnected" = "Disconnected";
+"dashboard.vpn.connecting" = "Connecting...";
+"dashboard.vpn.connected" = "Connected to VPN";
+"dashboard.vpn.disconnecting" = "Disconnecting...";
+"dashboard.vpn.changing_region" = "Changing region...";
+
+// VPN PERMISSION
+
+"vpn_permission.title" = "PIA";
+"vpn_permission.body.title" = "PIA needs access to your VPN profiles to secure your traffic";
+"vpn_permission.body.subtitle" = "To proceed tap “%@”.";
+"vpn_permission.body.footer" = "We don’t monitor, filter or log any network activity.";
+"vpn_permission.disallow.message.basic" = "We need this permission for the application to function.";
+"vpn_permission.disallow.message.support" = "You can also get in touch with customer support if you need assistance.";
+"vpn_permission.disallow.contact" = "Contact";

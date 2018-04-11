@@ -1,0 +1,3 @@
+- Mørkt tema er tilbake!
+- Vi la til støtte for OpenVPN®. Du kan bytte protokoll i Innstillinger.
+- Denne versjonen erstatter MACE med vår Safari-innholdsblokkering. Ta en titt i Innstillinger.

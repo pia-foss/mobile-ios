@@ -1,0 +1,378 @@
+/* (No Comment) */
+"about.accessibility.component.expand" = "แตะเพื่ออ่านการอนุญาตฉบับเต็ม";
+
+/* (No Comment) */
+"about.app" = "VPN โดย Private Internet Access";
+
+/* (No Comment) */
+"about.intro" = "โปรแกรมนี้ใช้องค์ประกอบต่อไปนี้:";
+
+/* (No Comment) */
+"account.accessibility.eye" = "ไอคอนรูปตา";
+
+/* (No Comment) */
+"account.accessibility.eye.hint.conceal" = "แตะเพื่อปิดบังรหัสผ่านของคุณ";
+
+/* (No Comment) */
+"account.accessibility.eye.hint.reveal" = "แตะเพื่อเปิดรหัสผ่านของคุณ";
+
+/* (No Comment) */
+"account.email.caption" = "อีเมล";
+
+/* (No Comment) */
+"account.email.placeholder" = "อีเมลแอดเดรส";
+
+/* (No Comment) */
+"account.eye.footer" = "แตะที่ไอคอนรูปตาเพื่อเปิดหรือปิดบังรหัสผ่านของคุณ";
+
+/* (No Comment) */
+"account.other.footer" = "ดาวน์โหลดแอพ Private Internet Access บนอุปกรณ์อื่นของคุณและใช้ชื่อผู้ใช้และรหัสผ่านด้านบนเพื่อเข้าสู่ระบบและทำให้การเชื่อมต่อของคุณปลอดภัย";
+
+/* (No Comment) */
+"account.password.caption" = "รหัสผ่าน";
+
+/* (No Comment) */
+"account.restore.button" = "คืนค่าการซื้อ";
+
+/* (No Comment) */
+"account.restore.description" = "หากคุณต่ออายุแผนของคุณแต่บัญชีของคุณยังแสดงสถานะใกล้หมดอายุ คุณสามารถเริ่มการต่ออายุใหม่ได้ที่นี่ คุณจะไม่ถูกเรียกเก็บเงินซ้ำในกระบวนการนี้";
+
+/* (No Comment) */
+"account.restore.failure.message" = "ไม่พบรายการซื้อที่สามารถแลกได้สำหรับต่ออายุ";
+
+/* (No Comment) */
+"account.restore.failure.title" = "คืนค่าการซื้อ";
+
+/* (No Comment) */
+"account.restore.title" = "คืนค่าการซื้อที่ยังไม่ได้คิดเครดิต";
+
+/* (No Comment) */
+"account.reveal.prompt" = "อนุญาตให้เปิดเผย";
+
+/* (No Comment) */
+"account.save.item" = "อัพเดท";
+
+/* (No Comment) */
+"account.save.prompt" = "อนุญาตให้บันทึกการเปลี่ยนแปลง";
+
+/* (No Comment) */
+"account.save.success" = "อีเมลแอดเดรสของคุณยังไม่ถูกบันทึก";
+
+/* (No Comment) */
+"account.username.caption" = "ชื่อผู้ใช้";
+
+/* (No Comment) */
+"content_blocker.body.footer" = "โปรดทราบ: คุณไม่จำเป็นต้องเชื่อมต่อไปยัง VPN เพื่อใช้งานตัวปิดกั้นเนื้อหา แต่จะใช้ได้ก็ต่อเมื่อใช้ Safari เท่านั้น";
+
+/* (No Comment) */
+"content_blocker.body.subtitle" = "ในการเปิดใช้งานตัวปิดกั้นเนื้อหาเพื่อใช้ใน Safari กรุณาไปยัง การตั้งค่า > Safari และภายใต้หมวดทั่วไป ให้แตะ ตัวปิดกั้นเนื้อหา ใน PIA VPN";
+
+/* (No Comment) */
+"content_blocker.title" = "ตัวปิดกั้นเนื้อหา";
+
+/* (No Comment) */
+"dashboard.connection.ip.caption" = "IP สาธารณะ";
+
+/* (No Comment) */
+"dashboard.connection.ip.unreachable" = "อินเทอร์เน็ตไม่สามารถเข้าถึงได้";
+
+/* (No Comment) */
+"dashboard.connection.region.caption" = "ภูมิภาคปัจจุบัน";
+
+/* (No Comment) */
+"dashboard.connection.region.change" = "เปลี่ยนภูมิภาค";
+
+/* (No Comment) */
+"dashboard.content_blocker.intro.message" = "เวอร์ชันนี้ทดแทน MACE ด้วยตัวปิดกั้นเนื้อหา Safari ของเรา\n\nตรวจสอบในส่วน “การตั้งค่า”";
+
+/* (No Comment) */
+"dashboard.status" = "สถานะ";
+
+/* (No Comment) */
+"dashboard.vpn.changing_region" = "กำลังเปลี่ยนภูมิภาค...";
+
+/* (No Comment) */
+"dashboard.vpn.connected" = "เชื่อมต่อกับ VPN";
+
+/* (No Comment) */
+"dashboard.vpn.connecting" = "กำลังเชื่อมต่อ...";
+
+/* (No Comment) */
+"dashboard.vpn.disconnected" = "ขาดการเชื่อมต่อ";
+
+/* (No Comment) */
+"dashboard.vpn.disconnecting" = "กำลังยกเลิกการเชื่อมต่อ...";
+
+/* (No Comment) */
+"expiration.message" = "สถานะสมาชิกของคุณจะหมดอายุเร็วๆนี้ ต่ออายุเพื่อรับการป้องกันต่อ";
+
+/* (No Comment) */
+"expiration.title" = "การต่ออายุ";
+
+/* (No Comment) */
+"global.automatic" = "อัตโนมัติ";
+
+/* (No Comment) */
+"global.cancel" = "ยกเลิก";
+
+/* (No Comment) */
+"global.close" = "ปิด";
+
+/* (No Comment) */
+"global.error" = "ข้อผิดพลาด";
+
+/* (No Comment) */
+"global.ok" = "ตกลง";
+
+/* (No Comment) */
+"menu.accessibility.item" = "เมนู";
+
+/* (No Comment) */
+"menu.accessibility.logged_as" = "เข้าสู่ระบบในฐานะ %@";
+
+/* (No Comment) */
+"menu.expiration.days" = "%d วัน";
+
+/* (No Comment) */
+"menu.expiration.expires_in" = "สถานะสมาชิกจะหมดอายุใน";
+
+/* (No Comment) */
+"menu.expiration.hours" = "%d ชั่วโมง";
+
+/* (No Comment) */
+"menu.expiration.one_hour" = "หนึ่งชั่วโมง";
+
+/* (No Comment) */
+"menu.expiration.upgrade" = "อัพเกรดบัญชี";
+
+/* (No Comment) */
+"menu.item.about" = "เกี่ยวกับ";
+
+/* (No Comment) */
+"menu.item.account" = "เกี่ยวกับ";
+
+/* (No Comment) */
+"menu.item.logout" = "ออกจากระบบ";
+
+/* (No Comment) */
+"menu.item.region" = "การเลือกภูมิภาค";
+
+/* (No Comment) */
+"menu.item.settings" = "ตั้งค่า";
+
+/* (No Comment) */
+"menu.item.web.home" = "หน้าเพจ";
+
+/* (No Comment) */
+"menu.item.web.privacy" = "นโยบายความเป็นส่วนตัว";
+
+/* (No Comment) */
+"menu.item.web.support" = "สนับสนุน";
+
+/* (No Comment) */
+"menu.logout.confirm" = "ออกจากระบบ";
+
+/* (No Comment) */
+"menu.logout.message" = "การออกจากระบบจะยกเลิก VPN และทำให้คุณไม่ได้รับการปกป้องใด";
+
+/* (No Comment) */
+"menu.logout.title" = "ออกจากระบบ";
+
+/* (No Comment) */
+"menu.renewal.message.trial" = "บัญชีทดลองไม่สามารถต่ออายุได้ กรุณาซื้อบัญชีใหม่เมื่อหมดอายุเพื่อใช้บริการต่อ";
+
+/* (No Comment) */
+"menu.renewal.message.unavailable" = "ไม่พบเซิร์ฟเวอร์แอปเปิ้ลในขณะนี้ โปรดลองใหม่ภายหลัง";
+
+/* (No Comment) */
+"menu.renewal.message.website" = "โปรดใช้เว็บไซต์ของเราเพื่อต่ออายุสมาชิกของคุณ";
+
+/* (No Comment) */
+"menu.renewal.purchase" = "ซื้อ";
+
+/* (No Comment) */
+"menu.renewal.renew" = "ต่ออายุ";
+
+/* (No Comment) */
+"menu.renewal.title" = "การต่ออายุ";
+
+/* (No Comment) */
+"notifications.disabled.message" = "เปิดการแจ้งเตือนเพื่อรับคำเตือนเพื่อต่ออายุสมาชิกก่อนหมดอายุ";
+
+/* (No Comment) */
+"notifications.disabled.settings" = "ตั้งค่า";
+
+/* (No Comment) */
+"notifications.disabled.title" = "การแจ้งเตือนถูกปิดอยู่";
+
+/* (No Comment) */
+"renewal.failure.message" = "ไม่สามารถส่งใบเสร็จการสั่งซื้อของคุณได้ โปรดลองอีกครั้งภายหลัง";
+
+/* (No Comment) */
+"renewal.success.message" = "บัญชีของคุณได้รับการต่ออายุเรียบร้อยแล้ว";
+
+/* (No Comment) */
+"renewal.success.title" = "ขอบคุณ";
+
+/* (No Comment) */
+"settings.application_information.debug.empty.message" = "ข้อมูลแก้จุดบกพร่องว่างเปล่า กรุณาพยายามเชื่อมต่อก่อนลองส่งใหม่อีกครั้ง";
+
+/* (No Comment) */
+"settings.application_information.debug.empty.title" = "ข้อมูลแก้จุดบกพร่องว่างเปล่า";
+
+/* (No Comment) */
+"settings.application_information.debug.failure.message" = "ไม่สามารถส่งข้อมูลแก้จุดบกพร่องได้ กรุณายกเลิกการเชื่อมต่อจาก VPN และลองอีกครั้ง";
+
+/* (No Comment) */
+"settings.application_information.debug.failure.title" = "เกิดข้อผิดพลาดระหว่างการส่ง";
+
+/* (No Comment) */
+"settings.application_information.debug.success.message" = "ส่งข้อมูลแก้จุดบกพร่องเรียบร้อยแล้ว \nID: %@\nกรุณาจด ID นี้ไว้ เนื่องจากทีมสนับสนุนของเราอาจสอบถามข้อมูลนี้เพื่อตรวจสอบการส่งข้อมูลของคุณ";
+
+/* (No Comment) */
+"settings.application_information.debug.success.title" = "ส่งข้อมูลแก้จุดบกพร่องเรียบร้อยแล้ว";
+
+/* (No Comment) */
+"settings.application_information.debug.title" = "ส่งการแก้จุดบกพร่องไปยังฝ่ายสนับสนุน";
+
+/* (No Comment) */
+"settings.application_information.title" = "ข้อมูลแอพพลิเคชั่น";
+
+/* (No Comment) */
+"settings.application_settings.dark_theme.title" = "ธีมมึด";
+
+/* (No Comment) */
+"settings.application_settings.mace.footer" = "PIA MACE™ บล็อกโฆษณา, ตัวติดตาม และมัลแวร์ ในขณะที่คุณกำลังเชื่อมต่อ VPN อยู่";
+
+/* (No Comment) */
+"settings.application_settings.mace.title" = "PIA MACE™";
+
+/* (No Comment) */
+"settings.application_settings.persistent.footer.disabled" = "การปิดการเชื่อมต่ออัตโนมัติอาจทำให้ความเป็นส่วนตัวของคุณตกอยู่ในความเสี่ยงได้ เมื่ออุปกรณ์ของคุณไม่มีการเชื่อมต่อกับเครือข่ายที่เสถียร";
+
+/* (No Comment) */
+"settings.application_settings.persistent.title" = "เชื่อมต่อใหม่อัตโนมัติ";
+
+/* (No Comment) */
+"settings.application_settings.title" = "การตั้งค่าแอพพลิเคชั่น";
+
+/* (No Comment) */
+"settings.commit.buttons.later" = "ภายหลัง";
+
+/* (No Comment) */
+"settings.commit.buttons.reconnect" = "เชื่อมต่ออีกครั้ง";
+
+/* (No Comment) */
+"settings.commit.messages.must_disconnect" = "ต้องเชื่อมต่อ VPN อีกครั้งเพื่อให้เกิดความเปลี่ยนแปลง";
+
+/* (No Comment) */
+"settings.commit.messages.should_reconnect" = "เชื่อมต่อ VPN อีกครั้งเพื่อใช้ความเปลี่ยนแปลง";
+
+/* (No Comment) */
+"settings.connection.remote_port.title" = "พอร์ตทางไกล";
+
+/* (No Comment) */
+"settings.connection.socket_protocol.title" = "ซ็อกเก็ต";
+
+/* (No Comment) */
+"settings.connection.title" = "การเชื่อมต่อ";
+
+/* (No Comment) */
+"settings.connection.vpn_protocol.title" = "โปรโตคอล";
+
+/* (No Comment) */
+"settings.content_blocker.footer" = "ในการเปิดหรือปิดตัวปิดกั้นเนื้อหา ให้ไปยังการตั้งค่า > Safari > ตัวปิดกั้นเนื้อหา และเปิดปิด PIA VPN";
+
+/* (No Comment) */
+"settings.content_blocker.refresh.title" = "รีเฟรชรายชื่อที่ปิดกั้น";
+
+/* (No Comment) */
+"settings.content_blocker.state.title" = "สถานะปัจจุบัน";
+
+/* (No Comment) */
+"settings.content_blocker.title" = "ตัวปิดกั้นเนื้อหา Safari";
+
+/* (No Comment) */
+"settings.encryption.cipher.title" = "การเข้ารหัสข้อมูล";
+
+/* (No Comment) */
+"settings.encryption.digest.title" = "การยืนยันข้อมูล";
+
+/* (No Comment) */
+"settings.encryption.handshake.title" = "ความร่วมมือ";
+
+/* (No Comment) */
+"settings.encryption.title" = "การเข้ารหัส";
+
+/* (No Comment) */
+"settings.reset.defaults.confirm.button" = "Reset";
+
+/* (No Comment) */
+"settings.reset.defaults.confirm.message" = "This will bring the app back to default. You will lose all changes you have made.";
+
+/* (No Comment) */
+"settings.reset.defaults.confirm.title" = "Reset settings";
+
+/* (No Comment) */
+"settings.reset.defaults.title" = "Reset to default settings";
+
+/* (No Comment) */
+"settings.reset.title" = "RESET";
+
+/* (No Comment) */
+"shortcuts.connect" = "เชื่อมต่อ";
+
+/* (No Comment) */
+"shortcuts.disconnect" = "ยกเลิกการเชื่อมต่อ";
+
+/* (No Comment) */
+"shortcuts.select_region" = "เลือกภูมิภาค";
+
+/* (No Comment) */
+"vpn_permission.body.footer" = "เราไม่ได้ตรวจสอบ คัดกรอง หรือบันทึกกิจกรรมเครือข่ายใดๆ";
+
+/* (No Comment) */
+"vpn_permission.body.subtitle" = "ในการดำเนินการต่อ ให้แตะ “%@”";
+
+/* (No Comment) */
+"vpn_permission.body.title" = "PIA ต้องการเข้าถึงการกำหนดค่า VPN เพื่อรักษาความปลอดภัยให้กับการเข้าชมของคุณ";
+
+/* (No Comment) */
+"vpn_permission.disallow.contact" = "ติดต่อ";
+
+/* (No Comment) */
+"vpn_permission.disallow.message.basic" = "เราต้องการสิทธิ์นี้เพื่อให้แอปพลิเคชันสามารถทำงานได้";
+
+/* (No Comment) */
+"vpn_permission.disallow.message.support" = "คุณยังสามารถติดต่อฝ่ายสนับสนุนได้หากต้องการความช่วยเหลือ";
+
+/* (No Comment) */
+"vpn_permission.title" = "PIA";
+
+/* (No Comment) */
+"walkthrough.action.done" = "เสร็จสิ้น";
+
+/* (No Comment) */
+"walkthrough.action.next" = "ถัดไป";
+
+/* (No Comment) */
+"walkthrough.action.skip" = "ข้าม";
+
+/* (No Comment) */
+"walkthrough.page.1.description" = "ปกป้องตัวคุณบนอุปกรณ์ถึง 5 เครื่องในเวลาเดียวกัน";
+
+/* (No Comment) */
+"walkthrough.page.1.title" = "รับรองอุปกรณ์ 5 เครื่องในคราวเดียว";
+
+/* (No Comment) */
+"walkthrough.page.2.description" = "ด้วยเซิร์ฟเวอร์ที่มีอยู่ทั่วโลก คุณจะได้รับความคุ้มครองตลอดเวลา";
+
+/* (No Comment) */
+"walkthrough.page.2.title" = "เชื่อมต่อไปยังภูมิภาคใดก็ตามได้อย่างง่ายดาย";
+
+/* (No Comment) */
+"walkthrough.page.3.description" = "การเปิดใช้งานตัวปิดกั้นเนื้อหาของเราจะเป็นการป้องกันไม่ให้แสดงโฆษณาใน Safari";
+
+/* (No Comment) */
+"walkthrough.page.3.title" = "ปกป้องตัวคุณจากโฆษณา";
+

@@ -1,0 +1,3 @@
+- Il tema scuro è tornato!
+- Abbiamo aggiunto il supporto per OpenVPN®, puoi cambiare protocollo dalle Impostazioni.
+- Questa versione sostituisce MACE con il nostro Blocco dei contenuti Safari. Dagli un'occhiata nelle Impostazioni.

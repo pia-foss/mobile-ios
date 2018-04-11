@@ -1,0 +1,3 @@
+- Het donkere thema is terug!
+- We hebben ondersteuning voor OpenVPN® toegevoegd; je kunt via Instellingen wisselen tussen protocollen.
+- Deze versie vervangt MACE met onze Safari Content Blocker. Bekijk de versie zelf via de Instellingen.

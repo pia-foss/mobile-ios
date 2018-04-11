@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Notices</key>
+	<array>
+		<dict>
+			<key>Name</key>
+			<string>OpenVPN</string>
+			<key>Copyright</key>
+			<string>© 2002-2017 OpenVPN Inc.</string>
+			<key>Notice</key>
+			<string>OpenVPN is a registered trademark of OpenVPN Inc.</string>
+		</dict>
+	</array>
+	<key>Licenses</key>
+	<array>
+		<dict>
+			<key>Name</key>
+			<string>OpenSSL</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 1998-2018 The OpenSSL Project. All rights reserved.</string>
+			<key>LicenseURL</key>
+			<string>https://www.openssl.org/source/license.txt</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Alamofire</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2014-2017 Alamofire Software Foundation (http://alamofire.org/)</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/Alamofire/Alamofire/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>SwifyBeaver</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2015 Sebastian Kreutzberger</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/SwiftyBeaver/SwiftyBeaver/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>SideMenu</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2015 Jonathan Kent &lt;contact@jonkent.me&gt;</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/jonkykong/SideMenu/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>iRate</string>
+			<key>Copyright</key>
+			<string>Copyright (C) 2011 Charcoal Design</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/nicklockwood/iRate/master/LICENCE.md</string>
+		</dict>
+	</array>
+</dict>
+</plist>

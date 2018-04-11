@@ -1,0 +1,21 @@
+ci_hostname = ENV['CI_HOSTNAME']
+raise "No project hostname" if ci_hostname.nil?
+ci_token = ENV['CI_JOB_TOKEN']
+
+if ci_token.nil?
+    git_url "git@#{ci_hostname}:ios/provisioning.git"
+else
+    git_url "https://gitlab-ci-token:#{ci_token}@#{ci_hostname}/ios/provisioning.git"
+end
+
+type "development" # The default type, can be: appstore, adhoc, enterprise or development
+
+app_identifier [
+    "com.privateinternetaccess.ios.PIA-VPN",
+    "com.privateinternetaccess.ios.PIA-VPN.Tunnel",
+    "com.privateinternetaccess.ios.PIA-VPN.Widget",
+    "com.privateinternetaccess.ios.PIA-VPN.AdBlocker"
+]
+
+# For all available options run `fastlane match --help`
+# Remove the # in the beginning of the line to enable the other options

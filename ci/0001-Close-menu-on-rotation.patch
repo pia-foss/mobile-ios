@@ -1,0 +1,41 @@
+From 002acdd93e71d90cedad1a736f5cb0562a358aec Mon Sep 17 00:00:00 2001
+From: Davide De Rosa <davide@londontrustmedia.com>
+Date: Tue, 23 Jan 2018 01:27:43 +0100
+Subject: [PATCH] Close menu on rotation
+
+Fixes #22
+---
+ .../Pod/Classes/UISideMenuNavigationController.swift    | 17 ++++++++++-------
+ 1 file changed, 10 insertions(+), 7 deletions(-)
+
+diff --git a/Pods/SideMenu/Pod/Classes/UISideMenuNavigationController.swift b/Pods/SideMenu/Pod/Classes/UISideMenuNavigationController.swift
+index 0c6963c..7e18b96 100644
+--- a/Pods/SideMenu/Pod/Classes/UISideMenuNavigationController.swift
++++ b/Pods/SideMenu/Pod/Classes/UISideMenuNavigationController.swift
+@@ -238,13 +238,16 @@ open class UISideMenuNavigationController: UINavigationController {
+         guard !view.isHidden else {
+             return
+         }
+-        
+-        NotificationCenter.default.removeObserver(self.transition, name: NSNotification.Name.UIApplicationWillChangeStatusBarFrame, object: nil)
+-        coordinator.animate(alongsideTransition: { (context) in
+-            self.transition.presentMenuStart()
+-        }) { (context) in
+-            NotificationCenter.default.addObserver(self.transition, selector:#selector(SideMenuTransition.handleNotification), name: NSNotification.Name.UIApplicationWillChangeStatusBarFrame, object: nil)
+-        }
++
++        // don't animate
++        transition.hideMenuStart()
++
++//        NotificationCenter.default.removeObserver(self.transition, name: NSNotification.Name.UIApplicationWillChangeStatusBarFrame, object: nil)
++//        coordinator.animate(alongsideTransition: { (context) in
++//            self.transition.presentMenuStart()
++//        }) { (context) in
++//            NotificationCenter.default.addObserver(self.transition, selector:#selector(SideMenuTransition.handleNotification), name: NSNotification.Name.UIApplicationWillChangeStatusBarFrame, object: nil)
++//        }
+     }
+     
+     override open func pushViewController(_ viewController: UIViewController, animated: Bool) {
+-- 
+2.8.1
+

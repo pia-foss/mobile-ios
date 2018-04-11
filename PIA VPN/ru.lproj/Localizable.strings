@@ -1,0 +1,378 @@
+/* (No Comment) */
+"about.accessibility.component.expand" = "Нажмите, чтобы прочитать полный текст лицензии";
+
+/* (No Comment) */
+"about.app" = "VPN от Private Internet Access";
+
+/* (No Comment) */
+"about.intro" = "Эта программа использует следующие компоненты:";
+
+/* (No Comment) */
+"account.accessibility.eye" = "Значок глаза";
+
+/* (No Comment) */
+"account.accessibility.eye.hint.conceal" = "Нажмите, чтобы скрыть пароль";
+
+/* (No Comment) */
+"account.accessibility.eye.hint.reveal" = "Нажмите, чтобы показать пароль";
+
+/* (No Comment) */
+"account.email.caption" = "Эл. адрес";
+
+/* (No Comment) */
+"account.email.placeholder" = "Адрес эл. почты";
+
+/* (No Comment) */
+"account.eye.footer" = "Нажмите значок с глазом, чтобы показать или скрыть пароль.";
+
+/* (No Comment) */
+"account.other.footer" = "Установите приложение Private Internet Access на других устройствах и используйте указанные выше имя пользователя и пароль для входа в учетную запись и защиты соединения.";
+
+/* (No Comment) */
+"account.password.caption" = "Пароль";
+
+/* (No Comment) */
+"account.restore.button" = "Восстановить покупку";
+
+/* (No Comment) */
+"account.restore.description" = "Если вы продлили план, но по-прежнему видите в учетной записи сообщение о том, что срок действия истекает, вы можете перезапустить здесь процедуру продления. За эту процедуру не взимается плата.";
+
+/* (No Comment) */
+"account.restore.failure.message" = "Не удалось найти применимой покупки для продления.";
+
+/* (No Comment) */
+"account.restore.failure.title" = "Восстановить покупку";
+
+/* (No Comment) */
+"account.restore.title" = "Восстановить непроведенную покупку";
+
+/* (No Comment) */
+"account.reveal.prompt" = "Выполните аутентификацию для показа";
+
+/* (No Comment) */
+"account.save.item" = "Обновить";
+
+/* (No Comment) */
+"account.save.prompt" = "Чтобы сохранить изменения, выполните аутентификацию";
+
+/* (No Comment) */
+"account.save.success" = "Адрес электронной почты сохранен.";
+
+/* (No Comment) */
+"account.username.caption" = "Имя пользователя";
+
+/* (No Comment) */
+"content_blocker.body.footer" = "Примечание. Для работы этого правила блокирования контента подключаться к VPN необязательно, но оно будет работать только при просмотре сайтов в Safari.";
+
+/* (No Comment) */
+"content_blocker.body.subtitle" = "Чтобы включить наше правило блокирования контента в Safari, перейдите в \"Настроки\" > Safari, а затем во вкладке \"Основные\" коснитесь пункта \"Правила блокирования контента\" и включите PIA VPN.";
+
+/* (No Comment) */
+"content_blocker.title" = "Правило блокирования контента";
+
+/* (No Comment) */
+"dashboard.connection.ip.caption" = "ОБЩЕДОСТУПНЫЙ IP-АДРЕС";
+
+/* (No Comment) */
+"dashboard.connection.ip.unreachable" = "Интернет недоступен";
+
+/* (No Comment) */
+"dashboard.connection.region.caption" = "ТЕКУЩИЙ РЕГИОН";
+
+/* (No Comment) */
+"dashboard.connection.region.change" = "ИЗМЕНЕНИЕ РЕГИОНА";
+
+/* (No Comment) */
+"dashboard.content_blocker.intro.message" = "Эта версия заменяет MACE нашим правилом блокирования контента для Safari.\n\nПосмотрите в разделе «Настройки».";
+
+/* (No Comment) */
+"dashboard.status" = "Статус";
+
+/* (No Comment) */
+"dashboard.vpn.changing_region" = "Изменение региона...";
+
+/* (No Comment) */
+"dashboard.vpn.connected" = "Подключено к VPN";
+
+/* (No Comment) */
+"dashboard.vpn.connecting" = "Подключение...";
+
+/* (No Comment) */
+"dashboard.vpn.disconnected" = "Отключено";
+
+/* (No Comment) */
+"dashboard.vpn.disconnecting" = "Отключение...";
+
+/* (No Comment) */
+"expiration.message" = "Срок действия подписки истекает в ближайшее время. Продлите подписку, чтобы не потерять защиту.";
+
+/* (No Comment) */
+"expiration.title" = "Продление";
+
+/* (No Comment) */
+"global.automatic" = "Автоматически";
+
+/* (No Comment) */
+"global.cancel" = "Отмена";
+
+/* (No Comment) */
+"global.close" = "Закрыть";
+
+/* (No Comment) */
+"global.error" = "Ошибка";
+
+/* (No Comment) */
+"global.ok" = "OK";
+
+/* (No Comment) */
+"menu.accessibility.item" = "Меню";
+
+/* (No Comment) */
+"menu.accessibility.logged_as" = "Выполнен вход под именем %@";
+
+/* (No Comment) */
+"menu.expiration.days" = "%d дней";
+
+/* (No Comment) */
+"menu.expiration.expires_in" = "Срок действия подписки истекает через";
+
+/* (No Comment) */
+"menu.expiration.hours" = "%d часов";
+
+/* (No Comment) */
+"menu.expiration.one_hour" = "один час";
+
+/* (No Comment) */
+"menu.expiration.upgrade" = "ПОВЫСИТЬ УРОВЕНЬ";
+
+/* (No Comment) */
+"menu.item.about" = "О программе";
+
+/* (No Comment) */
+"menu.item.account" = "Учетная запись";
+
+/* (No Comment) */
+"menu.item.logout" = "Выход";
+
+/* (No Comment) */
+"menu.item.region" = "Выбор региона";
+
+/* (No Comment) */
+"menu.item.settings" = "Настройки";
+
+/* (No Comment) */
+"menu.item.web.home" = "Главная страница";
+
+/* (No Comment) */
+"menu.item.web.privacy" = "Политика конфиденциальности";
+
+/* (No Comment) */
+"menu.item.web.support" = "Поддержка";
+
+/* (No Comment) */
+"menu.logout.confirm" = "Выход";
+
+/* (No Comment) */
+"menu.logout.message" = "После выхода VPN будет отключен и система не будет защищена.";
+
+/* (No Comment) */
+"menu.logout.title" = "Выход";
+
+/* (No Comment) */
+"menu.renewal.message.trial" = "Пробные учетные записи не дают права на продление подписки. Для продолжения пользования услугой после окончания пробного периода приобретите новую учетную запись.";
+
+/* (No Comment) */
+"menu.renewal.message.unavailable" = "Серверы Apple временно недоступны. Повторите попытку позже.";
+
+/* (No Comment) */
+"menu.renewal.message.website" = "Для продления подписки перейдите на наш веб-сайт.";
+
+/* (No Comment) */
+"menu.renewal.purchase" = "Купить";
+
+/* (No Comment) */
+"menu.renewal.renew" = "Обновить";
+
+/* (No Comment) */
+"menu.renewal.title" = "Продление";
+
+/* (No Comment) */
+"notifications.disabled.message" = "Включить уведомления с напоминаниями о необходимости возобновить подписку до истечения срока ее действия.";
+
+/* (No Comment) */
+"notifications.disabled.settings" = "Настройки";
+
+/* (No Comment) */
+"notifications.disabled.title" = "Уведомления отключены";
+
+/* (No Comment) */
+"renewal.failure.message" = "Не удалось отправить квитанцию на покупку, повторите попытку позже.";
+
+/* (No Comment) */
+"renewal.success.message" = "Действие вашей учетной записи успешно продлено";
+
+/* (No Comment) */
+"renewal.success.title" = "Благодарим вас";
+
+/* (No Comment) */
+"settings.application_information.debug.empty.message" = "Отладочная информация пуста, перед тем как повторно отправлять информацию, повторите попытку подключения.";
+
+/* (No Comment) */
+"settings.application_information.debug.empty.title" = "Пустая отладочная информация";
+
+/* (No Comment) */
+"settings.application_information.debug.failure.message" = "Не удалось отправить отладочную информацию. Отсоединитесь от VPN и повторите попытку.";
+
+/* (No Comment) */
+"settings.application_information.debug.failure.title" = "Ошибка при отправке";
+
+/* (No Comment) */
+"settings.application_information.debug.success.message" = "Отладочная информация успешно отправлена.\nКод: %@\nЗапишите этот код, т. к. наша служба поддержки запрашивает его для поиска переданных вами данных.";
+
+/* (No Comment) */
+"settings.application_information.debug.success.title" = "Отладочная информация отправлена";
+
+/* (No Comment) */
+"settings.application_information.debug.title" = "Отправить отладочную информацию в службу поддержки";
+
+/* (No Comment) */
+"settings.application_information.title" = "СВЕДЕНИЯ О ПРИЛОЖЕНИИ";
+
+/* (No Comment) */
+"settings.application_settings.dark_theme.title" = "Темная тема";
+
+/* (No Comment) */
+"settings.application_settings.mace.footer" = "PIA MACE™ блокирует рекламу, следящие программы и вредоносное ПО, когда вы подключены к VPN.";
+
+/* (No Comment) */
+"settings.application_settings.mace.title" = "PIA MACE™";
+
+/* (No Comment) */
+"settings.application_settings.persistent.footer.disabled" = "Если отключить функцию автоматического повторного подключения, при отсутствии доступа к устойчивой сети это может создать риски для устройства.";
+
+/* (No Comment) */
+"settings.application_settings.persistent.title" = "Восстанавливать подключение автоматически";
+
+/* (No Comment) */
+"settings.application_settings.title" = "НАСТРОЙКИ ПРИЛОЖЕНИЯ";
+
+/* (No Comment) */
+"settings.commit.buttons.later" = "Позже";
+
+/* (No Comment) */
+"settings.commit.buttons.reconnect" = "Переподключиться";
+
+/* (No Comment) */
+"settings.commit.messages.must_disconnect" = "Чтобы некоторые изменения вступили в силу, надо переподключиться к VPN.";
+
+/* (No Comment) */
+"settings.commit.messages.should_reconnect" = "Чтобы изменения вступили в силу, переподключитесь к VPN.";
+
+/* (No Comment) */
+"settings.connection.remote_port.title" = "Удаленный порт";
+
+/* (No Comment) */
+"settings.connection.socket_protocol.title" = "Сокет";
+
+/* (No Comment) */
+"settings.connection.title" = "СОЕДИНЕНИЕ";
+
+/* (No Comment) */
+"settings.connection.vpn_protocol.title" = "Протокол";
+
+/* (No Comment) */
+"settings.content_blocker.footer" = "Чтобы включить или выключить правило блокирования контента, перейдите в \"Настройки\" > Safari > \"Правила блокирования контента\" и нажмите на PIA VPN.";
+
+/* (No Comment) */
+"settings.content_blocker.refresh.title" = "Обновление списка блокирования";
+
+/* (No Comment) */
+"settings.content_blocker.state.title" = "Текущее состояние";
+
+/* (No Comment) */
+"settings.content_blocker.title" = "Правило блокирования контента для Safari";
+
+/* (No Comment) */
+"settings.encryption.cipher.title" = "Шифрование данных";
+
+/* (No Comment) */
+"settings.encryption.digest.title" = "Аутентификация данных";
+
+/* (No Comment) */
+"settings.encryption.handshake.title" = "Квитирование";
+
+/* (No Comment) */
+"settings.encryption.title" = "ШИФРОВАНИЕ";
+
+/* (No Comment) */
+"settings.reset.defaults.confirm.button" = "Reset";
+
+/* (No Comment) */
+"settings.reset.defaults.confirm.message" = "This will bring the app back to default. You will lose all changes you have made.";
+
+/* (No Comment) */
+"settings.reset.defaults.confirm.title" = "Reset settings";
+
+/* (No Comment) */
+"settings.reset.defaults.title" = "Reset to default settings";
+
+/* (No Comment) */
+"settings.reset.title" = "RESET";
+
+/* (No Comment) */
+"shortcuts.connect" = "Подключиться";
+
+/* (No Comment) */
+"shortcuts.disconnect" = "Отключиться";
+
+/* (No Comment) */
+"shortcuts.select_region" = "Выберите регион";
+
+/* (No Comment) */
+"vpn_permission.body.footer" = "Мы не отслеживаем, не фильтруем и не регистрируем действия в сети.";
+
+/* (No Comment) */
+"vpn_permission.body.subtitle" = "Чтобы продолжить, намжите на «%@».";
+
+/* (No Comment) */
+"vpn_permission.body.title" = "PIA требуется доступ к вашей конфигурации VPN для защиты вашего трафика.";
+
+/* (No Comment) */
+"vpn_permission.disallow.contact" = "Контакты";
+
+/* (No Comment) */
+"vpn_permission.disallow.message.basic" = "Это разрешение требуется приложению для работы.";
+
+/* (No Comment) */
+"vpn_permission.disallow.message.support" = "Если вам нужна помощь, вы также можете связаться со службой поддержки пользователей.";
+
+/* (No Comment) */
+"vpn_permission.title" = "PIA";
+
+/* (No Comment) */
+"walkthrough.action.done" = "ГОТОВО";
+
+/* (No Comment) */
+"walkthrough.action.next" = "ДАЛЕЕ";
+
+/* (No Comment) */
+"walkthrough.action.skip" = "ПРОПУСК";
+
+/* (No Comment) */
+"walkthrough.page.1.description" = "Защищайте себя на нескольких устройствах одновременно (до 5).";
+
+/* (No Comment) */
+"walkthrough.page.1.title" = "Поддержка 5 устройств одновременно";
+
+/* (No Comment) */
+"walkthrough.page.2.description" = "У нас есть серверы по всему миру, так что вы всегда будете под защитой.";
+
+/* (No Comment) */
+"walkthrough.page.2.title" = "Простое подключение к любому региону";
+
+/* (No Comment) */
+"walkthrough.page.3.description" = "Активация нашего правила блокирования контента препятствует отображению рекламы в Safari.";
+
+/* (No Comment) */
+"walkthrough.page.3.title" = "Защита от рекламы";
+

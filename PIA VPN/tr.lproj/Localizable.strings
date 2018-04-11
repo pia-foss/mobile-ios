@@ -1,0 +1,378 @@
+/* (No Comment) */
+"about.accessibility.component.expand" = "Lisansın tamamını görmek için dokunun";
+
+/* (No Comment) */
+"about.app" = "Private Internet Access'ten VPN";
+
+/* (No Comment) */
+"about.intro" = "Bu program şu bileşenleri kullanmaktadır:";
+
+/* (No Comment) */
+"account.accessibility.eye" = "Göz simgesi";
+
+/* (No Comment) */
+"account.accessibility.eye.hint.conceal" = "Şifreyi gizlemek için dokunun";
+
+/* (No Comment) */
+"account.accessibility.eye.hint.reveal" = "Şifreyi açmak için dokunun";
+
+/* (No Comment) */
+"account.email.caption" = "E-posta";
+
+/* (No Comment) */
+"account.email.placeholder" = "E-posta adresi";
+
+/* (No Comment) */
+"account.eye.footer" = "Şifrenizi açmak ya da gizlemek için göz simgesine dokunun.";
+
+/* (No Comment) */
+"account.other.footer" = "Diğer cihazlarınıza Private Internet Access uygulamasını yükleyip yukarıdaki kullanıcı adı ve şifre ile giriş yaparak İnternet'e güvenli şekilde bağlanın.";
+
+/* (No Comment) */
+"account.password.caption" = "Şifre";
+
+/* (No Comment) */
+"account.restore.button" = "Satın alınanı geri yükle";
+
+/* (No Comment) */
+"account.restore.description" = "Planınızı yenilemenize rağmen hesabınızdan hâlâ süresinin dolmak üzere olduğu uyarısını alıyorsanız, buradan yenilemeyi baştan başlatabilirsiniz. Bu işlem için sizden para kesilmeyecektir.";
+
+/* (No Comment) */
+"account.restore.failure.message" = "Yenileme işlemi için geri yüklenebilecek satın alım işlemi bulunamadı.";
+
+/* (No Comment) */
+"account.restore.failure.title" = "Satın alınanı geri yükle";
+
+/* (No Comment) */
+"account.restore.title" = "Hesaba yansıtılmamış satın alma işlemini geri yükleyin";
+
+/* (No Comment) */
+"account.reveal.prompt" = "Ortaya çıkarmak için doğrulayın";
+
+/* (No Comment) */
+"account.save.item" = "Güncelle";
+
+/* (No Comment) */
+"account.save.prompt" = "Değişiklikleri kaydetmek için doğrulayın";
+
+/* (No Comment) */
+"account.save.success" = "E-posta adresiniz kaydedildi.";
+
+/* (No Comment) */
+"account.username.caption" = "Kullanıcı Adı";
+
+/* (No Comment) */
+"content_blocker.body.footer" = "Lütfen unutmayın: Bu İçerik Engelleyicinin çalışması için VPN bağlantınızın olmasına gerek yoktur ancak yalnızca Safari ile gezindiğinizde çalışacaktır.";
+
+/* (No Comment) */
+"content_blocker.body.subtitle" = "İçerik Engelleyicimizin Safari ile kullanılmasını etkinleştirmek için lütfen Genel bölümü altından Ayarlar > Safari kısmına gidin ve PIA VPN'de İçerik Engelleyicileri açık hale getirin.";
+
+/* (No Comment) */
+"content_blocker.title" = "İçerik Engelleyici";
+
+/* (No Comment) */
+"dashboard.connection.ip.caption" = "HERKESE AÇIK IP";
+
+/* (No Comment) */
+"dashboard.connection.ip.unreachable" = "İnternet'e erişilemiyor";
+
+/* (No Comment) */
+"dashboard.connection.region.caption" = "MEVCUT BÖLGE";
+
+/* (No Comment) */
+"dashboard.connection.region.change" = "BÖLGEYİ DEĞİŞTİR";
+
+/* (No Comment) */
+"dashboard.content_blocker.intro.message" = "Bu sürüm, MACE'i Safari İçerik Engelleyicimizle değiştirir.\n\n'Ayarlar' bölümünde bunu işaretleyin.";
+
+/* (No Comment) */
+"dashboard.status" = "Durum";
+
+/* (No Comment) */
+"dashboard.vpn.changing_region" = "Bölge değiştiriliyor...";
+
+/* (No Comment) */
+"dashboard.vpn.connected" = "VPN'ye Bağlandı";
+
+/* (No Comment) */
+"dashboard.vpn.connecting" = "Bağlanıyor...";
+
+/* (No Comment) */
+"dashboard.vpn.disconnected" = "Bağlantı Kesildi";
+
+/* (No Comment) */
+"dashboard.vpn.disconnecting" = "Bağlantı Kesiliyor";
+
+/* (No Comment) */
+"expiration.message" = "Üyeliğiniz yakında sona erecek. Koruma altında kalmak için yenileyin.";
+
+/* (No Comment) */
+"expiration.title" = "Yenileme";
+
+/* (No Comment) */
+"global.automatic" = "Otomatik";
+
+/* (No Comment) */
+"global.cancel" = "İptal";
+
+/* (No Comment) */
+"global.close" = "Kapat";
+
+/* (No Comment) */
+"global.error" = "Hata";
+
+/* (No Comment) */
+"global.ok" = "Tamam";
+
+/* (No Comment) */
+"menu.accessibility.item" = "Menü";
+
+/* (No Comment) */
+"menu.accessibility.logged_as" = "%@ olarak giriş yapıldı";
+
+/* (No Comment) */
+"menu.expiration.days" = "%d gün";
+
+/* (No Comment) */
+"menu.expiration.expires_in" = "Üyeliğin sona erme süresi:";
+
+/* (No Comment) */
+"menu.expiration.hours" = "%d saat";
+
+/* (No Comment) */
+"menu.expiration.one_hour" = "bir saat";
+
+/* (No Comment) */
+"menu.expiration.upgrade" = "HESABI YÜKSELTİN";
+
+/* (No Comment) */
+"menu.item.about" = "Hakkında";
+
+/* (No Comment) */
+"menu.item.account" = "Hesap";
+
+/* (No Comment) */
+"menu.item.logout" = "Çıkış yap";
+
+/* (No Comment) */
+"menu.item.region" = "Bölge seçimi";
+
+/* (No Comment) */
+"menu.item.settings" = "Ayarlar";
+
+/* (No Comment) */
+"menu.item.web.home" = "Ana sayfa";
+
+/* (No Comment) */
+"menu.item.web.privacy" = "Gizlilik politikası";
+
+/* (No Comment) */
+"menu.item.web.support" = "Destek";
+
+/* (No Comment) */
+"menu.logout.confirm" = "Çıkış yap";
+
+/* (No Comment) */
+"menu.logout.message" = "Çıkış yaptığınızda VPN devre dışı kalacak ve korunmasız olacaksınız.";
+
+/* (No Comment) */
+"menu.logout.title" = "Çıkış yap";
+
+/* (No Comment) */
+"menu.renewal.message.trial" = "Deneme hesabı yenilenemez. Hizmeti kullanmaya devam etmek için süresi dolduktan sonra lütfen yeni bir hesap satın alın.";
+
+/* (No Comment) */
+"menu.renewal.message.unavailable" = "Apple sunucuları şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.";
+
+/* (No Comment) */
+"menu.renewal.message.website" = "Lütfen üyeliğinizi yenilemek için internet sitemizi kullanın.";
+
+/* (No Comment) */
+"menu.renewal.purchase" = "Satın Al";
+
+/* (No Comment) */
+"menu.renewal.renew" = "Yenile";
+
+/* (No Comment) */
+"menu.renewal.title" = "Yenileme";
+
+/* (No Comment) */
+"notifications.disabled.message" = "Aboneliğinizi süresi dolmadan önce yenilemek için bildirimleri etkinleştirerek bir hatırlatıcı alın.";
+
+/* (No Comment) */
+"notifications.disabled.settings" = "Ayarlar";
+
+/* (No Comment) */
+"notifications.disabled.title" = "Bildirimler kapalı";
+
+/* (No Comment) */
+"renewal.failure.message" = "Satın alım işleminizin faturası gönderilemedi; lütfen daha sonra tekrar deneyin.";
+
+/* (No Comment) */
+"renewal.success.message" = "Hesabınız başarıyla yenilendi.";
+
+/* (No Comment) */
+"renewal.success.title" = "Teşekkürler";
+
+/* (No Comment) */
+"settings.application_information.debug.empty.message" = "Hata ayıklama bilgileri boş; lütfen tekrar göndermeyi denemeden önce bir bağlantı kurun.";
+
+/* (No Comment) */
+"settings.application_information.debug.empty.title" = "Boş hata ayıklama bilgisi";
+
+/* (No Comment) */
+"settings.application_information.debug.failure.message" = "Hata ayıklama bilgileri gönderilemedi. Lütfen VPN bağlantısını kesip yeniden deneyin.";
+
+/* (No Comment) */
+"settings.application_information.debug.failure.title" = "Gönderme sırasında hata oluştu";
+
+/* (No Comment) */
+"settings.application_information.debug.success.message" = "Hata ayıklama bilgileri başarıyla gönderildi.\nKimlik: %@\nLütfen bu kimliği not edin; destek ekibimiz gönderdiğiniz bilgileri bulmak için bu kimliği kullanacaktır.";
+
+/* (No Comment) */
+"settings.application_information.debug.success.title" = "Hata ayıklama bilgileri gönderildi";
+
+/* (No Comment) */
+"settings.application_information.debug.title" = "Hata ayıklamayı destek birimine gönderin";
+
+/* (No Comment) */
+"settings.application_information.title" = "UYGULAMA BİLGİLERİ";
+
+/* (No Comment) */
+"settings.application_settings.dark_theme.title" = "Koyu tema";
+
+/* (No Comment) */
+"settings.application_settings.mace.footer" = "PIA MACE™ VPN'e bağlı iken reklam, iz sürücüler ve kötü amaçlı yazılımları engeller.";
+
+/* (No Comment) */
+"settings.application_settings.mace.title" = "PIA MACE™";
+
+/* (No Comment) */
+"settings.application_settings.persistent.footer.disabled" = "Otomatik yeniden bağlanmayı devre dışı bıraktığınızda, cihazınız stabil bir ağa bağlı olmadığı durumlarda riske girebilirsiniz.";
+
+/* (No Comment) */
+"settings.application_settings.persistent.title" = "Otomatik olarak yeniden bağlan";
+
+/* (No Comment) */
+"settings.application_settings.title" = "UYGULAMA AYARLARI";
+
+/* (No Comment) */
+"settings.commit.buttons.later" = "Daha Sonra";
+
+/* (No Comment) */
+"settings.commit.buttons.reconnect" = "Tekrar Bağlan";
+
+/* (No Comment) */
+"settings.commit.messages.must_disconnect" = "Bazı değişikliklerin etki etmesi için VPN'nin tekrar bağlanması gerekmektedir.";
+
+/* (No Comment) */
+"settings.commit.messages.should_reconnect" = "Değişikliklerin etki etmesi için VPN'yi tekrar bağlayın.";
+
+/* (No Comment) */
+"settings.connection.remote_port.title" = "Uzaktan bağlantı noktası";
+
+/* (No Comment) */
+"settings.connection.socket_protocol.title" = "Socket";
+
+/* (No Comment) */
+"settings.connection.title" = "BAĞLANTI";
+
+/* (No Comment) */
+"settings.connection.vpn_protocol.title" = "Protokol";
+
+/* (No Comment) */
+"settings.content_blocker.footer" = "İçerik Engelleyiciyi etkinleştirmek veya devre dışı bırakmak için Ayarlar > Safari > İçerik Engelleyici bölümüne gidin ve PIA VPN'i açık hale getirin.";
+
+/* (No Comment) */
+"settings.content_blocker.refresh.title" = "Engelleme listesini yenile";
+
+/* (No Comment) */
+"settings.content_blocker.state.title" = "Mevcut durum";
+
+/* (No Comment) */
+"settings.content_blocker.title" = "Safari İçerik Engelleyici";
+
+/* (No Comment) */
+"settings.encryption.cipher.title" = "Veri şifreleme";
+
+/* (No Comment) */
+"settings.encryption.digest.title" = "Veri doğrulama";
+
+/* (No Comment) */
+"settings.encryption.handshake.title" = "Handshake";
+
+/* (No Comment) */
+"settings.encryption.title" = "ŞİFRELEME";
+
+/* (No Comment) */
+"settings.reset.defaults.confirm.button" = "Reset";
+
+/* (No Comment) */
+"settings.reset.defaults.confirm.message" = "This will bring the app back to default. You will lose all changes you have made.";
+
+/* (No Comment) */
+"settings.reset.defaults.confirm.title" = "Reset settings";
+
+/* (No Comment) */
+"settings.reset.defaults.title" = "Reset to default settings";
+
+/* (No Comment) */
+"settings.reset.title" = "RESET";
+
+/* (No Comment) */
+"shortcuts.connect" = "Bağlan";
+
+/* (No Comment) */
+"shortcuts.disconnect" = "Bağlantıyı Kes";
+
+/* (No Comment) */
+"shortcuts.select_region" = "Bir Bölge Seçin";
+
+/* (No Comment) */
+"vpn_permission.body.footer" = "Hiçbir ağ aktivitesini izlemiyor, filtrelemiyor ya da kayıt altına almıyoruz.";
+
+/* (No Comment) */
+"vpn_permission.body.subtitle" = "Devam etmek için “%@” düğmesine dokunun.";
+
+/* (No Comment) */
+"vpn_permission.body.title" = "PIA'nın veri trafiğinizi güven altına alabilmesi için VPN yapılandırma ayarlarınıza erişebilmesi gerekmektedir.";
+
+/* (No Comment) */
+"vpn_permission.disallow.contact" = "İletişim";
+
+/* (No Comment) */
+"vpn_permission.disallow.message.basic" = "Uygulamanın çalışabilmesi için bu izne ihtiyaç duymaktayız.";
+
+/* (No Comment) */
+"vpn_permission.disallow.message.support" = "Yardıma ihtiyacınız olursa, müşteri desteği ile iletişime geçebilirsiniz.";
+
+/* (No Comment) */
+"vpn_permission.title" = "PIA";
+
+/* (No Comment) */
+"walkthrough.action.done" = "BİTTİ";
+
+/* (No Comment) */
+"walkthrough.action.next" = "İLERİ";
+
+/* (No Comment) */
+"walkthrough.action.skip" = "ATLA";
+
+/* (No Comment) */
+"walkthrough.page.1.description" = "Aynı anda 5 cihazda koruma sağlayın.";
+
+/* (No Comment) */
+"walkthrough.page.1.title" = "Aynı anda 5 cihazı destekle";
+
+/* (No Comment) */
+"walkthrough.page.2.description" = "Dünya çapındaki sunucularla daima koruma altındasınız.";
+
+/* (No Comment) */
+"walkthrough.page.2.title" = "Herhangi bir bölgeye kolayca bağlanın";
+
+/* (No Comment) */
+"walkthrough.page.3.description" = "İçerik Engelleyicimizi etkinleştirdiğinizde Safari'de reklamların gösterilmesi engellenir.";
+
+/* (No Comment) */
+"walkthrough.page.3.title" = "Kendinizi reklamlardan koruyun";
+

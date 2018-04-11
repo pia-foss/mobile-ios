@@ -1,0 +1,94 @@
+PODS:
+  - Alamofire (4.7.0)
+  - AlamofireImage (3.3.0):
+    - Alamofire (~> 4.5)
+  - FXPageControl (1.5)
+  - Gloss (2.0.0)
+  - HockeySDK (5.1.2):
+    - HockeySDK/DefaultLib (= 5.1.2)
+  - HockeySDK/DefaultLib (5.1.2)
+  - iRate (1.12.2)
+  - MBProgressHUD (1.1.0)
+  - OpenSSL-Apple (1.1.0g)
+  - PIALibrary/Core (1.0)
+  - PIALibrary/Library (1.0):
+    - Alamofire (~> 4)
+    - Gloss (~> 2)
+    - PIALibrary/Core
+    - PIALibrary/Util
+    - ReachabilitySwift
+    - SwiftyBeaver
+  - PIALibrary/Mock (1.0):
+    - PIALibrary/Library
+  - PIALibrary/UI (1.0):
+    - PIALibrary/Library
+    - SwiftyBeaver
+    - TPKeyboardAvoiding
+  - PIALibrary/Util (1.0):
+    - PIALibrary/Core
+  - PIALibrary/VPN (1.0):
+    - PIALibrary/Library
+    - PIATunnel (~> 1.0)
+  - PIATunnel (1.0):
+    - PIATunnel/AppExtension (= 1.0)
+    - PIATunnel/Core (= 1.0)
+  - PIATunnel/AppExtension (1.0):
+    - PIATunnel/Core
+    - SwiftyBeaver
+  - PIATunnel/Core (1.0):
+    - OpenSSL-Apple (= 1.1.0g)
+    - SwiftyBeaver
+  - ReachabilitySwift (4.1.0)
+  - SideMenu (3.1.5)
+  - SwiftyBeaver (1.5.2)
+  - TPKeyboardAvoiding (1.3.2)
+
+DEPENDENCIES:
+  - AlamofireImage
+  - FXPageControl
+  - HockeySDK
+  - iRate
+  - MBProgressHUD
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `v1.0`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `v1.0`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `v1.0`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `v1.0`)
+  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `v1.0`)
+  - SideMenu (= 3.1.5)
+  - TPKeyboardAvoiding
+
+EXTERNAL SOURCES:
+  PIALibrary:
+    :commit: v1.0
+    :git: https://github.com/pia-foss/client-library-apple
+  PIATunnel:
+    :commit: v1.0
+    :git: https://github.com/pia-foss/tunnel-apple
+
+CHECKOUT OPTIONS:
+  PIALibrary:
+    :commit: v1.0
+    :git: https://github.com/pia-foss/client-library-apple
+  PIATunnel:
+    :commit: v1.0
+    :git: https://github.com/pia-foss/tunnel-apple
+
+SPEC CHECKSUMS:
+  Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
+  AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
+  FXPageControl: 97620412515365d10a3282ec0660f49f6401a8f0
+  Gloss: b67617f327406adfd47adf20172d00680a3a31bd
+  HockeySDK: 38b7e2726af1ea86ae97ce4b5de33ab0817e3500
+  iRate: 4fc69958788624545e5d050c8ffd20884013c3f1
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
+  OpenSSL-Apple: e259fc621b6d3f6433253097dc266fce69e47c52
+  PIALibrary: c874a6b401324a213132534a648b3596abbb59b0
+  PIATunnel: 454ad07ee80920d45e9343d15416ac25b5cd9b31
+  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
+  SideMenu: 47dbf9e4d878062d8994aed43f6e4bf6c1fea30b
+  SwiftyBeaver: 85daaaa2b3ae6e31b7b55c99430e8b91dac088af
+  TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
+
+PODFILE CHECKSUM: a2d8fb0cf1140ff3f2f7a2a8738631ec5c5fe4bd
+
+COCOAPODS: 1.4.0

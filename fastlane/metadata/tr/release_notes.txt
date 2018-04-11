@@ -1,0 +1,3 @@
+- Koyu tema geri döndü!
+- OpenVPN® için destek ekledik; Ayarlar menüsünden protokol değiştirebilirsiniz.
+- Bu sürümde MACE'nin yerini Safari İçerik Engelleyici aldı. Ayarlar menüsünden göz atabilirsiniz.

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>usesDevelopmentClient</key>
+	<true/>
+	<key>customizesClientEnvironment</key>
+	<false/>
+	<key>customizesWelcomePreset</key>
+	<false/>
+	<key>usesMockAccount</key>
+	<false/>
+	<key>usesMockInApp</key>
+	<false/>
+	<key>usesMockVPN</key>
+	<false/>
+	<key>alwaysShowsWalkthrough</key>
+	<false/>
+	<key>enablesResetSettings</key>
+	<false/>
+	<key>enablesProtocolSelection</key>
+	<true/>
+	<key>enablesMACESetting</key>
+	<false/>
+	<key>disablesMACEForOpenVPN</key>
+	<false/>
+	<key>enablesEncryptionSettings</key>
+	<true/>
+	<key>enablesRemotePortSetting</key>
+	<true/>
+	<key>enablesDevelopmentSettings</key>
+	<true/>
+	<key>customizesVPNRenegotiation</key>
+	<false/>
+</dict>
+</plist>
