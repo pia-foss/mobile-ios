@@ -71,17 +71,7 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
             guard let servers = servers else {
                 return
             }
-
-            if self.accessedConfiguration.enablesServerPings {
-
-                // pings must be issued when VPN is NOT active to avoid biased response times
-                guard (self.accessedDatabase.transient.vpnStatus == .disconnected) else {
-                    log.debug("Not pinging servers while on VPN, will try on next update")
-                    return
-                }
-                log.debug("Start pinging servers")
-                ServersPinger.shared.ping(withDestinations: servers)
-            }
+            self.pingIfOffline(servers: servers)
         }
     }
     
@@ -96,6 +86,20 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
             self.checkOutdatedServers()
         }
         pendingUpdateTimer?.resume()
+    }
+    
+    private func pingIfOffline(servers: [Server]) {
+        guard accessedConfiguration.enablesServerPings else {
+            return
+        }
+        
+        // pings must be issued when VPN is NOT active to avoid biased response times
+        guard (accessedDatabase.transient.vpnStatus == .disconnected) else {
+            log.debug("Not pinging servers while on VPN, will try on next update")
+            return
+        }
+        log.debug("Start pinging servers")
+        ServersPinger.shared.ping(withDestinations: servers)
     }
 
     // MARK: Notifications
