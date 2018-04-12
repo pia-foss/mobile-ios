@@ -50,6 +50,7 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
                 log.debug("Elapsed \(elapsed) milliseconds (< \(pollInterval)) since last update (\(lastUpdateDate)), retrying in \(leftDelay) milliseconds...")
                 
                 scheduleServersUpdate(withDelay: leftDelay)
+                pingIfOffline(servers: accessedProviders.serverProvider.currentServers)
                 return
             }
         } else {
