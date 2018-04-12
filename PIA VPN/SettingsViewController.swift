@@ -138,6 +138,8 @@ class SettingsViewController: AutolayoutViewController {
 
     private var isContentBlockerEnabled = false
 
+    private var isTransitioningTheme = false
+
 //    private lazy var buttonConfirm = UIBarButtonItem(
 //        barButtonSystemItem: .save,
 //        target: self,
@@ -499,6 +501,9 @@ class SettingsViewController: AutolayoutViewController {
     }
     
     private func transitionTheme(to code: ThemeCode) {
+        guard !isTransitioningTheme else {
+            return
+        }
         guard (code != AppPreferences.shared.currentThemeCode) else {
             return
         }
@@ -507,6 +512,7 @@ class SettingsViewController: AutolayoutViewController {
         guard let window = UIApplication.shared.windows.first else {
             fatalError("No window?")
         }
+        isTransitioningTheme = true
         UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
             window.alpha = 0.0
         }, completion: { (success) in
@@ -514,6 +520,7 @@ class SettingsViewController: AutolayoutViewController {
             
             UIView.animate(withDuration: AppConfiguration.Animations.duration) {
                 window.alpha = 1.0
+                self.isTransitioningTheme = false
             }
         })
     }
