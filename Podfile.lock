@@ -1,6 +1,6 @@
 PODS:
-  - Alamofire (4.7.0)
-  - AlamofireImage (3.3.0):
+  - Alamofire (4.7.1)
+  - AlamofireImage (3.3.1):
     - Alamofire (~> 4.5)
   - FXPageControl (1.5)
   - Gloss (2.0.0)
@@ -89,8 +89,8 @@ CHECKOUT OPTIONS:
     :git: https://github.com/pia-foss/tunnel-apple
 
 SPEC CHECKSUMS:
-  Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
-  AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
+  Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
+  AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
   FXPageControl: 97620412515365d10a3282ec0660f49f6401a8f0
   Gloss: b67617f327406adfd47adf20172d00680a3a31bd
   HockeySDK: 38b7e2726af1ea86ae97ce4b5de33ab0817e3500
