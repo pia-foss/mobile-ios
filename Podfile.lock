@@ -57,6 +57,21 @@ DEPENDENCIES:
   - SideMenu (= 3.1.5)
   - TPKeyboardAvoiding
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - AlamofireImage
+    - FXPageControl
+    - Gloss
+    - HockeySDK
+    - iRate
+    - MBProgressHUD
+    - OpenSSL-Apple
+    - ReachabilitySwift
+    - SideMenu
+    - SwiftyBeaver
+    - TPKeyboardAvoiding
+
 EXTERNAL SOURCES:
   PIALibrary:
     :commit: v1.0
@@ -91,4 +106,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: a2d8fb0cf1140ff3f2f7a2a8738631ec5c5fe4bd
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0
