@@ -458,14 +458,14 @@ class SettingsViewController: AutolayoutViewController {
         }
         if Flags.shared.enablesMACESetting {
             rowsBySection[.applicationSettings] = [
-                .automaticReconnection,
                 .darkTheme,
+                .automaticReconnection,
                 .mace
             ]
         } else {
             rowsBySection[.applicationSettings] = [
-                .automaticReconnection,
-                .darkTheme
+                .darkTheme,
+                .automaticReconnection
             ]
         }
         if !Flags.shared.enablesContentBlockerSetting {
