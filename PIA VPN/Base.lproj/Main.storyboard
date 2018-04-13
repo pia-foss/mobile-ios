@@ -792,11 +792,23 @@
                                             <mask key="subviews">
                                                 <exclude reference="Lyj-6L-Q7U"/>
                                             </mask>
+                                            <mask key="constraints">
+                                                <exclude reference="4b1-ZY-K9Z"/>
+                                                <exclude reference="Gh7-gS-VCF"/>
+                                                <exclude reference="jKf-Yg-hNs"/>
+                                                <exclude reference="mQ5-KG-Ail"/>
+                                            </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <mask key="subviews">
                                                 <exclude reference="iCQ-g6-3OE"/>
                                                 <include reference="Lyj-6L-Q7U"/>
+                                            </mask>
+                                            <mask key="constraints">
+                                                <include reference="4b1-ZY-K9Z"/>
+                                                <include reference="Gh7-gS-VCF"/>
+                                                <include reference="jKf-Yg-hNs"/>
+                                                <include reference="mQ5-KG-Ail"/>
                                             </mask>
                                         </variation>
                                     </view>
