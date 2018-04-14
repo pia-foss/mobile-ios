@@ -8,7 +8,7 @@
 			<key>Name</key>
 			<string>OpenVPN</string>
 			<key>Copyright</key>
-			<string>© 2002-2017 OpenVPN Inc.</string>
+			<string>© 2002-2018 OpenVPN Inc.</string>
 			<key>Notice</key>
 			<string>OpenVPN is a registered trademark of OpenVPN Inc.</string>
 		</dict>
@@ -27,7 +27,7 @@
 			<key>Name</key>
 			<string>Alamofire</string>
 			<key>Copyright</key>
-			<string>Copyright (c) 2014-2017 Alamofire Software Foundation (http://alamofire.org/)</string>
+			<string>Copyright (c) 2014-2018 Alamofire Software Foundation (http://alamofire.org/)</string>
 			<key>LicenseURL</key>
 			<string>https://raw.githubusercontent.com/Alamofire/Alamofire/master/LICENSE</string>
 		</dict>
