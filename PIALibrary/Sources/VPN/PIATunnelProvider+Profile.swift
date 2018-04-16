@@ -26,6 +26,9 @@ extension PIATunnelProvider.Configuration: VPNCustomConfiguration {
         guard (appGroup == other.appGroup) else {
             return false
         }
+        guard (socketType == other.socketType) else {
+            return false
+        }
         guard (cipher == other.cipher) else {
             return false
         }
