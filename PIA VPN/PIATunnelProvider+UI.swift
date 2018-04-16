@@ -17,7 +17,7 @@ extension PIATunnelProvider.Cipher: CustomStringConvertible {
 
 extension PIATunnelProvider.Digest: CustomStringConvertible {
     public var description: String {
-        return rawValue
+        return "HMAC-\(rawValue)"
     }
 }
 
