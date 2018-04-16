@@ -9,6 +9,12 @@
 import Foundation
 import PIATunnel
 
+extension PIATunnelProvider.SocketType: CustomStringConvertible {
+    public var description: String {
+        return rawValue
+    }
+}
+
 extension PIATunnelProvider.Cipher: CustomStringConvertible {
     public var description: String {
         return rawValue

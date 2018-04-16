@@ -85,11 +85,20 @@ class Bootstrapper {
         
         // as per App Store guidelines
         let pref = Client.preferences.editable()
+        let tunnelConfiguration = pref.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? PIATunnelProvider.Configuration
+        var tunnelConfigurationBuilder = tunnelConfiguration?.builder()
         if !Flags.shared.enablesMACESetting {
             pref.mace = false
         }
         if !Flags.shared.enablesRemotePortSetting {
             pref.preferredPort = nil
+        }
+        if !Flags.shared.enablesSocketSetting {
+            pref.preferredPort = nil
+            tunnelConfigurationBuilder?.socketType = .udp
+        }
+        if let newConfiguration = tunnelConfigurationBuilder?.build() {
+            pref.setVPNCustomConfiguration(newConfiguration, for: PIATunnelProfile.vpnType)
         }
         pref.commit()
 

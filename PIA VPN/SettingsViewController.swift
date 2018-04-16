@@ -623,10 +623,13 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             }
 
         case .vpnSocket:
+            let configuration = currentOpenVPNConfiguration()
             cell.textLabel?.text = L10n.Settings.Connection.SocketProtocol.title
-            cell.detailTextLabel?.text = "UDP" // TODO: hardcoded
-            cell.accessoryType = .none
-            cell.selectionStyle = .none
+            cell.detailTextLabel?.text = configuration.socketType.description
+            if !Flags.shared.enablesSocketSetting {
+                cell.accessoryType = .none
+                cell.selectionStyle = .none
+            }
             
         case .vpnPort:
             cell.textLabel?.text = L10n.Settings.Connection.RemotePort.title
@@ -747,11 +750,26 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             controller?.options = options
             controller?.selectedOption = pendingPreferences.vpnType
             
+        case .vpnSocket:
+            guard Flags.shared.enablesSocketSetting else {
+                break
+            }
+            let configuration = currentOpenVPNConfiguration()
+            let options: [PIATunnelProvider.SocketType] = [
+                .udp,
+                .tcp
+            ]
+            controller = OptionsViewController()
+            controller?.options = options.map { $0.rawValue }
+            controller?.selectedOption = configuration.socketType.rawValue
+
         case .vpnPort:
             guard Flags.shared.enablesRemotePortSetting else {
                 break
             }
-            var options = Client.providers.serverProvider.currentServersConfiguration.vpnPorts.udp
+            let configuration = currentOpenVPNConfiguration()
+            let availablePorts = Client.providers.serverProvider.currentServersConfiguration.vpnPorts
+            var options = (configuration.socketType == .udp) ? availablePorts.udp : availablePorts.tcp
             options.insert(0, at: 0)
             controller = OptionsViewController()
             controller?.options = options
@@ -883,6 +901,9 @@ extension SettingsViewController: OptionsViewControllerDelegate {
         case .vpnProtocolSelection:
             cell.textLabel?.text = (option as? String)?.vpnTypeDescription
             
+        case .vpnSocket:
+            cell.textLabel?.text = (option as? String)?.description
+            
         case .vpnPort:
             if let port = option as? UInt16, (port > 0) {
                 cell.textLabel?.text = (option as? UInt16)?.description
@@ -916,6 +937,7 @@ extension SettingsViewController: OptionsViewControllerDelegate {
 
         var vpnHasChanged = false
         var newVPNType: String?
+        var newSocketType: String?
         var newPort: UInt16?
         var newConfiguration: PIATunnelProvider.Configuration?
 
@@ -923,6 +945,15 @@ extension SettingsViewController: OptionsViewControllerDelegate {
         case .vpnProtocolSelection:
             newVPNType = option as? String
             vpnHasChanged = (newVPNType != pendingPreferences.vpnType)
+            
+        case .vpnSocket:
+            newSocketType = option as? String
+            
+            let configuration = currentOpenVPNConfiguration()
+            var newBuilder = configuration.builder()
+            newBuilder.socketType = PIATunnelProvider.SocketType(rawValue: newSocketType!)!
+            newConfiguration = newBuilder.build()
+            vpnHasChanged = (newConfiguration != configuration)
             
         case .vpnPort:
             newPort = option as? UInt16
@@ -956,6 +987,9 @@ extension SettingsViewController: OptionsViewControllerDelegate {
         if vpnHasChanged {
             if let vpnType = newVPNType {
                 pendingPreferences.vpnType = vpnType
+            }
+            if let _ = newSocketType {
+                pendingPreferences.preferredPort = nil
             }
             if let port = newPort, (port > 0) {
                 pendingPreferences.preferredPort = port
