@@ -187,7 +187,7 @@ class SettingsViewController: AutolayoutViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        refreshContentBlockerState(withHUD: true)
+        refreshContentBlockerState()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
