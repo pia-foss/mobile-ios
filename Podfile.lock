@@ -49,10 +49,10 @@ DEPENDENCIES:
   - HockeySDK
   - iRate
   - MBProgressHUD
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `2d5341be22b1b0a2cd8c48c84aaef694a6be2dc4`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `2d5341be22b1b0a2cd8c48c84aaef694a6be2dc4`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `2d5341be22b1b0a2cd8c48c84aaef694a6be2dc4`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `2d5341be22b1b0a2cd8c48c84aaef694a6be2dc4`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `6fa116e61288056d3def804e6489c71bde473508`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `6fa116e61288056d3def804e6489c71bde473508`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `6fa116e61288056d3def804e6489c71bde473508`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `6fa116e61288056d3def804e6489c71bde473508`)
   - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `v1.0`)
   - SideMenu (= 3.1.5)
   - TPKeyboardAvoiding
@@ -74,7 +74,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :commit: 2d5341be22b1b0a2cd8c48c84aaef694a6be2dc4
+    :commit: 6fa116e61288056d3def804e6489c71bde473508
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
     :commit: v1.0
@@ -82,7 +82,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PIALibrary:
-    :commit: 2d5341be22b1b0a2cd8c48c84aaef694a6be2dc4
+    :commit: 6fa116e61288056d3def804e6489c71bde473508
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
     :commit: v1.0
@@ -104,6 +104,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 85daaaa2b3ae6e31b7b55c99430e8b91dac088af
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 51018640ff7165b37bfeacf7a6148f632126b167
+PODFILE CHECKSUM: 41efe9b626ded50101132d072f80bff62ff44d02
 
 COCOAPODS: 1.5.0
