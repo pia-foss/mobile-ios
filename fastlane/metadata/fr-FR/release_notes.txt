@@ -1,3 +1,2 @@
-- Le thème foncé est de retour !
-- Nous avons ajouté une prise en charge pour OpenVPN®, vous pouvez changer de protocole dans les réglages.
-- Cette version remplace MACE par notre bloqueur de contenu Safari. Découvrez-le dans les réglages.
+- You can now customize OpenVPN® UDP port and crypto settings.
+- Fixed a bug with ping times resulting in bad automatic server picks.

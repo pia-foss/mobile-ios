@@ -1,3 +1,2 @@
-－深色主题回归！
-－添加OpenVPN®支持，可在设置下切换协议。
-－本版本用我们的Safari内容屏蔽工具替换MACE。请在设置中查看。
+- You can now customize OpenVPN® UDP port and crypto settings.
+- Fixed a bug with ping times resulting in bad automatic server picks.
