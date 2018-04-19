@@ -69,10 +69,13 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
             guard (avg < bestResponseTime) else {
                 continue
             }
-            if let automaticIdentifiers = accessedDatabase.transient.serversConfiguration.automaticIdentifiers {
-                guard automaticIdentifiers.contains(server.identifier) else {
-                    continue
-                }
+//            if let automaticIdentifiers = accessedDatabase.transient.serversConfiguration.automaticIdentifiers {
+//                guard automaticIdentifiers.contains(server.identifier) else {
+//                    continue
+//                }
+//            }
+            guard server.isAutomatic else {
+                continue
             }
             bestIdentifier = server.identifier
             bestResponseTime = avg
