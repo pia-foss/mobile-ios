@@ -124,7 +124,7 @@ class GlossServersBundle: GlossParser {
         let glossConfiguration: GlossServersBundle.Configuration? = "info" <~~ json
 
         var servers: [Server] = []
-        for (_, serverDict) in json {
+        for (code, serverDict) in json {
             guard let serverJSON = serverDict as? JSON else {
                 continue
             }
@@ -134,6 +134,7 @@ class GlossServersBundle: GlossParser {
             guard let server = GlossServer(json: serverJSON)?.parsed else {
                 continue
             }
+            server.isAutomatic = glossConfiguration?.parsed.automaticIdentifiers?.contains(code) ?? true
             servers.append(server)
         }
         servers.sort { $0.name < $1.name }

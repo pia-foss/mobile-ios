@@ -81,6 +81,8 @@ public class Server: Hashable {
     /// - Seealso: `Macros.ping(...)`
     public let pingAddress: Address?
 
+    var isAutomatic: Bool
+
     /// :nodoc:
     public init(
         name: String,
@@ -97,6 +99,8 @@ public class Server: Hashable {
         self.bestOpenVPNAddressForTCP = bestOpenVPNAddressForTCP
         self.bestOpenVPNAddressForUDP = bestOpenVPNAddressForUDP
         self.pingAddress = pingAddress
+        
+        isAutomatic = true
     }
     
     // MARK: Hashable
