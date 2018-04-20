@@ -85,7 +85,7 @@ class Bootstrapper {
         
         // as per App Store guidelines
         let pref = Client.preferences.editable()
-        if !Flags.shared.enablesMACE(withVPNType: pref.vpnType) {
+        if !Flags.shared.enablesMACESetting {
             pref.mace = false
         }
         if !Flags.shared.enablesRemotePortSetting {

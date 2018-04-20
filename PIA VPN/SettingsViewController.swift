@@ -316,7 +316,7 @@ class SettingsViewController: AutolayoutViewController {
 //    }
     
     func commitChanges(_ completionHandler: @escaping () -> Void) {
-        if !enablesMACE() && !visibleSections.contains(.development) {
+        if !Flags.shared.enablesMACESetting && !visibleSections.contains(.development) {
             pendingPreferences.mace = false
         }
         
@@ -436,10 +436,6 @@ class SettingsViewController: AutolayoutViewController {
     
     // MARK: Helpers
     
-    private func enablesMACE() -> Bool {
-        return Flags.shared.enablesMACE(withVPNType: pendingPreferences.vpnType)
-    }
-
     @objc private func redisplaySettings() {
         var sections = SettingsViewController.allSections
         if !Flags.shared.enablesProtocolSelection {
@@ -450,7 +446,7 @@ class SettingsViewController: AutolayoutViewController {
                 sections.remove(at: sections.index(of: .encryption)!)
             }
         }
-        if enablesMACE() {
+        if Flags.shared.enablesMACESetting {
             rowsBySection[.applicationSettings] = [
                 .automaticReconnection,
                 .darkTheme,
@@ -585,7 +581,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             if !pendingPreferences.isPersistentConnection {
                 footer.append(L10n.Settings.ApplicationSettings.Persistent.Footer.disabled)
             }
-            if enablesMACE() {
+            if Flags.shared.enablesMACESetting {
                 footer.append(L10n.Settings.ApplicationSettings.Mace.footer)
             }
             return footer.joined(separator: "\n\n")
