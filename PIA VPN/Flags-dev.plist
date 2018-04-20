@@ -22,6 +22,8 @@
 	<true/>
 	<key>enablesMACESetting</key>
 	<false/>
+	<key>enablesContentBlockerSetting</key>
+	<true/>
 	<key>enablesEncryptionSettings</key>
 	<true/>
 	<key>enablesRemotePortSetting</key>

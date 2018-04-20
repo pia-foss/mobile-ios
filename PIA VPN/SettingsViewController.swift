@@ -115,7 +115,7 @@ class SettingsViewController: AutolayoutViewController {
 //            .truncateDebugLog,
 //            .recalculatePingTimes,
 //            .invokeMACERequest,
-            .mace,
+//            .mace,
             .resolveGoogleAdsDomain
         ]
     ]
@@ -452,12 +452,14 @@ class SettingsViewController: AutolayoutViewController {
                 .darkTheme,
                 .mace
             ]
-            sections.remove(at: sections.index(of: .contentBlocker)!)
         } else {
             rowsBySection[.applicationSettings] = [
                 .automaticReconnection,
                 .darkTheme
             ]
+        }
+        if !Flags.shared.enablesContentBlockerSetting {
+            sections.remove(at: sections.index(of: .contentBlocker)!)
         }
         if (pendingPreferences.vpnType != PIATunnelProfile.vpnType) {
             sections.remove(at: sections.index(of: .applicationInformation)!)
