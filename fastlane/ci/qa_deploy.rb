@@ -4,6 +4,9 @@ lane :qa_deploy do
     gitlab_issues
     changelog_from_gitlab_issues
     hockey
+    print_ipa_metadata(
+        prefix: "Deployed"
+    )
     serialize_archive_metadata(
         url: lane_context[SharedValues::HOCKEY_DOWNLOAD_LINK]
     )

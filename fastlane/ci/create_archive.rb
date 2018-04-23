@@ -11,4 +11,7 @@ lane :create_archive do
     )
     match
     gym
+    print_ipa_metadata(
+        prefix: "Archived"
+    )
 end
