@@ -22,8 +22,8 @@
 	<true/>
 	<key>enablesMACESetting</key>
 	<false/>
-	<key>disablesMACEForOpenVPN</key>
-	<false/>
+	<key>enablesContentBlockerSetting</key>
+	<true/>
 	<key>enablesEncryptionSettings</key>
 	<true/>
 	<key>enablesRemotePortSetting</key>

@@ -32,9 +32,9 @@ class Flags: NSObject {
     
     @objc private(set) var enablesProtocolSelection = true
 
-    @objc private var enablesMACESetting = false
+    @objc private(set) var enablesMACESetting = false
     
-    @objc private var disablesMACEForOpenVPN = false
+    @objc private(set) var enablesContentBlockerSetting = true
     
     @objc private(set) var enablesEncryptionSettings = true
 
@@ -62,12 +62,5 @@ class Flags: NSObject {
         for (key, value) in toggles {
             setValue(value, forKeyPath: key)
         }
-    }
-    
-    func enablesMACE(withVPNType vpnType: String) -> Bool {
-        guard enablesMACESetting else {
-            return false
-        }
-        return !(disablesMACEForOpenVPN && (vpnType == PIATunnelProfile.vpnType))
     }
 }
