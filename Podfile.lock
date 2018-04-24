@@ -49,11 +49,11 @@ DEPENDENCIES:
   - HockeySDK
   - iRate
   - MBProgressHUD
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `6fa116e61288056d3def804e6489c71bde473508`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `6fa116e61288056d3def804e6489c71bde473508`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `6fa116e61288056d3def804e6489c71bde473508`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `6fa116e61288056d3def804e6489c71bde473508`)
-  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `v1.0`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `20a70d3a987e739d7b2e5990909cd79d4f0169ba`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `20a70d3a987e739d7b2e5990909cd79d4f0169ba`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `20a70d3a987e739d7b2e5990909cd79d4f0169ba`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `20a70d3a987e739d7b2e5990909cd79d4f0169ba`)
+  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `e0d4ab5ff12168bc204a9ef2d1ea5b5b495c9e31`)
   - SideMenu (= 3.1.5)
   - TPKeyboardAvoiding
 
@@ -74,18 +74,18 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :commit: 6fa116e61288056d3def804e6489c71bde473508
+    :commit: 20a70d3a987e739d7b2e5990909cd79d4f0169ba
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
-    :commit: v1.0
+    :commit: e0d4ab5ff12168bc204a9ef2d1ea5b5b495c9e31
     :git: https://github.com/pia-foss/tunnel-apple
 
 CHECKOUT OPTIONS:
   PIALibrary:
-    :commit: 6fa116e61288056d3def804e6489c71bde473508
+    :commit: 20a70d3a987e739d7b2e5990909cd79d4f0169ba
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
-    :commit: v1.0
+    :commit: e0d4ab5ff12168bc204a9ef2d1ea5b5b495c9e31
     :git: https://github.com/pia-foss/tunnel-apple
 
 SPEC CHECKSUMS:
@@ -98,12 +98,12 @@ SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   OpenSSL-Apple: e259fc621b6d3f6433253097dc266fce69e47c52
   PIALibrary: c874a6b401324a213132534a648b3596abbb59b0
-  PIATunnel: 454ad07ee80920d45e9343d15416ac25b5cd9b31
+  PIATunnel: 0662ce50e41d5d8540165c4d112a1d4068279dc5
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   SideMenu: 47dbf9e4d878062d8994aed43f6e4bf6c1fea30b
   SwiftyBeaver: 85daaaa2b3ae6e31b7b55c99430e8b91dac088af
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 41efe9b626ded50101132d072f80bff62ff44d02
+PODFILE CHECKSUM: 6fc1ed18f2d057f90697d5ed7cea40b66e43634b
 
 COCOAPODS: 1.5.0
