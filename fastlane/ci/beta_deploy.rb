@@ -4,4 +4,7 @@ lane :beta_deploy do
     pilot(
         beta_app_description: lane_context[SharedValues::FL_CHANGELOG]
     )
+    print_ipa_metadata(
+        prefix: "Deployed"
+    )
 end

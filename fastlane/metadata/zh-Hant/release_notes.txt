@@ -1,3 +1,2 @@
-- 暗黑主題回歸！
-- 新加入支援 OpenVPN® 功能，您可於「設定」中切換協定。
-- 這個版本會以我們的 Safari 內容阻擋器取代 MACE。可於「設定」中查看。
+- You can now customize OpenVPN® UDP port and crypto settings.
+- Fixed a bug with ping times resulting in bad automatic server picks.

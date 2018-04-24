@@ -1,3 +1,2 @@
-- Возвращена темная тема!
-- Мы добавили поддержку для OpenVPN®. Протоколы можно сменить в настройках.
-- В этой версии MACE заменено на правило блокирования контента для Safari. Проверьте настройки.
+- You can now customize OpenVPN® UDP port and crypto settings.
+- Fixed a bug with ping times resulting in bad automatic server picks.

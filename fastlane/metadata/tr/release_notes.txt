@@ -1,3 +1,2 @@
-- Koyu tema geri döndü!
-- OpenVPN® için destek ekledik; Ayarlar menüsünden protokol değiştirebilirsiniz.
-- Bu sürümde MACE'nin yerini Safari İçerik Engelleyici aldı. Ayarlar menüsünden göz atabilirsiniz.
+- You can now customize OpenVPN® UDP port and crypto settings.
+- Fixed a bug with ping times resulting in bad automatic server picks.

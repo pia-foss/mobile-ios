@@ -1,3 +1,2 @@
-・ダークテーマが帰ってきました！
-・OpenVPN®のサポートを追加しました。設定からプロトコールを切り替えることができます。
-・このバージョンでは、MACEに代わり、Safariコンテンツブロッカーが導入されます。設定でご確認ください。
+- You can now customize OpenVPN® UDP port and crypto settings.
+- Fixed a bug with ping times resulting in bad automatic server picks.
