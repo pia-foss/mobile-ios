@@ -17,7 +17,7 @@
 	<key>alwaysShowsWalkthrough</key>
 	<false/>
 	<key>enablesResetSettings</key>
-	<false/>
+	<true/>
 	<key>enablesProtocolSelection</key>
 	<true/>
 	<key>enablesMACESetting</key>
