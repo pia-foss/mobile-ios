@@ -1,3 +1,2 @@
-- Dark theme is back!
-- We've added support for OpenVPN®, you can switch protocols under Settings.
-- This version replaces MACE with our Safari Content Blocker. Check it out in the Settings.
+- You can now customize OpenVPN® UDP port and crypto settings.
+- Fixed a bug with ping times resulting in bad automatic server picks.

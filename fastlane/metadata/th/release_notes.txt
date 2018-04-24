@@ -1,3 +1,2 @@
-- ธีมมืดกลับมาอีกครั้ง!
-- เราได้เพิ่มการรองรับ OpenVPN® คุณสามารถสลับโปรโตคอลได้ที่การตั้งค่า
-- เวอร์ชันนี้ทดแทน MACE ด้วยตัวปิดกั้นเนื้อหา Safari ของเรา ตรวจสอบในส่วน “การตั้งค่า”
+- You can now customize OpenVPN® UDP port and crypto settings.
+- Fixed a bug with ping times resulting in bad automatic server picks.

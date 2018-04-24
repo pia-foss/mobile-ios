@@ -1,3 +1,2 @@
-- Das dunkle Theme ist wieder da!
-- Wir haben eine Unterstützung für OpenVPN® hinzugefügt. Sie können die Protokolle in den Einstellungen wechseln.
-- Diese Version ersetzt MACE mit unserem Safari Content Blocker. Nähere Infos unter Einstellungen.
+- You can now customize OpenVPN® UDP port and crypto settings.
+- Fixed a bug with ping times resulting in bad automatic server picks.
