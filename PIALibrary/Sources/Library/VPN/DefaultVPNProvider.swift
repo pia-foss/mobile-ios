@@ -238,13 +238,21 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         guard let profile = profile ?? activeProfile else {
             preconditionFailure("Profile not installed")
         }
-        guard let port = accessedPreferences.preferredPort ??
-            accessedProviders.serverProvider.targetServer.bestOpenVPNAddressForUDP?.port ??
-            accessedDatabase.transient.serversConfiguration.vpnPorts.udp.first else {
 
-            preconditionFailure("Missing VPN server port")
+        let customConfiguration = accessedPreferences.vpnCustomConfiguration(for: profile.vpnType)
+
+        var port = accessedPreferences.preferredPort
+        if (port == nil), let cfg = customConfiguration {
+            let targetServer = accessedProviders.serverProvider.targetServer
+            if cfg.isTCP {
+                port = targetServer.bestOpenVPNAddressForTCP?.port ??
+                    accessedDatabase.transient.serversConfiguration.vpnPorts.tcp.first
+            } else {
+                port = targetServer.bestOpenVPNAddressForUDP?.port ??
+                    accessedDatabase.transient.serversConfiguration.vpnPorts.udp.first
+            }
         }
-        
+
         return VPNConfiguration(
             name: accessedConfiguration.vpnProfileName,
             username: currentUser.credentials.username,
@@ -253,7 +261,7 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
             port: port,
             isOnDemand: accessedPreferences.isPersistentConnection,
             disconnectsOnSleep: false,
-            customConfiguration: accessedPreferences.vpnCustomConfiguration(for: profile.vpnType)
+            customConfiguration: customConfiguration
         )
     }
 

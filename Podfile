@@ -6,7 +6,7 @@ abstract_target 'PIALibrary' do
     pod 'Gloss', '~> 2'
     pod 'Alamofire', '~> 4'
     pod 'ReachabilitySwift'
-    pod 'PIATunnel', :git => 'https://github.com/pia-foss/tunnel-apple.git', :commit => '5165f298f275f943f9b7bda571d9b553223ab019'
+    pod 'PIATunnel', :git => 'https://github.com/pia-foss/tunnel-apple.git', :commit => 'e0d4ab5ff12168bc204a9ef2d1ea5b5b495c9e31'
     #pod 'PIATunnel', '~> 1.0'
 
     target 'PIALibrary-iOS' do
