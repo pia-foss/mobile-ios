@@ -21,6 +21,7 @@ class SensitiveOperation {
     
     func perform(withReason reason: String, completionHandler: @escaping () -> Void) {
         guard canPerformInSensitiveContext else {
+            completionHandler()
             return
         }
         context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { (success, error) in
