@@ -51,7 +51,7 @@ end
 def shared_main_pods
     pod 'AlamofireImage'
     #library_by_path('..')
-    library_by_git('6fa116e61288056d3def804e6489c71bde473508')
+    library_by_git('20a70d3a987e739d7b2e5990909cd79d4f0169ba')
     #library_by_version('1.0')
 end
 
@@ -66,7 +66,7 @@ end
 
 def tunnel_pods
     #tunnel_by_path('..')
-    tunnel_by_git('v1.0')
+    tunnel_by_git('e0d4ab5ff12168bc204a9ef2d1ea5b5b495c9e31')
     #tunnel_by_version('1.0')
 end
 

@@ -40,6 +40,8 @@ class Flags: NSObject {
 
     @objc private(set) var enablesRemotePortSetting = true
 
+    @objc private(set) var enablesSocketSetting = false
+    
     @objc private(set) var enablesDevelopmentSettings = false
 
     @objc private(set) var customizesVPNRenegotiation = false
