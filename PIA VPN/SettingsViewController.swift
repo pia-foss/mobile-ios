@@ -148,7 +148,9 @@ class SettingsViewController: AutolayoutViewController {
 //        action: #selector(confirmChangesImmediately(_:))
 //    )
     
-    private var pendingPreferences = Client.preferences.editable()
+    private var pendingPreferences: Client.Preferences.Editable!
+    
+    private var pendingOpenVPNConfiguration: PIATunnelProvider.ConfigurationBuilder!
 
     private var pendingVPNAction: VPNAction?
 //    private var pendingVPNAction: VPNAction? {
@@ -169,9 +171,14 @@ class SettingsViewController: AutolayoutViewController {
         super.viewDidLoad()
     
         title = L10n.Menu.Item.settings
-
 //        buttonConfirm.isEnabled = false
 //        navigationItem.rightBarButtonItem = buttonConfirm
+        
+        pendingPreferences = Client.preferences.editable()
+        guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? PIATunnelProvider.Configuration else {
+            fatalError("No default VPN custom configuration provided for PIA protocol")
+        }
+        pendingOpenVPNConfiguration = currentOpenVPNConfiguration.builder()
 
         if #available(iOS 11, *) {
             tableView.sectionFooterHeight = UITableViewAutomaticDimension
@@ -493,13 +500,6 @@ class SettingsViewController: AutolayoutViewController {
         pendingVPNAction = pendingPreferences.requiredVPNAction()
     }
     
-    private func currentOpenVPNConfiguration() -> PIATunnelProvider.Configuration {
-        guard let configuration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? PIATunnelProvider.Configuration else {
-            fatalError("No default VPN custom configuration provided for PIA protocol")
-        }
-        return configuration
-    }
-    
     private func transitionTheme(to code: ThemeCode) {
         guard !isTransitioningTheme else {
             return
@@ -625,9 +625,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             }
 
         case .vpnSocket:
-            let configuration = currentOpenVPNConfiguration()
             cell.textLabel?.text = L10n.Settings.Connection.SocketProtocol.title
-            cell.detailTextLabel?.text = configuration.socketType.description
+            cell.detailTextLabel?.text = pendingOpenVPNConfiguration.socketType.description
             if !Flags.shared.enablesSocketSetting {
                 cell.accessoryType = .none
                 cell.selectionStyle = .none
@@ -643,27 +642,24 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             }
 
         case .encryptionCipher:
-            let configuration = currentOpenVPNConfiguration()
             cell.textLabel?.text = L10n.Settings.Encryption.Cipher.title
-            cell.detailTextLabel?.text = configuration.cipher.description
+            cell.detailTextLabel?.text = pendingOpenVPNConfiguration.cipher.description
             if !Flags.shared.enablesEncryptionSettings {
                 cell.accessoryType = .none
                 cell.selectionStyle = .none
             }
             
         case .encryptionDigest:
-            let configuration = currentOpenVPNConfiguration()
             cell.textLabel?.text = L10n.Settings.Encryption.Digest.title
-            cell.detailTextLabel?.text = configuration.digest.description
+            cell.detailTextLabel?.text = pendingOpenVPNConfiguration.digest.description
             if !Flags.shared.enablesEncryptionSettings {
                 cell.accessoryType = .none
                 cell.selectionStyle = .none
             }
 
         case .encryptionHandshake:
-            let configuration = currentOpenVPNConfiguration()
             cell.textLabel?.text = L10n.Settings.Encryption.Handshake.title
-            cell.detailTextLabel?.text = configuration.handshake.description
+            cell.detailTextLabel?.text = pendingOpenVPNConfiguration.handshake.description
             if !Flags.shared.enablesEncryptionSettings {
                 cell.accessoryType = .none
                 cell.selectionStyle = .none
@@ -756,22 +752,20 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             guard Flags.shared.enablesSocketSetting else {
                 break
             }
-            let configuration = currentOpenVPNConfiguration()
             let options: [PIATunnelProvider.SocketType] = [
                 .udp,
                 .tcp
             ]
             controller = OptionsViewController()
             controller?.options = options.map { $0.rawValue }
-            controller?.selectedOption = configuration.socketType.rawValue
+            controller?.selectedOption = pendingOpenVPNConfiguration.socketType.rawValue
 
         case .vpnPort:
             guard Flags.shared.enablesRemotePortSetting else {
                 break
             }
-            let configuration = currentOpenVPNConfiguration()
             let availablePorts = Client.providers.serverProvider.currentServersConfiguration.vpnPorts
-            var options = (configuration.socketType == .udp) ? availablePorts.udp : availablePorts.tcp
+            var options = (pendingOpenVPNConfiguration.socketType == .udp) ? availablePorts.udp : availablePorts.tcp
             options.insert(SettingsViewController.AUTOMATIC_PORT, at: 0)
             controller = OptionsViewController()
             controller?.options = options
@@ -781,33 +775,30 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             guard Flags.shared.enablesEncryptionSettings else {
                 break
             }
-            let configuration = currentOpenVPNConfiguration()
             let options: [PIATunnelProvider.Cipher] = [
                 .aes128cbc,
                 .aes256cbc
             ]
             controller = OptionsViewController()
             controller?.options = options.map { $0.rawValue }
-            controller?.selectedOption = configuration.cipher.rawValue
+            controller?.selectedOption = pendingOpenVPNConfiguration.cipher.rawValue
 
         case .encryptionDigest:
             guard Flags.shared.enablesEncryptionSettings else {
                 break
             }
-            let configuration = currentOpenVPNConfiguration()
             let options: [PIATunnelProvider.Digest] = [
                 .sha1,
                 .sha256
             ]
             controller = OptionsViewController()
             controller?.options = options.map { $0.rawValue }
-            controller?.selectedOption = configuration.digest.rawValue
+            controller?.selectedOption = pendingOpenVPNConfiguration.digest.rawValue
 
         case .encryptionHandshake:
             guard Flags.shared.enablesEncryptionSettings else {
                 break
             }
-            let configuration = currentOpenVPNConfiguration()
             let options: [PIATunnelProvider.Handshake] = [
                 .rsa2048,
                 .rsa3072,
@@ -817,7 +808,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             ]
             controller = OptionsViewController()
             controller?.options = options.map { $0.rawValue }
-            controller?.selectedOption = configuration.handshake.rawValue
+            controller?.selectedOption = pendingOpenVPNConfiguration.handshake.rawValue
             
         case .contentBlockerState:
             if #available(iOS 10, *) {
@@ -942,8 +933,6 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             fatalError("Unhandled setting \(controller.tag)")
         }
 
-        var newConfigurationBuilder = currentOpenVPNConfiguration().builder()
-
         switch setting {
         case .vpnProtocolSelection:
             let vpnType = option as! String
@@ -951,7 +940,7 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             
         case .vpnSocket:
             let rawSocketType = option as! String
-            newConfigurationBuilder.socketType = PIATunnelProvider.SocketType(rawValue: rawSocketType)!
+            pendingOpenVPNConfiguration.socketType = PIATunnelProvider.SocketType(rawValue: rawSocketType)!
             pendingPreferences.preferredPort = nil
 
         case .vpnPort:
@@ -960,21 +949,21 @@ extension SettingsViewController: OptionsViewControllerDelegate {
 
         case .encryptionCipher:
             let rawCipher = option as! String
-            newConfigurationBuilder.cipher = PIATunnelProvider.Cipher(rawValue: rawCipher)!
+            pendingOpenVPNConfiguration.cipher = PIATunnelProvider.Cipher(rawValue: rawCipher)!
 
         case .encryptionDigest:
             let rawDigest = option as! String
-            newConfigurationBuilder.digest = PIATunnelProvider.Digest(rawValue: rawDigest)!
+            pendingOpenVPNConfiguration.digest = PIATunnelProvider.Digest(rawValue: rawDigest)!
 
         case .encryptionHandshake:
             let rawHandshake = option as! String
-            newConfigurationBuilder.handshake = PIATunnelProvider.Handshake(rawValue: rawHandshake)!
+            pendingOpenVPNConfiguration.handshake = PIATunnelProvider.Handshake(rawValue: rawHandshake)!
 
         default:
             break
         }
         
-        pendingPreferences.setVPNCustomConfiguration(newConfigurationBuilder.build(), for: pendingPreferences.vpnType)
+        pendingPreferences.setVPNCustomConfiguration(pendingOpenVPNConfiguration.build(), for: pendingPreferences.vpnType)
 
         redisplaySettings()
         navigationController?.popViewController(animated: true)
