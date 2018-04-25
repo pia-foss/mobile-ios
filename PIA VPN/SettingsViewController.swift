@@ -899,10 +899,12 @@ extension SettingsViewController: OptionsViewControllerDelegate {
 
         switch setting {
         case .vpnProtocolSelection:
-            cell.textLabel?.text = (option as? String)?.vpnTypeDescription
+            let vpnType = option as? String
+            cell.textLabel?.text = vpnType?.vpnTypeDescription
             
         case .vpnSocket:
-            cell.textLabel?.text = (option as? String)?.description
+            let rawSocketType = option as? String
+            cell.textLabel?.text = rawSocketType?.description
             
         case .vpnPort:
             if let port = option as? UInt16, (port > 0) {
@@ -912,13 +914,16 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             }
 
         case .encryptionCipher:
-            cell.textLabel?.text = PIATunnelProvider.Cipher(rawValue: option as! String)?.description
+            let rawCipher = option as! String
+            cell.textLabel?.text = PIATunnelProvider.Cipher(rawValue: rawCipher)?.description
 
         case .encryptionDigest:
-            cell.textLabel?.text = PIATunnelProvider.Digest(rawValue: option as! String)?.description
+            let rawDigest = option as! String
+            cell.textLabel?.text = PIATunnelProvider.Digest(rawValue: rawDigest)?.description
 
         case .encryptionHandshake:
-            cell.textLabel?.text = PIATunnelProvider.Handshake(rawValue: option as! String)?.description
+            let rawHandshake = option as! String
+            cell.textLabel?.text = PIATunnelProvider.Handshake(rawValue: rawHandshake)?.description
 
         default:
             break
@@ -935,72 +940,39 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             fatalError("Unhandled setting \(controller.tag)")
         }
 
-        var vpnHasChanged = false
-        var newVPNType: String?
-        var newSocketType: String?
-        var newPort: UInt16?
-        var newConfiguration: PIATunnelProvider.Configuration?
+        var newConfigurationBuilder = currentOpenVPNConfiguration().builder()
 
         switch setting {
         case .vpnProtocolSelection:
-            newVPNType = option as? String
-            vpnHasChanged = (newVPNType != pendingPreferences.vpnType)
+            let vpnType = option as! String
+            pendingPreferences.vpnType = vpnType
             
         case .vpnSocket:
-            newSocketType = option as? String
-            
-            let configuration = currentOpenVPNConfiguration()
-            var newBuilder = configuration.builder()
-            newBuilder.socketType = PIATunnelProvider.SocketType(rawValue: newSocketType!)!
-            newConfiguration = newBuilder.build()
-            vpnHasChanged = (newConfiguration != configuration)
-            
+            let rawSocketType = option as! String
+            newConfigurationBuilder.socketType = PIATunnelProvider.SocketType(rawValue: rawSocketType)!
+            pendingPreferences.preferredPort = nil
+
         case .vpnPort:
-            newPort = option as? UInt16
-            vpnHasChanged = (newPort != pendingPreferences.preferredPort)
+            let port = option as! UInt16
+            pendingPreferences.preferredPort = (port > 0) ? port : nil
 
         case .encryptionCipher:
-            let configuration = currentOpenVPNConfiguration()
-            var newBuilder = configuration.builder()
-            newBuilder.cipher = PIATunnelProvider.Cipher(rawValue: option as! String)!
-            newConfiguration = newBuilder.build()
-            vpnHasChanged = (newConfiguration != configuration)
+            let rawCipher = option as! String
+            newConfigurationBuilder.cipher = PIATunnelProvider.Cipher(rawValue: rawCipher)!
 
         case .encryptionDigest:
-            let configuration = currentOpenVPNConfiguration()
-            var newBuilder = configuration.builder()
-            newBuilder.digest = PIATunnelProvider.Digest(rawValue: option as! String)!
-            newConfiguration = newBuilder.build()
-            vpnHasChanged = (newConfiguration != configuration)
+            let rawDigest = option as! String
+            newConfigurationBuilder.digest = PIATunnelProvider.Digest(rawValue: rawDigest)!
 
         case .encryptionHandshake:
-            let configuration = currentOpenVPNConfiguration()
-            var newBuilder = configuration.builder()
-            newBuilder.handshake = PIATunnelProvider.Handshake(rawValue: option as! String)!
-            newConfiguration = newBuilder.build()
-            vpnHasChanged = (newConfiguration != configuration)
+            let rawHandshake = option as! String
+            newConfigurationBuilder.handshake = PIATunnelProvider.Handshake(rawValue: rawHandshake)!
 
         default:
             break
         }
         
-        if vpnHasChanged {
-            if let vpnType = newVPNType {
-                pendingPreferences.vpnType = vpnType
-            }
-            if let _ = newSocketType {
-                pendingPreferences.preferredPort = nil
-            }
-            if let port = newPort, (port > 0) {
-                pendingPreferences.preferredPort = port
-            } else {
-                pendingPreferences.preferredPort = nil
-            }
-            if let configuration = newConfiguration {
-                let activeType = newVPNType ?? pendingPreferences.vpnType
-                pendingPreferences.setVPNCustomConfiguration(configuration, for: activeType)
-            }
-        }
+        pendingPreferences.setVPNCustomConfiguration(newConfigurationBuilder.build(), for: pendingPreferences.vpnType)
 
         redisplaySettings()
         navigationController?.popViewController(animated: true)
