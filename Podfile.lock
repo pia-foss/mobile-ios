@@ -9,34 +9,34 @@ PODS:
   - HockeySDK/DefaultLib (5.1.2)
   - iRate (1.12.2)
   - MBProgressHUD (1.1.0)
-  - OpenSSL-Apple (1.1.0g)
-  - PIALibrary/Core (1.0)
-  - PIALibrary/Library (1.0):
+  - OpenSSL-Apple (1.1.0h)
+  - PIALibrary/Core (1.1)
+  - PIALibrary/Library (1.1):
     - Alamofire (~> 4)
     - Gloss (~> 2)
     - PIALibrary/Core
     - PIALibrary/Util
     - ReachabilitySwift
     - SwiftyBeaver
-  - PIALibrary/Mock (1.0):
+  - PIALibrary/Mock (1.1):
     - PIALibrary/Library
-  - PIALibrary/UI (1.0):
+  - PIALibrary/UI (1.1):
     - PIALibrary/Library
     - SwiftyBeaver
     - TPKeyboardAvoiding
-  - PIALibrary/Util (1.0):
+  - PIALibrary/Util (1.1):
     - PIALibrary/Core
-  - PIALibrary/VPN (1.0):
+  - PIALibrary/VPN (1.1):
     - PIALibrary/Library
-    - PIATunnel (~> 1.0)
-  - PIATunnel (1.0):
-    - PIATunnel/AppExtension (= 1.0)
-    - PIATunnel/Core (= 1.0)
-  - PIATunnel/AppExtension (1.0):
+    - PIATunnel (~> 1.1)
+  - PIATunnel (1.1):
+    - PIATunnel/AppExtension (= 1.1)
+    - PIATunnel/Core (= 1.1)
+  - PIATunnel/AppExtension (1.1):
     - PIATunnel/Core
     - SwiftyBeaver
-  - PIATunnel/Core (1.0):
-    - OpenSSL-Apple (= 1.1.0g)
+  - PIATunnel/Core (1.1):
+    - OpenSSL-Apple (~> 1.1.0h)
     - SwiftyBeaver
   - ReachabilitySwift (4.1.0)
   - SideMenu (3.1.5)
@@ -49,11 +49,11 @@ DEPENDENCIES:
   - HockeySDK
   - iRate
   - MBProgressHUD
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `20a70d3a987e739d7b2e5990909cd79d4f0169ba`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `20a70d3a987e739d7b2e5990909cd79d4f0169ba`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `20a70d3a987e739d7b2e5990909cd79d4f0169ba`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `20a70d3a987e739d7b2e5990909cd79d4f0169ba`)
-  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `e0d4ab5ff12168bc204a9ef2d1ea5b5b495c9e31`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `5b7742cdf3d4e3881b3f7a7beb24db6a6f2a0bcd`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `5b7742cdf3d4e3881b3f7a7beb24db6a6f2a0bcd`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `5b7742cdf3d4e3881b3f7a7beb24db6a6f2a0bcd`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `5b7742cdf3d4e3881b3f7a7beb24db6a6f2a0bcd`)
+  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `a224c2bd5d9755b61b6900907bc469c1a268c916`)
   - SideMenu (= 3.1.5)
   - TPKeyboardAvoiding
 
@@ -74,18 +74,18 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :commit: 20a70d3a987e739d7b2e5990909cd79d4f0169ba
+    :commit: 5b7742cdf3d4e3881b3f7a7beb24db6a6f2a0bcd
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
-    :commit: e0d4ab5ff12168bc204a9ef2d1ea5b5b495c9e31
+    :commit: a224c2bd5d9755b61b6900907bc469c1a268c916
     :git: https://github.com/pia-foss/tunnel-apple
 
 CHECKOUT OPTIONS:
   PIALibrary:
-    :commit: 20a70d3a987e739d7b2e5990909cd79d4f0169ba
+    :commit: 5b7742cdf3d4e3881b3f7a7beb24db6a6f2a0bcd
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
-    :commit: e0d4ab5ff12168bc204a9ef2d1ea5b5b495c9e31
+    :commit: a224c2bd5d9755b61b6900907bc469c1a268c916
     :git: https://github.com/pia-foss/tunnel-apple
 
 SPEC CHECKSUMS:
@@ -96,14 +96,14 @@ SPEC CHECKSUMS:
   HockeySDK: 38b7e2726af1ea86ae97ce4b5de33ab0817e3500
   iRate: 4fc69958788624545e5d050c8ffd20884013c3f1
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  OpenSSL-Apple: e259fc621b6d3f6433253097dc266fce69e47c52
-  PIALibrary: c874a6b401324a213132534a648b3596abbb59b0
-  PIATunnel: 0662ce50e41d5d8540165c4d112a1d4068279dc5
+  OpenSSL-Apple: cd153d705ef350eb834ae7ff5f21f792b51ed208
+  PIALibrary: 46793b4820c4e0d0a1a5ff463c60271dd20d4221
+  PIATunnel: 2d5ce6aa731037103dd5f7db0b816833a4f447c1
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   SideMenu: 47dbf9e4d878062d8994aed43f6e4bf6c1fea30b
   SwiftyBeaver: 85daaaa2b3ae6e31b7b55c99430e8b91dac088af
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 6fc1ed18f2d057f90697d5ed7cea40b66e43634b
+PODFILE CHECKSUM: 2b32933b6df65400459db6b64971904dd2f85fba
 
 COCOAPODS: 1.5.0
