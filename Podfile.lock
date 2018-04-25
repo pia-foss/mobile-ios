@@ -1,15 +1,15 @@
 PODS:
   - Alamofire (4.7.1)
   - Gloss (2.0.0)
-  - OpenSSL-Apple (1.1.0g)
-  - PIATunnel (1.0):
-    - PIATunnel/AppExtension (= 1.0)
-    - PIATunnel/Core (= 1.0)
-  - PIATunnel/AppExtension (1.0):
+  - OpenSSL-Apple (1.1.0h)
+  - PIATunnel (1.1):
+    - PIATunnel/AppExtension (= 1.1)
+    - PIATunnel/Core (= 1.1)
+  - PIATunnel/AppExtension (1.1):
     - PIATunnel/Core
     - SwiftyBeaver
-  - PIATunnel/Core (1.0):
-    - OpenSSL-Apple (= 1.1.0g)
+  - PIATunnel/Core (1.1):
+    - OpenSSL-Apple (~> 1.1.0h)
     - SwiftyBeaver
   - ReachabilitySwift (4.1.0)
   - SwiftyBeaver (1.5.1)
@@ -17,28 +17,36 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4)
   - Gloss (~> 2)
-  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple.git`, commit `5165f298f275f943f9b7bda571d9b553223ab019`)
+  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple.git`, commit `a224c2bd5d9755b61b6900907bc469c1a268c916`)
   - ReachabilitySwift
   - SwiftyBeaver (~> 1.4)
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - Gloss
+    - OpenSSL-Apple
+    - ReachabilitySwift
+    - SwiftyBeaver
+
 EXTERNAL SOURCES:
   PIATunnel:
-    :commit: 5165f298f275f943f9b7bda571d9b553223ab019
+    :commit: a224c2bd5d9755b61b6900907bc469c1a268c916
     :git: https://github.com/pia-foss/tunnel-apple.git
 
 CHECKOUT OPTIONS:
   PIATunnel:
-    :commit: 5165f298f275f943f9b7bda571d9b553223ab019
+    :commit: a224c2bd5d9755b61b6900907bc469c1a268c916
     :git: https://github.com/pia-foss/tunnel-apple.git
 
 SPEC CHECKSUMS:
   Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
   Gloss: b67617f327406adfd47adf20172d00680a3a31bd
-  OpenSSL-Apple: e259fc621b6d3f6433253097dc266fce69e47c52
-  PIATunnel: 454ad07ee80920d45e9343d15416ac25b5cd9b31
+  OpenSSL-Apple: cd153d705ef350eb834ae7ff5f21f792b51ed208
+  PIATunnel: 2d5ce6aa731037103dd5f7db0b816833a4f447c1
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   SwiftyBeaver: 4f74563624b2c1e821c522c54142b5dd5ebb0f30
 
-PODFILE CHECKSUM: 580a5daec8dc8f44b1c48d3cb8f4215574511276
+PODFILE CHECKSUM: d63dc4b020c856a65d0a2b1b81a276e33f034ed6
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0

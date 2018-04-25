@@ -73,7 +73,8 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
                 isRenewable: self.mockIsRenewable,
                 isRecurring: self.mockIsRecurring,
                 expirationDate: self.mockExpirationDate,
-                shouldPresentExpirationAlert: self.mockIsExpiring
+                shouldPresentExpirationAlert: self.mockIsExpiring,
+                renewUrl: nil
             )
         }
     }

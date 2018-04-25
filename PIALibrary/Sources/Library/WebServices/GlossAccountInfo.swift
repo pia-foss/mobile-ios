@@ -27,14 +27,19 @@ class GlossAccountInfo: GlossParser {
         guard let shouldPresentExpirationAlert: Bool = "expire_alert" <~~ json else {
             return nil
         }
-        
+        var renewUrl: URL?
+        if let renewUrlString: String = "renew_url" <~~ json {
+            renewUrl = URL(string: renewUrlString)
+        }
+
         parsed = AccountInfo(
             email: email,
             plan: plan,
             isRenewable: isRenewable,
             isRecurring: isRecurring,
             expirationDate: Date(timeIntervalSince1970: expirationTime),
-            shouldPresentExpirationAlert: shouldPresentExpirationAlert
+            shouldPresentExpirationAlert: shouldPresentExpirationAlert,
+            renewUrl: renewUrl
         )
     }
 }
@@ -48,7 +53,8 @@ extension AccountInfo: JSONEncodable {
             "renewable" ~~> isRenewable,
             "recurring" ~~> isRecurring,
             "expiration_time" ~~> expirationDate.timeIntervalSince1970,
-            "expire_alert" ~~> shouldPresentExpirationAlert
+            "expire_alert" ~~> shouldPresentExpirationAlert,
+            "renew_url" ~~> renewUrl
         ])
     }
 }

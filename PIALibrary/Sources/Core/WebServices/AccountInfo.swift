@@ -44,6 +44,9 @@ public struct AccountInfo {
      */
     public let shouldPresentExpirationAlert: Bool
 
+    /// Returns the URL to which a non-renewable subscription should be redirected.
+    public let renewUrl: URL?
+    
     func with(email: String) -> AccountInfo {
         var newInfo = self // copied (struct)
         newInfo.email = email

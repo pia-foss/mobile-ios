@@ -43,6 +43,9 @@ public struct VPNConfiguration {
 /// - Seealso: `VPNProfile`
 public protocol VPNCustomConfiguration {
 
+    /// Returns `true` if connects via TCP.
+    var isTCP: Bool { get }
+
     /**
      Returns a dictionary representation of this configuration.
 
