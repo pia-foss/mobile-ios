@@ -24,6 +24,8 @@ private extension String {
 }
 
 class SettingsViewController: AutolayoutViewController {
+    private static let AUTOMATIC_PORT: UInt16 = 0
+    
     private enum Section: Int {
         case connection
 
@@ -770,10 +772,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             let configuration = currentOpenVPNConfiguration()
             let availablePorts = Client.providers.serverProvider.currentServersConfiguration.vpnPorts
             var options = (configuration.socketType == .udp) ? availablePorts.udp : availablePorts.tcp
-            options.insert(0, at: 0)
+            options.insert(SettingsViewController.AUTOMATIC_PORT, at: 0)
             controller = OptionsViewController()
             controller?.options = options
-            controller?.selectedOption = pendingPreferences.preferredPort ?? 0
+            controller?.selectedOption = pendingPreferences.preferredPort ?? SettingsViewController.AUTOMATIC_PORT
 
         case .encryptionCipher:
             guard Flags.shared.enablesEncryptionSettings else {
@@ -907,7 +909,7 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             cell.textLabel?.text = rawSocketType?.description
             
         case .vpnPort:
-            if let port = option as? UInt16, (port > 0) {
+            if let port = option as? UInt16, (port != SettingsViewController.AUTOMATIC_PORT) {
                 cell.textLabel?.text = (option as? UInt16)?.description
             } else {
                 cell.textLabel?.text = L10n.Global.automatic
@@ -954,7 +956,7 @@ extension SettingsViewController: OptionsViewControllerDelegate {
 
         case .vpnPort:
             let port = option as! UInt16
-            pendingPreferences.preferredPort = (port > 0) ? port : nil
+            pendingPreferences.preferredPort = (port != SettingsViewController.AUTOMATIC_PORT) ? port : nil
 
         case .encryptionCipher:
             let rawCipher = option as! String
