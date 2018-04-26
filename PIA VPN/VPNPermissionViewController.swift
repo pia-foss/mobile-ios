@@ -54,7 +54,7 @@ class VPNPermissionViewController: AutolayoutViewController {
                 return
             }
             self.dismissingViewController?.dismiss(animated: true) {
-                vpn.connect(nil)
+//                vpn.connect(nil)
             }
         }
     }
