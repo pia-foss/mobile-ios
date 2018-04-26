@@ -133,12 +133,14 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         activeProfile.disconnect(nil)
         activeProfile.remove { (error) in
             self.activeProfile = nil
+            self.accessedDatabase.transient.vpnStatus = .disconnected
             callback?(error)
         }
     }
     
     func uninstallAll() {
         activeProfile = nil
+        accessedDatabase.transient.vpnStatus = .disconnected
         for vpnType in availableVPNTypes {
             guard let profile = accessedConfiguration.profile(forVPNType: vpnType) else {
                 continue
