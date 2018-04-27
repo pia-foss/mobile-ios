@@ -17,16 +17,18 @@
 	<key>alwaysShowsWalkthrough</key>
 	<false/>
 	<key>enablesResetSettings</key>
-	<false/>
+	<true/>
 	<key>enablesProtocolSelection</key>
 	<true/>
 	<key>enablesMACESetting</key>
 	<false/>
-	<key>disablesMACEForOpenVPN</key>
-	<false/>
+	<key>enablesContentBlockerSetting</key>
+	<true/>
 	<key>enablesEncryptionSettings</key>
 	<true/>
 	<key>enablesRemotePortSetting</key>
+	<true/>
+	<key>enablesSocketSetting</key>
 	<true/>
 	<key>enablesDevelopmentSettings</key>
 	<true/>

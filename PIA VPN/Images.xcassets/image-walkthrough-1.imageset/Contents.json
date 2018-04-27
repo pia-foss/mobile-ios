@@ -2,7 +2,6 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "image-walkthrough-1.png",
       "scale" : "1x"
     },
     {
@@ -17,7 +16,7 @@
     }
   ],
   "info" : {
-    "version" : "1",
-    "author" : "zeplin"
+    "version" : 1,
+    "author" : "xcode"
   }
 }

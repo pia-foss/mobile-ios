@@ -1,2 +1,1 @@
-- You can now customize OpenVPN UDP port and crypto settings.
-- Fixed a bug with ping times resulting in bad Automatic server picks.
+- You can now use OpenVPN® over TCP.
