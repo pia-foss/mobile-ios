@@ -330,11 +330,11 @@ enum L10n {
       }
 
       enum Persistent {
-        /// Automatically reconnect
+        /// VPN kill switch
         static let title = L10n.tr("Localizable", "settings.application_settings.persistent.title")
 
         enum Footer {
-          /// Disabling automatic reconnection may put your privacy at risk when your device does not have access to a stable network.
+          /// The VPN kill switch disables your Internet connection when the VPN disconnects.
           static let disabled = L10n.tr("Localizable", "settings.application_settings.persistent.footer.disabled")
         }
       }
