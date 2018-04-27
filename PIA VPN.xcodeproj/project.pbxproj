@@ -1000,7 +1000,7 @@
 			};
 			buildConfigurationList = 291C6377183EBC210039EC03 /* Build configuration list for PBXProject "PIA VPN" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
