@@ -265,10 +265,10 @@
 		0E0715E5201CBB7100D6F666 /* Flags-dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Flags-dev.plist"; sourceTree = "<group>"; };
 		0E0786DD1EFA7EAE00F77466 /* Components.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Components.plist; sourceTree = "<group>"; };
 		0E1F318520176A5F00FC1000 /* Theme+DarkPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Theme+DarkPalette.swift"; sourceTree = "<group>"; };
-		0E2215C6200814A900F5FB4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0E2215C820084CD700F5FB4D /* SwiftGen+Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Strings.swift"; sourceTree = "<group>"; };
 		0E2215CB2008BF8300F5FB4D /* SwiftGen+Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Assets.swift"; sourceTree = "<group>"; };
 		0E257AC41DA45D2F0000D3C3 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		0E325DA62093277F0020BEDB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0E392DA51FE3283C0002160D /* TransientState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransientState.swift; sourceTree = "<group>"; };
 		0E3A35271FD9A960000B0F99 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		0E3A352B1FD9CDC5000B0F99 /* Theme+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+App.swift"; sourceTree = "<group>"; };
@@ -990,7 +990,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 				fr,
 				de,
 				ja,
@@ -1534,7 +1533,7 @@
 		291C6391183EBC210039EC03 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0E2215C6200814A900F5FB4D /* Base */,
+				0E325DA62093277F0020BEDB /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
