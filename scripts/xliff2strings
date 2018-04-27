@@ -1,0 +1,58 @@
+#
+# Copyright (c) 2018 Davide De Rosa. All rights reserved.
+#
+#!/bin/sh
+cat >$TMPDIR/transform.xsl <<"CODE"
+<?xml version="1.0"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="text" indent="no" encoding="utf-8"/>
+    <xsl:variable name="crlf" select="'&#xA;'"/>
+    <xsl:variable name="dq" select="'&quot;'"/>
+
+    <xsl:template match="/">
+<xsl:apply-templates select="/xliff/file[@original=$file]//trans-unit"/>
+    </xsl:template>
+    <xsl:template match="trans-unit">"<xsl:value-of select="@id"></xsl:value-of>" = "<xsl:apply-templates select="target"/>";
+</xsl:template>  
+    <xsl:template match="target">
+        <!-- <xsl:value-of select="replace(., $crlf, '\n')"/> -->
+        <xsl:variable name="nocrlf">
+            <xsl:call-template name="string-replace-all">
+                <xsl:with-param name="text" select="."/>
+                <xsl:with-param name="replace" select="$crlf"/>
+                <xsl:with-param name="by">\n</xsl:with-param>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:call-template name="string-replace-all">
+            <xsl:with-param name="text" select="$nocrlf"/>
+            <xsl:with-param name="replace" select="$dq"/>
+            <xsl:with-param name="by">\"</xsl:with-param>
+        </xsl:call-template>
+    </xsl:template>
+
+    <xsl:template name="string-replace-all">
+        <xsl:param name="text" />
+        <xsl:param name="replace" />
+        <xsl:param name="by" />
+        <xsl:choose>
+            <xsl:when test="contains($text, $replace)">
+                <xsl:value-of select="substring-before($text,$replace)" />
+                <xsl:value-of select="$by" />
+                <xsl:call-template name="string-replace-all">
+                    <xsl:with-param name="text" select="substring-after($text,$replace)" />
+                    <xsl:with-param name="replace" select="$replace" />
+                    <xsl:with-param name="by" select="$by" />
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$text" />
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+</xsl:stylesheet>
+CODE
+
+XLIFF=$1
+ORIGINAL=$2
+
+sed "s/<xliff.*/<xliff>/g" $XLIFF | xmlstarlet tr $TMPDIR/transform.xsl -s file="$ORIGINAL" | sort
