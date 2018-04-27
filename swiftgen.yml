@@ -6,7 +6,7 @@ strings:
 
 storyboards:
     paths:
-        - PIA VPN/Base.lproj/Main.storyboard
+        - PIA VPN/en.lproj/Main.storyboard
     templateName: swift4
     output: PIA VPN/SwiftGen+Storyboards.swift
     params:
