@@ -63,7 +63,7 @@ Issues and Pull Requests should use these templates: [ISSUE](/.github/ISSUE_TEMP
 ## Authors
 
 - Davide De Rosa - [keeshux](https://github.com/keeshux)
-- Amir Malik
+- Amir Malik (before 2016)
 
 ## License
 
