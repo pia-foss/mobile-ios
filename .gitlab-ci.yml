@@ -8,8 +8,8 @@ variables:
 
 before_script:
     - gem install bundler --no-ri --no-rdoc
-    - bundle exec fastlane run ensure_git_status_clean
     - bundle install
+    - bundle exec fastlane run ensure_git_status_clean
     - bundle update
 
 stages:
