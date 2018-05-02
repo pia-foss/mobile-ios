@@ -1,121 +1,378 @@
+/* (No Comment) */
 "about.accessibility.component.expand" = "اضغط لقراءة الترخيص الكامل";
+
+/* (No Comment) */
 "about.app" = "VPN من Private Internet Access";
+
+/* (No Comment) */
 "about.intro" = "يستخدم هذا البرنامج المكونات التالية:";
+
+/* (No Comment) */
 "account.accessibility.eye" = "أيقونة العين";
+
+/* (No Comment) */
 "account.accessibility.eye.hint.conceal" = "اضغط لإخفاء كلمة المرور";
+
+/* (No Comment) */
 "account.accessibility.eye.hint.reveal" = "اضغط لإظهار كلمة المرور";
+
+/* (No Comment) */
 "account.email.caption" = "البريد الإلكتروني";
+
+/* (No Comment) */
 "account.email.placeholder" = "البريد الإلكتروني";
+
+/* (No Comment) */
 "account.eye.footer" = "اضغط على رمز العين للكشف عن كلمة المرور أو إخفائها.";
+
+/* (No Comment) */
 "account.other.footer" = "احصل على تطبيق Private Internet Access لأجهزتك الأخرى واستخدم اسم المستخدم وكلمة المرور الموجودين أعلاه لتسجيل الدخول وتأمين اتصالك.";
+
+/* (No Comment) */
 "account.password.caption" = "كلمة المرور";
+
+/* (No Comment) */
 "account.restore.button" = "استرداد الشراء";
+
+/* (No Comment) */
 "account.restore.description" = "إذا جدَّدت خطتك ولكن لا يزال حسابك يقول أنها أوشكت على الانتهاء، يمكنك إعادة بدء التجديد من هنا. لن يتم تحصيل رسوم منك أثناء هذه العملية.";
+
+/* (No Comment) */
 "account.restore.failure.message" = "لم يتم العثور على عملية شراء قابلة للاسترداد للتجديد.";
+
+/* (No Comment) */
 "account.restore.failure.title" = "استرداد الشراء";
+
+/* (No Comment) */
 "account.restore.title" = "استرداد الشراء غير المقيد في الحساب";
+
+/* (No Comment) */
 "account.reveal.prompt" = "مصادقة للإظهار";
+
+/* (No Comment) */
 "account.save.item" = "تحديث";
+
+/* (No Comment) */
 "account.save.prompt" = "مصادقة لحفظ التغييرات";
+
+/* (No Comment) */
 "account.save.success" = "تم حفظ عنوان بريدك الإلكتروني.";
+
+/* (No Comment) */
 "account.username.caption" = "اسم المستخدم";
+
+/* (No Comment) */
 "content_blocker.body.footer" = "يرجى الملاحظة: يعمل حظر المحتوى دون الحاجة للاتصال بشبكة VPN، ولكنه لن يعمل إلا على متصفح Safari.";
+
+/* (No Comment) */
 "content_blocker.body.subtitle" = "لتفعيل استخدام حظر المحتوى على متصفح Safari، يرجى الذهاب الى الإعدادات > Safari وتفعيل PIA VPN تحت General touch Content Blockers";
+
+/* (No Comment) */
 "content_blocker.title" = "حظر المحتوى";
+
+/* (No Comment) */
 "dashboard.connection.ip.caption" = "IP عمومي";
+
+/* (No Comment) */
 "dashboard.connection.ip.unreachable" = "لا يمكن الوصول إلى الإنترنت";
+
+/* (No Comment) */
 "dashboard.connection.region.caption" = "المنطقة الحالية";
+
+/* (No Comment) */
 "dashboard.connection.region.change" = "تغيير المنطقة";
+
+/* (No Comment) */
 "dashboard.content_blocker.intro.message" = "يستبدل هذا الإصدار MACE مع أداة حظر محتوى Safari.\n\nألقِ عليه نظرة في قسم \"الإعدادات\".";
+
+/* (No Comment) */
 "dashboard.status" = "الحالة";
+
+/* (No Comment) */
 "dashboard.vpn.changing_region" = "جارٍ تغيير المنطقة...";
+
+/* (No Comment) */
 "dashboard.vpn.connected" = "تم الاتصال بـ VPN";
+
+/* (No Comment) */
 "dashboard.vpn.connecting" = "جارٍ الاتصال...";
+
+/* (No Comment) */
 "dashboard.vpn.disconnected" = "تم قطع الاتصال";
+
+/* (No Comment) */
 "dashboard.vpn.disconnecting" = "جارٍ قطع الاتصال...";
+
+/* (No Comment) */
 "expiration.message" = "سينتهي اشتراكك قريبًا. قم بتجديده لتبقى محميًا.";
+
+/* (No Comment) */
 "expiration.title" = "تجديد";
+
+/* (No Comment) */
 "global.automatic" = "تلقائي";
+
+/* (No Comment) */
 "global.cancel" = "إلغاء";
+
+/* (No Comment) */
 "global.close" = "إغلاق";
+
+/* (No Comment) */
 "global.error" = "خطأ";
+
+/* (No Comment) */
 "global.ok" = "موافق";
+
+/* (No Comment) */
 "menu.accessibility.item" = "القائمة";
+
+/* (No Comment) */
 "menu.accessibility.logged_as" = "تم تسجيل الدخول باسم %@";
+
+/* (No Comment) */
 "menu.expiration.days" = "%d يوم/أيام";
+
+/* (No Comment) */
 "menu.expiration.expires_in" = "ينتهي الاشتراك في";
+
+/* (No Comment) */
 "menu.expiration.hours" = "%d ساعة/ساعات";
+
+/* (No Comment) */
 "menu.expiration.one_hour" = "ساعة واحدة";
+
+/* (No Comment) */
 "menu.expiration.upgrade" = "ترقية الحساب";
+
+/* (No Comment) */
 "menu.item.about" = "حول التطبيق";
+
+/* (No Comment) */
 "menu.item.account" = "الحساب";
+
+/* (No Comment) */
 "menu.item.logout" = "تسجيل الخروج";
+
+/* (No Comment) */
 "menu.item.region" = "تحديد المنطقة";
+
+/* (No Comment) */
 "menu.item.settings" = "الإعدادات";
+
+/* (No Comment) */
 "menu.item.web.home" = "الصفحة الرئيسية";
+
+/* (No Comment) */
 "menu.item.web.privacy" = "سياسة الخصوصية";
+
+/* (No Comment) */
 "menu.item.web.support" = "الدعم";
+
+/* (No Comment) */
 "menu.logout.confirm" = "تسجيل الخروج";
+
+/* (No Comment) */
 "menu.logout.message" = "سيؤدي تسجيل الخروج إلى تعطيل الـ VPN وتركك بدون حماية.";
+
+/* (No Comment) */
 "menu.logout.title" = "تسجيل الخروج";
+
+/* (No Comment) */
 "menu.renewal.message.trial" = "الحسابات التجريبية غير مخولة للتجديد. يرجى إنشاء حساب جديد بعد انتهاء الفترة التجريبية للاستمرار في استخدام الخدمة.";
+
+/* (No Comment) */
 "menu.renewal.message.unavailable" = "خوادم أبل غير متاحة حاليًا. يرجى إعادة المحاولة لاحقًا.";
+
+/* (No Comment) */
 "menu.renewal.message.website" = "يرجى استخدام موقعنا الإلكتروني لتجديد اشتراكك.";
+
+/* (No Comment) */
 "menu.renewal.purchase" = "شراء";
+
+/* (No Comment) */
 "menu.renewal.renew" = "تجديد";
+
+/* (No Comment) */
 "menu.renewal.title" = "تجديد";
+
+/* (No Comment) */
 "notifications.disabled.message" = "قم بتمكين الإعلامات لكي يتم تذكيرك بتجديد اشتراكك قبل انتهائه.";
+
+/* (No Comment) */
 "notifications.disabled.settings" = "الإعدادات";
+
+/* (No Comment) */
 "notifications.disabled.title" = "تم تعطيل الإشعارات";
+
+/* (No Comment) */
 "renewal.failure.message" = "تعذر إرسال إيصال الشراء، يرجى إعادة المحاولة في وقت لاحق.";
+
+/* (No Comment) */
 "renewal.success.message" = "تم تجديد حسابك بنجاح.";
+
+/* (No Comment) */
 "renewal.success.title" = "شكرًا لك";
+
+/* (No Comment) */
 "settings.application_information.debug.empty.message" = "معلومات تتبع الأخطاء فارغة. يرجى محاولة إجراء اتصال قبل محاولة إعادة الإرسال.";
+
+/* (No Comment) */
 "settings.application_information.debug.empty.title" = "معلومات تتبع الأخطاء فارغة";
+
+/* (No Comment) */
 "settings.application_information.debug.failure.message" = "تعذَّر إرسال معلومات تتبع الأخطاء. يرجى إلغاء الاتصال بشبكة VPN وإعادة المحاولة.";
+
+/* (No Comment) */
 "settings.application_information.debug.failure.title" = "حدث خطأ أثناء الإرسال";
+
+/* (No Comment) */
 "settings.application_information.debug.success.message" = "تم إرسال معلومات تتبع الأخطاء بنجاح.\nالمعرف: %@\nيرجى تدوين هذا المعرف، حيث أن فريق الدعم سيحتاجه لتحديد ما أرسلته.";
+
+/* (No Comment) */
 "settings.application_information.debug.success.title" = "تم إرسال معلومات تتبع الأخطاء";
+
+/* (No Comment) */
 "settings.application_information.debug.title" = "إرسال تتبع الأخطاء إلى الدعم";
+
+/* (No Comment) */
 "settings.application_information.title" = "معلومات التطبيق";
+
+/* (No Comment) */
 "settings.application_settings.dark_theme.title" = "النسق الداكن";
+
+/* (No Comment) */
 "settings.application_settings.mace.footer" = "يحجب ™PIA MACE الإعلانات والمتعقبين والبرمجيات الضارة عندما تكون متصلًا بخدمة VPN.";
+
+/* (No Comment) */
 "settings.application_settings.mace.title" = "™PIA MACE";
-"settings.application_settings.persistent.footer.disabled" = "يؤدي استخدام مفتاح إيقاف VPN إلى تعطيل اتصالك بالإنترنت عند قطع اتصال شبكة VPN.";
-"settings.application_settings.persistent.title" = "مفتاح إيقاف VPN";
+
+/* (No Comment) */
+"settings.application_settings.persistent.footer.disabled" = "قد يُعرض تعطيل ميزة \"إعادة الاتصال التلقائي\" خصوصيتك للخطر عند عدم توافر اتصال مستقر بالإنترنت لجهازك.";
+
+/* (No Comment) */
+"settings.application_settings.persistent.title" = "إعادة الاتصال تلقائيًا";
+
+/* (No Comment) */
 "settings.application_settings.title" = "إعدادات التطبيق";
+
+/* (No Comment) */
 "settings.commit.buttons.later" = "لاحقًا";
+
+/* (No Comment) */
 "settings.commit.buttons.reconnect" = "إعادة اتصال";
+
+/* (No Comment) */
 "settings.commit.messages.must_disconnect" = "يجب إعادة اتصال VPN حتى تسري بعض التغييرات.";
+
+/* (No Comment) */
 "settings.commit.messages.should_reconnect" = "أعد اتصال VPN لتطبيق التغييرات.";
+
+/* (No Comment) */
 "settings.connection.remote_port.title" = "منفذ بعيد";
+
+/* (No Comment) */
 "settings.connection.socket_protocol.title" = "مقبس";
+
+/* (No Comment) */
 "settings.connection.title" = "الاتصال";
+
+/* (No Comment) */
 "settings.connection.vpn_protocol.title" = "البروتوكول";
+
+/* (No Comment) */
 "settings.content_blocker.footer" = "لتفعيل أو تعطيل حظر المحتوى على متصفح Safari، اذهب الى الإعدادات > Safari > حظر المحتوى وتفعيل PIA VPN";
+
+/* (No Comment) */
 "settings.content_blocker.refresh.title" = "تحديث قائمة الحظر";
+
+/* (No Comment) */
 "settings.content_blocker.state.title" = "الحالة الحالية";
+
+/* (No Comment) */
 "settings.content_blocker.title" = "حظر المحتوى في Safari";
+
+/* (No Comment) */
 "settings.encryption.cipher.title" = "تشفير البيانات";
+
+/* (No Comment) */
 "settings.encryption.digest.title" = "مصادقة البيانات";
+
+/* (No Comment) */
 "settings.encryption.handshake.title" = "مصافحة";
+
+/* (No Comment) */
 "settings.encryption.title" = "التشفير";
+
+/* (No Comment) */
+"settings.reset.defaults.confirm.button" = "Reset";
+
+/* (No Comment) */
+"settings.reset.defaults.confirm.message" = "This will bring the app back to default. You will lose all changes you have made.";
+
+/* (No Comment) */
+"settings.reset.defaults.confirm.title" = "Reset settings";
+
+/* (No Comment) */
+"settings.reset.defaults.title" = "Reset to default settings";
+
+/* (No Comment) */
+"settings.reset.title" = "RESET";
+
+/* (No Comment) */
 "shortcuts.connect" = "اتصال";
+
+/* (No Comment) */
 "shortcuts.disconnect" = "قطع الاتصال";
+
+/* (No Comment) */
 "shortcuts.select_region" = "حدّد منطقة";
+
+/* (No Comment) */
 "vpn_permission.body.footer" = "نحن لا نقوم بمراقبة أو تصفية أو تسجيل أي نشاط على الشبكة.";
+
+/* (No Comment) */
 "vpn_permission.body.subtitle" = "للمتابعة اضغط \"%@\".";
+
+/* (No Comment) */
 "vpn_permission.body.title" = "يحتاج PIA إلى الوصول إلى تكوينات VPN لتأمين حركة مرورك.";
+
+/* (No Comment) */
 "vpn_permission.disallow.contact" = "اتصال";
+
+/* (No Comment) */
 "vpn_permission.disallow.message.basic" = "نحن بحاجة إلى هذا الإذن ليعمل التطبيق.";
+
+/* (No Comment) */
 "vpn_permission.disallow.message.support" = "يمكنك أيضًا الاتصال بدعم العملاء إذا كنت بحاجة إلى المساعدة.";
+
+/* (No Comment) */
 "vpn_permission.title" = "PIA";
+
+/* (No Comment) */
 "walkthrough.action.done" = "تم";
+
+/* (No Comment) */
 "walkthrough.action.next" = "التالي";
+
+/* (No Comment) */
 "walkthrough.action.skip" = "تخطي";
+
+/* (No Comment) */
 "walkthrough.page.1.description" = "احمي نفسك على ما يصل إلى 5 أجهزة في وقت واحد.";
+
+/* (No Comment) */
 "walkthrough.page.1.title" = "يدعم 5 أجهزة في المرة الواحدة";
+
+/* (No Comment) */
 "walkthrough.page.2.description" = "مع خوادم في جميع أنحاء العالم، أنت دائما تحت الحماية.";
+
+/* (No Comment) */
 "walkthrough.page.2.title" = "اتصل بأي منطقة بسهولة";
+
+/* (No Comment) */
 "walkthrough.page.3.description" = "تمكين ميزة حظر المحتوى يمنع الإعلانات من الظهور في Safari.";
+
+/* (No Comment) */
 "walkthrough.page.3.title" = "احمي نفسك من الإعلانات";
+

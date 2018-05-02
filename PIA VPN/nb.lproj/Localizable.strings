@@ -1,121 +1,378 @@
+/* (No Comment) */
 "about.accessibility.component.expand" = "Trykk for å lese hele lisensen";
+
+/* (No Comment) */
 "about.app" = "VPN fra Private Internet Access";
+
+/* (No Comment) */
 "about.intro" = "Dette programmet bruker følgende komponenter:";
+
+/* (No Comment) */
 "account.accessibility.eye" = "Øye-ikon";
+
+/* (No Comment) */
 "account.accessibility.eye.hint.conceal" = "Trykk for å skjule passordet";
+
+/* (No Comment) */
 "account.accessibility.eye.hint.reveal" = "Trykk for å vise passordet";
+
+/* (No Comment) */
 "account.email.caption" = "E-post";
+
+/* (No Comment) */
 "account.email.placeholder" = "E-postadresse";
+
+/* (No Comment) */
 "account.eye.footer" = "Trykk på øye-ikonet for å vise eller skjule passordet ditt.";
+
+/* (No Comment) */
 "account.other.footer" = "Få Private Internet Access-appen på de andre enhetene dine og bruk det ovenfornevnte brukernavnet og passordet for å logge inn og sikre tilkoblingen din.";
+
+/* (No Comment) */
 "account.password.caption" = "Passord";
+
+/* (No Comment) */
 "account.restore.button" = "Gjenopprett kjøp";
+
+/* (No Comment) */
 "account.restore.description" = "Hvis du fornyet abonnementet ditt, men kontoen fortsatt sier den snart utløper, kan du starte fornyelsen på nytt her. Du belastes ikke i denne prosessen.";
+
+/* (No Comment) */
 "account.restore.failure.message" = "Ingen innløsbare kjøp ble funnet for fornyelse.";
+
+/* (No Comment) */
 "account.restore.failure.title" = "Gjenopprett kjøp";
+
+/* (No Comment) */
 "account.restore.title" = "Gjenopprett ukreditert kjøp";
+
+/* (No Comment) */
 "account.reveal.prompt" = "Autentiser for å vise";
+
+/* (No Comment) */
 "account.save.item" = "Oppdater";
+
+/* (No Comment) */
 "account.save.prompt" = "Autentifiser for å lagre endringene";
+
+/* (No Comment) */
 "account.save.success" = "E-postadressen din er lagret.";
+
+/* (No Comment) */
 "account.username.caption" = "Brukernavn";
+
+/* (No Comment) */
 "content_blocker.body.footer" = "Merk: Du trenger ikke å være tilkoblet VPN-tjenesten for at innholdsblokkereren skal virke, men den virker bare når du surfer med Safari.";
+
+/* (No Comment) */
 "content_blocker.body.subtitle" = "For å aktivere innholdsblokkereren (for Safari), kan du gå til Innstillinger > Safari, og under Generelt slår du på innholdsblokkerer for PIA VPN.";
+
+/* (No Comment) */
 "content_blocker.title" = "Innholdsblokkerer";
+
+/* (No Comment) */
 "dashboard.connection.ip.caption" = "OFFENTLIG IP";
+
+/* (No Comment) */
 "dashboard.connection.ip.unreachable" = "Får ikke kontakt med Internett";
+
+/* (No Comment) */
 "dashboard.connection.region.caption" = "NÅVÆRENDE REGION";
+
+/* (No Comment) */
 "dashboard.connection.region.change" = "BYTT REGION";
+
+/* (No Comment) */
 "dashboard.content_blocker.intro.message" = "Denne versjonen erstatter MACE med vår Safari Content Blocker.\n\nTa en titt i «Innstillinger»-delen.";
+
+/* (No Comment) */
 "dashboard.status" = "Status";
+
+/* (No Comment) */
 "dashboard.vpn.changing_region" = "Endrer region …";
+
+/* (No Comment) */
 "dashboard.vpn.connected" = "Koblet til VPN";
+
+/* (No Comment) */
 "dashboard.vpn.connecting" = "Kobler til …";
+
+/* (No Comment) */
 "dashboard.vpn.disconnected" = "Frakoblet";
+
+/* (No Comment) */
 "dashboard.vpn.disconnecting" = "Kobler fra …";
+
+/* (No Comment) */
 "expiration.message" = "Abonnementet ditt utløper snart. Forny det for å forbli beskyttet.";
+
+/* (No Comment) */
 "expiration.title" = "Forny";
+
+/* (No Comment) */
 "global.automatic" = "Automatisk";
+
+/* (No Comment) */
 "global.cancel" = "Avbryt";
+
+/* (No Comment) */
 "global.close" = "Lukk";
+
+/* (No Comment) */
 "global.error" = "Feil";
+
+/* (No Comment) */
 "global.ok" = "OK";
+
+/* (No Comment) */
 "menu.accessibility.item" = "Meny";
+
+/* (No Comment) */
 "menu.accessibility.logged_as" = "Logget på som %@";
+
+/* (No Comment) */
 "menu.expiration.days" = "%d dager";
+
+/* (No Comment) */
 "menu.expiration.expires_in" = "Abonnementet ditt utløper om";
+
+/* (No Comment) */
 "menu.expiration.hours" = "%d timer";
+
+/* (No Comment) */
 "menu.expiration.one_hour" = "én time";
+
+/* (No Comment) */
 "menu.expiration.upgrade" = "OPPGRADER KONTO";
+
+/* (No Comment) */
 "menu.item.about" = "Om";
+
+/* (No Comment) */
 "menu.item.account" = "Konto";
+
+/* (No Comment) */
 "menu.item.logout" = "Logg ut";
+
+/* (No Comment) */
 "menu.item.region" = "Valg av region";
+
+/* (No Comment) */
 "menu.item.settings" = "Innstillinger";
+
+/* (No Comment) */
 "menu.item.web.home" = "Startside";
+
+/* (No Comment) */
 "menu.item.web.privacy" = "Retningslinjer om personvern";
+
+/* (No Comment) */
 "menu.item.web.support" = "Støtte";
+
+/* (No Comment) */
 "menu.logout.confirm" = "Logg ut";
+
+/* (No Comment) */
 "menu.logout.message" = "Hvis du logger ut deaktiveres VPN og du er ikke lenger beskyttet.";
+
+/* (No Comment) */
 "menu.logout.title" = "Logg ut";
+
+/* (No Comment) */
 "menu.renewal.message.trial" = "Prøvekontoer kan ikke fornyes. Du kan fortsette bruk av tjenesten ved å kjøpe en ny konto etter at prøvekontoen er gått ut.";
+
+/* (No Comment) */
 "menu.renewal.message.unavailable" = "Apple-serverne er for øyeblikket ikke tilgjengelige. Prøv igjen senere.";
+
+/* (No Comment) */
 "menu.renewal.message.website" = "Bruk nettstedet vårt til å fornye abonnementet.";
+
+/* (No Comment) */
 "menu.renewal.purchase" = "Kjøp";
+
+/* (No Comment) */
 "menu.renewal.renew" = "Forny";
+
+/* (No Comment) */
 "menu.renewal.title" = "Forny";
+
+/* (No Comment) */
 "notifications.disabled.message" = "Aktiver varsler for å motta en påminnelse om å fornye abonnementet ditt før det utløper.";
+
+/* (No Comment) */
 "notifications.disabled.settings" = "Innstillinger";
+
+/* (No Comment) */
 "notifications.disabled.title" = "Varsler deaktivert";
+
+/* (No Comment) */
 "renewal.failure.message" = "Kunne ikke sende inn kvittering for kjøpet ditt, prøv igjen senere.";
+
+/* (No Comment) */
 "renewal.success.message" = "Kontoen din ble fornyet.";
+
+/* (No Comment) */
 "renewal.success.title" = "Takk";
+
+/* (No Comment) */
 "settings.application_information.debug.empty.message" = "Feilsøkinfo er tom. Prøv å koble deg på igjen før du sender inn på nytt.";
+
+/* (No Comment) */
 "settings.application_information.debug.empty.title" = "Feilsøkinfo er tom";
+
+/* (No Comment) */
 "settings.application_information.debug.failure.message" = "Feilsøkinfo kunne ikke sendes inn. Koble fra VPN og prøv på nytt.";
+
+/* (No Comment) */
 "settings.application_information.debug.failure.title" = "Feil ved innsending";
+
+/* (No Comment) */
 "settings.application_information.debug.success.message" = "Feilsøkinfo sendt. \nID: %@\nSkriv ned ID-en. Kundestøtte trenger den for å finne meldingen din.";
+
+/* (No Comment) */
 "settings.application_information.debug.success.title" = "Feilsøkinfo sendt inn";
+
+/* (No Comment) */
 "settings.application_information.debug.title" = "Send feilsøk til kundestøtte";
+
+/* (No Comment) */
 "settings.application_information.title" = "APPINFORMASJON";
+
+/* (No Comment) */
 "settings.application_settings.dark_theme.title" = "Mørkt tema";
+
+/* (No Comment) */
 "settings.application_settings.mace.footer" = "PIA MACE™ blokkerer reklamer, sporere og skadelig programvare når du er koblet til VPN-en.";
+
+/* (No Comment) */
 "settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.persistent.footer.disabled" = "VPN-kill switch deaktiverer Internett-forbindelsen når VPN kobles ut.";
-"settings.application_settings.persistent.title" = "Kill switch for VPN";
+
+/* (No Comment) */
+"settings.application_settings.persistent.footer.disabled" = "Hvis du deaktiverer automatisk forsøk på å koble seg til igjen, kan du risikere privatlivet ditt når enheten ikke har tilgang til et stabilt nettverk.";
+
+/* (No Comment) */
+"settings.application_settings.persistent.title" = "Kobler til igjen automatisk";
+
+/* (No Comment) */
 "settings.application_settings.title" = "APPINNSTILLINGER";
+
+/* (No Comment) */
 "settings.commit.buttons.later" = "Senere";
+
+/* (No Comment) */
 "settings.commit.buttons.reconnect" = "Koble til igjen";
+
+/* (No Comment) */
 "settings.commit.messages.must_disconnect" = "VPN-en må koble til igjen for at enkelte endringer skal tre i kraft.";
+
+/* (No Comment) */
 "settings.commit.messages.should_reconnect" = "Koble til VPN-en igjen for å ta i bruk endringene.";
+
+/* (No Comment) */
 "settings.connection.remote_port.title" = "Ekstern port";
+
+/* (No Comment) */
 "settings.connection.socket_protocol.title" = "Socket";
+
+/* (No Comment) */
 "settings.connection.title" = "TILKOBLING";
+
+/* (No Comment) */
 "settings.connection.vpn_protocol.title" = "Protokoll";
+
+/* (No Comment) */
 "settings.content_blocker.footer" = "For å aktivere eller deaktivere innholdsblokkerer, kan du gå til Innstillinger > Safari > Innholdsblokkerere og slå på PIA VPN.";
+
+/* (No Comment) */
 "settings.content_blocker.refresh.title" = "Oppdater utestengningslisten";
+
+/* (No Comment) */
 "settings.content_blocker.state.title" = "Gjeldene status";
+
+/* (No Comment) */
 "settings.content_blocker.title" = "Safari Innholdsblokkerer";
+
+/* (No Comment) */
 "settings.encryption.cipher.title" = "Datakryptering";
+
+/* (No Comment) */
 "settings.encryption.digest.title" = "Dataverifisering";
+
+/* (No Comment) */
 "settings.encryption.handshake.title" = "Håndtrykk";
+
+/* (No Comment) */
 "settings.encryption.title" = "KRYPTERING";
+
+/* (No Comment) */
+"settings.reset.defaults.confirm.button" = "Reset";
+
+/* (No Comment) */
+"settings.reset.defaults.confirm.message" = "This will bring the app back to default. You will lose all changes you have made.";
+
+/* (No Comment) */
+"settings.reset.defaults.confirm.title" = "Reset settings";
+
+/* (No Comment) */
+"settings.reset.defaults.title" = "Reset to default settings";
+
+/* (No Comment) */
+"settings.reset.title" = "RESET";
+
+/* (No Comment) */
 "shortcuts.connect" = "Koble til";
+
+/* (No Comment) */
 "shortcuts.disconnect" = "Koble fra";
+
+/* (No Comment) */
 "shortcuts.select_region" = "Velg region";
+
+/* (No Comment) */
 "vpn_permission.body.footer" = "Vi overvåker, filtrerer eller logger ikke nettverksaktiviteten din.";
+
+/* (No Comment) */
 "vpn_permission.body.subtitle" = "Trykk på «%@» for å fortsette.";
+
+/* (No Comment) */
 "vpn_permission.body.title" = "PIA trenger tilgang til VPN-konfigurasjonen din for å sikre trafikken din.";
+
+/* (No Comment) */
 "vpn_permission.disallow.contact" = "Kontakt";
+
+/* (No Comment) */
 "vpn_permission.disallow.message.basic" = "Vi trenger disse tillatelsene for at programmet skal fungere.";
+
+/* (No Comment) */
 "vpn_permission.disallow.message.support" = "Du kan også ta kontakt med kundestøtten, hvis du trenger hjelp.";
+
+/* (No Comment) */
 "vpn_permission.title" = "PIA";
+
+/* (No Comment) */
 "walkthrough.action.done" = "FERDIG";
+
+/* (No Comment) */
 "walkthrough.action.next" = "NESTE";
+
+/* (No Comment) */
 "walkthrough.action.skip" = "HOPP OVER";
+
+/* (No Comment) */
 "walkthrough.page.1.description" = "Beskytt deg på opptil fem enheter samtidig.";
+
+/* (No Comment) */
 "walkthrough.page.1.title" = "Støtter fem enheter samtidig";
+
+/* (No Comment) */
 "walkthrough.page.2.description" = "Med serverer rundt om i hele verden, er du alltid beskyttet.";
+
+/* (No Comment) */
 "walkthrough.page.2.title" = "Koble til hvilken som helst region på en enkel måte";
+
+/* (No Comment) */
 "walkthrough.page.3.description" = "Aktivering av innholdsblokkereren sikrer at reklame ikke blir vist når du bruker Safari.";
+
+/* (No Comment) */
 "walkthrough.page.3.title" = "Beskytt deg selv mot reklame";
+

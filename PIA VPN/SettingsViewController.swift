@@ -457,14 +457,14 @@ class SettingsViewController: AutolayoutViewController {
         }
         if Flags.shared.enablesMACESetting {
             rowsBySection[.applicationSettings] = [
-                .darkTheme,
                 .automaticReconnection,
+                .darkTheme,
                 .mace
             ]
         } else {
             rowsBySection[.applicationSettings] = [
-                .darkTheme,
-                .automaticReconnection
+                .automaticReconnection,
+                .darkTheme
             ]
         }
         if !Flags.shared.enablesContentBlockerSetting {
@@ -581,9 +581,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch visibleSections[section] {
         case .applicationSettings:
-            var footer: [String] = [
-                L10n.Settings.ApplicationSettings.Persistent.Footer.disabled
-            ]
+            var footer: [String] = []
+            if !pendingPreferences.isPersistentConnection {
+                footer.append(L10n.Settings.ApplicationSettings.Persistent.Footer.disabled)
+            }
             if Flags.shared.enablesMACESetting {
                 footer.append(L10n.Settings.ApplicationSettings.Mace.footer)
             }
