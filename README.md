@@ -29,7 +29,7 @@ The PIA VPN app features:
 - Xcode 9+ (Swift 4)
 - Git (preinstalled with Xcode Command Line Tools)
 - Ruby (preinstalled with macOS)
-- [CocoaPods 1.4.0][dep-cocoapods]
+- [CocoaPods 1.5.0][dep-cocoapods]
 
 It's highly recommended to use the Git and Ruby packages provided by [Homebrew][dep-brew].
 
@@ -63,7 +63,7 @@ Issues and Pull Requests should use these templates: [ISSUE](/.github/ISSUE_TEMP
 ## Authors
 
 - Davide De Rosa - [keeshux](https://github.com/keeshux)
-- Amir Malik
+- Amir Malik (before 2016)
 
 ## License
 
