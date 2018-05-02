@@ -6,14 +6,14 @@ Private Internet Access is the world's leading consumer VPN service. At Private 
 
 # PIA VPN for iOS
 
-With the Private Internet Access VPN app for iOS, you can access our network of VPN servers across the world from your iPhone, iPad or iPod touch (64-bit only). Choose among many available countries and connect to them easily. Features include kill switch, multiple VPN protocols, DNS/IPv6 leak protection and Safari Content Blocker for ad-blocking while browsing with Safari.
+With the Private Internet Access VPN app for iOS, you can access our network of VPN servers across the world from your iPhone, iPad or iPod touch (64-bit only). Choose among many available countries and connect to them easily. Features include automatic reconnection, multiple VPN protocols, DNS/IPv6 leak protection and Safari Content Blocker for ad-blocking while browsing with Safari.
 
 ## Getting started
 
 The PIA VPN app features:
 
 - [x] Plenty of countries to connect to (28 as of today)
-- [x] Kill switch
+- [x] Automatic reconnection
 - [x] Multiple VPN protocols
 - [x] Fine-grained VPN settings
 - [x] DNS leak protection

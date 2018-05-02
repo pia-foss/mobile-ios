@@ -1,121 +1,378 @@
+/* (No Comment) */
 "about.accessibility.component.expand" = "タップしてフルライセンスを読む";
+
+/* (No Comment) */
 "about.app" = "Private Internet AccessによるVPN";
+
+/* (No Comment) */
 "about.intro" = "このプログラムは次の構成要素を使用します:";
+
+/* (No Comment) */
 "account.accessibility.eye" = "目のアイコン";
+
+/* (No Comment) */
 "account.accessibility.eye.hint.conceal" = "タップしてパスワードを非表示";
+
+/* (No Comment) */
 "account.accessibility.eye.hint.reveal" = "タップしてパスワードを表示";
+
+/* (No Comment) */
 "account.email.caption" = "メールアドレス";
+
+/* (No Comment) */
 "account.email.placeholder" = "メールアドレス";
+
+/* (No Comment) */
 "account.eye.footer" = "目のアイコンをタップして、パスワードを表示または非表示にします。";
+
+/* (No Comment) */
 "account.other.footer" = "他の端末でもPrivate Internet Access アプリを入手し、上のユーザー名とパスワードでログインし、インターネット接続を保護することができます。\n\nパスワードをタップしてコピーするかパスワードを表示します。";
+
+/* (No Comment) */
 "account.password.caption" = "パスワード";
+
+/* (No Comment) */
 "account.restore.button" = "購入を復元";
+
+/* (No Comment) */
 "account.restore.description" = "プランを更新したにも関わらず、有効期限があと少しで切れるとアカウントに表示される場合、こちらから更新を再度開始することができます。この処理の実行中、請求は発生しません。";
+
+/* (No Comment) */
 "account.restore.failure.message" = "ご利用可能な更新の購入は見つかりませんでした。";
+
+/* (No Comment) */
 "account.restore.failure.title" = "購入を復元";
+
+/* (No Comment) */
 "account.restore.title" = "追加されていない購入を復元";
+
+/* (No Comment) */
 "account.reveal.prompt" = "認証して表示";
+
+/* (No Comment) */
 "account.save.item" = "アップデート";
+
+/* (No Comment) */
 "account.save.prompt" = "認証して変更を保存";
+
+/* (No Comment) */
 "account.save.success" = "メールアドレスが保存されました。";
+
+/* (No Comment) */
 "account.username.caption" = "ユーザー名";
+
+/* (No Comment) */
 "content_blocker.body.footer" = "注意：コンテンツブロッカーは、VPNへの接続がなくても機能しますが、Safariを使ったブラウジングのみで利用できます。";
+
+/* (No Comment) */
 "content_blocker.body.subtitle" = "コンテンツブロッカーをオンにしてSafariで使えるようにするには、「設定」>「Safari」にアクセスし、「一般」からPIA VPNで「コンテンツブロッカー」をオンにしてください。";
+
+/* (No Comment) */
 "content_blocker.title" = "コンテンツブロッカー";
+
+/* (No Comment) */
 "dashboard.connection.ip.caption" = "パブリックIP";
+
+/* (No Comment) */
 "dashboard.connection.ip.unreachable" = "インターネットに接続できません";
+
+/* (No Comment) */
 "dashboard.connection.region.caption" = "現在の地域";
+
+/* (No Comment) */
 "dashboard.connection.region.change" = "地域変更";
+
+/* (No Comment) */
 "dashboard.content_blocker.intro.message" = "このバージョンはMACEを弊社のSafariコンテンツブロッカーに取り換えるものです。\n\n「設定」セクションで確認してください。";
+
+/* (No Comment) */
 "dashboard.status" = "ステータス";
+
+/* (No Comment) */
 "dashboard.vpn.changing_region" = "地域を変更中...";
+
+/* (No Comment) */
 "dashboard.vpn.connected" = "VPN に接続済み";
+
+/* (No Comment) */
 "dashboard.vpn.connecting" = "接続中...";
+
+/* (No Comment) */
 "dashboard.vpn.disconnected" = "切断済み";
+
+/* (No Comment) */
 "dashboard.vpn.disconnecting" = "切断中...";
+
+/* (No Comment) */
 "expiration.message" = "ご利用のサブスクリプションがもうすぐ期限切れとなります。更新して保護された状態を保ちましょう。";
+
+/* (No Comment) */
 "expiration.title" = "更新";
+
+/* (No Comment) */
 "global.automatic" = "自動";
+
+/* (No Comment) */
 "global.cancel" = "キャンセル";
+
+/* (No Comment) */
 "global.close" = "閉じる";
+
+/* (No Comment) */
 "global.error" = "エラー";
+
+/* (No Comment) */
 "global.ok" = "OK";
+
+/* (No Comment) */
 "menu.accessibility.item" = "メニュー";
+
+/* (No Comment) */
 "menu.accessibility.logged_as" = "%@としてログインされています";
+
+/* (No Comment) */
 "menu.expiration.days" = "%d 日";
+
+/* (No Comment) */
 "menu.expiration.expires_in" = "サブスクリプション残り期間:";
+
+/* (No Comment) */
 "menu.expiration.hours" = "%d 時間";
+
+/* (No Comment) */
 "menu.expiration.one_hour" = "1時間";
+
+/* (No Comment) */
 "menu.expiration.upgrade" = "アカウントをアップグレード";
+
+/* (No Comment) */
 "menu.item.about" = "アプリについて";
+
+/* (No Comment) */
 "menu.item.account" = "アカウント";
+
+/* (No Comment) */
 "menu.item.logout" = "ログアウト";
+
+/* (No Comment) */
 "menu.item.region" = "地域選択";
+
+/* (No Comment) */
 "menu.item.settings" = "設定";
+
+/* (No Comment) */
 "menu.item.web.home" = "ホームページ";
+
+/* (No Comment) */
 "menu.item.web.privacy" = "プライバシーポリシー";
+
+/* (No Comment) */
 "menu.item.web.support" = "サポート";
+
+/* (No Comment) */
 "menu.logout.confirm" = "ログアウト";
+
+/* (No Comment) */
 "menu.logout.message" = "ログアウトするとVPN が無効になり、保護された状態でなくなります。";
+
+/* (No Comment) */
 "menu.logout.title" = "ログアウト";
+
+/* (No Comment) */
 "menu.renewal.message.trial" = "トライアルアカウントは更新できません。サービスを引き続きご利用いただくには、期限切れの際に新規アカウントを購入してください。";
+
+/* (No Comment) */
 "menu.renewal.message.unavailable" = "Appleサーバーが現在ご利用いただけません。後でもう一度お試しください。";
+
+/* (No Comment) */
 "menu.renewal.message.website" = "サブスクリプションを更新するには、弊社のウェブサイトをご使用ください。";
+
+/* (No Comment) */
 "menu.renewal.purchase" = "購入";
+
+/* (No Comment) */
 "menu.renewal.renew" = "更新";
+
+/* (No Comment) */
 "menu.renewal.title" = "更新";
+
+/* (No Comment) */
 "notifications.disabled.message" = "通知を有効にし、期限が切れる前にサブスクリプション更新のリマインダーを受け取りましょう。";
+
+/* (No Comment) */
 "notifications.disabled.settings" = "設定";
+
+/* (No Comment) */
 "notifications.disabled.title" = "通知が無効にされました";
+
+/* (No Comment) */
 "renewal.failure.message" = "購入レシートを送信できませんでした。後でもう一度お試しください。";
+
+/* (No Comment) */
 "renewal.success.message" = "アカウントが正常に更新されました。";
+
+/* (No Comment) */
 "renewal.success.title" = "ありがとうございます";
+
+/* (No Comment) */
 "settings.application_information.debug.empty.message" = "デバッグ情報が空です。送信を再試行する前に接続してみてください。";
+
+/* (No Comment) */
 "settings.application_information.debug.empty.title" = "空のデバッグ情報";
+
+/* (No Comment) */
 "settings.application_information.debug.failure.message" = "デバッグ情報を送信できませんでした。VPNから切断してもう一度お試しください。";
+
+/* (No Comment) */
 "settings.application_information.debug.failure.title" = "送信中のエラー";
+
+/* (No Comment) */
 "settings.application_information.debug.success.message" = "デバッグ情報が正常に送信されました。\nID: %@\n送信された情報を特定するためにサポートチームがこのIDを必要としますので、このIDを書き留めておいてください。";
+
+/* (No Comment) */
 "settings.application_information.debug.success.title" = "デバッグ情報が送信されました";
+
+/* (No Comment) */
 "settings.application_information.debug.title" = "サポートにデバッグを送信";
+
+/* (No Comment) */
 "settings.application_information.title" = "アプリ情報";
+
+/* (No Comment) */
 "settings.application_settings.dark_theme.title" = "ダークテーマ";
+
+/* (No Comment) */
 "settings.application_settings.mace.footer" = "PIA MACE™はVPNに接続されている間、広告、閲覧行動の追跡、そしてマルウェアをブロックします。";
+
+/* (No Comment) */
 "settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.persistent.footer.disabled" = "VPNキルスイッチは、VPNが切断されたときに、インターネット接続を無効にします。";
-"settings.application_settings.persistent.title" = "VPNキルスイッチ";
+
+/* (No Comment) */
+"settings.application_settings.persistent.footer.disabled" = "自動再接続を無効にすると、お使いの端末が安定したネットワークに接続していない場合、プライバシーが危険にさらされる恐れがあります。";
+
+/* (No Comment) */
+"settings.application_settings.persistent.title" = "自動的に再接続";
+
+/* (No Comment) */
 "settings.application_settings.title" = "アプリ設定";
+
+/* (No Comment) */
 "settings.commit.buttons.later" = "後で";
+
+/* (No Comment) */
 "settings.commit.buttons.reconnect" = "再接続";
+
+/* (No Comment) */
 "settings.commit.messages.must_disconnect" = "変更を反映するには、VPNを再接続する必要があります。";
+
+/* (No Comment) */
 "settings.commit.messages.should_reconnect" = "変更を適用するにはVPNに再度接続してください。";
+
+/* (No Comment) */
 "settings.connection.remote_port.title" = "リモートポート";
+
+/* (No Comment) */
 "settings.connection.socket_protocol.title" = "ソケット";
+
+/* (No Comment) */
 "settings.connection.title" = "接続";
+
+/* (No Comment) */
 "settings.connection.vpn_protocol.title" = "プロトコル";
+
+/* (No Comment) */
 "settings.content_blocker.footer" = "コンテンツブロッカーのオン、オフは「設定」>「Safari」>「コンテンツブロッカー」から、PIA VPNをオンにしてください。";
+
+/* (No Comment) */
 "settings.content_blocker.refresh.title" = "ブロックリストをリフレッシュ";
+
+/* (No Comment) */
 "settings.content_blocker.state.title" = "現在の状況";
+
+/* (No Comment) */
 "settings.content_blocker.title" = "Safariコンテンツブロッカー";
+
+/* (No Comment) */
 "settings.encryption.cipher.title" = "データ暗号化";
+
+/* (No Comment) */
 "settings.encryption.digest.title" = "データ認証";
+
+/* (No Comment) */
 "settings.encryption.handshake.title" = "ハンドシェイク";
+
+/* (No Comment) */
 "settings.encryption.title" = "暗号化";
+
+/* (No Comment) */
+"settings.reset.defaults.confirm.button" = "Reset";
+
+/* (No Comment) */
+"settings.reset.defaults.confirm.message" = "This will bring the app back to default. You will lose all changes you have made.";
+
+/* (No Comment) */
+"settings.reset.defaults.confirm.title" = "Reset settings";
+
+/* (No Comment) */
+"settings.reset.defaults.title" = "Reset to default settings";
+
+/* (No Comment) */
+"settings.reset.title" = "RESET";
+
+/* (No Comment) */
 "shortcuts.connect" = "接続";
+
+/* (No Comment) */
 "shortcuts.disconnect" = "切断";
+
+/* (No Comment) */
 "shortcuts.select_region" = "地域の選択";
+
+/* (No Comment) */
 "vpn_permission.body.footer" = "弊社はネットワークアクティビティの監視、フィルタリング、記録は一切行いません。";
+
+/* (No Comment) */
 "vpn_permission.body.subtitle" = "先に進むには「%@」をタップしてください。";
+
+/* (No Comment) */
 "vpn_permission.body.title" = "PIAはお客様のトラフィックを確保するために、VPN設定にアクセスする必要があります。";
+
+/* (No Comment) */
 "vpn_permission.disallow.contact" = "お問い合わせ";
+
+/* (No Comment) */
 "vpn_permission.disallow.message.basic" = "アプリケーションが機能するためにはこの許可が必要です。";
+
+/* (No Comment) */
 "vpn_permission.disallow.message.support" = "ヘルプが必要な場合はカスタマーサポートにご連絡ください。";
+
+/* (No Comment) */
 "vpn_permission.title" = "PIA";
+
+/* (No Comment) */
 "walkthrough.action.done" = "完了";
+
+/* (No Comment) */
 "walkthrough.action.next" = "次へ";
+
+/* (No Comment) */
 "walkthrough.action.skip" = "スキップ";
+
+/* (No Comment) */
 "walkthrough.page.1.description" = "一度に最大5台の端末を保護して自分を守ることができます。";
+
+/* (No Comment) */
 "walkthrough.page.1.title" = "一度に5台の端末をサポート";
+
+/* (No Comment) */
 "walkthrough.page.2.description" = "世界中にサーバがあるので、常に保護された状態でいることができます。";
+
+/* (No Comment) */
 "walkthrough.page.2.title" = "あらゆる地域に簡単に接続";
+
+/* (No Comment) */
 "walkthrough.page.3.description" = "コンテンツブロッカーを有効にすると、Safariで広告表示をブロックできます。";
+
+/* (No Comment) */
 "walkthrough.page.3.title" = "広告から自分を守りましょう";
+
