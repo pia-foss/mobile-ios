@@ -66,7 +66,7 @@ end
 
 def tunnel_pods
     #tunnel_by_path('..')
-    tunnel_by_git('a224c2bd5d9755b61b6900907bc469c1a268c916')
+    tunnel_by_git('2e68a9decc4c57b1c26cab41ca41dab74033445e')
     #tunnel_by_version('1.0')
 end
 
