@@ -26,11 +26,13 @@ protocol PlainStore: class {
 
     var preferredPort: UInt16? { get set }
     
-    func pings(forServerIdentifier identifier: String) -> [Int]
+    func ping(forServerIdentifier serverIdentifier: String) -> Int?
     
-    func addPing(_ ping: Int, forServerIdentifier identifier: String)
+    func setPing(_ ping: Int, forServerIdentifier serverIdentifier: String)
     
     func serializePings()
+    
+    func clearPings()
     
     // MARK: VPN
     
