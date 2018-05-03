@@ -50,7 +50,6 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
                 log.debug("Elapsed \(elapsed) milliseconds (< \(pollInterval)) since last update (\(lastUpdateDate)), retrying in \(leftDelay) milliseconds...")
                 
                 scheduleServersUpdate(withDelay: leftDelay)
-                pingIfOffline(servers: accessedProviders.serverProvider.currentServers)
                 return
             }
         } else {
@@ -68,7 +67,7 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
             self.lastUpdateDate = Date()
             log.debug("Servers updated on \(self.lastUpdateDate!), will repeat in \(pollInterval) milliseconds")
             self.scheduleServersUpdate(withDelay: pollInterval)
-
+            
             guard let servers = servers else {
                 return
             }
@@ -108,12 +107,14 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
     @objc private func vpnStatusDidChange(notification: Notification) {
         if hasEnabledUpdates {
             checkOutdatedServers()
+            pingIfOffline(servers: accessedProviders.serverProvider.currentServers)
         }
     }
     
     @objc private func handleReachable() {
         if hasEnabledUpdates {
             checkOutdatedServers()
+            pingIfOffline(servers: accessedProviders.serverProvider.currentServers)
         }
     }
 }

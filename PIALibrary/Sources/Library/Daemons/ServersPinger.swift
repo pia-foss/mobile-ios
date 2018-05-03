@@ -66,6 +66,7 @@ class ServersPinger: DatabaseAccess {
 
             queue.async {
                 guard let responseTime = server.ping(withProtocol: .UDP) else {
+                    log.warning("No ping destination available for \(server.identifier)")
                     completionBlock(nil)
                     return
                 }
@@ -84,7 +85,7 @@ class ServersPinger: DatabaseAccess {
                     return
                 }
 
-                log.verbose("Response time from \(server.identifier): \(responseTime)")
+                log.debug("Response time from \(server.identifier): \(responseTime)")
                 completionBlock(responseTime)
             }
         }
