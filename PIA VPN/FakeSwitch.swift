@@ -17,6 +17,12 @@ class FakeSwitch: UIControl {
         }
     }
     
+    var isGrayed = false {
+        didSet {
+            switchUnderlying.isEnabled = !isGrayed
+        }
+    }
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
