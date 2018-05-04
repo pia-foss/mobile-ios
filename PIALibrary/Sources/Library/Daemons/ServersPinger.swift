@@ -66,13 +66,6 @@ class ServersPinger: DatabaseAccess {
 
             queue.async {
                 guard let responseTime = server.ping(withProtocol: .UDP) else {
-                    log.warning("No ping destination available for \(server.identifier)")
-                    completionBlock(nil)
-                    return
-                }
-
-                // discard high as timeout
-                guard (responseTime != .max) else {
                     log.warning("Error/timeout from \(server.identifier)")
                     completionBlock(nil)
                     return
