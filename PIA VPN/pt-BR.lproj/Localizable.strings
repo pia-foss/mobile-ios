@@ -305,21 +305,6 @@
 "settings.encryption.title" = "CRIPTOGRAFIA";
 
 /* (No Comment) */
-"settings.reset.defaults.confirm.button" = "Reset";
-
-/* (No Comment) */
-"settings.reset.defaults.confirm.message" = "This will bring the app back to default. You will lose all changes you have made.";
-
-/* (No Comment) */
-"settings.reset.defaults.confirm.title" = "Reset settings";
-
-/* (No Comment) */
-"settings.reset.defaults.title" = "Reset to default settings";
-
-/* (No Comment) */
-"settings.reset.title" = "RESET";
-
-/* (No Comment) */
 "shortcuts.connect" = "Conectar";
 
 /* (No Comment) */
