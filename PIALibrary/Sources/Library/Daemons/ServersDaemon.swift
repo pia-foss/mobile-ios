@@ -26,6 +26,7 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
     
     func start() {
         let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(applicationDidBecomeActive(notification:)), name: .UIApplicationDidBecomeActive, object: nil)
         nc.addObserver(self, selector: #selector(handleReachable), name: .ConnectivityDaemonDidGetReachable, object: nil)
         nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
     }
@@ -108,6 +109,12 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
     }
 
     // MARK: Notifications
+    
+    @objc private func applicationDidBecomeActive(notification: Notification) {
+        if hasEnabledUpdates {
+            pingIfOffline(servers: accessedProviders.serverProvider.currentServers)
+        }
+    }
     
     @objc private func vpnStatusDidChange(notification: Notification) {
         if hasEnabledUpdates {
