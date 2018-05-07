@@ -591,6 +591,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             }
             return footer.joined(separator: "\n\n")
             
+        case .reset:
+            return L10n.Settings.Reset.footer
+            
         case .contentBlocker:
             return L10n.Settings.ContentBlocker.footer
 
