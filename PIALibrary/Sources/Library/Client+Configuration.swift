@@ -61,8 +61,8 @@ extension Client {
         /// Enables background server pinging.
         public var enablesServerPings: Bool
         
-        /// Sets the max number of ping responses retained in history.
-        public var maxServerPingCount: Int
+        /// Sets the interval before which pings are not repeated.
+        public var minPingInterval: Int
 
         // MARK: Connectivity
 
@@ -157,7 +157,7 @@ extension Client {
             verifiesServersSignature = true
 
             enablesServerPings = false
-            maxServerPingCount = 1
+            minPingInterval = 120000
 
             availableVPNProfiles = [IPSecProfile()]
             vpnProfileName = "Private Internet Access"
