@@ -16,10 +16,20 @@ class ServersPinger: DatabaseAccess {
     static let shared = ServersPinger()
 
     private var pingQueues: [String: DispatchQueue] = [:]
+    
+    private var isPinging = false
 
     func ping(withDestinations destinations: [Server]) {
-        let plainStore = accessedDatabase.plain
+        guard !isPinging else {
+            log.warning("Skip pinging, latest attempt still pending completion")
+            return
+        }
+        
+        isPinging = true
 
+        let persistence = accessedDatabase.plain
+        persistence.clearPings()
+        
         var pingableServers: [Server] = []
         for server in destinations {
             guard let _ = server.pingAddress else {
@@ -38,56 +48,38 @@ class ServersPinger: DatabaseAccess {
                 pingQueues[server.identifier] = queue
             }
 
-            let pingTimes = plainStore.pings(forServerIdentifier: server.identifier)
-            let avgTime: Int?
-            let capTime: Int?
-            if let floatingAvgTime = pingTimes.avg() {
-                avgTime = Int(floatingAvgTime)
-                capTime = 2 * avgTime!
-                log.verbose("Pinging \(server.identifier) (avg: \(avgTime!))")
-            } else {
-                avgTime = nil
-                capTime = nil
-                log.verbose("Pinging \(server.identifier) (no history)")
-            }
+            log.verbose("Pinging \(server.identifier)")
 
-            queue.async {
-                guard var responseTime = server.ping(withProtocol: .UDP) else {
-                    return
-                }
-                var isValid = false
-
-                // discard biased pings
-                if (self.accessedDatabase.transient.vpnStatus != .disconnected) {
-                    log.warning("Discarded VPN-biased response from \(server.identifier): \(responseTime)")
-                }
-                // record highest (cap) on error/timeout, discard if no history
-                else if (responseTime == .max) {
-                    log.error("Error/timeout from \(server.identifier)")
-                    if let capTime = capTime {
-                        responseTime = capTime
-                        isValid = true
-                    }
-                }
-                else {
-                    log.verbose("Response time from \(server.identifier): \(responseTime)")
-                    if let capTime = capTime, (responseTime > capTime) {
-                        responseTime = capTime
-                        log.warning("Capped high response from \(server.identifier) to \(responseTime)")
-                    }
-                    isValid = true
-                }
-
+            let completionBlock: (Int?) -> Void = { (time) in
                 DispatchQueue.main.sync {
-                    if isValid {
-                        plainStore.addPing(responseTime, forServerIdentifier: server.identifier)
+                    if let responseTime = time {
+                        persistence.setPing(responseTime, forServerIdentifier: server.identifier)
                     }
                     remainingServers.remove(server)
                     if remainingServers.isEmpty {
-                        plainStore.serializePings()
+                        persistence.serializePings()
+                        self.isPinging = false
                         Macros.postNotification(.PIADaemonsDidPingServers)
                     }
                 }
+            }
+
+            queue.async {
+                guard let responseTime = server.ping(withProtocol: .UDP) else {
+                    log.warning("Error/timeout from \(server.identifier)")
+                    completionBlock(nil)
+                    return
+                }
+
+                // discard biased pings
+                guard (self.accessedDatabase.transient.vpnStatus == .disconnected) else {
+                    log.warning("Discarded VPN-biased response from \(server.identifier): \(responseTime)")
+                    completionBlock(nil)
+                    return
+                }
+
+                log.debug("Response time from \(server.identifier): \(responseTime)")
+                completionBlock(responseTime)
             }
         }
     }

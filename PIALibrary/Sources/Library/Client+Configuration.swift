@@ -157,7 +157,7 @@ extension Client {
             verifiesServersSignature = true
 
             enablesServerPings = false
-            maxServerPingCount = 10
+            maxServerPingCount = 1
 
             availableVPNProfiles = [IPSecProfile()]
             vpnProfileName = "Private Internet Access"
