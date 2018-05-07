@@ -49,6 +49,30 @@
 		</dict>
 		<dict>
 			<key>Name</key>
+			<string>MBProgressHUD</string>
+			<key>Copyright</key>
+			<string>Copyright © 2009-2016 Matej Bukovinski</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/jdg/MBProgressHUD/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>TPKeyboardAvoiding</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2013 Michael Tyson</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/michaeltyson/TPKeyboardAvoiding/master/LICENSE.txt</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>FXPageControl</string>
+			<key>Copyright</key>
+			<string>Copyright (C) 2010 Charcoal Design</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/nicklockwood/FXPageControl/master/LICENSE.md</string>
+		</dict>
+		<dict>
+			<key>Name</key>
 			<string>iRate</string>
 			<key>Copyright</key>
 			<string>Copyright (C) 2011 Charcoal Design</string>
