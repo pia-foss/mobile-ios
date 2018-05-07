@@ -99,7 +99,12 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
             return
         }
         log.debug("Start pinging servers")
-        ServersPinger.shared.ping(withDestinations: servers)
+
+        // XXX: add a little delay to work around broken iOS connectivity right
+        // after getting the network change notification
+        Macros.dispatch(after: .milliseconds(500)) {
+            ServersPinger.shared.ping(withDestinations: servers)
+        }
     }
 
     // MARK: Notifications
