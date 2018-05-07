@@ -18,6 +18,8 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
     
     private var lastUpdateDate: Date?
     
+    private var lastPingDate: Date?
+    
     private var pendingUpdateTimer: DispatchSourceTimer?
 
     private init() {
@@ -94,6 +96,16 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
             return
         }
         
+        // not before minimum interval
+        if let last = lastPingDate {
+            let elapsed = Int(-last.timeIntervalSinceNow * 1000.0)
+            guard (elapsed >= accessedConfiguration.minPingInterval) else {
+                log.debug("Not pinging servers before \(accessedConfiguration.minPingInterval) milliseconds (elapsed: \(elapsed))")
+                return
+            }
+        }
+        lastPingDate = Date()
+
         // pings must be issued when VPN is NOT active to avoid biased response times
         guard (accessedDatabase.transient.vpnStatus == .disconnected) else {
             log.debug("Not pinging servers while on VPN, will try on next update")
