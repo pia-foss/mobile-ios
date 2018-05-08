@@ -387,6 +387,21 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
         }
     }
     
+    func redeem(with request: RedeemRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
+        let redeem = Redeem(email: request.email, code: request.code)
+        
+        webServices?.redeem(with: redeem) { (credentials, error) in
+            guard let credentials = credentials else {
+                callback?(nil, error)
+                return
+            }
+            let user = UserAccount(credentials: credentials, info: nil)
+            self.currentUser = user
+            self.isLoggedIn = true
+            callback?(user, nil)
+        }
+    }
+    
     func listRenewablePlans(_ callback: (([Plan]?, Error?) -> Void)?) {
         fatalError("Not implemented")
     }

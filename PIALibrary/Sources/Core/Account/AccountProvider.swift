@@ -109,6 +109,18 @@ public protocol AccountProvider: class {
      - Parameter callback: Returns a newly created `UserAccount`.
      */
     func signup(with request: SignupRequest, _ callback: LibraryCallback<UserAccount>?)
+
+    /**
+     Signs up with a redeem code.
+ 
+     - Precondition: `isLoggedIn` is `false`.
+     - Postcondition:
+        - Sets `currentUser` on success.
+        - Posts `Notification.Name.PIAAccountDidSignup` on success.
+     - Parameter request: The redeem request.
+     - Parameter callback: Returns a newly created `UserAccount`.
+     */
+    func redeem(with request: RedeemRequest, _ callback: LibraryCallback<UserAccount>?)
     
     /**
      Lists plans available for renewal.
