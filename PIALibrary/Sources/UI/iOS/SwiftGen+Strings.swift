@@ -118,6 +118,25 @@ enum L10n {
       }
     }
 
+    enum Redeem {
+      /// SUBMIT
+      static let submit = L10n.tr("Welcome", "redeem.submit")
+      /// Type in your email address and the 16 digit PIN from your gift card or trial card below.
+      static let subtitle = L10n.tr("Welcome", "redeem.subtitle")
+      /// Redeem gift card
+      static let title = L10n.tr("Welcome", "redeem.title")
+
+      enum Code {
+        /// 0123456789AB
+        static let placeholder = L10n.tr("Welcome", "redeem.code.placeholder")
+      }
+
+      enum Email {
+        /// Email address
+        static let placeholder = L10n.tr("Welcome", "redeem.email.placeholder")
+      }
+    }
+
     enum Restore {
       /// CONFIRM
       static let submit = L10n.tr("Welcome", "restore.submit")

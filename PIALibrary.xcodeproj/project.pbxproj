@@ -160,6 +160,7 @@
 		0EA4C43A1FDDE24B0041C3D8 /* ServersBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4C4381FDDE24B0041C3D8 /* ServersBundle.swift */; };
 		0EA4C4421FDDFD840041C3D8 /* ServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4C4411FDDFD830041C3D8 /* ServerTests.swift */; };
 		0EA7065F1F80F448001E4F88 /* AccountProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA7065E1F80F448001E4F88 /* AccountProvider.swift */; };
+		0EA8072420A18C6B0033EC1A /* RedeemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA8072320A18C6B0033EC1A /* RedeemViewController.swift */; };
 		0EAA388B1F9CC4C4000149CF /* InAppProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA38881F9CC4C4000149CF /* InAppProduct.swift */; };
 		0EAA388C1F9CC4C4000149CF /* InAppProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA38891F9CC4C4000149CF /* InAppProvider.swift */; };
 		0EAA388D1F9CC4C4000149CF /* InAppTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA388A1F9CC4C4000149CF /* InAppTransaction.swift */; };
@@ -396,6 +397,7 @@
 		0EA4C4381FDDE24B0041C3D8 /* ServersBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersBundle.swift; sourceTree = "<group>"; };
 		0EA4C4411FDDFD830041C3D8 /* ServerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTests.swift; sourceTree = "<group>"; };
 		0EA7065E1F80F448001E4F88 /* AccountProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountProvider.swift; sourceTree = "<group>"; };
+		0EA8072320A18C6B0033EC1A /* RedeemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemViewController.swift; sourceTree = "<group>"; };
 		0EAA38881F9CC4C4000149CF /* InAppProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppProduct.swift; sourceTree = "<group>"; };
 		0EAA38891F9CC4C4000149CF /* InAppProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppProvider.swift; sourceTree = "<group>"; };
 		0EAA388A1F9CC4C4000149CF /* InAppTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppTransaction.swift; sourceTree = "<group>"; };
@@ -762,6 +764,7 @@
 				0E4D4E9A1FA4CA7A007DA6DA /* PurchasePlan.swift */,
 				0EB8C0541F9CD38A005857E4 /* PurchasePlanCell.swift */,
 				0EB8C0551F9CD38A005857E4 /* PurchaseViewController.swift */,
+				0EA8072320A18C6B0033EC1A /* RedeemViewController.swift */,
 				0EB8C0561F9CD38A005857E4 /* RestoreSignupViewController.swift */,
 				0EB8C0571F9CD38A005857E4 /* SignupFailureViewController.swift */,
 				0EB8C0581F9CD38A005857E4 /* SignupInProgressViewController.swift */,
@@ -1589,6 +1592,7 @@
 				0EB8C0681F9CD38B005857E4 /* PIAWelcomeViewController.swift in Sources */,
 				0E2ADD481FE1595300BB170C /* IPSecProfile.swift in Sources */,
 				0EFB51271F82A5F80033B81F /* Notification+Core.swift in Sources */,
+				0EA8072420A18C6B0033EC1A /* RedeemViewController.swift in Sources */,
 				0EE261E01FEFD69F00E11955 /* Notification+Library.swift in Sources */,
 				0EFEB4C22007784A00F81029 /* PIATunnelProfile.swift in Sources */,
 				0E392DBB1FE34B5A0002160D /* NSString+URL.m in Sources */,

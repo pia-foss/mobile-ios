@@ -22,8 +22,11 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         /// The purchase plan page.
         public static let purchase = Pages(rawValue: 0x02)
         
+        /// The redeem page.
+        public static let redeem = Pages(rawValue: 0x04)
+        
         /// All pages.
-        public static let all: Pages = [.login, .purchase]
+        public static let all: Pages = [.login, .purchase, .redeem]
         
         /// :nodoc:
         public let rawValue: Int
@@ -51,6 +54,12 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         
         /// The purchase email address.
         public var purchaseEmail: String?
+        
+        /// The redeem email address.
+        public var redeemEmail: String?
+        
+        /// The redeem code.
+        public var redeemCode: String?
         
         /// If `true`, tries to recover any pending signup process.
         public var shouldRecoverPendingSignup = true
