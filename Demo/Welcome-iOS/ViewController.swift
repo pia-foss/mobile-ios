@@ -35,6 +35,8 @@ class ViewController: UIViewController, PIAWelcomeViewControllerDelegate {
         preset.loginUsername = "p0000000"
         preset.loginPassword = "foobarbogus"
         preset.purchaseEmail = "foo@bar.com"
+        preset.redeemEmail = "foo@bar.com"
+        preset.redeemCode = "1234-1234-1234-1234"
         
         let vc = PIAWelcomeViewController.with(preset: preset, delegate: self)
         present(vc, animated: true, completion: nil)
