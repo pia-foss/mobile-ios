@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import SwiftyBeaver
+
+private let log = SwiftyBeaver.self
 
 class RedeemViewController: AutolayoutViewController, WelcomeChild {
     @IBOutlet private weak var scrollView: UIScrollView!
@@ -36,6 +39,10 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     var omitsSiblingLink: Bool = false
     
     var completionDelegate: WelcomeCompletionDelegate?
+
+    private var redeemEmail: String?
+    
+    private var redeemCode: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,9 +84,58 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     // MARK: Actions
 
     @IBAction private func redeem(_ sender: Any?) {
-        //
+        guard !buttonRedeem.isRunningActivity else {
+            return
+        }
+        
+        guard let email = textEmail.text, Validator.validate(email: email) else {
+            let alert = Macros.alert(
+                L10n.Welcome.Redeem.Error.title,
+                L10n.Welcome.Purchase.Error.validation
+            )
+            alert.addCancelAction(L10n.Ui.Global.ok)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        guard let code = textCode.text, Validator.validate(giftCode: code) else {
+            let alert = Macros.alert(
+                L10n.Welcome.Redeem.Error.title,
+                L10n.Welcome.Redeem.Error.code
+            )
+            alert.addCancelAction(L10n.Ui.Global.ok)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        
+        log.debug("Redeeming...")
+        
+        redeemEmail = email
+        redeemCode = code
+        perform(segue: StoryboardSegue.Welcome.signupViaRedeemSegue)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == StoryboardSegue.Welcome.signupViaRedeemSegue.rawValue) {
+            let nav = segue.destination as! UINavigationController
+            let vc = nav.topViewController as! SignupInProgressViewController
+            
+            guard let email = redeemEmail else {
+                fatalError("Redeeming and redeemEmail is not set")
+            }
+            guard let code = redeemCode else {
+                fatalError("Redeeming and redeemCode is not set")
+            }
+            var metadata = SignupMetadata(email: email)
+            metadata.title = L10n.Welcome.Redeem.title
+            metadata.bodySubtitle = L10n.Signup.InProgress.Redeem.message
+            vc.metadata = metadata
+            vc.redeemRequest = RedeemRequest(email: email, code: code)
+            vc.preset = preset
+            vc.completionDelegate = completionDelegate
+        }
+    }
+
     private func enableInteractions(_ enable: Bool) {
         parent?.view.isUserInteractionEnabled = enable
         if enable {

@@ -29,25 +29,29 @@ class SignupSuccessViewController: AutolayoutViewController {
     @IBOutlet private weak var labelPassword: UILabel!
 
     @IBOutlet private weak var buttonSubmit: ActivityButton!
-
-    var email: String!
-
-    var user: UserAccount!
+    
+    var metadata: SignupMetadata?
     
     weak var completionDelegate: WelcomeCompletionDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        guard let metadata = metadata else {
+            fatalError("Metadata not set")
+        }
+
+        title = metadata.title
+        imvPicture.image = metadata.bodyImage
+        labelTitle.text = metadata.bodyTitle
+        labelMessage.text = metadata.bodySubtitle
+
         navigationItem.hidesBackButton = true
 
-        imvPicture.image = Asset.imagePurchaseSuccess.image
-        labelTitle.text = L10n.Signup.Success.title
-        labelMessage.text = L10n.Signup.Success.messageFormat(email)
         labelUsernameCaption.text = L10n.Signup.Success.Username.caption
-        labelUsername.text = user.credentials.username
+        labelUsername.text = metadata.user?.credentials.username
         labelPasswordCaption.text = L10n.Signup.Success.Password.caption
-        labelPassword.text = user.credentials.password
+        labelPassword.text = metadata.user?.credentials.password
         buttonSubmit.title = L10n.Signup.Success.submit.uppercased()
 
         var backgroundImage = Asset.imageReceiptBackground.image
@@ -61,6 +65,9 @@ class SignupSuccessViewController: AutolayoutViewController {
     }
     
     @IBAction private func submit() {
+        guard let user = metadata?.user else {
+            fatalError("User account not set in metadata")
+        }
         completionDelegate?.welcomeDidSignup(withUser: user, topViewController: self)
     }
 

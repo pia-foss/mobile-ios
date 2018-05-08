@@ -82,6 +82,7 @@ enum StoryboardSegue {
   enum Welcome: String, SegueType {
     case signupViaPurchaseSegue = "SignupViaPurchaseSegue"
     case signupViaRecoverSegue = "SignupViaRecoverSegue"
+    case signupViaRedeemSegue = "SignupViaRedeemSegue"
     case signupViaRestoreSegue = "SignupViaRestoreSegue"
   }
 }

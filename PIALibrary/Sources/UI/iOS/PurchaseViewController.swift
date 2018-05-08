@@ -207,7 +207,11 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
             guard let email = signupEmail else {
                 fatalError("Signing up and signupEmail is not set")
             }
-            vc.request = SignupRequest(email: email, transaction: signupTransaction)
+            var metadata = SignupMetadata(email: email)
+            metadata.title = L10n.Signup.InProgress.title
+            metadata.bodySubtitle = L10n.Signup.InProgress.message
+            vc.metadata = metadata
+            vc.signupRequest = SignupRequest(email: email, transaction: signupTransaction)
             vc.preset = preset
             vc.completionDelegate = completionDelegate
         }

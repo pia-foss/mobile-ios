@@ -48,6 +48,10 @@ enum Asset {
   static let imageNoInternet = ImageAsset(name: "image-no-internet")
   static let imagePurchaseSuccess = ImageAsset(name: "image-purchase-success")
   static let imageReceiptBackground = ImageAsset(name: "image-receipt-background")
+  static let imageRedeemClaimed = ImageAsset(name: "image-redeem-claimed")
+  static let imageRedeemExpired = ImageAsset(name: "image-redeem-expired")
+  static let imageRedeemInvalid = ImageAsset(name: "image-redeem-invalid")
+  static let imageRedeemSuccess = ImageAsset(name: "image-redeem-success")
   static let navLogo = ImageAsset(name: "nav-logo")
 
   // swiftlint:disable trailing_comma
@@ -58,6 +62,10 @@ enum Asset {
     imageNoInternet,
     imagePurchaseSuccess,
     imageReceiptBackground,
+    imageRedeemClaimed,
+    imageRedeemExpired,
+    imageRedeemInvalid,
+    imageRedeemSuccess,
     navLogo,
   ]
   // swiftlint:enable trailing_comma

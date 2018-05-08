@@ -34,6 +34,8 @@
 "redeem.submit" = "SUBMIT";
 //"redeem.login.footer" = "Already have an account?";
 //"redeem.login.button" = "Sign in!";
+"redeem.error.title" = "Redeem";
+"redeem.error.code" = "Code must be 16 numeric digits.";
 
 "plan.monthly.title" = "Monthly";
 "plan.yearly.title" = "Yearly";

@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Client.providers.accountProvider = mock
         Client.useMockServerProvider()
         Client.useMockVPNProvider()
+        Client.useMockInAppProvider()
         Client.database.truncate()
         Client.bootstrap()
         

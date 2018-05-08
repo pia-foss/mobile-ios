@@ -127,13 +127,20 @@ enum L10n {
       static let title = L10n.tr("Welcome", "redeem.title")
 
       enum Code {
-        /// 0123456789AB
+        /// 1234-5678-9012-3456
         static let placeholder = L10n.tr("Welcome", "redeem.code.placeholder")
       }
 
       enum Email {
         /// Email address
         static let placeholder = L10n.tr("Welcome", "redeem.email.placeholder")
+      }
+
+      enum Error {
+        /// Code must be 16 numeric digits.
+        static let code = L10n.tr("Welcome", "redeem.error.code")
+        /// Redeem
+        static let title = L10n.tr("Welcome", "redeem.error.title")
       }
     }
 
@@ -178,11 +185,42 @@ enum L10n {
       static let submit = L10n.tr("Signup", "failure.submit")
       /// Account creation failed
       static let title = L10n.tr("Signup", "failure.title")
+
+      enum Redeem {
+
+        enum Claimed {
+          /// Looks like this card has already been claimed by another account. You can try entering a different PIN.
+          static let message = L10n.tr("Signup", "failure.redeem.claimed.message")
+          /// Card claimed already
+          static let title = L10n.tr("Signup", "failure.redeem.claimed.title")
+        }
+
+        enum Expired {
+          /// Looks like this card has expired. You can try entering a different PIN.
+          static let message = L10n.tr("Signup", "failure.redeem.expired.message")
+          /// Card expired
+          static let title = L10n.tr("Signup", "failure.redeem.expired.title")
+        }
+
+        enum Invalid {
+          /// Looks like you entered an invalid card PIN. Please try again.
+          static let message = L10n.tr("Signup", "failure.redeem.invalid.message")
+          /// Invalid card PIN
+          static let title = L10n.tr("Signup", "failure.redeem.invalid.title")
+        }
+      }
     }
 
     enum InProgress {
       /// We're confirming your purchase with our system. It could take a moment so hang in there.
       static let message = L10n.tr("Signup", "in_progress.message")
+      /// Confirm sign-up
+      static let title = L10n.tr("Signup", "in_progress.title")
+
+      enum Redeem {
+        /// We're confirming your card PIN with our system. It could take a moment so hang in there.
+        static let message = L10n.tr("Signup", "in_progress.redeem.message")
+      }
     }
 
     enum Success {
@@ -198,6 +236,13 @@ enum L10n {
       enum Password {
         /// Password
         static let caption = L10n.tr("Signup", "success.password.caption")
+      }
+
+      enum Redeem {
+        /// You will receive an email shortly with your username and password.
+        static let message = L10n.tr("Signup", "success.redeem.message")
+        /// Completed!
+        static let title = L10n.tr("Signup", "success.redeem.title")
       }
 
       enum Username {

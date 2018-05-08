@@ -167,6 +167,7 @@
 		0EA8072D20A1C7A30033EC1A /* RedeemRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA8072B20A1C7A20033EC1A /* RedeemRequest.swift */; };
 		0EA8072F20A1E7C60033EC1A /* GlossRedeem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA8072E20A1E7C60033EC1A /* GlossRedeem.swift */; };
 		0EA8073020A1E7C60033EC1A /* GlossRedeem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA8072E20A1E7C60033EC1A /* GlossRedeem.swift */; };
+		0EA8073220A2F50A0033EC1A /* SignupMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA8073120A2F50A0033EC1A /* SignupMetadata.swift */; };
 		0EAA388B1F9CC4C4000149CF /* InAppProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA38881F9CC4C4000149CF /* InAppProduct.swift */; };
 		0EAA388C1F9CC4C4000149CF /* InAppProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA38891F9CC4C4000149CF /* InAppProvider.swift */; };
 		0EAA388D1F9CC4C4000149CF /* InAppTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA388A1F9CC4C4000149CF /* InAppTransaction.swift */; };
@@ -407,6 +408,7 @@
 		0EA8072620A1A0090033EC1A /* Redeem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Redeem.swift; sourceTree = "<group>"; };
 		0EA8072B20A1C7A20033EC1A /* RedeemRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedeemRequest.swift; sourceTree = "<group>"; };
 		0EA8072E20A1E7C60033EC1A /* GlossRedeem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlossRedeem.swift; sourceTree = "<group>"; };
+		0EA8073120A2F50A0033EC1A /* SignupMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupMetadata.swift; sourceTree = "<group>"; };
 		0EAA38881F9CC4C4000149CF /* InAppProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppProduct.swift; sourceTree = "<group>"; };
 		0EAA38891F9CC4C4000149CF /* InAppProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppProvider.swift; sourceTree = "<group>"; };
 		0EAA388A1F9CC4C4000149CF /* InAppTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppTransaction.swift; sourceTree = "<group>"; };
@@ -780,6 +782,7 @@
 				0EB8C0571F9CD38A005857E4 /* SignupFailureViewController.swift */,
 				0EB8C0581F9CD38A005857E4 /* SignupInProgressViewController.swift */,
 				0EB8C0591F9CD38A005857E4 /* SignupInternetUnreachableViewController.swift */,
+				0EA8073120A2F50A0033EC1A /* SignupMetadata.swift */,
 				0EB8C05A1F9CD38A005857E4 /* SignupSuccessViewController.swift */,
 				0E2215CE2008DFD900F5FB4D /* SwiftGen+Assets.swift */,
 				0ED1585B1FDC0D1B008F6522 /* SwiftGen+Storyboards.swift */,
@@ -1559,6 +1562,7 @@
 				0EBBC6DC1F9F64E700B8BD21 /* Client+Environment.swift in Sources */,
 				0EB3D9821FF02FE5005B11F4 /* VPNAction.swift in Sources */,
 				0E2ADD371FE14F0000BB170C /* DefaultVPNProvider.swift in Sources */,
+				0EA8073220A2F50A0033EC1A /* SignupMetadata.swift in Sources */,
 				0E4D4E9F1FA4CA7A007DA6DA /* Restylable.swift in Sources */,
 				0EB8C06E1F9CD38B005857E4 /* SignupInternetUnreachableViewController.swift in Sources */,
 				0E75D8D31F9E3F9F00658D1E /* UserAccount.swift in Sources */,

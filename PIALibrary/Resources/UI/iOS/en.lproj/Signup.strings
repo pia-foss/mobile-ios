@@ -6,16 +6,26 @@
   Copyright © 2017 London Trust Media. All rights reserved.
 */
 
+"in_progress.title" = "Confirm sign-up";
 "in_progress.message" = "We're confirming your purchase with our system. It could take a moment so hang in there.";
+"in_progress.redeem.message" = "We're confirming your card PIN with our system. It could take a moment so hang in there.";
 
 "success.title" = "Purchase complete";
 "success.message_format" = "Thank you for signing up with us. We have sent your account username and password at your email address at %@";
+"success.redeem.title" = "Completed!";
+"success.redeem.message" = "You will receive an email shortly with your username and password.";
 "success.username.caption" = "Username";
 "success.password.caption" = "Password";
 "success.submit" = "GET STARTED";
 
 "failure.title" = "Account creation failed";
 "failure.message" = "We're unable to create an account at this time. Please try again later. Reopening the app will re-attempt to create an account.";
+"failure.redeem.invalid.title" = "Invalid card PIN";
+"failure.redeem.invalid.message" = "Looks like you entered an invalid card PIN. Please try again.";
+"failure.redeem.claimed.title" = "Card claimed already";
+"failure.redeem.claimed.message" = "Looks like this card has already been claimed by another account. You can try entering a different PIN.";
+"failure.redeem.expired.title" = "Card expired";
+"failure.redeem.expired.message" = "Looks like this card has expired. You can try entering a different PIN.";
 "failure.submit" = "GO BACK";
 
 "unreachable.title" = "Whoops!";

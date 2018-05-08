@@ -212,7 +212,11 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
             guard let request = pendingSignupRequest else {
                 fatalError("Recovering signup and pendingSignupRequest is not set")
             }
-            vc.request = request
+            var metadata = SignupMetadata(email: request.email)
+            metadata.title = L10n.Signup.InProgress.title
+            metadata.bodySubtitle = L10n.Signup.InProgress.message
+            vc.metadata = metadata
+            vc.signupRequest = request
         }
     }
     

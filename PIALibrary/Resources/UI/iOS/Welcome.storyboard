@@ -1110,8 +1110,8 @@ You will not be charged during this process.</string>
                                                         <variation key="default">
                                                             <mask key="constraints">
                                                                 <exclude reference="Cx0-9R-80o"/>
-                                                                <exclude reference="wiL-Hp-aF4"/>
                                                                 <exclude reference="gnC-Zx-jwS"/>
+                                                                <exclude reference="wiL-Hp-aF4"/>
                                                             </mask>
                                                         </variation>
                                                         <variation key="heightClass=compact">
@@ -1254,8 +1254,8 @@ You will not be charged during this process.</string>
                         <viewLayoutGuide key="safeArea" id="rwM-xJ-4Mg"/>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="nm6-jy-D7Z"/>
                                 <exclude reference="hLc-Dd-43g"/>
+                                <exclude reference="nm6-jy-D7Z"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -1277,6 +1277,7 @@ You will not be charged during this process.</string>
                         <outlet property="textCode" destination="pbJ-dg-A3t" id="3HI-fT-yNN"/>
                         <outlet property="textEmail" destination="3ne-g6-NDW" id="tUr-cH-df2"/>
                         <outlet property="viewFooter" destination="h4C-e9-6n1" id="xcl-1q-9mx"/>
+                        <segue destination="9jt-8I-K8i" kind="presentation" identifier="SignupViaRedeemSegue" id="Knv-fa-JGO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r3v-al-5qU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1288,6 +1289,6 @@ You will not be charged during this process.</string>
         <image name="nav-logo" width="354" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EEe-nI-dHO"/>
+        <segue reference="Knv-fa-JGO"/>
     </inferredMetricsTieBreakers>
 </document>
