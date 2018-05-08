@@ -25,14 +25,6 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>Alamofire</string>
-			<key>Copyright</key>
-			<string>Copyright (c) 2014-2018 Alamofire Software Foundation (http://alamofire.org/)</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/Alamofire/Alamofire/master/LICENSE</string>
-		</dict>
-		<dict>
-			<key>Name</key>
 			<string>SwifyBeaver</string>
 			<key>Copyright</key>
 			<string>Copyright (c) 2015 Sebastian Kreutzberger</string>
@@ -41,19 +33,35 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>SideMenu</string>
+			<string>Gloss</string>
 			<key>Copyright</key>
-			<string>Copyright (c) 2015 Jonathan Kent &lt;contact@jonkent.me&gt;</string>
+			<string>Copyright (c) 2017 Harlan Kellaway</string>
 			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/jonkykong/SideMenu/master/LICENSE</string>
+            <string>https://raw.githubusercontent.com/hkellaway/Gloss/develop/LICENSE</string>
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>MBProgressHUD</string>
+			<string>Alamofire</string>
 			<key>Copyright</key>
-			<string>Copyright © 2009-2016 Matej Bukovinski</string>
+			<string>Copyright (c) 2014-2018 Alamofire Software Foundation (http://alamofire.org/)</string>
 			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/jdg/MBProgressHUD/master/LICENSE</string>
+			<string>https://raw.githubusercontent.com/Alamofire/Alamofire/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>ReachabilitySwift</string>
+			<key>Copyright</key>
+            <string>Copyright (c) 2016 Ashley Mills</string>
+			<key>LicenseURL</key>
+            <string>https://raw.githubusercontent.com/ashleymills/Reachability.swift/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>iRate</string>
+			<key>Copyright</key>
+			<string>Copyright (C) 2011 Charcoal Design</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/nicklockwood/iRate/master/LICENCE.md</string>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -65,6 +73,14 @@
 		</dict>
 		<dict>
 			<key>Name</key>
+			<string>SideMenu</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2015 Jonathan Kent &lt;contact@jonkent.me&gt;</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/jonkykong/SideMenu/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
 			<string>FXPageControl</string>
 			<key>Copyright</key>
 			<string>Copyright (C) 2010 Charcoal Design</string>
@@ -73,11 +89,11 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>iRate</string>
+			<string>MBProgressHUD</string>
 			<key>Copyright</key>
-			<string>Copyright (C) 2011 Charcoal Design</string>
+			<string>Copyright © 2009-2016 Matej Bukovinski</string>
 			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/nicklockwood/iRate/master/LICENCE.md</string>
+			<string>https://raw.githubusercontent.com/jdg/MBProgressHUD/master/LICENSE</string>
 		</dict>
 	</array>
 </dict>
