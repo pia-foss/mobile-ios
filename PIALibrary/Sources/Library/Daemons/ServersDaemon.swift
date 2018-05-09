@@ -28,7 +28,9 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
     
     func start() {
         let nc = NotificationCenter.default
+        #if os(iOS)
         nc.addObserver(self, selector: #selector(applicationDidBecomeActive(notification:)), name: .UIApplicationDidBecomeActive, object: nil)
+        #endif
         nc.addObserver(self, selector: #selector(handleReachable), name: .ConnectivityDaemonDidGetReachable, object: nil)
         nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
     }
