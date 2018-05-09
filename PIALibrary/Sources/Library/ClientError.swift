@@ -51,9 +51,6 @@ public enum ClientError: String, Error {
     /// The redeem code was claimed already.
     case redeemClaimed
 
-    /// The redeem code has expired.
-    case redeemExpired
-    
     /// Trial accounts are not renewable.
     case renewingTrial
 

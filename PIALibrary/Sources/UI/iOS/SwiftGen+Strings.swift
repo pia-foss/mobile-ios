@@ -197,13 +197,6 @@ enum L10n {
           static let title = L10n.tr("Signup", "failure.redeem.claimed.title")
         }
 
-        enum Expired {
-          /// Looks like this card has expired. You can try entering a different PIN.
-          static let message = L10n.tr("Signup", "failure.redeem.expired.message")
-          /// Card expired
-          static let title = L10n.tr("Signup", "failure.redeem.expired.title")
-        }
-
         enum Invalid {
           /// Looks like you entered an invalid card PIN. Please try again.
           static let message = L10n.tr("Signup", "failure.redeem.invalid.message")

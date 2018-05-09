@@ -45,13 +45,6 @@ class SignupFailureViewController: AutolayoutViewController {
                 labelMessage.text = L10n.Signup.Failure.Redeem.Claimed.message
                 break
                 
-            case .redeemExpired:
-                title = L10n.Welcome.Redeem.title
-                imvPicture.image = Asset.imageRedeemExpired.image
-                labelTitle.text = L10n.Signup.Failure.Redeem.Expired.title
-                labelMessage.text = L10n.Signup.Failure.Redeem.Expired.message
-                break
-                
             default:
                 break
             }
