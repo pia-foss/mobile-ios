@@ -15,6 +15,8 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     private static let nonDigitsSet = CharacterSet.decimalDigits.inverted
     
     private static let rxCodeGrouping: NSRegularExpression = try! NSRegularExpression(pattern: "\\d{4}(?=\\d)", options: [])
+    
+    private static let maxCodeLength = 16
 
     @IBOutlet private weak var scrollView: UIScrollView!
     
@@ -196,11 +198,17 @@ extension RedeemViewController: UITextFieldDelegate {
         guard string.rangeOfCharacter(from: RedeemViewController.nonDigitsSet) == nil else {
             return false
         }
+        guard let newText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) else {
+            redeemCode = nil
+            return true
+        }
 
         let cursorLocation = textField.position(from: textField.beginningOfDocument, offset: range.location + string.count)
-        let newText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
-
-        redeemCode = newText?.replacingOccurrences(of: "-", with: "")
+        let newCode = newText.replacingOccurrences(of: "-", with: "")
+        guard newCode.count <= RedeemViewController.maxCodeLength else {
+            return false
+        }
+        redeemCode = newCode
         if let previousLocation = cursorLocation {
             textField.selectedTextRange = textField.textRange(from: previousLocation, to: previousLocation)
         }
