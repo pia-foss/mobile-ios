@@ -12,6 +12,8 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 class RedeemViewController: AutolayoutViewController, WelcomeChild {
+    private static let nonDigitsSet = CharacterSet.decimalDigits.inverted
+    
     @IBOutlet private weak var scrollView: UIScrollView!
     
     @IBOutlet private weak var labelTitle: UILabel!
@@ -167,6 +169,17 @@ extension RedeemViewController: UITextFieldDelegate {
             textCode.becomeFirstResponder()
         } else if (textField == textCode) {
             redeem(nil)
+        }
+        return true
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard textField == textCode else {
+            return true
+        }
+        
+        guard string.rangeOfCharacter(from: RedeemViewController.nonDigitsSet) == nil else {
+            return false
         }
         return true
     }
