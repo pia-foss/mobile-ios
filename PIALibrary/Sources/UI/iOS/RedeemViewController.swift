@@ -54,12 +54,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
                 textCode.text = nil
                 return
             }
-            textCode.text = RedeemViewController.rxCodeGrouping.stringByReplacingMatches(
-                in: code,
-                options: [],
-                range: NSMakeRange(0, code.count),
-                withTemplate: "$0-"
-            )
+            textCode.text = friendlyRedeemCode(code)
         }
     }
 
@@ -87,7 +82,9 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
 //        buttonLogin.accessibilityIdentifier = "uitests.redeem.submit"
 //        viewPurchase.accessibilityLabel = "\(labelPurchase1.text!) \(labelPurchase2.text!)"
         textEmail.text = preset.redeemEmail
-        redeemCode = preset.redeemCode // will set textCode
+        if let code = preset.redeemCode {
+            redeemCode = strippedRedeemCode(code) // will set textCode automatically
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -130,7 +127,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         log.debug("Redeeming...")
         
         redeemEmail = email
-        redeemCode = code
+//        redeemCode = code
         perform(segue: StoryboardSegue.Welcome.signupViaRedeemSegue)
     }
     
@@ -149,7 +146,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             metadata.title = L10n.Welcome.Redeem.title
             metadata.bodySubtitle = L10n.Signup.InProgress.Redeem.message
             vc.metadata = metadata
-            vc.redeemRequest = RedeemRequest(email: email, code: code)
+            vc.redeemRequest = RedeemRequest(email: email, code: friendlyRedeemCode(code))
             vc.preset = preset
             vc.completionDelegate = completionDelegate
         }
@@ -162,6 +159,21 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         } else {
             buttonRedeem.startActivity()
         }
+    }
+    
+    // MARK: Helpers
+    
+    private func friendlyRedeemCode(_ code: String) -> String {
+        return RedeemViewController.rxCodeGrouping.stringByReplacingMatches(
+            in: code,
+            options: [],
+            range: NSMakeRange(0, code.count),
+            withTemplate: "$0-"
+        )
+    }
+    
+    private func strippedRedeemCode(_ code: String) -> String {
+        return code.replacingOccurrences(of: "-", with: "")
     }
 
     // MARK: Restylable
@@ -204,7 +216,7 @@ extension RedeemViewController: UITextFieldDelegate {
         }
 
         let cursorLocation = textField.position(from: textField.beginningOfDocument, offset: range.location + string.count)
-        let newCode = newText.replacingOccurrences(of: "-", with: "")
+        let newCode = strippedRedeemCode(newText)
         guard newCode.count <= RedeemViewController.maxCodeLength else {
             return false
         }
