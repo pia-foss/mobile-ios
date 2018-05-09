@@ -11,10 +11,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Confirm sign-up-->
+        <!--<Success>-->
         <scene sceneID="YfK-cN-j93">
             <objects>
-                <viewController title="Confirm sign-up" id="Zr7-rl-bTc" customClass="SignupSuccessViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="&lt;Success&gt;" id="Zr7-rl-bTc" customClass="SignupSuccessViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hpb-Jj-DF3"/>
                         <viewControllerLayoutGuide type="bottom" id="txe-vu-Noy"/>
@@ -267,7 +267,7 @@
             </objects>
             <point key="canvasLocation" x="-2345" y="-2694"/>
         </scene>
-        <!--In progress-->
+        <!--<In progress>-->
         <scene sceneID="25u-z4-3Es">
             <objects>
                 <viewController id="QNJ-sc-3YJ" customClass="SignupInProgressViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
@@ -327,7 +327,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pxd-qG-Gcv"/>
                     </view>
-                    <navigationItem key="navigationItem" title="In progress" id="d7O-ZW-iGA"/>
+                    <navigationItem key="navigationItem" title="&lt;In progress&gt;" id="d7O-ZW-iGA"/>
                     <connections>
                         <outlet property="labelMessage" destination="1oT-kj-Od6" id="xgN-7N-3SH"/>
                         <outlet property="progressView" destination="FID-tb-BQ2" id="4y1-V1-KOL"/>
@@ -341,10 +341,10 @@
             </objects>
             <point key="canvasLocation" x="-1497" y="-2693"/>
         </scene>
-        <!--Sign-up failed-->
+        <!--<Failure>-->
         <scene sceneID="cVa-gD-uAW">
             <objects>
-                <viewController title="Sign-up failed" id="y97-XZ-bVl" customClass="SignupFailureViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="&lt;Failure&gt;" id="y97-XZ-bVl" customClass="SignupFailureViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pQf-9H-MT6"/>
                         <viewControllerLayoutGuide type="bottom" id="Lh8-QO-mzq"/>
@@ -529,10 +529,10 @@
             </objects>
             <point key="canvasLocation" x="-1498.125" y="-1900"/>
         </scene>
-        <!--Error-->
+        <!--<Unreachable>-->
         <scene sceneID="RBn-V8-N6F">
             <objects>
-                <viewController title="Error" id="MUM-1i-MG1" customClass="SignupUnreachableViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="&lt;Unreachable&gt;" id="MUM-1i-MG1" customClass="SignupUnreachableViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xRc-Jm-7AF"/>
                         <viewControllerLayoutGuide type="bottom" id="2FW-ef-akc"/>

@@ -185,6 +185,8 @@ enum L10n {
       static let submit = L10n.tr("Signup", "failure.submit")
       /// Account creation failed
       static let title = L10n.tr("Signup", "failure.title")
+      /// Sign-up failed
+      static let vcTitle = L10n.tr("Signup", "failure.vc_title")
 
       enum Redeem {
 
@@ -258,6 +260,8 @@ enum L10n {
       static let submit = L10n.tr("Signup", "unreachable.submit")
       /// Whoops!
       static let title = L10n.tr("Signup", "unreachable.title")
+      /// Error
+      static let vcTitle = L10n.tr("Signup", "unreachable.vc_title")
     }
   }
 }

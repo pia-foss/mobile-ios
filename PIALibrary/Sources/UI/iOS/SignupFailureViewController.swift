@@ -24,6 +24,7 @@ class SignupFailureViewController: AutolayoutViewController {
         
         navigationItem.hidesBackButton = true
 
+        title = L10n.Signup.Failure.vcTitle
         imvPicture.image = Asset.imageAccountFailed.image
         labelTitle.text = L10n.Signup.Failure.title
         labelMessage.text = L10n.Signup.Failure.message
