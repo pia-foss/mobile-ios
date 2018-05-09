@@ -25,7 +25,6 @@ class ViewController: UIViewController, PIAWelcomeViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        _ = Client.preferences.editable().reset()
         refresh(user: nil)
     }
 

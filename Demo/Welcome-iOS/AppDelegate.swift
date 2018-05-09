@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Client.environment = .staging
         Client.configuration.setPlan(.monthly, forProductIdentifier: "com.privateinternetaccess.ios.iap.1month")
         Client.configuration.setPlan(.yearly, forProductIdentifier: "com.privateinternetaccess.ios.iap.1year")
+        Client.database.truncate()
         Client.bootstrap()
         
         Theme.current.palette.accent1 = .blue
