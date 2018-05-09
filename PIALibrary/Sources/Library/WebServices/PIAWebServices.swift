@@ -102,14 +102,11 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                 var specificError: ClientError = .malformedResponseData
                 if let code = json["code"] as? String {
                     switch code {
-                    case "not_found":
+                    case "not_found", "canceled":
                         specificError = .redeemInvalid
                         
                     case "redeemed":
                         specificError = .redeemClaimed
-
-                    case "invalid":
-                        specificError = .redeemExpired
                         
                     default:
                         break

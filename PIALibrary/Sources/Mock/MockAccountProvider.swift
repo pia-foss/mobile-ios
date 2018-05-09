@@ -35,13 +35,10 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
         case success
         
         /// Redeem code is invalid.
-        case notFound
+        case invalid
 
         /// Redeem code already claimed.
         case claimed
-
-        /// Redeem code expired.
-        case expired
     }
     
     /// Fakes authentication outcome.
@@ -203,14 +200,11 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
             case .success:
                 self.delegate.redeem(with: request, callback)
                 
-            case .notFound:
+            case .invalid:
                 callback?(nil, ClientError.redeemInvalid)
                 
             case .claimed:
                 callback?(nil, ClientError.redeemClaimed)
-
-            case .expired:
-                callback?(nil, ClientError.redeemExpired)
             }
         }
     }
