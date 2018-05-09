@@ -14,6 +14,8 @@ private let log = SwiftyBeaver.self
 class RedeemViewController: AutolayoutViewController, WelcomeChild {
     private static let nonDigitsSet = CharacterSet.decimalDigits.inverted
     
+    private static let rxCodeGrouping: NSRegularExpression = try! NSRegularExpression(pattern: "\\d{4}(?=\\d)", options: [])
+
     @IBOutlet private weak var scrollView: UIScrollView!
     
     @IBOutlet private weak var labelTitle: UILabel!
@@ -44,7 +46,20 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
 
     private var redeemEmail: String?
     
-    private var redeemCode: String?
+    private var redeemCode: String? {
+        didSet {
+            guard let code = redeemCode else {
+                textCode.text = nil
+                return
+            }
+            textCode.text = RedeemViewController.rxCodeGrouping.stringByReplacingMatches(
+                in: code,
+                options: [],
+                range: NSMakeRange(0, code.count),
+                withTemplate: "$0-"
+            )
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +85,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
 //        buttonLogin.accessibilityIdentifier = "uitests.redeem.submit"
 //        viewPurchase.accessibilityLabel = "\(labelPurchase1.text!) \(labelPurchase2.text!)"
         textEmail.text = preset.redeemEmail
-        textCode.text = preset.redeemCode
+        redeemCode = preset.redeemCode // will set textCode
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -99,7 +114,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             present(alert, animated: true, completion: nil)
             return
         }
-        guard let code = textCode.text, Validator.validate(giftCode: code) else {
+        guard let code = redeemCode, Validator.validate(giftCode: code) else {
             let alert = Macros.alert(
                 L10n.Welcome.Redeem.Error.title,
                 L10n.Welcome.Redeem.Error.code
@@ -181,6 +196,15 @@ extension RedeemViewController: UITextFieldDelegate {
         guard string.rangeOfCharacter(from: RedeemViewController.nonDigitsSet) == nil else {
             return false
         }
-        return true
+
+        let cursorLocation = textField.position(from: textField.beginningOfDocument, offset: range.location + string.count)
+        let newText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
+
+        redeemCode = newText?.replacingOccurrences(of: "-", with: "")
+        if let previousLocation = cursorLocation {
+            textField.selectedTextRange = textField.textRange(from: previousLocation, to: previousLocation)
+        }
+
+        return false
     }
 }
