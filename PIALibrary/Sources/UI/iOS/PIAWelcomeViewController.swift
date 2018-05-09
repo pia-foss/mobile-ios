@@ -119,7 +119,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         super.viewDidLoad()
         
         guard !preset.accountProvider.isLoggedIn else {
-            fatalError("You are already logged in, reset the state of Client.preferences")
+            fatalError("You are already logged in, you might want to Client.database.truncate() to start clean")
         }
         
         imvLogo.image = Theme.current.palette.logo
