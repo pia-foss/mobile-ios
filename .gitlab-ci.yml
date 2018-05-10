@@ -36,8 +36,9 @@ stages:
 qa_archive:
     stage: archive
     variables:
-        GYM_SCHEME: "PIA VPN dev"
         MATCH_TYPE: "adhoc"
+        GYM_SCHEME: "PIA VPN dev"
+        GYM_EXPORT_METHOD: "ad-hoc"
     script:
         - bundle exec fastlane create_archive
     artifacts:
@@ -94,8 +95,9 @@ qa_notify:
 beta_archive:
     stage: archive
     variables:
-        GYM_SCHEME: "PIA VPN"
         MATCH_TYPE: "appstore"
+        GYM_SCHEME: "PIA VPN"
+        GYM_EXPORT_METHOD: "app-store"
     script:
         #- bundle exec fastlane clean_openssl
         - bundle exec fastlane create_archive
