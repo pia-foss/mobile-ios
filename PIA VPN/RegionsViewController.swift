@@ -19,6 +19,10 @@ class RegionsViewController: AutolayoutViewController {
     private var servers: [Server] = []
 
     private var selectedServer: Server!
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +33,8 @@ class RegionsViewController: AutolayoutViewController {
         self.servers = servers
 
         selectedServer = Client.preferences.displayedServer
+
+        NotificationCenter.default.addObserver(self, selector: #selector(pingsDidComplete(notification:)), name: .PIADaemonsDidPingServers, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,6 +88,12 @@ class RegionsViewController: AutolayoutViewController {
             break
         }
         return true
+    }
+    
+    // MARK: Notifications
+    
+    @objc private func pingsDidComplete(notification: Notification) {
+        tableView.reloadData()
     }
     
     // MARK: Restylable

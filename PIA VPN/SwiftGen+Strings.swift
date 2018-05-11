@@ -415,6 +415,8 @@ enum L10n {
     }
 
     enum Reset {
+      /// This will reset all of the above settings to default.
+      static let footer = L10n.tr("Localizable", "settings.reset.footer")
       /// RESET
       static let title = L10n.tr("Localizable", "settings.reset.title")
 

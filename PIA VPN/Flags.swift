@@ -28,7 +28,7 @@ class Flags: NSObject {
 
     @objc private(set) var alwaysShowsWalkthrough = false
 
-    @objc private(set) var enablesResetSettings = false
+    @objc private(set) var enablesResetSettings = true
     
     @objc private(set) var enablesProtocolSelection = true
 

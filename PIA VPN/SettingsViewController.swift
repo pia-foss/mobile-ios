@@ -84,9 +84,9 @@ class SettingsViewController: AutolayoutViewController {
         .connection,
         .encryption,
         .applicationSettings,
-        .contentBlocker,
         .applicationInformation,
-        .reset
+        .reset,
+        .contentBlocker
     ]
 
     private var visibleSections: [Section] = []
@@ -186,6 +186,7 @@ class SettingsViewController: AutolayoutViewController {
         }
         switchPersistent.addTarget(self, action: #selector(togglePersistentConnection(_:)), for: .valueChanged)
         switchMACE.addTarget(self, action: #selector(toggleMACE(_:)), for: .valueChanged)
+//        switchContentBlocker.isGrayed = true
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
         switchDarkMode.addTarget(self, action: #selector(toggleDarkMode(_:)), for: .valueChanged)
         redisplaySettings()
@@ -589,6 +590,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 footer.append(L10n.Settings.ApplicationSettings.Mace.footer)
             }
             return footer.joined(separator: "\n\n")
+            
+        case .reset:
+            return L10n.Settings.Reset.footer
             
         case .contentBlocker:
             return L10n.Settings.ContentBlocker.footer
