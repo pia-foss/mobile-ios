@@ -21,14 +21,20 @@ class MockWebServices: WebServices {
         callback?(result, error)
     }
     
+    func update(credentials: Credentials, email: String, _ callback: SuccessLibraryCallback?) {
+        callback?(nil)
+    }
+    
     func signup(with request: Signup, _ callback: ((Credentials?, Error?) -> Void)?) {
         let result = credentials?()
         let error: ClientError? = (result == nil) ? .unsupported : nil
         callback?(result, error)
     }
     
-    func update(credentials: Credentials, email: String, _ callback: SuccessLibraryCallback?) {
-        callback?(nil)
+    func redeem(with request: Redeem, _ callback: ((Credentials?, Error?) -> Void)?) {
+        let result = credentials?()
+        let error: ClientError? = (result == nil) ? .unsupported : nil
+        callback?(result, error)
     }
     
     func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?) {

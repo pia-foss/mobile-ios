@@ -6,6 +6,7 @@ abstract_target 'iOS' do
 
     target 'Welcome-iOS' do
         pod 'PIALibrary/UI', :path => '..'
+        pod 'PIALibrary/Mock', :path => '..'
     end
 end
 

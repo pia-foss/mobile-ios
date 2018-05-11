@@ -22,6 +22,7 @@ class SignupUnreachableViewController: AutolayoutViewController {
 
         navigationItem.hidesBackButton = true
 
+        title = L10n.Signup.Unreachable.vcTitle
         imvPicture.image = Asset.imageNoInternet.image
         labelTitle.text = L10n.Signup.Unreachable.title
         labelMessage.text = L10n.Signup.Unreachable.message

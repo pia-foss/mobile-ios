@@ -22,8 +22,11 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         /// The purchase plan page.
         public static let purchase = Pages(rawValue: 0x02)
         
+        /// The redeem page.
+        public static let redeem = Pages(rawValue: 0x04)
+        
         /// All pages.
-        public static let all: Pages = [.login, .purchase]
+        public static let all: Pages = [.login, .purchase, .redeem]
         
         /// :nodoc:
         public let rawValue: Int
@@ -51,6 +54,12 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         
         /// The purchase email address.
         public var purchaseEmail: String?
+        
+        /// The redeem email address.
+        public var redeemEmail: String?
+        
+        /// The redeem code.
+        public var redeemCode: String?
         
         /// If `true`, tries to recover any pending signup process.
         public var shouldRecoverPendingSignup = true
@@ -119,7 +128,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         super.viewDidLoad()
         
         guard !preset.accountProvider.isLoggedIn else {
-            fatalError("You are already logged in, reset the state of Client.preferences")
+            fatalError("You are already logged in, you might want to Client.database.truncate() to start clean")
         }
         
         imvLogo.image = Theme.current.palette.logo
@@ -203,7 +212,11 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
             guard let request = pendingSignupRequest else {
                 fatalError("Recovering signup and pendingSignupRequest is not set")
             }
-            vc.request = request
+            var metadata = SignupMetadata(email: request.email)
+            metadata.title = L10n.Signup.InProgress.title
+            metadata.bodySubtitle = L10n.Signup.InProgress.message
+            vc.metadata = metadata
+            vc.signupRequest = request
         }
     }
     
@@ -367,6 +380,21 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
         }
 
         webServices?.signup(with: signup) { (credentials, error) in
+            guard let credentials = credentials else {
+                callback?(nil, error)
+                return
+            }
+            let user = UserAccount(credentials: credentials, info: nil)
+            self.currentUser = user
+            self.isLoggedIn = true
+            callback?(user, nil)
+        }
+    }
+    
+    func redeem(with request: RedeemRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
+        let redeem = Redeem(email: request.email, code: request.code)
+        
+        webServices?.redeem(with: redeem) { (credentials, error) in
             guard let credentials = credentials else {
                 callback?(nil, error)
                 return

@@ -66,6 +66,8 @@ enum StoryboardScene {
     static let loginViewController = SceneType<PIALibrary.LoginViewController>(storyboard: Welcome.self, identifier: "LoginViewController")
 
     static let purchaseViewController = SceneType<PIALibrary.PurchaseViewController>(storyboard: Welcome.self, identifier: "PurchaseViewController")
+
+    static let redeemViewController = SceneType<PIALibrary.RedeemViewController>(storyboard: Welcome.self, identifier: "RedeemViewController")
   }
 }
 
@@ -80,6 +82,7 @@ enum StoryboardSegue {
   enum Welcome: String, SegueType {
     case signupViaPurchaseSegue = "SignupViaPurchaseSegue"
     case signupViaRecoverSegue = "SignupViaRecoverSegue"
+    case signupViaRedeemSegue = "SignupViaRedeemSegue"
     case signupViaRestoreSegue = "SignupViaRestoreSegue"
   }
 }

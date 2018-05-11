@@ -28,8 +28,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         static let preferredPort = "PreferredPort"
         
-        static let pingHistory = "ServersPingHistory"
-
+        static let pingByServerIdentifier = "PingByServerIdentifier"
+        
         static let vpnType = "VPNType"
         
         static let vpnCustomConfigurationMaps = "VPNCustomConfigurationMaps"
@@ -47,7 +47,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
     
     private var serversConfigurationCopy: ServersBundle.Configuration?
     
-    private var pingsByServerIdentifier: [String: [Int]] = [:]
+    private var pingByServerIdentifier: [String: Int] = [:]
     
     init() {
         backend = UserDefaults.standard
@@ -65,7 +65,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
     }
     
     private func loadComplexMaps() {
-        pingsByServerIdentifier = backend.dictionary(forKey: Entries.pingHistory) as? [String: [Int]] ?? [:]
+        pingByServerIdentifier = backend.dictionary(forKey: Entries.pingByServerIdentifier) as? [String: Int] ?? [:]
     }
     
     deinit {
@@ -159,22 +159,20 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
     
-    func pings(forServerIdentifier identifier: String) -> [Int] {
-        return pingsByServerIdentifier[identifier] ?? []
+    func ping(forServerIdentifier serverIdentifier: String) -> Int? {
+        return pingByServerIdentifier[serverIdentifier]
     }
     
-    func addPing(_ ping: Int, forServerIdentifier identifier: String) {
-        var history = pingsByServerIdentifier[identifier] ?? []
-        history.append(ping)
-        while (history.count > accessedConfiguration.maxServerPingCount) {
-            history.removeFirst()
-        }
-        pingsByServerIdentifier[identifier] = history
+    func setPing(_ ping: Int, forServerIdentifier serverIdentifier: String) {
+        pingByServerIdentifier[serverIdentifier] = ping
     }
     
     func serializePings() {
-        log.verbose("Serializing ping history: \(pingsByServerIdentifier)")
-        backend.set(pingsByServerIdentifier, forKey: Entries.pingHistory)
+        backend.set(pingByServerIdentifier, forKey: Entries.pingByServerIdentifier)
+    }
+    
+    func clearPings() {
+        pingByServerIdentifier.removeAll()
     }
     
     // MARK: VPN

@@ -70,17 +70,20 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
     
     /// :nodoc:
     public var currentServers: [Server] {
-        return delegate.currentServers
+//        return delegate.currentServers
+        return mockServers
     }
     
     /// :nodoc:
     public var bestServer: Server? {
-        return delegate.bestServer
+//        return delegate.bestServer
+        return mockServers.first
     }
     
     /// :nodoc:
     public var targetServer: Server {
-        return delegate.targetServer
+//        return delegate.targetServer
+        return mockServers.last!
     }
     
     /// :nodoc:

@@ -16,15 +16,40 @@ class SignupFailureViewController: AutolayoutViewController {
     @IBOutlet private weak var labelMessage: UILabel!
 
     @IBOutlet private weak var buttonSubmit: ActivityButton!
+    
+    var error: Error?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.hidesBackButton = true
 
+        title = L10n.Signup.Failure.vcTitle
         imvPicture.image = Asset.imageAccountFailed.image
         labelTitle.text = L10n.Signup.Failure.title
         labelMessage.text = L10n.Signup.Failure.message
+            
+        if let clientError = error as? ClientError {
+            switch clientError {
+            case .redeemInvalid:
+                title = L10n.Welcome.Redeem.title
+                imvPicture.image = Asset.imageRedeemInvalid.image
+                labelTitle.text = L10n.Signup.Failure.Redeem.Invalid.title
+                labelMessage.text = L10n.Signup.Failure.Redeem.Invalid.message
+                break
+                
+            case .redeemClaimed:
+                title = L10n.Welcome.Redeem.title
+                imvPicture.image = Asset.imageRedeemClaimed.image
+                labelTitle.text = L10n.Signup.Failure.Redeem.Claimed.title
+                labelMessage.text = L10n.Signup.Failure.Redeem.Claimed.message
+                break
+                
+            default:
+                break
+            }
+        }
+        
         buttonSubmit.title = L10n.Signup.Failure.submit.uppercased()
     }
 

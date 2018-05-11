@@ -25,7 +25,7 @@ class MemoryStore: TransientStore, ConfigurationAccess {
             internalServersConfiguration = newValue
         }
     }
-
+    
     // MARK: VPN
 
     var activeVPNProfile: VPNProfile?

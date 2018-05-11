@@ -45,6 +45,12 @@ public enum ClientError: String, Error {
     /// The selected in-app product is not available.
     case productUnavailable
     
+    /// The redeem code is invalid.
+    case redeemInvalid
+    
+    /// The redeem code was claimed already.
+    case redeemClaimed
+
     /// Trial accounts are not renewable.
     case renewingTrial
 

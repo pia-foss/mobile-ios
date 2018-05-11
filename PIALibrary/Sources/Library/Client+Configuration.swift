@@ -32,6 +32,18 @@ extension Client {
             return url
         }
 
+        let tosPath: String
+        
+        var tosUrl: String {
+            return "\(baseUrl)/\(tosPath)"
+        }
+        
+        let privacyPath: String
+        
+        var privacyUrl: String {
+            return "\(baseUrl)/\(privacyPath)"
+        }
+        
         /// The timeout for web requests.
         public var webTimeout: Int
         
@@ -61,8 +73,8 @@ extension Client {
         /// Enables background server pinging.
         public var enablesServerPings: Bool
         
-        /// Sets the max number of ping responses retained in history.
-        public var maxServerPingCount: Int
+        /// Sets the interval before which pings are not repeated.
+        public var minPingInterval: Int
 
         // MARK: Connectivity
 
@@ -139,6 +151,8 @@ extension Client {
                 .production: production,
                 .staging: production
             ]
+            tosPath = "pages/terms-of-service"
+            privacyPath = "pages/privacy-policy"
 
             webTimeout = 10000
             
@@ -157,7 +171,7 @@ extension Client {
             verifiesServersSignature = true
 
             enablesServerPings = false
-            maxServerPingCount = 10
+            minPingInterval = 120000
 
             availableVPNProfiles = [IPSecProfile()]
             vpnProfileName = "Private Internet Access"

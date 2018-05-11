@@ -16,50 +16,93 @@ class SignupInProgressViewController: AutolayoutViewController {
 
     @IBOutlet private weak var labelMessage: UILabel!
 
-    var request: SignupRequest!
+    var signupRequest: SignupRequest?
 
+    var redeemRequest: RedeemRequest?
+    
     var preset: PIAWelcomeViewController.Preset?
 
+    var metadata: SignupMetadata?
+    
     weak var completionDelegate: WelcomeCompletionDelegate?
     
     private var user: UserAccount?
     
+    private var error: Error?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        labelMessage.text = L10n.Signup.InProgress.message
+        title = metadata?.title
+        labelMessage.text = metadata?.bodySubtitle
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         progressView.startAnimating()
-        performSignup()
+
+        if let request = signupRequest {
+            performSignup(with: request)
+        } else if let request = redeemRequest {
+            performRedeem(with: request)
+        }
     }
     
-    private func performSignup() {
+    private func performSignup(with request: SignupRequest) {
         log.debug("Signing up...")
 
         preset?.accountProvider.signup(with: request) { (user, error) in
             guard let user = user else {
                 self.user = nil
+                self.error = error
                 if let clientError = error as? ClientError, (clientError == .internetUnreachable) {
                     log.error("Failed to sign up: Internet is unreachable")
                     self.perform(segue: StoryboardSegue.Signup.internetUnreachableSegueIdentifier, sender: nil)
-                } else {
-                    if let error = error {
-                        log.error("Failed to sign up (error: \(error))")
-                    } else {
-                        log.error("Failed to sign up")
-                    }
-                    self.perform(segue: StoryboardSegue.Signup.failureSegueIdentifier)
+                    return
                 }
+                if let error = error {
+                    log.error("Failed to sign up (error: \(error))")
+                } else {
+                    log.error("Failed to sign up")
+                }
+                self.perform(segue: StoryboardSegue.Signup.failureSegueIdentifier)
                 return
             }
 
             log.debug("Sign-up succeeded!")
 
             self.user = user
+            self.error = nil
+            self.perform(segue: StoryboardSegue.Signup.successSegueIdentifier)
+        }
+    }
+    
+    private func performRedeem(with request: RedeemRequest) {
+        log.debug("Redeeming...")
+        
+        preset?.accountProvider.redeem(with: request) { (user, error) in
+            guard let user = user else {
+                self.user = nil
+                self.error = error
+                if let clientError = error as? ClientError, (clientError == .internetUnreachable) {
+                    log.error("Failed to redeem: Internet is unreachable")
+                    self.perform(segue: StoryboardSegue.Signup.internetUnreachableSegueIdentifier, sender: nil)
+                    return
+                }
+                if let error = error {
+                    log.error("Failed to redeem (error: \(error))")
+                } else {
+                    log.error("Failed to redeem")
+                }
+                self.perform(segue: StoryboardSegue.Signup.failureSegueIdentifier)
+                return
+            }
+            
+            log.debug("Redeem succeeded!")
+            
+            self.user = user
+            self.error = nil
             self.perform(segue: StoryboardSegue.Signup.successSegueIdentifier)
         }
     }
@@ -70,12 +113,29 @@ class SignupInProgressViewController: AutolayoutViewController {
         }
         switch segueType {
         case .successSegueIdentifier:
+            guard let email = signupRequest?.email ?? redeemRequest?.email else {
+                fatalError("Email not provided with signup or redeem request")
+            }
+            
             let vc = segue.destination as! SignupSuccessViewController
-            vc.email = request.email
-            vc.user = user
+            var metadata = SignupMetadata(email: email, user: user)
+            if let _ = signupRequest {
+                metadata.title = L10n.Signup.InProgress.title
+                metadata.bodyImage = Asset.imagePurchaseSuccess.image
+                metadata.bodyTitle = L10n.Signup.Success.title
+                metadata.bodySubtitle = L10n.Signup.Success.messageFormat(metadata.email)
+            } else if let _ = redeemRequest {
+                metadata.title = L10n.Welcome.Redeem.title
+                metadata.bodyImage = Asset.imageRedeemSuccess.image
+                metadata.bodyTitle = L10n.Signup.Success.Redeem.title
+                metadata.bodySubtitle = L10n.Signup.Success.Redeem.message
+            }
+            vc.metadata = metadata
             vc.completionDelegate = completionDelegate
             
         case .failureSegueIdentifier:
+            let vc = segue.destination as! SignupFailureViewController
+            vc.error = error
             break
 
         default:

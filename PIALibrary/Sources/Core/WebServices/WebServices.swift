@@ -22,7 +22,9 @@ protocol WebServices: class {
 
     #if os(iOS)
     func signup(with request: Signup, _ callback: LibraryCallback<Credentials>?)
-    
+
+    func redeem(with request: Redeem, _ callback: LibraryCallback<Credentials>?)
+
     func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?)
     #endif
     

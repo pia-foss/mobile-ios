@@ -19,9 +19,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         SwiftyBeaver.addDestination(ConsoleDestination())
         
-        Client.environment = .staging
+        let mock = MockAccountProvider()
+        mock.mockRedeemOutcome = .claimed
+        
+        Client.environment = .production
         Client.configuration.setPlan(.monthly, forProductIdentifier: "com.privateinternetaccess.ios.iap.1month")
         Client.configuration.setPlan(.yearly, forProductIdentifier: "com.privateinternetaccess.ios.iap.1year")
+        Client.providers.accountProvider = mock
+        Client.useMockServerProvider()
+        Client.useMockVPNProvider()
+        Client.useMockInAppProvider()
+        Client.database.truncate()
         Client.bootstrap()
         
         Theme.current.palette.accent1 = .blue

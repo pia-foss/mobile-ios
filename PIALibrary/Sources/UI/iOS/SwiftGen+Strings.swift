@@ -9,6 +9,18 @@ import Foundation
 enum L10n {
   enum Welcome {
 
+    enum Agreement {
+      /// Signing up constitutes acceptance of the $1 and the $2.
+      static let message = L10n.tr("Welcome", "agreement.message")
+
+      enum Message {
+        /// Privacy Policy
+        static let privacy = L10n.tr("Welcome", "agreement.message.privacy")
+        /// Terms of Service
+        static let tos = L10n.tr("Welcome", "agreement.message.tos")
+      }
+    }
+
     enum Iap {
 
       enum Error {
@@ -118,6 +130,32 @@ enum L10n {
       }
     }
 
+    enum Redeem {
+      /// SUBMIT
+      static let submit = L10n.tr("Welcome", "redeem.submit")
+      /// Type in your email address and the 16 digit PIN from your gift card or trial card below.
+      static let subtitle = L10n.tr("Welcome", "redeem.subtitle")
+      /// Redeem gift card
+      static let title = L10n.tr("Welcome", "redeem.title")
+
+      enum Code {
+        /// 1234-5678-9012-3456
+        static let placeholder = L10n.tr("Welcome", "redeem.code.placeholder")
+      }
+
+      enum Email {
+        /// Email address
+        static let placeholder = L10n.tr("Welcome", "redeem.email.placeholder")
+      }
+
+      enum Error {
+        /// Code must be 16 numeric digits.
+        static let code = L10n.tr("Welcome", "redeem.error.code")
+        /// Redeem
+        static let title = L10n.tr("Welcome", "redeem.error.title")
+      }
+    }
+
     enum Restore {
       /// CONFIRM
       static let submit = L10n.tr("Welcome", "restore.submit")
@@ -159,11 +197,37 @@ enum L10n {
       static let submit = L10n.tr("Signup", "failure.submit")
       /// Account creation failed
       static let title = L10n.tr("Signup", "failure.title")
+      /// Sign-up failed
+      static let vcTitle = L10n.tr("Signup", "failure.vc_title")
+
+      enum Redeem {
+
+        enum Claimed {
+          /// Looks like this card has already been claimed by another account. You can try entering a different PIN.
+          static let message = L10n.tr("Signup", "failure.redeem.claimed.message")
+          /// Card claimed already
+          static let title = L10n.tr("Signup", "failure.redeem.claimed.title")
+        }
+
+        enum Invalid {
+          /// Looks like you entered an invalid card PIN. Please try again.
+          static let message = L10n.tr("Signup", "failure.redeem.invalid.message")
+          /// Invalid card PIN
+          static let title = L10n.tr("Signup", "failure.redeem.invalid.title")
+        }
+      }
     }
 
     enum InProgress {
       /// We're confirming your purchase with our system. It could take a moment so hang in there.
       static let message = L10n.tr("Signup", "in_progress.message")
+      /// Confirm sign-up
+      static let title = L10n.tr("Signup", "in_progress.title")
+
+      enum Redeem {
+        /// We're confirming your card PIN with our system. It could take a moment so hang in there.
+        static let message = L10n.tr("Signup", "in_progress.redeem.message")
+      }
     }
 
     enum Success {
@@ -181,6 +245,13 @@ enum L10n {
         static let caption = L10n.tr("Signup", "success.password.caption")
       }
 
+      enum Redeem {
+        /// You will receive an email shortly with your username and password.
+        static let message = L10n.tr("Signup", "success.redeem.message")
+        /// Completed!
+        static let title = L10n.tr("Signup", "success.redeem.title")
+      }
+
       enum Username {
         /// Username
         static let caption = L10n.tr("Signup", "success.username.caption")
@@ -194,6 +265,8 @@ enum L10n {
       static let submit = L10n.tr("Signup", "unreachable.submit")
       /// Whoops!
       static let title = L10n.tr("Signup", "unreachable.title")
+      /// Error
+      static let vcTitle = L10n.tr("Signup", "unreachable.vc_title")
     }
   }
 }

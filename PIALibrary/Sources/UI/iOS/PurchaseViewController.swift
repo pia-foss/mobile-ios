@@ -24,6 +24,8 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
     
     @IBOutlet private weak var collectionPlans: UICollectionView!
     
+    @IBOutlet private weak var textAgreement: UITextView!
+    
     @IBOutlet private weak var buttonPurchase: ActivityButton!
     
     @IBOutlet private weak var viewFooter: UIView!
@@ -64,6 +66,13 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
 
         labelTitle.text = L10n.Welcome.Purchase.title
         textEmail.placeholder = L10n.Welcome.Purchase.Email.placeholder
+        textAgreement.attributedText = Theme.current.agreementText(
+            withMessage: L10n.Welcome.Agreement.message,
+            tos: L10n.Welcome.Agreement.Message.tos,
+            tosUrl: Client.configuration.tosUrl,
+            privacy: L10n.Welcome.Agreement.Message.privacy,
+            privacyUrl: Client.configuration.privacyUrl
+        )
         buttonPurchase.title = L10n.Welcome.Purchase.submit
         labelLogin1.text = L10n.Welcome.Purchase.Login.footer
         labelLogin2.text = L10n.Welcome.Purchase.Login.button
@@ -207,7 +216,11 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
             guard let email = signupEmail else {
                 fatalError("Signing up and signupEmail is not set")
             }
-            vc.request = SignupRequest(email: email, transaction: signupTransaction)
+            var metadata = SignupMetadata(email: email)
+            metadata.title = L10n.Signup.InProgress.title
+            metadata.bodySubtitle = L10n.Signup.InProgress.message
+            vc.metadata = metadata
+            vc.signupRequest = SignupRequest(email: email, transaction: signupTransaction)
             vc.preset = preset
             vc.completionDelegate = completionDelegate
         }
@@ -244,6 +257,7 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
         Theme.current.applySolidLightBackground(collectionPlans)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applyInput(textEmail)
+        Theme.current.applyLinkAttributes(textAgreement)
         Theme.current.applyActionButton(buttonPurchase)
         Theme.current.applyBody1(labelLogin1, appearance: .dark)
         Theme.current.applyTextButton(labelLogin2)
@@ -273,6 +287,12 @@ extension PurchaseViewController: UICollectionViewDelegateFlowLayout {
         let itemWidth = (collectionView.bounds.size.width - 10.0) / 2.0
 
         return CGSize(width: itemWidth, height: collectionView.bounds.size.height)
+    }
+}
+
+extension PurchaseViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        return true
     }
 }
 

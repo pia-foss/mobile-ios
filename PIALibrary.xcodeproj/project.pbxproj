@@ -160,6 +160,14 @@
 		0EA4C43A1FDDE24B0041C3D8 /* ServersBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4C4381FDDE24B0041C3D8 /* ServersBundle.swift */; };
 		0EA4C4421FDDFD840041C3D8 /* ServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4C4411FDDFD830041C3D8 /* ServerTests.swift */; };
 		0EA7065F1F80F448001E4F88 /* AccountProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA7065E1F80F448001E4F88 /* AccountProvider.swift */; };
+		0EA8072420A18C6B0033EC1A /* RedeemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA8072320A18C6B0033EC1A /* RedeemViewController.swift */; };
+		0EA8072720A1A0090033EC1A /* Redeem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA8072620A1A0090033EC1A /* Redeem.swift */; };
+		0EA8072820A1A0090033EC1A /* Redeem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA8072620A1A0090033EC1A /* Redeem.swift */; };
+		0EA8072C20A1C7A30033EC1A /* RedeemRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA8072B20A1C7A20033EC1A /* RedeemRequest.swift */; };
+		0EA8072D20A1C7A30033EC1A /* RedeemRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA8072B20A1C7A20033EC1A /* RedeemRequest.swift */; };
+		0EA8072F20A1E7C60033EC1A /* GlossRedeem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA8072E20A1E7C60033EC1A /* GlossRedeem.swift */; };
+		0EA8073020A1E7C60033EC1A /* GlossRedeem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA8072E20A1E7C60033EC1A /* GlossRedeem.swift */; };
+		0EA8073220A2F50A0033EC1A /* SignupMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA8073120A2F50A0033EC1A /* SignupMetadata.swift */; };
 		0EAA388B1F9CC4C4000149CF /* InAppProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA38881F9CC4C4000149CF /* InAppProduct.swift */; };
 		0EAA388C1F9CC4C4000149CF /* InAppProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA38891F9CC4C4000149CF /* InAppProvider.swift */; };
 		0EAA388D1F9CC4C4000149CF /* InAppTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA388A1F9CC4C4000149CF /* InAppTransaction.swift */; };
@@ -396,6 +404,11 @@
 		0EA4C4381FDDE24B0041C3D8 /* ServersBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersBundle.swift; sourceTree = "<group>"; };
 		0EA4C4411FDDFD830041C3D8 /* ServerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTests.swift; sourceTree = "<group>"; };
 		0EA7065E1F80F448001E4F88 /* AccountProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountProvider.swift; sourceTree = "<group>"; };
+		0EA8072320A18C6B0033EC1A /* RedeemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemViewController.swift; sourceTree = "<group>"; };
+		0EA8072620A1A0090033EC1A /* Redeem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Redeem.swift; sourceTree = "<group>"; };
+		0EA8072B20A1C7A20033EC1A /* RedeemRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedeemRequest.swift; sourceTree = "<group>"; };
+		0EA8072E20A1E7C60033EC1A /* GlossRedeem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlossRedeem.swift; sourceTree = "<group>"; };
+		0EA8073120A2F50A0033EC1A /* SignupMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupMetadata.swift; sourceTree = "<group>"; };
 		0EAA38881F9CC4C4000149CF /* InAppProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppProduct.swift; sourceTree = "<group>"; };
 		0EAA38891F9CC4C4000149CF /* InAppProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppProvider.swift; sourceTree = "<group>"; };
 		0EAA388A1F9CC4C4000149CF /* InAppTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppTransaction.swift; sourceTree = "<group>"; };
@@ -634,6 +647,7 @@
 				0E3D13CF1F9E26FD00434A48 /* GlossCredentials.swift */,
 				0EB9667D1FDF36490086ABC2 /* GlossParser.swift */,
 				0E3D13D51F9E272B00434A48 /* GlossPayment.swift */,
+				0EA8072E20A1E7C60033EC1A /* GlossRedeem.swift */,
 				0E9D626F1FDE83BD009A90CF /* GlossServer.swift */,
 				0E9D62701FDE83BD009A90CF /* GlossServersBundle.swift */,
 				0E3D13D81F9E273300434A48 /* GlossSignup.swift */,
@@ -707,6 +721,7 @@
 				0E392D941FE316860002160D /* DebugLog.swift */,
 				0EE771081F9D21020029A77B /* Payment.swift */,
 				0EE1068B1F8250A1009514E9 /* Plan.swift */,
+				0EA8072620A1A0090033EC1A /* Redeem.swift */,
 				0EA4C4301FDDD48F0041C3D8 /* Server.swift */,
 				0EA4C4381FDDE24B0041C3D8 /* ServersBundle.swift */,
 				0EE1068D1F828813009514E9 /* Signup.swift */,
@@ -762,10 +777,12 @@
 				0E4D4E9A1FA4CA7A007DA6DA /* PurchasePlan.swift */,
 				0EB8C0541F9CD38A005857E4 /* PurchasePlanCell.swift */,
 				0EB8C0551F9CD38A005857E4 /* PurchaseViewController.swift */,
+				0EA8072320A18C6B0033EC1A /* RedeemViewController.swift */,
 				0EB8C0561F9CD38A005857E4 /* RestoreSignupViewController.swift */,
 				0EB8C0571F9CD38A005857E4 /* SignupFailureViewController.swift */,
 				0EB8C0581F9CD38A005857E4 /* SignupInProgressViewController.swift */,
 				0EB8C0591F9CD38A005857E4 /* SignupInternetUnreachableViewController.swift */,
+				0EA8073120A2F50A0033EC1A /* SignupMetadata.swift */,
 				0EB8C05A1F9CD38A005857E4 /* SignupSuccessViewController.swift */,
 				0E2215CE2008DFD900F5FB4D /* SwiftGen+Assets.swift */,
 				0ED1585B1FDC0D1B008F6522 /* SwiftGen+Storyboards.swift */,
@@ -952,6 +969,7 @@
 		0EFDC1D11FE36E5B007C0B9B /* InApp */ = {
 			isa = PBXGroup;
 			children = (
+				0EA8072B20A1C7A20033EC1A /* RedeemRequest.swift */,
 				0EC7A2A31F9D3D78006DDB91 /* RenewRequest.swift */,
 				0EAA38921F9CC682000149CF /* SignupRequest.swift */,
 			);
@@ -1459,6 +1477,7 @@
 				0E9D628A1FDEA290009A90CF /* Data+Crypto.swift in Sources */,
 				0EE261E11FEFD69F00E11955 /* Notification+Library.swift in Sources */,
 				0E7BC6EF1F96B1120035C8B2 /* LoginRequest.swift in Sources */,
+				0EA8072820A1A0090033EC1A /* Redeem.swift in Sources */,
 				0E492C651FE5F949007F23DF /* MockServerProvider.swift in Sources */,
 				0E53A84E1FE5BB25000C2A18 /* VPNDaemon.swift in Sources */,
 				0EFEB4C420077AC900F81029 /* PIATunnelProvider+Profile.swift in Sources */,
@@ -1473,6 +1492,7 @@
 				0E3D13CE1F9DDD2400434A48 /* NotificationKey.swift in Sources */,
 				0E7BC6EC1F96B1040035C8B2 /* KeychainStore.swift in Sources */,
 				0E392D7B1FE2E47D0002160D /* TransientStore.swift in Sources */,
+				0EA8073020A1E7C60033EC1A /* GlossRedeem.swift in Sources */,
 				0E392DAA1FE329AD0002160D /* PlatformVPNLog.swift in Sources */,
 				0E53A8551FE5D770000C2A18 /* MockWebServices.swift in Sources */,
 				0E7BC6F91F96B1120035C8B2 /* Signup.swift in Sources */,
@@ -1486,6 +1506,7 @@
 				0E7BC6F31F96B1120035C8B2 /* PlainStore.swift in Sources */,
 				0E392D8D1FE2F8780002160D /* ConnectivityStatus.swift in Sources */,
 				0E7BC6DF1F96B0F40035C8B2 /* Keychain.swift in Sources */,
+				0EA8072D20A1C7A30033EC1A /* RedeemRequest.swift in Sources */,
 				0E9D62DE1FDEE45A009A90CF /* DefaultServerProvider.swift in Sources */,
 				0EF14E4C1FEAE6350007485A /* Client+Providers.swift in Sources */,
 				0E7BC6E61F96B1000035C8B2 /* Client.swift in Sources */,
@@ -1541,13 +1562,16 @@
 				0EBBC6DC1F9F64E700B8BD21 /* Client+Environment.swift in Sources */,
 				0EB3D9821FF02FE5005B11F4 /* VPNAction.swift in Sources */,
 				0E2ADD371FE14F0000BB170C /* DefaultVPNProvider.swift in Sources */,
+				0EA8073220A2F50A0033EC1A /* SignupMetadata.swift in Sources */,
 				0E4D4E9F1FA4CA7A007DA6DA /* Restylable.swift in Sources */,
 				0EB8C06E1F9CD38B005857E4 /* SignupInternetUnreachableViewController.swift in Sources */,
 				0E75D8D31F9E3F9F00658D1E /* UserAccount.swift in Sources */,
 				0EB8C0691F9CD38B005857E4 /* PurchasePlanCell.swift in Sources */,
+				0EA8072F20A1E7C60033EC1A /* GlossRedeem.swift in Sources */,
 				0EA4C4311FDDD48F0041C3D8 /* Server.swift in Sources */,
 				0EB9667E1FDF36490086ABC2 /* GlossParser.swift in Sources */,
 				0EAA38991F9CC7E4000149CF /* AppStoreTransaction.swift in Sources */,
+				0EA8072720A1A0090033EC1A /* Redeem.swift in Sources */,
 				0E392D951FE316860002160D /* DebugLog.swift in Sources */,
 				0EAA38981F9CC7E4000149CF /* AppStoreProduct.swift in Sources */,
 				0E1743131F82E1A4001E7DD6 /* Client.swift in Sources */,
@@ -1565,6 +1589,7 @@
 				0E2ADCF01FE09C6C00BB170C /* ConnectivityDaemon.swift in Sources */,
 				0EAA38971F9CC7E4000149CF /* AppStoreProvider.swift in Sources */,
 				0EB8C0661F9CD38B005857E4 /* LoginViewController.swift in Sources */,
+				0EA8072C20A1C7A30033EC1A /* RedeemRequest.swift in Sources */,
 				0EC7A2A41F9D3D78006DDB91 /* RenewRequest.swift in Sources */,
 				0EE771091F9D21020029A77B /* Payment.swift in Sources */,
 				0E53A8531FE5D73F000C2A18 /* Client+Mock.swift in Sources */,
@@ -1589,6 +1614,7 @@
 				0EB8C0681F9CD38B005857E4 /* PIAWelcomeViewController.swift in Sources */,
 				0E2ADD481FE1595300BB170C /* IPSecProfile.swift in Sources */,
 				0EFB51271F82A5F80033B81F /* Notification+Core.swift in Sources */,
+				0EA8072420A18C6B0033EC1A /* RedeemViewController.swift in Sources */,
 				0EE261E01FEFD69F00E11955 /* Notification+Library.swift in Sources */,
 				0EFEB4C22007784A00F81029 /* PIATunnelProfile.swift in Sources */,
 				0E392DBB1FE34B5A0002160D /* NSString+URL.m in Sources */,

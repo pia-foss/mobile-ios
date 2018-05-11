@@ -62,11 +62,10 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
 //                continue
 //            }
         for server in currentServers {
-            let history = accessedDatabase.plain.pings(forServerIdentifier: server.identifier)
-            guard let avg = history.avg() else {
+            guard let responseTime = accessedDatabase.plain.ping(forServerIdentifier: server.identifier) else {
                 continue
             }
-            guard (avg < bestResponseTime) else {
+            guard (responseTime < bestResponseTime) else {
                 continue
             }
 //            if let automaticIdentifiers = accessedDatabase.transient.serversConfiguration.automaticIdentifiers {
@@ -78,7 +77,7 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
                 continue
             }
             bestIdentifier = server.identifier
-            bestResponseTime = avg
+            bestResponseTime = responseTime
         }
         guard let _ = bestIdentifier else {
             return nil
@@ -149,6 +148,6 @@ extension Server: DatabaseAccess {
 
     /// Returns last ping response in milliseconds. Requires `Library` subspec.
     public var pingTime: Int? {
-        return accessedDatabase.plain.pings(forServerIdentifier: identifier).avg()
+        return accessedDatabase.plain.ping(forServerIdentifier: identifier)
     }
 }
