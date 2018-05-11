@@ -15,6 +15,8 @@ protocol Endpoint: ConfigurationAccess {
 enum ClientEndpoint: String, Endpoint {
     case signup
     
+    case redeem = "giftcard_redeem"
+    
     case account
     
     case payment

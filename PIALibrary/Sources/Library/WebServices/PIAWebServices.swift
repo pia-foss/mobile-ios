@@ -81,6 +81,48 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         })
     }
     
+    func redeem(with request: Redeem, _ callback: ((Credentials?, Error?) -> Void)?) {
+        let endpoint = ClientEndpoint.redeem
+        let parameters = request.toJSON()
+        let status = [200, 400, 429]
+        let errors: [Int: ClientError] = [
+            429: .throttled
+        ]
+        
+        req(nil, .post, endpoint, parameters, status, JSONRequestExecutor() { (json, status, error) in
+            if let knownError = self.knownError(endpoint, status, errors) {
+                callback?(nil, knownError)
+                return
+            }
+            guard let json = json else {
+                callback?(nil, error)
+                return
+            }
+            guard (status == 200) else {
+                var specificError: ClientError = .malformedResponseData
+                if let code = json["code"] as? String {
+                    switch code {
+                    case "not_found", "canceled":
+                        specificError = .redeemInvalid
+                        
+                    case "redeemed":
+                        specificError = .redeemClaimed
+                        
+                    default:
+                        break
+                    }
+                }
+                callback?(nil, specificError)
+                return
+            }
+            guard let credentials = GlossCredentials(json: json)?.parsed else {
+                callback?(nil, ClientError.malformedResponseData)
+                return
+            }
+            callback?(credentials, nil)
+        })
+    }
+    
     func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?) {
         let endpoint = ClientEndpoint.payment
         let parameters = request.toJSON()

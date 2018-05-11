@@ -23,12 +23,16 @@ class WelcomePageViewController: UIPageViewController {
         }
 
         if preset.pages.contains(.login) {
-            let login = StoryboardScene.Welcome.loginViewController.instantiate()
-            source.append(login)
+            let vc = StoryboardScene.Welcome.loginViewController.instantiate()
+            source.append(vc)
         }
         if preset.pages.contains(.purchase) {
-            let purchase = StoryboardScene.Welcome.purchaseViewController.instantiate()
-            source.append(purchase)
+            let vc = StoryboardScene.Welcome.purchaseViewController.instantiate()
+            source.append(vc)
+        }
+        if preset.pages.contains(.redeem) {
+            let vc = StoryboardScene.Welcome.redeemViewController.instantiate()
+            source.append(vc)
         }
         dataSource = self
 

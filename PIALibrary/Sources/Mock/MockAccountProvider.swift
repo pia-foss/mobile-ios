@@ -26,12 +26,30 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
         case internetUnreachable
     }
 
+    /// Mocks the outcome of a redeem operation.
+    ///
+    /// - Seealso: `AccountProvider.redeem(...)`
+    public enum RedeemOutcome {
+        
+        /// Redeem succeeded.
+        case success
+        
+        /// Redeem code is invalid.
+        case invalid
+
+        /// Redeem code already claimed.
+        case claimed
+    }
+    
     /// Fakes authentication outcome.
     public var mockIsUnauthorized = false
 
     /// Fakes sign-up outcome.
     public var mockSignupOutcome: SignupOutcome = .success
 
+    /// Fakes redeem outcome.
+    public var mockRedeemOutcome: RedeemOutcome = .success
+    
     /// Fakes `AccountInfo.email`.
     public var mockEmail: String = "mock@email.com"
 
@@ -171,6 +189,22 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
 
             case .internetUnreachable:
                 callback?(nil, ClientError.internetUnreachable)
+            }
+        }
+    }
+    
+    /// :nodoc:
+    public func redeem(with request: RedeemRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
+        Macros.dispatch(after: .seconds(1)) {
+            switch self.mockRedeemOutcome {
+            case .success:
+                self.delegate.redeem(with: request, callback)
+                
+            case .invalid:
+                callback?(nil, ClientError.redeemInvalid)
+                
+            case .claimed:
+                callback?(nil, ClientError.redeemClaimed)
             }
         }
     }

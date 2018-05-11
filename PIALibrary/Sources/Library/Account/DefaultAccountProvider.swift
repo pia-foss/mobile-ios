@@ -249,6 +249,32 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
     }
 
+    func redeem(with request: RedeemRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
+        guard !isLoggedIn else {
+            preconditionFailure()
+        }
+        let redeem = Redeem(email: request.email, code: request.code)
+        
+        webServices.redeem(with: redeem) { (credentials, error) in
+            if let urlError = error as? URLError, (urlError.code == .notConnectedToInternet) {
+                callback?(nil, ClientError.internetUnreachable)
+                return
+            }
+            guard let credentials = credentials else {
+                callback?(nil, error)
+                return
+            }
+            self.accessedDatabase.plain.username = credentials.username
+            self.accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
+            
+            let user = UserAccount(credentials: credentials, info: nil)
+            Macros.postNotification(.PIAAccountDidSignup, [
+                .user: user
+                ])
+            callback?(user, nil)
+        }
+    }
+    
     func listRenewablePlans(_ callback: (([Plan]?, Error?) -> Void)?) {
         guard let info = currentUser?.info else {
             preconditionFailure()
