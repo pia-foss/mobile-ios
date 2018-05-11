@@ -28,6 +28,8 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     
     @IBOutlet private weak var textCode: BorderedTextField!
     
+    @IBOutlet private weak var textAgreement: UITextView!
+
     @IBOutlet private weak var buttonRedeem: ActivityButton!
     
     @IBOutlet private weak var viewFooter: UIView!
@@ -71,6 +73,13 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         labelSubtitle.text = L10n.Welcome.Redeem.subtitle
         textEmail.placeholder = L10n.Welcome.Redeem.Email.placeholder
         textCode.placeholder = L10n.Welcome.Redeem.Code.placeholder
+        textAgreement.attributedText = Theme.current.agreementText(
+            withMessage: L10n.Welcome.Agreement.message,
+            tos: L10n.Welcome.Agreement.Message.tos,
+            tosUrl: Client.configuration.tosUrl,
+            privacy: L10n.Welcome.Agreement.Message.privacy,
+            privacyUrl: Client.configuration.privacyUrl
+        )
         buttonRedeem.title = L10n.Welcome.Redeem.submit
 //        labelPurchase1.text = L10n.Welcome.Login.Purchase.footer
 //        labelPurchase2.text = L10n.Welcome.Login.Purchase.button
@@ -185,6 +194,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         Theme.current.applySubtitle(labelSubtitle, appearance: .dark)
         Theme.current.applyInput(textEmail)
         Theme.current.applyInput(textCode)
+        Theme.current.applyLinkAttributes(textAgreement)
         Theme.current.applyActionButton(buttonRedeem)
 //        Theme.current.applyBody1(labelPurchase1, appearance: .dark)
 //        Theme.current.applyTextButton(labelPurchase2)
@@ -226,5 +236,11 @@ extension RedeemViewController: UITextFieldDelegate {
         }
 
         return false
+    }
+}
+
+extension RedeemViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        return true
     }
 }
