@@ -1047,7 +1047,7 @@ You will not be charged during this process.</string>
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="569"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TnM-Pl-njO">
-                                                                <rect key="frame" x="48" y="181" width="280" height="207"/>
+                                                                <rect key="frame" x="48" y="154.5" width="280" height="260"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Redeem" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEC-Qu-zkj">
                                                                         <rect key="frame" x="109.5" y="0.0" width="61" height="20"/>
@@ -1080,8 +1080,17 @@ You will not be charged during this process.</string>
                                                                             <outlet property="delegate" destination="qgN-PX-Sir" id="dW1-A9-fEp"/>
                                                                         </connections>
                                                                     </textField>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="&lt;Agreement&gt;" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xcj-pL-a9w">
+                                                                        <rect key="frame" x="0.0" y="167" width="280" height="33"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                                                        <connections>
+                                                                            <outlet property="delegate" destination="qgN-PX-Sir" id="rgj-vl-5da"/>
+                                                                        </connections>
+                                                                    </textView>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tea-DU-K60" customClass="ActivityButton" customModule="PIALibrary" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="167" width="280" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="220" width="280" height="40"/>
                                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="40" id="QJT-WV-pkY"/>
@@ -1098,15 +1107,18 @@ You will not be charged during this process.</string>
                                                                     <constraint firstAttribute="trailing" secondItem="S5y-bL-bNg" secondAttribute="trailing" id="5RT-z4-UFq"/>
                                                                     <constraint firstItem="tea-DU-K60" firstAttribute="leading" secondItem="TnM-Pl-njO" secondAttribute="leading" id="FYy-Le-HYh"/>
                                                                     <constraint firstItem="3ne-g6-NDW" firstAttribute="top" secondItem="S5y-bL-bNg" secondAttribute="bottom" constant="20" id="Hgd-B4-frq"/>
-                                                                    <constraint firstItem="tea-DU-K60" firstAttribute="top" secondItem="pbJ-dg-A3t" secondAttribute="bottom" constant="20" id="HwV-Ce-AVT"/>
                                                                     <constraint firstItem="pbJ-dg-A3t" firstAttribute="height" secondItem="3ne-g6-NDW" secondAttribute="height" id="IUJ-r9-crT"/>
+                                                                    <constraint firstItem="xcj-pL-a9w" firstAttribute="leading" secondItem="TnM-Pl-njO" secondAttribute="leading" id="Qng-Zc-Xvy"/>
                                                                     <constraint firstItem="tea-DU-K60" firstAttribute="trailing" secondItem="3ne-g6-NDW" secondAttribute="trailing" id="R8D-e4-h8a"/>
                                                                     <constraint firstItem="pbJ-dg-A3t" firstAttribute="leading" secondItem="3ne-g6-NDW" secondAttribute="leading" id="Sq9-EB-iDd"/>
                                                                     <constraint firstItem="QEC-Qu-zkj" firstAttribute="centerX" secondItem="TnM-Pl-njO" secondAttribute="centerX" id="UP3-a2-8uJ"/>
                                                                     <constraint firstAttribute="width" priority="750" constant="280" id="aV8-Hz-Jvp"/>
                                                                     <constraint firstItem="QEC-Qu-zkj" firstAttribute="top" secondItem="TnM-Pl-njO" secondAttribute="top" id="fcA-aA-3kt"/>
+                                                                    <constraint firstItem="xcj-pL-a9w" firstAttribute="top" secondItem="pbJ-dg-A3t" secondAttribute="bottom" constant="20" id="irZ-j2-vuS"/>
                                                                     <constraint firstItem="tea-DU-K60" firstAttribute="leading" secondItem="3ne-g6-NDW" secondAttribute="leading" id="jTH-4f-ZLY"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="xcj-pL-a9w" secondAttribute="trailing" id="qzi-8l-LNR"/>
                                                                     <constraint firstItem="S5y-bL-bNg" firstAttribute="top" secondItem="QEC-Qu-zkj" secondAttribute="bottom" constant="10" id="scj-YN-W64"/>
+                                                                    <constraint firstItem="tea-DU-K60" firstAttribute="top" secondItem="xcj-pL-a9w" secondAttribute="bottom" constant="20" id="tdl-ua-3hf"/>
                                                                     <constraint firstItem="pbJ-dg-A3t" firstAttribute="trailing" secondItem="3ne-g6-NDW" secondAttribute="trailing" id="toJ-5G-R2t"/>
                                                                     <constraint firstItem="S5y-bL-bNg" firstAttribute="leading" secondItem="TnM-Pl-njO" secondAttribute="leading" id="x2Y-Ul-kQx"/>
                                                                 </constraints>
@@ -1287,6 +1299,7 @@ You will not be charged during this process.</string>
                         <outlet property="labelSubtitle" destination="S5y-bL-bNg" id="hzd-5h-ycZ"/>
                         <outlet property="labelTitle" destination="QEC-Qu-zkj" id="wex-q3-a85"/>
                         <outlet property="scrollView" destination="9Ah-aP-Yc5" id="naB-Ae-QWx"/>
+                        <outlet property="textAgreement" destination="xcj-pL-a9w" id="rbC-ad-emm"/>
                         <outlet property="textCode" destination="pbJ-dg-A3t" id="3HI-fT-yNN"/>
                         <outlet property="textEmail" destination="3ne-g6-NDW" id="tUr-cH-df2"/>
                         <outlet property="viewFooter" destination="h4C-e9-6n1" id="xcl-1q-9mx"/>
@@ -1302,6 +1315,6 @@ You will not be charged during this process.</string>
         <image name="nav-logo" width="354" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Kkc-iF-rn9"/>
+        <segue reference="Knv-fa-JGO"/>
     </inferredMetricsTieBreakers>
 </document>
