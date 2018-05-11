@@ -479,7 +479,7 @@ You will not be charged during this process.</string>
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="591"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcT-bV-bFV">
-                                                                <rect key="frame" x="48" y="148.5" width="280" height="294.5"/>
+                                                                <rect key="frame" x="48" y="119.5" width="280" height="352.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a VPN plan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zza-Bd-w6I">
                                                                         <rect key="frame" x="74" y="0.0" width="132" height="19.5"/>
@@ -663,7 +663,7 @@ You will not be charged during this process.</string>
                                                                         </connections>
                                                                     </collectionView>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qcp-on-161" customClass="ActivityButton" customModule="PIALibrary" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="254.5" width="280" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="312.5" width="280" height="40"/>
                                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="40" id="Ak8-Vx-MCS"/>
@@ -672,21 +672,33 @@ You will not be charged during this process.</string>
                                                                             <action selector="signUp:" destination="J5T-ys-Of8" eventType="touchUpInside" id="zDp-mL-OgC"/>
                                                                         </connections>
                                                                     </view>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="&lt;Agreement&gt;" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="98s-Oe-HoA">
+                                                                        <rect key="frame" x="0.0" y="259.5" width="280" height="33"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                                                        <connections>
+                                                                            <outlet property="delegate" destination="J5T-ys-Of8" id="4FI-RT-2XU"/>
+                                                                        </connections>
+                                                                    </textView>
                                                                 </subviews>
                                                                 <constraints>
                                                                     <constraint firstItem="Qcp-on-161" firstAttribute="leading" secondItem="gcT-bV-bFV" secondAttribute="leading" id="2ho-GJ-odS"/>
                                                                     <constraint firstItem="Zza-Bd-w6I" firstAttribute="centerX" secondItem="gcT-bV-bFV" secondAttribute="centerX" id="2jE-3D-QrT"/>
                                                                     <constraint firstItem="Qcp-on-161" firstAttribute="trailing" secondItem="GHL-pF-Tfd" secondAttribute="trailing" id="3vz-67-e8w"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="98s-Oe-HoA" secondAttribute="trailing" id="6lk-EC-Ljw"/>
                                                                     <constraint firstAttribute="bottom" secondItem="Qcp-on-161" secondAttribute="bottom" id="8De-9a-Dka"/>
                                                                     <constraint firstItem="3Om-8R-79c" firstAttribute="top" secondItem="GHL-pF-Tfd" secondAttribute="bottom" constant="10" id="90g-7R-TMH"/>
+                                                                    <constraint firstItem="98s-Oe-HoA" firstAttribute="top" secondItem="3Om-8R-79c" secondAttribute="bottom" constant="20" id="96S-ew-YhE"/>
                                                                     <constraint firstAttribute="trailing" secondItem="Qcp-on-161" secondAttribute="trailing" id="BJl-yY-blS"/>
+                                                                    <constraint firstItem="Qcp-on-161" firstAttribute="top" secondItem="98s-Oe-HoA" secondAttribute="bottom" constant="20" id="M2C-UF-dE5"/>
                                                                     <constraint firstAttribute="width" priority="750" constant="280" id="ZHo-LL-jXW"/>
-                                                                    <constraint firstItem="Qcp-on-161" firstAttribute="top" secondItem="3Om-8R-79c" secondAttribute="bottom" constant="15" id="Zlu-8B-TJ9"/>
                                                                     <constraint firstItem="GHL-pF-Tfd" firstAttribute="top" secondItem="Zza-Bd-w6I" secondAttribute="bottom" constant="30" id="jN7-oE-kQz"/>
                                                                     <constraint firstItem="Qcp-on-161" firstAttribute="leading" secondItem="GHL-pF-Tfd" secondAttribute="leading" id="lDV-1J-mcj"/>
                                                                     <constraint firstAttribute="trailing" secondItem="3Om-8R-79c" secondAttribute="trailing" id="m14-ac-SLM"/>
                                                                     <constraint firstItem="3Om-8R-79c" firstAttribute="leading" secondItem="gcT-bV-bFV" secondAttribute="leading" id="qcO-m4-px0"/>
                                                                     <constraint firstItem="Zza-Bd-w6I" firstAttribute="top" secondItem="gcT-bV-bFV" secondAttribute="top" id="v2n-HJ-EVh"/>
+                                                                    <constraint firstItem="98s-Oe-HoA" firstAttribute="leading" secondItem="gcT-bV-bFV" secondAttribute="leading" id="vNG-8l-hXc"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
@@ -851,6 +863,7 @@ You will not be charged during this process.</string>
                         <outlet property="labelLogin2" destination="Hgt-8w-CNw" id="JI2-E0-4xF"/>
                         <outlet property="labelTitle" destination="Zza-Bd-w6I" id="Ler-ec-DLq"/>
                         <outlet property="scrollView" destination="R3h-YU-xym" id="9YE-uY-4mJ"/>
+                        <outlet property="textAgreement" destination="98s-Oe-HoA" id="lr2-HI-Fgb"/>
                         <outlet property="textEmail" destination="GHL-pF-Tfd" id="T14-vf-J73"/>
                         <outlet property="viewFooter" destination="Exp-5c-eqJ" id="Q9B-Qj-wvD"/>
                         <outlet property="viewLogin" destination="oSa-0z-U2f" id="XSw-0P-5nh"/>
@@ -1289,6 +1302,6 @@ You will not be charged during this process.</string>
         <image name="nav-logo" width="354" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Knv-fa-JGO"/>
+        <segue reference="Kkc-iF-rn9"/>
     </inferredMetricsTieBreakers>
 </document>

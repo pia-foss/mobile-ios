@@ -9,6 +9,11 @@ import Foundation
 enum L10n {
   enum Welcome {
 
+    enum Agreement {
+      /// Signing up constitutes acceptance of the Terms of Service and the Privacy Policy.
+      static let message = L10n.tr("Welcome", "agreement.message")
+    }
+
     enum Iap {
 
       enum Error {

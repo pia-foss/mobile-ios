@@ -381,6 +381,12 @@ public class Theme {
     }
     
     /// :nodoc:
+    public func applySmallInfo(_ textView: UITextView) {
+        textView.font = typeface.regularFont(size: 13.0)
+        textView.textColor = palette.textColor(forRelevance: 3, appearance: .dark)
+    }
+    
+    /// :nodoc:
     public func applyTag(_ label: UILabel, appearance: Appearance) {
         label.font = typeface.regularFont(size: 12.0)
         label.textColor = palette.textColor(forRelevance: 1, appearance: appearance)
