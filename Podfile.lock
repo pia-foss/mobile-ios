@@ -49,10 +49,10 @@ DEPENDENCIES:
   - HockeySDK
   - iRate
   - MBProgressHUD
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `2bbed67221cdbdbdd3ccf3acf091f012432cc94a`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `2bbed67221cdbdbdd3ccf3acf091f012432cc94a`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `2bbed67221cdbdbdd3ccf3acf091f012432cc94a`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `2bbed67221cdbdbdd3ccf3acf091f012432cc94a`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `54582498a3d71d4a3c94e1fe5d4fef0e039db7a0`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `54582498a3d71d4a3c94e1fe5d4fef0e039db7a0`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `54582498a3d71d4a3c94e1fe5d4fef0e039db7a0`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `54582498a3d71d4a3c94e1fe5d4fef0e039db7a0`)
   - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `2e68a9decc4c57b1c26cab41ca41dab74033445e`)
   - SideMenu (= 3.1.5)
   - TPKeyboardAvoiding
@@ -74,7 +74,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :commit: 2bbed67221cdbdbdd3ccf3acf091f012432cc94a
+    :commit: 54582498a3d71d4a3c94e1fe5d4fef0e039db7a0
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
     :commit: 2e68a9decc4c57b1c26cab41ca41dab74033445e
@@ -82,7 +82,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PIALibrary:
-    :commit: 2bbed67221cdbdbdd3ccf3acf091f012432cc94a
+    :commit: 54582498a3d71d4a3c94e1fe5d4fef0e039db7a0
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
     :commit: 2e68a9decc4c57b1c26cab41ca41dab74033445e
@@ -104,6 +104,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 85daaaa2b3ae6e31b7b55c99430e8b91dac088af
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: bc17cafe83ac6ef6df5258f1eabac5226033294d
+PODFILE CHECKSUM: 0c32ab6865b22bd3977ee6749178a6a53353b26f
 
 COCOAPODS: 1.5.2
