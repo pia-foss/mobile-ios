@@ -69,9 +69,9 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
         textAgreement.attributedText = Theme.current.agreementText(
             withMessage: L10n.Welcome.Agreement.message,
             tos: L10n.Welcome.Agreement.Message.tos,
-            tosUrl: "https://www.privateinternetaccess.com/pages/terms-of-service",
+            tosUrl: Client.configuration.tosUrl,
             privacy: L10n.Welcome.Agreement.Message.privacy,
-            privacyUrl: "https://www.privateinternetaccess.com/pages/privacy-policy"
+            privacyUrl: Client.configuration.privacyUrl
         )
         buttonPurchase.title = L10n.Welcome.Purchase.submit
         labelLogin1.text = L10n.Welcome.Purchase.Login.footer

@@ -32,6 +32,18 @@ extension Client {
             return url
         }
 
+        let tosPath: String
+        
+        var tosUrl: String {
+            return "\(baseUrl)/\(tosPath)"
+        }
+        
+        let privacyPath: String
+        
+        var privacyUrl: String {
+            return "\(baseUrl)/\(privacyPath)"
+        }
+        
         /// The timeout for web requests.
         public var webTimeout: Int
         
@@ -139,6 +151,8 @@ extension Client {
                 .production: production,
                 .staging: production
             ]
+            tosPath = "pages/terms-of-service"
+            privacyPath = "pages/privacy-policy"
 
             webTimeout = 10000
             
