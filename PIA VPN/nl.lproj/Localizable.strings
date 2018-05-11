@@ -1,363 +1,121 @@
-/* (No Comment) */
 "about.accessibility.component.expand" = "Tik om volledige licentie te lezen";
-
-/* (No Comment) */
 "about.app" = "VPN door Private Internet Access";
-
-/* (No Comment) */
 "about.intro" = "Dit programma gebruikt de volgende componenten:";
-
-/* (No Comment) */
 "account.accessibility.eye" = "Oogpictogram";
-
-/* (No Comment) */
 "account.accessibility.eye.hint.conceal" = "Tik om wachtwoord te verbergen";
-
-/* (No Comment) */
 "account.accessibility.eye.hint.reveal" = "Tik om wachtwoord te onthullen";
-
-/* (No Comment) */
 "account.email.caption" = "E-mail";
-
-/* (No Comment) */
 "account.email.placeholder" = "E-mailadres";
-
-/* (No Comment) */
 "account.eye.footer" = "Tik op het oogpictogram om uw wachtwoord te verbergen of te onthullen";
-
-/* (No Comment) */
 "account.other.footer" = "Download de Private Internet Access-app voor uw andere apparaten en gebruik de gebruikersnaam en het wachtwoord hierboven om in te loggen en uw verbinding te beveiligen.";
-
-/* (No Comment) */
 "account.password.caption" = "Wachtwoord";
-
-/* (No Comment) */
 "account.restore.button" = "Aankoop herstellen";
-
-/* (No Comment) */
 "account.restore.description" = "Als u uw abonnement heeft vernieuwd, maar uw account geeft nog steeds aan dat het bijna is verlopen, dan kunt u hier opnieuw beginnen. Er worden geen extra kosten in rekening gebracht tijdens dit proces.";
-
-/* (No Comment) */
 "account.restore.failure.message" = "Er is geen aankoop gevonden die kan worden hersteld.";
-
-/* (No Comment) */
 "account.restore.failure.title" = "Aankoop herstellen";
-
-/* (No Comment) */
 "account.restore.title" = "Niet-gecrediteerde aankoop herstellen";
-
-/* (No Comment) */
 "account.reveal.prompt" = "Authenticeren om te onthullen";
-
-/* (No Comment) */
 "account.save.item" = "Updaten";
-
-/* (No Comment) */
 "account.save.prompt" = "Authenticeren om wijzigingen op te slaan";
-
-/* (No Comment) */
 "account.save.success" = "Uw e-mailadres is opgeslagen.";
-
-/* (No Comment) */
 "account.username.caption" = "Gebruikersnaam";
-
-/* (No Comment) */
 "content_blocker.body.footer" = "Let op: Je hoeft niet verbonden te zijn met de VPN om deze Content blocker te laten werken, maar dan werkt het alleen als je Safari gebruikt.";
-
-/* (No Comment) */
 "content_blocker.body.subtitle" = "Om onze Content blocker voor Safari in te schakelen ga je naar Instellingen > Safari en onder Algemeen raak je Content Blockers aan om PIA VPN in te schakelen.";
-
-/* (No Comment) */
 "content_blocker.title" = "Content Blocker";
-
-/* (No Comment) */
 "dashboard.connection.ip.caption" = "OPENBARE IP";
-
-/* (No Comment) */
 "dashboard.connection.ip.unreachable" = "Internet onbereikbaar";
-
-/* (No Comment) */
 "dashboard.connection.region.caption" = "HUIDIGE REGIO";
-
-/* (No Comment) */
 "dashboard.connection.region.change" = "REGIO WIJZIGEN";
-
-/* (No Comment) */
 "dashboard.content_blocker.intro.message" = "Deze versie vervangt MACE met onze Content blocker voor Safari.\n\nGa voor meer informatie naar de 'Instellingen'.";
-
-/* (No Comment) */
 "dashboard.status" = "Status";
-
-/* (No Comment) */
 "dashboard.vpn.changing_region" = "Regio wijzigen...";
-
-/* (No Comment) */
 "dashboard.vpn.connected" = "Verbonden met VPN";
-
-/* (No Comment) */
 "dashboard.vpn.connecting" = "Verbinden...";
-
-/* (No Comment) */
 "dashboard.vpn.disconnected" = "Verbinding verbroken";
-
-/* (No Comment) */
 "dashboard.vpn.disconnecting" = "Verbinding verbreken...";
-
-/* (No Comment) */
 "expiration.message" = "Uw abonnement verloopt binnenkort. Vernieuw uw abonnement om beschermd te blijven.";
-
-/* (No Comment) */
 "expiration.title" = "Vernieuwing";
-
-/* (No Comment) */
 "global.automatic" = "Automatisch";
-
-/* (No Comment) */
 "global.cancel" = "Annuleren";
-
-/* (No Comment) */
 "global.close" = "Sluiten";
-
-/* (No Comment) */
 "global.error" = "Fout";
-
-/* (No Comment) */
 "global.ok" = "OK";
-
-/* (No Comment) */
 "menu.accessibility.item" = "Menu";
-
-/* (No Comment) */
 "menu.accessibility.logged_as" = "Ingelogd als %@";
-
-/* (No Comment) */
 "menu.expiration.days" = "%d dagen";
-
-/* (No Comment) */
 "menu.expiration.expires_in" = "Abonnement verloopt over";
-
-/* (No Comment) */
 "menu.expiration.hours" = "%d uur";
-
-/* (No Comment) */
 "menu.expiration.one_hour" = "één uur";
-
-/* (No Comment) */
 "menu.expiration.upgrade" = "ACCOUNT UPGRADEN";
-
-/* (No Comment) */
 "menu.item.about" = "Over";
-
-/* (No Comment) */
 "menu.item.account" = "Account";
-
-/* (No Comment) */
 "menu.item.logout" = "Uitloggen";
-
-/* (No Comment) */
 "menu.item.region" = "Regioselectie";
-
-/* (No Comment) */
 "menu.item.settings" = "Instellingen";
-
-/* (No Comment) */
 "menu.item.web.home" = "Homepage";
-
-/* (No Comment) */
 "menu.item.web.privacy" = "Privacybeleid";
-
-/* (No Comment) */
 "menu.item.web.support" = "Ondersteuning";
-
-/* (No Comment) */
 "menu.logout.confirm" = "Uitloggen";
-
-/* (No Comment) */
 "menu.logout.message" = "Als u uitlogt, wordt de VPN uitgeschakeld en bent u onbeschermd.";
-
-/* (No Comment) */
 "menu.logout.title" = "Uitloggen";
-
-/* (No Comment) */
 "menu.renewal.message.trial" = "Proefaccounts kunnen niet worden verlengd. Koop een nieuw account als het proefaccount verloopt om van onze diensten gebruik te blijven maken.";
-
-/* (No Comment) */
 "menu.renewal.message.unavailable" = "De Apple-servers zijn momenteel niet beschikbaar. Probeer het later opnieuw.";
-
-/* (No Comment) */
 "menu.renewal.message.website" = "Gebruik onze website om uw abonnement te vernieuwen.";
-
-/* (No Comment) */
 "menu.renewal.purchase" = "Kopen";
-
-/* (No Comment) */
 "menu.renewal.renew" = "Vernieuwen";
-
-/* (No Comment) */
 "menu.renewal.title" = "Vernieuwing";
-
-/* (No Comment) */
 "notifications.disabled.message" = "Schakel meldingen in om een herinnering te ontvangen om uw abonnement te vernieuwen als het bijna is verlopen.";
-
-/* (No Comment) */
 "notifications.disabled.settings" = "Instellingen";
-
-/* (No Comment) */
 "notifications.disabled.title" = "Meldingen uitgeschakeld";
-
-/* (No Comment) */
 "renewal.failure.message" = "Uw aankoopbewijs kan niet worden verzonden. Probeer het later opnieuw.";
-
-/* (No Comment) */
 "renewal.success.message" = "Uw account is vernieuwd.";
-
-/* (No Comment) */
 "renewal.success.title" = "Dank u wel";
-
-/* (No Comment) */
 "settings.application_information.debug.empty.message" = "Debuginformatie is leeg. Maak verbinding voordat u de informatie opnieuw verstuurt.";
-
-/* (No Comment) */
 "settings.application_information.debug.empty.title" = "Lege debuginformatie";
-
-/* (No Comment) */
 "settings.application_information.debug.failure.message" = "Debuginformatie kan niet worden verzonden. Verbreek de verbinding met de VPN en probeer het opnieuw.";
-
-/* (No Comment) */
 "settings.application_information.debug.failure.title" = "Fout tijdens inzending";
-
-/* (No Comment) */
 "settings.application_information.debug.success.message" = "Debuginformatie verzonden.\nID: %@\nLet op: ons ondersteuningsteam heeft deze ID nodig om uw inzending te vinden.";
-
-/* (No Comment) */
 "settings.application_information.debug.success.title" = "Debuginformatie verzonden";
-
-/* (No Comment) */
 "settings.application_information.debug.title" = "Debug naar service sturen";
-
-/* (No Comment) */
 "settings.application_information.title" = "APPLICATIE-INFORMATIE";
-
-/* (No Comment) */
 "settings.application_settings.dark_theme.title" = "Donker thema";
-
-/* (No Comment) */
 "settings.application_settings.mace.footer" = "PIA MACE™ blokkeert advertenties, trackers en malware als u met de VPN bent verbonden.";
-
-/* (No Comment) */
 "settings.application_settings.mace.title" = "PIA MACE™";
-
-/* (No Comment) */
-"settings.application_settings.persistent.footer.disabled" = "Het uitschakelen van de automatische verbinding kan uw privacy in gevaar brengen als uw apparaat geen toegang heeft tot een stabiel netwerk.";
-
-/* (No Comment) */
-"settings.application_settings.persistent.title" = "Automatisch opnieuw verbonden";
-
-/* (No Comment) */
+"settings.application_settings.persistent.footer.disabled" = "De VPN kill switch schakelt uw internetverbinding uit wanneer de VPN-verbinding wordt verbroken.";
+"settings.application_settings.persistent.title" = "VPN kill switch";
 "settings.application_settings.title" = "TOEPASSINGSINSTELLINGEN";
-
-/* (No Comment) */
 "settings.commit.buttons.later" = "Later";
-
-/* (No Comment) */
 "settings.commit.buttons.reconnect" = "Opnieuw verbinden";
-
-/* (No Comment) */
 "settings.commit.messages.must_disconnect" = "De VPN moet opnieuw verbinding maken om de wijzigingen door te voeren.";
-
-/* (No Comment) */
 "settings.commit.messages.should_reconnect" = "Laat de VPN opnieuw verbinding maken om de wijzigingen toe te passen.";
-
-/* (No Comment) */
 "settings.connection.remote_port.title" = "Externe poort";
-
-/* (No Comment) */
 "settings.connection.socket_protocol.title" = "Socket";
-
-/* (No Comment) */
 "settings.connection.title" = "VERBINDING";
-
-/* (No Comment) */
 "settings.connection.vpn_protocol.title" = "Protocol";
-
-/* (No Comment) */
 "settings.content_blocker.footer" = "Om Content Blocker in- of uit te schakelen, ga je naar Instellingen > Safari > Content Blockers en tik je op PIA VPN.";
-
-/* (No Comment) */
 "settings.content_blocker.refresh.title" = "Zwarte lijst verversen";
-
-/* (No Comment) */
 "settings.content_blocker.state.title" = "Huidige status";
-
-/* (No Comment) */
 "settings.content_blocker.title" = "Safari Content Blocker";
-
-/* (No Comment) */
 "settings.encryption.cipher.title" = "Gegevensversleuteling";
-
-/* (No Comment) */
 "settings.encryption.digest.title" = "Gegevensauthenticatie";
-
-/* (No Comment) */
 "settings.encryption.handshake.title" = "Handdruk";
-
-/* (No Comment) */
 "settings.encryption.title" = "VERSLEUTELING";
-
-/* (No Comment) */
 "shortcuts.connect" = "Verbinden";
-
-/* (No Comment) */
 "shortcuts.disconnect" = "Verbinding verbreken";
-
-/* (No Comment) */
 "shortcuts.select_region" = "Selecteer een regio";
-
-/* (No Comment) */
 "vpn_permission.body.footer" = "We monitoren, filteren of registreren geen netwerkactiviteit.";
-
-/* (No Comment) */
 "vpn_permission.body.subtitle" = "Tik op \"%@\" om door te gaan.";
-
-/* (No Comment) */
 "vpn_permission.body.title" = "PIA heeft toegang tot uw VPN-configuraties nodig om uw verkeer te beveiligen.";
-
-/* (No Comment) */
 "vpn_permission.disallow.contact" = "Contact";
-
-/* (No Comment) */
 "vpn_permission.disallow.message.basic" = "Deze toestemming is nodig om de applicatie te laten functioneren.";
-
-/* (No Comment) */
 "vpn_permission.disallow.message.support" = "Als u hulp nodig heeft, kunt u contact opnemen met de klantenservice.";
-
-/* (No Comment) */
 "vpn_permission.title" = "PIA";
-
-/* (No Comment) */
 "walkthrough.action.done" = "KLAAR";
-
-/* (No Comment) */
 "walkthrough.action.next" = "VOLGENDE";
-
-/* (No Comment) */
 "walkthrough.action.skip" = "OVERSLAAN";
-
-/* (No Comment) */
 "walkthrough.page.1.description" = "Bescherm uzelf op vijf apparaten tegelijk.";
-
-/* (No Comment) */
 "walkthrough.page.1.title" = "Ondersteun vijf apparaten tegelijk";
-
-/* (No Comment) */
 "walkthrough.page.2.description" = "Met servers over de hele wereld wordt u altijd beschermd.";
-
-/* (No Comment) */
 "walkthrough.page.2.title" = "Maak eenvoudig verbinding met elke regio";
-
-/* (No Comment) */
 "walkthrough.page.3.description" = "Als u onze Content Blocker inschakelt, krijgt u geen advertenties meer te zien in Safari.";
-
-/* (No Comment) */
 "walkthrough.page.3.title" = "Bescherm uzelf tegen advertenties";
-
