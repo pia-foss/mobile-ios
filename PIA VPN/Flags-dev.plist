@@ -16,6 +16,8 @@
 	<false/>
 	<key>alwaysShowsWalkthrough</key>
 	<false/>
+	<key>enablesRedeemPage</key>
+	<true/>
 	<key>enablesResetSettings</key>
 	<true/>
 	<key>enablesProtocolSelection</key>
