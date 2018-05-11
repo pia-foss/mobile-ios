@@ -66,7 +66,13 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
 
         labelTitle.text = L10n.Welcome.Purchase.title
         textEmail.placeholder = L10n.Welcome.Purchase.Email.placeholder
-        textAgreement.text = L10n.Welcome.Agreement.message
+        textAgreement.attributedText = Theme.current.agreementText(
+            withMessage: L10n.Welcome.Agreement.message,
+            tos: L10n.Welcome.Agreement.Message.tos,
+            tosUrl: "https://www.privateinternetaccess.com/pages/terms-of-service",
+            privacy: L10n.Welcome.Agreement.Message.privacy,
+            privacyUrl: "https://www.privateinternetaccess.com/pages/privacy-policy"
+        )
         buttonPurchase.title = L10n.Welcome.Purchase.submit
         labelLogin1.text = L10n.Welcome.Purchase.Login.footer
         labelLogin2.text = L10n.Welcome.Purchase.Login.button
@@ -251,7 +257,7 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
         Theme.current.applySolidLightBackground(collectionPlans)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applyInput(textEmail)
-        Theme.current.applySmallInfo(textAgreement)
+        Theme.current.applyLinkAttributes(textAgreement)
         Theme.current.applyActionButton(buttonPurchase)
         Theme.current.applyBody1(labelLogin1, appearance: .dark)
         Theme.current.applyTextButton(labelLogin2)
@@ -281,6 +287,12 @@ extension PurchaseViewController: UICollectionViewDelegateFlowLayout {
         let itemWidth = (collectionView.bounds.size.width - 10.0) / 2.0
 
         return CGSize(width: itemWidth, height: collectionView.bounds.size.height)
+    }
+}
+
+extension PurchaseViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        return true
     }
 }
 

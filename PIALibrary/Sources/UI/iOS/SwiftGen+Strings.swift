@@ -10,8 +10,15 @@ enum L10n {
   enum Welcome {
 
     enum Agreement {
-      /// Signing up constitutes acceptance of the Terms of Service and the Privacy Policy.
+      /// Signing up constitutes acceptance of the $1 and the $2.
       static let message = L10n.tr("Welcome", "agreement.message")
+
+      enum Message {
+        /// Privacy Policy
+        static let privacy = L10n.tr("Welcome", "agreement.message.privacy")
+        /// Terms of Service
+        static let tos = L10n.tr("Welcome", "agreement.message.tos")
+      }
     }
 
     enum Iap {

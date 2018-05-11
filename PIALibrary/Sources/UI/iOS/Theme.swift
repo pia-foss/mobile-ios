@@ -459,6 +459,31 @@ public class Theme {
         button.titleLabel?.font = typeface.mediumFont(size: 36.0)
         button.setTitleColor(palette.textColor(forRelevance: 1, appearance: appearance), for: .normal)
     }
+    
+    /// :nodoc:
+    public func agreementText(withMessage message: String, tos: String, tosUrl: String, privacy: String, privacyUrl: String) -> NSAttributedString {
+        let plain = message.replacingOccurrences(
+            of: "$1",
+            with: tos
+            ).replacingOccurrences(
+                of: "$2",
+                with: privacy
+            ) as NSString
+        
+        let attributed = NSMutableAttributedString(string: plain as String)
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
+        let fullRange = NSMakeRange(0, plain.length)
+        attributed.addAttribute(.font, value: typeface.regularFont(size: 13.0), range: fullRange)
+        attributed.addAttribute(.foregroundColor, value: palette.textColor(forRelevance: 3, appearance: .dark), range: fullRange)
+        attributed.addAttribute(.paragraphStyle, value: paragraph, range: fullRange)
+        let range1 = plain.range(of: tos)
+        let range2 = plain.range(of: privacy)
+        attributed.addAttribute(.link, value: tosUrl, range: range1)
+        attributed.addAttribute(.link, value: privacyUrl, range: range2)
+        return attributed
+    }
+    
 
     // MARK: Composite
 
@@ -535,6 +560,11 @@ public class Theme {
         circleProgressView.outerColor = palette.brandBackground
         circleProgressView.innerColor = palette.divider
         circleProgressView.fixedColor = palette.emphasis
+    }
+    
+    /// :nodoc:
+    public func applyLinkAttributes(_ textView: UITextView) {
+        textView.tintColor = palette.emphasis
     }
     
     // MARK: Strategy

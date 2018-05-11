@@ -52,4 +52,6 @@
 "iap.error.message.unavailable" = "Apple servers currently unavailable. Please try again later.";
 "iap.error.title" = "Error";
 
-"agreement.message" = "Signing up constitutes acceptance of the Terms of Service and the Privacy Policy.";
+"agreement.message" = "Signing up constitutes acceptance of the $1 and the $2.";
+"agreement.message.tos" = "Terms of Service";
+"agreement.message.privacy" = "Privacy Policy";
