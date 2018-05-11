@@ -58,7 +58,7 @@ DEPENDENCIES:
   - TPKeyboardAvoiding
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireImage
     - FXPageControl
@@ -106,4 +106,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: bc17cafe83ac6ef6df5258f1eabac5226033294d
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.2
