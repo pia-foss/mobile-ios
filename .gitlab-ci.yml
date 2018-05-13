@@ -33,24 +33,6 @@ stages:
     tags:
         - ios
 
-test_archive:
-    stage: archive
-    variables:
-        MATCH_TYPE: "adhoc"
-        MATCH_READONLY: "true"
-        GYM_SCHEME: "PIA VPN dev"
-        GYM_EXPORT_METHOD: "ad-hoc"
-    script:
-        - bundle exec fastlane create_archive
-    artifacts:
-        paths:
-            - "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.*"
-        expire_in: 1 day
-    only:
-        - /^test\//
-    tags:
-        - ios
-
 qa_archive:
     stage: archive
     variables:
@@ -89,7 +71,6 @@ qa_deploy:
         expire_in: 1 week
     only:
         - develop
-        - /^test\//
     tags:
         - ios
 
