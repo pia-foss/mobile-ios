@@ -214,7 +214,7 @@ You will not be charged during this process.</string>
                                                                             <constraint firstAttribute="height" constant="30" id="MlG-il-Cnw"/>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="username"/>
                                                                         <connections>
                                                                             <outlet property="delegate" destination="gOX-c2-oGJ" id="yXX-Tc-HMI"/>
                                                                         </connections>
@@ -222,7 +222,7 @@ You will not be charged during this process.</string>
                                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wtm-HW-6FS" customClass="BorderedTextField" customModule="PIALibrary" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="99.5" width="280" height="30"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
                                                                         <connections>
                                                                             <outlet property="delegate" destination="gOX-c2-oGJ" id="iMK-WX-uqP"/>
                                                                         </connections>
@@ -493,7 +493,7 @@ You will not be charged during this process.</string>
                                                                             <constraint firstAttribute="height" constant="30" id="DB3-2k-5g8"/>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES"/>
+                                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                                                                         <connections>
                                                                             <outlet property="delegate" destination="J5T-ys-Of8" id="e8v-ga-Xkm"/>
                                                                         </connections>
@@ -1067,7 +1067,7 @@ You will not be charged during this process.</string>
                                                                             <constraint firstAttribute="height" constant="30" id="ceN-iH-PMs"/>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                                                                         <connections>
                                                                             <outlet property="delegate" destination="qgN-PX-Sir" id="FdC-MG-czG"/>
                                                                         </connections>
@@ -1315,6 +1315,6 @@ You will not be charged during this process.</string>
         <image name="nav-logo" width="354" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Kkc-iF-rn9"/>
+        <segue reference="Knv-fa-JGO"/>
     </inferredMetricsTieBreakers>
 </document>
