@@ -93,6 +93,7 @@
 		0ECC1E421FDB45100039891D /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECC1E401FDB45100039891D /* AboutViewController.swift */; };
 		0ECF5C082017EBAD0047596C /* ThemeCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF5C072017EBAD0047596C /* ThemeCode.swift */; };
 		0ECF5C092017EBAD0047596C /* ThemeCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF5C072017EBAD0047596C /* ThemeCode.swift */; };
+		0ED66BD020A9918000333B35 /* staging.endpoint in Resources */ = {isa = PBXBuildFile; fileRef = 0ED66BCF20A9918000333B35 /* staging.endpoint */; };
 		0ED9841B1FC48C6000542EE6 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0ED984171FC48C6000542EE6 /* Roboto-Medium.ttf */; };
 		0ED9841C1FC48C6000542EE6 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0ED984181FC48C6000542EE6 /* Roboto-Light.ttf */; };
 		0ED9841D1FC48C6000542EE6 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0ED984191FC48C6000542EE6 /* Roboto-Regular.ttf */; };
@@ -351,6 +352,7 @@
 		0ECC1E3D1FDB3F2F0039891D /* RegionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsViewController.swift; sourceTree = "<group>"; };
 		0ECC1E401FDB45100039891D /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		0ECF5C072017EBAD0047596C /* ThemeCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeCode.swift; sourceTree = "<group>"; };
+		0ED66BCF20A9918000333B35 /* staging.endpoint */ = {isa = PBXFileReference; lastKnownFileType = text; path = staging.endpoint; sourceTree = "<group>"; };
 		0ED984171FC48C6000542EE6 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		0ED984181FC48C6000542EE6 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		0ED984191FC48C6000542EE6 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
@@ -636,6 +638,7 @@
 			children = (
 				0ED984161FC48C5100542EE6 /* Fonts */,
 				0E0786DD1EFA7EAE00F77466 /* Components.plist */,
+				0ED66BCF20A9918000333B35 /* staging.endpoint */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1035,6 +1038,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ED66BD020A9918000333B35 /* staging.endpoint in Resources */,
 				0E0715E7201CBB7100D6F666 /* Flags-dev.plist in Resources */,
 				0E7EC046209326E30029811E /* Localizable.strings in Resources */,
 				0E7EC0312093265C0029811E /* InfoPlist.strings in Resources */,
