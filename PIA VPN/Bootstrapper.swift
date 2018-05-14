@@ -51,6 +51,10 @@ class Bootstrapper {
         Client.environment = AppConfiguration.clientEnvironment
         Client.configuration.isDevelopment = Flags.shared.usesDevelopmentClient
 
+        if let stagingUrl = AppConstants.Web.stagingEndpointURL {
+            Client.configuration.setBaseURL(stagingUrl.absoluteString, for: .staging)
+        }
+
         Client.configuration.enablesConnectivityUpdates = true
         Client.configuration.enablesServerUpdates = true
         Client.configuration.enablesServerPings = true

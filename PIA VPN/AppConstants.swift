@@ -52,6 +52,16 @@ struct AppConstants {
         static let privacyURL = URL(string: "https://www.privateinternetaccess.com/pages/privacy-policy/")!
 
         static let csEmail = "helpdesk+vpnpermissions.ios@privateinternetaccess.com"
+
+        static var stagingEndpointURL: URL? = {
+            guard let path = Bundle.main.path(forResource: "staging", ofType: "endpoint") else {
+                return nil
+            }
+            guard let content = try? String(contentsOfFile: path) else {
+                return nil
+            }
+            return URL(string: content.trimmingCharacters(in: .whitespacesAndNewlines))
+        }()
     }
     
     struct Fonts {
