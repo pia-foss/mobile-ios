@@ -26,9 +26,6 @@ struct AppConfiguration {
     struct Welcome {
         static func defaultPreset() -> PIAWelcomeViewController.Preset {
             var preset = PIAWelcomeViewController.Preset()
-            if !Flags.shared.enablesRedeemPage {
-                preset.pages = [.login, .purchase]
-            }
             guard Flags.shared.customizesWelcomePreset else {
                 return preset
             }
