@@ -197,10 +197,10 @@ You will not be charged during this process.</string>
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YbX-j5-KQB">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="569"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="535"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XgW-nz-hik">
-                                                                <rect key="frame" x="48" y="190" width="280" height="189.5"/>
+                                                                <rect key="frame" x="48" y="173" width="280" height="189.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in to your account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rk-V0-kLQ">
                                                                         <rect key="frame" x="55" y="0.0" width="171" height="19.5"/>
@@ -284,13 +284,13 @@ You will not be charged during this process.</string>
                                                         </variation>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vJh-jQ-GSH">
-                                                        <rect key="frame" x="0.0" y="569" width="375" height="98"/>
+                                                        <rect key="frame" x="0.0" y="535" width="375" height="132"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FiL-D6-1cW">
-                                                                <rect key="frame" x="86" y="20" width="204.5" height="40"/>
+                                                                <rect key="frame" x="121.5" y="20" width="133.5" height="36"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Don’t have an account?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bdo-R2-Gfw">
-                                                                        <rect key="frame" x="0.0" y="10" width="142.5" height="20"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Purchase1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bdo-R2-Gfw">
+                                                                        <rect key="frame" x="0.0" y="10" width="62.5" height="16"/>
                                                                         <accessibility key="accessibilityConfiguration">
                                                                             <bool key="isElement" value="NO"/>
                                                                         </accessibility>
@@ -298,8 +298,8 @@ You will not be charged during this process.</string>
                                                                         <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Buy now!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ek-BH-E5E">
-                                                                        <rect key="frame" x="147.5" y="0.0" width="57" height="40"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Purchase2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ek-BH-E5E">
+                                                                        <rect key="frame" x="67.5" y="0.0" width="66" height="36"/>
                                                                         <accessibility key="accessibilityConfiguration">
                                                                             <bool key="isElement" value="NO"/>
                                                                         </accessibility>
@@ -308,7 +308,7 @@ You will not be charged during this process.</string>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDd-25-zzQ">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="204.5" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="133.5" height="36"/>
                                                                         <accessibility key="accessibilityConfiguration">
                                                                             <bool key="isElement" value="NO"/>
                                                                         </accessibility>
@@ -328,18 +328,70 @@ You will not be charged during this process.</string>
                                                                     <constraint firstItem="2Ek-BH-E5E" firstAttribute="leading" secondItem="Bdo-R2-Gfw" secondAttribute="trailing" constant="5" id="PeK-Gm-FXi"/>
                                                                     <constraint firstAttribute="bottom" secondItem="2Ek-BH-E5E" secondAttribute="bottom" id="U9L-n2-ejC"/>
                                                                     <constraint firstAttribute="trailing" secondItem="2Ek-BH-E5E" secondAttribute="trailing" id="XnQ-1W-A8S"/>
-                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="dLd-sA-uVJ"/>
+                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="dLd-sA-uVJ"/>
                                                                     <constraint firstItem="Bdo-R2-Gfw" firstAttribute="top" secondItem="FiL-D6-1cW" secondAttribute="top" constant="10" id="ghk-36-1x8"/>
                                                                     <constraint firstItem="cDd-25-zzQ" firstAttribute="leading" secondItem="FiL-D6-1cW" secondAttribute="leading" id="lhN-GJ-mlC"/>
                                                                     <constraint firstAttribute="bottom" secondItem="Bdo-R2-Gfw" secondAttribute="bottom" constant="10" id="n89-Ea-Kau"/>
                                                                     <constraint firstAttribute="bottom" secondItem="cDd-25-zzQ" secondAttribute="bottom" id="qAd-aI-hgp"/>
                                                                 </constraints>
                                                             </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8IA-PE-u7o">
+                                                                <rect key="frame" x="129.5" y="56" width="118.5" height="36"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Redeem1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rgi-Ro-zAz">
+                                                                        <rect key="frame" x="0.0" y="10" width="55" height="16"/>
+                                                                        <accessibility key="accessibilityConfiguration">
+                                                                            <bool key="isElement" value="NO"/>
+                                                                        </accessibility>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                        <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Redeem2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gIm-UN-3ch">
+                                                                        <rect key="frame" x="60" y="0.0" width="58.5" height="36"/>
+                                                                        <accessibility key="accessibilityConfiguration">
+                                                                            <bool key="isElement" value="NO"/>
+                                                                        </accessibility>
+                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPY-Wb-M2F">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="118.5" height="36"/>
+                                                                        <accessibility key="accessibilityConfiguration">
+                                                                            <bool key="isElement" value="NO"/>
+                                                                        </accessibility>
+                                                                        <connections>
+                                                                            <action selector="redeem:" destination="gOX-c2-oGJ" eventType="touchUpInside" id="o5i-ce-MaB"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                                <accessibility key="accessibilityConfiguration">
+                                                                    <bool key="isElement" value="YES"/>
+                                                                </accessibility>
+                                                                <constraints>
+                                                                    <constraint firstItem="gIm-UN-3ch" firstAttribute="top" secondItem="8IA-PE-u7o" secondAttribute="top" id="2V8-2o-QU3"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="uPY-Wb-M2F" secondAttribute="trailing" id="3Di-57-cjh"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="gIm-UN-3ch" secondAttribute="bottom" id="GUn-37-CTu"/>
+                                                                    <constraint firstItem="gIm-UN-3ch" firstAttribute="leading" secondItem="Rgi-Ro-zAz" secondAttribute="trailing" constant="5" id="N4t-mY-B1k"/>
+                                                                    <constraint firstItem="uPY-Wb-M2F" firstAttribute="top" secondItem="8IA-PE-u7o" secondAttribute="top" id="O2d-p5-U2n"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="gIm-UN-3ch" secondAttribute="trailing" id="ZYf-VH-hcb"/>
+                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="eHL-IC-Vnj"/>
+                                                                    <constraint firstItem="Rgi-Ro-zAz" firstAttribute="leading" secondItem="8IA-PE-u7o" secondAttribute="leading" id="epX-2Z-jir"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="Rgi-Ro-zAz" secondAttribute="bottom" constant="10" id="fTv-Iu-e0s"/>
+                                                                    <constraint firstItem="Rgi-Ro-zAz" firstAttribute="top" secondItem="8IA-PE-u7o" secondAttribute="top" constant="10" id="gM9-YP-aqa"/>
+                                                                    <constraint firstItem="uPY-Wb-M2F" firstAttribute="leading" secondItem="8IA-PE-u7o" secondAttribute="leading" id="jUT-ml-AJo"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="uPY-Wb-M2F" secondAttribute="bottom" id="n14-Cd-hHu"/>
+                                                                </constraints>
+                                                            </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t9b-Yk-g0k">
-                                                                <rect key="frame" x="116" y="60" width="144" height="28"/>
+                                                                <rect key="frame" x="116" y="92" width="144" height="30"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DGc-6c-QkZ">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="144" height="28"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="144" height="30"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="30" id="sNk-uO-cDS"/>
+                                                                        </constraints>
                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                                         <state key="normal" title="Couldn't get your plan?"/>
                                                                         <connections>
@@ -357,13 +409,17 @@ You will not be charged during this process.</string>
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstItem="FiL-D6-1cW" firstAttribute="top" secondItem="vJh-jQ-GSH" secondAttribute="top" constant="20" id="Biq-nV-ufp"/>
+                                                            <constraint firstItem="8IA-PE-u7o" firstAttribute="centerX" secondItem="FiL-D6-1cW" secondAttribute="centerX" id="Cj7-9x-nv0"/>
+                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8IA-PE-u7o" secondAttribute="trailing" constant="20" id="Idr-RF-ToT"/>
+                                                            <constraint firstItem="8IA-PE-u7o" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vJh-jQ-GSH" secondAttribute="leading" constant="20" id="NVK-Ln-RvS"/>
                                                             <constraint firstItem="FiL-D6-1cW" firstAttribute="centerX" secondItem="vJh-jQ-GSH" secondAttribute="centerX" id="TYb-oF-iFu"/>
+                                                            <constraint firstItem="8IA-PE-u7o" firstAttribute="top" secondItem="FiL-D6-1cW" secondAttribute="bottom" id="V4x-fi-SIa"/>
                                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="t9b-Yk-g0k" secondAttribute="trailing" constant="20" id="bVp-LU-imv"/>
-                                                            <constraint firstItem="t9b-Yk-g0k" firstAttribute="top" secondItem="FiL-D6-1cW" secondAttribute="bottom" id="hl4-hM-4er"/>
                                                             <constraint firstItem="FiL-D6-1cW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vJh-jQ-GSH" secondAttribute="leading" constant="20" id="iA8-sn-eDU"/>
                                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FiL-D6-1cW" secondAttribute="trailing" constant="20" id="mHp-tF-koj"/>
                                                             <constraint firstItem="t9b-Yk-g0k" firstAttribute="centerX" secondItem="FiL-D6-1cW" secondAttribute="centerX" id="nBF-Ts-6UV"/>
                                                             <constraint firstAttribute="bottom" secondItem="t9b-Yk-g0k" secondAttribute="bottom" constant="10" id="nQq-dn-o95"/>
+                                                            <constraint firstItem="t9b-Yk-g0k" firstAttribute="top" secondItem="8IA-PE-u7o" secondAttribute="bottom" id="vmC-n9-frc"/>
                                                             <constraint firstItem="t9b-Yk-g0k" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vJh-jQ-GSH" secondAttribute="leading" constant="20" id="wrC-PK-dKJ"/>
                                                         </constraints>
                                                     </view>
@@ -437,18 +493,21 @@ You will not be charged during this process.</string>
                         <outlet property="buttonRestorePurchase" destination="DGc-6c-QkZ" id="NWm-1K-itM"/>
                         <outlet property="labelPurchase1" destination="Bdo-R2-Gfw" id="8LQ-8b-dqG"/>
                         <outlet property="labelPurchase2" destination="2Ek-BH-E5E" id="tts-yY-e4v"/>
+                        <outlet property="labelRedeem1" destination="Rgi-Ro-zAz" id="gen-N7-Tgw"/>
+                        <outlet property="labelRedeem2" destination="gIm-UN-3ch" id="hw3-ue-jYD"/>
                         <outlet property="labelTitle" destination="2Rk-V0-kLQ" id="qdr-SQ-OwV"/>
                         <outlet property="scrollView" destination="RgS-fn-CJH" id="gQR-aC-e9f"/>
                         <outlet property="textPassword" destination="Wtm-HW-6FS" id="bvM-nY-mSr"/>
                         <outlet property="textUsername" destination="Gcb-kt-Yu7" id="5rD-If-yIW"/>
                         <outlet property="viewFooter" destination="vJh-jQ-GSH" id="ndq-QD-fYY"/>
                         <outlet property="viewPurchase" destination="FiL-D6-1cW" id="NzI-dl-aRy"/>
+                        <outlet property="viewRedeem" destination="8IA-PE-u7o" id="ve8-2H-01Q"/>
                         <segue destination="9jt-8I-K8i" kind="presentation" identifier="SignupViaRestoreSegue" id="EEe-nI-dHO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MPJ-r6-Xjn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="846" y="-1898"/>
+            <point key="canvasLocation" x="845.60000000000002" y="-1898.5007496251876"/>
         </scene>
         <!--Signup-->
         <scene sceneID="5io-4b-Dug">
@@ -1044,10 +1103,10 @@ You will not be charged during this process.</string>
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mPZ-KP-R5j">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="569"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="587"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TnM-Pl-njO">
-                                                                <rect key="frame" x="48" y="159.5" width="280" height="250"/>
+                                                                <rect key="frame" x="48" y="168.5" width="280" height="250"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Redeem" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEC-Qu-zkj">
                                                                         <rect key="frame" x="109.5" y="0.0" width="61" height="20"/>
@@ -1152,7 +1211,7 @@ You will not be charged during this process.</string>
                                                         </variation>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h4C-e9-6n1">
-                                                        <rect key="frame" x="0.0" y="569" width="375" height="98"/>
+                                                        <rect key="frame" x="0.0" y="587" width="375" height="80"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KcR-KY-dYx">
                                                                 <rect key="frame" x="86" y="20" width="204.5" height="40"/>
@@ -1180,6 +1239,9 @@ You will not be charged during this process.</string>
                                                                         <accessibility key="accessibilityConfiguration">
                                                                             <bool key="isElement" value="NO"/>
                                                                         </accessibility>
+                                                                        <connections>
+                                                                            <action selector="logIn:" destination="qgN-PX-Sir" eventType="touchUpInside" id="q3M-bF-jDA"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <accessibility key="accessibilityConfiguration">
@@ -1200,33 +1262,13 @@ You will not be charged during this process.</string>
                                                                     <constraint firstAttribute="bottom" secondItem="Ovb-tk-w2q" secondAttribute="bottom" constant="10" id="zp2-wv-xJf"/>
                                                                 </constraints>
                                                             </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8KQ-Ej-L5M">
-                                                                <rect key="frame" x="116" y="60" width="144" height="28"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKn-89-mpq">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="144" height="28"/>
-                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
-                                                                        <state key="normal" title="Couldn't get your plan?"/>
-                                                                    </button>
-                                                                </subviews>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="trailing" secondItem="JKn-89-mpq" secondAttribute="trailing" id="018-j9-1gH"/>
-                                                                    <constraint firstItem="JKn-89-mpq" firstAttribute="top" secondItem="8KQ-Ej-L5M" secondAttribute="top" id="OuY-A1-7nO"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="JKn-89-mpq" secondAttribute="bottom" id="pN0-cm-qhE"/>
-                                                                    <constraint firstItem="JKn-89-mpq" firstAttribute="leading" secondItem="8KQ-Ej-L5M" secondAttribute="leading" id="wLO-ed-Tad"/>
-                                                                </constraints>
-                                                            </view>
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstItem="KcR-KY-dYx" firstAttribute="top" secondItem="h4C-e9-6n1" secondAttribute="top" constant="20" id="3Zn-iz-jkz"/>
                                                             <constraint firstItem="KcR-KY-dYx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="h4C-e9-6n1" secondAttribute="leading" constant="20" id="A6h-4j-I4d"/>
-                                                            <constraint firstItem="8KQ-Ej-L5M" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="h4C-e9-6n1" secondAttribute="leading" constant="20" id="LZR-zX-0d3"/>
-                                                            <constraint firstItem="8KQ-Ej-L5M" firstAttribute="top" secondItem="KcR-KY-dYx" secondAttribute="bottom" id="WMV-SX-IQH"/>
+                                                            <constraint firstAttribute="bottom" secondItem="KcR-KY-dYx" secondAttribute="bottom" constant="20" id="KvL-Uj-0ql"/>
                                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KcR-KY-dYx" secondAttribute="trailing" constant="20" id="Xly-8i-P7e"/>
-                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8KQ-Ej-L5M" secondAttribute="trailing" constant="20" id="fS6-3G-DjH"/>
-                                                            <constraint firstAttribute="bottom" secondItem="8KQ-Ej-L5M" secondAttribute="bottom" constant="10" id="ftd-Z2-spE"/>
                                                             <constraint firstItem="KcR-KY-dYx" firstAttribute="centerX" secondItem="h4C-e9-6n1" secondAttribute="centerX" id="iRm-2n-8Oc"/>
-                                                            <constraint firstItem="8KQ-Ej-L5M" firstAttribute="centerX" secondItem="KcR-KY-dYx" secondAttribute="centerX" id="v6c-4p-NM7"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -1296,6 +1338,8 @@ You will not be charged during this process.</string>
                     </view>
                     <connections>
                         <outlet property="buttonRedeem" destination="tea-DU-K60" id="5tX-8w-A1k"/>
+                        <outlet property="labelLogin1" destination="Ovb-tk-w2q" id="43z-6a-sg0"/>
+                        <outlet property="labelLogin2" destination="ecj-b6-crK" id="a8l-fb-1Ph"/>
                         <outlet property="labelSubtitle" destination="S5y-bL-bNg" id="hzd-5h-ycZ"/>
                         <outlet property="labelTitle" destination="QEC-Qu-zkj" id="wex-q3-a85"/>
                         <outlet property="scrollView" destination="9Ah-aP-Yc5" id="naB-Ae-QWx"/>
@@ -1303,6 +1347,7 @@ You will not be charged during this process.</string>
                         <outlet property="textCode" destination="pbJ-dg-A3t" id="3HI-fT-yNN"/>
                         <outlet property="textEmail" destination="3ne-g6-NDW" id="tUr-cH-df2"/>
                         <outlet property="viewFooter" destination="h4C-e9-6n1" id="xcl-1q-9mx"/>
+                        <outlet property="viewLogin" destination="h4C-e9-6n1" id="9QP-x0-OOS"/>
                         <segue destination="9jt-8I-K8i" kind="presentation" identifier="SignupViaRedeemSegue" id="Knv-fa-JGO"/>
                     </connections>
                 </viewController>
@@ -1315,6 +1360,6 @@ You will not be charged during this process.</string>
         <image name="nav-logo" width="354" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Knv-fa-JGO"/>
+        <segue reference="EEe-nI-dHO"/>
     </inferredMetricsTieBreakers>
 </document>

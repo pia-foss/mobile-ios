@@ -13,7 +13,7 @@
 "success.title" = "Purchase complete";
 "success.message_format" = "Thank you for signing up with us. We have sent your account username and password at your email address at %@";
 "success.redeem.title" = "Completed!";
-"success.redeem.message" = "You will receive an email shortly with your username and password.";
+"success.redeem.message" = "You will also receive an email shortly with your username and password.";
 "success.username.caption" = "Username";
 "success.password.caption" = "Password";
 "success.submit" = "GET STARTED";

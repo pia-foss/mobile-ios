@@ -12,6 +12,8 @@
 "login.submit" = "LOGIN";
 "login.purchase.footer" = "Don’t have an account?";
 "login.purchase.button" = "Buy now!";
+"login.redeem.footer" = "Have a gift card or trial card?";
+"login.redeem.button" = "Redeem now!";
 "login.restore.button" = "Couldn't get your plan?";
 "login.error.title" = "Log in";
 "login.error.validation" = "You must enter an username and password.";

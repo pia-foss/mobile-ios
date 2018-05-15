@@ -63,6 +63,13 @@ enum L10n {
         static let footer = L10n.tr("Welcome", "login.purchase.footer")
       }
 
+      enum Redeem {
+        /// Redeem now!
+        static let button = L10n.tr("Welcome", "login.redeem.button")
+        /// Have a gift card or trial card?
+        static let footer = L10n.tr("Welcome", "login.redeem.footer")
+      }
+
       enum Restore {
         /// Couldn't get your plan?
         static let button = L10n.tr("Welcome", "login.restore.button")
@@ -246,7 +253,7 @@ enum L10n {
       }
 
       enum Redeem {
-        /// You will receive an email shortly with your username and password.
+        /// You will also receive an email shortly with your username and password.
         static let message = L10n.tr("Signup", "success.redeem.message")
         /// Completed!
         static let title = L10n.tr("Signup", "success.redeem.title")
