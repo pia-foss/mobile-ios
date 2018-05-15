@@ -54,7 +54,23 @@ class WelcomePageViewController: UIPageViewController {
     }
     
     func show(page: PIAWelcomeViewController.Pages) {
-        let index = page.rawValue - 1
+
+        // XXX: quick temp solution for log2
+        let index: Int
+        switch page {
+        case .login:
+            index = 0
+            
+        case .purchase:
+            index = 1
+            
+        case .redeem:
+            index = 2
+            
+        default:
+            return
+        }
+
         guard (index < source.count) else {
             fatalError("Page \(index) beyond source controllers (\(source.count))")
         }
