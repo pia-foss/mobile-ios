@@ -39,8 +39,11 @@ class WelcomePageViewController: UIPageViewController {
         guard !source.isEmpty else {
             fatalError("Source controllers are empty")
         }
-
         let isSinglePage = (source.count == 1)
+        guard isSinglePage || (preset.pages == .all) else {
+            fatalError("Currently supports all pages or a single page, not a subset")
+        }
+
         for vc in source {
             guard let child = vc as? WelcomeChild else {
                 fatalError("Source element must be a WelcomeChild")
