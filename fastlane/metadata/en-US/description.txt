@@ -36,8 +36,12 @@ Joe1134206, 09/8/2017
 “Love it. Feel safer when browsing the internet.”
 Cachuco, 08/7/2017
 
-“Hard to find a nit with this app. (...) The iOS app allows a quicker toggle on/off than digging into settings, for VPN hostile iOS apps like Pandora and Netflix. iOS has a VPN notifier by the Bluetooth indicator icon, so you are always aware of your status. I like PIA’s value for the money, and I have not had any trouble whatsoever with the iOS app. I recommend this app, and PIA, as one of your layers of online security.”
+“Hard to find a nit with this app. (...) The iOS app allows a quicker toggle on/off than digging into settings, for VPN hostile iOS apps like Pandora and Netflix. I like PIA’s value for the money, and I have not had any trouble whatsoever with the iOS app. I recommend this app, and PIA, as one of your layers of online security.”
 DB Associates, 01/27/2017
 
 “I did my homework, reviewing many VPN services. PIA was among the most economical, plenty of simultaneous connections and more than enough servers and services. (...) The speed is more than I hoped for. I can stream all YouTube videos. HD quality is superb with no buffering. I am happy to have this extra security on all our devices. My wife could not tell the difference after I installed it on her PC. I think I paid $39.99/year. What a bargain!”
 Helmut, 06/20/2016
+
+GDPR compatibility
+
+This application only sends username and encrypted passwords to our servers as part of using this app. During signups, we also collect user's email. We do not collect and/or store any other user information.
