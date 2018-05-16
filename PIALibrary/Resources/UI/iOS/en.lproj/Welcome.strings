@@ -32,7 +32,6 @@
 "redeem.title" = "Redeem gift card";
 "redeem.subtitle" = "Type in your email address and the 16 digit PIN from your gift card or trial card below.";
 "redeem.email.placeholder" = "Email address";
-"redeem.code.placeholder" = "1234-5678-9012-3456";
 "redeem.submit" = "SUBMIT";
 //"redeem.login.footer" = "Already have an account?";
 //"redeem.login.button" = "Sign in!";

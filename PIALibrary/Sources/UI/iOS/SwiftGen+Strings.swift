@@ -145,11 +145,6 @@ enum L10n {
       /// Redeem gift card
       static let title = L10n.tr("Welcome", "redeem.title")
 
-      enum Code {
-        /// 1234-5678-9012-3456
-        static let placeholder = L10n.tr("Welcome", "redeem.code.placeholder")
-      }
-
       enum Email {
         /// Email address
         static let placeholder = L10n.tr("Welcome", "redeem.email.placeholder")

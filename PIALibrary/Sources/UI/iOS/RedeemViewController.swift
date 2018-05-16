@@ -16,6 +16,8 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     
     private static let rxCodeGrouping: NSRegularExpression = try! NSRegularExpression(pattern: "\\d{4}(?=\\d)", options: [])
     
+    private static let codePlaceholder = "1234-5678-9012-3456"
+    
     private static let maxCodeLength = 16
 
     @IBOutlet private weak var scrollView: UIScrollView!
@@ -70,7 +72,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         labelTitle.text = L10n.Welcome.Redeem.title
         labelSubtitle.text = L10n.Welcome.Redeem.subtitle
         textEmail.placeholder = L10n.Welcome.Redeem.Email.placeholder
-        textCode.placeholder = L10n.Welcome.Redeem.Code.placeholder
+        textCode.placeholder = RedeemViewController.codePlaceholder
         textAgreement.attributedText = Theme.current.agreementText(
             withMessage: L10n.Welcome.Agreement.message,
             tos: L10n.Welcome.Agreement.Message.tos,
