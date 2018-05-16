@@ -53,7 +53,7 @@ DEPENDENCIES:
   - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `a1235a0f279f2ac5267b1a7044d3b5b1d6db62ca`)
   - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `a1235a0f279f2ac5267b1a7044d3b5b1d6db62ca`)
   - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `a1235a0f279f2ac5267b1a7044d3b5b1d6db62ca`)
-  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `2e68a9decc4c57b1c26cab41ca41dab74033445e`)
+  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `b976f5e`)
   - SideMenu (= 3.1.5)
   - TPKeyboardAvoiding
 
@@ -77,7 +77,7 @@ EXTERNAL SOURCES:
     :commit: a1235a0f279f2ac5267b1a7044d3b5b1d6db62ca
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
-    :commit: 2e68a9decc4c57b1c26cab41ca41dab74033445e
+    :commit: b976f5e
     :git: https://github.com/pia-foss/tunnel-apple
 
 CHECKOUT OPTIONS:
@@ -85,7 +85,7 @@ CHECKOUT OPTIONS:
     :commit: a1235a0f279f2ac5267b1a7044d3b5b1d6db62ca
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
-    :commit: 2e68a9decc4c57b1c26cab41ca41dab74033445e
+    :commit: b976f5e
     :git: https://github.com/pia-foss/tunnel-apple
 
 SPEC CHECKSUMS:
@@ -104,6 +104,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 85daaaa2b3ae6e31b7b55c99430e8b91dac088af
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 3db8fd3d6439bc6a9d95a62f3796977ac75c9079
+PODFILE CHECKSUM: 4a3c732a4ce5b641b739e838231288fbcd89757e
 
 COCOAPODS: 1.5.2
