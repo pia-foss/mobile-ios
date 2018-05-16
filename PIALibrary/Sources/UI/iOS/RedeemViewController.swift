@@ -18,7 +18,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     
     private static let codePlaceholder = "1234-5678-9012-3456"
     
-    private static let maxCodeLength = 16
+    private static let codeLength = 16
 
     @IBOutlet private weak var scrollView: UIScrollView!
     
@@ -70,7 +70,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         viewFooter.isHidden = omitsSiblingLink
         
         labelTitle.text = L10n.Welcome.Redeem.title
-        labelSubtitle.text = L10n.Welcome.Redeem.subtitle
+        labelSubtitle.text = L10n.Welcome.Redeem.subtitle(RedeemViewController.codeLength)
         textEmail.placeholder = L10n.Welcome.Redeem.Email.placeholder
         textCode.placeholder = RedeemViewController.codePlaceholder
         textAgreement.attributedText = Theme.current.agreementText(
@@ -121,7 +121,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         guard let code = redeemCode, Validator.validate(giftCode: code) else {
             let alert = Macros.alert(
                 L10n.Welcome.Redeem.Error.title,
-                L10n.Welcome.Redeem.Error.code
+                L10n.Welcome.Redeem.Error.code(RedeemViewController.codeLength)
             )
             alert.addCancelAction(L10n.Ui.Global.ok)
             present(alert, animated: true, completion: nil)
@@ -229,7 +229,7 @@ extension RedeemViewController: UITextFieldDelegate {
 
         let cursorLocation = textField.position(from: textField.beginningOfDocument, offset: range.location + string.count)
         let newCode = strippedRedeemCode(newText)
-        guard newCode.count <= RedeemViewController.maxCodeLength else {
+        guard newCode.count <= RedeemViewController.codeLength else {
             return false
         }
         redeemCode = newCode
