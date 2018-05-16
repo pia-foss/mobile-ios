@@ -12,7 +12,7 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 class RedeemViewController: AutolayoutViewController, WelcomeChild {
-    private static let nonDigitsSet = CharacterSet.decimalDigits.inverted
+    private static let codeInvalidSet = CharacterSet.decimalDigits.inverted
     
     private static let rxCodeGrouping: NSRegularExpression = try! NSRegularExpression(pattern: "\\d{4}(?=\\d)", options: [])
     
@@ -109,7 +109,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             return
         }
         
-        guard let email = textEmail.text, Validator.validate(email: email) else {
+        guard let email = textEmail.text?.trimmed(), Validator.validate(email: email) else {
             let alert = Macros.alert(
                 L10n.Welcome.Redeem.Error.title,
                 L10n.Welcome.Purchase.Error.validation
@@ -118,7 +118,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             present(alert, animated: true, completion: nil)
             return
         }
-        guard let code = redeemCode, Validator.validate(giftCode: code) else {
+        guard let code = redeemCode?.trimmed(), Validator.validate(giftCode: code) else {
             let alert = Macros.alert(
                 L10n.Welcome.Redeem.Error.title,
                 L10n.Welcome.Redeem.Error.code(RedeemViewController.codeLength)
@@ -128,7 +128,8 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             return
         }
         
-        
+        textEmail.text = email
+        textCode.text = friendlyRedeemCode(code)
         log.debug("Redeeming...")
         
         redeemEmail = email
@@ -218,15 +219,18 @@ extension RedeemViewController: UITextFieldDelegate {
         guard textField == textCode else {
             return true
         }
-        
-        guard string.rangeOfCharacter(from: RedeemViewController.nonDigitsSet) == nil else {
-            return false
-        }
+
+        // cleared input
         guard let newText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) else {
             redeemCode = nil
             return true
         }
 
+        // typed/pasted invalid character and did not paste a full code with dashes
+        guard (string.rangeOfCharacter(from: RedeemViewController.codeInvalidSet) == nil) || Validator.validate(giftCode: newText, withDashes: true) else {
+            return false
+        }
+        
         let cursorLocation = textField.position(from: textField.beginningOfDocument, offset: range.location + string.count)
         let newCode = strippedRedeemCode(newText)
         guard newCode.count <= RedeemViewController.codeLength else {
