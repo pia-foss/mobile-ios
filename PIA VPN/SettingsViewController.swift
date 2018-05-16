@@ -312,6 +312,10 @@ class SettingsViewController: AutolayoutViewController {
         let savedServer = pendingPreferences.preferredServer
         pendingPreferences.reset()
         pendingPreferences.preferredServer = savedServer
+        guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? PIATunnelProvider.Configuration else {
+            fatalError("No default VPN custom configuration provided for PIA protocol")
+        }
+        pendingOpenVPNConfiguration = currentOpenVPNConfiguration.builder()
 
         transitionTheme(to: .light)
 
