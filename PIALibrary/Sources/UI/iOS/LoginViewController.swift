@@ -92,13 +92,13 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
     
         let errorTitle = L10n.Welcome.Login.Error.title
         let errorMessage = L10n.Welcome.Login.Error.validation
-        guard let username = textUsername.text, !username.isEmpty else {
+        guard let username = textUsername.text?.trimmed(), !username.isEmpty else {
             let alert = Macros.alert(errorTitle, errorMessage)
             alert.addCancelAction(L10n.Ui.Global.ok)
             present(alert, animated: true, completion: nil)
             return
         }
-        guard let password = textPassword.text, !password.isEmpty else {
+        guard let password = textPassword.text?.trimmed(), !password.isEmpty else {
             let alert = Macros.alert(errorTitle, errorMessage)
             alert.addCancelAction(L10n.Ui.Global.ok)
             present(alert, animated: true, completion: nil)
@@ -110,6 +110,8 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
         let credentials = Credentials(username: username, password: password)
         let request = LoginRequest(credentials: credentials)
 
+        textUsername.text = username
+        textPassword.text = password
         log.debug("Logging in...")
 
         enableInteractions(false)

@@ -152,3 +152,9 @@ public extension UIAlertController {
         preferredAction = action
     }
 }
+
+extension String {
+    func trimmed() -> String {
+        return trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+}

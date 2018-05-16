@@ -109,7 +109,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             return
         }
         
-        guard let email = textEmail.text, Validator.validate(email: email) else {
+        guard let email = textEmail.text?.trimmed(), Validator.validate(email: email) else {
             let alert = Macros.alert(
                 L10n.Welcome.Redeem.Error.title,
                 L10n.Welcome.Purchase.Error.validation
@@ -118,7 +118,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             present(alert, animated: true, completion: nil)
             return
         }
-        guard let code = redeemCode, Validator.validate(giftCode: code) else {
+        guard let code = redeemCode?.trimmed(), Validator.validate(giftCode: code) else {
             let alert = Macros.alert(
                 L10n.Welcome.Redeem.Error.title,
                 L10n.Welcome.Redeem.Error.code(RedeemViewController.codeLength)
@@ -128,7 +128,8 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             return
         }
         
-        
+        textEmail.text = email
+        textCode.text = friendlyRedeemCode(code)
         log.debug("Redeeming...")
         
         redeemEmail = email
