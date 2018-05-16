@@ -12,7 +12,7 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 class RedeemViewController: AutolayoutViewController, WelcomeChild {
-    private static let nonDigitsSet = CharacterSet.decimalDigits.inverted
+    private static let codeInvalidSet = CharacterSet.decimalDigits.inverted
     
     private static let rxCodeGrouping: NSRegularExpression = try! NSRegularExpression(pattern: "\\d{4}(?=\\d)", options: [])
     
@@ -219,8 +219,7 @@ extension RedeemViewController: UITextFieldDelegate {
         guard textField == textCode else {
             return true
         }
-        
-        guard string.rangeOfCharacter(from: RedeemViewController.nonDigitsSet) == nil else {
+        guard string.rangeOfCharacter(from: RedeemViewController.codeInvalidSet) == nil else {
             return false
         }
         guard let newText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) else {
