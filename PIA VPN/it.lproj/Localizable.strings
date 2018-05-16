@@ -100,6 +100,12 @@
 "settings.encryption.digest.title" = "Autenticazione dati";
 "settings.encryption.handshake.title" = "Handshake";
 "settings.encryption.title" = "CRITTOGRAFIA";
+"settings.reset.defaults.confirm.button" = "Ripristina";
+"settings.reset.defaults.confirm.message" = "Questo riporterà l'app alle impostazioni predefinite. Perderai tutte le modifiche apportate.";
+"settings.reset.defaults.confirm.title" = "Ripristina impostazioni";
+"settings.reset.defaults.title" = "Ripristina impostazioni predefinite";
+"settings.reset.footer" = "Questo riporterà tutte le impostazioni a quelle predefinite";
+"settings.reset.title" = "RIPRISTINA";
 "shortcuts.connect" = "Connetti";
 "shortcuts.disconnect" = "Disconnetti";
 "shortcuts.select_region" = "Seleziona una regione";

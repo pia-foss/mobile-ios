@@ -100,6 +100,12 @@
 "settings.encryption.digest.title" = "การยืนยันข้อมูล";
 "settings.encryption.handshake.title" = "ความร่วมมือ";
 "settings.encryption.title" = "การเข้ารหัส";
+"settings.reset.defaults.confirm.button" = "รีเซ็ต";
+"settings.reset.defaults.confirm.message" = "การกระทำนี้จะทำให้แอปกลับไปสู่ค่าเริ่มต้น คุณจะสูญเสียการเปลี่ยนแปลงทั้งหมดที่เคยทำไว้";
+"settings.reset.defaults.confirm.title" = "การตั้งค่าการรีเซ็ต";
+"settings.reset.defaults.title" = "รีเซ็ตและกลับไปสู่การตั้งค่าเริ่มต้น";
+"settings.reset.footer" = "การกระทำนี้จะรีเซ็ตการตั้งค่าด้านบนทั้งหมดและกลับไปสู่ค่าเริ่มต้น";
+"settings.reset.title" = "รีเซ็ต";
 "shortcuts.connect" = "เชื่อมต่อ";
 "shortcuts.disconnect" = "ยกเลิกการเชื่อมต่อ";
 "shortcuts.select_region" = "เลือกภูมิภาค";

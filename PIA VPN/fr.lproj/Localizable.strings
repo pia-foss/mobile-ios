@@ -100,6 +100,12 @@
 "settings.encryption.digest.title" = "Authentification des données";
 "settings.encryption.handshake.title" = "Handshake";
 "settings.encryption.title" = "CHIFFREMENT";
+"settings.reset.defaults.confirm.button" = "Réinitialiser";
+"settings.reset.defaults.confirm.message" = "Cette action rétablira les paramètres par défaut de l'application. Toutes les modifications effectuées seront perdues.";
+"settings.reset.defaults.confirm.title" = "Réinitialiser les paramètres";
+"settings.reset.defaults.title" = "Réinitialiser les paramètres par défaut";
+"settings.reset.footer" = "Tout les paramètres ci-dessus seront réinitialisés.";
+"settings.reset.title" = "RÉINITIALISER";
 "shortcuts.connect" = "Se connecter";
 "shortcuts.disconnect" = "Se déconnecter";
 "shortcuts.select_region" = "Sélectionner une région";

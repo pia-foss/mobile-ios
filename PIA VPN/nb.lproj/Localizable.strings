@@ -100,6 +100,12 @@
 "settings.encryption.digest.title" = "Dataverifisering";
 "settings.encryption.handshake.title" = "Håndtrykk";
 "settings.encryption.title" = "KRYPTERING";
+"settings.reset.defaults.confirm.button" = "Tilbakestill";
+"settings.reset.defaults.confirm.message" = "Dette bringer appen tilbake til fabrikkinnstillingene. Du mister alle endringer.";
+"settings.reset.defaults.confirm.title" = "Innstillinger for tilbakestilling";
+"settings.reset.defaults.title" = "Tilbakestill til fabrikkinstillinger";
+"settings.reset.footer" = "Dette tilbakestiller alle innstillingene ovenfor til standard.";
+"settings.reset.title" = "TILBAKESTILL";
 "shortcuts.connect" = "Koble til";
 "shortcuts.disconnect" = "Koble fra";
 "shortcuts.select_region" = "Velg region";

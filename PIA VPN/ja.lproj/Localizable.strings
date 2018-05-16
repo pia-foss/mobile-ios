@@ -100,6 +100,12 @@
 "settings.encryption.digest.title" = "データ認証";
 "settings.encryption.handshake.title" = "ハンドシェイク";
 "settings.encryption.title" = "暗号化";
+"settings.reset.defaults.confirm.button" = "リセット";
+"settings.reset.defaults.confirm.message" = "アプリを標準設定に戻します。これまでの変更はすべて失われます。";
+"settings.reset.defaults.confirm.title" = "リセットの設定";
+"settings.reset.defaults.title" = "標準設定にリセット";
+"settings.reset.footer" = "上記すべての設定を標準設定に戻します。";
+"settings.reset.title" = "リセット";
 "shortcuts.connect" = "接続";
 "shortcuts.disconnect" = "切断";
 "shortcuts.select_region" = "地域の選択";

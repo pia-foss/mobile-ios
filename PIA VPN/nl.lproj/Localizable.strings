@@ -100,6 +100,12 @@
 "settings.encryption.digest.title" = "Gegevensauthenticatie";
 "settings.encryption.handshake.title" = "Handdruk";
 "settings.encryption.title" = "VERSLEUTELING";
+"settings.reset.defaults.confirm.button" = "Resetten";
+"settings.reset.defaults.confirm.message" = "Hiermee zet u de standaardinstellingen van de app terug. Alle wijzigingen die u heeft gemaakt, gaan verloren.";
+"settings.reset.defaults.confirm.title" = "Instellingen resetten";
+"settings.reset.defaults.title" = "Resetten naar standaardinstellingen";
+"settings.reset.footer" = "Hiermee worden alle bovenstaande instellingen teruggezet naar de standaardwaarden.";
+"settings.reset.title" = "RESETTEN";
 "shortcuts.connect" = "Verbinden";
 "shortcuts.disconnect" = "Verbinding verbreken";
 "shortcuts.select_region" = "Selecteer een regio";

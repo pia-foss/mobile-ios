@@ -100,6 +100,12 @@
 "settings.encryption.digest.title" = "Uwierzytelnianie danych";
 "settings.encryption.handshake.title" = "Uzgadnianie";
 "settings.encryption.title" = "SZYFROWANIE";
+"settings.reset.defaults.confirm.button" = "Resetuj";
+"settings.reset.defaults.confirm.message" = "Spowoduje to przywrócenie domyślnych ustawień aplikacji. Stracisz wszystkie wprowadzone zmiany.";
+"settings.reset.defaults.confirm.title" = "Resetuj ustawienia";
+"settings.reset.defaults.title" = "Resetuj do ustawień domyślnych";
+"settings.reset.footer" = "Spowoduje to zresetowanie wszystkich powyższych ustawień do domyślnych.";
+"settings.reset.title" = "RESETUJ";
 "shortcuts.connect" = "Połącz";
 "shortcuts.disconnect" = "Rozłącz";
 "shortcuts.select_region" = "Wybierz region";

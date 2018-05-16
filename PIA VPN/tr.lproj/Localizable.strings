@@ -100,6 +100,12 @@
 "settings.encryption.digest.title" = "Veri doğrulama";
 "settings.encryption.handshake.title" = "Handshake";
 "settings.encryption.title" = "ŞİFRELEME";
+"settings.reset.defaults.confirm.button" = "Sıfırla";
+"settings.reset.defaults.confirm.message" = "Bu işlem uygulama ayarlarını sıfırlayacak. Yapmış olduğun bütün değişiklikler kaybolacaktır.";
+"settings.reset.defaults.confirm.title" = "Ayarları sıfırla";
+"settings.reset.defaults.title" = "Varsayılan ayarlara sıfırla";
+"settings.reset.footer" = "Bu işlem yukarıdaki bütün ayarları sıfırlayarak varsayılan değerlere döndürecektir.";
+"settings.reset.title" = "SIFIRLA";
 "shortcuts.connect" = "Bağlan";
 "shortcuts.disconnect" = "Bağlantıyı Kes";
 "shortcuts.select_region" = "Bir Bölge Seçin";

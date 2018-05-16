@@ -100,6 +100,12 @@
 "settings.encryption.digest.title" = "数据认证";
 "settings.encryption.handshake.title" = "握手";
 "settings.encryption.title" = "加密";
+"settings.reset.defaults.confirm.button" = "重置";
+"settings.reset.defaults.confirm.message" = "此操作会将应用恢复为默认状态。您将丢失您做出的所有变更。";
+"settings.reset.defaults.confirm.title" = "重置设置";
+"settings.reset.defaults.title" = "重置为默认设置";
+"settings.reset.footer" = "此操作会将以上所有设置重置为默认状态。";
+"settings.reset.title" = "重置";
 "shortcuts.connect" = "连接";
 "shortcuts.disconnect" = "断开连接";
 "shortcuts.select_region" = "选择地区";

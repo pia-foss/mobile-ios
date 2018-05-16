@@ -100,6 +100,12 @@
 "settings.encryption.digest.title" = "Аутентификация данных";
 "settings.encryption.handshake.title" = "Квитирование";
 "settings.encryption.title" = "ШИФРОВАНИЕ";
+"settings.reset.defaults.confirm.button" = "Сбросить";
+"settings.reset.defaults.confirm.message" = "Это сбросит приложение к исходному состоянию. Вы потеряете все сделанные изменения.";
+"settings.reset.defaults.confirm.title" = "Сбросить настройки";
+"settings.reset.defaults.title" = "На настройки по умолчанию";
+"settings.reset.footer" = "Это сбросит все настройки к исходному состоянию.";
+"settings.reset.title" = "СБРОСИТЬ";
 "shortcuts.connect" = "Подключиться";
 "shortcuts.disconnect" = "Отключиться";
 "shortcuts.select_region" = "Выберите регион";

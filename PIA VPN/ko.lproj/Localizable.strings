@@ -100,6 +100,12 @@
 "settings.encryption.digest.title" = "데이터 인증";
 "settings.encryption.handshake.title" = "핸드셰이크";
 "settings.encryption.title" = "암호화";
+"settings.reset.defaults.confirm.button" = "초기화";
+"settings.reset.defaults.confirm.message" = "앱이 기본 설정으로 돌아갑니다. 모든 변경 사항을 잃게 됩니다.";
+"settings.reset.defaults.confirm.title" = "초기화 설정";
+"settings.reset.defaults.title" = "기본 설정으로 초기화";
+"settings.reset.footer" = "모든 설정이 기본 설정으로 초기화됩니다.";
+"settings.reset.title" = "초기화";
 "shortcuts.connect" = "연결";
 "shortcuts.disconnect" = "연결 해제";
 "shortcuts.select_region" = "지역 선택";

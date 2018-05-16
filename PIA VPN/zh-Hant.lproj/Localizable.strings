@@ -100,6 +100,12 @@
 "settings.encryption.digest.title" = "資料驗證";
 "settings.encryption.handshake.title" = "Handshake";
 "settings.encryption.title" = "加密";
+"settings.reset.defaults.confirm.button" = "重設";
+"settings.reset.defaults.confirm.message" = "此操作會將應用程式重設為預設狀態。所有您所作的變更都將會被清除。";
+"settings.reset.defaults.confirm.title" = "重設設定";
+"settings.reset.defaults.title" = "重設至預設設定";
+"settings.reset.footer" = "進行此操作會將以上所有設定都重設至預設狀態。";
+"settings.reset.title" = "重設";
 "shortcuts.connect" = "連線";
 "shortcuts.disconnect" = "解除連線";
 "shortcuts.select_region" = "選擇區域";

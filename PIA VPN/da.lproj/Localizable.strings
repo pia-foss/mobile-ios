@@ -100,6 +100,12 @@
 "settings.encryption.digest.title" = "Autentificering af data";
 "settings.encryption.handshake.title" = "Håndtryk";
 "settings.encryption.title" = "KRYPTERING";
+"settings.reset.defaults.confirm.button" = "Nulstil";
+"settings.reset.defaults.confirm.message" = "Det fører appen tilbage til standard. Du vil miste alle dine ændringer.";
+"settings.reset.defaults.confirm.title" = "Nulstil indstillinger";
+"settings.reset.defaults.title" = "Nulstil til standard";
+"settings.reset.footer" = "Dette vil nulstille alle ovenstående indstillinger til standard.";
+"settings.reset.title" = "NULSTIL";
 "shortcuts.connect" = "Forbind";
 "shortcuts.disconnect" = "Afbryd forbindelse";
 "shortcuts.select_region" = "Vælg en region";

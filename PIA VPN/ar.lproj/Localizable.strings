@@ -100,6 +100,12 @@
 "settings.encryption.digest.title" = "مصادقة البيانات";
 "settings.encryption.handshake.title" = "مصافحة";
 "settings.encryption.title" = "التشفير";
+"settings.reset.defaults.confirm.button" = "إعادة تعيين";
+"settings.reset.defaults.confirm.message" = "سيؤدي هذا الإجراء إلى عودة التطبيق إلى حالته الافتراضية وستفقد كل التغييرات التي أجريتها.";
+"settings.reset.defaults.confirm.title" = "إعادة تعيين الإعدادات";
+"settings.reset.defaults.title" = "إعادة تعيين إلى إعدادات افتراضية";
+"settings.reset.footer" = "سيؤدي هذا الإجراء إلى إعادة تعيين جميع الإعدادات أعلاه.";
+"settings.reset.title" = "إعادة تعيين";
 "shortcuts.connect" = "اتصال";
 "shortcuts.disconnect" = "قطع الاتصال";
 "shortcuts.select_region" = "حدّد منطقة";
