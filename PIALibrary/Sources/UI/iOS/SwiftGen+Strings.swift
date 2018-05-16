@@ -140,15 +140,12 @@ enum L10n {
     enum Redeem {
       /// SUBMIT
       static let submit = L10n.tr("Welcome", "redeem.submit")
-      /// Type in your email address and the 16 digit PIN from your gift card or trial card below.
-      static let subtitle = L10n.tr("Welcome", "redeem.subtitle")
+      /// Type in your email address and the %lu digit PIN from your gift card or trial card below.
+      static func subtitle(_ p1: Int) -> String {
+        return L10n.tr("Welcome", "redeem.subtitle", p1)
+      }
       /// Redeem gift card
       static let title = L10n.tr("Welcome", "redeem.title")
-
-      enum Code {
-        /// 1234-5678-9012-3456
-        static let placeholder = L10n.tr("Welcome", "redeem.code.placeholder")
-      }
 
       enum Email {
         /// Email address
@@ -156,8 +153,10 @@ enum L10n {
       }
 
       enum Error {
-        /// Code must be 16 numeric digits.
-        static let code = L10n.tr("Welcome", "redeem.error.code")
+        /// Code must be %lu numeric digits.
+        static func code(_ p1: Int) -> String {
+          return L10n.tr("Welcome", "redeem.error.code", p1)
+        }
         /// Redeem
         static let title = L10n.tr("Welcome", "redeem.error.title")
       }
