@@ -219,14 +219,18 @@ extension RedeemViewController: UITextFieldDelegate {
         guard textField == textCode else {
             return true
         }
-        guard string.rangeOfCharacter(from: RedeemViewController.codeInvalidSet) == nil else {
-            return false
-        }
+
+        // cleared input
         guard let newText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) else {
             redeemCode = nil
             return true
         }
 
+        // typed/pasted invalid character and did not paste a full code with dashes
+        guard (string.rangeOfCharacter(from: RedeemViewController.codeInvalidSet) == nil) || Validator.validate(giftCode: newText, withDashes: true) else {
+            return false
+        }
+        
         let cursorLocation = textField.position(from: textField.beginningOfDocument, offset: range.location + string.count)
         let newCode = strippedRedeemCode(newText)
         guard newCode.count <= RedeemViewController.codeLength else {
