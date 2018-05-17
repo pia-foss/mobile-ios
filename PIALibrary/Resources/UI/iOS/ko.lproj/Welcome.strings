@@ -74,10 +74,10 @@
 "purchase.submit" = "지금 구입";
 
 /* (No Comment) */
-"purchase.subtitle" = "VPN 플랜 선택";
+"purchase.title" = "VPN 플랜 선택";
 
 /* (No Comment) */
-"purchase.title" = "7일 이내 환불 보장";
+"purchase.subtitle" = "7일 이내 환불 보장";
 
 /* (No Comment) */
 "restore.email.placeholder" = "이메일 주소";

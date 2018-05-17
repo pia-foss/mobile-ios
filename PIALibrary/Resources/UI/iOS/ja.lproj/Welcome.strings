@@ -74,10 +74,10 @@
 "purchase.submit" = "今すぐ購入";
 
 /* (No Comment) */
-"purchase.subtitle" = "VPNプランを選択";
+"purchase.title" = "VPNプランを選択";
 
 /* (No Comment) */
-"purchase.title" = "7日間返金保証";
+"purchase.subtitle" = "7日間返金保証";
 
 /* (No Comment) */
 "restore.email.placeholder" = "メールアドレス";
