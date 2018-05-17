@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SwiftyBeaver.addDestination(ConsoleDestination())
         
         let mock = MockAccountProvider()
+        mock.mockSignupOutcome = .success
         mock.mockRedeemOutcome = .claimed
         
         Client.environment = .production
