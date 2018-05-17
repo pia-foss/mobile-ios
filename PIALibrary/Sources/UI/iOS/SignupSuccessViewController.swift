@@ -30,6 +30,8 @@ class SignupSuccessViewController: AutolayoutViewController {
 
     @IBOutlet private weak var buttonSubmit: ActivityButton!
     
+    @IBOutlet private weak var constraintPictureXOffset: NSLayoutConstraint!
+    
     var metadata: SignupMetadata?
     
     weak var completionDelegate: WelcomeCompletionDelegate?
@@ -43,6 +45,9 @@ class SignupSuccessViewController: AutolayoutViewController {
 
         title = metadata.title
         imvPicture.image = metadata.bodyImage
+        if let offset = metadata.bodyImageOffset {
+            constraintPictureXOffset.constant = offset.x
+        }
         labelTitle.text = metadata.bodyTitle
         labelMessage.text = metadata.bodySubtitle
 
@@ -55,7 +60,7 @@ class SignupSuccessViewController: AutolayoutViewController {
         buttonSubmit.title = L10n.Signup.Success.submit.uppercased()
 
         var backgroundImage = Asset.imageReceiptBackground.image
-//        backgroundImage = backgroundImage.withRenderingMode(.alwaysTemplate)
+        backgroundImage = backgroundImage.withRenderingMode(.alwaysTemplate)
         backgroundImage = backgroundImage.resizableImage(
             withCapInsets: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 60.0, right: 0.0),
             resizingMode: .tile
@@ -76,8 +81,7 @@ class SignupSuccessViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
 
-//        Theme.current.applyLightTint(imvBackground)
-//        Theme.current.applyLightTint(imvPicture)
+        Theme.current.applyLightTint(imvBackground)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applyBody1(labelMessage, appearance: .dark)
         Theme.current.applyCaption(labelUsernameCaption, appearance: .dark)

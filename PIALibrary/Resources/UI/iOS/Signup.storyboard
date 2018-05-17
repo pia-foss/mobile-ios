@@ -100,11 +100,11 @@
                                                                         <constraints>
                                                                             <constraint firstAttribute="bottom" secondItem="anG-08-GkY" secondAttribute="bottom" id="13a-n4-1GD"/>
                                                                             <constraint firstItem="tfe-b5-DL6" firstAttribute="leading" secondItem="J7x-eg-uZn" secondAttribute="leading" constant="20" id="2lN-gP-BLv"/>
+                                                                            <constraint firstItem="u2Y-2J-2l9" firstAttribute="centerX" secondItem="J7x-eg-uZn" secondAttribute="centerX" id="7Xb-18-Dfg"/>
                                                                             <constraint firstItem="lkw-gF-7ub" firstAttribute="top" secondItem="tfe-b5-DL6" secondAttribute="bottom" constant="20" id="7zY-8w-NsB"/>
                                                                             <constraint firstItem="csE-Oc-o6P" firstAttribute="centerX" secondItem="lkw-gF-7ub" secondAttribute="centerX" id="8JD-Tp-hVE"/>
                                                                             <constraint firstItem="csE-Oc-o6P" firstAttribute="top" secondItem="ZIH-gI-ebV" secondAttribute="bottom" constant="15" id="AGi-kX-bls"/>
                                                                             <constraint firstItem="anG-08-GkY" firstAttribute="top" secondItem="csE-Oc-o6P" secondAttribute="bottom" constant="6" id="FjD-ju-7Na"/>
-                                                                            <constraint firstItem="u2Y-2J-2l9" firstAttribute="centerX" secondItem="Mks-lR-0xQ" secondAttribute="centerX" id="Q5b-Id-awP"/>
                                                                             <constraint firstItem="lkw-gF-7ub" firstAttribute="centerX" secondItem="J7x-eg-uZn" secondAttribute="centerX" id="SMy-dr-JqL"/>
                                                                             <constraint firstItem="anG-08-GkY" firstAttribute="centerX" secondItem="csE-Oc-o6P" secondAttribute="centerX" id="TSJ-wB-fD5"/>
                                                                             <constraint firstItem="Mks-lR-0xQ" firstAttribute="top" secondItem="J7x-eg-uZn" secondAttribute="top" id="VKo-a8-ufV"/>
@@ -236,6 +236,7 @@
                     </view>
                     <connections>
                         <outlet property="buttonSubmit" destination="Gms-MG-RLl" id="iha-dH-jzY"/>
+                        <outlet property="constraintPictureXOffset" destination="XvM-Kf-Lwg" id="paH-fy-JFu"/>
                         <outlet property="imvBackground" destination="jJ9-y8-wxa" id="cGq-ub-xVS"/>
                         <outlet property="imvPicture" destination="Mks-lR-0xQ" id="WHG-lq-8TO"/>
                         <outlet property="labelMessage" destination="tfe-b5-DL6" id="T6a-2O-zcM"/>
@@ -392,11 +393,11 @@
                                                                         </subviews>
                                                                         <constraints>
                                                                             <constraint firstAttribute="trailing" secondItem="DeX-IC-DrJ" secondAttribute="trailing" constant="20" id="IU1-y4-qt0"/>
+                                                                            <constraint firstItem="Ft5-a5-fyn" firstAttribute="centerX" secondItem="F9S-cp-Y8Z" secondAttribute="centerX" id="Ivi-ea-F0s"/>
                                                                             <constraint firstItem="4M0-Hc-ELJ" firstAttribute="top" secondItem="F9S-cp-Y8Z" secondAttribute="top" id="W9e-9z-dgf"/>
                                                                             <constraint firstItem="Ft5-a5-fyn" firstAttribute="top" secondItem="4M0-Hc-ELJ" secondAttribute="bottom" constant="20" id="Wf6-Vr-Ifi"/>
                                                                             <constraint firstItem="DeX-IC-DrJ" firstAttribute="leading" secondItem="F9S-cp-Y8Z" secondAttribute="leading" constant="20" id="dVo-Qp-gnn"/>
                                                                             <constraint firstItem="DeX-IC-DrJ" firstAttribute="top" secondItem="Ft5-a5-fyn" secondAttribute="bottom" constant="10" id="edN-4G-ShH"/>
-                                                                            <constraint firstItem="Ft5-a5-fyn" firstAttribute="centerX" secondItem="4M0-Hc-ELJ" secondAttribute="centerX" id="ulH-Yc-C1P"/>
                                                                             <constraint firstItem="4M0-Hc-ELJ" firstAttribute="centerX" secondItem="F9S-cp-Y8Z" secondAttribute="centerX" id="vHE-Sw-bTN"/>
                                                                             <constraint firstAttribute="bottom" secondItem="DeX-IC-DrJ" secondAttribute="bottom" id="zcX-f5-KYz"/>
                                                                         </constraints>
@@ -584,9 +585,9 @@ You can come back to the app later to finish the process.</string>
                                                                         <constraints>
                                                                             <constraint firstAttribute="bottom" secondItem="o3b-Lm-bQf" secondAttribute="bottom" id="1IR-rv-pln"/>
                                                                             <constraint firstItem="Tcu-da-bn8" firstAttribute="top" secondItem="8uv-z8-27o" secondAttribute="top" id="5aw-Iv-GIG"/>
+                                                                            <constraint firstItem="hfc-Wf-wyF" firstAttribute="centerX" secondItem="8uv-z8-27o" secondAttribute="centerX" id="8oD-gE-63Q"/>
                                                                             <constraint firstItem="hfc-Wf-wyF" firstAttribute="top" secondItem="Tcu-da-bn8" secondAttribute="bottom" constant="20" id="9bA-9w-m4p"/>
                                                                             <constraint firstItem="o3b-Lm-bQf" firstAttribute="top" secondItem="hfc-Wf-wyF" secondAttribute="bottom" constant="10" id="KpB-LT-9gR"/>
-                                                                            <constraint firstItem="hfc-Wf-wyF" firstAttribute="centerX" secondItem="Tcu-da-bn8" secondAttribute="centerX" id="XRW-30-7T0"/>
                                                                             <constraint firstAttribute="trailing" secondItem="o3b-Lm-bQf" secondAttribute="trailing" constant="20" id="lLb-Zy-R0Q"/>
                                                                             <constraint firstItem="Tcu-da-bn8" firstAttribute="centerX" secondItem="8uv-z8-27o" secondAttribute="centerX" id="ra9-sr-l4h"/>
                                                                             <constraint firstItem="o3b-Lm-bQf" firstAttribute="leading" secondItem="8uv-z8-27o" secondAttribute="leading" constant="20" id="y3g-Ep-Gst"/>
