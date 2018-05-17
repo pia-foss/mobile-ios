@@ -124,7 +124,8 @@ struct AppConfiguration {
         static let accountProvider: MockAccountProvider = {
             let provider = MockAccountProvider()
             provider.mockIsUnauthorized = false
-            provider.mockSignupOutcome = .internetUnreachable
+            provider.mockSignupOutcome = .success
+            provider.mockRedeemOutcome = .success
             provider.mockPlan = .trial
             provider.mockIsExpiring = true
             provider.mockIsRenewable = true
