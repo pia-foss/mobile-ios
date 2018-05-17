@@ -30,6 +30,8 @@ class SignupSuccessViewController: AutolayoutViewController {
 
     @IBOutlet private weak var buttonSubmit: ActivityButton!
     
+    @IBOutlet private weak var constraintPictureXOffset: NSLayoutConstraint!
+    
     var metadata: SignupMetadata?
     
     weak var completionDelegate: WelcomeCompletionDelegate?
@@ -43,6 +45,9 @@ class SignupSuccessViewController: AutolayoutViewController {
 
         title = metadata.title
         imvPicture.image = metadata.bodyImage
+        if let offset = metadata.bodyImageOffset {
+            constraintPictureXOffset.constant = offset.x
+        }
         labelTitle.text = metadata.bodyTitle
         labelMessage.text = metadata.bodySubtitle
 
