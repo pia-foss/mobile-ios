@@ -74,10 +74,10 @@
 "purchase.submit" = "KUPUJĘ";
 
 /* (No Comment) */
-"purchase.subtitle" = "Wybierz plan VPN";
+"purchase.title" = "Wybierz plan VPN";
 
 /* (No Comment) */
-"purchase.title" = "7-dniowa gwarancja zwrotu pieniędzy";
+"purchase.subtitle" = "7-dniowa gwarancja zwrotu pieniędzy";
 
 /* (No Comment) */
 "restore.email.placeholder" = "Adres e-mail";

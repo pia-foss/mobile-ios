@@ -74,10 +74,10 @@
 "purchase.submit" = "ŞİMDİ SATIN AL";
 
 /* (No Comment) */
-"purchase.subtitle" = "Bir VPN planı seçin";
+"purchase.title" = "Bir VPN planı seçin";
 
 /* (No Comment) */
-"purchase.title" = "7 günlük para iade garantisi";
+"purchase.subtitle" = "7 günlük para iade garantisi";
 
 /* (No Comment) */
 "restore.email.placeholder" = "E-posta adresi";

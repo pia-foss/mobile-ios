@@ -74,10 +74,10 @@
 "purchase.submit" = "КУПИТЬ";
 
 /* (No Comment) */
-"purchase.subtitle" = "Выберите план VPN";
+"purchase.title" = "Выберите план VPN";
 
 /* (No Comment) */
-"purchase.title" = "7-дневная гарантия возврата денег";
+"purchase.subtitle" = "7-дневная гарантия возврата денег";
 
 /* (No Comment) */
 "restore.email.placeholder" = "Адрес электронной почты";

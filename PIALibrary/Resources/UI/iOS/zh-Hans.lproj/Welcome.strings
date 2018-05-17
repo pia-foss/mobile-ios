@@ -74,10 +74,10 @@
 "purchase.submit" = "立即购买";
 
 /* (No Comment) */
-"purchase.subtitle" = "选择 VPN 套餐";
+"purchase.title" = "选择 VPN 套餐";
 
 /* (No Comment) */
-"purchase.title" = "7 天退款保证";
+"purchase.subtitle" = "7 天退款保证";
 
 /* (No Comment) */
 "restore.email.placeholder" = "电子邮件地址";
