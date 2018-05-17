@@ -32,6 +32,8 @@ struct AppConfiguration {
             preset.loginUsername = "p0000000"
             preset.loginPassword = "foobarbogus"
             preset.purchaseEmail = "foo@bar.com"
+            preset.redeemCode = "1234-1234-1234-1234"
+            preset.redeemEmail = "foo@bar.com"
             return preset
         }
     }
