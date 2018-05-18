@@ -6,14 +6,14 @@ Private Internet Access is the world's leading consumer VPN service. At Private 
 
 # PIA VPN for iOS
 
-With the Private Internet Access VPN app for iOS, you can access our network of VPN servers across the world from your iPhone, iPad or iPod touch (64-bit only). Choose among many available countries and connect to them easily. Features include automatic reconnection, multiple VPN protocols, DNS/IPv6 leak protection and Safari Content Blocker for ad-blocking while browsing with Safari.
+With the Private Internet Access VPN app for iOS, you can access our network of VPN servers across the world from your iPhone, iPad or iPod touch (64-bit only). Choose among many available countries and connect to them easily. Features include kill switch, multiple VPN protocols, DNS/IPv6 leak protection and Safari Content Blocker for ad-blocking while browsing with Safari.
 
 ## Getting started
 
 The PIA VPN app features:
 
 - [x] Plenty of countries to connect to (28 as of today)
-- [x] Automatic reconnection
+- [x] Kill switch
 - [x] Multiple VPN protocols
 - [x] Fine-grained VPN settings
 - [x] DNS leak protection
@@ -30,6 +30,7 @@ The PIA VPN app features:
 - Git (preinstalled with Xcode Command Line Tools)
 - Ruby (preinstalled with macOS)
 - [CocoaPods 1.5.0][dep-cocoapods]
+- [SwiftGen][dep-swiftgen]
 
 It's highly recommended to use the Git and Ruby packages provided by [Homebrew][dep-brew].
 
@@ -86,5 +87,6 @@ This project is licensed under the [MIT (Expat) license](https://choosealicense.
 [pia-wiki]: https://en.wikipedia.org/wiki/Private_Internet_Access
 
 [dep-cocoapods]: https://guides.cocoapods.org/using/getting-started.html
+[dep-swiftgen]: https://github.com/SwiftGen/SwiftGen
 [dep-jazzy]: https://github.com/realm/jazzy
 [dep-brew]: https://brew.sh/

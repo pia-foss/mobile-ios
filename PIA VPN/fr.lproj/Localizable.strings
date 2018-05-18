@@ -1,363 +1,127 @@
-/* (No Comment) */
 "about.accessibility.component.expand" = "Toucher pour lire la licence complète";
-
-/* (No Comment) */
 "about.app" = "VPN par Private Internet Access";
-
-/* (No Comment) */
 "about.intro" = "Ce programme utilise les éléments suivants :";
-
-/* (No Comment) */
 "account.accessibility.eye" = "Icône d'œil";
-
-/* (No Comment) */
 "account.accessibility.eye.hint.conceal" = "Toucher pour masquer le mot de passe";
-
-/* (No Comment) */
 "account.accessibility.eye.hint.reveal" = "Toucher pour afficher le mot de passe";
-
-/* (No Comment) */
 "account.email.caption" = "E-mail";
-
-/* (No Comment) */
 "account.email.placeholder" = "Adresse e-mail";
-
-/* (No Comment) */
 "account.eye.footer" = "Touchez l'icône d'œil pour afficher ou masquer votre mot de passe.";
-
-/* (No Comment) */
 "account.other.footer" = "Obtenez l'application Private Internet Access pour vos autres appareils et utilisez le nom d'utilisateur et le mot de passe ci-dessus pour vous connecter et sécuriser votre connexion.";
-
-/* (No Comment) */
 "account.password.caption" = "Mot de passe";
-
-/* (No Comment) */
 "account.restore.button" = "Restaurer l'achat";
-
-/* (No Comment) */
 "account.restore.description" = "Si vous avez renouvelé votre forfait, mais que votre compte indique toujours qu'il est sur le point d'expirer, il est possible de relancer le renouvellement à partir d'ici. Cette action ne vous sera pas facturée.";
-
-/* (No Comment) */
 "account.restore.failure.message" = "Aucun achat utilisable n'a été trouvé pour le renouvellement.";
-
-/* (No Comment) */
 "account.restore.failure.title" = "Restaurer l'achat";
-
-/* (No Comment) */
 "account.restore.title" = "Restaurer l'achat non crédité";
-
-/* (No Comment) */
 "account.reveal.prompt" = "Authentifiez-vous pour afficher";
-
-/* (No Comment) */
 "account.save.item" = "Mettre à jour";
-
-/* (No Comment) */
 "account.save.prompt" = "Authentifiez-vous pour enregistrer les modifications";
-
-/* (No Comment) */
 "account.save.success" = "Votre adresse e-mail a été enregistrée.";
-
-/* (No Comment) */
 "account.username.caption" = "Nom d'utilisateur";
-
-/* (No Comment) */
 "content_blocker.body.footer" = "Veuillez noter : vous n'avez pas besoin d'être connecté au VPN pour que ce bloqueur de contenu fonctionne, mais il ne fonctionnera qu'en naviguant avec Safari.";
-
-/* (No Comment) */
 "content_blocker.body.subtitle" = "Pour activer l'utilisation de notre bloqueur de contenu sur Safari, veuillez accéder aux Réglages > Safari et dans la section Général, activez le bouton Bloqueurs de contenu sur PIA VPN.";
-
-/* (No Comment) */
 "content_blocker.title" = "Bloqueur de contenu";
-
-/* (No Comment) */
 "dashboard.connection.ip.caption" = "IP PUBLIQUE";
-
-/* (No Comment) */
 "dashboard.connection.ip.unreachable" = "Internet non joignable";
-
-/* (No Comment) */
 "dashboard.connection.region.caption" = "RÉGION ACTUELLE";
-
-/* (No Comment) */
 "dashboard.connection.region.change" = "CHANGER LA RÉGION";
-
-/* (No Comment) */
 "dashboard.content_blocker.intro.message" = "Cette version remplace MACE par notre bloqueur de contenu Safari.\n\nAllez la découvrir dans la section « Paramètres ».";
-
-/* (No Comment) */
 "dashboard.status" = "Statut";
-
-/* (No Comment) */
 "dashboard.vpn.changing_region" = "Changement de la région...";
-
-/* (No Comment) */
 "dashboard.vpn.connected" = "Connecté au VPN";
-
-/* (No Comment) */
 "dashboard.vpn.connecting" = "Connexion...";
-
-/* (No Comment) */
 "dashboard.vpn.disconnected" = "Déconnecté";
-
-/* (No Comment) */
 "dashboard.vpn.disconnecting" = "Déconnexion...";
-
-/* (No Comment) */
 "expiration.message" = "Votre adhésion expire bientôt. Renouvelez pour rester protégé.";
-
-/* (No Comment) */
 "expiration.title" = "Renouvellement";
-
-/* (No Comment) */
 "global.automatic" = "Automatique";
-
-/* (No Comment) */
 "global.cancel" = "Annuler";
-
-/* (No Comment) */
 "global.close" = "Fermer";
-
-/* (No Comment) */
 "global.error" = "Erreur";
-
-/* (No Comment) */
 "global.ok" = "OK";
-
-/* (No Comment) */
 "menu.accessibility.item" = "Menu";
-
-/* (No Comment) */
 "menu.accessibility.logged_as" = "Connecté en tant que %@";
-
-/* (No Comment) */
 "menu.expiration.days" = "%d jours";
-
-/* (No Comment) */
 "menu.expiration.expires_in" = "Votre adhésion expire dans";
-
-/* (No Comment) */
 "menu.expiration.hours" = "%d heures";
-
-/* (No Comment) */
 "menu.expiration.one_hour" = "une heure";
-
-/* (No Comment) */
 "menu.expiration.upgrade" = "METTRE LE COMPTE À JOUR";
-
-/* (No Comment) */
 "menu.item.about" = "À propos";
-
-/* (No Comment) */
 "menu.item.account" = "Compte";
-
-/* (No Comment) */
 "menu.item.logout" = "Déconnexion";
-
-/* (No Comment) */
 "menu.item.region" = "Sélection de région";
-
-/* (No Comment) */
 "menu.item.settings" = "Paramètres";
-
-/* (No Comment) */
 "menu.item.web.home" = "Page d'accueil";
-
-/* (No Comment) */
 "menu.item.web.privacy" = "Politique de confidentialité";
-
-/* (No Comment) */
 "menu.item.web.support" = "Assistance";
-
-/* (No Comment) */
 "menu.logout.confirm" = "Déconnexion";
-
-/* (No Comment) */
 "menu.logout.message" = "Si vous vous déconnectez, le VPN sera désactivé et vous ne serez plus protégé.";
-
-/* (No Comment) */
 "menu.logout.title" = "Déconnexion";
-
-/* (No Comment) */
 "menu.renewal.message.trial" = "Les comptes d'essai ne peuvent pas être renouvelés. Veuillez acheter un nouveau compte au moment de l'expiration pour continuer le service.";
-
-/* (No Comment) */
 "menu.renewal.message.unavailable" = "Les serveurs Apple ne sont pas disponibles actuellement. Veuillez réessayer plus tard.";
-
-/* (No Comment) */
 "menu.renewal.message.website" = "Veuillez utiliser notre site Web pour renouveler votre adhésion.";
-
-/* (No Comment) */
 "menu.renewal.purchase" = "Acheter";
-
-/* (No Comment) */
 "menu.renewal.renew" = "Renouveler";
-
-/* (No Comment) */
 "menu.renewal.title" = "Renouvellement";
-
-/* (No Comment) */
 "notifications.disabled.message" = "Activez les notifications pour recevoir un rappel lorsque votre adhésion est sur le point d'expirer.";
-
-/* (No Comment) */
 "notifications.disabled.settings" = "Paramètres";
-
-/* (No Comment) */
 "notifications.disabled.title" = "Notifications désactivées";
-
-/* (No Comment) */
 "renewal.failure.message" = "Impossible d'envoyer votre reçu d'achat, veuillez réessayer plus tard.";
-
-/* (No Comment) */
 "renewal.success.message" = "Votre compte a été bien renouvelé.";
-
-/* (No Comment) */
 "renewal.success.title" = "Merci";
-
-/* (No Comment) */
 "settings.application_information.debug.empty.message" = "Les informations de débogage sont vides, veuillez tenter une connexion avant de réessayer l'envoi.";
-
-/* (No Comment) */
 "settings.application_information.debug.empty.title" = "Informations de débogage vides";
-
-/* (No Comment) */
 "settings.application_information.debug.failure.message" = "Les informations de débogage n'ont pas pu être envoyées. Veuillez vous déconnecter au VPN et réessayer.";
-
-/* (No Comment) */
 "settings.application_information.debug.failure.title" = "Erreur au cours de l'envoi";
-
-/* (No Comment) */
 "settings.application_information.debug.success.message" = "Informations de débogage envoyées avec succès.\nID : %@\nVeuillez noter cet ID car notre équipe d'assistance en a besoin pour localiser votre message.";
-
-/* (No Comment) */
 "settings.application_information.debug.success.title" = "Informations de débogage envoyées";
-
-/* (No Comment) */
 "settings.application_information.debug.title" = "Envoyer le débogage à l'assistance";
-
-/* (No Comment) */
 "settings.application_information.title" = "INFORMATIONS DE L'APPLICATION";
-
-/* (No Comment) */
 "settings.application_settings.dark_theme.title" = "Thème sombre";
-
-/* (No Comment) */
 "settings.application_settings.mace.footer" = "PIA MACE™ bloque les publicités, les traqueurs et les logiciels malveillants quand vous êtes connecté au VPN.";
-
-/* (No Comment) */
 "settings.application_settings.mace.title" = "PIA MACE™";
-
-/* (No Comment) */
-"settings.application_settings.persistent.footer.disabled" = "La désactivation de la reconnexion automatique peut mettre votre confidentialité en danger lorsque votre appareil n'a pas d'accès à un réseau stable.";
-
-/* (No Comment) */
-"settings.application_settings.persistent.title" = "Reconnexion automatique";
-
-/* (No Comment) */
+"settings.application_settings.persistent.footer.disabled" = "Le Killswitch du VPN désactive automatiquement votre connexion Internet lorsque le VPN se déconnecte.";
+"settings.application_settings.persistent.title" = "Killswitch du VPN";
 "settings.application_settings.title" = "PARAMÉTRES D'APPLICATION";
-
-/* (No Comment) */
 "settings.commit.buttons.later" = "Plus tard";
-
-/* (No Comment) */
 "settings.commit.buttons.reconnect" = "Reconnecter";
-
-/* (No Comment) */
 "settings.commit.messages.must_disconnect" = "Le VPN doit se reconnecter pour appliquer certaines modifications.";
-
-/* (No Comment) */
 "settings.commit.messages.should_reconnect" = "Reconnectez le VPN pour appliquer les modifications.";
-
-/* (No Comment) */
 "settings.connection.remote_port.title" = "Port distant";
-
-/* (No Comment) */
 "settings.connection.socket_protocol.title" = "Socket";
-
-/* (No Comment) */
 "settings.connection.title" = "CONNEXION";
-
-/* (No Comment) */
 "settings.connection.vpn_protocol.title" = "Protocole";
-
-/* (No Comment) */
 "settings.content_blocker.footer" = "Pour activer ou désactiver le bloqueur de contenu, accédez aux Réglages > Safari > Bloqueurs de contenu et activez PIA VPN.";
-
-/* (No Comment) */
 "settings.content_blocker.refresh.title" = "Actualiser la liste de blocage";
-
-/* (No Comment) */
 "settings.content_blocker.state.title" = "État actuel";
-
-/* (No Comment) */
 "settings.content_blocker.title" = "Bloqueur de contenu Safari";
-
-/* (No Comment) */
 "settings.encryption.cipher.title" = "Chiffrement des données";
-
-/* (No Comment) */
 "settings.encryption.digest.title" = "Authentification des données";
-
-/* (No Comment) */
 "settings.encryption.handshake.title" = "Handshake";
-
-/* (No Comment) */
 "settings.encryption.title" = "CHIFFREMENT";
-
-/* (No Comment) */
+"settings.reset.defaults.confirm.button" = "Réinitialiser";
+"settings.reset.defaults.confirm.message" = "Cette action rétablira les paramètres par défaut de l'application. Toutes les modifications effectuées seront perdues.";
+"settings.reset.defaults.confirm.title" = "Réinitialiser les paramètres";
+"settings.reset.defaults.title" = "Réinitialiser les paramètres par défaut";
+"settings.reset.footer" = "Tout les paramètres ci-dessus seront réinitialisés.";
+"settings.reset.title" = "RÉINITIALISER";
 "shortcuts.connect" = "Se connecter";
-
-/* (No Comment) */
 "shortcuts.disconnect" = "Se déconnecter";
-
-/* (No Comment) */
 "shortcuts.select_region" = "Sélectionner une région";
-
-/* (No Comment) */
 "vpn_permission.body.footer" = "Nous n'enregistrons pas, ne suivons pas et ne surveillons pas votre activité réseau.";
-
-/* (No Comment) */
 "vpn_permission.body.subtitle" = "Pour continuer, touchez « %@ ».";
-
-/* (No Comment) */
 "vpn_permission.body.title" = "PIA doit accéder à vos configurations VPN pour sécuriser votre trafic.";
-
-/* (No Comment) */
 "vpn_permission.disallow.contact" = "Contact";
-
-/* (No Comment) */
 "vpn_permission.disallow.message.basic" = "L'application a besoin de cette permission pour fonctionner.";
-
-/* (No Comment) */
 "vpn_permission.disallow.message.support" = "Vous pouvez aussi contacter l'assistance client si vous avez besoin d'aide.";
-
-/* (No Comment) */
 "vpn_permission.title" = "PIA";
-
-/* (No Comment) */
 "walkthrough.action.done" = "TERMINÉ";
-
-/* (No Comment) */
 "walkthrough.action.next" = "SUIVANT";
-
-/* (No Comment) */
 "walkthrough.action.skip" = "PASSER";
-
-/* (No Comment) */
 "walkthrough.page.1.description" = "Protégez-vous sur jusqu'à 5 appareils à la fois.";
-
-/* (No Comment) */
 "walkthrough.page.1.title" = "Prend en charge 5 appareils en même temps";
-
-/* (No Comment) */
 "walkthrough.page.2.description" = "Avec des serveurs partout dans le monde, vous êtes toujours sous protection.";
-
-/* (No Comment) */
 "walkthrough.page.2.title" = "Connectez-vous facilement à n'importe quelle région";
-
-/* (No Comment) */
 "walkthrough.page.3.description" = "Activer notre bloqueur de contenu empêche les publicités de s'afficher dans Safari.";
-
-/* (No Comment) */
 "walkthrough.page.3.title" = "Protégez-vous contre les publicités";
-

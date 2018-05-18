@@ -1,363 +1,127 @@
-/* (No Comment) */
 "about.accessibility.component.expand" = "点击阅读完整许可";
-
-/* (No Comment) */
 "about.app" = "由 Private Internet Access 打造的 VPN";
-
-/* (No Comment) */
 "about.intro" = "此程序使用以下组件：";
-
-/* (No Comment) */
 "account.accessibility.eye" = "眼睛图标";
-
-/* (No Comment) */
 "account.accessibility.eye.hint.conceal" = "点击隐藏密码";
-
-/* (No Comment) */
 "account.accessibility.eye.hint.reveal" = "点击显示密码";
-
-/* (No Comment) */
 "account.email.caption" = "电子邮件";
-
-/* (No Comment) */
 "account.email.placeholder" = "电子邮件地址";
-
-/* (No Comment) */
 "account.eye.footer" = "点击眼睛图标以显示或隐藏您的密码。";
-
-/* (No Comment) */
 "account.other.footer" = "为您的其他设备获取 Private Internet Access App，并使用上述用户名和密码登录并获得连接。";
-
-/* (No Comment) */
 "account.password.caption" = "密码";
-
-/* (No Comment) */
 "account.restore.button" = "恢复购买";
-
-/* (No Comment) */
 "account.restore.description" = "如果您已续订套餐，但账户仍显示即将到期，可以从这里重新开始续订。在此过程中您不会被收费。";
-
-/* (No Comment) */
 "account.restore.failure.message" = "没有找到可兑换的购买来用于续期。";
-
-/* (No Comment) */
 "account.restore.failure.title" = "恢复购买";
-
-/* (No Comment) */
 "account.restore.title" = "恢复未入账的购买";
-
-/* (No Comment) */
 "account.reveal.prompt" = "验证以显示";
-
-/* (No Comment) */
 "account.save.item" = "更新";
-
-/* (No Comment) */
 "account.save.prompt" = "验证以保存更改";
-
-/* (No Comment) */
 "account.save.success" = "您的电子邮件地址已保存。";
-
-/* (No Comment) */
 "account.username.caption" = "用户名";
-
-/* (No Comment) */
 "content_blocker.body.footer" = "请注意：无需连接到 VPN，此内容拦截器也可正常工作，但该功能只有在使用 Safari 进行浏览时才能发挥作用。";
-
-/* (No Comment) */
 "content_blocker.body.subtitle" = "要启用内容拦截器以用于 Safari，请转至设置 > Safari，然后在“通用”下，触摸 PIA VPN 上的内容拦截器开关。";
-
-/* (No Comment) */
 "content_blocker.title" = "内容拦截器";
-
-/* (No Comment) */
 "dashboard.connection.ip.caption" = "公共 IP";
-
-/* (No Comment) */
 "dashboard.connection.ip.unreachable" = "无法访问互联网";
-
-/* (No Comment) */
 "dashboard.connection.region.caption" = "当前地区";
-
-/* (No Comment) */
 "dashboard.connection.region.change" = "更改地区";
-
-/* (No Comment) */
 "dashboard.content_blocker.intro.message" = "此版本将MACE替换为我们的Safari内容屏蔽器。\n\n请在“设置”栏中查看。";
-
-/* (No Comment) */
 "dashboard.status" = "状态";
-
-/* (No Comment) */
 "dashboard.vpn.changing_region" = "正在更改地区...";
-
-/* (No Comment) */
 "dashboard.vpn.connected" = "已连接到 VPN";
-
-/* (No Comment) */
 "dashboard.vpn.connecting" = "正在连接...";
-
-/* (No Comment) */
 "dashboard.vpn.disconnected" = "已断开连接";
-
-/* (No Comment) */
 "dashboard.vpn.disconnecting" = "正在断开连接";
-
-/* (No Comment) */
 "expiration.message" = "您的订阅即将到期。请续期以持续受到保护。";
-
-/* (No Comment) */
 "expiration.title" = "续订";
-
-/* (No Comment) */
 "global.automatic" = "自动";
-
-/* (No Comment) */
 "global.cancel" = "取消";
-
-/* (No Comment) */
 "global.close" = "关闭";
-
-/* (No Comment) */
 "global.error" = "错误";
-
-/* (No Comment) */
 "global.ok" = "确定";
-
-/* (No Comment) */
 "menu.accessibility.item" = "菜单";
-
-/* (No Comment) */
 "menu.accessibility.logged_as" = "登录的身份为%@";
-
-/* (No Comment) */
 "menu.expiration.days" = "%d天";
-
-/* (No Comment) */
 "menu.expiration.expires_in" = "订阅距离到期还有";
-
-/* (No Comment) */
 "menu.expiration.hours" = "%d小时";
-
-/* (No Comment) */
 "menu.expiration.one_hour" = "一小时";
-
-/* (No Comment) */
 "menu.expiration.upgrade" = "升级帐户";
-
-/* (No Comment) */
 "menu.item.about" = "关于";
-
-/* (No Comment) */
 "menu.item.account" = "帐户";
-
-/* (No Comment) */
 "menu.item.logout" = "登出";
-
-/* (No Comment) */
 "menu.item.region" = "地区选择";
-
-/* (No Comment) */
 "menu.item.settings" = "设置";
-
-/* (No Comment) */
 "menu.item.web.home" = "主页";
-
-/* (No Comment) */
 "menu.item.web.privacy" = "隐私政策";
-
-/* (No Comment) */
 "menu.item.web.support" = "支持";
-
-/* (No Comment) */
 "menu.logout.confirm" = "登出";
-
-/* (No Comment) */
 "menu.logout.message" = "登出后，VPN 将被禁用，您会处于未受保护状态。";
-
-/* (No Comment) */
 "menu.logout.title" = "登出";
-
-/* (No Comment) */
 "menu.renewal.message.trial" = "试用帐户不符合续订条件。请在到期时购买新帐户以继续服务。";
-
-/* (No Comment) */
 "menu.renewal.message.unavailable" = "Apple 服务器目前不可用。请稍后重试。";
-
-/* (No Comment) */
 "menu.renewal.message.website" = "请使用我们的网站为您的订阅续期。";
-
-/* (No Comment) */
 "menu.renewal.purchase" = "购买";
-
-/* (No Comment) */
 "menu.renewal.renew" = "续期";
-
-/* (No Comment) */
 "menu.renewal.title" = "续订";
-
-/* (No Comment) */
 "notifications.disabled.message" = "启用通知，以便在订阅到期前得到续订提醒。";
-
-/* (No Comment) */
 "notifications.disabled.settings" = "设置";
-
-/* (No Comment) */
 "notifications.disabled.title" = "通知已禁用";
-
-/* (No Comment) */
 "renewal.failure.message" = "无法提交您的购买收据，请稍后再试。";
-
-/* (No Comment) */
 "renewal.success.message" = "您的账户已成功续期。";
-
-/* (No Comment) */
 "renewal.success.title" = "谢谢";
-
-/* (No Comment) */
 "settings.application_information.debug.empty.message" = "调试信息为空，请尝试连接，然后重试提交。";
-
-/* (No Comment) */
 "settings.application_information.debug.empty.title" = "调试信息为空";
-
-/* (No Comment) */
 "settings.application_information.debug.failure.message" = "调试信息无法提交。请断开与 VPN 的连接并重试。";
-
-/* (No Comment) */
 "settings.application_information.debug.failure.title" = "提交时出错";
-
-/* (No Comment) */
 "settings.application_information.debug.success.message" = "调试信息成功提交。\nID：%@\n请记下此 ID，因为我们的支持团队需要该信息来找到您提交的内容。";
-
-/* (No Comment) */
 "settings.application_information.debug.success.title" = "调试信息已提交";
-
-/* (No Comment) */
 "settings.application_information.debug.title" = "向支持人员发送调试";
-
-/* (No Comment) */
 "settings.application_information.title" = "应用程序信息";
-
-/* (No Comment) */
 "settings.application_settings.dark_theme.title" = "黑暗主题";
-
-/* (No Comment) */
 "settings.application_settings.mace.footer" = "PIA MACE™可在您连接到 VPN 时阻止广告、跟踪和恶意软件。";
-
-/* (No Comment) */
 "settings.application_settings.mace.title" = "PIA MACE™";
-
-/* (No Comment) */
-"settings.application_settings.persistent.footer.disabled" = "如果禁用自动重新连接，则当您的设备没有接入稳定网络时，您的隐私可能不保。";
-
-/* (No Comment) */
-"settings.application_settings.persistent.title" = "自动重新连接";
-
-/* (No Comment) */
+"settings.application_settings.persistent.footer.disabled" = "VPN终止开关会在VPN未连接时禁用您的网络连接。";
+"settings.application_settings.persistent.title" = "VPN kill switch";
 "settings.application_settings.title" = "应用程序设置";
-
-/* (No Comment) */
 "settings.commit.buttons.later" = "以后";
-
-/* (No Comment) */
 "settings.commit.buttons.reconnect" = "重新连接";
-
-/* (No Comment) */
 "settings.commit.messages.must_disconnect" = "VPN 必须重新连接，某些更改才能生效。";
-
-/* (No Comment) */
 "settings.commit.messages.should_reconnect" = "重新连接 VPN 以应用更改。";
-
-/* (No Comment) */
 "settings.connection.remote_port.title" = "远程端口";
-
-/* (No Comment) */
 "settings.connection.socket_protocol.title" = "套接字";
-
-/* (No Comment) */
 "settings.connection.title" = "连接";
-
-/* (No Comment) */
 "settings.connection.vpn_protocol.title" = "协议";
-
-/* (No Comment) */
 "settings.content_blocker.footer" = "要启用或禁用内容拦截器，请转至设置 > Safari > 内容拦截器，然后切换 PIA VPN。";
-
-/* (No Comment) */
 "settings.content_blocker.refresh.title" = "刷新拦截列表";
-
-/* (No Comment) */
 "settings.content_blocker.state.title" = "当前状态";
-
-/* (No Comment) */
 "settings.content_blocker.title" = "Safari 内容拦截器";
-
-/* (No Comment) */
 "settings.encryption.cipher.title" = "数据加密";
-
-/* (No Comment) */
 "settings.encryption.digest.title" = "数据认证";
-
-/* (No Comment) */
 "settings.encryption.handshake.title" = "握手";
-
-/* (No Comment) */
 "settings.encryption.title" = "加密";
-
-/* (No Comment) */
+"settings.reset.defaults.confirm.button" = "重置";
+"settings.reset.defaults.confirm.message" = "此操作会将应用恢复为默认状态。您将丢失您做出的所有变更。";
+"settings.reset.defaults.confirm.title" = "重置设置";
+"settings.reset.defaults.title" = "重置为默认设置";
+"settings.reset.footer" = "此操作会将以上所有设置重置为默认状态。";
+"settings.reset.title" = "重置";
 "shortcuts.connect" = "连接";
-
-/* (No Comment) */
 "shortcuts.disconnect" = "断开连接";
-
-/* (No Comment) */
 "shortcuts.select_region" = "选择地区";
-
-/* (No Comment) */
 "vpn_permission.body.footer" = "我们不会监视、筛选或记录任何网络活动。";
-
-/* (No Comment) */
 "vpn_permission.body.subtitle" = "要继续，请点击“%@”.";
-
-/* (No Comment) */
 "vpn_permission.body.title" = "PIA 需要访问您的 VPN 配置来保护您的流量。";
-
-/* (No Comment) */
 "vpn_permission.disallow.contact" = "联系";
-
-/* (No Comment) */
 "vpn_permission.disallow.message.basic" = "我们需要此权限来使应用程序能正常工作。";
-
-/* (No Comment) */
 "vpn_permission.disallow.message.support" = "如需帮助，也可联系客户支持。";
-
-/* (No Comment) */
 "vpn_permission.title" = "PIA";
-
-/* (No Comment) */
 "walkthrough.action.done" = "完成";
-
-/* (No Comment) */
 "walkthrough.action.next" = "下一个";
-
-/* (No Comment) */
 "walkthrough.action.skip" = "跳过";
-
-/* (No Comment) */
 "walkthrough.page.1.description" = "一次在多达 5 台设备上保护自己。";
-
-/* (No Comment) */
 "walkthrough.page.1.title" = "一次支持 5 台设备";
-
-/* (No Comment) */
 "walkthrough.page.2.description" = "服务器遍布世界各地，您始终受到保护。";
-
-/* (No Comment) */
 "walkthrough.page.2.title" = "轻松连接到任何地区";
-
-/* (No Comment) */
 "walkthrough.page.3.description" = "启用内容拦截器以防止 Safari 中出现广告。";
-
-/* (No Comment) */
 "walkthrough.page.3.title" = "让自己远离广告";
-

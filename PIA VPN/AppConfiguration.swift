@@ -26,13 +26,14 @@ struct AppConfiguration {
     struct Welcome {
         static func defaultPreset() -> PIAWelcomeViewController.Preset {
             var preset = PIAWelcomeViewController.Preset()
-            preset.pages = [.login, .purchase]
             guard Flags.shared.customizesWelcomePreset else {
                 return preset
             }
             preset.loginUsername = "p0000000"
             preset.loginPassword = "foobarbogus"
             preset.purchaseEmail = "foo@bar.com"
+            preset.redeemCode = "1234-1234-1234-1234"
+            preset.redeemEmail = "foo@bar.com"
             return preset
         }
     }
@@ -123,7 +124,8 @@ struct AppConfiguration {
         static let accountProvider: MockAccountProvider = {
             let provider = MockAccountProvider()
             provider.mockIsUnauthorized = false
-            provider.mockSignupOutcome = .internetUnreachable
+            provider.mockSignupOutcome = .success
+            provider.mockRedeemOutcome = .success
             provider.mockPlan = .trial
             provider.mockIsExpiring = true
             provider.mockIsRenewable = true

@@ -1,363 +1,127 @@
-/* (No Comment) */
 "about.accessibility.component.expand" = "라이선스 전문을 보려면 누르세요";
-
-/* (No Comment) */
 "about.app" = "Private Internet Access의 VPN";
-
-/* (No Comment) */
 "about.intro" = "이 프로그램이 사용하는 구성 요소는 다음과 같습니다.";
-
-/* (No Comment) */
 "account.accessibility.eye" = "눈 아이콘";
-
-/* (No Comment) */
 "account.accessibility.eye.hint.conceal" = "비밀번호를 숨기려면 누르세요";
-
-/* (No Comment) */
 "account.accessibility.eye.hint.reveal" = "비밀번호를 표시하려면 누르세요";
-
-/* (No Comment) */
 "account.email.caption" = "이메일";
-
-/* (No Comment) */
 "account.email.placeholder" = "이메일 주소";
-
-/* (No Comment) */
 "account.eye.footer" = "눈 아이콘을 눌러서 비밀번호를 표시하거나 숨깁니다.";
-
-/* (No Comment) */
 "account.other.footer" = "다른 장치에서도 Private Internet Access 앱을 다운로드 받고 위의 사용자 이름과 비밀번호를 사용해 로그인해서 연결을 보호하세요.";
-
-/* (No Comment) */
 "account.password.caption" = "비밀번호";
-
-/* (No Comment) */
 "account.restore.button" = "구매 항목 복원";
-
-/* (No Comment) */
 "account.restore.description" = "이용 플랜을 갱신하셨는데 계정이 여전히 만료 예정이라고 나올 경우 이곳에서 갱신을 다시 시작하실 수 있습니다. 이 과정 중 요금이 부과되지 않습니다.";
-
-/* (No Comment) */
 "account.restore.failure.message" = "갱신 시 교환할 수 있는 구매를 찾을 수 없습니다.";
-
-/* (No Comment) */
 "account.restore.failure.title" = "구매 항목 복원";
-
-/* (No Comment) */
 "account.restore.title" = "인정되지 않은 구매 항목 복원";
-
-/* (No Comment) */
 "account.reveal.prompt" = "인증해서 표시합니다";
-
-/* (No Comment) */
 "account.save.item" = "업데이트";
-
-/* (No Comment) */
 "account.save.prompt" = "인증해서 변경 사항을 저장합니다";
-
-/* (No Comment) */
 "account.save.success" = "이메일 주소가 저장되었습니다.";
-
-/* (No Comment) */
 "account.username.caption" = "사용자 이름";
-
-/* (No Comment) */
 "content_blocker.body.footer" = "주의: Content Blocker를 작동시키기 위해 VPN에 연결할 필요가 없지만, Safari로 검색할 때만 작동합니다.";
-
-/* (No Comment) */
 "content_blocker.body.subtitle" = "Content Blocker를 활성화하여 Safari로 사용하려면 설정 > Safari로 가서 '일반'에서 Content Blockers를 눌러 PIA VPN을 켜세요.";
-
-/* (No Comment) */
 "content_blocker.title" = "Content Blocker";
-
-/* (No Comment) */
 "dashboard.connection.ip.caption" = "공용 IP";
-
-/* (No Comment) */
 "dashboard.connection.ip.unreachable" = "인터넷에 연결할 수 없음";
-
-/* (No Comment) */
 "dashboard.connection.region.caption" = "현재 지역";
-
-/* (No Comment) */
 "dashboard.connection.region.change" = "지역 변경";
-
-/* (No Comment) */
 "dashboard.content_blocker.intro.message" = "이 버전은 MACE를 Safari Content Blocker로 교체합니다.\n\n'설정'에서 확인해 보세요.";
-
-/* (No Comment) */
 "dashboard.status" = "상태";
-
-/* (No Comment) */
 "dashboard.vpn.changing_region" = "지역 변경 중...";
-
-/* (No Comment) */
 "dashboard.vpn.connected" = "VPN에 연결됨";
-
-/* (No Comment) */
 "dashboard.vpn.connecting" = "연결 중...";
-
-/* (No Comment) */
 "dashboard.vpn.disconnected" = "연결 해제됨";
-
-/* (No Comment) */
 "dashboard.vpn.disconnecting" = "연결 해제 중...";
-
-/* (No Comment) */
 "expiration.message" = "구독이 곧 만료됩니다. 갱신하여 계속 보호를 받으세요.";
-
-/* (No Comment) */
 "expiration.title" = "갱신";
-
-/* (No Comment) */
 "global.automatic" = "자동";
-
-/* (No Comment) */
 "global.cancel" = "취소";
-
-/* (No Comment) */
 "global.close" = "닫기";
-
-/* (No Comment) */
 "global.error" = "오류";
-
-/* (No Comment) */
 "global.ok" = "확인";
-
-/* (No Comment) */
 "menu.accessibility.item" = "메뉴";
-
-/* (No Comment) */
 "menu.accessibility.logged_as" = "로그인된 사용자: %@";
-
-/* (No Comment) */
 "menu.expiration.days" = "%d일";
-
-/* (No Comment) */
 "menu.expiration.expires_in" = "구독 만료 시간:";
-
-/* (No Comment) */
 "menu.expiration.hours" = "%d시간";
-
-/* (No Comment) */
 "menu.expiration.one_hour" = "1시간";
-
-/* (No Comment) */
 "menu.expiration.upgrade" = "계정 업그레이드";
-
-/* (No Comment) */
 "menu.item.about" = "정보";
-
-/* (No Comment) */
 "menu.item.account" = "계정";
-
-/* (No Comment) */
 "menu.item.logout" = "로그아웃";
-
-/* (No Comment) */
 "menu.item.region" = "지역 선택";
-
-/* (No Comment) */
 "menu.item.settings" = "설정";
-
-/* (No Comment) */
 "menu.item.web.home" = "홈페이지";
-
-/* (No Comment) */
 "menu.item.web.privacy" = "개인정보 취급방침";
-
-/* (No Comment) */
 "menu.item.web.support" = "지원";
-
-/* (No Comment) */
 "menu.logout.confirm" = "로그아웃";
-
-/* (No Comment) */
 "menu.logout.message" = "로그아웃하면 VPN을 이용할 수 없고 보호를 받지 못합니다.";
-
-/* (No Comment) */
 "menu.logout.title" = "로그아웃";
-
-/* (No Comment) */
 "menu.renewal.message.trial" = "체험 계정은 갱신할 수 없습니다. 서비스를 계속 이용하려면 만료 시 새 계정을 구매해주십시오.";
-
-/* (No Comment) */
 "menu.renewal.message.unavailable" = "현재 Apple 서버를 이용할 수 없습니다. 나중에 다시 시도해주십시오.";
-
-/* (No Comment) */
 "menu.renewal.message.website" = "저희 웹 사이트를 통해 정기 이용을 갱신해주십시오.";
-
-/* (No Comment) */
 "menu.renewal.purchase" = "구매";
-
-/* (No Comment) */
 "menu.renewal.renew" = "갱신";
-
-/* (No Comment) */
 "menu.renewal.title" = "갱신";
-
-/* (No Comment) */
 "notifications.disabled.message" = "알림을 활성화하면 구독이 만료되기 전에 갱신하라는 알림을 받을 수 있습니다.";
-
-/* (No Comment) */
 "notifications.disabled.settings" = "설정";
-
-/* (No Comment) */
 "notifications.disabled.title" = "알림 비활성화";
-
-/* (No Comment) */
 "renewal.failure.message" = "구매 영수증을 제출하지 못했습니다. 나중에 다시 시도하세요.";
-
-/* (No Comment) */
 "renewal.success.message" = "귀하의 계정이 갱신되었습니다.";
-
-/* (No Comment) */
 "renewal.success.title" = "감사합니다";
-
-/* (No Comment) */
 "settings.application_information.debug.empty.message" = "디버그 정보가 비어 있습니다. 다시 제출하시기 전에 연결을 시도하십시오.";
-
-/* (No Comment) */
 "settings.application_information.debug.empty.title" = "디버그 정보가 비어 있습니다";
-
-/* (No Comment) */
 "settings.application_information.debug.failure.message" = "디버그 정보를 제출하지 못했습니다. VPN의 연결을 해제한 후 다시 시도하십시오.";
-
-/* (No Comment) */
 "settings.application_information.debug.failure.title" = "제출 중 오류 발생";
-
-/* (No Comment) */
 "settings.application_information.debug.success.message" = "디버그 정보 제출 성공. \nID: %@\n저희 지원팀이 귀하의 제출 정보를 확인하려면 이 ID가 필요하므로 적어두시기 바랍니다.";
-
-/* (No Comment) */
 "settings.application_information.debug.success.title" = "디버그 정보 제출 완료";
-
-/* (No Comment) */
 "settings.application_information.debug.title" = "지원팀에 디버그 보내기";
-
-/* (No Comment) */
 "settings.application_information.title" = "애플리케이션 정보";
-
-/* (No Comment) */
 "settings.application_settings.dark_theme.title" = "다크 테마";
-
-/* (No Comment) */
 "settings.application_settings.mace.footer" = "PIA MACE™는 VPN에 연결되어 있을 때 광고, 트래커 및 악성코드를 차단합니다.";
-
-/* (No Comment) */
 "settings.application_settings.mace.title" = "PIA MACE™";
-
-/* (No Comment) */
-"settings.application_settings.persistent.footer.disabled" = "자동 재연결을 해제하면 기기가 안정적인 네트워크에 연결되지 않은 경우 프라이버시가 위험에 처할 수 있습니다.";
-
-/* (No Comment) */
-"settings.application_settings.persistent.title" = "자동으로 다시 연결";
-
-/* (No Comment) */
+"settings.application_settings.persistent.footer.disabled" = "VPN 연결이 해제되면 VPN kill switch가 인터넷 연결을 해제합니다.";
+"settings.application_settings.persistent.title" = "VPN 킬 스위치";
 "settings.application_settings.title" = "애플리케이션 설정";
-
-/* (No Comment) */
 "settings.commit.buttons.later" = "나중에";
-
-/* (No Comment) */
 "settings.commit.buttons.reconnect" = "다시 연결";
-
-/* (No Comment) */
 "settings.commit.messages.must_disconnect" = "변경사항이 반영되려면 VPN을 다시 연결해야 합니다.";
-
-/* (No Comment) */
 "settings.commit.messages.should_reconnect" = "변경사항을 적용하려면 VPN에 다시 연결하세요.";
-
-/* (No Comment) */
 "settings.connection.remote_port.title" = "원격 포트";
-
-/* (No Comment) */
 "settings.connection.socket_protocol.title" = "소켓";
-
-/* (No Comment) */
 "settings.connection.title" = "연결";
-
-/* (No Comment) */
 "settings.connection.vpn_protocol.title" = "프로토콜";
-
-/* (No Comment) */
 "settings.content_blocker.footer" = "Content Blocker를 활성화 또는 비활성화하려면 설정 > Safari > Content Blockers로 가서 PIA VPN을 토글하세요.";
-
-/* (No Comment) */
 "settings.content_blocker.refresh.title" = "차단 목록 새로고침";
-
-/* (No Comment) */
 "settings.content_blocker.state.title" = "현재 상태";
-
-/* (No Comment) */
 "settings.content_blocker.title" = "Safari Content Blocker";
-
-/* (No Comment) */
 "settings.encryption.cipher.title" = "데이터 암호화";
-
-/* (No Comment) */
 "settings.encryption.digest.title" = "데이터 인증";
-
-/* (No Comment) */
 "settings.encryption.handshake.title" = "핸드셰이크";
-
-/* (No Comment) */
 "settings.encryption.title" = "암호화";
-
-/* (No Comment) */
+"settings.reset.defaults.confirm.button" = "초기화";
+"settings.reset.defaults.confirm.message" = "앱이 기본 설정으로 돌아갑니다. 모든 변경 사항을 잃게 됩니다.";
+"settings.reset.defaults.confirm.title" = "초기화 설정";
+"settings.reset.defaults.title" = "기본 설정으로 초기화";
+"settings.reset.footer" = "모든 설정이 기본 설정으로 초기화됩니다.";
+"settings.reset.title" = "초기화";
 "shortcuts.connect" = "연결";
-
-/* (No Comment) */
 "shortcuts.disconnect" = "연결 해제";
-
-/* (No Comment) */
 "shortcuts.select_region" = "지역 선택";
-
-/* (No Comment) */
 "vpn_permission.body.footer" = "저희는 어떤 네트워크 활동도 모니터링, 필터링 또는 로그하지 않습니다.";
-
-/* (No Comment) */
 "vpn_permission.body.subtitle" = "계속하려면 “%@”을(를) 누르세요.";
-
-/* (No Comment) */
 "vpn_permission.body.title" = "PIA가 트래픽의 보안을 유지하려면 귀하의 VPN 구성에 접근해야 합니다.";
-
-/* (No Comment) */
 "vpn_permission.disallow.contact" = "문의";
-
-/* (No Comment) */
 "vpn_permission.disallow.message.basic" = "애플리케이션이 작동하려면 이 권한이 필요합니다.";
-
-/* (No Comment) */
 "vpn_permission.disallow.message.support" = "지원이 필요하시면 고객 지원팀에 문의하실 수 있습니다.";
-
-/* (No Comment) */
 "vpn_permission.title" = "PIA";
-
-/* (No Comment) */
 "walkthrough.action.done" = "완료";
-
-/* (No Comment) */
 "walkthrough.action.next" = "다음";
-
-/* (No Comment) */
 "walkthrough.action.skip" = "건너뛰기";
-
-/* (No Comment) */
 "walkthrough.page.1.description" = "한 번에 최대 5개의 장치에서 보호를 받으세요.";
-
-/* (No Comment) */
 "walkthrough.page.1.title" = "한 번의 5개의 장치 지원";
-
-/* (No Comment) */
 "walkthrough.page.2.description" = "전 세계에 있는 서버를 통해 언제나 보호를 받습니다.";
-
-/* (No Comment) */
 "walkthrough.page.2.title" = "모든 지역에 쉽게 연결";
-
-/* (No Comment) */
 "walkthrough.page.3.description" = "Content Blocker를 활성화하면 Safari에서 광고가 표시되지 않습니다.";
-
-/* (No Comment) */
 "walkthrough.page.3.title" = "광고로부터 보호";
-
