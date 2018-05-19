@@ -1,93 +1,43 @@
-/* (No Comment) */
+"agreement.message" = "Kaydolmak, $1'nın ve $2'nın kabul edildiği anlamına gelir.";
+"agreement.message.privacy" = "Gizlilik Politikası";
+"agreement.message.tos" = "Hizmet Koşulları";
 "iap.error.message.unavailable" = "Apple sunucuları şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.";
-
-/* (No Comment) */
 "iap.error.title" = "Hata";
-
-/* (No Comment) */
 "login.error.throttled" = "Bu kullanıcı adı ile çok fazla kez yanlış giriş yapıldı. Lütfen daha sonra tekrar deneyin.";
-
-/* (No Comment) */
 "login.error.title" = "Giriş yap";
-
-/* (No Comment) */
 "login.error.unauthorized" = "Kullanıcı adınız ya da şifreniz hatalı.";
-
-/* (No Comment) */
 "login.error.validation" = "Bir kullanıcı adı ile şifre girmelisiniz.";
-
-/* (No Comment) */
 "login.password.placeholder" = "Şifre";
-
-/* (No Comment) */
-"login.purchase.button" = "Hemen satın al!";
-
-/* (No Comment) */
+"login.purchase.button" = "Hemen satın al";
 "login.purchase.footer" = "Hesabınız yok mu?";
-
-/* (No Comment) */
+"login.redeem.button" = "Şimdi kullanın";
+"login.redeem.footer" = "Bir hediye kartınız ya da deneme kartınız mı var?";
 "login.restore.button" = "Planınızı alamadınız mı?";
-
-/* (No Comment) */
 "login.submit" = "GİRİŞ YAP";
-
-/* (No Comment) */
 "login.title" = "Hesabınıza giriş yapın";
-
-/* (No Comment) */
 "login.username.placeholder" = "Kullanıcı Adı (p1234567)";
-
-/* (No Comment) */
 "plan.accessibility.per_month" = "aylık";
-
-/* (No Comment) */
 "plan.best_value" = "En iyi fiyat";
-
-/* (No Comment) */
 "plan.monthly.title" = "Aylık";
-
-/* (No Comment) */
 "plan.price_format" = "%@/ay";
-
-/* (No Comment) */
 "plan.yearly.detail_format" = "Yılda %@%@";
-
-/* (No Comment) */
 "plan.yearly.title" = "Yıllık";
-
-/* (No Comment) */
 "purchase.email.placeholder" = "E-posta adresi";
-
-/* (No Comment) */
 "purchase.error.title" = "Satın Al";
-
-/* (No Comment) */
 "purchase.error.validation" = "Bir e-posta adresi girmeniz gerekiyor.";
-
-/* (No Comment) */
-"purchase.login.button" = "Giriş yapın!";
-
-/* (No Comment) */
+"purchase.login.button" = "Giriş yapın";
 "purchase.login.footer" = "Hesabınız var mı?";
-
-/* (No Comment) */
 "purchase.submit" = "ŞİMDİ SATIN AL";
-
-/* (No Comment) */
-"purchase.title" = "Bir VPN planı seçin";
-
-/* (No Comment) */
 "purchase.subtitle" = "7 günlük para iade garantisi";
-
-/* (No Comment) */
+"purchase.title" = "Bir VPN planı seçin";
+"redeem.email.placeholder" = "E-posta adresi";
+"redeem.error.code" = "Kod, %lu sayısal haneden oluşmalıdır.";
+"redeem.error.title" = "Kullan";
+"redeem.submit" = "Gönder";
+"redeem.subtitle" = "E-posta adresinizi ve hediye kartınızdaki ya da deneme kartınızdaki %lu haneli PIN'i aşağıya girin.";
+"redeem.title" = "Hediye kartını kullan";
 "restore.email.placeholder" = "E-posta adresi";
-
-/* (No Comment) */
 "restore.submit" = "ONAYLA";
-
-/* (No Comment) */
 "restore.subtitle" = "Bu uygulamadan bir plan satın aldıktan sonra hesap bilgilerinizi alamadıysanız, onları buradan tekrar gönderebilirsiniz.\nBu işlem için sizden ücret alınmayacak.";
-
-/* (No Comment) */
 "restore.title" = "Bilgileri gönderilmeyen satın alma işlemini tekrarlayın";
-
+"welcome.accessibility.cancel" = "İptal";

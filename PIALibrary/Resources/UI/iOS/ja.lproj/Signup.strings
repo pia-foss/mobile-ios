@@ -1,36 +1,22 @@
-/* (No Comment) */
 "failure.message" = "ただ今アカウントを作成できません。後ほどもう一度お試しください。\n\nアプリを再起動すると、アカウント作成が再試行されます。";
-
-/* (No Comment) */
+"failure.redeem.claimed.message" = "このカードは、すでに別のアカウントが獲得したようです。別のPINを入力してください。";
+"failure.redeem.claimed.title" = "すでに獲得されたカードです";
+"failure.redeem.invalid.message" = "無効なカードPINを入力したようです。もう一度お試しください。";
+"failure.redeem.invalid.title" = "無効なカードPIN";
 "failure.submit" = "戻る";
-
-/* (No Comment) */
 "failure.title" = "アカウントの作成に失敗しました";
-
-/* (No Comment) */
+"failure.vc_title" = "サインアップできませんでした";
 "in_progress.message" = "システムがご購入を確定しています。しばらく時間がかかることがありますので、そのままお待ちください。";
-
-/* (No Comment) */
+"in_progress.redeem.message" = "システムがご購入を確定しています。しばらく時間がかかることがありますので、そのままお待ちください。";
+"in_progress.title" = "サインアップを確定";
 "success.message_format" = "サインアップありがとうございます。アカウントのユーザー名とパスワードをお客様のメールアドレス（%@）に送信いたしました。";
-
-/* (No Comment) */
 "success.password.caption" = "パスワード";
-
-/* (No Comment) */
+"success.redeem.message" = "ユーザーネームとパスワードを記載したメールがまもなく届きます。";
+"success.redeem.title" = "完了！";
 "success.submit" = "始める";
-
-/* (No Comment) */
 "success.title" = "購入完了";
-
-/* (No Comment) */
 "success.username.caption" = "ユーザー名";
-
-/* (No Comment) */
 "unreachable.message" = "インターネット接続が見つかりません。インターネットに接続していることを確認してから下の再試行をタップしてください。\n\n後ほどアプリでこのプロセスを完了することができます。";
-
-/* (No Comment) */
 "unreachable.submit" = "再試行";
-
-/* (No Comment) */
 "unreachable.title" = "おっと！";
-
+"unreachable.vc_title" = "エラー";

@@ -1,93 +1,43 @@
-/* (No Comment) */
+"agreement.message" = "Ved tilmelding accepteres $1 og $2.";
+"agreement.message.privacy" = "Fortrolighedspolitik";
+"agreement.message.tos" = "Vilkår for brug";
 "iap.error.message.unavailable" = "Apple-servere er ikke tilgængelige i øjeblikket. Prøv venligst igen senere.";
-
-/* (No Comment) */
 "iap.error.title" = "Fejl";
-
-/* (No Comment) */
 "login.error.throttled" = "Alt for mange mislykkede forsøg på at logge ind med dette brugernavn. Prøv venligst igen senere.";
-
-/* (No Comment) */
 "login.error.title" = "Log ind";
-
-/* (No Comment) */
 "login.error.unauthorized" = "Dit brugernavn eller kodeord er forkert.";
-
-/* (No Comment) */
 "login.error.validation" = "Du skal indtaste et brugernavn og et kodeord.";
-
-/* (No Comment) */
 "login.password.placeholder" = "Kodeord";
-
-/* (No Comment) */
-"login.purchase.button" = "Køb nu!";
-
-/* (No Comment) */
+"login.purchase.button" = "Køb nu";
 "login.purchase.footer" = "Har du ikke en konto?";
-
-/* (No Comment) */
+"login.redeem.button" = "Indløs nu";
+"login.redeem.footer" = "Har du et gavekort eller prøvekort?";
 "login.restore.button" = "Kan du ikke få fat i din plan?";
-
-/* (No Comment) */
 "login.submit" = "LOG IND";
-
-/* (No Comment) */
 "login.title" = "Log ind på din konto";
-
-/* (No Comment) */
 "login.username.placeholder" = "Brugernavn (p1234567)";
-
-/* (No Comment) */
 "plan.accessibility.per_month" = "per måned";
-
-/* (No Comment) */
 "plan.best_value" = "Bedste værdi";
-
-/* (No Comment) */
 "plan.monthly.title" = "Månedligt";
-
-/* (No Comment) */
 "plan.price_format" = "%@/mdr";
-
-/* (No Comment) */
 "plan.yearly.detail_format" = "%@%@ per år";
-
-/* (No Comment) */
 "plan.yearly.title" = "Årligt";
-
-/* (No Comment) */
 "purchase.email.placeholder" = "E-mailadresse";
-
-/* (No Comment) */
 "purchase.error.title" = "Køb";
-
-/* (No Comment) */
 "purchase.error.validation" = "Du skal indtaste en e-mailadresse";
-
-/* (No Comment) */
-"purchase.login.button" = "Log ind!";
-
-/* (No Comment) */
+"purchase.login.button" = "Log ind";
 "purchase.login.footer" = "Har du allerede en konto?";
-
-/* (No Comment) */
 "purchase.submit" = "KØB NU";
-
-/* (No Comment) */
-"purchase.title" = "Vælg en VPN-plan";
-
-/* (No Comment) */
 "purchase.subtitle" = "7-dages pengene tilbage garanti";
-
-/* (No Comment) */
+"purchase.title" = "Vælg en VPN-plan";
+"redeem.email.placeholder" = "E-mailadresse";
+"redeem.error.code" = "Koden skal være %lu numeriske cifre.";
+"redeem.error.title" = "Indløs";
+"redeem.submit" = "INDSEND";
+"redeem.subtitle" = "Indtast din e-mailadresse, og %lu-cifrede pinkode frra dit gavekort eller prøvekort herunder.";
+"redeem.title" = "Indløs gavekort";
 "restore.email.placeholder" = "E-mailadresse";
-
-/* (No Comment) */
 "restore.submit" = "BEKRÆFT";
-
-/* (No Comment) */
 "restore.subtitle" = "Hvis du har købt en plan gennem denne app og ikke har modtaget dine legitimationsoplysninger, kan du anmode om at sende dem igen herfra.\nDu vil ikke blive opkrævet i løbet af denne proces.";
-
-/* (No Comment) */
 "restore.title" = "Gendan ukrediteret køb";
-
+"welcome.accessibility.cancel" = "Annuller";

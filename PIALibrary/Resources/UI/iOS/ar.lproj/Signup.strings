@@ -1,36 +1,22 @@
-/* (No Comment) */
 "failure.message" = "يتعذر علينا إنشاء حساب في الوقت الحالي. يرجى إعادة المحاولة لاحقًا. \n\nعند إعادة فتح التطبيق سيتم إعادة محاولة إنشاء حساب.";
-
-/* (No Comment) */
+"failure.redeem.claimed.message" = "يبدو أن هذه البطاقة استُخدمت في حساب آخر. حاول إدخال رمز جديد.";
+"failure.redeem.claimed.title" = "تم استخدام هذه البطاقة بالفعل";
+"failure.redeem.invalid.message" = "يبدو أنك أدخلت رمز بطاقة غير صالح. يرجى إعادة المحاولة.";
+"failure.redeem.invalid.title" = "رمز بطاقة غير صالح";
 "failure.submit" = "عودة";
-
-/* (No Comment) */
 "failure.title" = "فشل إنشاء الحساب";
-
-/* (No Comment) */
+"failure.vc_title" = "فشل تسجيل الآن";
 "in_progress.message" = "جارٍ تأكيد عملية الشراء مع نظامنا. يمكن أن يستغرق ذلك لحظة لذلك انتظر قليلًا.";
-
-/* (No Comment) */
+"in_progress.redeem.message" = "جارٍ تأكيد رمز بطاقتك مع نظامنا. قد يستغرق ذلك بضع لحظات، انتظر قليلًا.";
+"in_progress.title" = "تأكيد التسجيل";
 "success.message_format" = "شضكراً على اشتراكك معنا. لقد أرسلنا اسم المستخدم وكلمة المرور الخاصين بك إلى بريدك الإلكتروني %@";
-
-/* (No Comment) */
 "success.password.caption" = "كلمة المرور";
-
-/* (No Comment) */
+"success.redeem.message" = "ستحصل أيضاً على رسالة إلكترونية تحتوي على اسم المستخدم وكلمة المرور الخاصين بك.";
+"success.redeem.title" = "تم بنجاح!";
 "success.submit" = "كيف تبدأ";
-
-/* (No Comment) */
 "success.title" = "تم الشراء";
-
-/* (No Comment) */
 "success.username.caption" = "اسم المستخدم";
-
-/* (No Comment) */
 "unreachable.message" = "لم يتم العثور على اتصال بالإنترنت. يرجى التأكد من اتصالك بالإنترنت وضغط زر إعادة المحاولة أدناه.\n\nيمكنك العودة إلى التطبيق في وقت لاحق لإنهاء العملية.";
-
-/* (No Comment) */
 "unreachable.submit" = "أعد المحاولة";
-
-/* (No Comment) */
 "unreachable.title" = "أوبس!";
-
+"unreachable.vc_title" = "خطأ";

@@ -1,93 +1,43 @@
-/* (No Comment) */
+"agreement.message" = "بتسجيلك، تقر بأنك توافق على $1 و $2.";
+"agreement.message.privacy" = "سياسة الخصوصية";
+"agreement.message.tos" = "شروط الخدمة";
 "iap.error.message.unavailable" = "خوادم أبل غير متاحة حاليًا. يرجى إعادة المحاولة لاحقًا.";
-
-/* (No Comment) */
 "iap.error.title" = "خطأ";
-
-/* (No Comment) */
 "login.error.throttled" = "لقد أجريت الكثير من المحاولات الفاشلة باسم المستخدم هذا. يرجى إعادة المحاولة لاحقًا.";
-
-/* (No Comment) */
 "login.error.title" = "تسجيل الدخول";
-
-/* (No Comment) */
 "login.error.unauthorized" = "اسم المستخدم أو كلمة المرور غير صحيحة.";
-
-/* (No Comment) */
 "login.error.validation" = "يجب إدخال اسم المستخدم وكلمة المرور";
-
-/* (No Comment) */
 "login.password.placeholder" = "كلمة المرور";
-
-/* (No Comment) */
-"login.purchase.button" = "اشترِ الآن!";
-
-/* (No Comment) */
+"login.purchase.button" = "اشترِ الآن";
 "login.purchase.footer" = "ليس لديك حساب؟";
-
-/* (No Comment) */
+"login.redeem.button" = "استلم الآن";
+"login.redeem.footer" = "هل لديك بطاقة هدية أو بطاقة تجربة؟";
 "login.restore.button" = "لم تتمكن من الحصول على خطتك؟";
-
-/* (No Comment) */
 "login.submit" = "تسجيل الدخول";
-
-/* (No Comment) */
 "login.title" = "سجل الدخول إلى حسابك";
-
-/* (No Comment) */
 "login.username.placeholder" = "اسم المستخدم (p1234567)";
-
-/* (No Comment) */
 "plan.accessibility.per_month" = "في الشهر";
-
-/* (No Comment) */
 "plan.best_value" = "أفضل قيمة";
-
-/* (No Comment) */
 "plan.monthly.title" = "شهريًا";
-
-/* (No Comment) */
 "plan.price_format" = "%@ / شهر";
-
-/* (No Comment) */
 "plan.yearly.detail_format" = "%@%@ في السنة";
-
-/* (No Comment) */
 "plan.yearly.title" = "سنويًا";
-
-/* (No Comment) */
 "purchase.email.placeholder" = "البريد الإلكتروني";
-
-/* (No Comment) */
 "purchase.error.title" = "شراء";
-
-/* (No Comment) */
 "purchase.error.validation" = "يجب إدخال عنوان بريد إلكتروني.";
-
-/* (No Comment) */
-"purchase.login.button" = "تسجيل الدخول!";
-
-/* (No Comment) */
+"purchase.login.button" = "تسجيل الدخول";
 "purchase.login.footer" = "لديك حساب بالفعل؟";
-
-/* (No Comment) */
 "purchase.submit" = "شراء الآن";
-
-/* (No Comment) */
-"purchase.title" = "حدد خطة VPN";
-
-/* (No Comment) */
 "purchase.subtitle" = "ضمان استرداد المال لمدة 7 أيام";
-
-/* (No Comment) */
+"purchase.title" = "حدد خطة VPN";
+"redeem.email.placeholder" = "البريد الإلكتروني";
+"redeem.error.code" = "يجب أن يتكون الرمز من %lu خانات رقمية.";
+"redeem.error.title" = "استلام";
+"redeem.submit" = "إرسال";
+"redeem.subtitle" = "أدخل بريدك الإلكتروني ورمز بطاقة الهدية أو بطاقة التجربة المكون من %lu خانات.";
+"redeem.title" = "استلم محتويات بطاقة هدية";
 "restore.email.placeholder" = "البريد الإلكتروني";
-
-/* (No Comment) */
 "restore.submit" = "تأكيد";
-
-/* (No Comment) */
 "restore.subtitle" = "إذا اشتريت خطة من خلال هذا التطبيق ولم تصلك بيانات تسجيل دخولك، يمكنك إرسالها مرة أخرى من هنا.\nلن يتم تحصيل رسوم منك أثناء هذه العملية.";
-
-/* (No Comment) */
 "restore.title" = "استرداد الشراء غير المقيد في الحساب";
-
+"welcome.accessibility.cancel" = "إلغاء";

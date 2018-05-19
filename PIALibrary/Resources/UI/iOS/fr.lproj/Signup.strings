@@ -1,36 +1,22 @@
-/* (No Comment) */
 "failure.message" = "Nous ne parvenons pas à créer un compte pour l'instant. Veuillez réessayer plus tard. \n\nRouvrir l'application engendrera une nouvelle tentative de création de compte.";
-
-/* (No Comment) */
+"failure.redeem.claimed.message" = "Il semblerait que cette carte soit déjà utilisée sur un autre compte. Vous pouvez essayer de saisir un code PIN différent.";
+"failure.redeem.claimed.title" = "Carte déjà utilisée";
+"failure.redeem.invalid.message" = "Il semblerait que le code PIN de la carte saisie soit invalide. Veuillez réessayer.";
+"failure.redeem.invalid.title" = "Code PIN de la carte invalide";
 "failure.submit" = "REVENIR";
-
-/* (No Comment) */
 "failure.title" = "La création du compte a échoué";
-
-/* (No Comment) */
+"failure.vc_title" = "Échec de la connexion";
 "in_progress.message" = "Notre système est en train de confirmer votre achat. Cela pourrait prendre un moment, nous vous prions donc de patienter.";
-
-/* (No Comment) */
+"in_progress.redeem.message" = "Notre système est en train de confirmer le code PIN de votre carte. Cela pourrait prendre un moment, nous vous prions donc de patienter.";
+"in_progress.title" = "Confirmation d'inscription";
 "success.message_format" = "Merci pour votre inscription. L'identifiant et le mot de passe de votre compte ont été envoyés à votre adresse e-mail %@";
-
-/* (No Comment) */
 "success.password.caption" = "Mot de passe";
-
-/* (No Comment) */
+"success.redeem.message" = "Vous allez bientôt recevoir un e-mail contenant votre nom d'utilisateur et votre mot de passe.";
+"success.redeem.title" = "Terminé !";
 "success.submit" = "Commencer";
-
-/* (No Comment) */
 "success.title" = "Achat terminé";
-
-/* (No Comment) */
 "success.username.caption" = "Nom d'utilisateur";
-
-/* (No Comment) */
 "unreachable.message" = "Aucune connexion Internet trouvée. Veuillez confirmer que vous disposez d'une connexion Internet et cliquez de nouveau sur « Réessayer » ci-dessous.\n\nVous pourrez revenir dans l'application plus tard pour terminer le processus.";
-
-/* (No Comment) */
 "unreachable.submit" = "RÉESSAYER";
-
-/* (No Comment) */
 "unreachable.title" = "Oups !";
-
+"unreachable.vc_title" = "Erreur";

@@ -1,36 +1,12 @@
-/* (No Comment) */
 "failure.message" = "我們目前未能建立帳戶，請稍後再試。\n\n應用程式將在重新啟動時再次嘗試建立帳戶。";
-
-/* (No Comment) */
 "failure.submit" = "返回";
-
-/* (No Comment) */
 "failure.title" = "帳戶建立失敗";
-
-/* (No Comment) */
 "in_progress.message" = "我們的系統正確認您的購買交易，可能需要停留在此畫面幾分鐘時間。";
-
-/* (No Comment) */
 "success.message_format" = "感謝您註冊我們的服務！我們已將您的帳戶使用者名稱和密碼寄送到您的電子郵件地址：%@";
-
-/* (No Comment) */
 "success.password.caption" = "密碼";
-
-/* (No Comment) */
 "success.submit" = "開始使用";
-
-/* (No Comment) */
 "success.title" = "購買完成";
-
-/* (No Comment) */
 "success.username.caption" = "使用者名稱";
-
-/* (No Comment) */
 "unreachable.message" = "找不到網路連線。請確定您已連線上網，然後點選下方按鈕重試。\n\n您可以稍後再回來完成程序。";
-
-/* (No Comment) */
 "unreachable.submit" = "重試";
-
-/* (No Comment) */
 "unreachable.title" = "噢！";
-

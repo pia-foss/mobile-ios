@@ -1,36 +1,22 @@
-/* (No Comment) */
 "failure.message" = "Obecnie nie możemy utworzyć konta. Spróbuj ponownie później.";
-
-/* (No Comment) */
+"failure.redeem.claimed.message" = "Wygląda na to, że ta karta została użyta na innym koncie. Możesz spróbować wpisać inny PIN.";
+"failure.redeem.claimed.title" = "Karta już użyta";
+"failure.redeem.invalid.message" = "Wygląda na to, ze wpisałeś nieprawidłowy PIN karty. Spróbuj ponownie.";
+"failure.redeem.invalid.title" = "Nieprawidłowy PIN karty";
 "failure.submit" = "WSTECZ";
-
-/* (No Comment) */
 "failure.title" = "Błąd tworzenia konta";
-
-/* (No Comment) */
+"failure.vc_title" = "Rejestracja nie powiodła się";
 "in_progress.message" = "Potwierdzamy zakup w naszym systemie. Poczekaj spokojnie, bo to może trochę potrwać.";
-
-/* (No Comment) */
+"in_progress.redeem.message" = "Potwierdzamy Twój PIN karty w naszym systemie, TO może chwilę potrwać, więc prosimy o cierpliwość.";
+"in_progress.title" = "Potwierdź rejestrację";
 "success.message_format" = "Dziękujemy za rejestrację. Przesłaliśmy Twoją nazwę użytkownika i hasło na Twój adres e-mail: %@";
-
-/* (No Comment) */
 "success.password.caption" = "Hasło";
-
-/* (No Comment) */
+"success.redeem.message" = "Wkrótce otrzymasz również wiadomość e-mail z nazwą użytkownika i hasłem.";
+"success.redeem.title" = "Zakończono!";
 "success.submit" = "Rozpocznij";
-
-/* (No Comment) */
 "success.title" = "Zakup zakończony";
-
-/* (No Comment) */
 "success.username.caption" = "Nazwa użytkownika";
-
-/* (No Comment) */
 "unreachable.message" = "Nie znaleziono połączenia z internetem. Potwierdź, że masz połączenie z internetem i naciśnij „Spróbuj ponownie” poniżej..\n\nMożesz wrócić do aplikacji później, aby dokończyć proces.";
-
-/* (No Comment) */
 "unreachable.submit" = "SPRÓBUJ PONOWNIE";
-
-/* (No Comment) */
 "unreachable.title" = "Ups!";
-
+"unreachable.vc_title" = "Błąd";

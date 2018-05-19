@@ -1,36 +1,22 @@
-/* (No Comment) */
 "failure.message" = "Não podemos criar uma conta neste momento. Tente novamente mais tarde.\n\nApós a reabertua do aplicativo, uma nova tentativa de criação de conta será realizada.";
-
-/* (No Comment) */
+"failure.redeem.claimed.message" = "Parece que este cartão já foi resgatado por outra conta. Você pode tentar usar um PIN diferente.";
+"failure.redeem.claimed.title" = "O cartão já foi resgatado";
+"failure.redeem.invalid.message" = "Parece que você inseriu um PIN de cartão inválido. Por favor, tente novamente.";
+"failure.redeem.invalid.title" = "PIN de cartão inválido";
 "failure.submit" = "VOLTAR";
-
-/* (No Comment) */
 "failure.title" = "Falha ao Criar Conta";
-
-/* (No Comment) */
+"failure.vc_title" = "Falha ao registrar";
 "in_progress.message" = "Confirmamos sua compra com o nosso sistema. Isso pode demorar um pouco. Por favor, aguarde.";
-
-/* (No Comment) */
+"in_progress.redeem.message" = "Estamos confirmando o PIN do seu cartão com o nosso sistema. Isso pode demorar um pouco. Por favor, aguarde.";
+"in_progress.title" = "Confirme o registro";
 "success.message_format" = "Obrigado por se registrar conosco. Nós enviamos o nome de usuário e a senha da sua conta para o seu endereço de e-mail em %@";
-
-/* (No Comment) */
 "success.password.caption" = "Senha";
-
-/* (No Comment) */
+"success.redeem.message" = "Você também receberá um e-mail com seu nome de usuário e senha em breve.";
+"success.redeem.title" = "Concluído!";
 "success.submit" = "Comece Agora";
-
-/* (No Comment) */
 "success.title" = "Compra Concluída";
-
-/* (No Comment) */
 "success.username.caption" = "Nome de usuário";
-
-/* (No Comment) */
 "unreachable.message" = "Nenhuma conexão com a Internet encontrada. Confirme que você possui uma conexão com a Internet e pressione Tentar Novamente abaixo.\n\nVocê pode retornar ao aplicativo mais tarde para finalizar o processo.";
-
-/* (No Comment) */
 "unreachable.submit" = "TENTAR NOVAMENTE";
-
-/* (No Comment) */
 "unreachable.title" = "Ops!";
-
+"unreachable.vc_title" = "Erro";

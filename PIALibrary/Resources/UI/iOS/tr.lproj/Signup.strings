@@ -1,36 +1,22 @@
-/* (No Comment) */
 "failure.message" = "Şu anda hesap oluşturamıyoruz.\nLütfen daha sonra tekrar deneyin.\n\nUygulama yeniden açıldığından hesap oluşturma tekrar denenecektir.";
-
-/* (No Comment) */
+"failure.redeem.claimed.message" = "Bu kart önceden başka bir hesap tarafından talep edilmiş. Farklı bir PIN girmeyi deneyebilirsiniz.";
+"failure.redeem.claimed.title" = "Kart önceden talep edilmiş";
+"failure.redeem.invalid.message" = "Görünüşe bakılırsa geçersiz bir kart PIN'i girdiniz. Lütfen tekrar deneyin.";
+"failure.redeem.invalid.title" = "Geçersiz kart PIN'i";
 "failure.submit" = "GERİ DÖN";
-
-/* (No Comment) */
 "failure.title" = "Hesap Oluşturma Hatası";
-
-/* (No Comment) */
+"failure.vc_title" = "Kaydolma başarısız oldu";
 "in_progress.message" = "Sistemimizle satın alım işleminizi onaylıyoruz. Biraz zaman alabilir; lütfen bekleyin.";
-
-/* (No Comment) */
+"in_progress.redeem.message" = "Kart PIN'inizi sistemimizde onaylıyoruz. Bu biraz zaman alabilir, lütfen bekleyin.";
+"in_progress.title" = "Kaydolmayı onayla";
 "success.message_format" = "Bize kayıt olduğunuz için teşekkürler. Hesap kullanıcı adı ve parolanızı %@ e-posta adresinize gönderdik";
-
-/* (No Comment) */
 "success.password.caption" = "Şifre";
-
-/* (No Comment) */
+"success.redeem.message" = "Ayrıca kısa süre içinde kullanıcı adınızı ve şifrenizi içeren bir e-posta alacaksınız.";
+"success.redeem.title" = "Tamamlandı!";
 "success.submit" = "Başlarken";
-
-/* (No Comment) */
 "success.title" = "Satın Alma Tamamlandı";
-
-/* (No Comment) */
 "success.username.caption" = "Kullanıcı Adı";
-
-/* (No Comment) */
 "unreachable.message" = "İnternet bağlantısı yok. Lütfen İnternet bağlantınız olup olmadığını kontrol edin ve tekrar aşağıya tıklamayı deneyin.\n\nİşlemi bitirmek için uygulamaya daha sonra tekrar gelebilirsiniz.";
-
-/* (No Comment) */
 "unreachable.submit" = "TEKRAR DENE";
-
-/* (No Comment) */
 "unreachable.title" = "Heeey!";
-
+"unreachable.vc_title" = "Hata";

@@ -1,36 +1,22 @@
-/* (No Comment) */
 "failure.message" = "We kunnen op dit moment geen account maken. Probeer het later opnieuw. \n\nAls u de app opnieuw opent, wordt opnieuw geprobeerd een account te maken.";
-
-/* (No Comment) */
+"failure.redeem.claimed.message" = "Deze kaart is door een ander account geclaimd. Probeer een andere pincode.";
+"failure.redeem.claimed.title" = "Kaart al geclaimd";
+"failure.redeem.invalid.message" = "U heeft een ongeldige pincode ingevoerd. Probeer het opnieuw.";
+"failure.redeem.invalid.title" = "Ongeldige pincode";
 "failure.submit" = "GA TERUG";
-
-/* (No Comment) */
 "failure.title" = "Account aanmaken mislukt";
-
-/* (No Comment) */
+"failure.vc_title" = "Aanmelden mislukt";
 "in_progress.message" = "We zijn uw aankoop aan het verifiëren in ons systeem. Dit kan eventjes duren, daarom vragen we u vriendelijk om geduld.";
-
-/* (No Comment) */
+"in_progress.redeem.message" = "We zijn uw pincode aan het verifiëren in ons systeem. Dit kan eventjes duren, daarom vragen we u vriendelijk om geduld.";
+"in_progress.title" = "Aanmelding bevestigen";
 "success.message_format" = "Bedankt voor uw aanmelding. We hebben de gebruikersnaam en het wachtwoord voor uw account naar het volgende e-mailadres gestuurd: %@";
-
-/* (No Comment) */
 "success.password.caption" = "Wachtwoord";
-
-/* (No Comment) */
+"success.redeem.message" = "U ontvangt zo ook een e-mail met uw gebruikersnaam en wachtwoord.";
+"success.redeem.title" = "Voltooid!";
 "success.submit" = "Aan de slag";
-
-/* (No Comment) */
 "success.title" = "Aankoop voltooid";
-
-/* (No Comment) */
 "success.username.caption" = "Gebruikersnaam";
-
-/* (No Comment) */
 "unreachable.message" = "Geen internetverbinding gevonden. Controleer uw internetverbinding en probeer het hieronder opnieuw.\n\nU kunt later naar de app terugkeren om het proces te voltooien.";
-
-/* (No Comment) */
 "unreachable.submit" = "OPNIEUW PROBEREN";
-
-/* (No Comment) */
 "unreachable.title" = "Oeps!";
-
+"unreachable.vc_title" = "Fout";

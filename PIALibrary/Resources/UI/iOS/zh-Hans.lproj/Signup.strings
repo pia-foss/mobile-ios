@@ -1,36 +1,22 @@
-/* (No Comment) */
 "failure.message" = "我们现在无法创建账号。\n请稍后再试。\n\n重新打开本应用将会再次尝试创建账号。";
-
-/* (No Comment) */
+"failure.redeem.claimed.message" = "此卡片似乎已被另一个账号使用。您可尝试输入另一个PIN。";
+"failure.redeem.claimed.title" = "卡片已使用";
+"failure.redeem.invalid.message" = "您输入的卡片PIN似乎无效。请重试。";
+"failure.redeem.invalid.title" = "卡片PIN无效";
 "failure.submit" = "返回";
-
-/* (No Comment) */
 "failure.title" = "账户创建失败";
-
-/* (No Comment) */
+"failure.vc_title" = "注册失败";
 "in_progress.message" = "我们正在确认您在我们系统中的购买。这可能需要一点时间，请耐心等待。";
-
-/* (No Comment) */
+"in_progress.redeem.message" = "我们正在通过系统确认您的卡片PIN。这可能需要一些时间，请耐心等待。";
+"in_progress.title" = "确认注册";
 "success.message_format" = "感谢注册。我们已将您的用户名和密码发送至您的电子邮箱：%@";
-
-/* (No Comment) */
 "success.password.caption" = "密码";
-
-/* (No Comment) */
+"success.redeem.message" = "您也将很快收到一封电子邮件，记有您的用户名和密码。";
+"success.redeem.title" = "完成！";
 "success.submit" = "开始体验";
-
-/* (No Comment) */
 "success.title" = "购买完成";
-
-/* (No Comment) */
 "success.username.caption" = "用户名";
-
-/* (No Comment) */
 "unreachable.message" = "未找到网络连接。请确认您已接入网络，然后点击下面的重试。\n\n您可在稍后再回到本应用完成该操作。";
-
-/* (No Comment) */
 "unreachable.submit" = "重试";
-
-/* (No Comment) */
 "unreachable.title" = "糟糕！";
-
+"unreachable.vc_title" = "错误";

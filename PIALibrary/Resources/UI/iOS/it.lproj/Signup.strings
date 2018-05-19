@@ -1,36 +1,22 @@
-/* (No Comment) */
 "failure.message" = "Impossibile creare un account in questo momento. Riprova più tardi. \n\nRiaprendo l'app si riproverà a creare un account.";
-
-/* (No Comment) */
+"failure.redeem.claimed.message" = "Questa carta è già stata riscattata da un altro account. Prova a inserire un PIN diverso.";
+"failure.redeem.claimed.title" = "Carta già riscattata";
+"failure.redeem.invalid.message" = "Hai inserito un PIN della carta non valido. Riprova.";
+"failure.redeem.invalid.title" = "PIN della carta non valido";
 "failure.submit" = "INDIETRO";
-
-/* (No Comment) */
 "failure.title" = "Errore di creazione account";
-
-/* (No Comment) */
+"failure.vc_title" = "Registrazione non riuscita";
 "in_progress.message" = "Conferma dell'acquisto col sistema in corso. Potrebbe impiegare qualche secondo. Attendi.";
-
-/* (No Comment) */
+"in_progress.redeem.message" = "Conferma del PIN della tua carta col sistema in corso. Potrebbe impiegare qualche secondo. Attendi.";
+"in_progress.title" = "Conferma registrazione";
 "success.message_format" = "Grazie per la registrazione. Ti abbiamo inviato nome utente e password del tuo account all'indirizzo e-mail %@";
-
-/* (No Comment) */
 "success.password.caption" = "Password";
-
-/* (No Comment) */
+"success.redeem.message" = "Riceverai anche un'email a breve con nome utente e password.";
+"success.redeem.title" = "Fatto!";
 "success.submit" = "Inizia";
-
-/* (No Comment) */
 "success.title" = "Acquisto completato";
-
-/* (No Comment) */
 "success.username.caption" = "Nome utente";
-
-/* (No Comment) */
 "unreachable.message" = "Nessuna connessione Internet trovata. Verifica la connessione Internet e premi Riprova di seguito.\n\nPuoi tornare all'app più tardi per terminare il processo.";
-
-/* (No Comment) */
 "unreachable.submit" = "RIPROVA";
-
-/* (No Comment) */
 "unreachable.title" = "Ops!";
-
+"unreachable.vc_title" = "Errore";
