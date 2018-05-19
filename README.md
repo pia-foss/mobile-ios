@@ -32,6 +32,7 @@ The library has been tested on both iOS and macOS and includes the following fea
 - Git (preinstalled with Xcode Command Line Tools)
 - Ruby (preinstalled with macOS)
 - [CocoaPods 1.5.0][dep-cocoapods]
+- [SwiftGen][dep-swiftgen]
 - [jazzy][dep-jazzy] (optional, for documentation)
 
 It's highly recommended to use the Git and Ruby packages provided by [Homebrew][dep-brew].
@@ -323,6 +324,7 @@ This project is licensed under the [MIT (Expat) license](https://choosealicense.
 [pia-wiki]: https://en.wikipedia.org/wiki/Private_Internet_Access
 
 [dep-cocoapods]: https://guides.cocoapods.org/using/getting-started.html
+[dep-swiftgen]: https://github.com/SwiftGen/SwiftGen
 [dep-jazzy]: https://github.com/realm/jazzy
 [dep-brew]: https://brew.sh/
 

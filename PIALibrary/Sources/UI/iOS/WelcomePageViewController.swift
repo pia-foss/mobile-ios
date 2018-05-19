@@ -39,8 +39,11 @@ class WelcomePageViewController: UIPageViewController {
         guard !source.isEmpty else {
             fatalError("Source controllers are empty")
         }
-
         let isSinglePage = (source.count == 1)
+        guard isSinglePage || (preset.pages == .all) else {
+            fatalError("Currently supports all pages or a single page, not a subset")
+        }
+
         for vc in source {
             guard let child = vc as? WelcomeChild else {
                 fatalError("Source element must be a WelcomeChild")
@@ -54,7 +57,23 @@ class WelcomePageViewController: UIPageViewController {
     }
     
     func show(page: PIAWelcomeViewController.Pages) {
-        let index = page.rawValue - 1
+
+        // XXX: quick temp solution for log2
+        let index: Int
+        switch page {
+        case .login:
+            index = 0
+            
+        case .purchase:
+            index = 1
+            
+        case .redeem:
+            index = 2
+            
+        default:
+            return
+        }
+
         guard (index < source.count) else {
             fatalError("Page \(index) beyond source controllers (\(source.count))")
         }

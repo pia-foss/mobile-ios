@@ -12,11 +12,13 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 class RedeemViewController: AutolayoutViewController, WelcomeChild {
-    private static let nonDigitsSet = CharacterSet.decimalDigits.inverted
+    private static let codeInvalidSet = CharacterSet.decimalDigits.inverted
     
     private static let rxCodeGrouping: NSRegularExpression = try! NSRegularExpression(pattern: "\\d{4}(?=\\d)", options: [])
     
-    private static let maxCodeLength = 16
+    private static let codePlaceholder = "1234-5678-9012-3456"
+    
+    private static let codeLength = 16
 
     @IBOutlet private weak var scrollView: UIScrollView!
     
@@ -34,13 +36,11 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     
     @IBOutlet private weak var viewFooter: UIView!
     
-//    @IBOutlet private weak var viewPurchase: UIView!
-//
-//    @IBOutlet private weak var labelPurchase1: UILabel!
-//
-//    @IBOutlet private weak var labelPurchase2: UILabel!
-//
-//    @IBOutlet private weak var buttonRestorePurchase: UIButton!
+    @IBOutlet private weak var viewLogin: UIView!
+    
+    @IBOutlet private weak var labelLogin1: UILabel!
+    
+    @IBOutlet private weak var labelLogin2: UILabel!
 
     var preset: PIAWelcomeViewController.Preset?
     
@@ -70,9 +70,9 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         viewFooter.isHidden = omitsSiblingLink
         
         labelTitle.text = L10n.Welcome.Redeem.title
-        labelSubtitle.text = L10n.Welcome.Redeem.subtitle
+        labelSubtitle.text = L10n.Welcome.Redeem.subtitle(RedeemViewController.codeLength)
         textEmail.placeholder = L10n.Welcome.Redeem.Email.placeholder
-        textCode.placeholder = L10n.Welcome.Redeem.Code.placeholder
+        textCode.placeholder = RedeemViewController.codePlaceholder
         textAgreement.attributedText = Theme.current.agreementText(
             withMessage: L10n.Welcome.Agreement.message,
             tos: L10n.Welcome.Agreement.Message.tos,
@@ -81,15 +81,11 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             privacyUrl: Client.configuration.privacyUrl
         )
         buttonRedeem.title = L10n.Welcome.Redeem.submit
-//        labelPurchase1.text = L10n.Welcome.Login.Purchase.footer
-//        labelPurchase2.text = L10n.Welcome.Login.Purchase.button
-//        buttonRestorePurchase.setTitle(L10n.Welcome.Login.Restore.button, for: .normal)
-//        buttonRestorePurchase.titleLabel?.textAlignment = .center
-//        buttonRestorePurchase.titleLabel?.numberOfLines = 0
+        labelLogin1.text = L10n.Welcome.Purchase.Login.footer
+        labelLogin2.text = L10n.Welcome.Purchase.Login.button
         
-        viewFooter.isHidden = true
-//        buttonLogin.accessibilityIdentifier = "uitests.redeem.submit"
-//        viewPurchase.accessibilityLabel = "\(labelPurchase1.text!) \(labelPurchase2.text!)"
+        buttonRedeem.accessibilityIdentifier = "uitests.redeem.submit"
+        viewLogin.accessibilityLabel = "\(labelLogin1.text!) \(labelLogin2.text!)"
         textEmail.text = preset.redeemEmail
         if let code = preset.redeemCode {
             redeemCode = strippedRedeemCode(code) // will set textCode automatically
@@ -113,7 +109,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             return
         }
         
-        guard let email = textEmail.text, Validator.validate(email: email) else {
+        guard let email = textEmail.text?.trimmed(), Validator.validate(email: email) else {
             let alert = Macros.alert(
                 L10n.Welcome.Redeem.Error.title,
                 L10n.Welcome.Purchase.Error.validation
@@ -122,22 +118,30 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             present(alert, animated: true, completion: nil)
             return
         }
-        guard let code = redeemCode, Validator.validate(giftCode: code) else {
+        guard let code = redeemCode?.trimmed(), Validator.validate(giftCode: code) else {
             let alert = Macros.alert(
                 L10n.Welcome.Redeem.Error.title,
-                L10n.Welcome.Redeem.Error.code
+                L10n.Welcome.Redeem.Error.code(RedeemViewController.codeLength)
             )
             alert.addCancelAction(L10n.Ui.Global.ok)
             present(alert, animated: true, completion: nil)
             return
         }
         
-        
+        textEmail.text = email
+        textCode.text = friendlyRedeemCode(code)
         log.debug("Redeeming...")
         
         redeemEmail = email
 //        redeemCode = code
         perform(segue: StoryboardSegue.Welcome.signupViaRedeemSegue)
+    }
+    
+    @IBAction private func logIn(_ sender: Any?) {
+        guard let pageController = parent as? WelcomePageViewController else {
+            fatalError("Not running in WelcomePageViewController")
+        }
+        pageController.show(page: .login)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -196,9 +200,8 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         Theme.current.applyInput(textCode)
         Theme.current.applyLinkAttributes(textAgreement)
         Theme.current.applyActionButton(buttonRedeem)
-//        Theme.current.applyBody1(labelPurchase1, appearance: .dark)
-//        Theme.current.applyTextButton(labelPurchase2)
-//        Theme.current.applyTextButton(buttonRestorePurchase)
+        Theme.current.applyBody1(labelLogin1, appearance: .dark)
+        Theme.current.applyTextButton(labelLogin2)
     }
 }
 
@@ -216,18 +219,21 @@ extension RedeemViewController: UITextFieldDelegate {
         guard textField == textCode else {
             return true
         }
-        
-        guard string.rangeOfCharacter(from: RedeemViewController.nonDigitsSet) == nil else {
-            return false
-        }
+
+        // cleared input
         guard let newText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) else {
             redeemCode = nil
             return true
         }
 
+        // typed/pasted invalid character and did not paste a full code with dashes
+        guard (string.rangeOfCharacter(from: RedeemViewController.codeInvalidSet) == nil) || Validator.validate(giftCode: newText, withDashes: true) else {
+            return false
+        }
+        
         let cursorLocation = textField.position(from: textField.beginningOfDocument, offset: range.location + string.count)
         let newCode = strippedRedeemCode(newText)
-        guard newCode.count <= RedeemViewController.maxCodeLength else {
+        guard newCode.count <= RedeemViewController.codeLength else {
             return false
         }
         redeemCode = newCode

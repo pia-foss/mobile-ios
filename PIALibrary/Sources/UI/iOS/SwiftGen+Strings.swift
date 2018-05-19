@@ -63,6 +63,13 @@ enum L10n {
         static let footer = L10n.tr("Welcome", "login.purchase.footer")
       }
 
+      enum Redeem {
+        /// Redeem now!
+        static let button = L10n.tr("Welcome", "login.redeem.button")
+        /// Have a gift card or trial card?
+        static let footer = L10n.tr("Welcome", "login.redeem.footer")
+      }
+
       enum Restore {
         /// Couldn't get your plan?
         static let button = L10n.tr("Welcome", "login.restore.button")
@@ -133,15 +140,12 @@ enum L10n {
     enum Redeem {
       /// SUBMIT
       static let submit = L10n.tr("Welcome", "redeem.submit")
-      /// Type in your email address and the 16 digit PIN from your gift card or trial card below.
-      static let subtitle = L10n.tr("Welcome", "redeem.subtitle")
+      /// Type in your email address and the %lu digit PIN from your gift card or trial card below.
+      static func subtitle(_ p1: Int) -> String {
+        return L10n.tr("Welcome", "redeem.subtitle", p1)
+      }
       /// Redeem gift card
       static let title = L10n.tr("Welcome", "redeem.title")
-
-      enum Code {
-        /// 1234-5678-9012-3456
-        static let placeholder = L10n.tr("Welcome", "redeem.code.placeholder")
-      }
 
       enum Email {
         /// Email address
@@ -149,8 +153,10 @@ enum L10n {
       }
 
       enum Error {
-        /// Code must be 16 numeric digits.
-        static let code = L10n.tr("Welcome", "redeem.error.code")
+        /// Code must be %lu numeric digits.
+        static func code(_ p1: Int) -> String {
+          return L10n.tr("Welcome", "redeem.error.code", p1)
+        }
         /// Redeem
         static let title = L10n.tr("Welcome", "redeem.error.title")
       }
@@ -246,7 +252,7 @@ enum L10n {
       }
 
       enum Redeem {
-        /// You will receive an email shortly with your username and password.
+        /// You will also receive an email shortly with your username and password.
         static let message = L10n.tr("Signup", "success.redeem.message")
         /// Completed!
         static let title = L10n.tr("Signup", "success.redeem.title")

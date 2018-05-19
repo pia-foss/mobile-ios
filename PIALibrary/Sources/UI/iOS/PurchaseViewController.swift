@@ -151,7 +151,7 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
         }
         let errorTitle = L10n.Welcome.Purchase.Error.title
         let errorMessage = L10n.Welcome.Purchase.Error.validation
-        guard let email = textEmail.text, Validator.validate(email: email) else {
+        guard let email = textEmail.text?.trimmed(), Validator.validate(email: email) else {
             signupEmail = nil
             let alert = Macros.alert(errorTitle, errorMessage)
             alert.addCancelAction(L10n.Ui.Global.ok)
@@ -170,6 +170,7 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
             return
         }
         
+        textEmail.text = email
         log.debug("Will purchase plan: \(plan.product)")
 
         disableInteractions(fully: true)

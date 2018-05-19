@@ -2,10 +2,6 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "universal",
       "filename" : "image-redeem-success@2x.png",
       "scale" : "2x"
     },

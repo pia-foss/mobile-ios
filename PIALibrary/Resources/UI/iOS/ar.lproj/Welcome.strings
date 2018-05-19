@@ -74,10 +74,10 @@
 "purchase.submit" = "شراء الآن";
 
 /* (No Comment) */
-"purchase.subtitle" = "حدد خطة VPN";
+"purchase.title" = "حدد خطة VPN";
 
 /* (No Comment) */
-"purchase.title" = "ضمان استرداد المال لمدة 7 أيام";
+"purchase.subtitle" = "ضمان استرداد المال لمدة 7 أيام";
 
 /* (No Comment) */
 "restore.email.placeholder" = "البريد الإلكتروني";

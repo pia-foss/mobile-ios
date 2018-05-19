@@ -74,10 +74,10 @@
 "purchase.submit" = "JETZT KAUFEN";
 
 /* (No Comment) */
-"purchase.subtitle" = "VPN-Tarif auswählen";
+"purchase.title" = "VPN-Tarif auswählen";
 
 /* (No Comment) */
-"purchase.title" = "7-Tage-Geld-zurück-Garantie";
+"purchase.subtitle" = "7-Tage-Geld-zurück-Garantie";
 
 /* (No Comment) */
 "restore.email.placeholder" = "E-Mail-Adresse";

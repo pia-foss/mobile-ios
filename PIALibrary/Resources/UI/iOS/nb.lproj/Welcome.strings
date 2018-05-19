@@ -74,10 +74,10 @@
 "purchase.submit" = "KJØP NÅ";
 
 /* (No Comment) */
-"purchase.subtitle" = "Velg et VPN-abonnement";
+"purchase.title" = "Velg et VPN-abonnement";
 
 /* (No Comment) */
-"purchase.title" = "Garanti som gir deg pengene tilbake innen 7 dager";
+"purchase.subtitle" = "Garanti som gir deg pengene tilbake innen 7 dager";
 
 /* (No Comment) */
 "restore.email.placeholder" = "E-postadresse";

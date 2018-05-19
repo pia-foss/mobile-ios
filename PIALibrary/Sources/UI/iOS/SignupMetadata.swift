@@ -18,6 +18,8 @@ struct SignupMetadata {
     
     var bodyImage: UIImage?
     
+    var bodyImageOffset: CGPoint?
+
     var bodyTitle: String?
     
     var bodySubtitle: String?

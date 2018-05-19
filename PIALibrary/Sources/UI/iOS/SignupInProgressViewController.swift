@@ -127,6 +127,7 @@ class SignupInProgressViewController: AutolayoutViewController {
             } else if let _ = redeemRequest {
                 metadata.title = L10n.Welcome.Redeem.title
                 metadata.bodyImage = Asset.imageRedeemSuccess.image
+                metadata.bodyImageOffset = CGPoint(x: -10.0, y: 0.0)
                 metadata.bodyTitle = L10n.Signup.Success.Redeem.title
                 metadata.bodySubtitle = L10n.Signup.Success.Redeem.message
             }

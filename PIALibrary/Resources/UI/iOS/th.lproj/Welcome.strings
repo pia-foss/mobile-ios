@@ -74,10 +74,10 @@
 "purchase.submit" = "ซื้อเลย";
 
 /* (No Comment) */
-"purchase.subtitle" = "เลือกแผน VPN";
+"purchase.title" = "เลือกแผน VPN";
 
 /* (No Comment) */
-"purchase.title" = "รับประกันการคืนเงินภายใน 7 วัน";
+"purchase.subtitle" = "รับประกันการคืนเงินภายใน 7 วัน";
 
 /* (No Comment) */
 "restore.email.placeholder" = "อีเมลแอดเดรส";

@@ -74,10 +74,10 @@
 "purchase.submit" = "NU KOPEN";
 
 /* (No Comment) */
-"purchase.subtitle" = "Selecteer een VPN-abonnement";
+"purchase.title" = "Selecteer een VPN-abonnement";
 
 /* (No Comment) */
-"purchase.title" = "7 dagen lang niet-goed-geld-teruggarantie";
+"purchase.subtitle" = "7 dagen lang niet-goed-geld-teruggarantie";
 
 /* (No Comment) */
 "restore.email.placeholder" = "E-mailadres";

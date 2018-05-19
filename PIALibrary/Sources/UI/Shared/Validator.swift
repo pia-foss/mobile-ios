@@ -29,7 +29,11 @@ public class Validator {
      - Parameter giftCode: The gift code to validate.
      - Returns: `true` if the code syntax is valid.
      */
-    public static func validate(giftCode: String) -> Bool {
-        return NSPredicate(format: "SELF MATCHES %@", "^\\d{16}$").evaluate(with: giftCode)
+    public static func validate(giftCode: String, withDashes: Bool = false) -> Bool {
+        if withDashes {
+            return NSPredicate(format: "SELF MATCHES %@", "^(\\d{4}-){3}\\d{4}$").evaluate(with: giftCode)
+        } else {
+            return NSPredicate(format: "SELF MATCHES %@", "^\\d{16}$").evaluate(with: giftCode)
+        }
     }
 }
