@@ -1,12 +1,4 @@
-/* (No Comment) */
 "global.cancel" = "Abbrechen";
-
-/* (No Comment) */
 "global.close" = "Schließen";
-
-/* (No Comment) */
 "global.ok" = "OK";
-
-/* (No Comment) */
 "global.version.format" = "Version %@ (%@)";
-
