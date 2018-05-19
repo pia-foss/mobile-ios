@@ -1,93 +1,43 @@
-/* (No Comment) */
+"agreement.message" = "サインアップすることで、$1と$2に同意したことになります。";
+"agreement.message.privacy" = "プライバシーポリシー";
+"agreement.message.tos" = "利用規約";
 "iap.error.message.unavailable" = "Appleサーバーが現在ご利用いただけません。後でもう一度お試しください。";
-
-/* (No Comment) */
 "iap.error.title" = "エラー";
-
-/* (No Comment) */
 "login.error.throttled" = "このユーザー名で最大ログイン試行回数を超えました。後でもう一度お試しください。";
-
-/* (No Comment) */
 "login.error.title" = "ログイン";
-
-/* (No Comment) */
 "login.error.unauthorized" = "ユーザー名またはパスワードが間違っています。";
-
-/* (No Comment) */
 "login.error.validation" = "ユーザー名とパスワードを入力してください";
-
-/* (No Comment) */
 "login.password.placeholder" = "パスワード";
-
-/* (No Comment) */
-"login.purchase.button" = "今すぐ購入！";
-
-/* (No Comment) */
+"login.purchase.button" = "今すぐ購入";
 "login.purchase.footer" = "アカウントをお持ちでないですか？";
-
-/* (No Comment) */
+"login.redeem.button" = "今すぐカードを引換え";
+"login.redeem.footer" = "ギフトカードまたはトライアルカードをお持ちですか？";
 "login.restore.button" = "プランを取得できませんでしたか？";
-
-/* (No Comment) */
 "login.submit" = "ログイン";
-
-/* (No Comment) */
 "login.title" = "アカウントにサインイン";
-
-/* (No Comment) */
 "login.username.placeholder" = "ユーザー名 (p1234567)";
-
-/* (No Comment) */
 "plan.accessibility.per_month" = "月々";
-
-/* (No Comment) */
 "plan.best_value" = "最もお得";
-
-/* (No Comment) */
 "plan.monthly.title" = "月間";
-
-/* (No Comment) */
 "plan.price_format" = "%@/月";
-
-/* (No Comment) */
 "plan.yearly.detail_format" = "年間%@%@";
-
-/* (No Comment) */
 "plan.yearly.title" = "年間";
-
-/* (No Comment) */
 "purchase.email.placeholder" = "メールアドレス";
-
-/* (No Comment) */
 "purchase.error.title" = "購入";
-
-/* (No Comment) */
 "purchase.error.validation" = "必ずメールアドレスを入力してください。";
-
-/* (No Comment) */
-"purchase.login.button" = "サインイン！";
-
-/* (No Comment) */
+"purchase.login.button" = "サインイン";
 "purchase.login.footer" = "既にアカウントをお持ちですか？";
-
-/* (No Comment) */
 "purchase.submit" = "今すぐ購入";
-
-/* (No Comment) */
-"purchase.title" = "VPNプランを選択";
-
-/* (No Comment) */
 "purchase.subtitle" = "7日間返金保証";
-
-/* (No Comment) */
+"purchase.title" = "VPNプランを選択";
+"redeem.email.placeholder" = "メールアドレス";
+"redeem.error.code" = "コードは%lu桁でなければなりません。";
+"redeem.error.title" = "引換え";
+"redeem.submit" = "送信";
+"redeem.subtitle" = "メールアドレスと、以下のギフトカードまたはトライアルカードの%lu桁のPINを入力してください。";
+"redeem.title" = "ギフトカード引換え";
 "restore.email.placeholder" = "メールアドレス";
-
-/* (No Comment) */
 "restore.submit" = "確定";
-
-/* (No Comment) */
 "restore.subtitle" = "このアプリでプランを購入した後、認証情報を受け取っていない方は、こちらから認証情報を再度送信することができます。この処理の実行中、課金は発生しません。";
-
-/* (No Comment) */
 "restore.title" = "追加されていない更新を復元";
-
+"welcome.accessibility.cancel" = "キャンセル";

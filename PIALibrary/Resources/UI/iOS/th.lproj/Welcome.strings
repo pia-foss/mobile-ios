@@ -1,93 +1,43 @@
-/* (No Comment) */
+"agreement.message" = "ในการสมัคร ระบบจะขอให้คุณยอมรับ $1 และ $2";
+"agreement.message.privacy" = "นโยบายความเป็นส่วนตัว";
+"agreement.message.tos" = "ข้อตกลงการใช้บริการ";
 "iap.error.message.unavailable" = "ไม่พบเซิร์ฟเวอร์แอปเปิ้ลในขณะนี้ โปรดลองใหม่ภายหลัง";
-
-/* (No Comment) */
 "iap.error.title" = "ข้อผิดพลาด";
-
-/* (No Comment) */
 "login.error.throttled" = "มีการลงชื่อเข้าใช้ล้มเหลวด้วยชื่อผู้ใช้นี้เกินจำนวนครั้งที่กำหนด โปรดลองใหม่อีกครั้งภายใน";
-
-/* (No Comment) */
 "login.error.title" = "เข้าสู่ระบบ";
-
-/* (No Comment) */
 "login.error.unauthorized" = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
-
-/* (No Comment) */
 "login.error.validation" = "คุณต้องกรอกชื่อผู้ใช้และรหัสผ่าน";
-
-/* (No Comment) */
 "login.password.placeholder" = "รหัสผ่าน";
-
-/* (No Comment) */
-"login.purchase.button" = "ซื้อเลย!";
-
-/* (No Comment) */
+"login.purchase.button" = "ซื้อเลย";
 "login.purchase.footer" = "ไม่มีบัญชี?";
-
-/* (No Comment) */
+"login.redeem.button" = "ใช้สิทธิ์ตอนนี้";
+"login.redeem.footer" = "มีบัตรของขวัญหรือบัตรทดลองใช้หรือไม่";
 "login.restore.button" = "ไม่สามารถเลือกแผนของคุณได้?";
-
-/* (No Comment) */
 "login.submit" = "เข้าสู่ระบบ";
-
-/* (No Comment) */
 "login.title" = "ลงชื่อเข้าใช้บัญชีของคุณ";
-
-/* (No Comment) */
 "login.username.placeholder" = "ชื่อผู้ใช้ (p1234567)";
-
-/* (No Comment) */
 "plan.accessibility.per_month" = "ต่อเดือน";
-
-/* (No Comment) */
 "plan.best_value" = "คุ้มค่าที่สุด";
-
-/* (No Comment) */
 "plan.monthly.title" = "รายเดือน";
-
-/* (No Comment) */
 "plan.price_format" = "%@/เดือน";
-
-/* (No Comment) */
 "plan.yearly.detail_format" = "%@%@ ต่อปี";
-
-/* (No Comment) */
 "plan.yearly.title" = "รายปี";
-
-/* (No Comment) */
 "purchase.email.placeholder" = "อีเมลแอดเดรส";
-
-/* (No Comment) */
 "purchase.error.title" = "ซื้อ";
-
-/* (No Comment) */
 "purchase.error.validation" = "คุณต้องใส่ที่อยู่อีเมล";
-
-/* (No Comment) */
-"purchase.login.button" = "ลงชื่อเข้าใช้!";
-
-/* (No Comment) */
+"purchase.login.button" = "ลงชื่อเข้าใช้";
 "purchase.login.footer" = "มีบัญชีแล้วหรือยัง";
-
-/* (No Comment) */
 "purchase.submit" = "ซื้อเลย";
-
-/* (No Comment) */
-"purchase.title" = "เลือกแผน VPN";
-
-/* (No Comment) */
 "purchase.subtitle" = "รับประกันการคืนเงินภายใน 7 วัน";
-
-/* (No Comment) */
+"purchase.title" = "เลือกแผน VPN";
+"redeem.email.placeholder" = "ที่อยู่อีเมล";
+"redeem.error.code" = "รหัสต้องประกอบด้วยตัวเลข %lu หลัก";
+"redeem.error.title" = "ใช้สิทธิ์";
+"redeem.submit" = "ส่ง";
+"redeem.subtitle" = "พิมพ์ที่อยู่อีเมลของคุณและ PIN %lu หลักจากบัตรของขวัญหรือบัตรทดลองด้านล่าง";
+"redeem.title" = "ใช้สิทธิ์บัตรของขวัญ";
 "restore.email.placeholder" = "อีเมลแอดเดรส";
-
-/* (No Comment) */
 "restore.submit" = "ยืนยัน";
-
-/* (No Comment) */
 "restore.subtitle" = "หากคุณทำการซื้อแผนผ่านแอพนี้และยังไม่ได้รับข้อมูลประจำตัว คุณสามารถส่งอีกครั้งได้จากที่นี่\nคุณจะไม่ถูกเรียกเก็บเงินซ้ำอีกครั้งในกระบวนการนี้";
-
-/* (No Comment) */
 "restore.title" = "คืนค่าการซื้อยังไม่ได้คิดเครดิต";
-
+"welcome.accessibility.cancel" = "ยกเลิก";

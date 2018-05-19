@@ -1,93 +1,43 @@
-/* (No Comment) */
+"agreement.message" = "Для регистрации нужно принять $1 и $2.";
+"agreement.message.privacy" = "Политика конфиденциальности";
+"agreement.message.tos" = "Условия использования";
 "iap.error.message.unavailable" = "Серверы Apple временно недоступны. Повторите попытку позже.";
-
-/* (No Comment) */
 "iap.error.title" = "Ошибка";
-
-/* (No Comment) */
 "login.error.throttled" = "Слишком много неудачных попыток входа с использованием этого имени пользователя. Повторите попытку позже.";
-
-/* (No Comment) */
 "login.error.title" = "Войти";
-
-/* (No Comment) */
 "login.error.unauthorized" = "Неправильное имя пользователя или пароль.";
-
-/* (No Comment) */
 "login.error.validation" = "Необходимо ввести действительное имя пользователя и пароль.";
-
-/* (No Comment) */
 "login.password.placeholder" = "Пароль";
-
-/* (No Comment) */
-"login.purchase.button" = "Купите сейчас!";
-
-/* (No Comment) */
+"login.purchase.button" = "Купите сейчас";
 "login.purchase.footer" = "Нет учетной записи?";
-
-/* (No Comment) */
+"login.redeem.button" = "Использовать";
+"login.redeem.footer" = "Есть подарочная или триальная карта?";
 "login.restore.button" = "Не получили свой план?";
-
-/* (No Comment) */
 "login.submit" = "ВХОД";
-
-/* (No Comment) */
 "login.title" = "Войдите в свою учетную запсь";
-
-/* (No Comment) */
 "login.username.placeholder" = "Имя пользователя (p1234567)";
-
-/* (No Comment) */
 "plan.accessibility.per_month" = "в месяц";
-
-/* (No Comment) */
 "plan.best_value" = "Максимальная выгода";
-
-/* (No Comment) */
 "plan.monthly.title" = "Ежемесячно";
-
-/* (No Comment) */
 "plan.price_format" = "%@/мес.";
-
-/* (No Comment) */
 "plan.yearly.detail_format" = "%@%@ в год";
-
-/* (No Comment) */
 "plan.yearly.title" = "Ежегодно";
-
-/* (No Comment) */
 "purchase.email.placeholder" = "Адрес эл. почты";
-
-/* (No Comment) */
 "purchase.error.title" = "Купить";
-
-/* (No Comment) */
 "purchase.error.validation" = "Укажите адрес эл. почты.";
-
-/* (No Comment) */
 "purchase.login.button" = "Вход";
-
-/* (No Comment) */
 "purchase.login.footer" = "Уже есть учетная запись?";
-
-/* (No Comment) */
 "purchase.submit" = "КУПИТЬ";
-
-/* (No Comment) */
-"purchase.title" = "Выберите план VPN";
-
-/* (No Comment) */
 "purchase.subtitle" = "7-дневная гарантия возврата денег";
-
-/* (No Comment) */
+"purchase.title" = "Выберите план VPN";
+"redeem.email.placeholder" = "Адрес эл. почты";
+"redeem.error.code" = "В коде должно быть %lu цифр(ы).";
+"redeem.error.title" = "Использовать";
+"redeem.submit" = "ОТПРАВИТЬ";
+"redeem.subtitle" = "Введите свой адрес эл. почты и %lu-зн. PIN-код с подарочной или триальной карты.";
+"redeem.title" = "Исп-ть подарочную карту";
 "restore.email.placeholder" = "Адрес электронной почты";
-
-/* (No Comment) */
 "restore.submit" = "ПОДТВЕРДИТЬ";
-
-/* (No Comment) */
 "restore.subtitle" = "Если вы купили план через это приложение и не получили учетных данных, вы можете повторно отправить их отсюда. За эту процедуру не взимается плата.";
-
-/* (No Comment) */
 "restore.title" = "Восстановить непроведенную покупку";
-
+"welcome.accessibility.cancel" = "Отмена";

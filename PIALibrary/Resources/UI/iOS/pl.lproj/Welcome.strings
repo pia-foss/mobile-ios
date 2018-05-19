@@ -1,93 +1,43 @@
-/* (No Comment) */
+"agreement.message" = "Rejestracja składa się z zaakceptowania $1 i $2.";
+"agreement.message.privacy" = "Zasady ochrony prywatności";
+"agreement.message.tos" = "Warunki użytkowania";
 "iap.error.message.unavailable" = "Serwery Apple'a są w tej chwili niedostępne. Spróbuj ponownie później.";
-
-/* (No Comment) */
 "iap.error.title" = "Błąd";
-
-/* (No Comment) */
 "login.error.throttled" = "Zbyt wiele nieudanych prób logowania z tą nazwą użytkownika. Spróbuj ponownie później.";
-
-/* (No Comment) */
 "login.error.title" = "Zaloguj";
-
-/* (No Comment) */
 "login.error.unauthorized" = "Twoja nazwa użytkownika i hasło są nieprawidłowe.";
-
-/* (No Comment) */
 "login.error.validation" = "Musisz podać nazwę użytkownika i hasło.";
-
-/* (No Comment) */
 "login.password.placeholder" = "Hasło";
-
-/* (No Comment) */
-"login.purchase.button" = "Kup teraz!";
-
-/* (No Comment) */
+"login.purchase.button" = "Kup teraz";
 "login.purchase.footer" = "Nie masz jeszcze konta?";
-
-/* (No Comment) */
+"login.redeem.button" = "Wykorzystaj teraz";
+"login.redeem.footer" = "Masz kartę podarunkową lub kartę próbną?";
 "login.restore.button" = "Nie możesz pobrać swojego planu?";
-
-/* (No Comment) */
 "login.submit" = "ZALOGUJ";
-
-/* (No Comment) */
 "login.title" = "Zaloguj się na konto";
-
-/* (No Comment) */
 "login.username.placeholder" = "Nazwa użytkownika (p1234567)";
-
-/* (No Comment) */
 "plan.accessibility.per_month" = "miesięcznie";
-
-/* (No Comment) */
 "plan.best_value" = "Najlepsza wartość";
-
-/* (No Comment) */
 "plan.monthly.title" = "Miesięcznie";
-
-/* (No Comment) */
 "plan.price_format" = "%@/msc.";
-
-/* (No Comment) */
 "plan.yearly.detail_format" = "%@%@ rocznie";
-
-/* (No Comment) */
 "plan.yearly.title" = "Rocznie";
-
-/* (No Comment) */
 "purchase.email.placeholder" = "Adres e-mail";
-
-/* (No Comment) */
 "purchase.error.title" = "Zakup";
-
-/* (No Comment) */
 "purchase.error.validation" = "Musisz podać adres e-mail.";
-
-/* (No Comment) */
-"purchase.login.button" = "Zaloguj!";
-
-/* (No Comment) */
+"purchase.login.button" = "Zaloguj";
 "purchase.login.footer" = "Masz już konto?";
-
-/* (No Comment) */
 "purchase.submit" = "KUPUJĘ";
-
-/* (No Comment) */
-"purchase.title" = "Wybierz plan VPN";
-
-/* (No Comment) */
 "purchase.subtitle" = "7-dniowa gwarancja zwrotu pieniędzy";
-
-/* (No Comment) */
+"purchase.title" = "Wybierz plan VPN";
+"redeem.email.placeholder" = "Adres e-mail";
+"redeem.error.code" = "Kod musi składać się z %lu znaków numerycznych.";
+"redeem.error.title" = "Wykorzystaj";
+"redeem.submit" = "PRZEŚLIJ";
+"redeem.subtitle" = "Wpisz swój adres e-mail oraz %lu-cyfrowy PIN z karty podarunkowej lub karty próbnej poniżej.";
+"redeem.title" = "Wykorzystaj kartę podarunkową";
 "restore.email.placeholder" = "Adres e-mail";
-
-/* (No Comment) */
 "restore.submit" = "POTWIERDŹ";
-
-/* (No Comment) */
 "restore.subtitle" = "Jeśli kupił(a)ś plan, korzystając z tej aplikacji, ale nie dostałe(a)ś danych logowania, możesz wysłać je ponownie stąd.\nOpłata nie zostanie za to pobrana.";
-
-/* (No Comment) */
 "restore.title" = "Przywróć pominięty zakup";
-
+"welcome.accessibility.cancel" = "Anuluj";

@@ -1,93 +1,43 @@
-/* (No Comment) */
+"agreement.message" = "Als u zich aanmeldt, gaat u akkoord met de $1 en het S2.";
+"agreement.message.privacy" = "Privacybeleid";
+"agreement.message.tos" = "Servicevoorwaarden";
 "iap.error.message.unavailable" = "De Apple-servers zijn momenteel niet beschikbaar. Probeer het later opnieuw.";
-
-/* (No Comment) */
 "iap.error.title" = "Fout";
-
-/* (No Comment) */
 "login.error.throttled" = "Te veel mislukte inlogpogingen met deze gebruikersnaam. Probeer het later opnieuw.";
-
-/* (No Comment) */
 "login.error.title" = "Inloggen";
-
-/* (No Comment) */
 "login.error.unauthorized" = "Uw gebruikersnaam of wachtwoord is onjuist.";
-
-/* (No Comment) */
 "login.error.validation" = "U moet een gebruikersnaam en wachtwoord invoeren.";
-
-/* (No Comment) */
 "login.password.placeholder" = "Wachtwoord";
-
-/* (No Comment) */
-"login.purchase.button" = "Koop nu!";
-
-/* (No Comment) */
+"login.purchase.button" = "Koop nu";
 "login.purchase.footer" = "Heeft u geen account?";
-
-/* (No Comment) */
+"login.redeem.button" = "Nu inwisselen";
+"login.redeem.footer" = "Heeft u een cadeaubon of een proefperiodekaart?";
 "login.restore.button" = "Werkt uw abonnement niet?";
-
-/* (No Comment) */
 "login.submit" = "INLOGGEN";
-
-/* (No Comment) */
 "login.title" = "Aanmelden bij uw account";
-
-/* (No Comment) */
 "login.username.placeholder" = "Gebruikersnaam (p1234567)";
-
-/* (No Comment) */
 "plan.accessibility.per_month" = "per maand";
-
-/* (No Comment) */
 "plan.best_value" = "Beste waarde";
-
-/* (No Comment) */
 "plan.monthly.title" = "Maandelijks";
-
-/* (No Comment) */
 "plan.price_format" = "%@/ma";
-
-/* (No Comment) */
 "plan.yearly.detail_format" = "%@%@ per jaar";
-
-/* (No Comment) */
 "plan.yearly.title" = "Jaarlijks";
-
-/* (No Comment) */
 "purchase.email.placeholder" = "E-mailadres";
-
-/* (No Comment) */
 "purchase.error.title" = "Kopen";
-
-/* (No Comment) */
 "purchase.error.validation" = "U moet een e-mailadres invoeren";
-
-/* (No Comment) */
-"purchase.login.button" = "Aanmelden!";
-
-/* (No Comment) */
+"purchase.login.button" = "Aanmelden";
 "purchase.login.footer" = "Heeft u al een account?";
-
-/* (No Comment) */
 "purchase.submit" = "NU KOPEN";
-
-/* (No Comment) */
-"purchase.title" = "Selecteer een VPN-abonnement";
-
-/* (No Comment) */
 "purchase.subtitle" = "7 dagen lang niet-goed-geld-teruggarantie";
-
-/* (No Comment) */
+"purchase.title" = "Selecteer een VPN-abonnement";
+"redeem.email.placeholder" = "E-mailadres";
+"redeem.error.code" = "Code moet uit %lu getallen bestaan.";
+"redeem.error.title" = "Inwisselen";
+"redeem.submit" = "VERSTUREN";
+"redeem.subtitle" = "Voer uw e-mailadres en de %lu-cijferige pincode van uw cadeaubon of proefperiodekaart hieronder in.";
+"redeem.title" = "Cadeaubon inwisselen";
 "restore.email.placeholder" = "E-mailadres";
-
-/* (No Comment) */
 "restore.submit" = "BEVESTIGEN";
-
-/* (No Comment) */
 "restore.subtitle" = "Als u een abonnement via deze app heeft aangeschaft en u heeft uw gegevens niet ontvangen, dan kunt u ze hier opnieuw verzenden.\nEr worden geen kosten in rekening gebracht tijdens dit proces.";
-
-/* (No Comment) */
 "restore.title" = "Aankoop herstellen";
-
+"welcome.accessibility.cancel" = "Annuleren";

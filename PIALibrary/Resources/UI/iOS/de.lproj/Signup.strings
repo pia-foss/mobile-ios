@@ -1,36 +1,22 @@
-/* (No Comment) */
 "failure.message" = "Zur Zeit können wir kein Konto erstellen. Bitte später erneut versuchen.\n\nBeim erneuten Öffnen der App wird wieder versucht, ein Konto zu erstellen.";
-
-/* (No Comment) */
+"failure.redeem.claimed.message" = "Anscheinend wurde diese Karte bereits über ein anderes Konto eingelöst. Geben Sie eine andere PIN ein.";
+"failure.redeem.claimed.title" = "Karte bereits eingelöst";
+"failure.redeem.invalid.message" = "Anscheinend haben Sie eine ungültige PIN eingegeben. Bitte erneut versuchen.";
+"failure.redeem.invalid.title" = "Ungültige Karten-PIN";
 "failure.submit" = "ZURÜCK";
-
-/* (No Comment) */
 "failure.title" = "Konto nicht erstellt";
-
-/* (No Comment) */
+"failure.vc_title" = "Registrierung fehlgeschlagen";
 "in_progress.message" = "Wir bestätigen deinen Kauf in unserem System. Es kann einen Moment dauern, also gedulde dich bitte etwas.";
-
-/* (No Comment) */
+"in_progress.redeem.message" = "Wir überprüfen derzeit Ihre Karten-PIN in unserem System. Dies kann einen Moment dauern. Bitte haben Sie etwas Geduld.";
+"in_progress.title" = "Registrierung bestätigen";
 "success.message_format" = "Vielen Dank für deine Registrierung. Wir haben dir deinen Benutzernamen und dein Passwort an deine E-Mail-Adresse unter %@ gesendet.";
-
-/* (No Comment) */
 "success.password.caption" = "Passwort";
-
-/* (No Comment) */
+"success.redeem.message" = "Sie werden in Kürze zudem eine E-Mail mit Ihrem Benutzernamen und Passwort erhalten.";
+"success.redeem.title" = "Erfolgreich!";
 "success.submit" = "Erste Schritte";
-
-/* (No Comment) */
 "success.title" = "Kauf abgeschlossen";
-
-/* (No Comment) */
 "success.username.caption" = "Benutzername";
-
-/* (No Comment) */
 "unreachable.message" = "Keine Internetverbindung gefunden. Bitte deine Internetverbindung überprüfen und erneut versuchen.\n\nDu kannst die App später erneut aufrufen, um den Vorgang abzuschließen.";
-
-/* (No Comment) */
 "unreachable.submit" = "WIEDERHOLEN";
-
-/* (No Comment) */
 "unreachable.title" = "Ups!";
-
+"unreachable.vc_title" = "Fehler";

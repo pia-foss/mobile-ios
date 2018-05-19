@@ -1,36 +1,22 @@
-/* (No Comment) */
 "failure.message" = "เราไม่สามารถสร้างบัญชีได้ในขณะนี้ กรุณาลองใหม่อีกครั้งภายหลัง การปิดเปิดแอปใหม่จะเป็นการพยายามสร้างบัญชีใหม่";
-
-/* (No Comment) */
+"failure.redeem.claimed.message" = "ดูเหมือนว่าบัตรนี้มีการใช้สิทธิ์แล้วโดยบัญชีอื่น กรุณาลองใส่ PIN อื่น";
+"failure.redeem.claimed.title" = "บัตรมีการใช้สิทธิ์แล้ว";
+"failure.redeem.invalid.message" = "ดูเหมือนว่าคุณใส่ PIN การ์ดไม่ถูกต้อง กรุณาลองใหม่";
+"failure.redeem.invalid.title" = "PIN การ์ดไม่ถูกต้อง";
 "failure.submit" = "ย้อนกลับ";
-
-/* (No Comment) */
 "failure.title" = "สร้างบัญชีผู้ใช้ไม่สำเร็จ";
-
-/* (No Comment) */
+"failure.vc_title" = "การสมัครล้มเหลว";
 "in_progress.message" = "เรากำลังยืนยันการซื้อของคุณกับระบบของเรา กรุณารอสักครู่";
-
-/* (No Comment) */
+"in_progress.redeem.message" = "เรากำลังยืนยัน PIN การ์ดของคุณกับระบบของเรา กรุณารอสักครู่";
+"in_progress.title" = "ยืนยันการสมัคร";
 "success.message_format" = "ขอบคุณที่สมัครสมาชิกกับเรา เราได้ส่งชื่อผู้ใช้และรหัสผ่านไปยังอีเมลของคุณแล้วที่ %@";
-
-/* (No Comment) */
 "success.password.caption" = "รหัสผ่าน";
-
-/* (No Comment) */
+"success.redeem.message" = "คุณจะได้รับอีเมลพร้อมชื่อผู้ใช้และรหัสผ่านในไม่ช้า";
+"success.redeem.title" = "เสร็จสมบูรณ์!";
 "success.submit" = "เริ่มใช้งาน";
-
-/* (No Comment) */
 "success.title" = "ซื้อสำเร็จ";
-
-/* (No Comment) */
 "success.username.caption" = "ชื่อผู้ใช้";
-
-/* (No Comment) */
 "unreachable.message" = "ไม่พบการเชื่อมต่ออินเทอร์เน็ต กรุณายืนยันว่าคุณมีการเชื่อมต่ออินเทอร์เน็ตแล้วกดลองอีกครั้งด้านล่างนี้\n\nคุณสามารถกลับมาใหม่ในภายหลังเพื่อดำเนินการต่อให้เสร็จ";
-
-/* (No Comment) */
 "unreachable.submit" = "ลองใหม่";
-
-/* (No Comment) */
 "unreachable.title" = "อุ๊ปส์!";
-
+"unreachable.vc_title" = "ข้อผิดพลาด";
