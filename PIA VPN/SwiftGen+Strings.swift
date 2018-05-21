@@ -334,7 +334,7 @@ enum L10n {
         static let title = L10n.tr("Localizable", "settings.application_settings.persistent.title")
 
         enum Footer {
-          /// The VPN kill switch disables your Internet connection when the VPN disconnects.
+          /// The VPN kill switch prevents access to the Internet if the VPN connection is reconnecting. This excludes disconnecting manually.
           static let disabled = L10n.tr("Localizable", "settings.application_settings.persistent.footer.disabled")
         }
       }
