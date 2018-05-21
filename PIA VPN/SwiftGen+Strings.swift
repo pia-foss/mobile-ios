@@ -322,21 +322,18 @@ enum L10n {
         static let title = L10n.tr("Localizable", "settings.application_settings.dark_theme.title")
       }
 
+      enum KillSwitch {
+        /// The VPN kill switch prevents access to the Internet if the VPN connection is reconnecting. This excludes disconnecting manually.
+        static let footer = L10n.tr("Localizable", "settings.application_settings.kill_switch.footer")
+        /// VPN kill switch
+        static let title = L10n.tr("Localizable", "settings.application_settings.kill_switch.title")
+      }
+
       enum Mace {
         /// PIA MACE™ blocks ads, trackers, and malware while you're connected to the VPN.
         static let footer = L10n.tr("Localizable", "settings.application_settings.mace.footer")
         /// PIA MACE™
         static let title = L10n.tr("Localizable", "settings.application_settings.mace.title")
-      }
-
-      enum Persistent {
-        /// VPN kill switch
-        static let title = L10n.tr("Localizable", "settings.application_settings.persistent.title")
-
-        enum Footer {
-          /// The VPN kill switch prevents access to the Internet if the VPN connection is reconnecting. This excludes disconnecting manually.
-          static let disabled = L10n.tr("Localizable", "settings.application_settings.persistent.footer.disabled")
-        }
       }
     }
 

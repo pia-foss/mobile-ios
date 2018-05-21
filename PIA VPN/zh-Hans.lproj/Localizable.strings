@@ -81,8 +81,8 @@
 "settings.application_settings.dark_theme.title" = "黑暗主题";
 "settings.application_settings.mace.footer" = "PIA MACE™可在您连接到 VPN 时阻止广告、跟踪和恶意软件。";
 "settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.persistent.footer.disabled" = "VPN终止开关会在VPN未连接时禁用您的网络连接。";
-"settings.application_settings.persistent.title" = "VPN kill switch";
+"settings.application_settings.kill_switch.footer" = "VPN终止开关会在VPN未连接时禁用您的网络连接。";
+"settings.application_settings.kill_switch.title" = "VPN kill switch";
 "settings.application_settings.title" = "应用程序设置";
 "settings.commit.buttons.later" = "以后";
 "settings.commit.buttons.reconnect" = "重新连接";

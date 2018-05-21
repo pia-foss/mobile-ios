@@ -587,7 +587,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         switch visibleSections[section] {
         case .applicationSettings:
             var footer: [String] = [
-                L10n.Settings.ApplicationSettings.Persistent.Footer.disabled
+                L10n.Settings.ApplicationSettings.KillSwitch.footer
             ]
             if Flags.shared.enablesMACESetting {
                 footer.append(L10n.Settings.ApplicationSettings.Mace.footer)
@@ -673,7 +673,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             }
 
         case .automaticReconnection:
-            cell.textLabel?.text = L10n.Settings.ApplicationSettings.Persistent.title
+            cell.textLabel?.text = L10n.Settings.ApplicationSettings.KillSwitch.title
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchPersistent
             cell.selectionStyle = .none

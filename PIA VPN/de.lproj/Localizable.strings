@@ -81,8 +81,8 @@
 "settings.application_settings.dark_theme.title" = "Dunkles Theme";
 "settings.application_settings.mace.footer" = "PIA MACE™ blockiert Werbung, Tracker und Malware bei aktiver VPN-Verbindung.";
 "settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.persistent.footer.disabled" = "Der harte VPN-Killswitch unterbricht Ihre Internetverbindung, wenn das VPN getrennt wird.";
-"settings.application_settings.persistent.title" = "VPN-Killswitch";
+"settings.application_settings.kill_switch.footer" = "Der harte VPN-Killswitch unterbricht Ihre Internetverbindung, wenn das VPN getrennt wird.";
+"settings.application_settings.kill_switch.title" = "VPN-Killswitch";
 "settings.application_settings.title" = "ANWENDUNGSEINSTELLUNGEN";
 "settings.commit.buttons.later" = "Später";
 "settings.commit.buttons.reconnect" = "Erneut verbinden";

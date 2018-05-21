@@ -81,8 +81,8 @@
 "settings.application_settings.dark_theme.title" = "Mørkt tema";
 "settings.application_settings.mace.footer" = "PIA MACE™ blokerer annoncer, trackers og malware, mens du har forbindelse til VPN.";
 "settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.persistent.footer.disabled" = "VPN-afbryderknappen deaktiverer din internetforbindelse, når VPN'en afbrydes.";
-"settings.application_settings.persistent.title" = "VPN-afbryderknap";
+"settings.application_settings.kill_switch.footer" = "VPN-afbryderknappen deaktiverer din internetforbindelse, når VPN'en afbrydes.";
+"settings.application_settings.kill_switch.title" = "VPN-afbryderknap";
 "settings.application_settings.title" = "APPLIKATIONSINDSTILLINGER";
 "settings.commit.buttons.later" = "Senere";
 "settings.commit.buttons.reconnect" = "Anbefal";

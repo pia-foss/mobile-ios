@@ -81,8 +81,8 @@
 "settings.application_settings.dark_theme.title" = "Donker thema";
 "settings.application_settings.mace.footer" = "PIA MACE™ blokkeert advertenties, trackers en malware als u met de VPN bent verbonden.";
 "settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.persistent.footer.disabled" = "De VPN kill switch schakelt uw internetverbinding uit wanneer de VPN-verbinding wordt verbroken.";
-"settings.application_settings.persistent.title" = "VPN kill switch";
+"settings.application_settings.kill_switch.footer" = "De VPN kill switch schakelt uw internetverbinding uit wanneer de VPN-verbinding wordt verbroken.";
+"settings.application_settings.kill_switch.title" = "VPN kill switch";
 "settings.application_settings.title" = "TOEPASSINGSINSTELLINGEN";
 "settings.commit.buttons.later" = "Later";
 "settings.commit.buttons.reconnect" = "Opnieuw verbinden";
