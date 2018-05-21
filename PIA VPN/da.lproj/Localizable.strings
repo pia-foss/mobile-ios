@@ -79,10 +79,10 @@
 "settings.application_information.debug.title" = "Send fejloplysninger til support";
 "settings.application_information.title" = "INFORMATIN OM APPLIKATIONEN";
 "settings.application_settings.dark_theme.title" = "Mørkt tema";
+"settings.application_settings.kill_switch.footer" = "VPN-kill switchen forebygger kontakt til internettet, hvis VPN-forbindelsen genoprettes. Dette udelukker manuel frakobling.";
+"settings.application_settings.kill_switch.title" = "VPN-afbryderknap";
 "settings.application_settings.mace.footer" = "PIA MACE™ blokerer annoncer, trackers og malware, mens du har forbindelse til VPN.";
 "settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.kill_switch.footer" = "VPN-afbryderknappen deaktiverer din internetforbindelse, når VPN'en afbrydes.";
-"settings.application_settings.kill_switch.title" = "VPN-afbryderknap";
 "settings.application_settings.title" = "APPLIKATIONSINDSTILLINGER";
 "settings.commit.buttons.later" = "Senere";
 "settings.commit.buttons.reconnect" = "Anbefal";

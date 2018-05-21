@@ -79,10 +79,10 @@
 "settings.application_information.debug.title" = "サポートにデバッグを送信";
 "settings.application_information.title" = "アプリ情報";
 "settings.application_settings.dark_theme.title" = "ダークテーマ";
+"settings.application_settings.kill_switch.footer" = "VPNキルスイッチは、VPNの再接続時にインターネット接続を無効にします。これには手動での切断が含まれません。";
+"settings.application_settings.kill_switch.title" = "VPNキルスイッチ";
 "settings.application_settings.mace.footer" = "PIA MACE™はVPNに接続されている間、広告、閲覧行動の追跡、そしてマルウェアをブロックします。";
 "settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.kill_switch.footer" = "VPNキルスイッチは、VPNが切断されたときに、インターネット接続を無効にします。";
-"settings.application_settings.kill_switch.title" = "VPNキルスイッチ";
 "settings.application_settings.title" = "アプリ設定";
 "settings.commit.buttons.later" = "後で";
 "settings.commit.buttons.reconnect" = "再接続";

@@ -79,10 +79,10 @@
 "settings.application_information.debug.title" = "Envoyer le débogage à l'assistance";
 "settings.application_information.title" = "INFORMATIONS DE L'APPLICATION";
 "settings.application_settings.dark_theme.title" = "Thème sombre";
+"settings.application_settings.kill_switch.footer" = "Le killswitch du VPN empêche l'accès à Internet si la connexion VPN est en cours de reconnexion. Cela exclut la déconnexion manuelle.";
+"settings.application_settings.kill_switch.title" = "Killswitch du VPN";
 "settings.application_settings.mace.footer" = "PIA MACE™ bloque les publicités, les traqueurs et les logiciels malveillants quand vous êtes connecté au VPN.";
 "settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.kill_switch.footer" = "Le Killswitch du VPN désactive automatiquement votre connexion Internet lorsque le VPN se déconnecte.";
-"settings.application_settings.kill_switch.title" = "Killswitch du VPN";
 "settings.application_settings.title" = "PARAMÉTRES D'APPLICATION";
 "settings.commit.buttons.later" = "Plus tard";
 "settings.commit.buttons.reconnect" = "Reconnecter";
