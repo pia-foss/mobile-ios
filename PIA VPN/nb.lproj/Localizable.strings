@@ -79,10 +79,10 @@
 "settings.application_information.debug.title" = "Send feilsøk til kundestøtte";
 "settings.application_information.title" = "APPINFORMASJON";
 "settings.application_settings.dark_theme.title" = "Mørkt tema";
+"settings.application_settings.kill_switch.footer" = "Kill switch for VPN hindrer tilgang til Internett hvis VPN-tilkoblingen mister forbindelsen og prøver å koble til igjen. Dette ekskluderer manuell frakobling.";
+"settings.application_settings.kill_switch.title" = "Kill switch for VPN";
 "settings.application_settings.mace.footer" = "PIA MACE™ blokkerer reklamer, sporere og skadelig programvare når du er koblet til VPN-en.";
 "settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.persistent.footer.disabled" = "VPN-kill switch deaktiverer Internett-forbindelsen når VPN kobles ut.";
-"settings.application_settings.persistent.title" = "Kill switch for VPN";
 "settings.application_settings.title" = "APPINNSTILLINGER";
 "settings.commit.buttons.later" = "Senere";
 "settings.commit.buttons.reconnect" = "Koble til igjen";

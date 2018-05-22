@@ -79,10 +79,10 @@
 "settings.application_information.debug.title" = "Hata ayıklamayı destek birimine gönderin";
 "settings.application_information.title" = "UYGULAMA BİLGİLERİ";
 "settings.application_settings.dark_theme.title" = "Koyu tema";
+"settings.application_settings.kill_switch.footer" = "VPN kill switch, VPN bağlantısı kesilip yeniden bağlanmaya çalışırken İnternet bağlantısını devre dışı bırakır. Bağlantının elle kesildiği durumlar hariç.";
+"settings.application_settings.kill_switch.title" = "VPN sonlandırma anahtarı";
 "settings.application_settings.mace.footer" = "PIA MACE™ VPN'e bağlı iken reklam, iz sürücüler ve kötü amaçlı yazılımları engeller.";
 "settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.persistent.footer.disabled" = "VPN kill switch, VPN bağlantısı kesilince İnternet bağlantısını devre dışı bırakır.";
-"settings.application_settings.persistent.title" = "VPN sonlandırma anahtarı";
 "settings.application_settings.title" = "UYGULAMA AYARLARI";
 "settings.commit.buttons.later" = "Daha Sonra";
 "settings.commit.buttons.reconnect" = "Tekrar Bağlan";

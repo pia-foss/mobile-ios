@@ -79,10 +79,10 @@
 "settings.application_information.debug.title" = "ส่งการแก้จุดบกพร่องไปยังฝ่ายสนับสนุน";
 "settings.application_information.title" = "ข้อมูลแอพพลิเคชั่น";
 "settings.application_settings.dark_theme.title" = "ธีมมึด";
+"settings.application_settings.kill_switch.footer" = "Kill switch ของ VPN จะป้องกันการเข้าถึงอินเทอร์เน็ตหากการเชื่อมต่อ VPN กำลังเชื่อมต่อใหม่ ไม่รวมการตัดการเชื่อมต่อด้วยตนเอง";
+"settings.application_settings.kill_switch.title" = "Kill switch ของ VPN";
 "settings.application_settings.mace.footer" = "PIA MACE™ บล็อกโฆษณา, ตัวติดตาม และมัลแวร์ ในขณะที่คุณกำลังเชื่อมต่อ VPN อยู่";
 "settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.persistent.footer.disabled" = "Kill switch ของ VPN จะปิดการเชื่อมต่ออินเทอร์เน็ตของคุณเมื่อขาดการเชื่อมต่อ VPN";
-"settings.application_settings.persistent.title" = "Kill switch ของ VPN";
 "settings.application_settings.title" = "การตั้งค่าแอพพลิเคชั่น";
 "settings.commit.buttons.later" = "ภายหลัง";
 "settings.commit.buttons.reconnect" = "เชื่อมต่ออีกครั้ง";

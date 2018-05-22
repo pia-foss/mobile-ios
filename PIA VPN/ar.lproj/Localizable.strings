@@ -79,10 +79,10 @@
 "settings.application_information.debug.title" = "إرسال تتبع الأخطاء إلى الدعم";
 "settings.application_information.title" = "معلومات التطبيق";
 "settings.application_settings.dark_theme.title" = "النسق الداكن";
+"settings.application_settings.kill_switch.footer" = "يؤدي استخدام مفتاح إيقاف VPN إلى تعطيل اتصالك بالإنترنت إذا كان الـ VPN في وضع إعادة الاتصال. لا ينطبق ذلك ذلك على الاتصال اليدوي.";
+"settings.application_settings.kill_switch.title" = "مفتاح إيقاف VPN";
 "settings.application_settings.mace.footer" = "يحجب ™PIA MACE الإعلانات والمتعقبين والبرمجيات الضارة عندما تكون متصلًا بخدمة VPN.";
 "settings.application_settings.mace.title" = "™PIA MACE";
-"settings.application_settings.persistent.footer.disabled" = "يؤدي استخدام مفتاح إيقاف VPN إلى تعطيل اتصالك بالإنترنت عند قطع اتصال شبكة VPN.";
-"settings.application_settings.persistent.title" = "مفتاح إيقاف VPN";
 "settings.application_settings.title" = "إعدادات التطبيق";
 "settings.commit.buttons.later" = "لاحقًا";
 "settings.commit.buttons.reconnect" = "إعادة اتصال";
