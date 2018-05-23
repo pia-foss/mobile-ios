@@ -79,10 +79,10 @@
 "settings.application_information.debug.title" = "Отправить отладочную информацию в службу поддержки";
 "settings.application_information.title" = "СВЕДЕНИЯ О ПРИЛОЖЕНИИ";
 "settings.application_settings.dark_theme.title" = "Темная тема";
+"settings.application_settings.kill_switch.footer" = "Функция авторазрыва соединения рвет Интернет-соединение при отключении VPN. Она не срабатывает при ручном отключении VPN.";
+"settings.application_settings.kill_switch.title" = "Авторазрыв соединения";
 "settings.application_settings.mace.footer" = "PIA MACE™ блокирует рекламу, следящие программы и вредоносное ПО, когда вы подключены к VPN.";
 "settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.persistent.footer.disabled" = "Функция авторазрыва соединения отключает интернет-соединение при отключении VPN.";
-"settings.application_settings.persistent.title" = "Авторазрыв соединения";
 "settings.application_settings.title" = "НАСТРОЙКИ ПРИЛОЖЕНИЯ";
 "settings.commit.buttons.later" = "Позже";
 "settings.commit.buttons.reconnect" = "Переподключиться";

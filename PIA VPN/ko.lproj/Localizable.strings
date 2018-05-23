@@ -79,10 +79,10 @@
 "settings.application_information.debug.title" = "지원팀에 디버그 보내기";
 "settings.application_information.title" = "애플리케이션 정보";
 "settings.application_settings.dark_theme.title" = "다크 테마";
+"settings.application_settings.kill_switch.footer" = "VPN 킬 스위치는 VPN 연결이 다시 연결 중이면 인터넷에 대한 액세스를 방지합니다. 수동으로 연결을 해제하는 경우는 제외입니다.";
+"settings.application_settings.kill_switch.title" = "VPN 킬 스위치";
 "settings.application_settings.mace.footer" = "PIA MACE™는 VPN에 연결되어 있을 때 광고, 트래커 및 악성코드를 차단합니다.";
 "settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.persistent.footer.disabled" = "VPN 연결이 해제되면 VPN kill switch가 인터넷 연결을 해제합니다.";
-"settings.application_settings.persistent.title" = "VPN 킬 스위치";
 "settings.application_settings.title" = "애플리케이션 설정";
 "settings.commit.buttons.later" = "나중에";
 "settings.commit.buttons.reconnect" = "다시 연결";

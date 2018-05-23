@@ -79,10 +79,10 @@
 "settings.application_information.debug.title" = "將偵錯資料傳送到支援中心";
 "settings.application_information.title" = "應用程式資料";
 "settings.application_settings.dark_theme.title" = "黑色主題";
+"settings.application_settings.kill_switch.footer" = "如果 VPN 重新連接，VPN 的終止開關將阻止互聯網連線。這不包括手動斷開連接。";
+"settings.application_settings.kill_switch.title" = "VPN kill switch";
 "settings.application_settings.mace.footer" = "PIA MACE™ 會在您連線到 VPN 時封鎖廣告、追蹤器及惡意程式。";
 "settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.persistent.footer.disabled" = "VPN kill switch 可在 VPN 斷線時自動關閉網路連線。";
-"settings.application_settings.persistent.title" = "VPN kill switch";
 "settings.application_settings.title" = "應用程式設定";
 "settings.commit.buttons.later" = "稍後";
 "settings.commit.buttons.reconnect" = "重新連接";

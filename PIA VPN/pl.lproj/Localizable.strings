@@ -79,10 +79,10 @@
 "settings.application_information.debug.title" = "Wyślij wyniki debugowania do działu obsługi";
 "settings.application_information.title" = "INFORMACJE O APLIKACJI";
 "settings.application_settings.dark_theme.title" = "Ciemny motyw";
+"settings.application_settings.kill_switch.footer" = "Wyłącznik awaryjny VPN zapobiega dostępowi do internetu, jeśli połączenie VPN jest nawiązywane ponownie. Nie obejmuje to ręcznego rozłączenia.";
+"settings.application_settings.kill_switch.title" = "Wyłącznik awaryjny VPN";
 "settings.application_settings.mace.footer" = "PIA MACE™ blokuje reklamy,  programy śledzące i złośliwe oprogramowanie w czasie połączenia przez VPN.";
 "settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.persistent.footer.disabled" = "Wyłącznik awaryjny VPN wyłącza połączenie z internetem po rozłączeniu VPN.";
-"settings.application_settings.persistent.title" = "Wyłącznik awaryjny VPN";
 "settings.application_settings.title" = "USTAWIENIA APLIKACJI";
 "settings.commit.buttons.later" = "Później";
 "settings.commit.buttons.reconnect" = "Połącz ponownie";
