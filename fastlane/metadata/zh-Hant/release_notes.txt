@@ -1,3 +1,3 @@
-- Redeem gift or trial cards right inside the app.
-- Improved automatic server selection.
-- Added "Reset settings" feature.
+- 在應用程式內兌換禮品或試用卡。
+- 改良自動伺服器選擇。
+- 新增「重置設定」功能。

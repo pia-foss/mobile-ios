@@ -1,3 +1,3 @@
-- Redeem gift or trial cards right inside the app.
-- Improved automatic server selection.
-- Added "Reset settings" feature.
+- Используйте подарочные или триальные карты прямо в приложении.
+- Улучшен автоподбор сервера.
+- Добавлена функция «Сбросить настройки».

@@ -1,3 +1,3 @@
-- Redeem gift or trial cards right inside the app.
-- Improved automatic server selection.
-- Added "Reset settings" feature.
+- Wissel cadeaubonnen of proefperiodekaarten in via de app.
+- Verbeterde automatische serverselectie.
+- Functie voor het resetten van de instellingen toegevoegd.

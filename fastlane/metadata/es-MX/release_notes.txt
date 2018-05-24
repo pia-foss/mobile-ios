@@ -1,3 +1,3 @@
-- Redeem gift or trial cards right inside the app.
-- Improved automatic server selection.
-- Added "Reset settings" feature.
+- Canjea tarjetas de regalo o de prueba desde la aplicación.
+- Selección automática del servidor mejorada
+- Se agregó la función "Restablecer configuración".
