@@ -18,6 +18,7 @@ exclude:
     - "**/Sources/Library/Persistence/**/*.swift"
     - "**/Sources/Library/Server/**/*.swift"
     - "**/Sources/Library/WebServices/**/*.swift"
+    - "**/Sources/UI/*/SwiftGen+*.swift"
 
 custom_categories:
     - name: Client
@@ -37,6 +38,7 @@ custom_categories:
         - LoginRequest
         - SignupRequest
         - RenewRequest
+        - RedeemRequest
         - UpdateAccountRequest
         - AccountProvider
     - name: Store
