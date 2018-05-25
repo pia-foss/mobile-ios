@@ -3,3 +3,7 @@
 - Added "Reset settings" feature.
 - Improved OpenVPN stability.
 - Added missing translations.
+
+Important fix in 9213:
+
+- Fixed a regression in which a connection timeout in OpenVPN would instead result in a successful attempt, thus showing the app erroneously connected to the VPN.
