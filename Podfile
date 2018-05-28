@@ -4,27 +4,29 @@ use_frameworks!
 
 # Libraries
 
+$git_root = "https://github.com/pia-foss"
+
 $library_pod = 'PIALibrary'
+$library_repo = 'client-library-apple'
 $library_subspecs = [
     'Library',
     'UI',
     'Mock',
     'VPN'
 ]
-$library_url = "https://github.com/pia-foss/client-library-apple"
 
 $tunnel_pod = 'PIATunnel'
-$tunnel_url = "https://github.com/pia-foss/tunnel-apple"
+$tunnel_repo = 'tunnel-apple'
 
 def library_by_path(root)
     $library_subspecs.each { |name|
-        pod "#{$library_pod}/#{name}", :path => "#{root}/client-library-apple"
+        pod "#{$library_pod}/#{name}", :path => "#{root}/#{$library_repo}"
     }
 end
 
 def library_by_git(sha)
     $library_subspecs.each { |name|
-        pod "#{$library_pod}/#{name}", :git => $library_url, :commit => sha
+        pod "#{$library_pod}/#{name}", :git => "#{$git_root}/#{$library_repo}", :commit => sha
     }
 end
 
@@ -35,11 +37,11 @@ def library_by_version(version)
 end
 
 def tunnel_by_path(root)
-    pod $tunnel_pod, :path => "#{root}/tunnel-apple"
+    pod $tunnel_pod, :path => "#{root}/#{$tunnel_repo}"
 end
 
 def tunnel_by_git(sha)
-    pod $tunnel_pod, :git => $tunnel_url, :commit => sha
+    pod $tunnel_pod, :git => "#{$git_root}/#{$tunnel_repo}", :commit => sha
 end
 
 def tunnel_by_version(version)
@@ -51,8 +53,8 @@ end
 def shared_main_pods
     pod 'AlamofireImage'
     #library_by_path('..')
-    library_by_git('7feb16e')
-    #library_by_version('1.0')
+    #library_by_git('7feb16e')
+    library_by_version('1.1.0')
 end
 
 def app_pods
@@ -66,8 +68,8 @@ end
 
 def tunnel_pods
     #tunnel_by_path('..')
-    tunnel_by_git('216ef12')
-    #tunnel_by_version('1.0')
+    #tunnel_by_git('216ef12')
+    tunnel_by_version('1.1.0')
 end
 
 # Targets
