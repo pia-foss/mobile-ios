@@ -37,6 +37,22 @@ The library has been tested on both iOS and macOS and includes the following fea
 
 It's highly recommended to use the Git and Ruby packages provided by [Homebrew][dep-brew].
 
+### CocoaPods
+
+To use with CocoaPods just add this to your Podfile:
+
+```ruby
+pod 'PIALibrary'
+```
+
+To include other non-default subspecs:
+
+```ruby
+pod 'PIALibrary'
+pod 'PIALibrary/VPN' # adds support for PIATunnel
+pod 'PIALibrary/Mock'
+```
+
 ### Testing
 
 Download the library codebase locally:
@@ -58,10 +74,6 @@ There is a `Demo` directory containing a simple project for testing the library.
 then open `Demo.xcworkspace`. You can test the account-related business with the `WelcomeDemo-iOS` target which is, unsurprisingly, for iOS only.
 
 We'd definitely like to offer a more extensive showcase later on.
-
-### Deployment
-
-We plan to submit the library to the master CocoaPods repository, hence the presence of a `.podspec` file in the root.
 
 ## Documentation
 
