@@ -68,8 +68,8 @@ end
 
 def tunnel_pods
     #tunnel_by_path('..')
-    #tunnel_by_git('216ef12')
-    tunnel_by_version('1.1.0')
+    tunnel_by_git('e84f1de')
+    #tunnel_by_version('1.1.0')
 end
 
 # Targets
