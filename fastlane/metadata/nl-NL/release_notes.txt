@@ -1,3 +1,2 @@
-- Wissel cadeaubonnen of proefperiodekaarten in via de app.
-- Verbeterde automatische serverselectie.
-- Functie voor het resetten van de instellingen toegevoegd.
+- Fixed an issue ending up in a stale VPN connection after several network switches.
+- Bugfixing.

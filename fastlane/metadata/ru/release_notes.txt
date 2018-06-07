@@ -1,3 +1,2 @@
-- Используйте подарочные или триальные карты прямо в приложении.
-- Улучшен автоподбор сервера.
-- Добавлена функция «Сбросить настройки».
+- Fixed an issue ending up in a stale VPN connection after several network switches.
+- Bugfixing.

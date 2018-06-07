@@ -1,3 +1,2 @@
-- แลกบัตรของขวัญหรือบัตรทดลองใช้ได้จากภายในแอป
-- ปรับปรุงการเลือกเซิร์ฟเวอร์โดยอัตโนมัติ
-- เพิ่มคุณสมบัติ "รีเซ็ตการตั้งค่า"
+- Fixed an issue ending up in a stale VPN connection after several network switches.
+- Bugfixing.

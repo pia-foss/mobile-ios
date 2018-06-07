@@ -1,3 +1,2 @@
-- Échangez vos cartes cadeaux et cartes d'essai directement dans l'application.
-- Sélection automatique de serveur améliorée.
-- Ajout de la fonctionnalité « Réinitialisation des paramètres ».
+- Fixed an issue ending up in a stale VPN connection after several network switches.
+- Bugfixing.

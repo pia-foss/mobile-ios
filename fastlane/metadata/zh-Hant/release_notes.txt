@@ -1,3 +1,2 @@
-- 在應用程式內兌換禮品或試用卡。
-- 改良自動伺服器選擇。
-- 新增「重置設定」功能。
+- Fixed an issue ending up in a stale VPN connection after several network switches.
+- Bugfixing.

@@ -1,3 +1,2 @@
-- Uygulama içinden hediye ya da deneme kartlarını kullanın.
-- Otomatik sunucu seçimi geliştirildi.
-- "Ayarları sıfırla" özelliği eklendi.
+- Fixed an issue ending up in a stale VPN connection after several network switches.
+- Bugfixing.

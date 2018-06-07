@@ -1,3 +1,2 @@
-- 앱 안에서 바로 선물 또는 체험 카드 교환.
-- 자동 서버 선택 개선.
-- '설정 초기화' 기능 추가.
+- Fixed an issue ending up in a stale VPN connection after several network switches.
+- Bugfixing.

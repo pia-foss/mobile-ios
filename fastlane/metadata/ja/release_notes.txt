@@ -1,3 +1,2 @@
-・アプリ内から直接ギフトまたはトライアルカードに引換え
-・自動サーバー選択を向上
-・「リセット設定」機能を追加
+- Fixed an issue ending up in a stale VPN connection after several network switches.
+- Bugfixing.

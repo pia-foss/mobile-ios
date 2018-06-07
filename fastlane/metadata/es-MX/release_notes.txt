@@ -1,3 +1,2 @@
-- Canjea tarjetas de regalo o de prueba desde la aplicación.
-- Selección automática del servidor mejorada
-- Se agregó la función "Restablecer configuración".
+- Fixed an issue ending up in a stale VPN connection after several network switches.
+- Bugfixing.
