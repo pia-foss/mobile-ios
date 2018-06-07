@@ -1,3 +1,2 @@
-- Geschenk oder Testkarte direkt innerhalb der App einlösbar.
-- Automatische Serverauswahl verbessert.
-- Funktion „Einstellungen zurücksetzen“ hinzugefügt.
+- Fixed an issue ending up in a stale VPN connection after several network switches.
+- Bugfixing.

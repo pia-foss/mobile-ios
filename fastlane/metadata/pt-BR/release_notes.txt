@@ -1,3 +1,2 @@
-- Resgate cartões de presente ou teste dentro do app.
-- Seleção de servidor automática melhorada.
-- Adição do recurso "Redefinir configurações".
+- Fixed an issue ending up in a stale VPN connection after several network switches.
+- Bugfixing.

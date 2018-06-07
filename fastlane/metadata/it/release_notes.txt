@@ -1,3 +1,2 @@
-- Riscuoti le carte regalo o di prova direttamente all'interno dell'app.
-- Miglioramenti alla selezione automatica del server.
-- Nuova funzione "Ripristina impostazioni".
+- Fixed an issue ending up in a stale VPN connection after several network switches.
+- Bugfixing.

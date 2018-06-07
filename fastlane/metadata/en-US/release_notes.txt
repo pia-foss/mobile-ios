@@ -1,3 +1,2 @@
-- Redeem gift or trial cards right inside the app.
-- Improved automatic server selection.
-- Added "Reset settings" feature.
+- Fixed an issue ending up in a stale VPN connection after several network switches.
+- Bugfixing.

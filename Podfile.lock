@@ -29,13 +29,13 @@ PODS:
   - PIALibrary/VPN (1.1.0):
     - PIALibrary/Library
     - PIATunnel (~> 1.1)
-  - PIATunnel (1.1.0):
-    - PIATunnel/AppExtension (= 1.1.0)
-    - PIATunnel/Core (= 1.1.0)
-  - PIATunnel/AppExtension (1.1.0):
+  - PIATunnel (1.1.1):
+    - PIATunnel/AppExtension (= 1.1.1)
+    - PIATunnel/Core (= 1.1.1)
+  - PIATunnel/AppExtension (1.1.1):
     - PIATunnel/Core
     - SwiftyBeaver
-  - PIATunnel/Core (1.1.0):
+  - PIATunnel/Core (1.1.1):
     - OpenSSL-Apple (~> 1.1.0h)
     - SBObjectiveCWrapper
     - SwiftyBeaver
@@ -56,7 +56,7 @@ DEPENDENCIES:
   - PIALibrary/Mock (~> 1.1.0)
   - PIALibrary/UI (~> 1.1.0)
   - PIALibrary/VPN (~> 1.1.0)
-  - PIATunnel (~> 1.1.0)
+  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `1c458db`)
   - SideMenu (= 3.1.5)
   - TPKeyboardAvoiding
 
@@ -71,12 +71,21 @@ SPEC REPOS:
     - MBProgressHUD
     - OpenSSL-Apple
     - PIALibrary
-    - PIATunnel
     - ReachabilitySwift
     - SBObjectiveCWrapper
     - SideMenu
     - SwiftyBeaver
     - TPKeyboardAvoiding
+
+EXTERNAL SOURCES:
+  PIATunnel:
+    :commit: 1c458db
+    :git: https://github.com/pia-foss/tunnel-apple
+
+CHECKOUT OPTIONS:
+  PIATunnel:
+    :commit: 1c458db
+    :git: https://github.com/pia-foss/tunnel-apple
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
@@ -88,13 +97,13 @@ SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   OpenSSL-Apple: cd153d705ef350eb834ae7ff5f21f792b51ed208
   PIALibrary: b3f713941ab9a4cffc197eb460d014fd61a4d1b6
-  PIATunnel: b88e689038402f01f0514e53e29829d6d76995ac
+  PIATunnel: bba311b4d274c66d3a5c4a0ed6285f8a7b55e781
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   SBObjectiveCWrapper: 854ea56b37cd0031af2b1d6e12c2f965fc4ff86d
   SideMenu: 47dbf9e4d878062d8994aed43f6e4bf6c1fea30b
   SwiftyBeaver: 25bd76281f49ca989ec2e3cbde9af89c15bc1432
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 5507f1cba50869c9fd77017bc7bbbf2523f81afd
+PODFILE CHECKSUM: 5763607789c6fe629aa67cbe7cae13835e3ac43d
 
-COCOAPODS: 1.5.2
+COCOAPODS: 1.5.3
