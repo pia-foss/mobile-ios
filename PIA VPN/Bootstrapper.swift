@@ -31,7 +31,11 @@ class Bootstrapper {
 
     func bootstrap() {
         let console = ConsoleDestination()
+        #if PIA_DEV
         console.minLevel = .debug
+        #else
+        console.minLevel = .info
+        #endif
         SwiftyBeaver.addDestination(console)
         
         AppPreferences.shared.migrate()
