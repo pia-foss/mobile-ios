@@ -239,8 +239,6 @@
 		0EFEB4C3200778BC00F81029 /* NSData+Compression.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E392DAE1FE3366A0002160D /* NSData+Compression.m */; };
 		0EFEB4C420077AC900F81029 /* PIATunnelProvider+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFEB4BF2007784A00F81029 /* PIATunnelProvider+Profile.swift */; };
 		0EFEB4C520077AC900F81029 /* PIATunnelProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFEB4C02007784A00F81029 /* PIATunnelProfile.swift */; };
-		2DD1D9FFB87903348228DA2E /* Pods_PIALibrary_PIALibraryTests_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E60B687CB018346658F707F /* Pods_PIALibrary_PIALibraryTests_macOS.framework */; };
-		422B031023DDC959DAD69830 /* Pods_PIALibrary_PIALibrary_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E865E7775CCB07BA4CE22DEE /* Pods_PIALibrary_PIALibrary_macOS.framework */; };
 		5EA54E484C7FD035341E021E /* Pods_PIALibrary_PIALibraryTests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A22DD34A821A4EDAED288D2 /* Pods_PIALibrary_PIALibraryTests_iOS.framework */; };
 		A56365AB3EAA4588B479616A /* Pods_PIALibrary_PIALibraryHost_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 476E8514A236C48F405ACA40 /* Pods_PIALibrary_PIALibraryHost_iOS.framework */; };
 		E07462773BC314E3183B240E /* Pods_PIALibrary_PIALibrary_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC5BF5764146CA9C6104276 /* Pods_PIALibrary_PIALibrary_iOS.framework */; };
@@ -476,17 +474,13 @@
 		0EFB512D1F82D7C50033B81F /* PIAWebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAWebServices.swift; sourceTree = "<group>"; };
 		0EFEB4BF2007784A00F81029 /* PIATunnelProvider+Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PIATunnelProvider+Profile.swift"; sourceTree = "<group>"; };
 		0EFEB4C02007784A00F81029 /* PIATunnelProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIATunnelProfile.swift; sourceTree = "<group>"; };
-		2AE558D2D2B8B4FCBD387853 /* Pods-PIALibrary-PIALibraryTests-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryTests-macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibraryTests-macOS/Pods-PIALibrary-PIALibraryTests-macOS.release.xcconfig"; sourceTree = "<group>"; };
 		2E60B687CB018346658F707F /* Pods_PIALibrary_PIALibraryTests_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibraryTests_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC5BF5764146CA9C6104276 /* Pods_PIALibrary_PIALibrary_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibrary_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		378AC49FB4E07B2415156492 /* Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		476E8514A236C48F405ACA40 /* Pods_PIALibrary_PIALibraryHost_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibraryHost_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		574E53080395ED9BC541E673 /* Pods-PIALibrary-PIALibraryTests-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryTests-macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibraryTests-macOS/Pods-PIALibrary-PIALibraryTests-macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		64C04C071DE1CB44DE7945D6 /* Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibrary-iOS/Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		78555339E51799E54CEBE02D /* Pods-PIALibrary-PIALibrary-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibrary-macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibrary-macOS/Pods-PIALibrary-PIALibrary-macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		9A22DD34A821A4EDAED288D2 /* Pods_PIALibrary_PIALibraryTests_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibraryTests_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD0536741E220873045CBCC7 /* Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		BF04E70450EA9A4D60304633 /* Pods-PIALibrary-PIALibrary-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibrary-macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibrary-macOS/Pods-PIALibrary-PIALibrary-macOS.release.xcconfig"; sourceTree = "<group>"; };
 		E865E7775CCB07BA4CE22DEE /* Pods_PIALibrary_PIALibrary_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibrary_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F377C717610A648DF6C8ADFB /* Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -497,7 +491,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E2ADD211FE13B8600BB170C /* PIALibrary.framework in Frameworks */,
-				2DD1D9FFB87903348228DA2E /* Pods_PIALibrary_PIALibraryTests_macOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,7 +498,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				422B031023DDC959DAD69830 /* Pods_PIALibrary_PIALibrary_macOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,14 +534,10 @@
 			children = (
 				64C04C071DE1CB44DE7945D6 /* Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig */,
 				075B8F27D7866B12401A2FFF /* Pods-PIALibrary-PIALibrary-iOS.release.xcconfig */,
-				78555339E51799E54CEBE02D /* Pods-PIALibrary-PIALibrary-macOS.debug.xcconfig */,
-				BF04E70450EA9A4D60304633 /* Pods-PIALibrary-PIALibrary-macOS.release.xcconfig */,
 				BD0536741E220873045CBCC7 /* Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig */,
 				F377C717610A648DF6C8ADFB /* Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig */,
 				043B5BFAB4446CF8C5820F38 /* Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig */,
 				378AC49FB4E07B2415156492 /* Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig */,
-				574E53080395ED9BC541E673 /* Pods-PIALibrary-PIALibraryTests-macOS.debug.xcconfig */,
-				2AE558D2D2B8B4FCBD387853 /* Pods-PIALibrary-PIALibraryTests-macOS.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1029,11 +1017,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0E2ADD241FE13B8600BB170C /* Build configuration list for PBXNativeTarget "PIALibraryTests-macOS" */;
 			buildPhases = (
-				67EEB3EF817B427820ADE95D /* [CP] Check Pods Manifest.lock */,
 				0E2ADD181FE13B8600BB170C /* Sources */,
 				0E2ADD191FE13B8600BB170C /* Frameworks */,
 				0E2ADD1A1FE13B8600BB170C /* Resources */,
-				33D0A48B1A6BD28666DE2419 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1049,7 +1035,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0E7BC6DB1F96B0B00035C8B2 /* Build configuration list for PBXNativeTarget "PIALibrary-macOS" */;
 			buildPhases = (
-				A4691C3CA5BD651341543E90 /* [CP] Check Pods Manifest.lock */,
 				0E7BC6D11F96B0AF0035C8B2 /* Sources */,
 				0E7BC6D21F96B0AF0035C8B2 /* Frameworks */,
 				0E7BC6D31F96B0AF0035C8B2 /* Headers */,
@@ -1257,34 +1242,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		33D0A48B1A6BD28666DE2419 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PIALibrary-PIALibraryTests-macOS/Pods-PIALibrary-PIALibraryTests-macOS-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-macOS/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Gloss-macOS/Gloss.framework",
-				"${PODS_ROOT}/OpenSSL-Apple/frameworks/MacOSX/openssl.framework",
-				"${BUILT_PRODUCTS_DIR}/PIATunnel-macOS/PIATunnel.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift-macOS/Reachability.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver-macOS/SwiftyBeaver.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gloss.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIATunnel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PIALibrary-PIALibraryTests-macOS/Pods-PIALibrary-PIALibraryTests-macOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		365967D06E5DB94CB14B15AE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1310,12 +1267,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Gloss-iOS/Gloss.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Gloss/Gloss.framework",
 				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
-				"${BUILT_PRODUCTS_DIR}/PIATunnel-iOS/PIATunnel.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift-iOS/Reachability.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver-iOS/SwiftyBeaver.framework",
+				"${BUILT_PRODUCTS_DIR}/PIATunnel/PIATunnel.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/SBObjectiveCWrapper/SBObjectiveCWrapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1324,6 +1282,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIATunnel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SBObjectiveCWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1338,12 +1297,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Gloss-iOS/Gloss.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Gloss/Gloss.framework",
 				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
-				"${BUILT_PRODUCTS_DIR}/PIATunnel-iOS/PIATunnel.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift-iOS/Reachability.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver-iOS/SwiftyBeaver.framework",
+				"${BUILT_PRODUCTS_DIR}/PIATunnel/PIATunnel.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/SBObjectiveCWrapper/SBObjectiveCWrapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1352,29 +1312,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIATunnel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SBObjectiveCWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		67EEB3EF817B427820ADE95D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PIALibrary-PIALibraryTests-macOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8A447656EEACDD21D6E04D74 /* [CP] Check Pods Manifest.lock */ = {
@@ -1389,24 +1332,6 @@
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-PIALibrary-PIALibrary-iOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A4691C3CA5BD651341543E90 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PIALibrary-PIALibrary-macOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1778,7 +1703,6 @@
 /* Begin XCBuildConfiguration section */
 		0E2ADD251FE13B8600BB170C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 574E53080395ED9BC541E673 /* Pods-PIALibrary-PIALibraryTests-macOS.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
@@ -1794,7 +1718,6 @@
 		};
 		0E2ADD261FE13B8600BB170C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2AE558D2D2B8B4FCBD387853 /* Pods-PIALibrary-PIALibraryTests-macOS.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
@@ -1810,7 +1733,6 @@
 		};
 		0E7BC6DC1F96B0B00035C8B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 78555339E51799E54CEBE02D /* Pods-PIALibrary-PIALibrary-macOS.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
@@ -1834,7 +1756,6 @@
 		};
 		0E7BC6DD1F96B0B00035C8B2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF04E70450EA9A4D60304633 /* Pods-PIALibrary-PIALibrary-macOS.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
