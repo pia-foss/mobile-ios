@@ -1,2 +1,3 @@
 - Fixed an issue ending up in a stale VPN connection after several network switches.
+- Fixed an issue preventing the VPN from restarting when device is locked.
 - Bugfixing.
