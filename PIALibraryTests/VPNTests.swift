@@ -17,6 +17,7 @@ class VPNTests: XCTestCase {
 
         Client.database = Client.Database(group: "group.com.privateinternetaccess")
         Client.providers.vpnProvider = MockVPNProvider()
+        Client.preferences.vpnDisconnectsOnSleep = true
         Client.bootstrap()
     }
     

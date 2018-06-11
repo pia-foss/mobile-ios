@@ -38,6 +38,8 @@ protocol PlainStore: class {
     
     var vpnType: String? { get set }
     
+    var vpnDisconnectsOnSleep: Bool { get set }
+    
     var vpnCustomConfigurationMaps: [String: [String: Any]]? { get set }
 
     // MARK: Preferences
