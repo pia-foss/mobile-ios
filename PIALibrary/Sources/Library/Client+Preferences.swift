@@ -22,6 +22,8 @@ private protocol PreferencesStore: class {
 
     var vpnType: String { get set }
 
+    var vpnDisconnectsOnSleep: Bool { get set }
+    
     var vpnCustomConfigurations: [String: VPNCustomConfiguration] { get set }
 
     func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration?
@@ -40,6 +42,7 @@ private extension PreferencesStore {
         isPersistentConnection = source.isPersistentConnection
         mace = source.mace
         vpnType = source.vpnType
+        vpnDisconnectsOnSleep = source.vpnDisconnectsOnSleep
         vpnCustomConfigurations = source.vpnCustomConfigurations
     }
 }
@@ -119,6 +122,16 @@ extension Client {
             }
         }
         
+        /// When device sleeps, disconnects from the VPN if `true`.
+        public fileprivate(set) var vpnDisconnectsOnSleep: Bool {
+            get {
+                return accessedDatabase.plain.vpnDisconnectsOnSleep
+            }
+            set {
+                accessedDatabase.plain.vpnDisconnectsOnSleep = newValue
+            }
+        }
+        
         /// A dictionary of custom VPN configurations, mapped by `VPNProfile.vpnType`.
         public fileprivate(set) var vpnCustomConfigurations: [String: VPNCustomConfiguration] {
             get {
@@ -186,6 +199,7 @@ extension Client.Preferences {
             isPersistentConnection = true
             mace = false
             vpnType = IPSecProfile.vpnType
+            vpnDisconnectsOnSleep = false
             vpnCustomConfigurations = [:]
         }
 
@@ -228,6 +242,9 @@ extension Client.Preferences {
         public var vpnType: String
         
         /// :nodoc:
+        public var vpnDisconnectsOnSleep: Bool
+        
+        /// :nodoc:
         public var vpnCustomConfigurations: [String: VPNCustomConfiguration]
 
         /// :nodoc:
@@ -253,6 +270,9 @@ extension Client.Preferences {
             }
             var queue: [VPNAction] = []
             if (isPersistentConnection != target.isPersistentConnection) {
+                queue.append(VPNActionReinstall())
+            }
+            if (vpnDisconnectsOnSleep != target.vpnDisconnectsOnSleep) {
                 queue.append(VPNActionReinstall())
             }
             if (mace != target.mace) {

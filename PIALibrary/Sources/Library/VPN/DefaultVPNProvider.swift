@@ -262,7 +262,7 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
             server: accessedProviders.serverProvider.targetServer,
             port: port,
             isOnDemand: accessedPreferences.isPersistentConnection,
-            disconnectsOnSleep: false,
+            disconnectsOnSleep: accessedPreferences.vpnDisconnectsOnSleep,
             customConfiguration: customConfiguration
         )
     }

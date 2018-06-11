@@ -32,6 +32,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         
         static let vpnType = "VPNType"
         
+        static let vpnDisconnectsOnSleep = "VPNDisconnectsOnSleep"
+        
         static let vpnCustomConfigurationMaps = "VPNCustomConfigurationMaps"
 
         static let persistentConnection = "PersistentConnection" // legacy
@@ -183,6 +185,15 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
         set {
             backend.set(newValue, forKey: Entries.vpnType)
+        }
+    }
+    
+    var vpnDisconnectsOnSleep: Bool {
+        get {
+            return backend.bool(forKey: Entries.vpnDisconnectsOnSleep)
+        }
+        set {
+            backend.set(newValue, forKey: Entries.vpnDisconnectsOnSleep)
         }
     }
     
