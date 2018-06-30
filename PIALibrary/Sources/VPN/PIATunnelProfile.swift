@@ -172,7 +172,17 @@ public class PIATunnelProfile: NetworkExtensionProfile {
         let port = configuration.port ?? PIATunnelProfile.defaultPort
         cfg.serverAddress = "\(configuration.server.hostname):\(port)"
         cfg.providerBundleIdentifier = bundleIdentifier
-        cfg.providerConfiguration = configuration.customConfiguration?.serialized()
+        
+        var customCfg = configuration.customConfiguration
+        if let piaCfg = customCfg as? PIATunnelProvider.Configuration,
+            let bestAddress = configuration.server.bestOpenVPNAddressForUDP?.hostname { // XXX: UDP address = TCP address
+
+            var builder = piaCfg.builder()
+            builder.resolvedAddresses = [bestAddress]
+            customCfg = builder.build()
+        }
+
+        cfg.providerConfiguration = customCfg?.serialized()
         return cfg
     }
     
