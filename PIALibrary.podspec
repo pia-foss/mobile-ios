@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name              = "PIALibrary"
-    s.version           = "1.1.1"
+    s.version           = "1.1.2"
     s.summary           = "PIA client library in Swift."
 
     s.homepage          = "https://www.privateinternetaccess.com/"
@@ -38,7 +38,7 @@ Pod::Spec.new do |s|
         p.frameworks            = "NetworkExtension"
         p.pod_target_xcconfig   = { "APPLICATION_EXTENSION_API_ONLY" => "YES" }
 
-        p.dependency "PIATunnel", "~> 1.1"
+        p.dependency "PIATunnel", "~> 1.1.2"
         p.dependency "PIALibrary/Library"
     end
 
