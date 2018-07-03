@@ -31,18 +31,9 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
             return accessedDatabase.plain.cachedServers
         }
         set {
-            accessedDatabase.plain.cachedServers = newValue
-            if accessedConfiguration.isDevelopment {
-                let chipotle = Server(
-                    name: "chipotle251",
-                    country: "US",
-                    hostname: "chipotle251.privateinternetaccess.com",
-                    bestOpenVPNAddressForTCP: nil,
-                    bestOpenVPNAddressForUDP: Server.Address(hostname: "108.61.57.211", port: 8080),
-                    pingAddress: nil
-                )
-                accessedDatabase.plain.cachedServers.insert(chipotle, at: 0)
-            }
+            var servers = newValue
+            servers.insert(contentsOf: accessedConfiguration.customServers, at: 0)
+            accessedDatabase.plain.cachedServers = servers
 
             Macros.postNotification(.PIAServerDidUpdateCurrentServers, [
                 .servers: newValue
