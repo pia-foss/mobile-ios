@@ -58,6 +58,11 @@ class Bootstrapper {
         if let stagingUrl = AppConstants.Web.stagingEndpointURL {
             Client.configuration.setBaseURL(stagingUrl.absoluteString, for: .staging)
         }
+        if Client.configuration.isDevelopment, let customServers = AppConstants.Servers.customServers {
+            for server in customServers {
+                Client.configuration.addCustomServer(server)
+            }
+        }
 
         Client.configuration.enablesConnectivityUpdates = true
         Client.configuration.enablesServerUpdates = true

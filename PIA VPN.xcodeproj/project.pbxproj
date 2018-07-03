@@ -23,6 +23,7 @@
 		0E3A352D1FD9CDC5000B0F99 /* Theme+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3A352B1FD9CDC5000B0F99 /* Theme+App.swift */; };
 		0E3A35351FD9EBDA000B0F99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3A35341FD9EBDA000B0F99 /* AppDelegate.swift */; };
 		0E3A35361FD9EBDA000B0F99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3A35341FD9EBDA000B0F99 /* AppDelegate.swift */; };
+		0E3C9A5E20EC004E00B199F9 /* custom.servers in Resources */ = {isa = PBXBuildFile; fileRef = 0E3C9A5D20EC004D00B199F9 /* custom.servers */; };
 		0E435DA11E748C3900101226 /* PIA VPN Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0E67FC221E3F802D00EF9929 /* PIA VPN Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0E441E262055AEDF007528D5 /* ThemeStrategy+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E441E252055AEDF007528D5 /* ThemeStrategy+App.swift */; };
 		0E441E272055AEDF007528D5 /* ThemeStrategy+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E441E252055AEDF007528D5 /* ThemeStrategy+App.swift */; };
@@ -272,6 +273,7 @@
 		0E3A35271FD9A960000B0F99 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		0E3A352B1FD9CDC5000B0F99 /* Theme+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+App.swift"; sourceTree = "<group>"; };
 		0E3A35341FD9EBDA000B0F99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0E3C9A5D20EC004D00B199F9 /* custom.servers */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = custom.servers; sourceTree = "<group>"; };
 		0E441E252055AEDF007528D5 /* ThemeStrategy+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ThemeStrategy+App.swift"; sourceTree = "<group>"; };
 		0E441E302055B8A7007528D5 /* Theme+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Extension.swift"; sourceTree = "<group>"; };
 		0E492C661FE60907007F23DF /* Flags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flags.swift; sourceTree = "<group>"; };
@@ -636,6 +638,7 @@
 			children = (
 				0ED984161FC48C5100542EE6 /* Fonts */,
 				0E0786DD1EFA7EAE00F77466 /* Components.plist */,
+				0E3C9A5D20EC004D00B199F9 /* custom.servers */,
 				0ED66BCF20A9918000333B35 /* staging.endpoint */,
 			);
 			path = Resources;
@@ -1043,6 +1046,7 @@
 				0EE220631F4EF307002805AE /* Launch Screen.storyboard in Resources */,
 				0ED984201FC48C6500542EE6 /* Roboto-Medium.ttf in Resources */,
 				0ED984211FC48C6500542EE6 /* Roboto-Regular.ttf in Resources */,
+				0E3C9A5E20EC004E00B199F9 /* custom.servers in Resources */,
 				0EFDC1D51FE4607D007C0B9B /* Images.xcassets in Resources */,
 				0ED9841F1FC48C6500542EE6 /* Roboto-Light.ttf in Resources */,
 				0EE2206A1F4EF307002805AE /* Components.plist in Resources */,
