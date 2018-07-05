@@ -23,8 +23,6 @@ protocol PlainStore: class {
     var cachedServers: [Server] { get set }
     
     var preferredServer: Server? { get set }
-
-    var preferredPort: UInt16? { get set }
     
     func ping(forServerIdentifier serverIdentifier: String) -> Int?
     

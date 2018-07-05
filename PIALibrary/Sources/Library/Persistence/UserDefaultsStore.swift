@@ -26,8 +26,6 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         
         static let preferredServer = "CurrentRegion" // legacy
 
-        static let preferredPort = "PreferredPort"
-        
         static let pingByServerIdentifier = "PingByServerIdentifier"
         
         static let vpnType = "VPNType"
@@ -145,19 +143,6 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
         set {
             backend.set(newValue?.identifier, forKey: Entries.preferredServer)
-        }
-    }
-    
-    var preferredPort: UInt16? {
-        get {
-            let port = backend.integer(forKey: Entries.preferredPort)
-            guard (port > 0) else {
-                return nil
-            }
-            return UInt16(port)
-        }
-        set {
-            backend.set(newValue, forKey: Entries.preferredPort)
         }
     }
     

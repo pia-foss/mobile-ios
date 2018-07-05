@@ -11,10 +11,6 @@ import PIATunnel
 
 /// :nodoc:
 extension PIATunnelProvider.Configuration: VPNCustomConfiguration {
-    public var isTCP: Bool {
-        return (socketType == .tcp)
-    }
-    
     public func serialized() -> [String: Any] {
         return generatedProviderConfiguration()
     }
@@ -26,7 +22,7 @@ extension PIATunnelProvider.Configuration: VPNCustomConfiguration {
         guard (appGroup == other.appGroup) else {
             return false
         }
-        guard (socketType == other.socketType) else {
+        guard (endpointProtocols == other.endpointProtocols) else {
             return false
         }
         guard (cipher == other.cipher) else {
