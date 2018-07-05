@@ -26,10 +26,6 @@
 	<true/>
 	<key>enablesEncryptionSettings</key>
 	<true/>
-	<key>enablesRemotePortSetting</key>
-	<true/>
-	<key>enablesSocketSetting</key>
-	<true/>
 	<key>enablesDevelopmentSettings</key>
 	<true/>
 	<key>customizesVPNRenegotiation</key>

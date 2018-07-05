@@ -53,8 +53,8 @@ end
 def shared_main_pods
     pod 'AlamofireImage'
     #library_by_path('..')
-    library_by_git('ab78a47')
-    #library_by_version('~> 1.1.1')
+    #library_by_git('8bc6b90')
+    library_by_version('~> 1.1.2')
 end
 
 def app_pods
@@ -68,8 +68,8 @@ end
 
 def tunnel_pods
     #tunnel_by_path('..')
-    #tunnel_by_git('9ed3842')
-    tunnel_by_version('= 1.1.2')
+    tunnel_by_git('bf89991')
+    #tunnel_by_version('~> 1.1.3')
 end
 
 # Targets

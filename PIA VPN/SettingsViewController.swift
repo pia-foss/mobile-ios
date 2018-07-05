@@ -632,21 +632,25 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             }
 
         case .vpnSocket:
-            cell.textLabel?.text = L10n.Settings.Connection.SocketProtocol.title
-            cell.detailTextLabel?.text = pendingOpenVPNConfiguration.socketType.description
-            if !Flags.shared.enablesSocketSetting {
-                cell.accessoryType = .none
-                cell.selectionStyle = .none
-            }
+            // FIXME
+            break
+//            cell.textLabel?.text = L10n.Settings.Connection.SocketProtocol.title
+//            cell.detailTextLabel?.text = pendingOpenVPNConfiguration.socketType.description
+//            if !Flags.shared.enablesSocketSetting {
+//                cell.accessoryType = .none
+//                cell.selectionStyle = .none
+//            }
             
         case .vpnPort:
-            cell.textLabel?.text = L10n.Settings.Connection.RemotePort.title
-            cell.detailTextLabel?.text = pendingPreferences.preferredPort?.description ?? L10n.Global.automatic
-            if !Flags.shared.enablesRemotePortSetting {
-                cell.detailTextLabel?.text = Client.providers.serverProvider.targetServer.bestOpenVPNAddressForUDP?.port.description
-                cell.accessoryType = .none
-                cell.selectionStyle = .none
-            }
+            // FIXME
+            break
+//            cell.textLabel?.text = L10n.Settings.Connection.RemotePort.title
+//            cell.detailTextLabel?.text = pendingPreferences.preferredPort?.description ?? L10n.Global.automatic
+//            if !Flags.shared.enablesRemotePortSetting {
+//                cell.detailTextLabel?.text = Client.providers.serverProvider.targetServer.bestOpenVPNAddressForUDP?.port.description
+//                cell.accessoryType = .none
+//                cell.selectionStyle = .none
+//            }
 
         case .encryptionCipher:
             cell.textLabel?.text = L10n.Settings.Encryption.Cipher.title
@@ -756,27 +760,31 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             controller?.selectedOption = pendingPreferences.vpnType
             
         case .vpnSocket:
-            guard Flags.shared.enablesSocketSetting else {
-                break
-            }
-            let options: [PIATunnelProvider.SocketType] = [
-                .udp,
-                .tcp
-            ]
-            controller = OptionsViewController()
-            controller?.options = options.map { $0.rawValue }
-            controller?.selectedOption = pendingOpenVPNConfiguration.socketType.rawValue
+            // FIXME
+            break
+//            guard Flags.shared.enablesSocketSetting else {
+//                break
+//            }
+//            let options: [PIATunnelProvider.SocketType] = [
+//                .udp,
+//                .tcp
+//            ]
+//            controller = OptionsViewController()
+//            controller?.options = options.map { $0.rawValue }
+//            controller?.selectedOption = pendingOpenVPNConfiguration.socketType.rawValue
 
         case .vpnPort:
-            guard Flags.shared.enablesRemotePortSetting else {
-                break
-            }
-            let availablePorts = Client.providers.serverProvider.currentServersConfiguration.vpnPorts
-            var options = (pendingOpenVPNConfiguration.socketType == .udp) ? availablePorts.udp : availablePorts.tcp
-            options.insert(SettingsViewController.AUTOMATIC_PORT, at: 0)
-            controller = OptionsViewController()
-            controller?.options = options
-            controller?.selectedOption = pendingPreferences.preferredPort ?? SettingsViewController.AUTOMATIC_PORT
+            // FIXME
+            break
+//            guard Flags.shared.enablesRemotePortSetting else {
+//                break
+//            }
+//            let availablePorts = Client.providers.serverProvider.currentServersConfiguration.vpnPorts
+//            var options = (pendingOpenVPNConfiguration.socketType == .udp) ? availablePorts.udp : availablePorts.tcp
+//            options.insert(SettingsViewController.AUTOMATIC_PORT, at: 0)
+//            controller = OptionsViewController()
+//            controller?.options = options
+//            controller?.selectedOption = pendingPreferences.preferredPort ?? SettingsViewController.AUTOMATIC_PORT
 
         case .encryptionCipher:
             guard Flags.shared.enablesEncryptionSettings else {
@@ -946,13 +954,17 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             pendingPreferences.vpnType = vpnType
             
         case .vpnSocket:
-            let rawSocketType = option as! String
-            pendingOpenVPNConfiguration.socketType = PIATunnelProvider.SocketType(rawValue: rawSocketType)!
-            pendingPreferences.preferredPort = nil
+            // FIXME
+            break
+//            let rawSocketType = option as! String
+//            pendingOpenVPNConfiguration.socketType = PIATunnelProvider.SocketType(rawValue: rawSocketType)!
+//            pendingPreferences.preferredPort = nil
 
         case .vpnPort:
-            let port = option as! UInt16
-            pendingPreferences.preferredPort = (port != SettingsViewController.AUTOMATIC_PORT) ? port : nil
+            // FIXME
+            break
+//            let port = option as! UInt16
+//            pendingPreferences.preferredPort = (port != SettingsViewController.AUTOMATIC_PORT) ? port : nil
 
         case .encryptionCipher:
             let rawCipher = option as! String
