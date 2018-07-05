@@ -174,11 +174,11 @@ public class PIATunnelProfile: NetworkExtensionProfile {
         cfg.providerBundleIdentifier = bundleIdentifier
         
         var customCfg = configuration.customConfiguration
-        if let piaCfg = customCfg as? PIATunnelProvider.Configuration,
-            let bestAddress = configuration.server.bestOpenVPNAddressForUDP?.hostname { // XXX: UDP address = TCP address
-
+        if let piaCfg = customCfg as? PIATunnelProvider.Configuration {
             var builder = piaCfg.builder()
-            builder.resolvedAddresses = [bestAddress]
+            if let bestAddress = configuration.server.bestOpenVPNAddressForUDP?.hostname { // XXX: UDP address = TCP address
+                builder.resolvedAddresses = [bestAddress]
+            }
             customCfg = builder.build()
         }
 
