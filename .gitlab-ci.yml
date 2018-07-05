@@ -12,6 +12,7 @@ before_script:
     - bundle update
     #- bundle exec fastlane run ensure_git_status_clean
     - echo "$PIA_STAGING_ENDPOINT" >"Resources/staging.endpoint"
+    - echo "$PIA_CUSTOM_SERVERS" >"Resources/custom.servers"
 
 stages:
     - test
