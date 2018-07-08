@@ -53,7 +53,7 @@ DEPENDENCIES:
   - PIALibrary/Mock (~> 1.1.2)
   - PIALibrary/UI (~> 1.1.2)
   - PIALibrary/VPN (~> 1.1.2)
-  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `bf89991`)
+  - PIATunnel (~> 1.1.4)
   - SideMenu (= 3.1.5)
   - TPKeyboardAvoiding
 
@@ -68,20 +68,11 @@ SPEC REPOS:
     - MBProgressHUD
     - OpenSSL-Apple
     - PIALibrary
+    - PIATunnel
     - ReachabilitySwift
     - SideMenu
     - SwiftyBeaver
     - TPKeyboardAvoiding
-
-EXTERNAL SOURCES:
-  PIATunnel:
-    :commit: bf89991
-    :git: https://github.com/pia-foss/tunnel-apple
-
-CHECKOUT OPTIONS:
-  PIATunnel:
-    :commit: bf89991
-    :git: https://github.com/pia-foss/tunnel-apple
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
@@ -99,6 +90,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: e45759613e50b522b0e6f53b1f0f14389b45ca34
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 034147692a64641d9ed57530c760c12a5286c76d
+PODFILE CHECKSUM: 54ca4906ca6e0ca9fde357c90236402105f6e424
 
 COCOAPODS: 1.5.3
