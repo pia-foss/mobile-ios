@@ -14,8 +14,6 @@ private let log = SwiftyBeaver.self
 private protocol PreferencesStore: class {
     var preferredServer: Server? { get set }
     
-    var preferredPort: UInt16? { get set }
-    
     var isPersistentConnection: Bool { get set }
     
     var mace: Bool { get set }
@@ -38,7 +36,6 @@ private extension PreferencesStore {
 
     func load(from source: PreferencesStore) {
         preferredServer = source.preferredServer
-        preferredPort = source.preferredPort
         isPersistentConnection = source.isPersistentConnection
         mace = source.mace
         vpnType = source.vpnType
@@ -76,16 +73,6 @@ extension Client {
             }
             set {
                 accessedDatabase.plain.preferredServer = newValue
-            }
-        }
-        
-        /// The preferred server port, in case it's applicable for the current VPN protocol.
-        public var preferredPort: UInt16? {
-            get {
-                return accessedDatabase.plain.preferredPort
-            }
-            set {
-                accessedDatabase.plain.preferredPort = newValue
             }
         }
         
@@ -195,7 +182,6 @@ extension Client.Preferences {
         
         fileprivate init() {
             preferredServer = nil
-            preferredPort = nil
             isPersistentConnection = true
             mace = false
             vpnType = IPSecProfile.vpnType
@@ -228,9 +214,6 @@ extension Client.Preferences {
 
         /// :nodoc:
         public var preferredServer: Server?
-        
-        /// :nodoc:
-        public var preferredPort: UInt16?
         
         /// :nodoc:
         public var isPersistentConnection: Bool
@@ -281,9 +264,6 @@ extension Client.Preferences {
             if !isPreferredServer(equalTo: target.preferredServer) {
                 queue.append(VPNActionReinstall())
             }
-            if !isPreferredPort(equalTo: target.preferredPort) {
-                queue.append(VPNActionReconnect())
-            }
             if (vpnType != target.vpnType) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
@@ -306,16 +286,6 @@ extension Client.Preferences {
             return (preferredServer == server)
         }
         
-        private func isPreferredPort(equalTo port: UInt16?) -> Bool {
-            guard let preferredPort = preferredPort else {
-                return (port == nil)
-            }
-            guard let port = port else {
-                return false
-            }
-            return (preferredPort == port)
-        }
-
         /**
          Returns `true` if the VPN needs to reconnect to make the pending changes effective.
          
@@ -326,9 +296,6 @@ extension Client.Preferences {
                 return false
             }
             if (mace != target.mace) {
-                return true
-            }
-            if !isPreferredPort(equalTo: target.preferredPort) {
                 return true
             }
             if let configuration = vpnCustomConfigurations[vpnType],
