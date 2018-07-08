@@ -76,6 +76,8 @@ extension Client {
         /// Sets the interval before which pings are not repeated.
         public var minPingInterval: Int
 
+        private(set) var customServers: [Server]
+        
         // MARK: Connectivity
 
         /// Notifies connectivity updates e.g. current IP addresses.
@@ -169,6 +171,7 @@ extension Client {
             )
             serversUpdateWhenNetworkDownDelay = 10000
             verifiesServersSignature = true
+            customServers = []
 
             enablesServerPings = false
             minPingInterval = 120000
@@ -197,7 +200,7 @@ extension Client {
             #endif
         }
         
-        // MARK: Web
+        // MARK: WebServices
         
         /**
          Sets base URL for web services in a determined environment.
@@ -207,6 +210,17 @@ extension Client {
          */
         public func setBaseURL(_ url: String, for environment: Environment) {
             baseUrls[environment] = url
+        }
+        
+        // MARK: Server
+        
+        /**
+         Inserts a custom server on top on the server list.
+
+         - Parameter server: The server.
+         */
+        public func addCustomServer(_ server: Server) {
+            customServers.append(server)
         }
         
         // MARK: VPN

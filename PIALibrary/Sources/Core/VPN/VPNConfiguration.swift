@@ -23,9 +23,6 @@ public struct VPNConfiguration {
     /// The `Server` to connect to.
     public let server: Server
 
-    /// A custom port to connect to.
-    public let port: UInt16?
-    
     /// When `true`, the VPN will connect on demand.
     public let isOnDemand: Bool
 
@@ -42,9 +39,6 @@ public struct VPNConfiguration {
 ///
 /// - Seealso: `VPNProfile`
 public protocol VPNCustomConfiguration {
-
-    /// Returns `true` if connects via TCP.
-    var isTCP: Bool { get }
 
     /**
      Returns a dictionary representation of this configuration.

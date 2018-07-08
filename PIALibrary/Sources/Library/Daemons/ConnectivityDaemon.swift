@@ -106,7 +106,7 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
             return
         }
 
-        log.info("Checking network connectivity...")
+        log.debug("Checking network connectivity...")
         accessedDatabase.transient.publicIP = nil
         accessedDatabase.transient.vpnIP = nil
         Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
@@ -121,7 +121,7 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
                 log.error("Failed to check network connectivity (error: \(error?.localizedDescription ?? "")")
             
                 guard (self.failedConnectivityAttempts < self.accessedConfiguration.connectivityMaxAttempts) else {
-                    log.info("Giving up, network is unreachable")
+                    log.debug("Giving up, network is unreachable")
                     self.failedConnectivityAttempts = 0
                     self.accessedDatabase.transient.isInternetReachable = false
                     Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
@@ -129,7 +129,7 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
                 }
 
                 let delay = self.accessedConfiguration.connectivityRetryDelay
-                log.info("Retrying network connectivity in \(delay) milliseconds...")
+                log.debug("Retrying network connectivity in \(delay) milliseconds...")
                 Macros.dispatch(after: .milliseconds(delay)) {
                     self.checkConnectivityOrRetry()
                 }

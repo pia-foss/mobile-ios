@@ -12,8 +12,6 @@ import NetworkExtension
 
 /// Implementation of `VPNProfile` providing OpenVPN connectivity.
 public class PIATunnelProfile: NetworkExtensionProfile {
-    private static let defaultPort: UInt16 = 1194
-
     private let bundleIdentifier: String
 
     /**
@@ -169,10 +167,19 @@ public class PIATunnelProfile: NetworkExtensionProfile {
         
         cfg.username = configuration.username
         cfg.passwordReference = configuration.passwordReference
-        let port = configuration.port ?? PIATunnelProfile.defaultPort
-        cfg.serverAddress = "\(configuration.server.hostname):\(port)"
+        cfg.serverAddress = configuration.server.hostname
         cfg.providerBundleIdentifier = bundleIdentifier
-        cfg.providerConfiguration = configuration.customConfiguration?.serialized()
+        
+        var customCfg = configuration.customConfiguration
+        if let piaCfg = customCfg as? PIATunnelProvider.Configuration {
+            var builder = piaCfg.builder()
+            if let bestAddress = configuration.server.bestOpenVPNAddressForUDP?.hostname { // XXX: UDP address = TCP address
+                builder.resolvedAddresses = [bestAddress]
+            }
+            customCfg = builder.build()
+        }
+
+        cfg.providerConfiguration = customCfg?.serialized()
         return cfg
     }
     

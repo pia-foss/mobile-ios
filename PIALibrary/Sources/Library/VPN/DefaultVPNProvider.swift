@@ -243,24 +243,11 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
 
         let customConfiguration = accessedPreferences.vpnCustomConfiguration(for: profile.vpnType)
 
-        var port = accessedPreferences.preferredPort
-        if (port == nil), let cfg = customConfiguration {
-            let targetServer = accessedProviders.serverProvider.targetServer
-            if cfg.isTCP {
-                port = targetServer.bestOpenVPNAddressForTCP?.port ??
-                    accessedDatabase.transient.serversConfiguration.vpnPorts.tcp.first
-            } else {
-                port = targetServer.bestOpenVPNAddressForUDP?.port ??
-                    accessedDatabase.transient.serversConfiguration.vpnPorts.udp.first
-            }
-        }
-
         return VPNConfiguration(
             name: accessedConfiguration.vpnProfileName,
             username: currentUser.credentials.username,
             passwordReference: currentPasswordReference,
             server: accessedProviders.serverProvider.targetServer,
-            port: port,
             isOnDemand: accessedPreferences.isPersistentConnection,
             disconnectsOnSleep: accessedPreferences.vpnDisconnectsOnSleep,
             customConfiguration: customConfiguration
