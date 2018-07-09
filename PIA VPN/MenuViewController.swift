@@ -385,8 +385,8 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
         } else {
             let sectionItems = allItems[indexPath.section - 1]
             let item = sectionItems[indexPath.row]
+            tableView.deselectRow(at: indexPath, animated: true)
             guard (item != .logout) else {
-                tableView.deselectRow(at: indexPath, animated: true)
                 logOut()
                 return
             }
