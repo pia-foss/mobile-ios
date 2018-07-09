@@ -1,3 +1,4 @@
-- Fixed an issue ending up in a stale VPN connection after several network switches.
-- Fixed an issue preventing the VPN from restarting when device is locked.
-- Bugfixing.
+- Mitigated on iOS 12 bug affecting OpenVPN UDP (reported to Apple).
+- Optimized download speed.
+- IPv4 address is now used in case of DNS failure.
+- Automatic port now tries all available ports in sequence.
