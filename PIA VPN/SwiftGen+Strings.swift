@@ -6,502 +6,502 @@ import Foundation
 // swiftlint:disable file_length
 
 // swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
-enum L10n {
+internal enum L10n {
 
-  enum About {
+  internal enum About {
     /// VPN by Private Internet Access
-    static let app = L10n.tr("Localizable", "about.app")
+    internal static let app = L10n.tr("Localizable", "about.app")
     /// This program uses the following components:
-    static let intro = L10n.tr("Localizable", "about.intro")
+    internal static let intro = L10n.tr("Localizable", "about.intro")
 
-    enum Accessibility {
+    internal enum Accessibility {
 
-      enum Component {
+      internal enum Component {
         /// Tap to read full license
-        static let expand = L10n.tr("Localizable", "about.accessibility.component.expand")
+        internal static let expand = L10n.tr("Localizable", "about.accessibility.component.expand")
       }
     }
   }
 
-  enum Account {
+  internal enum Account {
 
-    enum Accessibility {
+    internal enum Accessibility {
       /// Eye icon
-      static let eye = L10n.tr("Localizable", "account.accessibility.eye")
+      internal static let eye = L10n.tr("Localizable", "account.accessibility.eye")
 
-      enum Eye {
+      internal enum Eye {
 
-        enum Hint {
+        internal enum Hint {
           /// Tap to conceal password
-          static let conceal = L10n.tr("Localizable", "account.accessibility.eye.hint.conceal")
+          internal static let conceal = L10n.tr("Localizable", "account.accessibility.eye.hint.conceal")
           /// Tap to reveal password
-          static let reveal = L10n.tr("Localizable", "account.accessibility.eye.hint.reveal")
+          internal static let reveal = L10n.tr("Localizable", "account.accessibility.eye.hint.reveal")
         }
       }
     }
 
-    enum Email {
+    internal enum Email {
       /// Email
-      static let caption = L10n.tr("Localizable", "account.email.caption")
+      internal static let caption = L10n.tr("Localizable", "account.email.caption")
       /// Email address
-      static let placeholder = L10n.tr("Localizable", "account.email.placeholder")
+      internal static let placeholder = L10n.tr("Localizable", "account.email.placeholder")
     }
 
-    enum Eye {
+    internal enum Eye {
       /// Tap the eye icon to reveal or conceal your password.
-      static let footer = L10n.tr("Localizable", "account.eye.footer")
+      internal static let footer = L10n.tr("Localizable", "account.eye.footer")
     }
 
-    enum Other {
+    internal enum Other {
       /// Get the Private Internet Access app for your other devices and use the above username and password to login and secure your connection.
-      static let footer = L10n.tr("Localizable", "account.other.footer")
+      internal static let footer = L10n.tr("Localizable", "account.other.footer")
     }
 
-    enum Password {
+    internal enum Password {
       /// Password
-      static let caption = L10n.tr("Localizable", "account.password.caption")
+      internal static let caption = L10n.tr("Localizable", "account.password.caption")
     }
 
-    enum Restore {
+    internal enum Restore {
       /// RESTORE PURCHASE
-      static let button = L10n.tr("Localizable", "account.restore.button")
+      internal static let button = L10n.tr("Localizable", "account.restore.button")
       /// If you renewed your plan but your account still says it's about to expire, you can restart the renewal from here. You will not be charged during this process.
-      static let description = L10n.tr("Localizable", "account.restore.description")
+      internal static let description = L10n.tr("Localizable", "account.restore.description")
       /// Restore uncredited purchase
-      static let title = L10n.tr("Localizable", "account.restore.title")
+      internal static let title = L10n.tr("Localizable", "account.restore.title")
 
-      enum Failure {
+      internal enum Failure {
         /// No redeemable purchase was found for renewal.
-        static let message = L10n.tr("Localizable", "account.restore.failure.message")
+        internal static let message = L10n.tr("Localizable", "account.restore.failure.message")
         /// Restore purchase
-        static let title = L10n.tr("Localizable", "account.restore.failure.title")
+        internal static let title = L10n.tr("Localizable", "account.restore.failure.title")
       }
     }
 
-    enum Reveal {
+    internal enum Reveal {
       /// Authenticate to reveal
-      static let prompt = L10n.tr("Localizable", "account.reveal.prompt")
+      internal static let prompt = L10n.tr("Localizable", "account.reveal.prompt")
     }
 
-    enum Save {
+    internal enum Save {
       /// Update
-      static let item = L10n.tr("Localizable", "account.save.item")
+      internal static let item = L10n.tr("Localizable", "account.save.item")
       /// Authenticate to save changes
-      static let prompt = L10n.tr("Localizable", "account.save.prompt")
+      internal static let prompt = L10n.tr("Localizable", "account.save.prompt")
       /// Your email address has been saved.
-      static let success = L10n.tr("Localizable", "account.save.success")
+      internal static let success = L10n.tr("Localizable", "account.save.success")
     }
 
-    enum Username {
+    internal enum Username {
       /// Username
-      static let caption = L10n.tr("Localizable", "account.username.caption")
+      internal static let caption = L10n.tr("Localizable", "account.username.caption")
     }
   }
 
-  enum ContentBlocker {
+  internal enum ContentBlocker {
     /// Content Blocker
-    static let title = L10n.tr("Localizable", "content_blocker.title")
+    internal static let title = L10n.tr("Localizable", "content_blocker.title")
 
-    enum Body {
+    internal enum Body {
       /// Please note: You do not need to be connected to the VPN for this Content Blocker to work, but it will only work while browsing with Safari.
-      static let footer = L10n.tr("Localizable", "content_blocker.body.footer")
+      internal static let footer = L10n.tr("Localizable", "content_blocker.body.footer")
       /// To enable our Content Blocker for use with Safari please go to Settings > Safari, and under General touch Content Blockers toggle on PIA VPN.
-      static let subtitle = L10n.tr("Localizable", "content_blocker.body.subtitle")
+      internal static let subtitle = L10n.tr("Localizable", "content_blocker.body.subtitle")
     }
   }
 
-  enum Dashboard {
+  internal enum Dashboard {
     /// Status
-    static let status = L10n.tr("Localizable", "dashboard.status")
+    internal static let status = L10n.tr("Localizable", "dashboard.status")
 
-    enum Connection {
+    internal enum Connection {
 
-      enum Ip {
+      internal enum Ip {
         /// PUBLIC IP
-        static let caption = L10n.tr("Localizable", "dashboard.connection.ip.caption")
+        internal static let caption = L10n.tr("Localizable", "dashboard.connection.ip.caption")
         /// Internet unreachable
-        static let unreachable = L10n.tr("Localizable", "dashboard.connection.ip.unreachable")
+        internal static let unreachable = L10n.tr("Localizable", "dashboard.connection.ip.unreachable")
       }
 
-      enum Region {
+      internal enum Region {
         /// CURRENT REGION
-        static let caption = L10n.tr("Localizable", "dashboard.connection.region.caption")
+        internal static let caption = L10n.tr("Localizable", "dashboard.connection.region.caption")
         /// CHANGE REGION
-        static let change = L10n.tr("Localizable", "dashboard.connection.region.change")
+        internal static let change = L10n.tr("Localizable", "dashboard.connection.region.change")
       }
     }
 
-    enum ContentBlocker {
+    internal enum ContentBlocker {
 
-      enum Intro {
+      internal enum Intro {
         /// This version replaces MACE with our Safari Content Blocker.\n\nCheck it out in the 'Settings' section.
-        static let message = L10n.tr("Localizable", "dashboard.content_blocker.intro.message")
+        internal static let message = L10n.tr("Localizable", "dashboard.content_blocker.intro.message")
       }
     }
 
-    enum Vpn {
+    internal enum Vpn {
       /// Changing region...
-      static let changingRegion = L10n.tr("Localizable", "dashboard.vpn.changing_region")
+      internal static let changingRegion = L10n.tr("Localizable", "dashboard.vpn.changing_region")
       /// Connected to VPN
-      static let connected = L10n.tr("Localizable", "dashboard.vpn.connected")
+      internal static let connected = L10n.tr("Localizable", "dashboard.vpn.connected")
       /// Connecting...
-      static let connecting = L10n.tr("Localizable", "dashboard.vpn.connecting")
+      internal static let connecting = L10n.tr("Localizable", "dashboard.vpn.connecting")
       /// Disconnected
-      static let disconnected = L10n.tr("Localizable", "dashboard.vpn.disconnected")
+      internal static let disconnected = L10n.tr("Localizable", "dashboard.vpn.disconnected")
       /// Disconnecting...
-      static let disconnecting = L10n.tr("Localizable", "dashboard.vpn.disconnecting")
+      internal static let disconnecting = L10n.tr("Localizable", "dashboard.vpn.disconnecting")
     }
   }
 
-  enum Expiration {
+  internal enum Expiration {
     /// Your subscription expires soon. Renew to stay protected.
-    static let message = L10n.tr("Localizable", "expiration.message")
+    internal static let message = L10n.tr("Localizable", "expiration.message")
     /// Renewal
-    static let title = L10n.tr("Localizable", "expiration.title")
+    internal static let title = L10n.tr("Localizable", "expiration.title")
   }
 
-  enum Global {
+  internal enum Global {
     /// Automatic
-    static let automatic = L10n.tr("Localizable", "global.automatic")
+    internal static let automatic = L10n.tr("Localizable", "global.automatic")
     /// Cancel
-    static let cancel = L10n.tr("Localizable", "global.cancel")
+    internal static let cancel = L10n.tr("Localizable", "global.cancel")
     /// Close
-    static let close = L10n.tr("Localizable", "global.close")
+    internal static let close = L10n.tr("Localizable", "global.close")
     /// Error
-    static let error = L10n.tr("Localizable", "global.error")
+    internal static let error = L10n.tr("Localizable", "global.error")
     /// OK
-    static let ok = L10n.tr("Localizable", "global.ok")
+    internal static let ok = L10n.tr("Localizable", "global.ok")
   }
 
-  enum Menu {
+  internal enum Menu {
 
-    enum Accessibility {
+    internal enum Accessibility {
       /// Menu
-      static let item = L10n.tr("Localizable", "menu.accessibility.item")
+      internal static let item = L10n.tr("Localizable", "menu.accessibility.item")
       /// Logged in as %@
-      static func loggedAs(_ p1: String) -> String {
+      internal static func loggedAs(_ p1: String) -> String {
         return L10n.tr("Localizable", "menu.accessibility.logged_as", p1)
       }
     }
 
-    enum Expiration {
+    internal enum Expiration {
       /// %d days
-      static func days(_ p1: Int) -> String {
+      internal static func days(_ p1: Int) -> String {
         return L10n.tr("Localizable", "menu.expiration.days", p1)
       }
       /// Subscription expires in
-      static let expiresIn = L10n.tr("Localizable", "menu.expiration.expires_in")
+      internal static let expiresIn = L10n.tr("Localizable", "menu.expiration.expires_in")
       /// %d hours
-      static func hours(_ p1: Int) -> String {
+      internal static func hours(_ p1: Int) -> String {
         return L10n.tr("Localizable", "menu.expiration.hours", p1)
       }
       /// one hour
-      static let oneHour = L10n.tr("Localizable", "menu.expiration.one_hour")
+      internal static let oneHour = L10n.tr("Localizable", "menu.expiration.one_hour")
       /// UPGRADE ACCOUNT
-      static let upgrade = L10n.tr("Localizable", "menu.expiration.upgrade")
+      internal static let upgrade = L10n.tr("Localizable", "menu.expiration.upgrade")
     }
 
-    enum Item {
+    internal enum Item {
       /// About
-      static let about = L10n.tr("Localizable", "menu.item.about")
+      internal static let about = L10n.tr("Localizable", "menu.item.about")
       /// Account
-      static let account = L10n.tr("Localizable", "menu.item.account")
+      internal static let account = L10n.tr("Localizable", "menu.item.account")
       /// Log out
-      static let logout = L10n.tr("Localizable", "menu.item.logout")
+      internal static let logout = L10n.tr("Localizable", "menu.item.logout")
       /// Region selection
-      static let region = L10n.tr("Localizable", "menu.item.region")
+      internal static let region = L10n.tr("Localizable", "menu.item.region")
       /// Settings
-      static let settings = L10n.tr("Localizable", "menu.item.settings")
+      internal static let settings = L10n.tr("Localizable", "menu.item.settings")
 
-      enum Web {
+      internal enum Web {
         /// Home page
-        static let home = L10n.tr("Localizable", "menu.item.web.home")
+        internal static let home = L10n.tr("Localizable", "menu.item.web.home")
         /// Privacy policy
-        static let privacy = L10n.tr("Localizable", "menu.item.web.privacy")
+        internal static let privacy = L10n.tr("Localizable", "menu.item.web.privacy")
         /// Support
-        static let support = L10n.tr("Localizable", "menu.item.web.support")
+        internal static let support = L10n.tr("Localizable", "menu.item.web.support")
       }
     }
 
-    enum Logout {
+    internal enum Logout {
       /// Log out
-      static let confirm = L10n.tr("Localizable", "menu.logout.confirm")
+      internal static let confirm = L10n.tr("Localizable", "menu.logout.confirm")
       /// Logging out will disable the VPN and leave you unprotected.
-      static let message = L10n.tr("Localizable", "menu.logout.message")
+      internal static let message = L10n.tr("Localizable", "menu.logout.message")
       /// Log out
-      static let title = L10n.tr("Localizable", "menu.logout.title")
+      internal static let title = L10n.tr("Localizable", "menu.logout.title")
     }
 
-    enum Renewal {
+    internal enum Renewal {
       /// Purchase
-      static let purchase = L10n.tr("Localizable", "menu.renewal.purchase")
+      internal static let purchase = L10n.tr("Localizable", "menu.renewal.purchase")
       /// Renew
-      static let renew = L10n.tr("Localizable", "menu.renewal.renew")
+      internal static let renew = L10n.tr("Localizable", "menu.renewal.renew")
       /// Renewal
-      static let title = L10n.tr("Localizable", "menu.renewal.title")
+      internal static let title = L10n.tr("Localizable", "menu.renewal.title")
 
-      enum Message {
+      internal enum Message {
         /// Trial accounts are not eligible for renewal. Please purchase a new account upon expiry to continue service.
-        static let trial = L10n.tr("Localizable", "menu.renewal.message.trial")
+        internal static let trial = L10n.tr("Localizable", "menu.renewal.message.trial")
         /// Apple servers currently unavailable. Please try again later.
-        static let unavailable = L10n.tr("Localizable", "menu.renewal.message.unavailable")
+        internal static let unavailable = L10n.tr("Localizable", "menu.renewal.message.unavailable")
         /// Please use our website to renew your subscription.
-        static let website = L10n.tr("Localizable", "menu.renewal.message.website")
+        internal static let website = L10n.tr("Localizable", "menu.renewal.message.website")
       }
     }
   }
 
-  enum Notifications {
+  internal enum Notifications {
 
-    enum Disabled {
+    internal enum Disabled {
       /// Enable notifications to get a reminder to renew your subscription before it expires.
-      static let message = L10n.tr("Localizable", "notifications.disabled.message")
+      internal static let message = L10n.tr("Localizable", "notifications.disabled.message")
       /// Settings
-      static let settings = L10n.tr("Localizable", "notifications.disabled.settings")
+      internal static let settings = L10n.tr("Localizable", "notifications.disabled.settings")
       /// Notifications disabled
-      static let title = L10n.tr("Localizable", "notifications.disabled.title")
+      internal static let title = L10n.tr("Localizable", "notifications.disabled.title")
     }
   }
 
-  enum Renewal {
+  internal enum Renewal {
 
-    enum Failure {
+    internal enum Failure {
       /// Your purchase receipt couldn't be submitted, please retry at a later time.
-      static let message = L10n.tr("Localizable", "renewal.failure.message")
+      internal static let message = L10n.tr("Localizable", "renewal.failure.message")
     }
 
-    enum Success {
+    internal enum Success {
       /// Your account was successfully renewed.
-      static let message = L10n.tr("Localizable", "renewal.success.message")
+      internal static let message = L10n.tr("Localizable", "renewal.success.message")
       /// Thank you
-      static let title = L10n.tr("Localizable", "renewal.success.title")
+      internal static let title = L10n.tr("Localizable", "renewal.success.title")
     }
   }
 
-  enum Settings {
+  internal enum Settings {
 
-    enum ApplicationInformation {
+    internal enum ApplicationInformation {
       /// APPLICATION INFORMATION
-      static let title = L10n.tr("Localizable", "settings.application_information.title")
+      internal static let title = L10n.tr("Localizable", "settings.application_information.title")
 
-      enum Debug {
+      internal enum Debug {
         /// Send debug to support
-        static let title = L10n.tr("Localizable", "settings.application_information.debug.title")
+        internal static let title = L10n.tr("Localizable", "settings.application_information.debug.title")
 
-        enum Empty {
+        internal enum Empty {
           /// Debug information is empty, please attempt a connection before retrying submission.
-          static let message = L10n.tr("Localizable", "settings.application_information.debug.empty.message")
+          internal static let message = L10n.tr("Localizable", "settings.application_information.debug.empty.message")
           /// Empty debug information
-          static let title = L10n.tr("Localizable", "settings.application_information.debug.empty.title")
+          internal static let title = L10n.tr("Localizable", "settings.application_information.debug.empty.title")
         }
 
-        enum Failure {
+        internal enum Failure {
           /// Debug information could not be submitted. Please disconnect from the VPN and retry.
-          static let message = L10n.tr("Localizable", "settings.application_information.debug.failure.message")
+          internal static let message = L10n.tr("Localizable", "settings.application_information.debug.failure.message")
           /// Error during submission
-          static let title = L10n.tr("Localizable", "settings.application_information.debug.failure.title")
+          internal static let title = L10n.tr("Localizable", "settings.application_information.debug.failure.title")
         }
 
-        enum Success {
+        internal enum Success {
           /// Debug information successfully submitted.\nID: %@\nPlease note this ID, as our support team will require this to locate your submission.
-          static func message(_ p1: String) -> String {
+          internal static func message(_ p1: String) -> String {
             return L10n.tr("Localizable", "settings.application_information.debug.success.message", p1)
           }
           /// Debug information submitted
-          static let title = L10n.tr("Localizable", "settings.application_information.debug.success.title")
+          internal static let title = L10n.tr("Localizable", "settings.application_information.debug.success.title")
         }
       }
     }
 
-    enum ApplicationSettings {
+    internal enum ApplicationSettings {
       /// APPLICATION SETTINGS
-      static let title = L10n.tr("Localizable", "settings.application_settings.title")
+      internal static let title = L10n.tr("Localizable", "settings.application_settings.title")
 
-      enum DarkTheme {
+      internal enum DarkTheme {
         /// Dark theme
-        static let title = L10n.tr("Localizable", "settings.application_settings.dark_theme.title")
+        internal static let title = L10n.tr("Localizable", "settings.application_settings.dark_theme.title")
       }
 
-      enum KillSwitch {
+      internal enum KillSwitch {
         /// The VPN kill switch prevents access to the Internet if the VPN connection is reconnecting. This excludes disconnecting manually.
-        static let footer = L10n.tr("Localizable", "settings.application_settings.kill_switch.footer")
+        internal static let footer = L10n.tr("Localizable", "settings.application_settings.kill_switch.footer")
         /// VPN kill switch
-        static let title = L10n.tr("Localizable", "settings.application_settings.kill_switch.title")
+        internal static let title = L10n.tr("Localizable", "settings.application_settings.kill_switch.title")
       }
 
-      enum Mace {
+      internal enum Mace {
         /// PIA MACE™ blocks ads, trackers, and malware while you're connected to the VPN.
-        static let footer = L10n.tr("Localizable", "settings.application_settings.mace.footer")
+        internal static let footer = L10n.tr("Localizable", "settings.application_settings.mace.footer")
         /// PIA MACE™
-        static let title = L10n.tr("Localizable", "settings.application_settings.mace.title")
+        internal static let title = L10n.tr("Localizable", "settings.application_settings.mace.title")
       }
     }
 
-    enum Commit {
+    internal enum Commit {
 
-      enum Buttons {
+      internal enum Buttons {
         /// Later
-        static let later = L10n.tr("Localizable", "settings.commit.buttons.later")
+        internal static let later = L10n.tr("Localizable", "settings.commit.buttons.later")
         /// Reconnect
-        static let reconnect = L10n.tr("Localizable", "settings.commit.buttons.reconnect")
+        internal static let reconnect = L10n.tr("Localizable", "settings.commit.buttons.reconnect")
       }
 
-      enum Messages {
+      internal enum Messages {
         /// The VPN must reconnect for some changes to take effect.
-        static let mustDisconnect = L10n.tr("Localizable", "settings.commit.messages.must_disconnect")
+        internal static let mustDisconnect = L10n.tr("Localizable", "settings.commit.messages.must_disconnect")
         /// Reconnect the VPN to apply changes.
-        static let shouldReconnect = L10n.tr("Localizable", "settings.commit.messages.should_reconnect")
+        internal static let shouldReconnect = L10n.tr("Localizable", "settings.commit.messages.should_reconnect")
       }
     }
 
-    enum Connection {
+    internal enum Connection {
       /// CONNECTION
-      static let title = L10n.tr("Localizable", "settings.connection.title")
+      internal static let title = L10n.tr("Localizable", "settings.connection.title")
 
-      enum RemotePort {
+      internal enum RemotePort {
         /// Remote port
-        static let title = L10n.tr("Localizable", "settings.connection.remote_port.title")
+        internal static let title = L10n.tr("Localizable", "settings.connection.remote_port.title")
       }
 
-      enum SocketProtocol {
+      internal enum SocketProtocol {
         /// Socket
-        static let title = L10n.tr("Localizable", "settings.connection.socket_protocol.title")
+        internal static let title = L10n.tr("Localizable", "settings.connection.socket_protocol.title")
       }
 
-      enum VpnProtocol {
+      internal enum VpnProtocol {
         /// Protocol
-        static let title = L10n.tr("Localizable", "settings.connection.vpn_protocol.title")
+        internal static let title = L10n.tr("Localizable", "settings.connection.vpn_protocol.title")
       }
     }
 
-    enum ContentBlocker {
+    internal enum ContentBlocker {
       /// To enable or disable Content Blocker go to Settings > Safari > Content Blockers and toggle PIA VPN.
-      static let footer = L10n.tr("Localizable", "settings.content_blocker.footer")
+      internal static let footer = L10n.tr("Localizable", "settings.content_blocker.footer")
       /// Safari Content Blocker
-      static let title = L10n.tr("Localizable", "settings.content_blocker.title")
+      internal static let title = L10n.tr("Localizable", "settings.content_blocker.title")
 
-      enum Refresh {
+      internal enum Refresh {
         /// Refresh block list
-        static let title = L10n.tr("Localizable", "settings.content_blocker.refresh.title")
+        internal static let title = L10n.tr("Localizable", "settings.content_blocker.refresh.title")
       }
 
-      enum State {
+      internal enum State {
         /// Current state
-        static let title = L10n.tr("Localizable", "settings.content_blocker.state.title")
+        internal static let title = L10n.tr("Localizable", "settings.content_blocker.state.title")
       }
     }
 
-    enum Encryption {
+    internal enum Encryption {
       /// ENCRYPTION
-      static let title = L10n.tr("Localizable", "settings.encryption.title")
+      internal static let title = L10n.tr("Localizable", "settings.encryption.title")
 
-      enum Cipher {
+      internal enum Cipher {
         /// Data encryption
-        static let title = L10n.tr("Localizable", "settings.encryption.cipher.title")
+        internal static let title = L10n.tr("Localizable", "settings.encryption.cipher.title")
       }
 
-      enum Digest {
+      internal enum Digest {
         /// Data authentication
-        static let title = L10n.tr("Localizable", "settings.encryption.digest.title")
+        internal static let title = L10n.tr("Localizable", "settings.encryption.digest.title")
       }
 
-      enum Handshake {
+      internal enum Handshake {
         /// Handshake
-        static let title = L10n.tr("Localizable", "settings.encryption.handshake.title")
+        internal static let title = L10n.tr("Localizable", "settings.encryption.handshake.title")
       }
     }
 
-    enum Reset {
+    internal enum Reset {
       /// This will reset all of the above settings to default.
-      static let footer = L10n.tr("Localizable", "settings.reset.footer")
+      internal static let footer = L10n.tr("Localizable", "settings.reset.footer")
       /// RESET
-      static let title = L10n.tr("Localizable", "settings.reset.title")
+      internal static let title = L10n.tr("Localizable", "settings.reset.title")
 
-      enum Defaults {
+      internal enum Defaults {
         /// Reset to default settings
-        static let title = L10n.tr("Localizable", "settings.reset.defaults.title")
+        internal static let title = L10n.tr("Localizable", "settings.reset.defaults.title")
 
-        enum Confirm {
+        internal enum Confirm {
           /// Reset
-          static let button = L10n.tr("Localizable", "settings.reset.defaults.confirm.button")
+          internal static let button = L10n.tr("Localizable", "settings.reset.defaults.confirm.button")
           /// This will bring the app back to default. You will lose all changes you have made.
-          static let message = L10n.tr("Localizable", "settings.reset.defaults.confirm.message")
+          internal static let message = L10n.tr("Localizable", "settings.reset.defaults.confirm.message")
           /// Reset settings
-          static let title = L10n.tr("Localizable", "settings.reset.defaults.confirm.title")
+          internal static let title = L10n.tr("Localizable", "settings.reset.defaults.confirm.title")
         }
       }
     }
   }
 
-  enum Shortcuts {
+  internal enum Shortcuts {
     /// Connect
-    static let connect = L10n.tr("Localizable", "shortcuts.connect")
+    internal static let connect = L10n.tr("Localizable", "shortcuts.connect")
     /// Disconnect
-    static let disconnect = L10n.tr("Localizable", "shortcuts.disconnect")
+    internal static let disconnect = L10n.tr("Localizable", "shortcuts.disconnect")
     /// Select a region
-    static let selectRegion = L10n.tr("Localizable", "shortcuts.select_region")
+    internal static let selectRegion = L10n.tr("Localizable", "shortcuts.select_region")
   }
 
-  enum VpnPermission {
+  internal enum VpnPermission {
     /// PIA
-    static let title = L10n.tr("Localizable", "vpn_permission.title")
+    internal static let title = L10n.tr("Localizable", "vpn_permission.title")
 
-    enum Body {
+    internal enum Body {
       /// We don’t monitor, filter or log any network activity.
-      static let footer = L10n.tr("Localizable", "vpn_permission.body.footer")
+      internal static let footer = L10n.tr("Localizable", "vpn_permission.body.footer")
       /// To proceed tap “%@”.
-      static func subtitle(_ p1: String) -> String {
+      internal static func subtitle(_ p1: String) -> String {
         return L10n.tr("Localizable", "vpn_permission.body.subtitle", p1)
       }
       /// PIA needs access to your VPN profiles to secure your traffic
-      static let title = L10n.tr("Localizable", "vpn_permission.body.title")
+      internal static let title = L10n.tr("Localizable", "vpn_permission.body.title")
     }
 
-    enum Disallow {
+    internal enum Disallow {
       /// Contact
-      static let contact = L10n.tr("Localizable", "vpn_permission.disallow.contact")
+      internal static let contact = L10n.tr("Localizable", "vpn_permission.disallow.contact")
 
-      enum Message {
+      internal enum Message {
         /// We need this permission for the application to function.
-        static let basic = L10n.tr("Localizable", "vpn_permission.disallow.message.basic")
+        internal static let basic = L10n.tr("Localizable", "vpn_permission.disallow.message.basic")
         /// You can also get in touch with customer support if you need assistance.
-        static let support = L10n.tr("Localizable", "vpn_permission.disallow.message.support")
+        internal static let support = L10n.tr("Localizable", "vpn_permission.disallow.message.support")
       }
     }
   }
 
-  enum Walkthrough {
+  internal enum Walkthrough {
 
-    enum Action {
+    internal enum Action {
       /// DONE
-      static let done = L10n.tr("Localizable", "walkthrough.action.done")
+      internal static let done = L10n.tr("Localizable", "walkthrough.action.done")
       /// NEXT
-      static let next = L10n.tr("Localizable", "walkthrough.action.next")
+      internal static let next = L10n.tr("Localizable", "walkthrough.action.next")
       /// SKIP
-      static let skip = L10n.tr("Localizable", "walkthrough.action.skip")
+      internal static let skip = L10n.tr("Localizable", "walkthrough.action.skip")
     }
 
-    enum Page {
+    internal enum Page {
 
-      enum _1 {
+      internal enum _1 {
         /// Protect yourself on up to 5 devices at a time.
-        static let description = L10n.tr("Localizable", "walkthrough.page.1.description")
+        internal static let description = L10n.tr("Localizable", "walkthrough.page.1.description")
         /// Support 5 devices at once
-        static let title = L10n.tr("Localizable", "walkthrough.page.1.title")
+        internal static let title = L10n.tr("Localizable", "walkthrough.page.1.title")
       }
 
-      enum _2 {
+      internal enum _2 {
         /// With servers around the globe, you are always under protection.
-        static let description = L10n.tr("Localizable", "walkthrough.page.2.description")
+        internal static let description = L10n.tr("Localizable", "walkthrough.page.2.description")
         /// Connect to any region easily
-        static let title = L10n.tr("Localizable", "walkthrough.page.2.title")
+        internal static let title = L10n.tr("Localizable", "walkthrough.page.2.title")
       }
 
-      enum _3 {
+      internal enum _3 {
         /// Enabling our Content Blocker prevents ads from showing in Safari.
-        static let description = L10n.tr("Localizable", "walkthrough.page.3.description")
+        internal static let description = L10n.tr("Localizable", "walkthrough.page.3.description")
         /// Protect yourself from ads
-        static let title = L10n.tr("Localizable", "walkthrough.page.3.title")
+        internal static let title = L10n.tr("Localizable", "walkthrough.page.3.title")
       }
     }
   }

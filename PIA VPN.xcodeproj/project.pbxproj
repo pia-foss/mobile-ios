@@ -23,6 +23,7 @@
 		0E3A352D1FD9CDC5000B0F99 /* Theme+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3A352B1FD9CDC5000B0F99 /* Theme+App.swift */; };
 		0E3A35351FD9EBDA000B0F99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3A35341FD9EBDA000B0F99 /* AppDelegate.swift */; };
 		0E3A35361FD9EBDA000B0F99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3A35341FD9EBDA000B0F99 /* AppDelegate.swift */; };
+		0E3C9A5E20EC004E00B199F9 /* custom.servers in Resources */ = {isa = PBXBuildFile; fileRef = 0E3C9A5D20EC004D00B199F9 /* custom.servers */; };
 		0E435DA11E748C3900101226 /* PIA VPN Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0E67FC221E3F802D00EF9929 /* PIA VPN Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0E441E262055AEDF007528D5 /* ThemeStrategy+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E441E252055AEDF007528D5 /* ThemeStrategy+App.swift */; };
 		0E441E272055AEDF007528D5 /* ThemeStrategy+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E441E252055AEDF007528D5 /* ThemeStrategy+App.swift */; };
@@ -30,7 +31,6 @@
 		0E441E322055B8A7007528D5 /* Theme+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E441E302055B8A7007528D5 /* Theme+Extension.swift */; };
 		0E492C671FE60907007F23DF /* Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E492C661FE60907007F23DF /* Flags.swift */; };
 		0E492C681FE60907007F23DF /* Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E492C661FE60907007F23DF /* Flags.swift */; };
-		0E51DF201E4BED4000024999 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E51DF101E4BED4000024999 /* Info.plist */; };
 		0E53A83B1FE5A156000C2A18 /* AccountProvider+Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E53A83A1FE5A156000C2A18 /* AccountProvider+Refresh.swift */; };
 		0E53A83C1FE5A156000C2A18 /* AccountProvider+Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E53A83A1FE5A156000C2A18 /* AccountProvider+Refresh.swift */; };
 		0E60FF931F4F4FAA001D30DB /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E51DF141E4BED4000024999 /* PacketTunnelProvider.swift */; };
@@ -119,7 +119,6 @@
 		0EE2205F1F4EF307002805AE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E9785851DA82FF000711A24 /* StoreKit.framework */; };
 		0EE220631F4EF307002805AE /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ECB081F1D61D2A900043852 /* Launch Screen.storyboard */; };
 		0EE2206A1F4EF307002805AE /* Components.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E0786DD1EFA7EAE00F77466 /* Components.plist */; };
-		0EE2206F1F4EF307002805AE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E51DF101E4BED4000024999 /* Info.plist */; };
 		0EE220701F4EF307002805AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 291C6391183EBC210039EC03 /* Main.storyboard */; };
 		0EE220741F4EF307002805AE /* PIA VPN Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0E67FC221E3F802D00EF9929 /* PIA VPN Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0EE2D7831CB40A98000DEC4D /* PIA_VPNUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE2D7821CB40A98000DEC4D /* PIA_VPNUITests.swift */; };
@@ -274,6 +273,7 @@
 		0E3A35271FD9A960000B0F99 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		0E3A352B1FD9CDC5000B0F99 /* Theme+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+App.swift"; sourceTree = "<group>"; };
 		0E3A35341FD9EBDA000B0F99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0E3C9A5D20EC004D00B199F9 /* custom.servers */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = custom.servers; sourceTree = "<group>"; };
 		0E441E252055AEDF007528D5 /* ThemeStrategy+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ThemeStrategy+App.swift"; sourceTree = "<group>"; };
 		0E441E302055B8A7007528D5 /* Theme+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Extension.swift"; sourceTree = "<group>"; };
 		0E492C661FE60907007F23DF /* Flags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flags.swift; sourceTree = "<group>"; };
@@ -638,6 +638,7 @@
 			children = (
 				0ED984161FC48C5100542EE6 /* Fonts */,
 				0E0786DD1EFA7EAE00F77466 /* Components.plist */,
+				0E3C9A5D20EC004D00B199F9 /* custom.servers */,
 				0ED66BCF20A9918000333B35 /* staging.endpoint */,
 			);
 			path = Resources;
@@ -1045,11 +1046,11 @@
 				0EE220631F4EF307002805AE /* Launch Screen.storyboard in Resources */,
 				0ED984201FC48C6500542EE6 /* Roboto-Medium.ttf in Resources */,
 				0ED984211FC48C6500542EE6 /* Roboto-Regular.ttf in Resources */,
+				0E3C9A5E20EC004E00B199F9 /* custom.servers in Resources */,
 				0EFDC1D51FE4607D007C0B9B /* Images.xcassets in Resources */,
 				0ED9841F1FC48C6500542EE6 /* Roboto-Light.ttf in Resources */,
 				0EE2206A1F4EF307002805AE /* Components.plist in Resources */,
 				0ED984221FC48C6500542EE6 /* Roboto-Thin.ttf in Resources */,
-				0EE2206F1F4EF307002805AE /* Info.plist in Resources */,
 				0EE220701F4EF307002805AE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1088,7 +1089,6 @@
 				0E0786DE1EFA7EAE00F77466 /* Components.plist in Resources */,
 				0ED9841C1FC48C6000542EE6 /* Roboto-Light.ttf in Resources */,
 				0ED9841E1FC48C6000542EE6 /* Roboto-Thin.ttf in Resources */,
-				0E51DF201E4BED4000024999 /* Info.plist in Resources */,
 				0E7EC0302093265C0029811E /* InfoPlist.strings in Resources */,
 				291C6393183EBC210039EC03 /* Main.storyboard in Resources */,
 			);

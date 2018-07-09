@@ -58,6 +58,11 @@ class Bootstrapper {
         if let stagingUrl = AppConstants.Web.stagingEndpointURL {
             Client.configuration.setBaseURL(stagingUrl.absoluteString, for: .staging)
         }
+        if Client.configuration.isDevelopment, let customServers = AppConstants.Servers.customServers {
+            for server in customServers {
+                Client.configuration.addCustomServer(server)
+            }
+        }
 
         Client.configuration.enablesConnectivityUpdates = true
         Client.configuration.enablesServerUpdates = true
@@ -91,26 +96,36 @@ class Bootstrapper {
             Client.useMockAccountProvider(AppConfiguration.Mock.accountProvider)
         }
         
-        // as per App Store guidelines
+        Client.bootstrap()
+        
+        // Preferences
+
         let pref = Client.preferences.editable()
-        let tunnelConfiguration = pref.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? PIATunnelProvider.Configuration
-        var tunnelConfigurationBuilder = tunnelConfiguration?.builder()
+        
+        // as per App Store guidelines
         if !Flags.shared.enablesMACESetting {
             pref.mace = false
         }
-        if !Flags.shared.enablesRemotePortSetting {
-            pref.preferredPort = nil
+        
+        // automatic
+        let tunnelConfiguration = pref.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? PIATunnelProvider.Configuration
+        if tunnelConfiguration?.endpointProtocols.isEmpty ?? true {
+            var tunnelConfigurationBuilder = tunnelConfiguration?.builder()
+            let vpnPorts = Client.providers.serverProvider.currentServersConfiguration.vpnPorts
+            var protos: [PIATunnelProvider.EndpointProtocol] = []
+            for port in vpnPorts.udp {
+                protos.append(PIATunnelProvider.EndpointProtocol(.udp, port, .pia))
+            }
+//            for port in vpnPorts.tcp {
+//                protos.append(PIATunnelProvider.EndpointProtocol(.tcp, port, .pia))
+//            }
+            tunnelConfigurationBuilder?.endpointProtocols = protos
+            if let newConfiguration = tunnelConfigurationBuilder?.build() {
+                pref.setVPNCustomConfiguration(newConfiguration, for: PIATunnelProfile.vpnType)
+            }
         }
-        if !Flags.shared.enablesSocketSetting {
-            pref.preferredPort = nil
-            tunnelConfigurationBuilder?.socketType = .udp
-        }
-        if let newConfiguration = tunnelConfigurationBuilder?.build() {
-            pref.setVPNCustomConfiguration(newConfiguration, for: PIATunnelProfile.vpnType)
-        }
+        
         pref.commit()
-
-        Client.bootstrap()
 
         // Business objects
         
