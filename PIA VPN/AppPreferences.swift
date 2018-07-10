@@ -8,6 +8,7 @@
 
 import Foundation
 import PIALibrary
+import PIATunnel
 import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
@@ -25,6 +26,8 @@ class AppPreferences {
         static let themeCode = "Theme" // reuse 2.2 key
 
         static let lastVPNConnectionStatus = "LastVPNConnectionStatus"
+
+        static let piaSocketType = "PIASocketType"
     }
 
     static let shared = AppPreferences()
@@ -81,6 +84,23 @@ class AppPreferences {
             defaults.set(newValue.rawValue, forKey: Entries.lastVPNConnectionStatus)
         }
     }
+    
+    // nil = automatic
+    var piaSocketType: PIATunnelProvider.SocketType? {
+        get {
+            guard let rawValue = defaults.string(forKey: Entries.piaSocketType) else {
+                return nil
+            }
+            return PIATunnelProvider.SocketType(rawValue: rawValue)
+        }
+        set {
+            if let rawValue = newValue?.rawValue {
+                defaults.set(rawValue, forKey: Entries.piaSocketType)
+            } else {
+                defaults.removeObject(forKey: Entries.piaSocketType)
+            }
+        }
+    }
 
     private init() {
         guard let defaults = UserDefaults(suiteName: AppConstants.appGroup) else {
@@ -124,8 +144,8 @@ class AppPreferences {
         // otherwise, app version < 2.1 (local defaults/keychain)
         
         // it used to be here in app version <= 2.0
-        let oldKeychain = Keychain()
-        let newKeychain = Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
+        let oldKeychain = PIALibrary.Keychain()
+        let newKeychain = PIALibrary.Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
         
         // migrate credentials from local to shared keychain
         if let legacyPassword = try? oldKeychain.password(for: loggedUsername) {
