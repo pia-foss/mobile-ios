@@ -24,8 +24,10 @@ private extension String {
 }
 
 class SettingsViewController: AutolayoutViewController {
+    fileprivate static let AUTOMATIC_SOCKET = "automatic"
+
     fileprivate static let AUTOMATIC_PORT: UInt16 = 0
-    
+
     private enum Section: Int {
         case connection
 
@@ -150,6 +152,8 @@ class SettingsViewController: AutolayoutViewController {
     
     private var pendingPreferences: Client.Preferences.Editable!
     
+    private var pendingOpenVPNSocketType: PIATunnelProvider.SocketType?
+    
     private var pendingOpenVPNConfiguration: PIATunnelProvider.ConfigurationBuilder!
 
     private var pendingVPNAction: VPNAction?
@@ -178,6 +182,7 @@ class SettingsViewController: AutolayoutViewController {
         guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? PIATunnelProvider.Configuration else {
             fatalError("No default VPN custom configuration provided for PIA protocol")
         }
+        pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
         pendingOpenVPNConfiguration = currentOpenVPNConfiguration.builder()
 
         if #available(iOS 11, *) {
@@ -315,6 +320,7 @@ class SettingsViewController: AutolayoutViewController {
         guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? PIATunnelProvider.Configuration else {
             fatalError("No default VPN custom configuration provided for PIA protocol")
         }
+        pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
         pendingOpenVPNConfiguration = currentOpenVPNConfiguration.builder()
 
         transitionTheme(to: .light)
@@ -335,7 +341,7 @@ class SettingsViewController: AutolayoutViewController {
         }
         
         guard let action = pendingVPNAction else {
-            pendingPreferences.commit()
+            commitPreferences()
             completionHandler()
             return
         }
@@ -360,7 +366,7 @@ class SettingsViewController: AutolayoutViewController {
 
         // disconnected, commit and execute
         guard !isDisconnected else {
-            pendingPreferences.commit()
+            commitPreferences()
             completionHandlerAfterVPNAction(false)
             return
         }
@@ -374,7 +380,7 @@ class SettingsViewController: AutolayoutViewController {
 
             // reconnect -> reconnect VPN and close
             alert.addDefaultAction(L10n.Settings.Commit.Buttons.reconnect) {
-                self.pendingPreferences.commit()
+                self.commitPreferences()
                 completionHandlerAfterVPNAction(true)
             }
 
@@ -388,8 +394,8 @@ class SettingsViewController: AutolayoutViewController {
 
         // should reconnect
         guard !pendingPreferences.suggestsVPNReconnection() else {
-            pendingPreferences.commit()
-            
+            commitPreferences()
+
             let alert = Macros.alert(
                 title,
                 L10n.Settings.Commit.Messages.shouldReconnect
@@ -409,8 +415,13 @@ class SettingsViewController: AutolayoutViewController {
         }
         
         // action doesn't affect VPN connection, commit and execute
-        pendingPreferences.commit()
+        commitPreferences()
         completionHandlerAfterVPNAction(false)
+    }
+    
+    private func commitPreferences() {
+        AppPreferences.shared.piaSocketType = pendingOpenVPNSocketType
+        pendingPreferences.commit()
     }
     
     // MARK: Unwind segues
@@ -633,10 +644,14 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         case .vpnSocket:
             cell.textLabel?.text = L10n.Settings.Connection.SocketProtocol.title
-            cell.detailTextLabel?.text = pendingOpenVPNConfiguration.currentSocketType.description
+            cell.detailTextLabel?.text = pendingOpenVPNSocketType?.description ?? L10n.Global.automatic
             
         case .vpnPort:
             cell.textLabel?.text = L10n.Settings.Connection.RemotePort.title
+            guard pendingOpenVPNSocketType != nil else {
+                cell.detailTextLabel?.text = L10n.Global.automatic
+                break
+            }
             cell.detailTextLabel?.text = pendingOpenVPNConfiguration.currentPort?.description ?? L10n.Global.automatic
 
         case .encryptionCipher:
@@ -753,11 +768,15 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             ]
             controller = OptionsViewController()
             controller?.options = options.map { $0.rawValue }
-            controller?.selectedOption = pendingOpenVPNConfiguration.currentSocketType.rawValue
+            controller?.options.insert(SettingsViewController.AUTOMATIC_SOCKET, at: 0)
+            controller?.selectedOption = pendingOpenVPNSocketType?.rawValue ?? SettingsViewController.AUTOMATIC_SOCKET
 
         case .vpnPort:
+            guard let socketType = pendingOpenVPNSocketType else {
+                break
+            }
             let availablePorts = Client.providers.serverProvider.currentServersConfiguration.vpnPorts
-            var options = (pendingOpenVPNConfiguration.currentSocketType == .udp) ? availablePorts.udp : availablePorts.tcp
+            var options = (socketType == .udp) ? availablePorts.udp : availablePorts.tcp
             options.insert(SettingsViewController.AUTOMATIC_PORT, at: 0)
             controller = OptionsViewController()
             controller?.options = options
@@ -889,7 +908,11 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             
         case .vpnSocket:
             let rawSocketType = option as? String
-            cell.textLabel?.text = rawSocketType?.description
+            if rawSocketType != SettingsViewController.AUTOMATIC_SOCKET {
+                cell.textLabel?.text = rawSocketType?.description
+            } else {
+                cell.textLabel?.text = L10n.Global.automatic
+            }
             
         case .vpnPort:
             if let port = option as? UInt16, (port != SettingsViewController.AUTOMATIC_PORT) {
@@ -934,32 +957,51 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             
         case .vpnSocket:
             let rawSocketType = option as! String
-            let socketType = PIATunnelProvider.SocketType(rawValue: rawSocketType)!
-            let ports = (socketType == .udp) ? serversCfg.vpnPorts.udp : serversCfg.vpnPorts.tcp
-            let currentPort = pendingOpenVPNConfiguration.currentPort
+            let optSocketType = PIATunnelProvider.SocketType(rawValue: rawSocketType)
 
             let currentProtocols = pendingOpenVPNConfiguration.endpointProtocols
             var newProtocols: [PIATunnelProvider.EndpointProtocol] = []
-            if currentProtocols.count == 1, let currentPort = currentPort, ports.contains(currentPort) {
-                newProtocols.append(PIATunnelProvider.EndpointProtocol(socketType, currentPort, .pia))
+
+            if let socketType = optSocketType {
+                let ports = (socketType == .udp) ? serversCfg.vpnPorts.udp : serversCfg.vpnPorts.tcp
+                if currentProtocols.count == 1, let currentPort = pendingOpenVPNConfiguration?.currentPort, ports.contains(currentPort) {
+                    newProtocols.append(PIATunnelProvider.EndpointProtocol(socketType, currentPort, .pia))
+                } else {
+                    for port in ports {
+                        newProtocols.append(PIATunnelProvider.EndpointProtocol(socketType, port, .pia))
+                    }
+                }
             } else {
-                for port in ports {
-                    newProtocols.append(PIATunnelProvider.EndpointProtocol(socketType, port, .pia))
+                for port in serversCfg.vpnPorts.udp {
+                    newProtocols.append(PIATunnelProvider.EndpointProtocol(.udp, port, .pia))
+                }
+                for port in serversCfg.vpnPorts.tcp {
+                    newProtocols.append(PIATunnelProvider.EndpointProtocol(.tcp, port, .pia))
                 }
             }
+            pendingOpenVPNSocketType = optSocketType
             pendingOpenVPNConfiguration.endpointProtocols = newProtocols
 
         case .vpnPort:
             let port = option as! UInt16
-            let currentSocketType = pendingOpenVPNConfiguration.currentSocketType
 
             var newProtocols: [PIATunnelProvider.EndpointProtocol] = []
             if (port != SettingsViewController.AUTOMATIC_PORT) {
-                newProtocols.append(PIATunnelProvider.EndpointProtocol(currentSocketType, port, .pia))
+                // FIXME: prevent UI
+                guard let socketType = pendingOpenVPNSocketType else {
+                    fatalError("Port cannot be set manually when socket type is automatic")
+                }
+                newProtocols.append(PIATunnelProvider.EndpointProtocol(socketType, port, .pia))
             } else {
-                let ports = (currentSocketType == .udp) ? serversCfg.vpnPorts.udp : serversCfg.vpnPorts.tcp
-                for port in ports {
-                    newProtocols.append(PIATunnelProvider.EndpointProtocol(currentSocketType, port, .pia))
+                if (pendingOpenVPNSocketType == nil) || (pendingOpenVPNSocketType == .udp) {
+                    for port in serversCfg.vpnPorts.udp {
+                        newProtocols.append(PIATunnelProvider.EndpointProtocol(.udp, port, .pia))
+                    }
+                }
+                if (pendingOpenVPNSocketType == nil) || (pendingOpenVPNSocketType == .tcp) {
+                    for port in serversCfg.vpnPorts.tcp {
+                        newProtocols.append(PIATunnelProvider.EndpointProtocol(.tcp, port, .pia))
+                    }
                 }
             }
             pendingOpenVPNConfiguration.endpointProtocols = newProtocols
@@ -990,13 +1032,13 @@ extension SettingsViewController: OptionsViewControllerDelegate {
 }
 
 private extension PIATunnelProvider.ConfigurationBuilder {
-    var currentSocketType: PIATunnelProvider.SocketType {
-        guard let currentType = endpointProtocols.first?.socketType else {
-            fatalError("Zero current protocols")
-        }
-        return currentType
-    }
-    
+//    var currentSocketType: PIATunnelProvider.SocketType {
+//        guard let currentType = endpointProtocols.first?.socketType else {
+//            fatalError("Zero current protocols")
+//        }
+//        return currentType
+//    }
+
     var currentPort: UInt16? {
         guard endpointProtocols.count == 1 else {
             return nil
