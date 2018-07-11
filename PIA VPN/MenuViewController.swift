@@ -105,6 +105,8 @@ class MenuViewController: AutolayoutViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        modalPresentationCapturesStatusBarAppearance = true
 
         imvAvatar.image = Asset.imageRobot.image
         labelVersion.text = Macros.localizedVersionFullString()
