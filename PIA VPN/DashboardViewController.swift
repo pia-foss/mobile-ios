@@ -84,7 +84,7 @@ class DashboardViewController: AutolayoutViewController {
         toggleConnection.addTarget(self, action: #selector(toggleMoved(_:)), for: .valueChanged)
         buttonChangeRegion.accessibilityIdentifier = "uitests.main.pick_region";
         
-        SideMenuManager.default.menuLeftNavigationController = storyboard!.instantiateViewController(withIdentifier: "SideMenuNavigationController") as? UISideMenuNavigationController
+        SideMenuManager.default.menuLeftNavigationController = StoryboardScene.Main.sideMenuNavigationController.instantiate()
         SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
         SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
 
