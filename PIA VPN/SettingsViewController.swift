@@ -972,12 +972,13 @@ extension SettingsViewController: OptionsViewControllerDelegate {
                     }
                 }
             } else {
-                for port in serversCfg.vpnPorts.udp {
-                    newProtocols.append(PIATunnelProvider.EndpointProtocol(.udp, port, .pia))
-                }
-                for port in serversCfg.vpnPorts.tcp {
-                    newProtocols.append(PIATunnelProvider.EndpointProtocol(.tcp, port, .pia))
-                }
+//                for port in serversCfg.vpnPorts.udp {
+//                    newProtocols.append(PIATunnelProvider.EndpointProtocol(.udp, port, .pia))
+//                }
+//                for port in serversCfg.vpnPorts.tcp {
+//                    newProtocols.append(PIATunnelProvider.EndpointProtocol(.tcp, port, .pia))
+//                }
+                newProtocols = AppConfiguration.VPN.piaAutomaticProtocols
             }
             pendingOpenVPNSocketType = optSocketType
             pendingOpenVPNConfiguration.endpointProtocols = newProtocols
@@ -987,18 +988,20 @@ extension SettingsViewController: OptionsViewControllerDelegate {
 
             var newProtocols: [PIATunnelProvider.EndpointProtocol] = []
             if (port != SettingsViewController.AUTOMATIC_PORT) {
-                // FIXME: prevent UI
                 guard let socketType = pendingOpenVPNSocketType else {
                     fatalError("Port cannot be set manually when socket type is automatic")
                 }
                 newProtocols.append(PIATunnelProvider.EndpointProtocol(socketType, port, .pia))
             } else {
-                if (pendingOpenVPNSocketType == nil) || (pendingOpenVPNSocketType == .udp) {
+                if (pendingOpenVPNSocketType == nil) {
+                    newProtocols = AppConfiguration.VPN.piaAutomaticProtocols
+                }
+                else if (pendingOpenVPNSocketType == .udp) {
                     for port in serversCfg.vpnPorts.udp {
                         newProtocols.append(PIATunnelProvider.EndpointProtocol(.udp, port, .pia))
                     }
                 }
-                if (pendingOpenVPNSocketType == nil) || (pendingOpenVPNSocketType == .tcp) {
+                else if (pendingOpenVPNSocketType == .tcp) {
                     for port in serversCfg.vpnPorts.tcp {
                         newProtocols.append(PIATunnelProvider.EndpointProtocol(.tcp, port, .pia))
                     }
