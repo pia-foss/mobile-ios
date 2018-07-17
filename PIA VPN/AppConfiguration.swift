@@ -57,11 +57,18 @@ struct AppConfiguration {
             builder.cipher = .aes128cbc
             builder.digest = .sha1
             builder.handshake = .rsa2048
+            builder.endpointProtocols = []
             builder.mtu = 1400
             builder.shouldDebug = true
             builder.debugLogKey = "LastVPNLog"
             return builder
         }()
+        
+        static let piaAutomaticProtocols: [PIATunnelProvider.EndpointProtocol] = [
+//            let vpnPorts = Client.providers.serverProvider.currentServersConfiguration.vpnPorts
+            PIATunnelProvider.EndpointProtocol(.udp, 8080, .pia),
+            PIATunnelProvider.EndpointProtocol(.tcp, 443, .pia)
+        ]
 
         private static let piaCustomRenegotiation: Renegotiation = .qa
         
