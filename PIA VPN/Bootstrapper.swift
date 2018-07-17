@@ -110,16 +110,10 @@ class Bootstrapper {
         // automatic
         let tunnelConfiguration = pref.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? PIATunnelProvider.Configuration
         if tunnelConfiguration?.endpointProtocols.isEmpty ?? true {
+            AppPreferences.shared.piaSocketType = nil
+            
             var tunnelConfigurationBuilder = tunnelConfiguration?.builder()
-            let vpnPorts = Client.providers.serverProvider.currentServersConfiguration.vpnPorts
-            var protos: [PIATunnelProvider.EndpointProtocol] = []
-            for port in vpnPorts.udp {
-                protos.append(PIATunnelProvider.EndpointProtocol(.udp, port, .pia))
-            }
-//            for port in vpnPorts.tcp {
-//                protos.append(PIATunnelProvider.EndpointProtocol(.tcp, port, .pia))
-//            }
-            tunnelConfigurationBuilder?.endpointProtocols = protos
+            tunnelConfigurationBuilder?.endpointProtocols = AppConfiguration.VPN.piaAutomaticProtocols
             if let newConfiguration = tunnelConfigurationBuilder?.build() {
                 pref.setVPNCustomConfiguration(newConfiguration, for: PIATunnelProfile.vpnType)
             }

@@ -3,6 +3,7 @@
 // swiftlint:disable sorted_imports
 import Foundation
 import UIKit
+import SideMenu
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
@@ -57,6 +58,8 @@ internal enum StoryboardScene {
     internal static let storyboardName = "Main"
 
     internal static let initialScene = InitialSceneType<UINavigationController>(storyboard: Main.self)
+
+    internal static let sideMenuNavigationController = SceneType<SideMenu.UISideMenuNavigationController>(storyboard: Main.self, identifier: "SideMenuNavigationController")
 
     internal static let vpnPermissionViewController = SceneType<PIA_VPN.VPNPermissionViewController>(storyboard: Main.self, identifier: "VPNPermissionViewController")
   }

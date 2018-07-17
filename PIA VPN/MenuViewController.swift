@@ -105,6 +105,8 @@ class MenuViewController: AutolayoutViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        modalPresentationCapturesStatusBarAppearance = true
 
         imvAvatar.image = Asset.imageRobot.image
         labelVersion.text = Macros.localizedVersionFullString()
@@ -385,8 +387,8 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
         } else {
             let sectionItems = allItems[indexPath.section - 1]
             let item = sectionItems[indexPath.row]
+            tableView.deselectRow(at: indexPath, animated: true)
             guard (item != .logout) else {
-                tableView.deselectRow(at: indexPath, animated: true)
                 logOut()
                 return
             }
