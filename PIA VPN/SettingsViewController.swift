@@ -791,6 +791,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 break
             }
             let options: [PIATunnelProvider.Cipher] = [
+                .aes128gcm,
+                .aes256gcm,
                 .aes128cbc,
                 .aes256cbc
             ]
