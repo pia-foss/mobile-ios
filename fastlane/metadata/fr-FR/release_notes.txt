@@ -1,3 +1,4 @@
+- Fixed potential logout on upgrade.
 - Added "Automatic" OpenVPN socket type.
 - Mitigated an iOS 12 bug affecting OpenVPN UDP.
 - Optimized download speed.
