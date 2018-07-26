@@ -10,6 +10,6 @@ app_identifier "com.privateinternetaccess.ios.PIA-VPN" # The bundle identifier o
 
 skip_binary_upload true
 skip_metadata false
-skip_screenshots false
+skip_screenshots true
 phased_release true
 #build_number (pick deterministically from lane)
