@@ -132,7 +132,7 @@ extension Client {
                 var allConfigurations: [String: VPNCustomConfiguration] = [:]
                 for (vpnType, map) in allMaps {
                     let profile = configuration.profile(forVPNType: vpnType)
-                    guard let configuration = profile?.parsedCustomConfiguration(from: map) else {
+                    guard let configuration = profile?.parsedCustomConfiguration(from: map) ?? defaults.vpnCustomConfiguration(for: vpnType) else {
                         continue
                     }
                     allConfigurations[vpnType] = configuration
