@@ -1,3 +1,7 @@
+Build 9286:
+
+- Fixed potential logout on upgrade.
+
 Build 9275:
 
 - Added "Automatic" OpenVPN socket type.

@@ -57,7 +57,7 @@ struct AppConfiguration {
             builder.cipher = .aes128cbc
             builder.digest = .sha1
             builder.handshake = .rsa2048
-            builder.endpointProtocols = []
+            builder.endpointProtocols = piaAutomaticProtocols
             builder.mtu = 1400
             builder.shouldDebug = true
             builder.debugLogKey = "LastVPNLog"
