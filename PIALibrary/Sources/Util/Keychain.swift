@@ -92,7 +92,7 @@ public class Keychain {
         setScope(query: &query)
         query[kSecClass as String] = kSecClassGenericPassword
         query[kSecAttrAccount as String] = username
-        query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
+        //query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         query[kSecReturnData as String] = true
         
