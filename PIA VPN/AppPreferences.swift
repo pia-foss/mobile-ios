@@ -36,6 +36,8 @@ class AppPreferences {
     
     private let defaults: UserDefaults
 
+    private var isTransitioningTheme = false
+    
     var wasLaunched: Bool {
         get {
             return defaults.bool(forKey: Entries.launched)
@@ -170,7 +172,34 @@ class AppPreferences {
     }
 
     func reset() {
+        piaSocketType = nil
+        transitionTheme(to: .light)
     }
     
 //    + (void)eraseForTesting;
+
+    func transitionTheme(to code: ThemeCode) {
+        guard !isTransitioningTheme else {
+            return
+        }
+        guard (code != AppPreferences.shared.currentThemeCode) else {
+            return
+        }
+        
+        AppPreferences.shared.currentThemeCode = code
+        guard let window = UIApplication.shared.windows.first else {
+            fatalError("No window?")
+        }
+        isTransitioningTheme = true
+        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
+            window.alpha = 0.0
+        }, completion: { (success) in
+            code.apply(theme: Theme.current, reload: true)
+            
+            UIView.animate(withDuration: AppConfiguration.Animations.duration) {
+                window.alpha = 1.0
+                self.isTransitioningTheme = false
+            }
+        })
+    }
 }
