@@ -327,6 +327,7 @@ class SettingsViewController: AutolayoutViewController {
         pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
         pendingOpenVPNConfiguration = currentOpenVPNConfiguration.builder()
 
+        AppPreferences.shared.piaSocketType = nil
         transitionTheme(to: .light)
 
         redisplaySettings()
