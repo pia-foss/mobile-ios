@@ -107,18 +107,6 @@ class Bootstrapper {
             pref.mace = false
         }
         
-        // automatic
-        let tunnelConfiguration = pref.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? PIATunnelProvider.Configuration
-        if tunnelConfiguration?.endpointProtocols.isEmpty ?? true {
-            AppPreferences.shared.piaSocketType = nil
-            
-            var tunnelConfigurationBuilder = tunnelConfiguration?.builder()
-            tunnelConfigurationBuilder?.endpointProtocols = AppConfiguration.VPN.piaAutomaticProtocols
-            if let newConfiguration = tunnelConfigurationBuilder?.build() {
-                pref.setVPNCustomConfiguration(newConfiguration, for: PIATunnelProfile.vpnType)
-            }
-        }
-        
         pref.commit()
 
         // Business objects
