@@ -668,6 +668,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             
         case .encryptionDigest:
             cell.textLabel?.text = L10n.Settings.Encryption.Digest.title
+            guard !pendingOpenVPNConfiguration.isEncryptionGCM() else {
+                cell.detailTextLabel?.text = "GCM"
+                break
+            }
             cell.detailTextLabel?.text = pendingOpenVPNConfiguration.digest.description
             if !Flags.shared.enablesEncryptionSettings {
                 cell.accessoryType = .none
@@ -791,6 +795,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 break
             }
             let options: [PIATunnelProvider.Cipher] = [
+                .aes128gcm,
+                .aes256gcm,
                 .aes128cbc,
                 .aes256cbc
             ]
@@ -800,6 +806,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         case .encryptionDigest:
             guard Flags.shared.enablesEncryptionSettings else {
+                break
+            }
+            guard !pendingOpenVPNConfiguration.isEncryptionGCM() else {
                 break
             }
             let options: [PIATunnelProvider.Digest] = [
@@ -1054,5 +1063,9 @@ private extension PIATunnelProvider.ConfigurationBuilder {
             fatalError("Zero current protocols")
         }
         return port
+    }
+
+    func isEncryptionGCM() -> Bool {
+        return (cipher == .aes128gcm) || (cipher == .aes256gcm)
     }
 }
