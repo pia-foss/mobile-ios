@@ -1,14 +1,2 @@
-Build 9286:
-
-- Fixed potential logout on upgrade.
-
-Build 9275:
-
-- Added "Automatic" OpenVPN socket type.
-
-Build 9262:
-
-- Mitigated on iOS 12 bug affecting OpenVPN UDP (reported to Apple).
-- Optimized download speed.
-- IPv4 address is now used in case of DNS failure.
-- Automatic port now tries all available ports in sequence.
+- Added GCM encryption ciphers to OpenVPN.
+- Added ECC-256k1 handshake certificate to OpenVPN.
