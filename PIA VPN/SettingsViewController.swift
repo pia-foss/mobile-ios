@@ -142,8 +142,6 @@ class SettingsViewController: AutolayoutViewController {
 
     private var isContentBlockerEnabled = false
 
-    private var isTransitioningTheme = false
-
 //    private lazy var buttonConfirm = UIBarButtonItem(
 //        barButtonSystemItem: .save,
 //        target: self,
@@ -233,7 +231,7 @@ class SettingsViewController: AutolayoutViewController {
 
     // XXX: no need to bufferize app preferences
     @objc private func toggleDarkMode(_ sender: UISwitch) {
-        transitionTheme(to: sender.isOn ? .dark : .light)
+        AppPreferences.shared.transitionTheme(to: sender.isOn ? .dark : .light)
     }
     
     @objc private func showContentBlockerTutorial() {
@@ -327,7 +325,7 @@ class SettingsViewController: AutolayoutViewController {
         pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
         pendingOpenVPNConfiguration = currentOpenVPNConfiguration.builder()
 
-        transitionTheme(to: .light)
+        AppPreferences.shared.reset()
 
         redisplaySettings()
         reportUpdatedPreferences()
@@ -518,31 +516,6 @@ class SettingsViewController: AutolayoutViewController {
     
     private func reportUpdatedPreferences() {
         pendingVPNAction = pendingPreferences.requiredVPNAction()
-    }
-    
-    private func transitionTheme(to code: ThemeCode) {
-        guard !isTransitioningTheme else {
-            return
-        }
-        guard (code != AppPreferences.shared.currentThemeCode) else {
-            return
-        }
-
-        AppPreferences.shared.currentThemeCode = code
-        guard let window = UIApplication.shared.windows.first else {
-            fatalError("No window?")
-        }
-        isTransitioningTheme = true
-        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
-            window.alpha = 0.0
-        }, completion: { (success) in
-            code.apply(theme: Theme.current, reload: true)
-            
-            UIView.animate(withDuration: AppConfiguration.Animations.duration) {
-                window.alpha = 1.0
-                self.isTransitioningTheme = false
-            }
-        })
     }
     
     // MARK: ModalController
