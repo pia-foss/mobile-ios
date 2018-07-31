@@ -54,7 +54,7 @@ struct AppConfiguration {
         static let piaDefaultConfigurationBuilder: PIATunnelProvider.ConfigurationBuilder = {
             var builder = PIATunnelProvider.ConfigurationBuilder(appGroup: AppConstants.appGroup)
             builder.renegotiatesAfterSeconds = piaRenegotiationInterval
-            builder.cipher = .aes128cbc
+            builder.cipher = .aes128gcm
             builder.digest = .sha1
             builder.handshake = .rsa2048
             builder.endpointProtocols = piaAutomaticProtocols

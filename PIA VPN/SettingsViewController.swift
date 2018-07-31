@@ -142,8 +142,6 @@ class SettingsViewController: AutolayoutViewController {
 
     private var isContentBlockerEnabled = false
 
-    private var isTransitioningTheme = false
-
 //    private lazy var buttonConfirm = UIBarButtonItem(
 //        barButtonSystemItem: .save,
 //        target: self,
@@ -233,7 +231,7 @@ class SettingsViewController: AutolayoutViewController {
 
     // XXX: no need to bufferize app preferences
     @objc private func toggleDarkMode(_ sender: UISwitch) {
-        transitionTheme(to: sender.isOn ? .dark : .light)
+        AppPreferences.shared.transitionTheme(to: sender.isOn ? .dark : .light)
     }
     
     @objc private func showContentBlockerTutorial() {
@@ -327,7 +325,7 @@ class SettingsViewController: AutolayoutViewController {
         pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
         pendingOpenVPNConfiguration = currentOpenVPNConfiguration.builder()
 
-        transitionTheme(to: .light)
+        AppPreferences.shared.reset()
 
         redisplaySettings()
         reportUpdatedPreferences()
@@ -520,31 +518,6 @@ class SettingsViewController: AutolayoutViewController {
         pendingVPNAction = pendingPreferences.requiredVPNAction()
     }
     
-    private func transitionTheme(to code: ThemeCode) {
-        guard !isTransitioningTheme else {
-            return
-        }
-        guard (code != AppPreferences.shared.currentThemeCode) else {
-            return
-        }
-
-        AppPreferences.shared.currentThemeCode = code
-        guard let window = UIApplication.shared.windows.first else {
-            fatalError("No window?")
-        }
-        isTransitioningTheme = true
-        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
-            window.alpha = 0.0
-        }, completion: { (success) in
-            code.apply(theme: Theme.current, reload: true)
-            
-            UIView.animate(withDuration: AppConfiguration.Animations.duration) {
-                window.alpha = 1.0
-                self.isTransitioningTheme = false
-            }
-        })
-    }
-    
     // MARK: ModalController
     
     override func dismissModal() {
@@ -668,6 +641,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             
         case .encryptionDigest:
             cell.textLabel?.text = L10n.Settings.Encryption.Digest.title
+            guard !pendingOpenVPNConfiguration.isEncryptionGCM() else {
+                cell.detailTextLabel?.text = "GCM"
+                break
+            }
             cell.detailTextLabel?.text = pendingOpenVPNConfiguration.digest.description
             if !Flags.shared.enablesEncryptionSettings {
                 cell.accessoryType = .none
@@ -758,8 +735,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         switch setting {
         case .vpnProtocolSelection:
             let options: [String] = [
-                IPSecProfile.vpnType,
-                PIATunnelProfile.vpnType
+                PIATunnelProfile.vpnType,
+                IPSecProfile.vpnType
             ]
             controller = OptionsViewController()
             controller?.options = options
@@ -791,6 +768,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 break
             }
             let options: [PIATunnelProvider.Cipher] = [
+                .aes128gcm,
+                .aes256gcm,
                 .aes128cbc,
                 .aes256cbc
             ]
@@ -800,6 +779,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         case .encryptionDigest:
             guard Flags.shared.enablesEncryptionSettings else {
+                break
+            }
+            guard !pendingOpenVPNConfiguration.isEncryptionGCM() else {
                 break
             }
             let options: [PIATunnelProvider.Digest] = [
@@ -819,6 +801,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 .rsa3072,
                 .rsa4096,
                 .ecc256r1,
+                .ecc256k1,
                 .ecc521r1
             ]
             controller = OptionsViewController()
@@ -1054,5 +1037,9 @@ private extension PIATunnelProvider.ConfigurationBuilder {
             fatalError("Zero current protocols")
         }
         return port
+    }
+
+    func isEncryptionGCM() -> Bool {
+        return (cipher == .aes128gcm) || (cipher == .aes256gcm)
     }
 }
