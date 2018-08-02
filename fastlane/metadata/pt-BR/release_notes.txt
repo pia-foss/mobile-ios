@@ -1,5 +1,2 @@
-- Fixed potential logout on upgrade.
-- Added "Automatic" OpenVPN socket type.
-- Optimized download speed.
-- IPv4 address is now used in case of DNS failure.
-- Automatic port now tries all available ports in sequence.
+- Added GCM encryption ciphers to OpenVPN.
+- Added ECC-256k1 handshake certificate to OpenVPN.
