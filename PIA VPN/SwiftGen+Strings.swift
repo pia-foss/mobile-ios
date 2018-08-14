@@ -57,6 +57,13 @@ internal enum L10n {
       internal static let footer = L10n.tr("Localizable", "account.other.footer")
     }
 
+    internal enum ExpiryDate {
+        /// Your plan will expire on %@.
+        internal static func information(_ p1: String) -> String {
+            return L10n.tr("Localizable", "account.expiry.date.information", p1)
+        }
+    }
+
     internal enum Password {
       /// Password
       internal static let caption = L10n.tr("Localizable", "account.password.caption")

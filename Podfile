@@ -52,9 +52,9 @@ end
 
 def shared_main_pods
     pod 'AlamofireImage'
-    #library_by_path('..')
+    library_by_path('/Users/jblaya/Desktop/PIA_iOS_Projects/')
     #library_by_git('b8a1a95')
-    library_by_version('~> 1.1.3')
+    #library_by_version('~> 1.1.3')
 end
 
 def app_pods
