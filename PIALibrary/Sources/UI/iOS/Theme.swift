@@ -386,6 +386,26 @@ public class Theme {
         textView.textColor = palette.textColor(forRelevance: 3, appearance: .dark)
     }
     
+    /// Method to apply a second style for the same UILabel
+    /// label.text should be previously set
+    public func makeSmallLabelToStandOut(_ label: UILabel,
+                                         withTextToStandOut textToStandOut: String,
+                                         andAppearance appearance: Appearance = Appearance.dark) {
+
+        if let text = label.text {
+            let rangeSecondText = (text as NSString).range(of: textToStandOut)
+            let attributedString = NSMutableAttributedString(string: text)
+            
+            attributedString.addAttribute(.foregroundColor,
+                                          value: palette.textColor(forRelevance: 1,
+                                                                   appearance: appearance),
+                                          range: rangeSecondText)
+
+            label.attributedText = attributedString
+        }
+        
+    }
+    
     /// :nodoc:
     public func applyTag(_ label: UILabel, appearance: Appearance) {
         label.font = typeface.regularFont(size: 12.0)

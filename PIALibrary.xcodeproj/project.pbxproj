@@ -240,6 +240,8 @@
 		0EFEB4C420077AC900F81029 /* PIATunnelProvider+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFEB4BF2007784A00F81029 /* PIATunnelProvider+Profile.swift */; };
 		0EFEB4C520077AC900F81029 /* PIATunnelProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFEB4C02007784A00F81029 /* PIATunnelProfile.swift */; };
 		5EA54E484C7FD035341E021E /* Pods_PIALibrary_PIALibraryTests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A22DD34A821A4EDAED288D2 /* Pods_PIALibrary_PIALibraryTests_iOS.framework */; };
+		843C67C22122E714005A3FDA /* AccountInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C67C12122E714005A3FDA /* AccountInfoTests.swift */; };
+		843C67C32122EA13005A3FDA /* AccountInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C67C12122E714005A3FDA /* AccountInfoTests.swift */; };
 		A56365AB3EAA4588B479616A /* Pods_PIALibrary_PIALibraryHost_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 476E8514A236C48F405ACA40 /* Pods_PIALibrary_PIALibraryHost_iOS.framework */; };
 		E07462773BC314E3183B240E /* Pods_PIALibrary_PIALibrary_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC5BF5764146CA9C6104276 /* Pods_PIALibrary_PIALibrary_iOS.framework */; };
 /* End PBXBuildFile section */
@@ -479,6 +481,7 @@
 		378AC49FB4E07B2415156492 /* Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		476E8514A236C48F405ACA40 /* Pods_PIALibrary_PIALibraryHost_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibraryHost_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64C04C071DE1CB44DE7945D6 /* Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibrary-iOS/Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		843C67C12122E714005A3FDA /* AccountInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoTests.swift; sourceTree = "<group>"; };
 		9A22DD34A821A4EDAED288D2 /* Pods_PIALibrary_PIALibraryTests_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibraryTests_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD0536741E220873045CBCC7 /* Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		E865E7775CCB07BA4CE22DEE /* Pods_PIALibrary_PIALibrary_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibrary_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -910,6 +913,7 @@
 				0E53A8591FE5E3CD000C2A18 /* MockProviders.swift */,
 				0EA4C4411FDDFD830041C3D8 /* ServerTests.swift */,
 				0E2ADD441FE1583A00BB170C /* VPNTests.swift */,
+				843C67C12122E714005A3FDA /* AccountInfoTests.swift */,
 				0EE78B011F818A20002E4CDD /* Info-iOS.plist */,
 				0E2ADD201FE13B8600BB170C /* Info-macOS.plist */,
 			);
@@ -1342,6 +1346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E2ADD291FE13C3B00BB170C /* ServerTests.swift in Sources */,
+				843C67C32122EA13005A3FDA /* AccountInfoTests.swift in Sources */,
 				0E2ADD461FE1583A00BB170C /* VPNTests.swift in Sources */,
 				0E53A85B1FE5E3CD000C2A18 /* MockProviders.swift in Sources */,
 				0E2ADD281FE13C3B00BB170C /* AccountTests.swift in Sources */,
@@ -1566,6 +1571,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E53A85A1FE5E3CD000C2A18 /* MockProviders.swift in Sources */,
+				843C67C22122E714005A3FDA /* AccountInfoTests.swift in Sources */,
 				0EE78B001F818A20002E4CDD /* AccountTests.swift in Sources */,
 				0EA4C4421FDDFD840041C3D8 /* ServerTests.swift in Sources */,
 				0EB8C0461F9CCB7C005857E4 /* AccountSignupTests.swift in Sources */,
