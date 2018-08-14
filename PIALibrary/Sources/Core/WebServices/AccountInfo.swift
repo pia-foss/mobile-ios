@@ -52,4 +52,15 @@ public struct AccountInfo {
         newInfo.email = email
         return newInfo
     }
+    
+    /// Return the Human Readable Date for the expirationDate var.
+    /// - Parameters:
+    /// locale: The locale to format the date, by default will use the locale of the device
+    func humanReadableExpirationDate(usingLocale locale: Locale = Locale.current) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = locale
+        return dateFormatter.string(from: self.expirationDate)
+    }
 }
