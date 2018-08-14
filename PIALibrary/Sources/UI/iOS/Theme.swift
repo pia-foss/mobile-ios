@@ -397,11 +397,8 @@ public class Theme {
             let attributedString = NSMutableAttributedString(string: text)
             
             attributedString.addAttribute(.foregroundColor,
-                                          value: palette.textColor(forRelevance: 2,
+                                          value: palette.textColor(forRelevance: 1,
                                                                    appearance: appearance),
-                                          range: rangeSecondText)
-            attributedString.addAttribute(.font,
-                                          value: typeface.mediumFont(size: 13.0),
                                           range: rangeSecondText)
 
             label.attributedText = attributedString
