@@ -62,6 +62,7 @@ internal enum L10n {
         internal static func information(_ p1: String) -> String {
             return L10n.tr("Localizable", "account.expiry.date.information", p1)
         }
+        internal static let expired = L10n.tr("Localizable", "account.expiry.date.expired")
     }
 
     internal enum Password {

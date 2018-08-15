@@ -273,7 +273,11 @@ class AccountViewController: AutolayoutViewController {
         textPassword.text = currentUser?.credentials.password
         
         if let userInfo = currentUser?.info {
-            labelExpiryInformation.text = L10n.Account.ExpiryDate.information(userInfo.humanReadableExpirationDate())
+            if userInfo.isExpired {
+                labelExpiryInformation.text = L10n.Account.ExpiryDate.expired
+            } else {
+                labelExpiryInformation.text = L10n.Account.ExpiryDate.information(userInfo.humanReadableExpirationDate())
+            }
             styleExpirationDate()
         }
         
