@@ -41,6 +41,8 @@ class AccountViewController: AutolayoutViewController {
 
     @IBOutlet private weak var labelFooterOther: UILabel!
 
+    @IBOutlet weak var labelExpiryInformation: UILabel!
+    
     @IBOutlet private weak var itemUpdate: UIBarButtonItem!
     
     @IBOutlet private weak var viewSeparator: UIView!
@@ -270,6 +272,15 @@ class AccountViewController: AutolayoutViewController {
         textUsername.text = currentUser?.credentials.username
         textPassword.text = currentUser?.credentials.password
         
+        if let userInfo = currentUser?.info {
+            if userInfo.isExpired {
+                labelExpiryInformation.text = L10n.Account.ExpiryDate.expired
+            } else {
+                labelExpiryInformation.text = L10n.Account.ExpiryDate.information(userInfo.humanReadableExpirationDate())
+            }
+            styleExpirationDate()
+        }
+        
         establishUncreditedVisibility()
     }
     
@@ -299,12 +310,22 @@ class AccountViewController: AutolayoutViewController {
         Theme.current.applyInput(textUsername)
         Theme.current.applyInput(textPassword)
         Theme.current.applyDivider(viewSeparator)
-        for label in [labelFooterEye!, labelFooterOther!] {
+        for label in [labelFooterEye!, labelFooterOther!, labelExpiryInformation!] {
             Theme.current.applySmallInfo(label, appearance: .dark)
         }
         Theme.current.applyBody2(labelRestoreTitle, appearance: .dark)
         Theme.current.applyBody1(labelRestoreInfo, appearance: .dark)
         Theme.current.applyTextButton(buttonRestore)
+        
+        styleExpirationDate()
+        
+    }
+    
+    private func styleExpirationDate() {
+        if let userInfo = currentUser?.info {
+            Theme.current.makeSmallLabelToStandOut(labelExpiryInformation,
+                                                   withTextToStandOut: userInfo.humanReadableExpirationDate())
+        }
     }
 }
 
