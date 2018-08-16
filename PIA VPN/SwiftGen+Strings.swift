@@ -47,6 +47,15 @@ internal enum L10n {
       internal static let placeholder = L10n.tr("Localizable", "account.email.placeholder")
     }
 
+    internal enum ExpiryDate {
+      /// Your plan has expired.
+      internal static let expired = L10n.tr("Localizable", "account.expiry_date.expired")
+      /// Your plan will expire on %@.
+      internal static func information(_ p1: String) -> String {
+        return L10n.tr("Localizable", "account.expiry_date.information", p1)
+      }
+    }
+
     internal enum Eye {
       /// Tap the eye icon to reveal or conceal your password.
       internal static let footer = L10n.tr("Localizable", "account.eye.footer")
@@ -55,14 +64,6 @@ internal enum L10n {
     internal enum Other {
       /// Get the Private Internet Access app for your other devices and use the above username and password to login and secure your connection.
       internal static let footer = L10n.tr("Localizable", "account.other.footer")
-    }
-
-    internal enum ExpiryDate {
-        /// Your plan will expire on %@.
-        internal static func information(_ p1: String) -> String {
-            return L10n.tr("Localizable", "account.expiry.date.information", p1)
-        }
-        internal static let expired = L10n.tr("Localizable", "account.expiry.date.expired")
     }
 
     internal enum Password {

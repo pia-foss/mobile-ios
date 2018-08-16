@@ -89,8 +89,8 @@
 "account.accessibility.eye" = "Eye icon";
 "account.accessibility.eye.hint.reveal" = "Tap to reveal password";
 "account.accessibility.eye.hint.conceal" = "Tap to conceal password";
-"account.expiry.date.information" = "Your plan will expire on %@.";
-"account.expiry.date.expired" = "Your plan has expired.";
+"account.expiry_date.information" = "Your plan will expire on %@.";
+"account.expiry_date.expired" = "Your plan has expired.";
 
 // SETTINGS
 
