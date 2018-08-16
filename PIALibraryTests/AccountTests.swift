@@ -51,6 +51,19 @@ class AccountTests: XCTestCase {
         __testLogout(factory: mock)
     }
     
+    func testAPIEndpointIsReachable() {
+        
+        let expectationAPIEndpoint = expectation(description: "apiEndpoint")
+
+        mock.accountProvider.isAPIEndpointAvailable { (result, error) in
+            XCTAssertTrue(result!, "The default API endpoint should be reachable from the tests")
+            expectationAPIEndpoint.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5.0, handler: nil)
+
+    }
+    
     /*func testWeb() {
         __testLogin(factory: live)
         sleep(1)
