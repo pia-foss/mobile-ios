@@ -169,19 +169,39 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
             present(alert, animated: true, completion: nil)
             return
         }
+
+        preset?.accountProvider.isAPIEndpointAvailable({ [weak self] (isAvailable, error) in
+            guard let isAvailable = isAvailable,
+                isAvailable else {
+                let alert = Macros.alert(
+                    L10n.Welcome.Purchase.Error.Connectivity.title,
+                    L10n.Welcome.Purchase.Error.Connectivity.description
+                )
+                alert.addCancelAction(L10n.Ui.Global.close)
+                self?.present(alert, animated: true, completion: nil)
+                return
+            }
+            self?.startPurchaseProcessWithEmail(email,
+                                                andPlan: plan)
+        })
+        
+    }
+    
+    private func startPurchaseProcessWithEmail(_ email: String,
+                                               andPlan plan: PurchasePlan) {
         
         textEmail.text = email
         log.debug("Will purchase plan: \(plan.product)")
-
+        
         disableInteractions(fully: true)
         
         preset?.accountProvider.purchase(plan: plan.plan) { (transaction, error) in
             self.enableInteractions()
-
+            
             guard let transaction = transaction else {
                 if let error = error {
                     log.error("Purchase failed (error: \(error))")
-
+                    
                     let alert = Macros.alert(
                         L10n.Welcome.Iap.Error.title,
                         error.localizedDescription
@@ -193,13 +213,14 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
                 }
                 return
             }
-
+            
             log.debug("Purchased with transaction: \(transaction)")
-
+            
             self.signupEmail = email
             self.signupTransaction = transaction
             self.perform(segue: StoryboardSegue.Welcome.signupViaPurchaseSegue)
         }
+
     }
     
     @IBAction private func logIn(_ sender: Any?) {

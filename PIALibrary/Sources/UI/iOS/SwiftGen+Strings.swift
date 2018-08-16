@@ -127,6 +127,14 @@ enum L10n {
         static let title = L10n.tr("Welcome", "purchase.error.title")
         /// You must enter an email address.
         static let validation = L10n.tr("Welcome", "purchase.error.validation")
+        
+        enum Connectivity {
+            /// Connection Failure
+            static let title = L10n.tr("Welcome", "purchase.error.connectivity.title")
+            /// We are unable to reach Private Internet Access. This may due to poor internet or our service is blocked in your country.
+            static let description = L10n.tr("Welcome", "purchase.error.connectivity.description")
+        }
+
       }
 
       enum Login {

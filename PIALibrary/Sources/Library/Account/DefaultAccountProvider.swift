@@ -351,4 +351,12 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
     var webServices: WebServices {
         return customWebServices ?? accessedWebServices
     }
+    
+    func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?) {
+        let task = webServices.taskForConnectivityCheck { (_, error) in
+            callback?(error == nil, error)
+        }
+        task.resume()
+    }
+    
 }

@@ -91,6 +91,13 @@ public protocol AccountProvider: class {
     func purchase(plan: Plan, _ callback: LibraryCallback<InAppTransaction>?)
     
     /**
+     Check if the user has access to our servers from the country where is based.
+     
+     - Parameter callback: Returns a boolean indicating if the operation was successfully or not.
+     */
+    func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?)
+
+    /**
      Restores the purchase history, possibly recovering from corruption.
      
      - Parameter callback: Returns `nil` on success.
