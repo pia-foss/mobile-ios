@@ -28,6 +28,9 @@
 "purchase.login.button" = "Sign in";
 "purchase.error.title" = "Purchase";
 "purchase.error.validation" = "You must enter an email address.";
+"purchase.error.connectivity.title" = "Connection Failure";
+"purchase.error.connectivity.description" = "We are unable to reach Private Internet Access. This may due to poor internet or our service is blocked in your country.";
+
 
 "redeem.title" = "Redeem gift card";
 "redeem.subtitle" = "Type in your email address and the %lu digit PIN from your gift card or trial card below.";

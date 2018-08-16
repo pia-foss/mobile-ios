@@ -413,4 +413,16 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
     func renew(with request: RenewRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         fatalError("Not implemented")
     }
+    
+    func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?) {
+        guard let webServices = webServices else {
+            callback?(false, nil)
+            return
+        }
+        let task = webServices.taskForConnectivityCheck { (_, error) in
+            callback?(error == nil, error)
+        }
+        task.resume()
+    }
+
 }

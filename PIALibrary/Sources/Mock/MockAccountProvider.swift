@@ -220,4 +220,9 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
         delegate.renew(with: request, callback)
     }
     #endif
+    
+    public func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?) {
+        callback?(true, nil)
+    }
+    
 }
