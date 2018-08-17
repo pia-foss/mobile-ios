@@ -84,6 +84,7 @@ enum StoryboardSegue {
     case signupViaRecoverSegue = "SignupViaRecoverSegue"
     case signupViaRedeemSegue = "SignupViaRedeemSegue"
     case signupViaRestoreSegue = "SignupViaRestoreSegue"
+    case signupQRCameraScannerSegue = "SignupQRCameraScannerSegue"
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

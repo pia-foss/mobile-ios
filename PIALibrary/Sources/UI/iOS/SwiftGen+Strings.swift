@@ -167,7 +167,15 @@ enum L10n {
         }
         /// Redeem
         static let title = L10n.tr("Welcome", "redeem.error.title")
+        
+        enum Qrcode {
+            /// Invalid QR code sequence. Please try again.
+            static let invalid = L10n.tr("Welcome", "redeem.error.qrcode.invalid")
+        }
+        
       }
+        
+        
     }
 
     enum Restore {
@@ -182,6 +190,18 @@ enum L10n {
         /// Email address
         static let placeholder = L10n.tr("Welcome", "restore.email.placeholder")
       }
+    }
+    
+    enum Camera {
+        enum Access {
+            enum Error {
+                /// Camera not available
+                static let title = L10n.tr("Welcome", "camera.access.error.title")
+                /// Your device does not support scanning a code. Please use a device with a camera.
+                static let message = L10n.tr("Welcome", "camera.access.error.message")
+
+            }
+        }
     }
   }
   enum Ui {

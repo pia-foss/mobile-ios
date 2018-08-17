@@ -38,6 +38,7 @@
 "redeem.submit" = "SUBMIT";
 "redeem.error.title" = "Redeem";
 "redeem.error.code" = "Code must be %lu numeric digits.";
+"redeem.error.qrcode.invalid" = "Invalid QR code sequence. Please try again.";
 
 "plan.monthly.title" = "Monthly";
 "plan.yearly.title" = "Yearly";
@@ -57,3 +58,6 @@
 "agreement.message" = "Signing up constitutes acceptance of the $1 and the $2.";
 "agreement.message.tos" = "Terms of Service";
 "agreement.message.privacy" = "Privacy Policy";
+
+"camera.access.error.title" = "Camera not available";
+"camera.access.error.message" = "Your device does not support scanning a code. Please use a device with a camera.";

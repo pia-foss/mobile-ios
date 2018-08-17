@@ -8,8 +8,13 @@
 
 import UIKit
 import SwiftyBeaver
+import AVFoundation
 
 private let log = SwiftyBeaver.self
+
+protocol RedeemScannerDelegate: class {
+    func giftCardCodeFound(withCode code: String)
+}
 
 class RedeemViewController: AutolayoutViewController, WelcomeChild {
     private static let codeInvalidSet = CharacterSet.decimalDigits.inverted
@@ -41,6 +46,8 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     @IBOutlet private weak var labelLogin1: UILabel!
     
     @IBOutlet private weak var labelLogin2: UILabel!
+    
+    @IBOutlet private weak var cameraButton: UIButton!
 
     var preset: PIAWelcomeViewController.Preset?
     
@@ -144,8 +151,27 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         pageController.show(page: .login)
     }
     
+    @IBAction private func showCameraToScanQRCodes(_ sender: Any?) {
+        
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
+            if response {
+                DispatchQueue.main.async {
+                    self.perform(segue: StoryboardSegue.Welcome.signupQRCameraScannerSegue)
+                }
+            } else {
+                let alert = Macros.alert(L10n.Welcome.Camera.Access.Error.title,
+                                         L10n.Welcome.Camera.Access.Error.message)
+                alert.addCancelAction(L10n.Ui.Global.close)
+                self.present(alert, animated: true)
+            }
+        }
+        
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == StoryboardSegue.Welcome.signupViaRedeemSegue.rawValue) {
+        
+        switch segue.identifier {
+        case StoryboardSegue.Welcome.signupViaRedeemSegue.rawValue:
             let nav = segue.destination as! UINavigationController
             let vc = nav.topViewController as! SignupInProgressViewController
             
@@ -162,7 +188,15 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             vc.redeemRequest = RedeemRequest(email: email, code: friendlyRedeemCode(code))
             vc.preset = preset
             vc.completionDelegate = completionDelegate
+        case StoryboardSegue.Welcome.signupQRCameraScannerSegue.rawValue:
+            guard let scannerViewController = segue.destination as? QRCameraScannerViewController else {
+                return
+            }
+            scannerViewController.delegate = self
+        default:
+            return
         }
+        
     }
 
     private func enableInteractions(_ enable: Bool) {
@@ -249,4 +283,19 @@ extension RedeemViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         return true
     }
+}
+
+extension RedeemViewController: RedeemScannerDelegate {
+    
+    func giftCardCodeFound(withCode code: String) {
+        if Validator.validate(giftCode: code) {
+            textCode.text = friendlyRedeemCode(code)
+        } else {
+            let alert = Macros.alert(L10n.Welcome.Redeem.Error.title,
+                                     L10n.Welcome.Redeem.Error.Qrcode.invalid)
+            alert.addCancelAction(L10n.Ui.Global.ok)
+            self.present(alert, animated: true)
+        }
+    }
+    
 }
