@@ -20,8 +20,6 @@ protocol RedeemScannerDelegate: class {
 class RedeemViewController: AutolayoutViewController, WelcomeChild {
     private static let codeInvalidSet = CharacterSet.decimalDigits.inverted
     
-    private static let rxCodeGrouping: NSRegularExpression = try! NSRegularExpression(pattern: "\\d{4}(?=\\d)", options: [])
-    
     private static let codePlaceholder = "1234-5678-9012-3456"
     
     private static let codeLength = 16
@@ -64,7 +62,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
                 textCode.text = nil
                 return
             }
-            textCode.text = friendlyRedeemCode(code)
+            textCode.text = GiftCardUtil.friendlyRedeemCode(code)
         }
     }
 
@@ -96,7 +94,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         viewLogin.accessibilityLabel = "\(labelLogin1.text!) \(labelLogin2.text!)"
         textEmail.text = preset.redeemEmail
         if let code = preset.redeemCode {
-            redeemCode = strippedRedeemCode(code) // will set textCode automatically
+            redeemCode = GiftCardUtil.strippedRedeemCode(code) // will set textCode automatically
         }
     }
 
@@ -131,7 +129,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         }
         
         textEmail.text = email
-        textCode.text = friendlyRedeemCode(code)
+        textCode.text = GiftCardUtil.friendlyRedeemCode(code)
         log.debug("Redeeming...")
         
         redeemEmail = email
@@ -183,7 +181,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             metadata.title = L10n.Welcome.Redeem.title
             metadata.bodySubtitle = L10n.Signup.InProgress.Redeem.message
             vc.metadata = metadata
-            vc.redeemRequest = RedeemRequest(email: email, code: friendlyRedeemCode(code))
+            vc.redeemRequest = RedeemRequest(email: email, code: GiftCardUtil.friendlyRedeemCode(code))
             vc.preset = preset
             vc.completionDelegate = completionDelegate
         case StoryboardSegue.Welcome.signupQRCameraScannerSegue.rawValue:
@@ -217,21 +215,6 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         } else {
             buttonRedeem.startActivity()
         }
-    }
-    
-    // MARK: Helpers
-    
-    private func friendlyRedeemCode(_ code: String) -> String {
-        return RedeemViewController.rxCodeGrouping.stringByReplacingMatches(
-            in: code,
-            options: [],
-            range: NSMakeRange(0, code.count),
-            withTemplate: "$0-"
-        )
-    }
-    
-    private func strippedRedeemCode(_ code: String) -> String {
-        return code.replacingOccurrences(of: "-", with: "")
     }
 
     // MARK: Restylable
@@ -277,7 +260,7 @@ extension RedeemViewController: UITextFieldDelegate {
         }
         
         let cursorLocation = textField.position(from: textField.beginningOfDocument, offset: range.location + string.count)
-        let newCode = strippedRedeemCode(newText)
+        let newCode = GiftCardUtil.strippedRedeemCode(newText)
         guard newCode.count <= RedeemViewController.codeLength else {
             return false
         }
@@ -299,8 +282,9 @@ extension RedeemViewController: UITextViewDelegate {
 extension RedeemViewController: RedeemScannerDelegate {
     
     func giftCardCodeFound(withCode code: String) {
-        if Validator.validate(giftCode: code) {
-            textCode.text = friendlyRedeemCode(code)
+        let plainRedeemCode = GiftCardUtil.plainRedeemCode(code)
+        if Validator.validate(giftCode: plainRedeemCode) {
+            textCode.text = GiftCardUtil.friendlyRedeemCode(plainRedeemCode)
         } else {
             presentAlertWith(title: L10n.Welcome.Redeem.Error.title,
                              andMessage: L10n.Welcome.Redeem.Error.Qrcode.invalid,
