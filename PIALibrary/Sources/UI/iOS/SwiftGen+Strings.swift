@@ -199,7 +199,11 @@ enum L10n {
                 static let title = L10n.tr("Welcome", "camera.access.error.title")
                 /// Your device does not support scanning a code. Please use a device with a camera.
                 static let message = L10n.tr("Welcome", "camera.access.error.message")
-
+            }
+            enum Denied {
+                /// Please grant permission to use the Camera.
+                static let message = L10n.tr("Welcome", "camera.access.denied.message")
+                
             }
         }
     }

@@ -10,7 +10,9 @@ import AVFoundation
 import UIKit
 
 class QRCameraScannerViewController: AutolayoutViewController {
-    
+
+    @IBOutlet private weak var closeButton: UIButton!
+
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     weak var delegate: RedeemScannerDelegate!
@@ -45,6 +47,14 @@ class QRCameraScannerViewController: AutolayoutViewController {
         return true
     }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    @IBAction private func dismissView(_ sender: Any?) {
+        dismissModal()
+    }
+
     private func setupCaptureSession() {
         
         captureSession = AVCaptureSession()
@@ -84,21 +94,20 @@ class QRCameraScannerViewController: AutolayoutViewController {
         }
         
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = view.layer.bounds
+        previewLayer.frame = UIScreen.main.bounds
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
+        view.bringSubview(toFront: closeButton)
         
         captureSession.startRunning()
         
     }
     
-    private func found(code: String) {
-        delegate.giftCardCodeFound(withCode: code)
-    }
-    
     private func failed() {
         captureSession = nil
-        dismissModal()
+        dismiss(animated: true) { [weak self] in
+            self?.delegate.errorFound()
+        }
     }
     
 }
@@ -109,6 +118,7 @@ extension QRCameraScannerViewController: AVCaptureMetadataOutputObjectsDelegate 
                         didOutput metadataObjects: [AVMetadataObject],
                         from connection: AVCaptureConnection) {
         captureSession.stopRunning()
+        var code = ""
         if let metadataObject = metadataObjects.first {
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else {
                 return
@@ -116,11 +126,13 @@ extension QRCameraScannerViewController: AVCaptureMetadataOutputObjectsDelegate 
             guard let stringValue = readableObject.stringValue else {
                 return
             }
+            code = stringValue
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            found(code: stringValue)
         }
         
-        dismiss(animated: true)
+        dismiss(animated: true) { [weak self] in
+            self?.delegate.giftCardCodeFound(withCode: code)
+        }
     }
     
 }

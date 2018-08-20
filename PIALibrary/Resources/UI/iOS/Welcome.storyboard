@@ -1375,9 +1375,25 @@ You will not be charged during this process.</string>
                     <view key="view" contentMode="scaleToFill" id="ep7-uG-1hN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xjW-oD-kRx">
+                                <rect key="frame" x="19" y="39" width="126" height="87"/>
+                                <state key="normal" backgroundImage="image-account-failed"/>
+                                <connections>
+                                    <action selector="dismissView:" destination="hSc-7t-RTF" eventType="touchUpInside" id="6rL-tJ-P3p"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="xjW-oD-kRx" firstAttribute="top" secondItem="bb6-gq-GN1" secondAttribute="top" constant="19" id="PSn-O5-oZX"/>
+                            <constraint firstItem="xjW-oD-kRx" firstAttribute="leading" secondItem="bb6-gq-GN1" secondAttribute="leading" constant="19" id="e3d-hl-FCD"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="bb6-gq-GN1"/>
                     </view>
+                    <connections>
+                        <outlet property="closeButton" destination="xjW-oD-kRx" id="nl4-yD-KQR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GlS-xa-MJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1385,6 +1401,7 @@ You will not be charged during this process.</string>
         </scene>
     </scenes>
     <resources>
+        <image name="image-account-failed" width="126" height="87"/>
         <image name="nav-logo" width="354" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>

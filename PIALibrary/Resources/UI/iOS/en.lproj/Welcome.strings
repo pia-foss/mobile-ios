@@ -61,3 +61,4 @@
 
 "camera.access.error.title" = "Camera not available";
 "camera.access.error.message" = "Your device does not support scanning a code. Please use a device with a camera.";
+"camera.access.denied.message" = "Please grant permission to use the Camera.";
