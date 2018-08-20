@@ -282,9 +282,11 @@ extension RedeemViewController: UITextViewDelegate {
 extension RedeemViewController: RedeemScannerDelegate {
     
     func giftCardCodeFound(withCode code: String) {
-        let plainRedeemCode = GiftCardUtil.plainRedeemCode(code)
-        if Validator.validate(giftCode: plainRedeemCode) {
-            textCode.text = GiftCardUtil.friendlyRedeemCode(plainRedeemCode)
+        
+        if let redeemCode = GiftCardUtil.extractRedeemCode(code,
+                                                           strippedFormat: true),
+            Validator.validate(giftCode: redeemCode) {
+            textCode.text = GiftCardUtil.friendlyRedeemCode(redeemCode)
         } else {
             presentAlertWith(title: L10n.Welcome.Redeem.Error.title,
                              andMessage: L10n.Welcome.Redeem.Error.Qrcode.invalid,

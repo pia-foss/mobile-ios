@@ -23,16 +23,25 @@ class GiftCardUtilTests: XCTestCase {
                        "1234567812345678")
     }
     
-    func testFormatGiftCardCode() {
-        var giftCode = "1234-5678-1234-5678"
-        XCTAssertEqual(GiftCardUtil.plainRedeemCode(giftCode),
+    func testExtractRedeemCode() {
+        
+        var giftCode = "1234567812345678"
+        XCTAssertEqual(GiftCardUtil.extractRedeemCode(giftCode),
                        "1234567812345678")
         giftCode = "1234#5678-1234#5678"
-        XCTAssertEqual(GiftCardUtil.plainRedeemCode(giftCode),
+        XCTAssertNil(GiftCardUtil.extractRedeemCode(giftCode))
+
+        giftCode = "hello the redeem code is 1234567812345678"
+        XCTAssertEqual(GiftCardUtil.extractRedeemCode(giftCode),
                        "1234567812345678")
-        giftCode = "1234 5678 1234 5678"
-        XCTAssertEqual(GiftCardUtil.plainRedeemCode(giftCode),
+
+        giftCode = "{redeemCode: \"1234-5678-1234-5678\", user: \"testuser\"}"
+        XCTAssertEqual(GiftCardUtil.extractRedeemCode(giftCode),
+                       "1234-5678-1234-5678")
+        
+        XCTAssertEqual(GiftCardUtil.extractRedeemCode(giftCode, strippedFormat: true),
                        "1234567812345678")
+
     }
 
 }
