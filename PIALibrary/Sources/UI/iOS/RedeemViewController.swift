@@ -287,6 +287,7 @@ extension RedeemViewController: RedeemScannerDelegate {
                                                            strippedFormat: true),
             Validator.validate(giftCode: redeemCode) {
             textCode.text = GiftCardUtil.friendlyRedeemCode(redeemCode)
+            self.redeemCode = redeemCode
         } else {
             presentAlertWith(title: L10n.Welcome.Redeem.Error.title,
                              andMessage: L10n.Welcome.Redeem.Error.Qrcode.invalid,
