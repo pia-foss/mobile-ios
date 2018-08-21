@@ -147,9 +147,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     @IBAction private func showCameraToScanQRCodes(_ sender: Any?) {
         
         if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == .denied {
-            presentAlertWith(title: L10n.Welcome.Camera.Access.Error.title,
-                             andMessage: L10n.Welcome.Camera.Access.Denied.message,
-                             andButtonTitle: L10n.Ui.Global.close)
+            self.presentUnauthorizeCameraError()
         } else {
             AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
                 if response {
@@ -157,7 +155,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
                         self.perform(segue: StoryboardSegue.Welcome.signupQRCameraScannerSegue)
                     }
                 } else {
-                    self.errorFound()
+                    self.presentUnauthorizeCameraError()
                 }
             }
         }
@@ -193,6 +191,12 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             return
         }
         
+    }
+    
+    private func presentUnauthorizeCameraError() {
+        presentAlertWith(title: L10n.Welcome.Camera.Access.Error.title,
+                         andMessage: L10n.Welcome.Camera.Access.Denied.message,
+                         andButtonTitle: L10n.Ui.Global.close)
     }
     
     private func presentAlertWith(title: String,

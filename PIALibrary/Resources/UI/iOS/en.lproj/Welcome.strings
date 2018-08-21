@@ -60,5 +60,5 @@
 "agreement.message.privacy" = "Privacy Policy";
 
 "camera.access.error.title" = "Camera not available";
-"camera.access.error.message" = "Your device does not support scanning a code. Please use a device with a camera.";
-"camera.access.denied.message" = "Please grant permission to use the Camera.";
+"camera.access.error.message" = "Your device does not support scanning QR codes. Please use a device with a camera.";
+"camera.access.denied.message" = "Enable camera access so you can scan QR codes to redeem a gift card.";
