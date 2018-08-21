@@ -43,6 +43,8 @@
 	<true/>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Authenticate to reveal</string>
+	<key>NSCameraUsageDescription</key>
+	<string>We need camera access to scan a code from an gift card</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto-Light.ttf</string>
