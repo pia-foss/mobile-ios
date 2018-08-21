@@ -1139,9 +1139,13 @@ You will not be charged during this process.</string>
                                                                             <outlet property="delegate" destination="qgN-PX-Sir" id="dW1-A9-fEp"/>
                                                                         </connections>
                                                                     </textField>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoC-xB-Jhr">
-                                                                        <rect key="frame" x="234" y="117" width="46" height="30"/>
-                                                                        <state key="normal" title="Button"/>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoC-xB-Jhr">
+                                                                        <rect key="frame" x="250" y="117" width="30" height="30"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="30" id="bCM-kI-tMy"/>
+                                                                        </constraints>
+                                                                        <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                                                        <state key="normal" image="qr-code"/>
                                                                         <connections>
                                                                             <action selector="showCameraToScanQRCodes:" destination="qgN-PX-Sir" eventType="touchUpInside" id="i22-HG-3Xe"/>
                                                                         </connections>
@@ -1377,8 +1381,13 @@ You will not be charged during this process.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xjW-oD-kRx">
-                                <rect key="frame" x="19" y="39" width="126" height="87"/>
-                                <state key="normal" backgroundImage="image-account-failed"/>
+                                <rect key="frame" x="5" y="25" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="mnt-Sa-70o"/>
+                                    <constraint firstAttribute="width" constant="44" id="uGL-95-tvI"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" image="close-icon"/>
                                 <connections>
                                     <action selector="dismissView:" destination="hSc-7t-RTF" eventType="touchUpInside" id="6rL-tJ-P3p"/>
                                 </connections>
@@ -1386,8 +1395,8 @@ You will not be charged during this process.</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="xjW-oD-kRx" firstAttribute="top" secondItem="bb6-gq-GN1" secondAttribute="top" constant="19" id="PSn-O5-oZX"/>
-                            <constraint firstItem="xjW-oD-kRx" firstAttribute="leading" secondItem="bb6-gq-GN1" secondAttribute="leading" constant="19" id="e3d-hl-FCD"/>
+                            <constraint firstItem="xjW-oD-kRx" firstAttribute="top" secondItem="bb6-gq-GN1" secondAttribute="top" constant="5" id="PSn-O5-oZX"/>
+                            <constraint firstItem="xjW-oD-kRx" firstAttribute="leading" secondItem="bb6-gq-GN1" secondAttribute="leading" constant="5" id="e3d-hl-FCD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bb6-gq-GN1"/>
                     </view>
@@ -1401,8 +1410,9 @@ You will not be charged during this process.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="image-account-failed" width="126" height="87"/>
+        <image name="close-icon" width="50" height="50"/>
         <image name="nav-logo" width="354" height="36"/>
+        <image name="qr-code" width="325" height="325"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Knv-fa-JGO"/>
