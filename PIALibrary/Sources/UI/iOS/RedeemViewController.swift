@@ -8,13 +8,17 @@
 
 import UIKit
 import SwiftyBeaver
+import AVFoundation
 
 private let log = SwiftyBeaver.self
 
+protocol RedeemScannerDelegate: class {
+    func giftCardCodeFound(withCode code: String)
+    func errorFound()
+}
+
 class RedeemViewController: AutolayoutViewController, WelcomeChild {
     private static let codeInvalidSet = CharacterSet.decimalDigits.inverted
-    
-    private static let rxCodeGrouping: NSRegularExpression = try! NSRegularExpression(pattern: "\\d{4}(?=\\d)", options: [])
     
     private static let codePlaceholder = "1234-5678-9012-3456"
     
@@ -41,6 +45,8 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     @IBOutlet private weak var labelLogin1: UILabel!
     
     @IBOutlet private weak var labelLogin2: UILabel!
+    
+    @IBOutlet private weak var cameraButton: UIButton!
 
     var preset: PIAWelcomeViewController.Preset?
     
@@ -56,7 +62,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
                 textCode.text = nil
                 return
             }
-            textCode.text = friendlyRedeemCode(code)
+            textCode.text = GiftCardUtil.friendlyRedeemCode(code)
         }
     }
 
@@ -88,7 +94,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         viewLogin.accessibilityLabel = "\(labelLogin1.text!) \(labelLogin2.text!)"
         textEmail.text = preset.redeemEmail
         if let code = preset.redeemCode {
-            redeemCode = strippedRedeemCode(code) // will set textCode automatically
+            redeemCode = GiftCardUtil.strippedRedeemCode(code) // will set textCode automatically
         }
     }
 
@@ -110,26 +116,20 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         }
         
         guard let email = textEmail.text?.trimmed(), Validator.validate(email: email) else {
-            let alert = Macros.alert(
-                L10n.Welcome.Redeem.Error.title,
-                L10n.Welcome.Purchase.Error.validation
-            )
-            alert.addCancelAction(L10n.Ui.Global.ok)
-            present(alert, animated: true, completion: nil)
+            presentAlertWith(title: L10n.Welcome.Redeem.Error.title,
+                             andMessage: L10n.Welcome.Purchase.Error.validation,
+                             andButtonTitle: L10n.Ui.Global.ok)
             return
         }
         guard let code = redeemCode?.trimmed(), Validator.validate(giftCode: code) else {
-            let alert = Macros.alert(
-                L10n.Welcome.Redeem.Error.title,
-                L10n.Welcome.Redeem.Error.code(RedeemViewController.codeLength)
-            )
-            alert.addCancelAction(L10n.Ui.Global.ok)
-            present(alert, animated: true, completion: nil)
+            presentAlertWith(title: L10n.Welcome.Redeem.Error.title,
+                             andMessage: L10n.Welcome.Redeem.Error.code(RedeemViewController.codeLength),
+                             andButtonTitle: L10n.Ui.Global.ok)
             return
         }
         
         textEmail.text = email
-        textCode.text = friendlyRedeemCode(code)
+        textCode.text = GiftCardUtil.friendlyRedeemCode(code)
         log.debug("Redeeming...")
         
         redeemEmail = email
@@ -144,8 +144,28 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         pageController.show(page: .login)
     }
     
+    @IBAction private func showCameraToScanQRCodes(_ sender: Any?) {
+        
+        if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == .denied {
+            self.presentUnauthorizeCameraError()
+        } else {
+            AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
+                if response {
+                    DispatchQueue.main.async {
+                        self.perform(segue: StoryboardSegue.Welcome.signupQRCameraScannerSegue)
+                    }
+                } else {
+                    self.presentUnauthorizeCameraError()
+                }
+            }
+        }
+        
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == StoryboardSegue.Welcome.signupViaRedeemSegue.rawValue) {
+        
+        switch segue.identifier {
+        case StoryboardSegue.Welcome.signupViaRedeemSegue.rawValue:
             let nav = segue.destination as! UINavigationController
             let vc = nav.topViewController as! SignupInProgressViewController
             
@@ -159,10 +179,37 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             metadata.title = L10n.Welcome.Redeem.title
             metadata.bodySubtitle = L10n.Signup.InProgress.Redeem.message
             vc.metadata = metadata
-            vc.redeemRequest = RedeemRequest(email: email, code: friendlyRedeemCode(code))
+            vc.redeemRequest = RedeemRequest(email: email, code: GiftCardUtil.friendlyRedeemCode(code))
             vc.preset = preset
             vc.completionDelegate = completionDelegate
+        case StoryboardSegue.Welcome.signupQRCameraScannerSegue.rawValue:
+            guard let scannerViewController = segue.destination as? QRCameraScannerViewController else {
+                return
+            }
+            scannerViewController.delegate = self
+        default:
+            return
         }
+        
+    }
+    
+    private func presentUnauthorizeCameraError() {
+        presentAlertWith(title: L10n.Welcome.Camera.Access.Error.title,
+                         andMessage: L10n.Welcome.Camera.Access.Denied.message,
+                         andButtonTitle: L10n.Ui.Global.close)
+    }
+    
+    private func presentAlertWith(title: String,
+                                  andMessage message: String,
+                                  andButtonTitle buttonTitle: String ) {
+        
+        let alert = Macros.alert(title,
+                                 message)
+        alert.addCancelAction(buttonTitle)
+        present(alert,
+                animated: true,
+                completion: nil)
+
     }
 
     private func enableInteractions(_ enable: Bool) {
@@ -172,21 +219,6 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         } else {
             buttonRedeem.startActivity()
         }
-    }
-    
-    // MARK: Helpers
-    
-    private func friendlyRedeemCode(_ code: String) -> String {
-        return RedeemViewController.rxCodeGrouping.stringByReplacingMatches(
-            in: code,
-            options: [],
-            range: NSMakeRange(0, code.count),
-            withTemplate: "$0-"
-        )
-    }
-    
-    private func strippedRedeemCode(_ code: String) -> String {
-        return code.replacingOccurrences(of: "-", with: "")
     }
 
     // MARK: Restylable
@@ -232,7 +264,7 @@ extension RedeemViewController: UITextFieldDelegate {
         }
         
         let cursorLocation = textField.position(from: textField.beginningOfDocument, offset: range.location + string.count)
-        let newCode = strippedRedeemCode(newText)
+        let newCode = GiftCardUtil.strippedRedeemCode(newText)
         guard newCode.count <= RedeemViewController.codeLength else {
             return false
         }
@@ -249,4 +281,28 @@ extension RedeemViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         return true
     }
+}
+
+extension RedeemViewController: RedeemScannerDelegate {
+    
+    func giftCardCodeFound(withCode code: String) {
+        
+        if let redeemCode = GiftCardUtil.extractRedeemCode(code,
+                                                           strippedFormat: true),
+            Validator.validate(giftCode: redeemCode) {
+            textCode.text = GiftCardUtil.friendlyRedeemCode(redeemCode)
+            self.redeemCode = redeemCode
+        } else {
+            presentAlertWith(title: L10n.Welcome.Redeem.Error.title,
+                             andMessage: L10n.Welcome.Redeem.Error.Qrcode.invalid,
+                             andButtonTitle:L10n.Ui.Global.ok)
+        }
+    }
+    
+    func errorFound() {
+        presentAlertWith(title: L10n.Welcome.Camera.Access.Error.title,
+                         andMessage: L10n.Welcome.Camera.Access.Error.message,
+                         andButtonTitle:L10n.Ui.Global.close)
+    }
+    
 }

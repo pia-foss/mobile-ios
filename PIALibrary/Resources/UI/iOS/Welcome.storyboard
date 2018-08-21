@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VHM-bG-giz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VHM-bG-giz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1139,6 +1139,17 @@ You will not be charged during this process.</string>
                                                                             <outlet property="delegate" destination="qgN-PX-Sir" id="dW1-A9-fEp"/>
                                                                         </connections>
                                                                     </textField>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoC-xB-Jhr">
+                                                                        <rect key="frame" x="250" y="117" width="30" height="30"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="30" id="bCM-kI-tMy"/>
+                                                                        </constraints>
+                                                                        <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                                                        <state key="normal" image="qr-code"/>
+                                                                        <connections>
+                                                                            <action selector="showCameraToScanQRCodes:" destination="qgN-PX-Sir" eventType="touchUpInside" id="i22-HG-3Xe"/>
+                                                                        </connections>
+                                                                    </button>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tea-DU-K60" customClass="ActivityButton" customModule="PIALibrary" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="167" width="280" height="40"/>
                                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
@@ -1165,9 +1176,12 @@ You will not be charged during this process.</string>
                                                                     <constraint firstAttribute="bottom" secondItem="xcj-pL-a9w" secondAttribute="bottom" id="4lI-EV-hFu"/>
                                                                     <constraint firstItem="pbJ-dg-A3t" firstAttribute="top" secondItem="3ne-g6-NDW" secondAttribute="bottom" constant="20" id="5F7-D0-viR"/>
                                                                     <constraint firstAttribute="trailing" secondItem="S5y-bL-bNg" secondAttribute="trailing" id="5RT-z4-UFq"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="aoC-xB-Jhr" secondAttribute="trailing" id="925-8A-MSn"/>
                                                                     <constraint firstItem="tea-DU-K60" firstAttribute="leading" secondItem="TnM-Pl-njO" secondAttribute="leading" id="FYy-Le-HYh"/>
                                                                     <constraint firstItem="3ne-g6-NDW" firstAttribute="top" secondItem="S5y-bL-bNg" secondAttribute="bottom" constant="20" id="Hgd-B4-frq"/>
                                                                     <constraint firstItem="pbJ-dg-A3t" firstAttribute="height" secondItem="3ne-g6-NDW" secondAttribute="height" id="IUJ-r9-crT"/>
+                                                                    <constraint firstItem="aoC-xB-Jhr" firstAttribute="top" secondItem="3ne-g6-NDW" secondAttribute="bottom" constant="20" id="JHV-oQ-Ico"/>
+                                                                    <constraint firstItem="aoC-xB-Jhr" firstAttribute="height" secondItem="pbJ-dg-A3t" secondAttribute="height" id="LdG-rX-omr"/>
                                                                     <constraint firstItem="xcj-pL-a9w" firstAttribute="leading" secondItem="TnM-Pl-njO" secondAttribute="leading" id="Qng-Zc-Xvy"/>
                                                                     <constraint firstItem="tea-DU-K60" firstAttribute="trailing" secondItem="3ne-g6-NDW" secondAttribute="trailing" id="R8D-e4-h8a"/>
                                                                     <constraint firstItem="pbJ-dg-A3t" firstAttribute="leading" secondItem="3ne-g6-NDW" secondAttribute="leading" id="Sq9-EB-iDd"/>
@@ -1176,9 +1190,10 @@ You will not be charged during this process.</string>
                                                                     <constraint firstAttribute="width" priority="750" constant="280" id="aV8-Hz-Jvp"/>
                                                                     <constraint firstItem="QEC-Qu-zkj" firstAttribute="top" secondItem="TnM-Pl-njO" secondAttribute="top" id="fcA-aA-3kt"/>
                                                                     <constraint firstItem="tea-DU-K60" firstAttribute="leading" secondItem="3ne-g6-NDW" secondAttribute="leading" id="jTH-4f-ZLY"/>
+                                                                    <constraint firstItem="tea-DU-K60" firstAttribute="top" secondItem="aoC-xB-Jhr" secondAttribute="bottom" constant="20" id="pbY-F6-mLe"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="pbJ-dg-A3t" secondAttribute="trailing" id="qhK-Wr-Ika"/>
                                                                     <constraint firstAttribute="trailing" secondItem="xcj-pL-a9w" secondAttribute="trailing" id="qzi-8l-LNR"/>
                                                                     <constraint firstItem="S5y-bL-bNg" firstAttribute="top" secondItem="QEC-Qu-zkj" secondAttribute="bottom" constant="10" id="scj-YN-W64"/>
-                                                                    <constraint firstItem="pbJ-dg-A3t" firstAttribute="trailing" secondItem="3ne-g6-NDW" secondAttribute="trailing" id="toJ-5G-R2t"/>
                                                                     <constraint firstItem="S5y-bL-bNg" firstAttribute="leading" secondItem="TnM-Pl-njO" secondAttribute="leading" id="x2Y-Ul-kQx"/>
                                                                 </constraints>
                                                             </view>
@@ -1338,6 +1353,7 @@ You will not be charged during this process.</string>
                     </view>
                     <connections>
                         <outlet property="buttonRedeem" destination="tea-DU-K60" id="5tX-8w-A1k"/>
+                        <outlet property="cameraButton" destination="aoC-xB-Jhr" id="oNJ-qt-hbR"/>
                         <outlet property="labelLogin1" destination="Ovb-tk-w2q" id="43z-6a-sg0"/>
                         <outlet property="labelLogin2" destination="ecj-b6-crK" id="a8l-fb-1Ph"/>
                         <outlet property="labelSubtitle" destination="S5y-bL-bNg" id="hzd-5h-ycZ"/>
@@ -1349,17 +1365,56 @@ You will not be charged during this process.</string>
                         <outlet property="viewFooter" destination="h4C-e9-6n1" id="xcl-1q-9mx"/>
                         <outlet property="viewLogin" destination="h4C-e9-6n1" id="9QP-x0-OOS"/>
                         <segue destination="9jt-8I-K8i" kind="presentation" identifier="SignupViaRedeemSegue" id="Knv-fa-JGO"/>
+                        <segue destination="hSc-7t-RTF" kind="presentation" identifier="SignupQRCameraScannerSegue" id="xx6-S9-E8H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r3v-al-5qU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2375" y="-1899"/>
+            <point key="canvasLocation" x="2373.5999999999999" y="-1899.400299850075"/>
+        </scene>
+        <!--Camera Scanner View Controller-->
+        <scene sceneID="0ML-Wj-AS6">
+            <objects>
+                <viewController id="hSc-7t-RTF" customClass="QRCameraScannerViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ep7-uG-1hN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xjW-oD-kRx">
+                                <rect key="frame" x="5" y="25" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="mnt-Sa-70o"/>
+                                    <constraint firstAttribute="width" constant="44" id="uGL-95-tvI"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" image="close-icon"/>
+                                <connections>
+                                    <action selector="dismissView:" destination="hSc-7t-RTF" eventType="touchUpInside" id="6rL-tJ-P3p"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="xjW-oD-kRx" firstAttribute="top" secondItem="bb6-gq-GN1" secondAttribute="top" constant="5" id="PSn-O5-oZX"/>
+                            <constraint firstItem="xjW-oD-kRx" firstAttribute="leading" secondItem="bb6-gq-GN1" secondAttribute="leading" constant="5" id="e3d-hl-FCD"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bb6-gq-GN1"/>
+                    </view>
+                    <connections>
+                        <outlet property="closeButton" destination="xjW-oD-kRx" id="nl4-yD-KQR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GlS-xa-MJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3238" y="-1901"/>
         </scene>
     </scenes>
     <resources>
+        <image name="close-icon" width="50" height="50"/>
         <image name="nav-logo" width="354" height="36"/>
+        <image name="qr-code" width="325" height="325"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EEe-nI-dHO"/>
+        <segue reference="Knv-fa-JGO"/>
     </inferredMetricsTieBreakers>
 </document>

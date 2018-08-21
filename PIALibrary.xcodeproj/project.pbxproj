@@ -240,8 +240,13 @@
 		0EFEB4C420077AC900F81029 /* PIATunnelProvider+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFEB4BF2007784A00F81029 /* PIATunnelProvider+Profile.swift */; };
 		0EFEB4C520077AC900F81029 /* PIATunnelProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFEB4C02007784A00F81029 /* PIATunnelProfile.swift */; };
 		5EA54E484C7FD035341E021E /* Pods_PIALibrary_PIALibraryTests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A22DD34A821A4EDAED288D2 /* Pods_PIALibrary_PIALibraryTests_iOS.framework */; };
+		841BE60D212AD0F3002EF2D1 /* ValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BE60C212AD0F3002EF2D1 /* ValidatorTests.swift */; };
+		841BE60F212AFE49002EF2D1 /* GiftCardUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BE60E212AFE49002EF2D1 /* GiftCardUtil.swift */; };
+		841BE610212AFE69002EF2D1 /* GiftCardUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BE60E212AFE49002EF2D1 /* GiftCardUtil.swift */; };
+		841BE612212AFFA7002EF2D1 /* GiftCardUtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BE611212AFFA7002EF2D1 /* GiftCardUtilTests.swift */; };
 		843C67C22122E714005A3FDA /* AccountInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C67C12122E714005A3FDA /* AccountInfoTests.swift */; };
 		843C67C32122EA13005A3FDA /* AccountInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C67C12122E714005A3FDA /* AccountInfoTests.swift */; };
+		84D5DA702126CE2900F753F8 /* QRCameraScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D5DA6F2126CE2900F753F8 /* QRCameraScannerViewController.swift */; };
 		A56365AB3EAA4588B479616A /* Pods_PIALibrary_PIALibraryHost_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 476E8514A236C48F405ACA40 /* Pods_PIALibrary_PIALibraryHost_iOS.framework */; };
 		E07462773BC314E3183B240E /* Pods_PIALibrary_PIALibrary_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC5BF5764146CA9C6104276 /* Pods_PIALibrary_PIALibrary_iOS.framework */; };
 /* End PBXBuildFile section */
@@ -481,7 +486,11 @@
 		378AC49FB4E07B2415156492 /* Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		476E8514A236C48F405ACA40 /* Pods_PIALibrary_PIALibraryHost_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibraryHost_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64C04C071DE1CB44DE7945D6 /* Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibrary-iOS/Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		841BE60C212AD0F3002EF2D1 /* ValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorTests.swift; sourceTree = "<group>"; };
+		841BE60E212AFE49002EF2D1 /* GiftCardUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftCardUtil.swift; sourceTree = "<group>"; };
+		841BE611212AFFA7002EF2D1 /* GiftCardUtilTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftCardUtilTests.swift; sourceTree = "<group>"; };
 		843C67C12122E714005A3FDA /* AccountInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoTests.swift; sourceTree = "<group>"; };
+		84D5DA6F2126CE2900F753F8 /* QRCameraScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCameraScannerViewController.swift; sourceTree = "<group>"; };
 		9A22DD34A821A4EDAED288D2 /* Pods_PIALibrary_PIALibraryTests_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibraryTests_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD0536741E220873045CBCC7 /* Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		E865E7775CCB07BA4CE22DEE /* Pods_PIALibrary_PIALibrary_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibrary_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -674,6 +683,7 @@
 			children = (
 				0E4D4E9B1FA4CA7A007DA6DA /* Restylable.swift */,
 				0E4D4E9C1FA4CA7A007DA6DA /* Validator.swift */,
+				841BE60E212AFE49002EF2D1 /* GiftCardUtil.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -769,6 +779,7 @@
 				0EB8C0541F9CD38A005857E4 /* PurchasePlanCell.swift */,
 				0EB8C0551F9CD38A005857E4 /* PurchaseViewController.swift */,
 				0EA8072320A18C6B0033EC1A /* RedeemViewController.swift */,
+				84D5DA6F2126CE2900F753F8 /* QRCameraScannerViewController.swift */,
 				0EB8C0561F9CD38A005857E4 /* RestoreSignupViewController.swift */,
 				0EB8C0571F9CD38A005857E4 /* SignupFailureViewController.swift */,
 				0EB8C0581F9CD38A005857E4 /* SignupInProgressViewController.swift */,
@@ -914,6 +925,8 @@
 				0EA4C4411FDDFD830041C3D8 /* ServerTests.swift */,
 				0E2ADD441FE1583A00BB170C /* VPNTests.swift */,
 				843C67C12122E714005A3FDA /* AccountInfoTests.swift */,
+				841BE60C212AD0F3002EF2D1 /* ValidatorTests.swift */,
+				841BE611212AFFA7002EF2D1 /* GiftCardUtilTests.swift */,
 				0EE78B011F818A20002E4CDD /* Info-iOS.plist */,
 				0E2ADD201FE13B8600BB170C /* Info-macOS.plist */,
 			);
@@ -1377,6 +1390,7 @@
 				0E7BC6F51F96B1120035C8B2 /* Credentials.swift in Sources */,
 				0E2ADCCB1FE06D7A00BB170C /* Array+Math.swift in Sources */,
 				0E7BC6EE1F96B1120035C8B2 /* AccountProvider.swift in Sources */,
+				841BE610212AFE69002EF2D1 /* GiftCardUtil.swift in Sources */,
 				0E7BC6F61F96B1120035C8B2 /* AccountInfo.swift in Sources */,
 				0E3D13D71F9E272B00434A48 /* GlossPayment.swift in Sources */,
 				0E2ADD491FE1595300BB170C /* IPSecProfile.swift in Sources */,
@@ -1498,6 +1512,7 @@
 				0EB9667E1FDF36490086ABC2 /* GlossParser.swift in Sources */,
 				0EAA38991F9CC7E4000149CF /* AppStoreTransaction.swift in Sources */,
 				0EA8072720A1A0090033EC1A /* Redeem.swift in Sources */,
+				84D5DA702126CE2900F753F8 /* QRCameraScannerViewController.swift in Sources */,
 				0E392D951FE316860002160D /* DebugLog.swift in Sources */,
 				0EAA38981F9CC7E4000149CF /* AppStoreProduct.swift in Sources */,
 				0E1743131F82E1A4001E7DD6 /* Client.swift in Sources */,
@@ -1537,6 +1552,7 @@
 				0E492C6A1FE61485007F23DF /* Client+Database.swift in Sources */,
 				0E48A8531FDAD60900B9A4C0 /* OptionsViewController.swift in Sources */,
 				0EB8C06C1F9CD38B005857E4 /* SignupFailureViewController.swift in Sources */,
+				841BE60F212AFE49002EF2D1 /* GiftCardUtil.swift in Sources */,
 				0EB8C0681F9CD38B005857E4 /* PIAWelcomeViewController.swift in Sources */,
 				0E2ADD481FE1595300BB170C /* IPSecProfile.swift in Sources */,
 				0EFB51271F82A5F80033B81F /* Notification+Core.swift in Sources */,
@@ -1571,11 +1587,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E53A85A1FE5E3CD000C2A18 /* MockProviders.swift in Sources */,
+				841BE60D212AD0F3002EF2D1 /* ValidatorTests.swift in Sources */,
 				843C67C22122E714005A3FDA /* AccountInfoTests.swift in Sources */,
 				0EE78B001F818A20002E4CDD /* AccountTests.swift in Sources */,
 				0EA4C4421FDDFD840041C3D8 /* ServerTests.swift in Sources */,
 				0EB8C0461F9CCB7C005857E4 /* AccountSignupTests.swift in Sources */,
 				0E2ADD451FE1583A00BB170C /* VPNTests.swift in Sources */,
+				841BE612212AFFA7002EF2D1 /* GiftCardUtilTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
