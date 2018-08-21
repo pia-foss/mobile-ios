@@ -2,24 +2,24 @@
 
 #if os(OSX)
   import AppKit.NSImage
-  typealias AssetColorTypeAlias = NSColor
-  typealias Image = NSImage
+  internal typealias AssetColorTypeAlias = NSColor
+  internal typealias Image = NSImage
 #elseif os(iOS) || os(tvOS) || os(watchOS)
   import UIKit.UIImage
-  typealias AssetColorTypeAlias = UIColor
-  typealias Image = UIImage
+  internal typealias AssetColorTypeAlias = UIColor
+  internal typealias Image = UIImage
 #endif
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 @available(*, deprecated, renamed: "ImageAsset")
-typealias AssetType = ImageAsset
+internal typealias AssetType = ImageAsset
 
-struct ImageAsset {
-  fileprivate var name: String
+internal struct ImageAsset {
+  internal fileprivate(set) var name: String
 
-  var image: Image {
+  internal var image: Image {
     let bundle = Bundle(for: BundleToken.self)
     #if os(iOS) || os(tvOS)
     let image = Image(named: name, in: bundle, compatibleWith: nil)
@@ -33,30 +33,33 @@ struct ImageAsset {
   }
 }
 
-struct ColorAsset {
-  fileprivate var name: String
+internal struct ColorAsset {
+  internal fileprivate(set) var name: String
 
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  var color: AssetColorTypeAlias {
+  internal var color: AssetColorTypeAlias {
     return AssetColorTypeAlias(asset: self)
   }
 }
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
-enum Asset {
-  static let imageAccountFailed = ImageAsset(name: "image-account-failed")
-  static let imageNoInternet = ImageAsset(name: "image-no-internet")
-  static let imagePurchaseSuccess = ImageAsset(name: "image-purchase-success")
-  static let imageReceiptBackground = ImageAsset(name: "image-receipt-background")
-  static let imageRedeemClaimed = ImageAsset(name: "image-redeem-claimed")
-  static let imageRedeemInvalid = ImageAsset(name: "image-redeem-invalid")
-  static let imageRedeemSuccess = ImageAsset(name: "image-redeem-success")
-  static let navLogo = ImageAsset(name: "nav-logo")
+internal enum Asset {
+  internal static let closeIcon = ImageAsset(name: "close-icon")
+  internal static let imageAccountFailed = ImageAsset(name: "image-account-failed")
+  internal static let imageNoInternet = ImageAsset(name: "image-no-internet")
+  internal static let imagePurchaseSuccess = ImageAsset(name: "image-purchase-success")
+  internal static let imageReceiptBackground = ImageAsset(name: "image-receipt-background")
+  internal static let imageRedeemClaimed = ImageAsset(name: "image-redeem-claimed")
+  internal static let imageRedeemInvalid = ImageAsset(name: "image-redeem-invalid")
+  internal static let imageRedeemSuccess = ImageAsset(name: "image-redeem-success")
+  internal static let navLogo = ImageAsset(name: "nav-logo")
+  internal static let qrCode = ImageAsset(name: "qr-code")
 
   // swiftlint:disable trailing_comma
-  static let allColors: [ColorAsset] = [
+  internal static let allColors: [ColorAsset] = [
   ]
-  static let allImages: [ImageAsset] = [
+  internal static let allImages: [ImageAsset] = [
+    closeIcon,
     imageAccountFailed,
     imageNoInternet,
     imagePurchaseSuccess,
@@ -65,14 +68,15 @@ enum Asset {
     imageRedeemInvalid,
     imageRedeemSuccess,
     navLogo,
+    qrCode,
   ]
   // swiftlint:enable trailing_comma
   @available(*, deprecated, renamed: "allImages")
-  static let allValues: [AssetType] = allImages
+  internal static let allValues: [AssetType] = allImages
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
-extension Image {
+internal extension Image {
   @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
   @available(OSX, deprecated,
     message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")
@@ -88,7 +92,7 @@ extension Image {
   }
 }
 
-extension AssetColorTypeAlias {
+internal extension AssetColorTypeAlias {
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
   convenience init!(asset: ColorAsset) {
     let bundle = Bundle(for: BundleToken.self)
