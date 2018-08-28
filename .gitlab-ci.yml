@@ -108,7 +108,7 @@ beta_manual_archive:
     when:
         manual
     only:
-        - release/.*$
+        - release\/.*$
     tags:
         - ios
 
@@ -125,7 +125,7 @@ beta_manual_deploy:
     when:
         manual
     only:
-        - release/.*$
+        - release\/.*$
     tags:
         - ios
 
