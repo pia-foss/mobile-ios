@@ -49,7 +49,7 @@ qa_archive:
         expire_in: 1 week
     only:
         - develop
-        - release/^(\d+\.)?(\d+\.)?(\*|\d+)$
+        - release\/(\d+\.)(\d+\.)(\d+)
     tags:
         - ios
 
@@ -74,7 +74,7 @@ qa_deploy:
         expire_in: 1 week
     only:
         - develop
-        - release/^(\d+\.)?(\d+\.)?(\*|\d+)
+        - release\/(\d+\.)(\d+\.)(\d+)
     tags:
         - ios
 
@@ -91,7 +91,7 @@ qa_notify:
         manual
     only:
         - develop
-        - release/^(\d+\.)?(\d+\.)?(\*|\d+)
+        - release\/(\d+\.)(\d+\.)(\d+)
     tags:
         - ios
 
@@ -111,7 +111,7 @@ beta_manual_archive:
     when:
         manual
     only:
-        - release/^(\d+\.)?(\d+\.)?(\*|\d+)
+        - release\/(\d+\.)(\d+\.)(\d+)
     tags:
         - ios
 
@@ -128,7 +128,7 @@ beta_manual_deploy:
     when:
         manual
     only:
-        - release/^(\d+\.)?(\d+\.)?(\*|\d+)
+        - release\/(\d+\.)(\d+\.)(\d+)
     tags:
         - ios
 
