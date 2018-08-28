@@ -49,6 +49,7 @@ qa_archive:
         expire_in: 1 week
     only:
         - develop
+        - /^release.*$/
     tags:
         - ios
 
@@ -73,6 +74,7 @@ qa_deploy:
         expire_in: 1 week
     only:
         - develop
+        - /^release.*$/
     tags:
         - ios
 
@@ -89,6 +91,7 @@ qa_notify:
         manual
     only:
         - develop
+        - /^release.*$/
     tags:
         - ios
 
@@ -129,36 +132,36 @@ beta_manual_deploy:
     tags:
         - ios
 
-beta_archive:
-    stage: archive
-    variables:
-        MATCH_TYPE: "appstore"
-        GYM_SCHEME: "PIA VPN"
-        GYM_EXPORT_METHOD: "app-store"
-    script:
-        #- bundle exec fastlane clean_openssl
-        - bundle exec fastlane create_archive
-    artifacts:
-        paths:
-            - "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.*"
-        expire_in: 1 week
-    only:
-        - master
-    tags:
-        - ios
+#beta_archive:
+#    stage: archive
+#    variables:
+#        MATCH_TYPE: "appstore"
+#        GYM_SCHEME: "PIA VPN"
+#        GYM_EXPORT_METHOD: "app-store"
+#    script:
+#        #- bundle exec fastlane clean_openssl
+#        - bundle exec fastlane create_archive
+#    artifacts:
+#        paths:
+#            - "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.*"
+#        expire_in: 1 week
+#    only:
+#        - master
+#    tags:
+#        - ios
 
-beta_deploy:
-    stage: deploy
-    variables:
-        PILOT_IPA: "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.ipa"
-        PILOT_DISTRIBUTE_EXTERNAL: "true"
-        DEMO_ACCOUNT_REQUIRED: "true"
-    script:
-        - bundle exec fastlane beta_deploy
-    environment:
-        name: "testflight"
-    only:
-        - master
-    tags:
-        - ios
+#beta_deploy:
+#    stage: deploy
+#    variables:
+#        PILOT_IPA: "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.ipa"
+#        PILOT_DISTRIBUTE_EXTERNAL: "true"
+#        DEMO_ACCOUNT_REQUIRED: "true"
+#    script:
+#        - bundle exec fastlane beta_deploy
+#    environment:
+#        name: "testflight"
+#    only:
+#        - master
+#    tags:
+#        - ios
 
