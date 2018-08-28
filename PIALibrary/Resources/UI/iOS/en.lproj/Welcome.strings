@@ -16,7 +16,7 @@
 "login.redeem.button" = "Redeem now";
 "login.restore.button" = "Couldn't get your plan?";
 "login.error.title" = "Log in";
-"login.error.validation" = "You must enter an username and password.";
+"login.error.validation" = "You must enter a username and password.";
 "login.error.unauthorized" = "Your username or password is incorrect.";
 "login.error.throttled" = "Too many failed login attempts with this username. Please try again later.";
 
