@@ -95,6 +95,43 @@ qa_notify:
     tags:
         - ios
 
+beta_manual_archive:
+    stage: archive
+    variables:
+        MATCH_TYPE: "appstore"
+        GYM_SCHEME: "PIA VPN"
+        GYM_EXPORT_METHOD: "app-store"
+    script:
+        #- bundle exec fastlane clean_openssl
+        - bundle exec fastlane create_archive
+    artifacts:
+        paths:
+            - "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.*"
+        expire_in: 1 week
+    when:
+        manual
+    only:
+        - release/^(\d+\.)?(\d+\.)?(\*|\d+)
+    tags:
+        - ios
+
+beta_manual_deploy:
+    stage: deploy
+    variables:
+        PILOT_IPA: "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.ipa"
+        PILOT_DISTRIBUTE_EXTERNAL: "true"
+        DEMO_ACCOUNT_REQUIRED: "true"
+    script:
+        - bundle exec fastlane beta_deploy
+    environment:
+        name: "testflight"
+    when:
+        manual
+    only:
+        - release/^(\d+\.)?(\d+\.)?(\*|\d+)
+    tags:
+        - ios
+
 beta_archive:
     stage: archive
     variables:
