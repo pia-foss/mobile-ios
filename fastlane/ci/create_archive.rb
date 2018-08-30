@@ -2,7 +2,7 @@ desc "Archive a new build"
 lane :create_archive do
     #ensure_git_status_clean
     sh "cd .. && rm -rf Pods/SideMenu"
-    cocoapods
+    cocoapods(try_repo_update_on_error: true)
     sh "cd .. && git apply ci/0001-Close-menu-on-rotation.patch"
 
     get_build_number
