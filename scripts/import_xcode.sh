@@ -13,6 +13,7 @@
 CWD=`pwd`
 DIR=$1
 ORIGINAL="PIA VPN/en.lproj/Localizable.strings"
+ORIGINAL_PLIST="PIA VPN/en.lproj/InfoPlist.strings"
 HERE=`dirname $0`
 
 rm -f en-US.xliff
@@ -25,7 +26,15 @@ for SRC in `ls $DIR/*.xliff`; do
     elif [ $LANG == 'zh-TW' ]; then
         LANG="zh-Hant"
     fi
+
+    #Update string file
     DST=${ORIGINAL/en.lproj/$LANG.lproj}
     echo "Writing to: $DST"
     $HERE/xliff2strings $SRC "$ORIGINAL" >$CWD/$DST
+
+    #Update InfoPlist file
+    DST=${ORIGINAL_PLIST/en.lproj/$LANG.lproj}
+    echo "Writing to InfoPlist: $DST"
+    $HERE/xliff2strings $SRC "$ORIGINAL_PLIST" >$CWD/$DST
+
 done
