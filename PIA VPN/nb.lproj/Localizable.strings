@@ -6,6 +6,8 @@
 "account.accessibility.eye.hint.reveal" = "Trykk for å vise passordet";
 "account.email.caption" = "E-post";
 "account.email.placeholder" = "E-postadresse";
+"account.expiry_date.expired" = "Planen din er utløpt.";
+"account.expiry_date.information" = "Planen din utløper %@.";
 "account.eye.footer" = "Trykk på øye-ikonet for å vise eller skjule passordet ditt.";
 "account.other.footer" = "Få Private Internet Access-appen på de andre enhetene dine og bruk det ovenfornevnte brukernavnet og passordet for å logge inn og sikre tilkoblingen din.";
 "account.password.caption" = "Passord";

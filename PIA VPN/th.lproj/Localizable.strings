@@ -6,6 +6,8 @@
 "account.accessibility.eye.hint.reveal" = "แตะเพื่อเปิดรหัสผ่านของคุณ";
 "account.email.caption" = "อีเมล";
 "account.email.placeholder" = "อีเมลแอดเดรส";
+"account.expiry_date.expired" = "แพ็กเกจของคุณหมดอายุแล้ว";
+"account.expiry_date.information" = "แพ็กเกจของคุณจะหมดอายุ %@";
 "account.eye.footer" = "แตะที่ไอคอนรูปตาเพื่อเปิดหรือปิดบังรหัสผ่านของคุณ";
 "account.other.footer" = "ดาวน์โหลดแอพ Private Internet Access บนอุปกรณ์อื่นของคุณและใช้ชื่อผู้ใช้และรหัสผ่านด้านบนเพื่อเข้าสู่ระบบและทำให้การเชื่อมต่อของคุณปลอดภัย";
 "account.password.caption" = "รหัสผ่าน";

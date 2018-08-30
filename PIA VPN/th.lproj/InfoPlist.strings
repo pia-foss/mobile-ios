@@ -1,3 +1,2 @@
-/* (No Comment) */
+"NSCameraUsageDescription" = "เราต้องเข้าถึงกล้องเพื่อให้คุณสแกน QR โค้ดเพื่อแลกรับบัตรของขวัญ";
 "NSFaceIDUsageDescription" = "อนุญาตให้เปิดเผย";
-

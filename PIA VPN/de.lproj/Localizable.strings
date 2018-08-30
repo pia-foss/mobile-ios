@@ -6,6 +6,8 @@
 "account.accessibility.eye.hint.reveal" = "Tippen, um Passwort anzuzeigen";
 "account.email.caption" = "E-Mail";
 "account.email.placeholder" = "E-Mail-Adresse";
+"account.expiry_date.expired" = "Dein Tarif ist abgelaufen.";
+"account.expiry_date.information" = "Dein Tarif lauft am %@ ab.";
 "account.eye.footer" = "Auf Augensymbol klicken, um dein Passwort ein- oder auszublenden.";
 "account.other.footer" = "Hol dir die App Private Internet Access für deine anderen Geräte und verwende den oben stehenden Benutzernamen und das Passwort, um dich anzumelden und deine Verbindung zu sichern.";
 "account.password.caption" = "Passwort";

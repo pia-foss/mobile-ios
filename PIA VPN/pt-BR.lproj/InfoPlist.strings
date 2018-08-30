@@ -1,3 +1,2 @@
-/* (No Comment) */
+"NSCameraUsageDescription" = "Precisamos de acesso à câmera para que você possa digitalizar códigos QR para resgatar um cartão-presente";
 "NSFaceIDUsageDescription" = "Autenticar para revelar";
-

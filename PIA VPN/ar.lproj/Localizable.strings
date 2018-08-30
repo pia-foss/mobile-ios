@@ -6,6 +6,8 @@
 "account.accessibility.eye.hint.reveal" = "اضغط لإظهار كلمة المرور";
 "account.email.caption" = "البريد الإلكتروني";
 "account.email.placeholder" = "البريد الإلكتروني";
+"account.expiry_date.expired" = "لقد انتهت صلاحية خطتك.";
+"account.expiry_date.information" = "ستنتهي صلاحية خطتك في %@.";
 "account.eye.footer" = "اضغط على رمز العين للكشف عن كلمة المرور أو إخفائها.";
 "account.other.footer" = "احصل على تطبيق Private Internet Access لأجهزتك الأخرى واستخدم اسم المستخدم وكلمة المرور الموجودين أعلاه لتسجيل الدخول وتأمين اتصالك.";
 "account.password.caption" = "كلمة المرور";

@@ -6,6 +6,8 @@
 "account.accessibility.eye.hint.reveal" = "點一下即可隱藏密碼";
 "account.email.caption" = "Email";
 "account.email.placeholder" = "電子郵件地址";
+"account.expiry_date.expired" = "您的計劃已過期。";
+"account.expiry_date.information" = "您的計劃將於 %@ 過期。";
 "account.eye.footer" = "點選眼睛圖示即可顯示或隱藏密碼。";
 "account.other.footer" = "您只要在您的其他裝置上安裝 Private Internet Access App，然後使用上方的使用者名稱及密碼登入，即可保障您的網路連線安全。";
 "account.password.caption" = "密碼";

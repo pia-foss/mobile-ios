@@ -6,6 +6,8 @@
 "account.accessibility.eye.hint.reveal" = "Toucher pour afficher le mot de passe";
 "account.email.caption" = "E-mail";
 "account.email.placeholder" = "Adresse e-mail";
+"account.expiry_date.expired" = "Votre forfait a expiré.";
+"account.expiry_date.information" = "Votre forfait expirera le %@.";
 "account.eye.footer" = "Touchez l'icône d'œil pour afficher ou masquer votre mot de passe.";
 "account.other.footer" = "Obtenez l'application Private Internet Access pour vos autres appareils et utilisez le nom d'utilisateur et le mot de passe ci-dessus pour vous connecter et sécuriser votre connexion.";
 "account.password.caption" = "Mot de passe";

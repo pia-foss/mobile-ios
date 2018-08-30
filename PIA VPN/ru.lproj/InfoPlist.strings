@@ -1,3 +1,2 @@
-/* (No Comment) */
+"NSCameraUsageDescription" = "Нам нужен доступ к камере, чтобы сканировать QR-коды и использовать подарочную карту";
 "NSFaceIDUsageDescription" = "Выполните аутентификацию для показа";
-
