@@ -65,7 +65,7 @@ internal enum L10n {
         internal static let title = L10n.tr("Welcome", "login.error.title")
         /// Your username or password is incorrect.
         internal static let unauthorized = L10n.tr("Welcome", "login.error.unauthorized")
-        /// You must enter an username and password.
+        /// You must enter a username and password.
         internal static let validation = L10n.tr("Welcome", "login.error.validation")
       }
 

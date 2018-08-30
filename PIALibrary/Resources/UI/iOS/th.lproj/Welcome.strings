@@ -1,6 +1,9 @@
 "agreement.message" = "ในการสมัคร ระบบจะขอให้คุณยอมรับ $1 และ $2";
 "agreement.message.privacy" = "นโยบายความเป็นส่วนตัว";
 "agreement.message.tos" = "ข้อตกลงการใช้บริการ";
+"camera.access.denied.message" = "เปิดใช้การเข้าถึงกล้องเพื่อให้คุณสแกน QR โค้ดเพื่อแลกรับบัตรของขวัญ";
+"camera.access.error.message" = "อุปกรณ์ของคุณไม่รองรับการสแกน QR โค้ด กรุณาใช้อุปกรณ์ที่มีกล้องถ่ายรูป";
+"camera.access.error.title" = "กล้องไม่พร้อมใช้งาน";
 "iap.error.message.unavailable" = "ไม่พบเซิร์ฟเวอร์แอปเปิ้ลในขณะนี้ โปรดลองใหม่ภายหลัง";
 "iap.error.title" = "ข้อผิดพลาด";
 "login.error.throttled" = "มีการลงชื่อเข้าใช้ล้มเหลวด้วยชื่อผู้ใช้นี้เกินจำนวนครั้งที่กำหนด โปรดลองใหม่อีกครั้งภายใน";
@@ -23,6 +26,8 @@
 "plan.yearly.detail_format" = "%@%@ ต่อปี";
 "plan.yearly.title" = "รายปี";
 "purchase.email.placeholder" = "อีเมลแอดเดรส";
+"purchase.error.connectivity.description" = "เราไม่สามารถเข้าถึง Private Internet Access ซึ่งอาจเป็นเพราะอินเทอร์เน็ตไม่เสถียรหรือบริการของเราถูกบล็อกในประเทศของคุณ";
+"purchase.error.connectivity.title" = "ความล้มเหลวในการเชื่อมต่อ";
 "purchase.error.title" = "ซื้อ";
 "purchase.error.validation" = "คุณต้องใส่ที่อยู่อีเมล";
 "purchase.login.button" = "ลงชื่อเข้าใช้";
@@ -32,6 +37,7 @@
 "purchase.title" = "เลือกแผน VPN";
 "redeem.email.placeholder" = "ที่อยู่อีเมล";
 "redeem.error.code" = "รหัสต้องประกอบด้วยตัวเลข %lu หลัก";
+"redeem.error.qrcode.invalid" = "ลำดับ QR โค้ดไม่ถูกต้อง กรุณาลองอีกครั้ง";
 "redeem.error.title" = "ใช้สิทธิ์";
 "redeem.submit" = "ส่ง";
 "redeem.subtitle" = "พิมพ์ที่อยู่อีเมลของคุณและ PIN %lu หลักจากบัตรของขวัญหรือบัตรทดลองด้านล่าง";
@@ -40,4 +46,3 @@
 "restore.submit" = "ยืนยัน";
 "restore.subtitle" = "หากคุณทำการซื้อแผนผ่านแอพนี้และยังไม่ได้รับข้อมูลประจำตัว คุณสามารถส่งอีกครั้งได้จากที่นี่\nคุณจะไม่ถูกเรียกเก็บเงินซ้ำอีกครั้งในกระบวนการนี้";
 "restore.title" = "คืนค่าการซื้อยังไม่ได้คิดเครดิต";
-"welcome.accessibility.cancel" = "ยกเลิก";

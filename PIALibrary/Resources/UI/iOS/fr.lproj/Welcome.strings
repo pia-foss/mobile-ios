@@ -1,6 +1,9 @@
 "agreement.message" = "Pour vous inscrire, vous devez accepter les $1 et la $2.";
 "agreement.message.privacy" = "Politique de confidentialité";
 "agreement.message.tos" = "Conditions d'utilisation";
+"camera.access.denied.message" = "Activez l'accès à l'appareil photo pour scanner les codes QR et utiliser ainsi les cartes cadeau.";
+"camera.access.error.message" = "Votre appareil ne permet pas de scanner les codes QR. Veuillez utiliser un appareil doté d'un appareil photo.";
+"camera.access.error.title" = "Appareil photo indisponible";
 "iap.error.message.unavailable" = "Les serveurs Apple ne sont pas disponibles actuellement. Veuillez réessayer plus tard.";
 "iap.error.title" = "Erreur";
 "login.error.throttled" = "Trop de tentatives de connexion échouées avec ce nom d'utilisateur. Veuillez réessayer plus tard.";
@@ -23,6 +26,8 @@
 "plan.yearly.detail_format" = "%@%@ par an";
 "plan.yearly.title" = "Annuellement";
 "purchase.email.placeholder" = "Adresse e-mail";
+"purchase.error.connectivity.description" = "Nous n'arrivons pas à joindre Private Internet Access. Cela peut être dû à une connexion Internet de faible qualité ou parce que notre service est bloqué dans votre pays.";
+"purchase.error.connectivity.title" = "Échec de la connexion";
 "purchase.error.title" = "Acheter";
 "purchase.error.validation" = "Vous devez entrer une adresse e-mail.";
 "purchase.login.button" = "Connectez-vous";
@@ -32,6 +37,7 @@
 "purchase.title" = "Sélectionnez un forfait VPN";
 "redeem.email.placeholder" = "Adresse e-mail";
 "redeem.error.code" = "Le code doit contenir %lu chiffres numériques.";
+"redeem.error.qrcode.invalid" = "Séquence de code QR invalide. Veuillez réessayer.";
 "redeem.error.title" = "Échanger";
 "redeem.submit" = "ENVOYER";
 "redeem.subtitle" = "Veuillez saisir ci-dessous votre adresse e-mail et le code PIN à %lu chiffres de votre carte cadeau ou carte d'essai.";
@@ -40,4 +46,3 @@
 "restore.submit" = "CONFIRMER";
 "restore.subtitle" = "Si vous avez acheté un forfait via cette application et n'avez pas reçu vos identifiants, il est possible de les renvoyer à partir d'ici. Cette action ne vous sera pas facturée.";
 "restore.title" = "Restaurer l'achat non crédité";
-"welcome.accessibility.cancel" = "Annuler";

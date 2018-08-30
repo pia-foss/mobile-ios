@@ -1,6 +1,9 @@
 "agreement.message" = "Rejestracja składa się z zaakceptowania $1 i $2.";
 "agreement.message.privacy" = "Zasady ochrony prywatności";
 "agreement.message.tos" = "Warunki użytkowania";
+"camera.access.denied.message" = "Zezwól na dostęp do aparatu, aby skanować kody QR i korzystać z kart upominkowych.";
+"camera.access.error.message" = "Twoje urządzenie nie obsługuje skanowania kodów QR. Użyj urządzenia z aparatem.";
+"camera.access.error.title" = "Aparat nie dostępny";
 "iap.error.message.unavailable" = "Serwery Apple'a są w tej chwili niedostępne. Spróbuj ponownie później.";
 "iap.error.title" = "Błąd";
 "login.error.throttled" = "Zbyt wiele nieudanych prób logowania z tą nazwą użytkownika. Spróbuj ponownie później.";
@@ -23,6 +26,8 @@
 "plan.yearly.detail_format" = "%@%@ rocznie";
 "plan.yearly.title" = "Rocznie";
 "purchase.email.placeholder" = "Adres e-mail";
+"purchase.error.connectivity.description" = "Nie można połączyć z Private Internet Access. Może to być spowodowane słabym połączeniem z internetem lub nasza usługa może być zablokowana w Twoim kraju.";
+"purchase.error.connectivity.title" = "Błąd połączenia";
 "purchase.error.title" = "Zakup";
 "purchase.error.validation" = "Musisz podać adres e-mail.";
 "purchase.login.button" = "Zaloguj";
@@ -32,6 +37,7 @@
 "purchase.title" = "Wybierz plan VPN";
 "redeem.email.placeholder" = "Adres e-mail";
 "redeem.error.code" = "Kod musi składać się z %lu znaków numerycznych.";
+"redeem.error.qrcode.invalid" = "Nieprawidłowa sekwencja kodu QR. Spróbuj ponownie.";
 "redeem.error.title" = "Wykorzystaj";
 "redeem.submit" = "PRZEŚLIJ";
 "redeem.subtitle" = "Wpisz swój adres e-mail oraz %lu-cyfrowy PIN z karty podarunkowej lub karty próbnej poniżej.";
@@ -40,4 +46,3 @@
 "restore.submit" = "POTWIERDŹ";
 "restore.subtitle" = "Jeśli kupił(a)ś plan, korzystając z tej aplikacji, ale nie dostałe(a)ś danych logowania, możesz wysłać je ponownie stąd.\nOpłata nie zostanie za to pobrana.";
 "restore.title" = "Przywróć pominięty zakup";
-"welcome.accessibility.cancel" = "Anuluj";

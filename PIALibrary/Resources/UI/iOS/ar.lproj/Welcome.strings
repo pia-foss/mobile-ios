@@ -1,6 +1,9 @@
 "agreement.message" = "بتسجيلك، تقر بأنك توافق على $1 و $2.";
 "agreement.message.privacy" = "سياسة الخصوصية";
 "agreement.message.tos" = "شروط الخدمة";
+"camera.access.denied.message" = "مكّن الوصول إلى الكاميرا لقراءة رموز QR لتتمكن من استلام محتوى بطاقة الهدايا.";
+"camera.access.error.message" = "لا يدعم جهازك خاصية قراءة رموز QR. يرجى استخدام جهاز عليه كاميرا.";
+"camera.access.error.title" = "الكاميرا غير متوفرة";
 "iap.error.message.unavailable" = "خوادم أبل غير متاحة حاليًا. يرجى إعادة المحاولة لاحقًا.";
 "iap.error.title" = "خطأ";
 "login.error.throttled" = "لقد أجريت الكثير من المحاولات الفاشلة باسم المستخدم هذا. يرجى إعادة المحاولة لاحقًا.";
@@ -23,6 +26,8 @@
 "plan.yearly.detail_format" = "%@%@ في السنة";
 "plan.yearly.title" = "سنويًا";
 "purchase.email.placeholder" = "البريد الإلكتروني";
+"purchase.error.connectivity.description" = "لم نتمكن من الوصول إلى منفذ الإنترنت الخاص. ربما بسبب اتصال ضعيف بالإنترنت أو خدماتنا موقوفة في بلدك.";
+"purchase.error.connectivity.title" = "فشل الاتصال";
 "purchase.error.title" = "شراء";
 "purchase.error.validation" = "يجب إدخال عنوان بريد إلكتروني.";
 "purchase.login.button" = "تسجيل الدخول";
@@ -32,6 +37,7 @@
 "purchase.title" = "حدد خطة VPN";
 "redeem.email.placeholder" = "البريد الإلكتروني";
 "redeem.error.code" = "يجب أن يتكون الرمز من %lu خانات رقمية.";
+"redeem.error.qrcode.invalid" = "تسلسل رمز QR غير صالح. حاول مرة اخرى.";
 "redeem.error.title" = "استلام";
 "redeem.submit" = "إرسال";
 "redeem.subtitle" = "أدخل بريدك الإلكتروني ورمز بطاقة الهدية أو بطاقة التجربة المكون من %lu خانات.";
@@ -40,4 +46,3 @@
 "restore.submit" = "تأكيد";
 "restore.subtitle" = "إذا اشتريت خطة من خلال هذا التطبيق ولم تصلك بيانات تسجيل دخولك، يمكنك إرسالها مرة أخرى من هنا.\nلن يتم تحصيل رسوم منك أثناء هذه العملية.";
 "restore.title" = "استرداد الشراء غير المقيد في الحساب";
-"welcome.accessibility.cancel" = "إلغاء";

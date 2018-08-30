@@ -1,12 +1,15 @@
 "agreement.message" = "La registrazione implica l'accettazione dei $1 e dell'$2.";
 "agreement.message.privacy" = "Informativa sulla Privacy";
 "agreement.message.tos" = "Termini di servizio";
+"camera.access.denied.message" = "Abilita l'accesso alla fotocamera per acquisire codici QR e riscattare una carta regalo.";
+"camera.access.error.message" = "Il tuo dispositivo non supporta la scansione di codici QR. Utilizza un dispositivo con una fotocamera.";
+"camera.access.error.title" = "Fotocamera non disponibile";
 "iap.error.message.unavailable" = "Server Apple attualmente non disponibili. Riprova più tardi.";
 "iap.error.title" = "Errore";
 "login.error.throttled" = "Troppi tentativi d'accesso non riusciti con questo nome utente. Riprova più tardi.";
 "login.error.title" = "Accedi";
 "login.error.unauthorized" = "Nome utente o password non valida";
-"login.error.validation" = "Devi inserire nome utente e password.";
+"login.error.validation" = "Devi inserire un nome utente e una password.";
 "login.password.placeholder" = "Password";
 "login.purchase.button" = "Acquistalo ora";
 "login.purchase.footer" = "Non possiedi un account?";
@@ -23,6 +26,8 @@
 "plan.yearly.detail_format" = "%@%@ all'anno";
 "plan.yearly.title" = "Annuale";
 "purchase.email.placeholder" = "Indirizzo email";
+"purchase.error.connectivity.description" = "Non siamo in grado di stabilire l'accesso a una rete Internet privata. Ciò potrebbe essere dovuto a una scarsa qualità della rete o a un blocco dei nostri servizi nel tuo paese.";
+"purchase.error.connectivity.title" = "Errore di connessione";
 "purchase.error.title" = "Acquista";
 "purchase.error.validation" = "Devi indicare un indirizzo e-mail.";
 "purchase.login.button" = "Accedi";
@@ -32,6 +37,7 @@
 "purchase.title" = "Seleziona un piano VPN";
 "redeem.email.placeholder" = "Indirizzo email";
 "redeem.error.code" = "Il codice dev'essere di %lu cifre.";
+"redeem.error.qrcode.invalid" = "Sequenza codice QR non valida. Riprova.";
 "redeem.error.title" = "Riscatta";
 "redeem.submit" = "INVIA";
 "redeem.subtitle" = "Digita qui sotto il tuo indirizzo email e le %lu cifre del PIN della carta regalo o carta di prova.";
@@ -40,4 +46,3 @@
 "restore.submit" = "CONFERMA";
 "restore.subtitle" = "Se hai acquistato un piano mediante questa app ma non hai ricevuto le tue credenziali, puoi inviarle nuovamente da qui.\nNon verrà effettuato alcun addebito durante la procedura.";
 "restore.title" = "Ripristina acquisto non accreditato";
-"welcome.accessibility.cancel" = "Annulla";

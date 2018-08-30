@@ -1,12 +1,15 @@
 "agreement.message" = "Kaydolmak, $1'nın ve $2'nın kabul edildiği anlamına gelir.";
 "agreement.message.privacy" = "Gizlilik Politikası";
 "agreement.message.tos" = "Hizmet Koşulları";
+"camera.access.denied.message" = "Kamera erişimini etkinleştirin, böylece bir hediye kartını kullanmak için QR kodlarını tarayabilirsiniz.";
+"camera.access.error.message" = "Cihazınız QR kodlarının taranmasını desteklemiyor. Lütfen kamerası olan bir cihaz kullanın.";
+"camera.access.error.title" = "Kamera kullanılabilir değil";
 "iap.error.message.unavailable" = "Apple sunucuları şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.";
 "iap.error.title" = "Hata";
 "login.error.throttled" = "Bu kullanıcı adı ile çok fazla kez yanlış giriş yapıldı. Lütfen daha sonra tekrar deneyin.";
 "login.error.title" = "Giriş yap";
 "login.error.unauthorized" = "Kullanıcı adınız ya da şifreniz hatalı.";
-"login.error.validation" = "Bir kullanıcı adı ile şifre girmelisiniz.";
+"login.error.validation" = "Bir kullanıcı adı ve şifre girmelisiniz.";
 "login.password.placeholder" = "Şifre";
 "login.purchase.button" = "Hemen satın al";
 "login.purchase.footer" = "Hesabınız yok mu?";
@@ -23,6 +26,8 @@
 "plan.yearly.detail_format" = "Yılda %@%@";
 "plan.yearly.title" = "Yıllık";
 "purchase.email.placeholder" = "E-posta adresi";
+"purchase.error.connectivity.description" = "Özel İnternet Erişimi'ne ulaşamıyoruz. Bu zayıf internet yüzünden olabilir veya hizmetimiz ülkenizde engelleniyor.";
+"purchase.error.connectivity.title" = "Bağlantı Hatası";
 "purchase.error.title" = "Satın Al";
 "purchase.error.validation" = "Bir e-posta adresi girmeniz gerekiyor.";
 "purchase.login.button" = "Giriş yapın";
@@ -32,6 +37,7 @@
 "purchase.title" = "Bir VPN planı seçin";
 "redeem.email.placeholder" = "E-posta adresi";
 "redeem.error.code" = "Kod, %lu sayısal haneden oluşmalıdır.";
+"redeem.error.qrcode.invalid" = "Geçersiz QR kodu dizisi. Lütfen tekrar deneyin.";
 "redeem.error.title" = "Kullan";
 "redeem.submit" = "Gönder";
 "redeem.subtitle" = "E-posta adresinizi ve hediye kartınızdaki ya da deneme kartınızdaki %lu haneli PIN'i aşağıya girin.";
@@ -40,4 +46,3 @@
 "restore.submit" = "ONAYLA";
 "restore.subtitle" = "Bu uygulamadan bir plan satın aldıktan sonra hesap bilgilerinizi alamadıysanız, onları buradan tekrar gönderebilirsiniz.\nBu işlem için sizden ücret alınmayacak.";
 "restore.title" = "Bilgileri gönderilmeyen satın alma işlemini tekrarlayın";
-"welcome.accessibility.cancel" = "İptal";

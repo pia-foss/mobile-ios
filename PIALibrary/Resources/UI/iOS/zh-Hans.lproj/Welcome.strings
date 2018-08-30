@@ -1,12 +1,15 @@
 "agreement.message" = "注册账号构成对$1和$2的接受。";
 "agreement.message.privacy" = "隐私政策";
 "agreement.message.tos" = "服务条款";
+"camera.access.denied.message" = "启用相机访问权限，以便您扫描二维码，兑换礼品卡。";
+"camera.access.error.message" = "您的设备不支持二维码扫描。请使用附带摄像头的设备。";
+"camera.access.error.title" = "相机不可用";
 "iap.error.message.unavailable" = "Apple 服务器目前不可用。请稍后重试。";
 "iap.error.title" = "错误";
 "login.error.throttled" = "此用户名尝试登录的失败次数过多。请稍后再试。";
 "login.error.title" = "登录";
 "login.error.unauthorized" = "您的用户名或密码不正确。";
-"login.error.validation" = "您必须输入用户名和密码";
+"login.error.validation" = "您必须输入用户名和密码。";
 "login.password.placeholder" = "密码";
 "login.purchase.button" = "立即购买";
 "login.purchase.footer" = "还没有账户？";
@@ -23,6 +26,8 @@
 "plan.yearly.detail_format" = "%@%@/每年";
 "plan.yearly.title" = "每年";
 "purchase.email.placeholder" = "电子邮件地址";
+"purchase.error.connectivity.description" = "我们无法接入Private Internet Access。原因可能是互联网连接不良或者我们的服务在您的国家遭到屏蔽。";
+"purchase.error.connectivity.title" = "连接失败";
 "purchase.error.title" = "购买";
 "purchase.error.validation" = "您必须输入一个电子邮箱地址。";
 "purchase.login.button" = "登录";
@@ -32,6 +37,7 @@
 "purchase.title" = "选择 VPN 套餐";
 "redeem.email.placeholder" = "邮箱地址";
 "redeem.error.code" = "PIN码必须包含%lu个数字。";
+"redeem.error.qrcode.invalid" = "二维码序列无效。请重试。";
 "redeem.error.title" = "兑换";
 "redeem.submit" = "提交";
 "redeem.subtitle" = "请输入您的电子邮箱地址以及礼品卡或试用卡上的%lu位数字PIN。";
@@ -40,4 +46,3 @@
 "restore.submit" = "确认";
 "restore.subtitle" = "如果您通过此 app 购买了套餐，但没有收到凭据，可以从这里重新发送。\n在此过程中您不会被收费。";
 "restore.title" = "恢复未入账的购买";
-"welcome.accessibility.cancel" = "取消";

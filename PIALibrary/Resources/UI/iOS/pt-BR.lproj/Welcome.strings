@@ -1,6 +1,9 @@
 "agreement.message" = "O registro constitui aceitação dos $1 e da $2.";
 "agreement.message.privacy" = "Política de Privacidade";
 "agreement.message.tos" = "Termos de Serviço";
+"camera.access.denied.message" = "Ative o acesso à câmera para que você possa escanear códigos QR para resgatar um cartão-presente.";
+"camera.access.error.message" = "Seu dispositivo não suporta o escaneamento de códigos QR. Use um dispositivo com câmera.";
+"camera.access.error.title" = "Câmera indisponível";
 "iap.error.message.unavailable" = "Servidores da Apple indisponíveis no momento. Tente novamente mais tarde.";
 "iap.error.title" = "Erro";
 "login.error.throttled" = "Muitas tentativas de login malsucedidas com este nome de usuário. Tente novamente mais tarde.";
@@ -23,6 +26,8 @@
 "plan.yearly.detail_format" = "%@%@ por ano";
 "plan.yearly.title" = "Anual";
 "purchase.email.placeholder" = "Endereço de e-mail";
+"purchase.error.connectivity.description" = "Não conseguimos acessar o Private Internet Access. Isso pode ser devido a uma conexão de internet fraca ou o nosso serviço está bloqueado em seu país.";
+"purchase.error.connectivity.title" = "Falha na conexão";
 "purchase.error.title" = "Comprar";
 "purchase.error.validation" = "Você precisa inserir um endereço de e-mail.";
 "purchase.login.button" = "Faça login";
@@ -32,6 +37,7 @@
 "purchase.title" = "Selecione um plano de VPN";
 "redeem.email.placeholder" = "Endereço de e-mail";
 "redeem.error.code" = "O código precisa ter %lu dígitos numéricos.";
+"redeem.error.qrcode.invalid" = "Sequência de código QR inválida. Tente novamente.";
 "redeem.error.title" = "Resgatar";
 "redeem.submit" = "ENVIAR";
 "redeem.subtitle" = "Digite o seu endereço de e-mail e o PIN de %lu dígitos do seu cartão-presente ou cartão de teste abaixo.";
@@ -40,4 +46,3 @@
 "restore.submit" = "CONFIRMAR";
 "restore.subtitle" = "Se você adquiriu um plano por este aplicativo e não recebeu as suas credenciais, você pode enviá-las novamente por aqui. Você não será cobrado durante esse processo.";
 "restore.title" = "Restaurar compra não creditada";
-"welcome.accessibility.cancel" = "Cancelar";
