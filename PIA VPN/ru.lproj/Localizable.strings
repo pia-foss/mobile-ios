@@ -6,6 +6,8 @@
 "account.accessibility.eye.hint.reveal" = "Нажмите, чтобы показать пароль";
 "account.email.caption" = "Эл. адрес";
 "account.email.placeholder" = "Адрес эл. почты";
+"account.expiry_date.expired" = "Срок действия плана истек.";
+"account.expiry_date.information" = "Ваш план истечет %@.";
 "account.eye.footer" = "Нажмите значок с глазом, чтобы показать или скрыть пароль.";
 "account.other.footer" = "Установите приложение Private Internet Access на других устройствах и используйте указанные выше имя пользователя и пароль для входа в учетную запись и защиты соединения.";
 "account.password.caption" = "Пароль";

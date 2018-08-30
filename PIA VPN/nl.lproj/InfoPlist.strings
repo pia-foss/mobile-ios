@@ -1,3 +1,2 @@
-/* (No Comment) */
+"NSCameraUsageDescription" = "We hebben toegang tot de camera nodig, zodat u QR-codes kunt scannen om cadeaubonnen in te wisselen";
 "NSFaceIDUsageDescription" = "Authenticeren om te onthullen";
-

@@ -6,6 +6,8 @@
 "account.accessibility.eye.hint.reveal" = "Tik om wachtwoord te onthullen";
 "account.email.caption" = "E-mail";
 "account.email.placeholder" = "E-mailadres";
+"account.expiry_date.expired" = "Uw abonnement is verlopen.";
+"account.expiry_date.information" = "Uw plan verloopt op %@.";
 "account.eye.footer" = "Tik op het oogpictogram om uw wachtwoord te verbergen of te onthullen";
 "account.other.footer" = "Download de Private Internet Access-app voor uw andere apparaten en gebruik de gebruikersnaam en het wachtwoord hierboven om in te loggen en uw verbinding te beveiligen.";
 "account.password.caption" = "Wachtwoord";

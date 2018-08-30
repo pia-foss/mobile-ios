@@ -1,3 +1,2 @@
-/* (No Comment) */
+"NSCameraUsageDescription" = "نحتاج للوصول إلى الكاميرا لقراءة رموز QR لتتمكن من استلام محتوى بطاقة الهدايا.";
 "NSFaceIDUsageDescription" = "مصادقة للإظهار";
-

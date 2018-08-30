@@ -6,6 +6,8 @@
 "account.accessibility.eye.hint.reveal" = "Şifreyi açmak için dokunun";
 "account.email.caption" = "E-posta";
 "account.email.placeholder" = "E-posta adresi";
+"account.expiry_date.expired" = "Planınızın süresi dolmuş.";
+"account.expiry_date.information" = "Planınızın süresi %@ tarihinde sona erecek.";
 "account.eye.footer" = "Şifrenizi açmak ya da gizlemek için göz simgesine dokunun.";
 "account.other.footer" = "Diğer cihazlarınıza Private Internet Access uygulamasını yükleyip yukarıdaki kullanıcı adı ve şifre ile giriş yaparak İnternet'e güvenli şekilde bağlanın.";
 "account.password.caption" = "Şifre";

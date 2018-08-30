@@ -83,7 +83,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = "it"
+      language = "en"
       region = "IT"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"

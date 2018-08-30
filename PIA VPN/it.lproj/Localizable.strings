@@ -6,6 +6,8 @@
 "account.accessibility.eye.hint.reveal" = "Tocca per rivelare la password";
 "account.email.caption" = "Email";
 "account.email.placeholder" = "Indirizzo email";
+"account.expiry_date.expired" = "Il tuo piano è scaduto.";
+"account.expiry_date.information" = "Il tuo piano scade il %@.";
 "account.eye.footer" = "Tocca l'icona con l'occhio per mostrare o nascondere la tua password.";
 "account.other.footer" = "Ottieni Private Internet Access anche per i tuoi altri dispositivi e utilizza il nome utente e la password in alto per accedere e connetterti in tutta sicurezza.";
 "account.password.caption" = "Password";

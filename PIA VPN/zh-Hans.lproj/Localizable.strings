@@ -6,6 +6,8 @@
 "account.accessibility.eye.hint.reveal" = "点击显示密码";
 "account.email.caption" = "电子邮件";
 "account.email.placeholder" = "电子邮件地址";
+"account.expiry_date.expired" = "您的套餐已到期。";
+"account.expiry_date.information" = "您的套餐将于%@到期。";
 "account.eye.footer" = "点击眼睛图标以显示或隐藏您的密码。";
 "account.other.footer" = "为您的其他设备获取 Private Internet Access App，并使用上述用户名和密码登录并获得连接。";
 "account.password.caption" = "密码";

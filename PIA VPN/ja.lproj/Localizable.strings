@@ -6,6 +6,8 @@
 "account.accessibility.eye.hint.reveal" = "タップしてパスワードを表示";
 "account.email.caption" = "メールアドレス";
 "account.email.placeholder" = "メールアドレス";
+"account.expiry_date.expired" = "プランが期限切れとなりました。";
+"account.expiry_date.information" = "プランが%@に期限切れとなります。";
 "account.eye.footer" = "目のアイコンをタップして、パスワードを表示または非表示にします。";
 "account.other.footer" = "他の端末でもPrivate Internet Access アプリを入手し、上のユーザー名とパスワードでログインし、インターネット接続を保護することができます。\n\nパスワードをタップしてコピーするかパスワードを表示します。";
 "account.password.caption" = "パスワード";

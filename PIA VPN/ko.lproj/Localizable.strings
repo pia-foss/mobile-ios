@@ -6,6 +6,8 @@
 "account.accessibility.eye.hint.reveal" = "비밀번호를 표시하려면 누르세요";
 "account.email.caption" = "이메일";
 "account.email.placeholder" = "이메일 주소";
+"account.expiry_date.expired" = "현재 플랜이 만료되었습니다.";
+"account.expiry_date.information" = "현재 플랜이 %@에 만료됩니다.";
 "account.eye.footer" = "눈 아이콘을 눌러서 비밀번호를 표시하거나 숨깁니다.";
 "account.other.footer" = "다른 장치에서도 Private Internet Access 앱을 다운로드 받고 위의 사용자 이름과 비밀번호를 사용해 로그인해서 연결을 보호하세요.";
 "account.password.caption" = "비밀번호";

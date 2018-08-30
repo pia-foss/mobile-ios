@@ -1,3 +1,2 @@
-/* (No Comment) */
+"NSCameraUsageDescription" = "Nous devons accéder à votre appareil photo pour vous permettre de scanner les codes QR et utiliser ainsi les cartes cadeau";
 "NSFaceIDUsageDescription" = "Authentifiez-vous pour afficher";
-

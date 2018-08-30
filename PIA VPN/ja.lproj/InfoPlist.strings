@@ -1,3 +1,2 @@
-/* (No Comment) */
+"NSCameraUsageDescription" = "QRコードをスキャンし、ギフトカードを利用するため、カメラへのアクセスが必要です";
 "NSFaceIDUsageDescription" = "認証して表示";
-

@@ -6,6 +6,8 @@
 "account.accessibility.eye.hint.reveal" = "Dotknij, aby odkryć hasło";
 "account.email.caption" = "E-mail";
 "account.email.placeholder" = "Adres e-mail";
+"account.expiry_date.expired" = "Ważność Twojego planu wygasła.";
+"account.expiry_date.information" = "Ważność Twojego planu wygaśnie w dniu %@.";
 "account.eye.footer" = "Dotknij ikony z okiem, aby odkryć lub ukryć hasło.";
 "account.other.footer" = "Pobierz aplikację firmy Private Internet Access na inne urządzenia i użyj powyższej nazwy użytkownika i hasła do logowania i ochrony połączenia.";
 "account.password.caption" = "Hasło";

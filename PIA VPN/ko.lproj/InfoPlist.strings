@@ -1,3 +1,2 @@
-/* (No Comment) */
+"NSCameraUsageDescription" = "기프트 카드 사용을 위해 QR 코드를 스캔하려면 카메라 접근권이 필요합니다.";
 "NSFaceIDUsageDescription" = "인증해서 표시합니다";
-

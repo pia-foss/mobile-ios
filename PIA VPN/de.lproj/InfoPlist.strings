@@ -1,3 +1,2 @@
-/* (No Comment) */
+"NSCameraUsageDescription" = "Wir benötigen Kamerazugriff, um QR-Codes zum Einlösen einer Geschenkkarte zu scannen.";
 "NSFaceIDUsageDescription" = "Zum Aufdecken authentifizieren";
-
