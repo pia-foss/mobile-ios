@@ -3,7 +3,7 @@
 # Copyright (c) 2018 Davide De Rosa. All rights reserved.
 #
 # USAGE
-#
+# brew install xmlstarlet 
 # ./import_xcode.sh (directory)
 #
 # EXAMPLE

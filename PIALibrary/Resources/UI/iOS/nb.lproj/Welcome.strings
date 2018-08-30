@@ -1,6 +1,9 @@
 "agreement.message" = "Ved å registrere deg godtar du $1 og $2.";
 "agreement.message.privacy" = "REntingslinjer om personvern";
 "agreement.message.tos" = "Tjenestevilkår";
+"camera.access.denied.message" = "Aktiver kameratilgang slik at du kan skanne QR-koder for å løse inn gavekort.";
+"camera.access.error.message" = "Enheten støtter ikke skanning av QR-koder. Bruk en enhet med kamera.";
+"camera.access.error.title" = "Kamera ikke tilgjengelig";
 "iap.error.message.unavailable" = "Apple-serverne er for øyeblikket ikke tilgjengelige. Prøv igjen senere.";
 "iap.error.title" = "Feil";
 "login.error.throttled" = "For mange mislykkede påloggingsforsøk med dette brukernavnet. Prøv igjen senere.";
@@ -23,6 +26,8 @@
 "plan.yearly.detail_format" = "%@%@ per år";
 "plan.yearly.title" = "Årlig";
 "purchase.email.placeholder" = "E-postadresse";
+"purchase.error.connectivity.description" = "Vi kunne ikke nå Private Internet Access. Dette kan skyldes dårlig Internett eller at tjenesten vår er blokkert i landet ditt.";
+"purchase.error.connectivity.title" = "Tilkoblingsfeil";
 "purchase.error.title" = "Kjøp";
 "purchase.error.validation" = "Du må angi en e-postadresse.";
 "purchase.login.button" = "Logg inn";
@@ -32,6 +37,7 @@
 "purchase.title" = "Velg et VPN-abonnement";
 "redeem.email.placeholder" = "E-postadresse";
 "redeem.error.code" = "Koden må bestå av %lu siffer.";
+"redeem.error.qrcode.invalid" = "Ugyldig QR-kodesekvens. Prøv igjen.";
 "redeem.error.title" = "Løs inn";
 "redeem.submit" = "SEND";
 "redeem.subtitle" = "Angi e-postadressen og den %lu-sifrede PIN-koden fra gavekortet eller prøvekortet nedenfor.";
@@ -40,4 +46,3 @@
 "restore.submit" = "BEKREFT";
 "restore.subtitle" = "Hvis du kjøpte en plan via appen og ikke har mottatt opplysningene dine, kan du sende dem igjen her i fra.\nDu belastes ikke under denne prosessen.";
 "restore.title" = "Gjenopprett ukreditert kjøp";
-"welcome.accessibility.cancel" = "Avbryt";

@@ -1,6 +1,9 @@
 "agreement.message" = "Mit Ihrer Registrierung erklären Sie sich mit den $1 und $2 einverstanden.";
 "agreement.message.privacy" = "Datenschutzrichtlinien";
 "agreement.message.tos" = "Nutzungsbedingungen";
+"camera.access.denied.message" = "Kamerazugriff aktivieren, um QR-Code zum Einlösen einer Geschenkkarte zu scannen.";
+"camera.access.error.message" = "Dein Gerät unterstützt das Scannen von QR-Codes nicht. Bitte ein Gerät mit einer Kamera verwenden.";
+"camera.access.error.title" = "Kamera nicht verfügbar";
 "iap.error.message.unavailable" = "Die Apple-Server sind momentan nicht verfügbar. Bitte später erneut versuchen.";
 "iap.error.title" = "Fehler";
 "login.error.throttled" = "Zu viele fehlgeschlagene Anmeldeversuche mit diesem Benutzernamen. Bitte später erneut versuchen.";
@@ -23,6 +26,8 @@
 "plan.yearly.detail_format" = "%@%@ pro Jahr";
 "plan.yearly.title" = "Jährlich";
 "purchase.email.placeholder" = "E-Mail-Adresse";
+"purchase.error.connectivity.description" = "Wir können Private Internet Access nicht erreichen. Dies kann auf eine schlechte Internetverbindung zurückzuführen sein oder unser Service ist in deinem Land blockiert.";
+"purchase.error.connectivity.title" = "Verbindungsfehler";
 "purchase.error.title" = "Kaufen";
 "purchase.error.validation" = "Sie müssen eine E-Mail-Adresse angeben.";
 "purchase.login.button" = "Anmelden";
@@ -32,6 +37,7 @@
 "purchase.title" = "VPN-Tarif auswählen";
 "redeem.email.placeholder" = "E-Mail-Adresse";
 "redeem.error.code" = "Der Code muss aus %lu Ziffern bestehen.";
+"redeem.error.qrcode.invalid" = "Ungültige QR-Code-Sequenz. Bitte erneut versuchen.";
 "redeem.error.title" = "Einlösen";
 "redeem.submit" = "SENDEN";
 "redeem.subtitle" = "Geben Sie unten Ihre E-Mail-Adresse und die %lu-stellige PIN von Ihrer Geschenk- oder Testkarte ein.";
@@ -40,4 +46,3 @@
 "restore.submit" = "BESTÄTIGEN";
 "restore.subtitle" = "Wenn du durch diese App einen Plan gekauft hast und deine Anmeldedaten nicht erhalten hast, kannst du sie von hier aus erneut senden.\nDir wird während dieses Prozesses nichts in Rechnung gestellt.";
 "restore.title" = "Nicht gutgeschriebenen Kauf wiederherstellen";
-"welcome.accessibility.cancel" = "Abbrechen";

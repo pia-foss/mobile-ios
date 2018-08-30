@@ -1,6 +1,9 @@
 "agreement.message" = "Als u zich aanmeldt, gaat u akkoord met de $1 en het S2.";
 "agreement.message.privacy" = "Privacybeleid";
 "agreement.message.tos" = "Servicevoorwaarden";
+"camera.access.denied.message" = "Geef cameratoegang zodat we de QR-codes kunnen scannen en de cadeaubonnen kunnen inwisselen.";
+"camera.access.error.message" = "Uw apparaat ondersteunt het scannen van QR-codes niet. Gebruik een apparaat met een camera, a.u.b.";
+"camera.access.error.title" = "Camera niet beschikbaar";
 "iap.error.message.unavailable" = "De Apple-servers zijn momenteel niet beschikbaar. Probeer het later opnieuw.";
 "iap.error.title" = "Fout";
 "login.error.throttled" = "Te veel mislukte inlogpogingen met deze gebruikersnaam. Probeer het later opnieuw.";
@@ -23,6 +26,8 @@
 "plan.yearly.detail_format" = "%@%@ per jaar";
 "plan.yearly.title" = "Jaarlijks";
 "purchase.email.placeholder" = "E-mailadres";
+"purchase.error.connectivity.description" = "We kunnen Private Internet Access niet bereiken. Dit kan komen door een slechte internetverbinding of omdat onze dienst in uw land is geblokkeerd.";
+"purchase.error.connectivity.title" = "Verbindingsfout";
 "purchase.error.title" = "Kopen";
 "purchase.error.validation" = "U moet een e-mailadres invoeren";
 "purchase.login.button" = "Aanmelden";
@@ -32,6 +37,7 @@
 "purchase.title" = "Selecteer een VPN-abonnement";
 "redeem.email.placeholder" = "E-mailadres";
 "redeem.error.code" = "Code moet uit %lu getallen bestaan.";
+"redeem.error.qrcode.invalid" = "Ongeldige QR-code. Probeer het opnieuw.";
 "redeem.error.title" = "Inwisselen";
 "redeem.submit" = "VERSTUREN";
 "redeem.subtitle" = "Voer uw e-mailadres en de %lu-cijferige pincode van uw cadeaubon of proefperiodekaart hieronder in.";
@@ -40,4 +46,3 @@
 "restore.submit" = "BEVESTIGEN";
 "restore.subtitle" = "Als u een abonnement via deze app heeft aangeschaft en u heeft uw gegevens niet ontvangen, dan kunt u ze hier opnieuw verzenden.\nEr worden geen kosten in rekening gebracht tijdens dit proces.";
 "restore.title" = "Aankoop herstellen";
-"welcome.accessibility.cancel" = "Annuleren";

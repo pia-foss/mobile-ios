@@ -1,12 +1,15 @@
 "agreement.message" = "サインアップすることで、$1と$2に同意したことになります。";
 "agreement.message.privacy" = "プライバシーポリシー";
 "agreement.message.tos" = "利用規約";
+"camera.access.denied.message" = "QRコードをスキャンし、ギフトカードを利用するには、カメラへのアクセスを許可してください。";
+"camera.access.error.message" = "お使いのデバイスはQRコードのスキャンに対応していません。カメラが搭載されたデバイスをお使いください。";
+"camera.access.error.title" = "カメラが利用できません";
 "iap.error.message.unavailable" = "Appleサーバーが現在ご利用いただけません。後でもう一度お試しください。";
 "iap.error.title" = "エラー";
 "login.error.throttled" = "このユーザー名で最大ログイン試行回数を超えました。後でもう一度お試しください。";
 "login.error.title" = "ログイン";
 "login.error.unauthorized" = "ユーザー名またはパスワードが間違っています。";
-"login.error.validation" = "ユーザー名とパスワードを入力してください";
+"login.error.validation" = "ユーザー名とパスワードを入力してください。";
 "login.password.placeholder" = "パスワード";
 "login.purchase.button" = "今すぐ購入";
 "login.purchase.footer" = "アカウントをお持ちでないですか？";
@@ -23,6 +26,8 @@
 "plan.yearly.detail_format" = "年間%@%@";
 "plan.yearly.title" = "年間";
 "purchase.email.placeholder" = "メールアドレス";
+"purchase.error.connectivity.description" = "Private Internet Accessに接続できませんでした。インターネットの接続が不安定、もしくはお住まいの国で当社サービスがブロックされている可能性があります。";
+"purchase.error.connectivity.title" = "接続エラー";
 "purchase.error.title" = "購入";
 "purchase.error.validation" = "必ずメールアドレスを入力してください。";
 "purchase.login.button" = "サインイン";
@@ -32,6 +37,7 @@
 "purchase.title" = "VPNプランを選択";
 "redeem.email.placeholder" = "メールアドレス";
 "redeem.error.code" = "コードは%lu桁でなければなりません。";
+"redeem.error.qrcode.invalid" = "QRコードのシーケンスが無効です。もう一度お試しください。";
 "redeem.error.title" = "引換え";
 "redeem.submit" = "送信";
 "redeem.subtitle" = "メールアドレスと、以下のギフトカードまたはトライアルカードの%lu桁のPINを入力してください。";
@@ -40,4 +46,3 @@
 "restore.submit" = "確定";
 "restore.subtitle" = "このアプリでプランを購入した後、認証情報を受け取っていない方は、こちらから認証情報を再度送信することができます。この処理の実行中、課金は発生しません。";
 "restore.title" = "追加されていない更新を復元";
-"welcome.accessibility.cancel" = "キャンセル";

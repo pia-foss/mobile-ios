@@ -1,12 +1,15 @@
 "agreement.message" = "Для регистрации нужно принять $1 и $2.";
 "agreement.message.privacy" = "Политика конфиденциальности";
 "agreement.message.tos" = "Условия использования";
+"camera.access.denied.message" = "Дайте доступ к камере, чтобы сканировать QR-коды и использовать подарочную карту.";
+"camera.access.error.message" = "Ваше устройство не может сканировать QR-код. Используйте устройство с камерой.";
+"camera.access.error.title" = "Камера недоступна";
 "iap.error.message.unavailable" = "Серверы Apple временно недоступны. Повторите попытку позже.";
 "iap.error.title" = "Ошибка";
 "login.error.throttled" = "Слишком много неудачных попыток входа с использованием этого имени пользователя. Повторите попытку позже.";
 "login.error.title" = "Войти";
 "login.error.unauthorized" = "Неправильное имя пользователя или пароль.";
-"login.error.validation" = "Необходимо ввести действительное имя пользователя и пароль.";
+"login.error.validation" = "Нужно ввести имя пользователя и пароль.";
 "login.password.placeholder" = "Пароль";
 "login.purchase.button" = "Купите сейчас";
 "login.purchase.footer" = "Нет учетной записи?";
@@ -23,6 +26,8 @@
 "plan.yearly.detail_format" = "%@%@ в год";
 "plan.yearly.title" = "Ежегодно";
 "purchase.email.placeholder" = "Адрес эл. почты";
+"purchase.error.connectivity.description" = "Не удалось подключиться к Private Internet Access. Это может быть из-за плохого качества соединения с Интернетом, или наша служба заблокирована в вашей стране.";
+"purchase.error.connectivity.title" = "Ошибка подключения";
 "purchase.error.title" = "Купить";
 "purchase.error.validation" = "Укажите адрес эл. почты.";
 "purchase.login.button" = "Вход";
@@ -32,6 +37,7 @@
 "purchase.title" = "Выберите план VPN";
 "redeem.email.placeholder" = "Адрес эл. почты";
 "redeem.error.code" = "В коде должно быть %lu цифр(ы).";
+"redeem.error.qrcode.invalid" = "Неверная последовательность QR-кодов. Попробуйте еще раз.";
 "redeem.error.title" = "Использовать";
 "redeem.submit" = "ОТПРАВИТЬ";
 "redeem.subtitle" = "Введите свой адрес эл. почты и %lu-зн. PIN-код с подарочной или триальной карты.";
@@ -40,4 +46,3 @@
 "restore.submit" = "ПОДТВЕРДИТЬ";
 "restore.subtitle" = "Если вы купили план через это приложение и не получили учетных данных, вы можете повторно отправить их отсюда. За эту процедуру не взимается плата.";
 "restore.title" = "Восстановить непроведенную покупку";
-"welcome.accessibility.cancel" = "Отмена";

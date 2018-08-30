@@ -1,12 +1,15 @@
 "agreement.message" = "註冊即代表您同意$1及$2。";
 "agreement.message.privacy" = "隱私權政策";
 "agreement.message.tos" = "服務條款";
+"camera.access.denied.message" = "請授予相機存取權，以掃描 QR 碼並兌換禮品卡。";
+"camera.access.error.message" = "您的裝置不支援掃描 QR 碼。請使用附有相機的裝置。";
+"camera.access.error.title" = "無法使用相機";
 "iap.error.message.unavailable" = "Apple 伺服器目前無法使用，請稍後再試。";
 "iap.error.title" = "錯誤";
 "login.error.throttled" = "此使用者名稱登入失敗次數太多，\n請稍後再試。";
 "login.error.title" = "登入";
 "login.error.unauthorized" = "您的使用者名稱或密碼不正確。";
-"login.error.validation" = "您必須輸入使用者名稱及密碼";
+"login.error.validation" = "您必須輸入使用者名稱及密碼。";
 "login.password.placeholder" = "密碼";
 "login.purchase.button" = "立即購買";
 "login.purchase.footer" = "沒有帳號？";
@@ -23,6 +26,8 @@
 "plan.yearly.detail_format" = "每年 %@%@";
 "plan.yearly.title" = "年繳";
 "purchase.email.placeholder" = "電子郵件地址";
+"purchase.error.connectivity.description" = "我們無法連線至 Private Internet Access。這可能是因為您的網路連線狀態不佳，或我們的服務在您的國家遭到封鎖。";
+"purchase.error.connectivity.title" = "連線失敗";
 "purchase.error.title" = "購買";
 "purchase.error.validation" = "必須輸入電郵地址。";
 "purchase.login.button" = "登入";
@@ -32,6 +37,7 @@
 "purchase.title" = "選擇 VPN 方案";
 "redeem.email.placeholder" = "電子郵件地址";
 "redeem.error.code" = "代碼必須包含 %lu 個數字。";
+"redeem.error.qrcode.invalid" = "QR 碼序號無效，請重試。";
 "redeem.error.title" = "兌換";
 "redeem.submit" = "提交";
 "redeem.subtitle" = "於下方輸入您的電子郵件地址及禮品卡或試用卡並的 %lu 位數 PIN 碼。";
@@ -40,4 +46,3 @@
 "restore.submit" = "確定";
 "restore.subtitle" = "如果您透過此應用程式購買方案後收不到您的憑證資料，您可以透過這裡要求再次傳送。\n此操作不會收取任何費用。";
 "restore.title" = "回復未貸記購買項目";
-"welcome.accessibility.cancel" = "取消";

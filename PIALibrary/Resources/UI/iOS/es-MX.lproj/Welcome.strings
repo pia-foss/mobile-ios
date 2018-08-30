@@ -1,12 +1,15 @@
 "agreement.message" = "El registro constituye la aceptación de los $1 y la $2.";
 "agreement.message.privacy" = "Política de privacidad";
 "agreement.message.tos" = "Términos de servicio";
+"camera.access.denied.message" = "Permita el acceso a la cámara para que puedas escanear códigos QR para canjear una tarjeta de regalo";
+"camera.access.error.message" = "Su dispositivo no es compatible con el escaneo de códigos QR. Use un dispositivo con cámara.";
+"camera.access.error.title" = "La cámara no está disponible";
 "iap.error.message.unavailable" = "Actualmente, los servidores de Apple no están disponibles. Por favor, inténtalo de nuevo más tarde.";
 "iap.error.title" = "Error";
 "login.error.throttled" = "Demasiados intentos fallidos de inicio de sesión con este nombre de usuario. Por favor, inténtelo de nuevo más tarde.";
 "login.error.title" = "Iniciar sesión";
 "login.error.unauthorized" = "Tu nombre de usuario o contraseña son incorrectos.";
-"login.error.validation" = "Debes ingresar un nombre de usuario y una contraseña.";
+"login.error.validation" = "Debe ingresar un nombre de usuario y una contraseña.";
 "login.password.placeholder" = "Contraseña ";
 "login.purchase.button" = "Comprar ahora";
 "login.purchase.footer" = "¿No tienes una cuenta?";
@@ -23,6 +26,8 @@
 "plan.yearly.detail_format" = "%@%@ al año";
 "plan.yearly.title" = "Anual";
 "purchase.email.placeholder" = "Dirección de correo electrónico";
+"purchase.error.connectivity.description" = "No pudimos localizar a Private Internet Access. Esto puede ser debido a una mala conexión con Internet o a que nuestro servicio está bloqueado en su país.";
+"purchase.error.connectivity.title" = "Falla en la conexión";
 "purchase.error.title" = "Comprar";
 "purchase.error.validation" = "Debes ingresar una dirección de email.";
 "purchase.login.button" = "Inicia sesión";
@@ -32,6 +37,7 @@
 "purchase.title" = "Selecciona un plan VPN";
 "redeem.email.placeholder" = "Dirección de correo electrónico";
 "redeem.error.code" = "El código debe tener %lu dígitos numéricos.";
+"redeem.error.qrcode.invalid" = "La secuencia del código QR no es válida. Inténtelo de nuevo.";
 "redeem.error.title" = "Canjear";
 "redeem.submit" = "ENVIAR";
 "redeem.subtitle" = "Escribe abajo tu dirección de correo electrónico y el PIN de %lu dígitos de tu tarjeta de regalo o tarjeta de prueba.";
@@ -40,4 +46,3 @@
 "restore.submit" = "CONFIRMAR";
 "restore.subtitle" = "Si compraste un plan con esta aplicación y no recibiste tus credenciales, puedes enviarlas de nuevo desde aquí.\nNo se te harán cargos durante este proceso.";
 "restore.title" = "Restablecer compra no acreditada";
-"welcome.accessibility.cancel" = "Cancelar";
