@@ -24,6 +24,7 @@ platform :ios do
   import "ci/clean_openssl.rb"
   import "ci/unit_test.rb"
   import "ci/create_archive.rb"
+  import "ci/create_beta_archive.rb"
   import "ci/qa_deploy.rb"
   import "ci/qa_notify.rb"
   import "ci/beta_deploy.rb"

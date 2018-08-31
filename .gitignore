@@ -12,5 +12,6 @@ fastlane/test_output
 fastlane/review_information/demo_*
 build
 dist
+apple_dist
 Preview.html
 Gemfile.lock

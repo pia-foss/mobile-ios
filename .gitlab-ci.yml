@@ -104,7 +104,7 @@ beta_manual_archive:
         GYM_EXPORT_METHOD: "app-store"
     script:
         #- bundle exec fastlane clean_openssl
-        - bundle exec fastlane create_archive
+        - bundle exec fastlane create_beta_archive
     artifacts:
         paths:
             - "$STAGE_TESTFLIGHT_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.*"
