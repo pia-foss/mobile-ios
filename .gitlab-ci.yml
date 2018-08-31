@@ -3,6 +3,7 @@ variables:
     LANG: "en_US.UTF-8"
     STAGE_BUILD_PATH: "build"
     STAGE_ARTIFACTS_PATH: "dist"
+    STAGE_TESTFLIGHT_ARTIFACTS_PATH: "apple_dist"
     STAGE_ARCHIVE_NAME: "pia-vpn"
     SERIALIZED_ARCHIVE_JSON: "$STAGE_ARTIFACTS_PATH/notify.json"
 
@@ -106,7 +107,7 @@ beta_manual_archive:
         - bundle exec fastlane create_archive
     artifacts:
         paths:
-            - "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.*"
+            - "$STAGE_TESTFLIGHT_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.*"
         expire_in: 1 week
     when:
         manual
@@ -118,7 +119,7 @@ beta_manual_archive:
 beta_manual_deploy:
     stage: deploy
     variables:
-        PILOT_IPA: "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.ipa"
+        PILOT_IPA: "$STAGE_TESTFLIGHT_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.ipa"
         PILOT_DISTRIBUTE_EXTERNAL: "true"
         DEMO_ACCOUNT_REQUIRED: "true"
     script:
