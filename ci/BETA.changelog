@@ -1,2 +1,2 @@
-- Added GCM encryption ciphers to OpenVPN.
-- Added ECC-256k1 handshake certificate to OpenVPN.
+- Added account expiry date in the Account view.
+- QR code scanning to redeem gift cards.
