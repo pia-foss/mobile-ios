@@ -770,33 +770,21 @@
 		0EB8C04E1F9CD38A005857E4 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				84577FC6213E7D68006DEC3D /* ViewControllers */,
 				0EB8C04F1F9CD38A005857E4 /* ActivityButton.swift */,
-				0EB8C0521F9CD38A005857E4 /* AutolayoutViewController.swift */,
 				0EB8C0501F9CD38A005857E4 /* BorderedTextField.swift */,
 				0E0F95951FD560C40046DC64 /* CircleProgressView.swift */,
 				0EE14D1A1FF16B39008D9AC2 /* InvalidatingFlowLayout.swift */,
-				0EB8C0511F9CD38A005857E4 /* LoginViewController.swift */,
 				0EB8C05D1F9CD38A005857E4 /* Macros+UI.swift */,
 				0E38E40F1FF81722008223AB /* Notification+UI.swift */,
-				0E48A8521FDAD60900B9A4C0 /* OptionsViewController.swift */,
-				0EB8C0531F9CD38A005857E4 /* PIAWelcomeViewController.swift */,
 				0E4D4E9A1FA4CA7A007DA6DA /* PurchasePlan.swift */,
 				0EB8C0541F9CD38A005857E4 /* PurchasePlanCell.swift */,
-				0EB8C0551F9CD38A005857E4 /* PurchaseViewController.swift */,
-				0EA8072320A18C6B0033EC1A /* RedeemViewController.swift */,
-				84D5DA6F2126CE2900F753F8 /* QRCameraScannerViewController.swift */,
-				0EB8C0561F9CD38A005857E4 /* RestoreSignupViewController.swift */,
-				0EB8C0571F9CD38A005857E4 /* SignupFailureViewController.swift */,
-				0EB8C0581F9CD38A005857E4 /* SignupInProgressViewController.swift */,
-				0EB8C0591F9CD38A005857E4 /* SignupInternetUnreachableViewController.swift */,
 				0EA8073120A2F50A0033EC1A /* SignupMetadata.swift */,
-				0EB8C05A1F9CD38A005857E4 /* SignupSuccessViewController.swift */,
 				0E2215CE2008DFD900F5FB4D /* SwiftGen+Assets.swift */,
 				0ED1585B1FDC0D1B008F6522 /* SwiftGen+Storyboards.swift */,
 				0ED158591FDC083F008F6522 /* SwiftGen+Strings.swift */,
 				0EB8C05C1F9CD38A005857E4 /* Theme.swift */,
 				0E5BCBFE20172C8300E3E4B4 /* Theme+LightPalette.swift */,
-				0EB8C05B1F9CD38A005857E4 /* WelcomePageViewController.swift */,
 				84577FC0213D9A23006DEC3D /* UIImage+Color.swift */,
 				84577FC2213D9AEA006DEC3D /* UITextField+PlaceholderColor.swift */,
 				84577FC4213D9B4D006DEC3D /* UILabel+LineHeight.swift */,
@@ -1031,6 +1019,26 @@
 				84577FBE213D8EE6006DEC3D /* ViewStyles.swift */,
 			);
 			path = Styles;
+			sourceTree = "<group>";
+		};
+		84577FC6213E7D68006DEC3D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0EB8C0521F9CD38A005857E4 /* AutolayoutViewController.swift */,
+				0EB8C0511F9CD38A005857E4 /* LoginViewController.swift */,
+				0E48A8521FDAD60900B9A4C0 /* OptionsViewController.swift */,
+				0EB8C0531F9CD38A005857E4 /* PIAWelcomeViewController.swift */,
+				0EB8C0551F9CD38A005857E4 /* PurchaseViewController.swift */,
+				0EA8072320A18C6B0033EC1A /* RedeemViewController.swift */,
+				84D5DA6F2126CE2900F753F8 /* QRCameraScannerViewController.swift */,
+				0EB8C0561F9CD38A005857E4 /* RestoreSignupViewController.swift */,
+				0EB8C0571F9CD38A005857E4 /* SignupFailureViewController.swift */,
+				0EB8C0581F9CD38A005857E4 /* SignupInProgressViewController.swift */,
+				0EB8C0591F9CD38A005857E4 /* SignupInternetUnreachableViewController.swift */,
+				0EB8C05A1F9CD38A005857E4 /* SignupSuccessViewController.swift */,
+				0EB8C05B1F9CD38A005857E4 /* WelcomePageViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
