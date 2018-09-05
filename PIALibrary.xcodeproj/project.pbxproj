@@ -239,16 +239,26 @@
 		0EFEB4C3200778BC00F81029 /* NSData+Compression.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E392DAE1FE3366A0002160D /* NSData+Compression.m */; };
 		0EFEB4C420077AC900F81029 /* PIATunnelProvider+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFEB4BF2007784A00F81029 /* PIATunnelProvider+Profile.swift */; };
 		0EFEB4C520077AC900F81029 /* PIATunnelProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFEB4C02007784A00F81029 /* PIATunnelProfile.swift */; };
-		5EA54E484C7FD035341E021E /* Pods_PIALibrary_PIALibraryTests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A22DD34A821A4EDAED288D2 /* Pods_PIALibrary_PIALibraryTests_iOS.framework */; };
+		25992EBD127189ADCABCD8DC /* Pods_PIALibrary_PIALibrary_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E9243DAB530557B8A68F5A /* Pods_PIALibrary_PIALibrary_iOS.framework */; };
+		493F2F67764E24F3F3F0562C /* Pods_PIALibrary_PIALibraryHost_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC8D338EE518EF3D7D996C5 /* Pods_PIALibrary_PIALibraryHost_iOS.framework */; };
+		84125E08213D7DFF001BCC19 /* PIAColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84125E07213D7DFF001BCC19 /* PIAColors.swift */; };
+		84125E09213D7E04001BCC19 /* PIAColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84125E07213D7DFF001BCC19 /* PIAColors.swift */; };
+		84125E0B213D7E0E001BCC19 /* PIAFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84125E0A213D7E0E001BCC19 /* PIAFonts.swift */; };
+		84125E0C213D7E0E001BCC19 /* PIAFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84125E0A213D7E0E001BCC19 /* PIAFonts.swift */; };
 		841BE60D212AD0F3002EF2D1 /* ValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BE60C212AD0F3002EF2D1 /* ValidatorTests.swift */; };
 		841BE60F212AFE49002EF2D1 /* GiftCardUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BE60E212AFE49002EF2D1 /* GiftCardUtil.swift */; };
 		841BE610212AFE69002EF2D1 /* GiftCardUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BE60E212AFE49002EF2D1 /* GiftCardUtil.swift */; };
 		841BE612212AFFA7002EF2D1 /* GiftCardUtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BE611212AFFA7002EF2D1 /* GiftCardUtilTests.swift */; };
 		843C67C22122E714005A3FDA /* AccountInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C67C12122E714005A3FDA /* AccountInfoTests.swift */; };
 		843C67C32122EA13005A3FDA /* AccountInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C67C12122E714005A3FDA /* AccountInfoTests.swift */; };
+		84577FBB213D8ED1006DEC3D /* StyleGuideHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84577FBA213D8ED1006DEC3D /* StyleGuideHelpers.swift */; };
+		84577FBD213D8EDD006DEC3D /* TextStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84577FBC213D8EDD006DEC3D /* TextStyles.swift */; };
+		84577FBF213D8EE6006DEC3D /* ViewStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84577FBE213D8EE6006DEC3D /* ViewStyles.swift */; };
+		84577FC1213D9A23006DEC3D /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84577FC0213D9A23006DEC3D /* UIImage+Color.swift */; };
+		84577FC3213D9AEA006DEC3D /* UITextField+PlaceholderColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84577FC2213D9AEA006DEC3D /* UITextField+PlaceholderColor.swift */; };
+		84577FC5213D9B4D006DEC3D /* UILabel+LineHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84577FC4213D9B4D006DEC3D /* UILabel+LineHeight.swift */; };
 		84D5DA702126CE2900F753F8 /* QRCameraScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D5DA6F2126CE2900F753F8 /* QRCameraScannerViewController.swift */; };
-		A56365AB3EAA4588B479616A /* Pods_PIALibrary_PIALibraryHost_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 476E8514A236C48F405ACA40 /* Pods_PIALibrary_PIALibraryHost_iOS.framework */; };
-		E07462773BC314E3183B240E /* Pods_PIALibrary_PIALibrary_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC5BF5764146CA9C6104276 /* Pods_PIALibrary_PIALibrary_iOS.framework */; };
+		9C43A37DD530B9DDB7C89A31 /* Pods_PIALibrary_PIALibraryTests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3625593159B612C0128DC56 /* Pods_PIALibrary_PIALibraryTests_iOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -276,8 +286,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		043B5BFAB4446CF8C5820F38 /* Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		075B8F27D7866B12401A2FFF /* Pods-PIALibrary-PIALibrary-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibrary-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibrary-iOS/Pods-PIALibrary-PIALibrary-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		03C85FC1668743D80449E0C5 /* Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibrary-iOS/Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		0E0E5B0C1F8297BD00022CD0 /* PlainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainStore.swift; sourceTree = "<group>"; };
 		0E0E5B0E1F8297C500022CD0 /* SecureStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStore.swift; sourceTree = "<group>"; };
 		0E0E5B101F8297D200022CD0 /* UserDefaultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStore.swift; sourceTree = "<group>"; };
@@ -481,20 +490,27 @@
 		0EFB512D1F82D7C50033B81F /* PIAWebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAWebServices.swift; sourceTree = "<group>"; };
 		0EFEB4BF2007784A00F81029 /* PIATunnelProvider+Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PIATunnelProvider+Profile.swift"; sourceTree = "<group>"; };
 		0EFEB4C02007784A00F81029 /* PIATunnelProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIATunnelProfile.swift; sourceTree = "<group>"; };
-		2E60B687CB018346658F707F /* Pods_PIALibrary_PIALibraryTests_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibraryTests_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2FC5BF5764146CA9C6104276 /* Pods_PIALibrary_PIALibrary_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibrary_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		378AC49FB4E07B2415156492 /* Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		476E8514A236C48F405ACA40 /* Pods_PIALibrary_PIALibraryHost_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibraryHost_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		64C04C071DE1CB44DE7945D6 /* Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibrary-iOS/Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		30E9243DAB530557B8A68F5A /* Pods_PIALibrary_PIALibrary_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibrary_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		412EB1D987DA270532444184 /* Pods-PIALibrary-PIALibrary-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibrary-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibrary-iOS/Pods-PIALibrary-PIALibrary-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		5CAAEA6E8186802A1850A95D /* Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		601D07CBF2ED3DE0A467998C /* Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		84125E07213D7DFF001BCC19 /* PIAColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAColors.swift; sourceTree = "<group>"; };
+		84125E0A213D7E0E001BCC19 /* PIAFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAFonts.swift; sourceTree = "<group>"; };
 		841BE60C212AD0F3002EF2D1 /* ValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorTests.swift; sourceTree = "<group>"; };
 		841BE60E212AFE49002EF2D1 /* GiftCardUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftCardUtil.swift; sourceTree = "<group>"; };
 		841BE611212AFFA7002EF2D1 /* GiftCardUtilTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftCardUtilTests.swift; sourceTree = "<group>"; };
 		843C67C12122E714005A3FDA /* AccountInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoTests.swift; sourceTree = "<group>"; };
+		84577FBA213D8ED1006DEC3D /* StyleGuideHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleGuideHelpers.swift; sourceTree = "<group>"; };
+		84577FBC213D8EDD006DEC3D /* TextStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyles.swift; sourceTree = "<group>"; };
+		84577FBE213D8EE6006DEC3D /* ViewStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStyles.swift; sourceTree = "<group>"; };
+		84577FC0213D9A23006DEC3D /* UIImage+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Color.swift"; sourceTree = "<group>"; };
+		84577FC2213D9AEA006DEC3D /* UITextField+PlaceholderColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+PlaceholderColor.swift"; sourceTree = "<group>"; };
+		84577FC4213D9B4D006DEC3D /* UILabel+LineHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+LineHeight.swift"; sourceTree = "<group>"; };
 		84D5DA6F2126CE2900F753F8 /* QRCameraScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCameraScannerViewController.swift; sourceTree = "<group>"; };
-		9A22DD34A821A4EDAED288D2 /* Pods_PIALibrary_PIALibraryTests_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibraryTests_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BD0536741E220873045CBCC7 /* Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		E865E7775CCB07BA4CE22DEE /* Pods_PIALibrary_PIALibrary_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibrary_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F377C717610A648DF6C8ADFB /* Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		8AC8D338EE518EF3D7D996C5 /* Pods_PIALibrary_PIALibraryHost_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibraryHost_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3625593159B612C0128DC56 /* Pods_PIALibrary_PIALibraryTests_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibraryTests_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFB60BE0FB54158D9F06B09E /* Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		D996039FACBBC9B64865AABC /* Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -517,7 +533,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E07462773BC314E3183B240E /* Pods_PIALibrary_PIALibrary_iOS.framework in Frameworks */,
+				25992EBD127189ADCABCD8DC /* Pods_PIALibrary_PIALibrary_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,7 +542,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0EE78B021F818A20002E4CDD /* PIALibrary.framework in Frameworks */,
-				5EA54E484C7FD035341E021E /* Pods_PIALibrary_PIALibraryTests_iOS.framework in Frameworks */,
+				9C43A37DD530B9DDB7C89A31 /* Pods_PIALibrary_PIALibraryTests_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,26 +550,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A56365AB3EAA4588B479616A /* Pods_PIALibrary_PIALibraryHost_iOS.framework in Frameworks */,
+				493F2F67764E24F3F3F0562C /* Pods_PIALibrary_PIALibraryHost_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0A2F3A4A40FE8B3EEA74ED88 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				64C04C071DE1CB44DE7945D6 /* Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig */,
-				075B8F27D7866B12401A2FFF /* Pods-PIALibrary-PIALibrary-iOS.release.xcconfig */,
-				BD0536741E220873045CBCC7 /* Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig */,
-				F377C717610A648DF6C8ADFB /* Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig */,
-				043B5BFAB4446CF8C5820F38 /* Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig */,
-				378AC49FB4E07B2415156492 /* Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		0E1108911F77B6B600A92462 /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -684,6 +687,8 @@
 				0E4D4E9B1FA4CA7A007DA6DA /* Restylable.swift */,
 				0E4D4E9C1FA4CA7A007DA6DA /* Validator.swift */,
 				841BE60E212AFE49002EF2D1 /* GiftCardUtil.swift */,
+				84125E07213D7DFF001BCC19 /* PIAColors.swift */,
+				84125E0A213D7E0E001BCC19 /* PIAFonts.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -765,33 +770,25 @@
 		0EB8C04E1F9CD38A005857E4 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				84577FC6213E7D68006DEC3D /* ViewControllers */,
 				0EB8C04F1F9CD38A005857E4 /* ActivityButton.swift */,
-				0EB8C0521F9CD38A005857E4 /* AutolayoutViewController.swift */,
 				0EB8C0501F9CD38A005857E4 /* BorderedTextField.swift */,
 				0E0F95951FD560C40046DC64 /* CircleProgressView.swift */,
 				0EE14D1A1FF16B39008D9AC2 /* InvalidatingFlowLayout.swift */,
-				0EB8C0511F9CD38A005857E4 /* LoginViewController.swift */,
 				0EB8C05D1F9CD38A005857E4 /* Macros+UI.swift */,
 				0E38E40F1FF81722008223AB /* Notification+UI.swift */,
-				0E48A8521FDAD60900B9A4C0 /* OptionsViewController.swift */,
-				0EB8C0531F9CD38A005857E4 /* PIAWelcomeViewController.swift */,
 				0E4D4E9A1FA4CA7A007DA6DA /* PurchasePlan.swift */,
 				0EB8C0541F9CD38A005857E4 /* PurchasePlanCell.swift */,
-				0EB8C0551F9CD38A005857E4 /* PurchaseViewController.swift */,
-				0EA8072320A18C6B0033EC1A /* RedeemViewController.swift */,
-				84D5DA6F2126CE2900F753F8 /* QRCameraScannerViewController.swift */,
-				0EB8C0561F9CD38A005857E4 /* RestoreSignupViewController.swift */,
-				0EB8C0571F9CD38A005857E4 /* SignupFailureViewController.swift */,
-				0EB8C0581F9CD38A005857E4 /* SignupInProgressViewController.swift */,
-				0EB8C0591F9CD38A005857E4 /* SignupInternetUnreachableViewController.swift */,
 				0EA8073120A2F50A0033EC1A /* SignupMetadata.swift */,
-				0EB8C05A1F9CD38A005857E4 /* SignupSuccessViewController.swift */,
 				0E2215CE2008DFD900F5FB4D /* SwiftGen+Assets.swift */,
 				0ED1585B1FDC0D1B008F6522 /* SwiftGen+Storyboards.swift */,
 				0ED158591FDC083F008F6522 /* SwiftGen+Strings.swift */,
 				0EB8C05C1F9CD38A005857E4 /* Theme.swift */,
 				0E5BCBFE20172C8300E3E4B4 /* Theme+LightPalette.swift */,
-				0EB8C05B1F9CD38A005857E4 /* WelcomePageViewController.swift */,
+				84577FC0213D9A23006DEC3D /* UIImage+Color.swift */,
+				84577FC2213D9AEA006DEC3D /* UITextField+PlaceholderColor.swift */,
+				84577FC4213D9B4D006DEC3D /* UILabel+LineHeight.swift */,
+				84577FB9213D8EB2006DEC3D /* Styles */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -834,7 +831,7 @@
 				0EE78B0D1F818A32002E4CDD /* PIALibraryHost-iOS */,
 				0EBFFFD61F693F800009D4F4 /* Products */,
 				5E2704A12A75C0E06858358C /* Frameworks */,
-				0A2F3A4A40FE8B3EEA74ED88 /* Pods */,
+				330C045F66FA296A540E44BF /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -990,17 +987,58 @@
 			path = VPN;
 			sourceTree = "<group>";
 		};
+		330C045F66FA296A540E44BF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				03C85FC1668743D80449E0C5 /* Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig */,
+				412EB1D987DA270532444184 /* Pods-PIALibrary-PIALibrary-iOS.release.xcconfig */,
+				D996039FACBBC9B64865AABC /* Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig */,
+				BFB60BE0FB54158D9F06B09E /* Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig */,
+				5CAAEA6E8186802A1850A95D /* Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig */,
+				601D07CBF2ED3DE0A467998C /* Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5E2704A12A75C0E06858358C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				0ED2CA3B1F6C3028008E7AD7 /* NetworkExtension.framework */,
-				2FC5BF5764146CA9C6104276 /* Pods_PIALibrary_PIALibrary_iOS.framework */,
-				E865E7775CCB07BA4CE22DEE /* Pods_PIALibrary_PIALibrary_macOS.framework */,
-				476E8514A236C48F405ACA40 /* Pods_PIALibrary_PIALibraryHost_iOS.framework */,
-				9A22DD34A821A4EDAED288D2 /* Pods_PIALibrary_PIALibraryTests_iOS.framework */,
-				2E60B687CB018346658F707F /* Pods_PIALibrary_PIALibraryTests_macOS.framework */,
+				30E9243DAB530557B8A68F5A /* Pods_PIALibrary_PIALibrary_iOS.framework */,
+				8AC8D338EE518EF3D7D996C5 /* Pods_PIALibrary_PIALibraryHost_iOS.framework */,
+				A3625593159B612C0128DC56 /* Pods_PIALibrary_PIALibraryTests_iOS.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		84577FB9213D8EB2006DEC3D /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				84577FBA213D8ED1006DEC3D /* StyleGuideHelpers.swift */,
+				84577FBC213D8EDD006DEC3D /* TextStyles.swift */,
+				84577FBE213D8EE6006DEC3D /* ViewStyles.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
+		84577FC6213E7D68006DEC3D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0EB8C0521F9CD38A005857E4 /* AutolayoutViewController.swift */,
+				0EB8C0511F9CD38A005857E4 /* LoginViewController.swift */,
+				0E48A8521FDAD60900B9A4C0 /* OptionsViewController.swift */,
+				0EB8C0531F9CD38A005857E4 /* PIAWelcomeViewController.swift */,
+				0EB8C0551F9CD38A005857E4 /* PurchaseViewController.swift */,
+				0EA8072320A18C6B0033EC1A /* RedeemViewController.swift */,
+				84D5DA6F2126CE2900F753F8 /* QRCameraScannerViewController.swift */,
+				0EB8C0561F9CD38A005857E4 /* RestoreSignupViewController.swift */,
+				0EB8C0571F9CD38A005857E4 /* SignupFailureViewController.swift */,
+				0EB8C0581F9CD38A005857E4 /* SignupInProgressViewController.swift */,
+				0EB8C0591F9CD38A005857E4 /* SignupInternetUnreachableViewController.swift */,
+				0EB8C05A1F9CD38A005857E4 /* SignupSuccessViewController.swift */,
+				0EB8C05B1F9CD38A005857E4 /* WelcomePageViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1070,7 +1108,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0EBFFFE91F693F800009D4F4 /* Build configuration list for PBXNativeTarget "PIALibrary-iOS" */;
 			buildPhases = (
-				8A447656EEACDD21D6E04D74 /* [CP] Check Pods Manifest.lock */,
+				B1578C550FCE2255E805CFA4 /* [CP] Check Pods Manifest.lock */,
 				0EBFFFD01F693F800009D4F4 /* Sources */,
 				0EBFFFD11F693F800009D4F4 /* Frameworks */,
 				0EBFFFD21F693F800009D4F4 /* Headers */,
@@ -1089,11 +1127,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0EE78B071F818A20002E4CDD /* Build configuration list for PBXNativeTarget "PIALibraryTests-iOS" */;
 			buildPhases = (
-				1368E6A17C5019052FF0D332 /* [CP] Check Pods Manifest.lock */,
+				1E058EDBA2721C3FFFE878CB /* [CP] Check Pods Manifest.lock */,
 				0EE78AF91F818A20002E4CDD /* Sources */,
 				0EE78AFA1F818A20002E4CDD /* Frameworks */,
 				0EE78AFB1F818A20002E4CDD /* Resources */,
-				671055337E862373EAC26E64 /* [CP] Embed Pods Frameworks */,
+				7BB5AF1A87DE3844D348E19E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1110,11 +1148,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0EE78B1B1F818A32002E4CDD /* Build configuration list for PBXNativeTarget "PIALibraryHost-iOS" */;
 			buildPhases = (
-				365967D06E5DB94CB14B15AE /* [CP] Check Pods Manifest.lock */,
+				F0C6985FA345208CFB061406 /* [CP] Check Pods Manifest.lock */,
 				0EE78B081F818A32002E4CDD /* Sources */,
 				0EE78B091F818A32002E4CDD /* Frameworks */,
 				0EE78B0A1F818A32002E4CDD /* Resources */,
-				5BC68B2BAEDA688BFA223A70 /* [CP] Embed Pods Frameworks */,
+				A3F1E895C38651AA998E2CB3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1241,7 +1279,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1368E6A17C5019052FF0D332 /* [CP] Check Pods Manifest.lock */ = {
+		1E058EDBA2721C3FFFE878CB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1259,53 +1297,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		365967D06E5DB94CB14B15AE /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PIALibrary-PIALibraryHost-iOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5BC68B2BAEDA688BFA223A70 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Gloss/Gloss.framework",
-				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
-				"${BUILT_PRODUCTS_DIR}/PIATunnel/PIATunnel.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gloss.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIATunnel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		671055337E862373EAC26E64 /* [CP] Embed Pods Frameworks */ = {
+		7BB5AF1A87DE3844D348E19E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1333,7 +1325,35 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8A447656EEACDD21D6E04D74 /* [CP] Check Pods Manifest.lock */ = {
+		A3F1E895C38651AA998E2CB3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Gloss/Gloss.framework",
+				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/PIATunnel/PIATunnel.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gloss.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIATunnel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B1578C550FCE2255E805CFA4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1345,6 +1365,24 @@
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-PIALibrary-PIALibrary-iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F0C6985FA345208CFB061406 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PIALibrary-PIALibraryHost-iOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1372,6 +1410,7 @@
 			files = (
 				0E492C5F1FE5F7C0007F23DF /* MockAccountProvider.swift in Sources */,
 				0E392DBC1FE34B5A0002160D /* NSString+URL.m in Sources */,
+				84125E0C213D7E0E001BCC19 /* PIAFonts.swift in Sources */,
 				0E3D13DA1F9E273300434A48 /* GlossSignup.swift in Sources */,
 				0E392D961FE316860002160D /* DebugLog.swift in Sources */,
 				0E7BC6EB1F96B1040035C8B2 /* PIAWebServices.swift in Sources */,
@@ -1392,6 +1431,7 @@
 				0E7BC6EE1F96B1120035C8B2 /* AccountProvider.swift in Sources */,
 				841BE610212AFE69002EF2D1 /* GiftCardUtil.swift in Sources */,
 				0E7BC6F61F96B1120035C8B2 /* AccountInfo.swift in Sources */,
+				84125E09213D7E04001BCC19 /* PIAColors.swift in Sources */,
 				0E3D13D71F9E272B00434A48 /* GlossPayment.swift in Sources */,
 				0E2ADD491FE1595300BB170C /* IPSecProfile.swift in Sources */,
 				0E7BC6F41F96B1120035C8B2 /* SecureStore.swift in Sources */,
@@ -1460,12 +1500,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84577FBD213D8EDD006DEC3D /* TextStyles.swift in Sources */,
 				0E3D13CD1F9DDD2400434A48 /* NotificationKey.swift in Sources */,
 				0EB8C06B1F9CD38B005857E4 /* RestoreSignupViewController.swift in Sources */,
 				0EAA38931F9CC682000149CF /* SignupRequest.swift in Sources */,
 				0E392DB01FE3366B0002160D /* NSData+Compression.m in Sources */,
 				0E9D62891FDE9C00009A90CF /* Data+Crypto.swift in Sources */,
 				0E53A84D1FE5BB25000C2A18 /* VPNDaemon.swift in Sources */,
+				84577FBB213D8ED1006DEC3D /* StyleGuideHelpers.swift in Sources */,
 				0EB8C0701F9CD38B005857E4 /* WelcomePageViewController.swift in Sources */,
 				0ED1585C1FDC0D1B008F6522 /* SwiftGen+Storyboards.swift in Sources */,
 				0EB8C0651F9CD38B005857E4 /* BorderedTextField.swift in Sources */,
@@ -1476,12 +1518,14 @@
 				0EE78AF81F818815002E4CDD /* AccountInfo.swift in Sources */,
 				0EFB512A1F82D45F0033B81F /* DefaultAccountProvider.swift in Sources */,
 				0E3D13D91F9E273300434A48 /* GlossSignup.swift in Sources */,
+				84577FBF213D8EE6006DEC3D /* ViewStyles.swift in Sources */,
 				0E0E5B0F1F8297C500022CD0 /* SecureStore.swift in Sources */,
 				0EAA388B1F9CC4C4000149CF /* InAppProduct.swift in Sources */,
 				0EAA388D1F9CC4C4000149CF /* InAppTransaction.swift in Sources */,
 				0E4D4E9E1FA4CA7A007DA6DA /* PurchasePlan.swift in Sources */,
 				0E2215CF2008DFD900F5FB4D /* SwiftGen+Assets.swift in Sources */,
 				0EE78AF21F8187F8002E4CDD /* LoginRequest.swift in Sources */,
+				84125E08213D7DFF001BCC19 /* PIAColors.swift in Sources */,
 				0EE78AF01F818767002E4CDD /* ClientError.swift in Sources */,
 				0E0E5B151F829EC500022CD0 /* UpdateAccountRequest.swift in Sources */,
 				0E392D8F1FE2FBBE0002160D /* GlossConnectivityStatus.swift in Sources */,
@@ -1509,11 +1553,13 @@
 				0EB8C0691F9CD38B005857E4 /* PurchasePlanCell.swift in Sources */,
 				0EA8072F20A1E7C60033EC1A /* GlossRedeem.swift in Sources */,
 				0EA4C4311FDDD48F0041C3D8 /* Server.swift in Sources */,
+				84577FC5213D9B4D006DEC3D /* UILabel+LineHeight.swift in Sources */,
 				0EB9667E1FDF36490086ABC2 /* GlossParser.swift in Sources */,
 				0EAA38991F9CC7E4000149CF /* AppStoreTransaction.swift in Sources */,
 				0EA8072720A1A0090033EC1A /* Redeem.swift in Sources */,
 				84D5DA702126CE2900F753F8 /* QRCameraScannerViewController.swift in Sources */,
 				0E392D951FE316860002160D /* DebugLog.swift in Sources */,
+				84125E0B213D7E0E001BCC19 /* PIAFonts.swift in Sources */,
 				0EAA38981F9CC7E4000149CF /* AppStoreProduct.swift in Sources */,
 				0E1743131F82E1A4001E7DD6 /* Client.swift in Sources */,
 				0EE771031F9D0DCA0029A77B /* Client+Configuration.swift in Sources */,
@@ -1542,9 +1588,11 @@
 				0E3D13D31F9E270A00434A48 /* GlossAccountInfo.swift in Sources */,
 				0E245C9D1FECF0C20010DEF2 /* ClientAccess.swift in Sources */,
 				0EF14E4B1FEAE6350007485A /* Client+Providers.swift in Sources */,
+				84577FC1213D9A23006DEC3D /* UIImage+Color.swift in Sources */,
 				0E38E4101FF81722008223AB /* Notification+UI.swift in Sources */,
 				0E392DA91FE329AD0002160D /* PlatformVPNLog.swift in Sources */,
 				0EB8C0481F9CCE07005857E4 /* Macros.swift in Sources */,
+				84577FC3213D9AEA006DEC3D /* UITextField+PlaceholderColor.swift in Sources */,
 				0EFEB4C12007784A00F81029 /* PIATunnelProvider+Profile.swift in Sources */,
 				0E392DA31FE3247E0002160D /* Endpoint.swift in Sources */,
 				0E53A8581FE5DA16000C2A18 /* MockInAppProvider.swift in Sources */,
@@ -1920,7 +1968,7 @@
 		};
 		0EBFFFEA1F693F800009D4F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 64C04C071DE1CB44DE7945D6 /* Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig */;
+			baseConfigurationReference = 03C85FC1668743D80449E0C5 /* Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1944,7 +1992,7 @@
 		};
 		0EBFFFEB1F693F800009D4F4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 075B8F27D7866B12401A2FFF /* Pods-PIALibrary-PIALibrary-iOS.release.xcconfig */;
+			baseConfigurationReference = 412EB1D987DA270532444184 /* Pods-PIALibrary-PIALibrary-iOS.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1968,7 +2016,7 @@
 		};
 		0EE78B051F818A20002E4CDD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 043B5BFAB4446CF8C5820F38 /* Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig */;
+			baseConfigurationReference = 5CAAEA6E8186802A1850A95D /* Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
@@ -1984,7 +2032,7 @@
 		};
 		0EE78B061F818A20002E4CDD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 378AC49FB4E07B2415156492 /* Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig */;
+			baseConfigurationReference = 601D07CBF2ED3DE0A467998C /* Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
@@ -2000,7 +2048,7 @@
 		};
 		0EE78B1C1F818A32002E4CDD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD0536741E220873045CBCC7 /* Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig */;
+			baseConfigurationReference = D996039FACBBC9B64865AABC /* Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "PIALibraryHost-iOS/PIALibraryHost.entitlements";
@@ -2016,7 +2064,7 @@
 		};
 		0EE78B1D1F818A32002E4CDD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F377C717610A648DF6C8ADFB /* Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig */;
+			baseConfigurationReference = BFB60BE0FB54158D9F06B09E /* Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "PIALibraryHost-iOS/PIALibraryHost.entitlements";
