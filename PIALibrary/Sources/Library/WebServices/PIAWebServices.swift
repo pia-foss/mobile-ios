@@ -201,7 +201,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         _ statuses: [Int],
         _ executor: RequestExecutor) {
         
-        var headers = HTTPHeaders()
+        var headers = SessionManager.defaultHTTPHeaders
 //        headers["X-Device"] = "ios-\(Constants.iosVersion)/\(Constants.appVersion)/\(Constants.language)/\(Constants.region)"
         if let credentials = credentials, let authHeader = Request.authorizationHeader(user: credentials.username, password: credentials.password) {
             headers[authHeader.key] = authHeader.value
