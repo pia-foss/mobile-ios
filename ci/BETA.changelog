@@ -1,2 +1,1 @@
-- Added account expiry date in the Account view.
-- QR code scanning to redeem gift cards.
+- Fixed issue with renewals from iOS devices
