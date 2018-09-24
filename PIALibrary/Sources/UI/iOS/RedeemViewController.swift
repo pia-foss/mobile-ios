@@ -194,9 +194,11 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     }
     
     private func presentUnauthorizeCameraError() {
-        presentAlertWith(title: L10n.Welcome.Camera.Access.Error.title,
-                         andMessage: L10n.Welcome.Camera.Access.Denied.message,
-                         andButtonTitle: L10n.Ui.Global.close)
+        DispatchQueue.main.async {
+            self.presentAlertWith(title: L10n.Welcome.Camera.Access.Error.title,
+                                  andMessage: L10n.Welcome.Camera.Access.Denied.message,
+                                  andButtonTitle: L10n.Ui.Global.close)
+        }
     }
     
     private func presentAlertWith(title: String,
