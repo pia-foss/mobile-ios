@@ -8,11 +8,13 @@ strings:
     params:
         module: PIALibrary
 
-storyboards:
+ib:
     paths:
         - PIALibrary/Resources/UI/iOS/Welcome.storyboard
         - PIALibrary/Resources/UI/iOS/Signup.storyboard
-    templateName: swift4
+    templateName: segues-swift4
+    output: PIALibrary/Sources/UI/iOS/SwiftGen+Storyboards.swift
+    templateName: scenes-swift4
     output: PIALibrary/Sources/UI/iOS/SwiftGen+Storyboards.swift
     params:
         module: PIALibrary
