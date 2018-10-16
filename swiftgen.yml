@@ -12,12 +12,12 @@ ib:
     paths:
         - PIALibrary/Resources/UI/iOS/Welcome.storyboard
         - PIALibrary/Resources/UI/iOS/Signup.storyboard
-    templateName: segues-swift4
-    output: PIALibrary/Sources/UI/iOS/SwiftGen+Storyboards.swift
-    templateName: scenes-swift4
-    output: PIALibrary/Sources/UI/iOS/SwiftGen+Storyboards.swift
-    params:
-        module: PIALibrary
+    outputs:
+        templateName: scenes-swift4
+        output: PIALibrary/Sources/UI/iOS/SwiftGen+ScenesStoryboards.swift
+        templateName: segues-swift4
+        output: PIALibrary/Sources/UI/iOS/SwiftGen+SeguesStoryboards.swift
+    module: PIALibrary
 
 xcassets:
     paths:
