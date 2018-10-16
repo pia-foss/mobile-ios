@@ -42,8 +42,6 @@
 		0E7361EC1FD99A1000706BFF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7361EA1FD99A1000706BFF /* MenuViewController.swift */; };
 		0E7AA9092023CA0700E1F07A /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7AA9082023CA0700E1F07A /* HUD.swift */; };
 		0E7AA90A2023CA0700E1F07A /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7AA9082023CA0700E1F07A /* HUD.swift */; };
-		0E7B8FA01FF41551000B59B7 /* SwiftGen+Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7B8F9F1FF41551000B59B7 /* SwiftGen+Storyboards.swift */; };
-		0E7B8FA11FF41717000B59B7 /* SwiftGen+Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7B8F9F1FF41551000B59B7 /* SwiftGen+Storyboards.swift */; };
 		0E7EC0302093265C0029811E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E7EC02E2093265C0029811E /* InfoPlist.strings */; };
 		0E7EC0312093265C0029811E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E7EC02E2093265C0029811E /* InfoPlist.strings */; };
 		0E7EC045209326E30029811E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E7EC043209326E30029811E /* Localizable.strings */; };
@@ -157,6 +155,10 @@
 		299E58511856BD31004CFD63 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 299E58501856BD31004CFD63 /* SystemConfiguration.framework */; };
 		299E585F1856C6EE004CFD63 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 299E585E1856C6EE004CFD63 /* libz.dylib */; };
 		45A07B00D61C82133B9BE96B /* Pods_PIA_VPN_Tunnel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5433F44E11954FFC8FF5D3C5 /* Pods_PIA_VPN_Tunnel.framework */; };
+		DDC8124C2176185000CB290C /* SwiftGen+SeguesStoryboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC8124B2176185000CB290C /* SwiftGen+SeguesStoryboards.swift */; };
+		DDC8124D2176185D00CB290C /* SwiftGen+SeguesStoryboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC8124B2176185000CB290C /* SwiftGen+SeguesStoryboards.swift */; };
+		DDC8124F21761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC8124E21761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift */; };
+		DDC8125021761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC8124E21761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift */; };
 		DFD6528782B6A66D1E454963 /* Pods_PIA_VPN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5474F758043FE2395DD520 /* Pods_PIA_VPN.framework */; };
 		FFF2F08ABA838D0A36D66F17 /* Pods_PIA_VPN_dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A0747BCF753BD2622A2C9B /* Pods_PIA_VPN_dev.framework */; };
 /* End PBXBuildFile section */
@@ -287,7 +289,6 @@
 		0E7361E71FD98C3400706BFF /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		0E7361EA1FD99A1000706BFF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		0E7AA9082023CA0700E1F07A /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
-		0E7B8F9F1FF41551000B59B7 /* SwiftGen+Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Storyboards.swift"; sourceTree = "<group>"; };
 		0E7EC02F2093265C0029811E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E7EC032209326640029811E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E7EC033209326660029811E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -401,6 +402,8 @@
 		93EAFFE4904155B1C09EFBC9 /* Pods-PIA VPN dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPN dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIA VPN dev/Pods-PIA VPN dev.debug.xcconfig"; sourceTree = "<group>"; };
 		C5464957EFE912B2D859C48E /* Pods-PIA VPN dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPN dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-PIA VPN dev/Pods-PIA VPN dev.release.xcconfig"; sourceTree = "<group>"; };
 		D4A0747BCF753BD2622A2C9B /* Pods_PIA_VPN_dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIA_VPN_dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDC8124B2176185000CB290C /* SwiftGen+SeguesStoryboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+SeguesStoryboards.swift"; sourceTree = "<group>"; };
+		DDC8124E21761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+ScenesStoryboards.swift"; sourceTree = "<group>"; };
 		EC84CA3A280C03D3509785B5 /* Pods-PIA VPN.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPN.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIA VPN/Pods-PIA VPN.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -754,7 +757,8 @@
 				0EE14D111FF12991008D9AC2 /* PIASwitch.h */,
 				0EE14D101FF12991008D9AC2 /* PIASwitch.m */,
 				0E2215CB2008BF8300F5FB4D /* SwiftGen+Assets.swift */,
-				0E7B8F9F1FF41551000B59B7 /* SwiftGen+Storyboards.swift */,
+				DDC8124B2176185000CB290C /* SwiftGen+SeguesStoryboards.swift */,
+				DDC8124E21761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift */,
 				0E2215C820084CD700F5FB4D /* SwiftGen+Strings.swift */,
 			);
 			name = Shared;
@@ -1352,12 +1356,12 @@
 				0E7AA90A2023CA0700E1F07A /* HUD.swift in Sources */,
 				0E441E322055B8A7007528D5 /* Theme+Extension.swift in Sources */,
 				0EA4ACAB20487B5800431F7D /* FakeSwitch.swift in Sources */,
+				DDC8124D2176185D00CB290C /* SwiftGen+SeguesStoryboards.swift in Sources */,
 				0EFB839120209CF200980F69 /* VPNPermissionViewController.swift in Sources */,
 				0EFDC1D81FE46177007C0B9B /* SensitiveOperation.swift in Sources */,
 				0E3A35291FD9A960000B0F99 /* DashboardViewController.swift in Sources */,
 				0E9452A61FDB578400891948 /* RegionCell.swift in Sources */,
 				0EFDC1ED1FE4B9DC007C0B9B /* AppConstants.swift in Sources */,
-				0E7B8FA11FF41717000B59B7 /* SwiftGen+Storyboards.swift in Sources */,
 				0EE14D131FF129AF008D9AC2 /* PIASwitch.m in Sources */,
 				0E2215CA2008BA9100F5FB4D /* SwiftGen+Strings.swift in Sources */,
 				0EFDC1C71FE35B78007C0B9B /* Macros+App.swift in Sources */,
@@ -1376,6 +1380,7 @@
 				0E53A83C1FE5A156000C2A18 /* AccountProvider+Refresh.swift in Sources */,
 				0EFDC1E11FE4A450007C0B9B /* AppPreferences.swift in Sources */,
 				0E441E272055AEDF007528D5 /* ThemeStrategy+App.swift in Sources */,
+				DDC8125021761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift in Sources */,
 				0E492C681FE60907007F23DF /* Flags.swift in Sources */,
 				0EE14D191FF15812008D9AC2 /* ModalNavigationSegue.swift in Sources */,
 				0E3A352D1FD9CDC5000B0F99 /* Theme+App.swift in Sources */,
@@ -1433,12 +1438,12 @@
 				0E3A35351FD9EBDA000B0F99 /* AppDelegate.swift in Sources */,
 				0E7AA9092023CA0700E1F07A /* HUD.swift in Sources */,
 				0EA4ACAA20487B5800431F7D /* FakeSwitch.swift in Sources */,
+				DDC8124C2176185000CB290C /* SwiftGen+SeguesStoryboards.swift in Sources */,
 				0EFB839020209CF200980F69 /* VPNPermissionViewController.swift in Sources */,
 				0EFDC1D71FE46177007C0B9B /* SensitiveOperation.swift in Sources */,
 				0E3A35281FD9A960000B0F99 /* DashboardViewController.swift in Sources */,
 				0E9452A51FDB578400891948 /* RegionCell.swift in Sources */,
 				0EFDC1EC1FE4B9DC007C0B9B /* AppConstants.swift in Sources */,
-				0E7B8FA01FF41551000B59B7 /* SwiftGen+Storyboards.swift in Sources */,
 				0EE14D121FF12991008D9AC2 /* PIASwitch.m in Sources */,
 				0E2215C920084CD700F5FB4D /* SwiftGen+Strings.swift in Sources */,
 				0EFDC1C61FE35B78007C0B9B /* Macros+App.swift in Sources */,
@@ -1457,6 +1462,7 @@
 				0E9452961FDB4C5800891948 /* AboutComponentCell.swift in Sources */,
 				0E53A83B1FE5A156000C2A18 /* AccountProvider+Refresh.swift in Sources */,
 				0EFDC1E01FE4A450007C0B9B /* AppPreferences.swift in Sources */,
+				DDC8124F21761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift in Sources */,
 				0E492C671FE60907007F23DF /* Flags.swift in Sources */,
 				0EE14D181FF15812008D9AC2 /* ModalNavigationSegue.swift in Sources */,
 				0E3A352C1FD9CDC5000B0F99 /* Theme+App.swift in Sources */,

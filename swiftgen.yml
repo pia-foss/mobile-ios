@@ -4,11 +4,14 @@ strings:
     templateName: structured-swift4
     output: PIA VPN/SwiftGen+Strings.swift
 
-storyboards:
+ib:
     paths:
         - PIA VPN/en.lproj/Main.storyboard
-    templateName: swift4
-    output: PIA VPN/SwiftGen+Storyboards.swift
+    outputs:
+        templateName: scenes-swift4
+        output: PIA VPN/SwiftGen+ScenesStoryboards.swift
+        templateName: segues-swift4
+        output: PIA VPN/SwiftGen+SeguesStoryboards.swift
     params:
         module: PIA_VPN
 

@@ -1,3 +1,4 @@
+// swiftlint:disable all
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
 import Foundation
@@ -5,7 +6,10 @@ import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
-// swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
+// MARK: - Strings
+
+// swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:disable nesting type_body_length type_name
 internal enum L10n {
 
   internal enum About {
@@ -13,9 +17,7 @@ internal enum L10n {
     internal static let app = L10n.tr("Localizable", "about.app")
     /// This program uses the following components:
     internal static let intro = L10n.tr("Localizable", "about.intro")
-
     internal enum Accessibility {
-
       internal enum Component {
         /// Tap to read full license
         internal static let expand = L10n.tr("Localizable", "about.accessibility.component.expand")
@@ -24,13 +26,10 @@ internal enum L10n {
   }
 
   internal enum Account {
-
     internal enum Accessibility {
       /// Eye icon
       internal static let eye = L10n.tr("Localizable", "account.accessibility.eye")
-
       internal enum Eye {
-
         internal enum Hint {
           /// Tap to conceal password
           internal static let conceal = L10n.tr("Localizable", "account.accessibility.eye.hint.conceal")
@@ -39,14 +38,12 @@ internal enum L10n {
         }
       }
     }
-
     internal enum Email {
       /// Email
       internal static let caption = L10n.tr("Localizable", "account.email.caption")
       /// Email address
       internal static let placeholder = L10n.tr("Localizable", "account.email.placeholder")
     }
-
     internal enum ExpiryDate {
       /// Your plan has expired.
       internal static let expired = L10n.tr("Localizable", "account.expiry_date.expired")
@@ -55,22 +52,18 @@ internal enum L10n {
         return L10n.tr("Localizable", "account.expiry_date.information", p1)
       }
     }
-
     internal enum Eye {
       /// Tap the eye icon to reveal or conceal your password.
       internal static let footer = L10n.tr("Localizable", "account.eye.footer")
     }
-
     internal enum Other {
       /// Get the Private Internet Access app for your other devices and use the above username and password to login and secure your connection.
       internal static let footer = L10n.tr("Localizable", "account.other.footer")
     }
-
     internal enum Password {
       /// Password
       internal static let caption = L10n.tr("Localizable", "account.password.caption")
     }
-
     internal enum Restore {
       /// RESTORE PURCHASE
       internal static let button = L10n.tr("Localizable", "account.restore.button")
@@ -78,7 +71,6 @@ internal enum L10n {
       internal static let description = L10n.tr("Localizable", "account.restore.description")
       /// Restore uncredited purchase
       internal static let title = L10n.tr("Localizable", "account.restore.title")
-
       internal enum Failure {
         /// No redeemable purchase was found for renewal.
         internal static let message = L10n.tr("Localizable", "account.restore.failure.message")
@@ -86,12 +78,10 @@ internal enum L10n {
         internal static let title = L10n.tr("Localizable", "account.restore.failure.title")
       }
     }
-
     internal enum Reveal {
       /// Authenticate to reveal
       internal static let prompt = L10n.tr("Localizable", "account.reveal.prompt")
     }
-
     internal enum Save {
       /// Update
       internal static let item = L10n.tr("Localizable", "account.save.item")
@@ -100,7 +90,6 @@ internal enum L10n {
       /// Your email address has been saved.
       internal static let success = L10n.tr("Localizable", "account.save.success")
     }
-
     internal enum Username {
       /// Username
       internal static let caption = L10n.tr("Localizable", "account.username.caption")
@@ -110,7 +99,6 @@ internal enum L10n {
   internal enum ContentBlocker {
     /// Content Blocker
     internal static let title = L10n.tr("Localizable", "content_blocker.title")
-
     internal enum Body {
       /// Please note: You do not need to be connected to the VPN for this Content Blocker to work, but it will only work while browsing with Safari.
       internal static let footer = L10n.tr("Localizable", "content_blocker.body.footer")
@@ -122,16 +110,13 @@ internal enum L10n {
   internal enum Dashboard {
     /// Status
     internal static let status = L10n.tr("Localizable", "dashboard.status")
-
     internal enum Connection {
-
       internal enum Ip {
         /// PUBLIC IP
         internal static let caption = L10n.tr("Localizable", "dashboard.connection.ip.caption")
         /// Internet unreachable
         internal static let unreachable = L10n.tr("Localizable", "dashboard.connection.ip.unreachable")
       }
-
       internal enum Region {
         /// CURRENT REGION
         internal static let caption = L10n.tr("Localizable", "dashboard.connection.region.caption")
@@ -139,15 +124,12 @@ internal enum L10n {
         internal static let change = L10n.tr("Localizable", "dashboard.connection.region.change")
       }
     }
-
     internal enum ContentBlocker {
-
       internal enum Intro {
         /// This version replaces MACE with our Safari Content Blocker.\n\nCheck it out in the 'Settings' section.
         internal static let message = L10n.tr("Localizable", "dashboard.content_blocker.intro.message")
       }
     }
-
     internal enum Vpn {
       /// Changing region...
       internal static let changingRegion = L10n.tr("Localizable", "dashboard.vpn.changing_region")
@@ -183,7 +165,6 @@ internal enum L10n {
   }
 
   internal enum Menu {
-
     internal enum Accessibility {
       /// Menu
       internal static let item = L10n.tr("Localizable", "menu.accessibility.item")
@@ -192,7 +173,6 @@ internal enum L10n {
         return L10n.tr("Localizable", "menu.accessibility.logged_as", p1)
       }
     }
-
     internal enum Expiration {
       /// %d days
       internal static func days(_ p1: Int) -> String {
@@ -209,7 +189,6 @@ internal enum L10n {
       /// UPGRADE ACCOUNT
       internal static let upgrade = L10n.tr("Localizable", "menu.expiration.upgrade")
     }
-
     internal enum Item {
       /// About
       internal static let about = L10n.tr("Localizable", "menu.item.about")
@@ -221,7 +200,6 @@ internal enum L10n {
       internal static let region = L10n.tr("Localizable", "menu.item.region")
       /// Settings
       internal static let settings = L10n.tr("Localizable", "menu.item.settings")
-
       internal enum Web {
         /// Home page
         internal static let home = L10n.tr("Localizable", "menu.item.web.home")
@@ -231,7 +209,6 @@ internal enum L10n {
         internal static let support = L10n.tr("Localizable", "menu.item.web.support")
       }
     }
-
     internal enum Logout {
       /// Log out
       internal static let confirm = L10n.tr("Localizable", "menu.logout.confirm")
@@ -240,7 +217,6 @@ internal enum L10n {
       /// Log out
       internal static let title = L10n.tr("Localizable", "menu.logout.title")
     }
-
     internal enum Renewal {
       /// Purchase
       internal static let purchase = L10n.tr("Localizable", "menu.renewal.purchase")
@@ -248,7 +224,6 @@ internal enum L10n {
       internal static let renew = L10n.tr("Localizable", "menu.renewal.renew")
       /// Renewal
       internal static let title = L10n.tr("Localizable", "menu.renewal.title")
-
       internal enum Message {
         /// Trial accounts are not eligible for renewal. Please purchase a new account upon expiry to continue service.
         internal static let trial = L10n.tr("Localizable", "menu.renewal.message.trial")
@@ -261,7 +236,6 @@ internal enum L10n {
   }
 
   internal enum Notifications {
-
     internal enum Disabled {
       /// Enable notifications to get a reminder to renew your subscription before it expires.
       internal static let message = L10n.tr("Localizable", "notifications.disabled.message")
@@ -273,12 +247,10 @@ internal enum L10n {
   }
 
   internal enum Renewal {
-
     internal enum Failure {
       /// Your purchase receipt couldn't be submitted, please retry at a later time.
       internal static let message = L10n.tr("Localizable", "renewal.failure.message")
     }
-
     internal enum Success {
       /// Your account was successfully renewed.
       internal static let message = L10n.tr("Localizable", "renewal.success.message")
@@ -288,29 +260,24 @@ internal enum L10n {
   }
 
   internal enum Settings {
-
     internal enum ApplicationInformation {
       /// APPLICATION INFORMATION
       internal static let title = L10n.tr("Localizable", "settings.application_information.title")
-
       internal enum Debug {
         /// Send debug to support
         internal static let title = L10n.tr("Localizable", "settings.application_information.debug.title")
-
         internal enum Empty {
           /// Debug information is empty, please attempt a connection before retrying submission.
           internal static let message = L10n.tr("Localizable", "settings.application_information.debug.empty.message")
           /// Empty debug information
           internal static let title = L10n.tr("Localizable", "settings.application_information.debug.empty.title")
         }
-
         internal enum Failure {
           /// Debug information could not be submitted. Please disconnect from the VPN and retry.
           internal static let message = L10n.tr("Localizable", "settings.application_information.debug.failure.message")
           /// Error during submission
           internal static let title = L10n.tr("Localizable", "settings.application_information.debug.failure.title")
         }
-
         internal enum Success {
           /// Debug information successfully submitted.\nID: %@\nPlease note this ID, as our support team will require this to locate your submission.
           internal static func message(_ p1: String) -> String {
@@ -321,23 +288,19 @@ internal enum L10n {
         }
       }
     }
-
     internal enum ApplicationSettings {
       /// APPLICATION SETTINGS
       internal static let title = L10n.tr("Localizable", "settings.application_settings.title")
-
       internal enum DarkTheme {
         /// Dark theme
         internal static let title = L10n.tr("Localizable", "settings.application_settings.dark_theme.title")
       }
-
       internal enum KillSwitch {
         /// The VPN kill switch prevents access to the Internet if the VPN connection is reconnecting. This excludes disconnecting manually.
         internal static let footer = L10n.tr("Localizable", "settings.application_settings.kill_switch.footer")
         /// VPN kill switch
         internal static let title = L10n.tr("Localizable", "settings.application_settings.kill_switch.title")
       }
-
       internal enum Mace {
         /// PIA MACE™ blocks ads, trackers, and malware while you're connected to the VPN.
         internal static let footer = L10n.tr("Localizable", "settings.application_settings.mace.footer")
@@ -345,16 +308,13 @@ internal enum L10n {
         internal static let title = L10n.tr("Localizable", "settings.application_settings.mace.title")
       }
     }
-
     internal enum Commit {
-
       internal enum Buttons {
         /// Later
         internal static let later = L10n.tr("Localizable", "settings.commit.buttons.later")
         /// Reconnect
         internal static let reconnect = L10n.tr("Localizable", "settings.commit.buttons.reconnect")
       }
-
       internal enum Messages {
         /// The VPN must reconnect for some changes to take effect.
         internal static let mustDisconnect = L10n.tr("Localizable", "settings.commit.messages.must_disconnect")
@@ -362,74 +322,60 @@ internal enum L10n {
         internal static let shouldReconnect = L10n.tr("Localizable", "settings.commit.messages.should_reconnect")
       }
     }
-
     internal enum Connection {
       /// CONNECTION
       internal static let title = L10n.tr("Localizable", "settings.connection.title")
-
       internal enum RemotePort {
         /// Remote port
         internal static let title = L10n.tr("Localizable", "settings.connection.remote_port.title")
       }
-
       internal enum SocketProtocol {
         /// Socket
         internal static let title = L10n.tr("Localizable", "settings.connection.socket_protocol.title")
       }
-
       internal enum VpnProtocol {
         /// Protocol
         internal static let title = L10n.tr("Localizable", "settings.connection.vpn_protocol.title")
       }
     }
-
     internal enum ContentBlocker {
       /// To enable or disable Content Blocker go to Settings > Safari > Content Blockers and toggle PIA VPN.
       internal static let footer = L10n.tr("Localizable", "settings.content_blocker.footer")
       /// Safari Content Blocker
       internal static let title = L10n.tr("Localizable", "settings.content_blocker.title")
-
       internal enum Refresh {
         /// Refresh block list
         internal static let title = L10n.tr("Localizable", "settings.content_blocker.refresh.title")
       }
-
       internal enum State {
         /// Current state
         internal static let title = L10n.tr("Localizable", "settings.content_blocker.state.title")
       }
     }
-
     internal enum Encryption {
       /// ENCRYPTION
       internal static let title = L10n.tr("Localizable", "settings.encryption.title")
-
       internal enum Cipher {
         /// Data encryption
         internal static let title = L10n.tr("Localizable", "settings.encryption.cipher.title")
       }
-
       internal enum Digest {
         /// Data authentication
         internal static let title = L10n.tr("Localizable", "settings.encryption.digest.title")
       }
-
       internal enum Handshake {
         /// Handshake
         internal static let title = L10n.tr("Localizable", "settings.encryption.handshake.title")
       }
     }
-
     internal enum Reset {
       /// This will reset all of the above settings to default.
       internal static let footer = L10n.tr("Localizable", "settings.reset.footer")
       /// RESET
       internal static let title = L10n.tr("Localizable", "settings.reset.title")
-
       internal enum Defaults {
         /// Reset to default settings
         internal static let title = L10n.tr("Localizable", "settings.reset.defaults.title")
-
         internal enum Confirm {
           /// Reset
           internal static let button = L10n.tr("Localizable", "settings.reset.defaults.confirm.button")
@@ -454,7 +400,6 @@ internal enum L10n {
   internal enum VpnPermission {
     /// PIA
     internal static let title = L10n.tr("Localizable", "vpn_permission.title")
-
     internal enum Body {
       /// We don’t monitor, filter or log any network activity.
       internal static let footer = L10n.tr("Localizable", "vpn_permission.body.footer")
@@ -465,11 +410,9 @@ internal enum L10n {
       /// PIA needs access to your VPN profiles to secure your traffic
       internal static let title = L10n.tr("Localizable", "vpn_permission.body.title")
     }
-
     internal enum Disallow {
       /// Contact
       internal static let contact = L10n.tr("Localizable", "vpn_permission.disallow.contact")
-
       internal enum Message {
         /// We need this permission for the application to function.
         internal static let basic = L10n.tr("Localizable", "vpn_permission.disallow.message.basic")
@@ -480,7 +423,6 @@ internal enum L10n {
   }
 
   internal enum Walkthrough {
-
     internal enum Action {
       /// DONE
       internal static let done = L10n.tr("Localizable", "walkthrough.action.done")
@@ -489,23 +431,19 @@ internal enum L10n {
       /// SKIP
       internal static let skip = L10n.tr("Localizable", "walkthrough.action.skip")
     }
-
     internal enum Page {
-
       internal enum _1 {
         /// Protect yourself on up to 5 devices at a time.
         internal static let description = L10n.tr("Localizable", "walkthrough.page.1.description")
         /// Support 5 devices at once
         internal static let title = L10n.tr("Localizable", "walkthrough.page.1.title")
       }
-
       internal enum _2 {
         /// With servers around the globe, you are always under protection.
         internal static let description = L10n.tr("Localizable", "walkthrough.page.2.description")
         /// Connect to any region easily
         internal static let title = L10n.tr("Localizable", "walkthrough.page.2.title")
       }
-
       internal enum _3 {
         /// Enabling our Content Blocker prevents ads from showing in Safari.
         internal static let description = L10n.tr("Localizable", "walkthrough.page.3.description")
@@ -515,7 +453,10 @@ internal enum L10n {
     }
   }
 }
-// swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
+// swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:enable nesting type_body_length type_name
+
+// MARK: - Implementation Details
 
 extension L10n {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
