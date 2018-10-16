@@ -6,7 +6,3 @@ module __PIALibraryNative {
     export *
 }
 
-module CCommonCrypto [system] {
-    header "/usr/include/CommonCrypto/CommonCrypto.h"
-    export *
-}

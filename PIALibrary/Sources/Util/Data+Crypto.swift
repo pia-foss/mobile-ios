@@ -8,7 +8,7 @@
 
 import Foundation
 #if os(iOS)
-import CCommonCrypto
+import CommonCrypto
 #else
 import Security
 #endif
