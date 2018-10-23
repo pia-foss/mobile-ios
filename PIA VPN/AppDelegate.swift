@@ -157,7 +157,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         switch type {
         case .connect:
             if !Client.providers.vpnProvider.isVPNConnected {
-                Client.providers.vpnProvider.connect(nil)
+                // this time delay seems to fix a strange issue of the VPN connecting from a fresh launch
+                Macros.dispatch(after: .milliseconds(100)) {
+                    Client.providers.vpnProvider.connect(nil)
+                }
             }
 
         case .disconnect:
