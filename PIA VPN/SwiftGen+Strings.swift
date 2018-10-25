@@ -156,12 +156,22 @@ internal enum L10n {
     internal static let automatic = L10n.tr("Localizable", "global.automatic")
     /// Cancel
     internal static let cancel = L10n.tr("Localizable", "global.cancel")
+    /// Clear
+    internal static let clear = L10n.tr("Localizable", "global.clear")
     /// Close
     internal static let close = L10n.tr("Localizable", "global.close")
+    /// Edit
+    internal static let edit = L10n.tr("Localizable", "global.edit")
     /// Error
     internal static let error = L10n.tr("Localizable", "global.error")
     /// OK
     internal static let ok = L10n.tr("Localizable", "global.ok")
+    /// Optional
+    internal static let `optional` = L10n.tr("Localizable", "global.optional")
+    /// Required
+    internal static let `required` = L10n.tr("Localizable", "global.required")
+    /// Update
+    internal static let update = L10n.tr("Localizable", "global.update")
   }
 
   internal enum Menu {
@@ -350,6 +360,42 @@ internal enum L10n {
       internal enum State {
         /// Current state
         internal static let title = L10n.tr("Localizable", "settings.content_blocker.state.title")
+      }
+    }
+    internal enum Dns {
+      /// Custom
+      internal static let custom = L10n.tr("Localizable", "settings.dns.custom")
+      /// Primary DNS
+      internal static let primaryDNS = L10n.tr("Localizable", "settings.dns.primaryDNS")
+      /// Secondary DNS
+      internal static let secondaryDNS = L10n.tr("Localizable", "settings.dns.secondaryDNS")
+      internal enum Alert {
+        internal enum Clear {
+          /// This will clear your custom DNS and default to PIA DNS.
+          internal static let message = L10n.tr("Localizable", "settings.dns.alert.clear.message")
+          /// Clear DNS
+          internal static let title = L10n.tr("Localizable", "settings.dns.alert.clear.title")
+        }
+        internal enum Create {
+          /// Be warned: Using a non-PIA DNS could compromise your privacy.
+          internal static let message = L10n.tr("Localizable", "settings.dns.alert.create.message")
+        }
+      }
+      internal enum Custom {
+        /// Custom DNS
+        internal static let dns = L10n.tr("Localizable", "settings.dns.custom.dns")
+      }
+      internal enum Validation {
+        internal enum Primary {
+          /// Primary DNS is not valid
+          internal static let invalid = L10n.tr("Localizable", "settings.dns.validation.primary.invalid")
+          /// Primary DNS is mandatory
+          internal static let mandatory = L10n.tr("Localizable", "settings.dns.validation.primary.mandatory")
+        }
+        internal enum Secondary {
+          /// Secondary DNS is not valid
+          internal static let invalid = L10n.tr("Localizable", "settings.dns.validation.secondary.invalid")
+        }
       }
     }
     internal enum Encryption {

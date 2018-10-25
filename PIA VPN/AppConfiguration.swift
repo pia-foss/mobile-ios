@@ -61,6 +61,7 @@ struct AppConfiguration {
             builder.mtu = 1400
             builder.shouldDebug = true
             builder.debugLogKey = "LastVPNLog"
+            builder.dnsServers = []
             return builder
         }()
         

@@ -26,6 +26,8 @@
 	<true/>
 	<key>enablesEncryptionSettings</key>
 	<true/>
+	<key>enablesDNSSettings</key>
+	<true/>
 	<key>enablesDevelopmentSettings</key>
 	<true/>
 	<key>customizesVPNRenegotiation</key>

@@ -41,6 +41,8 @@ class Flags: NSObject {
     @objc private(set) var enablesDevelopmentSettings = false
 
     @objc private(set) var customizesVPNRenegotiation = false
+    
+    @objc private(set) var enablesDNSSettings = true
 
     private override init() {
         super.init()
