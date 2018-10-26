@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina5_9" orientation="landscape">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,40 +15,19 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav-logo" translatesAutoresizingMaskIntoConstraints="NO" id="faG-cb-imf">
-                                <rect key="frame" x="276" y="169.66666666666666" width="260" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="260" id="Pt1-yZ-w1q"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Pt1-yZ-w1q"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="Pt1-yZ-w1q"/>
-                                    </mask>
-                                </variation>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image-robotside" translatesAutoresizingMaskIntoConstraints="NO" id="yUp-DM-ork">
-                                <rect key="frame" x="575" y="138" width="237" height="237"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="yUp-DM-ork" secondAttribute="height" id="ymG-Wk-vVN"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="light-splash" translatesAutoresizingMaskIntoConstraints="NO" id="9aw-V9-Ip8">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="yUp-DM-ork" firstAttribute="width" relation="lessThanOrEqual" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.3" id="Fnb-bc-97g"/>
-                            <constraint firstAttribute="trailing" secondItem="yUp-DM-ork" secondAttribute="trailing" id="cvE-ce-Qbw"/>
-                            <constraint firstItem="faG-cb-imf" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="f0K-Hr-MBN"/>
-                            <constraint firstItem="faG-cb-imf" firstAttribute="centerX" secondItem="8hy-Xx-4aM" secondAttribute="centerX" id="giv-L9-E34"/>
-                            <constraint firstAttribute="bottom" secondItem="yUp-DM-ork" secondAttribute="bottom" id="oVf-lR-pLw"/>
-                            <constraint firstItem="faG-cb-imf" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.75" priority="750" id="tCK-gl-NAK"/>
+                            <constraint firstItem="9aw-V9-Ip8" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="G5X-hV-6uF"/>
+                            <constraint firstAttribute="trailing" secondItem="9aw-V9-Ip8" secondAttribute="trailing" id="QH1-Ef-LqQ"/>
+                            <constraint firstAttribute="bottom" secondItem="9aw-V9-Ip8" secondAttribute="bottom" id="deM-Ge-F9S"/>
+                            <constraint firstItem="9aw-V9-Ip8" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="qaz-tK-oLF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8hy-Xx-4aM"/>
                     </view>
@@ -61,7 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="image-robotside" width="201" height="237"/>
-        <image name="nav-logo" width="354" height="36"/>
+        <image name="light-splash" width="750" height="1334"/>
     </resources>
 </document>
