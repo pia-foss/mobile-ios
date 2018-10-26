@@ -285,7 +285,13 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 return
             }
             guard info.isRenewable else {
-                callback?(nil, ClientError.renewingNonRenewable)
+                //We need to check if the plan is a trial even when the plan is not renewable, as the
+                //error message should be different for each scenario
+                if info.plan == .trial {
+                    callback?(nil, ClientError.renewingTrial)
+                } else {                    
+                    callback?(nil, ClientError.renewingNonRenewable)
+                }
                 return
             }
 

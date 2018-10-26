@@ -47,6 +47,9 @@ extension PIATunnelProvider.Configuration: VPNCustomConfiguration {
         guard (debugLogKey == other.debugLogKey) else {
             return false
         }
+        guard (dnsServers.joined() == other.dnsServers.joined()) else {
+            return false
+        }
         return true
     }
 }

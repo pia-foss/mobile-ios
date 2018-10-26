@@ -1,23 +1,23 @@
 PODS:
-  - Alamofire (4.7.2)
+  - Alamofire (4.7.3)
   - Gloss (2.0.1)
   - OpenSSL-Apple (1.1.0h)
-  - PIATunnel (1.1.6):
-    - PIATunnel/AppExtension (= 1.1.6)
-    - PIATunnel/Core (= 1.1.6)
-  - PIATunnel/AppExtension (1.1.6):
+  - PIATunnel (1.1.7):
+    - PIATunnel/AppExtension (= 1.1.7)
+    - PIATunnel/Core (= 1.1.7)
+  - PIATunnel/AppExtension (1.1.7):
     - PIATunnel/Core
     - SwiftyBeaver
-  - PIATunnel/Core (1.1.6):
+  - PIATunnel/Core (1.1.7):
     - OpenSSL-Apple (~> 1.1.0h)
     - SwiftyBeaver
-  - ReachabilitySwift (4.1.0)
-  - SwiftyBeaver (1.4.4)
+  - ReachabilitySwift (4.3.0)
+  - SwiftyBeaver (1.6.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4)
   - Gloss (~> 2)
-  - PIATunnel (~> 1.1.4)
+  - PIATunnel (from `/Users/ueshiba/Desktop/PIA/tunnel-apple`)
   - ReachabilitySwift
   - SwiftyBeaver (~> 1.4)
 
@@ -26,18 +26,21 @@ SPEC REPOS:
     - Alamofire
     - Gloss
     - OpenSSL-Apple
-    - PIATunnel
     - ReachabilitySwift
     - SwiftyBeaver
 
+EXTERNAL SOURCES:
+  PIATunnel:
+    :path: "/Users/ueshiba/Desktop/PIA/tunnel-apple"
+
 SPEC CHECKSUMS:
-  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Gloss: 1e8743f8de1fbe14a97f220ff901cba91ae5f8f8
   OpenSSL-Apple: cd153d705ef350eb834ae7ff5f21f792b51ed208
-  PIATunnel: d9bff9429fd66ed33cb2f5fea53401697cb2ce05
-  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
-  SwiftyBeaver: 25bd76281f49ca989ec2e3cbde9af89c15bc1432
+  PIATunnel: 3b1b68398ac384b04070994eabb53d7ce07e6368
+  ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
+  SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
 
-PODFILE CHECKSUM: 55d58fce16cf12bdf78f72dce418d9b9cf6e9727
+PODFILE CHECKSUM: f2c9b4116aa2f5e6cc5dd1a5ba8432997618c6a3
 
 COCOAPODS: 1.5.3
