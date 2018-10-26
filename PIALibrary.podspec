@@ -48,7 +48,7 @@ Pod::Spec.new do |s|
         p.dependency "PIALibrary/Library"
         p.dependency "SwiftyBeaver"
 
-        p.ios.source_files      = "PIALibrary/Sources/UI/iOS/*.swift"
+        p.ios.source_files      = "PIALibrary/Sources/UI/iOS/**/*.swift"
         p.ios.resources         = "PIALibrary/Resources/UI/iOS/**/*"
         p.ios.dependency "TPKeyboardAvoiding"
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GetStartedViewController: AutolayoutViewController, ConfigurationAccess {
+public class GetStartedViewController: AutolayoutViewController, ConfigurationAccess {
 
     @IBOutlet private weak var viewHeaderBackground: UIView!
     @IBOutlet private weak var viewHeader: UIView!
@@ -22,7 +22,7 @@ class GetStartedViewController: AutolayoutViewController, ConfigurationAccess {
         NotificationCenter.default.removeObserver(self)
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         imvLogo.image = Theme.current.palette.logo
@@ -32,6 +32,15 @@ class GetStartedViewController: AutolayoutViewController, ConfigurationAccess {
         labelVersion.text = Macros.localizedVersionFullString()
         
     }
+    
+    /**
+     Creates a wrapped `GetStartedViewController` ready for presentation.
+     */
+    public static func with() -> UIViewController {
+        let nav = StoryboardScene.Welcome.initialScene.instantiate()
+        return nav
+    }
+
 
     /// :nodoc:
     public override func viewWillAppear(_ animated: Bool) {
