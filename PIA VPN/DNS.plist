@@ -6,11 +6,5 @@
 		<key>PIA DNS</key>
 		<array/>
 	</dict>
-	<dict>
-		<key>PIA DNS + Handshake</key>
-		<array>
-			<string>159.89.233.131</string>
-		</array>
-	</dict>
 </array>
 </plist>

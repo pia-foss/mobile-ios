@@ -137,8 +137,8 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
         
         if let primaryDNS = textPrimaryDNS.text,
             !isValidAddress(primaryDNS) {
-            let alert = Macros.alert(L10n.Settings.Dns.Validation.Primary.invalid,
-                                     nil)
+            let alert = Macros.alert(L10n.Settings.Dns.Custom.dns,
+                                     L10n.Settings.Dns.Validation.Primary.invalid)
             alert.addCancelAction(L10n.Global.ok)
             self.present(alert,
                          animated: true,
@@ -149,8 +149,8 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
         if let secondaryDNS = textSecondaryDNS.text,
             !secondaryDNS.isEmpty,
             !isValidAddress(secondaryDNS) {
-            let alert = Macros.alert(L10n.Settings.Dns.Validation.Secondary.invalid,
-                                     nil)
+            let alert = Macros.alert(L10n.Settings.Dns.Custom.dns,
+                                     L10n.Settings.Dns.Validation.Secondary.invalid)
             alert.addCancelAction(L10n.Global.ok)
             self.present(alert,
                          animated: true,
