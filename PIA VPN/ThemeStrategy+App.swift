@@ -52,6 +52,9 @@ private struct LightThemeStrategy: ThemeStrategy {
         if let _ = viewController as? PIAWelcomeViewController {
             return .default
         }
+        if let _ = viewController as? GetStartedViewController {
+            return .default
+        }
         return .lightContent
     }
     
