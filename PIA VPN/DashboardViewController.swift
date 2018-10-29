@@ -183,7 +183,7 @@ class DashboardViewController: AutolayoutViewController {
             TransientState.didRetryPendingSignup = true
         }
 
-        let vc = PIAWelcomeViewController.with(preset: preset, delegate: self)
+        let vc = GetStartedViewController.with()
         present(vc, animated: true, completion: nil)
     }
     

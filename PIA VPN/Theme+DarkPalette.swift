@@ -14,9 +14,11 @@ extension Theme.Palette {
         let lightPalette: Theme.Palette = .light
         
         let palette = Theme.Palette()
+        palette.appearance = Theme.Appearance.dark
         palette.logo = Asset.navLogoWhite.image
         palette.brandBackground = lightPalette.brandBackground
-        palette.lightBackground = Macros.color(hex: 0x1a1a1a, alpha: 0xff)
+        palette.lightBackground = .piaGrey6
+        palette.lineColor = .white
         palette.solidLightBackground = Macros.color(hex: 0x232323, alpha: 0xff)
         palette.emphasis = lightPalette.emphasis
         palette.accent1 = lightPalette.accent1
