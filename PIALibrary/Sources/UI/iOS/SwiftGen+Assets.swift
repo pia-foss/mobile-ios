@@ -18,6 +18,10 @@
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Asset {
+  internal static let centeredDarkMap = ImageAsset(name: "centered-dark-map")
+  internal static let centeredLightMap = ImageAsset(name: "centered-light-map")
+  internal static let logoDark = ImageAsset(name: "logo-dark")
+  internal static let logoLight = ImageAsset(name: "logo-light")
   internal static let closeIcon = ImageAsset(name: "close-icon")
   internal static let imageAccountFailed = ImageAsset(name: "image-account-failed")
   internal static let imageNoInternet = ImageAsset(name: "image-no-internet")

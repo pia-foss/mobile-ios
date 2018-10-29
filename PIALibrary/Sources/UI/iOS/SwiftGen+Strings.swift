@@ -122,6 +122,12 @@ internal enum L10n {
         }
       }
     }
+    internal enum Getstarted {
+      internal enum Buttons {
+        /// Buy account
+        internal static let buyaccount = L10n.tr("Welcome", "getstarted.buttons.buyaccount")
+      }
+    }
     internal enum Iap {
       internal enum Error {
         /// Error

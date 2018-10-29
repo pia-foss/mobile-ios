@@ -28,6 +28,9 @@ public class Theme {
     /// Defines theme values related to colors.
     public final class Palette {
 
+        /// The appearance type theme
+        public var appearance: Appearance?
+        
         /// The logo image.
         public var logo: UIImage?
 
@@ -68,11 +71,16 @@ public class Theme {
         /// The overlay alpha value.
         public var overlayAlpha: CGFloat
 
+        /// The line color.
+        public var lineColor: UIColor
+
         /// :nodoc:
         public init() {
+            appearance = .light
             brandBackground = .green
-            lightBackground = .lightGray
+            lightBackground = .piaGrey1
             solidLightBackground = .white
+            lineColor = .piaGreenDark20
 //            primary = .black
             emphasis = .green
             accent1 = .orange
@@ -91,7 +99,7 @@ public class Theme {
                 lightText
             ]
             solidButtonText = .white
-            divider = .lightGray
+            divider = .piaGrey1
             overlayAlpha = 0.3
         }
         
@@ -263,7 +271,16 @@ public class Theme {
     public func applyLightBackground(_ view: UIView) {
         view.backgroundColor = palette.lightBackground
     }
-    
+
+    /// :nodoc:
+    public func applyTransparentButton(_ button: PIAButton,
+                                       withSize size: CGFloat) {
+        button.setBorder(withSize: size,
+                         andColor: palette.lineColor)
+        button.setTitleColor(palette.lineColor,
+                             for: .normal) 
+    }
+
     /// :nodoc:
     public func applyLightTint(_ view: UIView) {
         view.tintColor = palette.lightBackground
@@ -304,6 +321,14 @@ public class Theme {
         view.backgroundColor = UIColor(white: 0.0, alpha: palette.overlayAlpha)
     }
     
+    // MARK: Images
+
+    /// :nodoc:
+    public func applyCenteredMap(_ imageView: UIImageView) {
+        imageView.image = palette.appearance == .dark ?
+            Asset.centeredDarkMap.image : Asset.centeredLightMap.image
+    }
+    
     // MARK: Navigation bar
 
     /// :nodoc:
@@ -313,6 +338,14 @@ public class Theme {
     }
     
     // MARK: Typography
+    /// :nodoc:
+    public func applyButtonLabelStyle(_ button: UIButton) {
+        if palette.appearance == Appearance.light {
+            button.style(style: TextStyle.textStyle9)
+        } else {
+            button.style(style: TextStyle.textStyle6)
+        }
+    }
 
     /// :nodoc:
     public func applyTitle(_ label: UILabel, appearance: Appearance) {
@@ -645,6 +678,9 @@ private struct DefaultThemeStrategy: ThemeStrategy {
     
     func statusBarAppearance(for viewController: AutolayoutViewController) -> UIStatusBarStyle {
         if let _ = viewController as? PIAWelcomeViewController {
+            return .default
+        }
+        if let _ = viewController as? GetStartedViewController {
             return .default
         }
         return .lightContent
