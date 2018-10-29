@@ -1099,29 +1099,15 @@ You will not be charged during this process.</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1dA-og-SGN">
                                 <rect key="frame" x="0.0" y="20" width="375" height="150"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav-logo" translatesAutoresizingMaskIntoConstraints="NO" id="DVe-fv-utO">
-                                        <rect key="frame" x="56.5" y="62" width="262.5" height="36"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-light" translatesAutoresizingMaskIntoConstraints="NO" id="DVe-fv-utO">
+                                        <rect key="frame" x="56.5" y="42" width="262.5" height="39"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.2.3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tqQ-G1-84D">
-                                        <rect key="frame" x="157" y="133" width="61.5" height="12"/>
+                                        <rect key="frame" x="157" y="98" width="61.5" height="12"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yjr-lH-vCL">
-                                        <rect key="frame" x="0.0" y="0.0" width="44" height="55"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="0AQ-8P-3Zn"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="gIh-xv-Pch"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
-                                        <state key="normal" title="×">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="cancelClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="OIA-Sp-ACw"/>
-                                        </connections>
-                                    </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1KN-RL-PSo">
                                         <rect key="frame" x="205" y="12.5" width="150" height="30"/>
                                         <constraints>
@@ -1138,17 +1124,13 @@ You will not be charged during this process.</string>
                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="DVe-fv-utO" firstAttribute="width" relation="lessThanOrEqual" secondItem="1dA-og-SGN" secondAttribute="width" multiplier="0.7" id="6uc-qt-O9F"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Yjr-lH-vCL" secondAttribute="trailing" id="Cd5-U3-Fzc"/>
                                     <constraint firstItem="DVe-fv-utO" firstAttribute="centerX" secondItem="1dA-og-SGN" secondAttribute="centerX" id="JHl-Mr-6Zn"/>
-                                    <constraint firstItem="DVe-fv-utO" firstAttribute="centerY" secondItem="1dA-og-SGN" secondAttribute="centerY" constant="5" id="KwV-ne-YCL"/>
                                     <constraint firstAttribute="height" constant="150" id="PTk-Kq-KOD"/>
+                                    <constraint firstItem="tqQ-G1-84D" firstAttribute="top" secondItem="DVe-fv-utO" secondAttribute="bottom" constant="17" id="ZSv-GP-z0I"/>
                                     <constraint firstAttribute="trailing" secondItem="1KN-RL-PSo" secondAttribute="trailing" constant="20" id="bbK-hy-orF"/>
-                                    <constraint firstAttribute="bottom" secondItem="tqQ-G1-84D" secondAttribute="bottom" constant="5" id="esj-Ac-scj"/>
-                                    <constraint firstItem="Yjr-lH-vCL" firstAttribute="top" secondItem="1dA-og-SGN" secondAttribute="top" id="fer-dx-EjF"/>
-                                    <constraint firstItem="Yjr-lH-vCL" firstAttribute="leading" secondItem="1dA-og-SGN" secondAttribute="leading" id="gxJ-kW-ijG"/>
-                                    <constraint firstItem="1KN-RL-PSo" firstAttribute="centerY" secondItem="Yjr-lH-vCL" secondAttribute="centerY" id="iOh-DH-5k6"/>
+                                    <constraint firstItem="DVe-fv-utO" firstAttribute="top" secondItem="1dA-og-SGN" secondAttribute="top" constant="42" id="flx-25-TlD"/>
                                     <constraint firstItem="tqQ-G1-84D" firstAttribute="centerX" secondItem="DVe-fv-utO" secondAttribute="centerX" id="jWC-WI-5gY"/>
-                                    <constraint firstItem="1KN-RL-PSo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Yjr-lH-vCL" secondAttribute="trailing" id="yKn-mm-GVH"/>
+                                    <constraint firstItem="1KN-RL-PSo" firstAttribute="top" secondItem="1dA-og-SGN" secondAttribute="top" constant="12.5" id="uSg-Zb-eh2"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -1161,14 +1143,60 @@ You will not be charged during this process.</string>
                                     </mask>
                                 </variation>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="centered-dark-map" translatesAutoresizingMaskIntoConstraints="NO" id="6Md-hc-CJ2">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JeO-BO-hZn" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
+                                <rect key="frame" x="25" y="477" width="325" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="lv6-ch-s4O"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ei6-5m-nGj" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
+                                <rect key="frame" x="25" y="547" width="325" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Hl4-Za-4hO"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gwt-hk-1rU">
+                                <rect key="frame" x="25" y="617" width="46" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="SL8-XB-pmh"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BfP-Y8-7Sg">
+                                <rect key="frame" x="304" y="617" width="46" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="8C6-6B-4dA"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Gwt-hk-1rU" firstAttribute="top" secondItem="Ei6-5m-nGj" secondAttribute="bottom" constant="20" id="1V5-nb-cYc"/>
                             <constraint firstItem="1dA-og-SGN" firstAttribute="top" secondItem="NRk-y0-6j5" secondAttribute="top" id="1hv-Rv-uqE"/>
                             <constraint firstItem="1dA-og-SGN" firstAttribute="leading" secondItem="NRk-y0-6j5" secondAttribute="leading" id="4lw-J6-QFB"/>
+                            <constraint firstItem="6Md-hc-CJ2" firstAttribute="trailing" secondItem="NRk-y0-6j5" secondAttribute="trailing" id="8Cl-as-soo"/>
+                            <constraint firstItem="BfP-Y8-7Sg" firstAttribute="top" secondItem="Ei6-5m-nGj" secondAttribute="bottom" constant="20" id="C0W-0K-lZ5"/>
+                            <constraint firstItem="Ei6-5m-nGj" firstAttribute="leading" secondItem="NRk-y0-6j5" secondAttribute="leading" constant="25" id="GVX-gy-qq9"/>
                             <constraint firstItem="1dA-og-SGN" firstAttribute="trailing" secondItem="NRk-y0-6j5" secondAttribute="trailing" id="Qvc-bY-jCB"/>
+                            <constraint firstItem="Gwt-hk-1rU" firstAttribute="leading" secondItem="NRk-y0-6j5" secondAttribute="leading" constant="25" id="TIQ-q7-T2y"/>
+                            <constraint firstItem="6Md-hc-CJ2" firstAttribute="leading" secondItem="NRk-y0-6j5" secondAttribute="leading" id="UOL-5G-gEZ"/>
+                            <constraint firstItem="JeO-BO-hZn" firstAttribute="leading" secondItem="NRk-y0-6j5" secondAttribute="leading" constant="25" id="Un2-Oy-zV5"/>
+                            <constraint firstItem="NRk-y0-6j5" firstAttribute="trailing" secondItem="Ei6-5m-nGj" secondAttribute="trailing" constant="25" id="ZPp-Tg-Cc7"/>
+                            <constraint firstItem="6Md-hc-CJ2" firstAttribute="bottom" secondItem="NRk-y0-6j5" secondAttribute="bottom" id="Zvo-Qg-IBV"/>
+                            <constraint firstItem="6Md-hc-CJ2" firstAttribute="top" secondItem="tO9-0u-CbU" secondAttribute="top" id="btC-we-gqe"/>
+                            <constraint firstItem="Ei6-5m-nGj" firstAttribute="top" secondItem="JeO-BO-hZn" secondAttribute="bottom" constant="20" id="chh-Fj-I7B"/>
                             <constraint firstItem="WRA-UX-3e4" firstAttribute="top" secondItem="tO9-0u-CbU" secondAttribute="top" id="daB-2g-pDK"/>
+                            <constraint firstItem="NRk-y0-6j5" firstAttribute="trailing" secondItem="BfP-Y8-7Sg" secondAttribute="trailing" constant="25" id="e9k-F8-Yq9"/>
                             <constraint firstAttribute="bottom" secondItem="WRA-UX-3e4" secondAttribute="bottom" id="eDE-t7-CEc"/>
+                            <constraint firstItem="NRk-y0-6j5" firstAttribute="bottom" secondItem="BfP-Y8-7Sg" secondAttribute="bottom" constant="30" id="gxT-Nt-RD1"/>
+                            <constraint firstItem="NRk-y0-6j5" firstAttribute="trailing" secondItem="JeO-BO-hZn" secondAttribute="trailing" constant="25" id="ifU-VR-Vy5"/>
+                            <constraint firstItem="NRk-y0-6j5" firstAttribute="bottom" secondItem="Gwt-hk-1rU" secondAttribute="bottom" constant="30" id="mjo-Ge-Erf"/>
                             <constraint firstAttribute="trailing" secondItem="WRA-UX-3e4" secondAttribute="trailing" id="oa7-wW-wdQ"/>
                             <constraint firstItem="WRA-UX-3e4" firstAttribute="leading" secondItem="tO9-0u-CbU" secondAttribute="leading" id="wzy-fD-6vg"/>
                         </constraints>
@@ -1176,11 +1204,15 @@ You will not be charged during this process.</string>
                     </view>
                     <navigationItem key="navigationItem" id="AOC-0U-thD"/>
                     <connections>
-                        <outlet property="buttonCancel" destination="Yjr-lH-vCL" id="yJI-R9-si7"/>
                         <outlet property="buttonEnvironment" destination="1KN-RL-PSo" id="0se-De-Dpy"/>
+                        <outlet property="buyButton" destination="Ei6-5m-nGj" id="HBC-ry-Qpb"/>
+                        <outlet property="centeredMap" destination="6Md-hc-CJ2" id="w5i-tR-90V"/>
                         <outlet property="constraintHeaderHeight" destination="PTk-Kq-KOD" id="A9j-sv-B5M"/>
+                        <outlet property="couldNotGetPlanButton" destination="BfP-Y8-7Sg" id="nvw-I5-kck"/>
                         <outlet property="imvLogo" destination="DVe-fv-utO" id="gQ0-lh-kIP"/>
                         <outlet property="labelVersion" destination="tqQ-G1-84D" id="Rms-Mq-Nvf"/>
+                        <outlet property="loginButton" destination="JeO-BO-hZn" id="KbS-qe-l4K"/>
+                        <outlet property="redeemButton" destination="Gwt-hk-1rU" id="qS7-q2-RH8"/>
                         <outlet property="viewHeader" destination="1dA-og-SGN" id="Gbx-r1-tPk"/>
                         <outlet property="viewHeaderBackground" destination="WRA-UX-3e4" id="GNJ-M5-SWb"/>
                     </connections>
@@ -1514,7 +1546,9 @@ You will not be charged during this process.</string>
         </scene>
     </scenes>
     <resources>
+        <image name="centered-dark-map" width="375" height="300"/>
         <image name="close-icon" width="50" height="50"/>
+        <image name="logo-light" width="298" height="39"/>
         <image name="nav-logo" width="354" height="36"/>
         <image name="qr-code" width="325" height="325"/>
     </resources>
