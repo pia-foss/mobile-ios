@@ -114,8 +114,8 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
         labelSecondaryDNS.text = L10n.Settings.Dns.secondaryDNS
         textPrimaryDNS.placeholder = L10n.Global.required
         textSecondaryDNS.placeholder = L10n.Global.optional
-        textPrimaryDNS.keyboardType = .decimalPad
-        textSecondaryDNS.keyboardType = .decimalPad
+        textPrimaryDNS.keyboardType = .numbersAndPunctuation
+        textSecondaryDNS.keyboardType = .numbersAndPunctuation
         
         textPrimaryDNS.text = primaryDNSValue
         textSecondaryDNS.text = secondaryDNSValue
