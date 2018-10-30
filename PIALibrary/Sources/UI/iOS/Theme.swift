@@ -346,6 +346,10 @@ public class Theme {
             button.style(style: TextStyle.textStyle6)
         }
     }
+    
+    public func applyVersionNumberStyle(_ label: UILabel) {
+        label.style(style: TextStyle.versionNumberStyle)
+    }
 
     /// :nodoc:
     public func applyTitle(_ label: UILabel, appearance: Appearance) {

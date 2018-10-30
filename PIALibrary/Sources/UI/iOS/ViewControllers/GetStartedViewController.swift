@@ -35,6 +35,7 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
         constraintHeaderHeight.constant = (Macros.isDeviceBig ? 250.0 : 150.0)
         buttonEnvironment.isHidden = !accessedConfiguration.isDevelopment
         labelVersion.text = Macros.localizedVersionFullString()
+        view.backgroundColor = UIColor.piaGrey1
 
         self.styleButtons()
         
@@ -99,8 +100,7 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
         
         Theme.current.applyLightBackground(viewHeaderBackground)
         Theme.current.applyLightBackground(viewHeader)
-        Theme.current.applyCaption(labelVersion,
-                                   appearance: .dark)
+        Theme.current.applyVersionNumberStyle(labelVersion)
         Theme.current.applyCenteredMap(centeredMap)
         Theme.current.applyTransparentButton(buyButton,
                                              withSize: 1.0)

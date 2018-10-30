@@ -21,7 +21,7 @@ public extension TextStyle {
         foregroundColor: nil,
         backgroundColor: nil,
         tintColor: nil,
-        lineHeight: 18
+        lineHeight: 20
     )
 
     public static let textStyle2 = TextStyle(
@@ -30,7 +30,7 @@ public extension TextStyle {
         foregroundColor: nil,
         backgroundColor: nil,
         tintColor: nil,
-        lineHeight: 18
+        lineHeight: 20
     )
 
     public static let textStyle3 = TextStyle(
@@ -39,7 +39,7 @@ public extension TextStyle {
         foregroundColor: nil,
         backgroundColor: nil,
         tintColor: nil,
-        lineHeight: 18
+        lineHeight: 20
     )
 
     public static let textStyle4 = TextStyle(
@@ -48,7 +48,7 @@ public extension TextStyle {
         foregroundColor: nil,
         backgroundColor: nil,
         tintColor: nil,
-        lineHeight: 18
+        lineHeight: 20
     )
 
     public static let textStyle5 = TextStyle(
@@ -57,7 +57,7 @@ public extension TextStyle {
         foregroundColor: nil,
         backgroundColor: nil,
         tintColor: nil,
-        lineHeight: 16
+        lineHeight: 20
     )
 
     public static let textStyle6 = TextStyle(
@@ -75,7 +75,7 @@ public extension TextStyle {
         foregroundColor: nil,
         backgroundColor: nil,
         tintColor: nil,
-        lineHeight: 16
+        lineHeight: 18
     )
 
     public static let textStyle8 = TextStyle(
@@ -111,7 +111,7 @@ public extension TextStyle {
         foregroundColor: nil,
         backgroundColor: nil,
         tintColor: nil,
-        lineHeight: 22
+        lineHeight: 16
     )
 
     public static let textStyle12 = TextStyle(
@@ -120,7 +120,7 @@ public extension TextStyle {
         foregroundColor: nil,
         backgroundColor: nil,
         tintColor: nil,
-        lineHeight: 18
+        lineHeight: 16
     )
 
     public static let textStyle13 = TextStyle(
@@ -129,7 +129,7 @@ public extension TextStyle {
         foregroundColor: nil,
         backgroundColor: nil,
         tintColor: nil,
-        lineHeight: 22
+        lineHeight: 16
     )
 
     public static let textStyle14 = TextStyle(
@@ -147,7 +147,7 @@ public extension TextStyle {
         foregroundColor: nil,
         backgroundColor: nil,
         tintColor: nil,
-        lineHeight: 18
+        lineHeight: 16
     )
     
     public static let textStyle16 = TextStyle(
@@ -156,7 +156,7 @@ public extension TextStyle {
         foregroundColor: nil,
         backgroundColor: nil,
         tintColor: nil,
-        lineHeight: 16
+        lineHeight: 15
     )
     
     public static let textStyle17 = TextStyle(
@@ -165,7 +165,7 @@ public extension TextStyle {
         foregroundColor: nil,
         backgroundColor: nil,
         tintColor: nil,
-        lineHeight: 16
+        lineHeight: 15
     )
     
     public static let textStyle18 = TextStyle(
@@ -174,7 +174,7 @@ public extension TextStyle {
         foregroundColor: nil,
         backgroundColor: nil,
         tintColor: nil,
-        lineHeight: 16
+        lineHeight: 15
     )
     
     public static let textStyle19 = TextStyle(
@@ -183,7 +183,7 @@ public extension TextStyle {
         foregroundColor: nil,
         backgroundColor: nil,
         tintColor: nil,
-        lineHeight: 20
+        lineHeight: 15
     )
     
     public static let textStyle20 = TextStyle(
@@ -192,7 +192,16 @@ public extension TextStyle {
         foregroundColor: nil,
         backgroundColor: nil,
         tintColor: nil,
-        lineHeight: 16
+        lineHeight: 15
+    )
+    
+    public static let versionNumberStyle = TextStyle(
+        font: UIFont.regularFontWith(size: 14),
+        color: UIColor.piaGrey4,
+        foregroundColor: nil,
+        backgroundColor: nil,
+        tintColor: nil,
+        lineHeight: 18
     )
     
     public struct Buttons {
