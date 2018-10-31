@@ -24,8 +24,8 @@ struct AppConfiguration {
     }
     
     struct Welcome {
-        static func defaultPreset() -> PIAWelcomeViewController.Preset {
-            var preset = PIAWelcomeViewController.Preset()
+        static func defaultPreset() -> Preset {
+            var preset = Preset()
             guard Flags.shared.customizesWelcomePreset else {
                 return preset
             }

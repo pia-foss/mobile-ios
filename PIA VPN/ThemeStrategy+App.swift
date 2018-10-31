@@ -39,7 +39,13 @@ private struct LightThemeStrategy: ThemeStrategy {
             theme.applyLightNavigationBar(navigationBar)
             return
         }
-        theme.applyBrandNavigationBar(navigationBar)
+        
+        if viewController is BrandableNavigationBar {
+            theme.applyLightBrandLogoNavigationBar(navigationBar)
+        } else {
+            theme.applyBrandNavigationBar(navigationBar)
+        }
+
     }
     
     func statusBarAppearance(for viewController: AutolayoutViewController) -> UIStatusBarStyle {
@@ -71,7 +77,13 @@ private struct DarkThemeStrategy: ThemeStrategy {
         guard let navigationBar = viewController.navigationController?.navigationBar else {
             return
         }
-        theme.applyBrandNavigationBar(navigationBar)
+        
+        if viewController is BrandableNavigationBar {
+            theme.applyLightBrandLogoNavigationBar(navigationBar)
+        } else {
+            theme.applyBrandNavigationBar(navigationBar)
+        }
+
     }
     
     func statusBarAppearance(for viewController: AutolayoutViewController) -> UIStatusBarStyle {
