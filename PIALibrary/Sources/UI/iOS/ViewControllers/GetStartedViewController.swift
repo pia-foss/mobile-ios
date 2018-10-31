@@ -14,7 +14,6 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
     @IBOutlet private weak var viewHeader: UIView!
     @IBOutlet private weak var labelVersion: UILabel!
     @IBOutlet private weak var constraintHeaderHeight: NSLayoutConstraint!
-    @IBOutlet private weak var buttonEnvironment: UIButton!
     @IBOutlet private weak var imvLogo: UIImageView!
     @IBOutlet private weak var centeredMap: UIImageView!
     
@@ -33,7 +32,6 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
         imvLogo.image = Theme.current.palette.logo
         centeredMap.image = Theme.current.palette.logo
         constraintHeaderHeight.constant = (Macros.isDeviceBig ? 250.0 : 150.0)
-        buttonEnvironment.isHidden = !accessedConfiguration.isDevelopment
         labelVersion.text = Macros.localizedVersionFullString()
         view.backgroundColor = UIColor.piaGrey1
 
@@ -46,33 +44,25 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
     /**
      Creates a wrapped `GetStartedViewController` ready for presentation.
      */
-    public static func with() -> UIViewController {
+    public static func create() -> UIViewController {
         let nav = StoryboardScene.Welcome.initialScene.instantiate()
         return nav
     }
-
+    
+    public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier  {
+        case StoryboardSegue.Welcome.redeemGiftCardSegue.rawValue:
+            if let vc = segue.destination as? PIAWelcomeViewController {
+                vc.preset.pages = .redeem
+            }
+        default:
+            break
+        }
+    }
 
     /// :nodoc:
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        refreshEnvironmentButton()
-    }
-
-    @IBAction private func toggleEnvironment(_ sender: Any?) {
-        if (Client.environment == .production) {
-            Client.environment = .staging
-        } else {
-            Client.environment = .production
-        }
-        refreshEnvironmentButton()
-    }
-    
-    private func refreshEnvironmentButton() {
-        if (Client.environment == .production) {
-            buttonEnvironment.setTitle("Production", for: .normal)
-        } else {
-            buttonEnvironment.setTitle("Staging", for: .normal)
-        }
     }
     
     private func styleButtons() {
@@ -104,8 +94,6 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
         Theme.current.applyCenteredMap(centeredMap)
         Theme.current.applyTransparentButton(buyButton,
                                              withSize: 1.0)
-        buttonEnvironment.setTitleColor(labelVersion.textColor,
-                                        for: .normal)
         Theme.current.applyButtonLabelStyle(redeemButton)
         Theme.current.applyButtonLabelStyle(couldNotGetPlanButton)
     }

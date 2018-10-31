@@ -241,6 +241,10 @@ internal enum L10n {
       }
       /// Redeem gift card
       internal static let title = L10n.tr("Welcome", "redeem.title")
+      internal enum Accessibility {
+        /// Back
+        internal static let back = L10n.tr("Welcome", "redeem.accessibility.back")
+      }
       internal enum Email {
         /// Email address
         internal static let placeholder = L10n.tr("Welcome", "redeem.email.placeholder")

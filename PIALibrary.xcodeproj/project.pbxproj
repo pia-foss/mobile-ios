@@ -262,6 +262,11 @@
 		DD31498F21834B3F008E26E8 /* GetStartedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD31498E21834B3F008E26E8 /* GetStartedViewController.swift */; };
 		DD314990218350D1008E26E8 /* SwiftGen+ScenesStoryboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC812472176166500CB290C /* SwiftGen+ScenesStoryboards.swift */; };
 		DD314991218350D1008E26E8 /* SwiftGen+SeguesStoryboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC81249217617F900CB290C /* SwiftGen+SeguesStoryboards.swift */; };
+		DDD824E32189969400151709 /* Preset.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E22189969400151709 /* Preset.swift */; };
+		DDD824E5218996CD00151709 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E4218996CD00151709 /* Pages.swift */; };
+		DDD824E72189C0E800151709 /* BrandableNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E62189C0E800151709 /* BrandableNavigationBar.swift */; };
+		DDD824E82189C0EE00151709 /* BrandableNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E62189C0E800151709 /* BrandableNavigationBar.swift */; };
+		DDD824EA2189CD5700151709 /* NavigationLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E92189CD5700151709 /* NavigationLogoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -516,6 +521,10 @@
 		DD31498E21834B3F008E26E8 /* GetStartedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStartedViewController.swift; sourceTree = "<group>"; };
 		DDC812472176166500CB290C /* SwiftGen+ScenesStoryboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+ScenesStoryboards.swift"; sourceTree = "<group>"; };
 		DDC81249217617F900CB290C /* SwiftGen+SeguesStoryboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+SeguesStoryboards.swift"; sourceTree = "<group>"; };
+		DDD824E22189969400151709 /* Preset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preset.swift; sourceTree = "<group>"; };
+		DDD824E4218996CD00151709 /* Pages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pages.swift; sourceTree = "<group>"; };
+		DDD824E62189C0E800151709 /* BrandableNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandableNavigationBar.swift; sourceTree = "<group>"; };
+		DDD824E92189CD5700151709 /* NavigationLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLogoView.swift; sourceTree = "<group>"; };
 		E4E93DB7FA9D38CD96825F38 /* Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -578,6 +587,8 @@
 				0E392DB81FE34B5A0002160D /* NSString+URL.m */,
 				0E2ADCD81FE072ED00BB170C /* Pinger.h */,
 				0E2ADCD91FE072ED00BB170C /* Pinger.m */,
+				DDD824E22189969400151709 /* Preset.swift */,
+				DDD824E4218996CD00151709 /* Pages.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -695,6 +706,7 @@
 				841BE60E212AFE49002EF2D1 /* GiftCardUtil.swift */,
 				84125E07213D7DFF001BCC19 /* PIAColors.swift */,
 				84125E0A213D7E0E001BCC19 /* PIAFonts.swift */,
+				DDD824E62189C0E800151709 /* BrandableNavigationBar.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -796,6 +808,7 @@
 				84577FC2213D9AEA006DEC3D /* UITextField+PlaceholderColor.swift */,
 				84577FC4213D9B4D006DEC3D /* UILabel+LineHeight.swift */,
 				DD0AC78F218715B8009B576B /* PIAButton.swift */,
+				DDD824E92189CD5700151709 /* NavigationLogoView.swift */,
 				84577FB9213D8EB2006DEC3D /* Styles */,
 			);
 			path = iOS;
@@ -1480,6 +1493,7 @@
 				0E392D901FE2FBBE0002160D /* GlossConnectivityStatus.swift in Sources */,
 				0EE771041F9D0DCA0029A77B /* Client+Configuration.swift in Sources */,
 				0E7BC6E81F96B1000035C8B2 /* Client+Preferences.swift in Sources */,
+				DDD824E82189C0EE00151709 /* BrandableNavigationBar.swift in Sources */,
 				0E53A8571FE5DA16000C2A18 /* MockInAppProvider.swift in Sources */,
 				0E392D9E1FE31D630002160D /* MockVPNProvider.swift in Sources */,
 				0E3A35331FD9E97E000B0F99 /* Macros.swift in Sources */,
@@ -1556,6 +1570,7 @@
 				0E4D4E9E1FA4CA7A007DA6DA /* PurchasePlan.swift in Sources */,
 				0E2215CF2008DFD900F5FB4D /* SwiftGen+Assets.swift in Sources */,
 				0EE78AF21F8187F8002E4CDD /* LoginRequest.swift in Sources */,
+				DDD824E72189C0E800151709 /* BrandableNavigationBar.swift in Sources */,
 				84125E08213D7DFF001BCC19 /* PIAColors.swift in Sources */,
 				0EE78AF01F818767002E4CDD /* ClientError.swift in Sources */,
 				0E0E5B151F829EC500022CD0 /* UpdateAccountRequest.swift in Sources */,
@@ -1595,6 +1610,7 @@
 				0EAA38981F9CC7E4000149CF /* AppStoreProduct.swift in Sources */,
 				0E1743131F82E1A4001E7DD6 /* Client.swift in Sources */,
 				0EE771031F9D0DCA0029A77B /* Client+Configuration.swift in Sources */,
+				DDD824E5218996CD00151709 /* Pages.swift in Sources */,
 				0E0E5B131F8297DE00022CD0 /* KeychainStore.swift in Sources */,
 				0E0E5B0D1F8297BD00022CD0 /* PlainStore.swift in Sources */,
 				0EE78AEE1F818720002E4CDD /* LibraryCallback.swift in Sources */,
@@ -1628,6 +1644,7 @@
 				0EFEB4C12007784A00F81029 /* PIATunnelProvider+Profile.swift in Sources */,
 				0E392DA31FE3247E0002160D /* Endpoint.swift in Sources */,
 				0E53A8581FE5DA16000C2A18 /* MockInAppProvider.swift in Sources */,
+				DDD824E32189969400151709 /* Preset.swift in Sources */,
 				0E9D62721FDE83BD009A90CF /* GlossServersBundle.swift in Sources */,
 				0E492C6A1FE61485007F23DF /* Client+Database.swift in Sources */,
 				0E48A8531FDAD60900B9A4C0 /* OptionsViewController.swift in Sources */,
@@ -1651,6 +1668,7 @@
 				0EB8C06D1F9CD38B005857E4 /* SignupInProgressViewController.swift in Sources */,
 				0ED1585A1FDC083F008F6522 /* SwiftGen+Strings.swift in Sources */,
 				0E2ADCE91FE0843000BB170C /* Macros+Pinger.swift in Sources */,
+				DDD824EA2189CD5700151709 /* NavigationLogoView.swift in Sources */,
 				0EFB512E1F82D7C50033B81F /* PIAWebServices.swift in Sources */,
 				0EB8C0641F9CD38B005857E4 /* ActivityButton.swift in Sources */,
 				0ED2B5131F82444E00C9DB2B /* Client+Preferences.swift in Sources */,

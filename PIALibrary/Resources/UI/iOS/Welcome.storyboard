@@ -940,22 +940,15 @@ You will not be charged during this process.</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9yH-kk-Chi">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEF-LS-PZ6">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <connections>
+                                    <segue destination="lku-HF-3OI" kind="embed" id="UXm-xH-vgv"/>
+                                </connections>
+                            </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DMP-fZ-XVd">
                                 <rect key="frame" x="0.0" y="20" width="375" height="150"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav-logo" translatesAutoresizingMaskIntoConstraints="NO" id="5GV-Aq-hbm">
-                                        <rect key="frame" x="56.5" y="62" width="262.5" height="36"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.2.3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUP-Jr-Wry">
-                                        <rect key="frame" x="157" y="133" width="61.5" height="12"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XWX-I9-hIx">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="55"/>
                                         <constraints>
@@ -983,18 +976,13 @@ You will not be charged during this process.</string>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="5GV-Aq-hbm" firstAttribute="centerY" secondItem="DMP-fZ-XVd" secondAttribute="centerY" constant="5" id="200-Ai-KOn"/>
                                     <constraint firstItem="XWX-I9-hIx" firstAttribute="top" secondItem="DMP-fZ-XVd" secondAttribute="top" id="98o-mJ-byh"/>
-                                    <constraint firstItem="5GV-Aq-hbm" firstAttribute="centerX" secondItem="DMP-fZ-XVd" secondAttribute="centerX" id="BpU-su-m2H"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XWX-I9-hIx" secondAttribute="trailing" id="KLO-fG-8uJ"/>
-                                    <constraint firstItem="cUP-Jr-Wry" firstAttribute="centerX" secondItem="5GV-Aq-hbm" secondAttribute="centerX" id="V0z-S8-q3e"/>
                                     <constraint firstAttribute="trailing" secondItem="LMx-dm-CUP" secondAttribute="trailing" constant="20" id="XQF-pg-yLB"/>
-                                    <constraint firstItem="5GV-Aq-hbm" firstAttribute="width" relation="lessThanOrEqual" secondItem="DMP-fZ-XVd" secondAttribute="width" multiplier="0.7" id="d2b-ma-0Pv"/>
                                     <constraint firstItem="LMx-dm-CUP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XWX-I9-hIx" secondAttribute="trailing" id="hcC-Pt-uYF"/>
                                     <constraint firstItem="XWX-I9-hIx" firstAttribute="leading" secondItem="DMP-fZ-XVd" secondAttribute="leading" id="poE-wE-rMx"/>
-                                    <constraint firstAttribute="bottom" secondItem="cUP-Jr-Wry" secondAttribute="bottom" constant="5" id="rpa-uD-DmH"/>
                                     <constraint firstItem="LMx-dm-CUP" firstAttribute="centerY" secondItem="XWX-I9-hIx" secondAttribute="centerY" id="tO4-MO-fDD"/>
                                     <constraint firstAttribute="height" constant="150" id="vIf-OK-0gF"/>
                                 </constraints>
@@ -1009,50 +997,35 @@ You will not be charged during this process.</string>
                                     </mask>
                                 </variation>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEF-LS-PZ6">
-                                <rect key="frame" x="0.0" y="170" width="375" height="497"/>
-                                <connections>
-                                    <segue destination="lku-HF-3OI" kind="embed" id="UXm-xH-vgv"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="NEF-LS-PZ6" firstAttribute="top" secondItem="6Cx-hD-1NW" secondAttribute="top" id="91f-u8-wDf"/>
-                            <constraint firstItem="9yH-kk-Chi" firstAttribute="bottom" secondItem="DMP-fZ-XVd" secondAttribute="bottom" id="EVh-PS-ms5"/>
-                            <constraint firstItem="9yH-kk-Chi" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="EXi-Tn-oto"/>
                             <constraint firstItem="DMP-fZ-XVd" firstAttribute="leading" secondItem="6Cx-hD-1NW" secondAttribute="leading" id="HeX-SG-GWs"/>
                             <constraint firstItem="6Cx-hD-1NW" firstAttribute="bottom" secondItem="DMP-fZ-XVd" secondAttribute="bottom" id="Pd9-ZD-2p6"/>
                             <constraint firstAttribute="trailing" secondItem="NEF-LS-PZ6" secondAttribute="trailing" id="bj4-uZ-tNy"/>
                             <constraint firstItem="DMP-fZ-XVd" firstAttribute="top" secondItem="6Cx-hD-1NW" secondAttribute="top" id="dRV-IN-cpV"/>
                             <constraint firstItem="NEF-LS-PZ6" firstAttribute="leading" secondItem="6Cx-hD-1NW" secondAttribute="leading" id="f8G-WS-caA"/>
-                            <constraint firstItem="9yH-kk-Chi" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="gtO-XN-BlF"/>
                             <constraint firstItem="NEF-LS-PZ6" firstAttribute="width" secondItem="DMP-fZ-XVd" secondAttribute="width" multiplier="1.5" id="igF-rJ-JxN"/>
-                            <constraint firstItem="NEF-LS-PZ6" firstAttribute="top" secondItem="DMP-fZ-XVd" secondAttribute="bottom" id="k1z-cc-GEn"/>
                             <constraint firstItem="6Cx-hD-1NW" firstAttribute="trailing" secondItem="DMP-fZ-XVd" secondAttribute="trailing" id="oPM-sJ-bzr"/>
                             <constraint firstItem="NEF-LS-PZ6" firstAttribute="leading" secondItem="DMP-fZ-XVd" secondAttribute="trailing" id="puk-ve-VGC"/>
                             <constraint firstItem="NEF-LS-PZ6" firstAttribute="bottom" secondItem="kh9-bI-dsS" secondAttribute="bottom" id="s5i-lO-1yk"/>
-                            <constraint firstItem="9yH-kk-Chi" firstAttribute="trailing" secondItem="DMP-fZ-XVd" secondAttribute="trailing" id="u4S-DI-ran"/>
-                            <constraint firstAttribute="bottom" secondItem="9yH-kk-Chi" secondAttribute="bottom" id="zq4-LJ-wAw"/>
+                            <constraint firstItem="NEF-LS-PZ6" firstAttribute="top" secondItem="6Cx-hD-1NW" secondAttribute="top" id="yXa-4v-JM3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Cx-hD-1NW"/>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="Pd9-ZD-2p6"/>
                                 <exclude reference="oPM-sJ-bzr"/>
-                                <exclude reference="EVh-PS-ms5"/>
-                                <exclude reference="zq4-LJ-wAw"/>
                                 <exclude reference="91f-u8-wDf"/>
                                 <exclude reference="f8G-WS-caA"/>
                                 <exclude reference="igF-rJ-JxN"/>
-                                <exclude reference="k1z-cc-GEn"/>
                                 <exclude reference="puk-ve-VGC"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
                                 <include reference="Pd9-ZD-2p6"/>
-                                <include reference="zq4-LJ-wAw"/>
                                 <include reference="91f-u8-wDf"/>
                                 <include reference="igF-rJ-JxN"/>
                                 <include reference="puk-ve-VGC"/>
@@ -1061,9 +1034,7 @@ You will not be charged during this process.</string>
                         <variation key="heightClass=regular">
                             <mask key="constraints">
                                 <include reference="oPM-sJ-bzr"/>
-                                <include reference="EVh-PS-ms5"/>
                                 <include reference="f8G-WS-caA"/>
-                                <include reference="k1z-cc-GEn"/>
                             </mask>
                         </variation>
                     </view>
@@ -1073,16 +1044,13 @@ You will not be charged during this process.</string>
                         <outlet property="buttonCancel" destination="XWX-I9-hIx" id="WJA-f3-s0m"/>
                         <outlet property="buttonEnvironment" destination="LMx-dm-CUP" id="v5o-Qz-osg"/>
                         <outlet property="constraintHeaderHeight" destination="vIf-OK-0gF" id="6qK-Rd-Jgj"/>
-                        <outlet property="imvLogo" destination="5GV-Aq-hbm" id="BLp-Xa-3pY"/>
-                        <outlet property="labelVersion" destination="cUP-Jr-Wry" id="svj-VV-cUe"/>
                         <outlet property="viewHeader" destination="DMP-fZ-XVd" id="Xvp-OA-xQk"/>
-                        <outlet property="viewHeaderBackground" destination="9yH-kk-Chi" id="vJD-3I-eGw"/>
                         <segue destination="9jt-8I-K8i" kind="presentation" identifier="SignupViaRecoverSegue" id="eeI-Xa-Rq6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="240" y="-1005"/>
+            <point key="canvasLocation" x="239.19999999999999" y="-1005.2473763118442"/>
         </scene>
         <!--Get Started View Controller-->
         <scene sceneID="H76-OI-9Kq">
@@ -1108,18 +1076,6 @@ You will not be charged during this process.</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1KN-RL-PSo">
-                                        <rect key="frame" x="205" y="12.5" width="150" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="ZJg-zD-0YC"/>
-                                        </constraints>
-                                        <state key="normal" title="&lt;Environment&gt;">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="toggleEnvironment:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="sMk-F9-mGh"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1127,10 +1083,8 @@ You will not be charged during this process.</string>
                                     <constraint firstItem="DVe-fv-utO" firstAttribute="centerX" secondItem="1dA-og-SGN" secondAttribute="centerX" id="JHl-Mr-6Zn"/>
                                     <constraint firstAttribute="height" constant="150" id="PTk-Kq-KOD"/>
                                     <constraint firstItem="tqQ-G1-84D" firstAttribute="top" secondItem="DVe-fv-utO" secondAttribute="bottom" constant="17" id="ZSv-GP-z0I"/>
-                                    <constraint firstAttribute="trailing" secondItem="1KN-RL-PSo" secondAttribute="trailing" constant="20" id="bbK-hy-orF"/>
                                     <constraint firstItem="DVe-fv-utO" firstAttribute="top" secondItem="1dA-og-SGN" secondAttribute="top" constant="42" id="flx-25-TlD"/>
                                     <constraint firstItem="tqQ-G1-84D" firstAttribute="centerX" secondItem="DVe-fv-utO" secondAttribute="centerX" id="jWC-WI-5gY"/>
-                                    <constraint firstItem="1KN-RL-PSo" firstAttribute="top" secondItem="1dA-og-SGN" secondAttribute="top" constant="12.5" id="uSg-Zb-eh2"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -1166,6 +1120,9 @@ You will not be charged during this process.</string>
                                     <constraint firstAttribute="height" constant="20" id="SL8-XB-pmh"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="vXZ-lx-hvc" kind="show" identifier="RedeemGiftCardSegue" id="iBM-Ob-Upg"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BfP-Y8-7Sg">
                                 <rect key="frame" x="304" y="617" width="46" height="20"/>
@@ -1204,7 +1161,6 @@ You will not be charged during this process.</string>
                     </view>
                     <navigationItem key="navigationItem" id="AOC-0U-thD"/>
                     <connections>
-                        <outlet property="buttonEnvironment" destination="1KN-RL-PSo" id="0se-De-Dpy"/>
                         <outlet property="buyButton" destination="Ei6-5m-nGj" id="HBC-ry-Qpb"/>
                         <outlet property="centeredMap" destination="6Md-hc-CJ2" id="w5i-tR-90V"/>
                         <outlet property="constraintHeaderHeight" destination="PTk-Kq-KOD" id="A9j-sv-B5M"/>
@@ -1549,7 +1505,6 @@ You will not be charged during this process.</string>
         <image name="centered-dark-map" width="375" height="300"/>
         <image name="close-icon" width="50" height="50"/>
         <image name="logo-light" width="298" height="39"/>
-        <image name="nav-logo" width="354" height="36"/>
         <image name="qr-code" width="325" height="325"/>
     </resources>
     <inferredMetricsTieBreakers>

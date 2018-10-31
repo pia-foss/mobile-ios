@@ -34,6 +34,9 @@ public class Theme {
         /// The logo image.
         public var logo: UIImage?
 
+        /// The navigation bar back image.
+        public var navigationBarBackIcon: UIImage?
+
         /// The brand background color.
         public var brandBackground: UIColor
 

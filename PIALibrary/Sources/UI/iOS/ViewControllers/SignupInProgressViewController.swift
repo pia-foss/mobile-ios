@@ -20,7 +20,7 @@ class SignupInProgressViewController: AutolayoutViewController {
 
     var redeemRequest: RedeemRequest?
     
-    var preset: PIAWelcomeViewController.Preset?
+    var preset: Preset?
 
     var metadata: SignupMetadata?
     

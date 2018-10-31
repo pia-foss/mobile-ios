@@ -48,7 +48,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     
     @IBOutlet private weak var cameraButton: UIButton!
 
-    var preset: PIAWelcomeViewController.Preset?
+    var preset: Preset?
     
     var omitsSiblingLink: Bool = false
     

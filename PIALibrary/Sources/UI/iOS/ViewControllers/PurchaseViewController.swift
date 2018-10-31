@@ -36,7 +36,7 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
     
     @IBOutlet private weak var labelLogin2: UILabel!
     
-    var preset: PIAWelcomeViewController.Preset?
+    var preset: Preset?
     
     var omitsSiblingLink = false
     

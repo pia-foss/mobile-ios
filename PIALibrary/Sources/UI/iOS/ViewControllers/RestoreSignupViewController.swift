@@ -26,7 +26,7 @@ class RestoreSignupViewController: AutolayoutViewController {
 
     @IBOutlet private weak var buttonDismiss: UIButton!
 
-    var preset: PIAWelcomeViewController.Preset?
+    var preset: Preset?
 
     weak var delegate: RestoreSignupViewControllerDelegate?
 
