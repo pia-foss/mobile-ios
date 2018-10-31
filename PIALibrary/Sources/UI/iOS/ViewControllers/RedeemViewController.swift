@@ -46,7 +46,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     
     @IBOutlet private weak var labelLogin2: UILabel!
     
-    @IBOutlet private weak var cameraButton: UIButton!
+    @IBOutlet private weak var cameraButton: PIAButton!
 
     var preset: Preset?
     
@@ -100,6 +100,8 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         super.viewDidLoad()
 
         labelSubtitle.textAlignment = .center
+        cameraButton.setRounded()
+        cameraButton.style(style: TextStyle.Buttons.piaPlainTextButton)
 
     }
 
@@ -239,7 +241,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
-        
+        Theme.current.applyLightBackground(view)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applySubtitle(labelSubtitle)
         Theme.current.applyInput(textEmail)

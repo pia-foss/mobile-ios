@@ -497,8 +497,8 @@ public class Theme {
     
     /// :nodoc:
     public func applyInput(_ textField: UITextField) { // hint is placeholder
-        textField.font = typeface.regularFont(size: 14.0)
-        textField.textColor = palette.textColor(forRelevance: 1, appearance: .dark)
+        
+        textField.style(style: TextStyle.textStyle8)
 
         if let borderedTextField = textField as? BorderedTextField {
             borderedTextField.borderColor = palette.divider

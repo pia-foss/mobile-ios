@@ -190,6 +190,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
     public override func viewShouldRestyle() {
         super.viewShouldRestyle()
         navigationItem.titleView = NavigationLogoView()
+        Theme.current.applyLightBackground(view)
         Theme.current.applyNavigationBarStyle(to: self)
         Theme.current.applyCancelButton(buttonCancel, appearance: .dark)
         buttonEnvironment.setTitleColor(buttonCancel.titleColor(for: .normal), for: .normal)
