@@ -978,9 +978,9 @@ You will not be charged during this process.</string>
                             <constraint firstItem="6Cx-hD-1NW" firstAttribute="bottom" secondItem="NEF-LS-PZ6" secondAttribute="bottom" id="2nT-6M-1gb"/>
                             <constraint firstItem="NEF-LS-PZ6" firstAttribute="top" secondItem="6Cx-hD-1NW" secondAttribute="top" id="91f-u8-wDf"/>
                             <constraint firstItem="6Cx-hD-1NW" firstAttribute="trailing" secondItem="LMx-dm-CUP" secondAttribute="trailing" constant="20" id="IRV-D6-pd1"/>
-                            <constraint firstItem="NEF-LS-PZ6" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="KMc-g0-qpY"/>
                             <constraint firstItem="XWX-I9-hIx" firstAttribute="top" secondItem="6Cx-hD-1NW" secondAttribute="top" id="WM8-EC-Jwv"/>
                             <constraint firstItem="NEF-LS-PZ6" firstAttribute="leading" secondItem="6Cx-hD-1NW" secondAttribute="leading" id="cnS-ij-hCx"/>
+                            <constraint firstItem="NEF-LS-PZ6" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="lwB-Qe-3KV"/>
                             <constraint firstItem="NEF-LS-PZ6" firstAttribute="trailing" secondItem="6Cx-hD-1NW" secondAttribute="trailing" id="mfN-Xk-igx"/>
                             <constraint firstItem="LMx-dm-CUP" firstAttribute="centerY" secondItem="XWX-I9-hIx" secondAttribute="centerY" id="pfh-KB-Xhc"/>
                             <constraint firstItem="XWX-I9-hIx" firstAttribute="leading" secondItem="6Cx-hD-1NW" secondAttribute="leading" id="qgq-qF-XP0"/>
@@ -1040,6 +1040,7 @@ You will not be charged during this process.</string>
                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="DVe-fv-utO" firstAttribute="width" relation="lessThanOrEqual" secondItem="1dA-og-SGN" secondAttribute="width" multiplier="0.7" id="6uc-qt-O9F"/>
+                                    <constraint firstAttribute="height" constant="150" id="J3b-yM-0H8"/>
                                     <constraint firstItem="DVe-fv-utO" firstAttribute="centerX" secondItem="1dA-og-SGN" secondAttribute="centerX" id="JHl-Mr-6Zn"/>
                                     <constraint firstAttribute="height" constant="150" id="PTk-Kq-KOD"/>
                                     <constraint firstItem="tqQ-G1-84D" firstAttribute="top" secondItem="DVe-fv-utO" secondAttribute="bottom" constant="17" id="ZSv-GP-z0I"/>
@@ -1251,18 +1252,15 @@ You will not be charged during this process.</string>
                                                             <constraint firstAttribute="bottom" secondItem="TnM-Pl-njO" secondAttribute="bottom" id="Cx0-9R-80o"/>
                                                             <constraint firstItem="TnM-Pl-njO" firstAttribute="top" secondItem="mPZ-KP-R5j" secondAttribute="top" constant="29" id="Lpl-be-6RX"/>
                                                             <constraint firstAttribute="trailing" secondItem="TnM-Pl-njO" secondAttribute="trailing" constant="25" id="cH3-MI-9Lg"/>
-                                                            <constraint firstItem="TnM-Pl-njO" firstAttribute="top" secondItem="mPZ-KP-R5j" secondAttribute="top" constant="30" id="gnC-Zx-jwS"/>
                                                         </constraints>
                                                         <variation key="default">
                                                             <mask key="constraints">
                                                                 <exclude reference="Cx0-9R-80o"/>
-                                                                <exclude reference="gnC-Zx-jwS"/>
                                                             </mask>
                                                         </variation>
                                                         <variation key="heightClass=compact">
                                                             <mask key="constraints">
                                                                 <include reference="Cx0-9R-80o"/>
-                                                                <include reference="gnC-Zx-jwS"/>
                                                             </mask>
                                                         </variation>
                                                     </view>

@@ -31,7 +31,6 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
 
         imvLogo.image = Theme.current.palette.logo
         centeredMap.image = Theme.current.palette.logo
-        constraintHeaderHeight.constant = (Macros.isDeviceBig ? 250.0 : 150.0)
         labelVersion.text = Macros.localizedVersionFullString()
         view.backgroundColor = UIColor.piaGrey1
 
