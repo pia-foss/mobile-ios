@@ -946,94 +946,59 @@ You will not be charged during this process.</string>
                                     <segue destination="lku-HF-3OI" kind="embed" id="UXm-xH-vgv"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DMP-fZ-XVd">
-                                <rect key="frame" x="0.0" y="20" width="375" height="150"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XWX-I9-hIx">
-                                        <rect key="frame" x="0.0" y="0.0" width="44" height="55"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="PgJ-oz-rYu"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="bEM-gD-aoN"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
-                                        <state key="normal" title="×">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="cancelClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="FmV-yT-Pso"/>
-                                        </connections>
-                                    </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LMx-dm-CUP">
-                                        <rect key="frame" x="205" y="12.5" width="150" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="UGM-td-ifN"/>
-                                        </constraints>
-                                        <state key="normal" title="&lt;Environment&gt;">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="toggleEnvironment:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="lQ2-8l-miP"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XWX-I9-hIx">
+                                <rect key="frame" x="0.0" y="20" width="44" height="55"/>
                                 <constraints>
-                                    <constraint firstItem="XWX-I9-hIx" firstAttribute="top" secondItem="DMP-fZ-XVd" secondAttribute="top" id="98o-mJ-byh"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XWX-I9-hIx" secondAttribute="trailing" id="KLO-fG-8uJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="LMx-dm-CUP" secondAttribute="trailing" constant="20" id="XQF-pg-yLB"/>
-                                    <constraint firstItem="LMx-dm-CUP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XWX-I9-hIx" secondAttribute="trailing" id="hcC-Pt-uYF"/>
-                                    <constraint firstItem="XWX-I9-hIx" firstAttribute="leading" secondItem="DMP-fZ-XVd" secondAttribute="leading" id="poE-wE-rMx"/>
-                                    <constraint firstItem="LMx-dm-CUP" firstAttribute="centerY" secondItem="XWX-I9-hIx" secondAttribute="centerY" id="tO4-MO-fDD"/>
-                                    <constraint firstAttribute="height" constant="150" id="vIf-OK-0gF"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="PgJ-oz-rYu"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="bEM-gD-aoN"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="vIf-OK-0gF"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular">
-                                    <mask key="constraints">
-                                        <include reference="vIf-OK-0gF"/>
-                                    </mask>
-                                </variation>
-                            </view>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                                <state key="normal" title="×">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="FmV-yT-Pso"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LMx-dm-CUP">
+                                <rect key="frame" x="205" y="32.5" width="150" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="UGM-td-ifN"/>
+                                </constraints>
+                                <state key="normal" title="&lt;Environment&gt;">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toggleEnvironment:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="lQ2-8l-miP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="NEF-LS-PZ6" firstAttribute="top" secondItem="6Cx-hD-1NW" secondAttribute="top" id="91f-u8-wDf"/>
-                            <constraint firstItem="DMP-fZ-XVd" firstAttribute="leading" secondItem="6Cx-hD-1NW" secondAttribute="leading" id="HeX-SG-GWs"/>
-                            <constraint firstItem="6Cx-hD-1NW" firstAttribute="bottom" secondItem="DMP-fZ-XVd" secondAttribute="bottom" id="Pd9-ZD-2p6"/>
+                            <constraint firstItem="6Cx-hD-1NW" firstAttribute="trailing" secondItem="LMx-dm-CUP" secondAttribute="trailing" constant="20" id="IRV-D6-pd1"/>
+                            <constraint firstItem="XWX-I9-hIx" firstAttribute="top" secondItem="6Cx-hD-1NW" secondAttribute="top" id="WM8-EC-Jwv"/>
                             <constraint firstAttribute="trailing" secondItem="NEF-LS-PZ6" secondAttribute="trailing" id="bj4-uZ-tNy"/>
-                            <constraint firstItem="DMP-fZ-XVd" firstAttribute="top" secondItem="6Cx-hD-1NW" secondAttribute="top" id="dRV-IN-cpV"/>
                             <constraint firstItem="NEF-LS-PZ6" firstAttribute="leading" secondItem="6Cx-hD-1NW" secondAttribute="leading" id="f8G-WS-caA"/>
-                            <constraint firstItem="NEF-LS-PZ6" firstAttribute="width" secondItem="DMP-fZ-XVd" secondAttribute="width" multiplier="1.5" id="igF-rJ-JxN"/>
-                            <constraint firstItem="6Cx-hD-1NW" firstAttribute="trailing" secondItem="DMP-fZ-XVd" secondAttribute="trailing" id="oPM-sJ-bzr"/>
-                            <constraint firstItem="NEF-LS-PZ6" firstAttribute="leading" secondItem="DMP-fZ-XVd" secondAttribute="trailing" id="puk-ve-VGC"/>
+                            <constraint firstItem="LMx-dm-CUP" firstAttribute="centerY" secondItem="XWX-I9-hIx" secondAttribute="centerY" id="pfh-KB-Xhc"/>
+                            <constraint firstItem="XWX-I9-hIx" firstAttribute="leading" secondItem="6Cx-hD-1NW" secondAttribute="leading" id="qgq-qF-XP0"/>
                             <constraint firstItem="NEF-LS-PZ6" firstAttribute="bottom" secondItem="kh9-bI-dsS" secondAttribute="bottom" id="s5i-lO-1yk"/>
                             <constraint firstItem="NEF-LS-PZ6" firstAttribute="top" secondItem="6Cx-hD-1NW" secondAttribute="top" id="yXa-4v-JM3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Cx-hD-1NW"/>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="Pd9-ZD-2p6"/>
-                                <exclude reference="oPM-sJ-bzr"/>
                                 <exclude reference="91f-u8-wDf"/>
                                 <exclude reference="f8G-WS-caA"/>
-                                <exclude reference="igF-rJ-JxN"/>
-                                <exclude reference="puk-ve-VGC"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
-                                <include reference="Pd9-ZD-2p6"/>
                                 <include reference="91f-u8-wDf"/>
-                                <include reference="igF-rJ-JxN"/>
-                                <include reference="puk-ve-VGC"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
                             <mask key="constraints">
-                                <include reference="oPM-sJ-bzr"/>
                                 <include reference="f8G-WS-caA"/>
                             </mask>
                         </variation>
@@ -1043,8 +1008,6 @@ You will not be charged during this process.</string>
                     <connections>
                         <outlet property="buttonCancel" destination="XWX-I9-hIx" id="WJA-f3-s0m"/>
                         <outlet property="buttonEnvironment" destination="LMx-dm-CUP" id="v5o-Qz-osg"/>
-                        <outlet property="constraintHeaderHeight" destination="vIf-OK-0gF" id="6qK-Rd-Jgj"/>
-                        <outlet property="viewHeader" destination="DMP-fZ-XVd" id="Xvp-OA-xQk"/>
                         <segue destination="9jt-8I-K8i" kind="presentation" identifier="SignupViaRecoverSegue" id="eeI-Xa-Rq6"/>
                     </connections>
                 </viewController>
@@ -1198,22 +1161,22 @@ You will not be charged during this process.</string>
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="587"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TnM-Pl-njO">
-                                                                <rect key="frame" x="47.5" y="168.5" width="280" height="250"/>
+                                                                <rect key="frame" x="25" y="29" width="325" height="260"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Redeem" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEC-Qu-zkj">
-                                                                        <rect key="frame" x="109.5" y="0.0" width="61" height="20"/>
+                                                                        <rect key="frame" x="132" y="0.0" width="61" height="20"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S5y-bL-bNg">
-                                                                        <rect key="frame" x="0.0" y="30" width="280" height="17"/>
+                                                                        <rect key="frame" x="0.0" y="30" width="325" height="17"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3ne-g6-NDW" customClass="BorderedTextField" customModule="PIALibrary" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="67" width="280" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="67" width="325" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="30" id="ceN-iH-PMs"/>
                                                                         </constraints>
@@ -1224,7 +1187,7 @@ You will not be charged during this process.</string>
                                                                         </connections>
                                                                     </textField>
                                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="PIN" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pbJ-dg-A3t" customClass="BorderedTextField" customModule="PIALibrary" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="117" width="280" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="117" width="325" height="30"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
                                                                         <connections>
@@ -1232,7 +1195,7 @@ You will not be charged during this process.</string>
                                                                         </connections>
                                                                     </textField>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoC-xB-Jhr">
-                                                                        <rect key="frame" x="250" y="117" width="30" height="30"/>
+                                                                        <rect key="frame" x="295" y="117" width="30" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="30" id="bCM-kI-tMy"/>
                                                                         </constraints>
@@ -1242,18 +1205,18 @@ You will not be charged during this process.</string>
                                                                             <action selector="showCameraToScanQRCodes:" destination="qgN-PX-Sir" eventType="touchUpInside" id="i22-HG-3Xe"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tea-DU-K60" customClass="ActivityButton" customModule="PIALibrary" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="167" width="280" height="40"/>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tea-DU-K60" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="167" width="325" height="50"/>
                                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="40" id="QJT-WV-pkY"/>
+                                                                            <constraint firstAttribute="height" constant="50" id="QJT-WV-pkY"/>
                                                                         </constraints>
                                                                         <connections>
                                                                             <action selector="redeem:" destination="qgN-PX-Sir" eventType="touchUpInside" id="Aor-0p-u4V"/>
                                                                         </connections>
                                                                     </view>
                                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="&lt;Agreement&gt;" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xcj-pL-a9w">
-                                                                        <rect key="frame" x="0.0" y="217" width="280" height="33"/>
+                                                                        <rect key="frame" x="0.0" y="227" width="325" height="33"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -1291,29 +1254,23 @@ You will not be charged during this process.</string>
                                                             </view>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstItem="TnM-Pl-njO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mPZ-KP-R5j" secondAttribute="leading" constant="20" id="7nN-Vi-nF4"/>
+                                                            <constraint firstItem="TnM-Pl-njO" firstAttribute="leading" secondItem="mPZ-KP-R5j" secondAttribute="leading" constant="25" id="7nN-Vi-nF4"/>
                                                             <constraint firstItem="TnM-Pl-njO" firstAttribute="centerX" secondItem="mPZ-KP-R5j" secondAttribute="centerX" id="A1K-vS-qhc"/>
                                                             <constraint firstAttribute="bottom" secondItem="TnM-Pl-njO" secondAttribute="bottom" id="Cx0-9R-80o"/>
-                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TnM-Pl-njO" secondAttribute="trailing" constant="20" id="cH3-MI-9Lg"/>
+                                                            <constraint firstItem="TnM-Pl-njO" firstAttribute="top" secondItem="mPZ-KP-R5j" secondAttribute="top" constant="29" id="Lpl-be-6RX"/>
+                                                            <constraint firstAttribute="trailing" secondItem="TnM-Pl-njO" secondAttribute="trailing" constant="25" id="cH3-MI-9Lg"/>
                                                             <constraint firstItem="TnM-Pl-njO" firstAttribute="top" secondItem="mPZ-KP-R5j" secondAttribute="top" constant="30" id="gnC-Zx-jwS"/>
-                                                            <constraint firstItem="TnM-Pl-njO" firstAttribute="centerY" secondItem="mPZ-KP-R5j" secondAttribute="centerY" id="wiL-Hp-aF4"/>
                                                         </constraints>
                                                         <variation key="default">
                                                             <mask key="constraints">
                                                                 <exclude reference="Cx0-9R-80o"/>
                                                                 <exclude reference="gnC-Zx-jwS"/>
-                                                                <exclude reference="wiL-Hp-aF4"/>
                                                             </mask>
                                                         </variation>
                                                         <variation key="heightClass=compact">
                                                             <mask key="constraints">
                                                                 <include reference="Cx0-9R-80o"/>
                                                                 <include reference="gnC-Zx-jwS"/>
-                                                            </mask>
-                                                        </variation>
-                                                        <variation key="heightClass=regular">
-                                                            <mask key="constraints">
-                                                                <include reference="wiL-Hp-aF4"/>
                                                             </mask>
                                                         </variation>
                                                     </view>
@@ -1508,6 +1465,6 @@ You will not be charged during this process.</string>
         <image name="qr-code" width="325" height="325"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eeI-Xa-Rq6"/>
+        <segue reference="Knv-fa-JGO"/>
     </inferredMetricsTieBreakers>
 </document>

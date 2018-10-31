@@ -13,12 +13,7 @@ import UIKit
  */
 public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompletionDelegate, ConfigurationAccess, InAppAccess, BrandableNavigationBar {
  
-    @IBOutlet private weak var viewHeader: UIView!
-    
-    @IBOutlet private weak var buttonCancel: UIButton!
-    
-    @IBOutlet private weak var constraintHeaderHeight: NSLayoutConstraint!
-    
+    @IBOutlet private weak var buttonCancel: UIButton!    
     @IBOutlet private weak var buttonEnvironment: UIButton!
 
     var preset = Preset()
@@ -62,7 +57,6 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
             fatalError("You are already logged in, you might want to Client.database.truncate() to start clean")
         }
         
-        constraintHeaderHeight.constant = (Macros.isDeviceBig ? 250.0 : 150.0)
         buttonCancel.isHidden = !preset.allowsCancel
         buttonCancel.accessibilityLabel = L10n.Ui.Global.cancel
         buttonEnvironment.isHidden = !accessedConfiguration.isDevelopment

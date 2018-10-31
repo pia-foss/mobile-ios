@@ -356,14 +356,16 @@ public class Theme {
 
     /// :nodoc:
     public func applyTitle(_ label: UILabel, appearance: Appearance) {
-        label.font = typeface.regularFont(size: 16.0)
-        label.textColor = palette.textColor(forRelevance: 1, appearance: appearance)
+        if palette.appearance == Appearance.light {
+            label.style(style: TextStyle.textStyle2)
+        } else {
+            label.style(style: TextStyle.textStyle1)
+        }
     }
     
     /// :nodoc:
-    public func applySubtitle(_ label: UILabel, appearance: Appearance) {
-        label.font = typeface.regularFont(size: 13.0)
-        label.textColor = palette.textColor(forRelevance: 2, appearance: appearance)
+    public func applySubtitle(_ label: UILabel) {
+        label.style(style: TextStyle.textStyle8)
     }
 
     /// :nodoc:
@@ -533,9 +535,10 @@ public class Theme {
         let attributed = NSMutableAttributedString(string: plain as String)
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .center
+        paragraph.minimumLineHeight = 16
         let fullRange = NSMakeRange(0, plain.length)
-        attributed.addAttribute(.font, value: typeface.regularFont(size: 13.0), range: fullRange)
-        attributed.addAttribute(.foregroundColor, value: palette.textColor(forRelevance: 3, appearance: .dark), range: fullRange)
+        attributed.addAttribute(.font, value: UIFont.regularFontWith(size: 12), range: fullRange)
+        attributed.addAttribute(.foregroundColor, value: UIColor.piaGrey4, range: fullRange)
         attributed.addAttribute(.paragraphStyle, value: paragraph, range: fullRange)
         let range1 = plain.range(of: tos)
         let range2 = plain.range(of: privacy)
@@ -624,7 +627,7 @@ public class Theme {
     
     /// :nodoc:
     public func applyLinkAttributes(_ textView: UITextView) {
-        textView.tintColor = palette.emphasis
+        textView.tintColor = palette.lineColor
     }
     
     // MARK: Strategy

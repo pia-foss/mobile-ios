@@ -36,7 +36,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     
     @IBOutlet private weak var textAgreement: UITextView!
 
-    @IBOutlet private weak var buttonRedeem: ActivityButton!
+    @IBOutlet private weak var buttonRedeem: PIAButton!
     
     @IBOutlet private weak var viewFooter: UIView!
     
@@ -67,7 +67,6 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
         
         guard let preset = self.preset else {
             fatalError("Preset not propagated")
@@ -86,16 +85,22 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             privacy: L10n.Welcome.Agreement.Message.privacy,
             privacyUrl: Client.configuration.privacyUrl
         )
-        buttonRedeem.title = L10n.Welcome.Redeem.submit
+        buttonRedeem.setTitle(L10n.Welcome.Redeem.title,
+                              for: [])
         labelLogin1.text = L10n.Welcome.Purchase.Login.footer
         labelLogin2.text = L10n.Welcome.Purchase.Login.button
         
-        buttonRedeem.accessibilityIdentifier = "uitests.redeem.submit"
+        styleRedeemButton()
         viewLogin.accessibilityLabel = "\(labelLogin1.text!) \(labelLogin2.text!)"
         textEmail.text = preset.redeemEmail
         if let code = preset.redeemCode {
             redeemCode = GiftCardUtil.strippedRedeemCode(code) // will set textCode automatically
         }
+        
+        super.viewDidLoad()
+
+        labelSubtitle.textAlignment = .center
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -111,9 +116,9 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     // MARK: Actions
 
     @IBAction private func redeem(_ sender: Any?) {
-        guard !buttonRedeem.isRunningActivity else {
-            return
-        }
+        //guard !buttonRedeem.isRunningActivity else {
+        //    return
+        //}
         
         guard let email = textEmail.text?.trimmed(), Validator.validate(email: email) else {
             presentAlertWith(title: L10n.Welcome.Redeem.Error.title,
@@ -193,6 +198,13 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         
     }
     
+    private func styleRedeemButton() {
+        buttonRedeem.setRounded()
+        buttonRedeem.style(style: TextStyle.Buttons.piaGreenButton)
+        buttonRedeem.setTitle(L10n.Welcome.Redeem.title,
+                              for: [])
+    }
+
     private func presentUnauthorizeCameraError() {
         DispatchQueue.main.async {
             self.presentAlertWith(title: L10n.Welcome.Camera.Access.Error.title,
@@ -217,9 +229,9 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     private func enableInteractions(_ enable: Bool) {
         parent?.view.isUserInteractionEnabled = enable
         if enable {
-            buttonRedeem.stopActivity()
+            //buttonRedeem.stopActivity()
         } else {
-            buttonRedeem.startActivity()
+            //buttonRedeem.startActivity()
         }
     }
 
@@ -229,11 +241,10 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         super.viewShouldRestyle()
         
         Theme.current.applyTitle(labelTitle, appearance: .dark)
-        Theme.current.applySubtitle(labelSubtitle, appearance: .dark)
+        Theme.current.applySubtitle(labelSubtitle)
         Theme.current.applyInput(textEmail)
         Theme.current.applyInput(textCode)
         Theme.current.applyLinkAttributes(textAgreement)
-        Theme.current.applyActionButton(buttonRedeem)
         Theme.current.applyBody1(labelLogin1, appearance: .dark)
         Theme.current.applyTextButton(labelLogin2)
     }
