@@ -47,6 +47,7 @@ Pod::Spec.new do |s|
         p.resources             = "PIALibrary/Resources/UI/Shared/**/*"
         p.dependency "PIALibrary/Library"
         p.dependency "SwiftyBeaver"
+        p.dependency "SwiftEntryKit", "0.7.2"
 
         p.ios.source_files      = "PIALibrary/Sources/UI/iOS/**/*.swift"
         p.ios.resources         = "PIALibrary/Resources/UI/iOS/**/*"

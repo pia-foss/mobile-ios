@@ -130,6 +130,10 @@ public class BorderedTextField: UITextField {
         return UIEdgeInsetsInsetRect(bounds,
                                      UIEdgeInsetsMake(0, 16, 0, 16))
     }
+    override public func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds,
+                                     UIEdgeInsetsMake(0, 16, 0, 16))
+    }
     override public func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         return UIEdgeInsetsInsetRect(bounds,
                                      UIEdgeInsetsMake(0, 16, 0, 16))

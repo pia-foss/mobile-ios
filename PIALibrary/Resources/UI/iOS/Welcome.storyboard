@@ -1189,11 +1189,8 @@ You will not be charged during this process.</string>
                                                                             <outlet property="delegate" destination="qgN-PX-Sir" id="dW1-A9-fEp"/>
                                                                         </connections>
                                                                     </textField>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoC-xB-Jhr" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
-                                                                        <rect key="frame" x="200" y="149" width="120" height="40"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="120" id="uze-cQ-L1w"/>
-                                                                        </constraints>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoC-xB-Jhr" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
+                                                                        <rect key="frame" x="290" y="149" width="30" height="40"/>
                                                                         <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                                         <connections>
                                                                             <action selector="showCameraToScanQRCodes:" destination="qgN-PX-Sir" eventType="touchUpInside" id="i22-HG-3Xe"/>
@@ -1448,6 +1445,6 @@ You will not be charged during this process.</string>
         <image name="logo-light" width="298" height="39"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eeI-Xa-Rq6"/>
+        <segue reference="Knv-fa-JGO"/>
     </inferredMetricsTieBreakers>
 </document>

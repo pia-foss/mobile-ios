@@ -40,6 +40,7 @@
 "redeem.error.code" = "Code must be %lu numeric digits.";
 "redeem.error.qrcode.invalid" = "Invalid QR code sequence. Please try again.";
 "redeem.accessibility.back" = "Back";
+"redeem.scanqr" = "Scan QR";
 
 "plan.monthly.title" = "Monthly";
 "plan.yearly.title" = "Yearly";

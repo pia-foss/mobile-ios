@@ -9,12 +9,19 @@
 import UIKit
 import SwiftyBeaver
 import AVFoundation
+import SwiftEntryKit
 
 private let log = SwiftyBeaver.self
 
 protocol RedeemScannerDelegate: class {
     func giftCardCodeFound(withCode code: String)
     func errorFound()
+}
+
+enum RedeemViewStatus {
+    case initial
+    case restore(element: UIView)
+    case error(element: UIView)
 }
 
 class RedeemViewController: AutolayoutViewController, WelcomeChild {
@@ -65,6 +72,10 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             textCode.text = GiftCardUtil.friendlyRedeemCode(code)
         }
     }
+    
+    var status: RedeemViewStatus = .initial {
+        didSet { reloadFormElements() }
+    }
 
     override func viewDidLoad() {
         
@@ -100,8 +111,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         super.viewDidLoad()
 
         labelSubtitle.textAlignment = .center
-        cameraButton.setRounded()
-        cameraButton.style(style: TextStyle.Buttons.piaPlainTextButton)
+        configureCameraButton()
 
     }
 
@@ -123,17 +133,24 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         //}
         
         guard let email = textEmail.text?.trimmed(), Validator.validate(email: email) else {
-            presentAlertWith(title: L10n.Welcome.Redeem.Error.title,
-                             andMessage: L10n.Welcome.Purchase.Error.validation,
-                             andButtonTitle: L10n.Ui.Global.ok)
+            Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                    message: L10n.Welcome.Purchase.Error.validation)
+            self.status = .error(element: textEmail)
             return
         }
+        
+        self.status = .restore(element: textEmail)
+        
         guard let code = redeemCode?.trimmed(), Validator.validate(giftCode: code) else {
-            presentAlertWith(title: L10n.Welcome.Redeem.Error.title,
-                             andMessage: L10n.Welcome.Redeem.Error.code(RedeemViewController.codeLength),
-                             andButtonTitle: L10n.Ui.Global.ok)
+            Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                    message: L10n.Welcome.Redeem.Error.code(RedeemViewController.codeLength))
+            self.status = .error(element: textCode)
+            self.cameraButton.status = .error
             return
         }
+        
+        self.status = .initial
+        self.cameraButton.status = .normal
         
         textEmail.text = email
         textCode.text = GiftCardUtil.friendlyRedeemCode(code)
@@ -200,6 +217,48 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         
     }
     
+    private func configureCameraButton() {
+        cameraButton.setButtonImage()
+        cameraButton.setRounded()
+        cameraButton.setBorder(withSize: 1,
+                               andStyle: TextStyle.textStyle8)
+        cameraButton.style(style: TextStyle.textStyle8,
+                           for: [])
+        cameraButton.setTitle(L10n.Welcome.Redeem.scanqr.uppercased(),
+                              for: [])
+        cameraButton.tintColor = TextStyle.textStyle8.color
+        cameraButton.backgroundColor = Theme.current.palette.textfieldButtonBackgroundColor
+        cameraButton.setImage(Asset.iconCamera.image, for: [])
+    }
+    
+    private func reloadFormElements() {
+        switch status {
+        case .initial:
+            resetFormElementBorders()
+        case .restore(let element):
+            restoreFormElementBorder(element)
+        case .error(let element):
+            updateFormElementBorder(element)
+        }
+    }
+    
+    private func resetFormElementBorders() {
+        Theme.current.applyInput(textEmail)
+        Theme.current.applyInput(textCode)
+    }
+    
+    private func restoreFormElementBorder(_ element: UIView) {
+        if let element = element as? UITextField {
+            Theme.current.applyInput(element)
+        }
+    }
+
+    private func updateFormElementBorder(_ element: UIView) {
+        if let element = element as? UITextField {
+            Theme.current.applyInputError(element)
+        }
+    }
+
     private func styleRedeemButton() {
         buttonRedeem.setRounded()
         buttonRedeem.style(style: TextStyle.Buttons.piaGreenButton)
@@ -209,23 +268,9 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
 
     private func presentUnauthorizeCameraError() {
         DispatchQueue.main.async {
-            self.presentAlertWith(title: L10n.Welcome.Camera.Access.Error.title,
-                                  andMessage: L10n.Welcome.Camera.Access.Denied.message,
-                                  andButtonTitle: L10n.Ui.Global.close)
+            Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                    message: L10n.Welcome.Camera.Access.Denied.message)
         }
-    }
-    
-    private func presentAlertWith(title: String,
-                                  andMessage message: String,
-                                  andButtonTitle buttonTitle: String ) {
-        
-        let alert = Macros.alert(title,
-                                 message)
-        alert.addCancelAction(buttonTitle)
-        present(alert,
-                animated: true,
-                completion: nil)
-
     }
 
     private func enableInteractions(_ enable: Bool) {
@@ -308,16 +353,14 @@ extension RedeemViewController: RedeemScannerDelegate {
             textCode.text = GiftCardUtil.friendlyRedeemCode(redeemCode)
             self.redeemCode = redeemCode
         } else {
-            presentAlertWith(title: L10n.Welcome.Redeem.Error.title,
-                             andMessage: L10n.Welcome.Redeem.Error.Qrcode.invalid,
-                             andButtonTitle:L10n.Ui.Global.ok)
+            Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                    message: L10n.Welcome.Redeem.Error.Qrcode.invalid)
         }
     }
     
     func errorFound() {
-        presentAlertWith(title: L10n.Welcome.Camera.Access.Error.title,
-                         andMessage: L10n.Welcome.Camera.Access.Error.message,
-                         andButtonTitle:L10n.Ui.Global.close)
+        Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                message: L10n.Welcome.Camera.Access.Error.message)
     }
     
 }

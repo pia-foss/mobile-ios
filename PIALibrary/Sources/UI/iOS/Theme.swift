@@ -37,6 +37,12 @@ public class Theme {
         /// The navigation bar back image.
         public var navigationBarBackIcon: UIImage?
 
+        /// The light background color.
+        public var secondaryColor: UIColor
+
+        /// The background color of the buttons inside textfields.
+        public var textfieldButtonBackgroundColor: UIColor
+
         /// The brand background color.
         public var brandBackground: UIColor
 
@@ -45,6 +51,9 @@ public class Theme {
         
         /// The solid light background color.
         public var solidLightBackground: UIColor
+        
+        /// The color for the subtitle Labels in forms and views
+        public var subtitleColor: UIColor
 
 //        public var primary: UIColor
         
@@ -70,6 +79,9 @@ public class Theme {
         
         /// The divider color.
         public var divider: UIColor
+        
+        /// The error color.
+        public var errorColor: UIColor
 
         /// The overlay alpha value.
         public var overlayAlpha: CGFloat
@@ -81,8 +93,11 @@ public class Theme {
         public init() {
             appearance = .light
             brandBackground = .green
+            secondaryColor = .piaGrey10
             lightBackground = .piaGrey1
             solidLightBackground = .white
+            subtitleColor = .piaGrey8
+            textfieldButtonBackgroundColor = .white
             lineColor = .piaGreenDark20
 //            primary = .black
             emphasis = .green
@@ -103,6 +118,7 @@ public class Theme {
             ]
             solidButtonText = .white
             divider = .piaGrey1
+            errorColor = .piaRed
             overlayAlpha = 0.3
         }
         
@@ -499,6 +515,7 @@ public class Theme {
     public func applyInput(_ textField: UITextField) { // hint is placeholder
         
         textField.style(style: TextStyle.textStyle8)
+        textField.backgroundColor = Theme.current.palette.secondaryColor
 
         if let borderedTextField = textField as? BorderedTextField {
             borderedTextField.borderColor = palette.divider
@@ -506,6 +523,20 @@ public class Theme {
             borderedTextField.highlightsWhileEditing = true
         }
     }
+    
+    /// :nodoc:
+    public func applyInputError(_ textField: UITextField) { // hint is placeholder
+        
+        textField.style(style: TextStyle.textStyle8)
+        textField.backgroundColor = Theme.current.palette.secondaryColor
+        
+        if let borderedTextField = textField as? BorderedTextField {
+            borderedTextField.borderColor = palette.errorColor
+            borderedTextField.highlightedBorderColor = palette.errorColor
+            borderedTextField.highlightsWhileEditing = true
+        }
+    }
+
 
     /// :nodoc:
     public func applyActionButton(_ button: ActivityButton) {

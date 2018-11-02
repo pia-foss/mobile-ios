@@ -9,9 +9,25 @@
 import Foundation
 import UIKit
 
+public enum PIAButtonStatus {
+    case normal
+    case error
+}
+
 // UIButton with rounded corners and border to be used throughout PIA application
 public class PIAButton: UIButton {
     
+    private var isButtonImage = false
+    private var edgesHaveBeenSet = false
+    private var renderingModeHasBeenSet = false
+    
+    private var borderColor: UIColor!
+    private var style: TextStyle!
+
+    public var status: PIAButtonStatus = .normal {
+        didSet { reloadButtonStatus() }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupView()
@@ -35,14 +51,87 @@ public class PIAButton: UIButton {
     func setBorder(withSize size: CGFloat,
                    andColor color: UIColor) {
         self.layer.borderWidth = size
-        self.layer.borderColor = color.cgColor
+        self.borderColor = color
+        self.layer.borderColor = borderColor.cgColor
         clipsToBounds = true
     }
 
-    func setPlain() {
+    func setBorder(withSize size: CGFloat,
+                   andStyle style: TextStyle) {
+        self.layer.borderWidth = size
+        self.style = style
+        if let color = style.color {
+            self.borderColor = color
+            self.layer.borderColor = color.cgColor
+        }
+        clipsToBounds = true
+    }
+
+    func resetButton() {
+        self.isButtonImage = false
+        self.edgesHaveBeenSet = false
+        self.renderingModeHasBeenSet = false
         self.layer.cornerRadius = 0.0
         self.layer.borderWidth = 0.0
         self.layer.borderColor = UIColor.clear.cgColor
         clipsToBounds = true
     }
+    
+    func setButtonImage() {
+        self.isButtonImage = true
+    }
+    
+    private func reloadButtonStatus() {
+        checkRenderingMode()
+        if status == .error {
+            self.edgesHaveBeenSet = false
+            if let errorColor = TextStyle.textStyle10.color {
+                self.layer.borderColor = errorColor.cgColor
+                self.tintColor = errorColor
+                style(style: TextStyle.textStyle10,
+                      for: [])
+            }
+        } else {
+            if let color = style.color {
+                self.layer.borderColor = color.cgColor
+                self.tintColor = color
+                style(style: style,
+                      for: [])
+            } else {
+                self.layer.borderColor = borderColor.cgColor
+                self.tintColor = borderColor
+            }
+        }
+    }
+    
+    private func checkRenderingMode() {
+        if !self.renderingModeHasBeenSet,
+            let imageView = imageView,
+            let image = imageView.image {
+            self.renderingModeHasBeenSet = true
+            imageView.image = image.withRenderingMode(.alwaysTemplate)
+        }
+    }
+    
+}
+
+extension PIAButton {
+    
+    override public func layoutSubviews() {
+        super.layoutSubviews()
+        if self.isButtonImage,
+            !self.edgesHaveBeenSet,
+            let imageView = imageView {
+            imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: imageView.frame.width + 10)
+            titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 5)
+            self.edgesHaveBeenSet = true
+            for const in self.constraints {
+                if const.firstAttribute == .width {
+                    const.constant += imageView.frame.width
+                    self.layoutIfNeeded()
+                }
+            }
+        }
+    }
+
 }

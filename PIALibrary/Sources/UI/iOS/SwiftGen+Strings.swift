@@ -233,6 +233,8 @@ internal enum L10n {
       }
     }
     internal enum Redeem {
+      /// Scan QR
+      internal static let scanqr = L10n.tr("Welcome", "redeem.scanqr")
       /// SUBMIT
       internal static let submit = L10n.tr("Welcome", "redeem.submit")
       /// Type in your email address and the %lu digit PIN from your gift card or trial card below.
