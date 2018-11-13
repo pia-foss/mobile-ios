@@ -61,6 +61,15 @@ private struct LightThemeStrategy: ThemeStrategy {
         if let _ = viewController as? GetStartedViewController {
             return .default
         }
+        if let _ = viewController as? SignupInProgressViewController {
+            return .default
+        }
+        if let _ = viewController as? SignupFailureViewController {
+            return .default
+        }
+        if let _ = viewController as? SignupSuccessViewController {
+            return .default
+        }
         return .lightContent
     }
     
