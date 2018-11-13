@@ -20,10 +20,22 @@ public class PIAButton: UIButton {
     private var isButtonImage = false
     private var edgesHaveBeenSet = false
     private var renderingModeHasBeenSet = false
+    private var buttonWidth: CGFloat!
     
     private var borderColor: UIColor!
     private var style: TextStyle!
+    private var currentBackgroundColor: UIColor!
 
+    override open var isHighlighted: Bool {
+        didSet {
+            if currentBackgroundColor == nil {
+                currentBackgroundColor = backgroundColor
+            }
+            backgroundColor = isHighlighted && currentBackgroundColor != nil ?
+                currentBackgroundColor.withAlphaComponent(0.8) : currentBackgroundColor
+        }
+    }
+    
     public var status: PIAButtonStatus = .normal {
         didSet { reloadButtonStatus() }
     }
@@ -81,10 +93,14 @@ public class PIAButton: UIButton {
         self.isButtonImage = true
     }
     
+    private func resetEdges() {
+        self.edgesHaveBeenSet = false
+    }
+    
     private func reloadButtonStatus() {
         checkRenderingMode()
         if status == .error {
-            self.edgesHaveBeenSet = false
+            self.resetEdges()
             if let errorColor = TextStyle.textStyle10.color {
                 self.layer.borderColor = errorColor.cgColor
                 self.tintColor = errorColor
@@ -120,18 +136,25 @@ extension PIAButton {
     override public func layoutSubviews() {
         super.layoutSubviews()
         if self.isButtonImage,
-            !self.edgesHaveBeenSet,
             let imageView = imageView {
             imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: imageView.frame.width + 10)
             titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 5)
-            self.edgesHaveBeenSet = true
             for const in self.constraints {
                 if const.firstAttribute == .width {
-                    const.constant += imageView.frame.width
-                    self.layoutIfNeeded()
+                    if !self.edgesHaveBeenSet {
+                        const.constant += imageView.frame.width
+                        buttonWidth = const.constant
+                        self.edgesHaveBeenSet = true
+                        break
+                    } else {
+                        const.constant = buttonWidth
+                        break
+                    }
+                
                 }
             }
         }
+        
     }
 
 }

@@ -60,9 +60,9 @@ internal enum L10n {
         internal static let caption = L10n.tr("Signup", "success.password.caption")
       }
       internal enum Redeem {
-        /// You will also receive an email shortly with your username and password.
+        /// You will receive an email shortly with your username and password.
         internal static let message = L10n.tr("Signup", "success.redeem.message")
-        /// Completed!
+        /// Card redeemed successfully
         internal static let title = L10n.tr("Signup", "success.redeem.title")
       }
       internal enum Username {
@@ -252,6 +252,8 @@ internal enum L10n {
         internal static let placeholder = L10n.tr("Welcome", "redeem.email.placeholder")
       }
       internal enum Error {
+        /// Please type in your email and card PIN.
+        internal static let allfields = L10n.tr("Welcome", "redeem.error.allfields")
         /// Code must be %lu numeric digits.
         internal static func code(_ p1: Int) -> String {
           return L10n.tr("Welcome", "redeem.error.code", p1)

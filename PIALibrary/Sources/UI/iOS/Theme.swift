@@ -381,7 +381,9 @@ public class Theme {
     
     /// :nodoc:
     public func applySubtitle(_ label: UILabel) {
+        let textAlignment = label.textAlignment
         label.style(style: TextStyle.textStyle8)
+        label.textAlignment = textAlignment
     }
 
     /// :nodoc:

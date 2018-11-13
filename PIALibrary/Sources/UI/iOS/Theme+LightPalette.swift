@@ -20,7 +20,7 @@ extension Theme.Palette {
         palette.textfieldButtonBackgroundColor = .white
         palette.navigationBarBackIcon = Asset.iconBack.image
         palette.brandBackground = Macros.color(hex: 0x009a18, alpha: 0xff)
-        palette.lightBackground = .groupTableViewBackground
+        palette.lightBackground = UIColor.piaGrey1
         palette.lineColor = .piaGreenDark20
         palette.subtitleColor = .piaGrey8
         palette.emphasis = Macros.color(hex: 0x29cc41, alpha: 0xff)

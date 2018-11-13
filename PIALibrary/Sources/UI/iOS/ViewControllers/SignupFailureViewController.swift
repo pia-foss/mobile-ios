@@ -8,18 +8,16 @@
 
 import UIKit
 
-class SignupFailureViewController: AutolayoutViewController {
+public class SignupFailureViewController: AutolayoutViewController, BrandableNavigationBar {
+
     @IBOutlet private weak var imvPicture: UIImageView!
-
     @IBOutlet private weak var labelTitle: UILabel!
-    
     @IBOutlet private weak var labelMessage: UILabel!
-
-    @IBOutlet private weak var buttonSubmit: ActivityButton!
+    @IBOutlet private weak var buttonSubmit: PIAButton!
     
     var error: Error?
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.hidesBackButton = true
@@ -50,7 +48,7 @@ class SignupFailureViewController: AutolayoutViewController {
             }
         }
         
-        buttonSubmit.title = L10n.Signup.Failure.submit.uppercased()
+        self.styleSubmitButton()
     }
 
     @IBAction private func submit() {
@@ -59,11 +57,22 @@ class SignupFailureViewController: AutolayoutViewController {
 
     // MARK: Restylable
     
-    override func viewShouldRestyle() {
+    override public func viewShouldRestyle() {
         super.viewShouldRestyle()
-        
+        navigationItem.titleView = NavigationLogoView()
+        Theme.current.applyNavigationBarStyle(to: self)
+        Theme.current.applyLightBackground(view)
+        Theme.current.applyLightBackground(viewContainer!)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
-        Theme.current.applyBody1(labelMessage, appearance: .dark)
-        Theme.current.applyActionButton(buttonSubmit)
+        Theme.current.applySubtitle(labelMessage)
+        Theme.current.applyTitle(labelTitle, appearance: .dark)
     }
+    
+    private func styleSubmitButton() {
+        buttonSubmit.setRounded()
+        buttonSubmit.style(style: TextStyle.Buttons.piaGreenButton)
+        buttonSubmit.setTitle(L10n.Signup.Failure.submit.uppercased(),
+                              for: [])
+    }
+
 }

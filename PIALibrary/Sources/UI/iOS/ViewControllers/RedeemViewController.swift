@@ -101,7 +101,6 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         labelLogin1.text = L10n.Welcome.Purchase.Login.footer
         labelLogin2.text = L10n.Welcome.Purchase.Login.button
         
-        styleRedeemButton()
         viewLogin.accessibilityLabel = "\(labelLogin1.text!) \(labelLogin2.text!)"
         textEmail.text = preset.redeemEmail
         if let code = preset.redeemCode {
@@ -112,6 +111,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
 
         labelSubtitle.textAlignment = .center
         configureCameraButton()
+        styleRedeemButton()
 
     }
 
@@ -125,14 +125,29 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         scrollView.isScrollEnabled = (traitCollection.verticalSizeClass == .compact)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        cameraButton.backgroundColor = Theme.current.palette.textfieldButtonBackgroundColor
+    }
+    
     // MARK: Actions
 
     @IBAction private func redeem(_ sender: Any?) {
         //guard !buttonRedeem.isRunningActivity else {
         //    return
         //}
+        if textEmail.text?.trimmed().count == 0,
+            textCode.text?.trimmed().count == 0 {
+                Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                        message: L10n.Welcome.Redeem.Error.allfields)
+                self.status = .error(element: textEmail)
+                self.status = .error(element: textCode)
+                self.cameraButton.status = .error
+                return
+        }
         
-        guard let email = textEmail.text?.trimmed(), Validator.validate(email: email) else {
+        guard let email = textEmail.text?.trimmed(),
+            Validator.validate(email: email) else {
             Macros.displayImageNote(withImage: Asset.iconWarning.image,
                                     message: L10n.Welcome.Purchase.Error.validation)
             self.status = .error(element: textEmail)
@@ -141,7 +156,8 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         
         self.status = .restore(element: textEmail)
         
-        guard let code = redeemCode?.trimmed(), Validator.validate(giftCode: code) else {
+        guard let code = redeemCode?.trimmed(),
+            Validator.validate(giftCode: code) else {
             Macros.displayImageNote(withImage: Asset.iconWarning.image,
                                     message: L10n.Welcome.Redeem.Error.code(RedeemViewController.codeLength))
             self.status = .error(element: textCode)
@@ -222,8 +238,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         cameraButton.setRounded()
         cameraButton.setBorder(withSize: 1,
                                andStyle: TextStyle.textStyle8)
-        cameraButton.style(style: TextStyle.textStyle8,
-                           for: [])
+        cameraButton.style(style: TextStyle.textStyle8)
         cameraButton.setTitle(L10n.Welcome.Redeem.scanqr.uppercased(),
                               for: [])
         cameraButton.tintColor = TextStyle.textStyle8.color
@@ -262,7 +277,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     private func styleRedeemButton() {
         buttonRedeem.setRounded()
         buttonRedeem.style(style: TextStyle.Buttons.piaGreenButton)
-        buttonRedeem.setTitle(L10n.Welcome.Redeem.title,
+        buttonRedeem.setTitle(L10n.Welcome.Redeem.title.uppercased(),
                               for: [])
     }
 
