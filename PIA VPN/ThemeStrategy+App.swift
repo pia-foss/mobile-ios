@@ -49,28 +49,19 @@ private struct LightThemeStrategy: ThemeStrategy {
     }
     
     func statusBarAppearance(for viewController: AutolayoutViewController) -> UIStatusBarStyle {
-        if let _ = viewController as? WalkthroughViewController {
+        switch viewController {
+        case is WalkthroughViewController,
+             is DashboardViewController,
+             is PIAWelcomeViewController,
+             is GetStartedViewController,
+             is SignupInProgressViewController,
+             is SignupFailureViewController,
+             is SignupSuccessViewController,
+             is SignupUnreachableViewController:
             return .default
+        default:
+            return .lightContent
         }
-        if let _ = viewController as? DashboardViewController {
-            return .default
-        }
-        if let _ = viewController as? PIAWelcomeViewController {
-            return .default
-        }
-        if let _ = viewController as? GetStartedViewController {
-            return .default
-        }
-        if let _ = viewController as? SignupInProgressViewController {
-            return .default
-        }
-        if let _ = viewController as? SignupFailureViewController {
-            return .default
-        }
-        if let _ = viewController as? SignupSuccessViewController {
-            return .default
-        }
-        return .lightContent
     }
     
     func autolayoutContainerMargins(for mask: UIInterfaceOrientationMask) -> UIEdgeInsets {
