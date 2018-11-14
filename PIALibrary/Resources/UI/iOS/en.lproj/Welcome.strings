@@ -23,14 +23,16 @@
 "purchase.title" = "Select a VPN plan";
 "purchase.subtitle" = "7-day money back guarantee";
 "purchase.email.placeholder" = "Email address";
-"purchase.submit" = "Continue";
+"purchase.continue" = "Continue";
 "purchase.login.footer" = "Already have an account?";
 "purchase.login.button" = "Sign in";
 "purchase.error.title" = "Purchase";
 "purchase.error.validation" = "You must enter an email address.";
 "purchase.error.connectivity.title" = "Connection Failure";
 "purchase.error.connectivity.description" = "We are unable to reach Private Internet Access. This may due to poor internet or our service is blocked in your country.";
-
+"purchase.confirm.form.email" = "Enter your email address";
+"purchase.confirm.plan" = "Your are purchasing the %@ plan";
+"purchase.submit" = "Submit";
 
 "redeem.title" = "Redeem gift card";
 "redeem.subtitle" = "Type in your email address and the %lu digit PIN from your gift card or trial card below.";

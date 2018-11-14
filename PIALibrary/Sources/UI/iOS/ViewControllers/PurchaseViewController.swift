@@ -12,6 +12,7 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 class PurchaseViewController: AutolayoutViewController, WelcomeChild {
+    
     private struct Cells {
         static let plan = "PlanCell"
     }
@@ -20,8 +21,6 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
 
     @IBOutlet private weak var labelTitle: UILabel!
     @IBOutlet private weak var labelSubtitle: UILabel!
-
-    //@IBOutlet private weak var textEmail: BorderedTextField!
     
     @IBOutlet private weak var collectionPlans: UICollectionView!
     
@@ -30,18 +29,12 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
     @IBOutlet private weak var buttonPurchase: PIAButton!
     
     var preset: Preset?
-    
-    var omitsSiblingLink = false
-    
     weak var completionDelegate: WelcomeCompletionDelegate?
+    var omitsSiblingLink = false
 
     private var allPlans: [PurchasePlan] = [.dummy, .dummy]
 
     private var selectedPlanIndex: Int?
-
-    private var signupEmail: String?
-
-    private var signupTransaction: InAppTransaction?
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -50,7 +43,7 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let preset = self.preset else {
+        guard let _ = self.preset else {
             fatalError("Preset not propagated")
         }
 
@@ -58,7 +51,6 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
 
         labelTitle.text = L10n.Welcome.Purchase.title
         labelSubtitle.text = L10n.Welcome.Purchase.subtitle
-        //textEmail.placeholder = L10n.Welcome.Purchase.Email.placeholder
         textAgreement.attributedText = Theme.current.agreementText(
             withMessage: L10n.Welcome.Agreement.message,
             tos: L10n.Welcome.Agreement.Message.tos,
@@ -66,7 +58,6 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
             privacy: L10n.Welcome.Agreement.Message.privacy,
             privacyUrl: Client.configuration.privacyUrl
         )
-        //textEmail.text = preset.purchaseEmail
         
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(productsDidFetch(notification:)), name: .__InAppDidFetchProducts, object: nil)
@@ -92,6 +83,17 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
 
     override func didRefreshOrientationConstraints() {
         scrollView.isScrollEnabled = (traitCollection.verticalSizeClass == .compact)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == StoryboardSegue.Welcome.confirmPurchaseVPNPlanSegue.rawValue) {
+            if let vc = segue.destination as? ConfirmVPNPlanViewController,
+                let selectedIndex = selectedPlanIndex {
+                vc.preset = preset
+                vc.populateViewWith(plans: allPlans,
+                                    andSelectedPlanIndex: selectedIndex)
+            }
+        }
     }
     
     // MARK: Actions
@@ -131,104 +133,6 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
         collectionPlans.selectItem(at: IndexPath(row: selectedPlanIndex!, section: 0), animated: false, scrollPosition: [])
     }
     
-    @IBAction private func signUp(_ sender: Any?) {
-        guard let planIndex = selectedPlanIndex else {
-            return
-        }
-        let errorTitle = L10n.Welcome.Purchase.Error.title
-        let errorMessage = L10n.Welcome.Purchase.Error.validation
-        /*
-        guard let email = textEmail.text?.trimmed(), Validator.validate(email: email) else {
-            signupEmail = nil
-            let alert = Macros.alert(errorTitle, errorMessage)
-            alert.addCancelAction(L10n.Ui.Global.ok)
-            present(alert, animated: true, completion: nil)
-            return
-        }
-        */
-        
-        let plan = allPlans[planIndex]
-        guard !plan.isDummy else {
-            let alert = Macros.alert(
-                L10n.Welcome.Iap.Error.title,
-                L10n.Welcome.Iap.Error.Message.unavailable
-            )
-            alert.addCancelAction(L10n.Ui.Global.close)
-            present(alert, animated: true, completion: nil)
-            return
-        }
-
-        preset?.accountProvider.isAPIEndpointAvailable({ [weak self] (isAvailable, error) in
-            guard let isAvailable = isAvailable,
-                isAvailable else {
-                let alert = Macros.alert(
-                    L10n.Welcome.Purchase.Error.Connectivity.title,
-                    L10n.Welcome.Purchase.Error.Connectivity.description
-                )
-                alert.addCancelAction(L10n.Ui.Global.close)
-                self?.present(alert, animated: true, completion: nil)
-                return
-            }
-            //self?.startPurchaseProcessWithEmail(email,
-            //                                    andPlan: plan)
-        })
-        
-    }
-    
-    private func startPurchaseProcessWithEmail(_ email: String,
-                                               andPlan plan: PurchasePlan) {
-        
-        //textEmail.text = email
-        log.debug("Will purchase plan: \(plan.product)")
-        
-        disableInteractions(fully: true)
-        
-        preset?.accountProvider.purchase(plan: plan.plan) { (transaction, error) in
-            self.enableInteractions()
-            
-            guard let transaction = transaction else {
-                if let error = error {
-                    log.error("Purchase failed (error: \(error))")
-                    
-                    let alert = Macros.alert(
-                        L10n.Welcome.Iap.Error.title,
-                        error.localizedDescription
-                    )
-                    alert.addCancelAction(L10n.Ui.Global.close)
-                    self.present(alert, animated: true, completion: nil)
-                } else {
-                    log.warning("Cancelled purchase")
-                }
-                return
-            }
-            
-            log.debug("Purchased with transaction: \(transaction)")
-            
-            self.signupEmail = email
-            self.signupTransaction = transaction
-            self.perform(segue: StoryboardSegue.Welcome.signupViaPurchaseSegue)
-        }
-
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == StoryboardSegue.Welcome.signupViaPurchaseSegue.rawValue) {
-            let nav = segue.destination as! UINavigationController
-            let vc = nav.topViewController as! SignupInProgressViewController
-            
-            guard let email = signupEmail else {
-                fatalError("Signing up and signupEmail is not set")
-            }
-            var metadata = SignupMetadata(email: email)
-            metadata.title = L10n.Signup.InProgress.title
-            metadata.bodySubtitle = L10n.Signup.InProgress.message
-            vc.metadata = metadata
-            vc.signupRequest = SignupRequest(email: email, transaction: signupTransaction)
-            vc.preset = preset
-            vc.completionDelegate = completionDelegate
-        }
-    }
-    
     private func disableInteractions(fully: Bool) {
         collectionPlans.isUserInteractionEnabled = false
         if fully {
@@ -245,7 +149,6 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
     
     @objc private func productsDidFetch(notification: Notification) {
         let products: [Plan: InAppProduct] = notification.userInfo(for: .products)
-
         refreshPlans(products)
         enableInteractions()
     }
@@ -259,14 +162,13 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
         Theme.current.applyLightBackground(collectionPlans)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applySubtitle(labelSubtitle)
-        //Theme.current.applyInput(textEmail)
         Theme.current.applyLinkAttributes(textAgreement)
     }
     
     private func stylePurchaseButton() {
         buttonPurchase.setRounded()
         buttonPurchase.style(style: TextStyle.Buttons.piaGreenButton)
-        buttonPurchase.setTitle(L10n.Welcome.Purchase.submit.uppercased(),
+        buttonPurchase.setTitle(L10n.Welcome.Purchase.continue.uppercased(),
                               for: [])
     }
 

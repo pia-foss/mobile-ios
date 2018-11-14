@@ -17,6 +17,13 @@ public protocol ModalController: class {
     func dismissModal()
 }
 
+/// Enum used to determinate the status of the view controller and apply effects over the UI elements
+public enum ViewControllerStatus {
+    case initial
+    case restore(element: UIView)
+    case error(element: UIView)
+}
+
 /// Base view controller with dynamic constraints and restyling support.
 ///
 /// - Seealso: `Theme`
@@ -30,6 +37,12 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
     /// :nodoc:
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         return Theme.current.statusBarAppearance(for: self)
+    }
+    
+    /// The initial status of the view controller. Every time the var changes the value, we reload the UI of the form element given as parameter.
+    /// Example of use: self.status = .error(element: textEmail)
+    open var status: ViewControllerStatus = .initial {
+        didSet { reloadFormElements() }
     }
     
     deinit {
@@ -94,4 +107,28 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
         }
         setNeedsStatusBarAppearanceUpdate()
     }
+    
+    private func reloadFormElements() {
+        switch status {
+        case .initial:
+            break
+        case .restore(let element):
+            restoreFormElementBorder(element)
+        case .error(let element):
+            updateFormElementBorder(element)
+        }
+    }
+    
+    private func restoreFormElementBorder(_ element: UIView) {
+        if let element = element as? UITextField {
+            Theme.current.applyInput(element)
+        }
+    }
+    
+    private func updateFormElementBorder(_ element: UIView) {
+        if let element = element as? UITextField {
+            Theme.current.applyInputError(element)
+        }
+    }
+
 }

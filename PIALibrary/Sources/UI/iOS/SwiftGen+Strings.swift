@@ -204,11 +204,23 @@ internal enum L10n {
     }
     internal enum Purchase {
       /// Continue
+      internal static let `continue` = L10n.tr("Welcome", "purchase.continue")
+      /// Submit
       internal static let submit = L10n.tr("Welcome", "purchase.submit")
       /// 7-day money back guarantee
       internal static let subtitle = L10n.tr("Welcome", "purchase.subtitle")
       /// Select a VPN plan
       internal static let title = L10n.tr("Welcome", "purchase.title")
+      internal enum Confirm {
+        /// Your are purchasing the %@ plan
+        internal static func plan(_ p1: String) -> String {
+          return L10n.tr("Welcome", "purchase.confirm.plan", p1)
+        }
+        internal enum Form {
+          /// Enter your email address
+          internal static let email = L10n.tr("Welcome", "purchase.confirm.form.email")
+        }
+      }
       internal enum Email {
         /// Email address
         internal static let placeholder = L10n.tr("Welcome", "purchase.email.placeholder")

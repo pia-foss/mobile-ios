@@ -54,6 +54,13 @@ class WelcomePageViewController: UIPageViewController {
         }
         
         setViewControllers([source.first!], direction: .forward, animated: false, completion: nil)
+        
+        if let scrollView = self.view.subviews.filter({
+            $0.isKind(of: UIScrollView.self)
+        }).first as? UIScrollView {
+            scrollView.isScrollEnabled = false
+        }
+        
     }
     
     func show(page: Pages) {

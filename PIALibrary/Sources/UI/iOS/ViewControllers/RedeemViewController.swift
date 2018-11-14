@@ -18,12 +18,6 @@ protocol RedeemScannerDelegate: class {
     func errorFound()
 }
 
-enum RedeemViewStatus {
-    case initial
-    case restore(element: UIView)
-    case error(element: UIView)
-}
-
 class RedeemViewController: AutolayoutViewController, WelcomeChild {
     private static let codeInvalidSet = CharacterSet.decimalDigits.inverted
     
@@ -73,10 +67,6 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         }
     }
     
-    var status: RedeemViewStatus = .initial {
-        didSet { reloadFormElements() }
-    }
-
     override func viewDidLoad() {
         
         guard let preset = self.preset else {
@@ -165,6 +155,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             return
         }
         
+        self.status = .restore(element: textCode)
         self.status = .initial
         self.cameraButton.status = .normal
         
@@ -245,35 +236,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         cameraButton.backgroundColor = Theme.current.palette.textfieldButtonBackgroundColor
         cameraButton.setImage(Asset.iconCamera.image, for: [])
     }
-    
-    private func reloadFormElements() {
-        switch status {
-        case .initial:
-            resetFormElementBorders()
-        case .restore(let element):
-            restoreFormElementBorder(element)
-        case .error(let element):
-            updateFormElementBorder(element)
-        }
-    }
-    
-    private func resetFormElementBorders() {
-        Theme.current.applyInput(textEmail)
-        Theme.current.applyInput(textCode)
-    }
-    
-    private func restoreFormElementBorder(_ element: UIView) {
-        if let element = element as? UITextField {
-            Theme.current.applyInput(element)
-        }
-    }
-
-    private func updateFormElementBorder(_ element: UIView) {
-        if let element = element as? UITextField {
-            Theme.current.applyInputError(element)
-        }
-    }
-
+   
     private func styleRedeemButton() {
         buttonRedeem.setRounded()
         buttonRedeem.style(style: TextStyle.Buttons.piaGreenButton)
