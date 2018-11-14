@@ -203,7 +203,7 @@ internal enum L10n {
       }
     }
     internal enum Purchase {
-      /// BUY NOW
+      /// Continue
       internal static let submit = L10n.tr("Welcome", "purchase.submit")
       /// 7-day money back guarantee
       internal static let subtitle = L10n.tr("Welcome", "purchase.subtitle")

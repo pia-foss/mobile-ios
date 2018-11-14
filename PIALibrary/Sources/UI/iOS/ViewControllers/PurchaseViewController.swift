@@ -19,22 +19,15 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
     @IBOutlet private weak var scrollView: UIScrollView!
 
     @IBOutlet private weak var labelTitle: UILabel!
-    
-    @IBOutlet private weak var textEmail: BorderedTextField!
+    @IBOutlet private weak var labelSubtitle: UILabel!
+
+    //@IBOutlet private weak var textEmail: BorderedTextField!
     
     @IBOutlet private weak var collectionPlans: UICollectionView!
     
     @IBOutlet private weak var textAgreement: UITextView!
     
-    @IBOutlet private weak var buttonPurchase: ActivityButton!
-    
-    @IBOutlet private weak var viewFooter: UIView!
-    
-    @IBOutlet private weak var viewLogin: UIView!
-    
-    @IBOutlet private weak var labelLogin1: UILabel!
-    
-    @IBOutlet private weak var labelLogin2: UILabel!
+    @IBOutlet private weak var buttonPurchase: PIAButton!
     
     var preset: Preset?
     
@@ -62,10 +55,10 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
         }
 
         collectionPlans.isUserInteractionEnabled = false
-        viewFooter.isHidden = omitsSiblingLink
 
         labelTitle.text = L10n.Welcome.Purchase.title
-        textEmail.placeholder = L10n.Welcome.Purchase.Email.placeholder
+        labelSubtitle.text = L10n.Welcome.Purchase.subtitle
+        //textEmail.placeholder = L10n.Welcome.Purchase.Email.placeholder
         textAgreement.attributedText = Theme.current.agreementText(
             withMessage: L10n.Welcome.Agreement.message,
             tos: L10n.Welcome.Agreement.Message.tos,
@@ -73,15 +66,12 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
             privacy: L10n.Welcome.Agreement.Message.privacy,
             privacyUrl: Client.configuration.privacyUrl
         )
-        buttonPurchase.title = L10n.Welcome.Purchase.submit
-        labelLogin1.text = L10n.Welcome.Purchase.Login.footer
-        labelLogin2.text = L10n.Welcome.Purchase.Login.button
-
-        viewLogin.accessibilityLabel = "\(labelLogin1.text!) \(labelLogin2.text!)"
-        textEmail.text = preset.purchaseEmail
+        //textEmail.text = preset.purchaseEmail
         
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(productsDidFetch(notification:)), name: .__InAppDidFetchProducts, object: nil)
+        
+        stylePurchaseButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -142,15 +132,12 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
     }
     
     @IBAction private func signUp(_ sender: Any?) {
-        guard !buttonPurchase.isRunningActivity else {
-            return
-        }
-    
         guard let planIndex = selectedPlanIndex else {
             return
         }
         let errorTitle = L10n.Welcome.Purchase.Error.title
         let errorMessage = L10n.Welcome.Purchase.Error.validation
+        /*
         guard let email = textEmail.text?.trimmed(), Validator.validate(email: email) else {
             signupEmail = nil
             let alert = Macros.alert(errorTitle, errorMessage)
@@ -158,7 +145,8 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
             present(alert, animated: true, completion: nil)
             return
         }
-
+        */
+        
         let plan = allPlans[planIndex]
         guard !plan.isDummy else {
             let alert = Macros.alert(
@@ -181,8 +169,8 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
                 self?.present(alert, animated: true, completion: nil)
                 return
             }
-            self?.startPurchaseProcessWithEmail(email,
-                                                andPlan: plan)
+            //self?.startPurchaseProcessWithEmail(email,
+            //                                    andPlan: plan)
         })
         
     }
@@ -190,7 +178,7 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
     private func startPurchaseProcessWithEmail(_ email: String,
                                                andPlan plan: PurchasePlan) {
         
-        textEmail.text = email
+        //textEmail.text = email
         log.debug("Will purchase plan: \(plan.product)")
         
         disableInteractions(fully: true)
@@ -223,13 +211,6 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
 
     }
     
-    @IBAction private func logIn(_ sender: Any?) {
-        guard let pageController = parent as? WelcomePageViewController else {
-            fatalError("Not running in WelcomePageViewController")
-        }
-        pageController.show(page: .login)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == StoryboardSegue.Welcome.signupViaPurchaseSegue.rawValue) {
             let nav = segue.destination as! UINavigationController
@@ -253,13 +234,11 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
         if fully {
             parent?.view.isUserInteractionEnabled = false
         }
-        buttonPurchase.startActivity()
     }
     
     private func enableInteractions() {
         collectionPlans.isUserInteractionEnabled = true
         parent?.view.isUserInteractionEnabled = true
-        buttonPurchase.stopActivity()
     }
 
     // MARK: Notifications
@@ -275,15 +254,22 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
     
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
-
-        Theme.current.applySolidLightBackground(collectionPlans)
+        Theme.current.applyLightBackground(view)
+        Theme.current.applyLightBackground(scrollView)
+        Theme.current.applyLightBackground(collectionPlans)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
-        Theme.current.applyInput(textEmail)
+        Theme.current.applySubtitle(labelSubtitle)
+        //Theme.current.applyInput(textEmail)
         Theme.current.applyLinkAttributes(textAgreement)
-        Theme.current.applyActionButton(buttonPurchase)
-        Theme.current.applyBody1(labelLogin1, appearance: .dark)
-        Theme.current.applyTextButton(labelLogin2)
     }
+    
+    private func stylePurchaseButton() {
+        buttonPurchase.setRounded()
+        buttonPurchase.style(style: TextStyle.Buttons.piaGreenButton)
+        buttonPurchase.setTitle(L10n.Welcome.Purchase.submit.uppercased(),
+                              for: [])
+    }
+
 }
 
 extension PurchaseViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -306,9 +292,10 @@ extension PurchaseViewController: UICollectionViewDataSource, UICollectionViewDe
 
 extension PurchaseViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemWidth = (collectionView.bounds.size.width - 10.0) / 2.0
-
-        return CGSize(width: itemWidth, height: collectionView.bounds.size.height)
+        let itemWidth = collectionView.bounds.size.width
+        let itemHeight = (collectionView.bounds.size.height - 13) / 2.0
+        return CGSize(width: itemWidth,
+                      height: itemHeight)
     }
 }
 
@@ -320,9 +307,9 @@ extension PurchaseViewController: UITextViewDelegate {
 
 extension PurchaseViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if (textField == textEmail) {
-            signUp(nil)
-        }
+        //if (textField == textEmail) {
+        //    signUp(nil)
+        //}
         return true
     }
 }

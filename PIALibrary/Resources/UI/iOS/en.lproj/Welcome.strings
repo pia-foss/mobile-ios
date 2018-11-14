@@ -23,7 +23,7 @@
 "purchase.title" = "Select a VPN plan";
 "purchase.subtitle" = "7-day money back guarantee";
 "purchase.email.placeholder" = "Email address";
-"purchase.submit" = "BUY NOW";
+"purchase.submit" = "Continue";
 "purchase.login.footer" = "Already have an account?";
 "purchase.login.button" = "Sign in";
 "purchase.error.title" = "Purchase";

@@ -101,7 +101,7 @@ public class Theme {
             lineColor = .piaGreenDark20
 //            primary = .black
             emphasis = .green
-            accent1 = .orange
+            accent1 = .piaOrange
             accent2 = .red
 
             darkText = .black
@@ -470,6 +470,12 @@ public class Theme {
     public func applyTag(_ label: UILabel, appearance: Appearance) {
         label.font = typeface.regularFont(size: 12.0)
         label.textColor = palette.textColor(forRelevance: 1, appearance: appearance)
+    }
+    
+    /// :nodoc:
+    public func applyBlackLabelInBox(_ label: UILabel) {
+        label.font = typeface.regularFont(size: 12.0)
+        label.textColor = .black
     }
     
     /// :nodoc:
