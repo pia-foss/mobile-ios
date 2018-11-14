@@ -63,7 +63,6 @@ public class SignupFailureViewController: AutolayoutViewController, BrandableNav
         Theme.current.applyNavigationBarStyle(to: self)
         Theme.current.applyLightBackground(view)
         Theme.current.applyLightBackground(viewContainer!)
-        Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applySubtitle(labelMessage)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
     }

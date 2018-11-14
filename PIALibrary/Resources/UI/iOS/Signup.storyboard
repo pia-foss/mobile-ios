@@ -580,28 +580,28 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="359" height="674"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qhh-OH-TAO">
-                                                        <rect key="frame" x="0.0" y="146.99999999999997" width="359" height="380.33333333333326"/>
+                                                        <rect key="frame" x="0.0" y="134" width="359" height="406"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yy6-R3-jNs">
-                                                                <rect key="frame" x="39.666666666666657" y="20" width="280" height="270.33333333333331"/>
+                                                                <rect key="frame" x="60" y="20" width="239" height="296"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8uv-z8-27o">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="270.33333333333331"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="239" height="296"/>
                                                                         <subviews>
                                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image-no-internet" translatesAutoresizingMaskIntoConstraints="NO" id="Tcu-da-bn8">
-                                                                                <rect key="frame" x="47.333333333333343" y="0.0" width="185" height="120"/>
+                                                                                <rect key="frame" x="27" y="0.0" width="185" height="120"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="120" id="8Td-bO-gKB"/>
                                                                                 </constraints>
                                                                             </imageView>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Whoops!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfc-Wf-wyF">
-                                                                                <rect key="frame" x="106.66666666666669" y="140" width="66.666666666666686" height="20"/>
+                                                                                <rect key="frame" x="86.333333333333343" y="140" width="66.666666666666657" height="20"/>
                                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3b-Lm-bQf">
-                                                                                <rect key="frame" x="20" y="170" width="240" height="100.33333333333331"/>
+                                                                                <rect key="frame" x="20" y="179" width="199" height="117"/>
                                                                                 <string key="text">No internet connection found. Please confirm that you have an internet connection and hit retry below.
 
 You can come back to the app later to finish the process.</string>
@@ -615,7 +615,7 @@ You can come back to the app later to finish the process.</string>
                                                                             <constraint firstItem="Tcu-da-bn8" firstAttribute="top" secondItem="8uv-z8-27o" secondAttribute="top" id="5aw-Iv-GIG"/>
                                                                             <constraint firstItem="hfc-Wf-wyF" firstAttribute="centerX" secondItem="8uv-z8-27o" secondAttribute="centerX" id="8oD-gE-63Q"/>
                                                                             <constraint firstItem="hfc-Wf-wyF" firstAttribute="top" secondItem="Tcu-da-bn8" secondAttribute="bottom" constant="20" id="9bA-9w-m4p"/>
-                                                                            <constraint firstItem="o3b-Lm-bQf" firstAttribute="top" secondItem="hfc-Wf-wyF" secondAttribute="bottom" constant="10" id="KpB-LT-9gR"/>
+                                                                            <constraint firstItem="o3b-Lm-bQf" firstAttribute="top" secondItem="hfc-Wf-wyF" secondAttribute="bottom" constant="19" id="KpB-LT-9gR"/>
                                                                             <constraint firstAttribute="trailing" secondItem="o3b-Lm-bQf" secondAttribute="trailing" constant="20" id="lLb-Zy-R0Q"/>
                                                                             <constraint firstItem="Tcu-da-bn8" firstAttribute="centerX" secondItem="8uv-z8-27o" secondAttribute="centerX" id="ra9-sr-l4h"/>
                                                                             <constraint firstItem="o3b-Lm-bQf" firstAttribute="leading" secondItem="8uv-z8-27o" secondAttribute="leading" constant="20" id="y3g-Ep-Gst"/>
@@ -631,7 +631,7 @@ You can come back to the app later to finish the process.</string>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQs-S2-9qy" customClass="ActivityButton" customModule="PIALibrary" customModuleProvider="target">
-                                                                <rect key="frame" x="39.666666666666657" y="330.33333333333337" width="280" height="50"/>
+                                                                <rect key="frame" x="25" y="356" width="309" height="50"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="50" id="gIH-p8-z3s"/>
@@ -642,13 +642,13 @@ You can come back to the app later to finish the process.</string>
                                                             </view>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstItem="IQs-S2-9qy" firstAttribute="trailing" secondItem="yy6-R3-jNs" secondAttribute="trailing" id="5Kp-kW-Egn"/>
                                                             <constraint firstItem="yy6-R3-jNs" firstAttribute="top" secondItem="Qhh-OH-TAO" secondAttribute="top" constant="20" id="8Tl-8E-nbu"/>
                                                             <constraint firstItem="yy6-R3-jNs" firstAttribute="centerX" secondItem="Qhh-OH-TAO" secondAttribute="centerX" id="F8F-b1-DEK"/>
-                                                            <constraint firstItem="yy6-R3-jNs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Qhh-OH-TAO" secondAttribute="leading" constant="20" id="ZLh-MA-MKU"/>
-                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yy6-R3-jNs" secondAttribute="trailing" constant="20" id="ant-BQ-HNI"/>
+                                                            <constraint firstAttribute="trailing" secondItem="IQs-S2-9qy" secondAttribute="trailing" constant="25" id="WCF-vK-bPc"/>
+                                                            <constraint firstItem="yy6-R3-jNs" firstAttribute="leading" secondItem="Qhh-OH-TAO" secondAttribute="leading" constant="60" id="ZLh-MA-MKU"/>
+                                                            <constraint firstAttribute="trailing" secondItem="yy6-R3-jNs" secondAttribute="trailing" constant="60" id="ant-BQ-HNI"/>
                                                             <constraint firstAttribute="bottom" secondItem="IQs-S2-9qy" secondAttribute="bottom" id="dP7-LV-Uvk"/>
-                                                            <constraint firstItem="IQs-S2-9qy" firstAttribute="leading" secondItem="yy6-R3-jNs" secondAttribute="leading" id="phQ-Pb-UTx"/>
+                                                            <constraint firstItem="IQs-S2-9qy" firstAttribute="leading" secondItem="Qhh-OH-TAO" secondAttribute="leading" constant="25" id="eB7-zN-2Wh"/>
                                                             <constraint firstItem="IQs-S2-9qy" firstAttribute="top" secondItem="yy6-R3-jNs" secondAttribute="bottom" constant="40" id="x7q-fb-PLK"/>
                                                         </constraints>
                                                     </view>

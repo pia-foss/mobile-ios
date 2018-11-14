@@ -27,7 +27,7 @@ enum RedeemViewStatus {
 class RedeemViewController: AutolayoutViewController, WelcomeChild {
     private static let codeInvalidSet = CharacterSet.decimalDigits.inverted
     
-    private static let codePlaceholder = "1234-5678-9012-3456"
+    private static let codePlaceholder = L10n.Welcome.Redeem.Giftcard.placeholder
     
     private static let codeLength = 16
 

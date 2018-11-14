@@ -60,7 +60,7 @@ internal enum L10n {
         internal static let caption = L10n.tr("Signup", "success.password.caption")
       }
       internal enum Redeem {
-        /// You will receive an email shortly with your username and password.
+        /// You will receive an email shortly with your username and password.\n\nYour login details
         internal static let message = L10n.tr("Signup", "success.redeem.message")
         /// Card redeemed successfully
         internal static let title = L10n.tr("Signup", "success.redeem.title")
@@ -264,6 +264,10 @@ internal enum L10n {
           /// Invalid QR code sequence. Please try again.
           internal static let invalid = L10n.tr("Welcome", "redeem.error.qrcode.invalid")
         }
+      }
+      internal enum Giftcard {
+        /// Gift card PIN
+        internal static let placeholder = L10n.tr("Welcome", "redeem.giftcard.placeholder")
       }
     }
     internal enum Restore {

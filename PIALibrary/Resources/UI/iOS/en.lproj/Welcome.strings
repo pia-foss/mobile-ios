@@ -42,6 +42,7 @@
 "redeem.error.qrcode.invalid" = "Invalid QR code sequence. Please try again.";
 "redeem.accessibility.back" = "Back";
 "redeem.scanqr" = "Scan QR";
+"redeem.giftcard.placeholder" = "Gift card PIN";
 
 "plan.monthly.title" = "Monthly";
 "plan.yearly.title" = "Yearly";
