@@ -39,7 +39,7 @@ public class BorderedTextField: UITextField {
     public var borderColor: UIColor? {
         didSet {
             if (!highlightsWhileEditing || !isEditing) {
-                viewBorder?.backgroundColor = borderColor
+                self.layer.borderColor = borderColor?.cgColor
             }
             reloadPlaceholder()
         }
@@ -49,7 +49,7 @@ public class BorderedTextField: UITextField {
     public var highlightedBorderColor: UIColor? = .blue {
         didSet {
             if (highlightsWhileEditing && isEditing) {
-                viewBorder?.backgroundColor = highlightedBorderColor
+                self.layer.borderColor = highlightedBorderColor?.cgColor
             }
         }
     }
@@ -91,20 +91,12 @@ public class BorderedTextField: UITextField {
     public override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
 
-        let border = UIView()
-        border.backgroundColor = borderColor
-        border.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(border)
-        viewBorder = border
+        self.layer.cornerRadius = 6.0
+        self.layer.borderColor = borderColor?.cgColor
+        self.layer.borderWidth = 1
 
         reloadPlaceholder()
 
-        NSLayoutConstraint.activate([
-            border.heightAnchor.constraint(equalToConstant: 0.5),
-            border.leftAnchor.constraint(equalTo: leftAnchor),
-            border.rightAnchor.constraint(equalTo: rightAnchor),
-            border.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
     }
 
     /// :nodoc:
@@ -133,6 +125,20 @@ public class BorderedTextField: UITextField {
             attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attributes)
         }
     }
+    
+    override public func textRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds,
+                                     UIEdgeInsetsMake(0, 16, 0, 16))
+    }
+    override public func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds,
+                                     UIEdgeInsetsMake(0, 16, 0, 16))
+    }
+    override public func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds,
+                                     UIEdgeInsetsMake(0, 16, 0, 16))
+    }
+
 }
 
 // XXX: hack to inject self delegate
@@ -164,7 +170,7 @@ extension BorderedTextField: UITextFieldDelegate {
     
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         if highlightsWhileEditing {
-            viewBorder?.backgroundColor = highlightedBorderColor
+            self.layer.borderColor = highlightedBorderColor?.cgColor
         }
 
         if let method = realDelegate?.textFieldDidBeginEditing(_:) {
@@ -173,7 +179,7 @@ extension BorderedTextField: UITextFieldDelegate {
     }
     
     public func textFieldDidEndEditing(_ textField: UITextField) {
-        viewBorder?.backgroundColor = borderColor
+        self.layer.borderColor = borderColor?.cgColor
 
         if let method = realDelegate?.textFieldDidEndEditing(_:) {
             return method(textField)

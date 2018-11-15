@@ -11,7 +11,7 @@ import UIKit
 class WelcomePageViewController: UIPageViewController {
     private var source = [UIViewController]()
     
-    var preset: PIAWelcomeViewController.Preset?
+    var preset: Preset?
     
     weak var completionDelegate: WelcomeCompletionDelegate?
 
@@ -54,9 +54,16 @@ class WelcomePageViewController: UIPageViewController {
         }
         
         setViewControllers([source.first!], direction: .forward, animated: false, completion: nil)
+        
+        if let scrollView = self.view.subviews.filter({
+            $0.isKind(of: UIScrollView.self)
+        }).first as? UIScrollView {
+            scrollView.isScrollEnabled = false
+        }
+        
     }
     
-    func show(page: PIAWelcomeViewController.Pages) {
+    func show(page: Pages) {
 
         // XXX: quick temp solution for log2
         let index: Int

@@ -34,6 +34,15 @@ public class Theme {
         /// The logo image.
         public var logo: UIImage?
 
+        /// The navigation bar back image.
+        public var navigationBarBackIcon: UIImage?
+
+        /// The light background color.
+        public var secondaryColor: UIColor
+
+        /// The background color of the buttons inside textfields.
+        public var textfieldButtonBackgroundColor: UIColor
+
         /// The brand background color.
         public var brandBackground: UIColor
 
@@ -42,6 +51,9 @@ public class Theme {
         
         /// The solid light background color.
         public var solidLightBackground: UIColor
+        
+        /// The color for the subtitle Labels in forms and views
+        public var subtitleColor: UIColor
 
 //        public var primary: UIColor
         
@@ -67,6 +79,9 @@ public class Theme {
         
         /// The divider color.
         public var divider: UIColor
+        
+        /// The error color.
+        public var errorColor: UIColor
 
         /// The overlay alpha value.
         public var overlayAlpha: CGFloat
@@ -78,12 +93,15 @@ public class Theme {
         public init() {
             appearance = .light
             brandBackground = .green
+            secondaryColor = .piaGrey10
             lightBackground = .piaGrey1
             solidLightBackground = .white
+            subtitleColor = .piaGrey8
+            textfieldButtonBackgroundColor = .white
             lineColor = .piaGreenDark20
 //            primary = .black
             emphasis = .green
-            accent1 = .orange
+            accent1 = .piaOrange
             accent2 = .red
 
             darkText = .black
@@ -100,6 +118,7 @@ public class Theme {
             ]
             solidButtonText = .white
             divider = .piaGrey1
+            errorColor = .piaRed
             overlayAlpha = 0.3
         }
         
@@ -353,14 +372,18 @@ public class Theme {
 
     /// :nodoc:
     public func applyTitle(_ label: UILabel, appearance: Appearance) {
-        label.font = typeface.regularFont(size: 16.0)
-        label.textColor = palette.textColor(forRelevance: 1, appearance: appearance)
+        if palette.appearance == Appearance.light {
+            label.style(style: TextStyle.textStyle2)
+        } else {
+            label.style(style: TextStyle.textStyle1)
+        }
     }
     
     /// :nodoc:
-    public func applySubtitle(_ label: UILabel, appearance: Appearance) {
-        label.font = typeface.regularFont(size: 13.0)
-        label.textColor = palette.textColor(forRelevance: 2, appearance: appearance)
+    public func applySubtitle(_ label: UILabel) {
+        let textAlignment = label.textAlignment
+        label.style(style: TextStyle.textStyle8)
+        label.textAlignment = textAlignment
     }
 
     /// :nodoc:
@@ -450,6 +473,12 @@ public class Theme {
     }
     
     /// :nodoc:
+    public func applyBlackLabelInBox(_ label: UILabel) {
+        label.font = typeface.regularFont(size: 12.0)
+        label.textColor = .black
+    }
+    
+    /// :nodoc:
     public func applyList(_ label: UILabel, appearance: Appearance) {
         applyList(label, appearance: appearance, relevance: 2)
     }
@@ -492,8 +521,9 @@ public class Theme {
     
     /// :nodoc:
     public func applyInput(_ textField: UITextField) { // hint is placeholder
-        textField.font = typeface.regularFont(size: 14.0)
-        textField.textColor = palette.textColor(forRelevance: 1, appearance: .dark)
+        
+        textField.style(style: TextStyle.textStyle8)
+        textField.backgroundColor = Theme.current.palette.secondaryColor
 
         if let borderedTextField = textField as? BorderedTextField {
             borderedTextField.borderColor = palette.divider
@@ -501,6 +531,20 @@ public class Theme {
             borderedTextField.highlightsWhileEditing = true
         }
     }
+    
+    /// :nodoc:
+    public func applyInputError(_ textField: UITextField) { // hint is placeholder
+        
+        textField.style(style: TextStyle.textStyle8)
+        textField.backgroundColor = Theme.current.palette.secondaryColor
+        
+        if let borderedTextField = textField as? BorderedTextField {
+            borderedTextField.borderColor = palette.errorColor
+            borderedTextField.highlightedBorderColor = palette.errorColor
+            borderedTextField.highlightsWhileEditing = true
+        }
+    }
+
 
     /// :nodoc:
     public func applyActionButton(_ button: ActivityButton) {
@@ -530,9 +574,10 @@ public class Theme {
         let attributed = NSMutableAttributedString(string: plain as String)
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .center
+        paragraph.minimumLineHeight = 16
         let fullRange = NSMakeRange(0, plain.length)
-        attributed.addAttribute(.font, value: typeface.regularFont(size: 13.0), range: fullRange)
-        attributed.addAttribute(.foregroundColor, value: palette.textColor(forRelevance: 3, appearance: .dark), range: fullRange)
+        attributed.addAttribute(.font, value: UIFont.regularFontWith(size: 12), range: fullRange)
+        attributed.addAttribute(.foregroundColor, value: UIColor.piaGrey4, range: fullRange)
         attributed.addAttribute(.paragraphStyle, value: paragraph, range: fullRange)
         let range1 = plain.range(of: tos)
         let range2 = plain.range(of: privacy)
@@ -621,7 +666,7 @@ public class Theme {
     
     /// :nodoc:
     public func applyLinkAttributes(_ textView: UITextView) {
-        textView.tintColor = palette.emphasis
+        textView.tintColor = palette.lineColor
     }
     
     // MARK: Strategy

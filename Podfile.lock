@@ -11,7 +11,10 @@ PODS:
   - PIATunnel/Core (1.1.7):
     - OpenSSL-Apple (~> 1.1.0h)
     - SwiftyBeaver
+  - QuickLayout (2.0.2)
   - ReachabilitySwift (4.3.0)
+  - SwiftEntryKit (0.7.2):
+    - QuickLayout (= 2.0.2)
   - SwiftyBeaver (1.6.1)
 
 DEPENDENCIES:
@@ -19,6 +22,7 @@ DEPENDENCIES:
   - Gloss (~> 2)
   - PIATunnel (from `/Users/ueshiba/Desktop/PIA/tunnel-apple`)
   - ReachabilitySwift
+  - SwiftEntryKit (= 0.7.2)
   - SwiftyBeaver (~> 1.4)
 
 SPEC REPOS:
@@ -26,7 +30,9 @@ SPEC REPOS:
     - Alamofire
     - Gloss
     - OpenSSL-Apple
+    - QuickLayout
     - ReachabilitySwift
+    - SwiftEntryKit
     - SwiftyBeaver
 
 EXTERNAL SOURCES:
@@ -38,9 +44,11 @@ SPEC CHECKSUMS:
   Gloss: 1e8743f8de1fbe14a97f220ff901cba91ae5f8f8
   OpenSSL-Apple: cd153d705ef350eb834ae7ff5f21f792b51ed208
   PIATunnel: 3b1b68398ac384b04070994eabb53d7ce07e6368
+  QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
+  SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145
   SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
 
-PODFILE CHECKSUM: f2c9b4116aa2f5e6cc5dd1a5ba8432997618c6a3
+PODFILE CHECKSUM: 69dc247f30af562636213a5c232d74220b2ec50d
 
 COCOAPODS: 1.5.3

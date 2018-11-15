@@ -26,7 +26,7 @@ class RestoreSignupViewController: AutolayoutViewController {
 
     @IBOutlet private weak var buttonDismiss: UIButton!
 
-    var preset: PIAWelcomeViewController.Preset?
+    var preset: Preset?
 
     weak var delegate: RestoreSignupViewControllerDelegate?
 
@@ -146,7 +146,7 @@ class RestoreSignupViewController: AutolayoutViewController {
         Theme.current.applyCorner(viewModal)
 
         Theme.current.applyTitle(labelTitle, appearance: .dark)
-        Theme.current.applySubtitle(labelDescription, appearance: .dark)
+        Theme.current.applySubtitle(labelDescription)
         Theme.current.applyInput(textEmail)
         Theme.current.applyActionButton(buttonRestorePurchase)
     }

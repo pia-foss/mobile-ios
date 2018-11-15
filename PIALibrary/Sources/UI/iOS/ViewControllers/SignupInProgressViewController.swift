@@ -11,16 +11,17 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-class SignupInProgressViewController: AutolayoutViewController {
+public class SignupInProgressViewController: AutolayoutViewController, BrandableNavigationBar {
     @IBOutlet private weak var progressView: CircleProgressView!
 
+    @IBOutlet private weak var titleMessage: UILabel!
     @IBOutlet private weak var labelMessage: UILabel!
 
     var signupRequest: SignupRequest?
 
     var redeemRequest: RedeemRequest?
     
-    var preset: PIAWelcomeViewController.Preset?
+    var preset: Preset?
 
     var metadata: SignupMetadata?
     
@@ -30,14 +31,14 @@ class SignupInProgressViewController: AutolayoutViewController {
     
     private var error: Error?
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         
-        title = metadata?.title
         labelMessage.text = metadata?.bodySubtitle
+        titleMessage.text = metadata?.title
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         progressView.startAnimating()
@@ -107,7 +108,7 @@ class SignupInProgressViewController: AutolayoutViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier, let segueType = StoryboardSegue.Signup(rawValue: identifier) else {
             return
         }
@@ -151,10 +152,14 @@ class SignupInProgressViewController: AutolayoutViewController {
 
     // MARK: Restylable
     
-    override func viewShouldRestyle() {
+    override public func viewShouldRestyle() {
         super.viewShouldRestyle()
-        
-        Theme.current.applyBody1(labelMessage, appearance: .dark)
+        navigationItem.titleView = NavigationLogoView()
+        Theme.current.applyNavigationBarStyle(to: self)
+        Theme.current.applyLightBackground(view)
+        Theme.current.applyLightBackground(viewContainer!)
+        Theme.current.applyTitle(titleMessage, appearance: .dark)
+        Theme.current.applySubtitle(labelMessage)
         Theme.current.applyCircleProgressView(progressView)
     }
 }

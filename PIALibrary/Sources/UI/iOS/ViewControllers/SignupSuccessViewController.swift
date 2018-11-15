@@ -11,32 +11,26 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-class SignupSuccessViewController: AutolayoutViewController {
-    @IBOutlet private weak var imvBackground: UIImageView!
+public class SignupSuccessViewController: AutolayoutViewController, BrandableNavigationBar {
 
     @IBOutlet private weak var imvPicture: UIImageView!
-
     @IBOutlet private weak var labelTitle: UILabel!
-
     @IBOutlet private weak var labelMessage: UILabel!
-
     @IBOutlet private weak var labelUsernameCaption: UILabel!
-
     @IBOutlet private weak var labelUsername: UILabel!
-    
     @IBOutlet private weak var labelPasswordCaption: UILabel!
-    
     @IBOutlet private weak var labelPassword: UILabel!
+    @IBOutlet private weak var buttonSubmit: PIAButton!
+    @IBOutlet private weak var usernameContainer: UIView!
+    @IBOutlet private weak var passwordContainer: UIView!
 
-    @IBOutlet private weak var buttonSubmit: ActivityButton!
-    
     @IBOutlet private weak var constraintPictureXOffset: NSLayoutConstraint!
     
     var metadata: SignupMetadata?
     
     weak var completionDelegate: WelcomeCompletionDelegate?
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         
         guard let metadata = metadata else {
@@ -57,16 +51,9 @@ class SignupSuccessViewController: AutolayoutViewController {
         labelUsername.text = metadata.user?.credentials.username
         labelPasswordCaption.text = L10n.Signup.Success.Password.caption
         labelPassword.text = metadata.user?.credentials.password
-        buttonSubmit.title = L10n.Signup.Success.submit.uppercased()
 
-        var backgroundImage = Asset.imageReceiptBackground.image
-        backgroundImage = backgroundImage.withRenderingMode(.alwaysTemplate)
-        backgroundImage = backgroundImage.resizableImage(
-            withCapInsets: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 60.0, right: 0.0),
-            resizingMode: .tile
-        )
-        imvBackground.contentMode = .scaleToFill
-        imvBackground.image = backgroundImage
+        self.styleSubmitButton()
+        self.styleContainers()
     }
     
     @IBAction private func submit() {
@@ -78,16 +65,39 @@ class SignupSuccessViewController: AutolayoutViewController {
 
     // MARK: Restylable
 
-    override func viewShouldRestyle() {
+    override public func viewShouldRestyle() {
         super.viewShouldRestyle()
+        navigationItem.titleView = NavigationLogoView()
+        Theme.current.applyNavigationBarStyle(to: self)
+        Theme.current.applyLightBackground(view)
+        Theme.current.applyLightBackground(viewContainer!)
 
-        Theme.current.applyLightTint(imvBackground)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
-        Theme.current.applyBody1(labelMessage, appearance: .dark)
-        Theme.current.applyCaption(labelUsernameCaption, appearance: .dark)
-        Theme.current.applyBody1(labelUsername, appearance: .dark)
-        Theme.current.applyCaption(labelPasswordCaption, appearance: .dark)
-        Theme.current.applyBody1(labelPassword, appearance: .dark)
-        Theme.current.applyActionButton(buttonSubmit)
+        Theme.current.applySubtitle(labelMessage)
+
+        Theme.current.applySubtitle(labelUsernameCaption)
+        Theme.current.applyTitle(labelUsername, appearance: .dark)
+        Theme.current.applySubtitle(labelPasswordCaption)
+        Theme.current.applyTitle(labelPassword, appearance: .dark)
     }
+    
+    private func styleSubmitButton() {
+        buttonSubmit.setRounded()
+        buttonSubmit.style(style: TextStyle.Buttons.piaGreenButton)
+        buttonSubmit.setTitle(L10n.Signup.Success.submit.uppercased(),
+                              for: [])
+    }
+    
+    private func styleContainers() {
+        self.styleContainerView(usernameContainer)
+        self.styleContainerView(passwordContainer)
+    }
+    
+    func styleContainerView(_ view: UIView) {
+        view.layer.cornerRadius = 6.0
+        view.clipsToBounds = true
+        view.layer.borderWidth = 0.5
+        view.layer.borderColor = UIColor.piaGrey4.cgColor
+    }
+
 }

@@ -60,9 +60,9 @@ internal enum L10n {
         internal static let caption = L10n.tr("Signup", "success.password.caption")
       }
       internal enum Redeem {
-        /// You will also receive an email shortly with your username and password.
+        /// You will receive an email shortly with your username and password.\n\nYour login details
         internal static let message = L10n.tr("Signup", "success.redeem.message")
-        /// Completed!
+        /// Card redeemed successfully
         internal static let title = L10n.tr("Signup", "success.redeem.title")
       }
       internal enum Username {
@@ -203,12 +203,24 @@ internal enum L10n {
       }
     }
     internal enum Purchase {
-      /// BUY NOW
+      /// Continue
+      internal static let `continue` = L10n.tr("Welcome", "purchase.continue")
+      /// Submit
       internal static let submit = L10n.tr("Welcome", "purchase.submit")
       /// 7-day money back guarantee
       internal static let subtitle = L10n.tr("Welcome", "purchase.subtitle")
       /// Select a VPN plan
       internal static let title = L10n.tr("Welcome", "purchase.title")
+      internal enum Confirm {
+        /// Your are purchasing the %@ plan
+        internal static func plan(_ p1: String) -> String {
+          return L10n.tr("Welcome", "purchase.confirm.plan", p1)
+        }
+        internal enum Form {
+          /// Enter your email address
+          internal static let email = L10n.tr("Welcome", "purchase.confirm.form.email")
+        }
+      }
       internal enum Email {
         /// Email address
         internal static let placeholder = L10n.tr("Welcome", "purchase.email.placeholder")
@@ -233,6 +245,8 @@ internal enum L10n {
       }
     }
     internal enum Redeem {
+      /// Scan QR
+      internal static let scanqr = L10n.tr("Welcome", "redeem.scanqr")
       /// SUBMIT
       internal static let submit = L10n.tr("Welcome", "redeem.submit")
       /// Type in your email address and the %lu digit PIN from your gift card or trial card below.
@@ -241,11 +255,17 @@ internal enum L10n {
       }
       /// Redeem gift card
       internal static let title = L10n.tr("Welcome", "redeem.title")
+      internal enum Accessibility {
+        /// Back
+        internal static let back = L10n.tr("Welcome", "redeem.accessibility.back")
+      }
       internal enum Email {
         /// Email address
         internal static let placeholder = L10n.tr("Welcome", "redeem.email.placeholder")
       }
       internal enum Error {
+        /// Please type in your email and card PIN.
+        internal static let allfields = L10n.tr("Welcome", "redeem.error.allfields")
         /// Code must be %lu numeric digits.
         internal static func code(_ p1: Int) -> String {
           return L10n.tr("Welcome", "redeem.error.code", p1)
@@ -256,6 +276,10 @@ internal enum L10n {
           /// Invalid QR code sequence. Please try again.
           internal static let invalid = L10n.tr("Welcome", "redeem.error.qrcode.invalid")
         }
+      }
+      internal enum Giftcard {
+        /// Gift card PIN
+        internal static let placeholder = L10n.tr("Welcome", "redeem.giftcard.placeholder")
       }
     }
     internal enum Restore {

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftEntryKit
 
 extension Macros {
 
@@ -94,6 +95,37 @@ extension Macros {
      */
     public static func alert(_ title: String?, _ message: String?) -> UIAlertController {
         return UIAlertController(title: title, message: message, preferredStyle: .alert)
+    }
+    
+    /**
+     Shortcut to display an `EKImageNoteMessageView`.
+     
+     - Parameter image: The note image
+     - Parameter message: The note message
+     - Parameter duration: Optional duration of the note
+     */
+    public static func displayImageNote(withImage image: UIImage,
+                                        message: String,
+                                        andDuration duration: Double? = nil) {
+        
+        var attributes = EKAttributes()
+        attributes = .topToast
+        attributes.hapticFeedbackType = .success
+        attributes.entryBackground = .color(color: UIColor.piaRed)
+        if let duration = duration {
+            attributes.displayDuration = duration
+        }
+        
+        let labelContent = EKProperty.LabelContent(text: message,
+                                                   style: .init(font: TextStyle.textStyle7.font!,
+                                                                color: TextStyle.textStyle7.color!))
+        let imageContent = EKProperty.ImageContent(image: image)
+        let contentView = EKImageNoteMessageView(with: labelContent,
+                                      imageContent: imageContent)
+        
+        SwiftEntryKit.display(entry: contentView,
+                              using: attributes)
+
     }
 
     /**

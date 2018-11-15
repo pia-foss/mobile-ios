@@ -38,7 +38,7 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
     
     @IBOutlet private weak var buttonRestorePurchase: UIButton!
 
-    var preset: PIAWelcomeViewController.Preset?
+    var preset: Preset?
     
     var omitsSiblingLink = false
     

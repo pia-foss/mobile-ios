@@ -6,6 +6,7 @@ abstract_target 'PIALibrary' do
     pod 'Gloss', '~> 2'
     pod 'Alamofire', '~> 4'
     pod 'ReachabilitySwift'
+    pod 'SwiftEntryKit', '0.7.2'
     pod 'PIATunnel', :path => '/Users/ueshiba/Desktop/PIA/tunnel-apple'
     #pod 'PIATunnel', '~> 1.1.7'
 

@@ -11,94 +11,20 @@ import UIKit
 /**
  The welcome view controller is a graphic gateway to the PIA services.
  */
-public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompletionDelegate, ConfigurationAccess, InAppAccess {
+public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompletionDelegate, ConfigurationAccess, InAppAccess, BrandableNavigationBar {
  
-    /// The sub-pages offered in the `PIAWelcomeViewController` user interface.
-    public struct Pages: OptionSet {
-        
-        /// The login page.
-        public static let login = Pages(rawValue: 0x01)
-        
-        /// The purchase plan page.
-        public static let purchase = Pages(rawValue: 0x02)
-        
-        /// The redeem page.
-        public static let redeem = Pages(rawValue: 0x04)
-        
-        /// All pages.
-        public static let all: Pages = [.login, .purchase, .redeem]
-        
-        /// :nodoc:
-        public let rawValue: Int
-        
-        /// :nodoc:
-        public init(rawValue: Int) {
-            self.rawValue = rawValue
-        }
-    }
-    
-    /// Optional preset values for welcome forms.
-    public struct Preset: ProvidersAccess {
-
-        /// The `Pages` to display in the scroller.
-        public var pages = Pages.all
-        
-        /// If `true`, the controller can be cancelled.
-        public var allowsCancel = false
-        
-        /// The login username.
-        public var loginUsername: String?
-        
-        /// The login password.
-        public var loginPassword: String?
-        
-        /// The purchase email address.
-        public var purchaseEmail: String?
-        
-        /// The redeem email address.
-        public var redeemEmail: String?
-        
-        /// The redeem code.
-        public var redeemCode: String?
-        
-        /// If `true`, tries to recover any pending signup process.
-        public var shouldRecoverPendingSignup = true
-        
-        /// If `true`, doesn't persist state to current `Client.database`.
-        public var isEphemeral = false
-        
-        var accountProvider: AccountProvider {
-            return (isEphemeral ? EphemeralAccountProvider() : accessedProviders.accountProvider)
-        }
-        
-        /// Default initializer.
-        public init() {
-        }
-    }
-
-    @IBOutlet private weak var viewHeaderBackground: UIView!
-
-    @IBOutlet private weak var viewHeader: UIView!
-
-    @IBOutlet private weak var labelVersion: UILabel!
-    
-    @IBOutlet private weak var buttonCancel: UIButton!
-    
-    @IBOutlet private weak var constraintHeaderHeight: NSLayoutConstraint!
-    
+    @IBOutlet private weak var buttonCancel: UIButton!    
     @IBOutlet private weak var buttonEnvironment: UIButton!
 
-    @IBOutlet private weak var imvLogo: UIImageView!
-
-    private var preset = Preset()
+    var preset = Preset()
 
     private var pendingSignupRequest: SignupRequest?
     
     private weak var delegate: PIAWelcomeViewControllerDelegate?
     
-    /// It's `true` if the controller was created with `PIAWelcomeViewController.Preset.isEphemeral`.
+    /// It's `true` if the controller was created with `Preset.isEphemeral`.
     ///
-    /// - Seealso: `PIAWelcomeViewController.Preset.isEphemeral`
+    /// - Seealso: `Preset.isEphemeral`
     public var isEphemeral: Bool {
         return preset.isEphemeral
     }
@@ -131,23 +57,29 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
             fatalError("You are already logged in, you might want to Client.database.truncate() to start clean")
         }
         
-        imvLogo.image = Theme.current.palette.logo
-        constraintHeaderHeight.constant = (Macros.isDeviceBig ? 250.0 : 150.0)
         buttonCancel.isHidden = !preset.allowsCancel
         buttonCancel.accessibilityLabel = L10n.Ui.Global.cancel
         buttonEnvironment.isHidden = !accessedConfiguration.isDevelopment
-        labelVersion.text = Macros.localizedVersionFullString()
         
         #if os(iOS)
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(inAppDidAddUncredited(notification:)), name: .__InAppDidAddUncredited, object: nil)
         #endif
+
     }
     
     /// :nodoc:
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: Theme.current.palette.navigationBarBackIcon?.withRenderingMode(.alwaysOriginal),
+            style: .plain,
+            target: self,
+            action: #selector(back(_:))
+        )
+        self.navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Welcome.Redeem.Accessibility.back
+
         refreshEnvironmentButton()
     }
     
@@ -159,7 +91,10 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
     }
     
     // MARK: Actions
-    
+    @objc private func back(_ sender: Any?) {
+        self.navigationController?.popViewController(animated: true)
+    }
+
     @IBAction private func cancelClicked(_ sender: Any?) {
         delegate?.welcomeControllerDidCancel(self)
     }
@@ -254,12 +189,10 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
     /// :nodoc:
     public override func viewShouldRestyle() {
         super.viewShouldRestyle()
-        
-        Theme.current.applyLightBackground(viewHeaderBackground)
-        Theme.current.applyLightBackground(viewHeader)
+        navigationItem.titleView = NavigationLogoView()
+        Theme.current.applyLightBackground(view)
+        Theme.current.applyNavigationBarStyle(to: self)
         Theme.current.applyCancelButton(buttonCancel, appearance: .dark)
-        Theme.current.applyCaption(labelVersion, appearance: .dark)
-
         buttonEnvironment.setTitleColor(buttonCancel.titleColor(for: .normal), for: .normal)
     }
 }
@@ -297,7 +230,7 @@ public extension PIAWelcomeViewControllerDelegate {
 }
 
 protocol WelcomeChild: class {
-    var preset: PIAWelcomeViewController.Preset? { get set }
+    var preset: Preset? { get set }
     
     var omitsSiblingLink: Bool { get set }
     

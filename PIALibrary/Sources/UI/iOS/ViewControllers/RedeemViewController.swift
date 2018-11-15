@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyBeaver
 import AVFoundation
+import SwiftEntryKit
 
 private let log = SwiftyBeaver.self
 
@@ -20,7 +21,7 @@ protocol RedeemScannerDelegate: class {
 class RedeemViewController: AutolayoutViewController, WelcomeChild {
     private static let codeInvalidSet = CharacterSet.decimalDigits.inverted
     
-    private static let codePlaceholder = "1234-5678-9012-3456"
+    private static let codePlaceholder = L10n.Welcome.Redeem.Giftcard.placeholder
     
     private static let codeLength = 16
 
@@ -36,7 +37,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     
     @IBOutlet private weak var textAgreement: UITextView!
 
-    @IBOutlet private weak var buttonRedeem: ActivityButton!
+    @IBOutlet private weak var buttonRedeem: PIAButton!
     
     @IBOutlet private weak var viewFooter: UIView!
     
@@ -46,9 +47,9 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     
     @IBOutlet private weak var labelLogin2: UILabel!
     
-    @IBOutlet private weak var cameraButton: UIButton!
+    @IBOutlet private weak var cameraButton: PIAButton!
 
-    var preset: PIAWelcomeViewController.Preset?
+    var preset: Preset?
     
     var omitsSiblingLink: Bool = false
     
@@ -65,9 +66,8 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             textCode.text = GiftCardUtil.friendlyRedeemCode(code)
         }
     }
-
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
         
         guard let preset = self.preset else {
             fatalError("Preset not propagated")
@@ -86,16 +86,23 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             privacy: L10n.Welcome.Agreement.Message.privacy,
             privacyUrl: Client.configuration.privacyUrl
         )
-        buttonRedeem.title = L10n.Welcome.Redeem.submit
+        buttonRedeem.setTitle(L10n.Welcome.Redeem.title,
+                              for: [])
         labelLogin1.text = L10n.Welcome.Purchase.Login.footer
         labelLogin2.text = L10n.Welcome.Purchase.Login.button
         
-        buttonRedeem.accessibilityIdentifier = "uitests.redeem.submit"
         viewLogin.accessibilityLabel = "\(labelLogin1.text!) \(labelLogin2.text!)"
         textEmail.text = preset.redeemEmail
         if let code = preset.redeemCode {
             redeemCode = GiftCardUtil.strippedRedeemCode(code) // will set textCode automatically
         }
+        
+        super.viewDidLoad()
+
+        labelSubtitle.textAlignment = .center
+        configureCameraButton()
+        styleRedeemButton()
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -108,25 +115,49 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         scrollView.isScrollEnabled = (traitCollection.verticalSizeClass == .compact)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        cameraButton.backgroundColor = Theme.current.palette.textfieldButtonBackgroundColor
+    }
+    
     // MARK: Actions
 
     @IBAction private func redeem(_ sender: Any?) {
-        guard !buttonRedeem.isRunningActivity else {
+        //guard !buttonRedeem.isRunningActivity else {
+        //    return
+        //}
+        if textEmail.text?.trimmed().count == 0,
+            textCode.text?.trimmed().count == 0 {
+                Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                        message: L10n.Welcome.Redeem.Error.allfields)
+                self.status = .error(element: textEmail)
+                self.status = .error(element: textCode)
+                self.cameraButton.status = .error
+                return
+        }
+        
+        guard let email = textEmail.text?.trimmed(),
+            Validator.validate(email: email) else {
+            Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                    message: L10n.Welcome.Purchase.Error.validation)
+            self.status = .error(element: textEmail)
             return
         }
         
-        guard let email = textEmail.text?.trimmed(), Validator.validate(email: email) else {
-            presentAlertWith(title: L10n.Welcome.Redeem.Error.title,
-                             andMessage: L10n.Welcome.Purchase.Error.validation,
-                             andButtonTitle: L10n.Ui.Global.ok)
+        self.status = .restore(element: textEmail)
+        
+        guard let code = redeemCode?.trimmed(),
+            Validator.validate(giftCode: code) else {
+            Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                    message: L10n.Welcome.Redeem.Error.code(RedeemViewController.codeLength))
+            self.status = .error(element: textCode)
+            self.cameraButton.status = .error
             return
         }
-        guard let code = redeemCode?.trimmed(), Validator.validate(giftCode: code) else {
-            presentAlertWith(title: L10n.Welcome.Redeem.Error.title,
-                             andMessage: L10n.Welcome.Redeem.Error.code(RedeemViewController.codeLength),
-                             andButtonTitle: L10n.Ui.Global.ok)
-            return
-        }
+        
+        self.status = .restore(element: textCode)
+        self.status = .initial
+        self.cameraButton.status = .normal
         
         textEmail.text = email
         textCode.text = GiftCardUtil.friendlyRedeemCode(code)
@@ -193,33 +224,39 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         
     }
     
+    private func configureCameraButton() {
+        cameraButton.setButtonImage()
+        cameraButton.setRounded()
+        cameraButton.setBorder(withSize: 1,
+                               andStyle: TextStyle.textStyle8)
+        cameraButton.style(style: TextStyle.textStyle8)
+        cameraButton.setTitle(L10n.Welcome.Redeem.scanqr.uppercased(),
+                              for: [])
+        cameraButton.tintColor = TextStyle.textStyle8.color
+        cameraButton.backgroundColor = Theme.current.palette.textfieldButtonBackgroundColor
+        cameraButton.setImage(Asset.iconCamera.image, for: [])
+    }
+   
+    private func styleRedeemButton() {
+        buttonRedeem.setRounded()
+        buttonRedeem.style(style: TextStyle.Buttons.piaGreenButton)
+        buttonRedeem.setTitle(L10n.Welcome.Redeem.title.uppercased(),
+                              for: [])
+    }
+
     private func presentUnauthorizeCameraError() {
         DispatchQueue.main.async {
-            self.presentAlertWith(title: L10n.Welcome.Camera.Access.Error.title,
-                                  andMessage: L10n.Welcome.Camera.Access.Denied.message,
-                                  andButtonTitle: L10n.Ui.Global.close)
+            Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                    message: L10n.Welcome.Camera.Access.Denied.message)
         }
-    }
-    
-    private func presentAlertWith(title: String,
-                                  andMessage message: String,
-                                  andButtonTitle buttonTitle: String ) {
-        
-        let alert = Macros.alert(title,
-                                 message)
-        alert.addCancelAction(buttonTitle)
-        present(alert,
-                animated: true,
-                completion: nil)
-
     }
 
     private func enableInteractions(_ enable: Bool) {
         parent?.view.isUserInteractionEnabled = enable
         if enable {
-            buttonRedeem.stopActivity()
+            //buttonRedeem.stopActivity()
         } else {
-            buttonRedeem.startActivity()
+            //buttonRedeem.startActivity()
         }
     }
 
@@ -227,13 +264,12 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
-        
+        Theme.current.applyLightBackground(view)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
-        Theme.current.applySubtitle(labelSubtitle, appearance: .dark)
+        Theme.current.applySubtitle(labelSubtitle)
         Theme.current.applyInput(textEmail)
         Theme.current.applyInput(textCode)
         Theme.current.applyLinkAttributes(textAgreement)
-        Theme.current.applyActionButton(buttonRedeem)
         Theme.current.applyBody1(labelLogin1, appearance: .dark)
         Theme.current.applyTextButton(labelLogin2)
     }
@@ -295,16 +331,14 @@ extension RedeemViewController: RedeemScannerDelegate {
             textCode.text = GiftCardUtil.friendlyRedeemCode(redeemCode)
             self.redeemCode = redeemCode
         } else {
-            presentAlertWith(title: L10n.Welcome.Redeem.Error.title,
-                             andMessage: L10n.Welcome.Redeem.Error.Qrcode.invalid,
-                             andButtonTitle:L10n.Ui.Global.ok)
+            Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                    message: L10n.Welcome.Redeem.Error.Qrcode.invalid)
         }
     }
     
     func errorFound() {
-        presentAlertWith(title: L10n.Welcome.Camera.Access.Error.title,
-                         andMessage: L10n.Welcome.Camera.Access.Error.message,
-                         andButtonTitle:L10n.Ui.Global.close)
+        Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                message: L10n.Welcome.Camera.Access.Error.message)
     }
     
 }

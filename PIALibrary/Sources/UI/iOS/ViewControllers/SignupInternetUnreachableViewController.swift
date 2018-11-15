@@ -8,16 +8,14 @@
 
 import UIKit
 
-class SignupUnreachableViewController: AutolayoutViewController {
+public class SignupUnreachableViewController: AutolayoutViewController, BrandableNavigationBar {
+
     @IBOutlet private weak var imvPicture: UIImageView!
-
     @IBOutlet private weak var labelTitle: UILabel!
-
     @IBOutlet private weak var labelMessage: UILabel!
+    @IBOutlet private weak var buttonSubmit: PIAButton!
 
-    @IBOutlet private weak var buttonSubmit: ActivityButton!
-
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.hidesBackButton = true
@@ -26,7 +24,8 @@ class SignupUnreachableViewController: AutolayoutViewController {
         imvPicture.image = Asset.imageNoInternet.image
         labelTitle.text = L10n.Signup.Unreachable.title
         labelMessage.text = L10n.Signup.Unreachable.message
-        buttonSubmit.title = L10n.Signup.Unreachable.submit.uppercased()
+        self.styleSubmitButton()
+
     }
     
     @IBAction private func submit() {
@@ -35,11 +34,21 @@ class SignupUnreachableViewController: AutolayoutViewController {
 
     // MARK: Restylable
     
-    override func viewShouldRestyle() {
+    override public func viewShouldRestyle() {
         super.viewShouldRestyle()
-        
+        navigationItem.titleView = NavigationLogoView()
+        Theme.current.applyNavigationBarStyle(to: self)
+        Theme.current.applyLightBackground(view)
+        Theme.current.applyLightBackground(viewContainer!)
+        Theme.current.applySubtitle(labelMessage)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
-        Theme.current.applyBody1(labelMessage, appearance: .dark)
-        Theme.current.applyActionButton(buttonSubmit)
     }
+    
+    private func styleSubmitButton() {
+        buttonSubmit.setRounded()
+        buttonSubmit.style(style: TextStyle.Buttons.piaGreenButton)
+        buttonSubmit.setTitle(L10n.Signup.Unreachable.submit.uppercased(),
+                              for: [])
+    }
+
 }
