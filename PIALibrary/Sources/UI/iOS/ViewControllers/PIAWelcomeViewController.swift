@@ -19,8 +19,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
     var preset = Preset()
 
     private var pendingSignupRequest: SignupRequest?
-    
-    private weak var delegate: PIAWelcomeViewControllerDelegate?
+    weak var delegate: PIAWelcomeViewControllerDelegate?
     
     /// It's `true` if the controller was created with `Preset.isEphemeral`.
     ///

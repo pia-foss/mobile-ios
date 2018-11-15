@@ -77,7 +77,7 @@ public class BorderedTextField: UITextField {
     /// :nodoc:
     public override func awakeFromNib() {
         super.awakeFromNib()
-
+        rightViewMode = .unlessEditing
         borderStyle = .none
         textColor = .darkText
         self.delegate = self
@@ -137,6 +137,12 @@ public class BorderedTextField: UITextField {
     override public func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         return UIEdgeInsetsInsetRect(bounds,
                                      UIEdgeInsetsMake(0, 16, 0, 16))
+    }
+    
+    public override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        var rightViewRect = super.rightViewRect(forBounds: bounds)
+        rightViewRect.origin.x -= 16
+        return rightViewRect
     }
 
 }

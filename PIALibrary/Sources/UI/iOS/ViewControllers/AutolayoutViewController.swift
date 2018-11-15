@@ -122,12 +122,16 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
     private func restoreFormElementBorder(_ element: UIView) {
         if let element = element as? UITextField {
             Theme.current.applyInput(element)
+            element.rightView = nil
         }
     }
     
     private func updateFormElementBorder(_ element: UIView) {
         if let element = element as? UITextField {
             Theme.current.applyInputError(element)
+            let iconWarning = UIImageView(image:Asset.iconWarning.image.withRenderingMode(.alwaysTemplate))
+            iconWarning.tintColor = .piaRed
+            element.rightView = iconWarning
         }
     }
 
