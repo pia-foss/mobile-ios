@@ -49,14 +49,20 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
     }
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let vc = segue.destination as? PIAWelcomeViewController else {
+            return
+        }
+        
         switch segue.identifier  {
         case StoryboardSegue.Welcome.redeemGiftCardSegue.rawValue:
-            if let vc = segue.destination as? PIAWelcomeViewController {
                 vc.preset.pages = .redeem
-            }
+        case StoryboardSegue.Welcome.purchaseVPNPlanSegue.rawValue:
+                vc.preset.pages = .purchase
         default:
             break
         }
+        
     }
 
     /// :nodoc:
