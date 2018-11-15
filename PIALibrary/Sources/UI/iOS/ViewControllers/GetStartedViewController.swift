@@ -56,9 +56,11 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
         
         switch segue.identifier  {
         case StoryboardSegue.Welcome.redeemGiftCardSegue.rawValue:
-                vc.preset.pages = .redeem
+            vc.preset.pages = .redeem
         case StoryboardSegue.Welcome.purchaseVPNPlanSegue.rawValue:
-                vc.preset.pages = .purchase
+            vc.preset.pages = .purchase
+        case StoryboardSegue.Welcome.loginAccountSegue.rawValue:
+            vc.preset.pages = .login
         default:
             break
         }

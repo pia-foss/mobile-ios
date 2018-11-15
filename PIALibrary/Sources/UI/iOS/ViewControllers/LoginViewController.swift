@@ -20,24 +20,8 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
 
     @IBOutlet private weak var textPassword: BorderedTextField!
     
-    @IBOutlet private weak var buttonLogin: ActivityButton!
+    @IBOutlet private weak var buttonLogin: PIAButton!
     
-    @IBOutlet private weak var viewFooter: UIView!
-    
-    @IBOutlet private weak var viewPurchase: UIView!
-    
-    @IBOutlet private weak var labelPurchase1: UILabel!
-    
-    @IBOutlet private weak var labelPurchase2: UILabel!
-
-    @IBOutlet private weak var viewRedeem: UIView!
-    
-    @IBOutlet private weak var labelRedeem1: UILabel!
-    
-    @IBOutlet private weak var labelRedeem2: UILabel!
-    
-    @IBOutlet private weak var buttonRestorePurchase: UIButton!
-
     var preset: Preset?
     
     var omitsSiblingLink = false
@@ -46,6 +30,8 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
 
     private var signupEmail: String?
     
+    private var isLogging = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,24 +39,14 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
             fatalError("Preset not propagated")
         }
 
-        viewFooter.isHidden = omitsSiblingLink
-
         labelTitle.text = L10n.Welcome.Login.title
         textUsername.placeholder = L10n.Welcome.Login.Username.placeholder
         textPassword.placeholder = L10n.Welcome.Login.Password.placeholder
-        buttonLogin.title = L10n.Welcome.Login.submit
-        labelPurchase1.text = L10n.Welcome.Login.Purchase.footer
-        labelPurchase2.text = L10n.Welcome.Login.Purchase.button
-        labelRedeem1.text = L10n.Welcome.Login.Redeem.footer
-        labelRedeem2.text = L10n.Welcome.Login.Redeem.button
-        buttonRestorePurchase.setTitle(L10n.Welcome.Login.Restore.button, for: .normal)
-        buttonRestorePurchase.titleLabel?.textAlignment = .center
-        buttonRestorePurchase.titleLabel?.numberOfLines = 0
 
-        buttonLogin.accessibilityIdentifier = "uitests.login.submit"
-        viewPurchase.accessibilityLabel = "\(labelPurchase1.text!) \(labelPurchase2.text!)"
         textUsername.text = preset.loginUsername
         textPassword.text = preset.loginPassword
+        
+        styleLoginButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -86,24 +62,30 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
     // MARK: Actions
     
     @IBAction private func logIn(_ sender: Any?) {
-        guard !buttonLogin.isRunningActivity else {
+    
+        guard !isLogging else {
             return
         }
-    
-        let errorTitle = L10n.Welcome.Login.Error.title
+
         let errorMessage = L10n.Welcome.Login.Error.validation
         guard let username = textUsername.text?.trimmed(), !username.isEmpty else {
-            let alert = Macros.alert(errorTitle, errorMessage)
-            alert.addCancelAction(L10n.Ui.Global.ok)
-            present(alert, animated: true, completion: nil)
+            Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                    message: errorMessage)
+            self.status = .error(element: textUsername)
             return
         }
+        
+        self.status = .restore(element: textUsername)
+        
         guard let password = textPassword.text?.trimmed(), !password.isEmpty else {
-            let alert = Macros.alert(errorTitle, errorMessage)
-            alert.addCancelAction(L10n.Ui.Global.ok)
-            present(alert, animated: true, completion: nil)
+            Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                    message: errorMessage)
+            self.status = .error(element: textPassword)
             return
         }
+
+        self.status = .restore(element: textPassword)
+        self.status = .initial
 
         view.endEditing(false)
 
@@ -142,9 +124,8 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
                     log.error("Failed to log in")
                 }
 
-                let alert = Macros.alert(L10n.Welcome.Login.Error.title, errorMessage ?? "")
-                alert.addCancelAction(L10n.Ui.Global.close)
-                self.present(alert, animated: true, completion: nil)
+                Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                        message: errorMessage ?? L10n.Welcome.Login.Error.title)
                 return
             }
             
@@ -152,20 +133,6 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
             
             self.completionDelegate?.welcomeDidLogin(withUser: user, topViewController: self)
         }
-    }
-
-    @IBAction private func signUp(_ sender: Any?) {
-        guard let pageController = parent as? WelcomePageViewController else {
-            fatalError("Not running in WelcomePageViewController")
-        }
-        pageController.show(page: .purchase)
-    }
-    
-    @IBAction private func redeem(_ sender: Any?) {
-        guard let pageController = parent as? WelcomePageViewController else {
-            fatalError("Not running in WelcomePageViewController")
-        }
-        pageController.show(page: .redeem)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -191,28 +158,27 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
 
     private func enableInteractions(_ enable: Bool) {
         parent?.view.isUserInteractionEnabled = enable
-        if enable {
-            buttonLogin.stopActivity()
-        } else {
-            buttonLogin.startActivity()
-        }
+        isLogging = !enable
     }
     
     // MARK: Restylable
     
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
-        
+        Theme.current.applyLightBackground(view)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applyInput(textUsername)
         Theme.current.applyInput(textPassword)
-        Theme.current.applyActionButton(buttonLogin)
-        Theme.current.applyBody1(labelPurchase1, appearance: .dark)
-        Theme.current.applyTextButton(labelPurchase2)
-        Theme.current.applyBody1(labelRedeem1, appearance: .dark)
-        Theme.current.applyTextButton(labelRedeem2)
-        Theme.current.applyTextButton(buttonRestorePurchase)
     }
+    
+    private func styleLoginButton() {
+        buttonLogin.setRounded()
+        buttonLogin.style(style: TextStyle.Buttons.piaGreenButton)
+        buttonLogin.setTitle(L10n.Welcome.Login.submit.uppercased(),
+                               for: [])
+        buttonLogin.accessibilityIdentifier = "uitests.login.submit"
+    }
+
 }
 
 extension LoginViewController: UITextFieldDelegate {
