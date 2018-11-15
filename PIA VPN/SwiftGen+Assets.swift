@@ -45,6 +45,9 @@ struct ColorAsset {
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 enum Asset {
   enum Piax {
+    enum Global {
+      static let iconBack = ImageAsset(name: "icon-back")
+    }
     enum Splash {
       static let darkSplash = ImageAsset(name: "dark-splash")
       static let lightSplash = ImageAsset(name: "light-splash")
@@ -307,6 +310,7 @@ enum Asset {
   static let allColors: [ColorAsset] = [
   ]
   static let allImages: [ImageAsset] = [
+    Piax.Global.iconBack,
     Piax.Splash.darkSplash,
     Piax.Splash.lightSplash,
     accessoryExpire,

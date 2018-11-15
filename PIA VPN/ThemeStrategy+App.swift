@@ -39,23 +39,30 @@ private struct LightThemeStrategy: ThemeStrategy {
             theme.applyLightNavigationBar(navigationBar)
             return
         }
-        theme.applyBrandNavigationBar(navigationBar)
+        
+        if viewController is BrandableNavigationBar {
+            theme.applyLightBrandLogoNavigationBar(navigationBar)
+        } else {
+            theme.applyBrandNavigationBar(navigationBar)
+        }
+
     }
     
     func statusBarAppearance(for viewController: AutolayoutViewController) -> UIStatusBarStyle {
-        if let _ = viewController as? WalkthroughViewController {
+        switch viewController {
+        case is WalkthroughViewController,
+             is DashboardViewController,
+             is PIAWelcomeViewController,
+             is GetStartedViewController,
+             is SignupInProgressViewController,
+             is SignupFailureViewController,
+             is SignupSuccessViewController,
+             is SignupUnreachableViewController,
+             is ConfirmVPNPlanViewController:
             return .default
+        default:
+            return .lightContent
         }
-        if let _ = viewController as? DashboardViewController {
-            return .default
-        }
-        if let _ = viewController as? PIAWelcomeViewController {
-            return .default
-        }
-        if let _ = viewController as? GetStartedViewController {
-            return .default
-        }
-        return .lightContent
     }
     
     func autolayoutContainerMargins(for mask: UIInterfaceOrientationMask) -> UIEdgeInsets {
@@ -71,7 +78,13 @@ private struct DarkThemeStrategy: ThemeStrategy {
         guard let navigationBar = viewController.navigationController?.navigationBar else {
             return
         }
-        theme.applyBrandNavigationBar(navigationBar)
+        
+        if viewController is BrandableNavigationBar {
+            theme.applyLightBrandLogoNavigationBar(navigationBar)
+        } else {
+            theme.applyBrandNavigationBar(navigationBar)
+        }
+
     }
     
     func statusBarAppearance(for viewController: AutolayoutViewController) -> UIStatusBarStyle {

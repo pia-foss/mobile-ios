@@ -18,6 +18,12 @@ extension Theme {
     public func applyLightNavigationBar(_ navigationBar: UINavigationBar) {
         navigationBar.tintColor = palette.textColor(forRelevance: 1, appearance: .dark)
         navigationBar.barTintColor = palette.lightBackground
+        
+    }
+    
+    public func applyLightBrandLogoNavigationBar(_ navigationBar: UINavigationBar) {
+        navigationBar.tintColor = palette.textColor(forRelevance: 1, appearance: .dark)
+        navigationBar.barTintColor = palette.lightBackground
     }
 
     // MARK: Typography
