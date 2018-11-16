@@ -135,27 +135,6 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? RestoreSignupViewController {
-            vc.preset = preset
-            vc.delegate = self
-        }
-        // signup after receipt restore
-        else if (segue.identifier == StoryboardSegue.Welcome.signupViaRestoreSegue.rawValue) {
-            let nav = segue.destination as! UINavigationController
-            let vc = nav.topViewController as! SignupInProgressViewController
-
-            guard let email = signupEmail else {
-                fatalError("Signing up and signupEmail is not set")
-            }
-            var metadata = SignupMetadata(email: email)
-            metadata.title = L10n.Signup.InProgress.title
-            metadata.bodySubtitle = L10n.Signup.InProgress.message
-            vc.metadata = metadata
-            vc.signupRequest = SignupRequest(email: email)
-        }
-    }
-
     private func enableInteractions(_ enable: Bool) {
         parent?.view.isUserInteractionEnabled = enable
         isLogging = !enable
@@ -189,18 +168,5 @@ extension LoginViewController: UITextFieldDelegate {
             logIn(nil)
         }
         return true
-    }
-}
-
-extension LoginViewController: RestoreSignupViewControllerDelegate {
-    func restoreController(_ restoreController: RestoreSignupViewController, didRefreshReceiptWith email: String) {
-        dismiss(animated: true) {
-            self.signupEmail = email
-            self.perform(segue: StoryboardSegue.Welcome.signupViaRestoreSegue)
-        }
-    }
-    
-    func restoreControllerDidDismiss(_ restoreController: RestoreSignupViewController) {
-        dismiss(animated: true, completion: nil)
     }
 }

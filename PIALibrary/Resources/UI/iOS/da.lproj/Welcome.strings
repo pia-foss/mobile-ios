@@ -44,5 +44,5 @@
 "redeem.title" = "Indløs gavekort";
 "restore.email.placeholder" = "E-mailadresse";
 "restore.submit" = "BEKRÆFT";
-"restore.subtitle" = "Hvis du har købt en plan gennem denne app og ikke har modtaget dine legitimationsoplysninger, kan du anmode om at sende dem igen herfra.\nDu vil ikke blive opkrævet i løbet af denne proces.";
+"restore.subtitle" = "Hvis du har købt en plan gennem denne app og ikke har modtaget dine legitimationsoplysninger, kan du anmode om at sende dem igen herfra. Du vil ikke blive opkrævet i løbet af denne proces.";
 "restore.title" = "Gendan ukrediteret køb";

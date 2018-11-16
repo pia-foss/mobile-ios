@@ -62,6 +62,11 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let vc = segue.destination as? PIAWelcomeViewController else {
+            if segue.identifier == StoryboardSegue.Welcome.restorePurchaseSegue.rawValue {
+                if let vc = segue.destination as? RestoreSignupViewController {
+                    vc.preset = preset
+                }
+            }
             return
         }
         

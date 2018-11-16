@@ -52,7 +52,7 @@ public class SignupFailureViewController: AutolayoutViewController, BrandableNav
     }
 
     @IBAction private func submit() {
-        perform(segue: StoryboardSegue.Signup.unwindFailureSegueIdentifier)
+        dismissModal()
     }
 
     // MARK: Restylable
