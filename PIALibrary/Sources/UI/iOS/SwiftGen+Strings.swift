@@ -285,7 +285,7 @@ internal enum L10n {
     internal enum Restore {
       /// CONFIRM
       internal static let submit = L10n.tr("Welcome", "restore.submit")
-      /// If you purchased a plan through this app and didn't receive your credentials, you can send them again from here.\nYou will not be charged during this process.
+      /// If you purchased a plan through this app and didn't receive your credentials, you can send them again from here. You will not be charged during this process.
       internal static let subtitle = L10n.tr("Welcome", "restore.subtitle")
       /// Restore uncredited purchase
       internal static let title = L10n.tr("Welcome", "restore.title")

@@ -24,24 +24,17 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yDn-f2-pRd">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uEe-na-x7K">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
-                                                <accessibility key="accessibilityConfiguration" label="Cancel"/>
-                                                <connections>
-                                                    <action selector="dismiss:" destination="Y1W-Um-2lp" eventType="touchUpInside" id="umL-4L-pzm"/>
-                                                </connections>
-                                            </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1CW-ZP-sqf">
-                                                <rect key="frame" x="37.5" y="190" width="300" height="267.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restore uncredited purchase" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C7C-8i-CTb">
-                                                        <rect key="frame" x="20" y="30" width="260" height="19.5"/>
+                                                        <rect key="frame" x="80" y="29" width="215" height="19.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Sq-eo-OrE">
-                                                        <rect key="frame" x="20" y="59.5" width="260" height="78"/>
+                                                        <rect key="frame" x="40" y="69.5" width="295" height="62.5"/>
                                                         <string key="text">If you purchased a plan through this app and didn't receive your credentials, you can send them again from here.
 You will not be charged during this process.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -49,22 +42,21 @@ You will not be charged during this process.</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Vo-GR-ciV" customClass="BorderedTextField" customModule="PIALibrary" customModuleProvider="target">
-                                                        <rect key="frame" x="20" y="157.5" width="260" height="30"/>
+                                                        <rect key="frame" x="25" y="157" width="325" height="50"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="30" id="WNz-0h-Xp2"/>
+                                                            <constraint firstAttribute="height" constant="50" id="WNz-0h-Xp2"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="Y1W-Um-2lp" id="3zT-xF-wGK"/>
                                                         </connections>
                                                     </textField>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Un1-3v-2Ob" customClass="ActivityButton" customModule="PIALibrary" customModuleProvider="target">
-                                                        <rect key="frame" x="20" y="207.5" width="260" height="40"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Un1-3v-2Ob" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
+                                                        <rect key="frame" x="25" y="222" width="325" height="50"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="40" id="Z9y-Og-t8q"/>
-                                                            <constraint firstAttribute="width" constant="260" id="iKe-Dz-xoG"/>
+                                                            <constraint firstAttribute="height" constant="50" id="Z9y-Og-t8q"/>
                                                         </constraints>
                                                         <connections>
                                                             <action selector="restorePurchase:" destination="Y1W-Um-2lp" eventType="touchUpInside" id="Xuc-A7-OOK"/>
@@ -72,31 +64,28 @@ You will not be charged during this process.</string>
                                                     </view>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="6Sq-eo-OrE" firstAttribute="leading" secondItem="5Vo-GR-ciV" secondAttribute="leading" id="7Ta-kr-HWX"/>
-                                                    <constraint firstItem="C7C-8i-CTb" firstAttribute="top" secondItem="1CW-ZP-sqf" secondAttribute="top" constant="30" id="HFp-oh-sBM"/>
-                                                    <constraint firstItem="6Sq-eo-OrE" firstAttribute="trailing" secondItem="5Vo-GR-ciV" secondAttribute="trailing" id="IUS-Mu-8mH"/>
-                                                    <constraint firstItem="6Sq-eo-OrE" firstAttribute="top" secondItem="C7C-8i-CTb" secondAttribute="bottom" constant="10" id="J8C-xq-QqM"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Un1-3v-2Ob" secondAttribute="trailing" constant="20" id="MPL-4k-wMH"/>
-                                                    <constraint firstItem="C7C-8i-CTb" firstAttribute="leading" secondItem="6Sq-eo-OrE" secondAttribute="leading" id="Tp3-AQ-LUG"/>
-                                                    <constraint firstItem="5Vo-GR-ciV" firstAttribute="top" secondItem="6Sq-eo-OrE" secondAttribute="bottom" constant="20" id="aHZ-El-ic3"/>
-                                                    <constraint firstItem="Un1-3v-2Ob" firstAttribute="leading" secondItem="1CW-ZP-sqf" secondAttribute="leading" constant="20" id="abu-R5-vY3"/>
-                                                    <constraint firstItem="Un1-3v-2Ob" firstAttribute="trailing" secondItem="5Vo-GR-ciV" secondAttribute="trailing" id="bTh-Gr-ytX"/>
-                                                    <constraint firstItem="C7C-8i-CTb" firstAttribute="trailing" secondItem="6Sq-eo-OrE" secondAttribute="trailing" id="gAE-PA-OiV"/>
-                                                    <constraint firstItem="Un1-3v-2Ob" firstAttribute="top" secondItem="5Vo-GR-ciV" secondAttribute="bottom" constant="20" id="ven-p9-ZsT"/>
-                                                    <constraint firstItem="Un1-3v-2Ob" firstAttribute="leading" secondItem="5Vo-GR-ciV" secondAttribute="leading" id="vvm-wE-w6B"/>
-                                                    <constraint firstAttribute="bottom" secondItem="Un1-3v-2Ob" secondAttribute="bottom" constant="20" id="yLO-r9-xwd"/>
+                                                    <constraint firstItem="C7C-8i-CTb" firstAttribute="top" secondItem="1CW-ZP-sqf" secondAttribute="top" constant="29" id="HFp-oh-sBM"/>
+                                                    <constraint firstItem="6Sq-eo-OrE" firstAttribute="top" secondItem="C7C-8i-CTb" secondAttribute="bottom" constant="21" id="J8C-xq-QqM"/>
+                                                    <constraint firstAttribute="trailing" secondItem="6Sq-eo-OrE" secondAttribute="trailing" constant="40" id="O5z-Uv-yyh"/>
+                                                    <constraint firstItem="5Vo-GR-ciV" firstAttribute="leading" secondItem="1CW-ZP-sqf" secondAttribute="leading" constant="25" id="Sh0-wS-pM6"/>
+                                                    <constraint firstItem="Un1-3v-2Ob" firstAttribute="leading" secondItem="1CW-ZP-sqf" secondAttribute="leading" constant="25" id="YSj-gb-5Nr"/>
+                                                    <constraint firstItem="5Vo-GR-ciV" firstAttribute="top" secondItem="6Sq-eo-OrE" secondAttribute="bottom" constant="25" id="aHZ-El-ic3"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Un1-3v-2Ob" secondAttribute="trailing" constant="25" id="cNH-Oc-VWW"/>
+                                                    <constraint firstItem="C7C-8i-CTb" firstAttribute="centerX" secondItem="1CW-ZP-sqf" secondAttribute="centerX" id="e4C-IO-aYb"/>
+                                                    <constraint firstItem="6Sq-eo-OrE" firstAttribute="leading" secondItem="1CW-ZP-sqf" secondAttribute="leading" constant="40" id="vHT-G3-WYz"/>
+                                                    <constraint firstItem="Un1-3v-2Ob" firstAttribute="top" secondItem="5Vo-GR-ciV" secondAttribute="bottom" constant="15" id="ven-p9-ZsT"/>
+                                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Un1-3v-2Ob" secondAttribute="bottom" constant="20" id="yLO-r9-xwd"/>
+                                                    <constraint firstAttribute="trailing" secondItem="5Vo-GR-ciV" secondAttribute="trailing" constant="25" id="yir-wz-zBT"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="uEe-na-x7K" secondAttribute="bottom" id="IEH-W7-4oC"/>
-                                            <constraint firstItem="1CW-ZP-sqf" firstAttribute="centerX" secondItem="yDn-f2-pRd" secondAttribute="centerX" id="Juc-DH-i6T"/>
                                             <constraint firstItem="1CW-ZP-sqf" firstAttribute="top" secondItem="yDn-f2-pRd" secondAttribute="top" constant="147.5" id="S8N-A7-eRO"/>
-                                            <constraint firstItem="1CW-ZP-sqf" firstAttribute="centerY" secondItem="yDn-f2-pRd" secondAttribute="centerY" id="dKC-Yt-XPU"/>
-                                            <constraint firstItem="uEe-na-x7K" firstAttribute="top" secondItem="yDn-f2-pRd" secondAttribute="top" id="e9R-Ix-MJz"/>
-                                            <constraint firstAttribute="trailing" secondItem="uEe-na-x7K" secondAttribute="trailing" id="eQC-8V-0ZN"/>
+                                            <constraint firstAttribute="bottom" secondItem="1CW-ZP-sqf" secondAttribute="bottom" id="Tp8-Bv-eNj"/>
+                                            <constraint firstItem="1CW-ZP-sqf" firstAttribute="leading" secondItem="yDn-f2-pRd" secondAttribute="leading" id="asH-N4-4d1"/>
                                             <constraint firstItem="1CW-ZP-sqf" firstAttribute="centerY" secondItem="yDn-f2-pRd" secondAttribute="centerY" id="iUg-9l-uNK"/>
-                                            <constraint firstItem="uEe-na-x7K" firstAttribute="leading" secondItem="yDn-f2-pRd" secondAttribute="leading" id="xvD-Dr-5SD"/>
+                                            <constraint firstAttribute="trailing" secondItem="1CW-ZP-sqf" secondAttribute="trailing" id="p47-wb-nlk"/>
+                                            <constraint firstItem="1CW-ZP-sqf" firstAttribute="top" secondItem="yDn-f2-pRd" secondAttribute="top" id="xsS-u9-UmL"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -137,23 +126,19 @@ You will not be charged during this process.</string>
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="K20-v4-u5F">
-                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="1vy-qm-KfK"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="N0Y-dd-SGm"/>
-                    </navigationItem>
                     <connections>
-                        <outlet property="buttonDismiss" destination="uEe-na-x7K" id="Wz0-5O-P8r"/>
                         <outlet property="buttonRestorePurchase" destination="Un1-3v-2Ob" id="VA0-fZ-KyS"/>
                         <outlet property="labelDescription" destination="6Sq-eo-OrE" id="Ofw-Fg-FCH"/>
                         <outlet property="labelTitle" destination="C7C-8i-CTb" id="WTX-ZD-y2n"/>
                         <outlet property="scrollView" destination="rId-M8-qSh" id="H21-4l-pwC"/>
                         <outlet property="textEmail" destination="5Vo-GR-ciV" id="NNG-TR-vtL"/>
                         <outlet property="viewModal" destination="1CW-ZP-sqf" id="knW-G6-eA2"/>
+                        <segue destination="9jt-8I-K8i" kind="presentation" identifier="SignupViaRestoreSegue" id="Vqa-Fa-HWk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5s0-3w-xw2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="846" y="-2596"/>
+            <point key="canvasLocation" x="354" y="-2622"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YDM-pU-cja">
@@ -437,7 +422,6 @@ You will not be charged during this process.</string>
                         <outlet property="scrollView" destination="RgS-fn-CJH" id="gQR-aC-e9f"/>
                         <outlet property="textPassword" destination="Wtm-HW-6FS" id="bvM-nY-mSr"/>
                         <outlet property="textUsername" destination="Gcb-kt-Yu7" id="5rD-If-yIW"/>
-                        <segue destination="9jt-8I-K8i" kind="presentation" identifier="SignupViaRestoreSegue" id="EEe-nI-dHO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MPJ-r6-Xjn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -883,6 +867,9 @@ You will not be charged during this process.</string>
                                     <constraint firstAttribute="height" constant="20" id="8C6-6B-4dA"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="Y1W-Um-2lp" kind="show" identifier="RestorePurchaseSegue" id="Od1-de-d57"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1175,6 +1162,6 @@ You will not be charged during this process.</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="L3M-2E-gAx"/>
-        <segue reference="EEe-nI-dHO"/>
+        <segue reference="Vqa-Fa-HWk"/>
     </inferredMetricsTieBreakers>
 </document>

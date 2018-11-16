@@ -11,7 +11,7 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-class RestoreSignupViewController: AutolayoutViewController {
+public class RestoreSignupViewController: AutolayoutViewController, BrandableNavigationBar {
     @IBOutlet private weak var scrollView: UIScrollView!
     
     @IBOutlet private weak var viewModal: UIView!
@@ -22,28 +22,32 @@ class RestoreSignupViewController: AutolayoutViewController {
     
     @IBOutlet private weak var textEmail: BorderedTextField!
     
-    @IBOutlet private weak var buttonRestorePurchase: ActivityButton!
-
-    @IBOutlet private weak var buttonDismiss: UIButton!
+    @IBOutlet private weak var buttonRestorePurchase: PIAButton!
 
     var preset: Preset?
 
-    weak var delegate: RestoreSignupViewControllerDelegate?
-
     private var signupEmail: String?
+    private var isRunningActivity = false
 
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
+
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: Theme.current.palette.navigationBarBackIcon?.withRenderingMode(.alwaysOriginal),
+            style: .plain,
+            target: self,
+            action: #selector(back(_:))
+        )
+        self.navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Welcome.Redeem.Accessibility.back
 
         labelTitle.text = L10n.Welcome.Restore.title
         labelDescription.text = L10n.Welcome.Restore.subtitle
         textEmail.placeholder = L10n.Welcome.Restore.Email.placeholder
-        buttonRestorePurchase.title = L10n.Welcome.Restore.submit
-        buttonDismiss.accessibilityLabel = L10n.Ui.Global.cancel
 
         textEmail.text = preset?.purchaseEmail
 
@@ -52,33 +56,60 @@ class RestoreSignupViewController: AutolayoutViewController {
             scrollView.isScrollEnabled = false
         }
         
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: .UIKeyboardDidShow, object: nil)
-        nc.addObserver(self, selector: #selector(keyboardDidHide(notification:)), name: .UIKeyboardDidHide, object: nil)
+        styleRestoreButton()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         enableInteractions(true)
     }
     
-    // MARK: Actions
+    override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // signup after receipt restore
+        if (segue.identifier == StoryboardSegue.Welcome.signupViaRestoreSegue.rawValue) {
+            let nav = segue.destination as! UINavigationController
+            let vc = nav.topViewController as! SignupInProgressViewController
+            
+            guard let email = signupEmail else {
+                fatalError("Signing up and signupEmail is not set")
+            }
+            var metadata = SignupMetadata(email: email)
+            metadata.title = L10n.Signup.InProgress.title
+            metadata.bodySubtitle = L10n.Signup.InProgress.message
+            vc.metadata = metadata
+            vc.preset = preset
+            vc.signupRequest = SignupRequest(email: email)
+            
+        }
+    }
     
+    // MARK: Actions
+    @objc private func back(_ sender: Any?) {
+        self.navigationController?.popViewController(animated: true)
+    }
+
     @IBAction private func restorePurchase(_ sender: Any?) {
-        guard !buttonRestorePurchase.isRunningActivity else {
+        guard !isRunningActivity else {
             return
         }
     
-        guard let email = textEmail.text, Validator.validate(email: email) else {
+        guard let email = textEmail.text, Validator.validate(email: email.trimmed()) else {
             signupEmail = nil
             textEmail.becomeFirstResponder()
+            Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                    message: L10n.Welcome.Purchase.Error.validation)
+            self.status = .error(element: textEmail)
             return
         }
-        signupEmail = email
+        
+        self.status = .restore(element: textEmail)
+        signupEmail = email.trimmed()
     
         enableInteractions(false)
+        isRunningActivity = true
         preset?.accountProvider.restorePurchases { (error) in
+            self.isRunningActivity = false
             if let _ = error {
                 self.reportRestoreFailure(error)
                 self.enableInteractions(true)
@@ -94,7 +125,8 @@ class RestoreSignupViewController: AutolayoutViewController {
         guard let email = signupEmail else {
             fatalError("Restore receipt and signupEmail is not set")
         }
-        delegate?.restoreController(self, didRefreshReceiptWith: email)
+        self.restoreController(self,
+                               didRefreshReceiptWith: email)
     }
     
     private func reportRestoreFailure(_ optionalError: Error?) {
@@ -104,56 +136,44 @@ class RestoreSignupViewController: AutolayoutViewController {
             log.error("Failed to restore payment receipt")
         }
         
-        let alert = Macros.alert(
-            L10n.Welcome.Iap.Error.title,
-            optionalError?.localizedDescription ?? ""
-        )
-        alert.addCancelAction(L10n.Ui.Global.close)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    @IBAction private func dismiss(_ sender: Any?) {
-        view.endEditing(false)
-        delegate?.restoreControllerDidDismiss(self)
+        Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                message: optionalError?.localizedDescription ?? L10n.Welcome.Iap.Error.title)
+
     }
 
     private func enableInteractions(_ enable: Bool) {
         textEmail.isEnabled = enable
-        if enable {
-            buttonRestorePurchase.stopActivity()
-        } else {
-            buttonRestorePurchase.startActivity()
-        }
-    }
-    
-    // MARK: Notifications
-    
-    @objc private func keyboardDidShow(notification: Notification) {
-        buttonDismiss.isUserInteractionEnabled = false
-    }
-    
-    @objc private func keyboardDidHide(notification: Notification) {
-        buttonDismiss.isUserInteractionEnabled = true
     }
     
     // MARK: Restylable
 
-    override func viewShouldRestyle() {
+    override public func viewShouldRestyle() {
         super.viewShouldRestyle()
-
-        Theme.current.applyOverlay(view)
-        Theme.current.applySolidLightBackground(viewModal)
-        Theme.current.applyCorner(viewModal)
-
+        navigationItem.titleView = NavigationLogoView()
+        Theme.current.applyNavigationBarStyle(to: self)
+        Theme.current.applyLightBackground(view)
+        Theme.current.applyLightBackground(viewModal)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applySubtitle(labelDescription)
         Theme.current.applyInput(textEmail)
-        Theme.current.applyActionButton(buttonRestorePurchase)
     }
+    
+    private func styleRestoreButton() {
+        buttonRestorePurchase.setRounded()
+        buttonRestorePurchase.style(style: TextStyle.Buttons.piaGreenButton)
+        buttonRestorePurchase.setTitle(L10n.Welcome.Restore.submit.uppercased(),
+                              for: [])
+    }
+
+    private func restoreController(_ restoreController: RestoreSignupViewController, didRefreshReceiptWith email: String) {
+        self.signupEmail = email
+        self.perform(segue: StoryboardSegue.Welcome.signupViaRestoreSegue)
+    }
+    
 }
 
 extension RestoreSignupViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if (textField == textEmail) {
             restorePurchase(nil)
         }
@@ -161,8 +181,3 @@ extension RestoreSignupViewController: UITextFieldDelegate {
     }
 }
 
-protocol RestoreSignupViewControllerDelegate: class {
-    func restoreController(_ restoreController: RestoreSignupViewController, didRefreshReceiptWith email: String)
-
-    func restoreControllerDidDismiss(_ restoreController: RestoreSignupViewController)
-}

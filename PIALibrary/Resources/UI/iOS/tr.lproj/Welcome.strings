@@ -44,5 +44,5 @@
 "redeem.title" = "Hediye kartını kullan";
 "restore.email.placeholder" = "E-posta adresi";
 "restore.submit" = "ONAYLA";
-"restore.subtitle" = "Bu uygulamadan bir plan satın aldıktan sonra hesap bilgilerinizi alamadıysanız, onları buradan tekrar gönderebilirsiniz.\nBu işlem için sizden ücret alınmayacak.";
+"restore.subtitle" = "Bu uygulamadan bir plan satın aldıktan sonra hesap bilgilerinizi alamadıysanız, onları buradan tekrar gönderebilirsiniz. Bu işlem için sizden ücret alınmayacak.";
 "restore.title" = "Bilgileri gönderilmeyen satın alma işlemini tekrarlayın";

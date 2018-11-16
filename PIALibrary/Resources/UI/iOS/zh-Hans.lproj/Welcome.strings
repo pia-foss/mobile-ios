@@ -44,5 +44,5 @@
 "redeem.title" = "兑换礼品卡";
 "restore.email.placeholder" = "电子邮件地址";
 "restore.submit" = "确认";
-"restore.subtitle" = "如果您通过此 app 购买了套餐，但没有收到凭据，可以从这里重新发送。\n在此过程中您不会被收费。";
+"restore.subtitle" = "如果您通过此 app 购买了套餐，但没有收到凭据，可以从这里重新发送。 在此过程中您不会被收费。";
 "restore.title" = "恢复未入账的购买";
