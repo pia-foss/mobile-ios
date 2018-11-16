@@ -58,6 +58,7 @@ private struct LightThemeStrategy: ThemeStrategy {
              is SignupFailureViewController,
              is SignupSuccessViewController,
              is SignupUnreachableViewController,
+             is RestoreSignupViewController,
              is ConfirmVPNPlanViewController:
             return .default
         default:
