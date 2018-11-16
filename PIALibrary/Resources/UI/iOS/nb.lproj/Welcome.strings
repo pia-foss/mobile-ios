@@ -44,5 +44,5 @@
 "redeem.title" = "Løs inn gavekort";
 "restore.email.placeholder" = "E-postadresse";
 "restore.submit" = "BEKREFT";
-"restore.subtitle" = "Hvis du kjøpte en plan via appen og ikke har mottatt opplysningene dine, kan du sende dem igjen her i fra.\nDu belastes ikke under denne prosessen.";
+"restore.subtitle" = "Hvis du kjøpte en plan via appen og ikke har mottatt opplysningene dine, kan du sende dem igjen her i fra. Du belastes ikke under denne prosessen.";
 "restore.title" = "Gjenopprett ukreditert kjøp";

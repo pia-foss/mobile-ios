@@ -44,5 +44,5 @@
 "redeem.title" = "기프트 카드 청구";
 "restore.email.placeholder" = "이메일 주소";
 "restore.submit" = "확인";
-"restore.subtitle" = "이 앱을 통해 요금 플랜을 구매하셨는데 자격 증명 정보를 받지 못하신 경우 이곳에서 다시 보내실 수 있습니다.\n이 과정 중 요금이 부과되지 않습니다.";
+"restore.subtitle" = "이 앱을 통해 요금 플랜을 구매하셨는데 자격 증명 정보를 받지 못하신 경우 이곳에서 다시 보내실 수 있습니다. 이 과정 중 요금이 부과되지 않습니다.";
 "restore.title" = "인정되지 않은 구매 항목 복원";

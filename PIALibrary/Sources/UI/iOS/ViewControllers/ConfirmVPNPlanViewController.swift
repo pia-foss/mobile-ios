@@ -193,5 +193,4 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
                                for: [])
     }
 
-
 }

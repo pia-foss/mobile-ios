@@ -39,14 +39,6 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
 
     @IBOutlet private weak var buttonRedeem: PIAButton!
     
-    @IBOutlet private weak var viewFooter: UIView!
-    
-    @IBOutlet private weak var viewLogin: UIView!
-    
-    @IBOutlet private weak var labelLogin1: UILabel!
-    
-    @IBOutlet private weak var labelLogin2: UILabel!
-    
     @IBOutlet private weak var cameraButton: PIAButton!
 
     var preset: Preset?
@@ -73,8 +65,6 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
             fatalError("Preset not propagated")
         }
         
-        viewFooter.isHidden = omitsSiblingLink
-        
         labelTitle.text = L10n.Welcome.Redeem.title
         labelSubtitle.text = L10n.Welcome.Redeem.subtitle(RedeemViewController.codeLength)
         textEmail.placeholder = L10n.Welcome.Redeem.Email.placeholder
@@ -88,10 +78,6 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         )
         buttonRedeem.setTitle(L10n.Welcome.Redeem.title,
                               for: [])
-        labelLogin1.text = L10n.Welcome.Purchase.Login.footer
-        labelLogin2.text = L10n.Welcome.Purchase.Login.button
-        
-        viewLogin.accessibilityLabel = "\(labelLogin1.text!) \(labelLogin2.text!)"
         textEmail.text = preset.redeemEmail
         if let code = preset.redeemCode {
             redeemCode = GiftCardUtil.strippedRedeemCode(code) // will set textCode automatically
@@ -166,13 +152,6 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         redeemEmail = email
 //        redeemCode = code
         perform(segue: StoryboardSegue.Welcome.signupViaRedeemSegue)
-    }
-    
-    @IBAction private func logIn(_ sender: Any?) {
-        guard let pageController = parent as? WelcomePageViewController else {
-            fatalError("Not running in WelcomePageViewController")
-        }
-        pageController.show(page: .login)
     }
     
     @IBAction private func showCameraToScanQRCodes(_ sender: Any?) {
@@ -270,8 +249,6 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
         Theme.current.applyInput(textEmail)
         Theme.current.applyInput(textCode)
         Theme.current.applyLinkAttributes(textAgreement)
-        Theme.current.applyBody1(labelLogin1, appearance: .dark)
-        Theme.current.applyTextButton(labelLogin2)
     }
 }
 

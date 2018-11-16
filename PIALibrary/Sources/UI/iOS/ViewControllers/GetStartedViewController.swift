@@ -21,7 +21,9 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
     @IBOutlet private weak var buyButton: PIAButton!
     @IBOutlet private weak var redeemButton: UIButton!
     @IBOutlet private weak var couldNotGetPlanButton: UIButton!
-    
+
+    var preset = Preset()
+    private weak var delegate: PIAWelcomeViewControllerDelegate?
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -42,23 +44,42 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
     
     /**
      Creates a wrapped `GetStartedViewController` ready for presentation.
+     
+     - Parameter preset: The optional `Preset` to configure this controller with
+     - Parameter delegate: The `PIAWelcomeViewControllerDelegate` to handle raised events
      */
-    public static func create() -> UIViewController {
+    public static func with(preset: Preset? = nil, delegate: PIAWelcomeViewControllerDelegate? = nil) -> UIViewController {
         let nav = StoryboardScene.Welcome.initialScene.instantiate()
+        let vc = nav.topViewController as! GetStartedViewController
+        if let customPreset = preset {
+            vc.preset = customPreset
+        }
+        vc.delegate = delegate
         return nav
     }
+    
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let vc = segue.destination as? PIAWelcomeViewController else {
+            if segue.identifier == StoryboardSegue.Welcome.restorePurchaseSegue.rawValue {
+                if let vc = segue.destination as? RestoreSignupViewController {
+                    vc.preset = preset
+                }
+            }
             return
         }
         
+        vc.delegate = self.delegate
+        vc.preset = self.preset
+
         switch segue.identifier  {
         case StoryboardSegue.Welcome.redeemGiftCardSegue.rawValue:
-                vc.preset.pages = .redeem
+            vc.preset.pages = .redeem
         case StoryboardSegue.Welcome.purchaseVPNPlanSegue.rawValue:
-                vc.preset.pages = .purchase
+            vc.preset.pages = .purchase
+        case StoryboardSegue.Welcome.loginAccountSegue.rawValue:
+            vc.preset.pages = .login
         default:
             break
         }

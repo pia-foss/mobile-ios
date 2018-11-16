@@ -54,7 +54,7 @@
 "plan.accessibility.per_month" = "per month";
 
 "restore.title" = "Restore uncredited purchase";
-"restore.subtitle" = "If you purchased a plan through this app and didn't receive your credentials, you can send them again from here.\nYou will not be charged during this process.";
+"restore.subtitle" = "If you purchased a plan through this app and didn't receive your credentials, you can send them again from here. You will not be charged during this process.";
 "restore.email.placeholder" = "Email address";
 "restore.submit" = "CONFIRM";
 

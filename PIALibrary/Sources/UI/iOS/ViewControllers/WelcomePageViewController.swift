@@ -49,7 +49,7 @@ class WelcomePageViewController: UIPageViewController {
                 fatalError("Source element must be a WelcomeChild")
             }
             child.preset = preset
-            child.omitsSiblingLink = isSinglePage
+            child.omitsSiblingLink = !isSinglePage
             child.completionDelegate = completionDelegate
         }
         
