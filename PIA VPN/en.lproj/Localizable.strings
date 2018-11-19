@@ -5,6 +5,11 @@
 "global.close" = "Close";
 "global.error" = "Error";
 "global.automatic" = "Automatic";
+"global.required" = "Required";
+"global.optional" = "Optional";
+"global.clear" = "Clear";
+"global.update" = "Update";
+"global.edit" = "Edit";
 
 // NOTIFICATIONS
 
@@ -174,3 +179,16 @@
 "vpn_permission.disallow.message.basic" = "We need this permission for the application to function.";
 "vpn_permission.disallow.message.support" = "You can also get in touch with customer support if you need assistance.";
 "vpn_permission.disallow.contact" = "Contact";
+
+// CUSTOM DNS
+
+"settings.dns.custom" = "Custom";
+"settings.dns.alert.create.message" = "Using non PIA DNS could expose your DNS traffic to third parties and compromise your privacy.";
+"settings.dns.alert.clear.title" = "Clear DNS";
+"settings.dns.alert.clear.message" = "This will clear your custom DNS and default to PIA DNS.";
+"settings.dns.custom.dns" = "Custom DNS";
+"settings.dns.primaryDNS" = "Primary DNS";
+"settings.dns.secondaryDNS" = "Secondary DNS";
+"settings.dns.validation.primary.mandatory" = "Primary DNS is mandatory.";
+"settings.dns.validation.primary.invalid" = "Primary DNS is not valid.";
+"settings.dns.validation.secondary.invalid" = "Secondary DNS is not valid.";

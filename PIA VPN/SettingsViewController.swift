@@ -23,7 +23,62 @@ private extension String {
     }
 }
 
+enum Setting: Int {
+    case vpnProtocolSelection
+    
+    case vpnSocket
+    
+    case vpnPort
+    
+    case vpnDns
+    
+    case encryptionCipher
+    
+    case encryptionDigest
+    
+    case encryptionHandshake
+    
+    case automaticReconnection
+    
+    case contentBlockerState
+    
+    case contentBlockerRefreshRules
+    
+    case mace
+    
+    case darkTheme
+    
+    case sendDebugLog
+    
+    case resetSettings
+    
+    // development
+    
+    //        case truncateDebugLog
+    //
+    //        case recalculatePingTimes
+    //
+    //        case invokeMACERequest
+    
+    case resolveGoogleAdsDomain
+}
+
+protocol SettingsViewControllerDelegate: class {
+    
+    /**
+     Called to update the setting sent as parameter.
+     
+     - Parameter setting: The setting to update.
+     - Parameter value: Optional value to update the setting
+     */
+    func updateSetting(_ setting: Setting, withValue value: Any?)
+}
+
+
 class SettingsViewController: AutolayoutViewController {
+
+    fileprivate static let DNS: String = "DNS"
+
     fileprivate static let AUTOMATIC_SOCKET = "automatic"
 
     fileprivate static let AUTOMATIC_PORT: UInt16 = 0
@@ -44,44 +99,6 @@ class SettingsViewController: AutolayoutViewController {
         case development
     }
 
-    private enum Setting: Int {
-        case vpnProtocolSelection
-
-        case vpnSocket
-        
-        case vpnPort
-
-        case encryptionCipher
-
-        case encryptionDigest
-        
-        case encryptionHandshake
-        
-        case automaticReconnection
-
-        case contentBlockerState
-        
-        case contentBlockerRefreshRules
-
-        case mace
-        
-        case darkTheme
-
-        case sendDebugLog
-        
-        case resetSettings
-        
-        // development
-        
-//        case truncateDebugLog
-//
-//        case recalculatePingTimes
-//
-//        case invokeMACERequest
-        
-        case resolveGoogleAdsDomain
-    }
-    
     private static let allSections: [Section] = [
         .connection,
         .encryption,
@@ -97,7 +114,8 @@ class SettingsViewController: AutolayoutViewController {
         .connection: [
             .vpnProtocolSelection,
             .vpnSocket,
-            .vpnPort
+            .vpnPort,
+            .vpnDns
         ],
         .encryption: [
             .encryptionCipher,
@@ -186,6 +204,8 @@ class SettingsViewController: AutolayoutViewController {
         }
         pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
         pendingOpenVPNConfiguration = currentOpenVPNConfiguration.builder()
+        
+        validateDNSList()
 
         if #available(iOS 11, *) {
             tableView.sectionFooterHeight = UITableViewAutomaticDimension
@@ -203,7 +223,6 @@ class SettingsViewController: AutolayoutViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         refreshContentBlockerState()
     }
     
@@ -215,8 +234,24 @@ class SettingsViewController: AutolayoutViewController {
         }
     }
     
-    // MARK: Actions
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let customDNSSettingsVC = segue.destination as? CustomDNSSettingsViewController {
+            customDNSSettingsVC.delegate = self
+            let ips = DNSList.shared.valueForKey(DNSList.CUSTOM_DNS_KEY)
+            if ips.count > 0 {
+                customDNSSettingsVC.primaryDNSValue = ips.first
+                if ips.count > 1 {
+                    customDNSSettingsVC.secondaryDNSValue = ips.last
+                }
+            }
+        }
+    }
     
+    // MARK: Actions
+    @objc private func edit(_ sender: Any?) {
+        self.perform(segue: StoryboardSegue.Main.customDNSSegueIdentifier)
+    }
+
     @objc private func togglePersistentConnection(_ sender: UISwitch) {
         pendingPreferences.isPersistentConnection = sender.isOn
         redisplaySettings()
@@ -323,6 +358,7 @@ class SettingsViewController: AutolayoutViewController {
             fatalError("No default VPN custom configuration provided for PIA protocol")
         }
         AppPreferences.shared.reset()
+        DNSList.shared.resetPlist()
         pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
         pendingOpenVPNConfiguration = currentOpenVPNConfiguration.builder()
 
@@ -455,7 +491,7 @@ class SettingsViewController: AutolayoutViewController {
             }
             
             let alert = Macros.alert(nil, addresses.joined(separator: ","))
-            alert.addCancelAction("Close")
+            alert.addCancelAction(L10n.Global.close)
             self.present(alert, animated: true, completion: nil)
         }
     }
@@ -499,11 +535,12 @@ class SettingsViewController: AutolayoutViewController {
         visibleSections = sections
         
         if (pendingPreferences.vpnType == PIATunnelProfile.vpnType) {
-            rowsBySection[.connection] = [
-                .vpnProtocolSelection,
-                .vpnSocket,
-                .vpnPort
-            ]
+            
+            let dnsSettingsEnabled = Flags.shared.enablesDNSSettings
+            
+            rowsBySection[.connection] = dnsSettingsEnabled ?
+                [.vpnProtocolSelection, .vpnSocket, .vpnPort, .vpnDns] :
+                [.vpnProtocolSelection, .vpnSocket, .vpnPort]
         } else {
             rowsBySection[.connection] = [
                 .vpnProtocolSelection
@@ -537,6 +574,27 @@ class SettingsViewController: AutolayoutViewController {
         Theme.current.applyLightBackground(tableView)
         Theme.current.applyDividerToSeparator(tableView)
         tableView.reloadData()
+    }
+    
+    ///Check if the current value of the DNS is valid. If not, reset to default PIA server
+    private func validateDNSList() {
+        
+        if Flags.shared.enablesDNSSettings {
+            var isValid = false
+            for dns in DNSList.shared.dnsList {
+                for (_, value) in dns {
+                    if pendingOpenVPNConfiguration.dnsServers == value {
+                        isValid = true
+                        break
+                    }
+                }
+            }
+            
+            if !isValid {
+                pendingOpenVPNConfiguration.dnsServers = []
+            }
+        }
+        
     }
 }
 
@@ -629,6 +687,24 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 break
             }
             cell.detailTextLabel?.text = pendingOpenVPNConfiguration.currentPort?.description ?? L10n.Global.automatic
+
+        case .vpnDns:
+            cell.textLabel?.text = SettingsViewController.DNS
+            
+            let dnsValue = pendingOpenVPNConfiguration.dnsServers
+            for dns in DNSList.shared.dnsList {
+                for (key, value) in dns {
+                    if dnsValue == value {
+                        cell.detailTextLabel?.text = DNSList.shared.descriptionForKey(key)
+                        break
+                    }
+                }
+            }
+            
+            if !Flags.shared.enablesDNSSettings {
+                cell.accessoryType = .none
+                cell.selectionStyle = .none
+            }
 
         case .encryptionCipher:
             cell.textLabel?.text = L10n.Settings.Encryption.Cipher.title
@@ -762,6 +838,43 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             controller?.options = options
             controller?.selectedOption = pendingOpenVPNConfiguration.currentPort ?? SettingsViewController.AUTOMATIC_PORT
 
+        case .vpnDns:
+            guard Flags.shared.enablesDNSSettings else {
+                break
+            }
+            
+            controller = OptionsViewController()
+            if let dnsList = DNSList.shared.dnsList {
+                controller?.options = dnsList.compactMap {
+                    if let first = $0.first {
+                        return first.key
+                    }
+                    return nil
+                }
+            }
+            
+            if let options = controller?.options,
+                !options.contains(DNSList.CUSTOM_DNS_KEY) {
+                controller?.options.append(DNSList.CUSTOM_DNS_KEY)
+            } else {
+                for dns in DNSList.shared.dnsList {
+                    for (key, value) in dns {
+                        if key == DNSList.CUSTOM_DNS_KEY {
+                            if !value.isEmpty {
+                                controller?.navigationItem.rightBarButtonItem = UIBarButtonItem(
+                                    title: L10n.Global.edit,
+                                    style: .plain,
+                                    target: self,
+                                    action: #selector(edit(_:))
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+            
+            controller?.selectedOption = pendingOpenVPNConfiguration.dnsServers
+            
         case .encryptionCipher:
             guard Flags.shared.enablesEncryptionSettings else {
                 break
@@ -906,7 +1019,27 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             } else {
                 cell.textLabel?.text = L10n.Global.automatic
             }
-
+            
+        case .vpnDns:
+            if let option = option as? String {
+                cell.textLabel?.text = DNSList.shared.descriptionForKey(option)
+                if option == DNSList.CUSTOM_DNS_KEY {
+                    var isFound = false
+                    for dns in DNSList.shared.dnsList {
+                        for (key, value) in dns {
+                            if key == option {
+                                isFound = true
+                                if value.isEmpty {
+                                    cell.accessoryType = .disclosureIndicator
+                                }
+                            }
+                        }
+                    }
+                    if !isFound { //first time
+                        cell.accessoryType = .disclosureIndicator
+                    }
+                }
+            }
         case .encryptionCipher:
             let rawCipher = option as! String
             cell.textLabel?.text = PIATunnelProvider.Cipher(rawValue: rawCipher)?.description
@@ -925,6 +1058,19 @@ extension SettingsViewController: OptionsViewControllerDelegate {
         
         cell.accessoryView = (isSelected ? imvSelectedOption : nil)
 
+        if setting == .vpnDns,
+            let option = option as? String {
+            let dnsJoinedValue = pendingOpenVPNConfiguration.dnsServers.joined()
+            for dns in DNSList.shared.dnsList {
+                for (key, value) in dns {
+                    if key == option,
+                        dnsJoinedValue == value.joined() {
+                        cell.accessoryView = imvSelectedOption
+                    }
+                }
+            }
+        }
+        
         Theme.current.applySolidLightBackground(cell)
         Theme.current.applyDetailTableCell(cell)
     }
@@ -995,6 +1141,38 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             }
             pendingOpenVPNConfiguration.endpointProtocols = newProtocols
 
+        case .vpnDns:
+            if let option = option as? String {
+                var isFound = false
+                
+                for dns in DNSList.shared.dnsList {
+                    for (key, value) in dns {
+                        if key == option {
+                            isFound = true
+                            pendingOpenVPNConfiguration.dnsServers = value
+                            break
+                        }
+                    }
+                }
+                
+                if !isFound && option == DNSList.CUSTOM_DNS_KEY {
+                    let alertController = Macros.alert(L10n.Settings.Dns.Custom.dns,
+                                                       L10n.Settings.Dns.Alert.Create.message)
+                    let saveAction = UIAlertAction(title: L10n.Global.ok, style: UIAlertActionStyle.default, handler: { alert -> Void in
+                        self.perform(segue: StoryboardSegue.Main.customDNSSegueIdentifier)
+                    })
+                    let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: UIAlertActionStyle.default,
+                                                     handler: nil)
+                    
+                    alertController.addAction(saveAction)
+                    alertController.addAction(cancelAction)
+                    
+                    self.present(alertController,
+                                 animated: true,
+                                 completion: nil)
+                }
+                
+            }
         case .encryptionCipher:
             let rawCipher = option as! String
             pendingOpenVPNConfiguration.cipher = PIATunnelProvider.Cipher(rawValue: rawCipher)!
@@ -1011,11 +1189,16 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             break
         }
         
+        savePreferences()
+        navigationController?.popViewController(animated: true)
+
+    }
+    
+    private func savePreferences() {
         log.debug("OpenVPN endpoints: \(pendingOpenVPNConfiguration.endpointProtocols)")
         pendingPreferences.setVPNCustomConfiguration(pendingOpenVPNConfiguration.build(), for: pendingPreferences.vpnType)
-
+        
         redisplaySettings()
-        navigationController?.popViewController(animated: true)
         reportUpdatedPreferences()
     }
 }
@@ -1041,4 +1224,22 @@ private extension PIATunnelProvider.ConfigurationBuilder {
     func isEncryptionGCM() -> Bool {
         return (cipher == .aes128gcm) || (cipher == .aes256gcm)
     }
+}
+
+extension SettingsViewController: SettingsViewControllerDelegate {
+    
+    func updateSetting(_ setting: Setting, withValue value: Any?) {
+        switch setting {
+        case .vpnDns:
+            if let settingValue = value as? String {
+                pendingOpenVPNConfiguration.dnsServers = DNSList.shared.valueForKey(settingValue)
+            }
+        default:
+            break
+        }
+        
+        savePreferences()
+
+    }
+    
 }
