@@ -377,7 +377,7 @@ internal enum L10n {
           internal static let title = L10n.tr("Localizable", "settings.dns.alert.clear.title")
         }
         internal enum Create {
-          /// Be warned: Using a non-PIA DNS could compromise your privacy.
+          /// Using non PIA DNS could expose your DNS traffic to third parties and compromise your privacy.
           internal static let message = L10n.tr("Localizable", "settings.dns.alert.create.message")
         }
       }
@@ -387,13 +387,13 @@ internal enum L10n {
       }
       internal enum Validation {
         internal enum Primary {
-          /// Primary DNS is not valid
+          /// Primary DNS is not valid.
           internal static let invalid = L10n.tr("Localizable", "settings.dns.validation.primary.invalid")
-          /// Primary DNS is mandatory
+          /// Primary DNS is mandatory.
           internal static let mandatory = L10n.tr("Localizable", "settings.dns.validation.primary.mandatory")
         }
         internal enum Secondary {
-          /// Secondary DNS is not valid
+          /// Secondary DNS is not valid.
           internal static let invalid = L10n.tr("Localizable", "settings.dns.validation.secondary.invalid")
         }
       }
