@@ -10,6 +10,7 @@ import UIKit
 import PIALibrary
 import SideMenu
 import SwiftyBeaver
+import NetworkExtension
 
 private let log = SwiftyBeaver.self
 
@@ -32,6 +33,45 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         Bootstrapper.shared.bootstrap()
         application.shortcutItems = []
+        
+        //NEHotspotHelper tests
+        let options: [String: NSObject] = [kNEHotspotHelperOptionDisplayName : "Protect your connection with PIA" as NSObject]
+        let queue: DispatchQueue = DispatchQueue(label: "com.myapp.appname", attributes: DispatchQueue.Attributes.concurrent)
+        NEHotspotHelper.supportedNetworkInterfaces()
+        NEHotspotHelper.register(options: options,
+                                 queue: queue) { (cmd: NEHotspotHelperCommand) in
+                                    if !Client.providers.vpnProvider.isVPNConnected {
+                                        
+                                        if cmd.commandType == .filterScanList {
+                                            var unsecuredList: [NEHotspotNetwork] = []
+                                            for element in cmd.networkList! {
+                                                if !element.isSecure {
+                                                    unsecuredList.append(element)
+                                                }
+                                            }
+                                            let response = cmd.createResponse(NEHotspotHelperResult.success)
+                                            response.setNetworkList(unsecuredList)
+                                            response.deliver() //Respond back with the filtered list
+                                        } else if cmd.commandType == .evaluate {
+                                            if let network = cmd.network {
+                                                
+                                                //Connect the VPN
+                                                if !Client.providers.vpnProvider.isVPNConnected {
+                                                    // this time delay seems to fix a strange issue of the VPN connecting from a fresh launch
+                                                    Macros.dispatch(after: .milliseconds(200)) {
+                                                        Client.providers.vpnProvider.connect(nil)
+                                                    }
+                                                }
+                                                
+                                                let response = cmd.createResponse(NEHotspotHelperResult.success)
+                                                response.setNetwork(network)
+                                                response.deliver() //Respond back
+                                            }
+                                        }
+                                        
+                                    }
+        }
+        
         return true
     }
 
