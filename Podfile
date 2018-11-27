@@ -81,6 +81,7 @@ end
 target 'PIA VPN dev' do
     app_pods
     pod 'HockeySDK'
+    pod 'Firebase/Core'
 end
 
 target 'PIA VPN Tunnel' do
