@@ -13,6 +13,7 @@ import SwiftyBeaver
 import iRate
 #if PIA_DEV
 import HockeySDK
+import Firebase
 #endif
 
 class Bootstrapper {
@@ -127,6 +128,13 @@ class Bootstrapper {
         hockey.isMetricsManagerDisabled = true
         hockey.configure(withIdentifier: AppConstants.hockeyAppId)
         hockey.start()
+        
+        if let path = Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist"),
+            let plist = NSDictionary(contentsOf: path) as? [String: Any],
+            plist.count > 0 {
+            FirebaseApp.configure()
+        }
+
         #endif
 
         // Notifications
