@@ -95,28 +95,44 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         guard !isLoggedIn else {
             preconditionFailure()
         }
-        webServices.info(credentials: request.credentials) { (accountInfo, error) in
-            guard let accountInfo = accountInfo else {
+        
+        webServices.token(credentials: request.credentials) { (token, error) in
+            
+            guard let token = token else {
                 callback?(nil, error)
                 return
             }
-            self.accessedDatabase.plain.username = request.credentials.username
-            self.accessedDatabase.secure.setPassword(request.credentials.password, for: request.credentials.username)
-            self.accessedDatabase.plain.accountInfo = accountInfo
             
-            let user = UserAccount(credentials: request.credentials, info: accountInfo)
-            Macros.postNotification(.PIAAccountDidLogin, [
-                .user: user
-            ])
-            callback?(user, nil)
+            self.webServices.info(token: token) { (accountInfo, error) in
+                guard let accountInfo = accountInfo else {
+                    callback?(nil, error)
+                    return
+                }
+                
+                //Save after confirm the login was successful.
+                self.accessedDatabase.plain.username = request.credentials.username
+                self.accessedDatabase.secure.setPassword(request.credentials.password, for: request.credentials.username)
+                self.accessedDatabase.plain.accountInfo = accountInfo
+                //TODO: PLEASE SAVE THE TOKEN HERE
+
+                let user = UserAccount(credentials: request.credentials, info: accountInfo)
+                Macros.postNotification(.PIAAccountDidLogin, [
+                    .user: user
+                    ])
+                callback?(user, nil)
+            }
+
         }
+
     }
     
     func refreshAccountInfo(_ callback: ((AccountInfo?, Error?) -> Void)?) {
         guard let user = currentUser else {
             preconditionFailure()
         }
-        webServices.info(credentials: user.credentials) { (accountInfo, error) in
+        //TODO: PLEASE GET THE TOKEN HERE
+        
+        webServices.info(token: "TOKEN HERE") { (accountInfo, error) in
             guard let accountInfo = accountInfo else {
                 callback?(nil, error)
                 return
@@ -335,7 +351,8 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             }
             Macros.postNotification(.PIAAccountDidRenew)
 
-            self.webServices.info(credentials: user.credentials) { (accountInfo, error) in
+            //TODO: PLEASE GET THE TOKEN HERE
+            self.webServices.info(token: "TOKEN HERE") { (accountInfo, error) in
                 guard let newAccountInfo = accountInfo else {
                     callback?(nil, nil)
                     return

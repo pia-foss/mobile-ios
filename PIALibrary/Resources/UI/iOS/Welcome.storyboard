@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VHM-bG-giz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VHM-bG-giz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,7 +32,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1CW-ZP-sqf">
-                                                <rect key="frame" x="38" y="190.5" width="300" height="267.5"/>
+                                                <rect key="frame" x="37.5" y="190" width="300" height="267.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restore uncredited purchase" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C7C-8i-CTb">
                                                         <rect key="frame" x="20" y="30" width="260" height="19.5"/>
@@ -200,10 +199,10 @@ You will not be charged during this process.</string>
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="535"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XgW-nz-hik">
-                                                                <rect key="frame" x="48" y="173" width="280" height="189.5"/>
+                                                                <rect key="frame" x="47.5" y="173" width="280" height="189.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in to your account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rk-V0-kLQ">
-                                                                        <rect key="frame" x="55" y="0.0" width="171" height="19.5"/>
+                                                                        <rect key="frame" x="54.5" y="0.0" width="171" height="19.5"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -287,7 +286,7 @@ You will not be charged during this process.</string>
                                                         <rect key="frame" x="0.0" y="535" width="375" height="132"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FiL-D6-1cW">
-                                                                <rect key="frame" x="121.5" y="20" width="133.5" height="36"/>
+                                                                <rect key="frame" x="121" y="20" width="133.5" height="36"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Purchase1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bdo-R2-Gfw">
                                                                         <rect key="frame" x="0.0" y="10" width="62.5" height="16"/>
@@ -336,7 +335,7 @@ You will not be charged during this process.</string>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8IA-PE-u7o">
-                                                                <rect key="frame" x="129.5" y="56" width="118.5" height="36"/>
+                                                                <rect key="frame" x="128.5" y="56" width="118.5" height="36"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Redeem1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rgi-Ro-zAz">
                                                                         <rect key="frame" x="0.0" y="10" width="55" height="16"/>
@@ -385,7 +384,7 @@ You will not be charged during this process.</string>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t9b-Yk-g0k">
-                                                                <rect key="frame" x="116" y="92" width="144" height="30"/>
+                                                                <rect key="frame" x="115.5" y="92" width="144" height="30"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DGc-6c-QkZ">
                                                                         <rect key="frame" x="0.0" y="0.0" width="144" height="30"/>
@@ -538,7 +537,7 @@ You will not be charged during this process.</string>
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="591"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcT-bV-bFV">
-                                                                <rect key="frame" x="48" y="124.5" width="280" height="343"/>
+                                                                <rect key="frame" x="47.5" y="124.5" width="280" height="342.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a VPN plan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zza-Bd-w6I">
                                                                         <rect key="frame" x="74" y="0.0" width="132" height="19.5"/>
@@ -573,7 +572,7 @@ You will not be charged during this process.</string>
                                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sdu-Ni-C1K">
-                                                                                            <rect key="frame" x="0.0" y="10.5" width="153" height="103.5"/>
+                                                                                            <rect key="frame" x="0.0" y="10" width="153" height="104"/>
                                                                                             <subviews>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DjN-uQ-eeX">
                                                                                                     <rect key="frame" x="0.0" y="0.0" width="153" height="41.5"/>
@@ -583,10 +582,10 @@ You will not be charged during this process.</string>
                                                                                                             <color key="backgroundColor" red="0.16078431369999999" green="0.80000000000000004" blue="0.25490196079999999" alpha="0.87" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                         </view>
                                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f62-T1-JaM">
-                                                                                                            <rect key="frame" x="62" y="13" width="29" height="17"/>
+                                                                                                            <rect key="frame" x="62" y="12.5" width="29" height="17"/>
                                                                                                             <subviews>
                                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XeC-Pg-CTV">
-                                                                                                                    <rect key="frame" x="0.0" y="0.5" width="29" height="17"/>
+                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="29" height="17"/>
                                                                                                                     <accessibility key="accessibilityConfiguration">
                                                                                                                         <bool key="isElement" value="NO"/>
                                                                                                                     </accessibility>
@@ -623,10 +622,10 @@ You will not be charged during this process.</string>
                                                                                                     </constraints>
                                                                                                 </view>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XfN-hn-Iqq">
-                                                                                                    <rect key="frame" x="0.0" y="41.5" width="153" height="62"/>
+                                                                                                    <rect key="frame" x="0.0" y="41.5" width="153" height="62.5"/>
                                                                                                     <subviews>
                                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUM-Zm-DjE">
-                                                                                                            <rect key="frame" x="33.5" y="14" width="86.5" height="34"/>
+                                                                                                            <rect key="frame" x="33.5" y="14.5" width="86.5" height="34"/>
                                                                                                             <subviews>
                                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="$6.95/month" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="tgo-rF-jkg">
                                                                                                                     <rect key="frame" x="0.0" y="0.0" width="86.5" height="17"/>
@@ -676,7 +675,7 @@ You will not be charged during this process.</string>
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bxw-il-ANA">
-                                                                                            <rect key="frame" x="48" y="3.5" width="57" height="16"/>
+                                                                                            <rect key="frame" x="48" y="3" width="57" height="16"/>
                                                                                             <subviews>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUq-uE-VTM">
                                                                                                     <rect key="frame" x="3" y="2" width="50" height="12"/>
@@ -813,7 +812,7 @@ You will not be charged during this process.</string>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srZ-0g-tzk">
-                                                                        <rect key="frame" x="0.0" y="-0.5" width="206.5" height="36"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="206.5" height="36"/>
                                                                         <accessibility key="accessibilityConfiguration">
                                                                             <bool key="isElement" value="NO"/>
                                                                         </accessibility>
@@ -949,7 +948,7 @@ You will not be charged during this process.</string>
                                 <rect key="frame" x="0.0" y="20" width="375" height="150"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav-logo" translatesAutoresizingMaskIntoConstraints="NO" id="5GV-Aq-hbm">
-                                        <rect key="frame" x="56.5" y="62.5" width="262.5" height="36"/>
+                                        <rect key="frame" x="56.5" y="62" width="262.5" height="36"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.2.3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUP-Jr-Wry">
                                         <rect key="frame" x="157" y="133" width="61.5" height="12"/>
@@ -1106,7 +1105,7 @@ You will not be charged during this process.</string>
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="587"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TnM-Pl-njO">
-                                                                <rect key="frame" x="48" y="168.5" width="280" height="250"/>
+                                                                <rect key="frame" x="47.5" y="168.5" width="280" height="250"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Redeem" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEC-Qu-zkj">
                                                                         <rect key="frame" x="109.5" y="0.0" width="61" height="20"/>
@@ -1229,7 +1228,7 @@ You will not be charged during this process.</string>
                                                         <rect key="frame" x="0.0" y="587" width="375" height="80"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KcR-KY-dYx">
-                                                                <rect key="frame" x="86" y="20" width="204.5" height="40"/>
+                                                                <rect key="frame" x="85.5" y="20" width="204.5" height="40"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Don’t have an account?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ovb-tk-w2q">
                                                                         <rect key="frame" x="0.0" y="10" width="142.5" height="20"/>

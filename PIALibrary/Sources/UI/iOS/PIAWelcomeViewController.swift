@@ -337,15 +337,24 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
     }
     
     func login(with request: LoginRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        webServices?.info(credentials: request.credentials) { (info, error) in
-            guard let info = info else {
+        
+        webServices?.token(credentials: request.credentials) { (token, error) in
+            guard let token = token else {
                 callback?(nil, error)
                 return
             }
-            let user = UserAccount(credentials: request.credentials, info: info)
-            self.currentUser = user
-            self.isLoggedIn = true
-            callback?(user, nil)
+            
+            self.webServices?.info(token: token) { (info, error) in
+                guard let info = info else {
+                    callback?(nil, error)
+                    return
+                }
+                let user = UserAccount(credentials: request.credentials, info: info)
+                self.currentUser = user
+                self.isLoggedIn = true
+                callback?(user, nil)
+            }
+
         }
     }
     
