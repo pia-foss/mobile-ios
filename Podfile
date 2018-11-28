@@ -82,6 +82,8 @@ target 'PIA VPN dev' do
     app_pods
     pod 'HockeySDK'
     pod 'Firebase/Core'
+    pod 'Crashlytics'
+    pod 'Fabric'
 end
 
 target 'PIA VPN Tunnel' do

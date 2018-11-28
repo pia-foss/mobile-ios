@@ -2,6 +2,9 @@ PODS:
   - Alamofire (4.7.3)
   - AlamofireImage (3.4.1):
     - Alamofire (~> 4.7)
+  - Crashlytics (3.11.1):
+    - Fabric (~> 1.8.1)
+  - Fabric (1.8.1)
   - Firebase/Core (5.11.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.3.0)
@@ -94,6 +97,8 @@ PODS:
 
 DEPENDENCIES:
   - AlamofireImage
+  - Crashlytics
+  - Fabric
   - Firebase/Core
   - FXPageControl
   - HockeySDK
@@ -111,6 +116,8 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireImage
+    - Crashlytics
+    - Fabric
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -148,6 +155,8 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
+  Crashlytics: ca7ab4bc304aa216bdc2e4c1a96389ee77252203
+  Fabric: 43ed7bac010f588f63ee23ab1a0276b296db5e17
   Firebase: b48f9e653da971ecce5b8c749684bc8bb2d26bd3
   FirebaseAnalytics: 63202d2665de4e6adcbdce189135255d8b5962ba
   FirebaseCore: d16552f06821489ce1affe2e5e3e5593402ddfe3
@@ -168,6 +177,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 60dfe5807eaac0a6579a7163a4d8f02c8367e4f0
+PODFILE CHECKSUM: bc2af549c2ee95a3aaa8fcc6c01434ce797a5a60
 
 COCOAPODS: 1.5.3
