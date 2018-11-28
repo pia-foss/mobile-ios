@@ -326,6 +326,8 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
     
     var isLoggedIn = false
     
+    var token: String?
+
     var currentUser: UserAccount?
     
     var currentPasswordReference: Data? {

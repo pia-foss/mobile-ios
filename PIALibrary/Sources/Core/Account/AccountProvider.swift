@@ -22,6 +22,9 @@ public protocol AccountProvider: class {
     /// The user account currently logged in, or `nil` if logged out.
     var currentUser: UserAccount? { get set }
 
+    /// The current auth token, or 'nil' if logged out.
+    var token: String? { get }
+
     /// The password reference object associated with the currentUser, or `nil` if logged out.
     var currentPasswordReference: Data? { get }
 

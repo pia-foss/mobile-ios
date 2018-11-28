@@ -53,7 +53,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             429: .throttled
         ]
         
-        req(nil, .get, endpoint, nil, status, JSONRequestExecutor() { (json, status, error) in
+        req(nil, .get, endpoint, useAuthToken: true, nil, status, JSONRequestExecutor() { (json, status, error) in
             if let knownError = self.knownError(endpoint, status, errors) {
                 callback?(nil, knownError)
                 return
@@ -239,11 +239,11 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             headers[authHeader.key] = authHeader.value
         }
         
-        if useToken {
-            //TODO: PLEASE GET TOKEN HERE
-            headers["Authorization"] = "Token PLEASE THE TOKEN HERE"
+        if useToken,
+            let token = Client.providers.accountProvider.token {
+            headers["Authorization"] = "Token \(token)"
         }
-        
+
         if let parameters = parameters {
             log.debug("Request: \(method) \"\(url)\", parameters: \(parameters), headers: \(headers)")
         } else {

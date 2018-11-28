@@ -10,6 +10,7 @@ import Foundation
 
 /// Simulates account-related operations
 public class MockAccountProvider: AccountProvider, WebServicesConsumer {
+    
 
     /// Mocks the outcome of a sign-up operation.
     ///
@@ -111,6 +112,10 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
         return delegate.isLoggedIn
     }
     
+    public var token: String? {
+        return "TOKEN"
+    }
+
     /// :nodoc:
     public var currentUser: UserAccount? {
         get {

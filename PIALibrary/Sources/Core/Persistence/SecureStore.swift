@@ -19,5 +19,13 @@ protocol SecureStore: class {
 
     func passwordReference(for username: String) -> Data?
 
+    func token(for username: String) -> String?
+    
+    func setToken(_ token: String?, for username: String)
+    
+    func tokenReference(for username: String) -> Data?
+    
+    func tokenKey(for username: String) -> String
+
     func clear(for username: String)
 }

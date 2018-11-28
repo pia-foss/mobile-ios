@@ -75,6 +75,14 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
     }
     
+    var token: String? {
+        guard let username = accessedDatabase.plain.username else {
+            return nil
+        }
+        return accessedDatabase.secure.token(for: accessedDatabase.secure.tokenKey(for: username))
+    }
+
+    
     var currentPasswordReference: Data? {
         guard let username = accessedDatabase.plain.username else {
             return nil
@@ -103,6 +111,10 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 return
             }
             
+            self.accessedDatabase.plain.username = request.credentials.username
+            self.accessedDatabase.secure.setToken(request.credentials.password,
+                                                  for: self.accessedDatabase.secure.tokenKey(for: request.credentials.username))
+
             self.webServices.info(token: token) { (accountInfo, error) in
                 guard let accountInfo = accountInfo else {
                     callback?(nil, error)
@@ -110,10 +122,9 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 }
                 
                 //Save after confirm the login was successful.
-                self.accessedDatabase.plain.username = request.credentials.username
-                self.accessedDatabase.secure.setPassword(request.credentials.password, for: request.credentials.username)
+                self.accessedDatabase.secure.setPassword(request.credentials.password,
+                                                         for: request.credentials.username)
                 self.accessedDatabase.plain.accountInfo = accountInfo
-                //TODO: PLEASE SAVE THE TOKEN HERE
 
                 let user = UserAccount(credentials: request.credentials, info: accountInfo)
                 Macros.postNotification(.PIAAccountDidLogin, [
