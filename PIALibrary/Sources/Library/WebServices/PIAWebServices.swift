@@ -233,7 +233,6 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         _ executor: RequestExecutor) {
         
         var headers = SessionManager.defaultHTTPHeaders
-        //TODO: HERE ADD THE TOKEN
 //        headers["X-Device"] = "ios-\(Constants.iosVersion)/\(Constants.appVersion)/\(Constants.language)/\(Constants.region)"
         if let credentials = credentials, let authHeader = Request.authorizationHeader(user: credentials.username, password: credentials.password) {
             headers[authHeader.key] = authHeader.value
