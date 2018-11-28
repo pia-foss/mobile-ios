@@ -110,10 +110,16 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 callback?(nil, error)
                 return
             }
-            
-            self.accessedDatabase.plain.username = request.credentials.username
-            self.accessedDatabase.secure.setToken(token,
-                                                  for: self.accessedDatabase.secure.tokenKey(for: request.credentials.username))
+
+            let tokenComponents = token.split(by: token.count/2)
+            if let first = tokenComponents.first,
+                let last = tokenComponents.last {
+                self.accessedDatabase.plain.username = first
+                self.accessedDatabase.secure.setToken(token,
+                                                      for: self.accessedDatabase.secure.tokenKey(for: first))
+                self.accessedDatabase.secure.setPassword(last,
+                                                         for: first)
+            }
 
             self.webServices.info(token: token) { (accountInfo, error) in
                 guard let accountInfo = accountInfo else {
@@ -122,8 +128,6 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 }
                 
                 //Save after confirm the login was successful.
-                self.accessedDatabase.secure.setPassword(request.credentials.password,
-                                                         for: request.credentials.username)
                 self.accessedDatabase.plain.accountInfo = accountInfo
 
                 let user = UserAccount(credentials: request.credentials, info: accountInfo)
@@ -292,14 +296,34 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 callback?(nil, error)
                 return
             }
-            self.accessedDatabase.plain.username = credentials.username
-            self.accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
             
-            let user = UserAccount(credentials: credentials, info: nil)
-            Macros.postNotification(.PIAAccountDidSignup, [
-                .user: user
-                ])
-            callback?(user, nil)
+            self.webServices.token(credentials: credentials) { (token, error) in
+                
+                guard let token = token else {
+                    callback?(nil, error)
+                    return
+                }
+                
+                let tokenComponents = token.split(by: token.count/2)
+                if let first = tokenComponents.first,
+                    let last = tokenComponents.last {
+                    self.accessedDatabase.plain.username = first
+                    self.accessedDatabase.secure.setToken(token,
+                                                          for: self.accessedDatabase.secure.tokenKey(for: first))
+                    self.accessedDatabase.secure.setPassword(last,
+                                                             for: first)
+
+                }
+                
+                let user = UserAccount(credentials: credentials, info: nil)
+                Macros.postNotification(.PIAAccountDidSignup, [
+                    .user: user
+                    ])
+                callback?(user, nil)
+
+                
+            }
+
         }
     }
     
