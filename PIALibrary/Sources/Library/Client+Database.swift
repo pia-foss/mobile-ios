@@ -57,7 +57,7 @@ extension Client {
          - Returns: `self`
          */
         @discardableResult public func truncate() -> Self {
-            if let username = plain.username {
+            if let username = plain.publicUsername {
                 secure.clear(for: username)
             }
             plain.clear()

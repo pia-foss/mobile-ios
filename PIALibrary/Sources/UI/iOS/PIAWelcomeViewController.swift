@@ -330,6 +330,8 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
 
     var currentUser: UserAccount?
     
+    var publicUsername: String?
+
     var currentPasswordReference: Data? {
         return nil
     }

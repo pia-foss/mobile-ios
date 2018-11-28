@@ -41,15 +41,22 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
     #endif
     
     var isLoggedIn: Bool {
-        guard let username = accessedDatabase.plain.username else {
+        guard let username = accessedDatabase.secure.username() else {
             return false
         }
         return (accessedDatabase.secure.password(for: username) != nil)
     }
     
+    var publicUsername: String? {
+        guard let username = accessedDatabase.plain.publicUsername else {
+            return nil
+        }
+        return username
+    }
+    
     var currentUser: UserAccount? {
         get {
-            guard let username = accessedDatabase.plain.username else {
+            guard let username = accessedDatabase.secure.username() else {
                 return nil
             }
             guard let password = accessedDatabase.secure.password(for: username) else {
@@ -62,21 +69,22 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
         set {
             if let user = newValue {
-                accessedDatabase.plain.username = user.credentials.username
+                accessedDatabase.plain.publicUsername = user.credentials.username
                 accessedDatabase.secure.setPassword(user.credentials.password, for: user.credentials.username)
                 accessedDatabase.plain.accountInfo = user.info
             } else {
-                if let username = accessedDatabase.plain.username {
+                if let username = accessedDatabase.secure.username() {
                     accessedDatabase.secure.setPassword(nil, for: username)
+                    accessedDatabase.secure.setUsername(nil)
                 }
-                accessedDatabase.plain.username = nil
+                accessedDatabase.plain.publicUsername = nil
                 accessedDatabase.plain.accountInfo = nil
             }
         }
     }
     
     var token: String? {
-        guard let username = accessedDatabase.plain.username else {
+        guard let username = accessedDatabase.secure.username() else {
             return nil
         }
         return accessedDatabase.secure.token(for: accessedDatabase.secure.tokenKey(for: username))
@@ -84,7 +92,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
 
     
     var currentPasswordReference: Data? {
-        guard let username = accessedDatabase.plain.username else {
+        guard let username = accessedDatabase.secure.username() else {
             return nil
         }
         return accessedDatabase.secure.passwordReference(for: username)
@@ -114,7 +122,8 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             let tokenComponents = token.split(by: token.count/2)
             if let first = tokenComponents.first,
                 let last = tokenComponents.last {
-                self.accessedDatabase.plain.username = first
+                self.accessedDatabase.plain.publicUsername = request.credentials.username
+                self.accessedDatabase.secure.setUsername(first)
                 self.accessedDatabase.secure.setToken(token,
                                                       for: self.accessedDatabase.secure.tokenKey(for: first))
                 self.accessedDatabase.secure.setPassword(last,
@@ -188,11 +197,12 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         guard isLoggedIn else {
             preconditionFailure()
         }
-        if let username = accessedDatabase.plain.username {
+        if let username = accessedDatabase.secure.username() {
             accessedDatabase.secure.setPassword(nil, for: username)
+            accessedDatabase.secure.setUsername(nil)
             accessedDatabase.secure.setToken(nil, for: accessedDatabase.secure.tokenKey(for: username))
         }
-        accessedDatabase.plain.username = nil
+        accessedDatabase.plain.publicUsername = nil
         accessedDatabase.plain.accountInfo = nil
         Macros.postNotification(.PIAAccountDidLogout)
         callback?(nil)
@@ -270,7 +280,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 self.accessedStore.finishTransaction(transaction, success: true)
             }
             self.accessedDatabase.plain.lastSignupEmail = nil
-            self.accessedDatabase.plain.username = credentials.username
+            self.accessedDatabase.plain.publicUsername = credentials.username
             self.accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
 
             let user = UserAccount(credentials: credentials, info: nil)
@@ -307,7 +317,8 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 let tokenComponents = token.split(by: token.count/2)
                 if let first = tokenComponents.first,
                     let last = tokenComponents.last {
-                    self.accessedDatabase.plain.username = first
+                    self.accessedDatabase.plain.publicUsername = credentials.username
+                    self.accessedDatabase.secure.setUsername(first)
                     self.accessedDatabase.secure.setToken(token,
                                                           for: self.accessedDatabase.secure.tokenKey(for: first))
                     self.accessedDatabase.secure.setPassword(last,

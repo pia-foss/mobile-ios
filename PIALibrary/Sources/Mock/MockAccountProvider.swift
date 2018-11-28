@@ -115,6 +115,10 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     public var token: String? {
         return "TOKEN"
     }
+    
+    public var publicUsername: String? {
+        return "p0000000"
+    }
 
     /// :nodoc:
     public var currentUser: UserAccount? {

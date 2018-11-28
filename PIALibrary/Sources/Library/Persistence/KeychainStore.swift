@@ -65,6 +65,21 @@ class KeychainStore: SecureStore {
 
 extension KeychainStore {
     
+    func username() -> String? {
+        return try? backend.username()
+    }
+    
+    func setUsername(_ username: String?) {
+        if let username = username {
+            try? backend.set(username: username)
+        } else {
+            backend.removeUsername()
+        }
+    }
+}
+
+extension KeychainStore {
+    
     func token(for username: String) -> String? {
         return try? backend.token(for: username)
     }
