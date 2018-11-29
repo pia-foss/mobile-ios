@@ -124,7 +124,7 @@ class MenuViewController: AutolayoutViewController {
         assert(Client.providers.accountProvider.isLoggedIn, "Menu visible while not logged in")
 
         currentUser = Client.providers.accountProvider.currentUser
-        labelUsername.text = currentUser?.credentials.username
+        labelUsername.text = Client.providers.accountProvider.publicUsername ?? ""
         labelUsername.accessibilityLabel = L10n.Menu.Accessibility.loggedAs(currentUser?.credentials.username ?? "")
     }
     
