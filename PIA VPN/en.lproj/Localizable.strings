@@ -174,7 +174,7 @@
 
 "vpn_permission.title" = "PIA";
 "vpn_permission.body.title" = "PIA needs access to your VPN profiles to secure your traffic";
-"vpn_permission.body.subtitle" = "To proceed tap “%@”.";
+"vpn_permission.body.subtitle" = "You’ll see a prompt for PIA VPN and need to allow access to VPN configurations.\nTo proceed tap on “%@”.";
 "vpn_permission.body.footer" = "We don’t monitor, filter or log any network activity.";
 "vpn_permission.disallow.message.basic" = "We need this permission for the application to function.";
 "vpn_permission.disallow.message.support" = "You can also get in touch with customer support if you need assistance.";
