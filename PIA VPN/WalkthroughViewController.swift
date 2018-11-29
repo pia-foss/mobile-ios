@@ -138,6 +138,9 @@ class WalkthroughViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
+        Theme.current.applyLightBackground(view)
+        Theme.current.applyLightBackground(viewContainer!)
+        
         Theme.current.applyHighlightedText(buttonSkip)
         Theme.current.applyHighlightedText(buttonNext)
         Theme.current.applyPageControl(pageControl)

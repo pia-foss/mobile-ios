@@ -69,7 +69,8 @@ class WalkthroughPageView: UIView {
         labelDetail.text = data.detail
         imvImage.image = data.image
         
-        Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applySubtitle(labelDetail)
+        Theme.current.applyTitle(labelTitle, appearance: .dark)
+
     }
 }
