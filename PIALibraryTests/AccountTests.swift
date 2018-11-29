@@ -23,11 +23,13 @@ class AccountTests: XCTestCase {
 
         Client.database = Client.Database(group: "group.com.privateinternetaccess").truncate()
         Client.bootstrap()
+        Client.providers.accountProvider.cleanDatabase()
+
     }
     
     override func tearDown() {
         super.tearDown()
-
+        
         unregisterNotifications()
     }
     

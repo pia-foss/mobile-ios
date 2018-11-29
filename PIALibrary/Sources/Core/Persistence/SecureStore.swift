@@ -13,6 +13,10 @@ protocol SecureStore: class {
     
     @discardableResult func setPublicKey(withData data: Data) -> SecKey?
     
+    func username() -> String?
+    
+    func setUsername(_ username: String?)
+    
     func password(for username: String) -> String?
 
     func setPassword(_ password: String?, for username: String)

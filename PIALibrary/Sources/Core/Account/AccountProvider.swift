@@ -25,6 +25,9 @@ public protocol AccountProvider: class {
     /// The current auth token, or 'nil' if logged out.
     var token: String? { get }
 
+    /// The public username to be displayed in the views.
+    var publicUsername: String? { get }
+
     /// The password reference object associated with the currentUser, or `nil` if logged out.
     var currentPasswordReference: Data? { get }
 
@@ -76,6 +79,11 @@ public protocol AccountProvider: class {
      - Parameter callback: Returns `nil` on success.
      */
     func logout(_ callback: SuccessLibraryCallback?)
+    
+    /**
+     Remove all data from the plain and secure internal database
+     */
+    func cleanDatabase()
     
     #if os(iOS)
     /**

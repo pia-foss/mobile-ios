@@ -76,7 +76,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
     
     // MARK: Account
 
-    var username: String? {
+    var publicUsername: String? {
         get {
             return backend.string(forKey: Entries.username)
         }
