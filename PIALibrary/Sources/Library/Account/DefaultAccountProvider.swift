@@ -197,13 +197,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         guard isLoggedIn else {
             preconditionFailure()
         }
-        if let username = accessedDatabase.secure.username() {
-            accessedDatabase.secure.setPassword(nil, for: username)
-            accessedDatabase.secure.setUsername(nil)
-            accessedDatabase.secure.setToken(nil, for: accessedDatabase.secure.tokenKey(for: username))
-        }
-        accessedDatabase.plain.publicUsername = nil
-        accessedDatabase.plain.accountInfo = nil
+        cleanDatabase()
         Macros.postNotification(.PIAAccountDidLogout)
         callback?(nil)
     }
@@ -415,6 +409,19 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 callback?(user, nil)
             }
         }
+    }
+    
+    /**
+     Remove all data from the plain and secure internal database
+     */
+    func cleanDatabase() {
+        if let username = accessedDatabase.secure.username() {
+            accessedDatabase.secure.setPassword(nil, for: username)
+            accessedDatabase.secure.setUsername(nil)
+            accessedDatabase.secure.setToken(nil, for: accessedDatabase.secure.tokenKey(for: username))
+        }
+        accessedDatabase.plain.publicUsername = nil
+        accessedDatabase.plain.accountInfo = nil
     }
     #endif
 

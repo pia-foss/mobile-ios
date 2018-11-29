@@ -311,7 +311,7 @@ protocol WelcomeCompletionDelegate: class {
 }
 
 class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
-
+    
     // XXX: we want legit web services calls, yet allow the option to mock them
     private var webServices: WebServices? {
         guard let accountProvider = accessedProviders.accountProvider as? WebServicesConsumer else {
@@ -371,6 +371,10 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
     }
     
     func logout(_ callback: SuccessLibraryCallback?) {
+        fatalError("Not implemented")
+    }
+
+    func cleanDatabase() {
         fatalError("Not implemented")
     }
     

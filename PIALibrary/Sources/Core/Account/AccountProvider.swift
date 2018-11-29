@@ -80,6 +80,11 @@ public protocol AccountProvider: class {
      */
     func logout(_ callback: SuccessLibraryCallback?)
     
+    /**
+     Remove all data from the plain and secure internal database
+     */
+    func cleanDatabase()
+    
     #if os(iOS)
     /**
      Lists the available plans with their corresponding product to purchase in order to get them.
