@@ -22,4 +22,13 @@ public struct Credentials {
         self.username = username
         self.password = password
     }
+    
+}
+
+public extension Credentials {
+    
+    public func toJSONDictionary() -> [String: Any] {
+        return ["username":username, "password": password]
+    }
+
 }

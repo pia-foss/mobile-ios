@@ -15,8 +15,10 @@ protocol WebServicesConsumer {
 protocol WebServices: class {
     
     // MARK: Account
-    
-    func info(credentials: Credentials, _ callback: LibraryCallback<AccountInfo>?)
+
+    func token(credentials: Credentials, _ callback: LibraryCallback<String>?)
+
+    func info(token: String, _ callback: LibraryCallback<AccountInfo>?)
 
     func update(credentials: Credentials, email: String, _ callback: SuccessLibraryCallback?)
 

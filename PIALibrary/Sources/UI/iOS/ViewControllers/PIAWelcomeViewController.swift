@@ -243,7 +243,7 @@ protocol WelcomeCompletionDelegate: class {
 }
 
 class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
-
+    
     // XXX: we want legit web services calls, yet allow the option to mock them
     private var webServices: WebServices? {
         guard let accountProvider = accessedProviders.accountProvider as? WebServicesConsumer else {
@@ -258,8 +258,12 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
     
     var isLoggedIn = false
     
+    var token: String?
+
     var currentUser: UserAccount?
     
+    var publicUsername: String?
+
     var currentPasswordReference: Data? {
         return nil
     }
@@ -269,15 +273,24 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
     }
     
     func login(with request: LoginRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        webServices?.info(credentials: request.credentials) { (info, error) in
-            guard let info = info else {
+        
+        webServices?.token(credentials: request.credentials) { (token, error) in
+            guard let token = token else {
                 callback?(nil, error)
                 return
             }
-            let user = UserAccount(credentials: request.credentials, info: info)
-            self.currentUser = user
-            self.isLoggedIn = true
-            callback?(user, nil)
+            
+            self.webServices?.info(token: token) { (info, error) in
+                guard let info = info else {
+                    callback?(nil, error)
+                    return
+                }
+                let user = UserAccount(credentials: request.credentials, info: info)
+                self.currentUser = user
+                self.isLoggedIn = true
+                callback?(user, nil)
+            }
+
         }
     }
     
@@ -290,6 +303,10 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
     }
     
     func logout(_ callback: SuccessLibraryCallback?) {
+        fatalError("Not implemented")
+    }
+
+    func cleanDatabase() {
         fatalError("Not implemented")
     }
     

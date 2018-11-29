@@ -2,13 +2,13 @@ PODS:
   - Alamofire (4.7.3)
   - Gloss (2.0.1)
   - OpenSSL-Apple (1.1.0h)
-  - PIATunnel (1.1.7):
-    - PIATunnel/AppExtension (= 1.1.7)
-    - PIATunnel/Core (= 1.1.7)
-  - PIATunnel/AppExtension (1.1.7):
+  - PIATunnel (1.1.8):
+    - PIATunnel/AppExtension (= 1.1.8)
+    - PIATunnel/Core (= 1.1.8)
+  - PIATunnel/AppExtension (1.1.8):
     - PIATunnel/Core
     - SwiftyBeaver
-  - PIATunnel/Core (1.1.7):
+  - PIATunnel/Core (1.1.8):
     - OpenSSL-Apple (~> 1.1.0h)
     - SwiftyBeaver
   - QuickLayout (2.0.2)
@@ -43,7 +43,7 @@ SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Gloss: 1e8743f8de1fbe14a97f220ff901cba91ae5f8f8
   OpenSSL-Apple: cd153d705ef350eb834ae7ff5f21f792b51ed208
-  PIATunnel: 3b1b68398ac384b04070994eabb53d7ce07e6368
+  PIATunnel: fc7e7d0a812c6c98138ac315e7a43008aadd15b2
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
   SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145

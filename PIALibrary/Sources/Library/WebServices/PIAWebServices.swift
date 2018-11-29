@@ -16,7 +16,36 @@ private let log = SwiftyBeaver.self
 class PIAWebServices: WebServices, ConfigurationAccess {
     private static let serversVersion = 60
 
-    func info(credentials: Credentials, _ callback: ((AccountInfo?, Error?) -> Void)?) {
+    /***
+     Generates a new auth token for the specific user
+     */
+    func token(credentials: Credentials, _ callback: ((String?, Error?) -> Void)?) {
+        let endpoint = ClientEndpoint.token
+        let status = [200, 401, 429]
+        let errors: [Int: ClientError] = [
+            401: .unauthorized,
+            429: .throttled
+        ]
+        
+        let parameters = credentials.toJSONDictionary()
+        req(nil, .post, endpoint, parameters, status, JSONRequestExecutor() { (json, status, error) in
+            if let knownError = self.knownError(endpoint, status, errors) {
+                callback?(nil, knownError)
+                return
+            }
+            guard let json = json else {
+                callback?(nil, error)
+                return
+            }
+            guard let token = GlossToken(json: json)?.parsed else {
+                callback?(nil, ClientError.malformedResponseData)
+                return
+            }
+            callback?(token, nil)
+        })
+    }
+
+    func info(token: String, _ callback: ((AccountInfo?, Error?) -> Void)?) {
         let endpoint = ClientEndpoint.account
         let status = [200, 401, 429]
         let errors: [Int: ClientError] = [
@@ -24,7 +53,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             429: .throttled
         ]
         
-        req(credentials, .get, endpoint, nil, status, JSONRequestExecutor() { (json, status, error) in
+        req(nil, .get, endpoint, useAuthToken: true, nil, status, JSONRequestExecutor() { (json, status, error) in
             if let knownError = self.knownError(endpoint, status, errors) {
                 callback?(nil, knownError)
                 return
@@ -186,17 +215,19 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         _ credentials: Credentials?,
         _ method: HTTPMethod,
         _ endpoint: Endpoint,
+        useAuthToken useToken: Bool = false,
         _ parameters: [String: Any]?,
         _ statuses: [Int],
         _ executor: RequestExecutor) {
         
-        req(credentials, method, endpoint.url, parameters, statuses, executor)
+        req(credentials, method, endpoint.url, useToken, parameters, statuses, executor)
     }
     
     private func req(
         _ credentials: Credentials?,
         _ method: HTTPMethod,
         _ url: URL,
+        _ useToken: Bool,
         _ parameters: [String: Any]?,
         _ statuses: [Int],
         _ executor: RequestExecutor) {
@@ -207,6 +238,11 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             headers[authHeader.key] = authHeader.value
         }
         
+        if useToken,
+            let token = Client.providers.accountProvider.token {
+            headers["Authorization"] = "Token \(token)"
+        }
+
         if let parameters = parameters {
             log.debug("Request: \(method) \"\(url)\", parameters: \(parameters), headers: \(headers)")
         } else {
