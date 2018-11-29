@@ -12,7 +12,7 @@ protocol PlainStore: class {
 
     // MARK: Account
     
-    var username: String? { get set }
+    var publicUsername: String? { get set }
     
     var accountInfo: AccountInfo? { get set }
     
