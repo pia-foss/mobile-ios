@@ -58,6 +58,46 @@ class KeychainStore: SecureStore {
     
     func clear(for username: String) {
         backend.removePassword(for: username)
+        backend.removeToken(for: tokenKey(for: username))
         backend.remove(publicKeyWithIdentifier: Entries.publicKey)
     }
+}
+
+extension KeychainStore {
+    
+    func username() -> String? {
+        return try? backend.username()
+    }
+    
+    func setUsername(_ username: String?) {
+        if let username = username {
+            try? backend.set(username: username)
+        } else {
+            backend.removeUsername()
+        }
+    }
+}
+
+extension KeychainStore {
+    
+    func token(for username: String) -> String? {
+        return try? backend.token(for: username)
+    }
+    
+    func setToken(_ token: String?, for username: String) {
+        if let token = token {
+            try? backend.set(token: token, for: username)
+        } else {
+            backend.removeToken(for: username)
+        }
+    }
+    
+    func tokenReference(for username: String) -> Data? {
+        return try? backend.tokenReference(for: username)
+    }
+    
+    func tokenKey(for username: String) -> String {
+        return "auth-token: \(username)"
+    }
+
 }

@@ -10,7 +10,7 @@ import Foundation
 
 /// Simulates account-related operations
 public class MockAccountProvider: AccountProvider, WebServicesConsumer {
-
+    
     /// Mocks the outcome of a sign-up operation.
     ///
     /// - Seealso: `AccountProvider.signup(...)`
@@ -111,6 +111,14 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
         return delegate.isLoggedIn
     }
     
+    public var token: String? {
+        return "TOKEN"
+    }
+    
+    public var publicUsername: String? {
+        return "p0000000"
+    }
+
     /// :nodoc:
     public var currentUser: UserAccount? {
         get {
@@ -159,6 +167,11 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     /// :nodoc:
     public func logout(_ callback: SuccessLibraryCallback?) {
         delegate.logout(callback)
+    }
+    
+    /// :nodoc:
+    public func cleanDatabase() {
+        delegate.cleanDatabase()
     }
     
     #if os(iOS)
