@@ -449,7 +449,7 @@ internal enum L10n {
     internal enum Body {
       /// We don’t monitor, filter or log any network activity.
       internal static let footer = L10n.tr("Localizable", "vpn_permission.body.footer")
-      /// You’ll see a prompt for PIA VPN and need to allow access to VPN configurations. To proceed tap on “%@”.
+      /// You’ll see a prompt for PIA VPN and need to allow access to VPN configurations.\nTo proceed tap on “%@”.
       internal static func subtitle(_ p1: String) -> String {
         return L10n.tr("Localizable", "vpn_permission.body.subtitle", p1)
       }
