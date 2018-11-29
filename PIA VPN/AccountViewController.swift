@@ -31,14 +31,6 @@ class AccountViewController: AutolayoutViewController {
     
     @IBOutlet private weak var textUsername: BorderedTextField!
     
-    @IBOutlet private weak var labelPassword: UILabel!
-    
-    @IBOutlet private weak var textPassword: BorderedTextField!
-    
-    @IBOutlet private weak var buttonEye: UIButton!
-    
-    @IBOutlet private weak var labelFooterEye: UILabel!
-
     @IBOutlet private weak var labelFooterOther: UILabel!
 
     @IBOutlet weak var labelExpiryInformation: UILabel!
@@ -78,10 +70,7 @@ class AccountViewController: AutolayoutViewController {
         labelEmail.text = L10n.Account.Email.caption
         textEmail.placeholder = L10n.Account.Email.placeholder
         labelUsername.text = L10n.Account.Username.caption
-        labelPassword.text = L10n.Account.Password.caption
-        buttonEye.setImage(Asset.iconEye.image, for: .normal)
         itemUpdate.title = L10n.Account.Save.item
-        labelFooterEye.text = L10n.Account.Eye.footer
         labelFooterOther.text = L10n.Account.Other.footer
         labelRestoreTitle.text = L10n.Account.Restore.title
         labelRestoreInfo.text = L10n.Account.Restore.description
@@ -90,9 +79,7 @@ class AccountViewController: AutolayoutViewController {
         viewSafe.layoutMargins = .zero
         textEmail.isEditable = true
         textUsername.isEditable = false
-        textPassword.isEditable = false
         canSaveAccount = false
-        updateEyeAccessibilityToPasswordVisibility(false)
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(redisplayAccount), name: .PIAAccountDidRefresh, object: nil)
@@ -175,33 +162,6 @@ class AccountViewController: AutolayoutViewController {
         }
     }
     
-    @IBAction private func togglePasswordVisibility(_ sender: Any?) {
-
-        // conceal
-        if !textPassword.isSecureTextEntry {
-            textPassword.isSecureTextEntry = true
-            updateEyeAccessibilityToPasswordVisibility(false)
-        }
-        // reveal
-        else {
-            SensitiveOperation.perform(withReason: L10n.Account.Reveal.prompt) {
-                self.textPassword.isSecureTextEntry = false
-                self.updateEyeAccessibilityToPasswordVisibility(true)
-            }
-        }
-    }
-    
-    private func updateEyeAccessibilityToPasswordVisibility(_ passwordVisibility: Bool) {
-        buttonEye.accessibilityLabel = L10n.Account.Accessibility.eye
-        let hint: String
-        if passwordVisibility {
-            hint = L10n.Account.Accessibility.Eye.Hint.conceal
-        } else {
-            hint = L10n.Account.Accessibility.Eye.Hint.reveal
-        }
-        buttonEye.accessibilityHint = hint
-    }
-    
     @IBAction private func renewSubscriptionWithUncreditedPurchase(_ sender: Any?) {
         Client.providers.accountProvider.restorePurchases { (error) in
             if let error = error {
@@ -269,8 +229,7 @@ class AccountViewController: AutolayoutViewController {
         textEmail.endEditing(true)
         textEmail.text = currentUser?.info?.email
         textEmail.isEnabled = !(currentUser?.info?.isExpired ?? true)
-        textUsername.text = currentUser?.credentials.username
-        textPassword.text = currentUser?.credentials.password
+        textUsername.text =  Client.providers.accountProvider.publicUsername ?? ""
         
         if let userInfo = currentUser?.info {
             if userInfo.isExpired {
@@ -303,14 +262,13 @@ class AccountViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         
-        for label in [labelEmail!, labelUsername!, labelPassword!] {
+        for label in [labelEmail!, labelUsername!] {
             Theme.current.applyLabel(label, appearance: .dark)
         }
         Theme.current.applyInput(textEmail)
         Theme.current.applyInput(textUsername)
-        Theme.current.applyInput(textPassword)
         Theme.current.applyDivider(viewSeparator)
-        for label in [labelFooterEye!, labelFooterOther!, labelExpiryInformation!] {
+        for label in [labelFooterOther!, labelExpiryInformation!] {
             Theme.current.applySmallInfo(label, appearance: .dark)
         }
         Theme.current.applyBody2(labelRestoreTitle, appearance: .dark)

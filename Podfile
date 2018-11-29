@@ -53,7 +53,7 @@ end
 def shared_main_pods
     pod 'AlamofireImage'
     #library_by_path('..')
-    library_by_git('09dd28c')
+    library_by_git('962f979')
     #library_by_version('~> 1.1.3')
 end
 
@@ -67,7 +67,7 @@ def app_pods
 end
 
 def tunnel_pods
-    #tunnel_by_path('/Users/ueshiba/Desktop/PIA')
+    #tunnel_by_path('..')
     tunnel_by_git('269d6d1')
     #tunnel_by_version('~> 1.1.6')
 end
