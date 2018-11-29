@@ -107,6 +107,19 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
     }
     #endif
 
+    private func updateDatabaseWith(_ token: String, andUsername username: String) {
+        let tokenComponents = token.split(by: token.count/2)
+        if let first = tokenComponents.first,
+            let last = tokenComponents.last {
+            self.accessedDatabase.plain.publicUsername = username
+            self.accessedDatabase.secure.setUsername(first)
+            self.accessedDatabase.secure.setToken(token,
+                                                  for: self.accessedDatabase.secure.tokenKey(for: first))
+            self.accessedDatabase.secure.setPassword(last,
+                                                     for: first)
+        }
+    }
+    
     func login(with request: LoginRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard !isLoggedIn else {
             preconditionFailure()
@@ -119,16 +132,8 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 return
             }
 
-            let tokenComponents = token.split(by: token.count/2)
-            if let first = tokenComponents.first,
-                let last = tokenComponents.last {
-                self.accessedDatabase.plain.publicUsername = request.credentials.username
-                self.accessedDatabase.secure.setUsername(first)
-                self.accessedDatabase.secure.setToken(token,
-                                                      for: self.accessedDatabase.secure.tokenKey(for: first))
-                self.accessedDatabase.secure.setPassword(last,
-                                                         for: first)
-            }
+            self.updateDatabaseWith(token,
+                                    andUsername: request.credentials.username)
 
             self.webServices.info(token: token) { (accountInfo, error) in
                 guard let accountInfo = accountInfo else {
@@ -151,10 +156,30 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
     }
     
     func refreshAccountInfo(_ callback: ((AccountInfo?, Error?) -> Void)?) {
+        
         guard let token = self.token else {
-            preconditionFailure()
+
+            guard let user = currentUser else {
+                preconditionFailure()
+            }
+
+            self.webServices.token(credentials: user.credentials) { (token, error) in
+                if let token = token {
+                    
+                    self.updateDatabaseWith(token,
+                                       andUsername: user.credentials.username)
+                    self.accountInfoWith(token, callback)
+                }
+            }
+            
+            return
         }
 
+        accountInfoWith(token, callback)
+        
+    }
+    
+    private func accountInfoWith(_ token: String, _ callback: ((AccountInfo?, Error?) -> Void)?) {
         webServices.info(token: token) { (accountInfo, error) in
             guard let accountInfo = accountInfo else {
                 callback?(nil, error)
@@ -166,7 +191,6 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 ])
             callback?(accountInfo, nil)
         }
-        
     }
     
     func update(with request: UpdateAccountRequest, _ callback: ((AccountInfo?, Error?) -> Void)?) {
