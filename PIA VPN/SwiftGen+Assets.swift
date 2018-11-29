@@ -47,6 +47,10 @@ enum Asset {
   enum Piax {
     enum Global {
       static let iconBack = ImageAsset(name: "icon-back")
+      static let pagecontrolSelectedDot = ImageAsset(name: "pagecontrol-selected-dot")
+      static let pagecontrolUnselectedDot = ImageAsset(name: "pagecontrol-unselected-dot")
+      static let scrollableMapDark = ImageAsset(name: "scrollableMap-dark")
+      static let scrollableMapLight = ImageAsset(name: "scrollableMap-light")
     }
     enum Splash {
       static let darkSplash = ImageAsset(name: "dark-splash")
@@ -311,6 +315,10 @@ enum Asset {
   ]
   static let allImages: [ImageAsset] = [
     Piax.Global.iconBack,
+    Piax.Global.pagecontrolSelectedDot,
+    Piax.Global.pagecontrolUnselectedDot,
+    Piax.Global.scrollableMapDark,
+    Piax.Global.scrollableMapLight,
     Piax.Splash.darkSplash,
     Piax.Splash.lightSplash,
     accessoryExpire,

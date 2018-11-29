@@ -1387,17 +1387,24 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXd-u4-VP7">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="728"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scrollableMap-light" translatesAutoresizingMaskIntoConstraints="NO" id="Rfq-xd-mNv">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="728"/>
+                                    </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqk-hH-N2E">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="728"/>
                                     </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Rfq-xd-mNv" secondAttribute="bottom" id="84Y-Gz-Cc8"/>
                                     <constraint firstItem="rqk-hH-N2E" firstAttribute="height" secondItem="OXd-u4-VP7" secondAttribute="height" id="EAe-cZ-nts"/>
                                     <constraint firstItem="rqk-hH-N2E" firstAttribute="leading" secondItem="OXd-u4-VP7" secondAttribute="leading" id="MH2-Dk-jji"/>
+                                    <constraint firstItem="Rfq-xd-mNv" firstAttribute="leading" secondItem="OXd-u4-VP7" secondAttribute="leading" id="Ysh-yl-Sva"/>
                                     <constraint firstAttribute="trailing" secondItem="rqk-hH-N2E" secondAttribute="trailing" id="fy3-PV-ZyK"/>
+                                    <constraint firstItem="Rfq-xd-mNv" firstAttribute="top" secondItem="OXd-u4-VP7" secondAttribute="top" id="gqz-HG-PY2"/>
                                     <constraint firstItem="rqk-hH-N2E" firstAttribute="top" secondItem="OXd-u4-VP7" secondAttribute="top" id="o4K-AT-HpT"/>
                                     <constraint firstItem="rqk-hH-N2E" firstAttribute="width" secondItem="OXd-u4-VP7" secondAttribute="width" placeholder="YES" id="sdF-tF-mG4"/>
                                     <constraint firstAttribute="bottom" secondItem="rqk-hH-N2E" secondAttribute="bottom" id="spT-Sh-oBp"/>
+                                    <constraint firstAttribute="trailing" secondItem="Rfq-xd-mNv" secondAttribute="trailing" id="wj1-QP-QUq"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="dGS-1w-bnc" id="RyA-zV-98o"/>
@@ -1407,22 +1414,25 @@
                                 <rect key="frame" x="0.0" y="728" width="375" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0V1-l9-swV">
-                                        <rect key="frame" x="20" y="10" width="39" height="30"/>
+                                        <rect key="frame" x="30" y="10" width="39" height="30"/>
                                         <state key="normal" title="SKIP"/>
                                         <connections>
                                             <segue destination="1Y3-6R-wjV" kind="unwind" identifier="UnwindWalkthroughSegueIdentifier" unwindAction="unwoundWalkthroughViewController:" id="gc3-QD-c7f"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FnV-XX-tqE">
-                                        <rect key="frame" x="316" y="10" width="39" height="30"/>
+                                        <rect key="frame" x="306" y="10" width="39" height="30"/>
                                         <state key="normal" title="NEXT"/>
                                         <connections>
                                             <action selector="nextPage:" destination="dGS-1w-bnc" eventType="touchUpInside" id="Wh8-sm-DWg"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AEL-wb-Ylq" customClass="PIAPageControl" customModule="PIA_VPN" customModuleProvider="target">
-                                        <rect key="frame" x="69" y="7" width="237" height="36"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AEL-wb-Ylq" customClass="PIAPageControl" customModule="PIA_VPN" customModuleProvider="target">
+                                        <rect key="frame" x="79" y="7" width="217" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="CY0-9n-OPa"/>
+                                        </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="image" keyPath="dotImage" value="icon-unselected"/>
                                             <userDefinedRuntimeAttribute type="image" keyPath="selectedDotImage" value="icon-selected"/>
@@ -1442,12 +1452,13 @@
                                     <constraint firstItem="AEL-wb-Ylq" firstAttribute="centerX" secondItem="7Cj-hI-UcT" secondAttribute="centerX" id="Kgh-NL-lew"/>
                                     <constraint firstItem="FnV-XX-tqE" firstAttribute="centerY" secondItem="0V1-l9-swV" secondAttribute="centerY" id="LvL-Cy-fOz"/>
                                     <constraint firstItem="AEL-wb-Ylq" firstAttribute="centerY" secondItem="7Cj-hI-UcT" secondAttribute="centerY" id="Q2t-XH-HHB"/>
+                                    <constraint firstItem="AEL-wb-Ylq" firstAttribute="top" secondItem="7Cj-hI-UcT" secondAttribute="top" constant="7" id="QYP-Cy-Hwf"/>
                                     <constraint firstItem="0V1-l9-swV" firstAttribute="centerY" secondItem="7Cj-hI-UcT" secondAttribute="centerY" id="UA5-lQ-ht9"/>
                                     <constraint firstItem="AEL-wb-Ylq" firstAttribute="leading" secondItem="0V1-l9-swV" secondAttribute="trailing" constant="10" id="Uzt-2m-D8T"/>
-                                    <constraint firstAttribute="trailing" secondItem="FnV-XX-tqE" secondAttribute="trailing" constant="20" id="VsF-JL-Lm2"/>
+                                    <constraint firstAttribute="trailing" secondItem="FnV-XX-tqE" secondAttribute="trailing" constant="30" id="VsF-JL-Lm2"/>
                                     <constraint firstAttribute="height" constant="50" id="Wtg-x9-bPB"/>
                                     <constraint firstItem="FnV-XX-tqE" firstAttribute="leading" secondItem="AEL-wb-Ylq" secondAttribute="trailing" constant="10" id="dvY-wb-a0M"/>
-                                    <constraint firstItem="0V1-l9-swV" firstAttribute="leading" secondItem="7Cj-hI-UcT" secondAttribute="leading" constant="20" id="tZR-MH-syj"/>
+                                    <constraint firstItem="0V1-l9-swV" firstAttribute="leading" secondItem="7Cj-hI-UcT" secondAttribute="leading" constant="30" id="tZR-MH-syj"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1467,6 +1478,7 @@
                         <outlet property="buttonNext" destination="FnV-XX-tqE" id="qxu-fZ-qfC"/>
                         <outlet property="buttonSkip" destination="0V1-l9-swV" id="Sjv-8I-iNT"/>
                         <outlet property="pageControl" destination="AEL-wb-Ylq" id="eDy-Zf-l6O"/>
+                        <outlet property="scrollBackground" destination="Rfq-xd-mNv" id="oTG-GX-9qi"/>
                         <outlet property="scrollContent" destination="OXd-u4-VP7" id="CFP-Px-S6l"/>
                         <outlet property="viewContent" destination="rqk-hH-N2E" id="N9d-4S-gch"/>
                     </connections>
@@ -2039,6 +2051,7 @@
         <image name="icon-unselected" width="10" height="9.3333330154418945"/>
         <image name="image-content-blocker" width="86.400001525878906" height="112.52092742919922"/>
         <image name="image-vpn-allow" width="77" height="111"/>
+        <image name="scrollableMap-light" width="1740" height="870"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Ic8-R6-xho"/>

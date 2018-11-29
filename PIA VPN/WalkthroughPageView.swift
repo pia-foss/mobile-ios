@@ -49,10 +49,10 @@ class WalkthroughPageView: UIView {
             imvImage.topAnchor.constraint(equalTo: topAnchor),
             imvImage.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.65),
             imvImage.centerXAnchor.constraint(equalTo: centerXAnchor),
-            labelTitle.topAnchor.constraint(equalTo: imvImage.bottomAnchor, constant: 20.0),
+            labelTitle.topAnchor.constraint(equalTo: imvImage.bottomAnchor, constant: 32.5),
             labelTitle.leftAnchor.constraint(equalTo: leftAnchor, constant: 40.0),
             labelTitle.rightAnchor.constraint(equalTo: rightAnchor, constant: -40.0),
-            labelDetail.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 10.0),
+            labelDetail.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 14.0),
             labelDetail.leftAnchor.constraint(equalTo: labelTitle.leftAnchor),
             labelDetail.rightAnchor.constraint(equalTo: labelTitle.rightAnchor),
             labelDetail.bottomAnchor.constraint(equalTo: bottomAnchor)
@@ -60,9 +60,7 @@ class WalkthroughPageView: UIView {
         
         imvImage.contentMode = .scaleAspectFit
         imvImage.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-        labelTitle.textAlignment = .center
         labelTitle.numberOfLines = 0
-        labelDetail.textAlignment = .center
         labelDetail.numberOfLines = 0
         
         labelTitle.text = data.title
@@ -71,6 +69,9 @@ class WalkthroughPageView: UIView {
         
         Theme.current.applySubtitle(labelDetail)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
+
+        labelTitle.textAlignment = .center
+        labelDetail.textAlignment = .center
 
     }
 }
