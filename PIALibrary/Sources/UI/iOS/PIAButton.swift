@@ -55,12 +55,12 @@ public class PIAButton: UIButton {
         clipsToBounds = true
     }
     
-    func setRounded() {
+    public func setRounded() {
         self.layer.cornerRadius = 6.0
         clipsToBounds = true
     }
 
-    func setBorder(withSize size: CGFloat,
+    public func setBorder(withSize size: CGFloat,
                    andColor color: UIColor) {
         self.layer.borderWidth = size
         self.borderColor = color
@@ -68,7 +68,7 @@ public class PIAButton: UIButton {
         clipsToBounds = true
     }
 
-    func setBorder(withSize size: CGFloat,
+    public func setBorder(withSize size: CGFloat,
                    andStyle style: TextStyle) {
         self.layer.borderWidth = size
         self.style = style
@@ -79,7 +79,7 @@ public class PIAButton: UIButton {
         clipsToBounds = true
     }
 
-    func resetButton() {
+    public func resetButton() {
         self.isButtonImage = false
         self.edgesHaveBeenSet = false
         self.renderingModeHasBeenSet = false
@@ -89,7 +89,7 @@ public class PIAButton: UIButton {
         clipsToBounds = true
     }
     
-    func setButtonImage() {
+    public func setButtonImage() {
         self.isButtonImage = true
     }
     
