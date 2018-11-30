@@ -502,39 +502,26 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="359" height="533.66666666666663"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hkt-DN-kZZ">
-                                                        <rect key="frame" x="0.0" y="199" width="359" height="135.66666666666663"/>
+                                                        <rect key="frame" x="0.0" y="100" width="359" height="150"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BmT-10-tRN">
-                                                                <rect key="frame" x="155" y="0.0" width="49.333333333333343" height="21"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected to VPN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6c-8P-2tV">
-                                                                <rect key="frame" x="110.66666666666667" y="26" width="137.66666666666663" height="19.666666666666671"/>
-                                                                <accessibility key="accessibilityConfiguration">
-                                                                    <bool key="isElement" value="NO"/>
-                                                                </accessibility>
-                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i8m-Ed-q8t">
-                                                                <rect key="frame" x="104.66666666666669" y="60.666666666666686" width="150" height="75"/>
+                                                                <rect key="frame" x="104.66666666666669" y="0.0" width="150" height="150"/>
                                                                 <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ro-hb-UxF" customClass="PIASwitch">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="75"/>
-                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ro-hb-UxF" customClass="PIAConnectionButton" customModule="PIA_VPN" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="150" id="Iiv-TX-jPz"/>
-                                                                            <constraint firstAttribute="width" secondItem="3ro-hb-UxF" secondAttribute="height" multiplier="2" id="Ph6-xL-Od0"/>
-                                                                            <constraint firstAttribute="height" constant="75" id="eKt-70-tGa"/>
+                                                                            <constraint firstAttribute="height" constant="150" id="eKt-70-tGa"/>
                                                                         </constraints>
+                                                                        <connections>
+                                                                            <action selector="vpnButtonClicked:" destination="CEm-fv-KfP" eventType="touchUpInside" id="pco-w4-4qa"/>
+                                                                        </connections>
                                                                     </view>
                                                                 </subviews>
                                                                 <constraints>
                                                                     <constraint firstItem="3ro-hb-UxF" firstAttribute="leading" secondItem="i8m-Ed-q8t" secondAttribute="leading" id="5bt-6r-Jbf"/>
-                                                                    <constraint firstItem="3ro-hb-UxF" firstAttribute="top" secondItem="i8m-Ed-q8t" secondAttribute="top" id="c3U-TQ-o4n"/>
+                                                                    <constraint firstItem="3ro-hb-UxF" firstAttribute="top" secondItem="i8m-Ed-q8t" secondAttribute="top" id="nkx-ZJ-cKV"/>
                                                                     <constraint firstAttribute="bottom" secondItem="3ro-hb-UxF" secondAttribute="bottom" id="p4g-hu-lWy"/>
                                                                     <constraint firstAttribute="trailing" secondItem="3ro-hb-UxF" secondAttribute="trailing" id="xmF-rw-eQE"/>
                                                                 </constraints>
@@ -544,20 +531,16 @@
                                                             <bool key="isElement" value="YES"/>
                                                         </accessibility>
                                                         <constraints>
-                                                            <constraint firstItem="g6c-8P-2tV" firstAttribute="top" secondItem="BmT-10-tRN" secondAttribute="bottom" constant="5" id="EOl-y9-XOP"/>
-                                                            <constraint firstItem="i8m-Ed-q8t" firstAttribute="top" secondItem="g6c-8P-2tV" secondAttribute="bottom" constant="15" id="GXS-c6-tNL"/>
-                                                            <constraint firstItem="g6c-8P-2tV" firstAttribute="centerX" secondItem="hkt-DN-kZZ" secondAttribute="centerX" id="N0o-04-wK9"/>
-                                                            <constraint firstItem="BmT-10-tRN" firstAttribute="top" secondItem="hkt-DN-kZZ" secondAttribute="top" id="OJM-BB-4lf"/>
+                                                            <constraint firstItem="i8m-Ed-q8t" firstAttribute="top" secondItem="hkt-DN-kZZ" secondAttribute="top" id="HNX-OK-29L"/>
+                                                            <constraint firstItem="i8m-Ed-q8t" firstAttribute="centerX" secondItem="hkt-DN-kZZ" secondAttribute="centerX" id="Vqm-8a-ADZ"/>
                                                             <constraint firstAttribute="bottom" secondItem="i8m-Ed-q8t" secondAttribute="bottom" id="gYI-5C-nFq"/>
-                                                            <constraint firstItem="i8m-Ed-q8t" firstAttribute="centerX" secondItem="hkt-DN-kZZ" secondAttribute="centerX" id="uEP-qX-HO9"/>
-                                                            <constraint firstItem="BmT-10-tRN" firstAttribute="centerX" secondItem="hkt-DN-kZZ" secondAttribute="centerX" id="vfd-al-qVa"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="hkt-DN-kZZ" secondAttribute="trailing" id="80S-hq-L3e"/>
-                                                    <constraint firstItem="hkt-DN-kZZ" firstAttribute="centerY" secondItem="LIx-5E-b9S" secondAttribute="centerY" id="ari-ho-JEi"/>
                                                     <constraint firstItem="hkt-DN-kZZ" firstAttribute="leading" secondItem="LIx-5E-b9S" secondAttribute="leading" id="dPQ-fq-gUX"/>
+                                                    <constraint firstItem="hkt-DN-kZZ" firstAttribute="top" secondItem="LIx-5E-b9S" secondAttribute="top" constant="100" id="tA8-8c-sxT"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -883,10 +866,8 @@
                         <outlet property="labelPublicIPCaption" destination="yXc-oo-hmb" id="jCD-dp-s7z"/>
                         <outlet property="labelRegion" destination="9YW-9Y-9ST" id="IsD-bK-xbd"/>
                         <outlet property="labelRegionCaption" destination="drf-oR-mWL" id="MJh-Lz-BZj"/>
-                        <outlet property="labelStatus" destination="g6c-8P-2tV" id="mLX-wi-o0w"/>
-                        <outlet property="labelStatusCaption" destination="BmT-10-tRN" id="YWC-9c-I3y"/>
                         <outlet property="tableRows" destination="iCQ-g6-3OE" id="LyA-m0-EPg"/>
-                        <outlet property="toggleConnection" destination="3ro-hb-UxF" id="xL7-iV-IQs"/>
+                        <outlet property="toggleConnection" destination="3ro-hb-UxF" id="DOc-d5-qxe"/>
                         <outlet property="viewConnection" destination="i8m-Ed-q8t" id="Kif-fW-fcJ"/>
                         <outlet property="viewConnectionArea" destination="hkt-DN-kZZ" id="uaD-2U-nMv"/>
                         <outlet property="viewContainer" destination="R8e-Ar-VG6" id="TS5-TK-5QP"/>
