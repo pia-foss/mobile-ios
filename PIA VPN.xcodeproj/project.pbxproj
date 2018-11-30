@@ -160,6 +160,8 @@
 		DD1AA4972180AD92005116D7 /* CustomDNSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1AA4952180AD92005116D7 /* CustomDNSSettingsViewController.swift */; };
 		DD58F4BF21B12CFE00D043F7 /* PIAConnectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58F4BE21B12CFE00D043F7 /* PIAConnectionButton.swift */; };
 		DD58F4C021B12CFE00D043F7 /* PIAConnectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58F4BE21B12CFE00D043F7 /* PIAConnectionButton.swift */; };
+		DD58F4C221B190D000D043F7 /* CAGradientLayer+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58F4C121B190D000D043F7 /* CAGradientLayer+Image.swift */; };
+		DD58F4C321B190D000D043F7 /* CAGradientLayer+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58F4C121B190D000D043F7 /* CAGradientLayer+Image.swift */; };
 		DD746957217F070700B7BD73 /* DNS.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD746956217F070700B7BD73 /* DNS.plist */; };
 		DD746958217F070700B7BD73 /* DNS.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD746956217F070700B7BD73 /* DNS.plist */; };
 		DD74695A217F07AC00B7BD73 /* DNSList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD746959217F07AC00B7BD73 /* DNSList.swift */; };
@@ -412,6 +414,7 @@
 		D0E3B16D09433B9FD02705DB /* Pods_PIA_VPN_dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIA_VPN_dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD1AA4952180AD92005116D7 /* CustomDNSSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDNSSettingsViewController.swift; sourceTree = "<group>"; };
 		DD58F4BE21B12CFE00D043F7 /* PIAConnectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAConnectionButton.swift; sourceTree = "<group>"; };
+		DD58F4C121B190D000D043F7 /* CAGradientLayer+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+Image.swift"; sourceTree = "<group>"; };
 		DD746956217F070700B7BD73 /* DNS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DNS.plist; sourceTree = "<group>"; };
 		DD746959217F07AC00B7BD73 /* DNSList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSList.swift; sourceTree = "<group>"; };
 		DDC8124B2176185000CB290C /* SwiftGen+SeguesStoryboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+SeguesStoryboards.swift"; sourceTree = "<group>"; };
@@ -776,6 +779,7 @@
 				DDC8124E21761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift */,
 				0E2215C820084CD700F5FB4D /* SwiftGen+Strings.swift */,
 				DD58F4BE21B12CFE00D043F7 /* PIAConnectionButton.swift */,
+				DD58F4C121B190D000D043F7 /* CAGradientLayer+Image.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -1397,6 +1401,7 @@
 				0E8DCA06204D94E800B086DE /* ContentBlockerViewController.swift in Sources */,
 				0EA660091FEC7A9500CB2B0D /* PIATunnelProvider+UI.swift in Sources */,
 				0E7361EC1FD99A1000706BFF /* MenuViewController.swift in Sources */,
+				DD58F4C321B190D000D043F7 /* CAGradientLayer+Image.swift in Sources */,
 				0EB966781FDF11B80086ABC2 /* Server+UI.swift in Sources */,
 				0E9452AC1FDB5EF600891948 /* UINavigationItem+Shortcuts.swift in Sources */,
 				0E2215CD2008C01D00F5FB4D /* SwiftGen+Assets.swift in Sources */,
@@ -1482,6 +1487,7 @@
 				0E8DCA05204D94E800B086DE /* ContentBlockerViewController.swift in Sources */,
 				0EA660081FEC7A9500CB2B0D /* PIATunnelProvider+UI.swift in Sources */,
 				0E441E312055B8A7007528D5 /* Theme+Extension.swift in Sources */,
+				DD58F4C221B190D000D043F7 /* CAGradientLayer+Image.swift in Sources */,
 				0E7361EB1FD99A1000706BFF /* MenuViewController.swift in Sources */,
 				0EB966771FDF11B80086ABC2 /* Server+UI.swift in Sources */,
 				0E9452AB1FDB5EF600891948 /* UINavigationItem+Shortcuts.swift in Sources */,

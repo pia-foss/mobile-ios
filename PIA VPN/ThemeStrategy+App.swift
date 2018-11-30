@@ -51,7 +51,6 @@ private struct LightThemeStrategy: ThemeStrategy {
     func statusBarAppearance(for viewController: AutolayoutViewController) -> UIStatusBarStyle {
         switch viewController {
         case is WalkthroughViewController,
-             is DashboardViewController,
              is PIAWelcomeViewController,
              is GetStartedViewController,
              is SignupInProgressViewController,
@@ -61,6 +60,11 @@ private struct LightThemeStrategy: ThemeStrategy {
              is RestoreSignupViewController,
              is VPNPermissionViewController,
              is ConfirmVPNPlanViewController:
+            return .default
+        case is DashboardViewController:
+            if AppPreferences.shared.lastVPNConnectionStatus == VPNStatus.connected {
+                return .lightContent
+            }
             return .default
         default:
             return .lightContent

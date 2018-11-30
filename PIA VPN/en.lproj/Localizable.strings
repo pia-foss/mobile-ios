@@ -167,6 +167,7 @@
 "dashboard.vpn.disconnected" = "Disconnected";
 "dashboard.vpn.connecting" = "Connecting...";
 "dashboard.vpn.connected" = "Connected to VPN";
+"dashboard.vpn.on" = "VPN: ON";
 "dashboard.vpn.disconnecting" = "Disconnecting...";
 "dashboard.vpn.changing_region" = "Changing region...";
 
