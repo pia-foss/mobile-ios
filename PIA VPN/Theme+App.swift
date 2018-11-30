@@ -50,6 +50,8 @@ extension Theme {
     
     func applyPageControl(_ pageControl: FXPageControl) {
         pageControl.dotSpacing = 6.0
+        pageControl.selectedDotImage = Asset.Piax.Global.pagecontrolSelectedDot.image
+        pageControl.dotImage = Asset.Piax.Global.pagecontrolUnselectedDot.image
     }
     
     func applyPingTime(_ label: UILabel, time: Int) {
@@ -79,4 +81,10 @@ extension Theme {
             label.textColor = palette.accent2
         }
     }
+    
+    public func applyScrollableMap(_ imageView: UIImageView) {
+        imageView.image = palette.appearance == .dark ?
+            Asset.Piax.Global.scrollableMapDark.image : Asset.Piax.Global.scrollableMapLight.image
+    }
+
 }

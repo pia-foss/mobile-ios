@@ -67,8 +67,8 @@ def app_pods
 end
 
 def tunnel_pods
-    #tunnel_by_path('..')
-    tunnel_by_git('e40e891')
+    tunnel_by_path('/Users/ueshiba/Desktop/PIA')
+    #tunnel_by_git('e40e891')
     #tunnel_by_version('~> 1.1.6')
 end
 

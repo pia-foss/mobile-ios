@@ -45,8 +45,15 @@ struct ColorAsset {
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 enum Asset {
   enum Piax {
+    enum Dashboard {
+      static let vpnButton = ImageAsset(name: "vpn-button")
+    }
     enum Global {
       static let iconBack = ImageAsset(name: "icon-back")
+      static let pagecontrolSelectedDot = ImageAsset(name: "pagecontrol-selected-dot")
+      static let pagecontrolUnselectedDot = ImageAsset(name: "pagecontrol-unselected-dot")
+      static let scrollableMapDark = ImageAsset(name: "scrollableMap-dark")
+      static let scrollableMapLight = ImageAsset(name: "scrollableMap-light")
     }
     enum Splash {
       static let darkSplash = ImageAsset(name: "dark-splash")
@@ -310,7 +317,12 @@ enum Asset {
   static let allColors: [ColorAsset] = [
   ]
   static let allImages: [ImageAsset] = [
+    Piax.Dashboard.vpnButton,
     Piax.Global.iconBack,
+    Piax.Global.pagecontrolSelectedDot,
+    Piax.Global.pagecontrolUnselectedDot,
+    Piax.Global.scrollableMapDark,
+    Piax.Global.scrollableMapLight,
     Piax.Splash.darkSplash,
     Piax.Splash.lightSplash,
     accessoryExpire,
