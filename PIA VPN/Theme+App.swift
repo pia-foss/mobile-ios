@@ -43,6 +43,7 @@ extension Theme {
                 barTintColors.count <= 2 {
                 if barTintColors.count == 1 {
                     navigationBar.barTintColor = barTintColors.first
+                    navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
                 } else {
                     var updatedFrame = navigationBar.bounds
                     updatedFrame.size.height += navigationBar.frame.origin.y
@@ -51,6 +52,7 @@ extension Theme {
                 }
             } else {
                 navigationBar.barTintColor = self.palette.lightBackground
+                navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
             }
             navigationBar.layoutIfNeeded()
         }
