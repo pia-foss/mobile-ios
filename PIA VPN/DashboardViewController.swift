@@ -24,11 +24,7 @@ class DashboardViewController: AutolayoutViewController {
     
     @IBOutlet private weak var viewConnection: UIView!
 
-    @IBOutlet private weak var toggleConnection: PIASwitch!
-    
-    @IBOutlet private weak var labelStatusCaption: UILabel!
-
-    @IBOutlet private weak var labelStatus: UILabel!
+    @IBOutlet private weak var toggleConnection: PIAConnectionButton!
     
     @IBOutlet private weak var viewFooterSeparator: UIView!
 
@@ -74,14 +70,12 @@ class DashboardViewController: AutolayoutViewController {
         viewContent.isHidden = true
         viewRows.isHidden = true
         
-        labelStatusCaption.text = L10n.Dashboard.status
         labelRegionCaption.text = L10n.Dashboard.Connection.Region.caption
         buttonChangeRegion.setTitle(L10n.Dashboard.Connection.Region.change, for: .normal)
         labelPublicIPCaption.text = L10n.Dashboard.Connection.Ip.caption
 
         currentPageIndex = 0
 
-        toggleConnection.addTarget(self, action: #selector(toggleMoved(_:)), for: .valueChanged)
         buttonChangeRegion.accessibilityIdentifier = "uitests.main.pick_region";
         
         SideMenuManager.default.menuLeftNavigationController = StoryboardScene.Main.sideMenuNavigationController.instantiate()
@@ -202,8 +196,8 @@ class DashboardViewController: AutolayoutViewController {
         perform(segue: StoryboardSegue.Main.menuSegueIdentifier)
     }
     
-    @objc private func toggleMoved(_ sender: Any?) {
-        if toggleConnection.isOn {
+    @IBAction func vpnButtonClicked(_ sender: Any?) {
+        if !toggleConnection.isOn {
             Client.providers.vpnProvider.connect(nil)
         } else {
             Client.providers.vpnProvider.disconnect(nil)
@@ -271,28 +265,32 @@ class DashboardViewController: AutolayoutViewController {
     @objc private func updateCurrentStatusWithUserInfo(_ userInfo: [AnyHashable: Any]?) {
         currentStatus = Client.providers.vpnProvider.vpnStatus
 
-        Theme.current.applyVPNStatus(labelStatus, forStatus: currentStatus)
+        //Theme.current.applyVPNStatus(labelStatus, forStatus: currentStatus)
 
         switch currentStatus {
         case .connected:
             toggleConnection.isOn = true
             toggleConnection.isIndeterminate = false
-            labelStatus.text = L10n.Dashboard.Vpn.connected
+            toggleConnection.stopButtonAnimation()
+        //    labelStatus.text = L10n.Dashboard.Vpn.connected
 
         case .disconnected:
             toggleConnection.isOn = false
             toggleConnection.isIndeterminate = false
-            labelStatus.text = L10n.Dashboard.Vpn.disconnected
+            toggleConnection.stopButtonAnimation()
+        //    labelStatus.text = L10n.Dashboard.Vpn.disconnected
 
         case .connecting:
             toggleConnection.isOn = true
             toggleConnection.isIndeterminate = true
-            labelStatus.text = L10n.Dashboard.Vpn.connecting
+            toggleConnection.startButtonAnimation()
+        //    labelStatus.text = L10n.Dashboard.Vpn.connecting
 
         case .disconnecting:
             toggleConnection.isOn = true
             toggleConnection.isIndeterminate = true
-            labelStatus.text = L10n.Dashboard.Vpn.disconnecting
+            toggleConnection.startButtonAnimation()
+        //    labelStatus.text = L10n.Dashboard.Vpn.disconnecting
 
 //        case .changingServer:
 //            powerConnection.powerState = .pending
@@ -304,7 +302,7 @@ class DashboardViewController: AutolayoutViewController {
         imvRegion.setImage(fromServer: server.flagServer(forStatus: currentStatus))
 
         // XXX hack to suppress "ellipsis"
-        viewConnectionArea.accessibilityLabel = labelStatus.text
+        //viewConnectionArea.accessibilityLabel = labelStatus.text
         viewConnectionArea.accessibilityLabel = viewConnectionArea.accessibilityLabel?.replacingOccurrences(of: "...", with: "")
         UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, viewConnectionArea)
 
@@ -351,14 +349,12 @@ class DashboardViewController: AutolayoutViewController {
 
         navigationItem.titleView = NavigationLogoView()
         Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
-        Theme.current.applyTitle(labelStatusCaption, appearance: .dark)
         Theme.current.applyCaption(labelPublicIPCaption, appearance: .dark)
         Theme.current.applyTitle(labelPublicIP, appearance: .dark)
         Theme.current.applyCaption(labelRegionCaption, appearance: .dark)
         Theme.current.applyTitle(labelRegion, appearance: .dark)
         Theme.current.applyCaption(buttonChangeRegion, appearance: .emphasis)
         Theme.current.applyTextButton(buttonChangeRegion)
-        Theme.current.applyToggle(toggleConnection)
 
         // XXX: emulate native UITableView separator
         Theme.current.applyDividerToSeparator(tableRows)
