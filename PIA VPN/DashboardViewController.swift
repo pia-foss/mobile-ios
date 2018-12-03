@@ -293,7 +293,7 @@ class DashboardViewController: AutolayoutViewController {
             setNeedsStatusBarAppearanceUpdate()
 
         case .connecting:
-            toggleConnection.isOn = true
+            toggleConnection.isOn = false
             toggleConnection.isIndeterminate = true
             toggleConnection.startButtonAnimation()
             AppPreferences.shared.lastVPNConnectionStatus = .connecting
