@@ -272,25 +272,54 @@ class DashboardViewController: AutolayoutViewController {
             toggleConnection.isOn = true
             toggleConnection.isIndeterminate = false
             toggleConnection.stopButtonAnimation()
-        //    labelStatus.text = L10n.Dashboard.Vpn.connected
+            AppPreferences.shared.lastVPNConnectionStatus = .connected
+            let titleLabelView = UILabel(frame: CGRect.zero)
+            titleLabelView.style(style: TextStyle.textStyle6)
+            titleLabelView.text = L10n.Dashboard.Vpn.on.uppercased()
+            Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
+                                                   withTintColor: .white,
+                                                   andBarTintColors: [UIColor.piaGreen,
+                                                                      UIColor.piaGreenDark20])
+            navigationItem.titleView = titleLabelView
+            setNeedsStatusBarAppearanceUpdate()
 
         case .disconnected:
             toggleConnection.isOn = false
             toggleConnection.isIndeterminate = false
             toggleConnection.stopButtonAnimation()
-        //    labelStatus.text = L10n.Dashboard.Vpn.disconnected
+            AppPreferences.shared.lastVPNConnectionStatus = .disconnected
+            navigationItem.titleView = NavigationLogoView()
+            Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
+            setNeedsStatusBarAppearanceUpdate()
 
         case .connecting:
             toggleConnection.isOn = true
             toggleConnection.isIndeterminate = true
             toggleConnection.startButtonAnimation()
-        //    labelStatus.text = L10n.Dashboard.Vpn.connecting
+            AppPreferences.shared.lastVPNConnectionStatus = .connecting
+            let titleLabelView = UILabel(frame: CGRect.zero)
+            titleLabelView.style(style: TextStyle.textStyle7)
+            titleLabelView.text = L10n.Dashboard.Vpn.connecting.uppercased()
+            Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
+                                                   withTintColor: nil,
+                                                   andBarTintColors: nil)
+            navigationItem.titleView = titleLabelView
+            setNeedsStatusBarAppearanceUpdate()
 
         case .disconnecting:
             toggleConnection.isOn = true
             toggleConnection.isIndeterminate = true
             toggleConnection.startButtonAnimation()
-        //    labelStatus.text = L10n.Dashboard.Vpn.disconnecting
+            AppPreferences.shared.lastVPNConnectionStatus = .disconnecting
+            let titleLabelView = UILabel(frame: CGRect.zero)
+            titleLabelView.style(style: TextStyle.textStyle7)
+            titleLabelView.text = L10n.Dashboard.Vpn.disconnecting.uppercased()
+
+            Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
+                                                   withTintColor: nil,
+                                                   andBarTintColors: nil)
+            navigationItem.titleView = titleLabelView
+            setNeedsStatusBarAppearanceUpdate()
 
 //        case .changingServer:
 //            powerConnection.powerState = .pending

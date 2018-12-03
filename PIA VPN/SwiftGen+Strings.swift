@@ -141,6 +141,8 @@ internal enum L10n {
       internal static let disconnected = L10n.tr("Localizable", "dashboard.vpn.disconnected")
       /// Disconnecting...
       internal static let disconnecting = L10n.tr("Localizable", "dashboard.vpn.disconnecting")
+      /// VPN: ON
+      internal static let on = L10n.tr("Localizable", "dashboard.vpn.on")
     }
   }
 
