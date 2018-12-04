@@ -42,6 +42,10 @@ class PIAConnectionButton: UIButton {
 
     private func setupView() {
         
+        //Image
+        let vpnImage = Asset.Piax.Dashboard.vpnButton.image.withRenderingMode(.alwaysTemplate)
+        self.setImage(vpnImage, for: [])
+
         displayLink = CADisplayLink(target: self, selector: #selector(redrawUpdate))
 
         //Configure the button static color
@@ -57,10 +61,6 @@ class PIAConnectionButton: UIButton {
         self.updateColors()
         self.layer.addSublayer(circlePathLayer)
         self.clipsToBounds = true
-        
-        //Image
-        let vpnImage = Asset.Piax.Dashboard.vpnButton.image.withRenderingMode(.alwaysTemplate)
-        self.setImage(vpnImage, for: [])
         
     }
     
