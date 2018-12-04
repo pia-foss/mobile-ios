@@ -104,8 +104,12 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
 
         enableInteractions(false)
 
+        self.showLoadingAnimation()
+        
         preset?.accountProvider.login(with: request) { (user, error) in
             self.enableInteractions(true)
+
+            self.hideLoadingAnimation()
 
             guard let user = user else {
                 var errorMessage: String?

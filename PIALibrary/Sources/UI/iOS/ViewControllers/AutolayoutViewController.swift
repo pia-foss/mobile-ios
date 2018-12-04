@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Lottie
 /// Declares a generic, dismissable modal controller.
 public protocol ModalController: class {
 
@@ -15,6 +15,12 @@ public protocol ModalController: class {
      Dismisses the modal controller.
      */
     func dismissModal()
+}
+
+public protocol AnimatingLoadingDelegate: class {
+    func showLoadingAnimation()
+    func hideLoadingAnimation()
+    func adjustLottieSize()
 }
 
 /// Enum used to determinate the status of the view controller and apply effects over the UI elements
@@ -133,6 +139,74 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
             iconWarning.tintColor = .piaRed
             element.rightView = iconWarning
         }
+    }
+
+}
+
+extension AutolayoutViewController: AnimatingLoadingDelegate {
+    
+    private struct LottieRepos {
+        static var graphLoad: LOTAnimationView?
+        static var containerView: UIView?
+    }
+    
+    var graphLoad: LOTAnimationView? {
+        get {
+            return objc_getAssociatedObject(self, &LottieRepos.graphLoad) as? LOTAnimationView
+        }
+        set {
+            if let unwrappedValue = newValue {
+                objc_setAssociatedObject(self, &LottieRepos.graphLoad, unwrappedValue as LOTAnimationView?, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            }
+        }
+    }
+
+    var containerView: UIView? {
+        get {
+            return LottieRepos.containerView
+        }
+        set {
+            if let unwrappedValue = newValue {
+                LottieRepos.containerView = unwrappedValue
+            }
+        }
+    }
+
+    public func showLoadingAnimation() {
+        if graphLoad == nil {
+            containerView = UIView(frame: self.view.frame)
+            containerView?.backgroundColor = .white
+            containerView?.alpha = 0.2
+            graphLoad = LOTAnimationView(name: "pia-spinner")
+            adjustLottieSize()
+        }
+        addLoadingAnimation()
+    }
+    
+    private func addLoadingAnimation() {
+        graphLoad?.loopAnimation = true
+        if let graphLoad = graphLoad,
+            let containerView = containerView {
+            view.addSubview(containerView)
+            view.addSubview(graphLoad)
+            graphLoad.play()
+        }
+    }
+    
+    public func hideLoadingAnimation() {
+        graphLoad?.stop()
+        graphLoad?.removeFromSuperview()
+        containerView?.removeFromSuperview()
+    }
+    
+    public func adjustLottieSize() {
+        let lottieWidth = view.frame.width/4
+        graphLoad?.frame = CGRect(
+            x: (view.frame.width/2) - (lottieWidth/2),
+            y: (view.frame.height - lottieWidth)/2,
+            width: lottieWidth,
+            height: lottieWidth
+        )
     }
 
 }

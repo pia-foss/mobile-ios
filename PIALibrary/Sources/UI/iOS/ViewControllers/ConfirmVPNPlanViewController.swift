@@ -132,10 +132,12 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
         log.debug("Will purchase plan: \(plan.product)")
         
         disableInteractions()
+        self.showLoadingAnimation()
         
         preset?.accountProvider.purchase(plan: plan.plan) { (transaction, error) in
             self.enableInteractions()
-            
+            self.hideLoadingAnimation()
+
             guard let transaction = transaction else {
                 if let error = error {
                     log.error("Purchase failed (error: \(error))")

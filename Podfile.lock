@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (4.7.3)
   - Gloss (2.0.1)
+  - lottie-ios (2.5.2)
   - OpenSSL-Apple (1.1.0h)
   - PIATunnel (1.1.8):
     - PIATunnel/AppExtension (= 1.1.8)
@@ -20,6 +21,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4)
   - Gloss (~> 2)
+  - lottie-ios
   - PIATunnel (from `/Users/ueshiba/Desktop/PIA/tunnel-apple`)
   - ReachabilitySwift
   - SwiftEntryKit (= 0.7.2)
@@ -29,6 +31,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - Gloss
+    - lottie-ios
     - OpenSSL-Apple
     - QuickLayout
     - ReachabilitySwift
@@ -42,6 +45,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Gloss: 1e8743f8de1fbe14a97f220ff901cba91ae5f8f8
+  lottie-ios: 3fef45d3fabe63e3c7c2eb603dd64ddfffc73062
   OpenSSL-Apple: cd153d705ef350eb834ae7ff5f21f792b51ed208
   PIATunnel: fc7e7d0a812c6c98138ac315e7a43008aadd15b2
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
@@ -49,6 +53,6 @@ SPEC CHECKSUMS:
   SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145
   SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
 
-PODFILE CHECKSUM: 69dc247f30af562636213a5c232d74220b2ec50d
+PODFILE CHECKSUM: 779be591b3b48081d1a8f10fff64a068d022b520
 
 COCOAPODS: 1.5.3

@@ -42,12 +42,18 @@ Pod::Spec.new do |s|
         p.dependency "PIALibrary/Library"
     end
 
+    s.subspec "Lottie" do |p|
+        p.dependency "PIALibrary/Core"
+        p.dependency "PIALibrary/Util"
+    end
+
     s.subspec "UI" do |p|
         p.source_files          = "PIALibrary/Sources/UI/Shared/*.swift"
         p.resources             = "PIALibrary/Resources/UI/Shared/**/*"
         p.dependency "PIALibrary/Library"
         p.dependency "SwiftyBeaver"
         p.dependency "SwiftEntryKit", "0.7.2"
+        p.dependency "lottie-ios"
 
         p.ios.source_files      = "PIALibrary/Sources/UI/iOS/**/*.swift"
         p.ios.resources         = "PIALibrary/Resources/UI/iOS/**/*"

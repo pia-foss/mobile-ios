@@ -264,6 +264,8 @@
 		DD314991218350D1008E26E8 /* SwiftGen+SeguesStoryboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC81249217617F900CB290C /* SwiftGen+SeguesStoryboards.swift */; };
 		DD58F4BB21AEB99C00D043F7 /* GlossToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58F4BA21AEB99C00D043F7 /* GlossToken.swift */; };
 		DD58F4BD21AEF76100D043F7 /* String+Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58F4BC21AEF76100D043F7 /* String+Components.swift */; };
+		DD6DC5B921B6A83400F9D538 /* UIViewLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6DC5B821B6A83400F9D538 /* UIViewLoading.swift */; };
+		DD6DC5BC21B6A8FC00F9D538 /* pia-spinner.json in Resources */ = {isa = PBXBuildFile; fileRef = DD6DC5BB21B6A8FC00F9D538 /* pia-spinner.json */; };
 		DD8BF3CB219C6BAA0041357C /* ConfirmVPNPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8BF3CA219C6BAA0041357C /* ConfirmVPNPlanViewController.swift */; };
 		DDD824E32189969400151709 /* Preset.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E22189969400151709 /* Preset.swift */; };
 		DDD824E5218996CD00151709 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E4218996CD00151709 /* Pages.swift */; };
@@ -524,6 +526,8 @@
 		DD31498E21834B3F008E26E8 /* GetStartedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStartedViewController.swift; sourceTree = "<group>"; };
 		DD58F4BA21AEB99C00D043F7 /* GlossToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlossToken.swift; sourceTree = "<group>"; };
 		DD58F4BC21AEF76100D043F7 /* String+Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Components.swift"; sourceTree = "<group>"; };
+		DD6DC5B821B6A83400F9D538 /* UIViewLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewLoading.swift; sourceTree = "<group>"; };
+		DD6DC5BB21B6A8FC00F9D538 /* pia-spinner.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pia-spinner.json"; sourceTree = "<group>"; };
 		DD8BF3CA219C6BAA0041357C /* ConfirmVPNPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmVPNPlanViewController.swift; sourceTree = "<group>"; };
 		DDC812472176166500CB290C /* SwiftGen+ScenesStoryboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+ScenesStoryboards.swift"; sourceTree = "<group>"; };
 		DDC81249217617F900CB290C /* SwiftGen+SeguesStoryboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+SeguesStoryboards.swift"; sourceTree = "<group>"; };
@@ -818,6 +822,7 @@
 				DD0AC78F218715B8009B576B /* PIAButton.swift */,
 				DDD824E92189CD5700151709 /* NavigationLogoView.swift */,
 				84577FB9213D8EB2006DEC3D /* Styles */,
+				DD6DC5B821B6A83400F9D538 /* UIViewLoading.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -825,6 +830,7 @@
 		0EB8C07E1F9CE11A005857E4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DD6DC5BA21B6A8F200F9D538 /* Lottie */,
 				0E9D62831FDE95A1009A90CF /* Library */,
 				0EB8C07F1F9CE11A005857E4 /* UI */,
 			);
@@ -1072,6 +1078,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		DD6DC5BA21B6A8F200F9D538 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				DD6DC5BB21B6A8FC00F9D538 /* pia-spinner.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1283,6 +1297,7 @@
 				0E6B0A791FA4986D00EBB916 /* UI.strings in Resources */,
 				0E9D62871FDE95A1009A90CF /* PIA.pub in Resources */,
 				0E7361B41FD9683B00706BFF /* Signup.strings in Resources */,
+				DD6DC5BC21B6A8FC00F9D538 /* pia-spinner.json in Resources */,
 				0EB8C0831F9CE11A005857E4 /* UI.xcassets in Resources */,
 				0E7361E61FD9731F00706BFF /* Signup.storyboard in Resources */,
 				0E2ADD581FE189E800BB170C /* IPsec-Client.p12 in Resources */,
@@ -1371,6 +1386,7 @@
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftEntryKit/SwiftEntryKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
+				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -1384,6 +1400,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftEntryKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1429,6 +1446,7 @@
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftEntryKit/SwiftEntryKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
+				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -1442,6 +1460,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftEntryKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1679,6 +1698,7 @@
 				0E2ADCCA1FE06D7A00BB170C /* Array+Math.swift in Sources */,
 				0E2ADD331FE1472F00BB170C /* VPNStatus.swift in Sources */,
 				0E0F95961FD560C40046DC64 /* CircleProgressView.swift in Sources */,
+				DD6DC5B921B6A83400F9D538 /* UIViewLoading.swift in Sources */,
 				0E2ADCF11FE09C6C00BB170C /* ServersPinger.swift in Sources */,
 				0E2ADD4F1FE15C2200BB170C /* VPNConfiguration.swift in Sources */,
 				0EA7065F1F80F448001E4F88 /* AccountProvider.swift in Sources */,
