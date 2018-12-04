@@ -12,6 +12,8 @@ import SwiftEntryKit
 
 extension Macros {
 
+    private static let bannerHeight: CGFloat = 78.5
+    
     /**
      Creates an `UIColor` from its RGBA components.
  
@@ -108,17 +110,21 @@ extension Macros {
                                         message: String,
                                         andDuration duration: Double? = nil) {
         
+        
         var attributes = EKAttributes()
         attributes = .topToast
         attributes.hapticFeedbackType = .success
         attributes.entryBackground = .color(color: UIColor.piaRed)
+        attributes.positionConstraints.size = .init(width: EKAttributes.PositionConstraints.Edge.fill,
+                                                    height: EKAttributes.PositionConstraints.Edge.constant(value: bannerHeight))
+
         if let duration = duration {
             attributes.displayDuration = duration
         }
         
         let labelContent = EKProperty.LabelContent(text: message,
                                                    style: .init(font: TextStyle.textStyle7.font!,
-                                                                color: TextStyle.textStyle7.color!))
+                                                                color: .white))
         let imageContent = EKProperty.ImageContent(image: image)
         let contentView = EKImageNoteMessageView(with: labelContent,
                                       imageContent: imageContent)
