@@ -69,9 +69,15 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
 
         let errorMessage = L10n.Welcome.Login.Error.validation
         guard let username = textUsername.text?.trimmed(), !username.isEmpty else {
+            
             Macros.displayImageNote(withImage: Asset.iconWarning.image,
                                     message: errorMessage)
             self.status = .error(element: textUsername)
+            
+            if textPassword.text == nil || textPassword.text!.isEmpty {
+                self.status = .error(element: textPassword)
+            }
+
             return
         }
         
@@ -98,8 +104,12 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
 
         enableInteractions(false)
 
+        self.showLoadingAnimation()
+        
         preset?.accountProvider.login(with: request) { (user, error) in
             self.enableInteractions(true)
+
+            self.hideLoadingAnimation()
 
             guard let user = user else {
                 var errorMessage: String?

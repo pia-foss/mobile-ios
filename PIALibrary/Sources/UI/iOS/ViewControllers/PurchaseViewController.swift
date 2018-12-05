@@ -134,6 +134,7 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
     }
     
     private func disableInteractions(fully: Bool) {
+        self.showLoadingAnimation()
         collectionPlans.isUserInteractionEnabled = false
         if fully {
             parent?.view.isUserInteractionEnabled = false
@@ -141,6 +142,7 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
     }
     
     private func enableInteractions() {
+        self.hideLoadingAnimation()
         collectionPlans.isUserInteractionEnabled = true
         parent?.view.isUserInteractionEnabled = true
     }

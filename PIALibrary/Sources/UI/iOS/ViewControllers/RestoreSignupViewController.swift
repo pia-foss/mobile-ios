@@ -108,7 +108,9 @@ public class RestoreSignupViewController: AutolayoutViewController, BrandableNav
     
         enableInteractions(false)
         isRunningActivity = true
+        self.showLoadingAnimation()
         preset?.accountProvider.restorePurchases { (error) in
+            self.hideLoadingAnimation()
             self.isRunningActivity = false
             if let _ = error {
                 self.reportRestoreFailure(error)
