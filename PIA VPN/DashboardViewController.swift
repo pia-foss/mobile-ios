@@ -88,6 +88,7 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(applicationDidBecomeActive(notification:)), name: .UIApplicationDidBecomeActive, object: nil)
         nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
         nc.addObserver(self, selector: #selector(updateCurrentIP), name: .PIADaemonsDidUpdateConnectivity, object: nil)
+        nc.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
 
 #if !TARGET_IPHONE_SIMULATOR
         let types: UIUserNotificationType = [.alert, .badge, .sound]
@@ -246,6 +247,10 @@ class DashboardViewController: AutolayoutViewController {
         }
     }
     
+    @objc private func viewHasRotated() {
+        updateCurrentStatus()
+    }
+
     @objc private func accountDidLogout(notification: Notification) {
         presentLogin()
     }
@@ -377,6 +382,9 @@ class DashboardViewController: AutolayoutViewController {
         super.viewShouldRestyle()
 
         navigationItem.titleView = NavigationLogoView()
+        Theme.current.applyLightBackground(view)
+        Theme.current.applyLightBackground(viewContainer!)
+
         Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
         Theme.current.applyCaption(labelPublicIPCaption, appearance: .dark)
         Theme.current.applyTitle(labelPublicIP, appearance: .dark)
