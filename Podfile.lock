@@ -8,6 +8,7 @@ PODS:
     - HockeySDK/DefaultLib (= 5.1.4)
   - HockeySDK/DefaultLib (5.1.4)
   - iRate (1.12.2)
+  - lottie-ios (2.5.2)
   - MBProgressHUD (1.1.0)
   - OpenSSL-Apple (1.1.0h)
   - PIALibrary/Core (2.0.0)
@@ -21,6 +22,7 @@ PODS:
   - PIALibrary/Mock (2.0.0):
     - PIALibrary/Library
   - PIALibrary/UI (2.0.0):
+    - lottie-ios
     - PIALibrary/Library
     - SwiftEntryKit (= 0.7.2)
     - SwiftyBeaver
@@ -69,6 +71,7 @@ SPEC REPOS:
     - Gloss
     - HockeySDK
     - iRate
+    - lottie-ios
     - MBProgressHUD
     - OpenSSL-Apple
     - QuickLayout
@@ -91,9 +94,10 @@ SPEC CHECKSUMS:
   Gloss: 1e8743f8de1fbe14a97f220ff901cba91ae5f8f8
   HockeySDK: 15afe6bc0a5bfe3a531fd73dbf082095f37dac3b
   iRate: 4fc69958788624545e5d050c8ffd20884013c3f1
+  lottie-ios: 3fef45d3fabe63e3c7c2eb603dd64ddfffc73062
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   OpenSSL-Apple: cd153d705ef350eb834ae7ff5f21f792b51ed208
-  PIALibrary: 9bd13d30d751b032a154ab3b806e2ac982a44cf9
+  PIALibrary: 31ba3f0a1575931be2472d1b9d590f08bd7876be
   PIATunnel: fc7e7d0a812c6c98138ac315e7a43008aadd15b2
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
