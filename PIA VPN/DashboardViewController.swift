@@ -189,7 +189,7 @@ class DashboardViewController: AutolayoutViewController {
         preset.shouldRecoverPendingSignup = false
         preset.isEphemeral = true
 
-        let vc = PIAWelcomeViewController.with(preset: preset, delegate: self)
+        let vc = GetStartedViewController.withPurchase(preset: preset, delegate: self)
         present(vc, animated: true, completion: nil)
     }
     
@@ -293,9 +293,7 @@ class DashboardViewController: AutolayoutViewController {
             toggleConnection.isIndeterminate = false
             toggleConnection.stopButtonAnimation()
             AppPreferences.shared.lastVPNConnectionStatus = .disconnected
-            navigationItem.titleView = NavigationLogoView()
-            Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
-            setNeedsStatusBarAppearanceUpdate()
+            resetNavigationBar()
 
         case .connecting:
             toggleConnection.isOn = false
@@ -381,11 +379,11 @@ class DashboardViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
 
-        navigationItem.titleView = NavigationLogoView()
+//        navigationItem.titleView = NavigationLogoView()
         Theme.current.applyLightBackground(view)
         Theme.current.applyLightBackground(viewContainer!)
 
-        Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
+//        Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
         Theme.current.applyCaption(labelPublicIPCaption, appearance: .dark)
         Theme.current.applyTitle(labelPublicIP, appearance: .dark)
         Theme.current.applyCaption(labelRegionCaption, appearance: .dark)
@@ -398,6 +396,22 @@ class DashboardViewController: AutolayoutViewController {
         viewFooterSeparator.backgroundColor = tableRows.separatorColor
         constraintFooterSeparatorHeight.constant = 1.0 / UIScreen.main.scale
         tableRows.reloadData()
+    }
+    
+    private func resetNavigationBar() {
+        //First reset the green background
+        DispatchQueue.main.async {
+            Theme.current.applyCustomNavigationBar(self.navigationController!.navigationBar,
+                                                   withTintColor: nil,
+                                                   andBarTintColors: nil)
+            //Show the PIA logo
+            self.navigationItem.titleView = NavigationLogoView()
+            if let navController = self.navigationController {
+                //Apply the theme background color
+                Theme.current.applyLightNavigationBar(navController.navigationBar)
+            }
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
     }
 }
 
@@ -434,8 +448,8 @@ extension DashboardViewController: MenuViewControllerDelegate {
             selectRegion(animated: true)
             
         case .logout:
+            resetNavigationBar()
             presentLogin()
-            
         default:
             fatalError("Unhandled item '\(item)'")
         }
