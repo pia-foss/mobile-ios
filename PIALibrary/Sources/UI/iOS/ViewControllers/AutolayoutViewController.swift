@@ -174,7 +174,7 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
 
     public func showLoadingAnimation() {
         if graphLoad == nil {
-            containerView = UIView(frame: self.view.frame)
+            containerView = UIView(frame: UIScreen.main.bounds)
             containerView?.backgroundColor = .white
             containerView?.alpha = 0.2
             graphLoad = LOTAnimationView(name: "pia-spinner")
@@ -187,8 +187,10 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
         graphLoad?.loopAnimation = true
         if let graphLoad = graphLoad,
             let containerView = containerView {
-            view.addSubview(containerView)
-            view.addSubview(graphLoad)
+            if let key = self.navigationController?.view {
+                key.addSubview(containerView)
+                key.addSubview(graphLoad)
+            }
             graphLoad.play()
         }
     }
@@ -200,10 +202,10 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
     }
     
     public func adjustLottieSize() {
-        let lottieWidth = view.frame.width/4
+        let lottieWidth = UIScreen.main.bounds.width/4
         graphLoad?.frame = CGRect(
-            x: (view.frame.width/2) - (lottieWidth/2),
-            y: (view.frame.height - lottieWidth)/2,
+            x: (UIScreen.main.bounds.width/2) - (lottieWidth/2),
+            y: (UIScreen.main.bounds.height - lottieWidth)/2,
             width: lottieWidth,
             height: lottieWidth
         )
