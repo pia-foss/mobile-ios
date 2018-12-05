@@ -708,7 +708,7 @@ You will not be charged during this process.</string>
         <!--Welcome View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" customClass="PIAWelcomeViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PIAWelcomeViewController" automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" customClass="PIAWelcomeViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1162,6 +1162,6 @@ You will not be charged during this process.</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="L3M-2E-gAx"/>
-        <segue reference="Vqa-Fa-HWk"/>
+        <segue reference="eeI-Xa-Rq6"/>
     </inferredMetricsTieBreakers>
 </document>

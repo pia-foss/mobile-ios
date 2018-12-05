@@ -58,6 +58,19 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
         return nav
     }
     
+    public static func withPurchase(preset: Preset? = nil, delegate: PIAWelcomeViewControllerDelegate? = nil) -> UIViewController {
+        if let vc = StoryboardScene.Welcome.storyboard.instantiateViewController(withIdentifier: "PIAWelcomeViewController") as? PIAWelcomeViewController {
+            if let customPreset = preset {
+                vc.preset = customPreset
+            }
+            vc.delegate = delegate
+            let navigationController = UINavigationController(rootViewController: vc)
+            navigationController.setNavigationBarHidden(false,
+                                                        animated: false)
+            return navigationController
+        }
+        return UIViewController()
+    }
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
