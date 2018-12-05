@@ -85,6 +85,9 @@ extension Theme {
         menuSettings.menuFadeStatusBar = false
         menuSettings.menuPresentMode = .menuSlideIn
         menuSettings.menuAnimationFadeStrength = 0.5
+        menuSettings.menuAnimationBackgroundColor = palette.appearance == .dark ?
+            UIColor.black.withAlphaComponent(0.72) :
+            UIColor.piaGrey1.withAlphaComponent(0.75)
     }
     
     func applyPageControl(_ pageControl: FXPageControl) {
@@ -124,6 +127,39 @@ extension Theme {
     public func applyScrollableMap(_ imageView: UIImageView) {
         imageView.image = palette.appearance == .dark ?
             Asset.Piax.Global.scrollableMapDark.image : Asset.Piax.Global.scrollableMapLight.image
+    }
+    
+    public func applyMenuBackground(_ view: UIView) {
+        view.backgroundColor = palette.appearance == .dark ?
+            UIColor.piaGrey10 : UIColor.piaWhite
+    }
+
+    public func applyMenuSubtitle(_ label: UILabel) {
+        let textAlignment = label.textAlignment
+        label.style(style: TextStyle.textStyle13)
+        label.textAlignment = textAlignment
+    }
+
+    public func applyWarningMenuBackground(_ view: UIView) {
+        view.backgroundColor = UIColor.piaRed
+    }
+
+    public func applyMenuCaption(_ label: UILabel) {
+        let textAlignment = label.textAlignment
+        label.style(style: TextStyle.textStyle17)
+        label.textAlignment = textAlignment
+    }
+    
+    public func applyMenuSmallCaption(_ label: UILabel) {
+        let textAlignment = label.textAlignment
+        label.style(style: TextStyle.textStyle11)
+        label.text = label.text?.capitalized
+        label.textAlignment = textAlignment
+    }
+
+    public func applyMenuListStyle(_ label: UILabel) {
+        label.style(style: palette.appearance == .dark ?
+            TextStyle.textStyle6 : TextStyle.textStyle7)
     }
 
 }

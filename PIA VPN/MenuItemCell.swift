@@ -24,7 +24,7 @@ class MenuItemCell: UITableViewCell, Restylable {
     // MARK: Restylable
     
     func viewShouldRestyle() {
-        Theme.current.applySolidLightBackground(self)
-        Theme.current.applyList(labelTitle, appearance: .dark)
+        Theme.current.applyMenuBackground(self)
+        Theme.current.applyMenuListStyle(labelTitle)
     }
 }

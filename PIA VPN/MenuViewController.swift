@@ -310,11 +310,11 @@ class MenuViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
 
-        Theme.current.applyBrandBackground(view)
-        Theme.current.applyBrandBackground(viewHeader)
-        Theme.current.applySolidLightBackground(tableView)
+        Theme.current.applyMenuBackground(view)
+        Theme.current.applyMenuBackground(viewHeader)
+        Theme.current.applyMenuBackground(tableView)
         Theme.current.applyTitle(labelUsername, appearance: .light)
-        Theme.current.applyCaption(labelVersion, appearance: .light)
+        Theme.current.applyMenuSubtitle(labelVersion)
         tableView.reloadData()
     }
 }

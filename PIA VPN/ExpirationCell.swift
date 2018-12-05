@@ -20,7 +20,8 @@ class ExpirationCell: UITableViewCell, Restylable {
         super.awakeFromNib()
         
         labelUpgrade.text = L10n.Menu.Expiration.upgrade
-        imvAccessory.image = Asset.accessoryExpire.image
+        imvAccessory.image = Asset.accessoryExpire.image.withRenderingMode(.alwaysTemplate)
+        imvAccessory.tintColor = .white
     }
 
     func fill(withTimeLeft timeLeft: DateComponents) {
@@ -46,9 +47,9 @@ class ExpirationCell: UITableViewCell, Restylable {
         self.backgroundView = backgroundView
         
         Theme.current.applyLightBackground(self)
-        Theme.current.applyWarningBackground(backgroundView)
-        Theme.current.applyCaption(labelWarning, appearance: .dark)
-        Theme.current.applySmallCaption(labelUpgrade, appearance: .light)
+        Theme.current.applyWarningMenuBackground(backgroundView)
+        Theme.current.applyMenuCaption(labelWarning)
+        Theme.current.applyMenuSmallCaption(labelUpgrade)
         labelUpgrade.textColor = .white // XXX
     }
 }
