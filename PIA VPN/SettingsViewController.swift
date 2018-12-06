@@ -219,7 +219,8 @@ class SettingsViewController: AutolayoutViewController {
         redisplaySettings()
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshContentBlockerState), name: .UIApplicationDidBecomeActive, object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -264,6 +265,10 @@ class SettingsViewController: AutolayoutViewController {
         pendingPreferences.mace = sender.isOn
         redisplaySettings()
         reportUpdatedPreferences()
+    }
+    
+    @objc private func viewHasRotated() {
+        styleNavigationBar()
     }
 
     // XXX: no need to bufferize app preferences
