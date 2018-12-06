@@ -831,42 +831,38 @@ You will not be charged during this process.</string>
                                     </mask>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JeO-BO-hZn" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JeO-BO-hZn" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
                                 <rect key="frame" x="25" y="477" width="325" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="lv6-ch-s4O"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
                                 <connections>
                                     <segue destination="vXZ-lx-hvc" kind="show" identifier="LoginAccountSegue" id="L3M-2E-gAx"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ei6-5m-nGj" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ei6-5m-nGj" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
                                 <rect key="frame" x="25" y="547" width="325" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Hl4-Za-4hO"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
                                 <connections>
                                     <segue destination="vXZ-lx-hvc" kind="show" identifier="PurchaseVPNPlanSegue" id="6TQ-Zp-jc0"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gwt-hk-1rU">
-                                <rect key="frame" x="25" y="617" width="46" height="20"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gwt-hk-1rU">
+                                <rect key="frame" x="25" y="617" width="30" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="SL8-XB-pmh"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
                                 <connections>
                                     <segue destination="vXZ-lx-hvc" kind="show" identifier="RedeemGiftCardSegue" id="iBM-Ob-Upg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BfP-Y8-7Sg">
-                                <rect key="frame" x="304" y="617" width="46" height="20"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BfP-Y8-7Sg">
+                                <rect key="frame" x="320" y="617" width="30" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="8C6-6B-4dA"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
                                 <connections>
                                     <segue destination="Y1W-Um-2lp" kind="show" identifier="RestorePurchaseSegue" id="Od1-de-d57"/>
                                 </connections>
