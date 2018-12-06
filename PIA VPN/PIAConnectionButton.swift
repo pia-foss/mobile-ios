@@ -28,7 +28,8 @@ class PIAConnectionButton: UIButton, Restylable {
     private var isAnimating: Bool = false
     var isOn: Bool = false
     var isIndeterminate: Bool = false
-    
+    private var observedBounds: Any? = nil
+
     private let circlePathLayer = CAShapeLayer()
     private var circleRadius: CGFloat!
     private var currenStrokeEnd: CGFloat!
@@ -45,6 +46,7 @@ class PIAConnectionButton: UIButton, Restylable {
     }
 
     deinit {
+        self.observedBounds = nil
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -73,6 +75,14 @@ class PIAConnectionButton: UIButton, Restylable {
         self.layer.addSublayer(circlePathLayer)
         self.clipsToBounds = true
         
+        self.observedBounds = observe(\.bounds, options: [.new]) { object, change in
+            if let newValue = change.newValue {
+                self.layer.cornerRadius = self.frame.width/2
+                self.circlePathLayer.frame = newValue
+                self.layoutSubviews()
+            }
+        }
+
     }
     
     private func circleAnimationPath() -> UIBezierPath {
