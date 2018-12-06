@@ -419,25 +419,42 @@
                             <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y48-1b-51o">
                                 <rect key="frame" x="0.0" y="44" width="375" height="768"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="Koq-Ia-5Qo">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Koq-Ia-5Qo">
                                         <rect key="frame" x="8" y="8" width="359" height="752"/>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingCell" textLabel="ezh-Cu-3qy" detailTextLabel="ou1-xz-0HP" style="IBUITableViewCellStyleValue1" id="cDq-J2-0D3">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FooterCell" textLabel="ezh-Cu-3qy" style="IBUITableViewCellStyleDefault" id="cDq-J2-0D3">
                                                 <rect key="frame" x="0.0" y="55.333333333333343" width="359" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cDq-J2-0D3" id="ds6-dz-CMi">
                                                     <rect key="frame" x="0.0" y="0.0" width="359" height="43.666666666666664"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontSizeToFit="NO" id="ezh-Cu-3qy">
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontSizeToFit="NO" id="ezh-Cu-3qy">
+                                                            <rect key="frame" x="15" y="0.0" width="329" height="43.666666666666664"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingCell" textLabel="b42-md-11x" detailTextLabel="Ig8-Cy-Rh8" style="IBUITableViewCellStyleValue1" id="H5j-r8-6Tp">
+                                                <rect key="frame" x="0.0" y="99.333333333333343" width="359" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H5j-r8-6Tp" id="uLF-Sz-8Nd">
+                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="43.666666666666664"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontSizeToFit="NO" id="b42-md-11x">
                                                             <rect key="frame" x="15" y="11.999999999999998" width="33.333333333333336" height="20.333333333333332"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ou1-xz-0HP">
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ig8-Cy-Rh8">
                                                             <rect key="frame" x="300" y="11.999999999999998" width="44" height="20.333333333333332"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -880,6 +897,7 @@
                         <segue destination="kH0-rw-uGL" kind="presentation" identifier="MenuSegueIdentifier" id="mub-pZ-Rbt"/>
                         <segue destination="LrP-0B-Ym4" kind="show" identifier="SelectRegionSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_VPN" customModuleProvider="target" animates="NO" id="Z3b-zh-fBg"/>
                         <segue destination="LrP-0B-Ym4" kind="show" identifier="SelectRegionAnimatedSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_VPN" customModuleProvider="target" id="Ic8-R6-xho"/>
+                        <segue destination="SAw-ll-7Hp" kind="presentation" identifier="SettingsSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_VPN" customModuleProvider="target" id="Skk-3e-UDA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GcN-zf-hGC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1074,7 +1092,6 @@
                         <outlet property="viewHeader" destination="5Db-9L-gGu" id="RjK-YQ-KTG"/>
                         <segue destination="W4F-zm-KqY" kind="custom" identifier="AccountSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_VPN" customModuleProvider="target" id="DhA-zm-xhL"/>
                         <segue destination="ckY-cv-bTr" kind="custom" identifier="AboutSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_VPN" customModuleProvider="target" id="qGJ-vO-BTl"/>
-                        <segue destination="SAw-ll-7Hp" kind="custom" identifier="SettingsSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_VPN" customModuleProvider="target" id="qgQ-YP-4d8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kNN-xt-8ZC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2034,6 +2051,6 @@
         <image name="scrollableMap-light" width="1740" height="870"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ic8-R6-xho"/>
+        <segue reference="Z3b-zh-fBg"/>
     </inferredMetricsTieBreakers>
 </document>

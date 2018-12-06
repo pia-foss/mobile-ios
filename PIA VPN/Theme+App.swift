@@ -162,4 +162,12 @@ extension Theme {
             TextStyle.textStyle6 : TextStyle.textStyle7)
     }
 
+    /// :nodoc:
+    public func applySettingsCellTitle(_ label: UILabel, appearance: Appearance) {
+        if palette.appearance == Appearance.light {
+            label.style(style: TextStyle.textStyle7)
+        } else {
+            label.style(style: TextStyle.textStyle6)
+        }
+    }
 }

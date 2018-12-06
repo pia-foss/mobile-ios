@@ -144,6 +144,7 @@ class SettingsViewController: AutolayoutViewController {
     
     private struct Cells {
         static let setting = "SettingCell"
+        static let footer = "FooterCell"
     }
     
     @IBOutlet private weak var tableView: UITableView!
@@ -190,7 +191,6 @@ class SettingsViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        title = L10n.Menu.Item.settings
 //        buttonConfirm.isEnabled = false
 //        navigationItem.rightBarButtonItem = buttonConfirm
         
@@ -219,11 +219,13 @@ class SettingsViewController: AutolayoutViewController {
         redisplaySettings()
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshContentBlockerState), name: .UIApplicationDidBecomeActive, object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refreshContentBlockerState()
+        styleNavigationBar()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -564,16 +566,52 @@ class SettingsViewController: AutolayoutViewController {
     
     // MARK: Restylable
     
+    private func styleNavigationBar() {
+        
+        let currentStatus = Client.providers.vpnProvider.vpnStatus
+        
+        //Theme.current.applyVPNStatus(labelStatus, forStatus: currentStatus)
+        
+        switch currentStatus {
+        case .connected:
+            let titleLabelView = UILabel(frame: CGRect.zero)
+            titleLabelView.style(style: TextStyle.textStyle6)
+            titleLabelView.text = L10n.Menu.Item.settings
+            Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
+                                                   withTintColor: .white,
+                                                   andBarTintColors: [UIColor.piaGreen,
+                                                                      UIColor.piaGreenDark20])
+            navigationItem.titleView = titleLabelView
+            setNeedsStatusBarAppearanceUpdate()
+            
+        default:
+            let titleLabelView = UILabel(frame: CGRect.zero)
+            titleLabelView.style(style: Theme.current.palette.appearance == .dark ?
+                TextStyle.textStyle6 :
+                TextStyle.textStyle7)
+            titleLabelView.text = L10n.Menu.Item.settings
+            Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
+                                                   withTintColor: nil,
+                                                   andBarTintColors: nil)
+            navigationItem.titleView = titleLabelView
+            setNeedsStatusBarAppearanceUpdate()
+            
+        }
+    }
+    
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
+        styleNavigationBar()
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
+            Theme.current.applyLightBackground(view)
             Theme.current.applyLightBackground(viewContainer)
         }
         Theme.current.applyLightBackground(tableView)
         Theme.current.applyDividerToSeparator(tableView)
         tableView.reloadData()
+        
     }
     
     ///Check if the current value of the DNS is valid. If not, reset to default PIA server
@@ -628,28 +666,40 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
 
-    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        switch visibleSections[section] {
-        case .applicationSettings:
-            var footer: [String] = [
-                L10n.Settings.ApplicationSettings.KillSwitch.footer
-            ]
-            if Flags.shared.enablesMACESetting {
-                footer.append(L10n.Settings.ApplicationSettings.Mace.footer)
-            }
-            return footer.joined(separator: "\n\n")
-            
-        case .reset:
-            return L10n.Settings.Reset.footer
-            
-        case .contentBlocker:
-            return L10n.Settings.ContentBlocker.footer
-
-        default:
-            break
-        }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
+        if let cell = tableView.dequeueReusableCell(withIdentifier: Cells.footer) {
+            cell.textLabel?.numberOfLines = 0
+            cell.textLabel?.style(style: TextStyle.textStyle21)
+            
+            switch visibleSections[section] {
+            case .applicationSettings:
+                var footer: [String] = [
+                    L10n.Settings.ApplicationSettings.KillSwitch.footer
+                ]
+                if Flags.shared.enablesMACESetting {
+                    footer.append(L10n.Settings.ApplicationSettings.Mace.footer)
+                }
+                cell.textLabel?.text = footer.joined(separator: "\n\n")
+                
+            case .reset:
+                cell.textLabel?.text = L10n.Settings.Reset.footer
+                
+            case .contentBlocker:
+                cell.textLabel?.text = L10n.Settings.ContentBlocker.footer
+                
+            default:
+                return nil
+            }
+            
+            return cell
+        }
         return nil
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -794,7 +844,13 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         Theme.current.applySolidLightBackground(cell)
-        Theme.current.applyDetailTableCell(cell)
+        if let textLabel = cell.textLabel {
+            Theme.current.applySettingsCellTitle(textLabel,
+                                                 appearance: .dark)
+        }
+        if let detailLabel = cell.detailTextLabel {
+            Theme.current.applySubtitle(detailLabel)
+        }
 
         return cell
     }
@@ -971,10 +1027,11 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         Theme.current.applyTableSectionHeader(view)
     }
-
+    
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         Theme.current.applyTableSectionFooter(view)
     }
+
 }
 
 extension SettingsViewController: OptionsViewControllerDelegate {

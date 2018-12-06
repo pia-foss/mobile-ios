@@ -213,7 +213,11 @@ class DashboardViewController: AutolayoutViewController {
         let segue = (animated ? StoryboardSegue.Main.selectRegionAnimatedSegueIdentifier : StoryboardSegue.Main.selectRegionSegueIdentifier)
         perform(segue: segue)
     }
-    
+
+    func openSettings() {
+        perform(segue: StoryboardSegue.Main.settingsSegueIdentifier)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         navigationItem.setEmptyBackButton()
 
@@ -379,11 +383,11 @@ class DashboardViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
 
-//        navigationItem.titleView = NavigationLogoView()
+        navigationItem.titleView = NavigationLogoView()
         Theme.current.applyLightBackground(view)
         Theme.current.applyLightBackground(viewContainer!)
 
-//        Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
+        Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
         Theme.current.applyCaption(labelPublicIPCaption, appearance: .dark)
         Theme.current.applyTitle(labelPublicIP, appearance: .dark)
         Theme.current.applyCaption(labelRegionCaption, appearance: .dark)
@@ -446,7 +450,9 @@ extension DashboardViewController: MenuViewControllerDelegate {
         switch item {
         case .selectRegion:
             selectRegion(animated: true)
-            
+        case .settings:
+            openSettings()
+
         case .logout:
             resetNavigationBar()
             presentLogin()
