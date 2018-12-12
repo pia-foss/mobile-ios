@@ -128,6 +128,7 @@ class AppPreferences {
                                              group: AppConstants.appGroup).password(for: oldUsername) {
             //User is loggedIn
             try? PIALibrary.Keychain().set(username: oldUsername)
+            try? PIALibrary.Keychain().set(publicUsername: oldUsername)
             defaults.removeObject(forKey: "LoggedUsername")
             defaults.synchronize()
         }
