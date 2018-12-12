@@ -175,8 +175,9 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
     public func showLoadingAnimation() {
         if graphLoad == nil {
             containerView = UIView(frame: UIScreen.main.bounds)
-            containerView?.backgroundColor = .white
-            containerView?.alpha = 0.2
+            containerView?.backgroundColor = Theme.current.palette.appearance == .dark ?
+                UIColor.black.withAlphaComponent(0.72) :
+                UIColor.piaGrey1.withAlphaComponent(0.75)
             graphLoad = LOTAnimationView(name: "pia-spinner")
             adjustLottieSize()
         }

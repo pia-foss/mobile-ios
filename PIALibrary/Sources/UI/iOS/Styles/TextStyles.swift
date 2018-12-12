@@ -195,6 +195,15 @@ public extension TextStyle {
         lineHeight: 15
     )
     
+    public static let textStyle21 = TextStyle(
+        font: UIFont.regularFontWith(size: 12),
+        color: UIColor.piaGrey4,
+        foregroundColor: nil,
+        backgroundColor: nil,
+        tintColor: nil,
+        lineHeight: 16
+    )
+    
     public static let versionNumberStyle = TextStyle(
         font: UIFont.regularFontWith(size: 14),
         color: UIColor.piaGrey4,

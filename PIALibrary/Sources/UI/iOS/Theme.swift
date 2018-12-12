@@ -48,7 +48,7 @@ public class Theme {
 
         /// The light background color.
         public var lightBackground: UIColor
-        
+
         /// The solid light background color.
         public var solidLightBackground: UIColor
         
@@ -288,6 +288,11 @@ public class Theme {
     
     /// :nodoc:
     public func applyLightBackground(_ view: UIView) {
+        view.backgroundColor = palette.lightBackground
+    }
+    
+    /// :nodoc:
+    public func applySettingsBackground(_ view: UIView) {
         view.backgroundColor = palette.lightBackground
     }
 
@@ -612,7 +617,7 @@ public class Theme {
         guard let hfv = view as? UITableViewHeaderFooterView, let label = hfv.textLabel else {
             return
         }
-        label.textColor = palette.emphasis
+        label.style(style: TextStyle.textStyle14)
     }
 
     /// :nodoc:
@@ -620,7 +625,7 @@ public class Theme {
         guard let hfv = view as? UITableViewHeaderFooterView, let label = hfv.textLabel else {
             return
         }
-        label.textColor = palette.textColor(forRelevance: 3, appearance: .dark)
+        label.style(style: TextStyle.textStyle21)
     }
 
     /// :nodoc:
