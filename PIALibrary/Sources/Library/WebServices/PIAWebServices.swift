@@ -71,11 +71,11 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     }
     
     func update(credentials: Credentials, email: String, _ callback: SuccessLibraryCallback?) {
-        let endpoint = ClientEndpoint.account
+        let endpoint = ClientEndpoint.updateAccount
         let parameters = ["email": email]
         let status = [200]
 
-        req(credentials, .post, endpoint, parameters, status, JSONRequestExecutor() { (json, status, error) in
+        req(credentials, .post, endpoint, useAuthToken: false, parameters, status, JSONRequestExecutor() { (json, status, error) in
             if let error = error {
                 callback?(error)
                 return

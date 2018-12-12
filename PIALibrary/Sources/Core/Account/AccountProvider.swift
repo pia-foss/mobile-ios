@@ -65,9 +65,10 @@ public protocol AccountProvider: class {
      - Postcondition:
          - Posts `Notification.Name.PIAAccountDidUpdate` on success.
      - Parameter request: The account update request.
+     - Parameter password: The credentials to perform the operation.
      - Parameter callback: Returns the updated `AccountInfo`.
      */
-    func update(with request: UpdateAccountRequest, _ callback: LibraryCallback<AccountInfo>?)
+    func update(with request: UpdateAccountRequest, andPassword password: String, _ callback: LibraryCallback<AccountInfo>?)
 
     /**
      Logs out of the system.
