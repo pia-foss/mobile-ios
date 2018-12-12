@@ -20,7 +20,9 @@ enum ClientEndpoint: String, Endpoint {
     case token = "v2/token"
 
     case account = "v2/account"
-    
+
+    case updateAccount = "account"
+
     case payment
     
     case status

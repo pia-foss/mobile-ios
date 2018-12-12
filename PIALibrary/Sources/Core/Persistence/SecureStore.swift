@@ -17,6 +17,10 @@ protocol SecureStore: class {
     
     func setUsername(_ username: String?)
     
+    func publicUsername() -> String?
+    
+    func setPublicUsername(_ username: String?)
+    
     func password(for username: String) -> String?
 
     func setPassword(_ password: String?, for username: String)

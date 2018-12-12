@@ -48,7 +48,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
     }
     
     var publicUsername: String? {
-        guard let username = accessedDatabase.plain.publicUsername else {
+        guard let username = accessedDatabase.secure.publicUsername() else {
             return nil
         }
         return username
@@ -69,7 +69,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
         set {
             if let user = newValue {
-                accessedDatabase.plain.publicUsername = user.credentials.username
+                accessedDatabase.secure.setPublicUsername(user.credentials.username)
                 accessedDatabase.secure.setPassword(user.credentials.password, for: user.credentials.username)
                 accessedDatabase.plain.accountInfo = user.info
             } else {
@@ -77,7 +77,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                     accessedDatabase.secure.setPassword(nil, for: username)
                     accessedDatabase.secure.setUsername(nil)
                 }
-                accessedDatabase.plain.publicUsername = nil
+                accessedDatabase.secure.setPublicUsername(nil)
                 accessedDatabase.plain.accountInfo = nil
             }
         }
@@ -111,7 +111,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         let tokenComponents = token.split(by: token.count/2)
         if let first = tokenComponents.first,
             let last = tokenComponents.last {
-            self.accessedDatabase.plain.publicUsername = username
+            self.accessedDatabase.secure.setPublicUsername(username)
             self.accessedDatabase.secure.setUsername(first)
             self.accessedDatabase.secure.setToken(token,
                                                   for: self.accessedDatabase.secure.tokenKey(for: first))
@@ -193,11 +193,13 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
     }
     
-    func update(with request: UpdateAccountRequest, _ callback: ((AccountInfo?, Error?) -> Void)?) {
+    func update(with request: UpdateAccountRequest, andPassword password: String, _ callback: ((AccountInfo?, Error?) -> Void)?) {
         guard let user = currentUser else {
             preconditionFailure()
         }
-        webServices.update(credentials: user.credentials, email: request.email) { (error) in
+        let credentials = Credentials(username: Client.providers.accountProvider.publicUsername ?? "",
+                                      password: password)
+        webServices.update(credentials: credentials, email: request.email) { (error) in
             if let _ = error {
                 callback?(nil, error)
                 return
@@ -298,7 +300,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 self.accessedStore.finishTransaction(transaction, success: true)
             }
             self.accessedDatabase.plain.lastSignupEmail = nil
-            self.accessedDatabase.plain.publicUsername = credentials.username
+            self.accessedDatabase.secure.setPublicUsername(credentials.username)
             self.accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
 
             let user = UserAccount(credentials: credentials, info: nil)
@@ -335,7 +337,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 let tokenComponents = token.split(by: token.count/2)
                 if let first = tokenComponents.first,
                     let last = tokenComponents.last {
-                    self.accessedDatabase.plain.publicUsername = credentials.username
+                    self.accessedDatabase.secure.setPublicUsername(credentials.username)
                     self.accessedDatabase.secure.setUsername(first)
                     self.accessedDatabase.secure.setToken(token,
                                                           for: self.accessedDatabase.secure.tokenKey(for: first))
@@ -444,7 +446,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             accessedDatabase.secure.setUsername(nil)
             accessedDatabase.secure.setToken(nil, for: accessedDatabase.secure.tokenKey(for: username))
         }
-        accessedDatabase.plain.publicUsername = nil
+        accessedDatabase.secure.setPublicUsername(nil)
         accessedDatabase.plain.accountInfo = nil
     }
     #endif
