@@ -28,6 +28,7 @@ public class Keychain {
     private let accessGroup: String?
     
     private let usernameKey = "USERNAME_KEY"
+    private let publicUsernameKey = "PUBLIC_USERNAME_KEY"
 
     /**
      Default initializer. Uses the default keychain associated with the main bundle identifier.
@@ -285,6 +286,64 @@ extension Keychain {
         return token
     }
 
+}
+
+extension Keychain {
+    
+    // MARK: Public Username
+    
+    /// :nodoc:
+    public func set(publicUsername: String) throws {
+        removePublicUsername()
+        
+        var query = [String: Any]()
+        setScope(query: &query)
+        query[kSecClass as String] = kSecClassGenericPassword
+        query[kSecAttrAccount as String] = publicUsernameKey
+        query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
+        query[kSecValueData as String] = publicUsername.data(using: .utf8)
+        
+        let status = SecItemAdd(query as CFDictionary, nil)
+        guard (status == errSecSuccess) else {
+            throw KeychainError.add
+        }
+    }
+    
+    /// :nodoc:
+    @discardableResult public func removePublicUsername() -> Bool {
+        var query = [String: Any]()
+        setScope(query: &query)
+        query[kSecClass as String] = kSecClassGenericPassword
+        query[kSecAttrAccount as String] = publicUsernameKey
+        
+        let status = SecItemDelete(query as CFDictionary)
+        return (status == errSecSuccess)
+    }
+    
+    /// :nodoc:
+    public func publicUsername() throws -> String {
+        var query = [String: Any]()
+        setScope(query: &query)
+        query[kSecClass as String] = kSecClassGenericPassword
+        query[kSecAttrAccount as String] = publicUsernameKey
+        //query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
+        query[kSecMatchLimit as String] = kSecMatchLimitOne
+        query[kSecReturnData as String] = true
+        
+        var result: AnyObject?
+        let status = SecItemCopyMatching(query as CFDictionary, &result)
+        guard (status == errSecSuccess) else {
+            throw KeychainError.notFound
+        }
+        guard let data = result as? Data else {
+            throw KeychainError.notFound
+        }
+        guard let token = String(data: data, encoding: .utf8) else {
+            throw KeychainError.notFound
+        }
+        return token
+    }
+    
 }
 
 extension Keychain {

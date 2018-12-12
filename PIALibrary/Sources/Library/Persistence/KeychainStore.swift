@@ -80,6 +80,21 @@ extension KeychainStore {
 
 extension KeychainStore {
     
+    func publicUsername() -> String? {
+        return try? backend.publicUsername()
+    }
+    
+    func setPublicUsername(_ username: String?) {
+        if let username = username {
+            try? backend.set(publicUsername: username)
+        } else {
+            backend.removePublicUsername()
+        }
+    }
+}
+
+extension KeychainStore {
+    
     func token(for username: String) -> String? {
         return try? backend.token(for: username)
     }
