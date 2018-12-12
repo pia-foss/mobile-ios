@@ -83,12 +83,24 @@ internal enum L10n {
       internal static let prompt = L10n.tr("Localizable", "account.reveal.prompt")
     }
     internal enum Save {
-      /// Update
+      /// Update email
       internal static let item = L10n.tr("Localizable", "account.save.item")
       /// Authenticate to save changes
       internal static let prompt = L10n.tr("Localizable", "account.save.prompt")
       /// Your email address has been saved.
       internal static let success = L10n.tr("Localizable", "account.save.success")
+    }
+    internal enum Update {
+      internal enum Email {
+        internal enum RequirePassword {
+          /// Submit
+          internal static let button = L10n.tr("Localizable", "account.update.email.requirePassword.button")
+          /// For security reasons we require your PIA password to perform a change in your account. Please input your PIA password to proceed.
+          internal static let message = L10n.tr("Localizable", "account.update.email.requirePassword.message")
+          /// PIA Password Required
+          internal static let title = L10n.tr("Localizable", "account.update.email.requirePassword.title")
+        }
+      }
     }
     internal enum Username {
       /// Username
