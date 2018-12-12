@@ -118,6 +118,8 @@ class AccountViewController: AutolayoutViewController {
 
     @IBAction private func saveChanges(_ sender: Any?) {
         
+        textEmail.resignFirstResponder()
+        
         guard canSaveAccount else {
             return
         }
@@ -128,6 +130,8 @@ class AccountViewController: AutolayoutViewController {
         
         let alert = Macros.alert(L10n.Account.Update.Email.RequirePassword.title,
                                  L10n.Account.Update.Email.RequirePassword.message)
+        
+        alert.addCancelAction(L10n.Global.cancel)
         let action = UIAlertAction(title: L10n.Account.Update.Email.RequirePassword.button,
                                    style: .default) { [weak self] (alertAction) in
             
