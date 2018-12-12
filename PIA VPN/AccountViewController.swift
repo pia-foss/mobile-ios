@@ -117,49 +117,67 @@ class AccountViewController: AutolayoutViewController {
     // MARK: Actions
 
     @IBAction private func saveChanges(_ sender: Any?) {
+        
         guard canSaveAccount else {
             return
         }
     
-        SensitiveOperation.perform(withReason: L10n.Account.Save.prompt) {
-            guard let email = self.textEmail.text else {
-                return
-            }
-
-            log.debug("Account: Modifying account email...")
+        guard let email = self.textEmail.text else {
+            return
+        }
+        
+        let alert = Macros.alert(L10n.Account.Update.Email.RequirePassword.title,
+                                 L10n.Account.Update.Email.RequirePassword.message)
+        let action = UIAlertAction(title: L10n.Account.Update.Email.RequirePassword.button,
+                                   style: .default) { [weak self] (alertAction) in
             
-            let request = UpdateAccountRequest(email: email)
-            let hud = HUD()
-            
-            Client.providers.accountProvider.update(with: request) { (info, error) in
-                hud.hide()
-                
-                guard let _ = info else {
-                    if let error = error {
-                        log.error("Account: Failed to modify account email (error: \(error))")
-                    } else {
-                        log.error("Account: Failed to modify account email")
-                    }
-
-                    self.textEmail.text = ""
-                    let alert = Macros.alert(L10n.Global.error, error?.localizedDescription)
-                    alert.addCancelAction(L10n.Global.close)
-                    self.present(alert, animated: true, completion: nil)
+            if let weakSelf = self {
+                if let textField = alert.textFields?.first,
+                    let password = textField.text {
                     
-                    return
+                    log.debug("Account: Modifying account email...")
+                    
+                    let request = UpdateAccountRequest(email: email)
+                    let hud = HUD()
+                    
+                    Client.providers.accountProvider.update(with: request,
+                                                            andPassword: password) { (info, error) in
+                                                                hud.hide()
+                                                                
+                                                                guard let _ = info else {
+                                                                    if let error = error {
+                                                                        log.error("Account: Failed to modify account email (error: \(error))")
+                                                                    } else {
+                                                                        log.error("Account: Failed to modify account email")
+                                                                    }
+                                                                    
+                                                                    weakSelf.textEmail.text = ""
+                                                                    let alert = Macros.alert(L10n.Global.error, error?.localizedDescription)
+                                                                    alert.addCancelAction(L10n.Global.close)
+                                                                    self?.present(alert, animated: true, completion: nil)
+                                                                    
+                                                                    return
+                                                                }
+                                                                
+                                                                log.debug("Account: Email successfully modified")
+                                                                let alert = Macros.alert(nil, L10n.Account.Save.success)
+                                                                alert.addCancelAction(L10n.Global.ok)
+                                                                weakSelf.present(alert, animated: true, completion: nil)
+                                                                weakSelf.textEmail.text = email
+                                                                weakSelf.textEmail.endEditing(true)
+                                                                weakSelf.canSaveAccount = false
+                    }
+                    
                 }
 
-                log.debug("Account: Email successfully modified")
-                let alert = Macros.alert(nil, L10n.Account.Save.success)
-                alert.addCancelAction(L10n.Global.ok)
-                self.present(alert, animated: true, completion: nil)
-                
-                self.textEmail.text = email
-                self.textEmail.endEditing(true)
-                
-                self.canSaveAccount = false
             }
         }
+        alert.addTextField { (textField) in
+            textField.isSecureTextEntry = true
+        }
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
     @IBAction private func renewSubscriptionWithUncreditedPurchase(_ sender: Any?) {

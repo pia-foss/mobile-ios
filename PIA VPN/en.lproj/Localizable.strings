@@ -87,7 +87,7 @@
 "account.restore.button" = "RESTORE PURCHASE";
 "account.restore.failure.title" = "Restore purchase";
 "account.restore.failure.message" = "No redeemable purchase was found for renewal.";
-"account.save.item" = "Update";
+"account.save.item" = "Update email";
 "account.save.prompt" = "Authenticate to save changes";
 "account.save.success" = "Your email address has been saved.";
 "account.reveal.prompt" = "Authenticate to reveal";
@@ -96,7 +96,10 @@
 "account.accessibility.eye.hint.conceal" = "Tap to conceal password";
 "account.expiry_date.information" = "Your plan will expire on %@.";
 "account.expiry_date.expired" = "Your plan has expired.";
-
+"account.update.email.requirePassword.title" = "PIA Password Required";
+"account.update.email.requirePassword.message" = "For security reasons we require your PIA password to perform a change in your account. Please input your PIA password to proceed.";
+"account.update.email.requirePassword.button" = "Submit";
+"
 // SETTINGS
 
 "settings.connection.title" = "CONNECTION";
