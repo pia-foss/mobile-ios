@@ -92,13 +92,15 @@ internal enum L10n {
     }
     internal enum Update {
       internal enum Email {
-        internal enum RequirePassword {
-          /// Submit
-          internal static let button = L10n.tr("Localizable", "account.update.email.requirePassword.button")
-          /// For security reasons we require your PIA password to perform a change in your account. Please input your PIA password to proceed.
-          internal static let message = L10n.tr("Localizable", "account.update.email.requirePassword.message")
-          /// PIA Password Required
-          internal static let title = L10n.tr("Localizable", "account.update.email.requirePassword.title")
+        internal enum Require {
+          internal enum Password {
+            /// Submit
+            internal static let button = L10n.tr("Localizable", "account.update.email.require.password.button")
+            /// For security reasons we require your PIA password to perform a change in your account. Please input your PIA password to proceed.
+            internal static let message = L10n.tr("Localizable", "account.update.email.require.password.message")
+            /// PIA Password Required
+            internal static let title = L10n.tr("Localizable", "account.update.email.require.password.title")
+          }
         }
       }
     }

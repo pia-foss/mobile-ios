@@ -128,11 +128,11 @@ class AccountViewController: AutolayoutViewController {
             return
         }
         
-        let alert = Macros.alert(L10n.Account.Update.Email.RequirePassword.title,
-                                 L10n.Account.Update.Email.RequirePassword.message)
+        let alert = Macros.alert(L10n.Account.Update.Email.Require.Password.title,
+                                 L10n.Account.Update.Email.Require.Password.message)
         
         alert.addCancelAction(L10n.Global.cancel)
-        let action = UIAlertAction(title: L10n.Account.Update.Email.RequirePassword.button,
+        let action = UIAlertAction(title: L10n.Account.Update.Email.Require.Password.button,
                                    style: .default) { [weak self] (alertAction) in
             
             if let weakSelf = self {

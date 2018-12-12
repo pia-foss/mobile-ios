@@ -96,9 +96,9 @@
 "account.accessibility.eye.hint.conceal" = "Tap to conceal password";
 "account.expiry_date.information" = "Your plan will expire on %@.";
 "account.expiry_date.expired" = "Your plan has expired.";
-"account.update.email.requirePassword.title" = "PIA Password Required";
-"account.update.email.requirePassword.message" = "For security reasons we require your PIA password to perform a change in your account. Please input your PIA password to proceed.";
-"account.update.email.requirePassword.button" = "Submit";
+"account.update.email.require.password.title" = "PIA Password Required";
+"account.update.email.require.password.message" = "For security reasons we require your PIA password to perform a change in your account. Please input your PIA password to proceed.";
+"account.update.email.require.password.button" = "Submit";
 
 // SETTINGS
 
