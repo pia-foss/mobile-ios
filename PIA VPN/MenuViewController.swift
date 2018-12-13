@@ -93,10 +93,6 @@ class MenuViewController: AutolayoutViewController {
         .support: Asset.iconContact
     ]
     
-    private lazy var segueForItem: [Item: StoryboardSegue.Main] = [
-        .account: .accountSegueIdentifier,
-    ]
-    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -388,11 +384,6 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
             tableView.deselectRow(at: indexPath, animated: true)
             guard (item != .logout) else {
                 logOut()
-                return
-            }
-
-            if let segue = segueForItem[item] {
-                perform(segue: segue)
                 return
             }
             

@@ -78,11 +78,12 @@ class AccountViewController: AutolayoutViewController {
 
         viewSafe.layoutMargins = .zero
         textEmail.isEditable = true
-        textUsername.isEditable = false
+        textUsername.isUserInteractionEnabled = false
         canSaveAccount = false
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(redisplayAccount), name: .PIAAccountDidRefresh, object: nil)
+        nc.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
 
         Client.providers.accountProvider.refreshAndLogoutUnauthorized()
     }
@@ -91,6 +92,7 @@ class AccountViewController: AutolayoutViewController {
         super.viewWillAppear(animated)
     
         // update local state immediately
+        styleNavigationBarWithTitle(L10n.Menu.Item.account)
         redisplayAccount()
     }
 
@@ -114,6 +116,10 @@ class AccountViewController: AutolayoutViewController {
         establishUncreditedVisibility()
     }
 
+    @objc private func viewHasRotated() {
+        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
+    }
+    
     // MARK: Actions
 
     @IBAction private func saveChanges(_ sender: Any?) {
@@ -284,19 +290,26 @@ class AccountViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         
-        for label in [labelEmail!, labelUsername!] {
-            Theme.current.applyLabel(label, appearance: .dark)
+        styleNavigationBarWithTitle(L10n.Menu.Item.account)
+
+        if let viewContainer = viewContainer {
+            Theme.current.applyLightBackground(view)
+            Theme.current.applyLightBackground(viewContainer)
         }
+
+        Theme.current.applySubtitle(labelEmail)
+        Theme.current.applySubtitle(labelUsername)
+        
         Theme.current.applyInput(textEmail)
         Theme.current.applyInput(textUsername)
         Theme.current.applyDivider(viewSeparator)
         for label in [labelFooterOther!, labelExpiryInformation!] {
-            Theme.current.applySmallInfo(label, appearance: .dark)
+            Theme.current.applySubtitle(label)
         }
-        Theme.current.applyBody2(labelRestoreTitle, appearance: .dark)
-        Theme.current.applyBody1(labelRestoreInfo, appearance: .dark)
-        Theme.current.applyTextButton(buttonRestore)
-        
+        Theme.current.applyTitle(labelRestoreTitle, appearance: .dark)
+        Theme.current.applySubtitle(labelRestoreInfo)
+        buttonRestore.style(style: TextStyle.textStyle9)
+
         styleExpirationDate()
         
     }
