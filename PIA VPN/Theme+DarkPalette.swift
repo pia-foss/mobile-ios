@@ -23,7 +23,7 @@ extension Theme.Palette {
         palette.lightBackground = .piaGrey6
         palette.subtitleColor = .piaGrey8
         palette.lineColor = .white
-        palette.solidLightBackground = Macros.color(hex: 0x232323, alpha: 0xff)
+        palette.solidLightBackground = .piaGrey7
         palette.emphasis = lightPalette.emphasis
         palette.accent1 = lightPalette.accent1
         palette.accent2 = lightPalette.accent2

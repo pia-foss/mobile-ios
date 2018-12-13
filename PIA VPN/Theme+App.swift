@@ -16,7 +16,7 @@ extension Theme {
     // MARK: Navigation bar
     
     public func applyLightNavigationBar(_ navigationBar: UINavigationBar) {
-        navigationBar.tintColor = palette.textColor(forRelevance: 1, appearance: .dark)
+        navigationBar.tintColor = UIColor.piaGrey4
         navigationBar.barTintColor = palette.lightBackground
     }
     
@@ -35,7 +35,7 @@ extension Theme {
             if let tintColor = tintColor {
                 navigationBar.tintColor = tintColor
             } else {
-                navigationBar.tintColor = self.palette.textColor(forRelevance: 1, appearance: .dark)
+                navigationBar.tintColor = UIColor.piaGrey4
             }
             
             if let barTintColors = barTintColors,
@@ -162,4 +162,12 @@ extension Theme {
             TextStyle.textStyle6 : TextStyle.textStyle7)
     }
 
+    /// :nodoc:
+    public func applySettingsCellTitle(_ label: UILabel, appearance: Appearance) {
+        if palette.appearance == Appearance.light {
+            label.style(style: TextStyle.textStyle7)
+        } else {
+            label.style(style: TextStyle.textStyle6)
+        }
+    }
 }
