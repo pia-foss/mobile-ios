@@ -157,7 +157,8 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
     
     func refreshAccountInfo(_ callback: ((AccountInfo?, Error?) -> Void)?) {
         
-        guard let token = self.token else {
+        guard let token = self.token,
+            let _ = self.publicUsername else {
 
             guard let user = currentUser else {
                 preconditionFailure()
