@@ -99,6 +99,7 @@
 "account.update.email.require.password.title" = "PIA Password Required";
 "account.update.email.require.password.message" = "For security reasons we require your PIA password to perform a change in your account. Please input your PIA password to proceed.";
 "account.update.email.require.password.button" = "Submit";
+"account.error.unauthorized" = "Your username or password is incorrect.";
 
 // SETTINGS
 
