@@ -32,7 +32,7 @@ class AppPreferences {
 
     static let shared = AppPreferences()
     
-    private static let currentVersion = "3.0"
+    private static let currentVersion = "4.0"
     
     private let defaults: UserDefaults
 
@@ -118,12 +118,30 @@ class AppPreferences {
         ])
     }
     
+    private func migrateAPItoV2() {
+        // Migrate users from v1 to v2
+        log.debug("Migration to api v2")
+        //For v1 we stored the username in the plain database. We move the value to the keychain database.
+        //After refresh the account, the token will be generated
+        if let oldUsername = defaults.string(forKey: "LoggedUsername"),
+            let _ = try? PIALibrary.Keychain(team: AppConstants.teamId,
+                                             group: AppConstants.appGroup).password(for: oldUsername) {
+            //User is loggedIn
+            try? PIALibrary.Keychain().set(username: oldUsername)
+            try? PIALibrary.Keychain().set(publicUsername: oldUsername)
+            defaults.removeObject(forKey: "LoggedUsername")
+            defaults.synchronize()
+        }
+    }
+    
     func migrate() {
         let oldVersion = defaults.string(forKey: Entries.version)
         defaults.set(AppPreferences.currentVersion, forKey: Entries.version)
         
         guard (oldVersion == nil) else {
-            // migration to 3.0
+            if oldVersion != "4.0" {
+                migrateAPItoV2()
+            }
             return
         }
 
@@ -169,6 +187,9 @@ class AppPreferences {
 //        NSString *subscriptionPlan = [oldDefaults objectForKey:@"SubscriptionPlan"];
         oldDefaults.removeObject(forKey: "SubscriptionExpirationDate")
         oldDefaults.removeObject(forKey: "SubscriptionPlan")
+        
+        migrateAPItoV2()
+        
     }
 
     func reset() {

@@ -31,14 +31,6 @@ class AccountViewController: AutolayoutViewController {
     
     @IBOutlet private weak var textUsername: BorderedTextField!
     
-    @IBOutlet private weak var labelPassword: UILabel!
-    
-    @IBOutlet private weak var textPassword: BorderedTextField!
-    
-    @IBOutlet private weak var buttonEye: UIButton!
-    
-    @IBOutlet private weak var labelFooterEye: UILabel!
-
     @IBOutlet private weak var labelFooterOther: UILabel!
 
     @IBOutlet weak var labelExpiryInformation: UILabel!
@@ -78,10 +70,7 @@ class AccountViewController: AutolayoutViewController {
         labelEmail.text = L10n.Account.Email.caption
         textEmail.placeholder = L10n.Account.Email.placeholder
         labelUsername.text = L10n.Account.Username.caption
-        labelPassword.text = L10n.Account.Password.caption
-        buttonEye.setImage(Asset.iconEye.image, for: .normal)
         itemUpdate.title = L10n.Account.Save.item
-        labelFooterEye.text = L10n.Account.Eye.footer
         labelFooterOther.text = L10n.Account.Other.footer
         labelRestoreTitle.text = L10n.Account.Restore.title
         labelRestoreInfo.text = L10n.Account.Restore.description
@@ -90,9 +79,7 @@ class AccountViewController: AutolayoutViewController {
         viewSafe.layoutMargins = .zero
         textEmail.isEditable = true
         textUsername.isEditable = false
-        textPassword.isEditable = false
         canSaveAccount = false
-        updateEyeAccessibilityToPasswordVisibility(false)
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(redisplayAccount), name: .PIAAccountDidRefresh, object: nil)
@@ -130,76 +117,71 @@ class AccountViewController: AutolayoutViewController {
     // MARK: Actions
 
     @IBAction private func saveChanges(_ sender: Any?) {
+        
+        textEmail.resignFirstResponder()
+        
         guard canSaveAccount else {
             return
         }
     
-        SensitiveOperation.perform(withReason: L10n.Account.Save.prompt) {
-            guard let email = self.textEmail.text else {
-                return
-            }
-
-            log.debug("Account: Modifying account email...")
+        guard let email = self.textEmail.text else {
+            return
+        }
+        
+        let alert = Macros.alert(L10n.Account.Update.Email.Require.Password.title,
+                                 L10n.Account.Update.Email.Require.Password.message)
+        
+        alert.addCancelAction(L10n.Global.cancel)
+        let action = UIAlertAction(title: L10n.Account.Update.Email.Require.Password.button,
+                                   style: .default) { [weak self] (alertAction) in
             
-            let request = UpdateAccountRequest(email: email)
-            let hud = HUD()
-            
-            Client.providers.accountProvider.update(with: request) { (info, error) in
-                hud.hide()
-                
-                guard let _ = info else {
-                    if let error = error {
-                        log.error("Account: Failed to modify account email (error: \(error))")
-                    } else {
-                        log.error("Account: Failed to modify account email")
-                    }
-
-                    self.textEmail.text = ""
-                    let alert = Macros.alert(L10n.Global.error, error?.localizedDescription)
-                    alert.addCancelAction(L10n.Global.close)
-                    self.present(alert, animated: true, completion: nil)
+            if let weakSelf = self {
+                if let textField = alert.textFields?.first,
+                    let password = textField.text {
                     
-                    return
+                    log.debug("Account: Modifying account email...")
+                    
+                    let request = UpdateAccountRequest(email: email)
+                    let hud = HUD()
+                    
+                    Client.providers.accountProvider.update(with: request,
+                                                            andPassword: password) { (info, error) in
+                                                                hud.hide()
+                                                                
+                                                                guard let _ = info else {
+                                                                    if let error = error {
+                                                                        log.error("Account: Failed to modify account email (error: \(error))")
+                                                                    } else {
+                                                                        log.error("Account: Failed to modify account email")
+                                                                    }
+                                                                    
+                                                                    weakSelf.textEmail.text = ""
+                                                                    let alert = Macros.alert(L10n.Global.error, error?.localizedDescription)
+                                                                    alert.addCancelAction(L10n.Global.close)
+                                                                    self?.present(alert, animated: true, completion: nil)
+                                                                    
+                                                                    return
+                                                                }
+                                                                
+                                                                log.debug("Account: Email successfully modified")
+                                                                let alert = Macros.alert(nil, L10n.Account.Save.success)
+                                                                alert.addCancelAction(L10n.Global.ok)
+                                                                weakSelf.present(alert, animated: true, completion: nil)
+                                                                weakSelf.textEmail.text = email
+                                                                weakSelf.textEmail.endEditing(true)
+                                                                weakSelf.canSaveAccount = false
+                    }
+                    
                 }
 
-                log.debug("Account: Email successfully modified")
-                let alert = Macros.alert(nil, L10n.Account.Save.success)
-                alert.addCancelAction(L10n.Global.ok)
-                self.present(alert, animated: true, completion: nil)
-                
-                self.textEmail.text = email
-                self.textEmail.endEditing(true)
-                
-                self.canSaveAccount = false
             }
         }
-    }
-    
-    @IBAction private func togglePasswordVisibility(_ sender: Any?) {
-
-        // conceal
-        if !textPassword.isSecureTextEntry {
-            textPassword.isSecureTextEntry = true
-            updateEyeAccessibilityToPasswordVisibility(false)
+        alert.addTextField { (textField) in
+            textField.isSecureTextEntry = true
         }
-        // reveal
-        else {
-            SensitiveOperation.perform(withReason: L10n.Account.Reveal.prompt) {
-                self.textPassword.isSecureTextEntry = false
-                self.updateEyeAccessibilityToPasswordVisibility(true)
-            }
-        }
-    }
-    
-    private func updateEyeAccessibilityToPasswordVisibility(_ passwordVisibility: Bool) {
-        buttonEye.accessibilityLabel = L10n.Account.Accessibility.eye
-        let hint: String
-        if passwordVisibility {
-            hint = L10n.Account.Accessibility.Eye.Hint.conceal
-        } else {
-            hint = L10n.Account.Accessibility.Eye.Hint.reveal
-        }
-        buttonEye.accessibilityHint = hint
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
     @IBAction private func renewSubscriptionWithUncreditedPurchase(_ sender: Any?) {
@@ -269,8 +251,7 @@ class AccountViewController: AutolayoutViewController {
         textEmail.endEditing(true)
         textEmail.text = currentUser?.info?.email
         textEmail.isEnabled = !(currentUser?.info?.isExpired ?? true)
-        textUsername.text = currentUser?.credentials.username
-        textPassword.text = currentUser?.credentials.password
+        textUsername.text =  Client.providers.accountProvider.publicUsername ?? ""
         
         if let userInfo = currentUser?.info {
             if userInfo.isExpired {
@@ -303,14 +284,13 @@ class AccountViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         
-        for label in [labelEmail!, labelUsername!, labelPassword!] {
+        for label in [labelEmail!, labelUsername!] {
             Theme.current.applyLabel(label, appearance: .dark)
         }
         Theme.current.applyInput(textEmail)
         Theme.current.applyInput(textUsername)
-        Theme.current.applyInput(textPassword)
         Theme.current.applyDivider(viewSeparator)
-        for label in [labelFooterEye!, labelFooterOther!, labelExpiryInformation!] {
+        for label in [labelFooterOther!, labelExpiryInformation!] {
             Theme.current.applySmallInfo(label, appearance: .dark)
         }
         Theme.current.applyBody2(labelRestoreTitle, appearance: .dark)

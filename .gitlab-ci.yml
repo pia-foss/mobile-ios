@@ -14,6 +14,7 @@ before_script:
     #- bundle exec fastlane run ensure_git_status_clean
     - echo "$PIA_STAGING_ENDPOINT" >"Resources/staging.endpoint"
     - echo "$PIA_CUSTOM_SERVERS" >"Resources/custom.servers"
+    - echo "$PIA_FIREBASE_PLIST" >"Resources/GoogleService-Info.plist"
 
 stages:
     - test
