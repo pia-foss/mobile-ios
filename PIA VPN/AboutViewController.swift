@@ -36,16 +36,24 @@ class AboutViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        title = L10n.Menu.Item.about
         let textApp = L10n.About.app
         labelIntro.text = "Copyright © \(AppConfiguration.About.copyright) \(AppConfiguration.About.companyName)\n\(textApp) \(Macros.versionFullString()!)"
         tableView.scrollsToTop = true
+        
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     
         loadLicensesInBackground()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        styleNavigationBarWithTitle(L10n.Menu.Item.about)
     }
     
     override func viewDidLayoutSubviews() {
@@ -63,7 +71,15 @@ class AboutViewController: AutolayoutViewController {
         headerView.layoutIfNeeded()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     // MARK: Helpers
+    
+    @objc private func viewHasRotated() {
+        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
+    }
     
     private func loadLicensesInBackground() {
         for component in components.licenses {
@@ -86,12 +102,20 @@ class AboutViewController: AutolayoutViewController {
     }
     
     // MARK: Restylable
-    
+
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        Theme.current.applySolidLightBackground(tableView)
-        Theme.current.applyBody1(labelIntro, appearance: .dark)
+        tableView.separatorInset = UIEdgeInsetsMake(0, 30, 0, 0)
+        styleNavigationBarWithTitle(L10n.Menu.Item.about)
+        // XXX: for some reason, UITableView is not affected by appearance updates
+        if let viewContainer = viewContainer {
+            Theme.current.applyLightBackground(view)
+            Theme.current.applyLightBackground(viewContainer)
+        }
+
+        Theme.current.applyLightBackground(tableView)
+        Theme.current.applySubtitle(labelIntro)
     }
 }
 

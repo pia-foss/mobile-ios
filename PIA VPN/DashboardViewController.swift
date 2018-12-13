@@ -63,6 +63,14 @@ class DashboardViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: Asset.itemMenu.image,
+            style: .plain,
+            target: self,
+            action: #selector(openMenu(_:))
+        )
+        navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.item
+
         viewContent.isHidden = true
         viewRows.isHidden = true
         
@@ -85,6 +93,7 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
         nc.addObserver(self, selector: #selector(updateCurrentIP), name: .PIADaemonsDidUpdateConnectivity, object: nil)
         nc.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(updateCurrentStatus), name: .PIAThemeDidChange, object: nil)
 
 #if !TARGET_IPHONE_SIMULATOR
         let types: UIUserNotificationType = [.alert, .badge, .sound]
@@ -95,6 +104,7 @@ class DashboardViewController: AutolayoutViewController {
         if Client.providers.accountProvider.isLoggedIn {
             Client.providers.accountProvider.refreshAndLogoutUnauthorized()
         }
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -121,13 +131,6 @@ class DashboardViewController: AutolayoutViewController {
 //        [buttonMenu setImage:[UIImage imageNamed:@"item-menu"] forState:UIControlStateNormal];
 //        [buttonMenu addTarget:self action:@selector(openMenu:) forControlEvents:UIControlEventTouchUpInside];
 //        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:buttonMenu];
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: Asset.itemMenu.image,
-            style: .plain,
-            target: self,
-            action: #selector(openMenu(_:))
-        )
-        navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.item
 
         updateCurrentStatus()
         updateCurrentIP()
@@ -212,6 +215,14 @@ class DashboardViewController: AutolayoutViewController {
 
     func openSettings() {
         perform(segue: StoryboardSegue.Main.settingsSegueIdentifier)
+    }
+    
+    func openAccount() {
+        perform(segue: StoryboardSegue.Main.accountSegueIdentifier)
+    }
+
+    func openAbout() {
+        perform(segue: StoryboardSegue.Main.aboutSegueIdentifier)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -446,7 +457,10 @@ extension DashboardViewController: MenuViewControllerDelegate {
             selectRegion(animated: true)
         case .settings:
             openSettings()
-
+        case .account:
+            openAccount()
+        case .about:
+            openAbout()
         case .logout:
             resetNavigationBar()
             presentLogin()
