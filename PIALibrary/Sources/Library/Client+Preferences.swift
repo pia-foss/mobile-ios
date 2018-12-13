@@ -267,6 +267,9 @@ extension Client.Preferences {
             if (vpnType != target.vpnType) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
+            if (isPersistentConnection != target.isPersistentConnection) {
+                queue.append(VPNActionReinstall())
+            }
             if let configuration = vpnCustomConfigurations[vpnType],
                 let targetConfiguration = target.activeVPNCustomConfiguration,
                 !configuration.isEqual(to: targetConfiguration) {
@@ -296,6 +299,9 @@ extension Client.Preferences {
                 return false
             }
             if (mace != target.mace) {
+                return true
+            }
+            if (isPersistentConnection != target.isPersistentConnection) {
                 return true
             }
             if let configuration = vpnCustomConfigurations[vpnType],
