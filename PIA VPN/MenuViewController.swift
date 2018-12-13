@@ -95,7 +95,6 @@ class MenuViewController: AutolayoutViewController {
     
     private lazy var segueForItem: [Item: StoryboardSegue.Main] = [
         .account: .accountSegueIdentifier,
-        .about: .aboutSegueIdentifier
     ]
     
     deinit {

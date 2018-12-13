@@ -214,6 +214,10 @@ class DashboardViewController: AutolayoutViewController {
         perform(segue: StoryboardSegue.Main.settingsSegueIdentifier)
     }
 
+    func openAbout() {
+        perform(segue: StoryboardSegue.Main.aboutSegueIdentifier)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         navigationItem.setEmptyBackButton()
 
@@ -446,7 +450,8 @@ extension DashboardViewController: MenuViewControllerDelegate {
             selectRegion(animated: true)
         case .settings:
             openSettings()
-
+        case .about:
+            openAbout()
         case .logout:
             resetNavigationBar()
             presentLogin()

@@ -36,7 +36,6 @@ class AboutViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        title = L10n.Menu.Item.about
         let textApp = L10n.About.app
         labelIntro.text = "Copyright © \(AppConfiguration.About.copyright) \(AppConfiguration.About.companyName)\n\(textApp) \(Macros.versionFullString()!)"
         tableView.scrollsToTop = true
@@ -46,6 +45,11 @@ class AboutViewController: AutolayoutViewController {
         super.viewDidAppear(animated)
     
         loadLicensesInBackground()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        styleNavigationBar()
     }
     
     override func viewDidLayoutSubviews() {
@@ -87,11 +91,50 @@ class AboutViewController: AutolayoutViewController {
     
     // MARK: Restylable
     
+    private func styleNavigationBar() {
+        
+        let currentStatus = Client.providers.vpnProvider.vpnStatus
+        
+        switch currentStatus {
+        case .connected:
+            let titleLabelView = UILabel(frame: CGRect.zero)
+            titleLabelView.style(style: TextStyle.textStyle6)
+            titleLabelView.text = L10n.Menu.Item.about
+            Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
+                                                   withTintColor: .white,
+                                                   andBarTintColors: [UIColor.piaGreen,
+                                                                      UIColor.piaGreenDark20])
+            navigationItem.titleView = titleLabelView
+            setNeedsStatusBarAppearanceUpdate()
+            
+        default:
+            let titleLabelView = UILabel(frame: CGRect.zero)
+            titleLabelView.style(style: Theme.current.palette.appearance == .dark ?
+                TextStyle.textStyle6 :
+                TextStyle.textStyle7)
+            titleLabelView.text = L10n.Menu.Item.about
+            Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
+                                                   withTintColor: nil,
+                                                   andBarTintColors: nil)
+            navigationItem.titleView = titleLabelView
+            setNeedsStatusBarAppearanceUpdate()
+            
+        }
+    }
+
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
+        tableView.separatorInset = UIEdgeInsetsMake(0, 30, 0, 0)
+        styleNavigationBar()
+        // XXX: for some reason, UITableView is not affected by appearance updates
+        if let viewContainer = viewContainer {
+            Theme.current.applyLightBackground(view)
+            Theme.current.applyLightBackground(viewContainer)
+        }
+
         Theme.current.applySolidLightBackground(tableView)
-        Theme.current.applyBody1(labelIntro, appearance: .dark)
+        Theme.current.applySubtitle(labelIntro)
     }
 }
 

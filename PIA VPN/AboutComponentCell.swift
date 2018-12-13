@@ -36,7 +36,7 @@ class AboutNoticeCell: UITableViewCell, Restylable {
     
     func viewShouldRestyle() {
         Theme.current.applySolidLightBackground(self)
-        Theme.current.applyTextButton(buttonName)
+        buttonName.style(style: TextStyle.textStyle9)
         Theme.current.applySmallInfo(labelCopyright, appearance: .dark)
         Theme.current.applySmallInfo(labelNotice, appearance: .dark)
     }
@@ -154,7 +154,7 @@ class AboutLicenseCell: UITableViewCell, Restylable {
     func viewShouldRestyle() {
         Theme.current.applySolidLightBackground(self)
         Theme.current.applyLightBackground(textLicense)
-        Theme.current.applyTextButton(buttonName)
+        buttonName.style(style: TextStyle.textStyle9)
         Theme.current.applySmallInfo(labelCopyright, appearance: .dark)
         Theme.current.applyBody1Monospace(textLicense, appearance: .dark)
         buttonMore.tintColor = textLicense.textColor
