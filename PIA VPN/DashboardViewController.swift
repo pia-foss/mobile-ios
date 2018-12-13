@@ -26,8 +26,6 @@ class DashboardViewController: AutolayoutViewController {
 
     @IBOutlet private weak var toggleConnection: PIAConnectionButton!
     
-    @IBOutlet private weak var viewFooterSeparator: UIView!
-
     @IBOutlet private weak var viewRows: UIView!
     
     @IBOutlet private weak var tableRows: UITableView!
@@ -51,8 +49,6 @@ class DashboardViewController: AutolayoutViewController {
     @IBOutlet private weak var imvRegion: UIImageView!
     
     @IBOutlet private weak var buttonChangeRegion: UIButton!
-    
-    @IBOutlet private weak var constraintFooterSeparatorHeight: NSLayoutConstraint!
     
     private var currentPageIndex = 0
     
@@ -189,7 +185,7 @@ class DashboardViewController: AutolayoutViewController {
         preset.shouldRecoverPendingSignup = false
         preset.isEphemeral = true
 
-        let vc = PIAWelcomeViewController.with(preset: preset, delegate: self)
+        let vc = GetStartedViewController.withPurchase(preset: preset, delegate: self)
         present(vc, animated: true, completion: nil)
     }
     
@@ -213,7 +209,11 @@ class DashboardViewController: AutolayoutViewController {
         let segue = (animated ? StoryboardSegue.Main.selectRegionAnimatedSegueIdentifier : StoryboardSegue.Main.selectRegionSegueIdentifier)
         perform(segue: segue)
     }
-    
+
+    func openSettings() {
+        perform(segue: StoryboardSegue.Main.settingsSegueIdentifier)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         navigationItem.setEmptyBackButton()
 
@@ -293,9 +293,7 @@ class DashboardViewController: AutolayoutViewController {
             toggleConnection.isIndeterminate = false
             toggleConnection.stopButtonAnimation()
             AppPreferences.shared.lastVPNConnectionStatus = .disconnected
-            navigationItem.titleView = NavigationLogoView()
-            Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
-            setNeedsStatusBarAppearanceUpdate()
+            resetNavigationBar()
 
         case .connecting:
             toggleConnection.isOn = false
@@ -395,9 +393,23 @@ class DashboardViewController: AutolayoutViewController {
 
         // XXX: emulate native UITableView separator
         Theme.current.applyDividerToSeparator(tableRows)
-        viewFooterSeparator.backgroundColor = tableRows.separatorColor
-        constraintFooterSeparatorHeight.constant = 1.0 / UIScreen.main.scale
         tableRows.reloadData()
+    }
+    
+    private func resetNavigationBar() {
+        //First reset the green background
+        DispatchQueue.main.async {
+            Theme.current.applyCustomNavigationBar(self.navigationController!.navigationBar,
+                                                   withTintColor: nil,
+                                                   andBarTintColors: nil)
+            //Show the PIA logo
+            self.navigationItem.titleView = NavigationLogoView()
+            if let navController = self.navigationController {
+                //Apply the theme background color
+                Theme.current.applyLightNavigationBar(navController.navigationBar)
+            }
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
     }
 }
 
@@ -432,10 +444,12 @@ extension DashboardViewController: MenuViewControllerDelegate {
         switch item {
         case .selectRegion:
             selectRegion(animated: true)
-            
+        case .settings:
+            openSettings()
+
         case .logout:
+            resetNavigationBar()
             presentLogin()
-            
         default:
             fatalError("Unhandled item '\(item)'")
         }

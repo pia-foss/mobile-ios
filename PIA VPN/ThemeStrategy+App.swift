@@ -61,13 +61,11 @@ private struct LightThemeStrategy: ThemeStrategy {
              is VPNPermissionViewController,
              is ConfirmVPNPlanViewController:
             return .default
-        case is DashboardViewController:
+        default:
             if AppPreferences.shared.lastVPNConnectionStatus == VPNStatus.connected {
                 return .lightContent
             }
-            return .default
-        default:
-            return .lightContent
+            return Theme.current.palette.appearance == .dark ? .lightContent : .default
         }
     }
     

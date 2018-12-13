@@ -7,9 +7,13 @@
 //
 
 import Foundation
+import UIKit
+import PIALibrary
 
 private struct PIAConnectionButtonSettings {
     static let outsideBorderWidth: CGFloat = 10.0
+    static let outsideBorderLightColor = UIColor.piaGrey2.cgColor
+    static let outsideBorderDarkColor = UIColor.piaGrey10.cgColor
     static let animatedShapeWidth: CGFloat = 2.0
     static let startAngle: CGFloat = -0.25 * 2 * .pi
     static let endAngle: CGFloat = PIAConnectionButtonSettings.startAngle + 2 * .pi
@@ -19,12 +23,13 @@ private struct PIAConnectionButtonSettings {
     static let timingFunction = CAMediaTimingFunction(controlPoints: 0.2, 0.88, 0.09, 0.99)
 }
 
-class PIAConnectionButton: UIButton {
+class PIAConnectionButton: UIButton, Restylable {
 
     private var isAnimating: Bool = false
     var isOn: Bool = false
     var isIndeterminate: Bool = false
-    
+    private var observedBounds: Any? = nil
+
     private let circlePathLayer = CAShapeLayer()
     private var circleRadius: CGFloat!
     private var currenStrokeEnd: CGFloat!
@@ -40,8 +45,16 @@ class PIAConnectionButton: UIButton {
         self.setupView()
     }
 
+    deinit {
+        self.observedBounds = nil
+        NotificationCenter.default.removeObserver(self)
+    }
+
     private func setupView() {
         
+        //Notification when the theme has changed
+        NotificationCenter.default.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
+
         //Image
         let vpnImage = Asset.Piax.Dashboard.vpnButton.image.withRenderingMode(.alwaysTemplate)
         self.setImage(vpnImage, for: [])
@@ -51,8 +64,8 @@ class PIAConnectionButton: UIButton {
         //Configure the button static color
         self.layer.cornerRadius = self.frame.width/2
         self.layer.borderWidth = PIAConnectionButtonSettings.outsideBorderWidth
-        self.layer.borderColor = UIColor.piaGrey2.cgColor
-        
+        self.viewShouldRestyle()
+
         //Configure the Bezierpath to animate
         self.circlePathLayer.strokeEnd = 1
         self.circlePathLayer.frame = bounds
@@ -62,6 +75,14 @@ class PIAConnectionButton: UIButton {
         self.layer.addSublayer(circlePathLayer)
         self.clipsToBounds = true
         
+        self.observedBounds = observe(\.bounds, options: [.new]) { object, change in
+            if let newValue = change.newValue {
+                self.layer.cornerRadius = self.frame.width/2
+                self.circlePathLayer.frame = newValue
+                self.layoutSubviews()
+            }
+        }
+
     }
     
     private func circleAnimationPath() -> UIBezierPath {
@@ -171,4 +192,11 @@ class PIAConnectionButton: UIButton {
         }
     }
 
+    // MARK: Restylable
+    
+    @objc func viewShouldRestyle() {
+        self.layer.borderColor = Theme.current.palette.appearance == .dark ?
+            PIAConnectionButtonSettings.outsideBorderDarkColor :
+            PIAConnectionButtonSettings.outsideBorderLightColor
+    }
 }
