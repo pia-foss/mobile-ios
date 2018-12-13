@@ -24,11 +24,16 @@ class ModalNavigationSegue: UIStoryboardSegue {
         )
         
         let nav = UINavigationController(rootViewController: modal)
+        Theme.current.applyCustomNavigationBar(nav.navigationBar,
+                                               withTintColor: nil,
+                                               andBarTintColors: nil)
+        
         if let coordinator = source.transitionCoordinator {
             coordinator.animate(alongsideTransition: { (context) in
                 self.source.present(nav, animated: true, completion: nil)
             }, completion: nil)
         } else {
+            nav.modalPresentationStyle = .overFullScreen
             source.present(nav, animated: true, completion: nil)
         }
     }

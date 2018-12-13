@@ -26,8 +26,6 @@ class DashboardViewController: AutolayoutViewController {
 
     @IBOutlet private weak var toggleConnection: PIAConnectionButton!
     
-    @IBOutlet private weak var viewFooterSeparator: UIView!
-
     @IBOutlet private weak var viewRows: UIView!
     
     @IBOutlet private weak var tableRows: UITableView!
@@ -51,8 +49,6 @@ class DashboardViewController: AutolayoutViewController {
     @IBOutlet private weak var imvRegion: UIImageView!
     
     @IBOutlet private weak var buttonChangeRegion: UIButton!
-    
-    @IBOutlet private weak var constraintFooterSeparatorHeight: NSLayoutConstraint!
     
     private var currentPageIndex = 0
     
@@ -213,7 +209,11 @@ class DashboardViewController: AutolayoutViewController {
         let segue = (animated ? StoryboardSegue.Main.selectRegionAnimatedSegueIdentifier : StoryboardSegue.Main.selectRegionSegueIdentifier)
         perform(segue: segue)
     }
-    
+
+    func openSettings() {
+        perform(segue: StoryboardSegue.Main.settingsSegueIdentifier)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         navigationItem.setEmptyBackButton()
 
@@ -379,11 +379,11 @@ class DashboardViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
 
-//        navigationItem.titleView = NavigationLogoView()
+        navigationItem.titleView = NavigationLogoView()
         Theme.current.applyLightBackground(view)
         Theme.current.applyLightBackground(viewContainer!)
 
-//        Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
+        Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
         Theme.current.applyCaption(labelPublicIPCaption, appearance: .dark)
         Theme.current.applyTitle(labelPublicIP, appearance: .dark)
         Theme.current.applyCaption(labelRegionCaption, appearance: .dark)
@@ -393,8 +393,6 @@ class DashboardViewController: AutolayoutViewController {
 
         // XXX: emulate native UITableView separator
         Theme.current.applyDividerToSeparator(tableRows)
-        viewFooterSeparator.backgroundColor = tableRows.separatorColor
-        constraintFooterSeparatorHeight.constant = 1.0 / UIScreen.main.scale
         tableRows.reloadData()
     }
     
@@ -446,7 +444,9 @@ extension DashboardViewController: MenuViewControllerDelegate {
         switch item {
         case .selectRegion:
             selectRegion(animated: true)
-            
+        case .settings:
+            openSettings()
+
         case .logout:
             resetNavigationBar()
             presentLogin()
