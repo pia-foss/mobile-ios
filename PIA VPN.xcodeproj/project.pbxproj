@@ -159,6 +159,8 @@
 		C7E4C18FB384B90E4B165CA0 /* Pods_PIA_VPN_dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB58F793623E77B8F9F4408 /* Pods_PIA_VPN_dev.framework */; };
 		DD1AA4962180AD92005116D7 /* CustomDNSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1AA4952180AD92005116D7 /* CustomDNSSettingsViewController.swift */; };
 		DD1AA4972180AD92005116D7 /* CustomDNSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1AA4952180AD92005116D7 /* CustomDNSSettingsViewController.swift */; };
+		DD3BE97A21C2A0F60019206F /* AutolayoutViewController+Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3BE97921C2A0F60019206F /* AutolayoutViewController+Styles.swift */; };
+		DD3BE97B21C2A0F60019206F /* AutolayoutViewController+Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3BE97921C2A0F60019206F /* AutolayoutViewController+Styles.swift */; };
 		DD58F4B821AD579A00D043F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD58F4B721AD579A00D043F7 /* GoogleService-Info.plist */; };
 		DD58F4BF21B12CFE00D043F7 /* PIAConnectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58F4BE21B12CFE00D043F7 /* PIAConnectionButton.swift */; };
 		DD58F4C021B12CFE00D043F7 /* PIAConnectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58F4BE21B12CFE00D043F7 /* PIAConnectionButton.swift */; };
@@ -414,6 +416,7 @@
 		B09C77F61974E4D03AC1F748 /* Pods-PIA VPN dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPN dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-PIA VPN dev/Pods-PIA VPN dev.release.xcconfig"; sourceTree = "<group>"; };
 		B8BBBAA2AE67BF1F156C2EE6 /* Pods_PIA_VPN_Tunnel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIA_VPN_Tunnel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD1AA4952180AD92005116D7 /* CustomDNSSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDNSSettingsViewController.swift; sourceTree = "<group>"; };
+		DD3BE97921C2A0F60019206F /* AutolayoutViewController+Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AutolayoutViewController+Styles.swift"; sourceTree = "<group>"; };
 		DD58F4B721AD579A00D043F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DD58F4BE21B12CFE00D043F7 /* PIAConnectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAConnectionButton.swift; sourceTree = "<group>"; };
 		DD58F4C121B190D000D043F7 /* CAGradientLayer+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+Image.swift"; sourceTree = "<group>"; };
@@ -575,6 +578,7 @@
 				0E441E252055AEDF007528D5 /* ThemeStrategy+App.swift */,
 				0EE14D141FF15626008D9AC2 /* UINavigationController+StatusBar.swift */,
 				0E9452AA1FDB5EF600891948 /* UINavigationItem+Shortcuts.swift */,
+				DD3BE97921C2A0F60019206F /* AutolayoutViewController+Styles.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1412,6 +1416,7 @@
 				0E9452A01FDB547D00891948 /* ExpirationCell.swift in Sources */,
 				0EFDC1F01FE4B9E6007C0B9B /* AppConfiguration.swift in Sources */,
 				DD1AA4972180AD92005116D7 /* CustomDNSSettingsViewController.swift in Sources */,
+				DD3BE97B21C2A0F60019206F /* AutolayoutViewController+Styles.swift in Sources */,
 				0E9452A31FDB568700891948 /* MenuItemCell.swift in Sources */,
 				0EFDC1DB1FE4640C007C0B9B /* DNSResolver.swift in Sources */,
 				0E94529A1FDB4DF500891948 /* GradientView.swift in Sources */,
@@ -1498,6 +1503,7 @@
 				0E94529F1FDB547D00891948 /* ExpirationCell.swift in Sources */,
 				0E441E262055AEDF007528D5 /* ThemeStrategy+App.swift in Sources */,
 				DD1AA4962180AD92005116D7 /* CustomDNSSettingsViewController.swift in Sources */,
+				DD3BE97A21C2A0F60019206F /* AutolayoutViewController+Styles.swift in Sources */,
 				0EFDC1EF1FE4B9E6007C0B9B /* AppConfiguration.swift in Sources */,
 				0E9452A21FDB568700891948 /* MenuItemCell.swift in Sources */,
 				0EFDC1DA1FE4640C007C0B9B /* DNSResolver.swift in Sources */,

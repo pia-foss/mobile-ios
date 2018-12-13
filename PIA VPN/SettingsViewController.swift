@@ -226,7 +226,7 @@ class SettingsViewController: AutolayoutViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refreshContentBlockerState()
-        styleNavigationBar()
+        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -268,7 +268,7 @@ class SettingsViewController: AutolayoutViewController {
     }
     
     @objc private func viewHasRotated() {
-        styleNavigationBar()
+        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
     }
 
     // XXX: no need to bufferize app preferences
@@ -571,43 +571,10 @@ class SettingsViewController: AutolayoutViewController {
     
     // MARK: Restylable
     
-    private func styleNavigationBar() {
-        
-        let currentStatus = Client.providers.vpnProvider.vpnStatus
-        
-        //Theme.current.applyVPNStatus(labelStatus, forStatus: currentStatus)
-        
-        switch currentStatus {
-        case .connected:
-            let titleLabelView = UILabel(frame: CGRect.zero)
-            titleLabelView.style(style: TextStyle.textStyle6)
-            titleLabelView.text = L10n.Menu.Item.settings
-            Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
-                                                   withTintColor: .white,
-                                                   andBarTintColors: [UIColor.piaGreen,
-                                                                      UIColor.piaGreenDark20])
-            navigationItem.titleView = titleLabelView
-            setNeedsStatusBarAppearanceUpdate()
-            
-        default:
-            let titleLabelView = UILabel(frame: CGRect.zero)
-            titleLabelView.style(style: Theme.current.palette.appearance == .dark ?
-                TextStyle.textStyle6 :
-                TextStyle.textStyle7)
-            titleLabelView.text = L10n.Menu.Item.settings
-            Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
-                                                   withTintColor: nil,
-                                                   andBarTintColors: nil)
-            navigationItem.titleView = titleLabelView
-            setNeedsStatusBarAppearanceUpdate()
-            
-        }
-    }
-    
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        styleNavigationBar()
+        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
             Theme.current.applyLightBackground(view)
