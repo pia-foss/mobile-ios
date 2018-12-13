@@ -298,7 +298,7 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
         fatalError("Not implemented")
     }
     
-    func update(with request: UpdateAccountRequest, _ callback: ((AccountInfo?, Error?) -> Void)?) {
+    func update(with request: UpdateAccountRequest, andPassword password: String, _ callback: ((AccountInfo?, Error?) -> Void)?) {
         fatalError("Not implemented")
     }
     

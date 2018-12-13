@@ -11,9 +11,7 @@ import Foundation
 protocol PlainStore: class {
 
     // MARK: Account
-    
-    var publicUsername: String? { get set }
-    
+        
     var accountInfo: AccountInfo? { get set }
     
     var lastSignupEmail: String? { get set }
