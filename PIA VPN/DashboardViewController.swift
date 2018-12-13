@@ -26,8 +26,6 @@ class DashboardViewController: AutolayoutViewController {
 
     @IBOutlet private weak var toggleConnection: PIAConnectionButton!
     
-    @IBOutlet private weak var viewFooterSeparator: UIView!
-
     @IBOutlet private weak var viewRows: UIView!
     
     @IBOutlet private weak var tableRows: UITableView!
@@ -51,8 +49,6 @@ class DashboardViewController: AutolayoutViewController {
     @IBOutlet private weak var imvRegion: UIImageView!
     
     @IBOutlet private weak var buttonChangeRegion: UIButton!
-    
-    @IBOutlet private weak var constraintFooterSeparatorHeight: NSLayoutConstraint!
     
     private var currentPageIndex = 0
     
@@ -397,8 +393,6 @@ class DashboardViewController: AutolayoutViewController {
 
         // XXX: emulate native UITableView separator
         Theme.current.applyDividerToSeparator(tableRows)
-        viewFooterSeparator.backgroundColor = tableRows.separatorColor
-        constraintFooterSeparatorHeight.constant = 1.0 / UIScreen.main.scale
         tableRows.reloadData()
     }
     
