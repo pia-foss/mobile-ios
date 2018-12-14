@@ -187,6 +187,7 @@ class DashboardViewController: AutolayoutViewController {
         preset.allowsCancel = true
         preset.shouldRecoverPendingSignup = false
         preset.isEphemeral = true
+        preset.openFromDashboard = true
 
         let vc = GetStartedViewController.withPurchase(preset: preset, delegate: self)
         present(vc, animated: true, completion: nil)
