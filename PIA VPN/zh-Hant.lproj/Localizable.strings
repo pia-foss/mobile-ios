@@ -6,6 +6,7 @@
 "account.accessibility.eye.hint.reveal" = "點一下即可隱藏密碼";
 "account.email.caption" = "Email";
 "account.email.placeholder" = "電子郵件地址";
+"account.error.unauthorized" = "您的使用者名稱或密碼不正確。";
 "account.expiry_date.expired" = "您的計劃已過期。";
 "account.expiry_date.information" = "您的計劃將於 %@ 過期。";
 "account.eye.footer" = "點選眼睛圖示即可顯示或隱藏密碼。";
@@ -17,9 +18,12 @@
 "account.restore.failure.title" = "回復購買項目";
 "account.restore.title" = "回復未貸記購買項目";
 "account.reveal.prompt" = "驗證以顯示";
-"account.save.item" = "更新";
+"account.save.item" = "更新電子郵件地址";
 "account.save.prompt" = "驗證以儲存變更";
 "account.save.success" = "您的電子郵件地址已儲存。";
+"account.update.email.require.password.button" = "提交";
+"account.update.email.require.password.message" = "基於安全考量，您必須輸入 PIA 密碼才能變更帳戶。請輸入您的 PIA 密碼以繼續。";
+"account.update.email.require.password.title" = "需要 PIA 密碼";
 "account.username.caption" = "使用者名稱";
 "content_blocker.body.footer" = "請注意：您不需要連接至 VPN，此內容阻擋器就能運作，但將只會在您使用 Safari 瀏覽時才會有效。";
 "content_blocker.body.subtitle" = "要在 Safari 上啟用我們的內容阻擋器，請前往設定 > Safari，然後在「一般」類項點選「內容阻擋器」，開啟 PIA VPN。";

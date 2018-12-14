@@ -6,6 +6,7 @@
 "account.accessibility.eye.hint.reveal" = "แตะเพื่อเปิดรหัสผ่านของคุณ";
 "account.email.caption" = "อีเมล";
 "account.email.placeholder" = "อีเมลแอดเดรส";
+"account.error.unauthorized" = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
 "account.expiry_date.expired" = "แพ็กเกจของคุณหมดอายุแล้ว";
 "account.expiry_date.information" = "แพ็กเกจของคุณจะหมดอายุ %@";
 "account.eye.footer" = "แตะที่ไอคอนรูปตาเพื่อเปิดหรือปิดบังรหัสผ่านของคุณ";
@@ -17,9 +18,12 @@
 "account.restore.failure.title" = "คืนค่าการซื้อ";
 "account.restore.title" = "คืนค่าการซื้อที่ยังไม่ได้คิดเครดิต";
 "account.reveal.prompt" = "อนุญาตให้เปิดเผย";
-"account.save.item" = "อัพเดท";
+"account.save.item" = "อัพเดทอีเมล";
 "account.save.prompt" = "อนุญาตให้บันทึกการเปลี่ยนแปลง";
 "account.save.success" = "อีเมลแอดเดรสของคุณยังไม่ถูกบันทึก";
+"account.update.email.require.password.button" = "ส่ง";
+"account.update.email.require.password.message" = "เพื่อความปลอดภัยจึงจำเป็นต้องขอพาสเวิร์ด PIA เพื่อเปลี่ยนแปลงบัญชี กรุณากรอกพาสเวิร์ด PIA เพื่อดำเนินการต่อ";
+"account.update.email.require.password.title" = "จำเป็นต้องใช้พาสเวิร์ด PIA";
 "account.username.caption" = "ชื่อผู้ใช้";
 "content_blocker.body.footer" = "โปรดทราบ: คุณไม่จำเป็นต้องเชื่อมต่อไปยัง VPN เพื่อใช้งานตัวปิดกั้นเนื้อหา แต่จะใช้ได้ก็ต่อเมื่อใช้ Safari เท่านั้น";
 "content_blocker.body.subtitle" = "ในการเปิดใช้งานตัวปิดกั้นเนื้อหาเพื่อใช้ใน Safari กรุณาไปยัง การตั้งค่า > Safari และภายใต้หมวดทั่วไป ให้แตะ ตัวปิดกั้นเนื้อหา ใน PIA VPN";

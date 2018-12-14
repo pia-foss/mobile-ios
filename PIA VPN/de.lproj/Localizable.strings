@@ -6,6 +6,7 @@
 "account.accessibility.eye.hint.reveal" = "Tippen, um Passwort anzuzeigen";
 "account.email.caption" = "E-Mail";
 "account.email.placeholder" = "E-Mail-Adresse";
+"account.error.unauthorized" = "Dein Benutzername oder Passwort ist falsch.";
 "account.expiry_date.expired" = "Dein Tarif ist abgelaufen.";
 "account.expiry_date.information" = "Dein Tarif lauft am %@ ab.";
 "account.eye.footer" = "Auf Augensymbol klicken, um dein Passwort ein- oder auszublenden.";
@@ -17,9 +18,12 @@
 "account.restore.failure.title" = "Kauf wiederherstellen";
 "account.restore.title" = "Nicht gutgeschriebenen Kauf wiederherstellen";
 "account.reveal.prompt" = "Zum Aufdecken authentifizieren";
-"account.save.item" = "Aktualisieren";
+"account.save.item" = "E-Mail aktualisieren";
 "account.save.prompt" = "Authentifizieren, um die Änderungen zu speichern";
 "account.save.success" = "Deine E-Mail-Adresse wurde gespeichert.";
+"account.update.email.require.password.button" = "Senden";
+"account.update.email.require.password.message" = "Aus Sicherheitsgründen benötigen wir Ihr PIA-Passwort, um eine Änderung Ihres Kontos vorzunehmen. Bitte Ihr PIA-Passwort eingeben, um fortzufahren.";
+"account.update.email.require.password.title" = "PIA-Passwort erforderlich";
 "account.username.caption" = "Benutzername";
 "content_blocker.body.footer" = "Hinweis: Für diesen Inhalts-Blocker müssen Sie nicht mit VPN verbunden sein. Er funktioniert jedoch nur in Safari.";
 "content_blocker.body.subtitle" = "Um unseren Inhalts-Blocker für Safari zu aktivieren, gehen Sie bitte zu Einstellungen > Safari > Allgemein > Inhalts-Blocker und schalten Sie PIA VPN ein.";

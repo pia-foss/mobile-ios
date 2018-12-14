@@ -6,6 +6,7 @@
 "account.accessibility.eye.hint.reveal" = "비밀번호를 표시하려면 누르세요";
 "account.email.caption" = "이메일";
 "account.email.placeholder" = "이메일 주소";
+"account.error.unauthorized" = "사용자명 또는 비밀번호가 틀립니다.";
 "account.expiry_date.expired" = "현재 플랜이 만료되었습니다.";
 "account.expiry_date.information" = "현재 플랜이 %@에 만료됩니다.";
 "account.eye.footer" = "눈 아이콘을 눌러서 비밀번호를 표시하거나 숨깁니다.";
@@ -17,9 +18,12 @@
 "account.restore.failure.title" = "구매 항목 복원";
 "account.restore.title" = "인정되지 않은 구매 항목 복원";
 "account.reveal.prompt" = "인증해서 표시합니다";
-"account.save.item" = "업데이트";
+"account.save.item" = "이메일 업데이트";
 "account.save.prompt" = "인증해서 변경 사항을 저장합니다";
 "account.save.success" = "이메일 주소가 저장되었습니다.";
+"account.update.email.require.password.button" = "제출";
+"account.update.email.require.password.message" = "보안상의 이유로 계정에서 변경 작업을 수행하려면 PIA 비밀번호가 필요합니다. 계속 진행하려면 PIA 비밀번호를 입력하세요.";
+"account.update.email.require.password.title" = "PIA 비밀번호가 필요합니다.";
 "account.username.caption" = "사용자 이름";
 "content_blocker.body.footer" = "주의: Content Blocker를 작동시키기 위해 VPN에 연결할 필요가 없지만, Safari로 검색할 때만 작동합니다.";
 "content_blocker.body.subtitle" = "Content Blocker를 활성화하여 Safari로 사용하려면 설정 > Safari로 가서 '일반'에서 Content Blockers를 눌러 PIA VPN을 켜세요.";
