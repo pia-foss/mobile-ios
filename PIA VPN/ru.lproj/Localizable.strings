@@ -6,6 +6,7 @@
 "account.accessibility.eye.hint.reveal" = "Нажмите, чтобы показать пароль";
 "account.email.caption" = "Эл. адрес";
 "account.email.placeholder" = "Адрес эл. почты";
+"account.error.unauthorized" = "Неправильное имя пользователя или пароль.";
 "account.expiry_date.expired" = "Срок действия плана истек.";
 "account.expiry_date.information" = "Ваш план истечет %@.";
 "account.eye.footer" = "Нажмите значок с глазом, чтобы показать или скрыть пароль.";
@@ -17,9 +18,12 @@
 "account.restore.failure.title" = "Восстановить покупку";
 "account.restore.title" = "Восстановить непроведенную покупку";
 "account.reveal.prompt" = "Выполните аутентификацию для показа";
-"account.save.item" = "Обновить";
+"account.save.item" = "Изменить эл. адрес";
 "account.save.prompt" = "Чтобы сохранить изменения, выполните аутентификацию";
 "account.save.success" = "Адрес электронной почты сохранен.";
+"account.update.email.require.password.button" = "Отправить";
+"account.update.email.require.password.message" = "В целях безопасности для внесения изменений в учетную запись требуется ввести пароль PIA. Введите свой пароль PIA, чтобы продолжить.";
+"account.update.email.require.password.title" = "Требуется пароль PIA";
 "account.username.caption" = "Имя пользователя";
 "content_blocker.body.footer" = "Примечание. Для работы этого правила блокирования контента подключаться к VPN необязательно, но оно будет работать только при просмотре сайтов в Safari.";
 "content_blocker.body.subtitle" = "Чтобы включить наше правило блокирования контента в Safari, перейдите в \"Настроки\" > Safari, а затем во вкладке \"Основные\" коснитесь пункта \"Правила блокирования контента\" и включите PIA VPN.";

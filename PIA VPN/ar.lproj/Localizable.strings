@@ -6,6 +6,7 @@
 "account.accessibility.eye.hint.reveal" = "اضغط لإظهار كلمة المرور";
 "account.email.caption" = "البريد الإلكتروني";
 "account.email.placeholder" = "البريد الإلكتروني";
+"account.error.unauthorized" = "اسم المستخدم أو كلمة المرور غير صحيحة.";
 "account.expiry_date.expired" = "لقد انتهت صلاحية خطتك.";
 "account.expiry_date.information" = "ستنتهي صلاحية خطتك في %@.";
 "account.eye.footer" = "اضغط على رمز العين للكشف عن كلمة المرور أو إخفائها.";
@@ -17,9 +18,12 @@
 "account.restore.failure.title" = "استرداد الشراء";
 "account.restore.title" = "استرداد الشراء غير المقيد في الحساب";
 "account.reveal.prompt" = "مصادقة للإظهار";
-"account.save.item" = "تحديث";
+"account.save.item" = "تحديث البريد الإلكتروني";
 "account.save.prompt" = "مصادقة لحفظ التغييرات";
 "account.save.success" = "تم حفظ عنوان بريدك الإلكتروني.";
+"account.update.email.require.password.button" = "إرسال";
+"account.update.email.require.password.message" = "لأسباب أمنية، نطلب كلمة مرور PIA الخاصة بك عند إجراء تغييرات على حسابك. يرجى إدخال كلمة مرور PIA للمتابعة.";
+"account.update.email.require.password.title" = "كلمة مرور PIA مطلوبة";
 "account.username.caption" = "اسم المستخدم";
 "content_blocker.body.footer" = "يرجى الملاحظة: يعمل حظر المحتوى دون الحاجة للاتصال بشبكة VPN، ولكنه لن يعمل إلا على متصفح Safari.";
 "content_blocker.body.subtitle" = "لتفعيل استخدام حظر المحتوى على متصفح Safari، يرجى الذهاب الى الإعدادات > Safari وتفعيل PIA VPN تحت General touch Content Blockers";

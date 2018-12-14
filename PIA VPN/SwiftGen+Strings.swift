@@ -44,6 +44,10 @@ internal enum L10n {
       /// Email address
       internal static let placeholder = L10n.tr("Localizable", "account.email.placeholder")
     }
+    internal enum Error {
+      /// Your username or password is incorrect.
+      internal static let unauthorized = L10n.tr("Localizable", "account.error.unauthorized")
+    }
     internal enum ExpiryDate {
       /// Your plan has expired.
       internal static let expired = L10n.tr("Localizable", "account.expiry_date.expired")

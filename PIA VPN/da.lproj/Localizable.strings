@@ -6,6 +6,7 @@
 "account.accessibility.eye.hint.reveal" = "Tryk for at vise kodeord";
 "account.email.caption" = "E-mail";
 "account.email.placeholder" = "E-mailadresse";
+"account.error.unauthorized" = "Dit brugernavn eller kodeord er forkert.";
 "account.expiry_date.expired" = "Din plan er udløbet.";
 "account.expiry_date.information" = "Din plan vil udløbe om %@.";
 "account.eye.footer" = "Tryk på øjenikonet for at afsløre eller skjule dit kodeord.";
@@ -17,9 +18,12 @@
 "account.restore.failure.title" = "Gendan køb";
 "account.restore.title" = "Gendan ukrediteret køb";
 "account.reveal.prompt" = "Autentificer for at afsløre";
-"account.save.item" = "Opdater";
+"account.save.item" = "Opdater e-mail";
 "account.save.prompt" = "Autentificer for at gemme ændringer";
 "account.save.success" = "Din e-mailadresse er blevet gemt.";
+"account.update.email.require.password.button" = "Indsend";
+"account.update.email.require.password.message" = "Af sikkerhedsårsager skal vi bruge din PIA-adgangskode for at udføre en ændring i din konto. Angiv din PIA-adgangskode for at fortsætte.";
+"account.update.email.require.password.title" = "PIA-adgangskode påkrævet";
 "account.username.caption" = "Brugernavn";
 "content_blocker.body.footer" = "Bemærk: Du behøver ikke have forbindelse til VPN for, at denne Indholdsblokering kan fungere, men den virker kun, når du anvender Safari-browseren.";
 "content_blocker.body.subtitle" = "For at aktivere vores Indholdsblokering til brug med Safari skal du gå til Indstillinger > Safari og under Generelt trykke på Indholdsblokering til for PIA VPN.";

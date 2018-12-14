@@ -6,6 +6,7 @@
 "account.accessibility.eye.hint.reveal" = "Dotknij, aby odkryć hasło";
 "account.email.caption" = "E-mail";
 "account.email.placeholder" = "Adres e-mail";
+"account.error.unauthorized" = "Twoja nazwa użytkownika i hasło są nieprawidłowe.";
 "account.expiry_date.expired" = "Ważność Twojego planu wygasła.";
 "account.expiry_date.information" = "Ważność Twojego planu wygaśnie w dniu %@.";
 "account.eye.footer" = "Dotknij ikony z okiem, aby odkryć lub ukryć hasło.";
@@ -17,9 +18,12 @@
 "account.restore.failure.title" = "Przywróć zakup";
 "account.restore.title" = "Przywróć nieuznany zakup";
 "account.reveal.prompt" = "Potwierdź swoją tożsamość, aby wyświetlić";
-"account.save.item" = "Aktualizuj";
+"account.save.item" = "Aktualizuj e-mail";
 "account.save.prompt" = "Potwierdź swoją tożsamość, aby zapisać zmiany";
 "account.save.success" = "Zapisano adres e-mail.";
+"account.update.email.require.password.button" = "Wyślij";
+"account.update.email.require.password.message" = "Ze względów bezpieczeństwa do przeprowadzenia zmiany na koncie potrzebne jest twoje hasło w PIA. Wprowadź hasło w PIA, aby kontynuować.";
+"account.update.email.require.password.title" = "Wymagane hasło w PIA";
 "account.username.caption" = "Nazwa użytkownika";
 "content_blocker.body.footer" = "Uwaga: musisz być połączony z VPN, aby Blokada zawartości działała, ale będzie działać tylko podczas przeglądania stron za pomocą Safari.";
 "content_blocker.body.subtitle" = "Aby włączyć naszą blokadę reklam do użycia z przeglądarką Safari, przejdź do „Ustawienia > Safari”, pod „Ogólne” wybierz przełącznik „Blokady zawartości” na PIA VPN.";

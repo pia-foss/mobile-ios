@@ -6,6 +6,7 @@
 "account.accessibility.eye.hint.reveal" = "タップしてパスワードを表示";
 "account.email.caption" = "メールアドレス";
 "account.email.placeholder" = "メールアドレス";
+"account.error.unauthorized" = "ユーザー名またはパスワードが間違っています。";
 "account.expiry_date.expired" = "プランが期限切れとなりました。";
 "account.expiry_date.information" = "プランが%@に期限切れとなります。";
 "account.eye.footer" = "目のアイコンをタップして、パスワードを表示または非表示にします。";
@@ -17,9 +18,12 @@
 "account.restore.failure.title" = "購入を復元";
 "account.restore.title" = "追加されていない購入を復元";
 "account.reveal.prompt" = "認証して表示";
-"account.save.item" = "アップデート";
+"account.save.item" = "メールアドレス変更";
 "account.save.prompt" = "認証して変更を保存";
 "account.save.success" = "メールアドレスが保存されました。";
+"account.update.email.require.password.button" = "送信";
+"account.update.email.require.password.message" = "安全のため、お使いのアカウントのPIAパスワードの変更を行う必要があります。先へ進むにはPIAパスワードを入力してください。";
+"account.update.email.require.password.title" = "PIAパスワードが必要です";
 "account.username.caption" = "ユーザー名";
 "content_blocker.body.footer" = "注意：コンテンツブロッカーは、VPNへの接続がなくても機能しますが、Safariを使ったブラウジングのみで利用できます。";
 "content_blocker.body.subtitle" = "コンテンツブロッカーをオンにしてSafariで使えるようにするには、「設定」>「Safari」にアクセスし、「一般」からPIA VPNで「コンテンツブロッカー」をオンにしてください。";
