@@ -823,6 +823,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         if let detailLabel = cell.detailTextLabel {
             Theme.current.applySubtitle(detailLabel)
         }
+        
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = Theme.current.palette.lightBackground
+        cell.selectedBackgroundView = backgroundView
 
         return cell
     }
@@ -1100,6 +1104,10 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             }
         }
         
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = Theme.current.palette.lightBackground
+        cell.selectedBackgroundView = backgroundView
+
         Theme.current.applySolidLightBackground(cell)
         Theme.current.applyDetailTableCell(cell)
     }

@@ -356,6 +356,11 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
             default:
                 break
             }
+            
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = Theme.current.palette.lightBackground
+            cell.selectedBackgroundView = backgroundView
+
             return cell
         }
     }
