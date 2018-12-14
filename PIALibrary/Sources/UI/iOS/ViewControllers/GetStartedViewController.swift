@@ -65,8 +65,6 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
             }
             vc.delegate = delegate
             let navigationController = UINavigationController(rootViewController: vc)
-            navigationController.setNavigationBarHidden(false,
-                                                        animated: false)
             return navigationController
         }
         return UIViewController()

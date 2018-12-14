@@ -42,6 +42,9 @@ public struct Preset: ProvidersAccess {
         return (isEphemeral ? EphemeralAccountProvider() : accessedProviders.accountProvider)
     }
     
+    /// If `true`, the view controller is opened from Dashboard.
+    public var openFromDashboard = false
+    
     /// Default initializer.
     public init() {
     }

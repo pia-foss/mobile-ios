@@ -22,6 +22,7 @@ internal enum Asset {
   internal static let centeredLightMap = ImageAsset(name: "centered-light-map")
   internal static let iconBack = ImageAsset(name: "icon-back")
   internal static let iconCamera = ImageAsset(name: "icon-camera")
+  internal static let iconClose = ImageAsset(name: "icon-close")
   internal static let iconWarning = ImageAsset(name: "icon-warning")
   internal static let logoDark = ImageAsset(name: "logo-dark")
   internal static let logoLight = ImageAsset(name: "logo-light")
