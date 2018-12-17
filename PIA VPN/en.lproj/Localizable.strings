@@ -199,5 +199,6 @@
 
 // HOTSPOT HELPER
 
-"settings.hotspothelper.description" = "Auto connect WiFi";
-"hotspothelper.display.name" = "🛡 Protect your connection with PIA";
+"settings.hotspothelper.title" = "VPN WiFi Protection";
+"settings.hotspothelper.description" = "VPN WiFi Protection automatically connects the VPN when connecting to an Open network.";
+"hotspothelper.display.name" = "🛡 Open Network: Use PIA for Protection.";

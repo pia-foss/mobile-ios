@@ -194,7 +194,7 @@ internal enum L10n {
 
   internal enum Hotspothelper {
     internal enum Display {
-      /// 🛡 Protect your connection with PIA
+      /// 🛡 Open Network: Use PIA for Protection.
       internal static let name = L10n.tr("Localizable", "hotspothelper.display.name")
     }
   }
@@ -440,8 +440,10 @@ internal enum L10n {
       }
     }
     internal enum Hotspothelper {
-      /// Auto connect WiFi
+      /// VPN WiFi Protection automatically connects the VPN when connecting to an Open network.
       internal static let description = L10n.tr("Localizable", "settings.hotspothelper.description")
+      /// VPN WiFi Protection
+      internal static let title = L10n.tr("Localizable", "settings.hotspothelper.title")
     }
     internal enum Reset {
       /// This will reset all of the above settings to default.

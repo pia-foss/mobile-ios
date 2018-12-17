@@ -91,7 +91,9 @@ class SettingsViewController: AutolayoutViewController {
         case encryption
 
         case applicationSettings
-        
+
+        case autoConnectSettings
+
         case contentBlocker
 
         case applicationInformation
@@ -105,6 +107,7 @@ class SettingsViewController: AutolayoutViewController {
         .connection,
         .encryption,
         .applicationSettings,
+        .autoConnectSettings,
         .applicationInformation,
         .reset,
         .contentBlocker
@@ -125,6 +128,9 @@ class SettingsViewController: AutolayoutViewController {
             .encryptionHandshake
         ],
         .applicationSettings: [], // dynamic
+        .autoConnectSettings: [
+            .shouldConnectWithUnsecureNetworks
+        ],
         .contentBlocker: [
             .contentBlockerState,
             .contentBlockerRefreshRules
@@ -523,14 +529,12 @@ class SettingsViewController: AutolayoutViewController {
             rowsBySection[.applicationSettings] = [
                 .darkTheme,
                 .automaticReconnection,
-                .shouldConnectWithUnsecureNetworks,
                 .mace
             ]
         } else {
             rowsBySection[.applicationSettings] = [
                 .darkTheme,
                 .automaticReconnection,
-                .shouldConnectWithUnsecureNetworks
             ]
         }
         if !Flags.shared.enablesContentBlockerSetting {
@@ -626,7 +630,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             
         case .applicationSettings:
             return L10n.Settings.ApplicationSettings.title
-            
+           
+        case .autoConnectSettings:
+            return nil
+
         case .contentBlocker:
             return L10n.Settings.ContentBlocker.title
 
@@ -651,6 +658,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 footer.append(L10n.Settings.ApplicationSettings.Mace.footer)
             }
             return footer.joined(separator: "\n\n")
+            
+        case .autoConnectSettings:
+            return L10n.Settings.Hotspothelper.description
             
         case .reset:
             return L10n.Settings.Reset.footer
@@ -755,7 +765,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             switchPersistent.isOn = pendingPreferences.isPersistentConnection
             
         case .shouldConnectWithUnsecureNetworks:
-            cell.textLabel?.text = L10n.Settings.Hotspothelper.description
+            cell.textLabel?.text = L10n.Settings.Hotspothelper.title
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchAutoJoinWiFi
             cell.selectionStyle = .none
