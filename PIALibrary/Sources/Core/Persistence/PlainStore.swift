@@ -42,6 +42,8 @@ protocol PlainStore: class {
     
     var isPersistentConnection: Bool? { get set }
     
+    var shouldConnectWithUnsecureNetworks: Bool? { get set }
+
     var mace: Bool? { get set }
     
     // MARK: Lifecycle

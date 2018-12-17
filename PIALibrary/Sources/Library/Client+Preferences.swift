@@ -17,6 +17,8 @@ private protocol PreferencesStore: class {
     var isPersistentConnection: Bool { get set }
     
     var mace: Bool { get set }
+    
+    var shouldConnectWithUnsecureNetworks: Bool { get set }
 
     var vpnType: String { get set }
 
@@ -38,6 +40,7 @@ private extension PreferencesStore {
         preferredServer = source.preferredServer
         isPersistentConnection = source.isPersistentConnection
         mace = source.mace
+        shouldConnectWithUnsecureNetworks = source.shouldConnectWithUnsecureNetworks
         vpnType = source.vpnType
         vpnDisconnectsOnSleep = source.vpnDisconnectsOnSleep
         vpnCustomConfigurations = source.vpnCustomConfigurations
@@ -95,6 +98,17 @@ extension Client {
                 accessedDatabase.plain.mace = newValue
             }
         }
+        
+        /// The option for connect the vpn when selecting unsecure networks from Settings.
+        public fileprivate(set) var shouldConnectWithUnsecureNetworks: Bool {
+            get {
+                return accessedDatabase.plain.shouldConnectWithUnsecureNetworks ?? defaults.shouldConnectWithUnsecureNetworks
+            }
+            set {
+                accessedDatabase.plain.shouldConnectWithUnsecureNetworks = newValue
+            }
+        }
+
         
         /// The type of the current VPN profile. Must be found in `Client.Configuration.availableVPNTypes(...)`.
         ///
@@ -184,6 +198,7 @@ extension Client.Preferences {
             preferredServer = nil
             isPersistentConnection = true
             mace = false
+            shouldConnectWithUnsecureNetworks = false
             vpnType = IPSecProfile.vpnType
             vpnDisconnectsOnSleep = false
             vpnCustomConfigurations = [:]
@@ -220,6 +235,9 @@ extension Client.Preferences {
         
         /// :nodoc:
         public var mace: Bool
+        
+        /// :nodoc:
+        public var shouldConnectWithUnsecureNetworks: Bool
         
         /// :nodoc:
         public var vpnType: String

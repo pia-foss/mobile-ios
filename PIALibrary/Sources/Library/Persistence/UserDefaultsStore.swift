@@ -37,6 +37,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         static let persistentConnection = "PersistentConnection" // legacy
 
         static let mace = "MACE" // legacy
+        
+        static let shouldConnectWithUnsecureNetworks = "ShouldConnectWithUnsecureNetworks"
     }
     
     private let backend: UserDefaults
@@ -202,6 +204,18 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
         set {
             backend.set(newValue, forKey: Entries.persistentConnection)
+        }
+    }
+    
+    var shouldConnectWithUnsecureNetworks: Bool? {
+        get {
+            guard let value = backend.object(forKey: Entries.shouldConnectWithUnsecureNetworks) as? Bool else {
+                return nil
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.shouldConnectWithUnsecureNetworks)
         }
     }
     
