@@ -6,6 +6,7 @@
 "account.accessibility.eye.hint.reveal" = "Tik om wachtwoord te onthullen";
 "account.email.caption" = "E-mail";
 "account.email.placeholder" = "E-mailadres";
+"account.error.unauthorized" = "Uw gebruikersnaam of wachtwoord is onjuist.";
 "account.expiry_date.expired" = "Uw abonnement is verlopen.";
 "account.expiry_date.information" = "Uw plan verloopt op %@.";
 "account.eye.footer" = "Tik op het oogpictogram om uw wachtwoord te verbergen of te onthullen";
@@ -17,9 +18,12 @@
 "account.restore.failure.title" = "Aankoop herstellen";
 "account.restore.title" = "Niet-gecrediteerde aankoop herstellen";
 "account.reveal.prompt" = "Authenticeren om te onthullen";
-"account.save.item" = "Updaten";
+"account.save.item" = "E-mail updaten";
 "account.save.prompt" = "Authenticeren om wijzigingen op te slaan";
 "account.save.success" = "Uw e-mailadres is opgeslagen.";
+"account.update.email.require.password.button" = "Versturen";
+"account.update.email.require.password.message" = "Om veiligheidsredenen hebben wij uw PIA-wachtwoord nodig om wijzigingen in uw account uit te voeren. Voer uw PIA-wachtwoord in om verder te gaan.";
+"account.update.email.require.password.title" = "PIA-wachtwoord vereist";
 "account.username.caption" = "Gebruikersnaam";
 "content_blocker.body.footer" = "Let op: Je hoeft niet verbonden te zijn met de VPN om deze Content blocker te laten werken, maar dan werkt het alleen als je Safari gebruikt.";
 "content_blocker.body.subtitle" = "Om onze Content blocker voor Safari in te schakelen ga je naar Instellingen > Safari en onder Algemeen raak je Content Blockers aan om PIA VPN in te schakelen.";
