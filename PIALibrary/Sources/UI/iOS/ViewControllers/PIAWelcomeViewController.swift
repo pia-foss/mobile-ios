@@ -56,8 +56,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
             fatalError("You are already logged in, you might want to Client.database.truncate() to start clean")
         }
         
-        buttonCancel.isHidden = !preset.allowsCancel
-        buttonCancel.accessibilityLabel = L10n.Ui.Global.cancel
+        buttonCancel.isHidden = true
         buttonEnvironment.isHidden = !accessedConfiguration.isDevelopment
         
         #if os(iOS)
@@ -70,14 +69,26 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
     /// :nodoc:
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: Theme.current.palette.navigationBarBackIcon?.withRenderingMode(.alwaysOriginal),
-            style: .plain,
-            target: self,
-            action: #selector(back(_:))
-        )
-        self.navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Welcome.Redeem.Accessibility.back
+        if !preset.openFromDashboard {
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+                image: Theme.current.palette.navigationBarBackIcon?.withRenderingMode(.alwaysOriginal),
+                style: .plain,
+                target: self,
+                action: #selector(back(_:))
+            )
+            self.navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Welcome.Redeem.Accessibility.back
+        } else {
+            if preset.allowsCancel {
+                self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+                    image: Asset.iconClose.image.withRenderingMode(.alwaysOriginal),
+                    style: .plain,
+                    target: self,
+                    action: #selector(cancelClicked(_:))
+                )
+                self.navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Ui.Global.cancel
+            }
+        }
 
         refreshEnvironmentButton()
     }
@@ -94,7 +105,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         self.navigationController?.popViewController(animated: true)
     }
 
-    @IBAction private func cancelClicked(_ sender: Any?) {
+    @objc private func cancelClicked(_ sender: Any?) {
         delegate?.welcomeControllerDidCancel(self)
     }
     
