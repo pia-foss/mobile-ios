@@ -210,7 +210,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                                         } else if cmd.commandType == .evaluate {
                                             if let network = cmd.network {
                                                 
-                                                if Client.preferences.shouldConnectWithUnsecureNetworks && !network.isSecure {
+                                                if Client.preferences.shouldConnectWithUnsecuredNetworks && !network.isSecure {
                                                     network.setConfidence(.high)
                                                     //Connect the VPN
                                                     if !Client.providers.vpnProvider.isVPNConnected {

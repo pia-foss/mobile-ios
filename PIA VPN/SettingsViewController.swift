@@ -40,7 +40,7 @@ enum Setting: Int {
     
     case automaticReconnection
     
-    case shouldConnectWithUnsecureNetworks
+    case shouldConnectWithUnsecuredNetworks
 
     case contentBlockerState
     
@@ -129,7 +129,7 @@ class SettingsViewController: AutolayoutViewController {
         ],
         .applicationSettings: [], // dynamic
         .autoConnectSettings: [
-            .shouldConnectWithUnsecureNetworks
+            .shouldConnectWithUnsecuredNetworks
         ],
         .contentBlocker: [
             .contentBlockerState,
@@ -222,7 +222,7 @@ class SettingsViewController: AutolayoutViewController {
             tableView.estimatedSectionFooterHeight = 1.0
         }
         switchPersistent.addTarget(self, action: #selector(togglePersistentConnection(_:)), for: .valueChanged)
-        switchAutoJoinWiFi.addTarget(self, action: #selector(toggleAutoconnectWithUnsecureNetworks(_:)), for: .valueChanged)
+        switchAutoJoinWiFi.addTarget(self, action: #selector(toggleAutoconnectWithUnsecuredNetworks(_:)), for: .valueChanged)
         switchMACE.addTarget(self, action: #selector(toggleMACE(_:)), for: .valueChanged)
 //        switchContentBlocker.isGrayed = true
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
@@ -269,8 +269,8 @@ class SettingsViewController: AutolayoutViewController {
         reportUpdatedPreferences()
     }
     
-    @objc private func toggleAutoconnectWithUnsecureNetworks(_ sender: UISwitch) {
-        pendingPreferences.shouldConnectWithUnsecureNetworks = sender.isOn
+    @objc private func toggleAutoconnectWithUnsecuredNetworks(_ sender: UISwitch) {
+        pendingPreferences.shouldConnectWithUnsecuredNetworks = sender.isOn
         redisplaySettings()
         reportUpdatedPreferences()
     }
@@ -764,12 +764,12 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.selectionStyle = .none
             switchPersistent.isOn = pendingPreferences.isPersistentConnection
             
-        case .shouldConnectWithUnsecureNetworks:
+        case .shouldConnectWithUnsecuredNetworks:
             cell.textLabel?.text = L10n.Settings.Hotspothelper.title
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchAutoJoinWiFi
             cell.selectionStyle = .none
-            switchAutoJoinWiFi.isOn = pendingPreferences.shouldConnectWithUnsecureNetworks
+            switchAutoJoinWiFi.isOn = pendingPreferences.shouldConnectWithUnsecuredNetworks
 
         case .mace:
             cell.textLabel?.text = L10n.Settings.ApplicationSettings.Mace.title
