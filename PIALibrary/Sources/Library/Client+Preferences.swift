@@ -18,7 +18,7 @@ private protocol PreferencesStore: class {
     
     var mace: Bool { get set }
     
-    var shouldConnectWithUnsecureNetworks: Bool { get set }
+    var shouldConnectWithUnsecuredNetworks: Bool { get set }
 
     var vpnType: String { get set }
 
@@ -40,7 +40,7 @@ private extension PreferencesStore {
         preferredServer = source.preferredServer
         isPersistentConnection = source.isPersistentConnection
         mace = source.mace
-        shouldConnectWithUnsecureNetworks = source.shouldConnectWithUnsecureNetworks
+        shouldConnectWithUnsecuredNetworks = source.shouldConnectWithUnsecuredNetworks
         vpnType = source.vpnType
         vpnDisconnectsOnSleep = source.vpnDisconnectsOnSleep
         vpnCustomConfigurations = source.vpnCustomConfigurations
@@ -100,12 +100,12 @@ extension Client {
         }
         
         /// The option for connect the vpn when selecting unsecure networks from Settings.
-        public fileprivate(set) var shouldConnectWithUnsecureNetworks: Bool {
+        public fileprivate(set) var shouldConnectWithUnsecuredNetworks: Bool {
             get {
-                return accessedDatabase.plain.shouldConnectWithUnsecureNetworks ?? defaults.shouldConnectWithUnsecureNetworks
+                return accessedDatabase.plain.shouldConnectWithUnsecuredNetworks ?? defaults.shouldConnectWithUnsecuredNetworks
             }
             set {
-                accessedDatabase.plain.shouldConnectWithUnsecureNetworks = newValue
+                accessedDatabase.plain.shouldConnectWithUnsecuredNetworks = newValue
             }
         }
 
@@ -198,7 +198,7 @@ extension Client.Preferences {
             preferredServer = nil
             isPersistentConnection = true
             mace = false
-            shouldConnectWithUnsecureNetworks = false
+            shouldConnectWithUnsecuredNetworks = false
             vpnType = IPSecProfile.vpnType
             vpnDisconnectsOnSleep = false
             vpnCustomConfigurations = [:]
@@ -237,7 +237,7 @@ extension Client.Preferences {
         public var mace: Bool
         
         /// :nodoc:
-        public var shouldConnectWithUnsecureNetworks: Bool
+        public var shouldConnectWithUnsecuredNetworks: Bool
         
         /// :nodoc:
         public var vpnType: String

@@ -38,7 +38,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         static let mace = "MACE" // legacy
         
-        static let shouldConnectWithUnsecureNetworks = "ShouldConnectWithUnsecureNetworks"
+        static let shouldConnectWithUnsecuredNetworks = "ShouldConnectWithUnsecuredNetworks"
     }
     
     private let backend: UserDefaults
@@ -207,15 +207,15 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
     
-    var shouldConnectWithUnsecureNetworks: Bool? {
+    var shouldConnectWithUnsecuredNetworks: Bool? {
         get {
-            guard let value = backend.object(forKey: Entries.shouldConnectWithUnsecureNetworks) as? Bool else {
+            guard let value = backend.object(forKey: Entries.shouldConnectWithUnsecuredNetworks) as? Bool else {
                 return nil
             }
             return value
         }
         set {
-            backend.set(newValue, forKey: Entries.shouldConnectWithUnsecureNetworks)
+            backend.set(newValue, forKey: Entries.shouldConnectWithUnsecuredNetworks)
         }
     }
     
