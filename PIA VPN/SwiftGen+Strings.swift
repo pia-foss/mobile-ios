@@ -192,6 +192,13 @@ internal enum L10n {
     internal static let update = L10n.tr("Localizable", "global.update")
   }
 
+  internal enum Hotspothelper {
+    internal enum Display {
+      /// 🛡 Protect your connection with PIA
+      internal static let name = L10n.tr("Localizable", "hotspothelper.display.name")
+    }
+  }
+
   internal enum Menu {
     internal enum Accessibility {
       /// Menu
@@ -431,6 +438,10 @@ internal enum L10n {
         /// Handshake
         internal static let title = L10n.tr("Localizable", "settings.encryption.handshake.title")
       }
+    }
+    internal enum Hotspothelper {
+      /// Auto connect WiFi
+      internal static let description = L10n.tr("Localizable", "settings.hotspothelper.description")
     }
     internal enum Reset {
       /// This will reset all of the above settings to default.

@@ -40,6 +40,8 @@ enum Setting: Int {
     
     case automaticReconnection
     
+    case shouldConnectWithUnsecureNetworks
+
     case contentBlockerState
     
     case contentBlockerRefreshRules
@@ -148,8 +150,10 @@ class SettingsViewController: AutolayoutViewController {
     
     @IBOutlet private weak var tableView: UITableView!
 
+    private lazy var switchAutoJoinWiFi = UISwitch()
+
     private lazy var switchPersistent = UISwitch()
-    
+
     private lazy var switchMACE = UISwitch()
     
     private lazy var switchContentBlocker = FakeSwitch()
@@ -212,6 +216,7 @@ class SettingsViewController: AutolayoutViewController {
             tableView.estimatedSectionFooterHeight = 1.0
         }
         switchPersistent.addTarget(self, action: #selector(togglePersistentConnection(_:)), for: .valueChanged)
+        switchAutoJoinWiFi.addTarget(self, action: #selector(toggleAutoconnectWithUnsecureNetworks(_:)), for: .valueChanged)
         switchMACE.addTarget(self, action: #selector(toggleMACE(_:)), for: .valueChanged)
 //        switchContentBlocker.isGrayed = true
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
@@ -254,6 +259,12 @@ class SettingsViewController: AutolayoutViewController {
 
     @objc private func togglePersistentConnection(_ sender: UISwitch) {
         pendingPreferences.isPersistentConnection = sender.isOn
+        redisplaySettings()
+        reportUpdatedPreferences()
+    }
+    
+    @objc private func toggleAutoconnectWithUnsecureNetworks(_ sender: UISwitch) {
+        pendingPreferences.shouldConnectWithUnsecureNetworks = sender.isOn
         redisplaySettings()
         reportUpdatedPreferences()
     }
@@ -512,12 +523,14 @@ class SettingsViewController: AutolayoutViewController {
             rowsBySection[.applicationSettings] = [
                 .darkTheme,
                 .automaticReconnection,
+                .shouldConnectWithUnsecureNetworks,
                 .mace
             ]
         } else {
             rowsBySection[.applicationSettings] = [
                 .darkTheme,
-                .automaticReconnection
+                .automaticReconnection,
+                .shouldConnectWithUnsecureNetworks
             ]
         }
         if !Flags.shared.enablesContentBlockerSetting {
@@ -741,6 +754,13 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.selectionStyle = .none
             switchPersistent.isOn = pendingPreferences.isPersistentConnection
             
+        case .shouldConnectWithUnsecureNetworks:
+            cell.textLabel?.text = L10n.Settings.Hotspothelper.description
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchAutoJoinWiFi
+            cell.selectionStyle = .none
+            switchAutoJoinWiFi.isOn = pendingPreferences.shouldConnectWithUnsecureNetworks
+
         case .mace:
             cell.textLabel?.text = L10n.Settings.ApplicationSettings.Mace.title
             cell.detailTextLabel?.text = nil

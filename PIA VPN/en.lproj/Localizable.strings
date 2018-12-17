@@ -196,3 +196,8 @@
 "settings.dns.validation.primary.mandatory" = "Primary DNS is mandatory.";
 "settings.dns.validation.primary.invalid" = "Primary DNS is not valid.";
 "settings.dns.validation.secondary.invalid" = "Secondary DNS is not valid.";
+
+// HOTSPOT HELPER
+
+"settings.hotspothelper.description" = "Auto connect WiFi";
+"hotspothelper.display.name" = "🛡 Protect your connection with PIA";
