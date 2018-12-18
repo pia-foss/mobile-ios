@@ -272,6 +272,7 @@ enum Asset {
   static let icon3dtSelectRegion = ImageAsset(name: "icon-3dt-select-region")
   static let iconAbout = ImageAsset(name: "icon-about")
   static let iconAccount = ImageAsset(name: "icon-account")
+  static let iconAdd = ImageAsset(name: "icon-add")
   static let iconContact = ImageAsset(name: "icon-contact")
   static let iconDownload = ImageAsset(name: "icon-download")
   static let iconEye = ImageAsset(name: "icon-eye")
@@ -286,6 +287,7 @@ enum Asset {
   static let iconUnselectedWhite = ImageAsset(name: "icon-unselected-white")
   static let iconUnselected = ImageAsset(name: "icon-unselected")
   static let iconUpload = ImageAsset(name: "icon-upload")
+  static let iconWifi = ImageAsset(name: "icon-wifi")
   static let imageContentBlocker = ImageAsset(name: "image-content-blocker")
   static let imageRobot = ImageAsset(name: "image-robot")
   static let imageRobotside = ImageAsset(name: "image-robotside")
@@ -527,6 +529,7 @@ enum Asset {
     icon3dtSelectRegion,
     iconAbout,
     iconAccount,
+    iconAdd,
     iconContact,
     iconDownload,
     iconEye,
@@ -541,6 +544,7 @@ enum Asset {
     iconUnselectedWhite,
     iconUnselected,
     iconUpload,
+    iconWifi,
     imageContentBlocker,
     imageRobot,
     imageRobotside,

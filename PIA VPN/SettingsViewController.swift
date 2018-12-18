@@ -40,6 +40,8 @@ enum Setting: Int {
     
     case automaticReconnection
     
+    case trustedNetworks
+    
     case shouldConnectWithUnsecuredNetworks
 
     case contentBlockerState
@@ -129,7 +131,8 @@ class SettingsViewController: AutolayoutViewController {
         ],
         .applicationSettings: [], // dynamic
         .autoConnectSettings: [
-            .shouldConnectWithUnsecuredNetworks
+            .trustedNetworks,
+            .shouldConnectWithUnsecuredNetworks,
         ],
         .contentBlocker: [
             .contentBlockerState,
@@ -157,6 +160,8 @@ class SettingsViewController: AutolayoutViewController {
     @IBOutlet private weak var tableView: UITableView!
 
     private lazy var switchAutoJoinWiFi = UISwitch()
+
+    private lazy var switchAutoJoinAllNetworks = UISwitch()
 
     private lazy var switchPersistent = UISwitch()
 
@@ -223,6 +228,7 @@ class SettingsViewController: AutolayoutViewController {
         }
         switchPersistent.addTarget(self, action: #selector(togglePersistentConnection(_:)), for: .valueChanged)
         switchAutoJoinWiFi.addTarget(self, action: #selector(toggleAutoconnectWithUnsecuredNetworks(_:)), for: .valueChanged)
+        switchAutoJoinAllNetworks.addTarget(self, action: #selector(toggleAutoconnectWithAllNetworks(_:)), for: .valueChanged)
         switchMACE.addTarget(self, action: #selector(toggleMACE(_:)), for: .valueChanged)
 //        switchContentBlocker.isGrayed = true
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
@@ -271,6 +277,12 @@ class SettingsViewController: AutolayoutViewController {
     
     @objc private func toggleAutoconnectWithUnsecuredNetworks(_ sender: UISwitch) {
         pendingPreferences.shouldConnectWithUnsecuredNetworks = sender.isOn
+        redisplaySettings()
+        reportUpdatedPreferences()
+    }
+    
+    @objc private func toggleAutoconnectWithAllNetworks(_ sender: UISwitch) {
+        pendingPreferences.shouldConnectForAllNetworks = sender.isOn
         redisplaySettings()
         reportUpdatedPreferences()
     }
@@ -821,6 +833,11 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .resolveGoogleAdsDomain:
             cell.textLabel?.text = "Resolve google-analytics.com"
             cell.detailTextLabel?.text = nil
+            
+        case .trustedNetworks:
+            cell.textLabel?.text = L10n.Settings.Hotspothelper.trustedNetworks
+            cell.detailTextLabel?.text = nil
+
         }
 
         Theme.current.applySolidLightBackground(cell)
@@ -977,6 +994,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         case .resolveGoogleAdsDomain:
             resolveGoogleAdsDomain()
+
+        case .trustedNetworks:
+            self.perform(segue: StoryboardSegue.Main.trustedNetworksSegueIdentifier)
 
         default:
             break

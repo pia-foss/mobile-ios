@@ -428,6 +428,7 @@
                         <outlet property="viewContainer" destination="y48-1b-51o" id="lrf-Lu-k97"/>
                         <segue destination="GHB-bv-bDF" kind="presentation" identifier="ContentBlockerSegueIdentifier" id="m5W-SC-Abx"/>
                         <segue destination="dAM-Z5-oAd" kind="show" identifier="CustomDNSSegueIdentifier" id="lbS-7Z-NqV"/>
+                        <segue destination="jy7-91-daJ" kind="show" identifier="TrustedNetworksSegueIdentifier" id="LsE-Df-8xu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dYZ-r8-2HZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1425,6 +1426,72 @@
                 <exit id="1Y3-6R-wjV" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1159" y="-1198"/>
+        </scene>
+        <!--Trusted Networks View Controller-->
+        <scene sceneID="Rqb-Xe-d1j">
+            <objects>
+                <viewController id="jy7-91-daJ" customClass="TrustedNetworksViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P5B-eT-Ius">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p4O-Dy-PbF">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Si7-46-a7E">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NetworkCell" textLabel="vC0-u3-5dy" style="IBUITableViewCellStyleDefault" id="GOa-SC-nuT">
+                                                <rect key="frame" x="0.0" y="55.333333333333343" width="375" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GOa-SC-nuT" id="BWR-u5-7Aw">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vC0-u3-5dy">
+                                                            <rect key="frame" x="15" y="0.0" width="345" height="43.666666666666664"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="jy7-91-daJ" id="yxe-us-f0l"/>
+                                            <outlet property="delegate" destination="jy7-91-daJ" id="pjH-8P-kpT"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Si7-46-a7E" firstAttribute="leading" secondItem="p4O-Dy-PbF" secondAttribute="leading" id="0o4-In-hhO"/>
+                                    <constraint firstItem="Si7-46-a7E" firstAttribute="top" secondItem="p4O-Dy-PbF" secondAttribute="top" id="10u-Ou-k77"/>
+                                    <constraint firstAttribute="bottom" secondItem="Si7-46-a7E" secondAttribute="bottom" id="ZnL-aS-UmJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="Si7-46-a7E" secondAttribute="trailing" id="bSP-ny-gL3"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="p4O-Dy-PbF" firstAttribute="leading" secondItem="P5B-eT-Ius" secondAttribute="leading" id="Qq8-7p-ILm"/>
+                            <constraint firstItem="p4O-Dy-PbF" firstAttribute="top" secondItem="P5B-eT-Ius" secondAttribute="top" id="qoK-js-JxI"/>
+                            <constraint firstAttribute="bottom" secondItem="p4O-Dy-PbF" secondAttribute="bottom" id="qpF-I5-47U"/>
+                            <constraint firstAttribute="trailing" secondItem="p4O-Dy-PbF" secondAttribute="trailing" id="smH-y1-grb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3vR-8b-fBR"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Si7-46-a7E" id="xk9-1a-OcZ"/>
+                        <outlet property="viewContainer" destination="p4O-Dy-PbF" id="Aw9-9G-NGH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QBf-Kp-bhx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2697" y="-1767"/>
         </scene>
         <!--CustomDNS Settings View Controller-->
         <scene sceneID="TrO-qA-66V">

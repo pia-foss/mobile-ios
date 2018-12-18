@@ -444,6 +444,14 @@ internal enum L10n {
       internal static let description = L10n.tr("Localizable", "settings.hotspothelper.description")
       /// VPN WiFi Protection
       internal static let title = L10n.tr("Localizable", "settings.hotspothelper.title")
+      /// Trusted networks
+      internal static let trustedNetworks = L10n.tr("Localizable", "settings.hotspothelper.trustedNetworks")
+      internal enum All {
+        /// Automatically connect for all WiFi networks.
+        internal static let description = L10n.tr("Localizable", "settings.hotspothelper.all.description")
+        /// Connect for all
+        internal static let title = L10n.tr("Localizable", "settings.hotspothelper.all.title")
+      }
     }
     internal enum Reset {
       /// This will reset all of the above settings to default.
@@ -461,6 +469,18 @@ internal enum L10n {
           /// Reset settings
           internal static let title = L10n.tr("Localizable", "settings.reset.defaults.confirm.title")
         }
+      }
+    }
+    internal enum TrustedNetworks {
+      /// Trusted networks are networks to automatically join blablabla
+      internal static let message = L10n.tr("Localizable", "settings.trustedNetworks.message")
+      internal enum Sections {
+        /// Available networks
+        internal static let available = L10n.tr("Localizable", "settings.trustedNetworks.sections.available")
+        /// Current network
+        internal static let current = L10n.tr("Localizable", "settings.trustedNetworks.sections.current")
+        /// Trusted networks
+        internal static let trusted = L10n.tr("Localizable", "settings.trustedNetworks.sections.trusted")
       }
     }
   }

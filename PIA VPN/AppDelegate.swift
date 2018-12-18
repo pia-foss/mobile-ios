@@ -16,6 +16,7 @@ private let log = SwiftyBeaver.self
 
 @UIApplicationMain
 class AppDelegate: NSObject, UIApplicationDelegate {
+    
     private enum ShortcutItem: String {
         case connect
 
@@ -25,15 +26,18 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
 
     var window: UIWindow?
+    private var hotspotHelper: PIAHotspotHelper!
 
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        
         Bootstrapper.shared.bootstrap()
         application.shortcutItems = []
-        configureHotspotHelper()
+        hotspotHelper = PIAHotspotHelper()
+        _ = hotspotHelper.configureHotspotHelper()
         
         return true
     }
@@ -185,55 +189,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             }
             mainVC.selectRegion(animated: true)
         }
-    }
-    
-    //MARK: - NEHotspotHelper
-    private func configureHotspotHelper() {
-        let options: [String: NSObject] = [kNEHotspotHelperOptionDisplayName : L10n.Hotspothelper.Display.name as NSObject]
-        let queue: DispatchQueue = DispatchQueue(label: "com.privateinternetaccess.hotspot", attributes: DispatchQueue.Attributes.concurrent)
-        NEHotspotHelper.supportedNetworkInterfaces()
-        NEHotspotHelper.register(options: options,
-                                 queue: queue) { (cmd: NEHotspotHelperCommand) in
-                                    if !Client.providers.vpnProvider.isVPNConnected {
-                                        
-                                        if cmd.commandType == .filterScanList {
-                                            var unsecuredList: [NEHotspotNetwork] = []
-                                            for element in cmd.networkList! {
-                                                if !element.isSecure {
-                                                    element.setConfidence(.high)
-                                                    unsecuredList.append(element)
-                                                }
-                                            }
-                                            let response = cmd.createResponse(NEHotspotHelperResult.success)
-                                            response.setNetworkList(unsecuredList)
-                                            response.deliver()
-                                        } else if cmd.commandType == .evaluate {
-                                            if let network = cmd.network {
-                                                
-                                                if Client.preferences.shouldConnectWithUnsecuredNetworks && !network.isSecure {
-                                                    network.setConfidence(.high)
-                                                    //Connect the VPN
-                                                    if !Client.providers.vpnProvider.isVPNConnected {
-                                                        // this time delay seems to fix a strange issue of the VPN connecting from a fresh launch
-                                                        Macros.dispatch(after: .milliseconds(200)) {
-                                                            Client.providers.vpnProvider.connect(nil)
-                                                        }
-                                                    }
-                                                    
-                                                    let response = cmd.createResponse(.success)
-                                                    response.setNetwork(network)
-                                                    response.deliver()
-                                                } else {
-                                                    let response = cmd.createResponse(.failure)
-                                                    response.setNetwork(network)
-                                                    response.deliver()
-                                                }
-                                            }
-                                        }
-                                        
-                                    }
-        }
-
     }
     
 }

@@ -201,4 +201,11 @@
 
 "settings.hotspothelper.title" = "VPN WiFi Protection";
 "settings.hotspothelper.description" = "VPN WiFi Protection automatically connects the VPN when connecting to an Open network.";
+"settings.hotspothelper.all.title" = "Connect for all";
+"settings.hotspothelper.all.description" = "Automatically connect for all WiFi networks.";
+"settings.hotspothelper.trustedNetworks" = "Trusted networks";
+"settings.trustedNetworks.sections.current" = "Current network";
+"settings.trustedNetworks.sections.available" = "Available networks";
+"settings.trustedNetworks.sections.trusted" = "Trusted networks";
+"settings.trustedNetworks.message" = "Trusted networks are networks to automatically join blablabla";
 "hotspothelper.display.name" = "🛡 Open Network: Use PIA for Protection.";
