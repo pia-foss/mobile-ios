@@ -20,11 +20,17 @@ private protocol PreferencesStore: class {
     
     var shouldConnectWithUnsecuredNetworks: Bool { get set }
 
+    var shouldConnectForAllNetworks: Bool { get set }
+
     var vpnType: String { get set }
 
     var vpnDisconnectsOnSleep: Bool { get set }
     
     var vpnCustomConfigurations: [String: VPNCustomConfiguration] { get set }
+
+    var availableNetworks: [String] { get set }
+
+    var trustedNetworks: [String] { get set }
 
     func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration?
     
@@ -41,9 +47,12 @@ private extension PreferencesStore {
         isPersistentConnection = source.isPersistentConnection
         mace = source.mace
         shouldConnectWithUnsecuredNetworks = source.shouldConnectWithUnsecuredNetworks
+        shouldConnectForAllNetworks = source.shouldConnectForAllNetworks
         vpnType = source.vpnType
         vpnDisconnectsOnSleep = source.vpnDisconnectsOnSleep
         vpnCustomConfigurations = source.vpnCustomConfigurations
+        availableNetworks = source.availableNetworks
+        trustedNetworks = source.trustedNetworks
     }
 }
 
@@ -109,7 +118,16 @@ extension Client {
             }
         }
 
-        
+        /// The option for connect the vpn when selecting connect when changing to cellular data from Settings.
+        public fileprivate(set) var shouldConnectForAllNetworks: Bool {
+            get {
+                return accessedDatabase.plain.shouldConnectForAllNetworks ?? defaults.shouldConnectForAllNetworks
+            }
+            set {
+                accessedDatabase.plain.shouldConnectForAllNetworks = newValue
+            }
+        }
+
         /// The type of the current VPN profile. Must be found in `Client.Configuration.availableVPNTypes(...)`.
         ///
         /// - Seealso: `VPNProfile.vpnType`
@@ -183,6 +201,27 @@ extension Client {
             allMaps[vpnType] = customConfiguration.serialized()
             accessedDatabase.plain.vpnCustomConfigurationMaps = allMaps
         }
+        
+        /// The `String` array of available WiFi networks
+        public fileprivate(set) var availableNetworks: [String] {
+            get {
+                return accessedDatabase.plain.cachedNetworks
+            }
+            set {
+                accessedDatabase.plain.cachedNetworks = newValue
+            }
+        }
+
+        /// The `String` array of trusted WiFi networks
+        public fileprivate(set) var trustedNetworks: [String] {
+            get {
+                return accessedDatabase.plain.trustedNetworks
+            }
+            set {
+                accessedDatabase.plain.trustedNetworks = newValue
+            }
+        }
+
     }
 }
 
@@ -199,9 +238,12 @@ extension Client.Preferences {
             isPersistentConnection = true
             mace = false
             shouldConnectWithUnsecuredNetworks = false
+            shouldConnectForAllNetworks = false
             vpnType = IPSecProfile.vpnType
             vpnDisconnectsOnSleep = false
             vpnCustomConfigurations = [:]
+            availableNetworks = []
+            trustedNetworks = []
         }
 
         /**
@@ -238,7 +280,10 @@ extension Client.Preferences {
         
         /// :nodoc:
         public var shouldConnectWithUnsecuredNetworks: Bool
-        
+
+        /// :nodoc:
+        public var shouldConnectForAllNetworks: Bool
+
         /// :nodoc:
         public var vpnType: String
         
@@ -247,6 +292,12 @@ extension Client.Preferences {
         
         /// :nodoc:
         public var vpnCustomConfigurations: [String: VPNCustomConfiguration]
+        
+        /// :nodoc:
+        public var availableNetworks: [String]
+
+        /// :nodoc:
+        public var trustedNetworks: [String]
 
         /// :nodoc:
         public func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration? {

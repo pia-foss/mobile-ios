@@ -44,6 +44,8 @@ protocol PlainStore: class {
     
     var shouldConnectWithUnsecuredNetworks: Bool? { get set }
 
+    var shouldConnectForAllNetworks: Bool? { get set }
+
     var mace: Bool? { get set }
     
     // MARK: Lifecycle
@@ -51,4 +53,9 @@ protocol PlainStore: class {
     func reset()
     
     func clear()
+    
+    // MARK: Netwokrs
+    var cachedNetworks: [String] { get set }
+    
+    var trustedNetworks: [String] { get set }
 }
