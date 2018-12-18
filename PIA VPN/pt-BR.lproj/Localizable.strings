@@ -6,6 +6,7 @@
 "account.accessibility.eye.hint.reveal" = "Toque para revelar a senha";
 "account.email.caption" = "E-mail";
 "account.email.placeholder" = "Endereço de e-mail";
+"account.error.unauthorized" = "Seu nome de usuário ou senha está incorreto.";
 "account.expiry_date.expired" = "Seu plano expirou.";
 "account.expiry_date.information" = "Seu plano expirará em %@.";
 "account.eye.footer" = "Toque no ícone de olho para revelar ou ocultar sua senha.";
@@ -17,9 +18,12 @@
 "account.restore.failure.title" = "Restaurar compra";
 "account.restore.title" = "Restaurar compra não creditada";
 "account.reveal.prompt" = "Autenticar para revelar";
-"account.save.item" = "Atualizar";
+"account.save.item" = "Atualizar e-mail";
 "account.save.prompt" = "Autenticar para salvar as alterações";
 "account.save.success" = "Seu endereço de e-mail foi salvo.";
+"account.update.email.require.password.button" = "Enviar";
+"account.update.email.require.password.message" = "Por razões de segurança, precisamos da sua senha do PIA para executar uma alteração na sua conta. Insira a sua senha do PIA para continuar.";
+"account.update.email.require.password.title" = "Senha do PIA necessária";
 "account.username.caption" = "Nome de usuário";
 "content_blocker.body.footer" = "Observação: Você não precisa estar conectado à VPN para este Bloqueador de Conteúdo funcionar, porém ele só funcionará enquanto estiver navegando no Safari.";
 "content_blocker.body.subtitle" = "Para ativar nosso Bloqueador de Conteúdo para usar com o Safari, por favor, vá para Ajustes > Safari, e, em Geral, toque em Bloqueadores de Conteúdo e ative PIA VPN.";

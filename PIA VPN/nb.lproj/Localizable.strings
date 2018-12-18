@@ -6,6 +6,7 @@
 "account.accessibility.eye.hint.reveal" = "Trykk for å vise passordet";
 "account.email.caption" = "E-post";
 "account.email.placeholder" = "E-postadresse";
+"account.error.unauthorized" = "Brukernavnet eller passordet ditt er feil.";
 "account.expiry_date.expired" = "Planen din er utløpt.";
 "account.expiry_date.information" = "Planen din utløper %@.";
 "account.eye.footer" = "Trykk på øye-ikonet for å vise eller skjule passordet ditt.";
@@ -17,9 +18,12 @@
 "account.restore.failure.title" = "Gjenopprett kjøp";
 "account.restore.title" = "Gjenopprett ukreditert kjøp";
 "account.reveal.prompt" = "Autentiser for å vise";
-"account.save.item" = "Oppdater";
+"account.save.item" = "Oppdater e-post";
 "account.save.prompt" = "Autentifiser for å lagre endringene";
 "account.save.success" = "E-postadressen din er lagret.";
+"account.update.email.require.password.button" = "Send";
+"account.update.email.require.password.message" = "Av sikkerhetsmessige årsaker trenger vi PIA-passordet ditt for å endre kontoen din. Skriv inn PIA-passordet for å fortsette.";
+"account.update.email.require.password.title" = "PIA-passord kreves";
 "account.username.caption" = "Brukernavn";
 "content_blocker.body.footer" = "Merk: Du trenger ikke å være tilkoblet VPN-tjenesten for at innholdsblokkereren skal virke, men den virker bare når du surfer med Safari.";
 "content_blocker.body.subtitle" = "For å aktivere innholdsblokkereren (for Safari), kan du gå til Innstillinger > Safari, og under Generelt slår du på innholdsblokkerer for PIA VPN.";

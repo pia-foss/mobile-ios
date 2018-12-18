@@ -162,7 +162,7 @@ class AccountViewController: AutolayoutViewController {
                                                                     }
                                                                     
                                                                     weakSelf.textEmail.text = ""
-                                                                    let alert = Macros.alert(L10n.Global.error, error?.localizedDescription)
+                                                                    let alert = Macros.alert(L10n.Global.error, L10n.Account.Error.unauthorized)
                                                                     alert.addCancelAction(L10n.Global.close)
                                                                     self?.present(alert, animated: true, completion: nil)
                                                                     
