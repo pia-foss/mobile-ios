@@ -54,7 +54,7 @@ protocol PlainStore: class {
     
     func clear()
     
-    // MARK: Netwokrs
+    // MARK: Networks
     var cachedNetworks: [String] { get set }
     
     var trustedNetworks: [String] { get set }
