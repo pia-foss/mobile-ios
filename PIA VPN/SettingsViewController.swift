@@ -487,6 +487,10 @@ class SettingsViewController: AutolayoutViewController {
     
     private func commitPreferences() {
         AppPreferences.shared.piaSocketType = pendingOpenVPNSocketType
+        //Update with values from Trusted Network Settings
+        pendingPreferences.trustedNetworks = Client.preferences.trustedNetworks
+        pendingPreferences.availableNetworks = Client.preferences.availableNetworks
+        pendingPreferences.shouldConnectForAllNetworks = Client.preferences.shouldConnectForAllNetworks
         pendingPreferences.commit()
     }
     

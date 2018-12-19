@@ -79,7 +79,7 @@ class PIAHotspotHelper {
                                                         
                                                         if !Client.providers.vpnProvider.isVPNConnected {
                                                             if ((Client.preferences.shouldConnectWithUnsecuredNetworks && !network.isSecure) || Client.preferences.shouldConnectForAllNetworks ||
-                                                                weakSelf.trustedNetworks().contains(network.ssid)) {
+                                                                !weakSelf.trustedNetworks().contains(network.ssid)) {
                                                                 network.setConfidence(.high)
                                                                 //Connect the VPN
                                                                 if !Client.providers.vpnProvider.isVPNConnected {

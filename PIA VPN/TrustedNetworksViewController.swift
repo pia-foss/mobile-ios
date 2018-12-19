@@ -138,7 +138,11 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
         switch Sections.objectIdentifyBy(index: indexPath.section) {
         case .current:
             if let ssid = hotspotHelper.currentWiFiNetwork() {
-                cell.isUserInteractionEnabled = false
+                if trustedNetworks.contains(ssid) {
+                    cell.isUserInteractionEnabled = false
+                } else {
+                    cell.accessoryView = UIImageView(image: Asset.iconAdd.image)
+                }
                 cell.textLabel?.text = ssid
             }
         case .available:
@@ -164,9 +168,12 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         switch Sections.objectIdentifyBy(index: indexPath.section) {
+        case .current:
+            if let ssid = hotspotHelper.currentWiFiNetwork() {
+                hotspotHelper.saveTrustedNetwork(ssid)
+            }
         case .available:
             let ssid = availableNetworks[indexPath.row]
-            trustedNetworks.append(ssid)
             hotspotHelper.saveTrustedNetwork(ssid)
         default:
             break
