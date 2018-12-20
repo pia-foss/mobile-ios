@@ -281,6 +281,7 @@ enum Asset {
   static let iconLogout = ImageAsset(name: "icon-logout")
   static let iconPrivacy = ImageAsset(name: "icon-privacy")
   static let iconRegion = ImageAsset(name: "icon-region")
+  static let iconRemove = ImageAsset(name: "icon-remove")
   static let iconSelectedWhite = ImageAsset(name: "icon-selected-white")
   static let iconSelected = ImageAsset(name: "icon-selected")
   static let iconSettings = ImageAsset(name: "icon-settings")
@@ -538,6 +539,7 @@ enum Asset {
     iconLogout,
     iconPrivacy,
     iconRegion,
+    iconRemove,
     iconSelectedWhite,
     iconSelected,
     iconSettings,

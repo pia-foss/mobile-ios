@@ -41,8 +41,6 @@ enum Setting: Int {
     case automaticReconnection
     
     case trustedNetworks
-    
-    case shouldConnectWithUnsecuredNetworks
 
     case contentBlockerState
     
@@ -131,8 +129,7 @@ class SettingsViewController: AutolayoutViewController {
         ],
         .applicationSettings: [], // dynamic
         .autoConnectSettings: [
-            .trustedNetworks,
-            .shouldConnectWithUnsecuredNetworks,
+            .trustedNetworks
         ],
         .contentBlocker: [
             .contentBlockerState,
@@ -160,8 +157,6 @@ class SettingsViewController: AutolayoutViewController {
     @IBOutlet private weak var tableView: UITableView!
 
     private lazy var switchAutoJoinWiFi = UISwitch()
-
-    private lazy var switchAutoJoinAllNetworks = UISwitch()
 
     private lazy var switchPersistent = UISwitch()
 
@@ -227,8 +222,6 @@ class SettingsViewController: AutolayoutViewController {
             tableView.estimatedSectionFooterHeight = 1.0
         }
         switchPersistent.addTarget(self, action: #selector(togglePersistentConnection(_:)), for: .valueChanged)
-        switchAutoJoinWiFi.addTarget(self, action: #selector(toggleAutoconnectWithUnsecuredNetworks(_:)), for: .valueChanged)
-        switchAutoJoinAllNetworks.addTarget(self, action: #selector(toggleAutoconnectWithAllNetworks(_:)), for: .valueChanged)
         switchMACE.addTarget(self, action: #selector(toggleMACE(_:)), for: .valueChanged)
 //        switchContentBlocker.isGrayed = true
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
@@ -271,18 +264,6 @@ class SettingsViewController: AutolayoutViewController {
 
     @objc private func togglePersistentConnection(_ sender: UISwitch) {
         pendingPreferences.isPersistentConnection = sender.isOn
-        redisplaySettings()
-        reportUpdatedPreferences()
-    }
-    
-    @objc private func toggleAutoconnectWithUnsecuredNetworks(_ sender: UISwitch) {
-        pendingPreferences.shouldConnectWithUnsecuredNetworks = sender.isOn
-        redisplaySettings()
-        reportUpdatedPreferences()
-    }
-    
-    @objc private func toggleAutoconnectWithAllNetworks(_ sender: UISwitch) {
-        pendingPreferences.shouldConnectForAllNetworks = sender.isOn
         redisplaySettings()
         reportUpdatedPreferences()
     }
@@ -491,6 +472,7 @@ class SettingsViewController: AutolayoutViewController {
         pendingPreferences.trustedNetworks = Client.preferences.trustedNetworks
         pendingPreferences.availableNetworks = Client.preferences.availableNetworks
         pendingPreferences.shouldConnectForAllNetworks = Client.preferences.shouldConnectForAllNetworks
+        pendingPreferences.useWiFiProtection = Client.preferences.useWiFiProtection
         pendingPreferences.commit()
     }
     
@@ -779,13 +761,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryView = switchPersistent
             cell.selectionStyle = .none
             switchPersistent.isOn = pendingPreferences.isPersistentConnection
-            
-        case .shouldConnectWithUnsecuredNetworks:
-            cell.textLabel?.text = L10n.Settings.Hotspothelper.title
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchAutoJoinWiFi
-            cell.selectionStyle = .none
-            switchAutoJoinWiFi.isOn = pendingPreferences.shouldConnectWithUnsecuredNetworks
 
         case .mace:
             cell.textLabel?.text = L10n.Settings.ApplicationSettings.Mace.title
@@ -839,8 +814,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.detailTextLabel?.text = nil
             
         case .trustedNetworks:
-            cell.textLabel?.text = L10n.Settings.Hotspothelper.trustedNetworks
-            cell.detailTextLabel?.text = nil
+            cell.textLabel?.text = L10n.Settings.Hotspothelper.title
+            cell.detailTextLabel?.text = Client.preferences.useWiFiProtection ?
+                L10n.Global.enabled :
+                L10n.Global.disabled
 
         }
 

@@ -16,13 +16,15 @@ class TrustedNetworksViewController: AutolayoutViewController {
     private var trustedNetworks: [String] = []
     private let currentNetwork: String? = nil
     private var hotspotHelper: PIAHotspotHelper!
+    private lazy var switchWiFiProtection = UISwitch()
     private lazy var switchAutoJoinAllNetworks = UISwitch()
 
     private enum Sections: Int, EnumsBuilder {
-        case current = 0
+        case useVpnWifiProtection = 0
+        case autoConnectAllNetworksSettings
+        case current
         case available
         case trusted
-        case autoConnectAllNetworksSettings
     }
     
     private struct Cells {
@@ -31,9 +33,10 @@ class TrustedNetworksViewController: AutolayoutViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = L10n.Settings.TrustedNetworks.Sections.trusted
+        self.title = L10n.Settings.Hotspothelper.title
         self.hotspotHelper = PIAHotspotHelper(withDelegate: self)
         self.switchAutoJoinAllNetworks.addTarget(self, action: #selector(toggleAutoconnectWithAllNetworks(_:)), for: .valueChanged)
+        self.switchWiFiProtection.addTarget(self, action: #selector(toggleUseWiFiProtection(_:)), for: .valueChanged)
 
         configureTableView()
     }
@@ -66,6 +69,13 @@ class TrustedNetworksViewController: AutolayoutViewController {
         preferences.commit()
     }
     
+    @objc private func toggleUseWiFiProtection(_ sender: UISwitch) {
+        let preferences = Client.preferences.editable()
+        preferences.useWiFiProtection = sender.isOn
+        preferences.commit()
+        filterAvailableNetworks()
+    }
+
     // MARK: Private Methods
     private func configureTableView() {
         if #available(iOS 11, *) {
@@ -87,28 +97,36 @@ class TrustedNetworksViewController: AutolayoutViewController {
 extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Sections.countCases()
+        return Client.preferences.useWiFiProtection ? Sections.countCases() : 1
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch Sections.objectIdentifyBy(index: section) {
+        case .useVpnWifiProtection:
+            return L10n.Settings.Hotspothelper.title.uppercased()
         case .current:
             return L10n.Settings.TrustedNetworks.Sections.current.uppercased()
         case .available:
             return L10n.Settings.TrustedNetworks.Sections.available.uppercased()
         case .trusted:
             return L10n.Settings.TrustedNetworks.Sections.trusted.uppercased()
-        case .autoConnectAllNetworksSettings:
+        default:
             return nil
         }
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch Sections.objectIdentifyBy(index: section) {
+        case .useVpnWifiProtection:
+            return L10n.Settings.Hotspothelper.Enable.description
         case .trusted:
             return L10n.Settings.TrustedNetworks.message
         case .autoConnectAllNetworksSettings:
             return L10n.Settings.Hotspothelper.All.description
+        case .available:
+            return availableNetworks.isEmpty ?
+                L10n.Settings.Hotspothelper.Available.help :
+                L10n.Settings.Hotspothelper.Available.Add.help
         default:
             return nil
         }
@@ -122,7 +140,7 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
             return availableNetworks.count
         case .trusted:
             return trustedNetworks.count
-        case .autoConnectAllNetworksSettings:
+        default:
             return 1
         }
     }
@@ -149,6 +167,7 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
             cell.accessoryView = UIImageView(image: Asset.iconAdd.image)
             cell.textLabel?.text = availableNetworks[indexPath.row]
         case .trusted:
+            cell.accessoryView = UIImageView(image: Asset.iconRemove.image)
             cell.selectionStyle = .none
             cell.textLabel?.text = trustedNetworks[indexPath.row]
         case .autoConnectAllNetworksSettings:
@@ -157,6 +176,13 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
             cell.accessoryView = switchAutoJoinAllNetworks
             cell.selectionStyle = .none
             switchAutoJoinAllNetworks.isOn = Client.preferences.shouldConnectForAllNetworks
+        case .useVpnWifiProtection:
+            cell.imageView?.image = nil
+            cell.textLabel?.text = L10n.Global.enabled
+            cell.accessoryView = switchWiFiProtection
+            cell.selectionStyle = .none
+            switchWiFiProtection.isOn = Client.preferences.useWiFiProtection
+
         }
 
         Theme.current.applySolidLightBackground(cell)
@@ -175,6 +201,9 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
         case .available:
             let ssid = availableNetworks[indexPath.row]
             hotspotHelper.saveTrustedNetwork(ssid)
+        case .trusted:
+            let ssid = trustedNetworks[indexPath.row]
+            hotspotHelper.removeTrustedNetwork(ssid)
         default:
             break
         }

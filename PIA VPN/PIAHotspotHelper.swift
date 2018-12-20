@@ -47,7 +47,12 @@ class PIAHotspotHelper {
      - Returns: true if correctly configured.
      */
     public func configureHotspotHelper() -> Bool {
-        let options: [String: NSObject] = [kNEHotspotHelperOptionDisplayName : L10n.Hotspothelper.Display.name as NSObject]
+        
+        let hotspotDisplayName = Client.preferences.useWiFiProtection ?
+            L10n.Hotspothelper.Display.Protected.name :
+            L10n.Hotspothelper.Display.name
+        
+        let options: [String: NSObject] = [kNEHotspotHelperOptionDisplayName : hotspotDisplayName as NSObject]
         let queue: DispatchQueue = DispatchQueue(label: "com.privateinternetaccess.hotspot", attributes: DispatchQueue.Attributes.concurrent)
         NEHotspotHelper.supportedNetworkInterfaces()
         return NEHotspotHelper.register(options: options,
@@ -59,7 +64,8 @@ class PIAHotspotHelper {
                                                     var availableList: [String] = []
                                                     var unsecuredList: [NEHotspotNetwork] = []
                                                     for element in cmd.networkList! {
-                                                        if !element.ssid.isEmpty {
+                                                        if !element.ssid.isEmpty,
+                                                            !availableList.contains(element.ssid) {
                                                             availableList.append(element.ssid)
                                                         }
                                                         if !element.isSecure {
@@ -75,20 +81,19 @@ class PIAHotspotHelper {
                                                     }
                                                     response.deliver()
                                                 } else if cmd.commandType == .evaluate {
-                                                    if let network = cmd.network {
+                                                    if let network = cmd.network,
+                                                        Client.preferences.useWiFiProtection {
                                                         
                                                         if !Client.providers.vpnProvider.isVPNConnected {
-                                                            if ((Client.preferences.shouldConnectWithUnsecuredNetworks && !network.isSecure) || Client.preferences.shouldConnectForAllNetworks ||
-                                                                !weakSelf.trustedNetworks().contains(network.ssid)) {
-                                                                network.setConfidence(.high)
-                                                                //Connect the VPN
-                                                                if !Client.providers.vpnProvider.isVPNConnected {
-                                                                    Macros.dispatch(after: .milliseconds(200)) {
-                                                                        log.info("connecting VPN because network "+network.ssid+"has passed the filter")
-                                                                        Client.providers.vpnProvider.connect(nil)
-                                                                    }
-                                                                }
+                                                            if Client.preferences.shouldConnectForAllNetworks ||
+                                                                !weakSelf.trustedNetworks().contains(network.ssid) {
                                                                 
+                                                                network.setConfidence(.high)
+                                                                Macros.dispatch(after: .milliseconds(200)) {
+                                                                    log.info("connecting VPN because network "+network.ssid+"has passed the filter")
+                                                                    Client.providers.vpnProvider.connect(nil)
+                                                                }
+
                                                             }
                                                             
                                                             let response = cmd.createResponse(.success)
