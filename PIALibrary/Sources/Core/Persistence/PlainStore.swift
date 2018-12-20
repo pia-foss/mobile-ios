@@ -41,10 +41,10 @@ protocol PlainStore: class {
     // MARK: Preferences
     
     var isPersistentConnection: Bool? { get set }
-    
-    var shouldConnectWithUnsecuredNetworks: Bool? { get set }
 
     var shouldConnectForAllNetworks: Bool? { get set }
+
+    var useWiFiProtection: Bool? { get set }
 
     var mace: Bool? { get set }
     

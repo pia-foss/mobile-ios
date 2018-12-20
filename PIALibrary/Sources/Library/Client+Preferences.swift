@@ -18,7 +18,7 @@ private protocol PreferencesStore: class {
     
     var mace: Bool { get set }
     
-    var shouldConnectWithUnsecuredNetworks: Bool { get set }
+    var useWiFiProtection: Bool { get set }
 
     var shouldConnectForAllNetworks: Bool { get set }
 
@@ -46,7 +46,7 @@ private extension PreferencesStore {
         preferredServer = source.preferredServer
         isPersistentConnection = source.isPersistentConnection
         mace = source.mace
-        shouldConnectWithUnsecuredNetworks = source.shouldConnectWithUnsecuredNetworks
+        useWiFiProtection = source.useWiFiProtection
         shouldConnectForAllNetworks = source.shouldConnectForAllNetworks
         vpnType = source.vpnType
         vpnDisconnectsOnSleep = source.vpnDisconnectsOnSleep
@@ -108,13 +108,13 @@ extension Client {
             }
         }
         
-        /// The option for connect the vpn when selecting unsecure networks from Settings.
-        public fileprivate(set) var shouldConnectWithUnsecuredNetworks: Bool {
+        /// Use VPN WiFi Protection
+        public fileprivate(set) var useWiFiProtection: Bool {
             get {
-                return accessedDatabase.plain.shouldConnectWithUnsecuredNetworks ?? defaults.shouldConnectWithUnsecuredNetworks
+                return accessedDatabase.plain.useWiFiProtection ?? defaults.useWiFiProtection
             }
             set {
-                accessedDatabase.plain.shouldConnectWithUnsecuredNetworks = newValue
+                accessedDatabase.plain.useWiFiProtection = newValue
             }
         }
 
@@ -237,7 +237,7 @@ extension Client.Preferences {
             preferredServer = nil
             isPersistentConnection = true
             mace = false
-            shouldConnectWithUnsecuredNetworks = false
+            useWiFiProtection = false
             shouldConnectForAllNetworks = false
             vpnType = IPSecProfile.vpnType
             vpnDisconnectsOnSleep = false
@@ -279,7 +279,7 @@ extension Client.Preferences {
         public var mace: Bool
         
         /// :nodoc:
-        public var shouldConnectWithUnsecuredNetworks: Bool
+        public var useWiFiProtection: Bool
 
         /// :nodoc:
         public var shouldConnectForAllNetworks: Bool

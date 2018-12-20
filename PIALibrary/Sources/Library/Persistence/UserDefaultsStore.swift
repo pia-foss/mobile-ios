@@ -38,7 +38,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         static let mace = "MACE" // legacy
         
-        static let shouldConnectWithUnsecuredNetworks = "ShouldConnectWithUnsecuredNetworks"
+        static let useWiFiProtection = "UseWiFiProtection"
         
         static let shouldConnectForAllNetworks = "ShouldConnectForAllNetworks"
 
@@ -214,15 +214,15 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
     
-    var shouldConnectWithUnsecuredNetworks: Bool? {
+    var useWiFiProtection: Bool? {
         get {
-            guard let value = backend.object(forKey: Entries.shouldConnectWithUnsecuredNetworks) as? Bool else {
+            guard let value = backend.object(forKey: Entries.useWiFiProtection) as? Bool else {
                 return nil
             }
             return value
         }
         set {
-            backend.set(newValue, forKey: Entries.shouldConnectWithUnsecuredNetworks)
+            backend.set(newValue, forKey: Entries.useWiFiProtection)
         }
     }
     
@@ -260,7 +260,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.cachedNetworks)
         backend.removeObject(forKey: Entries.trustedNetworks)
         backend.removeObject(forKey: Entries.shouldConnectForAllNetworks)
-        backend.removeObject(forKey: Entries.shouldConnectWithUnsecuredNetworks)
+        backend.removeObject(forKey: Entries.useWiFiProtection)
         backend.synchronize()
     }
 
