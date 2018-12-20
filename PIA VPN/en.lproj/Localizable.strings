@@ -213,5 +213,5 @@
 "settings.trustedNetworks.sections.available" = "Available networks";
 "settings.trustedNetworks.sections.trusted" = "Trusted networks";
 "settings.trustedNetworks.message" = "PIA won't automatically connect on these networks.";
-"hotspothelper.display.name" = "🛡 Activate VPN WiFi Protection in PIA Settings to secure this connection.";
-"hotspothelper.display.protected.name" = "🛡 PIA VPN WiFi Protection Enabled - We got your back.";
+"hotspothelper.display.name" = "🔒 Activate VPN WiFi Protection in PIA Settings to secure this connection.";
+"hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi Protection Enabled - We got your back.";

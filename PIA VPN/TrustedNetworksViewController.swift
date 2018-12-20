@@ -168,7 +168,6 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
             cell.textLabel?.text = availableNetworks[indexPath.row]
         case .trusted:
             cell.accessoryView = UIImageView(image: Asset.iconRemove.image)
-            cell.selectionStyle = .none
             cell.textLabel?.text = trustedNetworks[indexPath.row]
         case .autoConnectAllNetworksSettings:
             cell.imageView?.image = nil
