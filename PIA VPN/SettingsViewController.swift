@@ -416,6 +416,8 @@ class SettingsViewController: AutolayoutViewController {
             action.execute { (error) in
                 self.pendingVPNAction = nil
                 
+                Client.providers.vpnProvider.updatePreferences(nil)
+                
                 if shouldReconnect && !isDisconnected {
                     Client.providers.vpnProvider.reconnect(after: nil) { (error) in
                         completionHandler()
