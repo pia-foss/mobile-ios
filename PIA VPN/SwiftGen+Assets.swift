@@ -302,6 +302,7 @@ enum Asset {
   static let iconUnselectedWhite = ImageAsset(name: "icon-unselected-white")
   static let iconUnselected = ImageAsset(name: "icon-unselected")
   static let iconUpload = ImageAsset(name: "icon-upload")
+  static let iconWarning = ImageAsset(name: "icon-warning")
   static let imageContentBlocker = ImageAsset(name: "image-content-blocker")
   static let imageRobot = ImageAsset(name: "image-robot")
   static let imageRobotside = ImageAsset(name: "image-robotside")
@@ -565,6 +566,7 @@ enum Asset {
     iconUnselectedWhite,
     iconUnselected,
     iconUpload,
+    iconWarning,
     imageContentBlocker,
     imageRobot,
     imageRobotside,

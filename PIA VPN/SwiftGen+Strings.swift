@@ -190,6 +190,8 @@ internal enum L10n {
     internal static let `optional` = L10n.tr("Localizable", "global.optional")
     /// Required
     internal static let `required` = L10n.tr("Localizable", "global.required")
+    /// No internet connection found. Please confirm that you have an internet connection.
+    internal static let unreachable = L10n.tr("Localizable", "global.unreachable")
     /// Update
     internal static let update = L10n.tr("Localizable", "global.update")
   }

@@ -142,7 +142,9 @@ class Bootstrapper {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(reloadTheme), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
-
+        nc.addObserver(self, selector: #selector(internetUnreachable(notification:)), name: .ConnectivityDaemonDidGetUnreachable, object: nil)
+        nc.addObserver(self, selector: #selector(internetReachable(notification:)), name: .ConnectivityDaemonDidGetReachable, object: nil)
+        
         // PIALibrary (Theme)
         
         AppPreferences.shared.currentThemeCode.apply(theme: Theme.current, reload: true)
@@ -169,5 +171,14 @@ class Bootstrapper {
             return
         }
         iRate.sharedInstance()!.logEvent(false)
+    }
+    
+    @objc private func internetReachable(notification: Notification) {
+        Macros.removeStickyNote()
+    }
+    
+    @objc private func internetUnreachable(notification: Notification) {
+        Macros.displayStickyNote(withMessage: L10n.Global.unreachable,
+                                 andImage: Asset.iconWarning.image)
     }
 }

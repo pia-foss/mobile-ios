@@ -10,6 +10,7 @@
 "global.clear" = "Clear";
 "global.update" = "Update";
 "global.edit" = "Edit";
+"global.unreachable" = "No internet connection found. Please confirm that you have an internet connection.";
 
 // NOTIFICATIONS
 
