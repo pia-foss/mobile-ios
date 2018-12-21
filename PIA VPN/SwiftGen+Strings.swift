@@ -198,10 +198,10 @@ internal enum L10n {
 
   internal enum Hotspothelper {
     internal enum Display {
-      /// 🛡 Activate VPN WiFi Protection in PIA Settings to secure this connection.
+      /// 🔒 Activate VPN WiFi Protection in PIA Settings to secure this connection.
       internal static let name = L10n.tr("Localizable", "hotspothelper.display.name")
       internal enum Protected {
-        /// 🛡 PIA VPN WiFi Protection Enabled - We got your back.
+        /// 🔒 PIA VPN WiFi Protection Enabled - We got your back.
         internal static let name = L10n.tr("Localizable", "hotspothelper.display.protected.name")
       }
     }
@@ -467,6 +467,12 @@ internal enum L10n {
           /// Tap + to add to Trusted networks.
           internal static let help = L10n.tr("Localizable", "settings.hotspothelper.available.add.help")
         }
+      }
+      internal enum Cellular {
+        /// PIA automatically enables the VPN when connecting to cellular networks if this option is disabled.
+        internal static let description = L10n.tr("Localizable", "settings.hotspothelper.cellular.description")
+        /// Trust cellular networks
+        internal static let title = L10n.tr("Localizable", "settings.hotspothelper.cellular.title")
       }
       internal enum Enable {
         /// VPN WiFi Protection automatically enables the VPN when connecting to untrusted networks.

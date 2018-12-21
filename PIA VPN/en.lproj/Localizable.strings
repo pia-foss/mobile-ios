@@ -215,3 +215,6 @@
 "settings.trustedNetworks.message" = "PIA won't automatically connect on these networks.";
 "hotspothelper.display.name" = "🔒 Activate VPN WiFi Protection in PIA Settings to secure this connection.";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi Protection Enabled - We got your back.";
+"settings.hotspothelper.cellular.title" = "Trust cellular networks";
+"settings.hotspothelper.cellular.description" = "PIA automatically enables the VPN when connecting to cellular networks if this option is disabled.";
+
