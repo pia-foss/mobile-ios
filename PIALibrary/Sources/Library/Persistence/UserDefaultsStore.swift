@@ -39,7 +39,9 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         static let mace = "MACE" // legacy
         
         static let useWiFiProtection = "UseWiFiProtection"
-        
+
+        static let trustCellularData = "TrustCellularData"
+
         static let shouldConnectForAllNetworks = "ShouldConnectForAllNetworks"
 
         static let cachedNetworks = "CachedNetworks"
@@ -226,6 +228,18 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
     
+    var trustCellularData: Bool? {
+        get {
+            guard let value = backend.object(forKey: Entries.trustCellularData) as? Bool else {
+                return nil
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.trustCellularData)
+        }
+    }
+
     var shouldConnectForAllNetworks: Bool? {
         get {
             guard let value = backend.object(forKey: Entries.shouldConnectForAllNetworks) as? Bool else {
@@ -261,6 +275,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.trustedNetworks)
         backend.removeObject(forKey: Entries.shouldConnectForAllNetworks)
         backend.removeObject(forKey: Entries.useWiFiProtection)
+        backend.removeObject(forKey: Entries.trustCellularData)
         backend.synchronize()
     }
 

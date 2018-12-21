@@ -20,6 +20,8 @@ private protocol PreferencesStore: class {
     
     var useWiFiProtection: Bool { get set }
 
+    var trustCellularData: Bool { get set }
+
     var shouldConnectForAllNetworks: Bool { get set }
 
     var vpnType: String { get set }
@@ -47,6 +49,7 @@ private extension PreferencesStore {
         isPersistentConnection = source.isPersistentConnection
         mace = source.mace
         useWiFiProtection = source.useWiFiProtection
+        trustCellularData = source.trustCellularData
         shouldConnectForAllNetworks = source.shouldConnectForAllNetworks
         vpnType = source.vpnType
         vpnDisconnectsOnSleep = source.vpnDisconnectsOnSleep
@@ -115,6 +118,16 @@ extension Client {
             }
             set {
                 accessedDatabase.plain.useWiFiProtection = newValue
+            }
+        }
+        
+        /// Trust cellular data
+        public fileprivate(set) var trustCellularData: Bool {
+            get {
+                return accessedDatabase.plain.trustCellularData ?? defaults.trustCellularData
+            }
+            set {
+                accessedDatabase.plain.trustCellularData = newValue
             }
         }
 
@@ -238,6 +251,7 @@ extension Client.Preferences {
             isPersistentConnection = true
             mace = false
             useWiFiProtection = false
+            trustCellularData = true
             shouldConnectForAllNetworks = false
             vpnType = IPSecProfile.vpnType
             vpnDisconnectsOnSleep = false
@@ -282,6 +296,9 @@ extension Client.Preferences {
         public var useWiFiProtection: Bool
 
         /// :nodoc:
+        public var trustCellularData: Bool
+
+        /// :nodoc:
         public var shouldConnectForAllNetworks: Bool
 
         /// :nodoc:
@@ -322,6 +339,9 @@ extension Client.Preferences {
             }
             var queue: [VPNAction] = []
             if (isPersistentConnection != target.isPersistentConnection) {
+                queue.append(VPNActionReinstall())
+            }
+            if (trustCellularData != target.trustCellularData) {
                 queue.append(VPNActionReinstall())
             }
             if (vpnDisconnectsOnSleep != target.vpnDisconnectsOnSleep) {

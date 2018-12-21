@@ -46,6 +46,8 @@ protocol PlainStore: class {
 
     var useWiFiProtection: Bool? { get set }
 
+    var trustCellularData: Bool? { get set }
+
     var mace: Bool? { get set }
     
     // MARK: Lifecycle
