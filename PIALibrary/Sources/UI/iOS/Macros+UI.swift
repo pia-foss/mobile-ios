@@ -13,7 +13,8 @@ import SwiftEntryKit
 extension Macros {
 
     private static let bannerHeight: CGFloat = 78.5
-    
+    private static let stickyNoteName: String = "sticky_note"
+
     /**
      Creates an `UIColor` from its RGBA components.
  
@@ -133,6 +134,45 @@ extension Macros {
                               using: attributes)
 
     }
+    
+    /**
+     Shortcut to display an infinite `EKImageNoteMessageView`.
+     
+     - Parameter message: The note message
+     - Parameter image: The note image
+     */
+    public static func displayStickyNote(withMessage message: String,
+                                         andImage image: UIImage) {
+        
+        var attributes = EKAttributes()
+        attributes = .topToast
+        attributes.name = stickyNoteName
+        attributes.hapticFeedbackType = .success
+        attributes.entryBackground = .color(color: UIColor.piaRed)
+        attributes.positionConstraints.size = .init(width: EKAttributes.PositionConstraints.Edge.fill,
+                                                    height: EKAttributes.PositionConstraints.Edge.constant(value: bannerHeight))
+        attributes.displayDuration = .infinity
+
+        let labelContent = EKProperty.LabelContent(text: message,
+                                                   style: .init(font: TextStyle.textStyle7.font!,
+                                                                color: .white))
+        let imageContent = EKProperty.ImageContent(image: image)
+        let contentView = EKImageNoteMessageView(with: labelContent,
+                                                 imageContent: imageContent)
+        SwiftEntryKit.display(entry: contentView,
+                              using: attributes)
+        
+    }
+    
+    /**
+     Removes the current presented sticky note `EKImageNoteMessageView`.
+    */
+    public static func removeStickyNote() {
+        if SwiftEntryKit.isCurrentlyDisplaying(entryNamed: stickyNoteName) {
+            SwiftEntryKit.dismiss()
+        }
+    }
+
 
     /**
      Shortcut to create an `UIAlertController` with `.actionSheet` preferred style.

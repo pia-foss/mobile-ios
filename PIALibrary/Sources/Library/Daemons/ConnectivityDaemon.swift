@@ -12,7 +12,7 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-extension Notification.Name {
+public extension Notification.Name {
     static let ConnectivityDaemonDidGetReachable = Notification.Name("ConnectivityDaemonDidGetReachable")
 
     static let ConnectivityDaemonDidGetUnreachable = Notification.Name("ConnectivityDaemonDidGetUnreachable")
