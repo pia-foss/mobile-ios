@@ -13,58 +13,6 @@ import FXPageControl
 
 extension Theme {
 
-    // MARK: Navigation bar
-    
-    public func applyLightNavigationBar(_ navigationBar: UINavigationBar) {
-        navigationBar.tintColor = UIColor.piaGrey4
-        navigationBar.barTintColor = palette.lightBackground
-    }
-    
-    /**
-     Set color values for a custom navigation bar.
-     
-     - Parameter navigationBar: The navigationBar where the changes are going to be applied.
-     - Parameter tintColor: The tintColor for the navigationBar. If nil: self.palette.textColor(forRelevance: 1, appearance: .dark)
-     - Parameter barTintColors: Array of colors for the background of the navigationBar. If the array contains 2 colors, it will generate a gradient. If the array contains more than 2 colors or nil, it will set the default value: self.palette.lightBackground. If the array only contains 1 color, a solid background color will be set.
-     */
-    public func applyCustomNavigationBar(_ navigationBar: UINavigationBar,
-                                         withTintColor tintColor: UIColor?,
-                                         andBarTintColors barTintColors: [UIColor]?) {
-        
-        UIView.animate(withDuration: 0.3) {
-            if let tintColor = tintColor {
-                navigationBar.tintColor = tintColor
-            } else {
-                navigationBar.tintColor = UIColor.piaGrey4
-            }
-            
-            if let barTintColors = barTintColors,
-                barTintColors.count > 0,
-                barTintColors.count <= 2 {
-                if barTintColors.count == 1 {
-                    navigationBar.barTintColor = barTintColors.first
-                    navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
-                } else {
-                    var updatedFrame = navigationBar.bounds
-                    updatedFrame.size.height += navigationBar.frame.origin.y
-                    let gradientLayer = CAGradientLayer(frame: updatedFrame, colors: barTintColors)
-                    navigationBar.setBackgroundImage(gradientLayer.createGradientImage(), for: UIBarMetrics.default)
-                }
-            } else {
-                navigationBar.barTintColor = self.palette.lightBackground
-                navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
-            }
-            navigationBar.layoutIfNeeded()
-        }
-        
-    }
-
-    
-    public func applyLightBrandLogoNavigationBar(_ navigationBar: UINavigationBar) {
-        navigationBar.tintColor = palette.textColor(forRelevance: 1, appearance: .dark)
-        navigationBar.barTintColor = palette.lightBackground
-    }
-
     // MARK: Typography
 
     func applyHighlightedText(_ button: UIButton) {
@@ -162,12 +110,4 @@ extension Theme {
             TextStyle.textStyle6 : TextStyle.textStyle7)
     }
 
-    /// :nodoc:
-    public func applySettingsCellTitle(_ label: UILabel, appearance: Appearance) {
-        if palette.appearance == Appearance.light {
-            label.style(style: TextStyle.textStyle7)
-        } else {
-            label.style(style: TextStyle.textStyle6)
-        }
-    }
 }
