@@ -110,6 +110,26 @@ public class IPSecProfile: NetworkExtensionProfile {
     }
     
     /// :nodoc:
+    public func updatePreferences(_ callback: SuccessLibraryCallback?) {
+        currentVPN.loadFromPreferences { (error) in
+            if let error = error {
+                callback?(error)
+                return
+            }
+            
+            // prevent reconnection
+            self.configureOnDemandSetting()
+            self.currentVPN.saveToPreferences { (error) in
+                if let error = error {
+                    callback?(error)
+                    return
+                }
+                callback?(nil)
+            }
+        }
+    }
+    
+    /// :nodoc:
     public func remove(_ callback: SuccessLibraryCallback?) {
         currentVPN.loadFromPreferences { (error) in
             self.currentVPN.removeFromPreferences(completionHandler: callback)

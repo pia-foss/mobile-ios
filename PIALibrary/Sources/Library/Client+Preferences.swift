@@ -339,7 +339,7 @@ extension Client.Preferences {
             }
             var queue: [VPNAction] = []
             if (isPersistentConnection != target.isPersistentConnection) {
-                queue.append(VPNActionDisconnectAndReinstall())
+                queue.append(VPNActionReinstall())
             }
             if (trustCellularData != target.trustCellularData) {
                 queue.append(VPNActionReinstall())
