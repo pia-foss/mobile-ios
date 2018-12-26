@@ -62,8 +62,41 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
         ])
 
         delegate?.optionsController(self, didLoad: tableView)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
+        
+        viewShouldRestyle()
+        
     }
     
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        styleNavigationBarWithTitle(self.navigationController?.title ?? "")
+    }
+    
+    @objc private func viewHasRotated() {
+        styleNavigationBarWithTitle(self.navigationController?.title ?? "")
+    }
+
+    // MARK: Restylable
+    
+    override public func viewShouldRestyle() {
+        super.viewShouldRestyle()
+        
+        styleNavigationBarWithTitle(self.navigationController?.title ?? "")
+        // XXX: for some reason, UITableView is not affected by appearance updates
+        if let viewContainer = viewContainer {
+            Theme.current.applyLightBackground(view)
+            Theme.current.applyLightBackground(viewContainer)
+        }
+        if tableView != nil {
+            Theme.current.applyLightBackground(tableView)
+            Theme.current.applyDividerToSeparator(tableView)
+            tableView.reloadData()
+        }
+        
+    }
+
     // MARK: UITableViewDataSource
     
     /// :nodoc:
@@ -83,6 +116,15 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
             isSelected = (option == selectedOption)
         }
         delegate?.optionsController(self, renderOption: option, in: cell, at: indexPath.row, isSelected: isSelected)
+
+        Theme.current.applySolidLightBackground(cell)
+        if let textLabel = cell.textLabel {
+            Theme.current.applySettingsCellTitle(textLabel,
+                                                 appearance: .dark)
+        }
+        if let detailLabel = cell.detailTextLabel {
+            Theme.current.applySubtitle(detailLabel)
+        }
 
         return cell
     }
