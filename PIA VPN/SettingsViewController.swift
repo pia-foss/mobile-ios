@@ -39,10 +39,10 @@ enum Setting: Int {
     case encryptionHandshake
     
     case automaticReconnection
-    
+
+    case trustCellularData
+
     case trustedNetworks
-    
-    case shouldConnectWithUnsecuredNetworks
 
     case contentBlockerState
     
@@ -94,6 +94,8 @@ class SettingsViewController: AutolayoutViewController {
 
         case applicationSettings
 
+        case cellularData
+        
         case autoConnectSettings
 
         case contentBlocker
@@ -109,6 +111,7 @@ class SettingsViewController: AutolayoutViewController {
         .connection,
         .encryption,
         .applicationSettings,
+        .cellularData,
         .autoConnectSettings,
         .applicationInformation,
         .reset,
@@ -130,9 +133,11 @@ class SettingsViewController: AutolayoutViewController {
             .encryptionHandshake
         ],
         .applicationSettings: [], // dynamic
+        .cellularData: [
+            .trustCellularData
+        ],
         .autoConnectSettings: [
-            .trustedNetworks,
-            .shouldConnectWithUnsecuredNetworks,
+            .trustedNetworks
         ],
         .contentBlocker: [
             .contentBlockerState,
@@ -161,8 +166,6 @@ class SettingsViewController: AutolayoutViewController {
 
     private lazy var switchAutoJoinWiFi = UISwitch()
 
-    private lazy var switchAutoJoinAllNetworks = UISwitch()
-
     private lazy var switchPersistent = UISwitch()
 
     private lazy var switchMACE = UISwitch()
@@ -170,7 +173,9 @@ class SettingsViewController: AutolayoutViewController {
     private lazy var switchContentBlocker = FakeSwitch()
     
     private lazy var switchDarkMode = UISwitch()
-    
+
+    private lazy var switchCellularData = UISwitch()
+
     private lazy var imvSelectedOption = UIImageView(image: Asset.accessorySelected.image)
 
     private var isContentBlockerEnabled = false
@@ -227,12 +232,11 @@ class SettingsViewController: AutolayoutViewController {
             tableView.estimatedSectionFooterHeight = 1.0
         }
         switchPersistent.addTarget(self, action: #selector(togglePersistentConnection(_:)), for: .valueChanged)
-        switchAutoJoinWiFi.addTarget(self, action: #selector(toggleAutoconnectWithUnsecuredNetworks(_:)), for: .valueChanged)
-        switchAutoJoinAllNetworks.addTarget(self, action: #selector(toggleAutoconnectWithAllNetworks(_:)), for: .valueChanged)
         switchMACE.addTarget(self, action: #selector(toggleMACE(_:)), for: .valueChanged)
 //        switchContentBlocker.isGrayed = true
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
         switchDarkMode.addTarget(self, action: #selector(toggleDarkMode(_:)), for: .valueChanged)
+        switchCellularData.addTarget(self, action: #selector(toggleCellularData(_:)), for: .valueChanged)
         redisplaySettings()
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshContentBlockerState), name: .UIApplicationDidBecomeActive, object: nil)
@@ -275,20 +279,14 @@ class SettingsViewController: AutolayoutViewController {
         reportUpdatedPreferences()
     }
     
-    @objc private func toggleAutoconnectWithUnsecuredNetworks(_ sender: UISwitch) {
-        pendingPreferences.shouldConnectWithUnsecuredNetworks = sender.isOn
-        redisplaySettings()
-        reportUpdatedPreferences()
-    }
-    
-    @objc private func toggleAutoconnectWithAllNetworks(_ sender: UISwitch) {
-        pendingPreferences.shouldConnectForAllNetworks = sender.isOn
-        redisplaySettings()
-        reportUpdatedPreferences()
-    }
-    
     @objc private func toggleMACE(_ sender: UISwitch) {
         pendingPreferences.mace = sender.isOn
+        redisplaySettings()
+        reportUpdatedPreferences()
+    }
+    
+    @objc private func toggleCellularData(_ sender: UISwitch) {
+        pendingPreferences.trustCellularData = sender.isOn
         redisplaySettings()
         reportUpdatedPreferences()
     }
@@ -418,6 +416,8 @@ class SettingsViewController: AutolayoutViewController {
             action.execute { (error) in
                 self.pendingVPNAction = nil
                 
+                Client.providers.vpnProvider.updatePreferences(nil)
+                
                 if shouldReconnect && !isDisconnected {
                     Client.providers.vpnProvider.reconnect(after: nil) { (error) in
                         completionHandler()
@@ -491,6 +491,7 @@ class SettingsViewController: AutolayoutViewController {
         pendingPreferences.trustedNetworks = Client.preferences.trustedNetworks
         pendingPreferences.availableNetworks = Client.preferences.availableNetworks
         pendingPreferences.shouldConnectForAllNetworks = Client.preferences.shouldConnectForAllNetworks
+        pendingPreferences.useWiFiProtection = Client.preferences.useWiFiProtection
         pendingPreferences.commit()
     }
     
@@ -647,7 +648,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .applicationSettings:
             return L10n.Settings.ApplicationSettings.title
            
-        case .autoConnectSettings:
+        case .autoConnectSettings, .cellularData:
             return nil
 
         case .contentBlocker:
@@ -674,7 +675,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 footer.append(L10n.Settings.ApplicationSettings.Mace.footer)
             }
             return footer.joined(separator: "\n\n")
-            
+
+        case .cellularData:
+            return L10n.Settings.Hotspothelper.Cellular.description
+
         case .autoConnectSettings:
             return L10n.Settings.Hotspothelper.description
             
@@ -779,13 +783,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryView = switchPersistent
             cell.selectionStyle = .none
             switchPersistent.isOn = pendingPreferences.isPersistentConnection
-            
-        case .shouldConnectWithUnsecuredNetworks:
-            cell.textLabel?.text = L10n.Settings.Hotspothelper.title
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchAutoJoinWiFi
-            cell.selectionStyle = .none
-            switchAutoJoinWiFi.isOn = pendingPreferences.shouldConnectWithUnsecuredNetworks
 
         case .mace:
             cell.textLabel?.text = L10n.Settings.ApplicationSettings.Mace.title
@@ -838,9 +835,18 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.textLabel?.text = "Resolve google-analytics.com"
             cell.detailTextLabel?.text = nil
             
-        case .trustedNetworks:
-            cell.textLabel?.text = L10n.Settings.Hotspothelper.trustedNetworks
+        case .trustCellularData:
+            cell.textLabel?.text = L10n.Settings.Hotspothelper.Cellular.title
             cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchCellularData
+            cell.selectionStyle = .none
+            switchCellularData.isOn = pendingPreferences.trustCellularData
+
+        case .trustedNetworks:
+            cell.textLabel?.text = L10n.Settings.Hotspothelper.title
+            cell.detailTextLabel?.text = Client.preferences.useWiFiProtection ?
+                L10n.Global.enabled :
+                L10n.Global.disabled
 
         }
 
