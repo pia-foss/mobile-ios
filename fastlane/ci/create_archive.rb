@@ -9,7 +9,7 @@ lane :create_archive do
     increment_build_number(
         build_number: deterministic_build_number
     )
-    match
+    match(template_name: 'Hotspot Helper iOS (Dev)', readonly: false)
     gym
     print_ipa_metadata(
         prefix: "Archived"
