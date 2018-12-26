@@ -91,6 +91,12 @@ public class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess {
     }
     
     /// :nodoc:
+    public func updatePreferences(_ callback: SuccessLibraryCallback?) {
+        Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
+        callback?(nil)
+    }
+    
+    /// :nodoc:
     public func reconnect(after delay: Int?, _ callback: SuccessLibraryCallback?) {
         let disconnectionDelay: Int
 //        if (vpnStatus == .changingServer) {

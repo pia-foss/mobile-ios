@@ -170,6 +170,16 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         activeProfile.disconnect(callback)
     }
     
+    func updatePreferences(_ callback: SuccessLibraryCallback?) {
+        guard accessedProviders.accountProvider.isLoggedIn else {
+            preconditionFailure()
+        }
+        guard let activeProfile = activeProfile else {
+            preconditionFailure()
+        }
+        activeProfile.updatePreferences(callback)
+    }
+
     func reconnect(after delay: Int?, _ callback: SuccessLibraryCallback?) {
         guard accessedProviders.accountProvider.isLoggedIn else {
             preconditionFailure()
