@@ -452,8 +452,6 @@ internal enum L10n {
       internal static let description = L10n.tr("Localizable", "settings.hotspothelper.description")
       /// VPN WiFi Protection
       internal static let title = L10n.tr("Localizable", "settings.hotspothelper.title")
-      /// Trusted networks
-      internal static let trustedNetworks = L10n.tr("Localizable", "settings.hotspothelper.trustedNetworks")
       internal enum All {
         /// VPN WiFi Protection will activate on all networks, including trusted networks.
         internal static let description = L10n.tr("Localizable", "settings.hotspothelper.all.description")
@@ -497,16 +495,18 @@ internal enum L10n {
         }
       }
     }
-    internal enum TrustedNetworks {
-      /// PIA won't automatically connect on these networks.
-      internal static let message = L10n.tr("Localizable", "settings.trustedNetworks.message")
-      internal enum Sections {
-        /// Available networks
-        internal static let available = L10n.tr("Localizable", "settings.trustedNetworks.sections.available")
-        /// Current network
-        internal static let current = L10n.tr("Localizable", "settings.trustedNetworks.sections.current")
-        /// Trusted networks
-        internal static let trusted = L10n.tr("Localizable", "settings.trustedNetworks.sections.trusted")
+    internal enum Trusted {
+      internal enum Networks {
+        /// PIA won't automatically connect on these networks.
+        internal static let message = L10n.tr("Localizable", "settings.trusted.networks.message")
+        internal enum Sections {
+          /// Available networks
+          internal static let available = L10n.tr("Localizable", "settings.trusted.networks.sections.available")
+          /// Current network
+          internal static let current = L10n.tr("Localizable", "settings.trusted.networks.sections.current")
+          /// Trusted networks
+          internal static let trusted = L10n.tr("Localizable", "settings.trusted.networks.sections.trusted")
+        }
       }
     }
   }

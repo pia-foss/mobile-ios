@@ -105,11 +105,11 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
         case .useVpnWifiProtection:
             return L10n.Settings.Hotspothelper.title.uppercased()
         case .current:
-            return L10n.Settings.TrustedNetworks.Sections.current.uppercased()
+            return L10n.Settings.Trusted.Networks.Sections.current.uppercased()
         case .available:
-            return L10n.Settings.TrustedNetworks.Sections.available.uppercased()
+            return L10n.Settings.Trusted.Networks.Sections.available.uppercased()
         case .trusted:
-            return L10n.Settings.TrustedNetworks.Sections.trusted.uppercased()
+            return L10n.Settings.Trusted.Networks.Sections.trusted.uppercased()
         default:
             return nil
         }
@@ -120,7 +120,7 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
         case .useVpnWifiProtection:
             return L10n.Settings.Hotspothelper.Enable.description
         case .trusted:
-            return L10n.Settings.TrustedNetworks.message
+            return L10n.Settings.Trusted.Networks.message
         case .autoConnectAllNetworksSettings:
             return L10n.Settings.Hotspothelper.All.description
         case .available:

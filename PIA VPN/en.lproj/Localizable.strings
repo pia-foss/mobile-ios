@@ -206,13 +206,12 @@
 "settings.hotspothelper.enable.description" = "VPN WiFi Protection automatically enables the VPN when connecting to untrusted networks.";
 "settings.hotspothelper.all.title" = "Protect all networks";
 "settings.hotspothelper.all.description" = "VPN WiFi Protection will activate on all networks, including trusted networks.";
-"settings.hotspothelper.trustedNetworks" = "Trusted networks";
 "settings.hotspothelper.available.help" = "To populate this list go to iOS Settings > WiFi.";
 "settings.hotspothelper.available.add.help" = "Tap + to add to Trusted networks.";
-"settings.trustedNetworks.sections.current" = "Current network";
-"settings.trustedNetworks.sections.available" = "Available networks";
-"settings.trustedNetworks.sections.trusted" = "Trusted networks";
-"settings.trustedNetworks.message" = "PIA won't automatically connect on these networks.";
+"settings.trusted.networks.sections.current" = "Current network";
+"settings.trusted.networks.sections.available" = "Available networks";
+"settings.trusted.networks.sections.trusted" = "Trusted networks";
+"settings.trusted.networks.message" = "PIA won't automatically connect on these networks.";
 "hotspothelper.display.name" = "🔒 Activate VPN WiFi Protection in PIA Settings to secure this connection.";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi Protection Enabled - We got your back.";
 "settings.hotspothelper.cellular.title" = "Trust cellular networks";
