@@ -178,8 +178,12 @@ internal enum L10n {
     internal static let clear = L10n.tr("Localizable", "global.clear")
     /// Close
     internal static let close = L10n.tr("Localizable", "global.close")
+    /// Disabled
+    internal static let disabled = L10n.tr("Localizable", "global.disabled")
     /// Edit
     internal static let edit = L10n.tr("Localizable", "global.edit")
+    /// Enabled
+    internal static let enabled = L10n.tr("Localizable", "global.enabled")
     /// Error
     internal static let error = L10n.tr("Localizable", "global.error")
     /// OK
@@ -190,6 +194,17 @@ internal enum L10n {
     internal static let `required` = L10n.tr("Localizable", "global.required")
     /// Update
     internal static let update = L10n.tr("Localizable", "global.update")
+  }
+
+  internal enum Hotspothelper {
+    internal enum Display {
+      /// 🔒 Activate VPN WiFi Protection in PIA Settings to secure this connection.
+      internal static let name = L10n.tr("Localizable", "hotspothelper.display.name")
+      internal enum Protected {
+        /// 🔒 PIA VPN WiFi Protection Enabled - We got your back.
+        internal static let name = L10n.tr("Localizable", "hotspothelper.display.protected.name")
+      }
+    }
   }
 
   internal enum Menu {
@@ -432,6 +447,38 @@ internal enum L10n {
         internal static let title = L10n.tr("Localizable", "settings.encryption.handshake.title")
       }
     }
+    internal enum Hotspothelper {
+      /// VPN WiFi Protection automatically engages the VPN when connecting to untrusted networks.
+      internal static let description = L10n.tr("Localizable", "settings.hotspothelper.description")
+      /// VPN WiFi Protection
+      internal static let title = L10n.tr("Localizable", "settings.hotspothelper.title")
+      /// Trusted networks
+      internal static let trustedNetworks = L10n.tr("Localizable", "settings.hotspothelper.trustedNetworks")
+      internal enum All {
+        /// VPN WiFi Protection will activate on all networks, including trusted networks.
+        internal static let description = L10n.tr("Localizable", "settings.hotspothelper.all.description")
+        /// Protect all networks
+        internal static let title = L10n.tr("Localizable", "settings.hotspothelper.all.title")
+      }
+      internal enum Available {
+        /// To populate this list go to iOS Settings > WiFi.
+        internal static let help = L10n.tr("Localizable", "settings.hotspothelper.available.help")
+        internal enum Add {
+          /// Tap + to add to Trusted networks.
+          internal static let help = L10n.tr("Localizable", "settings.hotspothelper.available.add.help")
+        }
+      }
+      internal enum Cellular {
+        /// PIA automatically enables the VPN when connecting to cellular networks if this option is disabled.
+        internal static let description = L10n.tr("Localizable", "settings.hotspothelper.cellular.description")
+        /// Trust cellular networks
+        internal static let title = L10n.tr("Localizable", "settings.hotspothelper.cellular.title")
+      }
+      internal enum Enable {
+        /// VPN WiFi Protection automatically enables the VPN when connecting to untrusted networks.
+        internal static let description = L10n.tr("Localizable", "settings.hotspothelper.enable.description")
+      }
+    }
     internal enum Reset {
       /// This will reset all of the above settings to default.
       internal static let footer = L10n.tr("Localizable", "settings.reset.footer")
@@ -448,6 +495,18 @@ internal enum L10n {
           /// Reset settings
           internal static let title = L10n.tr("Localizable", "settings.reset.defaults.confirm.title")
         }
+      }
+    }
+    internal enum TrustedNetworks {
+      /// PIA won't automatically connect on these networks.
+      internal static let message = L10n.tr("Localizable", "settings.trustedNetworks.message")
+      internal enum Sections {
+        /// Available networks
+        internal static let available = L10n.tr("Localizable", "settings.trustedNetworks.sections.available")
+        /// Current network
+        internal static let current = L10n.tr("Localizable", "settings.trustedNetworks.sections.current")
+        /// Trusted networks
+        internal static let trusted = L10n.tr("Localizable", "settings.trustedNetworks.sections.trusted")
       }
     }
   }
