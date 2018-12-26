@@ -44,12 +44,15 @@ class RegionCell: UITableViewCell, Restylable {
 
     func viewShouldRestyle() {
         backgroundView = UIView()
+        backgroundView?.backgroundColor = Theme.current.palette.lightBackground
+
         selectedBackgroundView = UIView()
+        selectedBackgroundView?.backgroundColor = Theme.current.palette.lightBackground
+
         accessoryView = UIImageView(image: Asset.accessorySelected.image)
         
-        Theme.current.applySolidLightBackground(backgroundView!)
-        Theme.current.applySelection(selectedBackgroundView!)
         Theme.current.applyList(labelRegion, appearance: .dark)
         Theme.current.applyTag(labelPingTime, appearance: .dark)
+        
     }
 }

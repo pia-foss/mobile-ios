@@ -35,11 +35,14 @@ class RegionsViewController: AutolayoutViewController {
         selectedServer = Client.preferences.displayedServer
 
         NotificationCenter.default.addObserver(self, selector: #selector(pingsDidComplete(notification:)), name: .PIADaemonsDidPingServers, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    
+        styleNavigationBarWithTitle(L10n.Menu.Item.region)
+
         let selectedRow = servers.index { (server) -> Bool in
             return (server.identifier == selectedServer.identifier)
         }
@@ -51,7 +54,10 @@ class RegionsViewController: AutolayoutViewController {
     }
     
     // MARK: Actions
-    
+    @objc private func viewHasRotated() {
+        styleNavigationBarWithTitle(L10n.Menu.Item.region)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier, let segue = StoryboardSegue.Main(rawValue: identifier) else {
             return
@@ -100,11 +106,14 @@ class RegionsViewController: AutolayoutViewController {
     
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
-    
+        styleNavigationBarWithTitle(L10n.Menu.Item.region)
+
         if let viewContainer = viewContainer {
+            Theme.current.applyLightBackground(view)
             Theme.current.applyLightBackground(viewContainer)
         }
-        Theme.current.applySolidLightBackground(tableView)
+        Theme.current.applyLightBackground(tableView)
+        Theme.current.applyDividerToSeparator(tableView)
         tableView.reloadData()
     }
 }
