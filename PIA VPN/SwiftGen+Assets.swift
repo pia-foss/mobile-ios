@@ -49,9 +49,12 @@ enum Asset {
       static let vpnButton = ImageAsset(name: "vpn-button")
     }
     enum Global {
+      static let favoriteSelected = ImageAsset(name: "favorite-selected")
+      static let favoriteUnselected = ImageAsset(name: "favorite-unselected")
       static let iconBack = ImageAsset(name: "icon-back")
       static let pagecontrolSelectedDot = ImageAsset(name: "pagecontrol-selected-dot")
       static let pagecontrolUnselectedDot = ImageAsset(name: "pagecontrol-unselected-dot")
+      static let regionSelected = ImageAsset(name: "region-selected")
       static let scrollableMapDark = ImageAsset(name: "scrollableMap-dark")
       static let scrollableMapLight = ImageAsset(name: "scrollableMap-light")
     }
@@ -319,9 +322,12 @@ enum Asset {
   ]
   static let allImages: [ImageAsset] = [
     Piax.Dashboard.vpnButton,
+    Piax.Global.favoriteSelected,
+    Piax.Global.favoriteUnselected,
     Piax.Global.iconBack,
     Piax.Global.pagecontrolSelectedDot,
     Piax.Global.pagecontrolUnselectedDot,
+    Piax.Global.regionSelected,
     Piax.Global.scrollableMapDark,
     Piax.Global.scrollableMapLight,
     Piax.Splash.darkSplash,

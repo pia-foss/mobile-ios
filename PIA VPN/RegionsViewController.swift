@@ -69,7 +69,9 @@ class RegionsViewController: AutolayoutViewController {
                 return
             }
             Client.preferences.displayedServer = selectedServer
-
+            NotificationCenter.default.post(name: .PIAThemeDidChange,
+                                            object: self,
+                                            userInfo: nil)
         default:
             break
         }
@@ -125,7 +127,8 @@ extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.region, for: indexPath) as! RegionCell
-    
+        cell.selectionStyle = .none
+        cell.separatorInset = .zero
         let server = servers[indexPath.row]
         let isSelected = (server.identifier == selectedServer.identifier)
         cell.fill(withServer: server, isSelected: isSelected)
