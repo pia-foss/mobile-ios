@@ -154,6 +154,8 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
                                                    withTintColor: .white,
                                                    andBarTintColors: [UIColor.piaGreen,
                                                                       UIColor.piaGreenDark20])
+            let size = titleLabelView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+            titleLabelView.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
             navigationItem.titleView = titleLabelView
             setNeedsStatusBarAppearanceUpdate()
             
@@ -163,9 +165,14 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
                 TextStyle.textStyle6 :
                 TextStyle.textStyle7)
             titleLabelView.text = title
-            Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
-                                                   withTintColor: nil,
-                                                   andBarTintColors: nil)
+            if let navigationController = navigationController {
+                Theme.current.applyCustomNavigationBar(navigationController.navigationBar,
+                                                       withTintColor: nil,
+                                                       andBarTintColors: nil)
+            }
+            
+            let size = titleLabelView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+            titleLabelView.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
             navigationItem.titleView = titleLabelView
             setNeedsStatusBarAppearanceUpdate()
             
