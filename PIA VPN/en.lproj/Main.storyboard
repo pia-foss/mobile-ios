@@ -23,7 +23,7 @@
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Kiz-8k-1hw">
                                         <rect key="frame" x="8" y="8" width="359" height="716"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <prototypes>
@@ -109,6 +109,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="rwa-6o-BR8" secondAttribute="trailing" id="mxX-av-P3f"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
                                                     <outlet property="favoriteButton" destination="9JG-G1-vW4" id="BvM-Gs-qOP"/>
                                                     <outlet property="favoriteImageView" destination="Tt7-8W-weg" id="Twm-Ls-JFQ"/>
@@ -126,7 +127,7 @@
                                         </connections>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailingMargin" secondItem="Kiz-8k-1hw" secondAttribute="trailing" id="EIE-xz-cx1"/>
                                     <constraint firstAttribute="bottom" secondItem="Kiz-8k-1hw" secondAttribute="bottom" id="e0d-c6-dIT"/>

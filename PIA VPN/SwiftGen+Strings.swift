@@ -278,6 +278,13 @@ internal enum L10n {
     }
   }
 
+  internal enum Region {
+    internal enum Search {
+      /// Search for a region
+      internal static let placeholder = L10n.tr("Localizable", "region.search.placeholder")
+    }
+  }
+
   internal enum Renewal {
     internal enum Failure {
       /// Your purchase receipt couldn't be submitted, please retry at a later time.

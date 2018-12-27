@@ -47,13 +47,13 @@ extension Theme {
     func applyPingTime(_ label: UILabel, time: Int) {
         switch AppConfiguration.ServerPing.from(value: time) {
         case .low:
-            label.textColor = palette.emphasis
+            label.textColor = UIColor.piaGreenDark20
 
         case .medium:
-            label.textColor = palette.accent1
+            label.textColor = UIColor.piaOrange
         
         case .high:
-            label.textColor = palette.accent2
+            label.textColor = UIColor.piaRed
         }
     }
 
@@ -109,5 +109,49 @@ extension Theme {
         label.style(style: palette.appearance == .dark ?
             TextStyle.textStyle6 : TextStyle.textStyle7)
     }
+    
+    //MARK: SearchBar
+    
+    public func applySearchBarStyle(_ searchBar: UISearchBar) {
+        
+        searchBar.backgroundColor = .clear
 
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.backgroundColor = .clear
+        let textFieldInsideSearchBarLabel = textFieldInsideSearchBar!.value(forKey: "placeholderLabel") as? UILabel
+        textFieldInsideSearchBarLabel?.backgroundColor = .clear
+        let glassIconView = textFieldInsideSearchBar?.leftView as? UIImageView
+        glassIconView?.tintColor = UIColor.piaGrey4
+
+        if palette.appearance == .dark {
+            //text
+            textFieldInsideSearchBar?.style(style: TextStyle.textStyle6)
+            //placeholder
+            textFieldInsideSearchBarLabel?.style(style: TextStyle.textStyle8)
+            searchBar.barTintColor = UIColor.piaGrey10
+        } else {
+            //text
+            textFieldInsideSearchBar?.style(style: TextStyle.textStyle7)
+            //placeholder
+            textFieldInsideSearchBarLabel?.style(style: TextStyle.textStyle8)
+            searchBar.barTintColor = UIColor.white
+        }
+        
+        //Cancel button
+        let attributes:[NSAttributedStringKey:Any] = [
+            NSAttributedStringKey.foregroundColor : TextStyle.textStyle8.color!,
+            NSAttributedStringKey.font : TextStyle.textStyle8.font!
+        ]
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
+
+    }
+
+    public func applyFavoriteUnselectedImage(_ imageView: UIImageView) {
+        if palette.appearance == .dark {
+            imageView.image = Asset.Piax.Global.favoriteUnselectedDark.image
+        } else {
+            imageView.image = Asset.Piax.Global.favoriteUnselected.image
+        }
+    }
+    
 }

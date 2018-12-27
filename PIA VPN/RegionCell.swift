@@ -49,6 +49,7 @@ class RegionCell: UITableViewCell, Restylable {
         }
         accessibilityIdentifier = "uitests.regions.region_name"
         
+        self.favoriteImageView.image = self.favoriteImageView.image?.withRenderingMode(.alwaysTemplate)
         self.favoriteImageView.alpha = CGFloat(NSNumber(booleanLiteral: server.name != L10n.Global.automatic).floatValue)
         self.favoriteButton.alpha = CGFloat(NSNumber(booleanLiteral: server.name != L10n.Global.automatic).floatValue)
 
@@ -65,8 +66,13 @@ class RegionCell: UITableViewCell, Restylable {
         self.backgroundColor = Theme.current.palette.lightBackground
         self.contentView.backgroundColor = Theme.current.palette.lightBackground
 
-        Theme.current.applyList(labelRegion, appearance: .dark)
+        Theme.current.applySettingsCellTitle(labelRegion, appearance: .dark)
         Theme.current.applyTag(labelPingTime, appearance: .dark)
+        Theme.current.applyFavoriteUnselectedImage(self.favoriteImageView)
+        
+        if Theme.current.palette.appearance! == .dark {
+            self.favoriteImageView.tintColor = UIColor.piaGrey10
+        }
         
     }
     
@@ -87,8 +93,8 @@ class RegionCell: UITableViewCell, Restylable {
     }
     
     private func updateFavoriteImage() {
-        self.favoriteImageView.image = self.isFavorite ?
-            Asset.Piax.Global.favoriteSelected.image :
-            Asset.Piax.Global.favoriteUnselected.image
+        self.isFavorite ?
+            self.favoriteImageView.image = Asset.Piax.Global.favoriteSelected.image :
+            Theme.current.applyFavoriteUnselectedImage(self.favoriteImageView)
     }
 }
