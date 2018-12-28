@@ -59,6 +59,10 @@ enum Asset {
       static let scrollableMapDark = ImageAsset(name: "scrollableMap-dark")
       static let scrollableMapLight = ImageAsset(name: "scrollableMap-light")
     }
+    enum Regions {
+      static let noResultsDark = ImageAsset(name: "no-results-dark")
+      static let noResultsLight = ImageAsset(name: "no-results-light")
+    }
     enum Splash {
       static let darkSplash = ImageAsset(name: "dark-splash")
       static let lightSplash = ImageAsset(name: "light-splash")
@@ -332,6 +336,8 @@ enum Asset {
     Piax.Global.regionSelected,
     Piax.Global.scrollableMapDark,
     Piax.Global.scrollableMapLight,
+    Piax.Regions.noResultsDark,
+    Piax.Regions.noResultsLight,
     Piax.Splash.darkSplash,
     Piax.Splash.lightSplash,
     accessoryExpire,

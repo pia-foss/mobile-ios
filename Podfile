@@ -64,6 +64,7 @@ def app_pods
     pod 'SideMenu', '= 3.1.5'
     pod 'FXPageControl'
     pod 'MBProgressHUD'
+    pod 'DZNEmptyDataSet'
 end
 
 def tunnel_pods

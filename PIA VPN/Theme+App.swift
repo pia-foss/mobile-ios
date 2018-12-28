@@ -154,4 +154,10 @@ extension Theme {
         }
     }
     
+    public func noResultsImage() -> UIImage {
+        return palette.appearance == .dark ?
+            Asset.Piax.Regions.noResultsDark.image :
+            Asset.Piax.Regions.noResultsLight.image
+    }
+    
 }

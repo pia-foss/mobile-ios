@@ -8,6 +8,7 @@
 
 import UIKit
 import PIALibrary
+import DZNEmptyDataSet
 
 class RegionsViewController: AutolayoutViewController {
     private struct Cells {
@@ -40,6 +41,9 @@ class RegionsViewController: AutolayoutViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
 
         setupSearchBarController()
+        
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
     }
     
     private func setupSearchBarController() {
@@ -200,5 +204,24 @@ extension RegionsViewController: UISearchResultsUpdating {
     
     func isFiltering() -> Bool {
         return searchController.isActive && !searchBarIsEmpty()
+    }
+}
+
+extension RegionsViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    
+    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+        return Theme.current.noResultsImage()
+    }
+    
+    func emptyDataSetWillAppear(_ scrollView: UIScrollView!) {
+        tableView.separatorStyle = .none
+    }
+    
+    func emptyDataSetWillDisappear(_ scrollView: UIScrollView!) {
+        tableView.separatorStyle = .singleLine
+    }
+    
+    func emptyDataSet(_ scrollView: UIScrollView!, didTap view: UIView!) {
+        searchController.searchBar.resignFirstResponder()
     }
 }
