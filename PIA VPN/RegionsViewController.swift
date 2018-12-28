@@ -33,6 +33,12 @@ class RegionsViewController: AutolayoutViewController {
         title = L10n.Menu.Item.region
         var servers = Client.providers.serverProvider.currentServers
         servers.insert(Server.automatic, at: 0)
+        
+        let favoriteServers = AppPreferences.shared.favoriteServerIdentifiers
+        for server in servers {
+            server.isFavorite = favoriteServers.contains(server.identifier)
+        }
+        
         self.servers = servers
 
         selectedServer = Client.preferences.displayedServer

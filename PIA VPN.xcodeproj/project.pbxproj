@@ -171,6 +171,10 @@
 		DDC8124D2176185D00CB290C /* SwiftGen+SeguesStoryboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC8124B2176185000CB290C /* SwiftGen+SeguesStoryboards.swift */; };
 		DDC8124F21761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC8124E21761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift */; };
 		DDC8125021761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC8124E21761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift */; };
+		DDD271DE21D616AA00B6D20F /* Server+Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD271DD21D616AA00B6D20F /* Server+Favorite.swift */; };
+		DDD271DF21D616AA00B6D20F /* Server+Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD271DD21D616AA00B6D20F /* Server+Favorite.swift */; };
+		DDD271E121D6262100B6D20F /* PropertyStoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD271E021D6262100B6D20F /* PropertyStoring.swift */; };
+		DDD271E221D6262100B6D20F /* PropertyStoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD271E021D6262100B6D20F /* PropertyStoring.swift */; };
 		FE61F5CECAD02C55C725A488 /* Pods_PIA_VPN_Tunnel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E770360A2D0093A53075E293 /* Pods_PIA_VPN_Tunnel.framework */; };
 /* End PBXBuildFile section */
 
@@ -420,6 +424,8 @@
 		DD746959217F07AC00B7BD73 /* DNSList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSList.swift; sourceTree = "<group>"; };
 		DDC8124B2176185000CB290C /* SwiftGen+SeguesStoryboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+SeguesStoryboards.swift"; sourceTree = "<group>"; };
 		DDC8124E21761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+ScenesStoryboards.swift"; sourceTree = "<group>"; };
+		DDD271DD21D616AA00B6D20F /* Server+Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+Favorite.swift"; sourceTree = "<group>"; };
+		DDD271E021D6262100B6D20F /* PropertyStoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyStoring.swift; sourceTree = "<group>"; };
 		E770360A2D0093A53075E293 /* Pods_PIA_VPN_Tunnel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIA_VPN_Tunnel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFACF2A7A2C3C206153EE1F /* Pods-PIA VPN dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPN dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIA VPN dev/Pods-PIA VPN dev.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -565,6 +571,7 @@
 				0EA660071FEC7A9500CB2B0D /* PIATunnelProvider+UI.swift */,
 				0EFDC1CB1FE35C9A007C0B9B /* Server+Automatic.swift */,
 				0EB966761FDF11B80086ABC2 /* Server+UI.swift */,
+				DDD271DD21D616AA00B6D20F /* Server+Favorite.swift */,
 				0EB966731FDF0D6E0086ABC2 /* ServerProvider+UI.swift */,
 				0E3A352B1FD9CDC5000B0F99 /* Theme+App.swift */,
 				0E1F318520176A5F00FC1000 /* Theme+DarkPalette.swift */,
@@ -572,6 +579,7 @@
 				0E441E252055AEDF007528D5 /* ThemeStrategy+App.swift */,
 				0EE14D141FF15626008D9AC2 /* UINavigationController+StatusBar.swift */,
 				0E9452AA1FDB5EF600891948 /* UINavigationItem+Shortcuts.swift */,
+				DDD271E021D6262100B6D20F /* PropertyStoring.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1415,6 +1423,7 @@
 				0E98BB6F1FD5BC6200B41D6B /* Bootstrapper.swift in Sources */,
 				0E9452A01FDB547D00891948 /* ExpirationCell.swift in Sources */,
 				0EFDC1F01FE4B9E6007C0B9B /* AppConfiguration.swift in Sources */,
+				DDD271DF21D616AA00B6D20F /* Server+Favorite.swift in Sources */,
 				DD1AA4972180AD92005116D7 /* CustomDNSSettingsViewController.swift in Sources */,
 				0E9452A31FDB568700891948 /* MenuItemCell.swift in Sources */,
 				0EFDC1DB1FE4640C007C0B9B /* DNSResolver.swift in Sources */,
@@ -1433,6 +1442,7 @@
 				0E441E322055B8A7007528D5 /* Theme+Extension.swift in Sources */,
 				0EA4ACAB20487B5800431F7D /* FakeSwitch.swift in Sources */,
 				DDC8124D2176185D00CB290C /* SwiftGen+SeguesStoryboards.swift in Sources */,
+				DDD271E221D6262100B6D20F /* PropertyStoring.swift in Sources */,
 				0EFB839120209CF200980F69 /* VPNPermissionViewController.swift in Sources */,
 				0EFDC1D81FE46177007C0B9B /* SensitiveOperation.swift in Sources */,
 				0E3A35291FD9A960000B0F99 /* DashboardViewController.swift in Sources */,
@@ -1500,6 +1510,7 @@
 				0E98BB6E1FD5BC6200B41D6B /* Bootstrapper.swift in Sources */,
 				0E94529F1FDB547D00891948 /* ExpirationCell.swift in Sources */,
 				0E441E262055AEDF007528D5 /* ThemeStrategy+App.swift in Sources */,
+				DDD271DE21D616AA00B6D20F /* Server+Favorite.swift in Sources */,
 				DD1AA4962180AD92005116D7 /* CustomDNSSettingsViewController.swift in Sources */,
 				0EFDC1EF1FE4B9E6007C0B9B /* AppConfiguration.swift in Sources */,
 				0E9452A21FDB568700891948 /* MenuItemCell.swift in Sources */,
@@ -1518,6 +1529,7 @@
 				0E7AA9092023CA0700E1F07A /* HUD.swift in Sources */,
 				0EA4ACAA20487B5800431F7D /* FakeSwitch.swift in Sources */,
 				DDC8124C2176185000CB290C /* SwiftGen+SeguesStoryboards.swift in Sources */,
+				DDD271E121D6262100B6D20F /* PropertyStoring.swift in Sources */,
 				0EFB839020209CF200980F69 /* VPNPermissionViewController.swift in Sources */,
 				0EFDC1D71FE46177007C0B9B /* SensitiveOperation.swift in Sources */,
 				0E3A35281FD9A960000B0F99 /* DashboardViewController.swift in Sources */,

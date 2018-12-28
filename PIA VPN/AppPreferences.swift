@@ -28,6 +28,8 @@ class AppPreferences {
         static let lastVPNConnectionStatus = "LastVPNConnectionStatus"
 
         static let piaSocketType = "PIASocketType"
+
+        static let favoriteServerIdentifiers = "FavoriteServerIdentifiers"
     }
 
     static let shared = AppPreferences()
@@ -104,6 +106,18 @@ class AppPreferences {
         }
     }
 
+    var favoriteServerIdentifiers: [String] {
+        get {
+            if let serverIdentifiers = defaults.array(forKey: Entries.favoriteServerIdentifiers) as? [String] {
+                return serverIdentifiers
+            }
+            return []
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.favoriteServerIdentifiers)
+        }
+    }
+
     private init() {
         guard let defaults = UserDefaults(suiteName: AppConstants.appGroup) else {
             fatalError("Unable to initialize app preferences")
@@ -113,6 +127,7 @@ class AppPreferences {
         defaults.register(defaults: [
             Entries.version: AppPreferences.currentVersion,
             Entries.launched: false,
+            Entries.favoriteServerIdentifiers: [],
             Entries.didAskToEnableNotifications: false,
             Entries.themeCode: ThemeCode.light.rawValue
         ])
