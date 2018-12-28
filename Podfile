@@ -80,6 +80,7 @@ end
 
 target 'PIA VPN dev' do
     app_pods
+    #only use the following pods for internal (non-public) builds
     pod 'HockeySDK'
     pod 'Firebase/Core'
     pod 'Crashlytics'
