@@ -6,6 +6,7 @@
 "account.accessibility.eye.hint.reveal" = "点击显示密码";
 "account.email.caption" = "电子邮件";
 "account.email.placeholder" = "电子邮件地址";
+"account.error.unauthorized" = "您的用户名或密码不正确。";
 "account.expiry_date.expired" = "您的套餐已到期。";
 "account.expiry_date.information" = "您的套餐将于%@到期。";
 "account.eye.footer" = "点击眼睛图标以显示或隐藏您的密码。";
@@ -17,9 +18,12 @@
 "account.restore.failure.title" = "恢复购买";
 "account.restore.title" = "恢复未入账的购买";
 "account.reveal.prompt" = "验证以显示";
-"account.save.item" = "更新";
+"account.save.item" = "更新电子邮件";
 "account.save.prompt" = "验证以保存更改";
 "account.save.success" = "您的电子邮件地址已保存。";
+"account.update.email.require.password.button" = "提交";
+"account.update.email.require.password.message" = "为安全起见，我们需要您提供 PIA 密码才能对您的帐户进行更改。请输入您的 PIA 密码以继续。";
+"account.update.email.require.password.title" = "需要填写 PIA 密码";
 "account.username.caption" = "用户名";
 "content_blocker.body.footer" = "请注意：无需连接到 VPN，此内容拦截器也可正常工作，但该功能只有在使用 Safari 进行浏览时才能发挥作用。";
 "content_blocker.body.subtitle" = "要启用内容拦截器以用于 Safari，请转至设置 > Safari，然后在“通用”下，触摸 PIA VPN 上的内容拦截器开关。";

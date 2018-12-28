@@ -44,6 +44,10 @@ internal enum L10n {
       /// Email address
       internal static let placeholder = L10n.tr("Localizable", "account.email.placeholder")
     }
+    internal enum Error {
+      /// Your username or password is incorrect.
+      internal static let unauthorized = L10n.tr("Localizable", "account.error.unauthorized")
+    }
     internal enum ExpiryDate {
       /// Your plan has expired.
       internal static let expired = L10n.tr("Localizable", "account.expiry_date.expired")
@@ -83,12 +87,26 @@ internal enum L10n {
       internal static let prompt = L10n.tr("Localizable", "account.reveal.prompt")
     }
     internal enum Save {
-      /// Update
+      /// Update email
       internal static let item = L10n.tr("Localizable", "account.save.item")
       /// Authenticate to save changes
       internal static let prompt = L10n.tr("Localizable", "account.save.prompt")
       /// Your email address has been saved.
       internal static let success = L10n.tr("Localizable", "account.save.success")
+    }
+    internal enum Update {
+      internal enum Email {
+        internal enum Require {
+          internal enum Password {
+            /// Submit
+            internal static let button = L10n.tr("Localizable", "account.update.email.require.password.button")
+            /// For security reasons we require your PIA password to perform a change in your account. Please input your PIA password to proceed.
+            internal static let message = L10n.tr("Localizable", "account.update.email.require.password.message")
+            /// PIA Password Required
+            internal static let title = L10n.tr("Localizable", "account.update.email.require.password.title")
+          }
+        }
+      }
     }
     internal enum Username {
       /// Username
@@ -377,7 +395,7 @@ internal enum L10n {
           internal static let title = L10n.tr("Localizable", "settings.dns.alert.clear.title")
         }
         internal enum Create {
-          /// Be warned: Using a non-PIA DNS could compromise your privacy.
+          /// Using non PIA DNS could expose your DNS traffic to third parties and compromise your privacy.
           internal static let message = L10n.tr("Localizable", "settings.dns.alert.create.message")
         }
       }
@@ -387,13 +405,13 @@ internal enum L10n {
       }
       internal enum Validation {
         internal enum Primary {
-          /// Primary DNS is not valid
+          /// Primary DNS is not valid.
           internal static let invalid = L10n.tr("Localizable", "settings.dns.validation.primary.invalid")
-          /// Primary DNS is mandatory
+          /// Primary DNS is mandatory.
           internal static let mandatory = L10n.tr("Localizable", "settings.dns.validation.primary.mandatory")
         }
         internal enum Secondary {
-          /// Secondary DNS is not valid
+          /// Secondary DNS is not valid.
           internal static let invalid = L10n.tr("Localizable", "settings.dns.validation.secondary.invalid")
         }
       }

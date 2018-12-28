@@ -53,7 +53,7 @@ end
 def shared_main_pods
     pod 'AlamofireImage'
     #library_by_path('..')
-    library_by_git('09dd28c')
+    library_by_git('327d345')
     #library_by_version('~> 1.1.3')
 end
 
@@ -68,7 +68,7 @@ end
 
 def tunnel_pods
     #tunnel_by_path('..')
-    tunnel_by_git('e40e891')
+    tunnel_by_git('269d6d1')
     #tunnel_by_version('~> 1.1.6')
 end
 
@@ -81,6 +81,9 @@ end
 target 'PIA VPN dev' do
     app_pods
     pod 'HockeySDK'
+    pod 'Firebase/Core'
+    pod 'Crashlytics'
+    pod 'Fabric'
 end
 
 target 'PIA VPN Tunnel' do
