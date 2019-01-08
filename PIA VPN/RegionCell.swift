@@ -22,12 +22,14 @@ class RegionCell: UITableViewCell, Restylable {
     @IBOutlet private weak var selectedRegionImageView: UIImageView!
 
     private var isFavorite: Bool!
+    private weak var server: Server!
 
     override func setSelected(_ selected: Bool, animated: Bool) {
     }
     
     func fill(withServer server: Server, isSelected: Bool) {
         viewShouldRestyle()
+        self.server = server
 
         imvFlag.setImage(fromServer: server)
         labelRegion.text = server.name
@@ -49,10 +51,11 @@ class RegionCell: UITableViewCell, Restylable {
         }
         accessibilityIdentifier = "uitests.regions.region_name"
         
-        self.favoriteImageView.alpha = CGFloat(NSNumber(booleanLiteral: server.name != L10n.Global.automatic).floatValue)
-        self.favoriteButton.alpha = CGFloat(NSNumber(booleanLiteral: server.name != L10n.Global.automatic).floatValue)
+        self.favoriteImageView.image = self.favoriteImageView.image?.withRenderingMode(.alwaysTemplate)
+        self.favoriteImageView.alpha = CGFloat(NSNumber(booleanLiteral: !server.isAutomatic).floatValue)
+        self.favoriteButton.alpha = CGFloat(NSNumber(booleanLiteral: !server.isAutomatic).floatValue)
 
-        self.isFavorite = isSelected
+        self.isFavorite = server.isFavorite
         self.updateFavoriteImage()
         
         self.setSelected(false, animated: false)
@@ -65,13 +68,19 @@ class RegionCell: UITableViewCell, Restylable {
         self.backgroundColor = Theme.current.palette.lightBackground
         self.contentView.backgroundColor = Theme.current.palette.lightBackground
 
-        Theme.current.applyList(labelRegion, appearance: .dark)
+        Theme.current.applySettingsCellTitle(labelRegion, appearance: .dark)
         Theme.current.applyTag(labelPingTime, appearance: .dark)
+        Theme.current.applyFavoriteUnselectedImage(self.favoriteImageView)
+        
+        if Theme.current.palette.appearance! == .dark {
+            self.favoriteImageView.tintColor = UIColor.piaGrey10
+        }
         
     }
     
     @IBAction func favoriteServer(_ sender: UIButton) {
         self.isFavorite = !self.isFavorite
+        self.isFavorite ? self.server.favorite() : self.server.unfavorite()
         self.animateFavoriteImage()
     }
     
@@ -87,8 +96,8 @@ class RegionCell: UITableViewCell, Restylable {
     }
     
     private func updateFavoriteImage() {
-        self.favoriteImageView.image = self.isFavorite ?
-            Asset.Piax.Global.favoriteSelected.image :
-            Asset.Piax.Global.favoriteUnselected.image
+        self.isFavorite ?
+            self.favoriteImageView.image = Asset.Piax.Global.favoriteSelected.image :
+            Theme.current.applyFavoriteUnselectedImage(self.favoriteImageView)
     }
 }

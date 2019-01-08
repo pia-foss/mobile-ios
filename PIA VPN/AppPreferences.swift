@@ -14,6 +14,7 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 class AppPreferences {
+    
     private struct Entries {
         static let version = "Version"
         
@@ -28,6 +29,10 @@ class AppPreferences {
         static let lastVPNConnectionStatus = "LastVPNConnectionStatus"
 
         static let piaSocketType = "PIASocketType"
+
+        static let favoriteServerIdentifiers = "FavoriteServerIdentifiers"
+        
+        static let regionFilter = "RegionFilter"
     }
 
     static let shared = AppPreferences()
@@ -104,6 +109,30 @@ class AppPreferences {
         }
     }
 
+    var favoriteServerIdentifiers: [String] {
+        get {
+            if let serverIdentifiers = defaults.array(forKey: Entries.favoriteServerIdentifiers) as? [String] {
+                return serverIdentifiers
+            }
+            return []
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.favoriteServerIdentifiers)
+        }
+    }
+
+    var regionFilter: RegionFilter {
+        get {
+            guard let rawValue = defaults.string(forKey: Entries.regionFilter) else {
+                return .name
+            }
+            return RegionFilter(rawValue: rawValue) ?? .name
+        }
+        set {
+            defaults.set(newValue.rawValue, forKey: Entries.regionFilter)
+        }
+    }
+
     private init() {
         guard let defaults = UserDefaults(suiteName: AppConstants.appGroup) else {
             fatalError("Unable to initialize app preferences")
@@ -113,6 +142,8 @@ class AppPreferences {
         defaults.register(defaults: [
             Entries.version: AppPreferences.currentVersion,
             Entries.launched: false,
+            Entries.regionFilter: RegionFilter.name.rawValue,
+            Entries.favoriteServerIdentifiers: [],
             Entries.didAskToEnableNotifications: false,
             Entries.themeCode: ThemeCode.light.rawValue
         ])
