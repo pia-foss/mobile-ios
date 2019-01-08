@@ -9,6 +9,7 @@
 import UIKit
 import PIALibrary
 import DZNEmptyDataSet
+import PopupDialog
 
 class RegionsViewController: AutolayoutViewController {
     private struct Cells {
@@ -40,6 +41,7 @@ class RegionsViewController: AutolayoutViewController {
         }
         
         self.servers = servers
+        filterServers()
 
         selectedServer = Client.preferences.displayedServer
 
@@ -47,9 +49,43 @@ class RegionsViewController: AutolayoutViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
 
         setupSearchBarController()
-        
+        stylePopupDialog()
+
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
+    }
+    
+    private func setupRightBarButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: Asset.Piax.Global.iconFilter.image,
+            style: .plain,
+            target: self,
+            action: #selector(showFilter(_:))
+        )
+        navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Region.Accessibility.filter
+    }
+    
+    private func stylePopupDialog() {
+        let dialogAppearance = PopupDialogDefaultView.appearance()
+        dialogAppearance.backgroundColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
+        dialogAppearance.titleFont = TextStyle.textStyle12.font!
+        dialogAppearance.titleColor = Theme.current.palette.appearance == .dark ? .white : TextStyle.textStyle12.color
+        
+        let containerAppearance = PopupDialogContainerView.appearance()
+        containerAppearance.cornerRadius    = 0
+        containerAppearance.shadowEnabled   = false
+        
+        let overlayAppearance = PopupDialogOverlayView.appearance()
+        overlayAppearance.color           = .black
+        overlayAppearance.blurEnabled     = false
+        overlayAppearance.liveBlurEnabled = false
+        overlayAppearance.opacity         = 0.5
+        
+        let buttonAppearance = DefaultButton.appearance()
+        buttonAppearance.titleFont      = TextStyle.textStyle21.font!
+        buttonAppearance.titleColor     = TextStyle.textStyle21.color
+        buttonAppearance.buttonColor    = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
+        buttonAppearance.separatorColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey10 : UIColor.piaGrey1
     }
     
     private func setupSearchBarController() {
@@ -64,8 +100,10 @@ class RegionsViewController: AutolayoutViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         styleNavigationBarWithTitle(L10n.Menu.Item.region)
-
+        setupRightBarButton()
+        
         let selectedRow = servers.index { (server) -> Bool in
             return (server.identifier == selectedServer.identifier)
         }
@@ -77,6 +115,53 @@ class RegionsViewController: AutolayoutViewController {
     }
     
     // MARK: Actions
+    @objc private func showFilter(_ sender: Any?) {
+        
+        let popup = PopupDialog(title: L10n.Region.Filter.sortby.uppercased(),
+                                message: nil)
+        
+        let buttonName = DefaultButton(title: L10n.Region.Filter.name.uppercased(), dismissOnTap: true) {
+            AppPreferences.shared.regionFilter = .name
+            self.filterServers()
+        }
+        let buttonLatency = DefaultButton(title: L10n.Region.Filter.latency.uppercased(), dismissOnTap: true) {
+            AppPreferences.shared.regionFilter = .latency
+            self.filterServers()
+        }
+        let buttonFavorites = DefaultButton(title: L10n.Region.Filter.favorites.uppercased(), dismissOnTap: true) {
+            AppPreferences.shared.regionFilter = .favorite
+            self.filterServers()
+        }
+        
+        switch AppPreferences.shared.regionFilter {
+        case .name:
+            buttonName.titleColor = UIColor.piaGreenDark20
+        case .latency:
+            buttonLatency.titleColor = UIColor.piaGreenDark20
+        default:
+            buttonFavorites.titleColor = UIColor.piaGreenDark20
+        }
+
+        popup.addButtons([buttonName, buttonLatency, buttonFavorites])
+        self.present(popup, animated: true, completion: nil)
+
+    }
+    
+    private func filterServers() {
+        self.servers = servers.filter({ !$0.isAutomatic })
+        switch AppPreferences.shared.regionFilter {
+        case .name:
+            self.servers = self.servers.sorted(by: { $0.name < $1.name })
+        case .latency:
+            self.servers = self.servers.sorted(by: { $0.pingTime ?? 0 < $1.pingTime ?? 0 })
+        default:
+            self.servers = self.servers.sorted(by: { $0.isFavorite && !$1.isFavorite })
+        }
+        tableView.reloadData()
+        self.servers.insert(Server.automatic, at: 0)
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+    }
+
     @objc private func viewHasRotated() {
         styleNavigationBarWithTitle(L10n.Menu.Item.region)
     }
