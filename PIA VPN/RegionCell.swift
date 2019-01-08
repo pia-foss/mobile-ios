@@ -22,12 +22,14 @@ class RegionCell: UITableViewCell, Restylable {
     @IBOutlet private weak var selectedRegionImageView: UIImageView!
 
     private var isFavorite: Bool!
+    private weak var server: Server!
 
     override func setSelected(_ selected: Bool, animated: Bool) {
     }
     
     func fill(withServer server: Server, isSelected: Bool) {
         viewShouldRestyle()
+        self.server = server
 
         imvFlag.setImage(fromServer: server)
         labelRegion.text = server.name
@@ -50,10 +52,10 @@ class RegionCell: UITableViewCell, Restylable {
         accessibilityIdentifier = "uitests.regions.region_name"
         
         self.favoriteImageView.image = self.favoriteImageView.image?.withRenderingMode(.alwaysTemplate)
-        self.favoriteImageView.alpha = CGFloat(NSNumber(booleanLiteral: server.name != L10n.Global.automatic).floatValue)
-        self.favoriteButton.alpha = CGFloat(NSNumber(booleanLiteral: server.name != L10n.Global.automatic).floatValue)
+        self.favoriteImageView.alpha = CGFloat(NSNumber(booleanLiteral: !server.isAutomatic).floatValue)
+        self.favoriteButton.alpha = CGFloat(NSNumber(booleanLiteral: !server.isAutomatic).floatValue)
 
-        self.isFavorite = isSelected
+        self.isFavorite = server.isFavorite
         self.updateFavoriteImage()
         
         self.setSelected(false, animated: false)
@@ -78,6 +80,7 @@ class RegionCell: UITableViewCell, Restylable {
     
     @IBAction func favoriteServer(_ sender: UIButton) {
         self.isFavorite = !self.isFavorite
+        self.isFavorite ? self.server.favorite() : self.server.unfavorite()
         self.animateFavoriteImage()
     }
     

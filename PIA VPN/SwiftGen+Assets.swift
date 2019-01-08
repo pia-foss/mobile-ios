@@ -53,11 +53,16 @@ enum Asset {
       static let favoriteUnselectedDark = ImageAsset(name: "favorite-unselected-dark")
       static let favoriteUnselected = ImageAsset(name: "favorite-unselected")
       static let iconBack = ImageAsset(name: "icon-back")
+      static let iconFilter = ImageAsset(name: "icon-filter")
       static let pagecontrolSelectedDot = ImageAsset(name: "pagecontrol-selected-dot")
       static let pagecontrolUnselectedDot = ImageAsset(name: "pagecontrol-unselected-dot")
       static let regionSelected = ImageAsset(name: "region-selected")
       static let scrollableMapDark = ImageAsset(name: "scrollableMap-dark")
       static let scrollableMapLight = ImageAsset(name: "scrollableMap-light")
+    }
+    enum Regions {
+      static let noResultsDark = ImageAsset(name: "no-results-dark")
+      static let noResultsLight = ImageAsset(name: "no-results-light")
     }
     enum Splash {
       static let darkSplash = ImageAsset(name: "dark-splash")
@@ -327,11 +332,14 @@ enum Asset {
     Piax.Global.favoriteUnselectedDark,
     Piax.Global.favoriteUnselected,
     Piax.Global.iconBack,
+    Piax.Global.iconFilter,
     Piax.Global.pagecontrolSelectedDot,
     Piax.Global.pagecontrolUnselectedDot,
     Piax.Global.regionSelected,
     Piax.Global.scrollableMapDark,
     Piax.Global.scrollableMapLight,
+    Piax.Regions.noResultsDark,
+    Piax.Regions.noResultsLight,
     Piax.Splash.darkSplash,
     Piax.Splash.lightSplash,
     accessoryExpire,
