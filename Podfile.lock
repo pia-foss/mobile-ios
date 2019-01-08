@@ -4,6 +4,8 @@ PODS:
     - Alamofire (~> 4.7)
   - Crashlytics (3.11.1):
     - Fabric (~> 1.8.1)
+  - DynamicBlurView (3.0.1)
+  - DZNEmptyDataSet (1.8.1)
   - Fabric (1.8.1)
   - Firebase/Core (5.11.0):
     - Firebase/CoreOnly
@@ -93,6 +95,8 @@ PODS:
   - PIATunnel/Core (1.1.8):
     - OpenSSL-Apple (~> 1.1.0h)
     - SwiftyBeaver
+  - PopupDialog (0.9.1):
+    - DynamicBlurView (~> 3.0.1)
   - QuickLayout (2.0.2)
   - ReachabilitySwift (4.3.0)
   - SideMenu (3.1.5)
@@ -104,6 +108,7 @@ PODS:
 DEPENDENCIES:
   - AlamofireImage
   - Crashlytics
+  - DZNEmptyDataSet
   - Fabric
   - Firebase/Core
   - FXPageControl
@@ -115,6 +120,7 @@ DEPENDENCIES:
   - PIALibrary/UI (from `/Users/ueshiba/Desktop/PIA/client-library-apple`)
   - PIALibrary/VPN (from `/Users/ueshiba/Desktop/PIA/client-library-apple`)
   - PIATunnel (from `/Users/ueshiba/Desktop/PIA/tunnel-apple`)
+  - PopupDialog
   - SideMenu (= 3.1.5)
   - TPKeyboardAvoiding
 
@@ -123,6 +129,8 @@ SPEC REPOS:
     - Alamofire
     - AlamofireImage
     - Crashlytics
+    - DynamicBlurView
+    - DZNEmptyDataSet
     - Fabric
     - Firebase
     - FirebaseAnalytics
@@ -138,6 +146,7 @@ SPEC REPOS:
     - MBProgressHUD
     - nanopb
     - OpenSSL-Apple
+    - PopupDialog
     - QuickLayout
     - ReachabilitySwift
     - SideMenu
@@ -155,6 +164,8 @@ SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
   Crashlytics: ca7ab4bc304aa216bdc2e4c1a96389ee77252203
+  DynamicBlurView: b1df5415f9bd31897549e5d7077e5ec120a4d636
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   Fabric: 43ed7bac010f588f63ee23ab1a0276b296db5e17
   Firebase: b48f9e653da971ecce5b8c749684bc8bb2d26bd3
   FirebaseAnalytics: 63202d2665de4e6adcbdce189135255d8b5962ba
@@ -172,6 +183,7 @@ SPEC CHECKSUMS:
   OpenSSL-Apple: cd153d705ef350eb834ae7ff5f21f792b51ed208
   PIALibrary: 31ba3f0a1575931be2472d1b9d590f08bd7876be
   PIATunnel: fc7e7d0a812c6c98138ac315e7a43008aadd15b2
+  PopupDialog: 03985b669c29802661c187513bf827340db1ae4d
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
   SideMenu: 47dbf9e4d878062d8994aed43f6e4bf6c1fea30b
@@ -179,6 +191,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 3e857e96f910e963b7a2a6ed0f4b0968875616f1
+PODFILE CHECKSUM: 87fc45c9dcad7b255ea49de23cf784af7b7efa83
 
 COCOAPODS: 1.5.3

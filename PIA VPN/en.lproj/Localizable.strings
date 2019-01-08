@@ -198,3 +198,12 @@
 "settings.dns.validation.primary.mandatory" = "Primary DNS is mandatory.";
 "settings.dns.validation.primary.invalid" = "Primary DNS is not valid.";
 "settings.dns.validation.secondary.invalid" = "Secondary DNS is not valid.";
+
+// REGION
+
+"region.search.placeholder" = "Search for a region";
+"region.accessibility.filter" = "Filter";
+"region.filter.sortby" = "Sort regions by";
+"region.filter.name" = "Name";
+"region.filter.latency" = "Latency";
+"region.filter.favorites" = "Favorites";

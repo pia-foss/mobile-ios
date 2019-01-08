@@ -278,6 +278,27 @@ internal enum L10n {
     }
   }
 
+  internal enum Region {
+    internal enum Accessibility {
+      /// Filter
+      internal static let filter = L10n.tr("Localizable", "region.accessibility.filter")
+    }
+    internal enum Filter {
+      /// Favorites
+      internal static let favorites = L10n.tr("Localizable", "region.filter.favorites")
+      /// Latency
+      internal static let latency = L10n.tr("Localizable", "region.filter.latency")
+      /// Name
+      internal static let name = L10n.tr("Localizable", "region.filter.name")
+      /// Sort regions by
+      internal static let sortby = L10n.tr("Localizable", "region.filter.sortby")
+    }
+    internal enum Search {
+      /// Search for a region
+      internal static let placeholder = L10n.tr("Localizable", "region.search.placeholder")
+    }
+  }
+
   internal enum Renewal {
     internal enum Failure {
       /// Your purchase receipt couldn't be submitted, please retry at a later time.
