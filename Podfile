@@ -64,6 +64,8 @@ def app_pods
     pod 'SideMenu', '= 3.1.5'
     pod 'FXPageControl'
     pod 'MBProgressHUD'
+    pod 'DZNEmptyDataSet'
+    pod 'PopupDialog'
 end
 
 def tunnel_pods
@@ -88,4 +90,14 @@ end
 
 target 'PIA VPN Tunnel' do
     tunnel_pods
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        if ['PopupDialog'].include? target.name
+            target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '4.2'
+            end
+        end
+    end
 end

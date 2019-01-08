@@ -14,7 +14,7 @@ private struct PIAConnectionButtonSettings {
     static let outsideBorderWidth: CGFloat = 10.0
     static let outsideBorderLightColor = UIColor.piaGrey2.cgColor
     static let outsideBorderDarkColor = UIColor.piaGrey10.cgColor
-    static let animatedShapeWidth: CGFloat = 2.0
+    static let animatedShapeWidth: CGFloat = 4.0
     static let startAngle: CGFloat = -0.25 * 2 * .pi
     static let endAngle: CGFloat = PIAConnectionButtonSettings.startAngle + 2 * .pi
     static let udpateColorAnimationDuration = 0.3
