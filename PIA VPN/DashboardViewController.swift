@@ -14,8 +14,10 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 class DashboardViewController: AutolayoutViewController {
+    
     private struct Cells {
-        static let info = "InfoCell"
+        static let tile = "IPTileCell"
+        static let tileCellClass = "IPTileCollectionViewCell"
     }
     
     @IBOutlet private weak var viewContent: UIView!
@@ -28,7 +30,7 @@ class DashboardViewController: AutolayoutViewController {
     
     @IBOutlet private weak var viewRows: UIView!
     
-    @IBOutlet private weak var tableRows: UITableView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     // iPad only
 
@@ -62,6 +64,11 @@ class DashboardViewController: AutolayoutViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        collectionView.register(UINib(nibName: Cells.tileCellClass,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.tile)
+        collectionView.backgroundColor = .clear
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: Asset.itemMenu.image,
@@ -356,7 +363,7 @@ class DashboardViewController: AutolayoutViewController {
         }
 
         // non-iPad bottom table
-        tableRows.reloadData()
+        collectionView.reloadData()
     }
 
     @objc private func updateCurrentIP() {
@@ -383,7 +390,7 @@ class DashboardViewController: AutolayoutViewController {
         }
 
         // non-iPad bottom table
-        tableRows.reloadData()
+        collectionView.reloadData()
     }
 
     // MARK: Restylable
@@ -404,8 +411,9 @@ class DashboardViewController: AutolayoutViewController {
         Theme.current.applyTextButton(buttonChangeRegion)
 
         // XXX: emulate native UITableView separator
-        Theme.current.applyDividerToSeparator(tableRows)
-        tableRows.reloadData()
+        //Theme.current.applyDividerToSeparator(tableRows)
+        collectionView.collectionViewLayout.invalidateLayout()
+        collectionView.reloadData()
     }
     
     private func resetNavigationBar() {
@@ -475,48 +483,72 @@ extension DashboardViewController: MenuViewControllerDelegate {
     }
 }
 
-extension DashboardViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+extension DashboardViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        /*
+         let paddingSpace = (sectionInsets.left) * (CGFloat(itemsPerRow) + 1)
+         let availableWidth = view.frame.width - paddingSpace - (UIDevice.current.orientation == UIDeviceOrientation.portrait ? 0 : safeAreaMargin)
+         var widthPerItem = availableWidth / CGFloat(itemsPerRow)
+         if let itemSize = self.itemSize {
+         widthPerItem = itemSize.width
+         }
+         
+         let actualSize = CGSize(width: widthPerItem, height: widthPerItem)
+         if let sizingCell = UINib(nibName: cellClass,
+         bundle: nil).instantiate(withOwner: nil,
+         options: nil).first as? ValueChartLegendCollectionViewCell {
+         
+         sizingCell.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+         sizingCell.frame.size = actualSize
+         switch indexPath.row {
+         case 0:
+         sizingCell.displayContentWith(dataset: ValueChartLegendContributionDataset())
+         case 1:
+         sizingCell.displayContentWith(dataset: ValueChartLegendValueDataset())
+         default:
+         sizingCell.displayContentWith(dataset: ValueChartLegendSimpleReturnDataset())
+         }
+         
+         return sizingCell.contentView.systemLayoutSizeFitting(actualSize,
+         withHorizontalFittingPriority: UILayoutPriority.required,
+         verticalFittingPriority: UILayoutPriority.defaultLow)
+         
+         }
+         */
+        return CGSize(width: collectionView.frame.width, height: 89)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Cells.info, for: indexPath) as! ConnectionInfoCell
-        switch indexPath.row {
-        case 0:
-            let server = Client.preferences.displayedServer
-            cell.fill(
-                withTitle: L10n.Dashboard.Connection.Region.caption,
-                server: server,
-                status: currentStatus
-            )
-            cell.accessoryType = .disclosureIndicator
-            cell.selectionStyle = .gray
-            cell.accessibilityIdentifier = "uitests.main.pick_region"
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets.zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+}
 
-        case 1:
-            cell.fill(
-                withTitle: L10n.Dashboard.Connection.Ip.caption,
-                description: currentIP
-            )
-            cell.accessoryType = .none
-            cell.selectionStyle = .none
-            
-        default:
-            fatalError("Unexpected cell row")
-        }
+
+extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.tile, for: indexPath) as! IPTileCollectionViewCell
         return cell
     }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
     
-        switch (indexPath.row) {
-        case 0:
-            selectRegion(animated: true)
-            
-        default:
-            break
-        }
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
     }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return AvailableTiles.countCases()
+    }
+    
 }

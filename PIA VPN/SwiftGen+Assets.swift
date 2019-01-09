@@ -68,6 +68,9 @@ enum Asset {
       static let darkSplash = ImageAsset(name: "dark-splash")
       static let lightSplash = ImageAsset(name: "light-splash")
     }
+    enum Tiles {
+      static let ipTriangle = ImageAsset(name: "ip-triangle")
+    }
   }
   static let accessoryExpire = ImageAsset(name: "accessory-expire")
   static let accessorySelected = ImageAsset(name: "accessory-selected")
@@ -342,6 +345,7 @@ enum Asset {
     Piax.Regions.noResultsLight,
     Piax.Splash.darkSplash,
     Piax.Splash.lightSplash,
+    Piax.Tiles.ipTriangle,
     accessoryExpire,
     accessorySelected,
     buttonBackgroundToggleConnected,

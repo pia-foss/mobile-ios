@@ -8,15 +8,6 @@
 
 import Foundation
 
-enum TileSections: Int, EnumsBuilder {
-    case power
-    case tiles
-}
-
-enum AvailablePowerTiles: Int, EnumsBuilder {
-    case power
-}
-
 enum AvailableTiles: Int, EnumsBuilder {
     case regions
     case ip

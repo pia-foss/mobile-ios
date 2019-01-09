@@ -17,9 +17,6 @@ protocol Tileable {
     var view: UIView! {get set}
     var detailSegueIdentifier: String! {get set}
     
-    mutating func xibSetup()
-    func loadViewFromNib() -> UIView
-    
     func isEditable() -> Bool
     func isExpandable() -> Bool
     func hasDetailView() -> Bool
@@ -44,30 +41,6 @@ extension Tileable {
     /// - Returns: Bool
     func hasDetailView() -> Bool {
         return false
-    }
-    
-}
-
-extension Tileable where Self: UIView {
-    
-    /// The initial setup
-    mutating func xibSetup() {
-        self.view = loadViewFromNib()
-        self.view.frame = bounds
-        self.view.autoresizingMask = [UIViewAutoresizing.flexibleWidth,
-                                      UIViewAutoresizing.flexibleHeight]
-        addSubview(self.view)
-    }
-    
-    /// The method used to load the xib file
-    /// - Returns: The view of the xib file
-    func loadViewFromNib() -> UIView {
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "PowerTile",
-                        bundle: bundle)
-        let view = nib.instantiate(withOwner: self,
-                                   options: nil)[0] as? UIView
-        return view!
     }
     
 }
