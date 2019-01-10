@@ -49,6 +49,7 @@ enum Asset {
       static let vpnButton = ImageAsset(name: "vpn-button")
     }
     enum Global {
+      static let favoriteGreen = ImageAsset(name: "favorite-green")
       static let favoriteSelected = ImageAsset(name: "favorite-selected")
       static let favoriteUnselectedDark = ImageAsset(name: "favorite-unselected-dark")
       static let favoriteUnselected = ImageAsset(name: "favorite-unselected")
@@ -331,6 +332,7 @@ enum Asset {
   ]
   static let allImages: [ImageAsset] = [
     Piax.Dashboard.vpnButton,
+    Piax.Global.favoriteGreen,
     Piax.Global.favoriteSelected,
     Piax.Global.favoriteUnselectedDark,
     Piax.Global.favoriteUnselected,

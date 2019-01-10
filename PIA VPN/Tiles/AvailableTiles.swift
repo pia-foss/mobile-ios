@@ -9,6 +9,6 @@
 import Foundation
 
 enum AvailableTiles: Int, EnumsBuilder {
-    case regions
+    case quickConnect
     case ip
 }

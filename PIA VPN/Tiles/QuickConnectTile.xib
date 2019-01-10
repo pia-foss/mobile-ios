@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuickConnectTile" customModule="PIA_VPN" customModuleProvider="target">
+            <connections>
+                <outlet property="stackView" destination="5tQ-tu-dGY" id="gGx-Er-vMO"/>
+                <outlet property="tileTitle" destination="4bj-c2-OSN" id="9CB-cC-b9z"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="365" height="89"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bj-c2-OSN">
+                    <rect key="frame" x="25" y="15" width="42" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5tQ-tu-dGY">
+                    <rect key="frame" x="25" y="34" width="315" height="40"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mpQ-L8-QwR">
+                            <rect key="frame" x="0.0" y="0.0" width="52.5" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4lf-TM-zJ2" customClass="ServerButton" customModule="PIA_VPN" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="36.5" height="40"/>
+                                    <connections>
+                                        <action selector="connectToServer:" destination="-1" eventType="touchUpInside" id="HDR-BV-flz"/>
+                                    </connections>
+                                </button>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite-green" translatesAutoresizingMaskIntoConstraints="NO" id="p4N-iq-XAs">
+                                    <rect key="frame" x="36.5" y="28" width="8" height="7"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="p4N-iq-XAs" secondAttribute="height" multiplier="8:7" id="jSm-db-uVH"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="p4N-iq-XAs" secondAttribute="trailing" constant="8" id="4im-RD-uf6"/>
+                                <constraint firstAttribute="bottom" secondItem="4lf-TM-zJ2" secondAttribute="bottom" id="JQo-gi-PqC"/>
+                                <constraint firstItem="4lf-TM-zJ2" firstAttribute="leading" secondItem="mpQ-L8-QwR" secondAttribute="leading" id="c7j-A0-dop"/>
+                                <constraint firstAttribute="bottom" secondItem="p4N-iq-XAs" secondAttribute="bottom" constant="5" id="cHL-fv-53Z"/>
+                                <constraint firstItem="p4N-iq-XAs" firstAttribute="leading" secondItem="4lf-TM-zJ2" secondAttribute="trailing" id="ffB-UW-UI4"/>
+                                <constraint firstItem="4lf-TM-zJ2" firstAttribute="top" secondItem="mpQ-L8-QwR" secondAttribute="top" id="pKh-87-09k"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RzD-3W-RwT">
+                            <rect key="frame" x="52.5" y="0.0" width="52.5" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJm-tp-3as" customClass="ServerButton" customModule="PIA_VPN" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="36.5" height="40"/>
+                                    <connections>
+                                        <action selector="connectToServer:" destination="-1" eventType="touchUpInside" id="ghn-zr-sqj"/>
+                                    </connections>
+                                </button>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite-green" translatesAutoresizingMaskIntoConstraints="NO" id="PDv-Np-ow2">
+                                    <rect key="frame" x="36.5" y="28" width="8" height="7"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="PDv-Np-ow2" secondAttribute="height" multiplier="8:7" id="SwP-nD-ghH"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="HJm-tp-3as" secondAttribute="bottom" id="2q8-9t-MIC"/>
+                                <constraint firstAttribute="bottom" secondItem="PDv-Np-ow2" secondAttribute="bottom" constant="5" id="8ko-ge-ObU"/>
+                                <constraint firstItem="HJm-tp-3as" firstAttribute="leading" secondItem="RzD-3W-RwT" secondAttribute="leading" id="ODp-DL-5Gb"/>
+                                <constraint firstAttribute="trailing" secondItem="PDv-Np-ow2" secondAttribute="trailing" constant="8" id="drF-id-aPI"/>
+                                <constraint firstItem="HJm-tp-3as" firstAttribute="top" secondItem="RzD-3W-RwT" secondAttribute="top" id="uwS-wK-hL6"/>
+                                <constraint firstItem="PDv-Np-ow2" firstAttribute="leading" secondItem="HJm-tp-3as" secondAttribute="trailing" id="zfh-ZH-hco"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yxU-lz-5KF">
+                            <rect key="frame" x="105" y="0.0" width="52.5" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zNq-qJ-kef" customClass="ServerButton" customModule="PIA_VPN" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="36.5" height="40"/>
+                                    <connections>
+                                        <action selector="connectToServer:" destination="-1" eventType="touchUpInside" id="TyZ-an-ovB"/>
+                                    </connections>
+                                </button>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite-green" translatesAutoresizingMaskIntoConstraints="NO" id="Zrk-Sf-sXs">
+                                    <rect key="frame" x="36.5" y="28" width="8" height="7"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="Zrk-Sf-sXs" secondAttribute="height" multiplier="8:7" id="Exj-PF-ghI"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="zNq-qJ-kef" firstAttribute="top" secondItem="yxU-lz-5KF" secondAttribute="top" id="EDe-Pm-jPc"/>
+                                <constraint firstAttribute="bottom" secondItem="Zrk-Sf-sXs" secondAttribute="bottom" constant="5" id="OGj-mC-Vr7"/>
+                                <constraint firstAttribute="trailing" secondItem="Zrk-Sf-sXs" secondAttribute="trailing" constant="8" id="ONz-fG-SWt"/>
+                                <constraint firstItem="zNq-qJ-kef" firstAttribute="leading" secondItem="yxU-lz-5KF" secondAttribute="leading" id="SEP-VS-yGj"/>
+                                <constraint firstAttribute="bottom" secondItem="zNq-qJ-kef" secondAttribute="bottom" id="T5V-2W-pnt"/>
+                                <constraint firstItem="Zrk-Sf-sXs" firstAttribute="leading" secondItem="zNq-qJ-kef" secondAttribute="trailing" id="zfn-ay-cGl"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7mv-wP-lqG">
+                            <rect key="frame" x="157.5" y="0.0" width="52.5" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="juU-Cm-Rjx" customClass="ServerButton" customModule="PIA_VPN" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="36.5" height="40"/>
+                                    <connections>
+                                        <action selector="connectToServer:" destination="-1" eventType="touchUpInside" id="DBc-JD-ncP"/>
+                                    </connections>
+                                </button>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite-green" translatesAutoresizingMaskIntoConstraints="NO" id="MOI-Xp-Srj">
+                                    <rect key="frame" x="36.5" y="28" width="8" height="7"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="MOI-Xp-Srj" secondAttribute="height" multiplier="8:7" id="70p-Qp-N9r"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="MOI-Xp-Srj" secondAttribute="bottom" constant="5" id="30r-P4-wTj"/>
+                                <constraint firstAttribute="bottom" secondItem="juU-Cm-Rjx" secondAttribute="bottom" id="Hnk-W6-yPb"/>
+                                <constraint firstItem="juU-Cm-Rjx" firstAttribute="leading" secondItem="7mv-wP-lqG" secondAttribute="leading" id="O5B-o5-Lyk"/>
+                                <constraint firstItem="juU-Cm-Rjx" firstAttribute="top" secondItem="7mv-wP-lqG" secondAttribute="top" id="d4U-T9-sBy"/>
+                                <constraint firstAttribute="trailing" secondItem="MOI-Xp-Srj" secondAttribute="trailing" constant="8" id="nc7-rT-Fc5"/>
+                                <constraint firstItem="MOI-Xp-Srj" firstAttribute="leading" secondItem="juU-Cm-Rjx" secondAttribute="trailing" id="tFf-KN-KpD"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UgG-TC-Ufr">
+                            <rect key="frame" x="210" y="0.0" width="52.5" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2za-Bw-gte" customClass="ServerButton" customModule="PIA_VPN" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="36.5" height="40"/>
+                                    <connections>
+                                        <action selector="connectToServer:" destination="-1" eventType="touchUpInside" id="Fkd-7U-tiB"/>
+                                    </connections>
+                                </button>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite-green" translatesAutoresizingMaskIntoConstraints="NO" id="6VV-TP-Hzf">
+                                    <rect key="frame" x="36.5" y="28" width="8" height="7"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="6VV-TP-Hzf" secondAttribute="height" multiplier="8:7" id="cX5-TV-Vud"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="2za-Bw-gte" secondAttribute="bottom" id="Gu9-U4-qHD"/>
+                                <constraint firstItem="6VV-TP-Hzf" firstAttribute="leading" secondItem="2za-Bw-gte" secondAttribute="trailing" id="KFg-cb-d3X"/>
+                                <constraint firstItem="2za-Bw-gte" firstAttribute="leading" secondItem="UgG-TC-Ufr" secondAttribute="leading" id="Nzs-Uj-LpF"/>
+                                <constraint firstItem="2za-Bw-gte" firstAttribute="top" secondItem="UgG-TC-Ufr" secondAttribute="top" id="ROa-dj-tPA"/>
+                                <constraint firstAttribute="trailing" secondItem="6VV-TP-Hzf" secondAttribute="trailing" constant="8" id="cHL-Ri-nuS"/>
+                                <constraint firstAttribute="bottom" secondItem="6VV-TP-Hzf" secondAttribute="bottom" constant="5" id="qLZ-iD-KDC"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iJT-fh-8bk">
+                            <rect key="frame" x="262.5" y="0.0" width="52.5" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HpK-OJ-XbF" customClass="ServerButton" customModule="PIA_VPN" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="36.5" height="40"/>
+                                    <connections>
+                                        <action selector="connectToServer:" destination="-1" eventType="touchUpInside" id="S6z-fv-ys7"/>
+                                    </connections>
+                                </button>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite-green" translatesAutoresizingMaskIntoConstraints="NO" id="Wff-Zr-3zQ">
+                                    <rect key="frame" x="36.5" y="28" width="8" height="7"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="Wff-Zr-3zQ" secondAttribute="height" multiplier="8:7" id="w5s-Le-6aY"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="HpK-OJ-XbF" firstAttribute="top" secondItem="iJT-fh-8bk" secondAttribute="top" id="6SD-d4-xBi"/>
+                                <constraint firstItem="HpK-OJ-XbF" firstAttribute="leading" secondItem="iJT-fh-8bk" secondAttribute="leading" id="AcR-Eq-IzA"/>
+                                <constraint firstAttribute="bottom" secondItem="HpK-OJ-XbF" secondAttribute="bottom" id="PVm-u4-ZjB"/>
+                                <constraint firstAttribute="bottom" secondItem="Wff-Zr-3zQ" secondAttribute="bottom" constant="5" id="VFl-p9-8dI"/>
+                                <constraint firstAttribute="trailing" secondItem="Wff-Zr-3zQ" secondAttribute="trailing" constant="8" id="fof-9R-RgY"/>
+                                <constraint firstItem="Wff-Zr-3zQ" firstAttribute="leading" secondItem="HpK-OJ-XbF" secondAttribute="trailing" id="ruB-MB-zRh"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="4zD-ug-MzB"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="4bj-c2-OSN" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="15" id="C27-fH-o4D"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="5tQ-tu-dGY" secondAttribute="bottom" constant="15" id="cnq-mg-NfM"/>
+                <constraint firstItem="5tQ-tu-dGY" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="jF0-26-mz6"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="5tQ-tu-dGY" secondAttribute="trailing" constant="25" id="kXN-se-6Xi"/>
+                <constraint firstItem="4bj-c2-OSN" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="oD2-SY-pNZ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="55.200000000000003" y="48.125937031484263"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="favorite-green" width="8" height="7"/>
+    </resources>
+</document>

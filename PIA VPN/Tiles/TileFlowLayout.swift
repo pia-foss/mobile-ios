@@ -25,28 +25,30 @@ final class TileFlowLayout: UICollectionViewFlowLayout {
         let lineWidth = self.minimumLineSpacing
         
         var decorationAttributes: [UICollectionViewLayoutAttributes] = []
-        for layoutAttribute in layoutAttributes {
+        for (index, layoutAttribute) in layoutAttributes.enumerated() {
             //bottom
             let separatorAttribute = UICollectionViewLayoutAttributes(forDecorationViewOfKind: separatorDecorationViewBottom,
                                                                       with: layoutAttribute.indexPath)
             let cellFrame = layoutAttribute.frame
             separatorAttribute.frame = CGRect(x: cellFrame.origin.x,
-                                              y: cellFrame.origin.y + cellFrame.size.height,
+                                              y: cellFrame.origin.y + cellFrame.size.height - lineWidth,
                                               width: cellFrame.size.width,
                                               height: lineWidth)
             separatorAttribute.zIndex = Int.max
             decorationAttributes.append(separatorAttribute)
             
             //top
-            let separatorAttributeTop = UICollectionViewLayoutAttributes(forDecorationViewOfKind: separatorDecorationViewTop,
-                                                                         with: layoutAttribute.indexPath)
-            let cellFrameTop = layoutAttribute.frame
-            separatorAttributeTop.frame = CGRect(x: cellFrameTop.origin.x,
-                                                 y: cellFrame.origin.y,
-                                                 width: cellFrameTop.size.width,
-                                                 height: lineWidth)
-            separatorAttributeTop.zIndex = Int.max - 1
-            decorationAttributes.append(separatorAttributeTop)
+            if layoutAttributes.count == 1 || index == 0 {
+                let separatorAttributeTop = UICollectionViewLayoutAttributes(forDecorationViewOfKind: separatorDecorationViewTop,
+                                                                             with: layoutAttribute.indexPath)
+                let cellFrameTop = layoutAttribute.frame
+                separatorAttributeTop.frame = CGRect(x: cellFrameTop.origin.x,
+                                                     y: cellFrame.origin.y,
+                                                     width: cellFrameTop.size.width,
+                                                     height: lineWidth)
+                separatorAttributeTop.zIndex = Int.max - 1
+                decorationAttributes.append(separatorAttributeTop)
+            }
 
         }
         

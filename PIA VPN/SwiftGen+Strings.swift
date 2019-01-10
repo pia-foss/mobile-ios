@@ -486,6 +486,15 @@ internal enum L10n {
     internal static let selectRegion = L10n.tr("Localizable", "shortcuts.select_region")
   }
 
+  internal enum Tiles {
+    internal enum Quick {
+      internal enum Connect {
+        /// Quick connect
+        internal static let title = L10n.tr("Localizable", "tiles.quick.connect.title")
+      }
+    }
+  }
+
   internal enum VpnPermission {
     /// PIA
     internal static let title = L10n.tr("Localizable", "vpn_permission.title")

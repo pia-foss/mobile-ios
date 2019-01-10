@@ -16,8 +16,11 @@ private let log = SwiftyBeaver.self
 class DashboardViewController: AutolayoutViewController {
     
     private struct Cells {
-        static let tile = "IPTileCell"
-        static let tileCellClass = "IPTileCollectionViewCell"
+        static let ipTile = "IPTileCell"
+        static let ipTileCellClass = "IPTileCollectionViewCell"
+        static let quickConnectTile = "QuickConnectTileCell"
+        static let quickConnectCellClass = "QuickConnectTileCollectionViewCell"
+
     }
     
     @IBOutlet private weak var viewContent: UIView!
@@ -43,9 +46,12 @@ class DashboardViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.register(UINib(nibName: Cells.tileCellClass,
+        collectionView.register(UINib(nibName: Cells.ipTileCellClass,
                                       bundle: nil),
-                                forCellWithReuseIdentifier: Cells.tile)
+                                forCellWithReuseIdentifier: Cells.ipTile)
+        collectionView.register(UINib(nibName: Cells.quickConnectCellClass,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.quickConnectTile)
         collectionView.backgroundColor = .clear
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -177,6 +183,9 @@ class DashboardViewController: AutolayoutViewController {
     @IBAction func vpnButtonClicked(_ sender: Any?) {
         if !toggleConnection.isOn {
             Client.providers.vpnProvider.connect(nil)
+            NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
+                                            object: self,
+                                            userInfo: nil)
         } else {
             Client.providers.vpnProvider.disconnect(nil)
         }
@@ -469,8 +478,14 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout {
 extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.tile, for: indexPath) as! IPTileCollectionViewCell
-        return cell
+        switch indexPath.row {
+        case AvailableTiles.quickConnect.rawValue:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.quickConnectTile, for: indexPath) as! QuickConnectTileCollectionViewCell
+            return cell
+        default:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.ipTile, for: indexPath) as! IPTileCollectionViewCell
+            return cell
+        }
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -478,7 +493,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 21//AvailableTiles.countCases()
+        return AvailableTiles.countCases()
     }
     
 }
