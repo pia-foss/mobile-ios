@@ -122,6 +122,9 @@ extension Client {
         
         #endif
         
+        /// The value of the max of servers appearing in the quick connect tile.
+        public var maxQuickConnectServers: Int
+
         // MARK: Initialization
         
         init() {
@@ -198,6 +201,8 @@ extension Client {
             #if os(iOS)
             inAppPlans = [:]
             #endif
+            
+            maxQuickConnectServers = 6
         }
         
         // MARK: WebServices

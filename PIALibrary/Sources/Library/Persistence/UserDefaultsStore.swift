@@ -22,6 +22,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         
         static let publicIP = "PublicIP"
 
+        static let historicalServers = "HistoricalServers"
+
         static let cachedServers = "CachedServers"
 
         static let serversConfiguration = "ServersConfiguration"
@@ -45,6 +47,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
     
     private let group: String?
     
+    private var historicalServersCopy: [Server]?
+
     private var cachedServersCopy: [Server]?
     
     private var serversConfigurationCopy: ServersBundle.Configuration?
@@ -134,6 +138,25 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
     }
     
     // MARK: Server
+    var historicalServers: [Server] {
+        get {
+            if let copy = historicalServersCopy {
+                return copy
+            }
+            guard let jsonArray = backend.array(forKey: Entries.historicalServers) as? [JSON] else {
+                return []
+            }
+            return Array<GlossServer>.from(jsonArray: jsonArray)?.map { $0.parsed } ?? []
+        }
+        set {
+            var servers = newValue
+            if servers.count > Client.configuration.maxQuickConnectServers {
+                servers.removeFirst()
+            }
+            historicalServersCopy = servers
+            backend.set(servers.toJSONArray() ?? [], forKey: Entries.historicalServers)
+        }
+    }
 
     var cachedServers: [Server] {
         get {
@@ -158,6 +181,18 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
         set {
             backend.set(newValue?.identifier, forKey: Entries.preferredServer)
+            var lastServers = historicalServers
+            if let server = newValue {
+                
+                if lastServers.contains(server),
+                    let indexOfServer = lastServers.firstIndex(of: server) {
+                    lastServers.remove(at: indexOfServer)
+                    lastServers.insert(server, at: 0)
+                }
+                
+                lastServers.append(server)
+                historicalServers = lastServers
+            }
         }
     }
     
