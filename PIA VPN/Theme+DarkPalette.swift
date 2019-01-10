@@ -20,10 +20,10 @@ extension Theme.Palette {
         palette.textfieldButtonBackgroundColor = UIColor.black
         palette.navigationBarBackIcon = Asset.Piax.Global.iconBack.image
         palette.brandBackground = lightPalette.brandBackground
-        palette.lightBackground = .piaGrey7
+        palette.lightBackground = .piaGrey6
         palette.subtitleColor = .piaGrey8
         palette.lineColor = .white
-        palette.solidLightBackground = .piaGrey6
+        palette.solidLightBackground = .piaGrey7
         palette.emphasis = lightPalette.emphasis
         palette.accent1 = lightPalette.accent1
         palette.accent2 = lightPalette.accent2
