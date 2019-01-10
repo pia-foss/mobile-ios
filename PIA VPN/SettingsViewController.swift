@@ -577,10 +577,10 @@ class SettingsViewController: AutolayoutViewController {
         styleNavigationBarWithTitle(L10n.Menu.Item.settings)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
-            Theme.current.applyLightBackground(view)
-            Theme.current.applyLightBackground(viewContainer)
+            Theme.current.applySolidLightBackground(view)
+            Theme.current.applySolidLightBackground(viewContainer)
         }
-        Theme.current.applyLightBackground(tableView)
+        Theme.current.applySolidLightBackground(tableView)
         Theme.current.applyDividerToSeparator(tableView)
         tableView.reloadData()
         
@@ -815,7 +815,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.detailTextLabel?.text = nil
         }
 
-        Theme.current.applySolidLightBackground(cell)
+        Theme.current.applyLightBackground(cell)
         if let textLabel = cell.textLabel {
             Theme.current.applySettingsCellTitle(textLabel,
                                                  appearance: .dark)
@@ -1108,7 +1108,7 @@ extension SettingsViewController: OptionsViewControllerDelegate {
         backgroundView.backgroundColor = Theme.current.palette.lightBackground
         cell.selectedBackgroundView = backgroundView
 
-        Theme.current.applySolidLightBackground(cell)
+        Theme.current.applyLightBackground(cell)
         Theme.current.applyDetailTableCell(cell)
     }
 

@@ -48,7 +48,7 @@ class QuickConnectTile: UIView, Tileable {
     
     @objc private func viewShouldRestyle() {
         tileTitle.style(style: TextStyle.textStyle21)
-        Theme.current.applyLightBackground(self)
+        Theme.current.applySolidLightBackground(self)
     }
     
     @objc private func updateQuickConnectList() {

@@ -85,8 +85,8 @@ class VPNPermissionViewController: AutolayoutViewController {
     
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
-        Theme.current.applyLightBackground(view)
-        Theme.current.applyLightBackground(viewContainer!)
+        Theme.current.applySolidLightBackground(view)
+        Theme.current.applySolidLightBackground(viewContainer!)
         Theme.current.applySubtitle(labelMessage)
         Theme.current.applySubtitle(labelFooter)
         Theme.current.applyTitle(labelTitle, appearance: .dark)

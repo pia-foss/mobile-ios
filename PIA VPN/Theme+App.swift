@@ -110,6 +110,12 @@ extension Theme {
             TextStyle.textStyle6 : TextStyle.textStyle7)
     }
     
+    public func applyClearTextfield(_ textfield: UITextField) {
+        textfield.style(style: palette.appearance == .dark ?
+            TextStyle.textStyle6 : TextStyle.textStyle7)
+        textfield.backgroundColor = .clear
+    }
+
     //MARK: SearchBar
     
     public func applySearchBarStyle(_ searchBar: UISearchBar) {

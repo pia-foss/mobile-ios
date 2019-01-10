@@ -230,12 +230,12 @@ class RegionsViewController: AutolayoutViewController {
         styleNavigationBarWithTitle(L10n.Menu.Item.region)
 
         if let viewContainer = viewContainer {
-            Theme.current.applyLightBackground(view)
-            Theme.current.applyLightBackground(viewContainer)
+            Theme.current.applySolidLightBackground(view)
+            Theme.current.applySolidLightBackground(viewContainer)
         }
         searchController.view.backgroundColor = .clear
         
-        Theme.current.applyLightBackground(tableView)
+        Theme.current.applySolidLightBackground(tableView)
         Theme.current.applyDividerToSeparator(tableView)
         Theme.current.applySearchBarStyle(searchController.searchBar)
         

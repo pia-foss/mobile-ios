@@ -80,7 +80,7 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
         super.viewShouldRestyle()
         
         if let viewContainer = viewContainer {
-            Theme.current.applyLightBackground(viewContainer)
+            Theme.current.applySolidLightBackground(viewContainer)
         }
 
         for label in [labelPrimaryDNS!, labelSecondaryDNS!] {

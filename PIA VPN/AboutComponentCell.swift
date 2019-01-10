@@ -152,8 +152,8 @@ class AboutLicenseCell: UITableViewCell, Restylable {
     // MARK: Restylable
     
     func viewShouldRestyle() {
-        Theme.current.applySolidLightBackground(self)
-        Theme.current.applyLightBackground(textLicense)
+        Theme.current.applyLightBackground(self)
+        Theme.current.applySolidLightBackground(textLicense)
         buttonName.style(style: TextStyle.textStyle9)
         Theme.current.applySmallInfo(labelCopyright, appearance: .dark)
         Theme.current.applyBody1Monospace(textLicense, appearance: .dark)

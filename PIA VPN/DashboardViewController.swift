@@ -344,8 +344,8 @@ class DashboardViewController: AutolayoutViewController {
         super.viewShouldRestyle()
 
         navigationItem.titleView = NavigationLogoView()
-        Theme.current.applyLightBackground(view)
-        Theme.current.applyLightBackground(viewContainer!)
+        Theme.current.applySolidLightBackground(view)
+        Theme.current.applySolidLightBackground(viewContainer!)
 
         Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
         
