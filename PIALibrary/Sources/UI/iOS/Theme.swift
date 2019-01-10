@@ -94,8 +94,8 @@ public class Theme {
             appearance = .light
             brandBackground = .green
             secondaryColor = .piaGrey10
-            lightBackground = .piaGrey1
-            solidLightBackground = .white
+            lightBackground = .white
+            solidLightBackground = .piaGrey1
             subtitleColor = .piaGrey8
             textfieldButtonBackgroundColor = .white
             lineColor = .piaGreenDark20
@@ -695,7 +695,7 @@ public class Theme {
     
     public func applyLightNavigationBar(_ navigationBar: UINavigationBar) {
         navigationBar.tintColor = UIColor.piaGrey4
-        navigationBar.barTintColor = palette.lightBackground
+        navigationBar.barTintColor = palette.solidLightBackground
     }
     
     /**

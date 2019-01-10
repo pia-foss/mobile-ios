@@ -181,7 +181,7 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
         super.viewShouldRestyle()
         navigationItem.titleView = NavigationLogoView()
         Theme.current.applyNavigationBarStyle(to: self)
-        Theme.current.applyLightBackground(view)
+        Theme.current.applySolidLightBackground(view)
         Theme.current.applyInput(textEmail)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applySubtitle(labelSubtitle)
