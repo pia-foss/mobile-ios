@@ -11,6 +11,7 @@ import PIALibrary
 
 class IPTile: UIView, Tileable  {
     
+    private let emptyIPValue = "---"
     var detailViewAction: Func!
     var view: UIView!
     var detailSegueIdentifier: String!
@@ -19,7 +20,7 @@ class IPTile: UIView, Tileable  {
     @IBOutlet private weak var localIpValue: UILabel!
     @IBOutlet private weak var vpnIpTitle: UILabel!
     @IBOutlet private weak var vpnIpValue: UILabel!
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.xibSetup()
@@ -39,19 +40,21 @@ class IPTile: UIView, Tileable  {
         
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(updateCurrentIP), name: .PIADaemonsDidUpdateConnectivity, object: nil)
+        nc.addObserver(self, selector: #selector(updateActivityViews), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
 
         viewShouldRestyle()
         self.detailViewAction = {}
         self.localIpTitle.text = "IP"
         self.vpnIpTitle.text = "VPN IP"
-        self.localIpValue.text = "---"
-        self.vpnIpValue.text = "---"
+        self.localIpValue.text = Client.daemons.publicIP ?? emptyIPValue
+        self.vpnIpValue.text = emptyIPValue
+        
     }
     
     @objc private func viewShouldRestyle() {
-        Theme.current.applySubtitle(localIpTitle)
-        Theme.current.applySubtitle(vpnIpTitle)
+        localIpTitle.style(style: TextStyle.textStyle21)
+        vpnIpTitle.style(style: TextStyle.textStyle21)
         Theme.current.applySubtitle(localIpValue)
         Theme.current.applySettingsCellTitle(vpnIpValue, appearance: .dark)
         Theme.current.applyLightBackground(self)
@@ -61,15 +64,21 @@ class IPTile: UIView, Tileable  {
         self.localIpValue.text = Client.daemons.publicIP
         let vpn = Client.providers.vpnProvider
         if (vpn.vpnStatus == .connected) {
-            self.vpnIpValue.text = Client.daemons.vpnIP
-            self.localIpValue.text = Client.daemons.publicIP
+            self.vpnIpValue.text = Client.daemons.vpnIP ?? self.emptyIPValue
         } else if (!Client.daemons.isInternetReachable && (vpn.vpnStatus == .disconnected)) {
             self.vpnIpValue.text = L10n.Dashboard.Connection.Ip.unreachable
-            self.localIpValue.text = "---"
-        } else {
-            self.vpnIpValue.text = "---"
-            self.localIpValue.text = "---"
         }
     }
+    
+    @objc private func updateActivityViews() {
+        let vpn = Client.providers.vpnProvider
+        switch vpn.vpnStatus {
+        case .connecting, .disconnecting:
+            self.vpnIpValue.text = self.emptyIPValue
+        default:
+            break
+        }
+    }
+
 
 }

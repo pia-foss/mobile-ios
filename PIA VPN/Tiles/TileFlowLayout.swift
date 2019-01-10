@@ -9,13 +9,15 @@
 import UIKit
 import PIALibrary
 
-private let separatorDecorationView = "separator"
+private let separatorDecorationViewTop = "separator-top"
+private let separatorDecorationViewBottom = "separator-bottom"
 
 final class TileFlowLayout: UICollectionViewFlowLayout {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        register(SeparatorView.self, forDecorationViewOfKind: separatorDecorationView)
+        register(SeparatorView.self, forDecorationViewOfKind: separatorDecorationViewTop)
+        register(SeparatorView.self, forDecorationViewOfKind: separatorDecorationViewBottom)
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
@@ -24,15 +26,28 @@ final class TileFlowLayout: UICollectionViewFlowLayout {
         
         var decorationAttributes: [UICollectionViewLayoutAttributes] = []
         for layoutAttribute in layoutAttributes {
-            let separatorAttribute = UICollectionViewLayoutAttributes(forDecorationViewOfKind: separatorDecorationView,
+            //bottom
+            let separatorAttribute = UICollectionViewLayoutAttributes(forDecorationViewOfKind: separatorDecorationViewBottom,
                                                                       with: layoutAttribute.indexPath)
             let cellFrame = layoutAttribute.frame
             separatorAttribute.frame = CGRect(x: cellFrame.origin.x,
-                                              y: cellFrame.origin.y - lineWidth,
+                                              y: cellFrame.origin.y + cellFrame.size.height,
                                               width: cellFrame.size.width,
                                               height: lineWidth)
             separatorAttribute.zIndex = Int.max
             decorationAttributes.append(separatorAttribute)
+            
+            //top
+            let separatorAttributeTop = UICollectionViewLayoutAttributes(forDecorationViewOfKind: separatorDecorationViewTop,
+                                                                         with: layoutAttribute.indexPath)
+            let cellFrameTop = layoutAttribute.frame
+            separatorAttributeTop.frame = CGRect(x: cellFrameTop.origin.x,
+                                                 y: cellFrame.origin.y,
+                                                 width: cellFrameTop.size.width,
+                                                 height: lineWidth)
+            separatorAttributeTop.zIndex = Int.max - 1
+            decorationAttributes.append(separatorAttributeTop)
+
         }
         
         return layoutAttributes + decorationAttributes

@@ -32,32 +32,10 @@ class DashboardViewController: AutolayoutViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView!
     
-    // iPad only
-
-    @IBOutlet private weak var viewPublicIP: UIView!
-    
-    @IBOutlet private weak var labelPublicIPCaption: UILabel!
-    
-    @IBOutlet private weak var labelPublicIP: UILabel!
-    
-    @IBOutlet private weak var activityPublicIP: UIActivityIndicatorView!
-    
-    @IBOutlet private weak var viewCurrentRegion: UIView!
-    
-    @IBOutlet private weak var labelRegionCaption: UILabel!
-    
-    @IBOutlet private weak var labelRegion: UILabel!
-    
-    @IBOutlet private weak var imvRegion: UIImageView!
-    
-    @IBOutlet private weak var buttonChangeRegion: UIButton!
-    
     private var currentPageIndex = 0
     
     private var currentStatus: VPNStatus = .disconnected
 
-    private var currentIP: String?
-    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -81,14 +59,8 @@ class DashboardViewController: AutolayoutViewController {
         viewContent.isHidden = true
         viewRows.isHidden = true
         
-        labelRegionCaption.text = L10n.Dashboard.Connection.Region.caption
-        buttonChangeRegion.setTitle(L10n.Dashboard.Connection.Region.change, for: .normal)
-        labelPublicIPCaption.text = L10n.Dashboard.Connection.Ip.caption
-
         currentPageIndex = 0
 
-        buttonChangeRegion.accessibilityIdentifier = "uitests.main.pick_region";
-        
         SideMenuManager.default.menuLeftNavigationController = StoryboardScene.Main.sideMenuNavigationController.instantiate()
         SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
         SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
@@ -98,7 +70,6 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(vpnDidInstall(notification:)), name: .PIAVPNDidInstall, object: nil)
         nc.addObserver(self, selector: #selector(applicationDidBecomeActive(notification:)), name: .UIApplicationDidBecomeActive, object: nil)
         nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
-        nc.addObserver(self, selector: #selector(updateCurrentIP), name: .PIADaemonsDidUpdateConnectivity, object: nil)
         nc.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateCurrentStatus), name: .PIAThemeDidChange, object: nil)
 
@@ -140,7 +111,6 @@ class DashboardViewController: AutolayoutViewController {
 //        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:buttonMenu];
 
         updateCurrentStatus()
-        updateCurrentIP()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -315,6 +285,7 @@ class DashboardViewController: AutolayoutViewController {
             resetNavigationBar()
 
         case .connecting:
+            Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
             toggleConnection.isOn = false
             toggleConnection.isIndeterminate = true
             toggleConnection.startButtonAnimation()
@@ -348,50 +319,15 @@ class DashboardViewController: AutolayoutViewController {
 //            labelStatus.text = L10n.Dashboard.Vpn.changingRegion
         }
 
-        let server = Client.preferences.displayedServer
-        labelRegion.text = server.name(forStatus: currentStatus)
-        imvRegion.setImage(fromServer: server.flagServer(forStatus: currentStatus))
-
         // XXX hack to suppress "ellipsis"
         //viewConnectionArea.accessibilityLabel = labelStatus.text
         viewConnectionArea.accessibilityLabel = viewConnectionArea.accessibilityLabel?.replacingOccurrences(of: "...", with: "")
         UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, viewConnectionArea)
 
-        // iPad accessibility wrappers
-        if Macros.isDevicePad {
-            viewCurrentRegion.accessibilityLabel = "\(labelRegionCaption.text ?? ""), \(labelRegion.text ?? "")"
-        }
-
         // non-iPad bottom table
         collectionView.reloadData()
     }
 
-    @objc private func updateCurrentIP() {
-        let vpn = Client.providers.vpnProvider
-        if (vpn.vpnStatus == .connected) {
-            currentIP = Client.daemons.vpnIP
-        } else if (!Client.daemons.isInternetReachable && (vpn.vpnStatus == .disconnected)) {
-            currentIP = L10n.Dashboard.Connection.Ip.unreachable
-        } else {
-            currentIP = Client.daemons.publicIP
-        }
-        
-        // iPad custom bottom view
-        self.labelPublicIP.text = self.currentIP;
-        if let _ = currentIP {
-            activityPublicIP.stopAnimating()
-        } else {
-            activityPublicIP.startAnimating()
-        }
-
-        // iPad accessibility wrappers
-        if Macros.isDevicePad {
-            viewPublicIP.accessibilityLabel = "\(labelPublicIPCaption.text ?? ""), \(labelPublicIP.text ?? "")"
-        }
-
-        // non-iPad bottom table
-        collectionView.reloadData()
-    }
 
     // MARK: Restylable
 
@@ -403,13 +339,7 @@ class DashboardViewController: AutolayoutViewController {
         Theme.current.applyLightBackground(viewContainer!)
 
         Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
-        Theme.current.applyCaption(labelPublicIPCaption, appearance: .dark)
-        Theme.current.applyTitle(labelPublicIP, appearance: .dark)
-        Theme.current.applyCaption(labelRegionCaption, appearance: .dark)
-        Theme.current.applyTitle(labelRegion, appearance: .dark)
-        Theme.current.applyCaption(buttonChangeRegion, appearance: .emphasis)
-        Theme.current.applyTextButton(buttonChangeRegion)
-
+        
         // XXX: emulate native UITableView separator
         //Theme.current.applyDividerToSeparator(tableRows)
         collectionView.collectionViewLayout.invalidateLayout()
@@ -548,7 +478,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return AvailableTiles.countCases()
+        return 21//AvailableTiles.countCases()
     }
     
 }
