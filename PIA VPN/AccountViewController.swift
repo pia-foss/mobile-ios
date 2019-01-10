@@ -29,7 +29,7 @@ class AccountViewController: AutolayoutViewController {
     
     @IBOutlet private weak var labelUsername: UILabel!
     
-    @IBOutlet private weak var textUsername: BorderedTextField!
+    @IBOutlet private weak var textUsername: UITextField!
     
     @IBOutlet private weak var labelFooterOther: UILabel!
 
@@ -37,6 +37,8 @@ class AccountViewController: AutolayoutViewController {
     
     @IBOutlet private weak var itemUpdate: UIBarButtonItem!
     
+    @IBOutlet private weak var viewAccountInfo: UIView!
+
     @IBOutlet private weak var viewSeparator: UIView!
     
     @IBOutlet private weak var viewUncredited: UIView!
@@ -293,16 +295,17 @@ class AccountViewController: AutolayoutViewController {
         styleNavigationBarWithTitle(L10n.Menu.Item.account)
 
         if let viewContainer = viewContainer {
-            Theme.current.applyLightBackground(view)
-            Theme.current.applyLightBackground(viewContainer)
+            Theme.current.applySolidLightBackground(view)
+            Theme.current.applySolidLightBackground(viewContainer)
         }
-
+        
+        Theme.current.applyLightBackground(viewAccountInfo)
         Theme.current.applySubtitle(labelEmail)
         Theme.current.applySubtitle(labelUsername)
         
         Theme.current.applyInput(textEmail)
-        Theme.current.applyInput(textUsername)
-        Theme.current.applyDivider(viewSeparator)
+        Theme.current.applyClearTextfield(textUsername)
+
         for label in [labelFooterOther!, labelExpiryInformation!] {
             Theme.current.applySubtitle(label)
         }
