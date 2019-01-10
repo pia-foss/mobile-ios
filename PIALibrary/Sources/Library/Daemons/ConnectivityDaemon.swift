@@ -107,7 +107,6 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
         }
 
         log.debug("Checking network connectivity...")
-        accessedDatabase.transient.publicIP = nil
         accessedDatabase.transient.vpnIP = nil
         Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
 
@@ -146,7 +145,7 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
                 self.accessedDatabase.transient.vpnIP = ipAddress
                 log.debug("VPN IP -> \(ipAddress)")
             } else {
-                self.accessedDatabase.transient.publicIP = ipAddress
+                self.accessedDatabase.plain.publicIP = ipAddress
                 log.debug("Public IP -> \(ipAddress)")
             }
             

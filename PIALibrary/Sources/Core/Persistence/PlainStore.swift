@@ -15,6 +15,10 @@ protocol PlainStore: class {
     var accountInfo: AccountInfo? { get set }
     
     var lastSignupEmail: String? { get set }
+    
+    // MARK: IP
+
+    var publicIP: String? { get set }
 
     // MARK: Server
     

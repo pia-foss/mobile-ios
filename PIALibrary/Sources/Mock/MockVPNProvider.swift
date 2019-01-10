@@ -50,7 +50,7 @@ public class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess {
     public func prepare() {
         accessedDatabase.transient.isNetworkReachable = true
         accessedDatabase.transient.isInternetReachable = true
-        accessedDatabase.transient.publicIP = mockPublicIP
+        accessedDatabase.plain.publicIP = mockPublicIP
         accessedDatabase.transient.vpnIP = mockVpnIP
 
         Macros.postNotification(.PIADaemonsDidUpdateVPNStatus)

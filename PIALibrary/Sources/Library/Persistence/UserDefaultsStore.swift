@@ -19,6 +19,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         static let accountInfo = "LoggedAccountInfo" // legacy
 
         static let lastSignupEmail = "LastSignupEmail"
+        
+        static let publicIP = "PublicIP"
 
         static let cachedServers = "CachedServers"
 
@@ -114,6 +116,19 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
                 backend.set(email, forKey: Entries.lastSignupEmail)
             } else {
                 backend.removeObject(forKey: Entries.lastSignupEmail)
+            }
+        }
+    }
+    
+    var publicIP: String? {
+        get {
+            return backend.string(forKey: Entries.publicIP)
+        }
+        set {
+            if let publicIP = newValue {
+                backend.set(publicIP, forKey: Entries.publicIP)
+            } else {
+                backend.removeObject(forKey: Entries.publicIP)
             }
         }
     }

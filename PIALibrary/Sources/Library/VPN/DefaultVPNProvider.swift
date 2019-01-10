@@ -47,7 +47,7 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
     }
     
     var publicIP: String? {
-        return accessedDatabase.transient.publicIP
+        return accessedDatabase.plain.publicIP
     }
     
     var vpnIP: String? {
