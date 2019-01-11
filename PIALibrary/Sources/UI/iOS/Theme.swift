@@ -729,7 +729,7 @@ public class Theme {
                     navigationBar.setBackgroundImage(gradientLayer.createGradientImage(), for: UIBarMetrics.default)
                 }
             } else {
-                navigationBar.barTintColor = self.palette.lightBackground
+                navigationBar.barTintColor = self.palette.solidLightBackground
                 navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
             }
             navigationBar.layoutIfNeeded()
@@ -740,7 +740,7 @@ public class Theme {
     
     public func applyLightBrandLogoNavigationBar(_ navigationBar: UINavigationBar) {
         navigationBar.tintColor = palette.textColor(forRelevance: 1, appearance: .dark)
-        navigationBar.barTintColor = palette.lightBackground
+        navigationBar.barTintColor = palette.solidLightBackground
     }
     
     //MARK: Cell
