@@ -517,10 +517,6 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             detailedCell.hasDetailView(),
             let segueIdentifier = detailedCell.segueIdentifier() {
             performSegue(withIdentifier: segueIdentifier, sender: nil)
-        } else {
-            if let cell = cell as? EditableTileCell {
-                cell.setupCellForStatus(.edit)
-            }
         }
     }
 }
