@@ -35,6 +35,9 @@ protocol PlainStore: class {
     
     func clearPings()
     
+    // MARK: Tiles
+    var visibleTiles: [AvailableTiles] {get set}
+    
     // MARK: VPN
     
     var vpnType: String? { get set }

@@ -23,7 +23,7 @@ private protocol PreferencesStore: class {
     var vpnDisconnectsOnSleep: Bool { get set }
     
     var vpnCustomConfigurations: [String: VPNCustomConfiguration] { get set }
-
+    
     func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration?
     
     func setVPNCustomConfiguration(_ customConfiguration: VPNCustomConfiguration, for vpnType: String)
@@ -220,7 +220,7 @@ extension Client.Preferences {
         
         /// :nodoc:
         public var mace: Bool
-        
+
         /// :nodoc:
         public var vpnType: String
         

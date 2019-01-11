@@ -274,6 +274,19 @@
 		DDD824E72189C0E800151709 /* BrandableNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E62189C0E800151709 /* BrandableNavigationBar.swift */; };
 		DDD824E82189C0EE00151709 /* BrandableNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E62189C0E800151709 /* BrandableNavigationBar.swift */; };
 		DDD824EA2189CD5700151709 /* NavigationLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E92189CD5700151709 /* NavigationLogoView.swift */; };
+		DDFCFAA821E924A70081F235 /* TileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAA721E924A70081F235 /* TileProvider.swift */; };
+		DDFCFAA921E924AD0081F235 /* TileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAA721E924A70081F235 /* TileProvider.swift */; };
+		DDFCFAAB21E925160081F235 /* DefaultTileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAAA21E925160081F235 /* DefaultTileProvider.swift */; };
+		DDFCFAAF21E925B60081F235 /* TileableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAAC21E925B60081F235 /* TileableCell.swift */; };
+		DDFCFAB021E925B60081F235 /* Tileable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAAD21E925B60081F235 /* Tileable.swift */; };
+		DDFCFAB121E925B60081F235 /* AvailableTiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAAE21E925B60081F235 /* AvailableTiles.swift */; };
+		DDFCFAB221E925BB0081F235 /* AvailableTiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAAE21E925B60081F235 /* AvailableTiles.swift */; };
+		DDFCFAB321E925BB0081F235 /* Tileable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAAD21E925B60081F235 /* Tileable.swift */; };
+		DDFCFAB421E925BB0081F235 /* TileableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAAC21E925B60081F235 /* TileableCell.swift */; };
+		DDFCFAB621E925F70081F235 /* EnumsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAB521E925F70081F235 /* EnumsBuilder.swift */; };
+		DDFCFAB721E925F70081F235 /* EnumsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAB521E925F70081F235 /* EnumsBuilder.swift */; };
+		DDFCFABA21E929660081F235 /* MockTileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAB921E929660081F235 /* MockTileProvider.swift */; };
+		DDFCFABB21E929660081F235 /* MockTileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAB921E929660081F235 /* MockTileProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -538,6 +551,13 @@
 		DDD824E4218996CD00151709 /* Pages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pages.swift; sourceTree = "<group>"; };
 		DDD824E62189C0E800151709 /* BrandableNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandableNavigationBar.swift; sourceTree = "<group>"; };
 		DDD824E92189CD5700151709 /* NavigationLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLogoView.swift; sourceTree = "<group>"; };
+		DDFCFAA721E924A70081F235 /* TileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileProvider.swift; sourceTree = "<group>"; };
+		DDFCFAAA21E925160081F235 /* DefaultTileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTileProvider.swift; sourceTree = "<group>"; };
+		DDFCFAAC21E925B60081F235 /* TileableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileableCell.swift; sourceTree = "<group>"; };
+		DDFCFAAD21E925B60081F235 /* Tileable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tileable.swift; sourceTree = "<group>"; };
+		DDFCFAAE21E925B60081F235 /* AvailableTiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailableTiles.swift; sourceTree = "<group>"; };
+		DDFCFAB521E925F70081F235 /* EnumsBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumsBuilder.swift; sourceTree = "<group>"; };
+		DDFCFAB921E929660081F235 /* MockTileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTileProvider.swift; sourceTree = "<group>"; };
 		E33B2BBA7FF3D6AFDC32294E /* Pods_PIALibrary_PIALibrary_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibrary_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -664,6 +684,7 @@
 			children = (
 				0E53A8521FE5D73F000C2A18 /* Client+Mock.swift */,
 				0E492C5D1FE5F7C0007F23DF /* MockAccountProvider.swift */,
+				DDFCFAB921E929660081F235 /* MockTileProvider.swift */,
 				0EB8C0431F9CCB76005857E4 /* MockInAppProvider.swift */,
 				0E492C631FE5F949007F23DF /* MockServerProvider.swift */,
 				0E2ADD3F1FE156EA00BB170C /* MockVPNProvider.swift */,
@@ -912,6 +933,8 @@
 		0EE106901F82900B009514E9 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				DDFCFAB821E926750081F235 /* Util */,
+				DDFCFAA521E900650081F235 /* Tiles */,
 				0EA7065D1F80F448001E4F88 /* Account */,
 				0EAA38871F9CC4C4000149CF /* InApp */,
 				0EE106911F829097009514E9 /* Persistence */,
@@ -986,6 +1009,7 @@
 		0EFB51281F82D4450033B81F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				DDFCFAA621E9008E0081F235 /* Tiles */,
 				0EE14CF31FF0F91C008D9AC2 /* Account */,
 				0E2ADCD71FE072ED00BB170C /* Daemons */,
 				0E3D13DD1F9E28DB00434A48 /* InApp */,
@@ -1088,6 +1112,33 @@
 				DD6DC5BB21B6A8FC00F9D538 /* pia-spinner.json */,
 			);
 			path = Lottie;
+			sourceTree = "<group>";
+		};
+		DDFCFAA521E900650081F235 /* Tiles */ = {
+			isa = PBXGroup;
+			children = (
+				DDFCFAA721E924A70081F235 /* TileProvider.swift */,
+				DDFCFAAE21E925B60081F235 /* AvailableTiles.swift */,
+				DDFCFAAD21E925B60081F235 /* Tileable.swift */,
+				DDFCFAAC21E925B60081F235 /* TileableCell.swift */,
+			);
+			path = Tiles;
+			sourceTree = "<group>";
+		};
+		DDFCFAA621E9008E0081F235 /* Tiles */ = {
+			isa = PBXGroup;
+			children = (
+				DDFCFAAA21E925160081F235 /* DefaultTileProvider.swift */,
+			);
+			path = Tiles;
+			sourceTree = "<group>";
+		};
+		DDFCFAB821E926750081F235 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				DDFCFAB521E925F70081F235 /* EnumsBuilder.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1514,6 +1565,7 @@
 				0E7BC6EE1F96B1120035C8B2 /* AccountProvider.swift in Sources */,
 				841BE610212AFE69002EF2D1 /* GiftCardUtil.swift in Sources */,
 				0E7BC6F61F96B1120035C8B2 /* AccountInfo.swift in Sources */,
+				DDFCFAB721E925F70081F235 /* EnumsBuilder.swift in Sources */,
 				84125E09213D7E04001BCC19 /* PIAColors.swift in Sources */,
 				0E3D13D71F9E272B00434A48 /* GlossPayment.swift in Sources */,
 				0E2ADD491FE1595300BB170C /* IPSecProfile.swift in Sources */,
@@ -1529,13 +1581,16 @@
 				0E392DA41FE3247E0002160D /* Endpoint.swift in Sources */,
 				0EE7710A1F9D21020029A77B /* Payment.swift in Sources */,
 				0E7BC6ED1F96B1040035C8B2 /* UserDefaultsStore.swift in Sources */,
+				DDFCFAB221E925BB0081F235 /* AvailableTiles.swift in Sources */,
 				0E2ADD341FE1472F00BB170C /* VPNStatus.swift in Sources */,
 				0EB3D9891FF06F37005B11F4 /* NetworkExtensionProfile.swift in Sources */,
+				DDFCFABB21E929660081F235 /* MockTileProvider.swift in Sources */,
 				0E392D901FE2FBBE0002160D /* GlossConnectivityStatus.swift in Sources */,
 				0EE771041F9D0DCA0029A77B /* Client+Configuration.swift in Sources */,
 				0E7BC6E81F96B1000035C8B2 /* Client+Preferences.swift in Sources */,
 				DDD824E82189C0EE00151709 /* BrandableNavigationBar.swift in Sources */,
 				0E53A8571FE5DA16000C2A18 /* MockInAppProvider.swift in Sources */,
+				DDFCFAA921E924AD0081F235 /* TileProvider.swift in Sources */,
 				0E392D9E1FE31D630002160D /* MockVPNProvider.swift in Sources */,
 				0E3A35331FD9E97E000B0F99 /* Macros.swift in Sources */,
 				0E9D628A1FDEA290009A90CF /* Data+Crypto.swift in Sources */,
@@ -1543,8 +1598,10 @@
 				0E7BC6EF1F96B1120035C8B2 /* LoginRequest.swift in Sources */,
 				0EA8072820A1A0090033EC1A /* Redeem.swift in Sources */,
 				0E492C651FE5F949007F23DF /* MockServerProvider.swift in Sources */,
+				DDFCFAB421E925BB0081F235 /* TileableCell.swift in Sources */,
 				0E53A84E1FE5BB25000C2A18 /* VPNDaemon.swift in Sources */,
 				0EFEB4C420077AC900F81029 /* PIATunnelProvider+Profile.swift in Sources */,
+				DDFCFAB321E925BB0081F235 /* Tileable.swift in Sources */,
 				0E2ADCEA1FE0843000BB170C /* Macros+Pinger.swift in Sources */,
 				0E7BC6F71F96B1120035C8B2 /* WebServices.swift in Sources */,
 				0E7BC6E71F96B1000035C8B2 /* ClientError.swift in Sources */,
@@ -1596,11 +1653,14 @@
 				0EB8C0701F9CD38B005857E4 /* WelcomePageViewController.swift in Sources */,
 				DD0AC790218715B8009B576B /* PIAButton.swift in Sources */,
 				0EB8C0651F9CD38B005857E4 /* BorderedTextField.swift in Sources */,
+				DDFCFABA21E929660081F235 /* MockTileProvider.swift in Sources */,
 				0EA4C4391FDDE24B0041C3D8 /* ServersBundle.swift in Sources */,
 				0E53A84A1FE5BA52000C2A18 /* Daemon.swift in Sources */,
 				0E492C641FE5F949007F23DF /* MockServerProvider.swift in Sources */,
 				0E53A8471FE5BA0B000C2A18 /* ServersDaemon.swift in Sources */,
 				0EE78AF81F818815002E4CDD /* AccountInfo.swift in Sources */,
+				DDFCFAAF21E925B60081F235 /* TileableCell.swift in Sources */,
+				DDFCFAB621E925F70081F235 /* EnumsBuilder.swift in Sources */,
 				0EFB512A1F82D45F0033B81F /* DefaultAccountProvider.swift in Sources */,
 				0E3D13D91F9E273300434A48 /* GlossSignup.swift in Sources */,
 				84577FBF213D8EE6006DEC3D /* ViewStyles.swift in Sources */,
@@ -1628,6 +1688,7 @@
 				0E392D8C1FE2F8780002160D /* ConnectivityStatus.swift in Sources */,
 				DD31498F21834B3F008E26E8 /* GetStartedViewController.swift in Sources */,
 				0E5BCBFF20172C8300E3E4B4 /* Theme+LightPalette.swift in Sources */,
+				DDFCFAAB21E925160081F235 /* DefaultTileProvider.swift in Sources */,
 				0EC849C91F82329F002480CA /* WebServices.swift in Sources */,
 				0E9D62711FDE83BD009A90CF /* GlossServer.swift in Sources */,
 				0EE14D1B1FF16B39008D9AC2 /* InvalidatingFlowLayout.swift in Sources */,
@@ -1647,6 +1708,7 @@
 				0EB9667E1FDF36490086ABC2 /* GlossParser.swift in Sources */,
 				0EAA38991F9CC7E4000149CF /* AppStoreTransaction.swift in Sources */,
 				0EA8072720A1A0090033EC1A /* Redeem.swift in Sources */,
+				DDFCFAB121E925B60081F235 /* AvailableTiles.swift in Sources */,
 				84D5DA702126CE2900F753F8 /* QRCameraScannerViewController.swift in Sources */,
 				0E392D951FE316860002160D /* DebugLog.swift in Sources */,
 				84125E0B213D7E0E001BCC19 /* PIAFonts.swift in Sources */,
@@ -1710,6 +1772,7 @@
 				0EA7065F1F80F448001E4F88 /* AccountProvider.swift in Sources */,
 				0E392D7A1FE2E47D0002160D /* TransientStore.swift in Sources */,
 				0EAA388C1F9CC4C4000149CF /* InAppProvider.swift in Sources */,
+				DDFCFAA821E924A70081F235 /* TileProvider.swift in Sources */,
 				0EB8C06D1F9CD38B005857E4 /* SignupInProgressViewController.swift in Sources */,
 				0ED1585A1FDC083F008F6522 /* SwiftGen+Strings.swift in Sources */,
 				0E2ADCE91FE0843000BB170C /* Macros+Pinger.swift in Sources */,
@@ -1720,6 +1783,7 @@
 				0EE78AF61F81880E002E4CDD /* Credentials.swift in Sources */,
 				DD8BF3CB219C6BAA0041357C /* ConfirmVPNPlanViewController.swift in Sources */,
 				0E53A83E1FE5A4C8000C2A18 /* Client+Daemons.swift in Sources */,
+				DDFCFAB021E925B60081F235 /* Tileable.swift in Sources */,
 				0E4D4EA01FA4CA7A007DA6DA /* Validator.swift in Sources */,
 				0E0E5B111F8297D200022CD0 /* UserDefaultsStore.swift in Sources */,
 				0E3D13D61F9E272B00434A48 /* GlossPayment.swift in Sources */,

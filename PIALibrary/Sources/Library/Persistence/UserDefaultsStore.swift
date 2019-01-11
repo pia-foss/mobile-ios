@@ -41,6 +41,9 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         static let persistentConnection = "PersistentConnection" // legacy
 
         static let mace = "MACE" // legacy
+        
+        static let visibleTiles = "VisibleTiles" // legacy
+
     }
     
     private let backend: UserDefaults
@@ -51,6 +54,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     private var cachedServersCopy: [Server]?
     
+    private var visibleTilesCopy: [AvailableTiles]?
+
     private var serversConfigurationCopy: ServersBundle.Configuration?
     
     private var pingByServerIdentifier: [String: Int] = [:]
@@ -134,6 +139,31 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
             } else {
                 backend.removeObject(forKey: Entries.publicIP)
             }
+        }
+    }
+    
+    var visibleTiles: [AvailableTiles] {
+        get {
+            if let copy = visibleTilesCopy {
+                return copy
+            }
+            guard let intArray = backend.array(forKey: Entries.visibleTiles) as? [Int] else {
+                return AvailableTiles.allTiles()
+            }
+            var tiles: [AvailableTiles] = []
+            for value in intArray {
+                if let tile = AvailableTiles(rawValue: value) {
+                    tiles.append(tile)
+                }
+            }
+            return tiles
+        }
+        set {
+            var intArray: [Int] = []
+            for value in newValue {
+                intArray.append(value.rawValue)
+            }
+            backend.set(intArray, forKey: Entries.visibleTiles)
         }
     }
     
