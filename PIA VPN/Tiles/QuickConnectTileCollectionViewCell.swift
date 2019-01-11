@@ -18,14 +18,15 @@ class QuickConnectTileCollectionViewCell: UICollectionViewCell, TileableCell {
     @IBOutlet weak var tileRightConstraint: NSLayoutConstraint!
 
     func setupCellForStatus(_ status: TileStatus) {
+        tile.status = status
         UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
             switch status {
             case .normal:
                 self.tileLeftConstraint.constant = 0
                 self.tileRightConstraint.constant = 0
             case .edit:
-                self.tileLeftConstraint.constant = 55
-                self.tileRightConstraint.constant = 55
+                self.tileLeftConstraint.constant = 30
+                self.tileRightConstraint.constant = 30
             }
             self.layoutIfNeeded()
         })

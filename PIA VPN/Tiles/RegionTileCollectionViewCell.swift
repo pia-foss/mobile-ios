@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PIALibrary
 
 class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
     
@@ -26,15 +27,26 @@ class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
     }
     
     func setupCellForStatus(_ status: TileStatus) {
+        tile.status = status
         UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
             switch status {
             case .normal:
                 self.tileLeftConstraint.constant = 0
             case .edit:
-                self.tileLeftConstraint.constant = 55
+                self.tileLeftConstraint.constant = 30
             }
             self.layoutIfNeeded()
         })
     }
     
+    
+    func highlightCell() {
+        Theme.current.applyLightBackground(tile)
+        Theme.current.applyLightBackground(self)
+    }
+    
+    func unhighlightCell() {
+        Theme.current.applySolidLightBackground(tile)
+        Theme.current.applySolidLightBackground(self)
+    }
 }

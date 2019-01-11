@@ -188,6 +188,7 @@ class DashboardViewController: AutolayoutViewController {
             self.viewContentLandscapeHeightConstraint.constant = self.tileModeStatus == .normal ? self.viewContentHeight : 0
             self.view.layoutIfNeeded()
         })
+        collectionView.reloadData()
     }
     
     private func showWalkthrough() {
@@ -379,8 +380,6 @@ class DashboardViewController: AutolayoutViewController {
 //            labelStatus.text = L10n.Dashboard.Vpn.changingRegion
         }
 
-        // non-iPad bottom table
-        collectionView.reloadData()
     }
 
 
@@ -392,11 +391,11 @@ class DashboardViewController: AutolayoutViewController {
         navigationItem.titleView = NavigationLogoView()
         Theme.current.applySolidLightBackground(view)
         Theme.current.applySolidLightBackground(viewContainer!)
+        Theme.current.applySolidLightBackground(viewContent)
+        Theme.current.applySolidLightBackground(viewRows)
 
         Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
         
-        // XXX: emulate native UITableView separator
-        //Theme.current.applyDividerToSeparator(tableRows)
         collectionView.collectionViewLayout.invalidateLayout()
         collectionView.reloadData()
     }
@@ -473,36 +472,6 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        /*
-         let paddingSpace = (sectionInsets.left) * (CGFloat(itemsPerRow) + 1)
-         let availableWidth = view.frame.width - paddingSpace - (UIDevice.current.orientation == UIDeviceOrientation.portrait ? 0 : safeAreaMargin)
-         var widthPerItem = availableWidth / CGFloat(itemsPerRow)
-         if let itemSize = self.itemSize {
-         widthPerItem = itemSize.width
-         }
-         
-         let actualSize = CGSize(width: widthPerItem, height: widthPerItem)
-         if let sizingCell = UINib(nibName: cellClass,
-         bundle: nil).instantiate(withOwner: nil,
-         options: nil).first as? ValueChartLegendCollectionViewCell {
-         
-         sizingCell.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-         sizingCell.frame.size = actualSize
-         switch indexPath.row {
-         case 0:
-         sizingCell.displayContentWith(dataset: ValueChartLegendContributionDataset())
-         case 1:
-         sizingCell.displayContentWith(dataset: ValueChartLegendValueDataset())
-         default:
-         sizingCell.displayContentWith(dataset: ValueChartLegendSimpleReturnDataset())
-         }
-         
-         return sizingCell.contentView.systemLayoutSizeFitting(actualSize,
-         withHorizontalFittingPriority: UILayoutPriority.required,
-         verticalFittingPriority: UILayoutPriority.defaultLow)
-         
-         }
-         */
         return CGSize(width: collectionView.frame.width, height: 89)
     }
     
@@ -548,6 +517,24 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             detailedCell.hasDetailView(),
             let segueIdentifier = detailedCell.segueIdentifier() {
             performSegue(withIdentifier: segueIdentifier, sender: nil)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? DetailedTileCell,
+            cell.hasDetailView() {
+            UIView.animate(withDuration: 0.1, animations: {
+                cell.highlightCell()
+            })
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? DetailedTileCell,
+            cell.hasDetailView() {
+            UIView.animate(withDuration: 0.1, animations: {
+                cell.unhighlightCell()
+            })
         }
     }
 }

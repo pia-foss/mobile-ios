@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALibrary
 
 public protocol EditableTileCell {
     
@@ -18,7 +19,9 @@ public protocol DetailedTileCell: EditableTileCell {
     
     func hasDetailView() -> Bool
     func segueIdentifier() -> String?
-    
+    func highlightCell()
+    func unhighlightCell()
+
 }
 
 public protocol TileableCell: DetailedTileCell {
@@ -35,6 +38,13 @@ extension TileableCell where Entity: Tileable {
     
     func segueIdentifier() -> String? {
         return nil
+    }
+
+    
+    func highlightCell() {
+    }
+    
+    func unhighlightCell() {
     }
     
 }

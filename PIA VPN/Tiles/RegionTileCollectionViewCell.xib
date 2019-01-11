@@ -34,14 +34,14 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jZJ-xb-NWP" customClass="RegionTile" customModule="PIA_VPN" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="429" height="117"/>
+                        <rect key="frame" x="0.0" y="0.0" width="454" height="117"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Jn8-5q-PKh"/>
                     </view>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="WyC-xZ-KKf" firstAttribute="leading" secondItem="jZJ-xb-NWP" secondAttribute="trailing" constant="25" id="3uU-Ru-UpS"/>
+                <constraint firstItem="WyC-xZ-KKf" firstAttribute="leading" secondItem="jZJ-xb-NWP" secondAttribute="trailing" id="3uU-Ru-UpS"/>
                 <constraint firstItem="Npc-wO-bht" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="18" id="5aK-OK-8ev"/>
                 <constraint firstAttribute="trailing" secondItem="WyC-xZ-KKf" secondAttribute="trailing" constant="18" id="MxK-Nk-OL3"/>
                 <constraint firstItem="jZJ-xb-NWP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="gfm-k5-z57"/>

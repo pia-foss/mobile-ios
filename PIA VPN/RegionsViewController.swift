@@ -270,7 +270,7 @@ extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
 
         let isSelected = (server.identifier == selectedServer.identifier)
         cell.fill(withServer: server, isSelected: isSelected)
-        
+
         return cell
     }
 }
