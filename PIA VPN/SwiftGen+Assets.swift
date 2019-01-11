@@ -104,6 +104,10 @@ enum Asset {
       static let vpnButton = ImageAsset(name: "vpn-button")
     }
     enum Global {
+      static let dragDropIndicatorDark = ImageAsset(name: "drag-drop-indicator-dark")
+      static let dragDropIndicatorLight = ImageAsset(name: "drag-drop-indicator-light")
+      static let eyeActive = ImageAsset(name: "eye-active")
+      static let eyeInactive = ImageAsset(name: "eye-inactive")
       static let favoriteGreen = ImageAsset(name: "favorite-green")
       static let favoriteSelected = ImageAsset(name: "favorite-selected")
       static let favoriteUnselectedDark = ImageAsset(name: "favorite-unselected-dark")
@@ -497,6 +501,10 @@ enum Asset {
     Piax.DarkMap.darkMapUSWashingtonDC,
     Piax.DarkMap.darkMapUSWest,
     Piax.Dashboard.vpnButton,
+    Piax.Global.dragDropIndicatorDark,
+    Piax.Global.dragDropIndicatorLight,
+    Piax.Global.eyeActive,
+    Piax.Global.eyeInactive,
     Piax.Global.favoriteGreen,
     Piax.Global.favoriteSelected,
     Piax.Global.favoriteUnselectedDark,

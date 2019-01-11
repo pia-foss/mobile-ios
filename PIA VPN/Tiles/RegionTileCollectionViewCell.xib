@@ -19,31 +19,30 @@
                 <rect key="frame" x="0.0" y="0.0" width="484" height="117"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Npc-wO-bht">
-                        <rect key="frame" x="18" y="38.5" width="40" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="40" id="aKb-cz-7Td"/>
-                            <constraint firstAttribute="width" constant="40" id="xna-eN-xar"/>
-                        </constraints>
-                        <state key="normal" title="Button"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Npc-wO-bht">
+                        <rect key="frame" x="15" y="47.5" width="19" height="22"/>
+                        <state key="normal" image="eye-active"/>
+                        <connections>
+                            <action selector="changeTileVisibility" destination="gTV-IL-0wX" eventType="touchUpInside" id="VQ4-bh-35U"/>
+                        </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="open-tile-details" translatesAutoresizingMaskIntoConstraints="NO" id="WyC-xZ-KKf">
-                        <rect key="frame" x="454" y="52.5" width="12" height="12"/>
+                        <rect key="frame" x="457" y="52.5" width="12" height="12"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="WyC-xZ-KKf" secondAttribute="height" multiplier="1:1" id="Pti-qw-bvu"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jZJ-xb-NWP" customClass="RegionTile" customModule="PIA_VPN" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="454" height="117"/>
+                        <rect key="frame" x="0.0" y="0.0" width="457" height="117"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Jn8-5q-PKh"/>
                     </view>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="Npc-wO-bht" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="1FQ-eq-y9t"/>
                 <constraint firstItem="WyC-xZ-KKf" firstAttribute="leading" secondItem="jZJ-xb-NWP" secondAttribute="trailing" id="3uU-Ru-UpS"/>
-                <constraint firstItem="Npc-wO-bht" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="18" id="5aK-OK-8ev"/>
-                <constraint firstAttribute="trailing" secondItem="WyC-xZ-KKf" secondAttribute="trailing" constant="18" id="MxK-Nk-OL3"/>
+                <constraint firstAttribute="trailing" secondItem="WyC-xZ-KKf" secondAttribute="trailing" constant="15" id="MxK-Nk-OL3"/>
                 <constraint firstItem="jZJ-xb-NWP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="gfm-k5-z57"/>
                 <constraint firstAttribute="bottom" secondItem="jZJ-xb-NWP" secondAttribute="bottom" id="iZH-op-NFK"/>
                 <constraint firstItem="WyC-xZ-KKf" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="nk0-sK-OJB"/>
@@ -62,6 +61,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="eye-active" width="19" height="10"/>
         <image name="open-tile-details" width="12" height="12"/>
     </resources>
 </document>

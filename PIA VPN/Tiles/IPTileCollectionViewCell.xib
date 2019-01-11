@@ -19,16 +19,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="751" height="174"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWg-5m-1wH">
-                        <rect key="frame" x="18" y="67" width="40" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="40" id="Uuf-kF-Xx9"/>
-                            <constraint firstAttribute="height" constant="40" id="oL9-61-Huk"/>
-                        </constraints>
-                        <state key="normal" title="Button"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWg-5m-1wH">
+                        <rect key="frame" x="15" y="76" width="19" height="22"/>
+                        <state key="normal" image="eye-active"/>
+                        <connections>
+                            <action selector="changeTileVisibility" destination="gTV-IL-0wX" eventType="touchUpInside" id="URh-aw-dI1"/>
+                        </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="open-tile-details" translatesAutoresizingMaskIntoConstraints="NO" id="LfW-8t-ljO">
-                        <rect key="frame" x="721" y="81" width="12" height="12"/>
+                        <rect key="frame" x="724" y="81" width="12" height="12"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rq7-Zl-mx1" customClass="IPTile" customModule="PIA_VPN" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="751" height="174"/>
@@ -38,11 +37,11 @@
             </view>
             <constraints>
                 <constraint firstItem="Rq7-Zl-mx1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="0Lx-3Y-pnD"/>
-                <constraint firstItem="RWg-5m-1wH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="18" id="558-Xx-qYG"/>
                 <constraint firstItem="RWg-5m-1wH" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="CrX-ek-aBo"/>
                 <constraint firstAttribute="trailing" secondItem="Rq7-Zl-mx1" secondAttribute="trailing" id="DDI-EZ-U3G"/>
-                <constraint firstAttribute="trailing" secondItem="LfW-8t-ljO" secondAttribute="trailing" constant="18" id="Fnw-AN-RdH"/>
+                <constraint firstAttribute="trailing" secondItem="LfW-8t-ljO" secondAttribute="trailing" constant="15" id="Fnw-AN-RdH"/>
                 <constraint firstAttribute="bottom" secondItem="Rq7-Zl-mx1" secondAttribute="bottom" id="PjF-bu-StA"/>
+                <constraint firstItem="RWg-5m-1wH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="R4G-Du-naX"/>
                 <constraint firstItem="LfW-8t-ljO" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="bWo-02-RUo"/>
                 <constraint firstItem="Rq7-Zl-mx1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ls4-Tg-2aF"/>
                 <constraint firstItem="LfW-8t-ljO" firstAttribute="width" secondItem="LfW-8t-ljO" secondAttribute="height" multiplier="1:1" id="oIC-Zn-2Oi"/>
@@ -60,6 +59,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="eye-active" width="19" height="10"/>
         <image name="open-tile-details" width="12" height="12"/>
     </resources>
 </document>

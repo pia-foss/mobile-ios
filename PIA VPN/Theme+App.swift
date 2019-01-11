@@ -167,7 +167,14 @@ extension Theme {
     }
     
     public func mapImageByServerName(_ serverName: String) -> String {
-        var prefix = palette.appearance == .dark ? "Dark-Map-" : "Light-Map-"
+        let prefix = palette.appearance == .dark ? "Dark-Map-" : "Light-Map-"
         return prefix + serverName
     }
+    
+    public func dragDropImage() -> UIImage {
+        return palette.appearance == .dark ?
+            Asset.Piax.Global.dragDropIndicatorDark.image :
+            Asset.Piax.Global.dragDropIndicatorLight.image
+    }
+
 }

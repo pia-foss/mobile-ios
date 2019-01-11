@@ -493,7 +493,12 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout {
 extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let identifier = Cells.objectIdentifyBy(index: indexPath.row).identifier
+        
+        let tileIndex = tileModeStatus == .normal ?
+            Client.providers.tileProvider.visibleTiles[indexPath.row].rawValue :
+            AvailableTiles.allTiles()[indexPath.row].rawValue
+        
+        let identifier = Cells.objectIdentifyBy(index: tileIndex).identifier
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier,
                                                       for: indexPath)
         if let cell = cell as? EditableTileCell {
@@ -508,7 +513,9 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return AvailableTiles.countCases()
+        return tileModeStatus == .normal ?
+            Client.providers.tileProvider.visibleTiles.count :
+            AvailableTiles.allTiles().count
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import PIALibrary
 
 class QuickConnectTileCollectionViewCell: UICollectionViewCell, TileableCell {
+    
+    var tileType: AvailableTiles = .quickConnect
 
     typealias Entity = QuickConnectTile
     @IBOutlet private weak var tile: Entity!
@@ -18,6 +21,7 @@ class QuickConnectTileCollectionViewCell: UICollectionViewCell, TileableCell {
     @IBOutlet weak var tileRightConstraint: NSLayoutConstraint!
 
     func setupCellForStatus(_ status: TileStatus) {
+        self.accessoryImageRight.image = Theme.current.dragDropImage()
         tile.status = status
         UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
             switch status {
@@ -25,11 +29,33 @@ class QuickConnectTileCollectionViewCell: UICollectionViewCell, TileableCell {
                 self.tileLeftConstraint.constant = 0
                 self.tileRightConstraint.constant = 0
             case .edit:
-                self.tileLeftConstraint.constant = 30
-                self.tileRightConstraint.constant = 30
+                self.tileLeftConstraint.constant = 34
+                self.tileRightConstraint.constant = 40
+                self.setupVisibilityButton()
             }
             self.layoutIfNeeded()
         })
     }
     
+    private func setupVisibilityButton() {
+        if Client.providers.tileProvider.visibleTiles.contains(tileType) {
+            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeActive.image, for: .normal)
+            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeInactive.image, for: .highlighted)
+        } else {
+            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeInactive.image, for: .normal)
+            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeActive.image, for: .highlighted)
+        }
+    }
+    
+    @IBAction private func changeTileVisibility() {
+        var visibleTiles = Client.providers.tileProvider.visibleTiles
+        if Client.providers.tileProvider.visibleTiles.contains(tileType) {
+            let tiles = visibleTiles.filter { $0 != tileType }
+            Client.providers.tileProvider.visibleTiles = tiles
+        } else {
+            visibleTiles.append(tileType)
+            Client.providers.tileProvider.visibleTiles = visibleTiles
+        }
+        Macros.postNotification(.PIAThemeDidChange)
+    }
 }
