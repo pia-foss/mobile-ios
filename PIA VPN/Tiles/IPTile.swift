@@ -12,9 +12,13 @@ import PIALibrary
 class IPTile: UIView, Tileable  {
     
     private let emptyIPValue = "---"
-    var detailViewAction: Func!
     var view: UIView!
     var detailSegueIdentifier: String!
+    var status: TileStatus = .normal {
+        didSet {
+            statusUpdated()
+        }
+    }
 
     @IBOutlet private weak var localIpTitle: UILabel!
     @IBOutlet private weak var localIpValue: UILabel!
@@ -44,7 +48,6 @@ class IPTile: UIView, Tileable  {
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
 
         viewShouldRestyle()
-        self.detailViewAction = {}
         self.localIpTitle.text = "IP"
         self.vpnIpTitle.text = "VPN IP"
         self.localIpValue.text = Client.daemons.publicIP ?? emptyIPValue
@@ -80,5 +83,7 @@ class IPTile: UIView, Tileable  {
         }
     }
 
-
+    private func statusUpdated() {
+    }
+    
 }

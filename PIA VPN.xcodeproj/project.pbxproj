@@ -204,6 +204,16 @@
 		DDD271E221D6262100B6D20F /* PropertyStoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD271E021D6262100B6D20F /* PropertyStoring.swift */; };
 		DDD271F021D6718F00B6D20F /* RegionFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD271EF21D6718F00B6D20F /* RegionFilter.swift */; };
 		DDD271F121D6718F00B6D20F /* RegionFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD271EF21D6718F00B6D20F /* RegionFilter.swift */; };
+		DDFCFA8F21E892070081F235 /* RegionTileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFA8D21E892070081F235 /* RegionTileCollectionViewCell.swift */; };
+		DDFCFA9021E892070081F235 /* RegionTileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFA8D21E892070081F235 /* RegionTileCollectionViewCell.swift */; };
+		DDFCFA9121E892070081F235 /* RegionTileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDFCFA8E21E892070081F235 /* RegionTileCollectionViewCell.xib */; };
+		DDFCFA9221E892070081F235 /* RegionTileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDFCFA8E21E892070081F235 /* RegionTileCollectionViewCell.xib */; };
+		DDFCFA9421E892130081F235 /* RegionTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFA9321E892130081F235 /* RegionTile.swift */; };
+		DDFCFA9521E892130081F235 /* RegionTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFA9321E892130081F235 /* RegionTile.swift */; };
+		DDFCFA9721E8921F0081F235 /* RegionTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDFCFA9621E8921F0081F235 /* RegionTile.xib */; };
+		DDFCFA9821E8921F0081F235 /* RegionTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDFCFA9621E8921F0081F235 /* RegionTile.xib */; };
+		DDFCFA9D21E896850081F235 /* TileableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFA9C21E896850081F235 /* TileableCell.swift */; };
+		DDFCFA9E21E896850081F235 /* TileableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFA9C21E896850081F235 /* TileableCell.swift */; };
 		EE3F4DA61F74FD3E4823BD8D /* Pods_PIA_VPN_Tunnel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04D231EC75F3FF07C2C2C9E /* Pods_PIA_VPN_Tunnel.framework */; };
 		FCD7F8AD8CC80ECD17CEB5AC /* Pods_PIA_VPN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A38BC60F965F3723D2CF6ED /* Pods_PIA_VPN.framework */; };
 /* End PBXBuildFile section */
@@ -472,6 +482,11 @@
 		DDD271DD21D616AA00B6D20F /* Server+Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+Favorite.swift"; sourceTree = "<group>"; };
 		DDD271E021D6262100B6D20F /* PropertyStoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyStoring.swift; sourceTree = "<group>"; };
 		DDD271EF21D6718F00B6D20F /* RegionFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionFilter.swift; sourceTree = "<group>"; };
+		DDFCFA8D21E892070081F235 /* RegionTileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionTileCollectionViewCell.swift; sourceTree = "<group>"; };
+		DDFCFA8E21E892070081F235 /* RegionTileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegionTileCollectionViewCell.xib; sourceTree = "<group>"; };
+		DDFCFA9321E892130081F235 /* RegionTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionTile.swift; sourceTree = "<group>"; };
+		DDFCFA9621E8921F0081F235 /* RegionTile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegionTile.xib; sourceTree = "<group>"; };
+		DDFCFA9C21E896850081F235 /* TileableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileableCell.swift; sourceTree = "<group>"; };
 		EDA80051C41F02C232A6B920 /* Pods-PIA VPN Tunnel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPN Tunnel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIA VPN Tunnel/Pods-PIA VPN Tunnel.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -874,15 +889,20 @@
 			children = (
 				DD1C137F21E6075B004004B3 /* AvailableTiles.swift */,
 				DD1C138221E60792004004B3 /* Tileable.swift */,
+				DDFCFA9C21E896850081F235 /* TileableCell.swift */,
 				DD1C13A321E6743F004004B3 /* TileFlowLayout.swift */,
 				DD1C138521E60BAE004004B3 /* IPTile.swift */,
 				DD1C138821E60C63004004B3 /* IPTile.xib */,
 				DD125DC421E77046004ECCB6 /* QuickConnectTile.swift */,
 				DD125DC721E7704F004ECCB6 /* QuickConnectTile.xib */,
+				DDFCFA9321E892130081F235 /* RegionTile.swift */,
+				DDFCFA9621E8921F0081F235 /* RegionTile.xib */,
 				DD1C139721E65F90004004B3 /* IPTileCollectionViewCell.swift */,
 				DD1C139821E65F90004004B3 /* IPTileCollectionViewCell.xib */,
 				DD125DCA21E772B6004ECCB6 /* QuickConnectTileCollectionViewCell.swift */,
 				DD125DCB21E772B6004ECCB6 /* QuickConnectTileCollectionViewCell.xib */,
+				DDFCFA8D21E892070081F235 /* RegionTileCollectionViewCell.swift */,
+				DDFCFA8E21E892070081F235 /* RegionTileCollectionViewCell.xib */,
 			);
 			path = Tiles;
 			sourceTree = "<group>";
@@ -1157,6 +1177,8 @@
 				DD746958217F070700B7BD73 /* DNS.plist in Resources */,
 				0E7EC046209326E30029811E /* Localizable.strings in Resources */,
 				0E7EC0312093265C0029811E /* InfoPlist.strings in Resources */,
+				DDFCFA9221E892070081F235 /* RegionTileCollectionViewCell.xib in Resources */,
+				DDFCFA9821E8921F0081F235 /* RegionTile.xib in Resources */,
 				0EE220631F4EF307002805AE /* Launch Screen.storyboard in Resources */,
 				0ED984201FC48C6500542EE6 /* Roboto-Medium.ttf in Resources */,
 				0ED984211FC48C6500542EE6 /* Roboto-Regular.ttf in Resources */,
@@ -1199,6 +1221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD125DC821E7704F004ECCB6 /* QuickConnectTile.xib in Resources */,
+				DDFCFA9721E8921F0081F235 /* RegionTile.xib in Resources */,
 				0ED9841B1FC48C6000542EE6 /* Roboto-Medium.ttf in Resources */,
 				0ECB08201D61D2A900043852 /* Launch Screen.storyboard in Resources */,
 				DD125DCE21E772B6004ECCB6 /* QuickConnectTileCollectionViewCell.xib in Resources */,
@@ -1207,6 +1230,7 @@
 				0ED9841D1FC48C6000542EE6 /* Roboto-Regular.ttf in Resources */,
 				291C6398183EBC210039EC03 /* Images.xcassets in Resources */,
 				0E0786DE1EFA7EAE00F77466 /* Components.plist in Resources */,
+				DDFCFA9121E892070081F235 /* RegionTileCollectionViewCell.xib in Resources */,
 				0ED9841C1FC48C6000542EE6 /* Roboto-Light.ttf in Resources */,
 				0ED9841E1FC48C6000542EE6 /* Roboto-Thin.ttf in Resources */,
 				0E7EC0302093265C0029811E /* InfoPlist.strings in Resources */,
@@ -1550,7 +1574,10 @@
 				DD1C139A21E65F90004004B3 /* IPTileCollectionViewCell.swift in Sources */,
 				0E9452AC1FDB5EF600891948 /* UINavigationItem+Shortcuts.swift in Sources */,
 				0E2215CD2008C01D00F5FB4D /* SwiftGen+Assets.swift in Sources */,
+				DDFCFA9021E892070081F235 /* RegionTileCollectionViewCell.swift in Sources */,
 				0E7361A11FD86F8300706BFF /* AccountObserver.swift in Sources */,
+				DDFCFA9521E892130081F235 /* RegionTile.swift in Sources */,
+				DDFCFA9E21E896850081F235 /* TileableCell.swift in Sources */,
 				0ECC1E351FDB32470039891D /* WalkthroughViewController.swift in Sources */,
 				0EFDC1E71FE4ABAA007C0B9B /* Notification+App.swift in Sources */,
 				0ECC1E3C1FDB3BD50039891D /* WalkthroughPageView.swift in Sources */,
@@ -1648,7 +1675,10 @@
 				DD1C139921E65F90004004B3 /* IPTileCollectionViewCell.swift in Sources */,
 				0EB966771FDF11B80086ABC2 /* Server+UI.swift in Sources */,
 				0E9452AB1FDB5EF600891948 /* UINavigationItem+Shortcuts.swift in Sources */,
+				DDFCFA8F21E892070081F235 /* RegionTileCollectionViewCell.swift in Sources */,
 				0E2215CC2008BF8300F5FB4D /* SwiftGen+Assets.swift in Sources */,
+				DDFCFA9421E892130081F235 /* RegionTile.swift in Sources */,
+				DDFCFA9D21E896850081F235 /* TileableCell.swift in Sources */,
 				0E7361A01FD86F8300706BFF /* AccountObserver.swift in Sources */,
 				0ECC1E341FDB32470039891D /* WalkthroughViewController.swift in Sources */,
 				0EFDC1E61FE4ABAA007C0B9B /* Notification+App.swift in Sources */,

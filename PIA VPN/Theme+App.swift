@@ -166,4 +166,8 @@ extension Theme {
             Asset.Piax.Regions.noResultsLight.image
     }
     
+    public func mapImageByServerName(_ serverName: String) -> String {
+        var prefix = palette.appearance == .dark ? "Dark-Map-" : "Light-Map-"
+        return prefix + serverName
+    }
 }

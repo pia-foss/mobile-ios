@@ -13,9 +13,9 @@ typealias Func = () -> Void
 
 protocol Tileable {
     
-    var detailViewAction: Func! {get}
     var view: UIView! {get set}
     var detailSegueIdentifier: String! {get set}
+    var status: TileStatus {get set}
     
     func isEditable() -> Bool
     func isExpandable() -> Bool

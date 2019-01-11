@@ -15,12 +15,27 @@ private let log = SwiftyBeaver.self
 
 class DashboardViewController: AutolayoutViewController {
     
-    private struct Cells {
-        static let ipTile = "IPTileCell"
-        static let ipTileCellClass = "IPTileCollectionViewCell"
-        static let quickConnectTile = "QuickConnectTileCell"
-        static let quickConnectCellClass = "QuickConnectTileCollectionViewCell"
-
+    private enum Cells: Int, EnumsBuilder {
+        
+        case region = 0
+        case quickConnect
+        case ipTile
+        
+        var identifier: String {
+            switch self {
+            case .ipTile: return "IPTileCell"
+            case .quickConnect: return "QuickConnectTileCell"
+            case .region: return "RegionTileCell"
+            }
+        }
+        
+        var className: String {
+            switch self {
+            case .ipTile: return "IPTileCollectionViewCell"
+            case .quickConnect: return "QuickConnectTileCollectionViewCell"
+            case .region: return "RegionTileCollectionViewCell"
+            }
+        }
     }
     
     @IBOutlet private weak var viewContent: UIView!
@@ -46,12 +61,15 @@ class DashboardViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.register(UINib(nibName: Cells.ipTileCellClass,
+        collectionView.register(UINib(nibName: Cells.ipTile.className,
                                       bundle: nil),
-                                forCellWithReuseIdentifier: Cells.ipTile)
-        collectionView.register(UINib(nibName: Cells.quickConnectCellClass,
+                                forCellWithReuseIdentifier: Cells.ipTile.identifier)
+        collectionView.register(UINib(nibName: Cells.quickConnect.className,
                                       bundle: nil),
-                                forCellWithReuseIdentifier: Cells.quickConnectTile)
+                                forCellWithReuseIdentifier: Cells.quickConnect.identifier)
+        collectionView.register(UINib(nibName: Cells.region.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.region.identifier)
         collectionView.backgroundColor = .clear
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -478,14 +496,11 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout {
 extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.row {
-        case AvailableTiles.quickConnect.rawValue:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.quickConnectTile, for: indexPath) as! QuickConnectTileCollectionViewCell
-            return cell
-        default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.ipTile, for: indexPath) as! IPTileCollectionViewCell
-            return cell
-        }
+        let identifier = Cells.objectIdentifyBy(index: indexPath.row).identifier
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier,
+                                                      for: indexPath)
+        Theme.current.applySolidLightBackground(cell)
+        return cell
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -496,4 +511,16 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         return AvailableTiles.countCases()
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        if let detailedCell = cell as? DetailedTileCell,
+            detailedCell.hasDetailView(),
+            let segueIdentifier = detailedCell.segueIdentifier() {
+            performSegue(withIdentifier: segueIdentifier, sender: nil)
+        } else {
+            if let cell = cell as? EditableTileCell {
+                cell.setupCellForStatus(.edit)
+            }
+        }
+    }
 }

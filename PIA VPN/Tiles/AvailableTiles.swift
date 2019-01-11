@@ -8,7 +8,13 @@
 
 import Foundation
 
-enum AvailableTiles: Int, EnumsBuilder {
+public enum AvailableTiles: Int, EnumsBuilder {
+    case region
     case quickConnect
     case ip
+}
+
+public enum TileStatus {
+    case normal
+    case edit
 }

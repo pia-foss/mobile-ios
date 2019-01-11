@@ -210,3 +210,4 @@
 
 // TILES
 "tiles.quick.connect.title" = "Quick connect";
+"tiles.region.title" = "VPN Server";

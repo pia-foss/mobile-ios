@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegionTile" customModule="PIA_VPN" customModuleProvider="target">
+            <connections>
+                <outlet property="mapImageView" destination="Dez-a8-UVo" id="Oc2-5m-5Eb"/>
+                <outlet property="serverName" destination="h3Z-eW-74s" id="BW2-cE-TZS"/>
+                <outlet property="tileTitle" destination="lOm-Af-4Gm" id="eGK-wJ-lyO"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="265" height="89"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOm-Af-4Gm">
+                    <rect key="frame" x="25" y="15" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3Z-eW-74s">
+                    <rect key="frame" x="25" y="40" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Light-Map-AU Melbourne" translatesAutoresizingMaskIntoConstraints="NO" id="Dez-a8-UVo">
+                    <rect key="frame" x="122.5" y="15" width="117.5" height="59"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Dez-a8-UVo" secondAttribute="height" multiplier="403:202" id="smP-Nh-qbj"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Dez-a8-UVo" secondAttribute="trailing" constant="25" id="2zp-4o-23D"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Dez-a8-UVo" secondAttribute="bottom" constant="15" id="6xL-UD-pQh"/>
+                <constraint firstItem="h3Z-eW-74s" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="8gs-81-ewj"/>
+                <constraint firstItem="Dez-a8-UVo" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="15" id="Efw-Oh-jWN"/>
+                <constraint firstItem="lOm-Af-4Gm" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="EsV-DR-HPb"/>
+                <constraint firstItem="lOm-Af-4Gm" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="15" id="QMT-Eu-gtD"/>
+                <constraint firstItem="h3Z-eW-74s" firstAttribute="top" secondItem="lOm-Af-4Gm" secondAttribute="bottom" constant="4" id="obN-sZ-6Eh"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Light-Map-AU Melbourne" width="403" height="202"/>
+    </resources>
+</document>

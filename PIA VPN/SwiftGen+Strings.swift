@@ -493,6 +493,10 @@ internal enum L10n {
         internal static let title = L10n.tr("Localizable", "tiles.quick.connect.title")
       }
     }
+    internal enum Region {
+      /// VPN Server
+      internal static let title = L10n.tr("Localizable", "tiles.region.title")
+    }
   }
 
   internal enum VpnPermission {
