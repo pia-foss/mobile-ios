@@ -38,12 +38,11 @@ class DashboardViewController: AutolayoutViewController {
         }
     }
     
+    private var viewContentHeight: CGFloat = 0
+    @IBOutlet weak var viewContentHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var viewContentLandscapeHeightConstraint: NSLayoutConstraint!
+    
     @IBOutlet private weak var viewContent: UIView!
-    
-    @IBOutlet private weak var viewConnectionArea: UIView!
-    
-    @IBOutlet private weak var viewConnection: UIView!
-
     @IBOutlet private weak var toggleConnection: PIAConnectionButton!
     
     @IBOutlet private weak var viewRows: UIView!
@@ -53,6 +52,13 @@ class DashboardViewController: AutolayoutViewController {
     private var currentPageIndex = 0
     
     private var currentStatus: VPNStatus = .disconnected
+
+    private var tileModeStatus: TileStatus = .normal {
+        didSet {
+            collectionView.reloadData()
+            self.updateTileLayout()
+        }
+    }
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -79,6 +85,14 @@ class DashboardViewController: AutolayoutViewController {
             action: #selector(openMenu(_:))
         )
         navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.item
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: Asset.Piax.Global.iconEditTile.image,
+            style: .plain,
+            target: self,
+            action: #selector(updateEditTileStatus(_:))
+        )
+        navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.Edit.tile
 
         viewContent.isHidden = true
         viewRows.isHidden = true
@@ -107,6 +121,7 @@ class DashboardViewController: AutolayoutViewController {
             Client.providers.accountProvider.refreshAndLogoutUnauthorized()
         }
         
+        self.viewContentHeight = self.viewContentHeightConstraint.constant
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -166,6 +181,14 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     // MARK: Actions
+    private func updateTileLayout() {
+        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
+            self.toggleConnection.alpha = self.tileModeStatus == .normal ? 1 : 0
+            self.viewContentHeightConstraint.constant = self.tileModeStatus == .normal ? self.viewContentHeight : 0
+            self.viewContentLandscapeHeightConstraint.constant = self.tileModeStatus == .normal ? self.viewContentHeight : 0
+            self.view.layoutIfNeeded()
+        })
+    }
     
     private func showWalkthrough() {
         perform(segue: StoryboardSegue.Main.walkthroughSegueIdentifier)
@@ -198,6 +221,15 @@ class DashboardViewController: AutolayoutViewController {
         perform(segue: StoryboardSegue.Main.menuSegueIdentifier)
     }
     
+    @objc private func updateEditTileStatus(_ sender: Any?) {
+        switch self.tileModeStatus { //change the status
+        case .normal:
+            self.tileModeStatus = .edit
+        case .edit:
+            self.tileModeStatus = .normal
+        }
+    }
+
     @IBAction func vpnButtonClicked(_ sender: Any?) {
         if !toggleConnection.isOn {
             Client.providers.vpnProvider.connect(nil)
@@ -265,6 +297,7 @@ class DashboardViewController: AutolayoutViewController {
     
     @objc private func viewHasRotated() {
         updateCurrentStatus()
+        updateTileLayout()
     }
 
     @objc private func accountDidLogout(notification: Notification) {
@@ -345,11 +378,6 @@ class DashboardViewController: AutolayoutViewController {
 //            powerConnection.powerState = .pending
 //            labelStatus.text = L10n.Dashboard.Vpn.changingRegion
         }
-
-        // XXX hack to suppress "ellipsis"
-        //viewConnectionArea.accessibilityLabel = labelStatus.text
-        viewConnectionArea.accessibilityLabel = viewConnectionArea.accessibilityLabel?.replacingOccurrences(of: "...", with: "")
-        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, viewConnectionArea)
 
         // non-iPad bottom table
         collectionView.reloadData()
@@ -499,6 +527,9 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         let identifier = Cells.objectIdentifyBy(index: indexPath.row).identifier
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier,
                                                       for: indexPath)
+        if let cell = cell as? EditableTileCell {
+            cell.setupCellForStatus(self.tileModeStatus)
+        }
         Theme.current.applySolidLightBackground(cell)
         return cell
     }

@@ -47,7 +47,7 @@
 "renewal.failure.message" = "Your purchase receipt couldn't be submitted, please retry at a later time.";
 
 // MENU
-
+"menu.accessibility.edit.tile" = "Edit";
 "menu.accessibility.item" = "Menu";
 "menu.accessibility.logged_as" = "Logged in as %@";
 "menu.expiration.expires_in" = "Subscription expires in";

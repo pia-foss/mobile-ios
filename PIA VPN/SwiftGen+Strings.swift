@@ -204,6 +204,10 @@ internal enum L10n {
       internal static func loggedAs(_ p1: String) -> String {
         return L10n.tr("Localizable", "menu.accessibility.logged_as", p1)
       }
+      internal enum Edit {
+        /// Edit
+        internal static let tile = L10n.tr("Localizable", "menu.accessibility.edit.tile")
+      }
     }
     internal enum Expiration {
       /// %d days

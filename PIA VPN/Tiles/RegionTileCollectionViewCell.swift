@@ -26,7 +26,7 @@ class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
     }
     
     func setupCellForStatus(_ status: TileStatus) {
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
             switch status {
             case .normal:
                 self.tileLeftConstraint.constant = 0

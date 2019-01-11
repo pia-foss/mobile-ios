@@ -88,7 +88,7 @@ class RegionCell: UITableViewCell, Restylable {
     }
     
     private func animateFavoriteImage() {
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
             self.favoriteImageView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         }, completion: { (finished) in
             UIView.animate(withDuration: 0.2, animations: {
