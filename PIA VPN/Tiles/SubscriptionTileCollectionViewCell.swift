@@ -21,6 +21,8 @@ class SubscriptionTileCollectionViewCell: UICollectionViewCell, TileableCell {
     @IBOutlet weak var tileRightConstraint: NSLayoutConstraint!
     
     func setupCellForStatus(_ status: TileStatus) {
+        Theme.current.applySolidLightBackground(self)
+        Theme.current.applySolidLightBackground(self.contentView)
         self.accessoryImageRight.image = Theme.current.dragDropImage()
         tile.status = status
         UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
@@ -36,17 +38,17 @@ class SubscriptionTileCollectionViewCell: UICollectionViewCell, TileableCell {
             self.layoutIfNeeded()
         })
     }
-    
+
     private func setupVisibilityButton() {
         if Client.providers.tileProvider.visibleTiles.contains(tileType) {
-            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeActive.image, for: .normal)
-            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeInactive.image, for: .highlighted)
+            accessoryButtonLeft.setImage(Theme.current.activeEyeImage(), for: .normal)
+            accessoryButtonLeft.setImage(Theme.current.inactiveEyeImage(), for: .highlighted)
         } else {
-            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeInactive.image, for: .normal)
-            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeActive.image, for: .highlighted)
+            accessoryButtonLeft.setImage(Theme.current.inactiveEyeImage(), for: .normal)
+            accessoryButtonLeft.setImage(Theme.current.activeEyeImage(), for: .highlighted)
         }
     }
-    
+
     @IBAction private func changeTileVisibility() {
         var visibleTiles = Client.providers.tileProvider.visibleTiles
         if Client.providers.tileProvider.visibleTiles.contains(tileType) {

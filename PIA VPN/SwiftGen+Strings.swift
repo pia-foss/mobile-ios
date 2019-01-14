@@ -502,8 +502,20 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "tiles.region.title")
     }
     internal enum Subscription {
+      /// Monthly
+      internal static let monthly = L10n.tr("Localizable", "tiles.subscription.monthly")
       /// Subscription
       internal static let title = L10n.tr("Localizable", "tiles.subscription.title")
+      /// Trial
+      internal static let trial = L10n.tr("Localizable", "tiles.subscription.trial")
+      /// Yearly
+      internal static let yearly = L10n.tr("Localizable", "tiles.subscription.yearly")
+      internal enum Days {
+        /// (%d days left)
+        internal static func `left`(_ p1: Int) -> String {
+          return L10n.tr("Localizable", "tiles.subscription.days.left", p1)
+        }
+      }
     }
   }
 

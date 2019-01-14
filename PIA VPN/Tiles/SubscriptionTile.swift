@@ -48,6 +48,7 @@ class SubscriptionTile: UIView, Tileable  {
         subscriptionTitle.style(style: TextStyle.textStyle21)
         Theme.current.applySubtitle(subscriptionValue)
         Theme.current.applySolidLightBackground(self)
+        displayAccountInformation()
     }
     
     @objc private func displayAccountInformation() {
@@ -57,12 +58,37 @@ class SubscriptionTile: UIView, Tileable  {
             if userInfo.isExpired {
                 self.subscriptionValue.text = L10n.Account.ExpiryDate.expired
             } else {
-                self.subscriptionValue.text = L10n.Account.ExpiryDate.information(userInfo.humanReadableExpirationDate())
+                var value = L10n.Account.ExpiryDate.information(userInfo.humanReadableExpirationDate())
+                if let days = daysLeftFromAccountInfo(userInfo) {
+                    let daysLeft = L10n.Tiles.Subscription.Days.left(days)
+                    let plan = planDescriptionFromPlan(userInfo.plan)
+                    if plan != "" {
+                        value = plan + " " + daysLeft
+                    }
+                }
+                self.subscriptionValue.text = value
             }
             Theme.current.makeSmallLabelToStandOut(self.subscriptionValue,
-                                                   withTextToStandOut: userInfo.humanReadableExpirationDate())
+                                                   withTextToStandOut: planDescriptionFromPlan(userInfo.plan))
         }
         
     }
 
+    private func planDescriptionFromPlan(_ plan: Plan) -> String {
+        switch plan {
+        case .trial: return L10n.Tiles.Subscription.trial
+        case .monthly: return L10n.Tiles.Subscription.monthly
+        case .yearly: return L10n.Tiles.Subscription.yearly
+        default: return ""
+        }
+    }
+    
+    private func daysLeftFromAccountInfo(_ userInfo: AccountInfo) -> Int? {
+        if let days = userInfo.dateComponentsBeforeExpiration.day {
+            return days +
+            1 + //today
+            1 //last day
+        }
+        return nil
+    }
 }
