@@ -216,3 +216,6 @@
 "tiles.subscription.monthly" = "Monthly";
 "tiles.subscription.yearly" = "Yearly";
 "tiles.subscription.days.left" = "(%d days left)";
+"tiles.usage.title" = "Usage";
+"tiles.usage.upload" = "Upload";
+"tiles.usage.download" = "Download";

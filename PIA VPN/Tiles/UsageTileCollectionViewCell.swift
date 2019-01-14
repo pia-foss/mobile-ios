@@ -1,5 +1,5 @@
 //
-//  SubscriptionTileCollectionViewCell.swift
+//  UsageTileCollectionViewCell.swift
 //  PIA VPN
 //
 //  Created by Jose Antonio Blaya Garcia on 14/01/2019.
@@ -9,11 +9,11 @@
 import UIKit
 import PIALibrary
 
-class SubscriptionTileCollectionViewCell: UICollectionViewCell, TileableCell {
+class UsageTileCollectionViewCell: UICollectionViewCell, TileableCell {
     
-    var tileType: AvailableTiles = .subscription
+    var tileType: AvailableTiles = .usage
     
-    typealias Entity = SubscriptionTile
+    typealias Entity = UsageTile
     @IBOutlet private weak var tile: Entity!
     @IBOutlet private weak var accessoryImageRight: UIImageView!
     @IBOutlet private weak var accessoryButtonLeft: UIButton!
@@ -38,7 +38,7 @@ class SubscriptionTileCollectionViewCell: UICollectionViewCell, TileableCell {
             self.layoutIfNeeded()
         })
     }
-
+    
     private func setupVisibilityButton() {
         if Client.providers.tileProvider.visibleTiles.contains(tileType) {
             accessoryButtonLeft.setImage(Theme.current.activeEyeImage(), for: .normal)
@@ -48,7 +48,7 @@ class SubscriptionTileCollectionViewCell: UICollectionViewCell, TileableCell {
             accessoryButtonLeft.setImage(Theme.current.activeEyeImage(), for: .highlighted)
         }
     }
-
+    
     @IBAction private func changeTileVisibility() {
         var visibleTiles = Client.providers.tileProvider.visibleTiles
         if Client.providers.tileProvider.visibleTiles.contains(tileType) {

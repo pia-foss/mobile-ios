@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UsageTileCell" id="gTV-IL-0wX" customClass="UsageTileCollectionViewCell" customModule="PIA_VPN" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="335" height="76"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="335" height="76"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSn-9h-eq8">
+                        <rect key="frame" x="15" y="27" width="16" height="22"/>
+                        <state key="normal" image="eye-active"/>
+                        <connections>
+                            <action selector="changeTileVisibility" destination="gTV-IL-0wX" eventType="touchUpInside" id="bFk-gl-t55"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="open-tile-details" translatesAutoresizingMaskIntoConstraints="NO" id="xNn-mr-ccn">
+                        <rect key="frame" x="308" y="32" width="12" height="12"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gFR-hf-yjv" customClass="UsageTile" customModule="PIA_VPN" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="335" height="76"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="gFR-hf-yjv" secondAttribute="bottom" id="5OI-fz-ihv"/>
+                <constraint firstItem="tSn-9h-eq8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="6AV-Qw-6jo"/>
+                <constraint firstItem="gFR-hf-yjv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Fpx-6G-lTK"/>
+                <constraint firstItem="xNn-mr-ccn" firstAttribute="width" secondItem="xNn-mr-ccn" secondAttribute="height" multiplier="1:1" id="LAs-7x-gF6"/>
+                <constraint firstItem="xNn-mr-ccn" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Snp-bQ-hiv"/>
+                <constraint firstItem="gFR-hf-yjv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="eiX-Vy-zrx"/>
+                <constraint firstAttribute="trailing" secondItem="xNn-mr-ccn" secondAttribute="trailing" constant="15" id="kgv-vf-LYQ"/>
+                <constraint firstAttribute="trailing" secondItem="gFR-hf-yjv" secondAttribute="trailing" id="n3H-61-9JT"/>
+                <constraint firstItem="tSn-9h-eq8" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="xzl-vE-rBh"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="335" height="76"/>
+            <connections>
+                <outlet property="accessoryButtonLeft" destination="tSn-9h-eq8" id="ZOB-Rf-IDp"/>
+                <outlet property="accessoryImageRight" destination="xNn-mr-ccn" id="Cgi-wa-nZw"/>
+                <outlet property="tile" destination="gFR-hf-yjv" id="WDd-Kb-3Q0"/>
+                <outlet property="tileLeftConstraint" destination="eiX-Vy-zrx" id="Peh-Nj-B1j"/>
+                <outlet property="tileRightConstraint" destination="n3H-61-9JT" id="PBO-ch-2fO"/>
+            </connections>
+            <point key="canvasLocation" x="365.60000000000002" y="143.02848575712144"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="eye-active" width="16" height="16"/>
+        <image name="open-tile-details" width="12" height="12"/>
+    </resources>
+</document>

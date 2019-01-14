@@ -517,6 +517,14 @@ internal enum L10n {
         }
       }
     }
+    internal enum Usage {
+      /// Download
+      internal static let download = L10n.tr("Localizable", "tiles.usage.download")
+      /// Usage
+      internal static let title = L10n.tr("Localizable", "tiles.usage.title")
+      /// Upload
+      internal static let upload = L10n.tr("Localizable", "tiles.usage.upload")
+    }
   }
 
   internal enum VpnPermission {

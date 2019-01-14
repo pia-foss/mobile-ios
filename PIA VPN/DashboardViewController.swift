@@ -25,6 +25,7 @@ class DashboardViewController: AutolayoutViewController {
         case quickConnect
         case ipTile
         case subscription
+        case usage
 
         var identifier: String {
             switch self {
@@ -32,6 +33,7 @@ class DashboardViewController: AutolayoutViewController {
             case .quickConnect: return "QuickConnectTileCell"
             case .region: return "RegionTileCell"
             case .subscription: return "SubscriptionTileCell"
+            case .usage: return "UsageTileCell"
             }
         }
         
@@ -41,6 +43,7 @@ class DashboardViewController: AutolayoutViewController {
             case .quickConnect: return "QuickConnectTileCollectionViewCell"
             case .region: return "RegionTileCollectionViewCell"
             case .subscription: return "SubscriptionTileCollectionViewCell"
+            case .usage: return "UsageTileCollectionViewCell"
             }
         }
     }
@@ -184,6 +187,9 @@ class DashboardViewController: AutolayoutViewController {
         collectionView.register(UINib(nibName: Cells.subscription.className,
                                       bundle: nil),
                                 forCellWithReuseIdentifier: Cells.subscription.identifier)
+        collectionView.register(UINib(nibName: Cells.usage.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.usage.identifier)
         collectionView.backgroundColor = .clear
     }
     
@@ -239,12 +245,23 @@ class DashboardViewController: AutolayoutViewController {
 
     @IBAction func vpnButtonClicked(_ sender: Any?) {
         if !toggleConnection.isOn {
-            Client.providers.vpnProvider.connect(nil)
+            Client.providers.vpnProvider.connect({ [weak self] _ in
+                self?.reloadUsageTileAfter(seconds: 5) //Show some usage after 5 seconds of activity
+            })
             NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
                                             object: self,
                                             userInfo: nil)
         } else {
-            Client.providers.vpnProvider.disconnect(nil)
+            Client.providers.vpnProvider.disconnect({ [weak self] _ in
+                self?.reloadUsageTileAfter(seconds: 1) //Reset the usage statistics after stop the VPN
+            })
+        }
+        Macros.postNotification(.PIAVPNUsageUpdate)
+    }
+    
+    private func reloadUsageTileAfter(seconds: TimeInterval) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+            Macros.postNotification(.PIAVPNUsageUpdate)
         }
     }
     
@@ -320,6 +337,7 @@ class DashboardViewController: AutolayoutViewController {
     // MARK: Helpers
 
     @objc private func updateCurrentStatus() {
+        Macros.postNotification(.PIAVPNUsageUpdate)
         updateCurrentStatusWithUserInfo(nil)
     }
     
@@ -329,8 +347,6 @@ class DashboardViewController: AutolayoutViewController {
 
     @objc private func updateCurrentStatusWithUserInfo(_ userInfo: [AnyHashable: Any]?) {
         currentStatus = Client.providers.vpnProvider.vpnStatus
-
-        //Theme.current.applyVPNStatus(labelStatus, forStatus: currentStatus)
 
         switch currentStatus {
         case .connected:
