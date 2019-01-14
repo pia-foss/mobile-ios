@@ -752,6 +752,16 @@ public class Theme {
             label.style(style: TextStyle.textStyle6)
         }
     }
+    
+    //MARK: Tile Usage
+    /// :nodoc:
+    public func applySubtitleTileUsage(_ label: UILabel, appearance: Appearance) {
+        if palette.appearance == Appearance.dark {
+            label.style(style: TextStyle.textStyle16)
+        } else {
+            label.style(style: TextStyle.textStyle17)
+        }
+    }
 
 }
 

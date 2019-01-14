@@ -10,7 +10,7 @@ import Foundation
 
 /// Simulates VPN-related operations
 public class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess {
-
+   
     /// Fakes the public IP address.
     public var mockPublicIP: String? = "192.168.12.78"
     
@@ -114,6 +114,11 @@ public class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess {
     
     /// :nodoc:
     public func submitLog(_ callback: ((DebugLog?, Error?) -> Void)?) {
+        callback?(nil, ClientError.unsupported)
+    }
+    
+    /// :nodoc:
+    public func dataUsage(_ callback: LibraryCallback<Usage>?) {
         callback?(nil, ClientError.unsupported)
     }
 }

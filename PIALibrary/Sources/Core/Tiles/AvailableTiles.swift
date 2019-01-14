@@ -12,13 +12,15 @@ public enum AvailableTiles: Int, EnumsBuilder {
     case region
     case quickConnect
     case ip
-    
+    case subscription
+    case usage
+
     public static func allTiles() -> [AvailableTiles] {
-        return [.region, .quickConnect, .ip]
+        return [.region, .quickConnect, .ip, .subscription, .usage]
     }
     
     public static func defaultOrderedTiles() -> [AvailableTiles] {
-        return [.region, .quickConnect, .ip]
+        return [.region, .quickConnect, .ip, .subscription, .usage]
     }
 
 }

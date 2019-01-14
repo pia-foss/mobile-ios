@@ -185,6 +185,14 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
                     tiles.append(tile)
                 }
             }
+            //Add new tiles when needed 
+            if tiles.count < AvailableTiles.defaultOrderedTiles().count {
+                for defaultTile in AvailableTiles.defaultOrderedTiles() {
+                    if !tiles.contains(defaultTile) {
+                        tiles.append(defaultTile)
+                    }
+                }
+            }
             return tiles
         }
         set {

@@ -268,6 +268,10 @@
 		DD58F4BD21AEF76100D043F7 /* String+Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58F4BC21AEF76100D043F7 /* String+Components.swift */; };
 		DD6DC5B921B6A83400F9D538 /* UIViewLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6DC5B821B6A83400F9D538 /* UIViewLoading.swift */; };
 		DD6DC5BC21B6A8FC00F9D538 /* pia-spinner.json in Resources */ = {isa = PBXBuildFile; fileRef = DD6DC5BB21B6A8FC00F9D538 /* pia-spinner.json */; };
+		DD76292821ECDFF80092DF50 /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD76292721ECDFF80092DF50 /* Usage.swift */; };
+		DD76292921ECDFF80092DF50 /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD76292721ECDFF80092DF50 /* Usage.swift */; };
+		DD76292E21ECEC3F0092DF50 /* DataManipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD76292D21ECEC3F0092DF50 /* DataManipulation.swift */; };
+		DD76292F21ECEC3F0092DF50 /* DataManipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD76292D21ECEC3F0092DF50 /* DataManipulation.swift */; };
 		DD8BF3CB219C6BAA0041357C /* ConfirmVPNPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8BF3CA219C6BAA0041357C /* ConfirmVPNPlanViewController.swift */; };
 		DDD824E32189969400151709 /* Preset.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E22189969400151709 /* Preset.swift */; };
 		DDD824E5218996CD00151709 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E4218996CD00151709 /* Pages.swift */; };
@@ -544,6 +548,8 @@
 		DD58F4BC21AEF76100D043F7 /* String+Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Components.swift"; sourceTree = "<group>"; };
 		DD6DC5B821B6A83400F9D538 /* UIViewLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewLoading.swift; sourceTree = "<group>"; };
 		DD6DC5BB21B6A8FC00F9D538 /* pia-spinner.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pia-spinner.json"; sourceTree = "<group>"; };
+		DD76292721ECDFF80092DF50 /* Usage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usage.swift; sourceTree = "<group>"; };
+		DD76292D21ECEC3F0092DF50 /* DataManipulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManipulation.swift; sourceTree = "<group>"; };
 		DD8BF3CA219C6BAA0041357C /* ConfirmVPNPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmVPNPlanViewController.swift; sourceTree = "<group>"; };
 		DDC812472176166500CB290C /* SwiftGen+ScenesStoryboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+ScenesStoryboards.swift"; sourceTree = "<group>"; };
 		DDC81249217617F900CB290C /* SwiftGen+SeguesStoryboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+SeguesStoryboards.swift"; sourceTree = "<group>"; };
@@ -622,6 +628,7 @@
 				0E2ADCD91FE072ED00BB170C /* Pinger.m */,
 				DDD824E22189969400151709 /* Preset.swift */,
 				DDD824E4218996CD00151709 /* Pages.swift */,
+				DD76292D21ECEC3F0092DF50 /* DataManipulation.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -787,6 +794,7 @@
 				0EA4C4381FDDE24B0041C3D8 /* ServersBundle.swift */,
 				0EE1068D1F828813009514E9 /* Signup.swift */,
 				0EC849C81F82329F002480CA /* WebServices.swift */,
+				DD76292721ECDFF80092DF50 /* Usage.swift */,
 			);
 			path = WebServices;
 			sourceTree = "<group>";
@@ -1595,6 +1603,7 @@
 				0E3A35331FD9E97E000B0F99 /* Macros.swift in Sources */,
 				0E9D628A1FDEA290009A90CF /* Data+Crypto.swift in Sources */,
 				0EE261E11FEFD69F00E11955 /* Notification+Library.swift in Sources */,
+				DD76292F21ECEC3F0092DF50 /* DataManipulation.swift in Sources */,
 				0E7BC6EF1F96B1120035C8B2 /* LoginRequest.swift in Sources */,
 				0EA8072820A1A0090033EC1A /* Redeem.swift in Sources */,
 				0E492C651FE5F949007F23DF /* MockServerProvider.swift in Sources */,
@@ -1632,6 +1641,7 @@
 				0EF14E4C1FEAE6350007485A /* Client+Providers.swift in Sources */,
 				0E7BC6E61F96B1000035C8B2 /* Client.swift in Sources */,
 				0E392D7E1FE2E4C10002160D /* MemoryStore.swift in Sources */,
+				DD76292921ECDFF80092DF50 /* Usage.swift in Sources */,
 				0E2ADD381FE14F0000BB170C /* DefaultVPNProvider.swift in Sources */,
 				0E75D8D41F9E3F9F00658D1E /* UserAccount.swift in Sources */,
 			);
@@ -1653,6 +1663,7 @@
 				0EB8C0701F9CD38B005857E4 /* WelcomePageViewController.swift in Sources */,
 				DD0AC790218715B8009B576B /* PIAButton.swift in Sources */,
 				0EB8C0651F9CD38B005857E4 /* BorderedTextField.swift in Sources */,
+				DD76292E21ECEC3F0092DF50 /* DataManipulation.swift in Sources */,
 				DDFCFABA21E929660081F235 /* MockTileProvider.swift in Sources */,
 				0EA4C4391FDDE24B0041C3D8 /* ServersBundle.swift in Sources */,
 				0E53A84A1FE5BA52000C2A18 /* Daemon.swift in Sources */,
@@ -1736,6 +1747,7 @@
 				0E53A8531FE5D73F000C2A18 /* Client+Mock.swift in Sources */,
 				0E392D9D1FE31D630002160D /* MockVPNProvider.swift in Sources */,
 				0E9D62DA1FDEE3FE009A90CF /* ServerProvider.swift in Sources */,
+				DD76292821ECDFF80092DF50 /* Usage.swift in Sources */,
 				0E2ADD3A1FE14F8600BB170C /* VPNProfile.swift in Sources */,
 				0E492C5C1FE5EA06007F23DF /* CMacros.m in Sources */,
 				0EB8C0671F9CD38B005857E4 /* AutolayoutViewController.swift in Sources */,
