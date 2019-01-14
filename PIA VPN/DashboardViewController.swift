@@ -541,6 +541,9 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if !Client.providers.accountProvider.isLoggedIn {
+            return 0
+        }
         return tileModeStatus == .normal ?
             Client.providers.tileProvider.visibleTiles.count :
             Client.providers.tileProvider.orderedTiles.count
