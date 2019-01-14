@@ -177,4 +177,16 @@ extension Theme {
             Asset.Piax.Global.dragDropIndicatorLight.image
     }
 
+    public func activeEyeImage() -> UIImage {
+        return palette.appearance == .dark ?
+            Asset.Piax.Global.eyeActiveDark.image :
+            Asset.Piax.Global.eyeActiveLight.image
+    }
+
+    public func inactiveEyeImage() -> UIImage {
+        return palette.appearance == .dark ?
+            Asset.Piax.Global.eyeInactiveDark.image :
+            Asset.Piax.Global.eyeInactiveLight.image
+    }
+
 }

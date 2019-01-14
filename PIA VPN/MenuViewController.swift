@@ -285,7 +285,7 @@ class MenuViewController: AutolayoutViewController {
         sheet.addDestructiveAction(L10n.Menu.Logout.confirm) {
             self.dismiss(animated: true) {
                 log.debug("Account: Logging out...")
-                
+                AppPreferences.shared.clean()
                 Client.providers.accountProvider.logout(nil)
             }
         }

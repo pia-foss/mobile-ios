@@ -68,8 +68,8 @@ class RegionsViewController: AutolayoutViewController {
     private func stylePopupDialog() {
         let dialogAppearance = PopupDialogDefaultView.appearance()
         dialogAppearance.backgroundColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
-        dialogAppearance.titleFont = TextStyle.textStyle12.font!
-        dialogAppearance.titleColor = Theme.current.palette.appearance == .dark ? .white : TextStyle.textStyle12.color
+        dialogAppearance.messageFont = TextStyle.textStyle12.font!
+        dialogAppearance.messageColor = Theme.current.palette.appearance == .dark ? .white : TextStyle.textStyle12.color
         
         let containerAppearance = PopupDialogContainerView.appearance()
         containerAppearance.cornerRadius    = 0
@@ -117,8 +117,8 @@ class RegionsViewController: AutolayoutViewController {
     // MARK: Actions
     @objc private func showFilter(_ sender: Any?) {
         
-        let popup = PopupDialog(title: L10n.Region.Filter.sortby.uppercased(),
-                                message: nil)
+        let popup = PopupDialog(title: nil,
+                                message: L10n.Region.Filter.sortby.uppercased())
         
         let buttonName = DefaultButton(title: L10n.Region.Filter.name.uppercased(), dismissOnTap: true) {
             AppPreferences.shared.regionFilter = .name
