@@ -451,6 +451,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         accessedDatabase.plain.accountInfo = nil
         accessedDatabase.plain.visibleTiles = AvailableTiles.allTiles()
         accessedDatabase.plain.orderedTiles = AvailableTiles.allTiles()
+        accessedDatabase.plain.historicalServers = []
     }
     #endif
 

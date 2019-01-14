@@ -244,13 +244,14 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
             var lastServers = historicalServers
             if let server = newValue {
                 
-                if lastServers.contains(server),
+                let filtered = lastServers.filter({$0.name == server.name})
+                if filtered.count != 0,
                     let indexOfServer = lastServers.firstIndex(of: server) {
                     lastServers.remove(at: indexOfServer)
-                    lastServers.insert(server, at: 0)
+                    lastServers.insert(server, at: lastServers.count)
+                } else {
+                    lastServers.append(server)
                 }
-                
-                lastServers.append(server)
                 historicalServers = lastServers
             }
         }
@@ -336,6 +337,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.vpnCustomConfigurationMaps)
         backend.removeObject(forKey: Entries.visibleTiles)
         backend.removeObject(forKey: Entries.orderedTiles)
+        backend.removeObject(forKey: Entries.historicalServers)
     }
 
     func clear() {

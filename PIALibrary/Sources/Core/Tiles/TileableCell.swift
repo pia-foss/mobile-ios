@@ -32,6 +32,14 @@ public protocol TileableCell: DetailedTileCell {
 
 public extension TileableCell where Entity: Tileable {
     
+    var leftConstraintValue: CGFloat {
+        return 34
+    }
+
+    var rightConstraintValue: CGFloat {
+        return 40
+    }
+    
     func hasDetailView() -> Bool {
         return false
     }
