@@ -29,8 +29,8 @@ class IPTileCollectionViewCell: UICollectionViewCell, TileableCell {
                 self.tileLeftConstraint.constant = 0
                 self.tileRightConstraint.constant = 0
             case .edit:
-                self.tileLeftConstraint.constant = 34
-                self.tileRightConstraint.constant = 40
+                self.tileLeftConstraint.constant = self.leftConstraintValue
+                self.tileRightConstraint.constant = self.rightConstraintValue
                 self.setupVisibilityButton()
             }
             self.layoutIfNeeded()

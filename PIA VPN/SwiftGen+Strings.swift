@@ -501,6 +501,10 @@ internal enum L10n {
       /// VPN Server
       internal static let title = L10n.tr("Localizable", "tiles.region.title")
     }
+    internal enum Subscription {
+      /// Subscription
+      internal static let title = L10n.tr("Localizable", "tiles.subscription.title")
+    }
   }
 
   internal enum VpnPermission {

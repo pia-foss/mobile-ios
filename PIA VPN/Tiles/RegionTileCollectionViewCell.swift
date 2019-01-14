@@ -37,7 +37,7 @@ class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
                 self.tileLeftConstraint.constant = 0
             case .edit:
                 self.accessoryImageRight.image = Theme.current.dragDropImage()
-                self.tileLeftConstraint.constant = 34
+                self.tileLeftConstraint.constant = self.leftConstraintValue
                 self.setupVisibilityButton()
             }
             self.layoutIfNeeded()

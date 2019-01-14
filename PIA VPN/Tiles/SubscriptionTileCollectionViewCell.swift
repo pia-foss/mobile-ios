@@ -1,25 +1,25 @@
 //
-//  QuickConnectTileCollectionViewCell.swift
+//  SubscriptionTileCollectionViewCell.swift
 //  PIA VPN
 //
-//  Created by Jose Antonio Blaya Garcia on 10/01/2019.
+//  Created by Jose Antonio Blaya Garcia on 14/01/2019.
 //  Copyright © 2019 London Trust Media. All rights reserved.
 //
 
 import UIKit
 import PIALibrary
 
-class QuickConnectTileCollectionViewCell: UICollectionViewCell, TileableCell {
+class SubscriptionTileCollectionViewCell: UICollectionViewCell, TileableCell {
     
-    var tileType: AvailableTiles = .quickConnect
-
-    typealias Entity = QuickConnectTile
+    var tileType: AvailableTiles = .subscription
+    
+    typealias Entity = IPTile
     @IBOutlet private weak var tile: Entity!
     @IBOutlet private weak var accessoryImageRight: UIImageView!
     @IBOutlet private weak var accessoryButtonLeft: UIButton!
     @IBOutlet weak var tileLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var tileRightConstraint: NSLayoutConstraint!
-
+    
     func setupCellForStatus(_ status: TileStatus) {
         self.accessoryImageRight.image = Theme.current.dragDropImage()
         tile.status = status

@@ -20,12 +20,14 @@ class DashboardViewController: AutolayoutViewController {
         case region = 0
         case quickConnect
         case ipTile
-        
+        case subscription
+
         var identifier: String {
             switch self {
             case .ipTile: return "IPTileCell"
             case .quickConnect: return "QuickConnectTileCell"
             case .region: return "RegionTileCell"
+            case .subscription: return "SubscriptionTileCell"
             }
         }
         
@@ -34,6 +36,7 @@ class DashboardViewController: AutolayoutViewController {
             case .ipTile: return "IPTileCollectionViewCell"
             case .quickConnect: return "QuickConnectTileCollectionViewCell"
             case .region: return "RegionTileCollectionViewCell"
+            case .subscription: return "SubscriptionTileCollectionViewCell"
             }
         }
     }
@@ -67,16 +70,7 @@ class DashboardViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.register(UINib(nibName: Cells.ipTile.className,
-                                      bundle: nil),
-                                forCellWithReuseIdentifier: Cells.ipTile.identifier)
-        collectionView.register(UINib(nibName: Cells.quickConnect.className,
-                                      bundle: nil),
-                                forCellWithReuseIdentifier: Cells.quickConnect.identifier)
-        collectionView.register(UINib(nibName: Cells.region.className,
-                                      bundle: nil),
-                                forCellWithReuseIdentifier: Cells.region.identifier)
-        collectionView.backgroundColor = .clear
+        setupCollectionView()
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: Asset.itemMenu.image,
@@ -181,6 +175,22 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     // MARK: Actions
+    private func setupCollectionView() {
+        collectionView.register(UINib(nibName: Cells.ipTile.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.ipTile.identifier)
+        collectionView.register(UINib(nibName: Cells.quickConnect.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.quickConnect.identifier)
+        collectionView.register(UINib(nibName: Cells.region.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.region.identifier)
+        collectionView.register(UINib(nibName: Cells.subscription.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.subscription.identifier)
+        collectionView.backgroundColor = .clear
+    }
+    
     private func updateTileLayout() {
         UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
             self.toggleConnection.alpha = self.tileModeStatus == .normal ? 1 : 0
