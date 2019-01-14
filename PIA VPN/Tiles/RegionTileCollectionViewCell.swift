@@ -29,6 +29,8 @@ class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
     }
     
     func setupCellForStatus(_ status: TileStatus) {
+        Theme.current.applySolidLightBackground(self)
+        Theme.current.applySolidLightBackground(self.contentView)
         tile.status = status
         UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
             switch status {
@@ -48,20 +50,22 @@ class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
     func highlightCell() {
         Theme.current.applyLightBackground(tile)
         Theme.current.applyLightBackground(self)
+        Theme.current.applyLightBackground(self.contentView)
     }
     
     func unhighlightCell() {
         Theme.current.applySolidLightBackground(tile)
         Theme.current.applySolidLightBackground(self)
+        Theme.current.applySolidLightBackground(self.contentView)
     }
     
     private func setupVisibilityButton() {
         if Client.providers.tileProvider.visibleTiles.contains(tileType) {
-            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeActive.image, for: .normal)
-            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeInactive.image, for: .highlighted)
+            accessoryButtonLeft.setImage(Theme.current.activeEyeImage(), for: .normal)
+            accessoryButtonLeft.setImage(Theme.current.inactiveEyeImage(), for: .highlighted)
         } else {
-            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeInactive.image, for: .normal)
-            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeActive.image, for: .highlighted)
+            accessoryButtonLeft.setImage(Theme.current.inactiveEyeImage(), for: .normal)
+            accessoryButtonLeft.setImage(Theme.current.activeEyeImage(), for: .highlighted)
         }
     }
 

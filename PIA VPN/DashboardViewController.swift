@@ -55,7 +55,6 @@ class DashboardViewController: AutolayoutViewController {
 
     private var tileModeStatus: TileStatus = .normal {
         didSet {
-            collectionView.reloadData()
             self.updateTileLayout()
         }
     }
@@ -140,15 +139,7 @@ class DashboardViewController: AutolayoutViewController {
         viewContent.isHidden = false
         viewRows.isHidden = false
 
-        // XXX: scale menu item manually
-//        UIButton *buttonMenu = [UIButton buttonWithType:UIButtonTypeCustom];
-//        const CGFloat itemRatio = 22.0 / 15.0;
-//        const CGFloat itemWidth = 17.0;
-//        buttonMenu.frame = CGRectMake(0, 0, itemWidth, itemWidth / itemRatio);
-//        [buttonMenu setImage:[UIImage imageNamed:@"item-menu"] forState:UIControlStateNormal];
-//        [buttonMenu addTarget:self action:@selector(openMenu:) forControlEvents:UIControlEventTouchUpInside];
-//        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:buttonMenu];
-
+        collectionView.reloadData()
         updateCurrentStatus()
     }
 
@@ -396,6 +387,8 @@ class DashboardViewController: AutolayoutViewController {
 
         Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
         
+        Theme.current.applySolidLightBackground(collectionView)
+
         collectionView.collectionViewLayout.invalidateLayout()
         collectionView.reloadData()
     }
@@ -496,7 +489,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         
         let tileIndex = tileModeStatus == .normal ?
             Client.providers.tileProvider.visibleTiles[indexPath.row].rawValue :
-            AvailableTiles.allTiles()[indexPath.row].rawValue
+            Client.providers.tileProvider.orderedTiles[indexPath.row].rawValue
         
         let identifier = Cells.objectIdentifyBy(index: tileIndex).identifier
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier,
@@ -504,7 +497,6 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         if let cell = cell as? EditableTileCell {
             cell.setupCellForStatus(self.tileModeStatus)
         }
-        Theme.current.applySolidLightBackground(cell)
         return cell
     }
     
@@ -515,20 +507,23 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tileModeStatus == .normal ?
             Client.providers.tileProvider.visibleTiles.count :
-            AvailableTiles.allTiles().count
+            Client.providers.tileProvider.orderedTiles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        if let detailedCell = cell as? DetailedTileCell,
-            detailedCell.hasDetailView(),
-            let segueIdentifier = detailedCell.segueIdentifier() {
-            performSegue(withIdentifier: segueIdentifier, sender: nil)
+        if tileModeStatus == .normal {
+            let cell = collectionView.cellForItem(at: indexPath)
+            if let detailedCell = cell as? DetailedTileCell,
+                detailedCell.hasDetailView(),
+                let segueIdentifier = detailedCell.segueIdentifier() {
+                performSegue(withIdentifier: segueIdentifier, sender: nil)
+            }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? DetailedTileCell,
+        if tileModeStatus == .normal,
+            let cell = collectionView.cellForItem(at: indexPath) as? DetailedTileCell,
             cell.hasDetailView() {
             UIView.animate(withDuration: 0.1, animations: {
                 cell.highlightCell()
@@ -537,11 +532,24 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? DetailedTileCell,
+        if tileModeStatus == .normal,
+            let cell = collectionView.cellForItem(at: indexPath) as? DetailedTileCell,
             cell.hasDetailView() {
             UIView.animate(withDuration: 0.1, animations: {
                 cell.unhighlightCell()
             })
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return self.tileModeStatus == .edit
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        var orderedTiles = Client.providers.tileProvider.orderedTiles
+        let tile = orderedTiles.remove(at: sourceIndexPath.row)
+        orderedTiles.insert(tile, at: destinationIndexPath.row)
+        Client.providers.tileProvider.orderedTiles = orderedTiles
+        collectionView.reloadData()
     }
 }
