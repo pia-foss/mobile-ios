@@ -16,10 +16,26 @@ class DefaultTileProvider: TileProvider, DatabaseAccess {
     // MARK: TileProvider
     var visibleTiles: [AvailableTiles] {
         get {
-            return accessedDatabase.plain.visibleTiles
+            var orderedVisibleTiles: [AvailableTiles] = []
+            let visibleTiles = accessedDatabase.plain.visibleTiles
+            let orderedTiles = accessedDatabase.plain.orderedTiles
+            for item in orderedTiles where visibleTiles.contains(item) {
+                orderedVisibleTiles.append(item)
+            }
+            return orderedVisibleTiles
         }
         set {
             accessedDatabase.plain.visibleTiles = newValue
+        }
+    }
+    
+    // MARK: TileProvider
+    var orderedTiles: [AvailableTiles] {
+        get {
+            return accessedDatabase.plain.orderedTiles
+        }
+        set {
+            accessedDatabase.plain.orderedTiles = newValue
         }
     }
 

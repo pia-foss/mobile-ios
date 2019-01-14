@@ -42,7 +42,9 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         static let mace = "MACE" // legacy
         
-        static let visibleTiles = "VisibleTiles" // legacy
+        static let visibleTiles = "VisibleTiles"
+
+        static let orderedTiles = "OrderedTiles"
 
     }
     
@@ -55,6 +57,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
     private var cachedServersCopy: [Server]?
     
     private var visibleTilesCopy: [AvailableTiles]?
+
+    private var orderedTilesCopy: [AvailableTiles]?
 
     private var serversConfigurationCopy: ServersBundle.Configuration?
     
@@ -166,6 +170,32 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(intArray, forKey: Entries.visibleTiles)
         }
     }
+    
+    var orderedTiles: [AvailableTiles] {
+        get {
+            if let copy = orderedTilesCopy {
+                return copy
+            }
+            guard let intArray = backend.array(forKey: Entries.orderedTiles) as? [Int] else {
+                return AvailableTiles.defaultOrderedTiles()
+            }
+            var tiles: [AvailableTiles] = []
+            for value in intArray {
+                if let tile = AvailableTiles(rawValue: value) {
+                    tiles.append(tile)
+                }
+            }
+            return tiles
+        }
+        set {
+            var intArray: [Int] = []
+            for value in newValue {
+                intArray.append(value.rawValue)
+            }
+            backend.set(intArray, forKey: Entries.orderedTiles)
+        }
+    }
+
     
     // MARK: Server
     var historicalServers: [Server] {
@@ -304,6 +334,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.mace)
         backend.removeObject(forKey: Entries.vpnType)
         backend.removeObject(forKey: Entries.vpnCustomConfigurationMaps)
+        backend.removeObject(forKey: Entries.visibleTiles)
+        backend.removeObject(forKey: Entries.orderedTiles)
     }
 
     func clear() {

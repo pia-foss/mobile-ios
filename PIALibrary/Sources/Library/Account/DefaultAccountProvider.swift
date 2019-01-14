@@ -449,6 +449,8 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
         accessedDatabase.secure.setPublicUsername(nil)
         accessedDatabase.plain.accountInfo = nil
+        accessedDatabase.plain.visibleTiles = AvailableTiles.allTiles()
+        accessedDatabase.plain.orderedTiles = AvailableTiles.allTiles()
     }
     #endif
 

@@ -16,6 +16,11 @@ public enum AvailableTiles: Int, EnumsBuilder {
     public static func allTiles() -> [AvailableTiles] {
         return [.region, .quickConnect, .ip]
     }
+    
+    public static func defaultOrderedTiles() -> [AvailableTiles] {
+        return [.region, .quickConnect, .ip]
+    }
+
 }
 
 public enum TileStatus {

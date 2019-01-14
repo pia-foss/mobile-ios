@@ -11,7 +11,10 @@ import Foundation
 /// Business interface related to the tiles.
 public protocol TileProvider: class {
     
-    /// Returns `true` if currently logged in, `false` otherwise.
+    /// the visible tiles in the dashboard.
     var visibleTiles: [AvailableTiles] { get set }
-    
+
+    /// the order of the tiles to appear in the dashboard.
+    var orderedTiles: [AvailableTiles] { get set }
+
 }

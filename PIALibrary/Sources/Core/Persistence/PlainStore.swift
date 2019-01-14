@@ -38,6 +38,8 @@ protocol PlainStore: class {
     // MARK: Tiles
     var visibleTiles: [AvailableTiles] {get set}
     
+    var orderedTiles: [AvailableTiles] {get set}
+
     // MARK: VPN
     
     var vpnType: String? { get set }
