@@ -15,6 +15,10 @@ private let log = SwiftyBeaver.self
 
 class DashboardViewController: AutolayoutViewController {
     
+    private enum TileSize: CGFloat {
+        case standard = 89.0
+    }
+    
     private enum Cells: Int, EnumsBuilder {
         
         case region = 0
@@ -109,6 +113,7 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
         nc.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateCurrentStatus), name: .PIAThemeDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(updateTiles), name: .PIATilesDidChange, object: nil)
 
 #if !TARGET_IPHONE_SIMULATOR
         let types: UIUserNotificationType = [.alert, .badge, .sound]
@@ -308,6 +313,10 @@ class DashboardViewController: AutolayoutViewController {
         updateCurrentStatusWithUserInfo(nil)
     }
     
+    @objc private func updateTiles() {
+        collectionView.reloadData()
+    }
+
     @objc private func updateCurrentStatusWithUserInfo(_ userInfo: [AnyHashable: Any]?) {
         currentStatus = Client.providers.vpnProvider.vpnStatus
 
@@ -465,7 +474,8 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 89)
+        return CGSize(width: collectionView.frame.width,
+                      height: TileSize.standard.rawValue)
     }
     
     func collectionView(_ collectionView: UICollectionView,

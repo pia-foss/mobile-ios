@@ -31,8 +31,8 @@ class QuickConnectTileCollectionViewCell: UICollectionViewCell, TileableCell {
                 self.tileLeftConstraint.constant = 0
                 self.tileRightConstraint.constant = 0
             case .edit:
-                self.tileLeftConstraint.constant = 34
-                self.tileRightConstraint.constant = 40
+                self.tileLeftConstraint.constant = self.leftConstraintValue
+                self.tileRightConstraint.constant = self.rightConstraintValue
                 self.setupVisibilityButton()
             }
             self.layoutIfNeeded()
@@ -58,6 +58,6 @@ class QuickConnectTileCollectionViewCell: UICollectionViewCell, TileableCell {
             visibleTiles.append(tileType)
             Client.providers.tileProvider.visibleTiles = visibleTiles
         }
-        Macros.postNotification(.PIAThemeDidChange)
+        Macros.postNotification(.PIATilesDidChange)
     }
 }
