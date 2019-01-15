@@ -524,6 +524,10 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "tiles.usage.title")
       /// Upload
       internal static let upload = L10n.tr("Localizable", "tiles.usage.upload")
+      internal enum Ipsec {
+        /// USAGE (Disabled unless using OpenVPN)
+        internal static let title = L10n.tr("Localizable", "tiles.usage.ipsec.title")
+      }
     }
   }
 

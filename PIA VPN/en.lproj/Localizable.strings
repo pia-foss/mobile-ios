@@ -217,5 +217,6 @@
 "tiles.subscription.yearly" = "Yearly";
 "tiles.subscription.days.left" = "(%d days left)";
 "tiles.usage.title" = "Usage";
+"tiles.usage.ipsec.title" = "USAGE (Disabled unless using OpenVPN)";
 "tiles.usage.upload" = "Upload";
 "tiles.usage.download" = "Download";
