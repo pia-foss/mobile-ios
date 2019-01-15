@@ -19,8 +19,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="335" height="76"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSn-9h-eq8">
-                        <rect key="frame" x="15" y="27" width="16" height="22"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSn-9h-eq8">
+                        <rect key="frame" x="0.0" y="21" width="34" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="34" id="6GE-p9-jbu"/>
+                            <constraint firstAttribute="width" constant="34" id="BJI-EI-k0I"/>
+                        </constraints>
                         <state key="normal" image="eye-active"/>
                         <connections>
                             <action selector="changeTileVisibility" destination="gTV-IL-0wX" eventType="touchUpInside" id="bFk-gl-t55"/>
@@ -37,7 +41,7 @@
             </view>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="gFR-hf-yjv" secondAttribute="bottom" id="5OI-fz-ihv"/>
-                <constraint firstItem="tSn-9h-eq8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="6AV-Qw-6jo"/>
+                <constraint firstItem="tSn-9h-eq8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="6AV-Qw-6jo"/>
                 <constraint firstItem="gFR-hf-yjv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Fpx-6G-lTK"/>
                 <constraint firstItem="xNn-mr-ccn" firstAttribute="width" secondItem="xNn-mr-ccn" secondAttribute="height" multiplier="1:1" id="LAs-7x-gF6"/>
                 <constraint firstItem="xNn-mr-ccn" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Snp-bQ-hiv"/>

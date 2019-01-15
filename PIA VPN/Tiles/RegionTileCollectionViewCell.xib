@@ -19,8 +19,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="484" height="117"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Npc-wO-bht">
-                        <rect key="frame" x="15" y="47.5" width="19" height="22"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Npc-wO-bht">
+                        <rect key="frame" x="0.0" y="41.5" width="34" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="34" id="jHP-Dd-1IU"/>
+                            <constraint firstAttribute="width" constant="34" id="wOe-Lk-jKc"/>
+                        </constraints>
                         <state key="normal" image="eye-active"/>
                         <connections>
                             <action selector="changeTileVisibility" destination="gTV-IL-0wX" eventType="touchUpInside" id="VQ4-bh-35U"/>
@@ -40,7 +44,7 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="Npc-wO-bht" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="1FQ-eq-y9t"/>
+                <constraint firstItem="Npc-wO-bht" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="1FQ-eq-y9t"/>
                 <constraint firstItem="WyC-xZ-KKf" firstAttribute="leading" secondItem="jZJ-xb-NWP" secondAttribute="trailing" id="3uU-Ru-UpS"/>
                 <constraint firstAttribute="trailing" secondItem="WyC-xZ-KKf" secondAttribute="trailing" constant="15" id="MxK-Nk-OL3"/>
                 <constraint firstItem="jZJ-xb-NWP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="gfm-k5-z57"/>

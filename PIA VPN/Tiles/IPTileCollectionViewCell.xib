@@ -19,8 +19,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="751" height="174"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWg-5m-1wH">
-                        <rect key="frame" x="15" y="76" width="19" height="22"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWg-5m-1wH">
+                        <rect key="frame" x="0.0" y="70" width="34" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="34" id="ikS-W5-PPW"/>
+                            <constraint firstAttribute="height" constant="34" id="n0k-fl-4f4"/>
+                        </constraints>
                         <state key="normal" image="eye-active"/>
                         <connections>
                             <action selector="changeTileVisibility" destination="gTV-IL-0wX" eventType="touchUpInside" id="URh-aw-dI1"/>
@@ -41,7 +45,7 @@
                 <constraint firstAttribute="trailing" secondItem="Rq7-Zl-mx1" secondAttribute="trailing" id="DDI-EZ-U3G"/>
                 <constraint firstAttribute="trailing" secondItem="LfW-8t-ljO" secondAttribute="trailing" constant="15" id="Fnw-AN-RdH"/>
                 <constraint firstAttribute="bottom" secondItem="Rq7-Zl-mx1" secondAttribute="bottom" id="PjF-bu-StA"/>
-                <constraint firstItem="RWg-5m-1wH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="R4G-Du-naX"/>
+                <constraint firstItem="RWg-5m-1wH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="R4G-Du-naX"/>
                 <constraint firstItem="LfW-8t-ljO" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="bWo-02-RUo"/>
                 <constraint firstItem="Rq7-Zl-mx1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ls4-Tg-2aF"/>
                 <constraint firstItem="LfW-8t-ljO" firstAttribute="width" secondItem="LfW-8t-ljO" secondAttribute="height" multiplier="1:1" id="oIC-Zn-2Oi"/>
