@@ -79,7 +79,7 @@ extension Theme {
     
     public func applyMenuBackground(_ view: UIView) {
         view.backgroundColor = palette.appearance == .dark ?
-            UIColor.piaGrey10 : UIColor.piaWhite
+            UIColor.piaGrey6 : UIColor.piaWhite
     }
 
     public func applyMenuSubtitle(_ label: UILabel) {

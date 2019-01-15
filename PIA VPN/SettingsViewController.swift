@@ -817,13 +817,15 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         if let textLabel = cell.textLabel {
             Theme.current.applySettingsCellTitle(textLabel,
                                                  appearance: .dark)
+            textLabel.backgroundColor = .clear
         }
         if let detailLabel = cell.detailTextLabel {
             Theme.current.applySubtitle(detailLabel)
+            detailLabel.backgroundColor = .clear
         }
         
         let backgroundView = UIView()
-        backgroundView.backgroundColor = Theme.current.palette.lightBackground
+        Theme.current.applySolidLightBackground(backgroundView)
         cell.selectedBackgroundView = backgroundView
 
         return cell
@@ -1010,7 +1012,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension SettingsViewController: OptionsViewControllerDelegate {
     func backgroundColorForOptionsController(_ controller: OptionsViewController) -> UIColor {
-        return Theme.current.palette.lightBackground
+        return Theme.current.palette.solidLightBackground
     }
     
     func tableStyleForOptionsController(_ controller: OptionsViewController) -> UITableViewStyle {
@@ -1103,7 +1105,7 @@ extension SettingsViewController: OptionsViewControllerDelegate {
         }
         
         let backgroundView = UIView()
-        backgroundView.backgroundColor = Theme.current.palette.lightBackground
+        backgroundView.backgroundColor = Theme.current.palette.solidLightBackground
         cell.selectedBackgroundView = backgroundView
 
         Theme.current.applyLightBackground(cell)

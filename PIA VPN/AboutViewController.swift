@@ -107,6 +107,7 @@ class AboutViewController: AutolayoutViewController {
         super.viewShouldRestyle()
     
         tableView.separatorInset = UIEdgeInsetsMake(0, 30, 0, 0)
+        Theme.current.applyDividerToSeparator(tableView)
         styleNavigationBarWithTitle(L10n.Menu.Item.about)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
