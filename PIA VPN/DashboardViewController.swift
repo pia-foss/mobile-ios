@@ -321,6 +321,10 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     @objc private func viewHasRotated() {
+        if tileModeStatus == .edit,
+            let tileLayout = collectionView.collectionViewLayout as? TileFlowLayout {
+            tileLayout.removeDraggingViewFromSuperView()
+        }
         updateCurrentStatus()
         updateTileLayout()
     }
