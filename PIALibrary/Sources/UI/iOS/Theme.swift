@@ -288,7 +288,9 @@ public class Theme {
     
     /// :nodoc:
     public func applyLightBackground(_ view: UIView) {
-        view.backgroundColor = palette.lightBackground
+        view.backgroundColor = palette.appearance == .dark ?
+            palette.lightBackground.withAlphaComponent(0.3) :
+            palette.lightBackground
     }
     
     /// :nodoc:
@@ -313,6 +315,16 @@ public class Theme {
     /// :nodoc:
     public func applySolidLightBackground(_ view: UIView) {
         view.backgroundColor = palette.solidLightBackground
+    }
+    
+    /// :nodoc:
+    public func applyRegionSolidLightBackground(_ view: UIView) {
+        view.backgroundColor = palette.appearance == .dark ? UIColor.piaGrey6 : palette.solidLightBackground
+    }
+    
+    /// :nodoc:
+    public func applyRegionLightBackground(_ view: UIView) {
+        view.backgroundColor = palette.appearance == .dark ? UIColor.piaGrey10 : palette.lightBackground
     }
     
     /// :nodoc:

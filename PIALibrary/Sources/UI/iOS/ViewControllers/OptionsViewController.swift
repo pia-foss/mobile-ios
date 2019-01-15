@@ -86,8 +86,8 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
         styleNavigationBarWithTitle(self.navigationController?.title ?? "")
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
-            Theme.current.applySolidLightBackground(view)
-            Theme.current.applySolidLightBackground(viewContainer)
+            Theme.current.applyLightBackground(view)
+            Theme.current.applyLightBackground(viewContainer)
         }
         if tableView != nil {
             Theme.current.applySolidLightBackground(tableView)
@@ -125,6 +125,10 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
         if let detailLabel = cell.detailTextLabel {
             Theme.current.applySubtitle(detailLabel)
         }
+        
+        let backgroundView = UIView()
+        Theme.current.applySolidLightBackground(backgroundView)
+        cell.selectedBackgroundView = backgroundView
 
         return cell
     }
