@@ -74,12 +74,15 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         
+        styleNavigationBarWithTitle(L10n.Settings.Dns.Custom.dns)
+        
         if let viewContainer = viewContainer {
+            Theme.current.applySolidLightBackground(view)
             Theme.current.applySolidLightBackground(viewContainer)
         }
 
         for label in [labelPrimaryDNS!, labelSecondaryDNS!] {
-            Theme.current.applyLabel(label, appearance: .dark)
+            Theme.current.applySubtitle(label)
         }
         
         Theme.current.applyInput(textPrimaryDNS)
