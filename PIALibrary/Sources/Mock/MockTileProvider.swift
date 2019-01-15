@@ -10,7 +10,7 @@ import Foundation
 
 public class MockTileProvider: TileProvider {
     
-    public var visibleTiles: [AvailableTiles] = AvailableTiles.allTiles()
+    public var visibleTiles: [AvailableTiles] = AvailableTiles.defaultTiles()
     
     public var orderedTiles: [AvailableTiles] = AvailableTiles.defaultOrderedTiles()
 

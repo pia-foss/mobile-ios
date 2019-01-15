@@ -152,7 +152,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
                 return copy
             }
             guard let intArray = backend.array(forKey: Entries.visibleTiles) as? [Int] else {
-                return AvailableTiles.allTiles()
+                return AvailableTiles.defaultTiles()
             }
             var tiles: [AvailableTiles] = []
             for value in intArray {
@@ -177,7 +177,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
                 return copy
             }
             guard let intArray = backend.array(forKey: Entries.orderedTiles) as? [Int] else {
-                return AvailableTiles.defaultOrderedTiles()
+                return AvailableTiles.allTiles()
             }
             var tiles: [AvailableTiles] = []
             for value in intArray {

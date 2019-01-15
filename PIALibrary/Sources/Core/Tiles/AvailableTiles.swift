@@ -19,6 +19,10 @@ public enum AvailableTiles: Int, EnumsBuilder {
         return [.region, .quickConnect, .ip, .subscription, .usage]
     }
     
+    public static func defaultTiles() -> [AvailableTiles] {
+        return [.region, .quickConnect, .ip]
+    }
+
     public static func defaultOrderedTiles() -> [AvailableTiles] {
         return [.region, .quickConnect, .ip, .subscription, .usage]
     }
