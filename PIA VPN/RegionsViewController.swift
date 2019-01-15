@@ -49,7 +49,7 @@ class RegionsViewController: AutolayoutViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
 
         setupSearchBarController()
-        stylePopupDialog()
+        Macros.stylePopupDialog()
 
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
@@ -65,28 +65,6 @@ class RegionsViewController: AutolayoutViewController {
         navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Region.Accessibility.filter
     }
     
-    private func stylePopupDialog() {
-        let dialogAppearance = PopupDialogDefaultView.appearance()
-        dialogAppearance.backgroundColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
-        dialogAppearance.messageFont = TextStyle.textStyle12.font!
-        dialogAppearance.messageColor = Theme.current.palette.appearance == .dark ? .white : TextStyle.textStyle12.color
-        
-        let containerAppearance = PopupDialogContainerView.appearance()
-        containerAppearance.cornerRadius    = 0
-        containerAppearance.shadowEnabled   = false
-        
-        let overlayAppearance = PopupDialogOverlayView.appearance()
-        overlayAppearance.color           = .black
-        overlayAppearance.blurEnabled     = false
-        overlayAppearance.liveBlurEnabled = false
-        overlayAppearance.opacity         = 0.5
-        
-        let buttonAppearance = DefaultButton.appearance()
-        buttonAppearance.titleFont      = TextStyle.textStyle21.font!
-        buttonAppearance.titleColor     = TextStyle.textStyle21.color
-        buttonAppearance.buttonColor    = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
-        buttonAppearance.separatorColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey10 : UIColor.piaGrey1
-    }
     
     private func setupSearchBarController() {
         searchController.searchResultsUpdater = self

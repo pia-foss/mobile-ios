@@ -136,9 +136,9 @@ class AccountViewController: AutolayoutViewController {
             return
         }
         
-        let alert = Macros.alert(L10n.Account.Update.Email.Require.Password.title,
-                                 L10n.Account.Update.Email.Require.Password.message)
-        
+        let alert = Macros.alertController(L10n.Account.Update.Email.Require.Password.title,
+                                           L10n.Account.Update.Email.Require.Password.message)
+
         alert.addCancelAction(L10n.Global.cancel)
         let action = UIAlertAction(title: L10n.Account.Update.Email.Require.Password.button,
                                    style: .default) { [weak self] (alertAction) in
@@ -165,7 +165,7 @@ class AccountViewController: AutolayoutViewController {
                                                                     
                                                                     weakSelf.textEmail.text = ""
                                                                     let alert = Macros.alert(L10n.Global.error, L10n.Account.Error.unauthorized)
-                                                                    alert.addCancelAction(L10n.Global.close)
+                                                                    alert.addDefaultAction(L10n.Global.close)
                                                                     self?.present(alert, animated: true, completion: nil)
                                                                     
                                                                     return
@@ -173,7 +173,7 @@ class AccountViewController: AutolayoutViewController {
                                                                 
                                                                 log.debug("Account: Email successfully modified")
                                                                 let alert = Macros.alert(nil, L10n.Account.Save.success)
-                                                                alert.addCancelAction(L10n.Global.ok)
+                                                                alert.addDefaultAction(L10n.Global.ok)
                                                                 weakSelf.present(alert, animated: true, completion: nil)
                                                                 weakSelf.textEmail.text = email
                                                                 weakSelf.textEmail.endEditing(true)
@@ -218,14 +218,14 @@ class AccountViewController: AutolayoutViewController {
         log.error("IAP: Failed to restore payment receipt (error: \(error?.localizedDescription ?? ""))")
 
         let alert = Macros.alert(L10n.Global.error, error?.localizedDescription)
-        alert.addCancelAction(L10n.Global.close)
+        alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
     
     private func handleReceiptSubmissionWithError(_ error: Error?) {
         if let error = error {
             let alert = Macros.alert(L10n.Global.error, error.localizedDescription)
-            alert.addCancelAction(L10n.Global.close)
+            alert.addDefaultAction(L10n.Global.close)
             present(alert, animated: true, completion: nil)
             return
         }
@@ -236,7 +236,7 @@ class AccountViewController: AutolayoutViewController {
             L10n.Renewal.Success.title,
             L10n.Renewal.Success.message
         )
-        alert.addCancelAction(L10n.Global.close)
+        alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
 
         redisplayAccount()
@@ -247,7 +247,7 @@ class AccountViewController: AutolayoutViewController {
             L10n.Account.Restore.Failure.title,
             L10n.Account.Restore.Failure.message
         )
-        alert.addCancelAction(L10n.Global.close)
+        alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
 

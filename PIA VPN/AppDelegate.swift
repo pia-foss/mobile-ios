@@ -54,7 +54,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             L10n.Notifications.Disabled.title,
             L10n.Notifications.Disabled.message
         )
-        alert.addDefaultAction(L10n.Notifications.Disabled.settings) {
+        alert.addActionWithTitle(L10n.Notifications.Disabled.settings) {
             application.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
         }
         alert.addCancelAction(L10n.Global.ok)

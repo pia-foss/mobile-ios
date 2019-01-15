@@ -320,11 +320,8 @@ class SettingsViewController: AutolayoutViewController {
         
             defer {
                 let alert = Macros.alert(title, message)
-                alert.addCancelAction(L10n.Global.ok)
+                alert.addDefaultAction(L10n.Global.ok)
                 self.present(alert, animated: true, completion: nil)
-                
-//                UIActivityViewController *vc = [[UIActivityViewController alloc] initWithActivityItems:@[log] applicationActivities:nil];
-//                [self presentViewController:vc animated:YES completion:NULL];
             }
             
             guard let log = log else {
@@ -348,7 +345,7 @@ class SettingsViewController: AutolayoutViewController {
             L10n.Settings.Reset.Defaults.Confirm.title,
             L10n.Settings.Reset.Defaults.Confirm.message
         )
-        alert.addDestructiveAction(L10n.Settings.Reset.Defaults.Confirm.button) {
+        alert.addDestructiveActionWithTitle(L10n.Settings.Reset.Defaults.Confirm.button) {
             self.doReset()
         }
         alert.addCancelAction(L10n.Global.cancel)
@@ -423,15 +420,15 @@ class SettingsViewController: AutolayoutViewController {
             )
 
             // reconnect -> reconnect VPN and close
-            alert.addDefaultAction(L10n.Settings.Commit.Buttons.reconnect) {
+            alert.addActionWithTitle(L10n.Settings.Commit.Buttons.reconnect) {
                 self.commitPreferences()
                 completionHandlerAfterVPNAction(true)
             }
 
             // cancel -> revert changes and close
-            alert.addAction(UIAlertAction(title: L10n.Global.cancel, style: .cancel) { (action) in
+            alert.addCancelActionWithTitle(L10n.Global.cancel) {
                 completionHandler()
-            })
+            }
             present(alert, animated: true, completion: nil)
             return
         }
@@ -446,14 +443,15 @@ class SettingsViewController: AutolayoutViewController {
             )
 
             // reconnect -> reconnect VPN and close
-            alert.addDefaultAction(L10n.Settings.Commit.Buttons.reconnect) {
+            alert.addActionWithTitle(L10n.Settings.Commit.Buttons.reconnect) {
                 completionHandlerAfterVPNAction(true)
             }
 
             // later -> close
-            alert.addAction(UIAlertAction(title: L10n.Settings.Commit.Buttons.later, style: .cancel) { (action) in
+            alert.addCancelActionWithTitle(L10n.Settings.Commit.Buttons.later) {
                 completionHandler()
-            })
+            }
+
             present(alert, animated: true, completion: nil)
             return
         }
@@ -498,7 +496,7 @@ class SettingsViewController: AutolayoutViewController {
             }
             
             let alert = Macros.alert(nil, addresses.joined(separator: ","))
-            alert.addCancelAction(L10n.Global.close)
+            alert.addDefaultAction(L10n.Global.close)
             self.present(alert, animated: true, completion: nil)
         }
     }
@@ -1195,15 +1193,10 @@ extension SettingsViewController: OptionsViewControllerDelegate {
                 if !isFound && option == DNSList.CUSTOM_DNS_KEY {
                     let alertController = Macros.alert(L10n.Settings.Dns.Custom.dns,
                                                        L10n.Settings.Dns.Alert.Create.message)
-                    let saveAction = UIAlertAction(title: L10n.Global.ok, style: UIAlertActionStyle.default, handler: { alert -> Void in
+                    alertController.addActionWithTitle(L10n.Global.ok) {
                         self.perform(segue: StoryboardSegue.Main.customDNSSegueIdentifier)
-                    })
-                    let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: UIAlertActionStyle.default,
-                                                     handler: nil)
-                    
-                    alertController.addAction(saveAction)
-                    alertController.addAction(cancelAction)
-                    
+                    }
+                    alertController.addCancelAction(L10n.Global.cancel)
                     self.present(alertController,
                                  animated: true,
                                  completion: nil)

@@ -158,7 +158,8 @@ class DashboardViewController: AutolayoutViewController {
                     L10n.Settings.ContentBlocker.title,
                     L10n.Dashboard.ContentBlocker.Intro.message
                 )
-                alert.addCancelAction(L10n.Global.ok)
+                alert.addActionWithTitle(L10n.Global.ok) {
+                }
                 present(alert, animated: true, completion: nil)
                 return
             }

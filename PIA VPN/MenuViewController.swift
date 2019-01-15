@@ -174,7 +174,7 @@ class MenuViewController: AutolayoutViewController {
             L10n.Global.error,
             errorMessage
         )
-        alert.addCancelAction(L10n.Global.close)
+        alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
 
@@ -186,7 +186,7 @@ class MenuViewController: AutolayoutViewController {
             L10n.Menu.Renewal.Message.trial
         )
         alert.addCancelAction(L10n.Global.cancel)
-        alert.addDefaultAction(L10n.Menu.Renewal.purchase) {
+        alert.addActionWithTitle(L10n.Menu.Renewal.purchase) {
             self.dismiss(animated: true) {
                 self.delegate?.menu(didDetectTrialUpgrade: self)
             }
@@ -203,7 +203,7 @@ class MenuViewController: AutolayoutViewController {
             L10n.Menu.Renewal.Message.website
         )
         alert.addCancelAction(L10n.Global.cancel)
-        alert.addDefaultAction(L10n.Menu.Renewal.renew) {
+        alert.addActionWithTitle(L10n.Menu.Renewal.renew) {
             UIApplication.shared.openURL(AppConstants.Web.homeURL)
         }
         present(alert, animated: true, completion: nil)
@@ -246,7 +246,7 @@ class MenuViewController: AutolayoutViewController {
         log.error("IAP: Purchase failed (error: \(error)")
 
         let alert = Macros.alert(L10n.Global.error, error.localizedDescription)
-        alert.addCancelAction(L10n.Global.close)
+        alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
 
@@ -257,7 +257,7 @@ class MenuViewController: AutolayoutViewController {
             L10n.Renewal.Success.title,
             L10n.Renewal.Success.message
         )
-        alert.addCancelAction(L10n.Global.close)
+        alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
 
@@ -272,7 +272,7 @@ class MenuViewController: AutolayoutViewController {
             L10n.Global.error,
             L10n.Renewal.Failure.message
         )
-        alert.addCancelAction(L10n.Global.close)
+        alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
     
@@ -282,7 +282,7 @@ class MenuViewController: AutolayoutViewController {
             L10n.Menu.Logout.message
         )
         sheet.addCancelAction(L10n.Global.cancel)
-        sheet.addDestructiveAction(L10n.Menu.Logout.confirm) {
+        sheet.addDestructiveActionWithTitle(L10n.Menu.Logout.confirm) {
             self.dismiss(animated: true) {
                 log.debug("Account: Logging out...")
                 AppPreferences.shared.clean()
