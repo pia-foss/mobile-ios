@@ -51,16 +51,14 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
         tableView.backgroundColor = bgColor
         tableView.dataSource = self
         tableView.delegate = self
+
         viewContainer.addSubview(tableView)
 
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: viewContainer.layoutMarginsGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: viewContainer.layoutMarginsGuide.bottomAnchor),
-            tableView.leftAnchor.constraint(equalTo: viewContainer.layoutMarginsGuide.leftAnchor),
-            tableView.rightAnchor.constraint(equalTo: viewContainer.layoutMarginsGuide.rightAnchor)
-        ])
-
+        tableView.addConstaintsToSuperview(leadingOffset: 0,
+                                           trailingOffset: 0,
+                                           topOffset: 0,
+                                           bottomOffset: 0)
+        
         delegate?.optionsController(self, didLoad: tableView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
