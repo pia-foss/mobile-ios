@@ -419,6 +419,7 @@ enum Asset {
   static let icon3dtSelectRegion = ImageAsset(name: "icon-3dt-select-region")
   static let iconAbout = ImageAsset(name: "icon-about")
   static let iconAccount = ImageAsset(name: "icon-account")
+  static let iconAdd = ImageAsset(name: "icon-add")
   static let iconContact = ImageAsset(name: "icon-contact")
   static let iconDownload = ImageAsset(name: "icon-download")
   static let iconEye = ImageAsset(name: "icon-eye")
@@ -427,6 +428,7 @@ enum Asset {
   static let iconLogout = ImageAsset(name: "icon-logout")
   static let iconPrivacy = ImageAsset(name: "icon-privacy")
   static let iconRegion = ImageAsset(name: "icon-region")
+  static let iconRemove = ImageAsset(name: "icon-remove")
   static let iconSelectedWhite = ImageAsset(name: "icon-selected-white")
   static let iconSelected = ImageAsset(name: "icon-selected")
   static let iconSettings = ImageAsset(name: "icon-settings")
@@ -434,6 +436,7 @@ enum Asset {
   static let iconUnselected = ImageAsset(name: "icon-unselected")
   static let iconUpload = ImageAsset(name: "icon-upload")
   static let iconWarning = ImageAsset(name: "icon-warning")
+  static let iconWifi = ImageAsset(name: "icon-wifi")
   static let imageContentBlocker = ImageAsset(name: "image-content-blocker")
   static let imageRobot = ImageAsset(name: "image-robot")
   static let imageRobotside = ImageAsset(name: "image-robotside")
@@ -806,6 +809,7 @@ enum Asset {
     icon3dtSelectRegion,
     iconAbout,
     iconAccount,
+    iconAdd,
     iconContact,
     iconDownload,
     iconEye,
@@ -814,6 +818,7 @@ enum Asset {
     iconLogout,
     iconPrivacy,
     iconRegion,
+    iconRemove,
     iconSelectedWhite,
     iconSelected,
     iconSettings,
@@ -821,6 +826,7 @@ enum Asset {
     iconUnselected,
     iconUpload,
     iconWarning,
+    iconWifi,
     imageContentBlocker,
     imageRobot,
     imageRobotside,

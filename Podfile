@@ -93,6 +93,14 @@ target 'PIA VPN Tunnel' do
     tunnel_pods
 end
 
+target 'PIA VPNTests' do
+    app_pods
+    pod 'HockeySDK'
+    pod 'Firebase/Core'
+    pod 'Crashlytics'
+    pod 'Fabric'
+end
+
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         if ['PopupDialog'].include? target.name
