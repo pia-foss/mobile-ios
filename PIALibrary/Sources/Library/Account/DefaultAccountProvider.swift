@@ -452,6 +452,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         accessedDatabase.plain.visibleTiles = AvailableTiles.defaultTiles()
         accessedDatabase.plain.orderedTiles = AvailableTiles.defaultTiles()
         accessedDatabase.plain.historicalServers = []
+        accessedDatabase.plain.reset()
     }
     #endif
 
