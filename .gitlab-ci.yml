@@ -80,23 +80,6 @@ qa_deploy:
     tags:
         - ios
 
-qa_notify:
-    stage: notify
-    variables:
-        FL_SLACK_USERNAME: "HockeyApp"
-        GITLAB_CHANGELOG_ISSUE_FORMAT: "- #%{id}: <%{url}|%{desc}>"
-    dependencies:
-        - qa_deploy
-    script:
-        - bundle exec fastlane qa_notify
-    when:
-        manual
-    only:
-        - develop
-        - /^release.*$/
-    tags:
-        - ios
-
 beta_manual_archive:
     stage: archive
     variables:
@@ -131,6 +114,47 @@ beta_manual_deploy:
         manual
     only:
         - /^release.*$/
+    tags:
+        - ios
+
+manual_qa_archive:
+    stage: archive
+    variables:
+        MATCH_TYPE: "adhoc"
+        GYM_SCHEME: "PIA VPN dev"
+        GYM_EXPORT_METHOD: "ad-hoc"
+    script:
+        - bundle exec fastlane create_archive
+    artifacts:
+        paths:
+            - "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.*"
+        expire_in: 1 week
+    only:
+        - branches
+    tags:
+        - ios
+
+manual_qa_deploy:
+    stage: deploy
+    variables:
+        IPA_OUTPUT_PATH: "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.ipa"
+        FL_HOCKEY_IPA: "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.ipa"
+        FL_HOCKEY_COMMIT_SHA: $CI_COMMIT_SHA
+        FL_HOCKEY_BUILD_SERVER_URL: "$CI_PROJECT_URL/-/jobs/$CI_JOB_ID"
+        FL_HOCKEY_REPOSITORY_URL: $CI_PROJECT_URL
+        FL_HOCKEY_NOTIFY: "false"
+        FL_HOCKEY_STRATEGY: "replace"
+    script:
+        - bundle exec fastlane qa_deploy
+    environment:
+        name: "hockey"
+        url: $HOCKEY_URL
+    artifacts:
+        paths:
+            - $SERIALIZED_ARCHIVE_JSON
+        expire_in: 1 week
+    only:
+        - branches
     tags:
         - ios
 
