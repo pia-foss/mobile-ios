@@ -125,6 +125,8 @@ manual_qa_archive:
         GYM_EXPORT_METHOD: "ad-hoc"
     script:
         - bundle exec fastlane create_archive
+    when:
+        manual
     artifacts:
         paths:
             - "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.*"
@@ -146,6 +148,8 @@ manual_qa_deploy:
         FL_HOCKEY_STRATEGY: "replace"
     script:
         - bundle exec fastlane qa_deploy
+    when:
+        manual
     environment:
         name: "hockey"
         url: $HOCKEY_URL
