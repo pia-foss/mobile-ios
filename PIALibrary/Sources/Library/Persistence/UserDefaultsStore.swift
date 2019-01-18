@@ -19,6 +19,10 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         static let accountInfo = "LoggedAccountInfo" // legacy
 
         static let lastSignupEmail = "LastSignupEmail"
+        
+        static let publicIP = "PublicIP"
+
+        static let historicalServers = "HistoricalServers"
 
         static let cachedServers = "CachedServers"
 
@@ -37,14 +41,35 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         static let persistentConnection = "PersistentConnection" // legacy
 
         static let mace = "MACE" // legacy
+        
+        static let visibleTiles = "VisibleTiles"
+
+        static let orderedTiles = "OrderedTiles"
+
+        static let useWiFiProtection = "UseWiFiProtection"
+
+        static let trustCellularData = "TrustCellularData"
+
+        static let shouldConnectForAllNetworks = "ShouldConnectForAllNetworks"
+
+        static let cachedNetworks = "CachedNetworks"
+
+        static let trustedNetworks = "TrustedNetworks"
+
     }
     
     private let backend: UserDefaults
     
     private let group: String?
     
+    private var historicalServersCopy: [Server]?
+
     private var cachedServersCopy: [Server]?
     
+    private var visibleTilesCopy: [AvailableTiles]?
+
+    private var orderedTilesCopy: [AvailableTiles]?
+
     private var serversConfigurationCopy: ServersBundle.Configuration?
     
     private var pingByServerIdentifier: [String: Int] = [:]
@@ -118,7 +143,98 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
     
+    var publicIP: String? {
+        get {
+            return backend.string(forKey: Entries.publicIP)
+        }
+        set {
+            if let publicIP = newValue {
+                backend.set(publicIP, forKey: Entries.publicIP)
+            } else {
+                backend.removeObject(forKey: Entries.publicIP)
+            }
+        }
+    }
+    
+    var visibleTiles: [AvailableTiles] {
+        get {
+            if let copy = visibleTilesCopy {
+                return copy
+            }
+            guard let intArray = backend.array(forKey: Entries.visibleTiles) as? [Int] else {
+                return AvailableTiles.defaultTiles()
+            }
+            var tiles: [AvailableTiles] = []
+            for value in intArray {
+                if let tile = AvailableTiles(rawValue: value) {
+                    tiles.append(tile)
+                }
+            }
+            return tiles
+        }
+        set {
+            var intArray: [Int] = []
+            for value in newValue {
+                intArray.append(value.rawValue)
+            }
+            backend.set(intArray, forKey: Entries.visibleTiles)
+        }
+    }
+    
+    var orderedTiles: [AvailableTiles] {
+        get {
+            if let copy = orderedTilesCopy {
+                return copy
+            }
+            guard let intArray = backend.array(forKey: Entries.orderedTiles) as? [Int] else {
+                return AvailableTiles.allTiles()
+            }
+            var tiles: [AvailableTiles] = []
+            for value in intArray {
+                if let tile = AvailableTiles(rawValue: value) {
+                    tiles.append(tile)
+                }
+            }
+            //Add new tiles when needed 
+            if tiles.count < AvailableTiles.defaultOrderedTiles().count {
+                for defaultTile in AvailableTiles.defaultOrderedTiles() {
+                    if !tiles.contains(defaultTile) {
+                        tiles.append(defaultTile)
+                    }
+                }
+            }
+            return tiles
+        }
+        set {
+            var intArray: [Int] = []
+            for value in newValue {
+                intArray.append(value.rawValue)
+            }
+            backend.set(intArray, forKey: Entries.orderedTiles)
+        }
+    }
+
+    
     // MARK: Server
+    var historicalServers: [Server] {
+        get {
+            if let copy = historicalServersCopy {
+                return copy
+            }
+            guard let jsonArray = backend.array(forKey: Entries.historicalServers) as? [JSON] else {
+                return []
+            }
+            return Array<GlossServer>.from(jsonArray: jsonArray)?.map { $0.parsed } ?? []
+        }
+        set {
+            var servers = newValue
+            if servers.count > Client.configuration.maxQuickConnectServers {
+                servers.removeFirst()
+            }
+            historicalServersCopy = servers
+            backend.set(servers.toJSONArray() ?? [], forKey: Entries.historicalServers)
+        }
+    }
 
     var cachedServers: [Server] {
         get {
@@ -143,6 +259,19 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
         set {
             backend.set(newValue?.identifier, forKey: Entries.preferredServer)
+            var lastServers = historicalServers
+            if let server = newValue {
+                
+                let filtered = lastServers.filter({$0.name == server.name})
+                if filtered.count != 0,
+                    let indexOfServer = lastServers.firstIndex(of: server) {
+                    lastServers.remove(at: indexOfServer)
+                    lastServers.insert(server, at: lastServers.count)
+                } else {
+                    lastServers.append(server)
+                }
+                historicalServers = lastServers
+            }
         }
     }
     
@@ -205,6 +334,42 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
     
+    var useWiFiProtection: Bool? {
+        get {
+            guard let value = backend.object(forKey: Entries.useWiFiProtection) as? Bool else {
+                return nil
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.useWiFiProtection)
+        }
+    }
+    
+    var trustCellularData: Bool? {
+        get {
+            guard let value = backend.object(forKey: Entries.trustCellularData) as? Bool else {
+                return nil
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.trustCellularData)
+        }
+    }
+
+    var shouldConnectForAllNetworks: Bool? {
+        get {
+            guard let value = backend.object(forKey: Entries.shouldConnectForAllNetworks) as? Bool else {
+                return nil
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.shouldConnectForAllNetworks)
+        }
+    }
+
     var mace: Bool? {
         get {
             guard let value = backend.object(forKey: Entries.mace) as? Bool else {
@@ -224,6 +389,15 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.mace)
         backend.removeObject(forKey: Entries.vpnType)
         backend.removeObject(forKey: Entries.vpnCustomConfigurationMaps)
+        backend.removeObject(forKey: Entries.visibleTiles)
+        backend.removeObject(forKey: Entries.orderedTiles)
+        backend.removeObject(forKey: Entries.historicalServers)
+        backend.removeObject(forKey: Entries.cachedNetworks)
+        backend.removeObject(forKey: Entries.trustedNetworks)
+        backend.removeObject(forKey: Entries.shouldConnectForAllNetworks)
+        backend.removeObject(forKey: Entries.useWiFiProtection)
+        backend.removeObject(forKey: Entries.trustCellularData)
+        backend.synchronize()
     }
 
     func clear() {
@@ -233,4 +407,31 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
             // FIXME: clear standard defaults
         }
     }
+    
+    //MARK: Networks
+    var cachedNetworks: [String] {
+        get {
+            guard let value = backend.object(forKey: Entries.cachedNetworks) as? [String] else {
+                return []
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.cachedNetworks)
+        }
+    }
+
+    //MARK: Networks
+    var trustedNetworks: [String] {
+        get {
+            guard let value = backend.object(forKey: Entries.trustedNetworks) as? [String] else {
+                return []
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.trustedNetworks)
+        }
+    }
+
 }

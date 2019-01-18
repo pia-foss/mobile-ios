@@ -25,7 +25,7 @@ extension Client {
 
         /// The public IP address while not on VPN.
         public var publicIP: String? {
-            return accessedDatabase.transient.publicIP
+            return accessedDatabase.plain.publicIP
         }
 
         /// The IP address while on VPN.

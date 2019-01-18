@@ -10,6 +10,7 @@ import Foundation
 import __PIALibraryNative
 
 class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, PreferencesAccess, ProvidersAccess, WebServicesAccess {
+    
     private static let forcedStatuses: [VPNStatus] = [
         .connected,
         .connecting
@@ -47,7 +48,7 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
     }
     
     var publicIP: String? {
-        return accessedDatabase.transient.publicIP
+        return accessedDatabase.plain.publicIP
     }
     
     var vpnIP: String? {
@@ -157,6 +158,8 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         guard let activeProfile = activeProfile else {
             preconditionFailure()
         }
+        // Update the preferredServer with the connected server in the plain store
+        accessedDatabase.plain.preferredServer = accessedProviders.serverProvider.targetServer
         activeProfile.connect(withConfiguration: vpnClientConfiguration(), callback)
     }
     
@@ -170,6 +173,16 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         activeProfile.disconnect(callback)
     }
     
+    func updatePreferences(_ callback: SuccessLibraryCallback?) {
+        guard accessedProviders.accountProvider.isLoggedIn else {
+            preconditionFailure()
+        }
+        guard let activeProfile = activeProfile else {
+            preconditionFailure()
+        }
+        activeProfile.updatePreferences(callback)
+    }
+
     func reconnect(after delay: Int?, _ callback: SuccessLibraryCallback?) {
         guard accessedProviders.accountProvider.isLoggedIn else {
             preconditionFailure()
@@ -211,6 +224,20 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
                 }
                 callback?(vpnLog, nil)
             }
+        }
+    }
+    
+    func dataUsage(_ callback: LibraryCallback<Usage>?) {
+        guard let activeProfile = activeProfile else {
+            preconditionFailure()
+        }
+        let configuration = vpnClientConfiguration()
+        activeProfile.requestDataUsage(withCustomConfiguration: configuration.customConfiguration) { (usage, error) in
+            guard let usage = usage else {
+                callback?(nil, error)
+                return
+            }
+            callback?(usage, nil)
         }
     }
     

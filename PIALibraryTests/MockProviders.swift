@@ -13,6 +13,7 @@ let MockProviders: () -> Client.Providers = {
     Client.useMockAccountProvider()
     Client.useMockServerProvider()
     Client.useMockVPNProvider()
+    Client.useMockTileProvider()
     #if os(iOS)
     Client.useMockInAppProvider()
     #endif

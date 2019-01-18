@@ -46,16 +46,11 @@ public class Theme {
         /// The brand background color.
         public var brandBackground: UIColor
 
-        /// The light background color.
-        public var lightBackground: UIColor
+        /// The secondary background color.
+        public var secondaryBackground: UIColor
 
         /// The solid light background color.
-        public var solidLightBackground: UIColor
-        
-        /// The color for the subtitle Labels in forms and views
-        public var subtitleColor: UIColor
-
-//        public var primary: UIColor
+        public var principalBackground: UIColor
         
         /// The emphasis accent color.
         public var emphasis: UIColor
@@ -94,9 +89,8 @@ public class Theme {
             appearance = .light
             brandBackground = .green
             secondaryColor = .piaGrey10
-            lightBackground = .piaGrey1
-            solidLightBackground = .white
-            subtitleColor = .piaGrey8
+            secondaryBackground = .white
+            principalBackground = .piaGrey1
             textfieldButtonBackgroundColor = .white
             lineColor = .piaGreenDark20
 //            primary = .black
@@ -120,38 +114,6 @@ public class Theme {
             divider = .piaGrey1
             errorColor = .piaRed
             overlayAlpha = 0.3
-        }
-        
-        /**
-         Sets the color for light text. Variants will be cached for alpha-based relevance.
-
-         - Precondition: `(alphas.count == 3)`.
-         - Parameter color: The color.
-         - Parameter alphas: An array of relevance alphas. Size must be 3.
-         */
-        public func setLightText(_ color: UIColor, alphas: [CGFloat] = [1.0, 1.0, 1.0]) {
-            precondition(alphas.count == 3)
-            
-            lightText = color
-            for i in lightTextArray.enumerated() {
-                lightTextArray[i.offset] = color.withAlphaComponent(alphas[i.offset])
-            }
-        }
-
-        /**
-         Sets the color for dark text. Variants will be cached for alpha-based relevance.
-
-         - Precondition: `(alphas.count == 3)`.
-         - Parameter color: The color.
-         - Parameter alphas: An array of relevance alphas. Size must be 3.
-         */
-        public func setDarkText(_ color: UIColor, alphas: [CGFloat] = [1.0, 1.0, 1.0]) {
-            precondition(alphas.count == 3)
-
-            darkText = color
-            for i in darkTextArray.enumerated() {
-                darkTextArray[i.offset] = color.withAlphaComponent(alphas[i.offset])
-            }
         }
         
         /**
@@ -277,42 +239,20 @@ public class Theme {
     // MARK: Backgrounds
     
     /// :nodoc:
-    public func applyBrandBackground(_ view: UIView) {
-        view.backgroundColor = palette.brandBackground
+    public func applySecondaryBackground(_ view: UIView) {
+        view.backgroundColor = palette.appearance == .dark ?
+            palette.secondaryBackground.withAlphaComponent(0.3) :
+            palette.secondaryBackground
     }
     
     /// :nodoc:
-    public func applyBrandTint(_ view: UIView) {
-        view.tintColor = palette.brandBackground
-    }
-    
-    /// :nodoc:
-    public func applyLightBackground(_ view: UIView) {
-        view.backgroundColor = palette.lightBackground
-    }
-    
-    /// :nodoc:
-    public func applySettingsBackground(_ view: UIView) {
-        view.backgroundColor = palette.lightBackground
+    public func applyPrincipalBackground(_ view: UIView) {
+        view.backgroundColor = palette.principalBackground
     }
 
     /// :nodoc:
-    public func applyTransparentButton(_ button: PIAButton,
-                                       withSize size: CGFloat) {
-        button.setBorder(withSize: size,
-                         andColor: palette.lineColor)
-        button.setTitleColor(palette.lineColor,
-                             for: .normal) 
-    }
-
-    /// :nodoc:
-    public func applyLightTint(_ view: UIView) {
-        view.tintColor = palette.lightBackground
-    }
-    
-    /// :nodoc:
-    public func applySolidLightBackground(_ view: UIView) {
-        view.backgroundColor = palette.solidLightBackground
+    public func applyRegionSolidLightBackground(_ view: UIView) {
+        view.backgroundColor = palette.appearance == .dark ? UIColor.piaGrey6 : palette.principalBackground
     }
     
     /// :nodoc:
@@ -320,16 +260,8 @@ public class Theme {
         view.backgroundColor = palette.accent1
     }
     
-    /// :nodoc:
-    public func applySelection(_ view: UIView) {
-        view.backgroundColor = palette.emphasis.withAlphaComponent(0.1)
-    }
-
-    /// :nodoc:
-    public func applySolidSelection(_ view: UIView) {
-        view.backgroundColor = palette.emphasis
-    }
-
+    // MARK: Table View Utils
+    
     /// :nodoc:
     public func applyDivider(_ view: UIView) {
         view.backgroundColor = palette.divider
@@ -338,11 +270,6 @@ public class Theme {
     /// :nodoc:
     public func applyDividerToSeparator(_ tableView: UITableView) {
         tableView.separatorColor = palette.divider
-    }
-    
-    /// :nodoc:
-    public func applyOverlay(_ view: UIView) {
-        view.backgroundColor = UIColor(white: 0.0, alpha: palette.overlayAlpha)
     }
     
     // MARK: Images
@@ -390,24 +317,6 @@ public class Theme {
         label.style(style: TextStyle.textStyle8)
         label.textAlignment = textAlignment
     }
-
-    /// :nodoc:
-    public func applyBody2(_ label: UILabel, appearance: Appearance) {
-        label.font = typeface.mediumFont(size: 14.0)
-        label.textColor = palette.textColor(forRelevance: 1, appearance: appearance)
-    }
-    
-    /// :nodoc:
-    public func applyBody2Monospace(_ textView: UITextView, appearance: Appearance) {
-        textView.font = typeface.monospaceFont(size: 14.0)
-        textView.textColor = palette.textColor(forRelevance: 1, appearance: appearance)
-    }
-    
-    /// :nodoc:
-    public func applyBody1(_ label: UILabel, appearance: Appearance) {
-        label.font = typeface.regularFont(size: 14.0)
-        label.textColor = palette.textColor(forRelevance: 2, appearance: appearance)
-    }
     
     /// :nodoc:
     public func applyBody1Monospace(_ textView: UITextView, appearance: Appearance) {
@@ -416,39 +325,9 @@ public class Theme {
     }
     
     /// :nodoc:
-    public func applyCaption(_ label: UILabel, appearance: Appearance) {
-        label.font = typeface.regularFont(size: 12.0)
-        label.textColor = palette.textColor(forRelevance: 2, appearance: appearance)
-    }
-    
-    /// :nodoc:
-    public func applyCaption(_ button: UIButton, appearance: Appearance) {
-        button.titleLabel?.font = typeface.regularFont(size: 12.0)
-        button.setTitleColor(palette.textColor(forRelevance: 2, appearance: appearance), for: .normal)
-    }
-    
-    /// :nodoc:
-    public func applySmallCaption(_ label: UILabel, appearance: Appearance) {
-        label.font = typeface.regularFont(size: 10.0)
-        label.textColor = palette.textColor(forRelevance: 3, appearance: appearance)
-    }
-    
-    /// :nodoc:
-    public func applyLabel(_ label: UILabel, appearance: Appearance) {
-        label.font = typeface.regularFont(size: 12.0)
-        label.textColor = palette.textColor(forRelevance: 3, appearance: appearance)
-    }
-    
-    /// :nodoc:
     public func applySmallInfo(_ label: UILabel, appearance: Appearance) {
         label.font = typeface.regularFont(size: 13.0)
         label.textColor = palette.textColor(forRelevance: 3, appearance: appearance)
-    }
-    
-    /// :nodoc:
-    public func applySmallInfo(_ textView: UITextView) {
-        textView.font = typeface.regularFont(size: 13.0)
-        textView.textColor = palette.textColor(forRelevance: 3, appearance: .dark)
     }
     
     /// Method to apply a second style for the same UILabel
@@ -461,9 +340,13 @@ public class Theme {
             let rangeSecondText = (text as NSString).range(of: textToStandOut)
             let attributedString = NSMutableAttributedString(string: text)
             
+            var foregroundColor = TextStyle.textStyle1.color!
+            if palette.appearance == Appearance.light {
+                foregroundColor = TextStyle.textStyle2.color!
+            }
+
             attributedString.addAttribute(.foregroundColor,
-                                          value: palette.textColor(forRelevance: 1,
-                                                                   appearance: appearance),
+                                          value: foregroundColor,
                                           range: rangeSecondText)
 
             label.attributedText = attributedString
@@ -494,35 +377,7 @@ public class Theme {
         label.textColor = palette.textColor(forRelevance: relevance, appearance: appearance)
     }
     
-    /// :nodoc:
-    public func applyTextButton(_ button: UIButton) {
-        button.titleLabel?.font = typeface.mediumFont(size: 14.0)
-        button.tintColor = palette.emphasis
-    }
-    
-    /// :nodoc:
-    public func applyTextButton(_ label: UILabel) {
-        label.font = typeface.mediumFont(size: 14.0)
-        label.textColor = palette.emphasis
-    }
-    
-    /// :nodoc:
-    public func applyWarningText(_ label: UILabel) {
-        label.font = typeface.mediumFont(size: 10.0)
-        label.textColor = palette.accent1
-    }
-    
-    /// :nodoc:
-    public func applyWarningText(_ button: UIButton) {
-        button.titleLabel?.font = typeface.mediumFont(size: 10.0)
-        button.tintColor = palette.accent1
-    }
-    
-    /// :nodoc:
-    public func applyHighlightedText(_ label: UILabel) {
-        label.font = typeface.regularFont(size: 13.0)
-        label.textColor = palette.emphasis
-    }
+    // MARK: Textfields
     
     /// :nodoc:
     public func applyInput(_ textField: UITextField) { // hint is placeholder
@@ -550,7 +405,17 @@ public class Theme {
         }
     }
 
+    // MARK: Buttons
 
+    /// :nodoc:
+    public func applyTransparentButton(_ button: PIAButton,
+                                       withSize size: CGFloat) {
+        button.setBorder(withSize: size,
+                         andColor: palette.lineColor)
+        button.setTitleColor(palette.lineColor,
+                             for: .normal)
+    }
+    
     /// :nodoc:
     public func applyActionButton(_ button: ActivityButton) {
         button.font = typeface.mediumFont(size: 15.0)
@@ -695,7 +560,7 @@ public class Theme {
     
     public func applyLightNavigationBar(_ navigationBar: UINavigationBar) {
         navigationBar.tintColor = UIColor.piaGrey4
-        navigationBar.barTintColor = palette.lightBackground
+        navigationBar.barTintColor = palette.principalBackground
     }
     
     /**
@@ -703,7 +568,7 @@ public class Theme {
      
      - Parameter navigationBar: The navigationBar where the changes are going to be applied.
      - Parameter tintColor: The tintColor for the navigationBar. If nil: self.palette.textColor(forRelevance: 1, appearance: .dark)
-     - Parameter barTintColors: Array of colors for the background of the navigationBar. If the array contains 2 colors, it will generate a gradient. If the array contains more than 2 colors or nil, it will set the default value: self.palette.lightBackground. If the array only contains 1 color, a solid background color will be set.
+     - Parameter barTintColors: Array of colors for the background of the navigationBar. If the array contains 2 colors, it will generate a gradient. If the array contains more than 2 colors or nil, it will set the default value: self.palette.secondaryBackground. If the array only contains 1 color, a solid background color will be set.
      */
     public func applyCustomNavigationBar(_ navigationBar: UINavigationBar,
                                          withTintColor tintColor: UIColor?,
@@ -729,7 +594,7 @@ public class Theme {
                     navigationBar.setBackgroundImage(gradientLayer.createGradientImage(), for: UIBarMetrics.default)
                 }
             } else {
-                navigationBar.barTintColor = self.palette.lightBackground
+                navigationBar.barTintColor = self.palette.principalBackground
                 navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
             }
             navigationBar.layoutIfNeeded()
@@ -740,7 +605,7 @@ public class Theme {
     
     public func applyLightBrandLogoNavigationBar(_ navigationBar: UINavigationBar) {
         navigationBar.tintColor = palette.textColor(forRelevance: 1, appearance: .dark)
-        navigationBar.barTintColor = palette.lightBackground
+        navigationBar.barTintColor = palette.principalBackground
     }
     
     //MARK: Cell
@@ -750,6 +615,16 @@ public class Theme {
             label.style(style: TextStyle.textStyle7)
         } else {
             label.style(style: TextStyle.textStyle6)
+        }
+    }
+    
+    //MARK: Tile Usage
+    /// :nodoc:
+    public func applySubtitleTileUsage(_ label: UILabel, appearance: Appearance) {
+        if palette.appearance == Appearance.dark {
+            label.style(style: TextStyle.textStyle16)
+        } else {
+            label.style(style: TextStyle.textStyle17)
         }
     }
 

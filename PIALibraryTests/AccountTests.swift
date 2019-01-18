@@ -96,7 +96,7 @@ class AccountTests: XCTestCase {
     private func __testUpdate(factory: Client.Providers) {
         let expUpdate = expectation(description: "update")
         let newEmail = "foobar+\(arc4random())@example.com"
-        factory.accountProvider.update(with: UpdateAccountRequest(email: newEmail)) { (accountInfo, error) in
+        factory.accountProvider.update(with: UpdateAccountRequest(email: newEmail), andPassword: "password") { (accountInfo, error) in
             guard let _ = accountInfo else {
                 print("Update error: \(error!)")
                 expUpdate.fulfill()
