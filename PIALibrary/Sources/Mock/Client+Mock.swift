@@ -37,6 +37,15 @@ extension Client {
         providers.vpnProvider = provider
     }
 
+    /**
+     Uses a mock `TileProvider`.
+     
+     - Parameter provider: The `TileProvider` to use (optional).
+     */
+    public static func useMockTileProvider(_ provider: TileProvider = MockTileProvider()) {
+        providers.tileProvider = provider
+    }
+    
     #if os(iOS)
     /**
      Uses a mock in-app provider for testing purchases.

@@ -18,6 +18,9 @@ public protocol ServerProvider: class {
 
     /// The list of provided `Server`s.
     var currentServers: [Server] { get }
+    
+    /// The list of last connected `Server`s.
+    var historicalServers: [Server] { get }
 
     /// The suggested best server to connect to.
     var bestServer: Server? { get }

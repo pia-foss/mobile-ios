@@ -154,7 +154,7 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
     
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
-        Theme.current.applyLightBackground(view)
+        Theme.current.applyPrincipalBackground(view)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applyInput(textUsername)
         Theme.current.applyInput(textPassword)

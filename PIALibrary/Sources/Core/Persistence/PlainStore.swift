@@ -21,7 +21,8 @@ protocol PlainStore: class {
     var publicIP: String? { get set }
 
     // MARK: Server
-    
+    var historicalServers: [Server] { get set }
+
     var cachedServers: [Server] { get set }
     
     var preferredServer: Server? { get set }
@@ -34,6 +35,11 @@ protocol PlainStore: class {
     
     func clearPings()
     
+    // MARK: Tiles
+    var visibleTiles: [AvailableTiles] {get set}
+    
+    var orderedTiles: [AvailableTiles] {get set}
+
     // MARK: VPN
     
     var vpnType: String? { get set }
@@ -45,7 +51,13 @@ protocol PlainStore: class {
     // MARK: Preferences
     
     var isPersistentConnection: Bool? { get set }
-    
+
+    var shouldConnectForAllNetworks: Bool? { get set }
+
+    var useWiFiProtection: Bool? { get set }
+
+    var trustCellularData: Bool? { get set }
+
     var mace: Bool? { get set }
     
     // MARK: Lifecycle
@@ -53,4 +65,9 @@ protocol PlainStore: class {
     func reset()
     
     func clear()
+    
+    // MARK: Networks
+    var cachedNetworks: [String] { get set }
+    
+    var trustedNetworks: [String] { get set }
 }

@@ -73,6 +73,14 @@ public protocol VPNProvider: class {
     func disconnect(_ callback: SuccessLibraryCallback?)
     
     /**
+     Update preferences from the VPN.
+     
+     - Parameter callback: Returns `nil` on success.
+     */
+    func updatePreferences(_ callback: SuccessLibraryCallback?)
+
+    
+    /**
      Reconnects to the VPN.
 
      - Parameter delay: The delay in milliseconds after which the reconnection is issue.
@@ -86,6 +94,13 @@ public protocol VPNProvider: class {
      - Parameter callback: Returns the submitted `DebugLog` on success.
      */
     func submitLog(_ callback: LibraryCallback<DebugLog>?)
+    
+    /**
+     Submits the usage information associated with the current VPN connection.
+     
+     - Parameter callback: Returns the `Usage` information on success.
+     */
+    func dataUsage(_ callback: LibraryCallback<Usage>?)
 }
 
 extension VPNProvider {

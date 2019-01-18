@@ -26,6 +26,15 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
         return accessedDatabase.transient.serversConfiguration
     }
     
+    var historicalServers: [Server] {
+        get {
+            return accessedDatabase.plain.historicalServers
+        }
+        set {
+            accessedDatabase.plain.cachedServers = newValue
+        }
+    }
+    
     var currentServers: [Server] {
         get {
             return accessedDatabase.plain.cachedServers

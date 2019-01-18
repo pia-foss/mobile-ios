@@ -85,8 +85,8 @@ public class PIATunnelProfile: NetworkExtensionProfile {
                 return
             }
             
-            // prevent reconnection
-            vpn.isOnDemandEnabled = false
+            //TODO: prevent reconnection
+            self.configureOnDemandSettingForVPN(vpn)
             
             vpn.saveToPreferences { (error) in
                 if let error = error {
@@ -100,13 +100,46 @@ public class PIATunnelProfile: NetworkExtensionProfile {
     }
     
     /// :nodoc:
+    public func updatePreferences(_ callback: SuccessLibraryCallback?) {
+        find { (vpn, error) in
+            guard let vpn = vpn else {
+                callback?(error)
+                return
+            }
+            
+            //TODO: prevent reconnection
+            self.configureOnDemandSettingForVPN(vpn)
+            
+            vpn.saveToPreferences { (error) in
+                if let error = error {
+                    callback?(error)
+                    return
+                }
+                callback?(nil)
+            }
+        }
+    }
+    
+    private func configureOnDemandSettingForVPN(_ vpn: NETunnelProviderManager) {
+        if Client.preferences.trustCellularData {
+            vpn.isOnDemandEnabled = false
+        } else {
+            vpn.isOnDemandEnabled = true
+            let cellularRule = NEOnDemandRuleConnect()
+            cellularRule.interfaceTypeMatch = .cellular
+            vpn.onDemandRules = [cellularRule]
+        }
+    }
+
+    /// :nodoc:
     public func disable(_ callback: SuccessLibraryCallback?) {
         find { (vpn, error) in
             guard let vpn = vpn else {
                 return
             }
             vpn.isEnabled = false
-            vpn.isOnDemandEnabled = false
+            //TODO: prevent reconnection
+            self.configureOnDemandSettingForVPN(vpn)
             vpn.saveToPreferences(completionHandler: callback)
         }
     }
@@ -151,6 +184,38 @@ public class PIATunnelProfile: NetworkExtensionProfile {
                     }
                     let log = String(data: data, encoding: .utf8)
                     callback?(log, nil)
+                }
+            } catch let e {
+                callback?(nil, e)
+            }
+        }
+    }
+
+    /// :nodoc:
+    public func requestDataUsage(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: ((Usage?, Error?) -> Void)?) {
+        find { (vpn, error) in
+            guard let vpn = vpn else {
+                callback?(nil, error)
+                return
+            }
+            
+            do {
+                let session = vpn.connection as? NETunnelProviderSession
+                try session?.sendProviderMessage(PIATunnelProvider.Message.dataCount.data) { (data) in
+                    guard let data = data, !data.isEmpty else {
+                        guard let _ = customConfiguration as? PIATunnelProvider.Configuration else {
+                            callback?(nil, nil)
+                            return
+                        }
+                        callback?(nil, ClientError.vpnProfileUnavailable)
+                        return
+                    }
+                    
+                    let downloaded = data.getInt64(start: 0)
+                    let uploaded = data.getInt64(start: 8)
+                    let usage = Usage(uploaded: uploaded, downloaded: downloaded)
+                    callback?(usage,
+                              nil)
                 }
             } catch let e {
                 callback?(nil, e)

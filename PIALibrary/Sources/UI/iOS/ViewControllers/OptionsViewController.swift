@@ -51,16 +51,14 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
         tableView.backgroundColor = bgColor
         tableView.dataSource = self
         tableView.delegate = self
+
         viewContainer.addSubview(tableView)
 
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: viewContainer.layoutMarginsGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: viewContainer.layoutMarginsGuide.bottomAnchor),
-            tableView.leftAnchor.constraint(equalTo: viewContainer.layoutMarginsGuide.leftAnchor),
-            tableView.rightAnchor.constraint(equalTo: viewContainer.layoutMarginsGuide.rightAnchor)
-        ])
-
+        tableView.addConstaintsToSuperview(leadingOffset: 0,
+                                           trailingOffset: 0,
+                                           topOffset: 0,
+                                           bottomOffset: 0)
+        
         delegate?.optionsController(self, didLoad: tableView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
@@ -86,11 +84,11 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
         styleNavigationBarWithTitle(self.navigationController?.title ?? "")
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
-            Theme.current.applyLightBackground(view)
-            Theme.current.applyLightBackground(viewContainer)
+            Theme.current.applySecondaryBackground(view)
+            Theme.current.applySecondaryBackground(viewContainer)
         }
         if tableView != nil {
-            Theme.current.applyLightBackground(tableView)
+            Theme.current.applyPrincipalBackground(tableView)
             Theme.current.applyDividerToSeparator(tableView)
             tableView.reloadData()
         }
@@ -117,7 +115,7 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
         }
         delegate?.optionsController(self, renderOption: option, in: cell, at: indexPath.row, isSelected: isSelected)
 
-        Theme.current.applySolidLightBackground(cell)
+        Theme.current.applySecondaryBackground(cell)
         if let textLabel = cell.textLabel {
             Theme.current.applySettingsCellTitle(textLabel,
                                                  appearance: .dark)
@@ -125,6 +123,10 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
         if let detailLabel = cell.detailTextLabel {
             Theme.current.applySubtitle(detailLabel)
         }
+        
+        let backgroundView = UIView()
+        Theme.current.applyPrincipalBackground(backgroundView)
+        cell.selectedBackgroundView = backgroundView
 
         return cell
     }

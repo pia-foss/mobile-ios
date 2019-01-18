@@ -17,4 +17,8 @@ public extension Notification.Name {
     
     /// Posted following a theme switch.
     public static let PIAThemeDidChange = Notification.Name("PIAThemeDidChange")
+    
+    /// Reload the tiles.
+    public static let PIATilesDidChange = Notification.Name("PIATilesDidChange")
+
 }
