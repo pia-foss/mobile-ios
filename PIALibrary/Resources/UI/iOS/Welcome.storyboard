@@ -794,7 +794,7 @@ You will not be charged during this process.</string>
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="centered-dark-map" translatesAutoresizingMaskIntoConstraints="NO" id="6Md-hc-CJ2">
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="centered-dark-map" translatesAutoresizingMaskIntoConstraints="NO" id="6Md-hc-CJ2">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1dA-og-SGN">
@@ -1150,7 +1150,7 @@ You will not be charged during this process.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="centered-dark-map" width="375" height="300"/>
+        <image name="centered-dark-map" width="688" height="344"/>
         <image name="close-icon" width="50" height="50"/>
         <image name="logo-light" width="298" height="39"/>
         <image name="plan-selected" width="34" height="34"/>

@@ -318,7 +318,8 @@ Issues and Pull Requests should use these templates: [ISSUE](/.github/ISSUE_TEMP
 
 ## Authors
 
-- Davide De Rosa - [keeshux](https://github.com/keeshux)
+- Jose Blaya - [ueshiba](https://github.com/ueshiba)
+- Davide De Rosa 
 
 ## License
 

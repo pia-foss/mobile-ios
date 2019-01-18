@@ -17,13 +17,23 @@ private protocol PreferencesStore: class {
     var isPersistentConnection: Bool { get set }
     
     var mace: Bool { get set }
+    
+    var useWiFiProtection: Bool { get set }
+
+    var trustCellularData: Bool { get set }
+
+    var shouldConnectForAllNetworks: Bool { get set }
 
     var vpnType: String { get set }
 
     var vpnDisconnectsOnSleep: Bool { get set }
     
     var vpnCustomConfigurations: [String: VPNCustomConfiguration] { get set }
-    
+
+    var availableNetworks: [String] { get set }
+
+    var trustedNetworks: [String] { get set }
+
     func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration?
     
     func setVPNCustomConfiguration(_ customConfiguration: VPNCustomConfiguration, for vpnType: String)
@@ -38,9 +48,14 @@ private extension PreferencesStore {
         preferredServer = source.preferredServer
         isPersistentConnection = source.isPersistentConnection
         mace = source.mace
+        useWiFiProtection = source.useWiFiProtection
+        trustCellularData = source.trustCellularData
+        shouldConnectForAllNetworks = source.shouldConnectForAllNetworks
         vpnType = source.vpnType
         vpnDisconnectsOnSleep = source.vpnDisconnectsOnSleep
         vpnCustomConfigurations = source.vpnCustomConfigurations
+        availableNetworks = source.availableNetworks
+        trustedNetworks = source.trustedNetworks
     }
 }
 
@@ -96,6 +111,36 @@ extension Client {
             }
         }
         
+        /// Use VPN WiFi Protection
+        public fileprivate(set) var useWiFiProtection: Bool {
+            get {
+                return accessedDatabase.plain.useWiFiProtection ?? defaults.useWiFiProtection
+            }
+            set {
+                accessedDatabase.plain.useWiFiProtection = newValue
+            }
+        }
+        
+        /// Trust cellular data
+        public fileprivate(set) var trustCellularData: Bool {
+            get {
+                return accessedDatabase.plain.trustCellularData ?? defaults.trustCellularData
+            }
+            set {
+                accessedDatabase.plain.trustCellularData = newValue
+            }
+        }
+
+        /// The option for connect the vpn when selecting connect when changing to cellular data from Settings.
+        public fileprivate(set) var shouldConnectForAllNetworks: Bool {
+            get {
+                return accessedDatabase.plain.shouldConnectForAllNetworks ?? defaults.shouldConnectForAllNetworks
+            }
+            set {
+                accessedDatabase.plain.shouldConnectForAllNetworks = newValue
+            }
+        }
+
         /// The type of the current VPN profile. Must be found in `Client.Configuration.availableVPNTypes(...)`.
         ///
         /// - Seealso: `VPNProfile.vpnType`
@@ -169,6 +214,27 @@ extension Client {
             allMaps[vpnType] = customConfiguration.serialized()
             accessedDatabase.plain.vpnCustomConfigurationMaps = allMaps
         }
+        
+        /// The `String` array of available WiFi networks
+        public fileprivate(set) var availableNetworks: [String] {
+            get {
+                return accessedDatabase.plain.cachedNetworks
+            }
+            set {
+                accessedDatabase.plain.cachedNetworks = newValue
+            }
+        }
+
+        /// The `String` array of trusted WiFi networks
+        public fileprivate(set) var trustedNetworks: [String] {
+            get {
+                return accessedDatabase.plain.trustedNetworks
+            }
+            set {
+                accessedDatabase.plain.trustedNetworks = newValue
+            }
+        }
+
     }
 }
 
@@ -184,9 +250,14 @@ extension Client.Preferences {
             preferredServer = nil
             isPersistentConnection = true
             mace = false
+            useWiFiProtection = false
+            trustCellularData = true
+            shouldConnectForAllNetworks = false
             vpnType = IPSecProfile.vpnType
             vpnDisconnectsOnSleep = false
             vpnCustomConfigurations = [:]
+            availableNetworks = []
+            trustedNetworks = []
         }
 
         /**
@@ -222,6 +293,15 @@ extension Client.Preferences {
         public var mace: Bool
 
         /// :nodoc:
+        public var useWiFiProtection: Bool
+
+        /// :nodoc:
+        public var trustCellularData: Bool
+
+        /// :nodoc:
+        public var shouldConnectForAllNetworks: Bool
+
+        /// :nodoc:
         public var vpnType: String
         
         /// :nodoc:
@@ -229,6 +309,12 @@ extension Client.Preferences {
         
         /// :nodoc:
         public var vpnCustomConfigurations: [String: VPNCustomConfiguration]
+        
+        /// :nodoc:
+        public var availableNetworks: [String]
+
+        /// :nodoc:
+        public var trustedNetworks: [String]
 
         /// :nodoc:
         public func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration? {
@@ -253,6 +339,9 @@ extension Client.Preferences {
             }
             var queue: [VPNAction] = []
             if (isPersistentConnection != target.isPersistentConnection) {
+                queue.append(VPNActionReinstall())
+            }
+            if (trustCellularData != target.trustCellularData) {
                 queue.append(VPNActionReinstall())
             }
             if (vpnDisconnectsOnSleep != target.vpnDisconnectsOnSleep) {

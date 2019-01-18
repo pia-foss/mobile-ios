@@ -46,6 +46,16 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         static let orderedTiles = "OrderedTiles"
 
+        static let useWiFiProtection = "UseWiFiProtection"
+
+        static let trustCellularData = "TrustCellularData"
+
+        static let shouldConnectForAllNetworks = "ShouldConnectForAllNetworks"
+
+        static let cachedNetworks = "CachedNetworks"
+
+        static let trustedNetworks = "TrustedNetworks"
+
     }
     
     private let backend: UserDefaults
@@ -324,6 +334,42 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
     
+    var useWiFiProtection: Bool? {
+        get {
+            guard let value = backend.object(forKey: Entries.useWiFiProtection) as? Bool else {
+                return nil
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.useWiFiProtection)
+        }
+    }
+    
+    var trustCellularData: Bool? {
+        get {
+            guard let value = backend.object(forKey: Entries.trustCellularData) as? Bool else {
+                return nil
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.trustCellularData)
+        }
+    }
+
+    var shouldConnectForAllNetworks: Bool? {
+        get {
+            guard let value = backend.object(forKey: Entries.shouldConnectForAllNetworks) as? Bool else {
+                return nil
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.shouldConnectForAllNetworks)
+        }
+    }
+
     var mace: Bool? {
         get {
             guard let value = backend.object(forKey: Entries.mace) as? Bool else {
@@ -346,6 +392,12 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.visibleTiles)
         backend.removeObject(forKey: Entries.orderedTiles)
         backend.removeObject(forKey: Entries.historicalServers)
+        backend.removeObject(forKey: Entries.cachedNetworks)
+        backend.removeObject(forKey: Entries.trustedNetworks)
+        backend.removeObject(forKey: Entries.shouldConnectForAllNetworks)
+        backend.removeObject(forKey: Entries.useWiFiProtection)
+        backend.removeObject(forKey: Entries.trustCellularData)
+        backend.synchronize()
     }
 
     func clear() {
@@ -355,4 +407,31 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
             // FIXME: clear standard defaults
         }
     }
+    
+    //MARK: Networks
+    var cachedNetworks: [String] {
+        get {
+            guard let value = backend.object(forKey: Entries.cachedNetworks) as? [String] else {
+                return []
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.cachedNetworks)
+        }
+    }
+
+    //MARK: Networks
+    var trustedNetworks: [String] {
+        get {
+            guard let value = backend.object(forKey: Entries.trustedNetworks) as? [String] else {
+                return []
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.trustedNetworks)
+        }
+    }
+
 }
