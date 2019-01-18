@@ -125,8 +125,8 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
     public override func viewShouldRestyle() {
         super.viewShouldRestyle()
         
-        Theme.current.applySolidLightBackground(viewHeaderBackground)
-        Theme.current.applySolidLightBackground(viewHeader)
+        Theme.current.applyPrincipalBackground(viewHeaderBackground)
+        Theme.current.applyPrincipalBackground(viewHeader)
         Theme.current.applyVersionNumberStyle(labelVersion)
         Theme.current.applyCenteredMap(centeredMap)
         Theme.current.applyTransparentButton(buyButton,

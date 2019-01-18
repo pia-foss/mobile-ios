@@ -38,8 +38,8 @@ public class SignupUnreachableViewController: AutolayoutViewController, Brandabl
         super.viewShouldRestyle()
         navigationItem.titleView = NavigationLogoView()
         Theme.current.applyNavigationBarStyle(to: self)
-        Theme.current.applySolidLightBackground(view)
-        Theme.current.applySolidLightBackground(viewContainer!)
+        Theme.current.applyPrincipalBackground(view)
+        Theme.current.applyPrincipalBackground(viewContainer!)
         Theme.current.applySubtitle(labelMessage)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
     }
