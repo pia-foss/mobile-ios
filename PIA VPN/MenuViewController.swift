@@ -131,10 +131,10 @@ class MenuViewController: AutolayoutViewController {
     private func renewSubscription() {
         log.debug("Account: Fetching renewable products...")
         
-        let hud = HUD()
+        self.showLoadingAnimation()
         
         Client.providers.accountProvider.listRenewablePlans { (plans, error) in
-            hud.hide()
+            self.hideLoadingAnimation()
             
             guard let plans = plans else {
                 if let clientError = error as? ClientError {
@@ -210,10 +210,10 @@ class MenuViewController: AutolayoutViewController {
     }
     
     private func purchaseProductWithPlan(_ plan: Plan) {
-        let purchaseHud = HUD()
-        
+
+        self.showLoadingAnimation()
         Client.providers.accountProvider.purchase(plan: plan) { (transaction, error) in
-            purchaseHud.hide()
+            self.hideLoadingAnimation()
             
             guard let transaction = transaction else {
                 self.handlePurchaseFailureWithError(error)
@@ -223,10 +223,10 @@ class MenuViewController: AutolayoutViewController {
             log.debug("Account: Submitting new payment receipt...")
             
             let request = RenewRequest(transaction: transaction)
-            let renewHud = HUD()
+            self.showLoadingAnimation()
             
             Client.providers.accountProvider.renew(with: request) { (user, error) in
-                renewHud.hide()
+                self.hideLoadingAnimation()
                 
                 guard let _ = user else {
                     self.handleRenewalFailureWithError(error)

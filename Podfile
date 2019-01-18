@@ -63,7 +63,6 @@ def app_pods
     pod 'TPKeyboardAvoiding'
     pod 'SideMenu', '= 3.1.5'
     pod 'FXPageControl'
-    pod 'MBProgressHUD'
     pod 'DZNEmptyDataSet'
     pod 'PopupDialog'
 end

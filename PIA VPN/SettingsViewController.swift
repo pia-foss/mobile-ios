@@ -309,13 +309,12 @@ class SettingsViewController: AutolayoutViewController {
 
     @objc private func refreshContentBlockerState(withHUD: Bool = false) {
         if #available(iOS 10, *) {
-            var hud: HUD?
             if withHUD {
-                hud = HUD()
+                self.showLoadingAnimation()
             }
             SFContentBlockerManager.getStateOfContentBlocker(withIdentifier: AppConstants.Extensions.adBlockerBundleIdentifier) { (state, error) in
                 DispatchQueue.main.async {
-                    hud?.hide()
+                    self.hideLoadingAnimation()
                     
                     self.isContentBlockerEnabled = state?.isEnabled ?? false
                     self.redisplaySettings()
@@ -325,22 +324,22 @@ class SettingsViewController: AutolayoutViewController {
     }
     
     private func refreshContentBlockerRules() {
-        let hud = HUD()
+        self.showLoadingAnimation()
         SFContentBlockerManager.reloadContentBlocker(withIdentifier: AppConstants.Extensions.adBlockerBundleIdentifier) { (error) in
             if let error = error {
                 log.error("Could not reload Safari Content Blocker: \(error)")
             }
             DispatchQueue.main.async {
-                hud.hide()
+                self.hideLoadingAnimation()
             }
         }
     }
     
     private func submitTunnelLog() {
-        let hud = HUD()
+        self.showLoadingAnimation()
         
         Client.providers.vpnProvider.submitLog { (log, error) in
-            hud.hide()
+            self.hideLoadingAnimation()
             
             let title: String
             let message: String
@@ -416,7 +415,7 @@ class SettingsViewController: AutolayoutViewController {
         
         let isDisconnected = (Client.providers.vpnProvider.vpnStatus == .disconnected)
         let completionHandlerAfterVPNAction: (Bool) -> Void = { (shouldReconnect) in
-            let hud = HUD()
+            self.showLoadingAnimation()
             action.execute { (error) in
                 self.pendingVPNAction = nil
                 
@@ -425,11 +424,11 @@ class SettingsViewController: AutolayoutViewController {
                 if shouldReconnect && !isDisconnected {
                     Client.providers.vpnProvider.reconnect(after: nil) { (error) in
                         completionHandler()
-                        hud.hide()
+                        self.hideLoadingAnimation()
                     }
                 } else {
                     completionHandler()
-                    hud.hide()
+                    self.hideLoadingAnimation()
                 }
             }
         }

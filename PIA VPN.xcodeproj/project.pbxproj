@@ -39,8 +39,6 @@
 		0E7361E91FD98C3400706BFF /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7361E71FD98C3400706BFF /* AccountViewController.swift */; };
 		0E7361EB1FD99A1000706BFF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7361EA1FD99A1000706BFF /* MenuViewController.swift */; };
 		0E7361EC1FD99A1000706BFF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7361EA1FD99A1000706BFF /* MenuViewController.swift */; };
-		0E7AA9092023CA0700E1F07A /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7AA9082023CA0700E1F07A /* HUD.swift */; };
-		0E7AA90A2023CA0700E1F07A /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7AA9082023CA0700E1F07A /* HUD.swift */; };
 		0E7EC0302093265C0029811E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E7EC02E2093265C0029811E /* InfoPlist.strings */; };
 		0E7EC0312093265C0029811E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E7EC02E2093265C0029811E /* InfoPlist.strings */; };
 		0E7EC045209326E30029811E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E7EC043209326E30029811E /* Localizable.strings */; };
@@ -354,7 +352,6 @@
 		0E73619F1FD86F8300706BFF /* AccountObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountObserver.swift; sourceTree = "<group>"; };
 		0E7361E71FD98C3400706BFF /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		0E7361EA1FD99A1000706BFF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		0E7AA9082023CA0700E1F07A /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		0E7EC02F2093265C0029811E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E7EC032209326640029811E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E7EC033209326660029811E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -871,7 +868,6 @@
 			children = (
 				0EA4ACA920487B5800431F7D /* FakeSwitch.swift */,
 				0E9452981FDB4DF500891948 /* GradientView.swift */,
-				0E7AA9082023CA0700E1F07A /* HUD.swift */,
 				0EE14D171FF15812008D9AC2 /* ModalNavigationSegue.swift */,
 				0E9452AD1FDB5F7A00891948 /* PIAPageControl.swift */,
 				0E2215CB2008BF8300F5FB4D /* SwiftGen+Assets.swift */,
@@ -1432,7 +1428,6 @@
 				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
 				"${BUILT_PRODUCTS_DIR}/FXPageControl/FXPageControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Gloss/Gloss.framework",
-				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/PIALibrary/PIALibrary.framework",
 				"${BUILT_PRODUCTS_DIR}/PIATunnel/PIATunnel.framework",
@@ -1458,7 +1453,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FXPageControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gloss.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIALibrary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIATunnel.framework",
@@ -1578,7 +1572,6 @@
 				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
 				"${BUILT_PRODUCTS_DIR}/FXPageControl/FXPageControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Gloss/Gloss.framework",
-				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/PIALibrary/PIALibrary.framework",
 				"${BUILT_PRODUCTS_DIR}/PIATunnel/PIATunnel.framework",
@@ -1604,7 +1597,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FXPageControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gloss.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIALibrary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIATunnel.framework",
@@ -1640,7 +1632,6 @@
 				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
 				"${BUILT_PRODUCTS_DIR}/FXPageControl/FXPageControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Gloss/Gloss.framework",
-				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/PIALibrary/PIALibrary.framework",
 				"${BUILT_PRODUCTS_DIR}/PIATunnel/PIATunnel.framework",
@@ -1664,7 +1655,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FXPageControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gloss.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIALibrary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIATunnel.framework",
@@ -1721,7 +1711,6 @@
 				DD76291221ECBD8B0092DF50 /* SubscriptionTileCollectionViewCell.swift in Sources */,
 				0E392DA71FE3283C0002160D /* TransientState.swift in Sources */,
 				0E3A35361FD9EBDA000B0F99 /* AppDelegate.swift in Sources */,
-				0E7AA90A2023CA0700E1F07A /* HUD.swift in Sources */,
 				0EA4ACAB20487B5800431F7D /* FakeSwitch.swift in Sources */,
 				DDC8124D2176185D00CB290C /* SwiftGen+SeguesStoryboards.swift in Sources */,
 				DDD271E221D6262100B6D20F /* PropertyStoring.swift in Sources */,
@@ -1825,7 +1814,6 @@
 				0ECF5C082017EBAD0047596C /* ThemeCode.swift in Sources */,
 				0E392DA61FE3283C0002160D /* TransientState.swift in Sources */,
 				0E3A35351FD9EBDA000B0F99 /* AppDelegate.swift in Sources */,
-				0E7AA9092023CA0700E1F07A /* HUD.swift in Sources */,
 				0EA4ACAA20487B5800431F7D /* FakeSwitch.swift in Sources */,
 				DDC8124C2176185000CB290C /* SwiftGen+SeguesStoryboards.swift in Sources */,
 				DDD271E121D6262100B6D20F /* PropertyStoring.swift in Sources */,

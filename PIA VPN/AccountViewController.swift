@@ -150,11 +150,11 @@ class AccountViewController: AutolayoutViewController {
                     log.debug("Account: Modifying account email...")
                     
                     let request = UpdateAccountRequest(email: email)
-                    let hud = HUD()
+                    weakSelf.showLoadingAnimation()
                     
                     Client.providers.accountProvider.update(with: request,
                                                             andPassword: password) { (info, error) in
-                                                                hud.hide()
+                                                                weakSelf.hideLoadingAnimation()
                                                                 
                                                                 guard let _ = info else {
                                                                     if let error = error {
