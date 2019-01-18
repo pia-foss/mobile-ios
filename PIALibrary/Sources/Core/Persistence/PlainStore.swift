@@ -51,7 +51,13 @@ protocol PlainStore: class {
     // MARK: Preferences
     
     var isPersistentConnection: Bool? { get set }
-    
+
+    var shouldConnectForAllNetworks: Bool? { get set }
+
+    var useWiFiProtection: Bool? { get set }
+
+    var trustCellularData: Bool? { get set }
+
     var mace: Bool? { get set }
     
     // MARK: Lifecycle
@@ -59,4 +65,9 @@ protocol PlainStore: class {
     func reset()
     
     func clear()
+    
+    // MARK: Networks
+    var cachedNetworks: [String] { get set }
+    
+    var trustedNetworks: [String] { get set }
 }

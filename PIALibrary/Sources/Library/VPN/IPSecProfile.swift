@@ -98,14 +98,33 @@ public class IPSecProfile: NetworkExtensionProfile {
             }
 
             // prevent reconnection
-            self.currentVPN.isOnDemandEnabled = false
-            
+            self.configureOnDemandSetting()
             self.currentVPN.saveToPreferences { (error) in
                 if let error = error {
                     callback?(error)
                     return
                 }
                 self.currentVPN.connection.stopVPNTunnel()
+                callback?(nil)
+            }
+        }
+    }
+    
+    /// :nodoc:
+    public func updatePreferences(_ callback: SuccessLibraryCallback?) {
+        currentVPN.loadFromPreferences { (error) in
+            if let error = error {
+                callback?(error)
+                return
+            }
+            
+            // prevent reconnection
+            self.configureOnDemandSetting()
+            self.currentVPN.saveToPreferences { (error) in
+                if let error = error {
+                    callback?(error)
+                    return
+                }
                 callback?(nil)
             }
         }
@@ -122,8 +141,19 @@ public class IPSecProfile: NetworkExtensionProfile {
     public func disable(_ callback: SuccessLibraryCallback?) {
         currentVPN.loadFromPreferences { (error) in
             self.currentVPN.isEnabled = false
-            self.currentVPN.isOnDemandEnabled = false
+            self.configureOnDemandSetting()
             self.currentVPN.saveToPreferences(completionHandler: callback)
+        }
+    }
+    
+    private func configureOnDemandSetting() {
+        if Client.preferences.trustCellularData {
+            self.currentVPN.isOnDemandEnabled = false
+        } else {
+            self.currentVPN.isOnDemandEnabled = true
+            let cellularRule = NEOnDemandRuleConnect()
+            cellularRule.interfaceTypeMatch = .cellular
+            self.currentVPN.onDemandRules = [cellularRule]
         }
     }
 
