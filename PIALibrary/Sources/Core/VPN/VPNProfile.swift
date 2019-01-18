@@ -54,6 +54,13 @@ public protocol VPNProfile: class {
     func disconnect(_ callback: SuccessLibraryCallback?)
     
     /**
+     Update preferences from the VPN.
+     
+     - Parameter callback: Returns `nil` on success.
+     */
+    func updatePreferences(_ callback: SuccessLibraryCallback?)
+    
+    /**
      Removes the profile from the device.
      
      - Parameter callback: Returns `nil` on success.

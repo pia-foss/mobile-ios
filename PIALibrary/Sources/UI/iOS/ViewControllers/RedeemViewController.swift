@@ -243,7 +243,7 @@ class RedeemViewController: AutolayoutViewController, WelcomeChild {
     
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
-        Theme.current.applySolidLightBackground(view)
+        Theme.current.applyPrincipalBackground(view)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applySubtitle(labelSubtitle)
         Theme.current.applyInput(textEmail)

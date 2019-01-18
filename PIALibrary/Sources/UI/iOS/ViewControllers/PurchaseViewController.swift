@@ -163,9 +163,9 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
     
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
-        Theme.current.applySolidLightBackground(view)
-        Theme.current.applySolidLightBackground(scrollView)
-        Theme.current.applySolidLightBackground(collectionPlans)
+        Theme.current.applyPrincipalBackground(view)
+        Theme.current.applyPrincipalBackground(scrollView)
+        Theme.current.applyPrincipalBackground(collectionPlans)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applySubtitle(labelSubtitle)
         Theme.current.applyLinkAttributes(textAgreement)
