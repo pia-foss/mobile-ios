@@ -295,11 +295,11 @@ class AccountViewController: AutolayoutViewController {
         styleNavigationBarWithTitle(L10n.Menu.Item.account)
 
         if let viewContainer = viewContainer {
-            Theme.current.applySolidLightBackground(view)
-            Theme.current.applySolidLightBackground(viewContainer)
+            Theme.current.applyPrincipalBackground(view)
+            Theme.current.applyPrincipalBackground(viewContainer)
         }
         
-        Theme.current.applyLightBackground(viewAccountInfo)
+        Theme.current.applySecondaryBackground(viewAccountInfo)
         Theme.current.applySubtitle(labelEmail)
         Theme.current.applySubtitle(labelUsername)
         

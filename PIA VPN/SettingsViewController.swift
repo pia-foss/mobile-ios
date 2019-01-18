@@ -609,10 +609,10 @@ class SettingsViewController: AutolayoutViewController {
         styleNavigationBarWithTitle(L10n.Menu.Item.settings)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
-            Theme.current.applySolidLightBackground(view)
-            Theme.current.applySolidLightBackground(viewContainer)
+            Theme.current.applyPrincipalBackground(view)
+            Theme.current.applyPrincipalBackground(viewContainer)
         }
-        Theme.current.applySolidLightBackground(tableView)
+        Theme.current.applyPrincipalBackground(tableView)
         Theme.current.applyDividerToSeparator(tableView)
         tableView.reloadData()
         
@@ -870,7 +870,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         }
 
-        Theme.current.applyLightBackground(cell)
+        Theme.current.applySecondaryBackground(cell)
         if let textLabel = cell.textLabel {
             Theme.current.applySettingsCellTitle(textLabel,
                                                  appearance: .dark)
@@ -882,7 +882,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         let backgroundView = UIView()
-        Theme.current.applySolidLightBackground(backgroundView)
+        Theme.current.applyPrincipalBackground(backgroundView)
         cell.selectedBackgroundView = backgroundView
 
         return cell
@@ -1072,7 +1072,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension SettingsViewController: OptionsViewControllerDelegate {
     func backgroundColorForOptionsController(_ controller: OptionsViewController) -> UIColor {
-        return Theme.current.palette.solidLightBackground
+        return Theme.current.palette.principalBackground
     }
     
     func tableStyleForOptionsController(_ controller: OptionsViewController) -> UITableViewStyle {
@@ -1165,10 +1165,10 @@ extension SettingsViewController: OptionsViewControllerDelegate {
         }
         
         let backgroundView = UIView()
-        backgroundView.backgroundColor = Theme.current.palette.solidLightBackground
+        backgroundView.backgroundColor = Theme.current.palette.principalBackground
         cell.selectedBackgroundView = backgroundView
 
-        Theme.current.applyLightBackground(cell)
+        Theme.current.applySecondaryBackground(cell)
         Theme.current.applyDetailTableCell(cell)
     }
 

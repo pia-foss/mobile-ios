@@ -358,7 +358,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             let backgroundView = UIView()
-            Theme.current.applyLightBackground(backgroundView)
+            Theme.current.applySecondaryBackground(backgroundView)
             cell.selectedBackgroundView = backgroundView
 
             return cell
