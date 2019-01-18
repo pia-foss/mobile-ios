@@ -60,7 +60,7 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
         super.viewDidLoad()
 
         if let viewContainer = viewContainer {
-            Theme.current.applySolidLightBackground(viewContainer)
+            Theme.current.applyPrincipalBackground(viewContainer)
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
@@ -107,9 +107,9 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
     /// :nodoc:
     @objc open func viewShouldRestyle() {
         Theme.current.applyNavigationBarStyle(to: self)
-        Theme.current.applySolidLightBackground(view)
+        Theme.current.applyPrincipalBackground(view)
         if let viewContainer = viewContainer {
-            Theme.current.applySolidLightBackground(viewContainer)
+            Theme.current.applyPrincipalBackground(viewContainer)
         }
         setNeedsStatusBarAppearanceUpdate()
     }

@@ -31,6 +31,7 @@ Pod::Spec.new do |s|
         p.dependency "Alamofire", "~> 4"
         p.dependency "ReachabilitySwift"
         p.dependency "SwiftyBeaver"
+        p.dependency "PopupDialog"
     end
 
     s.subspec "VPN" do |p|
