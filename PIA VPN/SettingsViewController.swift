@@ -868,7 +868,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .vpnProtocolSelection:
             let options: [String] = [
                 PIATunnelProfile.vpnType,
-                IPSecProfile.vpnType
+                IPSecProfile.vpnType,
+                IKEv2Profile.vpnType,
             ]
             controller = OptionsViewController()
             controller?.options = options
