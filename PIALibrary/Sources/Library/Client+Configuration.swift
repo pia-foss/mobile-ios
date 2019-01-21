@@ -176,7 +176,8 @@ extension Client {
             enablesServerPings = false
             minPingInterval = 120000
 
-            availableVPNProfiles = [IPSecProfile()]
+            availableVPNProfiles = [IPSecProfile(),
+                                    IKEv2Profile()]
             vpnProfileName = "Private Internet Access"
             vpnReconnectionDelay = 2000
             
