@@ -538,7 +538,8 @@ class SettingsViewController: AutolayoutViewController {
             sections.remove(at: sections.index(of: .connection)!)
             sections.remove(at: sections.index(of: .encryption)!)
         } else {
-            if (pendingPreferences.vpnType == IPSecProfile.vpnType) {
+            if (pendingPreferences.vpnType == IPSecProfile.vpnType ||
+                pendingPreferences.vpnType == IKEv2Profile.vpnType) {
                 sections.remove(at: sections.index(of: .encryption)!)
             }
         }
