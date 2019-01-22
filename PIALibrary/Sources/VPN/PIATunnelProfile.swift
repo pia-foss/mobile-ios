@@ -85,14 +85,12 @@ public class PIATunnelProfile: NetworkExtensionProfile {
                 return
             }
             
-            //TODO: prevent reconnection
-            self.configureOnDemandSettingForVPN(vpn)
-            
             vpn.saveToPreferences { (error) in
                 if let error = error {
                     callback?(error)
                     return
                 }
+                self.configureOnDemandSettingForVPN(vpn)
                 vpn.connection.stopVPNTunnel()
                 callback?(nil)
             }
@@ -107,14 +105,12 @@ public class PIATunnelProfile: NetworkExtensionProfile {
                 return
             }
             
-            //TODO: prevent reconnection
-            self.configureOnDemandSettingForVPN(vpn)
-            
             vpn.saveToPreferences { (error) in
                 if let error = error {
                     callback?(error)
                     return
                 }
+                self.configureOnDemandSettingForVPN(vpn)
                 callback?(nil)
             }
         }
@@ -138,9 +134,15 @@ public class PIATunnelProfile: NetworkExtensionProfile {
                 return
             }
             vpn.isEnabled = false
-            //TODO: prevent reconnection
-            self.configureOnDemandSettingForVPN(vpn)
             vpn.saveToPreferences(completionHandler: callback)
+            vpn.saveToPreferences { (error) in
+                if let error = error {
+                    callback?(error)
+                    return
+                }
+                self.configureOnDemandSettingForVPN(vpn)
+                callback?(nil)
+            }
         }
     }
     
