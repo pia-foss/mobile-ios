@@ -125,6 +125,7 @@ public class PIATunnelProfile: NetworkExtensionProfile {
             cellularRule.interfaceTypeMatch = .cellular
             vpn.onDemandRules = [cellularRule]
         }
+        vpn.saveToPreferences(completionHandler: nil)
     }
 
     /// :nodoc:

@@ -158,6 +158,7 @@ public class IPSecProfile: NetworkExtensionProfile {
             cellularRule.interfaceTypeMatch = .cellular
             self.currentVPN.onDemandRules = [cellularRule]
         }
+        self.currentVPN.saveToPreferences(completionHandler: nil)
     }
 
     /// :nodoc:
