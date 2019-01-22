@@ -150,15 +150,29 @@ public class IPSecProfile: NetworkExtensionProfile {
     }
     
     private func configureOnDemandSetting() {
-        if Client.preferences.trustCellularData {
-            self.currentVPN.isOnDemandEnabled = false
-        } else {
-            self.currentVPN.isOnDemandEnabled = true
-            let cellularRule = NEOnDemandRuleConnect()
-            cellularRule.interfaceTypeMatch = .cellular
-            self.currentVPN.onDemandRules = [cellularRule]
+        
+        self.currentVPN.loadFromPreferences { (error) in
+            if let _ = error {
+                return
+            }
+        
+            if Client.preferences.trustCellularData {
+                self.currentVPN.isOnDemandEnabled = false
+            } else {
+                self.currentVPN.isOnDemandEnabled = true
+                let cellularRule = NEOnDemandRuleConnect()
+                cellularRule.interfaceTypeMatch = .cellular
+                self.currentVPN.onDemandRules = [cellularRule]
+            }
+            
+            self.currentVPN.saveToPreferences{ (error) in
+                if let _ = error {
+                    return
+                }
+            }
+            
         }
-        self.currentVPN.saveToPreferences(completionHandler: nil)
+
     }
 
     /// :nodoc:
