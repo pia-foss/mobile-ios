@@ -53,7 +53,7 @@ end
 def shared_main_pods
     pod 'AlamofireImage'
     #library_by_path('/Users/ueshiba/Desktop/PIA')
-    library_by_git('e50ad47')
+    library_by_git('5ae5c87')
     #library_by_version('~> 1.1.3')
 end
 
