@@ -96,13 +96,12 @@ public class IPSecProfile: NetworkExtensionProfile {
                 return
             }
 
-            // prevent reconnection
-            self.configureOnDemandSetting()
             self.currentVPN.saveToPreferences { (error) in
                 if let error = error {
                     callback?(error)
                     return
                 }
+                self.configureOnDemandSetting()
                 self.currentVPN.connection.stopVPNTunnel()
                 callback?(nil)
             }
@@ -117,13 +116,12 @@ public class IPSecProfile: NetworkExtensionProfile {
                 return
             }
             
-            // prevent reconnection
-            self.configureOnDemandSetting()
             self.currentVPN.saveToPreferences { (error) in
                 if let error = error {
                     callback?(error)
                     return
                 }
+                self.configureOnDemandSetting()
                 callback?(nil)
             }
         }
@@ -140,8 +138,14 @@ public class IPSecProfile: NetworkExtensionProfile {
     public func disable(_ callback: SuccessLibraryCallback?) {
         currentVPN.loadFromPreferences { (error) in
             self.currentVPN.isEnabled = false
-            self.configureOnDemandSetting()
-            self.currentVPN.saveToPreferences(completionHandler: callback)
+            self.currentVPN.saveToPreferences { (error) in
+                if let error = error {
+                    callback?(error)
+                    return
+                }
+                self.configureOnDemandSetting()
+                callback?(nil)
+            }
         }
     }
     
