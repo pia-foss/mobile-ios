@@ -80,6 +80,11 @@ public class IKEv2Profile: NetworkExtensionProfile {
                 return
             }
             
+            // prevent reconnection
+            if Client.preferences.trustCellularData {
+                self.currentVPN.isOnDemandEnabled = false
+            }
+            
             self.currentVPN.saveToPreferences { (error) in
                 if let error = error {
                     callback?(error)
@@ -104,7 +109,6 @@ public class IKEv2Profile: NetworkExtensionProfile {
                     callback?(error)
                     return
                 }
-                self.configureOnDemandSetting()
                 callback?(nil)
             }
         }
@@ -121,40 +125,11 @@ public class IKEv2Profile: NetworkExtensionProfile {
     public func disable(_ callback: SuccessLibraryCallback?) {
         currentVPN.loadFromPreferences { (error) in
             self.currentVPN.isEnabled = false
-            self.currentVPN.saveToPreferences { (error) in
-                if let error = error {
-                    callback?(error)
-                    return
-                }
-                callback?(nil)
-            }
-        }
-    }
-    
-    private func configureOnDemandSetting() {
-        
-        self.currentVPN.loadFromPreferences { (error) in
-            if let _ = error {
-                return
-            }
-            
             if Client.preferences.trustCellularData {
                 self.currentVPN.isOnDemandEnabled = false
-            } else {
-                self.currentVPN.isOnDemandEnabled = true
-                let cellularRule = NEOnDemandRuleConnect()
-                cellularRule.interfaceTypeMatch = .cellular
-                self.currentVPN.onDemandRules = [cellularRule]
             }
-            
-            self.currentVPN.saveToPreferences{ (error) in
-                if let _ = error {
-                    return
-                }
-            }
-            
+            self.currentVPN.saveToPreferences(completionHandler: callback)
         }
-        
     }
     
     /// :nodoc:
