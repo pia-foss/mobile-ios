@@ -64,6 +64,12 @@ enum Setting: Int {
     //
     //        case invokeMACERequest
     
+    case publicUsername
+    
+    case username
+    
+    case password
+    
     case resolveGoogleAdsDomain
 }
 
@@ -154,6 +160,9 @@ class SettingsViewController: AutolayoutViewController {
 //            .recalculatePingTimes,
 //            .invokeMACERequest,
 //            .mace,
+            .publicUsername,
+            .username,
+            .password,
             .resolveGoogleAdsDomain
         ]
     ]
@@ -700,6 +709,31 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         return rowsBySection[visibleSections[section]]!.count
     }
     
+    func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+        let section = visibleSections[indexPath.section]
+        guard let setting = rowsBySection[section]?[indexPath.row] else {
+            fatalError("Data source is incorrect")
+        }
+        switch setting {
+        case .username, .publicUsername, .password:
+            return true
+        default:
+            return false
+        }
+    }
+
+    func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        return action == #selector(copy(_:))
+    }
+
+    func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
+        if action == #selector(copy(_:)) {
+            let cell = tableView.cellForRow(at: indexPath)
+            let pasteboard = UIPasteboard.general
+            pasteboard.string = cell?.detailTextLabel?.text
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.setting, for: indexPath)
         cell.accessoryType = .disclosureIndicator
@@ -835,6 +869,18 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .resolveGoogleAdsDomain:
             cell.textLabel?.text = "Resolve google-analytics.com"
             cell.detailTextLabel?.text = nil
+            
+        case .publicUsername:
+            cell.textLabel?.text = "Public username"
+            cell.detailTextLabel?.text = Client.providers.accountProvider.publicUsername ?? ""
+
+        case .username:
+            cell.textLabel?.text = "Username"
+            cell.detailTextLabel?.text = Client.providers.accountProvider.currentUser?.credentials.username ?? ""
+
+        case .password:
+            cell.textLabel?.text = "Password"
+            cell.detailTextLabel?.text = Client.providers.accountProvider.currentUser?.credentials.password ?? ""
             
         case .trustCellularData:
             cell.textLabel?.text = L10n.Settings.Hotspothelper.Cellular.title
