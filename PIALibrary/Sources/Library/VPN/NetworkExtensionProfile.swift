@@ -61,8 +61,17 @@ extension NetworkExtensionProfile {
         } else {
             vpn.isOnDemandEnabled = vpn.isOnDemandEnabled && configuration.isOnDemand
         }
+        
         if vpn.isOnDemandEnabled {
             vpn.onDemandRules = [NEOnDemandRuleConnect()]
+        }
+
+        //Configure onDemand rules
+        if !Client.preferences.trustCellularData {
+            vpn.isOnDemandEnabled = true
+            let cellularRule = NEOnDemandRuleConnect()
+            cellularRule.interfaceTypeMatch = .cellular
+            vpn.onDemandRules = [cellularRule]
         }
         
         log.debug("Configured with server: \(protocolConfiguration.serverAddress!)")
