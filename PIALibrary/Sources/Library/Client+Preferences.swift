@@ -342,7 +342,7 @@ extension Client.Preferences {
                 queue.append(VPNActionReinstall())
             }
             if (trustCellularData != target.trustCellularData) {
-                queue.append(VPNActionReinstall())
+                queue.append(VPNActionDisconnectAndReinstall())
             }
             if (vpnDisconnectsOnSleep != target.vpnDisconnectsOnSleep) {
                 queue.append(VPNActionReinstall())

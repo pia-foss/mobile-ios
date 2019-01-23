@@ -85,6 +85,9 @@ public class PIATunnelProfile: NetworkExtensionProfile {
                 return
             }
             
+            if Client.preferences.trustCellularData {
+                vpn.isOnDemandEnabled = false
+            }
             vpn.saveToPreferences { (error) in
                 if let error = error {
                     callback?(error)
@@ -109,28 +112,9 @@ public class PIATunnelProfile: NetworkExtensionProfile {
                     callback?(error)
                     return
                 }
-                self.configureOnDemandSetting()
                 callback?(nil)
             }
         }
-    }
-    
-    private func configureOnDemandSetting() {
-        find { (vpn, error) in
-            guard let vpn = vpn else {
-                return
-            }
-            if Client.preferences.trustCellularData {
-                vpn.isOnDemandEnabled = false
-            } else {
-                vpn.isOnDemandEnabled = true
-                let cellularRule = NEOnDemandRuleConnect()
-                cellularRule.interfaceTypeMatch = .cellular
-                vpn.onDemandRules = [cellularRule]
-            }
-            vpn.saveToPreferences(completionHandler: nil)
-        }
-
     }
 
     /// :nodoc:
@@ -140,14 +124,10 @@ public class PIATunnelProfile: NetworkExtensionProfile {
                 return
             }
             vpn.isEnabled = false
-            vpn.saveToPreferences(completionHandler: callback)
-            vpn.saveToPreferences { (error) in
-                if let error = error {
-                    callback?(error)
-                    return
-                }
-                callback?(nil)
+            if Client.preferences.trustCellularData {
+                vpn.isOnDemandEnabled = false
             }
+            vpn.saveToPreferences(completionHandler: callback)
         }
     }
     
