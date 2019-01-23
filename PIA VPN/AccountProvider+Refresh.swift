@@ -14,6 +14,16 @@ private let log = SwiftyBeaver.self
 
 extension AccountProvider {
     func refreshAndLogoutUnauthorized() {
+        
+        guard let accountInfo = Client.providers.accountProvider.currentUser?.info else {
+            return
+        }
+        
+        guard accountInfo.isExpired else {
+            //if not expired we do not need to refresh the token
+            return
+        }
+        
         refreshAccountInfo { (info, error) in
             guard let error = error as? ClientError else {
                 return
