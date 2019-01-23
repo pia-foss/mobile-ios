@@ -85,7 +85,6 @@ public class IKEv2Profile: NetworkExtensionProfile {
                     callback?(error)
                     return
                 }
-                self.configureOnDemandSetting()
                 self.currentVPN.connection.stopVPNTunnel()
                 callback?(nil)
             }
@@ -127,7 +126,6 @@ public class IKEv2Profile: NetworkExtensionProfile {
                     callback?(error)
                     return
                 }
-                self.configureOnDemandSetting()
                 callback?(nil)
             }
         }
