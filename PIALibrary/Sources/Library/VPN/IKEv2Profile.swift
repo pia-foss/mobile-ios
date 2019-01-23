@@ -86,10 +86,7 @@ public class IKEv2Profile: NetworkExtensionProfile {
             }
             
             // prevent reconnection
-            if Client.preferences.trustCellularData {
-                self.currentVPN.isOnDemandEnabled = false
-            }
-            
+            self.currentVPN.isOnDemandEnabled = false
             self.currentVPN.saveToPreferences { (error) in
                 if let error = error {
                     callback?(error)
@@ -130,9 +127,7 @@ public class IKEv2Profile: NetworkExtensionProfile {
     public func disable(_ callback: SuccessLibraryCallback?) {
         currentVPN.loadFromPreferences { (error) in
             self.currentVPN.isEnabled = false
-            if Client.preferences.trustCellularData {
-                self.currentVPN.isOnDemandEnabled = false
-            }
+            self.currentVPN.isOnDemandEnabled = false
             self.currentVPN.saveToPreferences(completionHandler: callback)
         }
     }
