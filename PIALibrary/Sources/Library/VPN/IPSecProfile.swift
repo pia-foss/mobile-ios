@@ -101,7 +101,6 @@ public class IPSecProfile: NetworkExtensionProfile {
                     callback?(error)
                     return
                 }
-                self.configureOnDemandSetting()
                 self.currentVPN.connection.stopVPNTunnel()
                 callback?(nil)
             }
@@ -143,7 +142,6 @@ public class IPSecProfile: NetworkExtensionProfile {
                     callback?(error)
                     return
                 }
-                self.configureOnDemandSetting()
                 callback?(nil)
             }
         }

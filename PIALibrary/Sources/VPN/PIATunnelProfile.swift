@@ -90,7 +90,6 @@ public class PIATunnelProfile: NetworkExtensionProfile {
                     callback?(error)
                     return
                 }
-                self.configureOnDemandSettingForVPN(vpn)
                 vpn.connection.stopVPNTunnel()
                 callback?(nil)
             }
@@ -110,22 +109,28 @@ public class PIATunnelProfile: NetworkExtensionProfile {
                     callback?(error)
                     return
                 }
-                self.configureOnDemandSettingForVPN(vpn)
+                self.configureOnDemandSetting()
                 callback?(nil)
             }
         }
     }
     
-    private func configureOnDemandSettingForVPN(_ vpn: NETunnelProviderManager) {
-        if Client.preferences.trustCellularData {
-            vpn.isOnDemandEnabled = false
-        } else {
-            vpn.isOnDemandEnabled = true
-            let cellularRule = NEOnDemandRuleConnect()
-            cellularRule.interfaceTypeMatch = .cellular
-            vpn.onDemandRules = [cellularRule]
+    private func configureOnDemandSetting() {
+        find { (vpn, error) in
+            guard let vpn = vpn else {
+                return
+            }
+            if Client.preferences.trustCellularData {
+                vpn.isOnDemandEnabled = false
+            } else {
+                vpn.isOnDemandEnabled = true
+                let cellularRule = NEOnDemandRuleConnect()
+                cellularRule.interfaceTypeMatch = .cellular
+                vpn.onDemandRules = [cellularRule]
+            }
+            vpn.saveToPreferences(completionHandler: nil)
         }
-        vpn.saveToPreferences(completionHandler: nil)
+
     }
 
     /// :nodoc:
@@ -141,7 +146,6 @@ public class PIATunnelProfile: NetworkExtensionProfile {
                     callback?(error)
                     return
                 }
-                self.configureOnDemandSettingForVPN(vpn)
                 callback?(nil)
             }
         }
