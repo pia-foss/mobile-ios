@@ -52,6 +52,7 @@ public class IKEv2Profile: NetworkExtensionProfile {
     
     /// :nodoc:
     public func save(withConfiguration configuration: VPNConfiguration, force: Bool, _ callback: SuccessLibraryCallback?) {
+        
         currentVPN.loadFromPreferences { (error) in
             if let error = error {
                 callback?(error)
@@ -163,6 +164,11 @@ public class IKEv2Profile: NetworkExtensionProfile {
         cfg.disconnectOnSleep = false
         cfg.useExtendedAuthentication = true
         
+        log.debug("IKEv2 Configuration")
+        log.debug("-------------------")
+        log.debug(cfg)
+        log.debug("-------------------")
+
         return cfg
     }
 }
