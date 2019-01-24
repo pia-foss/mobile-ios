@@ -873,15 +873,15 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .publicUsername:
             cell.textLabel?.text = "Public username"
             cell.detailTextLabel?.text = Client.providers.accountProvider.publicUsername ?? ""
-
+            cell.accessoryType = .none
         case .username:
             cell.textLabel?.text = "Username"
             cell.detailTextLabel?.text = Client.providers.accountProvider.currentUser?.credentials.username ?? ""
-
+            cell.accessoryType = .none
         case .password:
             cell.textLabel?.text = "Password"
             cell.detailTextLabel?.text = Client.providers.accountProvider.currentUser?.credentials.password ?? ""
-            
+            cell.accessoryType = .none
         case .trustCellularData:
             cell.textLabel?.text = L10n.Settings.Hotspothelper.Cellular.title
             cell.detailTextLabel?.text = nil
