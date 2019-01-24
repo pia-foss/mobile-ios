@@ -250,6 +250,8 @@
 		A6680249A33738280B9AD733 /* Pods_PIALibrary_PIALibraryHost_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 566B62D4C21DD5A90EF1BAE6 /* Pods_PIALibrary_PIALibraryHost_iOS.framework */; };
 		DD58F4BB21AEB99C00D043F7 /* GlossToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58F4BA21AEB99C00D043F7 /* GlossToken.swift */; };
 		DD58F4BD21AEF76100D043F7 /* String+Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58F4BC21AEF76100D043F7 /* String+Components.swift */; };
+		DDA4A7BE21F5C31400A02ACD /* IKEv2Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA4A7BD21F5C31400A02ACD /* IKEv2Profile.swift */; };
+		DDA4A7BF21F5C31B00A02ACD /* IKEv2Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA4A7BD21F5C31400A02ACD /* IKEv2Profile.swift */; };
 		DDC812482176166600CB290C /* SwiftGen+ScenesStoryboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC812472176166500CB290C /* SwiftGen+ScenesStoryboards.swift */; };
 		DDC8124A217617F900CB290C /* SwiftGen+SeguesStoryboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC81249217617F900CB290C /* SwiftGen+SeguesStoryboards.swift */; };
 /* End PBXBuildFile section */
@@ -495,6 +497,7 @@
 		D9FDC8980713EDCEDD51B936 /* Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibrary-iOS/Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		DD58F4BA21AEB99C00D043F7 /* GlossToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlossToken.swift; sourceTree = "<group>"; };
 		DD58F4BC21AEF76100D043F7 /* String+Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Components.swift"; sourceTree = "<group>"; };
+		DDA4A7BD21F5C31400A02ACD /* IKEv2Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IKEv2Profile.swift; sourceTree = "<group>"; };
 		DDC812472176166500CB290C /* SwiftGen+ScenesStoryboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+ScenesStoryboards.swift"; sourceTree = "<group>"; };
 		DDC81249217617F900CB290C /* SwiftGen+SeguesStoryboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+SeguesStoryboards.swift"; sourceTree = "<group>"; };
 		E526D8161FFFEE65AC2DF844 /* Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -613,6 +616,7 @@
 				0E2ADD471FE1595300BB170C /* IPSecProfile.swift */,
 				0EB3D9871FF06F37005B11F4 /* NetworkExtensionProfile.swift */,
 				0EB3D9811FF02FE5005B11F4 /* VPNAction.swift */,
+				DDA4A7BD21F5C31400A02ACD /* IKEv2Profile.swift */,
 			);
 			path = VPN;
 			sourceTree = "<group>";
@@ -1422,6 +1426,7 @@
 				0E7BC6F41F96B1120035C8B2 /* SecureStore.swift in Sources */,
 				0EFEB4C3200778BC00F81029 /* NSData+Compression.m in Sources */,
 				0EFEB4C520077AC900F81029 /* PIATunnelProfile.swift in Sources */,
+				DDA4A7BF21F5C31B00A02ACD /* IKEv2Profile.swift in Sources */,
 				0E2ADD3B1FE14F8600BB170C /* VPNProfile.swift in Sources */,
 				0EFDC1CF1FE36D45007C0B9B /* Validator.swift in Sources */,
 				0E7BC6E91F96B1040035C8B2 /* DefaultAccountProvider.swift in Sources */,
@@ -1536,6 +1541,7 @@
 				0EA8072F20A1E7C60033EC1A /* GlossRedeem.swift in Sources */,
 				0EA4C4311FDDD48F0041C3D8 /* Server.swift in Sources */,
 				0EB9667E1FDF36490086ABC2 /* GlossParser.swift in Sources */,
+				DDA4A7BE21F5C31400A02ACD /* IKEv2Profile.swift in Sources */,
 				0EAA38991F9CC7E4000149CF /* AppStoreTransaction.swift in Sources */,
 				0EA8072720A1A0090033EC1A /* Redeem.swift in Sources */,
 				84D5DA702126CE2900F753F8 /* QRCameraScannerViewController.swift in Sources */,
