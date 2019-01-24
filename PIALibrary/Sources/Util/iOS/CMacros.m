@@ -35,7 +35,7 @@ NSString *VPNIPAddressFromInterfaces()
                 
 //                NSLog(@"Interfaces: %@ = %@", ifName, ifIpAddress);
                 
-                if ([ifName hasPrefix:@"utun"] || [ifName hasPrefix:@"ppp"]) {
+                if ([ifName hasPrefix:@"utun"] || [ifName hasPrefix:@"ppp"] || [ifName hasPrefix:@"ipsec0"]) {
                     vpnIpAddress = ifIpAddress;
                 }
             }
