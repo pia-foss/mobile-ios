@@ -30,6 +30,11 @@ public class IKEv2Profile: NetworkExtensionProfile {
     }
     
     /// :nodoc:
+    public static var usernameAuthPrefix: String {
+        return "token_"
+    }
+    
+    /// :nodoc:
     public static var isTunnel: Bool {
         return false
     }
@@ -47,6 +52,7 @@ public class IKEv2Profile: NetworkExtensionProfile {
     
     /// :nodoc:
     public func save(withConfiguration configuration: VPNConfiguration, force: Bool, _ callback: SuccessLibraryCallback?) {
+        
         currentVPN.loadFromPreferences { (error) in
             if let error = error {
                 callback?(error)
@@ -81,10 +87,7 @@ public class IKEv2Profile: NetworkExtensionProfile {
             }
             
             // prevent reconnection
-            if Client.preferences.trustCellularData {
-                self.currentVPN.isOnDemandEnabled = false
-            }
-            
+            self.currentVPN.isOnDemandEnabled = false
             self.currentVPN.saveToPreferences { (error) in
                 if let error = error {
                     callback?(error)
@@ -125,9 +128,7 @@ public class IKEv2Profile: NetworkExtensionProfile {
     public func disable(_ callback: SuccessLibraryCallback?) {
         currentVPN.loadFromPreferences { (error) in
             self.currentVPN.isEnabled = false
-            if Client.preferences.trustCellularData {
-                self.currentVPN.isOnDemandEnabled = false
-            }
+            self.currentVPN.isOnDemandEnabled = false
             self.currentVPN.saveToPreferences(completionHandler: callback)
         }
     }
@@ -146,17 +147,28 @@ public class IKEv2Profile: NetworkExtensionProfile {
     
     /// :nodoc:
     public func generatedProtocol(withConfiguration configuration: VPNConfiguration) -> NEVPNProtocol {
+        
+        var iKEv2Username = IKEv2Profile.usernameAuthPrefix
+        if let username = Client.providers.accountProvider.publicUsername {
+            iKEv2Username += username
+        }
+        
         let cfg = NEVPNProtocolIKEv2()
         cfg.serverAddress = configuration.server.hostname
         cfg.remoteIdentifier = configuration.server.hostname
-        cfg.localIdentifier = configuration.username
-        cfg.username = configuration.username
+        cfg.localIdentifier = iKEv2Username
+        cfg.username = iKEv2Username
         cfg.passwordReference = configuration.passwordReference
         
         cfg.authenticationMethod = .none
         cfg.disconnectOnSleep = false
         cfg.useExtendedAuthentication = true
         
+        log.debug("IKEv2 Configuration")
+        log.debug("-------------------")
+        log.debug(cfg)
+        log.debug("-------------------")
+
         return cfg
     }
 }

@@ -85,9 +85,7 @@ public class PIATunnelProfile: NetworkExtensionProfile {
                 return
             }
             
-            if Client.preferences.trustCellularData {
-                vpn.isOnDemandEnabled = false
-            }
+            vpn.isOnDemandEnabled = false
             vpn.saveToPreferences { (error) in
                 if let error = error {
                     callback?(error)
@@ -124,9 +122,7 @@ public class PIATunnelProfile: NetworkExtensionProfile {
                 return
             }
             vpn.isEnabled = false
-            if Client.preferences.trustCellularData {
-                vpn.isOnDemandEnabled = false
-            }
+            vpn.isOnDemandEnabled = false
             vpn.saveToPreferences(completionHandler: callback)
         }
     }
