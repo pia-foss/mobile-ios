@@ -1,1 +1,2 @@
 - Automatic Network Protection - When enabled protects users connecting to untrusted networks. Adds options to define general rules for what is untrusted, and can manage a list of trusted networks.
+- IKEv2 support
