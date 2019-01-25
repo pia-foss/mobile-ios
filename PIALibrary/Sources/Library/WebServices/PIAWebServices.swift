@@ -28,7 +28,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         ]
         
         let parameters = credentials.toJSONDictionary()
-        req(nil, .post, endpoint, parameters, status, JSONRequestExecutor() { (json, status, error) in
+        req(nil, .post, endpoint, useAuthToken: true, parameters, status, JSONRequestExecutor() { (json, status, error) in
             if let knownError = self.knownError(endpoint, status, errors) {
                 callback?(nil, knownError)
                 return

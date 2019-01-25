@@ -151,12 +151,12 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     }
     
     /// :nodoc:
-    public func refreshAccountInfo(_ callback: ((AccountInfo?, Error?) -> Void)?) {
+    public func refreshAccountInfo(force: Bool, _ callback: ((AccountInfo?, Error?) -> Void)?) {
         guard !mockIsUnauthorized else {
             callback?(nil, ClientError.unauthorized)
             return
         }
-        delegate.refreshAccountInfo(callback)
+        delegate.refreshAccountInfo(force: false, callback)
     }
     
     /// :nodoc:
