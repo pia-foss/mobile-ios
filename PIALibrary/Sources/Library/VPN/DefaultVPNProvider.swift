@@ -79,11 +79,11 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         #endif
         activeProfile = profile
         if accessedProviders.accountProvider.isLoggedIn {
-            install(nil)
+            install(force: false, nil)
         }
     }
     
-    func install(_ callback: SuccessLibraryCallback?) {
+    func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?) {
         guard accessedProviders.accountProvider.isLoggedIn else {
             preconditionFailure()
         }
@@ -97,9 +97,9 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
             previousProfile = activeProfile
         }
 
-        let force = DefaultVPNProvider.forcedStatuses.contains(accessedDatabase.transient.vpnStatus)
+        let forcedStatuses = DefaultVPNProvider.forcedStatuses.contains(accessedDatabase.transient.vpnStatus)
         let installBlock: SuccessLibraryCallback = { (error) in
-            profile.save(withConfiguration: self.vpnClientConfiguration(for: profile), force: force) { (error) in
+            profile.save(withConfiguration: self.vpnClientConfiguration(for: profile), force: forcedStatuses) { (error) in
                 if let error = error {
                     callback?(error)
                     return
@@ -121,7 +121,7 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         if let previousProfile = previousProfile {
             previousProfile.disconnect(installBlock)
         } else {
-            if newVPNType != activeProfile?.vpnType || !force {
+            if newVPNType != activeProfile?.vpnType || !forcedStatuses || forceInstall {
                 //only install if new
                 installBlock(nil)
             }

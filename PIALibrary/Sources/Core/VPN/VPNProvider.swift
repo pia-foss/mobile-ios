@@ -36,8 +36,9 @@ public protocol VPNProvider: class {
      Installs the profile as per `currentVPNType`.
      
      - Parameter callback: Returns `nil` on success.
+     - Parameter forceInstall: Force the install of the profile.
      */
-    func install(_ callback: SuccessLibraryCallback?)
+    func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?)
     
     /**
      Disables the current profile.

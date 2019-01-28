@@ -48,13 +48,13 @@ class VPNActionReinstall: VPNAction, ProvidersAccess {
 
     func execute(_ callback: SuccessLibraryCallback?) {
         let vpn = accessedProviders.vpnProvider
-        vpn.install { (error) in
+        vpn.install(force: true, { (error) in
             if let _ = error {
                 callback?(error)
                 return
             }
             callback?(nil)
-        }
+        })
     }
 }
 
@@ -65,7 +65,7 @@ class VPNActionDisconnectAndReinstall: VPNAction, ProvidersAccess {
 
     func execute(_ callback: SuccessLibraryCallback?) {
         let vpn = accessedProviders.vpnProvider
-        vpn.install { (error) in
+        vpn.install(force: true, { (error) in
             if let _ = error {
                 callback?(error)
                 return
@@ -75,6 +75,6 @@ class VPNActionDisconnectAndReinstall: VPNAction, ProvidersAccess {
                 return
             }
             vpn.reconnect(after: nil, callback)
-        }
+        })
     }
 }
