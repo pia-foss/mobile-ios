@@ -48,15 +48,15 @@ class VPNPermissionViewController: AutolayoutViewController {
     
     @IBAction private func submit() {
         let vpn = Client.providers.vpnProvider
-        vpn.install { (error) in
+        vpn.install(force: false, { (error) in
             guard (error == nil) else {
                 self.alertRequiredPermission()
                 return
             }
             self.dismissingViewController?.dismiss(animated: true) {
-//                vpn.connect(nil)
+                //                vpn.connect(nil)
             }
-        }
+        })
     }
     
     private func alertRequiredPermission() {
