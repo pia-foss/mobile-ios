@@ -49,7 +49,7 @@ class RegionsViewController: AutolayoutViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
 
         setupSearchBarController()
-        stylePopupDialog()
+        Macros.stylePopupDialog()
 
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
@@ -65,28 +65,6 @@ class RegionsViewController: AutolayoutViewController {
         navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Region.Accessibility.filter
     }
     
-    private func stylePopupDialog() {
-        let dialogAppearance = PopupDialogDefaultView.appearance()
-        dialogAppearance.backgroundColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
-        dialogAppearance.titleFont = TextStyle.textStyle12.font!
-        dialogAppearance.titleColor = Theme.current.palette.appearance == .dark ? .white : TextStyle.textStyle12.color
-        
-        let containerAppearance = PopupDialogContainerView.appearance()
-        containerAppearance.cornerRadius    = 0
-        containerAppearance.shadowEnabled   = false
-        
-        let overlayAppearance = PopupDialogOverlayView.appearance()
-        overlayAppearance.color           = .black
-        overlayAppearance.blurEnabled     = false
-        overlayAppearance.liveBlurEnabled = false
-        overlayAppearance.opacity         = 0.5
-        
-        let buttonAppearance = DefaultButton.appearance()
-        buttonAppearance.titleFont      = TextStyle.textStyle21.font!
-        buttonAppearance.titleColor     = TextStyle.textStyle21.color
-        buttonAppearance.buttonColor    = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
-        buttonAppearance.separatorColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey10 : UIColor.piaGrey1
-    }
     
     private func setupSearchBarController() {
         searchController.searchResultsUpdater = self
@@ -95,7 +73,8 @@ class RegionsViewController: AutolayoutViewController {
         }
         searchController.searchBar.placeholder = L10n.Region.Search.placeholder
         self.tableView.tableHeaderView = self.searchController.searchBar
-        definesPresentationContext = true
+       
+        searchController.hidesNavigationBarDuringPresentation = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,8 +96,8 @@ class RegionsViewController: AutolayoutViewController {
     // MARK: Actions
     @objc private func showFilter(_ sender: Any?) {
         
-        let popup = PopupDialog(title: L10n.Region.Filter.sortby.uppercased(),
-                                message: nil)
+        let popup = PopupDialog(title: nil,
+                                message: L10n.Region.Filter.sortby.uppercased())
         
         let buttonName = DefaultButton(title: L10n.Region.Filter.name.uppercased(), dismissOnTap: true) {
             AppPreferences.shared.regionFilter = .name
@@ -230,12 +209,12 @@ class RegionsViewController: AutolayoutViewController {
         styleNavigationBarWithTitle(L10n.Menu.Item.region)
 
         if let viewContainer = viewContainer {
-            Theme.current.applySolidLightBackground(view)
-            Theme.current.applySolidLightBackground(viewContainer)
+            Theme.current.applyRegionSolidLightBackground(view)
+            Theme.current.applyRegionSolidLightBackground(viewContainer)
         }
         searchController.view.backgroundColor = .clear
         
-        Theme.current.applySolidLightBackground(tableView)
+        Theme.current.applyRegionSolidLightBackground(tableView)
         Theme.current.applyDividerToSeparator(tableView)
         Theme.current.applySearchBarStyle(searchController.searchBar)
         
