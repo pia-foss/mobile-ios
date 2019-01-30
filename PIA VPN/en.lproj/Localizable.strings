@@ -82,8 +82,6 @@
 "account.email.caption" = "Email";
 "account.email.placeholder" = "Email address";
 "account.username.caption" = "Username";
-"account.password.caption" = "Password";
-"account.eye.footer" = "Tap the eye icon to reveal or conceal your password.";
 "account.other.footer" = "Get the Private Internet Access app for your other devices and use the above username and password to login and secure your connection.";
 "account.restore.title" = "Restore uncredited purchase";
 "account.restore.description" = "If you renewed your plan but your account still says it's about to expire, you can restart the renewal from here. You will not be charged during this process.";
@@ -94,9 +92,6 @@
 "account.save.prompt" = "Authenticate to save changes";
 "account.save.success" = "Your email address has been saved.";
 "account.reveal.prompt" = "Authenticate to reveal";
-"account.accessibility.eye" = "Eye icon";
-"account.accessibility.eye.hint.reveal" = "Tap to reveal password";
-"account.accessibility.eye.hint.conceal" = "Tap to conceal password";
 "account.expiry_date.information" = "Your plan will expire on %@.";
 "account.expiry_date.expired" = "Your plan has expired.";
 "account.update.email.require.password.title" = "PIA Password Required";
@@ -165,10 +160,6 @@
 
 "dashboard.content_blocker.intro.message" = "This version replaces MACE with our Safari Content Blocker.\n\nCheck it out in the 'Settings' section.";
 
-"dashboard.status" = "Status";
-"dashboard.connection.region.caption" = "CURRENT REGION";
-"dashboard.connection.region.change" = "CHANGE REGION";
-"dashboard.connection.ip.caption" = "PUBLIC IP";
 "dashboard.connection.ip.unreachable" = "Internet unreachable";
 
 "dashboard.vpn.disconnected" = "Disconnected";

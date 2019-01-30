@@ -1,9 +1,6 @@
 "about.accessibility.component.expand" = "Tryk for at læse fuld licens";
 "about.app" = "VPN fra Private Internet Access";
 "about.intro" = "Dette program bruger følgende komponenter:";
-"account.accessibility.eye" = "Øje-ikon";
-"account.accessibility.eye.hint.conceal" = "Tryk for at skjule kodeord";
-"account.accessibility.eye.hint.reveal" = "Tryk for at vise kodeord";
 "account.email.caption" = "E-mail";
 "account.email.placeholder" = "E-mailadresse";
 "account.error.unauthorized" = "Dit brugernavn eller kodeord er forkert.";
@@ -11,7 +8,6 @@
 "account.expiry_date.information" = "Din plan vil udløbe om %@.";
 "account.eye.footer" = "Tryk på øjenikonet for at afsløre eller skjule dit kodeord.";
 "account.other.footer" = "Få Private Internet Access app'en til dine andre enheder og brug ovenstående brugernavn og adgangskode til at logge ind og sikre din forbindelse.";
-"account.password.caption" = "Kodeord";
 "account.restore.button" = "Gendan køb";
 "account.restore.description" = "Hvis du har fornyet din plan, men din konto stadig giver besked om at den vil udløbe, kan du genstarte fornyelse herfra. Du vil ikke blive opkrævet i løbet af denne proces.";
 "account.restore.failure.message" = "Der blev ikke fundet noget indløsende køb for fornyelse.";
@@ -28,12 +24,8 @@
 "content_blocker.body.footer" = "Bemærk: Du behøver ikke have forbindelse til VPN for, at denne Indholdsblokering kan fungere, men den virker kun, når du anvender Safari-browseren.";
 "content_blocker.body.subtitle" = "For at aktivere vores Indholdsblokering til brug med Safari skal du gå til Indstillinger > Safari og under Generelt trykke på Indholdsblokering til for PIA VPN.";
 "content_blocker.title" = "Indholdsblokering";
-"dashboard.connection.ip.caption" = "OFFENTLIG IP";
 "dashboard.connection.ip.unreachable" = "Internet kan ikke nås";
-"dashboard.connection.region.caption" = "AKTUEL REGION";
-"dashboard.connection.region.change" = "SKIFT REGION";
 "dashboard.content_blocker.intro.message" = "Denne version erstatter MACE med vores Safari Content Blocker.\n\nTjek den ud i afsnittet 'Indstillinger'.";
-"dashboard.status" = "Status";
 "dashboard.vpn.changing_region" = "Ændrer region...";
 "dashboard.vpn.connected" = "Forbundet til VPN";
 "dashboard.vpn.connecting" = "Forbinder...";

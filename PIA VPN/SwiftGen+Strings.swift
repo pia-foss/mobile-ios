@@ -26,18 +26,6 @@ internal enum L10n {
   }
 
   internal enum Account {
-    internal enum Accessibility {
-      /// Eye icon
-      internal static let eye = L10n.tr("Localizable", "account.accessibility.eye")
-      internal enum Eye {
-        internal enum Hint {
-          /// Tap to conceal password
-          internal static let conceal = L10n.tr("Localizable", "account.accessibility.eye.hint.conceal")
-          /// Tap to reveal password
-          internal static let reveal = L10n.tr("Localizable", "account.accessibility.eye.hint.reveal")
-        }
-      }
-    }
     internal enum Email {
       /// Email
       internal static let caption = L10n.tr("Localizable", "account.email.caption")
@@ -56,17 +44,9 @@ internal enum L10n {
         return L10n.tr("Localizable", "account.expiry_date.information", p1)
       }
     }
-    internal enum Eye {
-      /// Tap the eye icon to reveal or conceal your password.
-      internal static let footer = L10n.tr("Localizable", "account.eye.footer")
-    }
     internal enum Other {
       /// Get the Private Internet Access app for your other devices and use the above username and password to login and secure your connection.
       internal static let footer = L10n.tr("Localizable", "account.other.footer")
-    }
-    internal enum Password {
-      /// Password
-      internal static let caption = L10n.tr("Localizable", "account.password.caption")
     }
     internal enum Restore {
       /// RESTORE PURCHASE
@@ -126,20 +106,10 @@ internal enum L10n {
   }
 
   internal enum Dashboard {
-    /// Status
-    internal static let status = L10n.tr("Localizable", "dashboard.status")
     internal enum Connection {
       internal enum Ip {
-        /// PUBLIC IP
-        internal static let caption = L10n.tr("Localizable", "dashboard.connection.ip.caption")
         /// Internet unreachable
         internal static let unreachable = L10n.tr("Localizable", "dashboard.connection.ip.unreachable")
-      }
-      internal enum Region {
-        /// CURRENT REGION
-        internal static let caption = L10n.tr("Localizable", "dashboard.connection.region.caption")
-        /// CHANGE REGION
-        internal static let change = L10n.tr("Localizable", "dashboard.connection.region.change")
       }
     }
     internal enum ContentBlocker {

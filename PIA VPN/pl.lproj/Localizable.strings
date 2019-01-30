@@ -1,9 +1,6 @@
 "about.accessibility.component.expand" = "Tap, aby usłyszeć przeczytany tekst licencji";
 "about.app" = "VPN firmy Private Internet Access";
 "about.intro" = "Ten program wykorzystuje następujące elementy:";
-"account.accessibility.eye" = "Ikona oka";
-"account.accessibility.eye.hint.conceal" = "Dotknij, aby ukryć hasło";
-"account.accessibility.eye.hint.reveal" = "Dotknij, aby odkryć hasło";
 "account.email.caption" = "E-mail";
 "account.email.placeholder" = "Adres e-mail";
 "account.error.unauthorized" = "Twoja nazwa użytkownika i hasło są nieprawidłowe.";
@@ -11,7 +8,6 @@
 "account.expiry_date.information" = "Ważność Twojego planu wygaśnie w dniu %@.";
 "account.eye.footer" = "Dotknij ikony z okiem, aby odkryć lub ukryć hasło.";
 "account.other.footer" = "Pobierz aplikację firmy Private Internet Access na inne urządzenia i użyj powyższej nazwy użytkownika i hasła do logowania i ochrony połączenia.";
-"account.password.caption" = "Hasło";
 "account.restore.button" = "Przywróć zakup";
 "account.restore.description" = "Jeśli odnowiłe(a)ś swój plan, ale na koncie nadal widnieje informacja, że subskrypcja wkrótce wygaśnie, możesz ponownie uruchomić stąd proces odnowienia. Opłata nie zostanie pobrana.";
 "account.restore.failure.message" = "Nie znaleziono żadnego zakupu subskrypcji podlegającego zwrotowi.";
@@ -28,12 +24,8 @@
 "content_blocker.body.footer" = "Uwaga: musisz być połączony z VPN, aby Blokada zawartości działała, ale będzie działać tylko podczas przeglądania stron za pomocą Safari.";
 "content_blocker.body.subtitle" = "Aby włączyć naszą blokadę reklam do użycia z przeglądarką Safari, przejdź do „Ustawienia > Safari”, pod „Ogólne” wybierz przełącznik „Blokady zawartości” na PIA VPN.";
 "content_blocker.title" = "Blokada zawartości";
-"dashboard.connection.ip.caption" = "PUBLICZNY IP";
 "dashboard.connection.ip.unreachable" = "Brak zasięgu";
-"dashboard.connection.region.caption" = "BIEŻĄCY REGION";
-"dashboard.connection.region.change" = "ZMIEŃ REGION";
 "dashboard.content_blocker.intro.message" = "Ta wersja zastępuje MACE naszą Blokadą zawartości Safari.\n\nSprawdź szczegóły w części „Ustawienia”.";
-"dashboard.status" = "Status";
 "dashboard.vpn.changing_region" = "Zmieniamy region";
 "dashboard.vpn.connected" = "Połączono z VPN";
 "dashboard.vpn.connecting" = "Łączenie";
