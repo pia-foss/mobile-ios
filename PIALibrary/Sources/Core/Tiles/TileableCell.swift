@@ -26,8 +26,13 @@ public protocol DetailedTileCell: EditableTileCell {
 public protocol TileableCell: DetailedTileCell {
     
     associatedtype Entity
-    var tileType: AvailableTiles {get}
+    var tileType: AvailableTiles { get }
     
+    var accessoryImageRight: UIImageView! { get set }
+    var accessoryButtonLeft: UIButton!  { get set }
+    var tileLeftConstraint: NSLayoutConstraint!  { get set }
+    var tileRightConstraint: NSLayoutConstraint! { get set }
+
 }
 
 public extension TileableCell where Entity: Tileable {
@@ -48,7 +53,6 @@ public extension TileableCell where Entity: Tileable {
         return nil
     }
 
-    
     func highlightCell() {
     }
     
