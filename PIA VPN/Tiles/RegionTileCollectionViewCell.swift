@@ -17,9 +17,10 @@ class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
     @IBOutlet private weak var tile: Entity!
     @IBOutlet private weak var accessoryImageRight: UIImageView!
     @IBOutlet private weak var accessoryButtonLeft: UIButton!
-
     @IBOutlet weak var tileLeftConstraint: NSLayoutConstraint!
     
+    private var currentTileStatus: TileStatus?
+
     func hasDetailView() -> Bool {
         return tile.hasDetailView()
     }
@@ -29,39 +30,45 @@ class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
     }
     
     func setupCellForStatus(_ status: TileStatus) {
+        Theme.current.applyPrincipalBackground(self)
+        Theme.current.applyPrincipalBackground(self.contentView)
         tile.status = status
-        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
+        let animationDuration = currentTileStatus != nil ? AppConfiguration.Animations.duration : 0
+        UIView.animate(withDuration: animationDuration, animations: {
             switch status {
             case .normal:
                 self.accessoryImageRight.image = Asset.Piax.Tiles.openTileDetails.image
                 self.tileLeftConstraint.constant = 0
             case .edit:
                 self.accessoryImageRight.image = Theme.current.dragDropImage()
-                self.tileLeftConstraint.constant = 34
+                self.tileLeftConstraint.constant = self.leftConstraintValue
                 self.setupVisibilityButton()
             }
             self.layoutIfNeeded()
+            self.currentTileStatus = status
         })
     }
     
     
     func highlightCell() {
-        Theme.current.applyLightBackground(tile)
-        Theme.current.applyLightBackground(self)
+        Theme.current.applySecondaryBackground(tile)
+        Theme.current.applySecondaryBackground(self)
+        Theme.current.applySecondaryBackground(self.contentView)
     }
     
     func unhighlightCell() {
-        Theme.current.applySolidLightBackground(tile)
-        Theme.current.applySolidLightBackground(self)
+        Theme.current.applyPrincipalBackground(tile)
+        Theme.current.applyPrincipalBackground(self)
+        Theme.current.applyPrincipalBackground(self.contentView)
     }
     
     private func setupVisibilityButton() {
         if Client.providers.tileProvider.visibleTiles.contains(tileType) {
-            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeActive.image, for: .normal)
-            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeInactive.image, for: .highlighted)
+            accessoryButtonLeft.setImage(Theme.current.activeEyeImage(), for: .normal)
+            accessoryButtonLeft.setImage(Theme.current.inactiveEyeImage(), for: .highlighted)
         } else {
-            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeInactive.image, for: .normal)
-            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeActive.image, for: .highlighted)
+            accessoryButtonLeft.setImage(Theme.current.inactiveEyeImage(), for: .normal)
+            accessoryButtonLeft.setImage(Theme.current.activeEyeImage(), for: .highlighted)
         }
     }
 
@@ -74,7 +81,7 @@ class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
             visibleTiles.append(tileType)
             Client.providers.tileProvider.visibleTiles = visibleTiles
         }
-        Macros.postNotification(.PIAThemeDidChange)
+        Macros.postNotification(.PIATilesDidChange)
     }
     
 }

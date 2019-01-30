@@ -12,12 +12,32 @@ import PIALibrary
 private let separatorDecorationViewTop = "separator-top"
 private let separatorDecorationViewBottom = "separator-bottom"
 
+private struct DragDropSettings {
+    static let minimumPressDuration: TimeInterval = 0.2
+    static let shadowOpacity: Float = 0.8
+    static let shadowRadius: CGFloat = 10
+    static let springDamping: CGFloat = 0.4
+    static let viewAlpha: CGFloat = 0.95
+    static let viewTransform: CGAffineTransform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+}
+
 final class TileFlowLayout: UICollectionViewFlowLayout {
     
+    private var longPress: UILongPressGestureRecognizer!
+    private var originalIndexPath: IndexPath?
+    private var draggingIndexPath: IndexPath?
+    private var draggingView: UIView?
+    private var dragOffset = CGPoint.zero
+
     override func awakeFromNib() {
         super.awakeFromNib()
         register(SeparatorView.self, forDecorationViewOfKind: separatorDecorationViewTop)
         register(SeparatorView.self, forDecorationViewOfKind: separatorDecorationViewBottom)
+    }
+    
+    override func prepare() {
+        super.prepare()
+        self.installGestureRecognizer()
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
@@ -66,6 +86,123 @@ final class TileFlowLayout: UICollectionViewFlowLayout {
 
         }
     }
+    
+    /// Remove the dragging view from the superview
+    public func removeDraggingViewFromSuperView() {
+        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: { [weak self] in
+            self?.draggingView?.alpha = 0
+        }, completion: { [weak self] finished in
+            self?.draggingView?.removeFromSuperview()
+            self?.draggingView = nil
+        })
+
+    }
+    
+    private func installGestureRecognizer() {
+        if longPress == nil {
+            longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(longPress:)))
+            longPress.minimumPressDuration = DragDropSettings.minimumPressDuration
+            collectionView?.addGestureRecognizer(longPress)
+        }
+    }
+    
+    @objc private func handleLongPress(longPress: UILongPressGestureRecognizer) {
+        let location = longPress.location(in: collectionView!)
+        switch longPress.state {
+        case .began: startDragAtLocation(location)
+        case .changed: updateDragAtLocation(location)
+        case .ended: endDragAtLocation(location)
+        default:
+            break
+        }
+    }
+    
+    private func startDragAtLocation(_ location: CGPoint) {
+        guard let cv = collectionView else { return }
+        guard let indexPath = cv.indexPathForItem(at: location) else { return }
+        guard let dataSource = cv.dataSource else { return }
+        guard dataSource.collectionView!(cv, canMoveItemAt: indexPath) == true else { return }
+        guard let cell = cv.cellForItem(at: indexPath) else { return }
+        
+        originalIndexPath = indexPath
+        draggingIndexPath = indexPath
+        draggingView = cell.snapshotView(afterScreenUpdates: true)
+        draggingView!.frame = cell.frame
+        cv.addSubview(draggingView!)
+        
+        dragOffset = CGPoint(x: draggingView!.center.x - location.x,
+                             y: draggingView!.center.y - location.y)
+        
+        draggingView?.layer.shadowPath = UIBezierPath(rect: draggingView!.bounds).cgPath
+        draggingView?.layer.shadowColor = UIColor.black.cgColor
+        draggingView?.layer.shadowOpacity = DragDropSettings.shadowOpacity
+        draggingView?.layer.shadowRadius = DragDropSettings.shadowRadius
+        
+        invalidateLayout()
+        
+        UIView.animate(withDuration: AppConfiguration.Animations.duration,
+                       delay: 0,
+                       usingSpringWithDamping: DragDropSettings.springDamping,
+                       initialSpringVelocity: 0,
+                       options: [],
+                       animations: {
+            self.draggingView?.alpha = DragDropSettings.viewAlpha
+            self.draggingView?.transform = DragDropSettings.viewTransform
+        }, completion: nil)
+    }
+
+    private func updateDragAtLocation(_ location: CGPoint) {
+        guard let view = draggingView else { return }
+        guard let cv = collectionView else { return }
+        
+        view.center = CGPoint(x: location.x + dragOffset.x,
+                                  y: location.y + dragOffset.y)
+        
+        if let newIndexPath = cv.indexPathForItem(at: location) {
+            cv.moveItem(at: draggingIndexPath!, to: newIndexPath)
+            draggingIndexPath = newIndexPath
+        }
+    }
+
+    private func endDragAtLocation(_ location: CGPoint) {
+        guard let dragView = draggingView else { return }
+        guard let indexPath = draggingIndexPath else { return }
+        guard let cv = collectionView else { return }
+        guard let datasource = cv.dataSource else { return }
+        
+        let targetCenter = datasource.collectionView(cv, cellForItemAt: indexPath).center
+        
+        let shadowFade = CABasicAnimation(keyPath: "shadowOpacity")
+        shadowFade.fromValue = 0.8
+        shadowFade.toValue = 0
+        shadowFade.duration = AppConfiguration.Animations.duration
+        dragView.layer.add(shadowFade, forKey: "shadowFade")
+        
+        UIView.animate(withDuration: AppConfiguration.Animations.duration,
+                       delay: 0,
+                       usingSpringWithDamping: DragDropSettings.springDamping,
+                       initialSpringVelocity: 0,
+                       options: [],
+                       animations: {
+            dragView.center = targetCenter
+            dragView.transform = .identity
+            
+        }) { (completed) in
+            if let original = self.originalIndexPath {
+                if indexPath.compare(original) != ComparisonResult.orderedSame {
+                    datasource.collectionView!(cv, moveItemAt: original, to: indexPath)
+                }
+                dragView.removeFromSuperview()
+                self.draggingIndexPath = nil
+                self.draggingView = nil
+                self.invalidateLayout()
+
+            }
+        }
+        
+        
+    }
+
 }
 
 private final class SeparatorView: UICollectionReusableView {
@@ -83,4 +220,5 @@ private final class SeparatorView: UICollectionReusableView {
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         self.frame = layoutAttributes.frame
     }
+    
 }

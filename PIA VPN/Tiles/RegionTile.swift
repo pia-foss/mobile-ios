@@ -65,7 +65,7 @@ class RegionTile: UIView, Tileable {
     @objc private func viewShouldRestyle() {
         updateServer()
         tileTitle.style(style: TextStyle.textStyle21)
-        Theme.current.applySolidLightBackground(self)
+        Theme.current.applyPrincipalBackground(self)
         Theme.current.applySettingsCellTitle(serverName, appearance: .dark)
     }
     

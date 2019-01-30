@@ -19,31 +19,37 @@ class IPTileCollectionViewCell: UICollectionViewCell, TileableCell {
     @IBOutlet private weak var accessoryButtonLeft: UIButton!
     @IBOutlet weak var tileLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var tileRightConstraint: NSLayoutConstraint!
+    
+    private var currentTileStatus: TileStatus?
 
     func setupCellForStatus(_ status: TileStatus) {
+        Theme.current.applyPrincipalBackground(self)
+        Theme.current.applyPrincipalBackground(self.contentView)
         self.accessoryImageRight.image = Theme.current.dragDropImage()
         tile.status = status
-        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
+        let animationDuration = currentTileStatus != nil ? AppConfiguration.Animations.duration : 0
+        UIView.animate(withDuration: animationDuration, animations: {
             switch status {
             case .normal:
                 self.tileLeftConstraint.constant = 0
                 self.tileRightConstraint.constant = 0
             case .edit:
-                self.tileLeftConstraint.constant = 34
-                self.tileRightConstraint.constant = 40
+                self.tileLeftConstraint.constant = self.leftConstraintValue
+                self.tileRightConstraint.constant = self.rightConstraintValue
                 self.setupVisibilityButton()
             }
             self.layoutIfNeeded()
+            self.currentTileStatus = status
         })
     }
     
     private func setupVisibilityButton() {
         if Client.providers.tileProvider.visibleTiles.contains(tileType) {
-            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeActive.image, for: .normal)
-            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeInactive.image, for: .highlighted)
+            accessoryButtonLeft.setImage(Theme.current.activeEyeImage(), for: .normal)
+            accessoryButtonLeft.setImage(Theme.current.inactiveEyeImage(), for: .highlighted)
         } else {
-            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeInactive.image, for: .normal)
-            accessoryButtonLeft.setImage(Asset.Piax.Global.eyeActive.image, for: .highlighted)
+            accessoryButtonLeft.setImage(Theme.current.inactiveEyeImage(), for: .normal)
+            accessoryButtonLeft.setImage(Theme.current.activeEyeImage(), for: .highlighted)
         }
     }
     
@@ -56,6 +62,6 @@ class IPTileCollectionViewCell: UICollectionViewCell, TileableCell {
             visibleTiles.append(tileType)
             Client.providers.tileProvider.visibleTiles = visibleTiles
         }
-        Macros.postNotification(.PIAThemeDidChange)
+        Macros.postNotification(.PIATilesDidChange)
     }
 }
