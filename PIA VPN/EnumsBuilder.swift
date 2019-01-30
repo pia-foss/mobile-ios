@@ -8,8 +8,10 @@
 
 import Foundation
 
+import Foundation
+
 /// Usage example:
-/// private enum Cells: Int, EnumsBuilder {
+/// fileprivate enum Cells: Int, EnumsBuilder {
 ///     case updateAmount = 0
 ///     case totalAmount = 1
 ///     var identifier: String {

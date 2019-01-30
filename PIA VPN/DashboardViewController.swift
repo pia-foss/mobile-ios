@@ -15,20 +15,44 @@ private let log = SwiftyBeaver.self
 
 class DashboardViewController: AutolayoutViewController {
     
-    private struct Cells {
-        static let ipTile = "IPTileCell"
-        static let ipTileCellClass = "IPTileCollectionViewCell"
-        static let quickConnectTile = "QuickConnectTileCell"
-        static let quickConnectCellClass = "QuickConnectTileCollectionViewCell"
-
+    private enum TileSize: CGFloat {
+        case standard = 89.0
     }
     
-    @IBOutlet private weak var viewContent: UIView!
-    
-    @IBOutlet private weak var viewConnectionArea: UIView!
-    
-    @IBOutlet private weak var viewConnection: UIView!
+    private enum Cells: Int, EnumsBuilder {
+        
+        case region = 0
+        case quickConnect
+        case ipTile
+        case subscription
+        case usage
 
+        var identifier: String {
+            switch self {
+            case .ipTile: return "IPTileCell"
+            case .quickConnect: return "QuickConnectTileCell"
+            case .region: return "RegionTileCell"
+            case .subscription: return "SubscriptionTileCell"
+            case .usage: return "UsageTileCell"
+            }
+        }
+        
+        var className: String {
+            switch self {
+            case .ipTile: return "IPTileCollectionViewCell"
+            case .quickConnect: return "QuickConnectTileCollectionViewCell"
+            case .region: return "RegionTileCollectionViewCell"
+            case .subscription: return "SubscriptionTileCollectionViewCell"
+            case .usage: return "UsageTileCollectionViewCell"
+            }
+        }
+    }
+    
+    private var viewContentHeight: CGFloat = 0
+    @IBOutlet weak var viewContentHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var viewContentLandscapeHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet private weak var viewContent: UIView!
     @IBOutlet private weak var toggleConnection: PIAConnectionButton!
     
     @IBOutlet private weak var viewRows: UIView!
@@ -39,6 +63,12 @@ class DashboardViewController: AutolayoutViewController {
     
     private var currentStatus: VPNStatus = .disconnected
 
+    private var tileModeStatus: TileStatus = .normal {
+        didSet {
+            self.updateTileLayout()
+        }
+    }
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -46,13 +76,7 @@ class DashboardViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.register(UINib(nibName: Cells.ipTileCellClass,
-                                      bundle: nil),
-                                forCellWithReuseIdentifier: Cells.ipTile)
-        collectionView.register(UINib(nibName: Cells.quickConnectCellClass,
-                                      bundle: nil),
-                                forCellWithReuseIdentifier: Cells.quickConnectTile)
-        collectionView.backgroundColor = .clear
+        setupCollectionView()
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: Asset.itemMenu.image,
@@ -61,6 +85,14 @@ class DashboardViewController: AutolayoutViewController {
             action: #selector(openMenu(_:))
         )
         navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.item
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: Asset.Piax.Global.iconEditTile.image,
+            style: .plain,
+            target: self,
+            action: #selector(updateEditTileStatus(_:))
+        )
+        navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.Edit.tile
 
         viewContent.isHidden = true
         viewRows.isHidden = true
@@ -78,6 +110,7 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
         nc.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateCurrentStatus), name: .PIAThemeDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(updateTiles), name: .PIATilesDidChange, object: nil)
 
 #if !TARGET_IPHONE_SIMULATOR
         let types: UIUserNotificationType = [.alert, .badge, .sound]
@@ -89,6 +122,7 @@ class DashboardViewController: AutolayoutViewController {
             Client.providers.accountProvider.refreshAndLogoutUnauthorized()
         }
         
+        self.viewContentHeight = self.viewContentHeightConstraint.constant
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -107,15 +141,7 @@ class DashboardViewController: AutolayoutViewController {
         viewContent.isHidden = false
         viewRows.isHidden = false
 
-        // XXX: scale menu item manually
-//        UIButton *buttonMenu = [UIButton buttonWithType:UIButtonTypeCustom];
-//        const CGFloat itemRatio = 22.0 / 15.0;
-//        const CGFloat itemWidth = 17.0;
-//        buttonMenu.frame = CGRectMake(0, 0, itemWidth, itemWidth / itemRatio);
-//        [buttonMenu setImage:[UIImage imageNamed:@"item-menu"] forState:UIControlStateNormal];
-//        [buttonMenu addTarget:self action:@selector(openMenu:) forControlEvents:UIControlEventTouchUpInside];
-//        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:buttonMenu];
-
+        collectionView.reloadData()
         updateCurrentStatus()
     }
 
@@ -132,7 +158,8 @@ class DashboardViewController: AutolayoutViewController {
                     L10n.Settings.ContentBlocker.title,
                     L10n.Dashboard.ContentBlocker.Intro.message
                 )
-                alert.addCancelAction(L10n.Global.ok)
+                alert.addActionWithTitle(L10n.Global.ok) {
+                }
                 present(alert, animated: true, completion: nil)
                 return
             }
@@ -148,6 +175,34 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     // MARK: Actions
+    private func setupCollectionView() {
+        collectionView.register(UINib(nibName: Cells.ipTile.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.ipTile.identifier)
+        collectionView.register(UINib(nibName: Cells.quickConnect.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.quickConnect.identifier)
+        collectionView.register(UINib(nibName: Cells.region.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.region.identifier)
+        collectionView.register(UINib(nibName: Cells.subscription.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.subscription.identifier)
+        collectionView.register(UINib(nibName: Cells.usage.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.usage.identifier)
+        collectionView.backgroundColor = .clear
+    }
+    
+    private func updateTileLayout() {
+        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
+            self.toggleConnection.alpha = self.tileModeStatus == .normal ? 1 : 0
+            self.viewContentHeightConstraint.constant = self.tileModeStatus == .normal ? self.viewContentHeight : 0
+            self.viewContentLandscapeHeightConstraint.constant = self.tileModeStatus == .normal ? self.viewContentHeight : 0
+            self.view.layoutIfNeeded()
+        })
+        collectionView.reloadData()
+    }
     
     private func showWalkthrough() {
         perform(segue: StoryboardSegue.Main.walkthroughSegueIdentifier)
@@ -180,14 +235,34 @@ class DashboardViewController: AutolayoutViewController {
         perform(segue: StoryboardSegue.Main.menuSegueIdentifier)
     }
     
+    @objc private func updateEditTileStatus(_ sender: Any?) {
+        switch self.tileModeStatus { //change the status
+        case .normal:
+            self.tileModeStatus = .edit
+        case .edit:
+            self.tileModeStatus = .normal
+        }
+    }
+
     @IBAction func vpnButtonClicked(_ sender: Any?) {
         if !toggleConnection.isOn {
-            Client.providers.vpnProvider.connect(nil)
+            Client.providers.vpnProvider.connect({ [weak self] _ in
+                self?.reloadUsageTileAfter(seconds: 5) //Show some usage after 5 seconds of activity
+            })
             NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
                                             object: self,
                                             userInfo: nil)
         } else {
-            Client.providers.vpnProvider.disconnect(nil)
+            Client.providers.vpnProvider.disconnect({ [weak self] _ in
+                self?.reloadUsageTileAfter(seconds: 1) //Reset the usage statistics after stop the VPN
+            })
+        }
+        Macros.postNotification(.PIAVPNUsageUpdate)
+    }
+    
+    private func reloadUsageTileAfter(seconds: TimeInterval) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+            Macros.postNotification(.PIAVPNUsageUpdate)
         }
     }
     
@@ -246,7 +321,12 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     @objc private func viewHasRotated() {
+        if tileModeStatus == .edit,
+            let tileLayout = collectionView.collectionViewLayout as? TileFlowLayout {
+            tileLayout.removeDraggingViewFromSuperView()
+        }
         updateCurrentStatus()
+        updateTileLayout()
     }
 
     @objc private func accountDidLogout(notification: Notification) {
@@ -262,13 +342,16 @@ class DashboardViewController: AutolayoutViewController {
     // MARK: Helpers
 
     @objc private func updateCurrentStatus() {
+        Macros.postNotification(.PIAVPNUsageUpdate)
         updateCurrentStatusWithUserInfo(nil)
     }
     
+    @objc private func updateTiles() {
+        collectionView.reloadData()
+    }
+
     @objc private func updateCurrentStatusWithUserInfo(_ userInfo: [AnyHashable: Any]?) {
         currentStatus = Client.providers.vpnProvider.vpnStatus
-
-        //Theme.current.applyVPNStatus(labelStatus, forStatus: currentStatus)
 
         switch currentStatus {
         case .connected:
@@ -328,13 +411,6 @@ class DashboardViewController: AutolayoutViewController {
 //            labelStatus.text = L10n.Dashboard.Vpn.changingRegion
         }
 
-        // XXX hack to suppress "ellipsis"
-        //viewConnectionArea.accessibilityLabel = labelStatus.text
-        viewConnectionArea.accessibilityLabel = viewConnectionArea.accessibilityLabel?.replacingOccurrences(of: "...", with: "")
-        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, viewConnectionArea)
-
-        // non-iPad bottom table
-        collectionView.reloadData()
     }
 
 
@@ -344,13 +420,15 @@ class DashboardViewController: AutolayoutViewController {
         super.viewShouldRestyle()
 
         navigationItem.titleView = NavigationLogoView()
-        Theme.current.applyLightBackground(view)
-        Theme.current.applyLightBackground(viewContainer!)
+        Theme.current.applyPrincipalBackground(view)
+        Theme.current.applyPrincipalBackground(viewContainer!)
+        Theme.current.applyPrincipalBackground(viewContent)
+        Theme.current.applyPrincipalBackground(viewRows)
 
         Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
         
-        // XXX: emulate native UITableView separator
-        //Theme.current.applyDividerToSeparator(tableRows)
+        Theme.current.applyPrincipalBackground(collectionView)
+
         collectionView.collectionViewLayout.invalidateLayout()
         collectionView.reloadData()
     }
@@ -427,37 +505,8 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        /*
-         let paddingSpace = (sectionInsets.left) * (CGFloat(itemsPerRow) + 1)
-         let availableWidth = view.frame.width - paddingSpace - (UIDevice.current.orientation == UIDeviceOrientation.portrait ? 0 : safeAreaMargin)
-         var widthPerItem = availableWidth / CGFloat(itemsPerRow)
-         if let itemSize = self.itemSize {
-         widthPerItem = itemSize.width
-         }
-         
-         let actualSize = CGSize(width: widthPerItem, height: widthPerItem)
-         if let sizingCell = UINib(nibName: cellClass,
-         bundle: nil).instantiate(withOwner: nil,
-         options: nil).first as? ValueChartLegendCollectionViewCell {
-         
-         sizingCell.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-         sizingCell.frame.size = actualSize
-         switch indexPath.row {
-         case 0:
-         sizingCell.displayContentWith(dataset: ValueChartLegendContributionDataset())
-         case 1:
-         sizingCell.displayContentWith(dataset: ValueChartLegendValueDataset())
-         default:
-         sizingCell.displayContentWith(dataset: ValueChartLegendSimpleReturnDataset())
-         }
-         
-         return sizingCell.contentView.systemLayoutSizeFitting(actualSize,
-         withHorizontalFittingPriority: UILayoutPriority.required,
-         verticalFittingPriority: UILayoutPriority.defaultLow)
-         
-         }
-         */
-        return CGSize(width: collectionView.frame.width, height: 89)
+        return CGSize(width: collectionView.frame.width,
+                      height: TileSize.standard.rawValue)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -478,14 +527,18 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout {
 extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.row {
-        case AvailableTiles.quickConnect.rawValue:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.quickConnectTile, for: indexPath) as! QuickConnectTileCollectionViewCell
-            return cell
-        default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.ipTile, for: indexPath) as! IPTileCollectionViewCell
-            return cell
+        
+        let tileIndex = tileModeStatus == .normal ?
+            Client.providers.tileProvider.visibleTiles[indexPath.row].rawValue :
+            Client.providers.tileProvider.orderedTiles[indexPath.row].rawValue
+        
+        let identifier = Cells.objectIdentifyBy(index: tileIndex).identifier
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier,
+                                                      for: indexPath)
+        if let cell = cell as? EditableTileCell {
+            cell.setupCellForStatus(self.tileModeStatus)
         }
+        return cell
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -493,7 +546,54 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return AvailableTiles.countCases()
+        if !Client.providers.accountProvider.isLoggedIn {
+            return 0
+        }
+        return tileModeStatus == .normal ?
+            Client.providers.tileProvider.visibleTiles.count :
+            Client.providers.tileProvider.orderedTiles.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if tileModeStatus == .normal {
+            let cell = collectionView.cellForItem(at: indexPath)
+            if let detailedCell = cell as? DetailedTileCell,
+                detailedCell.hasDetailView(),
+                let segueIdentifier = detailedCell.segueIdentifier() {
+                performSegue(withIdentifier: segueIdentifier, sender: nil)
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        if tileModeStatus == .normal,
+            let cell = collectionView.cellForItem(at: indexPath) as? DetailedTileCell,
+            cell.hasDetailView() {
+            UIView.animate(withDuration: 0.1, animations: {
+                cell.highlightCell()
+            })
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        if tileModeStatus == .normal,
+            let cell = collectionView.cellForItem(at: indexPath) as? DetailedTileCell,
+            cell.hasDetailView() {
+            UIView.animate(withDuration: 0.1, animations: {
+                cell.unhighlightCell()
+            })
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return self.tileModeStatus == .edit
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        var orderedTiles = Client.providers.tileProvider.orderedTiles
+        let tile = orderedTiles.remove(at: sourceIndexPath.row)
+        orderedTiles.insert(tile, at: destinationIndexPath.row)
+        Client.providers.tileProvider.orderedTiles = orderedTiles
+        collectionView.reloadData()
+    }
 }

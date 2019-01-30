@@ -42,7 +42,7 @@ class ContentBlockerViewController: AutolayoutViewController {
         super.viewShouldRestyle()
         
         Theme.current.applyTitle(labelTitle, appearance: .dark)
-        Theme.current.applyBody1(labelMessage, appearance: .dark)
+        Theme.current.applySubtitle(labelMessage)
         Theme.current.applySmallInfo(labelFooter, appearance: .dark)
         Theme.current.applyActionButton(buttonSubmit)
     }

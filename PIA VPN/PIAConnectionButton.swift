@@ -17,9 +17,9 @@ private struct PIAConnectionButtonSettings {
     static let animatedShapeWidth: CGFloat = 4.0
     static let startAngle: CGFloat = -0.25 * 2 * .pi
     static let endAngle: CGFloat = PIAConnectionButtonSettings.startAngle + 2 * .pi
-    static let udpateColorAnimationDuration = 0.3
+    static let udpateColorAnimationDuration = AppConfiguration.Animations.duration
     static let shapeAnimationDuration = 2
-    static let shapeEndAnimationDuration = 0.3
+    static let shapeEndAnimationDuration = AppConfiguration.Animations.duration
     static let timingFunction = CAMediaTimingFunction(controlPoints: 0.2, 0.88, 0.09, 0.99)
 }
 

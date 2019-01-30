@@ -11,9 +11,13 @@ import PIALibrary
 
 class QuickConnectTile: UIView, Tileable {
 
-    var detailViewAction: Func!
     var view: UIView!
     var detailSegueIdentifier: String!
+    var status: TileStatus = .normal {
+        didSet {
+            statusUpdated()
+        }
+    }
     
     @IBOutlet private weak var tileTitle: UILabel!
     @IBOutlet private weak var stackView: UIStackView!
@@ -40,7 +44,6 @@ class QuickConnectTile: UIView, Tileable {
         nc.addObserver(self, selector: #selector(updateQuickConnectList), name: .PIAServerHasBeenUpdated, object: nil)
         
         viewShouldRestyle()
-        self.detailViewAction = {}
         self.tileTitle.text = L10n.Tiles.Quick.Connect.title.uppercased()
         updateQuickConnectList()
         
@@ -48,7 +51,7 @@ class QuickConnectTile: UIView, Tileable {
     
     @objc private func viewShouldRestyle() {
         tileTitle.style(style: TextStyle.textStyle21)
-        Theme.current.applyLightBackground(self)
+        Theme.current.applyPrincipalBackground(self)
     }
     
     @objc private func updateQuickConnectList() {
@@ -74,6 +77,9 @@ class QuickConnectTile: UIView, Tileable {
                 button.isUserInteractionEnabled = true
                 button.server = server
                 favoriteImage.isHidden = !AppPreferences.shared.favoriteServerIdentifiers.contains(server.identifier)
+                if status != .normal { //only when edit mode 
+                    favoriteImage.isHidden = true
+                }
             }
         }
     }
@@ -94,4 +100,8 @@ class QuickConnectTile: UIView, Tileable {
         }
     }
 
+    private func statusUpdated() {
+        updateQuickConnectList()
+    }
+    
 }

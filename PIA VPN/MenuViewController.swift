@@ -131,10 +131,10 @@ class MenuViewController: AutolayoutViewController {
     private func renewSubscription() {
         log.debug("Account: Fetching renewable products...")
         
-        let hud = HUD()
+        self.showLoadingAnimation()
         
         Client.providers.accountProvider.listRenewablePlans { (plans, error) in
-            hud.hide()
+            self.hideLoadingAnimation()
             
             guard let plans = plans else {
                 if let clientError = error as? ClientError {
@@ -174,7 +174,7 @@ class MenuViewController: AutolayoutViewController {
             L10n.Global.error,
             errorMessage
         )
-        alert.addCancelAction(L10n.Global.close)
+        alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
 
@@ -186,7 +186,7 @@ class MenuViewController: AutolayoutViewController {
             L10n.Menu.Renewal.Message.trial
         )
         alert.addCancelAction(L10n.Global.cancel)
-        alert.addDefaultAction(L10n.Menu.Renewal.purchase) {
+        alert.addActionWithTitle(L10n.Menu.Renewal.purchase) {
             self.dismiss(animated: true) {
                 self.delegate?.menu(didDetectTrialUpgrade: self)
             }
@@ -203,17 +203,17 @@ class MenuViewController: AutolayoutViewController {
             L10n.Menu.Renewal.Message.website
         )
         alert.addCancelAction(L10n.Global.cancel)
-        alert.addDefaultAction(L10n.Menu.Renewal.renew) {
+        alert.addActionWithTitle(L10n.Menu.Renewal.renew) {
             UIApplication.shared.openURL(AppConstants.Web.homeURL)
         }
         present(alert, animated: true, completion: nil)
     }
     
     private func purchaseProductWithPlan(_ plan: Plan) {
-        let purchaseHud = HUD()
-        
+
+        self.showLoadingAnimation()
         Client.providers.accountProvider.purchase(plan: plan) { (transaction, error) in
-            purchaseHud.hide()
+            self.hideLoadingAnimation()
             
             guard let transaction = transaction else {
                 self.handlePurchaseFailureWithError(error)
@@ -223,10 +223,10 @@ class MenuViewController: AutolayoutViewController {
             log.debug("Account: Submitting new payment receipt...")
             
             let request = RenewRequest(transaction: transaction)
-            let renewHud = HUD()
+            self.showLoadingAnimation()
             
             Client.providers.accountProvider.renew(with: request) { (user, error) in
-                renewHud.hide()
+                self.hideLoadingAnimation()
                 
                 guard let _ = user else {
                     self.handleRenewalFailureWithError(error)
@@ -246,7 +246,7 @@ class MenuViewController: AutolayoutViewController {
         log.error("IAP: Purchase failed (error: \(error)")
 
         let alert = Macros.alert(L10n.Global.error, error.localizedDescription)
-        alert.addCancelAction(L10n.Global.close)
+        alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
 
@@ -257,7 +257,7 @@ class MenuViewController: AutolayoutViewController {
             L10n.Renewal.Success.title,
             L10n.Renewal.Success.message
         )
-        alert.addCancelAction(L10n.Global.close)
+        alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
 
@@ -272,7 +272,7 @@ class MenuViewController: AutolayoutViewController {
             L10n.Global.error,
             L10n.Renewal.Failure.message
         )
-        alert.addCancelAction(L10n.Global.close)
+        alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
     
@@ -282,10 +282,10 @@ class MenuViewController: AutolayoutViewController {
             L10n.Menu.Logout.message
         )
         sheet.addCancelAction(L10n.Global.cancel)
-        sheet.addDestructiveAction(L10n.Menu.Logout.confirm) {
+        sheet.addDestructiveActionWithTitle(L10n.Menu.Logout.confirm) {
             self.dismiss(animated: true) {
                 log.debug("Account: Logging out...")
-                
+                AppPreferences.shared.clean()
                 Client.providers.accountProvider.logout(nil)
             }
         }
@@ -358,7 +358,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             let backgroundView = UIView()
-            backgroundView.backgroundColor = Theme.current.palette.lightBackground
+            Theme.current.applySecondaryBackground(backgroundView)
             cell.selectedBackgroundView = backgroundView
 
             return cell
