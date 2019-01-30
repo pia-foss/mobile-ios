@@ -39,7 +39,11 @@ enum Setting: Int {
     case encryptionHandshake
     
     case automaticReconnection
-    
+
+    case trustCellularData
+
+    case trustedNetworks
+
     case contentBlockerState
     
     case contentBlockerRefreshRules
@@ -89,7 +93,11 @@ class SettingsViewController: AutolayoutViewController {
         case encryption
 
         case applicationSettings
+
+        case cellularData
         
+        case autoConnectSettings
+
         case contentBlocker
 
         case applicationInformation
@@ -103,6 +111,8 @@ class SettingsViewController: AutolayoutViewController {
         .connection,
         .encryption,
         .applicationSettings,
+        .cellularData,
+        .autoConnectSettings,
         .applicationInformation,
         .reset,
         .contentBlocker
@@ -123,6 +133,12 @@ class SettingsViewController: AutolayoutViewController {
             .encryptionHandshake
         ],
         .applicationSettings: [], // dynamic
+        .cellularData: [
+            .trustCellularData
+        ],
+        .autoConnectSettings: [
+            .trustedNetworks
+        ],
         .contentBlocker: [
             .contentBlockerState,
             .contentBlockerRefreshRules
@@ -149,14 +165,18 @@ class SettingsViewController: AutolayoutViewController {
     
     @IBOutlet private weak var tableView: UITableView!
 
+    private lazy var switchAutoJoinWiFi = UISwitch()
+
     private lazy var switchPersistent = UISwitch()
-    
+
     private lazy var switchMACE = UISwitch()
     
     private lazy var switchContentBlocker = FakeSwitch()
     
     private lazy var switchDarkMode = UISwitch()
-    
+
+    private lazy var switchCellularData = UISwitch()
+
     private lazy var imvSelectedOption = UIImageView(image: Asset.accessorySelected.image)
 
     private var isContentBlockerEnabled = false
@@ -216,6 +236,7 @@ class SettingsViewController: AutolayoutViewController {
 //        switchContentBlocker.isGrayed = true
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
         switchDarkMode.addTarget(self, action: #selector(toggleDarkMode(_:)), for: .valueChanged)
+        switchCellularData.addTarget(self, action: #selector(toggleCellularData(_:)), for: .valueChanged)
         redisplaySettings()
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshContentBlockerState), name: .UIApplicationDidBecomeActive, object: nil)
@@ -270,6 +291,12 @@ class SettingsViewController: AutolayoutViewController {
     @objc private func viewHasRotated() {
         styleNavigationBarWithTitle(L10n.Menu.Item.settings)
     }
+    
+    @objc private func toggleCellularData(_ sender: UISwitch) {
+        pendingPreferences.trustCellularData = sender.isOn
+        redisplaySettings()
+        reportUpdatedPreferences()
+    }
 
     // XXX: no need to bufferize app preferences
     @objc private func toggleDarkMode(_ sender: UISwitch) {
@@ -282,13 +309,12 @@ class SettingsViewController: AutolayoutViewController {
 
     @objc private func refreshContentBlockerState(withHUD: Bool = false) {
         if #available(iOS 10, *) {
-            var hud: HUD?
             if withHUD {
-                hud = HUD()
+                self.showLoadingAnimation()
             }
             SFContentBlockerManager.getStateOfContentBlocker(withIdentifier: AppConstants.Extensions.adBlockerBundleIdentifier) { (state, error) in
                 DispatchQueue.main.async {
-                    hud?.hide()
+                    self.hideLoadingAnimation()
                     
                     self.isContentBlockerEnabled = state?.isEnabled ?? false
                     self.redisplaySettings()
@@ -298,22 +324,22 @@ class SettingsViewController: AutolayoutViewController {
     }
     
     private func refreshContentBlockerRules() {
-        let hud = HUD()
+        self.showLoadingAnimation()
         SFContentBlockerManager.reloadContentBlocker(withIdentifier: AppConstants.Extensions.adBlockerBundleIdentifier) { (error) in
             if let error = error {
                 log.error("Could not reload Safari Content Blocker: \(error)")
             }
             DispatchQueue.main.async {
-                hud.hide()
+                self.hideLoadingAnimation()
             }
         }
     }
     
     private func submitTunnelLog() {
-        let hud = HUD()
+        self.showLoadingAnimation()
         
         Client.providers.vpnProvider.submitLog { (log, error) in
-            hud.hide()
+            self.hideLoadingAnimation()
             
             let title: String
             let message: String
@@ -389,18 +415,20 @@ class SettingsViewController: AutolayoutViewController {
         
         let isDisconnected = (Client.providers.vpnProvider.vpnStatus == .disconnected)
         let completionHandlerAfterVPNAction: (Bool) -> Void = { (shouldReconnect) in
-            let hud = HUD()
+            self.showLoadingAnimation()
             action.execute { (error) in
                 self.pendingVPNAction = nil
+                
+                Client.providers.vpnProvider.updatePreferences(nil)
                 
                 if shouldReconnect && !isDisconnected {
                     Client.providers.vpnProvider.reconnect(after: nil) { (error) in
                         completionHandler()
-                        hud.hide()
+                        self.hideLoadingAnimation()
                     }
                 } else {
                     completionHandler()
-                    hud.hide()
+                    self.hideLoadingAnimation()
                 }
             }
         }
@@ -463,6 +491,11 @@ class SettingsViewController: AutolayoutViewController {
     
     private func commitPreferences() {
         AppPreferences.shared.piaSocketType = pendingOpenVPNSocketType
+        //Update with values from Trusted Network Settings
+        pendingPreferences.trustedNetworks = Client.preferences.trustedNetworks
+        pendingPreferences.availableNetworks = Client.preferences.availableNetworks
+        pendingPreferences.shouldConnectForAllNetworks = Client.preferences.shouldConnectForAllNetworks
+        pendingPreferences.useWiFiProtection = Client.preferences.useWiFiProtection
         pendingPreferences.commit()
     }
     
@@ -522,7 +555,7 @@ class SettingsViewController: AutolayoutViewController {
         } else {
             rowsBySection[.applicationSettings] = [
                 .darkTheme,
-                .automaticReconnection
+                .automaticReconnection,
             ]
         }
         if !Flags.shared.enablesContentBlockerSetting {
@@ -575,10 +608,10 @@ class SettingsViewController: AutolayoutViewController {
         styleNavigationBarWithTitle(L10n.Menu.Item.settings)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
-            Theme.current.applySolidLightBackground(view)
-            Theme.current.applySolidLightBackground(viewContainer)
+            Theme.current.applyPrincipalBackground(view)
+            Theme.current.applyPrincipalBackground(viewContainer)
         }
-        Theme.current.applySolidLightBackground(tableView)
+        Theme.current.applyPrincipalBackground(tableView)
         Theme.current.applyDividerToSeparator(tableView)
         tableView.reloadData()
         
@@ -621,7 +654,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             
         case .applicationSettings:
             return L10n.Settings.ApplicationSettings.title
-            
+           
+        case .autoConnectSettings, .cellularData:
+            return nil
+
         case .contentBlocker:
             return L10n.Settings.ContentBlocker.title
 
@@ -656,6 +692,12 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 }
                 cell.textLabel?.text = footer.joined(separator: "\n\n")
                 
+            case .cellularData:
+                cell.textLabel?.text =  L10n.Settings.Hotspothelper.Cellular.description
+
+            case .autoConnectSettings:
+                cell.textLabel?.text =  L10n.Settings.Hotspothelper.description
+
             case .reset:
                 cell.textLabel?.text = L10n.Settings.Reset.footer
                 
@@ -760,7 +802,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryView = switchPersistent
             cell.selectionStyle = .none
             switchPersistent.isOn = pendingPreferences.isPersistentConnection
-            
+
         case .mace:
             cell.textLabel?.text = L10n.Settings.ApplicationSettings.Mace.title
             cell.detailTextLabel?.text = nil
@@ -811,9 +853,23 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .resolveGoogleAdsDomain:
             cell.textLabel?.text = "Resolve google-analytics.com"
             cell.detailTextLabel?.text = nil
+            
+        case .trustCellularData:
+            cell.textLabel?.text = L10n.Settings.Hotspothelper.Cellular.title
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchCellularData
+            cell.selectionStyle = .none
+            switchCellularData.isOn = pendingPreferences.trustCellularData
+
+        case .trustedNetworks:
+            cell.textLabel?.text = L10n.Settings.Hotspothelper.title
+            cell.detailTextLabel?.text = Client.preferences.useWiFiProtection ?
+                L10n.Global.enabled :
+                L10n.Global.disabled
+
         }
 
-        Theme.current.applyLightBackground(cell)
+        Theme.current.applySecondaryBackground(cell)
         if let textLabel = cell.textLabel {
             Theme.current.applySettingsCellTitle(textLabel,
                                                  appearance: .dark)
@@ -825,7 +881,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         let backgroundView = UIView()
-        Theme.current.applySolidLightBackground(backgroundView)
+        Theme.current.applyPrincipalBackground(backgroundView)
         cell.selectedBackgroundView = backgroundView
 
         return cell
@@ -980,6 +1036,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .resolveGoogleAdsDomain:
             resolveGoogleAdsDomain()
 
+        case .trustedNetworks:
+            self.perform(segue: StoryboardSegue.Main.trustedNetworksSegueIdentifier)
+
         default:
             break
         }
@@ -1012,7 +1071,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension SettingsViewController: OptionsViewControllerDelegate {
     func backgroundColorForOptionsController(_ controller: OptionsViewController) -> UIColor {
-        return Theme.current.palette.solidLightBackground
+        return Theme.current.palette.principalBackground
     }
     
     func tableStyleForOptionsController(_ controller: OptionsViewController) -> UITableViewStyle {
@@ -1105,10 +1164,10 @@ extension SettingsViewController: OptionsViewControllerDelegate {
         }
         
         let backgroundView = UIView()
-        backgroundView.backgroundColor = Theme.current.palette.solidLightBackground
+        backgroundView.backgroundColor = Theme.current.palette.principalBackground
         cell.selectedBackgroundView = backgroundView
 
-        Theme.current.applyLightBackground(cell)
+        Theme.current.applySecondaryBackground(cell)
         Theme.current.applyDetailTableCell(cell)
     }
 
