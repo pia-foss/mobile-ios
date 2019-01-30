@@ -15,8 +15,8 @@ class IPTileCollectionViewCell: UICollectionViewCell, TileableCell {
 
     typealias Entity = IPTile
     @IBOutlet private weak var tile: Entity!
-    @IBOutlet private weak var accessoryImageRight: UIImageView!
-    @IBOutlet private weak var accessoryButtonLeft: UIButton!
+    @IBOutlet weak var accessoryImageRight: UIImageView!
+    @IBOutlet weak var accessoryButtonLeft: UIButton!
     @IBOutlet weak var tileLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var tileRightConstraint: NSLayoutConstraint!
     

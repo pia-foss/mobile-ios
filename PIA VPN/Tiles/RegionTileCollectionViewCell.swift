@@ -15,10 +15,11 @@ class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
 
     typealias Entity = RegionTile
     @IBOutlet private weak var tile: Entity!
-    @IBOutlet private weak var accessoryImageRight: UIImageView!
-    @IBOutlet private weak var accessoryButtonLeft: UIButton!
+    @IBOutlet weak var accessoryImageRight: UIImageView!
+    @IBOutlet weak var accessoryButtonLeft: UIButton!
     @IBOutlet weak var tileLeftConstraint: NSLayoutConstraint!
-    
+    var tileRightConstraint: NSLayoutConstraint! 
+
     private var currentTileStatus: TileStatus?
 
     func hasDetailView() -> Bool {
@@ -59,8 +60,10 @@ class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
     }
     
     func unhighlightCell() {
-        accessoryButtonLeft.alpha = 1
-        accessoryImageRight.alpha = 1
+        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: { [weak self] in
+            self?.accessoryButtonLeft.alpha = 1
+            self?.accessoryImageRight.alpha = 1
+        })
         Theme.current.applyPrincipalBackground(tile)
         Theme.current.applyPrincipalBackground(self)
         Theme.current.applyPrincipalBackground(self.contentView)
