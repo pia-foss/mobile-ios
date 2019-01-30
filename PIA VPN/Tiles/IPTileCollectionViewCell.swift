@@ -23,8 +23,8 @@ class IPTileCollectionViewCell: UICollectionViewCell, TileableCell {
     private var currentTileStatus: TileStatus?
 
     func setupCellForStatus(_ status: TileStatus) {
-        Theme.current.applySolidLightBackground(self)
-        Theme.current.applySolidLightBackground(self.contentView)
+        Theme.current.applyPrincipalBackground(self)
+        Theme.current.applyPrincipalBackground(self.contentView)
         self.accessoryImageRight.image = Theme.current.dragDropImage()
         tile.status = status
         let animationDuration = currentTileStatus != nil ? AppConfiguration.Animations.duration : 0
