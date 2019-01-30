@@ -138,6 +138,7 @@ class AppPreferences {
             defaults.removeObject(forKey: "LoggedUsername")
             defaults.synchronize()
         }
+        refreshAPIToken()
     }
     
     func migrate() {
