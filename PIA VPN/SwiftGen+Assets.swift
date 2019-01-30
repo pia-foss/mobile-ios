@@ -45,20 +45,138 @@ struct ColorAsset {
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 enum Asset {
   enum Piax {
+    enum DarkMap {
+      static let darkMapAUMelbourne = ImageAsset(name: "Dark-Map-AU Melbourne")
+      static let darkMapAUSydney = ImageAsset(name: "Dark-Map-AU Sydney")
+      static let darkMapAustria = ImageAsset(name: "Dark-Map-Austria")
+      static let darkMapBelgium = ImageAsset(name: "Dark-Map-Belgium")
+      static let darkMapBrazil = ImageAsset(name: "Dark-Map-Brazil")
+      static let darkMapCAMontreal = ImageAsset(name: "Dark-Map-CA Montreal")
+      static let darkMapCAToronto = ImageAsset(name: "Dark-Map-CA Toronto")
+      static let darkMapCAVancouver = ImageAsset(name: "Dark-Map-CA Vancouver")
+      static let darkMapCzechRepublic = ImageAsset(name: "Dark-Map-Czech Republic")
+      static let darkMapDEBerlin = ImageAsset(name: "Dark-Map-DE Berlin")
+      static let darkMapDEFrankfurt = ImageAsset(name: "Dark-Map-DE Frankfurt")
+      static let darkMapDenmark = ImageAsset(name: "Dark-Map-Denmark")
+      static let darkMapFinland = ImageAsset(name: "Dark-Map-Finland")
+      static let darkMapFrance = ImageAsset(name: "Dark-Map-France")
+      static let darkMapHongKong = ImageAsset(name: "Dark-Map-Hong Kong")
+      static let darkMapHungary = ImageAsset(name: "Dark-Map-Hungary")
+      static let darkMapIndia = ImageAsset(name: "Dark-Map-India")
+      static let darkMapIreland = ImageAsset(name: "Dark-Map-Ireland")
+      static let darkMapIsrael = ImageAsset(name: "Dark-Map-Israel")
+      static let darkMapItaly = ImageAsset(name: "Dark-Map-Italy")
+      static let darkMapJapan = ImageAsset(name: "Dark-Map-Japan")
+      static let darkMapLuxembourg = ImageAsset(name: "Dark-Map-Luxembourg")
+      static let darkMapMexico = ImageAsset(name: "Dark-Map-Mexico")
+      static let darkMapNetherlands = ImageAsset(name: "Dark-Map-Netherlands")
+      static let darkMapNewZealand = ImageAsset(name: "Dark-Map-New Zealand")
+      static let darkMapNorway = ImageAsset(name: "Dark-Map-Norway")
+      static let darkMapPoland = ImageAsset(name: "Dark-Map-Poland")
+      static let darkMapRomania = ImageAsset(name: "Dark-Map-Romania")
+      static let darkMapSingapore = ImageAsset(name: "Dark-Map-Singapore")
+      static let darkMapSouthAfrica = ImageAsset(name: "Dark-Map-South Africa")
+      static let darkMapSpain = ImageAsset(name: "Dark-Map-Spain")
+      static let darkMapSweden = ImageAsset(name: "Dark-Map-Sweden")
+      static let darkMapSwitzerland = ImageAsset(name: "Dark-Map-Switzerland")
+      static let darkMapTurkey = ImageAsset(name: "Dark-Map-Turkey")
+      static let darkMapUAE = ImageAsset(name: "Dark-Map-UAE")
+      static let darkMapUKLondon = ImageAsset(name: "Dark-Map-UK London")
+      static let darkMapUKManchester = ImageAsset(name: "Dark-Map-UK Manchester")
+      static let darkMapUKSouthampton = ImageAsset(name: "Dark-Map-UK Southampton")
+      static let darkMapUSAtlanta = ImageAsset(name: "Dark-Map-US Atlanta")
+      static let darkMapUSCalifornia = ImageAsset(name: "Dark-Map-US California")
+      static let darkMapUSChicago = ImageAsset(name: "Dark-Map-US Chicago")
+      static let darkMapUSDenver = ImageAsset(name: "Dark-Map-US Denver")
+      static let darkMapUSEast = ImageAsset(name: "Dark-Map-US East")
+      static let darkMapUSFlorida = ImageAsset(name: "Dark-Map-US Florida")
+      static let darkMapUSHouston = ImageAsset(name: "Dark-Map-US Houston")
+      static let darkMapUSLasVegas = ImageAsset(name: "Dark-Map-US Las Vegas")
+      static let darkMapUSMidwest = ImageAsset(name: "Dark-Map-US Midwest")
+      static let darkMapUSNewYorkCity = ImageAsset(name: "Dark-Map-US New York City")
+      static let darkMapUSSeattle = ImageAsset(name: "Dark-Map-US Seattle")
+      static let darkMapUSSiliconValley = ImageAsset(name: "Dark-Map-US Silicon Valley")
+      static let darkMapUSTexas = ImageAsset(name: "Dark-Map-US Texas")
+      static let darkMapUSWashingtonDC = ImageAsset(name: "Dark-Map-US Washington DC")
+      static let darkMapUSWest = ImageAsset(name: "Dark-Map-US West")
+    }
     enum Dashboard {
       static let vpnButton = ImageAsset(name: "vpn-button")
     }
     enum Global {
+      static let dragDropIndicatorDark = ImageAsset(name: "drag-drop-indicator-dark")
+      static let dragDropIndicatorLight = ImageAsset(name: "drag-drop-indicator-light")
+      static let eyeActiveDark = ImageAsset(name: "eye-active-dark")
+      static let eyeActiveLight = ImageAsset(name: "eye-active-light")
+      static let eyeInactiveDark = ImageAsset(name: "eye-inactive-dark")
+      static let eyeInactiveLight = ImageAsset(name: "eye-inactive-light")
+      static let favoriteGreen = ImageAsset(name: "favorite-green")
       static let favoriteSelected = ImageAsset(name: "favorite-selected")
       static let favoriteUnselectedDark = ImageAsset(name: "favorite-unselected-dark")
       static let favoriteUnselected = ImageAsset(name: "favorite-unselected")
       static let iconBack = ImageAsset(name: "icon-back")
+      static let iconEditTile = ImageAsset(name: "icon-edit-tile")
       static let iconFilter = ImageAsset(name: "icon-filter")
       static let pagecontrolSelectedDot = ImageAsset(name: "pagecontrol-selected-dot")
       static let pagecontrolUnselectedDot = ImageAsset(name: "pagecontrol-unselected-dot")
       static let regionSelected = ImageAsset(name: "region-selected")
       static let scrollableMapDark = ImageAsset(name: "scrollableMap-dark")
       static let scrollableMapLight = ImageAsset(name: "scrollableMap-light")
+    }
+    enum LightMap {
+      static let lightMapAUMelbourne = ImageAsset(name: "Light-Map-AU Melbourne")
+      static let lightMapAUSydney = ImageAsset(name: "Light-Map-AU Sydney")
+      static let lightMapAustria = ImageAsset(name: "Light-Map-Austria")
+      static let lightMapBelgium = ImageAsset(name: "Light-Map-Belgium")
+      static let lightMapBrazil = ImageAsset(name: "Light-Map-Brazil")
+      static let lightMapCAMontreal = ImageAsset(name: "Light-Map-CA Montreal")
+      static let lightMapCAToronto = ImageAsset(name: "Light-Map-CA Toronto")
+      static let lightMapCAVancouver = ImageAsset(name: "Light-Map-CA Vancouver")
+      static let lightMapCzechRepublic = ImageAsset(name: "Light-Map-Czech Republic")
+      static let lightMapDEBerlin = ImageAsset(name: "Light-Map-DE Berlin")
+      static let lightMapDEFrankfurt = ImageAsset(name: "Light-Map-DE Frankfurt")
+      static let lightMapDenmark = ImageAsset(name: "Light-Map-Denmark")
+      static let lightMapFinland = ImageAsset(name: "Light-Map-Finland")
+      static let lightMapFrance = ImageAsset(name: "Light-Map-France")
+      static let lightMapHongKong = ImageAsset(name: "Light-Map-Hong Kong")
+      static let lightMapHungary = ImageAsset(name: "Light-Map-Hungary")
+      static let lightMapIndia = ImageAsset(name: "Light-Map-India")
+      static let lightMapIreland = ImageAsset(name: "Light-Map-Ireland")
+      static let lightMapIsrael = ImageAsset(name: "Light-Map-Israel")
+      static let lightMapItaly = ImageAsset(name: "Light-Map-Italy")
+      static let lightMapJapan = ImageAsset(name: "Light-Map-Japan")
+      static let lightMapLuxembourg = ImageAsset(name: "Light-Map-Luxembourg")
+      static let lightMapMexico = ImageAsset(name: "Light-Map-Mexico")
+      static let lightMapNetherlands = ImageAsset(name: "Light-Map-Netherlands")
+      static let lightMapNewZealand = ImageAsset(name: "Light-Map-New Zealand")
+      static let lightMapNorway = ImageAsset(name: "Light-Map-Norway")
+      static let lightMapPoland = ImageAsset(name: "Light-Map-Poland")
+      static let lightMapRomania = ImageAsset(name: "Light-Map-Romania")
+      static let lightMapSingapore = ImageAsset(name: "Light-Map-Singapore")
+      static let lightMapSouthAfrica = ImageAsset(name: "Light-Map-South Africa")
+      static let lightMapSpain = ImageAsset(name: "Light-Map-Spain")
+      static let lightMapSweden = ImageAsset(name: "Light-Map-Sweden")
+      static let lightMapSwitzerland = ImageAsset(name: "Light-Map-Switzerland")
+      static let lightMapTurkey = ImageAsset(name: "Light-Map-Turkey")
+      static let lightMapUAE = ImageAsset(name: "Light-Map-UAE")
+      static let lightMapUKLondon = ImageAsset(name: "Light-Map-UK London")
+      static let lightMapUKManchester = ImageAsset(name: "Light-Map-UK Manchester")
+      static let lightMapUKSouthampton = ImageAsset(name: "Light-Map-UK Southampton")
+      static let lightMapUSAtlanta = ImageAsset(name: "Light-Map-US Atlanta")
+      static let lightMapUSCalifornia = ImageAsset(name: "Light-Map-US California")
+      static let lightMapUSChicago = ImageAsset(name: "Light-Map-US Chicago")
+      static let lightMapUSDenver = ImageAsset(name: "Light-Map-US Denver")
+      static let lightMapUSEast = ImageAsset(name: "Light-Map-US East")
+      static let lightMapUSFlorida = ImageAsset(name: "Light-Map-US Florida")
+      static let lightMapUSHouston = ImageAsset(name: "Light-Map-US Houston")
+      static let lightMapUSLasVegas = ImageAsset(name: "Light-Map-US Las Vegas")
+      static let lightMapUSMidwest = ImageAsset(name: "Light-Map-US Midwest")
+      static let lightMapUSNewYorkCity = ImageAsset(name: "Light-Map-US New York City")
+      static let lightMapUSSeattle = ImageAsset(name: "Light-Map-US Seattle")
+      static let lightMapUSSiliconValley = ImageAsset(name: "Light-Map-US Silicon Valley")
+      static let lightMapUSTexas = ImageAsset(name: "Light-Map-US Texas")
+      static let lightMapUSWashingtonDC = ImageAsset(name: "Light-Map-US Washington DC")
+      static let lightMapUSWest = ImageAsset(name: "Light-Map-US West")
     }
     enum Regions {
       static let noResultsDark = ImageAsset(name: "no-results-dark")
@@ -70,17 +188,12 @@ enum Asset {
     }
     enum Tiles {
       static let ipTriangle = ImageAsset(name: "ip-triangle")
+      static let openTileDetails = ImageAsset(name: "open-tile-details")
     }
   }
   static let accessoryExpire = ImageAsset(name: "accessory-expire")
   static let accessorySelected = ImageAsset(name: "accessory-selected")
-  static let buttonBackgroundToggleConnected = ImageAsset(name: "button-background-toggle-connected")
-  static let buttonBackgroundToggleConnecting = ImageAsset(name: "button-background-toggle-connecting")
-  static let buttonBackgroundToggleDisconnected = ImageAsset(name: "button-background-toggle-disconnected")
   static let buttonDown = ImageAsset(name: "button-down")
-  static let buttonToggleConnected = ImageAsset(name: "button-toggle-connected")
-  static let buttonToggleConnecting = ImageAsset(name: "button-toggle-connecting")
-  static let buttonToggleDisconnected = ImageAsset(name: "button-toggle-disconnected")
   static let buttonUp = ImageAsset(name: "button-up")
   enum Flags {
     static let flagAd = ImageAsset(name: "flag-ad")
@@ -300,24 +413,18 @@ enum Asset {
   static let icon3dtSelectRegion = ImageAsset(name: "icon-3dt-select-region")
   static let iconAbout = ImageAsset(name: "icon-about")
   static let iconAccount = ImageAsset(name: "icon-account")
+  static let iconAdd = ImageAsset(name: "icon-add")
   static let iconContact = ImageAsset(name: "icon-contact")
-  static let iconDownload = ImageAsset(name: "icon-download")
-  static let iconEye = ImageAsset(name: "icon-eye")
   static let iconHomepage = ImageAsset(name: "icon-homepage")
-  static let iconInfo = ImageAsset(name: "icon-info")
   static let iconLogout = ImageAsset(name: "icon-logout")
   static let iconPrivacy = ImageAsset(name: "icon-privacy")
   static let iconRegion = ImageAsset(name: "icon-region")
-  static let iconSelectedWhite = ImageAsset(name: "icon-selected-white")
-  static let iconSelected = ImageAsset(name: "icon-selected")
+  static let iconRemove = ImageAsset(name: "icon-remove")
   static let iconSettings = ImageAsset(name: "icon-settings")
-  static let iconUnselectedWhite = ImageAsset(name: "icon-unselected-white")
-  static let iconUnselected = ImageAsset(name: "icon-unselected")
-  static let iconUpload = ImageAsset(name: "icon-upload")
   static let iconWarning = ImageAsset(name: "icon-warning")
+  static let iconWifi = ImageAsset(name: "icon-wifi")
   static let imageContentBlocker = ImageAsset(name: "image-content-blocker")
   static let imageRobot = ImageAsset(name: "image-robot")
-  static let imageRobotside = ImageAsset(name: "image-robotside")
   static let imageVpnAllow = ImageAsset(name: "image-vpn-allow")
   static let imageWalkthrough1 = ImageAsset(name: "image-walkthrough-1")
   static let imageWalkthrough2 = ImageAsset(name: "image-walkthrough-2")
@@ -330,31 +437,140 @@ enum Asset {
   static let allColors: [ColorAsset] = [
   ]
   static let allImages: [ImageAsset] = [
+    Piax.DarkMap.darkMapAUMelbourne,
+    Piax.DarkMap.darkMapAUSydney,
+    Piax.DarkMap.darkMapAustria,
+    Piax.DarkMap.darkMapBelgium,
+    Piax.DarkMap.darkMapBrazil,
+    Piax.DarkMap.darkMapCAMontreal,
+    Piax.DarkMap.darkMapCAToronto,
+    Piax.DarkMap.darkMapCAVancouver,
+    Piax.DarkMap.darkMapCzechRepublic,
+    Piax.DarkMap.darkMapDEBerlin,
+    Piax.DarkMap.darkMapDEFrankfurt,
+    Piax.DarkMap.darkMapDenmark,
+    Piax.DarkMap.darkMapFinland,
+    Piax.DarkMap.darkMapFrance,
+    Piax.DarkMap.darkMapHongKong,
+    Piax.DarkMap.darkMapHungary,
+    Piax.DarkMap.darkMapIndia,
+    Piax.DarkMap.darkMapIreland,
+    Piax.DarkMap.darkMapIsrael,
+    Piax.DarkMap.darkMapItaly,
+    Piax.DarkMap.darkMapJapan,
+    Piax.DarkMap.darkMapLuxembourg,
+    Piax.DarkMap.darkMapMexico,
+    Piax.DarkMap.darkMapNetherlands,
+    Piax.DarkMap.darkMapNewZealand,
+    Piax.DarkMap.darkMapNorway,
+    Piax.DarkMap.darkMapPoland,
+    Piax.DarkMap.darkMapRomania,
+    Piax.DarkMap.darkMapSingapore,
+    Piax.DarkMap.darkMapSouthAfrica,
+    Piax.DarkMap.darkMapSpain,
+    Piax.DarkMap.darkMapSweden,
+    Piax.DarkMap.darkMapSwitzerland,
+    Piax.DarkMap.darkMapTurkey,
+    Piax.DarkMap.darkMapUAE,
+    Piax.DarkMap.darkMapUKLondon,
+    Piax.DarkMap.darkMapUKManchester,
+    Piax.DarkMap.darkMapUKSouthampton,
+    Piax.DarkMap.darkMapUSAtlanta,
+    Piax.DarkMap.darkMapUSCalifornia,
+    Piax.DarkMap.darkMapUSChicago,
+    Piax.DarkMap.darkMapUSDenver,
+    Piax.DarkMap.darkMapUSEast,
+    Piax.DarkMap.darkMapUSFlorida,
+    Piax.DarkMap.darkMapUSHouston,
+    Piax.DarkMap.darkMapUSLasVegas,
+    Piax.DarkMap.darkMapUSMidwest,
+    Piax.DarkMap.darkMapUSNewYorkCity,
+    Piax.DarkMap.darkMapUSSeattle,
+    Piax.DarkMap.darkMapUSSiliconValley,
+    Piax.DarkMap.darkMapUSTexas,
+    Piax.DarkMap.darkMapUSWashingtonDC,
+    Piax.DarkMap.darkMapUSWest,
     Piax.Dashboard.vpnButton,
+    Piax.Global.dragDropIndicatorDark,
+    Piax.Global.dragDropIndicatorLight,
+    Piax.Global.eyeActiveDark,
+    Piax.Global.eyeActiveLight,
+    Piax.Global.eyeInactiveDark,
+    Piax.Global.eyeInactiveLight,
+    Piax.Global.favoriteGreen,
     Piax.Global.favoriteSelected,
     Piax.Global.favoriteUnselectedDark,
     Piax.Global.favoriteUnselected,
     Piax.Global.iconBack,
+    Piax.Global.iconEditTile,
     Piax.Global.iconFilter,
     Piax.Global.pagecontrolSelectedDot,
     Piax.Global.pagecontrolUnselectedDot,
     Piax.Global.regionSelected,
     Piax.Global.scrollableMapDark,
     Piax.Global.scrollableMapLight,
+    Piax.LightMap.lightMapAUMelbourne,
+    Piax.LightMap.lightMapAUSydney,
+    Piax.LightMap.lightMapAustria,
+    Piax.LightMap.lightMapBelgium,
+    Piax.LightMap.lightMapBrazil,
+    Piax.LightMap.lightMapCAMontreal,
+    Piax.LightMap.lightMapCAToronto,
+    Piax.LightMap.lightMapCAVancouver,
+    Piax.LightMap.lightMapCzechRepublic,
+    Piax.LightMap.lightMapDEBerlin,
+    Piax.LightMap.lightMapDEFrankfurt,
+    Piax.LightMap.lightMapDenmark,
+    Piax.LightMap.lightMapFinland,
+    Piax.LightMap.lightMapFrance,
+    Piax.LightMap.lightMapHongKong,
+    Piax.LightMap.lightMapHungary,
+    Piax.LightMap.lightMapIndia,
+    Piax.LightMap.lightMapIreland,
+    Piax.LightMap.lightMapIsrael,
+    Piax.LightMap.lightMapItaly,
+    Piax.LightMap.lightMapJapan,
+    Piax.LightMap.lightMapLuxembourg,
+    Piax.LightMap.lightMapMexico,
+    Piax.LightMap.lightMapNetherlands,
+    Piax.LightMap.lightMapNewZealand,
+    Piax.LightMap.lightMapNorway,
+    Piax.LightMap.lightMapPoland,
+    Piax.LightMap.lightMapRomania,
+    Piax.LightMap.lightMapSingapore,
+    Piax.LightMap.lightMapSouthAfrica,
+    Piax.LightMap.lightMapSpain,
+    Piax.LightMap.lightMapSweden,
+    Piax.LightMap.lightMapSwitzerland,
+    Piax.LightMap.lightMapTurkey,
+    Piax.LightMap.lightMapUAE,
+    Piax.LightMap.lightMapUKLondon,
+    Piax.LightMap.lightMapUKManchester,
+    Piax.LightMap.lightMapUKSouthampton,
+    Piax.LightMap.lightMapUSAtlanta,
+    Piax.LightMap.lightMapUSCalifornia,
+    Piax.LightMap.lightMapUSChicago,
+    Piax.LightMap.lightMapUSDenver,
+    Piax.LightMap.lightMapUSEast,
+    Piax.LightMap.lightMapUSFlorida,
+    Piax.LightMap.lightMapUSHouston,
+    Piax.LightMap.lightMapUSLasVegas,
+    Piax.LightMap.lightMapUSMidwest,
+    Piax.LightMap.lightMapUSNewYorkCity,
+    Piax.LightMap.lightMapUSSeattle,
+    Piax.LightMap.lightMapUSSiliconValley,
+    Piax.LightMap.lightMapUSTexas,
+    Piax.LightMap.lightMapUSWashingtonDC,
+    Piax.LightMap.lightMapUSWest,
     Piax.Regions.noResultsDark,
     Piax.Regions.noResultsLight,
     Piax.Splash.darkSplash,
     Piax.Splash.lightSplash,
     Piax.Tiles.ipTriangle,
+    Piax.Tiles.openTileDetails,
     accessoryExpire,
     accessorySelected,
-    buttonBackgroundToggleConnected,
-    buttonBackgroundToggleConnecting,
-    buttonBackgroundToggleDisconnected,
     buttonDown,
-    buttonToggleConnected,
-    buttonToggleConnecting,
-    buttonToggleDisconnected,
     buttonUp,
     Flags.flagAd,
     Flags.flagAe,
@@ -572,24 +788,18 @@ enum Asset {
     icon3dtSelectRegion,
     iconAbout,
     iconAccount,
+    iconAdd,
     iconContact,
-    iconDownload,
-    iconEye,
     iconHomepage,
-    iconInfo,
     iconLogout,
     iconPrivacy,
     iconRegion,
-    iconSelectedWhite,
-    iconSelected,
+    iconRemove,
     iconSettings,
-    iconUnselectedWhite,
-    iconUnselected,
-    iconUpload,
     iconWarning,
+    iconWifi,
     imageContentBlocker,
     imageRobot,
-    imageRobotside,
     imageVpnAllow,
     imageWalkthrough1,
     imageWalkthrough2,

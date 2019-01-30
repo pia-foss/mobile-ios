@@ -139,7 +139,7 @@ class WalkthroughViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        Theme.current.applyLightBackground(view)
+        Theme.current.applyPrincipalBackground(view)
         Theme.current.applyScrollableMap(scrollBackground)
         Theme.current.applyButtonLabelStyle(buttonSkip)
         Theme.current.applyButtonLabelStyle(buttonNext)
