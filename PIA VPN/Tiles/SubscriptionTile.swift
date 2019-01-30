@@ -47,7 +47,7 @@ class SubscriptionTile: UIView, Tileable  {
     @objc private func viewShouldRestyle() {
         subscriptionTitle.style(style: TextStyle.textStyle21)
         Theme.current.applySubtitle(subscriptionValue)
-        Theme.current.applySolidLightBackground(self)
+        Theme.current.applyPrincipalBackground(self)
         displayAccountInformation()
     }
     

@@ -46,7 +46,7 @@ class ExpirationCell: UITableViewCell, Restylable {
         let backgroundView = UIView()
         self.backgroundView = backgroundView
         
-        Theme.current.applySolidLightBackground(self)
+        Theme.current.applyPrincipalBackground(self)
         Theme.current.applyWarningMenuBackground(backgroundView)
         Theme.current.applyMenuCaption(labelWarning)
         Theme.current.applyMenuSmallCaption(labelUpgrade)

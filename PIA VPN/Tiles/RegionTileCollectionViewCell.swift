@@ -17,9 +17,10 @@ class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
     @IBOutlet private weak var tile: Entity!
     @IBOutlet private weak var accessoryImageRight: UIImageView!
     @IBOutlet private weak var accessoryButtonLeft: UIButton!
-
     @IBOutlet weak var tileLeftConstraint: NSLayoutConstraint!
     
+    private var currentTileStatus: TileStatus?
+
     func hasDetailView() -> Bool {
         return tile.hasDetailView()
     }
@@ -29,10 +30,11 @@ class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
     }
     
     func setupCellForStatus(_ status: TileStatus) {
-        Theme.current.applySolidLightBackground(self)
-        Theme.current.applySolidLightBackground(self.contentView)
+        Theme.current.applyPrincipalBackground(self)
+        Theme.current.applyPrincipalBackground(self.contentView)
         tile.status = status
-        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
+        let animationDuration = currentTileStatus != nil ? AppConfiguration.Animations.duration : 0
+        UIView.animate(withDuration: animationDuration, animations: {
             switch status {
             case .normal:
                 self.accessoryImageRight.image = Asset.Piax.Tiles.openTileDetails.image
@@ -43,20 +45,21 @@ class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
                 self.setupVisibilityButton()
             }
             self.layoutIfNeeded()
+            self.currentTileStatus = status
         })
     }
     
     
     func highlightCell() {
-        Theme.current.applyLightBackground(tile)
-        Theme.current.applyLightBackground(self)
-        Theme.current.applyLightBackground(self.contentView)
+        Theme.current.applySecondaryBackground(tile)
+        Theme.current.applySecondaryBackground(self)
+        Theme.current.applySecondaryBackground(self.contentView)
     }
     
     func unhighlightCell() {
-        Theme.current.applySolidLightBackground(tile)
-        Theme.current.applySolidLightBackground(self)
-        Theme.current.applySolidLightBackground(self.contentView)
+        Theme.current.applyPrincipalBackground(tile)
+        Theme.current.applyPrincipalBackground(self)
+        Theme.current.applyPrincipalBackground(self.contentView)
     }
     
     private func setupVisibilityButton() {

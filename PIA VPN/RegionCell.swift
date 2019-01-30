@@ -65,8 +65,8 @@ class RegionCell: UITableViewCell, Restylable {
 
     func viewShouldRestyle() {
         
-        self.backgroundColor = Theme.current.palette.solidLightBackground
-        self.contentView.backgroundColor = Theme.current.palette.solidLightBackground
+        Theme.current.applyRegionSolidLightBackground(self)
+        Theme.current.applyRegionSolidLightBackground(self.contentView)
 
         Theme.current.applySettingsCellTitle(labelRegion, appearance: .dark)
         Theme.current.applyTag(labelPingTime, appearance: .dark)

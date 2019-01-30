@@ -20,12 +20,15 @@ class SubscriptionTileCollectionViewCell: UICollectionViewCell, TileableCell {
     @IBOutlet weak var tileLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var tileRightConstraint: NSLayoutConstraint!
     
+    private var currentTileStatus: TileStatus?
+
     func setupCellForStatus(_ status: TileStatus) {
-        Theme.current.applySolidLightBackground(self)
-        Theme.current.applySolidLightBackground(self.contentView)
+        Theme.current.applyPrincipalBackground(self)
+        Theme.current.applyPrincipalBackground(self.contentView)
         self.accessoryImageRight.image = Theme.current.dragDropImage()
         tile.status = status
-        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
+        let animationDuration = currentTileStatus != nil ? AppConfiguration.Animations.duration : 0
+        UIView.animate(withDuration: animationDuration, animations: {
             switch status {
             case .normal:
                 self.tileLeftConstraint.constant = 0
@@ -36,6 +39,7 @@ class SubscriptionTileCollectionViewCell: UICollectionViewCell, TileableCell {
                 self.setupVisibilityButton()
             }
             self.layoutIfNeeded()
+            self.currentTileStatus = status
         })
     }
 

@@ -10,11 +10,13 @@ import UIKit
 import PIALibrary
 import SideMenu
 import SwiftyBeaver
+import NetworkExtension
 
 private let log = SwiftyBeaver.self
 
 @UIApplicationMain
 class AppDelegate: NSObject, UIApplicationDelegate {
+    
     private enum ShortcutItem: String {
         case connect
 
@@ -24,14 +26,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
 
     var window: UIWindow?
+    private var hotspotHelper: PIAHotspotHelper!
 
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        
         Bootstrapper.shared.bootstrap()
         application.shortcutItems = []
+        hotspotHelper = PIAHotspotHelper()
+        _ = hotspotHelper.configureHotspotHelper()
+        
         return true
     }
 
@@ -54,7 +61,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             L10n.Notifications.Disabled.title,
             L10n.Notifications.Disabled.message
         )
-        alert.addDefaultAction(L10n.Notifications.Disabled.settings) {
+        alert.addActionWithTitle(L10n.Notifications.Disabled.settings) {
             application.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
         }
         alert.addCancelAction(L10n.Global.ok)
@@ -183,4 +190,5 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             mainVC.selectRegion(animated: true)
         }
     }
+    
 }
