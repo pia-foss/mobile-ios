@@ -51,12 +51,16 @@ class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
     
     
     func highlightCell() {
+        accessoryButtonLeft.alpha = 0
+        accessoryImageRight.alpha = 0
         Theme.current.applySecondaryBackground(tile)
         Theme.current.applySecondaryBackground(self)
         Theme.current.applySecondaryBackground(self.contentView)
     }
     
     func unhighlightCell() {
+        accessoryButtonLeft.alpha = 1
+        accessoryImageRight.alpha = 1
         Theme.current.applyPrincipalBackground(tile)
         Theme.current.applyPrincipalBackground(self)
         Theme.current.applyPrincipalBackground(self.contentView)
