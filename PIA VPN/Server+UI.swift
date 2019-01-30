@@ -55,3 +55,27 @@ extension UIImageView {
         self.image = image.withRenderingMode(.alwaysOriginal)
     }
 }
+
+extension UIButton {
+    func setImage(fromServer server: Server) {
+        let imageName = "flag-\(server.country.lowercased())"
+        guard let image = UIImage(named: imageName) else {
+            af_setImage(for: .normal, url: server.flagURL, placeholderImage: Asset.Flags.flagUniversal.image)
+            return
+        }
+        let original = image.withRenderingMode(.alwaysOriginal)
+        self.setImage(original.image(alpha: 0.7), for: .normal)
+        self.setImage(image.withRenderingMode(.alwaysOriginal), for: .highlighted)
+        
+    }
+}
+
+extension UIImage {
+    func image(alpha: CGFloat) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        draw(at: .zero, blendMode: .normal, alpha: alpha)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+}
