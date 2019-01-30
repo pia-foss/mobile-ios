@@ -24,12 +24,16 @@ class DashboardViewController: AutolayoutViewController {
         case region = 0
         case quickConnect
         case ipTile
-        
+        case subscription
+        case usage
+
         var identifier: String {
             switch self {
             case .ipTile: return "IPTileCell"
             case .quickConnect: return "QuickConnectTileCell"
             case .region: return "RegionTileCell"
+            case .subscription: return "SubscriptionTileCell"
+            case .usage: return "UsageTileCell"
             }
         }
         
@@ -38,6 +42,8 @@ class DashboardViewController: AutolayoutViewController {
             case .ipTile: return "IPTileCollectionViewCell"
             case .quickConnect: return "QuickConnectTileCollectionViewCell"
             case .region: return "RegionTileCollectionViewCell"
+            case .subscription: return "SubscriptionTileCollectionViewCell"
+            case .usage: return "UsageTileCollectionViewCell"
             }
         }
     }
@@ -70,16 +76,7 @@ class DashboardViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.register(UINib(nibName: Cells.ipTile.className,
-                                      bundle: nil),
-                                forCellWithReuseIdentifier: Cells.ipTile.identifier)
-        collectionView.register(UINib(nibName: Cells.quickConnect.className,
-                                      bundle: nil),
-                                forCellWithReuseIdentifier: Cells.quickConnect.identifier)
-        collectionView.register(UINib(nibName: Cells.region.className,
-                                      bundle: nil),
-                                forCellWithReuseIdentifier: Cells.region.identifier)
-        collectionView.backgroundColor = .clear
+        setupCollectionView()
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: Asset.itemMenu.image,
@@ -161,7 +158,8 @@ class DashboardViewController: AutolayoutViewController {
                     L10n.Settings.ContentBlocker.title,
                     L10n.Dashboard.ContentBlocker.Intro.message
                 )
-                alert.addCancelAction(L10n.Global.ok)
+                alert.addActionWithTitle(L10n.Global.ok) {
+                }
                 present(alert, animated: true, completion: nil)
                 return
             }
@@ -177,6 +175,25 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     // MARK: Actions
+    private func setupCollectionView() {
+        collectionView.register(UINib(nibName: Cells.ipTile.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.ipTile.identifier)
+        collectionView.register(UINib(nibName: Cells.quickConnect.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.quickConnect.identifier)
+        collectionView.register(UINib(nibName: Cells.region.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.region.identifier)
+        collectionView.register(UINib(nibName: Cells.subscription.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.subscription.identifier)
+        collectionView.register(UINib(nibName: Cells.usage.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.usage.identifier)
+        collectionView.backgroundColor = .clear
+    }
+    
     private func updateTileLayout() {
         UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
             self.toggleConnection.alpha = self.tileModeStatus == .normal ? 1 : 0
@@ -229,12 +246,23 @@ class DashboardViewController: AutolayoutViewController {
 
     @IBAction func vpnButtonClicked(_ sender: Any?) {
         if !toggleConnection.isOn {
-            Client.providers.vpnProvider.connect(nil)
+            Client.providers.vpnProvider.connect({ [weak self] _ in
+                self?.reloadUsageTileAfter(seconds: 5) //Show some usage after 5 seconds of activity
+            })
             NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
                                             object: self,
                                             userInfo: nil)
         } else {
-            Client.providers.vpnProvider.disconnect(nil)
+            Client.providers.vpnProvider.disconnect({ [weak self] _ in
+                self?.reloadUsageTileAfter(seconds: 1) //Reset the usage statistics after stop the VPN
+            })
+        }
+        Macros.postNotification(.PIAVPNUsageUpdate)
+    }
+    
+    private func reloadUsageTileAfter(seconds: TimeInterval) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+            Macros.postNotification(.PIAVPNUsageUpdate)
         }
     }
     
@@ -293,6 +321,10 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     @objc private func viewHasRotated() {
+        if tileModeStatus == .edit,
+            let tileLayout = collectionView.collectionViewLayout as? TileFlowLayout {
+            tileLayout.removeDraggingViewFromSuperView()
+        }
         updateCurrentStatus()
         updateTileLayout()
     }
@@ -310,6 +342,7 @@ class DashboardViewController: AutolayoutViewController {
     // MARK: Helpers
 
     @objc private func updateCurrentStatus() {
+        Macros.postNotification(.PIAVPNUsageUpdate)
         updateCurrentStatusWithUserInfo(nil)
     }
     
@@ -319,8 +352,6 @@ class DashboardViewController: AutolayoutViewController {
 
     @objc private func updateCurrentStatusWithUserInfo(_ userInfo: [AnyHashable: Any]?) {
         currentStatus = Client.providers.vpnProvider.vpnStatus
-
-        //Theme.current.applyVPNStatus(labelStatus, forStatus: currentStatus)
 
         switch currentStatus {
         case .connected:
@@ -389,14 +420,14 @@ class DashboardViewController: AutolayoutViewController {
         super.viewShouldRestyle()
 
         navigationItem.titleView = NavigationLogoView()
-        Theme.current.applySolidLightBackground(view)
-        Theme.current.applySolidLightBackground(viewContainer!)
-        Theme.current.applySolidLightBackground(viewContent)
-        Theme.current.applySolidLightBackground(viewRows)
+        Theme.current.applyPrincipalBackground(view)
+        Theme.current.applyPrincipalBackground(viewContainer!)
+        Theme.current.applyPrincipalBackground(viewContent)
+        Theme.current.applyPrincipalBackground(viewRows)
 
         Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
         
-        Theme.current.applySolidLightBackground(collectionView)
+        Theme.current.applyPrincipalBackground(collectionView)
 
         collectionView.collectionViewLayout.invalidateLayout()
         collectionView.reloadData()
@@ -515,6 +546,9 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if !Client.providers.accountProvider.isLoggedIn {
+            return 0
+        }
         return tileModeStatus == .normal ?
             Client.providers.tileProvider.visibleTiles.count :
             Client.providers.tileProvider.orderedTiles.count
