@@ -11,10 +11,6 @@
 "login.error.unauthorized" = "ユーザー名またはパスワードが間違っています。";
 "login.error.validation" = "ユーザー名とパスワードを入力してください。";
 "login.password.placeholder" = "パスワード";
-"login.purchase.button" = "今すぐ購入";
-"login.purchase.footer" = "アカウントをお持ちでないですか？";
-"login.redeem.button" = "今すぐカードを引換え";
-"login.redeem.footer" = "ギフトカードまたはトライアルカードをお持ちですか？";
 "login.restore.button" = "プランを取得できませんでしたか？";
 "login.submit" = "ログイン";
 "login.title" = "アカウントにサインイン";

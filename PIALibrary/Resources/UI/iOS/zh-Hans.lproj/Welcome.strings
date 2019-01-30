@@ -11,10 +11,6 @@
 "login.error.unauthorized" = "您的用户名或密码不正确。";
 "login.error.validation" = "您必须输入用户名和密码。";
 "login.password.placeholder" = "密码";
-"login.purchase.button" = "立即购买";
-"login.purchase.footer" = "还没有账户？";
-"login.redeem.button" = "立刻兑换";
-"login.redeem.footer" = "您有礼品卡或试用卡？";
 "login.restore.button" = "无法获取套餐？";
 "login.submit" = "登录";
 "login.title" = "登录到您的帐户";

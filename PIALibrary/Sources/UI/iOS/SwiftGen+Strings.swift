@@ -157,18 +157,6 @@ internal enum L10n {
         /// Password
         internal static let placeholder = L10n.tr("Welcome", "login.password.placeholder")
       }
-      internal enum Purchase {
-        /// Buy now
-        internal static let button = L10n.tr("Welcome", "login.purchase.button")
-        /// Don’t have an account?
-        internal static let footer = L10n.tr("Welcome", "login.purchase.footer")
-      }
-      internal enum Redeem {
-        /// Redeem now
-        internal static let button = L10n.tr("Welcome", "login.redeem.button")
-        /// Have a gift card or trial card?
-        internal static let footer = L10n.tr("Welcome", "login.redeem.footer")
-      }
       internal enum Restore {
         /// Couldn't get your plan?
         internal static let button = L10n.tr("Welcome", "login.restore.button")

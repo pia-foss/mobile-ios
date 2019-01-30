@@ -11,10 +11,6 @@
 "login.error.unauthorized" = "Seu nome de usuário ou senha está incorreto.";
 "login.error.validation" = "Você deve inserir um nome de usuário e senha.";
 "login.password.placeholder" = "Senha";
-"login.purchase.button" = "Compre já";
-"login.purchase.footer" = "Não tem uma conta?";
-"login.redeem.button" = "Resgate agora";
-"login.redeem.footer" = "Tem um cartão-presente ou cartão de teste?";
 "login.restore.button" = "Não consegue obter seu plano?";
 "login.submit" = "ENTRAR";
 "login.title" = "Entre na sua conta";

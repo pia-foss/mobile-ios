@@ -11,10 +11,6 @@
 "login.error.unauthorized" = "Votre nom d'utilisateur ou mot de passe est incorrect.";
 "login.error.validation" = "Vous devez saisir un nom d'utilisateur et un mot de passe.";
 "login.password.placeholder" = "Mot de passe";
-"login.purchase.button" = "Acheter maintenant";
-"login.purchase.footer" = "Pas de compte ?";
-"login.redeem.button" = "Échangez maintenant";
-"login.redeem.footer" = "Vous avez une carte cadeau ou une carte d'essai ?";
 "login.restore.button" = "Vous n'avez pas pu obtenir votre forfait ?";
 "login.submit" = "CONNEXION";
 "login.title" = "Connectez-vous à votre compte";

@@ -11,10 +11,6 @@
 "login.error.unauthorized" = "사용자명 또는 비밀번호가 틀립니다.";
 "login.error.validation" = "사용자 이름과 비밀번호를 입력하셔야 합니다.";
 "login.password.placeholder" = "비밀번호";
-"login.purchase.button" = "지금 구입";
-"login.purchase.footer" = "계정이 없으세요?";
-"login.redeem.button" = "지금 청구";
-"login.redeem.footer" = "기프트 카드나 체험 카드가 있으세요?";
 "login.restore.button" = "이용 플랜이 확인되지 않습니까?";
 "login.submit" = "로그인";
 "login.title" = "계정에 로그인";
