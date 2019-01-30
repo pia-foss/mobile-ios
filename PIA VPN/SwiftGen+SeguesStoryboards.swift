@@ -22,6 +22,7 @@ internal enum StoryboardSegue {
     case selectRegionAnimatedSegueIdentifier = "SelectRegionAnimatedSegueIdentifier"
     case selectRegionSegueIdentifier = "SelectRegionSegueIdentifier"
     case settingsSegueIdentifier = "SettingsSegueIdentifier"
+    case trustedNetworksSegueIdentifier = "TrustedNetworksSegueIdentifier"
     case unwindContentBlockerSegueIdentifier = "UnwindContentBlockerSegueIdentifier"
     case unwindRegionsSegueIdentifier = "UnwindRegionsSegueIdentifier"
     case unwindWalkthroughSegueIdentifier = "UnwindWalkthroughSegueIdentifier"

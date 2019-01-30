@@ -12,16 +12,6 @@ import SideMenu
 import FXPageControl
 
 extension Theme {
-
-    // MARK: Typography
-
-    func applyHighlightedText(_ button: UIButton) {
-        guard let label = button.titleLabel else {
-            return
-        }
-        applyHighlightedText(label)
-        button.tintColor = label.textColor
-    }
     
     // MARK: Customizations
     
@@ -79,7 +69,7 @@ extension Theme {
     
     public func applyMenuBackground(_ view: UIView) {
         view.backgroundColor = palette.appearance == .dark ?
-            UIColor.piaGrey10 : UIColor.piaWhite
+            UIColor.piaGrey6 : UIColor.piaWhite
     }
 
     public func applyMenuSubtitle(_ label: UILabel) {

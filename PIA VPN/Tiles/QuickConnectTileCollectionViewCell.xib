@@ -19,8 +19,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="668" height="128"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DOZ-9Y-ZeC">
-                        <rect key="frame" x="15" y="53" width="19" height="22"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DOZ-9Y-ZeC">
+                        <rect key="frame" x="0.0" y="47" width="34" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="34" id="Hd2-do-D1T"/>
+                            <constraint firstAttribute="width" constant="34" id="kff-Q9-RvK"/>
+                        </constraints>
                         <state key="normal" image="eye-active"/>
                         <connections>
                             <action selector="changeTileVisibility" destination="gTV-IL-0wX" eventType="touchUpInside" id="msP-nd-W8g"/>
@@ -42,7 +46,7 @@
                 <constraint firstItem="A1d-Bk-LNT" firstAttribute="width" secondItem="A1d-Bk-LNT" secondAttribute="height" multiplier="1:1" id="X1P-gH-hSf"/>
                 <constraint firstItem="A1d-Bk-LNT" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="fO5-9J-i8s"/>
                 <constraint firstAttribute="bottom" secondItem="SxC-qL-YYL" secondAttribute="bottom" id="giD-g3-4HN"/>
-                <constraint firstItem="DOZ-9Y-ZeC" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="j2a-fi-VuG"/>
+                <constraint firstItem="DOZ-9Y-ZeC" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="j2a-fi-VuG"/>
                 <constraint firstItem="SxC-qL-YYL" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="kvJ-pe-ZkO"/>
                 <constraint firstItem="DOZ-9Y-ZeC" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="veV-DB-Tmn"/>
             </constraints>

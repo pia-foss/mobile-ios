@@ -87,6 +87,17 @@ final class TileFlowLayout: UICollectionViewFlowLayout {
         }
     }
     
+    /// Remove the dragging view from the superview
+    public func removeDraggingViewFromSuperView() {
+        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: { [weak self] in
+            self?.draggingView?.alpha = 0
+        }, completion: { [weak self] finished in
+            self?.draggingView?.removeFromSuperview()
+            self?.draggingView = nil
+        })
+
+    }
+    
     private func installGestureRecognizer() {
         if longPress == nil {
             longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(longPress:)))
@@ -209,4 +220,5 @@ private final class SeparatorView: UICollectionReusableView {
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         self.frame = layoutAttributes.frame
     }
+    
 }
