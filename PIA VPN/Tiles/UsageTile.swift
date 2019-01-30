@@ -55,7 +55,7 @@ class UsageTile: UIView, Tileable  {
         Theme.current.applySettingsCellTitle(downloadValue, appearance: .dark)
         Theme.current.applySubtitleTileUsage(uploadTitle, appearance: .dark)
         Theme.current.applySubtitleTileUsage(downloadTitle, appearance: .dark)
-        Theme.current.applySolidLightBackground(self)
+        Theme.current.applyPrincipalBackground(self)
         displayUsageInformation()
     }
     

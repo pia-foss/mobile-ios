@@ -35,7 +35,7 @@ class AboutNoticeCell: UITableViewCell, Restylable {
     // MARK: Restylable
     
     func viewShouldRestyle() {
-        Theme.current.applyLightBackground(self)
+        Theme.current.applySecondaryBackground(self)
         buttonName.style(style: TextStyle.textStyle9)
         Theme.current.applySmallInfo(labelCopyright, appearance: .dark)
         Theme.current.applySmallInfo(labelNotice, appearance: .dark)
@@ -152,8 +152,8 @@ class AboutLicenseCell: UITableViewCell, Restylable {
     // MARK: Restylable
     
     func viewShouldRestyle() {
-        Theme.current.applyLightBackground(self)
-        Theme.current.applySolidLightBackground(textLicense)
+        Theme.current.applySecondaryBackground(self)
+        Theme.current.applyPrincipalBackground(textLicense)
         buttonName.style(style: TextStyle.textStyle9)
         Theme.current.applySmallInfo(labelCopyright, appearance: .dark)
         Theme.current.applyBody1Monospace(textLicense, appearance: .dark)
