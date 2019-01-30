@@ -11,10 +11,6 @@
 "login.error.unauthorized" = "Dein Benutzername oder Passwort ist falsch.";
 "login.error.validation" = "Du musst einen Benutzernamen und ein Passwort angeben.";
 "login.password.placeholder" = "Passwort";
-"login.purchase.button" = "Jetzt kaufen";
-"login.purchase.footer" = "Kein Konto?";
-"login.redeem.button" = "Jetzt einlösen";
-"login.redeem.footer" = "Haben Sie eine Geschenkkarte oder Testkarte?";
 "login.restore.button" = "Dein Plan ist nicht verfügbar?";
 "login.submit" = "ANMELDEN";
 "login.title" = "An deinem Konto anmelden";

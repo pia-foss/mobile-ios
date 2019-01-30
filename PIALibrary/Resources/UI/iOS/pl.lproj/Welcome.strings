@@ -11,10 +11,6 @@
 "login.error.unauthorized" = "Twoja nazwa użytkownika i hasło są nieprawidłowe.";
 "login.error.validation" = "Musisz podać nazwę użytkownika i hasło.";
 "login.password.placeholder" = "Hasło";
-"login.purchase.button" = "Kup teraz";
-"login.purchase.footer" = "Nie masz jeszcze konta?";
-"login.redeem.button" = "Wykorzystaj teraz";
-"login.redeem.footer" = "Masz kartę podarunkową lub kartę próbną?";
 "login.restore.button" = "Nie możesz pobrać swojego planu?";
 "login.submit" = "ZALOGUJ";
 "login.title" = "Zaloguj się na konto";

@@ -11,10 +11,6 @@
 "login.error.unauthorized" = "Dit brugernavn eller kodeord er forkert.";
 "login.error.validation" = "Du skal indtaste et brugernavn og et kodeord.";
 "login.password.placeholder" = "Kodeord";
-"login.purchase.button" = "Køb nu";
-"login.purchase.footer" = "Har du ikke en konto?";
-"login.redeem.button" = "Indløs nu";
-"login.redeem.footer" = "Har du et gavekort eller prøvekort?";
 "login.restore.button" = "Kan du ikke få fat i din plan?";
 "login.submit" = "LOG IND";
 "login.title" = "Log ind på din konto";

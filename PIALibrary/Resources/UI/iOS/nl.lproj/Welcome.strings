@@ -11,10 +11,6 @@
 "login.error.unauthorized" = "Uw gebruikersnaam of wachtwoord is onjuist.";
 "login.error.validation" = "U moet een gebruikersnaam en wachtwoord invoeren.";
 "login.password.placeholder" = "Wachtwoord";
-"login.purchase.button" = "Koop nu";
-"login.purchase.footer" = "Heeft u geen account?";
-"login.redeem.button" = "Nu inwisselen";
-"login.redeem.footer" = "Heeft u een cadeaubon of een proefperiodekaart?";
 "login.restore.button" = "Werkt uw abonnement niet?";
 "login.submit" = "INLOGGEN";
 "login.title" = "Aanmelden bij uw account";

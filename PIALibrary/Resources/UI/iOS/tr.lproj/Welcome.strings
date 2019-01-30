@@ -11,10 +11,6 @@
 "login.error.unauthorized" = "Kullanıcı adınız ya da şifreniz hatalı.";
 "login.error.validation" = "Bir kullanıcı adı ve şifre girmelisiniz.";
 "login.password.placeholder" = "Şifre";
-"login.purchase.button" = "Hemen satın al";
-"login.purchase.footer" = "Hesabınız yok mu?";
-"login.redeem.button" = "Şimdi kullanın";
-"login.redeem.footer" = "Bir hediye kartınız ya da deneme kartınız mı var?";
 "login.restore.button" = "Planınızı alamadınız mı?";
 "login.submit" = "GİRİŞ YAP";
 "login.title" = "Hesabınıza giriş yapın";

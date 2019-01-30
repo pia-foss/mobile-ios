@@ -11,10 +11,6 @@
 "login.error.unauthorized" = "Nome utente o password non valida";
 "login.error.validation" = "Devi inserire un nome utente e una password.";
 "login.password.placeholder" = "Password";
-"login.purchase.button" = "Acquistalo ora";
-"login.purchase.footer" = "Non possiedi un account?";
-"login.redeem.button" = "Riscatta ora";
-"login.redeem.footer" = "Hai una carta regalo o una carta di prova?";
 "login.restore.button" = "Non hai potuto ottenere il tuo piano?";
 "login.submit" = "ACCEDI";
 "login.title" = "Accedi al tuo account";

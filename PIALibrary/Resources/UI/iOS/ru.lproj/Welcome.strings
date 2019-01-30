@@ -11,10 +11,6 @@
 "login.error.unauthorized" = "Неправильное имя пользователя или пароль.";
 "login.error.validation" = "Нужно ввести имя пользователя и пароль.";
 "login.password.placeholder" = "Пароль";
-"login.purchase.button" = "Купите сейчас";
-"login.purchase.footer" = "Нет учетной записи?";
-"login.redeem.button" = "Использовать";
-"login.redeem.footer" = "Есть подарочная или триальная карта?";
 "login.restore.button" = "Не получили свой план?";
 "login.submit" = "ВХОД";
 "login.title" = "Войдите в свою учетную запсь";
