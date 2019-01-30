@@ -111,11 +111,11 @@ class AboutViewController: AutolayoutViewController {
         styleNavigationBarWithTitle(L10n.Menu.Item.about)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
-            Theme.current.applySolidLightBackground(view)
-            Theme.current.applySolidLightBackground(viewContainer)
+            Theme.current.applyPrincipalBackground(view)
+            Theme.current.applyPrincipalBackground(viewContainer)
         }
 
-        Theme.current.applySolidLightBackground(tableView)
+        Theme.current.applyPrincipalBackground(tableView)
         Theme.current.applySubtitle(labelIntro)
     }
 }

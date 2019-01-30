@@ -89,14 +89,6 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>MBProgressHUD</string>
-			<key>Copyright</key>
-			<string>Copyright © 2009-2016 Matej Bukovinski</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/jdg/MBProgressHUD/master/LICENSE</string>
-		</dict>
-		<dict>
-			<key>Name</key>
 			<string>DZNEmptyDataSet</string>
 			<key>Copyright</key>
 			<string>Copyright (c) 2016 Ignacio Romero Zurbuchen</string>

@@ -150,11 +150,11 @@ class AccountViewController: AutolayoutViewController {
                     log.debug("Account: Modifying account email...")
                     
                     let request = UpdateAccountRequest(email: email)
-                    let hud = HUD()
+                    weakSelf.showLoadingAnimation()
                     
                     Client.providers.accountProvider.update(with: request,
                                                             andPassword: password) { (info, error) in
-                                                                hud.hide()
+                                                                weakSelf.hideLoadingAnimation()
                                                                 
                                                                 guard let _ = info else {
                                                                     if let error = error {
@@ -295,11 +295,11 @@ class AccountViewController: AutolayoutViewController {
         styleNavigationBarWithTitle(L10n.Menu.Item.account)
 
         if let viewContainer = viewContainer {
-            Theme.current.applySolidLightBackground(view)
-            Theme.current.applySolidLightBackground(viewContainer)
+            Theme.current.applyPrincipalBackground(view)
+            Theme.current.applyPrincipalBackground(viewContainer)
         }
         
-        Theme.current.applyLightBackground(viewAccountInfo)
+        Theme.current.applySecondaryBackground(viewAccountInfo)
         Theme.current.applySubtitle(labelEmail)
         Theme.current.applySubtitle(labelUsername)
         

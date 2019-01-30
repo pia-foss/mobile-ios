@@ -58,9 +58,9 @@ class TrustedNetworksViewController: AutolayoutViewController {
         styleNavigationBarWithTitle(L10n.Settings.Hotspothelper.title)
 
         if let viewContainer = viewContainer {
-            Theme.current.applySolidLightBackground(viewContainer)
+            Theme.current.applyPrincipalBackground(viewContainer)
         }
-        Theme.current.applySolidLightBackground(tableView)
+        Theme.current.applyPrincipalBackground(tableView)
         Theme.current.applyDividerToSeparator(tableView)
     }
     
@@ -186,11 +186,16 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
         }
 
         cell.textLabel?.backgroundColor = .clear
-        Theme.current.applyLightBackground(cell)
+        Theme.current.applySecondaryBackground(cell)
         Theme.current.applyDetailTableCell(cell)
+        if let textLabel = cell.textLabel {
+            Theme.current.applySettingsCellTitle(textLabel,
+                                                 appearance: .dark)
+            textLabel.backgroundColor = .clear
+        }
 
         let backgroundView = UIView()
-        Theme.current.applySolidLightBackground(backgroundView)
+        Theme.current.applyPrincipalBackground(backgroundView)
         cell.selectedBackgroundView = backgroundView
 
         return cell

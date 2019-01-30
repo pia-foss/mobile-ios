@@ -12,16 +12,6 @@ import SideMenu
 import FXPageControl
 
 extension Theme {
-
-    // MARK: Typography
-
-    func applyHighlightedText(_ button: UIButton) {
-        guard let label = button.titleLabel else {
-            return
-        }
-        applyHighlightedText(label)
-        button.tintColor = label.textColor
-    }
     
     // MARK: Customizations
     

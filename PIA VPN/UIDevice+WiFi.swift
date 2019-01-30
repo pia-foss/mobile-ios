@@ -8,6 +8,7 @@
 
 import Foundation
 import SystemConfiguration
+import UIKit
 
 extension UIDevice {
     
