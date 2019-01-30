@@ -65,8 +65,8 @@ class RegionCell: UITableViewCell, Restylable {
 
     func viewShouldRestyle() {
         
-        self.backgroundColor = Theme.current.palette.lightBackground
-        self.contentView.backgroundColor = Theme.current.palette.lightBackground
+        Theme.current.applyRegionSolidLightBackground(self)
+        Theme.current.applyRegionSolidLightBackground(self.contentView)
 
         Theme.current.applySettingsCellTitle(labelRegion, appearance: .dark)
         Theme.current.applyTag(labelPingTime, appearance: .dark)
@@ -88,7 +88,7 @@ class RegionCell: UITableViewCell, Restylable {
     }
     
     private func animateFavoriteImage() {
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
             self.favoriteImageView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         }, completion: { (finished) in
             UIView.animate(withDuration: 0.2, animations: {

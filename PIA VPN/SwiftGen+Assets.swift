@@ -104,11 +104,18 @@ enum Asset {
       static let vpnButton = ImageAsset(name: "vpn-button")
     }
     enum Global {
+      static let dragDropIndicatorDark = ImageAsset(name: "drag-drop-indicator-dark")
+      static let dragDropIndicatorLight = ImageAsset(name: "drag-drop-indicator-light")
+      static let eyeActiveDark = ImageAsset(name: "eye-active-dark")
+      static let eyeActiveLight = ImageAsset(name: "eye-active-light")
+      static let eyeInactiveDark = ImageAsset(name: "eye-inactive-dark")
+      static let eyeInactiveLight = ImageAsset(name: "eye-inactive-light")
       static let favoriteGreen = ImageAsset(name: "favorite-green")
       static let favoriteSelected = ImageAsset(name: "favorite-selected")
       static let favoriteUnselectedDark = ImageAsset(name: "favorite-unselected-dark")
       static let favoriteUnselected = ImageAsset(name: "favorite-unselected")
       static let iconBack = ImageAsset(name: "icon-back")
+      static let iconEditTile = ImageAsset(name: "icon-edit-tile")
       static let iconFilter = ImageAsset(name: "icon-filter")
       static let pagecontrolSelectedDot = ImageAsset(name: "pagecontrol-selected-dot")
       static let pagecontrolUnselectedDot = ImageAsset(name: "pagecontrol-unselected-dot")
@@ -186,13 +193,7 @@ enum Asset {
   }
   static let accessoryExpire = ImageAsset(name: "accessory-expire")
   static let accessorySelected = ImageAsset(name: "accessory-selected")
-  static let buttonBackgroundToggleConnected = ImageAsset(name: "button-background-toggle-connected")
-  static let buttonBackgroundToggleConnecting = ImageAsset(name: "button-background-toggle-connecting")
-  static let buttonBackgroundToggleDisconnected = ImageAsset(name: "button-background-toggle-disconnected")
   static let buttonDown = ImageAsset(name: "button-down")
-  static let buttonToggleConnected = ImageAsset(name: "button-toggle-connected")
-  static let buttonToggleConnecting = ImageAsset(name: "button-toggle-connecting")
-  static let buttonToggleDisconnected = ImageAsset(name: "button-toggle-disconnected")
   static let buttonUp = ImageAsset(name: "button-up")
   enum Flags {
     static let flagAd = ImageAsset(name: "flag-ad")
@@ -412,24 +413,18 @@ enum Asset {
   static let icon3dtSelectRegion = ImageAsset(name: "icon-3dt-select-region")
   static let iconAbout = ImageAsset(name: "icon-about")
   static let iconAccount = ImageAsset(name: "icon-account")
+  static let iconAdd = ImageAsset(name: "icon-add")
   static let iconContact = ImageAsset(name: "icon-contact")
-  static let iconDownload = ImageAsset(name: "icon-download")
-  static let iconEye = ImageAsset(name: "icon-eye")
   static let iconHomepage = ImageAsset(name: "icon-homepage")
-  static let iconInfo = ImageAsset(name: "icon-info")
   static let iconLogout = ImageAsset(name: "icon-logout")
   static let iconPrivacy = ImageAsset(name: "icon-privacy")
   static let iconRegion = ImageAsset(name: "icon-region")
-  static let iconSelectedWhite = ImageAsset(name: "icon-selected-white")
-  static let iconSelected = ImageAsset(name: "icon-selected")
+  static let iconRemove = ImageAsset(name: "icon-remove")
   static let iconSettings = ImageAsset(name: "icon-settings")
-  static let iconUnselectedWhite = ImageAsset(name: "icon-unselected-white")
-  static let iconUnselected = ImageAsset(name: "icon-unselected")
-  static let iconUpload = ImageAsset(name: "icon-upload")
   static let iconWarning = ImageAsset(name: "icon-warning")
+  static let iconWifi = ImageAsset(name: "icon-wifi")
   static let imageContentBlocker = ImageAsset(name: "image-content-blocker")
   static let imageRobot = ImageAsset(name: "image-robot")
-  static let imageRobotside = ImageAsset(name: "image-robotside")
   static let imageVpnAllow = ImageAsset(name: "image-vpn-allow")
   static let imageWalkthrough1 = ImageAsset(name: "image-walkthrough-1")
   static let imageWalkthrough2 = ImageAsset(name: "image-walkthrough-2")
@@ -496,11 +491,18 @@ enum Asset {
     Piax.DarkMap.darkMapUSWashingtonDC,
     Piax.DarkMap.darkMapUSWest,
     Piax.Dashboard.vpnButton,
+    Piax.Global.dragDropIndicatorDark,
+    Piax.Global.dragDropIndicatorLight,
+    Piax.Global.eyeActiveDark,
+    Piax.Global.eyeActiveLight,
+    Piax.Global.eyeInactiveDark,
+    Piax.Global.eyeInactiveLight,
     Piax.Global.favoriteGreen,
     Piax.Global.favoriteSelected,
     Piax.Global.favoriteUnselectedDark,
     Piax.Global.favoriteUnselected,
     Piax.Global.iconBack,
+    Piax.Global.iconEditTile,
     Piax.Global.iconFilter,
     Piax.Global.pagecontrolSelectedDot,
     Piax.Global.pagecontrolUnselectedDot,
@@ -568,13 +570,7 @@ enum Asset {
     Piax.Tiles.openTileDetails,
     accessoryExpire,
     accessorySelected,
-    buttonBackgroundToggleConnected,
-    buttonBackgroundToggleConnecting,
-    buttonBackgroundToggleDisconnected,
     buttonDown,
-    buttonToggleConnected,
-    buttonToggleConnecting,
-    buttonToggleDisconnected,
     buttonUp,
     Flags.flagAd,
     Flags.flagAe,
@@ -792,24 +788,18 @@ enum Asset {
     icon3dtSelectRegion,
     iconAbout,
     iconAccount,
+    iconAdd,
     iconContact,
-    iconDownload,
-    iconEye,
     iconHomepage,
-    iconInfo,
     iconLogout,
     iconPrivacy,
     iconRegion,
-    iconSelectedWhite,
-    iconSelected,
+    iconRemove,
     iconSettings,
-    iconUnselectedWhite,
-    iconUnselected,
-    iconUpload,
     iconWarning,
+    iconWifi,
     imageContentBlocker,
     imageRobot,
-    imageRobotside,
     imageVpnAllow,
     imageWalkthrough1,
     imageWalkthrough2,

@@ -56,7 +56,7 @@ class RegionTile: UIView, Tileable {
     }
     
     @objc private func updateServer() {
-        let effectiveServer = Client.providers.vpnProvider.profileServer ?? Client.providers.serverProvider.targetServer
+        let effectiveServer = Client.preferences.displayedServer
         let vpn = Client.providers.vpnProvider
         self.serverName.text = effectiveServer.name(forStatus: vpn.vpnStatus)
         self.mapImageView.image = UIImage(named: Theme.current.mapImageByServerName(effectiveServer.name))
@@ -65,7 +65,7 @@ class RegionTile: UIView, Tileable {
     @objc private func viewShouldRestyle() {
         updateServer()
         tileTitle.style(style: TextStyle.textStyle21)
-        Theme.current.applySolidLightBackground(self)
+        Theme.current.applyPrincipalBackground(self)
         Theme.current.applySettingsCellTitle(serverName, appearance: .dark)
     }
     

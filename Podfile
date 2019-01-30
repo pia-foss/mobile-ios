@@ -63,7 +63,6 @@ def app_pods
     pod 'TPKeyboardAvoiding'
     pod 'SideMenu', '= 3.1.5'
     pod 'FXPageControl'
-    pod 'MBProgressHUD'
     pod 'DZNEmptyDataSet'
     pod 'PopupDialog'
 end
@@ -91,6 +90,14 @@ end
 
 target 'PIA VPN Tunnel' do
     tunnel_pods
+end
+
+target 'PIA VPNTests' do
+    app_pods
+    pod 'HockeySDK'
+    pod 'Firebase/Core'
+    pod 'Crashlytics'
+    pod 'Fabric'
 end
 
 post_install do |installer|
