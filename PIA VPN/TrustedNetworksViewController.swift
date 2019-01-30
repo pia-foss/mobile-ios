@@ -188,6 +188,11 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
         cell.textLabel?.backgroundColor = .clear
         Theme.current.applySecondaryBackground(cell)
         Theme.current.applyDetailTableCell(cell)
+        if let textLabel = cell.textLabel {
+            Theme.current.applySettingsCellTitle(textLabel,
+                                                 appearance: .dark)
+            textLabel.backgroundColor = .clear
+        }
 
         let backgroundView = UIView()
         Theme.current.applyPrincipalBackground(backgroundView)
