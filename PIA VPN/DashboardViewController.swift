@@ -14,54 +14,69 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 class DashboardViewController: AutolayoutViewController {
-    private struct Cells {
-        static let info = "InfoCell"
+    
+    private enum TileSize: CGFloat {
+        case standard = 89.0
     }
     
-    @IBOutlet private weak var viewContent: UIView!
-    
-    @IBOutlet private weak var viewConnectionArea: UIView!
-    
-    @IBOutlet private weak var viewConnection: UIView!
+    private enum Cells: Int, EnumsBuilder {
+        
+        case region = 0
+        case quickConnect
+        case ipTile
+        case subscription
+        case usage
 
+        var identifier: String {
+            switch self {
+            case .ipTile: return "IPTileCell"
+            case .quickConnect: return "QuickConnectTileCell"
+            case .region: return "RegionTileCell"
+            case .subscription: return "SubscriptionTileCell"
+            case .usage: return "UsageTileCell"
+            }
+        }
+        
+        var className: String {
+            switch self {
+            case .ipTile: return "IPTileCollectionViewCell"
+            case .quickConnect: return "QuickConnectTileCollectionViewCell"
+            case .region: return "RegionTileCollectionViewCell"
+            case .subscription: return "SubscriptionTileCollectionViewCell"
+            case .usage: return "UsageTileCollectionViewCell"
+            }
+        }
+    }
+    
+    private var viewContentHeight: CGFloat = 0
+    @IBOutlet weak var viewContentHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var viewContentLandscapeHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet private weak var viewContent: UIView!
     @IBOutlet private weak var toggleConnection: PIAConnectionButton!
     
     @IBOutlet private weak var viewRows: UIView!
     
-    @IBOutlet private weak var tableRows: UITableView!
-    
-    // iPad only
-
-    @IBOutlet private weak var viewPublicIP: UIView!
-    
-    @IBOutlet private weak var labelPublicIPCaption: UILabel!
-    
-    @IBOutlet private weak var labelPublicIP: UILabel!
-    
-    @IBOutlet private weak var activityPublicIP: UIActivityIndicatorView!
-    
-    @IBOutlet private weak var viewCurrentRegion: UIView!
-    
-    @IBOutlet private weak var labelRegionCaption: UILabel!
-    
-    @IBOutlet private weak var labelRegion: UILabel!
-    
-    @IBOutlet private weak var imvRegion: UIImageView!
-    
-    @IBOutlet private weak var buttonChangeRegion: UIButton!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     private var currentPageIndex = 0
     
     private var currentStatus: VPNStatus = .disconnected
 
-    private var currentIP: String?
-    
+    private var tileModeStatus: TileStatus = .normal {
+        didSet {
+            self.updateTileLayout()
+        }
+    }
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupCollectionView()
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: Asset.itemMenu.image,
@@ -71,17 +86,19 @@ class DashboardViewController: AutolayoutViewController {
         )
         navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.item
 
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: Asset.Piax.Global.iconEditTile.image,
+            style: .plain,
+            target: self,
+            action: #selector(updateEditTileStatus(_:))
+        )
+        navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.Edit.tile
+
         viewContent.isHidden = true
         viewRows.isHidden = true
         
-        labelRegionCaption.text = L10n.Dashboard.Connection.Region.caption
-        buttonChangeRegion.setTitle(L10n.Dashboard.Connection.Region.change, for: .normal)
-        labelPublicIPCaption.text = L10n.Dashboard.Connection.Ip.caption
-
         currentPageIndex = 0
 
-        buttonChangeRegion.accessibilityIdentifier = "uitests.main.pick_region";
-        
         SideMenuManager.default.menuLeftNavigationController = StoryboardScene.Main.sideMenuNavigationController.instantiate()
         SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
         SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
@@ -91,9 +108,9 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(vpnDidInstall(notification:)), name: .PIAVPNDidInstall, object: nil)
         nc.addObserver(self, selector: #selector(applicationDidBecomeActive(notification:)), name: .UIApplicationDidBecomeActive, object: nil)
         nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
-        nc.addObserver(self, selector: #selector(updateCurrentIP), name: .PIADaemonsDidUpdateConnectivity, object: nil)
         nc.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateCurrentStatus), name: .PIAThemeDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(updateTiles), name: .PIATilesDidChange, object: nil)
 
 #if !TARGET_IPHONE_SIMULATOR
         let types: UIUserNotificationType = [.alert, .badge, .sound]
@@ -105,6 +122,7 @@ class DashboardViewController: AutolayoutViewController {
             Client.providers.accountProvider.refreshAndLogoutUnauthorized()
         }
         
+        self.viewContentHeight = self.viewContentHeightConstraint.constant
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -123,17 +141,8 @@ class DashboardViewController: AutolayoutViewController {
         viewContent.isHidden = false
         viewRows.isHidden = false
 
-        // XXX: scale menu item manually
-//        UIButton *buttonMenu = [UIButton buttonWithType:UIButtonTypeCustom];
-//        const CGFloat itemRatio = 22.0 / 15.0;
-//        const CGFloat itemWidth = 17.0;
-//        buttonMenu.frame = CGRectMake(0, 0, itemWidth, itemWidth / itemRatio);
-//        [buttonMenu setImage:[UIImage imageNamed:@"item-menu"] forState:UIControlStateNormal];
-//        [buttonMenu addTarget:self action:@selector(openMenu:) forControlEvents:UIControlEventTouchUpInside];
-//        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:buttonMenu];
-
+        collectionView.reloadData()
         updateCurrentStatus()
-        updateCurrentIP()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -149,7 +158,8 @@ class DashboardViewController: AutolayoutViewController {
                     L10n.Settings.ContentBlocker.title,
                     L10n.Dashboard.ContentBlocker.Intro.message
                 )
-                alert.addCancelAction(L10n.Global.ok)
+                alert.addActionWithTitle(L10n.Global.ok) {
+                }
                 present(alert, animated: true, completion: nil)
                 return
             }
@@ -165,6 +175,34 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     // MARK: Actions
+    private func setupCollectionView() {
+        collectionView.register(UINib(nibName: Cells.ipTile.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.ipTile.identifier)
+        collectionView.register(UINib(nibName: Cells.quickConnect.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.quickConnect.identifier)
+        collectionView.register(UINib(nibName: Cells.region.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.region.identifier)
+        collectionView.register(UINib(nibName: Cells.subscription.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.subscription.identifier)
+        collectionView.register(UINib(nibName: Cells.usage.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.usage.identifier)
+        collectionView.backgroundColor = .clear
+    }
+    
+    private func updateTileLayout() {
+        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
+            self.toggleConnection.alpha = self.tileModeStatus == .normal ? 1 : 0
+            self.viewContentHeightConstraint.constant = self.tileModeStatus == .normal ? self.viewContentHeight : 0
+            self.viewContentLandscapeHeightConstraint.constant = self.tileModeStatus == .normal ? self.viewContentHeight : 0
+            self.view.layoutIfNeeded()
+        })
+        collectionView.reloadData()
+    }
     
     private func showWalkthrough() {
         perform(segue: StoryboardSegue.Main.walkthroughSegueIdentifier)
@@ -197,11 +235,34 @@ class DashboardViewController: AutolayoutViewController {
         perform(segue: StoryboardSegue.Main.menuSegueIdentifier)
     }
     
+    @objc private func updateEditTileStatus(_ sender: Any?) {
+        switch self.tileModeStatus { //change the status
+        case .normal:
+            self.tileModeStatus = .edit
+        case .edit:
+            self.tileModeStatus = .normal
+        }
+    }
+
     @IBAction func vpnButtonClicked(_ sender: Any?) {
         if !toggleConnection.isOn {
-            Client.providers.vpnProvider.connect(nil)
+            Client.providers.vpnProvider.connect({ [weak self] _ in
+                self?.reloadUsageTileAfter(seconds: 5) //Show some usage after 5 seconds of activity
+            })
+            NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
+                                            object: self,
+                                            userInfo: nil)
         } else {
-            Client.providers.vpnProvider.disconnect(nil)
+            Client.providers.vpnProvider.disconnect({ [weak self] _ in
+                self?.reloadUsageTileAfter(seconds: 1) //Reset the usage statistics after stop the VPN
+            })
+        }
+        Macros.postNotification(.PIAVPNUsageUpdate)
+    }
+    
+    private func reloadUsageTileAfter(seconds: TimeInterval) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+            Macros.postNotification(.PIAVPNUsageUpdate)
         }
     }
     
@@ -260,7 +321,12 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     @objc private func viewHasRotated() {
+        if tileModeStatus == .edit,
+            let tileLayout = collectionView.collectionViewLayout as? TileFlowLayout {
+            tileLayout.removeDraggingViewFromSuperView()
+        }
         updateCurrentStatus()
+        updateTileLayout()
     }
 
     @objc private func accountDidLogout(notification: Notification) {
@@ -276,13 +342,16 @@ class DashboardViewController: AutolayoutViewController {
     // MARK: Helpers
 
     @objc private func updateCurrentStatus() {
+        Macros.postNotification(.PIAVPNUsageUpdate)
         updateCurrentStatusWithUserInfo(nil)
     }
     
+    @objc private func updateTiles() {
+        collectionView.reloadData()
+    }
+
     @objc private func updateCurrentStatusWithUserInfo(_ userInfo: [AnyHashable: Any]?) {
         currentStatus = Client.providers.vpnProvider.vpnStatus
-
-        //Theme.current.applyVPNStatus(labelStatus, forStatus: currentStatus)
 
         switch currentStatus {
         case .connected:
@@ -308,6 +377,7 @@ class DashboardViewController: AutolayoutViewController {
             resetNavigationBar()
 
         case .connecting:
+            Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
             toggleConnection.isOn = false
             toggleConnection.isIndeterminate = true
             toggleConnection.startButtonAnimation()
@@ -341,50 +411,8 @@ class DashboardViewController: AutolayoutViewController {
 //            labelStatus.text = L10n.Dashboard.Vpn.changingRegion
         }
 
-        let server = Client.preferences.displayedServer
-        labelRegion.text = server.name(forStatus: currentStatus)
-        imvRegion.setImage(fromServer: server.flagServer(forStatus: currentStatus))
-
-        // XXX hack to suppress "ellipsis"
-        //viewConnectionArea.accessibilityLabel = labelStatus.text
-        viewConnectionArea.accessibilityLabel = viewConnectionArea.accessibilityLabel?.replacingOccurrences(of: "...", with: "")
-        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, viewConnectionArea)
-
-        // iPad accessibility wrappers
-        if Macros.isDevicePad {
-            viewCurrentRegion.accessibilityLabel = "\(labelRegionCaption.text ?? ""), \(labelRegion.text ?? "")"
-        }
-
-        // non-iPad bottom table
-        tableRows.reloadData()
     }
 
-    @objc private func updateCurrentIP() {
-        let vpn = Client.providers.vpnProvider
-        if (vpn.vpnStatus == .connected) {
-            currentIP = Client.daemons.vpnIP
-        } else if (!Client.daemons.isInternetReachable && (vpn.vpnStatus == .disconnected)) {
-            currentIP = L10n.Dashboard.Connection.Ip.unreachable
-        } else {
-            currentIP = Client.daemons.publicIP
-        }
-        
-        // iPad custom bottom view
-        self.labelPublicIP.text = self.currentIP;
-        if let _ = currentIP {
-            activityPublicIP.stopAnimating()
-        } else {
-            activityPublicIP.startAnimating()
-        }
-
-        // iPad accessibility wrappers
-        if Macros.isDevicePad {
-            viewPublicIP.accessibilityLabel = "\(labelPublicIPCaption.text ?? ""), \(labelPublicIP.text ?? "")"
-        }
-
-        // non-iPad bottom table
-        tableRows.reloadData()
-    }
 
     // MARK: Restylable
 
@@ -392,20 +420,17 @@ class DashboardViewController: AutolayoutViewController {
         super.viewShouldRestyle()
 
         navigationItem.titleView = NavigationLogoView()
-        Theme.current.applyLightBackground(view)
-        Theme.current.applyLightBackground(viewContainer!)
+        Theme.current.applyPrincipalBackground(view)
+        Theme.current.applyPrincipalBackground(viewContainer!)
+        Theme.current.applyPrincipalBackground(viewContent)
+        Theme.current.applyPrincipalBackground(viewRows)
 
         Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
-        Theme.current.applyCaption(labelPublicIPCaption, appearance: .dark)
-        Theme.current.applyTitle(labelPublicIP, appearance: .dark)
-        Theme.current.applyCaption(labelRegionCaption, appearance: .dark)
-        Theme.current.applyTitle(labelRegion, appearance: .dark)
-        Theme.current.applyCaption(buttonChangeRegion, appearance: .emphasis)
-        Theme.current.applyTextButton(buttonChangeRegion)
+        
+        Theme.current.applyPrincipalBackground(collectionView)
 
-        // XXX: emulate native UITableView separator
-        Theme.current.applyDividerToSeparator(tableRows)
-        tableRows.reloadData()
+        collectionView.collectionViewLayout.invalidateLayout()
+        collectionView.reloadData()
     }
     
     private func resetNavigationBar() {
@@ -475,48 +500,100 @@ extension DashboardViewController: MenuViewControllerDelegate {
     }
 }
 
-extension DashboardViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+extension DashboardViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width,
+                      height: TileSize.standard.rawValue)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Cells.info, for: indexPath) as! ConnectionInfoCell
-        switch indexPath.row {
-        case 0:
-            let server = Client.preferences.displayedServer
-            cell.fill(
-                withTitle: L10n.Dashboard.Connection.Region.caption,
-                server: server,
-                status: currentStatus
-            )
-            cell.accessoryType = .disclosureIndicator
-            cell.selectionStyle = .gray
-            cell.accessibilityIdentifier = "uitests.main.pick_region"
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets.zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+}
 
-        case 1:
-            cell.fill(
-                withTitle: L10n.Dashboard.Connection.Ip.caption,
-                description: currentIP
-            )
-            cell.accessoryType = .none
-            cell.selectionStyle = .none
-            
-        default:
-            fatalError("Unexpected cell row")
+
+extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let tileIndex = tileModeStatus == .normal ?
+            Client.providers.tileProvider.visibleTiles[indexPath.row].rawValue :
+            Client.providers.tileProvider.orderedTiles[indexPath.row].rawValue
+        
+        let identifier = Cells.objectIdentifyBy(index: tileIndex).identifier
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier,
+                                                      for: indexPath)
+        if let cell = cell as? EditableTileCell {
+            cell.setupCellForStatus(self.tileModeStatus)
         }
         return cell
     }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
     
-        switch (indexPath.row) {
-        case 0:
-            selectRegion(animated: true)
-            
-        default:
-            break
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if !Client.providers.accountProvider.isLoggedIn {
+            return 0
         }
+        return tileModeStatus == .normal ?
+            Client.providers.tileProvider.visibleTiles.count :
+            Client.providers.tileProvider.orderedTiles.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if tileModeStatus == .normal {
+            let cell = collectionView.cellForItem(at: indexPath)
+            if let detailedCell = cell as? DetailedTileCell,
+                detailedCell.hasDetailView(),
+                let segueIdentifier = detailedCell.segueIdentifier() {
+                performSegue(withIdentifier: segueIdentifier, sender: nil)
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        if tileModeStatus == .normal,
+            let cell = collectionView.cellForItem(at: indexPath) as? DetailedTileCell,
+            cell.hasDetailView() {
+            UIView.animate(withDuration: 0.1, animations: {
+                cell.highlightCell()
+            })
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        if tileModeStatus == .normal,
+            let cell = collectionView.cellForItem(at: indexPath) as? DetailedTileCell,
+            cell.hasDetailView() {
+            UIView.animate(withDuration: 0.1, animations: {
+                cell.unhighlightCell()
+            })
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return self.tileModeStatus == .edit
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        var orderedTiles = Client.providers.tileProvider.orderedTiles
+        let tile = orderedTiles.remove(at: sourceIndexPath.row)
+        orderedTiles.insert(tile, at: destinationIndexPath.row)
+        Client.providers.tileProvider.orderedTiles = orderedTiles
+        collectionView.reloadData()
     }
 }

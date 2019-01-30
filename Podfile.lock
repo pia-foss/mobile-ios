@@ -58,7 +58,6 @@ PODS:
   - HockeySDK/DefaultLib (5.1.4)
   - iRate (1.12.2)
   - lottie-ios (2.5.2)
-  - MBProgressHUD (1.1.0)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -71,6 +70,7 @@ PODS:
     - Gloss (~> 2)
     - PIALibrary/Core
     - PIALibrary/Util
+    - PopupDialog
     - ReachabilitySwift
     - SwiftyBeaver
   - PIALibrary/Mock (2.0.0):
@@ -114,7 +114,6 @@ DEPENDENCIES:
   - FXPageControl
   - HockeySDK
   - iRate
-  - MBProgressHUD
   - PIALibrary/Library (from `/Users/ueshiba/Desktop/PIA/client-library-apple`)
   - PIALibrary/Mock (from `/Users/ueshiba/Desktop/PIA/client-library-apple`)
   - PIALibrary/UI (from `/Users/ueshiba/Desktop/PIA/client-library-apple`)
@@ -143,7 +142,6 @@ SPEC REPOS:
     - HockeySDK
     - iRate
     - lottie-ios
-    - MBProgressHUD
     - nanopb
     - OpenSSL-Apple
     - PopupDialog
@@ -178,10 +176,9 @@ SPEC CHECKSUMS:
   HockeySDK: 15afe6bc0a5bfe3a531fd73dbf082095f37dac3b
   iRate: 4fc69958788624545e5d050c8ffd20884013c3f1
   lottie-ios: 3fef45d3fabe63e3c7c2eb603dd64ddfffc73062
-  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   OpenSSL-Apple: cd153d705ef350eb834ae7ff5f21f792b51ed208
-  PIALibrary: 31ba3f0a1575931be2472d1b9d590f08bd7876be
+  PIALibrary: 7ddf4142286031c89313a3cf7dcd6580a14f1db5
   PIATunnel: fc7e7d0a812c6c98138ac315e7a43008aadd15b2
   PopupDialog: 03985b669c29802661c187513bf827340db1ae4d
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
@@ -191,6 +188,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 87fc45c9dcad7b255ea49de23cf784af7b7efa83
+PODFILE CHECKSUM: 4ceb228886f832dd2d6e4c2f06a9f1f9c6771e01
 
 COCOAPODS: 1.5.3

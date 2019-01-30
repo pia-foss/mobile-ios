@@ -225,7 +225,12 @@ class AppPreferences {
 
     func reset() {
         piaSocketType = nil
+        favoriteServerIdentifiers = []
         transitionTheme(to: .light)
+    }
+    
+    func clean() {
+        favoriteServerIdentifiers = []
     }
     
 //    + (void)eraseForTesting;

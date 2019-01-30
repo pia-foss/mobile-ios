@@ -20,6 +20,7 @@ The PIA VPN app features:
 - [x] IPv6 leak protection
 - [x] Safari Content Blocker
 - [x] Dark theme
+- [x] Hotspot Helper 
 
 ## Installation
 
@@ -53,6 +54,12 @@ For the VPN to work properly, the app requires:
 
 both in the main app and the tunnel extension target.
 
+### Hotspot Helper API
+
+We use a special entitlement to participate in the process of joining Wi-Fi/hotspot networks (https://developer.apple.com/documentation/networkextension/nehotspothelper)
+
+You need to request this entitlement to Apple or remove the call to `configureHotspotHelper()` in `AppDelegate.swift` and adapt the entitlements file to your needs.
+
 ## Contributing
 
 By contributing to this project you are agreeing to the terms stated in the Contributor License Agreement (CLA) [here](/CLA.rst).
@@ -63,7 +70,8 @@ Issues and Pull Requests should use these templates: [ISSUE](/.github/ISSUE_TEMP
 
 ## Authors
 
-- Davide De Rosa - [keeshux](https://github.com/keeshux)
+- Jose Blaya - [ueshiba](https://github.com/ueshiba)
+- Davide De Rosa 
 - Amir Malik (before 2016)
 
 ## License

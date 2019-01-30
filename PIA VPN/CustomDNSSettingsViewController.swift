@@ -54,20 +54,15 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
         let alertController = Macros.alert(L10n.Settings.Dns.Alert.Clear.title,
                                            L10n.Settings.Dns.Alert.Clear.message)
         
-        let saveAction = UIAlertAction(title: L10n.Global.ok, style: UIAlertActionStyle.default, handler: { alert -> Void in
+        alertController.addActionWithTitle(L10n.Global.ok) {
             if let firstKey = DNSList.shared.firstKey() {
                 DNSList.shared.removeServer(name: DNSList.CUSTOM_DNS_KEY)
                 self.delegate?.updateSetting(Setting.vpnDns,
                                              withValue: firstKey)
             }
             self.navigationController?.popToRootViewController(animated: true)
-        })
-        
-        let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: UIAlertActionStyle.default,
-                                         handler: nil)
-        
-        alertController.addAction(saveAction)
-        alertController.addAction(cancelAction)
+        }
+        alertController.addCancelAction(L10n.Global.cancel)
         
         self.present(alertController,
                      animated: true,
@@ -79,12 +74,15 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         
+        styleNavigationBarWithTitle(L10n.Settings.Dns.Custom.dns)
+        
         if let viewContainer = viewContainer {
-            Theme.current.applyLightBackground(viewContainer)
+            Theme.current.applyPrincipalBackground(view)
+            Theme.current.applyPrincipalBackground(viewContainer)
         }
 
         for label in [labelPrimaryDNS!, labelSecondaryDNS!] {
-            Theme.current.applyLabel(label, appearance: .dark)
+            Theme.current.applySubtitle(label)
         }
         
         Theme.current.applyInput(textPrimaryDNS)
@@ -128,7 +126,7 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
             (textPrimaryDNS.text != nil && textPrimaryDNS.text!.isEmpty)) {
             let alert = Macros.alert(L10n.Settings.Dns.Custom.dns,
                                      L10n.Settings.Dns.Validation.Primary.mandatory)
-            alert.addCancelAction(L10n.Global.ok)
+            alert.addDefaultAction(L10n.Global.ok)
             self.present(alert,
                          animated: true,
                          completion: nil)
@@ -139,7 +137,7 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
             !isValidAddress(primaryDNS) {
             let alert = Macros.alert(L10n.Settings.Dns.Custom.dns,
                                      L10n.Settings.Dns.Validation.Primary.invalid)
-            alert.addCancelAction(L10n.Global.ok)
+            alert.addDefaultAction(L10n.Global.ok)
             self.present(alert,
                          animated: true,
                          completion: nil)
@@ -151,7 +149,7 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
             !isValidAddress(secondaryDNS) {
             let alert = Macros.alert(L10n.Settings.Dns.Custom.dns,
                                      L10n.Settings.Dns.Validation.Secondary.invalid)
-            alert.addCancelAction(L10n.Global.ok)
+            alert.addDefaultAction(L10n.Global.ok)
             self.present(alert,
                          animated: true,
                          completion: nil)

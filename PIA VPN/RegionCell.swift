@@ -65,8 +65,8 @@ class RegionCell: UITableViewCell, Restylable {
 
     func viewShouldRestyle() {
         
-        self.backgroundColor = Theme.current.palette.lightBackground
-        self.contentView.backgroundColor = Theme.current.palette.lightBackground
+        Theme.current.applyRegionSolidLightBackground(self)
+        Theme.current.applyRegionSolidLightBackground(self.contentView)
 
         Theme.current.applySettingsCellTitle(labelRegion, appearance: .dark)
         Theme.current.applyTag(labelPingTime, appearance: .dark)
@@ -82,10 +82,13 @@ class RegionCell: UITableViewCell, Restylable {
         self.isFavorite = !self.isFavorite
         self.isFavorite ? self.server.favorite() : self.server.unfavorite()
         self.animateFavoriteImage()
+        NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
+                                        object: self,
+                                        userInfo: nil)
     }
     
     private func animateFavoriteImage() {
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
             self.favoriteImageView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         }, completion: { (finished) in
             UIView.animate(withDuration: 0.2, animations: {
