@@ -77,8 +77,8 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
         styleNavigationBarWithTitle(L10n.Settings.Dns.Custom.dns)
         
         if let viewContainer = viewContainer {
-            Theme.current.applySolidLightBackground(view)
-            Theme.current.applySolidLightBackground(viewContainer)
+            Theme.current.applyPrincipalBackground(view)
+            Theme.current.applyPrincipalBackground(viewContainer)
         }
 
         for label in [labelPrimaryDNS!, labelSecondaryDNS!] {

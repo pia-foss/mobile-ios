@@ -420,14 +420,14 @@ class DashboardViewController: AutolayoutViewController {
         super.viewShouldRestyle()
 
         navigationItem.titleView = NavigationLogoView()
-        Theme.current.applySolidLightBackground(view)
-        Theme.current.applySolidLightBackground(viewContainer!)
-        Theme.current.applySolidLightBackground(viewContent)
-        Theme.current.applySolidLightBackground(viewRows)
+        Theme.current.applyPrincipalBackground(view)
+        Theme.current.applyPrincipalBackground(viewContainer!)
+        Theme.current.applyPrincipalBackground(viewContent)
+        Theme.current.applyPrincipalBackground(viewRows)
 
         Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
         
-        Theme.current.applySolidLightBackground(collectionView)
+        Theme.current.applyPrincipalBackground(collectionView)
 
         collectionView.collectionViewLayout.invalidateLayout()
         collectionView.reloadData()
