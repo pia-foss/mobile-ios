@@ -1,9 +1,6 @@
 "about.accessibility.component.expand" = "แตะเพื่ออ่านการอนุญาตฉบับเต็ม";
 "about.app" = "VPN โดย Private Internet Access";
 "about.intro" = "โปรแกรมนี้ใช้องค์ประกอบต่อไปนี้:";
-"account.accessibility.eye" = "ไอคอนรูปตา";
-"account.accessibility.eye.hint.conceal" = "แตะเพื่อปิดบังรหัสผ่านของคุณ";
-"account.accessibility.eye.hint.reveal" = "แตะเพื่อเปิดรหัสผ่านของคุณ";
 "account.email.caption" = "อีเมล";
 "account.email.placeholder" = "อีเมลแอดเดรส";
 "account.error.unauthorized" = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
@@ -11,7 +8,6 @@
 "account.expiry_date.information" = "แพ็กเกจของคุณจะหมดอายุ %@";
 "account.eye.footer" = "แตะที่ไอคอนรูปตาเพื่อเปิดหรือปิดบังรหัสผ่านของคุณ";
 "account.other.footer" = "ดาวน์โหลดแอพ Private Internet Access บนอุปกรณ์อื่นของคุณและใช้ชื่อผู้ใช้และรหัสผ่านด้านบนเพื่อเข้าสู่ระบบและทำให้การเชื่อมต่อของคุณปลอดภัย";
-"account.password.caption" = "รหัสผ่าน";
 "account.restore.button" = "คืนค่าการซื้อ";
 "account.restore.description" = "หากคุณต่ออายุแผนของคุณแต่บัญชีของคุณยังแสดงสถานะใกล้หมดอายุ คุณสามารถเริ่มการต่ออายุใหม่ได้ที่นี่ คุณจะไม่ถูกเรียกเก็บเงินซ้ำในกระบวนการนี้";
 "account.restore.failure.message" = "ไม่พบรายการซื้อที่สามารถแลกได้สำหรับต่ออายุ";
@@ -28,12 +24,8 @@
 "content_blocker.body.footer" = "โปรดทราบ: คุณไม่จำเป็นต้องเชื่อมต่อไปยัง VPN เพื่อใช้งานตัวปิดกั้นเนื้อหา แต่จะใช้ได้ก็ต่อเมื่อใช้ Safari เท่านั้น";
 "content_blocker.body.subtitle" = "ในการเปิดใช้งานตัวปิดกั้นเนื้อหาเพื่อใช้ใน Safari กรุณาไปยัง การตั้งค่า > Safari และภายใต้หมวดทั่วไป ให้แตะ ตัวปิดกั้นเนื้อหา ใน PIA VPN";
 "content_blocker.title" = "ตัวปิดกั้นเนื้อหา";
-"dashboard.connection.ip.caption" = "IP สาธารณะ";
 "dashboard.connection.ip.unreachable" = "อินเทอร์เน็ตไม่สามารถเข้าถึงได้";
-"dashboard.connection.region.caption" = "ภูมิภาคปัจจุบัน";
-"dashboard.connection.region.change" = "เปลี่ยนภูมิภาค";
 "dashboard.content_blocker.intro.message" = "เวอร์ชันนี้ทดแทน MACE ด้วยตัวปิดกั้นเนื้อหา Safari ของเรา\n\nตรวจสอบในส่วน “การตั้งค่า”";
-"dashboard.status" = "สถานะ";
 "dashboard.vpn.changing_region" = "กำลังเปลี่ยนภูมิภาค...";
 "dashboard.vpn.connected" = "เชื่อมต่อกับ VPN";
 "dashboard.vpn.connecting" = "กำลังเชื่อมต่อ...";
