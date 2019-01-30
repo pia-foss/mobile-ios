@@ -37,7 +37,7 @@
 			<key>Copyright</key>
 			<string>Copyright (c) 2017 Harlan Kellaway</string>
 			<key>LicenseURL</key>
-            <string>https://raw.githubusercontent.com/hkellaway/Gloss/develop/LICENSE</string>
+			<string>https://raw.githubusercontent.com/hkellaway/Gloss/develop/LICENSE</string>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -51,9 +51,9 @@
 			<key>Name</key>
 			<string>ReachabilitySwift</string>
 			<key>Copyright</key>
-            <string>Copyright (c) 2016 Ashley Mills</string>
+			<string>Copyright (c) 2016 Ashley Mills</string>
 			<key>LicenseURL</key>
-            <string>https://raw.githubusercontent.com/ashleymills/Reachability.swift/master/LICENSE</string>
+			<string>https://raw.githubusercontent.com/ashleymills/Reachability.swift/master/LICENSE</string>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -89,11 +89,59 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>MBProgressHUD</string>
+			<string>DZNEmptyDataSet</string>
 			<key>Copyright</key>
-			<string>Copyright © 2009-2016 Matej Bukovinski</string>
+			<string>Copyright (c) 2016 Ignacio Romero Zurbuchen</string>
 			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/jdg/MBProgressHUD/master/LICENSE</string>
+			<string>https://raw.githubusercontent.com/dzenbot/DZNEmptyDataSet/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>DynamicBlurView</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2015 Kyohei Ito</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/KyoheiG3/DynamicBlurView/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>PopupDialog</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2016 Orderella Ltd.</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/Orderella/PopupDialog/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>QuickLayout</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2017 huri000@gmail.com</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/huri000/QuickLayout/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>SwiftEntryKit</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2018 Daniel Huri</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/huri000/SwiftEntryKit/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>lottie-ios</string>
+			<key>Copyright</key>
+			<string>Copyright 2018 Airbnb, Inc.</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/airbnb/lottie-ios/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>nanopb</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2011 Petteri Aimonen</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/nanopb/nanopb/master/LICENSE.txt</string>
 		</dict>
 	</array>
 </dict>

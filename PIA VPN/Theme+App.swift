@@ -12,16 +12,6 @@ import SideMenu
 import FXPageControl
 
 extension Theme {
-
-    // MARK: Typography
-
-    func applyHighlightedText(_ button: UIButton) {
-        guard let label = button.titleLabel else {
-            return
-        }
-        applyHighlightedText(label)
-        button.tintColor = label.textColor
-    }
     
     // MARK: Customizations
     
@@ -79,7 +69,7 @@ extension Theme {
     
     public func applyMenuBackground(_ view: UIView) {
         view.backgroundColor = palette.appearance == .dark ?
-            UIColor.piaGrey10 : UIColor.piaWhite
+            UIColor.piaGrey6 : UIColor.piaWhite
     }
 
     public func applyMenuSubtitle(_ label: UILabel) {
@@ -166,4 +156,27 @@ extension Theme {
             Asset.Piax.Regions.noResultsLight.image
     }
     
+    public func mapImageByServerName(_ serverName: String) -> String {
+        let prefix = palette.appearance == .dark ? "Dark-Map-" : "Light-Map-"
+        return prefix + serverName
+    }
+    
+    public func dragDropImage() -> UIImage {
+        return palette.appearance == .dark ?
+            Asset.Piax.Global.dragDropIndicatorDark.image :
+            Asset.Piax.Global.dragDropIndicatorLight.image
+    }
+
+    public func activeEyeImage() -> UIImage {
+        return palette.appearance == .dark ?
+            Asset.Piax.Global.eyeActiveDark.image :
+            Asset.Piax.Global.eyeActiveLight.image
+    }
+
+    public func inactiveEyeImage() -> UIImage {
+        return palette.appearance == .dark ?
+            Asset.Piax.Global.eyeInactiveDark.image :
+            Asset.Piax.Global.eyeInactiveLight.image
+    }
+
 }

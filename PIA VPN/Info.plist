@@ -52,6 +52,10 @@
 		<string>Roboto-Regular.ttf</string>
 		<string>Roboto-Thin.ttf</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>network-authentication</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>Launch Screen</string>
 	<key>UIMainStoryboardFile</key>
