@@ -58,7 +58,7 @@ class IPTile: UIView, Tileable  {
     @objc private func viewShouldRestyle() {
         localIpTitle.style(style: TextStyle.textStyle21)
         vpnIpTitle.style(style: TextStyle.textStyle21)
-        Theme.current.applySubtitle(localIpValue)
+        Theme.current.applySettingsCellTitle(localIpValue, appearance: .dark)
         Theme.current.applySettingsCellTitle(vpnIpValue, appearance: .dark)
         Theme.current.applyPrincipalBackground(self)
     }

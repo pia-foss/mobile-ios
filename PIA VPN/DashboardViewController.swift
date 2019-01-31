@@ -77,23 +77,8 @@ class DashboardViewController: AutolayoutViewController {
         super.viewDidLoad()
         
         setupCollectionView()
-
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: Asset.itemMenu.image,
-            style: .plain,
-            target: self,
-            action: #selector(openMenu(_:))
-        )
-        navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.item
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: Asset.Piax.Global.iconEditTile.image,
-            style: .plain,
-            target: self,
-            action: #selector(updateEditTileStatus(_:))
-        )
-        navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.Edit.tile
-
+        setupNavigationBarButtons()
+        
         viewContent.isHidden = true
         viewRows.isHidden = true
         
@@ -175,6 +160,37 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     // MARK: Actions
+    private func setupNavigationBarButtons() {
+        
+        switch self.tileModeStatus { //change the status
+        case .normal:
+            navigationItem.leftBarButtonItem = UIBarButtonItem(
+                image: Asset.itemMenu.image,
+                style: .plain,
+                target: self,
+                action: #selector(openMenu(_:))
+            )
+            navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.item
+            
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                image: Asset.Piax.Global.iconEditTile.image,
+                style: .plain,
+                target: self,
+                action: #selector(updateEditTileStatus(_:))
+            )
+            navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.Edit.tile
+        case .edit:
+            navigationItem.leftBarButtonItem = UIBarButtonItem(
+                barButtonSystemItem: .stop,
+                target: self,
+                action: #selector(closeTileEditingMode(_:))
+            )
+            navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Global.cancel
+            navigationItem.rightBarButtonItem = nil
+        }
+
+    }
+    
     private func setupCollectionView() {
         collectionView.register(UINib(nibName: Cells.ipTile.className,
                                       bundle: nil),
@@ -202,6 +218,7 @@ class DashboardViewController: AutolayoutViewController {
             self.view.layoutIfNeeded()
         })
         collectionView.reloadData()
+        setupNavigationBarButtons()
     }
     
     private func showWalkthrough() {
@@ -233,6 +250,10 @@ class DashboardViewController: AutolayoutViewController {
     
     @objc private func openMenu(_ sender: Any?) {
         perform(segue: StoryboardSegue.Main.menuSegueIdentifier)
+    }
+    
+    @objc private func closeTileEditingMode(_ sender: Any?) {
+        self.tileModeStatus = .normal
     }
     
     @objc private func updateEditTileStatus(_ sender: Any?) {
