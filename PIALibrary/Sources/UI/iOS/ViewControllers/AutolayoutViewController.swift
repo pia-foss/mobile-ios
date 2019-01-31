@@ -150,10 +150,12 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
             let titleLabelView = UILabel(frame: CGRect.zero)
             titleLabelView.style(style: TextStyle.textStyle6)
             titleLabelView.text = title
-            Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
-                                                   withTintColor: .white,
-                                                   andBarTintColors: [UIColor.piaGreen,
-                                                                      UIColor.piaGreenDark20])
+            if let navController = navigationController {
+                Theme.current.applyCustomNavigationBar(navController.navigationBar,
+                                                       withTintColor: .white,
+                                                       andBarTintColors: [UIColor.piaGreen,
+                                                                          UIColor.piaGreenDark20])
+            }
             let size = titleLabelView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
             titleLabelView.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
             navigationItem.titleView = titleLabelView
