@@ -48,6 +48,8 @@ protocol PlainStore: class {
 
     var trustCellularData: Bool? { get set }
 
+    var authMigrationSuccess: Bool? { get set }
+
     var mace: Bool? { get set }
     
     // MARK: Lifecycle

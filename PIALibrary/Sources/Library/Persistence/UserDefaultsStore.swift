@@ -42,6 +42,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         static let trustCellularData = "TrustCellularData"
 
+        static let authMigrationSuccess = "AuthMigrationSuccess"
+
         static let shouldConnectForAllNetworks = "ShouldConnectForAllNetworks"
 
         static let cachedNetworks = "CachedNetworks"
@@ -240,6 +242,18 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
 
+    var authMigrationSuccess: Bool? {
+        get {
+            guard let value = backend.object(forKey: Entries.authMigrationSuccess) as? Bool else {
+                return nil
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.authMigrationSuccess)
+        }
+    }
+    
     var shouldConnectForAllNetworks: Bool? {
         get {
             guard let value = backend.object(forKey: Entries.shouldConnectForAllNetworks) as? Bool else {
@@ -276,6 +290,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.shouldConnectForAllNetworks)
         backend.removeObject(forKey: Entries.useWiFiProtection)
         backend.removeObject(forKey: Entries.trustCellularData)
+        backend.removeObject(forKey: Entries.authMigrationSuccess)
         backend.synchronize()
     }
 
