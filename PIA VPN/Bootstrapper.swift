@@ -44,6 +44,12 @@ class Bootstrapper {
 
         AppPreferences.shared.migrate()
 
+        // Check if should clean the account after delete the app and install again
+        if Client.providers.accountProvider.shouldCleanAccount {
+            //If first install, we need to ensure we don't have data from previous sessions in the Secure Keychain
+            Client.providers.accountProvider.cleanDatabase()
+        }
+
         // PIALibrary
         
         guard let bundledRegionsURL = AppConstants.Regions.bundleURL else {

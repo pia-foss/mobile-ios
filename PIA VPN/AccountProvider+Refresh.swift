@@ -14,7 +14,14 @@ private let log = SwiftyBeaver.self
 
 extension AccountProvider {
     func refreshAndLogoutUnauthorized(force: Bool = false) {
-        if !force {
+        
+        let migrationDone = Client.preferences.authMigrationSuccess
+        var forceRefreshToken = force
+        if migrationDone != true {
+            forceRefreshToken = true
+        }
+        
+        if !forceRefreshToken {
             guard let accountInfo = Client.providers.accountProvider.currentUser?.info else {
                 return
             }
@@ -25,13 +32,19 @@ extension AccountProvider {
             }
         }
         
-        refreshAccountInfo(force: force, { (info, error) in
+        refreshAccountInfo(force: forceRefreshToken, { (info, error) in
             guard let error = error as? ClientError else {
+
+                let preferences = Client.preferences.editable()
+                preferences.authMigrationSuccess = true
+                preferences.commit()
+
                 return
             }
             guard self.isLoggedIn else {
                 return
             }
+            
             if (error == .unauthorized) {
                 log.error("Account: Failed to refresh account info, user is unauthorized. Logging out...")
                 self.logout(nil)
