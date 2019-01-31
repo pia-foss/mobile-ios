@@ -80,11 +80,11 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         #endif
         activeProfile = profile
         if accessedProviders.accountProvider.isLoggedIn {
-            install(nil)
+            install(force: false, nil)
         }
     }
     
-    func install(_ callback: SuccessLibraryCallback?) {
+    func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?) {
         guard accessedProviders.accountProvider.isLoggedIn else {
             preconditionFailure()
         }
@@ -98,15 +98,22 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
             previousProfile = activeProfile
         }
 
-        let force = DefaultVPNProvider.forcedStatuses.contains(accessedDatabase.transient.vpnStatus)
+        let forcedStatuses = DefaultVPNProvider.forcedStatuses.contains(accessedDatabase.transient.vpnStatus)
         let installBlock: SuccessLibraryCallback = { (error) in
-            profile.save(withConfiguration: self.vpnClientConfiguration(for: profile), force: force) { (error) in
+            profile.save(withConfiguration: self.vpnClientConfiguration(for: profile), force: forcedStatuses) { (error) in
                 if let error = error {
                     callback?(error)
                     return
                 }
-                previousProfile?.remove(nil)
                 self.activeProfile = profile
+
+                if !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) &&
+                    (previousProfile?.vpnType == IPSecProfile.vpnType || previousProfile?.vpnType == IKEv2Profile.vpnType)) {
+                    //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead
+                    previousProfile?.remove(nil)
+                } else {
+                    self.connect(nil)
+                }
                 Macros.postNotification(.PIAVPNDidInstall)
                 callback?(nil)
             }
@@ -115,7 +122,10 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         if let previousProfile = previousProfile {
             previousProfile.disconnect(installBlock)
         } else {
-            installBlock(nil)
+            if newVPNType != activeProfile?.vpnType || !forcedStatuses || forceInstall {
+                //only install if new
+                installBlock(nil)
+            }
         }
     }
     
@@ -243,16 +253,19 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
     
     @discardableResult private func activeProfileRemovingInactive() -> VPNProfile? {
         let activeVPNType = accessedPreferences.vpnType
-        var activeProfile: VPNProfile?
+        let activeProfile: VPNProfile? = accessedConfiguration.profile(forVPNType: activeVPNType)
         
         for vpnType in availableVPNTypes {
             let profile = accessedConfiguration.profile(forVPNType: vpnType)!
             guard (vpnType == activeVPNType) else {
-                profile.disconnect(nil)
-                profile.remove(nil)
+                if !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) &&
+                    (activeProfile?.vpnType == IPSecProfile.vpnType || activeProfile?.vpnType == IKEv2Profile.vpnType)) {
+                    //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead
+                    profile.disconnect(nil)
+                    profile.remove(nil)
+                }
                 continue
             }
-            activeProfile = profile
         }
         return activeProfile
     }

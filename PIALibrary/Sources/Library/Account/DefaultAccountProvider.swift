@@ -120,6 +120,18 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
     }
     
+    private func updateToken(_ token: String) {
+        let tokenComponents = token.split(by: token.count/2)
+        if let first = tokenComponents.first,
+            let last = tokenComponents.last {
+            self.accessedDatabase.secure.setUsername(first)
+            self.accessedDatabase.secure.setToken(token,
+                                                  for: self.accessedDatabase.secure.tokenKey(for: first))
+            self.accessedDatabase.secure.setPassword(last,
+                                                     for: first)
+        }
+    }
+
     func login(with request: LoginRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard !isLoggedIn else {
             preconditionFailure()
@@ -155,9 +167,10 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
 
     }
     
-    func refreshAccountInfo(_ callback: ((AccountInfo?, Error?) -> Void)?) {
+    func refreshAccountInfo(force: Bool, _ callback: ((AccountInfo?, Error?) -> Void)?) {
         
-        guard let token = self.token,
+        guard force == false,
+            let token = self.token,
             let _ = self.publicUsername else {
 
             guard let user = currentUser else {
@@ -167,8 +180,12 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             self.webServices.token(credentials: user.credentials) { (token, error) in
                 if let token = token {
                     
-                    self.updateDatabaseWith(token,
-                                       andUsername: user.credentials.username)
+                    if force {
+                        self.updateToken(token)
+                    } else {
+                        self.updateDatabaseWith(token,
+                                                andUsername: user.credentials.username)
+                    }
                     self.accountInfoWith(token, callback)
                 }
             }
@@ -454,6 +471,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         accessedDatabase.plain.historicalServers = []
         accessedDatabase.plain.reset()
     }
+    
     #endif
 
     // MARK: WebServicesConsumer

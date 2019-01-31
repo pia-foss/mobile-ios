@@ -1,9 +1,9 @@
 //
-//  IPSecProfile.swift
-//  PIALibrary
+//  IKEv2Profile.swift
+//  PIALibrary-iOS
 //
-//  Created by Davide De Rosa on 12/13/17.
-//  Copyright © 2017 London Trust Media. All rights reserved.
+//  Created by Jose Antonio Blaya Garcia on 21/01/2019.
+//  Copyright © 2019 London Trust Media. All rights reserved.
 //
 
 import Foundation
@@ -12,26 +12,9 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-/// Implementation of `VPNProfile` providing IPsec connectivity.
-public class IPSecProfile: NetworkExtensionProfile {
+/// Implementation of `VPNProfile` providing IKEv2 connectivity.
+public class IKEv2Profile: NetworkExtensionProfile {
     
-    private static let identity = "client-ikev1"
-    
-//    private static let identityCommonName = "*.privateinternetaccess.com"
-    
-    private static let identityData: Data = {
-        let bundle = Bundle(for: IPSecProfile.self)
-        guard let url = bundle.url(forResource: "IPsec-Client", withExtension: "p12") else {
-            fatalError("Could not find IPSec identity file")
-        }
-        guard let data = try? Data(contentsOf: url) else {
-            fatalError("Could not load IPSec identity data")
-        }
-        return data
-    }()
-    
-    private static let identityPassword = "password12"
-
     private var currentVPN: NEVPNManager {
         return NEVPNManager.shared()
     }
@@ -40,17 +23,22 @@ public class IPSecProfile: NetworkExtensionProfile {
     }
     
     // MARK: VPNProfile
-
+    
     /// :nodoc:
     public static var vpnType: String {
-        return "IPsec"
+        return "IKEv2"
+    }
+    
+    /// :nodoc:
+    public static var usernameAuthPrefix: String {
+        return "token_"
     }
     
     /// :nodoc:
     public static var isTunnel: Bool {
         return false
     }
-
+    
     /// :nodoc:
     public var native: Any? {
         return currentVPN
@@ -64,6 +52,7 @@ public class IPSecProfile: NetworkExtensionProfile {
     
     /// :nodoc:
     public func save(withConfiguration configuration: VPNConfiguration, force: Bool, _ callback: SuccessLibraryCallback?) {
+        
         currentVPN.loadFromPreferences { (error) in
             if let error = error {
                 callback?(error)
@@ -96,10 +85,9 @@ public class IPSecProfile: NetworkExtensionProfile {
                 callback?(error)
                 return
             }
-
+            
             // prevent reconnection
             self.currentVPN.isOnDemandEnabled = false
-            
             self.currentVPN.saveToPreferences { (error) in
                 if let error = error {
                     callback?(error)
@@ -154,28 +142,38 @@ public class IPSecProfile: NetworkExtensionProfile {
     public func requestLog(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: ((String?, Error?) -> Void)?) {
         callback?(nil, ClientError.unsupported)
     }
-    
+
     /// :nodoc:
     public func requestDataUsage(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: LibraryCallback<Usage>?) {
         callback?(nil, ClientError.unsupported)
     }
-    
+
     // MARK: NetworkExtensionProfile
     
     /// :nodoc:
     public func generatedProtocol(withConfiguration configuration: VPNConfiguration) -> NEVPNProtocol {
-        let cfg = NEVPNProtocolIPSec()
-        cfg.localIdentifier = IPSecProfile.identity
-        cfg.remoteIdentifier = configuration.server.hostname
-        cfg.useExtendedAuthentication = true
-        cfg.authenticationMethod = .certificate
-        cfg.disconnectOnSleep = configuration.disconnectsOnSleep
         
-        cfg.identityData = IPSecProfile.identityData
-        cfg.identityDataPassword = IPSecProfile.identityPassword
-        cfg.username = configuration.username
-        cfg.passwordReference = configuration.passwordReference
+        var iKEv2Username = IKEv2Profile.usernameAuthPrefix
+        if let username = Client.providers.accountProvider.publicUsername {
+            iKEv2Username += username
+        }
+        
+        let cfg = NEVPNProtocolIKEv2()
         cfg.serverAddress = configuration.server.hostname
+        cfg.remoteIdentifier = configuration.server.hostname
+        cfg.localIdentifier = iKEv2Username
+        cfg.username = iKEv2Username
+        cfg.passwordReference = configuration.passwordReference
+        
+        cfg.authenticationMethod = .none
+        cfg.disconnectOnSleep = false
+        cfg.useExtendedAuthentication = true
+        
+        log.debug("IKEv2 Configuration")
+        log.debug("-------------------")
+        log.debug(cfg)
+        log.debug("-------------------")
+
         return cfg
     }
 }

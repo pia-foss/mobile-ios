@@ -17,7 +17,7 @@ enum ClientEndpoint: String, Endpoint {
     
     case redeem = "giftcard_redeem"
     
-    case token = "v2/token"
+    case token = "v2/ios_token"
 
     case account = "v2/account"
 

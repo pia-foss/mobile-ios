@@ -85,9 +85,7 @@ public class PIATunnelProfile: NetworkExtensionProfile {
                 return
             }
             
-            //TODO: prevent reconnection
-            self.configureOnDemandSettingForVPN(vpn)
-            
+            vpn.isOnDemandEnabled = false
             vpn.saveToPreferences { (error) in
                 if let error = error {
                     callback?(error)
@@ -107,9 +105,6 @@ public class PIATunnelProfile: NetworkExtensionProfile {
                 return
             }
             
-            //TODO: prevent reconnection
-            self.configureOnDemandSettingForVPN(vpn)
-            
             vpn.saveToPreferences { (error) in
                 if let error = error {
                     callback?(error)
@@ -117,17 +112,6 @@ public class PIATunnelProfile: NetworkExtensionProfile {
                 }
                 callback?(nil)
             }
-        }
-    }
-    
-    private func configureOnDemandSettingForVPN(_ vpn: NETunnelProviderManager) {
-        if Client.preferences.trustCellularData {
-            vpn.isOnDemandEnabled = false
-        } else {
-            vpn.isOnDemandEnabled = true
-            let cellularRule = NEOnDemandRuleConnect()
-            cellularRule.interfaceTypeMatch = .cellular
-            vpn.onDemandRules = [cellularRule]
         }
     }
 
@@ -138,8 +122,7 @@ public class PIATunnelProfile: NetworkExtensionProfile {
                 return
             }
             vpn.isEnabled = false
-            //TODO: prevent reconnection
-            self.configureOnDemandSettingForVPN(vpn)
+            vpn.isOnDemandEnabled = false
             vpn.saveToPreferences(completionHandler: callback)
         }
     }

@@ -292,6 +292,10 @@
 		DDFCFAB721E925F70081F235 /* EnumsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAB521E925F70081F235 /* EnumsBuilder.swift */; };
 		DDFCFABA21E929660081F235 /* MockTileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAB921E929660081F235 /* MockTileProvider.swift */; };
 		DDFCFABB21E929660081F235 /* MockTileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAB921E929660081F235 /* MockTileProvider.swift */; };
+		DDA4A7BE21F5C31400A02ACD /* IKEv2Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA4A7BD21F5C31400A02ACD /* IKEv2Profile.swift */; };
+		DDA4A7BF21F5C31B00A02ACD /* IKEv2Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA4A7BD21F5C31400A02ACD /* IKEv2Profile.swift */; };
+		DDC812482176166600CB290C /* SwiftGen+ScenesStoryboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC812472176166500CB290C /* SwiftGen+ScenesStoryboards.swift */; };
+		DDC8124A217617F900CB290C /* SwiftGen+SeguesStoryboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC81249217617F900CB290C /* SwiftGen+SeguesStoryboards.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -553,6 +557,7 @@
 		DD76292D21ECEC3F0092DF50 /* DataManipulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManipulation.swift; sourceTree = "<group>"; };
 		DD86BAF021EF5B6D004A988F /* UIViewAutolayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewAutolayout.swift; sourceTree = "<group>"; };
 		DD8BF3CA219C6BAA0041357C /* ConfirmVPNPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmVPNPlanViewController.swift; sourceTree = "<group>"; };
+		DDA4A7BD21F5C31400A02ACD /* IKEv2Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IKEv2Profile.swift; sourceTree = "<group>"; };
 		DDC812472176166500CB290C /* SwiftGen+ScenesStoryboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+ScenesStoryboards.swift"; sourceTree = "<group>"; };
 		DDC81249217617F900CB290C /* SwiftGen+SeguesStoryboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+SeguesStoryboards.swift"; sourceTree = "<group>"; };
 		DDD824E22189969400151709 /* Preset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preset.swift; sourceTree = "<group>"; };
@@ -684,6 +689,7 @@
 				0E2ADD471FE1595300BB170C /* IPSecProfile.swift */,
 				0EB3D9871FF06F37005B11F4 /* NetworkExtensionProfile.swift */,
 				0EB3D9811FF02FE5005B11F4 /* VPNAction.swift */,
+				DDA4A7BD21F5C31400A02ACD /* IKEv2Profile.swift */,
 			);
 			path = VPN;
 			sourceTree = "<group>";
@@ -1591,6 +1597,7 @@
 				0E7BC6F41F96B1120035C8B2 /* SecureStore.swift in Sources */,
 				0EFEB4C3200778BC00F81029 /* NSData+Compression.m in Sources */,
 				0EFEB4C520077AC900F81029 /* PIATunnelProfile.swift in Sources */,
+				DDA4A7BF21F5C31B00A02ACD /* IKEv2Profile.swift in Sources */,
 				0E2ADD3B1FE14F8600BB170C /* VPNProfile.swift in Sources */,
 				0EFDC1CF1FE36D45007C0B9B /* Validator.swift in Sources */,
 				0E7BC6E91F96B1040035C8B2 /* DefaultAccountProvider.swift in Sources */,
@@ -1729,6 +1736,7 @@
 				0EA4C4311FDDD48F0041C3D8 /* Server.swift in Sources */,
 				84577FC5213D9B4D006DEC3D /* UILabel+LineHeight.swift in Sources */,
 				0EB9667E1FDF36490086ABC2 /* GlossParser.swift in Sources */,
+				DDA4A7BE21F5C31400A02ACD /* IKEv2Profile.swift in Sources */,
 				0EAA38991F9CC7E4000149CF /* AppStoreTransaction.swift in Sources */,
 				0EA8072720A1A0090033EC1A /* Redeem.swift in Sources */,
 				DDFCFAB121E925B60081F235 /* AvailableTiles.swift in Sources */,
