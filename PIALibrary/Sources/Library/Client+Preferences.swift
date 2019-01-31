@@ -22,6 +22,8 @@ private protocol PreferencesStore: class {
 
     var trustCellularData: Bool { get set }
 
+    var authMigrationSuccess: Bool { get set }
+
     var shouldConnectForAllNetworks: Bool { get set }
 
     var vpnType: String { get set }
@@ -50,6 +52,7 @@ private extension PreferencesStore {
         mace = source.mace
         useWiFiProtection = source.useWiFiProtection
         trustCellularData = source.trustCellularData
+        authMigrationSuccess = source.authMigrationSuccess
         shouldConnectForAllNetworks = source.shouldConnectForAllNetworks
         vpnType = source.vpnType
         vpnDisconnectsOnSleep = source.vpnDisconnectsOnSleep
@@ -128,6 +131,16 @@ extension Client {
             }
             set {
                 accessedDatabase.plain.trustCellularData = newValue
+            }
+        }
+        
+        /// Flag to indicate if we have retrieve the correct auth token
+        public fileprivate(set) var authMigrationSuccess: Bool {
+            get {
+                return accessedDatabase.plain.authMigrationSuccess ?? defaults.authMigrationSuccess
+            }
+            set {
+                accessedDatabase.plain.authMigrationSuccess = newValue
             }
         }
 
@@ -252,6 +265,7 @@ extension Client.Preferences {
             mace = false
             useWiFiProtection = false
             trustCellularData = true
+            authMigrationSuccess = false
             shouldConnectForAllNetworks = false
             vpnType = IPSecProfile.vpnType
             vpnDisconnectsOnSleep = false
@@ -297,6 +311,9 @@ extension Client.Preferences {
 
         /// :nodoc:
         public var trustCellularData: Bool
+
+        /// :nodoc:
+        public var authMigrationSuccess: Bool
 
         /// :nodoc:
         public var shouldConnectForAllNetworks: Bool

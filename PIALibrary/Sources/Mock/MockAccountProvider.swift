@@ -107,6 +107,11 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     #endif
     
     /// :nodoc:
+    public var shouldCleanAccount: Bool {
+        return false
+    }
+
+    /// :nodoc:
     public var isLoggedIn: Bool {
         return delegate.isLoggedIn
     }

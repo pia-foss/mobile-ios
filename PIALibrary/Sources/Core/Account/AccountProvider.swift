@@ -15,7 +15,10 @@ public protocol AccountProvider: class {
     /// The in-app products required to purchase a `Plan`.
     var planProducts: [Plan: InAppProduct]? { get }
     #endif
-    
+
+    /// Returns `true` if accountInfo is nil and loggedIn true.
+    var shouldCleanAccount: Bool { get }
+
     /// Returns `true` if currently logged in, `false` otherwise.
     var isLoggedIn: Bool { get }
     

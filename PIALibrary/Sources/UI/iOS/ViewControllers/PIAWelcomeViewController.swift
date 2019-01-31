@@ -267,6 +267,8 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
         return accessedProviders.accountProvider.planProducts
     }
     
+    var shouldCleanAccount = false
+
     var isLoggedIn = false
     
     var token: String?
