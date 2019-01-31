@@ -47,6 +47,14 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         return (accessedDatabase.secure.password(for: username) != nil)
     }
     
+    var shouldCleanAccount: Bool {
+        if self.accessedDatabase.plain.accountInfo == nil,
+            self.isLoggedIn {
+            return true
+        }
+        return false
+    }
+    
     var publicUsername: String? {
         guard let username = accessedDatabase.secure.publicUsername() else {
             return nil
