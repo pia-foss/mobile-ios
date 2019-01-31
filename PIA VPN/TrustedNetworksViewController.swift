@@ -75,6 +75,12 @@ class TrustedNetworksViewController: AutolayoutViewController {
         preferences.useWiFiProtection = sender.isOn
         preferences.commit()
         filterAvailableNetworks()
+        if sender.isOn, //If toggle is ON
+            let ssid = UIDevice.current.WiFiSSID, //And we are connected to the WiFi
+            Client.providers.vpnProvider.vpnStatus == .disconnected, //And we are disconnected
+            !Client.preferences.trustedNetworks.contains(ssid) { // And the network is not one of the trustedNetworks
+            requestPermissionToConnectVPN() // Show alert to connect the VPN
+        }
     }
 
     // MARK: Private Methods
@@ -85,7 +91,6 @@ class TrustedNetworksViewController: AutolayoutViewController {
         }
         filterAvailableNetworks()
     }
-    
     private func filterAvailableNetworks() {
         self.availableNetworks = Client.preferences.availableNetworks
         self.trustedNetworks = Client.preferences.trustedNetworks
@@ -93,10 +98,22 @@ class TrustedNetworksViewController: AutolayoutViewController {
         self.tableView.reloadData()
     }
     
+    private func requestPermissionToConnectVPN() {
+        let alert = Macros.alert(L10n.Settings.Hotspothelper.title,
+                                 L10n.Settings.Trusted.Networks.Connect.message)
+        alert.addCancelAction(L10n.Global.close)
+        alert.addActionWithTitle(L10n.Global.ok) {
+            Macros.dispatch(after: .milliseconds(200)) {
+                Client.providers.vpnProvider.connect(nil)
+            }
+        }
+        present(alert, animated: true, completion: nil)
+    }
+    
 }
 
 extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSource {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return Client.preferences.useWiFiProtection ? Sections.countCases() : 1
     }

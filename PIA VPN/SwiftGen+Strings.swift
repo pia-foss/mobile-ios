@@ -498,6 +498,10 @@ internal enum L10n {
       internal enum Networks {
         /// PIA won't automatically connect on these networks.
         internal static let message = L10n.tr("Localizable", "settings.trusted.networks.message")
+        internal enum Connect {
+          /// Protect this network by connecting to VPN?
+          internal static let message = L10n.tr("Localizable", "settings.trusted.networks.connect.message")
+        }
         internal enum Sections {
           /// Available networks
           internal static let available = L10n.tr("Localizable", "settings.trusted.networks.sections.available")

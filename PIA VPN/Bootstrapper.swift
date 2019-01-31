@@ -38,7 +38,10 @@ class Bootstrapper {
         console.minLevel = .info
         #endif
         SwiftyBeaver.addDestination(console)
-        
+
+        // Load the database first
+        Client.database = Client.Database(team: AppConstants.teamId, group: AppConstants.appGroup)
+
         AppPreferences.shared.migrate()
 
         // PIALibrary
@@ -83,8 +86,6 @@ class Bootstrapper {
 
         Client.configuration.setPlan(.yearly, forProductIdentifier: AppConstants.InApp.yearlyProductIdentifier)
         Client.configuration.setPlan(.monthly, forProductIdentifier: AppConstants.InApp.monthlyProductIdentifier)
-
-        Client.database = Client.Database(team: AppConstants.teamId, group: AppConstants.appGroup)
 
         if (isSimulator || Flags.shared.usesMockVPN) {
             Client.configuration.enablesConnectivityUpdates = false
