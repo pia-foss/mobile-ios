@@ -188,6 +188,10 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             self.webServices.token(credentials: user.credentials) { (token, error) in
                 if let token = token {
                     
+                    let preferences = Client.preferences.editable()
+                    preferences.authMigrationSuccess = true
+                    preferences.commit()
+
                     if force {
                         self.updateToken(token)
                     } else {
