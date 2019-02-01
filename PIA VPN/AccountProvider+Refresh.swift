@@ -19,14 +19,17 @@ extension AccountProvider {
         var forceRefreshToken = force
         if migrationDone != true {
             //Disconnect the VPN (if it's trying to reconnect)
+            forceRefreshToken = true
+
             if !Client.providers.vpnProvider.isVPNConnected {
                 Client.providers.vpnProvider.disconnect({ [weak self] error in
                     guard let _ = error as? ClientError else {
-                        forceRefreshToken = true
                         self?.refreshAccount(force: forceRefreshToken)
                         return
                     }
                 })
+            } else {
+                refreshAccount(force: forceRefreshToken)
             }
         } else {
             refreshAccount(force: forceRefreshToken)
@@ -48,9 +51,6 @@ extension AccountProvider {
         
         refreshAccountInfo(force: forceRefreshToken, { (info, error) in
             guard let error = error as? ClientError else {
-                let preferences = Client.preferences.editable()
-                preferences.authMigrationSuccess = true
-                preferences.commit()
                 return
             }
             guard self.isLoggedIn else {
