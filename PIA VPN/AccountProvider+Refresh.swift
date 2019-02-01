@@ -21,7 +21,8 @@ extension AccountProvider {
             //Disconnect the VPN (if it's trying to reconnect)
             forceRefreshToken = true
 
-            if !Client.providers.vpnProvider.isVPNConnected {
+            if Client.providers.vpnProvider.vpnStatus == .connecting ||
+                Client.providers.vpnProvider.vpnStatus == .disconnecting {
                 Client.providers.vpnProvider.disconnect({ [weak self] error in
                     guard let _ = error as? ClientError else {
                         self?.refreshAccount(force: forceRefreshToken)

@@ -42,13 +42,13 @@ class Bootstrapper {
         // Load the database first
         Client.database = Client.Database(team: AppConstants.teamId, group: AppConstants.appGroup)
 
-        AppPreferences.shared.migrate()
-
         // Check if should clean the account after delete the app and install again
         if Client.providers.accountProvider.shouldCleanAccount {
             //If first install, we need to ensure we don't have data from previous sessions in the Secure Keychain
             Client.providers.accountProvider.cleanDatabase()
         }
+
+        AppPreferences.shared.migrate()
 
         // PIALibrary
         
