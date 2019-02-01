@@ -15,6 +15,10 @@ private let log = SwiftyBeaver.self
 extension AccountProvider {
     func refreshAndLogoutUnauthorized(force: Bool = false) {
         
+        guard self.isLoggedIn else {
+            return
+        }
+
         let migrationDone = Client.preferences.authMigrationSuccess
         var forceRefreshToken = force
         if migrationDone != true {
