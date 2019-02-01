@@ -29,9 +29,13 @@ extension Data {
             return nil
         }
         
-        return withUnsafeBytes { (c_key: UnsafePointer<UInt8>) in
+        return withUnsafeBytes { (c_key: UnsafePointer<UInt8>?) in
             var idx = 0
             
+            guard let c_key = c_key else {
+                return nil
+            }
+
             guard (c_key[idx] == 0x30) else {
                 return nil
             }
