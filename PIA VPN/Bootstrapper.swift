@@ -14,6 +14,8 @@ import iRate
 #if PIA_DEV
 import HockeySDK
 import Firebase
+import Fabric
+import Crashlytics
 #endif
 
 class Bootstrapper {
@@ -31,9 +33,22 @@ class Bootstrapper {
     }
 
     func bootstrap() {
+        
         let console = ConsoleDestination()
         #if PIA_DEV
         console.minLevel = .debug
+        let hockey = BITHockeyManager.shared()
+        hockey.isMetricsManagerDisabled = true
+        hockey.configure(withIdentifier: AppConstants.hockeyAppId)
+        hockey.start()
+        
+        if let path = Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist"),
+            let plist = NSDictionary(contentsOf: path) as? [String: Any],
+            plist.count > 0 {
+            FirebaseApp.configure()
+            Fabric.sharedSDK().debug = true
+            Fabric.with([Crashlytics.self()])
+        }
         #else
         console.minLevel = .info
         #endif
@@ -130,20 +145,6 @@ class Bootstrapper {
         rater.daysUntilPrompt = AppConfiguration.Rating.daysUntilPrompt
         rater.remindPeriod = AppConfiguration.Rating.remindPeriod
         
-        #if PIA_DEV
-        let hockey = BITHockeyManager.shared()
-        hockey.isMetricsManagerDisabled = true
-        hockey.configure(withIdentifier: AppConstants.hockeyAppId)
-        hockey.start()
-        
-        if let path = Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist"),
-            let plist = NSDictionary(contentsOf: path) as? [String: Any],
-            plist.count > 0 {
-            FirebaseApp.configure()
-        }
-
-        #endif
-
         // Notifications
         
         let nc = NotificationCenter.default
