@@ -11,6 +11,8 @@ import Foundation
 protocol SecureStore: class {
     var publicKey: SecKey? { get }
     
+    @discardableResult func publicKeyEntry() -> SecKey?
+
     @discardableResult func setPublicKey(withData data: Data) -> SecKey?
     
     func username() -> String?
