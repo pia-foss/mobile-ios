@@ -31,6 +31,14 @@ class KeychainStore: SecureStore {
 
     var publicKey: SecKey?
     
+    func publicKeyEntry() -> SecKey? {
+        guard let publicKey = try? backend.publicKey(withIdentifier: Entries.publicKey) else {
+            return nil
+        }
+        self.publicKey = publicKey
+        return publicKey
+    }
+    
     func setPublicKey(withData data: Data) -> SecKey? {
         backend.remove(publicKeyWithIdentifier: Entries.publicKey)
         guard let publicKey = try? backend.add(publicKeyWithIdentifier: Entries.publicKey, data: data) else {

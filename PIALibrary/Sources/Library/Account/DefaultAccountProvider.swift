@@ -474,6 +474,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         if let username = accessedDatabase.secure.username() {
             accessedDatabase.secure.setPassword(nil, for: username)
             accessedDatabase.secure.setUsername(nil)
+            accessedDatabase.secure.clear(for: username)
             accessedDatabase.secure.setToken(nil, for: accessedDatabase.secure.tokenKey(for: username))
         }
         accessedDatabase.secure.setPublicUsername(nil)
