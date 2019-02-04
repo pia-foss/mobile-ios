@@ -186,6 +186,12 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             }
 
             self.webServices.token(credentials: user.credentials) { (token, error) in
+                
+                if let _ = error {
+                    callback?(nil, error)
+                    return
+                }
+
                 if let token = token {
                     
                     let preferences = Client.preferences.editable()
