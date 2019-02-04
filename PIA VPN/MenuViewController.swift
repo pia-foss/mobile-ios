@@ -106,8 +106,6 @@ class MenuViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        assert(Client.providers.accountProvider.isLoggedIn, "Menu visible while not logged in")
-
         modalPresentationCapturesStatusBarAppearance = true
 
         imvAvatar.image = Asset.imageRobot.image
