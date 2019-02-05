@@ -37,7 +37,7 @@ class AppPreferences {
 
     static let shared = AppPreferences()
     
-    private static let currentVersion = "5.0"
+    private static let currentVersion = "5.1"
     
     private let defaults: UserDefaults
 
@@ -150,7 +150,7 @@ class AppPreferences {
     }
     
     private func refreshAPIToken() {
-        if Client.providers.accountProvider.isLoggedIn {
+        if Client.preferences.authMigrationSuccess == false {
             Client.providers.accountProvider.refreshAndLogoutUnauthorized(force: true)
         }
     }
@@ -169,18 +169,17 @@ class AppPreferences {
             defaults.removeObject(forKey: "LoggedUsername")
             defaults.synchronize()
         }
-        refreshAPIToken()
     }
     
     func migrate() {
         let oldVersion = defaults.string(forKey: Entries.version)
         defaults.set(AppPreferences.currentVersion, forKey: Entries.version)
-
+        
         guard (oldVersion == nil) else {
-            if oldVersion == "4.0" {
-                refreshAPIToken()
-            } else if oldVersion != "4.0" && oldVersion != AppPreferences.currentVersion {
+            if oldVersion != AppPreferences.currentVersion ||
+                !Client.preferences.authMigrationSuccess { //First time for each update or if the auth token has not been updated
                 migrateAPItoV2()
+                refreshAPIToken()
             }
             return
         }

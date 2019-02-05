@@ -114,9 +114,6 @@ class MenuViewController: AutolayoutViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        assert(Client.providers.accountProvider.isLoggedIn, "Menu visible while not logged in")
-
         currentUser = Client.providers.accountProvider.currentUser
         labelUsername.text = Client.providers.accountProvider.publicUsername ?? ""
         labelUsername.accessibilityLabel = L10n.Menu.Accessibility.loggedAs(Client.providers.accountProvider.publicUsername ?? "")
