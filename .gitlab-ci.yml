@@ -15,7 +15,7 @@ before_script:
     - echo "$PIA_STAGING_ENDPOINT" >"Resources/staging.endpoint"
     - echo "$PIA_CUSTOM_SERVERS" >"Resources/custom.servers"
     - echo "$PIA_FIREBASE_PLIST" >"Resources/GoogleService-Info.plist"
-    - security unlock-keychain -p $MATCH_PASSWORD ~/Library/Keychains/login.keychain-db
+    - security unlock-keychain -p "$MATCH_PASSWORD" ~/Library/Keychains/login.keychain-db
 stages:
     - test
     - archive
