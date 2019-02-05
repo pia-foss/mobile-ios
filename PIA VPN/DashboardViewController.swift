@@ -233,7 +233,15 @@ class DashboardViewController: AutolayoutViewController {
         }
 
         let vc = GetStartedViewController.with(preset: preset, delegate: self)
-        present(vc, animated: false, completion: nil)
+        
+        if let presented = self.navigationController?.presentedViewController,
+            presented != self {
+            presented.dismiss(animated: true, completion: {
+                self.present(vc, animated: false, completion: nil)
+            })
+        } else {
+            present(vc, animated: false, completion: nil)
+        }
     }
     
     private func presentPurchaseForTrial() {

@@ -86,7 +86,6 @@ class AccountViewController: AutolayoutViewController {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(redisplayAccount), name: .PIAAccountDidRefresh, object: nil)
         nc.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
-        nc.addObserver(self, selector: #selector(accountDidLogout(notification:)), name: .PIAAccountDidLogout, object: nil)
 
         Client.providers.accountProvider.refreshAndLogoutUnauthorized(force: true)
     }
@@ -253,10 +252,6 @@ class AccountViewController: AutolayoutViewController {
     }
 
     // MARK: Notifications
-    @objc private func accountDidLogout(notification: Notification) {
-        dismissModal()
-    }
-
     @objc private func redisplayAccount() {
         currentUser = Client.providers.accountProvider.currentUser
 
