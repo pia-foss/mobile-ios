@@ -158,7 +158,12 @@ extension Theme {
     
     public func mapImageByServerName(_ serverName: String) -> String {
         let prefix = palette.appearance == .dark ? "Dark-Map-" : "Light-Map-"
-        return prefix + serverName
+        if serverName != L10n.Global.automatic {
+            return prefix + serverName
+        } else {
+            return prefix + "Spain"
+        }
+        
     }
     
     public func dragDropImage() -> UIImage {
