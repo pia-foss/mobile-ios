@@ -44,7 +44,7 @@ qa_archive:
         GYM_SCHEME: "PIA VPN dev"
         GYM_EXPORT_METHOD: "ad-hoc"
     script:
-        - bundle exec fastlane create_archive
+        - bundle exec fastlane create_archive --verbose
     artifacts:
         paths:
             - "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.*"
