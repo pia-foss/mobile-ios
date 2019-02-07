@@ -165,6 +165,15 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     }
     
     /// :nodoc:
+    public func accountInformation(_ callback: ((AccountInfo?, Error?) -> Void)?) {
+        guard !mockIsUnauthorized else {
+            callback?(nil, ClientError.unauthorized)
+            return
+        }
+        delegate.accountInformation(callback)
+    }
+    
+    /// :nodoc:
     public func update(with request: UpdateAccountRequest, andPassword password: String, _ callback: LibraryCallback<AccountInfo>?) {
         delegate.update(with: request, andPassword: password, callback)
     }

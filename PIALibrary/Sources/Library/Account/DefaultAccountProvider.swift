@@ -215,6 +215,14 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         
     }
     
+    public func accountInformation(_ callback: ((AccountInfo?, Error?) -> Void)?) {
+        guard let token = self.token else {
+            callback?(nil, ClientError.unauthorized)
+            return
+        }
+        accountInfoWith(token, callback)
+    }
+    
     private func accountInfoWith(_ token: String, _ callback: ((AccountInfo?, Error?) -> Void)?) {
         webServices.info(token: token) { (accountInfo, error) in
             guard let accountInfo = accountInfo else {
