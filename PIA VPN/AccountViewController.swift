@@ -85,7 +85,7 @@ class AccountViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(redisplayAccount), name: .PIAAccountDidRefresh, object: nil)
         nc.addObserver(self, selector: #selector(accountDidLogout(notification:)), name: .PIAAccountDidLogout, object: nil)
 
-        Client.providers.accountProvider.refreshAndLogoutUnauthorized(force: true)
+        Client.providers.accountProvider.retrieveAccount()
     }
 
     override func viewWillAppear(_ animated: Bool) {
