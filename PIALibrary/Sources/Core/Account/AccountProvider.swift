@@ -63,6 +63,16 @@ public protocol AccountProvider: class {
     func refreshAccountInfo(force: Bool, _ callback: LibraryCallback<AccountInfo>?)
     
     /**
+     Retrieves information associated with the account currently logged in.
+     
+     - Precondition: `isLoggedIn` is `true`.
+     - Postcondition:
+     - Posts `Notification.Name.PIAAccountDidRefresh` on success.
+     - Parameter callback: Returns a refreshed `AccountInfo`.
+     */
+    func accountInformation(_ callback: ((AccountInfo?, Error?) -> Void)?)
+
+    /**
      Updates the account currently logged in.
  
      - Precondition: `isLoggedIn` is `true`.

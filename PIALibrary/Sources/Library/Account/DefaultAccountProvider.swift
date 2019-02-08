@@ -215,6 +215,14 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         
     }
     
+    public func accountInformation(_ callback: ((AccountInfo?, Error?) -> Void)?) {
+        guard let token = self.token else {
+            callback?(nil, ClientError.unauthorized)
+            return
+        }
+        accountInfoWith(token, callback)
+    }
+    
     private func accountInfoWith(_ token: String, _ callback: ((AccountInfo?, Error?) -> Void)?) {
         webServices.info(token: token) { (accountInfo, error) in
             guard let accountInfo = accountInfo else {
@@ -339,11 +347,34 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             self.accessedDatabase.secure.setPublicUsername(credentials.username)
             self.accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
 
-            let user = UserAccount(credentials: credentials, info: nil)
-            Macros.postNotification(.PIAAccountDidSignup, [
-                .user: user
-            ])
-            callback?(user, nil)
+            self.webServices.token(credentials: credentials) { (token, error) in
+                
+                guard let token = token else {
+                    callback?(nil, error)
+                    return
+                }
+                
+                self.updateDatabaseWith(token,
+                                        andUsername: credentials.username)
+                
+                self.webServices.info(token: token) { (accountInfo, error) in
+                    guard let accountInfo = accountInfo else {
+                        callback?(nil, error)
+                        return
+                    }
+                    
+                    //Save after confirm the login was successful.
+                    self.accessedDatabase.plain.accountInfo = accountInfo
+                    
+                    let user = UserAccount(credentials: credentials, info: nil)
+                    Macros.postNotification(.PIAAccountDidSignup, [
+                        .user: user
+                        ])
+                    callback?(user, nil)
+                }
+                
+            }
+
         }
     }
 
