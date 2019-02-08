@@ -7,7 +7,7 @@ abstract_target 'PIALibrary' do
     pod 'Alamofire', '~> 4'
     pod 'ReachabilitySwift'
     # pod 'PIATunnel', :path => '/Users/ueshiba/Desktop/PIA/tunnel-apple'
-    pod 'PIATunnel', '~> 1.1.8'
+    pod 'PIATunnel', '~> 1.1.7'
 
     target 'PIALibrary-iOS' do
         platform :ios, '9.0'
