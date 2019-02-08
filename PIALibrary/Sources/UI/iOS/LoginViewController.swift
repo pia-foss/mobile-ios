@@ -186,6 +186,8 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
             metadata.bodySubtitle = L10n.Signup.InProgress.message
             vc.metadata = metadata
             vc.signupRequest = SignupRequest(email: email)
+            vc.preset = preset
+            vc.completionDelegate = completionDelegate
         }
     }
 
