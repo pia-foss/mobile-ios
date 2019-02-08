@@ -6,11 +6,8 @@ abstract_target 'PIALibrary' do
     pod 'Gloss', '~> 2'
     pod 'Alamofire', '~> 4'
     pod 'ReachabilitySwift'
-    pod 'SwiftEntryKit', '0.7.2'
-    pod 'lottie-ios'
-    pod 'PopupDialog'
-    # pod 'PIATunnel', :path => ''
-    pod 'PIATunnel', '~> 1.1.8'
+    # pod 'PIATunnel', :path => '/Users/ueshiba/Desktop/PIA/tunnel-apple'
+    pod 'PIATunnel', '~> 1.1.7'
 
     target 'PIALibrary-iOS' do
         platform :ios, '9.0'
@@ -28,14 +25,4 @@ abstract_target 'PIALibrary' do
     #target 'PIALibraryTests-macOS' do
     #    platform :osx, '10.11'
     #end
-end
-
-post_install do |installer|
-    installer.pods_project.targets.each do |target|
-        if ['PopupDialog'].include? target.name
-            target.build_configurations.each do |config|
-                config.build_settings['SWIFT_VERSION'] = '4.2'
-            end
-        end
-    end
 end
