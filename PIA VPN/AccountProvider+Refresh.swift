@@ -13,6 +13,28 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 extension AccountProvider {
+    
+    func retrieveAccount() {
+        
+        guard self.isLoggedIn else {
+            return
+        }
+
+        accountInformation({ (info, error) in
+            guard let error = error as? ClientError else {
+                return
+            }
+            guard self.isLoggedIn else {
+                return
+            }
+            
+            if (error == .unauthorized) {
+                log.error("Account: Failed to retrieve the account info, user is unauthorized. Logging out...")
+                self.logout(nil)
+            }
+        })
+    }
+    
     func refreshAndLogoutUnauthorized(force: Bool = false) {
         
         guard self.isLoggedIn else {

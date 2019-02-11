@@ -151,7 +151,7 @@ class AppPreferences {
     
     private func refreshAPIToken() {
         if Client.preferences.authMigrationSuccess == false {
-            Client.providers.accountProvider.refreshAndLogoutUnauthorized(force: true)
+            Client.providers.accountProvider.refreshAndLogoutUnauthorized()
         }
     }
     
