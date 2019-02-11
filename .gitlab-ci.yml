@@ -9,7 +9,7 @@ variables:
 
 before_script:
     - gem install bundler --no-ri --no-rdoc
-    #- bundle install
+    - bundle install
     #- bundle update COCOAPODS 1.6.0 is broken
     #- bundle exec fastlane run ensure_git_status_clean
     - echo "$PIA_STAGING_ENDPOINT" >"Resources/staging.endpoint"
