@@ -77,88 +77,86 @@ class Bootstrapper {
             fatalError("Could not parse bundled regions file: \(e)")
         }
 
-        DispatchQueue.main.async {
-            Client.environment = AppConfiguration.clientEnvironment
-            Client.configuration.isDevelopment = Flags.shared.usesDevelopmentClient
-            if let stagingUrl = AppConstants.Web.stagingEndpointURL {
-                Client.configuration.setBaseURL(stagingUrl.absoluteString, for: .staging)
+        Client.environment = AppConfiguration.clientEnvironment
+        Client.configuration.isDevelopment = Flags.shared.usesDevelopmentClient
+        if let stagingUrl = AppConstants.Web.stagingEndpointURL {
+            Client.configuration.setBaseURL(stagingUrl.absoluteString, for: .staging)
+        }
+        if Client.configuration.isDevelopment, let customServers = AppConstants.Servers.customServers {
+            for server in customServers {
+                Client.configuration.addCustomServer(server)
             }
-            if Client.configuration.isDevelopment, let customServers = AppConstants.Servers.customServers {
-                for server in customServers {
-                    Client.configuration.addCustomServer(server)
-                }
-            }
-            
-            Client.configuration.enablesConnectivityUpdates = true
-            Client.configuration.enablesServerUpdates = true
-            Client.configuration.enablesServerPings = true
-            Client.configuration.bundledServersJSON = bundledServersJSON
-            Client.configuration.webTimeout = AppConfiguration.ClientConfiguration.webTimeout
-            Client.configuration.vpnProfileName = AppConfiguration.VPN.profileName
-            Client.configuration.addVPNProfile(PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier))
-            
-            let defaults = Client.preferences.defaults
-            defaults.isPersistentConnection = true
-            defaults.mace = false
-            defaults.vpnType = PIATunnelProfile.vpnType
-            defaults.vpnCustomConfigurations = [
-                PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build()
-            ]
-            
-            Client.configuration.setPlan(.yearly, forProductIdentifier: AppConstants.InApp.yearlyProductIdentifier)
-            Client.configuration.setPlan(.monthly, forProductIdentifier: AppConstants.InApp.monthlyProductIdentifier)
-            
-            if (self.isSimulator || Flags.shared.usesMockVPN) {
-                Client.configuration.enablesConnectivityUpdates = false
-                Client.useMockVPNProvider()
-            }
-            if Flags.shared.usesMockInApp {
-                Client.useMockInAppProvider()
-            }
-            if Flags.shared.usesMockAccount {
-                Client.useMockAccountProvider(AppConfiguration.Mock.accountProvider)
-            }
-            
-            Client.bootstrap()
-            
-            // Preferences
-            
-            let pref = Client.preferences.editable()
-            
-            // as per App Store guidelines
-            if !Flags.shared.enablesMACESetting {
-                pref.mace = false
-            }
-            
-            pref.commit()
-            
-            // Business objects
-            
-            AccountObserver.shared.start()
-            //        DataCounter.shared.startCounting()
-            
-            // Third parties
-            
-            let rater = iRate.sharedInstance()!
-            rater.usesUntilPrompt = AppConfiguration.Rating.usesUntilPrompt
-            rater.eventsUntilPrompt = AppConfiguration.Rating.eventsUntilPrompt
-            rater.daysUntilPrompt = AppConfiguration.Rating.daysUntilPrompt
-            rater.remindPeriod = AppConfiguration.Rating.remindPeriod
-            
-            // Notifications
-            
-            let nc = NotificationCenter.default
-            nc.addObserver(self, selector: #selector(self.reloadTheme), name: .PIAThemeDidChange, object: nil)
-            nc.addObserver(self, selector: #selector(self.vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
-            
-            // PIALibrary (Theme)
-            
-            AppPreferences.shared.currentThemeCode.apply(theme: Theme.current, reload: true)
-            
-            // show walkthrough on upgrade except for logged in users
-            if Client.providers.accountProvider.isLoggedIn {
-                AppPreferences.shared.wasLaunched = true
-            }
+        }
+        
+        Client.configuration.enablesConnectivityUpdates = true
+        Client.configuration.enablesServerUpdates = true
+        Client.configuration.enablesServerPings = true
+        Client.configuration.bundledServersJSON = bundledServersJSON
+        Client.configuration.webTimeout = AppConfiguration.ClientConfiguration.webTimeout
+        Client.configuration.vpnProfileName = AppConfiguration.VPN.profileName
+        Client.configuration.addVPNProfile(PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier))
+        
+        let defaults = Client.preferences.defaults
+        defaults.isPersistentConnection = true
+        defaults.mace = false
+        defaults.vpnType = PIATunnelProfile.vpnType
+        defaults.vpnCustomConfigurations = [
+            PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build()
+        ]
+        
+        Client.configuration.setPlan(.yearly, forProductIdentifier: AppConstants.InApp.yearlyProductIdentifier)
+        Client.configuration.setPlan(.monthly, forProductIdentifier: AppConstants.InApp.monthlyProductIdentifier)
+        
+        if (self.isSimulator || Flags.shared.usesMockVPN) {
+            Client.configuration.enablesConnectivityUpdates = false
+            Client.useMockVPNProvider()
+        }
+        if Flags.shared.usesMockInApp {
+            Client.useMockInAppProvider()
+        }
+        if Flags.shared.usesMockAccount {
+            Client.useMockAccountProvider(AppConfiguration.Mock.accountProvider)
+        }
+        
+        Client.bootstrap()
+        
+        // Preferences
+        
+        let pref = Client.preferences.editable()
+        
+        // as per App Store guidelines
+        if !Flags.shared.enablesMACESetting {
+            pref.mace = false
+        }
+        
+        pref.commit()
+        
+        // Business objects
+        
+        AccountObserver.shared.start()
+        //        DataCounter.shared.startCounting()
+        
+        // Third parties
+        
+        let rater = iRate.sharedInstance()!
+        rater.usesUntilPrompt = AppConfiguration.Rating.usesUntilPrompt
+        rater.eventsUntilPrompt = AppConfiguration.Rating.eventsUntilPrompt
+        rater.daysUntilPrompt = AppConfiguration.Rating.daysUntilPrompt
+        rater.remindPeriod = AppConfiguration.Rating.remindPeriod
+        
+        // Notifications
+        
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(self.reloadTheme), name: .PIAThemeDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(self.vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
+        
+        // PIALibrary (Theme)
+        
+        AppPreferences.shared.currentThemeCode.apply(theme: Theme.current, reload: true)
+        
+        // show walkthrough on upgrade except for logged in users
+        if Client.providers.accountProvider.isLoggedIn {
+            AppPreferences.shared.wasLaunched = true
         }
 
     }
