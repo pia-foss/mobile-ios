@@ -79,7 +79,6 @@ class Bootstrapper {
 
         Client.environment = AppConfiguration.clientEnvironment
         Client.configuration.isDevelopment = Flags.shared.usesDevelopmentClient
-
         if let stagingUrl = AppConstants.Web.stagingEndpointURL {
             Client.configuration.setBaseURL(stagingUrl.absoluteString, for: .staging)
         }
@@ -88,7 +87,7 @@ class Bootstrapper {
                 Client.configuration.addCustomServer(server)
             }
         }
-
+        
         Client.configuration.enablesConnectivityUpdates = true
         Client.configuration.enablesServerUpdates = true
         Client.configuration.enablesServerPings = true
@@ -96,7 +95,7 @@ class Bootstrapper {
         Client.configuration.webTimeout = AppConfiguration.ClientConfiguration.webTimeout
         Client.configuration.vpnProfileName = AppConfiguration.VPN.profileName
         Client.configuration.addVPNProfile(PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier))
-
+        
         let defaults = Client.preferences.defaults
         defaults.isPersistentConnection = true
         defaults.mace = false
@@ -104,11 +103,13 @@ class Bootstrapper {
         defaults.vpnCustomConfigurations = [
             PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build()
         ]
-
+        
         Client.configuration.setPlan(.yearly, forProductIdentifier: AppConstants.InApp.yearlyProductIdentifier)
         Client.configuration.setPlan(.monthly, forProductIdentifier: AppConstants.InApp.monthlyProductIdentifier)
+        Client.configuration.setPlan(.legacyYearly, forProductIdentifier: AppConstants.LegacyInApp.yearlyProductIdentifier)
+        Client.configuration.setPlan(.legacyMonthly, forProductIdentifier: AppConstants.LegacyInApp.monthlyProductIdentifier)
 
-        if (isSimulator || Flags.shared.usesMockVPN) {
+        if (self.isSimulator || Flags.shared.usesMockVPN) {
             Client.configuration.enablesConnectivityUpdates = false
             Client.useMockVPNProvider()
         }
@@ -122,7 +123,7 @@ class Bootstrapper {
         Client.bootstrap()
         
         // Preferences
-
+        
         let pref = Client.preferences.editable()
         
         // as per App Store guidelines
@@ -131,12 +132,12 @@ class Bootstrapper {
         }
         
         pref.commit()
-
+        
         // Business objects
         
         AccountObserver.shared.start()
-//        DataCounter.shared.startCounting()
-
+        //        DataCounter.shared.startCounting()
+        
         // Third parties
         
         let rater = iRate.sharedInstance()!
@@ -156,11 +157,12 @@ class Bootstrapper {
         // PIALibrary (Theme)
         
         AppPreferences.shared.currentThemeCode.apply(theme: Theme.current, reload: true)
-
+        
         // show walkthrough on upgrade except for logged in users
         if Client.providers.accountProvider.isLoggedIn {
             AppPreferences.shared.wasLaunched = true
         }
+
     }
 
     func dispose() {

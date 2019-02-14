@@ -194,9 +194,9 @@
 
 // HOTSPOT HELPER
 
-"settings.hotspothelper.title" = "VPN WiFi Protection";
-"settings.hotspothelper.description" = "VPN WiFi Protection automatically engages the VPN when connecting to untrusted networks.";
-"settings.hotspothelper.enable.description" = "VPN WiFi Protection automatically enables the VPN when connecting to untrusted networks.";
+"settings.hotspothelper.title" = "Network management tool";
+"settings.hotspothelper.description" = "Configure how PIA will behave on connection to WiFi or cellular networks.";
+"settings.hotspothelper.enable.description" = "VPN WiFi Protection automatically enables the VPN when connecting to untrusted networks if this option is enabled.";
 "settings.hotspothelper.all.title" = "Protect all networks";
 "settings.hotspothelper.all.description" = "VPN WiFi Protection will activate on all networks, including trusted networks.";
 "settings.hotspothelper.available.help" = "To populate this list go to iOS Settings > WiFi.";
@@ -209,7 +209,10 @@
 "hotspothelper.display.name" = "🔒 Activate VPN WiFi Protection in PIA Settings to secure this connection.";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi Protection Enabled - We got your back.";
 "settings.hotspothelper.cellular.title" = "Trust cellular networks";
+"settings.hotspothelper.wifi.trust.title" = "VPN WiFi Protection";
 "settings.hotspothelper.cellular.description" = "PIA automatically enables the VPN when connecting to cellular networks if this option is disabled.";
+"settings.hotspothelper.cellular.networks" = "Cellular networks";
+"settings.hotspothelper.wifi.networks" = "WiFi networks";
 
 
 // REGION

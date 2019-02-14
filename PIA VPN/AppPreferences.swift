@@ -37,7 +37,7 @@ class AppPreferences {
 
     static let shared = AppPreferences()
     
-    private static let currentVersion = "5.1"
+    private static let currentVersion = "5.2"
     
     private let defaults: UserDefaults
 

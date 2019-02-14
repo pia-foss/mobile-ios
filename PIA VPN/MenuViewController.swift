@@ -158,10 +158,30 @@ class MenuViewController: AutolayoutViewController {
     private func handleRenewablePlans(_ plans: [Plan]) {
         log.debug("Account: Renewable plans are: \(plans)")
 
-        // TODO: allow users to upgrade from monthly to yearly (plans.count == 2)
-        guard let uniquePlan = plans.first else {
+        guard var uniquePlan = plans.first else {
             fatalError("At least a renewable plan must be available")
         }
+
+        //Now we need to filter if legacy plan or not
+        if let currentUser = currentUser,
+            let productId = currentUser.info?.productId {
+            
+            switch productId {
+            case AppConstants.InApp.monthlyProductIdentifier:
+                uniquePlan = .monthly
+            case AppConstants.InApp.yearlyProductIdentifier:
+                uniquePlan = .yearly
+            case AppConstants.LegacyInApp.monthlyProductIdentifier:
+                uniquePlan = .legacyMonthly
+            case AppConstants.LegacyInApp.yearlyProductIdentifier:
+                uniquePlan = .legacyYearly
+            default:
+                break
+            }
+            
+        }
+        
+        // TODO: allow users to upgrade from monthly to yearly (plans.count == 2)
         purchaseProductWithPlan(uniquePlan)
     }
 
