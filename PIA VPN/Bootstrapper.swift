@@ -106,7 +106,9 @@ class Bootstrapper {
         
         Client.configuration.setPlan(.yearly, forProductIdentifier: AppConstants.InApp.yearlyProductIdentifier)
         Client.configuration.setPlan(.monthly, forProductIdentifier: AppConstants.InApp.monthlyProductIdentifier)
-        
+        Client.configuration.setPlan(.legacyYearly, forProductIdentifier: AppConstants.LegacyInApp.yearlyProductIdentifier)
+        Client.configuration.setPlan(.legacyMonthly, forProductIdentifier: AppConstants.LegacyInApp.monthlyProductIdentifier)
+
         if (self.isSimulator || Flags.shared.usesMockVPN) {
             Client.configuration.enablesConnectivityUpdates = false
             Client.useMockVPNProvider()
