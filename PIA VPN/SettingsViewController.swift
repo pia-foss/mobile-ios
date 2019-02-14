@@ -40,8 +40,6 @@ enum Setting: Int {
     
     case automaticReconnection
 
-    case trustCellularData
-
     case trustedNetworks
 
     case contentBlockerState
@@ -99,8 +97,6 @@ class SettingsViewController: AutolayoutViewController {
         case encryption
 
         case applicationSettings
-
-        case cellularData
         
         case autoConnectSettings
 
@@ -117,7 +113,6 @@ class SettingsViewController: AutolayoutViewController {
         .connection,
         .encryption,
         .applicationSettings,
-        .cellularData,
         .autoConnectSettings,
         .applicationInformation,
         .reset,
@@ -139,9 +134,6 @@ class SettingsViewController: AutolayoutViewController {
             .encryptionHandshake
         ],
         .applicationSettings: [], // dynamic
-        .cellularData: [
-            .trustCellularData
-        ],
         .autoConnectSettings: [
             .trustedNetworks
         ],
@@ -182,8 +174,6 @@ class SettingsViewController: AutolayoutViewController {
     private lazy var switchContentBlocker = FakeSwitch()
     
     private lazy var switchDarkMode = UISwitch()
-
-    private lazy var switchCellularData = UISwitch()
 
     private lazy var imvSelectedOption = UIImageView(image: Asset.accessorySelected.image)
 
@@ -245,7 +235,6 @@ class SettingsViewController: AutolayoutViewController {
 //        switchContentBlocker.isGrayed = true
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
         switchDarkMode.addTarget(self, action: #selector(toggleDarkMode(_:)), for: .valueChanged)
-        switchCellularData.addTarget(self, action: #selector(toggleCellularData(_:)), for: .valueChanged)
         redisplaySettings()
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshContentBlockerState), name: .UIApplicationDidBecomeActive, object: nil)
@@ -294,12 +283,6 @@ class SettingsViewController: AutolayoutViewController {
         reportUpdatedPreferences()
     }
     
-    @objc private func toggleCellularData(_ sender: UISwitch) {
-        pendingPreferences.trustCellularData = sender.isOn
-        redisplaySettings()
-        reportUpdatedPreferences()
-    }
-
     // XXX: no need to bufferize app preferences
     @objc private func toggleDarkMode(_ sender: UISwitch) {
         AppPreferences.shared.transitionTheme(to: sender.isOn ? .dark : .light)
@@ -658,7 +641,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .applicationSettings:
             return L10n.Settings.ApplicationSettings.title
            
-        case .autoConnectSettings, .cellularData:
+        case .autoConnectSettings:
             return nil
 
         case .contentBlocker:
@@ -685,9 +668,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 footer.append(L10n.Settings.ApplicationSettings.Mace.footer)
             }
             return footer.joined(separator: "\n\n")
-
-        case .cellularData:
-            return L10n.Settings.Hotspothelper.Cellular.description
 
         case .autoConnectSettings:
             return L10n.Settings.Hotspothelper.description
@@ -882,19 +862,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.textLabel?.text = "Password"
             cell.detailTextLabel?.text = Client.providers.accountProvider.currentUser?.credentials.password ?? ""
             cell.accessoryType = .none
-        case .trustCellularData:
-            cell.textLabel?.text = L10n.Settings.Hotspothelper.Cellular.title
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchCellularData
-            cell.selectionStyle = .none
-            switchCellularData.isOn = pendingPreferences.trustCellularData
-
         case .trustedNetworks:
             cell.textLabel?.text = L10n.Settings.Hotspothelper.title
-            cell.detailTextLabel?.text = Client.preferences.useWiFiProtection ?
-                L10n.Global.enabled :
-                L10n.Global.disabled
-
         }
 
         Theme.current.applySolidLightBackground(cell)

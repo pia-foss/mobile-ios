@@ -18,9 +18,12 @@ class TrustedNetworksViewController: AutolayoutViewController {
     private var hotspotHelper: PIAHotspotHelper!
     private lazy var switchWiFiProtection = UISwitch()
     private lazy var switchAutoJoinAllNetworks = UISwitch()
+    private lazy var switchCellularData = UISwitch()
 
     private enum Sections: Int, EnumsBuilder {
-        case useVpnWifiProtection = 0
+        
+        case cellularData = 0
+        case useVpnWifiProtection
         case autoConnectAllNetworksSettings
         case current
         case available
@@ -37,6 +40,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
         self.hotspotHelper = PIAHotspotHelper(withDelegate: self)
         self.switchAutoJoinAllNetworks.addTarget(self, action: #selector(toggleAutoconnectWithAllNetworks(_:)), for: .valueChanged)
         self.switchWiFiProtection.addTarget(self, action: #selector(toggleUseWiFiProtection(_:)), for: .valueChanged)
+        self.switchCellularData.addTarget(self, action: #selector(toggleCellularData(_:)), for: .valueChanged)
 
         configureTableView()
     }
@@ -82,6 +86,12 @@ class TrustedNetworksViewController: AutolayoutViewController {
         }
     }
 
+    @objc private func toggleCellularData(_ sender: UISwitch) {
+        let preferences = Client.preferences.editable()
+        preferences.trustCellularData = sender.isOn
+        preferences.commit()
+    }
+
     // MARK: Private Methods
     private func configureTableView() {
         if #available(iOS 11, *) {
@@ -115,19 +125,21 @@ class TrustedNetworksViewController: AutolayoutViewController {
 extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Client.preferences.useWiFiProtection ? Sections.countCases() : 1
+        return Client.preferences.useWiFiProtection ? Sections.countCases() : 2
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch Sections.objectIdentifyBy(index: section) {
         case .useVpnWifiProtection:
-            return L10n.Settings.Hotspothelper.title.uppercased()
+            return L10n.Settings.Hotspothelper.Wifi.networks.uppercased()
         case .current:
             return L10n.Settings.Trusted.Networks.Sections.current.uppercased()
         case .available:
             return L10n.Settings.Trusted.Networks.Sections.available.uppercased()
         case .trusted:
             return L10n.Settings.Trusted.Networks.Sections.trusted.uppercased()
+        case .cellularData:
+            return L10n.Settings.Hotspothelper.Cellular.networks.uppercased()
         default:
             return nil
         }
@@ -141,6 +153,8 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
             return L10n.Settings.Trusted.Networks.message
         case .autoConnectAllNetworksSettings:
             return L10n.Settings.Hotspothelper.All.description
+        case .cellularData:
+            return L10n.Settings.Hotspothelper.Cellular.description
         case .available:
             return availableNetworks.isEmpty ?
                 L10n.Settings.Hotspothelper.Available.help :
@@ -195,10 +209,17 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
             switchAutoJoinAllNetworks.isOn = Client.preferences.shouldConnectForAllNetworks
         case .useVpnWifiProtection:
             cell.imageView?.image = nil
-            cell.textLabel?.text = L10n.Global.enabled
+            cell.textLabel?.text = L10n.Settings.Hotspothelper.Wifi.Trust.title
             cell.accessoryView = switchWiFiProtection
             cell.selectionStyle = .none
             switchWiFiProtection.isOn = Client.preferences.useWiFiProtection
+        case .cellularData:
+            cell.imageView?.image = nil
+            cell.textLabel?.text = L10n.Settings.Hotspothelper.Cellular.title
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchCellularData
+            cell.selectionStyle = .none
+            switchCellularData.isOn = Client.preferences.trustCellularData
 
         }
 

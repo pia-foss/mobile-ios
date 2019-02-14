@@ -104,10 +104,10 @@ DEPENDENCIES:
   - HockeySDK
   - iRate
   - MBProgressHUD
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `d266916`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `d266916`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `d266916`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `d266916`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `dee3c84`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `dee3c84`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `dee3c84`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `dee3c84`)
   - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `269d6d1`)
   - SideMenu (= 3.1.5)
   - TPKeyboardAvoiding
@@ -138,7 +138,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :commit: d266916
+    :commit: dee3c84
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
     :commit: 269d6d1
@@ -146,7 +146,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PIALibrary:
-    :commit: d266916
+    :commit: dee3c84
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
     :commit: 269d6d1
@@ -177,6 +177,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 4dd18d15840913997a7adb96c2198d80a476a3ed
+PODFILE CHECKSUM: e3c928438759e03526dd20aa361155c37ad097b9
 
 COCOAPODS: 1.5.3
