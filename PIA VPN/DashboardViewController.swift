@@ -350,12 +350,14 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     @objc private func viewHasRotated() {
-        if tileModeStatus == .edit,
-            let tileLayout = collectionView.collectionViewLayout as? TileFlowLayout {
-            tileLayout.removeDraggingViewFromSuperView()
+        if Client.providers.accountProvider.isLoggedIn {
+            if tileModeStatus == .edit,
+                let tileLayout = collectionView.collectionViewLayout as? TileFlowLayout {
+                tileLayout.removeDraggingViewFromSuperView()
+            }
+            updateCurrentStatus()
+            updateTileLayout()
         }
-        updateCurrentStatus()
-        updateTileLayout()
     }
 
     @objc private func accountDidLogout(notification: Notification) {

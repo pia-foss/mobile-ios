@@ -871,9 +871,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             
         case .trustedNetworks:
             cell.textLabel?.text = L10n.Settings.Hotspothelper.title
-            cell.detailTextLabel?.text = Client.preferences.useWiFiProtection ?
-                L10n.Global.enabled :
-                L10n.Global.disabled
             
         case .publicUsername:
             cell.textLabel?.text = "Public username"
