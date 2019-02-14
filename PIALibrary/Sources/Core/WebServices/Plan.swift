@@ -17,6 +17,12 @@ public enum Plan: String {
     /// Plan expires/renews after one year.
     case yearly
     
+    /// Plan expires/renews after one month (price before 2019).
+    case legacyMonthly
+    
+    /// Plan expires/renews after one year (price before 2019).
+    case legacyYearly
+
     /// It's a trial plan.
     case trial
 

@@ -449,14 +449,14 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             case .trial:
                 callback?(nil, ClientError.renewingTrial)
                 return
-                
             case .monthly:
-//                callback?([.monthly, .yearly], nil)
                 callback?([.monthly], nil)
-
             case .yearly:
                 callback?([.yearly], nil)
-
+            case .legacyMonthly:
+                callback?([.legacyMonthly], nil)
+            case .legacyYearly:
+                callback?([.yearly], nil)
             case .other:
                 callback?(nil, ClientError.renewingNonRenewable)
             }

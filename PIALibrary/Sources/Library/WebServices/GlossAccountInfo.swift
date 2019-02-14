@@ -14,6 +14,7 @@ class GlossAccountInfo: GlossParser {
     
     required init?(json: JSON) {
         let email: String? = "email" <~~ json
+        let productId: String? = "product_id" <~~ json
         let plan: Plan = "plan" <~~ json ?? .other
         guard let isRenewable: Bool = "renewable" <~~ json else {
             return nil
@@ -35,6 +36,7 @@ class GlossAccountInfo: GlossParser {
         parsed = AccountInfo(
             email: email,
             plan: plan,
+            productId: productId,
             isRenewable: isRenewable,
             isRecurring: isRecurring,
             expirationDate: Date(timeIntervalSince1970: expirationTime),
@@ -49,6 +51,7 @@ extension AccountInfo: JSONEncodable {
     public func toJSON() -> JSON? {
         return jsonify([
             "email" ~~> email,
+            "product_id" ~~> productId,
             "plan" ~~> plan.rawValue,
             "renewable" ~~> isRenewable,
             "recurring" ~~> isRecurring,
