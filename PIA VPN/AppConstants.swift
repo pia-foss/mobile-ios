@@ -29,8 +29,12 @@ struct AppConstants {
     }
 
     struct InApp {
+        static let yearlyProductIdentifier = "com.privateinternetaccess.ios.iap.2019.1year"
+        static let monthlyProductIdentifier = "com.privateinternetaccess.ios.iap.2019.1month"
+    }
+    
+    struct LegacyInApp {
         static let yearlyProductIdentifier = "com.privateinternetaccess.ios.iap.1year"
-        
         static let monthlyProductIdentifier = "com.privateinternetaccess.ios.iap.1month"
     }
     
