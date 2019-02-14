@@ -17,7 +17,7 @@ extension Client {
         /// If `true`, expose development features.
         public var isDevelopment: Bool
 
-        let publicKey: SecKey
+        var publicKey: SecKey?
         
         // MARK: WebServices
         
@@ -125,6 +125,10 @@ extension Client {
         /// The value of the max of servers appearing in the quick connect tile.
         public var maxQuickConnectServers: Int
 
+        // MARK: Access to Data PublicKey
+        private let accessQueue = DispatchQueue(label: "SynchronizedDataAccess",
+                                                attributes: .concurrent)
+        
         // MARK: Initialization
         
         init() {
@@ -134,24 +138,7 @@ extension Client {
             let errorMessage = {
                 return "Cannot load PIA public key"
             }
-            if let publicKey = database.secure.publicKeyEntry() {
-                self.publicKey = publicKey
-            } else {
-                guard let pubKeyFile = bundle.path(forResource: "PIA", ofType: "pub") else {
-                    fatalError(errorMessage())
-                }
-                guard let pubKeyData = try? Data(contentsOf: URL(fileURLWithPath: pubKeyFile)) else {
-                    fatalError(errorMessage())
-                }
-                guard let strippedData = pubKeyData.withStrippedASN1Header() else {
-                    fatalError(errorMessage())
-                }
-                guard let publicKey = database.secure.setPublicKey(withData: strippedData) else {
-                    fatalError(errorMessage())
-                }
-                self.publicKey = publicKey
-            }
-
+            
             let production = "https://www.privateinternetaccess.com"
             baseUrls = [
                 .production: production
@@ -208,6 +195,26 @@ extension Client {
             #endif
             
             maxQuickConnectServers = 6
+            
+            if let publicKey = database.secure.publicKeyEntry() {
+                self.publicKey = publicKey
+            } else {
+                accessQueue.sync {
+                    guard let pubKeyFile = bundle.path(forResource: "PIA", ofType: "pub") else {
+                        fatalError(errorMessage())
+                    }
+                    guard let pubKeyData = try? Data(contentsOf: URL(fileURLWithPath: pubKeyFile)) else {
+                        fatalError(errorMessage())
+                    }
+                    guard let strippedData = pubKeyData.withStrippedASN1Header() else {
+                        fatalError(errorMessage())
+                    }
+                    guard let publicKey = database.secure.setPublicKey(withData: strippedData) else {
+                        fatalError(errorMessage())
+                    }
+                    self.publicKey = publicKey
+                }
+            }
         }
         
         // MARK: WebServices

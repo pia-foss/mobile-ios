@@ -195,8 +195,9 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                 callback?(nil, ClientError.malformedResponseData)
                 return
             }
-            if self.accessedConfiguration.verifiesServersSignature {
-                guard response.verifySignature(publicKey: self.accessedConfiguration.publicKey) else {
+            if self.accessedConfiguration.verifiesServersSignature,
+                let key = self.accessedConfiguration.publicKey {
+                guard response.verifySignature(publicKey: key) else {
                     callback?(nil, ClientError.badServersSignature)
                     return
                 }

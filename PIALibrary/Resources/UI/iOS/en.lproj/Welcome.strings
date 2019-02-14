@@ -10,7 +10,7 @@
 "login.username.placeholder" = "Username (p1234567)";
 "login.password.placeholder" = "Password";
 "login.submit" = "LOGIN";
-"login.restore.button" = "Couldn't get your plan?";
+"login.restore.button" = "Didn't receive account details?";
 "login.error.title" = "Log in";
 "login.error.validation" = "You must enter a username and password.";
 "login.error.unauthorized" = "Your username or password is incorrect.";

@@ -30,11 +30,6 @@ public class IKEv2Profile: NetworkExtensionProfile {
     }
     
     /// :nodoc:
-    public static var usernameAuthPrefix: String {
-        return "token_"
-    }
-    
-    /// :nodoc:
     public static var isTunnel: Bool {
         return false
     }
@@ -153,9 +148,9 @@ public class IKEv2Profile: NetworkExtensionProfile {
     /// :nodoc:
     public func generatedProtocol(withConfiguration configuration: VPNConfiguration) -> NEVPNProtocol {
         
-        var iKEv2Username = IKEv2Profile.usernameAuthPrefix
-        if let username = Client.providers.accountProvider.publicUsername {
-            iKEv2Username += username
+        var iKEv2Username = ""
+        if let username = Client.providers.accountProvider.currentUser?.credentials.username {
+            iKEv2Username = username
         }
         
         let cfg = NEVPNProtocolIKEv2()

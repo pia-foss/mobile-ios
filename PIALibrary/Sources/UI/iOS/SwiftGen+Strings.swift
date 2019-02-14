@@ -158,7 +158,7 @@ internal enum L10n {
         internal static let placeholder = L10n.tr("Welcome", "login.password.placeholder")
       }
       internal enum Restore {
-        /// Couldn't get your plan?
+        /// Didn't receive account details?
         internal static let button = L10n.tr("Welcome", "login.restore.button")
       }
       internal enum Username {
