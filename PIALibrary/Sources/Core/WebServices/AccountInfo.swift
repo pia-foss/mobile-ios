@@ -17,6 +17,9 @@ public struct AccountInfo {
     /// The currently subscribed `Plan`.
     public let plan: Plan
     
+    /// The product id for the current subscription
+    public let productId: String?
+    
     /// Returns `true` if the account is eligible for renewal.
     ///
     /// - Seealso: `AccountProvider.renew(...)`

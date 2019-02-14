@@ -53,6 +53,9 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     /// Fakes `AccountInfo.email`.
     public var mockEmail: String = "mock@email.com"
 
+    /// Fakes `AccountInfo.product_id`.
+    public var mockProductId: String = "com.privateinternetaccess.ios.iap.2019.1month"
+
     /// Fakes `AccountInfo.plan`.
     public var mockPlan: Plan = .monthly
     
@@ -88,6 +91,7 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
             return AccountInfo(
                 email: self.mockEmail,
                 plan: self.mockPlan,
+                productId: self.mockProductId,
                 isRenewable: self.mockIsRenewable,
                 isRecurring: self.mockIsRecurring,
                 expirationDate: self.mockExpirationDate,
