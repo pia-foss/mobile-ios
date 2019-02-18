@@ -477,6 +477,10 @@ internal enum L10n {
         /// VPN WiFi Protection automatically enables the VPN when connecting to untrusted networks if this option is enabled.
         internal static let description = L10n.tr("Localizable", "settings.hotspothelper.enable.description")
       }
+      internal enum Rules {
+        /// Rules
+        internal static let title = L10n.tr("Localizable", "settings.hotspothelper.rules.title")
+      }
       internal enum Wifi {
         /// WiFi networks
         internal static let networks = L10n.tr("Localizable", "settings.hotspothelper.wifi.networks")
@@ -519,6 +523,24 @@ internal enum L10n {
           internal static let current = L10n.tr("Localizable", "settings.trusted.networks.sections.current")
           /// Trusted networks
           internal static let trusted = L10n.tr("Localizable", "settings.trusted.networks.sections.trusted")
+          /// Untrusted networks
+          internal static let untrusted = L10n.tr("Localizable", "settings.trusted.networks.sections.untrusted")
+          internal enum Trusted {
+            internal enum Rule {
+              /// Disconnect from PIA VPN
+              internal static let action = L10n.tr("Localizable", "settings.trusted.networks.sections.trusted.rule.action")
+              /// Perform actions when joining trusted networks.
+              internal static let description = L10n.tr("Localizable", "settings.trusted.networks.sections.trusted.rule.description")
+            }
+          }
+          internal enum Untrusted {
+            internal enum Rule {
+              /// Connect to PIA VPN
+              internal static let action = L10n.tr("Localizable", "settings.trusted.networks.sections.untrusted.rule.action")
+              /// Perform actions when joining untrusted networks.
+              internal static let description = L10n.tr("Localizable", "settings.trusted.networks.sections.untrusted.rule.description")
+            }
+          }
         }
       }
     }
