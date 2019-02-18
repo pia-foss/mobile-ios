@@ -35,6 +35,10 @@ private protocol PreferencesStore: class {
     var availableNetworks: [String] { get set }
 
     var trustedNetworks: [String] { get set }
+    
+    var connectOnUntrusted: Bool { get set }
+
+    var disconnectOnTrusted: Bool { get set }
 
     func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration?
     
@@ -59,6 +63,8 @@ private extension PreferencesStore {
         vpnCustomConfigurations = source.vpnCustomConfigurations
         availableNetworks = source.availableNetworks
         trustedNetworks = source.trustedNetworks
+        connectOnUntrusted = source.connectOnUntrusted
+        disconnectOnTrusted = source.disconnectOnTrusted
     }
 }
 
@@ -248,6 +254,26 @@ extension Client {
             }
         }
 
+        /// Connect the VPN when joining an untrusted network. True by default
+        public fileprivate(set) var connectOnUntrusted: Bool {
+            get {
+                return accessedDatabase.plain.connectOnUntrusted ?? true
+            }
+            set {
+                accessedDatabase.plain.connectOnUntrusted = newValue
+            }
+        }
+
+        /// Disconnect the VPN when joining a trusted network. False by default
+        public fileprivate(set) var disconnectOnTrusted: Bool {
+            get {
+                return accessedDatabase.plain.disconnectOnTrusted ?? false
+            }
+            set {
+                accessedDatabase.plain.disconnectOnTrusted = newValue
+            }
+        }
+
     }
 }
 
@@ -257,6 +283,7 @@ extension Client.Preferences {
 
     /// Provides a means to edit `Client.Preferences` in a buffered way. Changes can be committed or reverted.
     public class Editable: PreferencesStore {
+        
         fileprivate var target: Client.Preferences?
         
         fileprivate init() {
@@ -272,6 +299,8 @@ extension Client.Preferences {
             vpnCustomConfigurations = [:]
             availableNetworks = []
             trustedNetworks = []
+            connectOnUntrusted = true
+            disconnectOnTrusted = false
         }
 
         /**
@@ -332,6 +361,12 @@ extension Client.Preferences {
 
         /// :nodoc:
         public var trustedNetworks: [String]
+        
+        /// :nodoc:
+        public var connectOnUntrusted: Bool
+        
+        /// :nodoc:
+        public var disconnectOnTrusted: Bool
 
         /// :nodoc:
         public func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration? {
@@ -359,6 +394,12 @@ extension Client.Preferences {
                 queue.append(VPNActionReinstall())
             }
             if (trustCellularData != target.trustCellularData) {
+                queue.append(VPNActionDisconnectAndReinstall())
+            }
+            if (connectOnUntrusted != target.connectOnUntrusted) {
+                queue.append(VPNActionDisconnectAndReinstall())
+            }
+            if (disconnectOnTrusted != target.disconnectOnTrusted) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
             if (vpnDisconnectsOnSleep != target.vpnDisconnectsOnSleep) {
