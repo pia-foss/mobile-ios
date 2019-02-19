@@ -11,7 +11,7 @@
 "login.error.unauthorized" = "Brukernavnet eller passordet ditt er feil.";
 "login.error.validation" = "Du må oppgi et brukernavn og passord.";
 "login.password.placeholder" = "Passord";
-"login.restore.button" = "Kunne du ikke få abonnementet?";
+"login.restore.button" = "Har du ikke fått kontodetaljene?";
 "login.submit" = "LOGG INN";
 "login.title" = "Logg inn på kontoen din";
 "login.username.placeholder" = "Brukernavn (p1234567)";

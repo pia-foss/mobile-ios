@@ -11,7 +11,7 @@
 "login.error.unauthorized" = "Kullanıcı adınız ya da şifreniz hatalı.";
 "login.error.validation" = "Bir kullanıcı adı ve şifre girmelisiniz.";
 "login.password.placeholder" = "Şifre";
-"login.restore.button" = "Planınızı alamadınız mı?";
+"login.restore.button" = "Hesap bilgilerinizi almadınız mı?";
 "login.submit" = "GİRİŞ YAP";
 "login.title" = "Hesabınıza giriş yapın";
 "login.username.placeholder" = "Kullanıcı Adı (p1234567)";

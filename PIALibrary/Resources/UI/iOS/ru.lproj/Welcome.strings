@@ -11,7 +11,7 @@
 "login.error.unauthorized" = "Неправильное имя пользователя или пароль.";
 "login.error.validation" = "Нужно ввести имя пользователя и пароль.";
 "login.password.placeholder" = "Пароль";
-"login.restore.button" = "Не получили свой план?";
+"login.restore.button" = "Не получили данные учетной записи?";
 "login.submit" = "ВХОД";
 "login.title" = "Войдите в свою учетную запсь";
 "login.username.placeholder" = "Имя пользователя (p1234567)";

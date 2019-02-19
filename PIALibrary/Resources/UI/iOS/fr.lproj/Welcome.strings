@@ -11,7 +11,7 @@
 "login.error.unauthorized" = "Votre nom d'utilisateur ou mot de passe est incorrect.";
 "login.error.validation" = "Vous devez saisir un nom d'utilisateur et un mot de passe.";
 "login.password.placeholder" = "Mot de passe";
-"login.restore.button" = "Vous n'avez pas pu obtenir votre forfait ?";
+"login.restore.button" = "Vous n'avez pas reçu les détails de votre compte ?";
 "login.submit" = "CONNEXION";
 "login.title" = "Connectez-vous à votre compte";
 "login.username.placeholder" = "Nom d'utilisateur (p1234567)";

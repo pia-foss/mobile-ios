@@ -11,7 +11,7 @@
 "login.error.unauthorized" = "Uw gebruikersnaam of wachtwoord is onjuist.";
 "login.error.validation" = "U moet een gebruikersnaam en wachtwoord invoeren.";
 "login.password.placeholder" = "Wachtwoord";
-"login.restore.button" = "Werkt uw abonnement niet?";
+"login.restore.button" = "Geen accountgegevens ontvangen?";
 "login.submit" = "INLOGGEN";
 "login.title" = "Aanmelden bij uw account";
 "login.username.placeholder" = "Gebruikersnaam (p1234567)";

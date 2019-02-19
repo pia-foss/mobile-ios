@@ -11,7 +11,7 @@
 "login.error.unauthorized" = "Dein Benutzername oder Passwort ist falsch.";
 "login.error.validation" = "Du musst einen Benutzernamen und ein Passwort angeben.";
 "login.password.placeholder" = "Passwort";
-"login.restore.button" = "Dein Plan ist nicht verfügbar?";
+"login.restore.button" = "Keine Kontodaten erhalten?";
 "login.submit" = "ANMELDEN";
 "login.title" = "An deinem Konto anmelden";
 "login.username.placeholder" = "Benutzername (p1234567)";

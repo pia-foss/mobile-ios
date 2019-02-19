@@ -11,7 +11,7 @@
 "login.error.unauthorized" = "您的用户名或密码不正确。";
 "login.error.validation" = "您必须输入用户名和密码。";
 "login.password.placeholder" = "密码";
-"login.restore.button" = "无法获取套餐？";
+"login.restore.button" = "没有收到账户详情？";
 "login.submit" = "登录";
 "login.title" = "登录到您的帐户";
 "login.username.placeholder" = "用户名 (p1234567)";

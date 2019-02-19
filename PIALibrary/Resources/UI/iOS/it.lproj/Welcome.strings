@@ -11,7 +11,7 @@
 "login.error.unauthorized" = "Nome utente o password non valida";
 "login.error.validation" = "Devi inserire un nome utente e una password.";
 "login.password.placeholder" = "Password";
-"login.restore.button" = "Non hai potuto ottenere il tuo piano?";
+"login.restore.button" = "Non hai ancora ricevuto i dettagli dell'account?";
 "login.submit" = "ACCEDI";
 "login.title" = "Accedi al tuo account";
 "login.username.placeholder" = "Nome utente (p1234567)";

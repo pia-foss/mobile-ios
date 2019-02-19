@@ -11,7 +11,7 @@
 "login.error.unauthorized" = "ユーザー名またはパスワードが間違っています。";
 "login.error.validation" = "ユーザー名とパスワードを入力してください。";
 "login.password.placeholder" = "パスワード";
-"login.restore.button" = "プランを取得できませんでしたか？";
+"login.restore.button" = "アカウント詳細を受信しませんでしたか？";
 "login.submit" = "ログイン";
 "login.title" = "アカウントにサインイン";
 "login.username.placeholder" = "ユーザー名 (p1234567)";

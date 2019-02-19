@@ -11,7 +11,7 @@
 "login.error.unauthorized" = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
 "login.error.validation" = "คุณต้องกรอกชื่อผู้ใช้และรหัสผ่าน";
 "login.password.placeholder" = "รหัสผ่าน";
-"login.restore.button" = "ไม่สามารถเลือกแผนของคุณได้?";
+"login.restore.button" = "ยังไม่ได้รับรายละเอียดบัญชีหรือ";
 "login.submit" = "เข้าสู่ระบบ";
 "login.title" = "ลงชื่อเข้าใช้บัญชีของคุณ";
 "login.username.placeholder" = "ชื่อผู้ใช้ (p1234567)";

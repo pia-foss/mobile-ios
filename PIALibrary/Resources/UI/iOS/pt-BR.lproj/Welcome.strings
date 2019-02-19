@@ -11,7 +11,7 @@
 "login.error.unauthorized" = "Seu nome de usuário ou senha está incorreto.";
 "login.error.validation" = "Você deve inserir um nome de usuário e senha.";
 "login.password.placeholder" = "Senha";
-"login.restore.button" = "Não consegue obter seu plano?";
+"login.restore.button" = "Não recebeu detalhes da conta?";
 "login.submit" = "ENTRAR";
 "login.title" = "Entre na sua conta";
 "login.username.placeholder" = "Nome de usuário (p1234567)";
