@@ -50,7 +50,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         static let trustCellularData = "TrustCellularData"
 
-        static let authMigrationSuccess = "TokenMigrationSuccess"
+        static let authMigrationSuccess = "AuthenticationTokenMigrationSuccess"
 
         static let shouldConnectForAllNetworks = "ShouldConnectForAllNetworks"
 
