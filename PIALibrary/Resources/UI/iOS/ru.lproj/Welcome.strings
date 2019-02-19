@@ -15,7 +15,7 @@
 "login.purchase.footer" = "Нет учетной записи?";
 "login.redeem.button" = "Использовать";
 "login.redeem.footer" = "Есть подарочная или триальная карта?";
-"login.restore.button" = "Не получили свой план?";
+"login.restore.button" = "Не получили данные учетной записи?";
 "login.submit" = "ВХОД";
 "login.title" = "Войдите в свою учетную запсь";
 "login.username.placeholder" = "Имя пользователя (p1234567)";

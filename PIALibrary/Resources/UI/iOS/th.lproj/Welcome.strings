@@ -15,7 +15,7 @@
 "login.purchase.footer" = "ไม่มีบัญชี?";
 "login.redeem.button" = "ใช้สิทธิ์ตอนนี้";
 "login.redeem.footer" = "มีบัตรของขวัญหรือบัตรทดลองใช้หรือไม่";
-"login.restore.button" = "ไม่สามารถเลือกแผนของคุณได้?";
+"login.restore.button" = "ยังไม่ได้รับรายละเอียดบัญชีหรือ";
 "login.submit" = "เข้าสู่ระบบ";
 "login.title" = "ลงชื่อเข้าใช้บัญชีของคุณ";
 "login.username.placeholder" = "ชื่อผู้ใช้ (p1234567)";

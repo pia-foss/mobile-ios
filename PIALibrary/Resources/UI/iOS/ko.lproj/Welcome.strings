@@ -15,7 +15,7 @@
 "login.purchase.footer" = "계정이 없으세요?";
 "login.redeem.button" = "지금 청구";
 "login.redeem.footer" = "기프트 카드나 체험 카드가 있으세요?";
-"login.restore.button" = "이용 플랜이 확인되지 않습니까?";
+"login.restore.button" = "계정 정보를 받지 못하셨습니까?";
 "login.submit" = "로그인";
 "login.title" = "계정에 로그인";
 "login.username.placeholder" = "사용자 이름 (p1234567)";

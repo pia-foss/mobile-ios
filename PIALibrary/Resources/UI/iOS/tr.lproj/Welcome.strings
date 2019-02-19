@@ -15,7 +15,7 @@
 "login.purchase.footer" = "Hesabınız yok mu?";
 "login.redeem.button" = "Şimdi kullanın";
 "login.redeem.footer" = "Bir hediye kartınız ya da deneme kartınız mı var?";
-"login.restore.button" = "Planınızı alamadınız mı?";
+"login.restore.button" = "Hesap bilgilerinizi almadınız mı?";
 "login.submit" = "GİRİŞ YAP";
 "login.title" = "Hesabınıza giriş yapın";
 "login.username.placeholder" = "Kullanıcı Adı (p1234567)";

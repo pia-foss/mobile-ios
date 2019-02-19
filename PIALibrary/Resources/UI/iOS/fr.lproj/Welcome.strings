@@ -15,7 +15,7 @@
 "login.purchase.footer" = "Pas de compte ?";
 "login.redeem.button" = "Échangez maintenant";
 "login.redeem.footer" = "Vous avez une carte cadeau ou une carte d'essai ?";
-"login.restore.button" = "Vous n'avez pas pu obtenir votre forfait ?";
+"login.restore.button" = "Vous n'avez pas reçu les détails de votre compte ?";
 "login.submit" = "CONNEXION";
 "login.title" = "Connectez-vous à votre compte";
 "login.username.placeholder" = "Nom d'utilisateur (p1234567)";
