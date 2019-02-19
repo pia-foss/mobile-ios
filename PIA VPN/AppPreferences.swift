@@ -176,11 +176,11 @@ class AppPreferences {
         defaults.set(AppPreferences.currentVersion, forKey: Entries.version)
         
         guard (oldVersion == nil) else {
-            if oldVersion != AppPreferences.currentVersion ||
-                !Client.preferences.authMigrationSuccess { //First time for each update or if the auth token has not been updated
+            if oldVersion != AppPreferences.currentVersion {
                 migrateAPItoV2()
-                refreshAPIToken()
             }
+            //First time for each update or if the auth token has not been updated
+            refreshAPIToken()
             return
         }
 
