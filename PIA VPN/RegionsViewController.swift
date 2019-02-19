@@ -96,6 +96,11 @@ class RegionsViewController: AutolayoutViewController {
     // MARK: Actions
     @objc private func showFilter(_ sender: Any?) {
         
+        if searchController.isActive {
+            searchController.searchBar.text = ""
+            searchController.dismiss(animated: false)
+        }
+        
         let popup = PopupDialog(title: nil,
                                 message: L10n.Region.Filter.sortby.uppercased())
         
