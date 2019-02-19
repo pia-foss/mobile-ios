@@ -106,8 +106,8 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
         loginButton.setRounded()
         buyButton.setRounded()
         
-        loginButton.style(style: TextStyle.Buttons.piaGreenButton)
-        buyButton.style(style: TextStyle.Buttons.piaPlainTextButton)
+        buyButton.style(style: TextStyle.Buttons.piaGreenButton)
+        loginButton.style(style: TextStyle.Buttons.piaPlainTextButton)
         
         loginButton.setTitle(L10n.Welcome.Login.submit.uppercased(),
                              for: [])
@@ -129,7 +129,7 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
         Theme.current.applyPrincipalBackground(viewHeader)
         Theme.current.applyVersionNumberStyle(labelVersion)
         Theme.current.applyCenteredMap(centeredMap)
-        Theme.current.applyTransparentButton(buyButton,
+        Theme.current.applyTransparentButton(loginButton,
                                              withSize: 1.0)
         Theme.current.applyButtonLabelStyle(redeemButton)
         Theme.current.applyButtonLabelStyle(couldNotGetPlanButton)
