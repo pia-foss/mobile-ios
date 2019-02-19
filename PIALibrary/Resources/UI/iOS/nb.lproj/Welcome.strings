@@ -15,7 +15,7 @@
 "login.purchase.footer" = "Har du ikke konto?";
 "login.redeem.button" = "Løs inn nå";
 "login.redeem.footer" = "Har du gavekort eller prøvekort?";
-"login.restore.button" = "Kunne du ikke få abonnementet?";
+"login.restore.button" = "Har du ikke fått kontodetaljene?";
 "login.submit" = "LOGG INN";
 "login.title" = "Logg inn på kontoen din";
 "login.username.placeholder" = "Brukernavn (p1234567)";

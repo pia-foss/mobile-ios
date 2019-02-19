@@ -15,7 +15,7 @@
 "login.purchase.footer" = "沒有帳號？";
 "login.redeem.button" = "立刻兌換";
 "login.redeem.footer" = "有禮品卡或試用卡嗎？";
-"login.restore.button" = "無法取得您的方案？";
+"login.restore.button" = "收不到帳戶資料？";
 "login.submit" = "登入";
 "login.title" = "登入帳戶";
 "login.username.placeholder" = "使用者名稱（p1234567）";

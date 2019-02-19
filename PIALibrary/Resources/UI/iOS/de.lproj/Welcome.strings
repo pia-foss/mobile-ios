@@ -15,7 +15,7 @@
 "login.purchase.footer" = "Kein Konto?";
 "login.redeem.button" = "Jetzt einlösen";
 "login.redeem.footer" = "Haben Sie eine Geschenkkarte oder Testkarte?";
-"login.restore.button" = "Dein Plan ist nicht verfügbar?";
+"login.restore.button" = "Keine Kontodaten erhalten?";
 "login.submit" = "ANMELDEN";
 "login.title" = "An deinem Konto anmelden";
 "login.username.placeholder" = "Benutzername (p1234567)";

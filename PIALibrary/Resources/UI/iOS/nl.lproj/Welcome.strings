@@ -15,7 +15,7 @@
 "login.purchase.footer" = "Heeft u geen account?";
 "login.redeem.button" = "Nu inwisselen";
 "login.redeem.footer" = "Heeft u een cadeaubon of een proefperiodekaart?";
-"login.restore.button" = "Werkt uw abonnement niet?";
+"login.restore.button" = "Geen accountgegevens ontvangen?";
 "login.submit" = "INLOGGEN";
 "login.title" = "Aanmelden bij uw account";
 "login.username.placeholder" = "Gebruikersnaam (p1234567)";

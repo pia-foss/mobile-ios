@@ -15,7 +15,7 @@
 "login.purchase.footer" = "Non possiedi un account?";
 "login.redeem.button" = "Riscatta ora";
 "login.redeem.footer" = "Hai una carta regalo o una carta di prova?";
-"login.restore.button" = "Non hai potuto ottenere il tuo piano?";
+"login.restore.button" = "Non hai ancora ricevuto i dettagli dell'account?";
 "login.submit" = "ACCEDI";
 "login.title" = "Accedi al tuo account";
 "login.username.placeholder" = "Nome utente (p1234567)";

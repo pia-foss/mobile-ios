@@ -15,7 +15,7 @@
 "login.purchase.footer" = "ليس لديك حساب؟";
 "login.redeem.button" = "استلم الآن";
 "login.redeem.footer" = "هل لديك بطاقة هدية أو بطاقة تجربة؟";
-"login.restore.button" = "لم تتمكن من الحصول على خطتك؟";
+"login.restore.button" = "لم تحصل على تفاصيل الحساب؟";
 "login.submit" = "تسجيل الدخول";
 "login.title" = "سجل الدخول إلى حسابك";
 "login.username.placeholder" = "اسم المستخدم (p1234567)";
