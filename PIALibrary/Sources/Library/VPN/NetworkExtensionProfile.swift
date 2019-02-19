@@ -56,14 +56,23 @@ extension NetworkExtensionProfile {
         }
         
         vpn.localizedDescription = configuration.name
-        if force {
-            vpn.isOnDemandEnabled = configuration.isOnDemand
-        } else {
-            vpn.isOnDemandEnabled = vpn.isOnDemandEnabled && configuration.isOnDemand
-        }
+        vpn.isOnDemandEnabled = configuration.isOnDemand
+        
+        let trustedNetworks = Client.preferences.trustedNetworks
+        let ruleDisconnect = NEOnDemandRuleDisconnect()
+        ruleDisconnect.ssidMatch = trustedNetworks
+        
+        vpn.onDemandRules = []
         
         if vpn.isOnDemandEnabled {
-            vpn.onDemandRules = [NEOnDemandRuleConnect()]
+            let wiFiRule = NEOnDemandRuleConnect()
+            wiFiRule.interfaceTypeMatch = .wiFi
+            vpn.onDemandRules = [wiFiRule]
+            if Client.preferences.useWiFiProtection,
+                Client.preferences.disconnectOnTrusted,
+                trustedNetworks.count > 0 {
+                vpn.onDemandRules?.append(ruleDisconnect)
+            }
         }
 
         //Configure onDemand rules
@@ -71,7 +80,34 @@ extension NetworkExtensionProfile {
             vpn.isOnDemandEnabled = true
             let cellularRule = NEOnDemandRuleConnect()
             cellularRule.interfaceTypeMatch = .cellular
-            vpn.onDemandRules = [cellularRule]
+            vpn.onDemandRules?.append(cellularRule)
+            if Client.preferences.useWiFiProtection,
+                Client.preferences.disconnectOnTrusted,
+                trustedNetworks.count > 0 {
+                vpn.onDemandRules?.append(ruleDisconnect)
+            }
+        } else {
+            //trust cellular data = true
+            if Client.preferences.disconnectOnTrusted {
+                let cellularRule = NEOnDemandRuleDisconnect()
+                cellularRule.interfaceTypeMatch = .cellular
+                vpn.onDemandRules?.append(cellularRule)
+            } else {
+                let cellularRule = NEOnDemandRuleConnect()
+                cellularRule.interfaceTypeMatch = .cellular
+                vpn.onDemandRules?.append(cellularRule)
+            }
+        }
+        
+        if !Client.preferences.connectOnUntrusted {
+            let wiFiRule = NEOnDemandRuleDisconnect()
+            wiFiRule.interfaceTypeMatch = .wiFi
+            vpn.onDemandRules = [wiFiRule]
+            if !Client.preferences.trustCellularData {
+                let cellularRule = NEOnDemandRuleDisconnect()
+                cellularRule.interfaceTypeMatch = .cellular
+                vpn.onDemandRules?.append(cellularRule)
+            }
         }
         
         log.debug("Configured with server: \(protocolConfiguration.serverAddress!)")
