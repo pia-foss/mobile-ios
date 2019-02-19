@@ -396,6 +396,9 @@ extension Client.Preferences {
             if (trustCellularData != target.trustCellularData) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
+            if (trustedNetworks != target.trustedNetworks) {
+                queue.append(VPNActionDisconnectAndReinstall())
+            }
             if (connectOnUntrusted != target.connectOnUntrusted) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
