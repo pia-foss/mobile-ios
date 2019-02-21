@@ -867,6 +867,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryType = .none
         case .trustedNetworks:
             cell.textLabel?.text = L10n.Settings.Hotspothelper.title
+            cell.detailTextLabel?.text = nil
         }
 
         Theme.current.applySolidLightBackground(cell)

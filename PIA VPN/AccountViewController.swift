@@ -270,7 +270,7 @@ class AccountViewController: AutolayoutViewController {
     }
     
     private func establishUncreditedVisibility() {
-        if let info = currentUser?.info, (info.isRenewable && !info.isExpired) {
+        if let info = currentUser?.info, info.isRenewable {
             NSLayoutConstraint.deactivate(constraintsHideUncredited)
             NSLayoutConstraint.activate(constraintsShowUncredited)
             viewSeparator.isHidden = false
