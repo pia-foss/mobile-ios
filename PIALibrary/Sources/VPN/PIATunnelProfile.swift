@@ -85,7 +85,6 @@ public class PIATunnelProfile: NetworkExtensionProfile {
                 return
             }
             
-            vpn.isOnDemandEnabled = false
             vpn.saveToPreferences { (error) in
                 if let error = error {
                     callback?(error)
