@@ -25,7 +25,7 @@
                             <constraint firstAttribute="height" constant="34" id="6GE-p9-jbu"/>
                             <constraint firstAttribute="width" constant="34" id="BJI-EI-k0I"/>
                         </constraints>
-                        <state key="normal" image="eye-active"/>
+                        <state key="normal" image="eye-active-dark"/>
                         <connections>
                             <action selector="changeTileVisibility" destination="gTV-IL-0wX" eventType="touchUpInside" id="bFk-gl-t55"/>
                         </connections>
@@ -63,7 +63,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="eye-active" width="16" height="16"/>
+        <image name="eye-active-dark" width="17" height="11"/>
         <image name="open-tile-details" width="12" height="12"/>
     </resources>
 </document>

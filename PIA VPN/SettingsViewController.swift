@@ -487,6 +487,8 @@ class SettingsViewController: AutolayoutViewController {
         AppPreferences.shared.piaSocketType = pendingOpenVPNSocketType
         //Update with values from Trusted Network Settings
         pendingPreferences.trustedNetworks = Client.preferences.trustedNetworks
+        pendingPreferences.connectOnUntrusted = Client.preferences.connectOnUntrusted
+        pendingPreferences.disconnectOnTrusted = Client.preferences.disconnectOnTrusted
         pendingPreferences.availableNetworks = Client.preferences.availableNetworks
         pendingPreferences.shouldConnectForAllNetworks = Client.preferences.shouldConnectForAllNetworks
         pendingPreferences.useWiFiProtection = Client.preferences.useWiFiProtection
@@ -874,7 +876,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             
         case .trustedNetworks:
             cell.textLabel?.text = L10n.Settings.Hotspothelper.title
-            
+            cell.detailTextLabel?.text = nil
+
         case .publicUsername:
             cell.textLabel?.text = "Public username"
             cell.detailTextLabel?.text = Client.providers.accountProvider.publicUsername ?? ""

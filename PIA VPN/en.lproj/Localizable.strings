@@ -213,7 +213,12 @@
 "settings.hotspothelper.cellular.description" = "PIA automatically enables the VPN when connecting to cellular networks if this option is disabled.";
 "settings.hotspothelper.cellular.networks" = "Cellular networks";
 "settings.hotspothelper.wifi.networks" = "WiFi networks";
-
+"settings.trusted.networks.sections.untrusted" = "Untrusted networks";
+"settings.hotspothelper.rules.title" = "Rules";
+"settings.trusted.networks.sections.trusted.rule.description"= "Perform actions when joining trusted networks.";
+"settings.trusted.networks.sections.untrusted.rule.description"= "Perform actions when joining untrusted networks.";
+"settings.trusted.networks.sections.trusted.rule.action"= "Disconnect from PIA VPN";
+"settings.trusted.networks.sections.untrusted.rule.action"= "Connect to PIA VPN";
 
 // REGION
 
