@@ -34,6 +34,8 @@ extension Notification.Name {
     /// - Seealso: `Client.Daemons`
     public static let PIAServerHasBeenUpdated = Notification.Name("PIAServerHasBeenUpdated")
     
+    public static let PIASettingsHaveChanged = Notification.Name("PIASettingsHaveChanged")
+    
 }
 
 extension NotificationKey {
