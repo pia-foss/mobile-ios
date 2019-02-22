@@ -19,6 +19,8 @@ class TrustedNetworksViewController: AutolayoutViewController {
     private lazy var switchWiFiProtection = UISwitch()
     private lazy var switchAutoJoinAllNetworks = UISwitch()
     private lazy var switchCellularData = UISwitch()
+    var shouldReconnectAutomatically = false
+    var hasUpdatedPreferences = false
 
     private enum Sections: Int, EnumsBuilder {
         
@@ -51,6 +53,16 @@ class TrustedNetworksViewController: AutolayoutViewController {
         filterAvailableNetworks()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if shouldReconnectAutomatically,
+            hasUpdatedPreferences{
+            NotificationCenter.default.post(name: .PIASettingsHaveChanged,
+                                            object: self,
+                                            userInfo: nil)
+        }
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -79,6 +91,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
         let preferences = Client.preferences.editable()
         preferences.useWiFiProtection = sender.isOn
         preferences.commit()
+        hasUpdatedPreferences = true
         filterAvailableNetworks()
         if sender.isOn, //If toggle is ON
             let ssid = UIDevice.current.WiFiSSID, //And we are connected to the WiFi
@@ -92,6 +105,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
         let preferences = Client.preferences.editable()
         preferences.trustCellularData = sender.isOn
         preferences.commit()
+        hasUpdatedPreferences = true
     }
 
     // MARK: Private Methods
@@ -256,9 +270,11 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
         case .available:
             let ssid = availableNetworks[indexPath.row]
             hotspotHelper.saveTrustedNetwork(ssid)
+            hasUpdatedPreferences = true
         case .trusted:
             let ssid = trustedNetworks[indexPath.row]
             hotspotHelper.removeTrustedNetwork(ssid)
+            hasUpdatedPreferences = true
         case .rules:
             self.perform(segue: StoryboardSegue.Main.trustedNetworkRulesSegueIdentifier)
         default:

@@ -26,6 +26,7 @@ class DashboardViewController: AutolayoutViewController {
         case ipTile
         case subscription
         case usage
+        case networkManagementTool
 
         var identifier: String {
             switch self {
@@ -34,6 +35,7 @@ class DashboardViewController: AutolayoutViewController {
             case .region: return "RegionTileCell"
             case .subscription: return "SubscriptionTileCell"
             case .usage: return "UsageTileCell"
+            case .networkManagementTool: return "NMTTileCell"
             }
         }
         
@@ -44,6 +46,7 @@ class DashboardViewController: AutolayoutViewController {
             case .region: return "RegionTileCollectionViewCell"
             case .subscription: return "SubscriptionTileCollectionViewCell"
             case .usage: return "UsageTileCollectionViewCell"
+            case .networkManagementTool: return "NetworkManagementToolTileCollectionViewCell"
             }
         }
     }
@@ -96,6 +99,7 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateCurrentStatus), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateTiles), name: .PIATilesDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(vpnShouldReconnect), name: .PIASettingsHaveChanged, object: nil)
 
 #if !TARGET_IPHONE_SIMULATOR
         let types: UIUserNotificationType = [.alert, .badge, .sound]
@@ -164,22 +168,32 @@ class DashboardViewController: AutolayoutViewController {
         
         switch self.tileModeStatus { //change the status
         case .normal:
-            navigationItem.leftBarButtonItem = UIBarButtonItem(
-                image: Asset.itemMenu.image,
-                style: .plain,
-                target: self,
-                action: #selector(openMenu(_:))
-            )
+            if let leftBarButton = navigationItem.leftBarButtonItem,
+                leftBarButton.accessibilityLabel != L10n.Global.cancel {
+                leftBarButton.image = Asset.itemMenu.image
+                leftBarButton.action = #selector(openMenu(_:))
+            } else {
+                navigationItem.leftBarButtonItem = UIBarButtonItem(
+                    image: Asset.itemMenu.image,
+                    style: .plain,
+                    target: self,
+                    action: #selector(openMenu(_:))
+                )
+            }
             navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.item
             
-            navigationItem.rightBarButtonItem = UIBarButtonItem(
-                image: Asset.Piax.Global.iconEditTile.image,
-                style: .plain,
-                target: self,
-                action: #selector(updateEditTileStatus(_:))
-            )
-            navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.Edit.tile
+            if navigationItem.rightBarButtonItem == nil {
+                navigationItem.rightBarButtonItem = UIBarButtonItem(
+                    image: Asset.Piax.Global.iconEditTile.image,
+                    style: .plain,
+                    target: self,
+                    action: #selector(updateEditTileStatus(_:))
+                )
+                navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.Edit.tile
+            }
+            
         case .edit:
+            
             navigationItem.leftBarButtonItem = UIBarButtonItem(
                 barButtonSystemItem: .stop,
                 target: self,
@@ -187,10 +201,11 @@ class DashboardViewController: AutolayoutViewController {
             )
             navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Global.cancel
             navigationItem.rightBarButtonItem = nil
+            
         }
-
+        
     }
-    
+
     private func setupCollectionView() {
         collectionView.register(UINib(nibName: Cells.ipTile.className,
                                       bundle: nil),
@@ -207,6 +222,9 @@ class DashboardViewController: AutolayoutViewController {
         collectionView.register(UINib(nibName: Cells.usage.className,
                                       bundle: nil),
                                 forCellWithReuseIdentifier: Cells.usage.identifier)
+        collectionView.register(UINib(nibName: Cells.networkManagementTool.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.networkManagementTool.identifier)
         collectionView.backgroundColor = .clear
     }
     
@@ -324,6 +342,8 @@ class DashboardViewController: AutolayoutViewController {
                 return
             }
             menu.delegate = self
+        } else if let nmt = segue.destination as? TrustedNetworksViewController {
+            nmt.shouldReconnectAutomatically = true
         }
     }
     
@@ -368,6 +388,27 @@ class DashboardViewController: AutolayoutViewController {
     
     @objc private func vpnStatusDidChange(notification: Notification) {
         performSelector(onMainThread: #selector(updateCurrentStatusWithUserInfo(_:)), with: notification.userInfo, waitUntilDone: false)
+    }
+    
+    @objc private func vpnShouldReconnect() {
+        if Client.providers.vpnProvider.vpnStatus != .disconnected {
+            let alert = Macros.alert(
+                title,
+                L10n.Settings.Commit.Messages.shouldReconnect
+            )
+            
+            // reconnect -> reconnect VPN and close
+            alert.addActionWithTitle(L10n.Settings.Commit.Buttons.reconnect) {
+                Client.providers.vpnProvider.reconnect(after: nil, { error in
+                })
+            }
+            
+            // later -> close
+            alert.addCancelActionWithTitle(L10n.Settings.Commit.Buttons.later) {
+            }
+            
+            present(alert, animated: true, completion: nil)
+        }
     }
     
     // MARK: Helpers

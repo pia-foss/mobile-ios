@@ -1,27 +1,27 @@
 //
-//  RegionTileCollectionViewCell.swift
+//  NetworkManagementToolTileCollectionViewCell.swift
 //  PIA VPN
 //
-//  Created by Jose Antonio Blaya Garcia on 11/01/2019.
+//  Created by Jose Antonio Blaya Garcia on 22/02/2019.
 //  Copyright © 2019 London Trust Media. All rights reserved.
 //
 
 import UIKit
 import PIALibrary
 
-class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
+class NetworkManagementToolTileCollectionViewCell: UICollectionViewCell, TileableCell {
     
-    var tileType: AvailableTiles = .region
-
-    typealias Entity = RegionTile
+    var tileType: AvailableTiles = .networkManagementTool
+    
+    typealias Entity = NetworkManagementToolTile
     @IBOutlet private weak var tile: Entity!
     @IBOutlet weak var accessoryImageRight: UIImageView!
     @IBOutlet weak var accessoryButtonLeft: UIButton!
     @IBOutlet weak var tileLeftConstraint: NSLayoutConstraint!
-    var tileRightConstraint: NSLayoutConstraint! 
-
+    var tileRightConstraint: NSLayoutConstraint!
+    
     private var currentTileStatus: TileStatus?
-
+    
     func hasDetailView() -> Bool {
         return tile.hasDetailView()
     }
@@ -78,7 +78,7 @@ class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
             accessoryButtonLeft.setImage(Theme.current.activeEyeImage(), for: .highlighted)
         }
     }
-
+    
     @IBAction private func changeTileVisibility() {
         var visibleTiles = Client.providers.tileProvider.visibleTiles
         if Client.providers.tileProvider.visibleTiles.contains(tileType) {

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NMTTileCell" id="6uH-n1-bjH" customClass="NetworkManagementToolTileCollectionViewCell" customModule="PIA_VPN" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="484" height="117"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="484" height="117"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HpK-YS-0fm">
+                        <rect key="frame" x="0.0" y="41.5" width="34" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="34" id="1Bs-88-Kca"/>
+                            <constraint firstAttribute="height" constant="34" id="FNc-om-G3k"/>
+                        </constraints>
+                        <state key="normal" image="eye-active-dark"/>
+                        <connections>
+                            <action selector="changeTileVisibility" destination="6uH-n1-bjH" eventType="touchUpInside" id="8Vf-ux-erl"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="open-tile-details" translatesAutoresizingMaskIntoConstraints="NO" id="8QR-ML-8hB">
+                        <rect key="frame" x="457" y="52.5" width="12" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="8QR-ML-8hB" secondAttribute="height" multiplier="1:1" id="2OV-9a-W8V"/>
+                        </constraints>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bnu-kr-urA" customClass="NetworkManagementToolTile" customModule="PIA_VPN" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="457" height="117"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="8Ss-S0-tXJ"/>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="bnu-kr-urA" firstAttribute="leading" secondItem="6uH-n1-bjH" secondAttribute="leading" id="FMB-4Y-ajt"/>
+                <constraint firstAttribute="bottom" secondItem="bnu-kr-urA" secondAttribute="bottom" id="GSh-Kr-fGn"/>
+                <constraint firstItem="bnu-kr-urA" firstAttribute="top" secondItem="6uH-n1-bjH" secondAttribute="top" id="Hva-HJ-K91"/>
+                <constraint firstAttribute="trailing" secondItem="8QR-ML-8hB" secondAttribute="trailing" constant="15" id="JkO-4s-fmt"/>
+                <constraint firstItem="8QR-ML-8hB" firstAttribute="centerY" secondItem="6uH-n1-bjH" secondAttribute="centerY" id="LLS-72-FlZ"/>
+                <constraint firstItem="8QR-ML-8hB" firstAttribute="leading" secondItem="bnu-kr-urA" secondAttribute="trailing" id="Ri8-id-6ZH"/>
+                <constraint firstItem="HpK-YS-0fm" firstAttribute="leading" secondItem="6uH-n1-bjH" secondAttribute="leading" id="Up4-dS-YPG"/>
+                <constraint firstItem="HpK-YS-0fm" firstAttribute="centerY" secondItem="6uH-n1-bjH" secondAttribute="centerY" id="o0L-Tx-wcU"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Ilo-HR-dRk"/>
+            <size key="customSize" width="484" height="117"/>
+            <connections>
+                <outlet property="accessoryButtonLeft" destination="HpK-YS-0fm" id="22t-LX-t36"/>
+                <outlet property="accessoryImageRight" destination="8QR-ML-8hB" id="xks-oK-i92"/>
+                <outlet property="tile" destination="bnu-kr-urA" id="Ner-zD-Lwm"/>
+                <outlet property="tileLeftConstraint" destination="FMB-4Y-ajt" id="uAN-Ul-whE"/>
+            </connections>
+            <point key="canvasLocation" x="112" y="127.28635682158921"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="eye-active-dark" width="17" height="11"/>
+        <image name="open-tile-details" width="12" height="12"/>
+    </resources>
+</document>
