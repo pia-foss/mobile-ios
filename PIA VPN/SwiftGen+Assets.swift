@@ -122,6 +122,8 @@ enum Asset {
       static let regionSelected = ImageAsset(name: "region-selected")
       static let scrollableMapDark = ImageAsset(name: "scrollableMap-dark")
       static let scrollableMapLight = ImageAsset(name: "scrollableMap-light")
+      static let trustedIcon = ImageAsset(name: "trusted-icon")
+      static let untrustedIcon = ImageAsset(name: "untrusted-icon")
     }
     enum LightMap {
       static let lightMapAUMelbourne = ImageAsset(name: "Light-Map-AU Melbourne")
@@ -509,6 +511,8 @@ enum Asset {
     Piax.Global.regionSelected,
     Piax.Global.scrollableMapDark,
     Piax.Global.scrollableMapLight,
+    Piax.Global.trustedIcon,
+    Piax.Global.untrustedIcon,
     Piax.LightMap.lightMapAUMelbourne,
     Piax.LightMap.lightMapAUSydney,
     Piax.LightMap.lightMapAustria,

@@ -556,6 +556,16 @@ internal enum L10n {
   }
 
   internal enum Tiles {
+    internal enum Nmt {
+      /// Cellular
+      internal static let cellular = L10n.tr("Localizable", "tiles.nmt.cellular")
+      internal enum Accessibility {
+        /// Trusted network
+        internal static let trusted = L10n.tr("Localizable", "tiles.nmt.accessibility.trusted")
+        /// Untrusted network
+        internal static let untrusted = L10n.tr("Localizable", "tiles.nmt.accessibility.untrusted")
+      }
+    }
     internal enum Quick {
       internal enum Connect {
         /// Quick connect

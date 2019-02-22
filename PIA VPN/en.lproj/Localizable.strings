@@ -241,3 +241,7 @@
 "tiles.usage.ipsec.title" = "USAGE (Disabled unless using OpenVPN)";
 "tiles.usage.upload" = "Upload";
 "tiles.usage.download" = "Download";
+"tiles.nmt.cellular" = "Cellular";
+"tiles.nmt.accessibility.trusted" = "Trusted network";
+"tiles.nmt.accessibility.untrusted" = "Untrusted network";
+
