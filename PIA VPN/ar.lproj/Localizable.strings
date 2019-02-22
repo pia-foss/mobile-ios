@@ -36,12 +36,16 @@
 "global.cancel" = "إلغاء";
 "global.clear" = "مسح";
 "global.close" = "إغلاق";
+"global.disabled" = "معطل";
 "global.edit" = "تحرير";
+"global.enabled" = "ممكّن";
 "global.error" = "خطأ";
 "global.ok" = "موافق";
 "global.optional" = "اختياري";
 "global.required" = "مطلوب";
 "global.update" = "تحديث";
+"hotspothelper.display.name" = "🔒 قم بتنشيط حماية VPN WiFi في إعدادات PIA لتأمين هذا الاتصال.";
+"hotspothelper.display.protected.name" = "🔒 حماية VPN WiFi من PIA نشطة - نحن نحمي ظهرك.";
 "menu.accessibility.item" = "القائمة";
 "menu.accessibility.logged_as" = "تم تسجيل الدخول باسم %@";
 "menu.expiration.days" = "%d يوم/أيام";
@@ -112,12 +116,29 @@
 "settings.encryption.digest.title" = "مصادقة البيانات";
 "settings.encryption.handshake.title" = "مصافحة";
 "settings.encryption.title" = "التشفير";
+"settings.hotspothelper.all.description" = "سيتم تنشيط حماية VPN WiFi على جميع الشبكات، بما في ذلك الشبكات الموثوقة.";
+"settings.hotspothelper.all.title" = "حماية كل الشبكات";
+"settings.hotspothelper.available.add.help" = "اضغط + للإضافة إلى الشبكات الموثوقة.";
+"settings.hotspothelper.available.help" = "لتعبئة هذه القائمة، انتقل إلى إعدادات iOS > WiFi.";
+"settings.hotspothelper.cellular.description" = "إذا تم تعطيل هذا الخيار، سيمكّن PIA خدمة VPN تلقائيًا عند الاتصال بالشبكات الخلوية.";
+"settings.hotspothelper.cellular.networks" = "الشبكات الخلوية";
+"settings.hotspothelper.cellular.title" = "وثوق في الشبكات الخلوية";
+"settings.hotspothelper.description" = "قم بتكوين سلوك PIA عند الاتصال بشبكات WiFi أو الشبكات الخلوية.";
+"settings.hotspothelper.enable.description" = "إذا تم تمكين هذا الخيار، ستمكّن حماية VPN WiFi خدمة VPN تلقائيًا عند الاتصال بالشبكات غير الموثوقة.";
+"settings.hotspothelper.title" = "أداة إدارة الشبكات";
+"settings.hotspothelper.wifi.networks" = "شبكات WiFi";
+"settings.hotspothelper.wifi.trust.title" = "حماية VPN WiFi";
 "settings.reset.defaults.confirm.button" = "إعادة تعيين";
 "settings.reset.defaults.confirm.message" = "سيؤدي هذا الإجراء إلى عودة التطبيق إلى حالته الافتراضية وستفقد كل التغييرات التي أجريتها.";
 "settings.reset.defaults.confirm.title" = "إعادة تعيين الإعدادات";
 "settings.reset.defaults.title" = "إعادة تعيين إلى إعدادات افتراضية";
 "settings.reset.footer" = "سيؤدي هذا الإجراء إلى إعادة تعيين جميع الإعدادات أعلاه.";
 "settings.reset.title" = "إعادة تعيين";
+"settings.trusted.networks.connect.message" = "هل تريد حماية هذه الشبكة عبر الاتصال بخدمة VPN؟";
+"settings.trusted.networks.message" = "لن يتصل PIA تلقائيًا على هذه الشبكات.";
+"settings.trusted.networks.sections.available" = "الشبكات المتاحة";
+"settings.trusted.networks.sections.current" = "الشبكة الحالية";
+"settings.trusted.networks.sections.trusted" = "الشبكات الموثوقة";
 "shortcuts.connect" = "اتصال";
 "shortcuts.disconnect" = "قطع الاتصال";
 "shortcuts.select_region" = "حدّد منطقة";
