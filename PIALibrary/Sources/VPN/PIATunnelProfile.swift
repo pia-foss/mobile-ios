@@ -86,7 +86,7 @@ public class PIATunnelProfile: NetworkExtensionProfile {
             }
             
             // prevent reconnection
-            vpn.isOnDemandEnabled = false
+            vpn.onDemandRules = [NEOnDemandRuleIgnore()]
 
             vpn.saveToPreferences { (error) in
                 if let error = error {

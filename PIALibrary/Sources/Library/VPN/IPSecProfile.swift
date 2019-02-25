@@ -98,7 +98,7 @@ public class IPSecProfile: NetworkExtensionProfile {
             }
             
             // prevent reconnection
-            self.currentVPN.isOnDemandEnabled = false
+            self.currentVPN.onDemandRules = [NEOnDemandRuleIgnore()]
 
             self.currentVPN.saveToPreferences { (error) in
                 if let error = error {
