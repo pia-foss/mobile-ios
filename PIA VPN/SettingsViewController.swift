@@ -376,6 +376,16 @@ class SettingsViewController: AutolayoutViewController {
         let savedServer = pendingPreferences.preferredServer
         pendingPreferences.reset()
         pendingPreferences.preferredServer = savedServer
+        
+        // reset NMT preferences
+        let preferences = Client.preferences.editable()
+        preferences.trustedNetworks = pendingPreferences.trustedNetworks
+        preferences.availableNetworks = pendingPreferences.availableNetworks
+        preferences.shouldConnectForAllNetworks = pendingPreferences.shouldConnectForAllNetworks
+        preferences.useWiFiProtection = pendingPreferences.useWiFiProtection
+        preferences.trustCellularData = pendingPreferences.trustCellularData
+        preferences.commit()
+
         guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? PIATunnelProvider.Configuration else {
             fatalError("No default VPN custom configuration provided for PIA protocol")
         }
