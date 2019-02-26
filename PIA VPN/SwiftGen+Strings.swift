@@ -533,14 +533,6 @@ internal enum L10n {
               internal static let description = L10n.tr("Localizable", "settings.trusted.networks.sections.trusted.rule.description")
             }
           }
-          internal enum Untrusted {
-            internal enum Rule {
-              /// Connect to PIA VPN
-              internal static let action = L10n.tr("Localizable", "settings.trusted.networks.sections.untrusted.rule.action")
-              /// Perform actions when joining untrusted networks.
-              internal static let description = L10n.tr("Localizable", "settings.trusted.networks.sections.untrusted.rule.description")
-            }
-          }
         }
       }
     }

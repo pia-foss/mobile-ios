@@ -13,12 +13,9 @@ class TrustedNetworkRulesViewController: AutolayoutViewController {
 
     @IBOutlet private weak var tableView: UITableView!
     private lazy var switchTrusted = UISwitch()
-    private lazy var switchUntrusted = UISwitch()
 
     private enum Sections: Int, EnumsBuilder {
-        
         case trusted = 0
-        case untrusted
     }
 
     private struct Cells {
@@ -29,7 +26,6 @@ class TrustedNetworkRulesViewController: AutolayoutViewController {
         super.viewDidLoad()
         self.title = L10n.Settings.Hotspothelper.Rules.title
         self.switchTrusted.addTarget(self, action: #selector(toggleTrusted(_:)), for: .valueChanged)
-        self.switchUntrusted.addTarget(self, action: #selector(toggleUntrusted(_:)), for: .valueChanged)
         configureTableView()
     }
     
@@ -61,12 +57,6 @@ class TrustedNetworkRulesViewController: AutolayoutViewController {
         preferences.commit()
     }
 
-    @objc private func toggleUntrusted(_ sender: UISwitch) {
-        let preferences = Client.preferences.editable()
-        preferences.connectOnUntrusted = sender.isOn
-        preferences.commit()
-    }
-
 }
 
 extension TrustedNetworkRulesViewController: UITableViewDelegate, UITableViewDataSource {
@@ -79,8 +69,6 @@ extension TrustedNetworkRulesViewController: UITableViewDelegate, UITableViewDat
         switch Sections.objectIdentifyBy(index: section) {
         case .trusted:
             return L10n.Settings.Trusted.Networks.Sections.trusted.uppercased()
-        case .untrusted:
-            return L10n.Settings.Trusted.Networks.Sections.untrusted.uppercased()
         }
     }
     
@@ -88,8 +76,6 @@ extension TrustedNetworkRulesViewController: UITableViewDelegate, UITableViewDat
         switch Sections.objectIdentifyBy(index: section) {
         case .trusted:
             return L10n.Settings.Trusted.Networks.Sections.Trusted.Rule.description
-        case .untrusted:
-            return L10n.Settings.Trusted.Networks.Sections.Untrusted.Rule.description
         }
     }
     
@@ -113,13 +99,6 @@ extension TrustedNetworkRulesViewController: UITableViewDelegate, UITableViewDat
             cell.accessoryView = switchTrusted
             cell.selectionStyle = .none
             switchTrusted.isOn = Client.preferences.disconnectOnTrusted
-        case .untrusted:
-            cell.imageView?.image = nil
-            cell.textLabel?.text = L10n.Settings.Trusted.Networks.Sections.Untrusted.Rule.action
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchUntrusted
-            cell.selectionStyle = .none
-            switchUntrusted.isOn = Client.preferences.connectOnUntrusted
             
         }
         
