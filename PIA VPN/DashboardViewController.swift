@@ -300,11 +300,43 @@ class DashboardViewController: AutolayoutViewController {
                                             object: self,
                                             userInfo: nil)
         } else {
-            Client.providers.vpnProvider.disconnect({ [weak self] _ in
-                self?.reloadUsageTileAfter(seconds: 1) //Reset the usage statistics after stop the VPN
-            })
+            
+            var showAlert = false
+            if let ssid = UIDevice.current.WiFiSSID {
+                if (Client.preferences.useWiFiProtection && (!Client.preferences.trustedNetworks.contains(ssid) || Client.preferences.shouldConnectForAllNetworks)) {
+                    showAlert = true
+                }
+            } else {
+                if !Client.preferences.trustCellularData {
+                    showAlert = true
+                }
+            }
+            
+            if showAlert {
+                let alert = Macros.alert(
+                    nil,
+                    L10n.Dashboard.Vpn.Disconnect.untrusted
+                )
+                
+                alert.addCancelActionWithTitle(L10n.Global.cancel) {
+                }
+                
+                alert.addActionWithTitle(L10n.Shortcuts.disconnect) {
+                    self.disconnectWithOneSecondDelay()
+                }
+                
+                present(alert, animated: true, completion: nil)
+            } else {
+                disconnectWithOneSecondDelay()
+            }
         }
         Macros.postNotification(.PIAVPNUsageUpdate)
+    }
+    
+    private func disconnectWithOneSecondDelay() {
+        Client.providers.vpnProvider.disconnect({ [weak self] _ in
+            self?.reloadUsageTileAfter(seconds: 1) //Reset the usage statistics after stop the VPN
+        })
     }
     
     private func reloadUsageTileAfter(seconds: TimeInterval) {

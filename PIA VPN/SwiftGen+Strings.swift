@@ -131,6 +131,10 @@ internal enum L10n {
       internal static let disconnecting = L10n.tr("Localizable", "dashboard.vpn.disconnecting")
       /// VPN: ON
       internal static let on = L10n.tr("Localizable", "dashboard.vpn.on")
+      internal enum Disconnect {
+        /// This network is untrusted. Do you really want to disconnect the VPN?
+        internal static let untrusted = L10n.tr("Localizable", "dashboard.vpn.disconnect.untrusted")
+      }
     }
   }
 

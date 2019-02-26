@@ -71,6 +71,7 @@ class NetworkManagementToolTile: UIView, Tileable  {
     }
     
     @objc private func updateNetwork() {
+        statusButton.isUserInteractionEnabled = true
         if let ssid = hotspotHelper.currentWiFiNetwork() {
             networkLabel.text = ssid.uppercased()
             if Client.preferences.useWiFiProtection {
@@ -82,6 +83,7 @@ class NetworkManagementToolTile: UIView, Tileable  {
                     statusButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.untrusted
                 }
             } else {
+                statusButton.isUserInteractionEnabled = false
                 statusButton.setImage(nil, for: [])
                 statusButton.accessibilityLabel = nil
             }

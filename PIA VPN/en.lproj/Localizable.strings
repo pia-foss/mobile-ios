@@ -168,6 +168,7 @@
 "dashboard.vpn.on" = "VPN: ON";
 "dashboard.vpn.disconnecting" = "Disconnecting...";
 "dashboard.vpn.changing_region" = "Changing region...";
+"dashboard.vpn.disconnect.untrusted" = "This network is untrusted. Do you really want to disconnect the VPN?";
 
 // VPN PERMISSION
 
