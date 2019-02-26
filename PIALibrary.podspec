@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
     s.author            = { "Davide De Rosa" => "davide@londontrustmedia.com", "Jose Blaya" => "joseblaya@londontrustmedia.com" }
     s.source            = { :git => "https://github.com/pia-foss/client-library-apple.git", :tag => "v#{s.version}" }
 
-    s.ios.deployment_target = "9.0"
+    s.ios.deployment_target = "10.0"
     #s.osx.deployment_target = "10.11"
 
     s.default_subspecs = "Core", "Library"
@@ -39,7 +39,7 @@ Pod::Spec.new do |s|
         p.frameworks            = "NetworkExtension"
         p.pod_target_xcconfig   = { "APPLICATION_EXTENSION_API_ONLY" => "YES" }
 
-        p.dependency "PIATunnel", "~> 1.1.8"
+        p.dependency "PIATunnel", "~> 2.0.0"
         p.dependency "PIALibrary/Library"
     end
 

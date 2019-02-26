@@ -1,47 +1,32 @@
 PODS:
   - Alamofire (4.7.3)
-  - DynamicBlurView (3.0.1)
   - Gloss (2.0.1)
-  - lottie-ios (2.5.2)
   - OpenSSL-Apple (1.1.0h)
-  - PIATunnel (1.1.8):
-    - PIATunnel/AppExtension (= 1.1.8)
-    - PIATunnel/Core (= 1.1.8)
-  - PIATunnel/AppExtension (1.1.8):
+  - PIATunnel (2.0.0):
+    - PIATunnel/AppExtension (= 2.0.0)
+    - PIATunnel/Core (= 2.0.0)
+  - PIATunnel/AppExtension (2.0.0):
     - PIATunnel/Core
     - SwiftyBeaver
-  - PIATunnel/Core (1.1.8):
+  - PIATunnel/Core (2.0.0):
     - OpenSSL-Apple (~> 1.1.0h)
     - SwiftyBeaver
-  - PopupDialog (0.9.1):
-    - DynamicBlurView (~> 3.0.1)
-  - QuickLayout (2.0.2)
   - ReachabilitySwift (4.3.0)
-  - SwiftEntryKit (0.7.2):
-    - QuickLayout (= 2.0.2)
   - SwiftyBeaver (1.6.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4)
   - Gloss (~> 2)
-  - lottie-ios
   - PIATunnel (from `/Users/ueshiba/Desktop/PIA/tunnel-apple`)
-  - PopupDialog
   - ReachabilitySwift
-  - SwiftEntryKit (= 0.7.2)
   - SwiftyBeaver (~> 1.4)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
-    - DynamicBlurView
     - Gloss
-    - lottie-ios
     - OpenSSL-Apple
-    - PopupDialog
-    - QuickLayout
     - ReachabilitySwift
-    - SwiftEntryKit
     - SwiftyBeaver
 
 EXTERNAL SOURCES:
@@ -50,17 +35,12 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  DynamicBlurView: b1df5415f9bd31897549e5d7077e5ec120a4d636
   Gloss: 1e8743f8de1fbe14a97f220ff901cba91ae5f8f8
-  lottie-ios: 3fef45d3fabe63e3c7c2eb603dd64ddfffc73062
   OpenSSL-Apple: cd153d705ef350eb834ae7ff5f21f792b51ed208
-  PIATunnel: fc7e7d0a812c6c98138ac315e7a43008aadd15b2
-  PopupDialog: 03985b669c29802661c187513bf827340db1ae4d
-  QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
+  PIATunnel: 72eed3d901b61ec9c408fc2c89708df2254638de
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
-  SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145
   SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
 
-PODFILE CHECKSUM: 4cafb8eceaa45a4c3c9a3e40a77040ad7a670913
+PODFILE CHECKSUM: fbc8645071dd0fc3523e73dac2cfcd562438757f
 
 COCOAPODS: 1.5.3
