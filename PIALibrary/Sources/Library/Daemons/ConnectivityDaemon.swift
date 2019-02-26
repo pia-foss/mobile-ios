@@ -32,8 +32,6 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
     private var pendingConnectivityCheck: URLSessionDataTask?
 
     private var wasConnected: Bool
-    
-    private var lastNetworkName: String
 
     private init() {
         hasEnabledUpdates = false
@@ -47,7 +45,6 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
         failedConnectivityAttempts = 0
         pendingConnectivityCheck = nil
         wasConnected = false
-        lastNetworkName = ""
     }
     
     deinit {
@@ -59,8 +56,6 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
-        nc.addObserver(self, selector: #selector(updateVPNProfileAfterNetworkChange), name: .reachabilityChanged , object: reachability)
-        nc.addObserver(self, selector: #selector(updateVPNProfileAfterEnterBackground), name: .UIApplicationDidEnterBackground, object: nil)
         startReachability()
     }
     
@@ -160,28 +155,7 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
     }
 
     // MARK: Notifications
-    
-    /***
-     Check if we need to update the vpn profile (onDemand rules) after disconnect the VPN and receive a notification of a network change
-    */
-    @objc private func updateVPNProfileAfterNetworkChange() {
-        let vpn = Client.providers.vpnProvider
-        if vpn.vpnStatus == .disconnected,
-            lastNetworkName != UIDevice.current.WiFiSSID {
-            vpn.install(force: false, nil)
-        }
-    }
-    
-    /***
-     Force the update of the vpn profile (onDemand rules) after disconnect the VPN and enter background mode
-     */
-    @objc private func updateVPNProfileAfterEnterBackground() {
-        let vpn = Client.providers.vpnProvider
-        if vpn.vpnStatus == .disconnected {
-            vpn.install(force: false, nil)
-        }
-    }
-    
+   
     @objc private func vpnStatusDidChange(notification: Notification) {
         switch accessedDatabase.transient.vpnStatus {
         case .connected:
@@ -228,7 +202,6 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
     }
     
     private func handleVPNDidDisconnect() {
-        lastNetworkName = UIDevice.current.WiFiSSID ?? ""
         if hasEnabledUpdates {
             accessedDatabase.transient.vpnIP = nil
             let delay = accessedConfiguration.connectivityVPNLag

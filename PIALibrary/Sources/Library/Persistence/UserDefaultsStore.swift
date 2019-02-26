@@ -57,8 +57,6 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         static let cachedNetworks = "CachedNetworks"
 
         static let trustedNetworks = "TrustedNetworks"
-
-        static let connectOnUntrusted = "ConnectOnUntrusted"
         
         static let disconnectOnTrusted = "DisconnectOnTrusted"
 
@@ -399,18 +397,6 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.mace)
         }
     }
-    
-    var connectOnUntrusted: Bool? {
-        get {
-            guard let value = backend.object(forKey: Entries.connectOnUntrusted) as? Bool else {
-                return nil
-            }
-            return value
-        }
-        set {
-            backend.set(newValue, forKey: Entries.connectOnUntrusted)
-        }
-    }
 
     var disconnectOnTrusted: Bool? {
         get {
@@ -436,7 +422,6 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.historicalServers)
         backend.removeObject(forKey: Entries.cachedNetworks)
         backend.removeObject(forKey: Entries.trustedNetworks)
-        backend.removeObject(forKey: Entries.connectOnUntrusted)
         backend.removeObject(forKey: Entries.disconnectOnTrusted)
         backend.removeObject(forKey: Entries.shouldConnectForAllNetworks)
         backend.removeObject(forKey: Entries.useWiFiProtection)
