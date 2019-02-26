@@ -1,4 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '10.0'
 use_frameworks!
 
 abstract_target 'PIALibrary' do
@@ -6,17 +7,17 @@ abstract_target 'PIALibrary' do
     pod 'Gloss', '~> 2'
     pod 'Alamofire', '~> 4'
     pod 'ReachabilitySwift'
-    # pod 'PIATunnel', :path => '/Users/ueshiba/Desktop/PIA/tunnel-apple'
-    pod 'PIATunnel', '~> 1.1.7'
+     pod 'PIATunnel', :path => '/Users/ueshiba/Desktop/PIA/tunnel-apple'
+    #pod 'PIATunnel', '~> 2.0.0'
 
     target 'PIALibrary-iOS' do
-        platform :ios, '9.0'
+        platform :ios, '10.0'
     end
     target 'PIALibraryTests-iOS' do
-        platform :ios, '9.0'
+        platform :ios, '10.0'
     end
     target 'PIALibraryHost-iOS' do
-        platform :ios, '9.0'
+        platform :ios, '10.0'
     end
 
     #target 'PIALibrary-macOS' do
