@@ -85,14 +85,14 @@ PODS:
     - PIALibrary/Core
   - PIALibrary/VPN (2.0.0):
     - PIALibrary/Library
-    - PIATunnel (~> 1.1.8)
-  - PIATunnel (1.1.8):
-    - PIATunnel/AppExtension (= 1.1.8)
-    - PIATunnel/Core (= 1.1.8)
-  - PIATunnel/AppExtension (1.1.8):
+    - PIATunnel (~> 2.0.0)
+  - PIATunnel (2.0.0):
+    - PIATunnel/AppExtension (= 2.0.0)
+    - PIATunnel/Core (= 2.0.0)
+  - PIATunnel/AppExtension (2.0.0):
     - PIATunnel/Core
     - SwiftyBeaver
-  - PIATunnel/Core (1.1.8):
+  - PIATunnel/Core (2.0.0):
     - OpenSSL-Apple (~> 1.1.0h)
     - SwiftyBeaver
   - PopupDialog (0.9.1):
@@ -178,8 +178,8 @@ SPEC CHECKSUMS:
   lottie-ios: 3fef45d3fabe63e3c7c2eb603dd64ddfffc73062
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   OpenSSL-Apple: cd153d705ef350eb834ae7ff5f21f792b51ed208
-  PIALibrary: 7ddf4142286031c89313a3cf7dcd6580a14f1db5
-  PIATunnel: fc7e7d0a812c6c98138ac315e7a43008aadd15b2
+  PIALibrary: ca9c4b28af7bd5012e5f66da5c7dab3c01b35f24
+  PIATunnel: 72eed3d901b61ec9c408fc2c89708df2254638de
   PopupDialog: 03985b669c29802661c187513bf827340db1ae4d
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
@@ -188,6 +188,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 4ceb228886f832dd2d6e4c2f06a9f1f9c6771e01
+PODFILE CHECKSUM: e8a6f84a89f1d0e461c1d4a2f7c4248458f923ae
 
 COCOAPODS: 1.5.3
