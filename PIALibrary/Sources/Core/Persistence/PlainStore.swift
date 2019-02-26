@@ -73,8 +73,6 @@ protocol PlainStore: class {
     
     var trustedNetworks: [String] { get set }
 
-    var connectOnUntrusted: Bool? { get set }
-
     var disconnectOnTrusted: Bool? { get set }
 
 }

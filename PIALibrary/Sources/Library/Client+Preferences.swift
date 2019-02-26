@@ -36,8 +36,6 @@ private protocol PreferencesStore: class {
 
     var trustedNetworks: [String] { get set }
     
-    var connectOnUntrusted: Bool { get set }
-
     var disconnectOnTrusted: Bool { get set }
 
     func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration?
@@ -63,7 +61,6 @@ private extension PreferencesStore {
         vpnCustomConfigurations = source.vpnCustomConfigurations
         availableNetworks = source.availableNetworks
         trustedNetworks = source.trustedNetworks
-        connectOnUntrusted = source.connectOnUntrusted
         disconnectOnTrusted = source.disconnectOnTrusted
     }
 }
@@ -254,16 +251,6 @@ extension Client {
             }
         }
 
-        /// Connect the VPN when joining an untrusted network. True by default
-        public fileprivate(set) var connectOnUntrusted: Bool {
-            get {
-                return accessedDatabase.plain.connectOnUntrusted ?? true
-            }
-            set {
-                accessedDatabase.plain.connectOnUntrusted = newValue
-            }
-        }
-
         /// Disconnect the VPN when joining a trusted network. False by default
         public fileprivate(set) var disconnectOnTrusted: Bool {
             get {
@@ -291,7 +278,7 @@ extension Client.Preferences {
             isPersistentConnection = true
             mace = false
             useWiFiProtection = false
-            trustCellularData = true
+            trustCellularData = false
             authMigrationSuccess = false
             shouldConnectForAllNetworks = false
             vpnType = IPSecProfile.vpnType
@@ -299,7 +286,6 @@ extension Client.Preferences {
             vpnCustomConfigurations = [:]
             availableNetworks = []
             trustedNetworks = []
-            connectOnUntrusted = true
             disconnectOnTrusted = false
         }
 
@@ -363,9 +349,6 @@ extension Client.Preferences {
         public var trustedNetworks: [String]
         
         /// :nodoc:
-        public var connectOnUntrusted: Bool
-        
-        /// :nodoc:
         public var disconnectOnTrusted: Bool
 
         /// :nodoc:
@@ -396,10 +379,13 @@ extension Client.Preferences {
             if (trustCellularData != target.trustCellularData) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
-            if (trustedNetworks != target.trustedNetworks) {
+            if (trustCellularData != target.shouldConnectForAllNetworks) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
-            if (connectOnUntrusted != target.connectOnUntrusted) {
+            if (trustCellularData != target.useWiFiProtection) {
+                queue.append(VPNActionDisconnectAndReinstall())
+            }
+            if (trustedNetworks != target.trustedNetworks) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
             if (disconnectOnTrusted != target.disconnectOnTrusted) {

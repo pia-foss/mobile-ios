@@ -32,7 +32,7 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
     private var pendingConnectivityCheck: URLSessionDataTask?
 
     private var wasConnected: Bool
-    
+
     private init() {
         hasEnabledUpdates = false
 
@@ -155,7 +155,7 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
     }
 
     // MARK: Notifications
-    
+   
     @objc private func vpnStatusDidChange(notification: Notification) {
         switch accessedDatabase.transient.vpnStatus {
         case .connected:
