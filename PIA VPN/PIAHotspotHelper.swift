@@ -80,32 +80,6 @@ class PIAHotspotHelper {
                                                         log.info("present PIA message for unprotected networks")
                                                     }
                                                     response.deliver()
-                                                } else if cmd.commandType == .evaluate {
-                                                    if let network = cmd.network,
-                                                        Client.preferences.useWiFiProtection {
-                                                        
-                                                        if !Client.providers.vpnProvider.isVPNConnected {
-                                                            if Client.preferences.shouldConnectForAllNetworks ||
-                                                                !weakSelf.trustedNetworks().contains(network.ssid) {
-                                                                
-                                                                network.setConfidence(.high)
-                                                                Macros.dispatch(after: .milliseconds(200)) {
-                                                                    log.info("connecting VPN because network "+network.ssid+"has passed the filter")
-                                                                    Client.providers.vpnProvider.connect(nil)
-                                                                }
-
-                                                            }
-                                                            
-                                                            let response = cmd.createResponse(.success)
-                                                            response.setNetwork(network)
-                                                            response.deliver()
-                                                            
-                                                        } else {
-                                                            let response = cmd.createResponse(.failure)
-                                                            response.setNetwork(network)
-                                                            response.deliver()
-                                                        }
-                                                    }
                                                 }
 
                                             }

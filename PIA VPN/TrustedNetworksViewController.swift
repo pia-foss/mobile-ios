@@ -22,7 +22,8 @@ class TrustedNetworksViewController: AutolayoutViewController {
 
     private enum Sections: Int, EnumsBuilder {
         
-        case cellularData = 0
+        case rules = 0
+        case cellularData
         case useVpnWifiProtection
         case autoConnectAllNetworksSettings
         case current
@@ -125,7 +126,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
 extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Client.preferences.useWiFiProtection ? Sections.countCases() : 2
+        return Client.preferences.useWiFiProtection ? Sections.countCases() : 3
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -181,11 +182,17 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.network, for: indexPath)
         cell.selectionStyle = .default
         cell.accessoryView = nil
+        cell.accessoryType = .none
         cell.isUserInteractionEnabled = true
         cell.imageView?.image = Asset.iconWifi.image.withRenderingMode(.alwaysTemplate)
         cell.imageView?.tintColor = Theme.current.palette.textColor(forRelevance: 3, appearance: .dark)
 
         switch Sections.objectIdentifyBy(index: indexPath.section) {
+        case .rules:
+            cell.imageView?.image = nil
+            cell.textLabel?.text = L10n.Settings.Hotspothelper.Rules.title
+            cell.accessoryType = .disclosureIndicator
+            cell.accessoryView = nil
         case .current:
             if let ssid = hotspotHelper.currentWiFiNetwork() {
                 if trustedNetworks.contains(ssid) {
@@ -236,6 +243,8 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
             if let ssid = hotspotHelper.currentWiFiNetwork() {
                 hotspotHelper.saveTrustedNetwork(ssid)
             }
+        case .rules:
+            self.perform(segue: StoryboardSegue.Main.trustedNetworkRulesSegueIdentifier)
         case .available:
             let ssid = availableNetworks[indexPath.row]
             hotspotHelper.saveTrustedNetwork(ssid)
