@@ -36,12 +36,16 @@ class TrustedNetworksViewController: AutolayoutViewController {
     }
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         self.title = L10n.Settings.Hotspothelper.title
         self.hotspotHelper = PIAHotspotHelper(withDelegate: self)
         self.switchAutoJoinAllNetworks.addTarget(self, action: #selector(toggleAutoconnectWithAllNetworks(_:)), for: .valueChanged)
         self.switchWiFiProtection.addTarget(self, action: #selector(toggleUseWiFiProtection(_:)), for: .valueChanged)
         self.switchCellularData.addTarget(self, action: #selector(toggleCellularData(_:)), for: .valueChanged)
+
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(filterAvailableNetworks), name: .UIApplicationDidBecomeActive, object: nil)
 
         configureTableView()
     }
@@ -102,7 +106,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
         filterAvailableNetworks()
     }
     
-    private func filterAvailableNetworks() {
+    @objc private func filterAvailableNetworks() {
         self.availableNetworks = Client.preferences.availableNetworks
         self.trustedNetworks = Client.preferences.trustedNetworks
         self.availableNetworks = self.availableNetworks.filter { !self.trustedNetworks.contains($0) }
