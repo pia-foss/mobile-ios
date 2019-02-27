@@ -49,6 +49,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         static let cachedNetworks = "CachedNetworks"
 
         static let trustedNetworks = "TrustedNetworks"
+        
+        static let disconnectOnTrusted = "DisconnectOnTrusted"
 
     }
     
@@ -278,6 +280,18 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
     
+    var disconnectOnTrusted: Bool? {
+        get {
+            guard let value = backend.object(forKey: Entries.disconnectOnTrusted) as? Bool else {
+                return nil
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.disconnectOnTrusted)
+        }
+    }
+    
     // MARK: Lifecycle
     
     func reset() {
@@ -291,6 +305,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.useWiFiProtection)
         backend.removeObject(forKey: Entries.trustCellularData)
         backend.removeObject(forKey: Entries.authMigrationSuccess)
+        backend.removeObject(forKey: Entries.disconnectOnTrusted)
         backend.synchronize()
     }
 

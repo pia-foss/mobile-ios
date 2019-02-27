@@ -56,22 +56,75 @@ extension NetworkExtensionProfile {
         }
         
         vpn.localizedDescription = configuration.name
-        if force {
-            vpn.isOnDemandEnabled = configuration.isOnDemand
-        } else {
-            vpn.isOnDemandEnabled = vpn.isOnDemandEnabled && configuration.isOnDemand
-        }
+        vpn.isOnDemandEnabled = configuration.isOnDemand
+        
+        let trustedNetworks = Client.preferences.trustedNetworks
+        
+        vpn.onDemandRules = []
         
         if vpn.isOnDemandEnabled {
-            vpn.onDemandRules = [NEOnDemandRuleConnect()]
-        }
-
-        //Configure onDemand rules
-        if !Client.preferences.trustCellularData {
-            vpn.isOnDemandEnabled = true
-            let cellularRule = NEOnDemandRuleConnect()
-            cellularRule.interfaceTypeMatch = .cellular
-            vpn.onDemandRules = [cellularRule]
+            
+            if Client.preferences.disconnectOnTrusted {
+                let ruleDisconnect = NEOnDemandRuleDisconnect()
+                ruleDisconnect.interfaceTypeMatch = .wiFi
+                ruleDisconnect.ssidMatch = trustedNetworks
+                if Client.preferences.useWiFiProtection {
+                    let ruleConnect = NEOnDemandRuleConnect()
+                    ruleConnect.interfaceTypeMatch = .wiFi
+                    if Client.preferences.shouldConnectForAllNetworks {
+                        vpn.onDemandRules?.append(ruleConnect)
+                    } else {
+                        vpn.onDemandRules?.append(contentsOf: [ruleDisconnect, ruleConnect])
+                    }
+                } else {
+                    let ruleConnect = NEOnDemandRuleConnect()
+                    ruleConnect.interfaceTypeMatch = .wiFi
+                    vpn.onDemandRules?.append(ruleConnect)
+                }
+                if !Client.preferences.trustCellularData {
+                    let ruleConnect = NEOnDemandRuleConnect()
+                    ruleConnect.interfaceTypeMatch = .cellular
+                    vpn.onDemandRules?.append(ruleConnect)
+                } else {
+                    let ruleDisconnect = NEOnDemandRuleDisconnect()
+                    ruleDisconnect.interfaceTypeMatch = .cellular
+                    vpn.onDemandRules?.append(ruleDisconnect)
+                }
+            } else {
+                if !Client.preferences.trustCellularData {
+                    let ruleConnect = NEOnDemandRuleConnect()
+                    ruleConnect.interfaceTypeMatch = .cellular
+                    vpn.onDemandRules?.append(ruleConnect)
+                } else {
+                    let ruleDisconnect = NEOnDemandRuleDisconnect()
+                    ruleDisconnect.interfaceTypeMatch = .cellular
+                    vpn.onDemandRules?.append(ruleDisconnect)
+                }
+                
+                if !Client.preferences.useWiFiProtection {
+                    let ruleConnect = NEOnDemandRuleConnect()
+                    ruleConnect.interfaceTypeMatch = .wiFi
+                    vpn.onDemandRules?.append(ruleConnect)
+                } else {
+                    if Client.preferences.shouldConnectForAllNetworks {
+                        let ruleConnect = NEOnDemandRuleConnect()
+                        ruleConnect.interfaceTypeMatch = .wiFi
+                        vpn.onDemandRules?.append(ruleConnect)
+                    } else {
+                        
+                        let ruleIgnore = NEOnDemandRuleIgnore()
+                        ruleIgnore.interfaceTypeMatch = .wiFi
+                        ruleIgnore.ssidMatch = trustedNetworks
+                        vpn.onDemandRules?.append(ruleIgnore)
+                        
+                        let ruleConnect = NEOnDemandRuleConnect()
+                        ruleConnect.interfaceTypeMatch = .wiFi
+                        vpn.onDemandRules?.append(ruleConnect)
+                        
+                    }
+                }
+            }
+            
         }
         
         log.debug("Configured with server: \(protocolConfiguration.serverAddress!)")

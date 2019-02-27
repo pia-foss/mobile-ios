@@ -36,9 +36,12 @@ private protocol PreferencesStore: class {
 
     var trustedNetworks: [String] { get set }
 
+    var disconnectOnTrusted: Bool { get set }
+
     func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration?
     
     func setVPNCustomConfiguration(_ customConfiguration: VPNCustomConfiguration, for vpnType: String)
+    
 }
 
 private extension PreferencesStore {
@@ -59,6 +62,7 @@ private extension PreferencesStore {
         vpnCustomConfigurations = source.vpnCustomConfigurations
         availableNetworks = source.availableNetworks
         trustedNetworks = source.trustedNetworks
+        disconnectOnTrusted = source.disconnectOnTrusted
     }
 }
 
@@ -248,6 +252,16 @@ extension Client {
             }
         }
 
+        /// Disconnect the VPN when joining a trusted network. False by default
+        public fileprivate(set) var disconnectOnTrusted: Bool {
+            get {
+                return accessedDatabase.plain.disconnectOnTrusted ?? false
+            }
+            set {
+                accessedDatabase.plain.disconnectOnTrusted = newValue
+            }
+        }
+
     }
 }
 
@@ -264,7 +278,7 @@ extension Client.Preferences {
             isPersistentConnection = true
             mace = false
             useWiFiProtection = false
-            trustCellularData = true
+            trustCellularData = false
             authMigrationSuccess = false
             shouldConnectForAllNetworks = false
             vpnType = IPSecProfile.vpnType
@@ -272,6 +286,7 @@ extension Client.Preferences {
             vpnCustomConfigurations = [:]
             availableNetworks = []
             trustedNetworks = []
+            disconnectOnTrusted = false
         }
 
         /**
@@ -334,6 +349,9 @@ extension Client.Preferences {
         public var trustedNetworks: [String]
 
         /// :nodoc:
+        public var disconnectOnTrusted: Bool
+
+        /// :nodoc:
         public func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration? {
             return vpnCustomConfigurations[vpnType]
         }
@@ -359,6 +377,12 @@ extension Client.Preferences {
                 queue.append(VPNActionReinstall())
             }
             if (trustCellularData != target.trustCellularData) {
+                queue.append(VPNActionDisconnectAndReinstall())
+            }
+            if (trustedNetworks != target.trustedNetworks) {
+                queue.append(VPNActionDisconnectAndReinstall())
+            }
+            if (disconnectOnTrusted != target.disconnectOnTrusted) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
             if (vpnDisconnectsOnSleep != target.vpnDisconnectsOnSleep) {
