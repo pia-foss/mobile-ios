@@ -114,11 +114,11 @@ DEPENDENCIES:
   - FXPageControl
   - HockeySDK
   - iRate
-  - PIALibrary/Library (from `/Users/ueshiba/Desktop/PIA/client-library-apple`)
-  - PIALibrary/Mock (from `/Users/ueshiba/Desktop/PIA/client-library-apple`)
-  - PIALibrary/UI (from `/Users/ueshiba/Desktop/PIA/client-library-apple`)
-  - PIALibrary/VPN (from `/Users/ueshiba/Desktop/PIA/client-library-apple`)
-  - PIATunnel (from `/Users/ueshiba/Desktop/PIA/tunnel-apple`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `00efd81`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `00efd81`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `00efd81`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `00efd81`)
+  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `bd53e0a`)
   - PopupDialog
   - SideMenu (= 3.1.5)
   - TPKeyboardAvoiding
@@ -154,9 +154,19 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :path: "/Users/ueshiba/Desktop/PIA/client-library-apple"
+    :commit: 00efd81
+    :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
-    :path: "/Users/ueshiba/Desktop/PIA/tunnel-apple"
+    :commit: bd53e0a
+    :git: https://github.com/pia-foss/tunnel-apple
+
+CHECKOUT OPTIONS:
+  PIALibrary:
+    :commit: 00efd81
+    :git: https://github.com/pia-foss/client-library-apple
+  PIATunnel:
+    :commit: bd53e0a
+    :git: https://github.com/pia-foss/tunnel-apple
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
@@ -178,8 +188,8 @@ SPEC CHECKSUMS:
   lottie-ios: 3fef45d3fabe63e3c7c2eb603dd64ddfffc73062
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   OpenSSL-Apple: cd153d705ef350eb834ae7ff5f21f792b51ed208
-  PIALibrary: ca9c4b28af7bd5012e5f66da5c7dab3c01b35f24
-  PIATunnel: 72eed3d901b61ec9c408fc2c89708df2254638de
+  PIALibrary: 49067d695fe3597be7ce9561a635bbd47f0e6b48
+  PIATunnel: c0a1e40d198ebca00d192c5266c055f1ec5d4bab
   PopupDialog: 03985b669c29802661c187513bf827340db1ae4d
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
@@ -188,6 +198,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: e8a6f84a89f1d0e461c1d4a2f7c4248458f923ae
+PODFILE CHECKSUM: f4caaec1bf0397beaddfd095f6a90e821a0e3e81
 
 COCOAPODS: 1.5.3
