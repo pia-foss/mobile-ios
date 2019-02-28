@@ -134,6 +134,7 @@
 "settings.hotspothelper.cellular.title" = "Доверять мобильным сетям";
 "settings.hotspothelper.description" = "Настройте поведение PIA при подключении к WiFi или мобильным сетям.";
 "settings.hotspothelper.enable.description" = "Если этот параметр активирован, защита WiFi с помощью VPN автоматически включает VPN при подключении к ненадежным сетям.";
+"settings.hotspothelper.rules.title" = "Правила";
 "settings.hotspothelper.title" = "Средство управления сетями";
 "settings.hotspothelper.wifi.networks" = "Сети WiFi";
 "settings.hotspothelper.wifi.trust.title" = "Защита WiFi с помощью VPN";
@@ -148,6 +149,9 @@
 "settings.trusted.networks.sections.available" = "Доступные сети";
 "settings.trusted.networks.sections.current" = "Текущая сеть";
 "settings.trusted.networks.sections.trusted" = "Доверенные сети";
+"settings.trusted.networks.sections.trusted.rule.action" = "Отключиться от PIA VPN";
+"settings.trusted.networks.sections.trusted.rule.description" = "Выполнять дейтствия при подключении к доверенным сетям.";
+"settings.trusted.networks.sections.untrusted" = "Ненадежные сети";
 "shortcuts.connect" = "Подключиться";
 "shortcuts.disconnect" = "Отключиться";
 "shortcuts.select_region" = "Выберите регион";

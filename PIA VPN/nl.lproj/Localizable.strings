@@ -134,6 +134,7 @@
 "settings.hotspothelper.cellular.title" = "Cellulaire netwerken vertrouwen";
 "settings.hotspothelper.description" = "Configureer hoe PIA zich gedraagt bij verbinding met wifi of cellulaire netwerken.";
 "settings.hotspothelper.enable.description" = "VPN wifi-bescherming schakelt de VPN automatisch in wanneer u verbinding maakt met niet-vertrouwde netwerken als deze optie is ingeschakeld.";
+"settings.hotspothelper.rules.title" = "Regels";
 "settings.hotspothelper.title" = "Netwerkbeheertool";
 "settings.hotspothelper.wifi.networks" = "Wifi-netwerken";
 "settings.hotspothelper.wifi.trust.title" = "VPN-wifibescherming";
@@ -148,6 +149,9 @@
 "settings.trusted.networks.sections.available" = "Beschikbare netwerken";
 "settings.trusted.networks.sections.current" = "Huidig netwerk";
 "settings.trusted.networks.sections.trusted" = "Vertrouwde netwerken";
+"settings.trusted.networks.sections.trusted.rule.action" = "PIA VPN-verbinding verbreken";
+"settings.trusted.networks.sections.trusted.rule.description" = "Voer handelingen uit wanneer er verbinding wordt gemaakt met vertrouwde netwerken.";
+"settings.trusted.networks.sections.untrusted" = "Niet-vertrouwde netwerken";
 "shortcuts.connect" = "Verbinden";
 "shortcuts.disconnect" = "Verbinding verbreken";
 "shortcuts.select_region" = "Selecteer een regio";

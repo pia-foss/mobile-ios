@@ -134,6 +134,7 @@
 "settings.hotspothelper.cellular.title" = "セルラーネットワークを信頼する";
 "settings.hotspothelper.description" = "WiFiまたはセルラーネットワークへの接続でPIAがどのように動作するかを構成します。";
 "settings.hotspothelper.enable.description" = "このオプションが有効にされている場合、信頼されていないセルラーネットワークへの接続時に、VPN WiFi保護がVPNを自動的に有効にします。";
+"settings.hotspothelper.rules.title" = "ルール";
 "settings.hotspothelper.title" = "ネットワーク管理ツール";
 "settings.hotspothelper.wifi.networks" = "WiFiネットワーク";
 "settings.hotspothelper.wifi.trust.title" = "VPN WiFi保護";
@@ -148,6 +149,9 @@
 "settings.trusted.networks.sections.available" = "利用可能なネットワーク";
 "settings.trusted.networks.sections.current" = "現在のネットワーク";
 "settings.trusted.networks.sections.trusted" = "信頼されたネットワーク";
+"settings.trusted.networks.sections.trusted.rule.action" = "PIA VPNからの接続を切断";
+"settings.trusted.networks.sections.trusted.rule.description" = "信頼できるネットワークに参加する際、操作を実行する。";
+"settings.trusted.networks.sections.untrusted" = "信頼できるネットワーク";
 "shortcuts.connect" = "接続";
 "shortcuts.disconnect" = "切断";
 "shortcuts.select_region" = "地域の選択";

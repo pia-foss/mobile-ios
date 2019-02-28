@@ -134,6 +134,7 @@
 "settings.hotspothelper.cellular.title" = "셀룰러 네트워크 신뢰";
 "settings.hotspothelper.description" = "PIA가 WiFi 또는 셀룰러 네트워크에서 작동하는 방식을 설정합니다.";
 "settings.hotspothelper.enable.description" = "이 옵션을 활성화하면 신뢰하지 않는 네트워크에 연결할 때 VPN WiFi 보호가 자동으로 VPN을 활성화합니다.";
+"settings.hotspothelper.rules.title" = "규칙";
 "settings.hotspothelper.title" = "네트워크 관리 도구";
 "settings.hotspothelper.wifi.networks" = "WiFi 네트워크";
 "settings.hotspothelper.wifi.trust.title" = "VPN WiFi 보호";
@@ -148,6 +149,9 @@
 "settings.trusted.networks.sections.available" = "이용 가능한 네트워크";
 "settings.trusted.networks.sections.current" = "현재 네트워크";
 "settings.trusted.networks.sections.trusted" = "신뢰하는 네트워크";
+"settings.trusted.networks.sections.trusted.rule.action" = "PIA VPN 연결 해제";
+"settings.trusted.networks.sections.trusted.rule.description" = "신뢰하는 네트워크에 연결할 때 작업을 수행합니다.";
+"settings.trusted.networks.sections.untrusted" = "신뢰하지 않는 네트워크";
 "shortcuts.connect" = "연결";
 "shortcuts.disconnect" = "연결 해제";
 "shortcuts.select_region" = "지역 선택";

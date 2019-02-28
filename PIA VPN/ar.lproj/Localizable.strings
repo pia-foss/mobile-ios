@@ -134,6 +134,7 @@
 "settings.hotspothelper.cellular.title" = "وثوق في الشبكات الخلوية";
 "settings.hotspothelper.description" = "قم بتكوين سلوك PIA عند الاتصال بشبكات WiFi أو الشبكات الخلوية.";
 "settings.hotspothelper.enable.description" = "إذا تم تمكين هذا الخيار، ستمكّن حماية VPN WiFi خدمة VPN تلقائيًا عند الاتصال بالشبكات غير الموثوقة.";
+"settings.hotspothelper.rules.title" = "القواعد";
 "settings.hotspothelper.title" = "أداة إدارة الشبكات";
 "settings.hotspothelper.wifi.networks" = "شبكات WiFi";
 "settings.hotspothelper.wifi.trust.title" = "حماية VPN WiFi";
@@ -148,6 +149,9 @@
 "settings.trusted.networks.sections.available" = "الشبكات المتاحة";
 "settings.trusted.networks.sections.current" = "الشبكة الحالية";
 "settings.trusted.networks.sections.trusted" = "الشبكات الموثوقة";
+"settings.trusted.networks.sections.trusted.rule.action" = "قطع الاتصال من PIA VPN";
+"settings.trusted.networks.sections.trusted.rule.description" = "تنفيذ الإجراءات عند الاتصال بشبكات موثوقة.";
+"settings.trusted.networks.sections.untrusted" = "شبكات غير موثوقة";
 "shortcuts.connect" = "اتصال";
 "shortcuts.disconnect" = "قطع الاتصال";
 "shortcuts.select_region" = "حدّد منطقة";

@@ -134,6 +134,7 @@
 "settings.hotspothelper.cellular.title" = "Reti di telefonia mobile affidabili";
 "settings.hotspothelper.description" = "Configura il comportamento di PIA in caso di connessione a reti WiFi o di telefonia mobile.";
 "settings.hotspothelper.enable.description" = "Se l'opzione è attivata, la protezione WiFi VPN attiva automaticamente il VPN in caso di connessione a reti non affidabili.";
+"settings.hotspothelper.rules.title" = "Regole";
 "settings.hotspothelper.title" = "Strumento di gestione di rete";
 "settings.hotspothelper.wifi.networks" = "Reti WiFi";
 "settings.hotspothelper.wifi.trust.title" = "Protezione WiFi VPN";
@@ -148,6 +149,9 @@
 "settings.trusted.networks.sections.available" = "Reti disponibili";
 "settings.trusted.networks.sections.current" = "Rete attuale";
 "settings.trusted.networks.sections.trusted" = "Reti affidabili";
+"settings.trusted.networks.sections.trusted.rule.action" = "Disconnessione dal VPN PIA";
+"settings.trusted.networks.sections.trusted.rule.description" = "Svolgi azioni quando ci si connette a reti affidabili";
+"settings.trusted.networks.sections.untrusted" = "Reti non affidabili";
 "shortcuts.connect" = "Connetti";
 "shortcuts.disconnect" = "Disconnetti";
 "shortcuts.select_region" = "Seleziona una regione";

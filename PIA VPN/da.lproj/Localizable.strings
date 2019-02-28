@@ -134,6 +134,7 @@
 "settings.hotspothelper.cellular.title" = "Betroede mobilnetværk";
 "settings.hotspothelper.description" = "Konfigurer, hvordan PIA vil opføre sig ved forbindelse til WiFi eller mobilnetværk.";
 "settings.hotspothelper.enable.description" = "VPN WiFi-beskyttelse aktiverer automatisk VPN'en, når den tilsluttes til usikre netværk, hvis denne indstilling er aktiveret.";
+"settings.hotspothelper.rules.title" = "Regler";
 "settings.hotspothelper.title" = "Netværksstyringsværktøj";
 "settings.hotspothelper.wifi.networks" = "WiFi-netværk";
 "settings.hotspothelper.wifi.trust.title" = "VPN WiFi-beskyttelse";
@@ -148,6 +149,9 @@
 "settings.trusted.networks.sections.available" = "Tilgængelige netværk";
 "settings.trusted.networks.sections.current" = "Aktuelle netværk";
 "settings.trusted.networks.sections.trusted" = "Betroede netværk";
+"settings.trusted.networks.sections.trusted.rule.action" = "Afbryd forbindelse til PIA VPN";
+"settings.trusted.networks.sections.trusted.rule.description" = "Udfør handlinger når du tilslutter dig betroede netværk.";
+"settings.trusted.networks.sections.untrusted" = "Ubetroede netværk";
 "shortcuts.connect" = "Forbind";
 "shortcuts.disconnect" = "Afbryd forbindelse";
 "shortcuts.select_region" = "Vælg en region";
