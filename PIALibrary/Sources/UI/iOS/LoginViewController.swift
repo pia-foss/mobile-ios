@@ -61,8 +61,8 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
         buttonLogin.title = L10n.Welcome.Login.submit
         labelPurchase1.text = L10n.Welcome.Login.Purchase.footer
         labelPurchase2.text = L10n.Welcome.Login.Purchase.button
-        labelRedeem1.text = L10n.Welcome.Login.Redeem.footer
-        labelRedeem2.text = L10n.Welcome.Login.Redeem.button
+        //labelRedeem1.text = L10n.Welcome.Login.Redeem.footer
+        //labelRedeem2.text = L10n.Welcome.Login.Redeem.button
         buttonRestorePurchase.setTitle(L10n.Welcome.Login.Restore.button, for: .normal)
         buttonRestorePurchase.titleLabel?.textAlignment = .center
         buttonRestorePurchase.titleLabel?.numberOfLines = 0
@@ -165,7 +165,7 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
         guard let pageController = parent as? WelcomePageViewController else {
             fatalError("Not running in WelcomePageViewController")
         }
-        pageController.show(page: .redeem)
+        //pageController.show(page: .redeem)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -211,8 +211,8 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
         Theme.current.applyActionButton(buttonLogin)
         Theme.current.applyBody1(labelPurchase1, appearance: .dark)
         Theme.current.applyTextButton(labelPurchase2)
-        Theme.current.applyBody1(labelRedeem1, appearance: .dark)
-        Theme.current.applyTextButton(labelRedeem2)
+        //Theme.current.applyBody1(labelRedeem1, appearance: .dark)
+        //Theme.current.applyTextButton(labelRedeem2)
         Theme.current.applyTextButton(buttonRestorePurchase)
     }
 }
