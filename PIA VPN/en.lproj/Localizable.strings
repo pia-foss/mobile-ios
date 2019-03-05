@@ -244,3 +244,9 @@
 "tiles.nmt.accessibility.trusted" = "Trusted network";
 "tiles.nmt.accessibility.untrusted" = "Untrusted network";
 
+//SIRI SHORTCUTS
+"siri.shortcuts.connect.row.title" = "'Connect' Siri Shortcut";
+"siri.shortcuts.disconnect.row.title" = "'Disconnect' Siri Shortcut";
+"siri.shortcuts.connect.title" = "Connect PIA VPN";
+"siri.shortcuts.disconnect.title" = "Disconnect PIA VPN";
+"siri.shortcuts.add.error" = "There was an error adding the Siri shortcut. Please, try it again.";

@@ -551,6 +551,31 @@ internal enum L10n {
     internal static let selectRegion = L10n.tr("Localizable", "shortcuts.select_region")
   }
 
+  internal enum Siri {
+    internal enum Shortcuts {
+      internal enum Add {
+        /// There was an error adding the Siri shortcut. Please, try it again.
+        internal static let error = L10n.tr("Localizable", "siri.shortcuts.add.error")
+      }
+      internal enum Connect {
+        /// Connect PIA VPN
+        internal static let title = L10n.tr("Localizable", "siri.shortcuts.connect.title")
+        internal enum Row {
+          /// 'Connect' Siri Shortcut
+          internal static let title = L10n.tr("Localizable", "siri.shortcuts.connect.row.title")
+        }
+      }
+      internal enum Disconnect {
+        /// Disconnect PIA VPN
+        internal static let title = L10n.tr("Localizable", "siri.shortcuts.disconnect.title")
+        internal enum Row {
+          /// 'Disconnect' Siri Shortcut
+          internal static let title = L10n.tr("Localizable", "siri.shortcuts.disconnect.row.title")
+        }
+      }
+    }
+  }
+
   internal enum Tiles {
     internal enum Nmt {
       /// Cellular

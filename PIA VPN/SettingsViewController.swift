@@ -11,6 +11,8 @@ import PIALibrary
 import PIATunnel
 import SafariServices
 import SwiftyBeaver
+import Intents
+import IntentsUI
 
 private let log = SwiftyBeaver.self
 
@@ -41,6 +43,10 @@ enum Setting: Int {
     case automaticReconnection
 
     case trustedNetworks
+
+    case connectShortcut
+
+    case disconnectShortcut
 
     case contentBlockerState
     
@@ -175,6 +181,10 @@ class SettingsViewController: AutolayoutViewController {
     private lazy var switchContentBlocker = FakeSwitch()
     
     private lazy var switchDarkMode = UISwitch()
+    
+    private lazy var switchConnectSiriShortcuts = UISwitch()
+
+    private lazy var switchDisconnectSiriShortcuts = UISwitch()
 
     private lazy var imvSelectedOption = UIImageView(image: Asset.accessorySelected.image)
 
@@ -235,6 +245,8 @@ class SettingsViewController: AutolayoutViewController {
 //        switchContentBlocker.isGrayed = true
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
         switchDarkMode.addTarget(self, action: #selector(toggleDarkMode(_:)), for: .valueChanged)
+        switchConnectSiriShortcuts.addTarget(self, action: #selector(toggleConnectSiriShortcuts(_:)), for: .valueChanged)
+        switchDisconnectSiriShortcuts.addTarget(self, action: #selector(toggleDisconnectSiriShortcuts(_:)), for: .valueChanged)
         redisplaySettings()
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshContentBlockerState), name: .UIApplicationDidBecomeActive, object: nil)
@@ -294,6 +306,60 @@ class SettingsViewController: AutolayoutViewController {
     @objc private func toggleDarkMode(_ sender: UISwitch) {
         AppPreferences.shared.transitionTheme(to: sender.isOn ? .dark : .light)
     }
+    
+    @objc private func toggleConnectSiriShortcuts(_ sender: UISwitch) {
+        if #available(iOS 12.0, *) {
+            
+            if AppPreferences.shared.useConnectSiriShortcuts {
+                if let shortcut = AppPreferences.shared.connectShortcut {
+                    let vc = INUIEditVoiceShortcutViewController(voiceShortcut: shortcut)
+                    vc.delegate = self
+                    present(vc, animated: true, completion: nil)
+                }
+            } else {
+                let connectActivity = NSUserActivity(activityType: AppConstants.SiriShortcuts.shortcutConnect)
+                connectActivity.title = L10n.Siri.Shortcuts.Connect.title
+                connectActivity.isEligibleForSearch = true
+                connectActivity.isEligibleForPrediction = true
+                connectActivity.persistentIdentifier = NSUserActivityPersistentIdentifier(AppConstants.SiriShortcuts.shortcutConnect)
+                let connectShortcut = INShortcut(userActivity: connectActivity)
+                
+                let vc = INUIAddVoiceShortcutViewController(shortcut: connectShortcut)
+                vc.delegate = self
+                present(vc, animated: true, completion: nil)
+            }
+
+            tableView.reloadData()
+        }
+    }
+    
+    @objc private func toggleDisconnectSiriShortcuts(_ sender: UISwitch) {
+        if #available(iOS 12.0, *) {
+            
+            if AppPreferences.shared.useDisconnectSiriShortcuts {
+                if let shortcut = AppPreferences.shared.disconnectShortcut {
+                    let vc = INUIEditVoiceShortcutViewController(voiceShortcut: shortcut)
+                    vc.delegate = self
+                    present(vc, animated: true, completion: nil)
+                }
+            } else {
+                let disconnectActivity = NSUserActivity(activityType: AppConstants.SiriShortcuts.shortcutDisconnect)
+                disconnectActivity.title = L10n.Siri.Shortcuts.Disconnect.title
+                disconnectActivity.isEligibleForSearch = true
+                disconnectActivity.isEligibleForPrediction = true
+                disconnectActivity.persistentIdentifier = NSUserActivityPersistentIdentifier(AppConstants.SiriShortcuts.shortcutDisconnect)
+                let disconnectShortcut = INShortcut(userActivity: disconnectActivity)
+                
+                let vc = INUIAddVoiceShortcutViewController(shortcut: disconnectShortcut)
+                vc.delegate = self
+                present(vc, animated: true, completion: nil)
+            }
+            
+            tableView.reloadData()
+
+        }
+    }
+
     
     @objc private func showContentBlockerTutorial() {
         perform(segue: StoryboardSegue.Main.contentBlockerSegueIdentifier)
@@ -565,6 +631,11 @@ class SettingsViewController: AutolayoutViewController {
                 .automaticReconnection,
             ]
         }
+        
+        if #available(iOS 12.0, *) {
+            rowsBySection[.applicationSettings]?.insert(contentsOf: [.connectShortcut, .disconnectShortcut], at: 0)
+        }
+        
         if !Flags.shared.enablesContentBlockerSetting {
             sections.remove(at: sections.index(of: .contentBlocker)!)
         }
@@ -858,6 +929,20 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryView = switchDarkMode
             cell.selectionStyle = .none
             switchDarkMode.isOn = (AppPreferences.shared.currentThemeCode == .dark)
+
+        case .connectShortcut:
+            cell.textLabel?.text = L10n.Siri.Shortcuts.Connect.Row.title
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchConnectSiriShortcuts
+            cell.selectionStyle = .none
+            switchConnectSiriShortcuts.isOn = AppPreferences.shared.useConnectSiriShortcuts
+
+        case .disconnectShortcut:
+            cell.textLabel?.text = L10n.Siri.Shortcuts.Disconnect.Row.title
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchDisconnectSiriShortcuts
+            cell.selectionStyle = .none
+            switchDisconnectSiriShortcuts.isOn = AppPreferences.shared.useDisconnectSiriShortcuts
 
         case .sendDebugLog:
             cell.textLabel?.text = L10n.Settings.ApplicationInformation.Debug.title
@@ -1367,4 +1452,65 @@ extension SettingsViewController: SettingsViewControllerDelegate {
 
     }
     
+}
+
+@available(iOS 12.0, *)
+extension SettingsViewController: INUIAddVoiceShortcutViewControllerDelegate {
+
+    func addVoiceShortcutViewController(
+        _ controller: INUIAddVoiceShortcutViewController,
+        didFinishWith voiceShortcut: INVoiceShortcut?,
+        error: Error?
+        ) {
+        if let _ = error {
+            let message = L10n.Siri.Shortcuts.Add.error
+            let alert = Macros.alert(nil, message)
+            alert.addCancelActionWithTitle(L10n.Global.cancel) {
+                self.dismiss(animated: true, completion: nil)
+            }
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            if let activityType = voiceShortcut?.shortcut.userActivity?.activityType {
+                if activityType == AppConstants.SiriShortcuts.shortcutConnect {
+                    AppPreferences.shared.useConnectSiriShortcuts = true
+                    AppPreferences.shared.connectShortcut = voiceShortcut
+                } else {
+                    AppPreferences.shared.useDisconnectSiriShortcuts = true
+                    AppPreferences.shared.disconnectShortcut = voiceShortcut
+                }
+            }
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+
+    func addVoiceShortcutViewControllerDidCancel(
+        _ controller: INUIAddVoiceShortcutViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+@available(iOS 12.0, *)
+extension SettingsViewController: INUIEditVoiceShortcutViewControllerDelegate {
+    
+    func editVoiceShortcutViewController(_ controller: INUIEditVoiceShortcutViewController, didUpdate voiceShortcut: INVoiceShortcut?, error: Error?) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func editVoiceShortcutViewController(_ controller: INUIEditVoiceShortcutViewController, didDeleteVoiceShortcutWithIdentifier deletedVoiceShortcutIdentifier: UUID) {
+        if deletedVoiceShortcutIdentifier == AppPreferences.shared.connectShortcut?.identifier {
+            AppPreferences.shared.useConnectSiriShortcuts = false
+            AppPreferences.shared.connectShortcut = nil
+        } else {
+            AppPreferences.shared.useDisconnectSiriShortcuts = false
+            AppPreferences.shared.disconnectShortcut = nil
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func editVoiceShortcutViewControllerDidCancel(_ controller: INUIEditVoiceShortcutViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+
 }

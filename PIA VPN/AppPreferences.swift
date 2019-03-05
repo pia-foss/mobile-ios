@@ -10,6 +10,7 @@ import Foundation
 import PIALibrary
 import PIATunnel
 import SwiftyBeaver
+import Intents
 
 private let log = SwiftyBeaver.self
 
@@ -33,6 +34,13 @@ class AppPreferences {
         static let favoriteServerIdentifiers = "FavoriteServerIdentifiers"
         
         static let regionFilter = "RegionFilter"
+
+        static let useConnectSiriShortcuts = "UseConnectSiriShortcuts"
+        static let connectShortcut = "ConnectShortcut"
+        
+        static let useDisconnectSiriShortcuts = "UseDisconnectSiriShortcuts"
+        static let disconnectShortcut = "disconnectShortcut"
+
     }
 
     static let shared = AppPreferences()
@@ -132,6 +140,58 @@ class AppPreferences {
             defaults.set(newValue.rawValue, forKey: Entries.regionFilter)
         }
     }
+    
+    var useConnectSiriShortcuts: Bool {
+        get {
+            return defaults.bool(forKey: Entries.useConnectSiriShortcuts)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.useConnectSiriShortcuts)
+        }
+    }
+
+    var useDisconnectSiriShortcuts: Bool {
+        get {
+            return defaults.bool(forKey: Entries.useDisconnectSiriShortcuts)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.useDisconnectSiriShortcuts)
+        }
+    }
+    
+    @available(iOS 12.0, *)
+    var connectShortcut: INVoiceShortcut? {
+        get {
+            if let data = defaults.object(forKey: Entries.connectShortcut) as? Data {
+                return NSKeyedUnarchiver.unarchiveObject(with: data) as? INVoiceShortcut
+            } else {
+                return nil
+            }
+        }
+        set {
+            if let newValue = newValue {
+                let encodedObject = NSKeyedArchiver.archivedData(withRootObject: newValue)
+                defaults.set(encodedObject, forKey: Entries.connectShortcut)
+            }
+        }
+    }
+    
+    @available(iOS 12.0, *)
+    var disconnectShortcut: INVoiceShortcut? {
+        get {
+            if let data = defaults.object(forKey: Entries.disconnectShortcut) as? Data {
+                return NSKeyedUnarchiver.unarchiveObject(with: data) as? INVoiceShortcut
+            } else {
+                return nil
+            }
+        }
+        set {
+            if let newValue = newValue {
+                let encodedObject = NSKeyedArchiver.archivedData(withRootObject: newValue)
+                defaults.set(encodedObject, forKey: Entries.disconnectShortcut)
+            }
+        }    }
+
 
     private init() {
         guard let defaults = UserDefaults(suiteName: AppConstants.appGroup) else {
@@ -145,7 +205,9 @@ class AppPreferences {
             Entries.regionFilter: RegionFilter.name.rawValue,
             Entries.favoriteServerIdentifiers: [],
             Entries.didAskToEnableNotifications: false,
-            Entries.themeCode: ThemeCode.light.rawValue
+            Entries.themeCode: ThemeCode.light.rawValue,
+            Entries.useConnectSiriShortcuts: false,
+            Entries.useDisconnectSiriShortcuts: false,
         ])
     }
     
@@ -234,11 +296,23 @@ class AppPreferences {
     func reset() {
         piaSocketType = nil
         favoriteServerIdentifiers = []
+        useConnectSiriShortcuts = false
+        useDisconnectSiriShortcuts = false
+        if #available(iOS 12.0, *) {
+            connectShortcut = nil
+            disconnectShortcut = nil
+        }
         transitionTheme(to: .light)
     }
     
     func clean() {
         favoriteServerIdentifiers = []
+        useConnectSiriShortcuts = false
+        useDisconnectSiriShortcuts = false
+        if #available(iOS 12.0, *) {
+            connectShortcut = nil
+            disconnectShortcut = nil
+        }
     }
     
 //    + (void)eraseForTesting;
