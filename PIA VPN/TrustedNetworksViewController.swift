@@ -45,6 +45,8 @@ class TrustedNetworksViewController: AutolayoutViewController {
         self.switchWiFiProtection.addTarget(self, action: #selector(toggleUseWiFiProtection(_:)), for: .valueChanged)
         self.switchCellularData.addTarget(self, action: #selector(toggleCellularData(_:)), for: .valueChanged)
 
+        NotificationCenter.default.addObserver(self, selector: #selector(filterAvailableNetworks), name: .UIApplicationDidBecomeActive, object: nil)
+
         configureTableView()
     }
     
@@ -116,7 +118,8 @@ class TrustedNetworksViewController: AutolayoutViewController {
         }
         filterAvailableNetworks()
     }
-    private func filterAvailableNetworks() {
+    
+    @objc private func filterAvailableNetworks() {
         self.availableNetworks = Client.preferences.availableNetworks
         self.trustedNetworks = Client.preferences.trustedNetworks
         self.availableNetworks = self.availableNetworks.filter { !self.trustedNetworks.contains($0) }
