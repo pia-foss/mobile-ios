@@ -379,6 +379,12 @@ extension Client.Preferences {
             if (trustCellularData != target.trustCellularData) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
+            if (shouldConnectForAllNetworks != target.shouldConnectForAllNetworks) {
+                queue.append(VPNActionDisconnectAndReinstall())
+            }
+            if (useWiFiProtection != target.useWiFiProtection) {
+                queue.append(VPNActionDisconnectAndReinstall())
+            }
             if (trustedNetworks != target.trustedNetworks) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
