@@ -61,6 +61,11 @@ class PurchasePlanCell: UICollectionViewCell, Restylable {
             labelPrice.text = L10n.Welcome.Plan.priceFormat(plan.monthlyPriceString)
             viewBestValue.isHidden = !plan.bestValue
 
+            if plan.bestValue {
+                Theme.current.applyTitle(labelDetail, appearance: .dark)
+                Theme.current.applySmallInfo(labelPrice, appearance: .dark)
+            }
+
             accessibilityLabel = "\(plan.title), \(plan.accessibleMonthlyPriceString) \(L10n.Welcome.Plan.Accessibility.perMonth)"
         }
         viewBestValue.isHidden = !plan.bestValue
