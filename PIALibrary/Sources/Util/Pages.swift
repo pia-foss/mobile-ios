@@ -12,16 +12,19 @@ import Foundation
 public struct Pages: OptionSet {
     
     /// The login page.
-    public static let login = Pages(rawValue: 0x01)
+    public static let login = Pages(rawValue: 1 << 0)
     
     /// The purchase plan page.
-    public static let purchase = Pages(rawValue: 0x02)
+    public static let purchase = Pages(rawValue: 1 << 1)
     
     /// The redeem page.
-    public static let redeem = Pages(rawValue: 0x04)
+    public static let redeem = Pages(rawValue: 1 << 2)
     
+    /// The redeem page.
+    public static let restore = Pages(rawValue: 1 << 3)
+
     /// All pages.
-    public static let all: Pages = [.login, .purchase, .redeem]
+    public static let all: Pages = [.login, .purchase, .redeem, .restore]
     
     /// :nodoc:
     public let rawValue: Int

@@ -21,7 +21,6 @@ class WelcomePageViewController: UIPageViewController {
         guard let preset = self.preset else {
             fatalError("Preset not propagated")
         }
-
         if preset.pages.contains(.login) {
             let vc = StoryboardScene.Welcome.loginViewController.instantiate()
             source.append(vc)
@@ -32,6 +31,10 @@ class WelcomePageViewController: UIPageViewController {
         }
         if preset.pages.contains(.redeem) {
             let vc = StoryboardScene.Welcome.redeemViewController.instantiate()
+            source.append(vc)
+        }
+        if preset.pages.contains(.restore) {
+            let vc = StoryboardScene.Welcome.restoreViewController.instantiate()
             source.append(vc)
         }
         dataSource = self
@@ -76,7 +79,10 @@ class WelcomePageViewController: UIPageViewController {
             
         case .redeem:
             index = 2
-            
+           
+        case .restore:
+            index = 3
+
         default:
             return
         }

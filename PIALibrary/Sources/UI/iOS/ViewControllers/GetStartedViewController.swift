@@ -73,11 +73,6 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let vc = segue.destination as? PIAWelcomeViewController else {
-            if segue.identifier == StoryboardSegue.Welcome.restorePurchaseSegue.rawValue {
-                if let vc = segue.destination as? RestoreSignupViewController {
-                    vc.preset = preset
-                }
-            }
             return
         }
         
@@ -91,6 +86,8 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
             vc.preset.pages = .purchase
         case StoryboardSegue.Welcome.loginAccountSegue.rawValue:
             vc.preset.pages = .login
+        case StoryboardSegue.Welcome.restorePurchaseSegue.rawValue:
+            vc.preset.pages = .restore
         default:
             break
         }

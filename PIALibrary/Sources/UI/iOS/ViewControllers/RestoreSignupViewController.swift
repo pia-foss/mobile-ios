@@ -11,7 +11,12 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-public class RestoreSignupViewController: AutolayoutViewController, BrandableNavigationBar {
+public class RestoreSignupViewController: AutolayoutViewController, BrandableNavigationBar, WelcomeChild {
+    
+    var omitsSiblingLink = false
+
+    var completionDelegate: WelcomeCompletionDelegate?
+    
     @IBOutlet private weak var scrollView: UIScrollView!
     
     @IBOutlet private weak var viewModal: UIView!
