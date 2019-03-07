@@ -20,7 +20,6 @@ public protocol ModalController: class {
 public protocol AnimatingLoadingDelegate: class {
     func showLoadingAnimation()
     func hideLoadingAnimation()
-    func adjustLottieSize()
 }
 
 /// Enum used to determinate the status of the view controller and apply effects over the UI elements
@@ -220,7 +219,6 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
                 UIColor.black.withAlphaComponent(0.72) :
                 UIColor.piaGrey1.withAlphaComponent(0.75)
             graphLoad = LOTAnimationView(name: "pia-spinner")
-            adjustLottieSize()
         }
         addLoadingAnimation()
     }
@@ -233,6 +231,7 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
                 key.addSubview(containerView)
                 key.addSubview(graphLoad)
             }
+            setLoadingConstraints()
             graphLoad.play()
         }
     }
@@ -243,14 +242,81 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
         containerView?.removeFromSuperview()
     }
     
-    public func adjustLottieSize() {
-        let lottieWidth = UIScreen.main.bounds.width/4
-        graphLoad?.frame = CGRect(
-            x: (UIScreen.main.bounds.width/2) - (lottieWidth/2),
-            y: (UIScreen.main.bounds.height - lottieWidth)/2,
-            width: lottieWidth,
-            height: lottieWidth
-        )
+    private func setLoadingConstraints() {
+        if let graphLoad = graphLoad,
+            let keyView = self.navigationController?.view,
+            let containerView = containerView {
+             
+            containerView.translatesAutoresizingMaskIntoConstraints = false
+            graphLoad.translatesAutoresizingMaskIntoConstraints = false
+
+            NSLayoutConstraint(item: containerView,
+                               attribute: .left,
+                               relatedBy: .equal,
+                               toItem: keyView,
+                               attribute: .left,
+                               multiplier: 1.0,
+                               constant: 0.0).isActive = true
+
+            NSLayoutConstraint(item: containerView,
+                               attribute: .right,
+                               relatedBy: .equal,
+                               toItem: keyView,
+                               attribute: .right,
+                               multiplier: 1.0,
+                               constant: 0.0).isActive = true
+
+            NSLayoutConstraint(item: containerView,
+                               attribute: .top,
+                               relatedBy: .equal,
+                               toItem: keyView,
+                               attribute: .top,
+                               multiplier: 1.0,
+                               constant: 0.0).isActive = true
+
+            NSLayoutConstraint(item: containerView,
+                               attribute: .bottom,
+                               relatedBy: .equal,
+                               toItem: keyView,
+                               attribute: .bottom,
+                               multiplier: 1.0,
+                               constant: 0.0).isActive = true
+
+            NSLayoutConstraint(item: graphLoad,
+                               attribute: .centerX,
+                               relatedBy: .equal,
+                               toItem: containerView,
+                               attribute: .centerX,
+                               multiplier: 1.0,
+                               constant: 0.0).isActive = true
+            
+            NSLayoutConstraint(item: graphLoad,
+                               attribute: .centerY,
+                               relatedBy: .equal,
+                               toItem: containerView,
+                               attribute: .centerY,
+                               multiplier: 1.0,
+                               constant: 0.0).isActive = true
+            
+            let lottieWidth = UIScreen.main.bounds.width/4
+
+            NSLayoutConstraint(item: graphLoad,
+                               attribute: .width,
+                               relatedBy: .equal,
+                               toItem: nil,
+                               attribute: .width,
+                               multiplier: 1.0,
+                               constant: lottieWidth).isActive = true
+            
+            NSLayoutConstraint(item: graphLoad,
+                               attribute: .height,
+                               relatedBy: .equal,
+                               toItem: nil,
+                               attribute: .height,
+                               multiplier: 1.0,
+                               constant: lottieWidth).isActive = true
+
+        }
     }
 
 }

@@ -20,5 +20,8 @@ public extension Notification.Name {
     
     /// Reload the tiles.
     public static let PIATilesDidChange = Notification.Name("PIATilesDidChange")
+    
+    /// Present Recover Signup page
+    public static let PIARecoverAccount = Notification.Name("PIARecoverAccount")
 
 }

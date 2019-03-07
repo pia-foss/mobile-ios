@@ -36,6 +36,9 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
         labelVersion.text = Macros.localizedVersionFullString()
         view.backgroundColor = UIColor.piaGrey1
 
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(recoverAccount), name: .PIARecoverAccount, object: nil)
+        
         self.styleButtons()
         
         super.viewDidLoad()
@@ -73,11 +76,6 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let vc = segue.destination as? PIAWelcomeViewController else {
-            if segue.identifier == StoryboardSegue.Welcome.restorePurchaseSegue.rawValue {
-                if let vc = segue.destination as? RestoreSignupViewController {
-                    vc.preset = preset
-                }
-            }
             return
         }
         
@@ -91,6 +89,8 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
             vc.preset.pages = .purchase
         case StoryboardSegue.Welcome.loginAccountSegue.rawValue:
             vc.preset.pages = .login
+        case StoryboardSegue.Welcome.restorePurchaseSegue.rawValue:
+            vc.preset.pages = .restore
         default:
             break
         }
@@ -135,4 +135,9 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
         Theme.current.applyButtonLabelStyle(couldNotGetPlanButton)
     }
 
+    // MARK: Notification event
+    @objc private func recoverAccount() {
+        self.performSegue(withIdentifier: StoryboardSegue.Welcome.restorePurchaseSegue.rawValue,
+                          sender: nil)
+    }
 }

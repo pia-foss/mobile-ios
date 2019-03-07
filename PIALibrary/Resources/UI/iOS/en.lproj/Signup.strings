@@ -31,3 +31,8 @@
 "unreachable.title" = "Whoops!";
 "unreachable.message" = "No internet connection found. Please confirm that you have an internet connection and hit retry below.\n\nYou can come back to the app later to finish the process.";
 "unreachable.submit" = "TRY AGAIN";
+
+"purchase.uncredited.alert.message" = "You have uncredited transactions. Do you want to recover your account details?";
+"purchase.uncredited.alert.button.cancel" = "Cancel";
+"purchase.uncredited.alert.button.recover" = "Recover account";
+

@@ -29,7 +29,6 @@ extension UIView: AnimatingLoadingDelegate {
     public func showLoadingAnimation() {
         if graphLoad == nil {
             graphLoad = LOTAnimationView(name: "pia-spinner")
-            adjustLottieSize()
         }
         addLoadingAnimation()
     }
@@ -40,6 +39,7 @@ extension UIView: AnimatingLoadingDelegate {
             self.addSubview(graphLoad)
             graphLoad.play()
         }
+        setLoadingConstraints()
     }
     
     public func hideLoadingAnimation() {
@@ -56,4 +56,47 @@ extension UIView: AnimatingLoadingDelegate {
             height: lottieWidth
         )
     }
+    
+    private func setLoadingConstraints() {
+        if let graphLoad = graphLoad {
+            
+            graphLoad.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint(item: graphLoad,
+                               attribute: .centerX,
+                               relatedBy: .equal,
+                               toItem: self,
+                               attribute: .centerX,
+                               multiplier: 1.0,
+                               constant: 0.0).isActive = true
+            
+            NSLayoutConstraint(item: graphLoad,
+                               attribute: .centerY,
+                               relatedBy: .equal,
+                               toItem: self,
+                               attribute: .centerY,
+                               multiplier: 1.0,
+                               constant: 0.0).isActive = true
+            
+            let lottieWidth = self.frame.width/2
+
+            NSLayoutConstraint(item: graphLoad,
+                               attribute: .width,
+                               relatedBy: .equal,
+                               toItem: nil,
+                               attribute: .width,
+                               multiplier: 1.0,
+                               constant: lottieWidth).isActive = true
+            
+            NSLayoutConstraint(item: graphLoad,
+                               attribute: .height,
+                               relatedBy: .equal,
+                               toItem: nil,
+                               attribute: .height,
+                               multiplier: 1.0,
+                               constant: lottieWidth).isActive = true
+            
+        }
+    }
+
 }

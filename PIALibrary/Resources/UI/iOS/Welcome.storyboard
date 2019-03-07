@@ -13,7 +13,7 @@
         <!--Restore Signup View Controller-->
         <scene sceneID="fct-7p-tbm">
             <objects>
-                <viewController id="Y1W-Um-2lp" customClass="RestoreSignupViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RestoreSignupViewController" id="Y1W-Um-2lp" customClass="RestoreSignupViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MO3-fL-T5Z">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -864,7 +864,7 @@ You will not be charged during this process.</string>
                                     <constraint firstAttribute="height" constant="20" id="8C6-6B-4dA"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="Y1W-Um-2lp" kind="show" identifier="RestorePurchaseSegue" id="Od1-de-d57"/>
+                                    <segue destination="vXZ-lx-hvc" kind="show" identifier="RestorePurchaseSegue" id="n8s-aK-2Sf"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -911,7 +911,7 @@ You will not be charged during this process.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gh3-NB-ifC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="239" y="-236"/>
+            <point key="canvasLocation" x="-2972" y="-203"/>
         </scene>
         <!--Redeem View Controller-->
         <scene sceneID="RUV-dc-TfS">
@@ -1157,7 +1157,7 @@ You will not be charged during this process.</string>
         <image name="plan-unselected" width="46" height="46"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="L3M-2E-gAx"/>
-        <segue reference="apR-1h-IYV"/>
+        <segue reference="n8s-aK-2Sf"/>
+        <segue reference="Vqa-Fa-HWk"/>
     </inferredMetricsTieBreakers>
 </document>
