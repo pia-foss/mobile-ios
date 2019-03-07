@@ -36,6 +36,9 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
         labelVersion.text = Macros.localizedVersionFullString()
         view.backgroundColor = UIColor.piaGrey1
 
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(recoverAccount), name: .PIARecoverAccount, object: nil)
+        
         self.styleButtons()
         
         super.viewDidLoad()
@@ -132,4 +135,9 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
         Theme.current.applyButtonLabelStyle(couldNotGetPlanButton)
     }
 
+    // MARK: Notification event
+    @objc private func recoverAccount() {
+        self.performSegue(withIdentifier: StoryboardSegue.Welcome.restorePurchaseSegue.rawValue,
+                          sender: nil)
+    }
 }

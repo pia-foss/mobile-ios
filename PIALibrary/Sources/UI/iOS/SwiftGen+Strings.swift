@@ -46,6 +46,20 @@ internal enum L10n {
         internal static let message = L10n.tr("Signup", "in_progress.redeem.message")
       }
     }
+    internal enum Purchase {
+      internal enum Uncredited {
+        internal enum Alert {
+          /// You have uncredited transactions. Do you want to recover your account details?
+          internal static let message = L10n.tr("Signup", "purchase.uncredited.alert.message")
+          internal enum Button {
+            /// Cancel
+            internal static let cancel = L10n.tr("Signup", "purchase.uncredited.alert.button.cancel")
+            /// Recover account
+            internal static let recover = L10n.tr("Signup", "purchase.uncredited.alert.button.recover")
+          }
+        }
+      }
+    }
     internal enum Success {
       /// Thank you for signing up with us. We have sent your account username and password at your email address at %@
       internal static func messageFormat(_ p1: String) -> String {

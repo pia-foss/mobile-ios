@@ -90,6 +90,7 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
             if let vc = segue.destination as? ConfirmVPNPlanViewController,
                 let selectedIndex = selectedPlanIndex {
                 vc.preset = preset
+                vc.completionDelegate = completionDelegate
                 vc.populateViewWith(plans: allPlans,
                                     andSelectedPlanIndex: selectedIndex)
             }
