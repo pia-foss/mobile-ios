@@ -475,7 +475,7 @@ internal enum L10n {
         internal static let title = L10n.tr("Localizable", "settings.hotspothelper.cellular.title")
       }
       internal enum Enable {
-        /// VPN WiFi Protection automatically enables the VPN when connecting to untrusted networks if this option is enabled.
+        /// PIA automatically enables the VPN when connecting to untrusted WiFi networks if this option is enabled.
         internal static let description = L10n.tr("Localizable", "settings.hotspothelper.enable.description")
       }
       internal enum Rules {

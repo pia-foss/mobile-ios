@@ -203,7 +203,7 @@
 
 "settings.hotspothelper.title" = "Network management tool";
 "settings.hotspothelper.description" = "Configure how PIA will behave on connection to WiFi or cellular networks.";
-"settings.hotspothelper.enable.description" = "VPN WiFi Protection automatically enables the VPN when connecting to untrusted networks if this option is enabled.";
+"settings.hotspothelper.enable.description" = "PIA automatically enables the VPN when connecting to untrusted WiFi networks if this option is enabled.";
 "settings.hotspothelper.all.title" = "Protect all networks";
 "settings.hotspothelper.all.description" = "VPN WiFi Protection will activate on all networks, including trusted networks.";
 "settings.hotspothelper.available.help" = "To populate this list go to iOS Settings > WiFi.";
