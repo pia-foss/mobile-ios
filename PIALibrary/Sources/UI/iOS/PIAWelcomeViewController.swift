@@ -23,10 +23,10 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         public static let purchase = Pages(rawValue: 0x02)
         
         /// The redeem page.
-        public static let redeem = Pages(rawValue: 0x04)
+        //public static let redeem = Pages(rawValue: 0x04)
         
         /// All pages.
-        public static let all: Pages = [.login, .purchase, .redeem]
+        public static let all: Pages = [.login, .purchase]//, .redeem]
         
         /// :nodoc:
         public let rawValue: Int

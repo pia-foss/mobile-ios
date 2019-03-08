@@ -62,3 +62,10 @@
 "camera.access.error.title" = "Camera not available";
 "camera.access.error.message" = "Your device does not support scanning QR codes. Please use a device with a camera.";
 "camera.access.denied.message" = "Enable camera access so you can scan QR codes to redeem a gift card.";
+
+"gdpr.collect.data.title" = "Personal information we collect";
+"gdpr.collect.data.description" = "E-mail Address for the purposes of account management and protection from abuse.\n\nPayment Data for the purposes of processing payments as required by our third-party payment processors. Note that we do not save your full credit card details.";
+"gdpr.usage.data.title" = "Uses of personal information collected by us";
+"gdpr.usage.data.description" = "E-mail address is used to send subscription information, payment confirmations, customer correspondence, and Private Internet Access promotional offers only.\n\nPayment data is used to manage client signups, payments, and cancellations.";
+"gdpr.accept.button.title" = "Agree and continue";
+

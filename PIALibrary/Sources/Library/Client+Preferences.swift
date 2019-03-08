@@ -277,10 +277,10 @@ extension Client.Preferences {
             preferredServer = nil
             isPersistentConnection = true
             mace = false
-            useWiFiProtection = false
+            useWiFiProtection = true
             trustCellularData = false
             authMigrationSuccess = false
-            shouldConnectForAllNetworks = false
+            shouldConnectForAllNetworks = true
             vpnType = IPSecProfile.vpnType
             vpnDisconnectsOnSleep = false
             vpnCustomConfigurations = [:]
@@ -377,6 +377,12 @@ extension Client.Preferences {
                 queue.append(VPNActionReinstall())
             }
             if (trustCellularData != target.trustCellularData) {
+                queue.append(VPNActionDisconnectAndReinstall())
+            }
+            if (shouldConnectForAllNetworks != target.shouldConnectForAllNetworks) {
+                queue.append(VPNActionDisconnectAndReinstall())
+            }
+            if (useWiFiProtection != target.useWiFiProtection) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
             if (trustedNetworks != target.trustedNetworks) {

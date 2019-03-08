@@ -40,6 +40,8 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
     
     var omitsSiblingLink = false
     
+    var termsAndConditionsAgreed = false
+    
     weak var completionDelegate: WelcomeCompletionDelegate?
 
     private var allPlans: [PurchasePlan] = [.dummy, .dummy]
@@ -142,6 +144,7 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
     }
     
     @IBAction private func signUp(_ sender: Any?) {
+        
         guard !buttonPurchase.isRunningActivity else {
             return
         }
@@ -156,6 +159,13 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
             let alert = Macros.alert(errorTitle, errorMessage)
             alert.addCancelAction(L10n.Ui.Global.ok)
             present(alert, animated: true, completion: nil)
+            return
+        }
+
+        guard termsAndConditionsAgreed else {
+            //present term and conditions
+            self.performSegue(withIdentifier: StoryboardSegue.Welcome.presentGDPRTermsSegue.rawValue,
+                              sender: nil)
             return
         }
 
@@ -245,6 +255,11 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
             vc.signupRequest = SignupRequest(email: email, transaction: signupTransaction)
             vc.preset = preset
             vc.completionDelegate = completionDelegate
+        } else if (segue.identifier == StoryboardSegue.Welcome.presentGDPRTermsSegue.rawValue) {
+            
+            let gdprViewController = segue.destination as! GDPRViewController
+            gdprViewController.delegate = self
+
         }
     }
     
@@ -325,4 +340,17 @@ extension PurchaseViewController: UITextFieldDelegate {
         }
         return true
     }
+}
+
+extension PurchaseViewController: GDPRDelegate {
+    
+    func gdprViewWasAccepted() {
+        self.termsAndConditionsAgreed = true
+        self.signUp(nil)
+    }
+    
+    func gdprViewWasRejected() {
+        self.termsAndConditionsAgreed = false
+    }
+    
 }

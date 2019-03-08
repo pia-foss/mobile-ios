@@ -122,6 +122,30 @@ internal enum L10n {
         }
       }
     }
+    internal enum Gdpr {
+      internal enum Accept {
+        internal enum Button {
+          /// Agree and continue
+          internal static let title = L10n.tr("Welcome", "gdpr.accept.button.title")
+        }
+      }
+      internal enum Collect {
+        internal enum Data {
+          /// E-mail Address for the purposes of account management and protection from abuse.\n\nPayment Data for the purposes of processing payments as required by our third-party payment processors. Note that we do not save your full credit card details.
+          internal static let description = L10n.tr("Welcome", "gdpr.collect.data.description")
+          /// Personal information we collect
+          internal static let title = L10n.tr("Welcome", "gdpr.collect.data.title")
+        }
+      }
+      internal enum Usage {
+        internal enum Data {
+          /// E-mail address is used to send subscription information, payment confirmations, customer correspondence, and Private Internet Access promotional offers only.\n\nPayment data is used to manage client signups, payments, and cancellations.
+          internal static let description = L10n.tr("Welcome", "gdpr.usage.data.description")
+          /// Uses of personal information collected by us
+          internal static let title = L10n.tr("Welcome", "gdpr.usage.data.title")
+        }
+      }
+    }
     internal enum Iap {
       internal enum Error {
         /// Error
