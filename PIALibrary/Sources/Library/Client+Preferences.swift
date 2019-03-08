@@ -277,10 +277,10 @@ extension Client.Preferences {
             preferredServer = nil
             isPersistentConnection = true
             mace = false
-            useWiFiProtection = false
+            useWiFiProtection = true
             trustCellularData = false
             authMigrationSuccess = false
-            shouldConnectForAllNetworks = false
+            shouldConnectForAllNetworks = true
             vpnType = IPSecProfile.vpnType
             vpnDisconnectsOnSleep = false
             vpnCustomConfigurations = [:]

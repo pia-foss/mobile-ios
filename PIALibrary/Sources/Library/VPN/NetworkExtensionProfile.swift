@@ -77,9 +77,9 @@ extension NetworkExtensionProfile {
                         vpn.onDemandRules?.append(contentsOf: [ruleDisconnect, ruleConnect])
                     }
                 } else {
-                    let ruleConnect = NEOnDemandRuleConnect()
-                    ruleConnect.interfaceTypeMatch = .wiFi
-                    vpn.onDemandRules?.append(ruleConnect)
+                    let ruleDisconnect = NEOnDemandRuleDisconnect()
+                    ruleDisconnect.interfaceTypeMatch = .wiFi
+                    vpn.onDemandRules?.append(ruleDisconnect)
                 }
                 if !Client.preferences.trustCellularData {
                     let ruleConnect = NEOnDemandRuleConnect()
@@ -95,23 +95,14 @@ extension NetworkExtensionProfile {
                     let ruleConnect = NEOnDemandRuleConnect()
                     ruleConnect.interfaceTypeMatch = .cellular
                     vpn.onDemandRules?.append(ruleConnect)
-                } else {
-                    let ruleDisconnect = NEOnDemandRuleDisconnect()
-                    ruleDisconnect.interfaceTypeMatch = .cellular
-                    vpn.onDemandRules?.append(ruleDisconnect)
                 }
                 
-                if !Client.preferences.useWiFiProtection {
-                    let ruleConnect = NEOnDemandRuleConnect()
-                    ruleConnect.interfaceTypeMatch = .wiFi
-                    vpn.onDemandRules?.append(ruleConnect)
-                } else {
+                if Client.preferences.useWiFiProtection {
                     if Client.preferences.shouldConnectForAllNetworks {
                         let ruleConnect = NEOnDemandRuleConnect()
                         ruleConnect.interfaceTypeMatch = .wiFi
                         vpn.onDemandRules?.append(ruleConnect)
                     } else {
-                        
                         let ruleIgnore = NEOnDemandRuleIgnore()
                         ruleIgnore.interfaceTypeMatch = .wiFi
                         ruleIgnore.ssidMatch = trustedNetworks
@@ -120,7 +111,6 @@ extension NetworkExtensionProfile {
                         let ruleConnect = NEOnDemandRuleConnect()
                         ruleConnect.interfaceTypeMatch = .wiFi
                         vpn.onDemandRules?.append(ruleConnect)
-                        
                     }
                 }
             }
