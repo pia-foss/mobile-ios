@@ -20,6 +20,7 @@ internal enum StoryboardSegue {
     case unwindInternetUnreachableSegueIdentifier = "UnwindInternetUnreachableSegueIdentifier"
   }
   internal enum Welcome: String, SegueType {
+    case presentGDPRTermsSegue = "PresentGDPRTermsSegue"
     case signupQRCameraScannerSegue = "SignupQRCameraScannerSegue"
     case signupViaPurchaseSegue = "SignupViaPurchaseSegue"
     case signupViaRecoverSegue = "SignupViaRecoverSegue"
