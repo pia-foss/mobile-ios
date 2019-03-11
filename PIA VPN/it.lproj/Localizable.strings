@@ -133,7 +133,7 @@
 "settings.hotspothelper.cellular.networks" = "Reti di telefonia mobile";
 "settings.hotspothelper.cellular.title" = "Reti di telefonia mobile affidabili";
 "settings.hotspothelper.description" = "Configura il comportamento di PIA in caso di connessione a reti WiFi o di telefonia mobile.";
-"settings.hotspothelper.enable.description" = "Se l'opzione è attivata, la protezione WiFi VPN attiva automaticamente il VPN in caso di connessione a reti non affidabili.";
+"settings.hotspothelper.enable.description" = "Se l'opzione è attivata, PIA attiva automaticamente il VPN in caso di connessione a reti WiFi non affidabili.";
 "settings.hotspothelper.rules.title" = "Regole";
 "settings.hotspothelper.title" = "Strumento di gestione di rete";
 "settings.hotspothelper.wifi.networks" = "Reti WiFi";

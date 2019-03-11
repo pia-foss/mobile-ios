@@ -133,7 +133,7 @@
 "settings.hotspothelper.cellular.networks" = "Redes móviles";
 "settings.hotspothelper.cellular.title" = "Confiar en redes móviles";
 "settings.hotspothelper.description" = "Configura la forma en que PIA se comporta al conectarse a una wifi o red móvil.";
-"settings.hotspothelper.enable.description" = "Si esta opción está activada, la protección wifi VPN habilita automáticamente la VPN al conectarse a redes que no son de confianza.";
+"settings.hotspothelper.enable.description" = "Si esta opción está activada, PIA habilita automáticamente la VPN al conectarse a redes wifi que no son de confianza.";
 "settings.hotspothelper.rules.title" = "Reglas";
 "settings.hotspothelper.title" = "Herramienta de gestión de redes";
 "settings.hotspothelper.wifi.networks" = "Redes wifi";

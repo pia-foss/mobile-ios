@@ -133,7 +133,7 @@
 "settings.hotspothelper.cellular.networks" = "Hücresel ağlar";
 "settings.hotspothelper.cellular.title" = "Hücresel ağlara güven";
 "settings.hotspothelper.description" = "WiFi ya da hücresel ağlara bağlandığınızda PIA'nın nasıl davranacağını yapılandırın.";
-"settings.hotspothelper.enable.description" = "Bu seçenek açıldığında, VPN WiFi Koruması, güvenilmeyen ağlara bağlandığınızda VPN'yi otomatik olarak açar.";
+"settings.hotspothelper.enable.description" = "Bu seçenek açıldığında, PIA, güvenilmeyen WiFi ağlarına bağlandığınızda VPN'yi otomatik olarak açar.";
 "settings.hotspothelper.rules.title" = "Kurallar";
 "settings.hotspothelper.title" = "Ağ yönetim aracı";
 "settings.hotspothelper.wifi.networks" = "WiFi ağları";

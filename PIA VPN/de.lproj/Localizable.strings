@@ -133,7 +133,7 @@
 "settings.hotspothelper.cellular.networks" = "Mobilfunknetze";
 "settings.hotspothelper.cellular.title" = "Vertrauenswürdige Mobilfunknetze";
 "settings.hotspothelper.description" = "Legen Sie fest, wie sich PIA beim Verbindungsaufbau zu Mobilfunknetzen oder WLAN verhalten soll.";
-"settings.hotspothelper.enable.description" = "Wenn diese Option aktiviert ist, wird über den VPN-WLAN-Schutz beim Verbindungsaufbau zu nicht vertrauenswürdigen Netzwerken automatisch VPN eingeschaltet.";
+"settings.hotspothelper.enable.description" = "Wenn diese Option aktiviert ist, aktiviert PIA das VPN automatisch, wenn die Verbindung zu nicht vertrauenswürdigen WLAN-Netzwerken hergestellt wird.";
 "settings.hotspothelper.rules.title" = "Regeln";
 "settings.hotspothelper.title" = "Netzwerkverwaltungstool";
 "settings.hotspothelper.wifi.networks" = "WLAN";

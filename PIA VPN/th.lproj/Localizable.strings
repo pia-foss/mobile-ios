@@ -133,7 +133,7 @@
 "settings.hotspothelper.cellular.networks" = "เครือข่ายเซลลูลาร์";
 "settings.hotspothelper.cellular.title" = "เชื่อถือเครือข่ายเซลลูลาร์";
 "settings.hotspothelper.description" = "กำหนดค่าวิธีการทำงานของ PIA ในการเชื่อมต่อกับ WiFi หรือเครือข่ายเซลลูลาร์";
-"settings.hotspothelper.enable.description" = "การป้องกัน VPN WiFi เปิดใช้งาน VPN โดยอัตโนมัติเมื่อเชื่อมต่อกับเครือข่ายที่ไม่น่าเชื่อถือหากเปิดใช้งานตัวเลือกนี้";
+"settings.hotspothelper.enable.description" = "PIA จะเปิดใช้งาน VPN โดยอัตโนมัติเมื่อเชื่อมต่อกับเครือข่าย WiFi ที่ไม่น่าเชื่อถือหากเปิดใช้งานตัวเลือกนี้";
 "settings.hotspothelper.rules.title" = "กฎระเบียบ";
 "settings.hotspothelper.title" = "เครื่องมือจัดการเครือข่าย";
 "settings.hotspothelper.wifi.networks" = "เครือข่าย WiFi";

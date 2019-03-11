@@ -133,7 +133,7 @@
 "settings.hotspothelper.cellular.networks" = "الشبكات الخلوية";
 "settings.hotspothelper.cellular.title" = "وثوق في الشبكات الخلوية";
 "settings.hotspothelper.description" = "قم بتكوين سلوك PIA عند الاتصال بشبكات WiFi أو الشبكات الخلوية.";
-"settings.hotspothelper.enable.description" = "إذا تم تمكين هذا الخيار، ستمكّن حماية VPN WiFi خدمة VPN تلقائيًا عند الاتصال بالشبكات غير الموثوقة.";
+"settings.hotspothelper.enable.description" = "إذا تم تمكين هذا الخيار، ستمكّن PIA خدمة VPN تلقائيًا عند الاتصال بشبكات WiFi غير الموثوقة.";
 "settings.hotspothelper.rules.title" = "القواعد";
 "settings.hotspothelper.title" = "أداة إدارة الشبكات";
 "settings.hotspothelper.wifi.networks" = "شبكات WiFi";

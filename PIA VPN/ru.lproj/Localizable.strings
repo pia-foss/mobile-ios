@@ -133,7 +133,7 @@
 "settings.hotspothelper.cellular.networks" = "Мобильные сети";
 "settings.hotspothelper.cellular.title" = "Доверять мобильным сетям";
 "settings.hotspothelper.description" = "Настройте поведение PIA при подключении к WiFi или мобильным сетям.";
-"settings.hotspothelper.enable.description" = "Если этот параметр активирован, защита WiFi с помощью VPN автоматически включает VPN при подключении к ненадежным сетям.";
+"settings.hotspothelper.enable.description" = "Если этот параметр активирован, PIA автоматически включает VPN при подключении к ненадежным сетям WiFi.";
 "settings.hotspothelper.rules.title" = "Правила";
 "settings.hotspothelper.title" = "Средство управления сетями";
 "settings.hotspothelper.wifi.networks" = "Сети WiFi";

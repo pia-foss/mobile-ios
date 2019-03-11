@@ -133,7 +133,7 @@
 "settings.hotspothelper.cellular.networks" = "セルラーネットワーク";
 "settings.hotspothelper.cellular.title" = "セルラーネットワークを信頼する";
 "settings.hotspothelper.description" = "WiFiまたはセルラーネットワークへの接続でPIAがどのように動作するかを構成します。";
-"settings.hotspothelper.enable.description" = "このオプションが有効にされている場合、信頼されていないセルラーネットワークへの接続時に、VPN WiFi保護がVPNを自動的に有効にします。";
+"settings.hotspothelper.enable.description" = "このオプションが有効にされている場合、信頼されていないWiFiネットワークへの接続時に、PIAがVPNを自動的に有効にします。";
 "settings.hotspothelper.rules.title" = "ルール";
 "settings.hotspothelper.title" = "ネットワーク管理ツール";
 "settings.hotspothelper.wifi.networks" = "WiFiネットワーク";

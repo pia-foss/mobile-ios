@@ -133,7 +133,7 @@
 "settings.hotspothelper.cellular.networks" = "셀룰러 네트워크";
 "settings.hotspothelper.cellular.title" = "셀룰러 네트워크 신뢰";
 "settings.hotspothelper.description" = "PIA가 WiFi 또는 셀룰러 네트워크에서 작동하는 방식을 설정합니다.";
-"settings.hotspothelper.enable.description" = "이 옵션을 활성화하면 신뢰하지 않는 네트워크에 연결할 때 VPN WiFi 보호가 자동으로 VPN을 활성화합니다.";
+"settings.hotspothelper.enable.description" = "이 옵션을 활성화하면 신뢰하지 않는 WiFi 네트워크에 연결할 때 PIA가 자동으로 VPN을 활성화합니다.";
 "settings.hotspothelper.rules.title" = "규칙";
 "settings.hotspothelper.title" = "네트워크 관리 도구";
 "settings.hotspothelper.wifi.networks" = "WiFi 네트워크";

@@ -133,7 +133,7 @@
 "settings.hotspothelper.cellular.networks" = "Sieci komórkowe";
 "settings.hotspothelper.cellular.title" = "Zaufane Sieci komórkowe";
 "settings.hotspothelper.description" = "Konfiguracja zachowania PIA przy łączeniu z się sieciami komórkowymi.";
-"settings.hotspothelper.enable.description" = "Ochrona V PN automatycznie włącza VPN przy łączeniu z sieciami komórkowymi.";
+"settings.hotspothelper.enable.description" = "Ochrona V PN automatycznie uruchamia VPN przy łączeniu z niezaufanymi sieciami WiFi, i, jeśli ta opcja jest włączona.";
 "settings.hotspothelper.rules.title" = "Reguły";
 "settings.hotspothelper.title" = "Narzędzie zarządzania sieciami";
 "settings.hotspothelper.wifi.networks" = "Sieci WIFi";

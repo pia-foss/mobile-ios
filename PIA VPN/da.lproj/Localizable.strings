@@ -133,7 +133,7 @@
 "settings.hotspothelper.cellular.networks" = "Mobilnetværk";
 "settings.hotspothelper.cellular.title" = "Betroede mobilnetværk";
 "settings.hotspothelper.description" = "Konfigurer, hvordan PIA vil opføre sig ved forbindelse til WiFi eller mobilnetværk.";
-"settings.hotspothelper.enable.description" = "VPN WiFi-beskyttelse aktiverer automatisk VPN'en, når den tilsluttes til usikre netværk, hvis denne indstilling er aktiveret.";
+"settings.hotspothelper.enable.description" = "PIA aktiverer automatisk VPN'en, når den tilsluttes usikre Wifi-netværk, hvis denne indstilling er aktiveret.";
 "settings.hotspothelper.rules.title" = "Regler";
 "settings.hotspothelper.title" = "Netværksstyringsværktøj";
 "settings.hotspothelper.wifi.networks" = "WiFi-netværk";
