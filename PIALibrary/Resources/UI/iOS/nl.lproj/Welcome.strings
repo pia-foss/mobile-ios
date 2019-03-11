@@ -4,6 +4,11 @@
 "camera.access.denied.message" = "Geef cameratoegang zodat we de QR-codes kunnen scannen en de cadeaubonnen kunnen inwisselen.";
 "camera.access.error.message" = "Uw apparaat ondersteunt het scannen van QR-codes niet. Gebruik een apparaat met een camera, a.u.b.";
 "camera.access.error.title" = "Camera niet beschikbaar";
+"gdpr.accept.button.title" = "Akkoord en doorgaan";
+"gdpr.collect.data.description" = "E-mailadres voor accountbeheer en bescherming tegen misbruik.\n\nBetalingsgegevens voor het verwerken van betalingen zoals vereist door onze externe betalingsverwerkers. We slaan uw volledige creditcardgegevens niet op.";
+"gdpr.collect.data.title" = "Persoonlijke informatie die we verzamelen";
+"gdpr.usage.data.description" = "E-mailadres wordt alleen gebruikt voor het verzenden van abonnementsinformatie, betalingsbevestigingen, correspondentie met klanten en promotionele aanbiedingen van Private Internet Access.\n\nBetalingsgegevens worden gebruikt om aanmeldingen, betalingen en annuleringen van klanten te beheren.";
+"gdpr.usage.data.title" = "Gebruik van de persoonlijke informatie die we verzamelen";
 "iap.error.message.unavailable" = "De Apple-servers zijn momenteel niet beschikbaar. Probeer het later opnieuw.";
 "iap.error.title" = "Fout";
 "login.error.throttled" = "Te veel mislukte inlogpogingen met deze gebruikersnaam. Probeer het later opnieuw.";

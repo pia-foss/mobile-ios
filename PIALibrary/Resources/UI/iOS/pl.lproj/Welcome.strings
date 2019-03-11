@@ -4,6 +4,11 @@
 "camera.access.denied.message" = "Zezwól na dostęp do aparatu, aby skanować kody QR i korzystać z kart upominkowych.";
 "camera.access.error.message" = "Twoje urządzenie nie obsługuje skanowania kodów QR. Użyj urządzenia z aparatem.";
 "camera.access.error.title" = "Aparat nie dostępny";
+"gdpr.accept.button.title" = "Zaakceptuj i kontynuuj";
+"gdpr.collect.data.description" = "Adres e-mail do zarządzania kontem i ochrony przed nadużyciami. n\nDane o płatnościach do przetwarzania informacji wymaganych przez zewnętrzne firmy zajmujących się przetwarzaniem płatności. Proszę pamiętać, że nie przechowujemy pełnych danych Państwa karty kredytowej.";
+"gdpr.collect.data.title" = "Zbierane przez dane asobowe";
+"gdpr.usage.data.description" = "Adres e-mail; używamy go do wysyłania informacji o subskrypcji, potwierdzeń płatności, korespondencji z klientami i wysyłania ofert promocyjnych wyłącznie Private Internet Access n\ndane o Płatnościach, służą do zarządzania rejestracjami, płatnościami i rezygnacjami klientów z subskrypcji.";
+"gdpr.usage.data.title" = "Sposoby wykorzystania zbieranych przez nas danych osobowych";
 "iap.error.message.unavailable" = "Serwery Apple'a są w tej chwili niedostępne. Spróbuj ponownie później.";
 "iap.error.title" = "Błąd";
 "login.error.throttled" = "Zbyt wiele nieudanych prób logowania z tą nazwą użytkownika. Spróbuj ponownie później.";

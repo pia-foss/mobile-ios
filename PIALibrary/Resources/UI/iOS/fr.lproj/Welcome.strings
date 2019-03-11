@@ -4,6 +4,11 @@
 "camera.access.denied.message" = "Activez l'accès à l'appareil photo pour scanner les codes QR et utiliser ainsi les cartes cadeau.";
 "camera.access.error.message" = "Votre appareil ne permet pas de scanner les codes QR. Veuillez utiliser un appareil doté d'un appareil photo.";
 "camera.access.error.title" = "Appareil photo indisponible";
+"gdpr.accept.button.title" = "Accepter et continuer";
+"gdpr.collect.data.description" = "Adresse e-mail dans le but de gérer le compte et de protéger des abus.\n\nDonnées de paiement dans le but de traiter les paiements comme cela est requis par nos processeurs de paiement tiers. Notez que nous n'enregistrons pas les détails complets de votre carte de crédit.";
+"gdpr.collect.data.title" = "Informations personnelles que nous collectons";
+"gdpr.usage.data.description" = "L'adresse e-mail est utilisée pour envoyer les informations d'abonnement, les confirmation de paiement, la correspondance avec le client, et les offres promotionnelles de Private Internet Access uniquement.\n\nLes données de paiement servent à gérer l'inscription, les paiements et les annulations du client.";
+"gdpr.usage.data.title" = "Utilisation des informations personnelles que nous collectons";
 "iap.error.message.unavailable" = "Les serveurs Apple ne sont pas disponibles actuellement. Veuillez réessayer plus tard.";
 "iap.error.title" = "Erreur";
 "login.error.throttled" = "Trop de tentatives de connexion échouées avec ce nom d'utilisateur. Veuillez réessayer plus tard.";

@@ -4,6 +4,11 @@
 "camera.access.denied.message" = "Aktiver kameraadgang, så du kan scanne QR-koder for at indløse et gavekort.";
 "camera.access.error.message" = "Din enhed understøtter ikke scanning af QR-koder. Brug venligst en enhed med et kamera.";
 "camera.access.error.title" = "Kamera ikke tilgængeligt";
+"gdpr.accept.button.title" = "Accepter og fortsæt";
+"gdpr.collect.data.description" = "E-mailadresse med henblik på kontohåndtering og beskyttelse mod misbrug.\n\nBetalingsdata med det formål at behandle betalinger som krævet af vores tredjeparts betalingsprocessorer. Bemærk, at vi ikke gemmer dine fulde kreditkortoplysninger.";
+"gdpr.collect.data.title" = "Personlige oplysninger, vi indsamler";
+"gdpr.usage.data.description" = "E-mailadresse bruges kun til at sende abonnementsoplysninger, betalingsbekræftelser, kundekorrespondance og salgsfremmende tilbud fra Private Internet Access.\n\nBetalingsdata bruges til at administrere kundetilmeldinger, betalinger og aflysninger.";
+"gdpr.usage.data.title" = "Anvendelse af personlige oplysninger indsamlet af os";
 "iap.error.message.unavailable" = "Apple-servere er ikke tilgængelige i øjeblikket. Prøv venligst igen senere.";
 "iap.error.title" = "Fejl";
 "login.error.throttled" = "Alt for mange mislykkede forsøg på at logge ind med dette brugernavn. Prøv venligst igen senere.";

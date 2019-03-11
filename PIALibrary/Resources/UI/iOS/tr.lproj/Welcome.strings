@@ -4,6 +4,11 @@
 "camera.access.denied.message" = "Kamera erişimini etkinleştirin, böylece bir hediye kartını kullanmak için QR kodlarını tarayabilirsiniz.";
 "camera.access.error.message" = "Cihazınız QR kodlarının taranmasını desteklemiyor. Lütfen kamerası olan bir cihaz kullanın.";
 "camera.access.error.title" = "Kamera kullanılabilir değil";
+"gdpr.accept.button.title" = "Kabul edip devam et";
+"gdpr.collect.data.description" = "Hesap yönetimi ve ihlalden koruma için E-posta Adresi.\n\nÜçüncü kısım ödeme işlemcilerimiz tarafından talep edildiği şekilde, ödemelerin işleme alınması amacıyla Ödeme Verileri. Kredi kartı bilgilerinizin tamamını kaydetmediğimizi göz önünde bulundurun.";
+"gdpr.collect.data.title" = "Topladığımız kişisel bilgiler";
+"gdpr.usage.data.description" = "E-posta adresi sadece abonelik bilgilerinin, ödeme onaylarının, müşteri iletişim unsurlarının ve Private Internet Access'in promosyonel tekliflerinin gönderilmesi için kullanılır.\n\nÖdeme verileri; müşteri kayıtları, ödemeler ve iptal işlemleri için kullanılır.";
+"gdpr.usage.data.title" = "Tarafımızca toplanan kişisel bilgilerin kullanım şekilleri";
 "iap.error.message.unavailable" = "Apple sunucuları şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.";
 "iap.error.title" = "Hata";
 "login.error.throttled" = "Bu kullanıcı adı ile çok fazla kez yanlış giriş yapıldı. Lütfen daha sonra tekrar deneyin.";

@@ -4,6 +4,11 @@
 "camera.access.denied.message" = "启用相机访问权限，以便您扫描二维码，兑换礼品卡。";
 "camera.access.error.message" = "您的设备不支持二维码扫描。请使用附带摄像头的设备。";
 "camera.access.error.title" = "相机不可用";
+"gdpr.accept.button.title" = "同意并继续";
+"gdpr.collect.data.description" = "用于账户管理和防止滥用的电子邮件地址。n\n用于处理第三方付款处理商所要求付款的付款数据。请注意，我们不会保存您的完整信用卡详情。";
+"gdpr.collect.data.title" = "我们收集的个人信息";
+"gdpr.usage.data.description" = "电子邮件地址仅用于发送订阅信息、付款确认、客户通信以及 Private Internet Access 促销优惠。\n\n付款数据用于管理客户注册、付款和取消。";
+"gdpr.usage.data.title" = "我们收集的个人信息的使用方式";
 "iap.error.message.unavailable" = "Apple 服务器目前不可用。请稍后重试。";
 "iap.error.title" = "错误";
 "login.error.throttled" = "此用户名尝试登录的失败次数过多。请稍后再试。";
