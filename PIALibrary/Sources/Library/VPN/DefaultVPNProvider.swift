@@ -122,7 +122,7 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         if let previousProfile = previousProfile {
             previousProfile.disconnect(installBlock)
         } else {
-            if newVPNType != activeProfile?.vpnType || !forcedStatuses {
+            if newVPNType != activeProfile?.vpnType || !forcedStatuses || forceInstall {
                 //only install if new and connected
                 if Client.providers.vpnProvider.vpnStatus == .connected || forceInstall {
                     installBlock(nil)

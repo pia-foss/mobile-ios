@@ -41,6 +41,7 @@ private protocol PreferencesStore: class {
     func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration?
     
     func setVPNCustomConfiguration(_ customConfiguration: VPNCustomConfiguration, for vpnType: String)
+    
 }
 
 private extension PreferencesStore {
@@ -277,10 +278,10 @@ extension Client.Preferences {
             preferredServer = nil
             isPersistentConnection = true
             mace = false
-            useWiFiProtection = false
+            useWiFiProtection = true
             trustCellularData = false
             authMigrationSuccess = false
-            shouldConnectForAllNetworks = false
+            shouldConnectForAllNetworks = true
             vpnType = IPSecProfile.vpnType
             vpnDisconnectsOnSleep = false
             vpnCustomConfigurations = [:]
@@ -347,7 +348,7 @@ extension Client.Preferences {
 
         /// :nodoc:
         public var trustedNetworks: [String]
-        
+
         /// :nodoc:
         public var disconnectOnTrusted: Bool
 
@@ -402,9 +403,6 @@ extension Client.Preferences {
             }
             if (vpnType != target.vpnType) {
                 queue.append(VPNActionDisconnectAndReinstall())
-            }
-            if (isPersistentConnection != target.isPersistentConnection) {
-                queue.append(VPNActionReinstall())
             }
             if let configuration = vpnCustomConfigurations[vpnType],
                 let targetConfiguration = target.activeVPNCustomConfiguration,

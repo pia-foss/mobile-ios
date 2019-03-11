@@ -23,6 +23,7 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
     private var signupTransaction: InAppTransaction?
     weak var completionDelegate: WelcomeCompletionDelegate?
     var omitsSiblingLink = false
+    var termsAndConditionsAgreed = false
 
     var preset: Preset?
     private var allPlans: [PurchasePlan] = [.dummy, .dummy]
@@ -88,6 +89,13 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
             return
         }
         
+        guard termsAndConditionsAgreed else {
+            //present term and conditions
+            self.performSegue(withIdentifier: StoryboardSegue.Welcome.presentGDPRTermsSegue.rawValue,
+                              sender: nil)
+            return
+        }
+
         self.status = .restore(element: textEmail)
         
         let plan = allPlans[planIndex]
@@ -188,6 +196,11 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
             vc.signupRequest = SignupRequest(email: email, transaction: signupTransaction)
             vc.preset = preset
             vc.completionDelegate = completionDelegate
+        } else if (segue.identifier == StoryboardSegue.Welcome.presentGDPRTermsSegue.rawValue) {
+            
+            let gdprViewController = segue.destination as! GDPRViewController
+            gdprViewController.delegate = self
+            
         }
     }
     
@@ -210,4 +223,17 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
                                for: [])
     }
 
+}
+
+extension ConfirmVPNPlanViewController: GDPRDelegate {
+    
+    public func gdprViewWasAccepted() {
+        self.termsAndConditionsAgreed = true
+        self.signUp(nil)
+    }
+    
+    public func gdprViewWasRejected() {
+        self.termsAndConditionsAgreed = false
+    }
+    
 }

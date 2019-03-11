@@ -4,6 +4,11 @@
 "camera.access.denied.message" = "請授予相機存取權，以掃描 QR 碼並兌換禮品卡。";
 "camera.access.error.message" = "您的裝置不支援掃描 QR 碼。請使用附有相機的裝置。";
 "camera.access.error.title" = "無法使用相機";
+"gdpr.accept.button.title" = "同意並繼續";
+"gdpr.collect.data.description" = "電子郵件地址用於管理帳戶及防止濫用。\n\n付款資料用於按照第三方付款處理商的要求處理付款。請注意，我們絕不儲存您的完整信用卡資料。";
+"gdpr.collect.data.title" = "我們收集的個人資料";
+"gdpr.usage.data.description" = "電子郵件地址僅用於傳送訂閱資訊、付款確認函、客戶通訊及 Private Internet Access 的促銷優惠。\n\n付款資料用於管理客戶註冊、付款及取消事宜。";
+"gdpr.usage.data.title" = "我們收集個人資料的用途";
 "iap.error.message.unavailable" = "Apple 伺服器目前無法使用，請稍後再試。";
 "iap.error.title" = "錯誤";
 "login.error.throttled" = "此使用者名稱登入失敗次數太多，\n請稍後再試。";

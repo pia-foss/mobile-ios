@@ -19,7 +19,6 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
     
     @IBOutlet private weak var loginButton: PIAButton!
     @IBOutlet private weak var buyButton: PIAButton!
-    @IBOutlet private weak var redeemButton: UIButton!
     @IBOutlet private weak var couldNotGetPlanButton: UIButton!
 
     var preset = Preset()
@@ -83,8 +82,6 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
         vc.preset = self.preset
 
         switch segue.identifier  {
-        case StoryboardSegue.Welcome.redeemGiftCardSegue.rawValue:
-            vc.preset.pages = .redeem
         case StoryboardSegue.Welcome.purchaseVPNPlanSegue.rawValue:
             vc.preset.pages = .purchase
         case StoryboardSegue.Welcome.loginAccountSegue.rawValue:
@@ -113,8 +110,6 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
                              for: [])
         buyButton.setTitle(L10n.Welcome.Getstarted.Buttons.buyaccount.uppercased(),
                            for: [])
-        redeemButton.setTitle(L10n.Welcome.Redeem.title,
-                              for: [])
         couldNotGetPlanButton.setTitle(L10n.Welcome.Login.Restore.button,
                                        for: [])
     }
@@ -131,7 +126,6 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
         Theme.current.applyCenteredMap(centeredMap)
         Theme.current.applyTransparentButton(loginButton,
                                              withSize: 1.0)
-        Theme.current.applyButtonLabelStyle(redeemButton)
         Theme.current.applyButtonLabelStyle(couldNotGetPlanButton)
     }
 

@@ -427,6 +427,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.useWiFiProtection)
         backend.removeObject(forKey: Entries.trustCellularData)
         backend.removeObject(forKey: Entries.authMigrationSuccess)
+        backend.removeObject(forKey: Entries.disconnectOnTrusted)
         backend.synchronize()
     }
 

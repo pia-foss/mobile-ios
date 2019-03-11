@@ -22,6 +22,7 @@ internal enum StoryboardSegue {
   internal enum Welcome: String, SegueType {
     case confirmPurchaseVPNPlanSegue = "ConfirmPurchaseVPNPlanSegue"
     case loginAccountSegue = "LoginAccountSegue"
+    case presentGDPRTermsSegue = "PresentGDPRTermsSegue"
     case purchaseVPNPlanSegue = "PurchaseVPNPlanSegue"
     case redeemGiftCardSegue = "RedeemGiftCardSegue"
     case restorePurchaseSegue = "RestorePurchaseSegue"

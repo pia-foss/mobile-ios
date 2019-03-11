@@ -66,6 +66,14 @@ class PurchasePlanCell: UICollectionViewCell, Restylable {
                 priceBottomConstraint.constant = PurchasePlanCell.priceBottomConstant
             }
             
+            if plan.plan == Plan.yearly {
+                Theme.current.applyTitle(labelDetail, appearance: .dark)
+                Theme.current.applySmallInfo(labelPrice, appearance: .dark)
+            } else {
+                Theme.current.applyTitle(labelPrice, appearance: .dark)
+                Theme.current.applySmallInfo(labelDetail, appearance: .dark)
+            }
+
             self.layoutSubviews()
 
             accessibilityLabel = "\(plan.title), \(plan.accessibleMonthlyPriceString) \(L10n.Welcome.Plan.Accessibility.perMonth)"

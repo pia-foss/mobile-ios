@@ -72,7 +72,7 @@ protocol PlainStore: class {
     var cachedNetworks: [String] { get set }
     
     var trustedNetworks: [String] { get set }
-
+    
     var disconnectOnTrusted: Bool? { get set }
 
 }

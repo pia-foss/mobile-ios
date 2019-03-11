@@ -29,10 +29,6 @@ class WelcomePageViewController: UIPageViewController {
             let vc = StoryboardScene.Welcome.purchaseViewController.instantiate()
             source.append(vc)
         }
-        if preset.pages.contains(.redeem) {
-            let vc = StoryboardScene.Welcome.redeemViewController.instantiate()
-            source.append(vc)
-        }
         if preset.pages.contains(.restore) {
             let vc = StoryboardScene.Welcome.restoreViewController.instantiate()
             source.append(vc)
@@ -77,9 +73,6 @@ class WelcomePageViewController: UIPageViewController {
         case .purchase:
             index = 1
             
-        case .redeem:
-            index = 2
-           
         case .restore:
             index = 3
 

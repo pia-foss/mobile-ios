@@ -4,6 +4,11 @@
 "camera.access.denied.message" = "기프트 카드 사용을 위해 QR 코드를 스캔할 수 있도록 카메라 접근권을 허용하세요.";
 "camera.access.error.message" = "기기에서 QR 코드 스캔 기능을 지원하지 않습니다. 카메라가 있는 기기를 사용하세요.";
 "camera.access.error.title" = "카메라를 이용할 수 없음";
+"gdpr.accept.button.title" = "동의 및 계속";
+"gdpr.collect.data.description" = "계정 관리 및 악용 방지를 위한 이메일 주소\n\n타사 결제 대행 업체가 요구한 결제 처리용 결제 데이터. 저희는 귀하의 전체 신용카드 정보를 저장하지 않습니다.";
+"gdpr.collect.data.title" = "당사가 수집하는 개인 정보";
+"gdpr.usage.data.description" = "구독 정보, 결제 확인, 고객 공지 사항 및 Private Internet Access 프로모션 정보를 발송하는 데에만 사용되는 이메일 주소.\n\n결제 데이터는 고객 가입, 결제 및 취소를 관리하는 데 사용됩니다.";
+"gdpr.usage.data.title" = "수집된 개인 정보의 사용";
 "iap.error.message.unavailable" = "현재 Apple 서버를 이용할 수 없습니다. 나중에 다시 시도해주십시오.";
 "iap.error.title" = "오류";
 "login.error.throttled" = "이 사용자 이름으로 너무 많은 로그인 시도가 실패했습니다. 나중에 다시 시도해주십시오.";

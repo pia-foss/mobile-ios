@@ -28,8 +28,6 @@ internal enum Asset {
   internal static let logoLight = ImageAsset(name: "logo-light")
   internal static let planSelected = ImageAsset(name: "plan-selected")
   internal static let planUnselected = ImageAsset(name: "plan-unselected")
-  internal static let trustedIcon = ImageAsset(name: "trusted-icon")
-  internal static let untrustedIcon = ImageAsset(name: "untrusted-icon")
   internal static let closeIcon = ImageAsset(name: "close-icon")
   internal static let imageAccountFailed = ImageAsset(name: "image-account-failed")
   internal static let imageNoInternet = ImageAsset(name: "image-no-internet")

@@ -4,6 +4,11 @@
 "camera.access.denied.message" = "QRコードをスキャンし、ギフトカードを利用するには、カメラへのアクセスを許可してください。";
 "camera.access.error.message" = "お使いのデバイスはQRコードのスキャンに対応していません。カメラが搭載されたデバイスをお使いください。";
 "camera.access.error.title" = "カメラが利用できません";
+"gdpr.accept.button.title" = "同意して続行する";
+"gdpr.collect.data.description" = "メールアドレスは、アカウント管理、および乱用からの保護を目的とします。\n\nお支払データは、弊社のサードパーティー支払い処理業者により義務付けられており、支払処理を目的とします。弊社はお客様のクレジットカードの完全な詳細情報を保管しないことにご留意ください。";
+"gdpr.collect.data.title" = "弊社が収集する個人情報";
+"gdpr.usage.data.description" = "メールアドレスはサブスクリプション情報、お支払確認、お客様とのやり取り、およびPrivate Internet Accessのプロモーションオファーを送信するためにのみ使用されます。\n\nお支払データはお客様のサインアップ、お支払、およびキャンセルを管理するために使用されます。";
+"gdpr.usage.data.title" = "弊社により収集される個人情報の使用";
 "iap.error.message.unavailable" = "Appleサーバーが現在ご利用いただけません。後でもう一度お試しください。";
 "iap.error.title" = "エラー";
 "login.error.throttled" = "このユーザー名で最大ログイン試行回数を超えました。後でもう一度お試しください。";

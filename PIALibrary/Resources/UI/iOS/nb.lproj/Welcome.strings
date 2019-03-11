@@ -4,6 +4,11 @@
 "camera.access.denied.message" = "Aktiver kameratilgang slik at du kan skanne QR-koder for å løse inn gavekort.";
 "camera.access.error.message" = "Enheten støtter ikke skanning av QR-koder. Bruk en enhet med kamera.";
 "camera.access.error.title" = "Kamera ikke tilgjengelig";
+"gdpr.accept.button.title" = "Godta og fortsett";
+"gdpr.collect.data.description" = "E-postadresse for kontoadministrasjon og beskyttelse mot misbruk.\n\nBetalingsdata for prosessering av betalinger som påkrevet av vår tredjeparts betalingsenhet. Vær oppmerksom på at vi ikke lagrer kredittkortinformasjonen din.";
+"gdpr.collect.data.title" = "Personlig informasjon vi tar vare på";
+"gdpr.usage.data.description" = "E-postadresse blir kun brukt for å sende ut informasjon om abonnementet, betalingsbekreftelser, kundekorrespondanse og tilbud om privat internettilgang.\n\nBetalingsdata blir brukt for å administrere kunderegistreringer, betalinger og kanselleringer.";
+"gdpr.usage.data.title" = "Bruk av personlig informasjon samlet inn av oss";
 "iap.error.message.unavailable" = "Apple-serverne er for øyeblikket ikke tilgjengelige. Prøv igjen senere.";
 "iap.error.title" = "Feil";
 "login.error.throttled" = "For mange mislykkede påloggingsforsøk med dette brukernavnet. Prøv igjen senere.";
