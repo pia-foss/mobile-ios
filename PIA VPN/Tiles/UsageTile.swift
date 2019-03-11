@@ -79,7 +79,8 @@ class UsageTile: UIView, Tileable  {
     }
     
     private func updateStyleForVPNType(_ vpnType: String) {
-        if vpnType == IPSecProfile.vpnType {
+        if vpnType == IPSecProfile.vpnType ||
+            vpnType == IKEv2Profile.vpnType {
             self.uploadValue.text = ByteCountFormatter.string(fromByteCount: Int64(0),
                                                               countStyle: .file)
             self.downloadValue.text = ByteCountFormatter.string(fromByteCount: Int64(0),
