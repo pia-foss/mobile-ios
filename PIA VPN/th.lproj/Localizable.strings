@@ -125,7 +125,8 @@
 "settings.hotspothelper.cellular.networks" = "เครือข่ายเซลลูลาร์";
 "settings.hotspothelper.cellular.title" = "เชื่อถือเครือข่ายเซลลูลาร์";
 "settings.hotspothelper.description" = "กำหนดค่าวิธีการทำงานของ PIA ในการเชื่อมต่อกับ WiFi หรือเครือข่ายเซลลูลาร์";
-"settings.hotspothelper.enable.description" = "การป้องกัน VPN WiFi เปิดใช้งาน VPN โดยอัตโนมัติเมื่อเชื่อมต่อกับเครือข่ายที่ไม่น่าเชื่อถือหากเปิดใช้งานตัวเลือกนี้";
+"settings.hotspothelper.enable.description" = "PIA จะเปิดใช้งาน VPN โดยอัตโนมัติเมื่อเชื่อมต่อกับเครือข่าย WiFi ที่ไม่น่าเชื่อถือหากเปิดใช้งานตัวเลือกนี้";
+"settings.hotspothelper.rules.title" = "กฎระเบียบ";
 "settings.hotspothelper.title" = "เครื่องมือจัดการเครือข่าย";
 "settings.hotspothelper.wifi.networks" = "เครือข่าย WiFi";
 "settings.hotspothelper.wifi.trust.title" = "การป้องกัน VPN WiFi";
@@ -140,6 +141,9 @@
 "settings.trusted.networks.sections.available" = "เครือข่ายที่ใช้ได้";
 "settings.trusted.networks.sections.current" = "เครือข่ายปัจจุบัน";
 "settings.trusted.networks.sections.trusted" = "เครือข่ายที่เชื่อถือ";
+"settings.trusted.networks.sections.trusted.rule.action" = "ยกเลิกการเชื่อมต่อ PIA VPN";
+"settings.trusted.networks.sections.trusted.rule.description" = "ทำตามคำสั่งเมื่อเข้าร่วมเครือข่ายที่เชื่อถือ";
+"settings.trusted.networks.sections.untrusted" = "เครือข่ายที่ไม่เชื่อถือ";
 "shortcuts.connect" = "เชื่อมต่อ";
 "shortcuts.disconnect" = "ยกเลิกการเชื่อมต่อ";
 "shortcuts.select_region" = "เลือกภูมิภาค";

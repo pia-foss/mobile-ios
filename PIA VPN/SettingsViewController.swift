@@ -568,6 +568,7 @@ class SettingsViewController: AutolayoutViewController {
         pendingPreferences.shouldConnectForAllNetworks = Client.preferences.shouldConnectForAllNetworks
         pendingPreferences.useWiFiProtection = Client.preferences.useWiFiProtection
         pendingPreferences.trustCellularData = Client.preferences.trustCellularData
+        pendingPreferences.disconnectOnTrusted = Client.preferences.disconnectOnTrusted
         pendingPreferences.commit()
     }
     

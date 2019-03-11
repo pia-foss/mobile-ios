@@ -125,7 +125,8 @@
 "settings.hotspothelper.cellular.networks" = "Sieci komórkowe";
 "settings.hotspothelper.cellular.title" = "Zaufane Sieci komórkowe";
 "settings.hotspothelper.description" = "Konfiguracja zachowania PIA przy łączeniu z się sieciami komórkowymi.";
-"settings.hotspothelper.enable.description" = "Ochrona V PN automatycznie włącza VPN przy łączeniu z sieciami komórkowymi.";
+"settings.hotspothelper.enable.description" = "Ochrona V PN automatycznie uruchamia VPN przy łączeniu z niezaufanymi sieciami WiFi, i, jeśli ta opcja jest włączona.";
+"settings.hotspothelper.rules.title" = "Reguły";
 "settings.hotspothelper.title" = "Narzędzie zarządzania sieciami";
 "settings.hotspothelper.wifi.networks" = "Sieci WIFi";
 "settings.hotspothelper.wifi.trust.title" = "Ochrona VPN WiFi";
@@ -140,6 +141,9 @@
 "settings.trusted.networks.sections.available" = "Dostępne sieci";
 "settings.trusted.networks.sections.current" = "Bieżąca sieć";
 "settings.trusted.networks.sections.trusted" = "Zaufane sieci";
+"settings.trusted.networks.sections.trusted.rule.action" = "Rozłącz z PIA VPN";
+"settings.trusted.networks.sections.trusted.rule.description" = "Wykonuj działania podczas dołączania do zaufanych sieci.";
+"settings.trusted.networks.sections.untrusted" = "Niezaufane sieci";
 "shortcuts.connect" = "Połącz";
 "shortcuts.disconnect" = "Rozłącz";
 "shortcuts.select_region" = "Wybierz region";

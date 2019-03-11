@@ -124,7 +124,8 @@
 "settings.hotspothelper.cellular.networks" = "蜂窝网络";
 "settings.hotspothelper.cellular.title" = "信任蜂窝网络";
 "settings.hotspothelper.description" = "配置 PIA 在连接到 WiFi 或蜂窝网络时的行为方式。";
-"settings.hotspothelper.enable.description" = "如果启用此选项，“VPN WiFi 保护”会在连接到不受信任的网络时自动启用 VPN。";
+"settings.hotspothelper.enable.description" = "如果启用此选项，PIA 会在连接到不受信任的 WiFi 网络时自动启用 VPN。";
+"settings.hotspothelper.rules.title" = "规则";
 "settings.hotspothelper.title" = "网络管理工具";
 "settings.hotspothelper.wifi.networks" = "WiFi 网络";
 "settings.hotspothelper.wifi.trust.title" = "VPN WiFi 保护";
@@ -139,6 +140,9 @@
 "settings.trusted.networks.sections.available" = "可用网络";
 "settings.trusted.networks.sections.current" = "当前网络";
 "settings.trusted.networks.sections.trusted" = "受信任网络";
+"settings.trusted.networks.sections.trusted.rule.action" = "断开 PIA VPN";
+"settings.trusted.networks.sections.trusted.rule.description" = "加入受信任网络时执行操作";
+"settings.trusted.networks.sections.untrusted" = "不受信任网站";
 "shortcuts.connect" = "连接";
 "shortcuts.disconnect" = "断开连接";
 "shortcuts.select_region" = "选择地区";

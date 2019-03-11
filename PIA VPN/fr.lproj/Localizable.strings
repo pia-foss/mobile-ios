@@ -124,7 +124,8 @@
 "settings.hotspothelper.cellular.networks" = "Réseaux cellulaires";
 "settings.hotspothelper.cellular.title" = "Réseaux cellulaires de confiance";
 "settings.hotspothelper.description" = "Configurez le comportement de PIA avec des connexions WiFi ou sur des réseaux cellulaires.";
-"settings.hotspothelper.enable.description" = "La protection WiFI VPN s'active automatiquement quand vous vous connectez à des réseaux inconnus si cette option est activée.";
+"settings.hotspothelper.enable.description" = "PIA active automatiquement le VPN quand vous vous connectez à des réseaux WiFi inconnus si cette option est activée.";
+"settings.hotspothelper.rules.title" = "Règles";
 "settings.hotspothelper.title" = "Outil de gestion du réseau";
 "settings.hotspothelper.wifi.networks" = "Réseaux WiFi";
 "settings.hotspothelper.wifi.trust.title" = "Protection WiFi VPN";
@@ -139,6 +140,9 @@
 "settings.trusted.networks.sections.available" = "Réseaux disponibles";
 "settings.trusted.networks.sections.current" = "Réseau actuel";
 "settings.trusted.networks.sections.trusted" = "Réseaux de confiance";
+"settings.trusted.networks.sections.trusted.rule.action" = "Se déconnecter du VPN PIA";
+"settings.trusted.networks.sections.trusted.rule.description" = "Effectuer les actions lors d'une connexion à des réseaux de confiance.";
+"settings.trusted.networks.sections.untrusted" = "Réseaux non approuvés";
 "shortcuts.connect" = "Se connecter";
 "shortcuts.disconnect" = "Se déconnecter";
 "shortcuts.select_region" = "Sélectionner une région";

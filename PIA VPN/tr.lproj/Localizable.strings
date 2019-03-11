@@ -124,7 +124,8 @@
 "settings.hotspothelper.cellular.networks" = "Hücresel ağlar";
 "settings.hotspothelper.cellular.title" = "Hücresel ağlara güven";
 "settings.hotspothelper.description" = "WiFi ya da hücresel ağlara bağlandığınızda PIA'nın nasıl davranacağını yapılandırın.";
-"settings.hotspothelper.enable.description" = "Bu seçenek açıldığında, VPN WiFi Koruması, güvenilmeyen ağlara bağlandığınızda VPN'yi otomatik olarak açar.";
+"settings.hotspothelper.enable.description" = "Bu seçenek açıldığında, PIA, güvenilmeyen WiFi ağlarına bağlandığınızda VPN'yi otomatik olarak açar.";
+"settings.hotspothelper.rules.title" = "Kurallar";
 "settings.hotspothelper.title" = "Ağ yönetim aracı";
 "settings.hotspothelper.wifi.networks" = "WiFi ağları";
 "settings.hotspothelper.wifi.trust.title" = "VPN WiFi Koruması";
@@ -139,6 +140,9 @@
 "settings.trusted.networks.sections.available" = "Mevcut ağlar";
 "settings.trusted.networks.sections.current" = "Mevcut ağ";
 "settings.trusted.networks.sections.trusted" = "Güvenilen ağlar";
+"settings.trusted.networks.sections.trusted.rule.action" = "PIA VPN bağlantısını kes";
+"settings.trusted.networks.sections.trusted.rule.description" = "Güvenilir ağlara bağlanırken eylem gerçekleştir.";
+"settings.trusted.networks.sections.untrusted" = "Güvenilmeyen ağlar";
 "shortcuts.connect" = "Bağlan";
 "shortcuts.disconnect" = "Bağlantıyı Kes";
 "shortcuts.select_region" = "Bir Bölge Seçin";

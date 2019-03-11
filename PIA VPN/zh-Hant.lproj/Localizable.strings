@@ -124,7 +124,8 @@
 "settings.hotspothelper.cellular.networks" = "行動網路";
 "settings.hotspothelper.cellular.title" = "信任行動網路";
 "settings.hotspothelper.description" = "配置 PIA 在您連接 WiFi 或行動網路時所執行的操作。";
-"settings.hotspothelper.enable.description" = "如果停用此選項，當您連接非信任網路時，VPN WiFi 保護功能將自動啟動 VPN。";
+"settings.hotspothelper.enable.description" = "如果停用此選項，當您連接非信任 WiFi 網路時，PIA 將自動啟動 VPN。";
+"settings.hotspothelper.rules.title" = "規則";
 "settings.hotspothelper.title" = "網路管理工具";
 "settings.hotspothelper.wifi.networks" = "WiFi 網路";
 "settings.hotspothelper.wifi.trust.title" = "VPN WiFi 保護";
@@ -139,6 +140,9 @@
 "settings.trusted.networks.sections.available" = "可用網路";
 "settings.trusted.networks.sections.current" = "現有網路";
 "settings.trusted.networks.sections.trusted" = "信任網路";
+"settings.trusted.networks.sections.trusted.rule.action" = "解除 PIA VPN 連線";
+"settings.trusted.networks.sections.trusted.rule.description" = "連線到信任網絡時執行動作。";
+"settings.trusted.networks.sections.untrusted" = "非信任網路";
 "shortcuts.connect" = "連線";
 "shortcuts.disconnect" = "解除連線";
 "shortcuts.select_region" = "選擇區域";
