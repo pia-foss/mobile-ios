@@ -77,18 +77,30 @@ extension NetworkExtensionProfile {
                         vpn.onDemandRules?.append(contentsOf: [ruleDisconnect, ruleConnect])
                     }
                 } else {
-                    let ruleDisconnect = NEOnDemandRuleDisconnect()
-                    ruleDisconnect.interfaceTypeMatch = .wiFi
-                    vpn.onDemandRules?.append(ruleDisconnect)
+                    if let _ = UIDevice.current.WiFiSSID { //If trying to connect from a WiFi network...
+                        let ruleIgnore = NEOnDemandRuleIgnore()
+                        ruleIgnore.interfaceTypeMatch = .wiFi
+                        vpn.onDemandRules?.append(ruleIgnore)
+                    } else {
+                        let ruleDisconnect = NEOnDemandRuleDisconnect()
+                        ruleDisconnect.interfaceTypeMatch = .wiFi
+                        vpn.onDemandRules?.append(ruleDisconnect)
+                    }
                 }
                 if !Client.preferences.trustCellularData {
                     let ruleConnect = NEOnDemandRuleConnect()
                     ruleConnect.interfaceTypeMatch = .cellular
                     vpn.onDemandRules?.append(ruleConnect)
                 } else {
-                    let ruleDisconnect = NEOnDemandRuleDisconnect()
-                    ruleDisconnect.interfaceTypeMatch = .cellular
-                    vpn.onDemandRules?.append(ruleDisconnect)
+                    if let _ = UIDevice.current.WiFiSSID { //If trying to connect from a Cellular network...
+                        let ruleDisconnect = NEOnDemandRuleDisconnect()
+                        ruleDisconnect.interfaceTypeMatch = .cellular
+                        vpn.onDemandRules?.append(ruleDisconnect)
+                    } else {
+                        let ruleIgnore = NEOnDemandRuleIgnore()
+                        ruleIgnore.interfaceTypeMatch = .cellular
+                        vpn.onDemandRules?.append(ruleIgnore)
+                    }
                 }
             } else {
                 if !Client.preferences.trustCellularData {
