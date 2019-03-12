@@ -9,6 +9,9 @@
 import Foundation
 import NetworkExtension
 import SwiftyBeaver
+import SystemConfiguration
+import UIKit
+
 
 private let log = SwiftyBeaver.self
 
@@ -77,18 +80,30 @@ extension NetworkExtensionProfile {
                         vpn.onDemandRules?.append(contentsOf: [ruleDisconnect, ruleConnect])
                     }
                 } else {
-                    let ruleDisconnect = NEOnDemandRuleDisconnect()
-                    ruleDisconnect.interfaceTypeMatch = .wiFi
-                    vpn.onDemandRules?.append(ruleDisconnect)
+                    if let _ = UIDevice.current.ssid { //If trying to connect from a WiFi network...
+                        let ruleIgnore = NEOnDemandRuleIgnore()
+                        ruleIgnore.interfaceTypeMatch = .wiFi
+                        vpn.onDemandRules?.append(ruleIgnore)
+                    } else {
+                        let ruleDisconnect = NEOnDemandRuleDisconnect()
+                        ruleDisconnect.interfaceTypeMatch = .wiFi
+                        vpn.onDemandRules?.append(ruleDisconnect)
+                    }
                 }
                 if !Client.preferences.trustCellularData {
                     let ruleConnect = NEOnDemandRuleConnect()
                     ruleConnect.interfaceTypeMatch = .cellular
                     vpn.onDemandRules?.append(ruleConnect)
                 } else {
-                    let ruleDisconnect = NEOnDemandRuleDisconnect()
-                    ruleDisconnect.interfaceTypeMatch = .cellular
-                    vpn.onDemandRules?.append(ruleDisconnect)
+                    if let _ = UIDevice.current.ssid { //If trying to connect from a Cellular network...
+                        let ruleDisconnect = NEOnDemandRuleDisconnect()
+                        ruleDisconnect.interfaceTypeMatch = .cellular
+                        vpn.onDemandRules?.append(ruleDisconnect)
+                    } else {
+                        let ruleIgnore = NEOnDemandRuleIgnore()
+                        ruleIgnore.interfaceTypeMatch = .cellular
+                        vpn.onDemandRules?.append(ruleIgnore)
+                    }
                 }
             } else {
                 if !Client.preferences.trustCellularData {
@@ -133,4 +148,18 @@ extension NetworkExtensionProfile {
             }
         }
     }
+}
+
+extension UIDevice {
+    
+    var ssid: String? {
+        guard let interfaces = CNCopySupportedInterfaces() as? [String] else { return nil }
+        let key = kCNNetworkInfoKeySSID as String
+        for interface in interfaces {
+            guard let interfaceInfo = CNCopyCurrentNetworkInfo(interface as CFString) as NSDictionary? else { continue }
+            return interfaceInfo[key] as? String
+        }
+        return nil
+    }
+    
 }
