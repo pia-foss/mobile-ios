@@ -14,6 +14,8 @@ private struct PIAConnectionButtonSettings {
     static let outsideBorderWidth: CGFloat = 10.0
     static let outsideBorderLightColor = UIColor.piaGrey2.cgColor
     static let outsideBorderDarkColor = UIColor.piaGrey10.cgColor
+    static let highlightedOutsideBorderLightColor = UIColor.piaGrey2Light.cgColor
+    static let highlightedOutsideBorderDarkColor = UIColor.piaGrey7.cgColor
     static let animatedShapeWidth: CGFloat = 4.0
     static let startAngle: CGFloat = -0.25 * 2 * .pi
     static let endAngle: CGFloat = PIAConnectionButtonSettings.startAngle + 2 * .pi
@@ -195,8 +197,27 @@ class PIAConnectionButton: UIButton, Restylable {
     // MARK: Restylable
     
     @objc func viewShouldRestyle() {
-        self.layer.borderColor = Theme.current.palette.appearance == .dark ?
+        self.layer.borderColor = buttonBorderColor()
+    }
+    
+    override open var isHighlighted: Bool {
+        didSet {
+            self.layer.borderColor = isHighlighted ?
+                highlightedButtonBorderColor() :
+                buttonBorderColor()
+        }
+    }
+    
+    private func buttonBorderColor() -> CGColor {
+        return Theme.current.palette.appearance == .dark ?
             PIAConnectionButtonSettings.outsideBorderDarkColor :
             PIAConnectionButtonSettings.outsideBorderLightColor
     }
+    
+    private func highlightedButtonBorderColor() -> CGColor {
+        return Theme.current.palette.appearance == .dark ?
+            PIAConnectionButtonSettings.highlightedOutsideBorderDarkColor :
+            PIAConnectionButtonSettings.highlightedOutsideBorderLightColor
+    }
+    
 }
