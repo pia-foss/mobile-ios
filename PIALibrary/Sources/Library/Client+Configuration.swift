@@ -135,9 +135,6 @@ extension Client {
             isDevelopment = false
 
             let bundle = Bundle(for: Client.self)
-            let errorMessage = {
-                return "Cannot load PIA public key"
-            }
             
             let production = "https://www.privateinternetaccess.com"
             baseUrls = [
@@ -201,16 +198,16 @@ extension Client {
             } else {
                 accessQueue.sync {
                     guard let pubKeyFile = bundle.path(forResource: "PIA", ofType: "pub") else {
-                        fatalError(errorMessage())
+                        preconditionFailure("Can't find pub key file")
                     }
                     guard let pubKeyData = try? Data(contentsOf: URL(fileURLWithPath: pubKeyFile)) else {
-                        fatalError(errorMessage())
+                        preconditionFailure("Can't create Data object from PUB file")
                     }
                     guard let strippedData = pubKeyData.withStrippedASN1Header() else {
-                        fatalError(errorMessage())
+                        preconditionFailure("Can't strip ASN1 header")
                     }
                     guard let publicKey = database.secure.setPublicKey(withData: strippedData) else {
-                        fatalError(errorMessage())
+                        preconditionFailure("Can't set the public key in the Keychain")
                     }
                     self.publicKey = publicKey
                 }

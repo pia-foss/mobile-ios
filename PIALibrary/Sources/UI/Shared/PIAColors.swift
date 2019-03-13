@@ -36,6 +36,10 @@ public extension UIColor {
         return UIColor(red: 215.0 / 255.0, green: 216.0 / 255.0, blue: 217.0 / 255.0, alpha: 1.0)
     }
     
+    public class var piaGrey2Light: UIColor {
+        return UIColor(red: 230.0 / 255.0, green: 230.0 / 255.0, blue: 230.0 / 255.0, alpha: 1.0)
+    }
+    
     public class var piaWhite: UIColor {
         return UIColor(white: 1.0, alpha: 1.0)
     }
