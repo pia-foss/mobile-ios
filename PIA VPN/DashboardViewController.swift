@@ -117,6 +117,8 @@ class DashboardViewController: AutolayoutViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
+        setupNavigationBarButtons()
+
         guard AppPreferences.shared.wasLaunched && !Flags.shared.alwaysShowsWalkthrough else {
             AppPreferences.shared.wasLaunched = true
             showWalkthrough()
@@ -166,6 +168,14 @@ class DashboardViewController: AutolayoutViewController {
     // MARK: Actions
     private func setupNavigationBarButtons() {
         
+        guard AppPreferences.shared.wasLaunched,
+            !Flags.shared.alwaysShowsWalkthrough,
+            Client.providers.accountProvider.isLoggedIn else {
+            navigationItem.leftBarButtonItem = nil
+            navigationItem.rightBarButtonItem = nil
+            return
+        }
+
         switch self.tileModeStatus { //change the status
         case .normal:
             if let leftBarButton = navigationItem.leftBarButtonItem,
@@ -254,8 +264,8 @@ class DashboardViewController: AutolayoutViewController {
         
         if let presented = self.navigationController?.presentedViewController,
             presented != self {
-            presented.dismiss(animated: true, completion: {
-                self.present(vc, animated: false, completion: nil)
+            self.present(vc, animated: true, completion: {
+                presented.dismiss(animated: true, completion: nil)
             })
         } else {
             present(vc, animated: false, completion: nil)
