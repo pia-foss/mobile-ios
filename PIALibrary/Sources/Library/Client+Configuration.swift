@@ -207,11 +207,35 @@ extension Client {
                         preconditionFailure("Can't strip ASN1 header")
                     }
                     guard let publicKey = database.secure.setPublicKey(withData: strippedData) else {
-                        preconditionFailure("Can't set the public key in the Keychain")
+                        //Use the key manually if can't be stored
+                        self.loadPublicKeyInMemoryWithData(strippedData)
+                        return
                     }
                     self.publicKey = publicKey
                 }
             }
+        }
+        
+        /**
+         Loads the public key in memory when setting the public key in the secure database fails
+         - Parameter strippedData: The pubKeyData with the stripped ASN1 header.
+         */
+        private func loadPublicKeyInMemoryWithData(_ strippedData: Data) {
+            let sizeInBits = strippedData.count * 8
+            let keyDict: [CFString: Any] = [
+                kSecAttrKeyType: kSecAttrKeyTypeRSA,
+                kSecAttrKeyClass: kSecAttrKeyClassPublic,
+                kSecAttrKeySizeInBits: NSNumber(value: sizeInBits),
+                kSecReturnPersistentRef: true
+            ]
+            
+            var error: Unmanaged<CFError>?
+            guard let publicKey = SecKeyCreateWithData(strippedData as CFData,
+                                                       keyDict as CFDictionary,
+                                                       &error) else {
+                                                        preconditionFailure("Can't set the public key in the Keychain")
+            }
+            self.publicKey = publicKey
         }
         
         // MARK: WebServices
