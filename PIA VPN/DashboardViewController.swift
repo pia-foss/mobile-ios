@@ -322,6 +322,10 @@ class DashboardViewController: AutolayoutViewController {
                 }
             }
             
+            if !Client.preferences.nmtRulesEnabled { //if NMT disabled...
+                showAlert = false
+            }
+            
             if showAlert {
                 let alert = Macros.alert(
                     nil,

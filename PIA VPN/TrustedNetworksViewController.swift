@@ -19,6 +19,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
     private lazy var switchWiFiProtection = UISwitch()
     private lazy var switchAutoJoinAllNetworks = UISwitch()
     private lazy var switchCellularData = UISwitch()
+    private lazy var switchRules = UISwitch()
     var shouldReconnectAutomatically = false
     var hasUpdatedPreferences = false
 
@@ -44,6 +45,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
         self.switchAutoJoinAllNetworks.addTarget(self, action: #selector(toggleAutoconnectWithAllNetworks(_:)), for: .valueChanged)
         self.switchWiFiProtection.addTarget(self, action: #selector(toggleUseWiFiProtection(_:)), for: .valueChanged)
         self.switchCellularData.addTarget(self, action: #selector(toggleCellularData(_:)), for: .valueChanged)
+        self.switchRules.addTarget(self, action: #selector(toggleRules(_:)), for: .valueChanged)
 
         NotificationCenter.default.addObserver(self, selector: #selector(filterAvailableNetworks), name: .UIApplicationDidBecomeActive, object: nil)
 
@@ -109,6 +111,15 @@ class TrustedNetworksViewController: AutolayoutViewController {
         preferences.commit()
         hasUpdatedPreferences = true
     }
+    
+    @objc private func toggleRules(_ sender: UISwitch) {
+        let preferences = Client.preferences.editable()
+        preferences.nmtRulesEnabled = sender.isOn
+        preferences.commit()
+        hasUpdatedPreferences = true
+        tableView.reloadData()
+    }
+
 
     // MARK: Private Methods
     private func configureTableView() {
@@ -143,7 +154,11 @@ class TrustedNetworksViewController: AutolayoutViewController {
 extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Client.preferences.useWiFiProtection ? Sections.countCases() : 3
+        if Client.preferences.nmtRulesEnabled {
+            return Client.preferences.useWiFiProtection ? Sections.countCases() : 3
+        } else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -158,6 +173,8 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
             return L10n.Settings.Trusted.Networks.Sections.trusted.uppercased()
         case .cellularData:
             return L10n.Settings.Hotspothelper.Cellular.networks.uppercased()
+        case .rules:
+            return L10n.Settings.Hotspothelper.title.uppercased()
         default:
             return nil
         }
@@ -177,6 +194,8 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
             return availableNetworks.isEmpty ?
                 L10n.Settings.Hotspothelper.Available.help :
                 L10n.Settings.Hotspothelper.Available.Add.help
+        case .rules:
+            return L10n.Settings.Trusted.Networks.Sections.Trusted.Rule.description
         default:
             return nil
         }
@@ -207,9 +226,10 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
         switch Sections.objectIdentifyBy(index: indexPath.section) {
         case .rules:
             cell.imageView?.image = nil
-            cell.textLabel?.text = L10n.Settings.Hotspothelper.Rules.title
-            cell.accessoryType = .disclosureIndicator
-            cell.accessoryView = nil
+            cell.textLabel?.text = L10n.Global.enabled
+            cell.accessoryView = switchRules
+            cell.selectionStyle = .none
+            switchRules.isOn = Client.preferences.nmtRulesEnabled
         case .current:
             if let ssid = hotspotHelper.currentWiFiNetwork() {
                 if trustedNetworks.contains(ssid) {
@@ -278,8 +298,6 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
             let ssid = trustedNetworks[indexPath.row]
             hotspotHelper.removeTrustedNetwork(ssid)
             hasUpdatedPreferences = true
-        case .rules:
-            self.perform(segue: StoryboardSegue.Main.trustedNetworkRulesSegueIdentifier)
         default:
             break
         }

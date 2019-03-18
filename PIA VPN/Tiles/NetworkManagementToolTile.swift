@@ -71,32 +71,41 @@ class NetworkManagementToolTile: UIView, Tileable  {
     }
     
     @objc private func updateNetwork() {
-        statusButton.isUserInteractionEnabled = true
-        if let ssid = hotspotHelper.currentWiFiNetwork() {
-            networkLabel.text = ssid.uppercased()
-            if Client.preferences.useWiFiProtection {
-                if Client.preferences.trustedNetworks.contains(ssid) {
+        
+        if Client.preferences.nmtRulesEnabled {
+            statusButton.isUserInteractionEnabled = true
+            if let ssid = hotspotHelper.currentWiFiNetwork() {
+                networkLabel.text = ssid.uppercased()
+                if Client.preferences.useWiFiProtection {
+                    if Client.preferences.trustedNetworks.contains(ssid) {
+                        statusButton.setImage(Asset.Piax.Global.trustedIcon.image, for: [])
+                        statusButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.trusted
+                    } else {
+                        statusButton.setImage(Asset.Piax.Global.untrustedIcon.image, for: [])
+                        statusButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.untrusted
+                    }
+                } else {
+                    statusButton.isUserInteractionEnabled = false
+                    statusButton.setImage(nil, for: [])
+                    statusButton.accessibilityLabel = nil
+                }
+            } else {
+                networkLabel.text = L10n.Tiles.Nmt.cellular
+                if Client.preferences.trustCellularData {
                     statusButton.setImage(Asset.Piax.Global.trustedIcon.image, for: [])
                     statusButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.trusted
                 } else {
                     statusButton.setImage(Asset.Piax.Global.untrustedIcon.image, for: [])
                     statusButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.untrusted
                 }
-            } else {
-                statusButton.isUserInteractionEnabled = false
-                statusButton.setImage(nil, for: [])
-                statusButton.accessibilityLabel = nil
             }
-        } else {
-            networkLabel.text = L10n.Tiles.Nmt.cellular
-            if Client.preferences.trustCellularData {
-                statusButton.setImage(Asset.Piax.Global.trustedIcon.image, for: [])
-                statusButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.trusted
-            } else {
-                statusButton.setImage(Asset.Piax.Global.untrustedIcon.image, for: [])
-                statusButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.untrusted
-            }
+        } else { // if NMT disabled
+            statusButton.isUserInteractionEnabled = false
+            networkLabel.text = L10n.Global.disabled
+            statusButton.setImage(nil, for: [])
+            statusButton.accessibilityLabel = L10n.Global.disabled
         }
+        
     }
 
     @IBAction func changeNetworkTrustMode(_ sender: Any) {
