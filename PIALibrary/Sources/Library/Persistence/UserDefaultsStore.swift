@@ -58,7 +58,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         static let trustedNetworks = "TrustedNetworks"
         
-        static let disconnectOnTrusted = "DisconnectOnTrusted"
+        static let nmtRulesEnabled = "NMTRulesEnabled"
 
     }
     
@@ -398,15 +398,15 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
 
-    var disconnectOnTrusted: Bool? {
+    var nmtRulesEnabled: Bool? {
         get {
-            guard let value = backend.object(forKey: Entries.disconnectOnTrusted) as? Bool else {
+            guard let value = backend.object(forKey: Entries.nmtRulesEnabled) as? Bool else {
                 return nil
             }
             return value
         }
         set {
-            backend.set(newValue, forKey: Entries.disconnectOnTrusted)
+            backend.set(newValue, forKey: Entries.nmtRulesEnabled)
         }
     }
     
@@ -422,12 +422,11 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.historicalServers)
         backend.removeObject(forKey: Entries.cachedNetworks)
         backend.removeObject(forKey: Entries.trustedNetworks)
-        backend.removeObject(forKey: Entries.disconnectOnTrusted)
+        backend.removeObject(forKey: Entries.nmtRulesEnabled)
         backend.removeObject(forKey: Entries.shouldConnectForAllNetworks)
         backend.removeObject(forKey: Entries.useWiFiProtection)
         backend.removeObject(forKey: Entries.trustCellularData)
         backend.removeObject(forKey: Entries.authMigrationSuccess)
-        backend.removeObject(forKey: Entries.disconnectOnTrusted)
         backend.synchronize()
     }
 
