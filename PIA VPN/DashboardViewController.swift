@@ -501,7 +501,9 @@ class DashboardViewController: AutolayoutViewController {
             toggleConnection.startButtonAnimation()
             AppPreferences.shared.lastVPNConnectionStatus = .connecting
             let titleLabelView = UILabel(frame: CGRect.zero)
-            titleLabelView.style(style: TextStyle.textStyle7)
+            titleLabelView.style(style: Theme.current.palette.appearance == .dark ?
+                TextStyle.textStyle6 :
+                TextStyle.textStyle7)
             titleLabelView.text = L10n.Dashboard.Vpn.connecting.uppercased()
             Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
                                                    withTintColor: nil,
@@ -515,7 +517,9 @@ class DashboardViewController: AutolayoutViewController {
             toggleConnection.startButtonAnimation()
             AppPreferences.shared.lastVPNConnectionStatus = .disconnecting
             let titleLabelView = UILabel(frame: CGRect.zero)
-            titleLabelView.style(style: TextStyle.textStyle7)
+            titleLabelView.style(style: Theme.current.palette.appearance == .dark ?
+                TextStyle.textStyle6 :
+                TextStyle.textStyle7)
             titleLabelView.text = L10n.Dashboard.Vpn.disconnecting.uppercased()
 
             Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
