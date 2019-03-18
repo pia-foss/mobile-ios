@@ -48,7 +48,7 @@ class PIAHotspotHelper {
      */
     public func configureHotspotHelper() -> Bool {
         
-        let hotspotDisplayName = Client.preferences.useWiFiProtection ?
+        let hotspotDisplayName = (Client.preferences.nmtRulesEnabled && Client.preferences.useWiFiProtection) ?
             L10n.Hotspothelper.Display.Protected.name :
             L10n.Hotspothelper.Display.name
         
