@@ -64,11 +64,25 @@ extension NetworkExtensionProfile {
         
         if vpn.isOnDemandEnabled {
             
-            if Client.preferences.disconnectOnTrusted {
-                let ruleDisconnect = NEOnDemandRuleDisconnect()
-                ruleDisconnect.interfaceTypeMatch = .wiFi
-                ruleDisconnect.ssidMatch = trustedNetworks
+            if Client.preferences.nmtRulesEnabled {
+                
                 if Client.preferences.useWiFiProtection {
+                
+                    let ruleDisconnect = NEOnDemandRuleDisconnect()
+                    ruleDisconnect.interfaceTypeMatch = .wiFi
+                    if let currentSSID = UIDevice.current.WiFiSSID {
+                        let filteredNetworkList = trustedNetworks.filter({
+                            return $0 != currentSSID
+                        })
+                        ruleDisconnect.ssidMatch = filteredNetworkList
+                        let ruleIgnore = NEOnDemandRuleIgnore()
+                        ruleIgnore.interfaceTypeMatch = .wiFi
+                        ruleIgnore.ssidMatch = [currentSSID]
+                        vpn.onDemandRules?.append(ruleIgnore)
+                    } else {
+                        ruleDisconnect.ssidMatch = trustedNetworks
+                    }
+                    
                     let ruleConnect = NEOnDemandRuleConnect()
                     ruleConnect.interfaceTypeMatch = .wiFi
                     if Client.preferences.shouldConnectForAllNetworks {
@@ -103,28 +117,16 @@ extension NetworkExtensionProfile {
                     }
                 }
             } else {
-                if !Client.preferences.trustCellularData {
-                    let ruleConnect = NEOnDemandRuleConnect()
-                    ruleConnect.interfaceTypeMatch = .cellular
-                    vpn.onDemandRules?.append(ruleConnect)
-                }
                 
-                if Client.preferences.useWiFiProtection {
-                    if Client.preferences.shouldConnectForAllNetworks {
-                        let ruleConnect = NEOnDemandRuleConnect()
-                        ruleConnect.interfaceTypeMatch = .wiFi
-                        vpn.onDemandRules?.append(ruleConnect)
-                    } else {
-                        let ruleIgnore = NEOnDemandRuleIgnore()
-                        ruleIgnore.interfaceTypeMatch = .wiFi
-                        ruleIgnore.ssidMatch = trustedNetworks
-                        vpn.onDemandRules?.append(ruleIgnore)
-                        
-                        let ruleConnect = NEOnDemandRuleConnect()
-                        ruleConnect.interfaceTypeMatch = .wiFi
-                        vpn.onDemandRules?.append(ruleConnect)
-                    }
+                if force {
+                    vpn.isOnDemandEnabled = configuration.isOnDemand
+                } else {
+                    vpn.isOnDemandEnabled = vpn.isOnDemandEnabled && configuration.isOnDemand
                 }
+                if vpn.isOnDemandEnabled {
+                    vpn.onDemandRules = [NEOnDemandRuleConnect()]
+                }
+
             }
             
         }
