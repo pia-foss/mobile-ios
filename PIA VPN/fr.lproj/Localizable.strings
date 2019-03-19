@@ -156,8 +156,8 @@
 "walkthrough.action.done" = "TERMINÉ";
 "walkthrough.action.next" = "SUIVANT";
 "walkthrough.action.skip" = "PASSER";
-"walkthrough.page.1.description" = "Protégez-vous sur jusqu'à 5 appareils à la fois.";
-"walkthrough.page.1.title" = "Prend en charge 5 appareils en même temps";
+"walkthrough.page.1.description" = "Protégez-vous sur jusqu'à 10 appareils à la fois.";
+"walkthrough.page.1.title" = "Prend en charge 10 appareils en même temps";
 "walkthrough.page.2.description" = "Avec des serveurs partout dans le monde, vous êtes toujours sous protection.";
 "walkthrough.page.2.title" = "Connectez-vous facilement à n'importe quelle région";
 "walkthrough.page.3.description" = "Activer notre bloqueur de contenu empêche les publicités de s'afficher dans Safari.";

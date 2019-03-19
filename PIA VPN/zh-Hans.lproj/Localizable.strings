@@ -156,8 +156,8 @@
 "walkthrough.action.done" = "完成";
 "walkthrough.action.next" = "下一个";
 "walkthrough.action.skip" = "跳过";
-"walkthrough.page.1.description" = "一次在多达 5 台设备上保护自己。";
-"walkthrough.page.1.title" = "一次支持 5 台设备";
+"walkthrough.page.1.description" = "一次在多达 10 台设备上保护自己。";
+"walkthrough.page.1.title" = "一次支持 10 台设备";
 "walkthrough.page.2.description" = "服务器遍布世界各地，您始终受到保护。";
 "walkthrough.page.2.title" = "轻松连接到任何地区";
 "walkthrough.page.3.description" = "启用内容拦截器以防止 Safari 中出现广告。";

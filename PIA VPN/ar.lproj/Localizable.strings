@@ -156,8 +156,8 @@
 "walkthrough.action.done" = "تم";
 "walkthrough.action.next" = "التالي";
 "walkthrough.action.skip" = "تخطي";
-"walkthrough.page.1.description" = "احمي نفسك على ما يصل إلى 5 أجهزة في وقت واحد.";
-"walkthrough.page.1.title" = "يدعم 5 أجهزة في المرة الواحدة";
+"walkthrough.page.1.description" = "احمي نفسك على ما يصل إلى 10 أجهزة في وقت واحد.";
+"walkthrough.page.1.title" = "يدعم 10 أجهزة في المرة الواحدة";
 "walkthrough.page.2.description" = "مع خوادم في جميع أنحاء العالم، أنت دائما تحت الحماية.";
 "walkthrough.page.2.title" = "اتصل بأي منطقة بسهولة";
 "walkthrough.page.3.description" = "تمكين ميزة حظر المحتوى يمنع الإعلانات من الظهور في Safari.";

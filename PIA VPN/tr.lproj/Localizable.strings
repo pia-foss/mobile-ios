@@ -156,8 +156,8 @@
 "walkthrough.action.done" = "BİTTİ";
 "walkthrough.action.next" = "İLERİ";
 "walkthrough.action.skip" = "ATLA";
-"walkthrough.page.1.description" = "Aynı anda 5 cihazda koruma sağlayın.";
-"walkthrough.page.1.title" = "Aynı anda 5 cihazı destekle";
+"walkthrough.page.1.description" = "Aynı anda 10 cihazda koruma sağlayın.";
+"walkthrough.page.1.title" = "Aynı anda 10 cihazı destekle";
 "walkthrough.page.2.description" = "Dünya çapındaki sunucularla daima koruma altındasınız.";
 "walkthrough.page.2.title" = "Herhangi bir bölgeye kolayca bağlanın";
 "walkthrough.page.3.description" = "İçerik Engelleyicimizi etkinleştirdiğinizde Safari'de reklamların gösterilmesi engellenir.";

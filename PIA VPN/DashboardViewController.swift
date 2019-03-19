@@ -124,11 +124,21 @@ class DashboardViewController: AutolayoutViewController {
             showWalkthrough()
             return
         }
+        
         guard Client.providers.accountProvider.isLoggedIn else {
             presentLogin()
+            AppPreferences.shared.todayWidgetVpnStatus = L10n.Today.Widget.login
+            AppPreferences.shared.todayWidgetButtonTitle = L10n.Today.Widget.login
             return
         }
 
+        AppPreferences.shared.todayWidgetVpnStatus = Client.providers.vpnProvider.vpnStatus.rawValue
+        if Client.providers.vpnProvider.vpnStatus == .disconnected {
+            AppPreferences.shared.todayWidgetButtonTitle = L10n.Shortcuts.connect
+        } else {
+            AppPreferences.shared.todayWidgetButtonTitle = L10n.Shortcuts.disconnect
+        }
+        
         viewContent.isHidden = false
         viewRows.isHidden = false
 
@@ -427,6 +437,8 @@ class DashboardViewController: AutolayoutViewController {
     }
 
     @objc private func accountDidLogout(notification: Notification) {
+        AppPreferences.shared.todayWidgetVpnStatus = nil
+        AppPreferences.shared.todayWidgetButtonTitle = L10n.Today.Widget.login
         presentLogin()
     }
     
@@ -469,6 +481,11 @@ class DashboardViewController: AutolayoutViewController {
     }
 
     @objc private func updateCurrentStatusWithUserInfo(_ userInfo: [AnyHashable: Any]?) {
+        
+        guard Client.providers.accountProvider.isLoggedIn else {
+            return
+        }
+
         currentStatus = Client.providers.vpnProvider.vpnStatus
 
         switch currentStatus {
@@ -486,6 +503,8 @@ class DashboardViewController: AutolayoutViewController {
                                                                       UIColor.piaGreenDark20])
             navigationItem.titleView = titleLabelView
             setNeedsStatusBarAppearanceUpdate()
+            AppPreferences.shared.todayWidgetVpnStatus = VPNStatus.connected.rawValue
+            AppPreferences.shared.todayWidgetButtonTitle = L10n.Shortcuts.disconnect
 
         case .disconnected:
             toggleConnection.isOn = false
@@ -493,6 +512,8 @@ class DashboardViewController: AutolayoutViewController {
             toggleConnection.stopButtonAnimation()
             AppPreferences.shared.lastVPNConnectionStatus = .disconnected
             resetNavigationBar()
+            AppPreferences.shared.todayWidgetVpnStatus = VPNStatus.disconnected.rawValue
+            AppPreferences.shared.todayWidgetButtonTitle = L10n.Shortcuts.connect
 
         case .connecting:
             Macros.postNotification(.PIADaemonsDidUpdateConnectivity)

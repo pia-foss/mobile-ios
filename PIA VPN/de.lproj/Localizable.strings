@@ -156,8 +156,8 @@
 "walkthrough.action.done" = "FERTIG";
 "walkthrough.action.next" = "WEITER";
 "walkthrough.action.skip" = "ÜBERSPRINGEN";
-"walkthrough.page.1.description" = "Schütze dich auf bis zu 5 Geräten gleichzeitig.";
-"walkthrough.page.1.title" = "Unterstützt 5 Geräte auf einmal";
+"walkthrough.page.1.description" = "Schütze dich auf bis zu 10 Geräten gleichzeitig.";
+"walkthrough.page.1.title" = "Unterstützt 10 Geräte auf einmal";
 "walkthrough.page.2.description" = "Mit Servern auf der ganzen Welt bist du immer geschützt.";
 "walkthrough.page.2.title" = "Bequem mit jeder beliebigen Region verbinden";
 "walkthrough.page.3.description" = "Mit der Aktivierung unseres Inhalts-Blockers sehen Sie keine Anzeigen in Safari mehr.";

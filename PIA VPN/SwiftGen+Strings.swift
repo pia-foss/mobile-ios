@@ -627,6 +627,13 @@ internal enum L10n {
     }
   }
 
+  internal enum Today {
+    internal enum Widget {
+      /// Login
+      internal static let login = L10n.tr("Localizable", "today.widget.login")
+    }
+  }
+
   internal enum VpnPermission {
     /// PIA
     internal static let title = L10n.tr("Localizable", "vpn_permission.title")
@@ -663,9 +670,9 @@ internal enum L10n {
     }
     internal enum Page {
       internal enum _1 {
-        /// Protect yourself on up to 5 devices at a time.
+        /// Protect yourself on up to 10 devices at a time.
         internal static let description = L10n.tr("Localizable", "walkthrough.page.1.description")
-        /// Support 5 devices at once
+        /// Support 10 devices at once
         internal static let title = L10n.tr("Localizable", "walkthrough.page.1.title")
       }
       internal enum _2 {
