@@ -35,8 +35,8 @@
 "walkthrough.action.done" = "DONE";
 "walkthrough.action.skip" = "SKIP";
 
-"walkthrough.page.1.title" = "Support 5 devices at once";
-"walkthrough.page.1.description" = "Protect yourself on up to 5 devices at a time.";
+"walkthrough.page.1.title" = "Support 10 devices at once";
+"walkthrough.page.1.description" = "Protect yourself on up to 10 devices at a time.";
 "walkthrough.page.2.title" = "Connect to any region easily";
 "walkthrough.page.2.description" = "With servers around the globe, you are always under protection.";
 "walkthrough.page.3.title" = "Protect yourself from ads";
@@ -250,3 +250,6 @@
 "siri.shortcuts.connect.title" = "Connect PIA VPN";
 "siri.shortcuts.disconnect.title" = "Disconnect PIA VPN";
 "siri.shortcuts.add.error" = "There was an error adding the Siri shortcut. Please, try it again.";
+
+//TODAY WIDGET
+"today.widget.login" = "Login";

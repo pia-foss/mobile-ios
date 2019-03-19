@@ -41,6 +41,9 @@ class AppPreferences {
         static let useDisconnectSiriShortcuts = "UseDisconnectSiriShortcuts"
         static let disconnectShortcut = "disconnectShortcut"
 
+        static let todayWidgetVpnStatus = "vpn.status"
+        static let todayWidgetButtonTitle = "vpn.button.description"
+
     }
 
     static let shared = AppPreferences()
@@ -159,6 +162,24 @@ class AppPreferences {
         }
     }
     
+    var todayWidgetVpnStatus: String? {
+        get {
+            return defaults.string(forKey: Entries.todayWidgetVpnStatus) ?? L10n.Today.Widget.login
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.todayWidgetVpnStatus)
+        }
+    }
+    
+    var todayWidgetButtonTitle: String? {
+        get {
+            return defaults.string(forKey: Entries.todayWidgetButtonTitle) ?? nil
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.todayWidgetButtonTitle)
+        }
+    }
+    
     @available(iOS 12.0, *)
     var connectShortcut: INVoiceShortcut? {
         get {
@@ -208,6 +229,7 @@ class AppPreferences {
             Entries.themeCode: ThemeCode.light.rawValue,
             Entries.useConnectSiriShortcuts: false,
             Entries.useDisconnectSiriShortcuts: false,
+            Entries.todayWidgetButtonTitle: L10n.Today.Widget.login
         ])
     }
     
@@ -313,6 +335,8 @@ class AppPreferences {
             connectShortcut = nil
             disconnectShortcut = nil
         }
+        todayWidgetVpnStatus = L10n.Today.Widget.login
+        todayWidgetButtonTitle = L10n.Today.Widget.login
     }
     
 //    + (void)eraseForTesting;

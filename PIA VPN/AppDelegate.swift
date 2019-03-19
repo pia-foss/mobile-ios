@@ -86,6 +86,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             // in case it's too early for notification delivery (vc not loaded)
             TransientState.shouldDisplayRegionPicker = true
             
+        case VPNStatus.connected.rawValue:
+            if Client.providers.vpnProvider.isVPNConnected {
+                disconnectAfter(milliseconds: 200)
+            }
+        case VPNStatus.disconnected.rawValue:
+            if !Client.providers.vpnProvider.isVPNConnected {
+                connectAfter(milliseconds: 200)
+            }
+
         default:
             return false
         }
@@ -165,9 +174,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         case .connect:
             if !Client.providers.vpnProvider.isVPNConnected {
                 // this time delay seems to fix a strange issue of the VPN connecting from a fresh launch
-                Macros.dispatch(after: .milliseconds(200)) {
-                    Client.providers.vpnProvider.connect(nil)
-                }
+                connectAfter(milliseconds: 200)
             }
 
         case .disconnect:
@@ -175,9 +182,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 
                 // this time delay seems to fix a strange issue of the VPN disconnecting and
                 // then automatically reconnecting when it's done from a fresh launch
-                Macros.dispatch(after: .milliseconds(200)) {
-                    Client.providers.vpnProvider.disconnect(nil)
-                }
+                disconnectAfter(milliseconds: 200)
             }
 
         case .selectRegion:
@@ -195,20 +200,28 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         if userActivity.activityType == AppConstants.SiriShortcuts.shortcutConnect {
             if AppPreferences.shared.useConnectSiriShortcuts {
-                Macros.dispatch(after: .milliseconds(200)) {
-                    Client.providers.vpnProvider.connect(nil)
-                }
+                connectAfter(milliseconds: 200)
             }
             return AppPreferences.shared.useConnectSiriShortcuts
         } else {
             if AppPreferences.shared.useDisconnectSiriShortcuts {
-                Macros.dispatch(after: .milliseconds(200)) {
-                    Client.providers.vpnProvider.disconnect(nil)
-                }
+                disconnectAfter(milliseconds: 200)
             }
             return AppPreferences.shared.useDisconnectSiriShortcuts
         }
 
     }
     
+    private func connectAfter(milliseconds: Int) {
+        Macros.dispatch(after: .milliseconds(milliseconds)) {
+            Client.providers.vpnProvider.connect(nil)
+        }
+    }
+    
+    private func disconnectAfter(milliseconds: Int) {
+        Macros.dispatch(after: .milliseconds(milliseconds)) {
+            Client.providers.vpnProvider.disconnect(nil)
+        }
+    }
+
 }

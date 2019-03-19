@@ -123,4 +123,10 @@ struct AppConstants {
             return typeface
         }()
     }
+    
+    struct VPNWidget {
+        static let vpnStatus = "vpn.status"
+        static let vpnButtonDescription = "vpn.button.description"
+    }
+    
 }
