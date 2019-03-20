@@ -113,6 +113,7 @@
 
 "settings.application_settings.title" = "APPLICATION SETTINGS";
 "settings.application_settings.dark_theme.title" = "Dark theme";
+"settings.application_settings.active_theme.title" = "Active theme";
 "settings.application_settings.kill_switch.title" = "VPN kill switch";
 "settings.application_settings.kill_switch.footer" = "The VPN kill switch prevents access to the Internet if the VPN connection is reconnecting. This excludes disconnecting manually.";
 "settings.application_settings.mace.title" = "PIA MACE™";
@@ -243,6 +244,7 @@
 "tiles.nmt.cellular" = "Cellular";
 "tiles.nmt.accessibility.trusted" = "Trusted network";
 "tiles.nmt.accessibility.untrusted" = "Untrusted network";
+"tiles.quicksettings.title" = "Quick settings";
 
 //SIRI SHORTCUTS
 "siri.shortcuts.connect.row.title" = "'Connect' Siri Shortcut";
