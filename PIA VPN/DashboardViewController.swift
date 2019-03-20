@@ -27,7 +27,8 @@ class DashboardViewController: AutolayoutViewController {
         case subscription
         case usage
         case networkManagementTool
-
+        case quickSettings
+        
         var identifier: String {
             switch self {
             case .ipTile: return "IPTileCell"
@@ -36,6 +37,7 @@ class DashboardViewController: AutolayoutViewController {
             case .subscription: return "SubscriptionTileCell"
             case .usage: return "UsageTileCell"
             case .networkManagementTool: return "NMTTileCell"
+            case .quickSettings: return "QuickSettingsTileCell"
             }
         }
         
@@ -47,6 +49,7 @@ class DashboardViewController: AutolayoutViewController {
             case .subscription: return "SubscriptionTileCollectionViewCell"
             case .usage: return "UsageTileCollectionViewCell"
             case .networkManagementTool: return "NetworkManagementToolTileCollectionViewCell"
+            case .quickSettings: return "QuickSettingsTileCollectionViewCell"
             }
         }
     }
@@ -245,6 +248,9 @@ class DashboardViewController: AutolayoutViewController {
         collectionView.register(UINib(nibName: Cells.networkManagementTool.className,
                                       bundle: nil),
                                 forCellWithReuseIdentifier: Cells.networkManagementTool.identifier)
+        collectionView.register(UINib(nibName: Cells.quickSettings.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.quickSettings.identifier)
         collectionView.backgroundColor = .clear
     }
     

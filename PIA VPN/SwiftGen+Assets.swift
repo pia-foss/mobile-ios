@@ -117,13 +117,25 @@ enum Asset {
       static let iconBack = ImageAsset(name: "icon-back")
       static let iconEditTile = ImageAsset(name: "icon-edit-tile")
       static let iconFilter = ImageAsset(name: "icon-filter")
+      static let killswitchDarkActive = ImageAsset(name: "killswitch-dark-active")
+      static let killswitchDarkInactive = ImageAsset(name: "killswitch-dark-inactive")
+      static let nmtDarkActive = ImageAsset(name: "nmt-dark-active")
+      static let nmtDarkInactive = ImageAsset(name: "nmt-dark-inactive")
+      static let nmtLightActive = ImageAsset(name: "nmt-light-active")
+      static let nmtLightInactive = ImageAsset(name: "nmt-light-inactive")
       static let pagecontrolSelectedDot = ImageAsset(name: "pagecontrol-selected-dot")
       static let pagecontrolUnselectedDot = ImageAsset(name: "pagecontrol-unselected-dot")
       static let regionSelected = ImageAsset(name: "region-selected")
       static let scrollableMapDark = ImageAsset(name: "scrollableMap-dark")
       static let scrollableMapLight = ImageAsset(name: "scrollableMap-light")
-      static let trustedIcon = ImageAsset(name: "trusted-icon")
-      static let untrustedIcon = ImageAsset(name: "untrusted-icon")
+      static let themeDarkActive = ImageAsset(name: "theme-dark-active")
+      static let themeDarkInactive = ImageAsset(name: "theme-dark-inactive")
+      static let themeLightActive = ImageAsset(name: "theme-light-active")
+      static let themeLightInactive = ImageAsset(name: "theme-light-inactive")
+      static let trustedDarkIcon = ImageAsset(name: "trusted-dark-icon")
+      static let trustedLightIcon = ImageAsset(name: "trusted-light-icon")
+      static let untrustedDarkIcon = ImageAsset(name: "untrusted-dark-icon")
+      static let untrustedLightIcon = ImageAsset(name: "untrusted-light-icon")
     }
     enum LightMap {
       static let lightMapAUMelbourne = ImageAsset(name: "Light-Map-AU Melbourne")
@@ -506,13 +518,25 @@ enum Asset {
     Piax.Global.iconBack,
     Piax.Global.iconEditTile,
     Piax.Global.iconFilter,
+    Piax.Global.killswitchDarkActive,
+    Piax.Global.killswitchDarkInactive,
+    Piax.Global.nmtDarkActive,
+    Piax.Global.nmtDarkInactive,
+    Piax.Global.nmtLightActive,
+    Piax.Global.nmtLightInactive,
     Piax.Global.pagecontrolSelectedDot,
     Piax.Global.pagecontrolUnselectedDot,
     Piax.Global.regionSelected,
     Piax.Global.scrollableMapDark,
     Piax.Global.scrollableMapLight,
-    Piax.Global.trustedIcon,
-    Piax.Global.untrustedIcon,
+    Piax.Global.themeDarkActive,
+    Piax.Global.themeDarkInactive,
+    Piax.Global.themeLightActive,
+    Piax.Global.themeLightInactive,
+    Piax.Global.trustedDarkIcon,
+    Piax.Global.trustedLightIcon,
+    Piax.Global.untrustedDarkIcon,
+    Piax.Global.untrustedLightIcon,
     Piax.LightMap.lightMapAUMelbourne,
     Piax.LightMap.lightMapAUSydney,
     Piax.LightMap.lightMapAustria,

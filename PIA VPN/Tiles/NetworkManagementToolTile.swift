@@ -78,10 +78,12 @@ class NetworkManagementToolTile: UIView, Tileable  {
                 networkLabel.text = ssid.uppercased()
                 if Client.preferences.useWiFiProtection {
                     if Client.preferences.trustedNetworks.contains(ssid) {
-                        statusButton.setImage(Asset.Piax.Global.trustedIcon.image, for: [])
+                        statusButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.trustedLightIcon.image :
+                            Asset.Piax.Global.trustedDarkIcon.image, for: [])
                         statusButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.trusted
                     } else {
-                        statusButton.setImage(Asset.Piax.Global.untrustedIcon.image, for: [])
+                        statusButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.untrustedLightIcon.image :
+                            Asset.Piax.Global.untrustedDarkIcon.image, for: [])
                         statusButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.untrusted
                     }
                 } else {
@@ -92,10 +94,12 @@ class NetworkManagementToolTile: UIView, Tileable  {
             } else {
                 networkLabel.text = L10n.Tiles.Nmt.cellular
                 if Client.preferences.trustCellularData {
-                    statusButton.setImage(Asset.Piax.Global.trustedIcon.image, for: [])
+                    statusButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.trustedLightIcon.image :
+                        Asset.Piax.Global.trustedDarkIcon.image, for: [])
                     statusButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.trusted
                 } else {
-                    statusButton.setImage(Asset.Piax.Global.untrustedIcon.image, for: [])
+                    statusButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.untrustedLightIcon.image :
+                        Asset.Piax.Global.untrustedDarkIcon.image, for: [])
                     statusButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.untrusted
                 }
             }
@@ -116,7 +120,8 @@ class NetworkManagementToolTile: UIView, Tileable  {
                 } else {
                     hotspotHelper.saveTrustedNetwork(ssid)
                 }
-                statusButton.setImage(Asset.Piax.Global.trustedIcon.image, for: [])
+                statusButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.trustedLightIcon.image :
+                    Asset.Piax.Global.trustedDarkIcon.image, for: [])
             }
         } else { // cellular
             let preferences = Client.preferences.editable()

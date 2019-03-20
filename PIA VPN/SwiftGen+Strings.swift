@@ -337,6 +337,10 @@ internal enum L10n {
     internal enum ApplicationSettings {
       /// APPLICATION SETTINGS
       internal static let title = L10n.tr("Localizable", "settings.application_settings.title")
+      internal enum ActiveTheme {
+        /// Active theme
+        internal static let title = L10n.tr("Localizable", "settings.application_settings.active_theme.title")
+      }
       internal enum DarkTheme {
         /// Dark theme
         internal static let title = L10n.tr("Localizable", "settings.application_settings.dark_theme.title")
@@ -592,6 +596,10 @@ internal enum L10n {
         /// Quick connect
         internal static let title = L10n.tr("Localizable", "tiles.quick.connect.title")
       }
+    }
+    internal enum Quicksettings {
+      /// Quick settings
+      internal static let title = L10n.tr("Localizable", "tiles.quicksettings.title")
     }
     internal enum Region {
       /// VPN Server

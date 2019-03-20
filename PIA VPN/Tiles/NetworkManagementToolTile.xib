@@ -40,7 +40,7 @@
                         <constraint firstAttribute="width" constant="44" id="2oR-IQ-nEX"/>
                         <constraint firstAttribute="height" constant="44" id="jNx-SM-We8"/>
                     </constraints>
-                    <state key="normal" image="trusted-icon"/>
+                    <state key="normal" image="trusted-dark-icon"/>
                     <connections>
                         <action selector="changeNetworkTrustMode:" destination="-1" eventType="touchUpInside" id="lJi-6x-b5f"/>
                     </connections>
@@ -62,6 +62,6 @@
         </view>
     </objects>
     <resources>
-        <image name="trusted-icon" width="23" height="28"/>
+        <image name="trusted-dark-icon" width="23" height="27"/>
     </resources>
 </document>
