@@ -74,7 +74,8 @@ extension NetworkExtensionProfile {
                 if Client.preferences.useWiFiProtection {
                     let ruleConnect = NEOnDemandRuleConnect()
                     ruleConnect.interfaceTypeMatch = .wiFi
-                    if Client.preferences.shouldConnectForAllNetworks {
+                    if Client.preferences.shouldConnectForAllNetworks ||
+                        ruleDisconnect.ssidMatch?.count == 0 {
                         vpn.onDemandRules?.append(ruleConnect)
                     } else {
                         vpn.onDemandRules?.append(contentsOf: [ruleDisconnect, ruleConnect])
