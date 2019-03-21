@@ -185,6 +185,8 @@
 		DD40197F221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD40197C221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.swift */; };
 		DD401980221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD40197D221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.xib */; };
 		DD401981221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD40197D221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.xib */; };
+		DD4E84572243BD1200929B39 /* DashboardCollectionViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4E84562243BD1200929B39 /* DashboardCollectionViewUtil.swift */; };
+		DD4E84582243BD1200929B39 /* DashboardCollectionViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4E84562243BD1200929B39 /* DashboardCollectionViewUtil.swift */; };
 		DD58F4B821AD579A00D043F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD58F4B721AD579A00D043F7 /* GoogleService-Info.plist */; };
 		DD58F4BF21B12CFE00D043F7 /* PIAConnectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58F4BE21B12CFE00D043F7 /* PIAConnectionButton.swift */; };
 		DD58F4C021B12CFE00D043F7 /* PIAConnectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58F4BE21B12CFE00D043F7 /* PIAConnectionButton.swift */; };
@@ -510,6 +512,7 @@
 		DD401979221FEF390041EB30 /* NetworkManagementToolTile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetworkManagementToolTile.xib; sourceTree = "<group>"; };
 		DD40197C221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagementToolTileCollectionViewCell.swift; sourceTree = "<group>"; };
 		DD40197D221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetworkManagementToolTileCollectionViewCell.xib; sourceTree = "<group>"; };
+		DD4E84562243BD1200929B39 /* DashboardCollectionViewUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCollectionViewUtil.swift; sourceTree = "<group>"; };
 		DD58F4B721AD579A00D043F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DD58F4BE21B12CFE00D043F7 /* PIAConnectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAConnectionButton.swift; sourceTree = "<group>"; };
 		DD606AB921C7A17900E0781D /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
@@ -637,6 +640,7 @@
 			isa = PBXGroup;
 			children = (
 				0E3A35271FD9A960000B0F99 /* DashboardViewController.swift */,
+				DD4E84562243BD1200929B39 /* DashboardCollectionViewUtil.swift */,
 				0EFB838F20209CF200980F69 /* VPNPermissionViewController.swift */,
 			);
 			name = Dashboard;
@@ -1872,6 +1876,7 @@
 				DD1C139F21E6623D004004B3 /* XIBSetup.swift in Sources */,
 				DDB6B95421C95CD400DE8C5F /* EnumsBuilder.swift in Sources */,
 				0E9AEA6320683FDF00B6E59A /* AboutComponent.swift in Sources */,
+				DD4E84582243BD1200929B39 /* DashboardCollectionViewUtil.swift in Sources */,
 				DD74695B217F07AC00B7BD73 /* DNSList.swift in Sources */,
 				0E9452AF1FDB5F7A00891948 /* PIAPageControl.swift in Sources */,
 				DDD271F121D6718F00B6D20F /* RegionFilter.swift in Sources */,
@@ -1977,6 +1982,7 @@
 				DD401977221FEF2C0041EB30 /* NetworkManagementToolTile.swift in Sources */,
 				DDB6B95321C95CD400DE8C5F /* EnumsBuilder.swift in Sources */,
 				0E9AEA6220683FDF00B6E59A /* AboutComponent.swift in Sources */,
+				DD4E84572243BD1200929B39 /* DashboardCollectionViewUtil.swift in Sources */,
 				DD74695A217F07AC00B7BD73 /* DNSList.swift in Sources */,
 				0E9452AE1FDB5F7A00891948 /* PIAPageControl.swift in Sources */,
 				DDD271F021D6718F00B6D20F /* RegionFilter.swift in Sources */,
