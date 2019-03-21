@@ -122,7 +122,9 @@ extension NetworkExtensionProfile {
                         let ruleIgnore = NEOnDemandRuleIgnore()
                         ruleIgnore.interfaceTypeMatch = .wiFi
                         ruleIgnore.ssidMatch = trustedNetworks
-                        vpn.onDemandRules?.append(ruleIgnore)
+                        if trustedNetworks.count > 0 {
+                            vpn.onDemandRules?.append(ruleIgnore)
+                        }
                         
                         let ruleConnect = NEOnDemandRuleConnect()
                         ruleConnect.interfaceTypeMatch = .wiFi
