@@ -15,45 +15,10 @@ private let log = SwiftyBeaver.self
 
 class DashboardViewController: AutolayoutViewController {
     
-    private enum TileSize: CGFloat {
+    enum TileSize: CGFloat {
         case standard = 89.0
     }
-    
-    private enum Cells: Int, EnumsBuilder {
-        
-        case region = 0
-        case quickConnect
-        case ipTile
-        case subscription
-        case usage
-        case networkManagementTool
-        case quickSettings
-        
-        var identifier: String {
-            switch self {
-            case .ipTile: return "IPTileCell"
-            case .quickConnect: return "QuickConnectTileCell"
-            case .region: return "RegionTileCell"
-            case .subscription: return "SubscriptionTileCell"
-            case .usage: return "UsageTileCell"
-            case .networkManagementTool: return "NMTTileCell"
-            case .quickSettings: return "QuickSettingsTileCell"
-            }
-        }
-        
-        var className: String {
-            switch self {
-            case .ipTile: return "IPTileCollectionViewCell"
-            case .quickConnect: return "QuickConnectTileCollectionViewCell"
-            case .region: return "RegionTileCollectionViewCell"
-            case .subscription: return "SubscriptionTileCollectionViewCell"
-            case .usage: return "UsageTileCollectionViewCell"
-            case .networkManagementTool: return "NetworkManagementToolTileCollectionViewCell"
-            case .quickSettings: return "QuickSettingsTileCollectionViewCell"
-            }
-        }
-    }
-    
+
     private var viewContentHeight: CGFloat = 0
     @IBOutlet weak var viewContentHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewContentLandscapeHeightConstraint: NSLayoutConstraint!
@@ -179,6 +144,11 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     // MARK: Actions
+    private func setupCollectionView() {
+        let collectionViewUtil = DashboardCollectionViewUtil()
+        collectionViewUtil.registerCellsFor(collectionView)
+    }
+    
     private func setupNavigationBarButtons() {
         
         guard AppPreferences.shared.wasLaunched,
@@ -229,31 +199,6 @@ class DashboardViewController: AutolayoutViewController {
         
     }
 
-    private func setupCollectionView() {
-        collectionView.register(UINib(nibName: Cells.ipTile.className,
-                                      bundle: nil),
-                                forCellWithReuseIdentifier: Cells.ipTile.identifier)
-        collectionView.register(UINib(nibName: Cells.quickConnect.className,
-                                      bundle: nil),
-                                forCellWithReuseIdentifier: Cells.quickConnect.identifier)
-        collectionView.register(UINib(nibName: Cells.region.className,
-                                      bundle: nil),
-                                forCellWithReuseIdentifier: Cells.region.identifier)
-        collectionView.register(UINib(nibName: Cells.subscription.className,
-                                      bundle: nil),
-                                forCellWithReuseIdentifier: Cells.subscription.identifier)
-        collectionView.register(UINib(nibName: Cells.usage.className,
-                                      bundle: nil),
-                                forCellWithReuseIdentifier: Cells.usage.identifier)
-        collectionView.register(UINib(nibName: Cells.networkManagementTool.className,
-                                      bundle: nil),
-                                forCellWithReuseIdentifier: Cells.networkManagementTool.identifier)
-        collectionView.register(UINib(nibName: Cells.quickSettings.className,
-                                      bundle: nil),
-                                forCellWithReuseIdentifier: Cells.quickSettings.identifier)
-        collectionView.backgroundColor = .clear
-    }
-    
     private func updateTileLayout() {
         UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
             self.toggleConnection.alpha = self.tileModeStatus == .normal ? 1 : 0
