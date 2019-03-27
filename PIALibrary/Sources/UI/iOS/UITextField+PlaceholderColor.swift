@@ -15,7 +15,7 @@ extension UITextField {
             let attributed = self.attributedPlaceholder ?? NSAttributedString(string: "")
             var placeholderColor = self.textColor
             attributed.enumerateAttribute(
-                NSAttributedStringKey.foregroundColor,
+                NSAttributedString.Key.foregroundColor,
                 in: NSRange(location: 0, length: attributed.length),
                 options: []
             ) { value, _, _ in
@@ -27,7 +27,7 @@ extension UITextField {
         }
         set {
             if let placeholder = self.placeholder, let newColorValue = newValue {
-                let placeholderAttributes = [NSAttributedStringKey.foregroundColor: newColorValue]
+                let placeholderAttributes = [NSAttributedString.Key.foregroundColor: newColorValue]
                 self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: placeholderAttributes)
             } else {
                 print("## Placeholder color has not been set. You need to define the placeholder text first.")

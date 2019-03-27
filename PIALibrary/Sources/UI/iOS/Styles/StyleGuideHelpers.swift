@@ -110,16 +110,16 @@ public struct TextAttributeStyle {
         self.baselineOffset = baselineOffset
     }
     
-    func toAttributeArray() -> [NSAttributedStringKey: Any] {
+    func toAttributeArray() -> [NSAttributedString.Key: Any] {
         
-        var array = [NSAttributedStringKey: Any]()
+        var array = [NSAttributedString.Key: Any]()
         
-        array[NSAttributedStringKey.kern] = kern
-        array[NSAttributedStringKey.paragraphStyle] = paragraphStyle
-        array[NSAttributedStringKey.foregroundColor] = foregroundColor
-        array[NSAttributedStringKey.font] = font
-        array[NSAttributedStringKey.link] = link
-        array[NSAttributedStringKey.baselineOffset] = baselineOffset
+        array[NSAttributedString.Key.kern] = kern
+        array[NSAttributedString.Key.paragraphStyle] = paragraphStyle
+        array[NSAttributedString.Key.foregroundColor] = foregroundColor
+        array[NSAttributedString.Key.font] = font
+        array[NSAttributedString.Key.link] = link
+        array[NSAttributedString.Key.baselineOffset] = baselineOffset
         
         return array
         
@@ -202,7 +202,7 @@ extension UIButton: TextStyling {
         backgroundColor = style.backgroundColor
     }
     
-    public func style(style: TextStyle, for controlState: UIControlState) {
+    public func style(style: TextStyle, for controlState: UIControl.State) {
         titleLabel?.font = style.font
         setTitleColor(style.color, for: controlState)
         if let color = style.backgroundColor {

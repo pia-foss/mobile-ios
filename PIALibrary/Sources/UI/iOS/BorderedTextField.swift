@@ -119,7 +119,7 @@ public class BorderedTextField: UITextField {
     
     private func reloadPlaceholder() {
         if let placeholder = placeholder, let placeholderColor = borderColor {
-            let attributes: [NSAttributedStringKey: Any] = [
+            let attributes: [NSAttributedString.Key: Any] = [
                 .foregroundColor: placeholderColor
             ]
             attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attributes)
@@ -127,16 +127,13 @@ public class BorderedTextField: UITextField {
     }
     
     override public func textRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds,
-                                     UIEdgeInsetsMake(0, 16, 0, 16))
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
     }
     override public func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds,
-                                     UIEdgeInsetsMake(0, 16, 0, 16))
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
     }
     override public func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds,
-                                     UIEdgeInsetsMake(0, 16, 0, 16))
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
     }
     
     public override func rightViewRect(forBounds bounds: CGRect) -> CGRect {

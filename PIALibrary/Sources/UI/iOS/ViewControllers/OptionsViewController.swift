@@ -61,7 +61,7 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
         
         delegate?.optionsController(self, didLoad: tableView)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         
         viewShouldRestyle()
         
@@ -153,7 +153,7 @@ public protocol OptionsViewControllerDelegate: class {
     /**
      Sets the `UITableViewStyle` for the table view.
      */
-    func tableStyleForOptionsController(_ controller: OptionsViewController) -> UITableViewStyle
+    func tableStyleForOptionsController(_ controller: OptionsViewController) -> UITableView.Style
 
     /**
      Called after loading the embedded `UITableView`.

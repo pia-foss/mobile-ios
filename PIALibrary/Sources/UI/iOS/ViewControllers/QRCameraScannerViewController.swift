@@ -97,7 +97,7 @@ class QRCameraScannerViewController: AutolayoutViewController {
         previewLayer.frame = UIScreen.main.bounds
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
-        view.bringSubview(toFront: closeButton)
+        view.bringSubviewToFront(closeButton)
         
         captureSession.startRunning()
         

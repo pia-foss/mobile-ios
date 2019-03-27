@@ -12,29 +12,29 @@ import Lottie
 extension UIView: AnimatingLoadingDelegate {
     
     private struct LottieRepos {
-        static var graphLoad: LOTAnimationView?
+        static var graphLoad: AnimationView?
     }
     
-    var graphLoad: LOTAnimationView? {
+    var graphLoad: AnimationView? {
         get {
-            return objc_getAssociatedObject(self, &LottieRepos.graphLoad) as? LOTAnimationView
+            return objc_getAssociatedObject(self, &LottieRepos.graphLoad) as? AnimationView
         }
         set {
             if let unwrappedValue = newValue {
-                objc_setAssociatedObject(self, &LottieRepos.graphLoad, unwrappedValue as LOTAnimationView?, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                objc_setAssociatedObject(self, &LottieRepos.graphLoad, unwrappedValue as AnimationView?, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             }
         }
     }
     
     public func showLoadingAnimation() {
         if graphLoad == nil {
-            graphLoad = LOTAnimationView(name: "pia-spinner")
+            graphLoad = AnimationView(name: "pia-spinner")
         }
         addLoadingAnimation()
     }
     
     private func addLoadingAnimation() {
-        graphLoad?.loopAnimation = true
+        graphLoad?.loopMode = .loop
         if let graphLoad = graphLoad {
             self.addSubview(graphLoad)
             graphLoad.play()

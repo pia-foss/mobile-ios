@@ -155,7 +155,7 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
                                                        andBarTintColors: [UIColor.piaGreen,
                                                                           UIColor.piaGreenDark20])
             }
-            let size = titleLabelView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+            let size = titleLabelView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
             titleLabelView.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
             navigationItem.titleView = titleLabelView
             setNeedsStatusBarAppearanceUpdate()
@@ -172,7 +172,7 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
                                                        andBarTintColors: nil)
             }
             
-            let size = titleLabelView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+            let size = titleLabelView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
             titleLabelView.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
             navigationItem.titleView = titleLabelView
             setNeedsStatusBarAppearanceUpdate()
@@ -186,17 +186,17 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
 extension AutolayoutViewController: AnimatingLoadingDelegate {
     
     private struct LottieRepos {
-        static var graphLoad: LOTAnimationView?
+        static var graphLoad: AnimationView?
         static var containerView: UIView?
     }
     
-    var graphLoad: LOTAnimationView? {
+    var graphLoad: AnimationView? {
         get {
-            return objc_getAssociatedObject(self, &LottieRepos.graphLoad) as? LOTAnimationView
+            return objc_getAssociatedObject(self, &LottieRepos.graphLoad) as? AnimationView
         }
         set {
             if let unwrappedValue = newValue {
-                objc_setAssociatedObject(self, &LottieRepos.graphLoad, unwrappedValue as LOTAnimationView?, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                objc_setAssociatedObject(self, &LottieRepos.graphLoad, unwrappedValue as AnimationView?, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             }
         }
     }
@@ -218,13 +218,13 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
             containerView?.backgroundColor = Theme.current.palette.appearance == .dark ?
                 UIColor.black.withAlphaComponent(0.72) :
                 UIColor.piaGrey1.withAlphaComponent(0.75)
-            graphLoad = LOTAnimationView(name: "pia-spinner")
+            graphLoad = AnimationView(name: "pia-spinner")
         }
         addLoadingAnimation()
     }
     
     private func addLoadingAnimation() {
-        graphLoad?.loopAnimation = true
+        graphLoad?.loopMode = .loop
         if let graphLoad = graphLoad,
             let containerView = containerView {
             if let key = self.navigationController?.view {
