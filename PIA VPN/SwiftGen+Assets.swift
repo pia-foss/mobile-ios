@@ -119,6 +119,7 @@ enum Asset {
       static let iconFilter = ImageAsset(name: "icon-filter")
       static let killswitchDarkActive = ImageAsset(name: "killswitch-dark-active")
       static let killswitchDarkInactive = ImageAsset(name: "killswitch-dark-inactive")
+      static let killswitchLightInactive = ImageAsset(name: "killswitch-light-inactive")
       static let nmtDarkActive = ImageAsset(name: "nmt-dark-active")
       static let nmtDarkInactive = ImageAsset(name: "nmt-dark-inactive")
       static let nmtLightActive = ImageAsset(name: "nmt-light-active")
@@ -203,6 +204,8 @@ enum Asset {
     enum Tiles {
       static let ipTriangle = ImageAsset(name: "ip-triangle")
       static let openTileDetails = ImageAsset(name: "open-tile-details")
+      static let quickConnectPlaceholderDark = ImageAsset(name: "quick-connect-placeholder-dark")
+      static let quickConnectPlaceholderLight = ImageAsset(name: "quick-connect-placeholder-light")
     }
   }
   static let accessoryExpire = ImageAsset(name: "accessory-expire")
@@ -520,6 +523,7 @@ enum Asset {
     Piax.Global.iconFilter,
     Piax.Global.killswitchDarkActive,
     Piax.Global.killswitchDarkInactive,
+    Piax.Global.killswitchLightInactive,
     Piax.Global.nmtDarkActive,
     Piax.Global.nmtDarkInactive,
     Piax.Global.nmtLightActive,
@@ -596,6 +600,8 @@ enum Asset {
     Piax.Splash.lightSplash,
     Piax.Tiles.ipTriangle,
     Piax.Tiles.openTileDetails,
+    Piax.Tiles.quickConnectPlaceholderDark,
+    Piax.Tiles.quickConnectPlaceholderLight,
     accessoryExpire,
     accessorySelected,
     buttonDown,

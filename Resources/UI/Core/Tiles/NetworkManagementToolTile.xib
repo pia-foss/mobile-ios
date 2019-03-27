@@ -22,20 +22,20 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3q3-XT-HIJ">
-                    <rect key="frame" x="25" y="25" width="271" height="0.0"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="3q3-XT-HIJ">
+                    <rect key="frame" x="25" y="25" width="291" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCb-o3-R7j">
-                    <rect key="frame" x="25" y="64" width="271" height="0.0"/>
+                    <rect key="frame" x="25" y="64" width="286" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ck-xW-hDu">
-                    <rect key="frame" x="306" y="22.5" width="44" height="44"/>
+                    <rect key="frame" x="321" y="22.5" width="44" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="44" id="2oR-IQ-nEX"/>
                         <constraint firstAttribute="height" constant="44" id="jNx-SM-We8"/>
@@ -48,8 +48,8 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="1ck-xW-hDu" firstAttribute="leading" secondItem="3q3-XT-HIJ" secondAttribute="trailing" constant="10" id="Iya-PP-u6S"/>
-                <constraint firstItem="Xqf-b8-IaJ" firstAttribute="trailing" secondItem="1ck-xW-hDu" secondAttribute="trailing" constant="25" id="UFu-K5-Fh7"/>
+                <constraint firstItem="1ck-xW-hDu" firstAttribute="leading" secondItem="3q3-XT-HIJ" secondAttribute="trailing" constant="5" id="Iya-PP-u6S"/>
+                <constraint firstItem="Xqf-b8-IaJ" firstAttribute="trailing" secondItem="1ck-xW-hDu" secondAttribute="trailing" constant="10" id="UFu-K5-Fh7"/>
                 <constraint firstItem="Xqf-b8-IaJ" firstAttribute="bottom" secondItem="OCb-o3-R7j" secondAttribute="bottom" constant="25" id="dNU-Sm-BX5"/>
                 <constraint firstItem="3q3-XT-HIJ" firstAttribute="top" secondItem="Xqf-b8-IaJ" secondAttribute="top" constant="25" id="f0x-IY-Qet"/>
                 <constraint firstItem="3q3-XT-HIJ" firstAttribute="leading" secondItem="Xqf-b8-IaJ" secondAttribute="leading" constant="25" id="izx-vU-Id5"/>

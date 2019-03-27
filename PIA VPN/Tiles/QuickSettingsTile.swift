@@ -64,7 +64,7 @@ class QuickSettingsTile: UIView, Tileable  {
         themeLabel.textAlignment = .center
         killSwitchLabel.text = L10n.Settings.ApplicationSettings.KillSwitch.title
         killSwitchLabel.textAlignment = .center
-        nmtLabel.text = L10n.Settings.Hotspothelper.title
+        nmtLabel.text = L10n.Tiles.Quicksetting.Nmt.title
         nmtLabel.textAlignment = .center
         
         if AppPreferences.shared.currentThemeCode == ThemeCode.light {
@@ -81,7 +81,8 @@ class QuickSettingsTile: UIView, Tileable  {
             killSwitchButton.setImage(Asset.Piax.Global.killswitchDarkActive.image, for: [])
             killSwitchButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.trusted
         } else {
-            killSwitchButton.setImage(Asset.Piax.Global.killswitchDarkInactive.image, for: [])
+            killSwitchButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.killswitchLightInactive.image :
+                Asset.Piax.Global.killswitchDarkInactive.image, for: [])
             killSwitchButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.trusted
         }
         

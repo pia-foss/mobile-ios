@@ -674,6 +674,7 @@ class SettingsViewController: AutolayoutViewController {
     
     override func dismissModal() {
         commitChanges {
+            Macros.postNotification(.PIASettingsHaveChanged)
             super.dismissModal()
         }
     }

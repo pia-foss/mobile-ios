@@ -37,7 +37,7 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bnu-kr-urA" customClass="NetworkManagementToolTile" customModule="PIA_VPN" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="457" height="117"/>
+                        <rect key="frame" x="0.0" y="0.0" width="444" height="117"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="8Ss-S0-tXJ"/>
                     </view>
@@ -49,8 +49,8 @@
                 <constraint firstItem="bnu-kr-urA" firstAttribute="top" secondItem="6uH-n1-bjH" secondAttribute="top" id="Hva-HJ-K91"/>
                 <constraint firstAttribute="trailing" secondItem="8QR-ML-8hB" secondAttribute="trailing" constant="15" id="JkO-4s-fmt"/>
                 <constraint firstItem="8QR-ML-8hB" firstAttribute="centerY" secondItem="6uH-n1-bjH" secondAttribute="centerY" id="LLS-72-FlZ"/>
-                <constraint firstItem="8QR-ML-8hB" firstAttribute="leading" secondItem="bnu-kr-urA" secondAttribute="trailing" id="Ri8-id-6ZH"/>
                 <constraint firstItem="HpK-YS-0fm" firstAttribute="leading" secondItem="6uH-n1-bjH" secondAttribute="leading" id="Up4-dS-YPG"/>
+                <constraint firstAttribute="trailing" secondItem="bnu-kr-urA" secondAttribute="trailing" constant="40" id="hRv-JJ-yWb"/>
                 <constraint firstItem="HpK-YS-0fm" firstAttribute="centerY" secondItem="6uH-n1-bjH" secondAttribute="centerY" id="o0L-Tx-wcU"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Ilo-HR-dRk"/>
