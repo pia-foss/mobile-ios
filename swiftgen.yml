@@ -6,7 +6,7 @@ strings:
 
 ib:
     paths:
-        - PIA VPN/en.lproj/Main.storyboard
+        - Resources/UI/en.lproj/Main.storyboard
     outputs:
         templateName: scenes-swift4
         output: PIA VPN/SwiftGen+ScenesStoryboards.swift

@@ -59,8 +59,8 @@ class QuickConnectTile: UIView, Tileable {
         for containerView in stackView.subviews {
             if let button = containerView.subviews.first as? ServerButton,
                 let favoriteImage = containerView.subviews.last as? UIImageView {
-                button.setImage(Asset.Flags.flagUniversal.image, for: .normal)
-                button.alpha = 0.1
+                button.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Tiles.quickConnectPlaceholderLight.image :
+                    Asset.Piax.Tiles.quickConnectPlaceholderDark.image, for: .normal)
                 button.imageView?.contentMode = .scaleAspectFit
                 button.isUserInteractionEnabled = false
                 favoriteImage.isHidden = true

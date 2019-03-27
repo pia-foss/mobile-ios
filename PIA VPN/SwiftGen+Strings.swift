@@ -597,6 +597,12 @@ internal enum L10n {
         internal static let title = L10n.tr("Localizable", "tiles.quick.connect.title")
       }
     }
+    internal enum Quicksetting {
+      internal enum Nmt {
+        /// Network tool
+        internal static let title = L10n.tr("Localizable", "tiles.quicksetting.nmt.title")
+      }
+    }
     internal enum Quicksettings {
       /// Quick settings
       internal static let title = L10n.tr("Localizable", "tiles.quicksettings.title")
