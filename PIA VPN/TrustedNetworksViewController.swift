@@ -47,7 +47,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
         self.switchCellularData.addTarget(self, action: #selector(toggleCellularData(_:)), for: .valueChanged)
         self.switchRules.addTarget(self, action: #selector(toggleRules(_:)), for: .valueChanged)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(filterAvailableNetworks), name: .UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(filterAvailableNetworks), name: UIApplication.didBecomeActiveNotification, object: nil)
 
         configureTableView()
     }
@@ -124,7 +124,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
     // MARK: Private Methods
     private func configureTableView() {
         if #available(iOS 11, *) {
-            tableView.sectionFooterHeight = UITableViewAutomaticDimension
+            tableView.sectionFooterHeight = UITableView.automaticDimension
             tableView.estimatedSectionFooterHeight = 1.0
         }
         filterAvailableNetworks()
@@ -313,7 +313,7 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let ssid = trustedNetworks[indexPath.row]
             hotspotHelper.removeTrustedNetwork(ssid)

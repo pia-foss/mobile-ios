@@ -32,7 +32,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         NotificationCenter.default.removeObserver(self)
     }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         Bootstrapper.shared.bootstrap()
         application.shortcutItems = []
@@ -62,7 +62,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             L10n.Notifications.Disabled.message
         )
         alert.addActionWithTitle(L10n.Notifications.Disabled.settings) {
-            application.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
+            application.openURL(URL(string: UIApplication.openSettingsURLString)!)
         }
         alert.addCancelAction(L10n.Global.ok)
         window?.rootViewController?.present(alert, animated: true, completion: nil)
@@ -74,7 +74,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         application.applicationIconBadgeNumber = 0
     }
 
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         log.debug("Opened app from URL: \(url)")
         guard let host = url.host else {
             return false

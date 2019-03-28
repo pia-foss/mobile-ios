@@ -41,7 +41,7 @@ class AboutViewController: AutolayoutViewController {
         tableView.scrollsToTop = true
         
         let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
 
     }
     
@@ -62,7 +62,7 @@ class AboutViewController: AutolayoutViewController {
         guard let headerView = tableView.tableHeaderView else {
             return
         }
-        let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+        let height = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
         var frame = headerView.frame
         frame.size.height = height
         headerView.frame = frame
@@ -106,7 +106,7 @@ class AboutViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        tableView.separatorInset = UIEdgeInsetsMake(0, 30, 0, 0)
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
         Theme.current.applyDividerToSeparator(tableView)
         styleNavigationBarWithTitle(L10n.Menu.Item.about)
         // XXX: for some reason, UITableView is not affected by appearance updates

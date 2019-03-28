@@ -2,6 +2,9 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 use_frameworks!
 
+# ignore all warnings from all pods
+inhibit_all_warnings!
+
 # Libraries
 
 $git_root = "https://github.com/pia-foss"
@@ -53,7 +56,7 @@ end
 def shared_main_pods
     pod 'AlamofireImage'
     #library_by_path('')
-    library_by_git('0033217')
+    library_by_git('7d09a9a')
     #library_by_version('~> 1.1.3')
 end
 
@@ -69,7 +72,7 @@ end
 
 def tunnel_pods
     #tunnel_by_path('')
-    tunnel_by_git('bd53e0a')
+    tunnel_by_git('257296c')
     #tunnel_by_version('~> 1.1.6')
 end
 
@@ -105,6 +108,11 @@ post_install do |installer|
         if ['PopupDialog'].include? target.name
             target.build_configurations.each do |config|
                 config.build_settings['SWIFT_VERSION'] = '4.2'
+            end
+        end
+        if ['SwiftEntryKit', 'QuickLayout', 'SideMenu'].include? target.name
+            target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '4.0'
             end
         end
     end

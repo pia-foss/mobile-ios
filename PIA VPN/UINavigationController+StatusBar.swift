@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UINavigationController {
-    open override var childViewControllerForStatusBarStyle: UIViewController? {
+    open override var childForStatusBarStyle: UIViewController? {
         return topViewController
     }
 }

@@ -105,7 +105,7 @@ class MenuViewController: AutolayoutViewController {
         imvAvatar.image = Asset.imageRobot.image
         labelVersion.text = Macros.localizedVersionFullString()
 
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
 
         let nc = NotificationCenter.default

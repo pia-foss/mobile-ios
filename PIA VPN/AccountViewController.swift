@@ -85,7 +85,7 @@ class AccountViewController: AutolayoutViewController {
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(redisplayAccount), name: .PIAAccountDidRefresh, object: nil)
-        nc.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
 
         Client.providers.accountProvider.retrieveAccount()
     }

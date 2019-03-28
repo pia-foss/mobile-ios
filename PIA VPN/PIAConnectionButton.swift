@@ -124,7 +124,7 @@ class PIAConnectionButton: UIButton, Restylable {
     
     func startButtonAnimation() {
         
-        displayLink.add(to: .current, forMode: .commonModes)
+        displayLink.add(to: .current, forMode: RunLoop.Mode.common)
 
         self.updateColors()
 
@@ -136,7 +136,7 @@ class PIAConnectionButton: UIButton, Restylable {
         end.beginTime = 0
         end.duration = duration * 0.75
         end.timingFunction = PIAConnectionButtonSettings.timingFunction
-        end.fillMode = kCAFillModeForwards
+        end.fillMode = CAMediaTimingFillMode.forwards
         
         let begin = CABasicAnimation(keyPath: "strokeStart")
         begin.fromValue = 0
@@ -144,7 +144,7 @@ class PIAConnectionButton: UIButton, Restylable {
         begin.beginTime = duration * 0.15
         begin.duration = duration * 0.85
         begin.timingFunction = PIAConnectionButtonSettings.timingFunction
-        begin.fillMode = kCAFillModeBackwards
+        begin.fillMode = CAMediaTimingFillMode.backwards
 
         let opacity = CABasicAnimation(keyPath: "opacity")
         opacity.fromValue = 0
@@ -152,7 +152,7 @@ class PIAConnectionButton: UIButton, Restylable {
         opacity.beginTime = 0
         opacity.duration = duration * 0.75
         opacity.timingFunction = PIAConnectionButtonSettings.timingFunction
-        opacity.fillMode = kCAFillModeForwards
+        opacity.fillMode = CAMediaTimingFillMode.forwards
 
         let group = CAAnimationGroup()
         group.animations = [end, begin, opacity]
@@ -177,9 +177,9 @@ class PIAConnectionButton: UIButton, Restylable {
             ending.fromValue = self.currenStrokeEnd
             ending.toValue = 1
             ending.duration = PIAConnectionButtonSettings.shapeEndAnimationDuration
-            ending.fillMode = kCAFillModeForwards
+            ending.fillMode = CAMediaTimingFillMode.forwards
             self.circlePathLayer.add(ending, forKey: "move")
-            displayLink.remove(from: .current, forMode: .commonModes)
+            displayLink.remove(from: .current, forMode: RunLoop.Mode.common)
         }
         
         isAnimating = false
