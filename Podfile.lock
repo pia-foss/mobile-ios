@@ -25,7 +25,7 @@ DEPENDENCIES:
   - Alamofire (~> 4)
   - Gloss (~> 2)
   - lottie-ios
-  - PIATunnel (from `/Users/ueshiba/Desktop/PIA/tunnel-apple`)
+  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `257296c`)
   - PopupDialog
   - ReachabilitySwift
   - SwiftEntryKit (= 0.7.2)
@@ -46,7 +46,13 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIATunnel:
-    :path: "/Users/ueshiba/Desktop/PIA/tunnel-apple"
+    :commit: 257296c
+    :git: https://github.com/pia-foss/tunnel-apple
+
+CHECKOUT OPTIONS:
+  PIATunnel:
+    :commit: 257296c
+    :git: https://github.com/pia-foss/tunnel-apple
 
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
@@ -54,13 +60,13 @@ SPEC CHECKSUMS:
   Gloss: 13ab6b4b0ff4cb2448466edc957479b1bccea8ba
   lottie-ios: 06e0b54aab85ba128e332687d7f4ac4861a7a7ae
   OpenSSL-Apple: cd153d705ef350eb834ae7ff5f21f792b51ed208
-  PIATunnel: 72eed3d901b61ec9c408fc2c89708df2254638de
+  PIATunnel: c0a1e40d198ebca00d192c5266c055f1ec5d4bab
   PopupDialog: f4bb461bf70ff422be0b56656566424ee9273080
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
   SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
 
-PODFILE CHECKSUM: f5620b6aa2df8fff978fe4ca9af6894e3d3e0956
+PODFILE CHECKSUM: df0f2d213369afd1fd10145338733df18c1c4252
 
 COCOAPODS: 1.5.3
