@@ -134,9 +134,9 @@ extension Theme {
         }
         
         //Cancel button
-        let attributes:[NSAttributedStringKey:Any] = [
-            NSAttributedStringKey.foregroundColor : TextStyle.textStyle8.color!,
-            NSAttributedStringKey.font : TextStyle.textStyle8.font!
+        let attributes:[NSAttributedString.Key:Any] = [
+            NSAttributedString.Key.foregroundColor : TextStyle.textStyle8.color!,
+            NSAttributedString.Key.font : TextStyle.textStyle8.font!
         ]
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
 

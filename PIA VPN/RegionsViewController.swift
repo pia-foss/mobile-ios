@@ -46,7 +46,7 @@ class RegionsViewController: AutolayoutViewController {
         selectedServer = Client.preferences.displayedServer
 
         NotificationCenter.default.addObserver(self, selector: #selector(pingsDidComplete(notification:)), name: .PIADaemonsDidPingServers, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
 
         setupSearchBarController()
         Macros.stylePopupDialog()

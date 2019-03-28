@@ -28,7 +28,7 @@ class AboutNoticeCell: UITableViewCell, Restylable {
         labelCopyright.text = component.copyright
         labelNotice.text = component.notice
         
-        buttonName.accessibilityTraits = UIAccessibilityTraitNone
+        buttonName.accessibilityTraits = UIAccessibilityTraits.none
         buttonName.accessibilityLabel = component.name
     }
     
@@ -110,7 +110,7 @@ class AboutLicenseCell: UITableViewCell, Restylable {
         }
         buttonMore.setImage(moreImage, for: .normal)
 
-        buttonName.accessibilityTraits = UIAccessibilityTraitNone
+        buttonName.accessibilityTraits = UIAccessibilityTraits.none
         buttonName.accessibilityLabel = component.name
         buttonName.accessibilityHint = L10n.About.Accessibility.Component.expand
     }

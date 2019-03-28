@@ -237,7 +237,7 @@ class SettingsViewController: AutolayoutViewController {
         validateDNSList()
 
         if #available(iOS 11, *) {
-            tableView.sectionFooterHeight = UITableViewAutomaticDimension
+            tableView.sectionFooterHeight = UITableView.automaticDimension
             tableView.estimatedSectionFooterHeight = 1.0
         }
         switchPersistent.addTarget(self, action: #selector(togglePersistentConnection(_:)), for: .valueChanged)
@@ -249,8 +249,8 @@ class SettingsViewController: AutolayoutViewController {
         switchDisconnectSiriShortcuts.addTarget(self, action: #selector(toggleDisconnectSiriShortcuts(_:)), for: .valueChanged)
         redisplaySettings()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshContentBlockerState), name: .UIApplicationDidBecomeActive, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: .UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshContentBlockerState), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
 
     }
     
@@ -752,7 +752,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -1194,7 +1194,7 @@ extension SettingsViewController: OptionsViewControllerDelegate {
         return Theme.current.palette.principalBackground
     }
     
-    func tableStyleForOptionsController(_ controller: OptionsViewController) -> UITableViewStyle {
+    func tableStyleForOptionsController(_ controller: OptionsViewController) -> UITableView.Style {
         return .grouped
     }
     

@@ -71,7 +71,7 @@ private struct LightThemeStrategy: ThemeStrategy {
     
     func autolayoutContainerMargins(for mask: UIInterfaceOrientationMask) -> UIEdgeInsets {
         if ((mask == .landscape) && Macros.isDevicePad) {
-            return UIEdgeInsetsMake(0, AppConfiguration.UI.iPadLandscapeMargin, 0, AppConfiguration.UI.iPadLandscapeMargin)
+            return UIEdgeInsets(top: 0, left: AppConfiguration.UI.iPadLandscapeMargin, bottom: 0, right: AppConfiguration.UI.iPadLandscapeMargin)
         }
         return .zero
     }
@@ -97,7 +97,7 @@ private struct DarkThemeStrategy: ThemeStrategy {
     
     func autolayoutContainerMargins(for mask: UIInterfaceOrientationMask) -> UIEdgeInsets {
         if ((mask == .landscape) && Macros.isDevicePad) {
-            return UIEdgeInsetsMake(0, AppConfiguration.UI.iPadLandscapeMargin, 0, AppConfiguration.UI.iPadLandscapeMargin)
+            return UIEdgeInsets(top: 0, left: AppConfiguration.UI.iPadLandscapeMargin, bottom: 0, right: AppConfiguration.UI.iPadLandscapeMargin)
         }
         return .zero
     }
