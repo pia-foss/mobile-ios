@@ -87,7 +87,7 @@ class WelcomePageViewController: UIPageViewController {
             fatalError("No page displayed yet")
         }
         let controller = source[index]
-        let direction: UIPageViewControllerNavigationDirection = (index > currentIndex) ? .forward : .reverse
+        let direction: UIPageViewController.NavigationDirection = (index > currentIndex) ? .forward : .reverse
         setViewControllers([controller], direction: direction, animated: true, completion: nil)
     }
     
@@ -98,7 +98,7 @@ class WelcomePageViewController: UIPageViewController {
 
     // MARK: Size classes
     
-    public override func overrideTraitCollection(forChildViewController childViewController: UIViewController) -> UITraitCollection? {
+    public override func overrideTraitCollection(forChild childViewController: UIViewController) -> UITraitCollection? {
         guard let window = view.window else {
             return super.traitCollection
         }

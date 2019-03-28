@@ -19,7 +19,7 @@ public extension UILabel {
             let attributeString = NSMutableAttributedString(string: text)
             let style = NSMutableParagraphStyle()
             style.minimumLineHeight = lineHeight
-            attributeString.addAttribute(NSAttributedStringKey.paragraphStyle,
+            attributeString.addAttribute(NSAttributedString.Key.paragraphStyle,
                                          value: style,
                                          range: NSRange(location: 0,
                                                         length: text.count))
