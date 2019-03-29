@@ -210,9 +210,9 @@
 "settings.trusted.networks.connect.message" = "Protect this network by connecting to VPN?";
 "hotspothelper.display.name" = "🔒 Activate VPN WiFi Protection in PIA Settings to secure this connection.";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi Protection Enabled - We got your back.";
-"settings.hotspothelper.cellular.title" = "Trust cellular networks";
+"settings.hotspothelper.cellular.title" = "Protect over cellular networks";
 "settings.hotspothelper.wifi.trust.title" = "VPN WiFi Protection";
-"settings.hotspothelper.cellular.description" = "PIA automatically enables the VPN when connecting to cellular networks if this option is disabled.";
+"settings.hotspothelper.cellular.description" = "PIA automatically enables the VPN when connecting to cellular networks if this option is enabled.";
 "settings.hotspothelper.cellular.networks" = "Cellular networks";
 "settings.hotspothelper.wifi.networks" = "WiFi networks";
 "settings.trusted.networks.sections.untrusted" = "Untrusted networks";
