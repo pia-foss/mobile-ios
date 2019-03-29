@@ -89,6 +89,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
         let preferences = Client.preferences.editable()
         preferences.shouldConnectForAllNetworks = sender.isOn
         preferences.commit()
+        hasUpdatedPreferences = true
     }
     
     @objc private func toggleUseWiFiProtection(_ sender: UISwitch) {
@@ -289,6 +290,7 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
         case .current:
             if let ssid = hotspotHelper.currentWiFiNetwork() {
                 hotspotHelper.saveTrustedNetwork(ssid)
+                hasUpdatedPreferences = true
             }
         case .available:
             let ssid = availableNetworks[indexPath.row]
@@ -317,6 +319,7 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
         if editingStyle == .delete {
             let ssid = trustedNetworks[indexPath.row]
             hotspotHelper.removeTrustedNetwork(ssid)
+            hasUpdatedPreferences = true
             filterAvailableNetworks()
         }
     }

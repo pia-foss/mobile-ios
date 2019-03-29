@@ -77,7 +77,8 @@ class NetworkManagementToolTile: UIView, Tileable  {
             if let ssid = hotspotHelper.currentWiFiNetwork() {
                 networkLabel.text = ssid.uppercased()
                 if Client.preferences.useWiFiProtection {
-                    if Client.preferences.trustedNetworks.contains(ssid) {
+                    if Client.preferences.trustedNetworks.contains(ssid) ||
+                        Client.preferences.shouldConnectForAllNetworks {
                         statusButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.trustedLightIcon.image :
                             Asset.Piax.Global.trustedDarkIcon.image, for: [])
                         statusButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.trusted
@@ -94,13 +95,13 @@ class NetworkManagementToolTile: UIView, Tileable  {
             } else {
                 networkLabel.text = L10n.Tiles.Nmt.cellular
                 if Client.preferences.trustCellularData {
-                    statusButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.trustedLightIcon.image :
-                        Asset.Piax.Global.trustedDarkIcon.image, for: [])
-                    statusButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.trusted
-                } else {
                     statusButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.untrustedLightIcon.image :
                         Asset.Piax.Global.untrustedDarkIcon.image, for: [])
                     statusButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.untrusted
+                } else {
+                    statusButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.trustedLightIcon.image :
+                        Asset.Piax.Global.trustedDarkIcon.image, for: [])
+                    statusButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.trusted
                 }
             }
         } else { // if NMT disabled
