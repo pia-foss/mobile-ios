@@ -107,7 +107,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
 
     @objc private func toggleCellularData(_ sender: UISwitch) {
         let preferences = Client.preferences.editable()
-        preferences.trustCellularData = sender.isOn
+        preferences.trustCellularData = !sender.isOn
         preferences.commit()
         hasUpdatedPreferences = true
     }
@@ -263,7 +263,7 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchCellularData
             cell.selectionStyle = .none
-            switchCellularData.isOn = Client.preferences.trustCellularData
+            switchCellularData.isOn = !Client.preferences.trustCellularData
 
         }
 

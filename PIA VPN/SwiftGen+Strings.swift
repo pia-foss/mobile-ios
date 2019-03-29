@@ -474,11 +474,11 @@ internal enum L10n {
         }
       }
       internal enum Cellular {
-        /// PIA automatically enables the VPN when connecting to cellular networks if this option is disabled.
+        /// PIA automatically enables the VPN when connecting to cellular networks if this option is enabled.
         internal static let description = L10n.tr("Localizable", "settings.hotspothelper.cellular.description")
         /// Cellular networks
         internal static let networks = L10n.tr("Localizable", "settings.hotspothelper.cellular.networks")
-        /// Trust cellular networks
+        /// Protect over cellular networks
         internal static let title = L10n.tr("Localizable", "settings.hotspothelper.cellular.title")
       }
       internal enum Enable {
