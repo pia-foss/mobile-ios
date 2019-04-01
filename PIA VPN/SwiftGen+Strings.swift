@@ -455,7 +455,7 @@ internal enum L10n {
       }
     }
     internal enum Hotspothelper {
-      /// Configure how PIA will behave on connection to WiFi or cellular networks.
+      /// Configure how PIA will behave on connection to WiFi or cellular networks. This excludes disconnecting manually.
       internal static let description = L10n.tr("Localizable", "settings.hotspothelper.description")
       /// Network management tool
       internal static let title = L10n.tr("Localizable", "settings.hotspothelper.title")
