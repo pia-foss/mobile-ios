@@ -599,7 +599,7 @@ internal enum L10n {
     }
     internal enum Quicksetting {
       internal enum Nmt {
-        /// Network tool
+        /// Network Management
         internal static let title = L10n.tr("Localizable", "tiles.quicksetting.nmt.title")
       }
     }

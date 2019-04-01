@@ -48,44 +48,53 @@ class PIAHotspotHelper {
      */
     public func configureHotspotHelper() -> Bool {
         
-        let hotspotDisplayName = (Client.preferences.nmtRulesEnabled && Client.preferences.useWiFiProtection) ?
-            L10n.Hotspothelper.Display.Protected.name :
-            L10n.Hotspothelper.Display.name
-        
-        let options: [String: NSObject] = [kNEHotspotHelperOptionDisplayName : hotspotDisplayName as NSObject]
+        let options: [String: NSObject] = [kNEHotspotHelperOptionDisplayName : self.hotspotHelperMessage() as NSObject]
         let queue: DispatchQueue = DispatchQueue(label: "com.privateinternetaccess.hotspot", attributes: DispatchQueue.Attributes.concurrent)
         NEHotspotHelper.supportedNetworkInterfaces()
-        return NEHotspotHelper.register(options: options,
-                                        queue: queue) { [weak self] (cmd: NEHotspotHelperCommand) in
-                                            
-                                            if let weakSelf = self {
-                                                if cmd.commandType == .filterScanList {
-                                                    log.info("filtering ssid list")
-                                                    var availableList: [String] = []
-                                                    var unsecuredList: [NEHotspotNetwork] = []
-                                                    for element in cmd.networkList! {
-                                                        if !element.ssid.isEmpty,
-                                                            !availableList.contains(element.ssid) {
-                                                            availableList.append(element.ssid)
+        if Client.preferences.nmtRulesEnabled {
+            return NEHotspotHelper.register(options: options,
+                                            queue: queue) { [weak self] (cmd: NEHotspotHelperCommand) in
+                                                
+                                                if let weakSelf = self {
+                                                    if cmd.commandType == .filterScanList {
+                                                        log.info("filtering ssid list")
+                                                        var availableList: [String] = []
+                                                        var unsecuredList: [NEHotspotNetwork] = []
+                                                        for element in cmd.networkList! {
+                                                            if !element.ssid.isEmpty,
+                                                                !availableList.contains(element.ssid) {
+                                                                availableList.append(element.ssid)
+                                                            }
+                                                            if !element.isSecure {
+                                                                element.setConfidence(.high)
+                                                                unsecuredList.append(element)
+                                                            }
                                                         }
-                                                        if !element.isSecure {
-                                                            element.setConfidence(.high)
-                                                            unsecuredList.append(element)
+                                                        weakSelf.saveCurrentNetworkList(availableNetworks: availableList)
+                                                        let response = cmd.createResponse(NEHotspotHelperResult.success)
+                                                        if !Client.providers.vpnProvider.isVPNConnected {
+                                                            response.setNetworkList(unsecuredList)
+                                                            log.info("present PIA message for unprotected networks")
                                                         }
+                                                        response.deliver()
                                                     }
-                                                    weakSelf.saveCurrentNetworkList(availableNetworks: availableList)
-                                                    let response = cmd.createResponse(NEHotspotHelperResult.success)
-                                                    if !Client.providers.vpnProvider.isVPNConnected {
-                                                        response.setNetworkList(unsecuredList)
-                                                        log.info("present PIA message for unprotected networks")
-                                                    }
-                                                    response.deliver()
+                                                    
                                                 }
-
-                                            }
-
+                                                
+            }
+        } else {
+            return false
         }
         
+    }
+    
+    private func hotspotHelperMessage() -> String {
+        if Client.preferences.nmtRulesEnabled,
+            Client.preferences.useWiFiProtection {
+            return L10n.Hotspothelper.Display.Protected.name
+        } else {
+            return L10n.Hotspothelper.Display.name
+        }
     }
     
     private func saveCurrentNetworkList(availableNetworks: [String]) {

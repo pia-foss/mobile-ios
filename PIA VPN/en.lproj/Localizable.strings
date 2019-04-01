@@ -219,7 +219,7 @@
 "settings.hotspothelper.rules.title" = "Rules";
 "settings.trusted.networks.sections.trusted.rule.description"= "Perform actions when joining trusted networks.";
 "settings.trusted.networks.sections.trusted.rule.action"= "Disconnect from PIA VPN";
-"tiles.quicksetting.nmt.title" = "Network tool";
+"tiles.quicksetting.nmt.title" = "Network Management";
 
 // REGION
 
