@@ -22,6 +22,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
     private lazy var switchRules = UISwitch()
     var shouldReconnectAutomatically = false
     var hasUpdatedPreferences = false
+    var persistentConnectionValue = false
 
     private enum Sections: Int, EnumsBuilder {
         
@@ -51,7 +52,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
 
         configureTableView()
         
-        if !Client.preferences.isPersistentConnection,
+        if !persistentConnectionValue,
             Client.preferences.nmtRulesEnabled {
             presentKillSwitchAlert()
         }
@@ -119,7 +120,8 @@ class TrustedNetworksViewController: AutolayoutViewController {
     }
     
     @objc private func toggleRules(_ sender: UISwitch) {
-        if sender.isOn {
+        if !persistentConnectionValue,
+            sender.isOn {
             presentKillSwitchAlert()
         }
         let preferences = Client.preferences.editable()

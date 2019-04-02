@@ -281,6 +281,8 @@ class SettingsViewController: AutolayoutViewController {
                     customDNSSettingsVC.secondaryDNSValue = ips.last
                 }
             }
+        } else if let trustedNetworksVC = segue.destination as? TrustedNetworksViewController {
+            trustedNetworksVC.persistentConnectionValue = pendingPreferences.isPersistentConnection
         }
     }
     
