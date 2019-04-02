@@ -184,4 +184,12 @@ extension Theme {
             Asset.Piax.Global.eyeInactiveLight.image
     }
 
+    public func applyLicenseMonospaceFontAndColor(_ textView: UITextView,
+                                                  appearance: Appearance) {
+        textView.font = typeface.monospaceFont(size: 14.0)
+        textView.textColor = palette.appearance == .dark ?
+            .white :
+            palette.textColor(forRelevance: 2, appearance: appearance)
+    }
+
 }
