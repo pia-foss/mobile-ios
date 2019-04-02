@@ -94,7 +94,7 @@ class AboutViewController: AutolayoutViewController {
         DispatchQueue.main.async {
             self.licenseByComponentName[component.name] = license
             
-            guard let index = self.components.licenses.index(of: component) else {
+            guard let index = self.components.licenses.firstIndex(of: component) else {
                 return
             }
             self.tableView.reloadRows(at: [IndexPath(row: index, section: 1)], with: .none)

@@ -50,6 +50,11 @@ class TrustedNetworksViewController: AutolayoutViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(filterAvailableNetworks), name: UIApplication.didBecomeActiveNotification, object: nil)
 
         configureTableView()
+        
+        if !Client.preferences.isPersistentConnection,
+            Client.preferences.nmtRulesEnabled {
+            presentKillSwitchAlert()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -114,6 +119,9 @@ class TrustedNetworksViewController: AutolayoutViewController {
     }
     
     @objc private func toggleRules(_ sender: UISwitch) {
+        if sender.isOn {
+            presentKillSwitchAlert()
+        }
         let preferences = Client.preferences.editable()
         preferences.nmtRulesEnabled = sender.isOn
         preferences.commit()
@@ -123,6 +131,20 @@ class TrustedNetworksViewController: AutolayoutViewController {
 
 
     // MARK: Private Methods
+    private func presentKillSwitchAlert() {
+        let alert = Macros.alert(nil, L10n.Settings.Nmt.Killswitch.disabled)
+        alert.addCancelAction(L10n.Global.close)
+        alert.addActionWithTitle(L10n.Global.enable) {
+            let preferences = Client.preferences.editable()
+            preferences.isPersistentConnection = true
+            preferences.commit()
+            NotificationCenter.default.post(name: .PIAPersistentConnectionSettingHaveChanged,
+                                            object: self,
+                                            userInfo: nil)
+        }
+        present(alert, animated: true, completion: nil)
+    }
+    
     private func configureTableView() {
         if #available(iOS 11, *) {
             tableView.sectionFooterHeight = UITableView.automaticDimension

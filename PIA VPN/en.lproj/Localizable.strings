@@ -13,6 +13,7 @@
 "global.unreachable" = "No internet connection found. Please confirm that you have an internet connection.";
 "global.enabled" = "Enabled";
 "global.disabled" = "Disabled";
+"global.enable" = "Enable";
 
 // NOTIFICATIONS
 
@@ -217,9 +218,10 @@
 "settings.hotspothelper.wifi.networks" = "WiFi networks";
 "settings.trusted.networks.sections.untrusted" = "Untrusted networks";
 "settings.hotspothelper.rules.title" = "Rules";
-"settings.trusted.networks.sections.trusted.rule.description"= "Perform actions when joining trusted networks.";
+"settings.trusted.networks.sections.trusted.rule.description"= "Enable this feature, with the VPN kill switch enabled, to customize how PIA will behave on WiFi and cellular networks. Please be aware, functionality of the Network Management Tool will be disabled if you manually disconnect.";
 "settings.trusted.networks.sections.trusted.rule.action"= "Disconnect from PIA VPN";
 "tiles.quicksetting.nmt.title" = "Network Management";
+"settings.nmt.killswitch.disabled" = "The VPN kill switch is currently disabled. In order to ensure that the Network Management Tool is functioning, and that you are able to reconnect when switching networks, please enable the VPN kill switch in your settings.";
 
 // REGION
 

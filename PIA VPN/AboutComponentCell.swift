@@ -37,8 +37,9 @@ class AboutNoticeCell: UITableViewCell, Restylable {
     func viewShouldRestyle() {
         Theme.current.applySecondaryBackground(self)
         buttonName.style(style: TextStyle.textStyle9)
-        Theme.current.applySmallInfo(labelCopyright, appearance: .dark)
-        Theme.current.applySmallInfo(labelNotice, appearance: .dark)
+        Theme.current.applySubtitle(labelCopyright)
+        Theme.current.applySubtitle(labelNotice)
+
     }
 }
 
@@ -155,8 +156,8 @@ class AboutLicenseCell: UITableViewCell, Restylable {
         Theme.current.applySecondaryBackground(self)
         Theme.current.applyPrincipalBackground(textLicense)
         buttonName.style(style: TextStyle.textStyle9)
-        Theme.current.applySmallInfo(labelCopyright, appearance: .dark)
-        Theme.current.applyBody1Monospace(textLicense, appearance: .dark)
+        Theme.current.applySubtitle(labelCopyright)
+        Theme.current.applyLicenseMonospaceFontAndColor(textLicense, appearance: .dark)
         buttonMore.tintColor = textLicense.textColor
 
         gradientLicense?.removeFromSuperview()
