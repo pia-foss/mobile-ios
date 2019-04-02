@@ -68,6 +68,7 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(updateCurrentStatus), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateTiles), name: .PIATilesDidChange, object: nil)
         nc.addObserver(self, selector: #selector(vpnShouldReconnect), name: .PIASettingsHaveChanged, object: nil)
+        nc.addObserver(self, selector: #selector(presentKillSwitchAlert), name: .PIAPersistentConnectionTileHaveChanged, object: nil)
 
 #if !TARGET_IPHONE_SIMULATOR
         let types: UIUserNotificationType = [.alert, .badge, .sound]
@@ -397,6 +398,20 @@ class DashboardViewController: AutolayoutViewController {
     
     @objc private func vpnStatusDidChange(notification: Notification) {
         performSelector(onMainThread: #selector(updateCurrentStatusWithUserInfo(_:)), with: notification.userInfo, waitUntilDone: false)
+    }
+    
+    @objc private func presentKillSwitchAlert() {
+        let alert = Macros.alert(nil, L10n.Settings.Nmt.Killswitch.disabled)
+        alert.addCancelAction(L10n.Global.close)
+        alert.addActionWithTitle(L10n.Global.enable) {
+            let preferences = Client.preferences.editable()
+            preferences.isPersistentConnection = true
+            preferences.commit()
+            NotificationCenter.default.post(name: .PIASettingsHaveChanged,
+                                            object: self,
+                                            userInfo: nil)
+        }
+        present(alert, animated: true, completion: nil)
     }
     
     @objc private func vpnShouldReconnect() {

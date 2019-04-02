@@ -126,6 +126,13 @@ class QuickSettingsTile: UIView, Tileable  {
         
         updateProfile()
         updateButtons()
+
+        if !Client.preferences.isPersistentConnection,
+            Client.preferences.nmtRulesEnabled {
+            NotificationCenter.default.post(name: .PIAPersistentConnectionTileHaveChanged,
+                                            object: self,
+                                            userInfo: nil)
+        }
     }
     
     private func updateProfile() {

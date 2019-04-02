@@ -158,6 +158,8 @@ internal enum L10n {
     internal static let disabled = L10n.tr("Localizable", "global.disabled")
     /// Edit
     internal static let edit = L10n.tr("Localizable", "global.edit")
+    /// Enable
+    internal static let enable = L10n.tr("Localizable", "global.enable")
     /// Enabled
     internal static let enabled = L10n.tr("Localizable", "global.enabled")
     /// Error
@@ -498,6 +500,12 @@ internal enum L10n {
         }
       }
     }
+    internal enum Nmt {
+      internal enum Killswitch {
+        /// The VPN kill switch is currently disabled. In order to ensure that the Network Management Tool is functioning, and that you are able to reconnect when switching networks, please enable the VPN kill switch in your settings.
+        internal static let disabled = L10n.tr("Localizable", "settings.nmt.killswitch.disabled")
+      }
+    }
     internal enum Reset {
       /// This will reset all of the above settings to default.
       internal static let footer = L10n.tr("Localizable", "settings.reset.footer")
@@ -537,7 +545,7 @@ internal enum L10n {
             internal enum Rule {
               /// Disconnect from PIA VPN
               internal static let action = L10n.tr("Localizable", "settings.trusted.networks.sections.trusted.rule.action")
-              /// Perform actions when joining trusted networks.
+              /// Enable this feature, with the VPN kill switch enabled, to customize how PIA will behave on WiFi and cellular networks. Please be aware, functionality of the Network Management Tool will be disabled if you manually disconnect.
               internal static let description = L10n.tr("Localizable", "settings.trusted.networks.sections.trusted.rule.description")
             }
           }

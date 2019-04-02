@@ -250,6 +250,9 @@ class SettingsViewController: AutolayoutViewController {
         redisplaySettings()
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshContentBlockerState), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshPersistentConnectionValue),
+                                               name: .PIAPersistentConnectionSettingHaveChanged,
+                                               object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
 
     }
@@ -379,6 +382,11 @@ class SettingsViewController: AutolayoutViewController {
                 }
             }
         }
+    }
+    
+    @objc private func refreshPersistentConnectionValue() {
+        pendingPreferences.isPersistentConnection = Client.preferences.isPersistentConnection
+        tableView.reloadData()
     }
     
     private func refreshContentBlockerRules() {
