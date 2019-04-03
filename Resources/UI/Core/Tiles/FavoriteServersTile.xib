@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FavoriteServersTile" customModule="PIA_VPN" customModuleProvider="target">
+            <connections>
+                <outlet property="stackView" destination="9eh-pB-Hca" id="5ta-3i-szt"/>
+                <outlet property="tileTitle" destination="6aZ-dJ-EIp" id="8O5-qp-crN"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Jne-FW-OGR">
+            <rect key="frame" x="0.0" y="0.0" width="365" height="89"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6aZ-dJ-EIp">
+                    <rect key="frame" x="25" y="15" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9eh-pB-Hca">
+                    <rect key="frame" x="25" y="34" width="315" height="40"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QDf-Ol-AIs">
+                            <rect key="frame" x="0.0" y="0.0" width="46" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SNw-pW-RjA" customClass="ServerButton" customModule="PIA_VPN" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="46" height="40"/>
+                                    <connections>
+                                        <action selector="connectToServer:" destination="-1" eventType="touchUpInside" id="vfc-tz-Uuc"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="SNw-pW-RjA" firstAttribute="top" secondItem="QDf-Ol-AIs" secondAttribute="top" id="Dza-hF-WT1"/>
+                                <constraint firstAttribute="trailing" secondItem="SNw-pW-RjA" secondAttribute="trailing" id="Ske-11-heh"/>
+                                <constraint firstItem="SNw-pW-RjA" firstAttribute="leading" secondItem="QDf-Ol-AIs" secondAttribute="leading" id="ab1-2Q-VjH"/>
+                                <constraint firstAttribute="bottom" secondItem="SNw-pW-RjA" secondAttribute="bottom" id="hxp-ki-hwH"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNm-BM-Ik6">
+                            <rect key="frame" x="54" y="0.0" width="45.5" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rp7-aT-ODg" customClass="ServerButton" customModule="PIA_VPN" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="45.5" height="40"/>
+                                    <connections>
+                                        <action selector="connectToServer:" destination="-1" eventType="touchUpInside" id="ZVo-BE-ENk"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="Rp7-aT-ODg" firstAttribute="top" secondItem="KNm-BM-Ik6" secondAttribute="top" id="7yz-A9-Msf"/>
+                                <constraint firstItem="Rp7-aT-ODg" firstAttribute="leading" secondItem="KNm-BM-Ik6" secondAttribute="leading" id="KoP-pI-ewg"/>
+                                <constraint firstAttribute="bottom" secondItem="Rp7-aT-ODg" secondAttribute="bottom" id="ZXq-j3-hXn"/>
+                                <constraint firstAttribute="trailing" secondItem="Rp7-aT-ODg" secondAttribute="trailing" id="kWf-0H-pbt"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ryJ-1b-2pr">
+                            <rect key="frame" x="107.5" y="0.0" width="46" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oXl-ye-biF" customClass="ServerButton" customModule="PIA_VPN" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="46" height="40"/>
+                                    <connections>
+                                        <action selector="connectToServer:" destination="-1" eventType="touchUpInside" id="Q5C-V1-icf"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="oXl-ye-biF" secondAttribute="bottom" id="791-u4-NPw"/>
+                                <constraint firstAttribute="trailing" secondItem="oXl-ye-biF" secondAttribute="trailing" id="NUA-xq-ITj"/>
+                                <constraint firstItem="oXl-ye-biF" firstAttribute="leading" secondItem="ryJ-1b-2pr" secondAttribute="leading" id="k8x-rc-qjI"/>
+                                <constraint firstItem="oXl-ye-biF" firstAttribute="top" secondItem="ryJ-1b-2pr" secondAttribute="top" id="p1t-VU-WQM"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BJ1-gb-exs">
+                            <rect key="frame" x="161.5" y="0.0" width="46" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BAH-qY-K0z" customClass="ServerButton" customModule="PIA_VPN" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="46" height="40"/>
+                                    <connections>
+                                        <action selector="connectToServer:" destination="-1" eventType="touchUpInside" id="8R2-dZ-zX2"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="BAH-qY-K0z" secondAttribute="bottom" id="F9Y-CI-IxH"/>
+                                <constraint firstAttribute="trailing" secondItem="BAH-qY-K0z" secondAttribute="trailing" id="PXk-NE-HBv"/>
+                                <constraint firstItem="BAH-qY-K0z" firstAttribute="top" secondItem="BJ1-gb-exs" secondAttribute="top" id="VQo-RA-XlW"/>
+                                <constraint firstItem="BAH-qY-K0z" firstAttribute="leading" secondItem="BJ1-gb-exs" secondAttribute="leading" id="l84-Tk-0jc"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3gQ-dC-TML">
+                            <rect key="frame" x="215.5" y="0.0" width="45.5" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pE1-jq-MVA" customClass="ServerButton" customModule="PIA_VPN" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="45.5" height="40"/>
+                                    <connections>
+                                        <action selector="connectToServer:" destination="-1" eventType="touchUpInside" id="9eA-DS-uUl"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="pE1-jq-MVA" secondAttribute="trailing" id="Erg-NJ-X6P"/>
+                                <constraint firstItem="pE1-jq-MVA" firstAttribute="leading" secondItem="3gQ-dC-TML" secondAttribute="leading" id="inb-R8-uS7"/>
+                                <constraint firstAttribute="bottom" secondItem="pE1-jq-MVA" secondAttribute="bottom" id="ldv-eS-QG9"/>
+                                <constraint firstItem="pE1-jq-MVA" firstAttribute="top" secondItem="3gQ-dC-TML" secondAttribute="top" id="lpi-Ie-Vs0"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bS5-9Y-Jcr">
+                            <rect key="frame" x="269" y="0.0" width="46" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7aD-4Y-J37" customClass="ServerButton" customModule="PIA_VPN" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="46" height="40"/>
+                                    <connections>
+                                        <action selector="connectToServer:" destination="-1" eventType="touchUpInside" id="3Qa-KW-9kg"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="7aD-4Y-J37" firstAttribute="leading" secondItem="bS5-9Y-Jcr" secondAttribute="leading" id="IkE-Wk-lnp"/>
+                                <constraint firstAttribute="trailing" secondItem="7aD-4Y-J37" secondAttribute="trailing" id="Oau-q7-KkY"/>
+                                <constraint firstItem="7aD-4Y-J37" firstAttribute="top" secondItem="bS5-9Y-Jcr" secondAttribute="top" id="t9I-g7-Tnn"/>
+                                <constraint firstAttribute="bottom" secondItem="7aD-4Y-J37" secondAttribute="bottom" id="ybd-5w-lWE"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Jp8-cw-Uht"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="6aZ-dJ-EIp" firstAttribute="top" secondItem="Jne-FW-OGR" secondAttribute="top" constant="15" id="F4e-i9-igd"/>
+                <constraint firstItem="9eh-pB-Hca" firstAttribute="leading" secondItem="Iuh-fe-bTm" secondAttribute="leading" constant="25" id="HOz-m1-QFg"/>
+                <constraint firstItem="6aZ-dJ-EIp" firstAttribute="leading" secondItem="Iuh-fe-bTm" secondAttribute="leading" constant="25" id="Jes-7k-0zG"/>
+                <constraint firstAttribute="bottom" secondItem="9eh-pB-Hca" secondAttribute="bottom" constant="15" id="euo-oq-3DM"/>
+                <constraint firstItem="Iuh-fe-bTm" firstAttribute="trailing" secondItem="9eh-pB-Hca" secondAttribute="trailing" constant="25" id="lqK-fp-p1L"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Iuh-fe-bTm"/>
+            <point key="canvasLocation" x="55.200000000000003" y="48.125937031484263"/>
+        </view>
+    </objects>
+</document>
