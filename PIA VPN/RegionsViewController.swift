@@ -164,10 +164,6 @@ class RegionsViewController: AutolayoutViewController {
             NotificationCenter.default.post(name: .PIAThemeDidChange,
                                             object: self,
                                             userInfo: nil)
-            NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
-                                            object: self,
-                                            userInfo: nil)
-
         default:
             break
         }

@@ -454,6 +454,10 @@ class DashboardViewController: AutolayoutViewController {
 
         currentStatus = Client.providers.vpnProvider.vpnStatus
 
+        NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
+                                        object: self,
+                                        userInfo: nil)
+        
         switch currentStatus {
         case .connected:
             toggleConnection.isOn = true

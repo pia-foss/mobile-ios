@@ -30,6 +30,8 @@ extension Client.Preferences {
                 let vpn = Client.providers.vpnProvider
                 if (vpn.vpnStatus != .disconnected) {
                     vpn.reconnect(after: nil, nil)
+                } else {
+                    vpn.connect(nil)
                 }
             }
         }

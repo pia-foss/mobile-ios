@@ -14,7 +14,7 @@ extension Server: CustomStringConvertible {
     func name(forStatus status: VPNStatus) -> String {
         switch status {
 //        case .connecting, .changingServer, .connected:
-        case .connecting, .connected:
+        case .connected:
             guard !isAutomatic else {
                 let effectiveServer = Client.providers.vpnProvider.profileServer ?? Client.providers.serverProvider.targetServer
                 return "\(name) (\(effectiveServer.name))"
