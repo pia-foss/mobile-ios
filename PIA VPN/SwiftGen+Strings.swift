@@ -589,6 +589,12 @@ internal enum L10n {
   }
 
   internal enum Tiles {
+    internal enum Favorite {
+      internal enum Servers {
+        /// Favorite servers
+        internal static let title = L10n.tr("Localizable", "tiles.favorite.servers.title")
+      }
+    }
     internal enum Nmt {
       /// Cellular
       internal static let cellular = L10n.tr("Localizable", "tiles.nmt.cellular")

@@ -234,6 +234,7 @@
 
 // TILES
 "tiles.quick.connect.title" = "Quick connect";
+"tiles.favorite.servers.title" = "Favorite servers";
 "tiles.region.title" = "VPN Server";
 "tiles.subscription.title" = "Subscription";
 "tiles.subscription.trial" = "Trial";

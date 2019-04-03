@@ -17,7 +17,8 @@ enum Cells: Int, EnumsBuilder {
     case usage
     case networkManagementTool
     case quickSettings
-    
+    case favoriteServers
+
     var identifier: String {
         switch self {
         case .ipTile: return "IPTileCell"
@@ -27,6 +28,7 @@ enum Cells: Int, EnumsBuilder {
         case .usage: return "UsageTileCell"
         case .networkManagementTool: return "NMTTileCell"
         case .quickSettings: return "QuickSettingsTileCell"
+        case .favoriteServers: return "FavoriteServersTileCell"
         }
     }
     
@@ -39,6 +41,7 @@ enum Cells: Int, EnumsBuilder {
         case .usage: return "UsageTileCollectionViewCell"
         case .networkManagementTool: return "NetworkManagementToolTileCollectionViewCell"
         case .quickSettings: return "QuickSettingsTileCollectionViewCell"
+        case .favoriteServers: return "FavoriteServersTileCollectionViewCell"
         }
     }
 }
@@ -67,6 +70,9 @@ class DashboardCollectionViewUtil: NSObject {
         collectionView.register(UINib(nibName: Cells.quickSettings.className,
                                       bundle: nil),
                                 forCellWithReuseIdentifier: Cells.quickSettings.identifier)
+        collectionView.register(UINib(nibName: Cells.favoriteServers.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.favoriteServers.identifier)
         collectionView.backgroundColor = .clear
     }
     
