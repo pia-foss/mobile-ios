@@ -87,14 +87,7 @@ class FavoriteServersTile: UIView, Tileable {
     
     @IBAction private func connectToServer(_ sender: ServerButton) {
         if let server = sender.server {
-            let currentServer = Client.preferences.displayedServer
-            guard (server.identifier != currentServer.identifier) else {
-                return
-            }
-            Client.preferences.displayedServer = server
-            NotificationCenter.default.post(name: .PIAThemeDidChange,
-                                            object: self,
-                                            userInfo: nil)
+            self.connectTo(server: server)
         }
     }
     
