@@ -1505,6 +1505,19 @@ extension SettingsViewController: INUIAddVoiceShortcutViewControllerDelegate {
 extension SettingsViewController: INUIEditVoiceShortcutViewControllerDelegate {
     
     func editVoiceShortcutViewController(_ controller: INUIEditVoiceShortcutViewController, didUpdate voiceShortcut: INVoiceShortcut?, error: Error?) {
+        if let error = error as? INIntentError {
+            if let errorDescription = error.userInfo["NSDebugDescription"] as? String,
+                let connectIdentifier = AppPreferences.shared.connectShortcut?.identifier.uuidString,
+                errorDescription.contains(connectIdentifier) {
+                AppPreferences.shared.useConnectSiriShortcuts = false
+                AppPreferences.shared.connectShortcut = nil
+            } else if let errorDescription = error.userInfo["NSDebugDescription"] as? String,
+                let disconnectIdentifier = AppPreferences.shared.disconnectShortcut?.identifier.uuidString,
+                errorDescription.contains(disconnectIdentifier) {
+                AppPreferences.shared.useDisconnectSiriShortcuts = false
+                AppPreferences.shared.disconnectShortcut = nil
+            }
+        }
         dismiss(animated: true, completion: nil)
     }
     

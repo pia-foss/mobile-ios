@@ -197,7 +197,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     
     //MARK: Siri Shortcuts
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if userActivity.activityType == AppConstants.SiriShortcuts.shortcutConnect {
             if AppPreferences.shared.useConnectSiriShortcuts {
                 connectAfter(milliseconds: 200)
