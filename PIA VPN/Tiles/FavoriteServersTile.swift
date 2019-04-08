@@ -55,7 +55,8 @@ class FavoriteServersTile: UIView, Tileable {
     }
     
     @objc private func updateFavoriteList() {
-        let currentServers = Client.providers.serverProvider.currentServers
+        var currentServers = Client.providers.serverProvider.currentServers
+        currentServers.append(Server.automatic)
         for containerView in stackView.subviews {
             if let button = containerView.subviews.first as? ServerButton {
                 button.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Tiles.quickConnectPlaceholderLight.image :
