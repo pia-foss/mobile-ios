@@ -52,8 +52,6 @@ class RegionCell: UITableViewCell, Restylable {
         accessibilityIdentifier = "uitests.regions.region_name"
         
         self.favoriteImageView.image = self.favoriteImageView.image?.withRenderingMode(.alwaysTemplate)
-        self.favoriteImageView.alpha = CGFloat(NSNumber(booleanLiteral: !server.isAutomatic).floatValue)
-        self.favoriteButton.alpha = CGFloat(NSNumber(booleanLiteral: !server.isAutomatic).floatValue)
 
         self.isFavorite = server.isFavorite
         self.updateFavoriteImage()
