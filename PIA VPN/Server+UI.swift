@@ -21,7 +21,11 @@ extension Server: CustomStringConvertible {
             }
             return name
             
-        default:
+        case .connecting:
+            return L10n.Dashboard.Vpn.connecting
+        case .disconnecting:
+            return L10n.Dashboard.Vpn.disconnecting
+        case .disconnected:
             return name
         }
     }
