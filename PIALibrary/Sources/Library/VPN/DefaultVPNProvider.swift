@@ -170,8 +170,6 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         guard let activeProfile = activeProfile else {
             preconditionFailure()
         }
-        // Update the preferredServer with the connected server in the plain store
-        accessedDatabase.plain.preferredServer = accessedProviders.serverProvider.targetServer
         activeProfile.connect(withConfiguration: vpnClientConfiguration(), callback)
     }
     
