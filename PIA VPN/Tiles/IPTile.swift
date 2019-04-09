@@ -76,7 +76,7 @@ class IPTile: UIView, Tileable  {
     @objc private func updateActivityViews() {
         let vpn = Client.providers.vpnProvider
         switch vpn.vpnStatus {
-        case .connecting, .disconnecting:
+        case .connecting, .disconnecting, .disconnected:
             self.vpnIpValue.text = self.emptyIPValue
         default:
             break
