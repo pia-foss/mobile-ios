@@ -352,6 +352,7 @@ class DashboardViewController: AutolayoutViewController {
             menu.delegate = self
         } else if let nmt = segue.destination as? TrustedNetworksViewController {
             nmt.shouldReconnectAutomatically = true
+            nmt.persistentConnectionValue = Client.preferences.isPersistentConnection
         }
     }
     
