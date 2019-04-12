@@ -53,6 +53,27 @@ class AccountTests: XCTestCase {
         __testLogout(factory: mock)
     }
     
+    func testMockProductIdentifiers() {
+        let expUpdate = expectation(description: "productIdentifiers")
+        mock.accountProvider.updatePlanProductIdentifiers { products, error in
+            if let _ = error {
+                print("error found: \(error!)")
+                expUpdate.fulfill()
+                XCTAssert(false)
+                return
+            }
+            guard let _ = products else {
+                print("testMockProductIdentifiers: \(error!)")
+                expUpdate.fulfill()
+                XCTAssert(false)
+                return
+            }
+            expUpdate.fulfill()
+        }
+        waitForExpectations(timeout: 5.0, handler: nil)
+
+    }
+    
     func testAPIEndpointIsReachable() {
         
         let expectationAPIEndpoint = expectation(description: "apiEndpoint")
