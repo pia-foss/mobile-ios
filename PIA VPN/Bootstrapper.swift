@@ -104,10 +104,30 @@ class Bootstrapper {
             PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build()
         ]
         
-        Client.configuration.setPlan(.yearly, forProductIdentifier: AppConstants.InApp.yearlyProductIdentifier)
-        Client.configuration.setPlan(.monthly, forProductIdentifier: AppConstants.InApp.monthlyProductIdentifier)
-        Client.configuration.setPlan(.legacyYearly, forProductIdentifier: AppConstants.LegacyInApp.yearlyProductIdentifier)
-        Client.configuration.setPlan(.legacyMonthly, forProductIdentifier: AppConstants.LegacyInApp.monthlyProductIdentifier)
+        Client.providers.accountProvider.updatePlanProductIdentifiers { [weak self] (products, error) in
+            
+            if let _ = error {
+                self?.setDefaultPlanProducts()
+            }
+            
+            if let products = products,
+                products.count > 0 {
+                for product in products {
+                    if product.legacy {
+                        if product.plan == .monthly {
+                            Client.configuration.setPlan(.legacyMonthly, forProductIdentifier: product.identifier)
+                        } else if product.plan == .yearly {
+                            Client.configuration.setPlan(.legacyYearly, forProductIdentifier: product.identifier)
+                        }
+                    } else {
+                        Client.configuration.setPlan(product.plan, forProductIdentifier: product.identifier)
+                    }
+                }
+            }
+
+            Client.refreshProducts()
+            
+        }
 
         if (self.isSimulator || Flags.shared.usesMockVPN) {
             Client.configuration.enablesConnectivityUpdates = false
@@ -163,6 +183,13 @@ class Bootstrapper {
             AppPreferences.shared.wasLaunched = true
         }
 
+    }
+    
+    private func setDefaultPlanProducts() {
+        Client.configuration.setPlan(.yearly, forProductIdentifier: AppConstants.InApp.yearlyProductIdentifier)
+        Client.configuration.setPlan(.monthly, forProductIdentifier: AppConstants.InApp.monthlyProductIdentifier)
+        Client.configuration.setPlan(.legacyYearly, forProductIdentifier: AppConstants.LegacyInApp.yearlyProductIdentifier)
+        Client.configuration.setPlan(.legacyMonthly, forProductIdentifier: AppConstants.LegacyInApp.monthlyProductIdentifier)
     }
 
     func dispose() {
