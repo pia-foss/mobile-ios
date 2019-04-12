@@ -22,6 +22,7 @@ class AccountInfoTests: XCTestCase {
         self.theDate = dateFormatter.date(from: "14-08-2018")
         self.accountInfo = AccountInfo(email: "email@email.com",
                                        plan: Plan.monthly,
+                                       productId: "identifier",
                                        isRenewable: false,
                                        isRecurring: false,
                                        expirationDate: self.theDate,

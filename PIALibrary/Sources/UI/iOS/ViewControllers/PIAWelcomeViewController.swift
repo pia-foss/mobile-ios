@@ -327,6 +327,10 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
         fatalError("Not implemented")
     }
     
+    func updatePlanProductIdentifiers(_ callback: LibraryCallback<[Product]>?) {
+        fatalError("Not implemented")
+    }
+
     func listPlanProducts(_ callback: (([Plan : InAppProduct]?, Error?) -> Void)?) {
         accessedProviders.accountProvider.listPlanProducts(callback)
     }

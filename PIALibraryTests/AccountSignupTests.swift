@@ -22,6 +22,7 @@ class AccountSignupTests: XCTestCase {
         Client.configuration.setPlan(.yearly, forProductIdentifier: "com.example.second")
         Client.database = Client.Database(group: "group.com.privateinternetaccess").truncate()
         Client.bootstrap()
+        Client.refreshProducts()
     }
     
     override func tearDown() {

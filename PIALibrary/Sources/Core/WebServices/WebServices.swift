@@ -29,7 +29,11 @@ protocol WebServices: class {
 
     func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?)
     #endif
+
+    // MARK: Store
     
+    func planProductIdentifiers(_ callback: LibraryCallback<[Product]>?)
+
     // MARK: Ephemeral
 
     func downloadServers(_ callback: LibraryCallback<ServersBundle>?)
@@ -39,4 +43,6 @@ protocol WebServices: class {
     func taskForConnectivityCheck(_ callback: LibraryCallback<ConnectivityStatus>?) -> URLSessionDataTask
 
     func submitDebugLog(_ log: DebugLog, _ callback: SuccessLibraryCallback?)
+    
+
 }

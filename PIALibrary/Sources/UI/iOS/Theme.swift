@@ -326,8 +326,11 @@ public class Theme {
     
     /// :nodoc:
     public func applySmallInfo(_ label: UILabel, appearance: Appearance) {
-        label.font = typeface.regularFont(size: 13.0)
-        label.textColor = palette.textColor(forRelevance: 3, appearance: appearance)
+        if palette.appearance == Appearance.light {
+            label.style(style: TextStyle.textStyle12)
+        } else {
+            label.style(style: TextStyle.textStyle11)
+        }
     }
     
     /// Method to apply a second style for the same UILabel

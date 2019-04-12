@@ -265,6 +265,8 @@
 		DD314991218350D1008E26E8 /* SwiftGen+SeguesStoryboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC81249217617F900CB290C /* SwiftGen+SeguesStoryboards.swift */; };
 		DD36CB7E21CCFFFB00FC815A /* CAGradientLayer+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD36CB7D21CCFFFB00FC815A /* CAGradientLayer+Image.swift */; };
 		DD36CB7F21CD000200FC815A /* CAGradientLayer+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD36CB7D21CCFFFB00FC815A /* CAGradientLayer+Image.swift */; };
+		DD56E3F4225F5D22002EDFB2 /* GlossProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD56E3F3225F5D22002EDFB2 /* GlossProduct.swift */; };
+		DD56E3F6225F5D77002EDFB2 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD56E3F5225F5D77002EDFB2 /* Product.swift */; };
 		DD58F4BB21AEB99C00D043F7 /* GlossToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58F4BA21AEB99C00D043F7 /* GlossToken.swift */; };
 		DD58F4BD21AEF76100D043F7 /* String+Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58F4BC21AEF76100D043F7 /* String+Components.swift */; };
 		DD6DC5B921B6A83400F9D538 /* UIViewLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6DC5B821B6A83400F9D538 /* UIViewLoading.swift */; };
@@ -551,6 +553,8 @@
 		DD0DE84F22366090002A6E82 /* GDPRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GDPRViewController.swift; path = PIALibrary/Sources/UI/iOS/GDPRViewController.swift; sourceTree = SOURCE_ROOT; };
 		DD31498E21834B3F008E26E8 /* GetStartedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStartedViewController.swift; sourceTree = "<group>"; };
 		DD36CB7D21CCFFFB00FC815A /* CAGradientLayer+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+Image.swift"; sourceTree = "<group>"; };
+		DD56E3F3225F5D22002EDFB2 /* GlossProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlossProduct.swift; sourceTree = "<group>"; };
+		DD56E3F5225F5D77002EDFB2 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		DD58F4BA21AEB99C00D043F7 /* GlossToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlossToken.swift; sourceTree = "<group>"; };
 		DD58F4BC21AEF76100D043F7 /* String+Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Components.swift"; sourceTree = "<group>"; };
 		DD6DC5B821B6A83400F9D538 /* UIViewLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewLoading.swift; sourceTree = "<group>"; };
@@ -725,6 +729,7 @@
 				0E9D62701FDE83BD009A90CF /* GlossServersBundle.swift */,
 				0E3D13D81F9E273300434A48 /* GlossSignup.swift */,
 				DD58F4BA21AEB99C00D043F7 /* GlossToken.swift */,
+				DD56E3F3225F5D22002EDFB2 /* GlossProduct.swift */,
 				0EFB512D1F82D7C50033B81F /* PIAWebServices.swift */,
 				0E392D9F1FE323ED0002160D /* PIAWebServices+Ephemeral.swift */,
 				0E392DA81FE329AD0002160D /* PlatformVPNLog.swift */,
@@ -806,6 +811,7 @@
 				0EE1068D1F828813009514E9 /* Signup.swift */,
 				0EC849C81F82329F002480CA /* WebServices.swift */,
 				DD76292721ECDFF80092DF50 /* Usage.swift */,
+				DD56E3F5225F5D77002EDFB2 /* Product.swift */,
 			);
 			path = WebServices;
 			sourceTree = "<group>";
@@ -1716,6 +1722,7 @@
 				0E0E5B0F1F8297C500022CD0 /* SecureStore.swift in Sources */,
 				DD6FB0372224355600A84F05 /* UIDevice+WiFi.swift in Sources */,
 				0EAA388B1F9CC4C4000149CF /* InAppProduct.swift in Sources */,
+				DD56E3F6225F5D77002EDFB2 /* Product.swift in Sources */,
 				DD314990218350D1008E26E8 /* SwiftGen+ScenesStoryboards.swift in Sources */,
 				0EAA388D1F9CC4C4000149CF /* InAppTransaction.swift in Sources */,
 				0E4D4E9E1FA4CA7A007DA6DA /* PurchasePlan.swift in Sources */,
@@ -1755,6 +1762,7 @@
 				0EB8C0691F9CD38B005857E4 /* PurchasePlanCell.swift in Sources */,
 				0EA8072F20A1E7C60033EC1A /* GlossRedeem.swift in Sources */,
 				0EA4C4311FDDD48F0041C3D8 /* Server.swift in Sources */,
+				DD56E3F4225F5D22002EDFB2 /* GlossProduct.swift in Sources */,
 				84577FC5213D9B4D006DEC3D /* UILabel+LineHeight.swift in Sources */,
 				0EB9667E1FDF36490086ABC2 /* GlossParser.swift in Sources */,
 				DDA4A7BE21F5C31400A02ACD /* IKEv2Profile.swift in Sources */,
@@ -2239,7 +2247,7 @@
 			baseConfigurationReference = 4C706F9C1A5FB0FB2184CF5A /* Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5357M5NW9W;
 				INFOPLIST_FILE = "PIALibraryTests/Info-iOS.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -2256,7 +2264,7 @@
 			baseConfigurationReference = D5BAE6AEE6DF929F2FF2DB94 /* Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5357M5NW9W;
 				INFOPLIST_FILE = "PIALibraryTests/Info-iOS.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
