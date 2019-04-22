@@ -476,6 +476,7 @@ class DashboardViewController: AutolayoutViewController {
             setNeedsStatusBarAppearanceUpdate()
             AppPreferences.shared.todayWidgetVpnStatus = VPNStatus.connected.rawValue
             AppPreferences.shared.todayWidgetButtonTitle = L10n.Shortcuts.disconnect
+            Macros.removeStickyNote()
 
         case .disconnected:
             toggleConnection.isOn = false
