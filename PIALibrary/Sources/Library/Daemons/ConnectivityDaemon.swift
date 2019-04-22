@@ -76,6 +76,9 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
         reachability.whenReachable = { (reach) in
             DispatchQueue.main.async {
                 guard !self.accessedDatabase.transient.isNetworkReachable else {
+                    if (self.accessedDatabase.transient.vpnStatus != .connected) {
+                        self.checkConnectivityOrRetry()
+                    }
                     return
                 }
                 log.debug("Network is now REACHABLE")
