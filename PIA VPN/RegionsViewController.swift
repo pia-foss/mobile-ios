@@ -17,11 +17,12 @@ class RegionsViewController: AutolayoutViewController {
     }
 
     @IBOutlet private weak var tableView: UITableView!
-    
+
     private var servers: [Server] = []
     private var filteredServers = [Server]()
     private var selectedServer: Server!
-    
+    private var refreshControl   = UIRefreshControl()
+
     let searchController = UISearchController(searchResultsController: nil)
     
     deinit {
@@ -53,8 +54,24 @@ class RegionsViewController: AutolayoutViewController {
 
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
+        
+        setupPullToRefresh()
+        
     }
     
+    private func setupPullToRefresh() {
+        refreshControl.addTarget(self, action: #selector(refreshLatency), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+    }
+    
+    @objc func refreshLatency(_ sender: Any) {
+        Client.ping(servers: self.servers)
+        refreshControl.endRefreshing()
+        Macros.dispatch(after: .milliseconds(400)) { [weak self] in
+            self?.filterServers()
+        }
+    }
+
     private func setupRightBarButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: Asset.Piax.Global.iconFilter.image,
@@ -218,6 +235,7 @@ class RegionsViewController: AutolayoutViewController {
         Theme.current.applyRegionSolidLightBackground(tableView)
         Theme.current.applyDividerToSeparator(tableView)
         Theme.current.applySearchBarStyle(searchController.searchBar)
+        Theme.current.applyRefreshControlStyle(refreshControl)
         
         let bgView = UIView()
         bgView.backgroundColor = .clear
