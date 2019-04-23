@@ -607,7 +607,7 @@ internal enum L10n {
     }
     internal enum Quick {
       internal enum Connect {
-        /// Quick connect
+        /// Recent servers
         internal static let title = L10n.tr("Localizable", "tiles.quick.connect.title")
       }
     }

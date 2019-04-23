@@ -233,7 +233,7 @@
 "region.filter.favorites" = "Favorites";
 
 // TILES
-"tiles.quick.connect.title" = "Quick connect";
+"tiles.quick.connect.title" = "Recent servers";
 "tiles.favorite.servers.title" = "Favorite servers";
 "tiles.region.title" = "VPN Server";
 "tiles.subscription.title" = "Subscription";
