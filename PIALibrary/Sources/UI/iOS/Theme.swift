@@ -566,6 +566,15 @@ public class Theme {
         navigationBar.barTintColor = palette.principalBackground
     }
     
+    // MARK: Refresh control
+    public func applyRefreshControlStyle(_ refreshControl: UIRefreshControl) {
+        if palette.appearance == Appearance.light {
+            refreshControl.style(style: ViewStyle.refreshControlLight)
+        } else {
+            refreshControl.style(style: ViewStyle.refreshControlDark)
+        }
+    }
+    
     /**
      Set color values for a custom navigation bar.
      
