@@ -15,7 +15,7 @@ protocol TextStyling {
 
 public extension TextStyle {
     
-    public static let textStyle1 = TextStyle(
+    static let textStyle1 = TextStyle(
         font: UIFont.regularFontWith(size: 18),
         color: UIColor.piaWhite,
         foregroundColor: nil,
@@ -24,7 +24,7 @@ public extension TextStyle {
         lineHeight: 20
     )
 
-    public static let textStyle2 = TextStyle(
+    static let textStyle2 = TextStyle(
         font: UIFont.regularFontWith(size: 18),
         color: UIColor.piaGrey6,
         foregroundColor: nil,
@@ -33,7 +33,7 @@ public extension TextStyle {
         lineHeight: 20
     )
 
-    public static let textStyle3 = TextStyle(
+    static let textStyle3 = TextStyle(
         font: UIFont.regularFontWith(size: 18),
         color: UIColor.piaGrey4,
         foregroundColor: nil,
@@ -42,7 +42,7 @@ public extension TextStyle {
         lineHeight: 20
     )
 
-    public static let textStyle4 = TextStyle(
+    static let textStyle4 = TextStyle(
         font: UIFont.regularFontWith(size: 18),
         color: UIColor.piaGreenDark20,
         foregroundColor: nil,
@@ -51,7 +51,7 @@ public extension TextStyle {
         lineHeight: 20
     )
 
-    public static let textStyle5 = TextStyle(
+    static let textStyle5 = TextStyle(
         font: UIFont.regularFontWith(size: 18),
         color: UIColor.piaRed,
         foregroundColor: nil,
@@ -60,7 +60,7 @@ public extension TextStyle {
         lineHeight: 20
     )
 
-    public static let textStyle6 = TextStyle(
+    static let textStyle6 = TextStyle(
         font: UIFont.regularFontWith(size: 14),
         color: UIColor.white,
         foregroundColor: nil,
@@ -69,7 +69,7 @@ public extension TextStyle {
         lineHeight: 18
     )
 
-    public static let textStyle7 = TextStyle(
+    static let textStyle7 = TextStyle(
         font: UIFont.regularFontWith(size: 14),
         color: UIColor.piaGrey6,
         foregroundColor: nil,
@@ -78,7 +78,7 @@ public extension TextStyle {
         lineHeight: 18
     )
 
-    public static let textStyle8 = TextStyle(
+    static let textStyle8 = TextStyle(
         font: UIFont.regularFontWith(size: 14),
         color: UIColor.piaGrey4,
         foregroundColor: nil,
@@ -87,7 +87,7 @@ public extension TextStyle {
         lineHeight: 18
     )
 
-    public static let textStyle9 = TextStyle(
+    static let textStyle9 = TextStyle(
         font: UIFont.regularFontWith(size: 14),
         color: UIColor.piaGreenDark20,
         foregroundColor: nil,
@@ -96,7 +96,7 @@ public extension TextStyle {
         lineHeight: 18
     )
 
-    public static let textStyle10 = TextStyle(
+    static let textStyle10 = TextStyle(
         font: UIFont.regularFontWith(size: 14),
         color: UIColor.piaRed,
         foregroundColor: nil,
@@ -105,7 +105,7 @@ public extension TextStyle {
         lineHeight: 18
     )
 
-    public static let textStyle11 = TextStyle(
+    static let textStyle11 = TextStyle(
         font: UIFont.regularFontWith(size: 12),
         color: UIColor.white,
         foregroundColor: nil,
@@ -114,7 +114,7 @@ public extension TextStyle {
         lineHeight: 16
     )
 
-    public static let textStyle12 = TextStyle(
+    static let textStyle12 = TextStyle(
         font: UIFont.regularFontWith(size: 12),
         color: UIColor.piaGrey6,
         foregroundColor: nil,
@@ -123,7 +123,7 @@ public extension TextStyle {
         lineHeight: 16
     )
 
-    public static let textStyle13 = TextStyle(
+    static let textStyle13 = TextStyle(
         font: UIFont.regularFontWith(size: 14),
         color: UIColor.piaGrey4,
         foregroundColor: nil,
@@ -132,7 +132,7 @@ public extension TextStyle {
         lineHeight: 16
     )
 
-    public static let textStyle14 = TextStyle(
+    static let textStyle14 = TextStyle(
         font: UIFont.regularFontWith(size: 12),
         color: UIColor.piaGreenDark20,
         foregroundColor: nil,
@@ -141,7 +141,7 @@ public extension TextStyle {
         lineHeight: 16
     )
 
-    public static let textStyle15 = TextStyle(
+    static let textStyle15 = TextStyle(
         font: UIFont.regularFontWith(size: 12),
         color: UIColor.piaRed,
         foregroundColor: nil,
@@ -150,7 +150,7 @@ public extension TextStyle {
         lineHeight: 16
     )
     
-    public static let textStyle16 = TextStyle(
+    static let textStyle16 = TextStyle(
         font: UIFont.regularFontWith(size: 10),
         color: UIColor.piaWhite,
         foregroundColor: nil,
@@ -159,7 +159,7 @@ public extension TextStyle {
         lineHeight: 15
     )
     
-    public static let textStyle17 = TextStyle(
+    static let textStyle17 = TextStyle(
         font: UIFont.regularFontWith(size: 10),
         color: UIColor.piaGrey6,
         foregroundColor: nil,
@@ -168,7 +168,7 @@ public extension TextStyle {
         lineHeight: 15
     )
     
-    public static let textStyle18 = TextStyle(
+    static let textStyle18 = TextStyle(
         font: UIFont.regularFontWith(size: 10),
         color: UIColor.piaGrey4,
         foregroundColor: nil,
@@ -177,7 +177,7 @@ public extension TextStyle {
         lineHeight: 15
     )
     
-    public static let textStyle19 = TextStyle(
+    static let textStyle19 = TextStyle(
         font: UIFont.regularFontWith(size: 10),
         color: UIColor.piaGreenDark20,
         foregroundColor: nil,
@@ -186,7 +186,7 @@ public extension TextStyle {
         lineHeight: 15
     )
     
-    public static let textStyle20 = TextStyle(
+    static let textStyle20 = TextStyle(
         font: UIFont.regularFontWith(size: 10),
         color: UIColor.piaRed,
         foregroundColor: nil,
@@ -195,7 +195,7 @@ public extension TextStyle {
         lineHeight: 15
     )
     
-    public static let textStyle21 = TextStyle(
+    static let textStyle21 = TextStyle(
         font: UIFont.regularFontWith(size: 12),
         color: UIColor.piaGrey4,
         foregroundColor: nil,
@@ -204,7 +204,7 @@ public extension TextStyle {
         lineHeight: 16
     )
     
-    public static let versionNumberStyle = TextStyle(
+    static let versionNumberStyle = TextStyle(
         font: UIFont.regularFontWith(size: 14),
         color: UIColor.piaGrey4,
         foregroundColor: nil,
@@ -213,7 +213,7 @@ public extension TextStyle {
         lineHeight: 18
     )
     
-    public struct Buttons {
+    struct Buttons {
         
         public static let piaGreenButton = TextStyle(
             font: UIFont.regularFontWith(size: 14),
