@@ -90,4 +90,11 @@ public final class Client {
         store.stopObservingTransactions()
         #endif
     }
+    
+    /**
+     Refresh the ping number to the given servers
+     */
+    public static func ping(servers: [Server]) {
+        ServersPinger.shared.ping(withDestinations: servers)
+    }
 }
