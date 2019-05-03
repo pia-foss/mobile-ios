@@ -9,10 +9,13 @@
 "in_progress.message" = "我们正在确认您在我们系统中的购买。这可能需要一点时间，请耐心等待。";
 "in_progress.redeem.message" = "我们正在通过系统确认您的卡片PIN。这可能需要一些时间，请耐心等待。";
 "in_progress.title" = "确认注册";
+"purchase.uncredited.alert.button.cancel" = "取消";
+"purchase.uncredited.alert.button.recover" = "恢复账户";
+"purchase.uncredited.alert.message" = "你有未入账的的交易。要恢复您的账户详情吗？";
 "success.message_format" = "感谢注册。我们已将您的用户名和密码发送至您的电子邮箱：%@";
 "success.password.caption" = "密码";
-"success.redeem.message" = "您也将很快收到一封电子邮件，记有您的用户名和密码。";
-"success.redeem.title" = "完成！";
+"success.redeem.message" = "您将很快收到一封电子邮件，记有您的用户名和密码。\n\n您的登录详情";
+"success.redeem.title" = "卡片兑换成功";
 "success.submit" = "开始体验";
 "success.title" = "购买完成";
 "success.username.caption" = "用户名";

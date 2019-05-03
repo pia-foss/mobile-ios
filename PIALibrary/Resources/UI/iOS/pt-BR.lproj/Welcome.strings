@@ -9,6 +9,7 @@
 "gdpr.collect.data.title" = "Informações pessoais que coletamos";
 "gdpr.usage.data.description" = "O endereço de e-mail é utilizado apenas para enviar informação de assinatura, confirmações de pagamento, correspondência com clientes e ofertas promocionais do Private Internet Access.\n\nDados de pagamento são utilizados para gerenciar assinaturas, pagamentos e cancelamentos de clientes.";
 "gdpr.usage.data.title" = "Uso de informações pessoais coletadas por nós";
+"getstarted.buttons.buyaccount" = "Comprar conta";
 "iap.error.message.unavailable" = "Servidores da Apple indisponíveis no momento. Tente novamente mais tarde.";
 "iap.error.title" = "Erro";
 "login.error.throttled" = "Muitas tentativas de login malsucedidas com este nome de usuário. Tente novamente mais tarde.";
@@ -16,6 +17,10 @@
 "login.error.unauthorized" = "Seu nome de usuário ou senha está incorreto.";
 "login.error.validation" = "Você deve inserir um nome de usuário e senha.";
 "login.password.placeholder" = "Senha";
+"login.purchase.button" = "Compre já";
+"login.purchase.footer" = "Não tem uma conta?";
+"login.redeem.button" = "Resgate agora";
+"login.redeem.footer" = "Tem um cartão-presente ou cartão de teste?";
 "login.restore.button" = "Não recebeu detalhes da conta?";
 "login.submit" = "ENTRAR";
 "login.title" = "Entre na sua conta";
@@ -26,6 +31,9 @@
 "plan.price_format" = "%@/mês";
 "plan.yearly.detail_format" = "%@%@ por ano";
 "plan.yearly.title" = "Anual";
+"purchase.confirm.form.email" = "Insira seu endereço de e-mail";
+"purchase.confirm.plan" = "Você está comprando o plano %@";
+"purchase.continue" = "Continuar";
 "purchase.email.placeholder" = "Endereço de e-mail";
 "purchase.error.connectivity.description" = "Não conseguimos acessar o Private Internet Access. Isso pode ser devido a uma conexão de internet fraca ou o nosso serviço está bloqueado em seu país.";
 "purchase.error.connectivity.title" = "Falha na conexão";
@@ -33,13 +41,17 @@
 "purchase.error.validation" = "Você precisa inserir um endereço de e-mail.";
 "purchase.login.button" = "Faça login";
 "purchase.login.footer" = "Já tem uma conta?";
-"purchase.submit" = "COMPRAR AGORA";
+"purchase.submit" = "Enviar";
 "purchase.subtitle" = "Garantia do dinheiro de volta em até 7 dias";
 "purchase.title" = "Selecione um plano de VPN";
+"redeem.accessibility.back" = "Voltar";
 "redeem.email.placeholder" = "Endereço de e-mail";
+"redeem.error.allfields" = "Digite o seu e-mail e PIN do cartão.";
 "redeem.error.code" = "O código precisa ter %lu dígitos numéricos.";
 "redeem.error.qrcode.invalid" = "Sequência de código QR inválida. Tente novamente.";
 "redeem.error.title" = "Resgatar";
+"redeem.giftcard.placeholder" = "PIN do cartão-presente";
+"redeem.scanqr" = "Escanear QR";
 "redeem.submit" = "ENVIAR";
 "redeem.subtitle" = "Digite o seu endereço de e-mail e o PIN de %lu dígitos do seu cartão-presente ou cartão de teste abaixo.";
 "redeem.title" = "Resgatar cartão-presente";

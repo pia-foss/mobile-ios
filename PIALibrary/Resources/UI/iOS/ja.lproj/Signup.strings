@@ -9,10 +9,13 @@
 "in_progress.message" = "システムがご購入を確定しています。しばらく時間がかかることがありますので、そのままお待ちください。";
 "in_progress.redeem.message" = "システムがご購入を確定しています。しばらく時間がかかることがありますので、そのままお待ちください。";
 "in_progress.title" = "サインアップを確定";
+"purchase.uncredited.alert.button.cancel" = "キャンセル";
+"purchase.uncredited.alert.button.recover" = "アカウントを回復";
+"purchase.uncredited.alert.message" = "反映されていない取引があります。アカウントの詳細を回復しますか？";
 "success.message_format" = "サインアップありがとうございます。アカウントのユーザー名とパスワードをお客様のメールアドレス（%@）に送信いたしました。";
 "success.password.caption" = "パスワード";
-"success.redeem.message" = "ユーザーネームとパスワードを記載したメールがまもなく届きます。";
-"success.redeem.title" = "完了！";
+"success.redeem.message" = "ユーザーネームとパスワードを記載したメールがまもなく届きます。\n\nお客様のログイン詳細";
+"success.redeem.title" = "カードの引き換えが完了しました";
 "success.submit" = "始める";
 "success.title" = "購入完了";
 "success.username.caption" = "ユーザー名";

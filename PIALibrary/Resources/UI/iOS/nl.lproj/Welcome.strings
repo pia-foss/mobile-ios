@@ -9,6 +9,7 @@
 "gdpr.collect.data.title" = "Persoonlijke informatie die we verzamelen";
 "gdpr.usage.data.description" = "E-mailadres wordt alleen gebruikt voor het verzenden van abonnementsinformatie, betalingsbevestigingen, correspondentie met klanten en promotionele aanbiedingen van Private Internet Access.\n\nBetalingsgegevens worden gebruikt om aanmeldingen, betalingen en annuleringen van klanten te beheren.";
 "gdpr.usage.data.title" = "Gebruik van de persoonlijke informatie die we verzamelen";
+"getstarted.buttons.buyaccount" = "Account kopen";
 "iap.error.message.unavailable" = "De Apple-servers zijn momenteel niet beschikbaar. Probeer het later opnieuw.";
 "iap.error.title" = "Fout";
 "login.error.throttled" = "Te veel mislukte inlogpogingen met deze gebruikersnaam. Probeer het later opnieuw.";
@@ -16,6 +17,10 @@
 "login.error.unauthorized" = "Uw gebruikersnaam of wachtwoord is onjuist.";
 "login.error.validation" = "U moet een gebruikersnaam en wachtwoord invoeren.";
 "login.password.placeholder" = "Wachtwoord";
+"login.purchase.button" = "Koop nu";
+"login.purchase.footer" = "Heeft u geen account?";
+"login.redeem.button" = "Nu inwisselen";
+"login.redeem.footer" = "Heeft u een cadeaubon of een proefperiodekaart?";
 "login.restore.button" = "Geen accountgegevens ontvangen?";
 "login.submit" = "INLOGGEN";
 "login.title" = "Aanmelden bij uw account";
@@ -26,6 +31,9 @@
 "plan.price_format" = "%@/ma";
 "plan.yearly.detail_format" = "%@%@ per jaar";
 "plan.yearly.title" = "Jaarlijks";
+"purchase.confirm.form.email" = "Voer uw e-mailadres in";
+"purchase.confirm.plan" = "U koop het %@-abonnement";
+"purchase.continue" = "Doorgaan";
 "purchase.email.placeholder" = "E-mailadres";
 "purchase.error.connectivity.description" = "We kunnen Private Internet Access niet bereiken. Dit kan komen door een slechte internetverbinding of omdat onze dienst in uw land is geblokkeerd.";
 "purchase.error.connectivity.title" = "Verbindingsfout";
@@ -33,13 +41,17 @@
 "purchase.error.validation" = "U moet een e-mailadres invoeren";
 "purchase.login.button" = "Aanmelden";
 "purchase.login.footer" = "Heeft u al een account?";
-"purchase.submit" = "NU KOPEN";
+"purchase.submit" = "Versturen";
 "purchase.subtitle" = "7 dagen lang niet-goed-geld-teruggarantie";
 "purchase.title" = "Selecteer een VPN-abonnement";
+"redeem.accessibility.back" = "Terug";
 "redeem.email.placeholder" = "E-mailadres";
+"redeem.error.allfields" = "Voer uw e-mailadres en pincode in.";
 "redeem.error.code" = "Code moet uit %lu getallen bestaan.";
 "redeem.error.qrcode.invalid" = "Ongeldige QR-code. Probeer het opnieuw.";
 "redeem.error.title" = "Inwisselen";
+"redeem.giftcard.placeholder" = "Pincode cadeaubon";
+"redeem.scanqr" = "QR scannen";
 "redeem.submit" = "VERSTUREN";
 "redeem.subtitle" = "Voer uw e-mailadres en de %lu-cijferige pincode van uw cadeaubon of proefperiodekaart hieronder in.";
 "redeem.title" = "Cadeaubon inwisselen";

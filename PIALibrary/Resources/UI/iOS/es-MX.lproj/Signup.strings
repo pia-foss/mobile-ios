@@ -9,10 +9,13 @@
 "in_progress.message" = "Estamos confirmando la compra en el sistema. Podrías tardar unos instantes, así que espera.";
 "in_progress.redeem.message" = "Estamos confirmando el PIN de tu tarjeta en nuestro sistema. Puede tardar un momento, así que espera un poco.";
 "in_progress.title" = "Confirmar registro";
+"purchase.uncredited.alert.button.cancel" = "Cancelar";
+"purchase.uncredited.alert.button.recover" = "Recuperar cuenta";
+"purchase.uncredited.alert.message" = "Tienes transacciones sin acreditar. ¿Seguro que quieres recuperar los detalles de tu cuenta?";
 "success.message_format" = "Gracias por registrarte con nosotros. Te enviamos el nombre de usuario y contraseña de tu cuenta a tu dirección de email en %@";
 "success.password.caption" = "Contraseña ";
-"success.redeem.message" = "También recibirás un email dentro de poco con tu nombre de usuario y contraseña.";
-"success.redeem.title" = "¡Completado!";
+"success.redeem.message" = "Recibirás un mensaje de correo electrónico dentro de poco con tu nombre de usuario y contraseña.\n\nTu información de inicio de sesión";
+"success.redeem.title" = "Tarjeta canjeada correctamente";
 "success.submit" = "Empieza";
 "success.title" = "Compra completa";
 "success.username.caption" = "Nombre de usuario";

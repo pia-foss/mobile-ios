@@ -9,10 +9,13 @@
 "in_progress.message" = "เรากำลังยืนยันการซื้อของคุณกับระบบของเรา กรุณารอสักครู่";
 "in_progress.redeem.message" = "เรากำลังยืนยัน PIN การ์ดของคุณกับระบบของเรา กรุณารอสักครู่";
 "in_progress.title" = "ยืนยันการสมัคร";
+"purchase.uncredited.alert.button.cancel" = "ยกเลิก";
+"purchase.uncredited.alert.button.recover" = "กู้คืนบัญชี";
+"purchase.uncredited.alert.message" = "คุณได้ยกเลิกการทำธุรกรรมแล้ว คุณต้องการกู้คืนรายละเอียดบัญชีหรือไม่";
 "success.message_format" = "ขอบคุณที่สมัครสมาชิกกับเรา เราได้ส่งชื่อผู้ใช้และรหัสผ่านไปยังอีเมลของคุณแล้วที่ %@";
 "success.password.caption" = "รหัสผ่าน";
-"success.redeem.message" = "คุณจะได้รับอีเมลพร้อมชื่อผู้ใช้และรหัสผ่านในไม่ช้า";
-"success.redeem.title" = "เสร็จสมบูรณ์!";
+"success.redeem.message" = "คุณจะได้รับอีเมลพร้อมชื่อผู้ใช้และรหัสผ่านในไม่ช้า\n\nข้อมูลการล็อกอิน";
+"success.redeem.title" = "คืนบัตรเสร็จสมบูรณ์!";
 "success.submit" = "เริ่มใช้งาน";
 "success.title" = "ซื้อสำเร็จ";
 "success.username.caption" = "ชื่อผู้ใช้";

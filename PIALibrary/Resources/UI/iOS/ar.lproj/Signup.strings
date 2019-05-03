@@ -9,10 +9,13 @@
 "in_progress.message" = "جارٍ تأكيد عملية الشراء مع نظامنا. يمكن أن يستغرق ذلك لحظة لذلك انتظر قليلًا.";
 "in_progress.redeem.message" = "جارٍ تأكيد رمز بطاقتك مع نظامنا. قد يستغرق ذلك بضع لحظات، انتظر قليلًا.";
 "in_progress.title" = "تأكيد التسجيل";
+"purchase.uncredited.alert.button.cancel" = "إلغاء";
+"purchase.uncredited.alert.button.recover" = "استعادة الحساب";
+"purchase.uncredited.alert.message" = "لديك معاملات غير معتمدة. هل تريد استعادة تفاصيل حسابك؟";
 "success.message_format" = "شضكراً على اشتراكك معنا. لقد أرسلنا اسم المستخدم وكلمة المرور الخاصين بك إلى بريدك الإلكتروني %@";
 "success.password.caption" = "كلمة المرور";
-"success.redeem.message" = "ستحصل أيضاً على رسالة إلكترونية تحتوي على اسم المستخدم وكلمة المرور الخاصين بك.";
-"success.redeem.title" = "تم بنجاح!";
+"success.redeem.message" = "ستصلك رسالة عبر البريد الإلكتروني تتضمن اسم المستخدم وكلمة المرور.\n\nتفاصيل تسجيل الدخول";
+"success.redeem.title" = "تم استبدال البطاقة بنجاح";
 "success.submit" = "كيف تبدأ";
 "success.title" = "تم الشراء";
 "success.username.caption" = "اسم المستخدم";

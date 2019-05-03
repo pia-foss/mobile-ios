@@ -9,6 +9,7 @@
 "gdpr.collect.data.title" = "弊社が収集する個人情報";
 "gdpr.usage.data.description" = "メールアドレスはサブスクリプション情報、お支払確認、お客様とのやり取り、およびPrivate Internet Accessのプロモーションオファーを送信するためにのみ使用されます。\n\nお支払データはお客様のサインアップ、お支払、およびキャンセルを管理するために使用されます。";
 "gdpr.usage.data.title" = "弊社により収集される個人情報の使用";
+"getstarted.buttons.buyaccount" = "アカウントを購入する";
 "iap.error.message.unavailable" = "Appleサーバーが現在ご利用いただけません。後でもう一度お試しください。";
 "iap.error.title" = "エラー";
 "login.error.throttled" = "このユーザー名で最大ログイン試行回数を超えました。後でもう一度お試しください。";
@@ -16,6 +17,10 @@
 "login.error.unauthorized" = "ユーザー名またはパスワードが間違っています。";
 "login.error.validation" = "ユーザー名とパスワードを入力してください。";
 "login.password.placeholder" = "パスワード";
+"login.purchase.button" = "今すぐ購入";
+"login.purchase.footer" = "アカウントをお持ちでないですか？";
+"login.redeem.button" = "今すぐカードを引換え";
+"login.redeem.footer" = "ギフトカードまたはトライアルカードをお持ちですか？";
 "login.restore.button" = "アカウント詳細を受信しませんでしたか？";
 "login.submit" = "ログイン";
 "login.title" = "アカウントにサインイン";
@@ -26,6 +31,9 @@
 "plan.price_format" = "%@/月";
 "plan.yearly.detail_format" = "年間%@%@";
 "plan.yearly.title" = "年間";
+"purchase.confirm.form.email" = "メールアドレスを入力してください";
+"purchase.confirm.plan" = "お客様は%@プランを購入しようとしています";
+"purchase.continue" = "続行";
 "purchase.email.placeholder" = "メールアドレス";
 "purchase.error.connectivity.description" = "Private Internet Accessに接続できませんでした。インターネットの接続が不安定、もしくはお住まいの国で当社サービスがブロックされている可能性があります。";
 "purchase.error.connectivity.title" = "接続エラー";
@@ -33,13 +41,17 @@
 "purchase.error.validation" = "必ずメールアドレスを入力してください。";
 "purchase.login.button" = "サインイン";
 "purchase.login.footer" = "既にアカウントをお持ちですか？";
-"purchase.submit" = "今すぐ購入";
+"purchase.submit" = "送信";
 "purchase.subtitle" = "7日間返金保証";
 "purchase.title" = "VPNプランを選択";
+"redeem.accessibility.back" = "戻る";
 "redeem.email.placeholder" = "メールアドレス";
+"redeem.error.allfields" = "メールアドレスとカードのPINを入力してください。";
 "redeem.error.code" = "コードは%lu桁でなければなりません。";
 "redeem.error.qrcode.invalid" = "QRコードのシーケンスが無効です。もう一度お試しください。";
 "redeem.error.title" = "引換え";
+"redeem.giftcard.placeholder" = "ギフトカードのPIN";
+"redeem.scanqr" = "QRをスキャン";
 "redeem.submit" = "送信";
 "redeem.subtitle" = "メールアドレスと、以下のギフトカードまたはトライアルカードの%lu桁のPINを入力してください。";
 "redeem.title" = "ギフトカード引換え";

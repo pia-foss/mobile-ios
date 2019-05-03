@@ -9,10 +9,13 @@
 "in_progress.message" = "Мы проверяем вашу покупку в системе. На это может понадобиться время, так что оставайтесь с нами.";
 "in_progress.redeem.message" = "Мы подтверждаем ваш PIN-код в системе. Это займет какое-то время, подождите немного.";
 "in_progress.title" = "Подтверждение регистрации";
+"purchase.uncredited.alert.button.cancel" = "Отмена";
+"purchase.uncredited.alert.button.recover" = "Восстановить учетную запись";
+"purchase.uncredited.alert.message" = "У вас есть непроведенные транзакции. Хотите восстановить данные своей учетной записи?";
 "success.message_format" = "Спасибо за регистрацию. Мы отправили имя пользователя и пароль на адрес электронной почты %@";
 "success.password.caption" = "Пароль";
-"success.redeem.message" = "Скоро вы получите эл. письмо с именем пользователя и паролем.";
-"success.redeem.title" = "Готово!";
+"success.redeem.message" = "Также вы получите эл. письмо с именем пользователя и паролем.\n\nВаши учетные данные";
+"success.redeem.title" = "Карта успешно использована";
 "success.submit" = "Начать";
 "success.title" = "Покупка завершена";
 "success.username.caption" = "Имя пользователя";

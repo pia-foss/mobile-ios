@@ -9,6 +9,7 @@
 "gdpr.collect.data.title" = "Personlige oplysninger, vi indsamler";
 "gdpr.usage.data.description" = "E-mailadresse bruges kun til at sende abonnementsoplysninger, betalingsbekræftelser, kundekorrespondance og salgsfremmende tilbud fra Private Internet Access.\n\nBetalingsdata bruges til at administrere kundetilmeldinger, betalinger og aflysninger.";
 "gdpr.usage.data.title" = "Anvendelse af personlige oplysninger indsamlet af os";
+"getstarted.buttons.buyaccount" = "Køb konto";
 "iap.error.message.unavailable" = "Apple-servere er ikke tilgængelige i øjeblikket. Prøv venligst igen senere.";
 "iap.error.title" = "Fejl";
 "login.error.throttled" = "Alt for mange mislykkede forsøg på at logge ind med dette brugernavn. Prøv venligst igen senere.";
@@ -16,6 +17,10 @@
 "login.error.unauthorized" = "Dit brugernavn eller kodeord er forkert.";
 "login.error.validation" = "Du skal indtaste et brugernavn og et kodeord.";
 "login.password.placeholder" = "Kodeord";
+"login.purchase.button" = "Køb nu";
+"login.purchase.footer" = "Har du ikke en konto?";
+"login.redeem.button" = "Indløs nu";
+"login.redeem.footer" = "Har du et gavekort eller prøvekort?";
 "login.restore.button" = "Modtog du ikke dine kontodetaljer?";
 "login.submit" = "LOG IND";
 "login.title" = "Log ind på din konto";
@@ -26,6 +31,9 @@
 "plan.price_format" = "%@/mdr";
 "plan.yearly.detail_format" = "%@%@ per år";
 "plan.yearly.title" = "Årligt";
+"purchase.confirm.form.email" = "Indtast din e-mailadresse";
+"purchase.confirm.plan" = "Du køber %@-planen";
+"purchase.continue" = "Fortsæt";
 "purchase.email.placeholder" = "E-mailadresse";
 "purchase.error.connectivity.description" = "Vi kan ikke nå Private Internet Access. Dette kan skyldes dårlig internet eller at vores service er blokeret i dit land.";
 "purchase.error.connectivity.title" = "Forbindelsesfejl";
@@ -33,13 +41,17 @@
 "purchase.error.validation" = "Du skal indtaste en e-mailadresse";
 "purchase.login.button" = "Log ind";
 "purchase.login.footer" = "Har du allerede en konto?";
-"purchase.submit" = "KØB NU";
+"purchase.submit" = "Indsend";
 "purchase.subtitle" = "7-dages pengene tilbage garanti";
 "purchase.title" = "Vælg en VPN-plan";
+"redeem.accessibility.back" = "Tilbage";
 "redeem.email.placeholder" = "E-mailadresse";
+"redeem.error.allfields" = "Indtast venligst din e-mail og dit korts PIN-kode.";
 "redeem.error.code" = "Koden skal være %lu numeriske cifre.";
 "redeem.error.qrcode.invalid" = "Ugyldig QR-kode sekvens. Prøv igen.";
 "redeem.error.title" = "Indløs";
+"redeem.giftcard.placeholder" = "Gavekortets PIN-kode";
+"redeem.scanqr" = "Scan QR";
 "redeem.submit" = "INDSEND";
 "redeem.subtitle" = "Indtast din e-mailadresse, og %lu-cifrede pinkode frra dit gavekort eller prøvekort herunder.";
 "redeem.title" = "Indløs gavekort";

@@ -9,10 +9,13 @@
 "in_progress.message" = "Sistemimizle satın alım işleminizi onaylıyoruz. Biraz zaman alabilir; lütfen bekleyin.";
 "in_progress.redeem.message" = "Kart PIN'inizi sistemimizde onaylıyoruz. Bu biraz zaman alabilir, lütfen bekleyin.";
 "in_progress.title" = "Kaydolmayı onayla";
+"purchase.uncredited.alert.button.cancel" = "İptal";
+"purchase.uncredited.alert.button.recover" = "Hesabı kurtar";
+"purchase.uncredited.alert.message" = "Hesaba yansıtılmamış olan işlemleriniz var. Hesap bilgilerinizi kurtarmak ister misiniz?";
 "success.message_format" = "Bize kayıt olduğunuz için teşekkürler. Hesap kullanıcı adı ve parolanızı %@ e-posta adresinize gönderdik";
 "success.password.caption" = "Şifre";
-"success.redeem.message" = "Ayrıca kısa süre içinde kullanıcı adınızı ve şifrenizi içeren bir e-posta alacaksınız.";
-"success.redeem.title" = "Tamamlandı!";
+"success.redeem.message" = "Kısa süre içinde kullanıcı adınızı ve şifrenizi içeren bir e-posta alacaksınız.\n\nGiriş bilgileriniz";
+"success.redeem.title" = "Kart başarıyla kullanıldı";
 "success.submit" = "Başlarken";
 "success.title" = "Satın Alma Tamamlandı";
 "success.username.caption" = "Kullanıcı Adı";
