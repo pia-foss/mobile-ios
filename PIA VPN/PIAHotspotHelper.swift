@@ -77,7 +77,36 @@ class PIAHotspotHelper {
                                                             log.info("present PIA message for unprotected networks")
                                                         }
                                                         response.deliver()
+                                                    } else if cmd.commandType == NEHotspotHelperCommandType.evaluate {
+                                                        if let network = cmd.network {
+                                                            log.info("HotspotHelper Evaluating: "+network.ssid)
+                                                            network.setConfidence(NEHotspotHelperConfidence.high)
+                                                            let response = cmd.createResponse(NEHotspotHelperResult.success)
+                                                            response.setNetwork(network)
+                                                            response.deliver()
+                                                        }
+                                                    } else if cmd.commandType == NEHotspotHelperCommandType.authenticate{
+                                                        if let network = cmd.network {
+                                                            log.info("HotspotHelper: Authenticating the network: "+network.ssid)
+                                                            network.setConfidence(.high)
+                                                            let response = cmd.createResponse(NEHotspotHelperResult.success)
+                                                            response.setNetwork(network)
+                                                            response.deliver()
+                                                        }
+                                                    } else if cmd.commandType == NEHotspotHelperCommandType.presentUI{
+                                                        if let network = cmd.network {
+                                                            log.info("HotspotHelper: presentUI for network: "+network.ssid)
+                                                            network.setConfidence(.high)
+                                                            let response = cmd.createResponse(NEHotspotHelperResult.success)
+                                                            response.setNetwork(network)
+                                                            response.deliver()
+                                                        }
+                                                    } else if cmd.commandType == NEHotspotHelperCommandType.maintain{
+                                                        if let network = cmd.network {
+                                                            log.info("HotspotHelper:maintain network: "+network.ssid)
+                                                        }
                                                     }
+
                                                     
                                                 }
                                                 
