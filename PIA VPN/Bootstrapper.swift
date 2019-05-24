@@ -99,7 +99,7 @@ class Bootstrapper {
         let defaults = Client.preferences.defaults
         defaults.isPersistentConnection = true
         defaults.mace = false
-        defaults.vpnType = PIATunnelProfile.vpnType
+        defaults.vpnType = IKEv2Profile.vpnType
         defaults.vpnCustomConfigurations = [
             PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build()
         ]
