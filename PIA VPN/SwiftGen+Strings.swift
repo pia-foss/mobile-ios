@@ -505,6 +505,16 @@ internal enum L10n {
         /// The VPN kill switch is currently disabled. In order to ensure that the Network Management Tool is functioning, and that you are able to reconnect when switching networks, please enable the VPN kill switch in your settings.
         internal static let disabled = L10n.tr("Localizable", "settings.nmt.killswitch.disabled")
       }
+      internal enum Optout {
+        internal enum Disconnect {
+          /// Opt-out disconnect confirmation alert
+          internal static let alerts = L10n.tr("Localizable", "settings.nmt.optout.disconnect.alerts")
+          internal enum Alerts {
+            /// Disables the warning alert when disconnecting from the VPN.
+            internal static let description = L10n.tr("Localizable", "settings.nmt.optout.disconnect.alerts.description")
+          }
+        }
+      }
     }
     internal enum Reset {
       /// This will reset all of the above settings to default.

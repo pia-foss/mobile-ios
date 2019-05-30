@@ -20,6 +20,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
     private lazy var switchAutoJoinAllNetworks = UISwitch()
     private lazy var switchCellularData = UISwitch()
     private lazy var switchRules = UISwitch()
+    private lazy var switchAskForDisconnect = UISwitch()
     var shouldReconnectAutomatically = false
     var hasUpdatedPreferences = false
     var persistentConnectionValue = false
@@ -27,6 +28,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
     private enum Sections: Int, EnumsBuilder {
         
         case rules = 0
+        case optOutAlerts
         case cellularData
         case useVpnWifiProtection
         case autoConnectAllNetworksSettings
@@ -47,6 +49,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
         self.switchWiFiProtection.addTarget(self, action: #selector(toggleUseWiFiProtection(_:)), for: .valueChanged)
         self.switchCellularData.addTarget(self, action: #selector(toggleCellularData(_:)), for: .valueChanged)
         self.switchRules.addTarget(self, action: #selector(toggleRules(_:)), for: .valueChanged)
+        self.switchAskForDisconnect.addTarget(self, action: #selector(toggleAskForDisconnect(_:)), for: .valueChanged)
 
         NotificationCenter.default.addObserver(self, selector: #selector(filterAvailableNetworks), name: UIApplication.didBecomeActiveNotification, object: nil)
 
@@ -131,7 +134,11 @@ class TrustedNetworksViewController: AutolayoutViewController {
         tableView.reloadData()
     }
 
-
+    @objc private func toggleAskForDisconnect(_ sender: UISwitch) {
+        AppPreferences.shared.optOutAskDisconnectVPNUsingNMT = sender.isOn
+        tableView.reloadData()
+    }
+    
     // MARK: Private Methods
     private func presentKillSwitchAlert() {
         let alert = Macros.alert(nil, L10n.Settings.Nmt.Killswitch.disabled)
@@ -221,6 +228,8 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
                 L10n.Settings.Hotspothelper.Available.Add.help
         case .rules:
             return L10n.Settings.Trusted.Networks.Sections.Trusted.Rule.description
+        case .optOutAlerts:
+            return L10n.Settings.Nmt.Optout.Disconnect.Alerts.description
         default:
             return nil
         }
@@ -255,6 +264,12 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
             cell.accessoryView = switchRules
             cell.selectionStyle = .none
             switchRules.isOn = Client.preferences.nmtRulesEnabled
+        case .optOutAlerts:
+            cell.imageView?.image = nil
+            cell.textLabel?.text = L10n.Settings.Nmt.Optout.Disconnect.alerts
+            cell.accessoryView = switchAskForDisconnect
+            cell.selectionStyle = .none
+            switchAskForDisconnect.isOn = AppPreferences.shared.optOutAskDisconnectVPNUsingNMT
         case .current:
             if let ssid = hotspotHelper.currentWiFiNetwork() {
                 if trustedNetworks.contains(ssid) {

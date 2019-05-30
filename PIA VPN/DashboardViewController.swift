@@ -284,7 +284,7 @@ class DashboardViewController: AutolayoutViewController {
                 }
             }
             
-            if !Client.preferences.nmtRulesEnabled { //if NMT disabled...
+            if !Client.preferences.nmtRulesEnabled || AppPreferences.shared.optOutAskDisconnectVPNUsingNMT { //if NMT disabled...
                 showAlert = false
             }
             

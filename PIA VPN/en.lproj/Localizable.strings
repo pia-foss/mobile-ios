@@ -222,6 +222,8 @@
 "settings.trusted.networks.sections.trusted.rule.action"= "Disconnect from PIA VPN";
 "tiles.quicksetting.nmt.title" = "Network Management";
 "settings.nmt.killswitch.disabled" = "The VPN kill switch is currently disabled. In order to ensure that the Network Management Tool is functioning, and that you are able to reconnect when switching networks, please enable the VPN kill switch in your settings.";
+"settings.nmt.optout.disconnect.alerts" = "Opt-out disconnect confirmation alert";
+"settings.nmt.optout.disconnect.alerts.description" = "Disables the warning alert when disconnecting from the VPN.";
 
 // REGION
 
