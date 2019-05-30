@@ -17,6 +17,7 @@ private let log = SwiftyBeaver.self
 class AppPreferences {
     
     private struct Entries {
+        
         static let version = "Version"
         
         static let launched = "Launched" // discard 2.2 key and invert logic
@@ -43,6 +44,8 @@ class AppPreferences {
 
         static let todayWidgetVpnStatus = "vpn.status"
         static let todayWidgetButtonTitle = "vpn.button.description"
+
+        static let optOutAskDisconnectVPNUsingNMT = "OptOutAskDisconnectVPNUsingNMT"
 
     }
 
@@ -180,6 +183,15 @@ class AppPreferences {
         }
     }
     
+    var optOutAskDisconnectVPNUsingNMT: Bool{
+        get {
+            return defaults.bool(forKey: Entries.optOutAskDisconnectVPNUsingNMT)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.optOutAskDisconnectVPNUsingNMT)
+        }
+    }
+    
     @available(iOS 12.0, *)
     var connectShortcut: INVoiceShortcut? {
         get {
@@ -229,6 +241,7 @@ class AppPreferences {
             Entries.themeCode: ThemeCode.light.rawValue,
             Entries.useConnectSiriShortcuts: false,
             Entries.useDisconnectSiriShortcuts: false,
+            Entries.optOutAskDisconnectVPNUsingNMT: false,
             Entries.todayWidgetButtonTitle: L10n.Today.Widget.login
         ])
     }
@@ -318,6 +331,7 @@ class AppPreferences {
     func reset() {
         piaSocketType = nil
         favoriteServerIdentifiers = []
+        optOutAskDisconnectVPNUsingNMT = false
         useConnectSiriShortcuts = false
         useDisconnectSiriShortcuts = false
         if #available(iOS 12.0, *) {
@@ -329,6 +343,7 @@ class AppPreferences {
     
     func clean() {
         favoriteServerIdentifiers = []
+        optOutAskDisconnectVPNUsingNMT = false
         useConnectSiriShortcuts = false
         useDisconnectSiriShortcuts = false
         if #available(iOS 12.0, *) {
