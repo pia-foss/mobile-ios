@@ -119,7 +119,7 @@ internal enum L10n {
   }
   internal enum Welcome {
     internal enum Agreement {
-      /// Signing up constitutes acceptance of the $1 and the $2.
+      /// Payment will be charged to your Apple ID account at the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.\n\nSigning up constitutes acceptance of the $1 and the $2.
       internal static let message = L10n.tr("Welcome", "agreement.message")
       internal enum Message {
         /// Privacy Policy

@@ -21,8 +21,7 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
 
     @IBOutlet private weak var labelTitle: UILabel!
     @IBOutlet private weak var labelSubtitle: UILabel!
-    @IBOutlet private weak var labelAppleTerms: UILabel!
-
+    
     @IBOutlet private weak var collectionPlans: UICollectionView!
     
     @IBOutlet private weak var textAgreement: UITextView!
@@ -52,7 +51,6 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
 
         labelTitle.text = L10n.Welcome.Purchase.title
         labelSubtitle.text = L10n.Welcome.Purchase.subtitle
-        labelAppleTerms.text = L10n.Signup.Purchase.Subscription.Apple.terms
         textAgreement.attributedText = Theme.current.agreementText(
             withMessage: L10n.Welcome.Agreement.message,
             tos: L10n.Welcome.Agreement.Message.tos,
@@ -171,7 +169,6 @@ class PurchaseViewController: AutolayoutViewController, WelcomeChild {
         Theme.current.applyPrincipalBackground(collectionPlans)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applySubtitle(labelSubtitle)
-        Theme.current.applySubtitle(labelAppleTerms)
         Theme.current.applyLinkAttributes(textAgreement)
     }
     

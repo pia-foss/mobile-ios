@@ -599,14 +599,8 @@ You will not be charged during this process.</string>
                                                             <outlet property="delegate" destination="J5T-ys-Of8" id="AOl-VK-KTQ"/>
                                                         </connections>
                                                     </collectionView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fC1-Bg-SaI">
-                                                        <rect key="frame" x="0.0" y="388.5" width="321" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="&lt;Agreement&gt;" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KyF-30-stz">
-                                                        <rect key="frame" x="0.0" y="419.5" width="321" height="218.5"/>
+                                                        <rect key="frame" x="0.0" y="388.5" width="321" height="249.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -630,17 +624,14 @@ You will not be charged during this process.</string>
                                                     <constraint firstAttribute="bottom" secondItem="KyF-30-stz" secondAttribute="bottom" id="30v-I9-NUH"/>
                                                     <constraint firstItem="1AP-NP-8y0" firstAttribute="top" secondItem="Peu-Da-gWl" secondAttribute="bottom" constant="33" id="3L3-SU-nCw"/>
                                                     <constraint firstItem="KyF-30-stz" firstAttribute="leading" secondItem="hTy-4A-jv9" secondAttribute="leading" id="7kA-ah-cv8"/>
-                                                    <constraint firstItem="fC1-Bg-SaI" firstAttribute="leading" secondItem="hTy-4A-jv9" secondAttribute="leading" id="8NT-pe-CDy"/>
                                                     <constraint firstAttribute="trailing" secondItem="1AP-NP-8y0" secondAttribute="trailing" id="ESc-uJ-tfw"/>
-                                                    <constraint firstItem="KyF-30-stz" firstAttribute="top" secondItem="fC1-Bg-SaI" secondAttribute="bottom" constant="10" id="MBl-ca-MnN"/>
+                                                    <constraint firstItem="KyF-30-stz" firstAttribute="top" secondItem="G5a-CO-RKC" secondAttribute="bottom" constant="10" id="FQm-bp-qj9"/>
                                                     <constraint firstItem="Peu-Da-gWl" firstAttribute="centerX" secondItem="hTy-4A-jv9" secondAttribute="centerX" id="QdA-NI-LNZ"/>
                                                     <constraint firstAttribute="trailing" secondItem="G5a-CO-RKC" secondAttribute="trailing" id="U1a-XQ-E6d"/>
                                                     <constraint firstItem="1AP-NP-8y0" firstAttribute="leading" secondItem="hTy-4A-jv9" secondAttribute="leading" id="WTU-4M-U31"/>
                                                     <constraint firstAttribute="trailing" secondItem="KyF-30-stz" secondAttribute="trailing" id="ZBr-4g-lGZ"/>
                                                     <constraint firstItem="G5a-CO-RKC" firstAttribute="leading" secondItem="hTy-4A-jv9" secondAttribute="leading" id="ZxJ-o3-ToY"/>
                                                     <constraint firstItem="G5a-CO-RKC" firstAttribute="top" secondItem="1AP-NP-8y0" secondAttribute="bottom" constant="20" id="afu-UC-s1H"/>
-                                                    <constraint firstAttribute="trailing" secondItem="fC1-Bg-SaI" secondAttribute="trailing" id="c9x-f5-ESH"/>
-                                                    <constraint firstItem="fC1-Bg-SaI" firstAttribute="top" secondItem="G5a-CO-RKC" secondAttribute="bottom" constant="10" id="cR1-gg-0fq"/>
                                                     <constraint firstItem="hPa-uO-IxH" firstAttribute="centerX" secondItem="hTy-4A-jv9" secondAttribute="centerX" id="hF5-2v-dnV"/>
                                                     <constraint firstItem="Peu-Da-gWl" firstAttribute="top" secondItem="hPa-uO-IxH" secondAttribute="bottom" constant="12" id="qnZ-7w-aXv"/>
                                                     <constraint firstItem="hPa-uO-IxH" firstAttribute="top" secondItem="hTy-4A-jv9" secondAttribute="top" id="re9-Hq-JJu"/>
