@@ -26,9 +26,39 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0EBFFFD41F693F800009D4F4"
+            BuildableName = "PIALibrary.framework"
+            BlueprintName = "PIALibrary-iOS"
+            ReferencedContainer = "container:PIALibrary.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0EE78AFC1F818A20002E4CDD"
+               BuildableName = "PIALibraryTests-iOS.xctest"
+               BlueprintName = "PIALibraryTests-iOS"
+               ReferencedContainer = "container:PIALibrary.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0EBFFFD41F693F800009D4F4"
+            BuildableName = "PIALibrary.framework"
+            BlueprintName = "PIALibrary-iOS"
+            ReferencedContainer = "container:PIALibrary.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
