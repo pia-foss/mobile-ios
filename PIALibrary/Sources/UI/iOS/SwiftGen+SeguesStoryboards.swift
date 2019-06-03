@@ -24,7 +24,6 @@ internal enum StoryboardSegue {
     case loginAccountSegue = "LoginAccountSegue"
     case presentGDPRTermsSegue = "PresentGDPRTermsSegue"
     case purchaseVPNPlanSegue = "PurchaseVPNPlanSegue"
-    case redeemGiftCardSegue = "RedeemGiftCardSegue"
     case restorePurchaseSegue = "RestorePurchaseSegue"
     case signupQRCameraScannerSegue = "SignupQRCameraScannerSegue"
     case signupViaPurchaseSegue = "SignupViaPurchaseSegue"
