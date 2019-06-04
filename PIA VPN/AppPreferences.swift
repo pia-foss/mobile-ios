@@ -338,6 +338,8 @@ class AppPreferences {
             connectShortcut = nil
             disconnectShortcut = nil
         }
+        let preferences = Client.preferences.editable().reset()
+        preferences.commit()
         transitionTheme(to: .light)
     }
     
@@ -352,6 +354,8 @@ class AppPreferences {
         }
         todayWidgetVpnStatus = L10n.Today.Widget.login
         todayWidgetButtonTitle = L10n.Today.Widget.login
+        let preferences = Client.preferences.editable().reset()
+        preferences.commit()
     }
     
 //    + (void)eraseForTesting;
