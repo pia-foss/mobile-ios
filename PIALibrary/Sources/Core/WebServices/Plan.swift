@@ -11,17 +11,23 @@ import Foundation
 /// The available subscription plans.
 public enum Plan: String {
 
-    /// Plan expires/renews after one month.
+    /// Subscription expires/renews after one month.
     case monthly
 
-    /// Plan expires/renews after one year.
+    /// Subscription expires/renews after one year.
     case yearly
     
-    /// Plan expires/renews after one month (price before 2019).
+    /// Plan expires/renews after one month (price inApp 2019).
     case legacyMonthly
     
-    /// Plan expires/renews after one year (price before 2019).
+    /// Plan expires/renews after one year (price inApp 2019).
     case legacyYearly
+    
+    /// Plan expires/renews after one month (price before 2019).
+    case oldLegacyMonthly
+    
+    /// Plan expires/renews after one year (price before 2019).
+    case oldLegacyYearly
 
     /// It's a trial plan.
     case trial
