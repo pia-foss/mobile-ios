@@ -151,6 +151,8 @@
 "settings.hotspothelper.wifi.networks" = "Wifi-netwerken";
 "settings.hotspothelper.wifi.trust.title" = "VPN-wifibescherming";
 "settings.nmt.killswitch.disabled" = "De VPN kill switch is op dit moment uitgeschakeld. Schakel de VPN kill switch in via uw instellingen om ervoor te zorgen dat de netwerkbeheertool werkt en dat u verbinding kunt maken als u van netwerk wisselt.";
+"settings.nmt.optout.disconnect.alerts" = "Bevestigingsmelding voor verbreken verbinding uitschakelen";
+"settings.nmt.optout.disconnect.alerts.description" = "Schakelt de melding bij het verbreken van de verbinding met de VPN uit.";
 "settings.reset.defaults.confirm.button" = "Resetten";
 "settings.reset.defaults.confirm.message" = "Hiermee zet u de standaardinstellingen van de app terug. Alle wijzigingen die u heeft gemaakt, gaan verloren.";
 "settings.reset.defaults.confirm.title" = "Instellingen resetten";

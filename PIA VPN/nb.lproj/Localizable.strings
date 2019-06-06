@@ -151,6 +151,8 @@
 "settings.hotspothelper.wifi.networks" = "WiFi-nettverk";
 "settings.hotspothelper.wifi.trust.title" = "VPN WiFi-beskyttelse";
 "settings.nmt.killswitch.disabled" = "VPN-avbruddsbryteren er for øyeblikket deaktivert. For å sikre at verktøyet for nettverksadministrering fungerer og at du kan koble til på nytt når du bytter nettverk, må du aktivere VPN-avbruddsbryteren i innstillingene.";
+"settings.nmt.optout.disconnect.alerts" = "Slå av bekreftelse på frakobling";
+"settings.nmt.optout.disconnect.alerts.description" = "Deaktiverer advarselvarselet når du kobler fra VPN-en.";
 "settings.reset.defaults.confirm.button" = "Tilbakestill";
 "settings.reset.defaults.confirm.message" = "Dette bringer appen tilbake til fabrikkinnstillingene. Du mister alle endringer.";
 "settings.reset.defaults.confirm.title" = "Innstillinger for tilbakestilling";

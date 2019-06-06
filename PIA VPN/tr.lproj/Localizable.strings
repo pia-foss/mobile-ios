@@ -151,6 +151,8 @@
 "settings.hotspothelper.wifi.networks" = "WiFi ağları";
 "settings.hotspothelper.wifi.trust.title" = "VPN WiFi Koruması";
 "settings.nmt.killswitch.disabled" = "VPN sonlandırma anahtarı şu anda devre dışı. Ağ Yönetim Aracının çalıştığından ve ağ değiştirdiğinizde bağlanabileceğinizden emin olmak için lütfen ayarlarınızdan VPN sonlandırma anahtarını etkinleştirin.";
+"settings.nmt.optout.disconnect.alerts" = "Bağlantı kesilmesi onay uyarısını kapat";
+"settings.nmt.optout.disconnect.alerts.description" = "VPN bağlantısı kesilirken gösterilen uyarıyı devre dışı bırakır.";
 "settings.reset.defaults.confirm.button" = "Sıfırla";
 "settings.reset.defaults.confirm.message" = "Bu işlem uygulama ayarlarını sıfırlayacak. Yapmış olduğun bütün değişiklikler kaybolacaktır.";
 "settings.reset.defaults.confirm.title" = "Ayarları sıfırla";

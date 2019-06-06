@@ -151,6 +151,8 @@
 "settings.hotspothelper.wifi.networks" = "Сети WiFi";
 "settings.hotspothelper.wifi.trust.title" = "Защита WiFi с помощью VPN";
 "settings.nmt.killswitch.disabled" = "Функция авторазрыва соединения в настоящее время отключена. Чтобы обеспечить работу инструмента управления сетью и получить возможность повторного подключения при смене сети, активируйте авторазрыв соединения в настройках.";
+"settings.nmt.optout.disconnect.alerts" = "Деактивировать оповещение с подтверждением отключения";
+"settings.nmt.optout.disconnect.alerts.description" = "Выключение оповещения при отключении от VPN.";
 "settings.reset.defaults.confirm.button" = "Сбросить";
 "settings.reset.defaults.confirm.message" = "Это сбросит приложение к исходному состоянию. Вы потеряете все сделанные изменения.";
 "settings.reset.defaults.confirm.title" = "Сбросить настройки";

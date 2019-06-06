@@ -151,6 +151,8 @@
 "settings.hotspothelper.wifi.networks" = "Redes WiFi";
 "settings.hotspothelper.wifi.trust.title" = "Proteção VPN WiFi";
 "settings.nmt.killswitch.disabled" = "O kill switch do VPN está desativado. Para garantir que a Ferramenta de Gestão de Rede esteja funcionando e que você pode reconectar-se ao trocar de rede, ative o kill switch do VPN em suas configurações.";
+"settings.nmt.optout.disconnect.alerts" = "Desativar alerta de confirmação de desconexão";
+"settings.nmt.optout.disconnect.alerts.description" = "Desativa o alerta ao desconectar da VPN";
 "settings.reset.defaults.confirm.button" = "Redefinir";
 "settings.reset.defaults.confirm.message" = "Isto irá restaurar o app para as opções padrão. Você perderá todas as mudanças que fez.";
 "settings.reset.defaults.confirm.title" = "Redefinir configurações";
