@@ -151,6 +151,8 @@
 "settings.hotspothelper.wifi.networks" = "WiFi 網路";
 "settings.hotspothelper.wifi.trust.title" = "VPN WiFi 保護";
 "settings.nmt.killswitch.disabled" = "VPN 切斷開關目前已停用。為確保網路管理工具正常運作，以及在切換網路時能夠重新連線，請在設定中啟用 VPN 切斷開關功能。";
+"settings.nmt.optout.disconnect.alerts" = "取消解除連線確認提示";
+"settings.nmt.optout.disconnect.alerts.description" = "解除 VPN 連線時不發出警告提示。";
 "settings.reset.defaults.confirm.button" = "重設";
 "settings.reset.defaults.confirm.message" = "此操作會將應用程式重設為預設狀態。所有您所作的變更都將會被清除。";
 "settings.reset.defaults.confirm.title" = "重設設定";

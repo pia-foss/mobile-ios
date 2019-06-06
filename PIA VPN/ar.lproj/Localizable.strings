@@ -151,6 +151,8 @@
 "settings.hotspothelper.wifi.networks" = "شبكات WiFi";
 "settings.hotspothelper.wifi.trust.title" = "حماية VPN WiFi";
 "settings.nmt.killswitch.disabled" = "مفتاح قطع اتصال VPN معطّل حاليًا. للتأكد من أن أداة إدارة الشبكة تعمل، وأنك قادر على إعادة الاتصال عند التبديل بين الشبكات، يرجى تمكين مفتاح قطع اتصال VPN في الإعدادات.";
+"settings.nmt.optout.disconnect.alerts" = "إلغاء الاشتراك في تنبيه تأكيد قطع الاتصال";
+"settings.nmt.optout.disconnect.alerts.description" = "يعطّل تنبيه التحذير عند قطع الاتصال بشبكة VPN.";
 "settings.reset.defaults.confirm.button" = "إعادة تعيين";
 "settings.reset.defaults.confirm.message" = "سيؤدي هذا الإجراء إلى عودة التطبيق إلى حالته الافتراضية وستفقد كل التغييرات التي أجريتها.";
 "settings.reset.defaults.confirm.title" = "إعادة تعيين الإعدادات";

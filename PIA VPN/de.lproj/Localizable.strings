@@ -151,6 +151,8 @@
 "settings.hotspothelper.wifi.networks" = "WLAN";
 "settings.hotspothelper.wifi.trust.title" = "VPN-WLAN-Schutz";
 "settings.nmt.killswitch.disabled" = "Der VPN-Notausschalter ist derzeit deaktiviert. Um sicherzustellen, dass das Network Management Tool funktioniert und Sie beim Netzwerkwechsel die Verbindung wiederherstellen können, aktivieren Sie bitte den VPN-Notausschalter in Ihren Einstellungen.";
+"settings.nmt.optout.disconnect.alerts" = "Deaktivierung der Warnung zur Bestätigung bei Verbindungsabbruch";
+"settings.nmt.optout.disconnect.alerts.description" = "Deaktiviert den Warnhinweis beim Trennen der Verbindung vom VPN.";
 "settings.reset.defaults.confirm.button" = "Zurücksetzen";
 "settings.reset.defaults.confirm.message" = "Damit wird die App in den Ausgangszustand versetzt. Alle Änderungen gehen verloren.";
 "settings.reset.defaults.confirm.title" = "Einstellungen zurücksetzen";

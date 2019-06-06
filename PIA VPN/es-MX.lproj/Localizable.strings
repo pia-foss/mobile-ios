@@ -151,6 +151,8 @@
 "settings.hotspothelper.wifi.networks" = "Redes wifi";
 "settings.hotspothelper.wifi.trust.title" = "Protección wifi VPN";
 "settings.nmt.killswitch.disabled" = "El interruptor de desconexión de emergencia está deshabilitado. Para garantizar que el interruptor de desconexión de emergencia funciona y que puedes reconectar al cambiar de red, habilita el interruptor de desconexión de emergencia de VPN en los ajustes.";
+"settings.nmt.optout.disconnect.alerts" = "Alerta de confirmación de desconexión";
+"settings.nmt.optout.disconnect.alerts.description" = "Deshabilita la alerta de aviso al desconectar del VPN.";
 "settings.reset.defaults.confirm.button" = "Restablecer";
 "settings.reset.defaults.confirm.message" = "Esto llevará a la aplicación a los valores predeterminados. Perderá todos los cambios que haya realizado.";
 "settings.reset.defaults.confirm.title" = "Restablecer configuración";

@@ -151,6 +151,8 @@
 "settings.hotspothelper.wifi.networks" = "เครือข่าย WiFi";
 "settings.hotspothelper.wifi.trust.title" = "การป้องกัน VPN WiFi";
 "settings.nmt.killswitch.disabled" = "ปุ่ม VPN kill ปิดใช้งานอยู่ กรุณาเปิดใช้งานปุ่ม VPN kill ในการตั้งค่า เพื่อยืนยันว่าเครื่องมือจัดการเครือข่ายยังทำงาน และคุณสามารถเชื่อมต่อเครือข่ายได้อีกครั้งเมื่อมีการเปลี่ยนเครือข่าย";
+"settings.nmt.optout.disconnect.alerts" = "ยกเลิกการแจ้งเตือนเพื่อยืนยันการเลิกเชื่อมต่อ";
+"settings.nmt.optout.disconnect.alerts.description" = "ปิดการแจ้งเตือนคำเตือนเมื่อเลิกเชื่อมต่อ VPN";
 "settings.reset.defaults.confirm.button" = "รีเซ็ต";
 "settings.reset.defaults.confirm.message" = "การกระทำนี้จะทำให้แอปกลับไปสู่ค่าเริ่มต้น คุณจะสูญเสียการเปลี่ยนแปลงทั้งหมดที่เคยทำไว้";
 "settings.reset.defaults.confirm.title" = "การตั้งค่าการรีเซ็ต";
