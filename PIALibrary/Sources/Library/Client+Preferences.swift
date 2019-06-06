@@ -278,7 +278,7 @@ extension Client.Preferences {
             preferredServer = nil
             isPersistentConnection = true
             mace = false
-            useWiFiProtection = false
+            useWiFiProtection = true
             trustCellularData = false
             authMigrationSuccess = false
             shouldConnectForAllNetworks = true
@@ -287,7 +287,7 @@ extension Client.Preferences {
             vpnCustomConfigurations = [:]
             availableNetworks = []
             trustedNetworks = []
-            nmtRulesEnabled = true
+            nmtRulesEnabled = false
         }
 
         /**
