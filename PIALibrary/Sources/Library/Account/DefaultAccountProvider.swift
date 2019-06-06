@@ -475,7 +475,11 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             case .legacyMonthly:
                 callback?([.legacyMonthly], nil)
             case .legacyYearly:
-                callback?([.yearly], nil)
+                callback?([.legacyYearly], nil)
+            case .oldLegacyMonthly:
+                callback?([.oldLegacyMonthly], nil)
+            case .oldLegacyYearly:
+                callback?([.oldLegacyYearly], nil)
             case .other:
                 callback?(nil, ClientError.renewingNonRenewable)
             }
