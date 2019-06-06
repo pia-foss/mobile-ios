@@ -278,7 +278,7 @@ extension Client.Preferences {
             preferredServer = nil
             isPersistentConnection = true
             mace = false
-            useWiFiProtection = true
+            useWiFiProtection = false
             trustCellularData = false
             authMigrationSuccess = false
             shouldConnectForAllNetworks = true
