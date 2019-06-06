@@ -187,7 +187,7 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
 
     func numberOfSections(in tableView: UITableView) -> Int {
         if Client.preferences.nmtRulesEnabled {
-            return Client.preferences.useWiFiProtection ? Sections.countCases() : 3
+            return Client.preferences.useWiFiProtection ? Sections.countCases() : 4
         } else {
             return 1
         }
