@@ -287,7 +287,7 @@ extension Client.Preferences {
             vpnCustomConfigurations = [:]
             availableNetworks = []
             trustedNetworks = []
-            nmtRulesEnabled = true
+            nmtRulesEnabled = false
         }
 
         /**
