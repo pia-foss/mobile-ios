@@ -115,9 +115,9 @@ class Bootstrapper {
                 for product in products {
                     if product.legacy {
                         if product.plan == .monthly {
-                            Client.configuration.setPlan(.legacyMonthly, forProductIdentifier: product.identifier)
+                            Client.configuration.setPlan(.oldLegacyMonthly, forProductIdentifier: product.identifier)
                         } else if product.plan == .yearly {
-                            Client.configuration.setPlan(.legacyYearly, forProductIdentifier: product.identifier)
+                            Client.configuration.setPlan(.oldLegacyYearly, forProductIdentifier: product.identifier)
                         }
                     } else {
                         Client.configuration.setPlan(product.plan, forProductIdentifier: product.identifier)
@@ -190,6 +190,8 @@ class Bootstrapper {
         Client.configuration.setPlan(.monthly, forProductIdentifier: AppConstants.InApp.monthlyProductIdentifier)
         Client.configuration.setPlan(.legacyYearly, forProductIdentifier: AppConstants.LegacyInApp.yearlyProductIdentifier)
         Client.configuration.setPlan(.legacyMonthly, forProductIdentifier: AppConstants.LegacyInApp.monthlyProductIdentifier)
+        Client.configuration.setPlan(.oldLegacyYearly, forProductIdentifier: AppConstants.LegacyInApp.oldYearlyProductIdentifier)
+        Client.configuration.setPlan(.oldLegacyMonthly, forProductIdentifier: AppConstants.LegacyInApp.oldMonthlyProductIdentifier)
     }
 
     func dispose() {
