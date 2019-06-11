@@ -30,6 +30,8 @@ extension Notification.Name {
     /// - Seealso: `AccountProvider.renew(...)`
     public static let PIAAccountDidRenew = Notification.Name("PIAAccountDidRenew")
     
+    public static let PIAAccountLapsed = Notification.Name("PIAAccountLapsed")
+    
     // MARK: Server
     
     /// - Seealso: `ServerProvider.currentServers`
