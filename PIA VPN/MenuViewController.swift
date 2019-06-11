@@ -167,14 +167,14 @@ class MenuViewController: AutolayoutViewController {
             let productId = currentUser.info?.productId {
             
             switch productId {
-            case AppConstants.InApp.monthlyProductIdentifier:
+            case AppConstants.InApp.monthlyProductIdentifier,
+                 AppConstants.LegacyInApp.monthlyProductIdentifier,
+                 AppConstants.LegacyInApp.oldMonthlyProductIdentifier:
                 uniquePlan = .monthly
-            case AppConstants.InApp.yearlyProductIdentifier:
+            case AppConstants.InApp.yearlyProductIdentifier,
+                 AppConstants.LegacyInApp.yearlyProductIdentifier,
+                 AppConstants.LegacyInApp.oldYearlyProductIdentifier:
                 uniquePlan = .yearly
-            case AppConstants.LegacyInApp.monthlyProductIdentifier:
-                uniquePlan = .legacyMonthly
-            case AppConstants.LegacyInApp.yearlyProductIdentifier:
-                uniquePlan = .legacyYearly
             default:
                 break
             }
