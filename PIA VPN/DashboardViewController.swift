@@ -69,6 +69,7 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(updateTiles), name: .PIATilesDidChange, object: nil)
         nc.addObserver(self, selector: #selector(vpnShouldReconnect), name: .PIASettingsHaveChanged, object: nil)
         nc.addObserver(self, selector: #selector(presentKillSwitchAlert), name: .PIAPersistentConnectionTileHaveChanged, object: nil)
+        nc.addObserver(self, selector: #selector(closeSession), name: .PIAAccountLapsed, object: nil)
 
 #if !TARGET_IPHONE_SIMULATOR
         let types: UIUserNotificationType = [.alert, .badge, .sound]
@@ -81,6 +82,7 @@ class DashboardViewController: AutolayoutViewController {
         }
         
         self.viewContentHeight = self.viewContentHeightConstraint.constant
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -393,6 +395,16 @@ class DashboardViewController: AutolayoutViewController {
         AppPreferences.shared.todayWidgetVpnStatus = nil
         AppPreferences.shared.todayWidgetButtonTitle = L10n.Today.Widget.login
         presentLogin()
+    }
+    
+    @objc private func closeSession() {
+        log.debug("Account: Logging out...")
+        AppPreferences.shared.clean()
+        if let window = self.view.window,
+            let rootViewController = window.rootViewController {
+            rootViewController.dismiss(animated: false, completion: nil)
+        }
+        Client.providers.accountProvider.logout(nil)
     }
     
     // MARK: Notifications (Connection)
