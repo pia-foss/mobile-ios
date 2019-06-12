@@ -25,6 +25,8 @@ class TrustedNetworksViewController: AutolayoutViewController {
     var hasUpdatedPreferences = false
     var persistentConnectionValue = false
 
+    private let numberOfVisibleSections = 4
+    
     private enum Sections: Int, EnumsBuilder {
         
         case rules = 0
@@ -187,7 +189,8 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
 
     func numberOfSections(in tableView: UITableView) -> Int {
         if Client.preferences.nmtRulesEnabled {
-            return Client.preferences.useWiFiProtection ? Sections.countCases() : 3
+            return Client.preferences.useWiFiProtection ?
+                Sections.countCases() : numberOfVisibleSections
         } else {
             return 1
         }
