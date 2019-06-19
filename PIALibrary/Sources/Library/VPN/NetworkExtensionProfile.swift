@@ -56,7 +56,9 @@ extension NetworkExtensionProfile {
         }
         
         vpn.localizedDescription = configuration.name
-        vpn.isOnDemandEnabled = configuration.isOnDemand
+        vpn.isOnDemandEnabled = Client.providers.vpnProvider.isVPNConnected || vpn.isEnabled ?
+            configuration.isOnDemand :
+            false //if the VPN is disconnected, don't activate the onDemand property to don't autoconnect the VPN without user permission
         
         let trustedNetworks = Client.preferences.trustedNetworks
         
