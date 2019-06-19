@@ -151,6 +151,8 @@
 "settings.hotspothelper.wifi.networks" = "WiFiネットワーク";
 "settings.hotspothelper.wifi.trust.title" = "VPN WiFi保護";
 "settings.nmt.killswitch.disabled" = "現在VPNキルスイッチが無効になっています。「ネットワーク管理ツール」が確かに機能している状態にし、ネットワークを切り替えたときに再度接続できるようにするには、設定でVPNキルスイッチを有効にしてください。";
+"settings.nmt.optout.disconnect.alerts" = "切断確認アラートのオプトアウト";
+"settings.nmt.optout.disconnect.alerts.description" = "VPNから切断されたときの警告アラートをオフにします。";
 "settings.reset.defaults.confirm.button" = "リセット";
 "settings.reset.defaults.confirm.message" = "アプリを標準設定に戻します。これまでの変更はすべて失われます。";
 "settings.reset.defaults.confirm.title" = "リセットの設定";

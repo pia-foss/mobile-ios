@@ -78,6 +78,7 @@ class PIAHotspotHelper {
                                                         }
                                                         response.deliver()
                                                     }
+
                                                     
                                                 }
                                                 

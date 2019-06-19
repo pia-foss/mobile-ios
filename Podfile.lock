@@ -86,13 +86,13 @@ PODS:
   - PIALibrary/VPN (2.0.0):
     - PIALibrary/Library
     - PIATunnel (~> 2.0.0)
-  - PIATunnel (2.0.0):
-    - PIATunnel/AppExtension (= 2.0.0)
-    - PIATunnel/Core (= 2.0.0)
-  - PIATunnel/AppExtension (2.0.0):
+  - PIATunnel (2.0.1):
+    - PIATunnel/AppExtension (= 2.0.1)
+    - PIATunnel/Core (= 2.0.1)
+  - PIATunnel/AppExtension (2.0.1):
     - PIATunnel/Core
     - SwiftyBeaver
-  - PIATunnel/Core (2.0.0):
+  - PIATunnel/Core (2.0.1):
     - OpenSSL-Apple (~> 1.1.0h)
     - SwiftyBeaver
   - PopupDialog (0.9.1):
@@ -114,11 +114,11 @@ DEPENDENCIES:
   - FXPageControl
   - HockeySDK
   - iRate
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `b5b2f07`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `b5b2f07`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `b5b2f07`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `b5b2f07`)
-  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `b0d7496`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `12d542c`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `12d542c`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `12d542c`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `12d542c`)
+  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `4eff5ca`)
   - PopupDialog
   - SideMenu (= 3.1.5)
   - TPKeyboardAvoiding
@@ -154,18 +154,18 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :commit: b5b2f07
+    :commit: 12d542c
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
-    :commit: b0d7496
+    :commit: 4eff5ca
     :git: https://github.com/pia-foss/tunnel-apple
 
 CHECKOUT OPTIONS:
   PIALibrary:
-    :commit: b5b2f07
+    :commit: 12d542c
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
-    :commit: b0d7496
+    :commit: 4eff5ca
     :git: https://github.com/pia-foss/tunnel-apple
 
 SPEC CHECKSUMS:
@@ -189,7 +189,7 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   OpenSSL-Apple: cd153d705ef350eb834ae7ff5f21f792b51ed208
   PIALibrary: 49067d695fe3597be7ce9561a635bbd47f0e6b48
-  PIATunnel: c0a1e40d198ebca00d192c5266c055f1ec5d4bab
+  PIATunnel: 3f6b905b907b745ebb83286ff6b663d17ecfb605
   PopupDialog: 03985b669c29802661c187513bf827340db1ae4d
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
@@ -198,6 +198,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 1546e9c3668ca254cf5feef44248ebd8006ed6b1
+PODFILE CHECKSUM: 7b8950f052338ff875f3b7a95fed078a0846ae42
 
 COCOAPODS: 1.5.3

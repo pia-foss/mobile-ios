@@ -151,6 +151,8 @@
 "settings.hotspothelper.wifi.networks" = "Sieci WIFi";
 "settings.hotspothelper.wifi.trust.title" = "Ochrona VPN WiFi";
 "settings.nmt.killswitch.disabled" = "Wyłącznik awaryjny  VPN jest obecnie wyłączony. co zapewnia prawidłowe działanie narzędzia do zarządzania siecią oraz możliwość ponownego podłączenia się przy zmianie sieci, wktywuj wyłącznik awaryjny  VPN w ustawieniach.";
+"settings.nmt.optout.disconnect.alerts" = "Ostrzeżenie o rezygnacji z potwierdzenia odłączenia";
+"settings.nmt.optout.disconnect.alerts.description" = "Wyłącza ostrzeżenie o odłączeniu od VPN.";
 "settings.reset.defaults.confirm.button" = "Resetuj";
 "settings.reset.defaults.confirm.message" = "Spowoduje to przywrócenie domyślnych ustawień aplikacji. Stracisz wszystkie wprowadzone zmiany.";
 "settings.reset.defaults.confirm.title" = "Resetuj ustawienia";

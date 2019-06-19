@@ -151,6 +151,8 @@
 "settings.hotspothelper.wifi.networks" = "WiFi-netværk";
 "settings.hotspothelper.wifi.trust.title" = "VPN WiFi-beskyttelse";
 "settings.nmt.killswitch.disabled" = "VPN kill-switch er for øjeblikket deaktiveret. For at sikre, at netværksstyringsværktøjet fungerer, og at du er i stand til at genoprette forbindelse, når du skifter netværk, skal du aktivere VPN kill-switch i dine indstillinger.";
+"settings.nmt.optout.disconnect.alerts" = "Frameld dig bekræftelsesalarm om afbrydelse";
+"settings.nmt.optout.disconnect.alerts.description" = "Deaktiverer advarselsalarmen, når du afbryder forbindelsen fra VPN'en.";
 "settings.reset.defaults.confirm.button" = "Nulstil";
 "settings.reset.defaults.confirm.message" = "Det fører appen tilbage til standard. Du vil miste alle dine ændringer.";
 "settings.reset.defaults.confirm.title" = "Nulstil indstillinger";

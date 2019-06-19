@@ -621,12 +621,12 @@ class SettingsViewController: AutolayoutViewController {
     @objc private func redisplaySettings() {
         var sections = SettingsViewController.allSections
         if !Flags.shared.enablesProtocolSelection {
-            sections.remove(at: sections.index(of: .connection)!)
-            sections.remove(at: sections.index(of: .encryption)!)
+            sections.remove(at: sections.firstIndex(of: .connection)!)
+            sections.remove(at: sections.firstIndex(of: .encryption)!)
         } else {
             if (pendingPreferences.vpnType == IPSecProfile.vpnType ||
                 pendingPreferences.vpnType == IKEv2Profile.vpnType) {
-                sections.remove(at: sections.index(of: .encryption)!)
+                sections.remove(at: sections.firstIndex(of: .encryption)!)
             }
         }
         if Flags.shared.enablesMACESetting {
@@ -647,13 +647,13 @@ class SettingsViewController: AutolayoutViewController {
         }
         
         if !Flags.shared.enablesContentBlockerSetting {
-            sections.remove(at: sections.index(of: .contentBlocker)!)
+            sections.remove(at: sections.firstIndex(of: .contentBlocker)!)
         }
         if (pendingPreferences.vpnType != PIATunnelProfile.vpnType) {
-            sections.remove(at: sections.index(of: .applicationInformation)!)
+            sections.remove(at: sections.firstIndex(of: .applicationInformation)!)
         }
         if !Flags.shared.enablesResetSettings {
-            sections.remove(at: sections.index(of: .reset)!)
+            sections.remove(at: sections.firstIndex(of: .reset)!)
         }
         if Flags.shared.enablesDevelopmentSettings {
             sections.append(.development)
@@ -1027,9 +1027,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         switch setting {
         case .vpnProtocolSelection:
             let options: [String] = [
+                IKEv2Profile.vpnType,
                 PIATunnelProfile.vpnType,
                 IPSecProfile.vpnType,
-                IKEv2Profile.vpnType,
             ]
             controller = OptionsViewController()
             controller?.options = options
