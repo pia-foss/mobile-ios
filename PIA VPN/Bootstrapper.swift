@@ -104,10 +104,30 @@ class Bootstrapper {
             PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build()
         ]
         
-        Client.configuration.setPlan(.yearly, forProductIdentifier: AppConstants.InApp.yearlyProductIdentifier)
-        Client.configuration.setPlan(.monthly, forProductIdentifier: AppConstants.InApp.monthlyProductIdentifier)
-        Client.configuration.setPlan(.legacyYearly, forProductIdentifier: AppConstants.LegacyInApp.yearlyProductIdentifier)
-        Client.configuration.setPlan(.legacyMonthly, forProductIdentifier: AppConstants.LegacyInApp.monthlyProductIdentifier)
+        Client.providers.accountProvider.updatePlanProductIdentifiers { [weak self] (products, error) in
+            
+            if let _ = error {
+                self?.setDefaultPlanProducts()
+            }
+            
+            if let products = products,
+                products.count > 0 {
+                for product in products {
+                    if product.legacy {
+                        if product.plan == .monthly {
+                            Client.configuration.setPlan(.legacyMonthly, forProductIdentifier: product.identifier)
+                        } else if product.plan == .yearly {
+                            Client.configuration.setPlan(.legacyYearly, forProductIdentifier: product.identifier)
+                        }
+                    } else {
+                        Client.configuration.setPlan(product.plan, forProductIdentifier: product.identifier)
+                    }
+                }
+            }
+
+            Client.refreshProducts()
+            
+        }
 
         if (self.isSimulator || Flags.shared.usesMockVPN) {
             Client.configuration.enablesConnectivityUpdates = false
@@ -149,8 +169,10 @@ class Bootstrapper {
         // Notifications
         
         let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(self.reloadTheme), name: .PIAThemeDidChange, object: nil)
-        nc.addObserver(self, selector: #selector(self.vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
+        nc.addObserver(self, selector: #selector(reloadTheme), name: .PIAThemeDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
+        nc.addObserver(self, selector: #selector(internetUnreachable(notification:)), name: .ConnectivityDaemonDidGetUnreachable, object: nil)
+        nc.addObserver(self, selector: #selector(internetReachable(notification:)), name: .ConnectivityDaemonDidGetReachable, object: nil)
         
         // PIALibrary (Theme)
         
@@ -161,6 +183,13 @@ class Bootstrapper {
             AppPreferences.shared.wasLaunched = true
         }
 
+    }
+    
+    private func setDefaultPlanProducts() {
+        Client.configuration.setPlan(.yearly, forProductIdentifier: AppConstants.InApp.yearlyProductIdentifier)
+        Client.configuration.setPlan(.monthly, forProductIdentifier: AppConstants.InApp.monthlyProductIdentifier)
+        Client.configuration.setPlan(.legacyYearly, forProductIdentifier: AppConstants.LegacyInApp.yearlyProductIdentifier)
+        Client.configuration.setPlan(.legacyMonthly, forProductIdentifier: AppConstants.LegacyInApp.monthlyProductIdentifier)
     }
 
     func dispose() {
@@ -179,5 +208,14 @@ class Bootstrapper {
             return
         }
         iRate.sharedInstance()!.logEvent(false)
+    }
+    
+    @objc private func internetReachable(notification: Notification) {
+        Macros.removeStickyNote()
+    }
+    
+    @objc private func internetUnreachable(notification: Notification) {
+        Macros.displayStickyNote(withMessage: L10n.Global.unreachable,
+                                 andImage: Asset.iconWarning.image)
     }
 }

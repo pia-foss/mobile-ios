@@ -11,6 +11,7 @@ import PIALibrary
 
 class WalkthroughViewController: AutolayoutViewController {
     @IBOutlet private weak var scrollContent: UIScrollView!
+    @IBOutlet private weak var scrollBackground: UIImageView!
 
     @IBOutlet private weak var viewContent: UIView!
     
@@ -138,8 +139,10 @@ class WalkthroughViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        Theme.current.applyHighlightedText(buttonSkip)
-        Theme.current.applyHighlightedText(buttonNext)
+        Theme.current.applyPrincipalBackground(view)
+        Theme.current.applyScrollableMap(scrollBackground)
+        Theme.current.applyButtonLabelStyle(buttonSkip)
+        Theme.current.applyButtonLabelStyle(buttonNext)
         Theme.current.applyPageControl(pageControl)
     }
 }

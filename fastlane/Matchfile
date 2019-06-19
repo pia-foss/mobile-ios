@@ -14,7 +14,8 @@ app_identifier [
     "com.privateinternetaccess.ios.PIA-VPN",
     "com.privateinternetaccess.ios.PIA-VPN.Tunnel",
     "com.privateinternetaccess.ios.PIA-VPN.Widget",
-    "com.privateinternetaccess.ios.PIA-VPN.AdBlocker"
+    "com.privateinternetaccess.ios.PIA-VPN.AdBlocker",
+    "com.privateinternetaccess.ios.PIA-VPN.PIAWidget"
 ]
 
 # For all available options run `fastlane match --help`

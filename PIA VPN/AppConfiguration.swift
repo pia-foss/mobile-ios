@@ -18,14 +18,14 @@ struct AppConfiguration {
     }
     
     struct About {
-        static let copyright = "2014-2018"
+        static let copyright = "2014-2019"
 
         static let companyName = "London Trust Media, Inc."
     }
     
     struct Welcome {
-        static func defaultPreset() -> PIAWelcomeViewController.Preset {
-            var preset = PIAWelcomeViewController.Preset()
+        static func defaultPreset() -> Preset {
+            var preset = Preset()
             guard Flags.shared.customizesWelcomePreset else {
                 return preset
             }

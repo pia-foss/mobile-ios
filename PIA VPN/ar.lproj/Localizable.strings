@@ -37,8 +37,10 @@
 "dashboard.vpn.changing_region" = "جارٍ تغيير المنطقة...";
 "dashboard.vpn.connected" = "تم الاتصال بـ VPN";
 "dashboard.vpn.connecting" = "جارٍ الاتصال...";
+"dashboard.vpn.disconnect.untrusted" = "هذه الشبكة غير موثوقة. هل تريد حقًا قطع اتصال VPN؟";
 "dashboard.vpn.disconnected" = "تم قطع الاتصال";
 "dashboard.vpn.disconnecting" = "جارٍ قطع الاتصال...";
+"dashboard.vpn.on" = "VPN: تشغيل";
 "expiration.message" = "سينتهي اشتراكك قريبًا. قم بتجديده لتبقى محميًا.";
 "expiration.title" = "تجديد";
 "global.automatic" = "تلقائي";
@@ -47,14 +49,17 @@
 "global.close" = "إغلاق";
 "global.disabled" = "معطل";
 "global.edit" = "تحرير";
+"global.enable" = "تمكين";
 "global.enabled" = "ممكّن";
 "global.error" = "خطأ";
 "global.ok" = "موافق";
 "global.optional" = "اختياري";
 "global.required" = "مطلوب";
+"global.unreachable" = "لم يتم العثور على اتصال بالإنترنت. يرجى التأكيد أن لديك اتصال بالإنترنت.";
 "global.update" = "تحديث";
 "hotspothelper.display.name" = "🔒 قم بتنشيط حماية VPN WiFi في إعدادات PIA لتأمين هذا الاتصال.";
 "hotspothelper.display.protected.name" = "🔒 حماية VPN WiFi من PIA نشطة - نحن نحمي ظهرك.";
+"menu.accessibility.edit.tile" = "تحرير";
 "menu.accessibility.item" = "القائمة";
 "menu.accessibility.logged_as" = "تم تسجيل الدخول باسم %@";
 "menu.expiration.days" = "%d يوم/أيام";
@@ -82,6 +87,12 @@
 "notifications.disabled.message" = "قم بتمكين الإعلامات لكي يتم تذكيرك بتجديد اشتراكك قبل انتهائه.";
 "notifications.disabled.settings" = "الإعدادات";
 "notifications.disabled.title" = "تم تعطيل الإشعارات";
+"region.accessibility.filter" = "تصفية";
+"region.filter.favorites" = "المفضلة";
+"region.filter.latency" = "زمن الانتقال";
+"region.filter.name" = "الاسم";
+"region.filter.sortby" = "فرز المناطق حسب";
+"region.search.placeholder" = "بحث عن المنطقة";
 "renewal.failure.message" = "تعذر إرسال إيصال الشراء، يرجى إعادة المحاولة في وقت لاحق.";
 "renewal.success.message" = "تم تجديد حسابك بنجاح.";
 "renewal.success.title" = "شكرًا لك";
@@ -93,6 +104,7 @@
 "settings.application_information.debug.success.title" = "تم إرسال معلومات تتبع الأخطاء";
 "settings.application_information.debug.title" = "إرسال تتبع الأخطاء إلى الدعم";
 "settings.application_information.title" = "معلومات التطبيق";
+"settings.application_settings.active_theme.title" = "النسق النشط";
 "settings.application_settings.dark_theme.title" = "النسق الداكن";
 "settings.application_settings.kill_switch.footer" = "يؤدي استخدام مفتاح إيقاف VPN إلى تعطيل اتصالك بالإنترنت إذا كان الـ VPN في وضع إعادة الاتصال. لا ينطبق ذلك ذلك على الاتصال اليدوي.";
 "settings.application_settings.kill_switch.title" = "مفتاح إيقاف VPN";
@@ -129,15 +141,16 @@
 "settings.hotspothelper.all.title" = "حماية كل الشبكات";
 "settings.hotspothelper.available.add.help" = "اضغط + للإضافة إلى الشبكات الموثوقة.";
 "settings.hotspothelper.available.help" = "لتعبئة هذه القائمة، انتقل إلى إعدادات iOS > WiFi.";
-"settings.hotspothelper.cellular.description" = "إذا تم تعطيل هذا الخيار، سيمكّن PIA خدمة VPN تلقائيًا عند الاتصال بالشبكات الخلوية.";
+"settings.hotspothelper.cellular.description" = "إذا تم تمكين هذا الخيار، سيمكّن PIA خدمة VPN تلقائيًا عند الاتصال بالشبكات الخلوية.";
 "settings.hotspothelper.cellular.networks" = "الشبكات الخلوية";
-"settings.hotspothelper.cellular.title" = "وثوق في الشبكات الخلوية";
-"settings.hotspothelper.description" = "قم بتكوين سلوك PIA عند الاتصال بشبكات WiFi أو الشبكات الخلوية.";
+"settings.hotspothelper.cellular.title" = "حماية على الشبكات الخلوية";
+"settings.hotspothelper.description" = "قم بتكوين سلوك PIA عند الاتصال بشبكات WiFi أو الشبكات الخلوية. هذا مستثنى منه قطع الاتصال يدويًا.";
 "settings.hotspothelper.enable.description" = "إذا تم تمكين هذا الخيار، ستمكّن PIA خدمة VPN تلقائيًا عند الاتصال بشبكات WiFi غير الموثوقة.";
 "settings.hotspothelper.rules.title" = "القواعد";
 "settings.hotspothelper.title" = "أداة إدارة الشبكات";
 "settings.hotspothelper.wifi.networks" = "شبكات WiFi";
 "settings.hotspothelper.wifi.trust.title" = "حماية VPN WiFi";
+"settings.nmt.killswitch.disabled" = "مفتاح قطع اتصال VPN معطّل حاليًا. للتأكد من أن أداة إدارة الشبكة تعمل، وأنك قادر على إعادة الاتصال عند التبديل بين الشبكات، يرجى تمكين مفتاح قطع اتصال VPN في الإعدادات.";
 "settings.reset.defaults.confirm.button" = "إعادة تعيين";
 "settings.reset.defaults.confirm.message" = "سيؤدي هذا الإجراء إلى عودة التطبيق إلى حالته الافتراضية وستفقد كل التغييرات التي أجريتها.";
 "settings.reset.defaults.confirm.title" = "إعادة تعيين الإعدادات";
@@ -150,13 +163,36 @@
 "settings.trusted.networks.sections.current" = "الشبكة الحالية";
 "settings.trusted.networks.sections.trusted" = "الشبكات الموثوقة";
 "settings.trusted.networks.sections.trusted.rule.action" = "قطع الاتصال من PIA VPN";
-"settings.trusted.networks.sections.trusted.rule.description" = "تنفيذ الإجراءات عند الاتصال بشبكات موثوقة.";
+"settings.trusted.networks.sections.trusted.rule.description" = "قم بتمكين هذه الميزة، مع تمكين مفتاح قطع اتصال VPN، لتخصيص سلوك PIA على شبكات WiFi والشبكات الخلوية. يرجى العلم، سيتم تعطيل وظيفة أداة إدارة الشبكة في حالة قطع الاتصال يدويًا.";
 "settings.trusted.networks.sections.untrusted" = "شبكات غير موثوقة";
 "shortcuts.connect" = "اتصال";
 "shortcuts.disconnect" = "قطع الاتصال";
 "shortcuts.select_region" = "حدّد منطقة";
+"siri.shortcuts.add.error" = "حدث خطأ أثناء إضافة اختصار Siri. يرجى إعادة المحاولة.";
+"siri.shortcuts.connect.row.title" = "اتصال اختصار Siri";
+"siri.shortcuts.connect.title" = "اتصال PIA VPN";
+"siri.shortcuts.disconnect.row.title" = "قطع اتصال اختصار Siri";
+"siri.shortcuts.disconnect.title" = "قطع اتصال PIA VPN";
+"tiles.favorite.servers.title" = "الخوادم المفضلة";
+"tiles.nmt.accessibility.trusted" = "شبكة موثوقة";
+"tiles.nmt.accessibility.untrusted" = "شبكة غير موثوقة";
+"tiles.nmt.cellular" = "خلوية";
+"tiles.quick.connect.title" = "الخوادم الأخيرة";
+"tiles.quicksetting.nmt.title" = "إدارة الشبكات";
+"tiles.quicksettings.title" = "إعدادات سريعة";
+"tiles.region.title" = "خادم VPN";
+"tiles.subscription.days.left" = "(متبقي %d أيام)";
+"tiles.subscription.monthly" = "شهريًا";
+"tiles.subscription.title" = "الاشتراك";
+"tiles.subscription.trial" = "تجريبي";
+"tiles.subscription.yearly" = "سنويًا";
+"tiles.usage.download" = "تنزيل";
+"tiles.usage.ipsec.title" = "الاستخدام (معطل عند عدم استخدام OpenVPN)";
+"tiles.usage.title" = "الاستخدام";
+"tiles.usage.upload" = "تحميل";
+"today.widget.login" = "تسجيل الدخول";
 "vpn_permission.body.footer" = "نحن لا نقوم بمراقبة أو تصفية أو تسجيل أي نشاط على الشبكة.";
-"vpn_permission.body.subtitle" = "للمتابعة اضغط \"%@\".";
+"vpn_permission.body.subtitle" = "سترى مطالبة من PIA VPN وتحتاج إلى السماح بالوصول إلى تكوينات VPN. للمتابعة اضغط على \"%@\".";
 "vpn_permission.body.title" = "يحتاج PIA إلى الوصول إلى تكوينات VPN لتأمين حركة مرورك.";
 "vpn_permission.disallow.contact" = "اتصال";
 "vpn_permission.disallow.message.basic" = "نحن بحاجة إلى هذا الإذن ليعمل التطبيق.";
@@ -165,8 +201,8 @@
 "walkthrough.action.done" = "تم";
 "walkthrough.action.next" = "التالي";
 "walkthrough.action.skip" = "تخطي";
-"walkthrough.page.1.description" = "احمي نفسك على ما يصل إلى 5 أجهزة في وقت واحد.";
-"walkthrough.page.1.title" = "يدعم 5 أجهزة في المرة الواحدة";
+"walkthrough.page.1.description" = "احمي نفسك على ما يصل إلى 10 أجهزة في وقت واحد.";
+"walkthrough.page.1.title" = "يدعم 10 أجهزة في المرة الواحدة";
 "walkthrough.page.2.description" = "مع خوادم في جميع أنحاء العالم، أنت دائما تحت الحماية.";
 "walkthrough.page.2.title" = "اتصل بأي منطقة بسهولة";
 "walkthrough.page.3.description" = "تمكين ميزة حظر المحتوى يمنع الإعلانات من الظهور في Safari.";

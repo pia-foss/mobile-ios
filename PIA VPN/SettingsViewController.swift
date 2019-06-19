@@ -11,6 +11,8 @@ import PIALibrary
 import PIATunnel
 import SafariServices
 import SwiftyBeaver
+import Intents
+import IntentsUI
 
 private let log = SwiftyBeaver.self
 
@@ -41,6 +43,10 @@ enum Setting: Int {
     case automaticReconnection
 
     case trustedNetworks
+
+    case connectShortcut
+
+    case disconnectShortcut
 
     case contentBlockerState
     
@@ -161,6 +167,7 @@ class SettingsViewController: AutolayoutViewController {
     
     private struct Cells {
         static let setting = "SettingCell"
+        static let footer = "FooterCell"
     }
     
     @IBOutlet private weak var tableView: UITableView!
@@ -174,6 +181,10 @@ class SettingsViewController: AutolayoutViewController {
     private lazy var switchContentBlocker = FakeSwitch()
     
     private lazy var switchDarkMode = UISwitch()
+    
+    private lazy var switchConnectSiriShortcuts = UISwitch()
+
+    private lazy var switchDisconnectSiriShortcuts = UISwitch()
 
     private lazy var imvSelectedOption = UIImageView(image: Asset.accessorySelected.image)
 
@@ -209,7 +220,6 @@ class SettingsViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        title = L10n.Menu.Item.settings
 //        buttonConfirm.isEnabled = false
 //        navigationItem.rightBarButtonItem = buttonConfirm
         
@@ -227,7 +237,7 @@ class SettingsViewController: AutolayoutViewController {
         validateDNSList()
 
         if #available(iOS 11, *) {
-            tableView.sectionFooterHeight = UITableViewAutomaticDimension
+            tableView.sectionFooterHeight = UITableView.automaticDimension
             tableView.estimatedSectionFooterHeight = 1.0
         }
         switchPersistent.addTarget(self, action: #selector(togglePersistentConnection(_:)), for: .valueChanged)
@@ -235,14 +245,22 @@ class SettingsViewController: AutolayoutViewController {
 //        switchContentBlocker.isGrayed = true
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
         switchDarkMode.addTarget(self, action: #selector(toggleDarkMode(_:)), for: .valueChanged)
+        switchConnectSiriShortcuts.addTarget(self, action: #selector(toggleConnectSiriShortcuts(_:)), for: .valueChanged)
+        switchDisconnectSiriShortcuts.addTarget(self, action: #selector(toggleDisconnectSiriShortcuts(_:)), for: .valueChanged)
         redisplaySettings()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshContentBlockerState), name: .UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshContentBlockerState), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshPersistentConnectionValue),
+                                               name: .PIAPersistentConnectionSettingHaveChanged,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refreshContentBlockerState()
+        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -263,6 +281,8 @@ class SettingsViewController: AutolayoutViewController {
                     customDNSSettingsVC.secondaryDNSValue = ips.last
                 }
             }
+        } else if let trustedNetworksVC = segue.destination as? TrustedNetworksViewController {
+            trustedNetworksVC.persistentConnectionValue = pendingPreferences.isPersistentConnection
         }
     }
     
@@ -283,10 +303,68 @@ class SettingsViewController: AutolayoutViewController {
         reportUpdatedPreferences()
     }
     
+    @objc private func viewHasRotated() {
+        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
+    }
+
     // XXX: no need to bufferize app preferences
     @objc private func toggleDarkMode(_ sender: UISwitch) {
         AppPreferences.shared.transitionTheme(to: sender.isOn ? .dark : .light)
     }
+    
+    @objc private func toggleConnectSiriShortcuts(_ sender: UISwitch) {
+        if #available(iOS 12.0, *) {
+            
+            if AppPreferences.shared.useConnectSiriShortcuts {
+                if let shortcut = AppPreferences.shared.connectShortcut {
+                    let vc = INUIEditVoiceShortcutViewController(voiceShortcut: shortcut)
+                    vc.delegate = self
+                    present(vc, animated: true, completion: nil)
+                }
+            } else {
+                let connectActivity = NSUserActivity(activityType: AppConstants.SiriShortcuts.shortcutConnect)
+                connectActivity.title = L10n.Siri.Shortcuts.Connect.title
+                connectActivity.isEligibleForSearch = true
+                connectActivity.isEligibleForPrediction = true
+                connectActivity.persistentIdentifier = NSUserActivityPersistentIdentifier(AppConstants.SiriShortcuts.shortcutConnect)
+                let connectShortcut = INShortcut(userActivity: connectActivity)
+                
+                let vc = INUIAddVoiceShortcutViewController(shortcut: connectShortcut)
+                vc.delegate = self
+                present(vc, animated: true, completion: nil)
+            }
+
+            tableView.reloadData()
+        }
+    }
+    
+    @objc private func toggleDisconnectSiriShortcuts(_ sender: UISwitch) {
+        if #available(iOS 12.0, *) {
+            
+            if AppPreferences.shared.useDisconnectSiriShortcuts {
+                if let shortcut = AppPreferences.shared.disconnectShortcut {
+                    let vc = INUIEditVoiceShortcutViewController(voiceShortcut: shortcut)
+                    vc.delegate = self
+                    present(vc, animated: true, completion: nil)
+                }
+            } else {
+                let disconnectActivity = NSUserActivity(activityType: AppConstants.SiriShortcuts.shortcutDisconnect)
+                disconnectActivity.title = L10n.Siri.Shortcuts.Disconnect.title
+                disconnectActivity.isEligibleForSearch = true
+                disconnectActivity.isEligibleForPrediction = true
+                disconnectActivity.persistentIdentifier = NSUserActivityPersistentIdentifier(AppConstants.SiriShortcuts.shortcutDisconnect)
+                let disconnectShortcut = INShortcut(userActivity: disconnectActivity)
+                
+                let vc = INUIAddVoiceShortcutViewController(shortcut: disconnectShortcut)
+                vc.delegate = self
+                present(vc, animated: true, completion: nil)
+            }
+            
+            tableView.reloadData()
+
+        }
+    }
+
     
     @objc private func showContentBlockerTutorial() {
         perform(segue: StoryboardSegue.Main.contentBlockerSegueIdentifier)
@@ -294,13 +372,12 @@ class SettingsViewController: AutolayoutViewController {
 
     @objc private func refreshContentBlockerState(withHUD: Bool = false) {
         if #available(iOS 10, *) {
-            var hud: HUD?
             if withHUD {
-                hud = HUD()
+                self.showLoadingAnimation()
             }
             SFContentBlockerManager.getStateOfContentBlocker(withIdentifier: AppConstants.Extensions.adBlockerBundleIdentifier) { (state, error) in
                 DispatchQueue.main.async {
-                    hud?.hide()
+                    self.hideLoadingAnimation()
                     
                     self.isContentBlockerEnabled = state?.isEnabled ?? false
                     self.redisplaySettings()
@@ -309,34 +386,36 @@ class SettingsViewController: AutolayoutViewController {
         }
     }
     
+    @objc private func refreshPersistentConnectionValue() {
+        pendingPreferences.isPersistentConnection = Client.preferences.isPersistentConnection
+        tableView.reloadData()
+    }
+    
     private func refreshContentBlockerRules() {
-        let hud = HUD()
+        self.showLoadingAnimation()
         SFContentBlockerManager.reloadContentBlocker(withIdentifier: AppConstants.Extensions.adBlockerBundleIdentifier) { (error) in
             if let error = error {
                 log.error("Could not reload Safari Content Blocker: \(error)")
             }
             DispatchQueue.main.async {
-                hud.hide()
+                self.hideLoadingAnimation()
             }
         }
     }
     
     private func submitTunnelLog() {
-        let hud = HUD()
+        self.showLoadingAnimation()
         
         Client.providers.vpnProvider.submitLog { (log, error) in
-            hud.hide()
+            self.hideLoadingAnimation()
             
             let title: String
             let message: String
         
             defer {
                 let alert = Macros.alert(title, message)
-                alert.addCancelAction(L10n.Global.ok)
+                alert.addDefaultAction(L10n.Global.ok)
                 self.present(alert, animated: true, completion: nil)
-                
-//                UIActivityViewController *vc = [[UIActivityViewController alloc] initWithActivityItems:@[log] applicationActivities:nil];
-//                [self presentViewController:vc animated:YES completion:NULL];
             }
             
             guard let log = log else {
@@ -360,7 +439,7 @@ class SettingsViewController: AutolayoutViewController {
             L10n.Settings.Reset.Defaults.Confirm.title,
             L10n.Settings.Reset.Defaults.Confirm.message
         )
-        alert.addDestructiveAction(L10n.Settings.Reset.Defaults.Confirm.button) {
+        alert.addDestructiveActionWithTitle(L10n.Settings.Reset.Defaults.Confirm.button) {
             self.doReset()
         }
         alert.addCancelAction(L10n.Global.cancel)
@@ -416,7 +495,7 @@ class SettingsViewController: AutolayoutViewController {
         
         let isDisconnected = (Client.providers.vpnProvider.vpnStatus == .disconnected)
         let completionHandlerAfterVPNAction: (Bool) -> Void = { (shouldReconnect) in
-            let hud = HUD()
+            self.showLoadingAnimation()
             action.execute { (error) in
                 self.pendingVPNAction = nil
                 
@@ -425,11 +504,11 @@ class SettingsViewController: AutolayoutViewController {
                 if shouldReconnect && !isDisconnected {
                     Client.providers.vpnProvider.reconnect(after: nil) { (error) in
                         completionHandler()
-                        hud.hide()
+                        self.hideLoadingAnimation()
                     }
                 } else {
                     completionHandler()
-                    hud.hide()
+                    self.hideLoadingAnimation()
                 }
             }
         }
@@ -449,15 +528,15 @@ class SettingsViewController: AutolayoutViewController {
             )
 
             // reconnect -> reconnect VPN and close
-            alert.addDefaultAction(L10n.Settings.Commit.Buttons.reconnect) {
+            alert.addActionWithTitle(L10n.Settings.Commit.Buttons.reconnect) {
                 self.commitPreferences()
                 completionHandlerAfterVPNAction(true)
             }
 
             // cancel -> revert changes and close
-            alert.addAction(UIAlertAction(title: L10n.Global.cancel, style: .cancel) { (action) in
+            alert.addCancelActionWithTitle(L10n.Global.cancel) {
                 completionHandler()
-            })
+            }
             present(alert, animated: true, completion: nil)
             return
         }
@@ -472,14 +551,15 @@ class SettingsViewController: AutolayoutViewController {
             )
 
             // reconnect -> reconnect VPN and close
-            alert.addDefaultAction(L10n.Settings.Commit.Buttons.reconnect) {
+            alert.addActionWithTitle(L10n.Settings.Commit.Buttons.reconnect) {
                 completionHandlerAfterVPNAction(true)
             }
 
             // later -> close
-            alert.addAction(UIAlertAction(title: L10n.Settings.Commit.Buttons.later, style: .cancel) { (action) in
+            alert.addCancelActionWithTitle(L10n.Settings.Commit.Buttons.later) {
                 completionHandler()
-            })
+            }
+
             present(alert, animated: true, completion: nil)
             return
         }
@@ -493,11 +573,11 @@ class SettingsViewController: AutolayoutViewController {
         AppPreferences.shared.piaSocketType = pendingOpenVPNSocketType
         //Update with values from Trusted Network Settings
         pendingPreferences.trustedNetworks = Client.preferences.trustedNetworks
+        pendingPreferences.nmtRulesEnabled = Client.preferences.nmtRulesEnabled
         pendingPreferences.availableNetworks = Client.preferences.availableNetworks
         pendingPreferences.shouldConnectForAllNetworks = Client.preferences.shouldConnectForAllNetworks
         pendingPreferences.useWiFiProtection = Client.preferences.useWiFiProtection
         pendingPreferences.trustCellularData = Client.preferences.trustCellularData
-        pendingPreferences.disconnectOnTrusted = Client.preferences.disconnectOnTrusted
         pendingPreferences.commit()
     }
     
@@ -531,7 +611,7 @@ class SettingsViewController: AutolayoutViewController {
             }
             
             let alert = Macros.alert(nil, addresses.joined(separator: ","))
-            alert.addCancelAction(L10n.Global.close)
+            alert.addDefaultAction(L10n.Global.close)
             self.present(alert, animated: true, completion: nil)
         }
     }
@@ -561,6 +641,11 @@ class SettingsViewController: AutolayoutViewController {
                 .automaticReconnection,
             ]
         }
+        
+        if #available(iOS 12.0, *) {
+            rowsBySection[.applicationSettings]?.insert(contentsOf: [.connectShortcut, .disconnectShortcut], at: 0)
+        }
+        
         if !Flags.shared.enablesContentBlockerSetting {
             sections.remove(at: sections.index(of: .contentBlocker)!)
         }
@@ -599,6 +684,7 @@ class SettingsViewController: AutolayoutViewController {
     
     override func dismissModal() {
         commitChanges {
+            Macros.postNotification(.PIASettingsHaveChanged)
             super.dismissModal()
         }
     }
@@ -608,13 +694,16 @@ class SettingsViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
+        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
-            Theme.current.applyLightBackground(viewContainer)
+            Theme.current.applyPrincipalBackground(view)
+            Theme.current.applyPrincipalBackground(viewContainer)
         }
-        Theme.current.applyLightBackground(tableView)
+        Theme.current.applyPrincipalBackground(tableView)
         Theme.current.applyDividerToSeparator(tableView)
         tableView.reloadData()
+        
     }
     
     ///Check if the current value of the DNS is valid. If not, reset to default PIA server
@@ -672,31 +761,43 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
 
-    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        switch visibleSections[section] {
-        case .applicationSettings:
-            var footer: [String] = [
-                L10n.Settings.ApplicationSettings.KillSwitch.footer
-            ]
-            if Flags.shared.enablesMACESetting {
-                footer.append(L10n.Settings.ApplicationSettings.Mace.footer)
-            }
-            return footer.joined(separator: "\n\n")
-
-        case .autoConnectSettings:
-            return L10n.Settings.Hotspothelper.description
-            
-        case .reset:
-            return L10n.Settings.Reset.footer
-            
-        case .contentBlocker:
-            return L10n.Settings.ContentBlocker.footer
-
-        default:
-            break
-        }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
+        if let cell = tableView.dequeueReusableCell(withIdentifier: Cells.footer) {
+            cell.textLabel?.numberOfLines = 0
+            cell.textLabel?.style(style: TextStyle.textStyle21)
+            
+            switch visibleSections[section] {
+            case .applicationSettings:
+                var footer: [String] = [
+                    L10n.Settings.ApplicationSettings.KillSwitch.footer
+                ]
+                if Flags.shared.enablesMACESetting {
+                    footer.append(L10n.Settings.ApplicationSettings.Mace.footer)
+                }
+                cell.textLabel?.text = footer.joined(separator: "\n\n")
+
+            case .autoConnectSettings:
+                cell.textLabel?.text =  L10n.Settings.Hotspothelper.description
+
+            case .reset:
+                cell.textLabel?.text = L10n.Settings.Reset.footer
+                
+            case .contentBlocker:
+                cell.textLabel?.text = L10n.Settings.ContentBlocker.footer
+                
+            default:
+                return nil
+            }
+            
+            return cell
+        }
         return nil
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -840,6 +941,20 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.selectionStyle = .none
             switchDarkMode.isOn = (AppPreferences.shared.currentThemeCode == .dark)
 
+        case .connectShortcut:
+            cell.textLabel?.text = L10n.Siri.Shortcuts.Connect.Row.title
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchConnectSiriShortcuts
+            cell.selectionStyle = .none
+            switchConnectSiriShortcuts.isOn = AppPreferences.shared.useConnectSiriShortcuts
+
+        case .disconnectShortcut:
+            cell.textLabel?.text = L10n.Siri.Shortcuts.Disconnect.Row.title
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchDisconnectSiriShortcuts
+            cell.selectionStyle = .none
+            switchDisconnectSiriShortcuts.isOn = AppPreferences.shared.useDisconnectSiriShortcuts
+
         case .sendDebugLog:
             cell.textLabel?.text = L10n.Settings.ApplicationInformation.Debug.title
             cell.detailTextLabel?.text = nil
@@ -864,6 +979,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.textLabel?.text = "Resolve google-analytics.com"
             cell.detailTextLabel?.text = nil
             
+        case .trustedNetworks:
+            cell.textLabel?.text = L10n.Settings.Hotspothelper.title
+            cell.detailTextLabel?.text = nil
+
         case .publicUsername:
             cell.textLabel?.text = "Public username"
             cell.detailTextLabel?.text = Client.providers.accountProvider.publicUsername ?? ""
@@ -876,13 +995,23 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.textLabel?.text = "Password"
             cell.detailTextLabel?.text = Client.providers.accountProvider.currentUser?.credentials.password ?? ""
             cell.accessoryType = .none
-        case .trustedNetworks:
-            cell.textLabel?.text = L10n.Settings.Hotspothelper.title
-            cell.detailTextLabel?.text = nil
+
         }
 
-        Theme.current.applySolidLightBackground(cell)
-        Theme.current.applyDetailTableCell(cell)
+        Theme.current.applySecondaryBackground(cell)
+        if let textLabel = cell.textLabel {
+            Theme.current.applySettingsCellTitle(textLabel,
+                                                 appearance: .dark)
+            textLabel.backgroundColor = .clear
+        }
+        if let detailLabel = cell.detailTextLabel {
+            Theme.current.applySubtitle(detailLabel)
+            detailLabel.backgroundColor = .clear
+        }
+        
+        let backgroundView = UIView()
+        Theme.current.applyPrincipalBackground(backgroundView)
+        cell.selectedBackgroundView = backgroundView
 
         return cell
     }
@@ -1063,18 +1192,19 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         Theme.current.applyTableSectionHeader(view)
     }
-
+    
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         Theme.current.applyTableSectionFooter(view)
     }
+
 }
 
 extension SettingsViewController: OptionsViewControllerDelegate {
     func backgroundColorForOptionsController(_ controller: OptionsViewController) -> UIColor {
-        return Theme.current.palette.lightBackground
+        return Theme.current.palette.principalBackground
     }
     
-    func tableStyleForOptionsController(_ controller: OptionsViewController) -> UITableViewStyle {
+    func tableStyleForOptionsController(_ controller: OptionsViewController) -> UITableView.Style {
         return .grouped
     }
     
@@ -1163,7 +1293,11 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             }
         }
         
-        Theme.current.applySolidLightBackground(cell)
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = Theme.current.palette.principalBackground
+        cell.selectedBackgroundView = backgroundView
+
+        Theme.current.applySecondaryBackground(cell)
         Theme.current.applyDetailTableCell(cell)
     }
 
@@ -1250,15 +1384,10 @@ extension SettingsViewController: OptionsViewControllerDelegate {
                 if !isFound && option == DNSList.CUSTOM_DNS_KEY {
                     let alertController = Macros.alert(L10n.Settings.Dns.Custom.dns,
                                                        L10n.Settings.Dns.Alert.Create.message)
-                    let saveAction = UIAlertAction(title: L10n.Global.ok, style: UIAlertActionStyle.default, handler: { alert -> Void in
+                    alertController.addActionWithTitle(L10n.Global.ok) {
                         self.perform(segue: StoryboardSegue.Main.customDNSSegueIdentifier)
-                    })
-                    let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: UIAlertActionStyle.default,
-                                                     handler: nil)
-                    
-                    alertController.addAction(saveAction)
-                    alertController.addAction(cancelAction)
-                    
+                    }
+                    alertController.addCancelAction(L10n.Global.cancel)
                     self.present(alertController,
                                  animated: true,
                                  completion: nil)
@@ -1334,4 +1463,78 @@ extension SettingsViewController: SettingsViewControllerDelegate {
 
     }
     
+}
+
+@available(iOS 12.0, *)
+extension SettingsViewController: INUIAddVoiceShortcutViewControllerDelegate {
+
+    func addVoiceShortcutViewController(
+        _ controller: INUIAddVoiceShortcutViewController,
+        didFinishWith voiceShortcut: INVoiceShortcut?,
+        error: Error?
+        ) {
+        if let _ = error {
+            let message = L10n.Siri.Shortcuts.Add.error
+            let alert = Macros.alert(nil, message)
+            alert.addCancelActionWithTitle(L10n.Global.cancel) {
+                self.dismiss(animated: true, completion: nil)
+            }
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            if let activityType = voiceShortcut?.shortcut.userActivity?.activityType {
+                if activityType == AppConstants.SiriShortcuts.shortcutConnect {
+                    AppPreferences.shared.useConnectSiriShortcuts = true
+                    AppPreferences.shared.connectShortcut = voiceShortcut
+                } else {
+                    AppPreferences.shared.useDisconnectSiriShortcuts = true
+                    AppPreferences.shared.disconnectShortcut = voiceShortcut
+                }
+            }
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+
+    func addVoiceShortcutViewControllerDidCancel(
+        _ controller: INUIAddVoiceShortcutViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+@available(iOS 12.0, *)
+extension SettingsViewController: INUIEditVoiceShortcutViewControllerDelegate {
+    
+    func editVoiceShortcutViewController(_ controller: INUIEditVoiceShortcutViewController, didUpdate voiceShortcut: INVoiceShortcut?, error: Error?) {
+        if let error = error as? INIntentError {
+            if let errorDescription = error.userInfo["NSDebugDescription"] as? String,
+                let connectIdentifier = AppPreferences.shared.connectShortcut?.identifier.uuidString,
+                errorDescription.contains(connectIdentifier) {
+                AppPreferences.shared.useConnectSiriShortcuts = false
+                AppPreferences.shared.connectShortcut = nil
+            } else if let errorDescription = error.userInfo["NSDebugDescription"] as? String,
+                let disconnectIdentifier = AppPreferences.shared.disconnectShortcut?.identifier.uuidString,
+                errorDescription.contains(disconnectIdentifier) {
+                AppPreferences.shared.useDisconnectSiriShortcuts = false
+                AppPreferences.shared.disconnectShortcut = nil
+            }
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func editVoiceShortcutViewController(_ controller: INUIEditVoiceShortcutViewController, didDeleteVoiceShortcutWithIdentifier deletedVoiceShortcutIdentifier: UUID) {
+        if deletedVoiceShortcutIdentifier == AppPreferences.shared.connectShortcut?.identifier {
+            AppPreferences.shared.useConnectSiriShortcuts = false
+            AppPreferences.shared.connectShortcut = nil
+        } else {
+            AppPreferences.shared.useDisconnectSiriShortcuts = false
+            AppPreferences.shared.disconnectShortcut = nil
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func editVoiceShortcutViewControllerDidCancel(_ controller: INUIEditVoiceShortcutViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+
 }

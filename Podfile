@@ -1,6 +1,9 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '9.0'
+platform :ios, '10.0'
 use_frameworks!
+
+# ignore all warnings from all pods
+inhibit_all_warnings!
 
 # Libraries
 
@@ -53,7 +56,7 @@ end
 def shared_main_pods
     pod 'AlamofireImage'
     #library_by_path('')
-    library_by_git('fce1383')
+    library_by_git('b5b2f07')
     #library_by_version('~> 1.1.3')
 end
 
@@ -63,12 +66,13 @@ def app_pods
     pod 'TPKeyboardAvoiding'
     pod 'SideMenu', '= 3.1.5'
     pod 'FXPageControl'
-    pod 'MBProgressHUD'
+    pod 'DZNEmptyDataSet'
+    pod 'PopupDialog'
 end
 
 def tunnel_pods
-    #tunnel_by_path('..')
-    tunnel_by_git('269d6d1')
+    #tunnel_by_path('')
+    tunnel_by_git('b0d7496')
     #tunnel_by_version('~> 1.1.6')
 end
 
@@ -97,4 +101,19 @@ target 'PIA VPNTests' do
     pod 'Firebase/Core'
     pod 'Crashlytics'
     pod 'Fabric'
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        if ['PopupDialog'].include? target.name
+            target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '4.2'
+            end
+        end
+        if ['SwiftEntryKit', 'QuickLayout', 'SideMenu'].include? target.name
+            target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '4.0'
+            end
+        end
+    end
 end

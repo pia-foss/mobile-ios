@@ -48,6 +48,11 @@ struct AppConstants {
         static let adBlockerBundleIdentifier = "com.privateinternetaccess.ios.PIA-VPN.AdBlocker"
     }
     
+    struct SiriShortcuts {
+        static let shortcutConnect = "com.privateinternetaccess.ios.PIA-VPN.connect"
+        static let shortcutDisconnect = "com.privateinternetaccess.ios.PIA-VPN.disconnect"
+    }
+    
     struct Web {
         static let homeURL = URL(string: "https://www.privateinternetaccess.com/")!
 
@@ -118,4 +123,10 @@ struct AppConstants {
             return typeface
         }()
     }
+    
+    struct VPNWidget {
+        static let vpnStatus = "vpn.status"
+        static let vpnButtonDescription = "vpn.button.description"
+    }
+    
 }

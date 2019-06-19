@@ -19,6 +19,10 @@ class TrustedNetworksViewController: AutolayoutViewController {
     private lazy var switchWiFiProtection = UISwitch()
     private lazy var switchAutoJoinAllNetworks = UISwitch()
     private lazy var switchCellularData = UISwitch()
+    private lazy var switchRules = UISwitch()
+    var shouldReconnectAutomatically = false
+    var hasUpdatedPreferences = false
+    var persistentConnectionValue = false
 
     private enum Sections: Int, EnumsBuilder {
         
@@ -36,23 +40,37 @@ class TrustedNetworksViewController: AutolayoutViewController {
     }
 
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         self.title = L10n.Settings.Hotspothelper.title
         self.hotspotHelper = PIAHotspotHelper(withDelegate: self)
         self.switchAutoJoinAllNetworks.addTarget(self, action: #selector(toggleAutoconnectWithAllNetworks(_:)), for: .valueChanged)
         self.switchWiFiProtection.addTarget(self, action: #selector(toggleUseWiFiProtection(_:)), for: .valueChanged)
         self.switchCellularData.addTarget(self, action: #selector(toggleCellularData(_:)), for: .valueChanged)
+        self.switchRules.addTarget(self, action: #selector(toggleRules(_:)), for: .valueChanged)
 
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(filterAvailableNetworks), name: .UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(filterAvailableNetworks), name: UIApplication.didBecomeActiveNotification, object: nil)
 
         configureTableView()
+        
+        if !persistentConnectionValue,
+            Client.preferences.nmtRulesEnabled {
+            presentKillSwitchAlert()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         filterAvailableNetworks()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if shouldReconnectAutomatically,
+            hasUpdatedPreferences{
+            NotificationCenter.default.post(name: .PIASettingsHaveChanged,
+                                            object: self,
+                                            userInfo: nil)
+        }
     }
     
     deinit {
@@ -64,11 +82,12 @@ class TrustedNetworksViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         
-        // XXX: for some reason, UITableView is not affected by appearance updates
+        styleNavigationBarWithTitle(L10n.Settings.Hotspothelper.title)
+
         if let viewContainer = viewContainer {
-            Theme.current.applyLightBackground(viewContainer)
+            Theme.current.applyPrincipalBackground(viewContainer)
         }
-        Theme.current.applyLightBackground(tableView)
+        Theme.current.applyPrincipalBackground(tableView)
         Theme.current.applyDividerToSeparator(tableView)
     }
     
@@ -76,12 +95,14 @@ class TrustedNetworksViewController: AutolayoutViewController {
         let preferences = Client.preferences.editable()
         preferences.shouldConnectForAllNetworks = sender.isOn
         preferences.commit()
+        hasUpdatedPreferences = true
     }
     
     @objc private func toggleUseWiFiProtection(_ sender: UISwitch) {
         let preferences = Client.preferences.editable()
         preferences.useWiFiProtection = sender.isOn
         preferences.commit()
+        hasUpdatedPreferences = true
         filterAvailableNetworks()
         if sender.isOn, //If toggle is ON
             let ssid = UIDevice.current.WiFiSSID, //And we are connected to the WiFi
@@ -93,14 +114,42 @@ class TrustedNetworksViewController: AutolayoutViewController {
 
     @objc private func toggleCellularData(_ sender: UISwitch) {
         let preferences = Client.preferences.editable()
-        preferences.trustCellularData = sender.isOn
+        preferences.trustCellularData = !sender.isOn
         preferences.commit()
+        hasUpdatedPreferences = true
+    }
+    
+    @objc private func toggleRules(_ sender: UISwitch) {
+        if !persistentConnectionValue,
+            sender.isOn {
+            presentKillSwitchAlert()
+        }
+        let preferences = Client.preferences.editable()
+        preferences.nmtRulesEnabled = sender.isOn
+        preferences.commit()
+        hasUpdatedPreferences = true
+        tableView.reloadData()
     }
 
+
     // MARK: Private Methods
+    private func presentKillSwitchAlert() {
+        let alert = Macros.alert(nil, L10n.Settings.Nmt.Killswitch.disabled)
+        alert.addCancelAction(L10n.Global.close)
+        alert.addActionWithTitle(L10n.Global.enable) {
+            let preferences = Client.preferences.editable()
+            preferences.isPersistentConnection = true
+            preferences.commit()
+            NotificationCenter.default.post(name: .PIAPersistentConnectionSettingHaveChanged,
+                                            object: self,
+                                            userInfo: nil)
+        }
+        present(alert, animated: true, completion: nil)
+    }
+    
     private func configureTableView() {
         if #available(iOS 11, *) {
-            tableView.sectionFooterHeight = UITableViewAutomaticDimension
+            tableView.sectionFooterHeight = UITableView.automaticDimension
             tableView.estimatedSectionFooterHeight = 1.0
         }
         filterAvailableNetworks()
@@ -117,20 +166,24 @@ class TrustedNetworksViewController: AutolayoutViewController {
         let alert = Macros.alert(L10n.Settings.Hotspothelper.title,
                                  L10n.Settings.Trusted.Networks.Connect.message)
         alert.addCancelAction(L10n.Global.close)
-        alert.addDefaultAction(L10n.Global.ok, handler: {
+        alert.addActionWithTitle(L10n.Global.ok) {
             Macros.dispatch(after: .milliseconds(200)) {
                 Client.providers.vpnProvider.connect(nil)
             }
-        })
+        }
         present(alert, animated: true, completion: nil)
     }
     
 }
 
 extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSource {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Client.preferences.useWiFiProtection ? Sections.countCases() : 3
+        if Client.preferences.nmtRulesEnabled {
+            return Client.preferences.useWiFiProtection ? Sections.countCases() : 3
+        } else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -145,6 +198,8 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
             return L10n.Settings.Trusted.Networks.Sections.trusted.uppercased()
         case .cellularData:
             return L10n.Settings.Hotspothelper.Cellular.networks.uppercased()
+        case .rules:
+            return L10n.Settings.Hotspothelper.title.uppercased()
         default:
             return nil
         }
@@ -164,6 +219,8 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
             return availableNetworks.isEmpty ?
                 L10n.Settings.Hotspothelper.Available.help :
                 L10n.Settings.Hotspothelper.Available.Add.help
+        case .rules:
+            return L10n.Settings.Trusted.Networks.Sections.Trusted.Rule.description
         default:
             return nil
         }
@@ -185,8 +242,8 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.network, for: indexPath)
         cell.selectionStyle = .default
-        cell.accessoryView = nil
         cell.accessoryType = .none
+        cell.accessoryView = nil
         cell.isUserInteractionEnabled = true
         cell.imageView?.image = Asset.iconWifi.image.withRenderingMode(.alwaysTemplate)
         cell.imageView?.tintColor = Theme.current.palette.textColor(forRelevance: 3, appearance: .dark)
@@ -194,9 +251,10 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
         switch Sections.objectIdentifyBy(index: indexPath.section) {
         case .rules:
             cell.imageView?.image = nil
-            cell.textLabel?.text = L10n.Settings.Hotspothelper.Rules.title
-            cell.accessoryType = .disclosureIndicator
-            cell.accessoryView = nil
+            cell.textLabel?.text = L10n.Global.enabled
+            cell.accessoryView = switchRules
+            cell.selectionStyle = .none
+            switchRules.isOn = Client.preferences.nmtRulesEnabled
         case .current:
             if let ssid = hotspotHelper.currentWiFiNetwork() {
                 if trustedNetworks.contains(ssid) {
@@ -230,12 +288,22 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchCellularData
             cell.selectionStyle = .none
-            switchCellularData.isOn = Client.preferences.trustCellularData
+            switchCellularData.isOn = !Client.preferences.trustCellularData
 
         }
 
-        Theme.current.applySolidLightBackground(cell)
+        cell.textLabel?.backgroundColor = .clear
+        Theme.current.applySecondaryBackground(cell)
         Theme.current.applyDetailTableCell(cell)
+        if let textLabel = cell.textLabel {
+            Theme.current.applySettingsCellTitle(textLabel,
+                                                 appearance: .dark)
+            textLabel.backgroundColor = .clear
+        }
+
+        let backgroundView = UIView()
+        Theme.current.applyPrincipalBackground(backgroundView)
+        cell.selectedBackgroundView = backgroundView
 
         return cell
     }
@@ -246,15 +314,16 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
         case .current:
             if let ssid = hotspotHelper.currentWiFiNetwork() {
                 hotspotHelper.saveTrustedNetwork(ssid)
+                hasUpdatedPreferences = true
             }
-        case .rules:
-            self.perform(segue: StoryboardSegue.Main.trustedNetworkRulesSegueIdentifier)
         case .available:
             let ssid = availableNetworks[indexPath.row]
             hotspotHelper.saveTrustedNetwork(ssid)
+            hasUpdatedPreferences = true
         case .trusted:
             let ssid = trustedNetworks[indexPath.row]
             hotspotHelper.removeTrustedNetwork(ssid)
+            hasUpdatedPreferences = true
         default:
             break
         }
@@ -270,10 +339,11 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let ssid = trustedNetworks[indexPath.row]
             hotspotHelper.removeTrustedNetwork(ssid)
+            hasUpdatedPreferences = true
             filterAvailableNetworks()
         }
     }

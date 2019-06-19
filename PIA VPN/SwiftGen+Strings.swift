@@ -26,18 +26,6 @@ internal enum L10n {
   }
 
   internal enum Account {
-    internal enum Accessibility {
-      /// Eye icon
-      internal static let eye = L10n.tr("Localizable", "account.accessibility.eye")
-      internal enum Eye {
-        internal enum Hint {
-          /// Tap to conceal password
-          internal static let conceal = L10n.tr("Localizable", "account.accessibility.eye.hint.conceal")
-          /// Tap to reveal password
-          internal static let reveal = L10n.tr("Localizable", "account.accessibility.eye.hint.reveal")
-        }
-      }
-    }
     internal enum Email {
       /// Email
       internal static let caption = L10n.tr("Localizable", "account.email.caption")
@@ -56,17 +44,9 @@ internal enum L10n {
         return L10n.tr("Localizable", "account.expiry_date.information", p1)
       }
     }
-    internal enum Eye {
-      /// Tap the eye icon to reveal or conceal your password.
-      internal static let footer = L10n.tr("Localizable", "account.eye.footer")
-    }
     internal enum Other {
       /// Get the Private Internet Access app for your other devices and use the above username and password to login and secure your connection.
       internal static let footer = L10n.tr("Localizable", "account.other.footer")
-    }
-    internal enum Password {
-      /// Password
-      internal static let caption = L10n.tr("Localizable", "account.password.caption")
     }
     internal enum Restore {
       /// RESTORE PURCHASE
@@ -126,20 +106,10 @@ internal enum L10n {
   }
 
   internal enum Dashboard {
-    /// Status
-    internal static let status = L10n.tr("Localizable", "dashboard.status")
     internal enum Connection {
       internal enum Ip {
-        /// PUBLIC IP
-        internal static let caption = L10n.tr("Localizable", "dashboard.connection.ip.caption")
         /// Internet unreachable
         internal static let unreachable = L10n.tr("Localizable", "dashboard.connection.ip.unreachable")
-      }
-      internal enum Region {
-        /// CURRENT REGION
-        internal static let caption = L10n.tr("Localizable", "dashboard.connection.region.caption")
-        /// CHANGE REGION
-        internal static let change = L10n.tr("Localizable", "dashboard.connection.region.change")
       }
     }
     internal enum ContentBlocker {
@@ -159,6 +129,12 @@ internal enum L10n {
       internal static let disconnected = L10n.tr("Localizable", "dashboard.vpn.disconnected")
       /// Disconnecting...
       internal static let disconnecting = L10n.tr("Localizable", "dashboard.vpn.disconnecting")
+      /// VPN: ON
+      internal static let on = L10n.tr("Localizable", "dashboard.vpn.on")
+      internal enum Disconnect {
+        /// This network is untrusted. Do you really want to disconnect the VPN?
+        internal static let untrusted = L10n.tr("Localizable", "dashboard.vpn.disconnect.untrusted")
+      }
     }
   }
 
@@ -182,6 +158,8 @@ internal enum L10n {
     internal static let disabled = L10n.tr("Localizable", "global.disabled")
     /// Edit
     internal static let edit = L10n.tr("Localizable", "global.edit")
+    /// Enable
+    internal static let enable = L10n.tr("Localizable", "global.enable")
     /// Enabled
     internal static let enabled = L10n.tr("Localizable", "global.enabled")
     /// Error
@@ -192,6 +170,8 @@ internal enum L10n {
     internal static let `optional` = L10n.tr("Localizable", "global.optional")
     /// Required
     internal static let `required` = L10n.tr("Localizable", "global.required")
+    /// No internet connection found. Please confirm that you have an internet connection.
+    internal static let unreachable = L10n.tr("Localizable", "global.unreachable")
     /// Update
     internal static let update = L10n.tr("Localizable", "global.update")
   }
@@ -214,6 +194,10 @@ internal enum L10n {
       /// Logged in as %@
       internal static func loggedAs(_ p1: String) -> String {
         return L10n.tr("Localizable", "menu.accessibility.logged_as", p1)
+      }
+      internal enum Edit {
+        /// Edit
+        internal static let tile = L10n.tr("Localizable", "menu.accessibility.edit.tile")
       }
     }
     internal enum Expiration {
@@ -289,6 +273,27 @@ internal enum L10n {
     }
   }
 
+  internal enum Region {
+    internal enum Accessibility {
+      /// Filter
+      internal static let filter = L10n.tr("Localizable", "region.accessibility.filter")
+    }
+    internal enum Filter {
+      /// Favorites
+      internal static let favorites = L10n.tr("Localizable", "region.filter.favorites")
+      /// Latency
+      internal static let latency = L10n.tr("Localizable", "region.filter.latency")
+      /// Name
+      internal static let name = L10n.tr("Localizable", "region.filter.name")
+      /// Sort regions by
+      internal static let sortby = L10n.tr("Localizable", "region.filter.sortby")
+    }
+    internal enum Search {
+      /// Search for a region
+      internal static let placeholder = L10n.tr("Localizable", "region.search.placeholder")
+    }
+  }
+
   internal enum Renewal {
     internal enum Failure {
       /// Your purchase receipt couldn't be submitted, please retry at a later time.
@@ -334,6 +339,10 @@ internal enum L10n {
     internal enum ApplicationSettings {
       /// APPLICATION SETTINGS
       internal static let title = L10n.tr("Localizable", "settings.application_settings.title")
+      internal enum ActiveTheme {
+        /// Active theme
+        internal static let title = L10n.tr("Localizable", "settings.application_settings.active_theme.title")
+      }
       internal enum DarkTheme {
         /// Dark theme
         internal static let title = L10n.tr("Localizable", "settings.application_settings.dark_theme.title")
@@ -448,7 +457,7 @@ internal enum L10n {
       }
     }
     internal enum Hotspothelper {
-      /// Configure how PIA will behave on connection to WiFi or cellular networks.
+      /// Configure how PIA will behave on connection to WiFi or cellular networks. This excludes disconnecting manually.
       internal static let description = L10n.tr("Localizable", "settings.hotspothelper.description")
       /// Network management tool
       internal static let title = L10n.tr("Localizable", "settings.hotspothelper.title")
@@ -467,11 +476,11 @@ internal enum L10n {
         }
       }
       internal enum Cellular {
-        /// PIA automatically enables the VPN when connecting to cellular networks if this option is disabled.
+        /// PIA automatically enables the VPN when connecting to cellular networks if this option is enabled.
         internal static let description = L10n.tr("Localizable", "settings.hotspothelper.cellular.description")
         /// Cellular networks
         internal static let networks = L10n.tr("Localizable", "settings.hotspothelper.cellular.networks")
-        /// Trust cellular networks
+        /// Protect over cellular networks
         internal static let title = L10n.tr("Localizable", "settings.hotspothelper.cellular.title")
       }
       internal enum Enable {
@@ -489,6 +498,12 @@ internal enum L10n {
           /// VPN WiFi Protection
           internal static let title = L10n.tr("Localizable", "settings.hotspothelper.wifi.trust.title")
         }
+      }
+    }
+    internal enum Nmt {
+      internal enum Killswitch {
+        /// The VPN kill switch is currently disabled. In order to ensure that the Network Management Tool is functioning, and that you are able to reconnect when switching networks, please enable the VPN kill switch in your settings.
+        internal static let disabled = L10n.tr("Localizable", "settings.nmt.killswitch.disabled")
       }
     }
     internal enum Reset {
@@ -530,7 +545,7 @@ internal enum L10n {
             internal enum Rule {
               /// Disconnect from PIA VPN
               internal static let action = L10n.tr("Localizable", "settings.trusted.networks.sections.trusted.rule.action")
-              /// Perform actions when joining trusted networks.
+              /// Enable this feature, with the VPN kill switch enabled, to customize how PIA will behave on WiFi and cellular networks. Please be aware, functionality of the Network Management Tool will be disabled if you manually disconnect.
               internal static let description = L10n.tr("Localizable", "settings.trusted.networks.sections.trusted.rule.description")
             }
           }
@@ -548,13 +563,112 @@ internal enum L10n {
     internal static let selectRegion = L10n.tr("Localizable", "shortcuts.select_region")
   }
 
+  internal enum Siri {
+    internal enum Shortcuts {
+      internal enum Add {
+        /// There was an error adding the Siri shortcut. Please, try it again.
+        internal static let error = L10n.tr("Localizable", "siri.shortcuts.add.error")
+      }
+      internal enum Connect {
+        /// Connect PIA VPN
+        internal static let title = L10n.tr("Localizable", "siri.shortcuts.connect.title")
+        internal enum Row {
+          /// 'Connect' Siri Shortcut
+          internal static let title = L10n.tr("Localizable", "siri.shortcuts.connect.row.title")
+        }
+      }
+      internal enum Disconnect {
+        /// Disconnect PIA VPN
+        internal static let title = L10n.tr("Localizable", "siri.shortcuts.disconnect.title")
+        internal enum Row {
+          /// 'Disconnect' Siri Shortcut
+          internal static let title = L10n.tr("Localizable", "siri.shortcuts.disconnect.row.title")
+        }
+      }
+    }
+  }
+
+  internal enum Tiles {
+    internal enum Favorite {
+      internal enum Servers {
+        /// Favorite servers
+        internal static let title = L10n.tr("Localizable", "tiles.favorite.servers.title")
+      }
+    }
+    internal enum Nmt {
+      /// Cellular
+      internal static let cellular = L10n.tr("Localizable", "tiles.nmt.cellular")
+      internal enum Accessibility {
+        /// Trusted network
+        internal static let trusted = L10n.tr("Localizable", "tiles.nmt.accessibility.trusted")
+        /// Untrusted network
+        internal static let untrusted = L10n.tr("Localizable", "tiles.nmt.accessibility.untrusted")
+      }
+    }
+    internal enum Quick {
+      internal enum Connect {
+        /// Recent servers
+        internal static let title = L10n.tr("Localizable", "tiles.quick.connect.title")
+      }
+    }
+    internal enum Quicksetting {
+      internal enum Nmt {
+        /// Network Management
+        internal static let title = L10n.tr("Localizable", "tiles.quicksetting.nmt.title")
+      }
+    }
+    internal enum Quicksettings {
+      /// Quick settings
+      internal static let title = L10n.tr("Localizable", "tiles.quicksettings.title")
+    }
+    internal enum Region {
+      /// VPN Server
+      internal static let title = L10n.tr("Localizable", "tiles.region.title")
+    }
+    internal enum Subscription {
+      /// Monthly
+      internal static let monthly = L10n.tr("Localizable", "tiles.subscription.monthly")
+      /// Subscription
+      internal static let title = L10n.tr("Localizable", "tiles.subscription.title")
+      /// Trial
+      internal static let trial = L10n.tr("Localizable", "tiles.subscription.trial")
+      /// Yearly
+      internal static let yearly = L10n.tr("Localizable", "tiles.subscription.yearly")
+      internal enum Days {
+        /// (%d days left)
+        internal static func `left`(_ p1: Int) -> String {
+          return L10n.tr("Localizable", "tiles.subscription.days.left", p1)
+        }
+      }
+    }
+    internal enum Usage {
+      /// Download
+      internal static let download = L10n.tr("Localizable", "tiles.usage.download")
+      /// Usage
+      internal static let title = L10n.tr("Localizable", "tiles.usage.title")
+      /// Upload
+      internal static let upload = L10n.tr("Localizable", "tiles.usage.upload")
+      internal enum Ipsec {
+        /// USAGE (Disabled unless using OpenVPN)
+        internal static let title = L10n.tr("Localizable", "tiles.usage.ipsec.title")
+      }
+    }
+  }
+
+  internal enum Today {
+    internal enum Widget {
+      /// Login
+      internal static let login = L10n.tr("Localizable", "today.widget.login")
+    }
+  }
+
   internal enum VpnPermission {
     /// PIA
     internal static let title = L10n.tr("Localizable", "vpn_permission.title")
     internal enum Body {
       /// We don’t monitor, filter or log any network activity.
       internal static let footer = L10n.tr("Localizable", "vpn_permission.body.footer")
-      /// To proceed tap “%@”.
+      /// You’ll see a prompt for PIA VPN and need to allow access to VPN configurations.\nTo proceed tap on “%@”.
       internal static func subtitle(_ p1: String) -> String {
         return L10n.tr("Localizable", "vpn_permission.body.subtitle", p1)
       }
@@ -584,9 +698,9 @@ internal enum L10n {
     }
     internal enum Page {
       internal enum _1 {
-        /// Protect yourself on up to 5 devices at a time.
+        /// Protect yourself on up to 10 devices at a time.
         internal static let description = L10n.tr("Localizable", "walkthrough.page.1.description")
-        /// Support 5 devices at once
+        /// Support 10 devices at once
         internal static let title = L10n.tr("Localizable", "walkthrough.page.1.title")
       }
       internal enum _2 {

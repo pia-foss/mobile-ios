@@ -29,7 +29,7 @@ class AccountViewController: AutolayoutViewController {
     
     @IBOutlet private weak var labelUsername: UILabel!
     
-    @IBOutlet private weak var textUsername: BorderedTextField!
+    @IBOutlet private weak var textUsername: UITextField!
     
     @IBOutlet private weak var labelFooterOther: UILabel!
 
@@ -37,6 +37,8 @@ class AccountViewController: AutolayoutViewController {
     
     @IBOutlet private weak var itemUpdate: UIBarButtonItem!
     
+    @IBOutlet private weak var viewAccountInfo: UIView!
+
     @IBOutlet private weak var viewSeparator: UIView!
     
     @IBOutlet private weak var viewUncredited: UIView!
@@ -78,12 +80,12 @@ class AccountViewController: AutolayoutViewController {
 
         viewSafe.layoutMargins = .zero
         textEmail.isEditable = true
-        textUsername.isEditable = false
+        textUsername.isUserInteractionEnabled = false
         canSaveAccount = false
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(redisplayAccount), name: .PIAAccountDidRefresh, object: nil)
-        nc.addObserver(self, selector: #selector(accountDidLogout(notification:)), name: .PIAAccountDidLogout, object: nil)
+        nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
 
         Client.providers.accountProvider.retrieveAccount()
     }
@@ -92,6 +94,7 @@ class AccountViewController: AutolayoutViewController {
         super.viewWillAppear(animated)
     
         // update local state immediately
+        styleNavigationBarWithTitle(L10n.Menu.Item.account)
         redisplayAccount()
     }
 
@@ -115,6 +118,10 @@ class AccountViewController: AutolayoutViewController {
         establishUncreditedVisibility()
     }
 
+    @objc private func viewHasRotated() {
+        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
+    }
+    
     // MARK: Actions
 
     @IBAction private func saveChanges(_ sender: Any?) {
@@ -129,9 +136,9 @@ class AccountViewController: AutolayoutViewController {
             return
         }
         
-        let alert = Macros.alert(L10n.Account.Update.Email.Require.Password.title,
-                                 L10n.Account.Update.Email.Require.Password.message)
-        
+        let alert = Macros.alertController(L10n.Account.Update.Email.Require.Password.title,
+                                           L10n.Account.Update.Email.Require.Password.message)
+
         alert.addCancelAction(L10n.Global.cancel)
         let action = UIAlertAction(title: L10n.Account.Update.Email.Require.Password.button,
                                    style: .default) { [weak self] (alertAction) in
@@ -143,11 +150,11 @@ class AccountViewController: AutolayoutViewController {
                     log.debug("Account: Modifying account email...")
                     
                     let request = UpdateAccountRequest(email: email)
-                    let hud = HUD()
+                    weakSelf.showLoadingAnimation()
                     
                     Client.providers.accountProvider.update(with: request,
                                                             andPassword: password) { (info, error) in
-                                                                hud.hide()
+                                                                weakSelf.hideLoadingAnimation()
                                                                 
                                                                 guard let _ = info else {
                                                                     if let error = error {
@@ -158,7 +165,7 @@ class AccountViewController: AutolayoutViewController {
                                                                     
                                                                     weakSelf.textEmail.text = ""
                                                                     let alert = Macros.alert(L10n.Global.error, L10n.Account.Error.unauthorized)
-                                                                    alert.addCancelAction(L10n.Global.close)
+                                                                    alert.addDefaultAction(L10n.Global.close)
                                                                     self?.present(alert, animated: true, completion: nil)
                                                                     
                                                                     return
@@ -166,7 +173,7 @@ class AccountViewController: AutolayoutViewController {
                                                                 
                                                                 log.debug("Account: Email successfully modified")
                                                                 let alert = Macros.alert(nil, L10n.Account.Save.success)
-                                                                alert.addCancelAction(L10n.Global.ok)
+                                                                alert.addDefaultAction(L10n.Global.ok)
                                                                 weakSelf.present(alert, animated: true, completion: nil)
                                                                 weakSelf.textEmail.text = email
                                                                 weakSelf.textEmail.endEditing(true)
@@ -211,14 +218,14 @@ class AccountViewController: AutolayoutViewController {
         log.error("IAP: Failed to restore payment receipt (error: \(error?.localizedDescription ?? ""))")
 
         let alert = Macros.alert(L10n.Global.error, error?.localizedDescription)
-        alert.addCancelAction(L10n.Global.close)
+        alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
     
     private func handleReceiptSubmissionWithError(_ error: Error?) {
         if let error = error {
             let alert = Macros.alert(L10n.Global.error, error.localizedDescription)
-            alert.addCancelAction(L10n.Global.close)
+            alert.addDefaultAction(L10n.Global.close)
             present(alert, animated: true, completion: nil)
             return
         }
@@ -229,7 +236,7 @@ class AccountViewController: AutolayoutViewController {
             L10n.Renewal.Success.title,
             L10n.Renewal.Success.message
         )
-        alert.addCancelAction(L10n.Global.close)
+        alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
 
         redisplayAccount()
@@ -240,15 +247,11 @@ class AccountViewController: AutolayoutViewController {
             L10n.Account.Restore.Failure.title,
             L10n.Account.Restore.Failure.message
         )
-        alert.addCancelAction(L10n.Global.close)
+        alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
 
     // MARK: Notifications
-    @objc private func accountDidLogout(notification: Notification) {
-        dismissModal()
-    }
-
     @objc private func redisplayAccount() {
         currentUser = Client.providers.accountProvider.currentUser
 
@@ -288,19 +291,27 @@ class AccountViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         
-        for label in [labelEmail!, labelUsername!] {
-            Theme.current.applyLabel(label, appearance: .dark)
+        styleNavigationBarWithTitle(L10n.Menu.Item.account)
+
+        if let viewContainer = viewContainer {
+            Theme.current.applyPrincipalBackground(view)
+            Theme.current.applyPrincipalBackground(viewContainer)
         }
-        Theme.current.applyInput(textEmail)
-        Theme.current.applyInput(textUsername)
-        Theme.current.applyDivider(viewSeparator)
-        for label in [labelFooterOther!, labelExpiryInformation!] {
-            Theme.current.applySmallInfo(label, appearance: .dark)
-        }
-        Theme.current.applyBody2(labelRestoreTitle, appearance: .dark)
-        Theme.current.applyBody1(labelRestoreInfo, appearance: .dark)
-        Theme.current.applyTextButton(buttonRestore)
         
+        Theme.current.applySecondaryBackground(viewAccountInfo)
+        Theme.current.applySubtitle(labelEmail)
+        Theme.current.applySubtitle(labelUsername)
+        
+        Theme.current.applyInput(textEmail)
+        Theme.current.applyClearTextfield(textUsername)
+
+        for label in [labelFooterOther!, labelExpiryInformation!] {
+            Theme.current.applySubtitle(label)
+        }
+        Theme.current.applyTitle(labelRestoreTitle, appearance: .dark)
+        Theme.current.applySubtitle(labelRestoreInfo)
+        buttonRestore.style(style: TextStyle.textStyle9)
+
         styleExpirationDate()
         
     }

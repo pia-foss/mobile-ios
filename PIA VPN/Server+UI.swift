@@ -14,14 +14,18 @@ extension Server: CustomStringConvertible {
     func name(forStatus status: VPNStatus) -> String {
         switch status {
 //        case .connecting, .changingServer, .connected:
-        case .connecting, .connected:
+        case .connected:
             guard !isAutomatic else {
                 let effectiveServer = Client.providers.vpnProvider.profileServer ?? Client.providers.serverProvider.targetServer
                 return "\(name) (\(effectiveServer.name))"
             }
             return name
             
-        default:
+        case .connecting:
+            return L10n.Dashboard.Vpn.connecting
+        case .disconnecting:
+            return L10n.Dashboard.Vpn.disconnecting
+        case .disconnected:
             return name
         }
     }
@@ -53,5 +57,29 @@ extension UIImageView {
             return
         }
         self.image = image.withRenderingMode(.alwaysOriginal)
+    }
+}
+
+extension UIButton {
+    func setImage(fromServer server: Server) {
+        let imageName = "flag-\(server.country.lowercased())"
+        guard let image = UIImage(named: imageName) else {
+            af_setImage(for: .normal, url: server.flagURL, placeholderImage: Asset.Flags.flagUniversal.image)
+            return
+        }
+        let original = image.withRenderingMode(.alwaysOriginal)
+        self.setImage(original.image(alpha: 0.7), for: .normal)
+        self.setImage(image.withRenderingMode(.alwaysOriginal), for: .highlighted)
+        
+    }
+}
+
+extension UIImage {
+    func image(alpha: CGFloat) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        draw(at: .zero, blendMode: .normal, alpha: alpha)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
     }
 }

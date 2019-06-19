@@ -36,10 +36,13 @@ class AboutViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        title = L10n.Menu.Item.about
         let textApp = L10n.About.app
         labelIntro.text = "Copyright © \(AppConfiguration.About.copyright) \(AppConfiguration.About.companyName)\n\(textApp) \(Macros.versionFullString()!)"
         tableView.scrollsToTop = true
+        
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,13 +51,18 @@ class AboutViewController: AutolayoutViewController {
         loadLicensesInBackground()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        styleNavigationBarWithTitle(L10n.Menu.Item.about)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     
         guard let headerView = tableView.tableHeaderView else {
             return
         }
-        let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+        let height = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
         var frame = headerView.frame
         frame.size.height = height
         headerView.frame = frame
@@ -63,7 +71,15 @@ class AboutViewController: AutolayoutViewController {
         headerView.layoutIfNeeded()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     // MARK: Helpers
+    
+    @objc private func viewHasRotated() {
+        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
+    }
     
     private func loadLicensesInBackground() {
         for component in components.licenses {
@@ -78,7 +94,7 @@ class AboutViewController: AutolayoutViewController {
         DispatchQueue.main.async {
             self.licenseByComponentName[component.name] = license
             
-            guard let index = self.components.licenses.index(of: component) else {
+            guard let index = self.components.licenses.firstIndex(of: component) else {
                 return
             }
             self.tableView.reloadRows(at: [IndexPath(row: index, section: 1)], with: .none)
@@ -86,12 +102,21 @@ class AboutViewController: AutolayoutViewController {
     }
     
     // MARK: Restylable
-    
+
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        Theme.current.applySolidLightBackground(tableView)
-        Theme.current.applyBody1(labelIntro, appearance: .dark)
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
+        Theme.current.applyDividerToSeparator(tableView)
+        styleNavigationBarWithTitle(L10n.Menu.Item.about)
+        // XXX: for some reason, UITableView is not affected by appearance updates
+        if let viewContainer = viewContainer {
+            Theme.current.applyPrincipalBackground(view)
+            Theme.current.applyPrincipalBackground(viewContainer)
+        }
+
+        Theme.current.applyPrincipalBackground(tableView)
+        Theme.current.applySubtitle(labelIntro)
     }
 }
 

@@ -28,17 +28,18 @@ class AboutNoticeCell: UITableViewCell, Restylable {
         labelCopyright.text = component.copyright
         labelNotice.text = component.notice
         
-        buttonName.accessibilityTraits = UIAccessibilityTraitNone
+        buttonName.accessibilityTraits = UIAccessibilityTraits.none
         buttonName.accessibilityLabel = component.name
     }
     
     // MARK: Restylable
     
     func viewShouldRestyle() {
-        Theme.current.applySolidLightBackground(self)
-        Theme.current.applyTextButton(buttonName)
-        Theme.current.applySmallInfo(labelCopyright, appearance: .dark)
-        Theme.current.applySmallInfo(labelNotice, appearance: .dark)
+        Theme.current.applySecondaryBackground(self)
+        buttonName.style(style: TextStyle.textStyle9)
+        Theme.current.applySubtitle(labelCopyright)
+        Theme.current.applySubtitle(labelNotice)
+
     }
 }
 
@@ -110,7 +111,7 @@ class AboutLicenseCell: UITableViewCell, Restylable {
         }
         buttonMore.setImage(moreImage, for: .normal)
 
-        buttonName.accessibilityTraits = UIAccessibilityTraitNone
+        buttonName.accessibilityTraits = UIAccessibilityTraits.none
         buttonName.accessibilityLabel = component.name
         buttonName.accessibilityHint = L10n.About.Accessibility.Component.expand
     }
@@ -152,11 +153,11 @@ class AboutLicenseCell: UITableViewCell, Restylable {
     // MARK: Restylable
     
     func viewShouldRestyle() {
-        Theme.current.applySolidLightBackground(self)
-        Theme.current.applyLightBackground(textLicense)
-        Theme.current.applyTextButton(buttonName)
-        Theme.current.applySmallInfo(labelCopyright, appearance: .dark)
-        Theme.current.applyBody1Monospace(textLicense, appearance: .dark)
+        Theme.current.applySecondaryBackground(self)
+        Theme.current.applyPrincipalBackground(textLicense)
+        buttonName.style(style: TextStyle.textStyle9)
+        Theme.current.applySubtitle(labelCopyright)
+        Theme.current.applyLicenseMonospaceFontAndColor(textLicense, appearance: .dark)
         buttonMore.tintColor = textLicense.textColor
 
         gradientLicense?.removeFromSuperview()

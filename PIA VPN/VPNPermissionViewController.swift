@@ -19,7 +19,7 @@ class VPNPermissionViewController: AutolayoutViewController {
 
     @IBOutlet private weak var labelFooter: UILabel!
 
-    @IBOutlet private weak var buttonSubmit: ActivityButton!
+    @IBOutlet private weak var buttonSubmit: PIAButton!
 
     weak var dismissingViewController: UIViewController?
 
@@ -37,13 +37,12 @@ class VPNPermissionViewController: AutolayoutViewController {
         labelTitle.text = L10n.VpnPermission.Body.title
         labelMessage.text = L10n.VpnPermission.Body.subtitle(L10n.Global.ok)
         labelFooter.text = L10n.VpnPermission.Body.footer
-        buttonSubmit.title = L10n.Global.ok
+        styleSubmitButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     @IBAction private func submit() {
@@ -60,18 +59,19 @@ class VPNPermissionViewController: AutolayoutViewController {
     }
     
     private func alertRequiredPermission() {
-        let alert = Macros.alert(L10n.VpnPermission.title, nil)
         var message = L10n.VpnPermission.Disallow.Message.basic
-        alert.addDefaultAction(L10n.Global.ok) {
-            self.submit()
-        }
         if MFMailComposeViewController.canSendMail() {
-            alert.addAction(UIAlertAction(title: L10n.VpnPermission.Disallow.contact, style: .default) { (action) in
-                self.contactCustomerSupport()
-            })
             message += "\n" + L10n.VpnPermission.Disallow.Message.support
         }
-        alert.message = message
+        let alert = Macros.alert(L10n.VpnPermission.title, message)
+        if MFMailComposeViewController.canSendMail() {
+            alert.addActionWithTitle(L10n.VpnPermission.Disallow.contact) {
+                self.contactCustomerSupport()
+            }
+        }
+        alert.addCancelActionWithTitle(L10n.Global.ok) {
+            self.submit()
+        }
         present(alert, animated: true, completion: nil)
     }
     
@@ -86,12 +86,20 @@ class VPNPermissionViewController: AutolayoutViewController {
     
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
-        
+        Theme.current.applyPrincipalBackground(view)
+        Theme.current.applyPrincipalBackground(viewContainer!)
+        Theme.current.applySubtitle(labelMessage)
+        Theme.current.applySubtitle(labelFooter)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
-        Theme.current.applyBody1(labelMessage, appearance: .dark)
-        Theme.current.applySmallInfo(labelFooter, appearance: .dark)
-        Theme.current.applyActionButton(buttonSubmit)
     }
+    
+    private func styleSubmitButton() {
+        buttonSubmit.setRounded()
+        buttonSubmit.style(style: TextStyle.Buttons.piaGreenButton)
+        buttonSubmit.setTitle(L10n.Global.ok.uppercased(),
+                              for: [])
+    }
+
 }
 
 extension VPNPermissionViewController: MFMailComposeViewControllerDelegate {

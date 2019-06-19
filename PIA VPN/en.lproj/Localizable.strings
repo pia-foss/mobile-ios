@@ -10,8 +10,10 @@
 "global.clear" = "Clear";
 "global.update" = "Update";
 "global.edit" = "Edit";
+"global.unreachable" = "No internet connection found. Please confirm that you have an internet connection.";
 "global.enabled" = "Enabled";
 "global.disabled" = "Disabled";
+"global.enable" = "Enable";
 
 // NOTIFICATIONS
 
@@ -34,8 +36,8 @@
 "walkthrough.action.done" = "DONE";
 "walkthrough.action.skip" = "SKIP";
 
-"walkthrough.page.1.title" = "Support 5 devices at once";
-"walkthrough.page.1.description" = "Protect yourself on up to 5 devices at a time.";
+"walkthrough.page.1.title" = "Support 10 devices at once";
+"walkthrough.page.1.description" = "Protect yourself on up to 10 devices at a time.";
 "walkthrough.page.2.title" = "Connect to any region easily";
 "walkthrough.page.2.description" = "With servers around the globe, you are always under protection.";
 "walkthrough.page.3.title" = "Protect yourself from ads";
@@ -48,7 +50,7 @@
 "renewal.failure.message" = "Your purchase receipt couldn't be submitted, please retry at a later time.";
 
 // MENU
-
+"menu.accessibility.edit.tile" = "Edit";
 "menu.accessibility.item" = "Menu";
 "menu.accessibility.logged_as" = "Logged in as %@";
 "menu.expiration.expires_in" = "Subscription expires in";
@@ -81,8 +83,6 @@
 "account.email.caption" = "Email";
 "account.email.placeholder" = "Email address";
 "account.username.caption" = "Username";
-"account.password.caption" = "Password";
-"account.eye.footer" = "Tap the eye icon to reveal or conceal your password.";
 "account.other.footer" = "Get the Private Internet Access app for your other devices and use the above username and password to login and secure your connection.";
 "account.restore.title" = "Restore uncredited purchase";
 "account.restore.description" = "If you renewed your plan but your account still says it's about to expire, you can restart the renewal from here. You will not be charged during this process.";
@@ -93,9 +93,6 @@
 "account.save.prompt" = "Authenticate to save changes";
 "account.save.success" = "Your email address has been saved.";
 "account.reveal.prompt" = "Authenticate to reveal";
-"account.accessibility.eye" = "Eye icon";
-"account.accessibility.eye.hint.reveal" = "Tap to reveal password";
-"account.accessibility.eye.hint.conceal" = "Tap to conceal password";
 "account.expiry_date.information" = "Your plan will expire on %@.";
 "account.expiry_date.expired" = "Your plan has expired.";
 "account.update.email.require.password.title" = "PIA Password Required";
@@ -117,6 +114,7 @@
 
 "settings.application_settings.title" = "APPLICATION SETTINGS";
 "settings.application_settings.dark_theme.title" = "Dark theme";
+"settings.application_settings.active_theme.title" = "Active theme";
 "settings.application_settings.kill_switch.title" = "VPN kill switch";
 "settings.application_settings.kill_switch.footer" = "The VPN kill switch prevents access to the Internet if the VPN connection is reconnecting. This excludes disconnecting manually.";
 "settings.application_settings.mace.title" = "PIA MACE™";
@@ -164,23 +162,21 @@
 
 "dashboard.content_blocker.intro.message" = "This version replaces MACE with our Safari Content Blocker.\n\nCheck it out in the 'Settings' section.";
 
-"dashboard.status" = "Status";
-"dashboard.connection.region.caption" = "CURRENT REGION";
-"dashboard.connection.region.change" = "CHANGE REGION";
-"dashboard.connection.ip.caption" = "PUBLIC IP";
 "dashboard.connection.ip.unreachable" = "Internet unreachable";
 
 "dashboard.vpn.disconnected" = "Disconnected";
 "dashboard.vpn.connecting" = "Connecting...";
 "dashboard.vpn.connected" = "Connected to VPN";
+"dashboard.vpn.on" = "VPN: ON";
 "dashboard.vpn.disconnecting" = "Disconnecting...";
 "dashboard.vpn.changing_region" = "Changing region...";
+"dashboard.vpn.disconnect.untrusted" = "This network is untrusted. Do you really want to disconnect the VPN?";
 
 // VPN PERMISSION
 
 "vpn_permission.title" = "PIA";
 "vpn_permission.body.title" = "PIA needs access to your VPN profiles to secure your traffic";
-"vpn_permission.body.subtitle" = "To proceed tap “%@”.";
+"vpn_permission.body.subtitle" = "You’ll see a prompt for PIA VPN and need to allow access to VPN configurations.\nTo proceed tap on “%@”.";
 "vpn_permission.body.footer" = "We don’t monitor, filter or log any network activity.";
 "vpn_permission.disallow.message.basic" = "We need this permission for the application to function.";
 "vpn_permission.disallow.message.support" = "You can also get in touch with customer support if you need assistance.";
@@ -202,7 +198,7 @@
 // HOTSPOT HELPER
 
 "settings.hotspothelper.title" = "Network management tool";
-"settings.hotspothelper.description" = "Configure how PIA will behave on connection to WiFi or cellular networks.";
+"settings.hotspothelper.description" = "Configure how PIA will behave on connection to WiFi or cellular networks. This excludes disconnecting manually.";
 "settings.hotspothelper.enable.description" = "PIA automatically enables the VPN when connecting to untrusted WiFi networks if this option is enabled.";
 "settings.hotspothelper.all.title" = "Protect all networks";
 "settings.hotspothelper.all.description" = "VPN WiFi Protection will activate on all networks, including trusted networks.";
@@ -215,13 +211,51 @@
 "settings.trusted.networks.connect.message" = "Protect this network by connecting to VPN?";
 "hotspothelper.display.name" = "🔒 Activate VPN WiFi Protection in PIA Settings to secure this connection.";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi Protection Enabled - We got your back.";
-"settings.hotspothelper.cellular.title" = "Trust cellular networks";
+"settings.hotspothelper.cellular.title" = "Protect over cellular networks";
 "settings.hotspothelper.wifi.trust.title" = "VPN WiFi Protection";
-"settings.hotspothelper.cellular.description" = "PIA automatically enables the VPN when connecting to cellular networks if this option is disabled.";
+"settings.hotspothelper.cellular.description" = "PIA automatically enables the VPN when connecting to cellular networks if this option is enabled.";
 "settings.hotspothelper.cellular.networks" = "Cellular networks";
 "settings.hotspothelper.wifi.networks" = "WiFi networks";
 "settings.trusted.networks.sections.untrusted" = "Untrusted networks";
 "settings.hotspothelper.rules.title" = "Rules";
-"settings.trusted.networks.sections.trusted.rule.description"= "Perform actions when joining trusted networks.";
+"settings.trusted.networks.sections.trusted.rule.description"= "Enable this feature, with the VPN kill switch enabled, to customize how PIA will behave on WiFi and cellular networks. Please be aware, functionality of the Network Management Tool will be disabled if you manually disconnect.";
 "settings.trusted.networks.sections.trusted.rule.action"= "Disconnect from PIA VPN";
+"tiles.quicksetting.nmt.title" = "Network Management";
+"settings.nmt.killswitch.disabled" = "The VPN kill switch is currently disabled. In order to ensure that the Network Management Tool is functioning, and that you are able to reconnect when switching networks, please enable the VPN kill switch in your settings.";
 
+// REGION
+
+"region.search.placeholder" = "Search for a region";
+"region.accessibility.filter" = "Filter";
+"region.filter.sortby" = "Sort regions by";
+"region.filter.name" = "Name";
+"region.filter.latency" = "Latency";
+"region.filter.favorites" = "Favorites";
+
+// TILES
+"tiles.quick.connect.title" = "Recent servers";
+"tiles.favorite.servers.title" = "Favorite servers";
+"tiles.region.title" = "VPN Server";
+"tiles.subscription.title" = "Subscription";
+"tiles.subscription.trial" = "Trial";
+"tiles.subscription.monthly" = "Monthly";
+"tiles.subscription.yearly" = "Yearly";
+"tiles.subscription.days.left" = "(%d days left)";
+"tiles.usage.title" = "Usage";
+"tiles.usage.ipsec.title" = "USAGE (Disabled unless using OpenVPN)";
+"tiles.usage.upload" = "Upload";
+"tiles.usage.download" = "Download";
+"tiles.nmt.cellular" = "Cellular";
+"tiles.nmt.accessibility.trusted" = "Trusted network";
+"tiles.nmt.accessibility.untrusted" = "Untrusted network";
+"tiles.quicksettings.title" = "Quick settings";
+
+//SIRI SHORTCUTS
+"siri.shortcuts.connect.row.title" = "'Connect' Siri Shortcut";
+"siri.shortcuts.disconnect.row.title" = "'Disconnect' Siri Shortcut";
+"siri.shortcuts.connect.title" = "Connect PIA VPN";
+"siri.shortcuts.disconnect.title" = "Disconnect PIA VPN";
+"siri.shortcuts.add.error" = "There was an error adding the Siri shortcut. Please, try it again.";
+
+//TODAY WIDGET
+"today.widget.login" = "Login";

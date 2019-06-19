@@ -14,15 +14,18 @@ extension Theme.Palette {
         let lightPalette: Theme.Palette = .light
         
         let palette = Theme.Palette()
+        palette.appearance = Theme.Appearance.dark
         palette.logo = Asset.navLogoWhite.image
+        palette.secondaryColor = UIColor.piaGrey10
+        palette.textfieldButtonBackgroundColor = UIColor.black
+        palette.navigationBarBackIcon = Asset.Piax.Global.iconBack.image
         palette.brandBackground = lightPalette.brandBackground
-        palette.lightBackground = Macros.color(hex: 0x1a1a1a, alpha: 0xff)
-        palette.solidLightBackground = Macros.color(hex: 0x232323, alpha: 0xff)
+        palette.secondaryBackground = .piaGrey5
+        palette.lineColor = .white
+        palette.principalBackground = .piaGrey6
         palette.emphasis = lightPalette.emphasis
         palette.accent1 = lightPalette.accent1
         palette.accent2 = lightPalette.accent2
-        palette.setDarkText(.white, alphas: [1.0, 0.87, 0.67])
-        palette.setLightText(.white, alphas: [1.0, 0.87, 0.67])
         palette.divider = UIColor(white: 1.0, alpha: 0.2)
         palette.overlayAlpha = 0.9
         return palette

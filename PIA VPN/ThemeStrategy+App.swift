@@ -39,25 +39,39 @@ private struct LightThemeStrategy: ThemeStrategy {
             theme.applyLightNavigationBar(navigationBar)
             return
         }
-        theme.applyBrandNavigationBar(navigationBar)
+        
+        if viewController is BrandableNavigationBar {
+            theme.applyLightBrandLogoNavigationBar(navigationBar)
+        } else {
+            theme.applyBrandNavigationBar(navigationBar)
+        }
+
     }
     
     func statusBarAppearance(for viewController: AutolayoutViewController) -> UIStatusBarStyle {
-        if let _ = viewController as? WalkthroughViewController {
+        switch viewController {
+        case is WalkthroughViewController,
+             is PIAWelcomeViewController,
+             is GetStartedViewController,
+             is SignupInProgressViewController,
+             is SignupFailureViewController,
+             is SignupSuccessViewController,
+             is SignupUnreachableViewController,
+             is RestoreSignupViewController,
+             is VPNPermissionViewController,
+             is ConfirmVPNPlanViewController:
             return .default
+        default:
+            if AppPreferences.shared.lastVPNConnectionStatus == VPNStatus.connected {
+                return .lightContent
+            }
+            return Theme.current.palette.appearance == .dark ? .lightContent : .default
         }
-        if let _ = viewController as? DashboardViewController {
-            return .default
-        }
-        if let _ = viewController as? PIAWelcomeViewController {
-            return .default
-        }
-        return .lightContent
     }
     
     func autolayoutContainerMargins(for mask: UIInterfaceOrientationMask) -> UIEdgeInsets {
         if ((mask == .landscape) && Macros.isDevicePad) {
-            return UIEdgeInsetsMake(0, AppConfiguration.UI.iPadLandscapeMargin, 0, AppConfiguration.UI.iPadLandscapeMargin)
+            return UIEdgeInsets(top: 0, left: AppConfiguration.UI.iPadLandscapeMargin, bottom: 0, right: AppConfiguration.UI.iPadLandscapeMargin)
         }
         return .zero
     }
@@ -68,7 +82,13 @@ private struct DarkThemeStrategy: ThemeStrategy {
         guard let navigationBar = viewController.navigationController?.navigationBar else {
             return
         }
-        theme.applyBrandNavigationBar(navigationBar)
+        
+        if viewController is BrandableNavigationBar {
+            theme.applyLightBrandLogoNavigationBar(navigationBar)
+        } else {
+            theme.applyBrandNavigationBar(navigationBar)
+        }
+
     }
     
     func statusBarAppearance(for viewController: AutolayoutViewController) -> UIStatusBarStyle {
@@ -77,7 +97,7 @@ private struct DarkThemeStrategy: ThemeStrategy {
     
     func autolayoutContainerMargins(for mask: UIInterfaceOrientationMask) -> UIEdgeInsets {
         if ((mask == .landscape) && Macros.isDevicePad) {
-            return UIEdgeInsetsMake(0, AppConfiguration.UI.iPadLandscapeMargin, 0, AppConfiguration.UI.iPadLandscapeMargin)
+            return UIEdgeInsets(top: 0, left: AppConfiguration.UI.iPadLandscapeMargin, bottom: 0, right: AppConfiguration.UI.iPadLandscapeMargin)
         }
         return .zero
     }
