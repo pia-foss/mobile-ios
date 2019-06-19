@@ -19,6 +19,10 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         static let accountInfo = "LoggedAccountInfo" // legacy
 
         static let lastSignupEmail = "LastSignupEmail"
+        
+        static let publicIP = "PublicIP"
+
+        static let historicalServers = "HistoricalServers"
 
         static let cachedServers = "CachedServers"
 
@@ -38,11 +42,15 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         static let mace = "MACE" // legacy
         
+        static let visibleTiles = "VisibleTiles"
+
+        static let orderedTiles = "OrderedTiles"
+
         static let useWiFiProtection = "UseWiFiProtection"
 
         static let trustCellularData = "TrustCellularData"
 
-        static let authMigrationSuccess = "TokenMigrationSuccess"
+        static let authMigrationSuccess = "AuthenticationTokenMigrationSuccess"
 
         static let shouldConnectForAllNetworks = "ShouldConnectForAllNetworks"
 
@@ -50,7 +58,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         static let trustedNetworks = "TrustedNetworks"
         
-        static let disconnectOnTrusted = "DisconnectOnTrusted"
+        static let nmtRulesEnabled = "NMTRulesEnabled"
 
     }
     
@@ -58,8 +66,14 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
     
     private let group: String?
     
+    private var historicalServersCopy: [Server]?
+
     private var cachedServersCopy: [Server]?
     
+    private var visibleTilesCopy: [AvailableTiles]?
+
+    private var orderedTilesCopy: [AvailableTiles]?
+
     private var serversConfigurationCopy: ServersBundle.Configuration?
     
     private var pingByServerIdentifier: [String: Int] = [:]
@@ -133,7 +147,98 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
     
+    var publicIP: String? {
+        get {
+            return backend.string(forKey: Entries.publicIP)
+        }
+        set {
+            if let publicIP = newValue {
+                backend.set(publicIP, forKey: Entries.publicIP)
+            } else {
+                backend.removeObject(forKey: Entries.publicIP)
+            }
+        }
+    }
+    
+    var visibleTiles: [AvailableTiles] {
+        get {
+            if let copy = visibleTilesCopy {
+                return copy
+            }
+            guard let intArray = backend.array(forKey: Entries.visibleTiles) as? [Int] else {
+                return AvailableTiles.defaultTiles()
+            }
+            var tiles: [AvailableTiles] = []
+            for value in intArray {
+                if let tile = AvailableTiles(rawValue: value) {
+                    tiles.append(tile)
+                }
+            }
+            return tiles
+        }
+        set {
+            var intArray: [Int] = []
+            for value in newValue {
+                intArray.append(value.rawValue)
+            }
+            backend.set(intArray, forKey: Entries.visibleTiles)
+        }
+    }
+    
+    var orderedTiles: [AvailableTiles] {
+        get {
+            if let copy = orderedTilesCopy {
+                return copy
+            }
+            guard let intArray = backend.array(forKey: Entries.orderedTiles) as? [Int] else {
+                return AvailableTiles.allTiles()
+            }
+            var tiles: [AvailableTiles] = []
+            for value in intArray {
+                if let tile = AvailableTiles(rawValue: value) {
+                    tiles.append(tile)
+                }
+            }
+            //Add new tiles when needed 
+            if tiles.count < AvailableTiles.defaultOrderedTiles().count {
+                for defaultTile in AvailableTiles.defaultOrderedTiles() {
+                    if !tiles.contains(defaultTile) {
+                        tiles.append(defaultTile)
+                    }
+                }
+            }
+            return tiles
+        }
+        set {
+            var intArray: [Int] = []
+            for value in newValue {
+                intArray.append(value.rawValue)
+            }
+            backend.set(intArray, forKey: Entries.orderedTiles)
+        }
+    }
+
+    
     // MARK: Server
+    var historicalServers: [Server] {
+        get {
+            if let copy = historicalServersCopy {
+                return copy
+            }
+            guard let jsonArray = backend.array(forKey: Entries.historicalServers) as? [JSON] else {
+                return []
+            }
+            return Array<GlossServer>.from(jsonArray: jsonArray)?.map { $0.parsed } ?? []
+        }
+        set {
+            var servers = newValue
+            if servers.count > Client.configuration.maxQuickConnectServers {
+                servers.removeFirst()
+            }
+            historicalServersCopy = servers
+            backend.set(servers.toJSONArray() ?? [], forKey: Entries.historicalServers)
+        }
+    }
 
     var cachedServers: [Server] {
         get {
@@ -158,6 +263,19 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
         set {
             backend.set(newValue?.identifier, forKey: Entries.preferredServer)
+            var lastServers = historicalServers
+            if let server = newValue {
+                
+                let filtered = lastServers.filter({$0.name == server.name})
+                if filtered.count != 0,
+                    let indexOfServer = lastServers.firstIndex(of: server) {
+                    lastServers.remove(at: indexOfServer)
+                    lastServers.insert(server, at: lastServers.count)
+                } else {
+                    lastServers.append(server)
+                }
+                historicalServers = lastServers
+            }
         }
     }
     
@@ -279,16 +397,16 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.mace)
         }
     }
-    
-    var disconnectOnTrusted: Bool? {
+
+    var nmtRulesEnabled: Bool? {
         get {
-            guard let value = backend.object(forKey: Entries.disconnectOnTrusted) as? Bool else {
+            guard let value = backend.object(forKey: Entries.nmtRulesEnabled) as? Bool else {
                 return nil
             }
             return value
         }
         set {
-            backend.set(newValue, forKey: Entries.disconnectOnTrusted)
+            backend.set(newValue, forKey: Entries.nmtRulesEnabled)
         }
     }
     
@@ -299,13 +417,16 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.mace)
         backend.removeObject(forKey: Entries.vpnType)
         backend.removeObject(forKey: Entries.vpnCustomConfigurationMaps)
+        backend.removeObject(forKey: Entries.visibleTiles)
+        backend.removeObject(forKey: Entries.orderedTiles)
+        backend.removeObject(forKey: Entries.historicalServers)
         backend.removeObject(forKey: Entries.cachedNetworks)
         backend.removeObject(forKey: Entries.trustedNetworks)
+        backend.removeObject(forKey: Entries.nmtRulesEnabled)
         backend.removeObject(forKey: Entries.shouldConnectForAllNetworks)
         backend.removeObject(forKey: Entries.useWiFiProtection)
         backend.removeObject(forKey: Entries.trustCellularData)
         backend.removeObject(forKey: Entries.authMigrationSuccess)
-        backend.removeObject(forKey: Entries.disconnectOnTrusted)
         backend.synchronize()
     }
 

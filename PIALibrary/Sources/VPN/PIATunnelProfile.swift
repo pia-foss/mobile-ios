@@ -175,6 +175,38 @@ public class PIATunnelProfile: NetworkExtensionProfile {
             }
         }
     }
+
+    /// :nodoc:
+    public func requestDataUsage(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: ((Usage?, Error?) -> Void)?) {
+        find { (vpn, error) in
+            guard let vpn = vpn else {
+                callback?(nil, error)
+                return
+            }
+            
+            do {
+                let session = vpn.connection as? NETunnelProviderSession
+                try session?.sendProviderMessage(PIATunnelProvider.Message.dataCount.data) { (data) in
+                    guard let data = data, !data.isEmpty else {
+                        guard let _ = customConfiguration as? PIATunnelProvider.Configuration else {
+                            callback?(nil, nil)
+                            return
+                        }
+                        callback?(nil, ClientError.vpnProfileUnavailable)
+                        return
+                    }
+                    
+                    let downloaded = data.getInt64(start: 0)
+                    let uploaded = data.getInt64(start: 8)
+                    let usage = Usage(uploaded: uploaded, downloaded: downloaded)
+                    callback?(usage,
+                              nil)
+                }
+            } catch let e {
+                callback?(nil, e)
+            }
+        }
+    }
     
     // MARK: NetworkExtensionProfile
     

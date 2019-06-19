@@ -25,8 +25,6 @@ protocol TransientStore: class {
     var isNetworkReachable: Bool { get set }
     
     var isInternetReachable: Bool { get set }
-    
-    var publicIP: String? { get set }
-    
+        
     var vpnIP: String? { get set }
 }

@@ -35,8 +35,8 @@ private protocol PreferencesStore: class {
     var availableNetworks: [String] { get set }
 
     var trustedNetworks: [String] { get set }
-
-    var disconnectOnTrusted: Bool { get set }
+    
+    var nmtRulesEnabled: Bool { get set }
 
     func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration?
     
@@ -62,7 +62,7 @@ private extension PreferencesStore {
         vpnCustomConfigurations = source.vpnCustomConfigurations
         availableNetworks = source.availableNetworks
         trustedNetworks = source.trustedNetworks
-        disconnectOnTrusted = source.disconnectOnTrusted
+        nmtRulesEnabled = source.nmtRulesEnabled
     }
 }
 
@@ -253,12 +253,12 @@ extension Client {
         }
 
         /// Disconnect the VPN when joining a trusted network. False by default
-        public fileprivate(set) var disconnectOnTrusted: Bool {
+        public fileprivate(set) var nmtRulesEnabled: Bool {
             get {
-                return accessedDatabase.plain.disconnectOnTrusted ?? false
+                return accessedDatabase.plain.nmtRulesEnabled ?? false
             }
             set {
-                accessedDatabase.plain.disconnectOnTrusted = newValue
+                accessedDatabase.plain.nmtRulesEnabled = newValue
             }
         }
 
@@ -271,6 +271,7 @@ extension Client.Preferences {
 
     /// Provides a means to edit `Client.Preferences` in a buffered way. Changes can be committed or reverted.
     public class Editable: PreferencesStore {
+        
         fileprivate var target: Client.Preferences?
         
         fileprivate init() {
@@ -286,7 +287,7 @@ extension Client.Preferences {
             vpnCustomConfigurations = [:]
             availableNetworks = []
             trustedNetworks = []
-            disconnectOnTrusted = false
+            nmtRulesEnabled = true
         }
 
         /**
@@ -320,7 +321,7 @@ extension Client.Preferences {
         
         /// :nodoc:
         public var mace: Bool
-        
+
         /// :nodoc:
         public var useWiFiProtection: Bool
 
@@ -349,7 +350,7 @@ extension Client.Preferences {
         public var trustedNetworks: [String]
 
         /// :nodoc:
-        public var disconnectOnTrusted: Bool
+        public var nmtRulesEnabled: Bool
 
         /// :nodoc:
         public func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration? {
@@ -388,7 +389,7 @@ extension Client.Preferences {
             if (trustedNetworks != target.trustedNetworks) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
-            if (disconnectOnTrusted != target.disconnectOnTrusted) {
+            if (nmtRulesEnabled != target.nmtRulesEnabled) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
             if (vpnDisconnectsOnSleep != target.vpnDisconnectsOnSleep) {
@@ -432,6 +433,9 @@ extension Client.Preferences {
                 return false
             }
             if (mace != target.mace) {
+                return true
+            }
+            if (isPersistentConnection != target.isPersistentConnection) {
                 return true
             }
             if let configuration = vpnCustomConfigurations[vpnType],

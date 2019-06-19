@@ -10,10 +10,6 @@
 "login.username.placeholder" = "Username (p1234567)";
 "login.password.placeholder" = "Password";
 "login.submit" = "LOGIN";
-"login.purchase.footer" = "Don’t have an account?";
-"login.purchase.button" = "Buy now";
-"login.redeem.footer" = "Have a gift card or trial card?";
-"login.redeem.button" = "Redeem now";
 "login.restore.button" = "Didn't receive account details?";
 "login.error.title" = "Log in";
 "login.error.validation" = "You must enter a username and password.";
@@ -23,14 +19,16 @@
 "purchase.title" = "Select a VPN plan";
 "purchase.subtitle" = "7-day money back guarantee";
 "purchase.email.placeholder" = "Email address";
-"purchase.submit" = "BUY NOW";
+"purchase.continue" = "Continue";
 "purchase.login.footer" = "Already have an account?";
 "purchase.login.button" = "Sign in";
 "purchase.error.title" = "Purchase";
 "purchase.error.validation" = "You must enter an email address.";
 "purchase.error.connectivity.title" = "Connection Failure";
 "purchase.error.connectivity.description" = "We are unable to reach Private Internet Access. This may due to poor internet or our service is blocked in your country.";
-
+"purchase.confirm.form.email" = "Enter your email address";
+"purchase.confirm.plan" = "You are purchasing the %@ plan";
+"purchase.submit" = "Submit";
 
 "redeem.title" = "Redeem gift card";
 "redeem.subtitle" = "Type in your email address and the %lu digit PIN from your gift card or trial card below.";
@@ -38,7 +36,11 @@
 "redeem.submit" = "SUBMIT";
 "redeem.error.title" = "Redeem";
 "redeem.error.code" = "Code must be %lu numeric digits.";
+"redeem.error.allfields"="Please type in your email and card PIN.";
 "redeem.error.qrcode.invalid" = "Invalid QR code sequence. Please try again.";
+"redeem.accessibility.back" = "Back";
+"redeem.scanqr" = "Scan QR";
+"redeem.giftcard.placeholder" = "Gift card PIN";
 
 "plan.monthly.title" = "Monthly";
 "plan.yearly.title" = "Yearly";
@@ -48,7 +50,7 @@
 "plan.accessibility.per_month" = "per month";
 
 "restore.title" = "Restore uncredited purchase";
-"restore.subtitle" = "If you purchased a plan through this app and didn't receive your credentials, you can send them again from here.\nYou will not be charged during this process.";
+"restore.subtitle" = "If you purchased a plan through this app and didn't receive your credentials, you can send them again from here. You will not be charged during this process.";
 "restore.email.placeholder" = "Email address";
 "restore.submit" = "CONFIRM";
 
@@ -62,6 +64,8 @@
 "camera.access.error.title" = "Camera not available";
 "camera.access.error.message" = "Your device does not support scanning QR codes. Please use a device with a camera.";
 "camera.access.denied.message" = "Enable camera access so you can scan QR codes to redeem a gift card.";
+
+"getstarted.buttons.buyaccount" = "Buy account";
 
 "gdpr.collect.data.title" = "Personal information we collect";
 "gdpr.collect.data.description" = "E-mail Address for the purposes of account management and protection from abuse.\n\nPayment Data for the purposes of processing payments as required by our third-party payment processors. Note that we do not save your full credit card details.";

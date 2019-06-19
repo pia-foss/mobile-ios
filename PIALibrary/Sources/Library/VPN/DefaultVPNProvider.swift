@@ -10,6 +10,7 @@ import Foundation
 import __PIALibraryNative
 
 class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, PreferencesAccess, ProvidersAccess, WebServicesAccess {
+    
     private static let forcedStatuses: [VPNStatus] = [
         .connected,
         .connecting
@@ -47,7 +48,7 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
     }
     
     var publicIP: String? {
-        return accessedDatabase.transient.publicIP
+        return accessedDatabase.plain.publicIP
     }
     
     var vpnIP: String? {
@@ -233,6 +234,20 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
                 }
                 callback?(vpnLog, nil)
             }
+        }
+    }
+    
+    func dataUsage(_ callback: LibraryCallback<Usage>?) {
+        guard let activeProfile = activeProfile else {
+            preconditionFailure()
+        }
+        let configuration = vpnClientConfiguration()
+        activeProfile.requestDataUsage(withCustomConfiguration: configuration.customConfiguration) { (usage, error) in
+            guard let usage = usage else {
+                callback?(nil, error)
+                return
+            }
+            callback?(usage, nil)
         }
     }
     

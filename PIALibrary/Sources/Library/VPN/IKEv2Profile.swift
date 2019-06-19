@@ -139,6 +139,11 @@ public class IKEv2Profile: NetworkExtensionProfile {
         callback?(nil, ClientError.unsupported)
     }
 
+    /// :nodoc:
+    public func requestDataUsage(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: LibraryCallback<Usage>?) {
+        callback?(nil, ClientError.unsupported)
+    }
+
     // MARK: NetworkExtensionProfile
     
     /// :nodoc:

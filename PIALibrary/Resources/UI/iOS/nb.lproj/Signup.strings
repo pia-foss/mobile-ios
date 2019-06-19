@@ -9,10 +9,13 @@
 "in_progress.message" = "Vi bekrefter kjøpet i systemet vårt. Dette kan ta litt tid.";
 "in_progress.redeem.message" = "Vi bekrefter kort-PIN-en din i systemet vårt. Det kan ta et øyeblikk, så vennligst vent.";
 "in_progress.title" = "Bekrefter registrering";
+"purchase.uncredited.alert.button.cancel" = "Abryt";
+"purchase.uncredited.alert.button.recover" = "Gjenopprett konto";
+"purchase.uncredited.alert.message" = "Du har ikke krediterte transaksjoner. Vil du gjenopprette kontoinformasjonen din?";
 "success.message_format" = "Takk for at du registrerte deg. Vi har sendt deg kontonavnet og passordet ditt til e-postadressen din %@";
 "success.password.caption" = "Passord";
-"success.redeem.message" = "Du mottar også en e-post med brukernavn og passord.";
-"success.redeem.title" = "Fullført!";
+"success.redeem.message" = "Du mottar en e-post med brukernavn og passord.\n\nPåloggingsinformasjonen din";
+"success.redeem.title" = "Kortet har blitt innløst";
 "success.submit" = "Komme i gang";
 "success.title" = "Kjøp fullført";
 "success.username.caption" = "Brukernavn";

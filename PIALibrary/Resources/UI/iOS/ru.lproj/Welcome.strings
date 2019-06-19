@@ -9,6 +9,7 @@
 "gdpr.collect.data.title" = "Личная информация, которую мы собираем";
 "gdpr.usage.data.description" = "Адрес эл. почты используется исключительно для отправки информации о подписке, подтверждений оплаты, переписки с пользователем и отправки акционных предложений Private Internet Access.\n\nПлатежные данные используются для управления регистрацией клиентов, платежей и отмены платежей.";
 "gdpr.usage.data.title" = "Использование собираемой нами личной информации";
+"getstarted.buttons.buyaccount" = "Приобрести учетную запись";
 "iap.error.message.unavailable" = "Серверы Apple временно недоступны. Повторите попытку позже.";
 "iap.error.title" = "Ошибка";
 "login.error.throttled" = "Слишком много неудачных попыток входа с использованием этого имени пользователя. Повторите попытку позже.";
@@ -30,6 +31,9 @@
 "plan.price_format" = "%@/мес.";
 "plan.yearly.detail_format" = "%@%@ в год";
 "plan.yearly.title" = "Ежегодно";
+"purchase.confirm.form.email" = "Введите свой адрес эл. почты";
+"purchase.confirm.plan" = "Вы приобретаете план «%@»";
+"purchase.continue" = "Продолжить";
 "purchase.email.placeholder" = "Адрес эл. почты";
 "purchase.error.connectivity.description" = "Не удалось подключиться к Private Internet Access. Это может быть из-за плохого качества соединения с Интернетом, или наша служба заблокирована в вашей стране.";
 "purchase.error.connectivity.title" = "Ошибка подключения";
@@ -37,13 +41,17 @@
 "purchase.error.validation" = "Укажите адрес эл. почты.";
 "purchase.login.button" = "Вход";
 "purchase.login.footer" = "Уже есть учетная запись?";
-"purchase.submit" = "КУПИТЬ";
+"purchase.submit" = "Отправить";
 "purchase.subtitle" = "7-дневная гарантия возврата денег";
 "purchase.title" = "Выберите план VPN";
+"redeem.accessibility.back" = "Назад";
 "redeem.email.placeholder" = "Адрес эл. почты";
+"redeem.error.allfields" = "Введите свой эл. адрес и PIN-код карты";
 "redeem.error.code" = "В коде должно быть %lu цифр(ы).";
 "redeem.error.qrcode.invalid" = "Неверная последовательность QR-кодов. Попробуйте еще раз.";
 "redeem.error.title" = "Использовать";
+"redeem.giftcard.placeholder" = "PIN-код подарочной карты";
+"redeem.scanqr" = "Сканировать QR-код";
 "redeem.submit" = "ОТПРАВИТЬ";
 "redeem.subtitle" = "Введите свой адрес эл. почты и %lu-зн. PIN-код с подарочной или триальной карты.";
 "redeem.title" = "Исп-ть подарочную карту";

@@ -23,7 +23,7 @@ class GDPRViewController: AutolayoutViewController {
     @IBOutlet private weak var labelUseDataTitle: UILabel!
     @IBOutlet private weak var labelUseDataDescription: UILabel!
 
-    @IBOutlet private weak var acceptButton: UIButton!
+    @IBOutlet private weak var acceptButton: PIAButton!
     @IBOutlet private weak var closeButton: UIButton!
 
     weak var delegate: GDPRDelegate? = nil
@@ -45,14 +45,11 @@ class GDPRViewController: AutolayoutViewController {
         
         Theme.current.applyTitle(labelCollectTitle, appearance: .dark)
         Theme.current.applyTitle(labelUseDataTitle, appearance: .dark)
-        Theme.current.applySmallInfo(labelCollectDescription, appearance: .dark)
-        Theme.current.applySmallInfo(labelUseDataDescription, appearance: .dark)
-        Theme.current.applyTextButton(acceptButton)
-        
-        acceptButton.titleLabel?.font = Theme.current.typeface.mediumFont(size: 15.0)
-        acceptButton.backgroundColor = Theme.current.palette.emphasis
-        acceptButton.setTitleColor(Theme.current.palette.solidButtonText, for: [])
-        acceptButton.layer.cornerRadius = 4.0
+        Theme.current.applySubtitle(labelCollectDescription)
+        Theme.current.applySubtitle(labelUseDataDescription)
+
+        acceptButton.setRounded()
+        acceptButton.style(style: TextStyle.Buttons.piaGreenButton)
         
     }
     

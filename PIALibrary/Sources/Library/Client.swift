@@ -51,7 +51,6 @@ public final class Client {
     public static func bootstrap() {
         #if os(iOS)
         store.startObservingTransactions()
-        providers.accountProvider.listPlanProducts(nil)
         #endif
 
         // preload servers from optionally bundled JSON
@@ -71,6 +70,15 @@ public final class Client {
         VPNDaemon.shared.start()
         VPNDaemon.shared.enableUpdates()
     }
+    
+    /**
+     Refresh the list of plan products
+     */
+    public static func refreshProducts() {
+        #if os(iOS)
+        providers.accountProvider.listPlanProducts(nil)
+        #endif
+    }
 
     /**
      Disposes the client resources and observers.
@@ -81,5 +89,12 @@ public final class Client {
         #if os(iOS)
         store.stopObservingTransactions()
         #endif
+    }
+    
+    /**
+     Refresh the ping number to the given servers
+     */
+    public static func ping(servers: [Server]) {
+        ServersPinger.shared.ping(withDestinations: servers)
     }
 }

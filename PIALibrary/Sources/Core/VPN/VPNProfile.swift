@@ -89,6 +89,15 @@ public protocol VPNProfile: class {
      - Parameter callback: Returns `ClientError.unsupported` if the profile doesn't support logging.
      */
     func requestLog(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: LibraryCallback<String>?)
+    
+    /**
+     Requests the data usage from this profile.
+     
+     - Parameter customConfiguration: The optional `VPNCustomConfiguration` required to access the debug log.
+     - Parameter callback: Returns `ClientError.unsupported` if the profile doesn't support logging.
+     */
+    func requestDataUsage(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: LibraryCallback<Usage>?)
+
 }
 
 extension VPNProfile {

@@ -9,6 +9,7 @@
 "gdpr.collect.data.title" = "Informations personnelles que nous collectons";
 "gdpr.usage.data.description" = "L'adresse e-mail est utilisée pour envoyer les informations d'abonnement, les confirmation de paiement, la correspondance avec le client, et les offres promotionnelles de Private Internet Access uniquement.\n\nLes données de paiement servent à gérer l'inscription, les paiements et les annulations du client.";
 "gdpr.usage.data.title" = "Utilisation des informations personnelles que nous collectons";
+"getstarted.buttons.buyaccount" = "Acheter un compte";
 "iap.error.message.unavailable" = "Les serveurs Apple ne sont pas disponibles actuellement. Veuillez réessayer plus tard.";
 "iap.error.title" = "Erreur";
 "login.error.throttled" = "Trop de tentatives de connexion échouées avec ce nom d'utilisateur. Veuillez réessayer plus tard.";
@@ -30,6 +31,9 @@
 "plan.price_format" = "%@/mo";
 "plan.yearly.detail_format" = "%@%@ par an";
 "plan.yearly.title" = "Annuellement";
+"purchase.confirm.form.email" = "Saisissez votre adresse e-mail";
+"purchase.confirm.plan" = "Vous achetez le forfait %@";
+"purchase.continue" = "Continuer";
 "purchase.email.placeholder" = "Adresse e-mail";
 "purchase.error.connectivity.description" = "Nous n'arrivons pas à joindre Private Internet Access. Cela peut être dû à une connexion Internet de faible qualité ou parce que notre service est bloqué dans votre pays.";
 "purchase.error.connectivity.title" = "Échec de la connexion";
@@ -37,13 +41,17 @@
 "purchase.error.validation" = "Vous devez entrer une adresse e-mail.";
 "purchase.login.button" = "Connectez-vous";
 "purchase.login.footer" = "Vous avez déjà un compte ?";
-"purchase.submit" = "ACHETER MAINTENANT";
+"purchase.submit" = "Envoyer";
 "purchase.subtitle" = "7 jours pour être satisfait ou remboursé";
 "purchase.title" = "Sélectionnez un forfait VPN";
+"redeem.accessibility.back" = "Retour";
 "redeem.email.placeholder" = "Adresse e-mail";
+"redeem.error.allfields" = "Saisissez votre e-mail et le code PIN de votre carte.";
 "redeem.error.code" = "Le code doit contenir %lu chiffres numériques.";
 "redeem.error.qrcode.invalid" = "Séquence de code QR invalide. Veuillez réessayer.";
 "redeem.error.title" = "Échanger";
+"redeem.giftcard.placeholder" = "Code PIN de la carte";
+"redeem.scanqr" = "Scanner le QR";
 "redeem.submit" = "ENVOYER";
 "redeem.subtitle" = "Veuillez saisir ci-dessous votre adresse e-mail et le code PIN à %lu chiffres de votre carte cadeau ou carte d'essai.";
 "redeem.title" = "Échanger carte cadeau";

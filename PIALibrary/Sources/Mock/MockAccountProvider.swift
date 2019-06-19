@@ -209,6 +209,11 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     }
     
     /// :nodoc:
+    public func updatePlanProductIdentifiers(_ callback: LibraryCallback<[Product]>?) {
+        delegate.updatePlanProductIdentifiers(callback)
+    } 
+    
+    /// :nodoc:
     public func signup(with request: SignupRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         Macros.dispatch(after: .seconds(1)) {
             switch self.mockSignupOutcome {

@@ -164,6 +164,13 @@ public protocol AccountProvider: class {
     func listRenewablePlans(_ callback: LibraryCallback<[Plan]>?)
     
     /**
+     Lists plans available for purchase or renewal in the PIA database.
+     
+     - Parameter callback: Returns a list of available plans.
+     */
+    func updatePlanProductIdentifiers(_ callback: LibraryCallback<[Product]>?)
+
+    /**
      Renews expiring plan with current purchase history.
      
      - Precondition: `currentUser` has a renewable plan.

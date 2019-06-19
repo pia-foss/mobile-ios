@@ -9,10 +9,13 @@
 "in_progress.message" = "我們的系統正確認您的購買交易，可能需要停留在此畫面幾分鐘時間。";
 "in_progress.redeem.message" = "我們的系統正在確認您的卡 PIN 碼。這可能需要一點時間，請稍候。";
 "in_progress.title" = "壓認註冊";
+"purchase.uncredited.alert.button.cancel" = "取消";
+"purchase.uncredited.alert.button.recover" = "回復帳戶";
+"purchase.uncredited.alert.message" = "您有未貸記的交易，要回復帳戶資料嗎？";
 "success.message_format" = "感謝您註冊我們的服務！我們已將您的帳戶使用者名稱和密碼寄送到您的電子郵件地址：%@";
 "success.password.caption" = "密碼";
-"success.redeem.message" = "您將很快收到一封包含您的用戶名稱和密碼的電子郵件。";
-"success.redeem.title" = "完成！";
+"success.redeem.message" = "您很快就會收到一封電子郵件，內有使用者名稱及密碼。\n\n您的登入資料";
+"success.redeem.title" = "已成功兌換禮品卡";
 "success.submit" = "開始使用";
 "success.title" = "購買完成";
 "success.username.caption" = "使用者名稱";

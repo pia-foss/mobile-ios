@@ -40,6 +40,8 @@ extension Notification.Name {
     /// - Seealso: `VPNProvider.install(...)`
     public static let PIAVPNDidInstall = Notification.Name("PIAVPNDidInstall")
 
+    public static let PIAVPNUsageUpdate = Notification.Name("PIAVPNUsageUpdate")
+
     #if os(iOS)
     
     // MARK: InApp

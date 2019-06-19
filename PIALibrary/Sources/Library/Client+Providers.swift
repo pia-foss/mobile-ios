@@ -21,5 +21,9 @@ extension Client {
         
         /// Provides methods for controlling the VPN connection.
         public var vpnProvider: VPNProvider = DefaultVPNProvider()
+        
+        /// Provides tiles related methods.
+        public var tileProvider: TileProvider = DefaultTileProvider()
+
     }
 }

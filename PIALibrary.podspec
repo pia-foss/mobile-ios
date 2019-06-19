@@ -1,14 +1,14 @@
 Pod::Spec.new do |s|
     s.name              = "PIALibrary"
-    s.version           = "1.1.9"
+    s.version           = "2.0.0"
     s.summary           = "PIA client library in Swift."
 
     s.homepage          = "https://www.privateinternetaccess.com/"
     s.license           = { :type => "MIT", :file => "LICENSE" }
-    s.author            = { "Jose Blaya" => "joseblaya@londontrustmedia.com" }
+    s.author            = { "Davide De Rosa" => "davide@londontrustmedia.com", "Jose Blaya" => "joseblaya@londontrustmedia.com" }
     s.source            = { :git => "https://github.com/pia-foss/client-library-apple.git", :tag => "v#{s.version}" }
 
-    s.ios.deployment_target = "9.0"
+    s.ios.deployment_target = "10.0"
     #s.osx.deployment_target = "10.11"
 
     s.default_subspecs = "Core", "Library"
@@ -31,6 +31,7 @@ Pod::Spec.new do |s|
         p.dependency "Alamofire", "~> 4"
         p.dependency "ReachabilitySwift"
         p.dependency "SwiftyBeaver"
+        p.dependency "PopupDialog"
     end
 
     s.subspec "VPN" do |p|
@@ -38,8 +39,13 @@ Pod::Spec.new do |s|
         p.frameworks            = "NetworkExtension"
         p.pod_target_xcconfig   = { "APPLICATION_EXTENSION_API_ONLY" => "YES" }
 
-        p.dependency "PIATunnel", "~> 1.1.8"
+        p.dependency "PIATunnel", "~> 2.0.0"
         p.dependency "PIALibrary/Library"
+    end
+
+    s.subspec "Lottie" do |p|
+        p.dependency "PIALibrary/Core"
+        p.dependency "PIALibrary/Util"
     end
 
     s.subspec "UI" do |p|
@@ -47,8 +53,10 @@ Pod::Spec.new do |s|
         p.resources             = "PIALibrary/Resources/UI/Shared/**/*"
         p.dependency "PIALibrary/Library"
         p.dependency "SwiftyBeaver"
+        p.dependency "SwiftEntryKit", "0.7.2"
+        p.dependency "lottie-ios"
 
-        p.ios.source_files      = "PIALibrary/Sources/UI/iOS/*.swift"
+        p.ios.source_files      = "PIALibrary/Sources/UI/iOS/**/*.swift"
         p.ios.resources         = "PIALibrary/Resources/UI/iOS/**/*"
         p.ios.dependency "TPKeyboardAvoiding"
 

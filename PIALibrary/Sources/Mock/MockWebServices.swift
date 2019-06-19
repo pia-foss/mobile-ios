@@ -64,4 +64,8 @@ class MockWebServices: WebServices {
     func submitDebugLog(_ log: DebugLog, _ callback: SuccessLibraryCallback?) {
         callback?(nil)
     }
+    
+    func planProductIdentifiers(_ callback: LibraryCallback<[Product]>?) {
+        callback?([Product(identifier: "com.product.monthly", plan: .monthly, price: "3.99", legacy: false)], nil)
+    }
 }

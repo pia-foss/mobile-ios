@@ -95,6 +95,13 @@ public protocol VPNProvider: class {
      - Parameter callback: Returns the submitted `DebugLog` on success.
      */
     func submitLog(_ callback: LibraryCallback<DebugLog>?)
+    
+    /**
+     Submits the usage information associated with the current VPN connection.
+     
+     - Parameter callback: Returns the `Usage` information on success.
+     */
+    func dataUsage(_ callback: LibraryCallback<Usage>?)
 }
 
 extension VPNProvider {

@@ -9,10 +9,13 @@
 "in_progress.message" = "We zijn uw aankoop aan het verifiëren in ons systeem. Dit kan eventjes duren, daarom vragen we u vriendelijk om geduld.";
 "in_progress.redeem.message" = "We zijn uw pincode aan het verifiëren in ons systeem. Dit kan eventjes duren, daarom vragen we u vriendelijk om geduld.";
 "in_progress.title" = "Aanmelding bevestigen";
+"purchase.uncredited.alert.button.cancel" = "Annuleren";
+"purchase.uncredited.alert.button.recover" = "Account herstellen";
+"purchase.uncredited.alert.message" = "U heeft niet-gecrediteerde transacties. Wilt u uw accountgegevens herstellen?";
 "success.message_format" = "Bedankt voor uw aanmelding. We hebben de gebruikersnaam en het wachtwoord voor uw account naar het volgende e-mailadres gestuurd: %@";
 "success.password.caption" = "Wachtwoord";
-"success.redeem.message" = "U ontvangt zo ook een e-mail met uw gebruikersnaam en wachtwoord.";
-"success.redeem.title" = "Voltooid!";
+"success.redeem.message" = "U ontvangt zo een e-mail met uw gebruikersnaam en wachtwoord.";
+"success.redeem.title" = "Kaart ingewisseld";
 "success.submit" = "Aan de slag";
 "success.title" = "Aankoop voltooid";
 "success.username.caption" = "Gebruikersnaam";

@@ -69,6 +69,12 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
     }
     
     /// :nodoc:
+    public var historicalServers: [Server] {
+        //        return delegate.currentServers
+        return mockServers
+    }
+
+    /// :nodoc:
     public var currentServers: [Server] {
 //        return delegate.currentServers
         return mockServers

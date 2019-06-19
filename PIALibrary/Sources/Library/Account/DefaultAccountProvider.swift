@@ -273,6 +273,25 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
     }
 
     #if os(iOS)
+    func updatePlanProductIdentifiers(_ callback: LibraryCallback<[Product]>?) {
+        log.debug("Fetching available product keys...")
+        webServices.planProductIdentifiers({ products, error in
+        
+            if let _ = error {
+                callback?(nil, error)
+                return
+            }
+            
+            if let products = products,
+                products.count > 0 {
+                callback?(products, nil)
+            } else {
+                callback?(nil, ClientError.malformedResponseData)
+            }
+
+        })
+    }
+    
     func listPlanProducts(_ callback: (([Plan : InAppProduct]?, Error?) -> Void)?) {
         log.debug("Fetching available products...")
         
@@ -516,6 +535,9 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
         accessedDatabase.secure.setPublicUsername(nil)
         accessedDatabase.plain.accountInfo = nil
+        accessedDatabase.plain.visibleTiles = AvailableTiles.defaultTiles()
+        accessedDatabase.plain.orderedTiles = AvailableTiles.defaultTiles()
+        accessedDatabase.plain.historicalServers = []
         accessedDatabase.plain.reset()
     }
     

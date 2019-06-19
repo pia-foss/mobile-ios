@@ -210,6 +210,39 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         })
     }
     
+    // MARK: Store
+    func planProductIdentifiers(_ callback: LibraryCallback<[Product]>?) {
+        let endpoint = ClientEndpoint.ios
+        let status = [200, 400]
+        let errors: [Int: ClientError] = [
+            400: .badReceipt
+        ]
+        
+        req(nil, .get, endpoint, useAuthToken: false, nil, status, JSONRequestExecutor() { (json, status, error) in
+            if let knownError = self.knownError(endpoint, status, errors) {
+                callback?(nil, knownError)
+                return
+            }
+            guard let json = json else {
+                callback?(nil, error)
+                return
+            }
+            
+            if let availableJSONProducts =  json["available_products"] as? [JSON] {
+                guard let products = [Product].from(jsonArray: availableJSONProducts) else {
+                    callback?(nil, error)
+                    return
+                }
+                callback?(products, nil)
+            } else {
+                callback?(nil, error)
+                return
+            }
+            
+        })
+
+    }
+    
     // MARK: Helpers
 
     private func req(

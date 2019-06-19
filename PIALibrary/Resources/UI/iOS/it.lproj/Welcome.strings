@@ -9,6 +9,7 @@
 "gdpr.collect.data.title" = "Dati personali da noi raccolti";
 "gdpr.usage.data.description" = "L'indirizzo email viene utilizzato solo per inviare informazioni sull'abbonamento, conferme di pagamento, corrispondenza col cliente e offerte promozionali di Private Internet Access.\n\nI dati di pagamento vengono usati per gestire iscrizioni, pagamenti e cancellazioni del cliente.";
 "gdpr.usage.data.title" = "Usi delle informazioni personali da noi richieste";
+"getstarted.buttons.buyaccount" = "Acquista account";
 "iap.error.message.unavailable" = "Server Apple attualmente non disponibili. Riprova più tardi.";
 "iap.error.title" = "Errore";
 "login.error.throttled" = "Troppi tentativi d'accesso non riusciti con questo nome utente. Riprova più tardi.";
@@ -30,6 +31,9 @@
 "plan.price_format" = "%@ al mese";
 "plan.yearly.detail_format" = "%@%@ all'anno";
 "plan.yearly.title" = "Annuale";
+"purchase.confirm.form.email" = "Inserisci il tuo indirizzo email";
+"purchase.confirm.plan" = "Stai acquistando il piano %@";
+"purchase.continue" = "Continua";
 "purchase.email.placeholder" = "Indirizzo email";
 "purchase.error.connectivity.description" = "Non siamo in grado di stabilire l'accesso a una rete Internet privata. Ciò potrebbe essere dovuto a una scarsa qualità della rete o a un blocco dei nostri servizi nel tuo paese.";
 "purchase.error.connectivity.title" = "Errore di connessione";
@@ -37,13 +41,17 @@
 "purchase.error.validation" = "Devi indicare un indirizzo e-mail.";
 "purchase.login.button" = "Accedi";
 "purchase.login.footer" = "Possiedi già un account?";
-"purchase.submit" = "ACQUISTA ORA";
+"purchase.submit" = "Invia";
 "purchase.subtitle" = "Garanzia di rimborso entro 7 giorni";
 "purchase.title" = "Seleziona un piano VPN";
+"redeem.accessibility.back" = "Indietro";
 "redeem.email.placeholder" = "Indirizzo email";
+"redeem.error.allfields" = "Digita il tuo indirizzo email e PIN della carta.";
 "redeem.error.code" = "Il codice dev'essere di %lu cifre.";
 "redeem.error.qrcode.invalid" = "Sequenza codice QR non valida. Riprova.";
 "redeem.error.title" = "Riscatta";
+"redeem.giftcard.placeholder" = "PIN carta regalo";
+"redeem.scanqr" = "Scansione QR";
 "redeem.submit" = "INVIA";
 "redeem.subtitle" = "Digita qui sotto il tuo indirizzo email e le %lu cifre del PIN della carta regalo o carta di prova.";
 "redeem.title" = "Riscatta la carta regalo";

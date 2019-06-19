@@ -12,7 +12,7 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-extension Notification.Name {
+public extension Notification.Name {
     static let ConnectivityDaemonDidGetReachable = Notification.Name("ConnectivityDaemonDidGetReachable")
 
     static let ConnectivityDaemonDidGetUnreachable = Notification.Name("ConnectivityDaemonDidGetUnreachable")
@@ -32,7 +32,7 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
     private var pendingConnectivityCheck: URLSessionDataTask?
 
     private var wasConnected: Bool
-    
+
     private init() {
         hasEnabledUpdates = false
 
@@ -76,6 +76,9 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
         reachability.whenReachable = { (reach) in
             DispatchQueue.main.async {
                 guard !self.accessedDatabase.transient.isNetworkReachable else {
+                    if (self.accessedDatabase.transient.vpnStatus != .connected) {
+                        self.checkConnectivityOrRetry()
+                    }
                     return
                 }
                 log.debug("Network is now REACHABLE")
@@ -107,7 +110,6 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
         }
 
         log.debug("Checking network connectivity...")
-        accessedDatabase.transient.publicIP = nil
         accessedDatabase.transient.vpnIP = nil
         Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
 
@@ -146,7 +148,7 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
                 self.accessedDatabase.transient.vpnIP = ipAddress
                 log.debug("VPN IP -> \(ipAddress)")
             } else {
-                self.accessedDatabase.transient.publicIP = ipAddress
+                self.accessedDatabase.plain.publicIP = ipAddress
                 log.debug("Public IP -> \(ipAddress)")
             }
             
@@ -156,7 +158,7 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
     }
 
     // MARK: Notifications
-    
+   
     @objc private func vpnStatusDidChange(notification: Notification) {
         switch accessedDatabase.transient.vpnStatus {
         case .connected:

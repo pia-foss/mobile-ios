@@ -12,30 +12,28 @@ class PurchasePlanCell: UICollectionViewCell, Restylable {
     
     // XXX
     private static let textPlaceholder = "                    "
-
     private static let pricePlaceholder = "             "
+    private static let bestValueContainerHeight: CGFloat = 20.0
+    private static let priceBottomConstant: CGFloat = 26.0
 
     @IBOutlet private weak var viewContainer: UIView!
-
-    @IBOutlet private weak var viewHeader: UIView!
-
     @IBOutlet private weak var viewBestValue: UIView!
-    
     @IBOutlet private weak var labelBestValue: UILabel!
-    
     @IBOutlet private weak var labelPlan: UILabel!
-
-    @IBOutlet private weak var viewSpacer: UIView!
-
     @IBOutlet private weak var labelPrice: UILabel!
-
     @IBOutlet private weak var labelDetail: UILabel!
+
+    @IBOutlet private weak var unselectedPlanImageView: UIImageView!
+    @IBOutlet private weak var selectedPlanImageView: UIImageView!
+
+    @IBOutlet private weak var bestValueHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var priceBottomConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         isSelected = false
-        labelBestValue.text = L10n.Welcome.Plan.bestValue
+        labelBestValue.text = L10n.Welcome.Plan.bestValue.uppercased()
+        selectedPlanImageView.alpha = 0
     }
     
     func fill(plan: PurchasePlan) {
@@ -60,7 +58,14 @@ class PurchasePlanCell: UICollectionViewCell, Restylable {
             labelDetail.text = plan.detail
             labelPrice.text = L10n.Welcome.Plan.priceFormat(plan.monthlyPriceString)
             viewBestValue.isHidden = !plan.bestValue
-
+            if viewBestValue.isHidden {
+                bestValueHeightConstraint.constant = 0
+                priceBottomConstraint.constant = 0
+            } else {
+                bestValueHeightConstraint.constant = PurchasePlanCell.bestValueContainerHeight
+                priceBottomConstraint.constant = PurchasePlanCell.priceBottomConstant
+            }
+            
             if plan.plan == Plan.yearly {
                 Theme.current.applyTitle(labelDetail, appearance: .dark)
                 Theme.current.applySmallInfo(labelPrice, appearance: .dark)
@@ -68,6 +73,8 @@ class PurchasePlanCell: UICollectionViewCell, Restylable {
                 Theme.current.applyTitle(labelPrice, appearance: .dark)
                 Theme.current.applySmallInfo(labelDetail, appearance: .dark)
             }
+
+            self.layoutSubviews()
 
             accessibilityLabel = "\(plan.title), \(plan.accessibleMonthlyPriceString) \(L10n.Welcome.Plan.Accessibility.perMonth)"
         }
@@ -80,13 +87,13 @@ class PurchasePlanCell: UICollectionViewCell, Restylable {
 //            Theme.current.applyTitle(labelPrice, appearance:(isSelected ? .emphasis : .dark))
 
             if isSelected {
-                Theme.current.applySolidSelection(viewHeader)
-                Theme.current.applyTitle(labelPlan, appearance: .light)
-                viewSpacer.isHidden = true
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.selectedPlanImageView.alpha = 1
+                })
             } else {
-                viewHeader.backgroundColor = .clear
-                Theme.current.applyTitle(labelPlan, appearance: .dark)
-                viewSpacer.isHidden = false
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.selectedPlanImageView.alpha = 0
+                })
             }
         }
     }
@@ -94,9 +101,11 @@ class PurchasePlanCell: UICollectionViewCell, Restylable {
     // MARK: Restylable
 
     func viewShouldRestyle() {
-        Theme.current.applyCorner(viewBestValue, factor: 0.5)
+        Theme.current.applyCorner(viewBestValue, factor: 1.0)
         Theme.current.applyWarningBackground(viewBestValue)
-        Theme.current.applyTag(labelBestValue, appearance: .light)
-        Theme.current.applyDivider(viewSpacer)
+        Theme.current.applyBlackLabelInBox(labelBestValue)
+        Theme.current.applySubtitle(labelPlan)
+        Theme.current.applyTitle(labelPrice, appearance: .dark)
+        Theme.current.applySubtitle(labelDetail)
     }
 }

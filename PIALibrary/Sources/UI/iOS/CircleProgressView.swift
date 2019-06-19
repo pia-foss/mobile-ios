@@ -108,7 +108,7 @@ public class CircleProgressView: UIView {
 
         for anim: CABasicAnimation in [outerRotation, innerRotation] {
             anim.duration = 3.0
-            anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+            anim.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
             anim.repeatCount = .infinity
 //            anim.autoreverses = true
         }

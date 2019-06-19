@@ -14,6 +14,7 @@ private let log = SwiftyBeaver.self
 
 /// Implementation of `VPNProfile` providing IPsec connectivity.
 public class IPSecProfile: NetworkExtensionProfile {
+    
     private static let identity = "client-ikev1"
     
 //    private static let identityCommonName = "*.privateinternetaccess.com"
@@ -151,6 +152,11 @@ public class IPSecProfile: NetworkExtensionProfile {
     
     /// :nodoc:
     public func requestLog(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: ((String?, Error?) -> Void)?) {
+        callback?(nil, ClientError.unsupported)
+    }
+    
+    /// :nodoc:
+    public func requestDataUsage(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: LibraryCallback<Usage>?) {
         callback?(nil, ClientError.unsupported)
     }
     

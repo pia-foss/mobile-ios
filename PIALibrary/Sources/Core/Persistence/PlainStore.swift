@@ -15,9 +15,14 @@ protocol PlainStore: class {
     var accountInfo: AccountInfo? { get set }
     
     var lastSignupEmail: String? { get set }
+    
+    // MARK: IP
+
+    var publicIP: String? { get set }
 
     // MARK: Server
-    
+    var historicalServers: [Server] { get set }
+
     var cachedServers: [Server] { get set }
     
     var preferredServer: Server? { get set }
@@ -30,6 +35,11 @@ protocol PlainStore: class {
     
     func clearPings()
     
+    // MARK: Tiles
+    var visibleTiles: [AvailableTiles] {get set}
+    
+    var orderedTiles: [AvailableTiles] {get set}
+
     // MARK: VPN
     
     var vpnType: String? { get set }
@@ -63,6 +73,6 @@ protocol PlainStore: class {
     
     var trustedNetworks: [String] { get set }
     
-    var disconnectOnTrusted: Bool? { get set }
+    var nmtRulesEnabled: Bool? { get set }
 
 }

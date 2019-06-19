@@ -24,9 +24,11 @@ enum ClientEndpoint: String, Endpoint {
     case updateAccount = "account"
 
     case payment
-    
+
     case status
-    
+
+    case ios
+
     var url: URL {
         return URL(string: "\(accessedConfiguration.baseUrl)/api/client/\(rawValue)")!
     }

@@ -27,6 +27,7 @@ internal enum StoryboardScene {
     internal static let purchaseViewController = SceneType<PIALibrary.PurchaseViewController>(storyboard: Welcome.self, identifier: "PurchaseViewController")
 
     internal static let redeemViewController = SceneType<PIALibrary.RedeemViewController>(storyboard: Welcome.self, identifier: "RedeemViewController")
+    internal static let restoreViewController = SceneType<PIALibrary.RestoreSignupViewController>(storyboard: Welcome.self, identifier: "RestoreSignupViewController")
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
