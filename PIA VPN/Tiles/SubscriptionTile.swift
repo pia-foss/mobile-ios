@@ -79,10 +79,6 @@ class SubscriptionTile: UIView, Tileable  {
         case .trial: return L10n.Tiles.Subscription.trial
         case .monthly: return L10n.Tiles.Subscription.monthly
         case .yearly: return L10n.Tiles.Subscription.yearly
-        case .legacyMonthly: return L10n.Tiles.Subscription.monthly
-        case .legacyYearly: return L10n.Tiles.Subscription.yearly
-        case .oldLegacyMonthly: return L10n.Tiles.Subscription.monthly
-        case .oldLegacyYearly: return L10n.Tiles.Subscription.yearly
         default: return ""
         }
     }
