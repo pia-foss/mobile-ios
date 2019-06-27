@@ -53,6 +53,10 @@ class AccountViewController: AutolayoutViewController {
     
     @IBOutlet private var constraintsHideUncredited: [NSLayoutConstraint]!
     
+    @IBOutlet private weak var labelSubscriptions: UILabel!
+
+    @IBOutlet weak var labelSubscriptionTopConstraint: NSLayoutConstraint!
+    
     private var currentUser: UserAccount?
 
     private var canSaveAccount = false {
@@ -77,6 +81,10 @@ class AccountViewController: AutolayoutViewController {
         labelRestoreTitle.text = L10n.Account.Restore.title
         labelRestoreInfo.text = L10n.Account.Restore.description
         buttonRestore.setTitle(L10n.Account.Restore.button.uppercased(), for: .normal)
+        labelSubscriptions.attributedText = Theme.current.textWithColoredLink(
+            withMessage: L10n.Account.Subscriptions.message,
+            link: L10n.Account.Subscriptions.linkMessage)
+        labelSubscriptions.isUserInteractionEnabled = true
 
         viewSafe.layoutMargins = .zero
         textEmail.isEditable = true
@@ -86,6 +94,9 @@ class AccountViewController: AutolayoutViewController {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(redisplayAccount), name: .PIAAccountDidRefresh, object: nil)
         nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(openManageSubscription))
+        labelSubscriptions.addGestureRecognizer(tap)
 
         Client.providers.accountProvider.retrieveAccount()
     }
@@ -252,6 +263,15 @@ class AccountViewController: AutolayoutViewController {
     }
 
     // MARK: Notifications
+    @objc private func openManageSubscription() {
+        if let url = URL(string: AppConstants.AppleUrls.subscriptions) {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+
+    }
+    
     @objc private func redisplayAccount() {
         currentUser = Client.providers.accountProvider.currentUser
 
@@ -267,6 +287,14 @@ class AccountViewController: AutolayoutViewController {
                 labelExpiryInformation.text = L10n.Account.ExpiryDate.information(userInfo.humanReadableExpirationDate())
             }
             styleExpirationDate()
+            
+            if userInfo.plan == .monthly || userInfo.plan == .yearly {
+                labelSubscriptions.isHidden = false
+                labelSubscriptionTopConstraint.constant = 20
+            } else {
+                labelSubscriptions.isHidden = true
+                labelSubscriptionTopConstraint.constant = 0
+            }
         }
         
         establishUncreditedVisibility()

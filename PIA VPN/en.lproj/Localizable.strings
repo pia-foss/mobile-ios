@@ -99,6 +99,8 @@
 "account.update.email.require.password.message" = "For security reasons we require your PIA password to perform a change in your account. Please input your PIA password to proceed.";
 "account.update.email.require.password.button" = "Submit";
 "account.error.unauthorized" = "Your username or password is incorrect.";
+"account.subscriptions.message" = "You can manage your subscription from here.";
+"account.subscriptions.linkMessage" = "here.";
 
 // SETTINGS
 

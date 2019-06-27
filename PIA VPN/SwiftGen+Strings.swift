@@ -74,6 +74,12 @@ internal enum L10n {
       /// Your email address has been saved.
       internal static let success = L10n.tr("Localizable", "account.save.success")
     }
+    internal enum Subscriptions {
+      /// here.
+      internal static let linkMessage = L10n.tr("Localizable", "account.subscriptions.linkMessage")
+      /// You can manage your subscription from here.
+      internal static let message = L10n.tr("Localizable", "account.subscriptions.message")
+    }
     internal enum Update {
       internal enum Email {
         internal enum Require {
