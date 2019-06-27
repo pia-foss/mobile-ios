@@ -131,4 +131,8 @@ struct AppConstants {
         static let vpnButtonDescription = "vpn.button.description"
     }
     
+    struct AppleUrls {
+        static let subscriptions = "itms-apps://apps.apple.com/account/subscriptions"
+    }
+    
 }
