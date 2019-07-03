@@ -425,6 +425,7 @@ enum Asset {
     static let flagZm = ImageAsset(name: "flag-zm")
     static let flagZw = ImageAsset(name: "flag-zw")
   }
+  static let friendReferrals = ImageAsset(name: "friend-referrals")
   static let icon3dtConnect = ImageAsset(name: "icon-3dt-connect")
   static let icon3dtDisconnect = ImageAsset(name: "icon-3dt-disconnect")
   static let icon3dtSelectRegion = ImageAsset(name: "icon-3dt-select-region")
@@ -817,6 +818,7 @@ enum Asset {
     Flags.flagZa,
     Flags.flagZm,
     Flags.flagZw,
+    friendReferrals,
     icon3dtConnect,
     icon3dtDisconnect,
     icon3dtSelectRegion,
