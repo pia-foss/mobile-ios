@@ -334,7 +334,7 @@
                                                                         </constraints>
                                                                         <state key="normal" title="Restore purchase"/>
                                                                         <connections>
-                                                                            <action selector="renewSubscriptionWithUncreditedPurchase:" destination="W4F-zm-KqY" eventType="touchUpInside" id="ITb-i6-WKW"/>
+                                                                            <segue destination="dUU-Wx-Abx" kind="show" id="dh0-Ig-Zqm"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -451,6 +451,63 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="okP-9g-KUk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1512" y="1355.9113300492611"/>
+        </scene>
+        <!--Friend Referrals View Controller-->
+        <scene sceneID="gHY-hy-WAO">
+            <objects>
+                <viewController id="dUU-Wx-Abx" customClass="FriendReferralsViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rzS-Zm-XOz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLz-t7-WZX">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="250" sectionHeaderHeight="1" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="vgK-8i-zCj" customClass="TPKeyboardAvoidingTableView">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="s4H-Q4-TsG">
+                                                <rect key="frame" x="0.0" y="55.333333333333343" width="375" height="250.00000000000003"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="s4H-Q4-TsG" id="oR6-Xg-Dxj">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="249.66666666666666"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="dUU-Wx-Abx" id="owB-K3-b6v"/>
+                                            <outlet property="delegate" destination="dUU-Wx-Abx" id="WQa-wo-mUX"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="vgK-8i-zCj" secondAttribute="bottom" id="7m7-9C-VPd"/>
+                                    <constraint firstAttribute="trailing" secondItem="vgK-8i-zCj" secondAttribute="trailing" id="UOq-98-Oa5"/>
+                                    <constraint firstItem="vgK-8i-zCj" firstAttribute="top" secondItem="iLz-t7-WZX" secondAttribute="top" id="qc4-3q-eVF"/>
+                                    <constraint firstItem="vgK-8i-zCj" firstAttribute="leading" secondItem="iLz-t7-WZX" secondAttribute="leading" id="tIH-cj-HGQ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="iLz-t7-WZX" firstAttribute="top" secondItem="rzS-Zm-XOz" secondAttribute="top" id="N5s-0G-XJD"/>
+                            <constraint firstItem="iLz-t7-WZX" firstAttribute="trailing" secondItem="qjz-xl-Kq7" secondAttribute="trailing" id="eQu-0d-woG"/>
+                            <constraint firstItem="iLz-t7-WZX" firstAttribute="leading" secondItem="qjz-xl-Kq7" secondAttribute="leading" id="jKa-IR-XYN"/>
+                            <constraint firstAttribute="bottom" secondItem="iLz-t7-WZX" secondAttribute="bottom" id="phz-MB-a1w"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qjz-xl-Kq7"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="vgK-8i-zCj" id="aQf-nx-lcD"/>
+                        <outlet property="viewContainer" destination="iLz-t7-WZX" id="Qr1-J6-Iu0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="znq-oy-DWA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2266" y="1646"/>
         </scene>
         <!--Settings-->
         <scene sceneID="wLQ-Xt-jeE">
@@ -1534,7 +1591,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="311" height="325.33333333333331"/>
                                                                         <subviews>
                                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image-vpn-allow" translatesAutoresizingMaskIntoConstraints="NO" id="kVs-7f-Ba8">
-                                                                                <rect key="frame" x="147.66666666666666" y="0.0" width="16" height="120"/>
+                                                                                <rect key="frame" x="117" y="0.0" width="77" height="120"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="120" id="0aW-7J-ej3"/>
                                                                                 </constraints>
@@ -1725,7 +1782,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="280" height="411.33333333333331"/>
                                                                         <subviews>
                                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image-content-blocker" translatesAutoresizingMaskIntoConstraints="NO" id="Ss0-C6-TEO">
-                                                                                <rect key="frame" x="132" y="0.0" width="16" height="120"/>
+                                                                                <rect key="frame" x="97" y="0.0" width="86" height="120"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="120" id="trZ-t1-FqN"/>
                                                                                 </constraints>
