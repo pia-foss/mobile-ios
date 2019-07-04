@@ -33,6 +33,23 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                     </textField>
+                    <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AOj-Rl-iii">
+                        <rect key="frame" x="25" y="41.5" width="270" height="50"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pn5-7K-kex">
+                                <rect key="frame" x="114" y="15" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pn5-7K-kex" firstAttribute="centerX" secondItem="AOj-Rl-iii" secondAttribute="centerX" id="ccn-eE-LmI"/>
+                            <constraint firstAttribute="height" constant="50" id="mun-SX-wXo"/>
+                            <constraint firstItem="pn5-7K-kex" firstAttribute="centerY" secondItem="AOj-Rl-iii" secondAttribute="centerY" id="yyn-C9-1fe"/>
+                        </constraints>
+                    </view>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="asdsdaasasdasadsdasdsaads" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hMX-XU-XVi">
                         <rect key="frame" x="25" y="102.5" width="270" height="50"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -52,6 +69,9 @@
                                     <constraint firstAttribute="height" constant="50" id="98a-7q-Yqb"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="copyToClipboard" destination="KGk-i7-Jjw" eventType="touchUpInside" id="GUd-fG-aZQ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJg-fW-jvz" customClass="PIAButton" customModule="PIALibrary">
                                 <rect key="frame" x="139" y="0.0" width="131" height="50"/>
@@ -69,18 +89,24 @@
                     <constraint firstAttribute="trailing" secondItem="kQ7-dP-GTe" secondAttribute="trailing" constant="25" id="LFG-06-QJC"/>
                     <constraint firstAttribute="trailing" secondItem="hMX-XU-XVi" secondAttribute="trailing" constant="25" id="PLd-oY-bk2"/>
                     <constraint firstItem="YE0-Gm-ZvJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="S39-1l-CYO"/>
+                    <constraint firstItem="AOj-Rl-iii" firstAttribute="top" secondItem="kQ7-dP-GTe" secondAttribute="bottom" constant="7" id="WWQ-p2-7qu"/>
                     <constraint firstItem="kQ7-dP-GTe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Xu1-3K-1zj"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="YE0-Gm-ZvJ" secondAttribute="bottom" constant="25" id="Zan-4c-r2E"/>
+                    <constraint firstItem="AOj-Rl-iii" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="a5S-2p-68W"/>
+                    <constraint firstItem="hMX-XU-XVi" firstAttribute="top" secondItem="AOj-Rl-iii" secondAttribute="bottom" constant="11" id="bSG-K0-4fa"/>
                     <constraint firstItem="8WJ-kF-32L" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="coU-co-ASZ"/>
                     <constraint firstAttribute="trailing" secondItem="8WJ-kF-32L" secondAttribute="trailing" constant="25" id="fbd-5A-uJz"/>
                     <constraint firstItem="hMX-XU-XVi" firstAttribute="top" secondItem="8WJ-kF-32L" secondAttribute="bottom" constant="11" id="fkw-I0-SRY"/>
                     <constraint firstItem="8WJ-kF-32L" firstAttribute="top" secondItem="kQ7-dP-GTe" secondAttribute="bottom" constant="7" id="fsh-hf-VVp"/>
                     <constraint firstAttribute="trailing" secondItem="YE0-Gm-ZvJ" secondAttribute="trailing" constant="25" id="nII-Sv-emv"/>
                     <constraint firstItem="hMX-XU-XVi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="qFv-Cc-eR7"/>
+                    <constraint firstAttribute="trailing" secondItem="AOj-Rl-iii" secondAttribute="trailing" constant="25" id="vP9-jd-qRz"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="copiedLabel" destination="pn5-7K-kex" id="Ptm-RK-Jz6"/>
+                <outlet property="copiedView" destination="AOj-Rl-iii" id="lzg-ih-k2w"/>
                 <outlet property="copyButton" destination="8f8-40-c1N" id="kl7-sk-nYN"/>
                 <outlet property="labelDescription" destination="kQ7-dP-GTe" id="EpU-og-mG4"/>
                 <outlet property="shareButton" destination="KJg-fW-jvz" id="P6g-Aw-nhh"/>

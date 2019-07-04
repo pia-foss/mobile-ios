@@ -21,6 +21,9 @@ class ShareInvitationTableViewCell: UITableViewCell, FriendReferralCell {
 
     @IBOutlet private weak var shareButton: PIAButton!
 
+    @IBOutlet private weak var copiedView: UIView!
+    @IBOutlet private weak var copiedLabel: UILabel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         labelDescription.text = "Share your unique referral link"
@@ -34,7 +37,9 @@ class ShareInvitationTableViewCell: UITableViewCell, FriendReferralCell {
                             for: [])
         shareButton.setTitle("SHARE",
                              for: [])
-
+        copiedLabel.text = "COPIED TO CLIPBOARD"
+        copiedView.alpha = 0
+        
         Theme.current.applySecondaryBackground(self)
         Theme.current.applySecondaryBackground(self.contentView)
 
@@ -54,9 +59,24 @@ class ShareInvitationTableViewCell: UITableViewCell, FriendReferralCell {
     }
 
     func setupCell() {
+        Theme.current.applyInputOverlay(copiedView)
+        Theme.current.applyFriendReferralsMessageLabel(copiedLabel)
         Theme.current.applySubtitle(labelDescription)
         Theme.current.applyInput(textUniqueCode)
         Theme.current.applyLinkAttributes(textAgreement)
+    }
+    
+    @IBAction func copyToClipboard() {
+        let pasteboard = UIPasteboard.general
+        pasteboard.string = textUniqueCode.text
+        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: { [weak self] in
+            self?.copiedView.alpha = 0.75
+            }, completion: { [weak self] finished in
+                UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: { [weak self] in
+                    self?.copiedView.alpha = 0
+                })
+        })
+
     }
 
     override func touchesBegan(_ touches: Set<UITouch>,
