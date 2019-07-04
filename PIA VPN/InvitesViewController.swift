@@ -1,75 +1,95 @@
 //
-//  FriendReferralsViewController.swift
+//  InvitesViewController.swift
 //  PIA VPN
 //
-//  Created by Jose Antonio Blaya Garcia on 03/07/2019.
+//  Created by Jose Antonio Blaya Garcia on 04/07/2019.
 //  Copyright © 2019 London Trust Media. All rights reserved.
 //
 
 import UIKit
 import PIALibrary
 
-class FriendReferralsViewController: AutolayoutViewController {
+class InvitesViewController: AutolayoutViewController {
 
     @IBOutlet private weak var tableView: UITableView!
-    private let numberOfSections = 3
-    private let numberOfRowsInSection = 1
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(shareUniqueCode), name: .ShareFriendReferralCode, object: nil)
-
     }
     
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         
-        styleNavigationBarWithTitle("Refer a Friend")
+        styleNavigationBarWithTitle("Invites sent")
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
             Theme.current.applyPrincipalBackground(viewContainer)
         }
         
+        Theme.current.applyDividerToSeparator(tableView)
         Theme.current.applyPrincipalBackground(tableView)
         tableView.separatorColor = Theme.current.palette.appearance == .dark ?
             UIColor.piaGrey10 :
             UIColor.piaGrey2
-
+        
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? InviteStatusViewController {
+            viewController.viewTitle = "Pending invites"
+        }
+    }
+    
     // MARK: Actions
     private func setupTableView() {
         let tableViewUtil = FriendReferralsTableViewUtil()
-        tableViewUtil.registerCellsForFriendReferralsViewController(tableView)
+        tableViewUtil.registerCellForInvitesSentViewController(tableView)
         self.tableView.estimatedRowHeight = 44.0
         self.tableView.rowHeight = UITableView.automaticDimension
-    }
-    
-    @objc private func shareUniqueCode() {
-        if let link = NSURL(string: "http://www.google.com") {
-            let activityVC = UIActivityViewController(activityItems: [link],
-                                                      applicationActivities: nil)
-            self.present(activityVC, animated: true, completion: nil)
-        }
     }
 
 }
 
-extension FriendReferralsViewController: UITableViewDataSource, UITableViewDelegate {
+extension InvitesViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return numberOfSections
+        return 2
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1 {
+            return "You have sent 5 invites"
+        }
+        return nil
+    }
+
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if section == 1 {
+            return "Please note, for privacy reasons, all invites older than 30 days will be deleted."
+        }
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        Theme.current.applyTableSectionHeader(view)
+    }
+
+    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        Theme.current.applyTableSectionFooter(view)
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberOfRowsInSection
+        if section == 0 {
+            return 1
+        } else {
+            return 2
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = FriendReferralCells.objectIdentifyBy(index: indexPath.section).identifier
+        let identifier = InvitesSentCells.objectIdentifyBy(index: indexPath.section).identifier
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
                                                  for: indexPath)
         if let friendReferralCell = cell as? FriendReferralCell {
@@ -82,7 +102,6 @@ extension FriendReferralsViewController: UITableViewDataSource, UITableViewDeleg
         cell.selectedBackgroundView = backgroundView
 
         return cell
-
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -90,10 +109,10 @@ extension FriendReferralsViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            self.perform(segue: StoryboardSegue.Main.showReferralInvites)
+        if indexPath.section == 1 {
+            self.perform(segue: StoryboardSegue.Main.viewFriendReferralStatus)
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
 }
+

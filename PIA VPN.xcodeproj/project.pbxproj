@@ -242,6 +242,18 @@
 		DD858B9F22CCEC71004953F3 /* ShareInvitationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD858B9C22CCEC71004953F3 /* ShareInvitationTableViewCell.swift */; };
 		DD858BA022CCEC71004953F3 /* ShareInvitationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD858B9D22CCEC71004953F3 /* ShareInvitationTableViewCell.xib */; };
 		DD858BA122CCEC71004953F3 /* ShareInvitationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD858B9D22CCEC71004953F3 /* ShareInvitationTableViewCell.xib */; };
+		DD858BA322CE421B004953F3 /* InvitesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD858BA222CE421B004953F3 /* InvitesViewController.swift */; };
+		DD858BA422CE421B004953F3 /* InvitesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD858BA222CE421B004953F3 /* InvitesViewController.swift */; };
+		DD858BA722CE4408004953F3 /* DaysAcquiredTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD858BA522CE4408004953F3 /* DaysAcquiredTableViewCell.swift */; };
+		DD858BA822CE4408004953F3 /* DaysAcquiredTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD858BA522CE4408004953F3 /* DaysAcquiredTableViewCell.swift */; };
+		DD858BA922CE4408004953F3 /* DaysAcquiredTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD858BA622CE4408004953F3 /* DaysAcquiredTableViewCell.xib */; };
+		DD858BAA22CE4408004953F3 /* DaysAcquiredTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD858BA622CE4408004953F3 /* DaysAcquiredTableViewCell.xib */; };
+		DD858BAD22CE5045004953F3 /* InviteStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD858BAB22CE5045004953F3 /* InviteStatusTableViewCell.swift */; };
+		DD858BAE22CE5045004953F3 /* InviteStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD858BAB22CE5045004953F3 /* InviteStatusTableViewCell.swift */; };
+		DD858BAF22CE5045004953F3 /* InviteStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD858BAC22CE5045004953F3 /* InviteStatusTableViewCell.xib */; };
+		DD858BB022CE5045004953F3 /* InviteStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD858BAC22CE5045004953F3 /* InviteStatusTableViewCell.xib */; };
+		DD858BB222CE5065004953F3 /* InviteStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD858BB122CE5065004953F3 /* InviteStatusViewController.swift */; };
+		DD858BB322CE5065004953F3 /* InviteStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD858BB122CE5065004953F3 /* InviteStatusViewController.swift */; };
 		DD9706A4224262BF00630220 /* QuickSettingsTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9706A3224262BF00630220 /* QuickSettingsTile.swift */; };
 		DD9706A5224262BF00630220 /* QuickSettingsTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9706A3224262BF00630220 /* QuickSettingsTile.swift */; };
 		DD9706A7224262CD00630220 /* QuickSettingsTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD9706A6224262CD00630220 /* QuickSettingsTile.xib */; };
@@ -567,6 +579,12 @@
 		DD858B9722CCEC62004953F3 /* InviteFriendTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InviteFriendTableViewCell.xib; sourceTree = "<group>"; };
 		DD858B9C22CCEC71004953F3 /* ShareInvitationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareInvitationTableViewCell.swift; sourceTree = "<group>"; };
 		DD858B9D22CCEC71004953F3 /* ShareInvitationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareInvitationTableViewCell.xib; sourceTree = "<group>"; };
+		DD858BA222CE421B004953F3 /* InvitesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitesViewController.swift; sourceTree = "<group>"; };
+		DD858BA522CE4408004953F3 /* DaysAcquiredTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysAcquiredTableViewCell.swift; sourceTree = "<group>"; };
+		DD858BA622CE4408004953F3 /* DaysAcquiredTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DaysAcquiredTableViewCell.xib; sourceTree = "<group>"; };
+		DD858BAB22CE5045004953F3 /* InviteStatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteStatusTableViewCell.swift; sourceTree = "<group>"; };
+		DD858BAC22CE5045004953F3 /* InviteStatusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InviteStatusTableViewCell.xib; sourceTree = "<group>"; };
+		DD858BB122CE5065004953F3 /* InviteStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteStatusViewController.swift; sourceTree = "<group>"; };
 		DD97069D223FF6C200630220 /* PIAWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PIAWidget.entitlements; sourceTree = "<group>"; };
 		DD9706A3224262BF00630220 /* QuickSettingsTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSettingsTile.swift; sourceTree = "<group>"; };
 		DD9706A6224262CD00630220 /* QuickSettingsTile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuickSettingsTile.xib; sourceTree = "<group>"; };
@@ -708,6 +726,12 @@
 				DD858B9722CCEC62004953F3 /* InviteFriendTableViewCell.xib */,
 				DD858B9C22CCEC71004953F3 /* ShareInvitationTableViewCell.swift */,
 				DD858B9D22CCEC71004953F3 /* ShareInvitationTableViewCell.xib */,
+				DD858BA222CE421B004953F3 /* InvitesViewController.swift */,
+				DD858BB122CE5065004953F3 /* InviteStatusViewController.swift */,
+				DD858BAB22CE5045004953F3 /* InviteStatusTableViewCell.swift */,
+				DD858BAC22CE5045004953F3 /* InviteStatusTableViewCell.xib */,
+				DD858BA522CE4408004953F3 /* DaysAcquiredTableViewCell.swift */,
+				DD858BA622CE4408004953F3 /* DaysAcquiredTableViewCell.xib */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -1413,6 +1437,7 @@
 				0ED66BD020A9918000333B35 /* staging.endpoint in Resources */,
 				DD76292021ECCD510092DF50 /* UsageTileCollectionViewCell.xib in Resources */,
 				DD6DC5C321B6C27F00F9D538 /* pia-spinner.json in Resources */,
+				DD858BAA22CE4408004953F3 /* DaysAcquiredTableViewCell.xib in Resources */,
 				0E0715E7201CBB7100D6F666 /* Flags-dev.plist in Resources */,
 				DD1C138A21E60C63004004B3 /* IPTile.xib in Resources */,
 				DD58F4B821AD579A00D043F7 /* GoogleService-Info.plist in Resources */,
@@ -1432,6 +1457,7 @@
 				0ED984201FC48C6500542EE6 /* Roboto-Medium.ttf in Resources */,
 				0ED984211FC48C6500542EE6 /* Roboto-Regular.ttf in Resources */,
 				DD125DCF21E772B6004ECCB6 /* QuickConnectTileCollectionViewCell.xib in Resources */,
+				DD858BB022CE5045004953F3 /* InviteStatusTableViewCell.xib in Resources */,
 				0E3C9A5E20EC004E00B199F9 /* custom.servers in Resources */,
 				DD1C139C21E65F90004004B3 /* IPTileCollectionViewCell.xib in Resources */,
 				DD858B9522CCEC53004953F3 /* InvitesSentTableViewCell.xib in Resources */,
@@ -1474,6 +1500,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD76291921ECBDA50092DF50 /* SubscriptionTile.xib in Resources */,
+				DD858BAF22CE5045004953F3 /* InviteStatusTableViewCell.xib in Resources */,
 				DD125DC821E7704F004ECCB6 /* QuickConnectTile.xib in Resources */,
 				DD9706A7224262CD00630220 /* QuickSettingsTile.xib in Resources */,
 				DDFCFA9721E8921F0081F235 /* RegionTile.xib in Resources */,
@@ -1489,6 +1516,7 @@
 				0ED9841D1FC48C6000542EE6 /* Roboto-Regular.ttf in Resources */,
 				DD858BA022CCEC71004953F3 /* ShareInvitationTableViewCell.xib in Resources */,
 				DD401980221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.xib in Resources */,
+				DD858BA922CE4408004953F3 /* DaysAcquiredTableViewCell.xib in Resources */,
 				DD76291F21ECCD510092DF50 /* UsageTileCollectionViewCell.xib in Resources */,
 				DD76292521ECCD650092DF50 /* UsageTile.xib in Resources */,
 				DD858B9422CCEC53004953F3 /* InvitesSentTableViewCell.xib in Resources */,
@@ -1916,6 +1944,7 @@
 				DD1C13A521E6743F004004B3 /* TileFlowLayout.swift in Sources */,
 				0EE14D161FF15626008D9AC2 /* UINavigationController+StatusBar.swift in Sources */,
 				DD76291E21ECCD510092DF50 /* UsageTileCollectionViewCell.swift in Sources */,
+				DD858BA422CE421B004953F3 /* InvitesViewController.swift in Sources */,
 				DD9706AC224262E000630220 /* QuickSettingsTileCollectionViewCell.swift in Sources */,
 				0E1F318720176A6300FC1000 /* Theme+DarkPalette.swift in Sources */,
 				0ECC1E3F1FDB3F2F0039891D /* RegionsViewController.swift in Sources */,
@@ -1929,6 +1958,7 @@
 				0EA4ACAB20487B5800431F7D /* FakeSwitch.swift in Sources */,
 				DDC8124D2176185D00CB290C /* SwiftGen+SeguesStoryboards.swift in Sources */,
 				DDD271E221D6262100B6D20F /* PropertyStoring.swift in Sources */,
+				DD858BA822CE4408004953F3 /* DaysAcquiredTableViewCell.swift in Sources */,
 				0EFB839120209CF200980F69 /* VPNPermissionViewController.swift in Sources */,
 				0EFDC1D81FE46177007C0B9B /* SensitiveOperation.swift in Sources */,
 				DD40197F221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.swift in Sources */,
@@ -1939,7 +1969,9 @@
 				DD58F4C021B12CFE00D043F7 /* PIAConnectionButton.swift in Sources */,
 				DD125DD221E7A694004ECCB6 /* ServerButton.swift in Sources */,
 				0E2215CA2008BA9100F5FB4D /* SwiftGen+Strings.swift in Sources */,
+				DD858BAE22CE5045004953F3 /* InviteStatusTableViewCell.swift in Sources */,
 				DD606ABD21C904BB00E0781D /* PIAHotspotHelper.swift in Sources */,
+				DD858BB322CE5065004953F3 /* InviteStatusViewController.swift in Sources */,
 				DD858B8C22CCE512004953F3 /* FriendReferralsViewController.swift in Sources */,
 				0EFDC1C71FE35B78007C0B9B /* Macros+App.swift in Sources */,
 				0ECC1E421FDB45100039891D /* AboutViewController.swift in Sources */,
@@ -2030,6 +2062,7 @@
 				0E7361E81FD98C3400706BFF /* AccountViewController.swift in Sources */,
 				DD1C13A421E6743F004004B3 /* TileFlowLayout.swift in Sources */,
 				DD76291D21ECCD510092DF50 /* UsageTileCollectionViewCell.swift in Sources */,
+				DD858BA322CE421B004953F3 /* InvitesViewController.swift in Sources */,
 				DD9706AB224262E000630220 /* QuickSettingsTileCollectionViewCell.swift in Sources */,
 				0EE14D151FF15626008D9AC2 /* UINavigationController+StatusBar.swift in Sources */,
 				0E1F318620176A5F00FC1000 /* Theme+DarkPalette.swift in Sources */,
@@ -2043,6 +2076,7 @@
 				0E392DA61FE3283C0002160D /* TransientState.swift in Sources */,
 				0E3A35351FD9EBDA000B0F99 /* AppDelegate.swift in Sources */,
 				0EA4ACAA20487B5800431F7D /* FakeSwitch.swift in Sources */,
+				DD858BA722CE4408004953F3 /* DaysAcquiredTableViewCell.swift in Sources */,
 				DDC8124C2176185000CB290C /* SwiftGen+SeguesStoryboards.swift in Sources */,
 				DDD271E121D6262100B6D20F /* PropertyStoring.swift in Sources */,
 				0EFB839020209CF200980F69 /* VPNPermissionViewController.swift in Sources */,
@@ -2053,7 +2087,9 @@
 				0EFDC1EC1FE4B9DC007C0B9B /* AppConstants.swift in Sources */,
 				DD58F4BF21B12CFE00D043F7 /* PIAConnectionButton.swift in Sources */,
 				DD125DD121E7A694004ECCB6 /* ServerButton.swift in Sources */,
+				DD858BAD22CE5045004953F3 /* InviteStatusTableViewCell.swift in Sources */,
 				0E2215C920084CD700F5FB4D /* SwiftGen+Strings.swift in Sources */,
+				DD858BB222CE5065004953F3 /* InviteStatusViewController.swift in Sources */,
 				DD858B8B22CCE512004953F3 /* FriendReferralsViewController.swift in Sources */,
 				DD606ABC21C904BB00E0781D /* PIAHotspotHelper.swift in Sources */,
 				0EFDC1C61FE35B78007C0B9B /* Macros+App.swift in Sources */,

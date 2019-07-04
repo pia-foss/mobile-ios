@@ -37,9 +37,46 @@ enum FriendReferralCells: Int, EnumsBuilder {
     }
 }
 
+enum InvitesSentCells: Int, EnumsBuilder {
+    
+    case daysAcquired = 0
+    case invitesSent
+    
+    var identifier: String {
+        switch self {
+        case .daysAcquired: return "DaysAcquiredCell"
+        case .invitesSent: return "InvitesSentCell"
+        }
+    }
+    
+    var className: String {
+        switch self {
+        case .daysAcquired: return "DaysAcquiredTableViewCell"
+        case .invitesSent: return "InvitesSentTableViewCell"
+        }
+    }
+}
+
+enum InvitesStatusCells: Int, EnumsBuilder {
+    
+    case statusCell = 0
+    
+    var identifier: String {
+        switch self {
+        case .statusCell: return "InviteStatusCell"
+        }
+    }
+    
+    var className: String {
+        switch self {
+        case .statusCell: return "InviteStatusTableViewCell"
+        }
+    }
+}
+
 class FriendReferralsTableViewUtil: NSObject {
     
-    func registerCellsFor(_ tableView: UITableView) {
+    func registerCellsForFriendReferralsViewController(_ tableView: UITableView) {
         tableView.register(UINib(nibName: FriendReferralCells.invitesSent.className,
                                  bundle: nil),
                            forCellReuseIdentifier: FriendReferralCells.invitesSent.identifier)
@@ -52,5 +89,18 @@ class FriendReferralsTableViewUtil: NSObject {
         tableView.backgroundColor = .clear
     }
     
+    func registerCellForInvitesSentViewController(_ tableView: UITableView) {
+        tableView.register(UINib(nibName: InvitesSentCells.invitesSent.className,
+                                 bundle: nil),
+                           forCellReuseIdentifier: InvitesSentCells.invitesSent.identifier)
+        tableView.register(UINib(nibName: InvitesSentCells.daysAcquired.className,
+                                 bundle: nil),
+                           forCellReuseIdentifier: InvitesSentCells.daysAcquired.identifier)
+    }
     
+    func registerCellForInvitesStatusViewController(_ tableView: UITableView) {
+        tableView.register(UINib(nibName: InvitesStatusCells.statusCell.className,
+                                 bundle: nil),
+                           forCellReuseIdentifier: InvitesStatusCells.statusCell.identifier)
+    }
 }
