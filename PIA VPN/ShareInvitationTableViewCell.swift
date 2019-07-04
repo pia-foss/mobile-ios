@@ -78,6 +78,10 @@ class ShareInvitationTableViewCell: UITableViewCell, FriendReferralCell {
         })
 
     }
+    
+    @IBAction func shareInApps() {
+        Macros.postNotification(.ShareFriendReferralCode)
+    }
 
     override func touchesBegan(_ touches: Set<UITouch>,
                                with event: UIEvent?) {

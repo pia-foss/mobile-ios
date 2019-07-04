@@ -79,6 +79,9 @@
                                     <constraint firstAttribute="height" constant="50" id="BWC-Sh-TKH"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="shareInApps" destination="KGk-i7-Jjw" eventType="touchUpInside" id="UnP-dW-yXR"/>
+                                </connections>
                             </button>
                         </subviews>
                     </stackView>

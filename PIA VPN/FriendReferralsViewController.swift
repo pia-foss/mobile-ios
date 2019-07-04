@@ -19,6 +19,9 @@ class FriendReferralsViewController: AutolayoutViewController {
         super.viewDidLoad()
         setupTableView()
         
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(shareUniqueCode), name: .ShareFriendReferralCode, object: nil)
+
     }
     
     override func viewShouldRestyle() {
@@ -44,6 +47,14 @@ class FriendReferralsViewController: AutolayoutViewController {
         tableViewUtil.registerCellsFor(tableView)
         self.tableView.estimatedRowHeight = 44.0
         self.tableView.rowHeight = UITableView.automaticDimension
+    }
+    
+    @objc private func shareUniqueCode() {
+        if let link = NSURL(string: "http://www.google.com") {
+            let activityVC = UIActivityViewController(activityItems: [link],
+                                                      applicationActivities: nil)
+            self.present(activityVC, animated: true, completion: nil)
+        }
     }
 
 }
