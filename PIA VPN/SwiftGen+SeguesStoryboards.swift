@@ -28,6 +28,8 @@ internal enum StoryboardSegue {
     case unwindRegionsSegueIdentifier = "UnwindRegionsSegueIdentifier"
     case unwindWalkthroughSegueIdentifier = "UnwindWalkthroughSegueIdentifier"
     case walkthroughSegueIdentifier = "WalkthroughSegueIdentifier"
+    case showReferralInvites = "show-referral-invites"
+    case viewFriendReferralStatus = "view-friend-referral-status"
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

@@ -130,6 +130,16 @@ extension Theme {
         label.font = Theme.current.typeface.mediumFont(size: 12)
     }
     
+    public func applyFriendReferralsMessageLabel(_ label: UILabel) {
+        label.style(style: TextStyle.textStyle6)
+        label.font = Theme.current.typeface.mediumFont(size: 15)
+    }
+
+    public func applyInputOverlay(_ view: UIView) {
+        view.layer.cornerRadius = 6.0
+        view.backgroundColor = .black
+    }
+    
     public func applyFriendReferralsButton(_ button: PIAButton,
                                            appearance: Appearance) {
         button.resetButton()
