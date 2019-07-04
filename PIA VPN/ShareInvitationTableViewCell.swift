@@ -9,7 +9,7 @@
 import UIKit
 import PIALibrary
 
-class ShareInvitationTableViewCell: UITableViewCell {
+class ShareInvitationTableViewCell: UITableViewCell, FriendReferralCell {
 
     @IBOutlet private weak var labelDescription: UILabel!
         
@@ -37,9 +37,7 @@ class ShareInvitationTableViewCell: UITableViewCell {
 
         Theme.current.applySecondaryBackground(self)
         Theme.current.applySecondaryBackground(self.contentView)
-        Theme.current.applySubtitle(labelDescription)
-        Theme.current.applyInput(textUniqueCode)
-        Theme.current.applyLinkAttributes(textAgreement)
+
         copyButton.setRounded()
         copyButton.setButtonImage()
         copyButton.setImage(Asset.copyIcon.image.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -53,6 +51,12 @@ class ShareInvitationTableViewCell: UITableViewCell {
         
         textUniqueCode.delegate = self
 
+    }
+
+    func setupCell() {
+        Theme.current.applySubtitle(labelDescription)
+        Theme.current.applyInput(textUniqueCode)
+        Theme.current.applyLinkAttributes(textAgreement)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>,

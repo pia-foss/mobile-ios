@@ -9,7 +9,7 @@
 import UIKit
 import PIALibrary
 
-class InviteFriendTableViewCell: UITableViewCell {
+class InviteFriendTableViewCell: UITableViewCell, FriendReferralCell {
 
     @IBOutlet private weak var labelFullName: UILabel!
     
@@ -36,20 +36,27 @@ class InviteFriendTableViewCell: UITableViewCell {
             privacyUrl: "")
         sendButton.setTitle("SEND INVITE",
                               for: [])
-
+        
         Theme.current.applySecondaryBackground(self)
         Theme.current.applySecondaryBackground(self.contentView)
-        Theme.current.applySubtitle(labelFullName)
-        Theme.current.applySubtitle(labelEmail)
-        Theme.current.applyInput(textFullName)
-        Theme.current.applyInput(textEmail)
-        Theme.current.applyLinkAttributes(textAgreement)
+
+        textEmail.placeholder = L10n.Account.Email.placeholder
+        textFullName.placeholder = "Full name"
+
         sendButton.setRounded()
         sendButton.style(style: TextStyle.Buttons.piaGreenButton)
         
         textEmail.delegate = self
         textFullName.delegate = self
 
+    }
+    
+    func setupCell() {
+        Theme.current.applySubtitle(labelFullName)
+        Theme.current.applySubtitle(labelEmail)
+        Theme.current.applyInput(textFullName)
+        Theme.current.applyInput(textEmail)
+        Theme.current.applyLinkAttributes(textAgreement)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>,

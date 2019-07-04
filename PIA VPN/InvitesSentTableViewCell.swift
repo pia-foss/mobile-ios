@@ -9,7 +9,7 @@
 import UIKit
 import PIALibrary
 
-class InvitesSentTableViewCell: UITableViewCell {
+class InvitesSentTableViewCell: UITableViewCell, FriendReferralCell {
 
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var accessoryImageRight: UIImageView!
@@ -17,14 +17,17 @@ class InvitesSentTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        Theme.current.applySecondaryBackground(self)
+        Theme.current.applySecondaryBackground(self.contentView)
+
         self.titleLabel.text = "View invites sent"
         self.accessoryImageRight.image = Asset.Piax.Tiles.openTileDetails.image.withRenderingMode(.alwaysTemplate)
         self.accessoryImageRight.tintColor = UIColor.piaGrey4
 
-        Theme.current.applySecondaryBackground(self)
-        Theme.current.applySecondaryBackground(self.contentView)
-        Theme.current.applySettingsCellTitle(titleLabel, appearance: .dark)
-
     }
 
+    func setupCell() {
+        Theme.current.applySettingsCellTitle(titleLabel, appearance: .dark)
+    }
+    
 }

@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol FriendReferralCell {
+    
+    func setupCell()
+    
+}
+
 enum FriendReferralCells: Int, EnumsBuilder {
     
     case invitesSent = 0

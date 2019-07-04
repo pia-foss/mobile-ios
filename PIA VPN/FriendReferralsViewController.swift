@@ -61,6 +61,9 @@ extension FriendReferralsViewController: UITableViewDataSource, UITableViewDeleg
         let identifier = FriendReferralCells.objectIdentifyBy(index: indexPath.section).identifier
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
                                                  for: indexPath)
+        if let friendReferralCell = cell as? FriendReferralCell {
+            friendReferralCell.setupCell()
+        }
         return cell
 
     }
