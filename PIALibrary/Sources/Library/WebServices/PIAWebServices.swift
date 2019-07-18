@@ -218,7 +218,11 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             400: .badReceipt
         ]
         
-        req(nil, .get, endpoint, useAuthToken: false, nil, status, JSONRequestExecutor() { (json, status, error) in
+        let parameters: JSON = [
+            "type": "subscription"
+        ]
+
+        req(nil, .get, endpoint, useAuthToken: false, parameters, status, JSONRequestExecutor() { (json, status, error) in
             if let knownError = self.knownError(endpoint, status, errors) {
                 callback?(nil, knownError)
                 return
