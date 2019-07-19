@@ -54,7 +54,7 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     public var mockEmail: String = "mock@email.com"
 
     /// Fakes `AccountInfo.product_id`.
-    public var mockProductId: String = "com.privateinternetaccess.ios.iap.2019.1month"
+    public var mockProductId: String = "com.privateinternetaccess.subscription.1month"
 
     /// Fakes `AccountInfo.plan`.
     public var mockPlan: Plan = .monthly
@@ -63,7 +63,7 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     public var mockIsRenewable: Bool = false
     
     /// Fakes `AccountInfo.isRecurring`.
-    public var mockIsRecurring: Bool = false
+    public var mockIsRecurring: Bool = true
     
     /// Fakes `AccountInfo.expirationDate`.
     public var mockExpirationDate: Date = Date().addingTimeInterval(7 * 24 * 60 * 60)
