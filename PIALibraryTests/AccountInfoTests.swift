@@ -53,4 +53,26 @@ class AccountInfoTests: XCTestCase {
         
     }
 
+    public func testRenewableProduct() {
+        
+        let factory = MockProviders()
+        let expLogin = expectation(description: "login")
+        let credentials = Credentials(username: "p0000000", password: "foobarbogus")
+        
+        Client.providers.accountProvider.login(with: LoginRequest(credentials: credentials)) { (user, error) in
+            guard let _ = user else {
+                print("Login error: \(error!)")
+                expLogin.fulfill()
+                XCTAssert(false)
+                return
+            }
+            XCTAssert(factory.accountProvider.isLoggedIn)
+            XCTAssertEqual(user?.isRenewable, false)
+            XCTAssertEqual(user?.info?.isRecurring, true)
+            expLogin.fulfill()
+        }
+        waitForExpectations(timeout: 5.0, handler: nil)
+        
+    }
+    
 }
