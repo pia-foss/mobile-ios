@@ -285,6 +285,7 @@
 		DDD824E72189C0E800151709 /* BrandableNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E62189C0E800151709 /* BrandableNavigationBar.swift */; };
 		DDD824E82189C0EE00151709 /* BrandableNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E62189C0E800151709 /* BrandableNavigationBar.swift */; };
 		DDD824EA2189CD5700151709 /* NavigationLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E92189CD5700151709 /* NavigationLogoView.swift */; };
+		DDE27E0422E1B1A700503A89 /* ProductTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE27E0322E1B1A700503A89 /* ProductTests.swift */; };
 		DDFCFAA821E924A70081F235 /* TileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAA721E924A70081F235 /* TileProvider.swift */; };
 		DDFCFAA921E924AD0081F235 /* TileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAA721E924A70081F235 /* TileProvider.swift */; };
 		DDFCFAAB21E925160081F235 /* DefaultTileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAAA21E925160081F235 /* DefaultTileProvider.swift */; };
@@ -571,6 +572,7 @@
 		DDD824E4218996CD00151709 /* Pages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pages.swift; sourceTree = "<group>"; };
 		DDD824E62189C0E800151709 /* BrandableNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandableNavigationBar.swift; sourceTree = "<group>"; };
 		DDD824E92189CD5700151709 /* NavigationLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLogoView.swift; sourceTree = "<group>"; };
+		DDE27E0322E1B1A700503A89 /* ProductTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductTests.swift; path = "../../../../../../System/Volumes/Data/Users/ueshiba/Projects/PIA/client-library-apple/PIALibraryTests/ProductTests.swift"; sourceTree = "<group>"; };
 		DDFCFAA721E924A70081F235 /* TileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileProvider.swift; sourceTree = "<group>"; };
 		DDFCFAAA21E925160081F235 /* DefaultTileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTileProvider.swift; sourceTree = "<group>"; };
 		DDFCFAAC21E925B60081F235 /* TileableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileableCell.swift; sourceTree = "<group>"; };
@@ -1011,6 +1013,7 @@
 				843C67C12122E714005A3FDA /* AccountInfoTests.swift */,
 				841BE60C212AD0F3002EF2D1 /* ValidatorTests.swift */,
 				841BE611212AFFA7002EF2D1 /* GiftCardUtilTests.swift */,
+				DDE27E0322E1B1A700503A89 /* ProductTests.swift */,
 				0EE78B011F818A20002E4CDD /* Info-iOS.plist */,
 				0E2ADD201FE13B8600BB170C /* Info-macOS.plist */,
 			);
@@ -1864,6 +1867,7 @@
 				0EB8C0461F9CCB7C005857E4 /* AccountSignupTests.swift in Sources */,
 				0E2ADD451FE1583A00BB170C /* VPNTests.swift in Sources */,
 				841BE612212AFFA7002EF2D1 /* GiftCardUtilTests.swift in Sources */,
+				DDE27E0422E1B1A700503A89 /* ProductTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
