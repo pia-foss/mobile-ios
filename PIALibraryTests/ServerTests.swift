@@ -11,6 +11,7 @@ import XCTest
 import SwiftyBeaver
 
 class ServerTests: XCTestCase {
+    
     override func setUp() {
         super.setUp()
         
@@ -48,7 +49,7 @@ class ServerTests: XCTestCase {
         __testProviderDownload(factory: MockProviders())
     }
 
-//    func testWebDownload() {
+    //    func testWebDownload() {
 //        __testProviderDownload(factory: Client.Providers())
 //    }
 
