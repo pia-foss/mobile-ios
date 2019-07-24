@@ -31,6 +31,8 @@ class NetworkManagementToolTileCollectionViewCell: UICollectionViewCell, Tileabl
     }
     
     func setupCellForStatus(_ status: TileStatus) {
+        self.accessibilityLabel = L10n.Settings.Hotspothelper.title
+        self.isAccessibilityElement = true
         Theme.current.applyPrincipalBackground(self)
         Theme.current.applyPrincipalBackground(self.contentView)
         tile.status = status

@@ -662,6 +662,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         let identifier = Cells.objectIdentifyBy(index: tileIndex).identifier
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier,
                                                       for: indexPath)
+        cell.accessibilityTraits = UIAccessibilityTraits.button
         if let cell = cell as? EditableTileCell {
             cell.setupCellForStatus(self.tileModeStatus)
         }
