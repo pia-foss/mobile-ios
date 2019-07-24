@@ -63,6 +63,7 @@ class QuickConnectTile: UIView, Tileable {
                     Asset.Piax.Tiles.quickConnectPlaceholderDark.image, for: .normal)
                 button.imageView?.contentMode = .scaleAspectFit
                 button.isUserInteractionEnabled = false
+                button.accessibilityLabel = L10n.Global.empty
                 favoriteImage.isHidden = true
             }
         }
