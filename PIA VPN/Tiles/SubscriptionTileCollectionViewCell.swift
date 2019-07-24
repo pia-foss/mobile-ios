@@ -33,9 +33,11 @@ class SubscriptionTileCollectionViewCell: UICollectionViewCell, TileableCell {
             case .normal:
                 self.tileLeftConstraint.constant = 0
                 self.tileRightConstraint.constant = 0
+                self.accessoryButtonLeft.isHidden = true
             case .edit:
                 self.tileLeftConstraint.constant = self.leftConstraintValue
                 self.tileRightConstraint.constant = self.rightConstraintValue
+                self.accessoryButtonLeft.isHidden = false
                 self.setupVisibilityButton()
             }
             self.layoutIfNeeded()

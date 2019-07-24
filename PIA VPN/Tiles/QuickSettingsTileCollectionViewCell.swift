@@ -34,7 +34,9 @@ class QuickSettingsTileCollectionViewCell: UICollectionViewCell, TileableCell {
                 self.tileLeftConstraint.constant = 0
                 self.tileRightConstraint.constant = 0
                 self.tile.isUserInteractionEnabled = true
+                self.accessoryButtonLeft.isHidden = true
             case .edit:
+                self.accessoryButtonLeft.isHidden = false
                 self.tileLeftConstraint.constant = self.leftConstraintValue
                 self.tileRightConstraint.constant = self.rightConstraintValue
                 self.setupVisibilityButton()

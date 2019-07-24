@@ -40,12 +40,12 @@ class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
             case .normal:
                 self.accessoryImageRight.image = Asset.Piax.Tiles.openTileDetails.image
                 self.tileLeftConstraint.constant = 0
-                self.accessoryButtonLeft.alpha = 0
+                self.accessoryButtonLeft.isHidden = true
             case .edit:
                 self.accessoryImageRight.image = Theme.current.dragDropImage()
                 self.tileLeftConstraint.constant = self.leftConstraintValue
                 self.setupVisibilityButton()
-                self.accessoryButtonLeft.alpha = 1
+                self.accessoryButtonLeft.isHidden = false
             }
             self.layoutIfNeeded()
             self.currentTileStatus = status
