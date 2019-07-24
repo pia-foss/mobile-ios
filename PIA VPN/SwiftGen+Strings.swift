@@ -112,6 +112,18 @@ internal enum L10n {
   }
 
   internal enum Dashboard {
+    internal enum Accessibility {
+      internal enum Vpn {
+        /// VPN Connection button
+        internal static let button = L10n.tr("Localizable", "dashboard.accessibility.vpn.button")
+        internal enum Button {
+          /// VPN Connection button. The VPN is currently disconnected
+          internal static let isOff = L10n.tr("Localizable", "dashboard.accessibility.vpn.button.isOff")
+          /// VPN Connection button. The VPN is currently connected
+          internal static let isOn = L10n.tr("Localizable", "dashboard.accessibility.vpn.button.isOn")
+        }
+      }
+    }
     internal enum Connection {
       internal enum Ip {
         /// Internet unreachable
@@ -166,6 +178,8 @@ internal enum L10n {
     internal static let disabled = L10n.tr("Localizable", "global.disabled")
     /// Edit
     internal static let edit = L10n.tr("Localizable", "global.edit")
+    /// Empty
+    internal static let empty = L10n.tr("Localizable", "global.empty")
     /// Enable
     internal static let enable = L10n.tr("Localizable", "global.enable")
     /// Enabled

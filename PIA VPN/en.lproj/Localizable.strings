@@ -16,6 +16,7 @@
 "global.enable" = "Enable";
 "global.add" = "Add";
 "global.remove" = "Remove";
+"global.empty" = "Empty";
 
 // NOTIFICATIONS
 
@@ -175,6 +176,9 @@
 "dashboard.vpn.disconnecting" = "Disconnecting...";
 "dashboard.vpn.changing_region" = "Changing region...";
 "dashboard.vpn.disconnect.untrusted" = "This network is untrusted. Do you really want to disconnect the VPN?";
+"dashboard.accessibility.vpn.button" = "VPN Connection button";
+"dashboard.accessibility.vpn.button.isOn" = "VPN Connection button. The VPN is currently connected";
+"dashboard.accessibility.vpn.button.isOff" = "VPN Connection button. The VPN is currently disconnected";
 
 // VPN PERMISSION
 
