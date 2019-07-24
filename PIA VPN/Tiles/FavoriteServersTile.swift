@@ -81,6 +81,7 @@ class FavoriteServersTile: UIView, Tileable {
                 button.imageView?.contentMode = .scaleAspectFit
                 button.isUserInteractionEnabled = true
                 button.server = server
+                button.accessibilityLabel = server.description
             }
         }
         
