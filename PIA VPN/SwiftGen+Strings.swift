@@ -299,8 +299,12 @@ internal enum L10n {
 
   internal enum Region {
     internal enum Accessibility {
+      /// Add a favorite region
+      internal static let favorite = L10n.tr("Localizable", "region.accessibility.favorite")
       /// Filter
       internal static let filter = L10n.tr("Localizable", "region.accessibility.filter")
+      /// Remove a favorite region
+      internal static let unfavorite = L10n.tr("Localizable", "region.accessibility.unfavorite")
     }
     internal enum Filter {
       /// Favorites
