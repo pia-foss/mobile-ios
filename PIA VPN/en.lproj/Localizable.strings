@@ -14,6 +14,9 @@
 "global.enabled" = "Enabled";
 "global.disabled" = "Disabled";
 "global.enable" = "Enable";
+"global.add" = "Add";
+"global.remove" = "Remove";
+"global.empty" = "Empty";
 
 // NOTIFICATIONS
 
@@ -173,6 +176,9 @@
 "dashboard.vpn.disconnecting" = "Disconnecting...";
 "dashboard.vpn.changing_region" = "Changing region...";
 "dashboard.vpn.disconnect.untrusted" = "This network is untrusted. Do you really want to disconnect the VPN?";
+"dashboard.accessibility.vpn.button" = "VPN Connection button";
+"dashboard.accessibility.vpn.button.isOn" = "VPN Connection button. The VPN is currently connected";
+"dashboard.accessibility.vpn.button.isOff" = "VPN Connection button. The VPN is currently disconnected";
 
 // VPN PERMISSION
 
@@ -235,6 +241,8 @@
 "region.filter.name" = "Name";
 "region.filter.latency" = "Latency";
 "region.filter.favorites" = "Favorites";
+"region.accessibility.favorite" = "Add a favorite region";
+"region.accessibility.unfavorite" = "Remove a favorite region";
 
 // TILES
 "tiles.quick.connect.title" = "Recent servers";
@@ -253,6 +261,8 @@
 "tiles.nmt.accessibility.trusted" = "Trusted network";
 "tiles.nmt.accessibility.untrusted" = "Untrusted network";
 "tiles.quicksettings.title" = "Quick settings";
+"tiles.accessibility.visible.tile.action" = "Tap to remove this tile from the dasboard";
+"tiles.accessibility.invisible.tile.action" = "Tap to add this tile to the dasboard";
 
 //SIRI SHORTCUTS
 "siri.shortcuts.connect.row.title" = "'Connect' Siri Shortcut";

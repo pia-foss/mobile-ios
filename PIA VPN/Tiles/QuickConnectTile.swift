@@ -63,6 +63,7 @@ class QuickConnectTile: UIView, Tileable {
                     Asset.Piax.Tiles.quickConnectPlaceholderDark.image, for: .normal)
                 button.imageView?.contentMode = .scaleAspectFit
                 button.isUserInteractionEnabled = false
+                button.accessibilityLabel = L10n.Global.empty
                 favoriteImage.isHidden = true
             }
         }
@@ -76,6 +77,7 @@ class QuickConnectTile: UIView, Tileable {
                 button.imageView?.contentMode = .scaleAspectFit
                 button.isUserInteractionEnabled = true
                 button.server = server
+                button.accessibilityLabel = server.description
                 favoriteImage.isHidden = !AppPreferences.shared.favoriteServerIdentifiers.contains(server.identifier)
                 if status != .normal { //only when edit mode 
                     favoriteImage.isHidden = true

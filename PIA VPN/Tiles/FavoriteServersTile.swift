@@ -63,6 +63,7 @@ class FavoriteServersTile: UIView, Tileable {
                     Asset.Piax.Tiles.quickConnectPlaceholderDark.image, for: .normal)
                 button.imageView?.contentMode = .scaleAspectFit
                 button.isUserInteractionEnabled = false
+                button.accessibilityLabel = L10n.Global.empty
             }
         }
         
@@ -81,6 +82,7 @@ class FavoriteServersTile: UIView, Tileable {
                 button.imageView?.contentMode = .scaleAspectFit
                 button.isUserInteractionEnabled = true
                 button.server = server
+                button.accessibilityLabel = server.description
             }
         }
         

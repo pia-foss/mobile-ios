@@ -112,6 +112,18 @@ internal enum L10n {
   }
 
   internal enum Dashboard {
+    internal enum Accessibility {
+      internal enum Vpn {
+        /// VPN Connection button
+        internal static let button = L10n.tr("Localizable", "dashboard.accessibility.vpn.button")
+        internal enum Button {
+          /// VPN Connection button. The VPN is currently disconnected
+          internal static let isOff = L10n.tr("Localizable", "dashboard.accessibility.vpn.button.isOff")
+          /// VPN Connection button. The VPN is currently connected
+          internal static let isOn = L10n.tr("Localizable", "dashboard.accessibility.vpn.button.isOn")
+        }
+      }
+    }
     internal enum Connection {
       internal enum Ip {
         /// Internet unreachable
@@ -152,6 +164,8 @@ internal enum L10n {
   }
 
   internal enum Global {
+    /// Add
+    internal static let add = L10n.tr("Localizable", "global.add")
     /// Automatic
     internal static let automatic = L10n.tr("Localizable", "global.automatic")
     /// Cancel
@@ -164,6 +178,8 @@ internal enum L10n {
     internal static let disabled = L10n.tr("Localizable", "global.disabled")
     /// Edit
     internal static let edit = L10n.tr("Localizable", "global.edit")
+    /// Empty
+    internal static let empty = L10n.tr("Localizable", "global.empty")
     /// Enable
     internal static let enable = L10n.tr("Localizable", "global.enable")
     /// Enabled
@@ -174,6 +190,8 @@ internal enum L10n {
     internal static let ok = L10n.tr("Localizable", "global.ok")
     /// Optional
     internal static let `optional` = L10n.tr("Localizable", "global.optional")
+    /// Remove
+    internal static let remove = L10n.tr("Localizable", "global.remove")
     /// Required
     internal static let `required` = L10n.tr("Localizable", "global.required")
     /// No internet connection found. Please confirm that you have an internet connection.
@@ -281,8 +299,12 @@ internal enum L10n {
 
   internal enum Region {
     internal enum Accessibility {
+      /// Add a favorite region
+      internal static let favorite = L10n.tr("Localizable", "region.accessibility.favorite")
       /// Filter
       internal static let filter = L10n.tr("Localizable", "region.accessibility.filter")
+      /// Remove a favorite region
+      internal static let unfavorite = L10n.tr("Localizable", "region.accessibility.unfavorite")
     }
     internal enum Filter {
       /// Favorites
@@ -605,6 +627,20 @@ internal enum L10n {
   }
 
   internal enum Tiles {
+    internal enum Accessibility {
+      internal enum Invisible {
+        internal enum Tile {
+          /// Tap to add this tile to the dasboard
+          internal static let action = L10n.tr("Localizable", "tiles.accessibility.invisible.tile.action")
+        }
+      }
+      internal enum Visible {
+        internal enum Tile {
+          /// Tap to remove this tile from the dasboard
+          internal static let action = L10n.tr("Localizable", "tiles.accessibility.visible.tile.action")
+        }
+      }
+    }
     internal enum Favorite {
       internal enum Servers {
         /// Favorite servers

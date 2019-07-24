@@ -66,34 +66,31 @@ class QuickSettingsTile: UIView, Tileable  {
         killSwitchLabel.textAlignment = .center
         nmtLabel.text = L10n.Tiles.Quicksetting.Nmt.title
         nmtLabel.textAlignment = .center
-        
+        themeButton.accessibilityLabel = L10n.Settings.ApplicationSettings.ActiveTheme.title
+        killSwitchButton.accessibilityLabel = L10n.Settings.ApplicationSettings.KillSwitch.title
+        nmtButton.accessibilityLabel = L10n.Tiles.Quicksetting.Nmt.title
+
         if AppPreferences.shared.currentThemeCode == ThemeCode.light {
             themeButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.themeLightActive.image :
                 Asset.Piax.Global.themeDarkActive.image, for: [])
-            themeButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.trusted
         } else {
             themeButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.themeLightInactive.image :
                 Asset.Piax.Global.themeDarkInactive.image, for: [])
-            themeButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.trusted
         }
         
         if Client.preferences.isPersistentConnection {
             killSwitchButton.setImage(Asset.Piax.Global.killswitchDarkActive.image, for: [])
-            killSwitchButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.trusted
         } else {
             killSwitchButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.killswitchLightInactive.image :
                 Asset.Piax.Global.killswitchDarkInactive.image, for: [])
-            killSwitchButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.trusted
         }
         
         if Client.preferences.nmtRulesEnabled {
             nmtButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.nmtLightActive.image :
                 Asset.Piax.Global.nmtDarkActive.image, for: [])
-            nmtButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.trusted
         } else {
             nmtButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.nmtLightInactive.image :
                 Asset.Piax.Global.nmtDarkInactive.image, for: [])
-            nmtButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.trusted
         }
         
     }
