@@ -14,6 +14,8 @@
 "global.enabled" = "Enabled";
 "global.disabled" = "Disabled";
 "global.enable" = "Enable";
+"global.add" = "Add";
+"global.remove" = "Remove";
 
 // NOTIFICATIONS
 

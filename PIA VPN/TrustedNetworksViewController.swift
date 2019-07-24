@@ -274,20 +274,26 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
             cell.selectionStyle = .none
             switchAskForDisconnect.isOn = AppPreferences.shared.optOutAskDisconnectVPNUsingNMT
         case .current:
+            cell.accessibilityTraits = UIAccessibilityTraits.button
             if let ssid = hotspotHelper.currentWiFiNetwork() {
                 if trustedNetworks.contains(ssid) {
                     cell.isUserInteractionEnabled = false
                 } else {
                     cell.accessoryView = UIImageView(image: Asset.iconAdd.image)
+                    cell.accessibilityLabel = L10n.Global.add + " " + ssid
                 }
                 cell.textLabel?.text = ssid
             }
         case .available:
+            cell.accessibilityTraits = UIAccessibilityTraits.button
             cell.accessoryView = UIImageView(image: Asset.iconAdd.image)
             cell.textLabel?.text = availableNetworks[indexPath.row]
+            cell.accessibilityLabel = L10n.Global.add + " " + availableNetworks[indexPath.row]
         case .trusted:
+            cell.accessibilityTraits = UIAccessibilityTraits.button
             cell.accessoryView = UIImageView(image: Asset.iconRemove.image)
             cell.textLabel?.text = trustedNetworks[indexPath.row]
+            cell.accessibilityLabel = L10n.Global.remove + " " + trustedNetworks[indexPath.row]
         case .autoConnectAllNetworksSettings:
             cell.imageView?.image = nil
             cell.textLabel?.text = L10n.Settings.Hotspothelper.All.title

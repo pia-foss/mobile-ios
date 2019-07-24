@@ -152,6 +152,8 @@ internal enum L10n {
   }
 
   internal enum Global {
+    /// Add
+    internal static let add = L10n.tr("Localizable", "global.add")
     /// Automatic
     internal static let automatic = L10n.tr("Localizable", "global.automatic")
     /// Cancel
@@ -174,6 +176,8 @@ internal enum L10n {
     internal static let ok = L10n.tr("Localizable", "global.ok")
     /// Optional
     internal static let `optional` = L10n.tr("Localizable", "global.optional")
+    /// Remove
+    internal static let remove = L10n.tr("Localizable", "global.remove")
     /// Required
     internal static let `required` = L10n.tr("Localizable", "global.required")
     /// No internet connection found. Please confirm that you have an internet connection.
