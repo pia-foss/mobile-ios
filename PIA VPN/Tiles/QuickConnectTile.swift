@@ -76,6 +76,7 @@ class QuickConnectTile: UIView, Tileable {
                 button.imageView?.contentMode = .scaleAspectFit
                 button.isUserInteractionEnabled = true
                 button.server = server
+                button.accessibilityLabel = server.description
                 favoriteImage.isHidden = !AppPreferences.shared.favoriteServerIdentifiers.contains(server.identifier)
                 if status != .normal { //only when edit mode 
                     favoriteImage.isHidden = true
