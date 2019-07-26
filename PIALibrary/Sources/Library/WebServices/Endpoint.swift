@@ -28,6 +28,8 @@ enum ClientEndpoint: String, Endpoint {
     case status
 
     case ios
+    
+    case invites
 
     var url: URL {
         return URL(string: "\(accessedConfiguration.baseUrl)/api/client/\(rawValue)")!
