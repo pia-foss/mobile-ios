@@ -100,6 +100,24 @@ public protocol AccountProvider: class {
      */
     func cleanDatabase()
     
+    /**
+     Fetch invites information.
+     
+     - Precondition: `isLoggedIn` is `true`.
+     - Parameter callback: Returns the updated `InvitesInformation`.
+     */
+    func invitesInformation(_ callback: LibraryCallback<InvitesInformation>?)
+    
+    /**
+     Invite a user to subscribe using an e-mail.
+     
+     - Precondition: `isLoggedIn` is `true`.
+     - Parameter name: The invitee name.
+     - Parameter email: The invitee email.
+     - Parameter callback: Returns `nil` on success.
+     */
+    func invite(name: String, email: String, _ callback: SuccessLibraryCallback?)
+
     #if os(iOS)
     /**
      Lists the available plans with their corresponding product to purchase in order to get them.

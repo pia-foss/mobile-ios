@@ -44,5 +44,9 @@ protocol WebServices: class {
 
     func submitDebugLog(_ log: DebugLog, _ callback: SuccessLibraryCallback?)
     
-
+    // MARK: Friend Referral
+    
+    func invitesInformation(_ callback: LibraryCallback<InvitesInformation>?)
+    
+    func invite(name: String, email: String, _ callback: SuccessLibraryCallback?)
 }

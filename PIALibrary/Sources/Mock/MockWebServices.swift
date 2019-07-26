@@ -13,6 +13,8 @@ class MockWebServices: WebServices {
 
     var accountInfo: (() -> AccountInfo)?
     
+    var invitesInformation: (() -> InvitesInformation)?
+    
     var serversBundle: (() -> ServersBundle)?
     
     func token(credentials: Credentials, _ callback: ((String?, Error?) -> Void)?) {
@@ -68,4 +70,15 @@ class MockWebServices: WebServices {
     func planProductIdentifiers(_ callback: LibraryCallback<[Product]>?) {
         callback?([Product(identifier: "com.product.monthly", plan: .monthly, price: "3.99", legacy: false)], nil)
     }
+    
+    func invitesInformation(_ callback: LibraryCallback<InvitesInformation>?) {
+        let result = invitesInformation?()
+        let error: ClientError? = (result == nil) ? .unsupported : nil
+        callback?(result, error)
+    }
+    
+    func invite(name: String, email: String, _ callback: SuccessLibraryCallback?) {
+        callback?(nil)
+    }
+    
 }

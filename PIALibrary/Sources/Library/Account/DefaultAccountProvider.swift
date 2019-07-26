@@ -272,6 +272,22 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         callback?(nil)
     }
 
+    func invitesInformation(_ callback: LibraryCallback<InvitesInformation>?) {
+        webServices.invitesInformation { (invitesInformation, error) in
+            guard let invitesInformation = invitesInformation else {
+                callback?(nil, error)
+                return
+            }
+            callback?(invitesInformation, nil)
+        }        
+    }
+    
+    func invite(name: String, email: String, _ callback: SuccessLibraryCallback?) {
+        webServices.invite(name: name, email: email, { result in 
+            callback?(result)
+        })
+    }
+    
     #if os(iOS)
     func updatePlanProductIdentifiers(_ callback: LibraryCallback<[Product]>?) {
         log.debug("Fetching available product keys...")

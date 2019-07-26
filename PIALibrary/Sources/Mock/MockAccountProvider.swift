@@ -192,6 +192,19 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
         delegate.cleanDatabase()
     }
     
+    /// :nodoc:
+    public func invitesInformation(_ callback: LibraryCallback<InvitesInformation>?) {
+        guard !mockIsUnauthorized else {
+            callback?(nil, ClientError.unauthorized)
+            return
+        }
+        delegate.invitesInformation(callback)
+    }
+    
+    public func invite(name: String, email: String, _ callback: SuccessLibraryCallback?) {
+        delegate.invite(name: name, email: email, callback)
+    }
+    
     #if os(iOS)
     /// :nodoc:
     public func listPlanProducts(_ callback: (([Plan : InAppProduct]?, Error?) -> Void)?) {
