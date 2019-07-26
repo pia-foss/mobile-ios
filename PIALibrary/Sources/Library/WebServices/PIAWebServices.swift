@@ -247,6 +247,61 @@ class PIAWebServices: WebServices, ConfigurationAccess {
 
     }
     
+    // MARK: Friend referral
+    
+    func invitesInformation(_ callback: LibraryCallback<InvitesInformation>?) {
+        
+        let endpoint = ClientEndpoint.invites
+        let status = [200, 400]
+        let errors: [Int: ClientError] = [
+            400: .badReceipt
+        ]
+        
+        req(nil, .get, endpoint, useAuthToken: true, nil, status, JSONRequestExecutor() { (json, status, error) in
+            
+            if let knownError = self.knownError(endpoint, status, errors) {
+                callback?(nil, knownError)
+                return
+            }
+            guard let json = json else {
+                callback?(nil, error)
+                return
+            }
+            guard let invitesInformation = GlossInvitesInformation(json: json)?.parsed else {
+                callback?(nil, ClientError.malformedResponseData)
+                return
+            }
+            
+            callback?(invitesInformation, nil)
+            
+        })
+
+    }
+    
+    func invite(name: String, email: String, _ callback: SuccessLibraryCallback?) {
+        let endpoint = ClientEndpoint.invites
+        let status = [200, 400]
+        let errors: [Int: ClientError] = [
+            400: .badReceipt
+        ]
+        
+        let parameters = ["invitee_name": name,
+                          "invitee_email": email]
+        
+        req(nil, .post, endpoint, parameters, status, JSONRequestExecutor() { (json, status, error) in
+            if let knownError = self.knownError(endpoint, status, errors) {
+                callback?(knownError)
+                return
+            }
+            if let error = error {
+                callback?(error)
+                return
+            }
+            callback?(nil)
+        })
+
+    }
+    
     // MARK: Helpers
 
     private func req(

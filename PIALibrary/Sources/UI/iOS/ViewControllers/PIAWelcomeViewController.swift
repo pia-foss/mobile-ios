@@ -327,7 +327,15 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
         fatalError("Not implemented")
     }
     
+    func invitesInformation(_ callback: LibraryCallback<InvitesInformation>?) {
+        fatalError("Not implemented")
+    }
+    
     func updatePlanProductIdentifiers(_ callback: LibraryCallback<[Product]>?) {
+        fatalError("Not implemented")
+    }
+    
+    func invite(name: String, email: String, _ callback: SuccessLibraryCallback?) {
         fatalError("Not implemented")
     }
 
