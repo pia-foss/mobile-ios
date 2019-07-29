@@ -38,8 +38,6 @@ class AccountViewController: AutolayoutViewController {
     @IBOutlet private weak var itemUpdate: UIBarButtonItem!
     
     @IBOutlet private weak var viewAccountInfo: UIView!
-
-    @IBOutlet private weak var viewSeparator: UIView!
     
     @IBOutlet private weak var viewUncredited: UIView!
     
@@ -49,14 +47,18 @@ class AccountViewController: AutolayoutViewController {
     
     @IBOutlet private weak var buttonRestore: UIButton!
     
-    @IBOutlet private var constraintsShowUncredited: [NSLayoutConstraint]!
-    
-    @IBOutlet private var constraintsHideUncredited: [NSLayoutConstraint]!
-    
     @IBOutlet private weak var labelSubscriptions: UILabel!
 
     @IBOutlet weak var labelSubscriptionTopConstraint: NSLayoutConstraint!
     
+    @IBOutlet private weak var viewFriendReferral: UIView!
+    
+    @IBOutlet private weak var labelFriendReferralTitle: UILabel!
+    
+    @IBOutlet private weak var labelFriendReferralInfo: UILabel!
+
+    @IBOutlet private weak var buttonFriendReferral: PIAButton!
+
     private var currentUser: UserAccount?
 
     private var canSaveAccount = false {
@@ -90,6 +92,10 @@ class AccountViewController: AutolayoutViewController {
         textEmail.isEditable = true
         textUsername.isUserInteractionEnabled = false
         canSaveAccount = false
+
+        buttonFriendReferral.setTitle("  Refer a friend  >  ", for: .normal)
+        labelFriendReferralInfo.text = "Refer your friends and family. For every sign up we’ll give you both 30 days free. "
+        labelFriendReferralTitle.text = "REFER A FRIEND. GET 30 DAYS FREE."
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(redisplayAccount), name: .PIAAccountDidRefresh, object: nil)
@@ -125,7 +131,7 @@ class AccountViewController: AutolayoutViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+        buttonFriendReferral.layoutIfNeeded()
         establishUncreditedVisibility()
     }
 
@@ -295,6 +301,7 @@ class AccountViewController: AutolayoutViewController {
                 labelSubscriptions.isHidden = true
                 labelSubscriptionTopConstraint.constant = 0
             }
+            viewFriendReferral.isHidden = userInfo.plan != .other
         }
         
         establishUncreditedVisibility()
@@ -302,14 +309,9 @@ class AccountViewController: AutolayoutViewController {
     
     private func establishUncreditedVisibility() {
         if let info = currentUser?.info, info.isRenewable {
-            NSLayoutConstraint.deactivate(constraintsHideUncredited)
-            NSLayoutConstraint.activate(constraintsShowUncredited)
-            viewSeparator.isHidden = false
             viewUncredited.isHidden = false
+            viewFriendReferral.removeFromSuperview()
         } else {
-            NSLayoutConstraint.deactivate(constraintsShowUncredited)
-            NSLayoutConstraint.activate(constraintsHideUncredited)
-            viewSeparator.isHidden = true
             viewUncredited.isHidden = true
         }
     }
@@ -338,6 +340,12 @@ class AccountViewController: AutolayoutViewController {
         }
         Theme.current.applyTitle(labelRestoreTitle, appearance: .dark)
         Theme.current.applySubtitle(labelRestoreInfo)
+        buttonRestore.style(style: TextStyle.textStyle9)
+
+        Theme.current.applyFriendReferralsTitle(labelFriendReferralTitle)
+        Theme.current.applyFriendReferralsSubtitle(labelFriendReferralInfo)
+        Theme.current.applyFriendReferralsView(viewFriendReferral, appearance: .dark)
+        Theme.current.applyFriendReferralsButton(buttonFriendReferral, appearance: .dark)
         buttonRestore.style(style: TextStyle.textStyle9)
 
         styleExpirationDate()

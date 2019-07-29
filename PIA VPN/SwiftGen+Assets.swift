@@ -212,6 +212,7 @@ enum Asset {
   static let accessorySelected = ImageAsset(name: "accessory-selected")
   static let buttonDown = ImageAsset(name: "button-down")
   static let buttonUp = ImageAsset(name: "button-up")
+  static let copyIcon = ImageAsset(name: "copy-icon")
   enum Flags {
     static let flagAd = ImageAsset(name: "flag-ad")
     static let flagAe = ImageAsset(name: "flag-ae")
@@ -425,6 +426,7 @@ enum Asset {
     static let flagZm = ImageAsset(name: "flag-zm")
     static let flagZw = ImageAsset(name: "flag-zw")
   }
+  static let friendReferrals = ImageAsset(name: "friend-referrals")
   static let icon3dtConnect = ImageAsset(name: "icon-3dt-connect")
   static let icon3dtDisconnect = ImageAsset(name: "icon-3dt-disconnect")
   static let icon3dtSelectRegion = ImageAsset(name: "icon-3dt-select-region")
@@ -449,6 +451,7 @@ enum Asset {
   static let itemMenu = ImageAsset(name: "item-menu")
   static let navLogoWhite = ImageAsset(name: "nav-logo-white")
   static let navLogo = ImageAsset(name: "nav-logo")
+  static let shareIcon = ImageAsset(name: "share-icon")
 
   // swiftlint:disable trailing_comma
   static let allColors: [ColorAsset] = [
@@ -606,6 +609,7 @@ enum Asset {
     accessorySelected,
     buttonDown,
     buttonUp,
+    copyIcon,
     Flags.flagAd,
     Flags.flagAe,
     Flags.flagAf,
@@ -817,6 +821,7 @@ enum Asset {
     Flags.flagZa,
     Flags.flagZm,
     Flags.flagZw,
+    friendReferrals,
     icon3dtConnect,
     icon3dtDisconnect,
     icon3dtSelectRegion,
@@ -841,6 +846,7 @@ enum Asset {
     itemMenu,
     navLogoWhite,
     navLogo,
+    shareIcon,
   ]
   // swiftlint:enable trailing_comma
   @available(*, deprecated, renamed: "allImages")

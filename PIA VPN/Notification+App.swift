@@ -10,7 +10,9 @@ import Foundation
 import PIALibrary
 
 extension Notification.Name {
-//    static let DataCounterDidReport = Notification.Name("DataCounterDidReport")
+    
+    static let ShareFriendReferralCode = Notification.Name("ShareFriendReferralCode")
+
 }
 
 extension NotificationKey {
