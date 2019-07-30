@@ -16,12 +16,15 @@ class GlossAccountInfo: GlossParser {
         let email: String? = "email" <~~ json
         let productId: String? = "product_id" <~~ json
         let plan: Plan = "plan" <~~ json ?? .other
+        let canInvite: Bool = "can_invite" <~~ json ?? false
+        
         guard let isRenewable: Bool = "renewable" <~~ json else {
             return nil
         }
         guard let isRecurring: Bool = "recurring" <~~ json else {
             return nil
         }
+        
         guard let expirationTime: TimeInterval = "expiration_time" <~~ json else {
             return nil
         }
@@ -40,6 +43,7 @@ class GlossAccountInfo: GlossParser {
             isRenewable: isRenewable,
             isRecurring: isRecurring,
             expirationDate: Date(timeIntervalSince1970: expirationTime),
+            canInvite: canInvite,
             shouldPresentExpirationAlert: shouldPresentExpirationAlert,
             renewUrl: renewUrl
         )
@@ -54,6 +58,7 @@ extension AccountInfo: JSONEncodable {
             "product_id" ~~> productId,
             "plan" ~~> plan.rawValue,
             "renewable" ~~> isRenewable,
+            "can_invite" ~~> canInvite,
             "recurring" ~~> isRecurring,
             "expiration_time" ~~> expirationDate.timeIntervalSince1970,
             "expire_alert" ~~> shouldPresentExpirationAlert,

@@ -44,6 +44,9 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     /// Fakes authentication outcome.
     public var mockIsUnauthorized = false
 
+    /// Fakes can invite.
+    public var mockCanInvite = false
+
     /// Fakes sign-up outcome.
     public var mockSignupOutcome: SignupOutcome = .success
 
@@ -95,6 +98,7 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
                 isRenewable: self.mockIsRenewable,
                 isRecurring: self.mockIsRecurring,
                 expirationDate: self.mockExpirationDate,
+                canInvite: self.mockCanInvite,
                 shouldPresentExpirationAlert: self.mockIsExpiring,
                 renewUrl: nil
             )
