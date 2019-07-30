@@ -17,6 +17,8 @@ public struct InvitesInformation {
 
     public let totalFreeDaysGiven: Int
 
+    public let uniqueReferralLink: String
+    
     public let invites: [Invites]
     
 }

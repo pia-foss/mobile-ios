@@ -18,6 +18,11 @@ class GlossInvitesInformation: GlossParser {
         let totalInvites: Int = "total_invites_sent" <~~ json ?? 0
         let totalRewarded: Int = "total_invites_rewarded" <~~ json ?? 0
         let totalDays: Int = "total_free_days_given" <~~ json ?? 0
+        
+        guard let uniqueReferralLink: String = "unique_referral_link" <~~ json else {
+            return nil
+        }
+        
         var invites : [Invites] = []
         
         if let inviteJSON = json["invites"] as? [JSON] {
@@ -48,6 +53,7 @@ class GlossInvitesInformation: GlossParser {
         parsed = InvitesInformation(totalInvitesSent: totalInvites,
                                     totalInvitesRewarded: totalRewarded,
                                     totalFreeDaysGiven: totalDays,
+                                    uniqueReferralLink: uniqueReferralLink,
                                     invites: invites)
         
     }

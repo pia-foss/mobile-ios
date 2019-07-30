@@ -31,6 +31,9 @@ public struct AccountInfo {
     /// The date by when the account is due to expire.
     public let expirationDate: Date
     
+    /// Returns `true` if the account can refer friends and get extra days
+    public let canInvite: Bool
+    
     /// Returns `true` if the account has expired.
     public var isExpired: Bool {
         return (expirationDate.timeIntervalSinceNow < 0)
