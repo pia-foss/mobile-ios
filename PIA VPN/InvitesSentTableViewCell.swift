@@ -23,7 +23,7 @@ class InvitesSentTableViewCell: UITableViewCell, FriendReferralCell {
     }
 
     func setupCell(withInviteInformation inviteInformation: InvitesInformation) {
-        self.titleLabel.text = "View invites sent"
+        self.titleLabel.text = L10n.Friend.Referrals.View.Invites.sent
         Theme.current.applySettingsCellTitle(titleLabel, appearance: .dark)
     }
     
@@ -32,11 +32,11 @@ class InvitesSentTableViewCell: UITableViewCell, FriendReferralCell {
         if row == 0 {
             let count = inviteInformation.invites.filter({ !$0.rewarded }).count
             self.setupAccessoryImageVisibility(count)
-            self.titleLabel.text = "\(count) pending invites"
+            self.titleLabel.text = L10n.Friend.Referrals.Pending.invites(count)
         } else {
             let count = inviteInformation.invites.filter({ $0.rewarded }).count
             self.setupAccessoryImageVisibility(count)
-            self.titleLabel.text = "\(count) signups"
+            self.titleLabel.text = L10n.Friend.Referrals.Signups.number(count)
         }
     }
     

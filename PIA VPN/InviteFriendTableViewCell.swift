@@ -26,22 +26,22 @@ class InviteFriendTableViewCell: UITableViewCell, FriendReferralCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        labelFullName.text = "Full name"
-        labelEmail.text = "Email address"
+        labelFullName.text = L10n.Friend.Referrals.fullName
+        labelEmail.text = L10n.Account.Email.placeholder
         textAgreement.attributedText = Theme.current.agreementText(
-            withMessage: "I agree to all of the terms and conditions of the Family and Friends Referral Program.",
-            tos: "Family and Friends Referral Program",
-            tosUrl: "https://www.privateinternetaccess.com/pages/invites/terms_and_conditions",
+            withMessage: L10n.Friend.Referrals.Invitation.terms,
+            tos: L10n.Friend.Referrals.Family.Friends.program,
+            tosUrl: AppConstants.Web.friendReferralTerms,
             privacy: "",
             privacyUrl: "")
-        sendButton.setTitle("SEND INVITE",
+        sendButton.setTitle(L10n.Friend.Referrals.Send.invite.uppercased(),
                               for: [])
         
         Theme.current.applySecondaryBackground(self)
         Theme.current.applySecondaryBackground(self.contentView)
 
         textEmail.placeholder = L10n.Account.Email.placeholder
-        textFullName.placeholder = "Full name"
+        textFullName.placeholder = L10n.Friend.Referrals.fullName
 
         sendButton.setRounded()
         sendButton.style(style: TextStyle.Buttons.piaGreenButton)
@@ -88,12 +88,12 @@ class InviteFriendTableViewCell: UITableViewCell, FriendReferralCell {
                                                         weakSelf.contentView.hideLoadingAnimation()
                                                         if let _ = error {
                                                             Macros.displayImageNote(withImage: Asset.iconWarning.image,
-                                                                                    message: "Error inviting")
+                                                                                    message: L10n.Friend.Referrals.Invite.error)
                                                         } else {
                                                             weakSelf.textEmail.text = ""
                                                             weakSelf.textFullName.text = ""
                                                             Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image,
-                                                                                    message: "Invitation sent")
+                                                                                    message: L10n.Friend.Referrals.Invite.success)
                                                             Macros.postNotification(.FriendInvitationSent)
                                                         }
                                                     }

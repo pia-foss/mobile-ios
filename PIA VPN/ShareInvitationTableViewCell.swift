@@ -26,18 +26,18 @@ class ShareInvitationTableViewCell: UITableViewCell, FriendReferralCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        labelDescription.text = "Share your unique referral link"
+        labelDescription.text = L10n.Friend.Referrals.Share.link
         textAgreement.attributedText = Theme.current.agreementText(
-            withMessage: "By sharing this link, you agree to all of the terms and conditions of the Family and Friends Referral Program.",
-            tos: "Family and Friends Referral Program",
-            tosUrl: "https://www.privateinternetaccess.com/pages/invites/terms_and_conditions",
+            withMessage: L10n.Friend.Referrals.Share.Link.terms,
+            tos: L10n.Friend.Referrals.Family.Friends.program,
+            tosUrl: AppConstants.Web.friendReferralTerms,
             privacy: "",
             privacyUrl: "")
-        copyButton.setTitle("COPY",
+        copyButton.setTitle(L10n.Global.copy.uppercased(),
                             for: [])
-        shareButton.setTitle("SHARE",
+        shareButton.setTitle(L10n.Global.share.uppercased(),
                              for: [])
-        copiedLabel.text = "COPIED TO CLIPBOARD"
+        copiedLabel.text = L10n.Global.copied.uppercased()
         copiedView.alpha = 0
         
         Theme.current.applySecondaryBackground(self)

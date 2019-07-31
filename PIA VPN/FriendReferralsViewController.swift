@@ -35,7 +35,7 @@ class FriendReferralsViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         
-        styleNavigationBarWithTitle("Refer a Friend")
+        styleNavigationBarWithTitle(L10n.Friend.Referrals.title)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)

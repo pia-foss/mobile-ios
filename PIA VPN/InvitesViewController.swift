@@ -22,7 +22,7 @@ class InvitesViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         
-        styleNavigationBarWithTitle("Invites sent")
+        styleNavigationBarWithTitle(L10n.Friend.Referrals.Invites.Sent.title)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
@@ -40,7 +40,7 @@ class InvitesViewController: AutolayoutViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let viewController = segue.destination as? InviteStatusViewController {
             viewController.inviteInformation = self.inviteInformation
-            viewController.viewTitle = "Pending invites"
+            viewController.viewTitle = L10n.Friend.Referrals.Pending.Invites.title
             if segue.identifier == StoryboardSegue.Main.viewFriendReferralSignups.rawValue {
                 viewController.inviteStatusViewMode = .signups
             }
@@ -66,14 +66,14 @@ extension InvitesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if let inviteInformation = self.inviteInformation,
             section == 1 {
-            return "You have sent \(inviteInformation.invites.count) invites"
+            return L10n.Friend.Referrals.Invites.number(inviteInformation.invites.count).uppercased()
         }
         return nil
     }
 
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if section == 1 {
-            return "Please note, for privacy reasons, all invites older than 30 days will be deleted."
+            return L10n.Friend.Referrals.Privacy.note
         }
         return nil
     }

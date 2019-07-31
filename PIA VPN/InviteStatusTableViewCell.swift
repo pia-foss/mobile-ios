@@ -20,9 +20,9 @@ class InviteStatusTableViewCell: UITableViewCell{
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        emailTitleLabel.text = "Email address"
-        signedupTitleLabel.text = "Signed up"
-        rewardedTitleLabel.text = "Reward given"
+        emailTitleLabel.text = L10n.Account.Email.placeholder
+        signedupTitleLabel.text = L10n.Friend.Referrals.signedup
+        rewardedTitleLabel.text = L10n.Friend.Referrals.Reward.given
     }
 
     func setupCell(withInvite invite: Invites) {
@@ -33,8 +33,8 @@ class InviteStatusTableViewCell: UITableViewCell{
         Theme.current.applySubtitle(rewardedTitleLabel)
         Theme.current.applySettingsCellTitle(rewardedLabel, appearance: .dark)
         emailLabel.text = invite.obfuscatedEmail
-        signedupLabel.text = invite.accepted ? "Yes" : "No"
-        rewardedLabel.text = invite.rewarded ? "Yes" : "No"
+        signedupLabel.text = invite.accepted ? L10n.Global.yes : L10n.Global.no
+        rewardedLabel.text = invite.rewarded ? L10n.Global.yes : L10n.Global.no
         
     }
     

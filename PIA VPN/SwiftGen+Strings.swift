@@ -165,9 +165,91 @@ internal enum L10n {
 
   internal enum Friend {
     internal enum Referrals {
+      /// Full name
+      internal static let fullName = L10n.tr("Localizable", "friend.referrals.fullName")
+      /// Signed up
+      internal static let signedup = L10n.tr("Localizable", "friend.referrals.signedup")
+      /// Refer a Friend
+      internal static let title = L10n.tr("Localizable", "friend.referrals.title")
+      internal enum Days {
+        /// Free days acquired
+        internal static let acquired = L10n.tr("Localizable", "friend.referrals.days.acquired")
+        /// %d days
+        internal static func number(_ p1: Int) -> String {
+          return L10n.tr("Localizable", "friend.referrals.days.number", p1)
+        }
+      }
       internal enum Email {
         /// Invalid email. Please try again.
         internal static let validation = L10n.tr("Localizable", "friend.referrals.email.validation")
+      }
+      internal enum Family {
+        internal enum Friends {
+          /// Family and Friends Referral Program
+          internal static let program = L10n.tr("Localizable", "friend.referrals.family.friends.program")
+        }
+      }
+      internal enum Invitation {
+        /// By sending this invitation, I agree to all of the terms and conditions of the Family and Friends Referral Program.
+        internal static let terms = L10n.tr("Localizable", "friend.referrals.invitation.terms")
+      }
+      internal enum Invite {
+        /// Could not resend invite. Try again later.
+        internal static let error = L10n.tr("Localizable", "friend.referrals.invite.error")
+        /// Invite sent successfully
+        internal static let success = L10n.tr("Localizable", "friend.referrals.invite.success")
+      }
+      internal enum Invites {
+        /// You have sent %d invites
+        internal static func number(_ p1: Int) -> String {
+          return L10n.tr("Localizable", "friend.referrals.invites.number", p1)
+        }
+        internal enum Sent {
+          /// Invites sent
+          internal static let title = L10n.tr("Localizable", "friend.referrals.invites.sent.title")
+        }
+      }
+      internal enum Pending {
+        /// %d pending invites
+        internal static func invites(_ p1: Int) -> String {
+          return L10n.tr("Localizable", "friend.referrals.pending.invites", p1)
+        }
+        internal enum Invites {
+          /// Pending invites
+          internal static let title = L10n.tr("Localizable", "friend.referrals.pending.invites.title")
+        }
+      }
+      internal enum Privacy {
+        /// Please note, for privacy reasons, all invites older than 30 days will be deleted.
+        internal static let note = L10n.tr("Localizable", "friend.referrals.privacy.note")
+      }
+      internal enum Reward {
+        /// Reward given
+        internal static let given = L10n.tr("Localizable", "friend.referrals.reward.given")
+      }
+      internal enum Send {
+        /// Send invite
+        internal static let invite = L10n.tr("Localizable", "friend.referrals.send.invite")
+      }
+      internal enum Share {
+        /// Share your unique referral link
+        internal static let link = L10n.tr("Localizable", "friend.referrals.share.link")
+        internal enum Link {
+          /// By sharing this link, you agree to all of the terms and conditions of the Family and Friends Referral Program.
+          internal static let terms = L10n.tr("Localizable", "friend.referrals.share.link.terms")
+        }
+      }
+      internal enum Signups {
+        /// %d signups
+        internal static func number(_ p1: Int) -> String {
+          return L10n.tr("Localizable", "friend.referrals.signups.number", p1)
+        }
+      }
+      internal enum View {
+        internal enum Invites {
+          /// View invites sent
+          internal static let sent = L10n.tr("Localizable", "friend.referrals.view.invites.sent")
+        }
       }
     }
   }
@@ -183,6 +265,10 @@ internal enum L10n {
     internal static let clear = L10n.tr("Localizable", "global.clear")
     /// Close
     internal static let close = L10n.tr("Localizable", "global.close")
+    /// Copied to clipboard
+    internal static let copied = L10n.tr("Localizable", "global.copied")
+    /// Copy
+    internal static let copy = L10n.tr("Localizable", "global.copy")
     /// Disabled
     internal static let disabled = L10n.tr("Localizable", "global.disabled")
     /// Edit
@@ -195,6 +281,8 @@ internal enum L10n {
     internal static let enabled = L10n.tr("Localizable", "global.enabled")
     /// Error
     internal static let error = L10n.tr("Localizable", "global.error")
+    /// No
+    internal static let no = L10n.tr("Localizable", "global.no")
     /// OK
     internal static let ok = L10n.tr("Localizable", "global.ok")
     /// Optional
@@ -203,10 +291,14 @@ internal enum L10n {
     internal static let remove = L10n.tr("Localizable", "global.remove")
     /// Required
     internal static let `required` = L10n.tr("Localizable", "global.required")
+    /// Share
+    internal static let share = L10n.tr("Localizable", "global.share")
     /// No internet connection found. Please confirm that you have an internet connection.
     internal static let unreachable = L10n.tr("Localizable", "global.unreachable")
     /// Update
     internal static let update = L10n.tr("Localizable", "global.update")
+    /// Yes
+    internal static let yes = L10n.tr("Localizable", "global.yes")
   }
 
   internal enum Hotspothelper {
