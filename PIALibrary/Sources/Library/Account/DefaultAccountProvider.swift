@@ -283,7 +283,12 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
     }
     
     func invite(name: String, email: String, _ callback: SuccessLibraryCallback?) {
-        webServices.invite(name: name, email: email, { result in 
+
+        guard let user = currentUser else {
+            preconditionFailure()
+        }
+
+        webServices.invite(credentials: user.credentials, name: name, email: email, { result in 
             callback?(result)
         })
     }

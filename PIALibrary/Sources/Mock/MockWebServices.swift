@@ -77,7 +77,7 @@ class MockWebServices: WebServices {
         callback?(result, error)
     }
     
-    func invite(name: String, email: String, _ callback: SuccessLibraryCallback?) {
+    func invite(credentials: Credentials, name: String, email: String, _ callback: SuccessLibraryCallback?) {
         callback?(nil)
     }
     
