@@ -186,6 +186,16 @@
 		DD1C139F21E6623D004004B3 /* XIBSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1C139D21E6623D004004B3 /* XIBSetup.swift */; };
 		DD1C13A421E6743F004004B3 /* TileFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1C13A321E6743F004004B3 /* TileFlowLayout.swift */; };
 		DD1C13A521E6743F004004B3 /* TileFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1C13A321E6743F004004B3 /* TileFlowLayout.swift */; };
+		DD21909222F1DFB0007D035E /* DaysAcquiredTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21908D22F1DD52007D035E /* DaysAcquiredTableViewCell.xib */; };
+		DD21909322F1DFB0007D035E /* InviteFriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21908B22F1DD52007D035E /* InviteFriendTableViewCell.xib */; };
+		DD21909422F1DFB0007D035E /* InvitesSentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21908F22F1DD53007D035E /* InvitesSentTableViewCell.xib */; };
+		DD21909522F1DFB0007D035E /* InviteStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21908C22F1DD52007D035E /* InviteStatusTableViewCell.xib */; };
+		DD21909622F1DFB0007D035E /* ShareInvitationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21908E22F1DD53007D035E /* ShareInvitationTableViewCell.xib */; };
+		DD21909722F1DFB0007D035E /* DaysAcquiredTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21908D22F1DD52007D035E /* DaysAcquiredTableViewCell.xib */; };
+		DD21909822F1DFB0007D035E /* InviteFriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21908B22F1DD52007D035E /* InviteFriendTableViewCell.xib */; };
+		DD21909922F1DFB0007D035E /* InvitesSentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21908F22F1DD53007D035E /* InvitesSentTableViewCell.xib */; };
+		DD21909A22F1DFB0007D035E /* InviteStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21908C22F1DD52007D035E /* InviteStatusTableViewCell.xib */; };
+		DD21909B22F1DFB0007D035E /* ShareInvitationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21908E22F1DD53007D035E /* ShareInvitationTableViewCell.xib */; };
 		DD401977221FEF2C0041EB30 /* NetworkManagementToolTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD401976221FEF2C0041EB30 /* NetworkManagementToolTile.swift */; };
 		DD401978221FEF2C0041EB30 /* NetworkManagementToolTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD401976221FEF2C0041EB30 /* NetworkManagementToolTile.swift */; };
 		DD40197A221FEF390041EB30 /* NetworkManagementToolTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD401979221FEF390041EB30 /* NetworkManagementToolTile.xib */; };
@@ -1449,12 +1459,16 @@
 				DD76291421ECBD8B0092DF50 /* SubscriptionTileCollectionViewCell.xib in Resources */,
 				DD746958217F070700B7BD73 /* DNS.plist in Resources */,
 				0E7EC046209326E30029811E /* Localizable.strings in Resources */,
+				DD21909822F1DFB0007D035E /* InviteFriendTableViewCell.xib in Resources */,
 				DD76291A21ECBDA50092DF50 /* SubscriptionTile.xib in Resources */,
 				0E7EC0312093265C0029811E /* InfoPlist.strings in Resources */,
 				DD76292621ECCD650092DF50 /* UsageTile.xib in Resources */,
 				DDFCFA9221E892070081F235 /* RegionTileCollectionViewCell.xib in Resources */,
 				DDFCFA9821E8921F0081F235 /* RegionTile.xib in Resources */,
+				DD21909A22F1DFB0007D035E /* InviteStatusTableViewCell.xib in Resources */,
 				DD401981221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.xib in Resources */,
+				DD21909922F1DFB0007D035E /* InvitesSentTableViewCell.xib in Resources */,
+				DD21909722F1DFB0007D035E /* DaysAcquiredTableViewCell.xib in Resources */,
 				0EE220631F4EF307002805AE /* Launch Screen.storyboard in Resources */,
 				DD9706A8224262CD00630220 /* QuickSettingsTile.xib in Resources */,
 				DD172A9D2254C36D00071CFB /* FavoriteServersTileCollectionViewCell.xib in Resources */,
@@ -1467,6 +1481,7 @@
 				0ED9841F1FC48C6500542EE6 /* Roboto-Light.ttf in Resources */,
 				0EE2206A1F4EF307002805AE /* Components.plist in Resources */,
 				0ED984221FC48C6500542EE6 /* Roboto-Thin.ttf in Resources */,
+				DD21909B22F1DFB0007D035E /* ShareInvitationTableViewCell.xib in Resources */,
 				DD40197B221FEF390041EB30 /* NetworkManagementToolTile.xib in Resources */,
 				DD9706AE224262E000630220 /* QuickSettingsTileCollectionViewCell.xib in Resources */,
 				DD125DC921E7704F004ECCB6 /* QuickConnectTile.xib in Resources */,
@@ -1504,16 +1519,21 @@
 				DD125DC821E7704F004ECCB6 /* QuickConnectTile.xib in Resources */,
 				DD9706A7224262CD00630220 /* QuickSettingsTile.xib in Resources */,
 				DDFCFA9721E8921F0081F235 /* RegionTile.xib in Resources */,
+				DD21909522F1DFB0007D035E /* InviteStatusTableViewCell.xib in Resources */,
 				0ED9841B1FC48C6000542EE6 /* Roboto-Medium.ttf in Resources */,
 				DD76291321ECBD8B0092DF50 /* SubscriptionTileCollectionViewCell.xib in Resources */,
 				0ECB08201D61D2A900043852 /* Launch Screen.storyboard in Resources */,
+				DD21909422F1DFB0007D035E /* InvitesSentTableViewCell.xib in Resources */,
 				DD9706AD224262E000630220 /* QuickSettingsTileCollectionViewCell.xib in Resources */,
 				DD172A9F2254C39300071CFB /* FavoriteServersTile.xib in Resources */,
 				DD125DCE21E772B6004ECCB6 /* QuickConnectTileCollectionViewCell.xib in Resources */,
 				DD1C138921E60C63004004B3 /* IPTile.xib in Resources */,
+				DD21909622F1DFB0007D035E /* ShareInvitationTableViewCell.xib in Resources */,
 				0E7EC045209326E30029811E /* Localizable.strings in Resources */,
+				DD21909322F1DFB0007D035E /* InviteFriendTableViewCell.xib in Resources */,
 				0ED9841D1FC48C6000542EE6 /* Roboto-Regular.ttf in Resources */,
 				DD401980221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.xib in Resources */,
+				DD21909222F1DFB0007D035E /* DaysAcquiredTableViewCell.xib in Resources */,
 				DD76291F21ECCD510092DF50 /* UsageTileCollectionViewCell.xib in Resources */,
 				DD76292521ECCD650092DF50 /* UsageTile.xib in Resources */,
 				DD172A9C2254C36D00071CFB /* FavoriteServersTileCollectionViewCell.xib in Resources */,
