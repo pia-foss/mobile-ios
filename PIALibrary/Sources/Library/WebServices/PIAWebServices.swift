@@ -278,17 +278,18 @@ class PIAWebServices: WebServices, ConfigurationAccess {
 
     }
     
-    func invite(name: String, email: String, _ callback: SuccessLibraryCallback?) {
+    func invite(credentials: Credentials, name: String, email: String, _ callback: SuccessLibraryCallback?) {
         let endpoint = ClientEndpoint.invites
-        let status = [200, 400]
+        let status = [200, 400, 401]
         let errors: [Int: ClientError] = [
-            400: .badReceipt
+            400: .badReceipt,
+            401: .unauthorized
         ]
         
         let parameters = ["invitee_name": name,
                           "invitee_email": email]
         
-        req(nil, .post, endpoint, parameters, status, JSONRequestExecutor() { (json, status, error) in
+        req(credentials, .post, endpoint, parameters, status, DataRequestExecutor() { (json, status, error) in
             if let knownError = self.knownError(endpoint, status, errors) {
                 callback?(knownError)
                 return
