@@ -120,11 +120,16 @@ extension InvitesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
+        if let inviteInformation = self.inviteInformation,
+            indexPath.section == 1 {
             if indexPath.row == 0 {
-                self.perform(segue: StoryboardSegue.Main.viewFriendReferralStatus)
+                if inviteInformation.invites.filter({ !$0.rewarded }).count > 0 {
+                    self.perform(segue: StoryboardSegue.Main.viewFriendReferralStatus)
+                }
             } else {
-                self.perform(segue: StoryboardSegue.Main.viewFriendReferralSignups)
+                if inviteInformation.invites.filter({ $0.rewarded }).count > 0 {
+                    self.perform(segue: StoryboardSegue.Main.viewFriendReferralSignups)
+                }
             }
         }
         tableView.deselectRow(at: indexPath, animated: true)
