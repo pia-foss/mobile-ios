@@ -163,6 +163,15 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "expiration.title")
   }
 
+  internal enum Friend {
+    internal enum Referrals {
+      internal enum Email {
+        /// Invalid email. Please try again.
+        internal static let validation = L10n.tr("Localizable", "friend.referrals.email.validation")
+      }
+    }
+  }
+
   internal enum Global {
     /// Add
     internal static let add = L10n.tr("Localizable", "global.add")

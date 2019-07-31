@@ -538,6 +538,7 @@
                         <outlet property="tableView" destination="NEU-N0-uvH" id="b9g-bO-Y2k"/>
                         <outlet property="viewContainer" destination="fOj-s5-WSW" id="4vz-e0-daK"/>
                         <segue destination="0az-vy-BiO" kind="show" identifier="view-friend-referral-status" id="asE-pH-Na7"/>
+                        <segue destination="0az-vy-BiO" kind="show" identifier="view-friend-referral-signups" id="9EP-gJ-pE1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z2j-Lx-dbH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -577,7 +578,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gD1-c3-c0P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3950" y="1645"/>
+            <point key="canvasLocation" x="3970" y="1729"/>
         </scene>
         <!--Settings-->
         <scene sceneID="wLQ-Xt-jeE">
@@ -2051,6 +2052,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="LsE-Df-8xu"/>
+        <segue reference="9EP-gJ-pE1"/>
         <segue reference="Z3b-zh-fBg"/>
     </inferredMetricsTieBreakers>
 </document>

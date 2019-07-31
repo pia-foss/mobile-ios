@@ -20,14 +20,22 @@ class InvitesSentTableViewCell: UITableViewCell, FriendReferralCell {
         Theme.current.applySecondaryBackground(self)
         Theme.current.applySecondaryBackground(self.contentView)
 
-        self.titleLabel.text = "View invites sent"
         self.accessoryImageRight.image = Asset.Piax.Tiles.openTileDetails.image.withRenderingMode(.alwaysTemplate)
         self.accessoryImageRight.tintColor = UIColor.piaGrey4
 
     }
 
-    func setupCell() {
+    func setupCell(withInviteInformation inviteInformation: InvitesInformation) {
         Theme.current.applySettingsCellTitle(titleLabel, appearance: .dark)
     }
     
+    func setupCell(withInviteInformation inviteInformation: InvitesInformation, andRow row: Int) {
+        Theme.current.applySettingsCellTitle(titleLabel, appearance: .dark)
+        if row == 0 {
+            self.titleLabel.text = "3 pending invites"
+        } else {
+            self.titleLabel.text = "3 signups"
+        }
+    }
+
 }

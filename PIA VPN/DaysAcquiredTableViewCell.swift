@@ -26,12 +26,12 @@ class DaysAcquiredTableViewCell: UITableViewCell, FriendReferralCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         labelTitle.text = "Free days acquired"
-        labelDays.text = "60 days"
     }
     
-    func setupCell() {
+    func setupCell(withInviteInformation inviteInformation: InvitesInformation) {
         Theme.current.applySubtitle(labelTitle)
         labelDays.style(style: textStyleDays)
+        labelDays.text = "\(inviteInformation.totalFreeDaysGiven) days"
     }
 
 }

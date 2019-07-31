@@ -55,15 +55,20 @@ class ShareInvitationTableViewCell: UITableViewCell, FriendReferralCell {
         shareButton.style(style: TextStyle.Buttons.piaGreenButton)
         
         textUniqueCode.delegate = self
+        textUniqueCode.isUserInteractionEnabled = false
 
     }
 
-    func setupCell() {
+    func setupCell(withInviteInformation inviteInformation: InvitesInformation) {
+        
         Theme.current.applyInputOverlay(copiedView)
         Theme.current.applyFriendReferralsMessageLabel(copiedLabel)
         Theme.current.applySubtitle(labelDescription)
         Theme.current.applyInput(textUniqueCode)
         Theme.current.applyLinkAttributes(textAgreement)
+        
+        textUniqueCode.text = inviteInformation.uniqueReferralLink
+        
     }
     
     @IBAction func copyToClipboard() {

@@ -12,6 +12,7 @@ import PIALibrary
 class InvitesViewController: AutolayoutViewController {
 
     @IBOutlet private weak var tableView: UITableView!
+    var inviteInformation: InvitesInformation?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,11 @@ class InvitesViewController: AutolayoutViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let viewController = segue.destination as? InviteStatusViewController {
+            viewController.inviteInformation = self.inviteInformation
             viewController.viewTitle = "Pending invites"
+            if segue.identifier == StoryboardSegue.Main.viewFriendReferralSignups.rawValue {
+                viewController.inviteStatusViewMode = .signups
+            }
         }
     }
     
@@ -59,8 +64,9 @@ extension InvitesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 1 {
-            return "You have sent 5 invites"
+        if let inviteInformation = self.inviteInformation,
+            section == 1 {
+            return "You have sent \(inviteInformation.invites.count) invites"
         }
         return nil
     }
@@ -92,8 +98,13 @@ extension InvitesViewController: UITableViewDataSource, UITableViewDelegate {
         let identifier = InvitesSentCells.objectIdentifyBy(index: indexPath.section).identifier
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
                                                  for: indexPath)
-        if let friendReferralCell = cell as? FriendReferralCell {
-            friendReferralCell.setupCell()
+        if let inviteInformation = self.inviteInformation,
+            let friendReferralCell = cell as? FriendReferralCell {
+            if let cell = cell as? InvitesSentTableViewCell {
+                cell.setupCell(withInviteInformation: inviteInformation, andRow: indexPath.row)
+            } else {
+                friendReferralCell.setupCell(withInviteInformation: inviteInformation)
+            }
         }
         
         Theme.current.applySecondaryBackground(cell)
@@ -110,7 +121,11 @@ extension InvitesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            self.perform(segue: StoryboardSegue.Main.viewFriendReferralStatus)
+            if indexPath.row == 0 {
+                self.perform(segue: StoryboardSegue.Main.viewFriendReferralStatus)
+            } else {
+                self.perform(segue: StoryboardSegue.Main.viewFriendReferralSignups)
+            }
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

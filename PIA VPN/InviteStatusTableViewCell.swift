@@ -9,7 +9,7 @@
 import UIKit
 import PIALibrary
 
-class InviteStatusTableViewCell: UITableViewCell, FriendReferralCell {
+class InviteStatusTableViewCell: UITableViewCell{
 
     @IBOutlet private weak var emailTitleLabel: UILabel!
     @IBOutlet private weak var emailLabel: UILabel!
@@ -24,17 +24,13 @@ class InviteStatusTableViewCell: UITableViewCell, FriendReferralCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         emailTitleLabel.text = "Email address"
-        emailLabel.text = "a@a.com"
         openedTitleLabel.text = "Opened"
-        openedLabel.text = "Yes"
         signedupTitleLabel.text = "Signed up"
-        signedupLabel.text = "No"
         rewardedTitleLabel.text = "Reward given"
-        rewardedLabel.text = "No"
         actionButton.setTitle("Resend", for: .normal)
     }
 
-    func setupCell() {
+    func setupCell(withInvite invite: Invites) {
         Theme.current.applySubtitle(emailTitleLabel)
         Theme.current.applySettingsCellTitle(emailLabel, appearance: .dark)
         Theme.current.applySubtitle(openedTitleLabel)
@@ -45,6 +41,12 @@ class InviteStatusTableViewCell: UITableViewCell, FriendReferralCell {
         Theme.current.applySettingsCellTitle(rewardedLabel, appearance: .dark)
         Theme.current.applyTransparentButton(actionButton,
                                              withSize: 0)
+        emailLabel.text = invite.obfuscatedEmail
+        openedLabel.text = "Yes"
+        signedupLabel.text = invite.accepted ? "Yes" : "No"
+        rewardedLabel.text = invite.rewarded ? "Yes" : "No"
+        actionButton.isHidden = invite.rewarded
+        
     }
     
     @IBAction func sendInvite() {

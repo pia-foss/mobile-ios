@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import PIALibrary
 
 protocol FriendReferralCell {
     
-    func setupCell()
+    func setupCell(withInviteInformation inviteInformation: InvitesInformation)
     
 }
 

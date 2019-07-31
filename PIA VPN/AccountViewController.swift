@@ -167,7 +167,7 @@ class AccountViewController: AutolayoutViewController {
                     log.debug("Account: Modifying account email...")
                     
                     let request = UpdateAccountRequest(email: email)
-                    weakSelf.showLoadingAnimation()
+
                     
                     Client.providers.accountProvider.update(with: request,
                                                             andPassword: password) { (info, error) in
@@ -301,7 +301,7 @@ class AccountViewController: AutolayoutViewController {
                 labelSubscriptions.isHidden = true
                 labelSubscriptionTopConstraint.constant = 0
             }
-            viewFriendReferral.isHidden = userInfo.plan != .other
+            viewFriendReferral.isHidden = !userInfo.canInvite
         }
         
         establishUncreditedVisibility()

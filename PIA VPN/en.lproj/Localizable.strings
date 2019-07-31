@@ -273,3 +273,6 @@
 
 //TODAY WIDGET
 "today.widget.login" = "Login";
+
+//FRIEND REFERRALS
+"friend.referrals.email.validation" = "Invalid email. Please try again.";
