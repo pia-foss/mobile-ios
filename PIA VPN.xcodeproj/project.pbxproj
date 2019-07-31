@@ -186,16 +186,6 @@
 		DD1C139F21E6623D004004B3 /* XIBSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1C139D21E6623D004004B3 /* XIBSetup.swift */; };
 		DD1C13A421E6743F004004B3 /* TileFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1C13A321E6743F004004B3 /* TileFlowLayout.swift */; };
 		DD1C13A521E6743F004004B3 /* TileFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1C13A321E6743F004004B3 /* TileFlowLayout.swift */; };
-		DD21907A22F1D974007D035E /* InviteStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21907522F1D973007D035E /* InviteStatusTableViewCell.xib */; };
-		DD21907B22F1D974007D035E /* InviteStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21907522F1D973007D035E /* InviteStatusTableViewCell.xib */; };
-		DD21907C22F1D974007D035E /* ShareInvitationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21907622F1D973007D035E /* ShareInvitationTableViewCell.xib */; };
-		DD21907D22F1D974007D035E /* ShareInvitationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21907622F1D973007D035E /* ShareInvitationTableViewCell.xib */; };
-		DD21907E22F1D974007D035E /* InviteFriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21907722F1D973007D035E /* InviteFriendTableViewCell.xib */; };
-		DD21907F22F1D974007D035E /* InviteFriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21907722F1D973007D035E /* InviteFriendTableViewCell.xib */; };
-		DD21908022F1D974007D035E /* InvitesSentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21907822F1D973007D035E /* InvitesSentTableViewCell.xib */; };
-		DD21908122F1D974007D035E /* InvitesSentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21907822F1D973007D035E /* InvitesSentTableViewCell.xib */; };
-		DD21908222F1D974007D035E /* DaysAcquiredTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21907922F1D973007D035E /* DaysAcquiredTableViewCell.xib */; };
-		DD21908322F1D974007D035E /* DaysAcquiredTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD21907922F1D973007D035E /* DaysAcquiredTableViewCell.xib */; };
 		DD401977221FEF2C0041EB30 /* NetworkManagementToolTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD401976221FEF2C0041EB30 /* NetworkManagementToolTile.swift */; };
 		DD401978221FEF2C0041EB30 /* NetworkManagementToolTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD401976221FEF2C0041EB30 /* NetworkManagementToolTile.swift */; };
 		DD40197A221FEF390041EB30 /* NetworkManagementToolTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD401979221FEF390041EB30 /* NetworkManagementToolTile.xib */; };
@@ -551,11 +541,11 @@
 		DD1C139821E65F90004004B3 /* IPTileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IPTileCollectionViewCell.xib; sourceTree = "<group>"; };
 		DD1C139D21E6623D004004B3 /* XIBSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XIBSetup.swift; sourceTree = "<group>"; };
 		DD1C13A321E6743F004004B3 /* TileFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileFlowLayout.swift; sourceTree = "<group>"; };
-		DD21907522F1D973007D035E /* InviteStatusTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InviteStatusTableViewCell.xib; path = "../../../../../../../../../System/Volumes/Data/Users/ueshiba/Projects/PIA/vpn-ios/Resources/UI/Menu/Cells/InviteStatusTableViewCell.xib"; sourceTree = "<group>"; };
-		DD21907622F1D973007D035E /* ShareInvitationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShareInvitationTableViewCell.xib; path = "../../../../../../../../../System/Volumes/Data/Users/ueshiba/Projects/PIA/vpn-ios/Resources/UI/Menu/Cells/ShareInvitationTableViewCell.xib"; sourceTree = "<group>"; };
-		DD21907722F1D973007D035E /* InviteFriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InviteFriendTableViewCell.xib; path = "../../../../../../../../../System/Volumes/Data/Users/ueshiba/Projects/PIA/vpn-ios/Resources/UI/Menu/Cells/InviteFriendTableViewCell.xib"; sourceTree = "<group>"; };
-		DD21907822F1D973007D035E /* InvitesSentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InvitesSentTableViewCell.xib; path = "../../../../../../../../../System/Volumes/Data/Users/ueshiba/Projects/PIA/vpn-ios/Resources/UI/Menu/Cells/InvitesSentTableViewCell.xib"; sourceTree = "<group>"; };
-		DD21907922F1D973007D035E /* DaysAcquiredTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DaysAcquiredTableViewCell.xib; path = "../../../../../../../../../System/Volumes/Data/Users/ueshiba/Projects/PIA/vpn-ios/Resources/UI/Menu/Cells/DaysAcquiredTableViewCell.xib"; sourceTree = "<group>"; };
+		DD21908B22F1DD52007D035E /* InviteFriendTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InviteFriendTableViewCell.xib; sourceTree = "<group>"; };
+		DD21908C22F1DD52007D035E /* InviteStatusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InviteStatusTableViewCell.xib; sourceTree = "<group>"; };
+		DD21908D22F1DD52007D035E /* DaysAcquiredTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DaysAcquiredTableViewCell.xib; sourceTree = "<group>"; };
+		DD21908E22F1DD53007D035E /* ShareInvitationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareInvitationTableViewCell.xib; sourceTree = "<group>"; };
+		DD21908F22F1DD53007D035E /* InvitesSentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvitesSentTableViewCell.xib; sourceTree = "<group>"; };
 		DD401976221FEF2C0041EB30 /* NetworkManagementToolTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagementToolTile.swift; sourceTree = "<group>"; };
 		DD401979221FEF390041EB30 /* NetworkManagementToolTile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetworkManagementToolTile.xib; sourceTree = "<group>"; };
 		DD40197C221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagementToolTileCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1066,22 +1056,22 @@
 			path = Tiles;
 			sourceTree = "<group>";
 		};
-		DD21907322F1D92F007D035E /* Menu */ = {
+		DD21909022F1DD6A007D035E /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				DD21907422F1D93F007D035E /* Cells */,
+				DD21909122F1DD7C007D035E /* Cells */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
 		};
-		DD21907422F1D93F007D035E /* Cells */ = {
+		DD21909122F1DD7C007D035E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				DD21907922F1D973007D035E /* DaysAcquiredTableViewCell.xib */,
-				DD21907722F1D973007D035E /* InviteFriendTableViewCell.xib */,
-				DD21907822F1D973007D035E /* InvitesSentTableViewCell.xib */,
-				DD21907522F1D973007D035E /* InviteStatusTableViewCell.xib */,
-				DD21907622F1D973007D035E /* ShareInvitationTableViewCell.xib */,
+				DD21908D22F1DD52007D035E /* DaysAcquiredTableViewCell.xib */,
+				DD21908B22F1DD52007D035E /* InviteFriendTableViewCell.xib */,
+				DD21908F22F1DD53007D035E /* InvitesSentTableViewCell.xib */,
+				DD21908C22F1DD52007D035E /* InviteStatusTableViewCell.xib */,
+				DD21908E22F1DD53007D035E /* ShareInvitationTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1089,7 +1079,7 @@
 		DD4368A3224A73E4005D373B /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				DD21907322F1D92F007D035E /* Menu */,
+				DD21909022F1DD6A007D035E /* Menu */,
 				DD4368A4224A73F1005D373B /* Core */,
 				0ECB081F1D61D2A900043852 /* Launch Screen.storyboard */,
 				291C6391183EBC210039EC03 /* Main.storyboard */,
@@ -1449,10 +1439,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD21908122F1D974007D035E /* InvitesSentTableViewCell.xib in Resources */,
 				DD172AA02254C39300071CFB /* FavoriteServersTile.xib in Resources */,
-				DD21907B22F1D974007D035E /* InviteStatusTableViewCell.xib in Resources */,
-				DD21907F22F1D974007D035E /* InviteFriendTableViewCell.xib in Resources */,
 				0ED66BD020A9918000333B35 /* staging.endpoint in Resources */,
 				DD76292021ECCD510092DF50 /* UsageTileCollectionViewCell.xib in Resources */,
 				DD6DC5C321B6C27F00F9D538 /* pia-spinner.json in Resources */,
@@ -1479,10 +1466,8 @@
 				0EFDC1D51FE4607D007C0B9B /* Images.xcassets in Resources */,
 				0ED9841F1FC48C6500542EE6 /* Roboto-Light.ttf in Resources */,
 				0EE2206A1F4EF307002805AE /* Components.plist in Resources */,
-				DD21907D22F1D974007D035E /* ShareInvitationTableViewCell.xib in Resources */,
 				0ED984221FC48C6500542EE6 /* Roboto-Thin.ttf in Resources */,
 				DD40197B221FEF390041EB30 /* NetworkManagementToolTile.xib in Resources */,
-				DD21908322F1D974007D035E /* DaysAcquiredTableViewCell.xib in Resources */,
 				DD9706AE224262E000630220 /* QuickSettingsTileCollectionViewCell.xib in Resources */,
 				DD125DC921E7704F004ECCB6 /* QuickConnectTile.xib in Resources */,
 				0EE220701F4EF307002805AE /* Main.storyboard in Resources */,
@@ -1527,11 +1512,9 @@
 				DD125DCE21E772B6004ECCB6 /* QuickConnectTileCollectionViewCell.xib in Resources */,
 				DD1C138921E60C63004004B3 /* IPTile.xib in Resources */,
 				0E7EC045209326E30029811E /* Localizable.strings in Resources */,
-				DD21908022F1D974007D035E /* InvitesSentTableViewCell.xib in Resources */,
 				0ED9841D1FC48C6000542EE6 /* Roboto-Regular.ttf in Resources */,
 				DD401980221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.xib in Resources */,
 				DD76291F21ECCD510092DF50 /* UsageTileCollectionViewCell.xib in Resources */,
-				DD21908222F1D974007D035E /* DaysAcquiredTableViewCell.xib in Resources */,
 				DD76292521ECCD650092DF50 /* UsageTile.xib in Resources */,
 				DD172A9C2254C36D00071CFB /* FavoriteServersTileCollectionViewCell.xib in Resources */,
 				291C6398183EBC210039EC03 /* Images.xcassets in Resources */,
@@ -1539,11 +1522,8 @@
 				0E0786DE1EFA7EAE00F77466 /* Components.plist in Resources */,
 				DDFCFA9121E892070081F235 /* RegionTileCollectionViewCell.xib in Resources */,
 				0ED9841C1FC48C6000542EE6 /* Roboto-Light.ttf in Resources */,
-				DD21907C22F1D974007D035E /* ShareInvitationTableViewCell.xib in Resources */,
-				DD21907A22F1D974007D035E /* InviteStatusTableViewCell.xib in Resources */,
 				0ED9841E1FC48C6000542EE6 /* Roboto-Thin.ttf in Resources */,
 				0E7EC0302093265C0029811E /* InfoPlist.strings in Resources */,
-				DD21907E22F1D974007D035E /* InviteFriendTableViewCell.xib in Resources */,
 				291C6393183EBC210039EC03 /* Main.storyboard in Resources */,
 				DD6DC5C221B6C27F00F9D538 /* pia-spinner.json in Resources */,
 				DD746957217F070700B7BD73 /* DNS.plist in Resources */,
