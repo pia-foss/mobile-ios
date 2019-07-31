@@ -9,10 +9,17 @@
 import UIKit
 import PIALibrary
 
+enum InviteStatusViewMode: Int {
+    case status
+    case signups
+}
+
 class InviteStatusViewController: AutolayoutViewController {
 
     @IBOutlet private weak var tableView: UITableView!
+    var inviteInformation: InvitesInformation?
     var viewTitle: String!
+    var inviteStatusViewMode: InviteStatusViewMode = .status
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +57,14 @@ class InviteStatusViewController: AutolayoutViewController {
 extension InviteStatusViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        if let inviteInformation = inviteInformation {
+            if inviteStatusViewMode == .signups {
+                return inviteInformation.invites.filter({ $0.rewarded }).count
+            } else {
+                return inviteInformation.invites.filter({ !$0.rewarded }).count
+            }
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,8 +75,14 @@ extension InviteStatusViewController: UITableViewDataSource, UITableViewDelegate
         let identifier = InvitesStatusCells.objectIdentifyBy(index: indexPath.row).identifier
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
                                                  for: indexPath)
-        if let friendReferralCell = cell as? FriendReferralCell {
-            friendReferralCell.setupCell()
+        
+        if let inviteInformation = self.inviteInformation,
+            let friendReferralCell = cell as? InviteStatusTableViewCell {
+            if inviteStatusViewMode == .signups {
+                friendReferralCell.setupCell(withInvite: inviteInformation.invites.filter({ $0.rewarded })[indexPath.section])
+            } else {
+                friendReferralCell.setupCell(withInvite: inviteInformation.invites.filter({ !$0.rewarded })[indexPath.section])
+            }
         }
         
         Theme.current.applySecondaryBackground(cell)

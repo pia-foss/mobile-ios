@@ -12,6 +12,7 @@ import PIALibrary
 extension Notification.Name {
     
     static let ShareFriendReferralCode = Notification.Name("ShareFriendReferralCode")
+    static let FriendInvitationSent = Notification.Name("FriendInvitationSent")
 
 }
 

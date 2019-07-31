@@ -14,6 +14,7 @@ class FriendReferralsViewController: AutolayoutViewController {
     @IBOutlet private weak var tableView: UITableView!
     private let numberOfSections = 3
     private let numberOfRowsInSection = 1
+    private var inviteInformation: InvitesInformation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,13 +22,20 @@ class FriendReferralsViewController: AutolayoutViewController {
         
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(shareUniqueCode), name: .ShareFriendReferralCode, object: nil)
+        nc.addObserver(self, selector: #selector(refreshInviteInformation), name: .FriendInvitationSent, object: nil)
 
+        refreshInviteInformation()
+
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         
-        styleNavigationBarWithTitle("Refer a Friend")
+        styleNavigationBarWithTitle(L10n.Friend.Referrals.title)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
@@ -40,6 +48,12 @@ class FriendReferralsViewController: AutolayoutViewController {
             UIColor.piaGrey2
 
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? InvitesViewController {
+            viewController.inviteInformation = self.inviteInformation
+        }
+    }
 
     // MARK: Actions
     private func setupTableView() {
@@ -49,8 +63,20 @@ class FriendReferralsViewController: AutolayoutViewController {
         self.tableView.rowHeight = UITableView.automaticDimension
     }
     
+    @objc private func refreshInviteInformation() {
+        self.showLoadingAnimation()
+        Client.providers.accountProvider.invitesInformation({ [weak self] (inviteInfo, error) in
+            if let weakSelf = self {
+                weakSelf.hideLoadingAnimation()
+                weakSelf.inviteInformation = inviteInfo
+                weakSelf.tableView.reloadData()
+            }
+        })
+    }
+    
     @objc private func shareUniqueCode() {
-        if let link = NSURL(string: "http://www.google.com") {
+        if let shareUrl = self.inviteInformation?.uniqueReferralLink,
+            let link = NSURL(string: shareUrl) {
             let activityVC = UIActivityViewController(activityItems: [link],
                                                       applicationActivities: nil)
             self.present(activityVC, animated: true, completion: nil)
@@ -72,8 +98,9 @@ extension FriendReferralsViewController: UITableViewDataSource, UITableViewDeleg
         let identifier = FriendReferralCells.objectIdentifyBy(index: indexPath.section).identifier
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
                                                  for: indexPath)
-        if let friendReferralCell = cell as? FriendReferralCell {
-            friendReferralCell.setupCell()
+        if let inviteInformation = self.inviteInformation,
+            let friendReferralCell = cell as? FriendReferralCell {
+            friendReferralCell.setupCell(withInviteInformation: inviteInformation)
         }
         
         Theme.current.applySecondaryBackground(cell)

@@ -17,6 +17,11 @@
 "global.add" = "Add";
 "global.remove" = "Remove";
 "global.empty" = "Empty";
+"global.copy" = "Copy";
+"global.share" = "Share";
+"global.copied" = "Copied to clipboard";
+"global.yes" = "Yes";
+"global.no" = "No";
 
 // NOTIFICATIONS
 
@@ -273,3 +278,26 @@
 
 //TODAY WIDGET
 "today.widget.login" = "Login";
+
+//FRIEND REFERRALS
+"friend.referrals.email.validation" = "Invalid email. Please try again.";
+"friend.referrals.title" = "Refer a Friend";
+"friend.referrals.view.invites.sent" = "View invites sent";
+"friend.referrals.pending.invites" = "%d pending invites";
+"friend.referrals.signups.number" = "%d signups";
+"friend.referrals.fullName" = "Full name";
+"friend.referrals.invitation.terms" = "By sending this invitation, I agree to all of the terms and conditions of the Family and Friends Referral Program.";
+"friend.referrals.family.friends.program" = "Family and Friends Referral Program";
+"friend.referrals.send.invite" = "Send invite";
+"friend.referrals.invite.error" = "Could not resend invite. Try again later.";
+"friend.referrals.invite.success" = "Invite sent successfully";
+"friend.referrals.share.link" = "Share your unique referral link";
+"friend.referrals.share.link.terms" = "By sharing this link, you agree to all of the terms and conditions of the Family and Friends Referral Program.";
+"friend.referrals.invites.sent.title" = "Invites sent";
+"friend.referrals.pending.invites.title" = "Pending invites";
+"friend.referrals.invites.number" = "You have sent %d invites";
+"friend.referrals.privacy.note" = "Please note, for privacy reasons, all invites older than 30 days will be deleted.";
+"friend.referrals.signedup" = "Signed up";
+"friend.referrals.reward.given" = "Reward given";
+"friend.referrals.days.acquired" = "Free days acquired";
+"friend.referrals.days.number" = "%d days";

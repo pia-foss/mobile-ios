@@ -64,6 +64,9 @@
                             <constraint firstAttribute="height" constant="50" id="yPP-xB-Y6V"/>
                         </constraints>
                         <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="sendInvitation:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="SQx-pU-sUW"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

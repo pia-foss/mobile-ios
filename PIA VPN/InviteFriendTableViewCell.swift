@@ -26,22 +26,22 @@ class InviteFriendTableViewCell: UITableViewCell, FriendReferralCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        labelFullName.text = "Full name"
-        labelEmail.text = "Email address"
+        labelFullName.text = L10n.Friend.Referrals.fullName
+        labelEmail.text = L10n.Account.Email.placeholder
         textAgreement.attributedText = Theme.current.agreementText(
-            withMessage: "I agree to all of the terms and conditions of the Family and Friends Referral Program.",
-            tos: "Family and Friends Referral Program",
-            tosUrl: "https://www.privateinternetaccess.com/pages/invites/terms_and_conditions",
+            withMessage: L10n.Friend.Referrals.Invitation.terms,
+            tos: L10n.Friend.Referrals.Family.Friends.program,
+            tosUrl: AppConstants.Web.friendReferralTerms,
             privacy: "",
             privacyUrl: "")
-        sendButton.setTitle("SEND INVITE",
+        sendButton.setTitle(L10n.Friend.Referrals.Send.invite.uppercased(),
                               for: [])
         
         Theme.current.applySecondaryBackground(self)
         Theme.current.applySecondaryBackground(self.contentView)
 
         textEmail.placeholder = L10n.Account.Email.placeholder
-        textFullName.placeholder = "Full name"
+        textFullName.placeholder = L10n.Friend.Referrals.fullName
 
         sendButton.setRounded()
         sendButton.style(style: TextStyle.Buttons.piaGreenButton)
@@ -51,7 +51,7 @@ class InviteFriendTableViewCell: UITableViewCell, FriendReferralCell {
 
     }
     
-    func setupCell() {
+    func setupCell(withInviteInformation inviteInformation: InvitesInformation) {
         Theme.current.applySubtitle(labelFullName)
         Theme.current.applySubtitle(labelEmail)
         Theme.current.applyInput(textFullName)
@@ -64,6 +64,54 @@ class InviteFriendTableViewCell: UITableViewCell, FriendReferralCell {
         self.endEditing(true)
     }
 
+    @IBAction func sendInvitation(_ sender: Any) {
+        
+        self.applyNormalStatusForEmailTextfield()
+
+        guard let email = textEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+            Validator.validate(email: email),
+            !email.isEmpty else {
+                let errorMessage = L10n.Friend.Referrals.Email.validation
+                self.applyErrorStatusForEmailTextfield()
+                Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                    message: errorMessage)
+            return
+        }
+
+        self.contentView.showLoadingAnimation()
+        self.isUserInteractionEnabled = false
+        Client.providers.accountProvider.invite(name: self.textFullName.text ?? "",
+                                                email: email,
+                                                { [weak self] error in
+                                                    if let weakSelf = self {
+                                                        weakSelf.isUserInteractionEnabled = true
+                                                        weakSelf.contentView.hideLoadingAnimation()
+                                                        if let _ = error {
+                                                            Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                                                                    message: L10n.Friend.Referrals.Invite.error)
+                                                        } else {
+                                                            weakSelf.textEmail.text = ""
+                                                            weakSelf.textFullName.text = ""
+                                                            Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image,
+                                                                                    message: L10n.Friend.Referrals.Invite.success)
+                                                            Macros.postNotification(.FriendInvitationSent)
+                                                        }
+                                                    }
+        })
+        
+    }
+    
+    private func applyErrorStatusForEmailTextfield() {
+        Theme.current.applyInputError(self.textEmail)
+        let iconWarning = UIImageView(image:Asset.iconWarning.image.withRenderingMode(.alwaysTemplate))
+        iconWarning.tintColor = .piaRed
+        self.textEmail.rightView = iconWarning
+    }
+    
+    private func applyNormalStatusForEmailTextfield() {
+        Theme.current.applyInput(self.textEmail)
+        self.textEmail.rightView = nil
+    }
 }
 
 extension InviteFriendTableViewCell: UITextFieldDelegate {
