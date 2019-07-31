@@ -114,10 +114,10 @@ DEPENDENCIES:
   - FXPageControl
   - HockeySDK
   - iRate
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `792681c`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `792681c`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `792681c`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `792681c`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `84b5b8e`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `84b5b8e`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `84b5b8e`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `84b5b8e`)
   - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `4eff5ca`)
   - PopupDialog
   - SideMenu (= 3.1.5)
@@ -154,7 +154,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :commit: 792681c
+    :commit: 84b5b8e
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
     :commit: 4eff5ca
@@ -162,7 +162,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PIALibrary:
-    :commit: 792681c
+    :commit: 84b5b8e
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
     :commit: 4eff5ca
@@ -198,6 +198,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 1bcf832534f9c4d3789e4f02959168514d8b4ef4
+PODFILE CHECKSUM: 37093dbc5f22bb70c59fe4fb60b8dbc2321a326b
 
 COCOAPODS: 1.5.3
