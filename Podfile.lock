@@ -4,14 +4,14 @@ PODS:
   - Gloss (2.1.0)
   - lottie-ios (3.0.3)
   - OpenSSL-Apple (1.1.0j.2)
-  - PIATunnel (2.0.1):
-    - PIATunnel/AppExtension (= 2.0.1)
-    - PIATunnel/Core (= 2.0.1)
-  - PIATunnel/AppExtension (2.0.1):
+  - PIATunnel (2.0.2):
+    - PIATunnel/AppExtension (= 2.0.2)
+    - PIATunnel/Core (= 2.0.2)
+  - PIATunnel/AppExtension (2.0.2):
     - PIATunnel/Core
     - SwiftyBeaver
-  - PIATunnel/Core (2.0.1):
-    - OpenSSL-Apple (~> 1.1.0h)
+  - PIATunnel/Core (2.0.2):
+    - OpenSSL-Apple (~> 1.1.0j.2)
     - SwiftyBeaver
   - PopupDialog (0.9.2):
     - DynamicBlurView (~> 3.0.1)
@@ -25,7 +25,7 @@ DEPENDENCIES:
   - Alamofire (~> 4)
   - Gloss (~> 2)
   - lottie-ios
-  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `bd1a145`)
+  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `d4b062d`)
   - PopupDialog
   - ReachabilitySwift
   - SwiftEntryKit (= 0.7.2)
@@ -46,12 +46,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIATunnel:
-    :commit: bd1a145
+    :commit: d4b062d
     :git: https://github.com/pia-foss/tunnel-apple
 
 CHECKOUT OPTIONS:
   PIATunnel:
-    :commit: bd1a145
+    :commit: d4b062d
     :git: https://github.com/pia-foss/tunnel-apple
 
 SPEC CHECKSUMS:
@@ -60,13 +60,13 @@ SPEC CHECKSUMS:
   Gloss: 13ab6b4b0ff4cb2448466edc957479b1bccea8ba
   lottie-ios: 06e0b54aab85ba128e332687d7f4ac4861a7a7ae
   OpenSSL-Apple: e88e1eb314acb4a05e2348069790c4aa49f6d319
-  PIATunnel: 3f6b905b907b745ebb83286ff6b663d17ecfb605
+  PIATunnel: ec5e1e1fcf3e4ba8014386de404589fcda12225c
   PopupDialog: f4bb461bf70ff422be0b56656566424ee9273080
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
   SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
 
-PODFILE CHECKSUM: dc165eb2b712a8a90b152610f7bebf86ae0bd67d
+PODFILE CHECKSUM: 15c8ee22353647e384c3a0ac5a08682a9ea78acb
 
 COCOAPODS: 1.5.3
