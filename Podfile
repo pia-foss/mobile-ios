@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '10.0'
+platform :ios, '11.0'
 use_frameworks!
 
 # ignore all warnings from all pods
@@ -56,7 +56,7 @@ end
 def shared_main_pods
     pod 'AlamofireImage'
     #library_by_path('')
-    library_by_git('84b5b8e')
+    library_by_git('a92b08e')
     #library_by_version('~> 1.1.3')
 end
 
@@ -72,7 +72,7 @@ end
 
 def tunnel_pods
     #tunnel_by_path('')
-    tunnel_by_git('4eff5ca')
+    tunnel_by_git('d4b062d')
     #tunnel_by_version('~> 1.1.6')
 end
 

@@ -63,7 +63,7 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - OpenSSL-Apple (1.1.0h)
+  - OpenSSL-Apple (1.1.0j.2)
   - PIALibrary/Core (2.1.0)
   - PIALibrary/Library (2.1.0):
     - Alamofire (~> 4)
@@ -114,11 +114,11 @@ DEPENDENCIES:
   - FXPageControl
   - HockeySDK
   - iRate
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `84b5b8e`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `84b5b8e`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `84b5b8e`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `84b5b8e`)
-  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `4eff5ca`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `c6daa90`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `c6daa90`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `c6daa90`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `c6daa90`)
+  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `bd1a145`)
   - PopupDialog
   - SideMenu (= 3.1.5)
   - TPKeyboardAvoiding
@@ -154,18 +154,18 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :commit: 84b5b8e
+    :commit: c6daa90
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
-    :commit: 4eff5ca
+    :commit: bd1a145
     :git: https://github.com/pia-foss/tunnel-apple
 
 CHECKOUT OPTIONS:
   PIALibrary:
-    :commit: 84b5b8e
+    :commit: c6daa90
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
-    :commit: 4eff5ca
+    :commit: bd1a145
     :git: https://github.com/pia-foss/tunnel-apple
 
 SPEC CHECKSUMS:
@@ -187,7 +187,7 @@ SPEC CHECKSUMS:
   iRate: 4fc69958788624545e5d050c8ffd20884013c3f1
   lottie-ios: 55a2de40418f8de2b155efaba4d4d1a025a5c570
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  OpenSSL-Apple: cd153d705ef350eb834ae7ff5f21f792b51ed208
+  OpenSSL-Apple: e88e1eb314acb4a05e2348069790c4aa49f6d319
   PIALibrary: eba6b3fef87ac85aaa58e5bf864fa2497bda27b7
   PIATunnel: 3f6b905b907b745ebb83286ff6b663d17ecfb605
   PopupDialog: 03985b669c29802661c187513bf827340db1ae4d
@@ -198,6 +198,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 37093dbc5f22bb70c59fe4fb60b8dbc2321a326b
+PODFILE CHECKSUM: e78134e895dd0b04c5c896ca4a3a1e432e5eb405
 
 COCOAPODS: 1.5.3
