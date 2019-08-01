@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '10.0'
+platform :ios, '11.0'
 use_frameworks!
 
 # ignore all warnings from all pods
@@ -14,16 +14,16 @@ abstract_target 'PIALibrary' do
     pod 'lottie-ios'
     pod 'PopupDialog'
     #pod 'PIATunnel', :path => ''
-    pod 'PIATunnel', :git => 'https://github.com/pia-foss/tunnel-apple', :commit => '257296c'
+    pod 'PIATunnel', :git => 'https://github.com/pia-foss/tunnel-apple', :commit => 'bd1a145'
 
     target 'PIALibrary-iOS' do
-        platform :ios, '10.0'
+        platform :ios, '11.0'
     end
     target 'PIALibraryTests-iOS' do
-        platform :ios, '10.0'
+        platform :ios, '11.0'
     end
     target 'PIALibraryHost-iOS' do
-        platform :ios, '10.0'
+        platform :ios, '11.0'
     end
 
     #target 'PIALibrary-macOS' do

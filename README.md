@@ -27,7 +27,7 @@ The library has been tested on both iOS and macOS and includes the following fea
 
 ### Requirements
 
-- iOS 9.0+ / macOS 10.11+
+- iOS 11.0+ / macOS 10.11+
 - Xcode 9+ (Swift 4)
 - Git (preinstalled with Xcode Command Line Tools)
 - Ruby (preinstalled with macOS)
