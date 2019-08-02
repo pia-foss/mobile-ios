@@ -26,6 +26,7 @@ class AccountInfoTests: XCTestCase {
                                        isRenewable: false,
                                        isRecurring: false,
                                        expirationDate: self.theDate,
+                                       canInvite: true,
                                        shouldPresentExpirationAlert: false,
                                        renewUrl: nil)
     }
