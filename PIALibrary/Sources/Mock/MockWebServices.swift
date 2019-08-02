@@ -72,12 +72,23 @@ class MockWebServices: WebServices {
     }
     
     func invitesInformation(_ callback: LibraryCallback<InvitesInformation>?) {
-        let result = invitesInformation?()
-        let error: ClientError? = (result == nil) ? .unsupported : nil
-        callback?(result, error)
+        
+        let result = InvitesInformation(totalInvitesSent: 10,
+                           totalInvitesRewarded: 2,
+                           totalFreeDaysGiven: 34,
+                           uniqueReferralLink: "http://www.privateinternetaccess.com",
+                           invites: [Invites(rewarded: true, accepted: true, obfuscatedEmail: "a***@***.com", gracePeriodRemaining: ""),
+                                     Invites(rewarded: false, accepted: true, obfuscatedEmail: "b***@***.com", gracePeriodRemaining: "")])
+        callback?(result, nil)
     }
     
     func invite(credentials: Credentials, name: String, email: String, _ callback: SuccessLibraryCallback?) {
+        
+        if email.isEmpty {
+            callback?(ClientError.invalidParameter)
+            return
+        }
+
         callback?(nil)
     }
     

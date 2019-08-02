@@ -56,5 +56,8 @@ public enum ClientError: String, Error {
 
     /// The account is not renewable.
     case renewingNonRenewable
+    
+    /// Invalid parameter
+    case invalidParameter
     #endif
 }

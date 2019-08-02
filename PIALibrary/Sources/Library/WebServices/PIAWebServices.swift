@@ -286,6 +286,11 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             401: .unauthorized
         ]
         
+        if email.isEmpty {
+            callback?(ClientError.invalidParameter)
+            return
+        }
+        
         let parameters = ["invitee_name": name,
                           "invitee_email": email]
         
