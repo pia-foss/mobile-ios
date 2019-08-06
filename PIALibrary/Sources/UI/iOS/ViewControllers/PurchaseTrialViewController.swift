@@ -1,54 +1,55 @@
 //
-//  PurchaseViewController.swift
+//  PurchaseTrialViewController.swift
 //  PIALibrary-iOS
 //
-//  Created by Davide De Rosa on 10/19/17.
-//  Copyright © 2017 London Trust Media. All rights reserved.
+//  Created by Jose Antonio Blaya Garcia on 06/08/2019.
+//  Copyright © 2019 London Trust Media. All rights reserved.
 //
 
 import UIKit
-import SwiftyBeaver
 
-private let log = SwiftyBeaver.self
-
-class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, WelcomeChild {
+class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigationBar, WelcomeChild {
     
-    private struct Cells {
-        static let plan = "PlanCell"
-    }
-
     @IBOutlet private weak var scrollView: UIScrollView!
-
-    @IBOutlet private weak var labelTitle: UILabel!
-    @IBOutlet private weak var labelSubtitle: UILabel!
-    
-    @IBOutlet private weak var collectionPlans: UICollectionView!
-    
     @IBOutlet private weak var textAgreement: UITextView!
-    
     @IBOutlet private weak var buttonPurchase: PIAButton!
-    
+    @IBOutlet private weak var buttonMorePlans: PIAButton!
+
+    @IBOutlet private weak var headerTitleLabel: UILabel!
+    @IBOutlet private weak var subtitleLabel: UILabel!
+    @IBOutlet private weak var smallTitleLabel: UILabel!
+
+    @IBOutlet private weak var protectionImageView: UIImageView!
+    @IBOutlet private weak var protectionTitleLabel: UILabel!
+    @IBOutlet private weak var protectionSubtitleLabel: UILabel!
+
+    @IBOutlet private weak var devicesImageView: UIImageView!
+    @IBOutlet private weak var devicesTitleLabel: UILabel!
+    @IBOutlet private weak var devicesSubtitleLabel: UILabel!
+
+    @IBOutlet private weak var serversImageView: UIImageView!
+    @IBOutlet private weak var serversTitleLabel: UILabel!
+    @IBOutlet private weak var serversSubtitleLabel: UILabel!
+
     var preset: Preset?
     weak var completionDelegate: WelcomeCompletionDelegate?
     var omitsSiblingLink = false
-
+    
     private var allPlans: [PurchasePlan] = [.dummy, .dummy]
-
+    
     private var selectedPlanIndex: Int?
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         guard let _ = self.preset else {
             fatalError("Preset not propagated")
         }
-
-        collectionPlans.isUserInteractionEnabled = false
-
+        
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: Theme.current.palette.navigationBarBackIcon?.withRenderingMode(.alwaysOriginal),
             style: .plain,
@@ -57,8 +58,22 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
         )
         self.navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Welcome.Redeem.Accessibility.back
 
-        labelTitle.text = L10n.Welcome.Purchase.title
-        labelSubtitle.text = L10n.Welcome.Purchase.subtitle
+        headerTitleLabel.text = "Try free for 7 days!"
+        subtitleLabel.text = "Pay only $74,99/year after"
+        smallTitleLabel.text = "7 day money back guarantee"
+        
+        protectionTitleLabel.text = "1 year of privacy and identity protection"
+        protectionSubtitleLabel.text = "Browse anonymously with a hidden ip."
+        protectionImageView.image = Asset.shieldIcon.image.withRenderingMode(.alwaysTemplate)
+        
+        devicesTitleLabel.text = "Support 10 devices at once"
+        devicesSubtitleLabel.text = "Protect yourself on up to 10 devices at a time."
+        devicesImageView.image = Asset.computerIcon.image.withRenderingMode(.alwaysTemplate)
+        
+        serversTitleLabel.text = "Connect to any region easily"
+        serversSubtitleLabel.text = "3341 + Servers in 32 countries"
+        serversImageView.image = Asset.globeIcon.image.withRenderingMode(.alwaysTemplate)
+        
         textAgreement.attributedText = Theme.current.agreementText(
             withMessage: L10n.Welcome.Agreement.message,
             tos: L10n.Welcome.Agreement.Message.tos,
@@ -70,33 +85,33 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(productsDidFetch(notification:)), name: .__InAppDidFetchProducts, object: nil)
         
-        stylePurchaseButton()
+        styleButtons()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         if let products = preset?.accountProvider.planProducts {
             refreshPlans(products)
         } else {
             disableInteractions(fully: false)
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         NotificationCenter.default.removeObserver(self)
-    }
-
-    override func didRefreshOrientationConstraints() {
-        scrollView.isScrollEnabled = (traitCollection.verticalSizeClass == .compact)
     }
     
     @objc private func back(_ sender: Any?) {
         self.navigationController?.popViewController(animated: true)
     }
 
+    override func didRefreshOrientationConstraints() {
+        scrollView.isScrollEnabled = (traitCollection.verticalSizeClass == .compact)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == StoryboardSegue.Welcome.confirmPurchaseVPNPlanSegue.rawValue) {
             if let vc = segue.destination as? ConfirmVPNPlanViewController,
@@ -105,6 +120,11 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
                 vc.completionDelegate = completionDelegate
                 vc.populateViewWith(plans: allPlans,
                                     andSelectedPlanIndex: selectedIndex)
+            }
+        } else if (segue.identifier == StoryboardSegue.Welcome.viewMoreVPNPlansSegue.rawValue) {
+            if let vc = segue.destination as? PurchaseViewController {
+                vc.preset = preset
+                vc.completionDelegate = completionDelegate
             }
         }
     }
@@ -118,39 +138,21 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
                 product: yearly,
                 monthlyFactor: 12.0
             )
-
+            
             purchase.title = L10n.Welcome.Plan.Yearly.title
             let currencySymbol = purchase.product.priceLocale.currencySymbol ?? ""
             purchase.detail = L10n.Welcome.Plan.Yearly.detailFormat(currencySymbol, purchase.product.price.description)
             purchase.bestValue = true
-
+            subtitleLabel.text = "Pay only \(L10n.Welcome.Plan.Yearly.detailFormat(currencySymbol, purchase.product.price.description)) after"
             allPlans[0] = purchase
-        }
-        if let monthly = plans[.monthly] {
-            let purchase = PurchasePlan(
-                plan: .monthly,
-                product: monthly,
-                monthlyFactor: 1.0
-            )
-            purchase.title = L10n.Welcome.Plan.Monthly.title
-            purchase.bestValue = false
-
-            allPlans[1] = purchase
-        }
-        
-        collectionPlans.isUserInteractionEnabled = true
-        collectionPlans.reloadData()
-        if (selectedPlanIndex == nil) {
             selectedPlanIndex = 0
         }
-        collectionPlans.selectItem(at: IndexPath(row: selectedPlanIndex!, section: 0), animated: false, scrollPosition: [])
     }
     
     private func disableInteractions(fully: Bool) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.showLoadingAnimation()
         }
-        collectionPlans.isUserInteractionEnabled = false
         if fully {
             parent?.view.isUserInteractionEnabled = false
         }
@@ -160,10 +162,9 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.hideLoadingAnimation()
         }
-        collectionPlans.isUserInteractionEnabled = true
         parent?.view.isUserInteractionEnabled = true
     }
-
+    
     // MARK: Notifications
     
     @objc private func productsDidFetch(notification: Notification) {
@@ -177,60 +178,34 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         Theme.current.applyPrincipalBackground(view)
-        Theme.current.applyPrincipalBackground(scrollView)
-        Theme.current.applyPrincipalBackground(collectionPlans)
-        Theme.current.applyTitle(labelTitle, appearance: .dark)
-        Theme.current.applySubtitle(labelSubtitle)
         Theme.current.applyLinkAttributes(textAgreement)
+        Theme.current.applyBigTitle(headerTitleLabel, appearance: .dark)
+        Theme.current.applySubtitle(subtitleLabel)
+        Theme.current.applySmallSubtitle(smallTitleLabel)
+        
+        Theme.current.applySettingsCellTitle(protectionTitleLabel, appearance: .dark)
+        Theme.current.applySmallSubtitle(protectionSubtitleLabel)
+        protectionImageView.tintColor = .white
+
+        Theme.current.applySettingsCellTitle(devicesTitleLabel, appearance: .dark)
+        Theme.current.applySmallSubtitle(devicesSubtitleLabel)
+        devicesImageView.tintColor = .white
+
+        Theme.current.applySettingsCellTitle(serversTitleLabel, appearance: .dark)
+        Theme.current.applySmallSubtitle(serversSubtitleLabel)
+        serversImageView.tintColor = .white
+
     }
     
-    private func stylePurchaseButton() {
+    private func styleButtons() {
         buttonPurchase.setRounded()
+        buttonMorePlans.setRounded()
         buttonPurchase.style(style: TextStyle.Buttons.piaGreenButton)
-        buttonPurchase.setTitle(L10n.Welcome.Purchase.continue.uppercased(),
-                              for: [])
-    }
-
-}
-
-extension PurchaseViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return allPlans.count
+        buttonMorePlans.style(style: TextStyle.Buttons.piaPlainTextButton)
+        buttonPurchase.setTitle("Start subscription".uppercased(),
+                                for: [])
+        buttonMorePlans.setTitle("See all available plans",
+                                for: [])
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let plan = allPlans[indexPath.row]
-        let cell = collectionPlans.dequeueReusableCell(withReuseIdentifier: Cells.plan, for: indexPath) as! PurchasePlanCell
-        cell.fill(plan: plan)
-        cell.isSelected = (indexPath.row == selectedPlanIndex)
-        return cell
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedPlanIndex = indexPath.row
-    }
-}
-
-extension PurchaseViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemWidth = collectionView.bounds.size.width
-        let itemHeight = (collectionView.bounds.size.height - 13) / 2.0
-        return CGSize(width: itemWidth,
-                      height: itemHeight)
-    }
-}
-
-extension PurchaseViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        return true
-    }
-}
-
-extension PurchaseViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //if (textField == textEmail) {
-        //    signUp(nil)
-        //}
-        return true
-    }
 }

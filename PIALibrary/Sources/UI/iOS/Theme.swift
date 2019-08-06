@@ -327,6 +327,12 @@ public class Theme {
         label.textAlignment = textAlignment
     }
     
+    public func applySmallSubtitle(_ label: UILabel) {
+        let textAlignment = label.textAlignment
+        label.style(style: TextStyle.textStyle21)
+        label.textAlignment = textAlignment
+    }
+    
     /// :nodoc:
     public func applyBody1Monospace(_ textView: UITextView, appearance: Appearance) {
         textView.font = typeface.monospaceFont(size: 14.0)

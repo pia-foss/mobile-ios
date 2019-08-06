@@ -26,7 +26,8 @@ class WelcomePageViewController: UIPageViewController {
             source.append(vc)
         }
         if preset.pages.contains(.purchase) {
-            let vc = StoryboardScene.Welcome.purchaseViewController.instantiate()
+            //let vc = StoryboardScene.Welcome.purchaseViewController.instantiate()
+            let vc = StoryboardScene.Welcome.purchaseTrialViewController.instantiate()
             source.append(vc)
         }
         if preset.pages.contains(.restore) {

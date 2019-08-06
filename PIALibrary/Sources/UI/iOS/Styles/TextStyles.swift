@@ -214,7 +214,7 @@ public extension TextStyle {
     )
     
     static let textStyle22 = TextStyle(
-        font: UIFont.mediumFontWith(size: 24),
+        font: UIFont.mediumFontWith(size: 26),
         color: UIColor.piaWhite,
         foregroundColor: nil,
         backgroundColor: nil,
@@ -223,7 +223,7 @@ public extension TextStyle {
     )
     
     static let textStyle23 = TextStyle(
-        font: UIFont.mediumFontWith(size: 24),
+        font: UIFont.mediumFontWith(size: 26),
         color: UIColor.piaGrey6,
         foregroundColor: nil,
         backgroundColor: nil,
