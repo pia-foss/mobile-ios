@@ -143,7 +143,10 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
             let currencySymbol = purchase.product.priceLocale.currencySymbol ?? ""
             purchase.detail = L10n.Welcome.Plan.Yearly.detailFormat(currencySymbol, purchase.product.price.description)
             purchase.bestValue = true
-            subtitleLabel.text = "Pay only \(L10n.Welcome.Plan.Yearly.detailFormat(currencySymbol, purchase.product.price.description)) after"
+            let price = L10n.Welcome.Plan.Yearly.detailFormat(currencySymbol, purchase.product.price.description)
+            subtitleLabel.text = "Pay only \(price) after"
+            Theme.current.makeSmallLabelToStandOut(subtitleLabel,
+                                                   withTextToStandOut: price)
             allPlans[0] = purchase
             selectedPlanIndex = 0
         }
@@ -181,21 +184,26 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
         Theme.current.applyLinkAttributes(textAgreement)
         Theme.current.applyBigTitle(headerTitleLabel, appearance: .dark)
         Theme.current.applySmallSubtitle(smallTitleLabel)
-        //Theme.current.applySubtitle(subtitleLabel)
-        Theme.current.makeSmallLabelToStandOut(subtitleLabel,
-                                               withTextToStandOut: allPlans.first!.detail)
+        Theme.current.applySubtitle(subtitleLabel)
 
+        if Theme.current.palette.appearance == .light {
+            protectionImageView.tintColor = Theme.current.palette.lineColor
+            devicesImageView.tintColor = Theme.current.palette.lineColor
+            serversImageView.tintColor = Theme.current.palette.lineColor
+        } else {
+            protectionImageView.tintColor = .white
+            devicesImageView.tintColor = .white
+            serversImageView.tintColor = .white
+        }
+        
         Theme.current.applySettingsCellTitle(protectionTitleLabel, appearance: .dark)
         Theme.current.applySmallSubtitle(protectionSubtitleLabel)
-        protectionImageView.tintColor = .white
-
+        
         Theme.current.applySettingsCellTitle(devicesTitleLabel, appearance: .dark)
         Theme.current.applySmallSubtitle(devicesSubtitleLabel)
-        devicesImageView.tintColor = .white
 
         Theme.current.applySettingsCellTitle(serversTitleLabel, appearance: .dark)
         Theme.current.applySmallSubtitle(serversSubtitleLabel)
-        serversImageView.tintColor = .white
 
     }
     
@@ -208,6 +216,8 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
                                 for: [])
         buttonMorePlans.setTitle("See all available plans",
                                 for: [])
+        Theme.current.applyTransparentButton(buttonMorePlans,
+                                             withSize: 1.0)
     }
     
 }
