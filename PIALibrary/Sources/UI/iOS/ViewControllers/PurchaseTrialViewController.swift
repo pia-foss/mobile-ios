@@ -180,9 +180,11 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
         Theme.current.applyPrincipalBackground(view)
         Theme.current.applyLinkAttributes(textAgreement)
         Theme.current.applyBigTitle(headerTitleLabel, appearance: .dark)
-        Theme.current.applySubtitle(subtitleLabel)
         Theme.current.applySmallSubtitle(smallTitleLabel)
-        
+        //Theme.current.applySubtitle(subtitleLabel)
+        Theme.current.makeSmallLabelToStandOut(subtitleLabel,
+                                               withTextToStandOut: allPlans.first!.detail)
+
         Theme.current.applySettingsCellTitle(protectionTitleLabel, appearance: .dark)
         Theme.current.applySmallSubtitle(protectionSubtitleLabel)
         protectionImageView.tintColor = .white
