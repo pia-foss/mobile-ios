@@ -10,6 +10,7 @@ import UIKit
 
 private enum Fonts {
     static let robotoTextRegular = "Roboto-Regular"
+    static let robotoTextMedium = "Roboto-Medium"
 }
 
 extension UIFont {
@@ -18,4 +19,8 @@ extension UIFont {
         return UIFont(name: Fonts.robotoTextRegular, size: size)
     }
     
+    public class func mediumFontWith(size: CGFloat) -> UIFont! {
+        return UIFont(name: Fonts.robotoTextMedium, size: size)
+    }
+
 }
