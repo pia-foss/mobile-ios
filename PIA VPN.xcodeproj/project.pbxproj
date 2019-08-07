@@ -1019,7 +1019,7 @@
 				4A84DF1D973A9EB2982807B7 /* Pods-PIA VPNTests.debug.xcconfig */,
 				4FD272E255D1205487F2B91D /* Pods-PIA VPNTests.release.xcconfig */,
 			);
-			path = Pods;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		DD0DE857223FECDD002A6E82 /* PIAWidget */ = {
