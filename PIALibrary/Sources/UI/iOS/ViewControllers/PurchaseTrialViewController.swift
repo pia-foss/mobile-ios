@@ -59,11 +59,11 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
         self.navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Welcome.Redeem.Accessibility.back
 
         headerTitleLabel.text = "Try free for 7 days!"
-        subtitleLabel.text = "Pay only $74,99/year after"
+        subtitleLabel.text = "Only $ per year after"
         smallTitleLabel.text = "7 day money back guarantee"
         
         protectionTitleLabel.text = "1 year of privacy and identity protection"
-        protectionSubtitleLabel.text = "Browse anonymously with a hidden ip."
+        protectionSubtitleLabel.text = "Browse anonymously and hide your ip."
         protectionImageView.image = Asset.shieldIcon.image.withRenderingMode(.alwaysTemplate)
         
         devicesTitleLabel.text = "Support 10 devices at once"
@@ -71,7 +71,7 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
         devicesImageView.image = Asset.computerIcon.image.withRenderingMode(.alwaysTemplate)
         
         serversTitleLabel.text = "Connect to any region easily"
-        serversSubtitleLabel.text = "3341 + Servers in 32 countries"
+        serversSubtitleLabel.text = "More than 33 servers in 32 countries"
         serversImageView.image = Asset.globeIcon.image.withRenderingMode(.alwaysTemplate)
         
         textAgreement.attributedText = Theme.current.agreementText(
@@ -81,7 +81,6 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
             privacy: L10n.Welcome.Agreement.Message.privacy,
             privacyUrl: Client.configuration.privacyUrl
         )
-        
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(productsDidFetch(notification:)), name: .__InAppDidFetchProducts, object: nil)
         
@@ -106,10 +105,6 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
     
     @objc private func back(_ sender: Any?) {
         self.navigationController?.popViewController(animated: true)
-    }
-
-    override func didRefreshOrientationConstraints() {
-        scrollView.isScrollEnabled = (traitCollection.verticalSizeClass == .compact)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -144,7 +139,7 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
             purchase.detail = L10n.Welcome.Plan.Yearly.detailFormat(currencySymbol, purchase.product.price.description)
             purchase.bestValue = true
             let price = L10n.Welcome.Plan.Yearly.detailFormat(currencySymbol, purchase.product.price.description)
-            subtitleLabel.text = "Pay only \(price) after"
+            subtitleLabel.text = "Only \(price) after"
             Theme.current.makeSmallLabelToStandOut(subtitleLabel,
                                                    withTextToStandOut: price)
             allPlans[0] = purchase
