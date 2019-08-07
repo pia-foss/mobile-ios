@@ -226,9 +226,9 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     }
     
     /// :nodoc:
-    public func updatePlanProductIdentifiers(_ callback: LibraryCallback<[Product]>?) {
-        delegate.updatePlanProductIdentifiers(callback)
-    } 
+    public func subscriptionInformation(_ callback: LibraryCallback<AppStoreInformation>?) {
+        delegate.subscriptionInformation(callback)
+    }
     
     /// :nodoc:
     public func signup(with request: SignupRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {

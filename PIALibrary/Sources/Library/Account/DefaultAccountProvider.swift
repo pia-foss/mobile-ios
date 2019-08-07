@@ -294,18 +294,20 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
     }
     
     #if os(iOS)
-    func updatePlanProductIdentifiers(_ callback: LibraryCallback<[Product]>?) {
+    func subscriptionInformation(_ callback: LibraryCallback<AppStoreInformation>?) {
         log.debug("Fetching available product keys...")
-        webServices.planProductIdentifiers({ products, error in
+        
+        let receipt = accessedStore.paymentReceipt
+        
+        webServices.subscriptionInformation(with: receipt, { appStoreInformation, error in
         
             if let _ = error {
                 callback?(nil, error)
                 return
             }
             
-            if let products = products,
-                products.count > 0 {
-                callback?(products, nil)
+            if let appStoreInformation = appStoreInformation {
+                callback?(appStoreInformation, nil)
             } else {
                 callback?(nil, ClientError.malformedResponseData)
             }
