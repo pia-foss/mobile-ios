@@ -266,7 +266,9 @@ class DashboardViewController: AutolayoutViewController {
     }
 
     @IBAction func vpnButtonClicked(_ sender: Any?) {
-        if !toggleConnection.isOn {
+        if !toggleConnection.isOn,
+            Client.providers.vpnProvider.vpnStatus != .disconnecting,
+            Client.providers.vpnProvider.vpnStatus != .connecting {
             Client.providers.vpnProvider.connect({ [weak self] _ in
                 self?.reloadUsageTileAfter(seconds: 5) //Show some usage after 5 seconds of activity
             })
