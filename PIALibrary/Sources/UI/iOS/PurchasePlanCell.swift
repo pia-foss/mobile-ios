@@ -32,7 +32,11 @@ class PurchasePlanCell: UICollectionViewCell, Restylable {
     override func awakeFromNib() {
         super.awakeFromNib()
         isSelected = false
-        labelBestValue.text = L10n.Welcome.Plan.bestValue.uppercased()
+        
+        labelBestValue.text = Client.configuration.eligibleForTrial ?
+            "\(L10n.Welcome.Plan.bestValue.uppercased()) - FREE TRIAL" :
+            L10n.Welcome.Plan.bestValue.uppercased()
+
         selectedPlanImageView.alpha = 0
         self.accessibilityTraits = UIAccessibilityTraits.button
         self.isAccessibilityElement = true

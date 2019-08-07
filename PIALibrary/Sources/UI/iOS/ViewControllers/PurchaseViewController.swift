@@ -89,10 +89,6 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
         NotificationCenter.default.removeObserver(self)
     }
 
-    override func didRefreshOrientationConstraints() {
-        scrollView.isScrollEnabled = (traitCollection.verticalSizeClass == .compact)
-    }
-    
     @objc private func back(_ sender: Any?) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -176,6 +172,8 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
     
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
+        navigationItem.titleView = NavigationLogoView()
+        Theme.current.applyNavigationBarStyle(to: self)
         Theme.current.applyPrincipalBackground(view)
         Theme.current.applyPrincipalBackground(scrollView)
         Theme.current.applyPrincipalBackground(collectionPlans)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VHM-bG-giz">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,26 +15,26 @@
             <objects>
                 <viewController storyboardIdentifier="RestoreSignupViewController" id="Y1W-Um-2lp" customClass="RestoreSignupViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MO3-fL-T5Z">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rId-M8-qSh" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yDn-f2-pRd">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1CW-ZP-sqf">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restore uncredited purchase" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C7C-8i-CTb">
-                                                        <rect key="frame" x="80" y="29" width="215" height="19.5"/>
+                                                        <rect key="frame" x="52.5" y="29" width="215" height="19.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Sq-eo-OrE">
-                                                        <rect key="frame" x="40" y="69.5" width="295" height="62.5"/>
+                                                        <rect key="frame" x="40" y="69.5" width="240" height="78"/>
                                                         <string key="text">If you purchased a plan through this app and didn't receive your credentials, you can send them again from here.
 You will not be charged during this process.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -42,7 +42,7 @@ You will not be charged during this process.</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Vo-GR-ciV" customClass="BorderedTextField" customModule="PIALibrary" customModuleProvider="target">
-                                                        <rect key="frame" x="25" y="157" width="325" height="50"/>
+                                                        <rect key="frame" x="25" y="172.5" width="270" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="WNz-0h-Xp2"/>
                                                         </constraints>
@@ -53,7 +53,7 @@ You will not be charged during this process.</string>
                                                         </connections>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Un1-3v-2Ob" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
-                                                        <rect key="frame" x="25" y="222" width="325" height="50"/>
+                                                        <rect key="frame" x="25" y="237.5" width="270" height="50"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="Z9y-Og-t8q"/>
@@ -145,35 +145,35 @@ You will not be charged during this process.</string>
             <objects>
                 <viewController storyboardIdentifier="PurchaseTrialViewController" id="BSS-Vx-roD" customClass="PurchaseTrialViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yF4-AI-FE0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u81-NH-vFv" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IY5-Kg-KKQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="532.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="553.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5C-xr-9h6">
-                                                <rect key="frame" x="19" y="19" width="337" height="20.5"/>
+                                                <rect key="frame" x="19" y="40" width="282" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QhW-ET-C6S">
-                                                <rect key="frame" x="19" y="49.5" width="337" height="20.5"/>
+                                                <rect key="frame" x="19" y="70.5" width="282" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="69O-CO-nH7">
-                                                <rect key="frame" x="19" y="72" width="337" height="20.5"/>
+                                                <rect key="frame" x="19" y="93" width="282" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="CA4-TV-yNn">
-                                                <rect key="frame" x="19" y="132.5" width="337" height="43"/>
+                                                <rect key="frame" x="19" y="153.5" width="282" height="43"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cT6-r5-aJX">
                                                         <rect key="frame" x="0.0" y="0.0" width="25" height="43"/>
@@ -192,16 +192,16 @@ You will not be charged during this process.</string>
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="eya-aE-tTQ">
-                                                        <rect key="frame" x="44" y="0.0" width="293" height="43"/>
+                                                        <rect key="frame" x="44" y="0.0" width="238" height="43"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ob-DR-bOF">
-                                                                <rect key="frame" x="0.0" y="0.0" width="293" height="20.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="238" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DlB-xs-sAp">
-                                                                <rect key="frame" x="0.0" y="22.5" width="293" height="20.5"/>
+                                                                <rect key="frame" x="0.0" y="22.5" width="238" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -211,7 +211,7 @@ You will not be charged during this process.</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="NCn-SM-i35">
-                                                <rect key="frame" x="19" y="190.5" width="337" height="43"/>
+                                                <rect key="frame" x="19" y="211.5" width="282" height="43"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="r5Z-Nr-23N">
                                                         <rect key="frame" x="0.0" y="0.0" width="25" height="43"/>
@@ -230,16 +230,16 @@ You will not be charged during this process.</string>
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="hW6-88-Puc">
-                                                        <rect key="frame" x="44" y="0.0" width="293" height="43"/>
+                                                        <rect key="frame" x="44" y="0.0" width="238" height="43"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vIt-e4-bGh">
-                                                                <rect key="frame" x="0.0" y="0.0" width="293" height="20.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="238" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uc2-Dn-2VL">
-                                                                <rect key="frame" x="0.0" y="22.5" width="293" height="20.5"/>
+                                                                <rect key="frame" x="0.0" y="22.5" width="238" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -249,7 +249,7 @@ You will not be charged during this process.</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="a9c-ON-ogp">
-                                                <rect key="frame" x="19" y="248.5" width="337" height="43"/>
+                                                <rect key="frame" x="19" y="269.5" width="282" height="43"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="KZU-ft-TM3">
                                                         <rect key="frame" x="0.0" y="0.0" width="25" height="43"/>
@@ -268,16 +268,16 @@ You will not be charged during this process.</string>
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="SZq-8e-0hj">
-                                                        <rect key="frame" x="44" y="0.0" width="293" height="43"/>
+                                                        <rect key="frame" x="44" y="0.0" width="238" height="43"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJE-Y3-9tm">
-                                                                <rect key="frame" x="0.0" y="0.0" width="293" height="20.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="238" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z0M-xn-BJo">
-                                                                <rect key="frame" x="0.0" y="22.5" width="293" height="20.5"/>
+                                                                <rect key="frame" x="0.0" y="22.5" width="238" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -287,7 +287,7 @@ You will not be charged during this process.</string>
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bDc-5S-XeY" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
-                                                <rect key="frame" x="19" y="351.5" width="337" height="50"/>
+                                                <rect key="frame" x="19" y="372.5" width="282" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="cde-wL-OsP"/>
                                                 </constraints>
@@ -297,7 +297,7 @@ You will not be charged during this process.</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qIN-O8-oDi" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
-                                                <rect key="frame" x="19" y="411.5" width="337" height="50"/>
+                                                <rect key="frame" x="19" y="432.5" width="282" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="eTr-g3-lR9"/>
                                                 </constraints>
@@ -307,7 +307,7 @@ You will not be charged during this process.</string>
                                                 </connections>
                                             </button>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="&lt;Agreement&gt;" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="J0c-Nr-MRF">
-                                                <rect key="frame" x="19" y="480.5" width="337" height="33"/>
+                                                <rect key="frame" x="19" y="501.5" width="282" height="33"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -333,7 +333,7 @@ You will not be charged during this process.</string>
                                             <constraint firstItem="qIN-O8-oDi" firstAttribute="top" secondItem="bDc-5S-XeY" secondAttribute="bottom" constant="10" id="XZs-X4-nlK"/>
                                             <constraint firstItem="bDc-5S-XeY" firstAttribute="leading" secondItem="IY5-Kg-KKQ" secondAttribute="leading" constant="19" id="YnA-hi-0wM"/>
                                             <constraint firstItem="NCn-SM-i35" firstAttribute="top" secondItem="CA4-TV-yNn" secondAttribute="bottom" constant="15" id="Yym-Fe-0oc"/>
-                                            <constraint firstItem="F5C-xr-9h6" firstAttribute="top" secondItem="IY5-Kg-KKQ" secondAttribute="top" constant="19" id="ZGz-JA-uEm"/>
+                                            <constraint firstItem="F5C-xr-9h6" firstAttribute="top" secondItem="IY5-Kg-KKQ" secondAttribute="top" constant="40" id="ZGz-JA-uEm"/>
                                             <constraint firstAttribute="bottom" secondItem="J0c-Nr-MRF" secondAttribute="bottom" constant="19" id="dZM-ac-KiA"/>
                                             <constraint firstAttribute="trailing" secondItem="NCn-SM-i35" secondAttribute="trailing" constant="19" id="gaa-ke-3PC"/>
                                             <constraint firstItem="69O-CO-nH7" firstAttribute="leading" secondItem="IY5-Kg-KKQ" secondAttribute="leading" constant="19" id="gkp-0r-UOZ"/>
@@ -419,26 +419,26 @@ You will not be charged during this process.</string>
             <objects>
                 <viewController id="bWG-QF-Zd5" customClass="ConfirmVPNPlanViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GKo-d3-iex">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eNM-GN-a3M">
-                                <rect key="frame" x="25" y="49" width="325" height="618"/>
+                                <rect key="frame" x="25" y="49" width="270" height="519"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KbN-2o-C5j">
-                                        <rect key="frame" x="141.5" y="0.0" width="42" height="21"/>
+                                        <rect key="frame" x="114" y="0.0" width="42" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6YL-19-QeS">
-                                        <rect key="frame" x="141.5" y="33" width="42" height="21"/>
+                                        <rect key="frame" x="114" y="33" width="42" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bsa-Kq-DVD" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="149" width="325" height="50"/>
+                                        <rect key="frame" x="0.0" y="149" width="270" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="nnQ-8g-OZj"/>
                                         </constraints>
@@ -448,7 +448,7 @@ You will not be charged during this process.</string>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N1F-t4-cDa" customClass="BorderedTextField" customModule="PIALibrary" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="84" width="325" height="50"/>
+                                        <rect key="frame" x="0.0" y="84" width="270" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="gPv-7Z-pVX"/>
@@ -458,7 +458,7 @@ You will not be charged during this process.</string>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done" textContentType="email"/>
                                     </textField>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="&lt;Agreement&gt;" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NHe-O4-oTj">
-                                        <rect key="frame" x="0.0" y="215" width="325" height="403"/>
+                                        <rect key="frame" x="0.0" y="215" width="270" height="304"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -514,32 +514,32 @@ You will not be charged during this process.</string>
             <objects>
                 <viewController storyboardIdentifier="LoginViewController" automaticallyAdjustsScrollViewInsets="NO" id="gOX-c2-oGJ" customClass="LoginViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m1d-km-gdB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RgS-fn-CJH" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gLb-rp-Tw5">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E4O-TD-CAk">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YbX-j5-KQB">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XgW-nz-hik">
-                                                                <rect key="frame" x="27" y="29" width="321" height="229.5"/>
+                                                                <rect key="frame" x="27" y="29" width="266" height="229.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in to your account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rk-V0-kLQ">
-                                                                        <rect key="frame" x="75" y="0.0" width="171" height="19.5"/>
+                                                                        <rect key="frame" x="47.5" y="0.0" width="171" height="19.5"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username (p1234567)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gcb-kt-Yu7" customClass="BorderedTextField" customModule="PIALibrary" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="49.5" width="321" height="50"/>
+                                                                        <rect key="frame" x="0.0" y="49.5" width="266" height="50"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="50" id="MlG-il-Cnw"/>
                                                                         </constraints>
@@ -550,7 +550,7 @@ You will not be charged during this process.</string>
                                                                         </connections>
                                                                     </textField>
                                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wtm-HW-6FS" customClass="BorderedTextField" customModule="PIALibrary" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="114.5" width="321" height="50"/>
+                                                                        <rect key="frame" x="0.0" y="114.5" width="266" height="50"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
                                                                         <connections>
@@ -558,7 +558,7 @@ You will not be charged during this process.</string>
                                                                         </connections>
                                                                     </textField>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jEh-9o-rVi" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="179.5" width="321" height="50"/>
+                                                                        <rect key="frame" x="0.0" y="179.5" width="266" height="50"/>
                                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="50" id="pxW-XI-iOF"/>
@@ -693,32 +693,32 @@ You will not be charged during this process.</string>
             <objects>
                 <viewController storyboardIdentifier="PurchaseViewController" id="J5T-ys-Of8" customClass="PurchaseViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hSf-Fj-o3R">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R3h-YU-xym" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qfZ-sq-7xA">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="450.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hTy-4A-jv9">
-                                                <rect key="frame" x="27" y="29" width="321" height="638"/>
+                                                <rect key="frame" x="27" y="29" width="266" height="421.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a VPN plan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPa-uO-IxH">
-                                                        <rect key="frame" x="94.5" y="0.0" width="132" height="19.5"/>
+                                                        <rect key="frame" x="67" y="0.0" width="132" height="19.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Peu-Da-gWl">
-                                                        <rect key="frame" x="139.5" y="31.5" width="42" height="21"/>
+                                                        <rect key="frame" x="112" y="31.5" width="42" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1AP-NP-8y0">
-                                                        <rect key="frame" x="0.0" y="85.5" width="321" height="223"/>
+                                                        <rect key="frame" x="0.0" y="85.5" width="266" height="223"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="223" id="9uI-0g-6cL"/>
@@ -726,7 +726,7 @@ You will not be charged during this process.</string>
                                                         <collectionViewLayout key="collectionViewLayout" id="Tws-YD-75O" customClass="InvalidatingFlowLayout" customModule="PIALibrary" customModuleProvider="target"/>
                                                         <cells>
                                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlanCell" id="oW3-48-lQJ" customClass="PurchasePlanCell" customModule="PIALibrary" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="321" height="105"/>
+                                                                <rect key="frame" x="-27.5" y="0.0" width="321" height="105"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                                     <rect key="frame" x="0.0" y="0.0" width="321" height="105"/>
@@ -851,7 +851,7 @@ You will not be charged during this process.</string>
                                                         </connections>
                                                     </collectionView>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="&lt;Agreement&gt;" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KyF-30-stz">
-                                                        <rect key="frame" x="0.0" y="388.5" width="321" height="249.5"/>
+                                                        <rect key="frame" x="0.0" y="388.5" width="266" height="33"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -860,7 +860,7 @@ You will not be charged during this process.</string>
                                                         </connections>
                                                     </textView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G5a-CO-RKC" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="328.5" width="321" height="50"/>
+                                                        <rect key="frame" x="0.0" y="328.5" width="266" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="Hh2-HR-XJt"/>
                                                         </constraints>
@@ -903,19 +903,8 @@ You will not be charged during this process.</string>
                                     <constraint firstAttribute="bottom" secondItem="qfZ-sq-7xA" secondAttribute="bottom" id="ABK-cJ-quE"/>
                                     <constraint firstItem="qfZ-sq-7xA" firstAttribute="top" secondItem="R3h-YU-xym" secondAttribute="top" id="HSV-qb-jbv"/>
                                     <constraint firstItem="qfZ-sq-7xA" firstAttribute="width" secondItem="R3h-YU-xym" secondAttribute="width" id="jaB-tQ-1Em"/>
-                                    <constraint firstItem="qfZ-sq-7xA" firstAttribute="height" secondItem="R3h-YU-xym" secondAttribute="height" id="uqE-U2-ppT"/>
                                     <constraint firstItem="qfZ-sq-7xA" firstAttribute="leading" secondItem="R3h-YU-xym" secondAttribute="leading" id="zOc-3b-2O7"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="uqE-U2-ppT"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular">
-                                    <mask key="constraints">
-                                        <include reference="uqE-U2-ppT"/>
-                                    </mask>
-                                </variation>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -962,11 +951,11 @@ You will not be charged during this process.</string>
             <objects>
                 <viewController storyboardIdentifier="PIAWelcomeViewController" automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" customClass="PIAWelcomeViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEF-LS-PZ6">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <connections>
                                     <segue destination="lku-HF-3OI" kind="embed" id="UXm-xH-vgv"/>
                                 </connections>
@@ -986,7 +975,7 @@ You will not be charged during this process.</string>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LMx-dm-CUP">
-                                <rect key="frame" x="205" y="32.5" width="150" height="30"/>
+                                <rect key="frame" x="150" y="32.5" width="150" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="UGM-td-ifN"/>
                                 </constraints>
@@ -1039,24 +1028,24 @@ You will not be charged during this process.</string>
             <objects>
                 <viewController id="bfs-I2-X8H" customClass="GetStartedViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tO9-0u-CbU">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRA-UX-3e4">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="centered-dark-map" translatesAutoresizingMaskIntoConstraints="NO" id="6Md-hc-CJ2">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1dA-og-SGN">
-                                <rect key="frame" x="0.0" y="20" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="150"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-light" translatesAutoresizingMaskIntoConstraints="NO" id="DVe-fv-utO">
-                                        <rect key="frame" x="56.5" y="42" width="262.5" height="39"/>
+                                        <rect key="frame" x="48" y="42" width="224" height="39"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.2.3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tqQ-G1-84D">
-                                        <rect key="frame" x="157" y="98" width="61.5" height="12"/>
+                                        <rect key="frame" x="129.5" y="98" width="61" height="12"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -1084,7 +1073,7 @@ You will not be charged during this process.</string>
                                 </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JeO-BO-hZn" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
-                                <rect key="frame" x="25" y="477" width="325" height="50"/>
+                                <rect key="frame" x="25" y="378" width="270" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="lv6-ch-s4O"/>
                                 </constraints>
@@ -1093,7 +1082,7 @@ You will not be charged during this process.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ei6-5m-nGj" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
-                                <rect key="frame" x="25" y="547" width="325" height="50"/>
+                                <rect key="frame" x="25" y="448" width="270" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Hl4-Za-4hO"/>
                                 </constraints>
@@ -1102,7 +1091,7 @@ You will not be charged during this process.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BfP-Y8-7Sg">
-                                <rect key="frame" x="20" y="617" width="330" height="20"/>
+                                <rect key="frame" x="20" y="518" width="275" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="8C6-6B-4dA"/>
                                 </constraints>
@@ -1158,38 +1147,38 @@ You will not be charged during this process.</string>
             <objects>
                 <viewController storyboardIdentifier="RedeemViewController" automaticallyAdjustsScrollViewInsets="NO" id="qgN-PX-Sir" customClass="RedeemViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Kh-lT-Rvu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Ah-aP-Yc5" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwf-bV-ShO">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IPK-FO-qcX">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mPZ-KP-R5j">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TnM-Pl-njO">
-                                                                <rect key="frame" x="25" y="29" width="325" height="302"/>
+                                                                <rect key="frame" x="25" y="29" width="270" height="302"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Redeem" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEC-Qu-zkj">
-                                                                        <rect key="frame" x="132" y="0.0" width="61" height="20"/>
+                                                                        <rect key="frame" x="104.5" y="0.0" width="61" height="20"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S5y-bL-bNg">
-                                                                        <rect key="frame" x="0.0" y="30" width="325" height="17"/>
+                                                                        <rect key="frame" x="0.0" y="30" width="270" height="17"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3ne-g6-NDW" customClass="BorderedTextField" customModule="PIALibrary" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="79" width="325" height="50"/>
+                                                                        <rect key="frame" x="0.0" y="79" width="270" height="50"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="50" id="ceN-iH-PMs"/>
                                                                         </constraints>
@@ -1200,7 +1189,7 @@ You will not be charged during this process.</string>
                                                                         </connections>
                                                                     </textField>
                                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="PIN" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pbJ-dg-A3t" customClass="BorderedTextField" customModule="PIALibrary" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="144" width="325" height="50"/>
+                                                                        <rect key="frame" x="0.0" y="144" width="270" height="50"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
                                                                         <connections>
@@ -1208,14 +1197,14 @@ You will not be charged during this process.</string>
                                                                         </connections>
                                                                     </textField>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoC-xB-Jhr" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
-                                                                        <rect key="frame" x="290" y="149" width="30" height="40"/>
+                                                                        <rect key="frame" x="235" y="149" width="30" height="40"/>
                                                                         <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                                         <connections>
                                                                             <action selector="showCameraToScanQRCodes:" destination="qgN-PX-Sir" eventType="touchUpInside" id="i22-HG-3Xe"/>
                                                                         </connections>
                                                                     </button>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tea-DU-K60" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="209" width="325" height="50"/>
+                                                                        <rect key="frame" x="0.0" y="209" width="270" height="50"/>
                                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="50" id="QJT-WV-pkY"/>
@@ -1225,7 +1214,7 @@ You will not be charged during this process.</string>
                                                                         </connections>
                                                                     </view>
                                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="&lt;Agreement&gt;" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xcj-pL-a9w">
-                                                                        <rect key="frame" x="0.0" y="269" width="325" height="33"/>
+                                                                        <rect key="frame" x="0.0" y="269" width="270" height="33"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -1357,7 +1346,7 @@ You will not be charged during this process.</string>
             <objects>
                 <viewController id="hSc-7t-RTF" customClass="QRCameraScannerViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ep7-uG-1hN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xjW-oD-kRx">
@@ -1393,35 +1382,35 @@ You will not be charged during this process.</string>
             <objects>
                 <viewController storyboardIdentifier="GDPRViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Bm9-XV-AeZ" customClass="GDPRViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mse-aE-G6T">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tAF-rd-lAs">
-                                <rect key="frame" x="19" y="75" width="337" height="20.5"/>
+                                <rect key="frame" x="19" y="75" width="282" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="mem-gV-Ugr">
-                                <rect key="frame" x="19" y="100.5" width="337" height="20.5"/>
+                                <rect key="frame" x="19" y="100.5" width="282" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sa3-Tk-b1I">
-                                <rect key="frame" x="19" y="140" width="337" height="20.5"/>
+                                <rect key="frame" x="19" y="140" width="282" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fTu-8B-ni3">
-                                <rect key="frame" x="19" y="165.5" width="337" height="20.5"/>
+                                <rect key="frame" x="19" y="165.5" width="282" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dhc-bJ-iSX" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
-                                <rect key="frame" x="19" y="598" width="337" height="50"/>
+                                <rect key="frame" x="19" y="499" width="282" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="YVC-MW-0J8"/>
                                 </constraints>

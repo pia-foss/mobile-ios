@@ -175,6 +175,8 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
     
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
+        navigationItem.titleView = NavigationLogoView()
+        Theme.current.applyNavigationBarStyle(to: self)
         Theme.current.applyPrincipalBackground(view)
         Theme.current.applyLinkAttributes(textAgreement)
         Theme.current.applyBigTitle(headerTitleLabel, appearance: .dark)
