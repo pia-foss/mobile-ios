@@ -20,6 +20,8 @@
 internal enum Asset {
   internal static let centeredDarkMap = ImageAsset(name: "centered-dark-map")
   internal static let centeredLightMap = ImageAsset(name: "centered-light-map")
+  internal static let computerIcon = ImageAsset(name: "computer-icon")
+  internal static let globeIcon = ImageAsset(name: "globe-icon")
   internal static let iconBack = ImageAsset(name: "icon-back")
   internal static let iconCamera = ImageAsset(name: "icon-camera")
   internal static let iconClose = ImageAsset(name: "icon-close")
@@ -28,6 +30,7 @@ internal enum Asset {
   internal static let logoLight = ImageAsset(name: "logo-light")
   internal static let planSelected = ImageAsset(name: "plan-selected")
   internal static let planUnselected = ImageAsset(name: "plan-unselected")
+  internal static let shieldIcon = ImageAsset(name: "shield-icon")
   internal static let closeIcon = ImageAsset(name: "close-icon")
   internal static let imageAccountFailed = ImageAsset(name: "image-account-failed")
   internal static let imageNoInternet = ImageAsset(name: "image-no-internet")

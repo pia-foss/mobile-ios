@@ -182,11 +182,11 @@ public protocol AccountProvider: class {
     func listRenewablePlans(_ callback: LibraryCallback<[Plan]>?)
     
     /**
-     Lists plans available for purchase or renewal in the PIA database.
+     Lists plans available from the AppStore and information about the purchase.
      
-     - Parameter callback: Returns a list of available plans.
+     - Parameter callback: Returns a AppStoreInformation object containing the list of available products and information about the status of the trial.
      */
-    func updatePlanProductIdentifiers(_ callback: LibraryCallback<[Product]>?)
+    func subscriptionInformation(_ callback: LibraryCallback<AppStoreInformation>?)
 
     /**
      Renews expiring plan with current purchase history.

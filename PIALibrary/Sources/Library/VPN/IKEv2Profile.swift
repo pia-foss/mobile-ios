@@ -86,6 +86,7 @@ public class IKEv2Profile: NetworkExtensionProfile {
 
             self.currentVPN.saveToPreferences { (error) in
                 if let error = error {
+                    self.currentVPN.connection.stopVPNTunnel()
                     callback?(error)
                     return
                 }

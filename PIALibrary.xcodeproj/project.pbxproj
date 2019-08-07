@@ -268,6 +268,7 @@
 		DD56E3F6225F5D77002EDFB2 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD56E3F5225F5D77002EDFB2 /* Product.swift */; };
 		DD58F4BB21AEB99C00D043F7 /* GlossToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58F4BA21AEB99C00D043F7 /* GlossToken.swift */; };
 		DD58F4BD21AEF76100D043F7 /* String+Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58F4BC21AEF76100D043F7 /* String+Components.swift */; };
+		DD6768E322FAB19D00B9FDD0 /* AppStoreInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6768E222FAB19D00B9FDD0 /* AppStoreInformation.swift */; };
 		DD6DC5B921B6A83400F9D538 /* UIViewLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6DC5B821B6A83400F9D538 /* UIViewLoading.swift */; };
 		DD6DC5BC21B6A8FC00F9D538 /* pia-spinner.json in Resources */ = {isa = PBXBuildFile; fileRef = DD6DC5BB21B6A8FC00F9D538 /* pia-spinner.json */; };
 		DD6FB0372224355600A84F05 /* UIDevice+WiFi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6FB0362224355600A84F05 /* UIDevice+WiFi.swift */; };
@@ -291,6 +292,7 @@
 		DDD824E82189C0EE00151709 /* BrandableNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E62189C0E800151709 /* BrandableNavigationBar.swift */; };
 		DDD824EA2189CD5700151709 /* NavigationLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E92189CD5700151709 /* NavigationLogoView.swift */; };
 		DDE27E0422E1B1A700503A89 /* ProductTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE27E0322E1B1A700503A89 /* ProductTests.swift */; };
+		DDE93C5722F9847E0054FE28 /* PurchaseTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE93C5622F9847E0054FE28 /* PurchaseTrialViewController.swift */; };
 		DDFCFAA821E924A70081F235 /* TileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAA721E924A70081F235 /* TileProvider.swift */; };
 		DDFCFAA921E924AD0081F235 /* TileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAA721E924A70081F235 /* TileProvider.swift */; };
 		DDFCFAAB21E925160081F235 /* DefaultTileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAAA21E925160081F235 /* DefaultTileProvider.swift */; };
@@ -566,6 +568,7 @@
 		DD56E3F5225F5D77002EDFB2 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		DD58F4BA21AEB99C00D043F7 /* GlossToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlossToken.swift; sourceTree = "<group>"; };
 		DD58F4BC21AEF76100D043F7 /* String+Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Components.swift"; sourceTree = "<group>"; };
+		DD6768E222FAB19D00B9FDD0 /* AppStoreInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreInformation.swift; sourceTree = "<group>"; };
 		DD6DC5B821B6A83400F9D538 /* UIViewLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewLoading.swift; sourceTree = "<group>"; };
 		DD6DC5BB21B6A8FC00F9D538 /* pia-spinner.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pia-spinner.json"; sourceTree = "<group>"; };
 		DD6FB0362224355600A84F05 /* UIDevice+WiFi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+WiFi.swift"; sourceTree = "<group>"; };
@@ -584,6 +587,7 @@
 		DDD824E62189C0E800151709 /* BrandableNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandableNavigationBar.swift; sourceTree = "<group>"; };
 		DDD824E92189CD5700151709 /* NavigationLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLogoView.swift; sourceTree = "<group>"; };
 		DDE27E0322E1B1A700503A89 /* ProductTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductTests.swift; path = "../../../../../../System/Volumes/Data/Users/ueshiba/Projects/PIA/client-library-apple/PIALibraryTests/ProductTests.swift"; sourceTree = "<group>"; };
+		DDE93C5622F9847E0054FE28 /* PurchaseTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTrialViewController.swift; sourceTree = "<group>"; };
 		DDFCFAA721E924A70081F235 /* TileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileProvider.swift; sourceTree = "<group>"; };
 		DDFCFAAA21E925160081F235 /* DefaultTileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTileProvider.swift; sourceTree = "<group>"; };
 		DDFCFAAC21E925B60081F235 /* TileableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileableCell.swift; sourceTree = "<group>"; };
@@ -827,6 +831,7 @@
 				0EC849C81F82329F002480CA /* WebServices.swift */,
 				DD76292721ECDFF80092DF50 /* Usage.swift */,
 				DD56E3F5225F5D77002EDFB2 /* Product.swift */,
+				DD6768E222FAB19D00B9FDD0 /* AppStoreInformation.swift */,
 				DDC0840F22EB077400DA2701 /* InvitesInformation.swift */,
 				DDC0840C22EB06F400DA2701 /* Invites.swift */,
 			);
@@ -1136,6 +1141,7 @@
 				0E48A8521FDAD60900B9A4C0 /* OptionsViewController.swift */,
 				0EB8C0531F9CD38A005857E4 /* PIAWelcomeViewController.swift */,
 				0EB8C0551F9CD38A005857E4 /* PurchaseViewController.swift */,
+				DDE93C5622F9847E0054FE28 /* PurchaseTrialViewController.swift */,
 				DD0DE84F22366090002A6E82 /* GDPRViewController.swift */,
 				0EA8072320A18C6B0033EC1A /* RedeemViewController.swift */,
 				84D5DA6F2126CE2900F753F8 /* QRCameraScannerViewController.swift */,
@@ -1447,10 +1453,8 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
 				"${BUILT_PRODUCTS_DIR}/Gloss/Gloss.framework",
@@ -1464,8 +1468,6 @@
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
@@ -1481,7 +1483,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9D0059CEB01BB1B3D7E8C974 /* [CP] Check Pods Manifest.lock */ = {
@@ -1555,10 +1557,8 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
 				"${BUILT_PRODUCTS_DIR}/Gloss/Gloss.framework",
@@ -1572,8 +1572,6 @@
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
@@ -1589,7 +1587,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1825,6 +1823,7 @@
 				DD76292821ECDFF80092DF50 /* Usage.swift in Sources */,
 				0E2ADD3A1FE14F8600BB170C /* VPNProfile.swift in Sources */,
 				0E492C5C1FE5EA06007F23DF /* CMacros.m in Sources */,
+				DD6768E322FAB19D00B9FDD0 /* AppStoreInformation.swift in Sources */,
 				0EB8C0671F9CD38B005857E4 /* AutolayoutViewController.swift in Sources */,
 				0E3D13D31F9E270A00434A48 /* GlossAccountInfo.swift in Sources */,
 				0E245C9D1FECF0C20010DEF2 /* ClientAccess.swift in Sources */,
@@ -1838,6 +1837,7 @@
 				0E392DA31FE3247E0002160D /* Endpoint.swift in Sources */,
 				0E53A8581FE5DA16000C2A18 /* MockInAppProvider.swift in Sources */,
 				DDD824E32189969400151709 /* Preset.swift in Sources */,
+				DDE93C5722F9847E0054FE28 /* PurchaseTrialViewController.swift in Sources */,
 				0E9D62721FDE83BD009A90CF /* GlossServersBundle.swift in Sources */,
 				0E492C6A1FE61485007F23DF /* Client+Database.swift in Sources */,
 				0E48A8531FDAD60900B9A4C0 /* OptionsViewController.swift in Sources */,

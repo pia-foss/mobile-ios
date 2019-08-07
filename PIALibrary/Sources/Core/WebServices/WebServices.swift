@@ -32,7 +32,7 @@ protocol WebServices: class {
 
     // MARK: Store
     
-    func planProductIdentifiers(_ callback: LibraryCallback<[Product]>?)
+    func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?)
 
     // MARK: Ephemeral
 

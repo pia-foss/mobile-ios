@@ -120,6 +120,9 @@ extension Client {
         
         private var inAppPlans: [String: Plan]
         
+        /// Enables background server pinging.
+        public var eligibleForTrial: Bool
+        
         #endif
         
         /// The value of the max of servers appearing in the quick connect tile.
@@ -189,6 +192,7 @@ extension Client {
             
             #if os(iOS)
             inAppPlans = [:]
+            eligibleForTrial = true
             #endif
             
             maxQuickConnectServers = 6

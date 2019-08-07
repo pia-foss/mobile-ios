@@ -312,9 +312,24 @@ public class Theme {
     }
     
     /// :nodoc:
+    public func applyBigTitle(_ label: UILabel, appearance: Appearance) {
+        if palette.appearance == Appearance.light {
+            label.style(style: TextStyle.textStyle23)
+        } else {
+            label.style(style: TextStyle.textStyle22)
+        }
+    }
+    
+    /// :nodoc:
     public func applySubtitle(_ label: UILabel) {
         let textAlignment = label.textAlignment
         label.style(style: TextStyle.textStyle8)
+        label.textAlignment = textAlignment
+    }
+    
+    public func applySmallSubtitle(_ label: UILabel) {
+        let textAlignment = label.textAlignment
+        label.style(style: TextStyle.textStyle21)
         label.textAlignment = textAlignment
     }
     

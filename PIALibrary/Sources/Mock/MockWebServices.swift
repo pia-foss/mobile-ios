@@ -67,8 +67,14 @@ class MockWebServices: WebServices {
         callback?(nil)
     }
     
-    func planProductIdentifiers(_ callback: LibraryCallback<[Product]>?) {
-        callback?([Product(identifier: "com.product.monthly", plan: .monthly, price: "3.99", legacy: false)], nil)
+    func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?) {
+        let appstoreInfo = AppStoreInformation(products: [Product(identifier: "com.product.monthly",
+                                                                  plan: .monthly,
+                                                                  price: "3.99",
+                                                                  legacy: false)],
+                                               isInIntroOfferPeriod: false,
+                                               isTrialPeriod: false)
+        callback?(appstoreInfo, nil)
     }
     
     func invitesInformation(_ callback: LibraryCallback<InvitesInformation>?) {

@@ -211,16 +211,20 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     }
     
     // MARK: Store
-    func planProductIdentifiers(_ callback: LibraryCallback<[Product]>?) {
+    func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?) {
         let endpoint = ClientEndpoint.ios
         let status = [200, 400]
         let errors: [Int: ClientError] = [
             400: .badReceipt
         ]
         
-        let parameters: JSON = [
+        var parameters: JSON = [
             "type": "subscription"
         ]
+        
+        if let receipt = receipt {
+            parameters["receipt"] = receipt
+        }
 
         req(nil, .get, endpoint, useAuthToken: false, parameters, status, JSONRequestExecutor() { (json, status, error) in
             if let knownError = self.knownError(endpoint, status, errors) {
@@ -237,7 +241,12 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                     callback?(nil, error)
                     return
                 }
-                callback?(products, nil)
+                let isIntroOffer = json["is_in_intro_offer_period"] as? Bool ?? false
+                let isTrialPeriod = json["is_trial_period"] as? Bool ?? false
+                let info = AppStoreInformation(products: products,
+                                    isInIntroOfferPeriod: isIntroOffer,
+                                    isTrialPeriod: isTrialPeriod)
+                callback?(info, nil)
             } else {
                 callback?(nil, error)
                 return

@@ -213,6 +213,23 @@ public extension TextStyle {
         lineHeight: 18
     )
     
+    static let textStyle22 = TextStyle(
+        font: UIFont.mediumFontWith(size: 26),
+        color: UIColor.piaWhite,
+        foregroundColor: nil,
+        backgroundColor: nil,
+        tintColor: nil,
+        lineHeight: 20
+    )
+    
+    static let textStyle23 = TextStyle(
+        font: UIFont.mediumFontWith(size: 26),
+        color: UIColor.piaGrey6,
+        foregroundColor: nil,
+        backgroundColor: nil,
+        tintColor: nil,
+        lineHeight: 20
+    )
     struct Buttons {
         
         public static let piaGreenButton = TextStyle(
