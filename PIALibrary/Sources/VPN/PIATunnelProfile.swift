@@ -90,6 +90,7 @@ public class PIATunnelProfile: NetworkExtensionProfile {
 
             vpn.saveToPreferences { (error) in
                 if let error = error {
+                    vpn.connection.stopVPNTunnel()
                     callback?(error)
                     return
                 }
