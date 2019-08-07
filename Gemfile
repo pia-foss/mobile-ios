@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 gem "fastlane"
-gem "cocoapods", "1.5.3"
+gem "cocoapods", "1.7.5"
 gem "dotenv"
 
 #CI_HOSTNAME=`[[ $CI_PROJECT_URL =~ ^https:\/\/([^\/]+)\/.*$ ]] && echo ${BASH_REMATCH[1]}`
