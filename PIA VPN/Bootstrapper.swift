@@ -104,15 +104,15 @@ class Bootstrapper {
             PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build()
         ]
         
-        Client.providers.accountProvider.updatePlanProductIdentifiers { [weak self] (products, error) in
+        Client.providers.accountProvider.subscriptionInformation { [weak self] (info, error) in
             
             if let _ = error {
                 self?.setDefaultPlanProducts()
             }
             
-            if let products = products,
-                products.count > 0 {
-                for product in products {
+            if let info = info,
+                info.products.count > 0 {
+                for product in info.products {
                     if !product.legacy {
                         Client.configuration.setPlan(product.plan, forProductIdentifier: product.identifier)
                     }
