@@ -110,13 +110,21 @@ class Bootstrapper {
                 self?.setDefaultPlanProducts()
             }
             
-            if let info = info,
-                info.products.count > 0 {
-                for product in info.products {
-                    if !product.legacy {
-                        Client.configuration.setPlan(product.plan, forProductIdentifier: product.identifier)
+            if let info = info {
+            
+                if info.products.count > 0 {
+                    for product in info.products {
+                        if !product.legacy {
+                            Client.configuration.setPlan(product.plan, forProductIdentifier: product.identifier)
+                        }
                     }
                 }
+                
+                //If either of these fields are true for a given subscription, the user is not eligible for an introductory offer on that subscription product or any other products within the same subscription group.
+                if info.isInIntroOfferPeriod || info.isTrialPeriod {
+                    Client.configuration.eligibleForTrial = false
+                }
+
             }
 
             Client.refreshProducts()
