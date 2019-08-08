@@ -248,6 +248,14 @@ public extension TextStyle {
             tintColor: nil
         )
         
+        public static let piaSmallPlainTextButton = TextStyle(
+            font: UIFont.regularFontWith(size: 12),
+            color: nil,
+            foregroundColor: nil,
+            backgroundColor: nil,
+            tintColor: nil
+        )
+        
     }
 
 }

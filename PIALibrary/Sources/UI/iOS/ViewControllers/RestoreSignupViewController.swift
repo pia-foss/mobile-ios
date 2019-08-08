@@ -90,9 +90,6 @@ public class RestoreSignupViewController: AutolayoutViewController, BrandableNav
     }
     
     // MARK: Actions
-    @objc private func back(_ sender: Any?) {
-        self.navigationController?.popViewController(animated: true)
-    }
 
     @IBAction private func restorePurchase(_ sender: Any?) {
         guard !isRunningActivity else {

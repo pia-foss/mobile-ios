@@ -120,10 +120,6 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
         })
         
     }
-    
-    @objc private func back(_ sender: Any?) {
-        self.navigationController?.popViewController(animated: true)
-    }
 
     private func disableInteractions() {
         parent?.view.isUserInteractionEnabled = false
