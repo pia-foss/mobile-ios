@@ -19,11 +19,11 @@ class InvitesSentTableViewCell: UITableViewCell, FriendReferralCell {
 
         Theme.current.applySecondaryBackground(self)
         Theme.current.applySecondaryBackground(self.contentView)
+        self.titleLabel.text = L10n.Friend.Referrals.View.Invites.sent
 
     }
 
     func setupCell(withInviteInformation inviteInformation: InvitesInformation) {
-        self.titleLabel.text = L10n.Friend.Referrals.View.Invites.sent
         Theme.current.applySettingsCellTitle(titleLabel, appearance: .dark)
     }
     
