@@ -180,6 +180,9 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
         }
     }
 
+    @objc public func back(_ sender: Any?) {
+        self.navigationController?.popViewController(animated: true)
+    }
 
 }
 

@@ -101,10 +101,6 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
     }
     
     // MARK: Actions
-    @objc private func back(_ sender: Any?) {
-        self.navigationController?.popViewController(animated: true)
-    }
-
     @objc private func cancelClicked(_ sender: Any?) {
         delegate?.welcomeControllerDidCancel(self)
     }

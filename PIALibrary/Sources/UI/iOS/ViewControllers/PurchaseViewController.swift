@@ -27,7 +27,8 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
     @IBOutlet private weak var textAgreement: UITextView!
     
     @IBOutlet private weak var buttonPurchase: PIAButton!
-    
+    @IBOutlet private weak var buttonTrialTerms: PIAButton!
+
     var preset: Preset?
     weak var completionDelegate: WelcomeCompletionDelegate?
     var omitsSiblingLink = false
@@ -42,6 +43,8 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        styleButtons()
 
         guard let _ = self.preset else {
             fatalError("Preset not propagated")
@@ -70,7 +73,6 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(productsDidFetch(notification:)), name: .__InAppDidFetchProducts, object: nil)
         
-        stylePurchaseButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,10 +91,6 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
         NotificationCenter.default.removeObserver(self)
     }
 
-    @objc private func back(_ sender: Any?) {
-        self.navigationController?.popViewController(animated: true)
-    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == StoryboardSegue.Welcome.confirmPurchaseVPNPlanSegue.rawValue) {
             if let vc = segue.destination as? ConfirmVPNPlanViewController,
@@ -101,6 +99,11 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
                 vc.completionDelegate = completionDelegate
                 vc.populateViewWith(plans: allPlans,
                                     andSelectedPlanIndex: selectedIndex)
+            }
+        } else if (segue.identifier == StoryboardSegue.Welcome.showTermsAndConditionsSegue.rawValue) {
+            if let vc = segue.destination as? TermsAndConditionsViewController {
+                vc.termsAndConditionsTitle = L10n.Welcome.Agreement.Trials.title
+                vc.termsAndConditions = L10n.Welcome.Agreement.Trials.message
             }
         }
     }
@@ -182,11 +185,17 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
         Theme.current.applyLinkAttributes(textAgreement)
     }
     
-    private func stylePurchaseButton() {
+    private func styleButtons() {
         buttonPurchase.setRounded()
         buttonPurchase.style(style: TextStyle.Buttons.piaGreenButton)
         buttonPurchase.setTitle(L10n.Welcome.Purchase.continue.uppercased(),
                               for: [])
+        buttonTrialTerms.style(style: TextStyle.Buttons.piaSmallPlainTextButton)
+        buttonTrialTerms.setTitle(L10n.Welcome.Agreement.Trials.title,
+                                  for: [])
+        Theme.current.applyTransparentButton(buttonTrialTerms,
+                                             withSize: 0.0)
+
     }
 
 }

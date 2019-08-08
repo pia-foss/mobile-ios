@@ -152,7 +152,7 @@ You will not be charged during this process.</string>
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IY5-Kg-KKQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="553.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="578.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5C-xr-9h6">
                                                 <rect key="frame" x="19" y="40" width="282" height="20.5"/>
@@ -306,8 +306,15 @@ You will not be charged during this process.</string>
                                                     <segue destination="J5T-ys-Of8" kind="show" identifier="ViewMoreVPNPlansSegue" id="jKg-hQ-0Pp"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xg5-Qr-1c2" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
+                                                <rect key="frame" x="19" y="492.5" width="282" height="34"/>
+                                                <state key="normal" title="Button"/>
+                                                <connections>
+                                                    <segue destination="DNR-EE-WLm" kind="show" identifier="ShowTermsAndConditionsSegue" id="nRl-Ww-kMh"/>
+                                                </connections>
+                                            </button>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="&lt;Agreement&gt;" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="J0c-Nr-MRF">
-                                                <rect key="frame" x="19" y="501.5" width="282" height="33"/>
+                                                <rect key="frame" x="19" y="526.5" width="282" height="33"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -319,12 +326,14 @@ You will not be charged during this process.</string>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="QhW-ET-C6S" firstAttribute="top" secondItem="F5C-xr-9h6" secondAttribute="bottom" constant="10" id="5xm-a2-XVJ"/>
-                                            <constraint firstItem="J0c-Nr-MRF" firstAttribute="top" secondItem="qIN-O8-oDi" secondAttribute="bottom" constant="19" id="DQF-Iv-Zyb"/>
                                             <constraint firstAttribute="trailing" secondItem="a9c-ON-ogp" secondAttribute="trailing" constant="19" id="DQz-S4-VYT"/>
+                                            <constraint firstAttribute="trailing" secondItem="Xg5-Qr-1c2" secondAttribute="trailing" constant="19" id="Dg2-ad-gB8"/>
                                             <constraint firstAttribute="trailing" secondItem="bDc-5S-XeY" secondAttribute="trailing" constant="19" id="DqV-T2-Bo2"/>
                                             <constraint firstAttribute="trailing" secondItem="J0c-Nr-MRF" secondAttribute="trailing" constant="19" id="E2m-Ad-R3y"/>
                                             <constraint firstItem="a9c-ON-ogp" firstAttribute="leading" secondItem="IY5-Kg-KKQ" secondAttribute="leading" constant="19" id="HKv-ug-nG9"/>
                                             <constraint firstItem="CA4-TV-yNn" firstAttribute="leading" secondItem="IY5-Kg-KKQ" secondAttribute="leading" constant="19" id="IXa-dK-77D"/>
+                                            <constraint firstItem="J0c-Nr-MRF" firstAttribute="top" secondItem="Xg5-Qr-1c2" secondAttribute="bottom" id="IZ4-Yc-yqo"/>
+                                            <constraint firstItem="Xg5-Qr-1c2" firstAttribute="leading" secondItem="IY5-Kg-KKQ" secondAttribute="leading" constant="19" id="KZk-LJ-Tsg"/>
                                             <constraint firstAttribute="trailing" secondItem="CA4-TV-yNn" secondAttribute="trailing" constant="19" id="Q1D-J0-0fz"/>
                                             <constraint firstItem="qIN-O8-oDi" firstAttribute="leading" secondItem="IY5-Kg-KKQ" secondAttribute="leading" constant="19" id="QA0-rX-u9H"/>
                                             <constraint firstAttribute="trailing" secondItem="QhW-ET-C6S" secondAttribute="trailing" constant="19" id="QyP-Tj-qwT"/>
@@ -346,6 +355,7 @@ You will not be charged during this process.</string>
                                             <constraint firstItem="CA4-TV-yNn" firstAttribute="top" secondItem="69O-CO-nH7" secondAttribute="bottom" constant="40" id="yBp-us-Men"/>
                                             <constraint firstItem="bDc-5S-XeY" firstAttribute="top" secondItem="a9c-ON-ogp" secondAttribute="bottom" constant="60" id="yOE-6B-XIC"/>
                                             <constraint firstAttribute="trailing" secondItem="qIN-O8-oDi" secondAttribute="trailing" constant="19" id="znz-UA-x0F"/>
+                                            <constraint firstItem="Xg5-Qr-1c2" firstAttribute="top" secondItem="qIN-O8-oDi" secondAttribute="bottom" constant="10" id="zx2-D4-5H8"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -370,6 +380,7 @@ You will not be charged during this process.</string>
                     <connections>
                         <outlet property="buttonMorePlans" destination="qIN-O8-oDi" id="Cab-8g-RR7"/>
                         <outlet property="buttonPurchase" destination="bDc-5S-XeY" id="DYH-KL-eGs"/>
+                        <outlet property="buttonTrialTerms" destination="Xg5-Qr-1c2" id="Dr9-P8-PSa"/>
                         <outlet property="devicesImageView" destination="kcY-un-5Y3" id="1uP-t2-Bv7"/>
                         <outlet property="devicesSubtitleLabel" destination="uc2-Dn-2VL" id="cYG-kY-Gh4"/>
                         <outlet property="devicesTitleLabel" destination="vIt-e4-bGh" id="5PG-r2-bLY"/>
@@ -390,6 +401,73 @@ You will not be charged during this process.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7kO-CF-POZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1593" y="-2901"/>
+        </scene>
+        <!--Terms And Conditions View Controller-->
+        <scene sceneID="d5T-5Y-jTO">
+            <objects>
+                <viewController id="DNR-EE-WLm" customClass="TermsAndConditionsViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ftb-sJ-jis">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YeP-ly-nAd">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eee-hq-wm9">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qiC-Mk-gRO">
+                                                <rect key="frame" x="19" y="40" width="282" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXI-q2-Scb">
+                                                <rect key="frame" x="19" y="79.5" width="282" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="QXI-q2-Scb" secondAttribute="trailing" constant="19" id="8pL-n6-CVb"/>
+                                            <constraint firstItem="qiC-Mk-gRO" firstAttribute="top" secondItem="Eee-hq-wm9" secondAttribute="top" constant="40" id="9Qw-fT-pwe"/>
+                                            <constraint firstAttribute="bottom" secondItem="QXI-q2-Scb" secondAttribute="bottom" constant="19" id="As8-hW-A3n"/>
+                                            <constraint firstItem="qiC-Mk-gRO" firstAttribute="leading" secondItem="Eee-hq-wm9" secondAttribute="leading" constant="19" id="SEF-qT-9GZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="qiC-Mk-gRO" secondAttribute="trailing" constant="19" id="lke-ur-OH1"/>
+                                            <constraint firstItem="QXI-q2-Scb" firstAttribute="top" secondItem="qiC-Mk-gRO" secondAttribute="bottom" constant="19" id="wPV-7a-GRG"/>
+                                            <constraint firstItem="QXI-q2-Scb" firstAttribute="leading" secondItem="Eee-hq-wm9" secondAttribute="leading" constant="19" id="x95-xo-WSO"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Eee-hq-wm9" firstAttribute="top" secondItem="YeP-ly-nAd" secondAttribute="top" id="A4R-66-J5H"/>
+                                    <constraint firstAttribute="trailing" secondItem="Eee-hq-wm9" secondAttribute="trailing" id="YzV-3P-ZBg"/>
+                                    <constraint firstItem="Eee-hq-wm9" firstAttribute="width" secondItem="YeP-ly-nAd" secondAttribute="width" id="bnT-d1-TT5"/>
+                                    <constraint firstAttribute="bottom" secondItem="Eee-hq-wm9" secondAttribute="bottom" id="sCN-x9-6Ln"/>
+                                    <constraint firstItem="Eee-hq-wm9" firstAttribute="leading" secondItem="YeP-ly-nAd" secondAttribute="leading" id="x9F-wz-V6i"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="YeP-ly-nAd" secondAttribute="trailing" id="9Zt-PV-dfh"/>
+                            <constraint firstItem="Sc5-Lj-D8n" firstAttribute="bottom" secondItem="YeP-ly-nAd" secondAttribute="bottom" id="GZM-pp-1Tp"/>
+                            <constraint firstItem="YeP-ly-nAd" firstAttribute="top" secondItem="Sc5-Lj-D8n" secondAttribute="top" id="Tht-AN-Lfq"/>
+                            <constraint firstItem="YeP-ly-nAd" firstAttribute="leading" secondItem="ftb-sJ-jis" secondAttribute="leading" id="Vd2-VX-Fup"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Sc5-Lj-D8n"/>
+                    </view>
+                    <connections>
+                        <outlet property="termsLabel" destination="QXI-q2-Scb" id="B3q-aQ-RBV"/>
+                        <outlet property="termsTitleLabel" destination="qiC-Mk-gRO" id="dzP-53-K5M"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rB3-3S-JRf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2445" y="-2903"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YDM-pU-cja">
@@ -700,10 +778,10 @@ You will not be charged during this process.</string>
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qfZ-sq-7xA">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="450.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="484.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hTy-4A-jv9">
-                                                <rect key="frame" x="27" y="29" width="266" height="421.5"/>
+                                                <rect key="frame" x="27" y="29" width="266" height="455.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a VPN plan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPa-uO-IxH">
                                                         <rect key="frame" x="67" y="0.0" width="132" height="19.5"/>
@@ -851,7 +929,7 @@ You will not be charged during this process.</string>
                                                         </connections>
                                                     </collectionView>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="&lt;Agreement&gt;" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KyF-30-stz">
-                                                        <rect key="frame" x="0.0" y="388.5" width="266" height="33"/>
+                                                        <rect key="frame" x="0.0" y="422.5" width="266" height="33"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -869,6 +947,13 @@ You will not be charged during this process.</string>
                                                             <segue destination="bWG-QF-Zd5" kind="show" identifier="ConfirmPurchaseVPNPlanSegue" id="WeP-PD-hnE"/>
                                                         </connections>
                                                     </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufe-qR-UTP" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="388.5" width="266" height="34"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <connections>
+                                                            <segue destination="DNR-EE-WLm" kind="show" identifier="ShowTermsAndConditionsSegue" id="CDj-e6-Sb9"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -876,14 +961,17 @@ You will not be charged during this process.</string>
                                                     <constraint firstItem="1AP-NP-8y0" firstAttribute="top" secondItem="Peu-Da-gWl" secondAttribute="bottom" constant="33" id="3L3-SU-nCw"/>
                                                     <constraint firstItem="KyF-30-stz" firstAttribute="leading" secondItem="hTy-4A-jv9" secondAttribute="leading" id="7kA-ah-cv8"/>
                                                     <constraint firstAttribute="trailing" secondItem="1AP-NP-8y0" secondAttribute="trailing" id="ESc-uJ-tfw"/>
-                                                    <constraint firstItem="KyF-30-stz" firstAttribute="top" secondItem="G5a-CO-RKC" secondAttribute="bottom" constant="10" id="FQm-bp-qj9"/>
                                                     <constraint firstItem="Peu-Da-gWl" firstAttribute="centerX" secondItem="hTy-4A-jv9" secondAttribute="centerX" id="QdA-NI-LNZ"/>
                                                     <constraint firstAttribute="trailing" secondItem="G5a-CO-RKC" secondAttribute="trailing" id="U1a-XQ-E6d"/>
                                                     <constraint firstItem="1AP-NP-8y0" firstAttribute="leading" secondItem="hTy-4A-jv9" secondAttribute="leading" id="WTU-4M-U31"/>
+                                                    <constraint firstItem="ufe-qR-UTP" firstAttribute="top" secondItem="G5a-CO-RKC" secondAttribute="bottom" constant="10" id="Xj4-zB-ugF"/>
                                                     <constraint firstAttribute="trailing" secondItem="KyF-30-stz" secondAttribute="trailing" id="ZBr-4g-lGZ"/>
                                                     <constraint firstItem="G5a-CO-RKC" firstAttribute="leading" secondItem="hTy-4A-jv9" secondAttribute="leading" id="ZxJ-o3-ToY"/>
                                                     <constraint firstItem="G5a-CO-RKC" firstAttribute="top" secondItem="1AP-NP-8y0" secondAttribute="bottom" constant="20" id="afu-UC-s1H"/>
+                                                    <constraint firstItem="ufe-qR-UTP" firstAttribute="leading" secondItem="hTy-4A-jv9" secondAttribute="leading" id="e40-X9-bYa"/>
                                                     <constraint firstItem="hPa-uO-IxH" firstAttribute="centerX" secondItem="hTy-4A-jv9" secondAttribute="centerX" id="hF5-2v-dnV"/>
+                                                    <constraint firstItem="KyF-30-stz" firstAttribute="top" secondItem="ufe-qR-UTP" secondAttribute="bottom" id="hRf-aK-IpX"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ufe-qR-UTP" secondAttribute="trailing" id="jOW-X0-BVA"/>
                                                     <constraint firstItem="Peu-Da-gWl" firstAttribute="top" secondItem="hPa-uO-IxH" secondAttribute="bottom" constant="12" id="qnZ-7w-aXv"/>
                                                     <constraint firstItem="hPa-uO-IxH" firstAttribute="top" secondItem="hTy-4A-jv9" secondAttribute="top" id="re9-Hq-JJu"/>
                                                 </constraints>
@@ -935,6 +1023,7 @@ You will not be charged during this process.</string>
                     </view>
                     <connections>
                         <outlet property="buttonPurchase" destination="G5a-CO-RKC" id="FFG-RG-P9O"/>
+                        <outlet property="buttonTrialTerms" destination="ufe-qR-UTP" id="DUM-pm-jf3"/>
                         <outlet property="collectionPlans" destination="1AP-NP-8y0" id="aYE-Vb-ib3"/>
                         <outlet property="labelSubtitle" destination="Peu-Da-gWl" id="uX5-ie-Mp6"/>
                         <outlet property="labelTitle" destination="hPa-uO-IxH" id="roY-Lm-FwR"/>
@@ -1481,6 +1570,7 @@ You will not be charged during this process.</string>
     <inferredMetricsTieBreakers>
         <segue reference="n8s-aK-2Sf"/>
         <segue reference="apR-1h-IYV"/>
-        <segue reference="ids-is-4Dy"/>
+        <segue reference="WeP-PD-hnE"/>
+        <segue reference="CDj-e6-Sb9"/>
     </inferredMetricsTieBreakers>
 </document>

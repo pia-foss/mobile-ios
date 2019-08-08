@@ -14,6 +14,7 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
     @IBOutlet private weak var textAgreement: UITextView!
     @IBOutlet private weak var buttonPurchase: PIAButton!
     @IBOutlet private weak var buttonMorePlans: PIAButton!
+    @IBOutlet private weak var buttonTrialTerms: PIAButton!
 
     @IBOutlet private weak var headerTitleLabel: UILabel!
     @IBOutlet private weak var subtitleLabel: UILabel!
@@ -46,6 +47,8 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        styleButtons()
+
         guard let _ = self.preset else {
             fatalError("Preset not propagated")
         }
@@ -84,7 +87,6 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(productsDidFetch(notification:)), name: .__InAppDidFetchProducts, object: nil)
         
-        styleButtons()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -103,10 +105,6 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
         NotificationCenter.default.removeObserver(self)
     }
     
-    @objc private func back(_ sender: Any?) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == StoryboardSegue.Welcome.confirmPurchaseVPNPlanSegue.rawValue) {
             if let vc = segue.destination as? ConfirmVPNPlanViewController,
@@ -120,6 +118,11 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
             if let vc = segue.destination as? PurchaseViewController {
                 vc.preset = preset
                 vc.completionDelegate = completionDelegate
+            }
+        } else if (segue.identifier == StoryboardSegue.Welcome.showTermsAndConditionsSegue.rawValue) {
+            if let vc = segue.destination as? TermsAndConditionsViewController {
+                vc.termsAndConditionsTitle = L10n.Welcome.Agreement.Trials.title
+                vc.termsAndConditions = L10n.Welcome.Agreement.Trials.message
             }
         }
     }
@@ -209,12 +212,17 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
         buttonMorePlans.setRounded()
         buttonPurchase.style(style: TextStyle.Buttons.piaGreenButton)
         buttonMorePlans.style(style: TextStyle.Buttons.piaPlainTextButton)
+        buttonTrialTerms.style(style: TextStyle.Buttons.piaSmallPlainTextButton)
         buttonPurchase.setTitle("Start subscription".uppercased(),
                                 for: [])
         buttonMorePlans.setTitle("See all available plans",
                                 for: [])
+        buttonTrialTerms.setTitle(L10n.Welcome.Agreement.Trials.title,
+                                 for: [])
         Theme.current.applyTransparentButton(buttonMorePlans,
                                              withSize: 1.0)
+        Theme.current.applyTransparentButton(buttonTrialTerms,
+                                             withSize: 0.0)
     }
     
 }

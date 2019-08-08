@@ -278,6 +278,7 @@
 		DD76292F21ECEC3F0092DF50 /* DataManipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD76292D21ECEC3F0092DF50 /* DataManipulation.swift */; };
 		DD86BAF121EF5B6D004A988F /* UIViewAutolayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD86BAF021EF5B6D004A988F /* UIViewAutolayout.swift */; };
 		DD8BF3CB219C6BAA0041357C /* ConfirmVPNPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8BF3CA219C6BAA0041357C /* ConfirmVPNPlanViewController.swift */; };
+		DDA184D122FC1F79003239CC /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA184D022FC1F79003239CC /* TermsAndConditionsViewController.swift */; };
 		DDA4A7BE21F5C31400A02ACD /* IKEv2Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA4A7BD21F5C31400A02ACD /* IKEv2Profile.swift */; };
 		DDA4A7BF21F5C31B00A02ACD /* IKEv2Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA4A7BD21F5C31400A02ACD /* IKEv2Profile.swift */; };
 		DDC0840D22EB06F400DA2701 /* Invites.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC0840C22EB06F400DA2701 /* Invites.swift */; };
@@ -576,6 +577,7 @@
 		DD76292D21ECEC3F0092DF50 /* DataManipulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManipulation.swift; sourceTree = "<group>"; };
 		DD86BAF021EF5B6D004A988F /* UIViewAutolayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewAutolayout.swift; sourceTree = "<group>"; };
 		DD8BF3CA219C6BAA0041357C /* ConfirmVPNPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmVPNPlanViewController.swift; sourceTree = "<group>"; };
+		DDA184D022FC1F79003239CC /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
 		DDA4A7BD21F5C31400A02ACD /* IKEv2Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IKEv2Profile.swift; sourceTree = "<group>"; };
 		DDC0840C22EB06F400DA2701 /* Invites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Invites.swift; path = "../../../../../../../../../System/Volumes/Data/Users/ueshiba/Projects/PIA/client-library-apple/PIALibrary/Sources/Core/WebServices/Invites.swift"; sourceTree = "<group>"; };
 		DDC0840F22EB077400DA2701 /* InvitesInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InvitesInformation.swift; path = "../../../../../../../../../System/Volumes/Data/Users/ueshiba/Projects/PIA/client-library-apple/PIALibrary/Sources/Core/WebServices/InvitesInformation.swift"; sourceTree = "<group>"; };
@@ -1142,6 +1144,7 @@
 				0EB8C0531F9CD38A005857E4 /* PIAWelcomeViewController.swift */,
 				0EB8C0551F9CD38A005857E4 /* PurchaseViewController.swift */,
 				DDE93C5622F9847E0054FE28 /* PurchaseTrialViewController.swift */,
+				DDA184D022FC1F79003239CC /* TermsAndConditionsViewController.swift */,
 				DD0DE84F22366090002A6E82 /* GDPRViewController.swift */,
 				0EA8072320A18C6B0033EC1A /* RedeemViewController.swift */,
 				84D5DA6F2126CE2900F753F8 /* QRCameraScannerViewController.swift */,
@@ -1804,6 +1807,7 @@
 				0EE78AEE1F818720002E4CDD /* LibraryCallback.swift in Sources */,
 				0E53A8561FE5D770000C2A18 /* MockWebServices.swift in Sources */,
 				DDC0841322EB07FB00DA2701 /* GlossInvitesInformation.swift in Sources */,
+				DDA184D122FC1F79003239CC /* TermsAndConditionsViewController.swift in Sources */,
 				0E392D7D1FE2E4C10002160D /* MemoryStore.swift in Sources */,
 				0E9D62DD1FDEE45A009A90CF /* DefaultServerProvider.swift in Sources */,
 				0EB3D9881FF06F37005B11F4 /* NetworkExtensionProfile.swift in Sources */,
