@@ -119,11 +119,6 @@ class Bootstrapper {
                         }
                     }
                 }
-                
-                //If either of these fields are true for a given subscription, the user is not eligible for an introductory offer on that subscription product or any other products within the same subscription group.
-                if info.isInIntroOfferPeriod || info.isTrialPeriod {
-                    Client.configuration.eligibleForTrial = false
-                }
 
             }
 
