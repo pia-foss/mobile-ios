@@ -51,7 +51,11 @@ extension Client {
      Uses a mock in-app provider for testing purchases.
      */
     public static func useMockInAppProvider() {
-        store = MockInAppProvider()
+        store = MockInAppProvider(with: Data())
+    }
+    
+    public static func useMockInAppProviderWithoutReceipt() {
+        store = MockInAppProvider(with: nil)
     }
     #endif
 }

@@ -29,14 +29,14 @@ class ProductTests: XCTestCase {
 
     func testMockProductIdentifiers() {
         let expUpdate = expectation(description: "productIdentifiers")
-        mock.accountProvider.updatePlanProductIdentifiers { products, error in
+        mock.accountProvider.subscriptionInformation { subscriptionInfo, error in
             if let _ = error {
                 print("error found: \(error!)")
                 expUpdate.fulfill()
                 XCTAssert(false)
                 return
             }
-            guard let _ = products else {
+            guard let _ = subscriptionInfo else {
                 print("testMockProductIdentifiers: \(error!)")
                 expUpdate.fulfill()
                 XCTAssert(false)
@@ -47,11 +47,58 @@ class ProductTests: XCTestCase {
         waitForExpectations(timeout: 5.0, handler: nil)
         
     }
+    
+    func testMockTrialsUserNotEligible() {
+        let expUpdate = expectation(description: "trials")
+        mock.accountProvider.subscriptionInformation { subscriptionInfo, error in
+            if let _ = error {
+                print("error found: \(error!)")
+                expUpdate.fulfill()
+                XCTAssert(false)
+                return
+            }
+            guard let _ = subscriptionInfo else {
+                print("testMockTrials: \(error!)")
+                expUpdate.fulfill()
+                XCTAssert(false)
+                return
+            }
+            XCTAssertFalse(Client.configuration.eligibleForTrial)
+            expUpdate.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5.0, handler: nil)
+        
+    }
 
+    func testMockTrialsUserEligible() {
+        Client.useMockInAppProviderWithoutReceipt()
+        let expUpdate = expectation(description: "trials")
+        mock.accountProvider.subscriptionInformation { subscriptionInfo, error in
+            if let _ = error {
+                print("error found: \(error!)")
+                expUpdate.fulfill()
+                XCTAssert(false)
+                return
+            }
+            guard let _ = subscriptionInfo else {
+                print("testMockTrials: \(error!)")
+                expUpdate.fulfill()
+                XCTAssert(false)
+                return
+            }
+            XCTAssertTrue(Client.configuration.eligibleForTrial)
+            expUpdate.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5.0, handler: nil)
+        
+    }
+    
     private func __testRetrieveSubscriptionPlans(webServices: PIAWebServices) {
         let exp = expectation(description: "subscription.plans")
         
-        webServices.planProductIdentifiers({ products, error in
+        webServices.subscriptionInformation(with: nil) { subscriptionInfo, error in
             
             if let _ = error {
                 print("Request error: \(error!)")
@@ -60,11 +107,11 @@ class ProductTests: XCTestCase {
                 return
             }
             
-            if let products = products,
-                products.count > 0 {
-                XCTAssertEqual(products.count, self.subscriptionProductIds.count)
-                XCTAssertEqual(products.first!.identifier, self.subscriptionProductIds.first!)
-                XCTAssertEqual(products.last!.identifier, self.subscriptionProductIds.last!)
+            if let subscriptionInfo = subscriptionInfo,
+                subscriptionInfo.products.count > 0 {
+                XCTAssertEqual(subscriptionInfo.products.count, self.subscriptionProductIds.count)
+                XCTAssertEqual(subscriptionInfo.products.first!.identifier, self.subscriptionProductIds.first!)
+                XCTAssertEqual(subscriptionInfo.products.last!.identifier, self.subscriptionProductIds.last!)
                 exp.fulfill()
             } else {
                 XCTAssert(error as? ClientError != ClientError.malformedResponseData, "malformedResponseData")
@@ -72,7 +119,7 @@ class ProductTests: XCTestCase {
                 exp.fulfill()
             }
             
-        })
+        }
         waitForExpectations(timeout: 5.0, handler: nil)
         
     }
