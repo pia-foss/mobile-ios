@@ -74,7 +74,7 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
         devicesImageView.image = Asset.computerIcon.image.withRenderingMode(.alwaysTemplate)
         
         serversTitleLabel.text = "Connect to any region easily"
-        serversSubtitleLabel.text = "More than 33 servers in 32 countries"
+        serversSubtitleLabel.text = "More than 3300 servers in 32 countries"
         serversImageView.image = Asset.globeIcon.image.withRenderingMode(.alwaysTemplate)
         
         textAgreement.attributedText = Theme.current.agreementText(
