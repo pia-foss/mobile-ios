@@ -31,9 +31,13 @@ private class MockTransaction: InAppTransaction {
 }
 
 class MockInAppProvider: InAppProvider, ConfigurationAccess {
+    
+    init(with receipt: Data? = Data()) {
+        self.paymentReceipt = receipt
+    }
     var availableProducts: [InAppProduct]?
 
-    var paymentReceipt: Data? = Data()
+    var paymentReceipt: Data?
     
     var hasUncreditedTransactions: Bool {
         return false

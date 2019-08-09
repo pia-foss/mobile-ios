@@ -14,7 +14,11 @@ class MockWebServices: WebServices {
     var accountInfo: (() -> AccountInfo)?
     
     var invitesInformation: (() -> InvitesInformation)?
-    
+
+    var appstoreInformationEligible: (() -> AppStoreInformation)?
+
+    var appstoreInformationNotEligible: (() -> AppStoreInformation)?
+
     var serversBundle: (() -> ServersBundle)?
     
     func token(credentials: Credentials, _ callback: ((String?, Error?) -> Void)?) {
@@ -68,13 +72,22 @@ class MockWebServices: WebServices {
     }
     
     func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?) {
-        let appstoreInfo = AppStoreInformation(products: [Product(identifier: "com.product.monthly",
-                                                                  plan: .monthly,
-                                                                  price: "3.99",
-                                                                  legacy: false)],
-                                               isInIntroOfferPeriod: false,
-                                               isTrialPeriod: false)
-        callback?(appstoreInfo, nil)
+        let result = { () -> AppStoreInformation? in
+            if let _ = receipt {
+                return self.appstoreInformationNotEligible?()
+            } else {
+                return self.appstoreInformationEligible?()
+            }
+        }
+        
+        if result()!.isInIntroOfferPeriod || result()!.isTrialPeriod {
+            Client.configuration.eligibleForTrial = false
+        } else {
+            Client.configuration.eligibleForTrial = true
+        }
+
+        callback?(result(), nil)
+
     }
     
     func invitesInformation(_ callback: LibraryCallback<InvitesInformation>?) {
