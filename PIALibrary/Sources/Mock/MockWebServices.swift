@@ -85,6 +85,8 @@ class MockWebServices: WebServices {
         } else {
             Client.configuration.eligibleForTrial = true
         }
+        
+        Client.configuration.eligibleForTrial = result()!.trialsEnabled
 
         callback?(result(), nil)
 

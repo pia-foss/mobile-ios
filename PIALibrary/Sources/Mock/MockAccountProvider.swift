@@ -109,7 +109,8 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
                                                           price: "3.99",
                                                           legacy: false)],
                                        isInIntroOfferPeriod: false,
-                                       isTrialPeriod: false)
+                                       isTrialPeriod: false,
+                                       trialsEnabled: true)
         }
         webServices.appstoreInformationNotEligible = {
             return AppStoreInformation(products: [Product(identifier: "com.product.monthly",
@@ -117,7 +118,8 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
                                                           price: "3.99",
                                                           legacy: false)],
                                        isInIntroOfferPeriod: true,
-                                       isTrialPeriod: false)
+                                       isTrialPeriod: false,
+                                       trialsEnabled: true)
         }
     }
     
