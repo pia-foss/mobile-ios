@@ -242,15 +242,12 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                     callback?(nil, error)
                     return
                 }
-                
-                guard let receipt =  json["receipt"] as? [String: Any] else {
-                    callback?(nil, error)
-                    return
-                }
+
+                let trialsEnabled = json["trial_enabled"] as? Bool ?? false
+                let receipt =  json["receipt"] as? [String: Any] ?? [:]
                 
                 let isIntroOffer = receipt["is_in_intro_offer_period"] as? Bool ?? false
                 let isTrialPeriod = receipt["is_trial_period"] as? Bool ?? false
-                let trialsEnabled = json["trials_enabled"] as? Bool ?? false
                 
                 let info = AppStoreInformation(products: products,
                                     isInIntroOfferPeriod: isIntroOffer,
@@ -263,8 +260,8 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                     Client.configuration.eligibleForTrial = true
                 }
                 
-                //Backend can disable the trials
-                Client.configuration.eligibleForTrial = trialsEnabled
+                //Backend can disable the trials and override the previous value
+                Client.configuration.eligibleForTrial = info.trialsEnabled
                 
                 callback?(info, nil)
             } else {
