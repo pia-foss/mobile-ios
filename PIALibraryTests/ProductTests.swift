@@ -95,6 +95,31 @@ class ProductTests: XCTestCase {
         
     }
     
+    func testMockTrialsUserEligibleButTrialsDisabledOnBackend() {
+        Client.useMockInAppProviderWithReceipt()
+        let expUpdate = expectation(description: "trials_disabled_from_backend")
+        mock.accountProvider.subscriptionInformation { subscriptionInfo, error in
+            if let _ = error {
+                print("error found: \(error!)")
+                expUpdate.fulfill()
+                XCTAssert(false)
+                return
+            }
+            guard let _ = subscriptionInfo else {
+                print("testMockTrials: \(error!)")
+                expUpdate.fulfill()
+                XCTAssert(false)
+                return
+            }
+            XCTAssertFalse(Client.configuration.eligibleForTrial)
+            expUpdate.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5.0, handler: nil)
+        
+
+    }
+    
     private func __testRetrieveSubscriptionPlans(webServices: PIAWebServices) {
         let exp = expectation(description: "subscription.plans")
         
