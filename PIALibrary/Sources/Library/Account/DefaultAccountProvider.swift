@@ -347,6 +347,10 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
 //                callback?(uncredited, nil)
 //                return
 //            }
+            if !Client.configuration.arePurchasesAvailable() {
+                callback?(nil, ClientError.invalidEnvironment)
+                return
+            }
 
             self.accessedStore.purchaseProduct(product) { (transaction, error) in
                 guard let transaction = transaction else {
@@ -359,6 +363,12 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
     }
     
     func restorePurchases(_ callback: SuccessLibraryCallback?) {
+        
+        if !Client.configuration.arePurchasesAvailable() {
+            callback?(ClientError.invalidEnvironment)
+            return
+        }
+
         accessedStore.refreshPaymentReceipt(callback)
     }
 
@@ -513,6 +523,11 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
         guard let payment = request.payment(withStore: accessedStore) else {
             callback?(nil, ClientError.noReceipt)
+            return
+        }
+        
+        if !Client.configuration.arePurchasesAvailable() {
+            callback?(nil, ClientError.invalidEnvironment)
             return
         }
 

@@ -85,7 +85,7 @@ public class RestoreSignupViewController: AutolayoutViewController, BrandableNav
             vc.metadata = metadata
             vc.preset = preset
             vc.signupRequest = SignupRequest(email: email)
-            
+            vc.completionDelegate = completionDelegate
         }
     }
     
