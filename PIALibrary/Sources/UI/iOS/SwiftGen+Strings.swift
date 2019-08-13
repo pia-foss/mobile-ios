@@ -22,7 +22,7 @@ internal enum L10n {
       /// Sign-up failed
       internal static let vcTitle = L10n.tr("Signup", "failure.vc_title")
       internal enum Environment {
-        /// Purchases are not available in Beta builds
+        /// Your have a sandbox receipt. Purchases with sandbox receipts are not available in Beta or Production builds.
         internal static let message = L10n.tr("Signup", "failure.environment.message")
         /// Invalid environment
         internal static let title = L10n.tr("Signup", "failure.environment.title")

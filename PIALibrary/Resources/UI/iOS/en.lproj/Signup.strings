@@ -22,7 +22,7 @@
 "failure.title" = "Account creation failed";
 "failure.message" = "We're unable to create an account at this time. Please try again later. Reopening the app will re-attempt to create an account.";
 "failure.environment.title" = "Invalid environment";
-"failure.environment.message" = "Your have a sandbox receipt. Purchases are not available in Beta builds";
+"failure.environment.message" = "Your have a sandbox receipt. Purchases with sandbox receipts are not available in Beta or Production builds.";
 "failure.redeem.invalid.title" = "Invalid card PIN";
 "failure.redeem.invalid.message" = "Looks like you entered an invalid card PIN. Please try again.";
 "failure.redeem.claimed.title" = "Card claimed already";
