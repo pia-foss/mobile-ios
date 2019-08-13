@@ -35,7 +35,10 @@ public class SignupFailureViewController: AutolayoutViewController, BrandableNav
                 labelTitle.text = L10n.Signup.Failure.Redeem.Invalid.title
                 labelMessage.text = L10n.Signup.Failure.Redeem.Invalid.message
                 break
-                
+            case .invalidEnvironment:
+                labelTitle.text = L10n.Signup.Failure.Environment.title
+                labelMessage.text = L10n.Signup.Failure.Environment.message
+                break
             case .redeemClaimed:
                 title = L10n.Welcome.Redeem.title
                 imvPicture.image = Asset.imageRedeemClaimed.image
