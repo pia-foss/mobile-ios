@@ -427,6 +427,10 @@ internal enum L10n {
     internal enum Failure {
       /// Your purchase receipt couldn't be submitted, please retry at a later time.
       internal static let message = L10n.tr("Localizable", "renewal.failure.message")
+      internal enum Receipt {
+        /// Your have a sandbox receipt. Renewals are not available in Beta builds
+        internal static let message = L10n.tr("Localizable", "renewal.failure.receipt.message")
+      }
     }
     internal enum Success {
       /// Your account was successfully renewed.

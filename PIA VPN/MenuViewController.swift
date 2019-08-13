@@ -288,8 +288,11 @@ class MenuViewController: AutolayoutViewController {
 
         let alert = Macros.alert(
             L10n.Global.error,
-            L10n.Renewal.Failure.message
+            error as? ClientError == ClientError.invalidEnvironment ?
+                L10n.Renewal.Failure.Receipt.message :
+                L10n.Renewal.Failure.message
         )
+        
         alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
