@@ -290,6 +290,19 @@ extension Client {
             return availableVPNProfiles.first { $0.vpnType == type }
         }
         
+        /**
+        Returns true if the purchase feature is available
+         - Returns: A boolean indicating if purchases are available.
+        */
+        public func arePurchasesAvailable() -> Bool {
+            if let url = Bundle.main.appStoreReceiptURL,
+                url.lastPathComponent == "sandboxReceipt",
+                Client.environment == .production {
+                return false
+            }
+            return true
+        }
+        
         #if os(iOS)
         
         // MARK: InApp
