@@ -56,7 +56,7 @@ end
 def shared_main_pods
     pod 'AlamofireImage'
     #library_by_path('')
-    library_by_git('a071364')
+    library_by_git('7cd787b')
     #library_by_version('~> 1.1.3')
 end
 
