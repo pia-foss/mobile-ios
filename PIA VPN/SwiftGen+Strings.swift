@@ -428,7 +428,7 @@ internal enum L10n {
       /// Your purchase receipt couldn't be submitted, please retry at a later time.
       internal static let message = L10n.tr("Localizable", "renewal.failure.message")
       internal enum Receipt {
-        /// Your have a sandbox receipt. Renewals are not available in Beta builds
+        /// Your have a sandbox receipt. Renewals with sandbox receipts are not available in Beta or Production builds.
         internal static let message = L10n.tr("Localizable", "renewal.failure.receipt.message")
       }
     }
