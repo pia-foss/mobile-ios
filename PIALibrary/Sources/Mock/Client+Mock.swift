@@ -57,5 +57,9 @@ extension Client {
     public static func useMockInAppProviderWithoutReceipt() {
         store = MockInAppProvider(with: nil)
     }
+    
+    public static func useMockInAppProviderWithReceipt() {
+        store = MockInAppProvider(with: "abcdefg".data(using: .utf8))
+    }
     #endif
 }

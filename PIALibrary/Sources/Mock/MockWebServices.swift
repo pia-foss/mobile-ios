@@ -19,6 +19,8 @@ class MockWebServices: WebServices {
 
     var appstoreInformationNotEligible: (() -> AppStoreInformation)?
 
+    var appstoreInformationEligibleButDisabledFromBackend: (() -> AppStoreInformation)?
+
     var serversBundle: (() -> ServersBundle)?
     
     func token(credentials: Credentials, _ callback: ((String?, Error?) -> Void)?) {
@@ -73,8 +75,12 @@ class MockWebServices: WebServices {
     
     func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?) {
         let result = { () -> AppStoreInformation? in
-            if let _ = receipt {
-                return self.appstoreInformationNotEligible?()
+            if let receipt = receipt {
+                if receipt.count == 0 {
+                    return self.appstoreInformationNotEligible?()
+                } else {
+                    return self.appstoreInformationEligibleButDisabledFromBackend?()
+                }
             } else {
                 return self.appstoreInformationEligible?()
             }
@@ -85,6 +91,8 @@ class MockWebServices: WebServices {
         } else {
             Client.configuration.eligibleForTrial = true
         }
+        
+        Client.configuration.eligibleForTrial = result()!.trialsEnabled
 
         callback?(result(), nil)
 

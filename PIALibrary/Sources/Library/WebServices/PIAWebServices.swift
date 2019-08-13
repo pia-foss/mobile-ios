@@ -237,21 +237,32 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             }
             
             if let availableJSONProducts =  json["available_products"] as? [JSON] {
+
                 guard let products = [Product].from(jsonArray: availableJSONProducts) else {
                     callback?(nil, error)
                     return
                 }
-                let isIntroOffer = json["is_in_intro_offer_period"] as? Bool ?? false
-                let isTrialPeriod = json["is_trial_period"] as? Bool ?? false
+
+                let trialsEnabled = json["trial_enabled"] as? Bool ?? false
+                let receipt =  json["receipt"] as? [String: Any] ?? [:]
+                
+                let isIntroOffer = receipt["is_in_intro_offer_period"] as? Bool ?? false
+                let isTrialPeriod = receipt["is_trial_period"] as? Bool ?? false
+                
                 let info = AppStoreInformation(products: products,
                                     isInIntroOfferPeriod: isIntroOffer,
-                                    isTrialPeriod: isTrialPeriod)
+                                    isTrialPeriod: isTrialPeriod,
+                                    trialsEnabled: trialsEnabled)
                 //If either of these fields are true for a given subscription, the user is not eligible for an introductory offer on that subscription product or any other products within the same subscription group.
                 if info.isInIntroOfferPeriod || info.isTrialPeriod {
                     Client.configuration.eligibleForTrial = false
                 } else {
                     Client.configuration.eligibleForTrial = true
                 }
+                
+                //Backend can disable the trials and override the previous value
+                Client.configuration.eligibleForTrial = info.trialsEnabled
+                
                 callback?(info, nil)
             } else {
                 callback?(nil, error)
