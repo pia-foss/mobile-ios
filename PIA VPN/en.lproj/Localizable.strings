@@ -56,7 +56,6 @@
 "renewal.success.title" = "Thank you";
 "renewal.success.message" = "Your account was successfully renewed.";
 "renewal.failure.message" = "Your purchase receipt couldn't be submitted, please retry at a later time.";
-"renewal.failure.receipt.message" = "Your have a sandbox receipt. Renewals with sandbox receipts are not available in Beta or Production builds.";
 
 // MENU
 "menu.accessibility.edit.tile" = "Edit";
