@@ -297,7 +297,7 @@ extension Client {
         public func arePurchasesAvailable() -> Bool {
             if let url = Bundle.main.appStoreReceiptURL,
                 url.lastPathComponent == "sandboxReceipt",
-                !isDevelopment {
+                Client.environment == .production {
                 return false
             }
             return true

@@ -60,7 +60,5 @@ public enum ClientError: String, Error {
     /// Invalid parameter
     case invalidParameter
     
-    /// Invalid environment
-    case invalidEnvironment
     #endif
 }

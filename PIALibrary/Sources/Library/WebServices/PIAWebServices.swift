@@ -93,11 +93,6 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             400: .badReceipt
         ]
     
-        if !Client.configuration.arePurchasesAvailable() {
-            callback?(nil, ClientError.invalidEnvironment)
-            return
-        }
-
         req(nil, .post, endpoint, parameters, status, JSONRequestExecutor() { (json, status, error) in
             if let knownError = self.knownError(endpoint, status, errors) {
                 callback?(nil, knownError)
@@ -165,11 +160,6 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             400: .badReceipt
         ]
         
-        if !Client.configuration.arePurchasesAvailable() {
-            callback?(ClientError.invalidEnvironment)
-            return
-        }
-
         req(credentials, .post, endpoint, parameters, status, JSONRequestExecutor() { (json, status, error) in
             if let knownError = self.knownError(endpoint, status, errors) {
                 callback?(knownError)

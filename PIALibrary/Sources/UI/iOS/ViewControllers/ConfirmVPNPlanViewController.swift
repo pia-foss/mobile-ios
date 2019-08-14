@@ -161,9 +161,6 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
                 if let error = error {
                     var message = error.localizedDescription
                     log.error("Purchase failed (error: \(error))")
-                    if error as? ClientError == ClientError.invalidEnvironment {
-                        message = L10n.Signup.Failure.Environment.message
-                    }
                     Macros.displayImageNote(withImage: Asset.iconWarning.image,
                                             message: message)
                 } else {
