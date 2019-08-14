@@ -21,12 +21,6 @@ internal enum L10n {
       internal static let title = L10n.tr("Signup", "failure.title")
       /// Sign-up failed
       internal static let vcTitle = L10n.tr("Signup", "failure.vc_title")
-      internal enum Environment {
-        /// Your have a sandbox receipt. Purchases with sandbox receipts are not available in Beta or Production builds.
-        internal static let message = L10n.tr("Signup", "failure.environment.message")
-        /// Invalid environment
-        internal static let title = L10n.tr("Signup", "failure.environment.title")
-      }
       internal enum Redeem {
         internal enum Claimed {
           /// Looks like this card has already been claimed by another account. You can try entering a different PIN.

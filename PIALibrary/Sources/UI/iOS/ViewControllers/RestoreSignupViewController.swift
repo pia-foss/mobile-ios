@@ -136,9 +136,6 @@ public class RestoreSignupViewController: AutolayoutViewController, BrandableNav
     private func reportRestoreFailure(_ optionalError: Error?) {
         var message = optionalError?.localizedDescription ?? L10n.Welcome.Iap.Error.title
         if let error = optionalError {
-            if error as? ClientError == ClientError.invalidEnvironment {
-                message = L10n.Signup.Failure.Environment.message
-            }
             log.error("Failed to restore payment receipt (error: \(error))")
         } else {
             log.error("Failed to restore payment receipt")

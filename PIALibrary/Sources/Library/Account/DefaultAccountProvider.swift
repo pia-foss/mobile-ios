@@ -347,11 +347,6 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
 //                callback?(uncredited, nil)
 //                return
 //            }
-            if !Client.configuration.arePurchasesAvailable() {
-                callback?(nil, ClientError.invalidEnvironment)
-                return
-            }
-
             self.accessedStore.purchaseProduct(product) { (transaction, error) in
                 guard let transaction = transaction else {
                     callback?(nil, error)
@@ -363,12 +358,6 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
     }
     
     func restorePurchases(_ callback: SuccessLibraryCallback?) {
-        
-        if !Client.configuration.arePurchasesAvailable() {
-            callback?(ClientError.invalidEnvironment)
-            return
-        }
-
         accessedStore.refreshPaymentReceipt(callback)
     }
 
@@ -389,12 +378,19 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 return
             }
             guard let credentials = credentials else {
+                // If bad Receipt and purchases are not available, remove and clean the transaction from the queue
+                if error as? ClientError == .badReceipt,
+                    let transaction = request.transaction,
+                    !Client.configuration.arePurchasesAvailable() {
+                    self.accessedStore.finishTransaction(transaction, success: false)
+                }
                 callback?(nil, error)
                 return
             }
             if let transaction = request.transaction {
                 self.accessedStore.finishTransaction(transaction, success: true)
             }
+            
             self.accessedDatabase.plain.lastSignupEmail = nil
             self.accessedDatabase.secure.setPublicUsername(credentials.username)
             self.accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
@@ -525,17 +521,19 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             callback?(nil, ClientError.noReceipt)
             return
         }
-        
-        if !Client.configuration.arePurchasesAvailable() {
-            callback?(nil, ClientError.invalidEnvironment)
-            return
-        }
 
         webServices.processPayment(credentials: user.credentials, request: payment) { (error) in
-            if let _ = error {
+            if let error = error {
+                // If bad Receipt and purchases are not available, remove and clean the transaction from the queue
+                if error as? ClientError == .badReceipt,
+                    let transaction = request.transaction,
+                    !Client.configuration.arePurchasesAvailable() {
+                    self.accessedStore.finishTransaction(transaction, success: false)
+                }
                 callback?(nil, error)
                 return
             }
+            
             if let transaction = request.transaction {
                 self.accessedStore.finishTransaction(transaction, success: true)
             }
