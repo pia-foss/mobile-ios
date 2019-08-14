@@ -372,7 +372,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
 
         accessedDatabase.plain.lastSignupEmail = request.email
 
-        webServices.signup(with: signup) { (credentials, error) in
+        webServices.signup(with: signup) { [weak self] (credentials, error) in
             if let urlError = error as? URLError, (urlError.code == .notConnectedToInternet) {
                 callback?(nil, ClientError.internetUnreachable)
                 return
@@ -380,39 +380,42 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             guard let credentials = credentials else {
                 // If bad Receipt and purchases are not available, remove and clean the transaction from the queue
                 if error as? ClientError == .badReceipt,
-                    let transaction = request.transaction,
                     !Client.configuration.arePurchasesAvailable() {
-                    self.accessedStore.finishTransaction(transaction, success: false)
+                    self?.finishTransactions(successfully: false)
                 }
                 callback?(nil, error)
                 return
             }
             if let transaction = request.transaction {
-                self.accessedStore.finishTransaction(transaction, success: true)
+                // Transaction is a new purchase
+                self?.accessedStore.finishTransaction(transaction, success: true)
+            } else {
+                // Transaction has been recovered
+                self?.finishTransactions(successfully: true)
             }
             
-            self.accessedDatabase.plain.lastSignupEmail = nil
-            self.accessedDatabase.secure.setPublicUsername(credentials.username)
-            self.accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
+            self?.accessedDatabase.plain.lastSignupEmail = nil
+            self?.accessedDatabase.secure.setPublicUsername(credentials.username)
+            self?.accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
 
-            self.webServices.token(credentials: credentials) { (token, error) in
+            self?.webServices.token(credentials: credentials) { [weak self] (token, error) in
                 
                 guard let token = token else {
                     callback?(nil, error)
                     return
                 }
                 
-                self.updateDatabaseWith(token,
+                self?.updateDatabaseWith(token,
                                         andUsername: credentials.username)
                 
-                self.webServices.info(token: token) { (accountInfo, error) in
+                self?.webServices.info(token: token) { [weak self] (accountInfo, error) in
                     guard let accountInfo = accountInfo else {
                         callback?(nil, error)
                         return
                     }
                     
                     //Save after confirm the login was successful.
-                    self.accessedDatabase.plain.accountInfo = accountInfo
+                    self?.accessedDatabase.plain.accountInfo = accountInfo
                     
                     let user = UserAccount(credentials: credentials, info: nil)
                     Macros.postNotification(.PIAAccountDidSignup, [
@@ -423,6 +426,16 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 
             }
 
+        }
+    }
+    
+    private func finishTransactions(successfully: Bool) {
+        if let products = self.accessedStore.availableProducts {
+            for product in products {
+                if let transaction = self.accessedStore.uncreditedTransaction(for: product) {
+                    self.accessedStore.finishTransaction(transaction, success: successfully)
+                }
+            }
         }
     }
 
@@ -522,29 +535,29 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             return
         }
 
-        webServices.processPayment(credentials: user.credentials, request: payment) { (error) in
+        webServices.processPayment(credentials: user.credentials, request: payment) { [weak self] (error) in
             if let error = error {
                 // If bad Receipt and purchases are not available, remove and clean the transaction from the queue
                 if error as? ClientError == .badReceipt,
                     let transaction = request.transaction,
                     !Client.configuration.arePurchasesAvailable() {
-                    self.accessedStore.finishTransaction(transaction, success: false)
+                    self?.finishTransactions(successfully: false)
                 }
                 callback?(nil, error)
                 return
             }
             
             if let transaction = request.transaction {
-                self.accessedStore.finishTransaction(transaction, success: true)
+                self?.accessedStore.finishTransaction(transaction, success: true)
             }
             Macros.postNotification(.PIAAccountDidRenew)
 
-            self.webServices.info(token: token) { (accountInfo, error) in
+            self?.webServices.info(token: token) { [weak self] (accountInfo, error) in
                 guard let newAccountInfo = accountInfo else {
                     callback?(nil, nil)
                     return
                 }
-                self.accessedDatabase.plain.accountInfo = newAccountInfo
+                self?.accessedDatabase.plain.accountInfo = newAccountInfo
                 
                 let user = UserAccount(credentials: user.credentials, info: newAccountInfo)
                 Macros.postNotification(.PIAAccountDidRefresh, [
