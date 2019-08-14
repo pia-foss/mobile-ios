@@ -84,6 +84,11 @@ class AppStoreProvider: NSObject, InAppProvider {
             log.warning("Purchase in progress")
             return
         }
+        if !Client.configuration.arePurchasesAvailable() {
+            log.warning("Purchases not available in sandbox")
+            callback?(nil, ClientError.sandboxPurchase)
+            return
+        }
         let payment = SKPayment(product: product.native as! SKProduct)
         log.debug("Purchasing product with identifier: \(payment.productIdentifier)")
 

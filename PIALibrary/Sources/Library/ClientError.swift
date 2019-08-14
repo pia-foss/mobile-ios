@@ -60,5 +60,20 @@ public enum ClientError: String, Error {
     /// Invalid parameter
     case invalidParameter
     
+    /// The selected sandbox subscription is not available in production.
+    case sandboxPurchase
+    
     #endif
+}
+
+extension ClientError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .sandboxPurchase:
+            return NSLocalizedString(L10n.Signup.Failure.Purchase.Sandbox.message,
+                                     comment: L10n.Signup.Failure.Purchase.Sandbox.message)
+        default:
+            return nil
+        }
+    }
 }

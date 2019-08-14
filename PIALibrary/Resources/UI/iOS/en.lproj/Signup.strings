@@ -21,6 +21,7 @@
 "failure.vc_title" = "Sign-up failed";
 "failure.title" = "Account creation failed";
 "failure.message" = "We're unable to create an account at this time. Please try again later. Reopening the app will re-attempt to create an account.";
+"failure.purchase.sandbox.message" = "The selected sandbox subscription is not available in production.";
 "failure.redeem.invalid.title" = "Invalid card PIN";
 "failure.redeem.invalid.message" = "Looks like you entered an invalid card PIN. Please try again.";
 "failure.redeem.claimed.title" = "Card claimed already";

@@ -21,6 +21,12 @@ internal enum L10n {
       internal static let title = L10n.tr("Signup", "failure.title")
       /// Sign-up failed
       internal static let vcTitle = L10n.tr("Signup", "failure.vc_title")
+      internal enum Purchase {
+        internal enum Sandbox {
+          /// The selected sandbox subscription is not available in production.
+          internal static let message = L10n.tr("Signup", "failure.purchase.sandbox.message")
+        }
+      }
       internal enum Redeem {
         internal enum Claimed {
           /// Looks like this card has already been claimed by another account. You can try entering a different PIN.
