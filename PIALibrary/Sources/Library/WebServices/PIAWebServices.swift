@@ -222,7 +222,8 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             "type": "subscription"
         ]
         
-        if let receipt = receipt {
+        if let receipt = receipt,
+            Client.configuration.arePurchasesAvailable() {
             parameters["receipt"] = receipt
         }
 
