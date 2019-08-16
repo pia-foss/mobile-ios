@@ -378,12 +378,22 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 return
             }
             guard let credentials = credentials else {
+                if let error = error as? ClientError, error == .badReceipt {
+                    if let products = Client.store.availableProducts {
+                        for product in products {
+                            if let uncreditedTransaction = Client.store.uncreditedTransaction(for: product) {
+                                self.accessedStore.finishTransaction(uncreditedTransaction, success: false)
+                            }
+                        }
+                    }
+                }
                 callback?(nil, error)
                 return
             }
             if let transaction = request.transaction {
                 self.accessedStore.finishTransaction(transaction, success: true)
             }
+            
             self.accessedDatabase.plain.lastSignupEmail = nil
             self.accessedDatabase.secure.setPublicUsername(credentials.username)
             self.accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
