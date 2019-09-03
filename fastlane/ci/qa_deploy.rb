@@ -3,7 +3,7 @@ lane :qa_deploy do
     get_ipa_metadata
     gitlab_issues
     changelog_from_gitlab_issues
-    hockey
+    appcenter_upload
     print_ipa_metadata(
         prefix: "Deployed"
     )

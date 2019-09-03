@@ -11,3 +11,4 @@ if ci_token.nil?
 else
     gem 'fastlane-plugin-pia_tools', git: "https://gitlab-ci-token:#{ci_token}@#{ci_hostname}/mobile/fastlane-plugin-pia_tools.git"
 end
+gem 'fastlane-plugin-appcenter'
