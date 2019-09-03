@@ -39,7 +39,7 @@ class Bootstrapper {
         console.minLevel = .debug
         let hockey = BITHockeyManager.shared()
         hockey.isMetricsManagerDisabled = true
-        hockey.configure(withIdentifier: AppConstants.hockeyAppId)
+        hockey.configure(withIdentifier: AppConstants.appCenterAppId)
         hockey.start()
         
         if let path = Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist"),
