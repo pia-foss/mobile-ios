@@ -85,7 +85,7 @@ end
 target 'PIA VPN dev' do
     app_pods
     #only use the following pods for internal (non-public) builds
-    pod 'HockeySDK'
+    pod 'AppCenter'
     pod 'Firebase/Core'
     pod 'Crashlytics'
     pod 'Fabric'
@@ -97,7 +97,7 @@ end
 
 target 'PIA VPNTests' do
     app_pods
-    pod 'HockeySDK'
+    pod 'AppCenter'
     pod 'Firebase/Core'
     pod 'Crashlytics'
     pod 'Fabric'
