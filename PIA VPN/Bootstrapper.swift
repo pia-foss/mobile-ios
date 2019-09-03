@@ -12,7 +12,9 @@ import PIATunnel
 import SwiftyBeaver
 import iRate
 #if PIA_DEV
-import HockeySDK
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
 import Firebase
 import Fabric
 import Crashlytics
@@ -37,10 +39,10 @@ class Bootstrapper {
         let console = ConsoleDestination()
         #if PIA_DEV
         console.minLevel = .debug
-        let hockey = BITHockeyManager.shared()
-        hockey.isMetricsManagerDisabled = true
-        hockey.configure(withIdentifier: AppConstants.hockeyAppId)
-        hockey.start()
+        
+        MSAppCenter.start(AppConstants.appCenterAppId,
+                        withServices: [MSAnalytics.self,
+                                       MSCrashes.self])
         
         if let path = Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist"),
             let plist = NSDictionary(contentsOf: path) as? [String: Any],

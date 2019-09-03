@@ -14,7 +14,7 @@ struct AppConstants {
 
     static let appGroup = "group.com.privateinternetaccess"
     
-    static let hockeyAppId = "a2397c4240ac48e897e67498f0df0e1a"
+    static let appCenterAppId = "a2397c42-40ac-48e8-97e6-7498f0df0e1a"
     
     struct Flags {
         static var developmentPath = Bundle.main.path(forResource: "Flags-dev", ofType: "plist")

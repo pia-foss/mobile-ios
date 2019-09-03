@@ -2,6 +2,14 @@ PODS:
   - Alamofire (4.8.2)
   - AlamofireImage (3.5.2):
     - Alamofire (~> 4.8)
+  - AppCenter (2.2.0):
+    - AppCenter/Analytics (= 2.2.0)
+    - AppCenter/Crashes (= 2.2.0)
+  - AppCenter/Analytics (2.2.0):
+    - AppCenter/Core
+  - AppCenter/Core (2.2.0)
+  - AppCenter/Crashes (2.2.0):
+    - AppCenter/Core
   - Crashlytics (3.13.4):
     - Fabric (~> 1.10.2)
   - DynamicBlurView (3.0.1)
@@ -54,9 +62,6 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.2.3):
     - GoogleUtilities/Logger
-  - HockeySDK (5.1.4):
-    - HockeySDK/DefaultLib (= 5.1.4)
-  - HockeySDK/DefaultLib (5.1.4)
   - iRate (1.12.2)
   - lottie-ios (3.1.2)
   - nanopb (0.3.901):
@@ -108,12 +113,12 @@ PODS:
 
 DEPENDENCIES:
   - AlamofireImage
+  - AppCenter
   - Crashlytics
   - DZNEmptyDataSet
   - Fabric
   - Firebase/Core
   - FXPageControl
-  - HockeySDK
   - iRate
   - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `2e58526`)
   - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `2e58526`)
@@ -128,6 +133,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireImage
+    - AppCenter
     - Crashlytics
     - DynamicBlurView
     - DZNEmptyDataSet
@@ -140,7 +146,6 @@ SPEC REPOS:
     - Gloss
     - GoogleAppMeasurement
     - GoogleUtilities
-    - HockeySDK
     - iRate
     - lottie-ios
     - nanopb
@@ -172,6 +177,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
+  AppCenter: c809e69d93218b9861b4f8e54ded8dcf4d2131e7
   Crashlytics: 2dfd686bcb918dc10ee0e76f7f853fe42c7bd552
   DynamicBlurView: b1df5415f9bd31897549e5d7077e5ec120a4d636
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
@@ -184,7 +190,6 @@ SPEC CHECKSUMS:
   Gloss: 9df15229b2f6484c14752a738474fd2528b4c5cd
   GoogleAppMeasurement: 183bd916af7f80deb67c01888368f1108d641832
   GoogleUtilities: d2b0e277a95962e09bb27f5cd42f5f0b6a506c7d
-  HockeySDK: 15afe6bc0a5bfe3a531fd73dbf082095f37dac3b
   iRate: 4fc69958788624545e5d050c8ffd20884013c3f1
   lottie-ios: 49cd85b1f24f61a7708ad7ec76a523ab2d0e3100
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
@@ -199,6 +204,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 0fe30723bb89b4dd8aa49b316d575cf0aed3c77d
+PODFILE CHECKSUM: 4ad52ede35013a89dc7480b6accc7fa15704a6f6
 
 COCOAPODS: 1.7.5
