@@ -93,9 +93,9 @@ class AccountViewController: AutolayoutViewController {
         textUsername.isUserInteractionEnabled = false
         canSaveAccount = false
 
-        buttonFriendReferral.setTitle("  Refer a friend  >  ", for: .normal)
-        labelFriendReferralInfo.text = "Refer your friends and family. For every sign up we’ll give you both 30 days free. "
-        labelFriendReferralTitle.text = "REFER A FRIEND. GET 30 DAYS FREE."
+        buttonFriendReferral.setTitle("  \(L10n.Friend.Referrals.title)  >  ", for: .normal)
+        labelFriendReferralInfo.text = L10n.Friend.Referrals.Friends.Family.title
+        labelFriendReferralTitle.text = L10n.Friend.Referrals.Description.short
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(redisplayAccount), name: .PIAAccountDidRefresh, object: nil)
