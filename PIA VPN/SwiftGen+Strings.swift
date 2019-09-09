@@ -179,6 +179,10 @@ internal enum L10n {
           return L10n.tr("Localizable", "friend.referrals.days.number", p1)
         }
       }
+      internal enum Description {
+        /// REFER A FRIEND. GET 30 DAYS FREE.
+        internal static let short = L10n.tr("Localizable", "friend.referrals.description.short")
+      }
       internal enum Email {
         /// Invalid email. Please try again.
         internal static let validation = L10n.tr("Localizable", "friend.referrals.email.validation")
@@ -187,6 +191,12 @@ internal enum L10n {
         internal enum Friends {
           /// Family and Friends Referral Program
           internal static let program = L10n.tr("Localizable", "friend.referrals.family.friends.program")
+        }
+      }
+      internal enum Friends {
+        internal enum Family {
+          /// Refer your friends and family. For every sign up we’ll give you both 30 days free. 
+          internal static let title = L10n.tr("Localizable", "friend.referrals.friends.family.title")
         }
       }
       internal enum Invitation {

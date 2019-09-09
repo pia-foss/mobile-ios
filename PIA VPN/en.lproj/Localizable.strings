@@ -301,3 +301,6 @@
 "friend.referrals.reward.given" = "Reward given";
 "friend.referrals.days.acquired" = "Free days acquired";
 "friend.referrals.days.number" = "%d days";
+
+"friend.referrals.friends.family.title" = "Refer your friends and family. For every sign up we’ll give you both 30 days free. ";
+"friend.referrals.description.short" = "REFER A FRIEND. GET 30 DAYS FREE.";
