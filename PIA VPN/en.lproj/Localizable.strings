@@ -266,8 +266,8 @@
 "tiles.nmt.accessibility.trusted" = "Trusted network";
 "tiles.nmt.accessibility.untrusted" = "Untrusted network";
 "tiles.quicksettings.title" = "Quick settings";
-"tiles.accessibility.visible.tile.action" = "Tap to remove this tile from the dasboard";
-"tiles.accessibility.invisible.tile.action" = "Tap to add this tile to the dasboard";
+"tiles.accessibility.visible.tile.action" = "Tap to remove this tile from the dashboard";
+"tiles.accessibility.invisible.tile.action" = "Tap to add this tile to the dashboard";
 
 //SIRI SHORTCUTS
 "siri.shortcuts.connect.row.title" = "'Connect' Siri Shortcut";

@@ -741,13 +741,13 @@ internal enum L10n {
     internal enum Accessibility {
       internal enum Invisible {
         internal enum Tile {
-          /// Tap to add this tile to the dasboard
+          /// Tap to add this tile to the dashboard
           internal static let action = L10n.tr("Localizable", "tiles.accessibility.invisible.tile.action")
         }
       }
       internal enum Visible {
         internal enum Tile {
-          /// Tap to remove this tile from the dasboard
+          /// Tap to remove this tile from the dashboard
           internal static let action = L10n.tr("Localizable", "tiles.accessibility.visible.tile.action")
         }
       }
