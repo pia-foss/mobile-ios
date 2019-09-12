@@ -19,6 +19,7 @@ public enum IKEv2EncryptionAlgorithm: Int, EnumsBuilder {
     case algorithmAES256
     case algorithmAES128GCM
     case algorithmAES256GCM
+    @available(iOS 13.0, *)
     case algorithmChaCha20Poly1305
     
     public func description() -> String {
@@ -38,3 +39,4 @@ public enum IKEv2EncryptionAlgorithm: Int, EnumsBuilder {
     }
     
 }
+
