@@ -185,11 +185,13 @@ extension CALayer {
 extension UILabel: TextStyling {
     
     public func style(style: TextStyle) {
+        let textAlignment = self.textAlignment
         font = style.font
         textColor = style.color
         if let lineHeight = style.lineHeight {
             setLineHeight(lineHeight)
         }
+        self.textAlignment = textAlignment
     }
     
 }
