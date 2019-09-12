@@ -225,7 +225,8 @@ class DashboardViewController: AutolayoutViewController {
         }
 
         let vc = GetStartedViewController.with(preset: preset, delegate: self)
-        
+        vc.modalPresentationStyle = .fullScreen
+
         if let presented = self.navigationController?.presentedViewController,
             presented != self {
             self.present(vc, animated: true, completion: {

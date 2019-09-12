@@ -82,6 +82,15 @@ class RegionsViewController: AutolayoutViewController {
         navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Region.Accessibility.filter
     }
     
+    override func dismissModal() {
+
+        if searchController.isActive {
+            searchController.searchBar.text = ""
+            searchController.dismiss(animated: false)
+        }
+
+        super.dismissModal()
+    }
     
     private func setupSearchBarController() {
         searchController.searchResultsUpdater = self

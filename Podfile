@@ -56,7 +56,7 @@ end
 def shared_main_pods
     pod 'AlamofireImage'
     #library_by_path('')
-    library_by_git('f709f06')
+    library_by_git('5ef7920')
     #library_by_version('~> 1.1.3')
 end
 
@@ -64,7 +64,7 @@ def app_pods
     shared_main_pods
     pod 'iRate'
     pod 'TPKeyboardAvoiding'
-    pod 'SideMenu', '= 3.1.5'
+    pod 'SideMenu', '~> 6.0'
     pod 'FXPageControl'
     pod 'DZNEmptyDataSet'
     pod 'PopupDialog'
@@ -110,7 +110,7 @@ post_install do |installer|
                 config.build_settings['SWIFT_VERSION'] = '4.2'
             end
         end
-        if ['SwiftEntryKit', 'QuickLayout', 'SideMenu'].include? target.name
+        if ['SwiftEntryKit', 'QuickLayout'].include? target.name
             target.build_configurations.each do |config|
                 config.build_settings['SWIFT_VERSION'] = '4.0'
             end
