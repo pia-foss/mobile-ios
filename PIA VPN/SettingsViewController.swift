@@ -40,6 +40,10 @@ enum Setting: Int {
     
     case encryptionHandshake
     
+    case ikeV2EncryptionAlgorithm
+    
+    case ikeV2IntegrityAlgorithm
+    
     case automaticReconnection
 
     case trustedNetworks
@@ -101,6 +105,8 @@ class SettingsViewController: AutolayoutViewController {
         case connection
 
         case encryption
+        
+        case ikeV2encryption
 
         case applicationSettings
         
@@ -118,6 +124,7 @@ class SettingsViewController: AutolayoutViewController {
     private static let allSections: [Section] = [
         .connection,
         .encryption,
+        .ikeV2encryption,
         .applicationSettings,
         .autoConnectSettings,
         .applicationInformation,
@@ -138,6 +145,10 @@ class SettingsViewController: AutolayoutViewController {
             .encryptionCipher,
             .encryptionDigest,
             .encryptionHandshake
+        ],
+        .ikeV2encryption: [
+            .ikeV2EncryptionAlgorithm,
+            .ikeV2IntegrityAlgorithm,
         ],
         .applicationSettings: [], // dynamic
         .autoConnectSettings: [
@@ -628,6 +639,10 @@ class SettingsViewController: AutolayoutViewController {
                 pendingPreferences.vpnType == IKEv2Profile.vpnType) {
                 sections.remove(at: sections.firstIndex(of: .encryption)!)
             }
+            if (pendingPreferences.vpnType == IPSecProfile.vpnType ||
+                pendingPreferences.vpnType == PIATunnelProfile.vpnType) {
+                sections.remove(at: sections.firstIndex(of: .ikeV2encryption)!)
+            }
         }
         if Flags.shared.enablesMACESetting {
             rowsBySection[.applicationSettings] = [
@@ -740,7 +755,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             
         case .encryption:
             return L10n.Settings.Encryption.title
-            
+
+        case .ikeV2encryption:
+            return L10n.Settings.Encryption.title
+
         case .applicationSettings:
             return L10n.Settings.ApplicationSettings.title
            
@@ -887,6 +905,22 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.selectionStyle = .none
             }
             
+        case .ikeV2EncryptionAlgorithm:
+            cell.textLabel?.text = L10n.Settings.Encryption.Cipher.title
+            cell.detailTextLabel?.text = IKEv2EncryptionAlgorithm.objectIdentifyBy(index: pendingPreferences.ikeV2EncryptionAlgorithm).description()
+            if !Flags.shared.enablesEncryptionSettings {
+                cell.accessoryType = .none
+                cell.selectionStyle = .none
+            }
+
+        case .ikeV2IntegrityAlgorithm:
+            cell.textLabel?.text = L10n.Settings.Encryption.Handshake.title
+            cell.detailTextLabel?.text = IKEv2IntegrityAlgorithm.objectIdentifyBy(index: pendingPreferences.ikeV2IntegrityAlgorithm).description()
+            if !Flags.shared.enablesEncryptionSettings {
+                cell.accessoryType = .none
+                cell.selectionStyle = .none
+            }
+
         case .encryptionDigest:
             cell.textLabel?.text = L10n.Settings.Encryption.Digest.title
             guard !pendingOpenVPNConfiguration.isEncryptionGCM() else {
@@ -1093,6 +1127,27 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             
             controller?.selectedOption = pendingOpenVPNConfiguration.dnsServers
             
+        case .ikeV2EncryptionAlgorithm:
+            guard Flags.shared.enablesEncryptionSettings else {
+                break
+            }
+            let options = IKEv2EncryptionAlgorithm.allValues()
+            if #available(iOS 13, *) {
+                //options.append(NEVPNIKEv2EncryptionAlgorithm.algorithmChaCha20Poly1305)
+            }
+            controller = OptionsViewController()
+            controller?.options = options.map { $0.description() }
+            controller?.selectedOption = IKEv2EncryptionAlgorithm.objectIdentifyBy(index: pendingPreferences.ikeV2EncryptionAlgorithm).description()
+
+        case .ikeV2IntegrityAlgorithm:
+            guard Flags.shared.enablesEncryptionSettings else {
+                break
+            }
+            let options = IKEv2IntegrityAlgorithm.allValues()
+            controller = OptionsViewController()
+            controller?.options = options.map { $0.description() }
+            controller?.selectedOption = IKEv2IntegrityAlgorithm.objectIdentifyBy(index: pendingPreferences.ikeV2IntegrityAlgorithm).description()
+
         case .encryptionCipher:
             guard Flags.shared.enablesEncryptionSettings else {
                 break
@@ -1270,6 +1325,9 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             let rawDigest = option as! String
             cell.textLabel?.text = PIATunnelProvider.Digest(rawValue: rawDigest)?.description
 
+        case .ikeV2EncryptionAlgorithm, .ikeV2IntegrityAlgorithm:
+            cell.textLabel?.text = option as? String
+            
         case .encryptionHandshake:
             let rawHandshake = option as! String
             cell.textLabel?.text = PIATunnelProvider.Handshake(rawValue: rawHandshake)?.description
@@ -1401,6 +1459,12 @@ extension SettingsViewController: OptionsViewControllerDelegate {
         case .encryptionDigest:
             let rawDigest = option as! String
             pendingOpenVPNConfiguration.digest = PIATunnelProvider.Digest(rawValue: rawDigest)!
+
+        case .ikeV2EncryptionAlgorithm:
+            pendingPreferences.ikeV2EncryptionAlgorithm = row + 1
+            
+        case .ikeV2IntegrityAlgorithm:
+            pendingPreferences.ikeV2IntegrityAlgorithm = row + 1
 
         case .encryptionHandshake:
             let rawHandshake = option as! String

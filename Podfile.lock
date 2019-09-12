@@ -70,8 +70,8 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - OpenSSL-Apple (1.1.0j.2)
-  - PIALibrary/Core (2.1.0)
-  - PIALibrary/Library (2.1.0):
+  - PIALibrary/Core (2.2.0)
+  - PIALibrary/Library (2.2.0):
     - Alamofire (~> 4)
     - Gloss (~> 2)
     - PIALibrary/Core
@@ -79,17 +79,17 @@ PODS:
     - PopupDialog
     - ReachabilitySwift
     - SwiftyBeaver
-  - PIALibrary/Mock (2.1.0):
+  - PIALibrary/Mock (2.2.0):
     - PIALibrary/Library
-  - PIALibrary/UI (2.1.0):
+  - PIALibrary/UI (2.2.0):
     - lottie-ios
     - PIALibrary/Library
     - SwiftEntryKit (= 0.7.2)
     - SwiftyBeaver
     - TPKeyboardAvoiding
-  - PIALibrary/Util (2.1.0):
+  - PIALibrary/Util (2.2.0):
     - PIALibrary/Core
-  - PIALibrary/VPN (2.1.0):
+  - PIALibrary/VPN (2.2.0):
     - PIALibrary/Library
     - PIATunnel (~> 2.0.0)
   - PIATunnel (2.0.2):
@@ -120,10 +120,10 @@ DEPENDENCIES:
   - Firebase/Core
   - FXPageControl
   - iRate
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `2e58526`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `2e58526`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `2e58526`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `2e58526`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `f709f06`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `f709f06`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `f709f06`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `f709f06`)
   - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `8bc012a`)
   - PopupDialog
   - SideMenu (= 3.1.5)
@@ -160,7 +160,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :commit: '2e58526'
+    :commit: f709f06
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
     :commit: 8bc012a
@@ -168,7 +168,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PIALibrary:
-    :commit: '2e58526'
+    :commit: f709f06
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
     :commit: 8bc012a
@@ -194,7 +194,7 @@ SPEC CHECKSUMS:
   lottie-ios: 49cd85b1f24f61a7708ad7ec76a523ab2d0e3100
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   OpenSSL-Apple: e88e1eb314acb4a05e2348069790c4aa49f6d319
-  PIALibrary: b8e76a91a83baa5dba85631cbe9d9b859c30f450
+  PIALibrary: 1bb8c23eab7c4d26b2fdc6d4c0e3b35fa86d12cf
   PIATunnel: 004fb69ae20ca14deafa4f3e3f33da5c35d57527
   PopupDialog: 42fb7a0bc4fafdf89fef8b5b2b127a6023f3e1cc
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
@@ -204,6 +204,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 4ad52ede35013a89dc7480b6accc7fa15704a6f6
+PODFILE CHECKSUM: 44907258ba8fffb825571470d33b6fe90d58f97b
 
 COCOAPODS: 1.7.5
