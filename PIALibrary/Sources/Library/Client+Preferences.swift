@@ -37,6 +37,10 @@ private protocol PreferencesStore: class {
     var trustedNetworks: [String] { get set }
     
     var nmtRulesEnabled: Bool { get set }
+    
+    var ikeV2IntegrityAlgorithm: Int { get set }
+    
+    var ikeV2EncryptionAlgorithm: Int { get set }
 
     func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration?
     
@@ -63,6 +67,8 @@ private extension PreferencesStore {
         availableNetworks = source.availableNetworks
         trustedNetworks = source.trustedNetworks
         nmtRulesEnabled = source.nmtRulesEnabled
+        ikeV2IntegrityAlgorithm = source.ikeV2IntegrityAlgorithm
+        ikeV2EncryptionAlgorithm = source.ikeV2EncryptionAlgorithm
     }
 }
 
@@ -181,6 +187,26 @@ extension Client {
             }
         }
         
+        /// Integrity algorithm for IKEv2 VPN configuration
+        public fileprivate(set) var ikeV2IntegrityAlgorithm: Int {
+            get {
+                return accessedDatabase.plain.ikeV2IntegrityAlgorithm
+            }
+            set {
+                accessedDatabase.plain.ikeV2IntegrityAlgorithm = newValue
+            }
+        }
+        
+        /// Encryption algorithm for IKEv2 VPN configuration
+        public fileprivate(set) var ikeV2EncryptionAlgorithm: Int {
+            get {
+                return accessedDatabase.plain.ikeV2EncryptionAlgorithm
+            }
+            set {
+                accessedDatabase.plain.ikeV2EncryptionAlgorithm = newValue
+            }
+        }
+        
         /// A dictionary of custom VPN configurations, mapped by `VPNProfile.vpnType`.
         public fileprivate(set) var vpnCustomConfigurations: [String: VPNCustomConfiguration] {
             get {
@@ -288,6 +314,8 @@ extension Client.Preferences {
             availableNetworks = []
             trustedNetworks = []
             nmtRulesEnabled = false
+            ikeV2IntegrityAlgorithm = IKEv2IntegrityAlgorithm.defaultAlgorithm
+            ikeV2EncryptionAlgorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm
         }
 
         /**
@@ -353,6 +381,12 @@ extension Client.Preferences {
         public var nmtRulesEnabled: Bool
 
         /// :nodoc:
+        public var ikeV2IntegrityAlgorithm: Int
+        
+        /// :nodoc:
+        public var ikeV2EncryptionAlgorithm: Int
+
+        /// :nodoc:
         public func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration? {
             return vpnCustomConfigurations[vpnType]
         }
@@ -402,6 +436,12 @@ extension Client.Preferences {
                 queue.append(VPNActionReinstall())
             }
             if (vpnType != target.vpnType) {
+                queue.append(VPNActionDisconnectAndReinstall())
+            }
+            if (ikeV2IntegrityAlgorithm != target.ikeV2IntegrityAlgorithm) {
+                queue.append(VPNActionDisconnectAndReinstall())
+            }
+            if (ikeV2EncryptionAlgorithm != target.ikeV2EncryptionAlgorithm) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
             if let configuration = vpnCustomConfigurations[vpnType],

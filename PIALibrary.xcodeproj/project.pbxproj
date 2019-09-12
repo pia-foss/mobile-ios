@@ -278,6 +278,10 @@
 		DD76292F21ECEC3F0092DF50 /* DataManipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD76292D21ECEC3F0092DF50 /* DataManipulation.swift */; };
 		DD86BAF121EF5B6D004A988F /* UIViewAutolayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD86BAF021EF5B6D004A988F /* UIViewAutolayout.swift */; };
 		DD8BF3CB219C6BAA0041357C /* ConfirmVPNPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8BF3CA219C6BAA0041357C /* ConfirmVPNPlanViewController.swift */; };
+		DD8C3E612327EF4C00BAD18E /* IKEv2IntegrityAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8C3E602327EF4C00BAD18E /* IKEv2IntegrityAlgorithm.swift */; };
+		DD8C3E622327EF4C00BAD18E /* IKEv2IntegrityAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8C3E602327EF4C00BAD18E /* IKEv2IntegrityAlgorithm.swift */; };
+		DD8C3E642327EF6000BAD18E /* IKEv2EncryptionAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8C3E632327EF6000BAD18E /* IKEv2EncryptionAlgorithm.swift */; };
+		DD8C3E652327EF6000BAD18E /* IKEv2EncryptionAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8C3E632327EF6000BAD18E /* IKEv2EncryptionAlgorithm.swift */; };
 		DDA184D122FC1F79003239CC /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA184D022FC1F79003239CC /* TermsAndConditionsViewController.swift */; };
 		DDA4A7BE21F5C31400A02ACD /* IKEv2Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA4A7BD21F5C31400A02ACD /* IKEv2Profile.swift */; };
 		DDA4A7BF21F5C31B00A02ACD /* IKEv2Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA4A7BD21F5C31400A02ACD /* IKEv2Profile.swift */; };
@@ -577,6 +581,8 @@
 		DD76292D21ECEC3F0092DF50 /* DataManipulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManipulation.swift; sourceTree = "<group>"; };
 		DD86BAF021EF5B6D004A988F /* UIViewAutolayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewAutolayout.swift; sourceTree = "<group>"; };
 		DD8BF3CA219C6BAA0041357C /* ConfirmVPNPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmVPNPlanViewController.swift; sourceTree = "<group>"; };
+		DD8C3E602327EF4C00BAD18E /* IKEv2IntegrityAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IKEv2IntegrityAlgorithm.swift; sourceTree = "<group>"; };
+		DD8C3E632327EF6000BAD18E /* IKEv2EncryptionAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IKEv2EncryptionAlgorithm.swift; sourceTree = "<group>"; };
 		DDA184D022FC1F79003239CC /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
 		DDA4A7BD21F5C31400A02ACD /* IKEv2Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IKEv2Profile.swift; sourceTree = "<group>"; };
 		DDC0840C22EB06F400DA2701 /* Invites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Invites.swift; path = "../../../../../../../../../System/Volumes/Data/Users/ueshiba/Projects/PIA/client-library-apple/PIALibrary/Sources/Core/WebServices/Invites.swift"; sourceTree = "<group>"; };
@@ -705,6 +711,8 @@
 				0E2ADD391FE14F8600BB170C /* VPNProfile.swift */,
 				0E2ADD301FE1468400BB170C /* VPNProvider.swift */,
 				0E2ADD321FE1472F00BB170C /* VPNStatus.swift */,
+				DD8C3E602327EF4C00BAD18E /* IKEv2IntegrityAlgorithm.swift */,
+				DD8C3E632327EF6000BAD18E /* IKEv2EncryptionAlgorithm.swift */,
 			);
 			path = VPN;
 			sourceTree = "<group>";
@@ -1700,12 +1708,14 @@
 				0E3D13D11F9E26FD00434A48 /* GlossCredentials.swift in Sources */,
 				0E53A8481FE5BA0B000C2A18 /* ServersDaemon.swift in Sources */,
 				0E53A84B1FE5BA52000C2A18 /* Daemon.swift in Sources */,
+				DD8C3E622327EF4C00BAD18E /* IKEv2IntegrityAlgorithm.swift in Sources */,
 				0EA4C43A1FDDE24B0041C3D8 /* ServersBundle.swift in Sources */,
 				0E7BC6F31F96B1120035C8B2 /* PlainStore.swift in Sources */,
 				0E392D8D1FE2F8780002160D /* ConnectivityStatus.swift in Sources */,
 				0E7BC6DF1F96B0F40035C8B2 /* Keychain.swift in Sources */,
 				0EA8072D20A1C7A30033EC1A /* RedeemRequest.swift in Sources */,
 				0E9D62DE1FDEE45A009A90CF /* DefaultServerProvider.swift in Sources */,
+				DD8C3E652327EF6000BAD18E /* IKEv2EncryptionAlgorithm.swift in Sources */,
 				0EF14E4C1FEAE6350007485A /* Client+Providers.swift in Sources */,
 				0E7BC6E61F96B1000035C8B2 /* Client.swift in Sources */,
 				0E392D7E1FE2E4C10002160D /* MemoryStore.swift in Sources */,
@@ -1739,6 +1749,7 @@
 				0E53A8471FE5BA0B000C2A18 /* ServersDaemon.swift in Sources */,
 				DDC0840D22EB06F400DA2701 /* Invites.swift in Sources */,
 				0EE78AF81F818815002E4CDD /* AccountInfo.swift in Sources */,
+				DD8C3E642327EF6000BAD18E /* IKEv2EncryptionAlgorithm.swift in Sources */,
 				DDFCFAAF21E925B60081F235 /* TileableCell.swift in Sources */,
 				DDFCFAB621E925F70081F235 /* EnumsBuilder.swift in Sources */,
 				0EFB512A1F82D45F0033B81F /* DefaultAccountProvider.swift in Sources */,
@@ -1838,6 +1849,7 @@
 				0EB8C0481F9CCE07005857E4 /* Macros.swift in Sources */,
 				84577FC3213D9AEA006DEC3D /* UITextField+PlaceholderColor.swift in Sources */,
 				0EFEB4C12007784A00F81029 /* PIATunnelProvider+Profile.swift in Sources */,
+				DD8C3E612327EF4C00BAD18E /* IKEv2IntegrityAlgorithm.swift in Sources */,
 				0E392DA31FE3247E0002160D /* Endpoint.swift in Sources */,
 				0E53A8581FE5DA16000C2A18 /* MockInAppProvider.swift in Sources */,
 				DDD824E32189969400151709 /* Preset.swift in Sources */,

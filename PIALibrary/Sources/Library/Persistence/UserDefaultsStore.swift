@@ -60,6 +60,10 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         
         static let nmtRulesEnabled = "NMTRulesEnabled"
 
+        static let ikeV2IntegrityAlgorithm = "IKEV2IntegrityAlgorithm"
+        
+        static let ikeV2EncryptionAlgorithm = "IKEV2EncryptionAlgorithm"
+
     }
     
     private let backend: UserDefaults
@@ -361,6 +365,30 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.trustCellularData)
         }
     }
+    
+    var ikeV2IntegrityAlgorithm: Int {
+        get {
+            guard let value = backend.object(forKey: Entries.ikeV2IntegrityAlgorithm) as? Int else {
+                return IKEv2IntegrityAlgorithm.defaultAlgorithm
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.ikeV2IntegrityAlgorithm)
+        }
+    }
+    
+    var ikeV2EncryptionAlgorithm: Int {
+        get {
+            guard let value = backend.object(forKey: Entries.ikeV2EncryptionAlgorithm) as? Int else {
+                return IKEv2EncryptionAlgorithm.defaultAlgorithm
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.ikeV2EncryptionAlgorithm)
+        }
+    }
 
     var authMigrationSuccess: Bool? {
         get {
@@ -427,6 +455,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.useWiFiProtection)
         backend.removeObject(forKey: Entries.trustCellularData)
         backend.removeObject(forKey: Entries.authMigrationSuccess)
+        backend.removeObject(forKey: Entries.ikeV2IntegrityAlgorithm)
+        backend.removeObject(forKey: Entries.ikeV2EncryptionAlgorithm)
         backend.synchronize()
     }
 

@@ -32,11 +32,21 @@ public extension EnumsBuilder where Self: RawRepresentable, Self.RawValue == Int
     }
     static func countCases() -> Int {
         var numCases = 0
-        while Self(rawValue: numCases) != nil {
+        while Self(rawValue: numCases) != nil || numCases == 0 {
             numCases += 1
         }
         return numCases
     }
+    static func allValues() -> [Self] {
+        var allValues: [Self] = []
+        for value in 0...self.countCases() {
+            if let value = Self(rawValue: value) {
+                allValues.append(value)
+            }
+        }
+        return allValues
+    }
+    
 }
 
 public extension EnumsBuilder where Self: RawRepresentable, Self.RawValue == String {
