@@ -1,4 +1,5 @@
 "failure.message" = "يتعذر علينا إنشاء حساب في الوقت الحالي. يرجى إعادة المحاولة لاحقًا. \n\nعند إعادة فتح التطبيق سيتم إعادة محاولة إنشاء حساب.";
+"failure.purchase.sandbox.message" = "اشتراك الصندوق المحدد غير متاح في الإنتاج.";
 "failure.redeem.claimed.message" = "يبدو أن هذه البطاقة استُخدمت في حساب آخر. حاول إدخال رمز جديد.";
 "failure.redeem.claimed.title" = "تم استخدام هذه البطاقة بالفعل";
 "failure.redeem.invalid.message" = "يبدو أنك أدخلت رمز بطاقة غير صالح. يرجى إعادة المحاولة.";
@@ -9,6 +10,17 @@
 "in_progress.message" = "جارٍ تأكيد عملية الشراء مع نظامنا. يمكن أن يستغرق ذلك لحظة لذلك انتظر قليلًا.";
 "in_progress.redeem.message" = "جارٍ تأكيد رمز بطاقتك مع نظامنا. قد يستغرق ذلك بضع لحظات، انتظر قليلًا.";
 "in_progress.title" = "تأكيد التسجيل";
+"purchase.trials.1year.protection" = "1 سنة من الخصوصية وحماية الهوية";
+"purchase.trials.all.plans" = "مشاهدة جميع الخطط المتاحة";
+"purchase.trials.anonymous" = "تصفح مجهول الهوية وإخفاء عنوان IP.";
+"purchase.trials.devices" = "يدعم 10 أجهزة في المرة الواحدة";
+"purchase.trials.devices.description" = "احمي نفسك على ما يصل إلى 10 أجهزة في وقت واحد.";
+"purchase.trials.intro" = "تجربة مجانية لمدة 7 أيام!";
+"purchase.trials.money.back" = "ضمان استرداد المال لمدة 7 أيام";
+"purchase.trials.price.after" = "فقط %@ بعد";
+"purchase.trials.region" = "اتصل بأي منطقة بسهولة";
+"purchase.trials.servers" = "أكثر من 3300 خادم في 32 دولة";
+"purchase.trials.start" = "ابدأ الاشتراك";
 "purchase.uncredited.alert.button.cancel" = "إلغاء";
 "purchase.uncredited.alert.button.recover" = "استعادة الحساب";
 "purchase.uncredited.alert.message" = "لديك معاملات غير معتمدة. هل تريد استعادة تفاصيل حسابك؟";

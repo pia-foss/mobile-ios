@@ -1,6 +1,8 @@
-"agreement.message" = "Rejestracja składa się z zaakceptowania $1 i $2.";
+"agreement.message" = "Płatność zostanie pobrana z Twojego konta Apple ID z chwilą potwierdzenia zakupu. Subskrypcja odnawia się automatycznie, chyba że zostanie anulowana co najmniej 24 godziny przed końcem bieżącego okresu rozliczeniowego. Opłata za odnowienie subskrypcji  zostanie pobrana w ciągu 24 godzin przed końcem bieżącego okresu. Możesz zarządzać subskrypcjami i je anulować, przechodząc do ustawień konta w App Store po dokonaniu zakupu.\n\nRejestracja oznacza akceptację kwoty  $1 i $2.";
 "agreement.message.privacy" = "Zasady ochrony prywatności";
 "agreement.message.tos" = "Warunki użytkowania";
+"agreement.trials.message" = "Płatność zostanie pobrana z Twojego konta Apple ID z chwilą potwierdzenia zakupu. Subskrypcja odnawia się automatycznie, chyba że zostanie anulowana co najmniej 24 godziny przed końcem bieżącego okresu rozliczeniowego. Opłata za odnowienie subskrypcji  zostanie pobrana w ciągu 24 godzin przed końcem bieżącego okresu. Możesz zarządzać subskrypcjami i je anulować, przechodząc do ustawień konta w App Store po dokonaniu zakupu.\n\nCzęść płatnych Subskrypcji może obejmować bezpłatną wersję próbną, z której możesz skorzystać przed naliczeniem opłaty. Jeśli postanowisz zrezygnować z płatnej subskrypcji przed rozpoczęciem naliczania opłat zgodnie z wybraną metodą płatności, anuluj subskrypcję co najmniej 24 godziny przed zakończeniem bezpłatnej wersji próbnej.\n\nBezpłatne wersje próbne są dostępne tylko dla nowych użytkowników i są przyznawane wyłącznie według naszego uznania, a w przypadku próby zarejestrowania w celu uzyskania dodatkowej bezpłatnej wersji próbnej, zostaniesz natychmiast obciążony standardową opłatą subskrypcyjną.\n\nRejestracja oznacza akceptację niniejszego regulaminu.";
+"agreement.trials.title" = "Regulamin korzystania z bezpłatnej wersji próbnej";
 "camera.access.denied.message" = "Zezwól na dostęp do aparatu, aby skanować kody QR i korzystać z kart upominkowych.";
 "camera.access.error.message" = "Twoje urządzenie nie obsługuje skanowania kodów QR. Użyj urządzenia z aparatem.";
 "camera.access.error.title" = "Aparat nie dostępny";
@@ -32,7 +34,7 @@
 "plan.yearly.detail_format" = "%@%@ rocznie";
 "plan.yearly.title" = "Rocznie";
 "purchase.confirm.form.email" = "Podaj swój adres e-mail";
-"purchase.confirm.plan" = "kupujesz abonament %@";
+"purchase.confirm.plan" = "Kupujesz abonament %@";
 "purchase.continue" = "Kontynuuj";
 "purchase.email.placeholder" = "Adres e-mail";
 "purchase.error.connectivity.description" = "Nie można połączyć z Private Internet Access. Może to być spowodowane słabym połączeniem z internetem lub nasza usługa może być zablokowana w Twoim kraju.";

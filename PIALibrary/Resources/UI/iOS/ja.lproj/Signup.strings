@@ -1,4 +1,5 @@
 "failure.message" = "ただ今アカウントを作成できません。後ほどもう一度お試しください。\n\nアプリを再起動すると、アカウント作成が再試行されます。";
+"failure.purchase.sandbox.message" = "選択されたサンドボックスのサブスクリプションは生産中のため利用できません。";
 "failure.redeem.claimed.message" = "このカードは、すでに別のアカウントが獲得したようです。別のPINを入力してください。";
 "failure.redeem.claimed.title" = "すでに獲得されたカードです";
 "failure.redeem.invalid.message" = "無効なカードPINを入力したようです。もう一度お試しください。";
@@ -9,6 +10,17 @@
 "in_progress.message" = "システムがご購入を確定しています。しばらく時間がかかることがありますので、そのままお待ちください。";
 "in_progress.redeem.message" = "システムがご購入を確定しています。しばらく時間がかかることがありますので、そのままお待ちください。";
 "in_progress.title" = "サインアップを確定";
+"purchase.trials.1year.protection" = "1年間のプライバシーおよび個人情報の保護";
+"purchase.trials.all.plans" = "利用可能なプランをすべて見る";
+"purchase.trials.anonymous" = "ウェブの匿名利用でIPを非表示にします。";
+"purchase.trials.devices" = "一度に10台の端末をサポート";
+"purchase.trials.devices.description" = "一度に最大10台の端末を保護して自分を守ることができます。";
+"purchase.trials.intro" = "7日間無料でお試し！";
+"purchase.trials.money.back" = "7日間返金保証";
+"purchase.trials.price.after" = "その後はわずか%@";
+"purchase.trials.region" = "すべての地域に簡単に接続";
+"purchase.trials.servers" = "32か国の3300以上のサーバー";
+"purchase.trials.start" = "サブスクリプションを開始";
 "purchase.uncredited.alert.button.cancel" = "キャンセル";
 "purchase.uncredited.alert.button.recover" = "アカウントを回復";
 "purchase.uncredited.alert.message" = "反映されていない取引があります。アカウントの詳細を回復しますか？";

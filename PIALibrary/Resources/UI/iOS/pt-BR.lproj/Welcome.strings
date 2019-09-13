@@ -1,6 +1,8 @@
-"agreement.message" = "O registro constitui aceitação dos $1 e da $2.";
+"agreement.message" = "O pagamento será cobrado na sua conta do ID Apple no ato da confirmação da compra. A assinatura será renovada automaticamente, a não ser que ela seja cancelada, pelo menos, 24 horas antes do fim do período atual. O valor da renovação será debitado na sua conta em até 24 horas antes do término do período da atual. Você pode gerenciar e cancelar suas assinaturas nos ajustes da conta na App Store após a compra.\n\nO registro constitui da aceitação dos $1 e da $2.";
 "agreement.message.privacy" = "Política de Privacidade";
 "agreement.message.tos" = "Termos de Serviço";
+"agreement.trials.message" = "O pagamento será cobrado na sua conta do ID Apple no ato da confirmação da compra. A assinatura será renovada automaticamente, a não ser que ela seja cancelada, pelo menos, 24 horas antes do fim do período atual. O valor da renovação será debitado na sua conta em até 24 horas antes do término do período da atual. Você pode gerenciar e cancelar suas assinaturas nos ajustes da conta na App Store após a compra.\n\nCertas assinaturas pagas podem oferecer uma avaliação gratuita antes da cobrança do pagamento. Se você decidir cancelar uma Assinatura Paga antes de começarmos a cobrar por ela, cancele-a, pelo menos, 24 horas antes do término da avaliação gratuita.\n\nAs avaliações gratuitas estão disponíveis apenas para novos usuários, e são a nosso critério. Se tentar se registrar para uma avaliação gratuita adicional, você será cobrado imediatamente com a Taxa de Assinatura padrão.\n\nReservamo-nos o direito de revogar sua avaliação gratuita a qualquer momento.\n\nQualquer parte não utilizada do período da sua avaliação gratuita será perdida após a compra de uma assinatura.\n\nO registro constitui da aceitação dos termos e condições.";
+"agreement.trials.title" = "Termos e condições das avaliações gratuitas";
 "camera.access.denied.message" = "Ative o acesso à câmera para que você possa escanear códigos QR para resgatar um cartão-presente.";
 "camera.access.error.message" = "Seu dispositivo não suporta o escaneamento de códigos QR. Use um dispositivo com câmera.";
 "camera.access.error.title" = "Câmera indisponível";
@@ -32,7 +34,7 @@
 "plan.yearly.detail_format" = "%@%@ por ano";
 "plan.yearly.title" = "Anual";
 "purchase.confirm.form.email" = "Insira seu endereço de e-mail";
-"purchase.confirm.plan" = "Você está comprando o plano %@";
+"purchase.confirm.plan" = "Você está adquirindo o plano %@";
 "purchase.continue" = "Continuar";
 "purchase.email.placeholder" = "Endereço de e-mail";
 "purchase.error.connectivity.description" = "Não conseguimos acessar o Private Internet Access. Isso pode ser devido a uma conexão de internet fraca ou o nosso serviço está bloqueado em seu país.";
