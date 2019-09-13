@@ -37,3 +37,14 @@
 "purchase.uncredited.alert.button.cancel" = "Cancel";
 "purchase.uncredited.alert.button.recover" = "Recover account";
 
+"purchase.trials.intro" = "Try free for 7 days!";
+"purchase.trials.price.after" = "Only %@ after";
+"purchase.trials.money.back" = "7 day money back guarantee";
+"purchase.trials.1year.protection" = "1 year of privacy and identity protection";
+"purchase.trials.anonymous" = "Browse anonymously and hide your ip.";
+"purchase.trials.devices" = "Support 10 devices at once";
+"purchase.trials.devices.description" = "Protect yourself on up to 10 devices at a time.";
+"purchase.trials.region" = "Connect to any region easily";
+"purchase.trials.servers" = "More than 3300 servers in 32 countries";
+"purchase.trials.start" = "Start subscription";
+"purchase.trials.all.plans" = "See all available plans";

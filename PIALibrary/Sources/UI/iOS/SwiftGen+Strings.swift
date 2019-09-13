@@ -53,6 +53,42 @@ internal enum L10n {
       }
     }
     internal enum Purchase {
+      internal enum Trials {
+        /// Browse anonymously and hide your ip.
+        internal static let anonymous = L10n.tr("Signup", "purchase.trials.anonymous")
+        /// Support 10 devices at once
+        internal static let devices = L10n.tr("Signup", "purchase.trials.devices")
+        /// Try free for 7 days!
+        internal static let intro = L10n.tr("Signup", "purchase.trials.intro")
+        /// Connect to any region easily
+        internal static let region = L10n.tr("Signup", "purchase.trials.region")
+        /// More than 3300 servers in 32 countries
+        internal static let servers = L10n.tr("Signup", "purchase.trials.servers")
+        /// Start subscription
+        internal static let start = L10n.tr("Signup", "purchase.trials.start")
+        internal enum _1year {
+          /// 1 year of privacy and identity protection
+          internal static let protection = L10n.tr("Signup", "purchase.trials.1year.protection")
+        }
+        internal enum All {
+          /// See all available plans
+          internal static let plans = L10n.tr("Signup", "purchase.trials.all.plans")
+        }
+        internal enum Devices {
+          /// Protect yourself on up to 10 devices at a time.
+          internal static let description = L10n.tr("Signup", "purchase.trials.devices.description")
+        }
+        internal enum Money {
+          /// 7 day money back guarantee
+          internal static let back = L10n.tr("Signup", "purchase.trials.money.back")
+        }
+        internal enum Price {
+          /// Only %@ after
+          internal static func after(_ p1: String) -> String {
+            return L10n.tr("Signup", "purchase.trials.price.after", p1)
+          }
+        }
+      }
       internal enum Uncredited {
         internal enum Alert {
           /// You have uncredited transactions. Do you want to recover your account details?

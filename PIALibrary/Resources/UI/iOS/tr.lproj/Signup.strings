@@ -1,4 +1,5 @@
 "failure.message" = "Şu anda hesap oluşturamıyoruz.\nLütfen daha sonra tekrar deneyin.\n\nUygulama yeniden açıldığından hesap oluşturma tekrar denenecektir.";
+"failure.purchase.sandbox.message" = "Seçilen Sandbox aboneliği üretim ortamında mevcut değil.";
 "failure.redeem.claimed.message" = "Bu kart önceden başka bir hesap tarafından talep edilmiş. Farklı bir PIN girmeyi deneyebilirsiniz.";
 "failure.redeem.claimed.title" = "Kart önceden talep edilmiş";
 "failure.redeem.invalid.message" = "Görünüşe bakılırsa geçersiz bir kart PIN'i girdiniz. Lütfen tekrar deneyin.";
@@ -9,6 +10,17 @@
 "in_progress.message" = "Sistemimizle satın alım işleminizi onaylıyoruz. Biraz zaman alabilir; lütfen bekleyin.";
 "in_progress.redeem.message" = "Kart PIN'inizi sistemimizde onaylıyoruz. Bu biraz zaman alabilir, lütfen bekleyin.";
 "in_progress.title" = "Kaydolmayı onayla";
+"purchase.trials.1year.protection" = "1 yıllık gizlilik ve kimlik koruması";
+"purchase.trials.all.plans" = "Tüm mevcut planlara bakın";
+"purchase.trials.anonymous" = "IP'nizi gizleyerek İnternet'te isimsiz gezinin.";
+"purchase.trials.devices" = "Aynı anda 10 cihaz desteği";
+"purchase.trials.devices.description" = "Aynı anda 10 cihazda kendinizi koruyun.";
+"purchase.trials.intro" = "7 gün boyunca ücretsiz deneyin!";
+"purchase.trials.money.back" = "7 günlük para iade garantisi";
+"purchase.trials.price.after" = "Sonra sadece %@";
+"purchase.trials.region" = "Tüm bölgelere kolayca bağlanın";
+"purchase.trials.servers" = "32 ülkede en az 3.300 sunucu";
+"purchase.trials.start" = "Aboneliği başlat";
 "purchase.uncredited.alert.button.cancel" = "İptal";
 "purchase.uncredited.alert.button.recover" = "Hesabı kurtar";
 "purchase.uncredited.alert.message" = "Hesaba yansıtılmamış olan işlemleriniz var. Hesap bilgilerinizi kurtarmak ister misiniz?";

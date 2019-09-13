@@ -1,4 +1,5 @@
 "failure.message" = "We kunnen op dit moment geen account maken. Probeer het later opnieuw. \n\nAls u de app opnieuw opent, wordt opnieuw geprobeerd een account te maken.";
+"failure.purchase.sandbox.message" = "Het geselecteerde sandbox-abonnement is niet beschikbaar in productie.";
 "failure.redeem.claimed.message" = "Deze kaart is door een ander account geclaimd. Probeer een andere pincode.";
 "failure.redeem.claimed.title" = "Kaart al geclaimd";
 "failure.redeem.invalid.message" = "U heeft een ongeldige pincode ingevoerd. Probeer het opnieuw.";
@@ -9,6 +10,17 @@
 "in_progress.message" = "We zijn uw aankoop aan het verifiëren in ons systeem. Dit kan eventjes duren, daarom vragen we u vriendelijk om geduld.";
 "in_progress.redeem.message" = "We zijn uw pincode aan het verifiëren in ons systeem. Dit kan eventjes duren, daarom vragen we u vriendelijk om geduld.";
 "in_progress.title" = "Aanmelding bevestigen";
+"purchase.trials.1year.protection" = "1 jaar aan privacy- en identiteitsbescherming";
+"purchase.trials.all.plans" = "Bekijk de beschikbare abonnementen";
+"purchase.trials.anonymous" = "Browse anoniem en verberg uw ip.";
+"purchase.trials.devices" = "Ondersteun tien apparaten tegelijk";
+"purchase.trials.devices.description" = "Bescherm uzelf op tien apparaten tegelijk.";
+"purchase.trials.intro" = "Probeer 7 dagen gratis!";
+"purchase.trials.money.back" = "7 dagen lang niet-goed-geld-teruggarantie";
+"purchase.trials.price.after" = "Slechts %@ na";
+"purchase.trials.region" = "Maak eenvoudig verbinding met elke regio";
+"purchase.trials.servers" = "Meer dan 3300 servers in 32 landen";
+"purchase.trials.start" = "Abonnement starten";
 "purchase.uncredited.alert.button.cancel" = "Annuleren";
 "purchase.uncredited.alert.button.recover" = "Account herstellen";
 "purchase.uncredited.alert.message" = "U heeft niet-gecrediteerde transacties. Wilt u uw accountgegevens herstellen?";

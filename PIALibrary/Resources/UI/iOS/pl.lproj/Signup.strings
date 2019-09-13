@@ -1,4 +1,5 @@
 "failure.message" = "Obecnie nie możemy utworzyć konta. Spróbuj ponownie później.";
+"failure.purchase.sandbox.message" = "Wybrana subskrypcja na piaskownicę (środowisko testowe) nie jest dostępna w produkcji.";
 "failure.redeem.claimed.message" = "Wygląda na to, że ta karta została użyta na innym koncie. Możesz spróbować wpisać inny PIN.";
 "failure.redeem.claimed.title" = "Karta już użyta";
 "failure.redeem.invalid.message" = "Wygląda na to, ze wpisałeś nieprawidłowy PIN karty. Spróbuj ponownie.";
@@ -9,6 +10,17 @@
 "in_progress.message" = "Potwierdzamy zakup w naszym systemie. Poczekaj spokojnie, bo to może trochę potrwać.";
 "in_progress.redeem.message" = "Potwierdzamy Twój PIN karty w naszym systemie, TO może chwilę potrwać, więc prosimy o cierpliwość.";
 "in_progress.title" = "Potwierdź rejestrację";
+"purchase.trials.1year.protection" = "1 rok ochrony prywatności i tożsamości";
+"purchase.trials.all.plans" = "Sprawdź wszystkie dostępne plany";
+"purchase.trials.anonymous" = "Przeglądaj sieć anonimowa i ukryj swoje IP";
+"purchase.trials.devices" = "Obsługa 10 urządzeń jednocześnie";
+"purchase.trials.devices.description" = "Ochrona na maksymalnie 10 urządzeniach jednocześnie.";
+"purchase.trials.intro" = "Wypróbuj za darmo przez 7 dni!";
+"purchase.trials.money.back" = "7-dniowa gwarancja zwrotu pieniędzy";
+"purchase.trials.price.after" = "Później tylko %@";
+"purchase.trials.region" = "Łatwo połączysz się z dowolnym regionem";
+"purchase.trials.servers" = "Ponad 3300 serwerów w 32 krajach";
+"purchase.trials.start" = "Rozpocznij subskrypcję";
 "purchase.uncredited.alert.button.cancel" = "Anuluj";
 "purchase.uncredited.alert.button.recover" = "Odzyskaj konto";
 "purchase.uncredited.alert.message" = "Masz nieuznane transakcje. Chcesz odzyskać dane swojego konta?";

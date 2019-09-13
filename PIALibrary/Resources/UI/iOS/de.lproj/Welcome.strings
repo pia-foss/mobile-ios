@@ -1,6 +1,8 @@
-"agreement.message" = "Mit Ihrer Registrierung erklären Sie sich mit den $1 und $2 einverstanden.";
+"agreement.message" = "Die Zahlung wird Ihrem Apple ID-Konto bei der Kaufbestätigung belastet. Das Abonnement verlängert sich automatisch, wenn es nicht mindestens 24 Stunden vor Ablauf der aktuellen Periode gekündigt wird. Die Verlängerung wird Ihrem Konto innerhalb von 24 Stunden vor Ablauf der aktuellen Periode in Rechnung gestellt. Sie können Ihre Abonnements verwalten und kündigen, indem Sie nach dem Kauf zu Ihren Kontoeinstellungen im App Store aufrufen.\n\nMit Ihrer Registrierung akzeptieren Sie die $1 und $2.";
 "agreement.message.privacy" = "Datenschutzrichtlinien";
 "agreement.message.tos" = "Nutzungsbedingungen";
+"agreement.trials.message" = "Die Zahlung wird Ihrem Apple ID-Konto bei der Kaufbestätigung belastet. Das Abonnement verlängert sich automatisch, wenn es nicht mindestens 24 Stunden vor Ablauf der aktuellen Periode gekündigt wird. Die Verlängerung wird Ihrem Konto innerhalb von 24 Stunden vor Ablauf der aktuellen Periode in Rechnung gestellt. Sie können Ihre Abonnements verwalten und kündigen, indem Sie nach dem Kauf zu Ihren Kontoeinstellungen im App Store aufrufen.\n\nBestimmte kostenpflichtige Abonnements können eine kostenlose Testversion anbieten, bevor Sie Ihre Zahlungsmethode berechnen. Wenn Sie sich entscheiden, sich von einem kostenpflichtigen Abonnement abzumelden, bevor wir mit der Berechnung Ihrer Zahlungsmethode beginnen, kündigen Sie das Abonnement mindestens 24 Stunden vor Ablauf der kostenlosen Probezeit.\n\nKostenlose Testversionen sind nur für neue Benutzer verfügbar und liegen in unserem alleinigen Ermessen, und wenn Sie versuchen, sich für eine zusätzliche kostenlose Testversion anzumelden, wird Ihnen sofort die Standard-Abonnementgebühr in Rechnung gestellt.\n\nWir behalten uns das Recht vor, Ihre kostenlose Testversion jederzeit zu widerrufen.\n\nJeder ungenutzte Teil Ihrer kostenlosen Probezeit verfällt mit dem Kauf eines Abonnements.\n\nMit der Registrierung akzeptieren Sie diese Nutzungsbedingungen.";
+"agreement.trials.title" = "Nutzungsbedingungen für kostenlose Testversionen";
 "camera.access.denied.message" = "Kamerazugriff aktivieren, um QR-Code zum Einlösen einer Geschenkkarte zu scannen.";
 "camera.access.error.message" = "Dein Gerät unterstützt das Scannen von QR-Codes nicht. Bitte ein Gerät mit einer Kamera verwenden.";
 "camera.access.error.title" = "Kamera nicht verfügbar";
@@ -32,7 +34,7 @@
 "plan.yearly.detail_format" = "%@%@ pro Jahr";
 "plan.yearly.title" = "Jährlich";
 "purchase.confirm.form.email" = "E-Mail-Adresse eingeben";
-"purchase.confirm.plan" = "Sie kaufen den %@-Tarif.";
+"purchase.confirm.plan" = "Sie erwerben den %@-Tarif.";
 "purchase.continue" = "Weiter";
 "purchase.email.placeholder" = "E-Mail-Adresse";
 "purchase.error.connectivity.description" = "Wir können Private Internet Access nicht erreichen. Dies kann auf eine schlechte Internetverbindung zurückzuführen sein oder unser Service ist in deinem Land blockiert.";

@@ -61,20 +61,20 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
         )
         self.navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Welcome.Redeem.Accessibility.back
 
-        headerTitleLabel.text = "Try free for 7 days!"
-        subtitleLabel.text = "Only $ per year after"
-        smallTitleLabel.text = "7 day money back guarantee"
+        headerTitleLabel.text = L10n.Signup.Purchase.Trials.intro
+        subtitleLabel.text = L10n.Signup.Purchase.Trials.Price.after("")
+        smallTitleLabel.text = L10n.Signup.Purchase.Trials.Money.back
         
-        protectionTitleLabel.text = "1 year of privacy and identity protection"
-        protectionSubtitleLabel.text = "Browse anonymously and hide your ip."
+        protectionTitleLabel.text = L10n.Signup.Purchase.Trials._1year.protection
+        protectionSubtitleLabel.text = L10n.Signup.Purchase.Trials.anonymous
         protectionImageView.image = Asset.shieldIcon.image.withRenderingMode(.alwaysTemplate)
         
-        devicesTitleLabel.text = "Support 10 devices at once"
-        devicesSubtitleLabel.text = "Protect yourself on up to 10 devices at a time."
+        devicesTitleLabel.text = L10n.Signup.Purchase.Trials.devices
+        devicesSubtitleLabel.text = L10n.Signup.Purchase.Trials.Devices.description
         devicesImageView.image = Asset.computerIcon.image.withRenderingMode(.alwaysTemplate)
         
-        serversTitleLabel.text = "Connect to any region easily"
-        serversSubtitleLabel.text = "More than 3300 servers in 32 countries"
+        serversTitleLabel.text = L10n.Signup.Purchase.Trials.region
+        serversSubtitleLabel.text = L10n.Signup.Purchase.Trials.servers
         serversImageView.image = Asset.globeIcon.image.withRenderingMode(.alwaysTemplate)
         
         textAgreement.attributedText = Theme.current.agreementText(
@@ -142,7 +142,7 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
             purchase.detail = L10n.Welcome.Plan.Yearly.detailFormat(currencySymbol, purchase.product.price.description)
             purchase.bestValue = true
             let price = L10n.Welcome.Plan.Yearly.detailFormat(currencySymbol, purchase.product.price.description)
-            subtitleLabel.text = "Only \(price) after"
+            subtitleLabel.text = L10n.Signup.Purchase.Trials.Price.after(price)
             Theme.current.makeSmallLabelToStandOut(subtitleLabel,
                                                    withTextToStandOut: price)
             allPlans[0] = purchase
@@ -213,9 +213,9 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
         buttonPurchase.style(style: TextStyle.Buttons.piaGreenButton)
         buttonMorePlans.style(style: TextStyle.Buttons.piaPlainTextButton)
         buttonTrialTerms.style(style: TextStyle.Buttons.piaSmallPlainTextButton)
-        buttonPurchase.setTitle("Start subscription".uppercased(),
+        buttonPurchase.setTitle(L10n.Signup.Purchase.Trials.start.uppercased(),
                                 for: [])
-        buttonMorePlans.setTitle("See all available plans",
+        buttonMorePlans.setTitle(L10n.Signup.Purchase.Trials.All.plans,
                                 for: [])
         buttonTrialTerms.setTitle(L10n.Welcome.Agreement.Trials.title,
                                  for: [])

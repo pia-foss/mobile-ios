@@ -1,4 +1,5 @@
 "failure.message" = "Нам не удалось создать учетную запись. Повторите попытку позже.\nПри повторном открытии приложения создание учетной записи будет возобновлено.";
+"failure.purchase.sandbox.message" = "Выбранная подписка на «песочницу» недоступна в производственной среде.";
 "failure.redeem.claimed.message" = "Похоже, эту карту уже использовали с другой учетной записи. Попробуйте ввести другой PIN.";
 "failure.redeem.claimed.title" = "Карта уже использована";
 "failure.redeem.invalid.message" = "Похоже, вы ввели неверный PIN-код карты. Попробуйте еще раз.";
@@ -9,6 +10,17 @@
 "in_progress.message" = "Мы проверяем вашу покупку в системе. На это может понадобиться время, так что оставайтесь с нами.";
 "in_progress.redeem.message" = "Мы подтверждаем ваш PIN-код в системе. Это займет какое-то время, подождите немного.";
 "in_progress.title" = "Подтверждение регистрации";
+"purchase.trials.1year.protection" = "1 год защиты конфиденциальности и личных данных";
+"purchase.trials.all.plans" = "Смотреть все доступные планы";
+"purchase.trials.anonymous" = "Пользуйтесь Интернетом анонимно и скрывайте свой IP-адрес.";
+"purchase.trials.devices" = "Поддержка сразу 10 устройств";
+"purchase.trials.devices.description" = "Защищайте себя на нескольких устройствах одновременно (до 10).";
+"purchase.trials.intro" = "Бесплатная проба в течение 7 дней!";
+"purchase.trials.money.back" = "7-дневная гарантия возврата денег";
+"purchase.trials.price.after" = "Всего %@ после этого";
+"purchase.trials.region" = "Простое подключение к любому региону";
+"purchase.trials.servers" = "Более 3300 серверов в 32 странах";
+"purchase.trials.start" = "Запустить подписку.";
 "purchase.uncredited.alert.button.cancel" = "Отмена";
 "purchase.uncredited.alert.button.recover" = "Восстановить учетную запись";
 "purchase.uncredited.alert.message" = "У вас есть непроведенные транзакции. Хотите восстановить данные своей учетной записи?";

@@ -1,4 +1,5 @@
 "failure.message" = "Impossibile creare un account in questo momento. Riprova più tardi. \n\nRiaprendo l'app si riproverà a creare un account.";
+"failure.purchase.sandbox.message" = "L'abbonamento del sandbox selezionato on è disponibile in produzione.";
 "failure.redeem.claimed.message" = "Questa carta è già stata riscattata da un altro account. Prova a inserire un PIN diverso.";
 "failure.redeem.claimed.title" = "Carta già riscattata";
 "failure.redeem.invalid.message" = "Hai inserito un PIN della carta non valido. Riprova.";
@@ -9,6 +10,17 @@
 "in_progress.message" = "Conferma dell'acquisto col sistema in corso. Potrebbe impiegare qualche secondo. Attendi.";
 "in_progress.redeem.message" = "Conferma del PIN della tua carta col sistema in corso. Potrebbe impiegare qualche secondo. Attendi.";
 "in_progress.title" = "Conferma registrazione";
+"purchase.trials.1year.protection" = "1 anno di privacy e protezione d'indentità";
+"purchase.trials.all.plans" = "Vedi tutti i piani disponibili";
+"purchase.trials.anonymous" = "Sfoglia anonimamente e nascondi il tuo IP.";
+"purchase.trials.devices" = "Supporta 10 dispositivi alla volta";
+"purchase.trials.devices.description" = "Proteggi un massimo di 10 dispositivi alla volta.";
+"purchase.trials.intro" = "Provalo gratuitamente per 7 giorni!";
+"purchase.trials.money.back" = "Garanzia di rimborso entro 7 giorni";
+"purchase.trials.price.after" = "Dopo a soli %@";
+"purchase.trials.region" = "Connettiti facilmente a qualsiasi regione";
+"purchase.trials.servers" = "Oltre 3300 server in 32 Paesi";
+"purchase.trials.start" = "Inizia abbonamento";
 "purchase.uncredited.alert.button.cancel" = "Annulla";
 "purchase.uncredited.alert.button.recover" = "Recupera account";
 "purchase.uncredited.alert.message" = "Hai transazioni non accreditate. Vuoi recuperare i dati del tuo account?";
