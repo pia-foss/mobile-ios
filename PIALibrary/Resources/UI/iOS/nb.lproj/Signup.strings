@@ -1,4 +1,5 @@
 "failure.message" = "Vi kunne ikke opprette en konto nå. Prøv på nytt senere.\n\nNår du åpner appen igjen, vil den prøve å opprette kontoen på nytt.";
+"failure.purchase.sandbox.message" = "Det valgte sandboksabonnementet er ikke tilgjengelig i produksjon.";
 "failure.redeem.claimed.message" = "Ser ut til at kortet allerede er brukt av en annen konto. Du kan prøve med en annen PIN.";
 "failure.redeem.claimed.title" = "Kortet er allerede brukt";
 "failure.redeem.invalid.message" = "Ser ut til at du brukte en ugyldig kort-PIN. Prøv igjen";
@@ -9,6 +10,17 @@
 "in_progress.message" = "Vi bekrefter kjøpet i systemet vårt. Dette kan ta litt tid.";
 "in_progress.redeem.message" = "Vi bekrefter kort-PIN-en din i systemet vårt. Det kan ta et øyeblikk, så vennligst vent.";
 "in_progress.title" = "Bekrefter registrering";
+"purchase.trials.1year.protection" = "Et års personverns- og identitetsbeskyttelse";
+"purchase.trials.all.plans" = "Vis alle tilgjengelige abonnement";
+"purchase.trials.anonymous" = "Surf anonymt og skjul IP-adressen din.";
+"purchase.trials.devices" = "Støtter ti enheter om gangen";
+"purchase.trials.devices.description" = "Beskytt deg på opptil ti enheter samtidig.";
+"purchase.trials.intro" = "Prøv gratis i syv dager!";
+"purchase.trials.money.back" = "Syv dagers garanti som gir deg pengene tilbake";
+"purchase.trials.price.after" = "Kun %@ etter";
+"purchase.trials.region" = "Koble til hvilken som helst region på en enkel måte";
+"purchase.trials.servers" = "Over 3300 servere i 32 land";
+"purchase.trials.start" = "Start abonnementet";
 "purchase.uncredited.alert.button.cancel" = "Abryt";
 "purchase.uncredited.alert.button.recover" = "Gjenopprett konto";
 "purchase.uncredited.alert.message" = "Du har ikke krediterte transaksjoner. Vil du gjenopprette kontoinformasjonen din?";

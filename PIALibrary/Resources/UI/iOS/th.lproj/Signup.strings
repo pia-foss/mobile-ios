@@ -1,4 +1,5 @@
 "failure.message" = "เราไม่สามารถสร้างบัญชีได้ในขณะนี้ กรุณาลองใหม่อีกครั้งภายหลัง การปิดเปิดแอปใหม่จะเป็นการพยายามสร้างบัญชีใหม่";
+"failure.purchase.sandbox.message" = "ไม่มีระบบสมาชิก Sandbox ที่คุณเลือกอยู่ในการผลิต";
 "failure.redeem.claimed.message" = "ดูเหมือนว่าบัตรนี้มีการใช้สิทธิ์แล้วโดยบัญชีอื่น กรุณาลองใส่ PIN อื่น";
 "failure.redeem.claimed.title" = "บัตรมีการใช้สิทธิ์แล้ว";
 "failure.redeem.invalid.message" = "ดูเหมือนว่าคุณใส่ PIN การ์ดไม่ถูกต้อง กรุณาลองใหม่";
@@ -9,6 +10,17 @@
 "in_progress.message" = "เรากำลังยืนยันการซื้อของคุณกับระบบของเรา กรุณารอสักครู่";
 "in_progress.redeem.message" = "เรากำลังยืนยัน PIN การ์ดของคุณกับระบบของเรา กรุณารอสักครู่";
 "in_progress.title" = "ยืนยันการสมัคร";
+"purchase.trials.1year.protection" = "การป้องกันข้อมูลประจำตัวและความเป็นส่วนตัว 1 ปี";
+"purchase.trials.all.plans" = "ดูแผนที่มีทั้งหมด";
+"purchase.trials.anonymous" = "เรียกดูโดยไม่ระบุชื่อและซ่อน ip ของคุณ";
+"purchase.trials.devices" = "รับรองอุปกรณ์ 10 เครื่องในเวลาเดียวกัน";
+"purchase.trials.devices.description" = "ปกป้องตัวคุณบนอุปกรณ์ถึง 10 เครื่องในเวลาเดียวกัน";
+"purchase.trials.intro" = "ทดลองใช้ฟรี 7 วัน!";
+"purchase.trials.money.back" = "รับประกันการคืนเงินภายใน 7 วัน";
+"purchase.trials.price.after" = "เพียง %@ หลังจาก";
+"purchase.trials.region" = "เชื่อมต่อไปยังภูมิภาคใดก็ตามได้อย่างง่ายดาย";
+"purchase.trials.servers" = "กว่า 3300 เซิร์ฟเวอร์ใน 32 ประเทศ";
+"purchase.trials.start" = "เริ่มการเป็นสมาชิก";
 "purchase.uncredited.alert.button.cancel" = "ยกเลิก";
 "purchase.uncredited.alert.button.recover" = "กู้คืนบัญชี";
 "purchase.uncredited.alert.message" = "คุณได้ยกเลิกการทำธุรกรรมแล้ว คุณต้องการกู้คืนรายละเอียดบัญชีหรือไม่";

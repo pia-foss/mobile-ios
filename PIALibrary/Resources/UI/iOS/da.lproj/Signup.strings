@@ -1,4 +1,5 @@
 "failure.message" = "Vi kan ikke oprette en konto på nuværende tidspunkt. Prøv igen senere.\n\nGenåbning af appen vil genoptage forsøget på at oprette en konto.";
+"failure.purchase.sandbox.message" = "Det valgte sandbox-abonnement er ikke tilgængeligt i produktionen.";
 "failure.redeem.claimed.message" = "Det ser ud til, at dette kort allerede er taget af en anden konto. Prøv at indtaste en anden pinkode.";
 "failure.redeem.claimed.title" = "Kort allerede taget";
 "failure.redeem.invalid.message" = "Det ser ud til, at du har indtastet en ugyldig kort-pinkode. Prøv igen.";
@@ -9,6 +10,17 @@
 "in_progress.message" = "Vi bekræfter dit køb i vores system. Det kan tage et øjeblik, så bliv her venligst.";
 "in_progress.redeem.message" = "Vi bekræfter din kort-pinkode i vores system. Det kan tage et øjeblik, så bliv her venligst.";
 "in_progress.title" = "Bekræft tilmelding";
+"purchase.trials.1year.protection" = "1 års beskyttelse af personlige oplysninger og identitet";
+"purchase.trials.all.plans" = "Se alle tilgængelige planer";
+"purchase.trials.anonymous" = "Gennemse anonymt og skjul din ip.";
+"purchase.trials.devices" = "Understøtter 10 enheder på én gang";
+"purchase.trials.devices.description" = "Beskyt dig selv på op til 10 enheder ad gangen.";
+"purchase.trials.intro" = "Prøv gratis i 7 dage!";
+"purchase.trials.money.back" = "7-dages pengene tilbage garanti";
+"purchase.trials.price.after" = "Kun %@ efter";
+"purchase.trials.region" = "Forbind nemt til en hvilken som helst region";
+"purchase.trials.servers" = "Mere end 3300 servere i 32 lande";
+"purchase.trials.start" = "Start abonnement";
 "purchase.uncredited.alert.button.cancel" = "Annuller";
 "purchase.uncredited.alert.button.recover" = "Gendan konto";
 "purchase.uncredited.alert.message" = "Du har ukrediterede transaktioner. Vil du gendanne dine kontooplysninger?";
