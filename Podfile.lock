@@ -120,10 +120,10 @@ DEPENDENCIES:
   - Firebase/Core
   - FXPageControl
   - iRate
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `2e58526`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `2e58526`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `2e58526`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `2e58526`)
+  - PIALibrary/Library (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
+  - PIALibrary/Mock (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
+  - PIALibrary/UI (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
+  - PIALibrary/VPN (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
   - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `8bc012a`)
   - PopupDialog
   - SideMenu (= 3.1.5)
@@ -160,16 +160,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :commit: '2e58526'
-    :git: https://github.com/pia-foss/client-library-apple
+    :path: "/Users/ueshiba/Projects/PIA/client-library-apple"
   PIATunnel:
     :commit: 8bc012a
     :git: https://github.com/pia-foss/tunnel-apple
 
 CHECKOUT OPTIONS:
-  PIALibrary:
-    :commit: '2e58526'
-    :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
     :commit: 8bc012a
     :git: https://github.com/pia-foss/tunnel-apple
@@ -204,6 +200,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 4ad52ede35013a89dc7480b6accc7fa15704a6f6
+PODFILE CHECKSUM: 0a15de62e745a9e4f2f34638ac411dba963591d4
 
 COCOAPODS: 1.7.5
