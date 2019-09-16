@@ -125,6 +125,7 @@ class Bootstrapper {
             }
 
             Client.refreshProducts()
+            Client.observeTransactions()
             
         }
 
