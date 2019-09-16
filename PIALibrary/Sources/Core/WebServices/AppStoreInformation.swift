@@ -12,10 +12,6 @@ public struct AppStoreInformation {
     
     public let products: [Product]
     
-    public let isInIntroOfferPeriod: Bool
-    
-    public let isTrialPeriod: Bool
-    
-    public let trialsEnabled: Bool
+    public let eligibleForTrial: Bool
 
 }
