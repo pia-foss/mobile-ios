@@ -49,9 +49,6 @@ public final class Client {
      You probably want to do this as soon as the consumer application starts.
      */
     public static func bootstrap() {
-        #if os(iOS)
-        store.startObservingTransactions()
-        #endif
 
         // preload servers from optionally bundled JSON
         if let data = configuration.bundledServersJSON {
@@ -77,6 +74,15 @@ public final class Client {
     public static func refreshProducts() {
         #if os(iOS)
         providers.accountProvider.listPlanProducts(nil)
+        #endif
+    }
+    
+    /**
+    Observe Purchase transactions
+    */
+    public static func observeTransactions() {
+        #if os(iOS)
+        store.startObservingTransactions()
         #endif
     }
 

@@ -130,7 +130,11 @@ class AppStoreProvider: NSObject, InAppProvider {
 
     private func addUncreditedTransaction(_ transaction: SKPaymentTransaction) {
         log.debug("Adding uncredited transaction: \(transaction)")
-        uncreditedTransactions.append(AppStoreTransaction(native: transaction))
+        
+        if let _ = Client.configuration.plan(forProductIdentifier: transaction.payment.productIdentifier) {
+            //Only add the uncredited transaction if the plan is available
+            uncreditedTransactions.append(AppStoreTransaction(native: transaction))
+        }
         
         log.debug("Uncredited transactions now: \(uncreditedTransactions)")
 
