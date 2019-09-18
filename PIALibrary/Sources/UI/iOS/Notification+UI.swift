@@ -16,12 +16,15 @@ public extension Notification.Name {
     // MARK: UI
     
     /// Posted following a theme switch.
-    public static let PIAThemeDidChange = Notification.Name("PIAThemeDidChange")
+    static let PIAThemeDidChange = Notification.Name("PIAThemeDidChange")
     
     /// Reload the tiles.
-    public static let PIATilesDidChange = Notification.Name("PIATilesDidChange")
+    static let PIATilesDidChange = Notification.Name("PIATilesDidChange")
     
     /// Present Recover Signup page
-    public static let PIARecoverAccount = Notification.Name("PIARecoverAccount")
+    static let PIARecoverAccount = Notification.Name("PIARecoverAccount")
+
+    /// User toggled the dark mode
+    static let PIAThemeShouldChange = Notification.Name("PIAThemeShouldChange")
 
 }

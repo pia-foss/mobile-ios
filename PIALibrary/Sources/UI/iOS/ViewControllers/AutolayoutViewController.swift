@@ -186,6 +186,16 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
 
 }
 
+//MARK: - iOS13 Dark mode
+extension AutolayoutViewController {
+    
+    override open func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        Macros.postNotification(.PIAThemeShouldChange)
+    }
+    
+}
+
 extension AutolayoutViewController: AnimatingLoadingDelegate {
     
     private struct LottieRepos {
