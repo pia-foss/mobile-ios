@@ -47,6 +47,7 @@ class DashboardViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        reloadTheme()
         setupCollectionView()
         setupNavigationBarButtons()
         
@@ -70,6 +71,7 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(vpnShouldReconnect), name: .PIASettingsHaveChanged, object: nil)
         nc.addObserver(self, selector: #selector(presentKillSwitchAlert), name: .PIAPersistentConnectionTileHaveChanged, object: nil)
         nc.addObserver(self, selector: #selector(closeSession), name: .PIAAccountLapsed, object: nil)
+        nc.addObserver(self, selector: #selector(reloadTheme), name: .PIAThemeShouldChange, object: nil)
 
 #if !TARGET_IPHONE_SIMULATOR
         let types: UIUserNotificationType = [.alert, .badge, .sound]
@@ -460,6 +462,17 @@ class DashboardViewController: AutolayoutViewController {
     
     @objc private func updateTiles() {
         collectionView.reloadData()
+    }
+    
+    @objc private func reloadTheme() {
+        if #available(iOS 13.0, *) {
+            switch UITraitCollection.current.userInterfaceStyle {
+            case .dark:
+                AppPreferences.shared.transitionTheme(to: .dark)
+            default:
+                AppPreferences.shared.transitionTheme(to: .light)
+            }
+        }
     }
 
     @objc private func updateCurrentStatusWithUserInfo(_ userInfo: [AnyHashable: Any]?) {
