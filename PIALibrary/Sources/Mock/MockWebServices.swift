@@ -86,13 +86,7 @@ class MockWebServices: WebServices {
             }
         }
         
-        if result()!.isInIntroOfferPeriod || result()!.isTrialPeriod {
-            Client.configuration.eligibleForTrial = false
-        } else {
-            Client.configuration.eligibleForTrial = true
-        }
-        
-        Client.configuration.eligibleForTrial = result()!.trialsEnabled
+        Client.configuration.eligibleForTrial = result()!.eligibleForTrial
 
         callback?(result(), nil)
 

@@ -222,12 +222,11 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             "type": "subscription"
         ]
         
-        if let receipt = receipt,
-            Client.configuration.arePurchasesAvailable() {
-            parameters["receipt"] = receipt
+        if let receipt = receipt {
+            parameters["receipt"] = receipt.base64EncodedString()
         }
 
-        req(nil, .get, endpoint, useAuthToken: false, parameters, status, JSONRequestExecutor() { (json, status, error) in
+        req(nil, .post, endpoint, useAuthToken: false, parameters, status, JSONRequestExecutor() { (json, status, error) in
             if let knownError = self.knownError(endpoint, status, errors) {
                 callback?(nil, knownError)
                 return
@@ -244,25 +243,12 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                     return
                 }
 
-                let trialsEnabled = json["trial_enabled"] as? Bool ?? false
                 let receipt =  json["receipt"] as? [String: Any] ?? [:]
-                
-                let isIntroOffer = receipt["is_in_intro_offer_period"] as? Bool ?? false
-                let isTrialPeriod = receipt["is_trial_period"] as? Bool ?? false
+                let eligibleForTrial = receipt["eligible_for_trial"] as? Bool ?? false
                 
                 let info = AppStoreInformation(products: products,
-                                    isInIntroOfferPeriod: isIntroOffer,
-                                    isTrialPeriod: isTrialPeriod,
-                                    trialsEnabled: trialsEnabled)
-                //If either of these fields are true for a given subscription, the user is not eligible for an introductory offer on that subscription product or any other products within the same subscription group.
-                if info.isInIntroOfferPeriod || info.isTrialPeriod {
-                    Client.configuration.eligibleForTrial = false
-                } else {
-                    Client.configuration.eligibleForTrial = true
-                }
-                
-                //Backend can disable the trials and override the previous value
-                Client.configuration.eligibleForTrial = info.trialsEnabled
+                                    eligibleForTrial: eligibleForTrial)
+                Client.configuration.eligibleForTrial = info.eligibleForTrial
                 
                 callback?(info, nil)
             } else {

@@ -108,27 +108,21 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
                                                           plan: .monthly,
                                                           price: "3.99",
                                                           legacy: false)],
-                                       isInIntroOfferPeriod: false,
-                                       isTrialPeriod: false,
-                                       trialsEnabled: true)
+                                       eligibleForTrial: true)
         }
         webServices.appstoreInformationEligibleButDisabledFromBackend = {
             return AppStoreInformation(products: [Product(identifier: "com.product.monthly",
                                                           plan: .monthly,
                                                           price: "3.99",
                                                           legacy: false)],
-                                       isInIntroOfferPeriod: false,
-                                       isTrialPeriod: false,
-                                       trialsEnabled: false)
+                                       eligibleForTrial: false)
         }
         webServices.appstoreInformationNotEligible = {
             return AppStoreInformation(products: [Product(identifier: "com.product.monthly",
                                                           plan: .monthly,
                                                           price: "3.99",
                                                           legacy: false)],
-                                       isInIntroOfferPeriod: true,
-                                       isTrialPeriod: false,
-                                       trialsEnabled: true)
+                                       eligibleForTrial: false)
         }
     }
     
