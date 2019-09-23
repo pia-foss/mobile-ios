@@ -33,7 +33,9 @@ class FavoriteServersTileCollectionViewCell: UICollectionViewCell, TileableCell 
             case .normal:
                 self.tileLeftConstraint.constant = 0
                 self.tileRightConstraint.constant = 0
+                self.accessoryButtonLeft.isHidden = true
             case .edit:
+                self.accessoryButtonLeft.isHidden = false
                 self.tileLeftConstraint.constant = self.leftConstraintValue
                 self.tileRightConstraint.constant = self.rightConstraintValue
                 self.setupVisibilityButton()
@@ -47,9 +49,11 @@ class FavoriteServersTileCollectionViewCell: UICollectionViewCell, TileableCell 
         if Client.providers.tileProvider.visibleTiles.contains(tileType) {
             accessoryButtonLeft.setImage(Theme.current.activeEyeImage(), for: .normal)
             accessoryButtonLeft.setImage(Theme.current.inactiveEyeImage(), for: .highlighted)
+            accessoryButtonLeft.accessibilityLabel = L10n.Tiles.Accessibility.Visible.Tile.action
         } else {
             accessoryButtonLeft.setImage(Theme.current.inactiveEyeImage(), for: .normal)
             accessoryButtonLeft.setImage(Theme.current.activeEyeImage(), for: .highlighted)
+            accessoryButtonLeft.accessibilityLabel = L10n.Tiles.Accessibility.Invisible.Tile.action
         }
     }
     

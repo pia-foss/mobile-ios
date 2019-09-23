@@ -12,7 +12,9 @@ import PIATunnel
 import SwiftyBeaver
 import iRate
 #if PIA_DEV
-import HockeySDK
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
 import Firebase
 import Fabric
 import Crashlytics
@@ -37,10 +39,10 @@ class Bootstrapper {
         let console = ConsoleDestination()
         #if PIA_DEV
         console.minLevel = .debug
-        let hockey = BITHockeyManager.shared()
-        hockey.isMetricsManagerDisabled = true
-        hockey.configure(withIdentifier: AppConstants.hockeyAppId)
-        hockey.start()
+        
+        MSAppCenter.start(AppConstants.appCenterAppId,
+                        withServices: [MSAnalytics.self,
+                                       MSCrashes.self])
         
         if let path = Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist"),
             let plist = NSDictionary(contentsOf: path) as? [String: Any],
@@ -104,28 +106,26 @@ class Bootstrapper {
             PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build()
         ]
         
-        Client.providers.accountProvider.updatePlanProductIdentifiers { [weak self] (products, error) in
+        Client.providers.accountProvider.subscriptionInformation { [weak self] (info, error) in
             
             if let _ = error {
                 self?.setDefaultPlanProducts()
             }
             
-            if let products = products,
-                products.count > 0 {
-                for product in products {
-                    if product.legacy {
-                        if product.plan == .monthly {
-                            Client.configuration.setPlan(.legacyMonthly, forProductIdentifier: product.identifier)
-                        } else if product.plan == .yearly {
-                            Client.configuration.setPlan(.legacyYearly, forProductIdentifier: product.identifier)
+            if let info = info {
+            
+                if info.products.count > 0 {
+                    for product in info.products {
+                        if !product.legacy {
+                            Client.configuration.setPlan(product.plan, forProductIdentifier: product.identifier)
                         }
-                    } else {
-                        Client.configuration.setPlan(product.plan, forProductIdentifier: product.identifier)
                     }
                 }
+
             }
 
             Client.refreshProducts()
+            Client.observeTransactions()
             
         }
 
@@ -188,8 +188,6 @@ class Bootstrapper {
     private func setDefaultPlanProducts() {
         Client.configuration.setPlan(.yearly, forProductIdentifier: AppConstants.InApp.yearlyProductIdentifier)
         Client.configuration.setPlan(.monthly, forProductIdentifier: AppConstants.InApp.monthlyProductIdentifier)
-        Client.configuration.setPlan(.legacyYearly, forProductIdentifier: AppConstants.LegacyInApp.yearlyProductIdentifier)
-        Client.configuration.setPlan(.legacyMonthly, forProductIdentifier: AppConstants.LegacyInApp.monthlyProductIdentifier)
     }
 
     func dispose() {

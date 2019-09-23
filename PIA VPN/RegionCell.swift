@@ -100,5 +100,8 @@ class RegionCell: UITableViewCell, Restylable {
         self.isFavorite ?
             self.favoriteImageView.image = Asset.Piax.Global.favoriteSelected.image :
             Theme.current.applyFavoriteUnselectedImage(self.favoriteImageView)
+        favoriteButton.accessibilityLabel = self.isFavorite ?
+            L10n.Region.Accessibility.favorite :
+            L10n.Region.Accessibility.unfavorite
     }
 }

@@ -98,13 +98,15 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
             target: self,
             action: #selector(clear(_:))
         )
-        
+        navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Global.clear
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: L10n.Global.update,
             style: .plain,
             target: self,
             action: #selector(update(_:))
         )
+        navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Global.update
     }
     
     private func configureTextfields() {

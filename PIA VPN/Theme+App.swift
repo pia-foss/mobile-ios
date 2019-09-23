@@ -105,6 +105,58 @@ extension Theme {
             TextStyle.textStyle6 : TextStyle.textStyle7)
         textfield.backgroundColor = .clear
     }
+    
+    public func applyFriendReferralsView(_ view: UIView,
+                                         appearance: Appearance) {
+        view.layer.cornerRadius = 2.3
+        if palette.appearance == Appearance.light {
+            view.layer.borderColor = UIColor.piaGreenDark20.cgColor
+            view.backgroundColor = UIColor.piaGreenDark20
+        } else {
+            view.layer.borderColor = UIColor.piaGrey10.cgColor
+            Theme.current.applySecondaryBackground(view)
+        }
+        view.layer.borderWidth = 1.0
+    }
+    
+    public func applyFriendReferralsSubtitle(_ label: UILabel) {
+        let textAlignment = label.textAlignment
+        label.style(style: TextStyle.textStyle16)
+        label.textAlignment = textAlignment
+    }
+    
+    public func applyFriendReferralsTitle(_ label: UILabel) {
+        label.style(style: TextStyle.textStyle11)
+        label.font = Theme.current.typeface.mediumFont(size: 12)
+    }
+    
+    public func applyFriendReferralsMessageLabel(_ label: UILabel) {
+        label.style(style: TextStyle.textStyle6)
+        label.font = Theme.current.typeface.mediumFont(size: 15)
+    }
+
+    public func applyInputOverlay(_ view: UIView) {
+        view.layer.cornerRadius = 6.0
+        view.backgroundColor = .black
+    }
+    
+    public func applyFriendReferralsButton(_ button: PIAButton,
+                                           appearance: Appearance) {
+        button.resetButton()
+        button.layer.cornerRadius = 1.7
+        button.titleLabel?.font = Theme.current.typeface.mediumFont(size: 9)
+        if palette.appearance == Appearance.light {
+            button.setTitleColor(TextStyle.textStyle14.color,
+                                 for: .normal)
+            button.setBackgroundImage(UIImage.fromColor(UIColor.white), for: .normal)
+        } else {
+            button.setTitleColor(TextStyle.textStyle11.color,
+                                 for: .normal)
+            button.setBackgroundImage(UIImage.fromColor(UIColor.piaGrey10), for: .normal)
+
+        }
+
+    }
 
     //MARK: SearchBar
     
@@ -194,5 +246,26 @@ extension Theme {
             .white :
             palette.textColor(forRelevance: 2, appearance: appearance)
     }
+    
+    public func textWithColoredLink(withMessage message: String, link: String) -> NSAttributedString {
+        let plain = message.replacingOccurrences(
+            of: "$1",
+            with: link
+            ) as NSString
+        
+        let attributed = NSMutableAttributedString(string: plain as String)
+
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .left
+        paragraph.minimumLineHeight = 16
+        let fullRange = NSMakeRange(0, plain.length)
+        attributed.addAttribute(.font, value: TextStyle.textStyle8.font!, range: fullRange)
+        attributed.addAttribute(.foregroundColor, value: TextStyle.textStyle8.color!, range: fullRange)
+        attributed.addAttribute(.paragraphStyle, value: paragraph, range: fullRange)
+        let range1 = plain.range(of: link)
+        attributed.addAttribute(.foregroundColor, value: TextStyle.textStyle9.color!, range: range1)
+        return attributed
+    }
+
 
 }

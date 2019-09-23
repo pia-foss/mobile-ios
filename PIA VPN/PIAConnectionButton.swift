@@ -28,7 +28,15 @@ private struct PIAConnectionButtonSettings {
 class PIAConnectionButton: UIButton, Restylable {
 
     private var isAnimating: Bool = false
-    var isOn: Bool = false
+    var isOn: Bool = false {
+        didSet {
+            if isOn == true {
+                self.accessibilityLabel = L10n.Dashboard.Accessibility.Vpn.Button.isOn
+            } else {
+                self.accessibilityLabel = L10n.Dashboard.Accessibility.Vpn.Button.isOff
+            }
+        }
+    }
     var isIndeterminate: Bool = false
     private var observedBounds: Any? = nil
 
@@ -53,6 +61,8 @@ class PIAConnectionButton: UIButton, Restylable {
     }
 
     private func setupView() {
+        
+        self.accessibilityLabel = L10n.Dashboard.Accessibility.Vpn.button
         
         //Notification when the theme has changed
         NotificationCenter.default.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)

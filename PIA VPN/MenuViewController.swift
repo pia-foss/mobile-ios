@@ -164,17 +164,18 @@ class MenuViewController: AutolayoutViewController {
 
         //Now we need to filter if legacy plan or not
         if let currentUser = currentUser,
-            let productId = currentUser.info?.productId {
+            let info = currentUser.info,
+            let productId = info.productId {
             
             switch productId {
-            case AppConstants.InApp.monthlyProductIdentifier:
+            case AppConstants.InApp.monthlyProductIdentifier,
+                 AppConstants.LegacyInApp.monthlyProductIdentifier,
+                 AppConstants.LegacyInApp.oldMonthlyProductIdentifier:
                 uniquePlan = .monthly
-            case AppConstants.InApp.yearlyProductIdentifier:
+            case AppConstants.InApp.yearlyProductIdentifier,
+                 AppConstants.LegacyInApp.yearlyProductIdentifier,
+                 AppConstants.LegacyInApp.oldYearlyProductIdentifier:
                 uniquePlan = .yearly
-            case AppConstants.LegacyInApp.monthlyProductIdentifier:
-                uniquePlan = .legacyMonthly
-            case AppConstants.LegacyInApp.yearlyProductIdentifier:
-                uniquePlan = .legacyYearly
             default:
                 break
             }
@@ -289,6 +290,7 @@ class MenuViewController: AutolayoutViewController {
             L10n.Global.error,
             L10n.Renewal.Failure.message
         )
+        
         alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
@@ -337,7 +339,11 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
-            return ((currentUser?.info?.shouldPresentExpirationAlert ?? false) ? 1 : 0)
+            if let currentUser = currentUser,
+                let info = currentUser.info {
+                return info.shouldPresentExpirationAlert ? 1 : 0
+            }
+            return 0
         } else {
             let sectionItems = allItems[section - 1]
             return sectionItems.count
@@ -346,10 +352,14 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == 0) {
-            let timeLeft = currentUser?.info?.dateComponentsBeforeExpiration ?? DateComponents()
-            let cell = tableView.dequeueReusableCell(withIdentifier: Cells.expiration, for: indexPath) as! ExpirationCell
-            cell.fill(withTimeLeft: timeLeft)
-            return cell
+            if let currentUser = currentUser,
+                let info = currentUser.info {
+                let timeLeft = info.dateComponentsBeforeExpiration
+                let cell = tableView.dequeueReusableCell(withIdentifier: Cells.expiration, for: indexPath) as! ExpirationCell
+                cell.fill(withTimeLeft: timeLeft)
+                return cell
+            }
+            return UITableViewCell()
         }
         else {
             let sectionItems = allItems[indexPath.section - 1]

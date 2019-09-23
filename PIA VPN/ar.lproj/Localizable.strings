@@ -21,6 +21,8 @@
 "account.save.item" = "تحديث البريد الإلكتروني";
 "account.save.prompt" = "مصادقة لحفظ التغييرات";
 "account.save.success" = "تم حفظ عنوان بريدك الإلكتروني.";
+"account.subscriptions.linkMessage" = "هنا.";
+"account.subscriptions.message" = "يمكنك إدارة اشتراكك من هنا.";
 "account.update.email.require.password.button" = "إرسال";
 "account.update.email.require.password.message" = "لأسباب أمنية، نطلب كلمة مرور PIA الخاصة بك عند إجراء تغييرات على حسابك. يرجى إدخال كلمة مرور PIA للمتابعة.";
 "account.update.email.require.password.title" = "كلمة مرور PIA مطلوبة";
@@ -28,6 +30,9 @@
 "content_blocker.body.footer" = "يرجى الملاحظة: يعمل حظر المحتوى دون الحاجة للاتصال بشبكة VPN، ولكنه لن يعمل إلا على متصفح Safari.";
 "content_blocker.body.subtitle" = "لتفعيل استخدام حظر المحتوى على متصفح Safari، يرجى الذهاب الى الإعدادات > Safari وتفعيل PIA VPN تحت General touch Content Blockers";
 "content_blocker.title" = "حظر المحتوى";
+"dashboard.accessibility.vpn.button" = "زر اتصال VPN";
+"dashboard.accessibility.vpn.button.isOff" = "زر اتصال VPN. خدمة VPN غير متصلة حاليًا";
+"dashboard.accessibility.vpn.button.isOn" = "زر اتصال VPN. خدمة VPN متصلة حاليًا";
 "dashboard.connection.ip.caption" = "IP عمومي";
 "dashboard.connection.ip.unreachable" = "لا يمكن الوصول إلى الإنترنت";
 "dashboard.connection.region.caption" = "المنطقة الحالية";
@@ -43,20 +48,51 @@
 "dashboard.vpn.on" = "VPN: تشغيل";
 "expiration.message" = "سينتهي اشتراكك قريبًا. قم بتجديده لتبقى محميًا.";
 "expiration.title" = "تجديد";
+"friend.referrals.days.acquired" = "تم الحصول على الأيام المجانية";
+"friend.referrals.days.number" = "%d أيام";
+"friend.referrals.description.short" = "رشّحنا لأحد الأصدقاء. احصل على 30 يومًا مجانًا.";
+"friend.referrals.email.validation" = "البريد الإلكتروني غير صحيح. يرجى إعادة المحاولة.";
+"friend.referrals.family.friends.program" = "برنامج إحالة العائلة والأصدقاء";
+"friend.referrals.friends.family.title" = "رشّحنا لأصدقائك وعائلتك. مقابل كل تسجيل، سنمنح كليكما 30 يومًا مجانًا. ";
+"friend.referrals.fullName" = "الاسم الكامل";
+"friend.referrals.invitation.terms" = "بإرسال هذه الدعوة، أوافق على جميع بنود وشروط برنامج إحالة العائلة والأصدقاء.";
+"friend.referrals.invite.error" = "تعذّر إعادة إرسال الدعوة. أعد المحاولة لاحقًا.";
+"friend.referrals.invite.success" = "تم إرسال الدعوة بنجاح";
+"friend.referrals.invites.number" = "لقد أرسلت %d دعوات";
+"friend.referrals.invites.sent.title" = "تم إرسال الدعوات";
+"friend.referrals.pending.invites" = "%d دعوات معلقة";
+"friend.referrals.pending.invites.title" = "الدعوات المعلقة";
+"friend.referrals.privacy.note" = "يرجى ملاحظة أنه لأسباب تتعلق بالخصوصية، سيتم حذف جميع الدعوات التي مضى عليها أكثر من 30 يومًا.";
+"friend.referrals.reward.given" = "تم منح المكافأة";
+"friend.referrals.send.invite" = "إرسال دعوة";
+"friend.referrals.share.link" = "مشاركة رابط الإحالة الفريد";
+"friend.referrals.share.link.terms" = "بمشاركة هذا الرابط، فأنت توافق على جميع شروط وأحكام برنامج إحالة العائلة والأصدقاء.";
+"friend.referrals.signedup" = "قام بالتسجيل";
+"friend.referrals.signups.number" = "%d تسجيلات";
+"friend.referrals.title" = "إحالة صديق";
+"friend.referrals.view.invites.sent" = "عرض الدعوات المرسلة";
+"global.add" = "إضافة";
 "global.automatic" = "تلقائي";
 "global.cancel" = "إلغاء";
 "global.clear" = "مسح";
 "global.close" = "إغلاق";
+"global.copied" = "تم النسخ إلى الحافظة";
+"global.copy" = "نسخ";
 "global.disabled" = "معطل";
 "global.edit" = "تحرير";
+"global.empty" = "فارغ";
 "global.enable" = "تمكين";
 "global.enabled" = "ممكّن";
 "global.error" = "خطأ";
+"global.no" = "لا";
 "global.ok" = "موافق";
 "global.optional" = "اختياري";
+"global.remove" = "إزالة";
 "global.required" = "مطلوب";
+"global.share" = "مشاركة";
 "global.unreachable" = "لم يتم العثور على اتصال بالإنترنت. يرجى التأكيد أن لديك اتصال بالإنترنت.";
 "global.update" = "تحديث";
+"global.yes" = "نعم";
 "hotspothelper.display.name" = "🔒 قم بتنشيط حماية VPN WiFi في إعدادات PIA لتأمين هذا الاتصال.";
 "hotspothelper.display.protected.name" = "🔒 حماية VPN WiFi من PIA نشطة - نحن نحمي ظهرك.";
 "menu.accessibility.edit.tile" = "تحرير";
@@ -87,7 +123,9 @@
 "notifications.disabled.message" = "قم بتمكين الإعلامات لكي يتم تذكيرك بتجديد اشتراكك قبل انتهائه.";
 "notifications.disabled.settings" = "الإعدادات";
 "notifications.disabled.title" = "تم تعطيل الإشعارات";
+"region.accessibility.favorite" = "إضافة منطقة مفضلة";
 "region.accessibility.filter" = "تصفية";
+"region.accessibility.unfavorite" = "إزالة منطقة مفضلة";
 "region.filter.favorites" = "المفضلة";
 "region.filter.latency" = "زمن الانتقال";
 "region.filter.name" = "الاسم";
@@ -175,6 +213,8 @@
 "siri.shortcuts.connect.title" = "اتصال PIA VPN";
 "siri.shortcuts.disconnect.row.title" = "قطع اتصال اختصار Siri";
 "siri.shortcuts.disconnect.title" = "قطع اتصال PIA VPN";
+"tiles.accessibility.invisible.tile.action" = "اضغط لإضافة هذا المربع إلى لوحة المعلومات";
+"tiles.accessibility.visible.tile.action" = "اضغط لإزالة هذا المربع من لوحة المعلومات";
 "tiles.favorite.servers.title" = "الخوادم المفضلة";
 "tiles.nmt.accessibility.trusted" = "شبكة موثوقة";
 "tiles.nmt.accessibility.untrusted" = "شبكة غير موثوقة";

@@ -14,7 +14,7 @@ struct AppConstants {
 
     static let appGroup = "group.com.privateinternetaccess"
     
-    static let hockeyAppId = "a2397c4240ac48e897e67498f0df0e1a"
+    static let appCenterAppId = "a2397c42-40ac-48e8-97e6-7498f0df0e1a"
     
     struct Flags {
         static var developmentPath = Bundle.main.path(forResource: "Flags-dev", ofType: "plist")
@@ -29,13 +29,15 @@ struct AppConstants {
     }
 
     struct InApp {
-        static let yearlyProductIdentifier = "com.privateinternetaccess.ios.iap.2019.1year"
-        static let monthlyProductIdentifier = "com.privateinternetaccess.ios.iap.2019.1month"
+        static let yearlyProductIdentifier = "com.privateinternetaccess.subscription.1year"
+        static let monthlyProductIdentifier = "com.privateinternetaccess.subscription.1month"
     }
     
     struct LegacyInApp {
-        static let yearlyProductIdentifier = "com.privateinternetaccess.ios.iap.1year"
-        static let monthlyProductIdentifier = "com.privateinternetaccess.ios.iap.1month"
+        static let yearlyProductIdentifier = "com.privateinternetaccess.ios.iap.2019.1year"
+        static let monthlyProductIdentifier = "com.privateinternetaccess.ios.iap.2019.1month"
+        static let oldYearlyProductIdentifier = "com.privateinternetaccess.ios.iap.1year"
+        static let oldMonthlyProductIdentifier = "com.privateinternetaccess.ios.iap.1month"
     }
     
     struct AppURL {
@@ -61,6 +63,8 @@ struct AppConstants {
         static let privacyURL = URL(string: "https://www.privateinternetaccess.com/pages/privacy-policy/")!
 
         static let csEmail = "helpdesk+vpnpermissions.ios@privateinternetaccess.com"
+        
+        static let friendReferralTerms = "https://www.privateinternetaccess.com/pages/invites/terms_and_conditions"
 
         static var stagingEndpointURL: URL? = {
             guard let path = Bundle.main.path(forResource: "staging", ofType: "endpoint") else {
@@ -127,6 +131,10 @@ struct AppConstants {
     struct VPNWidget {
         static let vpnStatus = "vpn.status"
         static let vpnButtonDescription = "vpn.button.description"
+    }
+    
+    struct AppleUrls {
+        static let subscriptions = "itms-apps://apps.apple.com/account/subscriptions"
     }
     
 }

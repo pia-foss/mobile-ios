@@ -14,6 +14,14 @@
 "global.enabled" = "Enabled";
 "global.disabled" = "Disabled";
 "global.enable" = "Enable";
+"global.add" = "Add";
+"global.remove" = "Remove";
+"global.empty" = "Empty";
+"global.copy" = "Copy";
+"global.share" = "Share";
+"global.copied" = "Copied to clipboard";
+"global.yes" = "Yes";
+"global.no" = "No";
 
 // NOTIFICATIONS
 
@@ -99,6 +107,8 @@
 "account.update.email.require.password.message" = "For security reasons we require your PIA password to perform a change in your account. Please input your PIA password to proceed.";
 "account.update.email.require.password.button" = "Submit";
 "account.error.unauthorized" = "Your username or password is incorrect.";
+"account.subscriptions.message" = "You can manage your subscription from here.";
+"account.subscriptions.linkMessage" = "here.";
 
 // SETTINGS
 
@@ -171,6 +181,9 @@
 "dashboard.vpn.disconnecting" = "Disconnecting...";
 "dashboard.vpn.changing_region" = "Changing region...";
 "dashboard.vpn.disconnect.untrusted" = "This network is untrusted. Do you really want to disconnect the VPN?";
+"dashboard.accessibility.vpn.button" = "VPN Connection button";
+"dashboard.accessibility.vpn.button.isOn" = "VPN Connection button. The VPN is currently connected";
+"dashboard.accessibility.vpn.button.isOff" = "VPN Connection button. The VPN is currently disconnected";
 
 // VPN PERMISSION
 
@@ -233,6 +246,8 @@
 "region.filter.name" = "Name";
 "region.filter.latency" = "Latency";
 "region.filter.favorites" = "Favorites";
+"region.accessibility.favorite" = "Add a favorite region";
+"region.accessibility.unfavorite" = "Remove a favorite region";
 
 // TILES
 "tiles.quick.connect.title" = "Recent servers";
@@ -251,6 +266,8 @@
 "tiles.nmt.accessibility.trusted" = "Trusted network";
 "tiles.nmt.accessibility.untrusted" = "Untrusted network";
 "tiles.quicksettings.title" = "Quick settings";
+"tiles.accessibility.visible.tile.action" = "Tap to remove this tile from the dasboard";
+"tiles.accessibility.invisible.tile.action" = "Tap to add this tile to the dasboard";
 
 //SIRI SHORTCUTS
 "siri.shortcuts.connect.row.title" = "'Connect' Siri Shortcut";
@@ -261,3 +278,29 @@
 
 //TODAY WIDGET
 "today.widget.login" = "Login";
+
+//FRIEND REFERRALS
+"friend.referrals.email.validation" = "Invalid email. Please try again.";
+"friend.referrals.title" = "Refer a Friend";
+"friend.referrals.view.invites.sent" = "View invites sent";
+"friend.referrals.pending.invites" = "%d pending invites";
+"friend.referrals.signups.number" = "%d signups";
+"friend.referrals.fullName" = "Full name";
+"friend.referrals.invitation.terms" = "By sending this invitation, I agree to all of the terms and conditions of the Family and Friends Referral Program.";
+"friend.referrals.family.friends.program" = "Family and Friends Referral Program";
+"friend.referrals.send.invite" = "Send invite";
+"friend.referrals.invite.error" = "Could not resend invite. Try again later.";
+"friend.referrals.invite.success" = "Invite sent successfully";
+"friend.referrals.share.link" = "Share your unique referral link";
+"friend.referrals.share.link.terms" = "By sharing this link, you agree to all of the terms and conditions of the Family and Friends Referral Program.";
+"friend.referrals.invites.sent.title" = "Invites sent";
+"friend.referrals.pending.invites.title" = "Pending invites";
+"friend.referrals.invites.number" = "You have sent %d invites";
+"friend.referrals.privacy.note" = "Please note, for privacy reasons, all invites older than 30 days will be deleted.";
+"friend.referrals.signedup" = "Signed up";
+"friend.referrals.reward.given" = "Reward given";
+"friend.referrals.days.acquired" = "Free days acquired";
+"friend.referrals.days.number" = "%d days";
+
+"friend.referrals.friends.family.title" = "Refer your friends and family. For every sign up we’ll give you both 30 days free. ";
+"friend.referrals.description.short" = "REFER A FRIEND. GET 30 DAYS FREE.";
