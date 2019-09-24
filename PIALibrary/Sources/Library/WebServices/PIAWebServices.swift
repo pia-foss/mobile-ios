@@ -243,8 +243,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                     return
                 }
 
-                let receipt =  json["receipt"] as? [String: Any] ?? [:]
-                let eligibleForTrial = receipt["eligible_for_trial"] as? Bool ?? false
+                let eligibleForTrial = json["eligible_for_trial"] as? Bool ?? false
                 
                 let info = AppStoreInformation(products: products,
                                     eligibleForTrial: eligibleForTrial)
