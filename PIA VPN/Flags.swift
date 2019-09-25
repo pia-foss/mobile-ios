@@ -44,8 +44,14 @@ class Flags: NSObject {
     
     @objc private(set) var enablesDNSSettings = true
 
+    private(set) var enablesThemeSwitch = true
+    
     private override init() {
         super.init()
+        
+        if #available(iOS 13.0, *) {
+            enablesThemeSwitch = false
+        }
         
         #if PIA_DEV
             guard let path = AppConstants.Flags.developmentPath else {

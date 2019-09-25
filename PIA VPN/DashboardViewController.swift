@@ -465,14 +465,7 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     @objc private func reloadTheme() {
-        if #available(iOS 13.0, *) {
-            switch UITraitCollection.current.userInterfaceStyle {
-            case .dark:
-                AppPreferences.shared.transitionTheme(to: .dark)
-            default:
-                AppPreferences.shared.transitionTheme(to: .light)
-            }
-        }
+        AppPreferences.shared.reloadTheme()
     }
 
     @objc private func updateCurrentStatusWithUserInfo(_ userInfo: [AnyHashable: Any]?) {
