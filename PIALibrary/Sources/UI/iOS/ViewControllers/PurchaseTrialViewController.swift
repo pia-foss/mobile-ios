@@ -142,9 +142,14 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
             purchase.detail = L10n.Welcome.Plan.Yearly.detailFormat(currencySymbol, purchase.product.price.description)
             purchase.bestValue = true
             let price = L10n.Welcome.Plan.Yearly.detailFormat(currencySymbol, purchase.product.price.description)
-            subtitleLabel.text = L10n.Signup.Purchase.Trials.Price.after(price)
-            Theme.current.makeSmallLabelToStandOut(subtitleLabel,
-                                                   withTextToStandOut: price)
+
+            DispatchQueue.main.async { [weak self] in
+                if let label = self?.subtitleLabel {
+                    label.text = L10n.Signup.Purchase.Trials.Price.after(price)
+                    Theme.current.makeSmallLabelToStandOut(label,
+                                                           withTextToStandOut: price)
+                }
+            }
             allPlans[0] = purchase
             selectedPlanIndex = 0
         }
