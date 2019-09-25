@@ -69,7 +69,10 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
     /// :nodoc:
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
+        //MARK: - iOS13 Dark mode
+        if #available(iOS 13.0, *) {
+            Macros.postNotification(.PIAThemeShouldChange)
+        }
         refreshOrientationConstraints(size: view.bounds.size)
     }
     
@@ -184,16 +187,6 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
         self.navigationController?.popViewController(animated: true)
     }
 
-}
-
-//MARK: - iOS13 Dark mode
-extension AutolayoutViewController {
-    
-    override open func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        Macros.postNotification(.PIAThemeShouldChange)
-    }
-    
 }
 
 extension AutolayoutViewController: AnimatingLoadingDelegate {
