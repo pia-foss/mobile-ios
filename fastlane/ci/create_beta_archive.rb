@@ -1,9 +1,9 @@
 desc "Archive a new build for Beta testing"
 lane :create_beta_archive do
     #ensure_git_status_clean
-    sh "cd .. && rm -rf Pods/SideMenu"
+    #sh "cd .. && rm -rf Pods/SideMenu"
     cocoapods(try_repo_update_on_error: true)
-    sh "cd .. && git apply ci/0001-Close-menu-on-rotation.patch"
+    #sh "cd .. && git apply ci/0001-Close-menu-on-rotation.patch"
 
     get_build_number
     increment_build_number(
