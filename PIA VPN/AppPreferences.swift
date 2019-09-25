@@ -360,7 +360,7 @@ class AppPreferences {
     
 //    + (void)eraseForTesting;
 
-    func transitionTheme(to code: ThemeCode) {
+    func transitionTheme(to code: ThemeCode, withDuration duration: Double = AppConfiguration.Animations.duration) {
         guard !isTransitioningTheme else {
             return
         }
@@ -373,15 +373,27 @@ class AppPreferences {
             fatalError("No window?")
         }
         isTransitioningTheme = true
-        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
+        UIView.animate(withDuration: duration, animations: {
             window.alpha = 0.0
         }, completion: { (success) in
             code.apply(theme: Theme.current, reload: true)
             
-            UIView.animate(withDuration: AppConfiguration.Animations.duration) {
+            UIView.animate(withDuration: duration) {
                 window.alpha = 1.0
                 self.isTransitioningTheme = false
             }
         })
+    }
+    
+    //MARK: Dark Mode
+    public func reloadTheme(withAnimationDuration duration: Double = AppConfiguration.Animations.duration) {
+        if #available(iOS 13.0, *) {
+            switch UITraitCollection.current.userInterfaceStyle {
+            case .dark:
+                AppPreferences.shared.transitionTheme(to: .dark, withDuration: duration)
+            default:
+                AppPreferences.shared.transitionTheme(to: .light, withDuration: duration)
+            }
+        }
     }
 }

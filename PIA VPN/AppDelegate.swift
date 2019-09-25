@@ -34,6 +34,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
+        AppPreferences.shared.reloadTheme(withAnimationDuration: 0)
+
         Bootstrapper.shared.bootstrap()
         application.shortcutItems = []
         hotspotHelper = PIAHotspotHelper()
@@ -62,7 +64,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             L10n.Notifications.Disabled.message
         )
         alert.addActionWithTitle(L10n.Notifications.Disabled.settings) {
-            application.openURL(URL(string: UIApplication.openSettingsURLString)!)
+            application.open(URL(string: UIApplication.openSettingsURLString)!,
+                             options: [:],
+                             completionHandler: nil)
         }
         alert.addCancelAction(L10n.Global.ok)
         window?.rootViewController?.present(alert, animated: true, completion: nil)
@@ -120,6 +124,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         refreshShortcutItems(in: application)
     }
 
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        AppPreferences.shared.reloadTheme(withAnimationDuration: 0)
+    }
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         application.applicationIconBadgeNumber = 0
     }

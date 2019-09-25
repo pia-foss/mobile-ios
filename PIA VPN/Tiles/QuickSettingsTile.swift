@@ -47,11 +47,25 @@ class QuickSettingsTile: UIView, Tileable  {
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateButtons), name: .PIASettingsHaveChanged, object: nil)
         
+        setupThemeButton()
         viewShouldRestyle()
     }
     
+    private func setupThemeButton() {
+        if !Flags.shared.enablesThemeSwitch {
+            if let stackView = self.themeButton.superview as? UIStackView {
+                stackView.removeFromSuperview()
+            }
+            if let stackView = self.themeLabel.superview as? UIStackView {
+                stackView.removeFromSuperview()
+            }
+        }
+    }
+    
     @objc private func viewShouldRestyle() {
-        Theme.current.applySubtitleTileUsage(themeLabel, appearance: .dark)
+        if Flags.shared.enablesThemeSwitch {
+            Theme.current.applySubtitleTileUsage(themeLabel, appearance: .dark)
+        }
         Theme.current.applySubtitleTileUsage(killSwitchLabel, appearance: .dark)
         Theme.current.applySubtitleTileUsage(nmtLabel, appearance: .dark)
         Theme.current.applyPrincipalBackground(self)
@@ -60,24 +74,26 @@ class QuickSettingsTile: UIView, Tileable  {
     
     @objc private func updateButtons() {
         
-        themeLabel.text = L10n.Settings.ApplicationSettings.ActiveTheme.title
-        themeLabel.textAlignment = .center
         killSwitchLabel.text = L10n.Settings.ApplicationSettings.KillSwitch.title
         killSwitchLabel.textAlignment = .center
         nmtLabel.text = L10n.Tiles.Quicksetting.Nmt.title
         nmtLabel.textAlignment = .center
-        themeButton.accessibilityLabel = L10n.Settings.ApplicationSettings.ActiveTheme.title
         killSwitchButton.accessibilityLabel = L10n.Settings.ApplicationSettings.KillSwitch.title
         nmtButton.accessibilityLabel = L10n.Tiles.Quicksetting.Nmt.title
 
-        if AppPreferences.shared.currentThemeCode == ThemeCode.light {
-            themeButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.themeLightActive.image :
-                Asset.Piax.Global.themeDarkActive.image, for: [])
-        } else {
-            themeButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.themeLightInactive.image :
-                Asset.Piax.Global.themeDarkInactive.image, for: [])
+        if Flags.shared.enablesThemeSwitch {
+            themeLabel.text = L10n.Settings.ApplicationSettings.ActiveTheme.title
+            themeLabel.textAlignment = .center
+            themeButton.accessibilityLabel = L10n.Settings.ApplicationSettings.ActiveTheme.title
+            if AppPreferences.shared.currentThemeCode == ThemeCode.light {
+                themeButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.themeLightActive.image :
+                    Asset.Piax.Global.themeDarkActive.image, for: [])
+            } else {
+                themeButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.themeLightInactive.image :
+                    Asset.Piax.Global.themeDarkInactive.image, for: [])
+            }
         }
-        
+
         if Client.preferences.isPersistentConnection {
             killSwitchButton.setImage(Asset.Piax.Global.killswitchDarkActive.image, for: [])
         } else {

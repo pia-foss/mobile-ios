@@ -646,15 +646,17 @@ class SettingsViewController: AutolayoutViewController {
         }
         if Flags.shared.enablesMACESetting {
             rowsBySection[.applicationSettings] = [
-                .darkTheme,
                 .automaticReconnection,
                 .mace
             ]
         } else {
             rowsBySection[.applicationSettings] = [
-                .darkTheme,
                 .automaticReconnection,
             ]
+        }
+        
+        if Flags.shared.enablesThemeSwitch {
+            rowsBySection[.applicationSettings]?.insert(.darkTheme, at: 0)
         }
         
         if #available(iOS 12.0, *) {
