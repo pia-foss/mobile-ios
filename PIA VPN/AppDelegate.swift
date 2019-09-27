@@ -8,7 +8,6 @@
 
 import UIKit
 import PIALibrary
-import SideMenu
 import SwiftyBeaver
 import NetworkExtension
 

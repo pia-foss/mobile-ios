@@ -100,6 +100,8 @@ class MenuViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Theme.current.applySideMenu()
+
         modalPresentationCapturesStatusBarAppearance = true
 
         imvAvatar.image = Asset.imageRobot.image
