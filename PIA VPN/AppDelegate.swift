@@ -124,10 +124,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         refreshShortcutItems(in: application)
     }
 
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        AppPreferences.shared.reloadTheme(withAnimationDuration: 0)
-    }
-    
     func applicationDidBecomeActive(_ application: UIApplication) {
         application.applicationIconBadgeNumber = 0
     }
