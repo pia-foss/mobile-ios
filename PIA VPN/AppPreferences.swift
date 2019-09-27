@@ -388,11 +388,13 @@ class AppPreferences {
     //MARK: Dark Mode
     public func reloadTheme(withAnimationDuration duration: Double = AppConfiguration.Animations.duration) {
         if #available(iOS 13.0, *) {
-            switch UITraitCollection.current.userInterfaceStyle {
-            case .dark:
-                AppPreferences.shared.transitionTheme(to: .dark, withDuration: duration)
-            default:
-                AppPreferences.shared.transitionTheme(to: .light, withDuration: duration)
+            DispatchQueue.main.async {
+              switch UITraitCollection.current.userInterfaceStyle {
+              case .dark:
+                  AppPreferences.shared.transitionTheme(to: .dark, withDuration: duration)
+              default:
+                  AppPreferences.shared.transitionTheme(to: .light, withDuration: duration)
+              }
             }
         }
     }
