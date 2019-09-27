@@ -16,14 +16,19 @@ extension Theme {
     // MARK: Customizations
     
     func applySideMenu() {
-        let menuSettings = SideMenuManager.default
+
         let screenSize = UIScreen.main.bounds.size
         let minEdge = min(screenSize.width, screenSize.height)
-        menuSettings.menuWidth = min(320.0, minEdge - 44.0)
-        menuSettings.menuFadeStatusBar = false
-        menuSettings.menuPresentMode = .menuSlideIn
-        menuSettings.menuAnimationFadeStrength = 0.5
-        menuSettings.menuAnimationBackgroundColor = palette.appearance == .dark ?
+        
+        if SideMenuManager.default.leftMenuNavigationController == nil {
+            SideMenuManager.default.leftMenuNavigationController = StoryboardScene.Main.sideMenuNavigationController.instantiate()
+        }
+        
+        SideMenuManager.default.leftMenuNavigationController?.menuWidth = min(320.0, minEdge - 44.0)
+        SideMenuManager.default.leftMenuNavigationController?.statusBarEndAlpha = 0
+        SideMenuManager.default.leftMenuNavigationController?.presentationStyle = .menuSlideIn
+        SideMenuManager.default.leftMenuNavigationController?.presentationStyle.presentingEndAlpha = 0.5
+        SideMenuManager.default.leftMenuNavigationController?.presentationStyle.backgroundColor = palette.appearance == .dark ?
             UIColor.black.withAlphaComponent(0.72) :
             UIColor.piaGrey1.withAlphaComponent(0.75)
     }
