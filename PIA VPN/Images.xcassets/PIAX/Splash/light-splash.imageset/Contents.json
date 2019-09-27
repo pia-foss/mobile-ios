@@ -3,6 +3,26 @@
     {
       "idiom" : "universal",
       "filename" : "L01. Splash.pdf"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "L01. Splash-1.pdf",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "light"
+        }
+      ]
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "D01. Splash.pdf",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ]
     }
   ],
   "info" : {

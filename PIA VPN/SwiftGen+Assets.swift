@@ -198,7 +198,6 @@ enum Asset {
       static let noResultsLight = ImageAsset(name: "no-results-light")
     }
     enum Splash {
-      static let darkSplash = ImageAsset(name: "dark-splash")
       static let lightSplash = ImageAsset(name: "light-splash")
     }
     enum Tiles {
@@ -599,7 +598,6 @@ enum Asset {
     Piax.LightMap.lightMapUSWest,
     Piax.Regions.noResultsDark,
     Piax.Regions.noResultsLight,
-    Piax.Splash.darkSplash,
     Piax.Splash.lightSplash,
     Piax.Tiles.ipTriangle,
     Piax.Tiles.openTileDetails,
