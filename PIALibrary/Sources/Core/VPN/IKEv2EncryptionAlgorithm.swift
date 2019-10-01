@@ -13,24 +13,24 @@ public enum IKEv2EncryptionAlgorithm: Int, EnumsBuilder {
     
     public static let defaultAlgorithm: Int = 2
 
-    case algorithmDES = 1
-    case algorithm3DES
+    //case algorithmDES = 1
+    case algorithm3DES = 2
     case algorithmAES128
     case algorithmAES256
-    case algorithmAES128GCM
-    case algorithmAES256GCM
-    @available(iOS 13.0, *)
-    case algorithmChaCha20Poly1305
+    //case algorithmAES128GCM
+    //case algorithmAES256GCM
+    //@available(iOS 13.0, *)
+    //case algorithmChaCha20Poly1305
     
     public func description() -> String {
         switch self {
-        case .algorithmDES: return "Data Encryption Standard (DES)"
+    //    case .algorithmDES: return "Data Encryption Standard (DES)"
         case .algorithm3DES: return "Triple Data Encryption Algorithm (aka 3DES)"
         case .algorithmAES128: return "Advanced Encryption Standard 128 bit (AES128)"
         case .algorithmAES256: return "Advanced Encryption Standard 256 bit (AES256)"
-        case .algorithmAES128GCM: return "Advanced Encryption Standard 128 bit (AES128GCM)"
-        case .algorithmAES256GCM: return "Advanced Encryption Standard 256 bit (AES256GCM)"
-        case .algorithmChaCha20Poly1305 : return "CHACHA20-POLY1305"
+    //    case .algorithmAES128GCM: return "Advanced Encryption Standard 128 bit (AES128GCM)"
+    //    case .algorithmAES256GCM: return "Advanced Encryption Standard 256 bit (AES256GCM)"
+    //    case .algorithmChaCha20Poly1305 : return "CHACHA20-POLY1305"
         }
     }
     
@@ -38,5 +38,11 @@ public enum IKEv2EncryptionAlgorithm: Int, EnumsBuilder {
         return NEVPNIKEv2EncryptionAlgorithm(rawValue: self.rawValue) ?? .algorithm3DES
     }
     
+    public static func allValues() -> [IKEv2EncryptionAlgorithm] {
+        return [.algorithm3DES,
+            .algorithmAES128,
+            .algorithmAES256
+        ]
+    }
 }
 
