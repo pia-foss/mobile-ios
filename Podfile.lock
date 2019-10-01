@@ -120,10 +120,10 @@ DEPENDENCIES:
   - Firebase/Core
   - FXPageControl
   - iRate
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `8a6c5de`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `8a6c5de`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `8a6c5de`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `8a6c5de`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `1a2a7c3`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `1a2a7c3`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `1a2a7c3`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `1a2a7c3`)
   - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `8bc012a`)
   - PopupDialog
   - SideMenu (~> 6.0)
@@ -160,7 +160,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :commit: 8a6c5de
+    :commit: 1a2a7c3
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
     :commit: 8bc012a
@@ -168,7 +168,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PIALibrary:
-    :commit: 8a6c5de
+    :commit: 1a2a7c3
     :git: https://github.com/pia-foss/client-library-apple
   PIATunnel:
     :commit: 8bc012a
@@ -204,6 +204,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 3fe9bfc087b2a9cd184e4f0895bb840a46ecb84d
+PODFILE CHECKSUM: 00403acf8806c4a4a8a2228c303452c2e77b6874
 
 COCOAPODS: 1.7.5

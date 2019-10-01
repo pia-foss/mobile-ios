@@ -1463,10 +1463,10 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             pendingOpenVPNConfiguration.digest = PIATunnelProvider.Digest(rawValue: rawDigest)!
 
         case .ikeV2EncryptionAlgorithm:
-            pendingPreferences.ikeV2EncryptionAlgorithm = row + 1
+            pendingPreferences.ikeV2EncryptionAlgorithm = row + IKEv2EncryptionAlgorithm.defaultAlgorithm
             
         case .ikeV2IntegrityAlgorithm:
-            pendingPreferences.ikeV2IntegrityAlgorithm = row + 1
+            pendingPreferences.ikeV2IntegrityAlgorithm = row + IKEv2IntegrityAlgorithm.defaultAlgorithm
 
         case .encryptionHandshake:
             let rawHandshake = option as! String
