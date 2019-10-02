@@ -340,7 +340,10 @@ class AppPreferences {
         }
         let preferences = Client.preferences.editable().reset()
         preferences.commit()
-        transitionTheme(to: .light)
+        guard #available(iOS 13.0, *) else {
+            transitionTheme(to: .light)
+            return
+        }
     }
     
     func clean() {
