@@ -234,6 +234,11 @@ extension AppStoreProvider: SKPaymentTransactionObserver {
             }
         }
     }
+    
+    /// This delegate is called when the user clicks the subscription in the AppStore. We are currently not handling the purchase from there, so we will return false until we implement a way to handle it.
+    func paymentQueue(_ queue: SKPaymentQueue, shouldAddStorePayment payment: SKPayment, for product: SKProduct) -> Bool {
+        return false
+    }
 }
 
 extension AppStoreProvider: SKRequestDelegate {
