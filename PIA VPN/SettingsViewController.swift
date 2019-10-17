@@ -909,7 +909,11 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             
         case .ikeV2EncryptionAlgorithm:
             cell.textLabel?.text = L10n.Settings.Encryption.Cipher.title
-            cell.detailTextLabel?.text = IKEv2EncryptionAlgorithm.objectIdentifyBy(index: pendingPreferences.ikeV2EncryptionAlgorithm).description()
+            if let encryptionAlgorithm = IKEv2EncryptionAlgorithm(rawValue: pendingPreferences.ikeV2EncryptionAlgorithm) {
+                cell.detailTextLabel?.text = encryptionAlgorithm.description()
+            } else {
+                cell.detailTextLabel?.text = IKEv2EncryptionAlgorithm.defaultAlgorithm.description()
+            }
             if !Flags.shared.enablesEncryptionSettings {
                 cell.accessoryType = .none
                 cell.selectionStyle = .none
@@ -917,7 +921,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         case .ikeV2IntegrityAlgorithm:
             cell.textLabel?.text = L10n.Settings.Encryption.Handshake.title
-            cell.detailTextLabel?.text = IKEv2IntegrityAlgorithm.objectIdentifyBy(index: pendingPreferences.ikeV2IntegrityAlgorithm).description()
+            cell.detailTextLabel?.text = IKEv2IntegrityAlgorithm.objectIdentifyBy(name: pendingPreferences.ikeV2IntegrityAlgorithm).description()
             if !Flags.shared.enablesEncryptionSettings {
                 cell.accessoryType = .none
                 cell.selectionStyle = .none
@@ -1139,16 +1143,27 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             }
             controller = OptionsViewController()
             controller?.options = options.map { $0.description() }
-            controller?.selectedOption = IKEv2EncryptionAlgorithm.objectIdentifyBy(index: pendingPreferences.ikeV2EncryptionAlgorithm).description()
+            
+            if let encryptionAlgorithm = IKEv2EncryptionAlgorithm(rawValue: pendingPreferences.ikeV2EncryptionAlgorithm) {
+                controller?.selectedOption = encryptionAlgorithm.rawValue
+            } else {
+                controller?.selectedOption = IKEv2EncryptionAlgorithm.defaultAlgorithm.rawValue
+            }
 
         case .ikeV2IntegrityAlgorithm:
             guard Flags.shared.enablesEncryptionSettings else {
                 break
             }
-            let options = IKEv2IntegrityAlgorithm.allValues()
+            
+            var options = IKEv2EncryptionAlgorithm.defaultAlgorithm.integrityAlgorithms()
+
+            if let encryptionAlgorithm = IKEv2EncryptionAlgorithm(rawValue: pendingPreferences.ikeV2EncryptionAlgorithm) {
+                options = encryptionAlgorithm.integrityAlgorithms()
+            }
+            
             controller = OptionsViewController()
             controller?.options = options.map { $0.description() }
-            controller?.selectedOption = IKEv2IntegrityAlgorithm.objectIdentifyBy(index: pendingPreferences.ikeV2IntegrityAlgorithm).description()
+            controller?.selectedOption = IKEv2IntegrityAlgorithm.objectIdentifyBy(name: pendingPreferences.ikeV2IntegrityAlgorithm).rawValue
 
         case .encryptionCipher:
             guard Flags.shared.enablesEncryptionSettings else {
@@ -1463,10 +1478,12 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             pendingOpenVPNConfiguration.digest = PIATunnelProvider.Digest(rawValue: rawDigest)!
 
         case .ikeV2EncryptionAlgorithm:
-            pendingPreferences.ikeV2EncryptionAlgorithm = row + IKEv2EncryptionAlgorithm.defaultAlgorithm
+            let rawEncryption = option as! String
+            pendingPreferences.ikeV2EncryptionAlgorithm = rawEncryption
             
         case .ikeV2IntegrityAlgorithm:
-            pendingPreferences.ikeV2IntegrityAlgorithm = row + IKEv2IntegrityAlgorithm.defaultAlgorithm
+            let rawIntegrity = option as! String
+            pendingPreferences.ikeV2IntegrityAlgorithm = rawIntegrity
 
         case .encryptionHandshake:
             let rawHandshake = option as! String
