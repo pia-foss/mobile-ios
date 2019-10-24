@@ -9,39 +9,51 @@
 import Foundation
 import NetworkExtension
 
-public enum IKEv2EncryptionAlgorithm: Int, EnumsBuilder {
-    
-    public static let defaultAlgorithm: Int = 2
+public enum IKEv2EncryptionAlgorithm: String, EnumsBuilder {
 
-    //case algorithmDES = 1
-    case algorithm3DES = 2
-    case algorithmAES128
-    case algorithmAES256
-    //case algorithmAES128GCM
-    //case algorithmAES256GCM
-    //@available(iOS 13.0, *)
-    //case algorithmChaCha20Poly1305
+    public static let defaultAlgorithm: IKEv2EncryptionAlgorithm = .algorithmAES256GCM
+    
+    case algorithm3DES = "3DES"
+    case algorithmAES128 = "AES-128"
+    case algorithmAES256 = "AES-256"
+    case algorithmAES128GCM = "AES-128-GCM"
+    case algorithmAES256GCM = "AES-256-GCM"
     
     public func description() -> String {
-        switch self {
-    //    case .algorithmDES: return "Data Encryption Standard (DES)"
-        case .algorithm3DES: return "Triple Data Encryption Algorithm (aka 3DES)"
-        case .algorithmAES128: return "Advanced Encryption Standard 128 bit (AES128)"
-        case .algorithmAES256: return "Advanced Encryption Standard 256 bit (AES256)"
-    //    case .algorithmAES128GCM: return "Advanced Encryption Standard 128 bit (AES128GCM)"
-    //    case .algorithmAES256GCM: return "Advanced Encryption Standard 256 bit (AES256GCM)"
-    //    case .algorithmChaCha20Poly1305 : return "CHACHA20-POLY1305"
-        }
+        return self.rawValue
+    }
+    
+    public func value() -> String {
+        return self.rawValue
     }
     
     public func networkExtensionValue() -> NEVPNIKEv2EncryptionAlgorithm {
-        return NEVPNIKEv2EncryptionAlgorithm(rawValue: self.rawValue) ?? .algorithm3DES
+        switch self {
+            case .algorithm3DES: return NEVPNIKEv2EncryptionAlgorithm.algorithm3DES
+            case .algorithmAES128: return NEVPNIKEv2EncryptionAlgorithm.algorithmAES128
+            case .algorithmAES256: return NEVPNIKEv2EncryptionAlgorithm.algorithmAES256
+            case .algorithmAES128GCM: return NEVPNIKEv2EncryptionAlgorithm.algorithmAES128GCM
+            case .algorithmAES256GCM: return NEVPNIKEv2EncryptionAlgorithm.algorithmAES256GCM
+            default: return NEVPNIKEv2EncryptionAlgorithm.algorithmAES256GCM
+        }
+    }
+    
+    public func integrityAlgorithms() -> [IKEv2IntegrityAlgorithm] {
+            switch self {
+            case .algorithm3DES: return [.SHA96]
+            case .algorithmAES128: return [.SHA96, .SHA256, .SHA384, .SHA512]
+            case .algorithmAES256: return [.SHA96, .SHA256, .SHA384, .SHA512]
+            case .algorithmAES128GCM: return [.SHA96, .SHA256, .SHA384, .SHA512]
+            case .algorithmAES256GCM: return [.SHA96, .SHA256, .SHA384, .SHA512]
+        }
     }
     
     public static func allValues() -> [IKEv2EncryptionAlgorithm] {
         return [.algorithm3DES,
             .algorithmAES128,
-            .algorithmAES256
+            .algorithmAES256,
+            .algorithmAES128GCM,
+            .algorithmAES256GCM
         ]
     }
 }

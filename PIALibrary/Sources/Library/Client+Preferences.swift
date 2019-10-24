@@ -38,9 +38,9 @@ private protocol PreferencesStore: class {
     
     var nmtRulesEnabled: Bool { get set }
     
-    var ikeV2IntegrityAlgorithm: Int { get set }
+    var ikeV2IntegrityAlgorithm: String { get set }
     
-    var ikeV2EncryptionAlgorithm: Int { get set }
+    var ikeV2EncryptionAlgorithm: String { get set }
 
     func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration?
     
@@ -188,7 +188,7 @@ extension Client {
         }
         
         /// Integrity algorithm for IKEv2 VPN configuration
-        public fileprivate(set) var ikeV2IntegrityAlgorithm: Int {
+        public fileprivate(set) var ikeV2IntegrityAlgorithm: String {
             get {
                 return accessedDatabase.plain.ikeV2IntegrityAlgorithm
             }
@@ -198,7 +198,7 @@ extension Client {
         }
         
         /// Encryption algorithm for IKEv2 VPN configuration
-        public fileprivate(set) var ikeV2EncryptionAlgorithm: Int {
+        public fileprivate(set) var ikeV2EncryptionAlgorithm: String {
             get {
                 return accessedDatabase.plain.ikeV2EncryptionAlgorithm
             }
@@ -314,8 +314,8 @@ extension Client.Preferences {
             availableNetworks = []
             trustedNetworks = []
             nmtRulesEnabled = false
-            ikeV2IntegrityAlgorithm = IKEv2IntegrityAlgorithm.defaultAlgorithm
-            ikeV2EncryptionAlgorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm
+            ikeV2IntegrityAlgorithm = IKEv2IntegrityAlgorithm.defaultIntegrity.value()
+            ikeV2EncryptionAlgorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm.value()
         }
 
         /**
@@ -381,10 +381,10 @@ extension Client.Preferences {
         public var nmtRulesEnabled: Bool
 
         /// :nodoc:
-        public var ikeV2IntegrityAlgorithm: Int
+        public var ikeV2IntegrityAlgorithm: String
         
         /// :nodoc:
-        public var ikeV2EncryptionAlgorithm: Int
+        public var ikeV2EncryptionAlgorithm: String
 
         /// :nodoc:
         public func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration? {

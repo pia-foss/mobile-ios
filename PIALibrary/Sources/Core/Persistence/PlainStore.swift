@@ -76,8 +76,8 @@ protocol PlainStore: class {
     var nmtRulesEnabled: Bool? { get set }
 
     //MARK: IKEv2
-    var ikeV2IntegrityAlgorithm: Int { get set }
+    var ikeV2IntegrityAlgorithm: String { get set }
     
-    var ikeV2EncryptionAlgorithm: Int { get set }
+    var ikeV2EncryptionAlgorithm: String { get set }
 
 }

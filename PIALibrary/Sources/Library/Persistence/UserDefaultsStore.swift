@@ -366,10 +366,10 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
     
-    var ikeV2IntegrityAlgorithm: Int {
+    var ikeV2IntegrityAlgorithm: String {
         get {
-            guard let value = backend.object(forKey: Entries.ikeV2IntegrityAlgorithm) as? Int else {
-                return IKEv2IntegrityAlgorithm.defaultAlgorithm
+            guard let value = backend.object(forKey: Entries.ikeV2IntegrityAlgorithm) as? String else {
+                return IKEv2IntegrityAlgorithm.defaultIntegrity.value()
             }
             return value
         }
@@ -378,10 +378,10 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
     
-    var ikeV2EncryptionAlgorithm: Int {
+    var ikeV2EncryptionAlgorithm: String {
         get {
-            guard let value = backend.object(forKey: Entries.ikeV2EncryptionAlgorithm) as? Int else {
-                return IKEv2EncryptionAlgorithm.defaultAlgorithm
+            guard let value = backend.object(forKey: Entries.ikeV2EncryptionAlgorithm) as? String else {
+                return IKEv2EncryptionAlgorithm.defaultAlgorithm.value()
             }
             return value
         }
