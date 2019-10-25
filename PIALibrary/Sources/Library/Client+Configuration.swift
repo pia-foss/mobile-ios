@@ -14,6 +14,12 @@ extension Client {
     /// Encapsulates internal and public parameters of the client. When not specified otherwise, time intervals are in milliseconds.
     public final class Configuration {
 
+        static let teamId = "5357M5NW9W"
+
+        static let appGroup = "group.com.privateinternetaccess"
+
+        static let debugLogKey = "LastVPNLog"
+        
         /// If `true`, expose development features.
         public var isDevelopment: Bool
 
@@ -135,6 +141,7 @@ extension Client {
         // MARK: Initialization
         
         init() {
+
             isDevelopment = false
 
             let bundle = Bundle(for: Client.self)

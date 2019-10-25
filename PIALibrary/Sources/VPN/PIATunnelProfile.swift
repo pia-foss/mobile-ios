@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import PIATunnel
+import TunnelKit
 import NetworkExtension
 
 /// Implementation of `VPNProfile` providing OpenVPN connectivity.
@@ -142,7 +142,7 @@ public class PIATunnelProfile: NetworkExtensionProfile {
     
     /// :nodoc:
     public func parsedCustomConfiguration(from map: [String : Any]) -> VPNCustomConfiguration? {
-        return try? PIATunnelProvider.Configuration.parsed(from: map)
+        return try? OpenVPNTunnelProvider.Configuration.parsed(from: map)
     }
     
     /// :nodoc:
@@ -155,9 +155,9 @@ public class PIATunnelProfile: NetworkExtensionProfile {
             
             do {
                 let session = vpn.connection as? NETunnelProviderSession
-                try session?.sendProviderMessage(PIATunnelProvider.Message.requestLog.data) { (data) in
+                try session?.sendProviderMessage(OpenVPNTunnelProvider.Message.requestLog.data) { (data) in
                     guard let data = data, !data.isEmpty else {
-                        guard let providerConfiguration = customConfiguration as? PIATunnelProvider.Configuration else {
+                        guard let providerConfiguration = customConfiguration as? OpenVPNTunnelProvider.Configuration else {
                             callback?(nil, nil)
                             return
                         }
@@ -187,9 +187,9 @@ public class PIATunnelProfile: NetworkExtensionProfile {
             
             do {
                 let session = vpn.connection as? NETunnelProviderSession
-                try session?.sendProviderMessage(PIATunnelProvider.Message.dataCount.data) { (data) in
+                try session?.sendProviderMessage(OpenVPNTunnelProvider.Message.dataCount.data) { (data) in
                     guard let data = data, !data.isEmpty else {
-                        guard let _ = customConfiguration as? PIATunnelProvider.Configuration else {
+                        guard let _ = customConfiguration as? OpenVPNTunnelProvider.Configuration else {
                             callback?(nil, nil)
                             return
                         }
@@ -222,7 +222,7 @@ public class PIATunnelProfile: NetworkExtensionProfile {
         cfg.providerBundleIdentifier = bundleIdentifier
         
         var customCfg = configuration.customConfiguration
-        if let piaCfg = customCfg as? PIATunnelProvider.Configuration {
+        if let piaCfg = customCfg as? OpenVPNTunnelProvider.Configuration {
             var builder = piaCfg.builder()
             if let bestAddress = configuration.server.bestOpenVPNAddressForUDP?.hostname { // XXX: UDP address = TCP address
                 builder.resolvedAddresses = [bestAddress]
@@ -265,14 +265,11 @@ public class PIATunnelProfile: NetworkExtensionProfile {
         }
     }
 
-    private func lastLogSnapshot(withProviderConfiguration providerConfiguration: PIATunnelProvider.Configuration) -> String? {
-        guard let logKey = providerConfiguration.debugLogKey else {
+    private func lastLogSnapshot(withProviderConfiguration providerConfiguration: OpenVPNTunnelProvider.Configuration) -> String? {
+        guard let defaults = UserDefaults(suiteName: Client.Configuration.appGroup) else {
             return nil
         }
-        guard let defaults = UserDefaults(suiteName: providerConfiguration.appGroup) else {
-            return nil
-        }
-        guard let lines = defaults.array(forKey: logKey) as? [String] else {
+        guard let lines = defaults.array(forKey: Client.Configuration.debugLogKey) as? [String] else {
             return nil
         }
         return lines.joined(separator: "\n")
