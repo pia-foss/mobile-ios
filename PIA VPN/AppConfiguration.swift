@@ -8,7 +8,7 @@
 
 import Foundation
 import PIALibrary
-import PIATunnel
+import TunnelKit
 
 struct AppConfiguration {
     private static let customClientEnvironment: Client.Environment = .staging
@@ -51,31 +51,32 @@ struct AppConfiguration {
         
         static let profileName = "Private Internet Access"
 
-        static let piaDefaultConfigurationBuilder: PIATunnelProvider.ConfigurationBuilder = {
-            var builder = PIATunnelProvider.ConfigurationBuilder(appGroup: AppConstants.appGroup)
-            builder.renegotiatesAfterSeconds = piaRenegotiationInterval
-            builder.cipher = .aes128gcm
-            builder.digest = .sha1
-            builder.handshake = .rsa2048
-            builder.endpointProtocols = piaAutomaticProtocols
+        static let piaDefaultConfigurationBuilder: OpenVPNTunnelProvider.ConfigurationBuilder = {
+            var sessionBuilder = OpenVPN.ConfigurationBuilder()
+            sessionBuilder.renegotiatesAfter = piaRenegotiationInterval
+            sessionBuilder.cipher = .aes128gcm
+            sessionBuilder.digest = .sha1
+            sessionBuilder.handshake = .rsa2048
+            sessionBuilder.endpointProtocols = piaAutomaticProtocols
+            sessionBuilder.dnsServers = []
+            sessionBuilder.usesPIAPatches = true
+            var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
             builder.mtu = 1400
             builder.shouldDebug = true
-            builder.debugLogKey = "LastVPNLog"
-            builder.dnsServers = []
             return builder
         }()
         
-        static let piaAutomaticProtocols: [PIATunnelProvider.EndpointProtocol] = [
+        static let piaAutomaticProtocols: [EndpointProtocol] = [
 //            let vpnPorts = Client.providers.serverProvider.currentServersConfiguration.vpnPorts
-            PIATunnelProvider.EndpointProtocol(.udp, 8080, .pia),
-            PIATunnelProvider.EndpointProtocol(.tcp, 443, .pia)
+            EndpointProtocol(.udp, 8080),
+            EndpointProtocol(.tcp, 443)
         ]
 
         private static let piaCustomRenegotiation: Renegotiation = .qa
         
-        private static var piaRenegotiationInterval: Int {
+        private static var piaRenegotiationInterval: TimeInterval {
             let reneg: Renegotiation = (Flags.shared.customizesVPNRenegotiation ? piaCustomRenegotiation : .production)
-            return reneg.rawValue
+            return TimeInterval(reneg.rawValue)
         }
     }
     

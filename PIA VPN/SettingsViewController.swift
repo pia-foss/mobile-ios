@@ -8,7 +8,7 @@
 
 import UIKit
 import PIALibrary
-import PIATunnel
+import TunnelKit
 import SafariServices
 import SwiftyBeaver
 import Intents
@@ -209,9 +209,9 @@ class SettingsViewController: AutolayoutViewController {
     
     private var pendingPreferences: Client.Preferences.Editable!
     
-    private var pendingOpenVPNSocketType: PIATunnelProvider.SocketType?
+    private var pendingOpenVPNSocketType: SocketType?
     
-    private var pendingOpenVPNConfiguration: PIATunnelProvider.ConfigurationBuilder!
+    private var pendingOpenVPNConfiguration: OpenVPN.ConfigurationBuilder!
 
     private var pendingVPNAction: VPNAction?
 //    private var pendingVPNAction: VPNAction? {
@@ -237,13 +237,13 @@ class SettingsViewController: AutolayoutViewController {
         pendingPreferences = Client.preferences.editable()
 
         // XXX: fall back to default configuration (don't rely on client library)
-        guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? PIATunnelProvider.Configuration ??
-            Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? PIATunnelProvider.Configuration else {
+        guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration ??
+            Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration else {
 
             fatalError("No default VPN custom configuration provided for PIA protocol")
         }
         pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
-        pendingOpenVPNConfiguration = currentOpenVPNConfiguration.builder()
+        pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
         
         validateDNSList()
 
@@ -473,13 +473,13 @@ class SettingsViewController: AutolayoutViewController {
         preferences.trustCellularData = pendingPreferences.trustCellularData
         preferences.commit()
 
-        guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? PIATunnelProvider.Configuration else {
+        guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration else {
             fatalError("No default VPN custom configuration provided for PIA protocol")
         }
         AppPreferences.shared.reset()
         DNSList.shared.resetPlist()
         pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
-        pendingOpenVPNConfiguration = currentOpenVPNConfiguration.builder()
+        pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
 
         redisplaySettings()
         reportUpdatedPreferences()
@@ -901,7 +901,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         case .encryptionCipher:
             cell.textLabel?.text = L10n.Settings.Encryption.Cipher.title
-            cell.detailTextLabel?.text = pendingOpenVPNConfiguration.cipher.description
+            cell.detailTextLabel?.text = pendingOpenVPNConfiguration.cipher?.description
             if !Flags.shared.enablesEncryptionSettings {
                 cell.accessoryType = .none
                 cell.selectionStyle = .none
@@ -909,7 +909,11 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             
         case .ikeV2EncryptionAlgorithm:
             cell.textLabel?.text = L10n.Settings.Encryption.Cipher.title
-            cell.detailTextLabel?.text = IKEv2EncryptionAlgorithm.objectIdentifyBy(index: pendingPreferences.ikeV2EncryptionAlgorithm).description()
+            if let encryptionAlgorithm = IKEv2EncryptionAlgorithm(rawValue: pendingPreferences.ikeV2EncryptionAlgorithm) {
+                cell.detailTextLabel?.text = encryptionAlgorithm.description()
+            } else {
+                cell.detailTextLabel?.text = IKEv2EncryptionAlgorithm.defaultAlgorithm.description()
+            }
             if !Flags.shared.enablesEncryptionSettings {
                 cell.accessoryType = .none
                 cell.selectionStyle = .none
@@ -917,7 +921,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         case .ikeV2IntegrityAlgorithm:
             cell.textLabel?.text = L10n.Settings.Encryption.Handshake.title
-            cell.detailTextLabel?.text = IKEv2IntegrityAlgorithm.objectIdentifyBy(index: pendingPreferences.ikeV2IntegrityAlgorithm).description()
+            cell.detailTextLabel?.text = IKEv2IntegrityAlgorithm.objectIdentifyBy(name: pendingPreferences.ikeV2IntegrityAlgorithm).description()
             if !Flags.shared.enablesEncryptionSettings {
                 cell.accessoryType = .none
                 cell.selectionStyle = .none
@@ -929,7 +933,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.detailTextLabel?.text = "GCM"
                 break
             }
-            cell.detailTextLabel?.text = pendingOpenVPNConfiguration.digest.description
+            cell.detailTextLabel?.text = pendingOpenVPNConfiguration.digest?.description
             if !Flags.shared.enablesEncryptionSettings {
                 cell.accessoryType = .none
                 cell.selectionStyle = .none
@@ -937,7 +941,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         case .encryptionHandshake:
             cell.textLabel?.text = L10n.Settings.Encryption.Handshake.title
-            cell.detailTextLabel?.text = pendingOpenVPNConfiguration.handshake.description
+            cell.detailTextLabel?.text = pendingOpenVPNConfiguration.handshake?.description
             if !Flags.shared.enablesEncryptionSettings {
                 cell.accessoryType = .none
                 cell.selectionStyle = .none
@@ -1072,7 +1076,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             controller?.selectedOption = pendingPreferences.vpnType
             
         case .vpnSocket:
-            let options: [PIATunnelProvider.SocketType] = [
+            let options: [SocketType] = [
                 .udp,
                 .tcp
             ]
@@ -1139,22 +1143,33 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             }
             controller = OptionsViewController()
             controller?.options = options.map { $0.description() }
-            controller?.selectedOption = IKEv2EncryptionAlgorithm.objectIdentifyBy(index: pendingPreferences.ikeV2EncryptionAlgorithm).description()
+            
+            if let encryptionAlgorithm = IKEv2EncryptionAlgorithm(rawValue: pendingPreferences.ikeV2EncryptionAlgorithm) {
+                controller?.selectedOption = encryptionAlgorithm.rawValue
+            } else {
+                controller?.selectedOption = IKEv2EncryptionAlgorithm.defaultAlgorithm.rawValue
+            }
 
         case .ikeV2IntegrityAlgorithm:
             guard Flags.shared.enablesEncryptionSettings else {
                 break
             }
-            let options = IKEv2IntegrityAlgorithm.allValues()
+            
+            var options = IKEv2EncryptionAlgorithm.defaultAlgorithm.integrityAlgorithms()
+
+            if let encryptionAlgorithm = IKEv2EncryptionAlgorithm(rawValue: pendingPreferences.ikeV2EncryptionAlgorithm) {
+                options = encryptionAlgorithm.integrityAlgorithms()
+            }
+            
             controller = OptionsViewController()
             controller?.options = options.map { $0.description() }
-            controller?.selectedOption = IKEv2IntegrityAlgorithm.objectIdentifyBy(index: pendingPreferences.ikeV2IntegrityAlgorithm).description()
+            controller?.selectedOption = IKEv2IntegrityAlgorithm.objectIdentifyBy(name: pendingPreferences.ikeV2IntegrityAlgorithm).rawValue
 
         case .encryptionCipher:
             guard Flags.shared.enablesEncryptionSettings else {
                 break
             }
-            let options: [PIATunnelProvider.Cipher] = [
+            let options: [OpenVPN.Cipher] = [
                 .aes128gcm,
                 .aes256gcm,
                 .aes128cbc,
@@ -1162,7 +1177,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             ]
             controller = OptionsViewController()
             controller?.options = options.map { $0.rawValue }
-            controller?.selectedOption = pendingOpenVPNConfiguration.cipher.rawValue
+            controller?.selectedOption = pendingOpenVPNConfiguration.cipher?.rawValue
 
         case .encryptionDigest:
             guard Flags.shared.enablesEncryptionSettings else {
@@ -1171,19 +1186,19 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             guard !pendingOpenVPNConfiguration.isEncryptionGCM() else {
                 break
             }
-            let options: [PIATunnelProvider.Digest] = [
+            let options: [OpenVPN.Digest] = [
                 .sha1,
                 .sha256
             ]
             controller = OptionsViewController()
             controller?.options = options.map { $0.rawValue }
-            controller?.selectedOption = pendingOpenVPNConfiguration.digest.rawValue
+            controller?.selectedOption = pendingOpenVPNConfiguration.digest?.rawValue
 
         case .encryptionHandshake:
             guard Flags.shared.enablesEncryptionSettings else {
                 break
             }
-            let options: [PIATunnelProvider.Handshake] = [
+            let options: [OpenVPN.Handshake] = [
                 .rsa2048,
                 .rsa3072,
                 .rsa4096,
@@ -1193,7 +1208,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             ]
             controller = OptionsViewController()
             controller?.options = options.map { $0.rawValue }
-            controller?.selectedOption = pendingOpenVPNConfiguration.handshake.rawValue
+            controller?.selectedOption = pendingOpenVPNConfiguration.handshake?.rawValue
             
         case .contentBlockerState:
             if #available(iOS 10, *) {
@@ -1321,18 +1336,18 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             }
         case .encryptionCipher:
             let rawCipher = option as! String
-            cell.textLabel?.text = PIATunnelProvider.Cipher(rawValue: rawCipher)?.description
+            cell.textLabel?.text = OpenVPN.Cipher(rawValue: rawCipher)?.description
 
         case .encryptionDigest:
             let rawDigest = option as! String
-            cell.textLabel?.text = PIATunnelProvider.Digest(rawValue: rawDigest)?.description
+            cell.textLabel?.text = OpenVPN.Digest(rawValue: rawDigest)?.description
 
         case .ikeV2EncryptionAlgorithm, .ikeV2IntegrityAlgorithm:
             cell.textLabel?.text = option as? String
             
         case .encryptionHandshake:
             let rawHandshake = option as! String
-            cell.textLabel?.text = PIATunnelProvider.Handshake(rawValue: rawHandshake)?.description
+            cell.textLabel?.text = OpenVPN.Handshake(rawValue: rawHandshake)?.description
 
         default:
             break
@@ -1342,7 +1357,7 @@ extension SettingsViewController: OptionsViewControllerDelegate {
 
         if setting == .vpnDns,
             let option = option as? String {
-            let dnsJoinedValue = pendingOpenVPNConfiguration.dnsServers.joined()
+            let dnsJoinedValue = pendingOpenVPNConfiguration.dnsServers?.joined()
             for dns in DNSList.shared.dnsList {
                 for (key, value) in dns {
                     if key == option,
@@ -1375,18 +1390,18 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             
         case .vpnSocket:
             let rawSocketType = option as! String
-            let optSocketType = PIATunnelProvider.SocketType(rawValue: rawSocketType)
+            let optSocketType = SocketType(rawValue: rawSocketType)
 
             let currentProtocols = pendingOpenVPNConfiguration.endpointProtocols
-            var newProtocols: [PIATunnelProvider.EndpointProtocol] = []
+            var newProtocols: [EndpointProtocol] = []
 
             if let socketType = optSocketType {
                 let ports = (socketType == .udp) ? serversCfg.vpnPorts.udp : serversCfg.vpnPorts.tcp
-                if currentProtocols.count == 1, let currentPort = pendingOpenVPNConfiguration?.currentPort, ports.contains(currentPort) {
-                    newProtocols.append(PIATunnelProvider.EndpointProtocol(socketType, currentPort, .pia))
+                if currentProtocols?.count == 1, let currentPort = pendingOpenVPNConfiguration?.currentPort, ports.contains(currentPort) {
+                    newProtocols.append(EndpointProtocol(socketType, currentPort))
                 } else {
                     for port in ports {
-                        newProtocols.append(PIATunnelProvider.EndpointProtocol(socketType, port, .pia))
+                        newProtocols.append(EndpointProtocol(socketType, port))
                     }
                 }
             } else {
@@ -1404,24 +1419,24 @@ extension SettingsViewController: OptionsViewControllerDelegate {
         case .vpnPort:
             let port = option as! UInt16
 
-            var newProtocols: [PIATunnelProvider.EndpointProtocol] = []
+            var newProtocols: [EndpointProtocol] = []
             if (port != SettingsViewController.AUTOMATIC_PORT) {
                 guard let socketType = pendingOpenVPNSocketType else {
                     fatalError("Port cannot be set manually when socket type is automatic")
                 }
-                newProtocols.append(PIATunnelProvider.EndpointProtocol(socketType, port, .pia))
+                newProtocols.append(EndpointProtocol(socketType, port))
             } else {
                 if (pendingOpenVPNSocketType == nil) {
                     newProtocols = AppConfiguration.VPN.piaAutomaticProtocols
                 }
                 else if (pendingOpenVPNSocketType == .udp) {
                     for port in serversCfg.vpnPorts.udp {
-                        newProtocols.append(PIATunnelProvider.EndpointProtocol(.udp, port, .pia))
+                        newProtocols.append(EndpointProtocol(.udp, port))
                     }
                 }
                 else if (pendingOpenVPNSocketType == .tcp) {
                     for port in serversCfg.vpnPorts.tcp {
-                        newProtocols.append(PIATunnelProvider.EndpointProtocol(.tcp, port, .pia))
+                        newProtocols.append(EndpointProtocol(.tcp, port))
                     }
                 }
             }
@@ -1456,21 +1471,26 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             }
         case .encryptionCipher:
             let rawCipher = option as! String
-            pendingOpenVPNConfiguration.cipher = PIATunnelProvider.Cipher(rawValue: rawCipher)!
+            pendingOpenVPNConfiguration.cipher = OpenVPN.Cipher(rawValue: rawCipher)!
 
         case .encryptionDigest:
             let rawDigest = option as! String
-            pendingOpenVPNConfiguration.digest = PIATunnelProvider.Digest(rawValue: rawDigest)!
+            pendingOpenVPNConfiguration.digest = OpenVPN.Digest(rawValue: rawDigest)!
 
         case .ikeV2EncryptionAlgorithm:
-            pendingPreferences.ikeV2EncryptionAlgorithm = row + IKEv2EncryptionAlgorithm.defaultAlgorithm
-            
+            let rawEncryption = option as! String
+            pendingPreferences.ikeV2EncryptionAlgorithm = rawEncryption
+            //reset integrity algorithm if the encryption changes
+            if let integrity = IKEv2EncryptionAlgorithm(rawValue: rawEncryption)?.integrityAlgorithms().first {
+                pendingPreferences.ikeV2IntegrityAlgorithm = integrity.rawValue
+            }
         case .ikeV2IntegrityAlgorithm:
-            pendingPreferences.ikeV2IntegrityAlgorithm = row + IKEv2IntegrityAlgorithm.defaultAlgorithm
+            let rawIntegrity = option as! String
+            pendingPreferences.ikeV2IntegrityAlgorithm = rawIntegrity
 
         case .encryptionHandshake:
             let rawHandshake = option as! String
-            pendingOpenVPNConfiguration.handshake = PIATunnelProvider.Handshake(rawValue: rawHandshake)!
+            pendingOpenVPNConfiguration.handshake = OpenVPN.Handshake(rawValue: rawHandshake)!
 
         default:
             break
@@ -1482,15 +1502,20 @@ extension SettingsViewController: OptionsViewControllerDelegate {
     }
     
     private func savePreferences() {
-        log.debug("OpenVPN endpoints: \(pendingOpenVPNConfiguration.endpointProtocols)")
-        pendingPreferences.setVPNCustomConfiguration(pendingOpenVPNConfiguration.build(), for: pendingPreferences.vpnType)
+        log.debug("OpenVPN endpoints: \(pendingOpenVPNConfiguration.endpointProtocols ?? [])")
+        
+        var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: pendingOpenVPNConfiguration.build())
+        builder.mtu = 1400
+        builder.shouldDebug = true
+
+        pendingPreferences.setVPNCustomConfiguration(builder.build(), for: pendingPreferences.vpnType)
         
         redisplaySettings()
         reportUpdatedPreferences()
     }
 }
 
-private extension PIATunnelProvider.ConfigurationBuilder {
+private extension OpenVPN.ConfigurationBuilder {
 //    var currentSocketType: PIATunnelProvider.SocketType {
 //        guard let currentType = endpointProtocols.first?.socketType else {
 //            fatalError("Zero current protocols")
@@ -1499,10 +1524,10 @@ private extension PIATunnelProvider.ConfigurationBuilder {
 //    }
 
     var currentPort: UInt16? {
-        guard endpointProtocols.count == 1 else {
+        guard endpointProtocols?.count == 1 else {
             return nil
         }
-        guard let port = endpointProtocols.first?.port else {
+        guard let port = endpointProtocols?.first?.port else {
             fatalError("Zero current protocols")
         }
         return port

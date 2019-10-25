@@ -8,7 +8,7 @@
 
 import Foundation
 import PIALibrary
-import PIATunnel
+import TunnelKit
 import SwiftyBeaver
 import Intents
 
@@ -107,12 +107,12 @@ class AppPreferences {
     }
     
     // nil = automatic
-    var piaSocketType: PIATunnelProvider.SocketType? {
+    var piaSocketType: SocketType? {
         get {
             guard let rawValue = defaults.string(forKey: Entries.piaSocketType) else {
                 return nil
             }
-            return PIATunnelProvider.SocketType(rawValue: rawValue)
+            return SocketType(rawValue: rawValue)
         }
         set {
             if let rawValue = newValue?.rawValue {

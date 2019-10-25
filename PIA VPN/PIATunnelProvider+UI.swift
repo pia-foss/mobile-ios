@@ -7,28 +7,22 @@
 //
 
 import Foundation
-import PIATunnel
+import TunnelKit
 
-extension PIATunnelProvider.SocketType: CustomStringConvertible {
+extension SocketType: CustomStringConvertible {
     public var description: String {
         return rawValue
     }
 }
 
-extension PIATunnelProvider.Cipher: CustomStringConvertible {
+extension OpenVPN.Cipher: CustomStringConvertible {
     public var description: String {
         return rawValue
     }
 }
 
-extension PIATunnelProvider.Digest: CustomStringConvertible {
+extension OpenVPN.Digest: CustomStringConvertible {
     public var description: String {
         return "HMAC-\(rawValue)"
-    }
-}
-
-extension PIATunnelProvider.Handshake: CustomStringConvertible {
-    public var description: String {
-        return rawValue
     }
 }
