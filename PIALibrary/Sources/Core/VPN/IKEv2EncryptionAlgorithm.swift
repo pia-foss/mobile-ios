@@ -34,7 +34,6 @@ public enum IKEv2EncryptionAlgorithm: String, EnumsBuilder {
             case .algorithmAES256: return NEVPNIKEv2EncryptionAlgorithm.algorithmAES256
             case .algorithmAES128GCM: return NEVPNIKEv2EncryptionAlgorithm.algorithmAES128GCM
             case .algorithmAES256GCM: return NEVPNIKEv2EncryptionAlgorithm.algorithmAES256GCM
-            default: return NEVPNIKEv2EncryptionAlgorithm.algorithmAES256GCM
         }
     }
     
@@ -43,8 +42,8 @@ public enum IKEv2EncryptionAlgorithm: String, EnumsBuilder {
             case .algorithm3DES: return [.SHA96]
             case .algorithmAES128: return [.SHA96, .SHA256, .SHA384, .SHA512]
             case .algorithmAES256: return [.SHA96, .SHA256, .SHA384, .SHA512]
-            case .algorithmAES128GCM: return [.SHA96, .SHA256, .SHA384, .SHA512]
-            case .algorithmAES256GCM: return [.SHA96, .SHA256, .SHA384, .SHA512]
+            case .algorithmAES128GCM: return [.SHA96, .SHA160, .SHA256]
+            case .algorithmAES256GCM: return [.SHA96, .SHA160, .SHA256]
         }
     }
     
