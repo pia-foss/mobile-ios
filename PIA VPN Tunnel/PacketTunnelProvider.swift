@@ -6,7 +6,7 @@
 //  Copyright © 2017 London Trust Media. All rights reserved.
 //
 
-import PIATunnel
+import TunnelKit
 
-class PacketTunnelProvider: PIATunnelProvider {
+class PacketTunnelProvider: OpenVPNTunnelProvider {
 }
