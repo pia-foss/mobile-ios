@@ -39,7 +39,7 @@ Pod::Spec.new do |s|
         p.frameworks            = "NetworkExtension"
         p.pod_target_xcconfig   = { "APPLICATION_EXTENSION_API_ONLY" => "YES" }
 
-        p.dependency "PIATunnel", "~> 2.0.0"
+        p.dependency "TunnelKit"
         p.dependency "PIALibrary/Library"
     end
 
