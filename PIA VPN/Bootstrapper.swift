@@ -8,7 +8,7 @@
 
 import Foundation
 import PIALibrary
-import PIATunnel
+import TunnelKit
 import SwiftyBeaver
 import iRate
 #if PIA_DEV
