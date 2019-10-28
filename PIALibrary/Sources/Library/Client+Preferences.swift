@@ -439,10 +439,10 @@ extension Client.Preferences {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
             if (ikeV2IntegrityAlgorithm != target.ikeV2IntegrityAlgorithm) {
-                queue.append(VPNActionDisconnectAndReinstall())
+                queue.append(VPNActionReinstall())
             }
             if (ikeV2EncryptionAlgorithm != target.ikeV2EncryptionAlgorithm) {
-                queue.append(VPNActionDisconnectAndReinstall())
+                queue.append(VPNActionReinstall())
             }
             if let configuration = vpnCustomConfigurations[vpnType],
                 let targetConfiguration = target.activeVPNCustomConfiguration,
