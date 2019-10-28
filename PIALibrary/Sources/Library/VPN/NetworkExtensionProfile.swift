@@ -91,8 +91,14 @@ extension NetworkExtensionProfile {
                 callback?(error)
                 return
             }
-            vpn.loadFromPreferences { (error) in
-                callback?(nil)
+            vpn.saveToPreferences { (error) in
+                if let error = error {
+                    callback?(error)
+                    return
+                }
+                vpn.loadFromPreferences { (error) in
+                    callback?(nil)
+                }
             }
         }
     }
