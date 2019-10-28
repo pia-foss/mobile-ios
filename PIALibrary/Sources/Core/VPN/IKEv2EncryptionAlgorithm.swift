@@ -14,8 +14,8 @@ public enum IKEv2EncryptionAlgorithm: String, EnumsBuilder {
     public static let defaultAlgorithm: IKEv2EncryptionAlgorithm = .algorithmAES256GCM
     
     case algorithm3DES = "3DES"
-    case algorithmAES128 = "AES-128"
-    case algorithmAES256 = "AES-256"
+    case algorithmAES128 = "AES-128-CBC"
+    case algorithmAES256 = "AES-256-CBC"
     case algorithmAES128GCM = "AES-128-GCM"
     case algorithmAES256GCM = "AES-256-GCM"
     
