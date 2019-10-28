@@ -1481,6 +1481,11 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             let rawEncryption = option as! String
             pendingPreferences.ikeV2EncryptionAlgorithm = rawEncryption
             
+            //reset integrity algorithm if the encryption changes
+            if let integrity = IKEv2EncryptionAlgorithm(rawValue: rawEncryption)?.integrityAlgorithms().first {
+                pendingPreferences.ikeV2IntegrityAlgorithm = integrity.rawValue
+            }
+
         case .ikeV2IntegrityAlgorithm:
             let rawIntegrity = option as! String
             pendingPreferences.ikeV2IntegrityAlgorithm = rawIntegrity
