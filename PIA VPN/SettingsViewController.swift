@@ -471,6 +471,8 @@ class SettingsViewController: AutolayoutViewController {
         preferences.shouldConnectForAllNetworks = pendingPreferences.shouldConnectForAllNetworks
         preferences.useWiFiProtection = pendingPreferences.useWiFiProtection
         preferences.trustCellularData = pendingPreferences.trustCellularData
+        preferences.ikeV2IntegrityAlgorithm = pendingPreferences.ikeV2IntegrityAlgorithm
+        preferences.ikeV2EncryptionAlgorithm = pendingPreferences.ikeV2EncryptionAlgorithm
         preferences.commit()
 
         guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? PIATunnelProvider.Configuration else {
