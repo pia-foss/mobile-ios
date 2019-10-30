@@ -74,7 +74,7 @@ class VPNActionDisconnectAndReinstall: VPNAction, ProvidersAccess {
                 callback?(nil)
                 return
             }
-            vpn.reconnect(after: nil, callback)
+            vpn.connect(callback)
         })
     }
 }
