@@ -69,7 +69,7 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - OpenSSL-Apple (1.1.0j.2)
+  - OpenSSL-Apple (1.1.0l.4)
   - PIALibrary/Core (2.2.0)
   - PIALibrary/Library (2.2.0):
     - Alamofire (~> 4)
@@ -91,16 +91,7 @@ PODS:
     - PIALibrary/Core
   - PIALibrary/VPN (2.2.0):
     - PIALibrary/Library
-    - PIATunnel (~> 2.0.0)
-  - PIATunnel (2.0.2):
-    - PIATunnel/AppExtension (= 2.0.2)
-    - PIATunnel/Core (= 2.0.2)
-  - PIATunnel/AppExtension (2.0.2):
-    - PIATunnel/Core
-    - SwiftyBeaver
-  - PIATunnel/Core (2.0.2):
-    - OpenSSL-Apple (~> 1.1.0j.2)
-    - SwiftyBeaver
+    - TunnelKit
   - PopupDialog (1.1.0):
     - DynamicBlurView (~> 3.0.1)
   - QuickLayout (2.0.2)
@@ -110,6 +101,17 @@ PODS:
     - QuickLayout (= 2.0.2)
   - SwiftyBeaver (1.8.2)
   - TPKeyboardAvoiding (1.3.2)
+  - TunnelKit (2.1.0.1):
+    - TunnelKit/Protocols/OpenVPN (= 2.1.0.1)
+  - TunnelKit/AppExtension (2.1.0.1):
+    - SwiftyBeaver
+    - TunnelKit/Core
+  - TunnelKit/Core (2.1.0.1):
+    - SwiftyBeaver
+  - TunnelKit/Protocols/OpenVPN (2.1.0.1):
+    - OpenSSL-Apple (~> 1.1.0j.4)
+    - TunnelKit/AppExtension
+    - TunnelKit/Core
 
 DEPENDENCIES:
   - AlamofireImage
@@ -120,14 +122,14 @@ DEPENDENCIES:
   - Firebase/Core
   - FXPageControl
   - iRate
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `f53db29`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `f53db29`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `f53db29`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `f53db29`)
-  - PIATunnel (from `https://github.com/pia-foss/tunnel-apple`, commit `8bc012a`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `3f69ef2`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `3f69ef2`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `3f69ef2`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `3f69ef2`)
   - PopupDialog
   - SideMenu (~> 6.0)
   - TPKeyboardAvoiding
+  - TunnelKit (from `https://github.com/pia-foss/tunnelkit`, commit `819005e`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -160,19 +162,19 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :commit: f53db29
+    :commit: 3f69ef2
     :git: https://github.com/pia-foss/client-library-apple
-  PIATunnel:
-    :commit: 8bc012a
-    :git: https://github.com/pia-foss/tunnel-apple
+  TunnelKit:
+    :commit: 819005e
+    :git: https://github.com/pia-foss/tunnelkit
 
 CHECKOUT OPTIONS:
   PIALibrary:
-    :commit: f53db29
+    :commit: 3f69ef2
     :git: https://github.com/pia-foss/client-library-apple
-  PIATunnel:
-    :commit: 8bc012a
-    :git: https://github.com/pia-foss/tunnel-apple
+  TunnelKit:
+    :commit: 819005e
+    :git: https://github.com/pia-foss/tunnelkit
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
@@ -193,9 +195,8 @@ SPEC CHECKSUMS:
   iRate: 4fc69958788624545e5d050c8ffd20884013c3f1
   lottie-ios: 496ac5cea1bbf1a7bd1f1f472f3232eb1b8d744b
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  OpenSSL-Apple: e88e1eb314acb4a05e2348069790c4aa49f6d319
-  PIALibrary: 1bb8c23eab7c4d26b2fdc6d4c0e3b35fa86d12cf
-  PIATunnel: 004fb69ae20ca14deafa4f3e3f33da5c35d57527
+  OpenSSL-Apple: f3d1668588ea8f06b076dcfa6177cd90452e3800
+  PIALibrary: 29a8deacaa4a7b2dbc4864fb975799b9eac54500
   PopupDialog: 42fb7a0bc4fafdf89fef8b5b2b127a6023f3e1cc
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
@@ -203,7 +204,8 @@ SPEC CHECKSUMS:
   SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145
   SwiftyBeaver: aaf2ebd7dac2e952991f46a82ed24ad642867ae2
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
+  TunnelKit: 18fc1981a75c16f927990e7c910caa6ca0740245
 
-PODFILE CHECKSUM: c25ee92650e7703805831ea7a6a638bd67a740d6
+PODFILE CHECKSUM: b94efae4639ef9cc292e413187c7d8a05d3ee969
 
 COCOAPODS: 1.7.5
