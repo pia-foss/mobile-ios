@@ -18,9 +18,11 @@ class QuickSettingsTile: UIView, Tileable  {
     @IBOutlet private weak var themeButton: UIButton!
     @IBOutlet private weak var killSwitchButton: UIButton!
     @IBOutlet private weak var nmtButton: UIButton!
+    @IBOutlet private weak var browserButton: UIButton!
     @IBOutlet private weak var themeLabel: UILabel!
     @IBOutlet private weak var killSwitchLabel: UILabel!
     @IBOutlet private weak var nmtLabel: UILabel!
+    @IBOutlet private weak var browserLabel: UILabel!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,6 +70,7 @@ class QuickSettingsTile: UIView, Tileable  {
         }
         Theme.current.applySubtitleTileUsage(killSwitchLabel, appearance: .dark)
         Theme.current.applySubtitleTileUsage(nmtLabel, appearance: .dark)
+        Theme.current.applySubtitleTileUsage(browserLabel, appearance: .dark)
         Theme.current.applyPrincipalBackground(self)
         updateButtons()
     }
@@ -76,10 +79,16 @@ class QuickSettingsTile: UIView, Tileable  {
         
         killSwitchLabel.text = L10n.Settings.ApplicationSettings.KillSwitch.title
         killSwitchLabel.textAlignment = .center
+        
         nmtLabel.text = L10n.Tiles.Quicksetting.Nmt.title
         nmtLabel.textAlignment = .center
+        
+        browserLabel.text = "Private Browser"
+        browserLabel.textAlignment = .center
+        
         killSwitchButton.accessibilityLabel = L10n.Settings.ApplicationSettings.KillSwitch.title
         nmtButton.accessibilityLabel = L10n.Tiles.Quicksetting.Nmt.title
+        browserButton.accessibilityLabel = "Private Browser"
 
         if Flags.shared.enablesThemeSwitch {
             themeLabel.text = L10n.Settings.ApplicationSettings.ActiveTheme.title
@@ -108,6 +117,9 @@ class QuickSettingsTile: UIView, Tileable  {
             nmtButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.nmtLightInactive.image :
                 Asset.Piax.Global.nmtDarkInactive.image, for: [])
         }
+        
+        browserButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.browserLightInactive.image :
+            Asset.Piax.Global.browserDarkInactive.image, for: [])
         
     }
     
@@ -142,6 +154,24 @@ class QuickSettingsTile: UIView, Tileable  {
         updateProfile()
         updateButtons()
         presentKillSwitchAlertIfNeeded()
+        
+    }
+    
+    @IBAction func openBrowser(_ sender: Any) {
+        
+        if let browserUrl = URL(string: AppConstants.Browser.scheme) {
+            if UIApplication.shared.canOpenURL(browserUrl) {
+                UIApplication.shared.open(browserUrl)
+            } else {
+                if let itunesUrl = URL(string: AppConstants.Browser.appStoreUrl),
+                    UIApplication.shared.canOpenURL(itunesUrl) {
+                    UIApplication.shared.open(itunesUrl)
+                } else {
+                    guard let url = URL(string: AppConstants.Browser.safariUrl) else { return }
+                    UIApplication.shared.open(url)
+                }
+            }
+        }
         
     }
     

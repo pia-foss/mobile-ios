@@ -2,6 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>itms-apps</string>
+		<string>inbrowser</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -45,11 +50,11 @@
 	<string>Authenticate to reveal</string>
 	<key>NSCameraUsageDescription</key>
 	<string>We need camera access to scan a code from an gift card</string>
-    <key>NSUserActivityTypes</key>
-    <array>
-        <string>com.privateinternetaccess.ios.PIA-VPN.connect</string>
-        <string>com.privateinternetaccess.ios.PIA-VPN.disconnect</string>
-    </array>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>com.privateinternetaccess.ios.PIA-VPN.connect</string>
+		<string>com.privateinternetaccess.ios.PIA-VPN.disconnect</string>
+	</array>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto-Light.ttf</string>
