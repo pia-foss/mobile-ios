@@ -303,11 +303,24 @@ class SettingsViewController: AutolayoutViewController {
     }
 
     @objc private func togglePersistentConnection(_ sender: UISwitch) {
+        if !sender.isOn,
+            Client.preferences.nmtRulesEnabled {
+                let alert = Macros.alert(nil, L10n.Settings.Nmt.Killswitch.disabled)
+                alert.addCancelAction(L10n.Global.close)
+                alert.addActionWithTitle(L10n.Global.enable) { [weak self] in
+                    self?.pendingPreferences.isPersistentConnection = true
+                    self?.redisplaySettings()
+                    self?.reportUpdatedPreferences()
+                }
+                present(alert, animated: true, completion: nil)
+        }
+        
         pendingPreferences.isPersistentConnection = sender.isOn
         redisplaySettings()
         reportUpdatedPreferences()
+
     }
-    
+     
     @objc private func toggleMACE(_ sender: UISwitch) {
         pendingPreferences.mace = sender.isOn
         redisplaySettings()

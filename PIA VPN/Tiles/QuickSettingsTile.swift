@@ -130,6 +130,8 @@ class QuickSettingsTile: UIView, Tileable  {
 
         updateProfile()
         updateButtons()
+        presentKillSwitchAlertIfNeeded()
+
     }
     
     @IBAction func updateNMTSetting(_ sender: Any) {
@@ -139,7 +141,11 @@ class QuickSettingsTile: UIView, Tileable  {
         
         updateProfile()
         updateButtons()
-
+        presentKillSwitchAlertIfNeeded()
+        
+    }
+    
+    private func presentKillSwitchAlertIfNeeded() {
         if !Client.preferences.isPersistentConnection,
             Client.preferences.nmtRulesEnabled {
             NotificationCenter.default.post(name: .PIAPersistentConnectionTileHaveChanged,
