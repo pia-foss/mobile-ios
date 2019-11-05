@@ -189,7 +189,7 @@ class SettingsViewController: AutolayoutViewController {
 
     private lazy var switchMACE = UISwitch()
     
-    private lazy var switchContentBlocker = FakeSwitch()
+    private lazy var switchContentBlocker = UISwitch()
     
     private lazy var switchDarkMode = UISwitch()
     
@@ -253,7 +253,6 @@ class SettingsViewController: AutolayoutViewController {
         }
         switchPersistent.addTarget(self, action: #selector(togglePersistentConnection(_:)), for: .valueChanged)
         switchMACE.addTarget(self, action: #selector(toggleMACE(_:)), for: .valueChanged)
-//        switchContentBlocker.isGrayed = true
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
         switchDarkMode.addTarget(self, action: #selector(toggleDarkMode(_:)), for: .valueChanged)
         switchConnectSiriShortcuts.addTarget(self, action: #selector(toggleConnectSiriShortcuts(_:)), for: .valueChanged)
@@ -979,12 +978,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .contentBlockerState:
             cell.textLabel?.text = L10n.Settings.ContentBlocker.State.title
             cell.detailTextLabel?.text = nil
-            if #available(iOS 10, *) {
-                cell.accessoryView = switchContentBlocker
-                cell.selectionStyle = .none
-                switchContentBlocker.isOn = isContentBlockerEnabled
-            }
-            
+            cell.accessoryView = switchContentBlocker
+            cell.selectionStyle = .none
+            switchContentBlocker.isOn = isContentBlockerEnabled
+
         case .contentBlockerRefreshRules:
             cell.textLabel?.text = L10n.Settings.ContentBlocker.Refresh.title
             cell.detailTextLabel?.text = nil
