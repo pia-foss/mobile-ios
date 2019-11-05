@@ -79,13 +79,19 @@ class QuickSettingsTile: UIView, Tileable  {
         
         killSwitchLabel.text = L10n.Settings.ApplicationSettings.KillSwitch.title
         killSwitchLabel.textAlignment = .center
+        killSwitchLabel.numberOfLines = 2
+        killSwitchLabel.minimumScaleFactor = 0.5
         
         nmtLabel.text = L10n.Tiles.Quicksetting.Nmt.title
         nmtLabel.textAlignment = .center
+        nmtLabel.numberOfLines = 2
+        nmtLabel.minimumScaleFactor = 0.5
         
         browserLabel.text = "Private Browser"
         browserLabel.textAlignment = .center
-        
+        browserLabel.numberOfLines = 2
+        browserLabel.minimumScaleFactor = 0.5
+
         killSwitchButton.accessibilityLabel = L10n.Settings.ApplicationSettings.KillSwitch.title
         nmtButton.accessibilityLabel = L10n.Tiles.Quicksetting.Nmt.title
         browserButton.accessibilityLabel = "Private Browser"
@@ -93,6 +99,8 @@ class QuickSettingsTile: UIView, Tileable  {
         if Flags.shared.enablesThemeSwitch {
             themeLabel.text = L10n.Settings.ApplicationSettings.ActiveTheme.title
             themeLabel.textAlignment = .center
+            themeLabel.numberOfLines = 2
+            themeLabel.minimumScaleFactor = 0.5
             themeButton.accessibilityLabel = L10n.Settings.ApplicationSettings.ActiveTheme.title
             if AppPreferences.shared.currentThemeCode == ThemeCode.light {
                 themeButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.themeLightActive.image :
