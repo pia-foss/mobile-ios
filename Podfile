@@ -13,8 +13,7 @@ abstract_target 'PIALibrary' do
     pod 'SwiftEntryKit', '0.7.2'
     pod 'lottie-ios'
     pod 'PopupDialog'
-    #pod 'PIATunnel', :path => ''
-    pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :commit => '819005e'
+    pod 'TunnelKit'
 
     target 'PIALibrary-iOS' do
         platform :ios, '11.0'
