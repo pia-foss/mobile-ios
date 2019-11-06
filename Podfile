@@ -18,9 +18,6 @@ $library_subspecs = [
     'VPN'
 ]
 
-$tunnel_pod = 'TunnelKit'
-$tunnel_repo = 'tunnelkit'
-
 def library_by_path(root)
     $library_subspecs.each { |name|
         pod "#{$library_pod}/#{name}", :path => "#{root}/#{$library_repo}"
@@ -39,24 +36,12 @@ def library_by_version(version)
     }
 end
 
-def tunnel_by_path(root)
-    pod $tunnel_pod, :path => "#{root}/#{$tunnel_repo}"
-end
-
-def tunnel_by_git(sha)
-    pod $tunnel_pod, :git => "#{$git_root}/#{$tunnel_repo}", :commit => sha
-end
-
-def tunnel_by_version(version)
-    pod $tunnel_pod, version
-end
-
 # Pod groups
 
 def shared_main_pods
     pod 'AlamofireImage'
     #library_by_path('')
-    library_by_git('82666b5')
+    library_by_git('28eae99')
     #library_by_version('~> 1.1.3')
 end
 
@@ -71,9 +56,7 @@ def app_pods
 end
 
 def tunnel_pods
-    #tunnel_by_path('')
-    tunnel_by_git('819005e')
-    #tunnel_by_version('~> 1.1.6')
+    pod 'TunnelKit'
 end
 
 # Targets

@@ -30,6 +30,8 @@ class AppPreferences {
 
         static let lastVPNConnectionStatus = "LastVPNConnectionStatus"
 
+        static let piaHandshake = "PIAHandshake"
+
         static let piaSocketType = "PIASocketType"
 
         static let favoriteServerIdentifiers = "FavoriteServerIdentifiers"
@@ -120,6 +122,19 @@ class AppPreferences {
             } else {
                 defaults.removeObject(forKey: Entries.piaSocketType)
             }
+        }
+    }
+    
+    var piaHandshake: OpenVPN.Configuration.Handshake {
+        get {
+            guard let rawValue = defaults.string(forKey: Entries.piaHandshake) else {
+                return .rsa2048
+            }
+            return OpenVPN.Configuration.Handshake(rawValue: rawValue) ??
+                OpenVPN.Configuration.Handshake.rsa2048
+        }
+        set {
+            defaults.set(newValue.rawValue, forKey: Entries.piaHandshake)
         }
     }
 
@@ -329,6 +344,7 @@ class AppPreferences {
     }
 
     func reset() {
+        piaHandshake = .rsa2048
         piaSocketType = nil
         favoriteServerIdentifiers = []
         optOutAskDisconnectVPNUsingNMT = false
@@ -347,6 +363,8 @@ class AppPreferences {
     }
     
     func clean() {
+        piaHandshake = .rsa2048
+        piaSocketType = nil
         favoriteServerIdentifiers = []
         optOutAskDisconnectVPNUsingNMT = false
         useConnectSiriShortcuts = false
