@@ -56,7 +56,9 @@ struct AppConfiguration {
             sessionBuilder.renegotiatesAfter = piaRenegotiationInterval
             sessionBuilder.cipher = .aes128gcm
             sessionBuilder.digest = .sha1
-            sessionBuilder.handshake = .rsa2048
+            if let pem = AppPreferences.shared.piaHandshake.pemString() {
+                sessionBuilder.ca = OpenVPN.CryptoContainer(pem: pem)
+            }
             sessionBuilder.endpointProtocols = piaAutomaticProtocols
             sessionBuilder.dnsServers = []
             sessionBuilder.usesPIAPatches = true

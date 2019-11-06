@@ -211,6 +211,8 @@ class SettingsViewController: AutolayoutViewController {
     
     private var pendingOpenVPNSocketType: SocketType?
     
+    private var pendingHandshake: OpenVPN.Configuration.Handshake!
+
     private var pendingOpenVPNConfiguration: OpenVPN.ConfigurationBuilder!
 
     private var pendingVPNAction: VPNAction?
@@ -243,6 +245,7 @@ class SettingsViewController: AutolayoutViewController {
             fatalError("No default VPN custom configuration provided for PIA protocol")
         }
         pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
+        pendingHandshake = AppPreferences.shared.piaHandshake
         pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
         
         validateDNSList()
@@ -493,6 +496,7 @@ class SettingsViewController: AutolayoutViewController {
         AppPreferences.shared.reset()
         DNSList.shared.resetPlist()
         pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
+        pendingHandshake = AppPreferences.shared.piaHandshake
         pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
 
         redisplaySettings()
@@ -596,6 +600,7 @@ class SettingsViewController: AutolayoutViewController {
     
     private func commitPreferences() {
         AppPreferences.shared.piaSocketType = pendingOpenVPNSocketType
+        AppPreferences.shared.piaHandshake = pendingHandshake
         //Update with values from Trusted Network Settings
         pendingPreferences.trustedNetworks = Client.preferences.trustedNetworks
         pendingPreferences.nmtRulesEnabled = Client.preferences.nmtRulesEnabled
@@ -955,7 +960,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         case .encryptionHandshake:
             cell.textLabel?.text = L10n.Settings.Encryption.Handshake.title
-            cell.detailTextLabel?.text = pendingOpenVPNConfiguration.handshake?.description
+            
+            cell.detailTextLabel?.text = pendingHandshake.description
             if !Flags.shared.enablesEncryptionSettings {
                 cell.accessoryType = .none
                 cell.selectionStyle = .none
@@ -1210,7 +1216,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             guard Flags.shared.enablesEncryptionSettings else {
                 break
             }
-            let options: [OpenVPN.Handshake] = [
+            let options: [OpenVPN.Configuration.Handshake] = [
                 .rsa2048,
                 .rsa3072,
                 .rsa4096,
@@ -1220,7 +1226,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             ]
             controller = OptionsViewController()
             controller?.options = options.map { $0.rawValue }
-            controller?.selectedOption = pendingOpenVPNConfiguration.handshake?.rawValue
+            controller?.selectedOption = pendingHandshake.description
             
         case .contentBlockerState:
             if #available(iOS 10, *) {
@@ -1359,7 +1365,7 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             
         case .encryptionHandshake:
             let rawHandshake = option as! String
-            cell.textLabel?.text = OpenVPN.Handshake(rawValue: rawHandshake)?.description
+            cell.textLabel?.text = OpenVPN.Configuration.Handshake(rawValue: rawHandshake)?.description
 
         default:
             break
@@ -1502,8 +1508,11 @@ extension SettingsViewController: OptionsViewControllerDelegate {
 
         case .encryptionHandshake:
             let rawHandshake = option as! String
-            pendingOpenVPNConfiguration.handshake = OpenVPN.Handshake(rawValue: rawHandshake)!
-
+            if let handshake = OpenVPN.Configuration.Handshake(rawValue: rawHandshake),
+                let pem = handshake.pemString() {
+                pendingOpenVPNConfiguration.ca = OpenVPN.CryptoContainer(pem: pem)
+                pendingHandshake = OpenVPN.Configuration.Handshake(rawValue: rawHandshake)
+            }
         default:
             break
         }
@@ -1521,7 +1530,7 @@ extension SettingsViewController: OptionsViewControllerDelegate {
         builder.shouldDebug = true
 
         pendingPreferences.setVPNCustomConfiguration(builder.build(), for: pendingPreferences.vpnType)
-        
+
         redisplaySettings()
         reportUpdatedPreferences()
     }
