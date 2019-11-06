@@ -11,14 +11,14 @@ PODS:
   - SwiftEntryKit (0.7.2):
     - QuickLayout (= 2.0.2)
   - SwiftyBeaver (1.7.0)
-  - TunnelKit (2.1.0.1):
-    - TunnelKit/Protocols/OpenVPN (= 2.1.0.1)
-  - TunnelKit/AppExtension (2.1.0.1):
+  - TunnelKit (2.0.5):
+    - TunnelKit/Protocols/OpenVPN (= 2.0.5)
+  - TunnelKit/AppExtension (2.0.5):
     - SwiftyBeaver
     - TunnelKit/Core
-  - TunnelKit/Core (2.1.0.1):
+  - TunnelKit/Core (2.0.5):
     - SwiftyBeaver
-  - TunnelKit/Protocols/OpenVPN (2.1.0.1):
+  - TunnelKit/Protocols/OpenVPN (2.0.5):
     - OpenSSL-Apple (~> 1.1.0j.4)
     - TunnelKit/AppExtension
     - TunnelKit/Core
@@ -31,7 +31,7 @@ DEPENDENCIES:
   - ReachabilitySwift
   - SwiftEntryKit (= 0.7.2)
   - SwiftyBeaver (~> 1.7.0)
-  - TunnelKit (from `https://github.com/pia-foss/tunnelkit`, commit `e5b8fc9`)
+  - TunnelKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -45,16 +45,7 @@ SPEC REPOS:
     - ReachabilitySwift
     - SwiftEntryKit
     - SwiftyBeaver
-
-EXTERNAL SOURCES:
-  TunnelKit:
-    :commit: e5b8fc9
-    :git: https://github.com/pia-foss/tunnelkit
-
-CHECKOUT OPTIONS:
-  TunnelKit:
-    :commit: e5b8fc9
-    :git: https://github.com/pia-foss/tunnelkit
+    - TunnelKit
 
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
@@ -67,8 +58,8 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
   SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
-  TunnelKit: d41ee9cf2ce3089f58b7bb32d25b12e43290f9c1
+  TunnelKit: f33216415cd9d5e37b6acf02edb0c79350598b36
 
-PODFILE CHECKSUM: 955f57ca23851f97813d816d15bf2fb513495378
+PODFILE CHECKSUM: fde4753cd084f84e9478f6da5890bde64f92d5e7
 
 COCOAPODS: 1.7.5
