@@ -1221,7 +1221,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 .rsa3072,
                 .rsa4096,
                 .ecc256r1,
-                .ecc256k1,
                 .ecc521r1
             ]
             controller = OptionsViewController()

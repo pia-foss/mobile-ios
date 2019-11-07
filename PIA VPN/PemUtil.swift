@@ -9,14 +9,6 @@
 import Foundation
 import TunnelKit
 
-public extension OpenVPN.CryptoContainer {
-    
-    var description: String {
-        return "hello"
-    }
-    
-}
-
 public extension OpenVPN.Configuration {
     
     /// The available certificates for handshake.
@@ -45,12 +37,12 @@ public extension OpenVPN.Configuration {
         /// - Seealso:
         case custom = "Custom"
         
-        private static let allDigests: [Handshake: String] = [
+        static let allDigests: [Handshake: String] = [
             .rsa2048: "e2fccccaba712ccc68449b1c56427ac1",
             .rsa3072: "2fcdb65712df9db7dae34a1f4a84e32d",
             .rsa4096: "ec085790314aa0ad4b01dda7b756a932",
             .ecc256r1: "6f0f23a616479329ce54614f76b52254",
-            .ecc256k1: "80c3b0f34001e4101e34fde9eb1dfa87",
+            //.ecc256k1: "80c3b0f34001e4101e34fde9eb1dfa87",
             .ecc521r1: "82446e0c80706e33e6e793cebf1b0c59"
         ]
         
