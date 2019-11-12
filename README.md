@@ -49,7 +49,7 @@ To include other non-default subspecs:
 
 ```ruby
 pod 'PIALibrary'
-pod 'PIALibrary/VPN' # adds support for PIATunnel
+pod 'PIALibrary/VPN' # adds support for TunnelKit
 pod 'PIALibrary/Mock'
 ```
 
@@ -223,18 +223,24 @@ NotificationCenter.default.addObserver(forName: .PIADaemonsDidUpdateConnectivity
 
 The *VPN* module complements part of the Library module dedicated to VPN profiles, normally based on the NetworkExtension framework for iOS and macOS.
 
-Today, it offers the `PIATunnelProfile` bridge to integrate [our tunnel implementation](https://github.com/pia-foss/tunnel-apple) into the library. In the pre-bootstrap code, do something like:
+Today, it offers the `PIATunnelProfile` bridge to integrate [TunnelKit](https://github.com/pia-foss/tunnel-apple) into the library. In the pre-bootstrap code, do something like:
 
 ```swift
 let packetTunnelBundle = "com.example.MyApp.MyTunnel"
 let group = "group.com.example"
+let ca = OpenVPN.CryptoContainer(pem: """
+-----BEGIN CERTIFICATE-----
+MIIFqzCCBJOgAwIBAgIJAKZ7D5Yv87qDMA0GCSqGSIb3DQEBDQUAMIHoMQswCQYD
+-----END CERTIFICATE-----
+""")
 
-var builder = PIATunnelProvider.ConfigurationBuilder(appGroup: group)
-builder.cipher = .aes128cbc
-builder.digest = .sha1
-builder.handshake = .rsa2048
+var sessionBuilder = OpenVPN.ConfigurationBuilder()
+sessionBuilder.cipher = .aes128gcm
+sessionBuilder.digest = .sha1
+
+var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
 builder.mtu = 1350
-
+        
 Client.configuration.addVPNProfile(
     PIATunnelProfile(bundleIdentifier: packetTunnelBundle)
 )
@@ -331,6 +337,7 @@ This project is licensed under the [MIT (Expat) license](https://choosealicense.
 - Gloss - © 2017 Harlan Kellaway
 - Alamofire - © 2014-2018 Alamofire Software Foundation (http://alamofire.org/)
 - ReachabilitySwift - © 2016 Ashley Mills
+- TunnelKit - © 2018 - Present Davide de Rosa (https://github.com/passepartoutvpn/tunnelkit) - TunnelKit is not MIT software and remains under the terms of the GPL license (https://github.com/passepartoutvpn/tunnelkit/blob/master/LICENSE)
 
 [pia-image]: https://www.privateinternetaccess.com/assets/PIALogo2x-0d1e1094ac909ea4c93df06e2da3db4ee8a73d8b2770f0f7d768a8603c62a82f.png
 [pia-url]: https://www.privateinternetaccess.com/
