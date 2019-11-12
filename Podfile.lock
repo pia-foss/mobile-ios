@@ -122,10 +122,10 @@ DEPENDENCIES:
   - Firebase/Core
   - FXPageControl
   - iRate
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `7829919`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `7829919`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `7829919`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `7829919`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `45b3f82`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `45b3f82`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `45b3f82`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `45b3f82`)
   - PopupDialog
   - SideMenu (~> 6.0)
   - TPKeyboardAvoiding
@@ -163,12 +163,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :commit: '7829919'
+    :commit: 45b3f82
     :git: https://github.com/pia-foss/client-library-apple
 
 CHECKOUT OPTIONS:
   PIALibrary:
-    :commit: '7829919'
+    :commit: 45b3f82
     :git: https://github.com/pia-foss/client-library-apple
 
 SPEC CHECKSUMS:
@@ -201,6 +201,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
   TunnelKit: f33216415cd9d5e37b6acf02edb0c79350598b36
 
-PODFILE CHECKSUM: 119d7390d5c3609fb1a85a20ffc5ba19d5dd6c97
+PODFILE CHECKSUM: 894da52f9159d0b0d65bdf6994fe158123a0a914
 
 COCOAPODS: 1.7.5
