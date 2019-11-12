@@ -87,6 +87,7 @@ This project is licensed under the [MIT (Expat) license](https://choosealicense.
 - SideMenu - © 2015 Jonathan Kent <contact@jonkent.me>
 - FXPageControl - © 2010 Charcoal Design
 - MBProgressHUD - © 2009-2016 Matej Bukovinski
+- TunnelKit - © 2018 - Present Davide de Rosa (https://github.com/passepartoutvpn/tunnelkit) - TunnelKit is not MIT software and remains under the terms of the GPL license (https://github.com/passepartoutvpn/tunnelkit/blob/master/LICENSE)
 
 © 2002-2018 OpenVPN Inc. - OpenVPN is a registered trademark of OpenVPN Inc.
 
