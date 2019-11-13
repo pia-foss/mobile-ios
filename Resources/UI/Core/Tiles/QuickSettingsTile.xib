@@ -30,30 +30,30 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0Qp-uW-eAj">
-                    <rect key="frame" x="20" y="35.5" width="335" height="53.5"/>
+                    <rect key="frame" x="20" y="35.5" width="362" height="53.5"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Bu-uZ-L11">
-                            <rect key="frame" x="0.0" y="0.0" width="69" height="53.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="75.5" height="53.5"/>
                             <state key="normal" image="theme-dark-active"/>
                             <connections>
                                 <action selector="changeTheme:" destination="-1" eventType="touchUpInside" id="yMQ-vt-Pvt"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBB-hV-AgG">
-                            <rect key="frame" x="89" y="0.0" width="68.5" height="53.5"/>
+                            <rect key="frame" x="95.5" y="0.0" width="75.5" height="53.5"/>
                             <state key="normal" image="killswitch-dark-active"/>
                             <connections>
                                 <action selector="updateKillSwitchSetting:" destination="-1" eventType="touchUpInside" id="ELb-to-qnb"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaA-K4-g4k">
-                            <rect key="frame" x="177.5" y="0.0" width="69" height="53.5"/>
+                            <rect key="frame" x="191" y="0.0" width="75.5" height="53.5"/>
                             <connections>
                                 <action selector="updateNMTSetting:" destination="-1" eventType="touchUpInside" id="BKD-oU-Cab"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MIc-dc-WeZ">
-                            <rect key="frame" x="266.5" y="0.0" width="68.5" height="53.5"/>
+                            <rect key="frame" x="286.5" y="0.0" width="75.5" height="53.5"/>
                             <connections>
                                 <action selector="openBrowser:" destination="-1" eventType="touchUpInside" id="bex-A4-HGR"/>
                             </connections>
@@ -67,7 +67,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="0Qp-uW-eAj" secondAttribute="bottom" id="OhQ-hF-kHh"/>
                 <constraint firstItem="0Qp-uW-eAj" firstAttribute="top" secondItem="Gno-Iw-R4F" secondAttribute="bottom" id="bI1-DA-HQj"/>
                 <constraint firstItem="0Qp-uW-eAj" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="csA-Ky-er2"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="0Qp-uW-eAj" secondAttribute="trailing" constant="20" id="oOS-xB-q3f"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="0Qp-uW-eAj" secondAttribute="trailing" constant="-7" id="oOS-xB-q3f"/>
                 <constraint firstItem="Gno-Iw-R4F" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="25" id="tPY-7o-dlf"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

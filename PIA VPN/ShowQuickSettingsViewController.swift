@@ -13,9 +13,27 @@ private struct QuickSettingCells {
     static let setting = "SettingCell"
 }
 
+private enum QuickSettingOptions: Int {
+    case theme = 0
+    case killswitch
+    case networkTools
+    case privateBrowsing
+    
+    static func totalCount() -> Int {
+        return !Flags.shared.enablesThemeSwitch ? 3 : 4
+    }
+    
+    static func options() -> [QuickSettingOptions] {
+        return !Flags.shared.enablesThemeSwitch ?
+            [killswitch, networkTools, privateBrowsing] :
+            [theme, killswitch, networkTools, privateBrowsing]
+    }
+}
+
 class ShowQuickSettingsViewController: AutolayoutViewController {
 
     @IBOutlet private weak var tableView: UITableView!
+    private lazy var switchThemeSettings = UISwitch()
     private lazy var switchKillSwitchSetting = UISwitch()
     private lazy var switchNetworkToolsSetting = UISwitch()
     private lazy var switchPrivateBrowserSetting = UISwitch()
@@ -26,10 +44,10 @@ class ShowQuickSettingsViewController: AutolayoutViewController {
         tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.estimatedSectionFooterHeight = 1.0
         
+        switchThemeSettings.addTarget(self, action: #selector(toggleThemeSetting), for: .valueChanged)
         switchKillSwitchSetting.addTarget(self, action: #selector(toggleKillSwitchSetting), for: .valueChanged)
         switchNetworkToolsSetting.addTarget(self, action: #selector(toggleNetworkToolsSetting), for: .valueChanged)
         switchPrivateBrowserSetting.addTarget(self, action: #selector(togglePrivateBrowserSetting), for: .valueChanged)
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,7 +60,12 @@ class ShowQuickSettingsViewController: AutolayoutViewController {
     }
     
     // MARK: Switch actions
-    
+    @objc private func toggleThemeSetting(_ sender: UISwitch) {
+        AppPreferences.shared.quickSettingThemeVisible = sender.isOn
+        tableView.reloadData()
+        Macros.postNotification(.PIATilesDidChange)
+    }
+
     @objc private func toggleKillSwitchSetting(_ sender: UISwitch) {
         AppPreferences.shared.quickSettingKillswitchVisible = sender.isOn
         tableView.reloadData()
@@ -93,7 +116,7 @@ extension ShowQuickSettingsViewController: UITableViewDataSource, UITableViewDel
     }
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return QuickSettingOptions.totalCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -102,21 +125,25 @@ extension ShowQuickSettingsViewController: UITableViewDataSource, UITableViewDel
         cell.accessoryView = nil
         cell.selectionStyle = .none
 
-        switch indexPath.row {
-        case 0:
+        let options = QuickSettingOptions.options()
+        let option = options[indexPath.row]
+        switch option {
+        case .theme:
+            cell.textLabel?.text = L10n.Settings.ApplicationSettings.ActiveTheme.title
+            cell.accessoryView = switchThemeSettings
+            switchThemeSettings.isOn = AppPreferences.shared.quickSettingThemeVisible
+        case .killswitch:
             cell.textLabel?.text = L10n.Settings.ApplicationSettings.KillSwitch.title
             cell.accessoryView = switchKillSwitchSetting
             switchKillSwitchSetting.isOn = AppPreferences.shared.quickSettingKillswitchVisible
-        case 1:
+        case .networkTools:
             cell.textLabel?.text = L10n.Tiles.Quicksetting.Nmt.title
             cell.accessoryView = switchNetworkToolsSetting
             switchNetworkToolsSetting.isOn = AppPreferences.shared.quickSettingNetworkToolVisible
-        case 2:
+        case .privateBrowsing:
             cell.textLabel?.text = L10n.Tiles.Quicksetting.Private.Browser.title
             cell.accessoryView = switchPrivateBrowserSetting
             switchPrivateBrowserSetting.isOn = AppPreferences.shared.quickSettingPrivateBrowserVisible
-        default:
-            break
         }
 
         Theme.current.applySecondaryBackground(cell)
