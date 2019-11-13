@@ -48,6 +48,12 @@ class AppPreferences {
         static let todayWidgetButtonTitle = "vpn.button.description"
 
         static let optOutAskDisconnectVPNUsingNMT = "OptOutAskDisconnectVPNUsingNMT"
+        
+        // Quick Settings options
+        static let quickSettingThemeVisible = "quickSettingThemeVisible"
+        static let quickSettingKillswitchVisible = "quickSettingKillswitchVisible"
+        static let quickSettingNetworkToolVisible = "quickSettingNetworkToolVisible"
+        static let quickSettingPrivateBrowserVisible = "quickSettingPrivateBrowserVisible"
 
     }
 
@@ -240,6 +246,41 @@ class AppPreferences {
             }
         }    }
 
+    var quickSettingThemeVisible: Bool{
+        get {
+            return defaults.bool(forKey: Entries.quickSettingThemeVisible)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.quickSettingThemeVisible)
+        }
+    }
+    
+    var quickSettingKillswitchVisible: Bool{
+        get {
+            return defaults.bool(forKey: Entries.quickSettingKillswitchVisible)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.quickSettingKillswitchVisible)
+        }
+    }
+    
+    var quickSettingNetworkToolVisible: Bool{
+        get {
+            return defaults.bool(forKey: Entries.quickSettingNetworkToolVisible)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.quickSettingNetworkToolVisible)
+        }
+    }
+    
+    var quickSettingPrivateBrowserVisible: Bool{
+        get {
+            return defaults.bool(forKey: Entries.quickSettingPrivateBrowserVisible)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.quickSettingPrivateBrowserVisible)
+        }
+    }
 
     private init() {
         guard let defaults = UserDefaults(suiteName: AppConstants.appGroup) else {
@@ -257,7 +298,11 @@ class AppPreferences {
             Entries.useConnectSiriShortcuts: false,
             Entries.useDisconnectSiriShortcuts: false,
             Entries.optOutAskDisconnectVPNUsingNMT: false,
-            Entries.todayWidgetButtonTitle: L10n.Today.Widget.login
+            Entries.todayWidgetButtonTitle: L10n.Today.Widget.login,
+            Entries.quickSettingThemeVisible: true,
+            Entries.quickSettingKillswitchVisible: true,
+            Entries.quickSettingNetworkToolVisible: true,
+            Entries.quickSettingPrivateBrowserVisible: true
         ])
     }
     
@@ -360,6 +405,10 @@ class AppPreferences {
             transitionTheme(to: .light)
             return
         }
+        quickSettingThemeVisible = true
+        quickSettingKillswitchVisible = true
+        quickSettingNetworkToolVisible = true
+        quickSettingPrivateBrowserVisible = true
     }
     
     func clean() {
@@ -375,6 +424,10 @@ class AppPreferences {
         }
         todayWidgetVpnStatus = L10n.Today.Widget.login
         todayWidgetButtonTitle = L10n.Today.Widget.login
+        quickSettingThemeVisible = true
+        quickSettingKillswitchVisible = true
+        quickSettingNetworkToolVisible = true
+        quickSettingPrivateBrowserVisible = true
         let preferences = Client.preferences.editable().reset()
         preferences.commit()
     }

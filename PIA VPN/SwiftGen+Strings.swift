@@ -779,6 +779,12 @@ internal enum L10n {
         /// Network Management
         internal static let title = L10n.tr("Localizable", "tiles.quicksetting.nmt.title")
       }
+      internal enum Private {
+        internal enum Browser {
+          /// Private Browser
+          internal static let title = L10n.tr("Localizable", "tiles.quicksetting.private.browser.title")
+        }
+      }
     }
     internal enum Quicksettings {
       /// Quick settings

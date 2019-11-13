@@ -104,7 +104,6 @@ enum Asset {
       static let vpnButton = ImageAsset(name: "vpn-button")
     }
     enum Global {
-      static let browserDarkActive = ImageAsset(name: "browser-dark-active")
       static let browserDarkInactive = ImageAsset(name: "browser-dark-inactive")
       static let browserLightInactive = ImageAsset(name: "browser-light-inactive")
       static let dragDropIndicatorDark = ImageAsset(name: "drag-drop-indicator-dark")
@@ -513,7 +512,6 @@ enum Asset {
     Piax.DarkMap.darkMapUSWashingtonDC,
     Piax.DarkMap.darkMapUSWest,
     Piax.Dashboard.vpnButton,
-    Piax.Global.browserDarkActive,
     Piax.Global.browserDarkInactive,
     Piax.Global.browserLightInactive,
     Piax.Global.dragDropIndicatorDark,

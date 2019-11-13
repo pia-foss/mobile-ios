@@ -15,15 +15,13 @@ class QuickSettingsTile: UIView, Tileable  {
     var detailSegueIdentifier: String!
     var status: TileStatus = .normal
     
+    @IBOutlet private weak var tileTitle: UILabel!
     @IBOutlet private weak var themeButton: UIButton!
     @IBOutlet private weak var killSwitchButton: UIButton!
     @IBOutlet private weak var nmtButton: UIButton!
     @IBOutlet private weak var browserButton: UIButton!
-    @IBOutlet private weak var themeLabel: UILabel!
-    @IBOutlet private weak var killSwitchLabel: UILabel!
-    @IBOutlet private weak var nmtLabel: UILabel!
-    @IBOutlet private weak var browserLabel: UILabel!
-
+    @IBOutlet weak var buttonsStackView: UIStackView!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.xibSetup()
@@ -40,67 +38,47 @@ class QuickSettingsTile: UIView, Tileable  {
     }
     
     func hasDetailView() -> Bool {
-        return false
+        return true
     }
     
     private func setupView() {
         
+        self.detailSegueIdentifier = StoryboardSegue.Main.showQuickSettingsViewController.rawValue
+
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateButtons), name: .PIASettingsHaveChanged, object: nil)
-        
-        setupThemeButton()
+        nc.addObserver(self, selector: #selector(setupButtons), name: .PIASettingsHaveChanged, object: nil)
+        nc.addObserver(self, selector: #selector(setupButtons), name: .PIATilesDidChange, object: nil)
+
+        self.tileTitle.text = L10n.Tiles.Quicksettings.title.uppercased()
+
+        setupButtons()
         viewShouldRestyle()
     }
     
-    private func setupThemeButton() {
-        if !Flags.shared.enablesThemeSwitch {
-            if let stackView = self.themeButton.superview as? UIStackView {
-                stackView.removeFromSuperview()
-            }
-            if let stackView = self.themeLabel.superview as? UIStackView {
-                stackView.removeFromSuperview()
-            }
-        }
+    @objc private func setupButtons() {
+        
+        self.themeButton.isHidden = !Flags.shared.enablesThemeSwitch || !AppPreferences.shared.quickSettingThemeVisible
+        self.killSwitchButton.isHidden = !AppPreferences.shared.quickSettingKillswitchVisible
+        self.nmtButton.isHidden = !AppPreferences.shared.quickSettingNetworkToolVisible
+        self.browserButton.isHidden = !AppPreferences.shared.quickSettingPrivateBrowserVisible
+
     }
     
     @objc private func viewShouldRestyle() {
-        if Flags.shared.enablesThemeSwitch {
-            Theme.current.applySubtitleTileUsage(themeLabel, appearance: .dark)
-        }
-        Theme.current.applySubtitleTileUsage(killSwitchLabel, appearance: .dark)
-        Theme.current.applySubtitleTileUsage(nmtLabel, appearance: .dark)
-        Theme.current.applySubtitleTileUsage(browserLabel, appearance: .dark)
         Theme.current.applyPrincipalBackground(self)
+        tileTitle.style(style: TextStyle.textStyle21)
         updateButtons()
     }
     
     @objc private func updateButtons() {
         
-        killSwitchLabel.text = L10n.Settings.ApplicationSettings.KillSwitch.title
-        killSwitchLabel.textAlignment = .center
-        killSwitchLabel.numberOfLines = 2
-        killSwitchLabel.minimumScaleFactor = 0.5
-        
-        nmtLabel.text = L10n.Tiles.Quicksetting.Nmt.title
-        nmtLabel.textAlignment = .center
-        nmtLabel.numberOfLines = 2
-        nmtLabel.minimumScaleFactor = 0.5
-        
-        browserLabel.text = "Private Browser"
-        browserLabel.textAlignment = .center
-        browserLabel.numberOfLines = 2
-        browserLabel.minimumScaleFactor = 0.5
-
         killSwitchButton.accessibilityLabel = L10n.Settings.ApplicationSettings.KillSwitch.title
         nmtButton.accessibilityLabel = L10n.Tiles.Quicksetting.Nmt.title
-        browserButton.accessibilityLabel = "Private Browser"
+        browserButton.accessibilityLabel = L10n.Tiles.Quicksetting.Private.Browser.title
 
         if Flags.shared.enablesThemeSwitch {
-            themeLabel.text = L10n.Settings.ApplicationSettings.ActiveTheme.title
-            themeLabel.textAlignment = .center
-            themeLabel.numberOfLines = 2
-            themeLabel.minimumScaleFactor = 0.5
             themeButton.accessibilityLabel = L10n.Settings.ApplicationSettings.ActiveTheme.title
             if AppPreferences.shared.currentThemeCode == ThemeCode.light {
                 themeButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.themeLightActive.image :

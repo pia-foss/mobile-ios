@@ -18,10 +18,18 @@ class QuickSettingsTileCollectionViewCell: UICollectionViewCell, TileableCell {
     @IBOutlet weak var accessoryImageRight: UIImageView!
     @IBOutlet weak var accessoryButtonLeft: UIButton!
     @IBOutlet weak var tileLeftConstraint: NSLayoutConstraint!
-    @IBOutlet weak var tileRightConstraint: NSLayoutConstraint!
-    
+    var tileRightConstraint: NSLayoutConstraint!
+
     private var currentTileStatus: TileStatus?
     
+    func hasDetailView() -> Bool {
+        return tile.hasDetailView()
+    }
+    
+    func segueIdentifier() -> String? {
+        return tile.detailSegueIdentifier
+    }
+
     func setupCellForStatus(_ status: TileStatus) {
         Theme.current.applyPrincipalBackground(self)
         Theme.current.applyPrincipalBackground(self.contentView)
@@ -31,16 +39,18 @@ class QuickSettingsTileCollectionViewCell: UICollectionViewCell, TileableCell {
         UIView.animate(withDuration: animationDuration, animations: {
             switch status {
             case .normal:
+                self.accessibilityTraits = UIAccessibilityTraits.button
+                self.isAccessibilityElement = true
+                self.accessoryImageRight.image = Asset.Piax.Tiles.openTileDetails.image
                 self.tileLeftConstraint.constant = 0
-                self.tileRightConstraint.constant = 0
-                self.tile.isUserInteractionEnabled = true
                 self.accessoryButtonLeft.isHidden = true
             case .edit:
-                self.accessoryButtonLeft.isHidden = false
+                self.accessibilityTraits = UIAccessibilityTraits.none
+                self.isAccessibilityElement = false
+                self.accessoryImageRight.image = Theme.current.dragDropImage()
                 self.tileLeftConstraint.constant = self.leftConstraintValue
-                self.tileRightConstraint.constant = self.rightConstraintValue
                 self.setupVisibilityButton()
-                self.tile.isUserInteractionEnabled = false
+                self.accessoryButtonLeft.isHidden = false
             }
             self.layoutIfNeeded()
             self.currentTileStatus = status

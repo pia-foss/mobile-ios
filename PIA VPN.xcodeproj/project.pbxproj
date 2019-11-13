@@ -266,6 +266,8 @@
 		DD858BAE22CE5045004953F3 /* InviteStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD858BAB22CE5045004953F3 /* InviteStatusTableViewCell.swift */; };
 		DD858BB222CE5065004953F3 /* InviteStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD858BB122CE5065004953F3 /* InviteStatusViewController.swift */; };
 		DD858BB322CE5065004953F3 /* InviteStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD858BB122CE5065004953F3 /* InviteStatusViewController.swift */; };
+		DD9329A2237AFD0A0025B6BC /* ShowQuickSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9329A1237AFD0A0025B6BC /* ShowQuickSettingsViewController.swift */; };
+		DD9329A3237AFD0A0025B6BC /* ShowQuickSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9329A1237AFD0A0025B6BC /* ShowQuickSettingsViewController.swift */; };
 		DD9706A4224262BF00630220 /* QuickSettingsTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9706A3224262BF00630220 /* QuickSettingsTile.swift */; };
 		DD9706A5224262BF00630220 /* QuickSettingsTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9706A3224262BF00630220 /* QuickSettingsTile.swift */; };
 		DD9706A7224262CD00630220 /* QuickSettingsTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD9706A6224262CD00630220 /* QuickSettingsTile.xib */; };
@@ -606,6 +608,7 @@
 		DD858BA522CE4408004953F3 /* DaysAcquiredTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysAcquiredTableViewCell.swift; sourceTree = "<group>"; };
 		DD858BAB22CE5045004953F3 /* InviteStatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteStatusTableViewCell.swift; sourceTree = "<group>"; };
 		DD858BB122CE5065004953F3 /* InviteStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteStatusViewController.swift; sourceTree = "<group>"; };
+		DD9329A1237AFD0A0025B6BC /* ShowQuickSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowQuickSettingsViewController.swift; sourceTree = "<group>"; };
 		DD97069D223FF6C200630220 /* PIAWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PIAWidget.entitlements; sourceTree = "<group>"; };
 		DD9706A3224262BF00630220 /* QuickSettingsTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSettingsTile.swift; sourceTree = "<group>"; };
 		DD9706A6224262CD00630220 /* QuickSettingsTile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuickSettingsTile.xib; sourceTree = "<group>"; };
@@ -734,6 +737,7 @@
 				0E9452A41FDB578400891948 /* RegionCell.swift */,
 				0ECC1E3D1FDB3F2F0039891D /* RegionsViewController.swift */,
 				0EB9ED191FDA1C4D00D1214D /* SettingsViewController.swift */,
+				DD9329A1237AFD0A0025B6BC /* ShowQuickSettingsViewController.swift */,
 				DD1AA4952180AD92005116D7 /* CustomDNSSettingsViewController.swift */,
 				DDB6B94F21C94E2E00DE8C5F /* TrustedNetworksViewController.swift */,
 				DD858B8A22CCE512004953F3 /* FriendReferralsViewController.swift */,
@@ -1971,6 +1975,7 @@
 				DD125DD221E7A694004ECCB6 /* ServerButton.swift in Sources */,
 				0E2215CA2008BA9100F5FB4D /* SwiftGen+Strings.swift in Sources */,
 				DD858BAE22CE5045004953F3 /* InviteStatusTableViewCell.swift in Sources */,
+				DD9329A3237AFD0A0025B6BC /* ShowQuickSettingsViewController.swift in Sources */,
 				DD606ABD21C904BB00E0781D /* PIAHotspotHelper.swift in Sources */,
 				DD858BB322CE5065004953F3 /* InviteStatusViewController.swift in Sources */,
 				DD858B8C22CCE512004953F3 /* FriendReferralsViewController.swift in Sources */,
@@ -2089,6 +2094,7 @@
 				DD58F4BF21B12CFE00D043F7 /* PIAConnectionButton.swift in Sources */,
 				DD125DD121E7A694004ECCB6 /* ServerButton.swift in Sources */,
 				DD858BAD22CE5045004953F3 /* InviteStatusTableViewCell.swift in Sources */,
+				DD9329A2237AFD0A0025B6BC /* ShowQuickSettingsViewController.swift in Sources */,
 				0E2215C920084CD700F5FB4D /* SwiftGen+Strings.swift in Sources */,
 				DD858BB222CE5065004953F3 /* InviteStatusViewController.swift in Sources */,
 				DD858B8B22CCE512004953F3 /* FriendReferralsViewController.swift in Sources */,
