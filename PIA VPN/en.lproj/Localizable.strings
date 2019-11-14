@@ -267,6 +267,7 @@
 "tiles.nmt.accessibility.trusted" = "Trusted network";
 "tiles.nmt.accessibility.untrusted" = "Untrusted network";
 "tiles.quicksettings.title" = "Quick settings";
+"tiles.quicksettings.min.elements.message" = "You should keep at least one element visible in the Quick Settings Tile";
 "tiles.accessibility.visible.tile.action" = "Tap to remove this tile from the dashboard";
 "tiles.accessibility.invisible.tile.action" = "Tap to add this tile to the dashboard";
 

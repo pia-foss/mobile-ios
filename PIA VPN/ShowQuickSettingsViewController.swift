@@ -9,10 +9,6 @@
 import UIKit
 import PIALibrary
 
-private struct QuickSettingCells {
-    static let setting = "SettingCell"
-}
-
 private enum QuickSettingOptions: Int {
     case theme = 0
     case killswitch
@@ -30,6 +26,13 @@ private enum QuickSettingOptions: Int {
     }
 }
 
+class ShowQuickSettingsCell: UITableViewCell {
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var settingImage: UIImageView!
+
+}
+
 class ShowQuickSettingsViewController: AutolayoutViewController {
 
     @IBOutlet private weak var tableView: UITableView!
@@ -37,6 +40,8 @@ class ShowQuickSettingsViewController: AutolayoutViewController {
     private lazy var switchKillSwitchSetting = UISwitch()
     private lazy var switchNetworkToolsSetting = UISwitch()
     private lazy var switchPrivateBrowserSetting = UISwitch()
+    
+    private let settingCellIdentifier = "SettingCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,29 +66,62 @@ class ShowQuickSettingsViewController: AutolayoutViewController {
     
     // MARK: Switch actions
     @objc private func toggleThemeSetting(_ sender: UISwitch) {
+        if enabledSettingsCount() == 1 && !sender.isOn {
+            cancelDisablingAction()
+            return
+        }
         AppPreferences.shared.quickSettingThemeVisible = sender.isOn
         tableView.reloadData()
         Macros.postNotification(.PIATilesDidChange)
     }
 
     @objc private func toggleKillSwitchSetting(_ sender: UISwitch) {
+        if enabledSettingsCount() == 1 && !sender.isOn {
+            cancelDisablingAction()
+            return
+        }
         AppPreferences.shared.quickSettingKillswitchVisible = sender.isOn
         tableView.reloadData()
         Macros.postNotification(.PIATilesDidChange)
     }
 
     @objc private func toggleNetworkToolsSetting(_ sender: UISwitch) {
+        if enabledSettingsCount() == 1 && !sender.isOn {
+            cancelDisablingAction()
+            return
+        }
         AppPreferences.shared.quickSettingNetworkToolVisible = sender.isOn
         tableView.reloadData()
         Macros.postNotification(.PIATilesDidChange)
     }
 
     @objc private func togglePrivateBrowserSetting(_ sender: UISwitch) {
+        if enabledSettingsCount() == 1 && !sender.isOn {
+            cancelDisablingAction()
+            return
+        }
         AppPreferences.shared.quickSettingPrivateBrowserVisible = sender.isOn
         tableView.reloadData()
         Macros.postNotification(.PIATilesDidChange)
     }
+    
+    private func cancelDisablingAction() {
+        tableView.reloadData()
+        let alert = Macros.alert(
+            L10n.Tiles.Quicksettings.title,
+            L10n.Tiles.Quicksettings.Min.Elements.message
+        )
+        alert.addActionWithTitle(L10n.Global.ok) {
+        }
+        present(alert, animated: true, completion: nil)
+    }
 
+    private func enabledSettingsCount() -> Int {
+        return (Flags.shared.enablesThemeSwitch && AppPreferences.shared.quickSettingThemeVisible).intValue +
+        AppPreferences.shared.quickSettingKillswitchVisible.intValue +
+        AppPreferences.shared.quickSettingNetworkToolVisible.intValue +
+        AppPreferences.shared.quickSettingPrivateBrowserVisible.intValue
+    }
 
     // MARK: Restylable
     
@@ -120,38 +158,50 @@ extension ShowQuickSettingsViewController: UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: QuickSettingCells.setting, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: settingCellIdentifier, for: indexPath)
         cell.accessoryType = .none
         cell.accessoryView = nil
         cell.selectionStyle = .none
 
-        let options = QuickSettingOptions.options()
-        let option = options[indexPath.row]
-        switch option {
-        case .theme:
-            cell.textLabel?.text = L10n.Settings.ApplicationSettings.ActiveTheme.title
-            cell.accessoryView = switchThemeSettings
-            switchThemeSettings.isOn = AppPreferences.shared.quickSettingThemeVisible
-        case .killswitch:
-            cell.textLabel?.text = L10n.Settings.ApplicationSettings.KillSwitch.title
-            cell.accessoryView = switchKillSwitchSetting
-            switchKillSwitchSetting.isOn = AppPreferences.shared.quickSettingKillswitchVisible
-        case .networkTools:
-            cell.textLabel?.text = L10n.Tiles.Quicksetting.Nmt.title
-            cell.accessoryView = switchNetworkToolsSetting
-            switchNetworkToolsSetting.isOn = AppPreferences.shared.quickSettingNetworkToolVisible
-        case .privateBrowsing:
-            cell.textLabel?.text = L10n.Tiles.Quicksetting.Private.Browser.title
-            cell.accessoryView = switchPrivateBrowserSetting
-            switchPrivateBrowserSetting.isOn = AppPreferences.shared.quickSettingPrivateBrowserVisible
+        if let cell = cell as? ShowQuickSettingsCell {
+            let options = QuickSettingOptions.options()
+            let option = options[indexPath.row]
+            switch option {
+            case .theme:
+                cell.titleLabel.text = L10n.Settings.ApplicationSettings.ActiveTheme.title
+                cell.accessoryView = switchThemeSettings
+                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Piax.Global.themeLightInactive.image :
+                Asset.Piax.Global.themeDarkInactive.image
+                cell.settingImage.accessibilityLabel = L10n.Settings.ApplicationSettings.ActiveTheme.title
+                switchThemeSettings.isOn = AppPreferences.shared.quickSettingThemeVisible
+            case .killswitch:
+                cell.titleLabel.text = L10n.Settings.ApplicationSettings.KillSwitch.title
+                cell.accessoryView = switchKillSwitchSetting
+                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Piax.Global.killswitchLightInactive.image :
+                Asset.Piax.Global.killswitchDarkInactive.image
+                cell.settingImage.accessibilityLabel = L10n.Settings.ApplicationSettings.KillSwitch.title
+                switchKillSwitchSetting.isOn = AppPreferences.shared.quickSettingKillswitchVisible
+            case .networkTools:
+                cell.titleLabel.text = L10n.Tiles.Quicksetting.Nmt.title
+                cell.accessoryView = switchNetworkToolsSetting
+                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Piax.Global.nmtLightInactive.image :
+                Asset.Piax.Global.nmtDarkInactive.image
+                cell.settingImage.accessibilityLabel = L10n.Tiles.Quicksetting.Nmt.title
+                switchNetworkToolsSetting.isOn = AppPreferences.shared.quickSettingNetworkToolVisible
+            case .privateBrowsing:
+                cell.titleLabel.text = L10n.Tiles.Quicksetting.Private.Browser.title
+                cell.accessoryView = switchPrivateBrowserSetting
+                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Piax.Global.browserLightInactive.image :
+                Asset.Piax.Global.browserDarkInactive.image
+                cell.settingImage.accessibilityLabel = L10n.Tiles.Quicksetting.Private.Browser.title
+                switchPrivateBrowserSetting.isOn = AppPreferences.shared.quickSettingPrivateBrowserVisible
+            }
+            Theme.current.applySettingsCellTitle(cell.titleLabel,
+                                                 appearance: .dark)
+            cell.titleLabel.backgroundColor = .clear
         }
 
         Theme.current.applySecondaryBackground(cell)
-        if let textLabel = cell.textLabel {
-            Theme.current.applySettingsCellTitle(textLabel,
-                                                 appearance: .dark)
-            textLabel.backgroundColor = .clear
-        }
         let backgroundView = UIView()
         Theme.current.applyPrincipalBackground(backgroundView)
         cell.selectedBackgroundView = backgroundView

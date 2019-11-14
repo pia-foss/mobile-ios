@@ -218,6 +218,8 @@
 		DD51F8C22372E494009FEED3 /* PIA-ECC-256k1.pem in Resources */ = {isa = PBXBuildFile; fileRef = DD51F8B62372E494009FEED3 /* PIA-ECC-256k1.pem */; };
 		DD51F8C42372E4C8009FEED3 /* PemUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD51F8C32372E4C8009FEED3 /* PemUtil.swift */; };
 		DD51F8C52372E4C8009FEED3 /* PemUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD51F8C32372E4C8009FEED3 /* PemUtil.swift */; };
+		DD522D22237D74380072F555 /* BooleanUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD522D21237D74380072F555 /* BooleanUtil.swift */; };
+		DD522D23237D74380072F555 /* BooleanUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD522D21237D74380072F555 /* BooleanUtil.swift */; };
 		DD58F4B821AD579A00D043F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD58F4B721AD579A00D043F7 /* GoogleService-Info.plist */; };
 		DD58F4BF21B12CFE00D043F7 /* PIAConnectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58F4BE21B12CFE00D043F7 /* PIAConnectionButton.swift */; };
 		DD58F4C021B12CFE00D043F7 /* PIAConnectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58F4BE21B12CFE00D043F7 /* PIAConnectionButton.swift */; };
@@ -582,6 +584,7 @@
 		DD51F8B52372E494009FEED3 /* PIA-ECC-256r1.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "PIA-ECC-256r1.pem"; sourceTree = "<group>"; };
 		DD51F8B62372E494009FEED3 /* PIA-ECC-256k1.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "PIA-ECC-256k1.pem"; sourceTree = "<group>"; };
 		DD51F8C32372E4C8009FEED3 /* PemUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PemUtil.swift; sourceTree = "<group>"; };
+		DD522D21237D74380072F555 /* BooleanUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooleanUtil.swift; sourceTree = "<group>"; };
 		DD58F4B721AD579A00D043F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DD58F4BE21B12CFE00D043F7 /* PIAConnectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAConnectionButton.swift; sourceTree = "<group>"; };
 		DD606AB921C7A17900E0781D /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
@@ -822,6 +825,7 @@
 				DD606ABB21C904BB00E0781D /* PIAHotspotHelper.swift */,
 				DDB6B95221C95CD400DE8C5F /* EnumsBuilder.swift */,
 				DD51F8C32372E4C8009FEED3 /* PemUtil.swift */,
+				DD522D21237D74380072F555 /* BooleanUtil.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1988,6 +1992,7 @@
 				DD76291721ECBD9C0092DF50 /* SubscriptionTile.swift in Sources */,
 				DD51F8C52372E4C8009FEED3 /* PemUtil.swift in Sources */,
 				0EA660091FEC7A9500CB2B0D /* PIATunnelProvider+UI.swift in Sources */,
+				DD522D23237D74380072F555 /* BooleanUtil.swift in Sources */,
 				0E7361EC1FD99A1000706BFF /* MenuViewController.swift in Sources */,
 				0EB966781FDF11B80086ABC2 /* Server+UI.swift in Sources */,
 				DD1C139A21E65F90004004B3 /* IPTileCollectionViewCell.swift in Sources */,
@@ -2107,6 +2112,7 @@
 				0E8DCA05204D94E800B086DE /* ContentBlockerViewController.swift in Sources */,
 				DD51F8C42372E4C8009FEED3 /* PemUtil.swift in Sources */,
 				DD76291621ECBD9C0092DF50 /* SubscriptionTile.swift in Sources */,
+				DD522D22237D74380072F555 /* BooleanUtil.swift in Sources */,
 				0EA660081FEC7A9500CB2B0D /* PIATunnelProvider+UI.swift in Sources */,
 				0E7361EB1FD99A1000706BFF /* MenuViewController.swift in Sources */,
 				DD1C139921E65F90004004B3 /* IPTileCollectionViewCell.swift in Sources */,

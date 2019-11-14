@@ -789,6 +789,12 @@ internal enum L10n {
     internal enum Quicksettings {
       /// Quick settings
       internal static let title = L10n.tr("Localizable", "tiles.quicksettings.title")
+      internal enum Min {
+        internal enum Elements {
+          /// You should keep at least one element visible in the Quick Settings Tile
+          internal static let message = L10n.tr("Localizable", "tiles.quicksettings.min.elements.message")
+        }
+      }
     }
     internal enum Region {
       /// VPN Server
