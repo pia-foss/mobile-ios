@@ -221,6 +221,8 @@
 "tiles.nmt.cellular" = "Hücresel";
 "tiles.quick.connect.title" = "Son kullanılan";
 "tiles.quicksetting.nmt.title" = "Ağ Yönetimi";
+"tiles.quicksetting.private.browser.title" = "Özel Tarayıcı";
+"tiles.quicksettings.min.elements.message" = "Hızlı Ayarlar Kısmında en az bir unsuru görünür tutmanız gerekiyor";
 "tiles.quicksettings.title" = "Hızlı ayarlar";
 "tiles.region.title" = "VPN Sunucusu";
 "tiles.subscription.days.left" = "(%d gün kaldı)";

@@ -221,6 +221,8 @@
 "tiles.nmt.cellular" = "เซลลูลาร์";
 "tiles.quick.connect.title" = "เซิร์ฟเวอร์ล่าสุด";
 "tiles.quicksetting.nmt.title" = "การจัดการเครือข่าย";
+"tiles.quicksetting.private.browser.title" = "เบราว์เซอร์ส่วนตัว";
+"tiles.quicksettings.min.elements.message" = "คุณควรเปิดไว้อย่างน้อยหนึ่งรายการในช่องการตั้งค่าด่วน";
 "tiles.quicksettings.title" = "การตั้งค่าด่วน";
 "tiles.region.title" = "เซิร์ฟเวอร์ VPN";
 "tiles.subscription.days.left" = "(เหลือ %d วัน)";

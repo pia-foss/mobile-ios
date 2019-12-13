@@ -221,6 +221,8 @@
 "tiles.nmt.cellular" = "蜂窝";
 "tiles.quick.connect.title" = "近期服务器";
 "tiles.quicksetting.nmt.title" = "网络管理";
+"tiles.quicksetting.private.browser.title" = "专用浏览器";
+"tiles.quicksettings.min.elements.message" = "应该在“快速设置”图块中保持至少一个元素可见";
 "tiles.quicksettings.title" = "快速设置";
 "tiles.region.title" = "VPN 服务器";
 "tiles.subscription.days.left" = "（还剩 %d 天）";

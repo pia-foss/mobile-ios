@@ -221,6 +221,8 @@
 "tiles.nmt.cellular" = "خلوية";
 "tiles.quick.connect.title" = "الخوادم الأخيرة";
 "tiles.quicksetting.nmt.title" = "إدارة الشبكات";
+"tiles.quicksetting.private.browser.title" = "المتصفح الخاص";
+"tiles.quicksettings.min.elements.message" = "يجب أن تبقي عنصرًا واحدًا على الأقل مرئيًا في لوح الإعدادات السريعة";
 "tiles.quicksettings.title" = "إعدادات سريعة";
 "tiles.region.title" = "خادم VPN";
 "tiles.subscription.days.left" = "(متبقي %d أيام)";

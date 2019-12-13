@@ -221,6 +221,8 @@
 "tiles.nmt.cellular" = "Celular";
 "tiles.quick.connect.title" = "Servidores recentes";
 "tiles.quicksetting.nmt.title" = "Gestão de Rede";
+"tiles.quicksetting.private.browser.title" = "Navegador privado";
+"tiles.quicksettings.min.elements.message" = "Você deve manter pelo menos um elemento visível no bloco Configurações Rápidas";
 "tiles.quicksettings.title" = "Configurações rápidas";
 "tiles.region.title" = "Servidor VPN";
 "tiles.subscription.days.left" = "(%d dias restantes)";

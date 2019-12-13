@@ -221,6 +221,8 @@
 "tiles.nmt.cellular" = "셀룰러";
 "tiles.quick.connect.title" = "최근 서버";
 "tiles.quicksetting.nmt.title" = "네트워크 관리";
+"tiles.quicksetting.private.browser.title" = "전용 브라우저";
+"tiles.quicksettings.min.elements.message" = "빠른 설정 타일에서 적어도 하나 이상의 항목이 표시되게 해야 합니다";
 "tiles.quicksettings.title" = "빠른 설정";
 "tiles.region.title" = "VPN 서버";
 "tiles.subscription.days.left" = "(%d일 남음)";

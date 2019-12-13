@@ -221,6 +221,8 @@
 "tiles.nmt.cellular" = "Mobilfunk";
 "tiles.quick.connect.title" = "Letzte Server";
 "tiles.quicksetting.nmt.title" = "Netzwerkverwaltung";
+"tiles.quicksetting.private.browser.title" = "Privater Browser";
+"tiles.quicksettings.min.elements.message" = "Sie sollten mindestens ein Element in den Schnelleinstellungen sichtbar halten.";
 "tiles.quicksettings.title" = "Schnelleinstellungen";
 "tiles.region.title" = "VPN-Server";
 "tiles.subscription.days.left" = "(noch %d Tage)";
