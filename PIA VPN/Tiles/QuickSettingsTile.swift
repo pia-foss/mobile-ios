@@ -15,13 +15,13 @@ class QuickSettingsTile: UIView, Tileable  {
     var detailSegueIdentifier: String!
     var status: TileStatus = .normal
     
+    @IBOutlet private weak var tileTitle: UILabel!
     @IBOutlet private weak var themeButton: UIButton!
     @IBOutlet private weak var killSwitchButton: UIButton!
     @IBOutlet private weak var nmtButton: UIButton!
-    @IBOutlet private weak var themeLabel: UILabel!
-    @IBOutlet private weak var killSwitchLabel: UILabel!
-    @IBOutlet private weak var nmtLabel: UILabel!
-
+    @IBOutlet private weak var browserButton: UIButton!
+    @IBOutlet weak var buttonsStackView: UIStackView!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.xibSetup()
@@ -38,52 +38,47 @@ class QuickSettingsTile: UIView, Tileable  {
     }
     
     func hasDetailView() -> Bool {
-        return false
+        return true
     }
     
     private func setupView() {
         
+        self.detailSegueIdentifier = StoryboardSegue.Main.showQuickSettingsViewController.rawValue
+
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateButtons), name: .PIASettingsHaveChanged, object: nil)
-        
-        setupThemeButton()
+        nc.addObserver(self, selector: #selector(setupButtons), name: .PIASettingsHaveChanged, object: nil)
+        nc.addObserver(self, selector: #selector(setupButtons), name: .PIATilesDidChange, object: nil)
+
+        self.tileTitle.text = L10n.Tiles.Quicksettings.title.uppercased()
+
+        setupButtons()
         viewShouldRestyle()
     }
     
-    private func setupThemeButton() {
-        if !Flags.shared.enablesThemeSwitch {
-            if let stackView = self.themeButton.superview as? UIStackView {
-                stackView.removeFromSuperview()
-            }
-            if let stackView = self.themeLabel.superview as? UIStackView {
-                stackView.removeFromSuperview()
-            }
-        }
+    @objc private func setupButtons() {
+        
+        self.themeButton.isHidden = !Flags.shared.enablesThemeSwitch || !AppPreferences.shared.quickSettingThemeVisible
+        self.killSwitchButton.isHidden = !AppPreferences.shared.quickSettingKillswitchVisible
+        self.nmtButton.isHidden = !AppPreferences.shared.quickSettingNetworkToolVisible
+        self.browserButton.isHidden = !AppPreferences.shared.quickSettingPrivateBrowserVisible
+
     }
     
     @objc private func viewShouldRestyle() {
-        if Flags.shared.enablesThemeSwitch {
-            Theme.current.applySubtitleTileUsage(themeLabel, appearance: .dark)
-        }
-        Theme.current.applySubtitleTileUsage(killSwitchLabel, appearance: .dark)
-        Theme.current.applySubtitleTileUsage(nmtLabel, appearance: .dark)
         Theme.current.applyPrincipalBackground(self)
+        tileTitle.style(style: TextStyle.textStyle21)
         updateButtons()
     }
     
     @objc private func updateButtons() {
         
-        killSwitchLabel.text = L10n.Settings.ApplicationSettings.KillSwitch.title
-        killSwitchLabel.textAlignment = .center
-        nmtLabel.text = L10n.Tiles.Quicksetting.Nmt.title
-        nmtLabel.textAlignment = .center
         killSwitchButton.accessibilityLabel = L10n.Settings.ApplicationSettings.KillSwitch.title
         nmtButton.accessibilityLabel = L10n.Tiles.Quicksetting.Nmt.title
+        browserButton.accessibilityLabel = L10n.Tiles.Quicksetting.Private.Browser.title
 
         if Flags.shared.enablesThemeSwitch {
-            themeLabel.text = L10n.Settings.ApplicationSettings.ActiveTheme.title
-            themeLabel.textAlignment = .center
             themeButton.accessibilityLabel = L10n.Settings.ApplicationSettings.ActiveTheme.title
             if AppPreferences.shared.currentThemeCode == ThemeCode.light {
                 themeButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.themeLightActive.image :
@@ -108,6 +103,9 @@ class QuickSettingsTile: UIView, Tileable  {
             nmtButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.nmtLightInactive.image :
                 Asset.Piax.Global.nmtDarkInactive.image, for: [])
         }
+        
+        browserButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.browserLightInactive.image :
+            Asset.Piax.Global.browserDarkInactive.image, for: [])
         
     }
     
@@ -142,6 +140,24 @@ class QuickSettingsTile: UIView, Tileable  {
         updateProfile()
         updateButtons()
         presentKillSwitchAlertIfNeeded()
+        
+    }
+    
+    @IBAction func openBrowser(_ sender: Any) {
+        
+        if let browserUrl = URL(string: AppConstants.Browser.scheme) {
+            if UIApplication.shared.canOpenURL(browserUrl) {
+                UIApplication.shared.open(browserUrl)
+            } else {
+                if let itunesUrl = URL(string: AppConstants.Browser.appStoreUrl),
+                    UIApplication.shared.canOpenURL(itunesUrl) {
+                    UIApplication.shared.open(itunesUrl)
+                } else {
+                    guard let url = URL(string: AppConstants.Browser.safariUrl) else { return }
+                    UIApplication.shared.open(url)
+                }
+            }
+        }
         
     }
     

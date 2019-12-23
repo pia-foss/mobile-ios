@@ -234,6 +234,7 @@
 "settings.trusted.networks.sections.trusted.rule.description"= "Enable this feature, with the VPN kill switch enabled, to customize how PIA will behave on WiFi and cellular networks. Please be aware, functionality of the Network Management Tool will be disabled if you manually disconnect.";
 "settings.trusted.networks.sections.trusted.rule.action"= "Disconnect from PIA VPN";
 "tiles.quicksetting.nmt.title" = "Network Management";
+"tiles.quicksetting.private.browser.title" = "Private Browser";
 "settings.nmt.killswitch.disabled" = "The VPN kill switch is currently disabled. In order to ensure that the Network Management Tool is functioning, and that you are able to reconnect when switching networks, please enable the VPN kill switch in your settings.";
 "settings.nmt.optout.disconnect.alerts" = "Opt-out disconnect confirmation alert";
 "settings.nmt.optout.disconnect.alerts.description" = "Disables the warning alert when disconnecting from the VPN.";
@@ -266,6 +267,7 @@
 "tiles.nmt.accessibility.trusted" = "Trusted network";
 "tiles.nmt.accessibility.untrusted" = "Untrusted network";
 "tiles.quicksettings.title" = "Quick settings";
+"tiles.quicksettings.min.elements.message" = "You should keep at least one element visible in the Quick Settings Tile";
 "tiles.accessibility.visible.tile.action" = "Tap to remove this tile from the dashboard";
 "tiles.accessibility.invisible.tile.action" = "Tap to add this tile to the dashboard";
 

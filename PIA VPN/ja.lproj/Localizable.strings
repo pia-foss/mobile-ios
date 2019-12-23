@@ -221,6 +221,8 @@
 "tiles.nmt.cellular" = "セルラー";
 "tiles.quick.connect.title" = "最近のサーバー";
 "tiles.quicksetting.nmt.title" = "ネットワーク管理";
+"tiles.quicksetting.private.browser.title" = "プライベートブラウザ";
+"tiles.quicksettings.min.elements.message" = "クイック設定タイルの少なくとも1つのエレメントを可視状態にしておくべきです";
 "tiles.quicksettings.title" = "クイック設定";
 "tiles.region.title" = "VPNサーバー";
 "tiles.subscription.days.left" = "（残り%d日）";

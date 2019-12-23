@@ -250,10 +250,8 @@ class SettingsViewController: AutolayoutViewController {
         
         validateDNSList()
 
-        if #available(iOS 11, *) {
-            tableView.sectionFooterHeight = UITableView.automaticDimension
-            tableView.estimatedSectionFooterHeight = 1.0
-        }
+        tableView.sectionFooterHeight = UITableView.automaticDimension
+        tableView.estimatedSectionFooterHeight = 1.0
         switchPersistent.addTarget(self, action: #selector(togglePersistentConnection(_:)), for: .valueChanged)
         switchMACE.addTarget(self, action: #selector(toggleMACE(_:)), for: .valueChanged)
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
@@ -278,10 +276,7 @@ class SettingsViewController: AutolayoutViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        
-        if #available(iOS 11, *) {
-            tableView.reloadData()
-        }
+        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

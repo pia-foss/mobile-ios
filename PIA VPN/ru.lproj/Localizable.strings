@@ -221,6 +221,8 @@
 "tiles.nmt.cellular" = "Мобильная";
 "tiles.quick.connect.title" = "Недавние серверы";
 "tiles.quicksetting.nmt.title" = "Управление сетью";
+"tiles.quicksetting.private.browser.title" = "Приватный браузер";
+"tiles.quicksettings.min.elements.message" = "Следует оставить как минимум один элемент на плитке «Быстрые настройки» видимым";
 "tiles.quicksettings.title" = "Быстрые настройки";
 "tiles.region.title" = "VPN-сервер";
 "tiles.subscription.days.left" = "(осталось %d дн.)";

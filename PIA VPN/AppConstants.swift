@@ -137,4 +137,11 @@ struct AppConstants {
         static let subscriptions = "itms-apps://apps.apple.com/account/subscriptions"
     }
     
+    struct Browser {
+        static let browserAppId = "598907571"
+        static let scheme = "inbrowser://?www.privateinternetaccess.com"
+        static let appStoreUrl = "itms-apps://itunes.apple.com/app/id598907571"
+        static let safariUrl = "https://apps.apple.com/us/app/inbrowser-private-browsing/id598907571?ls=1"
+    }
+
 }

@@ -221,6 +221,8 @@
 "tiles.nmt.cellular" = "行動網路";
 "tiles.quick.connect.title" = "最近的伺服器";
 "tiles.quicksetting.nmt.title" = "網路管理";
+"tiles.quicksetting.private.browser.title" = "私人瀏覽器";
+"tiles.quicksettings.min.elements.message" = "您應在快速設定磚中保留至少一個可見的元素";
 "tiles.quicksettings.title" = "快速設定";
 "tiles.region.title" = "VPN 伺服器";
 "tiles.subscription.days.left" = "（尚餘 %d 天）";

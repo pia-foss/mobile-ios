@@ -221,6 +221,8 @@
 "tiles.nmt.cellular" = "Komórkowa";
 "tiles.quick.connect.title" = "Najnowsze serwery";
 "tiles.quicksetting.nmt.title" = "Zarządzanie sieciami";
+"tiles.quicksetting.private.browser.title" = "Prywatna przeglądarka";
+"tiles.quicksettings.min.elements.message" = "Na kafelku Szybkich ustawień musisz zachować widoczny co najmniej jeden element.";
 "tiles.quicksettings.title" = "Szybkie ustawienia";
 "tiles.region.title" = "Serwer VPN";
 "tiles.subscription.days.left" = "Pozostało %d dni";

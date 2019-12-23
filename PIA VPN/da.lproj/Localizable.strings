@@ -221,6 +221,8 @@
 "tiles.nmt.cellular" = "Mobil";
 "tiles.quick.connect.title" = "Seneste servere";
 "tiles.quicksetting.nmt.title" = "Netværksstyring";
+"tiles.quicksetting.private.browser.title" = "Privat browser";
+"tiles.quicksettings.min.elements.message" = "Du skal holde mindst et element synligt i flisen Hurtig-indstillinger";
 "tiles.quicksettings.title" = "Hurtig-indstillinger";
 "tiles.region.title" = "VPN-server";
 "tiles.subscription.days.left" = "(%d dage tilbage)";

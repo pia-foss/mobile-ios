@@ -221,6 +221,8 @@
 "tiles.nmt.cellular" = "Cellulair";
 "tiles.quick.connect.title" = "Recente servers";
 "tiles.quicksetting.nmt.title" = "Netwerkbeheer";
+"tiles.quicksetting.private.browser.title" = "Privébrowser";
+"tiles.quicksettings.min.elements.message" = "Houd ten minste één element zichtbaar in de tegel Snelle instellingen";
 "tiles.quicksettings.title" = "Snelle instellingen";
 "tiles.region.title" = "VPN-server";
 "tiles.subscription.days.left" = "(Nog %d dagen)";
