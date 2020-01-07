@@ -62,8 +62,12 @@ struct AppConfiguration {
             sessionBuilder.endpointProtocols = piaAutomaticProtocols
             sessionBuilder.dnsServers = []
             sessionBuilder.usesPIAPatches = true
-            var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
-            builder.mtu = 1400
+            var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())            
+            if AppPreferences.shared.useSmallPackets {
+                builder.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
+            } else {
+                builder.mtu = AppConstants.OpenVPNPacketSize.defaultPacketSize
+            }
             builder.shouldDebug = true
             return builder
         }()

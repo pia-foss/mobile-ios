@@ -143,5 +143,10 @@ struct AppConstants {
         static let appStoreUrl = "itms-apps://itunes.apple.com/app/id598907571"
         static let safariUrl = "https://apps.apple.com/us/app/inbrowser-private-browsing/id598907571?ls=1"
     }
+    
+    struct OpenVPNPacketSize {
+        static let defaultPacketSize = 1400
+        static let smallPacketSize = 1350
+    }
 
 }
