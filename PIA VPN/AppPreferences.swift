@@ -34,6 +34,8 @@ class AppPreferences {
 
         static let piaSocketType = "PIASocketType"
 
+        static let useSmallPackets = "UseSmallPackets"
+
         static let favoriteServerIdentifiers = "FavoriteServerIdentifiers"
         
         static let regionFilter = "RegionFilter"
@@ -213,6 +215,16 @@ class AppPreferences {
         }
     }
     
+    var useSmallPackets: Bool {
+        get {
+            return defaults.bool(forKey: Entries.useSmallPackets)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.useSmallPackets)
+        }
+    }
+
+    
     @available(iOS 12.0, *)
     var connectShortcut: INVoiceShortcut? {
         get {
@@ -302,7 +314,8 @@ class AppPreferences {
             Entries.quickSettingThemeVisible: true,
             Entries.quickSettingKillswitchVisible: true,
             Entries.quickSettingNetworkToolVisible: true,
-            Entries.quickSettingPrivateBrowserVisible: true
+            Entries.quickSettingPrivateBrowserVisible: true,
+            Entries.useSmallPackets: false
         ])
     }
     
@@ -409,6 +422,7 @@ class AppPreferences {
         quickSettingKillswitchVisible = true
         quickSettingNetworkToolVisible = true
         quickSettingPrivateBrowserVisible = true
+        useSmallPackets = false
     }
     
     func clean() {
@@ -428,6 +442,7 @@ class AppPreferences {
         quickSettingKillswitchVisible = true
         quickSettingNetworkToolVisible = true
         quickSettingPrivateBrowserVisible = true
+        useSmallPackets = false
         let preferences = Client.preferences.editable().reset()
         preferences.commit()
     }

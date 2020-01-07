@@ -156,6 +156,9 @@
 "settings.reset.defaults.confirm.button" = "Reset";
 "settings.reset.footer" = "This will reset all of the above settings to default.";
 
+"settings.small.packets.title" = "Use small packets";
+"settings.small.packets.description" = "Will slightly lower the IP packet size to improve compatibility with some routers and mobile networks.";
+
 // CONTENT BLOCKER
 
 "content_blocker.title" = "Content Blocker";

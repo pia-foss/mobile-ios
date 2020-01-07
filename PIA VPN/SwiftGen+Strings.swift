@@ -673,6 +673,14 @@ internal enum L10n {
         }
       }
     }
+    internal enum Small {
+      internal enum Packets {
+        /// Will slightly lower the IP packet size to improve compatibility with some routers and mobile networks.
+        internal static let description = L10n.tr("Localizable", "settings.small.packets.description")
+        /// Use small packets
+        internal static let title = L10n.tr("Localizable", "settings.small.packets.title")
+      }
+    }
     internal enum Trusted {
       internal enum Networks {
         /// PIA won't automatically connect on these networks.

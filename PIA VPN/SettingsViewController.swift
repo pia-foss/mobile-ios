@@ -39,7 +39,9 @@ enum Setting: Int {
     case encryptionDigest
     
     case encryptionHandshake
-    
+        
+    case useSmallPackets
+
     case ikeV2EncryptionAlgorithm
     
     case ikeV2IntegrityAlgorithm
@@ -110,6 +112,8 @@ class SettingsViewController: AutolayoutViewController {
 
         case applicationSettings
         
+        case smallPackets
+        
         case autoConnectSettings
 
         case contentBlocker
@@ -126,6 +130,7 @@ class SettingsViewController: AutolayoutViewController {
         .encryption,
         .ikeV2encryption,
         .applicationSettings,
+        .smallPackets,
         .autoConnectSettings,
         .applicationInformation,
         .reset,
@@ -144,13 +149,16 @@ class SettingsViewController: AutolayoutViewController {
         .encryption: [
             .encryptionCipher,
             .encryptionDigest,
-            .encryptionHandshake
+            .encryptionHandshake,
         ],
         .ikeV2encryption: [
             .ikeV2EncryptionAlgorithm,
             .ikeV2IntegrityAlgorithm,
         ],
         .applicationSettings: [], // dynamic
+        .smallPackets: [
+        ], // dynamic
+
         .autoConnectSettings: [
             .trustedNetworks
         ],
@@ -196,6 +204,8 @@ class SettingsViewController: AutolayoutViewController {
     private lazy var switchConnectSiriShortcuts = UISwitch()
 
     private lazy var switchDisconnectSiriShortcuts = UISwitch()
+    
+    private lazy var switchSmallPackets = UISwitch()
 
     private lazy var imvSelectedOption = UIImageView(image: Asset.accessorySelected.image)
 
@@ -258,6 +268,7 @@ class SettingsViewController: AutolayoutViewController {
         switchDarkMode.addTarget(self, action: #selector(toggleDarkMode(_:)), for: .valueChanged)
         switchConnectSiriShortcuts.addTarget(self, action: #selector(toggleConnectSiriShortcuts(_:)), for: .valueChanged)
         switchDisconnectSiriShortcuts.addTarget(self, action: #selector(toggleDisconnectSiriShortcuts(_:)), for: .valueChanged)
+        switchSmallPackets.addTarget(self, action: #selector(toggleSmallPackets(_:)), for: .valueChanged)
         redisplaySettings()
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshContentBlockerState), name: UIApplication.didBecomeActiveNotification, object: nil)
@@ -386,7 +397,11 @@ class SettingsViewController: AutolayoutViewController {
         }
     }
 
-    
+    @objc private func toggleSmallPackets(_ sender: UISwitch) {
+        AppPreferences.shared.useSmallPackets = sender.isOn
+        savePreferences()
+    }
+
     @objc private func showContentBlockerTutorial() {
         perform(segue: StoryboardSegue.Main.contentBlockerSegueIdentifier)
     }
@@ -677,6 +692,13 @@ class SettingsViewController: AutolayoutViewController {
             rowsBySection[.applicationSettings]?.insert(contentsOf: [.connectShortcut, .disconnectShortcut], at: 0)
         }
         
+        if (pendingPreferences.vpnType == PIATunnelProfile.vpnType) {
+            rowsBySection[.smallPackets] = [.useSmallPackets]
+        } else {
+            rowsBySection[.smallPackets] = []
+            sections.remove(at: sections.firstIndex(of: .smallPackets)!)
+        }
+        
         if !Flags.shared.enablesContentBlockerSetting {
             sections.remove(at: sections.firstIndex(of: .contentBlocker)!)
         }
@@ -781,6 +803,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .autoConnectSettings:
             return nil
 
+        case .smallPackets:
+            return nil
+            
         case .contentBlocker:
             return L10n.Settings.ContentBlocker.title
 
@@ -818,6 +843,13 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             case .autoConnectSettings:
                 cell.textLabel?.text =  L10n.Settings.Hotspothelper.description
 
+            case .smallPackets:
+                if (pendingPreferences.vpnType == PIATunnelProfile.vpnType) {
+                    cell.textLabel?.text = L10n.Settings.Small.Packets.description
+                } else {
+                    return nil
+                }
+                
             case .reset:
                 cell.textLabel?.text = L10n.Settings.Reset.footer
                 
@@ -961,6 +993,13 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.accessoryType = .none
                 cell.selectionStyle = .none
             }
+            
+        case .useSmallPackets:
+            cell.textLabel?.text = L10n.Settings.Small.Packets.title
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchSmallPackets
+            cell.selectionStyle = .none
+            switchSmallPackets.isOn = AppPreferences.shared.useSmallPackets
 
         case .automaticReconnection:
             cell.textLabel?.text = L10n.Settings.ApplicationSettings.KillSwitch.title
@@ -1520,7 +1559,11 @@ extension SettingsViewController: OptionsViewControllerDelegate {
         log.debug("OpenVPN endpoints: \(pendingOpenVPNConfiguration.endpointProtocols ?? [])")
         
         var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: pendingOpenVPNConfiguration.build())
-        builder.mtu = 1400
+        if AppPreferences.shared.useSmallPackets {
+            builder.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
+        } else {
+            builder.mtu = AppConstants.OpenVPNPacketSize.defaultPacketSize
+        }
         builder.shouldDebug = true
 
         pendingPreferences.setVPNCustomConfiguration(builder.build(), for: pendingPreferences.vpnType)
