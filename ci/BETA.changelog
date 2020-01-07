@@ -1,2 +1,1 @@
-- iOS13 support
-- Dark mode support
+- Adds a 'Use small packets' setting for OpenVPN protocol. 
