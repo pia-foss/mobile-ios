@@ -171,10 +171,12 @@ class MenuViewController: AutolayoutViewController {
             
             switch productId {
             case AppConstants.InApp.monthlyProductIdentifier,
+                 AppConstants.LegacyInApp.monthlySubscriptionProductIdentifier,
                  AppConstants.LegacyInApp.monthlyProductIdentifier,
                  AppConstants.LegacyInApp.oldMonthlyProductIdentifier:
                 uniquePlan = .monthly
             case AppConstants.InApp.yearlyProductIdentifier,
+                 AppConstants.LegacyInApp.yearlySubscriptionProductIdentifier,
                  AppConstants.LegacyInApp.yearlyProductIdentifier,
                  AppConstants.LegacyInApp.oldYearlyProductIdentifier:
                 uniquePlan = .yearly
