@@ -251,3 +251,5 @@
 "walkthrough.page.2.title" = "Koble til hvilken som helst region på en enkel måte";
 "walkthrough.page.3.description" = "Aktivering av innholdsblokkereren sikrer at reklame ikke blir vist når du bruker Safari.";
 "walkthrough.page.3.title" = "Beskytt deg selv mot reklame";
+"settings.small.packets.title" = "Bruk små pakker";
+"settings.small.packets.description" = "IP-pakkens størrelse vil bli noe mindre for å forbedre kompatibilitet med noen rutere og mobile nettverk.";

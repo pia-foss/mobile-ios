@@ -251,3 +251,5 @@
 "walkthrough.page.2.title" = "모든 지역에 쉽게 연결";
 "walkthrough.page.3.description" = "Content Blocker를 활성화하면 Safari에서 광고가 표시되지 않습니다.";
 "walkthrough.page.3.title" = "광고로부터 보호";
+"settings.small.packets.title" = "작은 패킷 사용";
+"settings.small.packets.description" = "일부 라우터 및 모바일 네트워크와의 호환성을 향상시키기 위해 IP 패킷의 크기를 약간 줄입니다.";

@@ -251,3 +251,5 @@
 "walkthrough.page.2.title" = "轻松连接到任何地区";
 "walkthrough.page.3.description" = "启用内容拦截器以防止 Safari 中出现广告。";
 "walkthrough.page.3.title" = "让自己远离广告";
+"settings.small.packets.title" = "使用小包";
+"settings.small.packets.description" = "将稍微减小IP包，以提高与某些路由器和移动网络的兼容性。";

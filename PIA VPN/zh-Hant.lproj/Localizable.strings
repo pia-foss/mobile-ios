@@ -251,3 +251,5 @@
 "walkthrough.page.2.title" = "輕易就能連線到任何地區";
 "walkthrough.page.3.description" = "只要啟用我們的內容阻擋器，使用 Safari 瀏覽器時就再也不會看到廣告。";
 "walkthrough.page.3.title" = "讓自己免受廣告滋擾";
+"settings.small.packets.title" = "使用小封包";
+"settings.small.packets.description" = "將稍微降低 IP 封包大小以提高與部分路由器及行動網路的相容性。";

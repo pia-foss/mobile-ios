@@ -251,3 +251,5 @@
 "walkthrough.page.2.title" = "Maak eenvoudig verbinding met elke regio";
 "walkthrough.page.3.description" = "Als u onze Content Blocker inschakelt, krijgt u geen advertenties meer te zien in Safari.";
 "walkthrough.page.3.title" = "Bescherm uzelf tegen advertenties";
+"settings.small.packets.title" = "Kleine pakketten gebruiken";
+"settings.small.packets.description" = "Maakt het IP-pakket iets kleiner om de compatibiliteit met sommige routers en mobiele netwerken te verbeteren.";

@@ -251,3 +251,5 @@
 "walkthrough.page.2.title" = "Conéctate a cualquier región con facilidad";
 "walkthrough.page.3.description" = "Habilita nuestro Bloqueador de contenido para impedir que aparezca publicidad en Safari.";
 "walkthrough.page.3.title" = "Protégete de la publicidad";
+"settings.small.packets.title" = "Usar paquetes pequeños";
+"settings.small.packets.description" = "Reducirá ligeramente el tamaño del paquete IP para mejorar la compatibilidad con algunos routers y redes móviles.";

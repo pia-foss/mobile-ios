@@ -251,3 +251,5 @@
 "walkthrough.page.2.title" = "あらゆる地域に簡単に接続";
 "walkthrough.page.3.description" = "コンテンツブロッカーを有効にすると、Safariで広告表示をブロックできます。";
 "walkthrough.page.3.title" = "広告から自分を守りましょう";
+"settings.small.packets.title" = "小パケットを使用";
+"settings.small.packets.description" = "IPパケットサイズを少し小さくして、いくつかのルーターおよびモバイルネットワークとの互換性を改善します。";
