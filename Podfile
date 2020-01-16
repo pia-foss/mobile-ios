@@ -41,7 +41,7 @@ end
 def shared_main_pods
     pod 'AlamofireImage'
     #library_by_path('')
-    library_by_git('45b3f82')
+    library_by_git('ae61c8a')
     #library_by_version('~> 1.1.3')
 end
 
@@ -53,10 +53,11 @@ def app_pods
     pod 'FXPageControl'
     pod 'DZNEmptyDataSet'
     pod 'PopupDialog'
+    pod 'ReachabilitySwift', '~> 4.3.0'
 end
 
 def tunnel_pods
-    pod 'TunnelKit'
+    pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :commit => 'd19b9de'
 end
 
 # Targets
