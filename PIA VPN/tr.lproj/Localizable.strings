@@ -251,3 +251,5 @@
 "walkthrough.page.2.title" = "Herhangi bir bölgeye kolayca bağlanın";
 "walkthrough.page.3.description" = "İçerik Engelleyicimizi etkinleştirdiğinizde Safari'de reklamların gösterilmesi engellenir.";
 "walkthrough.page.3.title" = "Kendinizi reklamlardan koruyun";
+"settings.small.packets.title" = "Küçük paketler kullan";
+"settings.small.packets.description" = "Bazı yönlendirici ve mobil ağlarla olan uyumluluğu artırmak için IP paket boyutunu hafif düşürecek.";

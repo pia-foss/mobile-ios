@@ -251,3 +251,5 @@
 "walkthrough.page.2.title" = "Forbind nemt til en hvilken som helst region";
 "walkthrough.page.3.description" = "Aktivering af vores Indholdsblokering forhindrer reklamer i at blive vist i Safari.";
 "walkthrough.page.3.title" = "Beskyt dig mod annoncer";
+"settings.small.packets.title" = "Brug små pakker";
+"settings.small.packets.description" = "Vil sænker IP-pakkens størrelse en smule, for at forbedre kompatibiliteten med nogle routere og mobilnet.";
