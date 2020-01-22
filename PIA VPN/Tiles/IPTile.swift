@@ -3,7 +3,7 @@
 //  PIA VPN
 //
 //  Created by Jose Antonio Blaya Garcia on 09/01/2019.
-//  Copyright © 2020 Private Internet Access Inc.
+//  Copyright © 2020 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
 //
