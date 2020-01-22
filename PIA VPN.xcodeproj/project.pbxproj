@@ -1346,7 +1346,7 @@
 				CLASSPREFIX = PIA;
 				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 0930;
-				ORGANIZATIONNAME = "London Trust Media";
+				ORGANIZATIONNAME = "Private Internet Access Inc.";
 				TargetAttributes = {
 					0E67FC211E3F802D00EF9929 = {
 						CreatedOnToolsVersion = 8.2.1;
