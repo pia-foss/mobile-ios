@@ -1,1 +1,1 @@
-- Adds a 'Use small packets' setting for OpenVPN protocol. 
+- Add logout function to invalidate the access token.
