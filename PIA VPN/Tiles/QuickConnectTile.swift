@@ -102,7 +102,8 @@ class QuickConnectTile: UIView, Tileable {
     }
     
     @IBAction private func connectToServer(_ sender: ServerButton) {
-        if let server = sender.server {
+        if Client.providers.vpnProvider.vpnStatus != .connecting,
+            let server = sender.server {
             self.connectTo(server: server)
         }
     }
