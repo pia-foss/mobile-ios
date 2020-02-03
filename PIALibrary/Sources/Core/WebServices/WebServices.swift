@@ -36,6 +36,12 @@ protocol WebServices: class {
 
     func update(credentials: Credentials, email: String, _ callback: SuccessLibraryCallback?)
 
+    /**
+         Invalidates the access token.
+         - Parameter callback: Returns an `Bool` if the token was expired.
+     */
+    func logout(_ callback: LibraryCallback<Bool>?)
+
     #if os(iOS)
     func signup(with request: Signup, _ callback: LibraryCallback<Credentials>?)
 

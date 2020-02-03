@@ -53,6 +53,10 @@ class MockWebServices: WebServices {
         callback?(nil)
     }
     
+    func logout(_ callback: LibraryCallback<Bool>?) {
+        callback?(true, nil)
+    }
+    
     func signup(with request: Signup, _ callback: ((Credentials?, Error?) -> Void)?) {
         let result = credentials?()
         let error: ClientError? = (result == nil) ? .unsupported : nil
