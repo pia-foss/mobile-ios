@@ -98,6 +98,21 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         })
     }
     
+    func logout(_ callback: LibraryCallback<Bool>?) {
+        
+        let endpoint = ClientEndpoint.logout
+        let status = [200]
+
+        req(nil, .post, endpoint, useAuthToken: true, nil, status, JSONRequestExecutor() { (json, status, error) in
+            if let error = error {
+                callback?(false, error)
+                return
+            }
+            callback?(true, nil)
+        })
+
+    }
+    
     #if os(iOS)
     func signup(with request: Signup, _ callback: ((Credentials?, Error?) -> Void)?) {
         let endpoint = ClientEndpoint.signup

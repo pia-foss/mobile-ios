@@ -36,6 +36,8 @@ enum ClientEndpoint: String, Endpoint {
     case account = "v2/account"
 
     case updateAccount = "account"
+    
+    case logout = "v2/expire_token"
 
     case payment
 

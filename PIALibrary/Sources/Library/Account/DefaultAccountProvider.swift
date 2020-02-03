@@ -281,9 +281,20 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         guard isLoggedIn else {
             preconditionFailure()
         }
-        cleanDatabase()
-        Macros.postNotification(.PIAAccountDidLogout)
-        callback?(nil)
+        webServices.logout { [weak self] (result, error) in
+            
+            guard let success = result else {
+                callback?(nil)
+                return
+            }
+
+            if success {
+                self?.cleanDatabase()
+                Macros.postNotification(.PIAAccountDidLogout)
+            }
+            
+            callback?(nil)
+        }
     }
 
     func invitesInformation(_ callback: LibraryCallback<InvitesInformation>?) {
