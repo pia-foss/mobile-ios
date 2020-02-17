@@ -14,6 +14,7 @@ abstract_target 'PIALibrary' do
     pod 'lottie-ios'
     pod 'PopupDialog'
     pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :commit => 'd19b9de'
+    pod 'PIAWireguard', :path => "/Users/ueshiba/Projects/PIA/PIAWireguard"
 
     target 'PIALibrary-iOS' do
         platform :ios, '11.0'

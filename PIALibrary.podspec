@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name              = "PIALibrary"
-    s.version           = "2.2.2"
+    s.version           = "2.2.4"
     s.summary           = "PIA client library in Swift."
 
     s.homepage          = "https://www.privateinternetaccess.com/"
@@ -40,6 +40,7 @@ Pod::Spec.new do |s|
         p.pod_target_xcconfig   = { "APPLICATION_EXTENSION_API_ONLY" => "YES" }
 
         p.dependency "TunnelKit"
+        p.dependency "PIAWireguard"
         p.dependency "PIALibrary/Library"
     end
 

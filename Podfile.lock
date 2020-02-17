@@ -4,6 +4,12 @@ PODS:
   - Gloss (2.1.0)
   - lottie-ios (3.0.3)
   - OpenSSL-Apple (1.1.1d.5a)
+  - PIAWireguard (1.0.0):
+    - PIAWireguard/AppExtension (= 1.0.0)
+    - PIAWireguard/Core (= 1.0.0)
+  - PIAWireguard/AppExtension (1.0.0):
+    - PIAWireguard/Core
+  - PIAWireguard/Core (1.0.0)
   - PopupDialog (0.9.2):
     - DynamicBlurView (~> 3.0.1)
   - QuickLayout (2.0.2)
@@ -27,6 +33,7 @@ DEPENDENCIES:
   - Alamofire (~> 4)
   - Gloss (~> 2)
   - lottie-ios
+  - PIAWireguard (from `/Users/ueshiba/Projects/PIA/PIAWireguard`)
   - PopupDialog
   - ReachabilitySwift
   - SwiftEntryKit (= 0.7.2)
@@ -47,6 +54,8 @@ SPEC REPOS:
     - SwiftyBeaver
 
 EXTERNAL SOURCES:
+  PIAWireguard:
+    :path: "/Users/ueshiba/Projects/PIA/PIAWireguard"
   TunnelKit:
     :commit: d19b9de
     :git: https://github.com/pia-foss/tunnelkit
@@ -62,6 +71,7 @@ SPEC CHECKSUMS:
   Gloss: 13ab6b4b0ff4cb2448466edc957479b1bccea8ba
   lottie-ios: 06e0b54aab85ba128e332687d7f4ac4861a7a7ae
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
+  PIAWireguard: de9a053e00b729feb13de4b4f59f3fbfa470a4e2
   PopupDialog: f4bb461bf70ff422be0b56656566424ee9273080
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
@@ -69,6 +79,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
 
-PODFILE CHECKSUM: aab003f0cc1605940cc158f926b5148d27317625
+PODFILE CHECKSUM: 6c1a2eea2e9f871398d147405a981d26ab3f0123
 
 COCOAPODS: 1.7.5
