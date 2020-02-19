@@ -35,3 +35,12 @@
 "unreachable.submit" = "PRØV IGEN";
 "unreachable.title" = "Ups!";
 "unreachable.vc_title" = "Fejl";
+"walkthrough.action.done" = "UDFØRT";
+"walkthrough.action.next" = "NÆSTE";
+"walkthrough.action.skip" = "SPRING OVER";
+"walkthrough.page.1.description" = "Beskyt dig selv på op til 10 enheder ad gangen.";
+"walkthrough.page.1.title" = "Understøtter 10 enheder på en gang";
+"walkthrough.page.2.description" = "Med servere rundt om i verden er du altid beskyttet.";
+"walkthrough.page.2.title" = "Forbind nemt til en hvilken som helst region";
+"walkthrough.page.3.description" = "Aktivering af vores Indholdsblokering forhindrer reklamer i at blive vist i Safari.";
+"walkthrough.page.3.title" = "Beskyt dig mod annoncer";

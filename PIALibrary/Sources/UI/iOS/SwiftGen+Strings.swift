@@ -53,12 +53,16 @@ internal enum L10n {
       }
     }
     internal enum Purchase {
+      internal enum Subscribe {
+        /// Subscribe now
+        internal static let now = L10n.tr("Signup", "purchase.subscribe.now")
+      }
       internal enum Trials {
         /// Browse anonymously and hide your ip.
         internal static let anonymous = L10n.tr("Signup", "purchase.trials.anonymous")
         /// Support 10 devices at once
         internal static let devices = L10n.tr("Signup", "purchase.trials.devices")
-        /// Try free for 7 days!
+        /// Start your 7-days free trial
         internal static let intro = L10n.tr("Signup", "purchase.trials.intro")
         /// Connect to any region easily
         internal static let region = L10n.tr("Signup", "purchase.trials.region")
@@ -83,7 +87,7 @@ internal enum L10n {
           internal static let back = L10n.tr("Signup", "purchase.trials.money.back")
         }
         internal enum Price {
-          /// Only %@ after
+          /// Then %@
           internal static func after(_ p1: String) -> String {
             return L10n.tr("Signup", "purchase.trials.price.after", p1)
           }
@@ -136,6 +140,36 @@ internal enum L10n {
       /// Error
       internal static let vcTitle = L10n.tr("Signup", "unreachable.vc_title")
     }
+    internal enum Walkthrough {
+      internal enum Action {
+        /// DONE
+        internal static let done = L10n.tr("Signup", "walkthrough.action.done")
+        /// NEXT
+        internal static let next = L10n.tr("Signup", "walkthrough.action.next")
+        /// SKIP
+        internal static let skip = L10n.tr("Signup", "walkthrough.action.skip")
+      }
+      internal enum Page {
+        internal enum _1 {
+          /// Protect yourself on up to 10 devices at a time.
+          internal static let description = L10n.tr("Signup", "walkthrough.page.1.description")
+          /// Support 10 devices at once
+          internal static let title = L10n.tr("Signup", "walkthrough.page.1.title")
+        }
+        internal enum _2 {
+          /// With servers around the globe, you are always under protection.
+          internal static let description = L10n.tr("Signup", "walkthrough.page.2.description")
+          /// Connect to any region easily
+          internal static let title = L10n.tr("Signup", "walkthrough.page.2.title")
+        }
+        internal enum _3 {
+          /// Enabling our Content Blocker prevents ads from showing in Safari.
+          internal static let description = L10n.tr("Signup", "walkthrough.page.3.description")
+          /// Protect yourself from ads
+          internal static let title = L10n.tr("Signup", "walkthrough.page.3.title")
+        }
+      }
+    }
   }
   internal enum Ui {
     internal enum Global {
@@ -155,8 +189,10 @@ internal enum L10n {
   }
   internal enum Welcome {
     internal enum Agreement {
-      /// Payment will be charged to your Apple ID account at the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.\n\nSigning up constitutes acceptance of the $1 and the $2.
-      internal static let message = L10n.tr("Welcome", "agreement.message")
+      /// After the 7 days free trial this subscription automatically renews for %@ unless it is canceled at least 24 hours before the end of the trial period. Your Apple ID account will be charged for renewal within 24 hours before the end of the trial period. You can manage and cancel your subscriptions by going to your App Store account settings after purchase. 7-days trial offer is limited to one 7-days trial offer per user. Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription. All prices include applicable local sales taxes.\n\nSigning up constitutes acceptance of the $1 and the $2.
+      internal static func message(_ p1: String) -> String {
+        return L10n.tr("Welcome", "agreement.message", p1)
+      }
       internal enum Message {
         /// Privacy Policy
         internal static let privacy = L10n.tr("Welcome", "agreement.message.privacy")
@@ -168,6 +204,14 @@ internal enum L10n {
         internal static let message = L10n.tr("Welcome", "agreement.trials.message")
         /// Free trials terms and conditions
         internal static let title = L10n.tr("Welcome", "agreement.trials.title")
+        internal enum Monthly {
+          /// month
+          internal static let plan = L10n.tr("Welcome", "agreement.trials.monthly.plan")
+        }
+        internal enum Yearly {
+          /// year
+          internal static let plan = L10n.tr("Welcome", "agreement.trials.yearly.plan")
+        }
       }
     }
     internal enum Camera {
@@ -193,7 +237,7 @@ internal enum L10n {
       }
       internal enum Collect {
         internal enum Data {
-          /// E-mail Address for the purposes of account management and protection from abuse.\n\nPayment Data for the purposes of processing payments as required by our third-party payment processors. Note that we do not save your full credit card details.
+          /// E-mail Address for the purposes of account management and protection from abuse.
           internal static let description = L10n.tr("Welcome", "gdpr.collect.data.description")
           /// Personal information we collect
           internal static let title = L10n.tr("Welcome", "gdpr.collect.data.title")
@@ -201,7 +245,7 @@ internal enum L10n {
       }
       internal enum Usage {
         internal enum Data {
-          /// E-mail address is used to send subscription information, payment confirmations, customer correspondence, and Private Internet Access promotional offers only.\n\nPayment data is used to manage client signups, payments, and cancellations.
+          /// E-mail address is used to send subscription information, payment confirmations, customer correspondence, and Private Internet Access promotional offers only.
           internal static let description = L10n.tr("Welcome", "gdpr.usage.data.description")
           /// Uses of personal information collected by us
           internal static let title = L10n.tr("Welcome", "gdpr.usage.data.title")
@@ -298,6 +342,8 @@ internal enum L10n {
       internal enum Email {
         /// Email address
         internal static let placeholder = L10n.tr("Welcome", "purchase.email.placeholder")
+        /// We need your email to send your username and password.
+        internal static let why = L10n.tr("Welcome", "purchase.email.why")
       }
       internal enum Error {
         /// Purchase

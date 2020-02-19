@@ -35,3 +35,12 @@
 "unreachable.submit" = "OPNIEUW PROBEREN";
 "unreachable.title" = "Oeps!";
 "unreachable.vc_title" = "Fout";
+"walkthrough.action.done" = "KLAAR";
+"walkthrough.action.next" = "VOLGENDE";
+"walkthrough.action.skip" = "OVERSLAAN";
+"walkthrough.page.1.description" = "Bescherm uzelf op tien apparaten tegelijk.";
+"walkthrough.page.1.title" = "Ondersteun tien apparaten tegelijk";
+"walkthrough.page.2.description" = "Met servers over de hele wereld wordt u altijd beschermd.";
+"walkthrough.page.2.title" = "Maak eenvoudig verbinding met elke regio";
+"walkthrough.page.3.description" = "Als u onze Content Blocker inschakelt, krijgt u geen advertenties meer te zien in Safari.";
+"walkthrough.page.3.title" = "Bescherm uzelf tegen advertenties";

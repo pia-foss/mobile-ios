@@ -35,3 +35,12 @@
 "unreachable.submit" = "ПОВТОРИТЬ";
 "unreachable.title" = "Ой!";
 "unreachable.vc_title" = "Ошибка";
+"walkthrough.action.done" = "ГОТОВО";
+"walkthrough.action.next" = "ДАЛЕЕ";
+"walkthrough.action.skip" = "ПРОПУСК";
+"walkthrough.page.1.description" = "Защищайте себя на нескольких устройствах одновременно (до 10).";
+"walkthrough.page.1.title" = "Поддержка 10 устройств одновременно";
+"walkthrough.page.2.description" = "У нас есть серверы по всему миру, так что вы всегда будете под защитой.";
+"walkthrough.page.2.title" = "Простое подключение к любому региону";
+"walkthrough.page.3.description" = "Активация нашего правила блокирования контента препятствует отображению рекламы в Safari.";
+"walkthrough.page.3.title" = "Защита от рекламы";

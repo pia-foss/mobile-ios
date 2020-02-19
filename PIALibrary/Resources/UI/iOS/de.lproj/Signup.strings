@@ -35,3 +35,12 @@
 "unreachable.submit" = "WIEDERHOLEN";
 "unreachable.title" = "Ups!";
 "unreachable.vc_title" = "Fehler";
+"walkthrough.action.done" = "FERTIG";
+"walkthrough.action.next" = "WEITER";
+"walkthrough.action.skip" = "ÜBERSPRINGEN";
+"walkthrough.page.1.description" = "Schützen Sie sich auf bis zu 10 Geräten gleichzeitig.";
+"walkthrough.page.1.title" = "Unterstützung für 10 Geräte";
+"walkthrough.page.2.description" = "Mit Servern auf der ganzen Welt bist du immer geschützt.";
+"walkthrough.page.2.title" = "Bequem mit jeder beliebigen Region verbinden";
+"walkthrough.page.3.description" = "Mit der Aktivierung unseres Inhalts-Blockers sehen Sie keine Anzeigen in Safari mehr.";
+"walkthrough.page.3.title" = "Schütze dich vor Werbung";

@@ -1,8 +1,8 @@
 //
-//  Pages.swift
-//  PIALibrary-iOS
+//  PIAPageControl.swift
+//  PIA VPN
 //
-//  Created by Jose Antonio Blaya Garcia on 31/10/2018.
+//  Created by Davide De Rosa on 12/9/17.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
@@ -20,32 +20,18 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import FXPageControl
 
-/// The sub-pages offered in the `PIAWelcomeViewController` user interface.
-public struct Pages: OptionSet {
-    
-    /// The login page.
-    public static let login = Pages(rawValue: 1 << 0)
-    
-    /// The purchase plan page.
-    public static let purchase = Pages(rawValue: 1 << 1)
-    
-    /// The direct purchase plan page.
-    public static let directPurchase = Pages(rawValue: 1 << 2)
-    
-    /// The restore page.
-    public static let restore = Pages(rawValue: 1 << 3)
-
-    /// All pages.
-    public static let all: Pages = [.login, .purchase, .directPurchase, .restore]
-    
-    /// :nodoc:
-    public let rawValue: Int
-    
-    /// :nodoc:
-    public init(rawValue: Int) {
-        self.rawValue = rawValue
+class PIAPageControl: FXPageControl {
+    override func draw(_ rect: CGRect) {
+        UIGraphicsGetCurrentContext()?.clear(rect)
+        super.draw(rect)
     }
 }
-    
+
+//extension FXPageControl {
+//    open override func draw(_ rect: CGRect) {
+//        UIGraphicsGetCurrentContext()?.clear(rect)
+//        super.draw(rect)
+//    }
+//}

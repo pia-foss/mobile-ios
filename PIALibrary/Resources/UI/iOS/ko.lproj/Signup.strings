@@ -35,3 +35,12 @@
 "unreachable.submit" = "다시 시도";
 "unreachable.title" = "앗!";
 "unreachable.vc_title" = "오류";
+"walkthrough.action.done" = "완료";
+"walkthrough.action.next" = "다음";
+"walkthrough.action.skip" = "건너뛰기";
+"walkthrough.page.1.description" = "한 번에 최대 10대의 장치에서 보호를 받으세요.";
+"walkthrough.page.1.title" = "한 번의 10대의 장치 지원";
+"walkthrough.page.2.description" = "전 세계에 있는 서버를 통해 언제나 보호를 받습니다.";
+"walkthrough.page.2.title" = "모든 지역에 쉽게 연결";
+"walkthrough.page.3.description" = "Content Blocker를 활성화하면 Safari에서 광고가 표시되지 않습니다.";
+"walkthrough.page.3.title" = "광고로부터 보호";

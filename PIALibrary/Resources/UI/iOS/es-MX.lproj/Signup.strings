@@ -35,3 +35,12 @@
 "unreachable.submit" = "VOLVER A INTENTAR";
 "unreachable.title" = "¡Ups!";
 "unreachable.vc_title" = "Error";
+"walkthrough.action.done" = "TERMINADO";
+"walkthrough.action.next" = "SIGUIENTE";
+"walkthrough.action.skip" = "OMITIR";
+"walkthrough.page.1.description" = "Protégete en hasta 10 dispositivos a la vez.";
+"walkthrough.page.1.title" = "Admite 10 dispositivos a la vez";
+"walkthrough.page.2.description" = "Con servidores en todo el mundo, siempre estarás protegido.";
+"walkthrough.page.2.title" = "Conéctate a cualquier región con facilidad";
+"walkthrough.page.3.description" = "Habilita nuestro Bloqueador de contenido para impedir que aparezca publicidad en Safari.";
+"walkthrough.page.3.title" = "Protégete de la publicidad";

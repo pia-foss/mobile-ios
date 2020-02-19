@@ -35,3 +35,12 @@
 "unreachable.submit" = "ลองใหม่";
 "unreachable.title" = "อุ๊ปส์!";
 "unreachable.vc_title" = "ข้อผิดพลาด";
+"walkthrough.action.done" = "เสร็จสิ้น";
+"walkthrough.action.next" = "ถัดไป";
+"walkthrough.action.skip" = "ข้าม";
+"walkthrough.page.1.description" = "ปกป้องตัวคุณบนอุปกรณ์ถึง 10 เครื่องในเวลาเดียวกัน";
+"walkthrough.page.1.title" = "รับรองอุปกรณ์ 10 เครื่องในคราวเดียว";
+"walkthrough.page.2.description" = "ด้วยเซิร์ฟเวอร์ที่มีอยู่ทั่วโลก คุณจะได้รับความคุ้มครองตลอดเวลา";
+"walkthrough.page.2.title" = "เชื่อมต่อไปยังภูมิภาคใดก็ตามได้อย่างง่ายดาย";
+"walkthrough.page.3.description" = "การเปิดใช้งานตัวปิดกั้นเนื้อหาของเราจะเป็นการป้องกันไม่ให้แสดงโฆษณาใน Safari";
+"walkthrough.page.3.title" = "ปกป้องตัวคุณจากโฆษณา";

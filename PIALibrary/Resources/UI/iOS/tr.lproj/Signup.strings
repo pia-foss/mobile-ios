@@ -35,3 +35,12 @@
 "unreachable.submit" = "TEKRAR DENE";
 "unreachable.title" = "Heeey!";
 "unreachable.vc_title" = "Hata";
+"walkthrough.action.done" = "BİTTİ";
+"walkthrough.action.next" = "İLERİ";
+"walkthrough.action.skip" = "ATLA";
+"walkthrough.page.1.description" = "Aynı anda 10 cihazda koruma sağlayın.";
+"walkthrough.page.1.title" = "Aynı anda 10 cihazı destekler";
+"walkthrough.page.2.description" = "Dünya çapındaki sunucularla daima koruma altındasınız.";
+"walkthrough.page.2.title" = "Herhangi bir bölgeye kolayca bağlanın";
+"walkthrough.page.3.description" = "İçerik Engelleyicimizi etkinleştirdiğinizde Safari'de reklamların gösterilmesi engellenir.";
+"walkthrough.page.3.title" = "Kendinizi reklamlardan koruyun";

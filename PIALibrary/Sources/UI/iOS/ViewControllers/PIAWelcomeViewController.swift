@@ -31,7 +31,11 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
     @IBOutlet private weak var buttonEnvironment: UIButton!
 
     var preset = Preset()
-
+    
+    var selectedPlanIndex: Int?
+    
+    var allPlans: [PurchasePlan]?
+    
     private var pendingSignupRequest: SignupRequest?
     weak var delegate: PIAWelcomeViewControllerDelegate?
     
@@ -158,6 +162,8 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         if let vc = segue.destination as? WelcomePageViewController {
             vc.preset = preset
             vc.completionDelegate = self
+            vc.allPlans = allPlans
+            vc.selectedPlanIndex = selectedPlanIndex
         }
         // recover pending signup
         else if (segue.identifier == StoryboardSegue.Welcome.signupViaRecoverSegue.rawValue) {

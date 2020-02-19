@@ -82,6 +82,15 @@ public extension TextStyle {
         tintColor: nil,
         lineHeight: 18
     )
+    
+    static let textStyle6Medium = TextStyle(
+        font: UIFont.mediumFontWith(size: 14),
+        color: UIColor.white,
+        foregroundColor: nil,
+        backgroundColor: nil,
+        tintColor: nil,
+        lineHeight: 18
+    )
 
     static let textStyle7 = TextStyle(
         font: UIFont.regularFontWith(size: 14),
@@ -103,6 +112,15 @@ public extension TextStyle {
 
     static let textStyle9 = TextStyle(
         font: UIFont.regularFontWith(size: 14),
+        color: UIColor.piaGreenDark20,
+        foregroundColor: nil,
+        backgroundColor: nil,
+        tintColor: nil,
+        lineHeight: 18
+    )
+    
+    static let textStyle9Medium = TextStyle(
+        font: UIFont.mediumFontWith(size: 14),
         color: UIColor.piaGreenDark20,
         foregroundColor: nil,
         backgroundColor: nil,
