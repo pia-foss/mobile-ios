@@ -32,10 +32,14 @@ private let log = SwiftyBeaver.self
 
 private extension String {
     var vpnTypeDescription: String {
-        guard (self != PIATunnelProfile.vpnType) else {
+        switch self {
+        case PIAWGTunnelProfile.vpnType:
+            return "Wireguard"
+        case PIATunnelProfile.vpnType:
             return "OpenVPN"
+        default:
+            return self
         }
-        return self
     }
 }
 
@@ -679,11 +683,13 @@ class SettingsViewController: AutolayoutViewController {
             sections.remove(at: sections.firstIndex(of: .encryption)!)
         } else {
             if (pendingPreferences.vpnType == IPSecProfile.vpnType ||
-                pendingPreferences.vpnType == IKEv2Profile.vpnType) {
+                pendingPreferences.vpnType == IKEv2Profile.vpnType ||
+                pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType) {
                 sections.remove(at: sections.firstIndex(of: .encryption)!)
             }
             if (pendingPreferences.vpnType == IPSecProfile.vpnType ||
-                pendingPreferences.vpnType == PIATunnelProfile.vpnType) {
+                pendingPreferences.vpnType == PIATunnelProfile.vpnType ||
+                pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType) {
                 sections.remove(at: sections.firstIndex(of: .ikeV2encryption)!)
             }
         }
@@ -716,7 +722,8 @@ class SettingsViewController: AutolayoutViewController {
         if !Flags.shared.enablesContentBlockerSetting {
             sections.remove(at: sections.firstIndex(of: .contentBlocker)!)
         }
-        if (pendingPreferences.vpnType != PIATunnelProfile.vpnType) {
+        if (pendingPreferences.vpnType != PIATunnelProfile.vpnType &&
+            pendingPreferences.vpnType != PIAWGTunnelProfile.vpnType) {
             sections.remove(at: sections.firstIndex(of: .applicationInformation)!)
         }
         if !Flags.shared.enablesResetSettings {
@@ -1134,6 +1141,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .vpnProtocolSelection:
             let options: [String] = [
                 IKEv2Profile.vpnType,
+                PIAWGTunnelProfile.vpnType,
                 PIATunnelProfile.vpnType,
                 IPSecProfile.vpnType,
             ]
