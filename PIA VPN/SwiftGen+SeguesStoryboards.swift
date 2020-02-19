@@ -27,8 +27,6 @@ internal enum StoryboardSegue {
     case trustedNetworksSegueIdentifier = "TrustedNetworksSegueIdentifier"
     case unwindContentBlockerSegueIdentifier = "UnwindContentBlockerSegueIdentifier"
     case unwindRegionsSegueIdentifier = "UnwindRegionsSegueIdentifier"
-    case unwindWalkthroughSegueIdentifier = "UnwindWalkthroughSegueIdentifier"
-    case walkthroughSegueIdentifier = "WalkthroughSegueIdentifier"
     case showReferralInvites = "show-referral-invites"
     case viewFriendReferralSignups = "view-friend-referral-signups"
     case viewFriendReferralStatus = "view-friend-referral-status"

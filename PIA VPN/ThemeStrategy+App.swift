@@ -64,8 +64,7 @@ private struct LightThemeStrategy: ThemeStrategy {
     
     func statusBarAppearance(for viewController: AutolayoutViewController) -> UIStatusBarStyle {
         switch viewController {
-        case is WalkthroughViewController,
-             is PIAWelcomeViewController,
+        case is PIAWelcomeViewController,
              is GetStartedViewController,
              is SignupInProgressViewController,
              is SignupFailureViewController,

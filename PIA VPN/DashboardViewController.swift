@@ -107,12 +107,6 @@ class DashboardViewController: AutolayoutViewController {
         super.viewWillAppear(animated)
     
         setupNavigationBarButtons()
-
-        guard AppPreferences.shared.wasLaunched && !Flags.shared.alwaysShowsWalkthrough else {
-            AppPreferences.shared.wasLaunched = true
-            showWalkthrough()
-            return
-        }
         
         guard Client.providers.accountProvider.isLoggedIn else {
             presentLogin()
@@ -229,10 +223,6 @@ class DashboardViewController: AutolayoutViewController {
         })
         collectionView.reloadData()
         setupNavigationBarButtons()
-    }
-    
-    private func showWalkthrough() {
-        perform(segue: StoryboardSegue.Main.walkthroughSegueIdentifier)
     }
     
     private func presentLogin() {

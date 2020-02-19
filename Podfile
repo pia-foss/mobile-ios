@@ -41,7 +41,7 @@ end
 def shared_main_pods
     pod 'AlamofireImage'
     #library_by_path('')
-    library_by_git('2897214')
+    library_by_git('246c058')
     #library_by_version('~> 1.1.3')
 end
 
@@ -50,7 +50,6 @@ def app_pods
     pod 'iRate'
     pod 'TPKeyboardAvoiding'
     pod 'SideMenu', '~> 6.0'
-    pod 'FXPageControl'
     pod 'DZNEmptyDataSet'
     pod 'PopupDialog'
     pod 'ReachabilitySwift', '~> 4.3.0'

@@ -126,11 +126,7 @@ enum Asset {
       static let nmtDarkInactive = ImageAsset(name: "nmt-dark-inactive")
       static let nmtLightActive = ImageAsset(name: "nmt-light-active")
       static let nmtLightInactive = ImageAsset(name: "nmt-light-inactive")
-      static let pagecontrolSelectedDot = ImageAsset(name: "pagecontrol-selected-dot")
-      static let pagecontrolUnselectedDot = ImageAsset(name: "pagecontrol-unselected-dot")
       static let regionSelected = ImageAsset(name: "region-selected")
-      static let scrollableMapDark = ImageAsset(name: "scrollableMap-dark")
-      static let scrollableMapLight = ImageAsset(name: "scrollableMap-light")
       static let themeDarkActive = ImageAsset(name: "theme-dark-active")
       static let themeDarkInactive = ImageAsset(name: "theme-dark-inactive")
       static let themeLightActive = ImageAsset(name: "theme-light-active")
@@ -446,9 +442,6 @@ enum Asset {
   static let imageContentBlocker = ImageAsset(name: "image-content-blocker")
   static let imageRobot = ImageAsset(name: "image-robot")
   static let imageVpnAllow = ImageAsset(name: "image-vpn-allow")
-  static let imageWalkthrough1 = ImageAsset(name: "image-walkthrough-1")
-  static let imageWalkthrough2 = ImageAsset(name: "image-walkthrough-2")
-  static let imageWalkthrough3 = ImageAsset(name: "image-walkthrough-3")
   static let itemMenu = ImageAsset(name: "item-menu")
   static let navLogoWhite = ImageAsset(name: "nav-logo-white")
   static let navLogo = ImageAsset(name: "nav-logo")
@@ -534,11 +527,7 @@ enum Asset {
     Piax.Global.nmtDarkInactive,
     Piax.Global.nmtLightActive,
     Piax.Global.nmtLightInactive,
-    Piax.Global.pagecontrolSelectedDot,
-    Piax.Global.pagecontrolUnselectedDot,
     Piax.Global.regionSelected,
-    Piax.Global.scrollableMapDark,
-    Piax.Global.scrollableMapLight,
     Piax.Global.themeDarkActive,
     Piax.Global.themeDarkInactive,
     Piax.Global.themeLightActive,
@@ -842,9 +831,6 @@ enum Asset {
     imageContentBlocker,
     imageRobot,
     imageVpnAllow,
-    imageWalkthrough1,
-    imageWalkthrough2,
-    imageWalkthrough3,
     itemMenu,
     navLogoWhite,
     navLogo,

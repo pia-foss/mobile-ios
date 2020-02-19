@@ -242,14 +242,5 @@
 "vpn_permission.disallow.message.basic" = "Deze toestemming is nodig om de applicatie te laten functioneren.";
 "vpn_permission.disallow.message.support" = "Als u hulp nodig heeft, kunt u contact opnemen met de klantenservice.";
 "vpn_permission.title" = "PIA";
-"walkthrough.action.done" = "KLAAR";
-"walkthrough.action.next" = "VOLGENDE";
-"walkthrough.action.skip" = "OVERSLAAN";
-"walkthrough.page.1.description" = "Bescherm uzelf op tien apparaten tegelijk.";
-"walkthrough.page.1.title" = "Ondersteun tien apparaten tegelijk";
-"walkthrough.page.2.description" = "Met servers over de hele wereld wordt u altijd beschermd.";
-"walkthrough.page.2.title" = "Maak eenvoudig verbinding met elke regio";
-"walkthrough.page.3.description" = "Als u onze Content Blocker inschakelt, krijgt u geen advertenties meer te zien in Safari.";
-"walkthrough.page.3.title" = "Bescherm uzelf tegen advertenties";
 "settings.small.packets.title" = "Kleine pakketten gebruiken";
 "settings.small.packets.description" = "Maakt het IP-pakket iets kleiner om de compatibiliteit met sommige routers en mobiele netwerken te verbeteren.";
