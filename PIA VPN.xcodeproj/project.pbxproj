@@ -73,10 +73,6 @@
 		0EB9ED1A1FDA1C4D00D1214D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9ED191FDA1C4D00D1214D /* SettingsViewController.swift */; };
 		0EB9ED1B1FDA1C4D00D1214D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9ED191FDA1C4D00D1214D /* SettingsViewController.swift */; };
 		0ECB08201D61D2A900043852 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ECB081F1D61D2A900043852 /* Launch Screen.storyboard */; };
-		0ECC1E341FDB32470039891D /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECC1E331FDB32470039891D /* WalkthroughViewController.swift */; };
-		0ECC1E351FDB32470039891D /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECC1E331FDB32470039891D /* WalkthroughViewController.swift */; };
-		0ECC1E3B1FDB3BD50039891D /* WalkthroughPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECC1E3A1FDB3BD50039891D /* WalkthroughPageView.swift */; };
-		0ECC1E3C1FDB3BD50039891D /* WalkthroughPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECC1E3A1FDB3BD50039891D /* WalkthroughPageView.swift */; };
 		0ECC1E3E1FDB3F2F0039891D /* RegionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECC1E3D1FDB3F2F0039891D /* RegionsViewController.swift */; };
 		0ECC1E3F1FDB3F2F0039891D /* RegionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECC1E3D1FDB3F2F0039891D /* RegionsViewController.swift */; };
 		0ECC1E411FDB45100039891D /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECC1E401FDB45100039891D /* AboutViewController.swift */; };
@@ -489,8 +485,6 @@
 		0EB966761FDF11B80086ABC2 /* Server+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+UI.swift"; sourceTree = "<group>"; };
 		0EB9ED191FDA1C4D00D1214D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0ECB081F1D61D2A900043852 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		0ECC1E331FDB32470039891D /* WalkthroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewController.swift; sourceTree = "<group>"; };
-		0ECC1E3A1FDB3BD50039891D /* WalkthroughPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughPageView.swift; sourceTree = "<group>"; };
 		0ECC1E3D1FDB3F2F0039891D /* RegionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsViewController.swift; sourceTree = "<group>"; };
 		0ECC1E401FDB45100039891D /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		0ECF5C072017EBAD0047596C /* ThemeCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeCode.swift; sourceTree = "<group>"; };
@@ -754,15 +748,6 @@
 				DD858BA522CE4408004953F3 /* DaysAcquiredTableViewCell.swift */,
 			);
 			name = Menu;
-			sourceTree = "<group>";
-		};
-		0E1CFCBF1EBBA0300073155D /* Walkthrough */ = {
-			isa = PBXGroup;
-			children = (
-				0ECC1E3A1FDB3BD50039891D /* WalkthroughPageView.swift */,
-				0ECC1E331FDB32470039891D /* WalkthroughViewController.swift */,
-			);
-			name = Walkthrough;
 			sourceTree = "<group>";
 		};
 		0E51DF0A1E4BED4000024999 /* PIA VPN Tunnel */ = {
@@ -1029,7 +1014,6 @@
 				0E1CFCBD1EBB9F040073155D /* Dashboard */,
 				0E1CFCBE1EBB9F860073155D /* Menu */,
 				296B7BB21A1840CB005606AD /* Shared */,
-				0E1CFCBF1EBBA0300073155D /* Walkthrough */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -2006,9 +1990,7 @@
 				DD9706A5224262BF00630220 /* QuickSettingsTile.swift in Sources */,
 				0E7361A11FD86F8300706BFF /* AccountObserver.swift in Sources */,
 				DDFCFA9521E892130081F235 /* RegionTile.swift in Sources */,
-				0ECC1E351FDB32470039891D /* WalkthroughViewController.swift in Sources */,
 				0EFDC1E71FE4ABAA007C0B9B /* Notification+App.swift in Sources */,
-				0ECC1E3C1FDB3BD50039891D /* WalkthroughPageView.swift in Sources */,
 				DD1C138721E60BAE004004B3 /* IPTile.swift in Sources */,
 				0E9452971FDB4C5800891948 /* AboutComponentCell.swift in Sources */,
 				0E53A83C1FE5A156000C2A18 /* AccountProvider+Refresh.swift in Sources */,
@@ -2126,10 +2108,8 @@
 				DD9706A4224262BF00630220 /* QuickSettingsTile.swift in Sources */,
 				DDFCFA9421E892130081F235 /* RegionTile.swift in Sources */,
 				0E7361A01FD86F8300706BFF /* AccountObserver.swift in Sources */,
-				0ECC1E341FDB32470039891D /* WalkthroughViewController.swift in Sources */,
 				0EFDC1E61FE4ABAA007C0B9B /* Notification+App.swift in Sources */,
 				DD1C138621E60BAE004004B3 /* IPTile.swift in Sources */,
-				0ECC1E3B1FDB3BD50039891D /* WalkthroughPageView.swift in Sources */,
 				0E9452961FDB4C5800891948 /* AboutComponentCell.swift in Sources */,
 				0E53A83B1FE5A156000C2A18 /* AccountProvider+Refresh.swift in Sources */,
 				0EFDC1E01FE4A450007C0B9B /* AppPreferences.swift in Sources */,

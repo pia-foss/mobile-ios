@@ -50,7 +50,6 @@ def app_pods
     pod 'iRate'
     pod 'TPKeyboardAvoiding'
     pod 'SideMenu', '~> 6.0'
-    pod 'FXPageControl'
     pod 'DZNEmptyDataSet'
     pod 'PopupDialog'
     pod 'ReachabilitySwift', '~> 4.3.0'

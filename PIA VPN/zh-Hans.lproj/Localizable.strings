@@ -242,14 +242,5 @@
 "vpn_permission.disallow.message.basic" = "我们需要此权限来使应用程序能正常工作。";
 "vpn_permission.disallow.message.support" = "如需帮助，也可联系客户支持。";
 "vpn_permission.title" = "PIA";
-"walkthrough.action.done" = "完成";
-"walkthrough.action.next" = "下一个";
-"walkthrough.action.skip" = "跳过";
-"walkthrough.page.1.description" = "一次在多达 10 台设备上保护自己。";
-"walkthrough.page.1.title" = "一次支持 10 台设备";
-"walkthrough.page.2.description" = "服务器遍布世界各地，您始终受到保护。";
-"walkthrough.page.2.title" = "轻松连接到任何地区";
-"walkthrough.page.3.description" = "启用内容拦截器以防止 Safari 中出现广告。";
-"walkthrough.page.3.title" = "让自己远离广告";
 "settings.small.packets.title" = "使用小包";
 "settings.small.packets.description" = "将稍微减小IP包，以提高与某些路由器和移动网络的兼容性。";

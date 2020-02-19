@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="boO-X9-UIe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="boO-X9-UIe">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -909,7 +909,6 @@
                         <outlet property="viewContentHeightConstraint" destination="LrV-0j-7SB" id="MFV-y1-aYU"/>
                         <outlet property="viewContentLandscapeHeightConstraint" destination="xD9-nS-1Fh" id="hC0-nQ-h8R"/>
                         <outlet property="viewRows" destination="Azf-f1-8fS" id="qgu-NB-b1a"/>
-                        <segue destination="dGS-1w-bnc" kind="presentation" identifier="WalkthroughSegueIdentifier" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="PjE-Je-n2S"/>
                         <segue destination="kH0-rw-uGL" kind="presentation" identifier="MenuSegueIdentifier" id="mub-pZ-Rbt"/>
                         <segue destination="LrP-0B-Ym4" kind="show" identifier="SelectRegionSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_VPN" customModuleProvider="target" animates="NO" id="Z3b-zh-fBg"/>
                         <segue destination="LrP-0B-Ym4" kind="show" identifier="SelectRegionAnimatedSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_VPN" customModuleProvider="target" id="Ic8-R6-xho"/>
@@ -1391,131 +1390,19 @@
             </objects>
             <point key="canvasLocation" x="-56" y="1086"/>
         </scene>
-        <!--Walkthrough View Controller-->
-        <scene sceneID="cti-rm-kp3">
-            <objects>
-                <viewController id="dGS-1w-bnc" customClass="WalkthroughViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="gX1-Da-2eo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXd-u4-VP7">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="728"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scrollableMap-light" translatesAutoresizingMaskIntoConstraints="NO" id="Rfq-xd-mNv">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="728"/>
-                                    </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqk-hH-N2E">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="728"/>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Rfq-xd-mNv" secondAttribute="bottom" id="84Y-Gz-Cc8"/>
-                                    <constraint firstItem="rqk-hH-N2E" firstAttribute="height" secondItem="OXd-u4-VP7" secondAttribute="height" id="EAe-cZ-nts"/>
-                                    <constraint firstItem="rqk-hH-N2E" firstAttribute="leading" secondItem="OXd-u4-VP7" secondAttribute="leading" id="MH2-Dk-jji"/>
-                                    <constraint firstItem="Rfq-xd-mNv" firstAttribute="leading" secondItem="OXd-u4-VP7" secondAttribute="leading" id="Ysh-yl-Sva"/>
-                                    <constraint firstAttribute="trailing" secondItem="rqk-hH-N2E" secondAttribute="trailing" id="fy3-PV-ZyK"/>
-                                    <constraint firstItem="Rfq-xd-mNv" firstAttribute="top" secondItem="OXd-u4-VP7" secondAttribute="top" id="gqz-HG-PY2"/>
-                                    <constraint firstItem="rqk-hH-N2E" firstAttribute="top" secondItem="OXd-u4-VP7" secondAttribute="top" id="o4K-AT-HpT"/>
-                                    <constraint firstItem="rqk-hH-N2E" firstAttribute="width" secondItem="OXd-u4-VP7" secondAttribute="width" placeholder="YES" id="sdF-tF-mG4"/>
-                                    <constraint firstAttribute="bottom" secondItem="rqk-hH-N2E" secondAttribute="bottom" id="spT-Sh-oBp"/>
-                                    <constraint firstAttribute="trailing" secondItem="Rfq-xd-mNv" secondAttribute="trailing" id="wj1-QP-QUq"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="delegate" destination="dGS-1w-bnc" id="RyA-zV-98o"/>
-                                </connections>
-                            </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Cj-hI-UcT">
-                                <rect key="frame" x="0.0" y="728" width="375" height="50"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0V1-l9-swV">
-                                        <rect key="frame" x="30" y="10" width="39" height="30"/>
-                                        <state key="normal" title="SKIP"/>
-                                        <connections>
-                                            <segue destination="1Y3-6R-wjV" kind="unwind" identifier="UnwindWalkthroughSegueIdentifier" unwindAction="unwoundWalkthroughViewController:" id="gc3-QD-c7f"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FnV-XX-tqE">
-                                        <rect key="frame" x="306" y="10" width="39" height="30"/>
-                                        <state key="normal" title="NEXT"/>
-                                        <connections>
-                                            <action selector="nextPage:" destination="dGS-1w-bnc" eventType="touchUpInside" id="Wh8-sm-DWg"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AEL-wb-Ylq" customClass="PIAPageControl" customModule="PIA_VPN" customModuleProvider="target">
-                                        <rect key="frame" x="79" y="7" width="217" height="36"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="CY0-9n-OPa"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="image" keyPath="dotImage" value="icon-unselected"/>
-                                            <userDefinedRuntimeAttribute type="image" keyPath="selectedDotImage" value="icon-selected"/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="dotSize">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="selectedDotSize">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="scrollPage:" destination="dGS-1w-bnc" eventType="valueChanged" id="8Xx-DN-Ax8"/>
-                                        </connections>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="AEL-wb-Ylq" firstAttribute="centerX" secondItem="7Cj-hI-UcT" secondAttribute="centerX" id="Kgh-NL-lew"/>
-                                    <constraint firstItem="FnV-XX-tqE" firstAttribute="centerY" secondItem="0V1-l9-swV" secondAttribute="centerY" id="LvL-Cy-fOz"/>
-                                    <constraint firstItem="AEL-wb-Ylq" firstAttribute="centerY" secondItem="7Cj-hI-UcT" secondAttribute="centerY" id="Q2t-XH-HHB"/>
-                                    <constraint firstItem="AEL-wb-Ylq" firstAttribute="top" secondItem="7Cj-hI-UcT" secondAttribute="top" constant="7" id="QYP-Cy-Hwf"/>
-                                    <constraint firstItem="0V1-l9-swV" firstAttribute="centerY" secondItem="7Cj-hI-UcT" secondAttribute="centerY" id="UA5-lQ-ht9"/>
-                                    <constraint firstItem="AEL-wb-Ylq" firstAttribute="leading" secondItem="0V1-l9-swV" secondAttribute="trailing" constant="10" id="Uzt-2m-D8T"/>
-                                    <constraint firstAttribute="trailing" secondItem="FnV-XX-tqE" secondAttribute="trailing" constant="30" id="VsF-JL-Lm2"/>
-                                    <constraint firstAttribute="height" constant="50" id="Wtg-x9-bPB"/>
-                                    <constraint firstItem="FnV-XX-tqE" firstAttribute="leading" secondItem="AEL-wb-Ylq" secondAttribute="trailing" constant="10" id="dvY-wb-a0M"/>
-                                    <constraint firstItem="0V1-l9-swV" firstAttribute="leading" secondItem="7Cj-hI-UcT" secondAttribute="leading" constant="30" id="tZR-MH-syj"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="IJV-Xw-MlQ" firstAttribute="trailing" secondItem="OXd-u4-VP7" secondAttribute="trailing" id="COV-CD-sld"/>
-                            <constraint firstItem="OXd-u4-VP7" firstAttribute="top" secondItem="gX1-Da-2eo" secondAttribute="top" id="Ei3-B6-5Fk"/>
-                            <constraint firstItem="IJV-Xw-MlQ" firstAttribute="trailing" secondItem="7Cj-hI-UcT" secondAttribute="trailing" id="Fwc-kC-sEm"/>
-                            <constraint firstItem="7Cj-hI-UcT" firstAttribute="top" secondItem="OXd-u4-VP7" secondAttribute="bottom" id="OEA-1v-wMm"/>
-                            <constraint firstItem="OXd-u4-VP7" firstAttribute="leading" secondItem="IJV-Xw-MlQ" secondAttribute="leading" id="VGB-Bf-tYr"/>
-                            <constraint firstItem="7Cj-hI-UcT" firstAttribute="leading" secondItem="IJV-Xw-MlQ" secondAttribute="leading" id="WGA-eO-AMo"/>
-                            <constraint firstItem="IJV-Xw-MlQ" firstAttribute="bottom" secondItem="7Cj-hI-UcT" secondAttribute="bottom" id="aHL-hv-M2G"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="IJV-Xw-MlQ"/>
-                    </view>
-                    <connections>
-                        <outlet property="buttonNext" destination="FnV-XX-tqE" id="qxu-fZ-qfC"/>
-                        <outlet property="buttonSkip" destination="0V1-l9-swV" id="Sjv-8I-iNT"/>
-                        <outlet property="pageControl" destination="AEL-wb-Ylq" id="eDy-Zf-l6O"/>
-                        <outlet property="scrollBackground" destination="Rfq-xd-mNv" id="oTG-GX-9qi"/>
-                        <outlet property="scrollContent" destination="OXd-u4-VP7" id="CFP-Px-S6l"/>
-                        <outlet property="viewContent" destination="rqk-hH-N2E" id="N9d-4S-gch"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hy9-C0-R94" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="1Y3-6R-wjV" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="1159" y="-1198"/>
-        </scene>
         <!--Trusted Networks View Controller-->
         <scene sceneID="Rqb-Xe-d1j">
             <objects>
                 <viewController id="jy7-91-daJ" customClass="TrustedNetworksViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="P5B-eT-Ius">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p4O-Dy-PbF">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Si7-46-a7E">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NetworkCell" textLabel="vC0-u3-5dy" style="IBUITableViewCellStyleDefault" id="GOa-SC-nuT">
@@ -2130,16 +2017,13 @@
     <resources>
         <image name="favorite-selected" width="18" height="15"/>
         <image name="friend-referrals" width="85.666664123535156" height="89.666664123535156"/>
-        <image name="icon-selected" width="9.5" height="9"/>
-        <image name="icon-unselected" width="10" height="9.5"/>
         <image name="image-content-blocker" width="86" height="112"/>
         <image name="image-vpn-allow" width="77" height="111"/>
         <image name="killswitch-dark-inactive" width="35" height="24"/>
         <image name="region-selected" width="18" height="18"/>
-        <image name="scrollableMap-light" width="1740" height="870"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LsE-Df-8xu"/>
+        <segue reference="7wM-LQ-vSr"/>
         <segue reference="9EP-gJ-pE1"/>
         <segue reference="Ic8-R6-xho"/>
     </inferredMetricsTieBreakers>
