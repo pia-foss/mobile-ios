@@ -10,14 +10,15 @@
 "in_progress.message" = "Vi bekrefter kjøpet i systemet vårt. Dette kan ta litt tid.";
 "in_progress.redeem.message" = "Vi bekrefter kort-PIN-en din i systemet vårt. Det kan ta et øyeblikk, så vennligst vent.";
 "in_progress.title" = "Bekrefter registrering";
+"purchase.subscribe.now" = "Abonner nå";
 "purchase.trials.1year.protection" = "Et års personverns- og identitetsbeskyttelse";
 "purchase.trials.all.plans" = "Vis alle tilgjengelige abonnement";
 "purchase.trials.anonymous" = "Surf anonymt og skjul IP-adressen din.";
 "purchase.trials.devices" = "Støtter ti enheter om gangen";
 "purchase.trials.devices.description" = "Beskytt deg på opptil ti enheter samtidig.";
-"purchase.trials.intro" = "Prøv gratis i syv dager!";
+"purchase.trials.intro" = "Start din gratis 7-dagers prøveperiode";
 "purchase.trials.money.back" = "Syv dagers garanti som gir deg pengene tilbake";
-"purchase.trials.price.after" = "Kun %@ etter";
+"purchase.trials.price.after" = "Deretter %@";
 "purchase.trials.region" = "Koble til hvilken som helst region på en enkel måte";
 "purchase.trials.servers" = "Over 3300 servere i 32 land";
 "purchase.trials.start" = "Start abonnementet";

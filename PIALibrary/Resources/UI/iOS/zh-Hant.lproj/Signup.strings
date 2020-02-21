@@ -10,14 +10,15 @@
 "in_progress.message" = "我們的系統正確認您的購買交易，可能需要停留在此畫面幾分鐘時間。";
 "in_progress.redeem.message" = "我們的系統正在確認您的卡 PIN 碼。這可能需要一點時間，請稍候。";
 "in_progress.title" = "壓認註冊";
+"purchase.subscribe.now" = "馬上訂閱";
 "purchase.trials.1year.protection" = "1 年隱私權和身分保護";
 "purchase.trials.all.plans" = "檢視所有可用方案";
 "purchase.trials.anonymous" = "匿名瀏覽並隱藏 IP。";
 "purchase.trials.devices" = "同時支援 10 台裝置";
 "purchase.trials.devices.description" = "同時為最多 10 台裝置提供保護。";
-"purchase.trials.intro" = "7 天免費試用！";
+"purchase.trials.intro" = "開始 7 天免費試用";
 "purchase.trials.money.back" = "7 天退款保證";
-"purchase.trials.price.after" = "僅 %@ 後";
+"purchase.trials.price.after" = "然後 %@";
 "purchase.trials.region" = "可輕鬆連線到任何地區";
 "purchase.trials.servers" = "32 個國家超過 3300 台伺服器";
 "purchase.trials.start" = "開始訂閱";

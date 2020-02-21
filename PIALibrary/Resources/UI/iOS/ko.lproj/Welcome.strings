@@ -1,15 +1,16 @@
-"agreement.message" = "구매 확인 시 사용자의 Apple ID 계정으로 요금이 청구됩니다. 현재 기간이 종료하기 24시간 전에 취소하지 않으면 구독은 자동으로 갱신됩니다. 현재 기간이 종료하기 전 24시간 이내에 갱신 요금이 계정으로 청구됩니다. 구매 후 App Store의 계정 설정에서 구독을 관리하고 취소할 수 있습니다.\n\n가입 시 $1 및 $2에 동의하신 것으로 간주됩니다.";
+"agreement.message" = "체험 기간이 종료하기 24시간 전에 구독을 취소하지 않으면, 7일 무료 체험 후 이 구독은 %@에 자동으로 갱신됩니다. 체험 기간이 종료하기 전 24시간 이내에 사용자의 Apple ID로 갱신 요금이 청구됩니다. 구매 후 App Store 계정으로 이동하여 구독을 관리하고 취소할 수 있습니다. 7일 체험 혜택은 사용자당 한 번으로 제한됩니다. 사용자가 구독을 구매할 경우 무료 체험 기간의 미사용분은 소멸됩니다. 모든 가격에는 현지에서 적용되는 판매세가 포함됩니다.\n\n가입 시 $1 및 $2에 동의하신 것으로 간주됩니다.";
 "agreement.message.privacy" = "개인정보 취급방침";
 "agreement.message.tos" = "서비스 약관";
 "agreement.trials.message" = "구매 확인 시 사용자의 Apple ID 계정으로 요금이 청구됩니다. 현재 기간이 종료하기 24시간 전에 취소하지 않으면 구독은 자동으로 갱신됩니다. 현재 기간이 종료하기 전 24시간 이내에 갱신 요금이 계정으로 청구됩니다. 구매 후 App Store의 계정 설정에서 구독을 관리하고 취소할 수 있습니다.\n\n일부 유료 구독은 사용자의 결제 수단으로 청구하기 전에 무료 체험을 제공할 수 있습니다. 결제 수단으로 청구가 시작되기 전에 유료 구독을 취소하려면, 무료 체험 기간이 종료하기 24시간 전에 구독을 취소하십시오.\n\n무료 체험은 신규 사용자만 이용할 수 있으며, 당사의 단독 재량으로 제공됩니다. 무료 체험을 추가로 이용하기 위해 가입한 경우 표준 구독 요금이 즉시 청구됩니다.\n\n당사는 언제든지 무료 체험을 철회할 권리를 보유합니다.\n\n구독 구매 시 무료 체험 기간의 미사용분은 소멸됩니다.\n\n가입 시 본 계약 조건에 동의하신 것으로 간주됩니다.";
+"agreement.trials.monthly.plan" = "개월";
 "agreement.trials.title" = "무료 체험 계약 조건";
-"camera.access.denied.message" = "기프트 카드 사용을 위해 QR 코드를 스캔할 수 있도록 카메라 접근권을 허용하세요.";
+"agreement.trials.yearly.plan" = "년";
 "camera.access.error.message" = "기기에서 QR 코드 스캔 기능을 지원하지 않습니다. 카메라가 있는 기기를 사용하세요.";
 "camera.access.error.title" = "카메라를 이용할 수 없음";
 "gdpr.accept.button.title" = "동의 및 계속";
-"gdpr.collect.data.description" = "계정 관리 및 악용 방지를 위한 이메일 주소.\n\n타사 결제 대행 업체가 요구한 결제 처리용 결제 데이터. 저희는 귀하의 전체 신용카드 정보를 저장하지 않습니다.";
+"gdpr.collect.data.description" = "계정 관리 및 악용 방지를 위한 이메일 주소.";
 "gdpr.collect.data.title" = "당사가 수집하는 개인 정보";
-"gdpr.usage.data.description" = "이메일 주소는 구독 정보, 결제 확인, 고객 공지 사항 및 Private Internet Access 프로모션 정보를 보내는 데에만 사용됩니다.\n\n결제 데이터는 고객 가입, 결제 및 취소를 관리하는 데 사용됩니다.";
+"gdpr.usage.data.description" = "이메일 주소는 구독 정보, 결제 확인, 고객 공지 사항 및 Private Internet Access 프로모션 정보를 보내는 데에만 사용됩니다.";
 "gdpr.usage.data.title" = "수집된 개인 정보의 사용";
 "getstarted.buttons.buyaccount" = "계정 구입";
 "iap.error.message.unavailable" = "현재 Apple 서버를 이용할 수 없습니다. 나중에 다시 시도해주십시오.";
@@ -19,10 +20,6 @@
 "login.error.unauthorized" = "사용자명 또는 비밀번호가 틀립니다.";
 "login.error.validation" = "사용자 이름과 비밀번호를 입력하셔야 합니다.";
 "login.password.placeholder" = "비밀번호";
-"login.purchase.button" = "지금 구입";
-"login.purchase.footer" = "계정이 없으세요?";
-"login.redeem.button" = "지금 청구";
-"login.redeem.footer" = "기프트 카드나 체험 카드가 있으세요?";
 "login.restore.button" = "계정 정보를 받지 못하셨습니까?";
 "login.submit" = "로그인";
 "login.title" = "계정에 로그인";
@@ -37,6 +34,7 @@
 "purchase.confirm.plan" = "%@ 플랜을 구매합니다";
 "purchase.continue" = "계속";
 "purchase.email.placeholder" = "이메일 주소";
+"purchase.email.why" = "사용자 이름 및 비밀번호를 보내 드리면 고객님의 이메일 주소가 필요합니다.";
 "purchase.error.connectivity.description" = "Private Internet Access에 접속할 수 없습니다. 인터넷 연결 상태가 좋지 않거나 귀하의 국가에서 당사의 서비스가 차단된 것 같습니다.";
 "purchase.error.connectivity.title" = "연결 실패";
 "purchase.error.title" = "구매";
@@ -53,7 +51,6 @@
 "redeem.error.qrcode.invalid" = "QR 코드 시퀀스가 유효하지 않습니다. 다시 시도하세요.";
 "redeem.error.title" = "청구";
 "redeem.giftcard.placeholder" = "기프트 카드 PIN";
-"redeem.scanqr" = "QR 스캔";
 "redeem.submit" = "제출";
 "redeem.subtitle" = "기프트 카드 또는 체험 카드의 %lu자리 PIN과 이메일 주소를 입력하세요.";
 "redeem.title" = "기프트 카드 청구";

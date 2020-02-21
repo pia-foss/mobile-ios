@@ -10,14 +10,15 @@
 "in_progress.message" = "저희 시스템에서 고객님의 구매를 확인하고 있습니다. 약간 시간이 소요될 수 있으므로 양해 부탁드립니다.";
 "in_progress.redeem.message" = "저희 시스템에서 고객님의 카드 PIN을 확인하고 있습니다. 약간 시간이 소요될 수 있으므로 양해 부탁드립니다.";
 "in_progress.title" = "회원 가입 확인";
+"purchase.subscribe.now" = "지금 구독";
 "purchase.trials.1year.protection" = "1년간 프라이버시 및 신원 보호";
 "purchase.trials.all.plans" = "이용 가능한 모든 플랜 보기";
 "purchase.trials.anonymous" = "익명으로 검색하고 IP를 숨기세요.";
 "purchase.trials.devices" = "동시에 10대의 장치 지원";
 "purchase.trials.devices.description" = "한 번에 최대 10대의 장치에서 보호를 받으세요.";
-"purchase.trials.intro" = "7일간 무료 체험!";
+"purchase.trials.intro" = "7일 무료 체험 시작";
 "purchase.trials.money.back" = "7일 이내 환불 보장";
-"purchase.trials.price.after" = "그 후 단 %@";
+"purchase.trials.price.after" = "그 후 %@";
 "purchase.trials.region" = "모든 지역에 쉽게 연결";
 "purchase.trials.servers" = "32개국 3300개 이상의 서버";
 "purchase.trials.start" = "구독 시작";

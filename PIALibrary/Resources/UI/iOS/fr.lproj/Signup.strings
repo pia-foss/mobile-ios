@@ -10,14 +10,15 @@
 "in_progress.message" = "Notre système est en train de confirmer votre achat. Cela pourrait prendre un moment, nous vous prions donc de patienter.";
 "in_progress.redeem.message" = "Notre système est en train de confirmer le code PIN de votre carte. Cela pourrait prendre un moment, nous vous prions donc de patienter.";
 "in_progress.title" = "Confirmation d'inscription";
+"purchase.subscribe.now" = "S'abonner maintenant";
 "purchase.trials.1year.protection" = "1 an de confidentialité et de protection de l'identité";
 "purchase.trials.all.plans" = "Voir tous les forfaits disponibles";
 "purchase.trials.anonymous" = "Surfez anonymement et masquez votre IP.";
 "purchase.trials.devices" = "Prise en charge de 10 appareils en même temps";
 "purchase.trials.devices.description" = "Protégez-vous sur jusqu'à 10 appareils en même temps.";
-"purchase.trials.intro" = "Essayez gratuitement pendant 7 jours !";
+"purchase.trials.intro" = "Démarrez votre essai gratuit de 7 jours";
 "purchase.trials.money.back" = "Garantie satisfait ou remboursé sur 7 jours";
-"purchase.trials.price.after" = "Seulement %@ ensuite";
+"purchase.trials.price.after" = "Ensuite %@";
 "purchase.trials.region" = "Connectez-vous facilement à n'importe quelle région";
 "purchase.trials.servers" = "Plus de 3300 serveurs dans 32 pays";
 "purchase.trials.start" = "Commencer l'abonnement";

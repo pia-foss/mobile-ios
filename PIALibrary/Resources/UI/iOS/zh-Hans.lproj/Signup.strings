@@ -10,14 +10,15 @@
 "in_progress.message" = "我们正在确认您在我们系统中的购买。这可能需要一点时间，请耐心等待。";
 "in_progress.redeem.message" = "我们正在通过系统确认您的卡片PIN。这可能需要一些时间，请耐心等待。";
 "in_progress.title" = "确认注册";
+"purchase.subscribe.now" = "立即订阅";
 "purchase.trials.1year.protection" = "1 年隐私和身份保护";
 "purchase.trials.all.plans" = "查看所有可用套餐";
 "purchase.trials.anonymous" = "匿名浏览并隐藏您的 IP。";
 "purchase.trials.devices" = "一次支持 10 台设备";
 "purchase.trials.devices.description" = "一次在多达 10 台设备上保护自己。";
-"purchase.trials.intro" = "免费试用 7 天！";
+"purchase.trials.intro" = "开始 7 天免费试用";
 "purchase.trials.money.back" = "7 天退款保证";
-"purchase.trials.price.after" = "此后仅需 %@";
+"purchase.trials.price.after" = "然后 %@";
 "purchase.trials.region" = "轻松连接到任何地区";
 "purchase.trials.servers" = "在 32 个国家h地区拥有超过 3300 台服务器";
 "purchase.trials.start" = "开始订阅";

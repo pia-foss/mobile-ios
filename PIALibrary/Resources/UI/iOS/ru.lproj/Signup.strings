@@ -10,14 +10,15 @@
 "in_progress.message" = "Мы проверяем вашу покупку в системе. На это может понадобиться время, так что оставайтесь с нами.";
 "in_progress.redeem.message" = "Мы подтверждаем ваш PIN-код в системе. Это займет какое-то время, подождите немного.";
 "in_progress.title" = "Подтверждение регистрации";
+"purchase.subscribe.now" = "Подписаться";
 "purchase.trials.1year.protection" = "1 год защиты конфиденциальности и личных данных";
 "purchase.trials.all.plans" = "Смотреть все доступные планы";
 "purchase.trials.anonymous" = "Пользуйтесь Интернетом анонимно и скрывайте свой IP-адрес.";
 "purchase.trials.devices" = "Поддержка сразу 10 устройств";
 "purchase.trials.devices.description" = "Защищайте себя на нескольких устройствах одновременно (до 10).";
-"purchase.trials.intro" = "Бесплатная проба в течение 7 дней!";
+"purchase.trials.intro" = "Начните 7-дневную бесплатную пробу";
 "purchase.trials.money.back" = "7-дневная гарантия возврата денег";
-"purchase.trials.price.after" = "Всего %@ после этого";
+"purchase.trials.price.after" = "После этого %@";
 "purchase.trials.region" = "Простое подключение к любому региону";
 "purchase.trials.servers" = "Более 3300 серверов в 32 странах";
 "purchase.trials.start" = "Запустить подписку.";

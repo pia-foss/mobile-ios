@@ -10,14 +10,15 @@
 "in_progress.message" = "We zijn uw aankoop aan het verifiëren in ons systeem. Dit kan eventjes duren, daarom vragen we u vriendelijk om geduld.";
 "in_progress.redeem.message" = "We zijn uw pincode aan het verifiëren in ons systeem. Dit kan eventjes duren, daarom vragen we u vriendelijk om geduld.";
 "in_progress.title" = "Aanmelding bevestigen";
+"purchase.subscribe.now" = "Nu abonneren";
 "purchase.trials.1year.protection" = "1 jaar aan privacy- en identiteitsbescherming";
 "purchase.trials.all.plans" = "Bekijk de beschikbare abonnementen";
 "purchase.trials.anonymous" = "Browse anoniem en verberg uw ip.";
 "purchase.trials.devices" = "Ondersteun tien apparaten tegelijk";
 "purchase.trials.devices.description" = "Bescherm uzelf op tien apparaten tegelijk.";
-"purchase.trials.intro" = "Probeer 7 dagen gratis!";
+"purchase.trials.intro" = "Start je gratis proefabonnement van 7 dagen";
 "purchase.trials.money.back" = "7 dagen lang niet-goed-geld-teruggarantie";
-"purchase.trials.price.after" = "Slechts %@ na";
+"purchase.trials.price.after" = "Daarna %@";
 "purchase.trials.region" = "Maak eenvoudig verbinding met elke regio";
 "purchase.trials.servers" = "Meer dan 3300 servers in 32 landen";
 "purchase.trials.start" = "Abonnement starten";
