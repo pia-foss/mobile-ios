@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name              = "PIALibrary"
-    s.version           = "2.2.2"
+    s.version           = "2.2.4"
     s.summary           = "PIA client library in Swift."
 
     s.homepage          = "https://www.privateinternetaccess.com/"
@@ -55,6 +55,8 @@ Pod::Spec.new do |s|
         p.dependency "SwiftyBeaver"
         p.dependency "SwiftEntryKit", "0.7.2"
         p.dependency "lottie-ios"
+        p.dependency "FXPageControl"
+
 
         p.ios.source_files      = "PIALibrary/Sources/UI/iOS/**/*.swift"
         p.ios.resources         = "PIALibrary/Resources/UI/iOS/**/*"

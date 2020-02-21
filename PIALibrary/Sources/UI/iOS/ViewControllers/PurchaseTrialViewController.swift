@@ -92,7 +92,7 @@ class PurchaseTrialViewController: AutolayoutViewController, BrandableNavigation
         serversImageView.image = Asset.globeIcon.image.withRenderingMode(.alwaysTemplate)
         
         textAgreement.attributedText = Theme.current.agreementText(
-            withMessage: L10n.Welcome.Agreement.message,
+            withMessage: L10n.Welcome.Agreement.message(""),
             tos: L10n.Welcome.Agreement.Message.tos,
             tosUrl: Client.configuration.tosUrl,
             privacy: L10n.Welcome.Agreement.Message.privacy,

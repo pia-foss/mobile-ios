@@ -27,6 +27,10 @@ class WelcomePageViewController: UIPageViewController {
     
     var preset: Preset?
     
+    var selectedPlanIndex: Int?
+    
+    var allPlans: [PurchasePlan]?
+    
     weak var completionDelegate: WelcomeCompletionDelegate?
 
     override func viewDidLoad() {
@@ -40,12 +44,18 @@ class WelcomePageViewController: UIPageViewController {
             source.append(vc)
         }
         if preset.pages.contains(.purchase) {
-            let vc = Client.configuration.eligibleForTrial ?  StoryboardScene.Welcome.purchaseTrialViewController.instantiate() :
-                StoryboardScene.Welcome.purchaseViewController.instantiate()
+            let vc = StoryboardScene.Welcome.purchaseViewController.instantiate()
             source.append(vc)
         }
         if preset.pages.contains(.restore) {
             let vc = StoryboardScene.Welcome.restoreViewController.instantiate()
+            source.append(vc)
+        }
+        if preset.pages.contains(.directPurchase) {
+            let vc = StoryboardScene.Welcome.confirmPlanViewController.instantiate()
+            vc.preset = Preset()
+            vc.completionDelegate = completionDelegate
+            vc.populateViewWith(plans: self.allPlans ?? [.dummy, .dummy], andSelectedPlanIndex: self.selectedPlanIndex ?? 0)
             source.append(vc)
         }
         dataSource = self

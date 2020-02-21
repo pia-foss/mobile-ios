@@ -41,15 +41,14 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
     @IBOutlet private weak var textAgreement: UITextView!
     
     @IBOutlet private weak var buttonPurchase: PIAButton!
-    @IBOutlet private weak var buttonTrialTerms: PIAButton!
 
     var preset: Preset?
     weak var completionDelegate: WelcomeCompletionDelegate?
     var omitsSiblingLink = false
 
-    private var allPlans: [PurchasePlan] = [.dummy, .dummy]
+    var allPlans: [PurchasePlan] = [.dummy, .dummy]
 
-    private var selectedPlanIndex: Int?
+    var selectedPlanIndex: Int?
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -77,13 +76,13 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
         labelTitle.text = L10n.Welcome.Purchase.title
         labelSubtitle.text = L10n.Welcome.Purchase.subtitle
         textAgreement.attributedText = Theme.current.agreementText(
-            withMessage: L10n.Welcome.Agreement.message,
+            withMessage: L10n.Welcome.Agreement.message(""),
             tos: L10n.Welcome.Agreement.Message.tos,
             tosUrl: Client.configuration.tosUrl,
             privacy: L10n.Welcome.Agreement.Message.privacy,
             privacyUrl: Client.configuration.privacyUrl
         )
-        
+                
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(productsDidFetch(notification:)), name: .__InAppDidFetchProducts, object: nil)
         
@@ -122,7 +121,21 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
         }
     }
     
+    /// Populate the view with the values from GetStartedView
+    /// - Parameters:
+    ///   - plans:           The available plans.
+    ///   - selectedIndex:   The selected plan from the previous screen.
+    func populateViewWith(plans: [PurchasePlan], andSelectedPlanIndex selectedIndex: Int) {
+        self.allPlans = plans
+        self.selectedPlanIndex = selectedIndex
+    }
+    
     // MARK: Actions
+    
+    func confirmPlan() {
+        self.performSegue(withIdentifier: StoryboardSegue.Welcome.confirmPurchaseVPNPlanSegue.rawValue,
+                          sender: nil)
+    }
     
     private func refreshPlans(_ plans: [Plan: InAppProduct]) {
         if let yearly = plans[.yearly] {
@@ -138,6 +151,15 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
             purchase.bestValue = true
 
             allPlans[0] = purchase
+            
+            textAgreement.attributedText = Theme.current.agreementText(
+                withMessage: L10n.Welcome.Agreement.message(purchase.detail),
+                tos: L10n.Welcome.Agreement.Message.tos,
+                tosUrl: Client.configuration.tosUrl,
+                privacy: L10n.Welcome.Agreement.Message.privacy,
+                privacyUrl: Client.configuration.privacyUrl
+            )
+
         }
         if let monthly = plans[.monthly] {
             let purchase = PurchasePlan(
@@ -202,14 +224,8 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
     private func styleButtons() {
         buttonPurchase.setRounded()
         buttonPurchase.style(style: TextStyle.Buttons.piaGreenButton)
-        buttonPurchase.setTitle(L10n.Welcome.Purchase.continue.uppercased(),
+        buttonPurchase.setTitle(L10n.Signup.Purchase.Subscribe.now.uppercased(),
                               for: [])
-        buttonTrialTerms.style(style: TextStyle.Buttons.piaSmallPlainTextButton)
-        buttonTrialTerms.setTitle(L10n.Welcome.Agreement.Trials.title,
-                                  for: [])
-        Theme.current.applyTransparentButton(buttonTrialTerms,
-                                             withSize: 0.0)
-
     }
 
 }

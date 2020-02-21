@@ -31,14 +31,14 @@ public struct Pages: OptionSet {
     /// The purchase plan page.
     public static let purchase = Pages(rawValue: 1 << 1)
     
-    /// The redeem page.
-    public static let redeem = Pages(rawValue: 1 << 2)
+    /// The direct purchase plan page.
+    public static let directPurchase = Pages(rawValue: 1 << 2)
     
-    /// The redeem page.
+    /// The restore page.
     public static let restore = Pages(rawValue: 1 << 3)
 
     /// All pages.
-    public static let all: Pages = [.login, .purchase, .redeem, .restore]
+    public static let all: Pages = [.login, .purchase, .directPurchase, .restore]
     
     /// :nodoc:
     public let rawValue: Int

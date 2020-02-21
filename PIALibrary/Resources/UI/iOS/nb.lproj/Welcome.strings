@@ -1,15 +1,16 @@
-"agreement.message" = "Betalingen belastes Apple ID-kontoen din når du bekrefter kjøpet. Abonnementet fornyes automatisk med mindre det kanselleres minst 24 timer før slutten av den inneværende perioden. Kontoen blir belastet for fornyelse innen 24 timer før slutten av den inneværende perioden. Du kan administrere og kansellere abonnementene dine ved  besøke kontoinnstillingene på App Store etter kjøpet.\n\nVed å registrere deg godtar du $1 og $2.";
+"agreement.message" = "Etter den gratis 7-dagers prøveperioden fornyes abonnementet automatisk for %@, med mindre det kanselleres minst 24 timer før slutten av prøveperioden. Din Apple ID-konto belastes for fornyingen innen 24 timer før slutten av prøveperioden. Du kan administrere og avbryte abonnementene dine ved å gå til App Store-kontoinnstillingene etter kjøp. Det 7-dagers prøvetilbudet er begrenset til én 7-dagers prøveperiode per bruker. Eventuell ubrukt tid av den gratis prøveperioden går tapt hvis brukeren kjøper et abonnement. Alle priser inkluderer gjeldende lokale avgifter.\n\nVed å signere godtar du $1 og $2.";
 "agreement.message.privacy" = "REntingslinjer om personvern";
 "agreement.message.tos" = "Tjenestevilkår";
 "agreement.trials.message" = "Betalingen belastes Apple ID-kontoen din når du bekrefter kjøpet. Abonnementet fornyes automatisk med mindre det kanselleres minst 24 timer før slutten av den inneværende perioden. Kontoen blir belastet for fornyelse innen 24 timer før slutten av den inneværende perioden. Du kan administrere og kansellere abonnementene dine ved  besøke kontoinnstillingene på App Store etter kjøpet.\n\nEnkelte betalte abonnementer kan tilby en gratis prøveperiode før det belaster betalingsmetoden din. Hvis du bestemmer deg for å avslutte et betalt abonnement før vi begynner å belaste betalingsmetoden din, må du kansellere abonnementet minst 24 timer før prøveperioden er slutt.\n\nGratis prøveperioder er kun tilgjengelig for nye brukere og utføres etter vårt eget skjønn. Hvis du forsøker å registrere deg med flere gratis prøveperioder, blir du øyeblikkelig belastet standard abonnementsavgift.\n\nVi forbeholder oss retten til å tilbakekalle din gratis prøveperiode når som helst.\n\nEventuell ubrukt del av en gratis prøveperiode går tapt ved kjøpe av et abonnement.\n\nVed å registrere deg samtykker du til disse vilkårene og betingelsene.";
+"agreement.trials.monthly.plan" = "måned";
 "agreement.trials.title" = "Vilkår og betingelser for gratis prøveperiode";
-"camera.access.denied.message" = "Aktiver kameratilgang slik at du kan skanne QR-koder for å løse inn gavekort.";
+"agreement.trials.yearly.plan" = "år";
 "camera.access.error.message" = "Enheten støtter ikke skanning av QR-koder. Bruk en enhet med kamera.";
 "camera.access.error.title" = "Kamera ikke tilgjengelig";
 "gdpr.accept.button.title" = "Godta og fortsett";
-"gdpr.collect.data.description" = "E-postadresse for kontoadministrasjon og beskyttelse mot misbruk.\n\nBetalingsdata for prosessering av betalinger som påkrevet av vår tredjeparts betalingsenhet. Vær oppmerksom på at vi ikke lagrer kredittkortinformasjonen din.";
+"gdpr.collect.data.description" = "E-postadresse for kontoadministrasjon og beskyttelse mot misbruk.";
 "gdpr.collect.data.title" = "Personlig informasjon vi tar vare på";
-"gdpr.usage.data.description" = "E-postadresse blir kun brukt for å sende ut informasjon om abonnementet, betalingsbekreftelser, kundekorrespondanse og tilbud om privat internettilgang.\n\nBetalingsdata blir brukt for å administrere kunderegistreringer, betalinger og kanselleringer.";
+"gdpr.usage.data.description" = "E-postadresse blir kun brukt for å sende ut informasjon om abonnementet, betalingsbekreftelser, kundekorrespondanse og tilbud om privat internettilgang.";
 "gdpr.usage.data.title" = "Bruk av personlig informasjon samlet inn av oss";
 "getstarted.buttons.buyaccount" = "Kjøpskonto";
 "iap.error.message.unavailable" = "Apple-serverne er for øyeblikket ikke tilgjengelige. Prøv igjen senere.";
@@ -19,10 +20,6 @@
 "login.error.unauthorized" = "Brukernavnet eller passordet ditt er feil.";
 "login.error.validation" = "Du må oppgi et brukernavn og passord.";
 "login.password.placeholder" = "Passord";
-"login.purchase.button" = "Kjøp nå";
-"login.purchase.footer" = "Har du ikke konto?";
-"login.redeem.button" = "Løs inn nå";
-"login.redeem.footer" = "Har du gavekort eller prøvekort?";
 "login.restore.button" = "Har du ikke fått kontodetaljene?";
 "login.submit" = "LOGG INN";
 "login.title" = "Logg inn på kontoen din";
@@ -37,6 +34,7 @@
 "purchase.confirm.plan" = "Du kjøper %@-abonnementet";
 "purchase.continue" = "Fortsett";
 "purchase.email.placeholder" = "E-postadresse";
+"purchase.email.why" = "Vi trenger e-posten din for å sende deg brukernavnet og passordet ditt.";
 "purchase.error.connectivity.description" = "Vi kunne ikke nå Private Internet Access. Dette kan skyldes dårlig Internett eller at tjenesten vår er blokkert i landet ditt.";
 "purchase.error.connectivity.title" = "Tilkoblingsfeil";
 "purchase.error.title" = "Kjøp";
@@ -53,7 +51,6 @@
 "redeem.error.qrcode.invalid" = "Ugyldig QR-kodesekvens. Prøv igjen.";
 "redeem.error.title" = "Løs inn";
 "redeem.giftcard.placeholder" = "PIN-kode for gavekort";
-"redeem.scanqr" = "Skann QR-kode";
 "redeem.submit" = "SEND";
 "redeem.subtitle" = "Angi e-postadressen og den %lu-sifrede PIN-koden fra gavekortet eller prøvekortet nedenfor.";
 "redeem.title" = "Løs inn gavekort";

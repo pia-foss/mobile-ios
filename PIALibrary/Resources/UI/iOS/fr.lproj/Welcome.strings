@@ -1,15 +1,16 @@
-"agreement.message" = "Le paiement sera débité de votre compte Apple ID au moment de la confirmation de l'achat. L'abonnement se renouvelle automatiquement à moins qu'il ne soit annulé au moins 24 heures avant la fin de la période en cours. Votre compte sera débité du renouvellement dans les 24 heures précédant la fin de la période actuelle. Vous pouvez gérer et annuler vos abonnements en accédant aux paramètres du compte sur l'App Store après l'achat.";
+"agreement.message" = "Après l'essai gratuit de 7 jour, cet abonnement est renouvelé automatiquement pour %@, sauf s'il est annulé au moins 24 heures avant la fin de la période d'essai. Votre compte de l'identifiant Apple sera facturé pour le renouvellement 24 heures avant la fin de la période d'essai. Vous pouvez gérer et annuler vos abonnements en accédant aux paramètres de votre compte de l'App Store après l'achat. L'offre de l'essai de 7 jours est limité à une seule offre d'essai de 7 jours par utilisateur. Toute partie non utilisée d'une période d'essai (le cas échéant) sera abandonnée lorsque l'utilisateur achète une abonnement. Tous les prix comprennent les taxes locales applicables.\n\nL'abonnement signifie que vous acceptez les $1 et la $2.";
 "agreement.message.privacy" = "Politique de confidentialité";
 "agreement.message.tos" = "Conditions d'utilisation";
 "agreement.trials.message" = "Le paiement sera débité de votre compte Apple ID au moment de la confirmation de l'achat. L'abonnement se renouvelle automatiquement à moins qu'il ne soit annulé au moins 24 heures avant la fin de la période en cours. Votre compte sera débité du renouvellement dans les 24 heures précédant la fin de la période actuelle. Vous pouvez gérer et annuler vos abonnements en accédant aux paramètres du compte sur l'App Store après l'achat.\n\nCertains abonnements payants peuvent offrir un essai gratuit avant de débiter votre méthode de paiement. Si vous décidez de vous désabonner d'un abonnement payant avant que nous commencions à débiter votre méthode de paiement, annulez l'abonnement au moins 24 heures avant la fin de l'essai.\n\nLes essais gratuits ne sont disponibles que pour les nouveaux utilisateurs et sont à notre entière discrétion et si vous tentez de vous inscrire pour un autre essai gratuit, vous serez immédiatement débité des frais d'abonnement standards.\n\nNous nous réservons le droit de révoquer votre essai gratuit à tout moment.\n\nToute partie non utilisée de votre période d'essai gratuit sera abandonnée au moment de l'achat d'un abonnement.\n\nL'inscription constitue l'acceptation de ces termes et conditions.";
+"agreement.trials.monthly.plan" = "mois";
 "agreement.trials.title" = "Termes et conditions des essais gratuits";
-"camera.access.denied.message" = "Activez l'accès à l'appareil photo pour scanner les codes QR et utiliser ainsi les cartes cadeau.";
+"agreement.trials.yearly.plan" = "an";
 "camera.access.error.message" = "Votre appareil ne permet pas de scanner les codes QR. Veuillez utiliser un appareil doté d'un appareil photo.";
 "camera.access.error.title" = "Appareil photo indisponible";
 "gdpr.accept.button.title" = "Accepter et continuer";
-"gdpr.collect.data.description" = "Adresse e-mail dans le but de gérer le compte et de protéger des abus.\n\nDonnées de paiement dans le but de traiter les paiements comme cela est requis par nos processeurs de paiement tiers. Notez que nous n'enregistrons pas les détails complets de votre carte de crédit.";
+"gdpr.collect.data.description" = "Adresse e-mail dans le but de gérer le compte et de protéger des abus.";
 "gdpr.collect.data.title" = "Informations personnelles que nous collectons";
-"gdpr.usage.data.description" = "L'adresse e-mail est utilisée pour envoyer les informations d'abonnement, les confirmation de paiement, la correspondance avec le client, et les offres promotionnelles de Private Internet Access uniquement.\n\nLes données de paiement servent à gérer l'inscription, les paiements et les annulations du client.";
+"gdpr.usage.data.description" = "L'adresse e-mail est utilisée pour envoyer les informations d'abonnement, les confirmation de paiement, la correspondance avec le client, et les offres promotionnelles de Private Internet Access uniquement.";
 "gdpr.usage.data.title" = "Utilisation des informations personnelles que nous collectons";
 "getstarted.buttons.buyaccount" = "Acheter un compte";
 "iap.error.message.unavailable" = "Les serveurs Apple ne sont pas disponibles actuellement. Veuillez réessayer plus tard.";
@@ -19,10 +20,6 @@
 "login.error.unauthorized" = "Votre nom d'utilisateur ou mot de passe est incorrect.";
 "login.error.validation" = "Vous devez saisir un nom d'utilisateur et un mot de passe.";
 "login.password.placeholder" = "Mot de passe";
-"login.purchase.button" = "Acheter maintenant";
-"login.purchase.footer" = "Pas de compte ?";
-"login.redeem.button" = "Échangez maintenant";
-"login.redeem.footer" = "Vous avez une carte cadeau ou une carte d'essai ?";
 "login.restore.button" = "Vous n'avez pas reçu les détails de votre compte ?";
 "login.submit" = "CONNEXION";
 "login.title" = "Connectez-vous à votre compte";
@@ -37,6 +34,7 @@
 "purchase.confirm.plan" = "Vous achetez le forfait %@";
 "purchase.continue" = "Continuer";
 "purchase.email.placeholder" = "Adresse e-mail";
+"purchase.email.why" = "Nous avons besoin de votre e-mail pour envoyer votre nom d'utilisateur et votre mot de passe.";
 "purchase.error.connectivity.description" = "Nous n'arrivons pas à joindre Private Internet Access. Cela peut être dû à une connexion Internet de faible qualité ou parce que notre service est bloqué dans votre pays.";
 "purchase.error.connectivity.title" = "Échec de la connexion";
 "purchase.error.title" = "Acheter";
@@ -53,7 +51,6 @@
 "redeem.error.qrcode.invalid" = "Séquence de code QR invalide. Veuillez réessayer.";
 "redeem.error.title" = "Échanger";
 "redeem.giftcard.placeholder" = "Code PIN de la carte";
-"redeem.scanqr" = "Scanner le QR";
 "redeem.submit" = "ENVOYER";
 "redeem.subtitle" = "Veuillez saisir ci-dessous votre adresse e-mail et le code PIN à %lu chiffres de votre carte cadeau ou carte d'essai.";
 "redeem.title" = "Échanger carte cadeau";

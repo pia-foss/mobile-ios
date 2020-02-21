@@ -1,15 +1,16 @@
-"agreement.message" = "De betaling wordt bij de bevestiging van uw aankoop via uw Apple ID-account in rekening gebracht. Het abonnement wordt automatisch verlengd, tenzij het ten minste 24 uur voor het einde van de huidige periode wordt geannuleerd. De verlenging van uw account wordt binnen 24 uur voor het einde van de huidige periode in rekening gebracht. U kunt uw abonnementen beheren en annuleren door na de aankoop naar uw accountinstellingen in de App Store te gaan.\n\nAls u zich aanmeldt, gaat u akkoord met de $1 en het $2.";
+"agreement.message" = "Na de gratis proefperiode van 7 dagen wordt het abonnement automatisch verlengd voor %@, tenzij u het ten minste 24 uur voor het einde van de proefperiode annuleert. De kosten voor de verlenging worden binnen 24 uur voor het einde van de proefperiode via uw Apple ID-account in rekening gebracht. U kunt uw abonnementen beheren en annuleren door na de aankoop naar uw accountinstellingen in de App Store te gaan. De proefperiode van 7 dagen is beperkt tot één proefperiode van 7 dagen per gebruiker. Een eventueel ongebruikt deel van uw gratis proefperiode vervalt bij aankoop van een abonnement. Alle prijzen zijn inclusief lokale omzetbelasting, indien van toepassing.\n\nAls u zich aanmeldt, gaat u akkoord met de $1 en het $2.";
 "agreement.message.privacy" = "Privacybeleid";
 "agreement.message.tos" = "Servicevoorwaarden";
 "agreement.trials.message" = "De betaling wordt bij de bevestiging van uw aankoop via uw Apple ID-account in rekening gebracht. Het abonnement wordt automatisch verlengd, tenzij het ten minste 24 uur voor het einde van de huidige periode wordt geannuleerd. De verlenging van uw account wordt binnen 24 uur voor het einde van de huidige periode in rekening gebracht. U kunt uw abonnementen beheren en annuleren door na de aankoop naar uw accountinstellingen in de App Store te gaan.\n\nBepaalde betaalde abonnementen kunnen een gratis proefabonnement aanbieden voordat er kosten in rekening worden gebracht. Als u zich wilt afmelden voor een betaald abonnement voordat we kosten in rekening brengen, moet u het abonnement ten minste 24 uur voor het einde van de gratis proefperiode annuleren.\n\nGratis proefabonnementen zijn alleen beschikbaar voor nieuwe gebruikers. Als u zich aanmeldt voor een aanvullend gratis proefabonnement worden onmiddellijk de standaard abonnementskosten in rekening gebracht.\n\nWij behouden ons het recht voor om uw gratis proefabonnement te allen tijde in te trekken.\n\nEen eventueel ongebruikt deel van uw gratis proefperiode vervalt bij aankoop van een abonnement.\n\nAls u zich aanmeldt, gaat u akkoord met deze algemene voorwaarden.";
+"agreement.trials.monthly.plan" = "maand";
 "agreement.trials.title" = "Algemene voorwaarden gratis proefabonnementen";
-"camera.access.denied.message" = "Geef cameratoegang zodat we de QR-codes kunnen scannen en de cadeaubonnen kunnen inwisselen.";
+"agreement.trials.yearly.plan" = "jaar";
 "camera.access.error.message" = "Uw apparaat ondersteunt het scannen van QR-codes niet. Gebruik een apparaat met een camera, a.u.b.";
 "camera.access.error.title" = "Camera niet beschikbaar";
 "gdpr.accept.button.title" = "Akkoord en doorgaan";
-"gdpr.collect.data.description" = "E-mailadres voor accountbeheer en bescherming tegen misbruik.\n\nBetalingsgegevens voor het verwerken van betalingen zoals vereist door onze externe betalingsverwerkers. We slaan uw volledige creditcardgegevens niet op.";
+"gdpr.collect.data.description" = "E-mailadres voor accountbeheer en bescherming tegen misbruik.";
 "gdpr.collect.data.title" = "Persoonlijke informatie die we verzamelen";
-"gdpr.usage.data.description" = "E-mailadres wordt alleen gebruikt voor het verzenden van abonnementsinformatie, betalingsbevestigingen, correspondentie met klanten en promotionele aanbiedingen van Private Internet Access.\n\nBetalingsgegevens worden gebruikt om aanmeldingen, betalingen en annuleringen van klanten te beheren.";
+"gdpr.usage.data.description" = "E-mailadres wordt alleen gebruikt voor het verzenden van abonnementsinformatie, betalingsbevestigingen, correspondentie met klanten en promotionele aanbiedingen van Private Internet Access.";
 "gdpr.usage.data.title" = "Gebruik van de persoonlijke informatie die we verzamelen";
 "getstarted.buttons.buyaccount" = "Account kopen";
 "iap.error.message.unavailable" = "De Apple-servers zijn momenteel niet beschikbaar. Probeer het later opnieuw.";
@@ -19,10 +20,6 @@
 "login.error.unauthorized" = "Uw gebruikersnaam of wachtwoord is onjuist.";
 "login.error.validation" = "U moet een gebruikersnaam en wachtwoord invoeren.";
 "login.password.placeholder" = "Wachtwoord";
-"login.purchase.button" = "Koop nu";
-"login.purchase.footer" = "Heeft u geen account?";
-"login.redeem.button" = "Nu inwisselen";
-"login.redeem.footer" = "Heeft u een cadeaubon of een proefperiodekaart?";
 "login.restore.button" = "Geen accountgegevens ontvangen?";
 "login.submit" = "INLOGGEN";
 "login.title" = "Aanmelden bij uw account";
@@ -37,6 +34,7 @@
 "purchase.confirm.plan" = "U koop het %@-abonnement";
 "purchase.continue" = "Doorgaan";
 "purchase.email.placeholder" = "E-mailadres";
+"purchase.email.why" = "We hebben uw e-mailadres nodig om uw gebruikersnaam en wachtwoord te versturen.";
 "purchase.error.connectivity.description" = "We kunnen Private Internet Access niet bereiken. Dit kan komen door een slechte internetverbinding of omdat onze dienst in uw land is geblokkeerd.";
 "purchase.error.connectivity.title" = "Verbindingsfout";
 "purchase.error.title" = "Kopen";
@@ -53,7 +51,6 @@
 "redeem.error.qrcode.invalid" = "Ongeldige QR-code. Probeer het opnieuw.";
 "redeem.error.title" = "Inwisselen";
 "redeem.giftcard.placeholder" = "Pincode cadeaubon";
-"redeem.scanqr" = "QR scannen";
 "redeem.submit" = "VERSTUREN";
 "redeem.subtitle" = "Voer uw e-mailadres en de %lu-cijferige pincode van uw cadeaubon of proefperiodekaart hieronder in.";
 "redeem.title" = "Cadeaubon inwisselen";

@@ -282,17 +282,8 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             preconditionFailure()
         }
         webServices.logout { [weak self] (result, error) in
-            
-            guard let success = result else {
-                callback?(nil)
-                return
-            }
-
-            if success {
-                self?.cleanDatabase()
-                Macros.postNotification(.PIAAccountDidLogout)
-            }
-            
+            self?.cleanDatabase()
+            Macros.postNotification(.PIAAccountDidLogout)
             callback?(nil)
         }
     }

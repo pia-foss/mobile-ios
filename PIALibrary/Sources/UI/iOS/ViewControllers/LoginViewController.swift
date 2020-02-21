@@ -36,8 +36,11 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
     
     @IBOutlet private weak var buttonLogin: PIAButton!
     
+    @IBOutlet private weak var couldNotGetPlanButton: UIButton!
+
     var preset: Preset?
-    
+    private weak var delegate: PIAWelcomeViewControllerDelegate?
+
     var omitsSiblingLink = false
     
     weak var completionDelegate: WelcomeCompletionDelegate?
@@ -60,7 +63,7 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
         textUsername.text = preset.loginUsername
         textPassword.text = preset.loginPassword
         
-        styleLoginButton()
+        styleButtons()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +76,25 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
         scrollView.isScrollEnabled = (traitCollection.verticalSizeClass == .compact)
     }
     
+    public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let vc = segue.destination as? PIAWelcomeViewController else {
+            return
+        }
+        
+        vc.delegate = self.delegate
+        if let preset = preset {
+            vc.preset = preset
+        }
+        
+        switch segue.identifier  {
+        case StoryboardSegue.Welcome.restoreLoginPurchaseSegue.rawValue:
+            vc.preset.pages = .restore
+        default:
+            break
+        }
+        
+    }
     // MARK: Actions
     
     @IBAction private func logIn(_ sender: Any?) {
@@ -172,14 +194,17 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
         Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applyInput(textUsername)
         Theme.current.applyInput(textPassword)
+        Theme.current.applyButtonLabelMediumStyle(couldNotGetPlanButton)
     }
     
-    private func styleLoginButton() {
+    private func styleButtons() {
         buttonLogin.setRounded()
         buttonLogin.style(style: TextStyle.Buttons.piaGreenButton)
         buttonLogin.setTitle(L10n.Welcome.Login.submit.uppercased(),
                                for: [])
         buttonLogin.accessibilityIdentifier = "uitests.login.submit"
+        couldNotGetPlanButton.setTitle(L10n.Welcome.Login.Restore.button,
+                                       for: [])
     }
 
 }

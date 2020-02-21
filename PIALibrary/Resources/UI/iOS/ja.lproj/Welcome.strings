@@ -1,15 +1,16 @@
-"agreement.message" = "ご購入確定時にお使いのApple IDアカウント支払額が請求されます。サブスクリプションは現在の期間が終了する24時間前までにキャンセルされない限り自動的に更新されます。更新料は現在の期間終了前の24時間以内にお使いのアカウントに請求されます。サブスクリプションはご購入後にApp Storeのアカウント設定からいつでも管理およびキャンセルすることができます。\n\nサインアップすることで、$1と$2に同意したことになります。";
+"agreement.message" = "トライアル期間終了の少なくとも24時間前にキャンセルされない限り、7日間の無料トライアル後、この定期購読は自動的に%@で更新されます。更新料は、トライアル期間終了前の24時間以内にご利用のApple IDアカウントに請求されます。定期購読は、定期購読購入後にApp Storeアカウント設定から管理およびキャンセルすることができます。7日間のトライアルオファーは、ユーザー1人あたり1回の7日間トライアルに限られています。無料トライアルを利用した場合、無料トライアル期間の未使用分は、ユーザーが定期購読を購入した時点で無効となります。すべての料金には、適用可能な場合現地の消費税が含まれます。\n\nサインアップすることにより、$1および$2に同意したことになります。";
 "agreement.message.privacy" = "プライバシーポリシー";
 "agreement.message.tos" = "利用規約";
 "agreement.trials.message" = "ご購入確定時にお使いのApple IDアカウント支払額が請求されます。サブスクリプションは現在の期間が終了する24時間前までにキャンセルされない限り自動的に更新されます。更新料は現在の期間終了前の24時間以内にお使いのアカウントに請求されます。サブスクリプションはご購入後にApp Storeのアカウント設定からいつでも管理およびキャンセルすることができます。\n\n一部の有料サブスクリプションでは、ご希望の支払方法による請求が実施される前に無料トライアルが提供されている場合があります。ご選択の支払方法による請求が実施される前に有料サブスクリプションの解約をする場合は、無料トライアルが終了する24時間前までにサブスクリプションをキャンセルしてください。\n\n無料トライアルをご利用いただけるのは新規ユーザーのみとなり、無料トライアルを使用する目的で新たに追加のアカウントをサインアップした場合、弊社の裁量によって、通常のサブスクリプション料金が即時に請求されます。\n\n弊社は無料トライアル期間をいつでも無効にする権利を保持します。\n\nサブスクリプションご購入後、未使用分の無料トライアル期間は無効となります。\n\nサインアップすることで、$1と$2に同意したことになります。";
+"agreement.trials.monthly.plan" = "月";
 "agreement.trials.title" = "無料トライアル利用規約";
-"camera.access.denied.message" = "QRコードをスキャンし、ギフトカードを利用するには、カメラへのアクセスを許可してください。";
+"agreement.trials.yearly.plan" = "年";
 "camera.access.error.message" = "お使いのデバイスはQRコードのスキャンに対応していません。カメラが搭載されたデバイスをお使いください。";
 "camera.access.error.title" = "カメラが利用できません";
 "gdpr.accept.button.title" = "同意して続行する";
-"gdpr.collect.data.description" = "メールアドレスは、アカウント管理、および乱用からの保護を目的とします。\n\nお支払データは、弊社のサードパーティー支払い処理業者により義務付けられており、支払処理を目的とします。弊社はお客様のクレジットカードの完全な詳細情報を保管しないことにご留意ください。";
+"gdpr.collect.data.description" = "メールアドレスは、アカウント管理、および乱用からの保護を目的とします。";
 "gdpr.collect.data.title" = "弊社が収集する個人情報";
-"gdpr.usage.data.description" = "メールアドレスはサブスクリプション情報、お支払確認、お客様とのやり取り、およびPrivate Internet Accessのプロモーションオファーを送信するためにのみ使用されます。\n\nお支払データはお客様のサインアップ、お支払、およびキャンセルを管理するために使用されます。";
+"gdpr.usage.data.description" = "メールアドレスはサブスクリプション情報、お支払確認、お客様とのやり取り、およびPrivate Internet Accessのプロモーションオファーを送信するためにのみ使用されます。";
 "gdpr.usage.data.title" = "弊社により収集される個人情報の使用";
 "getstarted.buttons.buyaccount" = "アカウントを購入する";
 "iap.error.message.unavailable" = "Appleサーバーが現在ご利用いただけません。後でもう一度お試しください。";
@@ -19,10 +20,6 @@
 "login.error.unauthorized" = "ユーザー名またはパスワードが間違っています。";
 "login.error.validation" = "ユーザー名とパスワードを入力してください。";
 "login.password.placeholder" = "パスワード";
-"login.purchase.button" = "今すぐ購入";
-"login.purchase.footer" = "アカウントをお持ちでないですか？";
-"login.redeem.button" = "今すぐカードを引換え";
-"login.redeem.footer" = "ギフトカードまたはトライアルカードをお持ちですか？";
 "login.restore.button" = "アカウント詳細を受信しませんでしたか？";
 "login.submit" = "ログイン";
 "login.title" = "アカウントにサインイン";
@@ -37,6 +34,7 @@
 "purchase.confirm.plan" = "お客様は%@プランを購入しようとしています";
 "purchase.continue" = "続行";
 "purchase.email.placeholder" = "メールアドレス";
+"purchase.email.why" = "ユーザー名とパスワードを送信するためのメールアドレスを入力してください。";
 "purchase.error.connectivity.description" = "Private Internet Accessに接続できませんでした。インターネットの接続が不安定、もしくはお住まいの国で当社サービスがブロックされている可能性があります。";
 "purchase.error.connectivity.title" = "接続エラー";
 "purchase.error.title" = "購入";
@@ -53,7 +51,6 @@
 "redeem.error.qrcode.invalid" = "QRコードのシーケンスが無効です。もう一度お試しください。";
 "redeem.error.title" = "引換え";
 "redeem.giftcard.placeholder" = "ギフトカードのPIN";
-"redeem.scanqr" = "QRをスキャン";
 "redeem.submit" = "送信";
 "redeem.subtitle" = "メールアドレスと、以下のギフトカードまたはトライアルカードの%lu桁のPINを入力してください。";
 "redeem.title" = "ギフトカード引換え";
