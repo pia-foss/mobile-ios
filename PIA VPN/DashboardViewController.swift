@@ -108,6 +108,8 @@ class DashboardViewController: AutolayoutViewController {
     
         setupNavigationBarButtons()
         
+        AppPreferences.shared.wasLaunched = true
+        
         guard Client.providers.accountProvider.isLoggedIn else {
             presentLogin()
             AppPreferences.shared.todayWidgetVpnStatus = L10n.Today.Widget.login
@@ -167,7 +169,6 @@ class DashboardViewController: AutolayoutViewController {
     private func setupNavigationBarButtons() {
         
         guard AppPreferences.shared.wasLaunched,
-            !Flags.shared.alwaysShowsWalkthrough,
             Client.providers.accountProvider.isLoggedIn else {
             navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = nil
