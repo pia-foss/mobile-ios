@@ -226,22 +226,15 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
     public func generatedProtocol(withConfiguration configuration: VPNConfiguration) -> NEVPNProtocol {
         
         if #available(iOSApplicationExtension 12.0, *) {
-            var interface = InterfaceConfiguration(privateKey: Curve25519.generatePrivateKey())
-            interface.addresses = [IPAddressRange(from: String(format: "192.168.%d.%d/32", Int.random(in: 1 ... 10), Int.random(in: 1 ... 254)))!]
-            interface.dns = ["8.8.8.8", "8.8.4.4"].map { DNSServer(from: $0)! }
 
-            var peer = PeerConfiguration(publicKey: Curve25519.generatePublicKey(fromPrivateKey: Curve25519.generatePrivateKey()))
-            peer.endpoint = PIAWireguard.Endpoint(from: "blade1.madrid-rack404.nodes.gen4.ninja")
-            peer.allowedIPs = [IPAddressRange(from: "0.0.0.0/0")!]
+            let cfg = NETunnelProviderProtocol()
+            cfg.providerBundleIdentifier = bundleIdentifier
+            cfg.serverAddress = "https://blade1.tokyo-rack401.nodes.gen4.ninja"
+            cfg.username = Client.providers.accountProvider.publicUsername
+            
+            cfg.providerConfiguration = ["token": Client.providers.accountProvider.token]
 
-            let tunnelConfiguration = TunnelConfiguration(name: "pia-wg", interface: interface, peers: [peer])
-
-            let cfg = NETunnelProviderProtocol(tunnelConfiguration: tunnelConfiguration)
-            cfg?.providerBundleIdentifier = bundleIdentifier
-            cfg?.username = "db4a0ba4106ef94bf77420f341ba1b0197b224a5"
-            cfg?.passwordReference = "ec953684cd2431ef8a1067af0a8ac0f5e27d5f7c".data(using: .utf8)
-
-            return cfg!
+            return cfg
         } else {
             return NETunnelProviderProtocol()
         }
