@@ -122,16 +122,17 @@ class SettingsViewController: AutolayoutViewController {
     fileprivate static let AUTOMATIC_PORT: UInt16 = 0
 
     private enum Section: Int {
+        
         case connection
 
         case encryption
         
-        case ikeV2encryption
-
-        case applicationSettings
-        
         case smallPackets
+
+        case ikeV2encryption
         
+        case applicationSettings
+                
         case autoConnectSettings
 
         case contentBlocker
@@ -146,9 +147,9 @@ class SettingsViewController: AutolayoutViewController {
     private static let allSections: [Section] = [
         .connection,
         .encryption,
+        .smallPackets,
         .ikeV2encryption,
         .applicationSettings,
-        .smallPackets,
         .autoConnectSettings,
         .applicationInformation,
         .reset,
@@ -173,10 +174,9 @@ class SettingsViewController: AutolayoutViewController {
             .ikeV2EncryptionAlgorithm,
             .ikeV2IntegrityAlgorithm,
         ],
-        .applicationSettings: [], // dynamic
         .smallPackets: [
         ], // dynamic
-
+        .applicationSettings: [], // dynamic
         .autoConnectSettings: [
             .trustedNetworks
         ],
@@ -205,6 +205,7 @@ class SettingsViewController: AutolayoutViewController {
     private struct Cells {
         static let setting = "SettingCell"
         static let footer = "FooterCell"
+        static let header = "HeaderCell"
     }
     
     @IBOutlet private weak var tableView: UITableView!
@@ -280,6 +281,7 @@ class SettingsViewController: AutolayoutViewController {
 
         tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.estimatedSectionFooterHeight = 1.0
+        tableView.estimatedSectionHeaderHeight = 1.0
         switchPersistent.addTarget(self, action: #selector(togglePersistentConnection(_:)), for: .valueChanged)
         switchMACE.addTarget(self, action: #selector(toggleMACE(_:)), for: .valueChanged)
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
@@ -807,10 +809,36 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         return visibleSections.count
     }
 
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: Cells.header),
+            let label = cell.textLabel {
+            
+            label.style(style: TextStyle.textStyle9)
+            label.font = UIFont.mediumFontWith(size: 14.0)
+
+            switch visibleSections[section] {
+            case .connection:
+                label.text =  "VPN Settings".uppercased()
+
+            case .applicationSettings:
+                label.text =  "General Settings".uppercased()
+
+            default:
+                return nil
+            }
+            
+            return cell
+        }
+        return nil
+
+    }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch visibleSections[section] {
+
         case .connection:
-            return L10n.Settings.Connection.title
+            return nil
             
         case .encryption:
             return L10n.Settings.Encryption.title
@@ -819,7 +847,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             return L10n.Settings.Encryption.title
 
         case .applicationSettings:
-            return L10n.Settings.ApplicationSettings.title
+            return nil
            
         case .autoConnectSettings:
             return nil
