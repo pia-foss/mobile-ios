@@ -124,6 +124,7 @@ struct AppConstants {
                 }
 
                 servers.append(Server(
+                    serial: "",
                     name: name,
                     country: country,
                     hostname: hostname,

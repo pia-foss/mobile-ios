@@ -27,6 +27,7 @@ import SafariServices
 import SwiftyBeaver
 import Intents
 import IntentsUI
+import PIAWireguard
 
 private let log = SwiftyBeaver.self
 
@@ -244,6 +245,8 @@ class SettingsViewController: AutolayoutViewController {
 
     private var pendingOpenVPNConfiguration: OpenVPN.ConfigurationBuilder!
 
+    private var pendingWireguardVPNConfiguration: PIAWireguardConfiguration!
+
     private var pendingVPNAction: VPNAction?
 //    private var pendingVPNAction: VPNAction? {
 //        didSet {
@@ -268,15 +271,22 @@ class SettingsViewController: AutolayoutViewController {
         pendingPreferences = Client.preferences.editable()
 
         // XXX: fall back to default configuration (don't rely on client library)
+        
         guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration ??
             Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration else {
-
-            fatalError("No default VPN custom configuration provided for PIA protocol")
+            fatalError("No default VPN custom configuration provided for PIA OpenVPN protocol")
         }
+        
+        guard let currentWireguardVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration ??
+            Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration else {
+            fatalError("No default VPN custom configuration provided for PIA Wireguard protocol")
+        }
+        
         pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
         pendingHandshake = AppPreferences.shared.piaHandshake
         pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
-        
+        pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: [])
+
         validateDNSList()
 
         tableView.sectionFooterHeight = UITableView.automaticDimension
@@ -523,11 +533,15 @@ class SettingsViewController: AutolayoutViewController {
         guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration else {
             fatalError("No default VPN custom configuration provided for PIA protocol")
         }
+        guard let currentWireguardConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration else {
+            fatalError("No default VPN custom configuration provided for PIA protocol")
+        }
         AppPreferences.shared.reset()
         DNSList.shared.resetPlist()
         pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
         pendingHandshake = AppPreferences.shared.piaHandshake
         pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
+        pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: [])
 
         redisplaySettings()
         reportUpdatedPreferences()
@@ -736,13 +750,16 @@ class SettingsViewController: AutolayoutViewController {
         }
         visibleSections = sections
         
+        let dnsSettingsEnabled = Flags.shared.enablesDNSSettings
+
         if (pendingPreferences.vpnType == PIATunnelProfile.vpnType) {
-            
-            let dnsSettingsEnabled = Flags.shared.enablesDNSSettings
-            
             rowsBySection[.connection] = dnsSettingsEnabled ?
                 [.vpnProtocolSelection, .vpnSocket, .vpnPort, .vpnDns] :
                 [.vpnProtocolSelection, .vpnSocket, .vpnPort]
+        } else if (pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType) {
+            rowsBySection[.connection] = dnsSettingsEnabled ?
+                [.vpnProtocolSelection, .vpnDns] :
+                [.vpnProtocolSelection]
         } else {
             rowsBySection[.connection] = [
                 .vpnProtocolSelection
@@ -784,24 +801,39 @@ class SettingsViewController: AutolayoutViewController {
     
     ///Check if the current value of the DNS is valid. If not, reset to default PIA server
     private func validateDNSList() {
-        
-        if Flags.shared.enablesDNSSettings {
-            var isValid = false
-            for dns in DNSList.shared.dnsList {
-                for (_, value) in dns {
-                    if pendingOpenVPNConfiguration.dnsServers == value {
-                        isValid = true
-                        break
-                    }
-                }
+        if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+            if Flags.shared.enablesDNSSettings {
+                       var isValid = false
+                       for dns in DNSList.shared.dnsList {
+                           for (_, value) in dns {
+                               if pendingWireguardVPNConfiguration.customDNSServers == value {
+                                   isValid = true
+                                   break
+                               }
+                           }
+                       }
+                       if !isValid {
+                           pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: [])
+                       }
             }
-            
-            if !isValid {
-                pendingOpenVPNConfiguration.dnsServers = []
+        } else {
+            if Flags.shared.enablesDNSSettings {
+                       var isValid = false
+                       for dns in DNSList.shared.dnsList {
+                           for (_, value) in dns {
+                               if pendingOpenVPNConfiguration.dnsServers == value {
+                                   isValid = true
+                                   break
+                               }
+                           }
+                       }
+                       if !isValid {
+                           pendingOpenVPNConfiguration.dnsServers = []
+                       }
             }
         }
-        
     }
+    
 }
 
 extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -979,7 +1011,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .vpnDns:
             cell.textLabel?.text = SettingsViewController.DNS
             
-            let dnsValue = pendingOpenVPNConfiguration.dnsServers
+            var dnsValue = pendingOpenVPNConfiguration.dnsServers
+            if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+                dnsValue = pendingWireguardVPNConfiguration.customDNSServers
+            }
             for dns in DNSList.shared.dnsList {
                 for (key, value) in dns {
                     if dnsValue == value {
@@ -1233,7 +1268,11 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 }
             }
             
-            controller?.selectedOption = pendingOpenVPNConfiguration.dnsServers
+            if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+                controller?.selectedOption = pendingWireguardVPNConfiguration.customDNSServers
+            } else {
+                controller?.selectedOption = pendingOpenVPNConfiguration.dnsServers
+            }
             
         case .ikeV2EncryptionAlgorithm:
             guard Flags.shared.enablesEncryptionSettings else {
@@ -1458,7 +1497,12 @@ extension SettingsViewController: OptionsViewControllerDelegate {
 
         if setting == .vpnDns,
             let option = option as? String {
-            let dnsJoinedValue = pendingOpenVPNConfiguration.dnsServers?.joined()
+            
+            var dnsJoinedValue = pendingOpenVPNConfiguration.dnsServers?.joined()
+            if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+                dnsJoinedValue = pendingWireguardVPNConfiguration.customDNSServers.joined()
+            }
+
             for dns in DNSList.shared.dnsList {
                 for (key, value) in dns {
                     if key == option,
@@ -1551,7 +1595,11 @@ extension SettingsViewController: OptionsViewControllerDelegate {
                     for (key, value) in dns {
                         if key == option {
                             isFound = true
-                            pendingOpenVPNConfiguration.dnsServers = value
+                            if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+                                pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: value)
+                            } else {
+                                pendingOpenVPNConfiguration.dnsServers = value
+                            }
                             break
                         }
                     }
@@ -1608,15 +1656,22 @@ extension SettingsViewController: OptionsViewControllerDelegate {
     private func savePreferences() {
         log.debug("OpenVPN endpoints: \(pendingOpenVPNConfiguration.endpointProtocols ?? [])")
         
-        var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: pendingOpenVPNConfiguration.build())
-        if AppPreferences.shared.useSmallPackets {
-            builder.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
-        } else {
-            builder.mtu = AppConstants.OpenVPNPacketSize.defaultPacketSize
-        }
-        builder.shouldDebug = true
+        if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+            var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: pendingOpenVPNConfiguration.build())
+            
+            if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+                if AppPreferences.shared.useSmallPackets {
+                    builder.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
+                } else {
+                    builder.mtu = AppConstants.OpenVPNPacketSize.defaultPacketSize
+                }
+            }
+            builder.shouldDebug = true
 
-        pendingPreferences.setVPNCustomConfiguration(builder.build(), for: pendingPreferences.vpnType)
+            pendingPreferences.setVPNCustomConfiguration(builder.build(), for: pendingPreferences.vpnType)
+        } else {
+            pendingPreferences.setVPNCustomConfiguration(pendingWireguardVPNConfiguration, for: pendingPreferences.vpnType)
+        }
 
         redisplaySettings()
         reportUpdatedPreferences()

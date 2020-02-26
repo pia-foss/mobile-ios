@@ -25,6 +25,7 @@ import PIALibrary
 
 extension Server {
     static let automatic = Server(
+        serial: "",
         name: L10n.Global.automatic,
         country: "universal",
         hostname: "auto.bogus.domain",
