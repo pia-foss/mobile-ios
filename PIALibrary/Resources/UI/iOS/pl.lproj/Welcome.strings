@@ -1,13 +1,14 @@
-"agreement.message" = "Płatność zostanie pobrana z Twojego konta Apple ID z chwilą potwierdzenia zakupu. Subskrypcja odnawia się automatycznie, chyba że zostanie anulowana co najmniej 24 godziny przed końcem bieżącego okresu rozliczeniowego. Opłata za odnowienie subskrypcji  zostanie pobrana w ciągu 24 godzin przed końcem bieżącego okresu. Możesz zarządzać subskrypcjami i je anulować, przechodząc do ustawień konta w App Store po dokonaniu zakupu.\n\nRejestracja oznacza akceptację kwoty  $1 i $2.";
+"agreement.message" = "Po 7 dniach bezpłatnego okresu próbnego ta subskrypcja odnowi się automatycznie na %@, jeżeli nie zostanie anulowana co najmniej 24 godziny przed końcem okresu próbnego. Twoje konto Apple ID zostanie obciążone opłatą za odnowienie w ciągu 24 godzin przed końcem okresu próbnego. Możesz zarządzać swoimi subskrypcjami i je  anulować, wchodząc po zakupie w ustawienia swojego konta w  App Store  Oferta 7-dniowego okresu próbnego jest ograniczona –  każdemu użytkownikowi przysługuje jeden 7-dniowy okres próbny. Każda niewykorzystana część bezpłatnego okresu próbnego, jeśli zostanie zaoferowany, przepada wraz zakupem subskrypcji przez użytkownika. Wszystkie ceny zawierają obowiązujące lokalne podatki obrotowe.\n\nRejestracja oznacza akceptację artykułów. $1 i $2.";
 "agreement.message.privacy" = "Zasady ochrony prywatności";
 "agreement.message.tos" = "Warunki użytkowania";
 "agreement.trials.message" = "Płatność zostanie pobrana z Twojego konta Apple ID z chwilą potwierdzenia zakupu. Subskrypcja odnawia się automatycznie, chyba że zostanie anulowana co najmniej 24 godziny przed końcem bieżącego okresu rozliczeniowego. Opłata za odnowienie subskrypcji  zostanie pobrana w ciągu 24 godzin przed końcem bieżącego okresu. Możesz zarządzać subskrypcjami i je anulować, przechodząc do ustawień konta w App Store po dokonaniu zakupu.\n\nCzęść płatnych Subskrypcji może obejmować bezpłatną wersję próbną, z której możesz skorzystać przed naliczeniem opłaty. Jeśli postanowisz zrezygnować z płatnej subskrypcji przed rozpoczęciem naliczania opłat zgodnie z wybraną metodą płatności, anuluj subskrypcję co najmniej 24 godziny przed zakończeniem bezpłatnej wersji próbnej.\n\nBezpłatne wersje próbne są dostępne tylko dla nowych użytkowników i są przyznawane wyłącznie według naszego uznania, a w przypadku próby zarejestrowania w celu uzyskania dodatkowej bezpłatnej wersji próbnej, zostaniesz natychmiast obciążony standardową opłatą subskrypcyjną.\n\nRejestracja oznacza akceptację niniejszego regulaminu.";
+"agreement.trials.monthly.plan" = "miesiąc";
 "agreement.trials.title" = "Regulamin korzystania z bezpłatnej wersji próbnej";
-"camera.access.denied.message" = "Zezwól na dostęp do aparatu, aby skanować kody QR i korzystać z kart upominkowych.";
+"agreement.trials.yearly.plan" = "rok";
 "camera.access.error.message" = "Twoje urządzenie nie obsługuje skanowania kodów QR. Użyj urządzenia z aparatem.";
 "camera.access.error.title" = "Aparat nie dostępny";
 "gdpr.accept.button.title" = "Zaakceptuj i kontynuuj";
-"gdpr.collect.data.description" = "Adres e-mail do zarządzania kontem i ochrony przed nadużyciami. \n\nDane do płatności wymagane do przetwarzania płatności przez zewnętrzne firmy zajmujące się przetwarzaniem płatności. Proszę pamiętać, że nie przechowujemy pełnych informacji o Państwa karcie kredytowej.";
+"gdpr.collect.data.description" = "Adres e-mail do zarządzania kontem i ochrony przed nadużyciami.";
 "gdpr.collect.data.title" = "Zbierane przez dane asobowe";
 "gdpr.usage.data.description" = "Adres e-mail; używany go do wysyłania informacji o subskrypcji, potwierdzeń płatności, korespondencji z klientami i wysyłania ofert promocyjnych wyłącznie Private Internet Access";
 "gdpr.usage.data.title" = "Sposoby wykorzystania zbieranych przez nas danych osobowych";
@@ -19,10 +20,6 @@
 "login.error.unauthorized" = "Twoja nazwa użytkownika i hasło są nieprawidłowe.";
 "login.error.validation" = "Musisz podać nazwę użytkownika i hasło.";
 "login.password.placeholder" = "Hasło";
-"login.purchase.button" = "Kup teraz";
-"login.purchase.footer" = "Nie masz jeszcze konta?";
-"login.redeem.button" = "Wykorzystaj teraz";
-"login.redeem.footer" = "Masz kartę podarunkową lub kartę próbną?";
 "login.restore.button" = "Nie dostałeś(-aś) Danych swojego konta?";
 "login.submit" = "ZALOGUJ";
 "login.title" = "Zaloguj się na konto";
@@ -37,6 +34,7 @@
 "purchase.confirm.plan" = "Kupujesz abonament %@";
 "purchase.continue" = "Kontynuuj";
 "purchase.email.placeholder" = "Adres e-mail";
+"purchase.email.why" = "Twój e-mail jest nam potrzebny do przesłania Ci nazwy użytkownika i hasła,";
 "purchase.error.connectivity.description" = "Nie można połączyć z Private Internet Access. Może to być spowodowane słabym połączeniem z internetem lub nasza usługa może być zablokowana w Twoim kraju.";
 "purchase.error.connectivity.title" = "Błąd połączenia";
 "purchase.error.title" = "Zakup";
@@ -53,7 +51,6 @@
 "redeem.error.qrcode.invalid" = "Nieprawidłowa sekwencja kodu QR. Spróbuj ponownie.";
 "redeem.error.title" = "Wykorzystaj";
 "redeem.giftcard.placeholder" = "PIN karty upominkowej";
-"redeem.scanqr" = "Zeskanuj kod QR";
 "redeem.submit" = "PRZEŚLIJ";
 "redeem.subtitle" = "Wpisz swój adres e-mail oraz %lu-cyfrowy PIN z karty podarunkowej lub karty próbnej poniżej.";
 "redeem.title" = "Wykorzystaj kartę podarunkową";

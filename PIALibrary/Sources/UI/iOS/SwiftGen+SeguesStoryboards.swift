@@ -24,13 +24,13 @@ internal enum StoryboardSegue {
     case loginAccountSegue = "LoginAccountSegue"
     case presentGDPRTermsSegue = "PresentGDPRTermsSegue"
     case purchaseVPNPlanSegue = "PurchaseVPNPlanSegue"
+    case restoreLoginPurchaseSegue = "RestoreLoginPurchaseSegue"
     case restorePurchaseSegue = "RestorePurchaseSegue"
     case showTermsAndConditionsSegue = "ShowTermsAndConditionsSegue"
-    case signupQRCameraScannerSegue = "SignupQRCameraScannerSegue"
     case signupViaPurchaseSegue = "SignupViaPurchaseSegue"
     case signupViaRecoverSegue = "SignupViaRecoverSegue"
-    case signupViaRedeemSegue = "SignupViaRedeemSegue"
     case signupViaRestoreSegue = "SignupViaRestoreSegue"
+    case subscribeNowVPNPlanSegue = "SubscribeNowVPNPlanSegue"
     case viewMoreVPNPlansSegue = "ViewMoreVPNPlansSegue"
   }
 }

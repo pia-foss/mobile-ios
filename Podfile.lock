@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (4.8.1)
   - DynamicBlurView (3.0.1)
+  - FXPageControl (1.5)
   - Gloss (2.1.0)
   - lottie-ios (3.0.3)
   - OpenSSL-Apple (1.1.1d.5a)
@@ -32,6 +33,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4)
+  - FXPageControl
   - Gloss (~> 2)
   - lottie-ios
   - PIAWireguard (from `/Users/ueshiba/Projects/PIA/PIAWireguard`)
@@ -45,6 +47,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - DynamicBlurView
+    - FXPageControl
     - Gloss
     - lottie-ios
     - OpenSSL-Apple
@@ -69,6 +72,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
   DynamicBlurView: b1df5415f9bd31897549e5d7077e5ec120a4d636
+  FXPageControl: 97620412515365d10a3282ec0660f49f6401a8f0
   Gloss: 13ab6b4b0ff4cb2448466edc957479b1bccea8ba
   lottie-ios: 06e0b54aab85ba128e332687d7f4ac4861a7a7ae
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
@@ -80,6 +84,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
 
-PODFILE CHECKSUM: 6c1a2eea2e9f871398d147405a981d26ab3f0123
+PODFILE CHECKSUM: 62df8fef13bf55237e8f3aefb550c71393e9c62c
 
 COCOAPODS: 1.7.5

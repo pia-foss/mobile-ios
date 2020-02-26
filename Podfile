@@ -12,6 +12,7 @@ abstract_target 'PIALibrary' do
     pod 'ReachabilitySwift'
     pod 'SwiftEntryKit', '0.7.2'
     pod 'lottie-ios'
+    pod 'FXPageControl'
     pod 'PopupDialog'
     pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :commit => 'd19b9de'
     pod 'PIAWireguard', :path => "/Users/ueshiba/Projects/PIA/PIAWireguard"

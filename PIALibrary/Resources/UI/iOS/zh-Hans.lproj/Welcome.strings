@@ -1,15 +1,16 @@
-"agreement.message" = "确认购买后，将从您的 Apple ID 账户中收取款项。除非在当前使用期结束前至少提前 24 小时取消，否则会自动续订。您的账户将在当前使用期结束前 24 小时内收取续订费用。您可以在购买后前往 App Store 上的账户设置来管理和取消订阅。\n\n注册即表示接受 $1 和 $2。";
+"agreement.message" = "免费试用 7 天后，除非在试用期结束前至少提前 24 小时取消，否则此订阅将自动续订 ％@。您的 Apple ID 账户将在试用期结束前 24 小时内收取续订费用。您可以在购买后前往 App Store 上的账户设置来管理和取消订阅。每个用户仅可享受一次 7 天试用优惠。免费试用期的任何未使用部分（如果提供）将在用户购买订阅时失效。所有价格均包含适用的当地营业税。\n\n注册即表示接受$1和$2。";
 "agreement.message.privacy" = "隐私政策";
 "agreement.message.tos" = "服务条款";
 "agreement.trials.message" = "确认购买后，将从您的 Apple ID 账户中收取款项。除非在当前使用期结束前至少提前 24 小时取消，否则会自动续订。您的账户将在当前使用期结束前 24 小时内收取续订费用。您可以在购买后前往 App Store 上的账户设置来管理和取消订阅。\n\n某些“付费订阅”可能会在向您收取款项之前先提供免费试用。如果您在我们开始收取款项之前决定取消订阅“付费订阅”，请在免费试用结束前至少提前 24 小时取消订阅。\n\n免费试用仅适用于新用户，并由我们自行决定，如果您尝试注册额外的免费试用，您将被立即收取标准订阅费。\n\n我们有权随时撤销您的免费试用。\n\n免费试用期的任何未使用部分将在购买订阅时取消。\n\n注册即表示接受上述条款和条件。";
+"agreement.trials.monthly.plan" = "月";
 "agreement.trials.title" = "免费试用条款和条件";
-"camera.access.denied.message" = "启用相机访问权限，以便您扫描二维码，兑换礼品卡。";
+"agreement.trials.yearly.plan" = "年";
 "camera.access.error.message" = "您的设备不支持二维码扫描。请使用附带摄像头的设备。";
 "camera.access.error.title" = "相机不可用";
 "gdpr.accept.button.title" = "同意并继续";
-"gdpr.collect.data.description" = "用于账户管理和防止滥用的电子邮件地址。\n\n用于处理第三方付款处理商所要求付款的付款数据。请注意，我们不会保存您的完整信用卡详情。";
+"gdpr.collect.data.description" = "用于账户管理和防止滥用的电子邮件地址。";
 "gdpr.collect.data.title" = "我们收集的个人信息";
-"gdpr.usage.data.description" = "电子邮件地址仅用于发送订阅信息、付款确认、客户通信以及 Private Internet Access 促销优惠。\n\n付款数据用于管理客户注册、付款和取消。";
+"gdpr.usage.data.description" = "电子邮件地址仅用于发送订阅信息、付款确认、客户通信以及 Private Internet Access 促销优惠。";
 "gdpr.usage.data.title" = "我们收集的个人信息的使用方式";
 "getstarted.buttons.buyaccount" = "购买账户";
 "iap.error.message.unavailable" = "Apple 服务器目前不可用。请稍后重试。";
@@ -19,10 +20,6 @@
 "login.error.unauthorized" = "您的用户名或密码不正确。";
 "login.error.validation" = "您必须输入用户名和密码。";
 "login.password.placeholder" = "密码";
-"login.purchase.button" = "立即购买";
-"login.purchase.footer" = "还没有账户？";
-"login.redeem.button" = "立刻兑换";
-"login.redeem.footer" = "您有礼品卡或试用卡？";
 "login.restore.button" = "没有收到账户详情？";
 "login.submit" = "登录";
 "login.title" = "登录到您的帐户";
@@ -37,6 +34,7 @@
 "purchase.confirm.plan" = "您正在购买 %@ 套餐";
 "purchase.continue" = "继续";
 "purchase.email.placeholder" = "电子邮件地址";
+"purchase.email.why" = "我们需要您的电子邮件以发送您的用户名和密码。";
 "purchase.error.connectivity.description" = "我们无法接入Private Internet Access。原因可能是互联网连接不良或者我们的服务在您的国家遭到屏蔽。";
 "purchase.error.connectivity.title" = "连接失败";
 "purchase.error.title" = "购买";
@@ -53,7 +51,6 @@
 "redeem.error.qrcode.invalid" = "二维码序列无效。请重试。";
 "redeem.error.title" = "兑换";
 "redeem.giftcard.placeholder" = "礼品卡 PIN";
-"redeem.scanqr" = "扫描二维码";
 "redeem.submit" = "提交";
 "redeem.subtitle" = "请输入您的电子邮箱地址以及礼品卡或试用卡上的%lu位数字PIN。";
 "redeem.title" = "兑换礼品卡";

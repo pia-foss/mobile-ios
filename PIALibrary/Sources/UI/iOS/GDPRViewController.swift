@@ -34,7 +34,6 @@ class GDPRViewController: AutolayoutViewController {
 
     @IBOutlet private weak var labelCollectTitle: UILabel!
     @IBOutlet private weak var labelCollectDescription: UILabel!
-    @IBOutlet private weak var labelUseDataTitle: UILabel!
     @IBOutlet private weak var labelUseDataDescription: UILabel!
 
     @IBOutlet private weak var acceptButton: PIAButton!
@@ -47,7 +46,6 @@ class GDPRViewController: AutolayoutViewController {
         
         self.labelCollectTitle.text = L10n.Welcome.Gdpr.Collect.Data.title
         self.labelCollectDescription.text = L10n.Welcome.Gdpr.Collect.Data.description
-        self.labelUseDataTitle.text = L10n.Welcome.Gdpr.Usage.Data.title
         self.labelUseDataDescription.text = L10n.Welcome.Gdpr.Usage.Data.description
         self.acceptButton.setTitle(L10n.Welcome.Gdpr.Accept.Button.title, for: [])
     }
@@ -58,7 +56,6 @@ class GDPRViewController: AutolayoutViewController {
         super.viewShouldRestyle()
         
         Theme.current.applyTitle(labelCollectTitle, appearance: .dark)
-        Theme.current.applyTitle(labelUseDataTitle, appearance: .dark)
         Theme.current.applySubtitle(labelCollectDescription)
         Theme.current.applySubtitle(labelUseDataDescription)
 

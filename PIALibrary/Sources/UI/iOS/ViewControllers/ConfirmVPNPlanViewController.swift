@@ -68,9 +68,16 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
 
         labelTitle.text = L10n.Welcome.Purchase.Confirm.Form.email
         let plan = allPlans[planIndex]
-        labelSubtitle.text = L10n.Welcome.Purchase.Confirm.plan(plan.title.lowercased())
+        labelSubtitle.text = L10n.Welcome.Purchase.Email.why
+        
+        var price = ""
+        for plan in allPlans {
+            if plan.plan == .yearly {
+                price = plan.priceString
+            }
+        }
         textAgreement.attributedText = Theme.current.agreementText(
-            withMessage: L10n.Welcome.Agreement.message,
+            withMessage: L10n.Welcome.Agreement.message(price),
             tos: L10n.Welcome.Agreement.Message.tos,
             tosUrl: Client.configuration.tosUrl,
             privacy: L10n.Welcome.Agreement.Message.privacy,

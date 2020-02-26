@@ -28,9 +28,11 @@ internal enum StoryboardScene {
     
     internal static let purchaseTrialViewController = SceneType<PIALibrary.PurchaseTrialViewController>(storyboard: Welcome.self, identifier: "PurchaseTrialViewController")
 
-    internal static let redeemViewController = SceneType<PIALibrary.RedeemViewController>(storyboard: Welcome.self, identifier: "RedeemViewController")
     internal static let restoreViewController = SceneType<PIALibrary.RestoreSignupViewController>(storyboard: Welcome.self, identifier: "RestoreSignupViewController")
-  }
+      
+    internal static let confirmPlanViewController = SceneType<PIALibrary.ConfirmVPNPlanViewController>(storyboard: Welcome.self, identifier: "ConfirmVPNPlanViewController")
+
+    }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
 

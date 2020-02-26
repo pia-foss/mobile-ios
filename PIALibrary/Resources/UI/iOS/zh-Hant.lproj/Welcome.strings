@@ -1,15 +1,16 @@
-"agreement.message" = "確認購買後，系統將從您的 Apple ID 帳號收取費用。除非您在目前訂閱期間結束前至少 24 小時取消訂閱，否則訂閱將自動續訂。在目前期間結束前 24 小時內，將從您的帳號收取續訂費用。您可在購買後，前往 App Store 的帳號設定管理和取消您的訂閱。\n\n註冊即代表您同意$1及$2。";
+"agreement.message" = "免費試用 7 天後，除非您在試用期結束前至少 24 小時取消訂閱，否則系統將自動續訂 %@，並在試用期結束前的 24 小時內，從您的 Apple ID 帳號收取續訂費用。購買後，您可以前往 App Store 的帳號設定管理或取消您的訂閱方案。每位用戶只有一次 7 天試用的機會。若您的免費試用有任何未使用的期間，將會在購買訂閱時收回。所有價格已包括適用於當地的營業稅。\n\n若註冊，即代表您已接受 $1 與 $2。";
 "agreement.message.privacy" = "隱私權政策";
 "agreement.message.tos" = "服務條款";
 "agreement.trials.message" = "確認購買後，系統將從您的 Apple ID 帳號收取費用。除非您在目前訂閱期間結束前至少 24 小時取消訂閱，否則訂閱將自動續訂。在目前期間結束前 24 小時內，將從您的帳號收取續訂費用。您可在購買後，前往 App Store 的帳號設定管理和取消您的訂閱。\n\n「特定付費訂閱」可能在以您的付費方式收費前，提供免費試用。若您在我們開始以您的付費方式收費前，決定取消「付費訂閱」，請在免費試用結束前至少 24 小時取消訂閱。\n\n只有新使用者才享有免費試用的資格，且我們擁有唯一決定權。若您試圖再次註冊免費試用，我們會立即以「標準訂閱費用」向您收費。\n\n我們保留隨時解除您免費試用的權利。\n\n若您的免費試用有任何未使用的期間，將會在購買訂閱時收回。\n\n若註冊即代表您接受此條款與條件。";
+"agreement.trials.monthly.plan" = "月";
 "agreement.trials.title" = "免費試用條款與條件";
-"camera.access.denied.message" = "請授予相機存取權，以掃描 QR 碼並兌換禮品卡。";
+"agreement.trials.yearly.plan" = "年";
 "camera.access.error.message" = "您的裝置不支援掃描 QR 碼。請使用附有相機的裝置。";
 "camera.access.error.title" = "無法使用相機";
 "gdpr.accept.button.title" = "同意並繼續";
-"gdpr.collect.data.description" = "電子郵件地址用於管理帳戶及防止濫用。\n\n付款資料用於按照第三方付款處理商的要求處理付款。請注意，我們絕不儲存完整信用卡資料。";
+"gdpr.collect.data.description" = "電子郵件地址用於管理帳戶及防止濫用。";
 "gdpr.collect.data.title" = "我們收集的個人資料";
-"gdpr.usage.data.description" = "電子郵件地址僅用於傳送訂閱資訊、付款確認函、客戶通訊及 Private Internet Access 的促銷優惠。\n\n付款資料用於管理客戶註冊、付款及取消事宜。";
+"gdpr.usage.data.description" = "電子郵件地址僅用於傳送訂閱資訊、付款確認函、客戶通訊及 Private Internet Access 的促銷優惠。";
 "gdpr.usage.data.title" = "我們收集個人資料的用途";
 "getstarted.buttons.buyaccount" = "購買帳戶";
 "iap.error.message.unavailable" = "Apple 伺服器目前無法使用，請稍後再試。";
@@ -19,10 +20,6 @@
 "login.error.unauthorized" = "您的使用者名稱或密碼不正確。";
 "login.error.validation" = "您必須輸入使用者名稱及密碼。";
 "login.password.placeholder" = "密碼";
-"login.purchase.button" = "立即購買";
-"login.purchase.footer" = "沒有帳號？";
-"login.redeem.button" = "立刻兌換";
-"login.redeem.footer" = "有禮品卡或試用卡嗎？";
 "login.restore.button" = "收不到帳戶資料？";
 "login.submit" = "登入";
 "login.title" = "登入帳戶";
@@ -37,6 +34,7 @@
 "purchase.confirm.plan" = "您正在購買 %@ 方案";
 "purchase.continue" = "繼續";
 "purchase.email.placeholder" = "電子郵件地址";
+"purchase.email.why" = "請提供電子郵件以便我們傳送使用者名稱及密碼。";
 "purchase.error.connectivity.description" = "我們無法連線至 Private Internet Access。這可能是因為您的網路連線狀態不佳，或我們的服務在您的國家遭到封鎖。";
 "purchase.error.connectivity.title" = "連線失敗";
 "purchase.error.title" = "購買";
@@ -53,7 +51,6 @@
 "redeem.error.qrcode.invalid" = "QR 碼序號無效，請重試。";
 "redeem.error.title" = "兌換";
 "redeem.giftcard.placeholder" = "禮品卡 PIN 碼";
-"redeem.scanqr" = "掃描 QR 碼";
 "redeem.submit" = "提交";
 "redeem.subtitle" = "於下方輸入您的電子郵件地址及禮品卡或試用卡並的 %lu 位數 PIN 碼。";
 "redeem.title" = "兌換禮品卡";

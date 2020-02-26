@@ -1,15 +1,16 @@
-"agreement.message" = "Se realizará un cobro en tu cuenta de Apple ID en el momento de confirmar la compra. Las suscripciones se renuevan automáticamente a menos que se cancelen como mínimo 24 horas antes de la finalización del periodo actual. Se cobrará la cantidad de la renovación en un plazo de 24 horas antes de la finalización del período actual. Tu mismo podrás gestionar y cancelar las suscripciones en los ajustes de App Store después de la compra. \n\nSi te registras, aceptas los $1 y la $2.";
+"agreement.message" = "Después de los 7 días de prueba gratuita, esta suscripción se renueva automáticamente por %@ a menos que se cancele al menos 24 horas antes del final del período de prueba. Se cobrará la renovación en tu cuenta de ID de Apple en un plazo de 24 horas antes de que finalice el periodo de prueba. Puedes gestionar y cancelar tus suscripciones accediendo a los ajustes de tu cuenta de App Store después de la compra. La oferta de prueba de 7 días se limita a una oferta de prueba de 7 días por usuario. Cualquier parte no utilizada de un período de prueba gratuito, si se ofrece, se perderá cuando el usuario compre una suscripción. Todos los precios incluyen los impuestos de venta locales aplicables.\n\nSi te registras, aceptas los $1 y la $2.";
 "agreement.message.privacy" = "Política de privacidad";
 "agreement.message.tos" = "Términos de servicio";
 "agreement.trials.message" = "Se realizará un cobro en tu cuenta de Apple ID en el momento de confirmar la compra. Las suscripciones se renuevan automáticamente a menos que se cancelen como mínimo 24 horas antes de la finalización del periodo actual. Se cobrará la cantidad de la renovación en un plazo de 24 horas antes de la finalización del período actual. Tu mismo podrás gestionar y cancelar las suscripciones en los ajustes de App Store después de la compra. \n\nAlgunas suscripciones de pago pueden ofrecer una prueba gratuita antes de realizar cobros según tu método de pago. Si decides darte de baja de una suscripción de pago antes de que comencemos a cobrar tu método de pago, cancela la suscripción al menos 24 horas antes de que finalice la prueba gratuita.\n\nLas pruebas gratuitas solo están disponibles para nuevos usuarios y quedan a nuestra entera discreción. Si intentas registrarte para obtener una prueba gratuita adicional, se te cobrará de inmediato la tarifa de suscripción estándar.\n\nNos reservamos el derecho de revocar tu prueba gratuita en cualquier momento.\n\nLas secciones sin usar del periodo de prueba gratuito se perderán si el usuario compra una suscripción.\n\nSi te registras, aceptas estos términos y condiciones.";
+"agreement.trials.monthly.plan" = "mes";
 "agreement.trials.title" = "Términos y condiciones de la prueba gratuita.";
-"camera.access.denied.message" = "Permita el acceso a la cámara para que puedas escanear códigos QR para canjear una tarjeta de regalo";
+"agreement.trials.yearly.plan" = "año";
 "camera.access.error.message" = "Su dispositivo no es compatible con el escaneo de códigos QR. Use un dispositivo con cámara.";
 "camera.access.error.title" = "La cámara no está disponible";
 "gdpr.accept.button.title" = "Aceptar y continuar";
-"gdpr.collect.data.description" = "Dirección de correo electrónico con fines de gestión de cuenta y protección frente a abusos.\n\nDatos de pago con fines de procesamiento de pagos, tal y como requieren los procesadores de pagos de nuestros colaboradores. Ten en cuenta que no guardamos los datos completos de la tarjeta de crédito.";
+"gdpr.collect.data.description" = "Dirección de correo electrónico con fines de gestión de cuenta y protección frente a abusos.";
 "gdpr.collect.data.title" = "Información personal que recopilamos";
-"gdpr.usage.data.description" = "La dirección de correo electrónico solo se usa para enviar información de suscripción, confirmaciones de pago, correspondencia al cliente y ofertas promocionales de Private Internet Access.\n\nLos datos de pago se usan para gestionar los registros de clientes, pagos y cancelaciones.";
+"gdpr.usage.data.description" = "La dirección de correo electrónico solo se usa para enviar información de suscripción, confirmaciones de pago, correspondencia al cliente y ofertas promocionales de Private Internet Access.";
 "gdpr.usage.data.title" = "Usos de la información personal que recopilamos";
 "getstarted.buttons.buyaccount" = "Comprar cuenta";
 "iap.error.message.unavailable" = "Actualmente, los servidores de Apple no están disponibles. Por favor, inténtalo de nuevo más tarde.";
@@ -19,10 +20,6 @@
 "login.error.unauthorized" = "Tu nombre de usuario o contraseña son incorrectos.";
 "login.error.validation" = "Debe ingresar un nombre de usuario y una contraseña.";
 "login.password.placeholder" = "Contraseña ";
-"login.purchase.button" = "Comprar ahora";
-"login.purchase.footer" = "¿No tienes una cuenta?";
-"login.redeem.button" = "Canjea ahora";
-"login.redeem.footer" = "¿Tienes una tarjeta de regalo o de prueba?";
 "login.restore.button" = "¿No has recibido los detalles de la cuenta?";
 "login.submit" = "INICIAR SESIÓN";
 "login.title" = "Inicia sesión en tu cuenta";
@@ -37,6 +34,7 @@
 "purchase.confirm.plan" = "Estás comprando el plan %@.";
 "purchase.continue" = "Continuar";
 "purchase.email.placeholder" = "Dirección de correo electrónico";
+"purchase.email.why" = "Necesitamos tu dirección de correo electrónico para enviar tu nombre de usuario y tu contraseña.";
 "purchase.error.connectivity.description" = "No pudimos localizar a Private Internet Access. Esto puede ser debido a una mala conexión con Internet o a que nuestro servicio está bloqueado en su país.";
 "purchase.error.connectivity.title" = "Falla en la conexión";
 "purchase.error.title" = "Comprar";
@@ -53,7 +51,6 @@
 "redeem.error.qrcode.invalid" = "La secuencia del código QR no es válida. Inténtelo de nuevo.";
 "redeem.error.title" = "Canjear";
 "redeem.giftcard.placeholder" = "PIN de tarjeta regalo";
-"redeem.scanqr" = "Escanear QR";
 "redeem.submit" = "ENVIAR";
 "redeem.subtitle" = "Escribe abajo tu dirección de correo electrónico y el PIN de %lu dígitos de tu tarjeta de regalo o tarjeta de prueba.";
 "redeem.title" = "Canjear tarjeta de regalo";

@@ -22,6 +22,7 @@
 
 import Foundation
 import UIKit
+import FXPageControl
 
 /// Defines the look and feel of the client UI.
 public class Theme {
@@ -312,6 +313,14 @@ public class Theme {
         }
     }
     
+    public func applyButtonLabelMediumStyle(_ button: UIButton) {
+        if palette.appearance == Appearance.light {
+            button.style(style: TextStyle.textStyle9Medium)
+        } else {
+            button.style(style: TextStyle.textStyle6Medium)
+        }
+    }
+    
     public func applyVersionNumberStyle(_ label: UILabel) {
         label.style(style: TextStyle.versionNumberStyle)
     }
@@ -449,6 +458,11 @@ public class Theme {
     }
     
     /// :nodoc:
+    public func applyActivityIndicator(_ activityIndicator: UIActivityIndicatorView) {
+        activityIndicator.color = palette.appearance == Appearance.light ? .piaGreen : .piaWhite
+    }
+    
+    /// :nodoc:
     public func applyActionButton(_ button: ActivityButton) {
         button.font = typeface.mediumFont(size: 15.0)
         button.backgroundColor = palette.emphasis
@@ -570,6 +584,20 @@ public class Theme {
     public func applyLinkAttributes(_ textView: UITextView) {
         textView.tintColor = palette.lineColor
     }
+    
+    /// :nodoc:
+    public func applyScrollableMap(_ imageView: UIImageView) {
+        imageView.image = palette.appearance == .dark ?
+            Asset.scrollableMapDark.image : Asset.scrollableMapLight.image
+    }
+
+    /// :nodoc:
+    func applyPageControl(_ pageControl: FXPageControl) {
+        pageControl.dotSpacing = 6.0
+        pageControl.selectedDotImage = Asset.pagecontrolSelectedDot.image
+        pageControl.dotImage = Asset.pagecontrolUnselectedDot.image
+    }
+
     
     // MARK: Strategy
 
