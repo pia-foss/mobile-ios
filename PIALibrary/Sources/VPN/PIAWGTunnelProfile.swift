@@ -107,7 +107,7 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
     
     /// :nodoc:
     public static var vpnType: String {
-        return "PIA Wireguard"
+        return "PIAWG"
     }
     
     /// :nodoc:
@@ -227,12 +227,21 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
         
         if #available(iOSApplicationExtension 12.0, *) {
 
+            //configuration.server
+            
             let cfg = NETunnelProviderProtocol()
             cfg.providerBundleIdentifier = bundleIdentifier
-            cfg.serverAddress = "https://blade1.tokyo-rack401.nodes.gen4.ninja"
+            cfg.serverAddress = configuration.server.hostname
             cfg.username = Client.providers.accountProvider.publicUsername
             
-            cfg.providerConfiguration = ["token": Client.providers.accountProvider.token]
+            var customCfg = configuration.customConfiguration
+            if let piaCfg = customCfg as? PIAWireguardConfiguration {
+                print(customCfg?.serialized())
+            }
+
+            cfg.providerConfiguration = ["token": Client.providers.accountProvider.token,
+                                         "serial": configuration.server.serial] //use serial from server object
+            
 
             return cfg
         } else {

@@ -9,7 +9,8 @@ PODS:
     - PIAWireguard/Core (= 1.0.0)
   - PIAWireguard/AppExtension (1.0.0):
     - PIAWireguard/Core
-  - PIAWireguard/Core (1.0.0)
+  - PIAWireguard/Core (1.0.0):
+    - Alamofire
   - PopupDialog (0.9.2):
     - DynamicBlurView (~> 3.0.1)
   - QuickLayout (2.0.2)
@@ -71,7 +72,7 @@ SPEC CHECKSUMS:
   Gloss: 13ab6b4b0ff4cb2448466edc957479b1bccea8ba
   lottie-ios: 06e0b54aab85ba128e332687d7f4ac4861a7a7ae
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
-  PIAWireguard: de9a053e00b729feb13de4b4f59f3fbfa470a4e2
+  PIAWireguard: 2386a73dd5c658264504b7e1e84cb6bf11795ee4
   PopupDialog: f4bb461bf70ff422be0b56656566424ee9273080
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3

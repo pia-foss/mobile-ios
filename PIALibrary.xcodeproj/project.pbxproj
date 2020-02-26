@@ -302,6 +302,7 @@
 		DDD824EA2189CD5700151709 /* NavigationLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E92189CD5700151709 /* NavigationLogoView.swift */; };
 		DDE27E0422E1B1A700503A89 /* ProductTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE27E0322E1B1A700503A89 /* ProductTests.swift */; };
 		DDE93C5722F9847E0054FE28 /* PurchaseTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE93C5622F9847E0054FE28 /* PurchaseTrialViewController.swift */; };
+		DDF7F73F2405846800A671C7 /* PIAWGTunnelProvider+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF7F73E2405846800A671C7 /* PIAWGTunnelProvider+Profile.swift */; };
 		DDFCFAA821E924A70081F235 /* TileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAA721E924A70081F235 /* TileProvider.swift */; };
 		DDFCFAA921E924AD0081F235 /* TileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAA721E924A70081F235 /* TileProvider.swift */; };
 		DDFCFAAB21E925160081F235 /* DefaultTileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAAA21E925160081F235 /* DefaultTileProvider.swift */; };
@@ -598,6 +599,7 @@
 		DDD824E92189CD5700151709 /* NavigationLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLogoView.swift; sourceTree = "<group>"; };
 		DDE27E0322E1B1A700503A89 /* ProductTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductTests.swift; path = "../../../../../../System/Volumes/Data/Users/ueshiba/Projects/PIA/client-library-apple/PIALibraryTests/ProductTests.swift"; sourceTree = "<group>"; };
 		DDE93C5622F9847E0054FE28 /* PurchaseTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTrialViewController.swift; sourceTree = "<group>"; };
+		DDF7F73E2405846800A671C7 /* PIAWGTunnelProvider+Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PIAWGTunnelProvider+Profile.swift"; sourceTree = "<group>"; };
 		DDFCFAA721E924A70081F235 /* TileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileProvider.swift; sourceTree = "<group>"; };
 		DDFCFAAA21E925160081F235 /* DefaultTileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTileProvider.swift; sourceTree = "<group>"; };
 		DDFCFAAC21E925B60081F235 /* TileableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileableCell.swift; sourceTree = "<group>"; };
@@ -1106,6 +1108,7 @@
 			isa = PBXGroup;
 			children = (
 				0EFEB4BF2007784A00F81029 /* PIATunnelProvider+Profile.swift */,
+				DDF7F73E2405846800A671C7 /* PIAWGTunnelProvider+Profile.swift */,
 				0EFEB4C02007784A00F81029 /* PIATunnelProfile.swift */,
 				DD7411A823EC35B40058CEF3 /* PIAWGTunnelProfile.swift */,
 			);
@@ -1823,6 +1826,7 @@
 				DDD824E5218996CD00151709 /* Pages.swift in Sources */,
 				0E0E5B131F8297DE00022CD0 /* KeychainStore.swift in Sources */,
 				0E0E5B0D1F8297BD00022CD0 /* PlainStore.swift in Sources */,
+				DDF7F73F2405846800A671C7 /* PIAWGTunnelProvider+Profile.swift in Sources */,
 				0EE78AEE1F818720002E4CDD /* LibraryCallback.swift in Sources */,
 				0E53A8561FE5D770000C2A18 /* MockWebServices.swift in Sources */,
 				DDC0841322EB07FB00DA2701 /* GlossInvitesInformation.swift in Sources */,

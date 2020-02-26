@@ -32,9 +32,12 @@ public enum ServerError: Error {
 /// Represents a VPN server.
 public class Server: Hashable {
 
+    /// Serial host
+    public let serial: String
+
     /// Represents a VPN server address endpoint.
     public struct Address: CustomStringConvertible {
-
+        
         /// The endpoint hostname.
         public let hostname: String
         
@@ -99,6 +102,7 @@ public class Server: Hashable {
 
     /// :nodoc:
     public init(
+        serial: String,
         name: String,
         country: String,
         hostname: String,
@@ -106,6 +110,7 @@ public class Server: Hashable {
         bestOpenVPNAddressForUDP: Address?,
         pingAddress: Address?) {
         
+        self.serial = serial
         self.name = name
         self.country = country
         self.hostname = hostname

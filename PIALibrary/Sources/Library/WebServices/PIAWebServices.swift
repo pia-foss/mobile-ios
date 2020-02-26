@@ -28,7 +28,7 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 class PIAWebServices: WebServices, ConfigurationAccess {
-    private static let serversVersion = 60
+    private static let serversVersion = 1001
 
     /***
      Generates a new auth token for the specific user

@@ -36,6 +36,7 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
     public init() {
         mockServers = [
             Server(
+                serial: "8a55f03812851897f6e43b2ae22b1234",
                 name: "France",
                 country: "fr",
                 hostname: "france.example.com",
@@ -43,6 +44,7 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
                 bestOpenVPNAddressForUDP: nil,
                 pingAddress: nil
             ), Server(
+                serial: "8a55f03812851897f6e43b2ae22b1234",
                 name: "Germany",
                 country: "de",
                 hostname: "germany.example.com",
@@ -50,6 +52,7 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
                 bestOpenVPNAddressForUDP: nil,
                 pingAddress: nil
             ), Server(
+                serial: "8a55f03812851897f6e43b2ae22b1234",
                 name: "Italy",
                 country: "it",
                 hostname: "italy.example.com",
@@ -57,6 +60,7 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
                 bestOpenVPNAddressForUDP: nil,
                 pingAddress: nil
             ), Server(
+                serial: "8a55f03812851897f6e43b2ae22b1234",
                 name: "US East",
                 country: "us",
                 hostname: "us-east.example.com",
