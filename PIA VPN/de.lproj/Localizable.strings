@@ -242,14 +242,5 @@
 "vpn_permission.disallow.message.basic" = "Wir benötigen diese Berechtigung, damit die App ordnungsgemäß funktioniert.";
 "vpn_permission.disallow.message.support" = "Wenn Sie Hilfe benötigen, können Sie sich auch an den Kundendienst wenden.";
 "vpn_permission.title" = "PIA";
-"walkthrough.action.done" = "FERTIG";
-"walkthrough.action.next" = "WEITER";
-"walkthrough.action.skip" = "ÜBERSPRINGEN";
-"walkthrough.page.1.description" = "Schützen Sie sich auf bis zu 10 Geräten gleichzeitig.";
-"walkthrough.page.1.title" = "Unterstützung für 10 Geräte";
-"walkthrough.page.2.description" = "Mit Servern auf der ganzen Welt bist du immer geschützt.";
-"walkthrough.page.2.title" = "Bequem mit jeder beliebigen Region verbinden";
-"walkthrough.page.3.description" = "Mit der Aktivierung unseres Inhalts-Blockers sehen Sie keine Anzeigen in Safari mehr.";
-"walkthrough.page.3.title" = "Schütze dich vor Werbung";
 "settings.small.packets.title" = "Kleine Pakete verwenden";
 "settings.small.packets.description" = "Wird die IP-Paketgröße leicht verringern, um die Kompatibilität mit manchen Routern und Mobilfunknetzen zu verbessern.";

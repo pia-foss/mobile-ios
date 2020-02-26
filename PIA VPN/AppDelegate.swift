@@ -61,6 +61,26 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         Bootstrapper.shared.dispose()
     }
     
+    // MARK: Orientations
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        if let rootViewController = self.topViewControllerWithRootViewController(rootViewController: window?.rootViewController) {
+            if (rootViewController.responds(to: Selector(("onlyPortrait")))) {
+                return .portrait
+            }
+        }
+
+        return .allButUpsideDown
+    }
+    
+    private func topViewControllerWithRootViewController(rootViewController: UIViewController!) -> UIViewController? {
+        if (rootViewController == nil) { return nil }
+        if (rootViewController.isKind(of: UINavigationController.self)) {
+            return topViewControllerWithRootViewController(rootViewController: (rootViewController as! UINavigationController).visibleViewController)
+        }
+        return rootViewController
+    }
+    
     // MARK: Notifications registration
 
     func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {

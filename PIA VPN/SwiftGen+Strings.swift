@@ -869,37 +869,6 @@ internal enum L10n {
       }
     }
   }
-
-  internal enum Walkthrough {
-    internal enum Action {
-      /// DONE
-      internal static let done = L10n.tr("Localizable", "walkthrough.action.done")
-      /// NEXT
-      internal static let next = L10n.tr("Localizable", "walkthrough.action.next")
-      /// SKIP
-      internal static let skip = L10n.tr("Localizable", "walkthrough.action.skip")
-    }
-    internal enum Page {
-      internal enum _1 {
-        /// Protect yourself on up to 10 devices at a time.
-        internal static let description = L10n.tr("Localizable", "walkthrough.page.1.description")
-        /// Support 10 devices at once
-        internal static let title = L10n.tr("Localizable", "walkthrough.page.1.title")
-      }
-      internal enum _2 {
-        /// With servers around the globe, you are always under protection.
-        internal static let description = L10n.tr("Localizable", "walkthrough.page.2.description")
-        /// Connect to any region easily
-        internal static let title = L10n.tr("Localizable", "walkthrough.page.2.title")
-      }
-      internal enum _3 {
-        /// Enabling our Content Blocker prevents ads from showing in Safari.
-        internal static let description = L10n.tr("Localizable", "walkthrough.page.3.description")
-        /// Protect yourself from ads
-        internal static let title = L10n.tr("Localizable", "walkthrough.page.3.title")
-      }
-    }
-  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name

@@ -242,14 +242,5 @@
 "vpn_permission.disallow.message.basic" = "アプリケーションが機能するためにはこの許可が必要です。";
 "vpn_permission.disallow.message.support" = "ヘルプが必要な場合はカスタマーサポートにご連絡ください。";
 "vpn_permission.title" = "PIA";
-"walkthrough.action.done" = "完了";
-"walkthrough.action.next" = "次へ";
-"walkthrough.action.skip" = "スキップ";
-"walkthrough.page.1.description" = "一度に最大10台の端末を保護して自分を守ることができます。";
-"walkthrough.page.1.title" = "一度に10台の端末をサポート";
-"walkthrough.page.2.description" = "世界中にサーバがあるので、常に保護された状態でいることができます。";
-"walkthrough.page.2.title" = "あらゆる地域に簡単に接続";
-"walkthrough.page.3.description" = "コンテンツブロッカーを有効にすると、Safariで広告表示をブロックできます。";
-"walkthrough.page.3.title" = "広告から自分を守りましょう";
 "settings.small.packets.title" = "小パケットを使用";
 "settings.small.packets.description" = "IPパケットサイズを少し小さくして、いくつかのルーターおよびモバイルネットワークとの互換性を改善します。";

@@ -242,14 +242,5 @@
 "vpn_permission.disallow.message.basic" = "Vi trenger disse tillatelsene for at programmet skal fungere.";
 "vpn_permission.disallow.message.support" = "Du kan også ta kontakt med kundestøtten, hvis du trenger hjelp.";
 "vpn_permission.title" = "PIA";
-"walkthrough.action.done" = "FERDIG";
-"walkthrough.action.next" = "NESTE";
-"walkthrough.action.skip" = "HOPP OVER";
-"walkthrough.page.1.description" = "Beskytt deg på opptil ti enheter samtidig.";
-"walkthrough.page.1.title" = "Støtter ti enheter samtidig";
-"walkthrough.page.2.description" = "Med serverer rundt om i hele verden, er du alltid beskyttet.";
-"walkthrough.page.2.title" = "Koble til hvilken som helst region på en enkel måte";
-"walkthrough.page.3.description" = "Aktivering av innholdsblokkereren sikrer at reklame ikke blir vist når du bruker Safari.";
-"walkthrough.page.3.title" = "Beskytt deg selv mot reklame";
 "settings.small.packets.title" = "Bruk små pakker";
 "settings.small.packets.description" = "IP-pakkens størrelse vil bli noe mindre for å forbedre kompatibilitet med noen rutere og mobile nettverk.";
