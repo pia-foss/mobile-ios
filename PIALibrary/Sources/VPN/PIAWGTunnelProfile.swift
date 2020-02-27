@@ -28,7 +28,15 @@ import NetworkExtension
 public class PIAWGTunnelProfile: NetworkExtensionProfile {
     
     public func parsedCustomConfiguration(from map: [String : Any]) -> VPNCustomConfiguration? {
-        return nil
+        
+        let S = PIAWireguardConfiguration.Keys.self
+        
+        if let dnsServers = map[S.dnsServers] as? [String] {
+            return PIAWireguardConfiguration(customDNSServers: dnsServers)
+        }
+        
+        return PIAWireguardConfiguration(customDNSServers: [])
+
     }
     
     
@@ -227,25 +235,24 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
         
         if #available(iOSApplicationExtension 12.0, *) {
 
-            //configuration.server
-            
             let cfg = NETunnelProviderProtocol()
             cfg.providerBundleIdentifier = bundleIdentifier
             cfg.serverAddress = configuration.server.hostname
             cfg.username = Client.providers.accountProvider.publicUsername
-            
+            cfg.disconnectOnSleep = configuration.disconnectsOnSleep
+
+            cfg.providerConfiguration = [PIAWireguardConfiguration.Keys.token: Client.providers.accountProvider.token,
+                                         PIAWireguardConfiguration.Keys.ping: configuration.server.pingAddress?.description,
+                                         PIAWireguardConfiguration.Keys.serial: configuration.server.serial] 
+
             var customCfg = configuration.customConfiguration
             if let piaCfg = customCfg as? PIAWireguardConfiguration {
-                print(customCfg?.serialized())
+                cfg.providerConfiguration?[PIAWireguardConfiguration.Keys.dnsServers] = piaCfg.customDNSServers
             }
-
-            cfg.providerConfiguration = ["token": Client.providers.accountProvider.token,
-                                         "serial": configuration.server.serial] //use serial from server object
-            
 
             return cfg
         } else {
-            return NETunnelProviderProtocol()
+            fatalError("Wireguard should be initialized with iOS version 12.0 or higher")
         }
     }
     
