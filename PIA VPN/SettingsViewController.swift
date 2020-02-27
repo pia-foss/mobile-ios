@@ -277,15 +277,15 @@ class SettingsViewController: AutolayoutViewController {
             fatalError("No default VPN custom configuration provided for PIA OpenVPN protocol")
         }
         
-        guard let currentWireguardVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration ??
-            Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration else {
+        guard let currentWireguardVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ??
+            Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
             fatalError("No default VPN custom configuration provided for PIA Wireguard protocol")
         }
         
         pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
         pendingHandshake = AppPreferences.shared.piaHandshake
         pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
-        pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: [])
+        pendingWireguardVPNConfiguration = currentWireguardVPNConfiguration
 
         validateDNSList()
 
@@ -323,7 +323,8 @@ class SettingsViewController: AutolayoutViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let customDNSSettingsVC = segue.destination as? CustomDNSSettingsViewController {
             customDNSSettingsVC.delegate = self
-            let ips = DNSList.shared.valueForKey(DNSList.CUSTOM_DNS_KEY)
+            customDNSSettingsVC.vpnType = pendingPreferences.vpnType == PIATunnelProfile.vpnType ? PIATunnelProfile.vpnType : PIAWGTunnelProfile.vpnType
+            let ips = DNSList.shared.valueForKey(pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY)
             if ips.count > 0 {
                 customDNSSettingsVC.primaryDNSValue = ips.first
                 if ips.count > 1 {
@@ -1018,7 +1019,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             for dns in DNSList.shared.dnsList {
                 for (key, value) in dns {
                     if dnsValue == value {
-                        cell.detailTextLabel?.text = DNSList.shared.descriptionForKey(key)
+                        cell.detailTextLabel?.text = DNSList.shared.descriptionForKey(key, andCustomKey: (pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY))
                         break
                     }
                 }
@@ -1240,7 +1241,14 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             
             controller = OptionsViewController()
             if let dnsList = DNSList.shared.dnsList {
-                controller?.options = dnsList.compactMap {
+                let filtered = dnsList.filter({
+                    if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+                        return $0.first?.key != DNSList.CUSTOM_WIREGUARD_DNS_KEY
+                    } else {
+                        return $0.first?.key != DNSList.CUSTOM_OPENVPN_DNS_KEY
+                    }
+                })
+                controller?.options = filtered.compactMap {
                     if let first = $0.first {
                         return first.key
                     }
@@ -1249,12 +1257,16 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             if let options = controller?.options,
-                !options.contains(DNSList.CUSTOM_DNS_KEY) {
-                controller?.options.append(DNSList.CUSTOM_DNS_KEY)
+                !options.contains(pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
+                if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+                    controller?.options.append(DNSList.CUSTOM_OPENVPN_DNS_KEY)
+                } else {
+                    controller?.options.append(DNSList.CUSTOM_WIREGUARD_DNS_KEY)
+                }
             } else {
                 for dns in DNSList.shared.dnsList {
                     for (key, value) in dns {
-                        if key == DNSList.CUSTOM_DNS_KEY {
+                        if key == (pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
                             if !value.isEmpty {
                                 controller?.navigationItem.rightBarButtonItem = UIBarButtonItem(
                                     title: L10n.Global.edit,
@@ -1456,8 +1468,8 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             
         case .vpnDns:
             if let option = option as? String {
-                cell.textLabel?.text = DNSList.shared.descriptionForKey(option)
-                if option == DNSList.CUSTOM_DNS_KEY {
+                cell.textLabel?.text = DNSList.shared.descriptionForKey(option, andCustomKey: pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY)
+                if option == (pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
                     var isFound = false
                     for dns in DNSList.shared.dnsList {
                         for (key, value) in dns {
@@ -1605,7 +1617,7 @@ extension SettingsViewController: OptionsViewControllerDelegate {
                     }
                 }
                 
-                if !isFound && option == DNSList.CUSTOM_DNS_KEY {
+                if !isFound && option == (pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
                     let alertController = Macros.alert(L10n.Settings.Dns.Custom.dns,
                                                        L10n.Settings.Dns.Alert.Create.message)
                     alertController.addActionWithTitle(L10n.Global.ok) {
@@ -1707,7 +1719,11 @@ extension SettingsViewController: SettingsViewControllerDelegate {
         switch setting {
         case .vpnDns:
             if let settingValue = value as? String {
-                pendingOpenVPNConfiguration.dnsServers = DNSList.shared.valueForKey(settingValue)
+                if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+                    pendingOpenVPNConfiguration.dnsServers = DNSList.shared.valueForKey(settingValue)
+                } else {
+                    pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: DNSList.shared.valueForKey(settingValue))
+                }
             }
         default:
             break

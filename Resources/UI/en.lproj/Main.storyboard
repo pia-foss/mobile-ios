@@ -680,7 +680,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HeaderCell" textLabel="ezh-Cu-3qy" style="IBUITableViewCellStyleDefault" id="cDq-J2-0D3" customClass="SettingsHeaderCell" customModule="PIA_VPN" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HeaderCell" textLabel="ezh-Cu-3qy" style="IBUITableViewCellStyleDefault" id="cDq-J2-0D3">
                                                 <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43.666667938232422"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cDq-J2-0D3" id="ds6-dz-CMi">

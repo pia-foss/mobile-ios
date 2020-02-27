@@ -25,7 +25,8 @@ import Foundation
 class DNSList: NSObject {
     
     static let shared = DNSList()
-    static let CUSTOM_DNS_KEY: String = "Custom"
+    static let CUSTOM_OPENVPN_DNS_KEY: String = "Custom"
+    static let CUSTOM_WIREGUARD_DNS_KEY: String = "Custom_Wireguard"
 
     private(set) var dnsList: [[String:[String]]]!
     private var plistPathInDocument: String!
@@ -135,11 +136,11 @@ class DNSList: NSObject {
     /// Returns the description of the key
     /// - Returns:
     ///   - description: The description of the key or how the key should be displayed
-    func descriptionForKey(_ key: String) -> String {
+    func descriptionForKey(_ key: String, andCustomKey customKey: String) -> String {
         for dns in self.dnsList {
             for (theKey, value) in dns {
                 if theKey == key {
-                    if key == DNSList.CUSTOM_DNS_KEY { //L10n.Global.custom
+                    if key == customKey { //L10n.Global.custom
                         switch value.count {
                         case 0:
                             return L10n.Settings.Dns.custom

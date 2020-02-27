@@ -34,6 +34,7 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
     @IBOutlet private weak var textSecondaryDNS: BorderedTextField!
 
     weak var delegate: SettingsViewControllerDelegate?
+    var vpnType: String?
 
     override func viewDidLoad() {
         
@@ -56,10 +57,10 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
                 !secondaryDNS.isEmpty {
                 ips.append(secondaryDNS)
             }
-            DNSList.shared.addNewServerWithName(DNSList.CUSTOM_DNS_KEY,
+            DNSList.shared.addNewServerWithName((vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY),
                                                 andIPs: ips)
             self.delegate?.updateSetting(Setting.vpnDns,
-                                         withValue: DNSList.CUSTOM_DNS_KEY)
+                                         withValue: (vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY))
             self.navigationController?.popToRootViewController(animated: true)
         }
     }
@@ -70,7 +71,7 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
         
         alertController.addActionWithTitle(L10n.Global.ok) {
             if let firstKey = DNSList.shared.firstKey() {
-                DNSList.shared.removeServer(name: DNSList.CUSTOM_DNS_KEY)
+                DNSList.shared.removeServer(name: (self.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY))
                 self.delegate?.updateSetting(Setting.vpnDns,
                                              withValue: firstKey)
             }

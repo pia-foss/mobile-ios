@@ -70,8 +70,8 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - OpenSSL-Apple (1.1.1d.5a)
-  - PIALibrary/Core (2.2.4)
-  - PIALibrary/Library (2.2.4):
+  - PIALibrary/Core (2.3.0)
+  - PIALibrary/Library (2.3.0):
     - Alamofire (~> 4)
     - Gloss (~> 2)
     - PIALibrary/Core
@@ -79,19 +79,20 @@ PODS:
     - PopupDialog
     - ReachabilitySwift
     - SwiftyBeaver
-  - PIALibrary/Mock (2.2.4):
+  - PIALibrary/Mock (2.3.0):
     - PIALibrary/Library
-  - PIALibrary/UI (2.2.4):
+  - PIALibrary/UI (2.3.0):
     - FXPageControl
     - lottie-ios
     - PIALibrary/Library
     - SwiftEntryKit (= 0.7.2)
     - SwiftyBeaver
     - TPKeyboardAvoiding
-  - PIALibrary/Util (2.2.4):
+  - PIALibrary/Util (2.3.0):
     - PIALibrary/Core
-  - PIALibrary/VPN (2.2.4):
+  - PIALibrary/VPN (2.3.0):
     - PIALibrary/Library
+    - PIAWireguard
     - TunnelKit
   - PIAWireguard (1.0.0):
     - PIAWireguard/AppExtension (= 1.0.0)
@@ -203,7 +204,7 @@ SPEC CHECKSUMS:
   lottie-ios: 32bf84389337d86fbc8b12266e88452e0abf1dee
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
-  PIALibrary: b5646d5e254d845e93422c2a8cffae435a490cf1
+  PIALibrary: ccc1c42fec67cce365fe239f692a7397ba5dfcfa
   PIAWireguard: 2386a73dd5c658264504b7e1e84cb6bf11795ee4
   PopupDialog: 42fb7a0bc4fafdf89fef8b5b2b127a6023f3e1cc
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92

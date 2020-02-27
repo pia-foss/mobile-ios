@@ -25,6 +25,7 @@ import PIALibrary
 import TunnelKit
 import SwiftyBeaver
 import iRate
+import PIAWireguard
 #if PIA_DEV
 import AppCenter
 import AppCenterAnalytics
@@ -119,7 +120,7 @@ class Bootstrapper {
         defaults.vpnType = IKEv2Profile.vpnType
         defaults.vpnCustomConfigurations = [
             PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build(),
-            PIAWGTunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build()
+            PIAWGTunnelProfile.vpnType: PIAWireguardConfiguration(customDNSServers: [])
         ]
         
         Client.providers.accountProvider.subscriptionInformation { [weak self] (info, error) in
