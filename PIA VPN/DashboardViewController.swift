@@ -494,8 +494,13 @@ class DashboardViewController: AutolayoutViewController {
             toggleConnection.stopButtonAnimation()
             AppPreferences.shared.lastVPNConnectionStatus = .connected
             let titleLabelView = UILabel(frame: CGRect.zero)
+            titleLabelView.adjustsFontSizeToFitWidth = true
             titleLabelView.style(style: TextStyle.textStyle6)
-            titleLabelView.text = L10n.Dashboard.Vpn.on.uppercased()
+            
+            let effectiveServer = Client.preferences.displayedServer
+            let vpn = Client.providers.vpnProvider
+
+            titleLabelView.text = L10n.Dashboard.Vpn.connected+": "+effectiveServer.name(forStatus: vpn.vpnStatus)
             Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
                                                    withTintColor: .white,
                                                    andBarTintColors: [UIColor.piaGreen,
