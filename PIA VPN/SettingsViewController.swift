@@ -534,9 +534,6 @@ class SettingsViewController: AutolayoutViewController {
         guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration else {
             fatalError("No default VPN custom configuration provided for PIA protocol")
         }
-        guard let currentWireguardConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration else {
-            fatalError("No default VPN custom configuration provided for PIA protocol")
-        }
         AppPreferences.shared.reset()
         DNSList.shared.resetPlist()
         pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
