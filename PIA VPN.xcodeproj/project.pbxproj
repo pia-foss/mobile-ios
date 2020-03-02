@@ -295,6 +295,8 @@
 		DDD271E221D6262100B6D20F /* PropertyStoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD271E021D6262100B6D20F /* PropertyStoring.swift */; };
 		DDD271F021D6718F00B6D20F /* RegionFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD271EF21D6718F00B6D20F /* RegionFilter.swift */; };
 		DDD271F121D6718F00B6D20F /* RegionFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD271EF21D6718F00B6D20F /* RegionFilter.swift */; };
+		DDF7F755240D35BA00A671C7 /* CustomServerSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF7F754240D35BA00A671C7 /* CustomServerSettingsViewController.swift */; };
+		DDF7F756240D35BA00A671C7 /* CustomServerSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF7F754240D35BA00A671C7 /* CustomServerSettingsViewController.swift */; };
 		DDFCFA8F21E892070081F235 /* RegionTileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFA8D21E892070081F235 /* RegionTileCollectionViewCell.swift */; };
 		DDFCFA9021E892070081F235 /* RegionTileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFA8D21E892070081F235 /* RegionTileCollectionViewCell.swift */; };
 		DDFCFA9121E892070081F235 /* RegionTileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDFCFA8E21E892070081F235 /* RegionTileCollectionViewCell.xib */; };
@@ -641,6 +643,7 @@
 		DDD271DD21D616AA00B6D20F /* Server+Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+Favorite.swift"; sourceTree = "<group>"; };
 		DDD271E021D6262100B6D20F /* PropertyStoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyStoring.swift; sourceTree = "<group>"; };
 		DDD271EF21D6718F00B6D20F /* RegionFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionFilter.swift; sourceTree = "<group>"; };
+		DDF7F754240D35BA00A671C7 /* CustomServerSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomServerSettingsViewController.swift; sourceTree = "<group>"; };
 		DDFCFA8D21E892070081F235 /* RegionTileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionTileCollectionViewCell.swift; sourceTree = "<group>"; };
 		DDFCFA8E21E892070081F235 /* RegionTileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegionTileCollectionViewCell.xib; sourceTree = "<group>"; };
 		DDFCFA9321E892130081F235 /* RegionTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionTile.swift; sourceTree = "<group>"; };
@@ -769,6 +772,7 @@
 				0EB9ED191FDA1C4D00D1214D /* SettingsViewController.swift */,
 				DD9329A1237AFD0A0025B6BC /* ShowQuickSettingsViewController.swift */,
 				DD1AA4952180AD92005116D7 /* CustomDNSSettingsViewController.swift */,
+				DDF7F754240D35BA00A671C7 /* CustomServerSettingsViewController.swift */,
 				DDB6B94F21C94E2E00DE8C5F /* TrustedNetworksViewController.swift */,
 				DD858B8A22CCE512004953F3 /* FriendReferralsViewController.swift */,
 				DD858B8D22CCE9E4004953F3 /* FriendReferralsTableViewUtil.swift */,
@@ -2055,6 +2059,7 @@
 				0EB966751FDF0D6E0086ABC2 /* ServerProvider+UI.swift in Sources */,
 				0ECF5C092017EBAD0047596C /* ThemeCode.swift in Sources */,
 				DD76291221ECBD8B0092DF50 /* SubscriptionTileCollectionViewCell.swift in Sources */,
+				DDF7F756240D35BA00A671C7 /* CustomServerSettingsViewController.swift in Sources */,
 				0E392DA71FE3283C0002160D /* TransientState.swift in Sources */,
 				0E3A35361FD9EBDA000B0F99 /* AppDelegate.swift in Sources */,
 				DD172AA422573EDC00071CFB /* ServerTile+App.swift in Sources */,
@@ -2173,6 +2178,7 @@
 				0EB9ED1A1FDA1C4D00D1214D /* SettingsViewController.swift in Sources */,
 				0EB966741FDF0D6E0086ABC2 /* ServerProvider+UI.swift in Sources */,
 				DD76291121ECBD8B0092DF50 /* SubscriptionTileCollectionViewCell.swift in Sources */,
+				DDF7F755240D35BA00A671C7 /* CustomServerSettingsViewController.swift in Sources */,
 				DD40197E221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.swift in Sources */,
 				0ECF5C082017EBAD0047596C /* ThemeCode.swift in Sources */,
 				DD172AA322573EDC00071CFB /* ServerTile+App.swift in Sources */,
