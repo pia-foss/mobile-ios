@@ -1200,14 +1200,23 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         
         switch setting {
         case .vpnProtocolSelection:
-            let options: [String] = [
-                IKEv2Profile.vpnType,
-                PIAWGTunnelProfile.vpnType,
-                PIATunnelProfile.vpnType,
-                IPSecProfile.vpnType,
-            ]
+            
             controller = OptionsViewController()
-            controller?.options = options
+
+            if #available(iOS 12.0, *) {
+                controller?.options = [
+                    IKEv2Profile.vpnType,
+                    PIAWGTunnelProfile.vpnType, //WG only available for iOS12+
+                    PIATunnelProfile.vpnType,
+                    IPSecProfile.vpnType,
+                ]
+            } else {
+                controller?.options = [
+                    IKEv2Profile.vpnType,
+                    PIATunnelProfile.vpnType,
+                    IPSecProfile.vpnType,
+                ]
+            }
             controller?.selectedOption = pendingPreferences.vpnType
             
         case .vpnSocket:
