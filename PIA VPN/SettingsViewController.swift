@@ -93,6 +93,8 @@ enum Setting: Int {
     //
     //        case invokeMACERequest
     
+    case customServers
+    
     case publicUsername
     
     case username
@@ -196,6 +198,7 @@ class SettingsViewController: AutolayoutViewController {
 //            .recalculatePingTimes,
 //            .invokeMACERequest,
 //            .mace,
+            .customServers,
             .publicUsername,
             .username,
             .password,
@@ -1169,8 +1172,12 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.textLabel?.text = "Password"
             cell.detailTextLabel?.text = Client.providers.accountProvider.currentUser?.credentials.password ?? ""
             cell.accessoryType = .none
+        case .customServers:
+            cell.textLabel?.text = "Custom Servers"
+            cell.detailTextLabel?.text = nil
 
         }
+        
 
         Theme.current.applySecondaryBackground(cell)
         if let textLabel = cell.textLabel {
@@ -1398,6 +1405,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         case .trustedNetworks:
             self.perform(segue: StoryboardSegue.Main.trustedNetworksSegueIdentifier)
+
+        case .customServers:
+            self.perform(segue: StoryboardSegue.Main.customServerSegueIdentifier)
 
         default:
             break
