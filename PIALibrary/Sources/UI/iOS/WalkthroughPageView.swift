@@ -34,6 +34,9 @@ class WalkthroughPageView: UIView {
     }
     
     private let data: PageData
+    
+    private(set) var labelTitle = UILabel()
+    private(set) var labelDetail = UILabel()
 
     required init?(coder aDecoder: NSCoder) {
         data = PageData(title: "", detail: "", image: nil)
@@ -49,8 +52,7 @@ class WalkthroughPageView: UIView {
     
     private func configure() {
         let imvImage = UIImageView()
-        let labelTitle = UILabel()
-        let labelDetail = UILabel()
+
         addSubview(imvImage)
         addSubview(labelTitle)
         addSubview(labelDetail)
@@ -94,11 +96,14 @@ class WalkthroughPageView: UIView {
         labelDetail.text = data.detail
         imvImage.image = data.image
         
-        Theme.current.applySubtitle(labelDetail)
-        Theme.current.applyTitle(labelTitle, appearance: .dark)
-
         labelTitle.textAlignment = .center
         labelDetail.textAlignment = .center
 
     }
+    
+    func applyStyles() {
+        Theme.current.applySubtitle(labelDetail)
+        Theme.current.applyTitle(labelTitle, appearance: .dark)
+    }
+    
 }
