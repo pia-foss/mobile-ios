@@ -215,14 +215,8 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
             preconditionFailure()
         }
         let fallbackDelay = delay ?? accessedConfiguration.vpnReconnectionDelay
-        activeProfile.disconnect { (error) in
-            if let _ = error {
-                callback?(error)
-                return
-            }
-            Macros.dispatch(after: .milliseconds(fallbackDelay)) {
-                activeProfile.connect(withConfiguration: self.vpnClientConfiguration(), callback)
-            }
+        Macros.dispatch(after: .milliseconds(fallbackDelay)) {
+            activeProfile.connect(withConfiguration: self.vpnClientConfiguration(), callback)
         }
     }
     
