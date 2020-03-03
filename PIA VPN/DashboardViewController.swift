@@ -89,12 +89,6 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(closeSession), name: .PIAAccountLapsed, object: nil)
         nc.addObserver(self, selector: #selector(reloadTheme), name: .PIAThemeShouldChange, object: nil)
 
-#if !TARGET_IPHONE_SIMULATOR
-        let types: UIUserNotificationType = [.alert, .badge, .sound]
-        let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: types, categories: nil)
-        UIApplication.shared.registerUserNotificationSettings(settings)
-#endif
-
         if Client.providers.accountProvider.isLoggedIn {
             Client.providers.accountProvider.refreshAndLogoutUnauthorized()
         }
@@ -116,6 +110,12 @@ class DashboardViewController: AutolayoutViewController {
             AppPreferences.shared.todayWidgetButtonTitle = L10n.Today.Widget.login
             return
         }
+        
+        #if !TARGET_IPHONE_SIMULATOR
+            let types: UIUserNotificationType = [.alert, .badge, .sound]
+            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: types, categories: nil)
+            UIApplication.shared.registerUserNotificationSettings(settings)
+        #endif
 
         AppPreferences.shared.todayWidgetVpnStatus = Client.providers.vpnProvider.vpnStatus.rawValue
         if Client.providers.vpnProvider.vpnStatus == .disconnected {
