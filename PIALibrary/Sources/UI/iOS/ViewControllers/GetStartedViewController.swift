@@ -80,6 +80,8 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
             image: Asset.imageWalkthrough3.image
         )
     ]
+    
+    private var tutorialViews: [WalkthroughPageView] = []
 
     private var currentPageIndex = 0
 
@@ -299,6 +301,7 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
         
         for (i, data) in allData.enumerated() {
             let page = WalkthroughPageView(data: data)
+            tutorialViews.append(page)
             page.translatesAutoresizingMaskIntoConstraints = false
             parent.addSubview(page)
             
@@ -362,6 +365,9 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
         Theme.current.applyPageControl(pageControl)
         Theme.current.applyLinkAttributes(textAgreement)
         Theme.current.applyActivityIndicator(spinner)
+        tutorialViews.forEach({
+            $0.applyStyles()
+        })
         imvLogo.image = Theme.current.palette.logo
 
     }
