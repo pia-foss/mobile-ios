@@ -43,7 +43,7 @@ extension Client.Preferences {
             action?.execute { (error) in
                 let vpn = Client.providers.vpnProvider
                 if (vpn.vpnStatus != .disconnected) {
-                    vpn.reconnect(after: nil, nil)
+                    vpn.reconnect(after: nil, forceDisconnect: true, nil)
                 } else {
                     vpn.connect(nil)
                 }
