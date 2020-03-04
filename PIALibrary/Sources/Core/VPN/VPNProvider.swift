@@ -99,9 +99,10 @@ public protocol VPNProvider: class {
      Reconnects to the VPN.
 
      - Parameter delay: The delay in milliseconds after which the reconnection is issue.
+     - Parameter forceDisconnect: Boolean to indicate if we want to disconnect the VPN before reconnect..
      - Parameter callback: Returns `nil` on success.
      */
-    func reconnect(after delay: Int?, _ callback: SuccessLibraryCallback?)
+    func reconnect(after delay: Int?, forceDisconnect: Bool, _ callback: SuccessLibraryCallback?)
     
     /**
      Submits the debug log associated with the current VPN connection.
@@ -116,6 +117,12 @@ public protocol VPNProvider: class {
      - Parameter callback: Returns the `Usage` information on success.
      */
     func dataUsage(_ callback: LibraryCallback<Usage>?)
+}
+
+public extension VPNProvider {
+    public func reconnect(after delay: Int?, forceDisconnect: Bool = false, _ callback: SuccessLibraryCallback?) {
+        return reconnect(after: delay, forceDisconnect: forceDisconnect, callback)
+    }
 }
 
 extension VPNProvider {
