@@ -567,14 +567,19 @@ class SettingsViewController: AutolayoutViewController {
             return
         }
         
+        var forceDisconnect = true
+        if self.pendingPreferences.vpnType != Client.providers.vpnProvider.currentVPNType {
+            forceDisconnect = false
+        }
+        
         let isDisconnected = (Client.providers.vpnProvider.vpnStatus == .disconnected)
         let completionHandlerAfterVPNAction: (Bool) -> Void = { (shouldReconnect) in
             self.showLoadingAnimation()
             action.execute { (error) in
                 self.pendingVPNAction = nil
-                                
+                
                 if shouldReconnect && !isDisconnected {
-                    Client.providers.vpnProvider.reconnect(after: nil) { (error) in
+                    Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: forceDisconnect) { (error) in
                         completionHandler()
                         self.hideLoadingAnimation()
                     }
