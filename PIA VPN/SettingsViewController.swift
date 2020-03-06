@@ -927,7 +927,11 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.textLabel?.text = footer.joined(separator: "\n\n")
 
             case .autoConnectSettings:
-                cell.textLabel?.text =  L10n.Settings.Hotspothelper.description
+                var message = L10n.Settings.Hotspothelper.description
+                if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+                    message += "\n\n"+L10n.Settings.Nmt.Wireguard.warning
+                }
+                cell.textLabel?.text =  message
 
             case .smallPackets:
                 if (pendingPreferences.vpnType == PIATunnelProfile.vpnType) {
