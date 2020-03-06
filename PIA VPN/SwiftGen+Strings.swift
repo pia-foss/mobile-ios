@@ -654,6 +654,10 @@ internal enum L10n {
           }
         }
       }
+      internal enum Wireguard {
+        /// Due to iOS restrictions, using Network Management with Wireguard might lead to unexpected behavior. It may be necessary to manually disconnect the VPN on trusted networks.
+        internal static let warning = L10n.tr("Localizable", "settings.nmt.wireguard.warning")
+      }
     }
     internal enum Reset {
       /// This will reset all of the above settings to default.
