@@ -655,7 +655,7 @@ internal enum L10n {
         }
       }
       internal enum Wireguard {
-        /// Due to iOS restrictions, using Network Management with Wireguard might lead to unexpected behavior. It may be necessary to manually disconnect the VPN on trusted networks.
+        /// Due to iOS restrictions, using Network Management with Wireguard® might lead to unexpected behavior. It may be necessary to manually disconnect the VPN on trusted networks.
         internal static let warning = L10n.tr("Localizable", "settings.nmt.wireguard.warning")
       }
     }
@@ -836,7 +836,7 @@ internal enum L10n {
       /// Upload
       internal static let upload = L10n.tr("Localizable", "tiles.usage.upload")
       internal enum Ipsec {
-        /// USAGE (Disabled unless using OpenVPN)
+        /// USAGE (Disabled unless using OpenVPN or Wireguard®)
         internal static let title = L10n.tr("Localizable", "tiles.usage.ipsec.title")
       }
     }
