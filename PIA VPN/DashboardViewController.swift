@@ -463,7 +463,6 @@ class DashboardViewController: AutolayoutViewController {
     // MARK: Helpers
 
     @objc private func updateCurrentStatus() {
-        Macros.postNotification(.PIAVPNUsageUpdate)
         updateCurrentStatusWithUserInfo(nil)
     }
     
@@ -487,6 +486,8 @@ class DashboardViewController: AutolayoutViewController {
                                         object: self,
                                         userInfo: nil)
         
+        Macros.postNotification(.PIAVPNUsageUpdate)
+
         switch currentStatus {
         case .connected:
             toggleConnection.isOn = true
