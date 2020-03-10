@@ -17,6 +17,14 @@
 	<array>
 		<dict>
 			<key>Name</key>
+			<string>Wireguard</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2019 Jason A. Donenfeld. All rights reserved.</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/WireGuard/wireguard-apple/master/README.md</string>
+		</dict>
+		<dict>
+			<key>Name</key>
 			<string>TunnelKit</string>
 			<key>Copyright</key>
 			<string>Copyright (c) 2019 Davide De Rosa. All rights reserved.</string>
