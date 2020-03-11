@@ -655,7 +655,7 @@ internal enum L10n {
         }
       }
       internal enum Wireguard {
-        /// Wireguard® doesn't need to reconnect when you switch between different networks. It may be necessary to manually disconnect the VPN on trusted networks.
+        /// WireGuard® doesn't need to reconnect when you switch between different networks. It may be necessary to manually disconnect the VPN on trusted networks.
         internal static let warning = L10n.tr("Localizable", "settings.nmt.wireguard.warning")
       }
     }
@@ -836,7 +836,7 @@ internal enum L10n {
       /// Upload
       internal static let upload = L10n.tr("Localizable", "tiles.usage.upload")
       internal enum Ipsec {
-        /// USAGE (Disabled unless using OpenVPN or Wireguard®)
+        /// USAGE (Disabled unless using OpenVPN or WireGuard®)
         internal static let title = L10n.tr("Localizable", "tiles.usage.ipsec.title")
       }
     }

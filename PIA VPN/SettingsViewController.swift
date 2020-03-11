@@ -35,7 +35,7 @@ private extension String {
     var vpnTypeDescription: String {
         switch self {
         case PIAWGTunnelProfile.vpnType:
-            return "Wireguard"
+            return "WireGuard®"
         case PIATunnelProfile.vpnType:
             return "OpenVPN"
         default:
@@ -208,6 +208,7 @@ class SettingsViewController: AutolayoutViewController {
     
     private struct Cells {
         static let setting = "SettingCell"
+        static let protocolCell = "ProtocolTableViewCell"
         static let footer = "FooterCell"
         static let header = "HeaderCell"
     }
@@ -295,6 +296,7 @@ class SettingsViewController: AutolayoutViewController {
         tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.estimatedSectionFooterHeight = 1.0
         tableView.estimatedSectionHeaderHeight = 1.0
+        
         switchPersistent.addTarget(self, action: #selector(togglePersistentConnection(_:)), for: .valueChanged)
         switchMACE.addTarget(self, action: #selector(toggleMACE(_:)), for: .valueChanged)
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
@@ -998,12 +1000,26 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         
         switch setting {
         case .vpnProtocolSelection:
-            cell.textLabel?.text = L10n.Settings.Connection.VpnProtocol.title
-            cell.detailTextLabel?.text = pendingPreferences.vpnType.vpnTypeDescription
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: Cells.protocolCell, for: indexPath) as! ProtocolTableViewCell
+            cell.accessoryType = .disclosureIndicator
+            cell.accessoryView = nil
+            cell.selectionStyle = .default
+
+            cell.setupCell(withTitle: L10n.Settings.Connection.VpnProtocol.title,
+                           description: pendingPreferences.vpnType.vpnTypeDescription,
+                           shouldShowBadge: pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType)
+
             if !Flags.shared.enablesProtocolSelection {
                 cell.accessoryType = .none
                 cell.selectionStyle = .none
             }
+            
+            Theme.current.applySecondaryBackground(cell)
+            let backgroundView = UIView()
+            Theme.current.applyPrincipalBackground(backgroundView)
+            cell.selectedBackgroundView = backgroundView
+            return cell
 
         case .vpnSocket:
             cell.textLabel?.text = L10n.Settings.Connection.SocketProtocol.title
@@ -1474,7 +1490,6 @@ extension SettingsViewController: OptionsViewControllerDelegate {
         case .vpnProtocolSelection:
             let vpnType = option as? String
             cell.textLabel?.text = vpnType?.vpnTypeDescription
-            
         case .vpnSocket:
             let rawSocketType = option as? String
             if rawSocketType != SettingsViewController.AUTOMATIC_SOCKET {

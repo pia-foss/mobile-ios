@@ -210,6 +210,14 @@ extension Theme {
         }
     }
     
+    public func applyBadgeStyle(_ label: UILabel) {
+        label.font = UIFont.mediumFontWith(size: 10)
+        label.textColor = palette.principalBackground
+        label.layer.cornerRadius = 3.0
+        label.layer.masksToBounds = true
+        label.backgroundColor = UIColor.piaGreen
+    }
+    
     public func noResultsImage() -> UIImage {
         return palette.appearance == .dark ?
             Asset.Piax.Regions.noResultsDark.image :
