@@ -17,7 +17,7 @@
 	<array>
 		<dict>
 			<key>Name</key>
-			<string>Wireguard</string>
+			<string>WireGuard</string>
 			<key>Copyright</key>
 			<string>Copyright (c) 2019 Jason A. Donenfeld. All rights reserved.</string>
 			<key>LicenseURL</key>
