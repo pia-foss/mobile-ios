@@ -338,6 +338,7 @@ class SettingsViewController: AutolayoutViewController {
             }
         } else if let trustedNetworksVC = segue.destination as? TrustedNetworksViewController {
             trustedNetworksVC.persistentConnectionValue = pendingPreferences.isPersistentConnection
+            trustedNetworksVC.vpnType = pendingPreferences.vpnType
         }
     }
     
@@ -929,11 +930,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.textLabel?.text = footer.joined(separator: "\n\n")
 
             case .autoConnectSettings:
-                var message = L10n.Settings.Hotspothelper.description
-                if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                    message += "\n\n"+L10n.Settings.Nmt.Wireguard.warning
-                }
-                cell.textLabel?.text =  message
+                cell.textLabel?.text =  L10n.Settings.Hotspothelper.description
 
             case .smallPackets:
                 if (pendingPreferences.vpnType == PIATunnelProfile.vpnType) {
