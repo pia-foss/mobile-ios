@@ -38,6 +38,10 @@ private extension String {
             return "WireGuard®"
         case PIATunnelProfile.vpnType:
             return "OpenVPN"
+        case IKEv2Profile.vpnType:
+            return "IPSec (IKEv2)"
+        case IPSecProfile.vpnType:
+            return "IPSec (IKEv1)"
         default:
             return self
         }
@@ -1485,8 +1489,12 @@ extension SettingsViewController: OptionsViewControllerDelegate {
 
         switch setting {
         case .vpnProtocolSelection:
-            let vpnType = option as? String
-            cell.textLabel?.text = vpnType?.vpnTypeDescription
+            let vpnType = option as! String
+            var message = vpnType.vpnTypeDescription
+            if vpnType == PIAWGTunnelProfile.vpnType {
+                message += " - PREVIEW"
+            }
+            cell.textLabel?.text = message
         case .vpnSocket:
             let rawSocketType = option as? String
             if rawSocketType != SettingsViewController.AUTOMATIC_SOCKET {
