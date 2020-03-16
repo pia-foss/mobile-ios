@@ -448,7 +448,7 @@ class DashboardViewController: AutolayoutViewController {
             
             // reconnect -> reconnect VPN and close
             alert.addActionWithTitle(L10n.Settings.Commit.Buttons.reconnect) {
-                Client.providers.vpnProvider.reconnect(after: nil, { error in
+                Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, { error in
                 })
             }
             
