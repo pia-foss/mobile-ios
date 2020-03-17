@@ -76,13 +76,13 @@ SPEC CHECKSUMS:
   Gloss: 13ab6b4b0ff4cb2448466edc957479b1bccea8ba
   lottie-ios: 06e0b54aab85ba128e332687d7f4ac4861a7a7ae
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
-  PIAWireguard: 2386a73dd5c658264504b7e1e84cb6bf11795ee4
+  PIAWireguard: c97665b0ae3d49989a31d2600cd7109364f807d4
   PopupDialog: f4bb461bf70ff422be0b56656566424ee9273080
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
   SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
-  TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
+  TunnelKit: d13d005c0c7febd18a03a87e1ab7d4414fef3ffd
 
 PODFILE CHECKSUM: 62df8fef13bf55237e8f3aefb550c71393e9c62c
 

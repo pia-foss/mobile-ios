@@ -26,6 +26,7 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAccess, WebServicesAccess, InAppAccess, WebServicesConsumer {
+    
     private let customWebServices: WebServices?
 
     init(webServices: WebServices? = nil) {
@@ -153,6 +154,42 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                                                      for: first)
         }
     }
+    
+    func login(with receiptRequest: LoginReceiptRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
+        guard !isLoggedIn else {
+            preconditionFailure()
+        }
+        
+        webServices.token(receipt: receiptRequest.receipt) { (token, error) in
+            
+            guard let token = token else {
+                callback?(nil, error)
+                return
+            }
+
+            self.webServices.info(token: token) { (accountInfo, error) in
+                guard let accountInfo = accountInfo else {
+                    callback?(nil, error)
+                    return
+                }
+                
+                self.updateDatabaseWith(token,
+                                        andUsername: "PIA")
+
+                //Save after confirm the login was successful.
+                self.accessedDatabase.plain.accountInfo = accountInfo
+
+                let user = UserAccount(credentials: Credentials(username: "", password: ""), info: accountInfo)
+                Macros.postNotification(.PIAAccountDidLogin, [
+                    .user: user
+                    ])
+                callback?(user, nil)
+            }
+
+        }
+
+    }
+
 
     func login(with request: LoginRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard !isLoggedIn else {

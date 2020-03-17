@@ -32,6 +32,8 @@ protocol WebServices: class {
 
     func token(credentials: Credentials, _ callback: LibraryCallback<String>?)
 
+    func token(receipt: Data, _ callback: LibraryCallback<String>?)
+
     func info(token: String, _ callback: LibraryCallback<AccountInfo>?)
 
     func update(credentials: Credentials, email: String, _ callback: SuccessLibraryCallback?)

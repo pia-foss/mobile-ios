@@ -66,6 +66,18 @@ public protocol AccountProvider: class {
     func login(with request: LoginRequest, _ callback: LibraryCallback<UserAccount>?)
 
     /**
+     Logs into system using the purchase receipt. The `isLoggedIn` variable becomes `true` on success.
+
+     - Precondition: `isLoggedIn` is `false`.
+     - Postcondition:
+        - Sets `currentUser` on success.
+        - Posts `Notification.Name.PIAAccountDidLogin` on success.
+     - Parameter request: The login receipt request.
+     - Parameter callback: Returns an `UserAccount`.
+     */
+    func login(with receiptRequest: LoginReceiptRequest, _ callback: LibraryCallback<UserAccount>?)
+
+    /**
      Refreshes information associated with the account currently logged in.
  
      - Precondition: `isLoggedIn` is `true`.

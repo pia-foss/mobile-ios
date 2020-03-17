@@ -322,7 +322,29 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
 
         }
     }
-    
+
+    func login(with receiptRequest: LoginReceiptRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
+        
+        webServices?.token(receipt: receiptRequest.receipt) { (token, error) in
+            guard let token = token else {
+                callback?(nil, error)
+                return
+            }
+            
+            self.webServices?.info(token: token) { (info, error) in
+                guard let info = info else {
+                    callback?(nil, error)
+                    return
+                }
+                let user = UserAccount(credentials: Credentials(username: "", password: ""), info: info)
+                self.currentUser = user
+                self.isLoggedIn = true
+                callback?(user, nil)
+            }
+
+        }
+    }
+
     func refreshAccountInfo(force: Bool, _ callback: ((AccountInfo?, Error?) -> Void)?) {
         fatalError("Not implemented")
     }

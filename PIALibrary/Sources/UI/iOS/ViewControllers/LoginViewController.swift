@@ -26,6 +26,7 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 class LoginViewController: AutolayoutViewController, WelcomeChild {
+    
     @IBOutlet private weak var scrollView: UIScrollView!
 
     @IBOutlet private weak var labelTitle: UILabel!
@@ -37,6 +38,8 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
     @IBOutlet private weak var buttonLogin: PIAButton!
     
     @IBOutlet private weak var couldNotGetPlanButton: UIButton!
+
+    @IBOutlet private weak var loginWithReceipt: UIButton!
 
     var preset: Preset?
     private weak var delegate: PIAWelcomeViewControllerDelegate?
@@ -97,6 +100,65 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
     }
     // MARK: Actions
     
+    @IBAction private func logInWithReceipt(_ sender: Any?) {
+        
+        guard !isLogging else {
+            return
+        }
+        
+        guard let receipt = Client.store.paymentReceipt else {
+            return
+        }
+
+        let request = LoginReceiptRequest(receipt: receipt)
+
+        log.debug("Logging in...")
+
+        enableInteractions(false)
+
+        self.showLoadingAnimation()
+        
+        preset?.accountProvider.login(with: request) { (user, error) in
+            self.enableInteractions(true)
+
+            self.hideLoadingAnimation()
+
+            guard let user = user else {
+                var errorMessage: String?
+                if let error = error {
+                    if let clientError = error as? ClientError {
+                        switch clientError {
+                        case .unauthorized:
+                            errorMessage = L10n.Welcome.Login.Error.unauthorized
+
+                        case .throttled:
+                            errorMessage = L10n.Welcome.Login.Error.throttled
+                            
+                        default:
+                            break
+                        }
+                    }
+                    if (errorMessage == nil) {
+                        errorMessage = error.localizedDescription
+                    }
+                    log.error("Failed to log in (error: \(error))")
+                } else {
+                    log.error("Failed to log in")
+                }
+
+                Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                        message: errorMessage ?? L10n.Welcome.Login.Error.title)
+                return
+            }
+            
+            log.debug("Login succeeded!")
+            
+            self.completionDelegate?.welcomeDidLogin(withUser: user, topViewController: self)
+        }
+
+
+    }
+
     @IBAction private func logIn(_ sender: Any?) {
     
         guard !isLogging else {
@@ -194,6 +256,7 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
         Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applyInput(textUsername)
         Theme.current.applyInput(textPassword)
+        Theme.current.applyButtonLabelMediumStyle(loginWithReceipt)
         Theme.current.applyButtonLabelMediumStyle(couldNotGetPlanButton)
     }
     
@@ -205,6 +268,8 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
         buttonLogin.accessibilityIdentifier = "uitests.login.submit"
         couldNotGetPlanButton.setTitle(L10n.Welcome.Login.Restore.button,
                                        for: [])
+        loginWithReceipt.setTitle(L10n.Welcome.Login.Receipt.button,
+                                  for: [])
     }
 
 }

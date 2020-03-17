@@ -43,6 +43,12 @@ class MockWebServices: WebServices {
         callback?(result, error)
     }
 
+    func token(receipt: Data, _ callback: ((String?, Error?) -> Void)?) {
+        let result = "AUTH_TOKEN"
+        let error: ClientError? = (result == nil) ? .unsupported : nil
+        callback?(result, error)
+    }
+
     func info(token: String, _ callback: ((AccountInfo?, Error?) -> Void)?) {
         let result = accountInfo?()
         let error: ClientError? = (result == nil) ? .unsupported : nil

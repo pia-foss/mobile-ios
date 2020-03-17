@@ -623,7 +623,7 @@ You will not be charged during this process.</string>
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XgW-nz-hik">
-                                                                <rect key="frame" x="27" y="29" width="266" height="268.5"/>
+                                                                <rect key="frame" x="27" y="29" width="266" height="307.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in to your account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rk-V0-kLQ">
                                                                         <rect key="frame" x="47.5" y="0.0" width="171" height="19.5"/>
@@ -661,7 +661,7 @@ You will not be charged during this process.</string>
                                                                         </connections>
                                                                     </view>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Emv-5o-nzd">
-                                                                        <rect key="frame" x="0.0" y="248.5" width="266" height="20"/>
+                                                                        <rect key="frame" x="0.0" y="287.5" width="266" height="20"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="20" id="82T-Gm-hZ2"/>
                                                                         </constraints>
@@ -669,15 +669,29 @@ You will not be charged during this process.</string>
                                                                             <segue destination="vXZ-lx-hvc" kind="show" identifier="RestoreLoginPurchaseSegue" id="aVb-49-Y5l"/>
                                                                         </connections>
                                                                     </button>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4OL-1u-sdN">
+                                                                        <rect key="frame" x="0.0" y="248.5" width="266" height="20"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="20" id="SLD-gi-EF7"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <action selector="logInWithReceipt:" destination="gOX-c2-oGJ" eventType="touchUpInside" id="5hZ-Tf-eeJ"/>
+                                                                        </connections>
+                                                                    </button>
                                                                 </subviews>
                                                                 <constraints>
+                                                                    <constraint firstItem="Emv-5o-nzd" firstAttribute="top" secondItem="4OL-1u-sdN" secondAttribute="bottom" constant="19" id="D3k-hO-D8H"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="4OL-1u-sdN" secondAttribute="trailing" id="GmP-XN-FQH"/>
                                                                     <constraint firstItem="Wtm-HW-6FS" firstAttribute="trailing" secondItem="Gcb-kt-Yu7" secondAttribute="trailing" id="H7o-gu-nyL"/>
                                                                     <constraint firstItem="2Rk-V0-kLQ" firstAttribute="centerX" secondItem="XgW-nz-hik" secondAttribute="centerX" id="IxB-Hs-m36"/>
                                                                     <constraint firstItem="jEh-9o-rVi" firstAttribute="trailing" secondItem="Gcb-kt-Yu7" secondAttribute="trailing" id="KNu-Za-GOt"/>
                                                                     <constraint firstItem="Wtm-HW-6FS" firstAttribute="leading" secondItem="Gcb-kt-Yu7" secondAttribute="leading" id="KoY-pt-6W0"/>
+                                                                    <constraint firstItem="4OL-1u-sdN" firstAttribute="top" secondItem="jEh-9o-rVi" secondAttribute="bottom" constant="19" id="LBP-uO-0f4"/>
                                                                     <constraint firstItem="Wtm-HW-6FS" firstAttribute="top" secondItem="Gcb-kt-Yu7" secondAttribute="bottom" constant="15" id="Mtw-Tl-kU5"/>
                                                                     <constraint firstItem="jEh-9o-rVi" firstAttribute="top" secondItem="Wtm-HW-6FS" secondAttribute="bottom" constant="15" id="N4Q-cw-0Vj"/>
                                                                     <constraint firstItem="Emv-5o-nzd" firstAttribute="leading" secondItem="XgW-nz-hik" secondAttribute="leading" id="NZQ-d1-PES"/>
+                                                                    <constraint firstItem="4OL-1u-sdN" firstAttribute="leading" secondItem="XgW-nz-hik" secondAttribute="leading" id="Ts2-s1-uha"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="Emv-5o-nzd" secondAttribute="bottom" id="UPk-Wm-uMP"/>
                                                                     <constraint firstAttribute="bottom" secondItem="Emv-5o-nzd" secondAttribute="bottom" id="VqD-zG-Kh8"/>
                                                                     <constraint firstItem="Wtm-HW-6FS" firstAttribute="height" secondItem="Gcb-kt-Yu7" secondAttribute="height" id="ZnI-xV-5hO"/>
                                                                     <constraint firstAttribute="trailing" secondItem="jEh-9o-rVi" secondAttribute="trailing" id="b42-kd-WBq"/>
@@ -686,7 +700,6 @@ You will not be charged during this process.</string>
                                                                     <constraint firstItem="2Rk-V0-kLQ" firstAttribute="top" secondItem="XgW-nz-hik" secondAttribute="top" id="gX3-qV-EcT"/>
                                                                     <constraint firstItem="Gcb-kt-Yu7" firstAttribute="top" secondItem="2Rk-V0-kLQ" secondAttribute="bottom" constant="30" id="gew-Yr-Sqc"/>
                                                                     <constraint firstItem="jEh-9o-rVi" firstAttribute="leading" secondItem="Gcb-kt-Yu7" secondAttribute="leading" id="mBe-Fy-A5M"/>
-                                                                    <constraint firstItem="Emv-5o-nzd" firstAttribute="top" secondItem="jEh-9o-rVi" secondAttribute="bottom" constant="19" id="xkr-9V-VBV"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
@@ -777,6 +790,7 @@ You will not be charged during this process.</string>
                         <outlet property="buttonLogin" destination="jEh-9o-rVi" id="eaK-D0-FJE"/>
                         <outlet property="couldNotGetPlanButton" destination="Emv-5o-nzd" id="vhr-De-KQ4"/>
                         <outlet property="labelTitle" destination="2Rk-V0-kLQ" id="qdr-SQ-OwV"/>
+                        <outlet property="loginWithReceipt" destination="4OL-1u-sdN" id="gC0-4X-aYT"/>
                         <outlet property="scrollView" destination="RgS-fn-CJH" id="gQR-aC-e9f"/>
                         <outlet property="textPassword" destination="Wtm-HW-6FS" id="bvM-nY-mSr"/>
                         <outlet property="textUsername" destination="Gcb-kt-Yu7" id="5rD-If-yIW"/>
@@ -1057,11 +1071,11 @@ You will not be charged during this process.</string>
             <objects>
                 <viewController storyboardIdentifier="PIAWelcomeViewController" automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" customClass="PIAWelcomeViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEF-LS-PZ6">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                 <connections>
                                     <segue destination="lku-HF-3OI" kind="embed" id="UXm-xH-vgv"/>
                                 </connections>
@@ -1451,7 +1465,7 @@ You will not be charged during this process.</string>
         <image name="shield-icon" width="29" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="750-Xo-1Ft"/>
+        <segue reference="aVb-49-Y5l"/>
         <segue reference="apR-1h-IYV"/>
         <segue reference="WeP-PD-hnE"/>
     </inferredMetricsTieBreakers>

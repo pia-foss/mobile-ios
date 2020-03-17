@@ -62,7 +62,7 @@ internal enum L10n {
         internal static let anonymous = L10n.tr("Signup", "purchase.trials.anonymous")
         /// Support 10 devices at once
         internal static let devices = L10n.tr("Signup", "purchase.trials.devices")
-        /// Start your 7-days free trial
+        /// Start your 7-day free trial
         internal static let intro = L10n.tr("Signup", "purchase.trials.intro")
         /// Connect to any region easily
         internal static let region = L10n.tr("Signup", "purchase.trials.region")
@@ -286,6 +286,10 @@ internal enum L10n {
       internal enum Password {
         /// Password
         internal static let placeholder = L10n.tr("Welcome", "login.password.placeholder")
+      }
+      internal enum Receipt {
+        /// Login using purchase receipt
+        internal static let button = L10n.tr("Welcome", "login.receipt.button")
       }
       internal enum Restore {
         /// Didn't receive account details?

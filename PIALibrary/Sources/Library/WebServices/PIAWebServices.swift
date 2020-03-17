@@ -59,6 +59,37 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         })
     }
 
+    /***
+     Generates a new auth token for the specific user
+     */
+    func token(receipt: Data, _ callback: ((String?, Error?) -> Void)?) {
+        let endpoint = ClientEndpoint.token
+        let status = [200, 401, 429]
+        let errors: [Int: ClientError] = [
+            401: .unauthorized,
+            429: .throttled
+        ]
+        
+        let parameters = ["store": "apple_app_store",
+                          "receipt": receipt.base64EncodedString()]
+        
+        req(nil, .post, endpoint, useAuthToken: true, parameters, status, JSONRequestExecutor() { (json, status, error) in
+            if let knownError = self.knownError(endpoint, status, errors) {
+                callback?(nil, knownError)
+                return
+            }
+            guard let json = json else {
+                callback?(nil, error)
+                return
+            }
+            guard let token = GlossToken(json: json)?.parsed else {
+                callback?(nil, ClientError.malformedResponseData)
+                return
+            }
+            callback?(token, nil)
+        })
+    }
+
     func info(token: String, _ callback: ((AccountInfo?, Error?) -> Void)?) {
         let endpoint = ClientEndpoint.account
         let status = [200, 401, 429]
