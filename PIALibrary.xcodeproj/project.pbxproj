@@ -278,6 +278,7 @@
 		DD6DC5B921B6A83400F9D538 /* UIViewLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6DC5B821B6A83400F9D538 /* UIViewLoading.swift */; };
 		DD6DC5BC21B6A8FC00F9D538 /* pia-spinner.json in Resources */ = {isa = PBXBuildFile; fileRef = DD6DC5BB21B6A8FC00F9D538 /* pia-spinner.json */; };
 		DD6FB0372224355600A84F05 /* UIDevice+WiFi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6FB0362224355600A84F05 /* UIDevice+WiFi.swift */; };
+		DD7411A923EC35B40058CEF3 /* PIAWGTunnelProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7411A823EC35B40058CEF3 /* PIAWGTunnelProfile.swift */; };
 		DD76292821ECDFF80092DF50 /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD76292721ECDFF80092DF50 /* Usage.swift */; };
 		DD76292921ECDFF80092DF50 /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD76292721ECDFF80092DF50 /* Usage.swift */; };
 		DD76292E21ECEC3F0092DF50 /* DataManipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD76292D21ECEC3F0092DF50 /* DataManipulation.swift */; };
@@ -304,6 +305,7 @@
 		DDD824EA2189CD5700151709 /* NavigationLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E92189CD5700151709 /* NavigationLogoView.swift */; };
 		DDE27E0422E1B1A700503A89 /* ProductTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE27E0322E1B1A700503A89 /* ProductTests.swift */; };
 		DDE93C5722F9847E0054FE28 /* PurchaseTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE93C5622F9847E0054FE28 /* PurchaseTrialViewController.swift */; };
+		DDF7F73F2405846800A671C7 /* PIAWGTunnelProvider+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF7F73E2405846800A671C7 /* PIAWGTunnelProvider+Profile.swift */; };
 		DDFCFAA821E924A70081F235 /* TileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAA721E924A70081F235 /* TileProvider.swift */; };
 		DDFCFAA921E924AD0081F235 /* TileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAA721E924A70081F235 /* TileProvider.swift */; };
 		DDFCFAAB21E925160081F235 /* DefaultTileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAAA21E925160081F235 /* DefaultTileProvider.swift */; };
@@ -583,6 +585,7 @@
 		DD6DC5B821B6A83400F9D538 /* UIViewLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewLoading.swift; sourceTree = "<group>"; };
 		DD6DC5BB21B6A8FC00F9D538 /* pia-spinner.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pia-spinner.json"; sourceTree = "<group>"; };
 		DD6FB0362224355600A84F05 /* UIDevice+WiFi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+WiFi.swift"; sourceTree = "<group>"; };
+		DD7411A823EC35B40058CEF3 /* PIAWGTunnelProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAWGTunnelProfile.swift; sourceTree = "<group>"; };
 		DD76292721ECDFF80092DF50 /* Usage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usage.swift; sourceTree = "<group>"; };
 		DD76292D21ECEC3F0092DF50 /* DataManipulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManipulation.swift; sourceTree = "<group>"; };
 		DD86BAF021EF5B6D004A988F /* UIViewAutolayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewAutolayout.swift; sourceTree = "<group>"; };
@@ -602,6 +605,7 @@
 		DDD824E92189CD5700151709 /* NavigationLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLogoView.swift; sourceTree = "<group>"; };
 		DDE27E0322E1B1A700503A89 /* ProductTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductTests.swift; path = "../../../../../../System/Volumes/Data/Users/ueshiba/Projects/PIA/client-library-apple/PIALibraryTests/ProductTests.swift"; sourceTree = "<group>"; };
 		DDE93C5622F9847E0054FE28 /* PurchaseTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTrialViewController.swift; sourceTree = "<group>"; };
+		DDF7F73E2405846800A671C7 /* PIAWGTunnelProvider+Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PIAWGTunnelProvider+Profile.swift"; sourceTree = "<group>"; };
 		DDFCFAA721E924A70081F235 /* TileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileProvider.swift; sourceTree = "<group>"; };
 		DDFCFAAA21E925160081F235 /* DefaultTileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTileProvider.swift; sourceTree = "<group>"; };
 		DDFCFAAC21E925B60081F235 /* TileableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileableCell.swift; sourceTree = "<group>"; };
@@ -1113,7 +1117,9 @@
 			isa = PBXGroup;
 			children = (
 				0EFEB4BF2007784A00F81029 /* PIATunnelProvider+Profile.swift */,
+				DDF7F73E2405846800A671C7 /* PIAWGTunnelProvider+Profile.swift */,
 				0EFEB4C02007784A00F81029 /* PIATunnelProfile.swift */,
+				DD7411A823EC35B40058CEF3 /* PIAWGTunnelProfile.swift */,
 			);
 			path = VPN;
 			sourceTree = "<group>";
@@ -1502,6 +1508,7 @@
 				"${BUILT_PRODUCTS_DIR}/FXPageControl/FXPageControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Gloss/Gloss.framework",
 				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/PIAWireguard/PIAWireguard.framework",
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
 				"${BUILT_PRODUCTS_DIR}/QuickLayout/QuickLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
@@ -1517,6 +1524,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FXPageControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gloss.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAWireguard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QuickLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
@@ -1542,6 +1550,7 @@
 				"${BUILT_PRODUCTS_DIR}/FXPageControl/FXPageControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Gloss/Gloss.framework",
 				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/PIAWireguard/PIAWireguard.framework",
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
 				"${BUILT_PRODUCTS_DIR}/QuickLayout/QuickLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
@@ -1557,6 +1566,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FXPageControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gloss.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAWireguard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QuickLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
@@ -1815,6 +1825,7 @@
 				0EA8072F20A1E7C60033EC1A /* GlossRedeem.swift in Sources */,
 				0EA4C4311FDDD48F0041C3D8 /* Server.swift in Sources */,
 				DD56E3F4225F5D22002EDFB2 /* GlossProduct.swift in Sources */,
+				DD7411A923EC35B40058CEF3 /* PIAWGTunnelProfile.swift in Sources */,
 				84577FC5213D9B4D006DEC3D /* UILabel+LineHeight.swift in Sources */,
 				0EB9667E1FDF36490086ABC2 /* GlossParser.swift in Sources */,
 				DDA4A7BE21F5C31400A02ACD /* IKEv2Profile.swift in Sources */,
@@ -1830,6 +1841,7 @@
 				DDD824E5218996CD00151709 /* Pages.swift in Sources */,
 				0E0E5B131F8297DE00022CD0 /* KeychainStore.swift in Sources */,
 				0E0E5B0D1F8297BD00022CD0 /* PlainStore.swift in Sources */,
+				DDF7F73F2405846800A671C7 /* PIAWGTunnelProvider+Profile.swift in Sources */,
 				0EE78AEE1F818720002E4CDD /* LibraryCallback.swift in Sources */,
 				0E53A8561FE5D770000C2A18 /* MockWebServices.swift in Sources */,
 				DDC0841322EB07FB00DA2701 /* GlossInvitesInformation.swift in Sources */,
@@ -2264,10 +2276,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = PIALibrary/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2.2.4;
+				MARKETING_VERSION = 2.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.privateinternetaccess.apple.PIALibrary;
 				PRODUCT_NAME = PIALibrary;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2290,10 +2304,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = PIALibrary/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2.2.4;
+				MARKETING_VERSION = 2.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.privateinternetaccess.apple.PIALibrary;
 				PRODUCT_NAME = PIALibrary;
 				PROVISIONING_PROFILE_SPECIFIER = "";

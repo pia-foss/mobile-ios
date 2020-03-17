@@ -207,7 +207,7 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         activeProfile.updatePreferences(callback)
     }
 
-    func reconnect(after delay: Int?, _ callback: SuccessLibraryCallback?) {
+    func reconnect(after delay: Int?, forceDisconnect: Bool = false,  _ callback: SuccessLibraryCallback?) {
         guard accessedProviders.accountProvider.isLoggedIn else {
             preconditionFailure()
         }
@@ -215,11 +215,18 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
             preconditionFailure()
         }
         let fallbackDelay = delay ?? accessedConfiguration.vpnReconnectionDelay
-        activeProfile.disconnect { (error) in
-            if let _ = error {
-                callback?(error)
-                return
+        
+        if forceDisconnect {
+            activeProfile.disconnect { (error) in
+                if let _ = error {
+                    callback?(error)
+                    return
+                }
+                Macros.dispatch(after: .milliseconds(fallbackDelay)) {
+                    activeProfile.connect(withConfiguration: self.vpnClientConfiguration(), callback)
+                }
             }
+        } else {
             Macros.dispatch(after: .milliseconds(fallbackDelay)) {
                 activeProfile.connect(withConfiguration: self.vpnClientConfiguration(), callback)
             }

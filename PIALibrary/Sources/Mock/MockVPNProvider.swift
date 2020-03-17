@@ -111,7 +111,7 @@ public class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess {
     }
     
     /// :nodoc:
-    public func reconnect(after delay: Int?, _ callback: SuccessLibraryCallback?) {
+    public func reconnect(after delay: Int?, forceDisconnect: Bool = false, _ callback: SuccessLibraryCallback?) {
         let disconnectionDelay: Int
 //        if (vpnStatus == .changingServer) {
 //            disconnectionDelay = 1000

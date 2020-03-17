@@ -27,6 +27,11 @@ class GlossServer: GlossParser {
     let parsed: Server
     
     required init?(json: JSON) {
+        
+        guard let serial: String = "serial" <~~ json else {
+            return nil
+        }
+
         guard let name: String = "name" <~~ json else {
             return nil
         }
@@ -55,6 +60,7 @@ class GlossServer: GlossParser {
         }
 
         parsed = Server(
+            serial: serial,
             name: name,
             country: country,
             hostname: hostname,
@@ -69,6 +75,7 @@ class GlossServer: GlossParser {
 extension Server: JSONEncodable {
     public func toJSON() -> JSON? {
         return jsonify([
+            "serial" ~~> serial,
             "name" ~~> name,
             "country" ~~> country,
             "dns" ~~> hostname,
