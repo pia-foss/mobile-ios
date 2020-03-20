@@ -66,6 +66,8 @@ protocol PlainStore: class {
     
     var isPersistentConnection: Bool? { get set }
 
+    var gdprTermsAccepted: Bool? { get set }
+
     var shouldConnectForAllNetworks: Bool? { get set }
 
     var useWiFiProtection: Bool? { get set }

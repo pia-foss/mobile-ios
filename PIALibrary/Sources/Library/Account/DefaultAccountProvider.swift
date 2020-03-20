@@ -167,6 +167,8 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 return
             }
 
+            self.updateToken(token)
+
             self.webServices.info(token: token) { (accountInfo, error) in
                 guard let accountInfo = accountInfo else {
                     callback?(nil, error)
@@ -174,7 +176,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 }
                 
                 self.updateDatabaseWith(token,
-                                        andUsername: "PIA")
+                                        andUsername: accountInfo.username)
 
                 //Save after confirm the login was successful.
                 self.accessedDatabase.plain.accountInfo = accountInfo

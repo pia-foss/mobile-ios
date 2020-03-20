@@ -108,6 +108,7 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
         webServices.accountInfo = {
             return AccountInfo(
                 email: self.mockEmail,
+                username: "p0000000",
                 plan: self.mockPlan,
                 productId: self.mockProductId,
                 isRenewable: self.mockIsRenewable,

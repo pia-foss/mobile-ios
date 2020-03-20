@@ -27,6 +27,9 @@ public struct AccountInfo {
 
     /// The linked email address if any.
     public internal(set) var email: String?
+    
+    /// PIA username
+    public let username: String
 
     /// The currently subscribed `Plan`.
     public let plan: Plan

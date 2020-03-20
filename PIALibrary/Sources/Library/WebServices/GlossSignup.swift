@@ -25,12 +25,16 @@ import Gloss
 
 extension Signup: JSONEncodable {
     func toJSON() -> JSON? {
-        return jsonify([
+        var json = jsonify([
             "email" ~~> email,
             "receipt" ~~> receipt.base64EncodedString(),
             "marketing" ~~> marketing,
             "debug" ~~> debug,
             "store" ~~> "apple_app_store"
         ])
+        if email == "" {
+            json?.removeValue(forKey: "email")
+        }
+        return json
     }
 }

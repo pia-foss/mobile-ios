@@ -22,7 +22,7 @@
 
 import UIKit
 
-public class GetStartedViewController: AutolayoutViewController, ConfigurationAccess {
+public class GetStartedViewController: PIAWelcomeViewController {
 
     private static let smallDeviceMaxViewHeight: CGFloat = 520
     private static let maxViewHeight: CGFloat = 500
@@ -48,14 +48,16 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
     @IBOutlet private weak var textAgreement: UITextView!
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
-    private var allPlans: [PurchasePlan] = [.dummy, .dummy]
-    private var selectedPlanIndex: Int?
+    private var signupEmail: String?
+    private var signupTransaction: InAppTransaction?
+    private var isPurchasing = false
 
-    var preset = Preset()
-    private weak var delegate: PIAWelcomeViewControllerDelegate?
+    weak var completionDelegate: WelcomeCompletionDelegate?
 
     @IBOutlet private weak var buttonViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet private weak var hiddenButtonsConstraintHeight: NSLayoutConstraint!
+
+    var termsWerePresentedOnce = false
 
     private var buttonViewIsExpanded = false {
         didSet {
@@ -95,6 +97,8 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
     
     override public func viewDidLoad() {
         
+        allPlans = [.dummy, .dummy]
+        completionDelegate = self
         subscribeNowTitle.text = L10n.Signup.Purchase.Trials.intro
         subscribeNowDescription.text = L10n.Signup.Purchase.Trials.Price.after("")
 
@@ -156,25 +160,63 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
     }
 
     // MARK: Actions
+    @IBAction func confirmPlan() {
+        
+        if let index = selectedPlanIndex,
+            let plans = allPlans {
+            let plan = plans[index]
+            self.startPurchaseProcessWithEmail("", andPlan: plan)
+        }
+        
+    }
+    
+    private func startPurchaseProcessWithEmail(_ email: String,
+                                               andPlan plan: PurchasePlan) {
+                
+        guard !Client.store.hasUncreditedTransactions else {
+            let alert = Macros.alert(
+                nil,
+                L10n.Signup.Purchase.Uncredited.Alert.message
+            )
+            alert.addCancelAction(L10n.Signup.Purchase.Uncredited.Alert.Button.cancel)
+            alert.addActionWithTitle(L10n.Signup.Purchase.Uncredited.Alert.Button.recover) {
+                self.navigationController?.popToRootViewController(animated: true)
+                Macros.postNotification(.PIARecoverAccount)
+            }
+            present(alert, animated: true, completion: nil)
+            return
+
+        }
+
+        //textEmail.text = email
+        
+        isPurchasing = true
+        disableInteractions(fully: true)
+        self.showLoadingAnimation()
+        
+        preset.accountProvider.purchase(plan: plan.plan) { (transaction, error) in
+            self.isPurchasing = false
+            self.enableInteractions()
+            self.hideLoadingAnimation()
+            
+            guard let transaction = transaction else {
+                if let error = error {
+                    let message = error.localizedDescription
+                    Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                            message: message)
+                }
+                return
+            }
+            self.signupEmail = email
+            self.signupTransaction = transaction
+            self.perform(segue: StoryboardSegue.Welcome.signupViaPurchaseSegue)
+        }
+        
+    }
+
     
     @IBAction private func scrollPage(_ sender: UIPageControl) {
         scrollToPage(sender.currentPage, animated: true)
-    }
-    
-    /**
-     Creates a wrapped `GetStartedViewController` ready for presentation.
-     
-     - Parameter preset: The optional `Preset` to configure this controller with
-     - Parameter delegate: The `PIAWelcomeViewControllerDelegate` to handle raised events
-     */
-    public static func with(preset: Preset? = nil, delegate: PIAWelcomeViewControllerDelegate? = nil) -> UIViewController {
-        let nav = StoryboardScene.Welcome.initialScene.instantiate()
-        let vc = nav.topViewController as! GetStartedViewController
-        if let customPreset = preset {
-            vc.preset = customPreset
-        }
-        vc.delegate = delegate
-        return nav
     }
     
     public static func withPurchase(preset: Preset? = nil, delegate: PIAWelcomeViewControllerDelegate? = nil) -> UIViewController {
@@ -191,6 +233,25 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        if segue.identifier == StoryboardSegue.Welcome.presentGDPRTermsSegue.rawValue {
+            let gdprViewController = segue.destination as! GDPRViewController
+            gdprViewController.delegate = self
+        } else if (segue.identifier == StoryboardSegue.Welcome.signupViaPurchaseSegue.rawValue) {
+            let nav = segue.destination as! UINavigationController
+            let vc = nav.topViewController as! SignupInProgressViewController
+            
+            guard let email = signupEmail else {
+                fatalError("Signing up and signupEmail is not set")
+            }
+            var metadata = SignupMetadata(email: email)
+            metadata.title = L10n.Signup.InProgress.title
+            metadata.bodySubtitle = L10n.Signup.InProgress.message
+            vc.metadata = metadata
+            vc.signupRequest = SignupRequest(email: email, transaction: signupTransaction)
+            vc.preset = preset
+            vc.completionDelegate = completionDelegate
+        }
+        
         guard let vc = segue.destination as? PIAWelcomeViewController else {
             return
         }
@@ -201,10 +262,6 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
         switch segue.identifier  {
         case StoryboardSegue.Welcome.purchaseVPNPlanSegue.rawValue:
             vc.preset.pages = .purchase
-        case StoryboardSegue.Welcome.subscribeNowVPNPlanSegue.rawValue:
-            vc.preset.pages = .directPurchase
-            vc.allPlans = allPlans
-            vc.selectedPlanIndex = 0
         case StoryboardSegue.Welcome.loginAccountSegue.rawValue:
             vc.preset.pages = .login
         case StoryboardSegue.Welcome.restorePurchaseSegue.rawValue:
@@ -212,7 +269,7 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
         default:
             break
         }
-        
+                
     }
     
     // MARK: Orientation
@@ -230,14 +287,28 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
 
     /// :nodoc:
     public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        super.viewWillAppear(animated)
         if let products = preset.accountProvider.planProducts {
             refreshPlans(products)
         } else {
             disableInteractions(fully: false)
         }
+        
+        guard Client.preferences.gdprTermsAccepted else {
+            
+            if !termsWerePresentedOnce {
+                //present term and conditions
+                termsWerePresentedOnce = true
+                self.performSegue(withIdentifier: StoryboardSegue.Welcome.presentGDPRTermsSegue.rawValue,
+                                  sender: nil)
+                return
+            }
+            return
+
+        }
+
     }
     
     private func styleButtons() {
@@ -287,8 +358,10 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
     }
 
     private func enableInteractions() {
-        self.subscribeNowButton.isEnabled = true
-        self.spinner.stopAnimating()
+        if !isPurchasing { //dont reenable the screen if we are still purchasing
+            self.subscribeNowButton.isEnabled = true
+            self.spinner.stopAnimating()
+        }
     }
     
 
@@ -410,7 +483,7 @@ public class GetStartedViewController: AutolayoutViewController, ConfigurationAc
                 }
 
             }
-            allPlans[0] = purchase
+            allPlans?[0] = purchase
             selectedPlanIndex = 0
         }
     }
@@ -423,4 +496,20 @@ extension GetStartedViewController: UIScrollViewDelegate {
         pageControl.currentPage = currentPageIndex
         updateButtonsToCurrentPage()
     }
+}
+
+extension GetStartedViewController: GDPRDelegate {
+    
+    public func gdprViewWasAccepted() {
+        let preferences = Client.preferences.editable()
+        preferences.gdprTermsAccepted = true
+        preferences.commit()
+    }
+    
+    public func gdprViewWasRejected() {
+        let preferences = Client.preferences.editable()
+        preferences.gdprTermsAccepted = false
+        preferences.commit()
+    }
+    
 }
