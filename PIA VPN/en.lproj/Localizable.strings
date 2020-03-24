@@ -38,19 +38,6 @@
 "shortcuts.disconnect" = "Disconnect";
 "shortcuts.select_region" = "Select a region";
 
-// WALKTHROUGH
-
-"walkthrough.action.next" = "NEXT";
-"walkthrough.action.done" = "DONE";
-"walkthrough.action.skip" = "SKIP";
-
-"walkthrough.page.1.title" = "Support 10 devices at once";
-"walkthrough.page.1.description" = "Protect yourself on up to 10 devices at a time.";
-"walkthrough.page.2.title" = "Connect to any region easily";
-"walkthrough.page.2.description" = "With servers around the globe, you are always under protection.";
-"walkthrough.page.3.title" = "Protect yourself from ads";
-"walkthrough.page.3.description" = "Enabling our Content Blocker prevents ads from showing in Safari.";
-
 // RENEWAL
 
 "renewal.success.title" = "Thank you";
@@ -241,6 +228,7 @@
 "settings.nmt.killswitch.disabled" = "The VPN kill switch is currently disabled. In order to ensure that the Network Management Tool is functioning, and that you are able to reconnect when switching networks, please enable the VPN kill switch in your settings.";
 "settings.nmt.optout.disconnect.alerts" = "Opt-out disconnect confirmation alert";
 "settings.nmt.optout.disconnect.alerts.description" = "Disables the warning alert when disconnecting from the VPN.";
+"settings.nmt.wireguard.warning" = "WireGuard® doesn't need to reconnect when you switch between different networks. It may be necessary to manually disconnect the VPN on trusted networks.";
 
 // REGION
 
@@ -263,7 +251,7 @@
 "tiles.subscription.yearly" = "Yearly";
 "tiles.subscription.days.left" = "(%d days left)";
 "tiles.usage.title" = "Usage";
-"tiles.usage.ipsec.title" = "USAGE (Disabled unless using OpenVPN)";
+"tiles.usage.ipsec.title" = "USAGE (Disabled unless using OpenVPN or WireGuard®)";
 "tiles.usage.upload" = "Upload";
 "tiles.usage.download" = "Download";
 "tiles.nmt.cellular" = "Cellular";

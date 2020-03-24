@@ -191,12 +191,15 @@
 "settings.nmt.killswitch.disabled" = "VPN 切斷開關目前已停用。為確保網路管理工具正常運作，以及在切換網路時能夠重新連線，請在設定中啟用 VPN 切斷開關功能。";
 "settings.nmt.optout.disconnect.alerts" = "取消解除連線確認提示";
 "settings.nmt.optout.disconnect.alerts.description" = "解除 VPN 連線時不發出警告提示。";
+"settings.nmt.wireguard.warning" = "您切換至其他網路後，不需重新連接 WireGuard®。但您可能必須將 WireGuard® 與信任網路解除連線 。";
 "settings.reset.defaults.confirm.button" = "重設";
 "settings.reset.defaults.confirm.message" = "此操作會將應用程式重設為預設狀態。所有您所作的變更都將會被清除。";
 "settings.reset.defaults.confirm.title" = "重設設定";
 "settings.reset.defaults.title" = "重設至預設設定";
 "settings.reset.footer" = "進行此操作會將以上所有設定都重設至預設狀態。";
 "settings.reset.title" = "重設";
+"settings.small.packets.description" = "IP 封包尺寸將略為縮小，來改善與部分路由器和行動網路的相容性。";
+"settings.small.packets.title" = "使用小封包";
 "settings.trusted.networks.connect.message" = "要連線至 VPN 以為此網路提供保護嗎？";
 "settings.trusted.networks.message" = "PIA 不會自動連線至這些網路。";
 "settings.trusted.networks.sections.available" = "可用網路";
@@ -231,7 +234,7 @@
 "tiles.subscription.trial" = "試用版";
 "tiles.subscription.yearly" = "年繳";
 "tiles.usage.download" = "下載";
-"tiles.usage.ipsec.title" = "使用狀況（除非使用 OpenVPN，否則已停用）";
+"tiles.usage.ipsec.title" = "使用情況（除非使用 OpenVPN 或 WireGuard®，否則為停用）";
 "tiles.usage.title" = "使用狀況";
 "tiles.usage.upload" = "上傳";
 "today.widget.login" = "登入";
@@ -251,5 +254,3 @@
 "walkthrough.page.2.title" = "輕易就能連線到任何地區";
 "walkthrough.page.3.description" = "只要啟用我們的內容阻擋器，使用 Safari 瀏覽器時就再也不會看到廣告。";
 "walkthrough.page.3.title" = "讓自己免受廣告滋擾";
-"settings.small.packets.title" = "使用小封包";
-"settings.small.packets.description" = "將稍微降低 IP 封包大小以提高與部分路由器及行動網路的相容性。";

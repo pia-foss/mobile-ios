@@ -191,12 +191,15 @@
 "settings.nmt.killswitch.disabled" = "Der VPN-Notausschalter ist derzeit deaktiviert. Um sicherzustellen, dass das Network Management Tool funktioniert und Sie beim Netzwerkwechsel die Verbindung wiederherstellen können, aktivieren Sie bitte den VPN-Notausschalter in Ihren Einstellungen.";
 "settings.nmt.optout.disconnect.alerts" = "Deaktivierung der Warnung zur Bestätigung bei Verbindungsabbruch";
 "settings.nmt.optout.disconnect.alerts.description" = "Deaktiviert den Warnhinweis beim Trennen der Verbindung vom VPN.";
+"settings.nmt.wireguard.warning" = "WireGuard® muss nicht erneut verbunden werden, wenn Sie zwischen verschiedenen Netzwerken wechseln. In vertrauenswürdigen Netzwerken kann es notwendig sein, die VPN-Verbindung manuell zu trennen.";
 "settings.reset.defaults.confirm.button" = "Zurücksetzen";
 "settings.reset.defaults.confirm.message" = "Damit wird die App in den Ausgangszustand versetzt. Alle Änderungen gehen verloren.";
 "settings.reset.defaults.confirm.title" = "Einstellungen zurücksetzen";
 "settings.reset.defaults.title" = "Auf Standardeinstellungen zurücksetzen";
 "settings.reset.footer" = "Damit werden alle obigen Einstellungen auf den Standardwert zurückgesetzt.";
 "settings.reset.title" = "ZURÜCKSETZEN";
+"settings.small.packets.description" = "Wird die IP-Paketgröße leicht verringern, um die Kompatibilität mit manchen Routern und Mobilfunknetzen zu verbessern.";
+"settings.small.packets.title" = "Kleine Pakete verwenden";
 "settings.trusted.networks.connect.message" = "Möchten Sie dieses Netzwerk schützen, indem Sie sich mit VPN verbinden?";
 "settings.trusted.networks.message" = "PIA wird sich nicht automatisch mit diesen Netzwerken verbinden.";
 "settings.trusted.networks.sections.available" = "Verfügbare Netzwerke";
@@ -231,7 +234,7 @@
 "tiles.subscription.trial" = "Testversion";
 "tiles.subscription.yearly" = "Jährlich";
 "tiles.usage.download" = "Download";
-"tiles.usage.ipsec.title" = "Nutzung (deaktiviert, außer bei OpenVPN)";
+"tiles.usage.ipsec.title" = "Nutzung (deaktiviert, außer bei OpenVPN oder WireGuard®)";
 "tiles.usage.title" = "Nutzung";
 "tiles.usage.upload" = "Upload";
 "today.widget.login" = "Anmelden";
@@ -251,5 +254,3 @@
 "walkthrough.page.2.title" = "Bequem mit jeder beliebigen Region verbinden";
 "walkthrough.page.3.description" = "Mit der Aktivierung unseres Inhalts-Blockers sehen Sie keine Anzeigen in Safari mehr.";
 "walkthrough.page.3.title" = "Schütze dich vor Werbung";
-"settings.small.packets.title" = "Kleine Pakete verwenden";
-"settings.small.packets.description" = "Wird die IP-Paketgröße leicht verringern, um die Kompatibilität mit manchen Routern und Mobilfunknetzen zu verbessern.";

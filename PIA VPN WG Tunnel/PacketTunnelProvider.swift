@@ -1,8 +1,8 @@
 //
-//  Server+Automatic.swift
+//  PacketTunnelProvider.swift
 //  PIA VPN
-//
-//  Created by Davide De Rosa on 12/15/17.
+//  
+//  Created by Jose Antonio Blaya Garcia on 06/02/2020.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
@@ -20,21 +20,8 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Foundation
-import PIALibrary
+import PIAWireguard
 
-extension Server {
-    static let automatic = Server(
-        serial: "",
-        name: L10n.Global.automatic,
-        country: "universal",
-        hostname: "auto.bogus.domain",
-        bestOpenVPNAddressForTCP: nil,
-        bestOpenVPNAddressForUDP: nil,
-        pingAddress: nil
-    )
-    
-    var isAutomatic: Bool {
-        return (identifier == Server.automatic.identifier)
-    }
+class PacketTunnelProvider: WGPacketTunnelProvider {
+
 }

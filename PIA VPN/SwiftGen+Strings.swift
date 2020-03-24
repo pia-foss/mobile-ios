@@ -654,6 +654,10 @@ internal enum L10n {
           }
         }
       }
+      internal enum Wireguard {
+        /// WireGuard® doesn't need to reconnect when you switch between different networks. It may be necessary to manually disconnect the VPN on trusted networks.
+        internal static let warning = L10n.tr("Localizable", "settings.nmt.wireguard.warning")
+      }
     }
     internal enum Reset {
       /// This will reset all of the above settings to default.
@@ -832,7 +836,7 @@ internal enum L10n {
       /// Upload
       internal static let upload = L10n.tr("Localizable", "tiles.usage.upload")
       internal enum Ipsec {
-        /// USAGE (Disabled unless using OpenVPN)
+        /// USAGE (Disabled unless using OpenVPN or WireGuard®)
         internal static let title = L10n.tr("Localizable", "tiles.usage.ipsec.title")
       }
     }
@@ -866,37 +870,6 @@ internal enum L10n {
         internal static let basic = L10n.tr("Localizable", "vpn_permission.disallow.message.basic")
         /// You can also get in touch with customer support if you need assistance.
         internal static let support = L10n.tr("Localizable", "vpn_permission.disallow.message.support")
-      }
-    }
-  }
-
-  internal enum Walkthrough {
-    internal enum Action {
-      /// DONE
-      internal static let done = L10n.tr("Localizable", "walkthrough.action.done")
-      /// NEXT
-      internal static let next = L10n.tr("Localizable", "walkthrough.action.next")
-      /// SKIP
-      internal static let skip = L10n.tr("Localizable", "walkthrough.action.skip")
-    }
-    internal enum Page {
-      internal enum _1 {
-        /// Protect yourself on up to 10 devices at a time.
-        internal static let description = L10n.tr("Localizable", "walkthrough.page.1.description")
-        /// Support 10 devices at once
-        internal static let title = L10n.tr("Localizable", "walkthrough.page.1.title")
-      }
-      internal enum _2 {
-        /// With servers around the globe, you are always under protection.
-        internal static let description = L10n.tr("Localizable", "walkthrough.page.2.description")
-        /// Connect to any region easily
-        internal static let title = L10n.tr("Localizable", "walkthrough.page.2.title")
-      }
-      internal enum _3 {
-        /// Enabling our Content Blocker prevents ads from showing in Safari.
-        internal static let description = L10n.tr("Localizable", "walkthrough.page.3.description")
-        /// Protect yourself from ads
-        internal static let title = L10n.tr("Localizable", "walkthrough.page.3.title")
       }
     }
   }

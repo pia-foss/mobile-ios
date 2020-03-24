@@ -89,12 +89,6 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(closeSession), name: .PIAAccountLapsed, object: nil)
         nc.addObserver(self, selector: #selector(reloadTheme), name: .PIAThemeShouldChange, object: nil)
 
-#if !TARGET_IPHONE_SIMULATOR
-        let types: UIUserNotificationType = [.alert, .badge, .sound]
-        let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: types, categories: nil)
-        UIApplication.shared.registerUserNotificationSettings(settings)
-#endif
-
         if Client.providers.accountProvider.isLoggedIn {
             Client.providers.accountProvider.refreshAndLogoutUnauthorized()
         }
@@ -107,12 +101,8 @@ class DashboardViewController: AutolayoutViewController {
         super.viewWillAppear(animated)
     
         setupNavigationBarButtons()
-
-        guard AppPreferences.shared.wasLaunched && !Flags.shared.alwaysShowsWalkthrough else {
-            AppPreferences.shared.wasLaunched = true
-            showWalkthrough()
-            return
-        }
+        
+        AppPreferences.shared.wasLaunched = true
         
         guard Client.providers.accountProvider.isLoggedIn else {
             presentLogin()
@@ -120,6 +110,12 @@ class DashboardViewController: AutolayoutViewController {
             AppPreferences.shared.todayWidgetButtonTitle = L10n.Today.Widget.login
             return
         }
+        
+        #if !TARGET_IPHONE_SIMULATOR
+            let types: UIUserNotificationType = [.alert, .badge, .sound]
+            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: types, categories: nil)
+            UIApplication.shared.registerUserNotificationSettings(settings)
+        #endif
 
         AppPreferences.shared.todayWidgetVpnStatus = Client.providers.vpnProvider.vpnStatus.rawValue
         if Client.providers.vpnProvider.vpnStatus == .disconnected {
@@ -173,7 +169,6 @@ class DashboardViewController: AutolayoutViewController {
     private func setupNavigationBarButtons() {
         
         guard AppPreferences.shared.wasLaunched,
-            !Flags.shared.alwaysShowsWalkthrough,
             Client.providers.accountProvider.isLoggedIn else {
             navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = nil
@@ -229,10 +224,6 @@ class DashboardViewController: AutolayoutViewController {
         })
         collectionView.reloadData()
         setupNavigationBarButtons()
-    }
-    
-    private func showWalkthrough() {
-        perform(segue: StoryboardSegue.Main.walkthroughSegueIdentifier)
     }
     
     private func presentLogin() {
@@ -457,7 +448,7 @@ class DashboardViewController: AutolayoutViewController {
             
             // reconnect -> reconnect VPN and close
             alert.addActionWithTitle(L10n.Settings.Commit.Buttons.reconnect) {
-                Client.providers.vpnProvider.reconnect(after: nil, { error in
+                Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, { error in
                 })
             }
             
@@ -472,7 +463,6 @@ class DashboardViewController: AutolayoutViewController {
     // MARK: Helpers
 
     @objc private func updateCurrentStatus() {
-        Macros.postNotification(.PIAVPNUsageUpdate)
         updateCurrentStatusWithUserInfo(nil)
     }
     
@@ -496,6 +486,8 @@ class DashboardViewController: AutolayoutViewController {
                                         object: self,
                                         userInfo: nil)
         
+        Macros.postNotification(.PIAVPNUsageUpdate)
+
         switch currentStatus {
         case .connected:
             toggleConnection.isOn = true
@@ -503,8 +495,13 @@ class DashboardViewController: AutolayoutViewController {
             toggleConnection.stopButtonAnimation()
             AppPreferences.shared.lastVPNConnectionStatus = .connected
             let titleLabelView = UILabel(frame: CGRect.zero)
+            titleLabelView.adjustsFontSizeToFitWidth = true
             titleLabelView.style(style: TextStyle.textStyle6)
-            titleLabelView.text = L10n.Dashboard.Vpn.on.uppercased()
+            
+            let effectiveServer = Client.preferences.displayedServer
+            let vpn = Client.providers.vpnProvider
+
+            titleLabelView.text = L10n.Dashboard.Vpn.connected+": "+effectiveServer.name(forStatus: vpn.vpnStatus)
             Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
                                                    withTintColor: .white,
                                                    andBarTintColors: [UIColor.piaGreen,

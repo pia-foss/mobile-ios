@@ -191,12 +191,15 @@
 "settings.nmt.killswitch.disabled" = "ปุ่ม VPN kill ปิดใช้งานอยู่ กรุณาเปิดใช้งานปุ่ม VPN kill ในการตั้งค่า เพื่อยืนยันว่าเครื่องมือจัดการเครือข่ายยังทำงาน และคุณสามารถเชื่อมต่อเครือข่ายได้อีกครั้งเมื่อมีการเปลี่ยนเครือข่าย";
 "settings.nmt.optout.disconnect.alerts" = "ยกเลิกการแจ้งเตือนเพื่อยืนยันการเลิกเชื่อมต่อ";
 "settings.nmt.optout.disconnect.alerts.description" = "ปิดการแจ้งเตือนคำเตือนเมื่อเลิกเชื่อมต่อ VPN";
+"settings.nmt.wireguard.warning" = "WireGuard® ไม่จำเป็นต้องเชื่อมต่อใหม่เมื่อคุณสลับระหว่างเครือข่ายต่างๆ อาจจำเป็นต้องตัดการเชื่อมต่อ VPN ด้วยตนเองในเครือข่ายที่เชื่อถือได้";
 "settings.reset.defaults.confirm.button" = "รีเซ็ต";
 "settings.reset.defaults.confirm.message" = "การกระทำนี้จะทำให้แอปกลับไปสู่ค่าเริ่มต้น คุณจะสูญเสียการเปลี่ยนแปลงทั้งหมดที่เคยทำไว้";
 "settings.reset.defaults.confirm.title" = "การตั้งค่าการรีเซ็ต";
 "settings.reset.defaults.title" = "รีเซ็ตและกลับไปสู่การตั้งค่าเริ่มต้น";
 "settings.reset.footer" = "การกระทำนี้จะรีเซ็ตการตั้งค่าด้านบนทั้งหมดและกลับไปสู่ค่าเริ่มต้น";
 "settings.reset.title" = "รีเซ็ต";
+"settings.small.packets.description" = "จะค่อยๆ ลดขนาดแพ็กเกต IP เพื่อปรับปรุงให้สามารถทำงานร่วมกับเราเตอร์และเครือข่ายโทรศัพท์บางประเภทได้";
+"settings.small.packets.title" = "ใช้แพ็กเกตขนาดเล็ก";
 "settings.trusted.networks.connect.message" = "ป้องกันเครือข่ายนี้ด้วยการเชื่อมต่อกับ VPN หรือไม่";
 "settings.trusted.networks.message" = "PIA จะไม่เชื่อมต่อโดยอัตโนมัติบนเครือข่ายเหล่านี้";
 "settings.trusted.networks.sections.available" = "เครือข่ายที่ใช้ได้";
@@ -231,7 +234,7 @@
 "tiles.subscription.trial" = "ทดลอง";
 "tiles.subscription.yearly" = "รายปี";
 "tiles.usage.download" = "ดาวน์โหลด";
-"tiles.usage.ipsec.title" = "การใช้งาน (ปิดใช้งาน ยกเว้นเมื่อใช้ OpenVpN)";
+"tiles.usage.ipsec.title" = "การใช้งาน (ปิดใช้งาน ยกเว้นเมื่อใช้ OpenVpN หรือ WireGuard®)";
 "tiles.usage.title" = "การใช้งาน";
 "tiles.usage.upload" = "อัพโหลด";
 "today.widget.login" = "เข้าสู่ระบบ";
@@ -251,5 +254,3 @@
 "walkthrough.page.2.title" = "เชื่อมต่อไปยังภูมิภาคใดก็ตามได้อย่างง่ายดาย";
 "walkthrough.page.3.description" = "การเปิดใช้งานตัวปิดกั้นเนื้อหาของเราจะเป็นการป้องกันไม่ให้แสดงโฆษณาใน Safari";
 "walkthrough.page.3.title" = "ปกป้องตัวคุณจากโฆษณา";
-"settings.small.packets.title" = "ใช้แพ็กเกตขนาดเล็ก";
-"settings.small.packets.description" = "จะค่อยๆ ลดขนาดแพ็กเกต IP เพื่อปรับปรุงให้สามารถทำงานร่วมกับเราเตอร์และเครือข่ายโทรศัพท์บางประเภทได้";

@@ -191,12 +191,15 @@
 "settings.nmt.killswitch.disabled" = "Le killswitch du VPN est actuellement désactivé. Pour assurer que l'Outil de gestion du réseau fonctionne, et que vous pouvez vous reconnecter en changeant de réseau, activez le killswitch du VPN dans vos paramètres.";
 "settings.nmt.optout.disconnect.alerts" = "Retirer l'alerte de confirmation de déconnexion";
 "settings.nmt.optout.disconnect.alerts.description" = "Désactive l'alerte d'avertissement quand le VPN est déconnecté.";
+"settings.nmt.wireguard.warning" = "WireGuard® n'a pas besoin de se reconnecter lorsque vous passez d'un réseau à l'autre. Il peut être nécessaire de déconnecter manuellement le VPN sur les réseaux approuvés.";
 "settings.reset.defaults.confirm.button" = "Réinitialiser";
 "settings.reset.defaults.confirm.message" = "Cette action rétablira les paramètres par défaut de l'application. Toutes les modifications effectuées seront perdues.";
 "settings.reset.defaults.confirm.title" = "Réinitialiser les paramètres";
 "settings.reset.defaults.title" = "Réinitialiser les paramètres par défaut";
 "settings.reset.footer" = "Tout les paramètres ci-dessus seront réinitialisés.";
 "settings.reset.title" = "RÉINITIALISER";
+"settings.small.packets.description" = "Diminue légèrement la taille des paquets IP pour améliorer la compatibilité avec certains routeurs et réseaux mobiles.";
+"settings.small.packets.title" = "Utiliser des petits paquets";
 "settings.trusted.networks.connect.message" = "Protéger ce réseau en vous connectant au VPN ?";
 "settings.trusted.networks.message" = "PIA ne se connectera pas automatiquement à ces réseaux.";
 "settings.trusted.networks.sections.available" = "Réseaux disponibles";
@@ -231,7 +234,7 @@
 "tiles.subscription.trial" = "Essai";
 "tiles.subscription.yearly" = "Annuellement";
 "tiles.usage.download" = "Télécharger";
-"tiles.usage.ipsec.title" = "USAGE (Désactivé sauf si vous utilisez OpenVPN)";
+"tiles.usage.ipsec.title" = "USAGE (Désactivé sauf si vous utilisez OpenVPN or WireGuard®)";
 "tiles.usage.title" = "Usage";
 "tiles.usage.upload" = "Charger";
 "today.widget.login" = "Connexion";
@@ -251,5 +254,3 @@
 "walkthrough.page.2.title" = "Connectez-vous facilement à n'importe quelle région";
 "walkthrough.page.3.description" = "Activer notre bloqueur de contenu empêche les publicités de s'afficher dans Safari.";
 "walkthrough.page.3.title" = "Protégez-vous contre les publicités";
-"settings.small.packets.title" = "Utiliser des petits paquets";
-"settings.small.packets.description" = "Diminue légèrement la taille des paquets IP pour améliorer la compatibilité avec certains routeurs et réseaux mobiles.";

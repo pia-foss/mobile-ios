@@ -191,12 +191,15 @@
 "settings.nmt.killswitch.disabled" = "VPN sonlandırma anahtarı şu anda devre dışı. Ağ Yönetim Aracının çalıştığından ve ağ değiştirdiğinizde bağlanabileceğinizden emin olmak için lütfen ayarlarınızdan VPN sonlandırma anahtarını etkinleştirin.";
 "settings.nmt.optout.disconnect.alerts" = "Bağlantı kesilmesi onay uyarısını kapat";
 "settings.nmt.optout.disconnect.alerts.description" = "VPN bağlantısı kesilirken gösterilen uyarıyı devre dışı bırakır.";
+"settings.nmt.wireguard.warning" = "Farklı ağlar arasında geçiş yaptığınızda WireGuard®'ın tekrar bağlanmasına gerek yoktur. VPN bağlantısını güvenilir ağlarda manuel yoldan kesmeniz gerekebilir.";
 "settings.reset.defaults.confirm.button" = "Sıfırla";
 "settings.reset.defaults.confirm.message" = "Bu işlem uygulama ayarlarını sıfırlayacak. Yapmış olduğun bütün değişiklikler kaybolacaktır.";
 "settings.reset.defaults.confirm.title" = "Ayarları sıfırla";
 "settings.reset.defaults.title" = "Varsayılan ayarlara sıfırla";
 "settings.reset.footer" = "Bu işlem yukarıdaki bütün ayarları sıfırlayarak varsayılan değerlere döndürecektir.";
 "settings.reset.title" = "SIFIRLA";
+"settings.small.packets.description" = "Bazı yönlendirici ve mobil ağlarla olan uyumluluğu artırmak için IP paket boyutunu hafif düşürecek.";
+"settings.small.packets.title" = "Küçük paketler kullanın";
 "settings.trusted.networks.connect.message" = "VPN'ye bağlanarak bu ağı korumak istiyor musunuz?";
 "settings.trusted.networks.message" = "PIA, bu ağlara otomatik olarak bağlanmayacak.";
 "settings.trusted.networks.sections.available" = "Mevcut ağlar";
@@ -231,7 +234,7 @@
 "tiles.subscription.trial" = "Deneme";
 "tiles.subscription.yearly" = "Yıllık";
 "tiles.usage.download" = "İndir";
-"tiles.usage.ipsec.title" = "KULLANIM (OpenVPN kullanılmadığında devre dışı kalır)";
+"tiles.usage.ipsec.title" = "KULLANIM (OpenVPN veya WireGuard® kullanılmadığında devre dışı kalır)";
 "tiles.usage.title" = "Kullanım";
 "tiles.usage.upload" = "Karşıya yükle";
 "today.widget.login" = "Giriş";
@@ -251,5 +254,3 @@
 "walkthrough.page.2.title" = "Herhangi bir bölgeye kolayca bağlanın";
 "walkthrough.page.3.description" = "İçerik Engelleyicimizi etkinleştirdiğinizde Safari'de reklamların gösterilmesi engellenir.";
 "walkthrough.page.3.title" = "Kendinizi reklamlardan koruyun";
-"settings.small.packets.title" = "Küçük paketler kullan";
-"settings.small.packets.description" = "Bazı yönlendirici ve mobil ağlarla olan uyumluluğu artırmak için IP paket boyutunu hafif düşürecek.";

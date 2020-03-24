@@ -38,6 +38,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
     var shouldReconnectAutomatically = false
     var hasUpdatedPreferences = false
     var persistentConnectionValue = false
+    var vpnType = ""
 
     private let numberOfVisibleSections = 4
     
@@ -244,7 +245,11 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
                 L10n.Settings.Hotspothelper.Available.help :
                 L10n.Settings.Hotspothelper.Available.Add.help
         case .rules:
-            return L10n.Settings.Trusted.Networks.Sections.Trusted.Rule.description
+            var message = L10n.Settings.Trusted.Networks.Sections.Trusted.Rule.description
+            if self.vpnType == PIAWGTunnelProfile.vpnType {
+                message += "\n\n"+L10n.Settings.Nmt.Wireguard.warning
+            }
+            return message
         case .optOutAlerts:
             return L10n.Settings.Nmt.Optout.Disconnect.Alerts.description
         default:

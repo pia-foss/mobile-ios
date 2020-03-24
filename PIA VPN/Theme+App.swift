@@ -46,13 +46,7 @@ extension Theme {
             UIColor.black.withAlphaComponent(0.72) :
             UIColor.piaGrey1.withAlphaComponent(0.75)
     }
-    
-    func applyPageControl(_ pageControl: FXPageControl) {
-        pageControl.dotSpacing = 6.0
-        pageControl.selectedDotImage = Asset.Piax.Global.pagecontrolSelectedDot.image
-        pageControl.dotImage = Asset.Piax.Global.pagecontrolUnselectedDot.image
-    }
-    
+        
     func applyPingTime(_ label: UILabel, time: Int) {
         switch AppConfiguration.ServerPing.from(value: time) {
         case .low:
@@ -80,12 +74,7 @@ extension Theme {
             label.textColor = palette.accent2
         }
     }
-    
-    public func applyScrollableMap(_ imageView: UIImageView) {
-        imageView.image = palette.appearance == .dark ?
-            Asset.Piax.Global.scrollableMapDark.image : Asset.Piax.Global.scrollableMapLight.image
-    }
-    
+        
     public func applyMenuBackground(_ view: UIView) {
         view.backgroundColor = palette.appearance == .dark ?
             UIColor.piaGrey6 : UIColor.piaWhite
@@ -219,6 +208,14 @@ extension Theme {
         } else {
             imageView.image = Asset.Piax.Global.favoriteUnselected.image
         }
+    }
+    
+    public func applyBadgeStyle(_ label: UILabel) {
+        label.font = UIFont.mediumFontWith(size: 10)
+        label.textColor = palette.principalBackground
+        label.layer.cornerRadius = 3.0
+        label.layer.masksToBounds = true
+        label.backgroundColor = UIColor.piaGreen
     }
     
     public func noResultsImage() -> UIImage {

@@ -62,6 +62,7 @@ struct AppConstants {
     
     struct Extensions {
         static let tunnelBundleIdentifier = "com.privateinternetaccess.ios.PIA-VPN.Tunnel"
+        static let tunnelWireguardBundleIdentifier = "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel"
 
         static let adBlockerBundleIdentifier = "com.privateinternetaccess.ios.PIA-VPN.AdBlocker"
     }
@@ -123,6 +124,7 @@ struct AppConstants {
                 }
 
                 servers.append(Server(
+                    serial: "",
                     name: name,
                     country: country,
                     hostname: hostname,

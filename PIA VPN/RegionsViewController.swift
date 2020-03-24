@@ -50,6 +50,10 @@ class RegionsViewController: AutolayoutViewController {
         var servers = Client.providers.serverProvider.currentServers
         servers.insert(Server.automatic, at: 0)
         
+        if Client.configuration.isDevelopment, let customServers = AppConstants.Servers.customServers {
+            servers.append(contentsOf: customServers)
+        }
+        
         let favoriteServers = AppPreferences.shared.favoriteServerIdentifiers
         for server in servers {
             server.isFavorite = favoriteServers.contains(server.identifier)

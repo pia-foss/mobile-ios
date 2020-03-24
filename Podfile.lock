@@ -70,8 +70,8 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - OpenSSL-Apple (1.1.1d.5a)
-  - PIALibrary/Core (2.2.2)
-  - PIALibrary/Library (2.2.2):
+  - PIALibrary/Core (2.3.0)
+  - PIALibrary/Library (2.3.0):
     - Alamofire (~> 4)
     - Gloss (~> 2)
     - PIALibrary/Core
@@ -79,19 +79,28 @@ PODS:
     - PopupDialog
     - ReachabilitySwift
     - SwiftyBeaver
-  - PIALibrary/Mock (2.2.2):
+  - PIALibrary/Mock (2.3.0):
     - PIALibrary/Library
-  - PIALibrary/UI (2.2.2):
+  - PIALibrary/UI (2.3.0):
+    - FXPageControl
     - lottie-ios
     - PIALibrary/Library
     - SwiftEntryKit (= 0.7.2)
     - SwiftyBeaver
     - TPKeyboardAvoiding
-  - PIALibrary/Util (2.2.2):
+  - PIALibrary/Util (2.3.0):
     - PIALibrary/Core
-  - PIALibrary/VPN (2.2.2):
+  - PIALibrary/VPN (2.3.0):
     - PIALibrary/Library
+    - PIAWireguard
     - TunnelKit
+  - PIAWireguard (1.0.0):
+    - PIAWireguard/AppExtension (= 1.0.0)
+    - PIAWireguard/Core (= 1.0.0)
+  - PIAWireguard/AppExtension (1.0.0):
+    - PIAWireguard/Core
+  - PIAWireguard/Core (1.0.0):
+    - Alamofire
   - PopupDialog (1.1.0):
     - DynamicBlurView (~> 3.0.1)
   - QuickLayout (2.0.2)
@@ -120,12 +129,12 @@ DEPENDENCIES:
   - DZNEmptyDataSet
   - Fabric
   - Firebase/Core
-  - FXPageControl
   - iRate
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `2897214`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `2897214`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `2897214`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `2897214`)
+  - PIALibrary/Library (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
+  - PIALibrary/Mock (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
+  - PIALibrary/UI (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
+  - PIALibrary/VPN (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
+  - PIAWireguard (from `/Users/ueshiba/Projects/PIA/PIAWireguard`)
   - PopupDialog
   - ReachabilitySwift (~> 4.3.0)
   - SideMenu (~> 6.0)
@@ -163,16 +172,14 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :commit: '2897214'
-    :git: https://github.com/pia-foss/client-library-apple
+    :path: "/Users/ueshiba/Projects/PIA/client-library-apple"
+  PIAWireguard:
+    :path: "/Users/ueshiba/Projects/PIA/PIAWireguard"
   TunnelKit:
     :commit: d19b9de
     :git: https://github.com/pia-foss/tunnelkit
 
 CHECKOUT OPTIONS:
-  PIALibrary:
-    :commit: '2897214'
-    :git: https://github.com/pia-foss/client-library-apple
   TunnelKit:
     :commit: d19b9de
     :git: https://github.com/pia-foss/tunnelkit
@@ -197,7 +204,8 @@ SPEC CHECKSUMS:
   lottie-ios: 32bf84389337d86fbc8b12266e88452e0abf1dee
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
-  PIALibrary: 7592553c119bfa025b873af23cf7025ed63fc0dd
+  PIALibrary: ccc1c42fec67cce365fe239f692a7397ba5dfcfa
+  PIAWireguard: 2386a73dd5c658264504b7e1e84cb6bf11795ee4
   PopupDialog: 42fb7a0bc4fafdf89fef8b5b2b127a6023f3e1cc
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
@@ -207,6 +215,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
   TunnelKit: d13d005c0c7febd18a03a87e1ab7d4414fef3ffd
 
-PODFILE CHECKSUM: 0ad5cfeb591a5d84f72e3a133d18b4d1aa0f2d01
+PODFILE CHECKSUM: ab2daf15971c960dbda54ddc41f71dd2559a94b9
 
 COCOAPODS: 1.7.5

@@ -40,8 +40,8 @@ end
 
 def shared_main_pods
     pod 'AlamofireImage'
-    #library_by_path('')
-    library_by_git('2897214')
+    library_by_path('/Users/ueshiba/Projects/PIA')
+    #library_by_git('2897214')
     #library_by_version('~> 1.1.3')
 end
 
@@ -50,7 +50,6 @@ def app_pods
     pod 'iRate'
     pod 'TPKeyboardAvoiding'
     pod 'SideMenu', '~> 6.0'
-    pod 'FXPageControl'
     pod 'DZNEmptyDataSet'
     pod 'PopupDialog'
     pod 'ReachabilitySwift', '~> 4.3.0'
@@ -58,6 +57,10 @@ end
 
 def tunnel_pods
     pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :commit => 'd19b9de'
+end
+
+def piawireguard_pod
+    pod 'PIAWireguard', :path => "/Users/ueshiba/Projects/PIA/PIAWireguard"
 end
 
 # Targets
@@ -78,6 +81,11 @@ end
 target 'PIA VPN Tunnel' do
     tunnel_pods
 end
+
+target 'PIA VPN WG Tunnel' do
+    piawireguard_pod
+end
+
 
 target 'PIA VPNTests' do
     app_pods

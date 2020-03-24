@@ -25,6 +25,7 @@ import PIALibrary
 import TunnelKit
 import SwiftyBeaver
 import iRate
+import PIAWireguard
 #if PIA_DEV
 import AppCenter
 import AppCenterAnalytics
@@ -111,13 +112,15 @@ class Bootstrapper {
         Client.configuration.webTimeout = AppConfiguration.ClientConfiguration.webTimeout
         Client.configuration.vpnProfileName = AppConfiguration.VPN.profileName
         Client.configuration.addVPNProfile(PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier))
-        
+        Client.configuration.addVPNProfile(PIAWGTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier))
+
         let defaults = Client.preferences.defaults
         defaults.isPersistentConnection = true
         defaults.mace = false
         defaults.vpnType = IKEv2Profile.vpnType
         defaults.vpnCustomConfigurations = [
-            PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build()
+            PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build(),
+            PIAWGTunnelProfile.vpnType: PIAWireguardConfiguration(customDNSServers: [])
         ]
         
         Client.providers.accountProvider.subscriptionInformation { [weak self] (info, error) in
