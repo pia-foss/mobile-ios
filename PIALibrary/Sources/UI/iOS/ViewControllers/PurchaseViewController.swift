@@ -50,6 +50,10 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
 
     var selectedPlanIndex: Int?
     
+    private var signupEmail: String?
+    private var signupTransaction: InAppTransaction?
+    private var isPurchasing = false
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -118,7 +122,22 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
                 vc.termsAndConditionsTitle = L10n.Welcome.Agreement.Trials.title
                 vc.termsAndConditions = L10n.Welcome.Agreement.Trials.message
             }
+        } else if (segue.identifier == StoryboardSegue.Welcome.signupViaPurchaseSegue.rawValue) {
+            let nav = segue.destination as! UINavigationController
+            let vc = nav.topViewController as! SignupInProgressViewController
+            
+            guard let email = signupEmail else {
+                fatalError("Signing up and signupEmail is not set")
+            }
+            var metadata = SignupMetadata(email: email)
+            metadata.title = L10n.Signup.InProgress.title
+            metadata.bodySubtitle = L10n.Signup.InProgress.message
+            vc.metadata = metadata
+            vc.signupRequest = SignupRequest(email: email, transaction: signupTransaction)
+            vc.preset = preset
+            vc.completionDelegate = completionDelegate
         }
+
     }
     
     /// Populate the view with the values from GetStartedView
@@ -132,11 +151,72 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
     
     // MARK: Actions
     
-    func confirmPlan() {
+    @IBAction func confirmPlan() {
+        
+        /**
         self.performSegue(withIdentifier: StoryboardSegue.Welcome.confirmPurchaseVPNPlanSegue.rawValue,
                           sender: nil)
+            **/
+        
+        if let index = selectedPlanIndex {
+            let plan = allPlans[index]
+            self.startPurchaseProcessWithEmail("", andPlan: plan)
+        }
+        
+        
     }
     
+    private func startPurchaseProcessWithEmail(_ email: String,
+                                               andPlan plan: PurchasePlan) {
+                
+        guard !Client.store.hasUncreditedTransactions else {
+            let alert = Macros.alert(
+                nil,
+                L10n.Signup.Purchase.Uncredited.Alert.message
+            )
+            alert.addCancelAction(L10n.Signup.Purchase.Uncredited.Alert.Button.cancel)
+            alert.addActionWithTitle(L10n.Signup.Purchase.Uncredited.Alert.Button.recover) {
+                self.navigationController?.popToRootViewController(animated: true)
+                Macros.postNotification(.PIARecoverAccount)
+            }
+            present(alert, animated: true, completion: nil)
+            return
+
+        }
+
+        //textEmail.text = email
+        log.debug("Will purchase plan: \(plan.product)")
+        
+        isPurchasing = true
+        disableInteractions(fully: true)
+        self.showLoadingAnimation()
+        
+        preset?.accountProvider.purchase(plan: plan.plan) { (transaction, error) in
+            self.isPurchasing = false
+            self.enableInteractions()
+            self.hideLoadingAnimation()
+            
+            guard let transaction = transaction else {
+                if let error = error {
+                    let message = error.localizedDescription
+                    log.error("Purchase failed (error: \(error))")
+                    Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                            message: message)
+                } else {
+                    log.warning("Cancelled purchase")
+                }
+                return
+            }
+            
+            log.debug("Purchased with transaction: \(transaction)")
+            
+            self.signupEmail = email
+            self.signupTransaction = transaction
+            self.perform(segue: StoryboardSegue.Welcome.signupViaPurchaseSegue)
+        }
+        
+    }
+
     private func refreshPlans(_ plans: [Plan: InAppProduct]) {
         if let yearly = plans[.yearly] {
             let purchase = PurchasePlan(
@@ -192,11 +272,13 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
     }
     
     private func enableInteractions() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.hideLoadingAnimation()
+        if !isPurchasing { //dont reenable the screen if we are still purchasing
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.hideLoadingAnimation()
+            }
+            collectionPlans.isUserInteractionEnabled = true
+            parent?.view.isUserInteractionEnabled = true
         }
-        collectionPlans.isUserInteractionEnabled = true
-        parent?.view.isUserInteractionEnabled = true
     }
 
     // MARK: Notifications

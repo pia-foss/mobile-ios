@@ -15,6 +15,7 @@
 "login.error.validation" = "You must enter a username and password.";
 "login.error.unauthorized" = "Your username or password is incorrect.";
 "login.error.throttled" = "Too many failed login attempts with this username. Please try again later.";
+"login.receipt.button" = "Login using purchase receipt";
 
 "purchase.title" = "Select a VPN plan";
 "purchase.subtitle" = "7-day money back guarantee";

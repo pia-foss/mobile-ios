@@ -30,6 +30,8 @@ private protocol PreferencesStore: class {
     
     var isPersistentConnection: Bool { get set }
     
+    var gdprTermsAccepted: Bool { get set }
+    
     var mace: Bool { get set }
     
     var useWiFiProtection: Bool { get set }
@@ -69,6 +71,7 @@ private extension PreferencesStore {
 
     func load(from source: PreferencesStore) {
         preferredServer = source.preferredServer
+        gdprTermsAccepted = source.gdprTermsAccepted
         isPersistentConnection = source.isPersistentConnection
         mace = source.mace
         useWiFiProtection = source.useWiFiProtection
@@ -118,6 +121,16 @@ extension Client {
             }
         }
         
+        /// GDPR treatment data agreement.
+        public fileprivate(set) var gdprTermsAccepted: Bool {
+            get {
+                return accessedDatabase.plain.gdprTermsAccepted ?? defaults.gdprTermsAccepted
+            }
+            set {
+                accessedDatabase.plain.gdprTermsAccepted = newValue
+            }
+        }
+
         /// Enables automatic VPN reconnection.
         public fileprivate(set) var isPersistentConnection: Bool {
             get {
@@ -317,6 +330,7 @@ extension Client.Preferences {
         fileprivate init() {
             preferredServer = nil
             isPersistentConnection = true
+            gdprTermsAccepted = false
             mace = false
             useWiFiProtection = true
             trustCellularData = false
@@ -361,6 +375,9 @@ extension Client.Preferences {
         /// :nodoc:
         public var isPersistentConnection: Bool
         
+        /// :nodoc:
+        public var gdprTermsAccepted: Bool
+
         /// :nodoc:
         public var mace: Bool
 

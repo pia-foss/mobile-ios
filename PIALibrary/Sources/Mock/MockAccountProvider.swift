@@ -25,6 +25,7 @@ import Foundation
 /// Simulates account-related operations
 public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     
+    
     /// Mocks the outcome of a sign-up operation.
     ///
     /// - Seealso: `AccountProvider.signup(...)`
@@ -107,6 +108,7 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
         webServices.accountInfo = {
             return AccountInfo(
                 email: self.mockEmail,
+                username: "p0000000",
                 plan: self.mockPlan,
                 productId: self.mockProductId,
                 isRenewable: self.mockIsRenewable,
@@ -197,6 +199,15 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
         }
         delegate.login(with: request, callback)
     }
+    
+    public func login(with receiptRequest: LoginReceiptRequest, _ callback: LibraryCallback<UserAccount>?) {
+                guard !mockIsUnauthorized else {
+            callback?(nil, ClientError.unauthorized)
+            return
+        }
+        delegate.login(with: receiptRequest, callback)
+    }
+
     
     /// :nodoc:
     public func refreshAccountInfo(force: Bool, _ callback: ((AccountInfo?, Error?) -> Void)?) {

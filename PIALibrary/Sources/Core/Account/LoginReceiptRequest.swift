@@ -1,8 +1,8 @@
 //
-//  Signup+Gloss.swift
-//  PIALibrary
-//
-//  Created by Davide De Rosa on 10/23/17.
+//  LoginReceiptRequest.swift
+//  Pods
+//  
+//  Created by Jose Antonio Blaya Garcia on 17/03/2020.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
@@ -21,20 +21,17 @@
 //
 
 import Foundation
-import Gloss
 
-extension Signup: JSONEncodable {
-    func toJSON() -> JSON? {
-        var json = jsonify([
-            "email" ~~> email,
-            "receipt" ~~> receipt.base64EncodedString(),
-            "marketing" ~~> marketing,
-            "debug" ~~> debug,
-            "store" ~~> "apple_app_store"
-        ])
-        if email == "" {
-            json?.removeValue(forKey: "email")
-        }
-        return json
+/// A login receipt request.
+///
+/// - Seealso: `AccountProvider.login(...)`
+public struct LoginReceiptRequest {
+
+    /// The `Data` purchase receipt for the device.
+    public let receipt: Data
+    
+    /// :nodoc:
+    public init(receipt: Data) {
+        self.receipt = receipt
     }
 }

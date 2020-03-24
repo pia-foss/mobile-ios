@@ -150,7 +150,7 @@ You will not be charged during this process.</string>
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IY5-Kg-KKQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="578.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="629.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5C-xr-9h6">
                                                 <rect key="frame" x="19" y="40" width="282" height="20.5"/>
@@ -171,13 +171,13 @@ You will not be charged during this process.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="CA4-TV-yNn">
-                                                <rect key="frame" x="19" y="153.5" width="282" height="43"/>
+                                                <rect key="frame" x="19" y="153.5" width="282" height="60"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cT6-r5-aJX">
-                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="43"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="60"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shield-icon" translatesAutoresizingMaskIntoConstraints="NO" id="J5O-kL-LIc">
-                                                                <rect key="frame" x="0.0" y="0.0" width="25" height="43"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="25" height="60"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="25" id="Olf-Iz-7K1"/>
                                                                 </constraints>
@@ -190,16 +190,16 @@ You will not be charged during this process.</string>
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="eya-aE-tTQ">
-                                                        <rect key="frame" x="44" y="0.0" width="238" height="43"/>
+                                                        <rect key="frame" x="44" y="0.0" width="238" height="60"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ob-DR-bOF">
-                                                                <rect key="frame" x="0.0" y="0.0" width="238" height="20.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ob-DR-bOF">
+                                                                <rect key="frame" x="0.0" y="0.0" width="238" height="37.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DlB-xs-sAp">
-                                                                <rect key="frame" x="0.0" y="22.5" width="238" height="20.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DlB-xs-sAp">
+                                                                <rect key="frame" x="0.0" y="39.5" width="238" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -209,13 +209,13 @@ You will not be charged during this process.</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="NCn-SM-i35">
-                                                <rect key="frame" x="19" y="211.5" width="282" height="43"/>
+                                                <rect key="frame" x="19" y="228.5" width="282" height="60"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="r5Z-Nr-23N">
-                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="43"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="60"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="computer-icon" translatesAutoresizingMaskIntoConstraints="NO" id="kcY-un-5Y3">
-                                                                <rect key="frame" x="0.0" y="0.0" width="25" height="43"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="25" height="60"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="25" id="gkU-iQ-zut"/>
@@ -228,16 +228,16 @@ You will not be charged during this process.</string>
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="hW6-88-Puc">
-                                                        <rect key="frame" x="44" y="0.0" width="238" height="43"/>
+                                                        <rect key="frame" x="44" y="0.0" width="238" height="60"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vIt-e4-bGh">
-                                                                <rect key="frame" x="0.0" y="0.0" width="238" height="20.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vIt-e4-bGh">
+                                                                <rect key="frame" x="0.0" y="0.0" width="238" height="37.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uc2-Dn-2VL">
-                                                                <rect key="frame" x="0.0" y="22.5" width="238" height="20.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uc2-Dn-2VL">
+                                                                <rect key="frame" x="0.0" y="39.5" width="238" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -247,13 +247,13 @@ You will not be charged during this process.</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="a9c-ON-ogp">
-                                                <rect key="frame" x="19" y="269.5" width="282" height="43"/>
+                                                <rect key="frame" x="19" y="303.5" width="282" height="60"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="KZU-ft-TM3">
-                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="43"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="60"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="globe-icon" translatesAutoresizingMaskIntoConstraints="NO" id="jD2-op-60r">
-                                                                <rect key="frame" x="0.0" y="0.0" width="25" height="43"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="25" height="60"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="25" id="h5R-bd-AXO"/>
@@ -266,16 +266,16 @@ You will not be charged during this process.</string>
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="SZq-8e-0hj">
-                                                        <rect key="frame" x="44" y="0.0" width="238" height="43"/>
+                                                        <rect key="frame" x="44" y="0.0" width="238" height="60"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJE-Y3-9tm">
-                                                                <rect key="frame" x="0.0" y="0.0" width="238" height="20.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJE-Y3-9tm">
+                                                                <rect key="frame" x="0.0" y="0.0" width="238" height="37.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z0M-xn-BJo">
-                                                                <rect key="frame" x="0.0" y="22.5" width="238" height="20.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z0M-xn-BJo">
+                                                                <rect key="frame" x="0.0" y="39.5" width="238" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -285,7 +285,7 @@ You will not be charged during this process.</string>
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bDc-5S-XeY" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
-                                                <rect key="frame" x="19" y="372.5" width="282" height="50"/>
+                                                <rect key="frame" x="19" y="423.5" width="282" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="cde-wL-OsP"/>
                                                 </constraints>
@@ -295,7 +295,7 @@ You will not be charged during this process.</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qIN-O8-oDi" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
-                                                <rect key="frame" x="19" y="432.5" width="282" height="50"/>
+                                                <rect key="frame" x="19" y="483.5" width="282" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="eTr-g3-lR9"/>
                                                 </constraints>
@@ -305,14 +305,14 @@ You will not be charged during this process.</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xg5-Qr-1c2" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
-                                                <rect key="frame" x="19" y="492.5" width="282" height="34"/>
+                                                <rect key="frame" x="19" y="543.5" width="282" height="34"/>
                                                 <state key="normal" title="Button"/>
                                                 <connections>
                                                     <segue destination="DNR-EE-WLm" kind="presentation" identifier="ShowTermsAndConditionsSegue" id="nRl-Ww-kMh"/>
                                                 </connections>
                                             </button>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="&lt;Agreement&gt;" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="J0c-Nr-MRF">
-                                                <rect key="frame" x="19" y="526.5" width="282" height="33"/>
+                                                <rect key="frame" x="19" y="577.5" width="282" height="33"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -595,7 +595,6 @@ You will not be charged during this process.</string>
                         <outlet property="textAgreement" destination="NHe-O4-oTj" id="USY-Ed-eLQ"/>
                         <outlet property="textEmail" destination="N1F-t4-cDa" id="bXg-69-0YT"/>
                         <segue destination="9jt-8I-K8i" kind="presentation" identifier="SignupViaPurchaseSegue" modalPresentationStyle="fullScreen" id="apR-1h-IYV"/>
-                        <segue destination="Bm9-XV-AeZ" kind="presentation" identifier="PresentGDPRTermsSegue" id="FVG-Nd-1ED"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Re6-vD-amW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -623,7 +622,7 @@ You will not be charged during this process.</string>
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XgW-nz-hik">
-                                                                <rect key="frame" x="27" y="29" width="266" height="268.5"/>
+                                                                <rect key="frame" x="27" y="29" width="266" height="307.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in to your account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rk-V0-kLQ">
                                                                         <rect key="frame" x="47.5" y="0.0" width="171" height="19.5"/>
@@ -661,7 +660,7 @@ You will not be charged during this process.</string>
                                                                         </connections>
                                                                     </view>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Emv-5o-nzd">
-                                                                        <rect key="frame" x="0.0" y="248.5" width="266" height="20"/>
+                                                                        <rect key="frame" x="0.0" y="287.5" width="266" height="20"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="20" id="82T-Gm-hZ2"/>
                                                                         </constraints>
@@ -669,15 +668,29 @@ You will not be charged during this process.</string>
                                                                             <segue destination="vXZ-lx-hvc" kind="show" identifier="RestoreLoginPurchaseSegue" id="aVb-49-Y5l"/>
                                                                         </connections>
                                                                     </button>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4OL-1u-sdN">
+                                                                        <rect key="frame" x="0.0" y="248.5" width="266" height="20"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="20" id="SLD-gi-EF7"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <action selector="logInWithReceipt:" destination="gOX-c2-oGJ" eventType="touchUpInside" id="5hZ-Tf-eeJ"/>
+                                                                        </connections>
+                                                                    </button>
                                                                 </subviews>
                                                                 <constraints>
+                                                                    <constraint firstItem="Emv-5o-nzd" firstAttribute="top" secondItem="4OL-1u-sdN" secondAttribute="bottom" constant="19" id="D3k-hO-D8H"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="4OL-1u-sdN" secondAttribute="trailing" id="GmP-XN-FQH"/>
                                                                     <constraint firstItem="Wtm-HW-6FS" firstAttribute="trailing" secondItem="Gcb-kt-Yu7" secondAttribute="trailing" id="H7o-gu-nyL"/>
                                                                     <constraint firstItem="2Rk-V0-kLQ" firstAttribute="centerX" secondItem="XgW-nz-hik" secondAttribute="centerX" id="IxB-Hs-m36"/>
                                                                     <constraint firstItem="jEh-9o-rVi" firstAttribute="trailing" secondItem="Gcb-kt-Yu7" secondAttribute="trailing" id="KNu-Za-GOt"/>
                                                                     <constraint firstItem="Wtm-HW-6FS" firstAttribute="leading" secondItem="Gcb-kt-Yu7" secondAttribute="leading" id="KoY-pt-6W0"/>
+                                                                    <constraint firstItem="4OL-1u-sdN" firstAttribute="top" secondItem="jEh-9o-rVi" secondAttribute="bottom" constant="19" id="LBP-uO-0f4"/>
                                                                     <constraint firstItem="Wtm-HW-6FS" firstAttribute="top" secondItem="Gcb-kt-Yu7" secondAttribute="bottom" constant="15" id="Mtw-Tl-kU5"/>
                                                                     <constraint firstItem="jEh-9o-rVi" firstAttribute="top" secondItem="Wtm-HW-6FS" secondAttribute="bottom" constant="15" id="N4Q-cw-0Vj"/>
                                                                     <constraint firstItem="Emv-5o-nzd" firstAttribute="leading" secondItem="XgW-nz-hik" secondAttribute="leading" id="NZQ-d1-PES"/>
+                                                                    <constraint firstItem="4OL-1u-sdN" firstAttribute="leading" secondItem="XgW-nz-hik" secondAttribute="leading" id="Ts2-s1-uha"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="Emv-5o-nzd" secondAttribute="bottom" id="UPk-Wm-uMP"/>
                                                                     <constraint firstAttribute="bottom" secondItem="Emv-5o-nzd" secondAttribute="bottom" id="VqD-zG-Kh8"/>
                                                                     <constraint firstItem="Wtm-HW-6FS" firstAttribute="height" secondItem="Gcb-kt-Yu7" secondAttribute="height" id="ZnI-xV-5hO"/>
                                                                     <constraint firstAttribute="trailing" secondItem="jEh-9o-rVi" secondAttribute="trailing" id="b42-kd-WBq"/>
@@ -686,7 +699,6 @@ You will not be charged during this process.</string>
                                                                     <constraint firstItem="2Rk-V0-kLQ" firstAttribute="top" secondItem="XgW-nz-hik" secondAttribute="top" id="gX3-qV-EcT"/>
                                                                     <constraint firstItem="Gcb-kt-Yu7" firstAttribute="top" secondItem="2Rk-V0-kLQ" secondAttribute="bottom" constant="30" id="gew-Yr-Sqc"/>
                                                                     <constraint firstItem="jEh-9o-rVi" firstAttribute="leading" secondItem="Gcb-kt-Yu7" secondAttribute="leading" id="mBe-Fy-A5M"/>
-                                                                    <constraint firstItem="Emv-5o-nzd" firstAttribute="top" secondItem="jEh-9o-rVi" secondAttribute="bottom" constant="19" id="xkr-9V-VBV"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
@@ -777,6 +789,7 @@ You will not be charged during this process.</string>
                         <outlet property="buttonLogin" destination="jEh-9o-rVi" id="eaK-D0-FJE"/>
                         <outlet property="couldNotGetPlanButton" destination="Emv-5o-nzd" id="vhr-De-KQ4"/>
                         <outlet property="labelTitle" destination="2Rk-V0-kLQ" id="qdr-SQ-OwV"/>
+                        <outlet property="loginWithReceipt" destination="4OL-1u-sdN" id="gC0-4X-aYT"/>
                         <outlet property="scrollView" destination="RgS-fn-CJH" id="gQR-aC-e9f"/>
                         <outlet property="textPassword" destination="Wtm-HW-6FS" id="bvM-nY-mSr"/>
                         <outlet property="textUsername" destination="Gcb-kt-Yu7" id="5rD-If-yIW"/>
@@ -972,7 +985,7 @@ You will not be charged during this process.</string>
                                                         </constraints>
                                                         <state key="normal" title="Button"/>
                                                         <connections>
-                                                            <segue destination="bWG-QF-Zd5" kind="show" identifier="ConfirmPurchaseVPNPlanSegue" id="WeP-PD-hnE"/>
+                                                            <action selector="confirmPlan" destination="J5T-ys-Of8" eventType="touchUpInside" id="4Yn-bp-12i"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1046,6 +1059,7 @@ You will not be charged during this process.</string>
                         <outlet property="labelTitle" destination="hPa-uO-IxH" id="roY-Lm-FwR"/>
                         <outlet property="scrollView" destination="R3h-YU-xym" id="9YE-uY-4mJ"/>
                         <outlet property="textAgreement" destination="KyF-30-stz" id="ynW-rj-WPf"/>
+                        <segue destination="9jt-8I-K8i" kind="presentation" identifier="SignupViaPurchaseSegue" modalPresentationStyle="fullScreen" id="YiM-4D-yJt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9BK-Ic-1BU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1223,7 +1237,7 @@ You will not be charged during this process.</string>
                                                 <constraint firstAttribute="height" constant="50" id="5kr-fT-AVW"/>
                                             </constraints>
                                             <connections>
-                                                <segue destination="vXZ-lx-hvc" kind="show" identifier="SubscribeNowVPNPlanSegue" id="750-Xo-1Ft"/>
+                                                <action selector="confirmPlan" destination="bfs-I2-X8H" eventType="touchUpInside" id="s1x-8w-BpS"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JeO-BO-hZn" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
@@ -1295,10 +1309,38 @@ You will not be charged during this process.</string>
                                 </constraints>
                                 <blurEffect style="systemUltraThinMaterial"/>
                             </visualEffectView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zJA-yM-DX7">
+                                <rect key="frame" x="0.0" y="49" width="44" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="TA7-h3-9CU"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="eap-28-wXr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                                <state key="normal" title="×">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Ram-t8-vXx"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcd-04-7CR">
+                                <rect key="frame" x="150" y="49" width="150" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="sIg-TE-Nuf"/>
+                                </constraints>
+                                <state key="normal" title="&lt;Environment&gt;">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toggleEnvironment:" destination="bfs-I2-X8H" eventType="touchUpInside" id="LJf-5U-OHQ"/>
+                                    <action selector="toggleEnvironment:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="nB0-2l-Kj9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="NRk-y0-6j5" firstAttribute="trailing" secondItem="ypB-sc-4iy" secondAttribute="trailing" id="2EX-Tz-8v7"/>
+                            <constraint firstItem="zcd-04-7CR" firstAttribute="top" secondItem="DVe-fv-utO" secondAttribute="bottom" id="2rl-7p-PUd"/>
                             <constraint firstAttribute="trailing" secondItem="iP4-wP-euf" secondAttribute="trailing" id="4zC-Sy-5In"/>
                             <constraint firstItem="SID-tu-SQV" firstAttribute="leading" secondItem="NRk-y0-6j5" secondAttribute="leading" id="7xd-HG-mFE"/>
                             <constraint firstItem="FtT-Je-5Y0" firstAttribute="leading" secondItem="tO9-0u-CbU" secondAttribute="leading" id="CtF-XB-KEp"/>
@@ -1306,7 +1348,10 @@ You will not be charged during this process.</string>
                             <constraint firstItem="ypB-sc-4iy" firstAttribute="leading" secondItem="NRk-y0-6j5" secondAttribute="leading" id="JsJ-1l-dpy"/>
                             <constraint firstItem="iP4-wP-euf" firstAttribute="leading" secondItem="tO9-0u-CbU" secondAttribute="leading" id="K3L-Qc-Ddc"/>
                             <constraint firstAttribute="bottom" secondItem="iP4-wP-euf" secondAttribute="bottom" id="KQ9-cc-eaZ"/>
+                            <constraint firstItem="zcd-04-7CR" firstAttribute="centerY" secondItem="zJA-yM-DX7" secondAttribute="centerY" id="MCm-Qy-5tS"/>
+                            <constraint firstItem="zJA-yM-DX7" firstAttribute="top" secondItem="DVe-fv-utO" secondAttribute="bottom" id="Vxh-Ic-J8O"/>
                             <constraint firstAttribute="trailing" secondItem="FtT-Je-5Y0" secondAttribute="trailing" id="XVO-2G-6VB"/>
+                            <constraint firstItem="zJA-yM-DX7" firstAttribute="leading" secondItem="NRk-y0-6j5" secondAttribute="leading" id="ahn-MM-5Zv"/>
                             <constraint firstItem="NRk-y0-6j5" firstAttribute="trailing" secondItem="SID-tu-SQV" secondAttribute="trailing" id="akm-Fi-SCU"/>
                             <constraint firstAttribute="bottom" secondItem="SID-tu-SQV" secondAttribute="bottom" id="dNQ-ew-zAE"/>
                             <constraint firstItem="DVe-fv-utO" firstAttribute="top" secondItem="NRk-y0-6j5" secondAttribute="top" constant="10" id="e6m-lw-kFC"/>
@@ -1317,11 +1362,14 @@ You will not be charged during this process.</string>
                             <constraint firstItem="1u1-jZ-9mC" firstAttribute="centerX" secondItem="tO9-0u-CbU" secondAttribute="centerX" id="veL-Db-P82"/>
                             <constraint firstItem="ypB-sc-4iy" firstAttribute="top" secondItem="FtT-Je-5Y0" secondAttribute="bottom" id="x1x-4B-RTS"/>
                             <constraint firstItem="DVe-fv-utO" firstAttribute="leading" secondItem="NRk-y0-6j5" secondAttribute="leading" constant="19" id="y35-qB-igb"/>
+                            <constraint firstItem="NRk-y0-6j5" firstAttribute="trailing" secondItem="zcd-04-7CR" secondAttribute="trailing" constant="20" id="y3e-ac-gbG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NRk-y0-6j5"/>
                     </view>
                     <navigationItem key="navigationItem" id="AOC-0U-thD"/>
                     <connections>
+                        <outlet property="buttonCancel" destination="zJA-yM-DX7" id="Q30-1l-rgj"/>
+                        <outlet property="buttonEnvironment" destination="zcd-04-7CR" id="A71-z5-JfN"/>
                         <outlet property="buttonViewConstraintHeight" destination="Qpb-B2-C4x" id="eOF-Rm-P1P"/>
                         <outlet property="buyButton" destination="Ei6-5m-nGj" id="HBC-ry-Qpb"/>
                         <outlet property="hiddenButtonsConstraintHeight" destination="6hm-M9-FPK" id="5MR-P8-KcM"/>
@@ -1339,6 +1387,8 @@ You will not be charged during this process.</string>
                         <outlet property="viewContent" destination="Sj5-e7-K0y" id="J1z-WK-N0E"/>
                         <outlet property="visualEffectView" destination="SID-tu-SQV" id="hbj-Tp-4Sa"/>
                         <segue destination="vXZ-lx-hvc" kind="show" identifier="RestorePurchaseSegue" id="tth-4B-3Z0"/>
+                        <segue destination="Bm9-XV-AeZ" kind="presentation" identifier="PresentGDPRTermsSegue" id="Tat-Ih-NwJ"/>
+                        <segue destination="9jt-8I-K8i" kind="presentation" identifier="SignupViaPurchaseSegue" modalPresentationStyle="fullScreen" id="kNL-g4-6nK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gh3-NB-ifC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1451,8 +1501,7 @@ You will not be charged during this process.</string>
         <image name="shield-icon" width="29" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="750-Xo-1Ft"/>
-        <segue reference="apR-1h-IYV"/>
-        <segue reference="WeP-PD-hnE"/>
+        <segue reference="tth-4B-3Z0"/>
+        <segue reference="kNL-g4-6nK"/>
     </inferredMetricsTieBreakers>
 </document>
