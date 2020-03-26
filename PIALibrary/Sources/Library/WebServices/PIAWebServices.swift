@@ -120,11 +120,16 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         let parameters = ["email": email, "reset_password": reset] as [String : Any]
         let status = [200]
 
-        req(credentials, .post, endpoint, useAuthToken: false, parameters, status, JSONRequestExecutor() { (json, status, error) in
+        req(reset ? nil : credentials, .post, endpoint, useAuthToken: reset, parameters, status, JSONRequestExecutor() { (json, status, error) in
             if let error = error {
                 callback?(error)
                 return
             }
+            
+            if let newPassword = json?["password"] as? String {
+                Client.configuration.tempAccountPassword = newPassword
+            }
+            
             callback?(nil)
         })
     }

@@ -68,9 +68,7 @@ public class SignupSuccessViewController: AutolayoutViewController, BrandableNav
 
         self.styleSubmitButton()
         self.styleContainers()
-        
-        buttonSubmit.isUserInteractionEnabled = true
-        
+                
     }
     
     @IBAction private func submit() {

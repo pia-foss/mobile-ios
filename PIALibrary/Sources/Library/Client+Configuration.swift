@@ -151,7 +151,10 @@ extension Client {
         // MARK: Access to Data PublicKey
         private let accessQueue = DispatchQueue(label: "SynchronizedDataAccess",
                                                 attributes: .concurrent)
-        
+                
+        /// Store the account password in memory when the email is set and the user is LoggedIn.
+        public var tempAccountPassword: String
+
         // MARK: Initialization
         
         init() {
@@ -217,6 +220,7 @@ extension Client {
             #endif
             
             maxQuickConnectServers = 6
+            tempAccountPassword = ""
             
             if let publicKey = database.secure.publicKeyEntry() {
                 self.publicKey = publicKey

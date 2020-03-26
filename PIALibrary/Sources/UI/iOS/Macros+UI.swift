@@ -432,7 +432,7 @@ public extension UIAlertController {
     }
 }
 
-extension String {
+public extension String {
     func trimmed() -> String {
         return trimmingCharacters(in: .whitespacesAndNewlines)
     }
