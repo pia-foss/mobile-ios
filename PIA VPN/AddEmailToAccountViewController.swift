@@ -151,6 +151,7 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
     }
     
     @IBAction private func close() {
+        Client.configuration.tempAccountPassword = "" //Clean pwd memory
         self.dismissModal()
     }
 
