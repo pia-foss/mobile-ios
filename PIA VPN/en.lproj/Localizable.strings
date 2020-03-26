@@ -96,6 +96,7 @@
 "account.error.unauthorized" = "Your username or password is incorrect.";
 "account.subscriptions.message" = "You can manage your subscription from here.";
 "account.subscriptions.linkMessage" = "here.";
+"account.set.email.error" = "There was an error adding email. Please try again later.";
 
 // SETTINGS
 
@@ -297,3 +298,15 @@
 
 "friend.referrals.friends.family.title" = "Refer your friends and family. For every sign up we’ll give you both 30 days free. ";
 "friend.referrals.description.short" = "REFER A FRIEND. GET 30 DAYS FREE.";
+
+// GDPR
+"gdpr.collect.data.title" = "Personal information we collect";
+"gdpr.collect.data.description" = "E-mail Address for the purposes of account management and protection from abuse.\n\nE-mail address is used to send subscription information, payment confirmations, customer correspondence, and Private Internet Access promotional offers only.";
+"gdpr.accept.button.title" = "Agree and continue";
+
+// SET EMAIL
+"set.email.form.email" = "Enter your email address";
+"set.email.why" = "We need your email to send your username and password.";
+"set.email.success.message_format" = "We have sent your account username and password at your email address at %@";
+"set.email.password.caption" = "Password";
+"set.email.error.validation" = "You must enter an email address.";

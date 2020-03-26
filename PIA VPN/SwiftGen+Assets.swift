@@ -440,6 +440,7 @@ enum Asset {
   static let iconWarning = ImageAsset(name: "icon-warning")
   static let iconWifi = ImageAsset(name: "icon-wifi")
   static let imageContentBlocker = ImageAsset(name: "image-content-blocker")
+  static let imagePurchaseSuccess = ImageAsset(name: "image-purchase-success")
   static let imageRobot = ImageAsset(name: "image-robot")
   static let imageVpnAllow = ImageAsset(name: "image-vpn-allow")
   static let itemMenu = ImageAsset(name: "item-menu")
@@ -829,6 +830,7 @@ enum Asset {
     iconWarning,
     iconWifi,
     imageContentBlocker,
+    imagePurchaseSuccess,
     imageRobot,
     imageVpnAllow,
     itemMenu,
