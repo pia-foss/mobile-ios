@@ -184,6 +184,7 @@ class AccountViewController: AutolayoutViewController {
 
                     
                     Client.providers.accountProvider.update(with: request,
+                                                            resetPassword: false,
                                                             andPassword: password) { (info, error) in
                                                                 weakSelf.hideLoadingAnimation()
                                                                 
