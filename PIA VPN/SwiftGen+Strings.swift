@@ -74,6 +74,12 @@ internal enum L10n {
       /// Your email address has been saved.
       internal static let success = L10n.tr("Localizable", "account.save.success")
     }
+    internal enum Set {
+      internal enum Email {
+        /// There was an error adding email. Please try again later.
+        internal static let error = L10n.tr("Localizable", "account.set.email.error")
+      }
+    }
     internal enum Subscriptions {
       /// here.
       internal static let linkMessage = L10n.tr("Localizable", "account.subscriptions.linkMessage")
@@ -264,6 +270,23 @@ internal enum L10n {
     }
   }
 
+  internal enum Gdpr {
+    internal enum Accept {
+      internal enum Button {
+        /// Agree and continue
+        internal static let title = L10n.tr("Localizable", "gdpr.accept.button.title")
+      }
+    }
+    internal enum Collect {
+      internal enum Data {
+        /// E-mail Address for the purposes of account management and protection from abuse.\n\nE-mail address is used to send subscription information, payment confirmations, customer correspondence, and Private Internet Access promotional offers only.
+        internal static let description = L10n.tr("Localizable", "gdpr.collect.data.description")
+        /// Personal information we collect
+        internal static let title = L10n.tr("Localizable", "gdpr.collect.data.title")
+      }
+    }
+  }
+
   internal enum Global {
     /// Add
     internal static let add = L10n.tr("Localizable", "global.add")
@@ -443,6 +466,31 @@ internal enum L10n {
       internal static let message = L10n.tr("Localizable", "renewal.success.message")
       /// Thank you
       internal static let title = L10n.tr("Localizable", "renewal.success.title")
+    }
+  }
+
+  internal enum Set {
+    internal enum Email {
+      /// We need your email to send your username and password.
+      internal static let why = L10n.tr("Localizable", "set.email.why")
+      internal enum Error {
+        /// You must enter an email address.
+        internal static let validation = L10n.tr("Localizable", "set.email.error.validation")
+      }
+      internal enum Form {
+        /// Enter your email address
+        internal static let email = L10n.tr("Localizable", "set.email.form.email")
+      }
+      internal enum Password {
+        /// Password
+        internal static let caption = L10n.tr("Localizable", "set.email.password.caption")
+      }
+      internal enum Success {
+        /// We have sent your account username and password at your email address at %@
+        internal static func messageFormat(_ p1: String) -> String {
+          return L10n.tr("Localizable", "set.email.success.message_format", p1)
+        }
+      }
     }
   }
 

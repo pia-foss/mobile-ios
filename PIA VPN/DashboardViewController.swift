@@ -88,6 +88,7 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(presentKillSwitchAlert), name: .PIAPersistentConnectionTileHaveChanged, object: nil)
         nc.addObserver(self, selector: #selector(closeSession), name: .PIAAccountLapsed, object: nil)
         nc.addObserver(self, selector: #selector(reloadTheme), name: .PIAThemeShouldChange, object: nil)
+        nc.addObserver(self, selector: #selector(checkAccountEmail), name: .PIAAccountDidRefresh, object: nil)
 
         if Client.providers.accountProvider.isLoggedIn {
             Client.providers.accountProvider.refreshAndLogoutUnauthorized()
@@ -367,6 +368,8 @@ class DashboardViewController: AutolayoutViewController {
         } else if let nmt = segue.destination as? TrustedNetworksViewController {
             nmt.shouldReconnectAutomatically = true
             nmt.persistentConnectionValue = Client.preferences.isPersistentConnection
+        } else if let vc = segue.destination as? AddEmailToAccountViewController {
+            vc.modalPresentationStyle = .fullScreen
         }
     }
     
@@ -461,6 +464,19 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     // MARK: Helpers
+    
+    @objc private func checkAccountEmail() {
+
+        if let currentUser = Client.providers.accountProvider.currentUser,
+            let info = currentUser.info {
+            if info.email == nil || info.email == "" {
+                //No email, we need to show the account email view
+                if Client.providers.accountProvider.isLoggedIn {
+                    self.perform(segue: StoryboardSegue.Main.showAddEmailSegue)
+                }
+            }
+        }
+    }
 
     @objc private func updateCurrentStatus() {
         updateCurrentStatusWithUserInfo(nil)
