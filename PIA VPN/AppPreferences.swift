@@ -457,9 +457,7 @@ class AppPreferences {
         quickSettingNetworkToolVisible = true
         quickSettingPrivateBrowserVisible = true
         useSmallPackets = false
-        let terms = Client.preferences.gdprTermsAccepted //we keep this value
         let preferences = Client.preferences.editable().reset()
-        preferences.gdprTermsAccepted = terms
         preferences.commit()
     }
     
