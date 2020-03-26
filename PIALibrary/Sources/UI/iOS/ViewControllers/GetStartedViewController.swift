@@ -57,8 +57,6 @@ public class GetStartedViewController: PIAWelcomeViewController {
     @IBOutlet private weak var buttonViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet private weak var hiddenButtonsConstraintHeight: NSLayoutConstraint!
 
-    var termsWerePresentedOnce = false
-
     private var buttonViewIsExpanded = false {
         didSet {
             self.updateButtonView()
@@ -233,10 +231,7 @@ public class GetStartedViewController: PIAWelcomeViewController {
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == StoryboardSegue.Welcome.presentGDPRTermsSegue.rawValue {
-            let gdprViewController = segue.destination as! GDPRViewController
-            gdprViewController.delegate = self
-        } else if (segue.identifier == StoryboardSegue.Welcome.signupViaPurchaseSegue.rawValue) {
+        if (segue.identifier == StoryboardSegue.Welcome.signupViaPurchaseSegue.rawValue) {
             let nav = segue.destination as! UINavigationController
             let vc = nav.topViewController as! SignupInProgressViewController
             
@@ -295,20 +290,6 @@ public class GetStartedViewController: PIAWelcomeViewController {
         } else {
             disableInteractions(fully: false)
         }
-        
-        guard Client.preferences.gdprTermsAccepted else {
-            
-            if !termsWerePresentedOnce {
-                //present term and conditions
-                termsWerePresentedOnce = true
-                self.performSegue(withIdentifier: StoryboardSegue.Welcome.presentGDPRTermsSegue.rawValue,
-                                  sender: nil)
-                return
-            }
-            return
-
-        }
-
     }
     
     private func styleButtons() {
@@ -496,20 +477,4 @@ extension GetStartedViewController: UIScrollViewDelegate {
         pageControl.currentPage = currentPageIndex
         updateButtonsToCurrentPage()
     }
-}
-
-extension GetStartedViewController: GDPRDelegate {
-    
-    public func gdprViewWasAccepted() {
-        let preferences = Client.preferences.editable()
-        preferences.gdprTermsAccepted = true
-        preferences.commit()
-    }
-    
-    public func gdprViewWasRejected() {
-        let preferences = Client.preferences.editable()
-        preferences.gdprTermsAccepted = false
-        preferences.commit()
-    }
-    
 }

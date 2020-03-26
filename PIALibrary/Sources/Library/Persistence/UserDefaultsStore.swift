@@ -54,8 +54,6 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         static let persistentConnection = "PersistentConnection" // legacy
 
-        static let gdprTermsAccepted = "GDPRTermsAccepted"
-
         static let mace = "MACE" // legacy
         
         static let visibleTiles = "VisibleTiles"
@@ -358,18 +356,6 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
     
-    var gdprTermsAccepted: Bool? {
-        get {
-            guard let value = backend.object(forKey: Entries.gdprTermsAccepted) as? Bool else {
-                return nil
-            }
-            return value
-        }
-        set {
-            backend.set(newValue, forKey: Entries.gdprTermsAccepted)
-        }
-    }
-
     var useWiFiProtection: Bool? {
         get {
             guard let value = backend.object(forKey: Entries.useWiFiProtection) as? Bool else {

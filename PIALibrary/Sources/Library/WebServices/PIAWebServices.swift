@@ -115,9 +115,9 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         })
     }
     
-    func update(credentials: Credentials, email: String, _ callback: SuccessLibraryCallback?) {
+    func update(credentials: Credentials, resetPassword reset: Bool, email: String, _ callback: SuccessLibraryCallback?) {
         let endpoint = ClientEndpoint.updateAccount
-        let parameters = ["email": email]
+        let parameters = ["email": email, "reset_password": reset] as [String : Any]
         let status = [200]
 
         req(credentials, .post, endpoint, useAuthToken: false, parameters, status, JSONRequestExecutor() { (json, status, error) in

@@ -36,7 +36,7 @@ protocol WebServices: class {
 
     func info(token: String, _ callback: LibraryCallback<AccountInfo>?)
 
-    func update(credentials: Credentials, email: String, _ callback: SuccessLibraryCallback?)
+    func update(credentials: Credentials, resetPassword reset: Bool, email: String, _ callback: SuccessLibraryCallback?)
 
     /**
          Invalidates the access token.

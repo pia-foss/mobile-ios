@@ -109,20 +109,7 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == StoryboardSegue.Welcome.confirmPurchaseVPNPlanSegue.rawValue) {
-            if let vc = segue.destination as? ConfirmVPNPlanViewController,
-                let selectedIndex = selectedPlanIndex {
-                vc.preset = preset
-                vc.completionDelegate = completionDelegate
-                vc.populateViewWith(plans: allPlans,
-                                    andSelectedPlanIndex: selectedIndex)
-            }
-        } else if (segue.identifier == StoryboardSegue.Welcome.showTermsAndConditionsSegue.rawValue) {
-            if let vc = segue.destination as? TermsAndConditionsViewController {
-                vc.termsAndConditionsTitle = L10n.Welcome.Agreement.Trials.title
-                vc.termsAndConditions = L10n.Welcome.Agreement.Trials.message
-            }
-        } else if (segue.identifier == StoryboardSegue.Welcome.signupViaPurchaseSegue.rawValue) {
+        if (segue.identifier == StoryboardSegue.Welcome.signupViaPurchaseSegue.rawValue) {
             let nav = segue.destination as! UINavigationController
             let vc = nav.topViewController as! SignupInProgressViewController
             
@@ -137,7 +124,6 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
             vc.preset = preset
             vc.completionDelegate = completionDelegate
         }
-
     }
     
     /// Populate the view with the values from GetStartedView

@@ -29,18 +29,17 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
 
     @IBOutlet private weak var buttonConfirm: PIAButton!
     @IBOutlet private weak var textEmail: BorderedTextField!
-    @IBOutlet private weak var textAgreement: UITextView!
     @IBOutlet private weak var labelTitle: UILabel!
     @IBOutlet private weak var labelSubtitle: UILabel!
 
     private var signupEmail: String?
     private var signupTransaction: InAppTransaction?
+    var metadata: SignupMetadata!
     weak var completionDelegate: WelcomeCompletionDelegate?
     var omitsSiblingLink = false
+    var termsAndConditionsAgreed = false
 
     var preset: Preset?
-    private var allPlans: [PurchasePlan] = [.dummy, .dummy]
-    private var selectedPlanIndex: Int?
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -53,54 +52,19 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
             fatalError("Preset not propagated")
         }
 
-        guard let planIndex = selectedPlanIndex else {
-            return
-        }
-
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: Theme.current.palette.navigationBarBackIcon?.withRenderingMode(.alwaysOriginal),
-            style: .plain,
-            target: self,
-            action: #selector(back(_:))
-        )
-        self.navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Welcome.Redeem.Accessibility.back
+        navigationItem.hidesBackButton = true
 
         labelTitle.text = L10n.Welcome.Purchase.Confirm.Form.email
-        let plan = allPlans[planIndex]
         labelSubtitle.text = L10n.Welcome.Purchase.Email.why
-        
-        var price = ""
-        for plan in allPlans {
-            if plan.plan == .yearly {
-                price = plan.priceString
-            }
-        }
-        textAgreement.attributedText = Theme.current.agreementText(
-            withMessage: L10n.Welcome.Agreement.message(price),
-            tos: L10n.Welcome.Agreement.Message.tos,
-            tosUrl: Client.configuration.tosUrl,
-            privacy: L10n.Welcome.Agreement.Message.privacy,
-            privacyUrl: Client.configuration.privacyUrl
-        )
-
+       
         textEmail.placeholder = L10n.Welcome.Purchase.Email.placeholder
         textEmail.text = preset.purchaseEmail
         self.styleConfirmButton()
+        
     }
 
-    /// Populate the view with the values from PurchaseViewController
-    /// - Parameters:
-    ///   - plans:           The available plans.
-    ///   - selectedIndex:   The selected plan from the previous screen.
-    func populateViewWith(plans: [PurchasePlan], andSelectedPlanIndex selectedIndex: Int) {
-        self.allPlans = plans
-        self.selectedPlanIndex = selectedIndex
-    }
-    
     @IBAction private func signUp(_ sender: Any?) {
-        guard let planIndex = selectedPlanIndex else {
-            return
-        }
+
         guard let email = textEmail.text?.trimmed(), Validator.validate(email: email) else {
             signupEmail = nil
             Macros.displayImageNote(withImage: Asset.iconWarning.image,
@@ -109,29 +73,63 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
             return
         }
         
-        self.status = .restore(element: textEmail)
-        
-        let plan = allPlans[planIndex]
-        guard !plan.isDummy else {
-            Macros.displayImageNote(withImage: Asset.iconWarning.image,
-                                    message: L10n.Welcome.Iap.Error.Message.unavailable)
+        guard termsAndConditionsAgreed else {
+            //present term and conditions
+            self.performSegue(withIdentifier: StoryboardSegue.Signup.presentGDPRTermsSegue.rawValue,
+                              sender: nil)
             return
         }
-        
-        disableInteractions()
 
-        preset?.accountProvider.isAPIEndpointAvailable({ [weak self] (isAvailable, error) in
-            self?.enableInteractions()
-            guard let isAvailable = isAvailable,
-                isAvailable else {
-                    Macros.displayImageNote(withImage: Asset.iconWarning.image,
-                                            message: L10n.Welcome.Purchase.Error.Connectivity.description)
-                    return
-            }
-            self?.startPurchaseProcessWithEmail(email,
-                                                andPlan: plan)
-        })
+        self.status = .restore(element: textEmail)
         
+        self.showLoadingAnimation()
+        self.disableInteractions()
+        
+        log.debug("Account: Modifying account email...")
+        
+        metadata.title = L10n.Signup.InProgress.title
+        metadata.bodyImage = Asset.imagePurchaseSuccess.image
+        metadata.bodyTitle = L10n.Signup.Success.title
+        metadata.bodySubtitle = L10n.Signup.Success.messageFormat(email)
+
+        let request = UpdateAccountRequest(email: email)
+
+        var password = ""
+        if let currentPassword = metadata.user?.credentials.password {
+            password = currentPassword
+        }
+        
+        Client.providers.accountProvider.update(with: request,
+                                                resetPassword: false,
+                                                andPassword: password) { [weak self] (info, error) in
+                                                    self?.hideLoadingAnimation()
+                                                    self?.enableInteractions()
+                                                    
+                                                    guard let _ = info else {
+                                                        if let error = error {
+                                                            log.error("Account: Failed to modify account email (error: \(error))")
+                                                        } else {
+                                                            log.error("Account: Failed to modify account email")
+                                                        }
+                                                        
+                                                        self?.textEmail.text = ""
+                                                        /*
+                                                        let alert = Macros.alert(L10n.Global.error, L10n.Account.Error.unauthorized)
+                                                        alert.addDefaultAction(L10n.Global.close)
+                                                        self?.present(alert, animated: true, completion: nil)
+                                                        */
+                                                        let alert = Macros.alert("Error", "Error msg")
+                                                        alert.addDefaultAction("Close")
+                                                        self?.present(alert, animated: true, completion: nil)
+
+                                                        return
+                                                    }
+                                                    
+                                                    log.debug("Account: Email successfully modified")
+                                                    self?.textEmail.endEditing(true)
+                                                    self?.perform(segue: StoryboardSegue.Signup.successShowCredentialsSegueIdentifier)
+        }
+
     }
 
     private func disableInteractions() {
@@ -142,71 +140,25 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
         parent?.view.isUserInteractionEnabled = true
     }
 
-    private func startPurchaseProcessWithEmail(_ email: String,
-                                               andPlan plan: PurchasePlan) {
-        
-        guard !Client.store.hasUncreditedTransactions else {
-            let alert = Macros.alert(
-                nil,
-                L10n.Signup.Purchase.Uncredited.Alert.message
-            )
-            alert.addCancelAction(L10n.Signup.Purchase.Uncredited.Alert.Button.cancel)
-            alert.addActionWithTitle(L10n.Signup.Purchase.Uncredited.Alert.Button.recover) {
-                self.navigationController?.popToRootViewController(animated: true)
-                Macros.postNotification(.PIARecoverAccount)
-            }
-            present(alert, animated: true, completion: nil)
-            return
-
-        }
-
-        //textEmail.text = email
-        log.debug("Will purchase plan: \(plan.product)")
-        
-        disableInteractions()
-        self.showLoadingAnimation()
-        
-        preset?.accountProvider.purchase(plan: plan.plan) { (transaction, error) in
-            self.enableInteractions()
-            self.hideLoadingAnimation()
-
-            guard let transaction = transaction else {
-                if let error = error {
-                    let message = error.localizedDescription
-                    log.error("Purchase failed (error: \(error))")
-                    Macros.displayImageNote(withImage: Asset.iconWarning.image,
-                                            message: message)
-                } else {
-                    log.warning("Cancelled purchase")
-                }
-                return
-            }
-            
-            log.debug("Purchased with transaction: \(transaction)")
-            
-            self.signupEmail = email
-            self.signupTransaction = transaction
-            self.perform(segue: StoryboardSegue.Welcome.signupViaPurchaseSegue)
-        }
-        
-    }
-    
     override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == StoryboardSegue.Welcome.signupViaPurchaseSegue.rawValue) {
-            let nav = segue.destination as! UINavigationController
-            let vc = nav.topViewController as! SignupInProgressViewController
-            
-            guard let email = signupEmail else {
-                fatalError("Signing up and signupEmail is not set")
-            }
-            var metadata = SignupMetadata(email: email)
-            metadata.title = L10n.Signup.InProgress.title
-            metadata.bodySubtitle = L10n.Signup.InProgress.message
-            vc.metadata = metadata
-            vc.signupRequest = SignupRequest(email: email, transaction: signupTransaction)
-            vc.preset = preset
-            vc.completionDelegate = completionDelegate
+        
+        guard let identifier = segue.identifier, let segueType = StoryboardSegue.Signup(rawValue: identifier) else {
+            return
         }
+        switch segueType {
+        case .successShowCredentialsSegueIdentifier:
+            let vc = segue.destination as! SignupSuccessViewController
+            vc.metadata = metadata
+            vc.completionDelegate = completionDelegate
+            break
+        case .presentGDPRTermsSegue:
+            let gdprViewController = segue.destination as! GDPRViewController
+            gdprViewController.delegate = self
+            break
+        default:
+            break
+        }
+
     }
     
     // MARK: Restylable
@@ -218,7 +170,6 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
         Theme.current.applyInput(textEmail)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applySubtitle(labelSubtitle)
-        Theme.current.applyLinkAttributes(textAgreement)
     }
     
     private func styleConfirmButton() {
@@ -228,4 +179,17 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
                                for: [])
     }
 
+}
+
+extension ConfirmVPNPlanViewController: GDPRDelegate {
+    
+    public func gdprViewWasAccepted() {
+        self.termsAndConditionsAgreed = true
+        self.signUp(nil)
+    }
+    
+    public func gdprViewWasRejected() {
+        self.termsAndConditionsAgreed = false
+    }
+    
 }
