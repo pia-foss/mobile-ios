@@ -301,7 +301,6 @@
 		DDD824E82189C0EE00151709 /* BrandableNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E62189C0E800151709 /* BrandableNavigationBar.swift */; };
 		DDD824EA2189CD5700151709 /* NavigationLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E92189CD5700151709 /* NavigationLogoView.swift */; };
 		DDE27E0422E1B1A700503A89 /* ProductTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE27E0322E1B1A700503A89 /* ProductTests.swift */; };
-		DDE93C5722F9847E0054FE28 /* PurchaseTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE93C5622F9847E0054FE28 /* PurchaseTrialViewController.swift */; };
 		DDF7F73F2405846800A671C7 /* PIAWGTunnelProvider+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF7F73E2405846800A671C7 /* PIAWGTunnelProvider+Profile.swift */; };
 		DDFCFAA821E924A70081F235 /* TileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAA721E924A70081F235 /* TileProvider.swift */; };
 		DDFCFAA921E924AD0081F235 /* TileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAA721E924A70081F235 /* TileProvider.swift */; };
@@ -601,7 +600,6 @@
 		DDD824E62189C0E800151709 /* BrandableNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandableNavigationBar.swift; sourceTree = "<group>"; };
 		DDD824E92189CD5700151709 /* NavigationLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLogoView.swift; sourceTree = "<group>"; };
 		DDE27E0322E1B1A700503A89 /* ProductTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductTests.swift; path = "../../../../../../System/Volumes/Data/Users/ueshiba/Projects/PIA/client-library-apple/PIALibraryTests/ProductTests.swift"; sourceTree = "<group>"; };
-		DDE93C5622F9847E0054FE28 /* PurchaseTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTrialViewController.swift; sourceTree = "<group>"; };
 		DDF7F73E2405846800A671C7 /* PIAWGTunnelProvider+Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PIAWGTunnelProvider+Profile.swift"; sourceTree = "<group>"; };
 		DDFCFAA721E924A70081F235 /* TileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileProvider.swift; sourceTree = "<group>"; };
 		DDFCFAAA21E925160081F235 /* DefaultTileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTileProvider.swift; sourceTree = "<group>"; };
@@ -1149,7 +1147,6 @@
 				0E48A8521FDAD60900B9A4C0 /* OptionsViewController.swift */,
 				0EB8C0531F9CD38A005857E4 /* PIAWelcomeViewController.swift */,
 				0EB8C0551F9CD38A005857E4 /* PurchaseViewController.swift */,
-				DDE93C5622F9847E0054FE28 /* PurchaseTrialViewController.swift */,
 				DDA184D022FC1F79003239CC /* TermsAndConditionsViewController.swift */,
 				DD0DE84F22366090002A6E82 /* GDPRViewController.swift */,
 				0EB8C0561F9CD38A005857E4 /* RestoreSignupViewController.swift */,
@@ -1873,7 +1870,6 @@
 				0E392DA31FE3247E0002160D /* Endpoint.swift in Sources */,
 				0E53A8581FE5DA16000C2A18 /* MockInAppProvider.swift in Sources */,
 				DDD824E32189969400151709 /* Preset.swift in Sources */,
-				DDE93C5722F9847E0054FE28 /* PurchaseTrialViewController.swift in Sources */,
 				0E9D62721FDE83BD009A90CF /* GlossServersBundle.swift in Sources */,
 				0E492C6A1FE61485007F23DF /* Client+Database.swift in Sources */,
 				0E48A8531FDAD60900B9A4C0 /* OptionsViewController.swift in Sources */,

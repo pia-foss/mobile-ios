@@ -228,8 +228,8 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     }
     
     /// :nodoc:
-    public func update(with request: UpdateAccountRequest, andPassword password: String, _ callback: LibraryCallback<AccountInfo>?) {
-        delegate.update(with: request, andPassword: password, callback)
+    public func update(with request: UpdateAccountRequest, resetPassword reset: Bool, andPassword password: String, _ callback: LibraryCallback<AccountInfo>?) {
+        delegate.update(with: request, resetPassword: reset, andPassword: password, callback)
     }
     
     /// :nodoc:

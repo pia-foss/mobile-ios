@@ -128,11 +128,12 @@ public class SignupInProgressViewController: AutolayoutViewController, Brandable
         }
         switch segueType {
         case .successSegueIdentifier:
+                        
             guard let email = signupRequest?.email ?? redeemRequest?.email else {
                 fatalError("Email not provided with signup or redeem request")
             }
             
-            let vc = segue.destination as! SignupSuccessViewController
+            let vc = segue.destination as! ConfirmVPNPlanViewController
             var metadata = SignupMetadata(email: email, user: user)
             if let _ = signupRequest {
                 metadata.title = L10n.Signup.InProgress.title
@@ -146,6 +147,7 @@ public class SignupInProgressViewController: AutolayoutViewController, Brandable
                 metadata.bodyTitle = L10n.Signup.Success.Redeem.title
                 metadata.bodySubtitle = L10n.Signup.Success.Redeem.message
             }
+            vc.preset = preset
             vc.metadata = metadata
             vc.completionDelegate = completionDelegate
             

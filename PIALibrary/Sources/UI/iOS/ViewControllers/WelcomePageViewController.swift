@@ -51,13 +51,6 @@ class WelcomePageViewController: UIPageViewController {
             let vc = StoryboardScene.Welcome.restoreViewController.instantiate()
             source.append(vc)
         }
-        if preset.pages.contains(.directPurchase) {
-            let vc = StoryboardScene.Welcome.confirmPlanViewController.instantiate()
-            vc.preset = Preset()
-            vc.completionDelegate = completionDelegate
-            vc.populateViewWith(plans: self.allPlans ?? [.dummy, .dummy], andSelectedPlanIndex: self.selectedPlanIndex ?? 0)
-            source.append(vc)
-        }
         dataSource = self
 
         guard !source.isEmpty else {

@@ -15,23 +15,20 @@ internal enum StoryboardSegue {
   internal enum Signup: String, SegueType {
     case failureSegueIdentifier = "FailureSegueIdentifier"
     case internetUnreachableSegueIdentifier = "InternetUnreachableSegueIdentifier"
+    case presentGDPRTermsSegue = "PresentGDPRTermsSegue"
     case successSegueIdentifier = "SuccessSegueIdentifier"
+    case successShowCredentialsSegueIdentifier = "SuccessShowCredentialsSegueIdentifier"
     case unwindFailureSegueIdentifier = "UnwindFailureSegueIdentifier"
     case unwindInternetUnreachableSegueIdentifier = "UnwindInternetUnreachableSegueIdentifier"
   }
   internal enum Welcome: String, SegueType {
-    case confirmPurchaseVPNPlanSegue = "ConfirmPurchaseVPNPlanSegue"
     case loginAccountSegue = "LoginAccountSegue"
-    case presentGDPRTermsSegue = "PresentGDPRTermsSegue"
     case purchaseVPNPlanSegue = "PurchaseVPNPlanSegue"
     case restoreLoginPurchaseSegue = "RestoreLoginPurchaseSegue"
     case restorePurchaseSegue = "RestorePurchaseSegue"
-    case showTermsAndConditionsSegue = "ShowTermsAndConditionsSegue"
     case signupViaPurchaseSegue = "SignupViaPurchaseSegue"
     case signupViaRecoverSegue = "SignupViaRecoverSegue"
     case signupViaRestoreSegue = "SignupViaRestoreSegue"
-    case subscribeNowVPNPlanSegue = "SubscribeNowVPNPlanSegue"
-    case viewMoreVPNPlansSegue = "ViewMoreVPNPlansSegue"
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

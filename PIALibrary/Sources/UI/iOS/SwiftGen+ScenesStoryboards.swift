@@ -25,8 +25,6 @@ internal enum StoryboardScene {
     internal static let loginViewController = SceneType<PIALibrary.LoginViewController>(storyboard: Welcome.self, identifier: "LoginViewController")
 
     internal static let purchaseViewController = SceneType<PIALibrary.PurchaseViewController>(storyboard: Welcome.self, identifier: "PurchaseViewController")
-    
-    internal static let purchaseTrialViewController = SceneType<PIALibrary.PurchaseTrialViewController>(storyboard: Welcome.self, identifier: "PurchaseTrialViewController")
 
     internal static let restoreViewController = SceneType<PIALibrary.RestoreSignupViewController>(storyboard: Welcome.self, identifier: "RestoreSignupViewController")
       

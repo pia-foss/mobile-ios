@@ -55,7 +55,7 @@ class MockWebServices: WebServices {
         callback?(result, error)
     }
     
-    func update(credentials: Credentials, email: String, _ callback: SuccessLibraryCallback?) {
+    func update(credentials: Credentials, resetPassword reset: Bool, email: String, _ callback: SuccessLibraryCallback?) {
         callback?(nil)
     }
     

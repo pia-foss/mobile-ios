@@ -290,13 +290,13 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
     }
     
-    func update(with request: UpdateAccountRequest, andPassword password: String, _ callback: ((AccountInfo?, Error?) -> Void)?) {
+    func update(with request: UpdateAccountRequest, resetPassword reset: Bool, andPassword password: String, _ callback: ((AccountInfo?, Error?) -> Void)?) {
         guard let user = currentUser else {
             preconditionFailure()
         }
         let credentials = Credentials(username: Client.providers.accountProvider.publicUsername ?? "",
                                       password: password)
-        webServices.update(credentials: credentials, email: request.email) { (error) in
+        webServices.update(credentials: credentials, resetPassword: reset, email: request.email) { (error) in
             if let _ = error {
                 callback?(nil, error)
                 return
