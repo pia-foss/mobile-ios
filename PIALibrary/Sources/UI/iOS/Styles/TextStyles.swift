@@ -262,6 +262,16 @@ public extension TextStyle {
         tintColor: nil,
         lineHeight: 20
     )
+    
+    static let textStyleSubscriptionInformation = TextStyle(
+        font: UIFont.regularFontWith(size: 16),
+        color: UIColor.piaGrey4,
+        foregroundColor: nil,
+        backgroundColor: nil,
+        tintColor: nil,
+        lineHeight: 20
+    )
+
     struct Buttons {
         
         public static let piaGreenButton = TextStyle(
