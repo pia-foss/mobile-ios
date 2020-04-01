@@ -409,8 +409,8 @@ public class GetStartedViewController: PIAWelcomeViewController {
     /// :nodoc:
     public override func viewShouldRestyle() {
         super.viewShouldRestyle()
-        Theme.current.applySubtitle(subscribeNowDescription)
-        Theme.current.applyTitle(subscribeNowTitle, appearance: .light)
+        Theme.current.applyTitle(subscribeNowDescription, appearance: .light)
+        Theme.current.applySubtitle(subscribeNowTitle)
 
         Theme.current.applyTransparentButton(loginButton,
                                              withSize: 1.0)
