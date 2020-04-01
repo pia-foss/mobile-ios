@@ -108,6 +108,11 @@ extension Theme {
             TextStyle.textStyle6 : TextStyle.textStyle7)
     }
     
+    public func applyMenuVersionListStyle(_ label: UILabel) {
+        label.style(style: palette.appearance == .dark ?
+            TextStyle.textStyle11 : TextStyle.textStyle12)
+    }
+
     public func applyClearTextfield(_ textfield: UITextField) {
         textfield.style(style: palette.appearance == .dark ?
             TextStyle.textStyle6 : TextStyle.textStyle7)
@@ -275,7 +280,7 @@ extension Theme {
         paragraph.alignment = .left
         paragraph.minimumLineHeight = 16
         let fullRange = NSMakeRange(0, plain.length)
-        attributed.addAttribute(.font, value: TextStyle.textStyle8.font!, range: fullRange)
+        attributed.addAttribute(.font, value: TextStyle.textStyleSubscriptionInformation.font!, range: fullRange)
         attributed.addAttribute(.foregroundColor, value: TextStyle.textStyle8.color!, range: fullRange)
         attributed.addAttribute(.paragraphStyle, value: paragraph, range: fullRange)
         let range1 = plain.range(of: link)
@@ -283,5 +288,24 @@ extension Theme {
         return attributed
     }
 
+    public func smallTextWithColoredLink(withMessage message: String, link: String) -> NSAttributedString {
+        let plain = message.replacingOccurrences(
+            of: "$1",
+            with: link
+            ) as NSString
+        
+        let attributed = NSMutableAttributedString(string: plain as String)
+
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .left
+        paragraph.minimumLineHeight = 16
+        let fullRange = NSMakeRange(0, plain.length)
+        attributed.addAttribute(.font, value: TextStyle.textStyle8.font!, range: fullRange)
+        attributed.addAttribute(.foregroundColor, value: TextStyle.textStyle8.color!, range: fullRange)
+        attributed.addAttribute(.paragraphStyle, value: paragraph, range: fullRange)
+        let range1 = plain.range(of: link)
+        attributed.addAttribute(.foregroundColor, value: TextStyle.textStyle9.color!, range: range1)
+        return attributed
+    }
 
 }

@@ -85,6 +85,18 @@ internal enum L10n {
       internal static let linkMessage = L10n.tr("Localizable", "account.subscriptions.linkMessage")
       /// You can manage your subscription from here.
       internal static let message = L10n.tr("Localizable", "account.subscriptions.message")
+      /// Monthly plan
+      internal static let monthly = L10n.tr("Localizable", "account.subscriptions.monthly")
+      /// Trial plan
+      internal static let trial = L10n.tr("Localizable", "account.subscriptions.trial")
+      /// Yearly plan
+      internal static let yearly = L10n.tr("Localizable", "account.subscriptions.yearly")
+      internal enum Short {
+        /// Manage subscription
+        internal static let linkMessage = L10n.tr("Localizable", "account.subscriptions.short.linkMessage")
+        /// Manage subscription
+        internal static let message = L10n.tr("Localizable", "account.subscriptions.short.message")
+      }
     }
     internal enum Update {
       internal enum Email {

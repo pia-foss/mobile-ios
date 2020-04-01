@@ -34,6 +34,15 @@ class MenuItemCell: UITableViewCell, Restylable {
         labelTitle.text = title
         imvIcon.image = icon
     }
+    
+    func fillVersion(withTitle title: String) {
+        viewShouldRestyle()
+        Theme.current.applyMenuVersionListStyle(labelTitle)
+
+        labelTitle.text = title
+        imvIcon.image = nil
+    }
+
 
     // MARK: Restylable
     
