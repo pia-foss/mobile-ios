@@ -49,6 +49,8 @@ class MenuViewController: AutolayoutViewController {
         case about
         
         case privacy
+        
+        case version
     }
 
     private struct Cells {
@@ -81,7 +83,8 @@ class MenuViewController: AutolayoutViewController {
             .about,
             .privacy,
             .homepage,
-            .support
+            .support,
+            .version
         ]
     ]
 
@@ -93,7 +96,8 @@ class MenuViewController: AutolayoutViewController {
         .about: L10n.Menu.Item.about,
         .privacy: L10n.Menu.Item.Web.privacy,
         .homepage: L10n.Menu.Item.Web.home,
-        .support: L10n.Menu.Item.Web.support
+        .support: L10n.Menu.Item.Web.support,
+        .version: Macros.localizedVersionFullString() ?? ""
     ]
 
     private lazy var iconForItem: [Item: ImageAsset] = [
@@ -104,7 +108,8 @@ class MenuViewController: AutolayoutViewController {
         .about: Asset.iconAbout,
         .privacy: Asset.iconPrivacy,
         .homepage: Asset.iconHomepage,
-        .support: Asset.iconContact
+        .support: Asset.iconContact,
+        .version: Asset.iconAccount
     ]
     
     deinit {
@@ -119,7 +124,36 @@ class MenuViewController: AutolayoutViewController {
         modalPresentationCapturesStatusBarAppearance = true
 
         imvAvatar.image = Asset.imageRobot.image
-        labelVersion.text = Macros.localizedVersionFullString()
+
+        var planDescription = ""
+        if let currentUser = Client.providers.accountProvider.currentUser,
+            let info = currentUser.info {
+            
+            if info.plan == .monthly || info.plan == .yearly || info.plan == .trial {
+                
+                switch info.plan {
+                    case .yearly:
+                        planDescription = L10n.Account.Subscriptions.yearly
+                    case .monthly:
+                        planDescription = L10n.Account.Subscriptions.monthly
+                    default:
+                        planDescription = L10n.Account.Subscriptions.trial
+                }
+                
+                labelVersion.numberOfLines = 0
+                labelVersion.attributedText = Theme.current.smallTextWithColoredLink(
+                    withMessage: planDescription + "\n" + L10n.Account.Subscriptions.Short.message,
+                    link: L10n.Account.Subscriptions.Short.linkMessage)
+                labelVersion.isUserInteractionEnabled = true
+                let tap = UITapGestureRecognizer(target: self, action: #selector(openManageSubscription))
+                labelVersion.addGestureRecognizer(tap)
+
+            } else {
+                labelVersion.text = Macros.localizedVersionFullString()
+                allItems[1].removeLast()
+            }
+        }
+        
 
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
@@ -140,7 +174,15 @@ class MenuViewController: AutolayoutViewController {
     }
 
     // MARK: Actions
-    
+    @objc private func openManageSubscription() {
+        if let url = URL(string: AppConstants.AppleUrls.subscriptions) {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+
+    }
+
     private func renewSubscription() {
         log.debug("Account: Fetching renewable products...")
         
@@ -416,7 +458,11 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
             guard let iconAsset = iconForItem[item] else {
                 fatalError("Item '\(item)' has no mapped icon in iconForItem")
             }
-            cell.fill(withTitle: title, icon: iconAsset.image)
+            if item == .version {
+                cell.fillVersion(withTitle: title)
+            } else {
+                cell.fill(withTitle: title, icon: iconAsset.image)
+            }
             switch item {
             case .account:
                 cell.accessibilityIdentifier = "uitests.menu.account"

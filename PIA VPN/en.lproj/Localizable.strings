@@ -96,6 +96,11 @@
 "account.error.unauthorized" = "Your username or password is incorrect.";
 "account.subscriptions.message" = "You can manage your subscription from here.";
 "account.subscriptions.linkMessage" = "here.";
+"account.subscriptions.short.message" = "Manage subscription";
+"account.subscriptions.short.linkMessage" = "Manage subscription";
+"account.subscriptions.yearly" = "Yearly plan";
+"account.subscriptions.monthly" = "Monthly plan";
+"account.subscriptions.trial" = "Trial plan";
 
 // SETTINGS
 

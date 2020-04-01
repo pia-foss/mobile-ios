@@ -315,7 +315,7 @@ class AccountViewController: AutolayoutViewController {
                 labelSubscriptions.isHidden = true
                 labelSubscriptionTopConstraint.constant = 0
             }
-            viewFriendReferral.isHidden = !userInfo.canInvite
+            viewFriendReferral.isHidden = true//!userInfo.canInvite
         }
         
         establishUncreditedVisibility()
