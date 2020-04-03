@@ -481,34 +481,49 @@ class SettingsViewController: AutolayoutViewController {
     }
     
     private func submitTunnelLog() {
-        self.showLoadingAnimation()
         
-        Client.providers.vpnProvider.submitLog { (log, error) in
-            self.hideLoadingAnimation()
+        if Client.providers.vpnProvider.isVPNConnected {
             
-            let title: String
-            let message: String
-        
-            defer {
-                let alert = Macros.alert(title, message)
-                alert.addDefaultAction(L10n.Global.ok)
-                self.present(alert, animated: true, completion: nil)
-            }
+            self.showLoadingAnimation()
+
+            Client.providers.vpnProvider.submitLog { (log, error) in
+                self.hideLoadingAnimation()
+                
+                let title: String
+                let message: String
             
-            guard let log = log else {
-                title = L10n.Settings.ApplicationInformation.Debug.Failure.title
-                message = L10n.Settings.ApplicationInformation.Debug.Failure.message
-                return
-            }
-            guard !log.isEmpty else {
-                title = L10n.Settings.ApplicationInformation.Debug.Empty.title
-                message = L10n.Settings.ApplicationInformation.Debug.Empty.message
-                return
+                defer {
+                    let alert = Macros.alert(title, message)
+                    alert.addDefaultAction(L10n.Global.ok)
+                    self.present(alert, animated: true, completion: nil)
+                }
+                
+                guard let log = log else {
+                    title = L10n.Settings.ApplicationInformation.Debug.Failure.title
+                    message = L10n.Settings.ApplicationInformation.Debug.Failure.message
+                    return
+                }
+                guard !log.isEmpty else {
+                    title = L10n.Settings.ApplicationInformation.Debug.Empty.title
+                    message = L10n.Settings.ApplicationInformation.Debug.Empty.message
+                    return
+                }
+
+                title = L10n.Settings.ApplicationInformation.Debug.Success.title
+                message = L10n.Settings.ApplicationInformation.Debug.Success.message(log.identifier)
             }
 
-            title = L10n.Settings.ApplicationInformation.Debug.Success.title
-            message = L10n.Settings.ApplicationInformation.Debug.Success.message(log.identifier)
+        } else {
+            
+            let alert = Macros.alert(
+                nil,
+                L10n.Settings.Log.Connected.error
+            )
+            alert.addCancelAction(L10n.Global.close)
+            self.present(alert, animated: true, completion: nil)
+
         }
+        
     }
     
     private func resetToDefaultSettings() {
