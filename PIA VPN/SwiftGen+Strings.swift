@@ -520,7 +520,7 @@ internal enum L10n {
           internal static let title = L10n.tr("Localizable", "settings.application_information.debug.empty.title")
         }
         internal enum Failure {
-          /// Debug information could not be submitted. Please disconnect from the VPN and retry.
+          /// Debug information could not be submitted.
           internal static let message = L10n.tr("Localizable", "settings.application_information.debug.failure.message")
           /// Error during submission
           internal static let title = L10n.tr("Localizable", "settings.application_information.debug.failure.title")
@@ -697,6 +697,12 @@ internal enum L10n {
           /// VPN WiFi Protection
           internal static let title = L10n.tr("Localizable", "settings.hotspothelper.wifi.trust.title")
         }
+      }
+    }
+    internal enum Log {
+      internal enum Connected {
+        /// A VPN connection is required. Please connect to the VPN and retry.
+        internal static let error = L10n.tr("Localizable", "settings.log.connected.error")
       }
     }
     internal enum Nmt {

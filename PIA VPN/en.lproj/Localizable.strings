@@ -131,7 +131,7 @@
 "settings.application_information.title" = "APPLICATION INFORMATION";
 "settings.application_information.debug.title" = "Send debug to support";
 "settings.application_information.debug.failure.title" = "Error during submission";
-"settings.application_information.debug.failure.message" = "Debug information could not be submitted. Please disconnect from the VPN and retry.";
+"settings.application_information.debug.failure.message" = "Debug information could not be submitted.";
 "settings.application_information.debug.empty.title" = "Empty debug information";
 "settings.application_information.debug.empty.message" = "Debug information is empty, please attempt a connection before retrying submission.";
 "settings.application_information.debug.success.title" = "Debug information submitted";
@@ -151,6 +151,8 @@
 
 "settings.small.packets.title" = "Use small packets";
 "settings.small.packets.description" = "Will slightly lower the IP packet size to improve compatibility with some routers and mobile networks.";
+
+"settings.log.connected.error" = "A VPN connection is required. Please connect to the VPN and retry.";
 
 // CONTENT BLOCKER
 
