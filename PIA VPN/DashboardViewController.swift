@@ -508,6 +508,7 @@ class DashboardViewController: AutolayoutViewController {
         case .connected:
             toggleConnection.isOn = true
             toggleConnection.isIndeterminate = false
+            toggleConnection.isWarning = false
             toggleConnection.stopButtonAnimation()
             AppPreferences.shared.lastVPNConnectionStatus = .connected
             let titleLabelView = UILabel(frame: CGRect.zero)
@@ -529,17 +530,38 @@ class DashboardViewController: AutolayoutViewController {
             Macros.removeStickyNote()
 
         case .disconnected:
+            
             toggleConnection.isOn = false
-            toggleConnection.isIndeterminate = false
-            toggleConnection.stopButtonAnimation()
             AppPreferences.shared.lastVPNConnectionStatus = .disconnected
-            resetNavigationBar()
-            AppPreferences.shared.todayWidgetVpnStatus = VPNStatus.disconnected.rawValue
-            AppPreferences.shared.todayWidgetButtonTitle = L10n.Shortcuts.connect
+
+            if isTrustedNetwork() {
+                toggleConnection.isIndeterminate = false
+                toggleConnection.isWarning = true
+                let titleLabelView = UILabel(frame: CGRect.zero)
+                titleLabelView.text = L10n.Dashboard.Vpn.disconnected+": "+L10n.Tiles.Nmt.Accessibility.trusted
+                titleLabelView.adjustsFontSizeToFitWidth = true
+                titleLabelView.style(style: TextStyle.textStyle6)
+                Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
+                                                       withTintColor: .white,
+                                                       andBarTintColors: [UIColor.piaOrange,
+                                                                          UIColor.piaOrange])
+                toggleConnection.tintColor = UIColor.piaOrange
+                navigationItem.titleView = titleLabelView
+                setNeedsStatusBarAppearanceUpdate()
+            } else {
+                toggleConnection.isIndeterminate = false
+                toggleConnection.isWarning = false
+                resetNavigationBar()
+                AppPreferences.shared.todayWidgetVpnStatus = VPNStatus.disconnected.rawValue
+                AppPreferences.shared.todayWidgetButtonTitle = L10n.Shortcuts.connect
+            }
+
+            toggleConnection.stopButtonAnimation()
 
         case .connecting:
             Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
             toggleConnection.isOn = false
+            toggleConnection.isWarning = false
             toggleConnection.isIndeterminate = true
             toggleConnection.startButtonAnimation()
             AppPreferences.shared.lastVPNConnectionStatus = .connecting
@@ -556,6 +578,7 @@ class DashboardViewController: AutolayoutViewController {
 
         case .disconnecting:
             toggleConnection.isOn = true
+            toggleConnection.isWarning = false
             toggleConnection.isIndeterminate = true
             toggleConnection.startButtonAnimation()
             AppPreferences.shared.lastVPNConnectionStatus = .disconnecting
@@ -576,6 +599,28 @@ class DashboardViewController: AutolayoutViewController {
 //            labelStatus.text = L10n.Dashboard.Vpn.changingRegion
         }
 
+        
+    }
+    
+    private func isTrustedNetwork() -> Bool {
+        if Client.preferences.nmtRulesEnabled {
+            if let ssid = PIAHotspotHelper().currentWiFiNetwork() {
+                if Client.preferences.shouldConnectForAllNetworks {
+                    return false
+                }
+                
+                if !Client.preferences.useWiFiProtection {
+                    return true
+                } else if Client.preferences.trustedNetworks.contains(ssid) {
+                    return true
+                }
+            } else {
+                if Client.preferences.trustCellularData {
+                    return true
+                }
+            }
+        }
+        return false
     }
 
 
