@@ -113,13 +113,9 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
                                                         }
                                                         
                                                         self?.textEmail.text = ""
-                                                        /*
-                                                        let alert = Macros.alert(L10n.Global.error, L10n.Account.Error.unauthorized)
-                                                        alert.addDefaultAction(L10n.Global.close)
-                                                        self?.present(alert, animated: true, completion: nil)
-                                                        */
-                                                        let alert = Macros.alert("Error", "Error msg")
-                                                        alert.addDefaultAction("Close")
+                                                        
+                                                        let alert = Macros.alert(L10n.Signup.Unreachable.vcTitle, L10n.Welcome.Update.Account.Email.error)
+                                                        alert.addDefaultAction(L10n.Ui.Global.close)
                                                         self?.present(alert, animated: true, completion: nil)
 
                                                         return

@@ -20,6 +20,7 @@
 "login.error.unauthorized" = "Dein Benutzername oder Passwort ist falsch.";
 "login.error.validation" = "Du musst einen Benutzernamen und ein Passwort angeben.";
 "login.password.placeholder" = "Passwort";
+"login.receipt.button" = "Anmeldung mit Kaufbeleg";
 "login.restore.button" = "Keine Kontodaten erhalten?";
 "login.submit" = "ANMELDEN";
 "login.title" = "An deinem Konto anmelden";
@@ -58,3 +59,4 @@
 "restore.submit" = "BESTÄTIGEN";
 "restore.subtitle" = "Wenn Sie einen Tarif über diese App erworben haben und Ihre Zugangsdaten nicht erhalten haben, können Sie sie hier erneut anfordern. Sie müssen dann nicht erneut bezahlen.";
 "restore.title" = "Nicht gutgeschriebenen Kauf wiederherstellen";
+"update.account.email.error" = "Konto-E-Mail nicht geändert";

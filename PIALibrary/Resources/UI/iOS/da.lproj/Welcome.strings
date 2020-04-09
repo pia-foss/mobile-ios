@@ -20,6 +20,7 @@
 "login.error.unauthorized" = "Dit brugernavn eller kodeord er forkert.";
 "login.error.validation" = "Du skal indtaste et brugernavn og et kodeord.";
 "login.password.placeholder" = "Kodeord";
+"login.receipt.button" = "Log på med købskvittering";
 "login.restore.button" = "Modtog du ikke dine kontodetaljer?";
 "login.submit" = "LOG IND";
 "login.title" = "Log ind på din konto";
@@ -58,3 +59,4 @@
 "restore.submit" = "BEKRÆFT";
 "restore.subtitle" = "Hvis du har købt en plan gennem denne app og ikke har modtaget dine legitimationsoplysninger, kan du anmode om at sende dem igen herfra. Du vil ikke blive opkrævet i løbet af denne proces.";
 "restore.title" = "Gendan ukrediteret køb";
+"update.account.email.error" = "Lykkedes ikke at ændre konto-e-mail";

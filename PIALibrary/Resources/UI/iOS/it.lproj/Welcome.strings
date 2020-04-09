@@ -20,6 +20,7 @@
 "login.error.unauthorized" = "Nome utente o password non valida";
 "login.error.validation" = "Devi inserire un nome utente e una password.";
 "login.password.placeholder" = "Password";
+"login.receipt.button" = "Accedi mediante ricevuta d'acquisto";
 "login.restore.button" = "Non hai ancora ricevuto i dettagli dell'account?";
 "login.submit" = "ACCEDI";
 "login.title" = "Accedi al tuo account";
@@ -58,3 +59,4 @@
 "restore.submit" = "CONFERMA";
 "restore.subtitle" = "Se hai acquistato un piano mediante questa app ma non hai ricevuto le tue credenziali, puoi inviarle nuovamente da qui.\nNon verrà effettuato alcun addebito durante la procedura.";
 "restore.title" = "Ripristina acquisto non accreditato";
+"update.account.email.error" = "Modifica email account non riuscita";

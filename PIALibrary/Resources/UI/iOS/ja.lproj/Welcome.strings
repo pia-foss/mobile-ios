@@ -20,6 +20,7 @@
 "login.error.unauthorized" = "ユーザー名またはパスワードが間違っています。";
 "login.error.validation" = "ユーザー名とパスワードを入力してください。";
 "login.password.placeholder" = "パスワード";
+"login.receipt.button" = "購入領収書を使用してログイン";
 "login.restore.button" = "アカウント詳細を受信しませんでしたか？";
 "login.submit" = "ログイン";
 "login.title" = "アカウントにサインイン";
@@ -58,3 +59,4 @@
 "restore.submit" = "確定";
 "restore.subtitle" = "このアプリでプランを購入した後、認証情報を受け取っていない方は、こちらから認証情報を再度送信することができます。この処理の実行中、課金は発生しません。";
 "restore.title" = "追加されていない更新を復元";
+"update.account.email.error" = "アカウントのメールを変更できませんでした";

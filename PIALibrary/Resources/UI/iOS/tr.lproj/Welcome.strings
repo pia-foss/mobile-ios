@@ -20,6 +20,7 @@
 "login.error.unauthorized" = "Kullanıcı adınız ya da şifreniz hatalı.";
 "login.error.validation" = "Bir kullanıcı adı ve şifre girmelisiniz.";
 "login.password.placeholder" = "Şifre";
+"login.receipt.button" = "Satın alım faturasıyla giriş yapın";
 "login.restore.button" = "Hesap bilgilerinizi almadınız mı?";
 "login.submit" = "GİRİŞ YAP";
 "login.title" = "Hesabınıza giriş yapın";
@@ -58,3 +59,4 @@
 "restore.submit" = "ONAYLA";
 "restore.subtitle" = "Bu uygulamadan bir plan satın aldıktan sonra hesap bilgilerinizi alamadıysanız, onları buradan tekrar gönderebilirsiniz. Bu işlem esnasında sizden ücret alınmayacak.";
 "restore.title" = "Bilgileri gönderilmeyen satın alma işlemini tekrarlayın";
+"update.account.email.error" = "Hesap e-posta adresi değiştirilemedi";

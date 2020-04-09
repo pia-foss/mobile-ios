@@ -39,9 +39,7 @@
 "redeem.error.title" = "Redeem";
 "redeem.error.code" = "Code must be %lu numeric digits.";
 "redeem.error.allfields"="Please type in your email and card PIN.";
-"redeem.error.qrcode.invalid" = "Invalid QR code sequence. Please try again.";
 "redeem.accessibility.back" = "Back";
-"redeem.scanqr" = "Scan QR";
 "redeem.giftcard.placeholder" = "Gift card PIN";
 
 "plan.monthly.title" = "Monthly";
@@ -80,3 +78,4 @@
 "gdpr.usage.data.description" = "E-mail address is used to send subscription information, payment confirmations, customer correspondence, and Private Internet Access promotional offers only.";
 "gdpr.accept.button.title" = "Agree and continue";
 
+"update.account.email.error" = "Failed to modify account email";

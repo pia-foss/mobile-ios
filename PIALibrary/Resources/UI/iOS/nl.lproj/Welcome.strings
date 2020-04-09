@@ -20,6 +20,7 @@
 "login.error.unauthorized" = "Uw gebruikersnaam of wachtwoord is onjuist.";
 "login.error.validation" = "U moet een gebruikersnaam en wachtwoord invoeren.";
 "login.password.placeholder" = "Wachtwoord";
+"login.receipt.button" = "Inloggen met aankoopbewijs";
 "login.restore.button" = "Geen accountgegevens ontvangen?";
 "login.submit" = "INLOGGEN";
 "login.title" = "Aanmelden bij uw account";
@@ -58,3 +59,4 @@
 "restore.submit" = "BEVESTIGEN";
 "restore.subtitle" = "Als u een abonnement via deze app heeft aangeschaft en u heeft uw gegevens niet ontvangen, dan kunt u ze hier opnieuw verzenden. Er worden geen kosten in rekening gebracht tijdens dit proces.";
 "restore.title" = "Aankoop herstellen";
+"update.account.email.error" = "Kan accountmail niet aanpassen";

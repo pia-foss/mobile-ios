@@ -20,6 +20,7 @@
 "login.error.unauthorized" = "Seu nome de usuário ou senha está incorreto.";
 "login.error.validation" = "Você deve inserir um nome de usuário e senha.";
 "login.password.placeholder" = "Senha";
+"login.receipt.button" = "Faça login usando o recibo de compra";
 "login.restore.button" = "Não recebeu detalhes da conta?";
 "login.submit" = "ENTRAR";
 "login.title" = "Entre na sua conta";
@@ -58,3 +59,4 @@
 "restore.submit" = "CONFIRMAR";
 "restore.subtitle" = "Se você adquiriu um plano por este aplicativo e não recebeu as suas credenciais, você pode enviá-las novamente por aqui. Você não será cobrado durante esse processo.";
 "restore.title" = "Restaurar compra não creditada";
+"update.account.email.error" = "Falha ao modificar o e-mail da conta";

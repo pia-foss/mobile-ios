@@ -20,6 +20,7 @@
 "login.error.unauthorized" = "您的使用者名稱或密碼不正確。";
 "login.error.validation" = "您必須輸入使用者名稱及密碼。";
 "login.password.placeholder" = "密碼";
+"login.receipt.button" = "使用購買收據登入";
 "login.restore.button" = "收不到帳戶資料？";
 "login.submit" = "登入";
 "login.title" = "登入帳戶";
@@ -58,3 +59,4 @@
 "restore.submit" = "確定";
 "restore.subtitle" = "如果您透過此應用程式購買方案後收不到您的憑證，可以透過這裡要求再次傳送。此操作不會收取任何費用。";
 "restore.title" = "回復未貸記購買項目";
+"update.account.email.error" = "無法修改帳戶電子郵件";

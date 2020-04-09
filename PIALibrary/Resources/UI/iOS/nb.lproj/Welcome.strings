@@ -20,6 +20,7 @@
 "login.error.unauthorized" = "Brukernavnet eller passordet ditt er feil.";
 "login.error.validation" = "Du må oppgi et brukernavn og passord.";
 "login.password.placeholder" = "Passord";
+"login.receipt.button" = "Logg på med kjøpsbevis";
 "login.restore.button" = "Har du ikke fått kontodetaljene?";
 "login.submit" = "LOGG INN";
 "login.title" = "Logg inn på kontoen din";
@@ -58,3 +59,4 @@
 "restore.submit" = "BEKREFT";
 "restore.subtitle" = "Hvis du har kjøpt en plan via appen og ikke har mottatt opplysningene dine, kan du sende dem på nytt herfra.\nDu belastes ikke under denne prosessen.";
 "restore.title" = "Gjenopprett ukreditert kjøp";
+"update.account.email.error" = "Kunne ikke endre kontoens e-post";

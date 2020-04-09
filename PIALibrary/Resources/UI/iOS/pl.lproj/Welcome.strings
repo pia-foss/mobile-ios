@@ -20,6 +20,7 @@
 "login.error.unauthorized" = "Twoja nazwa użytkownika i hasło są nieprawidłowe.";
 "login.error.validation" = "Musisz podać nazwę użytkownika i hasło.";
 "login.password.placeholder" = "Hasło";
+"login.receipt.button" = "Zaloguj się, używając pokwitowania zakupu";
 "login.restore.button" = "Nie dostałeś(-aś) Danych swojego konta?";
 "login.submit" = "ZALOGUJ";
 "login.title" = "Zaloguj się na konto";
@@ -58,3 +59,4 @@
 "restore.submit" = "POTWIERDŹ";
 "restore.subtitle" = "Jeśli kupił(a)ś abonament, korzystając z tej aplikacji, ale nie dostałe(a)ś danych logowania, możesz wysłać je ponownie stąd.\nOpłata nie zostanie za to pobrana za tę czynność";
 "restore.title" = "Przywróć pominięty zakup";
+"update.account.email.error" = "Nie udało się zmienić -emalia konta";

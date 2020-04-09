@@ -369,8 +369,6 @@ internal enum L10n {
       }
     }
     internal enum Redeem {
-      /// Scan QR
-      internal static let scanqr = L10n.tr("Welcome", "redeem.scanqr")
       /// SUBMIT
       internal static let submit = L10n.tr("Welcome", "redeem.submit")
       /// Type in your email address and the %lu digit PIN from your gift card or trial card below.
@@ -396,10 +394,6 @@ internal enum L10n {
         }
         /// Redeem
         internal static let title = L10n.tr("Welcome", "redeem.error.title")
-        internal enum Qrcode {
-          /// Invalid QR code sequence. Please try again.
-          internal static let invalid = L10n.tr("Welcome", "redeem.error.qrcode.invalid")
-        }
       }
       internal enum Giftcard {
         /// Gift card PIN
@@ -416,6 +410,14 @@ internal enum L10n {
       internal enum Email {
         /// Email address
         internal static let placeholder = L10n.tr("Welcome", "restore.email.placeholder")
+      }
+    }
+    internal enum Update {
+      internal enum Account {
+        internal enum Email {
+          /// Failed to modify account email
+          internal static let error = L10n.tr("Welcome", "update.account.email.error")
+        }
       }
     }
   }

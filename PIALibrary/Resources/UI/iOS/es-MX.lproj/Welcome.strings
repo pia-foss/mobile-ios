@@ -20,6 +20,7 @@
 "login.error.unauthorized" = "Tu nombre de usuario o contraseña son incorrectos.";
 "login.error.validation" = "Debe ingresar un nombre de usuario y una contraseña.";
 "login.password.placeholder" = "Contraseña ";
+"login.receipt.button" = "Inicia sesión con el recibo de compra";
 "login.restore.button" = "¿No has recibido los detalles de la cuenta?";
 "login.submit" = "INICIAR SESIÓN";
 "login.title" = "Inicia sesión en tu cuenta";
@@ -58,3 +59,4 @@
 "restore.submit" = "CONFIRMAR";
 "restore.subtitle" = "Si compraste un plan a través de esta aplicación y no recibes tus credenciales, puedes reiniciar la renovación desde aquí. No se realizarán cargos durante este proceso. \n";
 "restore.title" = "Restablecer compra no acreditada";
+"update.account.email.error" = "Error al modificar el correo electrónico de la cuenta";
