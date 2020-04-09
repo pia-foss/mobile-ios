@@ -52,6 +52,7 @@ class PIAConnectionButton: UIButton, Restylable {
         }
     }
     var isIndeterminate: Bool = false
+    var isWarning: Bool = false
     private var observedBounds: Any? = nil
 
     private let circlePathLayer = CAShapeLayer()
@@ -129,8 +130,13 @@ class PIAConnectionButton: UIButton, Restylable {
                     weakSelf.circlePathLayer.strokeColor = UIColor.piaGreen.cgColor
                     weakSelf.tintColor = UIColor.piaGreen
                 } else {
-                    weakSelf.circlePathLayer.strokeColor = UIColor.piaRedDark.cgColor
-                    weakSelf.tintColor = UIColor.piaRedDark
+                    if weakSelf.isWarning {
+                        weakSelf.circlePathLayer.strokeColor = UIColor.piaOrange.cgColor
+                        weakSelf.tintColor = UIColor.piaOrange
+                    } else {
+                        weakSelf.circlePathLayer.strokeColor = UIColor.piaRedDark.cgColor
+                        weakSelf.tintColor = UIColor.piaRedDark
+                    }
                 }
                 if weakSelf.isIndeterminate {
                     weakSelf.circlePathLayer.strokeColor = UIColor.piaYellowDark.cgColor
