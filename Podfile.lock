@@ -132,11 +132,11 @@ DEPENDENCIES:
   - Fabric
   - Firebase/Core
   - iRate
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `5bc5b67`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `5bc5b67`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `5bc5b67`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `5bc5b67`)
-  - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`, commit `85122e9`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `c1994ec`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `c1994ec`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `c1994ec`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `c1994ec`)
+  - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`, commit `1585891`)
   - PopupDialog
   - ReachabilitySwift (~> 4.3.0)
   - SideMenu (~> 6.0)
@@ -175,10 +175,10 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :commit: 5bc5b67
+    :commit: c1994ec
     :git: https://github.com/pia-foss/client-library-apple
   PIAWireguard:
-    :commit: '85122e9'
+    :commit: '1585891'
     :git: https://github.com/pia-foss/ios-wireguard
   TunnelKit:
     :commit: d19b9de
@@ -186,10 +186,10 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PIALibrary:
-    :commit: 5bc5b67
+    :commit: c1994ec
     :git: https://github.com/pia-foss/client-library-apple
   PIAWireguard:
-    :commit: '85122e9'
+    :commit: '1585891'
     :git: https://github.com/pia-foss/ios-wireguard
   TunnelKit:
     :commit: d19b9de
@@ -227,6 +227,6 @@ SPEC CHECKSUMS:
   TunnelKit: d13d005c0c7febd18a03a87e1ab7d4414fef3ffd
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 8b364fea9c3b37545152e362301c9beb30b8162f
+PODFILE CHECKSUM: 6ed24a0d1ceee36c687d892e87f227b4639f4a7a
 
 COCOAPODS: 1.7.5
