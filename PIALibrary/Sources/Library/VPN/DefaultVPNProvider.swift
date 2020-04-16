@@ -30,6 +30,10 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         .connecting
     ]
     
+    private static let legacyProtocols: [String] = [
+        IPSecProfile.vpnType
+    ]
+    
     private let customWebServices: WebServices?
     
     init(webServices: WebServices? = nil) {
@@ -79,23 +83,49 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
     }
     
     func prepare() {
-        let profile = activeProfileRemovingInactive()
         
-        // should never happen, IPSec is always available
-        guard let _ = profile else {
-            fatalError("VPN protocol \(accessedPreferences.vpnType) is not available, please set accessedPreferences.vpnType to one of the following: \(availableVPNTypes)")
-        }
-        profile?.prepare()
+        var profile = activeProfileRemovingInactive()
+        var force = false
+        
+        let completionBlock = { [weak self] in
+            profile?.prepare()
 
-        #if os(iOS)
-        if let _ = VPNIPAddressFromInterfaces() {
-            accessedDatabase.transient.vpnStatus = .connected
+            #if os(iOS)
+            if let _ = VPNIPAddressFromInterfaces() {
+                self?.accessedDatabase.transient.vpnStatus = .connected
+            }
+            #endif
+            self?.activeProfile = profile
+            
         }
-        #endif
-        activeProfile = profile
-        if accessedProviders.accountProvider.isLoggedIn {
-            install(force: false, nil)
+        
+        if isLegacyProfile() {
+            
+            profile = IKEv2Profile()
+            //Set IKEv2 as default if user was using IKEv1
+            let preferences = Client.preferences.editable()
+            preferences.vpnType = IKEv2Profile.vpnType
+            preferences.commit()
+
+            completionBlock()
+            force = accessedDatabase.transient.vpnStatus == .connected
+
+        } else {
+            
+            // should never happen, IKEv2 is always available
+            guard let _ = profile else {
+                fatalError("VPN protocol \(accessedPreferences.vpnType) is not available, please set accessedPreferences.vpnType to one of the following: \(availableVPNTypes)")
+            }
+            
+            completionBlock()
+            
         }
+        
+        if self.accessedProviders.accountProvider.isLoggedIn {
+            self.install(force: force, nil)
+        }
+
+
     }
     
     func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?) {
@@ -121,10 +151,11 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
                 }
                 self.activeProfile = profile
 
-                if !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) &&
-                    (previousProfile?.vpnType == IPSecProfile.vpnType || previousProfile?.vpnType == IKEv2Profile.vpnType)) {
+                if let previousProfile = previousProfile,
+                    !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) &&
+                    (previousProfile.vpnType == IPSecProfile.vpnType || previousProfile.vpnType == IKEv2Profile.vpnType)) {
                     //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead
-                    previousProfile?.remove(nil)
+                    previousProfile.remove(nil)
                 } else {
                     self.connect(nil)
                 }
@@ -272,6 +303,10 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         }
     }
     
+    private func isLegacyProfile() -> Bool {
+        return DefaultVPNProvider.legacyProtocols.contains(accessedPreferences.vpnType)
+    }
+    
     @discardableResult private func activeProfileRemovingInactive() -> VPNProfile? {
         let activeVPNType = accessedPreferences.vpnType
         let activeProfile: VPNProfile? = accessedConfiguration.profile(forVPNType: activeVPNType)
@@ -279,11 +314,13 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         for vpnType in availableVPNTypes {
             let profile = accessedConfiguration.profile(forVPNType: vpnType)!
             guard (vpnType == activeVPNType) else {
-                if !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) &&
-                    (activeProfile?.vpnType == IPSecProfile.vpnType || activeProfile?.vpnType == IKEv2Profile.vpnType)) {
-                    //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead
-                    profile.disconnect(nil)
-                    profile.remove(nil)
+                if let activeProfile = activeProfile {
+                    if !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) &&
+                        (activeProfile.vpnType == IPSecProfile.vpnType || activeProfile.vpnType == IKEv2Profile.vpnType)) {
+                        //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead
+                        profile.disconnect(nil)
+                        profile.remove(nil)
+                    }
                 }
                 continue
             }
