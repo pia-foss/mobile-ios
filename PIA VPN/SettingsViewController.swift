@@ -40,8 +40,6 @@ private extension String {
             return "OpenVPN"
         case IKEv2Profile.vpnType:
             return "IPSec (IKEv2)"
-        case IPSecProfile.vpnType:
-            return "IPSec (IKEv1)"
         default:
             return self
         }
@@ -725,13 +723,11 @@ class SettingsViewController: AutolayoutViewController {
             sections.remove(at: sections.firstIndex(of: .connection)!)
             sections.remove(at: sections.firstIndex(of: .encryption)!)
         } else {
-            if (pendingPreferences.vpnType == IPSecProfile.vpnType ||
-                pendingPreferences.vpnType == IKEv2Profile.vpnType ||
+            if (pendingPreferences.vpnType == IKEv2Profile.vpnType ||
                 pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType) {
                 sections.remove(at: sections.firstIndex(of: .encryption)!)
             }
-            if (pendingPreferences.vpnType == IPSecProfile.vpnType ||
-                pendingPreferences.vpnType == PIATunnelProfile.vpnType ||
+            if (pendingPreferences.vpnType == PIATunnelProfile.vpnType ||
                 pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType) {
                 sections.remove(at: sections.firstIndex(of: .ikeV2encryption)!)
             }
@@ -1255,13 +1251,11 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                     IKEv2Profile.vpnType,
                     PIAWGTunnelProfile.vpnType, //WG only available for iOS12+
                     PIATunnelProfile.vpnType,
-                    IPSecProfile.vpnType,
                 ]
             } else {
                 controller?.options = [
                     IKEv2Profile.vpnType,
                     PIATunnelProfile.vpnType,
-                    IPSecProfile.vpnType,
                 ]
             }
             controller?.selectedOption = pendingPreferences.vpnType

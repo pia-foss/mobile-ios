@@ -76,7 +76,7 @@ class UsageTile: UIView, Tileable  {
     
     @objc private func displayUsageInformation() {
         updateStyleForVPNType(Client.providers.vpnProvider.currentVPNType)
-        if Client.providers.vpnProvider.currentVPNType != IPSecProfile.vpnType {
+        if Client.providers.vpnProvider.currentVPNType != IKEv2Profile.vpnType {
             Client.providers.vpnProvider.dataUsage { (usage, error) in
                 var uploaded = Int64(0)
                 var downloaded = Int64(0)
@@ -94,8 +94,7 @@ class UsageTile: UIView, Tileable  {
     }
     
     private func updateStyleForVPNType(_ vpnType: String) {
-        if vpnType == IPSecProfile.vpnType ||
-            vpnType == IKEv2Profile.vpnType {
+        if vpnType == IKEv2Profile.vpnType {
             self.uploadValue.text = ByteCountFormatter.string(fromByteCount: Int64(0),
                                                               countStyle: .file)
             self.downloadValue.text = ByteCountFormatter.string(fromByteCount: Int64(0),
