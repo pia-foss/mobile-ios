@@ -189,7 +189,7 @@ Client.providers.accountProvider.currentUser = user
 
 // establish VPN type (protocol)
 let prefs = Client.preferences.editable()
-prefs.vpnType = IPSecProfile.vpnType
+prefs.vpnType = IKEv2Profile.vpnType
 prefs.commit()
 
 // observe VPN updates
