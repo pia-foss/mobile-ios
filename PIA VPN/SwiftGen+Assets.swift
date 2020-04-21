@@ -331,6 +331,7 @@ enum Asset {
     static let flagMd = ImageAsset(name: "flag-md")
     static let flagMg = ImageAsset(name: "flag-mg")
     static let flagMh = ImageAsset(name: "flag-mh")
+    static let flagMk = ImageAsset(name: "flag-mk")
     static let flagMl = ImageAsset(name: "flag-ml")
     static let flagMm = ImageAsset(name: "flag-mm")
     static let flagMn = ImageAsset(name: "flag-mn")
@@ -371,6 +372,7 @@ enum Asset {
     static let flagPy = ImageAsset(name: "flag-py")
     static let flagQa = ImageAsset(name: "flag-qa")
     static let flagRo = ImageAsset(name: "flag-ro")
+    static let flagRs = ImageAsset(name: "flag-rs")
     static let flagRu = ImageAsset(name: "flag-ru")
     static let flagRw = ImageAsset(name: "flag-rw")
     static let flagSa = ImageAsset(name: "flag-sa")
@@ -722,6 +724,7 @@ enum Asset {
     Flags.flagMd,
     Flags.flagMg,
     Flags.flagMh,
+    Flags.flagMk,
     Flags.flagMl,
     Flags.flagMm,
     Flags.flagMn,
@@ -762,6 +765,7 @@ enum Asset {
     Flags.flagPy,
     Flags.flagQa,
     Flags.flagRo,
+    Flags.flagRs,
     Flags.flagRu,
     Flags.flagRw,
     Flags.flagSa,
