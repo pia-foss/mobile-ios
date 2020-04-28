@@ -249,7 +249,7 @@
 "tiles.subscription.trial" = "試用版";
 "tiles.subscription.yearly" = "年繳";
 "tiles.usage.download" = "下載";
-"tiles.usage.ipsec.title" = "使用情況（除非使用 OpenVPN 或 WireGuard®，否則為停用）";
+"tiles.usage.ipsec.title" = "使用情況（無法用於 IKEv2）";
 "tiles.usage.title" = "使用狀況";
 "tiles.usage.upload" = "上傳";
 "today.widget.login" = "登入";

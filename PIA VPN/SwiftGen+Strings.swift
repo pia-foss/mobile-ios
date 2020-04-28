@@ -902,7 +902,7 @@ internal enum L10n {
       /// Upload
       internal static let upload = L10n.tr("Localizable", "tiles.usage.upload")
       internal enum Ipsec {
-        /// USAGE (Disabled unless using OpenVPN or WireGuard®)
+        /// USAGE (Not available on IKEv2)
         internal static let title = L10n.tr("Localizable", "tiles.usage.ipsec.title")
       }
     }

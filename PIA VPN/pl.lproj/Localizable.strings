@@ -249,7 +249,7 @@
 "tiles.subscription.trial" = "Okres próbny";
 "tiles.subscription.yearly" = "Rocznie";
 "tiles.usage.download" = "Pobierz";
-"tiles.usage.ipsec.title" = "KORZYSTANIE (wyłączone chyba że używasz OpenVPN)";
+"tiles.usage.ipsec.title" = "Korzystanie (niedostępne IKEv2)";
 "tiles.usage.title" = "Wykorzystanie";
 "tiles.usage.upload" = "Prześlij";
 "today.widget.login" = "Zaloguj";

@@ -249,7 +249,7 @@
 "tiles.subscription.trial" = "Deneme";
 "tiles.subscription.yearly" = "Yıllık";
 "tiles.usage.download" = "İndir";
-"tiles.usage.ipsec.title" = "KULLANIM (OpenVPN veya WireGuard® kullanılmadığında devre dışı kalır)";
+"tiles.usage.ipsec.title" = "KULLANIM (IKEv2 üzerinde kullanılamaz)";
 "tiles.usage.title" = "Kullanım";
 "tiles.usage.upload" = "Karşıya yükle";
 "today.widget.login" = "Giriş";

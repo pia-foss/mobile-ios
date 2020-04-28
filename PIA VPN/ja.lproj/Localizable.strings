@@ -249,7 +249,7 @@
 "tiles.subscription.trial" = "トライアル";
 "tiles.subscription.yearly" = "年間";
 "tiles.usage.download" = "ダウンロード";
-"tiles.usage.ipsec.title" = "使用量（OpneVPNまたはWireGuard®)を使用していない限り無効）";
+"tiles.usage.ipsec.title" = "使用（IKEv2では利用不可）";
 "tiles.usage.title" = "使用量";
 "tiles.usage.upload" = "アップロード";
 "today.widget.login" = "ログイン";

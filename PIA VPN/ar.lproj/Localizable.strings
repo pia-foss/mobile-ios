@@ -249,7 +249,7 @@
 "tiles.subscription.trial" = "تجريبي";
 "tiles.subscription.yearly" = "سنويًا";
 "tiles.usage.download" = "تنزيل";
-"tiles.usage.ipsec.title" = "الاستخدام (معطل عند عدم استخدام OpenVPN أو ®WireGuard)";
+"tiles.usage.ipsec.title" = "(غير متاح على IKEv2)";
 "tiles.usage.title" = "الاستخدام";
 "tiles.usage.upload" = "تحميل";
 "today.widget.login" = "تسجيل الدخول";
