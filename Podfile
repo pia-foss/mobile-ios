@@ -49,7 +49,7 @@ def app_pods
     shared_main_pods
     pod 'iRate'
     pod 'TPKeyboardAvoiding'
-    pod 'SideMenu', '~> 6.0'
+    pod 'SideMenu', '6.1.3'
     pod 'DZNEmptyDataSet'
     pod 'PopupDialog'
     pod 'ReachabilitySwift', '~> 4.3.0'
@@ -73,7 +73,7 @@ target 'PIA VPN dev' do
     app_pods
     #only use the following pods for internal (non-public) builds
     pod 'AppCenter'
-    pod 'Firebase/Core'
+    pod 'Firebase/Core', '6.5.0'
     pod 'Crashlytics'
     pod 'Fabric'
 end
@@ -90,7 +90,7 @@ end
 target 'PIA VPNTests' do
     app_pods
     pod 'AppCenter'
-    pod 'Firebase/Core'
+    pod 'Firebase/Core', '6.5.0'
     pod 'Crashlytics'
     pod 'Fabric'
 end

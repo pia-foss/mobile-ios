@@ -15,48 +15,35 @@ PODS:
   - DynamicBlurView (4.0.0)
   - DZNEmptyDataSet (1.8.1)
   - Fabric (1.10.2)
-  - Firebase/Core (6.21.0):
+  - Firebase/Core (6.5.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (= 6.4.0)
-  - Firebase/CoreOnly (6.21.0):
-    - FirebaseCore (= 6.6.5)
-  - FirebaseAnalytics (6.4.0):
-    - FirebaseCore (~> 6.6)
-    - FirebaseInstallations (~> 1.1)
-    - GoogleAppMeasurement (= 6.4.0)
+    - FirebaseAnalytics (= 6.0.4)
+  - Firebase/CoreOnly (6.5.0):
+    - FirebaseCore (= 6.1.0)
+  - FirebaseAnalytics (6.0.4):
+    - FirebaseCore (~> 6.1)
+    - FirebaseInstanceID (~> 4.2)
+    - GoogleAppMeasurement (= 6.0.4)
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
-    - nanopb (= 0.3.9011)
-  - FirebaseCore (6.6.5):
-    - FirebaseCoreDiagnostics (~> 1.2)
-    - FirebaseCoreDiagnosticsInterop (~> 1.2)
-    - GoogleUtilities/Environment (~> 6.5)
-    - GoogleUtilities/Logger (~> 6.5)
-  - FirebaseCoreDiagnostics (1.2.2):
-    - FirebaseCoreDiagnosticsInterop (~> 1.2)
-    - GoogleDataTransportCCTSupport (~> 2.0)
-    - GoogleUtilities/Environment (~> 6.5)
-    - GoogleUtilities/Logger (~> 6.5)
-    - nanopb (~> 0.3.901)
-  - FirebaseCoreDiagnosticsInterop (1.2.0)
-  - FirebaseInstallations (1.1.1):
-    - FirebaseCore (~> 6.6)
-    - GoogleUtilities/UserDefaults (~> 6.5)
-    - PromisesObjC (~> 1.2)
+    - nanopb (~> 0.3)
+  - FirebaseCore (6.1.0):
+    - GoogleUtilities/Environment (~> 6.0)
+    - GoogleUtilities/Logger (~> 6.0)
+  - FirebaseInstanceID (4.2.7):
+    - FirebaseCore (~> 6.0)
+    - GoogleUtilities/Environment (~> 6.0)
+    - GoogleUtilities/UserDefaults (~> 6.0)
   - FXPageControl (1.5)
   - Gloss (2.1.1)
-  - GoogleAppMeasurement (6.4.0):
+  - GoogleAppMeasurement (6.0.4):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
-    - nanopb (= 0.3.9011)
-  - GoogleDataTransport (5.1.0)
-  - GoogleDataTransportCCTSupport (2.0.1):
-    - GoogleDataTransport (~> 5.1)
-    - nanopb (~> 0.3.901)
+    - nanopb (~> 0.3)
   - GoogleUtilities/AppDelegateSwizzler (6.5.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -117,10 +104,9 @@ PODS:
     - TweetNacl
   - PopupDialog (1.1.1):
     - DynamicBlurView (~> 4.0)
-  - PromisesObjC (1.2.8)
   - QuickLayout (2.0.2)
   - ReachabilitySwift (4.3.1)
-  - SideMenu (6.4.8)
+  - SideMenu (6.1.3)
   - SwiftEntryKit (0.7.2):
     - QuickLayout (= 2.0.2)
   - SwiftyBeaver (1.8.4)
@@ -144,7 +130,7 @@ DEPENDENCIES:
   - Crashlytics
   - DZNEmptyDataSet
   - Fabric
-  - Firebase/Core
+  - Firebase/Core (= 6.5.0)
   - iRate
   - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `c65e197`)
   - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `c65e197`)
@@ -153,7 +139,7 @@ DEPENDENCIES:
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`, commit `1585891`)
   - PopupDialog
   - ReachabilitySwift (~> 4.3.0)
-  - SideMenu (~> 6.0)
+  - SideMenu (= 6.1.3)
   - TPKeyboardAvoiding
   - TunnelKit (from `https://github.com/pia-foss/tunnelkit`, commit `d19b9de`)
 
@@ -169,21 +155,16 @@ SPEC REPOS:
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
-    - FirebaseCoreDiagnostics
-    - FirebaseCoreDiagnosticsInterop
-    - FirebaseInstallations
+    - FirebaseInstanceID
     - FXPageControl
     - Gloss
     - GoogleAppMeasurement
-    - GoogleDataTransport
-    - GoogleDataTransportCCTSupport
     - GoogleUtilities
     - iRate
     - lottie-ios
     - nanopb
     - OpenSSL-Apple
     - PopupDialog
-    - PromisesObjC
     - QuickLayout
     - ReachabilitySwift
     - SideMenu
@@ -222,17 +203,13 @@ SPEC CHECKSUMS:
   DynamicBlurView: ccf9acd2b20c883cc2c72e3524a04d8d3ee20533
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
-  Firebase: f378c80340dd41c0ad0914af740c021eb282a04b
-  FirebaseAnalytics: a1a0b3327ceb5cd5b4bacffdb293f6c909aa087d
-  FirebaseCore: 9f495d3afacb7b558711e6218ebb14b1c51b5802
-  FirebaseCoreDiagnostics: e9b4cd8ba60dee0f2d13347332e4b7898cca5b61
-  FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
-  FirebaseInstallations: acb3216eb9784d3b1d2d2d635ff74fa892cc0c44
+  Firebase: dedc9e48ea3f3649ad5f6b982f8a0c73508a14b5
+  FirebaseAnalytics: 3fb375bc9d13779add4039716f868d233a473fad
+  FirebaseCore: aecf02fb2274ec361b9bebeac112f5daa18273bd
+  FirebaseInstanceID: ebd2ea79ee38db0cb5f5167b17a0d387e1cc7b6e
   FXPageControl: 97620412515365d10a3282ec0660f49f6401a8f0
   Gloss: 9df15229b2f6484c14752a738474fd2528b4c5cd
-  GoogleAppMeasurement: 6e68a94d0eaeb1d73ef6b0ed4f7334e29d63ae29
-  GoogleDataTransport: b29a21d813e906014ca16c00897827e40e4a24ab
-  GoogleDataTransportCCTSupport: 6f15a89b0ca35d6fa523e1f752ef818588885988
+  GoogleAppMeasurement: 183bd916af7f80deb67c01888368f1108d641832
   GoogleUtilities: ad0f3b691c67909d03a3327cc205222ab8f42e0e
   iRate: 4fc69958788624545e5d050c8ffd20884013c3f1
   lottie-ios: 85ce835dd8c53e02509f20729fc7d6a4e6645a0a
@@ -241,16 +218,15 @@ SPEC CHECKSUMS:
   PIALibrary: 32ba92b7e314b8a55083b31289b8086120cbfe08
   PIAWireguard: f92333a1e281db298efd00b0fe97a5745a7946e6
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
-  PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
-  SideMenu: 4a891be552d30bb6fa87ad404d62e485f8450c34
+  SideMenu: 46c1b79dab51fc2f1c1ff3e1212ca47cc231b0bf
   SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145
   SwiftyBeaver: f9a9aba96a6a6166e21682377804d728b0d20b95
   TPKeyboardAvoiding: 6dd3fe3268b8f2627beb7ff3d82a3cacbdf66a36
   TunnelKit: d13d005c0c7febd18a03a87e1ab7d4414fef3ffd
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 8ecc389c6a2f81739505c384088b5b5b755dcc9a
+PODFILE CHECKSUM: 6c7016e8c9374c22fd9a0e36ae4805f7bff3ed60
 
 COCOAPODS: 1.7.5
