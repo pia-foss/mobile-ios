@@ -322,7 +322,7 @@ extension Client.Preferences {
             trustCellularData = false
             authMigrationSuccess = false
             shouldConnectForAllNetworks = true
-            vpnType = IPSecProfile.vpnType
+            vpnType = IKEv2Profile.vpnType
             vpnDisconnectsOnSleep = false
             vpnCustomConfigurations = [:]
             availableNetworks = []
