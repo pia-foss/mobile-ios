@@ -249,7 +249,7 @@
 "tiles.subscription.trial" = "Prøve";
 "tiles.subscription.yearly" = "Årligt";
 "tiles.usage.download" = "Download";
-"tiles.usage.ipsec.title" = "BRUG (Deaktiveret, medmindre du bruger OpenVPN eller WireGuard®)";
+"tiles.usage.ipsec.title" = "BRUG (Ikke tilgængelig på IKEv2)";
 "tiles.usage.title" = "Brug";
 "tiles.usage.upload" = "Upload";
 "today.widget.login" = "Log ind";

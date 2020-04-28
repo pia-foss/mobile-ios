@@ -25,8 +25,6 @@ import PIALibrary
 import TunnelKit
 import SafariServices
 import SwiftyBeaver
-import Intents
-import IntentsUI
 import PIAWireguard
 
 private let log = SwiftyBeaver.self
@@ -40,8 +38,6 @@ private extension String {
             return "OpenVPN"
         case IKEv2Profile.vpnType:
             return "IPSec (IKEv2)"
-        case IPSecProfile.vpnType:
-            return "IPSec (IKEv1)"
         default:
             return self
         }
@@ -228,23 +224,13 @@ class SettingsViewController: AutolayoutViewController {
     private lazy var switchContentBlocker = UISwitch()
     
     private lazy var switchDarkMode = UISwitch()
-    
-    private lazy var switchConnectSiriShortcuts = UISwitch()
-
-    private lazy var switchDisconnectSiriShortcuts = UISwitch()
-    
+        
     private lazy var switchSmallPackets = UISwitch()
 
     private lazy var imvSelectedOption = UIImageView(image: Asset.accessorySelected.image)
 
     private var isContentBlockerEnabled = false
 
-//    private lazy var buttonConfirm = UIBarButtonItem(
-//        barButtonSystemItem: .save,
-//        target: self,
-//        action: #selector(confirmChangesImmediately(_:))
-//    )
-    
     private var pendingPreferences: Client.Preferences.Editable!
     
     private var pendingOpenVPNSocketType: SocketType?
@@ -256,15 +242,6 @@ class SettingsViewController: AutolayoutViewController {
     private var pendingWireguardVPNConfiguration: PIAWireguardConfiguration!
 
     private var pendingVPNAction: VPNAction?
-//    private var pendingVPNAction: VPNAction? {
-//        didSet {
-//            if let _ = pendingVPNAction {
-//                buttonConfirm.isEnabled = true
-//            } else {
-//                buttonConfirm.isEnabled = false
-//            }
-//        }
-//    }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -305,16 +282,24 @@ class SettingsViewController: AutolayoutViewController {
         switchMACE.addTarget(self, action: #selector(toggleMACE(_:)), for: .valueChanged)
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
         switchDarkMode.addTarget(self, action: #selector(toggleDarkMode(_:)), for: .valueChanged)
-        switchConnectSiriShortcuts.addTarget(self, action: #selector(toggleConnectSiriShortcuts(_:)), for: .valueChanged)
-        switchDisconnectSiriShortcuts.addTarget(self, action: #selector(toggleDisconnectSiriShortcuts(_:)), for: .valueChanged)
         switchSmallPackets.addTarget(self, action: #selector(toggleSmallPackets(_:)), for: .valueChanged)
         redisplaySettings()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshContentBlockerState), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(refreshContentBlockerState), name: UIApplication.didBecomeActiveNotification,
+                                               object: nil)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(refreshPersistentConnectionValue),
                                                name: .PIAPersistentConnectionSettingHaveChanged,
                                                object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(viewHasRotated),
+                                               name: UIDevice.orientationDidChangeNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshSettings),
+                                               name: .RefreshSettings,
+                                               object: nil)
 
     }
     
@@ -384,59 +369,6 @@ class SettingsViewController: AutolayoutViewController {
     @objc private func toggleDarkMode(_ sender: UISwitch) {
         AppPreferences.shared.transitionTheme(to: sender.isOn ? .dark : .light)
     }
-    
-    @objc private func toggleConnectSiriShortcuts(_ sender: UISwitch) {
-        if #available(iOS 12.0, *) {
-            
-            if AppPreferences.shared.useConnectSiriShortcuts {
-                if let shortcut = AppPreferences.shared.connectShortcut {
-                    let vc = INUIEditVoiceShortcutViewController(voiceShortcut: shortcut)
-                    vc.delegate = self
-                    present(vc, animated: true, completion: nil)
-                }
-            } else {
-                let connectActivity = NSUserActivity(activityType: AppConstants.SiriShortcuts.shortcutConnect)
-                connectActivity.title = L10n.Siri.Shortcuts.Connect.title
-                connectActivity.isEligibleForSearch = true
-                connectActivity.isEligibleForPrediction = true
-                connectActivity.persistentIdentifier = NSUserActivityPersistentIdentifier(AppConstants.SiriShortcuts.shortcutConnect)
-                let connectShortcut = INShortcut(userActivity: connectActivity)
-                
-                let vc = INUIAddVoiceShortcutViewController(shortcut: connectShortcut)
-                vc.delegate = self
-                present(vc, animated: true, completion: nil)
-            }
-
-            tableView.reloadData()
-        }
-    }
-    
-    @objc private func toggleDisconnectSiriShortcuts(_ sender: UISwitch) {
-        if #available(iOS 12.0, *) {
-            
-            if AppPreferences.shared.useDisconnectSiriShortcuts {
-                if let shortcut = AppPreferences.shared.disconnectShortcut {
-                    let vc = INUIEditVoiceShortcutViewController(voiceShortcut: shortcut)
-                    vc.delegate = self
-                    present(vc, animated: true, completion: nil)
-                }
-            } else {
-                let disconnectActivity = NSUserActivity(activityType: AppConstants.SiriShortcuts.shortcutDisconnect)
-                disconnectActivity.title = L10n.Siri.Shortcuts.Disconnect.title
-                disconnectActivity.isEligibleForSearch = true
-                disconnectActivity.isEligibleForPrediction = true
-                disconnectActivity.persistentIdentifier = NSUserActivityPersistentIdentifier(AppConstants.SiriShortcuts.shortcutDisconnect)
-                let disconnectShortcut = INShortcut(userActivity: disconnectActivity)
-                
-                let vc = INUIAddVoiceShortcutViewController(shortcut: disconnectShortcut)
-                vc.delegate = self
-                present(vc, animated: true, completion: nil)
-            }
-            
-            tableView.reloadData()
-
-        }
-    }
 
     @objc private func toggleSmallPackets(_ sender: UISwitch) {
         AppPreferences.shared.useSmallPackets = sender.isOn
@@ -465,6 +397,10 @@ class SettingsViewController: AutolayoutViewController {
     
     @objc private func refreshPersistentConnectionValue() {
         pendingPreferences.isPersistentConnection = Client.preferences.isPersistentConnection
+        tableView.reloadData()
+    }
+    
+    @objc private func refreshSettings() {
         tableView.reloadData()
     }
     
@@ -725,13 +661,11 @@ class SettingsViewController: AutolayoutViewController {
             sections.remove(at: sections.firstIndex(of: .connection)!)
             sections.remove(at: sections.firstIndex(of: .encryption)!)
         } else {
-            if (pendingPreferences.vpnType == IPSecProfile.vpnType ||
-                pendingPreferences.vpnType == IKEv2Profile.vpnType ||
+            if (pendingPreferences.vpnType == IKEv2Profile.vpnType ||
                 pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType) {
                 sections.remove(at: sections.firstIndex(of: .encryption)!)
             }
-            if (pendingPreferences.vpnType == IPSecProfile.vpnType ||
-                pendingPreferences.vpnType == PIATunnelProfile.vpnType ||
+            if (pendingPreferences.vpnType == PIATunnelProfile.vpnType ||
                 pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType) {
                 sections.remove(at: sections.firstIndex(of: .ikeV2encryption)!)
             }
@@ -1160,17 +1094,11 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         case .connectShortcut:
             cell.textLabel?.text = L10n.Siri.Shortcuts.Connect.Row.title
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchConnectSiriShortcuts
-            cell.selectionStyle = .none
-            switchConnectSiriShortcuts.isOn = AppPreferences.shared.useConnectSiriShortcuts
+            cell.detailTextLabel?.text = SiriShortcutsManager.shared.descriptionActionForConnectShortcut()
 
         case .disconnectShortcut:
             cell.textLabel?.text = L10n.Siri.Shortcuts.Disconnect.Row.title
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchDisconnectSiriShortcuts
-            cell.selectionStyle = .none
-            switchDisconnectSiriShortcuts.isOn = AppPreferences.shared.useDisconnectSiriShortcuts
+            cell.detailTextLabel?.text = SiriShortcutsManager.shared.descriptionActionForDisconnectShortcut()
 
         case .sendDebugLog:
             cell.textLabel?.text = L10n.Settings.ApplicationInformation.Debug.title
@@ -1255,13 +1183,11 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                     IKEv2Profile.vpnType,
                     PIAWGTunnelProfile.vpnType, //WG only available for iOS12+
                     PIATunnelProfile.vpnType,
-                    IPSecProfile.vpnType,
                 ]
             } else {
                 controller?.options = [
                     IKEv2Profile.vpnType,
                     PIATunnelProfile.vpnType,
-                    IPSecProfile.vpnType,
                 ]
             }
             controller?.selectedOption = pendingPreferences.vpnType
@@ -1448,6 +1374,16 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         case .customServers:
             self.perform(segue: StoryboardSegue.Main.customServerSegueIdentifier)
+
+        case .connectShortcut:
+            if #available(iOS 12.0, *) {
+                SiriShortcutsManager.shared.presentConnectShortcut(inViewController: self)
+            }
+
+        case .disconnectShortcut:
+            if #available(iOS 12.0, *) {
+                SiriShortcutsManager.shared.presentDisconnectShortcut(inViewController: self)
+            }
 
         default:
             break
@@ -1792,78 +1728,4 @@ extension SettingsViewController: SettingsViewControllerDelegate {
 
     }
     
-}
-
-@available(iOS 12.0, *)
-extension SettingsViewController: INUIAddVoiceShortcutViewControllerDelegate {
-
-    func addVoiceShortcutViewController(
-        _ controller: INUIAddVoiceShortcutViewController,
-        didFinishWith voiceShortcut: INVoiceShortcut?,
-        error: Error?
-        ) {
-        if let _ = error {
-            let message = L10n.Siri.Shortcuts.Add.error
-            let alert = Macros.alert(nil, message)
-            alert.addCancelActionWithTitle(L10n.Global.cancel) {
-                self.dismiss(animated: true, completion: nil)
-            }
-            self.present(alert, animated: true, completion: nil)
-        } else {
-            if let activityType = voiceShortcut?.shortcut.userActivity?.activityType {
-                if activityType == AppConstants.SiriShortcuts.shortcutConnect {
-                    AppPreferences.shared.useConnectSiriShortcuts = true
-                    AppPreferences.shared.connectShortcut = voiceShortcut
-                } else {
-                    AppPreferences.shared.useDisconnectSiriShortcuts = true
-                    AppPreferences.shared.disconnectShortcut = voiceShortcut
-                }
-            }
-            self.dismiss(animated: true, completion: nil)
-        }
-    }
-
-    func addVoiceShortcutViewControllerDidCancel(
-        _ controller: INUIAddVoiceShortcutViewController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-}
-
-@available(iOS 12.0, *)
-extension SettingsViewController: INUIEditVoiceShortcutViewControllerDelegate {
-    
-    func editVoiceShortcutViewController(_ controller: INUIEditVoiceShortcutViewController, didUpdate voiceShortcut: INVoiceShortcut?, error: Error?) {
-        if let error = error as? INIntentError {
-            if let errorDescription = error.userInfo["NSDebugDescription"] as? String,
-                let connectIdentifier = AppPreferences.shared.connectShortcut?.identifier.uuidString,
-                errorDescription.contains(connectIdentifier) {
-                AppPreferences.shared.useConnectSiriShortcuts = false
-                AppPreferences.shared.connectShortcut = nil
-            } else if let errorDescription = error.userInfo["NSDebugDescription"] as? String,
-                let disconnectIdentifier = AppPreferences.shared.disconnectShortcut?.identifier.uuidString,
-                errorDescription.contains(disconnectIdentifier) {
-                AppPreferences.shared.useDisconnectSiriShortcuts = false
-                AppPreferences.shared.disconnectShortcut = nil
-            }
-        }
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func editVoiceShortcutViewController(_ controller: INUIEditVoiceShortcutViewController, didDeleteVoiceShortcutWithIdentifier deletedVoiceShortcutIdentifier: UUID) {
-        if deletedVoiceShortcutIdentifier == AppPreferences.shared.connectShortcut?.identifier {
-            AppPreferences.shared.useConnectSiriShortcuts = false
-            AppPreferences.shared.connectShortcut = nil
-        } else {
-            AppPreferences.shared.useDisconnectSiriShortcuts = false
-            AppPreferences.shared.disconnectShortcut = nil
-        }
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func editVoiceShortcutViewControllerDidCancel(_ controller: INUIEditVoiceShortcutViewController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-
 }

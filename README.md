@@ -13,6 +13,7 @@ With the Private Internet Access VPN app for iOS, you can access our network of 
 The PIA VPN app features:
 
 - [x] Plenty of countries to connect to (28 as of today)
+- [x] IKEv2, OpenVPN and WireGuard VPN Protocols
 - [x] Kill switch
 - [x] Multiple VPN protocols
 - [x] Fine-grained VPN settings

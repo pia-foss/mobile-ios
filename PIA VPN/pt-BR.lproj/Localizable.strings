@@ -249,7 +249,7 @@
 "tiles.subscription.trial" = "Teste";
 "tiles.subscription.yearly" = "Anual";
 "tiles.usage.download" = "Download";
-"tiles.usage.ipsec.title" = "USO (Desativado com exceção do uso de OpenVPN ou WireGuard®)";
+"tiles.usage.ipsec.title" = "USO (Não disponível no IKEv2)";
 "tiles.usage.title" = "Uso";
 "tiles.usage.upload" = "Upload";
 "today.widget.login" = "Login";
