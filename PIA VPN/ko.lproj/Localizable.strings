@@ -249,7 +249,7 @@
 "tiles.subscription.trial" = "체험";
 "tiles.subscription.yearly" = "연간";
 "tiles.usage.download" = "다운로드";
-"tiles.usage.ipsec.title" = "사용 현황 (OpenVPN 또는 WireGuard®를 사용하지 않으면 비활성화)";
+"tiles.usage.ipsec.title" = "사용 현황 (IKEv2에서는 사용 불가)";
 "tiles.usage.title" = "사용 현황";
 "tiles.usage.upload" = "업로드";
 "today.widget.login" = "로그인";

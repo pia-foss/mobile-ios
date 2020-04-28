@@ -249,7 +249,7 @@
 "tiles.subscription.trial" = "Пробная версия";
 "tiles.subscription.yearly" = "Ежегодно";
 "tiles.usage.download" = "Загрузить";
-"tiles.usage.ipsec.title" = "ИСПОЛЬЗОВАНИЕ (отключено, если не используется OpenVPN или WireGuard®)";
+"tiles.usage.ipsec.title" = "ИСПОЛЬЗОВАНИЕ (недоступно на IKEv2)";
 "tiles.usage.title" = "Использование";
 "tiles.usage.upload" = "Отправить";
 "today.widget.login" = "Вход";

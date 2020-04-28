@@ -249,7 +249,7 @@
 "tiles.subscription.trial" = "ทดลอง";
 "tiles.subscription.yearly" = "รายปี";
 "tiles.usage.download" = "ดาวน์โหลด";
-"tiles.usage.ipsec.title" = "การใช้งาน (ปิดใช้งาน ยกเว้นเมื่อใช้ OpenVpN หรือ WireGuard®)";
+"tiles.usage.ipsec.title" = "การใช้งาน (ไม่สามารถใช้ได้บน IKEv2)";
 "tiles.usage.title" = "การใช้งาน";
 "tiles.usage.upload" = "อัพโหลด";
 "today.widget.login" = "เข้าสู่ระบบ";

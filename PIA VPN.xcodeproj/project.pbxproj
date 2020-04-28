@@ -252,6 +252,10 @@
 		DD76292321ECCD5C0092DF50 /* UsageTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD76292121ECCD5C0092DF50 /* UsageTile.swift */; };
 		DD76292521ECCD650092DF50 /* UsageTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD76292421ECCD650092DF50 /* UsageTile.xib */; };
 		DD76292621ECCD650092DF50 /* UsageTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD76292421ECCD650092DF50 /* UsageTile.xib */; };
+		DD829EDF2449A1EF00E2EE55 /* SiriShortcutsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD829EDE2449A1EF00E2EE55 /* SiriShortcutsBuilder.swift */; };
+		DD829EE02449A1EF00E2EE55 /* SiriShortcutsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD829EDE2449A1EF00E2EE55 /* SiriShortcutsBuilder.swift */; };
+		DD829EE22449A4A400E2EE55 /* SiriShortcutsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD829EE12449A4A400E2EE55 /* SiriShortcutsManager.swift */; };
+		DD829EE32449A4A400E2EE55 /* SiriShortcutsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD829EE12449A4A400E2EE55 /* SiriShortcutsManager.swift */; };
 		DD858B8B22CCE512004953F3 /* FriendReferralsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD858B8A22CCE512004953F3 /* FriendReferralsViewController.swift */; };
 		DD858B8C22CCE512004953F3 /* FriendReferralsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD858B8A22CCE512004953F3 /* FriendReferralsViewController.swift */; };
 		DD858B8E22CCE9E4004953F3 /* FriendReferralsTableViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD858B8D22CCE9E4004953F3 /* FriendReferralsTableViewUtil.swift */; };
@@ -619,6 +623,8 @@
 		DD76291C21ECCD510092DF50 /* UsageTileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UsageTileCollectionViewCell.xib; sourceTree = "<group>"; };
 		DD76292121ECCD5C0092DF50 /* UsageTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageTile.swift; sourceTree = "<group>"; };
 		DD76292421ECCD650092DF50 /* UsageTile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UsageTile.xib; sourceTree = "<group>"; };
+		DD829EDE2449A1EF00E2EE55 /* SiriShortcutsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriShortcutsBuilder.swift; sourceTree = "<group>"; };
+		DD829EE12449A4A400E2EE55 /* SiriShortcutsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriShortcutsManager.swift; sourceTree = "<group>"; };
 		DD858B8A22CCE512004953F3 /* FriendReferralsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendReferralsViewController.swift; sourceTree = "<group>"; };
 		DD858B8D22CCE9E4004953F3 /* FriendReferralsTableViewUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendReferralsTableViewUtil.swift; sourceTree = "<group>"; };
 		DD858B9022CCEC53004953F3 /* InvitesSentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitesSentTableViewCell.swift; sourceTree = "<group>"; };
@@ -863,6 +869,7 @@
 		0E9160551DA6F7EC00A13AA7 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				DD829EDD2449A14800E2EE55 /* Siri */,
 				DD1C137E21E6073A004004B3 /* Tiles */,
 				0E53A8391FE5A104000C2A18 /* Extensions */,
 				0E76AE1F1D35436600421248 /* Daemons */,
@@ -1225,6 +1232,15 @@
 				DD6DC5C121B6C27F00F9D538 /* pia-spinner.json */,
 			);
 			path = Lottie;
+			sourceTree = "<group>";
+		};
+		DD829EDD2449A14800E2EE55 /* Siri */ = {
+			isa = PBXGroup;
+			children = (
+				DD829EDE2449A1EF00E2EE55 /* SiriShortcutsBuilder.swift */,
+				DD829EE12449A4A400E2EE55 /* SiriShortcutsManager.swift */,
+			);
+			path = Siri;
 			sourceTree = "<group>";
 		};
 		DDC8F5ED23EC1070005D19C6 /* PIA VPN WG Tunnel */ = {
@@ -2080,6 +2096,7 @@
 				DDC8124D2176185D00CB290C /* SwiftGen+SeguesStoryboards.swift in Sources */,
 				DDD271E221D6262100B6D20F /* PropertyStoring.swift in Sources */,
 				DD858BA822CE4408004953F3 /* DaysAcquiredTableViewCell.swift in Sources */,
+				DD829EE02449A1EF00E2EE55 /* SiriShortcutsBuilder.swift in Sources */,
 				0EFB839120209CF200980F69 /* VPNPermissionViewController.swift in Sources */,
 				0EFDC1D81FE46177007C0B9B /* SensitiveOperation.swift in Sources */,
 				DD40197F221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.swift in Sources */,
@@ -2087,6 +2104,7 @@
 				DDB6B95121C94E2E00DE8C5F /* TrustedNetworksViewController.swift in Sources */,
 				0E9452A61FDB578400891948 /* RegionCell.swift in Sources */,
 				0EFDC1ED1FE4B9DC007C0B9B /* AppConstants.swift in Sources */,
+				DD829EE32449A4A400E2EE55 /* SiriShortcutsManager.swift in Sources */,
 				DD58F4C021B12CFE00D043F7 /* PIAConnectionButton.swift in Sources */,
 				DD125DD221E7A694004ECCB6 /* ServerButton.swift in Sources */,
 				0E2215CA2008BA9100F5FB4D /* SwiftGen+Strings.swift in Sources */,
@@ -2201,6 +2219,7 @@
 				0E392DA61FE3283C0002160D /* TransientState.swift in Sources */,
 				0E3A35351FD9EBDA000B0F99 /* AppDelegate.swift in Sources */,
 				DD858BA722CE4408004953F3 /* DaysAcquiredTableViewCell.swift in Sources */,
+				DD829EDF2449A1EF00E2EE55 /* SiriShortcutsBuilder.swift in Sources */,
 				DDC8124C2176185000CB290C /* SwiftGen+SeguesStoryboards.swift in Sources */,
 				DDD271E121D6262100B6D20F /* PropertyStoring.swift in Sources */,
 				0EFB839020209CF200980F69 /* VPNPermissionViewController.swift in Sources */,
@@ -2208,6 +2227,7 @@
 				0E3A35281FD9A960000B0F99 /* DashboardViewController.swift in Sources */,
 				DDB6B95021C94E2E00DE8C5F /* TrustedNetworksViewController.swift in Sources */,
 				0E9452A51FDB578400891948 /* RegionCell.swift in Sources */,
+				DD829EE22449A4A400E2EE55 /* SiriShortcutsManager.swift in Sources */,
 				0EFDC1EC1FE4B9DC007C0B9B /* AppConstants.swift in Sources */,
 				DD58F4BF21B12CFE00D043F7 /* PIAConnectionButton.swift in Sources */,
 				DD125DD121E7A694004ECCB6 /* ServerButton.swift in Sources */,
