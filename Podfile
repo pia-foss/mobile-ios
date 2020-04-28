@@ -40,8 +40,8 @@ end
 
 def shared_main_pods
     pod 'AlamofireImage'
-    library_by_path('/Users/ueshiba/Projects/PIA')
-    #library_by_git('c1994ec')
+    #library_by_path('')
+    library_by_git('c65e197')
     #library_by_version('~> 1.1.3')
 end
 
