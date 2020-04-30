@@ -1206,7 +1206,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             guard let socketType = pendingOpenVPNSocketType else {
                 break
             }
-            let availablePorts = Client.providers.serverProvider.currentServersConfiguration.vpnPorts
+            let availablePorts = Client.providers.serverProvider.currentServersConfiguration.ovpnPorts
             var options = (socketType == .udp) ? availablePorts.udp : availablePorts.tcp
             options.insert(SettingsViewController.AUTOMATIC_PORT, at: 0)
             controller = OptionsViewController()
@@ -1548,7 +1548,7 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             var newProtocols: [EndpointProtocol] = []
 
             if let socketType = optSocketType {
-                let ports = (socketType == .udp) ? serversCfg.vpnPorts.udp : serversCfg.vpnPorts.tcp
+                let ports = (socketType == .udp) ? serversCfg.ovpnPorts.udp : serversCfg.ovpnPorts.tcp
                 if currentProtocols?.count == 1, let currentPort = pendingOpenVPNConfiguration?.currentPort, ports.contains(currentPort) {
                     newProtocols.append(EndpointProtocol(socketType, currentPort))
                 } else {
@@ -1582,12 +1582,12 @@ extension SettingsViewController: OptionsViewControllerDelegate {
                     newProtocols = AppConfiguration.VPN.piaAutomaticProtocols
                 }
                 else if (pendingOpenVPNSocketType == .udp) {
-                    for port in serversCfg.vpnPorts.udp {
+                    for port in serversCfg.ovpnPorts.udp {
                         newProtocols.append(EndpointProtocol(.udp, port))
                     }
                 }
                 else if (pendingOpenVPNSocketType == .tcp) {
-                    for port in serversCfg.vpnPorts.tcp {
+                    for port in serversCfg.ovpnPorts.tcp {
                         newProtocols.append(EndpointProtocol(.tcp, port))
                     }
                 }
