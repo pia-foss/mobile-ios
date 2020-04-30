@@ -109,6 +109,18 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
         return server
     }
     
+    func loadLocalJSON(fromJSON jsonData: Data) {
+        guard let bundle = GlossServersBundle(jsonData: jsonData, forServerNetwork: .legacy) else {
+            return
+        }
+        if let configuration = bundle.parsed.configuration {
+            accessedDatabase.transient.serversConfiguration = configuration
+        }
+        if currentServers.isEmpty {
+            currentServers = bundle.parsed.servers
+        }
+    }
+
     func load(fromJSON jsonData: Data) {
         guard let bundle = GlossServersBundle(jsonData: jsonData) else {
             return

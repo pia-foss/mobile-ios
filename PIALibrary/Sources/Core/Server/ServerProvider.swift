@@ -43,7 +43,17 @@ public protocol ServerProvider: class {
     ///
     /// - Seealso: `VPNProvider`
     var targetServer: Server { get }
-    
+
+    /**
+     Loads this provider with a local JSON, as seen on the /servers web client API.
+
+     - Postcondition:
+        - Sets `currentServers` and `currentServersConfiguration`.
+        - Posts `Notification.Name.PIAServerDidUpdateCurrentServers`.
+     - Parameter jsonData: The JSON data to load.
+     */
+    func loadLocalJSON(fromJSON jsonData: Data)
+
     /**
      Loads this provider with a JSON, as seen on the /servers web client API.
 

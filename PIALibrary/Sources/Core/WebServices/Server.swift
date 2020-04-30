@@ -75,6 +75,30 @@ public class Server: Hashable {
         }
     }
     
+    /// Represents a VPN server IP endpoint.
+    public class ServerAddressIP {
+        
+        /// The endpoint ip.
+        public let ip: String
+        
+        /// The endpoint common name.
+        public let cn: String
+
+        /// The response time for this address.
+        private(set) var responseTime: Int?
+
+        /// :nodoc:
+        public init(ip: String, cn: String) {
+            self.ip = ip
+            self.cn = cn
+        }
+        
+        func updateResponseTime(_ time: Int) {
+            self.responseTime = time
+        }
+        
+    }
+    
     /// The server name.
     public let name: String
     
@@ -93,6 +117,18 @@ public class Server: Hashable {
     /// The best address for establishing an OpenVPN connection over UDP.
     public let bestOpenVPNAddressForUDP: Address?
     
+    /// The best address for establishing an OpenVPN connection over TCP.
+    public let openVPNAddressesForTCP: [ServerAddressIP]?
+
+    /// The best address for establishing an OpenVPN connection over UDP.
+    public let openVPNAddressesForUDP: [ServerAddressIP]?
+
+    /// The best server IPs for establishing a WireGuard connection over UDP.
+    public let wireGuardAddressesForUDP: [ServerAddressIP]?
+    
+    /// The best server IPs for establishing an IKEv2 connection over UDP.
+    public let iKEv2AddressesForUDP: [ServerAddressIP]?
+    
     /// The address on which to "ping" the server.
     ///
     /// - Seealso: `Macros.ping(...)`
@@ -108,15 +144,26 @@ public class Server: Hashable {
         hostname: String,
         bestOpenVPNAddressForTCP: Address?,
         bestOpenVPNAddressForUDP: Address?,
-        pingAddress: Address?) {
+        openVPNAddressesForTCP: [ServerAddressIP]? = nil,
+        openVPNAddressesForUDP: [ServerAddressIP]? = nil,
+        wireGuardAddressesForUDP: [ServerAddressIP]? = nil,
+        iKEv2AddressesForUDP: [ServerAddressIP]? = nil,
+        pingAddress: Address?,
+        responseTime: Int? = 0) {
         
         self.serial = serial
         self.name = name
         self.country = country
         self.hostname = hostname
         identifier = hostname.components(separatedBy: ".").first ?? ""
+        
         self.bestOpenVPNAddressForTCP = bestOpenVPNAddressForTCP
         self.bestOpenVPNAddressForUDP = bestOpenVPNAddressForUDP
+        self.openVPNAddressesForTCP = openVPNAddressesForTCP
+        self.openVPNAddressesForUDP = openVPNAddressesForUDP
+        self.wireGuardAddressesForUDP = wireGuardAddressesForUDP
+        self.iKEv2AddressesForUDP = iKEv2AddressesForUDP
+
         self.pingAddress = pingAddress
         
         isAutomatic = true
@@ -133,4 +180,96 @@ public class Server: Hashable {
     public var hashValue: Int {
         return identifier.hashValue
     }
+    
+}
+
+extension Server {
+    
+    func bestAddressForOpenVPNTCP() -> Address? {
+        if Client.configuration.serverNetwork == .gen4,
+            let addresses = openVPNAddressesForTCP {
+            let sorted = addresses.sorted(by: { $0.responseTime ?? 0 > $1.responseTime ?? 0 })
+            return nil
+        }
+        
+        return bestOpenVPNAddressForTCP
+
+    }
+    
+    func bestAddressForOpenVPNUDP() -> Address? {
+        if Client.configuration.serverNetwork == .gen4,
+            let addresses = openVPNAddressesForUDP {
+            let sorted = addresses.sorted(by: { $0.responseTime ?? 0 > $1.responseTime ?? 0 })
+            return nil
+        }
+
+        return bestOpenVPNAddressForUDP
+
+    }
+
+    /// TODO: Use IP instead DNS
+    func bestAddressForIKEv2() -> Address? {
+        return nil // currently using DNS
+    }
+
+    /// TODO: Use IP instead DNS
+    func bestAddressForWireGuard() -> Address? {
+        return nil // currently using DNS
+    }
+
+    func bestPingAddress() -> [Address] {
+        
+        if Client.configuration.serverNetwork == .gen4 {
+            switch Client.providers.vpnProvider.currentVPNType {
+            case IKEv2Profile.vpnType:
+                var addresses: [Address] = []
+                for address in iKEv2AddressesForUDP ?? [] {
+                    addresses.append(Address(hostname: address.ip, port: 0))
+                }
+                return addresses
+            case PIATunnelProfile.vpnType:
+                var addresses: [Address] = []
+                for address in openVPNAddressesForUDP ?? [] {
+                    addresses.append(Address(hostname: address.ip, port: 0))
+                }
+                return addresses
+            case PIAWGTunnelProfile.vpnType:
+                var addresses: [Address] = []
+                for address in wireGuardAddressesForUDP ?? [] {
+                    addresses.append(Address(hostname: address.ip, port: 0))
+                }
+                return addresses
+            default:
+                return []
+            }
+        }
+        
+        if let pingAddress = pingAddress {
+            return [pingAddress]
+        } else {
+            return []
+        }
+
+    }
+    
+}
+
+extension Server {
+    
+    func updateResponseTime(_ time: Int, forAddress address: Address) {
+        switch Client.providers.vpnProvider.currentVPNType {
+        case IKEv2Profile.vpnType:
+            let serverAddressIP = iKEv2AddressesForUDP?.first(where: {$0.ip == address.hostname })
+            serverAddressIP?.updateResponseTime(time)
+        case PIATunnelProfile.vpnType:
+            let serverAddressIP = openVPNAddressesForUDP?.first(where: {$0.ip == address.hostname })
+            serverAddressIP?.updateResponseTime(time)
+        case PIAWGTunnelProfile.vpnType:
+            let serverAddressIP = wireGuardAddressesForUDP?.first(where: {$0.ip == address.hostname })
+            serverAddressIP?.updateResponseTime(time)
+        default:
+            break
+        }
+    }
+    
 }

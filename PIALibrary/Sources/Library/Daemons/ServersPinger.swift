@@ -46,9 +46,6 @@ class ServersPinger: DatabaseAccess {
         
         var pingableServers: [Server] = []
         for server in destinations {
-            guard let _ = server.pingAddress else {
-                continue
-            }
             pingableServers.append(server)
         }
         var remainingServers: Set<Server> = Set(pingableServers)
@@ -64,42 +61,51 @@ class ServersPinger: DatabaseAccess {
 
             log.verbose("Pinging \(server.identifier)")
 
-            let completionBlock: (Int?) -> Void = { (time) in
-                DispatchQueue.main.sync {
-                    if let responseTime = time {
-                        persistence.setPing(responseTime, forServerIdentifier: server.identifier)
+            for address in server.bestPingAddress() {
+                let completionBlock: (Int?) -> Void = { (time) in
+                    DispatchQueue.main.sync {
+                        if let responseTime = time {
+                            server.updateResponseTime(responseTime, forAddress: address)
+                            persistence.setPing(responseTime, forServerIdentifier: server.identifier)
+                        }
+                        remainingServers.remove(server)
+                        if remainingServers.isEmpty {
+                            persistence.serializePings()
+                            self.isPinging = false
+                            Macros.postNotification(.PIADaemonsDidPingServers)
+                        }
                     }
-                    remainingServers.remove(server)
-                    if remainingServers.isEmpty {
-                        persistence.serializePings()
-                        self.isPinging = false
-                        Macros.postNotification(.PIADaemonsDidPingServers)
+                }
+
+                queue.async {
+                    guard let responseTime = server.ping(toAddress: address, withProtocol: .UDP) else {
+                        log.warning("Error/timeout from \(server.identifier)")
+                        completionBlock(nil)
+                        return
                     }
-                }
-            }
 
-            queue.async {
-                guard let responseTime = server.ping(withProtocol: .UDP) else {
-                    log.warning("Error/timeout from \(server.identifier)")
-                    completionBlock(nil)
-                    return
-                }
+                    // discard biased pings
+                    guard (self.accessedDatabase.transient.vpnStatus == .disconnected) else {
+                        log.warning("Discarded VPN-biased response from \(server.identifier): \(responseTime)")
+                        completionBlock(nil)
+                        return
+                    }
 
-                // discard biased pings
-                guard (self.accessedDatabase.transient.vpnStatus == .disconnected) else {
-                    log.warning("Discarded VPN-biased response from \(server.identifier): \(responseTime)")
-                    completionBlock(nil)
-                    return
+                    log.debug("Response time from \(server.identifier): \(responseTime)")
+                    completionBlock(responseTime)
                 }
 
-                log.debug("Response time from \(server.identifier): \(responseTime)")
-                completionBlock(responseTime)
             }
         }
     }
 }
 
 extension Server {
+    
+    func ping(toAddress address:Address, withProtocol protocolType: PingerProtocol) -> Int? {
+        return Macros.ping(withProtocol: protocolType, hostname: address.hostname, port: address.port)
+    }
+    
     func ping(withProtocol protocolType: PingerProtocol) -> Int? {
         guard let address = pingAddress else {
             return nil

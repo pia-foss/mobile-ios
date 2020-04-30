@@ -60,4 +60,14 @@ enum VPNEndpoint: String, Endpoint {
     var url: URL {
         return URL(string: "\(accessedConfiguration.baseUrl)/vpninfo/\(rawValue)")!
     }
+    
+}
+
+enum ServerEndpoint: String, Endpoint {
+    case gen4
+    
+    var url: URL {
+        return URL(string: "https://serverlist.piaservers.net/vpninfo/servers/new")!
+    }
+    
 }

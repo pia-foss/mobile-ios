@@ -66,7 +66,7 @@ public final class Client {
 
         // preload servers from optionally bundled JSON
         if let data = configuration.bundledServersJSON {
-            providers.serverProvider.load(fromJSON: data)
+            providers.serverProvider.loadLocalJSON(fromJSON: data)
         }
 
         // daemons (observe passive notifications regardless)

@@ -64,6 +64,7 @@ class ServersResponse {
 }
 
 class GlossServersBundle: GlossParser {
+    
     class Configuration: GlossParser {
         class Ports: GlossParser {
             let parsed: ServersBundle.Configuration.Ports
@@ -101,7 +102,9 @@ class GlossServersBundle: GlossParser {
             }
 
             parsed = ServersBundle.Configuration(
-                vpnPorts: vpnPorts.parsed,
+                ovpnPorts: vpnPorts.parsed,
+                wgPorts: vpnPorts.parsed,
+                ikev2Ports: vpnPorts.parsed,
                 latestVersion: latestVersion,
                 pollInterval: pollIntervalSeconds * 1000,
                 automaticIdentifiers: automaticIdentifiers
@@ -109,7 +112,7 @@ class GlossServersBundle: GlossParser {
         }
     }
     
-    let parsed: ServersBundle
+    var parsed: ServersBundle
     
     convenience init?(jsonString: String) {
         guard let data = jsonString.data(using: .utf8) else {
@@ -132,11 +135,155 @@ class GlossServersBundle: GlossParser {
         self.init(json: json)
     }
 
+    convenience init?(jsonData: Data, forServerNetwork network: Client.ServersNetwork) {
+        guard let anyJSON = try? JSONSerialization.jsonObject(with: jsonData, options: []), let json = anyJSON as? JSON else {
+            return nil
+        }
+        self.init(json: json, forServerNetwork: network)
+    }
+
     // MARK: Decodable
 
     public required init?(json: JSON) {
-        let glossConfiguration: GlossServersBundle.Configuration? = "info" <~~ json
+        
+        // Init configuration object
+        parsed = ServersBundle(servers: [], configuration: nil)
+        
+        if Client.configuration.serverNetwork == .gen4 {
+            parseGEN4Data(json)
+        } else {
+            parseLegacyData(json)
+        }
+        
+    }
+    
+    public init?(json: JSON, forServerNetwork network: Client.ServersNetwork) {
+        
+        // Init configuration object
+        parsed = ServersBundle(servers: [], configuration: nil)
+        
+        if network == .legacy {
+            let currentNetwork = Client.configuration.serverNetwork
+            Client.configuration.setServerNetworks(to: .legacy) //Set legacy as current network
+            parseLegacyData(json)
+            Client.configuration.setServerNetworks(to: currentNetwork) //Rollback
+        } else {
+            parseGEN4Data(json)
+        }
+        
+    }
 
+    
+    private func parseGEN4Data(_ json: JSON) {
+        //groups and regions
+                
+        var servers: [Server] = []
+        
+        // Check regions
+        if let regionList = json["regions"] as? [JSON] {
+
+            for region in regionList {
+                guard let serverJSON = region as? JSON else {
+                    continue
+                }
+                guard let _ = serverJSON["country"] as? String else {
+                    continue
+                }
+                guard let server = GlossServer(json: serverJSON)?.parsed else {
+                    continue
+                }
+                servers.append(server)
+            }
+            servers.sort { $0.name < $1.name }
+
+        }
+
+        let configuration = parseGEN4Configuration(json)
+        
+        parsed = ServersBundle(
+            servers: servers,
+            configuration: configuration
+        )
+
+    }
+    
+    private func parseGEN4Configuration(_ json: JSON) -> ServersBundle.Configuration {
+        
+        var ovpnTCPPorts: [UInt16] = []
+        var ovpnUDPPorts: [UInt16] = []
+        var wgPorts: [UInt16] = []
+        var ikeV2Ports: [UInt16] = []
+        var ovpnTCPLatencyPort: UInt16?
+        var ovpnUDPLatencyPort: UInt16?
+        var wgLatencyPort: UInt16?
+        var ikeV2LatencyPort: UInt16?
+
+        if let groupList = json["groups"] as? JSON {
+            
+            if let ovpntcpArray = groupList["ovpntcp"] as? [JSON] {
+                for ovpntcp in ovpntcpArray {
+                    if let name = ovpntcp["name"] as? String {
+                        if name == "openvpn_tcp" {
+                            if let ports = ovpntcp["ports"] as? [UInt16] {
+                                ovpnTCPPorts = ports
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if let ovpnudpArray = groupList["ovpnudp"] as? [JSON] {
+                for ovpnudp in ovpnudpArray {
+                    if let name = ovpnudp["name"] as? String {
+                        if name == "openvpn_udp" {
+                            if let ports = ovpnudp["ports"] as? [UInt16] {
+                                ovpnUDPPorts = ports
+                            }
+                        }
+                    }
+                }
+            }
+
+            if let wgArray = groupList["wg"] as? [JSON] {
+                for wg in wgArray {
+                    if let name = wg["name"] as? String {
+                        if name == "wg" {
+                            if let ports = wg["ports"] as? [UInt16] {
+                                wgPorts = ports
+                            }
+                        }
+                    }
+                }
+            }
+
+            if let ikev2Array = groupList["ikev2"] as? [JSON] {
+                for ikev2 in ikev2Array {
+                    if let name = ikev2["name"] as? String {
+                        if name == "ikev2" {
+                            if let ports = ikev2["ports"] as? [UInt16] {
+                                ikeV2Ports = ports
+                            }
+                        }
+                    }
+                }
+
+            }
+
+        }
+        
+        return ServersBundle.Configuration(ovpnPorts: ServersBundle.Configuration.Ports(udp: ovpnUDPPorts, tcp: ovpnTCPPorts),
+                                           wgPorts: ServersBundle.Configuration.Ports(udp: wgPorts, tcp: []),
+                                           ikev2Ports: ServersBundle.Configuration.Ports(udp: ikeV2Ports, tcp: []),
+                                           latestVersion: 102,
+                                           pollInterval: 610,
+                                           automaticIdentifiers: nil)
+        
+    }
+    
+    func parseLegacyData(_ json: JSON) {
+        
+        let glossConfiguration: GlossServersBundle.Configuration? = "info" <~~ json
+        
         var servers: [Server] = []
         for (code, serverDict) in json {
             guard let serverJSON = serverDict as? JSON else {
@@ -157,5 +304,7 @@ class GlossServersBundle: GlossParser {
             servers: servers,
             configuration: glossConfiguration?.parsed
         )
+
     }
+    
 }

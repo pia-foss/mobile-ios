@@ -42,7 +42,8 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
                 hostname: "france.example.com",
                 bestOpenVPNAddressForTCP: nil,
                 bestOpenVPNAddressForUDP: nil,
-                pingAddress: nil
+                pingAddress: nil,
+                responseTime: 0
             ), Server(
                 serial: "8a55f03812851897f6e43b2ae22b1234",
                 name: "Germany",
@@ -50,7 +51,8 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
                 hostname: "germany.example.com",
                 bestOpenVPNAddressForTCP: nil,
                 bestOpenVPNAddressForUDP: nil,
-                pingAddress: nil
+                pingAddress: nil,
+                responseTime: 0
             ), Server(
                 serial: "8a55f03812851897f6e43b2ae22b1234",
                 name: "Italy",
@@ -58,7 +60,8 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
                 hostname: "italy.example.com",
                 bestOpenVPNAddressForTCP: nil,
                 bestOpenVPNAddressForUDP: nil,
-                pingAddress: nil
+                pingAddress: nil,
+                responseTime: 0
             ), Server(
                 serial: "8a55f03812851897f6e43b2ae22b1234",
                 name: "US East",
@@ -66,7 +69,8 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
                 hostname: "us-east.example.com",
                 bestOpenVPNAddressForTCP: nil,
                 bestOpenVPNAddressForUDP: nil,
-                pingAddress: nil
+                pingAddress: nil,
+                responseTime: 0
             )
         ]
 
@@ -112,6 +116,11 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
     
     /// :nodoc:
     public func load(fromJSON jsonData: Data) {
+        return delegate.load(fromJSON: jsonData)
+    }
+    
+    /// :nodoc:
+    public func loadLocalJSON(fromJSON jsonData: Data) {
         return delegate.load(fromJSON: jsonData)
     }
     
