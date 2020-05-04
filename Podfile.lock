@@ -70,8 +70,8 @@ PODS:
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - OpenSSL-Apple (1.1.1d.5a)
-  - PIALibrary/Core (2.5.0)
-  - PIALibrary/Library (2.5.0):
+  - PIALibrary/Core (2.6.0)
+  - PIALibrary/Library (2.6.0):
     - Alamofire (~> 4)
     - Gloss (~> 2)
     - PIALibrary/Core
@@ -79,18 +79,18 @@ PODS:
     - PopupDialog
     - ReachabilitySwift
     - SwiftyBeaver
-  - PIALibrary/Mock (2.5.0):
+  - PIALibrary/Mock (2.6.0):
     - PIALibrary/Library
-  - PIALibrary/UI (2.5.0):
+  - PIALibrary/UI (2.6.0):
     - FXPageControl
     - lottie-ios
     - PIALibrary/Library
     - SwiftEntryKit (= 0.7.2)
     - SwiftyBeaver
     - TPKeyboardAvoiding
-  - PIALibrary/Util (2.5.0):
+  - PIALibrary/Util (2.6.0):
     - PIALibrary/Core
-  - PIALibrary/VPN (2.5.0):
+  - PIALibrary/VPN (2.6.0):
     - PIALibrary/Library
     - PIAWireguard
     - TunnelKit
@@ -132,10 +132,10 @@ DEPENDENCIES:
   - Fabric
   - Firebase/Core (= 6.5.0)
   - iRate
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `c65e197`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `c65e197`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `c65e197`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `c65e197`)
+  - PIALibrary/Library (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
+  - PIALibrary/Mock (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
+  - PIALibrary/UI (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
+  - PIALibrary/VPN (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`, commit `1585891`)
   - PopupDialog
   - ReachabilitySwift (~> 4.3.0)
@@ -175,8 +175,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :commit: c65e197
-    :git: https://github.com/pia-foss/client-library-apple
+    :path: "/Users/ueshiba/Projects/PIA/client-library-apple"
   PIAWireguard:
     :commit: '1585891'
     :git: https://github.com/pia-foss/ios-wireguard
@@ -185,9 +184,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/pia-foss/tunnelkit
 
 CHECKOUT OPTIONS:
-  PIALibrary:
-    :commit: c65e197
-    :git: https://github.com/pia-foss/client-library-apple
   PIAWireguard:
     :commit: '1585891'
     :git: https://github.com/pia-foss/ios-wireguard
@@ -215,7 +211,7 @@ SPEC CHECKSUMS:
   lottie-ios: 85ce835dd8c53e02509f20729fc7d6a4e6645a0a
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
-  PIALibrary: 32ba92b7e314b8a55083b31289b8086120cbfe08
+  PIALibrary: eea3926adab90df4cfc7713436faba34f3af909a
   PIAWireguard: f92333a1e281db298efd00b0fe97a5745a7946e6
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
@@ -227,6 +223,6 @@ SPEC CHECKSUMS:
   TunnelKit: d13d005c0c7febd18a03a87e1ab7d4414fef3ffd
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 6c7016e8c9374c22fd9a0e36ae4805f7bff3ed60
+PODFILE CHECKSUM: 8ed973016efd2c4ed81a1526f4dea29c39385c37
 
 COCOAPODS: 1.7.5
