@@ -185,8 +185,8 @@ class RegionsViewController: AutolayoutViewController {
         default:
             self.servers = self.servers.sorted(by: { $0.isFavorite && !$1.isFavorite })
         }
-        tableView.reloadData()
         self.servers.insert(Server.automatic, at: 0)
+        tableView.reloadData()
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
 
