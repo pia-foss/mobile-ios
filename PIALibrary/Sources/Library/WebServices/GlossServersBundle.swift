@@ -275,7 +275,7 @@ class GlossServersBundle: GlossParser {
                                            wgPorts: ServersBundle.Configuration.Ports(udp: wgPorts, tcp: []),
                                            ikev2Ports: ServersBundle.Configuration.Ports(udp: ikeV2Ports, tcp: []),
                                            latestVersion: 102,
-                                           pollInterval: 610,
+                                           pollInterval: 600000,
                                            automaticIdentifiers: nil)
         
     }

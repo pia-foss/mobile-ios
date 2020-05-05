@@ -302,7 +302,15 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
     }
     
     func setPing(_ ping: Int, forServerIdentifier serverIdentifier: String) {
-        pingByServerIdentifier[serverIdentifier] = ping
+        
+        if let currentResponseTime = pingByServerIdentifier[serverIdentifier]{
+            if currentResponseTime > ping {
+                pingByServerIdentifier[serverIdentifier] = ping
+            }
+        } else {
+            pingByServerIdentifier[serverIdentifier] = ping
+        }
+
     }
     
     func serializePings() {

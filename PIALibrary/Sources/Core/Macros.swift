@@ -25,6 +25,9 @@ import Foundation
 /// A set of useful methods for internal and consumer development.
 public class Macros {
 
+    /// Array of ICMP pingers
+    static var pingers: [ICMPPing] = []
+    
     /**
      Returns a short version string.
      

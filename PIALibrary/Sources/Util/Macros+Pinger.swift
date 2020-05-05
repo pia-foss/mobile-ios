@@ -31,6 +31,7 @@ public enum PingerProtocol {
 
     /// Over UDP.
     case UDP
+
 }
 
 extension Macros {
@@ -49,13 +50,31 @@ extension Macros {
         switch protocolType {
         case .TCP:
             pinger = TCPPinger(hostname: hostname, port: port)
-            
         case .UDP:
             pinger = UDPPinger(hostname: hostname, port: port)
         }
+
         if let timeout = timeout {
             pinger.setTimeout(timeout)
         }
         return pinger.sendPing() as? Int
     }
+    
+    public static func icmpPing(hostname: String, port: UInt16, completionBlock: @escaping (Int?) -> ()) {
+        
+        guard let pinger = ICMPPing(host: hostname, configuration: PingConfiguration(interval: TimeInterval(60), with: TimeInterval(180)), queue: DispatchQueue.main) else {
+            completionBlock(nil)
+            return
+        }
+        
+        pingers.append(pinger)
+        pinger.observer = { ping, response in
+            ping.stop()
+            pingers.removeAll(where: {$0.host == pinger.host})
+            completionBlock(Int(response.duration * 1000))
+        }
+        pinger.start()
+
+    }
+    
 }

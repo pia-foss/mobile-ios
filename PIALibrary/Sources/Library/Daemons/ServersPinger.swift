@@ -63,7 +63,7 @@ class ServersPinger: DatabaseAccess {
 
             for address in server.bestPingAddress() {
                 let completionBlock: (Int?) -> Void = { (time) in
-                    DispatchQueue.main.sync {
+                    DispatchQueue.main.async {
                         if let responseTime = time {
                             server.updateResponseTime(responseTime, forAddress: address)
                             persistence.setPing(responseTime, forServerIdentifier: server.identifier)
@@ -77,26 +77,44 @@ class ServersPinger: DatabaseAccess {
                     }
                 }
 
-                queue.async {
-                    guard let responseTime = server.ping(toAddress: address, withProtocol: .UDP) else {
-                        log.warning("Error/timeout from \(server.identifier)")
-                        completionBlock(nil)
-                        return
-                    }
+                queue.async { [weak self] in
+                    
+                    var response: Int?
 
-                    // discard biased pings
-                    guard (self.accessedDatabase.transient.vpnStatus == .disconnected) else {
-                        log.warning("Discarded VPN-biased response from \(server.identifier): \(responseTime)")
-                        completionBlock(nil)
-                        return
+                    if Client.configuration.serverNetwork == .gen4 {
+                        server.icmpPing(toAddress: address, withCompletion: { duration in
+                            response = duration
+                            self?.parsePingResponse(response: response, withServer: server, andCompletionBlock: completionBlock)
+                        })
+                    } else {
+                        response = server.ping(toAddress: address, withProtocol: .UDP)
+                        self?.parsePingResponse(response: response, withServer: server, andCompletionBlock: completionBlock)
                     }
-
-                    log.debug("Response time from \(server.identifier): \(responseTime)")
-                    completionBlock(responseTime)
+                    
                 }
 
             }
         }
+    }
+    
+    private func parsePingResponse(response: Int?, withServer server: Server, andCompletionBlock completionBlock: (Int?) -> Void) {
+        
+        guard let responseTime = response else {
+            log.warning("Error/timeout from \(server.identifier)")
+            completionBlock(nil)
+            return
+        }
+
+        // discard biased pings
+        guard (self.accessedDatabase.transient.vpnStatus == .disconnected) else {
+            log.warning("Discarded VPN-biased response from \(server.identifier): \(responseTime)")
+            completionBlock(nil)
+            return
+        }
+
+        log.debug("Response time from \(server.identifier): \(responseTime)")
+        completionBlock(responseTime)
+
     }
 }
 
@@ -104,6 +122,10 @@ extension Server {
     
     func ping(toAddress address:Address, withProtocol protocolType: PingerProtocol) -> Int? {
         return Macros.ping(withProtocol: protocolType, hostname: address.hostname, port: address.port)
+    }
+    
+    func icmpPing(toAddress address:Address, withCompletion completionBlock: @escaping (Int?) -> ()) {
+        Macros.icmpPing(hostname: address.hostname, port: address.port, completionBlock: completionBlock)
     }
     
     func ping(withProtocol protocolType: PingerProtocol) -> Int? {
