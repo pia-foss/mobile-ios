@@ -387,8 +387,20 @@ class SettingsViewController: AutolayoutViewController {
     }
     
     @objc private func toggleServerNetwork(_ sender: UISwitch) {
+        self.showLoadingAnimation()
+        let currentValue = Client.configuration.currentServerNetwork()
         Client.configuration.setServerNetworks(to: sender.isOn ? .gen4 : .legacy)
-        Client.resetServers()
+        Client.resetServers(completionBlock: { error in
+            self.hideLoadingAnimation()
+            if error == nil {
+                NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
+                object: self,
+                userInfo: nil)
+            } else {
+                Client.configuration.setServerNetworks(to: currentValue)
+                self.tableView.reloadData()
+            }
+        })
     }
 
     @objc private func showContentBlockerTutorial() {
