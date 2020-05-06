@@ -29,6 +29,8 @@ private let log = SwiftyBeaver.self
 /// Implementation of `VPNProfile` providing IKEv2 connectivity.
 public class IKEv2Profile: NetworkExtensionProfile {
     
+    private static let ikeV2Gen4Password = "sesame"
+    
     private var currentVPN: NEVPNManager {
         return NEVPNManager.shared()
     }
@@ -165,8 +167,18 @@ public class IKEv2Profile: NetworkExtensionProfile {
     public func generatedProtocol(withConfiguration configuration: VPNConfiguration) -> NEVPNProtocol {
         
         var iKEv2Username = ""
-        if let username = Client.providers.accountProvider.currentUser?.credentials.username {
-            iKEv2Username = username
+        var iKEv2Password: Data?
+        
+        if Client.configuration.currentServerNetwork() == .gen4 {
+            if let username = Client.providers.accountProvider.token {
+                iKEv2Username = username
+            }
+            iKEv2Password = ikev2PasswordReference()
+        } else {
+            if let username = Client.providers.accountProvider.currentUser?.credentials.username {
+                iKEv2Username = username
+            }
+            iKEv2Password = configuration.passwordReference
         }
         
         let cfg = NEVPNProtocolIKEv2()
@@ -174,7 +186,7 @@ public class IKEv2Profile: NetworkExtensionProfile {
         cfg.remoteIdentifier = configuration.server.hostname
         cfg.localIdentifier = iKEv2Username
         cfg.username = iKEv2Username
-        cfg.passwordReference = configuration.passwordReference
+        cfg.passwordReference = iKEv2Password
         
         cfg.authenticationMethod = .none
         cfg.disconnectOnSleep = false
@@ -196,4 +208,55 @@ public class IKEv2Profile: NetworkExtensionProfile {
 
         return cfg
     }
+}
+
+extension IKEv2Profile {
+    
+    private func getGEN4IKEv2PasswordReference() -> Data? {
+        
+        var query = [String: Any]()
+        query[kSecClass as String] = kSecClassGenericPassword
+        query[kSecAttrAccount as String] = Self.ikeV2Gen4Password
+        query[kSecMatchLimit as String] = kSecMatchLimitOne
+        query[kSecReturnPersistentRef as String] = true
+        
+        var result: AnyObject?
+        let status = SecItemCopyMatching(query as CFDictionary, &result)
+        guard (status == errSecSuccess) else {
+            return nil
+        }
+        guard let data = result as? Data else {
+            return nil
+        }
+        return data
+
+    }
+    
+    /**
+     Gets a password reference for GEN4 IKEv2 .
+
+     - Returns: The password reference for the GEN4 IKEv2 protocol.
+     **/
+    public func ikev2PasswordReference() -> Data? {
+        
+        guard let reference = getGEN4IKEv2PasswordReference() else {
+            
+            var query = [String: Any]()
+            query[kSecClass as String] = kSecClassGenericPassword
+            query[kSecAttrAccount as String] = Self.ikeV2Gen4Password
+            query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
+            query[kSecValueData as String] = Self.ikeV2Gen4Password.data(using: .utf8)
+        
+            SecItemAdd(query as CFDictionary, nil)
+            
+            query.removeAll()
+
+            return getGEN4IKEv2PasswordReference()
+
+        }
+        
+        return reference
+        
+    }
+    
 }
