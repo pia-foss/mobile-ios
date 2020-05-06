@@ -70,7 +70,7 @@ class QuickConnectTile: UIView, Tileable {
     }
     
     @objc private func updateQuickConnectList() {
-        let historicalServers = Client.providers.serverProvider.historicalServers
+        let historicalServers = Client.providers.serverProvider.historicalServers.filter { $0.serverNetwork == Client.configuration.currentServerNetwork() }
         for containerView in stackView.subviews {
             if let button = containerView.subviews.first as? ServerButton,
                 let favoriteImage = containerView.subviews.last as? UIImageView {

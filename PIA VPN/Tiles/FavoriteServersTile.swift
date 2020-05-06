@@ -70,7 +70,7 @@ class FavoriteServersTile: UIView, Tileable {
     }
     
     @objc private func updateFavoriteList() {
-        var currentServers = Client.providers.serverProvider.currentServers
+        var currentServers = Client.providers.serverProvider.currentServers.filter { $0.serverNetwork == Client.configuration.currentServerNetwork() }
         currentServers.append(Server.automatic)
         for containerView in stackView.subviews {
             if let button = containerView.subviews.first as? ServerButton {
