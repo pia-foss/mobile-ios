@@ -1094,7 +1094,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchServersNetwork
             cell.selectionStyle = .none
-            switchServersNetwork.isOn = Client.configuration.currentServerNetwork() == Client.ServersNetwork.gen4
+            switchServersNetwork.isOn = Client.configuration.currentServerNetwork() == ServersNetwork.gen4
 
         case .mace:
             cell.textLabel?.text = L10n.Settings.ApplicationSettings.Mace.title
