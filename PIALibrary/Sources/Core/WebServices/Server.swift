@@ -242,13 +242,12 @@ extension Server {
             default:
                 return []
             }
-        }
-        
-        if let pingAddress = pingAddress {
+        } else if let pingAddress = pingAddress {
             return [pingAddress]
         } else {
             return []
         }
+        
 
     }
     

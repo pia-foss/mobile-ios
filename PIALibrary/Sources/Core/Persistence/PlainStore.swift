@@ -35,11 +35,14 @@ protocol PlainStore: class {
     var publicIP: String? { get set }
 
     // MARK: Server
+    
     var historicalServers: [Server] { get set }
 
     var cachedServers: [Server] { get set }
     
     var preferredServer: Server? { get set }
+    
+    var serverNetwork: Client.ServersNetwork { get set }
     
     func ping(forServerIdentifier serverIdentifier: String) -> Int?
     

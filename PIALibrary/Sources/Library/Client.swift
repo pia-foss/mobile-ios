@@ -82,6 +82,12 @@ public final class Client {
         VPNDaemon.shared.enableUpdates()
     }
     
+    public static func resetServers() {
+        ServersPinger.shared.reset()
+        ServersDaemon.shared.reset()
+        ServersDaemon.shared.enableUpdates()
+    }
+    
     /**
      Refresh the list of plan products
      */

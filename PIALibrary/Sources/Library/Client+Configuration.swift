@@ -25,7 +25,7 @@ import Alamofire
 
 extension Client {
     
-    public enum ServersNetwork {
+    public enum ServersNetwork: String {
         case legacy
         case gen4
     }
@@ -160,7 +160,7 @@ extension Client {
         /// Store the account password in memory when the email is set and the user is LoggedIn.
         public var tempAccountPassword: String
 
-        /// Set the server network to use.
+        /// The server network to use.
         private(set) var serverNetwork: ServersNetwork
 
         // MARK: Initialization
@@ -184,7 +184,7 @@ extension Client {
 
             webTimeout = 10000
             
-            fallbackServerIdentifier = "us-east"
+            fallbackServerIdentifier = "de-frankfurt"
             enablesServerUpdates = false
             defaultServersConfiguration = ServersBundle.Configuration(
                 ovpnPorts: ServersBundle.Configuration.Ports(
@@ -236,7 +236,7 @@ extension Client {
             
             maxQuickConnectServers = 6
             tempAccountPassword = ""
-            serverNetwork = .gen4
+            serverNetwork = Client.database.plain.serverNetwork
             
             if let publicKey = database.secure.publicKeyEntry() {
                 self.publicKey = publicKey
@@ -370,6 +370,11 @@ extension Client {
         
         public func setServerNetworks(to serverNetwork: ServersNetwork) {
             self.serverNetwork = serverNetwork
+            Client.database.plain.serverNetwork = serverNetwork
+        }
+        
+        public func currentServerNetwork() -> ServersNetwork {
+            return Client.database.plain.serverNetwork
         }
         
 //        public init(name: String) {

@@ -29,11 +29,19 @@ private let log = SwiftyBeaver.self
 class ServersPinger: DatabaseAccess {
     static let shared = ServersPinger()
 
-    private var pingQueues: [String: DispatchQueue] = [:]
-    
+    private var pendingPings: [PingTask] = []
+
     private var isPinging = false
+    
+    private var dispatchQueue: DispatchQueue!
 
     func ping(withDestinations destinations: [Server]) {
+        
+        if dispatchQueue != nil {
+            log.warning("Skip pinging, the queue is still waiting to finish the tasks.")
+            return
+        }
+
         guard !isPinging else {
             log.warning("Skip pinging, latest attempt still pending completion")
             return
@@ -49,72 +57,50 @@ class ServersPinger: DatabaseAccess {
             pingableServers.append(server)
         }
         var remainingServers: Set<Server> = Set(pingableServers)
+        
+        dispatchQueue = DispatchQueue(label: "com.privateinternetaccess.ping-server", qos: .userInteractive, attributes: [], autoreleaseFrequency: .workItem, target: nil)
 
         for server in pingableServers {
-            let queue: DispatchQueue
-            if let existingQueue = pingQueues[server.identifier] {
-                queue = existingQueue
-            } else {
-                queue = DispatchQueue(label: "ServersPinger-\(server.identifier)")
-                pingQueues[server.identifier] = queue
-            }
 
             log.verbose("Pinging \(server.identifier)")
 
             for address in server.bestPingAddress() {
-                let completionBlock: (Int?) -> Void = { (time) in
-                    DispatchQueue.main.async {
-                        if let responseTime = time {
-                            server.updateResponseTime(responseTime, forAddress: address)
-                            persistence.setPing(responseTime, forServerIdentifier: server.identifier)
+
+                let pingTask = PingTask(identifier: server.identifier, server: server, address: address, stateUpdateHandler: { (task) in
+                    DispatchQueue.main.async { [unowned self] in
+                        
+                        guard let index = self.pendingPings.indexOfTaskWith(identifier: server.identifier) else {
+                            return
                         }
-                        remainingServers.remove(server)
-                        if remainingServers.isEmpty {
-                            persistence.serializePings()
-                            self.isPinging = false
-                            Macros.postNotification(.PIADaemonsDidPingServers)
+                        
+                        switch task.state {
+                        case .completed:
+                            self.pendingPings.remove(at: index)
+                            if self.pendingPings.isEmpty {
+                                self.accessedDatabase.plain.serializePings()
+                                self.reset()
+                                Macros.postNotification(.PIADaemonsDidPingServers)
+                            }
+                        default:
+                            break
                         }
                     }
-                }
-
-                queue.async { [weak self] in
-                    
-                    var response: Int?
-
-                    if Client.configuration.serverNetwork == .gen4 {
-                        server.icmpPing(toAddress: address, withCompletion: { duration in
-                            response = duration
-                            self?.parsePingResponse(response: response, withServer: server, andCompletionBlock: completionBlock)
-                        })
-                    } else {
-                        response = server.ping(toAddress: address, withProtocol: .UDP)
-                        self?.parsePingResponse(response: response, withServer: server, andCompletionBlock: completionBlock)
-                    }
-                    
-                }
+                })
+                pendingPings.append(pingTask)
 
             }
         }
-    }
-    
-    private func parsePingResponse(response: Int?, withServer server: Server, andCompletionBlock completionBlock: (Int?) -> Void) {
         
-        guard let responseTime = response else {
-            log.warning("Error/timeout from \(server.identifier)")
-            completionBlock(nil)
-            return
+        pendingPings.forEach {
+            $0.startTask(queue: dispatchQueue)
         }
 
-        // discard biased pings
-        guard (self.accessedDatabase.transient.vpnStatus == .disconnected) else {
-            log.warning("Discarded VPN-biased response from \(server.identifier): \(responseTime)")
-            completionBlock(nil)
-            return
-        }
-
-        log.debug("Response time from \(server.identifier): \(responseTime)")
-        completionBlock(responseTime)
-
+    }
+        
+    func reset() {
+        pendingPings.removeAll()
+        isPinging = false
+        dispatchQueue = nil
     }
 }
 
