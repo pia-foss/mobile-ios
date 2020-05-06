@@ -725,6 +725,12 @@ internal enum L10n {
         internal static let warning = L10n.tr("Localizable", "settings.nmt.wireguard.warning")
       }
     }
+    internal enum Preview {
+      /// Be the first using the new PIA features...
+      internal static let footer = L10n.tr("Localizable", "settings.preview.footer")
+      /// Preview
+      internal static let title = L10n.tr("Localizable", "settings.preview.title")
+    }
     internal enum Reset {
       /// This will reset all of the above settings to default.
       internal static let footer = L10n.tr("Localizable", "settings.reset.footer")
@@ -741,6 +747,12 @@ internal enum L10n {
           /// Reset settings
           internal static let title = L10n.tr("Localizable", "settings.reset.defaults.confirm.title")
         }
+      }
+    }
+    internal enum Server {
+      internal enum Network {
+        /// Use next generation network
+        internal static let description = L10n.tr("Localizable", "settings.server.network.description")
       }
     }
     internal enum Small {

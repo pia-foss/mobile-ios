@@ -72,6 +72,8 @@ enum Setting: Int {
     case connectShortcut
 
     case disconnectShortcut
+    
+    case serversNetwork
 
     case contentBlockerState
     
@@ -145,6 +147,8 @@ class SettingsViewController: AutolayoutViewController {
         case reset
 
         case development
+        
+        case preview
     }
 
     private static let allSections: [Section] = [
@@ -156,7 +160,8 @@ class SettingsViewController: AutolayoutViewController {
         .autoConnectSettings,
         .applicationInformation,
         .reset,
-        .contentBlocker
+        .contentBlocker,
+        .preview
     ]
 
     private var visibleSections: [Section] = []
@@ -193,6 +198,9 @@ class SettingsViewController: AutolayoutViewController {
         .reset: [
             .resetSettings
         ],
+        .preview: [
+            .serversNetwork
+        ],
         .development: [
 //            .truncateDebugLog,
 //            .recalculatePingTimes,
@@ -226,6 +234,8 @@ class SettingsViewController: AutolayoutViewController {
     private lazy var switchDarkMode = UISwitch()
         
     private lazy var switchSmallPackets = UISwitch()
+
+    private lazy var switchServersNetwork = UISwitch()
 
     private lazy var imvSelectedOption = UIImageView(image: Asset.accessorySelected.image)
 
@@ -283,6 +293,7 @@ class SettingsViewController: AutolayoutViewController {
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
         switchDarkMode.addTarget(self, action: #selector(toggleDarkMode(_:)), for: .valueChanged)
         switchSmallPackets.addTarget(self, action: #selector(toggleSmallPackets(_:)), for: .valueChanged)
+        switchServersNetwork.addTarget(self, action: #selector(toggleServerNetwork(_:)), for: .valueChanged)
         redisplaySettings()
 
         NotificationCenter.default.addObserver(self,
@@ -373,6 +384,11 @@ class SettingsViewController: AutolayoutViewController {
     @objc private func toggleSmallPackets(_ sender: UISwitch) {
         AppPreferences.shared.useSmallPackets = sender.isOn
         savePreferences()
+    }
+    
+    @objc private func toggleServerNetwork(_ sender: UISwitch) {
+        Client.configuration.setServerNetworks(to: sender.isOn ? .gen4 : .legacy)
+        Client.resetServers()
     }
 
     @objc private func showContentBlockerTutorial() {
@@ -688,7 +704,7 @@ class SettingsViewController: AutolayoutViewController {
         if #available(iOS 12.0, *) {
             rowsBySection[.applicationSettings]?.insert(contentsOf: [.connectShortcut, .disconnectShortcut], at: 0)
         }
-        
+
         if (pendingPreferences.vpnType == PIATunnelProfile.vpnType) {
             rowsBySection[.smallPackets] = [.useSmallPackets]
         } else {
@@ -857,6 +873,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .reset:
             return L10n.Settings.Reset.title
 
+        case .preview:
+            return L10n.Settings.Preview.title
+
         case .development:
             return "DEVELOPMENT"
         }
@@ -894,7 +913,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 
             case .reset:
                 cell.textLabel?.text = L10n.Settings.Reset.footer
-                
+            
+            case .preview:
+                cell.textLabel?.text = L10n.Settings.Preview.footer
+
             case .contentBlocker:
                 cell.textLabel?.text = L10n.Settings.ContentBlocker.footer
                 
@@ -1066,6 +1088,13 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryView = switchPersistent
             cell.selectionStyle = .none
             switchPersistent.isOn = pendingPreferences.isPersistentConnection
+
+        case .serversNetwork:
+            cell.textLabel?.text = L10n.Settings.Server.Network.description
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchServersNetwork
+            cell.selectionStyle = .none
+            switchServersNetwork.isOn = Client.configuration.currentServerNetwork() == Client.ServersNetwork.gen4
 
         case .mace:
             cell.textLabel?.text = L10n.Settings.ApplicationSettings.Mace.title
