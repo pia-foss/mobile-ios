@@ -105,7 +105,8 @@ class GlossServer: GlossParser {
                             wireGuardAddressesForUDP: wgServerAddressIP,
                             iKEv2AddressesForUDP: ikev2ServerAddressIP,
                             pingAddress: pingAddress,
-                            responseTime: 0)
+                            responseTime: 0,
+                            serverNetwork: .gen4)
             
             if let autoRegion: Bool = "auto_region" <~~ json {
                 parsed.isAutomatic = autoRegion

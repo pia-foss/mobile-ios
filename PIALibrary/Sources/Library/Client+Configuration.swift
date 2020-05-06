@@ -25,11 +25,6 @@ import Alamofire
 
 extension Client {
     
-    public enum ServersNetwork: String {
-        case legacy
-        case gen4
-    }
-
     /// Encapsulates internal and public parameters of the client. When not specified otherwise, time intervals are in milliseconds.
     public final class Configuration {
 
