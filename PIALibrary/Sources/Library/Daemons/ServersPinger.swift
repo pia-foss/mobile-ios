@@ -54,14 +54,16 @@ class ServersPinger: DatabaseAccess {
         for server in destinations {
             pingableServers.append(server)
         }
-        var remainingServers: Set<Server> = Set(pingableServers)
         
-        let dispatchQueue = DispatchQueue(label: "com.privateinternetaccess.ping-server", qos: .userInitiated)
+        let dispatchQueue = DispatchQueue(label: "com.privateinternetaccess.ping-server", attributes: .concurrent)
+        
+        let icmpPingsGroup = DispatchGroup()
+        let serialQueue = DispatchQueue(label: "com.privateinternetaccess.icmpping-server")
 
         for server in pingableServers {
 
             log.verbose("Pinging \(server.identifier)")
-
+            
             for address in server.bestPingAddress() {
 
                 let pingTask = PingTask(identifier: server.identifier, server: server, address: address, stateUpdateHandler: { (task) in
@@ -90,8 +92,14 @@ class ServersPinger: DatabaseAccess {
             }
         }
         
+        let dispatchSemaphore = DispatchSemaphore(value: 0)
+
         pendingPings.forEach {
-            $0.startTask(queue: dispatchQueue)
+            if Client.configuration.serverNetwork == ServersNetwork.legacy {
+                $0.startTask(queue: dispatchQueue)
+            } else {
+                $0.startTask(queue: serialQueue, semaphore: dispatchSemaphore)
+            }
         }
 
     }
@@ -108,15 +116,16 @@ extension Server {
         return Macros.ping(withProtocol: protocolType, hostname: address.hostname, port: address.port)
     }
     
-    func icmpPing(toAddress address:Address, withCompletion completionBlock: @escaping (Int?) -> ()) {
-        Macros.icmpPing(hostname: address.hostname, port: address.port, completionBlock: completionBlock)
+    func icmpPing(toAddress address:Address, semaphore: DispatchSemaphore? = nil, withCompletion completionBlock: @escaping (Int?) -> ()) {
+        Macros.icmpPing(hostname: address.hostname, port: address.port, semaphore: semaphore, completionBlock: completionBlock)
     }
-    
+
     func ping(withProtocol protocolType: PingerProtocol) -> Int? {
         guard let address = pingAddress else {
             return nil
         }
         return Macros.ping(withProtocol: protocolType, hostname: address.hostname, port: address.port)
     }
+    
 }
 

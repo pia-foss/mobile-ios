@@ -45,7 +45,7 @@ class PingTask {
         self.stateUpdateHandler = stateUpdateHandler
     }
     
-    func startTask(queue: DispatchQueue) {
+    func startTask(queue: DispatchQueue, semaphore: DispatchSemaphore? = nil) {
         queue.async() { [weak self] in
                         
             var response: Int?
@@ -57,31 +57,30 @@ class PingTask {
             }
             
             if Client.configuration.serverNetwork == .gen4 {
-                self?.server.icmpPing(toAddress: address, withCompletion: { duration in
+                log.debug("Starting to Ping \(server.identifier) with address: \(address.hostname)")
+                
+                self?.server.icmpPing(toAddress: address, semaphore: semaphore, withCompletion: { duration in
                     if Client.configuration.serverNetwork == .gen4 {
                         response = duration
                         self?.parsePingResponse(response: response, withServer: server)
                         if let responseTime = response {
-                            DispatchQueue.main.async {
-                                server.updateResponseTime(responseTime, forAddress: address)
-                                persistence.setPing(responseTime, forServerIdentifier: server.identifier)
-                            }
+                            server.updateResponseTime(responseTime, forAddress: address)
+                            persistence.setPing(responseTime, forServerIdentifier: server.identifier)
                         }
                     }
                     //Discard result if the server network changed waiting to the response
                     self?.state = .completed
-
                 })
             } else {
                 response = server.ping(toAddress: address, withProtocol: .UDP)
-                self?.parsePingResponse(response: response, withServer: server)
-                if let responseTime = response {
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    self?.parsePingResponse(response: response, withServer: server)
+                    if let responseTime = response {
                         server.updateResponseTime(responseTime, forAddress: address)
                         persistence.setPing(responseTime, forServerIdentifier: server.identifier)
                     }
+                    self?.state = .completed
                 }
-                self?.state = .completed
             }
             
         }
