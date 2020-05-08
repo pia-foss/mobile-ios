@@ -82,6 +82,11 @@ class QuickConnectTile: UIView, Tileable {
                 favoriteImage.isHidden = true
             }
         }
+        
+        let favoriteServers = Client.configuration.currentServerNetwork() == .gen4 ?
+            AppPreferences.shared.favoriteServerIdentifiersGen4 :
+            AppPreferences.shared.favoriteServerIdentifiers
+
         for (index, server) in historicalServers.enumerated().reversed()  {
             let buttonIndex = historicalServers.count - (index + 1)
             let view = stackView.subviews[buttonIndex]
@@ -93,7 +98,7 @@ class QuickConnectTile: UIView, Tileable {
                 button.isUserInteractionEnabled = true
                 button.server = server
                 button.accessibilityLabel = server.description
-                favoriteImage.isHidden = !AppPreferences.shared.favoriteServerIdentifiers.contains(server.identifier)
+                favoriteImage.isHidden = !favoriteServers.contains(server.identifier)
                 if status != .normal { //only when edit mode 
                     favoriteImage.isHidden = true
                 }

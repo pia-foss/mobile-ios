@@ -52,16 +52,28 @@ extension Server: Favoritable, PropertyStoring {
 
     func favorite() {
         self.isFavorite = true
-        var currentFavorites = AppPreferences.shared.favoriteServerIdentifiers
-        currentFavorites.append(self.identifier)
-        AppPreferences.shared.favoriteServerIdentifiers = currentFavorites
+        if Client.configuration.currentServerNetwork() == .gen4 {
+            var currentFavorites = AppPreferences.shared.favoriteServerIdentifiersGen4
+            currentFavorites.append(self.identifier)
+            AppPreferences.shared.favoriteServerIdentifiersGen4 = currentFavorites
+        } else {
+            var currentFavorites = AppPreferences.shared.favoriteServerIdentifiers
+            currentFavorites.append(self.identifier)
+            AppPreferences.shared.favoriteServerIdentifiers = currentFavorites
+        }
     }
     
     func unfavorite() {
         self.isFavorite = false
-        let currentFavorites = AppPreferences.shared.favoriteServerIdentifiers
-        let filteredFavorites = currentFavorites.filter({$0 != self.identifier})
-        AppPreferences.shared.favoriteServerIdentifiers = filteredFavorites
+        if Client.configuration.currentServerNetwork() == .gen4 {
+            let currentFavorites = AppPreferences.shared.favoriteServerIdentifiersGen4
+            let filteredFavorites = currentFavorites.filter({$0 != self.identifier})
+            AppPreferences.shared.favoriteServerIdentifiersGen4 = filteredFavorites
+        } else {
+            let currentFavorites = AppPreferences.shared.favoriteServerIdentifiers
+            let filteredFavorites = currentFavorites.filter({$0 != self.identifier})
+            AppPreferences.shared.favoriteServerIdentifiers = filteredFavorites
+        }
     }
     
 }

@@ -51,7 +51,8 @@ class AppPreferences {
         static let useSmallPackets = "UseSmallPackets"
 
         static let favoriteServerIdentifiers = "FavoriteServerIdentifiers"
-        
+        static let favoriteServerIdentifiersGen4 = "FavoriteServerIdentifiersGen4"
+
         static let regionFilter = "RegionFilter"
 
         static let useConnectSiriShortcuts = "UseConnectSiriShortcuts"
@@ -171,6 +172,19 @@ class AppPreferences {
             defaults.set(newValue, forKey: Entries.favoriteServerIdentifiers)
         }
     }
+    
+    var favoriteServerIdentifiersGen4: [String] {
+        get {
+            if let serverIdentifiers = defaults.array(forKey: Entries.favoriteServerIdentifiersGen4) as? [String] {
+                return serverIdentifiers
+            }
+            return []
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.favoriteServerIdentifiersGen4)
+        }
+    }
+
 
     var regionFilter: RegionFilter {
         get {
@@ -319,6 +333,7 @@ class AppPreferences {
             Entries.launched: false,
             Entries.regionFilter: RegionFilter.name.rawValue,
             Entries.favoriteServerIdentifiers: [],
+            Entries.favoriteServerIdentifiersGen4: [],
             Entries.didAskToEnableNotifications: false,
             Entries.themeCode: ThemeCode.light.rawValue,
             Entries.useConnectSiriShortcuts: false,
@@ -419,6 +434,7 @@ class AppPreferences {
         piaHandshake = .rsa2048
         piaSocketType = nil
         favoriteServerIdentifiers = []
+        favoriteServerIdentifiersGen4 = []
         optOutAskDisconnectVPNUsingNMT = false
         useConnectSiriShortcuts = false
         useDisconnectSiriShortcuts = false
@@ -443,6 +459,7 @@ class AppPreferences {
         piaHandshake = .rsa2048
         piaSocketType = nil
         favoriteServerIdentifiers = []
+        favoriteServerIdentifiersGen4 = []
         optOutAskDisconnectVPNUsingNMT = false
         useConnectSiriShortcuts = false
         useDisconnectSiriShortcuts = false
