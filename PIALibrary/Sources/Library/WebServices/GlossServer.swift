@@ -38,6 +38,11 @@ class GlossServer: GlossParser {
         guard let hostname: String = "dns" <~~ json else {
             return nil
         }
+        
+        var internalServerNetwork: ServersNetwork?
+        if let serverNetwork: String = "internal_server_network" <~~ json { //We need this tmp key when storing the server in userdefault as json
+            internalServerNetwork = ServersNetwork(rawValue: serverNetwork)
+        }
 
         if Client.configuration.serverNetwork == .gen4 {
             
@@ -106,7 +111,7 @@ class GlossServer: GlossParser {
                             iKEv2AddressesForUDP: ikev2ServerAddressIP,
                             pingAddress: pingAddress,
                             responseTime: 0,
-                            serverNetwork: .gen4)
+                            serverNetwork: internalServerNetwork ?? .gen4)
             
             if let autoRegion: Bool = "auto_region" <~~ json {
                 parsed.isAutomatic = autoRegion
@@ -144,7 +149,8 @@ class GlossServer: GlossParser {
                 hostname: hostname,
                 bestOpenVPNAddressForTCP: ovpnTCPAddress,
                 bestOpenVPNAddressForUDP: ovpnUDPAddress,
-                pingAddress: pingAddress
+                pingAddress: pingAddress,
+                serverNetwork: internalServerNetwork ?? .legacy
             )
             
         }
@@ -167,7 +173,8 @@ extension Server: JSONEncodable {
             "openvpn_udp" ~~> jsonify([
                 "best" ~~> bestOpenVPNAddressForUDP?.description
             ]),
-            "ping" ~~> pingAddress?.description
+            "ping" ~~> pingAddress?.description,
+            "internal_server_network" ~~> serverNetwork?.rawValue
         ])
     }
 }
