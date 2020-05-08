@@ -56,8 +56,6 @@ class ServersPinger: DatabaseAccess {
         }
         
         let dispatchQueue = DispatchQueue(label: "com.privateinternetaccess.ping-server", attributes: .concurrent)
-        
-        let icmpPingsGroup = DispatchGroup()
         let serialQueue = DispatchQueue(label: "com.privateinternetaccess.icmpping-server")
 
         for server in pingableServers {
