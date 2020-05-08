@@ -23,9 +23,6 @@
 
 import Foundation
 import PIALibrary
-import SwiftyBeaver
-
-private let log = SwiftyBeaver.self
 
 class FavoriteServersTile: UIView, Tileable {
     
@@ -95,8 +92,6 @@ class FavoriteServersTile: UIView, Tileable {
                 favServers.append(server)
             }
         }
-        
-        log.debug(favServers)
 
         for (index, server) in favServers.enumerated() where index < stackView.subviews.count {
             let view = stackView.subviews[index]
