@@ -387,6 +387,17 @@ class SettingsViewController: AutolayoutViewController {
     }
     
     @objc private func toggleServerNetwork(_ sender: UISwitch) {
+        
+        guard Client.providers.vpnProvider.vpnStatus == .disconnected else {
+            sender.setOn(!sender.isOn, animated: true)
+            let title = ""
+            let message = "You should be disconnected to change the server network"
+            let alert = Macros.alert(title, message)
+            alert.addDefaultAction(L10n.Global.ok)
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+
         self.showLoadingAnimation()
         let currentValue = Client.configuration.currentServerNetwork()
         Client.configuration.setServerNetworks(to: sender.isOn ? .gen4 : .legacy)
@@ -401,6 +412,7 @@ class SettingsViewController: AutolayoutViewController {
                 self.tableView.reloadData()
             }
         })
+        
     }
 
     @objc private func showContentBlockerTutorial() {
