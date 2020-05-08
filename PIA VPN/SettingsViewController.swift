@@ -560,7 +560,7 @@ class SettingsViewController: AutolayoutViewController {
         pendingVPNAction = pendingPreferences.requiredVPNAction()
 
         guard let action = pendingVPNAction else {
-            commitPreferences()
+            commitAppPreferences()
             completionHandler()
             return
         }
@@ -645,16 +645,13 @@ class SettingsViewController: AutolayoutViewController {
         completionHandlerAfterVPNAction(false)
     }
     
-    private func commitPreferences() {
+    private func commitAppPreferences() {
         AppPreferences.shared.piaSocketType = pendingOpenVPNSocketType
         AppPreferences.shared.piaHandshake = pendingHandshake
-        //Update with values from Trusted Network Settings
-        pendingPreferences.trustedNetworks = Client.preferences.trustedNetworks
-        pendingPreferences.nmtRulesEnabled = Client.preferences.nmtRulesEnabled
-        pendingPreferences.availableNetworks = Client.preferences.availableNetworks
-        pendingPreferences.shouldConnectForAllNetworks = Client.preferences.shouldConnectForAllNetworks
-        pendingPreferences.useWiFiProtection = Client.preferences.useWiFiProtection
-        pendingPreferences.trustCellularData = Client.preferences.trustCellularData
+    }
+    
+    private func commitPreferences() {
+        commitAppPreferences()
         pendingPreferences.commit()
     }
     
