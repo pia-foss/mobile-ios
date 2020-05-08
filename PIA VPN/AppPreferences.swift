@@ -35,9 +35,7 @@ class AppPreferences {
         static let version = "Version"
         
         static let launched = "Launched" // discard 2.2 key and invert logic
-        
-        static let seenContentBlocker = "SeenContentBlocker"
-        
+                
         static let didAskToEnableNotifications = "DidAskToEnableNotifications"
 
         static let themeCode = "Theme" // reuse 2.2 key
@@ -88,15 +86,6 @@ class AppPreferences {
         }
         set {
             defaults.set(newValue, forKey: Entries.launched)
-        }
-    }
-    
-    var didSeeContentBlocker: Bool {
-        get {
-            return defaults.bool(forKey: Entries.seenContentBlocker)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.seenContentBlocker)
         }
     }
     
@@ -453,6 +442,8 @@ class AppPreferences {
         quickSettingNetworkToolVisible = true
         quickSettingPrivateBrowserVisible = true
         useSmallPackets = false
+        Client.configuration.setServerNetworks(to: .legacy)
+        Client.resetServers(completionBlock: {_ in })
     }
     
     func clean() {
@@ -476,6 +467,8 @@ class AppPreferences {
         useSmallPackets = false
         let preferences = Client.preferences.editable().reset()
         preferences.commit()
+        Client.configuration.setServerNetworks(to: .legacy)
+        Client.resetServers(completionBlock: {_ in })
     }
     
 //    + (void)eraseForTesting;

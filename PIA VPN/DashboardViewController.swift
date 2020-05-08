@@ -138,20 +138,7 @@ class DashboardViewController: AutolayoutViewController {
         guard Client.providers.accountProvider.isLoggedIn else {
             return
         }
-        if Flags.shared.enablesContentBlockerSetting {
-            guard AppPreferences.shared.didSeeContentBlocker else {
-                AppPreferences.shared.didSeeContentBlocker = true
-                let alert = Macros.alert(
-                    L10n.Settings.ContentBlocker.title,
-                    L10n.Dashboard.ContentBlocker.Intro.message
-                )
-                alert.addActionWithTitle(L10n.Global.ok) {
-                }
-                present(alert, animated: true, completion: nil)
-                return
-            }
-        }
-    
+
         if TransientState.shouldDisplayRegionPicker {
             TransientState.shouldDisplayRegionPicker = false
             selectRegion(animated: false)
