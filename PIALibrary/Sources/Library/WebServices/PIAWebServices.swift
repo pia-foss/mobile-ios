@@ -240,7 +240,12 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     #endif
     
     func downloadServers(_ callback: ((ServersBundle?, Error?) -> Void)?) {
-        let endpoint = VPNEndpoint.servers
+        
+        guard let endpoint = Client.configuration.serverNetwork == .gen4 ? ServerEndpoint.gen4 as? Endpoint : VPNEndpoint.servers as? Endpoint else {
+            callback?(nil, ClientError.unsupported)
+            return
+        }
+        
         let status = [200]
         let parameters: JSON = [
             "os": "ios",

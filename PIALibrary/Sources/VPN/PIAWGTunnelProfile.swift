@@ -242,7 +242,7 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
             cfg.disconnectOnSleep = configuration.disconnectsOnSleep
 
             cfg.providerConfiguration = [PIAWireguardConfiguration.Keys.token: Client.providers.accountProvider.token,
-                                         PIAWireguardConfiguration.Keys.ping: configuration.server.pingAddress?.description,
+                                         PIAWireguardConfiguration.Keys.ping: configuration.server.bestPingAddress().first?.description,
                                          PIAWireguardConfiguration.Keys.serial: configuration.server.serial] 
 
             var customCfg = configuration.customConfiguration

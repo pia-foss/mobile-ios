@@ -24,7 +24,7 @@ import Foundation
 import Alamofire
 
 extension Client {
-
+    
     /// Encapsulates internal and public parameters of the client. When not specified otherwise, time intervals are in milliseconds.
     public final class Configuration {
 
@@ -155,6 +155,9 @@ extension Client {
         /// Store the account password in memory when the email is set and the user is LoggedIn.
         public var tempAccountPassword: String
 
+        /// The server network to use.
+        private(set) var serverNetwork: ServersNetwork
+
         // MARK: Initialization
         
         init() {
@@ -176,12 +179,20 @@ extension Client {
 
             webTimeout = 10000
             
-            fallbackServerIdentifier = "us-east"
+            fallbackServerIdentifier = "de-frankfurt"
             enablesServerUpdates = false
             defaultServersConfiguration = ServersBundle.Configuration(
-                vpnPorts: ServersBundle.Configuration.Ports(
+                ovpnPorts: ServersBundle.Configuration.Ports(
                     udp: [8080],
                     tcp: [80]
+                ),
+                wgPorts: ServersBundle.Configuration.Ports(
+                    udp: [1337],
+                    tcp: []
+                ),
+                ikev2Ports: ServersBundle.Configuration.Ports(
+                    udp: [500, 4500],
+                    tcp: []
                 ),
                 latestVersion: 60,
                 pollInterval: 600000,
@@ -220,6 +231,7 @@ extension Client {
             
             maxQuickConnectServers = 6
             tempAccountPassword = ""
+            serverNetwork = Client.database.plain.serverNetwork
             
             if let publicKey = database.secure.publicKeyEntry() {
                 self.publicKey = publicKey
@@ -350,6 +362,15 @@ extension Client {
         }
         
         #endif
+        
+        public func setServerNetworks(to serverNetwork: ServersNetwork) {
+            self.serverNetwork = serverNetwork
+            Client.database.plain.serverNetwork = serverNetwork
+        }
+        
+        public func currentServerNetwork() -> ServersNetwork {
+            return Client.database.plain.serverNetwork
+        }
         
 //        public init(name: String) {
 //            guard let path = Bundle.main.path(forResource: name, ofType: "plist") else {
