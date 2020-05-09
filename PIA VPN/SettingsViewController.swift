@@ -390,9 +390,8 @@ class SettingsViewController: AutolayoutViewController {
         
         guard Client.providers.vpnProvider.vpnStatus == .disconnected else {
             sender.setOn(!sender.isOn, animated: true)
-            let title = ""
-            let message = "You should be disconnected to change the server network"
-            let alert = Macros.alert(title, message)
+            let message = L10n.Settings.Server.Network.alert
+            let alert = Macros.alert(nil, message)
             alert.addDefaultAction(L10n.Global.ok)
             self.present(alert, animated: true, completion: nil)
             return

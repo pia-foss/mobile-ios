@@ -157,6 +157,7 @@
 "settings.preview.title" = "Preview";
 "settings.preview.footer" = "Be the first using the new PIA features...";
 "settings.server.network.description" = "Use next generation network";
+"settings.server.network.alert" = "The VPN has to be disconnected to change the server network.";
 
 // CONTENT BLOCKER
 
