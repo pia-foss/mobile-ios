@@ -42,7 +42,7 @@ protocol PlainStore: class {
     
     var preferredServer: Server? { get set }
     
-    var serverNetwork: Client.ServersNetwork { get set }
+    var serverNetwork: ServersNetwork { get set }
     
     func ping(forServerIdentifier serverIdentifier: String) -> Int?
     

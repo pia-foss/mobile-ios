@@ -129,6 +129,8 @@ public class Server: Hashable {
     /// The best server IPs for establishing an IKEv2 connection over UDP.
     public let iKEv2AddressesForUDP: [ServerAddressIP]?
     
+    public let serverNetwork: ServersNetwork?
+    
     /// The address on which to "ping" the server.
     ///
     /// - Seealso: `Macros.ping(...)`
@@ -149,7 +151,8 @@ public class Server: Hashable {
         wireGuardAddressesForUDP: [ServerAddressIP]? = nil,
         iKEv2AddressesForUDP: [ServerAddressIP]? = nil,
         pingAddress: Address?,
-        responseTime: Int? = 0) {
+        responseTime: Int? = 0,
+        serverNetwork: ServersNetwork? = .legacy) {
         
         self.serial = serial
         self.name = name
@@ -165,7 +168,8 @@ public class Server: Hashable {
         self.iKEv2AddressesForUDP = iKEv2AddressesForUDP
 
         self.pingAddress = pingAddress
-        
+        self.serverNetwork = serverNetwork
+
         isAutomatic = true
     }
     

@@ -82,10 +82,10 @@ public final class Client {
         VPNDaemon.shared.enableUpdates()
     }
     
-    public static func resetServers() {
+    public static func resetServers(completionBlock: @escaping (Error?) -> Void) {
         ServersPinger.shared.reset()
         ServersDaemon.shared.reset()
-        ServersDaemon.shared.enableUpdates()
+        ServersDaemon.shared.forceUpdates(completionBlock: completionBlock)
     }
     
     /**

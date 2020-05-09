@@ -135,7 +135,7 @@ class GlossServersBundle: GlossParser {
         self.init(json: json)
     }
 
-    convenience init?(jsonData: Data, forServerNetwork network: Client.ServersNetwork) {
+    convenience init?(jsonData: Data, forServerNetwork network: ServersNetwork) {
         guard let anyJSON = try? JSONSerialization.jsonObject(with: jsonData, options: []), let json = anyJSON as? JSON else {
             return nil
         }
@@ -157,7 +157,7 @@ class GlossServersBundle: GlossParser {
         
     }
     
-    public init?(json: JSON, forServerNetwork network: Client.ServersNetwork) {
+    public init?(json: JSON, forServerNetwork network: ServersNetwork) {
         
         // Init configuration object
         parsed = ServersBundle(servers: [], configuration: nil)

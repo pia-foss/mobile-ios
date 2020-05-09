@@ -60,20 +60,20 @@ extension Macros {
         return pinger.sendPing() as? Int
     }
     
-    public static func icmpPing(hostname: String, port: UInt16, completionBlock: @escaping (Int?) -> ()) {
+    public static func icmpPing(hostname: String, port: UInt16, semaphore: DispatchSemaphore? = nil, completionBlock: @escaping (Int?) -> ()) {
         
-        guard let pinger = ICMPPing(host: hostname, configuration: PingConfiguration(interval: TimeInterval(60), with: TimeInterval(180)), queue: DispatchQueue.main) else {
+        guard let pinger = try? ICMPPing(ipv4Address: hostname, config: PingConfiguration(), queue: pingerQueue) else {
             completionBlock(nil)
             return
         }
         
-        pingers.append(pinger)
-        pinger.observer = { ping, response in
-            ping.stop()
-            pingers.removeAll(where: {$0.host == pinger.host})
+        pinger.observer = { response in
+            semaphore?.signal()
             completionBlock(Int(response.duration * 1000))
         }
-        pinger.start()
+        pinger.targetCount = 1
+        pinger.startPinging()
+        semaphore?.wait()
 
     }
     

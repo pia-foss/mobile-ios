@@ -32,13 +32,11 @@ class ServersPinger: DatabaseAccess {
     private var pendingPings: [PingTask] = []
 
     private var isPinging = false
-    
-    private var dispatchQueue: DispatchQueue!
 
     func ping(withDestinations destinations: [Server]) {
         
-        if dispatchQueue != nil {
-            log.warning("Skip pinging, the queue is still waiting to finish the tasks.")
+        guard (accessedDatabase.transient.vpnStatus == .disconnected) else {
+            log.debug("Not pinging servers while on VPN, will try on next update")
             return
         }
 
@@ -56,43 +54,50 @@ class ServersPinger: DatabaseAccess {
         for server in destinations {
             pingableServers.append(server)
         }
-        var remainingServers: Set<Server> = Set(pingableServers)
         
-        dispatchQueue = DispatchQueue(label: "com.privateinternetaccess.ping-server", qos: .userInteractive, attributes: [], autoreleaseFrequency: .workItem, target: nil)
+        let dispatchQueue = DispatchQueue(label: "com.privateinternetaccess.ping-server", attributes: .concurrent)
+        let serialQueue = DispatchQueue(label: "com.privateinternetaccess.icmpping-server")
 
         for server in pingableServers {
 
             log.verbose("Pinging \(server.identifier)")
-
+            
             for address in server.bestPingAddress() {
 
                 let pingTask = PingTask(identifier: server.identifier, server: server, address: address, stateUpdateHandler: { (task) in
-                    DispatchQueue.main.async { [unowned self] in
-                        
-                        guard let index = self.pendingPings.indexOfTaskWith(identifier: server.identifier) else {
-                            return
-                        }
-                        
-                        switch task.state {
-                        case .completed:
-                            self.pendingPings.remove(at: index)
-                            if self.pendingPings.isEmpty {
+                    
+                    guard let index = self.pendingPings.indexOfTaskWith(identifier: server.identifier) else {
+                        return
+                    }
+                    
+                    switch task.state {
+                    case .completed:
+                        self.pendingPings.remove(at: index)
+                        if self.pendingPings.isEmpty {
+                            DispatchQueue.main.async { [unowned self] in
                                 self.accessedDatabase.plain.serializePings()
                                 self.reset()
                                 Macros.postNotification(.PIADaemonsDidPingServers)
                             }
-                        default:
-                            break
                         }
+                    default:
+                        break
                     }
+
                 })
                 pendingPings.append(pingTask)
 
             }
         }
         
+        let dispatchSemaphore = DispatchSemaphore(value: 0)
+
         pendingPings.forEach {
-            $0.startTask(queue: dispatchQueue)
+            if Client.configuration.serverNetwork == ServersNetwork.legacy {
+                $0.startTask(queue: dispatchQueue)
+            } else {
+                $0.startTask(queue: serialQueue, semaphore: dispatchSemaphore)
+            }
         }
 
     }
@@ -100,7 +105,6 @@ class ServersPinger: DatabaseAccess {
     func reset() {
         pendingPings.removeAll()
         isPinging = false
-        dispatchQueue = nil
     }
 }
 
@@ -110,15 +114,16 @@ extension Server {
         return Macros.ping(withProtocol: protocolType, hostname: address.hostname, port: address.port)
     }
     
-    func icmpPing(toAddress address:Address, withCompletion completionBlock: @escaping (Int?) -> ()) {
-        Macros.icmpPing(hostname: address.hostname, port: address.port, completionBlock: completionBlock)
+    func icmpPing(toAddress address:Address, semaphore: DispatchSemaphore? = nil, withCompletion completionBlock: @escaping (Int?) -> ()) {
+        Macros.icmpPing(hostname: address.hostname, port: address.port, semaphore: semaphore, completionBlock: completionBlock)
     }
-    
+
     func ping(withProtocol protocolType: PingerProtocol) -> Int? {
         guard let address = pingAddress else {
             return nil
         }
         return Macros.ping(withProtocol: protocolType, hostname: address.hostname, port: address.port)
     }
+    
 }
 

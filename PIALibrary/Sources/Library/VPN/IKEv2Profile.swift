@@ -28,9 +28,7 @@ private let log = SwiftyBeaver.self
 
 /// Implementation of `VPNProfile` providing IKEv2 connectivity.
 public class IKEv2Profile: NetworkExtensionProfile {
-    
-    private static let ikeV2Gen4Password = "sesame"
-    
+        
     private var currentVPN: NEVPNManager {
         return NEVPNManager.shared()
     }
@@ -216,7 +214,7 @@ extension IKEv2Profile {
         
         var query = [String: Any]()
         query[kSecClass as String] = kSecClassGenericPassword
-        query[kSecAttrAccount as String] = Self.ikeV2Gen4Password
+        query[kSecAttrAccount as String] = Client.providers.accountProvider.token 
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         query[kSecReturnPersistentRef as String] = true
         
@@ -241,15 +239,19 @@ extension IKEv2Profile {
         
         guard let reference = getGEN4IKEv2PasswordReference() else {
             
-            var query = [String: Any]()
-            query[kSecClass as String] = kSecClassGenericPassword
-            query[kSecAttrAccount as String] = Self.ikeV2Gen4Password
-            query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
-            query[kSecValueData as String] = Self.ikeV2Gen4Password.data(using: .utf8)
-        
-            SecItemAdd(query as CFDictionary, nil)
-            
-            query.removeAll()
+            if let token = Client.providers.accountProvider.token {
+                
+                    var query = [String: Any]()
+                    query[kSecClass as String] = kSecClassGenericPassword
+                    query[kSecAttrAccount as String] = token
+                    query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
+                    query[kSecValueData as String] = token.data(using: .utf8)
+                
+                    SecItemAdd(query as CFDictionary, nil)
+                    
+                    query.removeAll()
+
+            }
 
             return getGEN4IKEv2PasswordReference()
 
