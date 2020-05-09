@@ -387,8 +387,31 @@ class SettingsViewController: AutolayoutViewController {
     }
     
     @objc private func toggleServerNetwork(_ sender: UISwitch) {
+        
+        guard Client.providers.vpnProvider.vpnStatus == .disconnected else {
+            sender.setOn(!sender.isOn, animated: true)
+            let message = L10n.Settings.Server.Network.alert
+            let alert = Macros.alert(nil, message)
+            alert.addDefaultAction(L10n.Global.ok)
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+
+        self.showLoadingAnimation()
+        let currentValue = Client.configuration.currentServerNetwork()
         Client.configuration.setServerNetworks(to: sender.isOn ? .gen4 : .legacy)
-        Client.resetServers()
+        Client.resetServers(completionBlock: { error in
+            self.hideLoadingAnimation()
+            if error == nil {
+                NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
+                object: self,
+                userInfo: nil)
+            } else {
+                Client.configuration.setServerNetworks(to: currentValue)
+                self.tableView.reloadData()
+            }
+        })
+        
     }
 
     @objc private func showContentBlockerTutorial() {
@@ -536,7 +559,7 @@ class SettingsViewController: AutolayoutViewController {
         pendingVPNAction = pendingPreferences.requiredVPNAction()
 
         guard let action = pendingVPNAction else {
-            commitPreferences()
+            commitAppPreferences()
             completionHandler()
             return
         }
@@ -621,16 +644,13 @@ class SettingsViewController: AutolayoutViewController {
         completionHandlerAfterVPNAction(false)
     }
     
-    private func commitPreferences() {
+    private func commitAppPreferences() {
         AppPreferences.shared.piaSocketType = pendingOpenVPNSocketType
         AppPreferences.shared.piaHandshake = pendingHandshake
-        //Update with values from Trusted Network Settings
-        pendingPreferences.trustedNetworks = Client.preferences.trustedNetworks
-        pendingPreferences.nmtRulesEnabled = Client.preferences.nmtRulesEnabled
-        pendingPreferences.availableNetworks = Client.preferences.availableNetworks
-        pendingPreferences.shouldConnectForAllNetworks = Client.preferences.shouldConnectForAllNetworks
-        pendingPreferences.useWiFiProtection = Client.preferences.useWiFiProtection
-        pendingPreferences.trustCellularData = Client.preferences.trustCellularData
+    }
+    
+    private func commitPreferences() {
+        commitAppPreferences()
         pendingPreferences.commit()
     }
     
@@ -1094,7 +1114,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchServersNetwork
             cell.selectionStyle = .none
-            switchServersNetwork.isOn = Client.configuration.currentServerNetwork() == Client.ServersNetwork.gen4
+            switchServersNetwork.isOn = Client.configuration.currentServerNetwork() == ServersNetwork.gen4
 
         case .mace:
             cell.textLabel?.text = L10n.Settings.ApplicationSettings.Mace.title

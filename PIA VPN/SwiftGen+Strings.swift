@@ -751,6 +751,8 @@ internal enum L10n {
     }
     internal enum Server {
       internal enum Network {
+        /// The VPN has to be disconnected to change the server network.
+        internal static let alert = L10n.tr("Localizable", "settings.server.network.alert")
         /// Use next generation network
         internal static let description = L10n.tr("Localizable", "settings.server.network.description")
       }
