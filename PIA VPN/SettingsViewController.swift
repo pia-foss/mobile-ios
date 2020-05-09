@@ -72,6 +72,8 @@ enum Setting: Int {
     case connectShortcut
 
     case disconnectShortcut
+    
+    case serversNetwork
 
     case contentBlockerState
     
@@ -145,6 +147,8 @@ class SettingsViewController: AutolayoutViewController {
         case reset
 
         case development
+        
+        case preview
     }
 
     private static let allSections: [Section] = [
@@ -156,7 +160,8 @@ class SettingsViewController: AutolayoutViewController {
         .autoConnectSettings,
         .applicationInformation,
         .reset,
-        .contentBlocker
+        .contentBlocker,
+        .preview
     ]
 
     private var visibleSections: [Section] = []
@@ -193,6 +198,9 @@ class SettingsViewController: AutolayoutViewController {
         .reset: [
             .resetSettings
         ],
+        .preview: [
+            .serversNetwork
+        ],
         .development: [
 //            .truncateDebugLog,
 //            .recalculatePingTimes,
@@ -226,6 +234,8 @@ class SettingsViewController: AutolayoutViewController {
     private lazy var switchDarkMode = UISwitch()
         
     private lazy var switchSmallPackets = UISwitch()
+
+    private lazy var switchServersNetwork = UISwitch()
 
     private lazy var imvSelectedOption = UIImageView(image: Asset.accessorySelected.image)
 
@@ -283,6 +293,7 @@ class SettingsViewController: AutolayoutViewController {
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
         switchDarkMode.addTarget(self, action: #selector(toggleDarkMode(_:)), for: .valueChanged)
         switchSmallPackets.addTarget(self, action: #selector(toggleSmallPackets(_:)), for: .valueChanged)
+        switchServersNetwork.addTarget(self, action: #selector(toggleServerNetwork(_:)), for: .valueChanged)
         redisplaySettings()
 
         NotificationCenter.default.addObserver(self,
@@ -373,6 +384,34 @@ class SettingsViewController: AutolayoutViewController {
     @objc private func toggleSmallPackets(_ sender: UISwitch) {
         AppPreferences.shared.useSmallPackets = sender.isOn
         savePreferences()
+    }
+    
+    @objc private func toggleServerNetwork(_ sender: UISwitch) {
+        
+        guard Client.providers.vpnProvider.vpnStatus == .disconnected else {
+            sender.setOn(!sender.isOn, animated: true)
+            let message = L10n.Settings.Server.Network.alert
+            let alert = Macros.alert(nil, message)
+            alert.addDefaultAction(L10n.Global.ok)
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+
+        self.showLoadingAnimation()
+        let currentValue = Client.configuration.currentServerNetwork()
+        Client.configuration.setServerNetworks(to: sender.isOn ? .gen4 : .legacy)
+        Client.resetServers(completionBlock: { error in
+            self.hideLoadingAnimation()
+            if error == nil {
+                NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
+                object: self,
+                userInfo: nil)
+            } else {
+                Client.configuration.setServerNetworks(to: currentValue)
+                self.tableView.reloadData()
+            }
+        })
+        
     }
 
     @objc private func showContentBlockerTutorial() {
@@ -520,7 +559,7 @@ class SettingsViewController: AutolayoutViewController {
         pendingVPNAction = pendingPreferences.requiredVPNAction()
 
         guard let action = pendingVPNAction else {
-            commitPreferences()
+            commitAppPreferences()
             completionHandler()
             return
         }
@@ -605,16 +644,13 @@ class SettingsViewController: AutolayoutViewController {
         completionHandlerAfterVPNAction(false)
     }
     
-    private func commitPreferences() {
+    private func commitAppPreferences() {
         AppPreferences.shared.piaSocketType = pendingOpenVPNSocketType
         AppPreferences.shared.piaHandshake = pendingHandshake
-        //Update with values from Trusted Network Settings
-        pendingPreferences.trustedNetworks = Client.preferences.trustedNetworks
-        pendingPreferences.nmtRulesEnabled = Client.preferences.nmtRulesEnabled
-        pendingPreferences.availableNetworks = Client.preferences.availableNetworks
-        pendingPreferences.shouldConnectForAllNetworks = Client.preferences.shouldConnectForAllNetworks
-        pendingPreferences.useWiFiProtection = Client.preferences.useWiFiProtection
-        pendingPreferences.trustCellularData = Client.preferences.trustCellularData
+    }
+    
+    private func commitPreferences() {
+        commitAppPreferences()
         pendingPreferences.commit()
     }
     
@@ -688,7 +724,7 @@ class SettingsViewController: AutolayoutViewController {
         if #available(iOS 12.0, *) {
             rowsBySection[.applicationSettings]?.insert(contentsOf: [.connectShortcut, .disconnectShortcut], at: 0)
         }
-        
+
         if (pendingPreferences.vpnType == PIATunnelProfile.vpnType) {
             rowsBySection[.smallPackets] = [.useSmallPackets]
         } else {
@@ -857,6 +893,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .reset:
             return L10n.Settings.Reset.title
 
+        case .preview:
+            return L10n.Settings.Preview.title
+
         case .development:
             return "DEVELOPMENT"
         }
@@ -894,7 +933,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 
             case .reset:
                 cell.textLabel?.text = L10n.Settings.Reset.footer
-                
+            
+            case .preview:
+                cell.textLabel?.text = L10n.Settings.Preview.footer
+
             case .contentBlocker:
                 cell.textLabel?.text = L10n.Settings.ContentBlocker.footer
                 
@@ -1067,6 +1109,13 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.selectionStyle = .none
             switchPersistent.isOn = pendingPreferences.isPersistentConnection
 
+        case .serversNetwork:
+            cell.textLabel?.text = L10n.Settings.Server.Network.description
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchServersNetwork
+            cell.selectionStyle = .none
+            switchServersNetwork.isOn = Client.configuration.currentServerNetwork() == ServersNetwork.gen4
+
         case .mace:
             cell.textLabel?.text = L10n.Settings.ApplicationSettings.Mace.title
             cell.detailTextLabel?.text = nil
@@ -1206,7 +1255,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             guard let socketType = pendingOpenVPNSocketType else {
                 break
             }
-            let availablePorts = Client.providers.serverProvider.currentServersConfiguration.vpnPorts
+            let availablePorts = Client.providers.serverProvider.currentServersConfiguration.ovpnPorts
             var options = (socketType == .udp) ? availablePorts.udp : availablePorts.tcp
             options.insert(SettingsViewController.AUTOMATIC_PORT, at: 0)
             controller = OptionsViewController()
@@ -1548,7 +1597,7 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             var newProtocols: [EndpointProtocol] = []
 
             if let socketType = optSocketType {
-                let ports = (socketType == .udp) ? serversCfg.vpnPorts.udp : serversCfg.vpnPorts.tcp
+                let ports = (socketType == .udp) ? serversCfg.ovpnPorts.udp : serversCfg.ovpnPorts.tcp
                 if currentProtocols?.count == 1, let currentPort = pendingOpenVPNConfiguration?.currentPort, ports.contains(currentPort) {
                     newProtocols.append(EndpointProtocol(socketType, currentPort))
                 } else {
@@ -1582,12 +1631,12 @@ extension SettingsViewController: OptionsViewControllerDelegate {
                     newProtocols = AppConfiguration.VPN.piaAutomaticProtocols
                 }
                 else if (pendingOpenVPNSocketType == .udp) {
-                    for port in serversCfg.vpnPorts.udp {
+                    for port in serversCfg.ovpnPorts.udp {
                         newProtocols.append(EndpointProtocol(.udp, port))
                     }
                 }
                 else if (pendingOpenVPNSocketType == .tcp) {
-                    for port in serversCfg.vpnPorts.tcp {
+                    for port in serversCfg.ovpnPorts.tcp {
                         newProtocols.append(EndpointProtocol(.tcp, port))
                     }
                 }

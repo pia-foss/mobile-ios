@@ -54,7 +54,10 @@ class RegionsViewController: AutolayoutViewController {
             servers.append(contentsOf: customServers)
         }
         
-        let favoriteServers = AppPreferences.shared.favoriteServerIdentifiers
+        let favoriteServers = Client.configuration.currentServerNetwork() == .gen4 ?
+            AppPreferences.shared.favoriteServerIdentifiersGen4 :
+            AppPreferences.shared.favoriteServerIdentifiers
+        
         for server in servers {
             server.isFavorite = favoriteServers.contains(server.identifier)
         }
@@ -185,8 +188,8 @@ class RegionsViewController: AutolayoutViewController {
         default:
             self.servers = self.servers.sorted(by: { $0.isFavorite && !$1.isFavorite })
         }
-        tableView.reloadData()
         self.servers.insert(Server.automatic, at: 0)
+        tableView.reloadData()
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
 
