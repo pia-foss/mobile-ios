@@ -154,6 +154,11 @@
 
 "settings.log.connected.error" = "A VPN connection is required. Please connect to the VPN and retry.";
 
+"settings.preview.title" = "Preview";
+"settings.preview.footer" = "Be the first using the new PIA features...";
+"settings.server.network.description" = "Use next generation network";
+"settings.server.network.alert" = "The VPN has to be disconnected to change the server network.";
+
 // CONTENT BLOCKER
 
 "content_blocker.title" = "Content Blocker";

@@ -35,9 +35,7 @@ class AppPreferences {
         static let version = "Version"
         
         static let launched = "Launched" // discard 2.2 key and invert logic
-        
-        static let seenContentBlocker = "SeenContentBlocker"
-        
+                
         static let didAskToEnableNotifications = "DidAskToEnableNotifications"
 
         static let themeCode = "Theme" // reuse 2.2 key
@@ -51,7 +49,8 @@ class AppPreferences {
         static let useSmallPackets = "UseSmallPackets"
 
         static let favoriteServerIdentifiers = "FavoriteServerIdentifiers"
-        
+        static let favoriteServerIdentifiersGen4 = "FavoriteServerIdentifiersGen4"
+
         static let regionFilter = "RegionFilter"
 
         static let useConnectSiriShortcuts = "UseConnectSiriShortcuts"
@@ -87,15 +86,6 @@ class AppPreferences {
         }
         set {
             defaults.set(newValue, forKey: Entries.launched)
-        }
-    }
-    
-    var didSeeContentBlocker: Bool {
-        get {
-            return defaults.bool(forKey: Entries.seenContentBlocker)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.seenContentBlocker)
         }
     }
     
@@ -171,6 +161,19 @@ class AppPreferences {
             defaults.set(newValue, forKey: Entries.favoriteServerIdentifiers)
         }
     }
+    
+    var favoriteServerIdentifiersGen4: [String] {
+        get {
+            if let serverIdentifiers = defaults.array(forKey: Entries.favoriteServerIdentifiersGen4) as? [String] {
+                return serverIdentifiers
+            }
+            return []
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.favoriteServerIdentifiersGen4)
+        }
+    }
+
 
     var regionFilter: RegionFilter {
         get {
@@ -319,6 +322,7 @@ class AppPreferences {
             Entries.launched: false,
             Entries.regionFilter: RegionFilter.name.rawValue,
             Entries.favoriteServerIdentifiers: [],
+            Entries.favoriteServerIdentifiersGen4: [],
             Entries.didAskToEnableNotifications: false,
             Entries.themeCode: ThemeCode.light.rawValue,
             Entries.useConnectSiriShortcuts: false,
@@ -419,6 +423,7 @@ class AppPreferences {
         piaHandshake = .rsa2048
         piaSocketType = nil
         favoriteServerIdentifiers = []
+        favoriteServerIdentifiersGen4 = []
         optOutAskDisconnectVPNUsingNMT = false
         useConnectSiriShortcuts = false
         useDisconnectSiriShortcuts = false
@@ -437,12 +442,15 @@ class AppPreferences {
         quickSettingNetworkToolVisible = true
         quickSettingPrivateBrowserVisible = true
         useSmallPackets = false
+        Client.configuration.setServerNetworks(to: .legacy)
+        Client.resetServers(completionBlock: {_ in })
     }
     
     func clean() {
         piaHandshake = .rsa2048
         piaSocketType = nil
         favoriteServerIdentifiers = []
+        favoriteServerIdentifiersGen4 = []
         optOutAskDisconnectVPNUsingNMT = false
         useConnectSiriShortcuts = false
         useDisconnectSiriShortcuts = false
@@ -459,6 +467,8 @@ class AppPreferences {
         useSmallPackets = false
         let preferences = Client.preferences.editable().reset()
         preferences.commit()
+        Client.configuration.setServerNetworks(to: .legacy)
+        Client.resetServers(completionBlock: {_ in })
     }
     
 //    + (void)eraseForTesting;
