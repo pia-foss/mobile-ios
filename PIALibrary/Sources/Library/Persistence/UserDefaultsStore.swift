@@ -72,6 +72,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         static let trustedNetworks = "TrustedNetworks"
         
+        static let serverNetwork = "ServerNetwork"
+
         static let nmtRulesEnabled = "NMTRulesEnabled"
 
         static let ikeV2IntegrityAlgorithm = "IKEV2IntegrityAlgorithm"
@@ -297,12 +299,30 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
     
+    var serverNetwork: ServersNetwork {
+        get {
+            let network = backend.string(forKey: Entries.serverNetwork)
+            return ServersNetwork(rawValue: network ?? "") ?? ServersNetwork.legacy
+        }
+        set {
+            backend.set(newValue.rawValue, forKey: Entries.serverNetwork)
+        }
+    }
+    
     func ping(forServerIdentifier serverIdentifier: String) -> Int? {
         return pingByServerIdentifier[serverIdentifier]
     }
     
     func setPing(_ ping: Int, forServerIdentifier serverIdentifier: String) {
-        pingByServerIdentifier[serverIdentifier] = ping
+        
+        if let currentResponseTime = pingByServerIdentifier[serverIdentifier]{
+            if currentResponseTime > ping {
+                pingByServerIdentifier[serverIdentifier] = ping
+            }
+        } else {
+            pingByServerIdentifier[serverIdentifier] = ping
+        }
+
     }
     
     func serializePings() {
@@ -471,6 +491,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.authMigrationSuccess)
         backend.removeObject(forKey: Entries.ikeV2IntegrityAlgorithm)
         backend.removeObject(forKey: Entries.ikeV2EncryptionAlgorithm)
+        backend.removeObject(forKey: Entries.serverNetwork)
         backend.synchronize()
     }
 

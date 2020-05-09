@@ -25,6 +25,9 @@ import Foundation
 /// A set of useful methods for internal and consumer development.
 public class Macros {
 
+    /// Array of ICMP pinger queue
+    static let pingerQueue = DispatchQueue(label: "com.privateinternetaccess.icmp-ping-server", attributes: .concurrent)
+    
     /**
      Returns a short version string.
      

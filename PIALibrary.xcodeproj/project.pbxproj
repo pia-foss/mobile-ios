@@ -262,6 +262,10 @@
 		DD1AB10523FC280000396E74 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1AB10423FC280000396E74 /* DeviceModel.swift */; };
 		DD22D23B22F4292B00DFFB6C /* FriendReferralTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD22D23A22F4292B00DFFB6C /* FriendReferralTests.swift */; };
 		DD22D23C22F4292B00DFFB6C /* FriendReferralTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD22D23A22F4292B00DFFB6C /* FriendReferralTests.swift */; };
+		DD2683E42460227700C65DAA /* ICMPPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2683E32460227700C65DAA /* ICMPPing.swift */; };
+		DD2683E52460227700C65DAA /* ICMPPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2683E32460227700C65DAA /* ICMPPing.swift */; };
+		DD2683E924617F0300C65DAA /* PingTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2683E824617F0300C65DAA /* PingTask.swift */; };
+		DD2683EA24617F0300C65DAA /* PingTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2683E824617F0300C65DAA /* PingTask.swift */; };
 		DD31498F21834B3F008E26E8 /* GetStartedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD31498E21834B3F008E26E8 /* GetStartedViewController.swift */; };
 		DD314990218350D1008E26E8 /* SwiftGen+ScenesStoryboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC812472176166500CB290C /* SwiftGen+ScenesStoryboards.swift */; };
 		DD314991218350D1008E26E8 /* SwiftGen+SeguesStoryboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC81249217617F900CB290C /* SwiftGen+SeguesStoryboards.swift */; };
@@ -280,6 +284,7 @@
 		DD76292921ECDFF80092DF50 /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD76292721ECDFF80092DF50 /* Usage.swift */; };
 		DD76292E21ECEC3F0092DF50 /* DataManipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD76292D21ECEC3F0092DF50 /* DataManipulation.swift */; };
 		DD76292F21ECEC3F0092DF50 /* DataManipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD76292D21ECEC3F0092DF50 /* DataManipulation.swift */; };
+		DD7AD3E12462EC7E00CDCE0F /* ServerNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7AD3E02462EC7E00CDCE0F /* ServerNetwork.swift */; };
 		DD86BAF121EF5B6D004A988F /* UIViewAutolayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD86BAF021EF5B6D004A988F /* UIViewAutolayout.swift */; };
 		DD8BF3CB219C6BAA0041357C /* ConfirmVPNPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8BF3CA219C6BAA0041357C /* ConfirmVPNPlanViewController.swift */; };
 		DD8C3E612327EF4C00BAD18E /* IKEv2IntegrityAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8C3E602327EF4C00BAD18E /* IKEv2IntegrityAlgorithm.swift */; };
@@ -571,6 +576,8 @@
 		DD1AB10223FAD83900396E74 /* WalkthroughPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkthroughPageView.swift; sourceTree = "<group>"; };
 		DD1AB10423FC280000396E74 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
 		DD22D23A22F4292B00DFFB6C /* FriendReferralTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendReferralTests.swift; sourceTree = "<group>"; };
+		DD2683E32460227700C65DAA /* ICMPPing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICMPPing.swift; sourceTree = "<group>"; };
+		DD2683E824617F0300C65DAA /* PingTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingTask.swift; sourceTree = "<group>"; };
 		DD31498E21834B3F008E26E8 /* GetStartedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStartedViewController.swift; sourceTree = "<group>"; };
 		DD36CB7D21CCFFFB00FC815A /* CAGradientLayer+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+Image.swift"; sourceTree = "<group>"; };
 		DD56E3F3225F5D22002EDFB2 /* GlossProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlossProduct.swift; sourceTree = "<group>"; };
@@ -584,6 +591,7 @@
 		DD7411A823EC35B40058CEF3 /* PIAWGTunnelProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAWGTunnelProfile.swift; sourceTree = "<group>"; };
 		DD76292721ECDFF80092DF50 /* Usage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usage.swift; sourceTree = "<group>"; };
 		DD76292D21ECEC3F0092DF50 /* DataManipulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManipulation.swift; sourceTree = "<group>"; };
+		DD7AD3E02462EC7E00CDCE0F /* ServerNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerNetwork.swift; sourceTree = "<group>"; };
 		DD86BAF021EF5B6D004A988F /* UIViewAutolayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewAutolayout.swift; sourceTree = "<group>"; };
 		DD8BF3CA219C6BAA0041357C /* ConfirmVPNPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmVPNPlanViewController.swift; sourceTree = "<group>"; };
 		DD8C3E602327EF4C00BAD18E /* IKEv2IntegrityAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IKEv2IntegrityAlgorithm.swift; sourceTree = "<group>"; };
@@ -673,6 +681,7 @@
 				DDD824E4218996CD00151709 /* Pages.swift */,
 				DD76292D21ECEC3F0092DF50 /* DataManipulation.swift */,
 				DD6FB0362224355600A84F05 /* UIDevice+WiFi.swift */,
+				DD2683E32460227700C65DAA /* ICMPPing.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -685,6 +694,7 @@
 				0E53A8461FE5BA0B000C2A18 /* ServersDaemon.swift */,
 				0E2ADCEF1FE09C6C00BB170C /* ServersPinger.swift */,
 				0E53A84C1FE5BB25000C2A18 /* VPNDaemon.swift */,
+				DD2683E824617F0300C65DAA /* PingTask.swift */,
 			);
 			path = Daemons;
 			sourceTree = "<group>";
@@ -827,6 +837,7 @@
 			isa = PBXGroup;
 			children = (
 				0E9D62D91FDEE3FE009A90CF /* ServerProvider.swift */,
+				DD7AD3E02462EC7E00CDCE0F /* ServerNetwork.swift */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -1646,6 +1657,7 @@
 				0E392D961FE316860002160D /* DebugLog.swift in Sources */,
 				0E7BC6EB1F96B1040035C8B2 /* PIAWebServices.swift in Sources */,
 				0E245C9E1FECF0C20010DEF2 /* ClientAccess.swift in Sources */,
+				DD2683EA24617F0300C65DAA /* PingTask.swift in Sources */,
 				0E9D62D21FDEBBC8009A90CF /* GlossServersBundle.swift in Sources */,
 				0E7BC6FB1F96B1120035C8B2 /* LibraryCallback.swift in Sources */,
 				0E3D13D41F9E270A00434A48 /* GlossAccountInfo.swift in Sources */,
@@ -1735,6 +1747,7 @@
 				0E9D62DE1FDEE45A009A90CF /* DefaultServerProvider.swift in Sources */,
 				DD8C3E652327EF6000BAD18E /* IKEv2EncryptionAlgorithm.swift in Sources */,
 				0EF14E4C1FEAE6350007485A /* Client+Providers.swift in Sources */,
+				DD2683E52460227700C65DAA /* ICMPPing.swift in Sources */,
 				0E7BC6E61F96B1000035C8B2 /* Client.swift in Sources */,
 				0E392D7E1FE2E4C10002160D /* MemoryStore.swift in Sources */,
 				DD76292921ECDFF80092DF50 /* Usage.swift in Sources */,
@@ -1759,6 +1772,7 @@
 				DD314991218350D1008E26E8 /* SwiftGen+SeguesStoryboards.swift in Sources */,
 				0EB8C0701F9CD38B005857E4 /* WelcomePageViewController.swift in Sources */,
 				DD0AC790218715B8009B576B /* PIAButton.swift in Sources */,
+				DD2683E42460227700C65DAA /* ICMPPing.swift in Sources */,
 				0EB8C0651F9CD38B005857E4 /* BorderedTextField.swift in Sources */,
 				DD76292E21ECEC3F0092DF50 /* DataManipulation.swift in Sources */,
 				DDFCFABA21E929660081F235 /* MockTileProvider.swift in Sources */,
@@ -1864,10 +1878,12 @@
 				0E3D13D31F9E270A00434A48 /* GlossAccountInfo.swift in Sources */,
 				0E245C9D1FECF0C20010DEF2 /* ClientAccess.swift in Sources */,
 				0EF14E4B1FEAE6350007485A /* Client+Providers.swift in Sources */,
+				DD2683E924617F0300C65DAA /* PingTask.swift in Sources */,
 				84577FC1213D9A23006DEC3D /* UIImage+Color.swift in Sources */,
 				0E38E4101FF81722008223AB /* Notification+UI.swift in Sources */,
 				0E392DA91FE329AD0002160D /* PlatformVPNLog.swift in Sources */,
 				0EB8C0481F9CCE07005857E4 /* Macros.swift in Sources */,
+				DD7AD3E12462EC7E00CDCE0F /* ServerNetwork.swift in Sources */,
 				84577FC3213D9AEA006DEC3D /* UITextField+PlaceholderColor.swift in Sources */,
 				0EFEB4C12007784A00F81029 /* PIATunnelProvider+Profile.swift in Sources */,
 				DD8C3E612327EF4C00BAD18E /* IKEv2IntegrityAlgorithm.swift in Sources */,

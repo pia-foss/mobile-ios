@@ -421,11 +421,15 @@ extension Client.Preferences {
             guard let target = target else {
                 return nil
             }
+
             var queue: [VPNAction] = []
             if (isPersistentConnection != target.isPersistentConnection) {
                 queue.append(VPNActionReinstall())
             }
             if (trustCellularData != target.trustCellularData) {
+                queue.append(VPNActionDisconnectAndReinstall())
+            }
+            if (availableNetworks != target.availableNetworks) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
             if (shouldConnectForAllNetworks != target.shouldConnectForAllNetworks) {

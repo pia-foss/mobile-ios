@@ -57,6 +57,34 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
 
         checkOutdatedServers()
     }
+    
+    func forceUpdates(completionBlock: @escaping (Error?) -> Void) {
+        
+        guard !hasEnabledUpdates else {
+            return
+        }
+        hasEnabledUpdates = true
+        let pollInterval = accessedDatabase.transient.serversConfiguration.pollInterval
+        accessedProviders.serverProvider.download { (servers, error) in
+            self.lastUpdateDate = Date()
+            log.debug("Servers updated on \(self.lastUpdateDate!), will repeat in \(pollInterval) milliseconds")
+            self.scheduleServersUpdate(withDelay: pollInterval)
+            
+            guard let servers = servers else {
+                completionBlock(error)
+                return
+            }
+            self.pingIfOffline(servers: servers)
+            completionBlock(error)
+        }
+
+    }
+    
+    func reset() {
+        lastUpdateDate = nil
+        lastPingDate = nil
+        hasEnabledUpdates = false
+    }
 
     @objc private func checkOutdatedServers() {
         let pollInterval = accessedDatabase.transient.serversConfiguration.pollInterval
@@ -129,11 +157,7 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
         }
         log.debug("Start pinging servers")
 
-        // XXX: add a little delay to work around broken iOS connectivity right
-        // after getting the network change notification
-        Macros.dispatch(after: .milliseconds(500)) {
-            ServersPinger.shared.ping(withDestinations: servers)
-        }
+        ServersPinger.shared.ping(withDestinations: servers)
     }
 
     // MARK: Notifications

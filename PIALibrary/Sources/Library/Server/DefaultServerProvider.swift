@@ -75,7 +75,8 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
 //            guard (avg < bestResponseTime) else {
 //                continue
 //            }
-        for server in currentServers {
+        let servers = currentServers.filter { $0.serverNetwork == Client.configuration.currentServerNetwork() }
+        for server in servers {
             guard let responseTime = accessedDatabase.plain.ping(forServerIdentifier: server.identifier) else {
                 continue
             }
