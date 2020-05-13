@@ -73,14 +73,6 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>iRate</string>
-			<key>Copyright</key>
-			<string>Copyright (C) 2011 Charcoal Design</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/nicklockwood/iRate/master/LICENCE.md</string>
-		</dict>
-		<dict>
-			<key>Name</key>
 			<string>TPKeyboardAvoiding</string>
 			<key>Copyright</key>
 			<string>Copyright (c) 2013 Michael Tyson</string>

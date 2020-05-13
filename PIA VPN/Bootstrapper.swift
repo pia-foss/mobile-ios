@@ -24,7 +24,6 @@ import Foundation
 import PIALibrary
 import TunnelKit
 import SwiftyBeaver
-import iRate
 import PIAWireguard
 #if PIA_DEV
 import AppCenter
@@ -174,15 +173,7 @@ class Bootstrapper {
         
         AccountObserver.shared.start()
         //        DataCounter.shared.startCounting()
-        
-        // Third parties
-        
-        let rater = iRate.sharedInstance()!
-        rater.usesUntilPrompt = AppConfiguration.Rating.usesUntilPrompt
-        rater.eventsUntilPrompt = AppConfiguration.Rating.eventsUntilPrompt
-        rater.daysUntilPrompt = AppConfiguration.Rating.daysUntilPrompt
-        rater.remindPeriod = AppConfiguration.Rating.remindPeriod
-        
+                
         // Notifications
         
         let nc = NotificationCenter.default
@@ -222,7 +213,7 @@ class Bootstrapper {
         guard (Client.providers.vpnProvider.vpnStatus == .connected) else {
             return
         }
-        iRate.sharedInstance()!.logEvent(false)
+        RatingManager.shared.logSuccessConnection()
     }
     
     @objc private func internetReachable(notification: Notification) {

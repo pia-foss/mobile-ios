@@ -47,7 +47,6 @@ end
 
 def app_pods
     shared_main_pods
-    pod 'iRate'
     pod 'TPKeyboardAvoiding'
     pod 'SideMenu', '6.1.3'
     pod 'DZNEmptyDataSet'

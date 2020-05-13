@@ -73,7 +73,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         return .allButUpsideDown
     }
     
-    private func topViewControllerWithRootViewController(rootViewController: UIViewController!) -> UIViewController? {
+    func topViewControllerWithRootViewController(rootViewController: UIViewController!) -> UIViewController? {
         if (rootViewController == nil) { return nil }
         if (rootViewController.isKind(of: UINavigationController.self)) {
             return topViewControllerWithRootViewController(rootViewController: (rootViewController as! UINavigationController).visibleViewController)
@@ -261,4 +261,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         }
     }
 
+}
+
+extension AppDelegate {
+
+    // MARK: - App Delegate Ref
+    class func delegate() -> AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    
 }
