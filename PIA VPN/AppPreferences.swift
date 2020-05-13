@@ -70,6 +70,12 @@ class AppPreferences {
         static let quickSettingNetworkToolVisible = "quickSettingNetworkToolVisible"
         static let quickSettingPrivateBrowserVisible = "quickSettingPrivateBrowserVisible"
 
+        // Rating Settings
+        static let successConnections = "successConnections"
+        static let failureConnections = "failureConnections"
+        static let canAskAgainForReview = "canAskAgainForReview"
+        static let lastRatingRejection = "lastRatingRejection"
+
     }
 
     static let shared = AppPreferences()
@@ -310,6 +316,42 @@ class AppPreferences {
             defaults.set(newValue, forKey: Entries.quickSettingPrivateBrowserVisible)
         }
     }
+    
+    var canAskAgainForReview: Bool{
+        get {
+            return defaults.bool(forKey: Entries.canAskAgainForReview)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.canAskAgainForReview)
+        }
+    }
+    
+    var successConnections: Int{
+        get {
+            return defaults.integer(forKey: Entries.successConnections)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.successConnections)
+        }
+    }
+
+    var failureConnections: Int{
+        get {
+            return defaults.integer(forKey: Entries.failureConnections)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.failureConnections)
+        }
+    }
+
+    var lastRatingRejection: Date? {
+        get {
+            return defaults.object(forKey: Entries.lastRatingRejection) as? Date
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.lastRatingRejection)
+        }
+    }
 
     private init() {
         guard let defaults = UserDefaults(suiteName: AppConstants.appGroup) else {
@@ -333,7 +375,10 @@ class AppPreferences {
             Entries.quickSettingKillswitchVisible: true,
             Entries.quickSettingNetworkToolVisible: true,
             Entries.quickSettingPrivateBrowserVisible: true,
-            Entries.useSmallPackets: false
+            Entries.useSmallPackets: false,
+            Entries.canAskAgainForReview: false,
+            Entries.successConnections: 0,
+            Entries.failureConnections: 0
         ])
     }
     
@@ -444,6 +489,7 @@ class AppPreferences {
         useSmallPackets = false
         Client.configuration.setServerNetworks(to: .legacy)
         Client.resetServers(completionBlock: {_ in })
+        failureConnections = 0
     }
     
     func clean() {
@@ -469,6 +515,7 @@ class AppPreferences {
         preferences.commit()
         Client.configuration.setServerNetworks(to: .legacy)
         Client.resetServers(completionBlock: {_ in })
+        failureConnections = 0
     }
     
 //    + (void)eraseForTesting;

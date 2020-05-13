@@ -24,11 +24,18 @@ import Foundation
 import PIALibrary
 
 struct AppConstants {
+    
+    static let appId = "955626407"
     static let teamId = "5357M5NW9W"
 
     static let appGroup = "group.com.privateinternetaccess"
     
     static let appCenterAppId = "a2397c42-40ac-48e8-97e6-7498f0df0e1a"
+    
+    struct Reviews {
+        static var appReviewUrl = "https://itunes.apple.com/app/id\(appId)?action=write-review"
+        static var feedbackUrl = "https://www.privateinternetaccess.com/helpdesk/new-ticket"
+    }
     
     struct Flags {
         static var developmentPath = Bundle.main.path(forResource: "Flags-dev", ofType: "plist")
@@ -75,7 +82,7 @@ struct AppConstants {
     struct Web {
         static let homeURL = URL(string: "https://www.privateinternetaccess.com/")!
 
-        static let supportURL = URL(string: "https://helpdesk.privateinternetaccess.com/")!
+        static let supportURL = URL(string: "https://www.privateinternetaccess.com/helpdesk")!
         
         static let privacyURL = URL(string: "https://www.privateinternetaccess.com/pages/privacy-policy/")!
 

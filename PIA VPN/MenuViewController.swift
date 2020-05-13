@@ -282,7 +282,8 @@ class MenuViewController: AutolayoutViewController {
         )
         alert.addCancelAction(L10n.Global.cancel)
         alert.addActionWithTitle(L10n.Menu.Renewal.renew) {
-            UIApplication.shared.openURL(AppConstants.Web.homeURL)
+            guard UIApplication.shared.canOpenURL(AppConstants.Web.homeURL) else { return }
+            UIApplication.shared.open(AppConstants.Web.homeURL, options: [:], completionHandler: nil)
         }
         present(alert, animated: true, completion: nil)
     }
@@ -512,15 +513,18 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
             let application = UIApplication.shared
             switch item {
             case .homepage:
-                application.openURL(AppConstants.Web.homeURL)
+                guard application.canOpenURL(AppConstants.Web.homeURL) else { return }
+                application.open(AppConstants.Web.homeURL, options: [:], completionHandler: nil)
                 return
 
             case .support:
-                application.openURL(AppConstants.Web.supportURL)
+                guard application.canOpenURL(AppConstants.Web.supportURL) else { return }
+                application.open(AppConstants.Web.supportURL, options: [:], completionHandler: nil)
                 return
 
             case .privacy:
-                application.openURL(AppConstants.Web.privacyURL)
+                guard application.canOpenURL(AppConstants.Web.privacyURL) else { return }
+                application.open(AppConstants.Web.privacyURL, options: [:], completionHandler: nil)
                 return
 
             default:

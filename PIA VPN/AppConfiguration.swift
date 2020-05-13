@@ -124,17 +124,11 @@ struct AppConfiguration {
 
     struct Rating {
 
-        // don't prompt on usage
-        static let usesUntilPrompt: UInt = .max
+        static let successConnectionsUntilPrompt: Int = 3
+        static let successConnectionsUntilPromptAgain: Int = 50
+        static let errorInConnectionsUntilPrompt: Int = 2
+        static let timeIntervalUntilPromptAgain: Double = 2592000
 
-        // prompt after 3 successful connections
-        static let eventsUntilPrompt: UInt = 3
-
-        // prompt after at least 3 days
-        static let daysUntilPrompt: Float = 3.0
-        
-        // prompt again after 1 day
-        static let remindPeriod: Float = 1.0
     }
 
     struct UI {

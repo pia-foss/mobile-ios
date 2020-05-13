@@ -443,6 +443,27 @@ internal enum L10n {
     }
   }
 
+  internal enum Rating {
+    internal enum Enjoy {
+      /// Are you enjoying PIA VPN?
+      internal static let question = L10n.tr("Localizable", "rating.enjoy.question")
+      /// We hope our VPN product is meeting your expectations
+      internal static let subtitle = L10n.tr("Localizable", "rating.enjoy.subtitle")
+    }
+    internal enum Problems {
+      /// What went wrong?
+      internal static let question = L10n.tr("Localizable", "rating.problems.question")
+      /// Do you want to give feedback? We can help you to improve your experience using PIA
+      internal static let subtitle = L10n.tr("Localizable", "rating.problems.subtitle")
+    }
+    internal enum Rate {
+      /// How about an AppStore review?
+      internal static let question = L10n.tr("Localizable", "rating.rate.question")
+      /// We appreciate if you can spend one moment of your time sharing your comments with us
+      internal static let subtitle = L10n.tr("Localizable", "rating.rate.subtitle")
+    }
+  }
+
   internal enum Region {
     internal enum Accessibility {
       /// Add a favorite region
