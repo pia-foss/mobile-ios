@@ -1059,6 +1059,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             if let encryptionAlgorithm = IKEv2EncryptionAlgorithm(rawValue: pendingPreferences.ikeV2EncryptionAlgorithm) {
                 cell.detailTextLabel?.text = encryptionAlgorithm.description()
             } else {
+                pendingPreferences.ikeV2EncryptionAlgorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm.rawValue
                 cell.detailTextLabel?.text = IKEv2EncryptionAlgorithm.defaultAlgorithm.description()
             }
             if !Flags.shared.enablesEncryptionSettings {
@@ -1340,6 +1341,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
             if let encryptionAlgorithm = IKEv2EncryptionAlgorithm(rawValue: pendingPreferences.ikeV2EncryptionAlgorithm) {
                 options = encryptionAlgorithm.integrityAlgorithms()
+            } else {
+                options = IKEv2EncryptionAlgorithm.defaultAlgorithm.integrityAlgorithms()
             }
             
             controller = OptionsViewController()
@@ -1686,7 +1689,11 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             let rawEncryption = option as! String
             pendingPreferences.ikeV2EncryptionAlgorithm = rawEncryption
             //reset integrity algorithm if the encryption changes
-            if let integrity = IKEv2EncryptionAlgorithm(rawValue: rawEncryption)?.integrityAlgorithms().first {
+            var algorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm
+            if let currentAlgorithm = IKEv2EncryptionAlgorithm(rawValue: rawEncryption) {
+                algorithm = currentAlgorithm
+            }
+            if let integrity = algorithm.integrityAlgorithms().first {
                 pendingPreferences.ikeV2IntegrityAlgorithm = integrity.rawValue
             }
         case .ikeV2IntegrityAlgorithm:
