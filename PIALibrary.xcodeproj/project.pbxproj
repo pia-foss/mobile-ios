@@ -305,6 +305,10 @@
 		DDD824E72189C0E800151709 /* BrandableNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E62189C0E800151709 /* BrandableNavigationBar.swift */; };
 		DDD824E82189C0EE00151709 /* BrandableNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E62189C0E800151709 /* BrandableNavigationBar.swift */; };
 		DDD824EA2189CD5700151709 /* NavigationLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E92189CD5700151709 /* NavigationLogoView.swift */; };
+		DDD93E40246D914F0031460F /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = DDD93E3E246D914F0031460F /* SimplePing.m */; };
+		DDD93E41246D914F0031460F /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = DDD93E3E246D914F0031460F /* SimplePing.m */; };
+		DDD93E42246D914F0031460F /* SimplePing.h in Headers */ = {isa = PBXBuildFile; fileRef = DDD93E3F246D914F0031460F /* SimplePing.h */; };
+		DDD93E43246D914F0031460F /* SimplePing.h in Headers */ = {isa = PBXBuildFile; fileRef = DDD93E3F246D914F0031460F /* SimplePing.h */; };
 		DDE27E0422E1B1A700503A89 /* ProductTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE27E0322E1B1A700503A89 /* ProductTests.swift */; };
 		DDF7F73F2405846800A671C7 /* PIAWGTunnelProvider+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF7F73E2405846800A671C7 /* PIAWGTunnelProvider+Profile.swift */; };
 		DDFCFAA821E924A70081F235 /* TileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFAA721E924A70081F235 /* TileProvider.swift */; };
@@ -607,6 +611,8 @@
 		DDD824E4218996CD00151709 /* Pages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pages.swift; sourceTree = "<group>"; };
 		DDD824E62189C0E800151709 /* BrandableNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandableNavigationBar.swift; sourceTree = "<group>"; };
 		DDD824E92189CD5700151709 /* NavigationLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLogoView.swift; sourceTree = "<group>"; };
+		DDD93E3E246D914F0031460F /* SimplePing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePing.m; sourceTree = "<group>"; };
+		DDD93E3F246D914F0031460F /* SimplePing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePing.h; sourceTree = "<group>"; };
 		DDE27E0322E1B1A700503A89 /* ProductTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductTests.swift; path = "../../../../../../System/Volumes/Data/Users/ueshiba/Projects/PIA/client-library-apple/PIALibraryTests/ProductTests.swift"; sourceTree = "<group>"; };
 		DDF7F73E2405846800A671C7 /* PIAWGTunnelProvider+Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PIAWGTunnelProvider+Profile.swift"; sourceTree = "<group>"; };
 		DDFCFAA721E924A70081F235 /* TileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileProvider.swift; sourceTree = "<group>"; };
@@ -665,6 +671,8 @@
 		0E1108911F77B6B600A92462 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				DDD93E3F246D914F0031460F /* SimplePing.h */,
+				DDD93E3E246D914F0031460F /* SimplePing.m */,
 				0E2ADCFB1FE136D600BB170C /* iOS */,
 				0E2ADCFC1FE136DA00BB170C /* macOS */,
 				0E2ADCC91FE06D7A00BB170C /* Array+Math.swift */,
@@ -1230,6 +1238,7 @@
 			files = (
 				0E392DBA1FE34B5A0002160D /* NSString+URL.h in Headers */,
 				0E392DB21FE33AF00002160D /* NSData+Compression.h in Headers */,
+				DDD93E43246D914F0031460F /* SimplePing.h in Headers */,
 				0E2ADCDC1FE072ED00BB170C /* Pinger.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1241,6 +1250,7 @@
 				0E392DB91FE34B5A0002160D /* NSString+URL.h in Headers */,
 				0E392DB11FE3366B0002160D /* NSData+Compression.h in Headers */,
 				0E2ADCDB1FE072ED00BB170C /* Pinger.h in Headers */,
+				DDD93E42246D914F0031460F /* SimplePing.h in Headers */,
 				0E492C5B1FE5EA06007F23DF /* CMacros.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1673,6 +1683,7 @@
 				0E2ADCCB1FE06D7A00BB170C /* Array+Math.swift in Sources */,
 				DD36CB7F21CD000200FC815A /* CAGradientLayer+Image.swift in Sources */,
 				0E7BC6EE1F96B1120035C8B2 /* AccountProvider.swift in Sources */,
+				DDD93E41246D914F0031460F /* SimplePing.m in Sources */,
 				841BE610212AFE69002EF2D1 /* GiftCardUtil.swift in Sources */,
 				0E7BC6F61F96B1120035C8B2 /* AccountInfo.swift in Sources */,
 				DDFCFAB721E925F70081F235 /* EnumsBuilder.swift in Sources */,
@@ -1919,6 +1930,7 @@
 				DDD824EA2189CD5700151709 /* NavigationLogoView.swift in Sources */,
 				0EFB512E1F82D7C50033B81F /* PIAWebServices.swift in Sources */,
 				0EB8C0641F9CD38B005857E4 /* ActivityButton.swift in Sources */,
+				DDD93E40246D914F0031460F /* SimplePing.m in Sources */,
 				0ED2B5131F82444E00C9DB2B /* Client+Preferences.swift in Sources */,
 				0EE78AF61F81880E002E4CDD /* Credentials.swift in Sources */,
 				DD8BF3CB219C6BAA0041357C /* ConfirmVPNPlanViewController.swift in Sources */,

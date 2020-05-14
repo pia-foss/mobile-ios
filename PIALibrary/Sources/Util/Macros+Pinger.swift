@@ -60,21 +60,4 @@ extension Macros {
         return pinger.sendPing() as? Int
     }
     
-    public static func icmpPing(hostname: String, port: UInt16, semaphore: DispatchSemaphore? = nil, completionBlock: @escaping (Int?) -> ()) {
-        
-        guard let pinger = try? ICMPPing(ipv4Address: hostname, config: PingConfiguration(), queue: pingerQueue) else {
-            completionBlock(nil)
-            return
-        }
-        
-        pinger.observer = { response in
-            semaphore?.signal()
-            completionBlock(Int(response.duration * 1000))
-        }
-        pinger.targetCount = 1
-        pinger.startPinging()
-        semaphore?.wait()
-
-    }
-    
 }
