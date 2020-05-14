@@ -80,6 +80,7 @@ class RegionsViewController: AutolayoutViewController {
         
         setupPullToRefresh()
         
+        gradientProgressBar.backgroundColor = .clear
         gradientProgressBar.progress = 0.0
         gradientProgressBar.gradientColors = [UIColor.piaGreen, UIColor.piaGreenDark20, UIColor.piaGreen]
         
