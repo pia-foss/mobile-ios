@@ -28,6 +28,8 @@ private let log = SwiftyBeaver.self
 
 class PingTask {
     
+    var icmpPinger: ICMPPing!
+    
     let identifier: String
     let server: Server
     let address: Server.Address
@@ -45,21 +47,22 @@ class PingTask {
         self.stateUpdateHandler = stateUpdateHandler
     }
     
-    func startTask(queue: DispatchQueue, semaphore: DispatchSemaphore? = nil) {
-        queue.async() { [weak self] in
+    func startTask(queue: DispatchQueue) {
                         
-            var response: Int?
-            let persistence = Client.database.plain
-            self?.state = .pending
-
-            guard let address = self?.address, let server = self?.server else {
-                return
-            }
+        var response: Int?
+        let persistence = Client.database.plain
+        self.state = .pending
+        
+        if Client.configuration.serverNetwork == .gen4 {
+            log.debug("Starting to Ping \(server.identifier) with address: \(address.hostname)")
             
-            if Client.configuration.serverNetwork == .gen4 {
-                log.debug("Starting to Ping \(server.identifier) with address: \(address.hostname)")
-                
-                self?.server.icmpPing(toAddress: address, semaphore: semaphore, withCompletion: { duration in
+            self.icmpPinger = ICMPPing(ip: address.hostname, completionBlock: { duration in
+                DispatchQueue.main.async { [weak self] in
+                    
+                    guard let address = self?.address, let server = self?.server else {
+                        return
+                    }
+
                     if Client.configuration.serverNetwork == .gen4 {
                         response = duration
                         self?.parsePingResponse(response: response, withServer: server)
@@ -70,8 +73,19 @@ class PingTask {
                     }
                     //Discard result if the server network changed waiting to the response
                     self?.state = .completed
-                })
-            } else {
+                }
+            })
+            
+            self.icmpPinger.start()
+
+        } else {
+            
+            queue.async() { [weak self] in
+
+                guard let address = self?.address, let server = self?.server else {
+                    return
+                }
+
                 response = server.ping(toAddress: address, withProtocol: .UDP)
                 DispatchQueue.main.async {
                     self?.parsePingResponse(response: response, withServer: server)
@@ -81,9 +95,11 @@ class PingTask {
                     }
                     self?.state = .completed
                 }
+
             }
-            
+
         }
+            
     }
     
     private func parsePingResponse(response: Int?, withServer server: Server) {

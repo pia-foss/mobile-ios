@@ -56,7 +56,6 @@ class ServersPinger: DatabaseAccess {
         }
         
         let dispatchQueue = DispatchQueue(label: "com.privateinternetaccess.ping-server", attributes: .concurrent)
-        let serialQueue = DispatchQueue(label: "com.privateinternetaccess.icmpping-server")
 
         for server in pingableServers {
 
@@ -87,14 +86,8 @@ class ServersPinger: DatabaseAccess {
 
         }
         
-        let dispatchSemaphore = DispatchSemaphore(value: 0)
-
         pendingPings.forEach {
-            if Client.configuration.serverNetwork == ServersNetwork.legacy {
-                $0.startTask(queue: dispatchQueue)
-            } else {
-                $0.startTask(queue: serialQueue, semaphore: dispatchSemaphore)
-            }
+            $0.startTask(queue: dispatchQueue)
         }
 
     }
@@ -119,10 +112,6 @@ extension Server {
         return Macros.ping(withProtocol: protocolType, hostname: address.hostname, port: address.port)
     }
     
-    func icmpPing(toAddress address:Address, semaphore: DispatchSemaphore? = nil, withCompletion completionBlock: @escaping (Int?) -> ()) {
-        Macros.icmpPing(hostname: address.hostname, port: address.port, semaphore: semaphore, completionBlock: completionBlock)
-    }
-
     func ping(withProtocol protocolType: PingerProtocol) -> Int? {
         guard let address = pingAddress else {
             return nil
