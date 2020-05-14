@@ -459,7 +459,7 @@ internal enum L10n {
     internal enum Rate {
       /// How about an AppStore review?
       internal static let question = L10n.tr("Localizable", "rating.rate.question")
-      /// We appreciate if you can spend one moment of your time sharing your comments with us
+      /// We appreciate you sharing your experience
       internal static let subtitle = L10n.tr("Localizable", "rating.rate.subtitle")
     }
   }
