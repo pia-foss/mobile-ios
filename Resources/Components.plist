@@ -73,6 +73,14 @@
 		</dict>
 		<dict>
 			<key>Name</key>
+			<string>GradientProgressBar</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2017 fxm90</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/fxm90/GradientProgressBar/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
 			<string>TPKeyboardAvoiding</string>
 			<key>Copyright</key>
 			<string>Copyright (c) 2013 Michael Tyson</string>

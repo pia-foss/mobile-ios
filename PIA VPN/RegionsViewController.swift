@@ -24,6 +24,7 @@ import UIKit
 import PIALibrary
 import DZNEmptyDataSet
 import PopupDialog
+import GradientProgressBar
 
 class RegionsViewController: AutolayoutViewController {
     private struct Cells {
@@ -31,6 +32,7 @@ class RegionsViewController: AutolayoutViewController {
     }
 
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var gradientProgressBar: GradientProgressBar!
 
     private var servers: [Server] = []
     private var filteredServers = [Server]()
@@ -78,6 +80,9 @@ class RegionsViewController: AutolayoutViewController {
         
         setupPullToRefresh()
         
+        gradientProgressBar.progress = 0.0
+        gradientProgressBar.gradientColors = [UIColor.piaGreen, UIColor.piaGreenDark20, UIColor.piaGreen]
+        
     }
     
     private func setupPullToRefresh() {
@@ -86,12 +91,16 @@ class RegionsViewController: AutolayoutViewController {
     }
     
     @objc func refreshLatency(_ sender: Any) {
+
+        gradientProgressBar.setProgress(0.5, animated: true)
+
         Client.ping(servers: self.servers)
         refreshControl.endRefreshing()
         Macros.dispatch(after: .milliseconds(400)) { [weak self] in
             self?.filterServers()
         }
     }
+    
 
     private func setupRightBarButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -247,6 +256,10 @@ class RegionsViewController: AutolayoutViewController {
     // MARK: Notifications
     
     @objc private func pingsDidComplete(notification: Notification) {
+        gradientProgressBar.setProgress(100, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + AppConfiguration.Animations.duration, execute: {
+            self.gradientProgressBar.setProgress(0, animated: true)
+        })
         tableView.reloadData()
     }
     

@@ -52,6 +52,7 @@ def app_pods
     pod 'DZNEmptyDataSet'
     pod 'PopupDialog'
     pod 'ReachabilitySwift', '~> 4.3.0'
+    pod 'GradientProgressBar', '~> 2.0'
 end
 
 def tunnel_pods
