@@ -61,32 +61,33 @@ class ServersPinger: DatabaseAccess {
         for server in pingableServers {
 
             log.verbose("Pinging \(server.identifier)")
+            let addresses = server.bestPingAddress()
             
-            for address in server.bestPingAddress() {
+            if addresses.count == 0 {
+                self.finish()
+            } else {
+                for address in server.bestPingAddress() {
 
-                let pingTask = PingTask(identifier: server.identifier, server: server, address: address, stateUpdateHandler: { (task) in
-                    
-                    guard let index = self.pendingPings.indexOfTaskWith(identifier: server.identifier) else {
-                        return
-                    }
-                    
-                    switch task.state {
-                    case .completed:
-                        self.pendingPings.remove(at: index)
-                        if self.pendingPings.isEmpty {
-                            DispatchQueue.main.async { [unowned self] in
-                                self.accessedDatabase.plain.serializePings()
-                                self.reset()
-                                Macros.postNotification(.PIADaemonsDidPingServers)
-                            }
+                    let pingTask = PingTask(identifier: server.identifier, server: server, address: address, stateUpdateHandler: { (task) in
+                        
+                        guard let index = self.pendingPings.indexOfTaskWith(identifier: server.identifier) else {
+                            return
                         }
-                    default:
-                        break
-                    }
+                        
+                        switch task.state {
+                        case .completed:
+                            self.pendingPings.remove(at: index)
+                            if self.pendingPings.isEmpty {
+                                self.finish()
+                            }
+                        default:
+                            break
+                        }
 
-                })
-                pendingPings.append(pingTask)
+                    })
+                    pendingPings.append(pingTask)
 
+                }
             }
         }
         
@@ -105,6 +106,14 @@ class ServersPinger: DatabaseAccess {
     func reset() {
         pendingPings.removeAll()
         isPinging = false
+    }
+    
+    func finish() {
+        DispatchQueue.main.async { [unowned self] in
+            self.accessedDatabase.plain.serializePings()
+            self.reset()
+            Macros.postNotification(.PIADaemonsDidPingServers)
+        }
     }
 }
 
