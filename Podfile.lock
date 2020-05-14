@@ -62,6 +62,9 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.5.2):
     - GoogleUtilities/Logger
+  - GradientProgressBar (2.0.3):
+    - LightweightObservable (~> 2.0)
+  - LightweightObservable (2.1.1)
   - lottie-ios (3.1.6)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
@@ -130,6 +133,7 @@ DEPENDENCIES:
   - DZNEmptyDataSet
   - Fabric
   - Firebase/Core (= 6.5.0)
+  - GradientProgressBar (~> 2.0)
   - PIALibrary/Library (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
   - PIALibrary/Mock (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
   - PIALibrary/UI (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
@@ -158,6 +162,8 @@ SPEC REPOS:
     - Gloss
     - GoogleAppMeasurement
     - GoogleUtilities
+    - GradientProgressBar
+    - LightweightObservable
     - lottie-ios
     - nanopb
     - OpenSSL-Apple
@@ -204,6 +210,8 @@ SPEC CHECKSUMS:
   Gloss: 9df15229b2f6484c14752a738474fd2528b4c5cd
   GoogleAppMeasurement: 183bd916af7f80deb67c01888368f1108d641832
   GoogleUtilities: ad0f3b691c67909d03a3327cc205222ab8f42e0e
+  GradientProgressBar: f11fb57cffc615a4794da558ce283171a992130a
+  LightweightObservable: 52abe2a01c8273921b1f66cd66526eb3328ca35a
   lottie-ios: 85ce835dd8c53e02509f20729fc7d6a4e6645a0a
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
@@ -219,6 +227,6 @@ SPEC CHECKSUMS:
   TunnelKit: d13d005c0c7febd18a03a87e1ab7d4414fef3ffd
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: fe2139d5008963eaac040d77a0a0c6fe434810af
+PODFILE CHECKSUM: 71612555d575f50b05abb4483a599afd55f41b0d
 
 COCOAPODS: 1.7.5

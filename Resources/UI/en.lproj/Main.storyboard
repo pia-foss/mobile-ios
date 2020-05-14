@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="boO-X9-UIe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="boO-X9-UIe">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -124,12 +124,22 @@
                                             <outlet property="delegate" destination="LrP-0B-Ym4" id="bQV-EV-qm6"/>
                                         </connections>
                                     </tableView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C89-dd-63h" customClass="GradientProgressBar" customModule="GradientProgressBar">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="2" id="Cu0-hQ-kAx"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Kiz-8k-1hw" secondAttribute="trailing" id="6dv-UQ-FYh"/>
+                                    <constraint firstItem="C89-dd-63h" firstAttribute="leading" secondItem="GNv-hu-B2X" secondAttribute="leading" id="9tw-sa-kYd"/>
+                                    <constraint firstItem="C89-dd-63h" firstAttribute="top" secondItem="GNv-hu-B2X" secondAttribute="top" id="GKx-4z-c9L"/>
                                     <constraint firstItem="Kiz-8k-1hw" firstAttribute="leading" secondItem="GNv-hu-B2X" secondAttribute="leading" id="HMT-DL-hDe"/>
                                     <constraint firstItem="Kiz-8k-1hw" firstAttribute="top" secondItem="GNv-hu-B2X" secondAttribute="top" id="VQR-lC-WDY"/>
+                                    <constraint firstAttribute="trailing" secondItem="C89-dd-63h" secondAttribute="trailing" id="d3M-aP-lOY"/>
                                     <constraint firstAttribute="bottom" secondItem="Kiz-8k-1hw" secondAttribute="bottom" id="vNe-6j-A3Q"/>
                                 </constraints>
                             </view>
@@ -144,6 +154,7 @@
                         <viewLayoutGuide key="safeArea" id="9hH-2n-97J"/>
                     </view>
                     <connections>
+                        <outlet property="gradientProgressBar" destination="C89-dd-63h" id="2qo-cC-xkg"/>
                         <outlet property="tableView" destination="Kiz-8k-1hw" id="E7f-VR-Z1D"/>
                         <outlet property="viewContainer" destination="GNv-hu-B2X" id="3d1-NT-wDF"/>
                     </connections>
@@ -1699,7 +1710,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="311" height="325.33333333333331"/>
                                                                         <subviews>
                                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image-vpn-allow" translatesAutoresizingMaskIntoConstraints="NO" id="kVs-7f-Ba8">
-                                                                                <rect key="frame" x="78.666666666666686" y="0.0" width="154" height="120"/>
+                                                                                <rect key="frame" x="117" y="0.0" width="77" height="120"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="120" id="0aW-7J-ej3"/>
                                                                                 </constraints>
@@ -1890,7 +1901,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="280" height="411.33333333333331"/>
                                                                         <subviews>
                                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image-content-blocker" translatesAutoresizingMaskIntoConstraints="NO" id="Ss0-C6-TEO">
-                                                                                <rect key="frame" x="54" y="0.0" width="172" height="120"/>
+                                                                                <rect key="frame" x="97" y="0.0" width="86" height="120"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="120" id="trZ-t1-FqN"/>
                                                                                 </constraints>
@@ -2394,15 +2405,15 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="Nxd-SP-Rs1"/>
                                                 <exclude reference="YFn-Ch-KuH"/>
                                                 <exclude reference="iNL-zp-g0L"/>
-                                                <exclude reference="Nxd-SP-Rs1"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=compact">
                                             <mask key="constraints">
-                                                <include reference="YFn-Ch-KuH"/>
                                                 <include reference="Nxd-SP-Rs1"/>
+                                                <include reference="YFn-Ch-KuH"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular">
@@ -2467,6 +2478,11 @@
             <point key="canvasLocation" x="-975" y="-679"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="7wM-LQ-vSr"/>
+        <segue reference="9EP-gJ-pE1"/>
+        <segue reference="Ic8-R6-xho"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="favorite-selected" width="18" height="15"/>
         <image name="friend-referrals" width="85.666664123535156" height="89.666664123535156"/>
@@ -2476,9 +2492,4 @@
         <image name="killswitch-dark-inactive" width="35" height="24"/>
         <image name="region-selected" width="18" height="18"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="7wM-LQ-vSr"/>
-        <segue reference="9EP-gJ-pE1"/>
-        <segue reference="Ic8-R6-xho"/>
-    </inferredMetricsTieBreakers>
 </document>
