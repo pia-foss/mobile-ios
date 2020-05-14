@@ -46,7 +46,6 @@ class RatingManager {
     }
     
     func logSuccessConnection() {
-        reviewApp()
 
         AppPreferences.shared.successConnections += 1
         if AppPreferences.shared.successConnections == self.successConnectionsUntilPrompt {
