@@ -193,7 +193,11 @@ public class IKEv2Profile: NetworkExtensionProfile {
         if let encryption = IKEv2EncryptionAlgorithm(rawValue: Client.preferences.ikeV2EncryptionAlgorithm) {
             cfg.ikeSecurityAssociationParameters.encryptionAlgorithm = encryption.networkExtensionValue()
             cfg.childSecurityAssociationParameters.encryptionAlgorithm = encryption.networkExtensionValue()
+        } else {
+            cfg.ikeSecurityAssociationParameters.encryptionAlgorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm.networkExtensionValue()
+            cfg.childSecurityAssociationParameters.encryptionAlgorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm.networkExtensionValue()
         }
+        
         if let integrity = IKEv2IntegrityAlgorithm(rawValue: Client.preferences.ikeV2IntegrityAlgorithm) {
             cfg.ikeSecurityAssociationParameters.integrityAlgorithm = integrity.networkExtensionValue()
             cfg.childSecurityAssociationParameters.integrityAlgorithm = integrity.networkExtensionValue()
