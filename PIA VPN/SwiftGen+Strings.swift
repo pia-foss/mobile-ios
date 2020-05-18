@@ -747,8 +747,6 @@ internal enum L10n {
       }
     }
     internal enum Preview {
-      /// Be the first using the new PIA features...
-      internal static let footer = L10n.tr("Localizable", "settings.preview.footer")
       /// Preview
       internal static let title = L10n.tr("Localizable", "settings.preview.title")
     }
@@ -774,7 +772,7 @@ internal enum L10n {
       internal enum Network {
         /// The VPN has to be disconnected to change the server network.
         internal static let alert = L10n.tr("Localizable", "settings.server.network.alert")
-        /// Use next generation network
+        /// Next generation network
         internal static let description = L10n.tr("Localizable", "settings.server.network.description")
       }
     }
