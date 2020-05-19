@@ -2457,6 +2457,7 @@
                         <viewLayoutGuide key="safeArea" id="6zc-L9-qKD"/>
                     </view>
                     <connections>
+                        <outlet property="addEmailContainer" destination="scI-Sh-qxj" id="Y5L-C7-5Dw"/>
                         <outlet property="buttonConfirm" destination="D9l-3d-oC0" id="EPs-45-e3z"/>
                         <outlet property="buttonSubmit" destination="5jJ-Zb-2eF" id="IfX-ZK-EK8"/>
                         <outlet property="imvPicture" destination="1fo-Wl-Uw1" id="jZJ-HF-aDh"/>

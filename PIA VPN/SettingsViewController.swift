@@ -933,9 +933,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 
             case .reset:
                 cell.textLabel?.text = L10n.Settings.Reset.footer
-            
-            case .preview:
-                cell.textLabel?.text = L10n.Settings.Preview.footer
 
             case .contentBlocker:
                 cell.textLabel?.text = L10n.Settings.ContentBlocker.footer
