@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AJf-iF-18P">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AJf-iF-18P">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -818,6 +818,7 @@ You can come back to the app later to finish the process.</string>
                         <viewLayoutGuide key="safeArea" id="Jrv-85-gga"/>
                     </view>
                     <connections>
+                        <outlet property="addEmailContainer" destination="A8t-3o-Y1d" id="1R7-ct-rfy"/>
                         <outlet property="buttonConfirm" destination="9Hh-df-yby" id="HSF-Np-NCm"/>
                         <outlet property="labelSubtitle" destination="3b5-dH-9MA" id="9nW-wR-AEb"/>
                         <outlet property="labelTitle" destination="8dA-qn-p1Q" id="zDW-ML-hpx"/>

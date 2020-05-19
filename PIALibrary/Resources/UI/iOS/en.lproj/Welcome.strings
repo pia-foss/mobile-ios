@@ -31,6 +31,7 @@
 "purchase.confirm.plan" = "You are purchasing the %@ plan";
 "purchase.email.why" = "We need your email to send your username and password.";
 "purchase.submit" = "Submit";
+"purchase.or" = "or";
 
 "redeem.title" = "Redeem gift card";
 "redeem.subtitle" = "Type in your email address and the %lu digit PIN from your gift card or trial card below.";
