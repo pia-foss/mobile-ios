@@ -56,6 +56,8 @@ private protocol PreferencesStore: class {
     
     var ikeV2EncryptionAlgorithm: String { get set }
 
+    var signInWithAppleFakeEmail: String? { get set }
+
     func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration?
     
     func setVPNCustomConfiguration(_ customConfiguration: VPNCustomConfiguration, for vpnType: String)
@@ -83,6 +85,7 @@ private extension PreferencesStore {
         nmtRulesEnabled = source.nmtRulesEnabled
         ikeV2IntegrityAlgorithm = source.ikeV2IntegrityAlgorithm
         ikeV2EncryptionAlgorithm = source.ikeV2EncryptionAlgorithm
+        signInWithAppleFakeEmail = source.signInWithAppleFakeEmail
     }
 }
 
@@ -301,6 +304,17 @@ extension Client {
                 accessedDatabase.plain.nmtRulesEnabled = newValue
             }
         }
+        
+        /// Sign in with Apple generates only once the fake email. We store it just in case the user tries to use it multiple time
+        public fileprivate(set) var signInWithAppleFakeEmail: String? {
+            get {
+                return accessedDatabase.plain.signInWithAppleFakeEmail
+            }
+            set {
+                accessedDatabase.plain.signInWithAppleFakeEmail = newValue
+            }
+        }
+
 
     }
 }
@@ -330,6 +344,7 @@ extension Client.Preferences {
             nmtRulesEnabled = false
             ikeV2IntegrityAlgorithm = IKEv2IntegrityAlgorithm.defaultIntegrity.value()
             ikeV2EncryptionAlgorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm.value()
+            signInWithAppleFakeEmail = nil
         }
 
         /**
@@ -399,6 +414,9 @@ extension Client.Preferences {
         
         /// :nodoc:
         public var ikeV2EncryptionAlgorithm: String
+
+        /// :nodoc:
+        public var signInWithAppleFakeEmail: String?
 
         /// :nodoc:
         public func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration? {

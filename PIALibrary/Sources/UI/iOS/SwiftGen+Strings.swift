@@ -327,6 +327,8 @@ internal enum L10n {
     internal enum Purchase {
       /// Continue
       internal static let `continue` = L10n.tr("Welcome", "purchase.continue")
+      /// or
+      internal static let or = L10n.tr("Welcome", "purchase.or")
       /// Submit
       internal static let submit = L10n.tr("Welcome", "purchase.submit")
       /// 7-day money back guarantee

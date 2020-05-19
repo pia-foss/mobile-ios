@@ -80,6 +80,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         
         static let ikeV2EncryptionAlgorithm = "IKEV2EncryptionAlgorithm"
 
+        static let signInWithAppleFakeEmail = "SignInWithAppleFakeEmail"
+
     }
     
     private let backend: UserDefaults
@@ -472,6 +474,15 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
     
+    var signInWithAppleFakeEmail: String? {
+        get {
+            return backend.string(forKey: Entries.signInWithAppleFakeEmail)
+        }
+        set {
+            backend.set(newValue, forKey: Entries.signInWithAppleFakeEmail)
+        }
+    }
+    
     // MARK: Lifecycle
     
     func reset() {
@@ -492,6 +503,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.ikeV2IntegrityAlgorithm)
         backend.removeObject(forKey: Entries.ikeV2EncryptionAlgorithm)
         backend.removeObject(forKey: Entries.serverNetwork)
+        backend.removeObject(forKey: Entries.signInWithAppleFakeEmail)
         backend.synchronize()
     }
 

@@ -22,6 +22,7 @@
 
 import UIKit
 import SwiftyBeaver
+import AuthenticationServices
 
 private let log = SwiftyBeaver.self
 
@@ -31,7 +32,9 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
     @IBOutlet private weak var textEmail: BorderedTextField!
     @IBOutlet private weak var labelTitle: UILabel!
     @IBOutlet private weak var labelSubtitle: UILabel!
+    @IBOutlet private weak var addEmailContainer: UIView!
 
+    private var labelOr = UILabel()
     private var signupEmail: String?
     private var signupTransaction: InAppTransaction?
     var metadata: SignupMetadata!
@@ -61,6 +64,10 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
         textEmail.text = preset.purchaseEmail
         self.styleConfirmButton()
         
+        if #available(iOSApplicationExtension 13.0, *) {
+            setupAppleSignInUI()
+        }
+
     }
 
     @IBAction private func signUp(_ sender: Any?) {
@@ -157,6 +164,50 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
 
     }
     
+    private func setupAppleSignInUI() {
+        if #available(iOSApplicationExtension 13.0, *) {
+            labelOr.text = L10n.Welcome.Purchase.or.uppercased()
+            labelOr.textAlignment = .center
+            
+            let signInWithAppleButton = ASAuthorizationAppleIDButton(type: .signIn, style: Theme.current.palette.appearance == .dark ? .whiteOutline : .black)
+            signInWithAppleButton.addTarget(self, action: #selector(handleAuthorizationAppleID), for: .touchUpInside)
+                        
+            self.addEmailContainer.addSubview(signInWithAppleButton)
+            self.addEmailContainer.addSubview(labelOr)
+
+            labelOr.translatesAutoresizingMaskIntoConstraints = false
+            signInWithAppleButton.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                labelOr.topAnchor.constraint(equalTo: self.buttonConfirm.bottomAnchor, constant: 15),
+                labelOr.leftAnchor.constraint(equalTo: self.addEmailContainer.leftAnchor),
+                labelOr.rightAnchor.constraint(equalTo: self.addEmailContainer.rightAnchor),
+                labelOr.heightAnchor.constraint(equalToConstant: 15),
+
+                signInWithAppleButton.topAnchor.constraint(equalTo: self.labelOr.bottomAnchor, constant: 15),
+                signInWithAppleButton.leftAnchor.constraint(equalTo: self.addEmailContainer.leftAnchor),
+                signInWithAppleButton.rightAnchor.constraint(equalTo: self.addEmailContainer.rightAnchor),
+                signInWithAppleButton.heightAnchor.constraint(equalToConstant: 50)
+            ])
+
+        }
+    }
+
+    // MARK: Actions
+    @IBAction private func handleAuthorizationAppleID() {
+        if #available(iOSApplicationExtension 13.0, *) {
+            let request = ASAuthorizationAppleIDProvider().createRequest()
+            request.requestedScopes = [.email]
+            
+            let controller = ASAuthorizationController(authorizationRequests: [request])
+            
+            controller.delegate = self
+            controller.presentationContextProvider = self
+            
+            controller.performRequests()
+        }
+    }
+    
     // MARK: Restylable
     override public func viewShouldRestyle() {
         super.viewShouldRestyle()
@@ -166,6 +217,7 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
         Theme.current.applyInput(textEmail)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applySubtitle(labelSubtitle)
+        Theme.current.applySubtitle(labelOr)
     }
     
     private func styleConfirmButton() {
@@ -188,4 +240,26 @@ extension ConfirmVPNPlanViewController: GDPRDelegate {
         self.termsAndConditionsAgreed = false
     }
     
+}
+
+@available(iOSApplicationExtension 13.0, *)
+extension ConfirmVPNPlanViewController: ASAuthorizationControllerPresentationContextProviding {
+    public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        guard let appleIDCredentials = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
+        if let email = appleIDCredentials.email {
+            textEmail.text = email
+            let preferences = Client.preferences.editable()
+            preferences.signInWithAppleFakeEmail = email
+            preferences.commit()
+        } else {
+            textEmail.text = Client.preferences.signInWithAppleFakeEmail
+        }
+    }
+}
+
+@available(iOSApplicationExtension 13.0, *)
+extension ConfirmVPNPlanViewController: ASAuthorizationControllerDelegate {
+    public func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
 }
