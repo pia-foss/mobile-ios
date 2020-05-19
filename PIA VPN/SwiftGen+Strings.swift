@@ -332,6 +332,8 @@ internal enum L10n {
     internal static let ok = L10n.tr("Localizable", "global.ok")
     /// Optional
     internal static let `optional` = L10n.tr("Localizable", "global.optional")
+    /// or
+    internal static let or = L10n.tr("Localizable", "global.or")
     /// Remove
     internal static let remove = L10n.tr("Localizable", "global.remove")
     /// Required

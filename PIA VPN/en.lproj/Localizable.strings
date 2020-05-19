@@ -22,6 +22,7 @@
 "global.copied" = "Copied to clipboard";
 "global.yes" = "Yes";
 "global.no" = "No";
+"global.or" = "or";
 
 // NOTIFICATIONS
 
