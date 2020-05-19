@@ -25,6 +25,9 @@ import PIALibrary
 import DZNEmptyDataSet
 import PopupDialog
 import GradientProgressBar
+import SwiftyBeaver
+
+private let log = SwiftyBeaver.self
 
 class RegionsViewController: AutolayoutViewController {
     private struct Cells {
@@ -93,10 +96,16 @@ class RegionsViewController: AutolayoutViewController {
     
     @objc func refreshLatency(_ sender: Any) {
 
+        refreshControl.endRefreshing()
+
+        guard (Client.providers.vpnProvider.vpnStatus == .disconnected) else {
+            log.debug("Not pinging servers while on VPN, will try on next update")
+            return
+        }
+        
         gradientProgressBar.setProgress(0.5, animated: true)
 
         Client.ping(servers: self.servers)
-        refreshControl.endRefreshing()
         Macros.dispatch(after: .milliseconds(400)) { [weak self] in
             self?.filterServers()
         }
