@@ -157,7 +157,9 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
                     //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead
                     previousProfile.remove(nil)
                 } else {
-                    self.connect(nil)
+                    if let previousProfile = previousProfile { // dont connect after install
+                        self.connect(nil)
+                    }
                 }
                 Macros.postNotification(.PIAVPNDidInstall)
                 callback?(nil)
