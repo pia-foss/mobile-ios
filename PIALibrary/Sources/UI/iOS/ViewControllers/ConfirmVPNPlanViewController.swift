@@ -254,6 +254,7 @@ extension ConfirmVPNPlanViewController: ASAuthorizationControllerPresentationCon
         } else {
             textEmail.text = Client.preferences.signInWithAppleFakeEmail
         }
+        self.signUp(nil)
     }
 }
 
