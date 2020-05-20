@@ -275,6 +275,7 @@ extension AddEmailToAccountViewController: ASAuthorizationControllerPresentation
         } else {
             textEmail.text = Client.preferences.signInWithAppleFakeEmail
         }
+        self.signUp(nil)
     }
 }
 
