@@ -165,11 +165,11 @@ class RatingManager {
         
         let sheet = Macros.alert(
             L10n.Rating.Error.question,
-            L10n.Rating.Problems.subtitle
+            L10n.Rating.Error.subtitle
         )
-        sheet.addCancelAction(L10n.Global.no)
+        sheet.addCancelAction(L10n.Global.close)
         
-        sheet.addActionWithTitle(L10n.Global.yes) {
+        sheet.addActionWithTitle(L10n.Rating.Error.Button.send) {
             self.openFeedbackWebsite()
         }
         

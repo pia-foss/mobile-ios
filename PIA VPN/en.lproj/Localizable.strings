@@ -330,4 +330,6 @@
 "rating.problems.subtitle" = "Do you want to give feedback? We can help you to improve your experience using PIA";
 "rating.rate.question" = "How about an AppStore review?";
 "rating.rate.subtitle" = "We appreciate you sharing your experience";
-"rating.error.question" = "Something went wrong";
+"rating.error.question" = "Oh no, what went wrong?";
+"rating.error.subtitle" = "Let us know about it. We really want to fix it for you.";
+"rating.error.button.send" = "Send feedback";

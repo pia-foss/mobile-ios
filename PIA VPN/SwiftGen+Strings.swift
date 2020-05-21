@@ -453,8 +453,14 @@ internal enum L10n {
       internal static let subtitle = L10n.tr("Localizable", "rating.enjoy.subtitle")
     }
     internal enum Error {
-      /// Something went wrong
+      /// Oh no, what went wrong?
       internal static let question = L10n.tr("Localizable", "rating.error.question")
+      /// Let us know about it. We really want to fix it for you.
+      internal static let subtitle = L10n.tr("Localizable", "rating.error.subtitle")
+      internal enum Button {
+        /// Send feedback
+        internal static let send = L10n.tr("Localizable", "rating.error.button.send")
+      }
     }
     internal enum Problems {
       /// What went wrong?
