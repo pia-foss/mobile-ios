@@ -66,7 +66,11 @@ class RatingManager {
     }
     
     func logError() {
-        //TODO
+        if AppPreferences.shared.failureConnections == self.errorInConnectionsUntilPrompt {
+            askForConnectionIssuesFeedback()
+            AppPreferences.shared.failureConnections = 0
+        }
+        AppPreferences.shared.failureConnections += 1
     }
     
     private func openRatingViewInAppstore() {
@@ -150,6 +154,26 @@ class RatingManager {
         }
 
         return sheet
+
+    }
+
+    private func askForConnectionIssuesFeedback() {
+        
+        guard let rootView = AppDelegate.delegate().topViewControllerWithRootViewController(rootViewController: UIApplication.shared.keyWindow?.rootViewController) else {
+            return
+        }
+        
+        let sheet = Macros.alert(
+            L10n.Rating.Error.question,
+            L10n.Rating.Problems.subtitle
+        )
+        sheet.addCancelAction(L10n.Global.no)
+        
+        sheet.addActionWithTitle(L10n.Global.yes) {
+            self.openFeedbackWebsite()
+        }
+        
+        rootView.present(sheet, animated: true, completion: nil)
 
     }
 

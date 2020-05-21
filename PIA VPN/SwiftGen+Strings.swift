@@ -452,6 +452,10 @@ internal enum L10n {
       /// We hope our VPN product is meeting your expectations
       internal static let subtitle = L10n.tr("Localizable", "rating.enjoy.subtitle")
     }
+    internal enum Error {
+      /// Something went wrong
+      internal static let question = L10n.tr("Localizable", "rating.error.question")
+    }
     internal enum Problems {
       /// What went wrong?
       internal static let question = L10n.tr("Localizable", "rating.problems.question")
