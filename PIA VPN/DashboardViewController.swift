@@ -45,7 +45,8 @@ class DashboardViewController: AutolayoutViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     
     private var currentPageIndex = 0
-    
+    private var isDisconnecting = false
+
     private var currentStatus: VPNStatus = .disconnected
 
     private var tileModeStatus: TileStatus = .normal {
@@ -89,7 +90,8 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(closeSession), name: .PIAAccountLapsed, object: nil)
         nc.addObserver(self, selector: #selector(reloadTheme), name: .PIAThemeShouldChange, object: nil)
         nc.addObserver(self, selector: #selector(checkAccountEmail), name: .PIAAccountDidRefresh, object: nil)
-
+        nc.addObserver(self, selector: #selector(vpnDidFail), name: .PIAVPNDidFail, object: nil)
+        
         if Client.providers.accountProvider.isLoggedIn {
             Client.providers.accountProvider.refreshAndLogoutUnauthorized()
         }
@@ -267,7 +269,10 @@ class DashboardViewController: AutolayoutViewController {
         if !toggleConnection.isOn,
             Client.providers.vpnProvider.vpnStatus != .disconnecting,
             Client.providers.vpnProvider.vpnStatus != .connecting {
-            Client.providers.vpnProvider.connect({ [weak self] _ in
+            Client.providers.vpnProvider.connect({ [weak self] error in
+                if let _ = error {
+                    RatingManager.shared.logError()
+                }
                 self?.reloadUsageTileAfter(seconds: 5) //Show some usage after 5 seconds of activity
             })
             NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
@@ -451,6 +456,15 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     // MARK: Helpers
+    @objc private func vpnDidFail() {
+        if !isDisconnecting {
+            isDisconnecting = true
+            Client.providers.vpnProvider.disconnect { _ in
+                RatingManager.shared.logError()
+                self.isDisconnecting = false
+            }
+        }
+    }
     
     @objc private func checkAccountEmail() {
 
