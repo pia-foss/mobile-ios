@@ -58,6 +58,8 @@ extension Notification.Name {
 
     public static let PIAVPNUsageUpdate = Notification.Name("PIAVPNUsageUpdate")
 
+    public static let PIAVPNDidFail = Notification.Name("PIAVPNDidFail")
+
     #if os(iOS)
     
     // MARK: InApp
