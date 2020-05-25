@@ -111,6 +111,9 @@ public class Server: Hashable {
     /// The server identifier.
     public let identifier: String
     
+    /// The server is virtually located.
+    public let geo: Bool
+
     /// The best address for establishing an OpenVPN connection over TCP.
     public let bestOpenVPNAddressForTCP: Address?
 
@@ -152,12 +155,14 @@ public class Server: Hashable {
         iKEv2AddressesForUDP: [ServerAddressIP]? = nil,
         pingAddress: Address?,
         responseTime: Int? = 0,
-        serverNetwork: ServersNetwork? = .legacy) {
+        serverNetwork: ServersNetwork? = .legacy,
+        geo: Bool = false) {
         
         self.serial = serial
         self.name = name
         self.country = country
         self.hostname = hostname
+        self.geo = geo
         identifier = hostname.components(separatedBy: ".").first ?? ""
         
         self.bestOpenVPNAddressForTCP = bestOpenVPNAddressForTCP
