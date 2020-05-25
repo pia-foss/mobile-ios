@@ -228,11 +228,6 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
             preconditionFailure()
         }
         activeProfile.disconnect(callback)
-        
-        let ed = accessedPreferences.editable()
-        ed.preferredServer = nil
-        ed.commit()
-
     }
     
     func updatePreferences(_ callback: SuccessLibraryCallback?) {
