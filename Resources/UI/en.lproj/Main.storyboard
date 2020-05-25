@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="boO-X9-UIe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="boO-X9-UIe">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -55,8 +55,15 @@
                                                                         <constraint firstAttribute="height" constant="18" id="NWf-jz-ZWy"/>
                                                                     </constraints>
                                                                 </imageView>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="computer-icon" translatesAutoresizingMaskIntoConstraints="NO" id="h1y-EN-pdB">
+                                                                    <rect key="frame" x="86" y="16" width="18" height="18"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="18" id="Jnt-N9-mdE"/>
+                                                                        <constraint firstAttribute="height" constant="18" id="m9e-Sy-sy6"/>
+                                                                    </constraints>
+                                                                </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100ms" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fmJ-Lh-MsI">
-                                                                    <rect key="frame" x="83" y="0.0" width="187" height="50"/>
+                                                                    <rect key="frame" x="138" y="0.0" width="132" height="50"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -88,10 +95,12 @@
                                                                 <constraint firstAttribute="trailing" secondItem="9JG-G1-vW4" secondAttribute="trailing" constant="5" id="O5k-jU-MX3"/>
                                                                 <constraint firstItem="Tt7-8W-weg" firstAttribute="centerX" secondItem="9JG-G1-vW4" secondAttribute="centerX" id="Pk9-OP-kaR"/>
                                                                 <constraint firstItem="9JG-G1-vW4" firstAttribute="centerY" secondItem="rwa-6o-BR8" secondAttribute="centerY" id="S1X-7S-6bH"/>
-                                                                <constraint firstItem="fmJ-Lh-MsI" firstAttribute="leading" secondItem="5u6-4W-5WT" secondAttribute="trailing" constant="10" id="VrU-R0-8mU"/>
+                                                                <constraint firstItem="h1y-EN-pdB" firstAttribute="centerY" secondItem="rwa-6o-BR8" secondAttribute="centerY" id="WVg-0m-8JL"/>
+                                                                <constraint firstItem="fmJ-Lh-MsI" firstAttribute="leading" secondItem="h1y-EN-pdB" secondAttribute="trailing" constant="10" id="ca6-MK-G8R"/>
                                                                 <constraint firstItem="0df-FZ-CRz" firstAttribute="centerY" secondItem="rwa-6o-BR8" secondAttribute="centerY" id="eSe-GK-2Dj"/>
                                                                 <constraint firstItem="fmJ-Lh-MsI" firstAttribute="centerY" secondItem="rwa-6o-BR8" secondAttribute="centerY" id="feg-a8-bhl"/>
                                                                 <constraint firstItem="5u6-4W-5WT" firstAttribute="centerY" secondItem="rwa-6o-BR8" secondAttribute="centerY" id="xS7-v0-bdQ"/>
+                                                                <constraint firstItem="h1y-EN-pdB" firstAttribute="leading" secondItem="5u6-4W-5WT" secondAttribute="trailing" constant="10" id="ySs-iS-FQ9"/>
                                                                 <constraint firstItem="5u6-4W-5WT" firstAttribute="leading" secondItem="0df-FZ-CRz" secondAttribute="trailing" constant="10" id="ydY-U6-uzu"/>
                                                             </constraints>
                                                         </view>
@@ -114,7 +123,8 @@
                                                     <outlet property="imvFlag" destination="6CB-UJ-BuN" id="9Y7-df-EOc"/>
                                                     <outlet property="labelPingTime" destination="fmJ-Lh-MsI" id="nFy-wM-saF"/>
                                                     <outlet property="labelRegion" destination="0df-FZ-CRz" id="j0p-l0-ig6"/>
-                                                    <outlet property="selectedRegionImageView" destination="5u6-4W-5WT" id="icE-bz-RS1"/>
+                                                    <outlet property="leftIconImageView" destination="5u6-4W-5WT" id="NHN-Gh-Ehk"/>
+                                                    <outlet property="rightIconImageView" destination="h1y-EN-pdB" id="lCQ-DS-f2e"/>
                                                     <segue destination="4OD-n8-oW7" kind="unwind" identifier="UnwindRegionsSegueIdentifier" unwindAction="unwoundRegionsViewController:" id="fV8-af-tUY"/>
                                                 </connections>
                                             </tableViewCell>
@@ -2485,6 +2495,7 @@
         <segue reference="Ic8-R6-xho"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="computer-icon" width="29" height="30"/>
         <image name="favorite-selected" width="18" height="15"/>
         <image name="friend-referrals" width="85.666664123535156" height="89.666664123535156"/>
         <image name="image-content-blocker" width="86" height="112"/>

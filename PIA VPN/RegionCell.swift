@@ -33,7 +33,8 @@ class RegionCell: UITableViewCell, Restylable {
     
     @IBOutlet private weak var favoriteButton: UIButton!
     @IBOutlet private weak var favoriteImageView: UIImageView!
-    @IBOutlet private weak var selectedRegionImageView: UIImageView!
+    @IBOutlet private weak var leftIconImageView: UIImageView!
+    @IBOutlet private weak var rightIconImageView: UIImageView!
 
     private var isFavorite: Bool!
     private weak var server: Server!
@@ -55,8 +56,8 @@ class RegionCell: UITableViewCell, Restylable {
             Theme.current.applyPingTime(labelPingTime, time: pingTime)
         }
         labelPingTime.text = pingTimeString
-        
-        selectedRegionImageView.isHidden = !isSelected
+
+        prepareCellIcons(isSelected)
         
         if let pingTimeString = pingTimeString {
             accessibilityLabel = "\(server.name), \(pingTimeString)"
@@ -73,6 +74,20 @@ class RegionCell: UITableViewCell, Restylable {
         self.setSelected(false, animated: false)
     }
 
+    private func prepareCellIcons(_ isSelected: Bool) {
+        if server.geo {
+            leftIconImageView.image = UIImage(named: "icon-contact")
+            rightIconImageView.image = UIImage(named: "region-selected")
+            leftIconImageView.isHidden = false
+            rightIconImageView.isHidden = !isSelected
+        } else {
+            leftIconImageView.image = UIImage(named: "region-selected")
+            rightIconImageView.image = UIImage(named: "icon-contact")
+            leftIconImageView.isHidden = !isSelected
+            rightIconImageView.isHidden = true
+        }
+    }
+    
     // MARK: Restylable
 
     func viewShouldRestyle() {
