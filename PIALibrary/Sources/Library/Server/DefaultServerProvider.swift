@@ -91,6 +91,12 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
             guard server.isAutomatic else {
                 continue
             }
+            
+            // GEO servers can't autoconnect
+            guard !server.geo else {
+                continue
+            }
+            
             bestIdentifier = server.identifier
             bestResponseTime = responseTime
         }
