@@ -75,6 +75,8 @@ enum Setting: Int {
     
     case serversNetwork
 
+    case geoServers
+
     case contentBlockerState
     
     case contentBlockerRefreshRules
@@ -199,7 +201,8 @@ class SettingsViewController: AutolayoutViewController {
             .resetSettings
         ],
         .preview: [
-            .serversNetwork
+            .serversNetwork,
+            .geoServers
         ],
         .development: [
 //            .truncateDebugLog,
@@ -236,6 +239,8 @@ class SettingsViewController: AutolayoutViewController {
     private lazy var switchSmallPackets = UISwitch()
 
     private lazy var switchServersNetwork = UISwitch()
+
+    private lazy var switchGeoServers = UISwitch()
 
     private lazy var imvSelectedOption = UIImageView(image: Asset.accessorySelected.image)
 
@@ -294,6 +299,7 @@ class SettingsViewController: AutolayoutViewController {
         switchDarkMode.addTarget(self, action: #selector(toggleDarkMode(_:)), for: .valueChanged)
         switchSmallPackets.addTarget(self, action: #selector(toggleSmallPackets(_:)), for: .valueChanged)
         switchServersNetwork.addTarget(self, action: #selector(toggleServerNetwork(_:)), for: .valueChanged)
+        switchGeoServers.addTarget(self, action: #selector(toggleGEOServers(_:)), for: .valueChanged)
         redisplaySettings()
 
         NotificationCenter.default.addObserver(self,
@@ -412,6 +418,10 @@ class SettingsViewController: AutolayoutViewController {
             }
         })
         
+    }
+    
+    @objc private func toggleGEOServers(_ sender: UISwitch) {
+        AppPreferences.shared.showGeoServers = sender.isOn
     }
 
     @objc private func showContentBlockerTutorial() {
@@ -1113,6 +1123,13 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryView = switchServersNetwork
             cell.selectionStyle = .none
             switchServersNetwork.isOn = Client.configuration.currentServerNetwork() == ServersNetwork.gen4
+
+        case .geoServers:
+            cell.textLabel?.text = L10n.Settings.Geo.Servers.description
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchGeoServers
+            cell.selectionStyle = .none
+            switchGeoServers.isOn = AppPreferences.shared.showGeoServers
 
         case .mace:
             cell.textLabel?.text = L10n.Settings.ApplicationSettings.Mace.title

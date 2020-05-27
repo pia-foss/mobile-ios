@@ -207,7 +207,11 @@ class RegionsViewController: AutolayoutViewController {
         default:
             self.servers = self.servers.sorted(by: { $0.isFavorite && !$1.isFavorite })
         }
+        if AppPreferences.shared.showGeoServers == false {
+            self.servers = self.servers.filter({ $0.geo == AppPreferences.shared.showGeoServers })
+        }
         self.servers.insert(Server.automatic, at: 0)
+        
         tableView.reloadData()
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }

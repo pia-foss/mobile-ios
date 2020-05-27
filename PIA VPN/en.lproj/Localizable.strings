@@ -159,6 +159,8 @@
 "settings.server.network.description" = "Next generation network";
 "settings.server.network.alert" = "The VPN has to be disconnected to change the server network.";
 
+"settings.geo.servers.description" = "Show relocated servers";
+
 // CONTENT BLOCKER
 
 "content_blocker.title" = "Content Blocker";
