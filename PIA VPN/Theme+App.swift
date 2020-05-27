@@ -229,25 +229,16 @@ extension Theme {
             Asset.Piax.Regions.noResultsLight.image
     }
     
-    public func mapImageByServerName(_ serverName: String, andTargetServer targetServer: String? = nil) -> String {
-        let prefix = palette.appearance == .dark ? "Dark-Map-" : "Light-Map-"
-        if serverName != L10n.Global.automatic {
-            if let _ = UIImage(named: (prefix + serverName)) {
-                return prefix + serverName
-            } else {
-                return prefix + "NF"
-            }
-        } else {
-            if let targetServer = targetServer {
-                if let _ = UIImage(named: (prefix + targetServer)) {
-                    return prefix + targetServer
-                } else {
-                    return prefix + "NF"
-                }
-            } else {
-                return prefix + "NF"
-            }
+    public func mapImage() -> UIImage? {
+        
+        let image = UIImage(named: "Dark-Map")
+        
+        if palette.appearance == .light {
+            return image?.image(alpha: 0.15)
         }
+        
+        return image
+        
     }
     
     public func dragDropImage() -> UIImage {
