@@ -232,12 +232,20 @@ extension Theme {
     public func mapImageByServerName(_ serverName: String, andTargetServer targetServer: String? = nil) -> String {
         let prefix = palette.appearance == .dark ? "Dark-Map-" : "Light-Map-"
         if serverName != L10n.Global.automatic {
-            return prefix + serverName
+            if let _ = UIImage(named: (prefix + serverName)) {
+                return prefix + serverName
+            } else {
+                return prefix + "NF"
+            }
         } else {
             if let targetServer = targetServer {
-                return prefix + targetServer
+                if let _ = UIImage(named: (prefix + targetServer)) {
+                    return prefix + targetServer
+                } else {
+                    return prefix + "NF"
+                }
             } else {
-                return prefix + "Spain"
+                return prefix + "NF"
             }
         }
     }

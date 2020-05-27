@@ -69,6 +69,7 @@ enum Asset {
       static let darkMapJapan = ImageAsset(name: "Dark-Map-Japan")
       static let darkMapLuxembourg = ImageAsset(name: "Dark-Map-Luxembourg")
       static let darkMapMexico = ImageAsset(name: "Dark-Map-Mexico")
+      static let darkMapNF = ImageAsset(name: "Dark-Map-NF")
       static let darkMapNetherlands = ImageAsset(name: "Dark-Map-Netherlands")
       static let darkMapNewZealand = ImageAsset(name: "Dark-Map-New Zealand")
       static let darkMapNorway = ImageAsset(name: "Dark-Map-Norway")
@@ -160,6 +161,7 @@ enum Asset {
       static let lightMapJapan = ImageAsset(name: "Light-Map-Japan")
       static let lightMapLuxembourg = ImageAsset(name: "Light-Map-Luxembourg")
       static let lightMapMexico = ImageAsset(name: "Light-Map-Mexico")
+      static let lightMapNF = ImageAsset(name: "Light-Map-NF")
       static let lightMapNetherlands = ImageAsset(name: "Light-Map-Netherlands")
       static let lightMapNewZealand = ImageAsset(name: "Light-Map-New Zealand")
       static let lightMapNorway = ImageAsset(name: "Light-Map-Norway")
@@ -477,6 +479,7 @@ enum Asset {
     Piax.DarkMap.darkMapJapan,
     Piax.DarkMap.darkMapLuxembourg,
     Piax.DarkMap.darkMapMexico,
+    Piax.DarkMap.darkMapNF,
     Piax.DarkMap.darkMapNetherlands,
     Piax.DarkMap.darkMapNewZealand,
     Piax.DarkMap.darkMapNorway,
@@ -562,6 +565,7 @@ enum Asset {
     Piax.LightMap.lightMapJapan,
     Piax.LightMap.lightMapLuxembourg,
     Piax.LightMap.lightMapMexico,
+    Piax.LightMap.lightMapNF,
     Piax.LightMap.lightMapNetherlands,
     Piax.LightMap.lightMapNewZealand,
     Piax.LightMap.lightMapNorway,
