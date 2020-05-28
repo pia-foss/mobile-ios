@@ -33,9 +33,11 @@ class RegionCell: UITableViewCell, Restylable {
     
     @IBOutlet private weak var favoriteButton: UIButton!
     @IBOutlet private weak var favoriteImageView: UIImageView!
-    @IBOutlet private weak var selectedRegionImageView: UIImageView!
+    @IBOutlet private weak var leftIconImageView: UIImageView!
+    @IBOutlet private weak var rightIconImageView: UIImageView!
 
     private var isFavorite: Bool!
+    private var iconSelected = false
     private weak var server: Server!
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -55,8 +57,10 @@ class RegionCell: UITableViewCell, Restylable {
             Theme.current.applyPingTime(labelPingTime, time: pingTime)
         }
         labelPingTime.text = pingTimeString
+
+        iconSelected = isSelected
         
-        selectedRegionImageView.isHidden = !isSelected
+        prepareCellIcons()
         
         if let pingTimeString = pingTimeString {
             accessibilityLabel = "\(server.name), \(pingTimeString)"
@@ -73,6 +77,24 @@ class RegionCell: UITableViewCell, Restylable {
         self.setSelected(false, animated: false)
     }
 
+    private func prepareCellIcons() {
+        guard let server = server else {
+            return
+        }
+        let suffix = iconSelected ? "-selected" : ""
+        if server.geo {
+            leftIconImageView.image = UIImage(named: Theme.current.geoImageName()+suffix)
+            rightIconImageView.image = UIImage(named: "region-selected")
+            leftIconImageView.isHidden = false
+            rightIconImageView.isHidden = !iconSelected
+        } else {
+            leftIconImageView.image = UIImage(named: "region-selected")
+            rightIconImageView.image = UIImage(named: Theme.current.geoImageName()+suffix)
+            leftIconImageView.isHidden = !iconSelected
+            rightIconImageView.isHidden = true
+        }
+    }
+    
     // MARK: Restylable
 
     func viewShouldRestyle() {
@@ -87,6 +109,8 @@ class RegionCell: UITableViewCell, Restylable {
         if Theme.current.palette.appearance! == .dark {
             self.favoriteImageView.tintColor = UIColor.piaGrey10
         }
+        
+        prepareCellIcons()
         
     }
     

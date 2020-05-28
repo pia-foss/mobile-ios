@@ -37,6 +37,7 @@ class RegionTile: UIView, Tileable {
     @IBOutlet private weak var tileTitle: UILabel!
     @IBOutlet private weak var serverName: UILabel!
     @IBOutlet private weak var mapImageView: UIImageView!
+    private var greenDot: UIView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -71,11 +72,26 @@ class RegionTile: UIView, Tileable {
     }
     
     @objc private func updateServer() {
+        
+        greenDot?.removeFromSuperview()
+        
         let effectiveServer = Client.preferences.displayedServer
         let targetServer = Client.providers.serverProvider.targetServer
         let vpn = Client.providers.vpnProvider
         self.serverName.text = effectiveServer.name(forStatus: vpn.vpnStatus)
-        self.mapImageView.image = UIImage(named: Theme.current.mapImageByServerName(effectiveServer.name, andTargetServer: targetServer.name))
+        self.mapImageView.image = Theme.current.mapImage()
+
+        if effectiveServer.name != L10n.Global.automatic {
+            //NO AUTOMATIC
+            let coordFinder = CoordinatesFinder(forServer: effectiveServer.name, usingMapImage: self.mapImageView)
+            greenDot = coordFinder.dot()
+        } else {
+            let coordFinder = CoordinatesFinder(forServer: targetServer.name, usingMapImage: self.mapImageView)
+            greenDot = coordFinder.dot()
+        }
+
+        self.mapImageView.addSubview(greenDot)
+
     }
     
     @objc private func viewShouldRestyle() {

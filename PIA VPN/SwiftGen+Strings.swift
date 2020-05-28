@@ -688,6 +688,12 @@ internal enum L10n {
         internal static let title = L10n.tr("Localizable", "settings.encryption.handshake.title")
       }
     }
+    internal enum Geo {
+      internal enum Servers {
+        /// Show relocated servers
+        internal static let description = L10n.tr("Localizable", "settings.geo.servers.description")
+      }
+    }
     internal enum Hotspothelper {
       /// Configure how PIA will behave on connection to WiFi or cellular networks. This excludes disconnecting manually.
       internal static let description = L10n.tr("Localizable", "settings.hotspothelper.description")

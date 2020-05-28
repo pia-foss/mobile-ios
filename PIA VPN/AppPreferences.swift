@@ -76,6 +76,9 @@ class AppPreferences {
         static let canAskAgainForReview = "canAskAgainForReview"
         static let lastRatingRejection = "lastRatingRejection"
 
+        // GEO servers
+        static let showGeoServers = "ShowGeoServers"
+
     }
 
     static let shared = AppPreferences()
@@ -352,6 +355,15 @@ class AppPreferences {
             defaults.set(newValue, forKey: Entries.lastRatingRejection)
         }
     }
+    
+    var showGeoServers: Bool {
+        get {
+            return defaults.bool(forKey: Entries.showGeoServers)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.showGeoServers)
+        }
+    }
 
     private init() {
         guard let defaults = UserDefaults(suiteName: AppConstants.appGroup) else {
@@ -378,7 +390,8 @@ class AppPreferences {
             Entries.useSmallPackets: false,
             Entries.canAskAgainForReview: false,
             Entries.successConnections: 0,
-            Entries.failureConnections: 0
+            Entries.failureConnections: 0,
+            Entries.showGeoServers: true
         ])
     }
     
@@ -490,6 +503,7 @@ class AppPreferences {
         Client.configuration.setServerNetworks(to: .legacy)
         Client.resetServers(completionBlock: {_ in })
         failureConnections = 0
+        showGeoServers = true
     }
     
     func clean() {
@@ -516,6 +530,7 @@ class AppPreferences {
         Client.configuration.setServerNetworks(to: .legacy)
         Client.resetServers(completionBlock: {_ in })
         failureConnections = 0
+        showGeoServers = true
     }
     
 //    + (void)eraseForTesting;

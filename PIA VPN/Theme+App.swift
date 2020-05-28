@@ -215,6 +215,14 @@ extension Theme {
         }
     }
     
+    public func geoImageName() -> String {
+        if palette.appearance == .dark {
+            return "icon-geo-dark"
+        } else {
+            return "icon-geo"
+        }
+    }
+    
     public func applyBadgeStyle(_ label: UILabel) {
         label.font = UIFont.mediumFontWith(size: 10)
         label.textColor = palette.principalBackground
@@ -229,17 +237,16 @@ extension Theme {
             Asset.Piax.Regions.noResultsLight.image
     }
     
-    public func mapImageByServerName(_ serverName: String, andTargetServer targetServer: String? = nil) -> String {
-        let prefix = palette.appearance == .dark ? "Dark-Map-" : "Light-Map-"
-        if serverName != L10n.Global.automatic {
-            return prefix + serverName
-        } else {
-            if let targetServer = targetServer {
-                return prefix + targetServer
-            } else {
-                return prefix + "Spain"
-            }
+    public func mapImage() -> UIImage? {
+        
+        let image = UIImage(named: "Dark-Map")
+        
+        if palette.appearance == .light {
+            return image?.image(alpha: 0.15)
         }
+        
+        return image
+        
     }
     
     public func dragDropImage() -> UIImage {
