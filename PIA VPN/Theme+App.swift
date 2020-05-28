@@ -215,6 +215,14 @@ extension Theme {
         }
     }
     
+    public func geoImageName() -> String {
+        if palette.appearance == .dark {
+            return "icon-geo-dark"
+        } else {
+            return "icon-geo"
+        }
+    }
+    
     public func applyBadgeStyle(_ label: UILabel) {
         label.font = UIFont.mediumFontWith(size: 10)
         label.textColor = palette.principalBackground
