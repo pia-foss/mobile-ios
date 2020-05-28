@@ -690,7 +690,7 @@ internal enum L10n {
     }
     internal enum Geo {
       internal enum Servers {
-        /// Show relocated servers
+        /// Include locations provided by geolocation only
         internal static let description = L10n.tr("Localizable", "settings.geo.servers.description")
       }
     }

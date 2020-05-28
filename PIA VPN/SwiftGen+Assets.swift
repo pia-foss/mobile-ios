@@ -326,6 +326,10 @@ enum Asset {
   static let iconAccount = ImageAsset(name: "icon-account")
   static let iconAdd = ImageAsset(name: "icon-add")
   static let iconContact = ImageAsset(name: "icon-contact")
+  static let iconGeoDarkSelected = ImageAsset(name: "icon-geo-dark-selected")
+  static let iconGeoDark = ImageAsset(name: "icon-geo-dark")
+  static let iconGeoSelected = ImageAsset(name: "icon-geo-selected")
+  static let iconGeo = ImageAsset(name: "icon-geo")
   static let iconHomepage = ImageAsset(name: "icon-homepage")
   static let iconLogout = ImageAsset(name: "icon-logout")
   static let iconPrivacy = ImageAsset(name: "icon-privacy")
@@ -613,6 +617,10 @@ enum Asset {
     iconAccount,
     iconAdd,
     iconContact,
+    iconGeoDarkSelected,
+    iconGeoDark,
+    iconGeoSelected,
+    iconGeo,
     iconHomepage,
     iconLogout,
     iconPrivacy,

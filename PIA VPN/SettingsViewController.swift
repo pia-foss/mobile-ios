@@ -1126,6 +1126,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         case .geoServers:
             cell.textLabel?.text = L10n.Settings.Geo.Servers.description
+            cell.textLabel?.numberOfLines = 0
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchGeoServers
             cell.selectionStyle = .none
