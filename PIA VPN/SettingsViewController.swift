@@ -142,6 +142,8 @@ class SettingsViewController: AutolayoutViewController {
                 
         case autoConnectSettings
 
+        case geoSettings
+
         case contentBlocker
 
         case applicationInformation
@@ -160,6 +162,7 @@ class SettingsViewController: AutolayoutViewController {
         .ikeV2encryption,
         .applicationSettings,
         .autoConnectSettings,
+        .geoSettings,
         .applicationInformation,
         .reset,
         .contentBlocker,
@@ -190,6 +193,9 @@ class SettingsViewController: AutolayoutViewController {
         .autoConnectSettings: [
             .trustedNetworks
         ],
+        .geoSettings: [
+            .geoServers
+        ],
         .contentBlocker: [
             .contentBlockerState,
             .contentBlockerRefreshRules
@@ -202,7 +208,6 @@ class SettingsViewController: AutolayoutViewController {
         ],
         .preview: [
             .serversNetwork,
-            .geoServers
         ],
         .development: [
 //            .truncateDebugLog,
@@ -889,6 +894,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             return nil
            
         case .autoConnectSettings:
+            return nil
+
+        case .geoSettings:
             return nil
 
         case .smallPackets:
