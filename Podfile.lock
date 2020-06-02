@@ -134,10 +134,10 @@ DEPENDENCIES:
   - Fabric
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
-  - PIALibrary/Library (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
-  - PIALibrary/Mock (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
-  - PIALibrary/UI (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
-  - PIALibrary/VPN (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `c98145c`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `c98145c`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `c98145c`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `c98145c`)
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`, commit `1585891`)
   - PopupDialog
   - ReachabilitySwift (~> 4.3.0)
@@ -178,7 +178,8 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :path: "/Users/ueshiba/Projects/PIA/client-library-apple"
+    :commit: c98145c
+    :git: https://github.com/pia-foss/client-library-apple
   PIAWireguard:
     :commit: '1585891'
     :git: https://github.com/pia-foss/ios-wireguard
@@ -187,6 +188,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/pia-foss/tunnelkit
 
 CHECKOUT OPTIONS:
+  PIALibrary:
+    :commit: c98145c
+    :git: https://github.com/pia-foss/client-library-apple
   PIAWireguard:
     :commit: '1585891'
     :git: https://github.com/pia-foss/ios-wireguard
@@ -227,6 +231,6 @@ SPEC CHECKSUMS:
   TunnelKit: d13d005c0c7febd18a03a87e1ab7d4414fef3ffd
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 71612555d575f50b05abb4483a599afd55f41b0d
+PODFILE CHECKSUM: 4c503537713f9e43b16ea8ef70beafd3dbc8447a
 
 COCOAPODS: 1.7.5
