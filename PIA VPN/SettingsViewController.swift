@@ -571,6 +571,9 @@ class SettingsViewController: AutolayoutViewController {
             pendingPreferences.mace = false
         }
         
+        //update NMT preferences value
+        pendingPreferences.nmtRulesEnabled = Client.preferences.nmtRulesEnabled
+        
         pendingVPNAction = pendingPreferences.requiredVPNAction()
 
         guard let action = pendingVPNAction else {
