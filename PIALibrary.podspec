@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name              = "PIALibrary"
-    s.version           = "2.6.0"
+    s.version           = "2.7.0"
     s.summary           = "PIA client library in Swift."
 
     s.homepage          = "https://www.privateinternetaccess.com/"
@@ -32,6 +32,8 @@ Pod::Spec.new do |s|
         p.dependency "ReachabilitySwift"
         p.dependency "SwiftyBeaver"
         p.dependency "PopupDialog"
+        p.dependency "Regions"
+        
     end
 
     s.subspec "VPN" do |p|

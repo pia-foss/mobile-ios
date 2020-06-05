@@ -36,8 +36,6 @@ extension Client {
         
         /// If `true`, expose development features.
         public var isDevelopment: Bool
-
-        var publicKey: SecKey?
         
         // MARK: WebServices
         
@@ -148,10 +146,6 @@ extension Client {
         /// The value of the max of servers appearing in the quick connect tile.
         public var maxQuickConnectServers: Int
 
-        // MARK: Access to Data PublicKey
-        private let accessQueue = DispatchQueue(label: "SynchronizedDataAccess",
-                                                attributes: .concurrent)
-                
         /// Store the account password in memory when the email is set and the user is LoggedIn.
         public var tempAccountPassword: String
 
@@ -164,8 +158,6 @@ extension Client {
 
             isDevelopment = false
 
-            let bundle = Bundle(for: Client.self)
-            
             let production = "https://www.privateinternetaccess.com"
             baseUrls = [
                 .production: production
@@ -232,50 +224,7 @@ extension Client {
             maxQuickConnectServers = 6
             tempAccountPassword = ""
             serverNetwork = Client.database.plain.serverNetwork
-            
-            if let publicKey = database.secure.publicKeyEntry() {
-                self.publicKey = publicKey
-            } else {
-                accessQueue.sync {
-                    guard let pubKeyFile = bundle.path(forResource: "PIA", ofType: "pub") else {
-                        preconditionFailure("Can't find pub key file")
-                    }
-                    guard let pubKeyData = try? Data(contentsOf: URL(fileURLWithPath: pubKeyFile)) else {
-                        preconditionFailure("Can't create Data object from PUB file")
-                    }
-                    guard let strippedData = pubKeyData.withStrippedASN1Header() else {
-                        preconditionFailure("Can't strip ASN1 header")
-                    }
-                    guard let publicKey = database.secure.setPublicKey(withData: strippedData) else {
-                        //Use the key manually if can't be stored
-                        self.loadPublicKeyInMemoryWithData(strippedData)
-                        return
-                    }
-                    self.publicKey = publicKey
-                }
-            }
-        }
-        
-        /**
-         Loads the public key in memory when setting the public key in the secure database fails
-         - Parameter strippedData: The pubKeyData with the stripped ASN1 header.
-         */
-        private func loadPublicKeyInMemoryWithData(_ strippedData: Data) {
-            let sizeInBits = strippedData.count * 8
-            let keyDict: [CFString: Any] = [
-                kSecAttrKeyType: kSecAttrKeyTypeRSA,
-                kSecAttrKeyClass: kSecAttrKeyClassPublic,
-                kSecAttrKeySizeInBits: NSNumber(value: sizeInBits),
-                kSecReturnPersistentRef: true
-            ]
-            
-            var error: Unmanaged<CFError>?
-            guard let publicKey = SecKeyCreateWithData(strippedData as CFData,
-                                                       keyDict as CFDictionary,
-                                                       &error) else {
-                                                        preconditionFailure("Can't set the public key in the Keychain")
-            }
-            self.publicKey = publicKey
+
         }
         
         // MARK: WebServices

@@ -17,6 +17,9 @@ PODS:
     - DynamicBlurView (~> 3.0.1)
   - QuickLayout (2.0.2)
   - ReachabilitySwift (4.3.0)
+  - Regions (1.0.0):
+    - Regions/Core (= 1.0.0)
+  - Regions/Core (1.0.0)
   - SwiftEntryKit (0.7.2):
     - QuickLayout (= 2.0.2)
   - SwiftyBeaver (1.7.0)
@@ -41,6 +44,7 @@ DEPENDENCIES:
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`, commit `1585891`)
   - PopupDialog
   - ReachabilitySwift
+  - Regions (from `/Users/ueshiba/Projects/PIA/regions`)
   - SwiftEntryKit (= 0.7.2)
   - SwiftyBeaver (~> 1.7.0)
   - TunnelKit (from `https://github.com/pia-foss/tunnelkit`, commit `d19b9de`)
@@ -64,6 +68,8 @@ EXTERNAL SOURCES:
   PIAWireguard:
     :commit: '1585891'
     :git: https://github.com/pia-foss/ios-wireguard
+  Regions:
+    :path: "/Users/ueshiba/Projects/PIA/regions"
   TunnelKit:
     :commit: d19b9de
     :git: https://github.com/pia-foss/tunnelkit
@@ -87,11 +93,12 @@ SPEC CHECKSUMS:
   PopupDialog: f4bb461bf70ff422be0b56656566424ee9273080
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
+  Regions: 6a5f93c65ba0dfef817c16058cdd3ff858135597
   SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
   TunnelKit: d13d005c0c7febd18a03a87e1ab7d4414fef3ffd
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: d27651f992a5919c89818ce4e4a0007b95deb8e1
+PODFILE CHECKSUM: e87888c27b1b5dba4732ab81ddc08f26053f480c
 
 COCOAPODS: 1.7.5

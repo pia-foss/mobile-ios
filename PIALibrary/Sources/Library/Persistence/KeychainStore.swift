@@ -21,11 +21,9 @@
 //
 
 import Foundation
+import Regions
 
 class KeychainStore: SecureStore {
-    private struct Entries {
-        static let publicKey = "PIAPublicKey"
-    }
     
     private let backend: Keychain
 
@@ -42,25 +40,6 @@ class KeychainStore: SecureStore {
     }
 
     // MARK: SecureStore
-
-    var publicKey: SecKey?
-    
-    func publicKeyEntry() -> SecKey? {
-        guard let publicKey = try? backend.publicKey(withIdentifier: Entries.publicKey) else {
-            return nil
-        }
-        self.publicKey = publicKey
-        return publicKey
-    }
-    
-    func setPublicKey(withData data: Data) -> SecKey? {
-        backend.remove(publicKeyWithIdentifier: Entries.publicKey)
-        guard let publicKey = try? backend.add(publicKeyWithIdentifier: Entries.publicKey, data: data) else {
-            return nil
-        }
-        self.publicKey = publicKey
-        return publicKey
-    }
     
     func password(for username: String) -> String? {
         return try? backend.password(for: username)
@@ -81,7 +60,7 @@ class KeychainStore: SecureStore {
     func clear(for username: String) {
         backend.removePassword(for: username)
         backend.removeToken(for: tokenKey(for: username))
-        backend.remove(publicKeyWithIdentifier: Entries.publicKey)
+        PublicKeyKeychainStore().clearPubKey()
     }
 }
 

@@ -169,68 +169,6 @@ public class Keychain {
         return password
     }
     
-    // MARK: Key
-    
-    // https://forums.developer.apple.com/thread/13748
-    
-    /// :nodoc:
-    public func add(publicKeyWithIdentifier identifier: String, data: Data) throws -> SecKey {
-        var query = [String: Any]()
-        query[kSecClass as String] = kSecClassKey
-        query[kSecAttrApplicationTag as String] = identifier
-        query[kSecAttrKeyType as String] = kSecAttrKeyTypeRSA
-        query[kSecAttrKeyClass as String] = kSecAttrKeyClassPublic
-        query[kSecValueData as String] = data
-
-        // XXX
-        query.removeValue(forKey: kSecAttrService as String)
-
-        let status = SecItemAdd(query as CFDictionary, nil)
-        guard (status == errSecSuccess) else {
-            throw KeychainError.add
-        }
-        return try publicKey(withIdentifier: identifier)
-    }
-    
-    /// :nodoc:
-    public func publicKey(withIdentifier identifier: String) throws -> SecKey {
-        var query = [String: Any]()
-        query[kSecClass as String] = kSecClassKey
-        query[kSecAttrApplicationTag as String] = identifier
-        query[kSecAttrKeyType as String] = kSecAttrKeyTypeRSA
-        query[kSecAttrKeyClass as String] = kSecAttrKeyClassPublic
-        query[kSecReturnRef as String] = true
-
-        // XXX
-        query.removeValue(forKey: kSecAttrService as String)
-
-        var result: AnyObject?
-        let status = SecItemCopyMatching(query as CFDictionary, &result)
-        guard (status == errSecSuccess) else {
-            throw KeychainError.notFound
-        }
-//        guard let key = result as? SecKey else {
-//            throw KeychainError.typeMismatch
-//        }
-//        return key
-        return result as! SecKey
-    }
-    
-    /// :nodoc:
-    @discardableResult public func remove(publicKeyWithIdentifier identifier: String) -> Bool {
-        var query = [String: Any]()
-        query[kSecClass as String] = kSecClassKey
-        query[kSecAttrApplicationTag as String] = identifier
-        query[kSecAttrKeyType as String] = kSecAttrKeyTypeRSA
-        query[kSecAttrKeyClass as String] = kSecAttrKeyClassPublic
-
-        // XXX
-        query.removeValue(forKey: kSecAttrService as String)
-
-        let status = SecItemDelete(query as CFDictionary)
-        return (status == errSecSuccess)
-    }
-    
     // MARK: Helpers
     
     private func setScope(query: inout [String: Any]) {

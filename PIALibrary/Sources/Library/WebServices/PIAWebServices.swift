@@ -24,6 +24,7 @@ import Foundation
 import Alamofire
 import Gloss
 import SwiftyBeaver
+import Regions
 
 private let log = SwiftyBeaver.self
 
@@ -265,9 +266,8 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                 callback?(nil, ClientError.malformedResponseData)
                 return
             }
-            if self.accessedConfiguration.verifiesServersSignature,
-                let key = self.accessedConfiguration.publicKey {
-                guard response.verifySignature(publicKey: key) else {
+            if self.accessedConfiguration.verifiesServersSignature {
+                guard response.verifySignature() else {
                     callback?(nil, ClientError.badServersSignature)
                     return
                 }
