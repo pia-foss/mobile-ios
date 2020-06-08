@@ -26,6 +26,8 @@ import PIALibrary
 
 class QuickConnectTile: UIView, Tileable {
 
+    private let maxElementsInArray = 6
+    
     var view: UIView!
     var detailSegueIdentifier: String!
     var status: TileStatus = .normal {
@@ -37,6 +39,8 @@ class QuickConnectTile: UIView, Tileable {
     @IBOutlet private weak var tileTitle: UILabel!
     @IBOutlet private weak var stackView: UIStackView!
 
+    private var historicalServers: [Server] = []
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.xibSetup()
@@ -70,7 +74,8 @@ class QuickConnectTile: UIView, Tileable {
     }
     
     @objc private func updateQuickConnectList() {
-        let historicalServers = Client.providers.serverProvider.historicalServers.filter { $0.serverNetwork == Client.configuration.currentServerNetwork() }
+        
+        historicalServers = Client.providers.serverProvider.historicalServers.filter { $0.serverNetwork == Client.configuration.currentServerNetwork() }
         for containerView in stackView.subviews {
             if let button = containerView.subviews.first as? ServerButton,
                 let favoriteImage = containerView.subviews.last as? UIImageView {
@@ -87,6 +92,8 @@ class QuickConnectTile: UIView, Tileable {
             AppPreferences.shared.favoriteServerIdentifiersGen4 :
             AppPreferences.shared.favoriteServerIdentifiers
 
+        autocompleteRecentServers()
+        
         for (index, server) in historicalServers.enumerated().reversed()  {
             let buttonIndex = historicalServers.count - (index + 1)
             let view = stackView.subviews[buttonIndex]
@@ -104,6 +111,24 @@ class QuickConnectTile: UIView, Tileable {
                 }
             }
         }
+    }
+    
+    private func autocompleteRecentServers() {
+        
+        var currentServers = Client.providers.serverProvider.currentServers.filter { $0.serverNetwork == Client.configuration.currentServerNetwork() }
+        currentServers = currentServers.sorted(by: { $0.pingTime ?? 1000 < $1.pingTime ?? 1000 })
+
+        let numberOfServersToAdd = maxElementsInArray - historicalServers.count
+
+        if numberOfServersToAdd > 0 && currentServers.first?.pingTime != nil {
+            let arraySlice = currentServers.prefix(numberOfServersToAdd)
+            let newServersArray = Array(arraySlice)
+            let currentHistorical = historicalServers
+            historicalServers.removeAll()
+            historicalServers.append(contentsOf: newServersArray.reversed())
+            historicalServers.append(contentsOf: currentHistorical)
+        }
+        
     }
     
     @IBAction private func connectToServer(_ sender: ServerButton) {
