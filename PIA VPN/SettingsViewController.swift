@@ -571,9 +571,14 @@ class SettingsViewController: AutolayoutViewController {
             pendingPreferences.mace = false
         }
         
-        //update NMT preferences value
+        //Update with values from Trusted Network Settings
+        pendingPreferences.trustedNetworks = Client.preferences.trustedNetworks
         pendingPreferences.nmtRulesEnabled = Client.preferences.nmtRulesEnabled
-        
+        pendingPreferences.availableNetworks = Client.preferences.availableNetworks
+        pendingPreferences.shouldConnectForAllNetworks = Client.preferences.shouldConnectForAllNetworks
+        pendingPreferences.useWiFiProtection = Client.preferences.useWiFiProtection
+        pendingPreferences.trustCellularData = Client.preferences.trustCellularData
+
         pendingVPNAction = pendingPreferences.requiredVPNAction()
 
         guard let action = pendingVPNAction else {
