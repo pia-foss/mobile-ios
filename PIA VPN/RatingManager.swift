@@ -66,13 +66,15 @@ class RatingManager {
     }
     
     func logError() {
-        if AppPreferences.shared.failureConnections == self.errorInConnectionsUntilPrompt {
-            askForConnectionIssuesFeedback()
-            AppPreferences.shared.failureConnections = 0
+        if Client.daemons.isNetworkReachable {
+            if AppPreferences.shared.failureConnections == self.errorInConnectionsUntilPrompt {
+                askForConnectionIssuesFeedback()
+                AppPreferences.shared.failureConnections = 0
+            }
+            AppPreferences.shared.failureConnections += 1
         }
-        AppPreferences.shared.failureConnections += 1
     }
-    
+
     private func openRatingViewInAppstore() {
         
         let urlStr = AppConstants.Reviews.appReviewUrl
