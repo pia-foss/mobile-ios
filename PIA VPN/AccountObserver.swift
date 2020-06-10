@@ -47,9 +47,9 @@ class AccountObserver {
     }
     
     @objc private func registerExpirationNotifications() -> [Date]? {
-        let application = UIApplication.shared
-        application.cancelAllLocalNotifications()
-        
+
+        cancelExpirationNotifications()
+
         guard let accountInfo = Client.providers.accountProvider.currentUser?.info else {
             return nil
         }
@@ -77,17 +77,34 @@ class AccountObserver {
             dates.append(oneDayPrior)
         }
         
+        let userNotificationCenter = UNUserNotificationCenter.current()
+
         for date in dates {
-            let note = UILocalNotification()
-            note.timeZone = NSTimeZone.local
-            note.fireDate = date
-            note.alertAction = L10n.Expiration.title
-            note.alertBody = L10n.Expiration.message
-            note.userInfo = ["date": date]
-            note.soundName = UILocalNotificationDefaultSoundName
-            note.applicationIconBadgeNumber = 1
             
-            application.scheduleLocalNotification(note)
+            let note = UNMutableNotificationContent()
+
+            note.title = L10n.Expiration.title
+            note.body = L10n.Expiration.message
+            note.userInfo = ["date": date]
+            note.sound = .default
+            note.badge = 1
+            
+            let calendar = Calendar(identifier: .gregorian)
+            var triggerDate = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second,], from: date)
+            triggerDate.timeZone = NSTimeZone.local
+            
+            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate,
+                                                            repeats: false)
+            let request = UNNotificationRequest(identifier: "registerExpirationNotifications\(date.timeIntervalSinceNow)",
+                                                content: note,
+                                                trigger: trigger)
+            
+            userNotificationCenter.add(request) { (error) in
+                if let error = error {
+                    print("Notification Error: ", error)
+                }
+            }
+
         }
         
         if !dates.isEmpty {
@@ -98,8 +115,7 @@ class AccountObserver {
     }
     
     private func cancelExpirationNotifications() {
-        UIApplication.shared.cancelAllLocalNotifications()
-
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         log.debug("Account: Cancelled any pending renewal notification")
     }
     
