@@ -114,9 +114,9 @@ class QuickConnectTile: UIView, Tileable {
     }
     
     private func autocompleteRecentServers() {
-        
         var currentServers = Client.providers.serverProvider.currentServers.filter { $0.serverNetwork == Client.configuration.currentServerNetwork() }
         currentServers = currentServers.sorted(by: { $0.pingTime ?? 1000 < $1.pingTime ?? 1000 })
+        currentServers = currentServers.filterDuplicate{ ($0.country) }
 
         let numberOfServersToAdd = maxElementsInArray - historicalServers.count
 
