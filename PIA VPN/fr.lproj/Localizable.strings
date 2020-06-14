@@ -96,6 +96,7 @@
 "global.no" = "Non";
 "global.ok" = "OK";
 "global.optional" = "Facultatif";
+"global.or" = "ou";
 "global.remove" = "Supprimer";
 "global.required" = "Requis";
 "global.share" = "Partager";
@@ -132,6 +133,15 @@
 "notifications.disabled.message" = "Activez les notifications pour recevoir un rappel lorsque votre adhésion est sur le point d'expirer.";
 "notifications.disabled.settings" = "Paramètres";
 "notifications.disabled.title" = "Notifications désactivées";
+"rating.enjoy.question" = "Vous appréciez PIA VPN ?";
+"rating.enjoy.subtitle" = "Nous espérons que notre produit VPN répond à vos attentes";
+"rating.error.button.send" = "Envoyer un commentaire";
+"rating.error.question" = "Oh non, que s'est-il passé ?";
+"rating.error.subtitle" = "Dites-nous quel a été le problème. Nous aimerions le corriger.";
+"rating.problems.question" = "Quel était le problème ?";
+"rating.problems.subtitle" = "Vous voulez nous envoyer un commentaire ? Nous pouvons vous aider à améliorer votre expérience sur PIA";
+"rating.rate.question" = "Et un avis sur l'App Store ?";
+"rating.rate.subtitle" = "Nous apprécions que vous partagiez votre expérience";
 "region.accessibility.favorite" = "Ajouter une région préférée";
 "region.accessibility.filter" = "Filtre";
 "region.accessibility.unfavorite" = "Supprimer une région préférée";
@@ -189,6 +199,7 @@
 "settings.encryption.digest.title" = "Authentification des données";
 "settings.encryption.handshake.title" = "Handshake";
 "settings.encryption.title" = "CHIFFREMENT";
+"settings.geo.servers.description" = "Inclure les régions géo-localisées";
 "settings.hotspothelper.all.description" = "La protection WiFi VPN s'activera sur tous les réseaux, y compris les réseaux de confiance.";
 "settings.hotspothelper.all.title" = "Protéger tous les réseaux";
 "settings.hotspothelper.available.add.help" = "Touchez + pour ajouter aux Réseaux de confiance.";
@@ -207,12 +218,15 @@
 "settings.nmt.optout.disconnect.alerts" = "Retirer l'alerte de confirmation de déconnexion";
 "settings.nmt.optout.disconnect.alerts.description" = "Désactive l'alerte d'avertissement quand le VPN est déconnecté.";
 "settings.nmt.wireguard.warning" = "WireGuard® n'a pas besoin de se reconnecter lorsque vous passez d'un réseau à l'autre. Il peut être nécessaire de déconnecter manuellement le VPN sur les réseaux approuvés.";
+"settings.preview.title" = "Aperçu";
 "settings.reset.defaults.confirm.button" = "Réinitialiser";
 "settings.reset.defaults.confirm.message" = "Cette action rétablira les paramètres par défaut de l'application. Toutes les modifications effectuées seront perdues.";
 "settings.reset.defaults.confirm.title" = "Réinitialiser les paramètres";
 "settings.reset.defaults.title" = "Réinitialiser les paramètres par défaut";
 "settings.reset.footer" = "Tout les paramètres ci-dessus seront réinitialisés.";
 "settings.reset.title" = "RÉINITIALISER";
+"settings.server.network.alert" = "Le VPN doit être déconnecté pour changer le réseau du serveur.";
+"settings.server.network.description" = "Réseau nouvelle génération";
 "settings.small.packets.description" = "Diminue légèrement la taille des paquets IP pour améliorer la compatibilité avec certains routeurs et réseaux mobiles.";
 "settings.small.packets.title" = "Utiliser des petits paquets";
 "settings.trusted.networks.connect.message" = "Protéger ce réseau en vous connectant au VPN ?";

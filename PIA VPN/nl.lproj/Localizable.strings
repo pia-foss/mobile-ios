@@ -96,6 +96,7 @@
 "global.no" = "Nee";
 "global.ok" = "OK";
 "global.optional" = "Optioneel";
+"global.or" = "of";
 "global.remove" = "Verwijderen";
 "global.required" = "Vereist";
 "global.share" = "Delen";
@@ -132,6 +133,15 @@
 "notifications.disabled.message" = "Schakel meldingen in om een herinnering te ontvangen om uw abonnement te vernieuwen als het bijna is verlopen.";
 "notifications.disabled.settings" = "Instellingen";
 "notifications.disabled.title" = "Meldingen uitgeschakeld";
+"rating.enjoy.question" = "Geniet u van PIA VPN?";
+"rating.enjoy.subtitle" = "We hopen dat ons VPN-product aan uw verwachtingen voldoet";
+"rating.error.button.send" = "Feedback sturen";
+"rating.error.question" = "O nee, wat is er fout gegaan?";
+"rating.error.subtitle" = "Laat het ons weten. We willen het graag voor u verhelpen.";
+"rating.problems.question" = "Wat is er fout gegaan?";
+"rating.problems.subtitle" = "Wilt u feedback geven? We kunnen u helpen met het verbeteren van uw ervaring met PIA.";
+"rating.rate.question" = "Waarom laat u geen beoordeling achter in de AppStore?";
+"rating.rate.subtitle" = "We stellen het op prijs dat u uw ervaring deelt";
 "region.accessibility.favorite" = "Een favoriete regio toevoegen";
 "region.accessibility.filter" = "Sorteren";
 "region.accessibility.unfavorite" = "Een favoriete regio verwijderen";
@@ -189,6 +199,7 @@
 "settings.encryption.digest.title" = "Gegevensauthenticatie";
 "settings.encryption.handshake.title" = "Handdruk";
 "settings.encryption.title" = "VERSLEUTELING";
+"settings.geo.servers.description" = "Geolocatie-regio's opnemen";
 "settings.hotspothelper.all.description" = "VPN-wifibescherming wordt op alle netwerken geactiveerd, inclusief vertrouwde netwerken.";
 "settings.hotspothelper.all.title" = "Bescherm alle netwerken";
 "settings.hotspothelper.available.add.help" = "Tik op + om aan vertrouwde netwerken toe te voegen.";
@@ -207,12 +218,15 @@
 "settings.nmt.optout.disconnect.alerts" = "Bevestigingsmelding voor verbreken verbinding uitschakelen";
 "settings.nmt.optout.disconnect.alerts.description" = "Schakelt de melding bij het verbreken van de verbinding met de VPN uit.";
 "settings.nmt.wireguard.warning" = "WireGuard® hoeft niet opnieuw verbinding te maken als u tussen verschillende netwerken schakelt. Het kan noodzakelijk zijn om de verbinding met de VPN op vertrouwde netwerken te verbreken.";
+"settings.preview.title" = "Voorbeeld";
 "settings.reset.defaults.confirm.button" = "Resetten";
 "settings.reset.defaults.confirm.message" = "Hiermee zet u de standaardinstellingen van de app terug. Alle wijzigingen die u heeft gemaakt, gaan verloren.";
 "settings.reset.defaults.confirm.title" = "Instellingen resetten";
 "settings.reset.defaults.title" = "Resetten naar standaardinstellingen";
 "settings.reset.footer" = "Hiermee worden alle bovenstaande instellingen teruggezet naar de standaardwaarden.";
 "settings.reset.title" = "RESETTEN";
+"settings.server.network.alert" = "De VPN-verbinding moet worden verbroken om het servernetwerk te wijzigen.";
+"settings.server.network.description" = "Volgende-generatienetwerk";
 "settings.small.packets.description" = "Maakt het IP-pakket iets kleiner om de compatibiliteit met sommige routers en mobiele netwerken te verbeteren.";
 "settings.small.packets.title" = "Kleine pakketten gebruiken";
 "settings.trusted.networks.connect.message" = "Dit netwerk beschermen door met VPN te verbinden?";

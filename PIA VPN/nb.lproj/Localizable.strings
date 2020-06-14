@@ -96,6 +96,7 @@
 "global.no" = "Nei";
 "global.ok" = "OK";
 "global.optional" = "Valgfritt";
+"global.or" = "eller";
 "global.remove" = "Fjern";
 "global.required" = "Påkrevd";
 "global.share" = "Del";
@@ -132,6 +133,15 @@
 "notifications.disabled.message" = "Aktiver varsler for å motta en påminnelse om å fornye abonnementet ditt før det utløper.";
 "notifications.disabled.settings" = "Innstillinger";
 "notifications.disabled.title" = "Varsler deaktivert";
+"rating.enjoy.question" = "Liker du PIA VPN?";
+"rating.enjoy.subtitle" = "Vi håper VPN-produktet svarer til forventningene dine";
+"rating.error.button.send" = "Send tilbakemelding";
+"rating.error.question" = "Å nei, hva gikk galt?";
+"rating.error.subtitle" = "La oss få høre. Vi vil gjerne fikse det for deg.";
+"rating.problems.question" = "Hva gikk galt?";
+"rating.problems.subtitle" = "Ønsker du å sende en tilbakemelding? Vi kan bidra til å forbedre opplevelsen din med PIA";
+"rating.rate.question" = "Hva med en anmeldelse på AppStore?";
+"rating.rate.subtitle" = "Vi setter pris på at du deler opplevelsen din";
 "region.accessibility.favorite" = "Legg til favorittområde";
 "region.accessibility.filter" = "Filter";
 "region.accessibility.unfavorite" = "Fjern et favorittområde";
@@ -189,6 +199,7 @@
 "settings.encryption.digest.title" = "Dataverifisering";
 "settings.encryption.handshake.title" = "Håndtrykk";
 "settings.encryption.title" = "KRYPTERING";
+"settings.geo.servers.description" = "Inkluder geo-lokaliserte regioner";
 "settings.hotspothelper.all.description" = "VPN WiFi-beskyttelse aktiveres på alle nettverk, inkludert pålitelige nettverk.";
 "settings.hotspothelper.all.title" = "Beskytt alle nettverk";
 "settings.hotspothelper.available.add.help" = "Trykk på + for å legge til pålitelige nettverk.";
@@ -207,12 +218,15 @@
 "settings.nmt.optout.disconnect.alerts" = "Slå av bekreftelse på frakobling";
 "settings.nmt.optout.disconnect.alerts.description" = "Deaktiverer advarselvarselet når du kobler fra VPN-en.";
 "settings.nmt.wireguard.warning" = "WireGuard® må ikke koble til igjen når du bytter mellom ulike nettverk. Det kan være nødvendig å manuelt koble fra VPN-en på pålitelige nettverk.";
+"settings.preview.title" = "Forhåndsvisning";
 "settings.reset.defaults.confirm.button" = "Tilbakestill";
 "settings.reset.defaults.confirm.message" = "Dette bringer appen tilbake til fabrikkinnstillingene. Du mister alle endringer.";
 "settings.reset.defaults.confirm.title" = "Innstillinger for tilbakestilling";
 "settings.reset.defaults.title" = "Tilbakestill til fabrikkinstillinger";
 "settings.reset.footer" = "Dette tilbakestiller alle innstillingene ovenfor til standard.";
 "settings.reset.title" = "TILBAKESTILL";
+"settings.server.network.alert" = "VPN må kobles fra for å endre nettverkstjeneren.";
+"settings.server.network.description" = "Neste generasjons nettverk";
 "settings.small.packets.description" = "IP-pakkens størrelse vil bli noe mindre for å forbedre kompatibilitet med noen rutere og mobile nettverk.";
 "settings.small.packets.title" = "Bruk små pakker";
 "settings.trusted.networks.connect.message" = "Vil du beskytte dette nettverket ved å koble til VPN?";

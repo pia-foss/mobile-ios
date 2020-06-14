@@ -96,6 +96,7 @@
 "global.no" = "いいえ";
 "global.ok" = "OK";
 "global.optional" = "任意";
+"global.or" = "または";
 "global.remove" = "削除";
 "global.required" = "必須";
 "global.share" = "共有";
@@ -132,6 +133,15 @@
 "notifications.disabled.message" = "通知を有効にし、期限が切れる前にサブスクリプション更新のリマインダーを受け取りましょう。";
 "notifications.disabled.settings" = "設定";
 "notifications.disabled.title" = "通知が無効にされました";
+"rating.enjoy.question" = "PIA VPNを楽しんでいますか？";
+"rating.enjoy.subtitle" = "VPN製品にご満足いただいていることを願っています";
+"rating.error.button.send" = "フィードバックを送信";
+"rating.error.question" = "どのような問題があったのでしょうか？";
+"rating.error.subtitle" = "問題解決に努めたいと思いますので、問題について説明してください。";
+"rating.problems.question" = "どのような問題があったのでしょうか？";
+"rating.problems.subtitle" = "フィードバックを送信しますか？PIAご利用にあたり、お客様のエクスペリエンス改善のお手伝いをいたします。";
+"rating.rate.question" = "AppStoreでレビューしていただけますか？";
+"rating.rate.subtitle" = "お客様のご感想を共有していただければありがたいです";
 "region.accessibility.favorite" = "お気に入りの地域を追加";
 "region.accessibility.filter" = "フィルター";
 "region.accessibility.unfavorite" = "お気に入りの地域を削除";
@@ -189,6 +199,7 @@
 "settings.encryption.digest.title" = "データ認証";
 "settings.encryption.handshake.title" = "ハンドシェイク";
 "settings.encryption.title" = "暗号化";
+"settings.geo.servers.description" = "ジオロケーション地域を含める";
 "settings.hotspothelper.all.description" = "VPN WiFi保護が信頼されているネットワークを含むすべてのネットワークで有効になります。";
 "settings.hotspothelper.all.title" = "すべてのネットワークを保護";
 "settings.hotspothelper.available.add.help" = "信頼されたネットワークを追加するには「+」をタップします。";
@@ -207,12 +218,15 @@
 "settings.nmt.optout.disconnect.alerts" = "切断確認アラートのオプトアウト";
 "settings.nmt.optout.disconnect.alerts.description" = "VPNから切断されたときの警告アラートをオフにします。";
 "settings.nmt.wireguard.warning" = "異なるネットワーク間で切り替える際、WireGuard®は再接続を必要としません。信頼されるネットワーク上ではVPNを手動で切断しなければならない場合もあります。";
+"settings.preview.title" = "プレビュー";
 "settings.reset.defaults.confirm.button" = "リセット";
 "settings.reset.defaults.confirm.message" = "アプリを標準設定に戻します。これまでの変更はすべて失われます。";
 "settings.reset.defaults.confirm.title" = "リセットの設定";
 "settings.reset.defaults.title" = "標準設定にリセット";
 "settings.reset.footer" = "上記すべての設定を標準設定に戻します。";
 "settings.reset.title" = "リセット";
+"settings.server.network.alert" = "サーバーネットワークを変更するにはVPNを切断してください。";
+"settings.server.network.description" = "次世代ネットワーク";
 "settings.small.packets.description" = "IPパケットサイズを少し小さくして、いくつかのルーターおよびモバイルネットワークとの互換性を改善します。";
 "settings.small.packets.title" = "小さなパケットを使用";
 "settings.trusted.networks.connect.message" = "VPNに接続することによりこのネットワークを保護しますか？";

@@ -96,6 +96,7 @@
 "global.no" = "لا";
 "global.ok" = "موافق";
 "global.optional" = "اختياري";
+"global.or" = "أو";
 "global.remove" = "إزالة";
 "global.required" = "مطلوب";
 "global.share" = "مشاركة";
@@ -132,6 +133,15 @@
 "notifications.disabled.message" = "قم بتمكين الإعلامات لكي يتم تذكيرك بتجديد اشتراكك قبل انتهائه.";
 "notifications.disabled.settings" = "الإعدادات";
 "notifications.disabled.title" = "تم تعطيل الإشعارات";
+"rating.enjoy.question" = "هل تستمتع بـ PIA VPN؟";
+"rating.enjoy.subtitle" = "نأمل أن يلبي منتجنا لشبكات VPN توقعاتك";
+"rating.error.button.send" = "إرسال ملاحظات";
+"rating.error.question" = "للأسف، حدث خلل";
+"rating.error.subtitle" = "أخبرنا عن الخلل. نأمل أن نصلحه في أقرب وقت.";
+"rating.problems.question" = "ما الخلل الذي حصل؟";
+"rating.problems.subtitle" = "هل لديك أي ملاحظات؟ يمكننا مساعدتك على تحسين تجربتك في استخدام PIA";
+"rating.rate.question" = "ما رأيك بترك مراجعة في AppStore؟";
+"rating.rate.subtitle" = "نقدّر لك مشاركة تجربتك";
 "region.accessibility.favorite" = "إضافة منطقة مفضلة";
 "region.accessibility.filter" = "تصفية";
 "region.accessibility.unfavorite" = "إزالة منطقة مفضلة";
@@ -189,6 +199,7 @@
 "settings.encryption.digest.title" = "مصادقة البيانات";
 "settings.encryption.handshake.title" = "مصافحة";
 "settings.encryption.title" = "التشفير";
+"settings.geo.servers.description" = "تضمين المناطق المحدد موقعها جغرافيًا";
 "settings.hotspothelper.all.description" = "سيتم تنشيط حماية VPN WiFi على جميع الشبكات، بما في ذلك الشبكات الموثوقة.";
 "settings.hotspothelper.all.title" = "حماية كل الشبكات";
 "settings.hotspothelper.available.add.help" = "اضغط + للإضافة إلى الشبكات الموثوقة.";
@@ -207,12 +218,15 @@
 "settings.nmt.optout.disconnect.alerts" = "إلغاء الاشتراك في تنبيه تأكيد قطع الاتصال";
 "settings.nmt.optout.disconnect.alerts.description" = "يعطّل تنبيه التحذير عند قطع الاتصال بشبكة VPN.";
 "settings.nmt.wireguard.warning" = "لا يحتاج ®WireGuard إلى إعادة الاتصال عند التبديل بين الشبكات المختلفة. قد يكون من الضروري قطع اتصال VPN يدويًا على الشبكات الموثوقة.";
+"settings.preview.title" = "معاينة";
 "settings.reset.defaults.confirm.button" = "إعادة تعيين";
 "settings.reset.defaults.confirm.message" = "سيؤدي هذا الإجراء إلى عودة التطبيق إلى حالته الافتراضية وستفقد كل التغييرات التي أجريتها.";
 "settings.reset.defaults.confirm.title" = "إعادة تعيين الإعدادات";
 "settings.reset.defaults.title" = "إعادة تعيين إلى إعدادات افتراضية";
 "settings.reset.footer" = "سيؤدي هذا الإجراء إلى إعادة تعيين جميع الإعدادات أعلاه.";
 "settings.reset.title" = "إعادة تعيين";
+"settings.server.network.alert" = "يجب قطع اتصال VPN لتغيير شبكة الخادم.";
+"settings.server.network.description" = "شبكة الجيل القادم";
 "settings.small.packets.description" = "سيخفض حجم حزمة IP قليلًا لتحسين التوافق مع بعض أنواع الموجهات وشبكات الجوَّال.";
 "settings.small.packets.title" = "استخدام حزم صغيرة";
 "settings.trusted.networks.connect.message" = "هل تريد حماية هذه الشبكة عبر الاتصال بخدمة VPN؟";
