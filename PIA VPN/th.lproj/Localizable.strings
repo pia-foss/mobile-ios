@@ -96,6 +96,7 @@
 "global.no" = "ไม่";
 "global.ok" = "ตกลง";
 "global.optional" = "ถ้ามี";
+"global.or" = "หรือ";
 "global.remove" = "ลบออก";
 "global.required" = "จำเป็น";
 "global.share" = "แชร์";
@@ -132,6 +133,15 @@
 "notifications.disabled.message" = "เปิดการแจ้งเตือนเพื่อรับคำเตือนเพื่อต่ออายุสมาชิกก่อนหมดอายุ";
 "notifications.disabled.settings" = "ตั้งค่า";
 "notifications.disabled.title" = "การแจ้งเตือนถูกปิดอยู่";
+"rating.enjoy.question" = "คุณชอบใช้ PIA VPN หรือไม่";
+"rating.enjoy.subtitle" = "เราหวังว่าผลิตภัณฑ์ VPN ของเราจะตอบโจทย์ความต้องการของคุณ";
+"rating.error.button.send" = "ส่งความคิดเห็น";
+"rating.error.question" = "ไม่นะ เกิดอะไรขึ้น";
+"rating.error.subtitle" = "โปรดแจ้งให้เราทราบ เราอยากที่จะแก้ไขให้คุณจริงๆ";
+"rating.problems.question" = "มีอะไรผิดปกติเหรอ";
+"rating.problems.subtitle" = "คุณอยากที่จะให้ข้อเสนอแนะไหม เราช่วยปรับปรุงประสบการณ์การใช้งาน PIA ของคุณได้";
+"rating.rate.question" = "รีวิว AppStore เป็นอย่างไร?";
+"rating.rate.subtitle" = "ขอขอบคุณที่คุณช่วยแชร์ประสบการณ์";
 "region.accessibility.favorite" = "เพิ่มภูมิภาคที่ชื่นชอบ";
 "region.accessibility.filter" = "ตัวกรอง";
 "region.accessibility.unfavorite" = "ลบภูมิภาคที่ชื่นชอบ";
@@ -189,6 +199,7 @@
 "settings.encryption.digest.title" = "การยืนยันข้อมูล";
 "settings.encryption.handshake.title" = "ความร่วมมือ";
 "settings.encryption.title" = "การเข้ารหัส";
+"settings.geo.servers.description" = "รวมภูมิภาคตามที่ตั้งทางภูมิศาสตร์";
 "settings.hotspothelper.all.description" = "การป้องกัน VPN WiFi จะเปิดใช้งานในทุกเครือข่าย รวมถึงเครือข่ายที่เชื่อถือ";
 "settings.hotspothelper.all.title" = "ป้องกันเครือข่ายทั้งหมด";
 "settings.hotspothelper.available.add.help" = "แตะ + เพื่อเพิ่มเครือข่ายที่เชื่อถือ";
@@ -207,12 +218,15 @@
 "settings.nmt.optout.disconnect.alerts" = "ยกเลิกการแจ้งเตือนเพื่อยืนยันการเลิกเชื่อมต่อ";
 "settings.nmt.optout.disconnect.alerts.description" = "ปิดการแจ้งเตือนคำเตือนเมื่อเลิกเชื่อมต่อ VPN";
 "settings.nmt.wireguard.warning" = "WireGuard® ไม่จำเป็นต้องเชื่อมต่อใหม่เมื่อคุณสลับระหว่างเครือข่ายต่างๆ อาจจำเป็นต้องตัดการเชื่อมต่อ VPN ด้วยตนเองในเครือข่ายที่เชื่อถือได้";
+"settings.preview.title" = "ตัวอย่าง";
 "settings.reset.defaults.confirm.button" = "รีเซ็ต";
 "settings.reset.defaults.confirm.message" = "การกระทำนี้จะทำให้แอปกลับไปสู่ค่าเริ่มต้น คุณจะสูญเสียการเปลี่ยนแปลงทั้งหมดที่เคยทำไว้";
 "settings.reset.defaults.confirm.title" = "การตั้งค่าการรีเซ็ต";
 "settings.reset.defaults.title" = "รีเซ็ตและกลับไปสู่การตั้งค่าเริ่มต้น";
 "settings.reset.footer" = "การกระทำนี้จะรีเซ็ตการตั้งค่าด้านบนทั้งหมดและกลับไปสู่ค่าเริ่มต้น";
 "settings.reset.title" = "รีเซ็ต";
+"settings.server.network.alert" = "VPN ต้องถูกตัดการเชื่อมต่อเพื่อเปลี่ยนเครือข่ายเซิร์ฟเวอร์";
+"settings.server.network.description" = "เครือข่ายรุ่นต่อไป";
 "settings.small.packets.description" = "จะค่อยๆ ลดขนาดแพ็กเกต IP เพื่อปรับปรุงให้สามารถทำงานร่วมกับเราเตอร์และเครือข่ายโทรศัพท์บางประเภทได้";
 "settings.small.packets.title" = "ใช้แพ็กเกตขนาดเล็ก";
 "settings.trusted.networks.connect.message" = "ป้องกันเครือข่ายนี้ด้วยการเชื่อมต่อกับ VPN หรือไม่";

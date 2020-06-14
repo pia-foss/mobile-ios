@@ -96,6 +96,7 @@
 "global.no" = "아니요";
 "global.ok" = "확인";
 "global.optional" = "선택";
+"global.or" = "또는";
 "global.remove" = "제거";
 "global.required" = "필수";
 "global.share" = "공유";
@@ -132,6 +133,15 @@
 "notifications.disabled.message" = "알림을 활성화하면 구독이 만료되기 전에 갱신하라는 알림을 받을 수 있습니다.";
 "notifications.disabled.settings" = "설정";
 "notifications.disabled.title" = "알림 비활성화";
+"rating.enjoy.question" = "PIA VPN이 마음에 드세요?";
+"rating.enjoy.subtitle" = "저희 VPN 제품이 고객님의 기대에 부응하기를 바랍니다";
+"rating.error.button.send" = "피드백 보내기";
+"rating.error.question" = "어떤 문제가 있었습니까?";
+"rating.error.subtitle" = "저희에게 알려 주세요. 최선을 다해 해결해 드리겠습니다.";
+"rating.problems.question" = "어떤 문제가 있었습니까?";
+"rating.problems.subtitle" = "피드백을 보내 주시겠습니까? 더 나은 PIA를 경험하실 수 있도록 도와 드리겠습니다";
+"rating.rate.question" = "App Store에 리뷰를 남겨 주시겠습니까?";
+"rating.rate.subtitle" = "고객님의 경험을 공유해 주시면 감사하겠습니다";
 "region.accessibility.favorite" = "선호하는 지역 추가";
 "region.accessibility.filter" = "필터";
 "region.accessibility.unfavorite" = "선호하는 지역 제거";
@@ -189,6 +199,7 @@
 "settings.encryption.digest.title" = "데이터 인증";
 "settings.encryption.handshake.title" = "핸드셰이크";
 "settings.encryption.title" = "암호화";
+"settings.geo.servers.description" = "지리적 위치 기반 지역 포함";
 "settings.hotspothelper.all.description" = "신뢰하는 네트워크를 포함한 모든 네트워크에서 VPN WiFi 보호가 활성화됩니다.";
 "settings.hotspothelper.all.title" = "모든 네트워크 보호";
 "settings.hotspothelper.available.add.help" = "+를 탭해서 신뢰하는 네트워크에 추가합니다.";
@@ -207,12 +218,15 @@
 "settings.nmt.optout.disconnect.alerts" = "연결 해제 확인 알림 거부";
 "settings.nmt.optout.disconnect.alerts.description" = "VPN 연결이 해제될 때 발신되는 경고 알림을 비활성화합니다.";
 "settings.nmt.wireguard.warning" = "다른 네트워크 사이를 전환할 경우 WireGuard®를 다시 연결할 필요가 없습니다. 신뢰할 수 있는 네트워크에서는 VPN의 연결을 직접 해제할 필요가 있을 수 있습니다.";
+"settings.preview.title" = "미리 보기";
 "settings.reset.defaults.confirm.button" = "초기화";
 "settings.reset.defaults.confirm.message" = "앱이 기본 설정으로 돌아갑니다. 모든 변경 사항을 잃게 됩니다.";
 "settings.reset.defaults.confirm.title" = "초기화 설정";
 "settings.reset.defaults.title" = "기본 설정으로 초기화";
 "settings.reset.footer" = "모든 설정이 기본 설정으로 초기화됩니다.";
 "settings.reset.title" = "초기화";
+"settings.server.network.alert" = "서버 네트워크를 변경하려면 VPN의 연결을 해제해야 합니다.";
+"settings.server.network.description" = "차세대 네트워크";
 "settings.small.packets.description" = "일부 라우터 및 모바일 네트워크와의 호환성을 향상시키기 위해 IP 패킷의 크기를 약간 줄입니다.";
 "settings.small.packets.title" = "작은 패킷 사용";
 "settings.trusted.networks.connect.message" = "VPN에 연결해서 이 네트워크를 보호하시겠습니까?";

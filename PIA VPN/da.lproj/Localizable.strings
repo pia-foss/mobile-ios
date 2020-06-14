@@ -96,6 +96,7 @@
 "global.no" = "Nej";
 "global.ok" = "OK";
 "global.optional" = "Valgfri";
+"global.or" = "eller";
 "global.remove" = "Fjern";
 "global.required" = "Påkrævet";
 "global.share" = "Del";
@@ -132,6 +133,15 @@
 "notifications.disabled.message" = "Aktiver underretninger for at få en påmindelse om at forny dit abonnement, før det udløber.";
 "notifications.disabled.settings" = "Indstillinger";
 "notifications.disabled.title" = "Underretninger deaktiveret";
+"rating.enjoy.question" = "Har du glæde af PIA VPN?";
+"rating.enjoy.subtitle" = "Vi håber, at vores VPN lever op til dine forventninger.";
+"rating.error.button.send" = "Send feedback";
+"rating.error.question" = "Åh nej, hvad gik galt?";
+"rating.error.subtitle" = "Fortæl os om det. Vi vil meget gerne løse det for dig.";
+"rating.problems.question" = "Hvad gik galt?";
+"rating.problems.subtitle" = "Vil du give noget feedback? Vi kan hjælpe dig med at forbedre din oplevelse med PIA";
+"rating.rate.question" = "Hvad med en AppStore-anmeldelse?";
+"rating.rate.subtitle" = "Vi sætter pris på, at du deler din oplevelse";
 "region.accessibility.favorite" = "Tilføj en favoritregion";
 "region.accessibility.filter" = "Filter";
 "region.accessibility.unfavorite" = "Fjern en favoritregion";
@@ -189,6 +199,7 @@
 "settings.encryption.digest.title" = "Autentificering af data";
 "settings.encryption.handshake.title" = "Håndtryk";
 "settings.encryption.title" = "KRYPTERING";
+"settings.geo.servers.description" = "Inkluder geo-placerede områder";
 "settings.hotspothelper.all.description" = "VPN WiFi-beskyttelse vil blive aktiveret på alle netværk, inklusive betroede netværk.";
 "settings.hotspothelper.all.title" = "Beskyt alle netværk";
 "settings.hotspothelper.available.add.help" = "Tryk på + for at tilføje betroede netværk.";
@@ -207,12 +218,15 @@
 "settings.nmt.optout.disconnect.alerts" = "Frameld dig bekræftelsesalarm om afbrydelse";
 "settings.nmt.optout.disconnect.alerts.description" = "Deaktiverer advarselsalarmen, når du afbryder forbindelsen fra VPN'en.";
 "settings.nmt.wireguard.warning" = "WireGuard® har ikke brug for at genoprette forbindelsen, når du skifter mellem forskellige netværk. Det kan være nødvendigt at afbryde forbindelsen til VPN'en manuelt på netværk, der er tillid til.";
+"settings.preview.title" = "Forhåndsvisning";
 "settings.reset.defaults.confirm.button" = "Nulstil";
 "settings.reset.defaults.confirm.message" = "Det fører appen tilbage til standard. Du vil miste alle dine ændringer.";
 "settings.reset.defaults.confirm.title" = "Nulstil indstillinger";
 "settings.reset.defaults.title" = "Nulstil til standard";
 "settings.reset.footer" = "Dette vil nulstille alle ovenstående indstillinger til standard.";
 "settings.reset.title" = "NULSTIL";
+"settings.server.network.alert" = "VPN'en skal afbrydes for at skifte servernetværk.";
+"settings.server.network.description" = "Næste generations netværk";
 "settings.small.packets.description" = "Vil sænke IP-pakkens størrelse en smule for at forbedre kompatibiliteten med nogle routere og mobilnetværk.";
 "settings.small.packets.title" = "Brug små pakker";
 "settings.trusted.networks.connect.message" = "Beskyt dette netværk ved at oprette forbindelse til VPN?";

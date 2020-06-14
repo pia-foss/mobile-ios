@@ -96,6 +96,7 @@
 "global.no" = "否";
 "global.ok" = "确定";
 "global.optional" = "可选";
+"global.or" = "或";
 "global.remove" = "删除";
 "global.required" = "必填";
 "global.share" = "共享";
@@ -132,6 +133,15 @@
 "notifications.disabled.message" = "启用通知，以便在订阅到期前得到续订提醒。";
 "notifications.disabled.settings" = "设置";
 "notifications.disabled.title" = "通知已禁用";
+"rating.enjoy.question" = "您觉得 PIA VPN 好用吗？";
+"rating.enjoy.subtitle" = "希望我们的 VPN 产品符合您的期望";
+"rating.error.button.send" = "发送反馈";
+"rating.error.question" = "出什么问题了？";
+"rating.error.subtitle" = "告诉我们吧。我们会尽力改进。";
+"rating.problems.question" = "出什么问题了？";
+"rating.problems.subtitle" = "您希望提供反馈意见吗？我们可以帮助您改善使用 PIA 的体验";
+"rating.rate.question" = "在 AppStore 上发表评论如何？";
+"rating.rate.subtitle" = "感谢您分享使用体验";
 "region.accessibility.favorite" = "添加收藏地区";
 "region.accessibility.filter" = "筛选器";
 "region.accessibility.unfavorite" = "删除收藏地区";
@@ -189,6 +199,7 @@
 "settings.encryption.digest.title" = "数据认证";
 "settings.encryption.handshake.title" = "握手";
 "settings.encryption.title" = "加密";
+"settings.geo.servers.description" = "包括地理定位区域";
 "settings.hotspothelper.all.description" = "将在所有网络上激活 VPN WiFi 保护，包括受信任网络。";
 "settings.hotspothelper.all.title" = "保护所有网络";
 "settings.hotspothelper.available.add.help" = "点击 + 以添加到受信任网络";
@@ -207,12 +218,15 @@
 "settings.nmt.optout.disconnect.alerts" = "禁用断开确认提醒";
 "settings.nmt.optout.disconnect.alerts.description" = "与 VPN 断开时禁用警告提醒。";
 "settings.nmt.wireguard.warning" = "当您在不同网络之间切换时，WireGuard® 无需重新连接。可能需要在受信任网络上手动断开 VPN 连接。";
+"settings.preview.title" = "预览";
 "settings.reset.defaults.confirm.button" = "重置";
 "settings.reset.defaults.confirm.message" = "此操作会将应用恢复为默认状态。您将丢失您做出的所有变更。";
 "settings.reset.defaults.confirm.title" = "重置设置";
 "settings.reset.defaults.title" = "重置为默认设置";
 "settings.reset.footer" = "此操作会将以上所有设置重置为默认状态。";
 "settings.reset.title" = "重置";
+"settings.server.network.alert" = "必须断开 VPN 才能更改服务器网络。";
+"settings.server.network.description" = "下一代网络";
 "settings.small.packets.description" = "稍微降低 IP 数据包的大小，以改进与一些路由器和移动网络的兼容性";
 "settings.small.packets.title" = "使用小数据包";
 "settings.trusted.networks.connect.message" = "通过连接到 VPN 来保护此网络？";

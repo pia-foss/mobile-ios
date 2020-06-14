@@ -96,6 +96,7 @@
 "global.no" = "Hayır";
 "global.ok" = "Tamam";
 "global.optional" = "İsteğe bağlı";
+"global.or" = "veya";
 "global.remove" = "Kaldır";
 "global.required" = "Gerekli";
 "global.share" = "Paylaş";
@@ -132,6 +133,15 @@
 "notifications.disabled.message" = "Aboneliğinizi süresi dolmadan önce yenilemek için bildirimleri etkinleştirerek bir hatırlatıcı alın.";
 "notifications.disabled.settings" = "Ayarlar";
 "notifications.disabled.title" = "Bildirimler kapalı";
+"rating.enjoy.question" = "PIA VPN hoşunuza gidiyor mu?";
+"rating.enjoy.subtitle" = "Umarız VPN ürünümüz beklentilerinizi karşılıyordur";
+"rating.error.button.send" = "Geri bildirim gönder";
+"rating.error.question" = "Hay aksi! Sorun nedir?";
+"rating.error.subtitle" = "Bize bu konuda bilgi verin. Bu sorunu sizin için düzeltmek isteriz.";
+"rating.problems.question" = "Sorun nedir?";
+"rating.problems.subtitle" = "Geri bildirim göndermek ister misiniz? PIA kullanırken yaşadığınız deneyimi geliştirmenize yardımcı olabiliriz";
+"rating.rate.question" = "AppStore değerlendirmesi verebilir misiniz?";
+"rating.rate.subtitle" = "Deneyiminizi paylaşmanız bizi memnun eder";
 "region.accessibility.favorite" = "Favori bölge ekleyin";
 "region.accessibility.filter" = "Filtre";
 "region.accessibility.unfavorite" = "Bir favori bölgeyi kaldırın";
@@ -189,6 +199,7 @@
 "settings.encryption.digest.title" = "Veri doğrulama";
 "settings.encryption.handshake.title" = "Handshake";
 "settings.encryption.title" = "ŞİFRELEME";
+"settings.geo.servers.description" = "Coğrafi konum bölgelerini dahil et";
 "settings.hotspothelper.all.description" = "VPN WiFi Koruması, güvenilen ağlar da dâhil olmak üzere tüm ağlarda etkinleşecek.";
 "settings.hotspothelper.all.title" = "Tüm ağları koru";
 "settings.hotspothelper.available.add.help" = "Güvenilen ağları eklemek için + simgesine dokunun.";
@@ -207,12 +218,15 @@
 "settings.nmt.optout.disconnect.alerts" = "Bağlantı kesilmesi onay uyarısını kapat";
 "settings.nmt.optout.disconnect.alerts.description" = "VPN bağlantısı kesilirken gösterilen uyarıyı devre dışı bırakır.";
 "settings.nmt.wireguard.warning" = "Farklı ağlar arasında geçiş yaptığınızda WireGuard®'ın tekrar bağlanmasına gerek yoktur. VPN bağlantısını güvenilir ağlarda manuel yoldan kesmeniz gerekebilir.";
+"settings.preview.title" = "Önizleme";
 "settings.reset.defaults.confirm.button" = "Sıfırla";
 "settings.reset.defaults.confirm.message" = "Bu işlem uygulama ayarlarını sıfırlayacak. Yapmış olduğun bütün değişiklikler kaybolacaktır.";
 "settings.reset.defaults.confirm.title" = "Ayarları sıfırla";
 "settings.reset.defaults.title" = "Varsayılan ayarlara sıfırla";
 "settings.reset.footer" = "Bu işlem yukarıdaki bütün ayarları sıfırlayarak varsayılan değerlere döndürecektir.";
 "settings.reset.title" = "SIFIRLA";
+"settings.server.network.alert" = "Sunucu ağını değiştirmek için VPN bağlantısının sonlandırılması gerekiyor.";
+"settings.server.network.description" = "Yeni nesil ağ";
 "settings.small.packets.description" = "Bazı yönlendirici ve mobil ağlarla olan uyumluluğu artırmak için IP paket boyutunu hafif düşürecek.";
 "settings.small.packets.title" = "Küçük paketler kullanın";
 "settings.trusted.networks.connect.message" = "VPN'ye bağlanarak bu ağı korumak istiyor musunuz?";
