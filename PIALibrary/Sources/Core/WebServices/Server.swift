@@ -76,7 +76,7 @@ public class Server: Hashable {
     }
     
     /// Represents a VPN server IP endpoint.
-    public class ServerAddressIP {
+    public class ServerAddressIP: Codable {
         
         /// The endpoint ip.
         public let ip: String
