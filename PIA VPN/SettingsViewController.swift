@@ -1649,12 +1649,14 @@ extension SettingsViewController: OptionsViewControllerDelegate {
                     newProtocols = AppConfiguration.VPN.piaAutomaticProtocols
                 }
                 else if (pendingOpenVPNSocketType == .udp) {
-                    for port in serversCfg.ovpnPorts.udp {
+                    let udpPorts = serversCfg.ovpnPorts.udp.shuffled()
+                    for port in udpPorts {
                         newProtocols.append(EndpointProtocol(.udp, port))
                     }
                 }
                 else if (pendingOpenVPNSocketType == .tcp) {
-                    for port in serversCfg.ovpnPorts.tcp {
+                    let tcpPorts = serversCfg.ovpnPorts.tcp.shuffled()
+                    for port in tcpPorts {
                         newProtocols.append(EndpointProtocol(.tcp, port))
                     }
                 }
