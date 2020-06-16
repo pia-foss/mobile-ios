@@ -119,6 +119,11 @@ extension Theme {
         textfield.backgroundColor = .clear
     }
     
+    public func applyCountryNameStyleFor(_ label: UILabel) {
+        label.style(style: Theme.current.palette.appearance == .dark ?
+            TextStyle.textStyle16 : TextStyle.textStyle17)
+    }
+    
     public func applyFriendReferralsView(_ view: UIView,
                                          appearance: Appearance) {
         view.layer.cornerRadius = 2.3
