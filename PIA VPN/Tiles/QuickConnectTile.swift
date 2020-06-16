@@ -38,6 +38,7 @@ class QuickConnectTile: UIView, Tileable {
     
     @IBOutlet private weak var tileTitle: UILabel!
     @IBOutlet private weak var stackView: UIStackView!
+    @IBOutlet private weak var labelsStackView: UIStackView!
 
     private var historicalServers: [Server] = []
     
@@ -88,6 +89,12 @@ class QuickConnectTile: UIView, Tileable {
             }
         }
         
+        for label in labelsStackView.subviews {
+            if let label = label as? UILabel {
+                label.text = ""
+            }
+        }
+        
         let favoriteServers = Client.configuration.currentServerNetwork() == .gen4 ?
             AppPreferences.shared.favoriteServerIdentifiersGen4 :
             AppPreferences.shared.favoriteServerIdentifiers
@@ -110,6 +117,12 @@ class QuickConnectTile: UIView, Tileable {
                     favoriteImage.isHidden = true
                 }
             }
+            
+            if let label = labelsStackView.subviews[buttonIndex] as? UILabel {
+                label.text = server.country
+                Theme.current.applyCountryNameStyleFor(label)
+            }
+
         }
     }
     
