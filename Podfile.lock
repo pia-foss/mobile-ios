@@ -134,10 +134,10 @@ DEPENDENCIES:
   - Fabric
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `c98145c`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `c98145c`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `c98145c`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `c98145c`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `7075984`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `7075984`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `7075984`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `7075984`)
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`, commit `1585891`)
   - PopupDialog
   - ReachabilitySwift (~> 4.3.0)
@@ -146,7 +146,7 @@ DEPENDENCIES:
   - TunnelKit (from `https://github.com/pia-foss/tunnelkit`, commit `d19b9de`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - AlamofireImage
     - AppCenter
@@ -178,7 +178,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :commit: c98145c
+    :commit: '7075984'
     :git: https://github.com/pia-foss/client-library-apple
   PIAWireguard:
     :commit: '1585891'
@@ -189,7 +189,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PIALibrary:
-    :commit: c98145c
+    :commit: '7075984'
     :git: https://github.com/pia-foss/client-library-apple
   PIAWireguard:
     :commit: '1585891'
@@ -228,9 +228,9 @@ SPEC CHECKSUMS:
   SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145
   SwiftyBeaver: f9a9aba96a6a6166e21682377804d728b0d20b95
   TPKeyboardAvoiding: 6dd3fe3268b8f2627beb7ff3d82a3cacbdf66a36
-  TunnelKit: d13d005c0c7febd18a03a87e1ab7d4414fef3ffd
+  TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 4c503537713f9e43b16ea8ef70beafd3dbc8447a
+PODFILE CHECKSUM: 834599a2392ac3e1fbd78f172be08096ab13651b
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.9.3
