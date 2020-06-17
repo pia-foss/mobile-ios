@@ -22,7 +22,7 @@
 
 import Foundation
 import Gloss
-import Regions
+import PIARegions
 
 class ServersResponse {
     private let originalLength: Int
@@ -60,6 +60,7 @@ class ServersResponse {
     func bundle() -> ServersBundle? {
         return GlossServersBundle(jsonString: jsonString)?.parsed
     }
+    
 }
 
 class GlossServersBundle: GlossParser {

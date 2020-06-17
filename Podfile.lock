@@ -50,7 +50,7 @@ DEPENDENCIES:
   - TunnelKit (from `https://github.com/pia-foss/tunnelkit`, commit `d19b9de`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - DynamicBlurView
     - FXPageControl
@@ -93,7 +93,7 @@ SPEC CHECKSUMS:
   PopupDialog: f4bb461bf70ff422be0b56656566424ee9273080
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
-  Regions: 6a5f93c65ba0dfef817c16058cdd3ff858135597
+  Regions: 3119651f74c1aa8691bd4b3473d83d8d1822c778
   SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
   TunnelKit: d13d005c0c7febd18a03a87e1ab7d4414fef3ffd
@@ -101,4 +101,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: e87888c27b1b5dba4732ab81ddc08f26053f480c
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.9.3

@@ -24,7 +24,7 @@ import Foundation
 import Alamofire
 import Gloss
 import SwiftyBeaver
-import Regions
+import PIARegions
 
 private let log = SwiftyBeaver.self
 
@@ -242,42 +242,60 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     
     func downloadServers(_ callback: ((ServersBundle?, Error?) -> Void)?) {
         
-        guard let endpoint = Client.configuration.serverNetwork == .gen4 ? ServerEndpoint.gen4 as? Endpoint : VPNEndpoint.servers as? Endpoint else {
-            callback?(nil, ClientError.unsupported)
-            return
-        }
-        
         let status = [200]
         let parameters: JSON = [
             "os": "ios",
             "version": PIAWebServices.serversVersion
         ]
-        
-        req(nil, .get, endpoint, parameters, status, DataRequestExecutor() { (data, status, error) in
-            if let error = error {
-                callback?(nil, error)
-                return
-            }
-            guard let data = data else {
-                callback?(nil, ClientError.malformedResponseData)
-                return
-            }
-            guard let response = ServersResponse(data: data) else {
-                callback?(nil, ClientError.malformedResponseData)
-                return
-            }
-            if self.accessedConfiguration.verifiesServersSignature {
-                guard response.verifySignature() else {
-                    callback?(nil, ClientError.badServersSignature)
+
+        if Client.configuration.serverNetwork == .gen4 {
+            let regionTask = RegionsTask()
+            regionTask.fetchRawData { jsonResponse, error in
+                
+                if let error = error {
+                    callback?(nil, ClientError.malformedResponseData)
                     return
                 }
+
+                guard let bundle = GlossServersBundle(jsonString: jsonResponse)?.parsed else {
+                    callback?(nil, ClientError.malformedResponseData)
+                    return
+                }
+                
+                callback?(bundle, nil)
+                
+                print("Valid response from server")
             }
-            guard let bundle = response.bundle() else {
-                callback?(nil, ClientError.malformedResponseData)
-                return
-            }
-            callback?(bundle, nil)
-        })
+
+        } else {
+            req(nil, .get, VPNEndpoint.servers, parameters, status, DataRequestExecutor() { (data, status, error) in
+                if let error = error {
+                    callback?(nil, error)
+                    return
+                }
+                guard let data = data else {
+                    callback?(nil, ClientError.malformedResponseData)
+                    return
+                }
+                guard let response = ServersResponse(data: data) else {
+                    callback?(nil, ClientError.malformedResponseData)
+                    return
+                }
+                if self.accessedConfiguration.verifiesServersSignature {
+                    guard response.verifySignature() else {
+                        callback?(nil, ClientError.badServersSignature)
+                        return
+                    }
+                }
+                guard let bundle = response.bundle() else {
+                    callback?(nil, ClientError.malformedResponseData)
+                    return
+                }
+                callback?(bundle, nil)
+            })
+        }
+        
+
     }
     
     // MARK: Store

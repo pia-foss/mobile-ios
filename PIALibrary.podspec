@@ -32,7 +32,7 @@ Pod::Spec.new do |s|
         p.dependency "ReachabilitySwift"
         p.dependency "SwiftyBeaver"
         p.dependency "PopupDialog"
-        p.dependency "Regions"
+        p.dependency "PIARegions"
         
     end
 

@@ -21,7 +21,7 @@
 //
 
 import Foundation
-import Regions
+import PIARegions
 
 class KeychainStore: SecureStore {
     
