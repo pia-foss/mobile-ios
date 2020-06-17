@@ -250,7 +250,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
 
         if Client.configuration.serverNetwork == .gen4 {
             let regionTask = RegionsTask()
-            regionTask.fetchRawData { jsonResponse, error in
+            regionTask.fetch { response, jsonResponse, error in
                 
                 if let error = error {
                     callback?(nil, ClientError.malformedResponseData)
