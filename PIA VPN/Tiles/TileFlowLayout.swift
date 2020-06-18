@@ -174,7 +174,9 @@ final class TileFlowLayout: UICollectionViewFlowLayout {
                                   y: location.y + dragOffset.y)
         
         if let newIndexPath = cv.indexPathForItem(at: location) {
-            cv.moveItem(at: draggingIndexPath!, to: newIndexPath)
+            if let draggingIndexPath = draggingIndexPath {
+                cv.moveItem(at: draggingIndexPath, to: newIndexPath)
+            }
             draggingIndexPath = newIndexPath
         }
     }
