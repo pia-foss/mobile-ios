@@ -148,6 +148,10 @@ class DashboardViewController: AutolayoutViewController {
 
         // give up pending signup if logged in
         TransientState.didRetryPendingSignup = true
+        
+        // check account email
+        checkAccountEmail()
+
     }
     
     // MARK: Actions

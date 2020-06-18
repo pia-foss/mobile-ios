@@ -159,7 +159,7 @@
 "settings.server.network.description" = "Next generation network";
 "settings.server.network.alert" = "The VPN has to be disconnected to change the server network.";
 
-"settings.geo.servers.description" = "Include locations provided by geolocation only";
+"settings.geo.servers.description" = "Include geo-located regions";
 
 // CONTENT BLOCKER
 

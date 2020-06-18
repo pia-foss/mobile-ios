@@ -111,7 +111,6 @@ enum Asset {
     static let flagAi = ImageAsset(name: "flag-ai")
     static let flagAl = ImageAsset(name: "flag-al")
     static let flagAm = ImageAsset(name: "flag-am")
-    static let flagAn = ImageAsset(name: "flag-an")
     static let flagAo = ImageAsset(name: "flag-ao")
     static let flagAq = ImageAsset(name: "flag-aq")
     static let flagAr = ImageAsset(name: "flag-ar")
@@ -119,6 +118,7 @@ enum Asset {
     static let flagAt = ImageAsset(name: "flag-at")
     static let flagAu = ImageAsset(name: "flag-au")
     static let flagAw = ImageAsset(name: "flag-aw")
+    static let flagAx = ImageAsset(name: "flag-ax")
     static let flagAz = ImageAsset(name: "flag-az")
     static let flagBa = ImageAsset(name: "flag-ba")
     static let flagBb = ImageAsset(name: "flag-bb")
@@ -129,16 +129,21 @@ enum Asset {
     static let flagBh = ImageAsset(name: "flag-bh")
     static let flagBi = ImageAsset(name: "flag-bi")
     static let flagBj = ImageAsset(name: "flag-bj")
+    static let flagBl = ImageAsset(name: "flag-bl")
     static let flagBm = ImageAsset(name: "flag-bm")
     static let flagBn = ImageAsset(name: "flag-bn")
     static let flagBo = ImageAsset(name: "flag-bo")
+    static let flagBq = ImageAsset(name: "flag-bq")
     static let flagBr = ImageAsset(name: "flag-br")
     static let flagBs = ImageAsset(name: "flag-bs")
     static let flagBt = ImageAsset(name: "flag-bt")
+    static let flagBv = ImageAsset(name: "flag-bv")
     static let flagBw = ImageAsset(name: "flag-bw")
     static let flagBy = ImageAsset(name: "flag-by")
     static let flagBz = ImageAsset(name: "flag-bz")
     static let flagCa = ImageAsset(name: "flag-ca")
+    static let flagCc = ImageAsset(name: "flag-cc")
+    static let flagCd = ImageAsset(name: "flag-cd")
     static let flagCf = ImageAsset(name: "flag-cf")
     static let flagCg = ImageAsset(name: "flag-cg")
     static let flagCh = ImageAsset(name: "flag-ch")
@@ -151,6 +156,7 @@ enum Asset {
     static let flagCr = ImageAsset(name: "flag-cr")
     static let flagCu = ImageAsset(name: "flag-cu")
     static let flagCv = ImageAsset(name: "flag-cv")
+    static let flagCw = ImageAsset(name: "flag-cw")
     static let flagCx = ImageAsset(name: "flag-cx")
     static let flagCy = ImageAsset(name: "flag-cy")
     static let flagCz = ImageAsset(name: "flag-cz")
@@ -165,37 +171,56 @@ enum Asset {
     static let flagEg = ImageAsset(name: "flag-eg")
     static let flagEh = ImageAsset(name: "flag-eh")
     static let flagEr = ImageAsset(name: "flag-er")
+    static let flagEsCt = ImageAsset(name: "flag-es-ct")
     static let flagEs = ImageAsset(name: "flag-es")
     static let flagEt = ImageAsset(name: "flag-et")
+    static let flagEu = ImageAsset(name: "flag-eu")
     static let flagFi = ImageAsset(name: "flag-fi")
     static let flagFj = ImageAsset(name: "flag-fj")
+    static let flagFk = ImageAsset(name: "flag-fk")
     static let flagFm = ImageAsset(name: "flag-fm")
     static let flagFo = ImageAsset(name: "flag-fo")
     static let flagFr = ImageAsset(name: "flag-fr")
     static let flagGa = ImageAsset(name: "flag-ga")
+    static let flagGbEng = ImageAsset(name: "flag-gb-eng")
+    static let flagGbNir = ImageAsset(name: "flag-gb-nir")
+    static let flagGbSct = ImageAsset(name: "flag-gb-sct")
+    static let flagGbWls = ImageAsset(name: "flag-gb-wls")
     static let flagGb = ImageAsset(name: "flag-gb")
     static let flagGd = ImageAsset(name: "flag-gd")
     static let flagGe = ImageAsset(name: "flag-ge")
+    static let flagGf = ImageAsset(name: "flag-gf")
+    static let flagGg = ImageAsset(name: "flag-gg")
     static let flagGh = ImageAsset(name: "flag-gh")
     static let flagGi = ImageAsset(name: "flag-gi")
     static let flagGl = ImageAsset(name: "flag-gl")
     static let flagGm = ImageAsset(name: "flag-gm")
     static let flagGn = ImageAsset(name: "flag-gn")
+    static let flagGp = ImageAsset(name: "flag-gp")
+    static let flagGq = ImageAsset(name: "flag-gq")
     static let flagGr = ImageAsset(name: "flag-gr")
     static let flagGs = ImageAsset(name: "flag-gs")
+    static let flagGt = ImageAsset(name: "flag-gt")
     static let flagGu = ImageAsset(name: "flag-gu")
     static let flagGw = ImageAsset(name: "flag-gw")
     static let flagGy = ImageAsset(name: "flag-gy")
     static let flagHk = ImageAsset(name: "flag-hk")
+    static let flagHm = ImageAsset(name: "flag-hm")
+    static let flagHn = ImageAsset(name: "flag-hn")
+    static let flagHr = ImageAsset(name: "flag-hr")
+    static let flagHt = ImageAsset(name: "flag-ht")
+    static let flagHu = ImageAsset(name: "flag-hu")
     static let flagId = ImageAsset(name: "flag-id")
     static let flagIe = ImageAsset(name: "flag-ie")
     static let flagIl = ImageAsset(name: "flag-il")
+    static let flagIm = ImageAsset(name: "flag-im")
     static let flagIn = ImageAsset(name: "flag-in")
     static let flagIo = ImageAsset(name: "flag-io")
     static let flagIq = ImageAsset(name: "flag-iq")
     static let flagIr = ImageAsset(name: "flag-ir")
     static let flagIs = ImageAsset(name: "flag-is")
     static let flagIt = ImageAsset(name: "flag-it")
+    static let flagJe = ImageAsset(name: "flag-je")
     static let flagJm = ImageAsset(name: "flag-jm")
     static let flagJo = ImageAsset(name: "flag-jo")
     static let flagJp = ImageAsset(name: "flag-jp")
@@ -210,6 +235,7 @@ enum Asset {
     static let flagKw = ImageAsset(name: "flag-kw")
     static let flagKy = ImageAsset(name: "flag-ky")
     static let flagKz = ImageAsset(name: "flag-kz")
+    static let flagLa = ImageAsset(name: "flag-la")
     static let flagLb = ImageAsset(name: "flag-lb")
     static let flagLc = ImageAsset(name: "flag-lc")
     static let flagLi = ImageAsset(name: "flag-li")
@@ -219,9 +245,12 @@ enum Asset {
     static let flagLt = ImageAsset(name: "flag-lt")
     static let flagLu = ImageAsset(name: "flag-lu")
     static let flagLv = ImageAsset(name: "flag-lv")
+    static let flagLy = ImageAsset(name: "flag-ly")
     static let flagMa = ImageAsset(name: "flag-ma")
     static let flagMc = ImageAsset(name: "flag-mc")
     static let flagMd = ImageAsset(name: "flag-md")
+    static let flagMe = ImageAsset(name: "flag-me")
+    static let flagMf = ImageAsset(name: "flag-mf")
     static let flagMg = ImageAsset(name: "flag-mg")
     static let flagMh = ImageAsset(name: "flag-mh")
     static let flagMk = ImageAsset(name: "flag-mk")
@@ -230,6 +259,7 @@ enum Asset {
     static let flagMn = ImageAsset(name: "flag-mn")
     static let flagMo = ImageAsset(name: "flag-mo")
     static let flagMp = ImageAsset(name: "flag-mp")
+    static let flagMq = ImageAsset(name: "flag-mq")
     static let flagMr = ImageAsset(name: "flag-mr")
     static let flagMs = ImageAsset(name: "flag-ms")
     static let flagMt = ImageAsset(name: "flag-mt")
@@ -240,6 +270,7 @@ enum Asset {
     static let flagMy = ImageAsset(name: "flag-my")
     static let flagMz = ImageAsset(name: "flag-mz")
     static let flagNa = ImageAsset(name: "flag-na")
+    static let flagNc = ImageAsset(name: "flag-nc")
     static let flagNe = ImageAsset(name: "flag-ne")
     static let flagNf = ImageAsset(name: "flag-nf")
     static let flagNg = ImageAsset(name: "flag-ng")
@@ -257,13 +288,16 @@ enum Asset {
     static let flagPg = ImageAsset(name: "flag-pg")
     static let flagPh = ImageAsset(name: "flag-ph")
     static let flagPk = ImageAsset(name: "flag-pk")
+    static let flagPl = ImageAsset(name: "flag-pl")
     static let flagPm = ImageAsset(name: "flag-pm")
     static let flagPn = ImageAsset(name: "flag-pn")
     static let flagPr = ImageAsset(name: "flag-pr")
+    static let flagPs = ImageAsset(name: "flag-ps")
     static let flagPt = ImageAsset(name: "flag-pt")
     static let flagPw = ImageAsset(name: "flag-pw")
     static let flagPy = ImageAsset(name: "flag-py")
     static let flagQa = ImageAsset(name: "flag-qa")
+    static let flagRe = ImageAsset(name: "flag-re")
     static let flagRo = ImageAsset(name: "flag-ro")
     static let flagRs = ImageAsset(name: "flag-rs")
     static let flagRu = ImageAsset(name: "flag-ru")
@@ -276,13 +310,17 @@ enum Asset {
     static let flagSg = ImageAsset(name: "flag-sg")
     static let flagSh = ImageAsset(name: "flag-sh")
     static let flagSi = ImageAsset(name: "flag-si")
+    static let flagSj = ImageAsset(name: "flag-sj")
     static let flagSk = ImageAsset(name: "flag-sk")
     static let flagSl = ImageAsset(name: "flag-sl")
     static let flagSm = ImageAsset(name: "flag-sm")
     static let flagSn = ImageAsset(name: "flag-sn")
     static let flagSo = ImageAsset(name: "flag-so")
     static let flagSr = ImageAsset(name: "flag-sr")
+    static let flagSs = ImageAsset(name: "flag-ss")
     static let flagSt = ImageAsset(name: "flag-st")
+    static let flagSv = ImageAsset(name: "flag-sv")
+    static let flagSx = ImageAsset(name: "flag-sx")
     static let flagSy = ImageAsset(name: "flag-sy")
     static let flagSz = ImageAsset(name: "flag-sz")
     static let flagTc = ImageAsset(name: "flag-tc")
@@ -292,10 +330,10 @@ enum Asset {
     static let flagTh = ImageAsset(name: "flag-th")
     static let flagTj = ImageAsset(name: "flag-tj")
     static let flagTk = ImageAsset(name: "flag-tk")
+    static let flagTl = ImageAsset(name: "flag-tl")
     static let flagTm = ImageAsset(name: "flag-tm")
     static let flagTn = ImageAsset(name: "flag-tn")
     static let flagTo = ImageAsset(name: "flag-to")
-    static let flagTp = ImageAsset(name: "flag-tp")
     static let flagTr = ImageAsset(name: "flag-tr")
     static let flagTt = ImageAsset(name: "flag-tt")
     static let flagTv = ImageAsset(name: "flag-tv")
@@ -303,6 +341,8 @@ enum Asset {
     static let flagTz = ImageAsset(name: "flag-tz")
     static let flagUa = ImageAsset(name: "flag-ua")
     static let flagUg = ImageAsset(name: "flag-ug")
+    static let flagUm = ImageAsset(name: "flag-um")
+    static let flagUn = ImageAsset(name: "flag-un")
     static let flagUniversal = ImageAsset(name: "flag-universal")
     static let flagUs = ImageAsset(name: "flag-us")
     static let flagUy = ImageAsset(name: "flag-uy")
@@ -310,10 +350,14 @@ enum Asset {
     static let flagVa = ImageAsset(name: "flag-va")
     static let flagVc = ImageAsset(name: "flag-vc")
     static let flagVe = ImageAsset(name: "flag-ve")
+    static let flagVg = ImageAsset(name: "flag-vg")
+    static let flagVi = ImageAsset(name: "flag-vi")
     static let flagVn = ImageAsset(name: "flag-vn")
     static let flagVu = ImageAsset(name: "flag-vu")
+    static let flagWf = ImageAsset(name: "flag-wf")
     static let flagWs = ImageAsset(name: "flag-ws")
     static let flagYe = ImageAsset(name: "flag-ye")
+    static let flagYt = ImageAsset(name: "flag-yt")
     static let flagZa = ImageAsset(name: "flag-za")
     static let flagZm = ImageAsset(name: "flag-zm")
     static let flagZw = ImageAsset(name: "flag-zw")
@@ -403,7 +447,6 @@ enum Asset {
     Flags.flagAi,
     Flags.flagAl,
     Flags.flagAm,
-    Flags.flagAn,
     Flags.flagAo,
     Flags.flagAq,
     Flags.flagAr,
@@ -411,6 +454,7 @@ enum Asset {
     Flags.flagAt,
     Flags.flagAu,
     Flags.flagAw,
+    Flags.flagAx,
     Flags.flagAz,
     Flags.flagBa,
     Flags.flagBb,
@@ -421,16 +465,21 @@ enum Asset {
     Flags.flagBh,
     Flags.flagBi,
     Flags.flagBj,
+    Flags.flagBl,
     Flags.flagBm,
     Flags.flagBn,
     Flags.flagBo,
+    Flags.flagBq,
     Flags.flagBr,
     Flags.flagBs,
     Flags.flagBt,
+    Flags.flagBv,
     Flags.flagBw,
     Flags.flagBy,
     Flags.flagBz,
     Flags.flagCa,
+    Flags.flagCc,
+    Flags.flagCd,
     Flags.flagCf,
     Flags.flagCg,
     Flags.flagCh,
@@ -443,6 +492,7 @@ enum Asset {
     Flags.flagCr,
     Flags.flagCu,
     Flags.flagCv,
+    Flags.flagCw,
     Flags.flagCx,
     Flags.flagCy,
     Flags.flagCz,
@@ -457,37 +507,56 @@ enum Asset {
     Flags.flagEg,
     Flags.flagEh,
     Flags.flagEr,
+    Flags.flagEsCt,
     Flags.flagEs,
     Flags.flagEt,
+    Flags.flagEu,
     Flags.flagFi,
     Flags.flagFj,
+    Flags.flagFk,
     Flags.flagFm,
     Flags.flagFo,
     Flags.flagFr,
     Flags.flagGa,
+    Flags.flagGbEng,
+    Flags.flagGbNir,
+    Flags.flagGbSct,
+    Flags.flagGbWls,
     Flags.flagGb,
     Flags.flagGd,
     Flags.flagGe,
+    Flags.flagGf,
+    Flags.flagGg,
     Flags.flagGh,
     Flags.flagGi,
     Flags.flagGl,
     Flags.flagGm,
     Flags.flagGn,
+    Flags.flagGp,
+    Flags.flagGq,
     Flags.flagGr,
     Flags.flagGs,
+    Flags.flagGt,
     Flags.flagGu,
     Flags.flagGw,
     Flags.flagGy,
     Flags.flagHk,
+    Flags.flagHm,
+    Flags.flagHn,
+    Flags.flagHr,
+    Flags.flagHt,
+    Flags.flagHu,
     Flags.flagId,
     Flags.flagIe,
     Flags.flagIl,
+    Flags.flagIm,
     Flags.flagIn,
     Flags.flagIo,
     Flags.flagIq,
     Flags.flagIr,
     Flags.flagIs,
     Flags.flagIt,
+    Flags.flagJe,
     Flags.flagJm,
     Flags.flagJo,
     Flags.flagJp,
@@ -502,6 +571,7 @@ enum Asset {
     Flags.flagKw,
     Flags.flagKy,
     Flags.flagKz,
+    Flags.flagLa,
     Flags.flagLb,
     Flags.flagLc,
     Flags.flagLi,
@@ -511,9 +581,12 @@ enum Asset {
     Flags.flagLt,
     Flags.flagLu,
     Flags.flagLv,
+    Flags.flagLy,
     Flags.flagMa,
     Flags.flagMc,
     Flags.flagMd,
+    Flags.flagMe,
+    Flags.flagMf,
     Flags.flagMg,
     Flags.flagMh,
     Flags.flagMk,
@@ -522,6 +595,7 @@ enum Asset {
     Flags.flagMn,
     Flags.flagMo,
     Flags.flagMp,
+    Flags.flagMq,
     Flags.flagMr,
     Flags.flagMs,
     Flags.flagMt,
@@ -532,6 +606,7 @@ enum Asset {
     Flags.flagMy,
     Flags.flagMz,
     Flags.flagNa,
+    Flags.flagNc,
     Flags.flagNe,
     Flags.flagNf,
     Flags.flagNg,
@@ -549,13 +624,16 @@ enum Asset {
     Flags.flagPg,
     Flags.flagPh,
     Flags.flagPk,
+    Flags.flagPl,
     Flags.flagPm,
     Flags.flagPn,
     Flags.flagPr,
+    Flags.flagPs,
     Flags.flagPt,
     Flags.flagPw,
     Flags.flagPy,
     Flags.flagQa,
+    Flags.flagRe,
     Flags.flagRo,
     Flags.flagRs,
     Flags.flagRu,
@@ -568,13 +646,17 @@ enum Asset {
     Flags.flagSg,
     Flags.flagSh,
     Flags.flagSi,
+    Flags.flagSj,
     Flags.flagSk,
     Flags.flagSl,
     Flags.flagSm,
     Flags.flagSn,
     Flags.flagSo,
     Flags.flagSr,
+    Flags.flagSs,
     Flags.flagSt,
+    Flags.flagSv,
+    Flags.flagSx,
     Flags.flagSy,
     Flags.flagSz,
     Flags.flagTc,
@@ -584,10 +666,10 @@ enum Asset {
     Flags.flagTh,
     Flags.flagTj,
     Flags.flagTk,
+    Flags.flagTl,
     Flags.flagTm,
     Flags.flagTn,
     Flags.flagTo,
-    Flags.flagTp,
     Flags.flagTr,
     Flags.flagTt,
     Flags.flagTv,
@@ -595,6 +677,8 @@ enum Asset {
     Flags.flagTz,
     Flags.flagUa,
     Flags.flagUg,
+    Flags.flagUm,
+    Flags.flagUn,
     Flags.flagUniversal,
     Flags.flagUs,
     Flags.flagUy,
@@ -602,10 +686,14 @@ enum Asset {
     Flags.flagVa,
     Flags.flagVc,
     Flags.flagVe,
+    Flags.flagVg,
+    Flags.flagVi,
     Flags.flagVn,
     Flags.flagVu,
+    Flags.flagWf,
     Flags.flagWs,
     Flags.flagYe,
+    Flags.flagYt,
     Flags.flagZa,
     Flags.flagZm,
     Flags.flagZw,
