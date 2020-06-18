@@ -705,6 +705,8 @@ extension DashboardViewController: MenuViewControllerDelegate {
         case .logout:
             resetNavigationBar()
             presentLogin()
+        case .version:
+            break
         default:
             fatalError("Unhandled item '\(item)'")
         }
