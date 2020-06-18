@@ -62,7 +62,7 @@ class QuickConnectTile: UIView, Tileable {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateQuickConnectList), name: .PIAServerHasBeenUpdated, object: nil)
-        
+        nc.addObserver(self, selector: #selector(updateQuickConnectList), name: .PIADaemonsDidPingServers, object: nil)
         viewShouldRestyle()
         self.tileTitle.text = L10n.Tiles.Quick.Connect.title.uppercased()
         updateQuickConnectList()
@@ -129,14 +129,16 @@ class QuickConnectTile: UIView, Tileable {
     private func autocompleteRecentServers() {
         var currentServers = Client.providers.serverProvider.currentServers.filter { $0.serverNetwork == Client.configuration.currentServerNetwork() }
         currentServers = currentServers.sorted(by: { $0.pingTime ?? 1000 < $1.pingTime ?? 1000 })
+        currentServers = currentServers.filter({!historicalServers.contains($0)})
         currentServers = currentServers.filterDuplicate{ ($0.country) }
 
         let numberOfServersToAdd = maxElementsInArray - historicalServers.count
 
-        if numberOfServersToAdd > 0 && currentServers.first?.pingTime != nil {
+        if numberOfServersToAdd > 0 {
             let arraySlice = currentServers.prefix(numberOfServersToAdd)
             let newServersArray = Array(arraySlice)
             let currentHistorical = historicalServers
+            
             historicalServers.removeAll()
             historicalServers.append(contentsOf: newServersArray.reversed())
             historicalServers.append(contentsOf: currentHistorical)
