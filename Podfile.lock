@@ -5,6 +5,9 @@ PODS:
   - Gloss (2.1.0)
   - lottie-ios (3.0.3)
   - OpenSSL-Apple (1.1.1d.5a)
+  - PIARegions (1.0.0):
+    - PIARegions/Core (= 1.0.0)
+  - PIARegions/Core (1.0.0)
   - PIAWireguard (1.0.0):
     - PIAWireguard/AppExtension (= 1.0.0)
     - PIAWireguard/Core (= 1.0.0)
@@ -17,9 +20,6 @@ PODS:
     - DynamicBlurView (~> 3.0.1)
   - QuickLayout (2.0.2)
   - ReachabilitySwift (4.3.0)
-  - Regions (1.0.0):
-    - Regions/Core (= 1.0.0)
-  - Regions/Core (1.0.0)
   - SwiftEntryKit (0.7.2):
     - QuickLayout (= 2.0.2)
   - SwiftyBeaver (1.7.0)
@@ -41,10 +41,10 @@ DEPENDENCIES:
   - FXPageControl
   - Gloss (~> 2)
   - lottie-ios
+  - PIARegions (from `https://github.com/pia-foss/mobile-common-regions`)
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`, commit `1585891`)
   - PopupDialog
   - ReachabilitySwift
-  - Regions (from `/Users/ueshiba/Projects/PIA/regions`)
   - SwiftEntryKit (= 0.7.2)
   - SwiftyBeaver (~> 1.7.0)
   - TunnelKit (from `https://github.com/pia-foss/tunnelkit`, commit `d19b9de`)
@@ -65,16 +65,19 @@ SPEC REPOS:
     - TweetNacl
 
 EXTERNAL SOURCES:
+  PIARegions:
+    :git: https://github.com/pia-foss/mobile-common-regions
   PIAWireguard:
     :commit: '1585891'
     :git: https://github.com/pia-foss/ios-wireguard
-  Regions:
-    :path: "/Users/ueshiba/Projects/PIA/regions"
   TunnelKit:
     :commit: d19b9de
     :git: https://github.com/pia-foss/tunnelkit
 
 CHECKOUT OPTIONS:
+  PIARegions:
+    :commit: 00885bc8a95f5354edb3ed99c88ca0d558f5c503
+    :git: https://github.com/pia-foss/mobile-common-regions
   PIAWireguard:
     :commit: '1585891'
     :git: https://github.com/pia-foss/ios-wireguard
@@ -89,16 +92,16 @@ SPEC CHECKSUMS:
   Gloss: 13ab6b4b0ff4cb2448466edc957479b1bccea8ba
   lottie-ios: 06e0b54aab85ba128e332687d7f4ac4861a7a7ae
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
+  PIARegions: 8189a991b6f0e69766b7e6d8d68ea23c8b1a123b
   PIAWireguard: f92333a1e281db298efd00b0fe97a5745a7946e6
   PopupDialog: f4bb461bf70ff422be0b56656566424ee9273080
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
-  Regions: 3119651f74c1aa8691bd4b3473d83d8d1822c778
   SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
   TunnelKit: d13d005c0c7febd18a03a87e1ab7d4414fef3ffd
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: e87888c27b1b5dba4732ab81ddc08f26053f480c
+PODFILE CHECKSUM: f643fbb790f57874dc796236cbf82ae7987d3293
 
 COCOAPODS: 1.9.3
