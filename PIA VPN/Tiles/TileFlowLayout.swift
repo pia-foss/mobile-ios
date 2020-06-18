@@ -73,7 +73,7 @@ final class TileFlowLayout: UICollectionViewFlowLayout {
             decorationAttributes.append(separatorAttribute)
             
             //top
-            if layoutAttributes.count == 1 || index == 0 {
+            if index == 0 {
                 let separatorAttributeTop = UICollectionViewLayoutAttributes(forDecorationViewOfKind: separatorDecorationViewTop,
                                                                              with: layoutAttribute.indexPath)
                 let cellFrameTop = layoutAttribute.frame
@@ -175,6 +175,7 @@ final class TileFlowLayout: UICollectionViewFlowLayout {
         
         if let newIndexPath = cv.indexPathForItem(at: location) {
             if let draggingIndexPath = draggingIndexPath {
+                self.invalidateLayout()
                 cv.moveItem(at: draggingIndexPath, to: newIndexPath)
             }
             draggingIndexPath = newIndexPath
