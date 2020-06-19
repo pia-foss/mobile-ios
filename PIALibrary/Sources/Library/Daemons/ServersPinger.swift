@@ -86,6 +86,10 @@ class ServersPinger: DatabaseAccess {
 
         }
         
+        if pendingPings.count == 0 {
+            self.finish()
+        }
+        
         pendingPings.forEach {
             $0.startTask(queue: dispatchQueue)
         }

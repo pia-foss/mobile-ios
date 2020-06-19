@@ -82,8 +82,10 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         accessedDatabase.transient.vpnStatus = nextStatus
         
         if let error = connection.value(forKey: "_lastDisconnectError") {
-            log.error("The VPN did fail \(error)")
-            Macros.postNotification(.PIAVPNDidFail)
+            if previousStatus == .connecting {
+                log.error("The VPN did fail \(error)")
+                Macros.postNotification(.PIAVPNDidFail)
+            }
         }
         
     }

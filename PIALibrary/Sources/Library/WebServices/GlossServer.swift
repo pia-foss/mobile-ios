@@ -167,7 +167,19 @@ class GlossServer: GlossParser {
 /// :nodoc:
 extension Server: JSONEncodable {
     public func toJSON() -> JSON? {
-        return jsonify([
+        
+        //Retrieve values for each protocol
+        let ovpnTCP = try? JSONEncoder().encode(openVPNAddressesForTCP)
+        let ovpnUDP = try? JSONEncoder().encode(openVPNAddressesForUDP)
+        let wgUDP = try? JSONEncoder().encode(wireGuardAddressesForUDP)
+        let ikeV2UDP = try? JSONEncoder().encode(iKEv2AddressesForUDP)
+        
+        let ovpnTCPobj = try? JSONSerialization.jsonObject(with: ovpnTCP ?? Data(), options: .mutableContainers)
+        let ovpnUDPobj = try? JSONSerialization.jsonObject(with: ovpnUDP ?? Data(), options: .mutableContainers)
+        let wgUDPobj = try? JSONSerialization.jsonObject(with: wgUDP ?? Data(), options: .mutableContainers)
+        let ikeV2UDPobj = try? JSONSerialization.jsonObject(with: ikeV2UDP ?? Data(), options: .mutableContainers)
+
+        var jsonified = jsonify([
             "serial" ~~> serial,
             "name" ~~> name,
             "country" ~~> country,
@@ -180,7 +192,16 @@ extension Server: JSONEncodable {
                 "best" ~~> bestOpenVPNAddressForUDP?.description
             ]),
             "ping" ~~> pingAddress?.description,
+            "servers" ~~> jsonify([
+                "ovpnudp" ~~> ovpnTCPobj,
+                "ovpntcp" ~~> ovpnUDPobj,
+                "wg" ~~> wgUDPobj,
+                "ikev2" ~~> ikeV2UDPobj,
+            ]),
             "internal_server_network" ~~> serverNetwork?.rawValue
         ])
+
+        
+        return jsonified
     }
 }
