@@ -71,11 +71,6 @@ extension Client {
         ///
         /// - Seealso: `ServerProvider.load(...)`
         public var bundledServersJSON: Data?
-        
-        /// The fallback server identifier in case no server is set.
-        ///
-        /// - Seealso: `Server.identifier`
-        public var fallbackServerIdentifier: String
 
         /// Downloads server updates regularly.
         public var enablesServerUpdates: Bool
@@ -171,7 +166,6 @@ extension Client {
 
             webTimeout = 10000
             
-            fallbackServerIdentifier = "de-frankfurt"
             enablesServerUpdates = false
             defaultServersConfiguration = ServersBundle.Configuration(
                 ovpnPorts: ServersBundle.Configuration.Ports(
