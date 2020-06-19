@@ -49,7 +49,7 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
             
             do {
                 let session = vpn.connection as? NETunnelProviderSession
-                if #available(iOSApplicationExtension 12.0, *) {
+                if #available(iOS 12.0, *) {
                     try session?.sendProviderMessage(WGPacketTunnelProvider.Message.requestLog.data) { (data) in
                         guard let data = data, !data.isEmpty else {
                             callback?(nil, nil)
@@ -77,7 +77,7 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
             
             do {
                 let session = vpn.connection as? NETunnelProviderSession
-                if #available(iOSApplicationExtension 12.0, *) {
+                if #available(iOS 12.0, *) {
                     try session?.sendProviderMessage(WGPacketTunnelProvider.Message.dataCount.data) { (data) in
                         guard let data = data, !data.isEmpty else {
                             callback?(nil, ClientError.vpnProfileUnavailable)

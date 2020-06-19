@@ -32,6 +32,8 @@ Pod::Spec.new do |s|
         p.dependency "ReachabilitySwift"
         p.dependency "SwiftyBeaver"
         p.dependency "PopupDialog"
+        p.dependency "PIARegions"
+        
     end
 
     s.subspec "VPN" do |p|

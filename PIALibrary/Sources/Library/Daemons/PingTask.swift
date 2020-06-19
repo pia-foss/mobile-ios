@@ -23,6 +23,7 @@
 import Foundation
 import SwiftyBeaver
 import __PIALibraryNative
+import PIARegions
 
 private let log = SwiftyBeaver.self
 

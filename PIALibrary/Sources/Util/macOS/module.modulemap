@@ -1,6 +1,5 @@
 module __PIALibraryNative {
     header "../Pinger.h"
-    header "../SimplePing.h"
     header "../NSData+Compression.h"
     header "../NSString+URL.h"
     export *

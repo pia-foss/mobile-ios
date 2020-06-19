@@ -5,6 +5,13 @@ PODS:
   - Gloss (2.1.0)
   - lottie-ios (3.0.3)
   - OpenSSL-Apple (1.1.1d.5a)
+  - PIARegions (1.0.0):
+    - PIARegions/Core (= 1.0.0)
+    - PIARegions/gradle (= 1.0.0)
+    - PIARegions/regions (= 1.0.0)
+  - PIARegions/Core (1.0.0)
+  - PIARegions/gradle (1.0.0)
+  - PIARegions/regions (1.0.0)
   - PIAWireguard (1.0.0):
     - PIAWireguard/AppExtension (= 1.0.0)
     - PIAWireguard/Core (= 1.0.0)
@@ -38,6 +45,7 @@ DEPENDENCIES:
   - FXPageControl
   - Gloss (~> 2)
   - lottie-ios
+  - PIARegions (from `https://github.com/pia-foss/mobile-common-regions`)
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`, commit `1585891`)
   - PopupDialog
   - ReachabilitySwift
@@ -46,7 +54,7 @@ DEPENDENCIES:
   - TunnelKit (from `https://github.com/pia-foss/tunnelkit`, commit `d19b9de`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - DynamicBlurView
     - FXPageControl
@@ -61,6 +69,8 @@ SPEC REPOS:
     - TweetNacl
 
 EXTERNAL SOURCES:
+  PIARegions:
+    :git: https://github.com/pia-foss/mobile-common-regions
   PIAWireguard:
     :commit: '1585891'
     :git: https://github.com/pia-foss/ios-wireguard
@@ -69,6 +79,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/pia-foss/tunnelkit
 
 CHECKOUT OPTIONS:
+  PIARegions:
+    :commit: f1fb90acad798af299b97f769db7776956dbb5cb
+    :git: https://github.com/pia-foss/mobile-common-regions
   PIAWireguard:
     :commit: '1585891'
     :git: https://github.com/pia-foss/ios-wireguard
@@ -83,6 +96,7 @@ SPEC CHECKSUMS:
   Gloss: 13ab6b4b0ff4cb2448466edc957479b1bccea8ba
   lottie-ios: 06e0b54aab85ba128e332687d7f4ac4861a7a7ae
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
+  PIARegions: b1e2c47a48e54040c36a14a9aab07b95d8be6cfb
   PIAWireguard: f92333a1e281db298efd00b0fe97a5745a7946e6
   PopupDialog: f4bb461bf70ff422be0b56656566424ee9273080
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
@@ -92,6 +106,6 @@ SPEC CHECKSUMS:
   TunnelKit: d13d005c0c7febd18a03a87e1ab7d4414fef3ffd
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: d27651f992a5919c89818ce4e4a0007b95deb8e1
+PODFILE CHECKSUM: f643fbb790f57874dc796236cbf82ae7987d3293
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.9.3

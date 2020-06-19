@@ -22,6 +22,7 @@
 
 import Foundation
 import Gloss
+import PIARegions
 
 class ServersResponse {
     private let originalLength: Int
@@ -47,11 +48,9 @@ class ServersResponse {
         self.signature = signature
     }
     
-    func verifySignature(publicKey: SecKey) -> Bool {
-        guard let data = jsonString.data(using: .utf8) else {
-            fatalError("Cannot encode jsonString to data")
-        }
-        return data.verifySHA256(withRSASignature: signature, publicKey: publicKey)
+    func verifySignature() -> Bool {
+        let verifySignature = VerifySignature(json: jsonString, signature: signature)
+        return verifySignature.verify()
     }
 
     func writeBundle(to file: String) throws {
@@ -61,6 +60,7 @@ class ServersResponse {
     func bundle() -> ServersBundle? {
         return GlossServersBundle(jsonString: jsonString)?.parsed
     }
+    
 }
 
 class GlossServersBundle: GlossParser {

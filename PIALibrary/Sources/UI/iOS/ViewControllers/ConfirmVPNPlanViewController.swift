@@ -165,7 +165,7 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
     }
     
     private func setupAppleSignInUI() {
-        if #available(iOSApplicationExtension 13.0, *) {
+        if #available(iOS 13.0, *) {
             labelOr.text = L10n.Welcome.Purchase.or.uppercased()
             labelOr.textAlignment = .center
             
@@ -195,7 +195,7 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
 
     // MARK: Actions
     @IBAction private func handleAuthorizationAppleID() {
-        if #available(iOSApplicationExtension 13.0, *) {
+        if #available(iOS 13.0, *) {
             let request = ASAuthorizationAppleIDProvider().createRequest()
             request.requestedScopes = [.email]
             
@@ -242,7 +242,7 @@ extension ConfirmVPNPlanViewController: GDPRDelegate {
     
 }
 
-@available(iOSApplicationExtension 13.0, *)
+@available(iOS 13.0, *)
 extension ConfirmVPNPlanViewController: ASAuthorizationControllerPresentationContextProviding {
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredentials = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
@@ -258,7 +258,7 @@ extension ConfirmVPNPlanViewController: ASAuthorizationControllerPresentationCon
     }
 }
 
-@available(iOSApplicationExtension 13.0, *)
+@available(iOS 13.0, *)
 extension ConfirmVPNPlanViewController: ASAuthorizationControllerDelegate {
     public func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
