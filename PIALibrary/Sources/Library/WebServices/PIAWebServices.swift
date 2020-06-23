@@ -29,7 +29,9 @@ import PIARegions
 private let log = SwiftyBeaver.self
 
 class PIAWebServices: WebServices, ConfigurationAccess {
+    
     private static let serversVersion = 1002
+    private let regionsTask = RegionsTask()
 
     /***
      Generates a new auth token for the specific user
@@ -249,8 +251,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         ]
 
         if Client.configuration.serverNetwork == .gen4 {
-            let regionTask = RegionsTask()
-            regionTask.fetch { response, jsonResponse, error in
+            self.regionsTask.fetch { response, jsonResponse, error in
                 
                 if let error = error {
                     callback?(nil, ClientError.malformedResponseData)
