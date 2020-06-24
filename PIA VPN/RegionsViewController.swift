@@ -274,7 +274,7 @@ class RegionsViewController: AutolayoutViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + AppConfiguration.Animations.duration, execute: {
             self.gradientProgressBar.setProgress(0, animated: true)
         })
-        tableView.reloadData()
+        self.filterServers()
     }
     
     // MARK: Restylable
