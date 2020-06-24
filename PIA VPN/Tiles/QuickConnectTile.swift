@@ -27,8 +27,7 @@ import PIALibrary
 class QuickConnectTile: UIView, Tileable {
 
     private let maxElementsInArray = 6
-    private var autocompletedServersArray: [Server] = []
-
+    
     var view: UIView!
     var detailSegueIdentifier: String!
     var status: TileStatus = .normal {
@@ -101,7 +100,7 @@ class QuickConnectTile: UIView, Tileable {
             AppPreferences.shared.favoriteServerIdentifiers
 
         autocompleteRecentServers()
-
+        
         for (index, server) in historicalServers.enumerated().reversed()  {
             let buttonIndex = historicalServers.count - (index + 1)
             let view = stackView.subviews[buttonIndex]
@@ -136,14 +135,12 @@ class QuickConnectTile: UIView, Tileable {
         let numberOfServersToAdd = maxElementsInArray - historicalServers.count
 
         if numberOfServersToAdd > 0 {
-            if autocompletedServersArray.count == 0 {
-                let arraySlice = currentServers.prefix(numberOfServersToAdd)
-                autocompletedServersArray = Array(arraySlice)
-            }
+            let arraySlice = currentServers.prefix(numberOfServersToAdd)
+            let newServersArray = Array(arraySlice)
             let currentHistorical = historicalServers
             
             historicalServers.removeAll()
-            historicalServers.append(contentsOf: autocompletedServersArray.reversed())
+            historicalServers.append(contentsOf: newServersArray.reversed())
             historicalServers.append(contentsOf: currentHistorical)
         }
         
