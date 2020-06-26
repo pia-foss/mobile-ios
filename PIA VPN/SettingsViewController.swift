@@ -427,6 +427,9 @@ class SettingsViewController: AutolayoutViewController {
     
     @objc private func toggleGEOServers(_ sender: UISwitch) {
         AppPreferences.shared.showGeoServers = sender.isOn
+        NotificationCenter.default.post(name: .PIADaemonsDidPingServers,
+        object: self,
+        userInfo: nil)
     }
 
     @objc private func showContentBlockerTutorial() {
