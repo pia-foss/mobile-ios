@@ -72,30 +72,38 @@ PODS:
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - OpenSSL-Apple (1.1.1d.5a)
-  - PIALibrary/Core (2.6.0)
-  - PIALibrary/Library (2.6.0):
+  - PIALibrary/Core (2.7.0)
+  - PIALibrary/Library (2.7.0):
     - Alamofire (~> 4)
     - Gloss (~> 2)
     - PIALibrary/Core
     - PIALibrary/Util
+    - PIARegions
     - PopupDialog
     - ReachabilitySwift
     - SwiftyBeaver
-  - PIALibrary/Mock (2.6.0):
+  - PIALibrary/Mock (2.7.0):
     - PIALibrary/Library
-  - PIALibrary/UI (2.6.0):
+  - PIALibrary/UI (2.7.0):
     - FXPageControl
     - lottie-ios
     - PIALibrary/Library
     - SwiftEntryKit (= 0.7.2)
     - SwiftyBeaver
     - TPKeyboardAvoiding
-  - PIALibrary/Util (2.6.0):
+  - PIALibrary/Util (2.7.0):
     - PIALibrary/Core
-  - PIALibrary/VPN (2.6.0):
+  - PIALibrary/VPN (2.7.0):
     - PIALibrary/Library
     - PIAWireguard
     - TunnelKit
+  - PIARegions (1.0.0):
+    - PIARegions/Core (= 1.0.0)
+    - PIARegions/gradle (= 1.0.0)
+    - PIARegions/regions (= 1.0.0)
+  - PIARegions/Core (1.0.0)
+  - PIARegions/gradle (1.0.0)
+  - PIARegions/regions (1.0.0)
   - PIAWireguard (1.0.0):
     - PIAWireguard/AppExtension (= 1.0.0)
     - PIAWireguard/Core (= 1.0.0)
@@ -138,6 +146,7 @@ DEPENDENCIES:
   - PIALibrary/Mock (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
   - PIALibrary/UI (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
   - PIALibrary/VPN (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
+  - PIARegions (from `https://github.com/pia-foss/mobile-common-regions`)
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`, commit `1585891`)
   - PopupDialog
   - ReachabilitySwift (~> 4.3.0)
@@ -179,6 +188,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   PIALibrary:
     :path: "/Users/ueshiba/Projects/PIA/client-library-apple"
+  PIARegions:
+    :git: https://github.com/pia-foss/mobile-common-regions
   PIAWireguard:
     :commit: '1585891'
     :git: https://github.com/pia-foss/ios-wireguard
@@ -187,6 +198,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/pia-foss/tunnelkit
 
 CHECKOUT OPTIONS:
+  PIARegions:
+    :commit: 49910bf9cc33ae83568f75894e42ce4aba20ad10
+    :git: https://github.com/pia-foss/mobile-common-regions
   PIAWireguard:
     :commit: '1585891'
     :git: https://github.com/pia-foss/ios-wireguard
@@ -215,7 +229,8 @@ SPEC CHECKSUMS:
   lottie-ios: 85ce835dd8c53e02509f20729fc7d6a4e6645a0a
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
-  PIALibrary: eea3926adab90df4cfc7713436faba34f3af909a
+  PIALibrary: d417388569b212af5a29f454c6ec5aec66e69f90
+  PIARegions: 9ccd572b05443a6c8cc88e1bdcc38ed78a25cac4
   PIAWireguard: f92333a1e281db298efd00b0fe97a5745a7946e6
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
@@ -227,6 +242,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 7e2ee37018b5f9d01b4b9da9499b0009e6b01665
+PODFILE CHECKSUM: 13c917c29f6784643f6bcce8110c82786add3007
 
 COCOAPODS: 1.9.3

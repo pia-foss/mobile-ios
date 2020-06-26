@@ -18,6 +18,9 @@ $library_subspecs = [
     'VPN'
 ]
 
+$regions_repo = 'mobile-common-regions'
+
+
 def library_by_path(root)
     $library_subspecs.each { |name|
         pod "#{$library_pod}/#{name}", :path => "#{root}/#{$library_repo}"
@@ -40,6 +43,7 @@ end
 
 def shared_main_pods
     pod 'AlamofireImage'
+    pod "PIARegions", :git => "#{$git_root}/#{$regions_repo}"
     library_by_path('/Users/ueshiba/Projects/PIA')
     #library_by_git('7075984')
     #library_by_version('~> 1.1.3')
