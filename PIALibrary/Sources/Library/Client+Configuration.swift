@@ -208,6 +208,7 @@ extension Client {
             let urlscfg = URLSessionConfiguration.default
             urlscfg.timeoutIntervalForRequest = Double(webTimeout) / 1000.0
             urlscfg.timeoutIntervalForResource = Double(webTimeout) / 1000.0
+            urlscfg.urlCache = nil
             sessionManager = SessionManager(configuration: urlscfg)
             
             #if os(iOS)
