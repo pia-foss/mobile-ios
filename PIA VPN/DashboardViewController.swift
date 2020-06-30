@@ -221,6 +221,9 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     private func presentLogin() {
+        
+        dismissExistingViewController()
+        
         var preset = AppConfiguration.Welcome.defaultPreset()
         preset.shouldRecoverPendingSignup = false//!TransientState.didRetryPendingSignup
         if !TransientState.didRetryPendingSignup {
@@ -230,6 +233,7 @@ class DashboardViewController: AutolayoutViewController {
         let vc = GetStartedViewController.with(preset: preset, delegate: self)
         vc.modalPresentationStyle = .fullScreen
 
+        
         if let presented = self.navigationController?.presentedViewController,
             presented != self {
             self.present(vc, animated: true, completion: {
@@ -238,6 +242,10 @@ class DashboardViewController: AutolayoutViewController {
         } else {
             present(vc, animated: false, completion: nil)
         }
+    }
+    
+    func dismissExistingViewController() {
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     private func presentPurchaseForTrial() {
