@@ -45,6 +45,7 @@ extension AccountProvider {
             if (error == .unauthorized) {
                 log.error("Account: Failed to retrieve the account info, user is unauthorized. Logging out...")
                 self.logout(nil)
+                Macros.postNotification(.Unauthorized)
             }
         })
     }

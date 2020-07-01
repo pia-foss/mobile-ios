@@ -28,6 +28,7 @@ extension Notification.Name {
     static let ShareFriendReferralCode = Notification.Name("ShareFriendReferralCode")
     static let FriendInvitationSent = Notification.Name("FriendInvitationSent")
     static let RefreshSettings = Notification.Name("RefreshSettings")
+    static let Unauthorized = Notification.Name("Unauthorized")
 
 }
 
