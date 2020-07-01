@@ -46,6 +46,7 @@ class DashboardViewController: AutolayoutViewController {
     
     private var currentPageIndex = 0
     private var isDisconnecting = false
+    private var isUnauthorized = false
 
     private var currentStatus: VPNStatus = .disconnected
 
@@ -91,6 +92,7 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(reloadTheme), name: .PIAThemeShouldChange, object: nil)
         nc.addObserver(self, selector: #selector(checkAccountEmail), name: .PIAAccountDidRefresh, object: nil)
         nc.addObserver(self, selector: #selector(vpnDidFail), name: .PIAVPNDidFail, object: nil)
+        nc.addObserver(self, selector: #selector(unauthorized), name: .Unauthorized, object: nil)
         
         if Client.providers.accountProvider.isLoggedIn {
             Client.providers.accountProvider.refreshAndLogoutUnauthorized()
@@ -232,7 +234,6 @@ class DashboardViewController: AutolayoutViewController {
 
         let vc = GetStartedViewController.with(preset: preset, delegate: self)
         vc.modalPresentationStyle = .fullScreen
-
         
         if let presented = self.navigationController?.presentedViewController,
             presented != self {
@@ -242,6 +243,12 @@ class DashboardViewController: AutolayoutViewController {
         } else {
             present(vc, animated: false, completion: nil)
         }
+        
+        if isUnauthorized {
+            Macros.displayImageNote(withImage: Asset.iconWarning.image, message: L10n.Account.Error.unauthorized)
+            isUnauthorized = false
+        }
+        
     }
     
     func dismissExistingViewController() {
@@ -258,6 +265,10 @@ class DashboardViewController: AutolayoutViewController {
 
         let vc = GetStartedViewController.withPurchase(preset: preset, delegate: self)
         present(vc, animated: true, completion: nil)
+    }
+    
+    @objc private func unauthorized() {
+        self.isUnauthorized = true
     }
     
     @objc private func openMenu(_ sender: Any?) {
