@@ -245,7 +245,7 @@ class DashboardViewController: AutolayoutViewController {
         }
         
         if isUnauthorized {
-            Macros.displayImageNote(withImage: Asset.iconWarning.image, message: L10n.Account.Error.unauthorized)
+            Macros.displayImageNote(withImage: Asset.iconWarning.image, message: L10n.Account.unauthorized)
             isUnauthorized = false
         }
         
