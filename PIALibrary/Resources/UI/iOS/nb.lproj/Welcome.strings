@@ -43,7 +43,7 @@
 "purchase.login.button" = "Logg inn";
 "purchase.login.footer" = "Har du allerede en konto?";
 "purchase.submit" = "Send inn";
-"purchase.subtitle" = "Garanti som gir deg pengene tilbake innen 7 dager";
+"purchase.subtitle" = "Garanti som gir deg pengene tilbake innen 30 dager";
 "purchase.title" = "Velg et VPN-abonnement";
 "redeem.accessibility.back" = "Tilbake";
 "redeem.email.placeholder" = "E-postadresse";

@@ -43,7 +43,7 @@
 "purchase.login.button" = "ลงชื่อเข้าใช้";
 "purchase.login.footer" = "มีบัญชีแล้วหรือยัง";
 "purchase.submit" = "ส่ง";
-"purchase.subtitle" = "รับประกันการคืนเงินภายใน 7 วัน";
+"purchase.subtitle" = "รับประกันการคืนเงินภายใน 30 วัน";
 "purchase.title" = "เลือกแผน VPN";
 "redeem.accessibility.back" = "กลับ";
 "redeem.email.placeholder" = "ที่อยู่อีเมล";

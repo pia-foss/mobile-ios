@@ -43,7 +43,7 @@
 "purchase.login.button" = "Accedi";
 "purchase.login.footer" = "Possiedi già un account?";
 "purchase.submit" = "Invia";
-"purchase.subtitle" = "Garanzia di rimborso entro 7 giorni";
+"purchase.subtitle" = "Garanzia di rimborso entro 30 giorni";
 "purchase.title" = "Seleziona un piano VPN";
 "redeem.accessibility.back" = "Indietro";
 "redeem.email.placeholder" = "Indirizzo email";

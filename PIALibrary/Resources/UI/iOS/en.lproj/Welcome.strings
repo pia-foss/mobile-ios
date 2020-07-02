@@ -18,7 +18,7 @@
 "login.receipt.button" = "Login using purchase receipt";
 
 "purchase.title" = "Select a VPN plan";
-"purchase.subtitle" = "7-day money back guarantee";
+"purchase.subtitle" = "30-day money back guarantee";
 "purchase.email.placeholder" = "Email address";
 "purchase.continue" = "Continue";
 "purchase.login.footer" = "Already have an account?";

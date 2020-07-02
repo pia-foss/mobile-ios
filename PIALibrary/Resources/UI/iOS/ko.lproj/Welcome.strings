@@ -43,7 +43,7 @@
 "purchase.login.button" = "로그인";
 "purchase.login.footer" = "이미 계정이 있으세요?";
 "purchase.submit" = "제출";
-"purchase.subtitle" = "7일 이내 환불 보장";
+"purchase.subtitle" = "30일 이내 환불 보장";
 "purchase.title" = "VPN 플랜 선택";
 "redeem.accessibility.back" = "뒤로";
 "redeem.email.placeholder" = "이메일 주소";
