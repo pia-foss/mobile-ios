@@ -17,7 +17,7 @@
 "purchase.trials.devices" = "一度に10台の端末をサポート";
 "purchase.trials.devices.description" = "一度に最大10台の端末を保護して自分を守ることができます。";
 "purchase.trials.intro" = "7日間無料トライアルを開始";
-"purchase.trials.money.back" = "7日間返金保証";
+"purchase.trials.money.back" = "30日間返金保証";
 "purchase.trials.price.after" = "以後%@";
 "purchase.trials.region" = "すべての地域に簡単に接続";
 "purchase.trials.servers" = "32か国の3300以上のサーバー";

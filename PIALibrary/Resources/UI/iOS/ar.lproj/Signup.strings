@@ -17,7 +17,7 @@
 "purchase.trials.devices" = "يدعم 10 أجهزة في المرة الواحدة";
 "purchase.trials.devices.description" = "احمي نفسك على ما يصل إلى 10 أجهزة في وقت واحد.";
 "purchase.trials.intro" = "ابدأ تجربتك المجانية لمدة 7 ايام";
-"purchase.trials.money.back" = "ضمان استرداد المال لمدة 7 أيام";
+"purchase.trials.money.back" = "ضمان استرداد المال لمدة 30 أيام";
 "purchase.trials.price.after" = "ثم %@";
 "purchase.trials.region" = "اتصل بأي منطقة بسهولة";
 "purchase.trials.servers" = "أكثر من 3300 خادم في 32 دولة";

@@ -17,7 +17,7 @@
 "purchase.trials.devices" = "Obsługa 10 urządzeń jednocześnie";
 "purchase.trials.devices.description" = "Ochrona na maksymalnie 10 urządzeniach jednocześnie.";
 "purchase.trials.intro" = "Zacznij 7-dniowy bezpłatny okres próbny";
-"purchase.trials.money.back" = "7-dniowa gwarancja zwrotu pieniędzy";
+"purchase.trials.money.back" = "30-dniowa gwarancja zwrotu pieniędzy";
 "purchase.trials.price.after" = "Potem %@";
 "purchase.trials.region" = "Łatwo połączysz się z dowolnym regionem";
 "purchase.trials.servers" = "Ponad 3300 serwerów w 32 krajach";

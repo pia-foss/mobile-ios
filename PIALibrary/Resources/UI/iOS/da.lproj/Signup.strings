@@ -17,7 +17,7 @@
 "purchase.trials.devices" = "Understøtter 10 enheder på én gang";
 "purchase.trials.devices.description" = "Beskyt dig selv på op til 10 enheder ad gangen.";
 "purchase.trials.intro" = "Start din 7-dages gratis prøveperiode";
-"purchase.trials.money.back" = "7-dages pengene tilbage garanti";
+"purchase.trials.money.back" = "30-dages pengene tilbage garanti";
 "purchase.trials.price.after" = "Derefter %@";
 "purchase.trials.region" = "Forbind nemt til en hvilken som helst region";
 "purchase.trials.servers" = "Mere end 3300 servere i 32 lande";

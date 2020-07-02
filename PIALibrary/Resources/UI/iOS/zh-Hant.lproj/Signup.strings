@@ -17,7 +17,7 @@
 "purchase.trials.devices" = "同時支援 10 台裝置";
 "purchase.trials.devices.description" = "同時為最多 10 台裝置提供保護。";
 "purchase.trials.intro" = "開始 7 天免費試用";
-"purchase.trials.money.back" = "7 天退款保證";
+"purchase.trials.money.back" = "30 天退款保證";
 "purchase.trials.price.after" = "然後 %@";
 "purchase.trials.region" = "可輕鬆連線到任何地區";
 "purchase.trials.servers" = "32 個國家超過 3300 台伺服器";

@@ -17,7 +17,7 @@
 "purchase.trials.devices" = "동시에 10대의 장치 지원";
 "purchase.trials.devices.description" = "한 번에 최대 10대의 장치에서 보호를 받으세요.";
 "purchase.trials.intro" = "7일 무료 체험 시작";
-"purchase.trials.money.back" = "7일 이내 환불 보장";
+"purchase.trials.money.back" = "30일 이내 환불 보장";
 "purchase.trials.price.after" = "그 후 %@";
 "purchase.trials.region" = "모든 지역에 쉽게 연결";
 "purchase.trials.servers" = "32개국 3300개 이상의 서버";

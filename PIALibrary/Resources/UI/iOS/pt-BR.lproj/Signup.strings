@@ -17,7 +17,7 @@
 "purchase.trials.devices" = "Suporte para 10 dispositivos ao mesmo tempo";
 "purchase.trials.devices.description" = "Proteja-se em até 10 dispositivos ao mesmo tempo.";
 "purchase.trials.intro" = "Comece sua avaliação gratuita de 7 dias";
-"purchase.trials.money.back" = "Seu dinheiro de volta em até 7 dias";
+"purchase.trials.money.back" = "Seu dinheiro de volta em até 30 dias";
 "purchase.trials.price.after" = "Em seguida, %@";
 "purchase.trials.region" = "Conecte-se a qualquer região facilmente";
 "purchase.trials.servers" = "Mais de 3.300 servidores em 32 países";

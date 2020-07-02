@@ -17,7 +17,7 @@
 "purchase.trials.devices" = "Supporta 10 dispositivi alla volta";
 "purchase.trials.devices.description" = "Proteggi un massimo di 10 dispositivi alla volta.";
 "purchase.trials.intro" = "Inizia la tua prova gratuita da 7 giorni";
-"purchase.trials.money.back" = "Garanzia di rimborso entro 7 giorni";
+"purchase.trials.money.back" = "Garanzia di rimborso entro 30 giorni";
 "purchase.trials.price.after" = "Poi a %@";
 "purchase.trials.region" = "Connettiti facilmente a qualsiasi regione";
 "purchase.trials.servers" = "Oltre 3300 server in 32 Paesi";

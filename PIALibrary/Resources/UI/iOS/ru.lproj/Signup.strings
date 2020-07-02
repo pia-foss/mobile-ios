@@ -17,7 +17,7 @@
 "purchase.trials.devices" = "Поддержка сразу 10 устройств";
 "purchase.trials.devices.description" = "Защищайте себя на нескольких устройствах одновременно (до 10).";
 "purchase.trials.intro" = "Начните 7-дневную бесплатную пробу";
-"purchase.trials.money.back" = "7-дневная гарантия возврата денег";
+"purchase.trials.money.back" = "30-дневная гарантия возврата денег";
 "purchase.trials.price.after" = "После этого %@";
 "purchase.trials.region" = "Простое подключение к любому региону";
 "purchase.trials.servers" = "Более 3300 серверов в 32 странах";
