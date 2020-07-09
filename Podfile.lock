@@ -65,7 +65,7 @@ PODS:
   - GradientProgressBar (2.0.3):
     - LightweightObservable (~> 2.0)
   - LightweightObservable (2.1.1)
-  - lottie-ios (3.1.6)
+  - lottie-ios (3.1.8)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
     - nanopb/encode (= 0.3.9011)
@@ -119,7 +119,7 @@ PODS:
   - SideMenu (6.1.3)
   - SwiftEntryKit (0.7.2):
     - QuickLayout (= 2.0.2)
-  - SwiftyBeaver (1.8.4)
+  - SwiftyBeaver (1.9.1)
   - TPKeyboardAvoiding (1.3.3)
   - TunnelKit (2.2.2):
     - TunnelKit/Protocols/OpenVPN (= 2.2.2)
@@ -142,10 +142,10 @@ DEPENDENCIES:
   - Fabric
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
-  - PIALibrary/Library (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
-  - PIALibrary/Mock (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
-  - PIALibrary/UI (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
-  - PIALibrary/VPN (from `/Users/ueshiba/Projects/PIA/client-library-apple`)
+  - PIALibrary/Library (from `/Users/jose/Projects/PIA/client-library-apple`)
+  - PIALibrary/Mock (from `/Users/jose/Projects/PIA/client-library-apple`)
+  - PIALibrary/UI (from `/Users/jose/Projects/PIA/client-library-apple`)
+  - PIALibrary/VPN (from `/Users/jose/Projects/PIA/client-library-apple`)
   - PIARegions (from `https://github.com/pia-foss/mobile-common-regions`)
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`, commit `1585891`)
   - PopupDialog
@@ -187,7 +187,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :path: "/Users/ueshiba/Projects/PIA/client-library-apple"
+    :path: "/Users/jose/Projects/PIA/client-library-apple"
   PIARegions:
     :git: https://github.com/pia-foss/mobile-common-regions
   PIAWireguard:
@@ -226,7 +226,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: ad0f3b691c67909d03a3327cc205222ab8f42e0e
   GradientProgressBar: f11fb57cffc615a4794da558ce283171a992130a
   LightweightObservable: 52abe2a01c8273921b1f66cd66526eb3328ca35a
-  lottie-ios: 85ce835dd8c53e02509f20729fc7d6a4e6645a0a
+  lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
   PIALibrary: d417388569b212af5a29f454c6ec5aec66e69f90
@@ -237,11 +237,11 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
   SideMenu: 46c1b79dab51fc2f1c1ff3e1212ca47cc231b0bf
   SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145
-  SwiftyBeaver: f9a9aba96a6a6166e21682377804d728b0d20b95
+  SwiftyBeaver: a1f5691458561414bcfab51874b2b7445451602b
   TPKeyboardAvoiding: 6dd3fe3268b8f2627beb7ff3d82a3cacbdf66a36
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 13c917c29f6784643f6bcce8110c82786add3007
+PODFILE CHECKSUM: f04ea3a6f40e366031f75ebd8d877863139c3544
 
 COCOAPODS: 1.9.3
