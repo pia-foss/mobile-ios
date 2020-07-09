@@ -140,6 +140,11 @@ class QuickConnectTile: UIView, Tileable {
         currentServers = currentServers.sorted(by: { $0.pingTime ?? 1000 < $1.pingTime ?? 1000 })
         currentServers = currentServers.filter({!historicalServers.contains($0)})
         currentServers = currentServers.filterDuplicate{ ($0.country) }
+        if AppPreferences.shared.showGeoServers == false {
+            currentServers = currentServers.filter {
+                $0.geo == false
+            }
+        }
 
         let numberOfServersToAdd = maxElementsInArray - historicalServers.count
 
