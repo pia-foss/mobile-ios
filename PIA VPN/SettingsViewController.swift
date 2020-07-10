@@ -106,6 +106,9 @@ enum Setting: Int {
     case password
     
     case resolveGoogleAdsDomain
+
+    case cardsHistory
+    
 }
 
 protocol SettingsViewControllerDelegate: class {
@@ -208,6 +211,7 @@ class SettingsViewController: AutolayoutViewController {
         ],
         .preview: [
             .serversNetwork,
+            .cardsHistory
         ],
         .development: [
 //            .truncateDebugLog,
@@ -1143,6 +1147,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.selectionStyle = .none
             switchServersNetwork.isOn = Client.configuration.currentServerNetwork() == ServersNetwork.gen4
 
+        case .cardsHistory:
+            cell.textLabel?.text = "Cards history"
+            cell.detailTextLabel?.text = nil
+
         case .geoServers:
             cell.textLabel?.text = L10n.Settings.Geo.Servers.description
             cell.textLabel?.numberOfLines = 0
@@ -1442,6 +1450,17 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             
         case .resetSettings:
             resetToDefaultSettings()
+            
+        case .cardsHistory:
+            let callingCards = CardFactory.getAllCards()
+            if !callingCards.isEmpty {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let cardsController = storyboard.instantiateViewController(withIdentifier: "PIACardsViewController") as? PIACardsViewController {
+                    cardsController.setupWith(cards: callingCards)
+                    cardsController.modalPresentationStyle = .overCurrentContext
+                    self.present(cardsController, animated: true)
+                }
+            }
 
 //        case .truncateDebugLog:
 //            truncateDebugLog()

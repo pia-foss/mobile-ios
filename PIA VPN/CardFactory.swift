@@ -36,9 +36,12 @@ struct CardFactory {
     }
     
     private static let availableCards = [
-        Card("3.7.1", "TBC", "TBC", UIImage(named: "Dark-Map")!, "TBC", {
+        Card("3.7.1", "Introducing WireGuard", "TBC", UIImage(named: "Dark-Map")!, "TBC", {
             print("TBC")
-        })
+        }),
+        Card("3.6.0", "Introducing IKEv2", "TBC", UIImage(named: "Dark-Map")!, "TBC", {
+           print("TBC")
+       })
     ]
     
 }
