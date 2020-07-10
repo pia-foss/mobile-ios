@@ -144,6 +144,12 @@
 		77BD742F4431F83617891C3A /* Pods_PIA_VPN_WG_Tunnel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25534C630A3B6911A17F036D /* Pods_PIA_VPN_WG_Tunnel.framework */; };
 		82A1AD1F24B7BF4E0003DD02 /* Array+Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE432DE2498EADA0095B197 /* Array+Group.swift */; };
 		82A1AD2324B7C0020003DD02 /* PIACardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A1AD2224B7C0020003DD02 /* PIACardTests.swift */; };
+		82A1AD2624B86AF60003DD02 /* PIACardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A1AD2524B86AF60003DD02 /* PIACardsViewController.swift */; };
+		82A1AD2724B86AF60003DD02 /* PIACardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A1AD2524B86AF60003DD02 /* PIACardsViewController.swift */; };
+		82A1AD2924B87CCD0003DD02 /* PIACard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82A1AD2824B87CCD0003DD02 /* PIACard.xib */; };
+		82A1AD2A24B87CCD0003DD02 /* PIACard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82A1AD2824B87CCD0003DD02 /* PIACard.xib */; };
+		82A1AD2F24B87CF20003DD02 /* PIACard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A1AD2E24B87CF20003DD02 /* PIACard.swift */; };
+		82A1AD3024B87CF20003DD02 /* PIACard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A1AD2E24B87CF20003DD02 /* PIACard.swift */; };
 		DD052AC32419003300AD3A24 /* ProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD052AC22419003300AD3A24 /* ProtocolTableViewCell.swift */; };
 		DD052AC42419020E00AD3A24 /* ProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD052AC22419003300AD3A24 /* ProtocolTableViewCell.swift */; };
 		DD07AACC242CBFF2000EE1A3 /* AddEmailToAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD07AACB242CBFF2000EE1A3 /* AddEmailToAccountViewController.swift */; };
@@ -564,6 +570,9 @@
 		6E80B8CEB39E492B8BBD9DE5 /* Pods-PIA VPN Tunnel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPN Tunnel.debug.xcconfig"; path = "Target Support Files/Pods-PIA VPN Tunnel/Pods-PIA VPN Tunnel.debug.xcconfig"; sourceTree = "<group>"; };
 		74C3E3CAA4477C3F4F8F59D6 /* Pods_PIA_VPN_Tunnel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIA_VPN_Tunnel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A1AD2224B7C0020003DD02 /* PIACardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACardTests.swift; sourceTree = "<group>"; };
+		82A1AD2524B86AF60003DD02 /* PIACardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACardsViewController.swift; sourceTree = "<group>"; };
+		82A1AD2824B87CCD0003DD02 /* PIACard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PIACard.xib; sourceTree = "<group>"; };
+		82A1AD2E24B87CF20003DD02 /* PIACard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACard.swift; sourceTree = "<group>"; };
 		8F29AD59245249AB5E2BA099 /* Pods-PIA VPN.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPN.release.xcconfig"; path = "Target Support Files/Pods-PIA VPN/Pods-PIA VPN.release.xcconfig"; sourceTree = "<group>"; };
 		94031EEABA50DF53444854B4 /* Pods-PIA VPN WG Tunnel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPN WG Tunnel.debug.xcconfig"; path = "Target Support Files/Pods-PIA VPN WG Tunnel/Pods-PIA VPN WG Tunnel.debug.xcconfig"; sourceTree = "<group>"; };
 		9734DB6C4A913313C798B16F /* Pods-PIA VPNTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPNTests.debug.xcconfig"; path = "Target Support Files/Pods-PIA VPNTests/Pods-PIA VPNTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1051,11 +1060,22 @@
 		296BBFEE1840066A00944151 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				82A1AD2424B86ADB0003DD02 /* Cards */,
 				0E1CFCBD1EBB9F040073155D /* Dashboard */,
 				0E1CFCBE1EBB9F860073155D /* Menu */,
 				296B7BB21A1840CB005606AD /* Shared */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		82A1AD2424B86ADB0003DD02 /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				82A1AD2524B86AF60003DD02 /* PIACardsViewController.swift */,
+				82A1AD2824B87CCD0003DD02 /* PIACard.xib */,
+				82A1AD2E24B87CF20003DD02 /* PIACard.swift */,
+			);
+			name = Cards;
 			sourceTree = "<group>";
 		};
 		D1AF2B5B4033CE59223598AD /* Pods */ = {
@@ -1543,6 +1563,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82A1AD2A24B87CCD0003DD02 /* PIACard.xib in Resources */,
 				DD51F8B82372E494009FEED3 /* PIA-RSA-3072.pem in Resources */,
 				DD172AA02254C39300071CFB /* FavoriteServersTile.xib in Resources */,
 				0ED66BD020A9918000333B35 /* staging.endpoint in Resources */,
@@ -1624,6 +1645,7 @@
 				DD51F8C12372E494009FEED3 /* PIA-ECC-256k1.pem in Resources */,
 				DD125DCE21E772B6004ECCB6 /* QuickConnectTileCollectionViewCell.xib in Resources */,
 				DD1C138921E60C63004004B3 /* IPTile.xib in Resources */,
+				82A1AD2924B87CCD0003DD02 /* PIACard.xib in Resources */,
 				DD21909622F1DFB0007D035E /* ShareInvitationTableViewCell.xib in Resources */,
 				0E7EC045209326E30029811E /* Localizable.strings in Resources */,
 				DD21909322F1DFB0007D035E /* InviteFriendTableViewCell.xib in Resources */,
@@ -2049,6 +2071,7 @@
 				DDD65314247E66AD00F0A897 /* CoordinatesFinder.swift in Sources */,
 				DDD271DF21D616AA00B6D20F /* Server+Favorite.swift in Sources */,
 				DD125DC621E77046004ECCB6 /* QuickConnectTile.swift in Sources */,
+				82A1AD2724B86AF60003DD02 /* PIACardsViewController.swift in Sources */,
 				DD1AA4972180AD92005116D7 /* CustomDNSSettingsViewController.swift in Sources */,
 				0E9452A31FDB568700891948 /* MenuItemCell.swift in Sources */,
 				0EFDC1DB1FE4640C007C0B9B /* DNSResolver.swift in Sources */,
@@ -2076,6 +2099,7 @@
 				DD829EE02449A1EF00E2EE55 /* SiriShortcutsBuilder.swift in Sources */,
 				0EFB839120209CF200980F69 /* VPNPermissionViewController.swift in Sources */,
 				0EFDC1D81FE46177007C0B9B /* SensitiveOperation.swift in Sources */,
+				82A1AD3024B87CF20003DD02 /* PIACard.swift in Sources */,
 				DD40197F221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.swift in Sources */,
 				0E3A35291FD9A960000B0F99 /* DashboardViewController.swift in Sources */,
 				DDB6B95121C94E2E00DE8C5F /* TrustedNetworksViewController.swift in Sources */,
@@ -2170,6 +2194,7 @@
 				DDD65313247E66AD00F0A897 /* CoordinatesFinder.swift in Sources */,
 				DDD271DE21D616AA00B6D20F /* Server+Favorite.swift in Sources */,
 				DD125DC521E77046004ECCB6 /* QuickConnectTile.swift in Sources */,
+				82A1AD2624B86AF60003DD02 /* PIACardsViewController.swift in Sources */,
 				DD1AA4962180AD92005116D7 /* CustomDNSSettingsViewController.swift in Sources */,
 				0EFDC1EF1FE4B9E6007C0B9B /* AppConfiguration.swift in Sources */,
 				0E9452A21FDB568700891948 /* MenuItemCell.swift in Sources */,
@@ -2197,6 +2222,7 @@
 				DD829EDF2449A1EF00E2EE55 /* SiriShortcutsBuilder.swift in Sources */,
 				DDC8124C2176185000CB290C /* SwiftGen+SeguesStoryboards.swift in Sources */,
 				DDD271E121D6262100B6D20F /* PropertyStoring.swift in Sources */,
+				82A1AD2F24B87CF20003DD02 /* PIACard.swift in Sources */,
 				0EFB839020209CF200980F69 /* VPNPermissionViewController.swift in Sources */,
 				0EFDC1D71FE46177007C0B9B /* SensitiveOperation.swift in Sources */,
 				0E3A35281FD9A960000B0F99 /* DashboardViewController.swift in Sources */,

@@ -134,6 +134,8 @@ class DashboardViewController: AutolayoutViewController {
 
         collectionView.reloadData()
         updateCurrentStatus()
+        setupCallingCards()
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -154,6 +156,18 @@ class DashboardViewController: AutolayoutViewController {
         // check account email
         checkAccountEmail()
 
+    }
+    // MARK: Calling Cards
+    private func setupCallingCards() {
+        let callingCards = CardFactory.getCardsForVersion(Macros.versionString())
+        if !callingCards.isEmpty {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let cardsController = storyboard.instantiateViewController(withIdentifier: "PIACardsViewController") as? PIACardsViewController {
+                cardsController.setupWith(cards: callingCards)
+                cardsController.modalPresentationStyle = .overCurrentContext
+                self.present(cardsController, animated: true)
+            }
+        }
     }
     
     // MARK: Actions
