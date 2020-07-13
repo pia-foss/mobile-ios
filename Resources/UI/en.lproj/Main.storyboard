@@ -2196,14 +2196,24 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done" textContentType="email"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsD-My-XU1">
+                                        <rect key="frame" x="19" y="655" width="287" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="logout" destination="Jcq-Qm-xQ1" eventType="touchUpInside" id="atf-JR-qMo"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="zsD-My-XU1" firstAttribute="leading" secondItem="scI-Sh-qxj" secondAttribute="leading" constant="19" id="4pf-5O-0he"/>
                                     <constraint firstAttribute="trailing" secondItem="VLy-oz-kiu" secondAttribute="trailing" id="6px-2P-IUf"/>
                                     <constraint firstItem="D9l-3d-oC0" firstAttribute="top" secondItem="VLy-oz-kiu" secondAttribute="bottom" constant="15" id="8dw-Oe-usn"/>
+                                    <constraint firstAttribute="bottom" secondItem="zsD-My-XU1" secondAttribute="bottom" constant="10" id="D2e-Ko-15o"/>
                                     <constraint firstItem="KBB-r2-c8t" firstAttribute="leading" secondItem="scI-Sh-qxj" secondAttribute="leading" id="Den-nB-EB1"/>
                                     <constraint firstItem="VLy-oz-kiu" firstAttribute="leading" secondItem="scI-Sh-qxj" secondAttribute="leading" id="Efd-8Y-54r"/>
                                     <constraint firstAttribute="trailing" secondItem="Au3-Vi-X1D" secondAttribute="trailing" id="FYE-iA-sdS"/>
+                                    <constraint firstAttribute="trailing" secondItem="zsD-My-XU1" secondAttribute="trailing" constant="19" id="PeY-Sr-FWJ"/>
                                     <constraint firstItem="D9l-3d-oC0" firstAttribute="leading" secondItem="scI-Sh-qxj" secondAttribute="leading" id="WlF-OJ-FNI"/>
                                     <constraint firstItem="Au3-Vi-X1D" firstAttribute="centerX" secondItem="scI-Sh-qxj" secondAttribute="centerX" id="WlY-G7-fOG"/>
                                     <constraint firstAttribute="trailing" secondItem="KBB-r2-c8t" secondAttribute="trailing" id="Yhv-Rx-wKt"/>
@@ -2423,6 +2433,7 @@
                         <outlet property="labelTitle" destination="KBB-r2-c8t" id="8wZ-wg-rSS"/>
                         <outlet property="labelUsername" destination="AJW-EF-WZa" id="Voe-hx-Z9H"/>
                         <outlet property="labelUsernameCaption" destination="W6N-Xf-fqO" id="vQ4-u5-44l"/>
+                        <outlet property="logoutButton" destination="zsD-My-XU1" id="RrP-MS-cuO"/>
                         <outlet property="passwordContainer" destination="32b-n5-8LE" id="Xm4-96-35f"/>
                         <outlet property="scrollView" destination="RdJ-fm-xAP" id="sYy-Dx-Ofp"/>
                         <outlet property="textEmail" destination="VLy-oz-kiu" id="F1B-eP-BEW"/>
