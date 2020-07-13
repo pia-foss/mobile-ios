@@ -500,7 +500,7 @@ class AppPreferences {
         quickSettingNetworkToolVisible = true
         quickSettingPrivateBrowserVisible = true
         useSmallPackets = false
-        Client.configuration.setServerNetworks(to: .legacy)
+        Client.configuration.setServerNetworks(to: .gen4)
         Client.resetServers(completionBlock: {_ in })
         failureConnections = 0
         showGeoServers = true
@@ -527,7 +527,7 @@ class AppPreferences {
         useSmallPackets = false
         let preferences = Client.preferences.editable().reset()
         preferences.commit()
-        Client.configuration.setServerNetworks(to: .legacy)
+        Client.configuration.setServerNetworks(to: .gen4)
         Client.resetServers(completionBlock: {_ in })
         failureConnections = 0
         showGeoServers = true
