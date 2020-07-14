@@ -41,7 +41,8 @@ class PIACardsViewController: UIViewController {
         var collectingCards = [PIACard]()
         for card in cards {
             let slide:PIACard = Bundle.main.loadNibNamed("PIACard", owner: self, options: nil)?.first as! PIACard
-            slide.cardImageView.image = card.cardImage
+            slide.cardBgImageView.image = card.cardImage
+            slide.cardParallaxImageView.image = card.cardFrontImage
             slide.cardTitle.text = card.title
             slide.cardDescription.text = card.description
             slide.contentView.layer.cornerRadius = 10.0
@@ -96,8 +97,8 @@ extension PIACardsViewController: UIScrollViewDelegate {
         
         if(percentOffset.x > 0 && percentOffset.x <= scale) {
            
-            slides[0].cardImageView.transform = CGAffineTransform(scaleX: (scale-percentOffset.x)/scale, y: (scale-percentOffset.x)/scale)
-            slides[1].cardImageView.transform = CGAffineTransform(scaleX: percentOffset.x/scale, y: percentOffset.x/scale)
+            slides[0].cardBgImageView.transform = CGAffineTransform(scaleX: (scale-percentOffset.x)/scale, y: (scale-percentOffset.x)/scale)
+            slides[1].cardBgImageView.transform = CGAffineTransform(scaleX: percentOffset.x/scale, y: percentOffset.x/scale)
            
         }
 

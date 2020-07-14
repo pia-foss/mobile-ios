@@ -44,6 +44,8 @@ struct ColorAsset {
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 enum Asset {
+  enum Cards {
+  }
   enum Piax {
     enum DarkMap {
       static let darkMap = ImageAsset(name: "Dark-Map")

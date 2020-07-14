@@ -11,7 +11,8 @@ import UIKit
 class PIACard: UIView {
 
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var cardImageView: UIImageView!
+    @IBOutlet weak var cardBgImageView: UIImageView!
+    @IBOutlet weak var cardParallaxImageView: UIImageView!
     @IBOutlet weak var cardTitle: UILabel!
     @IBOutlet weak var cardDescription: UILabel!
 

@@ -28,20 +28,28 @@ class Card: Collectable {
     var title: String
     var description: String
     var cardImage: UIImage
+    var cardFrontImage: UIImage
     var ctaLabel: String
     var cta: CTAFunc
     var learnMoreLink: URL?
+    
+    private(set) var showCTA = true
 
-    init(_ version: String, _ title: String, _ description: String, _ cardImage: UIImage, _ ctaLabel: String, _ cta: @escaping CTAFunc, _ learnMoreLink: URL? = nil ) {
+    init(_ version: String, _ title: String, _ description: String, _ cardImage: UIImage, _ cardFrontImage: UIImage, _ ctaLabel: String, _ learnMoreLink: URL? = nil, _ cta: @escaping CTAFunc ) {
         self.version = version
         self.title = title
         self.description = description
         self.cardImage = cardImage
+        self.cardFrontImage = cardFrontImage
         self.ctaLabel = ctaLabel
         self.cta = cta
         if let link = learnMoreLink {
             self.learnMoreLink = link
         }
+    }
+    
+    func hideCTA() {
+        self.showCTA = false
     }
     
 }

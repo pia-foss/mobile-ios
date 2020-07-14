@@ -32,16 +32,23 @@ struct CardFactory {
     }
     
     static func getAllCards() -> [Card] {
-        return Self.availableCards
+        let cards = Self.availableCards
+        cards.forEach { $0.hideCTA() }
+        return cards
     }
     
     private static let availableCards = [
-        Card("3.7.1", "Introducing WireGuard", "TBC", UIImage(named: "Dark-Map")!, "TBC", {
-            print("TBC")
+        Card("3.7.1",
+             L10n.Card.Wireguard.title,
+             L10n.Card.Wireguard.description,
+             UIImage(named: "Dark-Map")!,
+             UIImage(named: "Dark-Map")!,
+             L10n.Card.Wireguard.Cta.activate,
+             URL(string: "https://www.privateinternetaccess.com/blog/wireguard-on-pia-is-out-of-beta-and-available-to-use-on-windows-mac-linux-android-and-ios/"), {
+                
+                print("TBC")
+        
         }),
-        Card("3.6.0", "Introducing IKEv2", "TBC", UIImage(named: "Dark-Map")!, "TBC", {
-           print("TBC")
-       })
     ]
     
 }
