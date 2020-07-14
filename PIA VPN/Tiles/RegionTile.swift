@@ -82,17 +82,11 @@ class RegionTile: UIView, Tileable {
         greenDot?.removeFromSuperview()
         
         let effectiveServer = Client.preferences.displayedServer
-        let targetServer = Client.providers.serverProvider.targetServer
         let vpn = Client.providers.vpnProvider
         self.serverName.text = effectiveServer.name(forStatus: vpn.vpnStatus)
         self.mapImageView.image = Theme.current.mapImage()
 
-        if effectiveServer.name != L10n.Global.automatic {
-            //NO AUTOMATIC
-            setupRegionTileAndMapForServer(effectiveServer)
-        } else {
-            setupRegionTileAndMapForServer(targetServer)
-        }
+        setupRegionTileAndMapForServer(effectiveServer)
 
         self.mapImageView.addSubview(greenDot)
         
