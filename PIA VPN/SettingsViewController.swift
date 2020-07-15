@@ -1030,7 +1030,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
             cell.setupCell(withTitle: L10n.Settings.Connection.VpnProtocol.title,
                            description: pendingPreferences.vpnType.vpnTypeDescription,
-                           shouldShowBadge: pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType)
+                           shouldShowBadge: false)
 
             if !Flags.shared.enablesProtocolSelection {
                 cell.accessoryType = .none
@@ -1546,10 +1546,7 @@ extension SettingsViewController: OptionsViewControllerDelegate {
         switch setting {
         case .vpnProtocolSelection:
             let vpnType = option as! String
-            var message = vpnType.vpnTypeDescription
-            if vpnType == PIAWGTunnelProfile.vpnType {
-                message += " - PREVIEW"
-            }
+            let message = vpnType.vpnTypeDescription
             cell.textLabel?.text = message
         case .vpnSocket:
             let rawSocketType = option as? String

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PIALibrary
 
 class PIACardsViewController: UIViewController {
 
@@ -14,7 +15,6 @@ class PIACardsViewController: UIViewController {
     private var slides:[PIACard] = []
 
     @IBOutlet weak var pageControl: UIPageControl!
-    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
 
     override func viewDidLoad() {
@@ -37,16 +37,45 @@ class PIACardsViewController: UIViewController {
     }
     
     func createSlides() -> [PIACard] {
-
+        
+        let closeImage = Asset.iconClose.image.withRenderingMode(.alwaysTemplate)
+        
         var collectingCards = [PIACard]()
         for card in cards {
             let slide:PIACard = Bundle.main.loadNibNamed("PIACard", owner: self, options: nil)?.first as! PIACard
-            slide.cardBgImageView.image = card.cardImage
-            slide.cardParallaxImageView.image = card.cardFrontImage
+            slide.cardParallaxImageView.image = UIImage(named: card.cardFrontImage)
             slide.cardTitle.text = card.title
             slide.cardDescription.text = card.description
-            slide.contentView.layer.cornerRadius = 10.0
-            slide.contentView.layer.masksToBounds = true
+            slide.closeButton.setImage(closeImage, for: [])
+            slide.closeButton.addAction(for: .touchUpInside) { (button) in
+                self.dismiss(animated: true, completion: nil)
+            }
+
+            slide.cardCTAButton.style(style: TextStyle.Buttons.piaGreenButton)
+            slide.cardCTAButton.setTitle(card.ctaLabel, for: [])
+            slide.cardCTAButton.accessibilityIdentifier = card.ctaLabel
+            slide.cardCTAButton.addAction(for: .touchUpInside) { (button) in
+                self.dismiss(animated: true, completion: {
+                    card.cta()
+                })
+            }
+            if card.hasSecondCTA() {
+                slide.cardSecondaryCTAButton.isHidden = false
+                slide.cardSecondaryCTAButton.setTitle(L10n.Card.Wireguard.Cta.learn, for: [])
+                slide.cardSecondaryCTAButton.accessibilityIdentifier = L10n.Card.Wireguard.Cta.learn
+                slide.cardSecondaryCTAButton.addAction(for: .touchUpInside) { (button) in
+                    if let url = card.learnMoreLink {
+                        if UIApplication.shared.canOpenURL(url) {
+                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                        }
+                    }
+                }
+            } else {
+                slide.cardSecondaryCTAButton.setTitle("", for: [])
+                slide.cardSecondaryCTAButton.isHidden = true
+            }
+
+            slide.cardBackgroundImagePrefix = card.cardImage
             collectingCards.append(slide)
         }
         
@@ -62,17 +91,19 @@ class PIACardsViewController: UIViewController {
             slides[i].frame = CGRect(x: view.frame.width * CGFloat(i), y: 0, width: view.frame.width, height: view.frame.height)
             scrollView.addSubview(slides[i])
         }
+        
+        scrollView.subviews.forEach({
+            if let view = $0 as? PIACard {
+                view.setupView()
+            }
+        })
+        
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         setupSlideScrollView(slides: slides)
     }
 
-    //MARK: Actions
-
-    @IBAction func dismissCards(_ sender: Any?) {
-        self.dismiss(animated: true, completion: nil)
-    }
 }
 
 extension PIACardsViewController: UIScrollViewDelegate {

@@ -2503,13 +2503,6 @@
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="1J8-pD-cu8">
                                 <rect key="frame" x="168" y="741" width="39" height="37"/>
                             </pageControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="449-te-Di0">
-                                <rect key="frame" x="307" y="44" width="48" height="30"/>
-                                <state key="normal" title="CLOSE"/>
-                                <connections>
-                                    <action selector="dismissCards:" destination="fek-Xn-fRR" eventType="touchUpInside" id="zBd-W7-NsA"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
@@ -2517,15 +2510,12 @@
                             <constraint firstItem="9mt-va-Ael" firstAttribute="bottom" secondItem="1J8-pD-cu8" secondAttribute="bottom" id="LrA-o2-Zby"/>
                             <constraint firstItem="1hk-Xk-k6h" firstAttribute="height" secondItem="PEc-bc-lz4" secondAttribute="height" id="Nxe-n8-tdr"/>
                             <constraint firstItem="1hk-Xk-k6h" firstAttribute="centerY" secondItem="9mt-va-Ael" secondAttribute="centerY" id="aEN-ZQ-F9Q"/>
-                            <constraint firstItem="449-te-Di0" firstAttribute="top" secondItem="9mt-va-Ael" secondAttribute="top" id="hDf-ee-fj5"/>
                             <constraint firstItem="1hk-Xk-k6h" firstAttribute="centerX" secondItem="9mt-va-Ael" secondAttribute="centerX" id="tL3-RF-N5X"/>
-                            <constraint firstItem="9mt-va-Ael" firstAttribute="trailing" secondItem="449-te-Di0" secondAttribute="trailing" constant="20" id="v7S-3Q-NYO"/>
                             <constraint firstItem="1J8-pD-cu8" firstAttribute="centerX" secondItem="PEc-bc-lz4" secondAttribute="centerX" id="wlQ-lU-pTB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9mt-va-Ael"/>
                     </view>
                     <connections>
-                        <outlet property="closeButton" destination="449-te-Di0" id="trT-bK-tm8"/>
                         <outlet property="pageControl" destination="1J8-pD-cu8" id="7no-Xt-rTo"/>
                         <outlet property="scrollView" destination="1hk-Xk-k6h" id="OgR-2C-zEO"/>
                     </connections>

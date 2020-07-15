@@ -29,6 +29,7 @@ extension Notification.Name {
     static let FriendInvitationSent = Notification.Name("FriendInvitationSent")
     static let RefreshSettings = Notification.Name("RefreshSettings")
     static let Unauthorized = Notification.Name("Unauthorized")
+    static let OpenSettings = Notification.Name("OpenSettings")
 
 }
 

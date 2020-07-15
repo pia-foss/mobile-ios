@@ -21,6 +21,7 @@
 
 import Foundation
 import PIALibrary
+import PIAWireguard
 
 struct CardFactory {
     
@@ -41,13 +42,34 @@ struct CardFactory {
         Card("3.7.1",
              L10n.Card.Wireguard.title,
              L10n.Card.Wireguard.description,
-             UIImage(named: "Dark-Map")!,
-             UIImage(named: "Dark-Map")!,
+             "wg-background-",
+             "wg-main",
              L10n.Card.Wireguard.Cta.activate,
              URL(string: "https://www.privateinternetaccess.com/blog/wireguard-on-pia-is-out-of-beta-and-available-to-use-on-windows-mac-linux-android-and-ios/"), {
                 
-                print("TBC")
-        
+                if !Client.providers.vpnProvider.isVPNConnected {
+                    
+                    let preferences = Client.preferences.editable()
+                    guard let currentWireguardVPNConfiguration = preferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ??
+                        Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
+                        fatalError("No default VPN custom configuration provided for PIA Wireguard protocol")
+                    }
+
+                    preferences.setVPNCustomConfiguration(currentWireguardVPNConfiguration, for: PIAWGTunnelProfile.vpnType)
+                    preferences.vpnType = PIAWGTunnelProfile.vpnType
+                    preferences.commit()
+                    
+                    if let pendingVPNAction = preferences.requiredVPNAction() {
+                        pendingVPNAction.execute(nil)
+                        Client.providers.vpnProvider.connect(nil)
+                    }
+                    
+
+                } else {
+                    NotificationCenter.default.post(name: .OpenSettings,
+                    object: nil,
+                    userInfo: nil)
+                }
         }),
     ]
     

@@ -28,7 +28,8 @@ public protocol Collectable {
     
     var title: String {get set}
     var description: String {get set}
-    var cardImage: UIImage {get set}
+    var cardImage: String {get set}
+    var cardFrontImage: String {get set}
     var ctaLabel: String {get set}
     var cta: CTAFunc {get set}
     var learnMoreLink: URL? {get set}

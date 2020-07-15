@@ -45,6 +45,11 @@ struct ColorAsset {
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 enum Asset {
   enum Cards {
+    enum WireGuard {
+      static let wgBackgroundDark = ImageAsset(name: "wg-background-dark")
+      static let wgBackgroundLight = ImageAsset(name: "wg-background-light")
+      static let wgMain = ImageAsset(name: "wg-main")
+    }
   }
   enum Piax {
     enum DarkMap {
@@ -371,6 +376,7 @@ enum Asset {
   static let iconAbout = ImageAsset(name: "icon-about")
   static let iconAccount = ImageAsset(name: "icon-account")
   static let iconAdd = ImageAsset(name: "icon-add")
+  static let iconClose = ImageAsset(name: "icon-close")
   static let iconContact = ImageAsset(name: "icon-contact")
   static let iconGeoDarkSelected = ImageAsset(name: "icon-geo-dark-selected")
   static let iconGeoDark = ImageAsset(name: "icon-geo-dark")
@@ -397,6 +403,9 @@ enum Asset {
   static let allColors: [ColorAsset] = [
   ]
   static let allImages: [ImageAsset] = [
+    Cards.WireGuard.wgBackgroundDark,
+    Cards.WireGuard.wgBackgroundLight,
+    Cards.WireGuard.wgMain,
     Piax.DarkMap.darkMap,
     Piax.Dashboard.vpnButton,
     Piax.Global.browserDarkInactive,
@@ -706,6 +715,7 @@ enum Asset {
     iconAbout,
     iconAccount,
     iconAdd,
+    iconClose,
     iconContact,
     iconGeoDarkSelected,
     iconGeoDark,

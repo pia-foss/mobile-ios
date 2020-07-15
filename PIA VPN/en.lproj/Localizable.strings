@@ -338,8 +338,8 @@
 "rating.error.button.send" = "Send feedback";
 
 // CALLING CARDS
-"card.wireguard.title" = "Try WireGuard(R) today!";
+"card.wireguard.title" = "Try WireGuard® today!";
 "card.wireguard.description" = "It's a new, more efficient VPN protocol that offers better performance, lower CPU usage and longer battery life.";
-"card.wireguard.cta.activate" = "Try WireGuard(R) now";
+"card.wireguard.cta.activate" = "Try WireGuard® now";
 "card.wireguard.cta.settings" = "Open Settings";
 "card.wireguard.cta.learn" = "Learn more";
