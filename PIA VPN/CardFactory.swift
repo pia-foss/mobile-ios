@@ -45,7 +45,7 @@ struct CardFactory {
              "wg-background-",
              "wg-main",
              L10n.Card.Wireguard.Cta.activate,
-             URL(string: "https://www.privateinternetaccess.com/blog/wireguard-on-pia-is-out-of-beta-and-available-to-use-on-windows-mac-linux-android-and-ios/"), {
+             URL(string: "https://www.privateinternetaccess.com/blog/wireguide-all-about-the-wireguard-vpn-protocol/"), {
                 
                 if !Client.providers.vpnProvider.isVPNConnected {
                     
@@ -59,11 +59,9 @@ struct CardFactory {
                     preferences.vpnType = PIAWGTunnelProfile.vpnType
                     preferences.commit()
                     
-                    if let pendingVPNAction = preferences.requiredVPNAction() {
-                        pendingVPNAction.execute(nil)
+                    Client.providers.vpnProvider.install(force: true, { _ in
                         Client.providers.vpnProvider.connect(nil)
-                    }
-                    
+                    })
 
                 } else {
                     NotificationCenter.default.post(name: .OpenSettings,
