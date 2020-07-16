@@ -31,9 +31,10 @@ public enum AvailableTiles: Int, EnumsBuilder {
     case networkManagementTool
     case quickSettings
     case favoriteServers
+    case connectionTile
 
     public static func allTiles() -> [AvailableTiles] {
-        return [.region, .quickConnect, .ip, .subscription, .usage, .networkManagementTool, .quickSettings, .favoriteServers]
+        return [.region, .quickConnect, .ip, .subscription, .usage, .networkManagementTool, .quickSettings, .favoriteServers, .connectionTile]
     }
     
     public static func defaultTiles() -> [AvailableTiles] {
@@ -41,7 +42,7 @@ public enum AvailableTiles: Int, EnumsBuilder {
     }
 
     public static func defaultOrderedTiles() -> [AvailableTiles] {
-        return [.region, .quickConnect, .favoriteServers, .ip, .quickSettings, .subscription, .usage, .networkManagementTool]
+        return [.region, .quickConnect, .favoriteServers, .ip, .connectionTile, .quickSettings, .subscription, .usage, .networkManagementTool]
     }
 
 }

@@ -234,6 +234,7 @@
 		294889BC1EE78B3571331B6F /* Pods_PIALibrary_PIALibraryHost_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A657769254FB764E75F172BF /* Pods_PIALibrary_PIALibraryHost_iOS.framework */; };
 		4EC699081E21113A5D476DA7 /* Pods_PIALibrary_PIALibraryTests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF2CACA4F28EEB36C8B827C /* Pods_PIALibrary_PIALibraryTests_iOS.framework */; };
 		7BBDD26C2B8942A316F9B7D6 /* Pods_PIALibrary_PIALibrary_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1675DD0A7CF588C08745F3 /* Pods_PIALibrary_PIALibrary_iOS.framework */; };
+		822BC1D024BF20C90041BF9A /* UIControl+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BC1CF24BF20C90041BF9A /* UIControl+Action.swift */; };
 		84125E08213D7DFF001BCC19 /* PIAColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84125E07213D7DFF001BCC19 /* PIAColors.swift */; };
 		84125E09213D7E04001BCC19 /* PIAColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84125E07213D7DFF001BCC19 /* PIAColors.swift */; };
 		84125E0B213D7E0E001BCC19 /* PIAFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84125E0A213D7E0E001BCC19 /* PIAFonts.swift */; };
@@ -544,6 +545,7 @@
 		24914A32A94CB67BF6938365 /* Pods-PIALibrary-PIALibrary-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibrary-iOS.release.xcconfig"; path = "Target Support Files/Pods-PIALibrary-PIALibrary-iOS/Pods-PIALibrary-PIALibrary-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		4B1675DD0A7CF588C08745F3 /* Pods_PIALibrary_PIALibrary_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibrary_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E0D54C02CE0B120AA1FD581 /* Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig"; path = "Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		822BC1CF24BF20C90041BF9A /* UIControl+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Action.swift"; sourceTree = "<group>"; };
 		84125E07213D7DFF001BCC19 /* PIAColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAColors.swift; sourceTree = "<group>"; };
 		84125E0A213D7E0E001BCC19 /* PIAFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAFonts.swift; sourceTree = "<group>"; };
 		841BE60C212AD0F3002EF2D1 /* ValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorTests.swift; sourceTree = "<group>"; };
@@ -903,6 +905,7 @@
 				DDD824E92189CD5700151709 /* NavigationLogoView.swift */,
 				84577FB9213D8EB2006DEC3D /* Styles */,
 				DD6DC5B821B6A83400F9D538 /* UIViewLoading.swift */,
+				822BC1CF24BF20C90041BF9A /* UIControl+Action.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -1865,6 +1868,7 @@
 				DD8C3E612327EF4C00BAD18E /* IKEv2IntegrityAlgorithm.swift in Sources */,
 				0E392DA31FE3247E0002160D /* Endpoint.swift in Sources */,
 				0E53A8581FE5DA16000C2A18 /* MockInAppProvider.swift in Sources */,
+				822BC1D024BF20C90041BF9A /* UIControl+Action.swift in Sources */,
 				DDD824E32189969400151709 /* Preset.swift in Sources */,
 				0E9D62721FDE83BD009A90CF /* GlossServersBundle.swift in Sources */,
 				0E492C6A1FE61485007F23DF /* Client+Database.swift in Sources */,
@@ -2265,7 +2269,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2.4.0;
+				MARKETING_VERSION = 2.7.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.privateinternetaccess.apple.PIALibrary;
 				PRODUCT_NAME = PIALibrary;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2293,7 +2297,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2.4.0;
+				MARKETING_VERSION = 2.7.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.privateinternetaccess.apple.PIALibrary;
 				PRODUCT_NAME = PIALibrary;
 				PROVISIONING_PROFILE_SPECIFIER = "";

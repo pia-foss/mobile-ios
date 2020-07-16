@@ -271,6 +271,25 @@ public extension TextStyle {
         tintColor: nil,
         lineHeight: 20
     )
+    
+    static let textStyleCardTitleDark = TextStyle(
+        font: UIFont.mediumFontWith(size: 20),
+        color: UIColor.piaWhite,
+        foregroundColor: nil,
+        backgroundColor: nil,
+        tintColor: nil,
+        lineHeight: 20
+    )
+
+    static let textStyleCardTitleLight = TextStyle(
+        font: UIFont.mediumFontWith(size: 20),
+        color: UIColor.piaGrey6,
+        foregroundColor: nil,
+        backgroundColor: nil,
+        tintColor: nil,
+        lineHeight: 20
+    )
+
 
     struct Buttons {
         
