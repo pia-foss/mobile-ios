@@ -99,6 +99,14 @@ enum Asset {
       static let splash = ImageAsset(name: "splash")
     }
     enum Tiles {
+      enum ConnectionTile {
+        static let iconAuthentication = ImageAsset(name: "icon-authentication")
+        static let iconEncryption = ImageAsset(name: "icon-encryption")
+        static let iconHandshake = ImageAsset(name: "icon-handshake")
+        static let iconPort = ImageAsset(name: "icon-port")
+        static let iconProtocol = ImageAsset(name: "icon-protocol")
+        static let iconSocket = ImageAsset(name: "icon-socket")
+      }
       static let ipTriangle = ImageAsset(name: "ip-triangle")
       static let openTileDetails = ImageAsset(name: "open-tile-details")
       static let quickConnectPlaceholderDark = ImageAsset(name: "quick-connect-placeholder-dark")
@@ -442,6 +450,12 @@ enum Asset {
     Piax.Regions.noResultsDark,
     Piax.Regions.noResultsLight,
     Piax.Splash.splash,
+    Piax.Tiles.ConnectionTile.iconAuthentication,
+    Piax.Tiles.ConnectionTile.iconEncryption,
+    Piax.Tiles.ConnectionTile.iconHandshake,
+    Piax.Tiles.ConnectionTile.iconPort,
+    Piax.Tiles.ConnectionTile.iconProtocol,
+    Piax.Tiles.ConnectionTile.iconSocket,
     Piax.Tiles.ipTriangle,
     Piax.Tiles.openTileDetails,
     Piax.Tiles.quickConnectPlaceholderDark,

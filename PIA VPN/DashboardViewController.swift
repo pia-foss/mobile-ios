@@ -31,6 +31,7 @@ class DashboardViewController: AutolayoutViewController {
     
     enum TileSize: CGFloat {
         case standard = 89.0
+        case big = 150.0
     }
 
     private var viewContentHeight: CGFloat = 0
@@ -765,8 +766,18 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let tileIndex = tileModeStatus == .normal ?
+            Client.providers.tileProvider.visibleTiles[indexPath.row].rawValue :
+            Client.providers.tileProvider.orderedTiles[indexPath.row].rawValue
+
+        var tileHeight = TileSize.standard.rawValue
+        if Cells.objectIdentifyBy(index: tileIndex).identifier == Cells.connectionTile.identifier {
+            tileHeight = TileSize.big.rawValue
+        }
+        
         return CGSize(width: collectionView.frame.width,
-                      height: TileSize.standard.rawValue)
+                      height: tileHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView,

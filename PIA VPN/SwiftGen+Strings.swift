@@ -123,10 +123,10 @@ internal enum L10n {
     internal enum Wireguard {
       /// It's a new, more efficient VPN protocol that offers better performance, lower CPU usage and longer battery life.
       internal static let description = L10n.tr("Localizable", "card.wireguard.description")
-      /// Try WireGuard(R) today!
+      /// Try WireGuard® today!
       internal static let title = L10n.tr("Localizable", "card.wireguard.title")
       internal enum Cta {
-        /// Try WireGuard(R) now
+        /// Try WireGuard® now
         internal static let activate = L10n.tr("Localizable", "card.wireguard.cta.activate")
         /// Learn more
         internal static let learn = L10n.tr("Localizable", "card.wireguard.cta.learn")
