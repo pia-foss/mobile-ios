@@ -87,12 +87,12 @@ class ConnectionTile: UIView, Tileable  {
     }
     
     private func resetValues() {
-        self.protocolLabel.text = "--"
-        self.portLabel.text = "--"
-        self.authenticationLabel.text = "--"
-        self.encryptionLabel.text = "--"
-        self.socketLabel.text = "--"
-        self.handshakeLabel.text = "--"
+        self.protocolLabel.text = "---"
+        self.portLabel.text = "---"
+        self.authenticationLabel.text = "---"
+        self.encryptionLabel.text = "---"
+        self.socketLabel.text = "---"
+        self.handshakeLabel.text = "---"
     }
     
     @objc private func viewShouldRestyle() {
@@ -145,11 +145,11 @@ private extension String {
             } else {
                 return L10n.Global.automatic
             }
-            return "--"
+            return "---"
         case IKEv2Profile.vpnType:
             return "500"
         default:
-            return "--"
+            return "---"
         }
     }
     
@@ -188,7 +188,7 @@ private extension String {
             if let currentOpenVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration {
                 return currentOpenVPNConfiguration.sessionConfiguration.builder().cipher?.rawValue ?? ""
             }
-            return "--"
+            return "---"
         case IKEv2Profile.vpnType:
             let preferences = Client.preferences.editable()
             return preferences.ikeV2EncryptionAlgorithm
@@ -206,9 +206,9 @@ private extension String {
             if let currentOpenVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration {
                 return currentOpenVPNConfiguration.sessionConfiguration.builder().digest?.rawValue ?? ""
             }
-            return "--"
+            return "---"
         case IKEv2Profile.vpnType:
-            return "--"
+            return "---"
         default:
             return self
         }
