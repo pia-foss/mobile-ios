@@ -106,6 +106,9 @@ enum Setting: Int {
     case password
     
     case resolveGoogleAdsDomain
+
+    case cardsHistory
+    
 }
 
 protocol SettingsViewControllerDelegate: class {
@@ -208,6 +211,7 @@ class SettingsViewController: AutolayoutViewController {
         ],
         .preview: [
             .serversNetwork,
+            .cardsHistory
         ],
         .development: [
 //            .truncateDebugLog,
@@ -1026,7 +1030,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
             cell.setupCell(withTitle: L10n.Settings.Connection.VpnProtocol.title,
                            description: pendingPreferences.vpnType.vpnTypeDescription,
-                           shouldShowBadge: pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType)
+                           shouldShowBadge: false)
 
             if !Flags.shared.enablesProtocolSelection {
                 cell.accessoryType = .none
@@ -1142,6 +1146,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryView = switchServersNetwork
             cell.selectionStyle = .none
             switchServersNetwork.isOn = Client.configuration.currentServerNetwork() == ServersNetwork.gen4
+
+        case .cardsHistory:
+            cell.textLabel?.text = "Cards history"
+            cell.detailTextLabel?.text = nil
 
         case .geoServers:
             cell.textLabel?.text = L10n.Settings.Geo.Servers.description
@@ -1442,6 +1450,17 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             
         case .resetSettings:
             resetToDefaultSettings()
+            
+        case .cardsHistory:
+            let callingCards = CardFactory.getAllCards()
+            if !callingCards.isEmpty {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let cardsController = storyboard.instantiateViewController(withIdentifier: "PIACardsViewController") as? PIACardsViewController {
+                    cardsController.setupWith(cards: callingCards)
+                    cardsController.modalPresentationStyle = .overCurrentContext
+                    self.present(cardsController, animated: true)
+                }
+            }
 
 //        case .truncateDebugLog:
 //            truncateDebugLog()
@@ -1527,10 +1546,7 @@ extension SettingsViewController: OptionsViewControllerDelegate {
         switch setting {
         case .vpnProtocolSelection:
             let vpnType = option as! String
-            var message = vpnType.vpnTypeDescription
-            if vpnType == PIAWGTunnelProfile.vpnType {
-                message += " - PREVIEW"
-            }
+            let message = vpnType.vpnTypeDescription
             cell.textLabel?.text = message
         case .vpnSocket:
             let rawSocketType = option as? String

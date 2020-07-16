@@ -2444,6 +2444,43 @@
             </objects>
             <point key="canvasLocation" x="-975" y="-679"/>
         </scene>
+        <!--Cards View Controller-->
+        <scene sceneID="99d-cb-iAU">
+            <objects>
+                <viewController storyboardIdentifier="PIACardsViewController" id="fek-Xn-fRR" customClass="PIACardsViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PEc-bc-lz4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hk-Xk-k6h">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="NzH-f8-cqQ"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="aeb-89-wap"/>
+                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="1J8-pD-cu8">
+                                <rect key="frame" x="168" y="741" width="39" height="37"/>
+                            </pageControl>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="1hk-Xk-k6h" firstAttribute="width" secondItem="PEc-bc-lz4" secondAttribute="width" id="CWc-6e-1UF"/>
+                            <constraint firstItem="9mt-va-Ael" firstAttribute="bottom" secondItem="1J8-pD-cu8" secondAttribute="bottom" id="LrA-o2-Zby"/>
+                            <constraint firstItem="1hk-Xk-k6h" firstAttribute="height" secondItem="PEc-bc-lz4" secondAttribute="height" id="Nxe-n8-tdr"/>
+                            <constraint firstItem="1hk-Xk-k6h" firstAttribute="centerY" secondItem="9mt-va-Ael" secondAttribute="centerY" id="aEN-ZQ-F9Q"/>
+                            <constraint firstItem="1hk-Xk-k6h" firstAttribute="centerX" secondItem="9mt-va-Ael" secondAttribute="centerX" id="tL3-RF-N5X"/>
+                            <constraint firstItem="1J8-pD-cu8" firstAttribute="centerX" secondItem="PEc-bc-lz4" secondAttribute="centerX" id="wlQ-lU-pTB"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9mt-va-Ael"/>
+                    </view>
+                    <connections>
+                        <outlet property="pageControl" destination="1J8-pD-cu8" id="7no-Xt-rTo"/>
+                        <outlet property="scrollView" destination="1hk-Xk-k6h" id="OgR-2C-zEO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NEb-Fe-eQ9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2671.1999999999998" y="138.91625615763547"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="7wM-LQ-vSr"/>

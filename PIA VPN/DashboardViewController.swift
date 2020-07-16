@@ -93,7 +93,8 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(checkAccountEmail), name: .PIAAccountDidRefresh, object: nil)
         nc.addObserver(self, selector: #selector(vpnDidFail), name: .PIAVPNDidFail, object: nil)
         nc.addObserver(self, selector: #selector(unauthorized), name: .Unauthorized, object: nil)
-        
+        nc.addObserver(self, selector: #selector(openSettings), name: .OpenSettings, object: nil)
+
         if Client.providers.accountProvider.isLoggedIn {
             Client.providers.accountProvider.refreshAndLogoutUnauthorized()
         }
@@ -134,6 +135,8 @@ class DashboardViewController: AutolayoutViewController {
 
         collectionView.reloadData()
         updateCurrentStatus()
+        setupCallingCards()
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -153,6 +156,27 @@ class DashboardViewController: AutolayoutViewController {
         
         // check account email
         checkAccountEmail()
+
+    }
+    
+    // MARK: Calling Cards
+    private func setupCallingCards() {
+        
+        if AppPreferences.shared.appVersion == nil || (AppPreferences.shared.appVersion != nil && AppPreferences.shared.appVersion != Macros.versionString()) {
+            
+            let callingCards = CardFactory.getCardsForVersion(Macros.versionString())
+            if !callingCards.isEmpty {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let cardsController = storyboard.instantiateViewController(withIdentifier: "PIACardsViewController") as? PIACardsViewController {
+                    cardsController.setupWith(cards: callingCards)
+                    cardsController.modalPresentationStyle = .overCurrentContext
+                    self.present(cardsController, animated: true)
+                }
+            }
+            
+            AppPreferences.shared.appVersion = Macros.versionString()
+
+        }
 
     }
     
@@ -360,7 +384,7 @@ class DashboardViewController: AutolayoutViewController {
         perform(segue: segue)
     }
 
-    func openSettings() {
+    @objc func openSettings() {
         perform(segue: StoryboardSegue.Main.settingsSegueIdentifier)
     }
     
