@@ -29,6 +29,7 @@
 "account.subscriptions.short.message" = "Zarządzaj subskrypcją";
 "account.subscriptions.trial" = "Plan próbny";
 "account.subscriptions.yearly" = "Plan roczny";
+"account.unauthorized" = "Coś poszło nie tak. zalogować się ponownie.";
 "account.update.email.require.password.button" = "Wyślij";
 "account.update.email.require.password.message" = "Ze względów bezpieczeństwa do przeprowadzenia zmiany na koncie potrzebne jest twoje hasło w PIA. Wprowadź hasło w PIA, aby kontynuować.";
 "account.update.email.require.password.title" = "Wymagane hasło w PIA";

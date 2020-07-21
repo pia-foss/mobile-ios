@@ -29,6 +29,7 @@
 "account.subscriptions.short.message" = "管理訂閱";
 "account.subscriptions.trial" = "試用方案";
 "account.subscriptions.yearly" = "年度方案";
+"account.unauthorized" = "發生錯誤，請稍後再嘗試登入。";
 "account.update.email.require.password.button" = "提交";
 "account.update.email.require.password.message" = "基於安全考量，您必須輸入 PIA 密碼才能變更帳戶。請輸入您的 PIA 密碼以繼續。";
 "account.update.email.require.password.title" = "需要 PIA 密碼";
@@ -199,7 +200,7 @@
 "settings.encryption.digest.title" = "資料驗證";
 "settings.encryption.handshake.title" = "Handshake";
 "settings.encryption.title" = "加密";
-"settings.geo.servers.description" = "包括地理位置區域";
+"settings.geo.servers.description" = "包括地理定位區域";
 "settings.hotspothelper.all.description" = "VPN WiFi 保護功能將在所有網路上啟動，包括信任網路。";
 "settings.hotspothelper.all.title" = "保護所有網路";
 "settings.hotspothelper.available.add.help" = "點一下「+」可新增為信任網路。";

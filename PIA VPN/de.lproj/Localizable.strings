@@ -29,6 +29,7 @@
 "account.subscriptions.short.message" = "Abonnement verwalten";
 "account.subscriptions.trial" = "Testversion";
 "account.subscriptions.yearly" = "Jahresabo";
+"account.unauthorized" = "Etwas ging schief. Bitte versuchen, erneut anzumelden";
 "account.update.email.require.password.button" = "Senden";
 "account.update.email.require.password.message" = "Aus Sicherheitsgründen benötigen wir Ihr PIA-Passwort, um eine Änderung Ihres Kontos vorzunehmen. Bitte Ihr PIA-Passwort eingeben, um fortzufahren.";
 "account.update.email.require.password.title" = "PIA-Passwort erforderlich";

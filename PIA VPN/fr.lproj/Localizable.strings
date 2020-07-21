@@ -29,6 +29,7 @@
 "account.subscriptions.short.message" = "Gérer l'abonnement";
 "account.subscriptions.trial" = "Forfait d'essai";
 "account.subscriptions.yearly" = "Forfait annuel";
+"account.unauthorized" = "Un problème est survenu. Veuillez réessayer de vous connecter";
 "account.update.email.require.password.button" = "Envoyer";
 "account.update.email.require.password.message" = "Pour des raisons de sécurité, nous exigeons votre mot de passe PIA pour effectuer un changement sur votre compte. Veuillez saisir votre mot de passe PIA pour continuer.";
 "account.update.email.require.password.title" = "Mot de passe PIA nécessaire";

@@ -29,6 +29,7 @@
 "account.subscriptions.short.message" = "管理订阅";
 "account.subscriptions.trial" = "试用套餐";
 "account.subscriptions.yearly" = "包年套餐";
+"account.unauthorized" = "出现问题。请尝试重新登录";
 "account.update.email.require.password.button" = "提交";
 "account.update.email.require.password.message" = "为安全起见，我们需要您提供 PIA 密码才能对您的帐户进行更改。请输入您的 PIA 密码以继续。";
 "account.update.email.require.password.title" = "需要填写 PIA 密码";

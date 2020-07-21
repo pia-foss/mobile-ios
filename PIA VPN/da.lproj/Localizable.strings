@@ -29,6 +29,7 @@
 "account.subscriptions.short.message" = "Adminstrer abonnement";
 "account.subscriptions.trial" = "Prøveabonnement";
 "account.subscriptions.yearly" = "Årsabonnement";
+"account.unauthorized" = "Noget gik galt. Prøv at logge på igen.";
 "account.update.email.require.password.button" = "Indsend";
 "account.update.email.require.password.message" = "Af sikkerhedsårsager skal vi bruge din PIA-adgangskode for at udføre en ændring i din konto. Angiv din PIA-adgangskode for at fortsætte.";
 "account.update.email.require.password.title" = "PIA-adgangskode påkrævet";

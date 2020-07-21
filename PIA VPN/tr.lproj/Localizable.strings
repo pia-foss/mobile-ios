@@ -29,6 +29,7 @@
 "account.subscriptions.short.message" = "Aboneliği yönetin";
 "account.subscriptions.trial" = "Deneme planı";
 "account.subscriptions.yearly" = "Yıllık plan";
+"account.unauthorized" = "Bir sorun oluştu. Lütfen tekrar giriş yapmayı deneyin";
 "account.update.email.require.password.button" = "Gönder";
 "account.update.email.require.password.message" = "Güvenlik açısından hesabınızda değişiklik yapabilmeniz için PIA şifrenizi girmelisiniz. Devam etmek için lütfen PIA şifrenizi girin.";
 "account.update.email.require.password.title" = "PIA Şifresi Gerekli";

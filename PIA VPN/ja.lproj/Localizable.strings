@@ -29,6 +29,7 @@
 "account.subscriptions.short.message" = "サブスクリプションを管理する";
 "account.subscriptions.trial" = "トライアルプラン";
 "account.subscriptions.yearly" = "年間プラン";
+"account.unauthorized" = "問題が発生しました。もう一度ログインしてみてください";
 "account.update.email.require.password.button" = "送信";
 "account.update.email.require.password.message" = "安全のため、お使いのアカウントのPIAパスワードの変更を行う必要があります。先へ進むにはPIAパスワードを入力してください。";
 "account.update.email.require.password.title" = "PIAパスワードが必要です";
