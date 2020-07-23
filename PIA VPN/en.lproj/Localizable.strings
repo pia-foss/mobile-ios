@@ -161,6 +161,7 @@
 "settings.server.network.alert" = "The VPN has to be disconnected to change the server network.";
 
 "settings.geo.servers.description" = "Include geo-located regions";
+"settings.cards.history.title" = "Latest news";
 
 // CONTENT BLOCKER
 

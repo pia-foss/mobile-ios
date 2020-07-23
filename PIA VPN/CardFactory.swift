@@ -49,19 +49,18 @@ struct CardFactory {
                 
                 if !Client.providers.vpnProvider.isVPNConnected {
                     
-                    let preferences = Client.preferences.editable()
-                    guard let currentWireguardVPNConfiguration = preferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ??
-                        Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
-                        fatalError("No default VPN custom configuration provided for PIA Wireguard protocol")
+                    guard let rootView = AppDelegate.delegate().topViewControllerWithRootViewController(rootViewController: UIApplication.shared.keyWindow?.rootViewController) else {
+                        return
+                    }
+                    
+                    if rootView is SettingsViewController {
+                        rootView.dismiss(animated: true) {
+                            Self.activateWireGuard()
+                        }
+                    } else {
+                        Self.activateWireGuard()
                     }
 
-                    preferences.setVPNCustomConfiguration(currentWireguardVPNConfiguration, for: PIAWGTunnelProfile.vpnType)
-                    preferences.vpnType = PIAWGTunnelProfile.vpnType
-                    preferences.commit()
-                    
-                    Client.providers.vpnProvider.install(force: true, { _ in
-                        Client.providers.vpnProvider.connect(nil)
-                    })
 
                 } else {
                     NotificationCenter.default.post(name: .OpenSettings,
@@ -70,6 +69,22 @@ struct CardFactory {
                 }
         }),
     ]
+    
+    private static func activateWireGuard() {
+        let preferences = Client.preferences.editable()
+        guard let currentWireguardVPNConfiguration = preferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ??
+            Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
+            fatalError("No default VPN custom configuration provided for PIA Wireguard protocol")
+        }
+
+        preferences.setVPNCustomConfiguration(currentWireguardVPNConfiguration, for: PIAWGTunnelProfile.vpnType)
+        preferences.vpnType = PIAWGTunnelProfile.vpnType
+        preferences.commit()
+        
+        Client.providers.vpnProvider.install(force: true, { _ in
+            Client.providers.vpnProvider.connect(nil)
+        })
+    }
     
 }
 

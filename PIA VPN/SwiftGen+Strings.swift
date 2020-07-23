@@ -610,6 +610,12 @@ internal enum L10n {
         internal static let title = L10n.tr("Localizable", "settings.application_settings.mace.title")
       }
     }
+    internal enum Cards {
+      internal enum History {
+        /// Latest news
+        internal static let title = L10n.tr("Localizable", "settings.cards.history.title")
+      }
+    }
     internal enum Commit {
       internal enum Buttons {
         /// Later

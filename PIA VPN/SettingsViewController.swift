@@ -156,6 +156,8 @@ class SettingsViewController: AutolayoutViewController {
         case development
         
         case preview
+
+        case info
     }
 
     private static let allSections: [Section] = [
@@ -169,7 +171,8 @@ class SettingsViewController: AutolayoutViewController {
         .applicationInformation,
         .reset,
         .contentBlocker,
-        .preview
+        .preview,
+        .info
     ]
 
     private var visibleSections: [Section] = []
@@ -211,7 +214,6 @@ class SettingsViewController: AutolayoutViewController {
         ],
         .preview: [
             .serversNetwork,
-            .cardsHistory
         ],
         .development: [
 //            .truncateDebugLog,
@@ -223,6 +225,9 @@ class SettingsViewController: AutolayoutViewController {
             .username,
             .password,
             .resolveGoogleAdsDomain
+        ],
+        .info: [
+            .cardsHistory
         ]
     ]
     
@@ -931,6 +936,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         case .development:
             return "DEVELOPMENT"
+            
+        case .info:
+            return nil
+
         }
     }
 
@@ -1148,7 +1157,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             switchServersNetwork.isOn = Client.configuration.currentServerNetwork() == ServersNetwork.gen4
 
         case .cardsHistory:
-            cell.textLabel?.text = "Cards history"
+            cell.textLabel?.text = L10n.Settings.Cards.History.title
             cell.detailTextLabel?.text = nil
 
         case .geoServers:
