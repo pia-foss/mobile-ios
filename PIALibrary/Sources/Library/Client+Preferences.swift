@@ -52,6 +52,8 @@ private protocol PreferencesStore: class {
     
     var nmtTrustedNetworkRules: [String: Int] { get set }
 
+    var nmtTemporaryOpenNetworks: [String] { get set }
+
     var nmtGenericRules: [String: Int] { get set }
 
     var nmtRulesEnabled: Bool { get set }
@@ -87,6 +89,7 @@ private extension PreferencesStore {
         availableNetworks = source.availableNetworks
         trustedNetworks = source.trustedNetworks
         nmtTrustedNetworkRules = source.nmtTrustedNetworkRules
+        nmtTemporaryOpenNetworks = source.nmtTemporaryOpenNetworks
         nmtGenericRules = source.nmtGenericRules
         nmtRulesEnabled = source.nmtRulesEnabled
         ikeV2IntegrityAlgorithm = source.ikeV2IntegrityAlgorithm
@@ -311,6 +314,17 @@ extension Client {
                 accessedDatabase.plain.nmtTrustedNetworkRules = newValue
             }
         }
+        
+        /// The `String` array of temporary open networks whee the user is trying to connect
+        public fileprivate(set) var nmtTemporaryOpenNetworks: [String] {
+            get {
+                return accessedDatabase.plain.nmtTemporaryOpenNetworks
+            }
+            set {
+                accessedDatabase.plain.nmtTemporaryOpenNetworks = newValue
+            }
+        }
+        
 
         /// The `Int:Int` dictionary of generic rules for each type of network
         public fileprivate(set) var nmtGenericRules: [String: Int] {
@@ -369,6 +383,7 @@ extension Client.Preferences {
             availableNetworks = []
             trustedNetworks = []
             nmtTrustedNetworkRules = [:]
+            nmtTemporaryOpenNetworks = []
             nmtGenericRules = [NMTType.protectedWiFi.rawValue: NMTRules.alwaysConnect.rawValue,
                                 NMTType.openWiFi.rawValue: NMTRules.alwaysConnect.rawValue,
                                 NMTType.cellular.rawValue: NMTRules.alwaysConnect.rawValue]
@@ -439,6 +454,9 @@ extension Client.Preferences {
 
         /// :nodoc:
         public var nmtTrustedNetworkRules: [String: Int]
+
+        /// :nodoc:
+        public var nmtTemporaryOpenNetworks: [String]
 
         /// :nodoc:
         public var nmtGenericRules: [String: Int]

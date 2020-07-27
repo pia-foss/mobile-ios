@@ -90,6 +90,8 @@ protocol PlainStore: class {
 
     var nmtTrustedNetworkRules: [String: Int] {get set}
 
+    var nmtTemporaryOpenNetworks: [String] {get set}
+
     //MARK: IKEv2
     var ikeV2IntegrityAlgorithm: String { get set }
     

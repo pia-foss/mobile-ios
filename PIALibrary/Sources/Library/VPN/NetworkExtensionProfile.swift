@@ -112,15 +112,37 @@ extension NetworkExtensionProfile {
     
     private func configureOnDemandOnWiFiNetworksFor(_ trustedNetworks: [String: Int],
                                                     _ vpn: NEVPNManager) {
-        
-        //TODO OPEN WIFI
-        
+                
         let genericRules = Client.preferences.nmtGenericRules
         let rule = genericRules[NMTType.protectedWiFi.rawValue]
         
         vpn.onDemandRules = []
         
-        //First, apply rules for each network
+        //First, Open networks
+        let openNetworks = Client.preferences.nmtTemporaryOpenNetworks
+        openNetworks.forEach { network in
+            
+            switch genericRules[NMTType.openWiFi.rawValue] {
+            case NMTRules.alwaysConnect.rawValue:
+                let ruleConnect = NEOnDemandRuleConnect()
+                ruleConnect.interfaceTypeMatch = .wiFi
+                ruleConnect.ssidMatch = [network]
+                vpn.onDemandRules?.append(ruleConnect)
+            case NMTRules.alwaysDisconnect.rawValue:
+                let ruleDisconnect = NEOnDemandRuleDisconnect()
+                ruleDisconnect.interfaceTypeMatch = .wiFi
+                ruleDisconnect.ssidMatch = [network]
+                vpn.onDemandRules?.append(ruleDisconnect)
+            default:
+                let ruleIgnore = NEOnDemandRuleIgnore()
+                ruleIgnore.interfaceTypeMatch = .wiFi
+                ruleIgnore.ssidMatch = [network]
+                vpn.onDemandRules?.append(ruleIgnore)
+            }
+
+        }
+        
+        //Next, apply rules for each network
         trustedNetworks.forEach { (key, value) in
             
             switch value {
@@ -158,6 +180,11 @@ extension NetworkExtensionProfile {
             ruleIgnore.interfaceTypeMatch = .wiFi
             vpn.onDemandRules?.append(ruleIgnore)
         }
+        
+        let preferences = Client.preferences.editable()
+        preferences.nmtTemporaryOpenNetworks = []
+        preferences.commit()
+        
     }
     
     private func configureOnDemandOnCellularNetworks(_ vpn: NEVPNManager) {

@@ -84,6 +84,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         static let nmtTrustedNetworkRules = "NMTTrustedNetworkRules"
 
+        static let nmtTemporaryOpenNetworks = "NMTTemporaryOpenNetworks"
+
         static let nmtGenericRules = "NMTGenericRules"
 
     }
@@ -475,7 +477,19 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.nmtTrustedNetworkRules)
         }
     }
-
+    
+    var nmtTemporaryOpenNetworks: [String] {
+        get {
+            guard let value = backend.object(forKey: Entries.nmtTemporaryOpenNetworks) as? [String] else {
+                return []
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.nmtTemporaryOpenNetworks)
+        }
+    }
+    
     var nmtGenericRules: [String: Int] {
         get {
             guard let value = backend.dictionary(forKey: Entries.nmtGenericRules) as? [String: Int] else {
@@ -551,6 +565,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.historicalServers)
         backend.removeObject(forKey: Entries.cachedNetworks)
         backend.removeObject(forKey: Entries.nmtTrustedNetworkRules)
+        backend.removeObject(forKey: Entries.nmtTemporaryOpenNetworks)
         backend.removeObject(forKey: Entries.nmtRulesEnabled)
         backend.removeObject(forKey: Entries.nmtGenericRules)
         backend.removeObject(forKey: Entries.nmtMigrationSuccess)
