@@ -91,8 +91,20 @@ class PIAHotspotHelper {
                                                             log.info("present PIA message for unprotected networks")
                                                         }
                                                         response.deliver()
-                                                    }
+                                                    } else {
+                                                        if cmd.commandType == .evaluate {
+                                                            if let currentNetwork = cmd.network {
+                                                                if !currentNetwork.isSecure { // Open WiFi
 
+                                                                    let preferences = Client.preferences.editable()
+                                                                    preferences.nmtTemporaryOpenNetworks = [currentNetwork.ssid]
+                                                                    preferences.commit()
+                                                                    Client.providers.vpnProvider.reconnect(after: 0, forceDisconnect: true, nil)
+                                                                    
+                                                                }
+                                                            }
+                                                        }
+                                                    }
                                                     
                                                 }
                                                 
