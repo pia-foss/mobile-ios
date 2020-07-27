@@ -369,7 +369,9 @@ extension Client.Preferences {
             availableNetworks = []
             trustedNetworks = []
             nmtTrustedNetworkRules = [:]
-            nmtGenericRules = [:]
+            nmtGenericRules = [NMTType.protectedWiFi.rawValue: NMTRules.alwaysConnect.rawValue,
+                                NMTType.openWiFi.rawValue: NMTRules.alwaysConnect.rawValue,
+                                NMTType.cellular.rawValue: NMTRules.alwaysConnect.rawValue]
             nmtRulesEnabled = false
             ikeV2IntegrityAlgorithm = IKEv2IntegrityAlgorithm.defaultIntegrity.value()
             ikeV2EncryptionAlgorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm.value()
