@@ -142,6 +142,7 @@
 		5F094924D06C6FDCA2A920E0 /* Pods_PIA_VPN_dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 377A9A73BEDE0E29D2A32CBA /* Pods_PIA_VPN_dev.framework */; };
 		5F3E74B1A9B053447C034B1B /* Pods_PIA_VPN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32C75B545E6362364180F291 /* Pods_PIA_VPN.framework */; };
 		77BD742F4431F83617891C3A /* Pods_PIA_VPN_WG_Tunnel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25534C630A3B6911A17F036D /* Pods_PIA_VPN_WG_Tunnel.framework */; };
+		8221922B24CECFE700C24F1C /* NMTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221922A24CECFE700C24F1C /* NMTTests.swift */; };
 		824C530824C046CB003DB740 /* ConnectionTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824C530724C046CA003DB740 /* ConnectionTile.swift */; };
 		824C530924C046CB003DB740 /* ConnectionTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824C530724C046CA003DB740 /* ConnectionTile.swift */; };
 		824C531524C04796003DB740 /* ConnectionTileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824C531324C04796003DB740 /* ConnectionTileCollectionViewCell.swift */; };
@@ -577,6 +578,7 @@
 		6B9D5F1AA8CF7CC26A3C7E2A /* Pods-PIA VPN dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPN dev.release.xcconfig"; path = "Target Support Files/Pods-PIA VPN dev/Pods-PIA VPN dev.release.xcconfig"; sourceTree = "<group>"; };
 		6E80B8CEB39E492B8BBD9DE5 /* Pods-PIA VPN Tunnel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPN Tunnel.debug.xcconfig"; path = "Target Support Files/Pods-PIA VPN Tunnel/Pods-PIA VPN Tunnel.debug.xcconfig"; sourceTree = "<group>"; };
 		74C3E3CAA4477C3F4F8F59D6 /* Pods_PIA_VPN_Tunnel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIA_VPN_Tunnel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8221922A24CECFE700C24F1C /* NMTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMTTests.swift; sourceTree = "<group>"; };
 		824C530724C046CA003DB740 /* ConnectionTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionTile.swift; sourceTree = "<group>"; };
 		824C531324C04796003DB740 /* ConnectionTileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionTileCollectionViewCell.swift; sourceTree = "<group>"; };
 		824C531424C04796003DB740 /* ConnectionTileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectionTileCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1245,6 +1247,7 @@
 			children = (
 				DD606AC321C9252500E0781D /* Utils */,
 				82A1AD2224B7C0020003DD02 /* PIACardTests.swift */,
+				8221922A24CECFE700C24F1C /* NMTTests.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -2193,6 +2196,7 @@
 				DD606AC621C9256300E0781D /* PIAHotspotHelperTests.swift in Sources */,
 				DD606AC821C9344100E0781D /* AppTests.swift in Sources */,
 				82A1AD2324B7C0020003DD02 /* PIACardTests.swift in Sources */,
+				8221922B24CECFE700C24F1C /* NMTTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

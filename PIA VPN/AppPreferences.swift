@@ -429,6 +429,55 @@ class AppPreferences {
         }
     }
     
+    func migrateNMT() {
+        
+        if !Client.preferences.nmtMigrationSuccess {
+            if Client.preferences.nmtRulesEnabled {
+                
+                //First, migrate the trusted networks
+                var trustedNetworkRules = [String:Int]()
+                Client.preferences.trustedNetworks.forEach {
+                    trustedNetworkRules[$0] = NMTRules.alwaysDisconnect.rawValue
+                }
+                
+                //Now, migrate the generic rules
+                var genericRules = [String:Int]()
+                genericRules[NMTType.protectedWiFi.rawValue] = NMTRules.alwaysConnect.rawValue
+                genericRules[NMTType.openWiFi.rawValue] = NMTRules.alwaysConnect.rawValue
+                genericRules[NMTType.cellular.rawValue] = NMTRules.alwaysConnect.rawValue
+
+                if Client.preferences.trustCellularData {
+                    genericRules[NMTType.cellular.rawValue] = NMTRules.alwaysDisconnect.rawValue
+                }
+                
+                if Client.preferences.useWiFiProtection {
+                    genericRules[NMTType.protectedWiFi.rawValue] = NMTRules.alwaysDisconnect.rawValue
+                }
+                
+                let preferences = Client.preferences.editable()
+                preferences.nmtGenericRules = genericRules
+                preferences.nmtTrustedNetworkRules = trustedNetworkRules
+                preferences.nmtMigrationSuccess = true
+                preferences.commit()
+                
+            } else {
+                
+                var genericRules = [String:Int]()
+                genericRules[NMTType.protectedWiFi.rawValue] = NMTRules.alwaysConnect.rawValue
+                genericRules[NMTType.openWiFi.rawValue] = NMTRules.alwaysConnect.rawValue
+                genericRules[NMTType.cellular.rawValue] = NMTRules.alwaysConnect.rawValue
+
+                let preferences = Client.preferences.editable()
+                preferences.nmtGenericRules = genericRules
+                preferences.nmtTrustedNetworkRules = [:]
+                preferences.nmtMigrationSuccess = true
+                preferences.commit()
+
+            }
+        }
+        
+    }
+    
     func migrate() {
         let oldVersion = defaults.string(forKey: Entries.version)
         defaults.set(AppPreferences.currentVersion, forKey: Entries.version)

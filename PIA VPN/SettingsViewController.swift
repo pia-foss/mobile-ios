@@ -551,7 +551,6 @@ class SettingsViewController: AutolayoutViewController {
         let preferences = Client.preferences.editable()
         preferences.trustedNetworks = pendingPreferences.trustedNetworks
         preferences.availableNetworks = pendingPreferences.availableNetworks
-        preferences.shouldConnectForAllNetworks = pendingPreferences.shouldConnectForAllNetworks
         preferences.useWiFiProtection = pendingPreferences.useWiFiProtection
         preferences.trustCellularData = pendingPreferences.trustCellularData
         preferences.ikeV2IntegrityAlgorithm = pendingPreferences.ikeV2IntegrityAlgorithm
@@ -587,7 +586,6 @@ class SettingsViewController: AutolayoutViewController {
         pendingPreferences.trustedNetworks = Client.preferences.trustedNetworks
         pendingPreferences.nmtRulesEnabled = Client.preferences.nmtRulesEnabled
         pendingPreferences.availableNetworks = Client.preferences.availableNetworks
-        pendingPreferences.shouldConnectForAllNetworks = Client.preferences.shouldConnectForAllNetworks
         pendingPreferences.useWiFiProtection = Client.preferences.useWiFiProtection
         pendingPreferences.trustCellularData = Client.preferences.trustCellularData
 
