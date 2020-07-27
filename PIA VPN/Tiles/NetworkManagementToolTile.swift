@@ -93,7 +93,7 @@ class NetworkManagementToolTile: UIView, Tileable  {
                 networkLabel.text = ssid.uppercased()
                 if Client.preferences.useWiFiProtection {
                     if Client.preferences.trustedNetworks.contains(ssid) ||
-                        Client.preferences.shouldConnectForAllNetworks {
+                        true {
                         statusButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.trustedLightIcon.image :
                             Asset.Piax.Global.trustedDarkIcon.image, for: [])
                         statusButton.accessibilityLabel = L10n.Tiles.Nmt.Accessibility.trusted

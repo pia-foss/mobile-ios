@@ -113,7 +113,6 @@ class TrustedNetworksViewController: AutolayoutViewController {
     
     @objc private func toggleAutoconnectWithAllNetworks(_ sender: UISwitch) {
         let preferences = Client.preferences.editable()
-        preferences.shouldConnectForAllNetworks = sender.isOn
         preferences.commit()
         hasUpdatedPreferences = true
     }
@@ -318,7 +317,6 @@ extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSou
             cell.textLabel?.text = L10n.Settings.Hotspothelper.All.title
             cell.accessoryView = switchAutoJoinAllNetworks
             cell.selectionStyle = .none
-            switchAutoJoinAllNetworks.isOn = Client.preferences.shouldConnectForAllNetworks
         case .useVpnWifiProtection:
             cell.imageView?.image = nil
             cell.textLabel?.text = L10n.Settings.Hotspothelper.Wifi.Trust.title

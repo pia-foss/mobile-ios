@@ -67,6 +67,8 @@ enum Setting: Int {
     
     case automaticReconnection
 
+    case nmtSelection
+    
     case trustedNetworks
 
     case connectShortcut
@@ -196,9 +198,7 @@ class SettingsViewController: AutolayoutViewController {
         .smallPackets: [
         ], // dynamic
         .applicationSettings: [], // dynamic
-        .autoConnectSettings: [
-            .trustedNetworks
-        ],
+        .autoConnectSettings: [], // dynamic
         .geoSettings: [
             .geoServers
         ],
@@ -240,7 +240,7 @@ class SettingsViewController: AutolayoutViewController {
     
     @IBOutlet private weak var tableView: UITableView!
 
-    private lazy var switchAutoJoinWiFi = UISwitch()
+    private lazy var switchEnableNMT = UISwitch()
 
     private lazy var switchPersistent = UISwitch()
 
@@ -314,6 +314,7 @@ class SettingsViewController: AutolayoutViewController {
         switchSmallPackets.addTarget(self, action: #selector(toggleSmallPackets(_:)), for: .valueChanged)
         switchServersNetwork.addTarget(self, action: #selector(toggleServerNetwork(_:)), for: .valueChanged)
         switchGeoServers.addTarget(self, action: #selector(toggleGEOServers(_:)), for: .valueChanged)
+        switchEnableNMT.addTarget(self, action: #selector(toggleNMT(_:)), for: .valueChanged)
         redisplaySettings()
 
         NotificationCenter.default.addObserver(self,
@@ -440,6 +441,13 @@ class SettingsViewController: AutolayoutViewController {
         object: self,
         userInfo: nil)
     }
+    
+    @objc private func toggleNMT(_ sender: UISwitch) {
+        let preferences = Client.preferences.editable()
+        preferences.nmtRulesEnabled = sender.isOn
+        preferences.commit()
+        redisplaySettings()
+    }
 
     @objc private func showContentBlockerTutorial() {
         perform(segue: StoryboardSegue.Main.contentBlockerSegueIdentifier)
@@ -551,7 +559,6 @@ class SettingsViewController: AutolayoutViewController {
         let preferences = Client.preferences.editable()
         preferences.trustedNetworks = pendingPreferences.trustedNetworks
         preferences.availableNetworks = pendingPreferences.availableNetworks
-        preferences.shouldConnectForAllNetworks = pendingPreferences.shouldConnectForAllNetworks
         preferences.useWiFiProtection = pendingPreferences.useWiFiProtection
         preferences.trustCellularData = pendingPreferences.trustCellularData
         preferences.ikeV2IntegrityAlgorithm = pendingPreferences.ikeV2IntegrityAlgorithm
@@ -587,7 +594,6 @@ class SettingsViewController: AutolayoutViewController {
         pendingPreferences.trustedNetworks = Client.preferences.trustedNetworks
         pendingPreferences.nmtRulesEnabled = Client.preferences.nmtRulesEnabled
         pendingPreferences.availableNetworks = Client.preferences.availableNetworks
-        pendingPreferences.shouldConnectForAllNetworks = Client.preferences.shouldConnectForAllNetworks
         pendingPreferences.useWiFiProtection = Client.preferences.useWiFiProtection
         pendingPreferences.trustCellularData = Client.preferences.trustCellularData
 
@@ -740,6 +746,16 @@ class SettingsViewController: AutolayoutViewController {
                 pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType) {
                 sections.remove(at: sections.firstIndex(of: .ikeV2encryption)!)
             }
+        }
+        if Client.preferences.nmtRulesEnabled {
+            rowsBySection[.autoConnectSettings] = [
+                .nmtSelection,
+                .trustedNetworks
+            ]
+        } else {
+            rowsBySection[.autoConnectSettings] = [
+                .nmtSelection
+            ]
         }
         if Flags.shared.enablesMACESetting {
             rowsBySection[.applicationSettings] = [
@@ -1225,8 +1241,16 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.textLabel?.text = "Resolve google-analytics.com"
             cell.detailTextLabel?.text = nil
             
-        case .trustedNetworks:
+        case .nmtSelection:
             cell.textLabel?.text = L10n.Settings.Hotspothelper.title
+            cell.textLabel?.numberOfLines = 0
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchEnableNMT
+            cell.selectionStyle = .none
+            switchEnableNMT.isOn = Client.preferences.nmtRulesEnabled
+
+        case .trustedNetworks:
+            cell.textLabel?.text = "Manage automation"
             cell.detailTextLabel?.text = nil
 
         case .publicUsername:

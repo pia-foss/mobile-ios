@@ -180,15 +180,4 @@ class PIAHotspotHelper {
         preferences.commit()
     }
     
-    private func tryToConnectVPNForAllNetworks() {
-        if Client.preferences.shouldConnectForAllNetworks {
-            //Connect the VPN
-            if !Client.providers.vpnProvider.isVPNConnected {
-                Macros.dispatch(after: .milliseconds(200)) {
-                    Client.providers.vpnProvider.connect(nil)
-                }
-            }
-        }
-    }
-    
 }

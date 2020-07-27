@@ -330,7 +330,7 @@ class DashboardViewController: AutolayoutViewController {
             
             var showAlert = false
             if let ssid = UIDevice.current.WiFiSSID {
-                if (Client.preferences.useWiFiProtection && (!Client.preferences.trustedNetworks.contains(ssid) || Client.preferences.shouldConnectForAllNetworks)) {
+                if (Client.preferences.useWiFiProtection && (!Client.preferences.trustedNetworks.contains(ssid))) {
                     showAlert = true
                 }
             } else {
@@ -654,10 +654,6 @@ class DashboardViewController: AutolayoutViewController {
     private func isTrustedNetwork() -> Bool {
         if Client.preferences.nmtRulesEnabled {
             if let ssid = PIAHotspotHelper().currentWiFiNetwork() {
-                if Client.preferences.shouldConnectForAllNetworks {
-                    return false
-                }
-                
                 if !Client.preferences.useWiFiProtection {
                     return true
                 } else if Client.preferences.trustedNetworks.contains(ssid) {

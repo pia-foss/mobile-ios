@@ -80,6 +80,7 @@ class Bootstrapper {
         }
 
         AppPreferences.shared.migrate()
+        AppPreferences.shared.migrateNMT()
 
         // PIALibrary
         
