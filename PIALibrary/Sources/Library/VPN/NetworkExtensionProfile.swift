@@ -74,8 +74,7 @@ extension NetworkExtensionProfile {
             configuration.isOnDemand :
             false //if the VPN is disconnected, don't activate the onDemand property to don't autoconnect the VPN without user permission
         
-        //TODO
-        let trustedNetworks = [""] //Client.preferences.nmtTrustedNetworkRules
+        let trustedNetworks = Client.preferences.nmtTrustedNetworkRules
         
         vpn.onDemandRules = []
         
@@ -111,47 +110,53 @@ extension NetworkExtensionProfile {
     }
     
     
-    private func configureOnDemandOnWiFiNetworksFor(_ trustedNetworks: [String],
+    private func configureOnDemandOnWiFiNetworksFor(_ trustedNetworks: [String: Int],
                                                     _ vpn: NEVPNManager) {
         
-        if true {
+        //TODO OPEN WIFI
+        
+        let genericRules = Client.preferences.nmtGenericRules
+        let rule = genericRules[NMTType.protectedWiFi.rawValue]
+        
+        vpn.onDemandRules = []
+        
+        //First, apply rules for each network
+        trustedNetworks.forEach { (key, value) in
             
-            let ruleDisconnect = NEOnDemandRuleDisconnect()
-            ruleDisconnect.interfaceTypeMatch = .wiFi
-            if let currentSSID = UIDevice.current.WiFiSSID {
-                let filteredNetworkList = trustedNetworks.filter({
-                    return $0 != currentSSID
-                })
-                ruleDisconnect.ssidMatch = filteredNetworkList
-                let ruleIgnore = NEOnDemandRuleIgnore()
-                ruleIgnore.interfaceTypeMatch = .wiFi
-                ruleIgnore.ssidMatch = [currentSSID]
-                if trustedNetworks.contains(currentSSID) {
-                    vpn.onDemandRules?.append(ruleIgnore) //Only add the ignore rule if the current WiFi network is a trusted network
-                }
-            } else {
-                ruleDisconnect.ssidMatch = trustedNetworks
-            }
-            
-            let ruleConnect = NEOnDemandRuleConnect()
-            ruleConnect.interfaceTypeMatch = .wiFi
-            if true {
-                vpn.onDemandRules = [ruleConnect]
-            } else if ruleDisconnect.ssidMatch?.count == 0 {
+            switch value {
+            case NMTRules.alwaysConnect.rawValue:
+                let ruleConnect = NEOnDemandRuleConnect()
+                ruleConnect.interfaceTypeMatch = .wiFi
+                ruleConnect.ssidMatch = [key]
                 vpn.onDemandRules?.append(ruleConnect)
-            } else {
-                vpn.onDemandRules?.append(contentsOf: [ruleDisconnect, ruleConnect])
-            }
-        } else {
-            if let _ = UIDevice.current.WiFiSSID { //If trying to connect from a WiFi network...
-                let ruleIgnore = NEOnDemandRuleIgnore()
-                ruleIgnore.interfaceTypeMatch = .wiFi
-                vpn.onDemandRules?.append(ruleIgnore)
-            } else {
+            case NMTRules.alwaysDisconnect.rawValue:
                 let ruleDisconnect = NEOnDemandRuleDisconnect()
                 ruleDisconnect.interfaceTypeMatch = .wiFi
+                ruleDisconnect.ssidMatch = [key]
                 vpn.onDemandRules?.append(ruleDisconnect)
+            default:
+                let ruleIgnore = NEOnDemandRuleIgnore()
+                ruleIgnore.interfaceTypeMatch = .wiFi
+                ruleIgnore.ssidMatch = [key]
+                vpn.onDemandRules?.append(ruleIgnore)
             }
+
+        }
+        
+        //Last, apply generic rules to WiFi
+        switch rule {
+        case NMTRules.alwaysConnect.rawValue:
+            let ruleConnect = NEOnDemandRuleConnect()
+            ruleConnect.interfaceTypeMatch = .wiFi
+            vpn.onDemandRules?.append(ruleConnect)
+        case NMTRules.alwaysDisconnect.rawValue:
+            let ruleDisconnect = NEOnDemandRuleDisconnect()
+            ruleDisconnect.interfaceTypeMatch = .wiFi
+            vpn.onDemandRules?.append(ruleDisconnect)
+        default:
+            let ruleIgnore = NEOnDemandRuleIgnore()
+            ruleIgnore.interfaceTypeMatch = .wiFi
+            vpn.onDemandRules?.append(ruleIgnore)
         }
     }
     
