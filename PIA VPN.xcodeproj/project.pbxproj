@@ -219,14 +219,6 @@
 		DD3B504724B758330002F4B5 /* Collectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3B504524B758330002F4B5 /* Collectable.swift */; };
 		DD3B504924B75A1E0002F4B5 /* CardFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3B504824B75A1E0002F4B5 /* CardFactory.swift */; };
 		DD3B504A24B75A1E0002F4B5 /* CardFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3B504824B75A1E0002F4B5 /* CardFactory.swift */; };
-		DD401977221FEF2C0041EB30 /* NetworkManagementToolTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD401976221FEF2C0041EB30 /* NetworkManagementToolTile.swift */; };
-		DD401978221FEF2C0041EB30 /* NetworkManagementToolTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD401976221FEF2C0041EB30 /* NetworkManagementToolTile.swift */; };
-		DD40197A221FEF390041EB30 /* NetworkManagementToolTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD401979221FEF390041EB30 /* NetworkManagementToolTile.xib */; };
-		DD40197B221FEF390041EB30 /* NetworkManagementToolTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD401979221FEF390041EB30 /* NetworkManagementToolTile.xib */; };
-		DD40197E221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD40197C221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.swift */; };
-		DD40197F221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD40197C221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.swift */; };
-		DD401980221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD40197D221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.xib */; };
-		DD401981221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD40197D221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.xib */; };
 		DD4E84572243BD1200929B39 /* DashboardCollectionViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4E84562243BD1200929B39 /* DashboardCollectionViewUtil.swift */; };
 		DD4E84582243BD1200929B39 /* DashboardCollectionViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4E84562243BD1200929B39 /* DashboardCollectionViewUtil.swift */; };
 		DD51F8B72372E494009FEED3 /* PIA-RSA-3072.pem in Resources */ = {isa = PBXBuildFile; fileRef = DD51F8B12372E494009FEED3 /* PIA-RSA-3072.pem */; };
@@ -622,10 +614,6 @@
 		DD3B504224B7576F0002F4B5 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		DD3B504524B758330002F4B5 /* Collectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collectable.swift; sourceTree = "<group>"; };
 		DD3B504824B75A1E0002F4B5 /* CardFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFactory.swift; sourceTree = "<group>"; };
-		DD401976221FEF2C0041EB30 /* NetworkManagementToolTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagementToolTile.swift; sourceTree = "<group>"; };
-		DD401979221FEF390041EB30 /* NetworkManagementToolTile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetworkManagementToolTile.xib; sourceTree = "<group>"; };
-		DD40197C221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagementToolTileCollectionViewCell.swift; sourceTree = "<group>"; };
-		DD40197D221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetworkManagementToolTileCollectionViewCell.xib; sourceTree = "<group>"; };
 		DD4E84562243BD1200929B39 /* DashboardCollectionViewUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCollectionViewUtil.swift; sourceTree = "<group>"; };
 		DD51F8B12372E494009FEED3 /* PIA-RSA-3072.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "PIA-RSA-3072.pem"; sourceTree = "<group>"; };
 		DD51F8B22372E494009FEED3 /* PIA-RSA-4096.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "PIA-RSA-4096.pem"; sourceTree = "<group>"; };
@@ -1139,7 +1127,6 @@
 				DDFCFA9321E892130081F235 /* RegionTile.swift */,
 				DD76291521ECBD9C0092DF50 /* SubscriptionTile.swift */,
 				DD76292121ECCD5C0092DF50 /* UsageTile.swift */,
-				DD401976221FEF2C0041EB30 /* NetworkManagementToolTile.swift */,
 				DD9706A3224262BF00630220 /* QuickSettingsTile.swift */,
 				824C530724C046CA003DB740 /* ConnectionTile.swift */,
 				DD1C139721E65F90004004B3 /* IPTileCollectionViewCell.swift */,
@@ -1148,7 +1135,6 @@
 				DD172A982254C36D00071CFB /* FavoriteServersTileCollectionViewCell.swift */,
 				DDFCFA8D21E892070081F235 /* RegionTileCollectionViewCell.swift */,
 				DD76291B21ECCD510092DF50 /* UsageTileCollectionViewCell.swift */,
-				DD40197C221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.swift */,
 				DD9706A9224262E000630220 /* QuickSettingsTileCollectionViewCell.swift */,
 				824C531324C04796003DB740 /* ConnectionTileCollectionViewCell.swift */,
 			);
@@ -1213,7 +1199,6 @@
 				DDFCFA9621E8921F0081F235 /* RegionTile.xib */,
 				DD76291821ECBDA50092DF50 /* SubscriptionTile.xib */,
 				DD76292421ECCD650092DF50 /* UsageTile.xib */,
-				DD401979221FEF390041EB30 /* NetworkManagementToolTile.xib */,
 				DD9706A6224262CD00630220 /* QuickSettingsTile.xib */,
 				824C531C24C04800003DB740 /* ConnectionTile.xib */,
 				DD1C139821E65F90004004B3 /* IPTileCollectionViewCell.xib */,
@@ -1222,7 +1207,6 @@
 				DD172A992254C36D00071CFB /* FavoriteServersTileCollectionViewCell.xib */,
 				DDFCFA8E21E892070081F235 /* RegionTileCollectionViewCell.xib */,
 				DD76291C21ECCD510092DF50 /* UsageTileCollectionViewCell.xib */,
-				DD40197D221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.xib */,
 				DD9706AA224262E000630220 /* QuickSettingsTileCollectionViewCell.xib */,
 				824C531424C04796003DB740 /* ConnectionTileCollectionViewCell.xib */,
 			);
@@ -1604,7 +1588,6 @@
 				DDFCFA9221E892070081F235 /* RegionTileCollectionViewCell.xib in Resources */,
 				DDFCFA9821E8921F0081F235 /* RegionTile.xib in Resources */,
 				DD21909A22F1DFB0007D035E /* InviteStatusTableViewCell.xib in Resources */,
-				DD401981221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.xib in Resources */,
 				824C531E24C04800003DB740 /* ConnectionTile.xib in Resources */,
 				DD21909922F1DFB0007D035E /* InvitesSentTableViewCell.xib in Resources */,
 				DD21909722F1DFB0007D035E /* DaysAcquiredTableViewCell.xib in Resources */,
@@ -1624,7 +1607,6 @@
 				DD21909B22F1DFB0007D035E /* ShareInvitationTableViewCell.xib in Resources */,
 				824C531824C04796003DB740 /* ConnectionTileCollectionViewCell.xib in Resources */,
 				DD51F8BE2372E494009FEED3 /* PIA-ECC-521r1.pem in Resources */,
-				DD40197B221FEF390041EB30 /* NetworkManagementToolTile.xib in Resources */,
 				DD9706AE224262E000630220 /* QuickSettingsTileCollectionViewCell.xib in Resources */,
 				DD125DC921E7704F004ECCB6 /* QuickConnectTile.xib in Resources */,
 				0EE220701F4EF307002805AE /* Main.storyboard in Resources */,
@@ -1672,14 +1654,12 @@
 				0E7EC045209326E30029811E /* Localizable.strings in Resources */,
 				DD21909322F1DFB0007D035E /* InviteFriendTableViewCell.xib in Resources */,
 				0ED9841D1FC48C6000542EE6 /* Roboto-Regular.ttf in Resources */,
-				DD401980221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.xib in Resources */,
 				DD21909222F1DFB0007D035E /* DaysAcquiredTableViewCell.xib in Resources */,
 				DD76291F21ECCD510092DF50 /* UsageTileCollectionViewCell.xib in Resources */,
 				DD76292521ECCD650092DF50 /* UsageTile.xib in Resources */,
 				DD172A9C2254C36D00071CFB /* FavoriteServersTileCollectionViewCell.xib in Resources */,
 				DD51F8B92372E494009FEED3 /* PIA-RSA-4096.pem in Resources */,
 				291C6398183EBC210039EC03 /* Images.xcassets in Resources */,
-				DD40197A221FEF390041EB30 /* NetworkManagementToolTile.xib in Resources */,
 				0E0786DE1EFA7EAE00F77466 /* Components.plist in Resources */,
 				DDFCFA9121E892070081F235 /* RegionTileCollectionViewCell.xib in Resources */,
 				0ED9841C1FC48C6000542EE6 /* Roboto-Light.ttf in Resources */,
@@ -2124,7 +2104,6 @@
 				0EFB839120209CF200980F69 /* VPNPermissionViewController.swift in Sources */,
 				0EFDC1D81FE46177007C0B9B /* SensitiveOperation.swift in Sources */,
 				82A1AD3024B87CF20003DD02 /* PIACard.swift in Sources */,
-				DD40197F221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.swift in Sources */,
 				0E3A35291FD9A960000B0F99 /* DashboardViewController.swift in Sources */,
 				DDB6B95121C94E2E00DE8C5F /* TrustedNetworksViewController.swift in Sources */,
 				0E9452A61FDB578400891948 /* RegionCell.swift in Sources */,
@@ -2161,7 +2140,6 @@
 				0E2215CD2008C01D00F5FB4D /* SwiftGen+Assets.swift in Sources */,
 				DD858B8F22CCE9E4004953F3 /* FriendReferralsTableViewUtil.swift in Sources */,
 				DDFCFA9021E892070081F235 /* RegionTileCollectionViewCell.swift in Sources */,
-				DD401978221FEF2C0041EB30 /* NetworkManagementToolTile.swift in Sources */,
 				DD9706A5224262BF00630220 /* QuickSettingsTile.swift in Sources */,
 				DD3B504424B7576F0002F4B5 /* Card.swift in Sources */,
 				0E7361A11FD86F8300706BFF /* AccountObserver.swift in Sources */,
@@ -2238,7 +2216,6 @@
 				0EB966741FDF0D6E0086ABC2 /* ServerProvider+UI.swift in Sources */,
 				DD76291121ECBD8B0092DF50 /* SubscriptionTileCollectionViewCell.swift in Sources */,
 				DDF7F755240D35BA00A671C7 /* CustomServerSettingsViewController.swift in Sources */,
-				DD40197E221FEF650041EB30 /* NetworkManagementToolTileCollectionViewCell.swift in Sources */,
 				0ECF5C082017EBAD0047596C /* ThemeCode.swift in Sources */,
 				DD172AA322573EDC00071CFB /* ServerTile+App.swift in Sources */,
 				0E392DA61FE3283C0002160D /* TransientState.swift in Sources */,
@@ -2305,7 +2282,6 @@
 				DD1C139E21E6623D004004B3 /* XIBSetup.swift in Sources */,
 				DD07AACC242CBFF2000EE1A3 /* AddEmailToAccountViewController.swift in Sources */,
 				DDE432DF2498EADB0095B197 /* Array+Group.swift in Sources */,
-				DD401977221FEF2C0041EB30 /* NetworkManagementToolTile.swift in Sources */,
 				DDB6B95321C95CD400DE8C5F /* EnumsBuilder.swift in Sources */,
 				0E9AEA6220683FDF00B6E59A /* AboutComponent.swift in Sources */,
 				DD4E84572243BD1200929B39 /* DashboardCollectionViewUtil.swift in Sources */,

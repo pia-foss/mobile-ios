@@ -30,7 +30,6 @@ enum Cells: Int, EnumsBuilder {
     case ipTile
     case subscription
     case usage
-    case networkManagementTool
     case quickSettings
     case favoriteServers
     case connectionTile
@@ -42,7 +41,6 @@ enum Cells: Int, EnumsBuilder {
         case .region: return "RegionTileCell"
         case .subscription: return "SubscriptionTileCell"
         case .usage: return "UsageTileCell"
-        case .networkManagementTool: return "NMTTileCell"
         case .quickSettings: return "QuickSettingsTileCell"
         case .favoriteServers: return "FavoriteServersTileCell"
         case .connectionTile: return "ConnectionTileCell"
@@ -56,7 +54,6 @@ enum Cells: Int, EnumsBuilder {
         case .region: return "RegionTileCollectionViewCell"
         case .subscription: return "SubscriptionTileCollectionViewCell"
         case .usage: return "UsageTileCollectionViewCell"
-        case .networkManagementTool: return "NetworkManagementToolTileCollectionViewCell"
         case .quickSettings: return "QuickSettingsTileCollectionViewCell"
         case .favoriteServers: return "FavoriteServersTileCollectionViewCell"
         case .connectionTile: return "ConnectionTileCollectionViewCell"
@@ -82,9 +79,6 @@ class DashboardCollectionViewUtil: NSObject {
         collectionView.register(UINib(nibName: Cells.usage.className,
                                       bundle: nil),
                                 forCellWithReuseIdentifier: Cells.usage.identifier)
-        collectionView.register(UINib(nibName: Cells.networkManagementTool.className,
-                                      bundle: nil),
-                                forCellWithReuseIdentifier: Cells.networkManagementTool.identifier)
         collectionView.register(UINib(nibName: Cells.quickSettings.className,
                                       bundle: nil),
                                 forCellWithReuseIdentifier: Cells.quickSettings.identifier)

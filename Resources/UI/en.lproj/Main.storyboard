@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="boO-X9-UIe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="boO-X9-UIe">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -943,7 +943,6 @@
                         <segue destination="SAw-ll-7Hp" kind="presentation" identifier="SettingsSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_VPN" customModuleProvider="target" id="Skk-3e-UDA"/>
                         <segue destination="ckY-cv-bTr" kind="presentation" identifier="AboutSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_VPN" customModuleProvider="target" id="1AI-Fy-NYL"/>
                         <segue destination="W4F-zm-KqY" kind="presentation" identifier="AccountSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_VPN" customModuleProvider="target" id="grU-WE-sRJ"/>
-                        <segue destination="jy7-91-daJ" kind="show" identifier="NetworkManagementToolTileSegue" id="7wM-LQ-vSr"/>
                         <segue destination="MU8-v2-7Zn" kind="show" identifier="ShowQuickSettingsViewController" customClass="ModalNavigationSegue" customModule="PIA_VPN" customModuleProvider="target" id="gOr-cS-0Jn"/>
                         <segue destination="Jcq-Qm-xQ1" kind="presentation" identifier="ShowAddEmailSegue" id="2vQ-Ts-0N1"/>
                     </connections>
@@ -1424,14 +1423,14 @@
             <objects>
                 <viewController id="jy7-91-daJ" customClass="TrustedNetworksViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="P5B-eT-Ius">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p4O-Dy-PbF">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Si7-46-a7E">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NetworkCell" textLabel="vC0-u3-5dy" style="IBUITableViewCellStyleDefault" id="GOa-SC-nuT">
@@ -2483,7 +2482,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7wM-LQ-vSr"/>
         <segue reference="9EP-gJ-pE1"/>
         <segue reference="Ic8-R6-xho"/>
     </inferredMetricsTieBreakers>
