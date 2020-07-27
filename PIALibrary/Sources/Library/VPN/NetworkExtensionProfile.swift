@@ -74,7 +74,8 @@ extension NetworkExtensionProfile {
             configuration.isOnDemand :
             false //if the VPN is disconnected, don't activate the onDemand property to don't autoconnect the VPN without user permission
         
-        let trustedNetworks = Client.preferences.trustedNetworks
+        //TODO
+        let trustedNetworks = [""] //Client.preferences.nmtTrustedNetworkRules
         
         vpn.onDemandRules = []
         
@@ -82,10 +83,8 @@ extension NetworkExtensionProfile {
             
             if Client.preferences.nmtRulesEnabled {
                 log.debug("Network Management Rule Enabled: \(Client.preferences.nmtRulesEnabled)")
-                log.debug("Network Management Rule Protect WiFi Network: \(Client.preferences.useWiFiProtection)")
-                log.debug("Network Management Rule Trust Cellular Network: \(Client.preferences.trustCellularData)")
-                log.debug("Network Management Rule Protect all WiFi Networks: \(Client.preferences.shouldConnectForAllNetworks)")
-                log.debug("Network Management Rule Trusted Networks: \(Client.preferences.trustedNetworks)")
+                log.debug("Network Management Rules for Trusted Networks: \(Client.preferences.nmtTrustedNetworkRules)")
+                log.debug("Network Management Generic rules: \(Client.preferences.nmtGenericRules)")
                 self.configureOnDemandOnWiFiNetworksFor(trustedNetworks, vpn)
                 self.configureOnDemandOnCellularNetworks(vpn)
             } else {
@@ -114,7 +113,8 @@ extension NetworkExtensionProfile {
     
     private func configureOnDemandOnWiFiNetworksFor(_ trustedNetworks: [String],
                                                     _ vpn: NEVPNManager) {
-        if Client.preferences.useWiFiProtection {
+        
+        if true {
             
             let ruleDisconnect = NEOnDemandRuleDisconnect()
             ruleDisconnect.interfaceTypeMatch = .wiFi
@@ -135,7 +135,7 @@ extension NetworkExtensionProfile {
             
             let ruleConnect = NEOnDemandRuleConnect()
             ruleConnect.interfaceTypeMatch = .wiFi
-            if Client.preferences.shouldConnectForAllNetworks {
+            if true {
                 vpn.onDemandRules = [ruleConnect]
             } else if ruleDisconnect.ssidMatch?.count == 0 {
                 vpn.onDemandRules?.append(ruleConnect)
@@ -156,20 +156,22 @@ extension NetworkExtensionProfile {
     }
     
     private func configureOnDemandOnCellularNetworks(_ vpn: NEVPNManager) {
-        if !Client.preferences.trustCellularData {
+        let rules = Client.preferences.nmtGenericRules
+        let cellularRule = rules[NMTType.cellular.rawValue]
+        
+        switch cellularRule {
+        case NMTRules.alwaysConnect.rawValue:
             let ruleConnect = NEOnDemandRuleConnect()
             ruleConnect.interfaceTypeMatch = .cellular
             vpn.onDemandRules?.append(ruleConnect)
-        } else {
-            if let _ = UIDevice.current.WiFiSSID { //If trying to connect from a Cellular network...
-                let ruleDisconnect = NEOnDemandRuleDisconnect()
-                ruleDisconnect.interfaceTypeMatch = .cellular
-                vpn.onDemandRules?.append(ruleDisconnect)
-            } else {
-                let ruleIgnore = NEOnDemandRuleIgnore()
-                ruleIgnore.interfaceTypeMatch = .cellular
-                vpn.onDemandRules?.append(ruleIgnore)
-            }
+        case NMTRules.alwaysDisconnect.rawValue:
+            let ruleDisconnect = NEOnDemandRuleDisconnect()
+            ruleDisconnect.interfaceTypeMatch = .cellular
+            vpn.onDemandRules?.append(ruleDisconnect)
+        default:
+            let ruleIgnore = NEOnDemandRuleIgnore()
+            ruleIgnore.interfaceTypeMatch = .cellular
+            vpn.onDemandRules?.append(ruleIgnore)
         }
     }
     

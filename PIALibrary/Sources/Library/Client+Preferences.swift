@@ -38,7 +38,7 @@ private protocol PreferencesStore: class {
 
     var authMigrationSuccess: Bool { get set }
 
-    var shouldConnectForAllNetworks: Bool { get set }
+    var nmtMigrationSuccess: Bool { get set }
 
     var vpnType: String { get set }
 
@@ -50,6 +50,10 @@ private protocol PreferencesStore: class {
 
     var trustedNetworks: [String] { get set }
     
+    var nmtTrustedNetworkRules: [String: Int] { get set }
+
+    var nmtGenericRules: [String: Int] { get set }
+
     var nmtRulesEnabled: Bool { get set }
     
     var ikeV2IntegrityAlgorithm: String { get set }
@@ -76,12 +80,14 @@ private extension PreferencesStore {
         useWiFiProtection = source.useWiFiProtection
         trustCellularData = source.trustCellularData
         authMigrationSuccess = source.authMigrationSuccess
-        shouldConnectForAllNetworks = source.shouldConnectForAllNetworks
+        nmtMigrationSuccess = source.nmtMigrationSuccess
         vpnType = source.vpnType
         vpnDisconnectsOnSleep = source.vpnDisconnectsOnSleep
         vpnCustomConfigurations = source.vpnCustomConfigurations
         availableNetworks = source.availableNetworks
         trustedNetworks = source.trustedNetworks
+        nmtTrustedNetworkRules = source.nmtTrustedNetworkRules
+        nmtGenericRules = source.nmtGenericRules
         nmtRulesEnabled = source.nmtRulesEnabled
         ikeV2IntegrityAlgorithm = source.ikeV2IntegrityAlgorithm
         ikeV2EncryptionAlgorithm = source.ikeV2EncryptionAlgorithm
@@ -161,6 +167,7 @@ extension Client {
             }
         }
         
+                
         /// Flag to indicate if we have retrieve the correct auth token
         public fileprivate(set) var authMigrationSuccess: Bool {
             get {
@@ -171,13 +178,13 @@ extension Client {
             }
         }
 
-        /// The option for connect the vpn when selecting connect when changing to cellular data from Settings.
-        public fileprivate(set) var shouldConnectForAllNetworks: Bool {
+        /// Flag to indicate if we have migrated the nmt rules
+        public fileprivate(set) var nmtMigrationSuccess: Bool {
             get {
-                return accessedDatabase.plain.shouldConnectForAllNetworks ?? defaults.shouldConnectForAllNetworks
+                return accessedDatabase.plain.nmtMigrationSuccess ?? defaults.nmtMigrationSuccess
             }
             set {
-                accessedDatabase.plain.shouldConnectForAllNetworks = newValue
+                accessedDatabase.plain.nmtMigrationSuccess = newValue
             }
         }
 
@@ -295,6 +302,26 @@ extension Client {
             }
         }
 
+        /// The `String:Int` dictionary of trusted WiFi networks with the rule to apply
+        public fileprivate(set) var nmtTrustedNetworkRules: [String: Int] {
+            get {
+                return accessedDatabase.plain.nmtTrustedNetworkRules
+            }
+            set {
+                accessedDatabase.plain.nmtTrustedNetworkRules = newValue
+            }
+        }
+
+        /// The `Int:Int` dictionary of generic rules for each type of network
+        public fileprivate(set) var nmtGenericRules: [String: Int] {
+            get {
+                return accessedDatabase.plain.nmtGenericRules
+            }
+            set {
+                accessedDatabase.plain.nmtGenericRules = newValue
+            }
+        }
+
         /// Disconnect the VPN when joining a trusted network. False by default
         public fileprivate(set) var nmtRulesEnabled: Bool {
             get {
@@ -335,12 +362,14 @@ extension Client.Preferences {
             useWiFiProtection = true
             trustCellularData = false
             authMigrationSuccess = false
-            shouldConnectForAllNetworks = true
+            nmtMigrationSuccess = false
             vpnType = IKEv2Profile.vpnType
             vpnDisconnectsOnSleep = false
             vpnCustomConfigurations = [:]
             availableNetworks = []
             trustedNetworks = []
+            nmtTrustedNetworkRules = [:]
+            nmtGenericRules = [:]
             nmtRulesEnabled = false
             ikeV2IntegrityAlgorithm = IKEv2IntegrityAlgorithm.defaultIntegrity.value()
             ikeV2EncryptionAlgorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm.value()
@@ -389,7 +418,7 @@ extension Client.Preferences {
         public var authMigrationSuccess: Bool
 
         /// :nodoc:
-        public var shouldConnectForAllNetworks: Bool
+        public var nmtMigrationSuccess: Bool
 
         /// :nodoc:
         public var vpnType: String
@@ -405,6 +434,12 @@ extension Client.Preferences {
 
         /// :nodoc:
         public var trustedNetworks: [String]
+
+        /// :nodoc:
+        public var nmtTrustedNetworkRules: [String: Int]
+
+        /// :nodoc:
+        public var nmtGenericRules: [String: Int]
 
         /// :nodoc:
         public var nmtRulesEnabled: Bool
@@ -444,19 +479,13 @@ extension Client.Preferences {
             if (isPersistentConnection != target.isPersistentConnection) {
                 queue.append(VPNActionReinstall())
             }
-            if (trustCellularData != target.trustCellularData) {
-                queue.append(VPNActionDisconnectAndReinstall())
-            }
             if (availableNetworks != target.availableNetworks) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
-            if (shouldConnectForAllNetworks != target.shouldConnectForAllNetworks) {
+            if (nmtTrustedNetworkRules != target.nmtTrustedNetworkRules) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
-            if (useWiFiProtection != target.useWiFiProtection) {
-                queue.append(VPNActionDisconnectAndReinstall())
-            }
-            if (trustedNetworks != target.trustedNetworks) {
+            if (nmtGenericRules != target.nmtGenericRules) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
             if (nmtRulesEnabled != target.nmtRulesEnabled) {

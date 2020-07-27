@@ -234,6 +234,16 @@
 		294889BC1EE78B3571331B6F /* Pods_PIALibrary_PIALibraryHost_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A657769254FB764E75F172BF /* Pods_PIALibrary_PIALibraryHost_iOS.framework */; };
 		4EC699081E21113A5D476DA7 /* Pods_PIALibrary_PIALibraryTests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF2CACA4F28EEB36C8B827C /* Pods_PIALibrary_PIALibraryTests_iOS.framework */; };
 		7BBDD26C2B8942A316F9B7D6 /* Pods_PIALibrary_PIALibrary_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1675DD0A7CF588C08745F3 /* Pods_PIALibrary_PIALibrary_iOS.framework */; };
+		8221921C24CEBA3800C24F1C /* NMTRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921B24CEBA3800C24F1C /* NMTRules.swift */; };
+		8221921D24CEBA3800C24F1C /* NMTRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921B24CEBA3800C24F1C /* NMTRules.swift */; };
+		8221921F24CEBABA00C24F1C /* NMTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921E24CEBABA00C24F1C /* NMTType.swift */; };
+		8221922024CEBABA00C24F1C /* NMTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921E24CEBABA00C24F1C /* NMTType.swift */; };
+		8221922324CEC1E400C24F1C /* Invites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221922124CEC1E400C24F1C /* Invites.swift */; };
+		8221922424CEC1E400C24F1C /* Invites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221922124CEC1E400C24F1C /* Invites.swift */; };
+		8221922524CEC1E400C24F1C /* InvitesInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221922224CEC1E400C24F1C /* InvitesInformation.swift */; };
+		8221922624CEC1E400C24F1C /* InvitesInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221922224CEC1E400C24F1C /* InvitesInformation.swift */; };
+		8221922824CEC1ED00C24F1C /* GlossInvitesInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221922724CEC1ED00C24F1C /* GlossInvitesInformation.swift */; };
+		8221922924CEC1ED00C24F1C /* GlossInvitesInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221922724CEC1ED00C24F1C /* GlossInvitesInformation.swift */; };
 		822BC1D024BF20C90041BF9A /* UIControl+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BC1CF24BF20C90041BF9A /* UIControl+Action.swift */; };
 		84125E08213D7DFF001BCC19 /* PIAColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84125E07213D7DFF001BCC19 /* PIAColors.swift */; };
 		84125E09213D7E04001BCC19 /* PIAColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84125E07213D7DFF001BCC19 /* PIAColors.swift */; };
@@ -289,12 +299,6 @@
 		DDA184D122FC1F79003239CC /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA184D022FC1F79003239CC /* TermsAndConditionsViewController.swift */; };
 		DDA4A7BE21F5C31400A02ACD /* IKEv2Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA4A7BD21F5C31400A02ACD /* IKEv2Profile.swift */; };
 		DDA4A7BF21F5C31B00A02ACD /* IKEv2Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA4A7BD21F5C31400A02ACD /* IKEv2Profile.swift */; };
-		DDC0840D22EB06F400DA2701 /* Invites.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC0840C22EB06F400DA2701 /* Invites.swift */; };
-		DDC0840E22EB06F400DA2701 /* Invites.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC0840C22EB06F400DA2701 /* Invites.swift */; };
-		DDC0841022EB077400DA2701 /* InvitesInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC0840F22EB077400DA2701 /* InvitesInformation.swift */; };
-		DDC0841122EB077400DA2701 /* InvitesInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC0840F22EB077400DA2701 /* InvitesInformation.swift */; };
-		DDC0841322EB07FB00DA2701 /* GlossInvitesInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC0841222EB07FB00DA2701 /* GlossInvitesInformation.swift */; };
-		DDC0841422EB07FB00DA2701 /* GlossInvitesInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC0841222EB07FB00DA2701 /* GlossInvitesInformation.swift */; };
 		DDD824E32189969400151709 /* Preset.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E22189969400151709 /* Preset.swift */; };
 		DDD824E5218996CD00151709 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E4218996CD00151709 /* Pages.swift */; };
 		DDD824E72189C0E800151709 /* BrandableNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD824E62189C0E800151709 /* BrandableNavigationBar.swift */; };
@@ -545,6 +549,11 @@
 		24914A32A94CB67BF6938365 /* Pods-PIALibrary-PIALibrary-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibrary-iOS.release.xcconfig"; path = "Target Support Files/Pods-PIALibrary-PIALibrary-iOS/Pods-PIALibrary-PIALibrary-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		4B1675DD0A7CF588C08745F3 /* Pods_PIALibrary_PIALibrary_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibrary_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E0D54C02CE0B120AA1FD581 /* Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig"; path = "Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		8221921B24CEBA3800C24F1C /* NMTRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMTRules.swift; sourceTree = "<group>"; };
+		8221921E24CEBABA00C24F1C /* NMTType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMTType.swift; sourceTree = "<group>"; };
+		8221922124CEC1E400C24F1C /* Invites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invites.swift; sourceTree = "<group>"; };
+		8221922224CEC1E400C24F1C /* InvitesInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitesInformation.swift; sourceTree = "<group>"; };
+		8221922724CEC1ED00C24F1C /* GlossInvitesInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossInvitesInformation.swift; sourceTree = "<group>"; };
 		822BC1CF24BF20C90041BF9A /* UIControl+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Action.swift"; sourceTree = "<group>"; };
 		84125E07213D7DFF001BCC19 /* PIAColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAColors.swift; sourceTree = "<group>"; };
 		84125E0A213D7E0E001BCC19 /* PIAFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAFonts.swift; sourceTree = "<group>"; };
@@ -589,9 +598,6 @@
 		DD8C3E632327EF6000BAD18E /* IKEv2EncryptionAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IKEv2EncryptionAlgorithm.swift; sourceTree = "<group>"; };
 		DDA184D022FC1F79003239CC /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
 		DDA4A7BD21F5C31400A02ACD /* IKEv2Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IKEv2Profile.swift; sourceTree = "<group>"; };
-		DDC0840C22EB06F400DA2701 /* Invites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Invites.swift; path = "../../../../../../../../../System/Volumes/Data/Users/ueshiba/Projects/PIA/client-library-apple/PIALibrary/Sources/Core/WebServices/Invites.swift"; sourceTree = "<group>"; };
-		DDC0840F22EB077400DA2701 /* InvitesInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InvitesInformation.swift; path = "../../../../../../../../../System/Volumes/Data/Users/ueshiba/Projects/PIA/client-library-apple/PIALibrary/Sources/Core/WebServices/InvitesInformation.swift"; sourceTree = "<group>"; };
-		DDC0841222EB07FB00DA2701 /* GlossInvitesInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GlossInvitesInformation.swift; path = "../../../../../../../../../System/Volumes/Data/Users/ueshiba/Projects/PIA/client-library-apple/PIALibrary/Sources/Library/WebServices/GlossInvitesInformation.swift"; sourceTree = "<group>"; };
 		DDC812472176166500CB290C /* SwiftGen+ScenesStoryboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+ScenesStoryboards.swift"; sourceTree = "<group>"; };
 		DDC81249217617F900CB290C /* SwiftGen+SeguesStoryboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+SeguesStoryboards.swift"; sourceTree = "<group>"; };
 		DDD824E22189969400151709 /* Preset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preset.swift; sourceTree = "<group>"; };
@@ -750,6 +756,7 @@
 		0E3D13DB1F9E28B600434A48 /* WebServices */ = {
 			isa = PBXGroup;
 			children = (
+				8221922724CEC1ED00C24F1C /* GlossInvitesInformation.swift */,
 				0E392DA21FE3247E0002160D /* Endpoint.swift */,
 				0E3D13D21F9E270A00434A48 /* GlossAccountInfo.swift */,
 				0E392D8E1FE2FBBE0002160D /* GlossConnectivityStatus.swift */,
@@ -762,7 +769,6 @@
 				0E3D13D81F9E273300434A48 /* GlossSignup.swift */,
 				DD58F4BA21AEB99C00D043F7 /* GlossToken.swift */,
 				DD56E3F3225F5D22002EDFB2 /* GlossProduct.swift */,
-				DDC0841222EB07FB00DA2701 /* GlossInvitesInformation.swift */,
 				0EFB512D1F82D7C50033B81F /* PIAWebServices.swift */,
 				0E392D9F1FE323ED0002160D /* PIAWebServices+Ephemeral.swift */,
 				0E392DA81FE329AD0002160D /* PlatformVPNLog.swift */,
@@ -826,6 +832,8 @@
 		0EA7065C1F80F448001E4F88 /* WebServices */ = {
 			isa = PBXGroup;
 			children = (
+				8221922124CEC1E400C24F1C /* Invites.swift */,
+				8221922224CEC1E400C24F1C /* InvitesInformation.swift */,
 				0EE78AF71F818815002E4CDD /* AccountInfo.swift */,
 				0E392D8B1FE2F8780002160D /* ConnectivityStatus.swift */,
 				0EE78AF51F81880E002E4CDD /* Credentials.swift */,
@@ -840,8 +848,6 @@
 				DD76292721ECDFF80092DF50 /* Usage.swift */,
 				DD56E3F5225F5D77002EDFB2 /* Product.swift */,
 				DD6768E222FAB19D00B9FDD0 /* AppStoreInformation.swift */,
-				DDC0840F22EB077400DA2701 /* InvitesInformation.swift */,
-				DDC0840C22EB06F400DA2701 /* Invites.swift */,
 			);
 			path = WebServices;
 			sourceTree = "<group>";
@@ -990,6 +996,7 @@
 		0EE106901F82900B009514E9 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				8221921A24CEBA0800C24F1C /* NMT */,
 				DDFCFAB821E926750081F235 /* Util */,
 				DDFCFAA521E900650081F235 /* Tiles */,
 				0EA7065D1F80F448001E4F88 /* Account */,
@@ -1120,6 +1127,15 @@
 				0DF2CACA4F28EEB36C8B827C /* Pods_PIALibrary_PIALibraryTests_iOS.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8221921A24CEBA0800C24F1C /* NMT */ = {
+			isa = PBXGroup;
+			children = (
+				8221921B24CEBA3800C24F1C /* NMTRules.swift */,
+				8221921E24CEBABA00C24F1C /* NMTType.swift */,
+			);
+			path = NMT;
 			sourceTree = "<group>";
 		};
 		84577FB9213D8EB2006DEC3D /* Styles */ = {
@@ -1637,6 +1653,8 @@
 				84125E0C213D7E0E001BCC19 /* PIAFonts.swift in Sources */,
 				0E3D13DA1F9E273300434A48 /* GlossSignup.swift in Sources */,
 				0E392D961FE316860002160D /* DebugLog.swift in Sources */,
+				8221922624CEC1E400C24F1C /* InvitesInformation.swift in Sources */,
+				8221922424CEC1E400C24F1C /* Invites.swift in Sources */,
 				0E7BC6EB1F96B1040035C8B2 /* PIAWebServices.swift in Sources */,
 				0E245C9E1FECF0C20010DEF2 /* ClientAccess.swift in Sources */,
 				DD2683EA24617F0300C65DAA /* PingTask.swift in Sources */,
@@ -1661,8 +1679,8 @@
 				84125E09213D7E04001BCC19 /* PIAColors.swift in Sources */,
 				0E3D13D71F9E272B00434A48 /* GlossPayment.swift in Sources */,
 				0E2ADD491FE1595300BB170C /* IPSecProfile.swift in Sources */,
-				DDC0841422EB07FB00DA2701 /* GlossInvitesInformation.swift in Sources */,
 				0E7BC6F41F96B1120035C8B2 /* SecureStore.swift in Sources */,
+				8221922024CEBABA00C24F1C /* NMTType.swift in Sources */,
 				0EFEB4C3200778BC00F81029 /* NSData+Compression.m in Sources */,
 				0EFEB4C520077AC900F81029 /* PIATunnelProfile.swift in Sources */,
 				DDA4A7BF21F5C31B00A02ACD /* IKEv2Profile.swift in Sources */,
@@ -1672,8 +1690,8 @@
 				0E7BC6F21F96B1120035C8B2 /* UpdateAccountRequest.swift in Sources */,
 				0E53A83F1FE5A4C8000C2A18 /* Client+Daemons.swift in Sources */,
 				0EFDC1CE1FE36D45007C0B9B /* Restylable.swift in Sources */,
+				8221922924CEC1ED00C24F1C /* GlossInvitesInformation.swift in Sources */,
 				0E392DA41FE3247E0002160D /* Endpoint.swift in Sources */,
-				DDC0840E22EB06F400DA2701 /* Invites.swift in Sources */,
 				0EE7710A1F9D21020029A77B /* Payment.swift in Sources */,
 				0E7BC6ED1F96B1040035C8B2 /* UserDefaultsStore.swift in Sources */,
 				DDFCFAB221E925BB0081F235 /* AvailableTiles.swift in Sources */,
@@ -1696,7 +1714,6 @@
 				DDFCFAB421E925BB0081F235 /* TileableCell.swift in Sources */,
 				0E53A84E1FE5BB25000C2A18 /* VPNDaemon.swift in Sources */,
 				0EFEB4C420077AC900F81029 /* PIATunnelProvider+Profile.swift in Sources */,
-				DDC0841122EB077400DA2701 /* InvitesInformation.swift in Sources */,
 				DDFCFAB321E925BB0081F235 /* Tileable.swift in Sources */,
 				0E2ADCEA1FE0843000BB170C /* Macros+Pinger.swift in Sources */,
 				0E7BC6F71F96B1120035C8B2 /* WebServices.swift in Sources */,
@@ -1725,6 +1742,7 @@
 				0E392D8D1FE2F8780002160D /* ConnectivityStatus.swift in Sources */,
 				0E7BC6DF1F96B0F40035C8B2 /* Keychain.swift in Sources */,
 				0EA8072D20A1C7A30033EC1A /* RedeemRequest.swift in Sources */,
+				8221921D24CEBA3800C24F1C /* NMTRules.swift in Sources */,
 				0E9D62DE1FDEE45A009A90CF /* DefaultServerProvider.swift in Sources */,
 				DD8C3E652327EF6000BAD18E /* IKEv2EncryptionAlgorithm.swift in Sources */,
 				0EF14E4C1FEAE6350007485A /* Client+Providers.swift in Sources */,
@@ -1758,13 +1776,11 @@
 				0E53A84A1FE5BA52000C2A18 /* Daemon.swift in Sources */,
 				0E492C641FE5F949007F23DF /* MockServerProvider.swift in Sources */,
 				0E53A8471FE5BA0B000C2A18 /* ServersDaemon.swift in Sources */,
-				DDC0840D22EB06F400DA2701 /* Invites.swift in Sources */,
 				0EE78AF81F818815002E4CDD /* AccountInfo.swift in Sources */,
 				DD8C3E642327EF6000BAD18E /* IKEv2EncryptionAlgorithm.swift in Sources */,
 				DDFCFAAF21E925B60081F235 /* TileableCell.swift in Sources */,
 				DDFCFAB621E925F70081F235 /* EnumsBuilder.swift in Sources */,
 				0EFB512A1F82D45F0033B81F /* DefaultAccountProvider.swift in Sources */,
-				DDC0841022EB077400DA2701 /* InvitesInformation.swift in Sources */,
 				0E3D13D91F9E273300434A48 /* GlossSignup.swift in Sources */,
 				84577FBF213D8EE6006DEC3D /* ViewStyles.swift in Sources */,
 				0E0E5B0F1F8297C500022CD0 /* SecureStore.swift in Sources */,
@@ -1777,10 +1793,12 @@
 				DD58F4BB21AEB99C00D043F7 /* GlossToken.swift in Sources */,
 				DD1AB10323FAD83900396E74 /* WalkthroughPageView.swift in Sources */,
 				0E2215CF2008DFD900F5FB4D /* SwiftGen+Assets.swift in Sources */,
+				8221922524CEC1E400C24F1C /* InvitesInformation.swift in Sources */,
 				0EE78AF21F8187F8002E4CDD /* LoginRequest.swift in Sources */,
 				DDD824E72189C0E800151709 /* BrandableNavigationBar.swift in Sources */,
 				84125E08213D7DFF001BCC19 /* PIAColors.swift in Sources */,
 				DD2F4AD1248A6D4D00A2F6D8 /* LoginReceiptRequest.swift in Sources */,
+				8221922824CEC1ED00C24F1C /* GlossInvitesInformation.swift in Sources */,
 				0EE78AF01F818767002E4CDD /* ClientError.swift in Sources */,
 				0E0E5B151F829EC500022CD0 /* UpdateAccountRequest.swift in Sources */,
 				0E392D8F1FE2FBBE0002160D /* GlossConnectivityStatus.swift in Sources */,
@@ -1831,7 +1849,6 @@
 				DDF7F73F2405846800A671C7 /* PIAWGTunnelProvider+Profile.swift in Sources */,
 				0EE78AEE1F818720002E4CDD /* LibraryCallback.swift in Sources */,
 				0E53A8561FE5D770000C2A18 /* MockWebServices.swift in Sources */,
-				DDC0841322EB07FB00DA2701 /* GlossInvitesInformation.swift in Sources */,
 				DDA184D122FC1F79003239CC /* TermsAndConditionsViewController.swift in Sources */,
 				0E392D7D1FE2E4C10002160D /* MemoryStore.swift in Sources */,
 				0E9D62DD1FDEE45A009A90CF /* DefaultServerProvider.swift in Sources */,
@@ -1839,6 +1856,7 @@
 				0E2ADD311FE1468400BB170C /* VPNProvider.swift in Sources */,
 				0E1108951F77B6B600A92462 /* Keychain.swift in Sources */,
 				0EB8C0711F9CD38B005857E4 /* Theme.swift in Sources */,
+				8221921C24CEBA3800C24F1C /* NMTRules.swift in Sources */,
 				0E2ADCF01FE09C6C00BB170C /* ConnectivityDaemon.swift in Sources */,
 				0EAA38971F9CC7E4000149CF /* AppStoreProvider.swift in Sources */,
 				0EB8C0661F9CD38B005857E4 /* LoginViewController.swift in Sources */,
@@ -1883,6 +1901,7 @@
 				DD1AB10523FC280000396E74 /* DeviceModel.swift in Sources */,
 				0E392DBB1FE34B5A0002160D /* NSString+URL.m in Sources */,
 				0E2ADCCA1FE06D7A00BB170C /* Array+Math.swift in Sources */,
+				8221922324CEC1E400C24F1C /* Invites.swift in Sources */,
 				0E2ADD331FE1472F00BB170C /* VPNStatus.swift in Sources */,
 				0E0F95961FD560C40046DC64 /* CircleProgressView.swift in Sources */,
 				DD6DC5B921B6A83400F9D538 /* UIViewLoading.swift in Sources */,
@@ -1891,6 +1910,7 @@
 				0EA7065F1F80F448001E4F88 /* AccountProvider.swift in Sources */,
 				0E392D7A1FE2E47D0002160D /* TransientStore.swift in Sources */,
 				DD0DE85022366090002A6E82 /* GDPRViewController.swift in Sources */,
+				8221921F24CEBABA00C24F1C /* NMTType.swift in Sources */,
 				0EAA388C1F9CC4C4000149CF /* InAppProvider.swift in Sources */,
 				DDFCFAA821E924A70081F235 /* TileProvider.swift in Sources */,
 				0EB8C06D1F9CD38B005857E4 /* SignupInProgressViewController.swift in Sources */,
@@ -2269,7 +2289,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2.7.1;
+				MARKETING_VERSION = 2.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.privateinternetaccess.apple.PIALibrary;
 				PRODUCT_NAME = PIALibrary;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2297,7 +2317,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2.7.1;
+				MARKETING_VERSION = 2.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.privateinternetaccess.apple.PIALibrary;
 				PRODUCT_NAME = PIALibrary;
 				PROVISIONING_PROFILE_SPECIFIER = "";

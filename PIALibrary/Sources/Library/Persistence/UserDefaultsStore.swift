@@ -66,21 +66,25 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         static let authMigrationSuccess = "AuthenticationTokenMigrationSuccess"
 
-        static let shouldConnectForAllNetworks = "ShouldConnectForAllNetworks"
-
-        static let cachedNetworks = "CachedNetworks"
+        static let nmtMigrationSuccess = "NMTMigrationSuccess"
 
         static let trustedNetworks = "TrustedNetworks"
         
         static let serverNetwork = "ServerNetwork"
-
-        static let nmtRulesEnabled = "NMTRulesEnabled"
 
         static let ikeV2IntegrityAlgorithm = "IKEV2IntegrityAlgorithm"
         
         static let ikeV2EncryptionAlgorithm = "IKEV2EncryptionAlgorithm"
 
         static let signInWithAppleFakeEmail = "SignInWithAppleFakeEmail"
+
+        static let nmtRulesEnabled = "NMTRulesEnabled"
+
+        static let cachedNetworks = "CachedNetworks"
+
+        static let nmtTrustedNetworkRules = "NMTTrustedNetworkRules"
+
+        static let nmtGenericRules = "NMTGenericRules"
 
     }
     
@@ -378,30 +382,6 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
     
-    var useWiFiProtection: Bool? {
-        get {
-            guard let value = backend.object(forKey: Entries.useWiFiProtection) as? Bool else {
-                return nil
-            }
-            return value
-        }
-        set {
-            backend.set(newValue, forKey: Entries.useWiFiProtection)
-        }
-    }
-    
-    var trustCellularData: Bool? {
-        get {
-            guard let value = backend.object(forKey: Entries.trustCellularData) as? Bool else {
-                return nil
-            }
-            return value
-        }
-        set {
-            backend.set(newValue, forKey: Entries.trustCellularData)
-        }
-    }
-    
     var ikeV2IntegrityAlgorithm: String {
         get {
             guard let value = backend.object(forKey: Entries.ikeV2IntegrityAlgorithm) as? String else {
@@ -426,6 +406,18 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
 
+    var nmtMigrationSuccess: Bool? {
+        get {
+            guard let value = backend.object(forKey: Entries.nmtMigrationSuccess) as? Bool else {
+                return nil
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.nmtMigrationSuccess)
+        }
+    }
+
     var authMigrationSuccess: Bool? {
         get {
             guard let value = backend.object(forKey: Entries.authMigrationSuccess) as? Bool else {
@@ -435,18 +427,6 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
         set {
             backend.set(newValue, forKey: Entries.authMigrationSuccess)
-        }
-    }
-    
-    var shouldConnectForAllNetworks: Bool? {
-        get {
-            guard let value = backend.object(forKey: Entries.shouldConnectForAllNetworks) as? Bool else {
-                return nil
-            }
-            return value
-        }
-        set {
-            backend.set(newValue, forKey: Entries.shouldConnectForAllNetworks)
         }
     }
 
@@ -461,6 +441,52 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.mace)
         }
     }
+    
+    var signInWithAppleFakeEmail: String? {
+        get {
+            return backend.string(forKey: Entries.signInWithAppleFakeEmail)
+        }
+        set {
+            backend.set(newValue, forKey: Entries.signInWithAppleFakeEmail)
+        }
+    }
+
+    //MARK: Networks
+    var cachedNetworks: [String] {
+        get {
+            guard let value = backend.object(forKey: Entries.cachedNetworks) as? [String] else {
+                return []
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.cachedNetworks)
+        }
+    }
+
+    var nmtTrustedNetworkRules: [String: Int] {
+        get {
+            guard let value = backend.dictionary(forKey: Entries.nmtTrustedNetworkRules) as? [String: Int] else {
+                return [:]
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.nmtTrustedNetworkRules)
+        }
+    }
+
+    var nmtGenericRules: [String: Int] {
+        get {
+            guard let value = backend.dictionary(forKey: Entries.nmtGenericRules) as? [String: Int] else {
+                return [:]
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.nmtGenericRules)
+        }
+    }
 
     var nmtRulesEnabled: Bool? {
         get {
@@ -473,16 +499,46 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.nmtRulesEnabled)
         }
     }
-    
-    var signInWithAppleFakeEmail: String? {
+
+    ///Deprecated
+    var trustCellularData: Bool? {
         get {
-            return backend.string(forKey: Entries.signInWithAppleFakeEmail)
+            guard let value = backend.object(forKey: Entries.trustCellularData) as? Bool else {
+                return nil
+            }
+            return value
         }
         set {
-            backend.set(newValue, forKey: Entries.signInWithAppleFakeEmail)
+            backend.set(newValue, forKey: Entries.trustCellularData)
+        }
+    }
+
+    ///Deprecated
+    var useWiFiProtection: Bool? {
+        get {
+            guard let value = backend.object(forKey: Entries.useWiFiProtection) as? Bool else {
+                return nil
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.useWiFiProtection)
         }
     }
     
+    ///Deprecated
+    var trustedNetworks: [String] {
+        get {
+            guard let value = backend.object(forKey: Entries.trustedNetworks) as? [String] else {
+                return []
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.trustedNetworks)
+        }
+    }
+
     // MARK: Lifecycle
     
     func reset() {
@@ -494,11 +550,13 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.orderedTiles)
         backend.removeObject(forKey: Entries.historicalServers)
         backend.removeObject(forKey: Entries.cachedNetworks)
-        backend.removeObject(forKey: Entries.trustedNetworks)
+        backend.removeObject(forKey: Entries.nmtTrustedNetworkRules)
         backend.removeObject(forKey: Entries.nmtRulesEnabled)
-        backend.removeObject(forKey: Entries.shouldConnectForAllNetworks)
-        backend.removeObject(forKey: Entries.useWiFiProtection)
+        backend.removeObject(forKey: Entries.nmtGenericRules)
+        backend.removeObject(forKey: Entries.nmtMigrationSuccess)
         backend.removeObject(forKey: Entries.trustCellularData)
+        backend.removeObject(forKey: Entries.useWiFiProtection)
+        backend.removeObject(forKey: Entries.trustedNetworks)
         backend.removeObject(forKey: Entries.authMigrationSuccess)
         backend.removeObject(forKey: Entries.ikeV2IntegrityAlgorithm)
         backend.removeObject(forKey: Entries.ikeV2EncryptionAlgorithm)
@@ -514,31 +572,5 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
             // FIXME: clear standard defaults
         }
     }
-    
-    //MARK: Networks
-    var cachedNetworks: [String] {
-        get {
-            guard let value = backend.object(forKey: Entries.cachedNetworks) as? [String] else {
-                return []
-            }
-            return value
-        }
-        set {
-            backend.set(newValue, forKey: Entries.cachedNetworks)
-        }
-    }
-
-    //MARK: Networks
-    var trustedNetworks: [String] {
-        get {
-            guard let value = backend.object(forKey: Entries.trustedNetworks) as? [String] else {
-                return []
-            }
-            return value
-        }
-        set {
-            backend.set(newValue, forKey: Entries.trustedNetworks)
-        }
-    }
-
+        
 }

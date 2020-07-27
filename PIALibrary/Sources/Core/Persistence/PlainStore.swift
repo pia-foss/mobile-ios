@@ -69,13 +69,9 @@ protocol PlainStore: class {
     
     var isPersistentConnection: Bool? { get set }
 
-    var shouldConnectForAllNetworks: Bool? { get set }
-
-    var useWiFiProtection: Bool? { get set }
-
-    var trustCellularData: Bool? { get set }
-
     var authMigrationSuccess: Bool? { get set }
+
+    var nmtMigrationSuccess: Bool? { get set }
 
     var mace: Bool? { get set }
     
@@ -88,9 +84,11 @@ protocol PlainStore: class {
     // MARK: Networks
     var cachedNetworks: [String] { get set }
     
-    var trustedNetworks: [String] { get set }
-    
     var nmtRulesEnabled: Bool? { get set }
+    
+    var nmtGenericRules: [String: Int] {get set}
+
+    var nmtTrustedNetworkRules: [String: Int] {get set}
 
     //MARK: IKEv2
     var ikeV2IntegrityAlgorithm: String { get set }
@@ -99,5 +97,12 @@ protocol PlainStore: class {
 
     //MARK: Sign in with Apple
     var signInWithAppleFakeEmail: String? { get set }
+
+    //MARK: Deprecated
+    var useWiFiProtection: Bool? { get set }
+
+    var trustCellularData: Bool? { get set }
+
+    var trustedNetworks: [String] { get set }
 
 }
