@@ -144,6 +144,10 @@ class PIAWebServices: WebServices, ConfigurationAccess {
 
         req(nil, .post, endpoint, useAuthToken: true, nil, status, JSONRequestExecutor() { (json, status, error) in
             if let error = error {
+                if let status = status, status == 401 {
+                    callback?(true, nil)
+                    return
+                }
                 callback?(false, error)
                 return
             }
@@ -265,7 +269,6 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                 
                 callback?(bundle, nil)
                 
-                print("Valid response from server")
             }
 
         } else {
