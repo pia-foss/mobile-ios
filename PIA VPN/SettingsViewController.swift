@@ -260,6 +260,8 @@ class SettingsViewController: AutolayoutViewController {
 
     private var isContentBlockerEnabled = false
 
+    private var isResetting = false
+
     private var pendingPreferences: Client.Preferences.Editable!
     
     private var pendingOpenVPNSocketType: SocketType?
@@ -542,6 +544,8 @@ class SettingsViewController: AutolayoutViewController {
     
     private func doReset() {
 
+        isResetting = true
+        
         // only don't reset selected server
         let savedServer = pendingPreferences.preferredServer
         pendingPreferences.reset()
@@ -590,9 +594,16 @@ class SettingsViewController: AutolayoutViewController {
         pendingPreferences.shouldConnectForAllNetworks = Client.preferences.shouldConnectForAllNetworks
         pendingPreferences.useWiFiProtection = Client.preferences.useWiFiProtection
         pendingPreferences.trustCellularData = Client.preferences.trustCellularData
-
         pendingVPNAction = pendingPreferences.requiredVPNAction()
 
+        if pendingVPNAction == nil &&
+            Client.providers.vpnProvider.isVPNConnected &&
+            isResetting {
+            pendingVPNAction = pendingPreferences.defaultVPNAction()
+        }
+        
+        isResetting = false
+        
         guard let action = pendingVPNAction else {
             commitAppPreferences()
             completionHandler()
