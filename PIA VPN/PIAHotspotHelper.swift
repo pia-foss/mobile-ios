@@ -62,55 +62,55 @@ class PIAHotspotHelper {
      */
     public func configureHotspotHelper() -> Bool {
         
-        let options: [String: NSObject] = [kNEHotspotHelperOptionDisplayName : self.hotspotHelperMessage() as NSObject]
-        let queue: DispatchQueue = DispatchQueue(label: "com.privateinternetaccess.hotspot", attributes: DispatchQueue.Attributes.concurrent)
-        NEHotspotHelper.supportedNetworkInterfaces()
+        var options: [String: NSObject] = [:]
         if Client.preferences.nmtRulesEnabled {
-            return NEHotspotHelper.register(options: options,
-                                            queue: queue) { [weak self] (cmd: NEHotspotHelperCommand) in
-                                                
-                                                if let weakSelf = self {
-                                                    if cmd.commandType == .filterScanList {
-                                                        log.info("filtering ssid list")
-                                                        var availableList: [String] = []
-                                                        var unsecuredList: [NEHotspotNetwork] = []
-                                                        for element in cmd.networkList! {
-                                                            if !element.ssid.isEmpty,
-                                                                !availableList.contains(element.ssid) {
-                                                                availableList.append(element.ssid)
-                                                            }
-                                                            if !element.isSecure {
-                                                                element.setConfidence(.high)
-                                                                unsecuredList.append(element)
-                                                            }
+            options = [kNEHotspotHelperOptionDisplayName : self.hotspotHelperMessage() as NSObject]
+        }
+        NEHotspotHelper.supportedNetworkInterfaces()
+        return NEHotspotHelper.register(options: options,
+                                        queue: DispatchQueue.main) { [weak self] (cmd: NEHotspotHelperCommand) in
+                                            
+                                            if let weakSelf = self {
+                                                if cmd.commandType == .filterScanList {
+                                                    log.info("filtering ssid list")
+                                                    var availableList: [String] = []
+                                                    var unsecuredList: [NEHotspotNetwork] = []
+                                                    for element in cmd.networkList! {
+                                                        if !element.ssid.isEmpty,
+                                                            !availableList.contains(element.ssid) {
+                                                            availableList.append(element.ssid)
                                                         }
-                                                        weakSelf.saveCurrentNetworkList(availableNetworks: availableList)
-                                                        let response = cmd.createResponse(NEHotspotHelperResult.success)
-                                                        if !Client.providers.vpnProvider.isVPNConnected {
-                                                            response.setNetworkList(unsecuredList)
-                                                            log.info("present PIA message for unprotected networks")
+                                                        if !element.isSecure {
+                                                            element.setConfidence(.high)
+                                                            unsecuredList.append(element)
                                                         }
-                                                        response.deliver()
-                                                    } else {
-                                                        if cmd.commandType == .evaluate {
-                                                            if let currentNetwork = cmd.network {
-                                                                if !currentNetwork.isSecure { // Open WiFi
+                                                    }
+                                                    weakSelf.saveCurrentNetworkList(availableNetworks: availableList)
+                                                    let response = cmd.createResponse(NEHotspotHelperResult.success)
+                                                    if !Client.providers.vpnProvider.isVPNConnected {
+                                                        response.setNetworkList(unsecuredList)
+                                                        log.info("present PIA message for unprotected networks")
+                                                    }
+                                                    response.deliver()
+                                                } else if cmd.commandType == .evaluate {
+                                                        if let currentNetwork = cmd.network {
+                                                            if !currentNetwork.isSecure { // Open WiFi
+                                                                log.info("Evaluate")
 
-                                                                    let preferences = Client.preferences.editable()
-                                                                    preferences.nmtTemporaryOpenNetworks = [currentNetwork.ssid]
-                                                                    preferences.commit()
+                                                                let preferences = Client.preferences.editable()
+                                                                preferences.nmtTemporaryOpenNetworks = [currentNetwork.ssid]
+                                                                preferences.commit()
+                                                                if Client.providers.vpnProvider.isVPNConnected {
                                                                     Client.providers.vpnProvider.reconnect(after: 0, forceDisconnect: true, nil)
-                                                                    
+                                                                } else {
+                                                                    Client.providers.vpnProvider.connect(nil)
                                                                 }
+                                                                
                                                             }
                                                         }
                                                     }
-                                                    
-                                                }
-                                                
-            }
-        } else {
-            return false
+                                            } 
+                                            
         }
         
     }
