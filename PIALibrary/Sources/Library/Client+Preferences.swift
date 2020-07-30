@@ -489,6 +489,10 @@ extension Client.Preferences {
             return queue.max { $0.priority < $1.priority }
         }
         
+        public func defaultVPNAction() -> VPNAction? {
+            return VPNActionDisconnectAndReinstall()
+        }
+        
         private func isPreferredServer(equalTo server: Server?) -> Bool {
             guard let preferredServer = preferredServer else {
                 return (server == nil)
