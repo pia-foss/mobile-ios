@@ -17,12 +17,23 @@ class PIACardsViewController: UIViewController {
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var scrollView: UIScrollView!
 
+    // MARK: Orientation
+    @objc func onlyPortrait() -> Void {}
+
+    override public var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.clear
         view.isOpaque = false
-        scrollView.delegate = self
         setupSlides()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
     }
     
     private func setupSlides() {
@@ -83,6 +94,11 @@ class PIACardsViewController: UIViewController {
     }
     
     func setupSlideScrollView(slides : [PIACard]) {
+        
+        guard let view = view else {
+            return
+        }
+        
         scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(slides.count), height: view.frame.height)
         scrollView.isPagingEnabled = true
@@ -102,37 +118,6 @@ class PIACardsViewController: UIViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         setupSlideScrollView(slides: slides)
-    }
-
-}
-
-extension PIACardsViewController: UIScrollViewDelegate {
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
-        let pageIndex = round(scrollView.contentOffset.x/view.frame.width)
-        pageControl.currentPage = Int(pageIndex)
-       
-        let maximumHorizontalOffset: CGFloat = scrollView.contentSize.width - scrollView.frame.width
-        let currentHorizontalOffset: CGFloat = scrollView.contentOffset.x
-       
-        // vertical
-        let maximumVerticalOffset: CGFloat = scrollView.contentSize.height - scrollView.frame.height
-        let currentVerticalOffset: CGFloat = scrollView.contentOffset.y
-       
-        let percentageHorizontalOffset: CGFloat = currentHorizontalOffset / maximumHorizontalOffset
-        let percentageVerticalOffset: CGFloat = currentVerticalOffset / maximumVerticalOffset
-
-        let percentOffset: CGPoint = CGPoint(x: percentageHorizontalOffset, y: percentageVerticalOffset)
-        let scale = CGFloat(1 / cards.count)
-        
-        if(percentOffset.x > 0 && percentOffset.x <= scale) {
-           
-            slides[0].cardBgImageView.transform = CGAffineTransform(scaleX: (scale-percentOffset.x)/scale, y: (scale-percentOffset.x)/scale)
-            slides[1].cardBgImageView.transform = CGAffineTransform(scaleX: percentOffset.x/scale, y: percentOffset.x/scale)
-           
-        }
-
     }
 
 }

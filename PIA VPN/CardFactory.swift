@@ -71,6 +71,12 @@ struct CardFactory {
     ]
     
     private static func activateWireGuard() {
+        
+        if Client.preferences.vpnType == PIAWGTunnelProfile.vpnType,
+            Client.providers.vpnProvider.isVPNConnected {
+            return
+        }
+        
         let preferences = Client.preferences.editable()
         guard let currentWireguardVPNConfiguration = preferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ??
             Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
