@@ -162,6 +162,9 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
         return webServices.flagURL(for: server.country.lowercased())
     }
 
+    func resetCurrentServers() {
+        currentServers = []
+    }
     // MARK: WebServicesConsumer
 
     var webServices: WebServices {

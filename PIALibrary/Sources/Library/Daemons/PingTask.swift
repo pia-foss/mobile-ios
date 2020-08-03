@@ -57,28 +57,25 @@ class PingTask {
         if Client.configuration.serverNetwork == .gen4 {
             log.debug("Starting to Ping \(server.identifier) with address: \(address.hostname)")
             
-            self.icmpPinger = ICMPPing(ip: address.hostname, completionBlock: { duration in
-                DispatchQueue.main.async { [weak self] in
-                    
-                    guard let address = self?.address, let server = self?.server else {
-                        return
-                    }
+            queue.async() { [weak self] in
 
-                    if Client.configuration.serverNetwork == .gen4 {
-                        response = duration
-                        self?.parsePingResponse(response: response, withServer: server)
-                        if let responseTime = response {
-                            server.updateResponseTime(responseTime, forAddress: address)
-                            persistence.setPing(responseTime, forServerIdentifier: server.identifier)
-                        }
+                guard let address = self?.address, let server = self?.server else {
+                    return
+                }
+                
+                let tcpAddress = Server.Address(hostname: address.hostname, port: 443)
+                response = server.ping(toAddress: tcpAddress, withProtocol: .TCP)
+                DispatchQueue.main.async {
+                    self?.parsePingResponse(response: response, withServer: server)
+                    if let responseTime = response {
+                        server.updateResponseTime(responseTime, forAddress: address)
+                        persistence.setPing(responseTime, forServerIdentifier: server.identifier)
                     }
-                    //Discard result if the server network changed waiting to the response
                     self?.state = .completed
                 }
-            })
-            
-            self.icmpPinger.start()
 
+            }
+            
         } else {
             
             queue.async() { [weak self] in
