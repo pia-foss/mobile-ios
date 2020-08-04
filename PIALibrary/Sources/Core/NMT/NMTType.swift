@@ -28,4 +28,17 @@ public enum NMTType: String, EnumsBuilder {
     case cellular
     case trustedNetwork
     
+    public func order() -> Int {
+        switch self {
+        case .protectedWiFi:
+            return 0
+        case .openWiFi:
+            return 1
+        case .trustedNetwork:
+            return 2
+        default:
+            return 3
+        }
+    }
+    
 }

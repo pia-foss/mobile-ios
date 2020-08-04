@@ -129,5 +129,21 @@ public extension UIColor {
     public class var piaTransparentGrey: UIColor {
         return UIColor(red: 147.0 / 255.0, green: 155.0 / 255.0, blue: 163.0 / 255.0, alpha: 0.13)
     }
+    
+    public class var piaNMTGreen: UIColor {
+        return UIColor(red: 60.0 / 255.0, green: 182.0 / 255.0, blue: 74.0 / 255.0, alpha: 1.0)
+    }
+    
+    public class var piaNMTRed: UIColor {
+        return UIColor(red: 214.0 / 255.0, green: 64.0 / 255.0, blue: 3.0 / 255.0, alpha: 1.0)
+    }
+    
+    public class var piaNMTBlue: UIColor {
+        return UIColor(red: 29.0 / 255.0, green: 174.0 / 255.0, blue: 174.0 / 255.0, alpha: 1.0)
+    }
+
+    public class var piaNMTGrey: UIColor {
+        return UIColor(red: 246.0 / 255.0, green: 246.0 / 255.0, blue: 246.0 / 255.0, alpha: 1.0)
+    }
 
 }
