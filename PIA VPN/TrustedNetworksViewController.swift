@@ -23,59 +23,53 @@
 import UIKit
 import PIALibrary
 
+struct Rule {
+    var type: NMTType
+    var rule: NMTRules
+}
+
 class TrustedNetworksViewController: AutolayoutViewController {
 
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var collectionView: UICollectionView!
+
+    private var data = [Rule]()
+    
     private var availableNetworks: [String] = []
     private var trustedNetworks: [String] = []
     private let currentNetwork: String? = nil
     private var hotspotHelper: PIAHotspotHelper!
-    private lazy var switchWiFiProtection = UISwitch()
-    private lazy var switchAutoJoinAllNetworks = UISwitch()
-    private lazy var switchCellularData = UISwitch()
-    private lazy var switchRules = UISwitch()
-    private lazy var switchAskForDisconnect = UISwitch()
     var shouldReconnectAutomatically = false
     var hasUpdatedPreferences = false
     var persistentConnectionValue = false
     var vpnType = ""
-
-    private let numberOfVisibleSections = 4
-    
-    private enum Sections: Int, EnumsBuilder {
-        
-        case rules = 0
-        case optOutAlerts
-        case cellularData
-        case useVpnWifiProtection
-        case autoConnectAllNetworksSettings
-        case current
-        case available
-        case trusted
-    }
     
     private struct Cells {
-        static let network = "NetworkCell"
+        static let network = "NetworkCollectionViewCell"
+        static let header = "NetworkHeaderCollectionViewCell"
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = L10n.Settings.Hotspothelper.title
+        
+        let genericRules = Client.preferences.nmtGenericRules
+        for rule in genericRules {
+            if let type = NMTType(rawValue: rule.key), let rule = NMTRules(rawValue: rule.value) {
+                data.append(Rule(type: type, rule: rule))
+            }
+        }
+        data = data.sorted(by: { $0.type.order() < $1.type.order() })
+
         self.hotspotHelper = PIAHotspotHelper(withDelegate: self)
-        self.switchAutoJoinAllNetworks.addTarget(self, action: #selector(toggleAutoconnectWithAllNetworks(_:)), for: .valueChanged)
-        self.switchWiFiProtection.addTarget(self, action: #selector(toggleUseWiFiProtection(_:)), for: .valueChanged)
-        self.switchCellularData.addTarget(self, action: #selector(toggleCellularData(_:)), for: .valueChanged)
-        self.switchRules.addTarget(self, action: #selector(toggleRules(_:)), for: .valueChanged)
-        self.switchAskForDisconnect.addTarget(self, action: #selector(toggleAskForDisconnect(_:)), for: .valueChanged)
 
         NotificationCenter.default.addObserver(self, selector: #selector(filterAvailableNetworks), name: UIApplication.didBecomeActiveNotification, object: nil)
 
-        configureTableView()
+        configureCollectionView()
         
         if !persistentConnectionValue,
             Client.preferences.nmtRulesEnabled {
             presentKillSwitchAlert()
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,57 +96,14 @@ class TrustedNetworksViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         
-        styleNavigationBarWithTitle(L10n.Settings.Hotspothelper.title)
+        styleNavigationBarWithTitle("")
 
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(viewContainer)
         }
-        Theme.current.applyPrincipalBackground(tableView)
-        Theme.current.applyDividerToSeparator(tableView)
-    }
-    
-    @objc private func toggleAutoconnectWithAllNetworks(_ sender: UISwitch) {
-        let preferences = Client.preferences.editable()
-        preferences.commit()
-        hasUpdatedPreferences = true
-    }
-    
-    @objc private func toggleUseWiFiProtection(_ sender: UISwitch) {
-        let preferences = Client.preferences.editable()
-        preferences.useWiFiProtection = sender.isOn
-        preferences.commit()
-        hasUpdatedPreferences = true
-        filterAvailableNetworks()
-        if sender.isOn, //If toggle is ON
-            let ssid = UIDevice.current.WiFiSSID, //And we are connected to the WiFi
-            Client.providers.vpnProvider.vpnStatus == .disconnected, //And we are disconnected
-            !Client.preferences.trustedNetworks.contains(ssid) { // And the network is not one of the trustedNetworks
-            requestPermissionToConnectVPN() // Show alert to connect the VPN
-        }
-    }
+        Theme.current.applyPrincipalBackground(collectionView)
+        self.collectionView.reloadData()
 
-    @objc private func toggleCellularData(_ sender: UISwitch) {
-        let preferences = Client.preferences.editable()
-        preferences.trustCellularData = !sender.isOn
-        preferences.commit()
-        hasUpdatedPreferences = true
-    }
-    
-    @objc private func toggleRules(_ sender: UISwitch) {
-        if !persistentConnectionValue,
-            sender.isOn {
-            presentKillSwitchAlert()
-        }
-        let preferences = Client.preferences.editable()
-        preferences.nmtRulesEnabled = sender.isOn
-        preferences.commit()
-        hasUpdatedPreferences = true
-        tableView.reloadData()
-    }
-
-    @objc private func toggleAskForDisconnect(_ sender: UISwitch) {
-        AppPreferences.shared.optOutAskDisconnectVPNUsingNMT = sender.isOn
-        tableView.reloadData()
     }
     
     // MARK: Private Methods
@@ -170,11 +121,17 @@ class TrustedNetworksViewController: AutolayoutViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    private func configureTableView() {
-        if #available(iOS 11, *) {
-            tableView.sectionFooterHeight = UITableView.automaticDimension
-            tableView.estimatedSectionFooterHeight = 1.0
-        }
+    private func configureCollectionView() {
+
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(UINib(nibName: Cells.network,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.network)
+        collectionView.register(UINib(nibName: Cells.header, bundle: nil),
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier:Cells.header)
+        collectionView.delegate = self
+        collectionView.dataSource = self
         filterAvailableNetworks()
     }
     
@@ -182,223 +139,63 @@ class TrustedNetworksViewController: AutolayoutViewController {
         self.availableNetworks = Client.preferences.availableNetworks
         self.trustedNetworks = Client.preferences.trustedNetworks
         self.availableNetworks = self.availableNetworks.filter { !self.trustedNetworks.contains($0) }
-        self.tableView.reloadData()
+        self.collectionView.reloadData()
     }
-    
-    private func requestPermissionToConnectVPN() {
-        let alert = Macros.alert(L10n.Settings.Hotspothelper.title,
-                                 L10n.Settings.Trusted.Networks.Connect.message)
-        alert.addCancelAction(L10n.Global.close)
-        alert.addActionWithTitle(L10n.Global.ok) {
-            Macros.dispatch(after: .milliseconds(200)) {
-                Client.providers.vpnProvider.connect(nil)
-            }
-        }
-        present(alert, animated: true, completion: nil)
-    }
-    
+        
 }
 
-extension TrustedNetworksViewController: UITableViewDelegate, UITableViewDataSource {
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        if Client.preferences.nmtRulesEnabled {
-            return Client.preferences.useWiFiProtection ?
-                Sections.countCases() : numberOfVisibleSections
+extension TrustedNetworksViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if Macros.isDevicePad {
+            let size =  collectionView.frame.width/6
+            return CGSize(width: size, height: size)
         } else {
-            return 1
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch Sections.objectIdentifyBy(index: section) {
-        case .useVpnWifiProtection:
-            return L10n.Settings.Hotspothelper.Wifi.networks.uppercased()
-        case .current:
-            return L10n.Settings.Trusted.Networks.Sections.current.uppercased()
-        case .available:
-            return L10n.Settings.Trusted.Networks.Sections.available.uppercased()
-        case .trusted:
-            return L10n.Settings.Trusted.Networks.Sections.trusted.uppercased()
-        case .cellularData:
-            return L10n.Settings.Hotspothelper.Cellular.networks.uppercased()
-        case .rules:
-            return L10n.Settings.Hotspothelper.title.uppercased()
-        default:
-            return nil
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        switch Sections.objectIdentifyBy(index: section) {
-        case .useVpnWifiProtection:
-            return L10n.Settings.Hotspothelper.Enable.description
-        case .trusted:
-            return L10n.Settings.Trusted.Networks.message
-        case .autoConnectAllNetworksSettings:
-            return L10n.Settings.Hotspothelper.All.description
-        case .cellularData:
-            return L10n.Settings.Hotspothelper.Cellular.description
-        case .available:
-            return availableNetworks.isEmpty ?
-                L10n.Settings.Hotspothelper.Available.help :
-                L10n.Settings.Hotspothelper.Available.Add.help
-        case .rules:
-            var message = L10n.Settings.Trusted.Networks.Sections.Trusted.Rule.description
-            if self.vpnType == PIAWGTunnelProfile.vpnType {
-                message += "\n\n"+L10n.Settings.Nmt.Wireguard.warning
+            if !isLandscape {
+                let size =  ((collectionView.frame.width/2) - 28)
+                return CGSize(width: size, height: size)
+            } else {
+                let size =  collectionView.frame.width/4
+                return CGSize(width: size, height: size)
             }
-            return message
-        case .optOutAlerts:
-            return L10n.Settings.Nmt.Optout.Disconnect.Alerts.description
-        default:
-            return nil
         }
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch Sections.objectIdentifyBy(index: section) {
-        case .current:
-            return hotspotHelper.currentWiFiNetwork() != nil ? 1 : 0
-        case .available:
-            return availableNetworks.count
-        case .trusted:
-            return trustedNetworks.count
-        default:
-            return 1
-        }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return data.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Cells.network, for: indexPath)
-        cell.selectionStyle = .default
-        cell.accessoryType = .none
-        cell.accessoryView = nil
-        cell.isUserInteractionEnabled = true
-        cell.imageView?.image = Asset.iconWifi.image.withRenderingMode(.alwaysTemplate)
-        cell.imageView?.tintColor = Theme.current.palette.textColor(forRelevance: 3, appearance: .dark)
-
-        switch Sections.objectIdentifyBy(index: indexPath.section) {
-        case .rules:
-            cell.imageView?.image = nil
-            cell.textLabel?.text = L10n.Global.enabled
-            cell.accessoryView = switchRules
-            cell.selectionStyle = .none
-            switchRules.isOn = Client.preferences.nmtRulesEnabled
-        case .optOutAlerts:
-            cell.imageView?.image = nil
-            cell.textLabel?.text = L10n.Settings.Nmt.Optout.Disconnect.alerts
-            cell.accessoryView = switchAskForDisconnect
-            cell.selectionStyle = .none
-            switchAskForDisconnect.isOn = AppPreferences.shared.optOutAskDisconnectVPNUsingNMT
-        case .current:
-            cell.accessibilityTraits = UIAccessibilityTraits.button
-            if let ssid = hotspotHelper.currentWiFiNetwork() {
-                if trustedNetworks.contains(ssid) {
-                    cell.isUserInteractionEnabled = false
-                } else {
-                    cell.accessoryView = UIImageView(image: Asset.iconAdd.image)
-                    cell.accessibilityLabel = L10n.Global.add + " " + ssid
-                }
-                cell.textLabel?.text = ssid
-            }
-        case .available:
-            cell.accessibilityTraits = UIAccessibilityTraits.button
-            cell.accessoryView = UIImageView(image: Asset.iconAdd.image)
-            cell.textLabel?.text = availableNetworks[indexPath.row]
-            cell.accessibilityLabel = L10n.Global.add + " " + availableNetworks[indexPath.row]
-        case .trusted:
-            cell.accessibilityTraits = UIAccessibilityTraits.button
-            cell.accessoryView = UIImageView(image: Asset.iconRemove.image)
-            cell.textLabel?.text = trustedNetworks[indexPath.row]
-            cell.accessibilityLabel = L10n.Global.remove + " " + trustedNetworks[indexPath.row]
-        case .autoConnectAllNetworksSettings:
-            cell.imageView?.image = nil
-            cell.textLabel?.text = L10n.Settings.Hotspothelper.All.title
-            cell.accessoryView = switchAutoJoinAllNetworks
-            cell.selectionStyle = .none
-        case .useVpnWifiProtection:
-            cell.imageView?.image = nil
-            cell.textLabel?.text = L10n.Settings.Hotspothelper.Wifi.Trust.title
-            cell.accessoryView = switchWiFiProtection
-            cell.selectionStyle = .none
-            switchWiFiProtection.isOn = Client.preferences.useWiFiProtection
-        case .cellularData:
-            cell.imageView?.image = nil
-            cell.textLabel?.text = L10n.Settings.Hotspothelper.Cellular.title
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchCellularData
-            cell.selectionStyle = .none
-            switchCellularData.isOn = !Client.preferences.trustCellularData
-
-        }
-
-        cell.textLabel?.backgroundColor = .clear
-        Theme.current.applySecondaryBackground(cell)
-        Theme.current.applyDetailTableCell(cell)
-        if let textLabel = cell.textLabel {
-            Theme.current.applySettingsCellTitle(textLabel,
-                                                 appearance: .dark)
-            textLabel.backgroundColor = .clear
-        }
-
-        let backgroundView = UIView()
-        Theme.current.applyPrincipalBackground(backgroundView)
-        cell.selectedBackgroundView = backgroundView
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.network, for: indexPath) as! NetworkCollectionViewCell
+        cell.data = self.data[indexPath.item]
+        cell.viewShouldRestyle()
 
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        switch Sections.objectIdentifyBy(index: indexPath.section) {
-        case .current:
-            if let ssid = hotspotHelper.currentWiFiNetwork() {
-                hotspotHelper.saveTrustedNetwork(ssid)
-                hasUpdatedPreferences = true
-            }
-        case .available:
-            let ssid = availableNetworks[indexPath.row]
-            hotspotHelper.saveTrustedNetwork(ssid)
-            hasUpdatedPreferences = true
-        case .trusted:
-            let ssid = trustedNetworks[indexPath.row]
-            hotspotHelper.removeTrustedNetwork(ssid)
-            hasUpdatedPreferences = true
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Cells.header, for: indexPath) as! NetworkHeaderCollectionViewCell
+            headerView.setup(withTitle: "Manage automation", andSubtitle: "Configure how PIA behave on connection to WiFi or Cellular networks. This excludes disconnecting manually.")
+            return headerView
+
         default:
-            break
+            assert(false, "Unexpected element kind")
         }
-        filterAvailableNetworks()
+
     }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        switch Sections.objectIdentifyBy(index: indexPath.section) {
-        case .trusted:
-            return true
-        default:
-            return false
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let ssid = trustedNetworks[indexPath.row]
-            hotspotHelper.removeTrustedNetwork(ssid)
-            hasUpdatedPreferences = true
-            filterAvailableNetworks()
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-        return L10n.Global.clear
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        Theme.current.applyTableSectionHeader(view)
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        Theme.current.applyTableSectionFooter(view)
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+
+        let indexPath = IndexPath(row: 0, section: section)
+        let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as! NetworkHeaderCollectionViewCell
+
+        return headerView.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height),
+                                                  withHorizontalFittingPriority: .defaultHigh,
+                                                  verticalFittingPriority: .fittingSizeLevel) 
+
     }
 
 }
@@ -408,7 +205,7 @@ extension TrustedNetworksViewController: PIAHotspotHelperDelegate{
     func refreshAvailableNetworks(_ networks: [String]?) {
         if let networks = networks {
             self.availableNetworks = networks
-            self.tableView.reloadData()
+            self.collectionView.reloadData()
         }
     }
     

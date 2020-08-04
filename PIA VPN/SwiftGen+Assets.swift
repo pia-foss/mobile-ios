@@ -91,6 +91,27 @@ enum Asset {
       static let untrustedDarkIcon = ImageAsset(name: "untrusted-dark-icon")
       static let untrustedLightIcon = ImageAsset(name: "untrusted-light-icon")
     }
+    enum Nmt {
+      static let iconAddRule = ImageAsset(name: "icon-add-rule")
+      static let iconCustomWifiConnect = ImageAsset(name: "icon-custom-wifi-connect")
+      static let iconCustomWifiDisconnect = ImageAsset(name: "icon-custom-wifi-disconnect")
+      static let iconCustomWifiRetain = ImageAsset(name: "icon-custom-wifi-retain")
+      static let iconDisconnect = ImageAsset(name: "icon-disconnect")
+      static let iconMobileDataConnect = ImageAsset(name: "icon-mobile-data-connect")
+      static let iconMobileDataDisconnect = ImageAsset(name: "icon-mobile-data-disconnect")
+      static let iconMobileDataRetain = ImageAsset(name: "icon-mobile-data-retain")
+      static let iconNmtConnect = ImageAsset(name: "icon-nmt-connect")
+      static let iconNmtWifi = ImageAsset(name: "icon-nmt-wifi")
+      static let iconOpenWifiConnect = ImageAsset(name: "icon-open-wifi-connect")
+      static let iconOpenWifiDisconnect = ImageAsset(name: "icon-open-wifi-disconnect")
+      static let iconOpenWifiRetain = ImageAsset(name: "icon-open-wifi-retain")
+      static let iconOptions = ImageAsset(name: "icon-options")
+      static let iconRetain = ImageAsset(name: "icon-retain")
+      static let iconSecureWifiConnect = ImageAsset(name: "icon-secure-wifi-connect")
+      static let iconSecureWifiDisconnect = ImageAsset(name: "icon-secure-wifi-disconnect")
+      static let iconSecureWifiRetain = ImageAsset(name: "icon-secure-wifi-retain")
+      static let iconSelect = ImageAsset(name: "icon-select")
+    }
     enum Regions {
       static let noResultsDark = ImageAsset(name: "no-results-dark")
       static let noResultsLight = ImageAsset(name: "no-results-light")
@@ -447,6 +468,25 @@ enum Asset {
     Piax.Global.trustedLightIcon,
     Piax.Global.untrustedDarkIcon,
     Piax.Global.untrustedLightIcon,
+    Piax.Nmt.iconAddRule,
+    Piax.Nmt.iconCustomWifiConnect,
+    Piax.Nmt.iconCustomWifiDisconnect,
+    Piax.Nmt.iconCustomWifiRetain,
+    Piax.Nmt.iconDisconnect,
+    Piax.Nmt.iconMobileDataConnect,
+    Piax.Nmt.iconMobileDataDisconnect,
+    Piax.Nmt.iconMobileDataRetain,
+    Piax.Nmt.iconNmtConnect,
+    Piax.Nmt.iconNmtWifi,
+    Piax.Nmt.iconOpenWifiConnect,
+    Piax.Nmt.iconOpenWifiDisconnect,
+    Piax.Nmt.iconOpenWifiRetain,
+    Piax.Nmt.iconOptions,
+    Piax.Nmt.iconRetain,
+    Piax.Nmt.iconSecureWifiConnect,
+    Piax.Nmt.iconSecureWifiDisconnect,
+    Piax.Nmt.iconSecureWifiRetain,
+    Piax.Nmt.iconSelect,
     Piax.Regions.noResultsDark,
     Piax.Regions.noResultsLight,
     Piax.Splash.splash,

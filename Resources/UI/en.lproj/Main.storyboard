@@ -1429,40 +1429,24 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p4O-Dy-PbF">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Si7-46-a7E">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Naa-ek-220">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NetworkCell" textLabel="vC0-u3-5dy" style="IBUITableViewCellStyleDefault" id="GOa-SC-nuT">
-                                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43.666667938232422"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GOa-SC-nuT" id="BWR-u5-7Aw">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vC0-u3-5dy">
-                                                            <rect key="frame" x="15" y="0.0" width="345" height="43.666667938232422"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </tableViewCellContentView>
-                                            </tableViewCell>
-                                        </prototypes>
-                                        <connections>
-                                            <outlet property="dataSource" destination="jy7-91-daJ" id="yxe-us-f0l"/>
-                                            <outlet property="delegate" destination="jy7-91-daJ" id="pjH-8P-kpT"/>
-                                        </connections>
-                                    </tableView>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="19" minimumInteritemSpacing="10" sectionInsetReference="safeArea" id="Ye6-gU-Jhi">
+                                            <size key="itemSize" width="128" height="128"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="19" minY="5" maxX="19" maxY="5"/>
+                                        </collectionViewFlowLayout>
+                                        <cells/>
+                                    </collectionView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="Si7-46-a7E" firstAttribute="leading" secondItem="p4O-Dy-PbF" secondAttribute="leading" id="0o4-In-hhO"/>
-                                    <constraint firstItem="Si7-46-a7E" firstAttribute="top" secondItem="p4O-Dy-PbF" secondAttribute="top" id="10u-Ou-k77"/>
-                                    <constraint firstAttribute="bottom" secondItem="Si7-46-a7E" secondAttribute="bottom" id="ZnL-aS-UmJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="Si7-46-a7E" secondAttribute="trailing" id="bSP-ny-gL3"/>
+                                    <constraint firstAttribute="bottom" secondItem="Naa-ek-220" secondAttribute="bottom" id="Noz-OS-dda"/>
+                                    <constraint firstAttribute="trailing" secondItem="Naa-ek-220" secondAttribute="trailing" id="XBk-8c-djd"/>
+                                    <constraint firstItem="Naa-ek-220" firstAttribute="leading" secondItem="p4O-Dy-PbF" secondAttribute="leading" id="ZGY-V2-eUZ"/>
+                                    <constraint firstItem="Naa-ek-220" firstAttribute="top" secondItem="p4O-Dy-PbF" secondAttribute="top" id="lZR-Eu-FE5"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1476,7 +1460,7 @@
                         <viewLayoutGuide key="safeArea" id="3vR-8b-fBR"/>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="Si7-46-a7E" id="xk9-1a-OcZ"/>
+                        <outlet property="collectionView" destination="Naa-ek-220" id="4KX-lN-2Ai"/>
                         <outlet property="viewContainer" destination="p4O-Dy-PbF" id="Aw9-9G-NGH"/>
                     </connections>
                 </viewController>
