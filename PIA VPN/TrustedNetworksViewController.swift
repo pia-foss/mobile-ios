@@ -59,6 +59,9 @@ class TrustedNetworksViewController: AutolayoutViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshContent),
                                                name: .RefreshNMTRules,
                                                object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showCustomNetworks),
+                                               name: .ShowCustomNMTNetworks,
+                                               object: nil)
 
         configureCollectionView()
         
@@ -159,6 +162,19 @@ class TrustedNetworksViewController: AutolayoutViewController {
         reloadRulesData()
         self.collectionView.reloadItems(at: [IndexPath(row: 0, section: 0), IndexPath(row: 1, section: 0), IndexPath(row: 2, section: 0)])
     }
+    
+    @objc private func showCustomNetworks() {
+        self.perform(segue: StoryboardSegue.Main.showCustomNetworks)
+    }
+    
+    // MARK: Segues
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let addNetworksSettings = segue.destination as? AddCustomNetworksViewController {
+            
+        }
+    }
+
+    
         
 }
 

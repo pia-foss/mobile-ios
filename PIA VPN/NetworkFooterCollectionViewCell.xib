@@ -24,6 +24,9 @@
                         </constraints>
                         <inset key="titleEdgeInsets" minX="19" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="Add new rule" image="icon-add-rule"/>
+                        <connections>
+                            <action selector="addNewRule" destination="gTV-IL-0wX" eventType="touchUpInside" id="mbx-gT-nlW"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>

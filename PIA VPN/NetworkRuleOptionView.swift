@@ -28,7 +28,8 @@ class NetworkRuleOptionView: UIView {
     private let cellReuseIdentifier = "cell"
     weak var currentPopover: Popover!
     var currentType: NMTType!
-    
+    var ssid: String!
+
     private let tableView: UITableView = {
         let table = UITableView(frame: .zero)
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -96,18 +97,17 @@ extension NetworkRuleOptionView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let preferences = Client.preferences.editable()
-        var rules = preferences.nmtGenericRules
-        
-        switch indexPath.row {
-        case NMTRules.alwaysConnect.rawValue:
-            rules[currentType.rawValue] = NMTRules.alwaysConnect.rawValue
-        case NMTRules.alwaysDisconnect.rawValue:
-            rules[currentType.rawValue] = NMTRules.alwaysDisconnect.rawValue
-        default:
-            rules[currentType.rawValue] = NMTRules.retainState.rawValue
+
+        if currentType != NMTType.trustedNetwork {
+            var rules = preferences.nmtGenericRules
+            rules[currentType.rawValue] = indexPath.row
+            preferences.nmtGenericRules = rules
+        } else {
+            var rules = preferences.nmtTrustedNetworkRules
+            rules[ssid] = indexPath.row
+            preferences.nmtTrustedNetworkRules = rules
+            NotificationCenter.default.post(name: .TrustedNetworkAdded, object: nil)
         }
-        
-        preferences.nmtGenericRules = rules
         preferences.commit()
 
         NotificationCenter.default.post(name: .RefreshNMTRules, object: nil)

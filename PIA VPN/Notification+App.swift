@@ -31,6 +31,8 @@ extension Notification.Name {
     static let Unauthorized = Notification.Name("Unauthorized")
     static let OpenSettings = Notification.Name("OpenSettings")
     static let RefreshNMTRules = Notification.Name("RefreshNMTRules")
+    static let ShowCustomNMTNetworks = Notification.Name("ShowCustomNMTNetworks")
+    static let TrustedNetworkAdded = Notification.Name("TrustedNetworkAdded")
 
 }
 

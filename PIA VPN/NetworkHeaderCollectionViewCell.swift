@@ -42,7 +42,7 @@ class NetworkHeaderCollectionViewCell: UICollectionViewCell {
     func viewShouldRestyle() {
         
         title.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyle22 : TextStyle.textStyle23)
-        subtitle.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyle6 : TextStyle.textStyle7)
+        subtitle.style(style: TextStyle.textStyle8)
     }
 
 }

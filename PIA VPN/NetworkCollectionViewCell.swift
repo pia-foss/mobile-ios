@@ -127,7 +127,7 @@ class NetworkCollectionViewCell: UICollectionViewCell {
     func viewShouldRestyle() {
         
         title.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyleCardTitleDark : TextStyle.textStyleCardTitleLight)
-        subtitle.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyle6 : TextStyle.textStyle7)
+        subtitle.style(style: TextStyle.textStyle8)
         let optionsImage = Asset.Piax.Nmt.iconOptions.image.withRenderingMode(.alwaysTemplate)
         manageButton.setImage(optionsImage, for: .normal)
         manageButton.tintColor = Theme.current.palette.appearance == .dark ? UIColor.white : UIColor.piaGrey6

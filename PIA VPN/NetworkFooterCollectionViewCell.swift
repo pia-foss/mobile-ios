@@ -38,7 +38,6 @@ class NetworkFooterCollectionViewCell: UICollectionViewCell {
     // MARK: Restylable
 
     func viewShouldRestyle() {
-        
         addRuleButton.titleLabel?.font = TextStyle.textStyle4.font
         addRuleButton.setTitleColor(TextStyle.textStyle4.color, for: .normal) 
         let optionsImage = Asset.Piax.Nmt.iconAddRule.image.withRenderingMode(.alwaysTemplate)
@@ -46,4 +45,7 @@ class NetworkFooterCollectionViewCell: UICollectionViewCell {
         addRuleButton.tintColor = TextStyle.textStyle4.color
     }
 
+    @IBAction private func addNewRule() {
+        NotificationCenter.default.post(name: .ShowCustomNMTNetworks, object: nil)
+    }
 }

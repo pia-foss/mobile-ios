@@ -13,7 +13,7 @@
             <objects>
                 <viewController title="Region selection" id="LrP-0B-Ym4" customClass="RegionsViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R3h-W3-NNr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GNv-hu-B2X">
@@ -1462,11 +1462,50 @@
                     <connections>
                         <outlet property="collectionView" destination="Naa-ek-220" id="4KX-lN-2Ai"/>
                         <outlet property="viewContainer" destination="p4O-Dy-PbF" id="Aw9-9G-NGH"/>
+                        <segue destination="rTx-sq-4Hq" kind="show" identifier="ShowCustomNetworks" id="xwv-Yc-17W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QBf-Kp-bhx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2697" y="-1767"/>
+        </scene>
+        <!--Add Custom Networks View Controller-->
+        <scene sceneID="nCZ-5p-uPX">
+            <objects>
+                <viewController id="rTx-sq-4Hq" customClass="AddCustomNetworksViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jUh-De-KQu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SHD-jz-eBd">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="10" sectionInsetReference="safeArea" id="3Q3-IM-7mQ">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="19" minY="5" maxX="19" maxY="5"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="SHD-jz-eBd" firstAttribute="trailing" secondItem="Hxr-R2-TND" secondAttribute="trailing" id="4GE-Kk-irz"/>
+                            <constraint firstItem="SHD-jz-eBd" firstAttribute="leading" secondItem="Hxr-R2-TND" secondAttribute="leading" id="5Nw-69-rwE"/>
+                            <constraint firstItem="SHD-jz-eBd" firstAttribute="top" secondItem="Hxr-R2-TND" secondAttribute="top" id="KnM-GB-Vhu"/>
+                            <constraint firstAttribute="bottom" secondItem="SHD-jz-eBd" secondAttribute="bottom" id="Myl-3w-8MV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Hxr-R2-TND"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="MHp-T8-Evc"/>
+                    <connections>
+                        <outlet property="collectionView" destination="SHD-jz-eBd" id="BoC-d8-qTF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ofC-wS-882" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3702" y="-1767"/>
         </scene>
         <!--CustomDNS Settings View Controller-->
         <scene sceneID="TrO-qA-66V">
