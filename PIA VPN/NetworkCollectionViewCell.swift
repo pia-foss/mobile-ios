@@ -21,6 +21,7 @@
 
 import UIKit
 import PIALibrary
+import Popover
 
 class NetworkCollectionViewCell: UICollectionViewCell {
 
@@ -30,7 +31,8 @@ class NetworkCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var manageButton: UIButton!
     @IBOutlet private weak var title: UILabel!
     @IBOutlet private weak var subtitle: UILabel!
-
+    private var popover: Popover!
+    
     var data: Rule? {
         didSet {
             guard let data = data else { return }
@@ -94,8 +96,30 @@ class NetworkCollectionViewCell: UICollectionViewCell {
         
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
+        
+        let options = [
+          .type(.auto),
+          .cornerRadius(10),
+          .animationIn(0.3),
+          .blackOverlayColor(UIColor.black.withAlphaComponent(0.1)),
+          .arrowSize(CGSize.zero)
+          ] as [PopoverOption]
+        self.popover = Popover(options: options, showHandler: nil, dismissHandler: nil)
+
         viewShouldRestyle()
         
+    }
+    
+    @IBAction func showOptions() {
+        
+        guard let data = data else { return }
+
+        let width = self.contentView.frame.width * 1.5
+        let height = 44 * 3 //Default height * 3 options
+        let optionsView = NetworkRuleOptionView(frame: CGRect(x: 0, y: 0, width: Int(width), height: height))
+        optionsView.currentType = data.type
+        optionsView.currentPopover = popover
+        popover.show(optionsView, fromView: self.manageButton)
     }
 
     // MARK: Restylable
@@ -107,5 +131,7 @@ class NetworkCollectionViewCell: UICollectionViewCell {
         let optionsImage = Asset.Piax.Nmt.iconOptions.image.withRenderingMode(.alwaysTemplate)
         manageButton.setImage(optionsImage, for: .normal)
         manageButton.tintColor = Theme.current.palette.appearance == .dark ? UIColor.white : UIColor.piaGrey6
+        
+        popover.dismiss()
     }
 }

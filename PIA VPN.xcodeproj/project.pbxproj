@@ -151,6 +151,16 @@
 		824C531824C04796003DB740 /* ConnectionTileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 824C531424C04796003DB740 /* ConnectionTileCollectionViewCell.xib */; };
 		824C531D24C04800003DB740 /* ConnectionTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 824C531C24C04800003DB740 /* ConnectionTile.xib */; };
 		824C531E24C04800003DB740 /* ConnectionTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 824C531C24C04800003DB740 /* ConnectionTile.xib */; };
+		827570CB24DAA128008F9800 /* NetworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 827570C724DAA128008F9800 /* NetworkCollectionViewCell.xib */; };
+		827570CC24DAA128008F9800 /* NetworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 827570C724DAA128008F9800 /* NetworkCollectionViewCell.xib */; };
+		827570CD24DAA128008F9800 /* NetworkHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 827570C824DAA128008F9800 /* NetworkHeaderCollectionViewCell.xib */; };
+		827570CE24DAA128008F9800 /* NetworkHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 827570C824DAA128008F9800 /* NetworkHeaderCollectionViewCell.xib */; };
+		827570CF24DAA128008F9800 /* NetworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570C924DAA128008F9800 /* NetworkCollectionViewCell.swift */; };
+		827570D024DAA128008F9800 /* NetworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570C924DAA128008F9800 /* NetworkCollectionViewCell.swift */; };
+		827570D124DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570CA24DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift */; };
+		827570D224DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570CA24DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift */; };
+		827570D424DAA317008F9800 /* NetworkRuleOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570D324DAA317008F9800 /* NetworkRuleOptionView.swift */; };
+		827570D524DAA317008F9800 /* NetworkRuleOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570D324DAA317008F9800 /* NetworkRuleOptionView.swift */; };
 		82A1AD1F24B7BF4E0003DD02 /* Array+Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE432DE2498EADA0095B197 /* Array+Group.swift */; };
 		82A1AD2324B7C0020003DD02 /* PIACardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A1AD2224B7C0020003DD02 /* PIACardTests.swift */; };
 		82A1AD2624B86AF60003DD02 /* PIACardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A1AD2524B86AF60003DD02 /* PIACardsViewController.swift */; };
@@ -575,6 +585,11 @@
 		824C531324C04796003DB740 /* ConnectionTileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionTileCollectionViewCell.swift; sourceTree = "<group>"; };
 		824C531424C04796003DB740 /* ConnectionTileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectionTileCollectionViewCell.xib; sourceTree = "<group>"; };
 		824C531C24C04800003DB740 /* ConnectionTile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectionTile.xib; sourceTree = "<group>"; };
+		827570C724DAA128008F9800 /* NetworkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkCollectionViewCell.xib; sourceTree = "<group>"; };
+		827570C824DAA128008F9800 /* NetworkHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
+		827570C924DAA128008F9800 /* NetworkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkCollectionViewCell.swift; sourceTree = "<group>"; };
+		827570CA24DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		827570D324DAA317008F9800 /* NetworkRuleOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRuleOptionView.swift; sourceTree = "<group>"; };
 		82A1AD2224B7C0020003DD02 /* PIACardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACardTests.swift; sourceTree = "<group>"; };
 		82A1AD2524B86AF60003DD02 /* PIACardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACardsViewController.swift; sourceTree = "<group>"; };
 		82A1AD2824B87CCD0003DD02 /* PIACard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PIACard.xib; sourceTree = "<group>"; };
@@ -808,6 +823,11 @@
 				DD858BA522CE4408004953F3 /* DaysAcquiredTableViewCell.swift */,
 				DD052AC22419003300AD3A24 /* ProtocolTableViewCell.swift */,
 				DD07AACB242CBFF2000EE1A3 /* AddEmailToAccountViewController.swift */,
+				827570C924DAA128008F9800 /* NetworkCollectionViewCell.swift */,
+				827570C724DAA128008F9800 /* NetworkCollectionViewCell.xib */,
+				827570CA24DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift */,
+				827570C824DAA128008F9800 /* NetworkHeaderCollectionViewCell.xib */,
+				827570D324DAA317008F9800 /* NetworkRuleOptionView.swift */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -1571,6 +1591,7 @@
 				DD172AA02254C39300071CFB /* FavoriteServersTile.xib in Resources */,
 				0ED66BD020A9918000333B35 /* staging.endpoint in Resources */,
 				DD76292021ECCD510092DF50 /* UsageTileCollectionViewCell.xib in Resources */,
+				827570CC24DAA128008F9800 /* NetworkCollectionViewCell.xib in Resources */,
 				DD51F8C02372E494009FEED3 /* PIA-ECC-256r1.pem in Resources */,
 				DD6DC5C321B6C27F00F9D538 /* pia-spinner.json in Resources */,
 				0E0715E7201CBB7100D6F666 /* Flags-dev.plist in Resources */,
@@ -1605,6 +1626,7 @@
 				0EE2206A1F4EF307002805AE /* Components.plist in Resources */,
 				0ED984221FC48C6500542EE6 /* Roboto-Thin.ttf in Resources */,
 				DD21909B22F1DFB0007D035E /* ShareInvitationTableViewCell.xib in Resources */,
+				827570CE24DAA128008F9800 /* NetworkHeaderCollectionViewCell.xib in Resources */,
 				824C531824C04796003DB740 /* ConnectionTileCollectionViewCell.xib in Resources */,
 				DD51F8BE2372E494009FEED3 /* PIA-ECC-521r1.pem in Resources */,
 				DD9706AE224262E000630220 /* QuickSettingsTileCollectionViewCell.xib in Resources */,
@@ -1646,6 +1668,7 @@
 				824C531724C04796003DB740 /* ConnectionTileCollectionViewCell.xib in Resources */,
 				DD9706AD224262E000630220 /* QuickSettingsTileCollectionViewCell.xib in Resources */,
 				DD172A9F2254C39300071CFB /* FavoriteServersTile.xib in Resources */,
+				827570CB24DAA128008F9800 /* NetworkCollectionViewCell.xib in Resources */,
 				DD51F8C12372E494009FEED3 /* PIA-ECC-256k1.pem in Resources */,
 				DD125DCE21E772B6004ECCB6 /* QuickConnectTileCollectionViewCell.xib in Resources */,
 				DD1C138921E60C63004004B3 /* IPTile.xib in Resources */,
@@ -1663,6 +1686,7 @@
 				0E0786DE1EFA7EAE00F77466 /* Components.plist in Resources */,
 				DDFCFA9121E892070081F235 /* RegionTileCollectionViewCell.xib in Resources */,
 				0ED9841C1FC48C6000542EE6 /* Roboto-Light.ttf in Resources */,
+				827570CD24DAA128008F9800 /* NetworkHeaderCollectionViewCell.xib in Resources */,
 				0ED9841E1FC48C6000542EE6 /* Roboto-Thin.ttf in Resources */,
 				0E7EC0302093265C0029811E /* InfoPlist.strings in Resources */,
 				DD51F8BF2372E494009FEED3 /* PIA-ECC-256r1.pem in Resources */,
@@ -1820,6 +1844,7 @@
 				"${BUILT_PRODUCTS_DIR}/PIALibrary/PIALibrary.framework",
 				"${BUILT_PRODUCTS_DIR}/PIARegions/PIARegions.framework",
 				"${BUILT_PRODUCTS_DIR}/PIAWireguard/PIAWireguard.framework",
+				"${BUILT_PRODUCTS_DIR}/Popover/Popover.framework",
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
 				"${BUILT_PRODUCTS_DIR}/QuickLayout/QuickLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
@@ -1847,6 +1872,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIALibrary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIARegions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAWireguard.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Popover.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QuickLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
@@ -1906,6 +1932,7 @@
 				"${BUILT_PRODUCTS_DIR}/PIALibrary/PIALibrary.framework",
 				"${BUILT_PRODUCTS_DIR}/PIARegions/PIARegions.framework",
 				"${BUILT_PRODUCTS_DIR}/PIAWireguard/PIAWireguard.framework",
+				"${BUILT_PRODUCTS_DIR}/Popover/Popover.framework",
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
 				"${BUILT_PRODUCTS_DIR}/QuickLayout/QuickLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
@@ -1931,6 +1958,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIALibrary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIARegions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAWireguard.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Popover.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QuickLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
@@ -1966,6 +1994,7 @@
 				"${BUILT_PRODUCTS_DIR}/PIALibrary/PIALibrary.framework",
 				"${BUILT_PRODUCTS_DIR}/PIARegions/PIARegions.framework",
 				"${BUILT_PRODUCTS_DIR}/PIAWireguard/PIAWireguard.framework",
+				"${BUILT_PRODUCTS_DIR}/Popover/Popover.framework",
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
 				"${BUILT_PRODUCTS_DIR}/QuickLayout/QuickLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
@@ -1993,6 +2022,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIALibrary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIARegions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAWireguard.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Popover.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QuickLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
@@ -2107,11 +2137,13 @@
 				0E3A35291FD9A960000B0F99 /* DashboardViewController.swift in Sources */,
 				DDB6B95121C94E2E00DE8C5F /* TrustedNetworksViewController.swift in Sources */,
 				0E9452A61FDB578400891948 /* RegionCell.swift in Sources */,
+				827570D524DAA317008F9800 /* NetworkRuleOptionView.swift in Sources */,
 				0EFDC1ED1FE4B9DC007C0B9B /* AppConstants.swift in Sources */,
 				DD829EE32449A4A400E2EE55 /* SiriShortcutsManager.swift in Sources */,
 				DD58F4C021B12CFE00D043F7 /* PIAConnectionButton.swift in Sources */,
 				DD125DD221E7A694004ECCB6 /* ServerButton.swift in Sources */,
 				824C530924C046CB003DB740 /* ConnectionTile.swift in Sources */,
+				827570D224DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift in Sources */,
 				0E2215CA2008BA9100F5FB4D /* SwiftGen+Strings.swift in Sources */,
 				DD858BAE22CE5045004953F3 /* InviteStatusTableViewCell.swift in Sources */,
 				DD9329A3237AFD0A0025B6BC /* ShowQuickSettingsViewController.swift in Sources */,
@@ -2132,6 +2164,7 @@
 				0E7361EC1FD99A1000706BFF /* MenuViewController.swift in Sources */,
 				0EB966781FDF11B80086ABC2 /* Server+UI.swift in Sources */,
 				DD1C139A21E65F90004004B3 /* IPTileCollectionViewCell.swift in Sources */,
+				827570D024DAA128008F9800 /* NetworkCollectionViewCell.swift in Sources */,
 				0E9452AC1FDB5EF600891948 /* UINavigationItem+Shortcuts.swift in Sources */,
 				DD052AC42419020E00AD3A24 /* ProtocolTableViewCell.swift in Sources */,
 				DD858B9322CCEC53004953F3 /* InvitesSentTableViewCell.swift in Sources */,
@@ -2231,11 +2264,13 @@
 				0EFDC1D71FE46177007C0B9B /* SensitiveOperation.swift in Sources */,
 				0E3A35281FD9A960000B0F99 /* DashboardViewController.swift in Sources */,
 				DDB6B95021C94E2E00DE8C5F /* TrustedNetworksViewController.swift in Sources */,
+				827570D424DAA317008F9800 /* NetworkRuleOptionView.swift in Sources */,
 				0E9452A51FDB578400891948 /* RegionCell.swift in Sources */,
 				DD829EE22449A4A400E2EE55 /* SiriShortcutsManager.swift in Sources */,
 				0EFDC1EC1FE4B9DC007C0B9B /* AppConstants.swift in Sources */,
 				DD58F4BF21B12CFE00D043F7 /* PIAConnectionButton.swift in Sources */,
 				824C530824C046CB003DB740 /* ConnectionTile.swift in Sources */,
+				827570D124DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift in Sources */,
 				DD125DD121E7A694004ECCB6 /* ServerButton.swift in Sources */,
 				DD858BAD22CE5045004953F3 /* InviteStatusTableViewCell.swift in Sources */,
 				DD9329A2237AFD0A0025B6BC /* ShowQuickSettingsViewController.swift in Sources */,
@@ -2256,6 +2291,7 @@
 				0EA660081FEC7A9500CB2B0D /* PIATunnelProvider+UI.swift in Sources */,
 				0E7361EB1FD99A1000706BFF /* MenuViewController.swift in Sources */,
 				DD1C139921E65F90004004B3 /* IPTileCollectionViewCell.swift in Sources */,
+				827570CF24DAA128008F9800 /* NetworkCollectionViewCell.swift in Sources */,
 				0EB966771FDF11B80086ABC2 /* Server+UI.swift in Sources */,
 				DD052AC32419003300AD3A24 /* ProtocolTableViewCell.swift in Sources */,
 				DD858B9222CCEC53004953F3 /* InvitesSentTableViewCell.swift in Sources */,

@@ -45,6 +45,9 @@
                         </constraints>
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="19" maxY="0.0"/>
                         <state key="normal" image="icon-options"/>
+                        <connections>
+                            <action selector="showOptions" destination="gTV-IL-0wX" eventType="touchUpInside" id="0bB-fj-tOY"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="zq7-li-JWd">
                         <rect key="frame" x="19" y="137.5" width="392" height="20.5"/>

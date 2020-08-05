@@ -51,17 +51,13 @@ class TrustedNetworksViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let genericRules = Client.preferences.nmtGenericRules
-        for rule in genericRules {
-            if let type = NMTType(rawValue: rule.key), let rule = NMTRules(rawValue: rule.value) {
-                data.append(Rule(type: type, rule: rule))
-            }
-        }
-        data = data.sorted(by: { $0.type.order() < $1.type.order() })
-
+        reloadRulesData()
         self.hotspotHelper = PIAHotspotHelper(withDelegate: self)
 
         NotificationCenter.default.addObserver(self, selector: #selector(filterAvailableNetworks), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshContent),
+                                               name: .RefreshNMTRules,
+                                               object: nil)
 
         configureCollectionView()
         
@@ -140,6 +136,24 @@ class TrustedNetworksViewController: AutolayoutViewController {
         self.trustedNetworks = Client.preferences.trustedNetworks
         self.availableNetworks = self.availableNetworks.filter { !self.trustedNetworks.contains($0) }
         self.collectionView.reloadData()
+    }
+    
+    private func reloadRulesData() {
+        data = []
+        let genericRules = Client.preferences.nmtGenericRules
+        for rule in genericRules {
+            if let type = NMTType(rawValue: rule.key), let rule = NMTRules(rawValue: rule.value) {
+                data.append(Rule(type: type, rule: rule))
+            }
+        }
+        data = data.sorted(by: { $0.type.order() < $1.type.order() })
+
+    }
+    
+    // MARK: Actions
+    @objc private func refreshContent() {
+        reloadRulesData()
+        self.collectionView.reloadItems(at: [IndexPath(row: 0, section: 0), IndexPath(row: 1, section: 0), IndexPath(row: 2, section: 0)])
     }
         
 }
