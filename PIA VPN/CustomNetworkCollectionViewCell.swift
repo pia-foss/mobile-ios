@@ -37,7 +37,6 @@ class CustomNetworkCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.backgroundColor = .white
         let options = [
           .type(.auto),
           .cornerRadius(10),

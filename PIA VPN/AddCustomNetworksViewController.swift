@@ -50,6 +50,7 @@ class AddCustomNetworksViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
               
         data = Client.preferences.availableNetworks
+        data = data.filter { !Client.preferences.nmtTrustedNetworkRules.keys.contains($0) }
 
         super.viewShouldRestyle()
         
@@ -67,6 +68,7 @@ class AddCustomNetworksViewController: AutolayoutViewController {
     private func configureCollectionView() {
 
         data = Client.preferences.availableNetworks
+        data = data.filter { !Client.preferences.nmtTrustedNetworkRules.keys.contains($0) }
 
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(UINib(nibName: Cells.network,
@@ -100,6 +102,13 @@ extension AddCustomNetworksViewController: UICollectionViewDelegateFlowLayout, U
         cell.isSelected = false
         cell.setup(withTitle: data[indexPath.row])
         cell.viewShouldRestyle()
+        
+        Theme.current.applySecondaryBackground(cell)
+
+        let backgroundView = UIView()
+        Theme.current.applyPrincipalBackground(backgroundView)
+        cell.selectedBackgroundView = backgroundView
+
         return cell
     }
     

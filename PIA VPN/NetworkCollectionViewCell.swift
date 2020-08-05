@@ -32,7 +32,14 @@ class NetworkCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var title: UILabel!
     @IBOutlet private weak var subtitle: UILabel!
     private var popover: Popover!
-    
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                showOptions()
+            }
+        }
+    }
+
     var data: Rule? {
         didSet {
             guard let data = data else { return }
@@ -68,7 +75,15 @@ class NetworkCollectionViewCell: UICollectionViewCell {
                     networkIcon.image = Asset.Piax.Nmt.iconMobileDataRetain.image
                 }
             case .trustedNetwork:
-                title.text = "Trusted Network"
+                title.text = data.ssid
+                switch data.rule {
+                case .alwaysConnect:
+                    networkIcon.image = Asset.Piax.Nmt.iconCustomWifiConnect.image
+                case .alwaysDisconnect:
+                    networkIcon.image = Asset.Piax.Nmt.iconCustomWifiDisconnect.image
+                case .retainState:
+                    networkIcon.image = Asset.Piax.Nmt.iconCustomWifiRetain.image
+                }
             }
             
             switch data.rule {
@@ -88,8 +103,6 @@ class NetworkCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.backgroundColor = .white
-        // Initialization code
         
         networkIconBackground.layer.cornerRadius = 10
         networkIconBackground.backgroundColor = UIColor.piaNMTGrey
@@ -115,10 +128,11 @@ class NetworkCollectionViewCell: UICollectionViewCell {
         guard let data = data else { return }
 
         let width = self.contentView.frame.width * 1.5
-        let height = 44 * 3 //Default height * 3 options
+        let height = 44 * (data.type == NMTType.trustedNetwork ? 4 : 3) //Default height * 3 or 4 options
         let optionsView = NetworkRuleOptionView(frame: CGRect(x: 0, y: 0, width: Int(width), height: height))
         optionsView.currentType = data.type
         optionsView.currentPopover = popover
+        optionsView.ssid = data.ssid
         popover.show(optionsView, fromView: self.manageButton)
     }
 

@@ -26,6 +26,7 @@ import PIALibrary
 struct Rule {
     var type: NMTType
     var rule: NMTRules
+    var ssid: String
 }
 
 class TrustedNetworksViewController: AutolayoutViewController {
@@ -34,9 +35,6 @@ class TrustedNetworksViewController: AutolayoutViewController {
 
     private var data = [Rule]()
     
-    private var availableNetworks: [String] = []
-    private var trustedNetworks: [String] = []
-    private let currentNetwork: String? = nil
     private var hotspotHelper: PIAHotspotHelper!
     var shouldReconnectAutomatically = false
     var hasUpdatedPreferences = false
@@ -139,9 +137,6 @@ class TrustedNetworksViewController: AutolayoutViewController {
     }
     
     @objc private func filterAvailableNetworks() {
-        self.availableNetworks = Client.preferences.availableNetworks
-        self.trustedNetworks = Client.preferences.trustedNetworks
-        self.availableNetworks = self.availableNetworks.filter { !self.trustedNetworks.contains($0) }
         self.collectionView.reloadData()
     }
     
@@ -150,31 +145,31 @@ class TrustedNetworksViewController: AutolayoutViewController {
         let genericRules = Client.preferences.nmtGenericRules
         for rule in genericRules {
             if let type = NMTType(rawValue: rule.key), let rule = NMTRules(rawValue: rule.value) {
-                data.append(Rule(type: type, rule: rule))
+                data.append(Rule(type: type, rule: rule, ssid: ""))
             }
         }
         data = data.sorted(by: { $0.type.order() < $1.type.order() })
+
+        let networks = Client.preferences.nmtTrustedNetworkRules
+        let sortedKeys = networks.keys.sorted()
+        
+        for key in sortedKeys {
+            if let raw = networks[key], let rule = NMTRules(rawValue: raw) {
+                data.append(Rule(type: NMTType.trustedNetwork, rule: rule, ssid: key))
+            }
+        }
 
     }
     
     // MARK: Actions
     @objc private func refreshContent() {
         reloadRulesData()
-        self.collectionView.reloadItems(at: [IndexPath(row: 0, section: 0), IndexPath(row: 1, section: 0), IndexPath(row: 2, section: 0)])
+        self.collectionView.reloadSections(IndexSet(arrayLiteral: 0))
     }
     
     @objc private func showCustomNetworks() {
         self.perform(segue: StoryboardSegue.Main.showCustomNetworks)
     }
-    
-    // MARK: Segues
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let addNetworksSettings = segue.destination as? AddCustomNetworksViewController {
-            
-        }
-    }
-
-    
         
 }
 
@@ -204,7 +199,17 @@ extension TrustedNetworksViewController: UICollectionViewDelegateFlowLayout, UIC
         cell.data = self.data[indexPath.item]
         cell.viewShouldRestyle()
 
+        Theme.current.applySecondaryBackground(cell)
+
+        let backgroundView = UIView()
+        Theme.current.applyPrincipalBackground(backgroundView)
+        cell.selectedBackgroundView = backgroundView
+
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -255,7 +260,9 @@ extension TrustedNetworksViewController: PIAHotspotHelperDelegate{
     
     func refreshAvailableNetworks(_ networks: [String]?) {
         if let networks = networks {
-            self.availableNetworks = networks
+            let preferences = Client.preferences.editable()
+            preferences.availableNetworks = networks
+            preferences.commit()
             self.collectionView.reloadData()
         }
     }

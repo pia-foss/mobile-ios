@@ -557,10 +557,16 @@ class SettingsViewController: AutolayoutViewController {
         
         // reset NMT preferences
         let preferences = Client.preferences.editable()
-        preferences.trustedNetworks = pendingPreferences.trustedNetworks
+        
+        var genericRules = [String:Int]()
+        genericRules[NMTType.protectedWiFi.rawValue] = NMTRules.alwaysConnect.rawValue
+        genericRules[NMTType.openWiFi.rawValue] = NMTRules.alwaysConnect.rawValue
+        genericRules[NMTType.cellular.rawValue] = NMTRules.alwaysConnect.rawValue
+
+        preferences.nmtTrustedNetworkRules = pendingPreferences.nmtTrustedNetworkRules
         preferences.availableNetworks = pendingPreferences.availableNetworks
-        preferences.useWiFiProtection = pendingPreferences.useWiFiProtection
-        preferences.trustCellularData = pendingPreferences.trustCellularData
+        preferences.nmtGenericRules = genericRules
+
         preferences.ikeV2IntegrityAlgorithm = pendingPreferences.ikeV2IntegrityAlgorithm
         preferences.ikeV2EncryptionAlgorithm = pendingPreferences.ikeV2EncryptionAlgorithm
         preferences.commit()
@@ -591,12 +597,11 @@ class SettingsViewController: AutolayoutViewController {
         }
         
         //Update with values from Trusted Network Settings
-        pendingPreferences.trustedNetworks = Client.preferences.trustedNetworks
+        pendingPreferences.nmtTrustedNetworkRules = Client.preferences.nmtTrustedNetworkRules
         pendingPreferences.nmtRulesEnabled = Client.preferences.nmtRulesEnabled
         pendingPreferences.availableNetworks = Client.preferences.availableNetworks
-        pendingPreferences.useWiFiProtection = Client.preferences.useWiFiProtection
-        pendingPreferences.trustCellularData = Client.preferences.trustCellularData
-
+        pendingPreferences.nmtGenericRules = Client.preferences.nmtGenericRules
+        
         pendingVPNAction = pendingPreferences.requiredVPNAction()
 
         guard let action = pendingVPNAction else {

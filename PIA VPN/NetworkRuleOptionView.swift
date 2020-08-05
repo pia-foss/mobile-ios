@@ -63,7 +63,7 @@ class NetworkRuleOptionView: UIView {
 extension NetworkRuleOptionView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return currentType == NMTType.trustedNetwork ? 4 : 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,9 +78,13 @@ extension NetworkRuleOptionView: UITableViewDelegate, UITableViewDataSource {
         case NMTRules.alwaysDisconnect.rawValue:
             cell.textLabel?.text = "Always Disconnect VPN"
             cell.accessoryView = UIImageView(image: Asset.Piax.Nmt.iconDisconnect.image.withRenderingMode(.alwaysTemplate))
-        default:
+        case NMTRules.retainState.rawValue:
             cell.textLabel?.text = "Retain VPN State"
             cell.accessoryView = UIImageView(image: Asset.Piax.Nmt.iconRetain.image.withRenderingMode(.alwaysTemplate))
+        default:
+            cell.textLabel?.text = L10n.Global.remove
+            cell.textLabel?.style(style: TextStyle.textStyle10)
+            cell.accessoryView = nil
         }
         
         cell.accessoryView?.tintColor = Theme.current.palette.appearance == .dark ? UIColor.white : UIColor.piaGrey6
@@ -104,7 +108,11 @@ extension NetworkRuleOptionView: UITableViewDelegate, UITableViewDataSource {
             preferences.nmtGenericRules = rules
         } else {
             var rules = preferences.nmtTrustedNetworkRules
-            rules[ssid] = indexPath.row
+            if NMTRules(rawValue: indexPath.row) == nil { //Delete
+                rules.removeValue(forKey: ssid)
+            } else {
+                rules[ssid] = indexPath.row
+            }
             preferences.nmtTrustedNetworkRules = rules
             NotificationCenter.default.post(name: .TrustedNetworkAdded, object: nil)
         }

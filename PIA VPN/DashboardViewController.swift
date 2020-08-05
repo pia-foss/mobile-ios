@@ -328,38 +328,8 @@ class DashboardViewController: AutolayoutViewController {
                                             userInfo: nil)
         } else {
             
-            var showAlert = false
-            if let ssid = UIDevice.current.WiFiSSID {
-                if (Client.preferences.useWiFiProtection && (!Client.preferences.trustedNetworks.contains(ssid))) {
-                    showAlert = true
-                }
-            } else {
-                if !Client.preferences.trustCellularData {
-                    showAlert = true
-                }
-            }
-            
-            if !Client.preferences.nmtRulesEnabled || AppPreferences.shared.optOutAskDisconnectVPNUsingNMT { //if NMT disabled...
-                showAlert = false
-            }
-            
-            if showAlert {
-                let alert = Macros.alert(
-                    nil,
-                    L10n.Dashboard.Vpn.Disconnect.untrusted
-                )
-                
-                alert.addCancelActionWithTitle(L10n.Global.cancel) {
-                }
-                
-                alert.addActionWithTitle(L10n.Shortcuts.disconnect) {
-                    self.disconnectWithOneSecondDelay()
-                }
-                
-                present(alert, animated: true, completion: nil)
-            } else {
-                disconnectWithOneSecondDelay()
-            }
+            disconnectWithOneSecondDelay()
+
         }
         Macros.postNotification(.PIAVPNUsageUpdate)
     }
@@ -654,13 +624,13 @@ class DashboardViewController: AutolayoutViewController {
     private func isTrustedNetwork() -> Bool {
         if Client.preferences.nmtRulesEnabled {
             if let ssid = PIAHotspotHelper().currentWiFiNetwork() {
-                if !Client.preferences.useWiFiProtection {
+                if Client.preferences.nmtGenericRules[NMTType.protectedWiFi.rawValue] == NMTRules.alwaysDisconnect.rawValue {
                     return true
-                } else if Client.preferences.trustedNetworks.contains(ssid) {
+                } else if Client.preferences.nmtTrustedNetworkRules[ssid] == NMTRules.alwaysDisconnect.rawValue {
                     return true
                 }
             } else {
-                if Client.preferences.trustCellularData {
+                if Client.preferences.nmtGenericRules[NMTType.cellular.rawValue] == NMTRules.alwaysDisconnect.rawValue {
                     return true
                 }
             }
