@@ -161,6 +161,10 @@
 		827570D224DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570CA24DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift */; };
 		827570D424DAA317008F9800 /* NetworkRuleOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570D324DAA317008F9800 /* NetworkRuleOptionView.swift */; };
 		827570D524DAA317008F9800 /* NetworkRuleOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570D324DAA317008F9800 /* NetworkRuleOptionView.swift */; };
+		827570D824DAB6E4008F9800 /* NetworkFooterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570D624DAB6E4008F9800 /* NetworkFooterCollectionViewCell.swift */; };
+		827570D924DAB6E4008F9800 /* NetworkFooterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570D624DAB6E4008F9800 /* NetworkFooterCollectionViewCell.swift */; };
+		827570DA24DAB6E4008F9800 /* NetworkFooterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 827570D724DAB6E4008F9800 /* NetworkFooterCollectionViewCell.xib */; };
+		827570DB24DAB6E4008F9800 /* NetworkFooterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 827570D724DAB6E4008F9800 /* NetworkFooterCollectionViewCell.xib */; };
 		82A1AD1F24B7BF4E0003DD02 /* Array+Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE432DE2498EADA0095B197 /* Array+Group.swift */; };
 		82A1AD2324B7C0020003DD02 /* PIACardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A1AD2224B7C0020003DD02 /* PIACardTests.swift */; };
 		82A1AD2624B86AF60003DD02 /* PIACardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A1AD2524B86AF60003DD02 /* PIACardsViewController.swift */; };
@@ -590,6 +594,8 @@
 		827570C924DAA128008F9800 /* NetworkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkCollectionViewCell.swift; sourceTree = "<group>"; };
 		827570CA24DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		827570D324DAA317008F9800 /* NetworkRuleOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRuleOptionView.swift; sourceTree = "<group>"; };
+		827570D624DAB6E4008F9800 /* NetworkFooterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFooterCollectionViewCell.swift; sourceTree = "<group>"; };
+		827570D724DAB6E4008F9800 /* NetworkFooterCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetworkFooterCollectionViewCell.xib; sourceTree = "<group>"; };
 		82A1AD2224B7C0020003DD02 /* PIACardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACardTests.swift; sourceTree = "<group>"; };
 		82A1AD2524B86AF60003DD02 /* PIACardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACardsViewController.swift; sourceTree = "<group>"; };
 		82A1AD2824B87CCD0003DD02 /* PIACard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PIACard.xib; sourceTree = "<group>"; };
@@ -827,6 +833,8 @@
 				827570C724DAA128008F9800 /* NetworkCollectionViewCell.xib */,
 				827570CA24DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift */,
 				827570C824DAA128008F9800 /* NetworkHeaderCollectionViewCell.xib */,
+				827570D624DAB6E4008F9800 /* NetworkFooterCollectionViewCell.swift */,
+				827570D724DAB6E4008F9800 /* NetworkFooterCollectionViewCell.xib */,
 				827570D324DAA317008F9800 /* NetworkRuleOptionView.swift */,
 			);
 			name = Menu;
@@ -1607,6 +1615,7 @@
 				DD76292621ECCD650092DF50 /* UsageTile.xib in Resources */,
 				DD51F8BC2372E494009FEED3 /* PIA-RSA-2048.pem in Resources */,
 				DDFCFA9221E892070081F235 /* RegionTileCollectionViewCell.xib in Resources */,
+				827570DB24DAB6E4008F9800 /* NetworkFooterCollectionViewCell.xib in Resources */,
 				DDFCFA9821E8921F0081F235 /* RegionTile.xib in Resources */,
 				DD21909A22F1DFB0007D035E /* InviteStatusTableViewCell.xib in Resources */,
 				824C531E24C04800003DB740 /* ConnectionTile.xib in Resources */,
@@ -1677,6 +1686,7 @@
 				0E7EC045209326E30029811E /* Localizable.strings in Resources */,
 				DD21909322F1DFB0007D035E /* InviteFriendTableViewCell.xib in Resources */,
 				0ED9841D1FC48C6000542EE6 /* Roboto-Regular.ttf in Resources */,
+				827570DA24DAB6E4008F9800 /* NetworkFooterCollectionViewCell.xib in Resources */,
 				DD21909222F1DFB0007D035E /* DaysAcquiredTableViewCell.xib in Resources */,
 				DD76291F21ECCD510092DF50 /* UsageTileCollectionViewCell.xib in Resources */,
 				DD76292521ECCD650092DF50 /* UsageTile.xib in Resources */,
@@ -2148,6 +2158,7 @@
 				DD858BAE22CE5045004953F3 /* InviteStatusTableViewCell.swift in Sources */,
 				DD9329A3237AFD0A0025B6BC /* ShowQuickSettingsViewController.swift in Sources */,
 				DD606ABD21C904BB00E0781D /* PIAHotspotHelper.swift in Sources */,
+				827570D924DAB6E4008F9800 /* NetworkFooterCollectionViewCell.swift in Sources */,
 				DD858BB322CE5065004953F3 /* InviteStatusViewController.swift in Sources */,
 				DD858B8C22CCE512004953F3 /* FriendReferralsViewController.swift in Sources */,
 				0EFDC1C71FE35B78007C0B9B /* Macros+App.swift in Sources */,
@@ -2275,6 +2286,7 @@
 				DD858BAD22CE5045004953F3 /* InviteStatusTableViewCell.swift in Sources */,
 				DD9329A2237AFD0A0025B6BC /* ShowQuickSettingsViewController.swift in Sources */,
 				0E2215C920084CD700F5FB4D /* SwiftGen+Strings.swift in Sources */,
+				827570D824DAB6E4008F9800 /* NetworkFooterCollectionViewCell.swift in Sources */,
 				DD858BB222CE5065004953F3 /* InviteStatusViewController.swift in Sources */,
 				DD3B504324B7576F0002F4B5 /* Card.swift in Sources */,
 				DD858B8B22CCE512004953F3 /* FriendReferralsViewController.swift in Sources */,

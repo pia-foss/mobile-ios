@@ -46,6 +46,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
     private struct Cells {
         static let network = "NetworkCollectionViewCell"
         static let header = "NetworkHeaderCollectionViewCell"
+        static let footer = "NetworkFooterCollectionViewCell"
     }
 
     override func viewDidLoad() {
@@ -126,6 +127,9 @@ class TrustedNetworksViewController: AutolayoutViewController {
         collectionView.register(UINib(nibName: Cells.header, bundle: nil),
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier:Cells.header)
+        collectionView.register(UINib(nibName: Cells.footer, bundle: nil),
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                                withReuseIdentifier:Cells.footer)
         collectionView.delegate = self
         collectionView.dataSource = self
         filterAvailableNetworks()
@@ -195,6 +199,11 @@ extension TrustedNetworksViewController: UICollectionViewDelegateFlowLayout, UIC
             headerView.setup(withTitle: "Manage automation", andSubtitle: "Configure how PIA behave on connection to WiFi or Cellular networks. This excludes disconnecting manually.")
             return headerView
 
+        case UICollectionView.elementKindSectionFooter:
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Cells.footer, for: indexPath) as! NetworkFooterCollectionViewCell
+            footerView.setup()
+            return footerView
+
         default:
             assert(false, "Unexpected element kind")
         }
@@ -211,6 +220,18 @@ extension TrustedNetworksViewController: UICollectionViewDelegateFlowLayout, UIC
                                                   verticalFittingPriority: .fittingSizeLevel) 
 
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+
+        let indexPath = IndexPath(row: 0, section: section)
+        let footerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionFooter, at: indexPath) as! NetworkFooterCollectionViewCell
+
+        return footerView.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height),
+                                                  withHorizontalFittingPriority: .defaultHigh,
+                                                  verticalFittingPriority: .fittingSizeLevel)
+
+    }
+
 
 }
 
