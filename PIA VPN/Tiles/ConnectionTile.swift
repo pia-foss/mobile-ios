@@ -65,7 +65,7 @@ class ConnectionTile: UIView, Tileable  {
 
         setConnectionValues()
         viewShouldRestyle()
-        self.tileTitle.text = "Connection".uppercased()
+        self.tileTitle.text = L10n.Settings.Connection.title.uppercased()
 
     }
     
