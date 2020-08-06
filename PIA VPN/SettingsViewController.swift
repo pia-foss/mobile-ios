@@ -596,15 +596,11 @@ class SettingsViewController: AutolayoutViewController {
             pendingPreferences.mace = false
         }
         
-        //Update with values from Trusted Network Settings
-        pendingPreferences.nmtTrustedNetworkRules = Client.preferences.nmtTrustedNetworkRules
-        pendingPreferences.nmtRulesEnabled = Client.preferences.nmtRulesEnabled
-        pendingPreferences.availableNetworks = Client.preferences.availableNetworks
-        pendingPreferences.nmtGenericRules = Client.preferences.nmtGenericRules
         
         pendingVPNAction = pendingPreferences.requiredVPNAction()
 
         guard let action = pendingVPNAction else {
+            commitNMTPreferences()
             commitAppPreferences()
             completionHandler()
             return
@@ -696,8 +692,17 @@ class SettingsViewController: AutolayoutViewController {
     }
     
     private func commitPreferences() {
+        commitNMTPreferences()
         commitAppPreferences()
         pendingPreferences.commit()
+    }
+    
+    private func commitNMTPreferences() {
+        //Update with values from Trusted Network Settings
+        pendingPreferences.nmtTrustedNetworkRules = Client.preferences.nmtTrustedNetworkRules
+        pendingPreferences.nmtRulesEnabled = Client.preferences.nmtRulesEnabled
+        pendingPreferences.availableNetworks = Client.preferences.availableNetworks
+        pendingPreferences.nmtGenericRules = Client.preferences.nmtGenericRules
     }
     
     // MARK: Unwind segues

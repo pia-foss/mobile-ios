@@ -318,8 +318,19 @@ class DashboardViewController: AutolayoutViewController {
             Client.providers.vpnProvider.vpnStatus != .disconnecting,
             Client.providers.vpnProvider.vpnStatus != .connecting {
             Client.providers.vpnProvider.connect({ [weak self] error in
+                
+                guard let weakSelf = self else { return }
                 if let _ = error {
                     RatingManager.shared.logError()
+                }
+                if Client.providers.vpnProvider.vpnStatus == .disconnected {
+                    weakSelf.handleDisconnectedAndTrustedNetwork()
+                    if weakSelf.isTrustedNetwork() {
+                        //Show additionally a message indicating the VPN is enabled but disconnected given the current NMT settings
+                        let alert = Macros.alert(nil, "Your automation settings are configured to don't connect the VPN under the current network conditions. The VPN is enabled and will connect or disconnect automatically if you switch to a different network")
+                        alert.addCancelAction(L10n.Global.close)
+                        weakSelf.present(alert, animated: true, completion: nil)
+                    }
                 }
                 self?.reloadUsageTileAfter(seconds: 5) //Show some usage after 5 seconds of activity
             })
@@ -553,28 +564,7 @@ class DashboardViewController: AutolayoutViewController {
             toggleConnection.isOn = false
             AppPreferences.shared.lastVPNConnectionStatus = .disconnected
 
-            if isTrustedNetwork() {
-                toggleConnection.isIndeterminate = false
-                toggleConnection.isWarning = true
-                let titleLabelView = UILabel(frame: CGRect.zero)
-                titleLabelView.text = L10n.Dashboard.Vpn.disconnected+": "+L10n.Tiles.Nmt.Accessibility.trusted
-                titleLabelView.adjustsFontSizeToFitWidth = true
-                titleLabelView.style(style: TextStyle.textStyle6)
-                Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
-                                                       withTintColor: .white,
-                                                       andBarTintColors: [UIColor.piaOrange,
-                                                                          UIColor.piaOrange])
-                toggleConnection.tintColor = UIColor.piaOrange
-                navigationItem.titleView = titleLabelView
-                setNeedsStatusBarAppearanceUpdate()
-            } else {
-                toggleConnection.isIndeterminate = false
-                toggleConnection.isWarning = false
-                resetNavigationBar()
-                AppPreferences.shared.todayWidgetVpnStatus = VPNStatus.disconnected.rawValue
-                AppPreferences.shared.todayWidgetButtonTitle = L10n.Shortcuts.connect
-            }
-
+            handleDisconnectedAndTrustedNetwork()
             toggleConnection.stopButtonAnimation()
 
         case .connecting:
@@ -621,12 +611,36 @@ class DashboardViewController: AutolayoutViewController {
         
     }
     
+    private func handleDisconnectedAndTrustedNetwork() {
+        if isTrustedNetwork() {
+            toggleConnection.isIndeterminate = false
+            toggleConnection.isWarning = true
+            let titleLabelView = UILabel(frame: CGRect.zero)
+            titleLabelView.text = L10n.Dashboard.Vpn.disconnected+": "+L10n.Tiles.Nmt.Accessibility.trusted
+            titleLabelView.adjustsFontSizeToFitWidth = true
+            titleLabelView.style(style: TextStyle.textStyle6)
+            Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
+                                                   withTintColor: .white,
+                                                   andBarTintColors: [UIColor.piaOrange,
+                                                                      UIColor.piaOrange])
+            toggleConnection.tintColor = UIColor.piaOrange
+            navigationItem.titleView = titleLabelView
+            setNeedsStatusBarAppearanceUpdate()
+        } else {
+            toggleConnection.isIndeterminate = false
+            toggleConnection.isWarning = false
+            resetNavigationBar()
+            AppPreferences.shared.todayWidgetVpnStatus = VPNStatus.disconnected.rawValue
+            AppPreferences.shared.todayWidgetButtonTitle = L10n.Shortcuts.connect
+        }
+    }
+    
     private func isTrustedNetwork() -> Bool {
         if Client.preferences.nmtRulesEnabled {
             if let ssid = PIAHotspotHelper().currentWiFiNetwork() {
-                if Client.preferences.nmtGenericRules[NMTType.protectedWiFi.rawValue] == NMTRules.alwaysDisconnect.rawValue {
-                    return true
-                } else if Client.preferences.nmtTrustedNetworkRules[ssid] == NMTRules.alwaysDisconnect.rawValue {
+                if Client.preferences.nmtGenericRules[NMTType.protectedWiFi.rawValue] == NMTRules.alwaysDisconnect.rawValue &&
+                    (Client.preferences.nmtTrustedNetworkRules[ssid] == NMTRules.alwaysDisconnect.rawValue ||
+                        Client.preferences.nmtTrustedNetworkRules[ssid] == nil){
                     return true
                 }
             } else {
