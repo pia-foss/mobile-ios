@@ -29,10 +29,16 @@
 "account.subscriptions.short.message" = "Gérer l'abonnement";
 "account.subscriptions.trial" = "Forfait d'essai";
 "account.subscriptions.yearly" = "Forfait annuel";
+"account.unauthorized" = "Un problème est survenu. Veuillez réessayer de vous connecter";
 "account.update.email.require.password.button" = "Envoyer";
 "account.update.email.require.password.message" = "Pour des raisons de sécurité, nous exigeons votre mot de passe PIA pour effectuer un changement sur votre compte. Veuillez saisir votre mot de passe PIA pour continuer.";
 "account.update.email.require.password.title" = "Mot de passe PIA nécessaire";
 "account.username.caption" = "Nom d'utilisateur";
+"card.wireguard.cta.activate" = "Essayez WireGuard® maintenant";
+"card.wireguard.cta.learn" = "En savoir plus";
+"card.wireguard.cta.settings" = "Ouvrir les Paramètres";
+"card.wireguard.description" = "Il s'agit d'un nouveau protocole VPN plus efficace qui offre de meilleures performances, une utilisation plus faible du processeur et une durée de vie de la batterie plus longue.";
+"card.wireguard.title" = "Essayez WireGuard® aujourd'hui !";
 "content_blocker.body.footer" = "Veuillez noter : vous n'avez pas besoin d'être connecté au VPN pour que ce bloqueur de contenu fonctionne, mais il ne fonctionnera qu'en naviguant avec Safari.";
 "content_blocker.body.subtitle" = "Pour activer l'utilisation de notre bloqueur de contenu sur Safari, veuillez accéder aux Réglages > Safari et dans la section Général, activez le bouton Bloqueurs de contenu sur PIA VPN.";
 "content_blocker.title" = "Bloqueur de contenu";
@@ -173,6 +179,7 @@
 "settings.application_settings.mace.footer" = "PIA MACE™ bloque les publicités, les traqueurs et les logiciels malveillants quand vous êtes connecté au VPN.";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.title" = "PARAMÉTRES D'APPLICATION";
+"settings.cards.history.title" = "Dernières actualités";
 "settings.commit.buttons.later" = "Plus tard";
 "settings.commit.buttons.reconnect" = "Reconnecter";
 "settings.commit.messages.must_disconnect" = "Le VPN doit se reconnecter pour appliquer certaines modifications.";
