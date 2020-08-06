@@ -154,8 +154,6 @@ class SettingsViewController: AutolayoutViewController {
         case reset
 
         case development
-        
-        case preview
 
         case info
     }
@@ -171,7 +169,6 @@ class SettingsViewController: AutolayoutViewController {
         .applicationInformation,
         .reset,
         .contentBlocker,
-        .preview,
         .info
     ]
 
@@ -212,9 +209,6 @@ class SettingsViewController: AutolayoutViewController {
         .reset: [
             .resetSettings
         ],
-        .preview: [
-            .serversNetwork,
-        ],
         .development: [
 //            .truncateDebugLog,
 //            .recalculatePingTimes,
@@ -227,6 +221,7 @@ class SettingsViewController: AutolayoutViewController {
             .resolveGoogleAdsDomain
         ],
         .info: [
+            .serversNetwork,
             .cardsHistory
         ]
     ]
@@ -936,9 +931,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         case .reset:
             return L10n.Settings.Reset.title
-
-        case .preview:
-            return L10n.Settings.Preview.title
 
         case .development:
             return "DEVELOPMENT"
