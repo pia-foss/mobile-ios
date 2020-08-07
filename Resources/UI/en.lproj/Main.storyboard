@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="boO-X9-UIe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="boO-X9-UIe">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -946,6 +946,7 @@
                         <segue destination="jy7-91-daJ" kind="show" identifier="NetworkManagementToolTileSegue" id="7wM-LQ-vSr"/>
                         <segue destination="MU8-v2-7Zn" kind="show" identifier="ShowQuickSettingsViewController" customClass="ModalNavigationSegue" customModule="PIA_VPN" customModuleProvider="target" id="gOr-cS-0Jn"/>
                         <segue destination="Jcq-Qm-xQ1" kind="presentation" identifier="ShowAddEmailSegue" id="2vQ-Ts-0N1"/>
+                        <segue destination="SAw-ll-7Hp" kind="presentation" identifier="SettingsAndWireGuardSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_VPN" customModuleProvider="target" id="jku-ph-JBL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GcN-zf-hGC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1476,6 +1477,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3vR-8b-fBR"/>
                     </view>
+                    <navigationItem key="navigationItem" id="OUg-1Q-0Jt"/>
                     <connections>
                         <outlet property="tableView" destination="Si7-46-a7E" id="xk9-1a-OcZ"/>
                         <outlet property="viewContainer" destination="p4O-Dy-PbF" id="Aw9-9G-NGH"/>
@@ -1606,6 +1608,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vdJ-TL-mh3"/>
                     </view>
+                    <navigationItem key="navigationItem" id="u7O-qA-HXL"/>
                     <connections>
                         <outlet property="labelPrimaryDNS" destination="UiE-dS-YQG" id="O4c-Wd-pPX"/>
                         <outlet property="labelSecondaryDNS" destination="L8R-SE-RHz" id="yJO-fi-1uf"/>
@@ -2484,6 +2487,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="7wM-LQ-vSr"/>
+        <segue reference="jku-ph-JBL"/>
         <segue reference="9EP-gJ-pE1"/>
         <segue reference="Ic8-R6-xho"/>
     </inferredMetricsTieBreakers>

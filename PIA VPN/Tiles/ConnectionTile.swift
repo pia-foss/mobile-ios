@@ -61,6 +61,7 @@ class ConnectionTile: UIView, Tileable  {
         
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(setConnectionValues), name: .PIASettingsHaveChanged, object: nil)
         nc.addObserver(self, selector: #selector(setConnectionValues), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
 
         setConnectionValues()
@@ -73,17 +74,14 @@ class ConnectionTile: UIView, Tileable  {
         
         if !Client.providers.vpnProvider.isVPNConnected {
             resetValues()
-            return
         }
 
-        let preferences = Client.preferences.editable()
-
-        self.protocolLabel.text = preferences.vpnType.vpnProtocol
-        self.portLabel.text = preferences.vpnType.port
-        self.authenticationLabel.text = preferences.vpnType.authentication
-        self.encryptionLabel.text = preferences.vpnType.encryption
-        self.socketLabel.text = preferences.vpnType.socket
-        self.handshakeLabel.text = preferences.vpnType.handshake
+        self.protocolLabel.text = Client.preferences.vpnType.vpnProtocol
+        self.portLabel.text = Client.preferences.vpnType.port
+        self.authenticationLabel.text = Client.preferences.vpnType.authentication
+        self.encryptionLabel.text = Client.preferences.vpnType.encryption
+        self.socketLabel.text = Client.preferences.vpnType.socket
+        self.handshakeLabel.text = Client.preferences.vpnType.handshake
     }
     
     private func resetValues() {
@@ -97,9 +95,7 @@ class ConnectionTile: UIView, Tileable  {
     
     @objc private func viewShouldRestyle() {
         
-        if !Client.providers.vpnProvider.isVPNConnected {
-            resetValues()
-        }
+        setConnectionValues()
         
         tileTitle.style(style: TextStyle.textStyle21)
         Theme.current.applySettingsCellTitle(protocolLabel, appearance: .dark)

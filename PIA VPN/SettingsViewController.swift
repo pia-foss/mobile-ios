@@ -269,6 +269,8 @@ class SettingsViewController: AutolayoutViewController {
 
     private var pendingVPNAction: VPNAction?
     
+    var shouldSetWireGuardSettings = false
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -328,7 +330,13 @@ class SettingsViewController: AutolayoutViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshSettings),
                                                name: .RefreshSettings,
                                                object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshWireGuardSettings),
+                                               name: .RefreshWireGuardSettings,
+                                               object: nil)
 
+        if shouldSetWireGuardSettings {
+            refreshWireGuardSettings()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -465,6 +473,17 @@ class SettingsViewController: AutolayoutViewController {
     
     @objc private func refreshSettings() {
         tableView.reloadData()
+    }
+    
+    @objc private func refreshWireGuardSettings() {
+        guard let currentWireguardVPNConfiguration = Client.preferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ??
+            Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
+            fatalError("No default VPN custom configuration provided for PIA Wireguard protocol")
+        }
+
+        pendingPreferences.setVPNCustomConfiguration(currentWireguardVPNConfiguration, for: PIAWGTunnelProfile.vpnType)
+        pendingPreferences.vpnType = PIAWGTunnelProfile.vpnType
+        savePreferences()
     }
     
     private func refreshContentBlockerRules() {

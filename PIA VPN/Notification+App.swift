@@ -30,6 +30,8 @@ extension Notification.Name {
     static let RefreshSettings = Notification.Name("RefreshSettings")
     static let Unauthorized = Notification.Name("Unauthorized")
     static let OpenSettings = Notification.Name("OpenSettings")
+    static let OpenSettingsAndActivateWireGuard = Notification.Name("OpenSettingsAndActivateWireGuard")
+    static let RefreshWireGuardSettings = Notification.Name("RefreshWireGuardSettings")
 
 }
 
