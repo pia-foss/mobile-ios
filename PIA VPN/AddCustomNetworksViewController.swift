@@ -119,16 +119,10 @@ extension AddCustomNetworksViewController: UICollectionViewDelegateFlowLayout, U
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
 
-        case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Cells.header, for: indexPath) as! NetworkHeaderCollectionViewCell
-            headerView.setup(withTitle: "Add new rule", andSubtitle: "Choose a WiFi network to add a new rule.")
-            return headerView
-
-        default:
-            assert(false, "Unexpected element kind")
-        }
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Cells.header, for: indexPath) as! NetworkHeaderCollectionViewCell
+        headerView.setup(withTitle: "Add new rule", andSubtitle: "Choose a WiFi network to add a new rule.")
+        return headerView
 
     }
 

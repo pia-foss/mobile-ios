@@ -220,13 +220,11 @@ extension TrustedNetworksViewController: UICollectionViewDelegateFlowLayout, UIC
             headerView.setup(withTitle: "Manage automation", andSubtitle: "Configure how PIA behave on connection to WiFi or Cellular networks. This excludes disconnecting manually.")
             return headerView
 
-        case UICollectionView.elementKindSectionFooter:
+        default:
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Cells.footer, for: indexPath) as! NetworkFooterCollectionViewCell
             footerView.setup()
             return footerView
 
-        default:
-            assert(false, "Unexpected element kind")
         }
 
     }
