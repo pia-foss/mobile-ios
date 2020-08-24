@@ -614,7 +614,6 @@ class SettingsViewController: AutolayoutViewController {
             pendingPreferences.mace = false
         }
         
-        
         pendingVPNAction = pendingPreferences.requiredVPNAction()
 
         if pendingVPNAction == nil &&

@@ -36,6 +36,7 @@ class AddCustomNetworksViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: UIApplication.didBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(popViewController),
                                                name: .TrustedNetworkAdded,
                                                object: nil)
@@ -48,9 +49,6 @@ class AddCustomNetworksViewController: AutolayoutViewController {
     // MARK: Restylable
     
     override func viewShouldRestyle() {
-              
-        data = Client.preferences.availableNetworks
-        data = data.filter { !Client.preferences.nmtTrustedNetworkRules.keys.contains($0) }
 
         super.viewShouldRestyle()
         
@@ -60,16 +58,13 @@ class AddCustomNetworksViewController: AutolayoutViewController {
             Theme.current.applyPrincipalBackground(viewContainer)
         }
         Theme.current.applyPrincipalBackground(collectionView)
-        self.collectionView.reloadData()
+
+        reloadData()
 
     }
     
     // MARK: Private Methods    
     private func configureCollectionView() {
-
-        data = Client.preferences.availableNetworks
-        data = data.filter { !Client.preferences.nmtTrustedNetworkRules.keys.contains($0) }
-
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(UINib(nibName: Cells.network,
                                       bundle: nil),
@@ -79,8 +74,19 @@ class AddCustomNetworksViewController: AutolayoutViewController {
                                 withReuseIdentifier:Cells.header)
         collectionView.delegate = self
         collectionView.dataSource = self
+        reloadData()
     }
 
+    @objc private func reloadData() {
+        data = Client.preferences.availableNetworks
+        data = data.filter { !Client.preferences.nmtTrustedNetworkRules.keys.contains($0) }
+
+        if let current = PIAHotspotHelper().currentWiFiNetwork(), !data.contains(current) {
+            data.append(current)
+        }
+        self.collectionView.reloadData()
+    }
+    
     // MARK: Actions
     @objc private func popViewController() {
         self.navigationController?.popViewController(animated: true)
@@ -121,7 +127,7 @@ extension AddCustomNetworksViewController: UICollectionViewDelegateFlowLayout, U
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
 
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Cells.header, for: indexPath) as! NetworkHeaderCollectionViewCell
-        headerView.setup(withTitle: "Add new rule", andSubtitle: "Choose a WiFi network to add a new rule.")
+        headerView.setup(withTitle: "Add new rule", andSubtitle: "Choose a WiFi network to add a new rule. " + L10n.Settings.Hotspothelper.Available.help)
         return headerView
 
     }
