@@ -310,7 +310,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
     var serverNetwork: ServersNetwork {
         get {
             let network = backend.string(forKey: Entries.serverNetwork)
-            return ServersNetwork(rawValue: network ?? "") ?? ServersNetwork.legacy
+            return ServersNetwork(rawValue: network ?? "") ?? ServersNetwork.gen4
         }
         set {
             backend.set(newValue.rawValue, forKey: Entries.serverNetwork)

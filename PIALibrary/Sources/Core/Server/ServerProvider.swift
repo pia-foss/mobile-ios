@@ -88,4 +88,9 @@ public protocol ServerProvider: class {
      - Returns: The `URL` of the flag asset. The asset is not guaranteed to be available.
      */
     func flagURL(for server: Server) -> URL
+    
+    /**
+     Reset the currentServers object
+     */
+    func resetCurrentServers()
 }

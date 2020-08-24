@@ -249,18 +249,20 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         }
         let fallbackDelay = delay ?? accessedConfiguration.vpnReconnectionDelay
         
-        if forceDisconnect {
+        if activeProfile.vpnType != IKEv2Profile.vpnType {
             activeProfile.disconnect { (error) in
                 if let _ = error {
                     callback?(error)
                     return
                 }
-                Macros.dispatch(after: .milliseconds(fallbackDelay)) {
-                    activeProfile.connect(withConfiguration: self.vpnClientConfiguration(), callback)
-                }
+                activeProfile.connect(withConfiguration: self.vpnClientConfiguration(), callback)
             }
         } else {
-            Macros.dispatch(after: .milliseconds(fallbackDelay)) {
+            activeProfile.updatePreferences { (error) in
+                if let _ = error {
+                    callback?(error)
+                    return
+                }
                 activeProfile.connect(withConfiguration: self.vpnClientConfiguration(), callback)
             }
         }
