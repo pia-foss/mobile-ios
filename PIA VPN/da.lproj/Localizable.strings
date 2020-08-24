@@ -34,6 +34,11 @@
 "account.update.email.require.password.message" = "Af sikkerhedsårsager skal vi bruge din PIA-adgangskode for at udføre en ændring i din konto. Angiv din PIA-adgangskode for at fortsætte.";
 "account.update.email.require.password.title" = "PIA-adgangskode påkrævet";
 "account.username.caption" = "Brugernavn";
+"card.wireguard.cta.activate" = "Prøv WireGuard® nu";
+"card.wireguard.cta.learn" = "Lær mere";
+"card.wireguard.cta.settings" = "Åbn indstillinger";
+"card.wireguard.description" = "Det er en ny, mere effektiv VPN-protokol, der giver bedre ydelse, lavere CPU-forbrug og længere batterilevetid.";
+"card.wireguard.title" = "Prøv WireGuard® i dag!";
 "content_blocker.body.footer" = "Bemærk: Du behøver ikke have forbindelse til VPN for, at denne Indholdsblokering kan fungere, men den virker kun, når du anvender Safari-browseren.";
 "content_blocker.body.subtitle" = "For at aktivere vores Indholdsblokering til brug med Safari skal du gå til Indstillinger > Safari og under Generelt trykke på Indholdsblokering til for PIA VPN.";
 "content_blocker.title" = "Indholdsblokering";
@@ -174,6 +179,7 @@
 "settings.application_settings.mace.footer" = "PIA MACE™ blokerer annoncer, trackers og malware, mens du har forbindelse til VPN.";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.title" = "APPLIKATIONSINDSTILLINGER";
+"settings.cards.history.title" = "Seneste nyt";
 "settings.commit.buttons.later" = "Senere";
 "settings.commit.buttons.reconnect" = "Anbefal";
 "settings.commit.messages.must_disconnect" = "VPN'en skal genoprette forbindelse før nogle ændringer træder i kraft.";

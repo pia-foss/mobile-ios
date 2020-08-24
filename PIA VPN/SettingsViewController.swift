@@ -106,6 +106,9 @@ enum Setting: Int {
     case password
     
     case resolveGoogleAdsDomain
+
+    case cardsHistory
+    
 }
 
 protocol SettingsViewControllerDelegate: class {
@@ -151,8 +154,8 @@ class SettingsViewController: AutolayoutViewController {
         case reset
 
         case development
-        
-        case preview
+
+        case info
     }
 
     private static let allSections: [Section] = [
@@ -166,7 +169,7 @@ class SettingsViewController: AutolayoutViewController {
         .applicationInformation,
         .reset,
         .contentBlocker,
-        .preview
+        .info
     ]
 
     private var visibleSections: [Section] = []
@@ -206,9 +209,6 @@ class SettingsViewController: AutolayoutViewController {
         .reset: [
             .resetSettings
         ],
-        .preview: [
-            .serversNetwork,
-        ],
         .development: [
 //            .truncateDebugLog,
 //            .recalculatePingTimes,
@@ -219,6 +219,10 @@ class SettingsViewController: AutolayoutViewController {
             .username,
             .password,
             .resolveGoogleAdsDomain
+        ],
+        .info: [
+            .serversNetwork,
+            .cardsHistory
         ]
     ]
     
@@ -251,6 +255,8 @@ class SettingsViewController: AutolayoutViewController {
 
     private var isContentBlockerEnabled = false
 
+    private var isResetting = false
+
     private var pendingPreferences: Client.Preferences.Editable!
     
     private var pendingOpenVPNSocketType: SocketType?
@@ -262,6 +268,8 @@ class SettingsViewController: AutolayoutViewController {
     private var pendingWireguardVPNConfiguration: PIAWireguardConfiguration!
 
     private var pendingVPNAction: VPNAction?
+    
+    var shouldSetWireGuardSettings = false
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -322,7 +330,13 @@ class SettingsViewController: AutolayoutViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshSettings),
                                                name: .RefreshSettings,
                                                object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshWireGuardSettings),
+                                               name: .RefreshWireGuardSettings,
+                                               object: nil)
 
+        if shouldSetWireGuardSettings {
+            refreshWireGuardSettings()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -461,6 +475,17 @@ class SettingsViewController: AutolayoutViewController {
         tableView.reloadData()
     }
     
+    @objc private func refreshWireGuardSettings() {
+        guard let currentWireguardVPNConfiguration = Client.preferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ??
+            Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
+            fatalError("No default VPN custom configuration provided for PIA Wireguard protocol")
+        }
+
+        pendingPreferences.setVPNCustomConfiguration(currentWireguardVPNConfiguration, for: PIAWGTunnelProfile.vpnType)
+        pendingPreferences.vpnType = PIAWGTunnelProfile.vpnType
+        savePreferences()
+    }
+    
     private func refreshContentBlockerRules() {
         self.showLoadingAnimation()
         SFContentBlockerManager.reloadContentBlocker(withIdentifier: AppConstants.Extensions.adBlockerBundleIdentifier) { (error) in
@@ -533,6 +558,8 @@ class SettingsViewController: AutolayoutViewController {
     
     private func doReset() {
 
+        isResetting = true
+        
         // only don't reset selected server
         let savedServer = pendingPreferences.preferredServer
         pendingPreferences.reset()
@@ -581,18 +608,20 @@ class SettingsViewController: AutolayoutViewController {
         pendingPreferences.shouldConnectForAllNetworks = Client.preferences.shouldConnectForAllNetworks
         pendingPreferences.useWiFiProtection = Client.preferences.useWiFiProtection
         pendingPreferences.trustCellularData = Client.preferences.trustCellularData
-
         pendingVPNAction = pendingPreferences.requiredVPNAction()
 
+        if pendingVPNAction == nil &&
+            Client.providers.vpnProvider.isVPNConnected &&
+            isResetting {
+            pendingVPNAction = pendingPreferences.defaultVPNAction()
+        }
+        
+        isResetting = false
+        
         guard let action = pendingVPNAction else {
             commitAppPreferences()
             completionHandler()
             return
-        }
-        
-        var forceDisconnect = true
-        if self.pendingPreferences.vpnType != Client.providers.vpnProvider.currentVPNType {
-            forceDisconnect = false
         }
         
         let isDisconnected = (Client.providers.vpnProvider.vpnStatus == .disconnected)
@@ -602,7 +631,7 @@ class SettingsViewController: AutolayoutViewController {
                 self.pendingVPNAction = nil
                 
                 if shouldReconnect && !isDisconnected {
-                    Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: forceDisconnect) { (error) in
+                    Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true) { (error) in
                         completionHandler()
                         self.hideLoadingAnimation()
                     }
@@ -922,11 +951,12 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .reset:
             return L10n.Settings.Reset.title
 
-        case .preview:
-            return L10n.Settings.Preview.title
-
         case .development:
             return "DEVELOPMENT"
+            
+        case .info:
+            return nil
+
         }
     }
 
@@ -1026,7 +1056,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
             cell.setupCell(withTitle: L10n.Settings.Connection.VpnProtocol.title,
                            description: pendingPreferences.vpnType.vpnTypeDescription,
-                           shouldShowBadge: pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType)
+                           shouldShowBadge: false)
 
             if !Flags.shared.enablesProtocolSelection {
                 cell.accessoryType = .none
@@ -1142,6 +1172,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryView = switchServersNetwork
             cell.selectionStyle = .none
             switchServersNetwork.isOn = Client.configuration.currentServerNetwork() == ServersNetwork.gen4
+
+        case .cardsHistory:
+            cell.textLabel?.text = L10n.Settings.Cards.History.title
+            cell.detailTextLabel?.text = nil
 
         case .geoServers:
             cell.textLabel?.text = L10n.Settings.Geo.Servers.description
@@ -1442,6 +1476,17 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             
         case .resetSettings:
             resetToDefaultSettings()
+            
+        case .cardsHistory:
+            let callingCards = CardFactory.getAllCards()
+            if !callingCards.isEmpty {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let cardsController = storyboard.instantiateViewController(withIdentifier: "PIACardsViewController") as? PIACardsViewController {
+                    cardsController.setupWith(cards: callingCards)
+                    cardsController.modalPresentationStyle = .overCurrentContext
+                    self.present(cardsController, animated: true)
+                }
+            }
 
 //        case .truncateDebugLog:
 //            truncateDebugLog()
@@ -1527,10 +1572,7 @@ extension SettingsViewController: OptionsViewControllerDelegate {
         switch setting {
         case .vpnProtocolSelection:
             let vpnType = option as! String
-            var message = vpnType.vpnTypeDescription
-            if vpnType == PIAWGTunnelProfile.vpnType {
-                message += " - PREVIEW"
-            }
+            let message = vpnType.vpnTypeDescription
             cell.textLabel?.text = message
         case .vpnSocket:
             let rawSocketType = option as? String

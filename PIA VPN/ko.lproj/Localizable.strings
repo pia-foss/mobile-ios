@@ -34,6 +34,11 @@
 "account.update.email.require.password.message" = "보안상의 이유로 계정에서 변경 작업을 수행하려면 PIA 비밀번호가 필요합니다. 계속 진행하려면 PIA 비밀번호를 입력하세요.";
 "account.update.email.require.password.title" = "PIA 비밀번호가 필요합니다.";
 "account.username.caption" = "사용자 이름";
+"card.wireguard.cta.activate" = "지금 WireGuard® 사용해 보기";
+"card.wireguard.cta.learn" = "자세히 보기";
+"card.wireguard.cta.settings" = "설정 열기";
+"card.wireguard.description" = "새롭고 더 효율적인 VPN 프로토콜을 통해 더 우수한 성능, 더 적은 CPU 사용량 및 더 긴 배터리 수명을 제공합니다.";
+"card.wireguard.title" = "지금 WireGuard®를 사용해 보세요!";
 "content_blocker.body.footer" = "주의: Content Blocker를 작동시키기 위해 VPN에 연결할 필요가 없지만, Safari로 검색할 때만 작동합니다.";
 "content_blocker.body.subtitle" = "Content Blocker를 활성화하여 Safari로 사용하려면 설정 > Safari로 가서 '일반'에서 Content Blockers를 눌러 PIA VPN을 켜세요.";
 "content_blocker.title" = "Content Blocker";
@@ -174,6 +179,7 @@
 "settings.application_settings.mace.footer" = "PIA MACE™는 VPN에 연결되어 있을 때 광고, 트래커 및 악성코드를 차단합니다.";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.title" = "애플리케이션 설정";
+"settings.cards.history.title" = "최신 뉴스";
 "settings.commit.buttons.later" = "나중에";
 "settings.commit.buttons.reconnect" = "다시 연결";
 "settings.commit.messages.must_disconnect" = "변경사항이 반영되려면 VPN을 다시 연결해야 합니다.";

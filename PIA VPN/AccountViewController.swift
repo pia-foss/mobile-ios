@@ -36,21 +36,13 @@ class AccountViewController: AutolayoutViewController {
     @IBOutlet private weak var scrollView: UIScrollView!
 
     @IBOutlet private weak var viewSafe: UIView!
-
-    @IBOutlet private weak var labelEmail: UILabel!
-
-    @IBOutlet private weak var textEmail: BorderedTextField!
     
     @IBOutlet private weak var labelUsername: UILabel!
     
     @IBOutlet private weak var textUsername: UITextField!
     
-    @IBOutlet private weak var labelFooterOther: UILabel!
-
     @IBOutlet weak var labelExpiryInformation: UILabel!
-    
-    @IBOutlet private weak var itemUpdate: UIBarButtonItem!
-    
+        
     @IBOutlet private weak var viewAccountInfo: UIView!
     
     @IBOutlet private weak var viewUncredited: UIView!
@@ -75,12 +67,6 @@ class AccountViewController: AutolayoutViewController {
 
     private var currentUser: UserAccount?
 
-    private var canSaveAccount = false {
-        didSet {
-            itemUpdate.isEnabled = canSaveAccount
-        }
-    }
-
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -89,11 +75,7 @@ class AccountViewController: AutolayoutViewController {
         super.viewDidLoad()
 
         title = L10n.Menu.Item.account
-        labelEmail.text = L10n.Account.Email.caption
-        textEmail.placeholder = L10n.Account.Email.placeholder
         labelUsername.text = L10n.Account.Username.caption
-        itemUpdate.title = L10n.Account.Save.item
-        labelFooterOther.text = L10n.Account.Other.footer
         labelRestoreTitle.text = L10n.Account.Restore.title
         labelRestoreInfo.text = L10n.Account.Restore.description
         buttonRestore.setTitle(L10n.Account.Restore.button.uppercased(), for: .normal)
@@ -103,9 +85,7 @@ class AccountViewController: AutolayoutViewController {
         labelSubscriptions.isUserInteractionEnabled = true
 
         viewSafe.layoutMargins = .zero
-        textEmail.isEditable = true
         textUsername.isUserInteractionEnabled = false
-        canSaveAccount = false
 
         buttonFriendReferral.setTitle("  \(L10n.Friend.Referrals.title)  >  ", for: .normal)
         labelFriendReferralInfo.text = L10n.Friend.Referrals.Friends.Family.title
@@ -135,14 +115,6 @@ class AccountViewController: AutolayoutViewController {
         view.endEditing(true)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    
-        if textEmail.text?.isEmpty ?? true {
-            textEmail.becomeFirstResponder()
-        }
-    }
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         buttonFriendReferral.layoutIfNeeded()
@@ -155,75 +127,6 @@ class AccountViewController: AutolayoutViewController {
     
     // MARK: Actions
 
-    @IBAction private func saveChanges(_ sender: Any?) {
-        
-        textEmail.resignFirstResponder()
-        
-        guard canSaveAccount else {
-            return
-        }
-    
-        guard let email = self.textEmail.text else {
-            return
-        }
-        
-        let alert = Macros.alertController(L10n.Account.Update.Email.Require.Password.title,
-                                           L10n.Account.Update.Email.Require.Password.message)
-
-        alert.addCancelAction(L10n.Global.cancel)
-        let action = UIAlertAction(title: L10n.Account.Update.Email.Require.Password.button,
-                                   style: .default) { [weak self] (alertAction) in
-            
-            if let weakSelf = self {
-                if let textField = alert.textFields?.first,
-                    let password = textField.text {
-                    
-                    log.debug("Account: Modifying account email...")
-                    
-                    let request = UpdateAccountRequest(email: email)
-
-                    
-                    Client.providers.accountProvider.update(with: request,
-                                                            resetPassword: false,
-                                                            andPassword: password) { (info, error) in
-                                                                weakSelf.hideLoadingAnimation()
-                                                                
-                                                                guard let _ = info else {
-                                                                    if let error = error {
-                                                                        log.error("Account: Failed to modify account email (error: \(error))")
-                                                                    } else {
-                                                                        log.error("Account: Failed to modify account email")
-                                                                    }
-                                                                    
-                                                                    weakSelf.textEmail.text = ""
-                                                                    let alert = Macros.alert(L10n.Global.error, L10n.Account.Error.unauthorized)
-                                                                    alert.addDefaultAction(L10n.Global.close)
-                                                                    self?.present(alert, animated: true, completion: nil)
-                                                                    
-                                                                    return
-                                                                }
-                                                                
-                                                                log.debug("Account: Email successfully modified")
-                                                                let alert = Macros.alert(nil, L10n.Account.Save.success)
-                                                                alert.addDefaultAction(L10n.Global.ok)
-                                                                weakSelf.present(alert, animated: true, completion: nil)
-                                                                weakSelf.textEmail.text = email
-                                                                weakSelf.textEmail.endEditing(true)
-                                                                weakSelf.canSaveAccount = false
-                    }
-                    
-                }
-
-            }
-        }
-        alert.addTextField { (textField) in
-            textField.isSecureTextEntry = true
-        }
-        alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
-        
-    }
-    
     @IBAction private func renewSubscriptionWithUncreditedPurchase(_ sender: Any?) {
         Client.providers.accountProvider.restorePurchases { (error) in
             if let error = error {
@@ -296,9 +199,6 @@ class AccountViewController: AutolayoutViewController {
     @objc private func redisplayAccount() {
         currentUser = Client.providers.accountProvider.currentUser
 
-        textEmail.endEditing(true)
-        textEmail.text = currentUser?.info?.email
-        textEmail.isEnabled = !(currentUser?.info?.isExpired ?? true)
         textUsername.text =  Client.providers.accountProvider.publicUsername ?? ""
         
         if let userInfo = currentUser?.info {
@@ -344,13 +244,11 @@ class AccountViewController: AutolayoutViewController {
         }
         
         Theme.current.applySecondaryBackground(viewAccountInfo)
-        Theme.current.applySubtitle(labelEmail)
         Theme.current.applySubtitle(labelUsername)
         
-        Theme.current.applyInput(textEmail)
         Theme.current.applyClearTextfield(textUsername)
 
-        for label in [labelFooterOther!, labelExpiryInformation!] {
+        for label in [labelExpiryInformation!] {
             Theme.current.applySubtitle(label)
         }
         Theme.current.applyTitle(labelRestoreTitle, appearance: .dark)
@@ -375,23 +273,3 @@ class AccountViewController: AutolayoutViewController {
     }
 }
 
-extension AccountViewController: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let hitEnter = (string == "\n")
-        if !hitEnter {
-            if let currentText = textField.text {
-                let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
-                canSaveAccount = ((newText != currentUser?.info?.email) && Validator.validate(email: newText))
-            }
-        }
-        return true
-    }
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if (textField == textEmail) {
-            textField.resignFirstResponder()
-            saveChanges(textField)
-        }
-        return true
-    }
-}

@@ -34,6 +34,11 @@
 "account.update.email.require.password.message" = "基於安全考量，您必須輸入 PIA 密碼才能變更帳戶。請輸入您的 PIA 密碼以繼續。";
 "account.update.email.require.password.title" = "需要 PIA 密碼";
 "account.username.caption" = "使用者名稱";
+"card.wireguard.cta.activate" = "立即體驗 WireGuard®";
+"card.wireguard.cta.learn" = "深入了解";
+"card.wireguard.cta.settings" = "開啟設定";
+"card.wireguard.description" = "這是款全新高效的 VPN 通訊協定，具備更佳的性能、更低的 CPU 使用率和更長的電池壽命。";
+"card.wireguard.title" = "立即體驗 WireGuard®！";
 "content_blocker.body.footer" = "請注意：您不需要連接至 VPN，此內容阻擋器就能運作，但將只會在您使用 Safari 瀏覽時才會有效。";
 "content_blocker.body.subtitle" = "要在 Safari 上啟用我們的內容阻擋器，請前往設定 > Safari，然後在「一般」類項點選「內容阻擋器」，開啟 PIA VPN。";
 "content_blocker.title" = "內容阻擋器";
@@ -174,6 +179,7 @@
 "settings.application_settings.mace.footer" = "PIA MACE™ 會在您連線到 VPN 時封鎖廣告、追蹤器及惡意程式。";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.title" = "應用程式設定";
+"settings.cards.history.title" = "最新消息";
 "settings.commit.buttons.later" = "稍後";
 "settings.commit.buttons.reconnect" = "重新連接";
 "settings.commit.messages.must_disconnect" = "部分修改須待VPN 重新連接，方可生效。";

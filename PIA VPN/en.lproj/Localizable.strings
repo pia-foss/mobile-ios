@@ -161,6 +161,7 @@
 "settings.server.network.alert" = "The VPN has to be disconnected to change the server network.";
 
 "settings.geo.servers.description" = "Include geo-located regions";
+"settings.cards.history.title" = "Latest news";
 
 // CONTENT BLOCKER
 
@@ -336,3 +337,10 @@
 "rating.error.question" = "Oh no, what went wrong?";
 "rating.error.subtitle" = "Let us know about it. We really want to fix it for you.";
 "rating.error.button.send" = "Send feedback";
+
+// CALLING CARDS
+"card.wireguard.title" = "Try WireGuard® today!";
+"card.wireguard.description" = "It's a new, more efficient VPN protocol that offers better performance, lower CPU usage and longer battery life.";
+"card.wireguard.cta.activate" = "Try WireGuard® now";
+"card.wireguard.cta.settings" = "Open Settings";
+"card.wireguard.cta.learn" = "Learn more";

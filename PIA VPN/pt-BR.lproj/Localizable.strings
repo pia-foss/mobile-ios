@@ -34,6 +34,11 @@
 "account.update.email.require.password.message" = "Por razões de segurança, precisamos da sua senha do PIA para executar uma alteração na sua conta. Insira a sua senha do PIA para continuar.";
 "account.update.email.require.password.title" = "Senha do PIA necessária";
 "account.username.caption" = "Nome de usuário";
+"card.wireguard.cta.activate" = "Experimente o WireGuard® agora";
+"card.wireguard.cta.learn" = "Saiba mais";
+"card.wireguard.cta.settings" = "Abrir Configurações";
+"card.wireguard.description" = "É um protocolo de VPN novo e mais eficiente que oferece um melhor desempenho, menor uso da CPU e maior duração da bateria.";
+"card.wireguard.title" = "Experimente o WireGuard® hoje mesmo!";
 "content_blocker.body.footer" = "Observação: Você não precisa estar conectado à VPN para este Bloqueador de Conteúdo funcionar, porém ele só funcionará enquanto estiver navegando no Safari.";
 "content_blocker.body.subtitle" = "Para ativar nosso Bloqueador de Conteúdo para usar com o Safari, por favor, vá para Ajustes > Safari, e, em Geral, toque em Bloqueadores de Conteúdo e ative PIA VPN.";
 "content_blocker.title" = "Bloqueador de Conteúdo";
@@ -174,6 +179,7 @@
 "settings.application_settings.mace.footer" = "O PIA MACE™ bloqueia anúncios, rastreadores e malware enquanto você está conectado à VPN.";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.title" = "CONFIGURAÇÕES DO APLICATIVO";
+"settings.cards.history.title" = "Últimas notícias";
 "settings.commit.buttons.later" = "Depois";
 "settings.commit.buttons.reconnect" = "Reconectar";
 "settings.commit.messages.must_disconnect" = "A VPN deve reconectar para que algumas mudanças entrem em efeito.";

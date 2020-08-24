@@ -32,6 +32,8 @@ class AppPreferences {
     
     private struct Entries {
         
+        static let appVersion = "AppVersion"
+        
         static let version = "Version"
         
         static let launched = "Launched" // discard 2.2 key and invert logic
@@ -364,6 +366,15 @@ class AppPreferences {
             defaults.set(newValue, forKey: Entries.showGeoServers)
         }
     }
+    
+    var appVersion: String? {
+        get {
+            return defaults.string(forKey: Entries.appVersion)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.appVersion)
+        }
+    }
 
     private init() {
         guard let defaults = UserDefaults(suiteName: AppConstants.appGroup) else {
@@ -373,6 +384,7 @@ class AppPreferences {
 
         defaults.register(defaults: [
             Entries.version: AppPreferences.currentVersion,
+            Entries.appVersion: "",
             Entries.launched: false,
             Entries.regionFilter: RegionFilter.name.rawValue,
             Entries.favoriteServerIdentifiers: [],

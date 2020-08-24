@@ -31,6 +31,7 @@ class DashboardViewController: AutolayoutViewController {
     
     enum TileSize: CGFloat {
         case standard = 89.0
+        case big = 150.0
     }
 
     private var viewContentHeight: CGFloat = 0
@@ -93,7 +94,9 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(checkAccountEmail), name: .PIAAccountDidRefresh, object: nil)
         nc.addObserver(self, selector: #selector(vpnDidFail), name: .PIAVPNDidFail, object: nil)
         nc.addObserver(self, selector: #selector(unauthorized), name: .Unauthorized, object: nil)
-        
+        nc.addObserver(self, selector: #selector(openSettings), name: .OpenSettings, object: nil)
+        nc.addObserver(self, selector: #selector(openSettingsAndWireGuard), name: .OpenSettingsAndActivateWireGuard, object: nil)
+
         if Client.providers.accountProvider.isLoggedIn {
             Client.providers.accountProvider.refreshAndLogoutUnauthorized()
         }
@@ -134,6 +137,8 @@ class DashboardViewController: AutolayoutViewController {
 
         collectionView.reloadData()
         updateCurrentStatus()
+        setupCallingCards()
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -153,6 +158,27 @@ class DashboardViewController: AutolayoutViewController {
         
         // check account email
         checkAccountEmail()
+
+    }
+    
+    // MARK: Calling Cards
+    private func setupCallingCards() {
+        
+        if AppPreferences.shared.appVersion == nil || (AppPreferences.shared.appVersion != nil && AppPreferences.shared.appVersion != Macros.versionString()) {
+            
+            let callingCards = CardFactory.getCardsForVersion(Macros.versionString())
+            if !callingCards.isEmpty {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let cardsController = storyboard.instantiateViewController(withIdentifier: "PIACardsViewController") as? PIACardsViewController {
+                    cardsController.setupWith(cards: callingCards)
+                    cardsController.modalPresentationStyle = .overCurrentContext
+                    self.present(cardsController, animated: true)
+                }
+            }
+            
+            AppPreferences.shared.appVersion = Macros.versionString()
+
+        }
 
     }
     
@@ -360,8 +386,12 @@ class DashboardViewController: AutolayoutViewController {
         perform(segue: segue)
     }
 
-    func openSettings() {
+    @objc func openSettings() {
         perform(segue: StoryboardSegue.Main.settingsSegueIdentifier)
+    }
+    
+    @objc func openSettingsAndWireGuard() {
+        perform(segue: StoryboardSegue.Main.settingsAndWireGuardSegueIdentifier)
     }
     
     func openAccount() {
@@ -385,6 +415,10 @@ class DashboardViewController: AutolayoutViewController {
             nmt.persistentConnectionValue = Client.preferences.isPersistentConnection
         } else if let vc = segue.destination as? AddEmailToAccountViewController {
             vc.modalPresentationStyle = .fullScreen
+        } else if let identifier = segue.identifier,
+            identifier == StoryboardSegue.Main.settingsAndWireGuardSegueIdentifier.rawValue,
+            let vc = segue.destination as? SettingsViewController {
+            vc.shouldSetWireGuardSettings = true
         }
     }
     
@@ -741,8 +775,18 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let tileIndex = tileModeStatus == .normal ?
+            Client.providers.tileProvider.visibleTiles[indexPath.row].rawValue :
+            Client.providers.tileProvider.orderedTiles[indexPath.row].rawValue
+
+        var tileHeight = TileSize.standard.rawValue
+        if Cells.objectIdentifyBy(index: tileIndex).identifier == Cells.connectionTile.identifier {
+            tileHeight = TileSize.big.rawValue
+        }
+        
         return CGSize(width: collectionView.frame.width,
-                      height: TileSize.standard.rawValue)
+                      height: tileHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView,

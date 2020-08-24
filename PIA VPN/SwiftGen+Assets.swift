@@ -44,6 +44,13 @@ struct ColorAsset {
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 enum Asset {
+  enum Cards {
+    enum WireGuard {
+      static let wgBackgroundDark = ImageAsset(name: "wg-background-dark")
+      static let wgBackgroundLight = ImageAsset(name: "wg-background-light")
+      static let wgMain = ImageAsset(name: "wg-main")
+    }
+  }
   enum Piax {
     enum DarkMap {
       static let darkMap = ImageAsset(name: "Dark-Map")
@@ -92,6 +99,14 @@ enum Asset {
       static let splash = ImageAsset(name: "splash")
     }
     enum Tiles {
+      enum ConnectionTile {
+        static let iconAuthentication = ImageAsset(name: "icon-authentication")
+        static let iconEncryption = ImageAsset(name: "icon-encryption")
+        static let iconHandshake = ImageAsset(name: "icon-handshake")
+        static let iconPort = ImageAsset(name: "icon-port")
+        static let iconProtocol = ImageAsset(name: "icon-protocol")
+        static let iconSocket = ImageAsset(name: "icon-socket")
+      }
       static let ipTriangle = ImageAsset(name: "ip-triangle")
       static let openTileDetails = ImageAsset(name: "open-tile-details")
       static let quickConnectPlaceholderDark = ImageAsset(name: "quick-connect-placeholder-dark")
@@ -369,6 +384,7 @@ enum Asset {
   static let iconAbout = ImageAsset(name: "icon-about")
   static let iconAccount = ImageAsset(name: "icon-account")
   static let iconAdd = ImageAsset(name: "icon-add")
+  static let iconClose = ImageAsset(name: "icon-close")
   static let iconContact = ImageAsset(name: "icon-contact")
   static let iconGeoDarkSelected = ImageAsset(name: "icon-geo-dark-selected")
   static let iconGeoDark = ImageAsset(name: "icon-geo-dark")
@@ -395,6 +411,9 @@ enum Asset {
   static let allColors: [ColorAsset] = [
   ]
   static let allImages: [ImageAsset] = [
+    Cards.WireGuard.wgBackgroundDark,
+    Cards.WireGuard.wgBackgroundLight,
+    Cards.WireGuard.wgMain,
     Piax.DarkMap.darkMap,
     Piax.Dashboard.vpnButton,
     Piax.Global.browserDarkInactive,
@@ -431,6 +450,12 @@ enum Asset {
     Piax.Regions.noResultsDark,
     Piax.Regions.noResultsLight,
     Piax.Splash.splash,
+    Piax.Tiles.ConnectionTile.iconAuthentication,
+    Piax.Tiles.ConnectionTile.iconEncryption,
+    Piax.Tiles.ConnectionTile.iconHandshake,
+    Piax.Tiles.ConnectionTile.iconPort,
+    Piax.Tiles.ConnectionTile.iconProtocol,
+    Piax.Tiles.ConnectionTile.iconSocket,
     Piax.Tiles.ipTriangle,
     Piax.Tiles.openTileDetails,
     Piax.Tiles.quickConnectPlaceholderDark,
@@ -704,6 +729,7 @@ enum Asset {
     iconAbout,
     iconAccount,
     iconAdd,
+    iconClose,
     iconContact,
     iconGeoDarkSelected,
     iconGeoDark,

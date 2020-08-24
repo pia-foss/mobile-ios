@@ -1,10 +1,9 @@
 // swiftlint:disable all
-// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 import Foundation
 
-// swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
+// swiftlint:disable superfluous_disable_command file_length implicit_return
 
 // MARK: - Strings
 
@@ -42,8 +41,8 @@ internal enum L10n {
       /// Your plan has expired.
       internal static let expired = L10n.tr("Localizable", "account.expiry_date.expired")
       /// Your plan will expire on %@.
-      internal static func information(_ p1: String) -> String {
-        return L10n.tr("Localizable", "account.expiry_date.information", p1)
+      internal static func information(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "account.expiry_date.information", String(describing: p1))
       }
     }
     internal enum Other {
@@ -117,6 +116,23 @@ internal enum L10n {
     internal enum Username {
       /// Username
       internal static let caption = L10n.tr("Localizable", "account.username.caption")
+    }
+  }
+
+  internal enum Card {
+    internal enum Wireguard {
+      /// It's a new, more efficient VPN protocol that offers better performance, lower CPU usage and longer battery life.
+      internal static let description = L10n.tr("Localizable", "card.wireguard.description")
+      /// Try WireGuard® today!
+      internal static let title = L10n.tr("Localizable", "card.wireguard.title")
+      internal enum Cta {
+        /// Try WireGuard® now
+        internal static let activate = L10n.tr("Localizable", "card.wireguard.cta.activate")
+        /// Learn more
+        internal static let learn = L10n.tr("Localizable", "card.wireguard.cta.learn")
+        /// Open Settings
+        internal static let settings = L10n.tr("Localizable", "card.wireguard.cta.settings")
+      }
     }
   }
 
@@ -366,8 +382,8 @@ internal enum L10n {
       /// Menu
       internal static let item = L10n.tr("Localizable", "menu.accessibility.item")
       /// Logged in as %@
-      internal static func loggedAs(_ p1: String) -> String {
-        return L10n.tr("Localizable", "menu.accessibility.logged_as", p1)
+      internal static func loggedAs(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "menu.accessibility.logged_as", String(describing: p1))
       }
       internal enum Edit {
         /// Edit
@@ -534,8 +550,8 @@ internal enum L10n {
       }
       internal enum Success {
         /// We have sent your account username and password at your email address at %@
-        internal static func messageFormat(_ p1: String) -> String {
-          return L10n.tr("Localizable", "set.email.success.message_format", p1)
+        internal static func messageFormat(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "set.email.success.message_format", String(describing: p1))
         }
       }
     }
@@ -562,8 +578,8 @@ internal enum L10n {
         }
         internal enum Success {
           /// Debug information successfully submitted.\nID: %@\nPlease note this ID, as our support team will require this to locate your submission.
-          internal static func message(_ p1: String) -> String {
-            return L10n.tr("Localizable", "settings.application_information.debug.success.message", p1)
+          internal static func message(_ p1: Any) -> String {
+            return L10n.tr("Localizable", "settings.application_information.debug.success.message", String(describing: p1))
           }
           /// Debug information submitted
           internal static let title = L10n.tr("Localizable", "settings.application_information.debug.success.title")
@@ -592,6 +608,12 @@ internal enum L10n {
         internal static let footer = L10n.tr("Localizable", "settings.application_settings.mace.footer")
         /// PIA MACE™
         internal static let title = L10n.tr("Localizable", "settings.application_settings.mace.title")
+      }
+    }
+    internal enum Cards {
+      internal enum History {
+        /// Latest news
+        internal static let title = L10n.tr("Localizable", "settings.cards.history.title")
       }
     }
     internal enum Commit {
@@ -975,8 +997,8 @@ internal enum L10n {
       /// We don’t monitor, filter or log any network activity.
       internal static let footer = L10n.tr("Localizable", "vpn_permission.body.footer")
       /// You’ll see a prompt for PIA VPN and need to allow access to VPN configurations.\nTo proceed tap on “%@”.
-      internal static func subtitle(_ p1: String) -> String {
-        return L10n.tr("Localizable", "vpn_permission.body.subtitle", p1)
+      internal static func subtitle(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "vpn_permission.body.subtitle", String(describing: p1))
       }
       /// PIA needs access to your VPN profiles to secure your traffic
       internal static let title = L10n.tr("Localizable", "vpn_permission.body.title")
@@ -1000,9 +1022,15 @@ internal enum L10n {
 
 extension L10n {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
-    let format = NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
+    let format = BundleToken.bundle.localizedString(forKey: key, value: nil, table: table)
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }
 
-private final class BundleToken {}
+// swiftlint:disable convenience_type
+private final class BundleToken {
+  static let bundle: Bundle = {
+    Bundle(for: BundleToken.self)
+  }()
+}
+// swiftlint:enable convenience_type

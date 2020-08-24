@@ -34,6 +34,11 @@
 "account.update.email.require.password.message" = "安全のため、お使いのアカウントのPIAパスワードの変更を行う必要があります。先へ進むにはPIAパスワードを入力してください。";
 "account.update.email.require.password.title" = "PIAパスワードが必要です";
 "account.username.caption" = "ユーザー名";
+"card.wireguard.cta.activate" = "WireGuard®を今すぐ試す";
+"card.wireguard.cta.learn" = "詳しく知る";
+"card.wireguard.cta.settings" = "[設定]を開く";
+"card.wireguard.description" = "より優れたパフォーマンス、より低いCPU使用率、およびより長いバッテリー寿命を提供する、新しくより効率的なVPNプロトコルです。";
+"card.wireguard.title" = "WireGuard®を今すぐお試しください！";
 "content_blocker.body.footer" = "注意：コンテンツブロッカーは、VPNへの接続がなくても機能しますが、Safariを使ったブラウジングのみで利用できます。";
 "content_blocker.body.subtitle" = "コンテンツブロッカーをオンにしてSafariで使えるようにするには、「設定」>「Safari」にアクセスし、「一般」からPIA VPNで「コンテンツブロッカー」をオンにしてください。";
 "content_blocker.title" = "コンテンツブロッカー";
@@ -174,6 +179,7 @@
 "settings.application_settings.mace.footer" = "PIA MACE™はVPNに接続されている間、広告、閲覧行動の追跡、そしてマルウェアをブロックします。";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.title" = "アプリ設定";
+"settings.cards.history.title" = "最新情報";
 "settings.commit.buttons.later" = "後で";
 "settings.commit.buttons.reconnect" = "再接続";
 "settings.commit.messages.must_disconnect" = "変更を反映するには、VPNを再接続する必要があります。";

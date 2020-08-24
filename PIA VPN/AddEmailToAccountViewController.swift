@@ -34,6 +34,7 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
     @IBOutlet private weak var textEmail: BorderedTextField!
     @IBOutlet private weak var labelTitle: UILabel!
     @IBOutlet private weak var labelSubtitle: UILabel!
+    @IBOutlet private weak var logoutButton: UIButton!
     var termsAndConditionsAgreed = false
     
     //Show credentials
@@ -72,6 +73,7 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
         }
 
         self.styleConfirmButton()
+        self.styleLogoutButton()
         
         scrollView.alpha = 0
 
@@ -216,6 +218,18 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
         }
     }
     
+    @IBAction private func logout() {
+        Client.providers.accountProvider.logout({ error in
+            guard let _ = error else {
+                self.dismiss(animated: true) {
+                    AppPreferences.shared.clean()
+                }
+                return
+            }
+            log.debug("Account: Error logging out the user")
+        })
+    }
+
     // MARK: Restylable
     override public func viewShouldRestyle() {
         super.viewShouldRestyle()
@@ -239,6 +253,12 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
         buttonConfirm.setRounded()
         buttonConfirm.style(style: TextStyle.Buttons.piaGreenButton)
         buttonConfirm.setTitle(L10n.Global.update.uppercased(),
+                               for: [])
+    }
+    
+    private func styleLogoutButton() {
+        Theme.current.applyButtonLabelMediumStyle(logoutButton)
+        logoutButton.setTitle(L10n.Menu.Logout.title.uppercased(),
                                for: [])
     }
     

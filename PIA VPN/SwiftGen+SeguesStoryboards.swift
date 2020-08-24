@@ -1,5 +1,5 @@
 // swiftlint:disable all
-// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 // swiftlint:disable sorted_imports
 import Foundation
@@ -23,6 +23,7 @@ internal enum StoryboardSegue {
     case networkManagementToolTileSegue = "NetworkManagementToolTileSegue"
     case selectRegionAnimatedSegueIdentifier = "SelectRegionAnimatedSegueIdentifier"
     case selectRegionSegueIdentifier = "SelectRegionSegueIdentifier"
+    case settingsAndWireGuardSegueIdentifier = "SettingsAndWireGuardSegueIdentifier"
     case settingsSegueIdentifier = "SettingsSegueIdentifier"
     case showAddEmailSegue = "ShowAddEmailSegue"
     case showQuickSettingsViewController = "ShowQuickSettingsViewController"
@@ -53,5 +54,3 @@ internal extension SegueType where RawValue == String {
     self.init(rawValue: identifier)
   }
 }
-
-private final class BundleToken {}
