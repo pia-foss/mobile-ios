@@ -36,7 +36,8 @@ class FavoriteServersTile: UIView, Tileable {
     
     @IBOutlet private weak var tileTitle: UILabel!
     @IBOutlet private weak var stackView: UIStackView!
-    
+    @IBOutlet private weak var labelsStackView: UIStackView!
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.xibSetup()
@@ -82,6 +83,12 @@ class FavoriteServersTile: UIView, Tileable {
             }
         }
         
+        for label in labelsStackView.subviews {
+            if let label = label as? UILabel {
+                label.text = ""
+            }
+        }
+        
         var favServers: [Server] = []
         let favoriteServers = Client.configuration.currentServerNetwork() == .gen4 ?
             AppPreferences.shared.favoriteServerIdentifiersGen4 :
@@ -103,6 +110,12 @@ class FavoriteServersTile: UIView, Tileable {
                 button.server = server
                 button.accessibilityLabel = server.description
             }
+            
+            if let label = labelsStackView.subviews[index] as? UILabel {
+                label.text = server.country
+                Theme.current.applyCountryNameStyleFor(label)
+            }
+
         }
         
     }

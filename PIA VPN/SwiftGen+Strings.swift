@@ -26,6 +26,8 @@ internal enum L10n {
   }
 
   internal enum Account {
+    /// Something went wrong. Please try logging in again
+    internal static let unauthorized = L10n.tr("Localizable", "account.unauthorized")
     internal enum Email {
       /// Email
       internal static let caption = L10n.tr("Localizable", "account.email.caption")

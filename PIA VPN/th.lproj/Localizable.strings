@@ -29,6 +29,7 @@
 "account.subscriptions.short.message" = "จัดการสมาชิก";
 "account.subscriptions.trial" = "แผนทดลองใช้";
 "account.subscriptions.yearly" = "แผนรายปี";
+"account.unauthorized" = "บางอย่างผิดปกติ โปรดลองลงชื่อเข้าใช้อีกครั้ง";
 "account.update.email.require.password.button" = "ส่ง";
 "account.update.email.require.password.message" = "เพื่อความปลอดภัยจึงจำเป็นต้องขอพาสเวิร์ด PIA เพื่อเปลี่ยนแปลงบัญชี กรุณากรอกพาสเวิร์ด PIA เพื่อดำเนินการต่อ";
 "account.update.email.require.password.title" = "จำเป็นต้องใช้พาสเวิร์ด PIA";

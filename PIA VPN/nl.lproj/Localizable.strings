@@ -29,6 +29,7 @@
 "account.subscriptions.short.message" = "Abonnement beheren";
 "account.subscriptions.trial" = "Proefabonnement";
 "account.subscriptions.yearly" = "Jaarlijks abonnement";
+"account.unauthorized" = "Er is iets fout gegaan. Probeer opnieuw in te loggen.";
 "account.update.email.require.password.button" = "Versturen";
 "account.update.email.require.password.message" = "Om veiligheidsredenen hebben wij uw PIA-wachtwoord nodig om wijzigingen in uw account uit te voeren. Voer uw PIA-wachtwoord in om verder te gaan.";
 "account.update.email.require.password.title" = "PIA-wachtwoord vereist";

@@ -103,6 +103,7 @@
 "account.subscriptions.yearly" = "Yearly plan";
 "account.subscriptions.monthly" = "Monthly plan";
 "account.subscriptions.trial" = "Trial plan";
+"account.unauthorized" = "Something went wrong. Please try logging in again";
 
 // SETTINGS
 

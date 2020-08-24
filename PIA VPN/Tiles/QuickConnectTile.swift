@@ -26,6 +26,8 @@ import PIALibrary
 
 class QuickConnectTile: UIView, Tileable {
 
+    private let maxElementsInArray = 6
+    
     var view: UIView!
     var detailSegueIdentifier: String!
     var status: TileStatus = .normal {
@@ -36,7 +38,10 @@ class QuickConnectTile: UIView, Tileable {
     
     @IBOutlet private weak var tileTitle: UILabel!
     @IBOutlet private weak var stackView: UIStackView!
+    @IBOutlet private weak var labelsStackView: UIStackView!
 
+    private var historicalServers: [Server] = []
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.xibSetup()
@@ -57,7 +62,7 @@ class QuickConnectTile: UIView, Tileable {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateQuickConnectList), name: .PIAServerHasBeenUpdated, object: nil)
-        
+        nc.addObserver(self, selector: #selector(updateQuickConnectList), name: .PIADaemonsDidPingServers, object: nil)
         viewShouldRestyle()
         self.tileTitle.text = L10n.Tiles.Quick.Connect.title.uppercased()
         updateQuickConnectList()
@@ -70,7 +75,17 @@ class QuickConnectTile: UIView, Tileable {
     }
     
     @objc private func updateQuickConnectList() {
-        let historicalServers = Client.providers.serverProvider.historicalServers.filter { $0.serverNetwork == Client.configuration.currentServerNetwork() }
+        
+        historicalServers = Client.providers.serverProvider.historicalServers.filter {
+            $0.serverNetwork == Client.configuration.currentServerNetwork()
+        }
+        
+        if AppPreferences.shared.showGeoServers == false {
+            historicalServers = Client.providers.serverProvider.historicalServers.filter {
+                $0.geo == false
+            }
+        }
+
         for containerView in stackView.subviews {
             if let button = containerView.subviews.first as? ServerButton,
                 let favoriteImage = containerView.subviews.last as? UIImageView {
@@ -83,10 +98,18 @@ class QuickConnectTile: UIView, Tileable {
             }
         }
         
+        for label in labelsStackView.subviews {
+            if let label = label as? UILabel {
+                label.text = ""
+            }
+        }
+        
         let favoriteServers = Client.configuration.currentServerNetwork() == .gen4 ?
             AppPreferences.shared.favoriteServerIdentifiersGen4 :
             AppPreferences.shared.favoriteServerIdentifiers
 
+        autocompleteRecentServers()
+        
         for (index, server) in historicalServers.enumerated().reversed()  {
             let buttonIndex = historicalServers.count - (index + 1)
             let view = stackView.subviews[buttonIndex]
@@ -103,7 +126,38 @@ class QuickConnectTile: UIView, Tileable {
                     favoriteImage.isHidden = true
                 }
             }
+            
+            if let label = labelsStackView.subviews[buttonIndex] as? UILabel {
+                label.text = server.country
+                Theme.current.applyCountryNameStyleFor(label)
+            }
+
         }
+    }
+    
+    private func autocompleteRecentServers() {
+        var currentServers = Client.providers.serverProvider.currentServers.filter { $0.serverNetwork == Client.configuration.currentServerNetwork() }
+        currentServers = currentServers.sorted(by: { $0.pingTime ?? 1000 < $1.pingTime ?? 1000 })
+        currentServers = currentServers.filter({!historicalServers.contains($0)})
+        currentServers = currentServers.filterDuplicate{ ($0.country) }
+        if AppPreferences.shared.showGeoServers == false {
+            currentServers = currentServers.filter {
+                $0.geo == false
+            }
+        }
+
+        let numberOfServersToAdd = maxElementsInArray - historicalServers.count
+
+        if numberOfServersToAdd > 0 {
+            let arraySlice = currentServers.prefix(numberOfServersToAdd)
+            let newServersArray = Array(arraySlice)
+            let currentHistorical = historicalServers
+            
+            historicalServers.removeAll()
+            historicalServers.append(contentsOf: newServersArray.reversed())
+            historicalServers.append(contentsOf: currentHistorical)
+        }
+        
     }
     
     @IBAction private func connectToServer(_ sender: ServerButton) {

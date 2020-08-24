@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegionTile" customModule="PIA_VPN" customModuleProvider="target">
             <connections>
+                <outlet property="geoImageView" destination="mxN-kx-KMf" id="dEx-DK-BUs"/>
+                <outlet property="labelLeadingConstraint" destination="A4q-Lj-dxg" id="H3a-n4-2fL"/>
                 <outlet property="mapImageView" destination="Dez-a8-UVo" id="Oc2-5m-5Eb"/>
                 <outlet property="serverName" destination="h3Z-eW-74s" id="BW2-cE-TZS"/>
                 <outlet property="tileTitle" destination="lOm-Af-4Gm" id="eGK-wJ-lyO"/>
@@ -34,8 +34,15 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-geo" translatesAutoresizingMaskIntoConstraints="NO" id="mxN-kx-KMf">
+                    <rect key="frame" x="25" y="19.5" width="19" height="19"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="19" id="81l-5x-AoM"/>
+                        <constraint firstAttribute="width" constant="19" id="Vpy-Nc-eoT"/>
+                    </constraints>
+                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3Z-eW-74s">
-                    <rect key="frame" x="25" y="19" width="0.0" height="20"/>
+                    <rect key="frame" x="49" y="19" width="0.0" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="3kO-m6-0KE"/>
                     </constraints>
@@ -48,10 +55,12 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Dez-a8-UVo" secondAttribute="trailing" constant="25" id="2zp-4o-23D"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Dez-a8-UVo" secondAttribute="bottom" constant="15" id="6xL-UD-pQh"/>
-                <constraint firstItem="h3Z-eW-74s" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="8gs-81-ewj"/>
+                <constraint firstItem="h3Z-eW-74s" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="49" id="A4q-Lj-dxg"/>
+                <constraint firstItem="mxN-kx-KMf" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="DAa-eD-2yW"/>
                 <constraint firstItem="Dez-a8-UVo" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="15" id="Efw-Oh-jWN"/>
                 <constraint firstItem="lOm-Af-4Gm" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="EsV-DR-HPb"/>
                 <constraint firstItem="lOm-Af-4Gm" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="15" id="QMT-Eu-gtD"/>
+                <constraint firstItem="mxN-kx-KMf" firstAttribute="centerY" secondItem="h3Z-eW-74s" secondAttribute="centerY" id="XP5-e2-HEz"/>
                 <constraint firstItem="h3Z-eW-74s" firstAttribute="top" secondItem="lOm-Af-4Gm" secondAttribute="bottom" constant="4" id="obN-sZ-6Eh"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -61,5 +70,6 @@
     </objects>
     <resources>
         <image name="Light-Map-AU Melbourne" width="403" height="202"/>
+        <image name="icon-geo" width="64" height="64"/>
     </resources>
 </document>

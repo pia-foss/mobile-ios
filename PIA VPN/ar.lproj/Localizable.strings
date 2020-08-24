@@ -29,6 +29,7 @@
 "account.subscriptions.short.message" = "إدارة الاشتراك";
 "account.subscriptions.trial" = "خطة تجريبية";
 "account.subscriptions.yearly" = "خطة سنوية";
+"account.unauthorized" = "حدث خطأ. يرجى محاولة تسجيل الدخول مرة أخرى";
 "account.update.email.require.password.button" = "إرسال";
 "account.update.email.require.password.message" = "لأسباب أمنية، نطلب كلمة مرور PIA الخاصة بك عند إجراء تغييرات على حسابك. يرجى إدخال كلمة مرور PIA للمتابعة.";
 "account.update.email.require.password.title" = "كلمة مرور PIA مطلوبة";

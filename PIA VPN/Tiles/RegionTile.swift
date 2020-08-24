@@ -26,6 +26,9 @@ import PIALibrary
 
 class RegionTile: UIView, Tileable {
     
+    private let defaultLeadingDistance: CGFloat = 25
+    private let geoLeadingDistance: CGFloat = 49
+    
     var view: UIView!
     var detailSegueIdentifier: String!
     var status: TileStatus = .normal {
@@ -34,9 +37,12 @@ class RegionTile: UIView, Tileable {
         }
     }
     
+    @IBOutlet private weak var labelLeadingConstraint: NSLayoutConstraint!
+    
     @IBOutlet private weak var tileTitle: UILabel!
     @IBOutlet private weak var serverName: UILabel!
     @IBOutlet private weak var mapImageView: UIImageView!
+    @IBOutlet private weak var geoImageView: UIImageView!
     private var greenDot: UIView!
 
     override init(frame: CGRect) {
@@ -76,22 +82,22 @@ class RegionTile: UIView, Tileable {
         greenDot?.removeFromSuperview()
         
         let effectiveServer = Client.preferences.displayedServer
-        let targetServer = Client.providers.serverProvider.targetServer
         let vpn = Client.providers.vpnProvider
         self.serverName.text = effectiveServer.name(forStatus: vpn.vpnStatus)
         self.mapImageView.image = Theme.current.mapImage()
 
-        if effectiveServer.name != L10n.Global.automatic {
-            //NO AUTOMATIC
-            let coordFinder = CoordinatesFinder(forServer: effectiveServer.name, usingMapImage: self.mapImageView)
-            greenDot = coordFinder.dot()
-        } else {
-            let coordFinder = CoordinatesFinder(forServer: targetServer.name, usingMapImage: self.mapImageView)
-            greenDot = coordFinder.dot()
-        }
+        setupRegionTileAndMapForServer(effectiveServer)
 
         self.mapImageView.addSubview(greenDot)
+        
 
+    }
+    
+    private func setupRegionTileAndMapForServer(_ server: Server) {
+        let coordFinder = CoordinatesFinder(forServer: server.name, usingMapImage: self.mapImageView)
+        greenDot = coordFinder.dot()
+        self.geoImageView.isHidden = !server.geo
+        self.labelLeadingConstraint.constant = server.geo ? geoLeadingDistance : defaultLeadingDistance
     }
     
     @objc private func viewShouldRestyle() {

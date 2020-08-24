@@ -29,6 +29,7 @@
 "account.subscriptions.short.message" = "Управление подпиской";
 "account.subscriptions.trial" = "Пробный план";
 "account.subscriptions.yearly" = "Годовой план";
+"account.unauthorized" = "Что-то пошло не так. Попробуйте выполнить вход еще раз";
 "account.update.email.require.password.button" = "Отправить";
 "account.update.email.require.password.message" = "В целях безопасности для внесения изменений в учетную запись требуется ввести пароль PIA. Введите свой пароль PIA, чтобы продолжить.";
 "account.update.email.require.password.title" = "Требуется пароль PIA";

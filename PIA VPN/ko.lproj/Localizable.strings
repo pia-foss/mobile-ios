@@ -29,6 +29,7 @@
 "account.subscriptions.short.message" = "구독 관리";
 "account.subscriptions.trial" = "체험 플랜";
 "account.subscriptions.yearly" = "연간 플랜";
+"account.unauthorized" = "문제가 발생했습니다. 다시 로그인해 보세요";
 "account.update.email.require.password.button" = "제출";
 "account.update.email.require.password.message" = "보안상의 이유로 계정에서 변경 작업을 수행하려면 PIA 비밀번호가 필요합니다. 계속 진행하려면 PIA 비밀번호를 입력하세요.";
 "account.update.email.require.password.title" = "PIA 비밀번호가 필요합니다.";

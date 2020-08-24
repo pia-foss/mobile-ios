@@ -29,6 +29,7 @@
 "account.subscriptions.short.message" = "Administrer abonnement";
 "account.subscriptions.trial" = "Prøveplan";
 "account.subscriptions.yearly" = "Årlig plan";
+"account.unauthorized" = "Noe gikk galt. Prøv å logge inn igjen.";
 "account.update.email.require.password.button" = "Send";
 "account.update.email.require.password.message" = "Av sikkerhetsmessige årsaker trenger vi PIA-passordet ditt for å endre kontoen din. Skriv inn PIA-passordet for å fortsette.";
 "account.update.email.require.password.title" = "PIA-passord kreves";
