@@ -29,10 +29,16 @@
 "account.subscriptions.short.message" = "Zarządzaj subskrypcją";
 "account.subscriptions.trial" = "Plan próbny";
 "account.subscriptions.yearly" = "Plan roczny";
+"account.unauthorized" = "Coś poszło nie tak. zalogować się ponownie.";
 "account.update.email.require.password.button" = "Wyślij";
 "account.update.email.require.password.message" = "Ze względów bezpieczeństwa do przeprowadzenia zmiany na koncie potrzebne jest twoje hasło w PIA. Wprowadź hasło w PIA, aby kontynuować.";
 "account.update.email.require.password.title" = "Wymagane hasło w PIA";
 "account.username.caption" = "Nazwa użytkownika";
+"card.wireguard.cta.activate" = "Wypróbuj WireGuard® teraz";
+"card.wireguard.cta.learn" = "Dowiedz się więcej";
+"card.wireguard.cta.settings" = "Otwórz ustawienia";
+"card.wireguard.description" = "To nowy, wydajniejszy protokół komunikacyjny dla VPN, który oferuje sprawniejsze działanie, mniejsze zużycie procesora i dłuższą żywotność baterii.";
+"card.wireguard.title" = "Wypróbuj WireGuard® dzisiaj!";
 "content_blocker.body.footer" = "Uwaga: musisz być połączony z VPN, aby Blokada zawartości działała, ale będzie działać tylko podczas przeglądania stron za pomocą Safari.";
 "content_blocker.body.subtitle" = "Aby włączyć naszą blokadę reklam do użycia z przeglądarką Safari, przejdź do „Ustawienia > Safari”, pod „Ogólne” wybierz przełącznik „Blokady zawartości” na PIA VPN.";
 "content_blocker.title" = "Blokada zawartości";
@@ -173,6 +179,7 @@
 "settings.application_settings.mace.footer" = "PIA MACE™ blokuje reklamy,  programy śledzące i złośliwe oprogramowanie w czasie połączenia przez VPN.";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.title" = "USTAWIENIA APLIKACJI";
+"settings.cards.history.title" = "Najnowsze wiadomości";
 "settings.commit.buttons.later" = "Później";
 "settings.commit.buttons.reconnect" = "Połącz ponownie";
 "settings.commit.messages.must_disconnect" = "VPN musi połączyć się ponownie, aby niektóre zmiany zostały wprowadzone.";

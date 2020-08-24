@@ -945,6 +945,7 @@
                         <segue destination="W4F-zm-KqY" kind="presentation" identifier="AccountSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_VPN" customModuleProvider="target" id="grU-WE-sRJ"/>
                         <segue destination="MU8-v2-7Zn" kind="show" identifier="ShowQuickSettingsViewController" customClass="ModalNavigationSegue" customModule="PIA_VPN" customModuleProvider="target" id="gOr-cS-0Jn"/>
                         <segue destination="Jcq-Qm-xQ1" kind="presentation" identifier="ShowAddEmailSegue" id="2vQ-Ts-0N1"/>
+                        <segue destination="SAw-ll-7Hp" kind="presentation" identifier="SettingsAndWireGuardSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_VPN" customModuleProvider="target" id="jku-ph-JBL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GcN-zf-hGC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1447,6 +1448,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3vR-8b-fBR"/>
                     </view>
+                    <navigationItem key="navigationItem" id="OUg-1Q-0Jt"/>
                     <connections>
                         <outlet property="collectionView" destination="Naa-ek-220" id="4KX-lN-2Ai"/>
                         <segue destination="rTx-sq-4Hq" kind="show" identifier="ShowCustomNetworks" id="xwv-Yc-17W"/>
@@ -1615,6 +1617,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vdJ-TL-mh3"/>
                     </view>
+                    <navigationItem key="navigationItem" id="u7O-qA-HXL"/>
                     <connections>
                         <outlet property="labelPrimaryDNS" destination="UiE-dS-YQG" id="O4c-Wd-pPX"/>
                         <outlet property="labelSecondaryDNS" destination="L8R-SE-RHz" id="yJO-fi-1uf"/>
@@ -2492,6 +2495,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="7wM-LQ-vSr"/>
+        <segue reference="jku-ph-JBL"/>
         <segue reference="9EP-gJ-pE1"/>
         <segue reference="Ic8-R6-xho"/>
     </inferredMetricsTieBreakers>

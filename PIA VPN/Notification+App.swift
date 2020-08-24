@@ -33,6 +33,8 @@ extension Notification.Name {
     static let RefreshNMTRules = Notification.Name("RefreshNMTRules")
     static let ShowCustomNMTNetworks = Notification.Name("ShowCustomNMTNetworks")
     static let TrustedNetworkAdded = Notification.Name("TrustedNetworkAdded")
+    static let OpenSettingsAndActivateWireGuard = Notification.Name("OpenSettingsAndActivateWireGuard")
+    static let RefreshWireGuardSettings = Notification.Name("RefreshWireGuardSettings")
 
 }
 

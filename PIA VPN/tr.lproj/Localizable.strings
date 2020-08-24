@@ -29,10 +29,16 @@
 "account.subscriptions.short.message" = "Aboneliği yönetin";
 "account.subscriptions.trial" = "Deneme planı";
 "account.subscriptions.yearly" = "Yıllık plan";
+"account.unauthorized" = "Bir sorun oluştu. Lütfen tekrar giriş yapmayı deneyin";
 "account.update.email.require.password.button" = "Gönder";
 "account.update.email.require.password.message" = "Güvenlik açısından hesabınızda değişiklik yapabilmeniz için PIA şifrenizi girmelisiniz. Devam etmek için lütfen PIA şifrenizi girin.";
 "account.update.email.require.password.title" = "PIA Şifresi Gerekli";
 "account.username.caption" = "Kullanıcı Adı";
+"card.wireguard.cta.activate" = "WireGuard®'ı şimdi deneyin";
+"card.wireguard.cta.learn" = "Daha fazla bilgi";
+"card.wireguard.cta.settings" = "Ayarları açın";
+"card.wireguard.description" = "Bu, daha iyi performans, daha düşük CPU kullanımı ve daha uzun pil ömrü sunan, yeni, daha verimli bir VPN protokolü.";
+"card.wireguard.title" = "WireGuard®'ı bugün deneyin!";
 "content_blocker.body.footer" = "Lütfen unutmayın: Bu İçerik Engelleyicinin çalışması için VPN bağlantınızın olmasına gerek yoktur ancak yalnızca Safari ile gezindiğinizde çalışacaktır.";
 "content_blocker.body.subtitle" = "İçerik Engelleyicimizin Safari ile kullanılmasını etkinleştirmek için lütfen Genel bölümü altından Ayarlar > Safari kısmına gidin ve PIA VPN'de İçerik Engelleyicileri açık hale getirin.";
 "content_blocker.title" = "İçerik Engelleyici";
@@ -173,6 +179,7 @@
 "settings.application_settings.mace.footer" = "PIA MACE™ VPN'e bağlı iken reklam, iz sürücüler ve kötü amaçlı yazılımları engeller.";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.title" = "UYGULAMA AYARLARI";
+"settings.cards.history.title" = "Son haberler";
 "settings.commit.buttons.later" = "Daha Sonra";
 "settings.commit.buttons.reconnect" = "Tekrar Bağlan";
 "settings.commit.messages.must_disconnect" = "Bazı değişikliklerin etki etmesi için VPN'nin tekrar bağlanması gerekmektedir.";

@@ -29,10 +29,16 @@
 "account.subscriptions.short.message" = "Управление подпиской";
 "account.subscriptions.trial" = "Пробный план";
 "account.subscriptions.yearly" = "Годовой план";
+"account.unauthorized" = "Что-то пошло не так. Попробуйте выполнить вход еще раз";
 "account.update.email.require.password.button" = "Отправить";
 "account.update.email.require.password.message" = "В целях безопасности для внесения изменений в учетную запись требуется ввести пароль PIA. Введите свой пароль PIA, чтобы продолжить.";
 "account.update.email.require.password.title" = "Требуется пароль PIA";
 "account.username.caption" = "Имя пользователя";
+"card.wireguard.cta.activate" = "Опробуйте WireGuard®";
+"card.wireguard.cta.learn" = "Подробнее";
+"card.wireguard.cta.settings" = "Открыть настройки";
+"card.wireguard.description" = "Это новый, более эффективный протокол VPN, который обеспечивает более высокую производительность, меньшую нагрузку на процессор и более длительную автономную работу устройства.";
+"card.wireguard.title" = "Опробуйте WireGuard® сегодня!";
 "content_blocker.body.footer" = "Примечание. Для работы этого правила блокирования контента подключаться к VPN необязательно, но оно будет работать только при просмотре сайтов в Safari.";
 "content_blocker.body.subtitle" = "Чтобы включить наше правило блокирования контента в Safari, перейдите в \"Настроки\" > Safari, а затем во вкладке \"Основные\" коснитесь пункта \"Правила блокирования контента\" и включите PIA VPN.";
 "content_blocker.title" = "Правило блокирования контента";
@@ -173,6 +179,7 @@
 "settings.application_settings.mace.footer" = "PIA MACE™ блокирует рекламу, следящие программы и вредоносное ПО, когда вы подключены к VPN.";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.title" = "НАСТРОЙКИ ПРИЛОЖЕНИЯ";
+"settings.cards.history.title" = "Последние новости";
 "settings.commit.buttons.later" = "Позже";
 "settings.commit.buttons.reconnect" = "Переподключиться";
 "settings.commit.messages.must_disconnect" = "Чтобы некоторые изменения вступили в силу, надо переподключиться к VPN.";
