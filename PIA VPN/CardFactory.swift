@@ -47,30 +47,37 @@ struct CardFactory {
              L10n.Card.Wireguard.Cta.activate,
              URL(string: "https://www.privateinternetaccess.com/blog/wireguide-all-about-the-wireguard-vpn-protocol/"), {
                 
-                if !Client.providers.vpnProvider.isVPNConnected {
-                    
-                    guard let rootView = AppDelegate.delegate().topViewControllerWithRootViewController(rootViewController: UIApplication.shared.keyWindow?.rootViewController) else {
-                        return
-                    }
-                    
-                    if rootView is SettingsViewController {
-                        rootView.dismiss(animated: true) {
-                            Self.activateWireGuard()
-                        }
-                    } else {
-                        Self.activateWireGuard()
-                    }
-
-
-                } else {
-                    NotificationCenter.default.post(name: .OpenSettings,
+                guard let rootView = AppDelegate.delegate().topViewControllerWithRootViewController(rootViewController: UIApplication.shared.keyWindow?.rootViewController) else {
+                    return
+                }
+                
+                if rootView is SettingsViewController {
+                    NotificationCenter.default.post(name: .RefreshWireGuardSettings,
                     object: nil,
                     userInfo: nil)
+                } else {
+                    if Client.providers.vpnProvider.isVPNConnected {
+                        NotificationCenter.default.post(name: .OpenSettingsAndActivateWireGuard,
+                        object: nil,
+                        userInfo: nil)
+                    } else {
+                        Self.activateWireGuard()
+                        NotificationCenter.default.post(name: .OpenSettings,
+                        object: nil,
+                        userInfo: nil)
+                    }
                 }
+
         }),
     ]
     
     private static func activateWireGuard() {
+        
+        if Client.preferences.vpnType == PIAWGTunnelProfile.vpnType,
+            Client.providers.vpnProvider.isVPNConnected {
+            return
+        }
+        
         let preferences = Client.preferences.editable()
         guard let currentWireguardVPNConfiguration = preferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ??
             Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
@@ -81,11 +88,13 @@ struct CardFactory {
         preferences.vpnType = PIAWGTunnelProfile.vpnType
         preferences.commit()
         
+    }
+    
+    private static func connect() {
         Client.providers.vpnProvider.install(force: true, { _ in
             Client.providers.vpnProvider.connect(nil)
         })
     }
-    
 }
 
 

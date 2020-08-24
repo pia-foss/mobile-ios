@@ -29,10 +29,16 @@
 "account.subscriptions.short.message" = "إدارة الاشتراك";
 "account.subscriptions.trial" = "خطة تجريبية";
 "account.subscriptions.yearly" = "خطة سنوية";
+"account.unauthorized" = "حدث خطأ. يرجى محاولة تسجيل الدخول مرة أخرى";
 "account.update.email.require.password.button" = "إرسال";
 "account.update.email.require.password.message" = "لأسباب أمنية، نطلب كلمة مرور PIA الخاصة بك عند إجراء تغييرات على حسابك. يرجى إدخال كلمة مرور PIA للمتابعة.";
 "account.update.email.require.password.title" = "كلمة مرور PIA مطلوبة";
 "account.username.caption" = "اسم المستخدم";
+"card.wireguard.cta.activate" = "جرّب ®WireGuard الآن";
+"card.wireguard.cta.learn" = "معرفة المزيد";
+"card.wireguard.cta.settings" = "فتح الإعدادات";
+"card.wireguard.description" = "إنه بروتوكول VPN جديد وأكثر كفاءة يوفر أداءً أفضل واستخدامًا أقل للمعالج وعمرًا أطول للبطارية.";
+"card.wireguard.title" = "جرّب ®WireGuard اليوم!";
 "content_blocker.body.footer" = "يرجى الملاحظة: يعمل حظر المحتوى دون الحاجة للاتصال بشبكة VPN، ولكنه لن يعمل إلا على متصفح Safari.";
 "content_blocker.body.subtitle" = "لتفعيل استخدام حظر المحتوى على متصفح Safari، يرجى الذهاب الى الإعدادات > Safari وتفعيل PIA VPN تحت General touch Content Blockers";
 "content_blocker.title" = "حظر المحتوى";
@@ -173,6 +179,7 @@
 "settings.application_settings.mace.footer" = "يحجب ™PIA MACE الإعلانات والمتعقبين والبرمجيات الضارة عندما تكون متصلًا بخدمة VPN.";
 "settings.application_settings.mace.title" = "™PIA MACE";
 "settings.application_settings.title" = "إعدادات التطبيق";
+"settings.cards.history.title" = "آخر الأخبار";
 "settings.commit.buttons.later" = "لاحقًا";
 "settings.commit.buttons.reconnect" = "إعادة اتصال";
 "settings.commit.messages.must_disconnect" = "يجب إعادة اتصال VPN حتى تسري بعض التغييرات.";

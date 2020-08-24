@@ -49,6 +49,10 @@ struct AppConstants {
         static var bundleURL = Bundle.main.url(forResource: "Regions", withExtension: "json")
     }
 
+    struct RegionsGEN4 {
+        static var bundleURL = Bundle.main.url(forResource: "RegionsGEN4", withExtension: "json")
+    }
+
     struct InApp {
         static let yearlyProductIdentifier = "com.privateinternetaccess.subscription.1year.2020"
         static let monthlyProductIdentifier = "com.privateinternetaccess.subscription.1month.2020"

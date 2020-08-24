@@ -156,8 +156,6 @@ class SettingsViewController: AutolayoutViewController {
         case reset
 
         case development
-        
-        case preview
 
         case info
     }
@@ -173,7 +171,6 @@ class SettingsViewController: AutolayoutViewController {
         .applicationInformation,
         .reset,
         .contentBlocker,
-        .preview,
         .info
     ]
 
@@ -212,9 +209,6 @@ class SettingsViewController: AutolayoutViewController {
         .reset: [
             .resetSettings
         ],
-        .preview: [
-            .serversNetwork,
-        ],
         .development: [
 //            .truncateDebugLog,
 //            .recalculatePingTimes,
@@ -227,6 +221,7 @@ class SettingsViewController: AutolayoutViewController {
             .resolveGoogleAdsDomain
         ],
         .info: [
+            .serversNetwork,
             .cardsHistory
         ]
     ]
@@ -260,6 +255,8 @@ class SettingsViewController: AutolayoutViewController {
 
     private var isContentBlockerEnabled = false
 
+    private var isResetting = false
+
     private var pendingPreferences: Client.Preferences.Editable!
     
     private var pendingOpenVPNSocketType: SocketType?
@@ -271,6 +268,8 @@ class SettingsViewController: AutolayoutViewController {
     private var pendingWireguardVPNConfiguration: PIAWireguardConfiguration!
 
     private var pendingVPNAction: VPNAction?
+    
+    var shouldSetWireGuardSettings = false
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -332,7 +331,13 @@ class SettingsViewController: AutolayoutViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshSettings),
                                                name: .RefreshSettings,
                                                object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshWireGuardSettings),
+                                               name: .RefreshWireGuardSettings,
+                                               object: nil)
 
+        if shouldSetWireGuardSettings {
+            refreshWireGuardSettings()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -478,6 +483,17 @@ class SettingsViewController: AutolayoutViewController {
         tableView.reloadData()
     }
     
+    @objc private func refreshWireGuardSettings() {
+        guard let currentWireguardVPNConfiguration = Client.preferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ??
+            Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
+            fatalError("No default VPN custom configuration provided for PIA Wireguard protocol")
+        }
+
+        pendingPreferences.setVPNCustomConfiguration(currentWireguardVPNConfiguration, for: PIAWGTunnelProfile.vpnType)
+        pendingPreferences.vpnType = PIAWGTunnelProfile.vpnType
+        savePreferences()
+    }
+    
     private func refreshContentBlockerRules() {
         self.showLoadingAnimation()
         SFContentBlockerManager.reloadContentBlocker(withIdentifier: AppConstants.Extensions.adBlockerBundleIdentifier) { (error) in
@@ -550,6 +566,8 @@ class SettingsViewController: AutolayoutViewController {
     
     private func doReset() {
 
+        isResetting = true
+        
         // only don't reset selected server
         let savedServer = pendingPreferences.preferredServer
         pendingPreferences.reset()
@@ -596,18 +614,20 @@ class SettingsViewController: AutolayoutViewController {
         pendingPreferences.availableNetworks = Client.preferences.availableNetworks
         pendingPreferences.useWiFiProtection = Client.preferences.useWiFiProtection
         pendingPreferences.trustCellularData = Client.preferences.trustCellularData
-
         pendingVPNAction = pendingPreferences.requiredVPNAction()
 
+        if pendingVPNAction == nil &&
+            Client.providers.vpnProvider.isVPNConnected &&
+            isResetting {
+            pendingVPNAction = pendingPreferences.defaultVPNAction()
+        }
+        
+        isResetting = false
+        
         guard let action = pendingVPNAction else {
             commitAppPreferences()
             completionHandler()
             return
-        }
-        
-        var forceDisconnect = true
-        if self.pendingPreferences.vpnType != Client.providers.vpnProvider.currentVPNType {
-            forceDisconnect = false
         }
         
         let isDisconnected = (Client.providers.vpnProvider.vpnStatus == .disconnected)
@@ -617,7 +637,7 @@ class SettingsViewController: AutolayoutViewController {
                 self.pendingVPNAction = nil
                 
                 if shouldReconnect && !isDisconnected {
-                    Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: forceDisconnect) { (error) in
+                    Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true) { (error) in
                         completionHandler()
                         self.hideLoadingAnimation()
                     }
@@ -946,9 +966,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         case .reset:
             return L10n.Settings.Reset.title
-
-        case .preview:
-            return L10n.Settings.Preview.title
 
         case .development:
             return "DEVELOPMENT"

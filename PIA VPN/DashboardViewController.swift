@@ -95,6 +95,7 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(vpnDidFail), name: .PIAVPNDidFail, object: nil)
         nc.addObserver(self, selector: #selector(unauthorized), name: .Unauthorized, object: nil)
         nc.addObserver(self, selector: #selector(openSettings), name: .OpenSettings, object: nil)
+        nc.addObserver(self, selector: #selector(openSettingsAndWireGuard), name: .OpenSettingsAndActivateWireGuard, object: nil)
 
         if Client.providers.accountProvider.isLoggedIn {
             Client.providers.accountProvider.refreshAndLogoutUnauthorized()
@@ -389,6 +390,10 @@ class DashboardViewController: AutolayoutViewController {
         perform(segue: StoryboardSegue.Main.settingsSegueIdentifier)
     }
     
+    @objc func openSettingsAndWireGuard() {
+        perform(segue: StoryboardSegue.Main.settingsAndWireGuardSegueIdentifier)
+    }
+    
     func openAccount() {
         perform(segue: StoryboardSegue.Main.accountSegueIdentifier)
     }
@@ -410,6 +415,10 @@ class DashboardViewController: AutolayoutViewController {
             nmt.persistentConnectionValue = Client.preferences.isPersistentConnection
         } else if let vc = segue.destination as? AddEmailToAccountViewController {
             vc.modalPresentationStyle = .fullScreen
+        } else if let identifier = segue.identifier,
+            identifier == StoryboardSegue.Main.settingsAndWireGuardSegueIdentifier.rawValue,
+            let vc = segue.destination as? SettingsViewController {
+            vc.shouldSetWireGuardSettings = true
         }
     }
     

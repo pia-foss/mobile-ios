@@ -29,10 +29,16 @@
 "account.subscriptions.short.message" = "จัดการสมาชิก";
 "account.subscriptions.trial" = "แผนทดลองใช้";
 "account.subscriptions.yearly" = "แผนรายปี";
+"account.unauthorized" = "บางอย่างผิดปกติ โปรดลองลงชื่อเข้าใช้อีกครั้ง";
 "account.update.email.require.password.button" = "ส่ง";
 "account.update.email.require.password.message" = "เพื่อความปลอดภัยจึงจำเป็นต้องขอพาสเวิร์ด PIA เพื่อเปลี่ยนแปลงบัญชี กรุณากรอกพาสเวิร์ด PIA เพื่อดำเนินการต่อ";
 "account.update.email.require.password.title" = "จำเป็นต้องใช้พาสเวิร์ด PIA";
 "account.username.caption" = "ชื่อผู้ใช้";
+"card.wireguard.cta.activate" = "ลอง WireGuard® ได้แล้วตอนนี้";
+"card.wireguard.cta.learn" = "เรียนรู้เพิ่มเติม";
+"card.wireguard.cta.settings" = "เปิดตั้งค่า";
+"card.wireguard.description" = "นี่คือโปรโตคอล VPN ใหม่ที่มีประสิทธิภาพมากขึ้น ลดการใช้ CPU และยืดอายุแบตเตอรี่";
+"card.wireguard.title" = "ลอง WireGuard® ได้แล้ววันนี้!";
 "content_blocker.body.footer" = "โปรดทราบ: คุณไม่จำเป็นต้องเชื่อมต่อไปยัง VPN เพื่อใช้งานตัวปิดกั้นเนื้อหา แต่จะใช้ได้ก็ต่อเมื่อใช้ Safari เท่านั้น";
 "content_blocker.body.subtitle" = "ในการเปิดใช้งานตัวปิดกั้นเนื้อหาเพื่อใช้ใน Safari กรุณาไปยัง การตั้งค่า > Safari และภายใต้หมวดทั่วไป ให้แตะ ตัวปิดกั้นเนื้อหา ใน PIA VPN";
 "content_blocker.title" = "ตัวปิดกั้นเนื้อหา";
@@ -173,6 +179,7 @@
 "settings.application_settings.mace.footer" = "PIA MACE™ บล็อกโฆษณา, ตัวติดตาม และมัลแวร์ ในขณะที่คุณกำลังเชื่อมต่อ VPN อยู่";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.title" = "การตั้งค่าแอพพลิเคชั่น";
+"settings.cards.history.title" = "ข่าวล่าสุด";
 "settings.commit.buttons.later" = "ภายหลัง";
 "settings.commit.buttons.reconnect" = "เชื่อมต่ออีกครั้ง";
 "settings.commit.messages.must_disconnect" = "ต้องเชื่อมต่อ VPN อีกครั้งเพื่อให้เกิดความเปลี่ยนแปลง";

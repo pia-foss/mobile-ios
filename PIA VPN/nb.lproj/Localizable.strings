@@ -29,10 +29,16 @@
 "account.subscriptions.short.message" = "Administrer abonnement";
 "account.subscriptions.trial" = "Prøveplan";
 "account.subscriptions.yearly" = "Årlig plan";
+"account.unauthorized" = "Noe gikk galt. Prøv å logge inn igjen.";
 "account.update.email.require.password.button" = "Send";
 "account.update.email.require.password.message" = "Av sikkerhetsmessige årsaker trenger vi PIA-passordet ditt for å endre kontoen din. Skriv inn PIA-passordet for å fortsette.";
 "account.update.email.require.password.title" = "PIA-passord kreves";
 "account.username.caption" = "Brukernavn";
+"card.wireguard.cta.activate" = "Prøv WireGuard® nå";
+"card.wireguard.cta.learn" = "Finn ut mer";
+"card.wireguard.cta.settings" = "Åpne innstillinger";
+"card.wireguard.description" = "Det er en ny mer effektiv VPN-protokoll som tilbyr bedre ytelse, lavere CPU-bruk og lengre batteritid.";
+"card.wireguard.title" = "Prøv WireGuard® i dag!";
 "content_blocker.body.footer" = "Merk: Du trenger ikke å være tilkoblet VPN-tjenesten for at innholdsblokkereren skal virke, men den virker bare når du surfer med Safari.";
 "content_blocker.body.subtitle" = "For å aktivere innholdsblokkereren (for Safari), kan du gå til Innstillinger > Safari, og under Generelt slår du på innholdsblokkerer for PIA VPN.";
 "content_blocker.title" = "Innholdsblokkerer";
@@ -173,6 +179,7 @@
 "settings.application_settings.mace.footer" = "PIA MACE™ blokkerer reklamer, sporere og skadelig programvare når du er koblet til VPN-en.";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.title" = "APPINNSTILLINGER";
+"settings.cards.history.title" = "Siste nytt";
 "settings.commit.buttons.later" = "Senere";
 "settings.commit.buttons.reconnect" = "Koble til igjen";
 "settings.commit.messages.must_disconnect" = "VPN-en må koble til igjen for at enkelte endringer skal tre i kraft.";

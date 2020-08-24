@@ -29,10 +29,16 @@
 "account.subscriptions.short.message" = "Abonnement beheren";
 "account.subscriptions.trial" = "Proefabonnement";
 "account.subscriptions.yearly" = "Jaarlijks abonnement";
+"account.unauthorized" = "Er is iets fout gegaan. Probeer opnieuw in te loggen.";
 "account.update.email.require.password.button" = "Versturen";
 "account.update.email.require.password.message" = "Om veiligheidsredenen hebben wij uw PIA-wachtwoord nodig om wijzigingen in uw account uit te voeren. Voer uw PIA-wachtwoord in om verder te gaan.";
 "account.update.email.require.password.title" = "PIA-wachtwoord vereist";
 "account.username.caption" = "Gebruikersnaam";
+"card.wireguard.cta.activate" = "Probeer WireGuard® nu";
+"card.wireguard.cta.learn" = "Meer informatie";
+"card.wireguard.cta.settings" = "Instellingen openen";
+"card.wireguard.description" = "Het is een nieuw, efficiënter VPN-protocol met betere prestaties, een lager CPU-gebruik en een langere levensduur van de batterij.";
+"card.wireguard.title" = "Probeer WireGuard® vandaag nog!";
 "content_blocker.body.footer" = "Let op: Je hoeft niet verbonden te zijn met de VPN om deze Content blocker te laten werken, maar dan werkt het alleen als je Safari gebruikt.";
 "content_blocker.body.subtitle" = "Om onze Content blocker voor Safari in te schakelen ga je naar Instellingen > Safari en onder Algemeen raak je Content Blockers aan om PIA VPN in te schakelen.";
 "content_blocker.title" = "Content Blocker";
@@ -173,6 +179,7 @@
 "settings.application_settings.mace.footer" = "PIA MACE™ blokkeert advertenties, trackers en malware als u met de VPN bent verbonden.";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.title" = "TOEPASSINGSINSTELLINGEN";
+"settings.cards.history.title" = "Laatste nieuws";
 "settings.commit.buttons.later" = "Later";
 "settings.commit.buttons.reconnect" = "Opnieuw verbinden";
 "settings.commit.messages.must_disconnect" = "De VPN moet opnieuw verbinding maken om de wijzigingen door te voeren.";
