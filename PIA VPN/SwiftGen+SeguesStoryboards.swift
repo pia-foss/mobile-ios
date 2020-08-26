@@ -25,6 +25,7 @@ internal enum StoryboardSegue {
     case settingsAndWireGuardSegueIdentifier = "SettingsAndWireGuardSegueIdentifier"
     case settingsSegueIdentifier = "SettingsSegueIdentifier"
     case showAddEmailSegue = "ShowAddEmailSegue"
+    case showCustomNetworks = "ShowCustomNetworks"
     case showQuickSettingsViewController = "ShowQuickSettingsViewController"
     case trustedNetworksSegueIdentifier = "TrustedNetworksSegueIdentifier"
     case unwindContentBlockerSegueIdentifier = "UnwindContentBlockerSegueIdentifier"

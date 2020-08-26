@@ -63,8 +63,6 @@ class AppPreferences {
 
         static let todayWidgetVpnStatus = "vpn.status"
         static let todayWidgetButtonTitle = "vpn.button.description"
-
-        static let optOutAskDisconnectVPNUsingNMT = "OptOutAskDisconnectVPNUsingNMT"
         
         // Quick Settings options
         static let quickSettingThemeVisible = "quickSettingThemeVisible"
@@ -234,15 +232,6 @@ class AppPreferences {
         }
     }
     
-    var optOutAskDisconnectVPNUsingNMT: Bool{
-        get {
-            return defaults.bool(forKey: Entries.optOutAskDisconnectVPNUsingNMT)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.optOutAskDisconnectVPNUsingNMT)
-        }
-    }
-    
     var useSmallPackets: Bool {
         get {
             return defaults.bool(forKey: Entries.useSmallPackets)
@@ -393,7 +382,6 @@ class AppPreferences {
             Entries.themeCode: ThemeCode.light.rawValue,
             Entries.useConnectSiriShortcuts: false,
             Entries.useDisconnectSiriShortcuts: false,
-            Entries.optOutAskDisconnectVPNUsingNMT: false,
             Entries.todayWidgetButtonTitle: L10n.Today.Widget.login,
             Entries.quickSettingThemeVisible: true,
             Entries.quickSettingKillswitchVisible: true,
@@ -543,7 +531,6 @@ class AppPreferences {
         piaSocketType = nil
         favoriteServerIdentifiers = []
         favoriteServerIdentifiersGen4 = []
-        optOutAskDisconnectVPNUsingNMT = false
         useConnectSiriShortcuts = false
         useDisconnectSiriShortcuts = false
         if #available(iOS 12.0, *) {
@@ -572,7 +559,6 @@ class AppPreferences {
         piaSocketType = nil
         favoriteServerIdentifiers = []
         favoriteServerIdentifiersGen4 = []
-        optOutAskDisconnectVPNUsingNMT = false
         useConnectSiriShortcuts = false
         useDisconnectSiriShortcuts = false
         if #available(iOS 12.0, *) {

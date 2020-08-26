@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "icon-mobile-data-connect.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

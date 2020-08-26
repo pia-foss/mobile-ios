@@ -43,7 +43,7 @@ end
 
 def shared_main_pods
     pod 'AlamofireImage'
-    pod "PIARegions", :git => "#{$git_root}/#{$regions_repo}"
+    pod "PIARegions", :path => "/Users/jose/Projects/PIA/regions"
     library_by_path('/Users/jose/Projects/PIA')
     #library_by_git('7075984')
     #library_by_version('~> 1.1.3')
@@ -57,6 +57,7 @@ def app_pods
     pod 'PopupDialog'
     pod 'ReachabilitySwift', '~> 4.3.0'
     pod 'GradientProgressBar', '~> 2.0'
+    pod 'Popover'
 end
 
 def tunnel_pods
