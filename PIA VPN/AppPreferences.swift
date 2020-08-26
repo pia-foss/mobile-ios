@@ -395,28 +395,6 @@ class AppPreferences {
         ])
     }
     
-    private func refreshAPIToken() {
-        if Client.preferences.authMigrationSuccess == false {
-            Client.providers.accountProvider.refreshAndLogoutUnauthorized()
-        }
-    }
-    
-    private func migrateAPItoV2() {
-        // Migrate users from v1 to v2
-        log.debug("Migration to api v2")
-        //For v1 we stored the username in the plain database. We move the value to the keychain database.
-        //After refresh the account, the token will be generated
-        if let oldUsername = defaults.string(forKey: "LoggedUsername"),
-            let _ = try? PIALibrary.Keychain(team: AppConstants.teamId,
-                                             group: AppConstants.appGroup).password(for: oldUsername) {
-            //User is loggedIn
-            try? PIALibrary.Keychain().set(username: oldUsername)
-            try? PIALibrary.Keychain().set(publicUsername: oldUsername)
-            defaults.removeObject(forKey: "LoggedUsername")
-            defaults.synchronize()
-        }
-    }
-    
     func migrateNMT() {
         
         if !Client.preferences.nmtMigrationSuccess {
@@ -472,10 +450,8 @@ class AppPreferences {
         
         guard (oldVersion == nil) else {
             if oldVersion != AppPreferences.currentVersion {
-                migrateAPItoV2()
+                Client.providers.accountProvider.logout(nil)
             }
-            //First time for each update or if the auth token has not been updated
-            refreshAPIToken()
             return
         }
 
@@ -524,6 +500,22 @@ class AppPreferences {
         
         migrateAPItoV2()
         
+    }
+    
+    private func migrateAPItoV2() {
+        // Migrate users from v1 to v2
+        log.debug("Migration to api v2")
+        //For v1 we stored the username in the plain database. We move the value to the keychain database.
+        //After refresh the account, the token will be generated
+        if let oldUsername = defaults.string(forKey: "LoggedUsername"),
+            let _ = try? PIALibrary.Keychain(team: AppConstants.teamId,
+                                             group: AppConstants.appGroup).password(for: oldUsername) {
+            //User is loggedIn
+            try? PIALibrary.Keychain().set(username: oldUsername)
+            try? PIALibrary.Keychain().set(publicUsername: oldUsername)
+            defaults.removeObject(forKey: "LoggedUsername")
+            defaults.synchronize()
+        }
     }
 
     func reset() {

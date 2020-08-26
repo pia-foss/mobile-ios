@@ -50,35 +50,19 @@ extension AccountProvider {
         })
     }
     
-    func refreshAndLogoutUnauthorized(force: Bool = false) {
+    func refreshAndLogoutUnauthorized() {
         
         guard self.isLoggedIn else {
             return
         }
-
-        let migrationDone = Client.preferences.authMigrationSuccess
-        var forceRefreshToken = force
-        if migrationDone != true {
-            forceRefreshToken = true
-        }
         
-        refreshAccount(force: forceRefreshToken)
+        refreshAccount()
         
     }
     
-    private func refreshAccount(force forceRefreshToken: Bool) {
-        if !forceRefreshToken {
-            guard let accountInfo = Client.providers.accountProvider.currentUser?.info else {
-                return
-            }
-            
-            guard accountInfo.isExpired else {
-                //if not expired we do not need to refresh the token
-                return
-            }
-        }
-        
-        refreshAccountInfo(force: forceRefreshToken, { (info, error) in
+    private func refreshAccount() {
+
+        refreshAccountInfo( { (info, error) in
             guard let error = error as? ClientError else {
                 return
             }

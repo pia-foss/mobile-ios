@@ -97,10 +97,6 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(openSettings), name: .OpenSettings, object: nil)
         nc.addObserver(self, selector: #selector(openSettingsAndWireGuard), name: .OpenSettingsAndActivateWireGuard, object: nil)
 
-        if Client.providers.accountProvider.isLoggedIn {
-            Client.providers.accountProvider.refreshAndLogoutUnauthorized()
-        }
-        
         self.viewContentHeight = self.viewContentHeightConstraint.constant
         
     }
