@@ -31,7 +31,8 @@ extension Server {
         hostname: "auto.bogus.domain",
         bestOpenVPNAddressForTCP: nil,
         bestOpenVPNAddressForUDP: nil,
-        pingAddress: nil
+        pingAddress: nil,
+        regionIdentifier: "auto"
     )
     
     var isAutomatic: Bool {

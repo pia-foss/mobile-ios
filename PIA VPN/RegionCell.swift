@@ -48,7 +48,12 @@ class RegionCell: UITableViewCell, Restylable {
         self.server = server
 
         imvFlag.setImage(fromServer: server)
-        labelRegion.text = server.name
+        
+        if let _ = Client.providers.serverProvider.regionStaticData {
+            labelRegion.text = Client.providers.serverProvider.regionStaticData.localisedServerName(forCountryName: server.name)
+        } else {
+            labelRegion.text = server.name
+        }
         
         var pingTimeString: String?
         if let pingTime = server.pingTime {

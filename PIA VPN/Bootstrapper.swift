@@ -130,6 +130,12 @@ class Bootstrapper {
             PIAWGTunnelProfile.vpnType: PIAWireguardConfiguration(customDNSServers: [])
         ]
         
+        Client.providers.serverProvider.downloadRegionStaticData { (error) in
+            NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
+            object: self,
+            userInfo: nil)
+        }
+        
         Client.providers.accountProvider.subscriptionInformation { [weak self] (info, error) in
             
             if let _ = error {
