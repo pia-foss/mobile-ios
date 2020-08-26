@@ -91,8 +91,6 @@ struct AppConstants {
         static let privacyURL = URL(string: "https://www.privateinternetaccess.com/pages/privacy-policy/")!
 
         static let csEmail = "helpdesk+vpnpermissions.ios@privateinternetaccess.com"
-        
-        static let friendReferralTerms = "https://www.privateinternetaccess.com/pages/invites/terms_and_conditions"
 
         static var stagingEndpointURL: URL? = {
             guard let path = Bundle.main.path(forResource: "staging", ofType: "endpoint") else {

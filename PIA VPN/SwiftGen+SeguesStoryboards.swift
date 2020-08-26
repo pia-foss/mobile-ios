@@ -30,9 +30,6 @@ internal enum StoryboardSegue {
     case trustedNetworksSegueIdentifier = "TrustedNetworksSegueIdentifier"
     case unwindContentBlockerSegueIdentifier = "UnwindContentBlockerSegueIdentifier"
     case unwindRegionsSegueIdentifier = "UnwindRegionsSegueIdentifier"
-    case showReferralInvites = "show-referral-invites"
-    case viewFriendReferralSignups = "view-friend-referral-signups"
-    case viewFriendReferralStatus = "view-friend-referral-status"
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
