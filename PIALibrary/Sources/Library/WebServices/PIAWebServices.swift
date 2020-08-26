@@ -317,6 +317,21 @@ class PIAWebServices: WebServices, ConfigurationAccess {
 
     }
     
+    func downloadRegionsStaticData(_ callback: LibraryCallback<RegionData>?) {
+        
+        self.regionsTask.fetchLocalization { (response, error) in
+            
+            var regionData = RegionData(translations: [String : [String : String]](), geolocations: [String : [String]]())
+
+            if let response = response {
+                regionData = RegionData(translations: response.translations, geolocations: response.gps)
+            }
+                        
+            callback?(regionData, nil)
+
+        }
+    }
+    
     // MARK: Store
     func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?) {
         

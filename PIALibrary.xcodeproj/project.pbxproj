@@ -238,15 +238,11 @@
 		8221921D24CEBA3800C24F1C /* NMTRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921B24CEBA3800C24F1C /* NMTRules.swift */; };
 		8221921F24CEBABA00C24F1C /* NMTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921E24CEBABA00C24F1C /* NMTType.swift */; };
 		8221922024CEBABA00C24F1C /* NMTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921E24CEBABA00C24F1C /* NMTType.swift */; };
-		8221922324CEC1E400C24F1C /* Invites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221922124CEC1E400C24F1C /* Invites.swift */; };
-		8221922424CEC1E400C24F1C /* Invites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221922124CEC1E400C24F1C /* Invites.swift */; };
-		8221922524CEC1E400C24F1C /* InvitesInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221922224CEC1E400C24F1C /* InvitesInformation.swift */; };
-		8221922624CEC1E400C24F1C /* InvitesInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221922224CEC1E400C24F1C /* InvitesInformation.swift */; };
-		8221922824CEC1ED00C24F1C /* GlossInvitesInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221922724CEC1ED00C24F1C /* GlossInvitesInformation.swift */; };
-		8221922924CEC1ED00C24F1C /* GlossInvitesInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221922724CEC1ED00C24F1C /* GlossInvitesInformation.swift */; };
 		822BC1D024BF20C90041BF9A /* UIControl+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BC1CF24BF20C90041BF9A /* UIControl+Action.swift */; };
 		82E20B1124F652ED0065EFE3 /* AccountInfo+Kotlin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E20B1024F652ED0065EFE3 /* AccountInfo+Kotlin.swift */; };
 		82E20B1224F652ED0065EFE3 /* AccountInfo+Kotlin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E20B1024F652ED0065EFE3 /* AccountInfo+Kotlin.swift */; };
+		82E20B1624F6AA110065EFE3 /* RegionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E20B1524F6AA110065EFE3 /* RegionData.swift */; };
+		82E20B1724F6AA110065EFE3 /* RegionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E20B1524F6AA110065EFE3 /* RegionData.swift */; };
 		84125E08213D7DFF001BCC19 /* PIAColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84125E07213D7DFF001BCC19 /* PIAColors.swift */; };
 		84125E09213D7E04001BCC19 /* PIAColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84125E07213D7DFF001BCC19 /* PIAColors.swift */; };
 		84125E0B213D7E0E001BCC19 /* PIAFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84125E0A213D7E0E001BCC19 /* PIAFonts.swift */; };
@@ -556,6 +552,7 @@
 		8221922724CEC1ED00C24F1C /* GlossInvitesInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossInvitesInformation.swift; sourceTree = "<group>"; };
 		822BC1CF24BF20C90041BF9A /* UIControl+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Action.swift"; sourceTree = "<group>"; };
 		82E20B1024F652ED0065EFE3 /* AccountInfo+Kotlin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountInfo+Kotlin.swift"; sourceTree = "<group>"; };
+		82E20B1524F6AA110065EFE3 /* RegionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionData.swift; sourceTree = "<group>"; };
 		84125E07213D7DFF001BCC19 /* PIAColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAColors.swift; sourceTree = "<group>"; };
 		84125E0A213D7E0E001BCC19 /* PIAFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAFonts.swift; sourceTree = "<group>"; };
 		841BE60C212AD0F3002EF2D1 /* ValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorTests.swift; sourceTree = "<group>"; };
@@ -847,6 +844,7 @@
 				DD76292721ECDFF80092DF50 /* Usage.swift */,
 				DD56E3F5225F5D77002EDFB2 /* Product.swift */,
 				DD6768E222FAB19D00B9FDD0 /* AppStoreInformation.swift */,
+				82E20B1524F6AA110065EFE3 /* RegionData.swift */,
 			);
 			path = WebServices;
 			sourceTree = "<group>";
@@ -1652,8 +1650,6 @@
 				84125E0C213D7E0E001BCC19 /* PIAFonts.swift in Sources */,
 				0E3D13DA1F9E273300434A48 /* GlossSignup.swift in Sources */,
 				0E392D961FE316860002160D /* DebugLog.swift in Sources */,
-				8221922624CEC1E400C24F1C /* InvitesInformation.swift in Sources */,
-				8221922424CEC1E400C24F1C /* Invites.swift in Sources */,
 				0E7BC6EB1F96B1040035C8B2 /* PIAWebServices.swift in Sources */,
 				0E245C9E1FECF0C20010DEF2 /* ClientAccess.swift in Sources */,
 				DD2683EA24617F0300C65DAA /* PingTask.swift in Sources */,
@@ -1677,6 +1673,7 @@
 				0E7BC6F61F96B1120035C8B2 /* AccountInfo.swift in Sources */,
 				DDFCFAB721E925F70081F235 /* EnumsBuilder.swift in Sources */,
 				84125E09213D7E04001BCC19 /* PIAColors.swift in Sources */,
+				82E20B1724F6AA110065EFE3 /* RegionData.swift in Sources */,
 				0E3D13D71F9E272B00434A48 /* GlossPayment.swift in Sources */,
 				0E2ADD491FE1595300BB170C /* IPSecProfile.swift in Sources */,
 				0E7BC6F41F96B1120035C8B2 /* SecureStore.swift in Sources */,
@@ -1690,7 +1687,6 @@
 				0E7BC6F21F96B1120035C8B2 /* UpdateAccountRequest.swift in Sources */,
 				0E53A83F1FE5A4C8000C2A18 /* Client+Daemons.swift in Sources */,
 				0EFDC1CE1FE36D45007C0B9B /* Restylable.swift in Sources */,
-				8221922924CEC1ED00C24F1C /* GlossInvitesInformation.swift in Sources */,
 				0E392DA41FE3247E0002160D /* Endpoint.swift in Sources */,
 				0EE7710A1F9D21020029A77B /* Payment.swift in Sources */,
 				0E7BC6ED1F96B1040035C8B2 /* UserDefaultsStore.swift in Sources */,
@@ -1793,12 +1789,10 @@
 				DD58F4BB21AEB99C00D043F7 /* GlossToken.swift in Sources */,
 				DD1AB10323FAD83900396E74 /* WalkthroughPageView.swift in Sources */,
 				0E2215CF2008DFD900F5FB4D /* SwiftGen+Assets.swift in Sources */,
-				8221922524CEC1E400C24F1C /* InvitesInformation.swift in Sources */,
 				0EE78AF21F8187F8002E4CDD /* LoginRequest.swift in Sources */,
 				DDD824E72189C0E800151709 /* BrandableNavigationBar.swift in Sources */,
 				84125E08213D7DFF001BCC19 /* PIAColors.swift in Sources */,
 				DD2F4AD1248A6D4D00A2F6D8 /* LoginReceiptRequest.swift in Sources */,
-				8221922824CEC1ED00C24F1C /* GlossInvitesInformation.swift in Sources */,
 				0EE78AF01F818767002E4CDD /* ClientError.swift in Sources */,
 				0E0E5B151F829EC500022CD0 /* UpdateAccountRequest.swift in Sources */,
 				0E392D8F1FE2FBBE0002160D /* GlossConnectivityStatus.swift in Sources */,
@@ -1902,9 +1896,9 @@
 				DD1AB10523FC280000396E74 /* DeviceModel.swift in Sources */,
 				0E392DBB1FE34B5A0002160D /* NSString+URL.m in Sources */,
 				0E2ADCCA1FE06D7A00BB170C /* Array+Math.swift in Sources */,
-				8221922324CEC1E400C24F1C /* Invites.swift in Sources */,
 				0E2ADD331FE1472F00BB170C /* VPNStatus.swift in Sources */,
 				0E0F95961FD560C40046DC64 /* CircleProgressView.swift in Sources */,
+				82E20B1624F6AA110065EFE3 /* RegionData.swift in Sources */,
 				DD6DC5B921B6A83400F9D538 /* UIViewLoading.swift in Sources */,
 				0E2ADCF11FE09C6C00BB170C /* ServersPinger.swift in Sources */,
 				0E2ADD4F1FE15C2200BB170C /* VPNConfiguration.swift in Sources */,

@@ -39,6 +39,10 @@ class GlossServer: GlossParser {
             return nil
         }
         
+        guard let regionIdentifier: String = "id" <~~ json else {
+           return nil
+       }
+        
         let geo: Bool = "geo" <~~ json ?? false
 
         var internalServerNetwork: ServersNetwork?
@@ -114,7 +118,8 @@ class GlossServer: GlossParser {
                             pingAddress: pingAddress,
                             responseTime: 0,
                             serverNetwork: internalServerNetwork ?? .gen4,
-                            geo: geo
+                            geo: geo,
+                            regionIdentifier: regionIdentifier
             )
             
             if let autoRegion: Bool = "auto_region" <~~ json {
@@ -155,7 +160,8 @@ class GlossServer: GlossParser {
                 bestOpenVPNAddressForUDP: ovpnUDPAddress,
                 pingAddress: pingAddress,
                 serverNetwork: internalServerNetwork ?? .legacy,
-                geo: geo
+                geo: geo,
+                regionIdentifier: regionIdentifier
             )
             
         }

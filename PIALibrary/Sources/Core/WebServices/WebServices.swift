@@ -58,6 +58,8 @@ protocol WebServices: class {
 
     func downloadServers(_ callback: LibraryCallback<ServersBundle>?)
 
+    func downloadRegionsStaticData(_ callback: LibraryCallback<RegionData>?)
+
     func flagURL(for country: String) -> URL
 
     func taskForConnectivityCheck(_ callback: LibraryCallback<ConnectivityStatus>?) -> URLSessionDataTask

@@ -111,6 +111,9 @@ public class Server: Hashable {
     /// The server identifier.
     public let identifier: String
     
+    /// The server region identifier
+    public let regionIdentifier: String
+    
     /// The server is virtually located.
     public let geo: Bool
 
@@ -156,13 +159,15 @@ public class Server: Hashable {
         pingAddress: Address?,
         responseTime: Int? = 0,
         serverNetwork: ServersNetwork? = .legacy,
-        geo: Bool = false) {
+        geo: Bool = false,
+        regionIdentifier: String) {
         
         self.serial = serial
         self.name = name
         self.country = country
         self.hostname = hostname
         self.geo = geo
+        self.regionIdentifier = regionIdentifier
         identifier = hostname.components(separatedBy: ".").first ?? ""
         
         self.bestOpenVPNAddressForTCP = bestOpenVPNAddressForTCP
