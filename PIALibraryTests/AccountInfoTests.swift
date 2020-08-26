@@ -34,7 +34,7 @@ class AccountInfoTests: XCTestCase {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
         self.theDate = dateFormatter.date(from: "14-08-2018")
-        self.accountInfo = AccountInfo(email: "email@email.com",
+        self.accountInfo = AccountInfo(email: "email@email.com", username: "pXXXXXX",
                                        plan: Plan.monthly,
                                        productId: "identifier",
                                        isRenewable: false,

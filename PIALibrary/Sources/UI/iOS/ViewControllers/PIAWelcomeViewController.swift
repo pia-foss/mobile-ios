@@ -365,15 +365,7 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
         fatalError("Not implemented")
     }
     
-    func invitesInformation(_ callback: LibraryCallback<InvitesInformation>?) {
-        fatalError("Not implemented")
-    }
-    
     func subscriptionInformation(_ callback: LibraryCallback<AppStoreInformation>?) {
-        fatalError("Not implemented")
-    }
-    
-    func invite(name: String, email: String, _ callback: SuccessLibraryCallback?) {
         fatalError("Not implemented")
     }
 
@@ -406,22 +398,7 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
             callback?(user, nil)
         }
     }
-    
-    func redeem(with request: RedeemRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        let redeem = Redeem(email: request.email, code: request.code)
         
-        webServices?.redeem(with: redeem) { (credentials, error) in
-            guard let credentials = credentials else {
-                callback?(nil, error)
-                return
-            }
-            let user = UserAccount(credentials: credentials, info: nil)
-            self.currentUser = user
-            self.isLoggedIn = true
-            callback?(user, nil)
-        }
-    }
-    
     func listRenewablePlans(_ callback: (([Plan]?, Error?) -> Void)?) {
         fatalError("Not implemented")
     }

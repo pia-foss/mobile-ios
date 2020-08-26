@@ -47,8 +47,6 @@ protocol WebServices: class {
     #if os(iOS)
     func signup(with request: Signup, _ callback: LibraryCallback<Credentials>?)
 
-    func redeem(with request: Redeem, _ callback: LibraryCallback<Credentials>?)
-
     func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?)
     #endif
 
@@ -65,10 +63,5 @@ protocol WebServices: class {
     func taskForConnectivityCheck(_ callback: LibraryCallback<ConnectivityStatus>?) -> URLSessionDataTask
 
     func submitDebugLog(_ log: DebugLog, _ callback: SuccessLibraryCallback?)
-    
-    // MARK: Friend Referral
-    
-    func invitesInformation(_ callback: LibraryCallback<InvitesInformation>?)
-    
-    func invite(credentials: Credentials, name: String, email: String, _ callback: SuccessLibraryCallback?)
+
 }

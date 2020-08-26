@@ -25,224 +25,239 @@ import Alamofire
 import Gloss
 import SwiftyBeaver
 import PIARegions
+import PIAAccount
 
 private let log = SwiftyBeaver.self
 
 class PIAWebServices: WebServices, ConfigurationAccess {
     
     private static let serversVersion = 1002
+    private static let store = "apple_app_store"
+    
     private let regionsTask = RegionsTask()
+    private let accountAPI: IOSAccountAPI!
+    
+    init() {
+        
+        self.accountAPI = AccountBuilder().setPlatform(platform: .ios)
+                .setStaging(staging: Client.environment == .staging)
+                .setUserAgentValue(userAgentValue: userAgent).build() as? IOSAccountAPI
+        
+    }
+    
+    private let userAgent: String = {
+        if let info = Bundle.main.infoDictionary {
+            let executable = info[kCFBundleExecutableKey as String] as? String ?? "Unknown"
+            let bundle = info[kCFBundleIdentifierKey as String] as? String ?? "Unknown"
+            let appVersion = info["CFBundleShortVersionString"] as? String ?? "Unknown"
+            let appBuild = info[kCFBundleVersionKey as String] as? String ?? "Unknown"
+
+            let osNameVersion: String = {
+                let version = ProcessInfo.processInfo.operatingSystemVersion
+                let versionString = "\(version.majorVersion).\(version.minorVersion).\(version.patchVersion)"
+
+                let osName: String = {
+                    #if os(iOS)
+                        return "iOS"
+                    #elseif os(watchOS)
+                        return "watchOS"
+                    #elseif os(tvOS)
+                        return "tvOS"
+                    #elseif os(macOS)
+                        return "OS X"
+                    #elseif os(Linux)
+                        return "Linux"
+                    #else
+                        return "Unknown"
+                    #endif
+                }()
+
+                return "\(osName) \(versionString)"
+            }()
+
+            return "\(executable)/\(appVersion) (\(bundle); build:\(appBuild); \(osNameVersion))"
+        }
+
+        return "PIA"
+    }()
 
     /***
      Generates a new auth token for the specific user
      */
     func token(credentials: Credentials, _ callback: ((String?, Error?) -> Void)?) {
-        let endpoint = ClientEndpoint.token
-        let status = [200, 401, 429]
-        let errors: [Int: ClientError] = [
-            401: .unauthorized,
-            429: .throttled
-        ]
         
-        let parameters = credentials.toJSONDictionary()
-        req(nil, .post, endpoint, useAuthToken: true, parameters, status, JSONRequestExecutor() { (json, status, error) in
-            if let knownError = self.knownError(endpoint, status, errors) {
-                callback?(nil, knownError)
-                return
-            }
-            guard let json = json else {
-                callback?(nil, error)
-                return
-            }
-            guard let token = GlossToken(json: json)?.parsed else {
-                callback?(nil, ClientError.malformedResponseData)
-                return
-            }
-            callback?(token, nil)
-        })
+        self.accountAPI.loginWithCredentials(username: credentials.username,
+                                             password: credentials.password) { (response, error) in
+
+                                                if let error = error {
+                                                    callback?(nil, ClientError.invalidParameter)
+                                                    return
+                                                }
+                                                
+                                                guard let token = response else {
+                                                    callback?(nil, ClientError.malformedResponseData)
+                                                    return
+                                                }
+                                                
+                                                callback?(token, nil)
+                                                
+        }
+        
     }
 
     /***
      Generates a new auth token for the specific user
      */
     func token(receipt: Data, _ callback: ((String?, Error?) -> Void)?) {
-        let endpoint = ClientEndpoint.token
-        let status = [200, 401, 429]
-        let errors: [Int: ClientError] = [
-            401: .unauthorized,
-            429: .throttled
-        ]
         
-        let parameters = ["store": "apple_app_store",
-                          "receipt": receipt.base64EncodedString()]
-        
-        req(nil, .post, endpoint, useAuthToken: true, parameters, status, JSONRequestExecutor() { (json, status, error) in
-            if let knownError = self.knownError(endpoint, status, errors) {
-                callback?(nil, knownError)
+        self.accountAPI.loginWithReceipt(receiptBase64: receipt.base64EncodedString()) { (response, error) in
+            
+            if let error = error {
+                callback?(nil, ClientError.invalidParameter)
                 return
             }
-            guard let json = json else {
-                callback?(nil, error)
-                return
-            }
-            guard let token = GlossToken(json: json)?.parsed else {
+
+            guard let token = response else {
                 callback?(nil, ClientError.malformedResponseData)
                 return
             }
+            
             callback?(token, nil)
-        })
+            
+        }
+        
     }
 
     func info(token: String, _ callback: ((AccountInfo?, Error?) -> Void)?) {
-        let endpoint = ClientEndpoint.account
-        let status = [200, 401, 429]
-        let errors: [Int: ClientError] = [
-            401: .unauthorized,
-            429: .throttled
-        ]
         
-        req(nil, .get, endpoint, useAuthToken: true, nil, status, JSONRequestExecutor() { (json, status, error) in
-            if let knownError = self.knownError(endpoint, status, errors) {
-                callback?(nil, knownError)
-                return
+        if let token = Client.providers.accountProvider.token {
+            
+            self.accountAPI.accountDetails(token: token) { (response, error) in
+                
+                if let error = error {
+                    callback?(nil, ClientError.invalidParameter)
+                    return
+                }
+                
+                if let response = response {
+                    let account = AccountInfo(accountInformation: response)
+                    callback?(account, nil)
+                } else {
+                    callback?(nil, ClientError.malformedResponseData)
+                }
+                
             }
-            guard let json = json else {
-                callback?(nil, error)
-                return
-            }
-            guard let accountInfo = GlossAccountInfo(json: json)?.parsed else {
-                callback?(nil, ClientError.malformedResponseData)
-                return
-            }
-            callback?(accountInfo, nil)
-        })
+
+        } else {
+            callback?(nil, ClientError.unauthorized)
+        }
+        
     }
     
     func update(credentials: Credentials, resetPassword reset: Bool, email: String, _ callback: SuccessLibraryCallback?) {
-        let endpoint = ClientEndpoint.updateAccount
-        let parameters = ["email": email, "reset_password": reset] as [String : Any]
-        let status = [200]
-
-        req(reset ? nil : credentials, .post, endpoint, useAuthToken: reset, parameters, status, JSONRequestExecutor() { (json, status, error) in
-            if let error = error {
-                callback?(error)
-                return
+        
+        if reset {
+            //Reset password, we use the token
+            if let token = Client.providers.accountProvider.token {
+                self.accountAPI.setEmail(token: token, email: email, resetPassword: reset) { (newPassword, error) in
+                    if let error = error {
+                        callback?(ClientError.unsupported)
+                        return
+                    }
+                    if let newPassword = newPassword {
+                        Client.configuration.tempAccountPassword = newPassword
+                    }
+                    callback?(nil)
+                }
+            } else {
+                callback?(ClientError.invalidParameter)
             }
-            
-            if let newPassword = json?["password"] as? String {
-                Client.configuration.tempAccountPassword = newPassword
+        } else {
+            //We use the email and the password returned by the signup endpoint in the previous step, we don't update the password
+            self.accountAPI.setEmail(username: credentials.username, password: credentials.password, email: email, resetPassword: reset) { (newPassword, error) in
+                if let error = error {
+                    callback?(ClientError.unsupported)
+                    return
+                }
+                callback?(nil)
             }
-            
-            callback?(nil)
-        })
+        }
+        
     }
     
     func logout(_ callback: LibraryCallback<Bool>?) {
         
-        let endpoint = ClientEndpoint.logout
-        let status = [200]
-
-        req(nil, .post, endpoint, useAuthToken: true, nil, status, JSONRequestExecutor() { (json, status, error) in
-            if let error = error {
-                if let status = status, status == 401 {
-                    callback?(true, nil)
+        if let token = Client.providers.accountProvider.token {
+            self.accountAPI.logout(token: token) { (accountError) in
+                if let error = accountError {
+                    if error.code == 401 {
+                        callback?(true, nil)
+                        return
+                    }
+                    callback?(false, ClientError.invalidParameter)
                     return
                 }
-                callback?(false, error)
-                return
+                callback?(true, nil)
             }
-            callback?(true, nil)
-        })
+        } else {
+            callback?(false, ClientError.invalidParameter)
+        }
 
     }
     
     #if os(iOS)
     func signup(with request: Signup, _ callback: ((Credentials?, Error?) -> Void)?) {
-        let endpoint = ClientEndpoint.signup
-        let parameters = request.toJSON()
-        let status = [200, 400, 409]
-        let errors: [Int: ClientError] = [
-            400: .badReceipt
-        ]
-    
-        req(nil, .post, endpoint, parameters, status, JSONRequestExecutor() { (json, status, error) in
-            if let knownError = self.knownError(endpoint, status, errors) {
-                callback?(nil, knownError)
-                return
-            }
-            guard let json = json else {
-                callback?(nil, error)
-                return
-            }
-            guard let credentials = GlossCredentials(json: json)?.parsed else {
-                callback?(nil, ClientError.malformedResponseData)
-                return
-            }
-            callback?(credentials, nil)
-        })
-    }
-    
-    func redeem(with request: Redeem, _ callback: ((Credentials?, Error?) -> Void)?) {
-        let endpoint = ClientEndpoint.redeem
-        let parameters = request.toJSON()
-        let status = [200, 400, 429]
-        let errors: [Int: ClientError] = [
-            429: .throttled
-        ]
         
-        req(nil, .post, endpoint, parameters, status, JSONRequestExecutor() { (json, status, error) in
-            if let knownError = self.knownError(endpoint, status, errors) {
-                callback?(nil, knownError)
-                return
-            }
-            guard let json = json else {
-                callback?(nil, error)
-                return
-            }
-            guard (status == 200) else {
-                var specificError: ClientError = .malformedResponseData
-                if let code = json["code"] as? String {
-                    switch code {
-                    case "not_found", "canceled":
-                        specificError = .redeemInvalid
-                        
-                    case "redeemed":
-                        specificError = .redeemClaimed
-                        
-                    default:
-                        break
-                    }
-                }
-                callback?(nil, specificError)
-                return
-            }
-            guard let credentials = GlossCredentials(json: json)?.parsed else {
-                callback?(nil, ClientError.malformedResponseData)
-                return
-            }
-            callback?(credentials, nil)
-        })
-    }
-    
-    func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?) {
-        let endpoint = ClientEndpoint.payment
-        let parameters = request.toJSON()
-        let status = [200, 400]
-        let errors: [Int: ClientError] = [
-            400: .badReceipt
-        ]
+        var marketingJSON = ""
+        if let json = request.marketing as? JSON {
+            marketingJSON = json.description
+        }
         
-        req(credentials, .post, endpoint, parameters, status, JSONRequestExecutor() { (json, status, error) in
-            if let knownError = self.knownError(endpoint, status, errors) {
-                callback?(knownError)
-                return
-            }
+        var debugJSON = ""
+        if let json = request.debug as? JSON {
+            debugJSON = json.description
+        }
+        
+        let info = IOSSignupInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), email: request.email, marketing: marketingJSON, debug: debugJSON)
+        self.accountAPI.signUp(information: info) { (response, error) in
+            
             if let error = error {
-                callback?(error)
+                callback?(nil, ClientError.invalidParameter)
+                return
+            }
+
+            guard let response = response else {
+                callback?(nil, ClientError.malformedResponseData)
+                return
+            }
+
+            callback?(Credentials(username: response.username, password: response.password), nil)
+            
+        }
+        
+    }
+        
+    func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?) {
+        
+        var marketingJSON = ""
+        if let json = request.marketing as? JSON {
+            marketingJSON = json.description
+        }
+        
+        var debugJSON = ""
+        if let json = request.debug as? JSON {
+            debugJSON = json.description
+        }
+        
+        let info = IOSPaymentInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), marketing: marketingJSON, debug: debugJSON)
+
+        self.accountAPI.payment(username: credentials.username, password: credentials.password, information: info) { (error) in
+            if let error = error {
+                callback?(ClientError.invalidParameter)
                 return
             }
             callback?(nil)
-        })
+        }
     }
     #endif
     
@@ -304,114 +319,46 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     
     // MARK: Store
     func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?) {
-        let endpoint = ClientEndpoint.ios
-        let status = [200, 400]
-        let errors: [Int: ClientError] = [
-            400: .badReceipt
-        ]
         
-        var parameters: JSON = [
-            "type": "subscription"
-        ]
-        
-        if let receipt = receipt {
-            parameters["receipt"] = receipt.base64EncodedString()
+        guard let receipt = receipt else {
+            callback?(nil, ClientError.invalidParameter)
+            return
         }
 
-        req(nil, .post, endpoint, useAuthToken: false, parameters, status, JSONRequestExecutor() { (json, status, error) in
-            if let knownError = self.knownError(endpoint, status, errors) {
-                callback?(nil, knownError)
-                return
-            }
-            guard let json = json else {
-                callback?(nil, error)
-                return
-            }
+        self.accountAPI.subscriptions(receipt: receipt.base64EncodedString()) { (response, error) in
             
-            if let availableJSONProducts =  json["available_products"] as? [JSON] {
+            if let error = error {
+                callback?(nil, ClientError.malformedResponseData)
+                return
+            }
 
-                guard let products = [Product].from(jsonArray: availableJSONProducts) else {
-                    callback?(nil, error)
-                    return
+            if let response = response {
+                
+                var products = [Product]()
+                for prod in response.availableProducts {
+                    let product = Product(identifier: prod.id,
+                                          plan: Plan(rawValue: prod.plan) ?? .other,
+                                          price: prod.price,
+                                          legacy: prod.legacy)
+                    products.append(product)
                 }
 
-                let eligibleForTrial = json["eligible_for_trial"] as? Bool ?? false
+                let eligibleForTrial = response.eligibleForTrial
                 
                 let info = AppStoreInformation(products: products,
                                     eligibleForTrial: eligibleForTrial)
                 Client.configuration.eligibleForTrial = info.eligibleForTrial
                 
                 callback?(info, nil)
-            } else {
-                callback?(nil, error)
-                return
-            }
-            
-        })
 
-    }
-    
-    // MARK: Friend referral
-    
-    func invitesInformation(_ callback: LibraryCallback<InvitesInformation>?) {
-        
-        let endpoint = ClientEndpoint.invites
-        let status = [200, 400]
-        let errors: [Int: ClientError] = [
-            400: .badReceipt
-        ]
-        
-        req(nil, .get, endpoint, useAuthToken: true, nil, status, JSONRequestExecutor() { (json, status, error) in
-            
-            if let knownError = self.knownError(endpoint, status, errors) {
-                callback?(nil, knownError)
-                return
-            }
-            guard let json = json else {
-                callback?(nil, error)
-                return
-            }
-            guard let invitesInformation = GlossInvitesInformation(json: json)?.parsed else {
+            } else {
                 callback?(nil, ClientError.malformedResponseData)
                 return
             }
-            
-            callback?(invitesInformation, nil)
-            
-        })
-
-    }
-    
-    func invite(credentials: Credentials, name: String, email: String, _ callback: SuccessLibraryCallback?) {
-        let endpoint = ClientEndpoint.invites
-        let status = [200, 400, 401]
-        let errors: [Int: ClientError] = [
-            400: .badReceipt,
-            401: .unauthorized
-        ]
-        
-        if email.isEmpty {
-            callback?(ClientError.invalidParameter)
-            return
         }
         
-        let parameters = ["invitee_name": name,
-                          "invitee_email": email]
-        
-        req(credentials, .post, endpoint, parameters, status, DataRequestExecutor() { (json, status, error) in
-            if let knownError = self.knownError(endpoint, status, errors) {
-                callback?(knownError)
-                return
-            }
-            if let error = error {
-                callback?(error)
-                return
-            }
-            callback?(nil)
-        })
-
     }
-    
+        
     // MARK: Helpers
 
     private func req(

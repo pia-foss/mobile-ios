@@ -242,19 +242,6 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
         delegate.cleanDatabase()
     }
     
-    /// :nodoc:
-    public func invitesInformation(_ callback: LibraryCallback<InvitesInformation>?) {
-        guard !mockIsUnauthorized else {
-            callback?(nil, ClientError.unauthorized)
-            return
-        }
-        delegate.invitesInformation(callback)
-    }
-    
-    public func invite(name: String, email: String, _ callback: SuccessLibraryCallback?) {
-        delegate.invite(name: name, email: email, callback)
-    }
-    
     #if os(iOS)
     /// :nodoc:
     public func listPlanProducts(_ callback: (([Plan : InAppProduct]?, Error?) -> Void)?) {
@@ -291,23 +278,7 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
             }
         }
     }
-    
-    /// :nodoc:
-    public func redeem(with request: RedeemRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        Macros.dispatch(after: .seconds(1)) {
-            switch self.mockRedeemOutcome {
-            case .success:
-                self.delegate.redeem(with: request, callback)
-                
-            case .invalid:
-                callback?(nil, ClientError.redeemInvalid)
-                
-            case .claimed:
-                callback?(nil, ClientError.redeemClaimed)
-            }
-        }
-    }
-    
+        
     /// :nodoc:
     public func listRenewablePlans(_ callback: (([Plan]?, Error?) -> Void)?) {
         delegate.listRenewablePlans(callback)

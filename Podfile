@@ -16,6 +16,7 @@ abstract_target 'PIALibrary' do
     pod 'PopupDialog'
     pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :commit => 'd19b9de'
     pod 'PIAWireguard', :git => "https://github.com/pia-foss/ios-wireguard", :commit => '1585891'
+    pod "PIAAccount", :path => "/Users/jose/Projects/PIA/account"
     pod 'PIARegions',  :git => "https://github.com/pia-foss/mobile-common-regions"
 
     target 'PIALibrary-iOS' do

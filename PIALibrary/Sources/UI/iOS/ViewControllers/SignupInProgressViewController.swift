@@ -59,8 +59,6 @@ public class SignupInProgressViewController: AutolayoutViewController, Brandable
 
         if let request = signupRequest {
             performSignup(with: request)
-        } else if let request = redeemRequest {
-            performRedeem(with: request)
         }
     }
     
@@ -92,36 +90,7 @@ public class SignupInProgressViewController: AutolayoutViewController, Brandable
             self.perform(segue: StoryboardSegue.Signup.successSegueIdentifier)
         }
     }
-    
-    private func performRedeem(with request: RedeemRequest) {
-        log.debug("Redeeming...")
         
-        preset?.accountProvider.redeem(with: request) { (user, error) in
-            guard let user = user else {
-                self.user = nil
-                self.error = error
-                if let clientError = error as? ClientError, (clientError == .internetUnreachable) {
-                    log.error("Failed to redeem: Internet is unreachable")
-                    self.perform(segue: StoryboardSegue.Signup.internetUnreachableSegueIdentifier, sender: nil)
-                    return
-                }
-                if let error = error {
-                    log.error("Failed to redeem (error: \(error))")
-                } else {
-                    log.error("Failed to redeem")
-                }
-                self.perform(segue: StoryboardSegue.Signup.failureSegueIdentifier)
-                return
-            }
-            
-            log.debug("Redeem succeeded!")
-            
-            self.user = user
-            self.error = nil
-            self.perform(segue: StoryboardSegue.Signup.successSegueIdentifier)
-        }
-    }
-    
     override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier, let segueType = StoryboardSegue.Signup(rawValue: identifier) else {
             return
