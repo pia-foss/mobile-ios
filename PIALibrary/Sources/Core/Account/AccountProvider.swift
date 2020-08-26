@@ -84,9 +84,8 @@ public protocol AccountProvider: class {
      - Postcondition:
          - Posts `Notification.Name.PIAAccountDidRefresh` on success.
      - Parameter callback: Returns a refreshed `AccountInfo`.
-     - Parameter force: Force refresh.
      */
-    func refreshAccountInfo(force: Bool, _ callback: LibraryCallback<AccountInfo>?)
+    func refreshAccountInfo(_ callback: LibraryCallback<AccountInfo>?)
     
     /**
      Retrieves information associated with the account currently logged in.

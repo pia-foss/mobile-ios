@@ -69,8 +69,6 @@ protocol PlainStore: class {
     
     var isPersistentConnection: Bool? { get set }
 
-    var authMigrationSuccess: Bool? { get set }
-
     var nmtMigrationSuccess: Bool? { get set }
 
     var mace: Bool? { get set }

@@ -135,7 +135,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             self.accountAPI.accountDetails(token: token) { (response, error) in
                 
                 if let error = error {
-                    callback?(nil, ClientError.invalidParameter)
+                    callback?(nil, error.code == 401 ? ClientError.unauthorized : ClientError.invalidParameter)
                     return
                 }
                 
@@ -161,7 +161,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             if let token = Client.providers.accountProvider.token {
                 self.accountAPI.setEmail(token: token, email: email, resetPassword: reset) { (newPassword, error) in
                     if let error = error {
-                        callback?(ClientError.unsupported)
+                        callback?(error.code == 401 ? ClientError.unauthorized : ClientError.unsupported)
                         return
                     }
                     if let newPassword = newPassword {

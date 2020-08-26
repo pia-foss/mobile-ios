@@ -345,7 +345,7 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
         }
     }
 
-    func refreshAccountInfo(force: Bool, _ callback: ((AccountInfo?, Error?) -> Void)?) {
+    func refreshAccountInfo(_ callback: ((AccountInfo?, Error?) -> Void)?) {
         fatalError("Not implemented")
     }
     

@@ -228,38 +228,16 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
 
     }
     
-    func refreshAccountInfo(force: Bool, _ callback: ((AccountInfo?, Error?) -> Void)?) {
+    func refreshAccountInfo(_ callback: ((AccountInfo?, Error?) -> Void)?) {
         
-        guard force == false,
-            let token = self.token,
+        guard let token = self.token,
             let _ = self.publicUsername else {
 
             guard let user = currentUser else {
                 preconditionFailure()
             }
 
-            self.webServices.token(credentials: user.credentials) { (token, error) in
-                
-                if let _ = error {
-                    callback?(nil, error)
-                    return
-                }
-
-                if let token = token {
-                    
-                    let preferences = Client.preferences.editable()
-                    preferences.authMigrationSuccess = true
-                    preferences.commit()
-
-                    if force {
-                        self.updateToken(token)
-                    } else {
-                        self.updateDatabaseWith(token,
-                                                andUsername: user.credentials.username)
-                    }
-                    self.accountInfoWith(token, callback)
-                }
-            }
+            self.logout(nil)
             
             return
         }

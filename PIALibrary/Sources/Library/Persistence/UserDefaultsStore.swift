@@ -64,8 +64,6 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         static let trustCellularData = "TrustCellularData"
 
-        static let authMigrationSuccess = "AuthenticationTokenMigrationSuccess"
-
         static let nmtMigrationSuccess = "NMTMigrationSuccess"
 
         static let trustedNetworks = "TrustedNetworks"
@@ -420,18 +418,6 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
 
-    var authMigrationSuccess: Bool? {
-        get {
-            guard let value = backend.object(forKey: Entries.authMigrationSuccess) as? Bool else {
-                return nil
-            }
-            return value
-        }
-        set {
-            backend.set(newValue, forKey: Entries.authMigrationSuccess)
-        }
-    }
-
     var mace: Bool? {
         get {
             guard let value = backend.object(forKey: Entries.mace) as? Bool else {
@@ -572,7 +558,6 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.trustCellularData)
         backend.removeObject(forKey: Entries.useWiFiProtection)
         backend.removeObject(forKey: Entries.trustedNetworks)
-        backend.removeObject(forKey: Entries.authMigrationSuccess)
         backend.removeObject(forKey: Entries.ikeV2IntegrityAlgorithm)
         backend.removeObject(forKey: Entries.ikeV2EncryptionAlgorithm)
         backend.removeObject(forKey: Entries.serverNetwork)
