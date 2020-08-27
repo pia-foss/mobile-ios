@@ -33,7 +33,7 @@ Pod::Spec.new do |s|
         p.dependency "SwiftyBeaver"
         p.dependency "PopupDialog"
         p.dependency "PIARegions"
-        p.dependency "PIAAccount"
+        p.dependency "PIAAccountModule"
         
     end
 

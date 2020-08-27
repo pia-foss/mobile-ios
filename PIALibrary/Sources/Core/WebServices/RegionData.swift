@@ -46,7 +46,8 @@ public extension RegionData {
     public func localisedServerName(forCountryName countryName: String) -> String {
         
         if let localizationData = self.translations[countryName],
-            let translatedServerName = localizationData[Locale.current.identifier.replacingOccurrences(of: "_", with: "-")] {
+            let translatedServerName = localizationData[Locale.current.identifier.replacingOccurrences(of: "_", with: "-")],
+            !translatedServerName.isEmpty {
             return translatedServerName
         }
         

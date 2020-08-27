@@ -40,7 +40,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     init() {
         
         self.accountAPI = AccountBuilder().setPlatform(platform: .ios)
-                .setStaging(staging: Client.environment == .staging)
+                .setStaging(staging: true)
                 .setUserAgentValue(userAgentValue: userAgent).build() as? IOSAccountAPI
         
     }
@@ -113,7 +113,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         self.accountAPI.loginWithReceipt(receiptBase64: receipt.base64EncodedString()) { (response, error) in
             
             if let error = error {
-                callback?(nil, ClientError.invalidParameter)
+                callback?(nil, error.code == 400 ? ClientError.badReceipt : ClientError.invalidParameter)
                 return
             }
 
@@ -210,19 +210,21 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         
         var marketingJSON = ""
         if let json = request.marketing as? JSON {
-            marketingJSON = json.description
+            marketingJSON = stringify(json: json)
         }
         
         var debugJSON = ""
         if let json = request.debug as? JSON {
-            debugJSON = json.description
+            debugJSON = stringify(json: json)
         }
         
-        let info = IOSSignupInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), email: request.email, marketing: marketingJSON, debug: debugJSON)
+        request.toJSON()
+        
+        let info = IOSSignupInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), email: request.email)
         self.accountAPI.signUp(information: info) { (response, error) in
             
             if let error = error {
-                callback?(nil, ClientError.invalidParameter)
+                callback?(nil, error.code == 400 ? ClientError.badReceipt : ClientError.invalidParameter)
                 return
             }
 
@@ -237,16 +239,34 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         
     }
         
+    private func stringify(json: Any, prettyPrinted: Bool = false) -> String {
+        var options: JSONSerialization.WritingOptions = []
+        if prettyPrinted {
+          options = JSONSerialization.WritingOptions.prettyPrinted
+        }
+
+        do {
+          let data = try JSONSerialization.data(withJSONObject: json, options: options)
+          if let string = String(data: data, encoding: String.Encoding.utf8) {
+            return string
+          }
+        } catch {
+          print(error)
+        }
+
+        return ""
+    }
+
     func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?) {
         
         var marketingJSON = ""
         if let json = request.marketing as? JSON {
-            marketingJSON = json.description
+            marketingJSON = stringify(json: json)
         }
         
         var debugJSON = ""
         if let json = request.debug as? JSON {
-            debugJSON = json.description
+            debugJSON = stringify(json: json)
         }
         
         let info = IOSPaymentInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), marketing: marketingJSON, debug: debugJSON)
@@ -340,10 +360,10 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             return
         }
 
-        self.accountAPI.subscriptions(receipt: receipt.base64EncodedString()) { (response, error) in
+        self.accountAPI.subscriptions(receipt: nil) { (response, error) in
             
             if let error = error {
-                callback?(nil, ClientError.malformedResponseData)
+                callback?(nil, error.code == 400 ? ClientError.badReceipt : ClientError.invalidParameter)
                 return
             }
 
