@@ -43,7 +43,7 @@ end
 
 def shared_main_pods
     pod 'AlamofireImage'
-    pod "PIAAccount", :path => "/Users/jose/Projects/PIA/account"
+    pod "PIAAccountModule", :path => "/Users/jose/Projects/PIA/account"
     pod "PIARegions", :path => "/Users/jose/Projects/PIA/regions"
     library_by_path('/Users/jose/Projects/PIA')
     #library_by_git('7075984')
