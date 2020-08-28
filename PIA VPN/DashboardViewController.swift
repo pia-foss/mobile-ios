@@ -96,6 +96,7 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(unauthorized), name: .Unauthorized, object: nil)
         nc.addObserver(self, selector: #selector(openSettings), name: .OpenSettings, object: nil)
         nc.addObserver(self, selector: #selector(openSettingsAndWireGuard), name: .OpenSettingsAndActivateWireGuard, object: nil)
+        nc.addObserver(self, selector: #selector(checkInternetConnection), name: .PIADaemonsDidUpdateConnectivity, object: nil)
 
         if Client.providers.accountProvider.isLoggedIn {
             Client.providers.accountProvider.refreshAndLogoutUnauthorized()
@@ -295,6 +296,15 @@ class DashboardViewController: AutolayoutViewController {
     
     @objc private func unauthorized() {
         self.isUnauthorized = true
+    }
+    
+    @objc private func checkInternetConnection() {
+        //If connecting and no internet, reconnect the VPN
+        if Client.providers.vpnProvider.vpnStatus == .connecting,
+            Client.daemons.isInternetReachable == false {
+            Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, { error in
+            })
+        }
     }
     
     @objc private func openMenu(_ sender: Any?) {
@@ -649,7 +659,7 @@ class DashboardViewController: AutolayoutViewController {
     private func isTrustedNetwork() -> Bool {
         if Client.preferences.nmtRulesEnabled {
             if let ssid = PIAHotspotHelper().currentWiFiNetwork() {
-                if Client.preferences.nmtGenericRules[NMTType.protectedWiFi.rawValue] == NMTRules.alwaysDisconnect.rawValue &&
+                if Client.preferences.nmtGenericRules[NMTType.protectedWiFi.rawValue] == NMTRules.alwaysDisconnect.rawValue ||
                     (Client.preferences.nmtTrustedNetworkRules[ssid] == NMTRules.alwaysDisconnect.rawValue ||
                         Client.preferences.nmtTrustedNetworkRules[ssid] == nil){
                     return true
