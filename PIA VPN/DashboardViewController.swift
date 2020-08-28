@@ -490,6 +490,8 @@ class DashboardViewController: AutolayoutViewController {
             }
             
             present(alert, animated: true, completion: nil)
+        } else {
+            Client.providers.vpnProvider.install(force: true, nil)
         }
     }
     
