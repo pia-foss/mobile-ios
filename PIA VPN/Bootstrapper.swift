@@ -35,6 +35,7 @@ import Crashlytics
 #endif
 
 class Bootstrapper {
+    
     static let shared = Bootstrapper()
     
     private init() {
@@ -157,6 +158,10 @@ class Bootstrapper {
             Client.refreshProducts()
             Client.observeTransactions()
             
+            if Client.providers.accountProvider.isLoggedIn {
+                Client.providers.accountProvider.refreshAccountInfo(nil)
+            }
+            
         }
 
         if (self.isSimulator || Flags.shared.usesMockVPN) {
@@ -214,6 +219,13 @@ class Bootstrapper {
 
     func dispose() {
         Client.dispose()
+    }
+    
+    func test() {
+        if Client.providers.accountProvider.isLoggedIn {
+            Client.providers.accountProvider.refreshAccountInfo(nil)
+        }
+
     }
     
     // MARK: Notifications
