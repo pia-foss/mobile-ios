@@ -96,6 +96,7 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(unauthorized), name: .Unauthorized, object: nil)
         nc.addObserver(self, selector: #selector(openSettings), name: .OpenSettings, object: nil)
         nc.addObserver(self, selector: #selector(openSettingsAndWireGuard), name: .OpenSettingsAndActivateWireGuard, object: nil)
+        nc.addObserver(self, selector: #selector(checkInternetConnection), name: .PIADaemonsDidUpdateConnectivity, object: nil)
 
         self.viewContentHeight = self.viewContentHeightConstraint.constant
         
@@ -293,6 +294,15 @@ class DashboardViewController: AutolayoutViewController {
         self.isUnauthorized = true
     }
     
+    @objc private func checkInternetConnection() {
+        //If connecting and no internet, reconnect the VPN
+        if Client.providers.vpnProvider.vpnStatus == .connecting,
+            Client.daemons.isInternetReachable == false {
+            Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, { error in
+            })
+        }
+    }
+    
     @objc private func openMenu(_ sender: Any?) {
         perform(segue: StoryboardSegue.Main.menuSegueIdentifier)
     }
@@ -486,6 +496,8 @@ class DashboardViewController: AutolayoutViewController {
             }
             
             present(alert, animated: true, completion: nil)
+        } else {
+            Client.providers.vpnProvider.install(force: true, nil)
         }
     }
     
@@ -643,7 +655,7 @@ class DashboardViewController: AutolayoutViewController {
     private func isTrustedNetwork() -> Bool {
         if Client.preferences.nmtRulesEnabled {
             if let ssid = PIAHotspotHelper().currentWiFiNetwork() {
-                if Client.preferences.nmtGenericRules[NMTType.protectedWiFi.rawValue] == NMTRules.alwaysDisconnect.rawValue &&
+                if Client.preferences.nmtGenericRules[NMTType.protectedWiFi.rawValue] == NMTRules.alwaysDisconnect.rawValue ||
                     (Client.preferences.nmtTrustedNetworkRules[ssid] == NMTRules.alwaysDisconnect.rawValue ||
                         Client.preferences.nmtTrustedNetworkRules[ssid] == nil){
                     return true
