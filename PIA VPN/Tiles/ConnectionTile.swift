@@ -62,6 +62,7 @@ class ConnectionTile: UIView, Tileable  {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(setConnectionValues), name: .PIASettingsHaveChanged, object: nil)
+        nc.addObserver(self, selector: #selector(setConnectionValues), name: .PIAQuickSettingsHaveChanged, object: nil)
         nc.addObserver(self, selector: #selector(setConnectionValues), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
 
         setConnectionValues()
