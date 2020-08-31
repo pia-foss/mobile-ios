@@ -40,7 +40,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     init() {
         
         self.accountAPI = AccountBuilder().setPlatform(platform: .ios)
-                .setStaging(staging: true)
+            .setStaging(staging: Client.environment == .staging)
                 .setUserAgentValue(userAgentValue: userAgent).build() as? IOSAccountAPI
         
     }
@@ -90,7 +90,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                                              password: credentials.password) { (response, error) in
 
                                                 if let error = error {
-                                                    callback?(nil, ClientError.invalidParameter)
+                                                    callback?(nil, ClientError.unauthorized)
                                                     return
                                                 }
                                                 
@@ -220,7 +220,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         
         request.toJSON()
         
-        let info = IOSSignupInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), email: request.email)
+        let info = IOSSignupInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), email: request.email, marketing: marketingJSON.isEmpty ? nil : marketingJSON, debug: debugJSON.isEmpty ? nil : debugJSON)
         self.accountAPI.signUp(information: info) { (response, error) in
             
             if let error = error {
