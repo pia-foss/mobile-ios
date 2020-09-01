@@ -113,7 +113,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         self.accountAPI.loginWithReceipt(receiptBase64: receipt.base64EncodedString()) { (response, error) in
             
             if let error = error {
-                callback?(nil, error.code == 400 ? ClientError.badReceipt : ClientError.invalidParameter)
+                callback?(nil, error.code == 400 ? ClientError.badReceipt : ClientError.unauthorized)
                 return
             }
 
