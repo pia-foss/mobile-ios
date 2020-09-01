@@ -64,7 +64,7 @@ def tunnel_pods
 end
 
 def piawireguard_pod
-    pod 'PIAWireguard', :git => "https://github.com/pia-foss/ios-wireguard", :commit => '1585891'
+    pod 'PIAWireguard', :path => "/Users/jose/Projects/PIA/PIAWireguard"
 end
 
 # Targets
