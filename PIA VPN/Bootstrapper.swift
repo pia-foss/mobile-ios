@@ -158,9 +158,6 @@ class Bootstrapper {
             Client.refreshProducts()
             Client.observeTransactions()
             
-            if Client.providers.accountProvider.isLoggedIn {
-                Client.providers.accountProvider.refreshAccountInfo(nil)
-            }
             
         }
 
@@ -219,13 +216,6 @@ class Bootstrapper {
 
     func dispose() {
         Client.dispose()
-    }
-    
-    func test() {
-        if Client.providers.accountProvider.isLoggedIn {
-            Client.providers.accountProvider.refreshAccountInfo(nil)
-        }
-
     }
     
     // MARK: Notifications

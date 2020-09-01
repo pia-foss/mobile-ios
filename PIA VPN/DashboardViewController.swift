@@ -48,7 +48,6 @@ class DashboardViewController: AutolayoutViewController {
     private var currentPageIndex = 0
     private var isDisconnecting = false
     private var isUnauthorized = false
-    private var appStarted = false
 
     private var currentStatus: VPNStatus = .disconnected
 
@@ -156,8 +155,6 @@ class DashboardViewController: AutolayoutViewController {
         
         // check account email
         checkAccountEmail()
-        
-        appStarted = true
 
     }
     
@@ -428,7 +425,7 @@ class DashboardViewController: AutolayoutViewController {
     
     @objc private func applicationDidBecomeActive(notification: Notification) {
         perform(#selector(updateCurrentStatus))
-        if Client.providers.accountProvider.isLoggedIn && appStarted {
+        if Client.providers.accountProvider.isLoggedIn {
             Client.providers.accountProvider.refreshAccountInfo(nil)
         }
     }
