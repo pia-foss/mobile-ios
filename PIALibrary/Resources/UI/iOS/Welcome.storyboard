@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VHM-bG-giz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VHM-bG-giz">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -264,7 +264,7 @@ You will not be charged during this process.</string>
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XgW-nz-hik">
-                                                                <rect key="frame" x="27" y="29" width="266" height="307.5"/>
+                                                                <rect key="frame" x="27" y="29" width="266" height="346.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in to your account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rk-V0-kLQ">
                                                                         <rect key="frame" x="47.5" y="0.0" width="171" height="19.5"/>
@@ -319,8 +319,18 @@ You will not be charged during this process.</string>
                                                                             <action selector="logInWithReceipt:" destination="gOX-c2-oGJ" eventType="touchUpInside" id="5hZ-Tf-eeJ"/>
                                                                         </connections>
                                                                     </button>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E7y-PY-4t7">
+                                                                        <rect key="frame" x="0.0" y="326.5" width="266" height="20"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="20" id="Ww6-Wb-6Ko"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <action selector="logInWithLink:" destination="gOX-c2-oGJ" eventType="touchUpInside" id="dxU-nW-kkc"/>
+                                                                        </connections>
+                                                                    </button>
                                                                 </subviews>
                                                                 <constraints>
+                                                                    <constraint firstItem="E7y-PY-4t7" firstAttribute="top" secondItem="Emv-5o-nzd" secondAttribute="bottom" constant="19" id="0Mh-3P-VeI"/>
                                                                     <constraint firstItem="Emv-5o-nzd" firstAttribute="top" secondItem="4OL-1u-sdN" secondAttribute="bottom" constant="19" id="D3k-hO-D8H"/>
                                                                     <constraint firstAttribute="trailing" secondItem="4OL-1u-sdN" secondAttribute="trailing" id="GmP-XN-FQH"/>
                                                                     <constraint firstItem="Wtm-HW-6FS" firstAttribute="trailing" secondItem="Gcb-kt-Yu7" secondAttribute="trailing" id="H7o-gu-nyL"/>
@@ -332,15 +342,16 @@ You will not be charged during this process.</string>
                                                                     <constraint firstItem="jEh-9o-rVi" firstAttribute="top" secondItem="Wtm-HW-6FS" secondAttribute="bottom" constant="15" id="N4Q-cw-0Vj"/>
                                                                     <constraint firstItem="Emv-5o-nzd" firstAttribute="leading" secondItem="XgW-nz-hik" secondAttribute="leading" id="NZQ-d1-PES"/>
                                                                     <constraint firstItem="4OL-1u-sdN" firstAttribute="leading" secondItem="XgW-nz-hik" secondAttribute="leading" id="Ts2-s1-uha"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="Emv-5o-nzd" secondAttribute="bottom" id="UPk-Wm-uMP"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="Emv-5o-nzd" secondAttribute="bottom" id="VqD-zG-Kh8"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="E7y-PY-4t7" secondAttribute="trailing" id="Wgs-iT-ZEG"/>
                                                                     <constraint firstItem="Wtm-HW-6FS" firstAttribute="height" secondItem="Gcb-kt-Yu7" secondAttribute="height" id="ZnI-xV-5hO"/>
                                                                     <constraint firstAttribute="trailing" secondItem="jEh-9o-rVi" secondAttribute="trailing" id="b42-kd-WBq"/>
                                                                     <constraint firstItem="jEh-9o-rVi" firstAttribute="leading" secondItem="XgW-nz-hik" secondAttribute="leading" id="c6b-oA-k4x"/>
                                                                     <constraint firstAttribute="trailing" secondItem="Emv-5o-nzd" secondAttribute="trailing" id="dX9-3z-NZN"/>
                                                                     <constraint firstItem="2Rk-V0-kLQ" firstAttribute="top" secondItem="XgW-nz-hik" secondAttribute="top" id="gX3-qV-EcT"/>
                                                                     <constraint firstItem="Gcb-kt-Yu7" firstAttribute="top" secondItem="2Rk-V0-kLQ" secondAttribute="bottom" constant="30" id="gew-Yr-Sqc"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="E7y-PY-4t7" secondAttribute="bottom" id="h90-lE-xIx"/>
                                                                     <constraint firstItem="jEh-9o-rVi" firstAttribute="leading" secondItem="Gcb-kt-Yu7" secondAttribute="leading" id="mBe-Fy-A5M"/>
+                                                                    <constraint firstItem="E7y-PY-4t7" firstAttribute="leading" secondItem="XgW-nz-hik" secondAttribute="leading" id="oUP-FE-dqy"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
@@ -431,6 +442,7 @@ You will not be charged during this process.</string>
                         <outlet property="buttonLogin" destination="jEh-9o-rVi" id="eaK-D0-FJE"/>
                         <outlet property="couldNotGetPlanButton" destination="Emv-5o-nzd" id="vhr-De-KQ4"/>
                         <outlet property="labelTitle" destination="2Rk-V0-kLQ" id="qdr-SQ-OwV"/>
+                        <outlet property="loginWithLink" destination="E7y-PY-4t7" id="Jc9-jn-K4J"/>
                         <outlet property="loginWithReceipt" destination="4OL-1u-sdN" id="gC0-4X-aYT"/>
                         <outlet property="scrollView" destination="RgS-fn-CJH" id="gQR-aC-e9f"/>
                         <outlet property="textPassword" destination="Wtm-HW-6FS" id="bvM-nY-mSr"/>
@@ -707,6 +719,40 @@ You will not be charged during this process.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9BK-Ic-1BU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1592.8" y="-1898.5007496251876"/>
+        </scene>
+        <!--Magic Link Login View Controller-->
+        <scene sceneID="hR4-se-5tr">
+            <objects>
+                <viewController storyboardIdentifier="MagicLinkLoginViewController" id="VQu-uR-ebb" customClass="MagicLinkLoginViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="t3k-ob-dIM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zXr-6i-iXN" customClass="BorderedTextField" customModule="PIALibrary" customModuleProvider="target">
+                                <rect key="frame" x="19" y="19" width="282" height="18.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="pAP-q7-PIs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="zXr-6i-iXN" firstAttribute="leading" secondItem="SMf-w6-IZ4" secondAttribute="leading" constant="19" id="V2f-gT-Jmt"/>
+                            <constraint firstItem="zXr-6i-iXN" firstAttribute="top" secondItem="SMf-w6-IZ4" secondAttribute="top" constant="19" id="fDt-yX-j8f"/>
+                            <constraint firstItem="SMf-w6-IZ4" firstAttribute="bottom" secondItem="zXr-6i-iXN" secondAttribute="bottom" constant="19" id="sQz-ep-96l"/>
+                            <constraint firstItem="SMf-w6-IZ4" firstAttribute="trailing" secondItem="zXr-6i-iXN" secondAttribute="trailing" constant="19" id="xSW-2O-f0G"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="SMf-w6-IZ4"/>
+                    </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="zXr-6i-iXN" id="PUq-AQ-qz1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mmc-yI-Jnp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2957" y="-2015"/>
         </scene>
         <!--Welcome View Controller-->
         <scene sceneID="ufC-wZ-h7g">

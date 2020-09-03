@@ -38,6 +38,8 @@ protocol WebServices: class {
 
     func update(credentials: Credentials, resetPassword reset: Bool, email: String, _ callback: SuccessLibraryCallback?)
 
+    func loginLink(email: String, _ callback: SuccessLibraryCallback?)
+    
     /**
          Invalidates the access token.
          - Parameter callback: Returns an `Bool` if the token was expired.

@@ -345,7 +345,11 @@ public class GetStartedViewController: PIAWelcomeViewController {
         }
     }
     
-
+    public func navigateToLoginView() {
+        self.performSegue(withIdentifier: StoryboardSegue.Welcome.loginAccountSegue.rawValue,
+                          sender: nil)
+    }
+    
     // MARK: Onboarding walkthrough
 
     private func addPages() {

@@ -185,6 +185,22 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         
     }
     
+    func loginLink(email: String, _ callback: SuccessLibraryCallback?) {
+        
+        let endpoint = ClientEndpoint.login_link
+        let parameters = ["email": email] as [String : Any]
+        let status = [200]
+
+        req(nil, .post, endpoint, useAuthToken: true, parameters, status, JSONRequestExecutor() { (json, status, error) in
+            if let error = error {
+                callback?(error)
+                return
+            }
+            callback?(nil)
+        })
+
+    }
+    
     func logout(_ callback: LibraryCallback<Bool>?) {
         
         if let token = Client.providers.accountProvider.token {

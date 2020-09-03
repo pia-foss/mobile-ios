@@ -41,4 +41,7 @@ public extension Notification.Name {
     /// User toggled the dark mode
     static let PIAThemeShouldChange = Notification.Name("PIAThemeShouldChange")
 
+    /// User clicked the magic link and got a valid token
+    static let PIAFinishLoginWithMagicLink = Notification.Name("PIALoginWithMagicLink")
+
 }

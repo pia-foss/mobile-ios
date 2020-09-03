@@ -46,6 +46,8 @@ enum ClientEndpoint: String, Endpoint {
     case ios
     
     case invites
+    
+    case login_link = "v2/login_link"
 
     var url: URL {
         return URL(string: "\(accessedConfiguration.baseUrl)/api/client/\(rawValue)")!

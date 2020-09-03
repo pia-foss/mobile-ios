@@ -359,6 +359,14 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
         fatalError("Not implemented")
     }
     
+    func login(with token: String, _ callback: ((UserAccount?, Error?) -> Void)?) {
+        fatalError("Not implemented")
+    }
+    
+    func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {
+        fatalError("Not implemented")
+    }
+    
     func logout(_ callback: SuccessLibraryCallback?) {
         fatalError("Not implemented")
     }

@@ -201,13 +201,20 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     }
     
     public func login(with receiptRequest: LoginReceiptRequest, _ callback: LibraryCallback<UserAccount>?) {
-                guard !mockIsUnauthorized else {
+        guard !mockIsUnauthorized else {
             callback?(nil, ClientError.unauthorized)
             return
         }
         delegate.login(with: receiptRequest, callback)
     }
 
+    public func login(with token: String, _ callback: ((UserAccount?, Error?) -> Void)?) {
+        guard !mockIsUnauthorized else {
+            callback?(nil, ClientError.unauthorized)
+            return
+        }
+        delegate.login(with: "12345", callback)
+    }
     
     /// :nodoc:
     public func refreshAccountInfo(_ callback: ((AccountInfo?, Error?) -> Void)?) {
@@ -256,6 +263,10 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     /// :nodoc:
     public func restorePurchases(_ callback: SuccessLibraryCallback?) {
         delegate.restorePurchases(callback)
+    }
+    
+    public func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {
+        delegate.loginUsingMagicLink(withEmail: email, callback)
     }
     
     /// :nodoc:
