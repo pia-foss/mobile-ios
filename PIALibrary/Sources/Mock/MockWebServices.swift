@@ -23,12 +23,11 @@
 import Foundation
 
 class MockWebServices: WebServices {
+    
     var credentials: (() -> Credentials)?
 
     var accountInfo: (() -> AccountInfo)?
     
-    var invitesInformation: (() -> InvitesInformation)?
-
     var appstoreInformationEligible: (() -> AppStoreInformation)?
 
     var appstoreInformationNotEligible: (() -> AppStoreInformation)?
@@ -37,6 +36,8 @@ class MockWebServices: WebServices {
 
     var serversBundle: (() -> ServersBundle)?
     
+    var regionStaticData: (() -> RegionData)?
+
     func token(credentials: Credentials, _ callback: ((String?, Error?) -> Void)?) {
         let result = "AUTH_TOKEN"
         let error: ClientError? = (result == nil) ? .unsupported : nil
@@ -85,6 +86,12 @@ class MockWebServices: WebServices {
         callback?(result, error)
     }
     
+    func downloadRegionsStaticData(_ callback: LibraryCallback<RegionData>?) {
+        let result = regionStaticData?()
+        let error: ClientError? = (result == nil) ? .unsupported : nil
+        callback?(result, error)
+    }
+    
     func flagURL(for country: String) -> URL {
         return URL(fileURLWithPath: "")
     }
@@ -114,27 +121,6 @@ class MockWebServices: WebServices {
 
         callback?(result(), nil)
 
-    }
-    
-    func invitesInformation(_ callback: LibraryCallback<InvitesInformation>?) {
-        
-        let result = InvitesInformation(totalInvitesSent: 10,
-                           totalInvitesRewarded: 2,
-                           totalFreeDaysGiven: 34,
-                           uniqueReferralLink: "http://www.privateinternetaccess.com",
-                           invites: [Invites(rewarded: true, accepted: true, obfuscatedEmail: "a***@***.com", gracePeriodRemaining: ""),
-                                     Invites(rewarded: false, accepted: true, obfuscatedEmail: "b***@***.com", gracePeriodRemaining: "")])
-        callback?(result, nil)
-    }
-    
-    func invite(credentials: Credentials, name: String, email: String, _ callback: SuccessLibraryCallback?) {
-        
-        if email.isEmpty {
-            callback?(ClientError.invalidParameter)
-            return
-        }
-
-        callback?(nil)
     }
     
 }

@@ -36,8 +36,6 @@ private protocol PreferencesStore: class {
 
     var trustCellularData: Bool { get set }
 
-    var authMigrationSuccess: Bool { get set }
-
     var nmtMigrationSuccess: Bool { get set }
 
     var vpnType: String { get set }
@@ -81,7 +79,6 @@ private extension PreferencesStore {
         mace = source.mace
         useWiFiProtection = source.useWiFiProtection
         trustCellularData = source.trustCellularData
-        authMigrationSuccess = source.authMigrationSuccess
         nmtMigrationSuccess = source.nmtMigrationSuccess
         vpnType = source.vpnType
         vpnDisconnectsOnSleep = source.vpnDisconnectsOnSleep
@@ -170,17 +167,6 @@ extension Client {
             }
         }
         
-                
-        /// Flag to indicate if we have retrieve the correct auth token
-        public fileprivate(set) var authMigrationSuccess: Bool {
-            get {
-                return accessedDatabase.plain.authMigrationSuccess ?? defaults.authMigrationSuccess
-            }
-            set {
-                accessedDatabase.plain.authMigrationSuccess = newValue
-            }
-        }
-
         /// Flag to indicate if we have migrated the nmt rules
         public fileprivate(set) var nmtMigrationSuccess: Bool {
             get {
@@ -375,7 +361,6 @@ extension Client.Preferences {
             mace = false
             useWiFiProtection = true
             trustCellularData = false
-            authMigrationSuccess = false
             nmtMigrationSuccess = false
             vpnType = IKEv2Profile.vpnType
             vpnDisconnectsOnSleep = false
@@ -430,9 +415,6 @@ extension Client.Preferences {
 
         /// :nodoc:
         public var trustCellularData: Bool
-
-        /// :nodoc:
-        public var authMigrationSuccess: Bool
 
         /// :nodoc:
         public var nmtMigrationSuccess: Bool

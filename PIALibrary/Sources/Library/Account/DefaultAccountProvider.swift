@@ -228,38 +228,16 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
 
     }
     
-    func refreshAccountInfo(force: Bool, _ callback: ((AccountInfo?, Error?) -> Void)?) {
+    func refreshAccountInfo(_ callback: ((AccountInfo?, Error?) -> Void)?) {
         
-        guard force == false,
-            let token = self.token,
+        guard let token = self.token,
             let _ = self.publicUsername else {
 
             guard let user = currentUser else {
                 preconditionFailure()
             }
 
-            self.webServices.token(credentials: user.credentials) { (token, error) in
-                
-                if let _ = error {
-                    callback?(nil, error)
-                    return
-                }
-
-                if let token = token {
-                    
-                    let preferences = Client.preferences.editable()
-                    preferences.authMigrationSuccess = true
-                    preferences.commit()
-
-                    if force {
-                        self.updateToken(token)
-                    } else {
-                        self.updateDatabaseWith(token,
-                                                andUsername: user.credentials.username)
-                    }
-                    self.accountInfoWith(token, callback)
-                }
-            }
+            self.logout(nil)
             
             return
         }
@@ -325,27 +303,6 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             Macros.postNotification(.PIAAccountDidLogout)
             callback?(nil)
         }
-    }
-
-    func invitesInformation(_ callback: LibraryCallback<InvitesInformation>?) {
-        webServices.invitesInformation { (invitesInformation, error) in
-            guard let invitesInformation = invitesInformation else {
-                callback?(nil, error)
-                return
-            }
-            callback?(invitesInformation, nil)
-        }        
-    }
-    
-    func invite(name: String, email: String, _ callback: SuccessLibraryCallback?) {
-
-        guard let user = currentUser else {
-            preconditionFailure()
-        }
-
-        webServices.invite(credentials: user.credentials, name: name, email: email, { result in 
-            callback?(result)
-        })
     }
     
     #if os(iOS)
@@ -484,53 +441,6 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
     }
 
-    func redeem(with request: RedeemRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        guard !isLoggedIn else {
-            preconditionFailure()
-        }
-        let redeem = Redeem(email: request.email, code: request.code)
-        
-        webServices.redeem(with: redeem) { (credentials, error) in
-            if let urlError = error as? URLError, (urlError.code == .notConnectedToInternet) {
-                callback?(nil, ClientError.internetUnreachable)
-                return
-            }
-            guard let credentials = credentials else {
-                callback?(nil, error)
-                return
-            }
-            
-            self.webServices.token(credentials: credentials) { (token, error) in
-                
-                guard let token = token else {
-                    callback?(nil, error)
-                    return
-                }
-                
-                let tokenComponents = token.split(by: token.count/2)
-                if let first = tokenComponents.first,
-                    let last = tokenComponents.last {
-                    self.accessedDatabase.secure.setPublicUsername(credentials.username)
-                    self.accessedDatabase.secure.setUsername(first)
-                    self.accessedDatabase.secure.setToken(token,
-                                                          for: self.accessedDatabase.secure.tokenKey(for: first))
-                    self.accessedDatabase.secure.setPassword(last,
-                                                             for: first)
-
-                }
-                
-                let user = UserAccount(credentials: credentials, info: nil)
-                Macros.postNotification(.PIAAccountDidSignup, [
-                    .user: user
-                    ])
-                callback?(user, nil)
-
-                
-            }
-
-        }
-    }
-    
     func listRenewablePlans(_ callback: (([Plan]?, Error?) -> Void)?) {
         guard let info = currentUser?.info else {
             preconditionFailure()

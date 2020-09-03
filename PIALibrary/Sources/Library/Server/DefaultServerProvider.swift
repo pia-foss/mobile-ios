@@ -24,6 +24,7 @@ import Foundation
 import __PIALibraryNative
 
 class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess, PreferencesAccess, WebServicesAccess, WebServicesConsumer {
+    
     private let customWebServices: WebServices?
     
     init(webServices: WebServices? = nil) {
@@ -116,6 +117,8 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
         return server
     }
     
+    public var regionStaticData: RegionData!
+    
     func loadLocalJSON(fromJSON jsonData: Data) {
         guard let bundle = GlossServersBundle(jsonData: jsonData, forServerNetwork: .gen4) else {
             return
@@ -151,6 +154,15 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
             }
             self.currentServers = bundle.servers
             callback?(bundle.servers, error)
+        }
+    }
+    
+    public func downloadRegionStaticData( _ callback: SuccessLibraryCallback?) {
+        webServices.downloadRegionsStaticData { (regionData, error) in
+            if let regionStaticData = regionData {
+                self.regionStaticData = regionStaticData
+            }
+            callback?(nil)
         }
     }
     

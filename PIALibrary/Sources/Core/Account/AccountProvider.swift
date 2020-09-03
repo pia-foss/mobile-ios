@@ -84,9 +84,8 @@ public protocol AccountProvider: class {
      - Postcondition:
          - Posts `Notification.Name.PIAAccountDidRefresh` on success.
      - Parameter callback: Returns a refreshed `AccountInfo`.
-     - Parameter force: Force refresh.
      */
-    func refreshAccountInfo(force: Bool, _ callback: LibraryCallback<AccountInfo>?)
+    func refreshAccountInfo(_ callback: LibraryCallback<AccountInfo>?)
     
     /**
      Retrieves information associated with the account currently logged in.
@@ -127,24 +126,6 @@ public protocol AccountProvider: class {
      */
     func cleanDatabase()
     
-    /**
-     Fetch invites information.
-     
-     - Precondition: `isLoggedIn` is `true`.
-     - Parameter callback: Returns the updated `InvitesInformation`.
-     */
-    func invitesInformation(_ callback: LibraryCallback<InvitesInformation>?)
-    
-    /**
-     Invite a user to subscribe using an e-mail.
-     
-     - Precondition: `isLoggedIn` is `true`.
-     - Parameter name: The invitee name.
-     - Parameter email: The invitee email.
-     - Parameter callback: Returns `nil` on success.
-     */
-    func invite(name: String, email: String, _ callback: SuccessLibraryCallback?)
-
     #if os(iOS)
     /**
      Lists the available plans with their corresponding product to purchase in order to get them.
@@ -187,18 +168,6 @@ public protocol AccountProvider: class {
      - Parameter callback: Returns a newly created `UserAccount`.
      */
     func signup(with request: SignupRequest, _ callback: LibraryCallback<UserAccount>?)
-
-    /**
-     Signs up with a redeem code.
- 
-     - Precondition: `isLoggedIn` is `false`.
-     - Postcondition:
-        - Sets `currentUser` on success.
-        - Posts `Notification.Name.PIAAccountDidSignup` on success.
-     - Parameter request: The redeem request.
-     - Parameter callback: Returns a newly created `UserAccount`.
-     */
-    func redeem(with request: RedeemRequest, _ callback: LibraryCallback<UserAccount>?)
     
     /**
      Lists plans available for renewal.

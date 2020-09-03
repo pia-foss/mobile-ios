@@ -43,7 +43,8 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
                 bestOpenVPNAddressForTCP: nil,
                 bestOpenVPNAddressForUDP: nil,
                 pingAddress: nil,
-                responseTime: 0
+                responseTime: 0,
+                regionIdentifier: ""
             ), Server(
                 serial: "8a55f03812851897f6e43b2ae22b1234",
                 name: "Germany",
@@ -52,7 +53,8 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
                 bestOpenVPNAddressForTCP: nil,
                 bestOpenVPNAddressForUDP: nil,
                 pingAddress: nil,
-                responseTime: 0
+                responseTime: 0,
+                regionIdentifier: ""
             ), Server(
                 serial: "8a55f03812851897f6e43b2ae22b1234",
                 name: "Italy",
@@ -61,7 +63,8 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
                 bestOpenVPNAddressForTCP: nil,
                 bestOpenVPNAddressForUDP: nil,
                 pingAddress: nil,
-                responseTime: 0
+                responseTime: 0,
+                regionIdentifier: ""
             ), Server(
                 serial: "8a55f03812851897f6e43b2ae22b1234",
                 name: "US East",
@@ -70,7 +73,8 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
                 bestOpenVPNAddressForTCP: nil,
                 bestOpenVPNAddressForUDP: nil,
                 pingAddress: nil,
-                responseTime: 0
+                responseTime: 0,
+                regionIdentifier: ""
             )
         ]
 
@@ -114,6 +118,10 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
         return mockServers.last!
     }
     
+    public var regionStaticData: RegionData! {
+        return RegionData(translations: [String : [String : String]](), geolocations: [String : [String]]())
+    }
+    
     /// :nodoc:
     public func load(fromJSON jsonData: Data) {
         return delegate.load(fromJSON: jsonData)
@@ -127,6 +135,13 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
     /// :nodoc:
     public func download(_ callback: (([Server]?, Error?) -> Void)?) {
         delegate.download(callback)
+    }
+    
+    /// :nodoc:
+    public func downloadRegionStaticData(_ callback: SuccessLibraryCallback?) {
+        delegate.downloadRegionStaticData { (error) in
+            callback?(error)
+        }
     }
     
     /// :nodoc:

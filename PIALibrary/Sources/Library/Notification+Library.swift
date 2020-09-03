@@ -49,7 +49,8 @@ extension Notification.Name {
     public static let PIAServerHasBeenUpdated = Notification.Name("PIAServerHasBeenUpdated")
     
     public static let PIASettingsHaveChanged = Notification.Name("PIASettingsHaveChanged")
-    
+    public static let PIAQuickSettingsHaveChanged = Notification.Name("PIAQuickSettingsHaveChanged")
+
     public static let PIAPersistentConnectionSettingHaveChanged = Notification.Name("PIAPersistentConnectionSettingHaveChanged")
     public static let PIAPersistentConnectionTileHaveChanged = Notification.Name("PIAPersistentConnectionTileHaveChanged")
 
