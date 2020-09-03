@@ -236,9 +236,12 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
         if #available(iOSApplicationExtension 12.0, *) {
 
             var serverAddress = configuration.server.hostname
+            var serverCN = ""
             if Client.configuration.serverNetwork == .gen4,
-                let ip = configuration.server.bestAddressForWireGuard()?.ip {
+                let ip = configuration.server.bestAddressForWireGuard()?.ip,
+                let cn = configuration.server.bestAddressForWireGuard()?.cn {
                 serverAddress = ip
+                serverCN = cn
             }
 
             let cfg = NETunnelProviderProtocol()
@@ -250,6 +253,7 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
             cfg.providerConfiguration = [PIAWireguardConfiguration.Keys.token: Client.providers.accountProvider.token,
                                          PIAWireguardConfiguration.Keys.ping: configuration.server.bestPingAddress().first?.description,
                                          PIAWireguardConfiguration.Keys.serial: configuration.server.serial,
+                                         PIAWireguardConfiguration.Keys.cn: serverCN,
                                          PIAWireguardConfiguration.Keys.useIP: Client.configuration.serverNetwork == .gen4 ? true : false]
 
             var customCfg = configuration.customConfiguration
