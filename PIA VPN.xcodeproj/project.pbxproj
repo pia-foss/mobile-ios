@@ -141,6 +141,8 @@
 		41063BEEFE5F6C3AFE0E8A59 /* Pods_PIA_VPN_WG_Tunnel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 433F1357A8DDEB723609EEAD /* Pods_PIA_VPN_WG_Tunnel.framework */; };
 		605A56B65CE1607D8A1D3274 /* Pods_PIA_VPN_dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E13900173A4FA7E59E36F81D /* Pods_PIA_VPN_dev.framework */; };
 		776F60F86FC86516235286F1 /* Pods_PIA_VPN_Tunnel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9A94E3ECCDA282DF82684BA /* Pods_PIA_VPN_Tunnel.framework */; };
+		82183D7B2500FD460033023F /* String+Substrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82183D7A2500FD460033023F /* String+Substrings.swift */; };
+		82183D7C2500FD460033023F /* String+Substrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82183D7A2500FD460033023F /* String+Substrings.swift */; };
 		8221922B24CECFE700C24F1C /* NMTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221922A24CECFE700C24F1C /* NMTTests.swift */; };
 		824C530824C046CB003DB740 /* ConnectionTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824C530724C046CA003DB740 /* ConnectionTile.swift */; };
 		824C530924C046CB003DB740 /* ConnectionTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824C530724C046CA003DB740 /* ConnectionTile.swift */; };
@@ -552,6 +554,7 @@
 		4925145414F130E3755AC31E /* Pods_PIA_VPNTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIA_VPNTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A08858E9595828F0A2E9BEE /* Pods-PIA VPN WG Tunnel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPN WG Tunnel.release.xcconfig"; path = "Target Support Files/Pods-PIA VPN WG Tunnel/Pods-PIA VPN WG Tunnel.release.xcconfig"; sourceTree = "<group>"; };
 		80EDB0A7AB3A3418CC4832CE /* Pods-PIA VPN.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPN.debug.xcconfig"; path = "Target Support Files/Pods-PIA VPN/Pods-PIA VPN.debug.xcconfig"; sourceTree = "<group>"; };
+		82183D7A2500FD460033023F /* String+Substrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Substrings.swift"; sourceTree = "<group>"; };
 		8221922A24CECFE700C24F1C /* NMTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMTTests.swift; sourceTree = "<group>"; };
 		824C530724C046CA003DB740 /* ConnectionTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionTile.swift; sourceTree = "<group>"; };
 		824C531324C04796003DB740 /* ConnectionTileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionTileCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -828,6 +831,7 @@
 				0E9452AA1FDB5EF600891948 /* UINavigationItem+Shortcuts.swift */,
 				DDD271E021D6262100B6D20F /* PropertyStoring.swift */,
 				DDE432DE2498EADA0095B197 /* Array+Group.swift */,
+				82183D7A2500FD460033023F /* String+Substrings.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -2129,6 +2133,7 @@
 				DDFCFA9021E892070081F235 /* RegionTileCollectionViewCell.swift in Sources */,
 				DD9706A5224262BF00630220 /* QuickSettingsTile.swift in Sources */,
 				DD3B504424B7576F0002F4B5 /* Card.swift in Sources */,
+				82183D7C2500FD460033023F /* String+Substrings.swift in Sources */,
 				0E7361A11FD86F8300706BFF /* AccountObserver.swift in Sources */,
 				DDFCFA9521E892130081F235 /* RegionTile.swift in Sources */,
 				0EFDC1E71FE4ABAA007C0B9B /* Notification+App.swift in Sources */,
@@ -2250,6 +2255,7 @@
 				0E2215CC2008BF8300F5FB4D /* SwiftGen+Assets.swift in Sources */,
 				DD3B504624B758330002F4B5 /* Collectable.swift in Sources */,
 				DD9706A4224262BF00630220 /* QuickSettingsTile.swift in Sources */,
+				82183D7B2500FD460033023F /* String+Substrings.swift in Sources */,
 				DDFCFA9421E892130081F235 /* RegionTile.swift in Sources */,
 				0E7361A01FD86F8300706BFF /* AccountObserver.swift in Sources */,
 				0EFDC1E61FE4ABAA007C0B9B /* Notification+App.swift in Sources */,

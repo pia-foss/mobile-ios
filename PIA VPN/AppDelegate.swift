@@ -113,6 +113,33 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         log.debug("Opened app from URL: \(url)")
+        
+        if url.absoluteString.starts(with: AppConstants.MagicLink.url) {
+
+            log.debug("Trying to login using magic link")
+
+            guard !Client.providers.accountProvider.isLoggedIn else {
+                log.debug("User is already logged in")
+                return false
+            }
+
+            if let rootViewController = self.topViewControllerWithRootViewController(rootViewController: window?.rootViewController) {
+                rootViewController.navigationController?.popToRootViewController(animated: false)
+                if let getStartedViewController = self.topViewControllerWithRootViewController(rootViewController: self.window?.rootViewController) as? GetStartedViewController {
+                    getStartedViewController.navigateToLoginView()
+                    getStartedViewController.showLoadingAnimation()
+                    Macros.dispatch(after: .milliseconds(1000)) { //TODO: Improve this, we are giving some time to push the view
+                        let token = url.absoluteString[AppConstants.MagicLink.url.count...]
+                        Client.providers.accountProvider.login(with: token) { (user, error) in
+                            getStartedViewController.hideLoadingAnimation()
+                            Macros.postNotification(.PIAFinishLoginWithMagicLink)
+                        }
+                    }
+                }
+            }
+
+        }
+        
         guard let host = url.host else {
             return false
         }

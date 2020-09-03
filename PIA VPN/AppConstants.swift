@@ -177,4 +177,8 @@ struct AppConstants {
         static let smallPacketSize = 1350
     }
     
+    struct MagicLink {
+        static let url = "piavpn:login?token="
+    }
+    
 }
