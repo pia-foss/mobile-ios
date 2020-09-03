@@ -124,58 +124,11 @@ extension Theme {
             TextStyle.textStyle16 : TextStyle.textStyle17)
     }
     
-    public func applyFriendReferralsView(_ view: UIView,
-                                         appearance: Appearance) {
-        view.layer.cornerRadius = 2.3
-        if palette.appearance == Appearance.light {
-            view.layer.borderColor = UIColor.piaGreenDark20.cgColor
-            view.backgroundColor = UIColor.piaGreenDark20
-        } else {
-            view.layer.borderColor = UIColor.piaGrey10.cgColor
-            Theme.current.applySecondaryBackground(view)
-        }
-        view.layer.borderWidth = 1.0
-    }
-    
-    public func applyFriendReferralsSubtitle(_ label: UILabel) {
-        let textAlignment = label.textAlignment
-        label.style(style: TextStyle.textStyle16)
-        label.textAlignment = textAlignment
-    }
-    
-    public func applyFriendReferralsTitle(_ label: UILabel) {
-        label.style(style: TextStyle.textStyle11)
-        label.font = Theme.current.typeface.mediumFont(size: 12)
-    }
-    
-    public func applyFriendReferralsMessageLabel(_ label: UILabel) {
-        label.style(style: TextStyle.textStyle6)
-        label.font = Theme.current.typeface.mediumFont(size: 15)
-    }
-
     public func applyInputOverlay(_ view: UIView) {
         view.layer.cornerRadius = 6.0
         view.backgroundColor = .black
     }
     
-    public func applyFriendReferralsButton(_ button: PIAButton,
-                                           appearance: Appearance) {
-        button.resetButton()
-        button.layer.cornerRadius = 1.7
-        button.titleLabel?.font = Theme.current.typeface.mediumFont(size: 9)
-        if palette.appearance == Appearance.light {
-            button.setTitleColor(TextStyle.textStyle14.color,
-                                 for: .normal)
-            button.setBackgroundImage(UIImage.fromColor(UIColor.white), for: .normal)
-        } else {
-            button.setTitleColor(TextStyle.textStyle11.color,
-                                 for: .normal)
-            button.setBackgroundImage(UIImage.fromColor(UIColor.piaGrey10), for: .normal)
-
-        }
-
-    }
-
     //MARK: SearchBar
     
     public func applySearchBarStyle(_ searchBar: UISearchBar) {

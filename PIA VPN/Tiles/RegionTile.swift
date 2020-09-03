@@ -88,14 +88,16 @@ class RegionTile: UIView, Tileable {
 
         setupRegionTileAndMapForServer(effectiveServer)
 
-        self.mapImageView.addSubview(greenDot)
-        
-
+        if let _ = Client.providers.serverProvider.regionStaticData {
+            self.mapImageView.addSubview(greenDot)
+        }
     }
     
     private func setupRegionTileAndMapForServer(_ server: Server) {
-        let coordFinder = CoordinatesFinder(forServer: server.name, usingMapImage: self.mapImageView)
-        greenDot = coordFinder.dot()
+        let coordFinder = CoordinatesFinder(forServer: server.regionIdentifier, usingMapImage: self.mapImageView)
+        if let _ = Client.providers.serverProvider.regionStaticData {
+            greenDot = coordFinder.dot()
+        }
         self.geoImageView.isHidden = !server.geo
         self.labelLeadingConstraint.constant = server.geo ? geoLeadingDistance : defaultLeadingDistance
     }

@@ -72,10 +72,12 @@ PODS:
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - OpenSSL-Apple (1.1.1d.5a)
+  - PIAAccountModule (1.0.0)
   - PIALibrary/Core (2.8.0)
   - PIALibrary/Library (2.8.0):
     - Alamofire (~> 4)
     - Gloss (~> 2)
+    - PIAAccountModule
     - PIALibrary/Core
     - PIALibrary/Util
     - PIARegions
@@ -143,6 +145,7 @@ DEPENDENCIES:
   - Fabric
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
+  - PIAAccountModule (from `/Users/jose/Projects/PIA/account`)
   - PIALibrary/Library (from `/Users/jose/Projects/PIA/client-library-apple`)
   - PIALibrary/Mock (from `/Users/jose/Projects/PIA/client-library-apple`)
   - PIALibrary/UI (from `/Users/jose/Projects/PIA/client-library-apple`)
@@ -189,6 +192,8 @@ SPEC REPOS:
     - TweetNacl
 
 EXTERNAL SOURCES:
+  PIAAccountModule:
+    :path: "/Users/jose/Projects/PIA/account"
   PIALibrary:
     :path: "/Users/jose/Projects/PIA/client-library-apple"
   PIARegions:
@@ -229,7 +234,8 @@ SPEC CHECKSUMS:
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
-  PIALibrary: f98040ee26636625f8a00f2a6e18ca3ceab3d7bf
+  PIAAccountModule: d69820ba919e1b55706b145d9241434555e96853
+  PIALibrary: d56c4c982bd0d0ec554b6c07af9beca5e94534f2
   PIARegions: 570e1dfa496d39919427f9b0f25b9d4dca12f0d4
   PIAWireguard: f92333a1e281db298efd00b0fe97a5745a7946e6
   Popover: 10e1d9528f81d9504df984b7b3f491292bc1822d
@@ -243,6 +249,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 3ea24f3f455ea6be0202ef66b820977e899aa853
+PODFILE CHECKSUM: d4d89fb2019b28a00f65406a93977d6a3c315503
 
 COCOAPODS: 1.9.3

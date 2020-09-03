@@ -64,6 +64,8 @@ class QuickSettingsTile: UIView, Tileable  {
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateButtons), name: .PIASettingsHaveChanged, object: nil)
         nc.addObserver(self, selector: #selector(setupButtons), name: .PIASettingsHaveChanged, object: nil)
+        nc.addObserver(self, selector: #selector(updateButtons), name: .PIAQuickSettingsHaveChanged, object: nil)
+        nc.addObserver(self, selector: #selector(setupButtons), name: .PIAQuickSettingsHaveChanged, object: nil)
         nc.addObserver(self, selector: #selector(setupButtons), name: .PIATilesDidChange, object: nil)
 
         self.tileTitle.text = L10n.Tiles.Quicksettings.title.uppercased()
@@ -186,7 +188,7 @@ class QuickSettingsTile: UIView, Tileable  {
     }
     
     private func updateProfile() {
-        NotificationCenter.default.post(name: .PIASettingsHaveChanged,
+        NotificationCenter.default.post(name: .PIAQuickSettingsHaveChanged,
                                         object: self,
                                         userInfo: nil)
     }

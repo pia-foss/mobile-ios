@@ -87,7 +87,7 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         nc.addObserver(self, selector: #selector(updateCurrentStatus), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateTiles), name: .PIATilesDidChange, object: nil)
-        nc.addObserver(self, selector: #selector(vpnShouldReconnect), name: .PIASettingsHaveChanged, object: nil)
+        nc.addObserver(self, selector: #selector(vpnShouldReconnect), name: .PIAQuickSettingsHaveChanged, object: nil)
         nc.addObserver(self, selector: #selector(presentKillSwitchAlert), name: .PIAPersistentConnectionTileHaveChanged, object: nil)
         nc.addObserver(self, selector: #selector(closeSession), name: .PIAAccountLapsed, object: nil)
         nc.addObserver(self, selector: #selector(reloadTheme), name: .PIAThemeShouldChange, object: nil)
@@ -98,10 +98,6 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(openSettingsAndWireGuard), name: .OpenSettingsAndActivateWireGuard, object: nil)
         nc.addObserver(self, selector: #selector(checkInternetConnection), name: .PIADaemonsDidUpdateConnectivity, object: nil)
 
-        if Client.providers.accountProvider.isLoggedIn {
-            Client.providers.accountProvider.refreshAndLogoutUnauthorized()
-        }
-        
         self.viewContentHeight = self.viewContentHeightConstraint.constant
         
     }
@@ -429,9 +425,8 @@ class DashboardViewController: AutolayoutViewController {
     
     @objc private func applicationDidBecomeActive(notification: Notification) {
         perform(#selector(updateCurrentStatus))
-    
         if Client.providers.accountProvider.isLoggedIn {
-            Client.providers.accountProvider.refreshAndLogoutUnauthorized()
+            Client.providers.accountProvider.refreshAccountInfo(nil)
         }
     }
     
@@ -475,7 +470,7 @@ class DashboardViewController: AutolayoutViewController {
             let preferences = Client.preferences.editable()
             preferences.isPersistentConnection = true
             preferences.commit()
-            NotificationCenter.default.post(name: .PIASettingsHaveChanged,
+            NotificationCenter.default.post(name: .PIAQuickSettingsHaveChanged,
                                             object: self,
                                             userInfo: nil)
         }

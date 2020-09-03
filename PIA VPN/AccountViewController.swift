@@ -57,14 +57,6 @@ class AccountViewController: AutolayoutViewController {
 
     @IBOutlet weak var labelSubscriptionTopConstraint: NSLayoutConstraint!
     
-    @IBOutlet private weak var viewFriendReferral: UIView!
-    
-    @IBOutlet private weak var labelFriendReferralTitle: UILabel!
-    
-    @IBOutlet private weak var labelFriendReferralInfo: UILabel!
-
-    @IBOutlet private weak var buttonFriendReferral: PIAButton!
-
     private var currentUser: UserAccount?
 
     deinit {
@@ -86,10 +78,6 @@ class AccountViewController: AutolayoutViewController {
 
         viewSafe.layoutMargins = .zero
         textUsername.isUserInteractionEnabled = false
-
-        buttonFriendReferral.setTitle("  \(L10n.Friend.Referrals.title)  >  ", for: .normal)
-        labelFriendReferralInfo.text = L10n.Friend.Referrals.Friends.Family.title
-        labelFriendReferralTitle.text = L10n.Friend.Referrals.Description.short
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(redisplayAccount), name: .PIAAccountDidRefresh, object: nil)
@@ -117,7 +105,6 @@ class AccountViewController: AutolayoutViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        buttonFriendReferral.layoutIfNeeded()
         establishUncreditedVisibility()
     }
 
@@ -216,7 +203,6 @@ class AccountViewController: AutolayoutViewController {
                 labelSubscriptions.isHidden = true
                 labelSubscriptionTopConstraint.constant = 0
             }
-            viewFriendReferral.isHidden = true//!userInfo.canInvite
         }
         
         establishUncreditedVisibility()
@@ -225,7 +211,6 @@ class AccountViewController: AutolayoutViewController {
     private func establishUncreditedVisibility() {
         if let info = currentUser?.info, info.isRenewable {
             viewUncredited.isHidden = false
-            viewFriendReferral.removeFromSuperview()
         } else {
             viewUncredited.isHidden = true
         }
@@ -255,10 +240,6 @@ class AccountViewController: AutolayoutViewController {
         Theme.current.applySubtitle(labelRestoreInfo)
         buttonRestore.style(style: TextStyle.textStyle9)
 
-        Theme.current.applyFriendReferralsTitle(labelFriendReferralTitle)
-        Theme.current.applyFriendReferralsSubtitle(labelFriendReferralInfo)
-        Theme.current.applyFriendReferralsView(viewFriendReferral, appearance: .dark)
-        Theme.current.applyFriendReferralsButton(buttonFriendReferral, appearance: .dark)
         buttonRestore.style(style: TextStyle.textStyle9)
 
         styleExpirationDate()

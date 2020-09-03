@@ -22,6 +22,7 @@
 
 import Foundation
 import UIKit
+import PIALibrary
 
 class Coordinates {
     
@@ -30,10 +31,15 @@ class Coordinates {
     
     init(forServer server: String) {
     
-        let coordinates = AppConstants.ServerCoordinates.coordinates[server]
-        self.latitude = coordinates?["lat"] ?? AppConstants.ServerCoordinates.defaultCoordinates["lat"]!
-        self.longitude = coordinates?["long"] ?? AppConstants.ServerCoordinates.defaultCoordinates["long"]!
-        
+        if let data = Client.providers.serverProvider.regionStaticData {
+            let coordinates = data.geolocation(forIdentifier: server)
+            self.latitude = Double(coordinates.first ?? "0") ?? 0.0
+            self.longitude = Double(coordinates.last ?? "0") ?? 0.0
+        } else {
+            self.latitude = Double.zero
+            self.longitude = Double.zero
+        }
+
     }
     
 }

@@ -62,7 +62,8 @@ class CustomServerSettingsViewController: AutolayoutViewController {
                 hostname: hostname,
                 bestOpenVPNAddressForTCP: Server.Address(hostname: address, port: tcpPort),
                 bestOpenVPNAddressForUDP: Server.Address(hostname: address, port: udpPort),
-                pingAddress: nil
+                pingAddress: nil,
+                regionIdentifier: ""
             )
             
             if AppConstants.Servers.customServers == nil {
