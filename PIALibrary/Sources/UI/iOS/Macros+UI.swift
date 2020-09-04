@@ -150,7 +150,9 @@ extension Macros {
     
     public static func alert(_ viewController: UIViewController, completionHandler completion: (() -> Void)? = nil) -> PopupDialog {
         Macros.styleAlertPopupDialog()
-        let popup = PopupDialog(viewController: viewController, completion: completion)
+        let popup = PopupDialog(viewController: viewController,
+                                buttonAlignment: .horizontal,
+                                completion: completion)
         return popup
     }
     
