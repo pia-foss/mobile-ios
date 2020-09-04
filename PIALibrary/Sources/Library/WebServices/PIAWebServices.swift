@@ -285,7 +285,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
 
         self.accountAPI.payment(username: credentials.username, password: credentials.password, information: info) { (error) in
             if let error = error {
-                callback?(ClientError.invalidParameter)
+                callback?(ClientError.badReceipt)
                 return
             }
             callback?(nil)
