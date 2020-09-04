@@ -60,6 +60,10 @@ class MockWebServices: WebServices {
         callback?(nil)
     }
     
+    func loginLink(email: String, _ callback: SuccessLibraryCallback?) {
+        callback?(nil)
+    }
+    
     func logout(_ callback: LibraryCallback<Bool>?) {
         callback?(true, nil)
     }

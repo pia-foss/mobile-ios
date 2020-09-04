@@ -161,33 +161,47 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
         
         webServices.token(receipt: receiptRequest.receipt) { (token, error) in
-            
-            guard let token = token else {
+            self.saveToken(token: token, error: error, callback)
+        }
+
+    }
+    
+    func login(with token: String, _ callback: ((UserAccount?, Error?) -> Void)?) {
+        
+        guard !isLoggedIn else {
+            preconditionFailure()
+        }
+
+        self.saveToken(token: token, error: nil, callback)
+        
+    }
+    
+    private func saveToken(token: String?, error: Error?, _ callback: ((UserAccount?, Error?) -> Void)?) {
+        
+        guard let token = token else {
+            callback?(nil, error)
+            return
+        }
+
+        self.updateToken(token)
+
+        self.webServices.info(token: token) { (accountInfo, error) in
+            guard let accountInfo = accountInfo else {
                 callback?(nil, error)
                 return
             }
+            
+            self.updateDatabaseWith(token,
+                                    andUsername: accountInfo.username)
 
-            self.updateToken(token)
+            //Save after confirm the login was successful.
+            self.accessedDatabase.plain.accountInfo = accountInfo
 
-            self.webServices.info(token: token) { (accountInfo, error) in
-                guard let accountInfo = accountInfo else {
-                    callback?(nil, error)
-                    return
-                }
-                
-                self.updateDatabaseWith(token,
-                                        andUsername: accountInfo.username)
-
-                //Save after confirm the login was successful.
-                self.accessedDatabase.plain.accountInfo = accountInfo
-
-                let user = UserAccount(credentials: Credentials(username: "", password: ""), info: accountInfo)
-                Macros.postNotification(.PIAAccountDidLogin, [
-                    .user: user
-                    ])
-                callback?(user, nil)
-            }
-
+            let user = UserAccount(credentials: Credentials(username: "", password: ""), info: accountInfo)
+            Macros.postNotification(.PIAAccountDidLogin, [
+                .user: user
+                ])
+            callback?(user, nil)
         }
 
     }
@@ -371,6 +385,10 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
     
     func restorePurchases(_ callback: SuccessLibraryCallback?) {
         accessedStore.refreshPaymentReceipt(callback)
+    }
+    
+    func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {
+        self.webServices.loginLink(email: email, callback)
     }
 
     func signup(with request: SignupRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {

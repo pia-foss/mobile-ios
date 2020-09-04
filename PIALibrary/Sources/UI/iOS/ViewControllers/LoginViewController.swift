@@ -41,6 +41,8 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
 
     @IBOutlet private weak var loginWithReceipt: UIButton!
 
+    @IBOutlet private weak var loginWithLink: UIButton!
+
     var preset: Preset?
     private weak var delegate: PIAWelcomeViewControllerDelegate?
 
@@ -52,12 +54,18 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
     
     private var isLogging = false
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         guard let preset = self.preset else {
             fatalError("Preset not propagated")
         }
+
+        NotificationCenter.default.addObserver(self, selector: #selector(finishLoginWithMagicLink), name: .PIAFinishLoginWithMagicLink, object: nil)
 
         labelTitle.text = L10n.Welcome.Login.title
         textUsername.placeholder = L10n.Welcome.Login.Username.placeholder
@@ -71,7 +79,6 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         enableInteractions(true)
     }
     
@@ -99,6 +106,50 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
         
     }
     // MARK: Actions
+    @IBAction private func logInWithLink(_ sender: Any?) {
+        
+        let bundle = Bundle(for: LoginViewController.self)
+        let storyboard = UIStoryboard(name: "Welcome", bundle: bundle)
+        if let magicLinkLoginViewController = storyboard.instantiateViewController(withIdentifier: "MagicLinkLoginViewController") as? MagicLinkLoginViewController {
+            let alert = Macros.alert(magicLinkLoginViewController)
+            alert.addCancelAction(L10n.Signup.Purchase.Uncredited.Alert.Button.cancel)
+            alert.addActionWithTitle("Send Link".uppercased(), handler: {
+                
+                let email = magicLinkLoginViewController.email()
+                guard Validator.validate(email: email) else {
+                    Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                            message: "Invalid email. Please try again.")
+                    return
+                }
+                
+                guard !self.isLogging else {
+                    return
+                }
+                
+                self.showLoadingAnimation()
+
+                self.preset?.accountProvider.loginUsingMagicLink(withEmail: email, { (error) in
+                    
+                    Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image,
+                                                   message: "Please check your e-mail for a login link.")
+
+                    self.hideLoadingAnimation()
+
+                })
+                
+            })
+            present(alert, animated: true, completion: nil)
+        }
+        
+    }
+    
+    @objc private func finishLoginWithMagicLink() {
+        self.completionDelegate?.welcomeDidLogin(withUser:
+            UserAccount(credentials: Credentials(username: "",
+                                                 password: ""),
+                        info: nil),
+                                                 topViewController: self)
+    }
     
     @IBAction private func logInWithReceipt(_ sender: Any?) {
         
@@ -257,6 +308,7 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
         Theme.current.applyInput(textUsername)
         Theme.current.applyInput(textPassword)
         Theme.current.applyButtonLabelMediumStyle(loginWithReceipt)
+        Theme.current.applyButtonLabelMediumStyle(loginWithLink)
         Theme.current.applyButtonLabelMediumStyle(couldNotGetPlanButton)
     }
     
@@ -270,6 +322,8 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
                                        for: [])
         loginWithReceipt.setTitle(L10n.Welcome.Login.Receipt.button,
                                   for: [])
+        loginWithLink.setTitle("Login using magic email link",
+                               for: [])
     }
 
 }

@@ -78,6 +78,17 @@ public protocol AccountProvider: class {
     func login(with receiptRequest: LoginReceiptRequest, _ callback: LibraryCallback<UserAccount>?)
 
     /**
+    Logs into system using the token directly. The `isLoggedIn` variable becomes `true` on success.
+
+    - Precondition: `isLoggedIn` is `false`.
+    - Postcondition:
+       - Sets `currentUser` on success.
+       - Posts `Notification.Name.PIAAccountDidLogin` on success.
+    - Parameter token: A valid token.
+    - Parameter callback: Returns an `UserAccount`.
+    */
+    func login(with token: String, _ callback: ((UserAccount?, Error?) -> Void)?)
+    /**
      Refreshes information associated with the account currently logged in.
  
      - Precondition: `isLoggedIn` is `true`.
@@ -155,6 +166,14 @@ public protocol AccountProvider: class {
      - Parameter callback: Returns `nil` on success.
      */
     func restorePurchases(_ callback: SuccessLibraryCallback?)
+    
+    /**
+    Send a login link to the email provided as parameter.
+    
+    - Parameter email: The associated email to the account where the magic link is sent.
+    - Parameter callback: Returns `nil` on success.
+    */
+    func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?)
     
     /**
      Signs up with current purchase history.

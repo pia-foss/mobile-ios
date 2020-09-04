@@ -148,6 +148,14 @@ extension Macros {
         return popup
     }
     
+    public static func alert(_ viewController: UIViewController, completionHandler completion: (() -> Void)? = nil) -> PopupDialog {
+        Macros.styleAlertPopupDialog()
+        let popup = PopupDialog(viewController: viewController,
+                                buttonAlignment: .horizontal,
+                                completion: completion)
+        return popup
+    }
+    
     /**
      Shortcut to create an `UIAlertController`.
      

@@ -234,6 +234,8 @@
 		0EFEB4C520077AC900F81029 /* PIATunnelProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFEB4C02007784A00F81029 /* PIATunnelProfile.swift */; };
 		5DEFCC9D9249ECF1D4D50824 /* Pods_PIALibrary_PIALibrary_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FD03DE969DD697A0224E03F /* Pods_PIALibrary_PIALibrary_iOS.framework */; };
 		768CFA464E84E26F6767746C /* Pods_PIALibrary_PIALibraryTests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0E0FCF436478033902B6E19 /* Pods_PIALibrary_PIALibraryTests_iOS.framework */; };
+		82183D7F25011D200033023F /* MagicLinkLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82183D7D25011D200033023F /* MagicLinkLoginViewController.swift */; };
+		82183D8025011D200033023F /* MagicLinkLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82183D7D25011D200033023F /* MagicLinkLoginViewController.swift */; };
 		8221921C24CEBA3800C24F1C /* NMTRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921B24CEBA3800C24F1C /* NMTRules.swift */; };
 		8221921D24CEBA3800C24F1C /* NMTRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921B24CEBA3800C24F1C /* NMTRules.swift */; };
 		8221921F24CEBABA00C24F1C /* NMTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921E24CEBABA00C24F1C /* NMTType.swift */; };
@@ -545,6 +547,7 @@
 		4F20850F73C307B2D06BD291 /* Pods_PIALibrary_PIALibraryHost_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibraryHost_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		60DA3CDA1F4A0C204A01744A /* Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig"; path = "Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		7E3F84013F47616DB2212E01 /* Pods-PIALibrary-PIALibrary-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibrary-iOS.release.xcconfig"; path = "Target Support Files/Pods-PIALibrary-PIALibrary-iOS/Pods-PIALibrary-PIALibrary-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		82183D7D25011D200033023F /* MagicLinkLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLinkLoginViewController.swift; sourceTree = "<group>"; };
 		8221921B24CEBA3800C24F1C /* NMTRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMTRules.swift; sourceTree = "<group>"; };
 		8221921E24CEBABA00C24F1C /* NMTType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMTType.swift; sourceTree = "<group>"; };
 		8221922124CEC1E400C24F1C /* Invites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invites.swift; sourceTree = "<group>"; };
@@ -1161,6 +1164,7 @@
 				0EB8C05B1F9CD38A005857E4 /* WelcomePageViewController.swift */,
 				DD31498E21834B3F008E26E8 /* GetStartedViewController.swift */,
 				DD8BF3CA219C6BAA0041357C /* ConfirmVPNPlanViewController.swift */,
+				82183D7D25011D200033023F /* MagicLinkLoginViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1740,6 +1744,7 @@
 				0EA8072D20A1C7A30033EC1A /* RedeemRequest.swift in Sources */,
 				8221921D24CEBA3800C24F1C /* NMTRules.swift in Sources */,
 				0E9D62DE1FDEE45A009A90CF /* DefaultServerProvider.swift in Sources */,
+				82183D8025011D200033023F /* MagicLinkLoginViewController.swift in Sources */,
 				DD8C3E652327EF6000BAD18E /* IKEv2EncryptionAlgorithm.swift in Sources */,
 				0EF14E4C1FEAE6350007485A /* Client+Providers.swift in Sources */,
 				0E7BC6E61F96B1000035C8B2 /* Client.swift in Sources */,
@@ -1812,6 +1817,7 @@
 				0EC849C91F82329F002480CA /* WebServices.swift in Sources */,
 				0E9D62711FDE83BD009A90CF /* GlossServer.swift in Sources */,
 				0EE14D1B1FF16B39008D9AC2 /* InvalidatingFlowLayout.swift in Sources */,
+				82183D7F25011D200033023F /* MagicLinkLoginViewController.swift in Sources */,
 				0EE1068C1F8250A1009514E9 /* Plan.swift in Sources */,
 				DD36CB7E21CCFFFB00FC815A /* CAGradientLayer+Image.swift in Sources */,
 				0EBBC6DC1F9F64E700B8BD21 /* Client+Environment.swift in Sources */,
