@@ -27,13 +27,7 @@ class CustomNetworkCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet private weak var title: UILabel!
     @IBOutlet private weak var wifiIcon: UIImageView!
-    @IBOutlet private weak var selectedIcon: UIImageView!
     private var popover: Popover!
-    override var isSelected: Bool {
-        didSet {
-            selectedIcon.alpha = isSelected ? 1.0 : 0.0
-        }
-    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
