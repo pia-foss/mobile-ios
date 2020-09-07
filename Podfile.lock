@@ -72,8 +72,8 @@ PODS:
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - OpenSSL-Apple (1.1.1d.5a)
-  - PIALibrary/Core (2.7.1)
-  - PIALibrary/Library (2.7.1):
+  - PIALibrary/Core (2.7.2)
+  - PIALibrary/Library (2.7.2):
     - Alamofire (~> 4)
     - Gloss (~> 2)
     - PIALibrary/Core
@@ -82,18 +82,18 @@ PODS:
     - PopupDialog
     - ReachabilitySwift
     - SwiftyBeaver
-  - PIALibrary/Mock (2.7.1):
+  - PIALibrary/Mock (2.7.2):
     - PIALibrary/Library
-  - PIALibrary/UI (2.7.1):
+  - PIALibrary/UI (2.7.2):
     - FXPageControl
     - lottie-ios
     - PIALibrary/Library
     - SwiftEntryKit (= 0.7.2)
     - SwiftyBeaver
     - TPKeyboardAvoiding
-  - PIALibrary/Util (2.7.1):
+  - PIALibrary/Util (2.7.2):
     - PIALibrary/Core
-  - PIALibrary/VPN (2.7.1):
+  - PIALibrary/VPN (2.7.2):
     - PIALibrary/Library
     - PIAWireguard
     - TunnelKit
@@ -104,12 +104,12 @@ PODS:
   - PIARegions/Core (1.0.4)
   - PIARegions/gradle (1.0.4)
   - PIARegions/regions (1.0.4)
-  - PIAWireguard (1.0.0):
-    - PIAWireguard/AppExtension (= 1.0.0)
-    - PIAWireguard/Core (= 1.0.0)
-  - PIAWireguard/AppExtension (1.0.0):
+  - PIAWireguard (1.0.1):
+    - PIAWireguard/AppExtension (= 1.0.1)
+    - PIAWireguard/Core (= 1.0.1)
+  - PIAWireguard/AppExtension (1.0.1):
     - PIAWireguard/Core
-  - PIAWireguard/Core (1.0.0):
+  - PIAWireguard/Core (1.0.1):
     - Alamofire
     - TweetNacl
   - PopupDialog (1.1.1):
@@ -142,12 +142,12 @@ DEPENDENCIES:
   - Fabric
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
-  - PIALibrary/Library (from `/Users/jose/Projects/PIA/client-library-apple`)
-  - PIALibrary/Mock (from `/Users/jose/Projects/PIA/client-library-apple`)
-  - PIALibrary/UI (from `/Users/jose/Projects/PIA/client-library-apple`)
-  - PIALibrary/VPN (from `/Users/jose/Projects/PIA/client-library-apple`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `78ddb62`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `78ddb62`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `78ddb62`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `78ddb62`)
   - PIARegions (from `https://github.com/pia-foss/mobile-common-regions`)
-  - PIAWireguard (from `/Users/jose/Projects/PIA/PIAWireguard`)
+  - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
   - PopupDialog
   - ReachabilitySwift (~> 4.3.0)
   - SideMenu (= 6.1.3)
@@ -187,19 +187,26 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIALibrary:
-    :path: "/Users/jose/Projects/PIA/client-library-apple"
+    :commit: 78ddb62
+    :git: https://github.com/pia-foss/client-library-apple
   PIARegions:
     :git: https://github.com/pia-foss/mobile-common-regions
   PIAWireguard:
-    :path: "/Users/jose/Projects/PIA/PIAWireguard"
+    :git: https://github.com/pia-foss/ios-wireguard
   TunnelKit:
     :commit: d19b9de
     :git: https://github.com/pia-foss/tunnelkit
 
 CHECKOUT OPTIONS:
+  PIALibrary:
+    :commit: 78ddb62
+    :git: https://github.com/pia-foss/client-library-apple
   PIARegions:
     :commit: 9033933a4add382bb51e8ec05cece175a0bc9540
     :git: https://github.com/pia-foss/mobile-common-regions
+  PIAWireguard:
+    :commit: 10ddb6b3e79b695358d4fa58a85d663039f7509e
+    :git: https://github.com/pia-foss/ios-wireguard
   TunnelKit:
     :commit: d19b9de
     :git: https://github.com/pia-foss/tunnelkit
@@ -225,9 +232,9 @@ SPEC CHECKSUMS:
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
-  PIALibrary: 9d66fd505939b16e9cec49b349172df6e4f8c187
+  PIALibrary: 8c6748306a7fffaf94ecfccdc024276ef4488d2a
   PIARegions: 570e1dfa496d39919427f9b0f25b9d4dca12f0d4
-  PIAWireguard: a5f50b4a8a6fc45d8c1db236813b8fa97f925318
+  PIAWireguard: 9d71dabc9e483b149236eebbd0e6bb8fa5c8317f
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
@@ -238,6 +245,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: f81da3f79d47c3b14e5c81496b5c73b55bec1e2d
+PODFILE CHECKSUM: 75007a29145e3a67c1d4bec4cc8509692ebe1189
 
 COCOAPODS: 1.9.3
