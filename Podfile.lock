@@ -12,12 +12,12 @@ PODS:
   - PIARegions/Core (1.0.0)
   - PIARegions/gradle (1.0.0)
   - PIARegions/regions (1.0.0)
-  - PIAWireguard (1.0.0):
-    - PIAWireguard/AppExtension (= 1.0.0)
-    - PIAWireguard/Core (= 1.0.0)
-  - PIAWireguard/AppExtension (1.0.0):
+  - PIAWireguard (1.0.1):
+    - PIAWireguard/AppExtension (= 1.0.1)
+    - PIAWireguard/Core (= 1.0.1)
+  - PIAWireguard/AppExtension (1.0.1):
     - PIAWireguard/Core
-  - PIAWireguard/Core (1.0.0):
+  - PIAWireguard/Core (1.0.1):
     - Alamofire
     - TweetNacl
   - PopupDialog (0.9.2):
@@ -46,7 +46,7 @@ DEPENDENCIES:
   - Gloss (~> 2)
   - lottie-ios
   - PIARegions (from `https://github.com/pia-foss/mobile-common-regions`)
-  - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`, commit `1585891`)
+  - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
   - PopupDialog
   - ReachabilitySwift
   - SwiftEntryKit (= 0.7.2)
@@ -72,7 +72,6 @@ EXTERNAL SOURCES:
   PIARegions:
     :git: https://github.com/pia-foss/mobile-common-regions
   PIAWireguard:
-    :commit: '1585891'
     :git: https://github.com/pia-foss/ios-wireguard
   TunnelKit:
     :commit: d19b9de
@@ -83,7 +82,7 @@ CHECKOUT OPTIONS:
     :commit: f1fb90acad798af299b97f769db7776956dbb5cb
     :git: https://github.com/pia-foss/mobile-common-regions
   PIAWireguard:
-    :commit: '1585891'
+    :commit: 10ddb6b3e79b695358d4fa58a85d663039f7509e
     :git: https://github.com/pia-foss/ios-wireguard
   TunnelKit:
     :commit: d19b9de
@@ -97,15 +96,15 @@ SPEC CHECKSUMS:
   lottie-ios: 06e0b54aab85ba128e332687d7f4ac4861a7a7ae
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
   PIARegions: b1e2c47a48e54040c36a14a9aab07b95d8be6cfb
-  PIAWireguard: f92333a1e281db298efd00b0fe97a5745a7946e6
+  PIAWireguard: 9d71dabc9e483b149236eebbd0e6bb8fa5c8317f
   PopupDialog: f4bb461bf70ff422be0b56656566424ee9273080
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
   SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
-  TunnelKit: d13d005c0c7febd18a03a87e1ab7d4414fef3ffd
+  TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: f643fbb790f57874dc796236cbf82ae7987d3293
+PODFILE CHECKSUM: 5f796250d0bf25c74ffd7b1aac29c975692dee2e
 
 COCOAPODS: 1.9.3
