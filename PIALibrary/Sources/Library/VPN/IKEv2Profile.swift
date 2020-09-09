@@ -180,7 +180,12 @@ public class IKEv2Profile: NetworkExtensionProfile {
         }
         
         let cfg = NEVPNProtocolIKEv2()
-        cfg.serverAddress = configuration.server.hostname
+        if Client.configuration.serverNetwork == .gen4,
+            let ip = configuration.server.bestAddressForIKEv2()?.ip {
+            cfg.serverAddress = ip
+        } else {
+            cfg.serverAddress = configuration.server.hostname
+        }
         cfg.remoteIdentifier = configuration.server.hostname
         cfg.localIdentifier = iKEv2Username
         cfg.username = iKEv2Username
