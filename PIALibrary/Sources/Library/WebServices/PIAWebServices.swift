@@ -38,11 +38,14 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     private let accountAPI: IOSAccountAPI!
     
     init() {
-        
-        self.accountAPI = AccountBuilder().setPlatform(platform: .ios)
-            .setStaging(staging: Client.environment == .staging)
-                .setUserAgentValue(userAgentValue: userAgent).build() as? IOSAccountAPI
-        
+        if Client.environment == .staging {
+            self.accountAPI = AccountBuilder().setPlatform(platform: .ios)
+                .setStagingEndpoint(stagingEndpoint: Client.configuration.baseUrl)
+                    .setUserAgentValue(userAgentValue: userAgent).build() as? IOSAccountAPI
+        } else {
+            self.accountAPI = AccountBuilder().setPlatform(platform: .ios)
+                    .setUserAgentValue(userAgentValue: userAgent).build() as? IOSAccountAPI
+        }
     }
     
     private let userAgent: String = {
