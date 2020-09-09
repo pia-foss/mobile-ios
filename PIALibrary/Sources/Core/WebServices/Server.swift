@@ -221,14 +221,25 @@ extension Server {
 
     }
 
-    /// TODO: Use IP instead DNS
-    func bestAddressForIKEv2() -> Address? {
+    func bestAddressForIKEv2() -> ServerAddressIP? {
+        
+        if Client.configuration.serverNetwork == .gen4,
+            let addresses = iKEv2AddressesForUDP {
+            let sorted = addresses.sorted(by: { $0.responseTime ?? 0 > $1.responseTime ?? 0 })
+            return sorted.first
+        }
+
         return nil // currently using DNS
     }
 
-    /// TODO: Use IP instead DNS
-    func bestAddressForWireGuard() -> Address? {
-        return nil // currently using DNS
+    func bestAddressForWireGuard() -> ServerAddressIP? {
+        if Client.configuration.serverNetwork == .gen4,
+            let addresses = wireGuardAddressesForUDP {
+            let sorted = addresses.sorted(by: { $0.responseTime ?? 0 > $1.responseTime ?? 0 })
+            return sorted.first
+        }
+
+        return nil 
     }
 
     func bestPingAddress() -> [Address] {
