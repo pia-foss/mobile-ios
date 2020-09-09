@@ -45,8 +45,8 @@ def shared_main_pods
     pod 'AlamofireImage'
     pod "PIAAccountModule", :path => "/Users/jose/Projects/PIA/account"
     pod "PIARegions", :path => "/Users/jose/Projects/PIA/regions"
-    library_by_path('/Users/jose/Projects/PIA')
-    #library_by_git('7075984')
+    #library_by_path('')
+    library_by_git('78ddb62')
     #library_by_version('~> 1.1.3')
 end
 
@@ -66,7 +66,7 @@ def tunnel_pods
 end
 
 def piawireguard_pod
-    pod 'PIAWireguard', :git => "https://github.com/pia-foss/ios-wireguard", :commit => '1585891'
+    pod 'PIAWireguard', :git => "https://github.com/pia-foss/ios-wireguard"
 end
 
 # Targets

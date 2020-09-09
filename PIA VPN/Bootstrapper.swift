@@ -73,6 +73,13 @@ class Bootstrapper {
 
         // Load the database first
         Client.database = Client.Database(team: AppConstants.teamId, group: AppConstants.appGroup)
+        
+        // Override GEN4 in beta and dev versions
+        if !Client.configuration.arePurchasesAvailable() {
+            if Client.configuration.currentServerNetwork() == .legacy {
+                Client.configuration.setServerNetworks(to: .gen4)
+            }
+        }
 
         // Override GEN4 in beta and dev versions
         if !Client.configuration.arePurchasesAvailable() {
