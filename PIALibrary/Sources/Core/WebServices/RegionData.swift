@@ -49,6 +49,21 @@ public extension RegionData {
             let translatedServerName = localizationData[Locale.current.identifier.replacingOccurrences(of: "_", with: "-")],
             !translatedServerName.isEmpty {
             return translatedServerName
+        } else { //Not found, let's try to find it without the region
+            if let localizationData = self.translations[countryName],
+                let locale = Locale.current.identifier.split(separator: "_").first,
+                let translatedServerName = localizationData[locale.description],
+                !translatedServerName.isEmpty {
+                return translatedServerName
+            } else { //Not found, let's try to find a key with the same code
+                if let localizationData = self.translations[countryName],
+                    let locale = Locale.current.identifier.split(separator: "_").first,
+                    let keyThatMatch = localizationData.keys.filter( { $0.starts(with: locale.description)} ).first,
+                    let translatedServerName = localizationData[keyThatMatch],
+                    !translatedServerName.isEmpty {
+                    return translatedServerName
+                }
+            }
         }
         
         return countryName
