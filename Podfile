@@ -46,7 +46,7 @@ def shared_main_pods
     pod "PIAAccountModule", :path => "/Users/jose/Projects/PIA/account"
     pod "PIARegions", :path => "/Users/jose/Projects/PIA/regions"
     #library_by_path('')
-    library_by_git('78ddb62')
+    library_by_git('6304023')
     #library_by_version('~> 1.1.3')
 end
 

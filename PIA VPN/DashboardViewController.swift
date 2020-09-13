@@ -336,6 +336,14 @@ class DashboardViewController: AutolayoutViewController {
                         //Show additionally a message indicating the VPN is enabled but disconnected given the current NMT settings
                         let alert = Macros.alert(nil, "Your automation settings are configured to don't connect the VPN under the current network conditions. The VPN is enabled and will connect or disconnect automatically if you switch to a different network")
                         alert.addCancelAction(L10n.Global.close)
+                        alert.addActionWithTitle("Disable automation") {
+                            let preferences = Client.preferences.editable()
+                            preferences.nmtRulesEnabled = !Client.preferences.nmtRulesEnabled
+                            preferences.commit()
+                            NotificationCenter.default.post(name: .PIAQuickSettingsHaveChanged,
+                                                            object: self,
+                                                            userInfo: nil)
+                        }
                         weakSelf.present(alert, animated: true, completion: nil)
                     }
                 }
@@ -655,8 +663,7 @@ class DashboardViewController: AutolayoutViewController {
         if Client.preferences.nmtRulesEnabled {
             if let ssid = PIAHotspotHelper().currentWiFiNetwork() {
                 if Client.preferences.nmtGenericRules[NMTType.protectedWiFi.rawValue] == NMTRules.alwaysDisconnect.rawValue ||
-                    (Client.preferences.nmtTrustedNetworkRules[ssid] == NMTRules.alwaysDisconnect.rawValue ||
-                        Client.preferences.nmtTrustedNetworkRules[ssid] == nil){
+                    (Client.preferences.nmtTrustedNetworkRules[ssid] == NMTRules.alwaysDisconnect.rawValue){
                     return true
                 }
             } else {
