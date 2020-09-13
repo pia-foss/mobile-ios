@@ -39,10 +39,6 @@ class GlossServer: GlossParser {
             return nil
         }
         
-        guard let regionIdentifier: String = "id" <~~ json else {
-           return nil
-       }
-        
         let geo: Bool = "geo" <~~ json ?? false
 
         var internalServerNetwork: ServersNetwork?
@@ -51,6 +47,10 @@ class GlossServer: GlossParser {
         }
 
         if Client.configuration.serverNetwork == .gen4 {
+            
+            guard let regionIdentifier: String = "id" <~~ json else {
+               return nil
+            }
             
             var ovpnTCPServerAddressIP: [Server.ServerAddressIP] = []
             if let ovpnTCP: [String: Any] = "servers" <~~ json {
@@ -127,6 +127,12 @@ class GlossServer: GlossParser {
             }
             
         } else {
+            
+            var regionIdentifier = name
+            if let serverName = hostname.split(separator: ".").first {
+                regionIdentifier = serverName.description
+                regionIdentifier = regionIdentifier.replacingOccurrences(of: "-", with: "_")
+            }
             
             var serial = ""
             if let serialValue: String = "serial" <~~ json {
