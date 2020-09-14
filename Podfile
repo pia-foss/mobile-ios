@@ -19,7 +19,7 @@ $library_subspecs = [
 ]
 
 $regions_repo = 'mobile-common-regions'
-
+$accounts_repo = 'mobile-common-account'
 
 def library_by_path(root)
     $library_subspecs.each { |name|

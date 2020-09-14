@@ -72,7 +72,9 @@ PODS:
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - OpenSSL-Apple (1.1.1d.5a)
-  - PIAAccountModule (1.0.0)
+  - PIAAccountModule (1.0.0):
+    - PIAAccountModule/gradle (= 1.0.0)
+  - PIAAccountModule/gradle (1.0.0)
   - PIALibrary/Core (2.8.0)
   - PIALibrary/Library (2.8.0):
     - Alamofire (~> 4)
@@ -240,7 +242,7 @@ SPEC CHECKSUMS:
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
-  PIAAccountModule: d69820ba919e1b55706b145d9241434555e96853
+  PIAAccountModule: 81192ef71f6d8dd54f7850000902f9fb33ee7568
   PIALibrary: d56c4c982bd0d0ec554b6c07af9beca5e94534f2
   PIARegions: 9590d17d28998b006e7db044decc29cd9470ecb8
   PIAWireguard: 9d71dabc9e483b149236eebbd0e6bb8fa5c8317f
@@ -255,6 +257,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 1acb09c6dea48f7f3b1640431ecd4dc32c64c120
+PODFILE CHECKSUM: 30d58dbbddda9f0b8d7ca9d88050c30d4fd956fb
 
 COCOAPODS: 1.9.3
