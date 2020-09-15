@@ -131,7 +131,7 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
                 self.preset?.accountProvider.loginUsingMagicLink(withEmail: email, { (error) in
                     
                     Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image,
-                                                   message: "Please check your e-mail for a login link.")
+                                                   message: L10n.Welcome.Login.Magic.Link.response)
 
                     self.hideLoadingAnimation()
 
@@ -322,7 +322,7 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
                                        for: [])
         loginWithReceipt.setTitle(L10n.Welcome.Login.Receipt.button,
                                   for: [])
-        loginWithLink.setTitle("Login using magic email link",
+        loginWithLink.setTitle(L10n.Welcome.Login.Magic.Link.title,
                                for: [])
     }
 
