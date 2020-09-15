@@ -1277,7 +1277,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             switchEnableNMT.isOn = Client.preferences.nmtRulesEnabled
 
         case .trustedNetworks:
-            cell.textLabel?.text = "Manage automation"
+            cell.textLabel?.text = L10n.Network.Management.Tool.title
             cell.detailTextLabel?.text = nil
 
         case .publicUsername:

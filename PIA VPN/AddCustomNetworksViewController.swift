@@ -127,7 +127,7 @@ extension AddCustomNetworksViewController: UICollectionViewDelegateFlowLayout, U
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
 
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Cells.header, for: indexPath) as! NetworkHeaderCollectionViewCell
-        headerView.setup(withTitle: "Add new rule", andSubtitle: "Choose a WiFi network to add a new rule. " + L10n.Settings.Hotspothelper.Available.help)
+        headerView.setup(withTitle: L10n.Network.Management.Tool.Add.rule, andSubtitle: L10n.Network.Management.Tool.Choose.wifi + L10n.Settings.Hotspothelper.Available.help)
         return headerView
 
     }

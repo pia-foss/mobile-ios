@@ -45,7 +45,7 @@ class NetworkCollectionViewCell: UICollectionViewCell {
             guard let data = data else { return }
             switch data.type {
             case .openWiFi:
-                title.text = "Open WiFi"
+                title.text = L10n.Network.Management.Tool.Open.wifi
                 switch data.rule {
                 case .alwaysConnect:
                     networkIcon.image = Asset.Piax.Nmt.iconOpenWifiConnect.image
@@ -55,7 +55,7 @@ class NetworkCollectionViewCell: UICollectionViewCell {
                     networkIcon.image = Asset.Piax.Nmt.iconOpenWifiRetain.image
                 }
             case .protectedWiFi:
-                title.text = "Secure WiFi"
+                title.text = L10n.Network.Management.Tool.Secure.wifi
                 switch data.rule {
                 case .alwaysConnect:
                     networkIcon.image = Asset.Piax.Nmt.iconSecureWifiConnect.image
@@ -65,7 +65,7 @@ class NetworkCollectionViewCell: UICollectionViewCell {
                     networkIcon.image = Asset.Piax.Nmt.iconSecureWifiRetain.image
                 }
             case .cellular:
-                title.text = "Mobile data"
+                title.text = L10n.Network.Management.Tool.Mobile.data
                 switch data.rule {
                 case .alwaysConnect:
                     networkIcon.image = Asset.Piax.Nmt.iconMobileDataConnect.image
@@ -88,13 +88,13 @@ class NetworkCollectionViewCell: UICollectionViewCell {
             
             switch data.rule {
             case .alwaysConnect:
-                subtitle.text = "Always connect VPN"
+                subtitle.text = L10n.Network.Management.Tool.Always.connect
                 statusColor.backgroundColor = UIColor.piaNMTGreen
             case .alwaysDisconnect:
-                subtitle.text = "Always disconnect VPN"
+                subtitle.text = L10n.Network.Management.Tool.Always.disconnect
                 statusColor.backgroundColor = UIColor.piaNMTRed
             case .retainState:
-                subtitle.text = "Retain VPN State"
+                subtitle.text = L10n.Network.Management.Tool.Retain.state
                 statusColor.backgroundColor = UIColor.piaNMTBlue
             }
             

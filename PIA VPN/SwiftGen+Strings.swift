@@ -452,6 +452,45 @@ internal enum L10n {
     }
   }
 
+  internal enum Network {
+    internal enum Management {
+      internal enum Tool {
+        /// Manage automation
+        internal static let title = L10n.tr("Localizable", "network.management.tool.title")
+        internal enum Add {
+          /// Add new rule
+          internal static let rule = L10n.tr("Localizable", "network.management.tool.add.rule")
+        }
+        internal enum Always {
+          /// Always connect VPN
+          internal static let connect = L10n.tr("Localizable", "network.management.tool.always.connect")
+          /// Always disconnect VPN
+          internal static let disconnect = L10n.tr("Localizable", "network.management.tool.always.disconnect")
+        }
+        internal enum Choose {
+          /// Choose a WiFi network to add a new rule. 
+          internal static let wifi = L10n.tr("Localizable", "network.management.tool.choose.wifi")
+        }
+        internal enum Mobile {
+          /// Mobile data
+          internal static let data = L10n.tr("Localizable", "network.management.tool.mobile.data")
+        }
+        internal enum Open {
+          /// Open WiFi
+          internal static let wifi = L10n.tr("Localizable", "network.management.tool.open.wifi")
+        }
+        internal enum Retain {
+          /// Retain VPN State
+          internal static let state = L10n.tr("Localizable", "network.management.tool.retain.state")
+        }
+        internal enum Secure {
+          /// Secure WiFi
+          internal static let wifi = L10n.tr("Localizable", "network.management.tool.secure.wifi")
+        }
+      }
+    }
+  }
+
   internal enum Notifications {
     internal enum Disabled {
       /// Enable notifications to get a reminder to renew your subscription before it expires.

@@ -32,7 +32,7 @@ class NetworkFooterCollectionViewCell: UICollectionViewCell {
     }
 
     func setup() {
-        self.addRuleButton.setTitle("Add new rule", for: .normal)
+        self.addRuleButton.setTitle(L10n.Network.Management.Tool.Add.rule, for: .normal)
         viewShouldRestyle()
     }
     // MARK: Restylable
