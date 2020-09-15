@@ -308,7 +308,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             self.regionsTask.fetch { response, jsonResponse, error in
                 
                 if let error = error {
-                    callback?(nil, ClientError.malformedResponseData)
+                    callback?(nil, ClientError.noRegions)
                     return
                 }
 
