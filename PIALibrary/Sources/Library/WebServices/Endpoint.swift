@@ -27,27 +27,8 @@ protocol Endpoint: ConfigurationAccess {
 }
 
 enum ClientEndpoint: String, Endpoint {
-    case signup
-    
-    case redeem = "giftcard_redeem"
-    
-    case token = "v2/token"
-
-    case account = "v2/account"
-
-    case updateAccount = "account"
-    
-    case logout = "v2/expire_token"
-
-    case payment
 
     case status
-
-    case ios
-    
-    case invites
-    
-    case login_link = "v2/login_link"
 
     var url: URL {
         return URL(string: "\(accessedConfiguration.baseUrl)/api/client/\(rawValue)")!
