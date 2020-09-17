@@ -19,6 +19,8 @@
 "login.error.title" = "Connexion";
 "login.error.unauthorized" = "Votre nom d'utilisateur ou mot de passe est incorrect.";
 "login.error.validation" = "Vous devez saisir un nom d'utilisateur et un mot de passe.";
+"login.magic.link.response" = "Veuillez vérifier vos e-mails pour trouver un lien de connexion.";
+"login.magic.link.title" = "Connectez-vous à l'aide du lien e-mail magique";
 "login.password.placeholder" = "Mot de passe";
 "login.receipt.button" = "Connectez-vous à l'aide du reçu d'achat";
 "login.restore.button" = "Vous n'avez pas reçu les détails de votre compte ?";
@@ -42,8 +44,9 @@
 "purchase.error.validation" = "Vous devez entrer une adresse e-mail.";
 "purchase.login.button" = "Connectez-vous";
 "purchase.login.footer" = "Vous avez déjà un compte ?";
+"purchase.or" = "ou";
 "purchase.submit" = "Envoyer";
-"purchase.subtitle" = "30 jours pour être satisfait ou remboursé";
+"purchase.subtitle" = "Garantie satisfait ou remboursé sur 30 jours";
 "purchase.title" = "Sélectionnez un forfait VPN";
 "redeem.accessibility.back" = "Retour";
 "redeem.email.placeholder" = "Adresse e-mail";

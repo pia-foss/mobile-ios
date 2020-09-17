@@ -19,6 +19,8 @@
 "login.error.title" = "로그인";
 "login.error.unauthorized" = "사용자명 또는 비밀번호가 틀립니다.";
 "login.error.validation" = "사용자 이름과 비밀번호를 입력하셔야 합니다.";
+"login.magic.link.response" = "로그인 링크가 담긴 이메일을 확인하세요.";
+"login.magic.link.title" = "이메일 링크를 사용해 간편하게 로그인";
 "login.password.placeholder" = "비밀번호";
 "login.receipt.button" = "구매 영수증을 사용해 로그인";
 "login.restore.button" = "계정 정보를 받지 못하셨습니까?";
@@ -42,6 +44,7 @@
 "purchase.error.validation" = "이메일 주소를 입력하셔야 합니다.";
 "purchase.login.button" = "로그인";
 "purchase.login.footer" = "이미 계정이 있으세요?";
+"purchase.or" = "또는";
 "purchase.submit" = "제출";
 "purchase.subtitle" = "30일 이내 환불 보장";
 "purchase.title" = "VPN 플랜 선택";

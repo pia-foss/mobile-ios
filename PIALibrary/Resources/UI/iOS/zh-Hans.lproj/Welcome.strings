@@ -19,6 +19,8 @@
 "login.error.title" = "登录";
 "login.error.unauthorized" = "您的用户名或密码不正确。";
 "login.error.validation" = "您必须输入用户名和密码。";
+"login.magic.link.response" = "请检查您的电子邮件，以查找登录链接。";
+"login.magic.link.title" = "使用魔法电子邮件链接登录";
 "login.password.placeholder" = "密码";
 "login.receipt.button" = "使用购买收据登录";
 "login.restore.button" = "没有收到账户详情？";
@@ -42,6 +44,7 @@
 "purchase.error.validation" = "您必须输入一个电子邮箱地址。";
 "purchase.login.button" = "登录";
 "purchase.login.footer" = "已有帐号？";
+"purchase.or" = "或";
 "purchase.submit" = "提交";
 "purchase.subtitle" = "30 天退款保证";
 "purchase.title" = "选择 VPN 套餐";

@@ -19,6 +19,8 @@
 "login.error.title" = "Log ind";
 "login.error.unauthorized" = "Dit brugernavn eller kodeord er forkert.";
 "login.error.validation" = "Du skal indtaste et brugernavn og et kodeord.";
+"login.magic.link.response" = "Se i din e-mail for et login-link.";
+"login.magic.link.title" = "Log ind ved hjælp af magisk e-maillink";
 "login.password.placeholder" = "Kodeord";
 "login.receipt.button" = "Log på med købskvittering";
 "login.restore.button" = "Modtog du ikke dine kontodetaljer?";
@@ -42,6 +44,7 @@
 "purchase.error.validation" = "Du skal indtaste en e-mailadresse";
 "purchase.login.button" = "Log ind";
 "purchase.login.footer" = "Har du allerede en konto?";
+"purchase.or" = "eller";
 "purchase.submit" = "Indsend";
 "purchase.subtitle" = "30-dages pengene tilbage garanti";
 "purchase.title" = "Vælg en VPN-plan";

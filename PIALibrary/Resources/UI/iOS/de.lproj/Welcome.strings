@@ -19,6 +19,8 @@
 "login.error.title" = "Anmelden";
 "login.error.unauthorized" = "Dein Benutzername oder Passwort ist falsch.";
 "login.error.validation" = "Du musst einen Benutzernamen und ein Passwort angeben.";
+"login.magic.link.response" = "Bitte überprüfen Sie Ihre E-Mail auf einen Login-Link.";
+"login.magic.link.title" = "Anmeldung mit magischem E-Mail-Link";
 "login.password.placeholder" = "Passwort";
 "login.receipt.button" = "Anmeldung mit Kaufbeleg";
 "login.restore.button" = "Keine Kontodaten erhalten?";
@@ -42,6 +44,7 @@
 "purchase.error.validation" = "Sie müssen eine E-Mail-Adresse angeben.";
 "purchase.login.button" = "Anmelden";
 "purchase.login.footer" = "Bereits ein Konto?";
+"purchase.or" = "oder";
 "purchase.submit" = "Senden";
 "purchase.subtitle" = "30-Tage-Geld-zurück-Garantie";
 "purchase.title" = "VPN-Tarif auswählen";
