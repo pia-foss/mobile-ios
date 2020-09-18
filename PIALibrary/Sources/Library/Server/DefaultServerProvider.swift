@@ -128,6 +128,7 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
         }
         if currentServers.isEmpty {
             currentServers = bundle.parsed.servers
+            ServersPinger.shared.ping(withDestinations: currentServers)
         }
     }
 

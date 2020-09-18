@@ -240,6 +240,9 @@
 		8221921F24CEBABA00C24F1C /* NMTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921E24CEBABA00C24F1C /* NMTType.swift */; };
 		8221922024CEBABA00C24F1C /* NMTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921E24CEBABA00C24F1C /* NMTType.swift */; };
 		822BC1D024BF20C90041BF9A /* UIControl+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BC1CF24BF20C90041BF9A /* UIControl+Action.swift */; };
+		82C374F82514DE7D00E391EE /* EndpointManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C374F42514DC6D00E391EE /* EndpointManagerTests.swift */; };
+		82C374F92514DE8200E391EE /* server.json in Resources */ = {isa = PBXBuildFile; fileRef = 82C374F62514DC7200E391EE /* server.json */; };
+		82C374FB2514DEC700E391EE /* EndpointManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C374FA2514DEC700E391EE /* EndpointManager.swift */; };
 		82E20B1124F652ED0065EFE3 /* AccountInfo+Kotlin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E20B1024F652ED0065EFE3 /* AccountInfo+Kotlin.swift */; };
 		82E20B1224F652ED0065EFE3 /* AccountInfo+Kotlin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E20B1024F652ED0065EFE3 /* AccountInfo+Kotlin.swift */; };
 		82E20B1624F6AA110065EFE3 /* RegionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E20B1524F6AA110065EFE3 /* RegionData.swift */; };
@@ -554,6 +557,9 @@
 		8221922224CEC1E400C24F1C /* InvitesInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitesInformation.swift; sourceTree = "<group>"; };
 		8221922724CEC1ED00C24F1C /* GlossInvitesInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossInvitesInformation.swift; sourceTree = "<group>"; };
 		822BC1CF24BF20C90041BF9A /* UIControl+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Action.swift"; sourceTree = "<group>"; };
+		82C374F42514DC6D00E391EE /* EndpointManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointManagerTests.swift; sourceTree = "<group>"; };
+		82C374F62514DC7200E391EE /* server.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = server.json; sourceTree = "<group>"; };
+		82C374FA2514DEC700E391EE /* EndpointManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointManager.swift; sourceTree = "<group>"; };
 		82E20B1024F652ED0065EFE3 /* AccountInfo+Kotlin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountInfo+Kotlin.swift"; sourceTree = "<group>"; };
 		82E20B1524F6AA110065EFE3 /* RegionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionData.swift; sourceTree = "<group>"; };
 		84125E07213D7DFF001BCC19 /* PIAColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAColors.swift; sourceTree = "<group>"; };
@@ -754,6 +760,7 @@
 		0E3D13DB1F9E28B600434A48 /* WebServices */ = {
 			isa = PBXGroup;
 			children = (
+				82C374FA2514DEC700E391EE /* EndpointManager.swift */,
 				8221922724CEC1ED00C24F1C /* GlossInvitesInformation.swift */,
 				0E392DA21FE3247E0002160D /* Endpoint.swift */,
 				0E3D13D21F9E270A00434A48 /* GlossAccountInfo.swift */,
@@ -1042,6 +1049,8 @@
 		0EE78AFE1F818A20002E4CDD /* PIALibraryTests */ = {
 			isa = PBXGroup;
 			children = (
+				82C374F62514DC7200E391EE /* server.json */,
+				82C374F42514DC6D00E391EE /* EndpointManagerTests.swift */,
 				0EB8C0451F9CCB7C005857E4 /* AccountSignupTests.swift */,
 				0EE78AFF1F818A20002E4CDD /* AccountTests.swift */,
 				0E53A8591FE5E3CD000C2A18 /* MockProviders.swift */,
@@ -1452,6 +1461,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82C374F92514DE8200E391EE /* server.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1853,6 +1863,7 @@
 				DDA184D122FC1F79003239CC /* TermsAndConditionsViewController.swift in Sources */,
 				0E392D7D1FE2E4C10002160D /* MemoryStore.swift in Sources */,
 				0E9D62DD1FDEE45A009A90CF /* DefaultServerProvider.swift in Sources */,
+				82C374FB2514DEC700E391EE /* EndpointManager.swift in Sources */,
 				0EB3D9881FF06F37005B11F4 /* NetworkExtensionProfile.swift in Sources */,
 				0E2ADD311FE1468400BB170C /* VPNProvider.swift in Sources */,
 				0E1108951F77B6B600A92462 /* Keychain.swift in Sources */,
@@ -1937,6 +1948,7 @@
 			files = (
 				0E53A85A1FE5E3CD000C2A18 /* MockProviders.swift in Sources */,
 				841BE60D212AD0F3002EF2D1 /* ValidatorTests.swift in Sources */,
+				82C374F82514DE7D00E391EE /* EndpointManagerTests.swift in Sources */,
 				843C67C22122E714005A3FDA /* AccountInfoTests.swift in Sources */,
 				0EE78B001F818A20002E4CDD /* AccountTests.swift in Sources */,
 				0EA4C4421FDDFD840041C3D8 /* ServerTests.swift in Sources */,

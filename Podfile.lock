@@ -50,11 +50,11 @@ DEPENDENCIES:
   - FXPageControl
   - Gloss (~> 2)
   - lottie-ios
-  - PIAAccountModule (from `https://github.com/pia-foss/mobile-common-account`)
-  - PIARegions (from `https://github.com/pia-foss/mobile-common-regions`, commit `4567597`)
+  - PIAAccountModule (from `https://github.com/pia-foss/mobile-common-account`, commit `98f5dfb`)
+  - PIARegions (from `https://github.com/pia-foss/mobile-common-regions`)
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
   - PopupDialog
-  - ReachabilitySwift
+  - ReachabilitySwift (= 4.3.0)
   - SwiftEntryKit (= 0.7.2)
   - SwiftyBeaver (~> 1.7.0)
   - TunnelKit (from `https://github.com/pia-foss/tunnelkit`, commit `d19b9de`)
@@ -76,9 +76,9 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIAAccountModule:
+    :commit: 98f5dfb
     :git: https://github.com/pia-foss/mobile-common-account
   PIARegions:
-    :commit: '4567597'
     :git: https://github.com/pia-foss/mobile-common-regions
   PIAWireguard:
     :git: https://github.com/pia-foss/ios-wireguard
@@ -88,10 +88,10 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PIAAccountModule:
-    :commit: 98f5dfb4d8569fbbef6932d495a4e0772e537d02
+    :commit: 98f5dfb
     :git: https://github.com/pia-foss/mobile-common-account
   PIARegions:
-    :commit: '4567597'
+    :commit: 4567597c4cd228b3bf23ad7a478150326a979f3d
     :git: https://github.com/pia-foss/mobile-common-regions
   PIAWireguard:
     :commit: 10ddb6b3e79b695358d4fa58a85d663039f7509e
@@ -118,6 +118,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 71ddb979a98328a2d6e24c9a9ade0498e2dd89b6
+PODFILE CHECKSUM: 5007c9c0fcc7ed5e368a6f181d000a75b07551c1
 
 COCOAPODS: 1.9.3
