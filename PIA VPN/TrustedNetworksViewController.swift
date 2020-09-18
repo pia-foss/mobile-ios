@@ -217,7 +217,7 @@ extension TrustedNetworksViewController: UICollectionViewDelegateFlowLayout, UIC
 
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Cells.header, for: indexPath) as! NetworkHeaderCollectionViewCell
-            headerView.setup(withTitle: "Manage automation", andSubtitle: "Configure how PIA behaves on connection to WiFi or Cellular networks. This excludes disconnecting manually.")
+            headerView.setup(withTitle: L10n.Network.Management.Tool.title, andSubtitle: L10n.Settings.Hotspothelper.description)
             return headerView
 
         default:
