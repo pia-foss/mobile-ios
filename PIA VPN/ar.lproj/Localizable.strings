@@ -136,6 +136,17 @@
 "menu.renewal.purchase" = "شراء";
 "menu.renewal.renew" = "تجديد";
 "menu.renewal.title" = "تجديد";
+"network.management.tool.add.rule" = "إضافة قاعدة جديدة";
+"network.management.tool.alert" = "تم تكوين إعدادات الأتمتة لقطع اتصال VPN في ظل ظروف الشبكة الحالية. تم تمكين VPN وسيتم الاتصال بها أو قطع الاتصال بها تلقائيًا إذا قمت بالتبديل إلى شبكة مختلفة.";
+"network.management.tool.always.connect" = "اتصال بـ VPN دائمًا";
+"network.management.tool.always.disconnect" = "قطع اتصال VPN دائمًا";
+"network.management.tool.choose.wifi" = "اختر شبكة WiFi لإضافة قاعدة جديدة. ";
+"network.management.tool.disable" = "تعطيل الأتمتة";
+"network.management.tool.mobile.data" = "بيانات الموبايل";
+"network.management.tool.open.wifi" = "فتح WiFi";
+"network.management.tool.retain.state" = "احتفاظ بحالة VPN";
+"network.management.tool.secure.wifi" = "تأمين WiFi";
+"network.management.tool.title" = "أتمتة الإدارة";
 "notifications.disabled.message" = "قم بتمكين الإعلامات لكي يتم تذكيرك بتجديد اشتراكك قبل انتهائه.";
 "notifications.disabled.settings" = "الإعدادات";
 "notifications.disabled.title" = "تم تعطيل الإشعارات";

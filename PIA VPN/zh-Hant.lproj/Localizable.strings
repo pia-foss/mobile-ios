@@ -136,6 +136,17 @@
 "menu.renewal.purchase" = "購買";
 "menu.renewal.renew" = "續約";
 "menu.renewal.title" = "續訂";
+"network.management.tool.add.rule" = "加入新規則";
+"network.management.tool.alert" = "在目前的網路狀況下，您的自動功能設定已設為解除 VPN 連線。若切換成不同網路，VPN 將啟用並自動連線或解除連線。";
+"network.management.tool.always.connect" = "永遠連線至 VPN";
+"network.management.tool.always.disconnect" = "永遠解除 VPN 連線";
+"network.management.tool.choose.wifi" = "選擇 WiFi 網路以加入新規則。 ";
+"network.management.tool.disable" = "停用自動功能";
+"network.management.tool.mobile.data" = "行動數據";
+"network.management.tool.open.wifi" = "開啟 WiFi";
+"network.management.tool.retain.state" = "保留 VPN 狀態";
+"network.management.tool.secure.wifi" = "安全 WiFi";
+"network.management.tool.title" = "管理自動功能";
 "notifications.disabled.message" = "啟用通知功能以在您的訂購計劃屆滿前收到續約提示。";
 "notifications.disabled.settings" = "設定";
 "notifications.disabled.title" = "通知功能已停用";
@@ -206,7 +217,7 @@
 "settings.encryption.digest.title" = "資料驗證";
 "settings.encryption.handshake.title" = "Handshake";
 "settings.encryption.title" = "加密";
-"settings.geo.servers.description" = "包括地理位置區域";
+"settings.geo.servers.description" = "包括地理定位區域";
 "settings.hotspothelper.all.description" = "VPN WiFi 保護功能將在所有網路上啟動，包括信任網路。";
 "settings.hotspothelper.all.title" = "保護所有網路";
 "settings.hotspothelper.available.add.help" = "點一下「+」可新增為信任網路。";
@@ -214,7 +225,7 @@
 "settings.hotspothelper.cellular.description" = "如果啟用此選項，當您連接行動網路時，PIA 將自動啟動 VPN。";
 "settings.hotspothelper.cellular.networks" = "行動網路";
 "settings.hotspothelper.cellular.title" = "保護行動網路";
-"settings.hotspothelper.description" = "配置 PIA 在連接 WiFi 或行動網路時所執行的操作。不涵蓋手動解除連線。";
+"settings.hotspothelper.description" = "配置 PIA 在與 WiFi 或行動網路連線時所執行的操作。不含手動解除連線。";
 "settings.hotspothelper.enable.description" = "如果停用此選項，當您連接非信任 WiFi 網路時，PIA 將自動啟動 VPN。";
 "settings.hotspothelper.rules.title" = "規則";
 "settings.hotspothelper.title" = "網路管理工具";

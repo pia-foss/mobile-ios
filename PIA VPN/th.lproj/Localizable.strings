@@ -136,6 +136,17 @@
 "menu.renewal.purchase" = "ซื้อ";
 "menu.renewal.renew" = "ต่ออายุ";
 "menu.renewal.title" = "การต่ออายุ";
+"network.management.tool.add.rule" = "เพิ่มกฎใหม่";
+"network.management.tool.alert" = "การตั้งค่าอัตโนมัติของคุณถูกกำหนดค่าให้ยกเลิกการเชื่อมต่อ VPN ภายใต้เงื่อนไขเครือข่ายปัจจุบัน VPN ถูกเปิดใช้งานและจะเชื่อมต่อหรือตัดการเชื่อมต่อโดยอัตโนมัติหากคุณเปลี่ยนไปใช้เครือข่ายอื่น";
+"network.management.tool.always.connect" = "เชื่อมต่อ VPN ทุกครั้ง";
+"network.management.tool.always.disconnect" = "เลิกเชื่อมต่อ VPN ทุกครั้ง";
+"network.management.tool.choose.wifi" = "เลือกเครือข่าย WiFi เพื่อเพิ่มกฎใหม่ ";
+"network.management.tool.disable" = "ปิดใช้งานระบบอัตโนมัติ";
+"network.management.tool.mobile.data" = "ข้อมูลมือถือ";
+"network.management.tool.open.wifi" = "เปิด WiFi";
+"network.management.tool.retain.state" = "รักษาสถานะ VPN";
+"network.management.tool.secure.wifi" = "WiFi ที่ปลอดภัย";
+"network.management.tool.title" = "จัดการระบบอัตโนมัติ";
 "notifications.disabled.message" = "เปิดการแจ้งเตือนเพื่อรับคำเตือนเพื่อต่ออายุสมาชิกก่อนหมดอายุ";
 "notifications.disabled.settings" = "ตั้งค่า";
 "notifications.disabled.title" = "การแจ้งเตือนถูกปิดอยู่";
@@ -214,7 +225,7 @@
 "settings.hotspothelper.cellular.description" = "PIA เปิดใช้งาน VPN โดยอัตโนมัติเมื่อเชื่อมต่อกับเครือข่ายเซลลูลาร์หากตัวเลือกนี้ถูกเปิดใช้งาน";
 "settings.hotspothelper.cellular.networks" = "เครือข่ายเซลลูลาร์";
 "settings.hotspothelper.cellular.title" = "ปกป้องเครือข่ายเซลลูลาร์";
-"settings.hotspothelper.description" = "กำหนดค่าวิธีการทำงานของ PIA ในการเชื่อมต่อกับ WiFi หรือเครือข่ายเซลลูลาร์ ซึ่งไม่ได้รวมกับการยกเลิกการเชื่อมต่อด้วยมือ";
+"settings.hotspothelper.description" = "กำหนดค่าวิธีการทำงานของ PIA ในการเชื่อมต่อกับ WiFi หรือเครือข่ายเซลลูลาร์ ซึ่งไม่ได้รวมกับการยกเลิกการเชื่อมต่อด้วยตนเอง";
 "settings.hotspothelper.enable.description" = "PIA จะเปิดใช้งาน VPN โดยอัตโนมัติเมื่อเชื่อมต่อกับเครือข่าย WiFi ที่ไม่น่าเชื่อถือหากเปิดใช้งานตัวเลือกนี้";
 "settings.hotspothelper.rules.title" = "กฎระเบียบ";
 "settings.hotspothelper.title" = "เครื่องมือจัดการเครือข่าย";

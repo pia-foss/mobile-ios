@@ -136,6 +136,17 @@
 "menu.renewal.purchase" = "Køb";
 "menu.renewal.renew" = "Forny";
 "menu.renewal.title" = "Fornyelse";
+"network.management.tool.add.rule" = "Tilføj ny regel";
+"network.management.tool.alert" = "Dine automatiseringsindstillinger er konfigureret til at afbryde VPN under de aktuelle netværksforhold. VPN er aktiveret og opretter automatisk forbindelse eller afbrydelse, hvis du skifter til et andet netværk.";
+"network.management.tool.always.connect" = "Forbind altid VPN";
+"network.management.tool.always.disconnect" = "Afbryd altid VPN";
+"network.management.tool.choose.wifi" = "Vælg et wifi-netværk for at tilføje en ny regel. ";
+"network.management.tool.disable" = "Deaktiver automatisering";
+"network.management.tool.mobile.data" = "Mobildata";
+"network.management.tool.open.wifi" = "Åbn wifi";
+"network.management.tool.retain.state" = "Bevar VPN-tilstand";
+"network.management.tool.secure.wifi" = "Sikker wifi";
+"network.management.tool.title" = "Administrer automatisering";
 "notifications.disabled.message" = "Aktiver underretninger for at få en påmindelse om at forny dit abonnement, før det udløber.";
 "notifications.disabled.settings" = "Indstillinger";
 "notifications.disabled.title" = "Underretninger deaktiveret";

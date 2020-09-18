@@ -136,6 +136,17 @@
 "menu.renewal.purchase" = "購入";
 "menu.renewal.renew" = "更新";
 "menu.renewal.title" = "更新";
+"network.management.tool.add.rule" = "新しいルールを追加する";
+"network.management.tool.alert" = "自動化設定は、現在のネットワーク条件下でVPNを切断するように構成されています。 VPNは有効になっており、別のネットワークに切り替えると自動的に接続または切断されます。";
+"network.management.tool.always.connect" = "常にVPNを接続する";
+"network.management.tool.always.disconnect" = "常にVPNを切断する";
+"network.management.tool.choose.wifi" = "新しいルールを追加するWiFiネットワークを選択してください。 ";
+"network.management.tool.disable" = "自動化を無効にする";
+"network.management.tool.mobile.data" = "モバイルデータ";
+"network.management.tool.open.wifi" = "オープン状態のWiFi";
+"network.management.tool.retain.state" = "VPN状態を保持する";
+"network.management.tool.secure.wifi" = "安全なWiFi";
+"network.management.tool.title" = "自動化を管理する";
 "notifications.disabled.message" = "通知を有効にし、期限が切れる前にサブスクリプション更新のリマインダーを受け取りましょう。";
 "notifications.disabled.settings" = "設定";
 "notifications.disabled.title" = "通知が無効にされました";

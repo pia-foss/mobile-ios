@@ -136,6 +136,17 @@
 "menu.renewal.purchase" = "Kopen";
 "menu.renewal.renew" = "Vernieuwen";
 "menu.renewal.title" = "Vernieuwing";
+"network.management.tool.add.rule" = "Nieuwe regel toevoegen";
+"network.management.tool.alert" = "Uw automatiseringsinstellingen zijn zo geconfigureerd dat de VPN onder de huidige netwerkomstandigheden wordt uitgeschakeld. De VPN is ingeschakeld en maakt automatisch verbinding of verbreekt automatisch de verbinding als u naar een ander netwerk overschakelt.";
+"network.management.tool.always.connect" = "Altijd verbinden met VPN";
+"network.management.tool.always.disconnect" = "VPN-verbinding altijd verbreken";
+"network.management.tool.choose.wifi" = "Kies een wifi-netwerk om een nieuwe regel toe te voegen. ";
+"network.management.tool.disable" = "Automatisering uitschakelen";
+"network.management.tool.mobile.data" = "Mobiele gegevens";
+"network.management.tool.open.wifi" = "Wifi openen";
+"network.management.tool.retain.state" = "VPN-status behouden";
+"network.management.tool.secure.wifi" = "Veilige wifi";
+"network.management.tool.title" = "Automatisering beheren";
 "notifications.disabled.message" = "Schakel meldingen in om een herinnering te ontvangen om uw abonnement te vernieuwen als het bijna is verlopen.";
 "notifications.disabled.settings" = "Instellingen";
 "notifications.disabled.title" = "Meldingen uitgeschakeld";

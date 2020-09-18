@@ -73,9 +73,12 @@ PODS:
   - nanopb/encode (0.3.9011)
   - OpenSSL-Apple (1.1.1d.5a)
   - PIAAccountModule (1.0.0):
+    - PIAAccountModule/account (= 1.0.0)
     - PIAAccountModule/gradle (= 1.0.0)
+  - PIAAccountModule/account (1.0.0)
   - PIAAccountModule/gradle (1.0.0)
-  - PIALibrary/Core (2.8.0)
+  - PIALibrary/Core (2.8.0):
+    - PIAAccountModule
   - PIALibrary/Library (2.8.0):
     - Alamofire (~> 4)
     - Gloss (~> 2)
@@ -101,13 +104,13 @@ PODS:
     - PIALibrary/Library
     - PIAWireguard
     - TunnelKit
-  - PIARegions (1.0.5):
-    - PIARegions/Core (= 1.0.5)
-    - PIARegions/gradle (= 1.0.5)
-    - PIARegions/regions (= 1.0.5)
-  - PIARegions/Core (1.0.5)
-  - PIARegions/gradle (1.0.5)
-  - PIARegions/regions (1.0.5)
+  - PIARegions (1.0.6):
+    - PIARegions/Core (= 1.0.6)
+    - PIARegions/gradle (= 1.0.6)
+    - PIARegions/regions (= 1.0.6)
+  - PIARegions/Core (1.0.6)
+  - PIARegions/gradle (1.0.6)
+  - PIARegions/regions (1.0.6)
   - PIAWireguard (1.0.1):
     - PIAWireguard/AppExtension (= 1.0.1)
     - PIAWireguard/Core (= 1.0.1)
@@ -147,11 +150,11 @@ DEPENDENCIES:
   - Fabric
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
-  - PIAAccountModule (from `/Users/jose/Projects/PIA/account`)
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `6304023`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `6304023`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `6304023`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `6304023`)
+  - PIAAccountModule (from `https://github.com/pia-foss/mobile-common-account`, commit `98f5dfb`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `637ed7e`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `637ed7e`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `637ed7e`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `637ed7e`)
   - PIARegions (from `https://github.com/pia-foss/mobile-common-regions`)
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
   - Popover
@@ -195,9 +198,10 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIAAccountModule:
-    :path: "/Users/jose/Projects/PIA/account"
+    :commit: 98f5dfb
+    :git: https://github.com/pia-foss/mobile-common-account
   PIALibrary:
-    :commit: '6304023'
+    :commit: 637ed7e
     :git: https://github.com/pia-foss/client-library-apple
   PIARegions:
     :git: https://github.com/pia-foss/mobile-common-regions
@@ -208,11 +212,14 @@ EXTERNAL SOURCES:
     :git: https://github.com/pia-foss/tunnelkit
 
 CHECKOUT OPTIONS:
+  PIAAccountModule:
+    :commit: 98f5dfb
+    :git: https://github.com/pia-foss/mobile-common-account
   PIALibrary:
-    :commit: '6304023'
+    :commit: 637ed7e
     :git: https://github.com/pia-foss/client-library-apple
   PIARegions:
-    :commit: 39c520907623b92cdbaebf9613275e258faa2f2f
+    :commit: 4567597c4cd228b3bf23ad7a478150326a979f3d
     :git: https://github.com/pia-foss/mobile-common-regions
   PIAWireguard:
     :commit: 10ddb6b3e79b695358d4fa58a85d663039f7509e
@@ -242,9 +249,9 @@ SPEC CHECKSUMS:
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
-  PIAAccountModule: 81192ef71f6d8dd54f7850000902f9fb33ee7568
-  PIALibrary: d56c4c982bd0d0ec554b6c07af9beca5e94534f2
-  PIARegions: 9590d17d28998b006e7db044decc29cd9470ecb8
+  PIAAccountModule: 99b8629a86f4852d4ddd9c2506dbc37e7852e08a
+  PIALibrary: cd7dd2f82a8fe4065d49d5521df27941832b3500
+  PIARegions: ee8493cb3e713211f04be3da5189849eb290065b
   PIAWireguard: 9d71dabc9e483b149236eebbd0e6bb8fa5c8317f
   Popover: 10e1d9528f81d9504df984b7b3f491292bc1822d
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
@@ -257,6 +264,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 30d58dbbddda9f0b8d7ca9d88050c30d4fd956fb
+PODFILE CHECKSUM: c5018ec526f0b73b4fa6632b273b331c5255da55
 
 COCOAPODS: 1.9.3

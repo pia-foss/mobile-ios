@@ -136,6 +136,17 @@
 "menu.renewal.purchase" = "Comprar";
 "menu.renewal.renew" = "Renovar";
 "menu.renewal.title" = "Renovación";
+"network.management.tool.add.rule" = "Añadir nueva regla";
+"network.management.tool.alert" = "Los ajustes de automatización están configurados para desconectar la VPN en las condiciones de red actuales. La VPN está habilitada y se conectará o desconectará automáticamente si cambias a una red diferente.";
+"network.management.tool.always.connect" = "Conectar VPN siempre";
+"network.management.tool.always.disconnect" = "Desconectar VPN siempre";
+"network.management.tool.choose.wifi" = "Escoge una red wifi para agregar una nueva regla.";
+"network.management.tool.disable" = "Deshabilitar automatización";
+"network.management.tool.mobile.data" = "Datos móviles";
+"network.management.tool.open.wifi" = "Abrir wifi";
+"network.management.tool.retain.state" = "Conservar el estado del VPN";
+"network.management.tool.secure.wifi" = "Wifi segura";
+"network.management.tool.title" = "Gestionar automatización";
 "notifications.disabled.message" = "Activa las notificaciones para recibir un recordatorio y renovar tu suscripción antes de que expire.";
 "notifications.disabled.settings" = "Configuración";
 "notifications.disabled.title" = "Notificaciones desactivadas";

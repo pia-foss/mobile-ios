@@ -136,6 +136,17 @@
 "menu.renewal.purchase" = "Zakup";
 "menu.renewal.renew" = "Odśwież";
 "menu.renewal.title" = "Odnowienie";
+"network.management.tool.add.rule" = "Dodaj nową zasadę";
+"network.management.tool.alert" = "Twoja konfiguracja ustawień automatyzacji przewiduje odłączenie VPN w obecnych warunkach sieciowych. VPN jest jest uruchomiona i połączy lub rozłączy się automatycznie, gdy przełączysz się na inną sieć.";
+"network.management.tool.always.connect" = "Zawsze łącz Z VPN";
+"network.management.tool.always.disconnect" = "Zawsze odłączaj VPN";
+"network.management.tool.choose.wifi" = "Wybierz sieć WiFi, do której dodasz nową zasadę. ";
+"network.management.tool.disable" = "Wyłącz automatyzację";
+"network.management.tool.mobile.data" = "Dane mobilne";
+"network.management.tool.open.wifi" = "Otwórz WiFi";
+"network.management.tool.retain.state" = "Utrzymaj stan VPN";
+"network.management.tool.secure.wifi" = "Bezpieczny WiFI";
+"network.management.tool.title" = "Zarządzaj automatyzacją";
 "notifications.disabled.message" = "Włącz powiadomienia, aby otrzymywać przypomnienia o konieczności odnowienia subskrypcji przed jej wygaśnięciem.";
 "notifications.disabled.settings" = "Ustawienia";
 "notifications.disabled.title" = "Wyłączono powiadomienia";
@@ -214,7 +225,7 @@
 "settings.hotspothelper.cellular.description" = "PIA Automatycznie włącza VPN przy łączeniu z sieciami komórkowymi, jeśli ta opcja jest włączona.";
 "settings.hotspothelper.cellular.networks" = "Sieci komórkowe";
 "settings.hotspothelper.cellular.title" = "Ochrona połączeń w Sieciach komórkowych";
-"settings.hotspothelper.description" = "Skonfiguruj zachowanie PIA przy łączeniu z się sieciami komórkowymi.Ta czynność wyklucza możliwość ręcznego rozłączenia";
+"settings.hotspothelper.description" = "Skonfiguruj zachowanie PIA przy łączeniu z WiFI lub sieci komórkowe.Ta czynność wyklucza możliwość ręcznego rozłączenia";
 "settings.hotspothelper.enable.description" = "Ochrona V PN automatycznie uruchamia VPN przy łączeniu z niezaufanymi sieciami WiFi, i, jeśli ta opcja jest włączona.";
 "settings.hotspothelper.rules.title" = "Reguły";
 "settings.hotspothelper.title" = "Narzędzie zarządzania sieciami";

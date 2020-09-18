@@ -136,6 +136,17 @@
 "menu.renewal.purchase" = "Acheter";
 "menu.renewal.renew" = "Renouveler";
 "menu.renewal.title" = "Renouvellement";
+"network.management.tool.add.rule" = "Ajouter une nouvelle règle";
+"network.management.tool.alert" = "Vos paramètres d'automatisation sont configurés pour déconnecter le VPN dans les conditions réseau actuelles. Le VPN est activé et se connectera ou se déconnectera automatiquement si vous passez à un autre réseau.";
+"network.management.tool.always.connect" = "Toujours connecter au VPN";
+"network.management.tool.always.disconnect" = "Toujours déconnecter le VPN";
+"network.management.tool.choose.wifi" = "Choisissez un réseau Wi-Fi pour ajouter une nouvelle règle. ";
+"network.management.tool.disable" = "Désactiver l'automatisation";
+"network.management.tool.mobile.data" = "Données mobiles";
+"network.management.tool.open.wifi" = "Wi-Fi ouvert";
+"network.management.tool.retain.state" = "Conserver l'état du VPN";
+"network.management.tool.secure.wifi" = "Wi-Fi sécurisé";
+"network.management.tool.title" = "Gérer l'automatisation";
 "notifications.disabled.message" = "Activez les notifications pour recevoir un rappel lorsque votre adhésion est sur le point d'expirer.";
 "notifications.disabled.settings" = "Paramètres";
 "notifications.disabled.title" = "Notifications désactivées";
@@ -214,7 +225,7 @@
 "settings.hotspothelper.cellular.description" = "PIA active automatiquement le VPN quand vous vous connectez à des réseaux cellulaires si cette option est activée.";
 "settings.hotspothelper.cellular.networks" = "Réseaux cellulaires";
 "settings.hotspothelper.cellular.title" = "Protéger les réseaux cellulaires";
-"settings.hotspothelper.description" = "Configurez le comportement de PIA avec des connexions WiFi ou sur des réseaux cellulaires, hormis déconnexion manuelle.";
+"settings.hotspothelper.description" = "Configurez le comportement de PIA avec des connexions Wi-Fi ou sur des réseaux cellulaires, hormis déconnexion manuelle.";
 "settings.hotspothelper.enable.description" = "PIA active automatiquement le VPN quand vous vous connectez à des réseaux WiFi inconnus si cette option est activée.";
 "settings.hotspothelper.rules.title" = "Règles";
 "settings.hotspothelper.title" = "Outil de gestion du réseau";

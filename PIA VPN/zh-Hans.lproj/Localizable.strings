@@ -136,6 +136,17 @@
 "menu.renewal.purchase" = "购买";
 "menu.renewal.renew" = "续期";
 "menu.renewal.title" = "续订";
+"network.management.tool.add.rule" = "添加新规则";
+"network.management.tool.alert" = "您的自动化设置已配置为：在当前网络条件下断开 VPN。VPN 已启用，如果您切换到其他网络，将自动连接或断开。";
+"network.management.tool.always.connect" = "始终连接 VPN";
+"network.management.tool.always.disconnect" = "始终断开 VPN";
+"network.management.tool.choose.wifi" = "选择 WiFi 网络以添加新规则。";
+"network.management.tool.disable" = "禁用自动化";
+"network.management.tool.mobile.data" = "移动数据";
+"network.management.tool.open.wifi" = "打开 WiFi";
+"network.management.tool.retain.state" = "保留 VPN 状态";
+"network.management.tool.secure.wifi" = "安全 WiFi";
+"network.management.tool.title" = "管理自动化";
 "notifications.disabled.message" = "启用通知，以便在订阅到期前得到续订提醒。";
 "notifications.disabled.settings" = "设置";
 "notifications.disabled.title" = "通知已禁用";

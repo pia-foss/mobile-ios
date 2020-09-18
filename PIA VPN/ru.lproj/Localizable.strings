@@ -136,6 +136,17 @@
 "menu.renewal.purchase" = "Купить";
 "menu.renewal.renew" = "Обновить";
 "menu.renewal.title" = "Продление";
+"network.management.tool.add.rule" = "Добавить новое правило";
+"network.management.tool.alert" = "Ваши параметры автоматизации настроены на отключение от VPN для данных условий сети. VPN активирован и будет подключаться или отключаться автоматически при переключении на другую сеть.";
+"network.management.tool.always.connect" = "Всегда подключать VPN";
+"network.management.tool.always.disconnect" = "Всегда отключать VPN";
+"network.management.tool.choose.wifi" = "Выберите Wi-Fi сеть, чтобы добавить новое правило. ";
+"network.management.tool.disable" = "Отключить автоматизацию";
+"network.management.tool.mobile.data" = "Мобильная сеть";
+"network.management.tool.open.wifi" = "Открытая сеть WiFi";
+"network.management.tool.retain.state" = "Сохранять статус VPN";
+"network.management.tool.secure.wifi" = "Защищенная сеть WiFi";
+"network.management.tool.title" = "Настроить автоматизацию";
 "notifications.disabled.message" = "Включить уведомления с напоминаниями о необходимости возобновить подписку до истечения срока ее действия.";
 "notifications.disabled.settings" = "Настройки";
 "notifications.disabled.title" = "Уведомления отключены";

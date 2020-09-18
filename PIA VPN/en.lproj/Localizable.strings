@@ -256,6 +256,8 @@
 "network.management.tool.add.rule" = "Add new rule";
 "network.management.tool.choose.wifi" = "Choose a WiFi network to add a new rule. ";
 "network.management.tool.title" = "Manage automation";
+"network.management.tool.alert" = "Your automation settings are configured to disconnect the VPN under the current network conditions. The VPN is enabled and will connect or disconnect automatically if you switch to a different network.";
+"network.management.tool.disable" = "Disable automation";
 
 // REGION
 

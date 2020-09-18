@@ -136,6 +136,17 @@
 "menu.renewal.purchase" = "Comprar";
 "menu.renewal.renew" = "Renovar";
 "menu.renewal.title" = "Renovação";
+"network.management.tool.add.rule" = "Adicionar nova regra";
+"network.management.tool.alert" = "Suas configurações de automação estão definidas para desconectar a VPN nas condições de rede atuais. A VPN está ativada e será conectada ou desconectada automaticamente se você mudar para uma rede diferente.";
+"network.management.tool.always.connect" = "Sempre conectar a VPN";
+"network.management.tool.always.disconnect" = "Sempre desconectar a VPN";
+"network.management.tool.choose.wifi" = "Escolha uma rede Wi-Fi para adicionar uma nova regra.";
+"network.management.tool.disable" = "Desativar automação";
+"network.management.tool.mobile.data" = "Dados móveis";
+"network.management.tool.open.wifi" = "Abrir Wi-Fi";
+"network.management.tool.retain.state" = "Manter status da VPN";
+"network.management.tool.secure.wifi" = "Rede Wi-Fi segura";
+"network.management.tool.title" = "Gerenciar automação";
 "notifications.disabled.message" = "Ative as notificações para receber um lembrete de renovação da sua assinatura antes da expiração.";
 "notifications.disabled.settings" = "Ajustes";
 "notifications.disabled.title" = "Notificações desativadas";
@@ -214,7 +225,7 @@
 "settings.hotspothelper.cellular.description" = "O PIA ativa a rede VPN automaticamente ao conectar-se a redes celulares se esta opção estiver ativada.";
 "settings.hotspothelper.cellular.networks" = "Redes celulares";
 "settings.hotspothelper.cellular.title" = "Proteção em redes celulares";
-"settings.hotspothelper.description" = "Configure o comportamento do PIA para conexões em redes WiFi ou celular. Isso exclui a desconexão manual.";
+"settings.hotspothelper.description" = "Configure como a PIA se comportará na conexão com redes Wi-Fi ou celulares. Isso exclui uma desconexão manual.";
 "settings.hotspothelper.enable.description" = "O PIA ativa a rede VPN automaticamente ao conectar-se a redes WiFi não confiáveis se esta opção estiver desativada.";
 "settings.hotspothelper.rules.title" = "Regras";
 "settings.hotspothelper.title" = "Ferramenta de gestão de rede";

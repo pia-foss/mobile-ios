@@ -455,6 +455,10 @@ internal enum L10n {
   internal enum Network {
     internal enum Management {
       internal enum Tool {
+        /// Your automation settings are configured to disconnect the VPN under the current network conditions. The VPN is enabled and will connect or disconnect automatically if you switch to a different network.
+        internal static let alert = L10n.tr("Localizable", "network.management.tool.alert")
+        /// Disable automation
+        internal static let disable = L10n.tr("Localizable", "network.management.tool.disable")
         /// Manage automation
         internal static let title = L10n.tr("Localizable", "network.management.tool.title")
         internal enum Add {
