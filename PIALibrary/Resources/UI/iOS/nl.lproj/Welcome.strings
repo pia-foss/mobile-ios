@@ -19,6 +19,8 @@
 "login.error.title" = "Inloggen";
 "login.error.unauthorized" = "Uw gebruikersnaam of wachtwoord is onjuist.";
 "login.error.validation" = "U moet een gebruikersnaam en wachtwoord invoeren.";
+"login.magic.link.response" = "Controleer uw e-mail voor een inloglink.";
+"login.magic.link.title" = "Log in met de magische link in uw e-mail";
 "login.password.placeholder" = "Wachtwoord";
 "login.receipt.button" = "Inloggen met aankoopbewijs";
 "login.restore.button" = "Geen accountgegevens ontvangen?";
@@ -42,6 +44,7 @@
 "purchase.error.validation" = "U moet een e-mailadres invoeren";
 "purchase.login.button" = "Aanmelden";
 "purchase.login.footer" = "Heeft u al een account?";
+"purchase.or" = "of";
 "purchase.submit" = "Versturen";
 "purchase.subtitle" = "30 dagen lang niet-goed-geld-teruggarantie";
 "purchase.title" = "Selecteer een VPN-abonnement";

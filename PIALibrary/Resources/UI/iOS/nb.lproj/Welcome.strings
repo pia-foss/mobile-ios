@@ -19,6 +19,8 @@
 "login.error.title" = "Logg på";
 "login.error.unauthorized" = "Brukernavnet eller passordet ditt er feil.";
 "login.error.validation" = "Du må oppgi et brukernavn og passord.";
+"login.magic.link.response" = "Sjekk e-posten din for å finne påloggingskoblingen.";
+"login.magic.link.title" = "Pålogging med magisk e-postkobling";
 "login.password.placeholder" = "Passord";
 "login.receipt.button" = "Logg på med kjøpsbevis";
 "login.restore.button" = "Har du ikke fått kontodetaljene?";
@@ -42,8 +44,9 @@
 "purchase.error.validation" = "Du må angi en e-postadresse.";
 "purchase.login.button" = "Logg inn";
 "purchase.login.footer" = "Har du allerede en konto?";
+"purchase.or" = "eller";
 "purchase.submit" = "Send inn";
-"purchase.subtitle" = "Garanti som gir deg pengene tilbake innen 30 dager";
+"purchase.subtitle" = "30 dagers pengene-tilbake-garanti";
 "purchase.title" = "Velg et VPN-abonnement";
 "redeem.accessibility.back" = "Tilbake";
 "redeem.email.placeholder" = "E-postadresse";

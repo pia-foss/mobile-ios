@@ -19,6 +19,8 @@
 "login.error.title" = "Entrar";
 "login.error.unauthorized" = "Seu nome de usuário ou senha está incorreto.";
 "login.error.validation" = "Você deve inserir um nome de usuário e senha.";
+"login.magic.link.response" = "Veja se você recebeu por e-mail um link para fazer login.";
+"login.magic.link.title" = "Faça login usando o link mágico enviado por e-mail";
 "login.password.placeholder" = "Senha";
 "login.receipt.button" = "Faça login usando o recibo de compra";
 "login.restore.button" = "Não recebeu detalhes da conta?";
@@ -42,6 +44,7 @@
 "purchase.error.validation" = "Você precisa inserir um endereço de e-mail.";
 "purchase.login.button" = "Faça login";
 "purchase.login.footer" = "Já tem uma conta?";
+"purchase.or" = "ou";
 "purchase.submit" = "Enviar";
 "purchase.subtitle" = "Garantia do dinheiro de volta em até 30 dias";
 "purchase.title" = "Selecione um plano de VPN";

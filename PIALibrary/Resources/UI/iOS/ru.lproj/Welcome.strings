@@ -19,6 +19,8 @@
 "login.error.title" = "Войти";
 "login.error.unauthorized" = "Неправильное имя пользователя или пароль.";
 "login.error.validation" = "Нужно ввести имя пользователя и пароль.";
+"login.magic.link.response" = "Поищите ссылку для входа в письме.";
+"login.magic.link.title" = "Войти через волшебную ссылку из письма";
 "login.password.placeholder" = "Пароль";
 "login.receipt.button" = "Выполните вход по квитанции о покупке";
 "login.restore.button" = "Не получили данные учетной записи?";
@@ -42,6 +44,7 @@
 "purchase.error.validation" = "Укажите адрес эл. почты.";
 "purchase.login.button" = "Вход";
 "purchase.login.footer" = "Уже есть учетная запись?";
+"purchase.or" = "или";
 "purchase.submit" = "Отправить";
 "purchase.subtitle" = "30-дневная гарантия возврата денег";
 "purchase.title" = "Выберите план VPN";

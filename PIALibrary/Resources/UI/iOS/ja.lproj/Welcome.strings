@@ -19,6 +19,8 @@
 "login.error.title" = "ログイン";
 "login.error.unauthorized" = "ユーザー名またはパスワードが間違っています。";
 "login.error.validation" = "ユーザー名とパスワードを入力してください。";
+"login.magic.link.response" = "ログインリンクについては、メールを確認してください。";
+"login.magic.link.title" = "魔法のメールリンクを使用してログイン";
 "login.password.placeholder" = "パスワード";
 "login.receipt.button" = "購入領収書を使用してログイン";
 "login.restore.button" = "アカウント詳細を受信しませんでしたか？";
@@ -42,6 +44,7 @@
 "purchase.error.validation" = "必ずメールアドレスを入力してください。";
 "purchase.login.button" = "サインイン";
 "purchase.login.footer" = "既にアカウントをお持ちですか？";
+"purchase.or" = "または";
 "purchase.submit" = "送信";
 "purchase.subtitle" = "30日間返金保証";
 "purchase.title" = "VPNプランを選択";

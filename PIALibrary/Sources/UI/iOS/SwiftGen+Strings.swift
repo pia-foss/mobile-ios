@@ -1,10 +1,9 @@
 // swiftlint:disable all
-// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 import Foundation
 
-// swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
+// swiftlint:disable superfluous_disable_command file_length implicit_return
 
 // MARK: - Strings
 
@@ -83,13 +82,13 @@ internal enum L10n {
           internal static let description = L10n.tr("Signup", "purchase.trials.devices.description")
         }
         internal enum Money {
-          /// 7 day money back guarantee
+          /// 30 day money back guarantee
           internal static let back = L10n.tr("Signup", "purchase.trials.money.back")
         }
         internal enum Price {
           /// Then %@
-          internal static func after(_ p1: String) -> String {
-            return L10n.tr("Signup", "purchase.trials.price.after", p1)
+          internal static func after(_ p1: Any) -> String {
+            return L10n.tr("Signup", "purchase.trials.price.after", String(describing: p1))
           }
         }
       }
@@ -108,8 +107,8 @@ internal enum L10n {
     }
     internal enum Success {
       /// Thank you for signing up with us. We have sent your account username and password at your email address at %@
-      internal static func messageFormat(_ p1: String) -> String {
-        return L10n.tr("Signup", "success.message_format", p1)
+      internal static func messageFormat(_ p1: Any) -> String {
+        return L10n.tr("Signup", "success.message_format", String(describing: p1))
       }
       /// GET STARTED
       internal static let submit = L10n.tr("Signup", "success.submit")
@@ -181,8 +180,8 @@ internal enum L10n {
       internal static let ok = L10n.tr("UI", "global.ok")
       internal enum Version {
         /// Version %@ (%@)
-        internal static func format(_ p1: String, _ p2: String) -> String {
-          return L10n.tr("UI", "global.version.format", p1, p2)
+        internal static func format(_ p1: Any, _ p2: Any) -> String {
+          return L10n.tr("UI", "global.version.format", String(describing: p1), String(describing: p2))
         }
       }
     }
@@ -190,8 +189,8 @@ internal enum L10n {
   internal enum Welcome {
     internal enum Agreement {
       /// After the 7 days free trial this subscription automatically renews for %@ unless it is canceled at least 24 hours before the end of the trial period. Your Apple ID account will be charged for renewal within 24 hours before the end of the trial period. You can manage and cancel your subscriptions by going to your App Store account settings after purchase. 7-days trial offer is limited to one 7-days trial offer per user. Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription. All prices include applicable local sales taxes.\n\nSigning up constitutes acceptance of the $1 and the $2.
-      internal static func message(_ p1: String) -> String {
-        return L10n.tr("Welcome", "agreement.message", p1)
+      internal static func message(_ p1: Any) -> String {
+        return L10n.tr("Welcome", "agreement.message", String(describing: p1))
       }
       internal enum Message {
         /// Privacy Policy
@@ -283,6 +282,14 @@ internal enum L10n {
         /// You must enter a username and password.
         internal static let validation = L10n.tr("Welcome", "login.error.validation")
       }
+      internal enum Magic {
+        internal enum Link {
+          /// Please check your e-mail for a login link.
+          internal static let response = L10n.tr("Welcome", "login.magic.link.response")
+          /// Login using magic email link
+          internal static let title = L10n.tr("Welcome", "login.magic.link.title")
+        }
+      }
       internal enum Password {
         /// Password
         internal static let placeholder = L10n.tr("Welcome", "login.password.placeholder")
@@ -304,8 +311,8 @@ internal enum L10n {
       /// Best value
       internal static let bestValue = L10n.tr("Welcome", "plan.best_value")
       /// %@/mo
-      internal static func priceFormat(_ p1: String) -> String {
-        return L10n.tr("Welcome", "plan.price_format", p1)
+      internal static func priceFormat(_ p1: Any) -> String {
+        return L10n.tr("Welcome", "plan.price_format", String(describing: p1))
       }
       internal enum Accessibility {
         /// per month
@@ -317,8 +324,8 @@ internal enum L10n {
       }
       internal enum Yearly {
         /// %@%@ per year
-        internal static func detailFormat(_ p1: String, _ p2: String) -> String {
-          return L10n.tr("Welcome", "plan.yearly.detail_format", p1, p2)
+        internal static func detailFormat(_ p1: Any, _ p2: Any) -> String {
+          return L10n.tr("Welcome", "plan.yearly.detail_format", String(describing: p1), String(describing: p2))
         }
         /// Yearly
         internal static let title = L10n.tr("Welcome", "plan.yearly.title")
@@ -331,14 +338,14 @@ internal enum L10n {
       internal static let or = L10n.tr("Welcome", "purchase.or")
       /// Submit
       internal static let submit = L10n.tr("Welcome", "purchase.submit")
-      /// 7-day money back guarantee
+      /// 30-day money back guarantee
       internal static let subtitle = L10n.tr("Welcome", "purchase.subtitle")
       /// Select a VPN plan
       internal static let title = L10n.tr("Welcome", "purchase.title")
       internal enum Confirm {
         /// You are purchasing the %@ plan
-        internal static func plan(_ p1: String) -> String {
-          return L10n.tr("Welcome", "purchase.confirm.plan", p1)
+        internal static func plan(_ p1: Any) -> String {
+          return L10n.tr("Welcome", "purchase.confirm.plan", String(describing: p1))
         }
         internal enum Form {
           /// Enter your email address
@@ -431,9 +438,15 @@ internal enum L10n {
 
 extension L10n {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
-    let format = NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
+    let format = BundleToken.bundle.localizedString(forKey: key, value: nil, table: table)
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }
 
-private final class BundleToken {}
+// swiftlint:disable convenience_type
+private final class BundleToken {
+  static let bundle: Bundle = {
+    Bundle(for: BundleToken.self)
+  }()
+}
+// swiftlint:enable convenience_type

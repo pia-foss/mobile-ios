@@ -19,6 +19,8 @@
 "login.error.title" = "تسجيل الدخول";
 "login.error.unauthorized" = "اسم المستخدم أو كلمة المرور غير صحيحة.";
 "login.error.validation" = "يجب إدخال اسم المستخدم وكلمة المرور";
+"login.magic.link.response" = "يرجى إلقاء نظرة على بريدك الإلكتروني للحصول على رابط تسجيل الدخول.";
+"login.magic.link.title" = "تسجيل الدخول باستخدام رابط البريد الإلكتروني السحري";
 "login.password.placeholder" = "كلمة المرور";
 "login.receipt.button" = "تسجيل الدخول باستخدام إيصال الشراء";
 "login.restore.button" = "لم تحصل على تفاصيل الحساب؟";
@@ -42,6 +44,7 @@
 "purchase.error.validation" = "يجب إدخال عنوان بريد إلكتروني.";
 "purchase.login.button" = "تسجيل الدخول";
 "purchase.login.footer" = "لديك حساب بالفعل؟";
+"purchase.or" = "أو";
 "purchase.submit" = "إرسال";
 "purchase.subtitle" = "ضمان استرداد المال لمدة 30 أيام";
 "purchase.title" = "حدد خطة VPN";

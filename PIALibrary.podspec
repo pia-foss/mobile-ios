@@ -17,6 +17,7 @@ Pod::Spec.new do |s|
         p.source_files          = "PIALibrary/Sources/Core/**/*.swift"
         #p.osx.exclude_files     = "PIALibrary/Sources/Core/InApp",
         #                          "PIALibrary/Sources/Core/Account/InApp"
+        p.dependency "PIAAccountModule"
     end
 
     s.subspec "Library" do |p|

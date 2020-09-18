@@ -16,6 +16,8 @@
 "login.error.unauthorized" = "Your username or password is incorrect.";
 "login.error.throttled" = "Too many failed login attempts with this username. Please try again later.";
 "login.receipt.button" = "Login using purchase receipt";
+"login.magic.link.title" = "Login using magic email link";
+"login.magic.link.response" = "Please check your e-mail for a login link.";
 
 "purchase.title" = "Select a VPN plan";
 "purchase.subtitle" = "30-day money back guarantee";

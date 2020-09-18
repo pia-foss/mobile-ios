@@ -19,6 +19,8 @@
 "login.error.title" = "登入";
 "login.error.unauthorized" = "您的使用者名稱或密碼不正確。";
 "login.error.validation" = "您必須輸入使用者名稱及密碼。";
+"login.magic.link.response" = "請確認電子信箱是否已收到登入連結。";
+"login.magic.link.title" = "使用神奇的電子郵件連結登入";
 "login.password.placeholder" = "密碼";
 "login.receipt.button" = "使用購買收據登入";
 "login.restore.button" = "收不到帳戶資料？";
@@ -42,6 +44,7 @@
 "purchase.error.validation" = "必須輸入電郵地址。";
 "purchase.login.button" = "登入";
 "purchase.login.footer" = "已有帳號？";
+"purchase.or" = "或";
 "purchase.submit" = "提交";
 "purchase.subtitle" = "30 天退款保證";
 "purchase.title" = "選擇 VPN 方案";
