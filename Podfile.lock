@@ -88,7 +88,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PIAAccountModule:
-    :commit: 98f5dfb4d8569fbbef6932d495a4e0772e537d02
+    :commit: becdbf78d5a3a620355c28bf95a5d2d5fd08f15d
     :git: https://github.com/pia-foss/mobile-common-account
   PIARegions:
     :commit: '4567597'
