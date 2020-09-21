@@ -150,11 +150,11 @@ DEPENDENCIES:
   - Fabric
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
-  - PIAAccountModule (from `https://github.com/pia-foss/mobile-common-account`, commit `98f5dfb`)
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `637ed7e`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `637ed7e`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `637ed7e`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `637ed7e`)
+  - PIAAccountModule (from `https://github.com/pia-foss/mobile-common-account`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `c115fe1`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `c115fe1`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `c115fe1`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `c115fe1`)
   - PIARegions (from `https://github.com/pia-foss/mobile-common-regions`)
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
   - Popover
@@ -198,10 +198,9 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIAAccountModule:
-    :commit: 98f5dfb
     :git: https://github.com/pia-foss/mobile-common-account
   PIALibrary:
-    :commit: 637ed7e
+    :commit: c115fe1
     :git: https://github.com/pia-foss/client-library-apple
   PIARegions:
     :git: https://github.com/pia-foss/mobile-common-regions
@@ -213,10 +212,10 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PIAAccountModule:
-    :commit: 98f5dfb
+    :commit: becdbf78d5a3a620355c28bf95a5d2d5fd08f15d
     :git: https://github.com/pia-foss/mobile-common-account
   PIALibrary:
-    :commit: 637ed7e
+    :commit: c115fe1
     :git: https://github.com/pia-foss/client-library-apple
   PIARegions:
     :commit: 4567597c4cd228b3bf23ad7a478150326a979f3d
@@ -264,6 +263,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: c5018ec526f0b73b4fa6632b273b331c5255da55
+PODFILE CHECKSUM: 47a331e28124579e14e13453c8eca5fbec21f207
 
 COCOAPODS: 1.9.3
