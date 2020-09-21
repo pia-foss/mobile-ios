@@ -137,7 +137,7 @@
 "menu.renewal.renew" = "Renouveler";
 "menu.renewal.title" = "Renouvellement";
 "network.management.tool.add.rule" = "Ajouter une nouvelle règle";
-"network.management.tool.alert" = "Vos paramètres d'automatisation sont configurés pour déconnecter le VPN dans les conditions réseau actuelles. Le VPN est activé et se connectera ou se déconnectera automatiquement si vous passez à un autre réseau.";
+"network.management.tool.alert" = "Vos paramètres d'automatisation sont configurés pour garder le VPN déconnecté dans les conditions réseau actuelles.";
 "network.management.tool.always.connect" = "Toujours connecter au VPN";
 "network.management.tool.always.disconnect" = "Toujours déconnecter le VPN";
 "network.management.tool.choose.wifi" = "Choisissez un réseau Wi-Fi pour ajouter une nouvelle règle. ";

@@ -137,7 +137,7 @@
 "menu.renewal.renew" = "ต่ออายุ";
 "menu.renewal.title" = "การต่ออายุ";
 "network.management.tool.add.rule" = "เพิ่มกฎใหม่";
-"network.management.tool.alert" = "การตั้งค่าอัตโนมัติของคุณถูกกำหนดค่าให้ยกเลิกการเชื่อมต่อ VPN ภายใต้เงื่อนไขเครือข่ายปัจจุบัน VPN ถูกเปิดใช้งานและจะเชื่อมต่อหรือตัดการเชื่อมต่อโดยอัตโนมัติหากคุณเปลี่ยนไปใช้เครือข่ายอื่น";
+"network.management.tool.alert" = "การตั้งค่าอัตโนมัติของคุณถูกกำหนดค่าให้ยกเลิกการเชื่อมต่อ VPN เสมอภายใต้เงื่อนไขเครือข่ายปัจจุบัน";
 "network.management.tool.always.connect" = "เชื่อมต่อ VPN ทุกครั้ง";
 "network.management.tool.always.disconnect" = "เลิกเชื่อมต่อ VPN ทุกครั้ง";
 "network.management.tool.choose.wifi" = "เลือกเครือข่าย WiFi เพื่อเพิ่มกฎใหม่ ";

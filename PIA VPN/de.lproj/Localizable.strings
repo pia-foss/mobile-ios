@@ -137,7 +137,7 @@
 "menu.renewal.renew" = "Verlängern";
 "menu.renewal.title" = "Verlängerung";
 "network.management.tool.add.rule" = "Neue Regel hinzufügen";
-"network.management.tool.alert" = "Ihre Automatisierungseinstellungen sind so konfiguriert, dass die VPN-Verbindung unter den aktuellen Netzwerkbedingungen getrennt wird. Das VPN ist aktiviert und wird automatisch verbunden oder getrennt, wenn Sie zu einem anderen Netzwerk wechseln.";
+"network.management.tool.alert" = "Ihre Automatisierungseinstellungen sind so konfiguriert, dass die VPN-Verbindung unter den aktuellen Netzwerkbedingungen getrennt bleibt.";
 "network.management.tool.always.connect" = "VPN immer verbinden";
 "network.management.tool.always.disconnect" = "VPN-Verbindungen immer trennen";
 "network.management.tool.choose.wifi" = "WLAN-Netzwerk wählen, um eine neue Regel hinzuzufügen. ";

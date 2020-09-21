@@ -137,7 +137,7 @@
 "menu.renewal.renew" = "續約";
 "menu.renewal.title" = "續訂";
 "network.management.tool.add.rule" = "加入新規則";
-"network.management.tool.alert" = "在目前的網路狀況下，您的自動功能設定已設為解除 VPN 連線。若切換成不同網路，VPN 將啟用並自動連線或解除連線。";
+"network.management.tool.alert" = "在目前的網路狀況下，您的自動功能設定已設為保持中斷 VPN 連線。";
 "network.management.tool.always.connect" = "永遠連線至 VPN";
 "network.management.tool.always.disconnect" = "永遠解除 VPN 連線";
 "network.management.tool.choose.wifi" = "選擇 WiFi 網路以加入新規則。 ";

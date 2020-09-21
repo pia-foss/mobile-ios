@@ -137,7 +137,7 @@
 "menu.renewal.renew" = "Odśwież";
 "menu.renewal.title" = "Odnowienie";
 "network.management.tool.add.rule" = "Dodaj nową zasadę";
-"network.management.tool.alert" = "Twoja konfiguracja ustawień automatyzacji przewiduje odłączenie VPN w obecnych warunkach sieciowych. VPN jest jest uruchomiona i połączy lub rozłączy się automatycznie, gdy przełączysz się na inną sieć.";
+"network.management.tool.alert" = "Twoje ustawienia automatyzacji są skonfigurowane tak, aby VPN pozostawała rozłączona w obecnych warunkach sieciowych.";
 "network.management.tool.always.connect" = "Zawsze łącz Z VPN";
 "network.management.tool.always.disconnect" = "Zawsze odłączaj VPN";
 "network.management.tool.choose.wifi" = "Wybierz sieć WiFi, do której dodasz nową zasadę. ";
