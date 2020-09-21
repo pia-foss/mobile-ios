@@ -137,7 +137,7 @@
 "menu.renewal.renew" = "تجديد";
 "menu.renewal.title" = "تجديد";
 "network.management.tool.add.rule" = "إضافة قاعدة جديدة";
-"network.management.tool.alert" = "تم تكوين إعدادات الأتمتة لقطع اتصال VPN في ظل ظروف الشبكة الحالية. تم تمكين VPN وسيتم الاتصال بها أو قطع الاتصال بها تلقائيًا إذا قمت بالتبديل إلى شبكة مختلفة.";
+"network.management.tool.alert" = "تم تكوين إعدادات الأتمتة لإبقاء VPN غير متصلة في ظل ظروف الشبكة الحالية.";
 "network.management.tool.always.connect" = "اتصال بـ VPN دائمًا";
 "network.management.tool.always.disconnect" = "قطع اتصال VPN دائمًا";
 "network.management.tool.choose.wifi" = "اختر شبكة WiFi لإضافة قاعدة جديدة. ";
