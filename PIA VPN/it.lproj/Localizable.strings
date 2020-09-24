@@ -137,7 +137,7 @@
 "menu.renewal.renew" = "Rinnova";
 "menu.renewal.title" = "Rinnovo";
 "network.management.tool.add.rule" = "Aggiungi nuova regola";
-"network.management.tool.alert" = "Le impostazioni d'automazione sono configurate per disconnettere la VPN nelle condizioni di rete attuali. La VPN è abilitata e si connetterà o disconnetterà automaticamente in caso di passaggio a un'altra rete.";
+"network.management.tool.alert" = "Le impostazioni d'automazione sono configurate per mantenere la VPN disconnessa nelle condizioni di rete attuali.";
 "network.management.tool.always.connect" = "Connetti sempre VPN";
 "network.management.tool.always.disconnect" = "Disconnetti sempre VPN";
 "network.management.tool.choose.wifi" = "Scegli una rete WiFi per aggiungere una nuova regola. ";

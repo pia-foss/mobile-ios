@@ -137,7 +137,7 @@
 "menu.renewal.renew" = "Yenile";
 "menu.renewal.title" = "Yenileme";
 "network.management.tool.add.rule" = "Yeni kural ekle";
-"network.management.tool.alert" = "Otomatik işlev ayarlarınız, mevcut ağ koşulları altında VPN'nin bağlantısını kesecek şekilde yapılandırılmış. VPN etkin ve farklı bir ağa geçtiğiniz takdirde otomatik olarak bağlanacak ya da bağlantısı kesilecek.";
+"network.management.tool.alert" = "Otomatik işlev ayarlarınız, mevcut ağ koşulları altında VPN'nin bağlantısını kesik tutacak şekilde yapılandırılmış.";
 "network.management.tool.always.connect" = "Daima VPN'ye bağlan";
 "network.management.tool.always.disconnect" = "Daima VPN bağlantısını kes";
 "network.management.tool.choose.wifi" = "Yeni kural eklemek için bir WiFi ağı seçin. ";

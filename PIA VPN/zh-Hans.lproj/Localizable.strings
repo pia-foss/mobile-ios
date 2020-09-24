@@ -137,7 +137,7 @@
 "menu.renewal.renew" = "续期";
 "menu.renewal.title" = "续订";
 "network.management.tool.add.rule" = "添加新规则";
-"network.management.tool.alert" = "您的自动化设置已配置为：在当前网络条件下断开 VPN。VPN 已启用，如果您切换到其他网络，将自动连接或断开。";
+"network.management.tool.alert" = "您的自动化设置已配置为：在当前网络条件下保持 VPN 断开。";
 "network.management.tool.always.connect" = "始终连接 VPN";
 "network.management.tool.always.disconnect" = "始终断开 VPN";
 "network.management.tool.choose.wifi" = "选择 WiFi 网络以添加新规则。";

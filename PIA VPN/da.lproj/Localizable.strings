@@ -137,7 +137,7 @@
 "menu.renewal.renew" = "Forny";
 "menu.renewal.title" = "Fornyelse";
 "network.management.tool.add.rule" = "Tilføj ny regel";
-"network.management.tool.alert" = "Dine automatiseringsindstillinger er konfigureret til at afbryde VPN under de aktuelle netværksforhold. VPN er aktiveret og opretter automatisk forbindelse eller afbrydelse, hvis du skifter til et andet netværk.";
+"network.management.tool.alert" = "Dine automatiseringsindstillinger er konfigureret til at holde VPN'en afbrudt under de aktuelle netværksforhold.";
 "network.management.tool.always.connect" = "Forbind altid VPN";
 "network.management.tool.always.disconnect" = "Afbryd altid VPN";
 "network.management.tool.choose.wifi" = "Vælg et wifi-netværk for at tilføje en ny regel. ";

@@ -137,7 +137,7 @@
 "menu.renewal.renew" = "Vernieuwen";
 "menu.renewal.title" = "Vernieuwing";
 "network.management.tool.add.rule" = "Nieuwe regel toevoegen";
-"network.management.tool.alert" = "Uw automatiseringsinstellingen zijn zo geconfigureerd dat de VPN onder de huidige netwerkomstandigheden wordt uitgeschakeld. De VPN is ingeschakeld en maakt automatisch verbinding of verbreekt automatisch de verbinding als u naar een ander netwerk overschakelt.";
+"network.management.tool.alert" = "Uw automatiseringsinstellingen zijn zo geconfigureerd dat de VPN onder de huidige netwerkomstandigheden uitgeschakeld blijft.";
 "network.management.tool.always.connect" = "Altijd verbinden met VPN";
 "network.management.tool.always.disconnect" = "VPN-verbinding altijd verbreken";
 "network.management.tool.choose.wifi" = "Kies een wifi-netwerk om een nieuwe regel toe te voegen. ";

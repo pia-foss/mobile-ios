@@ -334,9 +334,9 @@ class DashboardViewController: AutolayoutViewController {
                     weakSelf.handleDisconnectedAndTrustedNetwork()
                     if weakSelf.isTrustedNetwork() {
                         //Show additionally a message indicating the VPN is enabled but disconnected given the current NMT settings
-                        let alert = Macros.alert(nil, "Your automation settings are configured to don't connect the VPN under the current network conditions. The VPN is enabled and will connect or disconnect automatically if you switch to a different network")
+                        let alert = Macros.alert(nil, L10n.Network.Management.Tool.alert)
                         alert.addCancelAction(L10n.Global.close)
-                        alert.addActionWithTitle("Disable automation") {
+                        alert.addActionWithTitle(L10n.Network.Management.Tool.disable) {
                             let preferences = Client.preferences.editable()
                             preferences.nmtRulesEnabled = !Client.preferences.nmtRulesEnabled
                             preferences.commit()
