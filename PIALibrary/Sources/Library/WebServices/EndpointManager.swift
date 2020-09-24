@@ -21,40 +21,53 @@
 
 import Foundation
 
+public struct PinningEndpoint {
+    let host: String
+    let useCertificatePinning: Bool?
+    let commonName: String?
+    
+    init(host: String, useCertificatePinning: Bool? = false, commonName: String? = nil) {
+        self.host = host
+        self.useCertificatePinning = useCertificatePinning
+        self.commonName = commonName
+    }
+}
+
 public class EndpointManager {
     
-    private let internalUrl = "https://10.0.0.1:443"
-    private let proxy = "https://piaproxy.net/"
+    private let internalUrl = "10.0.0.1"
+    private let proxy = "piaproxy.net"
+    private let pia = "www.privateinternetaccess.com"
 
     public static let shared = EndpointManager()
 
-    public func availableEndpoints() -> [String] {
+    public func availableEndpoints() -> [PinningEndpoint] {
     
         if Client.configuration.currentServerNetwork() == .gen4 {
             
             if Client.providers.vpnProvider.isVPNConnected {
-                return [internalUrl,
-                        Client.configuration.baseUrl,
-                        proxy]
+                return [PinningEndpoint(host: internalUrl),
+                        PinningEndpoint(host: pia),
+                        PinningEndpoint(host: proxy)]
             }
             
-            var availableEndpoints = [String]()
+            var availableEndpoints = [PinningEndpoint]()
             var currentServers = Client.providers.serverProvider.currentServers.filter { $0.serverNetwork == .gen4 }
             currentServers = currentServers.sorted(by: { $0.pingTime ?? 1000 < $1.pingTime ?? 1000 })
 
             if currentServers.count > 2 {
-                availableEndpoints.append(currentServers[0].hostname) //TODO replace meta
-                availableEndpoints.append(currentServers[1].hostname) //TODO replace meta
+                availableEndpoints.append(PinningEndpoint(host: currentServers[0].bestAddressForWireGuard()!.ip, useCertificatePinning: true, commonName: currentServers[0].bestAddressForWireGuard()?.cn))
+                availableEndpoints.append(PinningEndpoint(host: currentServers[1].bestAddressForWireGuard()!.ip, useCertificatePinning: true, commonName: currentServers[1].bestAddressForWireGuard()?.cn))
             }
             
-            availableEndpoints.append(Client.configuration.baseUrl)
-            availableEndpoints.append(proxy)
+            availableEndpoints.append(PinningEndpoint(host: pia))
+            availableEndpoints.append(PinningEndpoint(host: proxy))
             
             return availableEndpoints
 
         } else {
-            return [Client.configuration.baseUrl,
-                    proxy]
+            return [PinningEndpoint(host: pia),
+                    PinningEndpoint(host: proxy)]
         }
     }
     

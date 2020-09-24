@@ -10,13 +10,13 @@ PODS:
     - PIAAccountModule/gradle (= 1.0.0)
   - PIAAccountModule/account (1.0.0)
   - PIAAccountModule/gradle (1.0.0)
-  - PIARegions (1.0.6):
-    - PIARegions/Core (= 1.0.6)
-    - PIARegions/gradle (= 1.0.6)
-    - PIARegions/regions (= 1.0.6)
-  - PIARegions/Core (1.0.6)
-  - PIARegions/gradle (1.0.6)
-  - PIARegions/regions (1.0.6)
+  - PIARegions (1.0.4):
+    - PIARegions/Core (= 1.0.4)
+    - PIARegions/gradle (= 1.0.4)
+    - PIARegions/regions (= 1.0.4)
+  - PIARegions/Core (1.0.4)
+  - PIARegions/gradle (1.0.4)
+  - PIARegions/regions (1.0.4)
   - PIAWireguard (1.0.1):
     - PIAWireguard/AppExtension (= 1.0.1)
     - PIAWireguard/Core (= 1.0.1)
@@ -50,8 +50,8 @@ DEPENDENCIES:
   - FXPageControl
   - Gloss (~> 2)
   - lottie-ios
-  - PIAAccountModule (from `https://github.com/pia-foss/mobile-common-account`, commit `98f5dfb`)
-  - PIARegions (from `https://github.com/pia-foss/mobile-common-regions`)
+  - PIAAccountModule (from `/Users/jose/Projects/PIA/account`)
+  - PIARegions (from `/Users/jose/Projects/PIA/regions`)
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
   - PopupDialog
   - ReachabilitySwift (= 4.3.0)
@@ -76,10 +76,9 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIAAccountModule:
-    :commit: 98f5dfb
-    :git: https://github.com/pia-foss/mobile-common-account
+    :path: "/Users/jose/Projects/PIA/account"
   PIARegions:
-    :git: https://github.com/pia-foss/mobile-common-regions
+    :path: "/Users/jose/Projects/PIA/regions"
   PIAWireguard:
     :git: https://github.com/pia-foss/ios-wireguard
   TunnelKit:
@@ -87,12 +86,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/pia-foss/tunnelkit
 
 CHECKOUT OPTIONS:
-  PIAAccountModule:
-    :commit: 98f5dfb
-    :git: https://github.com/pia-foss/mobile-common-account
-  PIARegions:
-    :commit: 4567597c4cd228b3bf23ad7a478150326a979f3d
-    :git: https://github.com/pia-foss/mobile-common-regions
   PIAWireguard:
     :commit: 10ddb6b3e79b695358d4fa58a85d663039f7509e
     :git: https://github.com/pia-foss/ios-wireguard
@@ -108,7 +101,7 @@ SPEC CHECKSUMS:
   lottie-ios: 06e0b54aab85ba128e332687d7f4ac4861a7a7ae
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
   PIAAccountModule: 99b8629a86f4852d4ddd9c2506dbc37e7852e08a
-  PIARegions: ee8493cb3e713211f04be3da5189849eb290065b
+  PIARegions: 7d1b35d837615440bf4a0930b287040d41d7a500
   PIAWireguard: 9d71dabc9e483b149236eebbd0e6bb8fa5c8317f
   PopupDialog: f4bb461bf70ff422be0b56656566424ee9273080
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
@@ -118,6 +111,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 5007c9c0fcc7ed5e368a6f181d000a75b07551c1
+PODFILE CHECKSUM: b240f01cbc754ab089fa5ac8a6a0f5b993607cd7
 
 COCOAPODS: 1.9.3
