@@ -138,6 +138,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 }
             }
 
+        } else if url.absoluteString.starts(with: AppConstants.Widget.connect) {
+            if Client.providers.vpnProvider.isVPNConnected {
+                disconnectAfter(milliseconds: 200)
+            } else {
+                connectAfter(milliseconds: 200)
+            }
         }
         
         guard let host = url.host else {

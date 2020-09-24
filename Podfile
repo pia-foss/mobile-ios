@@ -92,7 +92,6 @@ target 'PIA VPN WG Tunnel' do
     piawireguard_pod
 end
 
-
 target 'PIA VPNTests' do
     app_pods
     pod 'AppCenter'

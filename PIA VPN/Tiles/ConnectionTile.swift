@@ -22,6 +22,7 @@
 import UIKit
 import PIALibrary
 import TunnelKit
+import WidgetKit
 
 class ConnectionTile: UIView, Tileable  {
     
@@ -83,6 +84,14 @@ class ConnectionTile: UIView, Tileable  {
         self.encryptionLabel.text = Client.preferences.vpnType.encryption
         self.socketLabel.text = Client.preferences.vpnType.socket
         self.handshakeLabel.text = Client.preferences.vpnType.handshake
+        
+        AppPreferences.shared.todayWidgetVpnProtocol = Client.preferences.vpnType.vpnProtocol
+        AppPreferences.shared.todayWidgetVpnSocket = Client.preferences.vpnType.port
+        AppPreferences.shared.todayWidgetVpnPort = Client.preferences.vpnType.socket
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadTimelines(ofKind: "PIAWidget")
+        }
+
     }
     
     private func resetValues() {
