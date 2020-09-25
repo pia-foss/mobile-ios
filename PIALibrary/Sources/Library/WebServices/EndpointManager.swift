@@ -38,9 +38,41 @@ public class EndpointManager {
     private let internalUrl = "10.0.0.1"
     private let proxy = "piaproxy.net"
     private let pia = "www.privateinternetaccess.com"
+    private let region = "serverlist.piaservers.net"
 
     public static let shared = EndpointManager()
 
+    private func availableMetaEndpoints(_ availableEndpoints: inout [PinningEndpoint]) {
+        var currentServers = Client.providers.serverProvider.currentServers.filter { $0.serverNetwork == .gen4 }
+        currentServers = currentServers.sorted(by: { $0.pingTime ?? 1000 < $1.pingTime ?? 1000 })
+        
+        if currentServers.count > 2 {
+            availableEndpoints.append(PinningEndpoint(host: currentServers[0].meta!.ip, useCertificatePinning: true, commonName: currentServers[0].meta?.cn))
+            availableEndpoints.append(PinningEndpoint(host: currentServers[1].meta!.ip, useCertificatePinning: true, commonName: currentServers[1].meta?.cn))
+        }
+    }
+    
+    public func availableRegionEndpoints() -> [PinningEndpoint] {
+    
+        if Client.configuration.currentServerNetwork() == .gen4 {
+            
+            if Client.providers.vpnProvider.isVPNConnected {
+                return [PinningEndpoint(host: internalUrl),
+                        PinningEndpoint(host: region)]
+            }
+            
+            var availableEndpoints = [PinningEndpoint]()
+            availableMetaEndpoints(&availableEndpoints)
+            
+            availableEndpoints.append(PinningEndpoint(host: region))
+            
+            return availableEndpoints
+
+        } else {
+            return [PinningEndpoint(host: region)]
+        }
+    }
+    
     public func availableEndpoints() -> [PinningEndpoint] {
     
         if Client.configuration.currentServerNetwork() == .gen4 {
@@ -52,14 +84,8 @@ public class EndpointManager {
             }
             
             var availableEndpoints = [PinningEndpoint]()
-            var currentServers = Client.providers.serverProvider.currentServers.filter { $0.serverNetwork == .gen4 }
-            currentServers = currentServers.sorted(by: { $0.pingTime ?? 1000 < $1.pingTime ?? 1000 })
+            availableMetaEndpoints(&availableEndpoints)
 
-            if currentServers.count > 2 {
-                availableEndpoints.append(PinningEndpoint(host: currentServers[0].bestAddressForWireGuard()!.ip, useCertificatePinning: true, commonName: currentServers[0].bestAddressForWireGuard()?.cn))
-                availableEndpoints.append(PinningEndpoint(host: currentServers[1].bestAddressForWireGuard()!.ip, useCertificatePinning: true, commonName: currentServers[1].bestAddressForWireGuard()?.cn))
-            }
-            
             availableEndpoints.append(PinningEndpoint(host: pia))
             availableEndpoints.append(PinningEndpoint(host: proxy))
             

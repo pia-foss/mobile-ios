@@ -48,6 +48,18 @@ class GlossServer: GlossParser {
 
         if Client.configuration.serverNetwork == .gen4 {
             
+            var meta: Server.ServerAddressIP?
+            if let metaServer: [String: Any] = "servers" <~~ json {
+                if let addressArray: [JSON] = "meta" <~~ metaServer {
+                    for address in addressArray {
+                        if let ip: String = "ip" <~~ address,
+                            let cn: String = "cn" <~~ address {
+                            meta = Server.ServerAddressIP(ip: ip, cn: cn)
+                        }
+                    }
+                }
+            }
+
             guard let regionIdentifier: String = "id" <~~ json else {
                return nil
             }
@@ -119,6 +131,7 @@ class GlossServer: GlossParser {
                             responseTime: 0,
                             serverNetwork: internalServerNetwork ?? .gen4,
                             geo: geo,
+                            meta: meta,
                             regionIdentifier: regionIdentifier
             )
             

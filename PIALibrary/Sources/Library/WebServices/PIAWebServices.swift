@@ -33,7 +33,7 @@ private let log = SwiftyBeaver.self
 class RegClientStateProvider : RegionClientStateProvider {
 
     func regionEndpoints() -> [RegionEndpoint] {
-        let validEndpoints = EndpointManager.shared.availableEndpoints()
+        let validEndpoints = EndpointManager.shared.availableRegionEndpoints()
         var clientEndpoints = [RegionEndpoint]()
         for endpoint in validEndpoints.reversed() {
             clientEndpoints.append(RegionEndpoint(endpoint: endpoint.host, usePinnedCertificate: endpoint.useCertificatePinning ?? false, certificateCommonName: endpoint.commonName))

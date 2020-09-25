@@ -142,6 +142,9 @@ public class Server: Hashable {
     /// - Seealso: `Macros.ping(...)`
     public let pingAddress: Address?
 
+    /// The meta IP.
+    public let meta: ServerAddressIP?
+
     var isAutomatic: Bool
 
     /// :nodoc:
@@ -160,6 +163,7 @@ public class Server: Hashable {
         responseTime: Int? = 0,
         serverNetwork: ServersNetwork? = .legacy,
         geo: Bool = false,
+        meta: ServerAddressIP? = nil,
         regionIdentifier: String) {
         
         self.serial = serial
@@ -177,6 +181,7 @@ public class Server: Hashable {
         self.wireGuardAddressesForUDP = wireGuardAddressesForUDP
         self.iKEv2AddressesForUDP = iKEv2AddressesForUDP
 
+        self.meta = meta
         self.pingAddress = pingAddress
         self.serverNetwork = serverNetwork
 

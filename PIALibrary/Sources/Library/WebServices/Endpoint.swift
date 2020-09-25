@@ -46,11 +46,3 @@ enum VPNEndpoint: String, Endpoint {
     
 }
 
-enum ServerEndpoint: String, Endpoint {
-    case gen4
-    
-    var url: URL {
-        return URL(string: "https://serverlist.piaservers.net/vpninfo/servers/new")!
-    }
-    
-}
