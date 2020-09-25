@@ -113,12 +113,12 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
         if let magicLinkLoginViewController = storyboard.instantiateViewController(withIdentifier: "MagicLinkLoginViewController") as? MagicLinkLoginViewController {
             let alert = Macros.alert(magicLinkLoginViewController)
             alert.addCancelAction(L10n.Signup.Purchase.Uncredited.Alert.Button.cancel)
-            alert.addActionWithTitle("Send Link".uppercased(), handler: {
+            alert.addActionWithTitle(L10n.Welcome.Login.Magic.Link.send.uppercased(), handler: {
                 
                 let email = magicLinkLoginViewController.email()
                 guard Validator.validate(email: email) else {
                     Macros.displayImageNote(withImage: Asset.iconWarning.image,
-                                            message: "Invalid email. Please try again.")
+                                            message: L10n.Welcome.Login.Magic.Link.Invalid.email)
                     return
                 }
                 
@@ -318,12 +318,21 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
         buttonLogin.setTitle(L10n.Welcome.Login.submit.uppercased(),
                                for: [])
         buttonLogin.accessibilityIdentifier = "uitests.login.submit"
+        
         couldNotGetPlanButton.setTitle(L10n.Welcome.Login.Restore.button,
                                        for: [])
+        couldNotGetPlanButton.titleLabel?.numberOfLines = 0
+        couldNotGetPlanButton.titleLabel?.textAlignment = .center
+
         loginWithReceipt.setTitle(L10n.Welcome.Login.Receipt.button,
                                   for: [])
+        loginWithReceipt.titleLabel?.numberOfLines = 0
+        loginWithReceipt.titleLabel?.textAlignment = .center
+        
         loginWithLink.setTitle(L10n.Welcome.Login.Magic.Link.title,
                                for: [])
+        loginWithLink.titleLabel?.numberOfLines = 0
+        loginWithLink.titleLabel?.textAlignment = .center
     }
 
 }

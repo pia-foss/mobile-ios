@@ -18,6 +18,8 @@
 "login.receipt.button" = "Login using purchase receipt";
 "login.magic.link.title" = "Login using magic email link";
 "login.magic.link.response" = "Please check your e-mail for a login link.";
+"login.magic.link.send" = "Send Link";
+"login.magic.link.invalid.email" = "Invalid email. Please try again.";
 
 "purchase.title" = "Select a VPN plan";
 "purchase.subtitle" = "30-day money back guarantee";

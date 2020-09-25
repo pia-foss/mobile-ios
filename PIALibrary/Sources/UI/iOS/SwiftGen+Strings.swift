@@ -286,8 +286,14 @@ internal enum L10n {
         internal enum Link {
           /// Please check your e-mail for a login link.
           internal static let response = L10n.tr("Welcome", "login.magic.link.response")
+          /// Send Link
+          internal static let send = L10n.tr("Welcome", "login.magic.link.send")
           /// Login using magic email link
           internal static let title = L10n.tr("Welcome", "login.magic.link.title")
+          internal enum Invalid {
+            /// Invalid email. Please try again.
+            internal static let email = L10n.tr("Welcome", "login.magic.link.invalid.email")
+          }
         }
       }
       internal enum Password {
