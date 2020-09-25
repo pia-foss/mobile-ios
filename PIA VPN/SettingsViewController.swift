@@ -938,6 +938,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 return nil
             }
             
+            cell.backgroundColor = .clear
             return cell
         }
         return nil
@@ -995,7 +996,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         if let cell = tableView.dequeueReusableCell(withIdentifier: Cells.footer) {
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.style(style: TextStyle.textStyle21)
-            
+            cell.backgroundColor = .clear
+
             switch visibleSections[section] {
             case .applicationSettings:
                 var footer: [String] = [
