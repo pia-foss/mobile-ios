@@ -24,54 +24,22 @@ import SwiftUI
 import Intents
 
 struct Provider: TimelineProvider {
-    
-    private let appGroup = "group.com.privateinternetaccess"
-    private let urlSchema = "privateinternetaccess://"
 
-    private var isVPNConnected: Bool {
-        var connected = false
-        if let sharedDefaults = UserDefaults(suiteName: appGroup),
-            let status = sharedDefaults.string(forKey: "vpn.status") {
-        
-            if status == "connected" {
-                connected = true
-            }
-            
-        }
-        return connected
-    }
-    
-    private var vpnProtocol: String {
-        if let sharedDefaults = UserDefaults(suiteName: appGroup),
-            let value = sharedDefaults.string(forKey: "vpn.widget.protocol") {
-            return value
-        }
-        return "--"
-    }
-    
-    private var vpnPort: String {
-        if let sharedDefaults = UserDefaults(suiteName: appGroup),
-            let value = sharedDefaults.string(forKey: "vpn.widget.port") {
-            return value
-        }
-        return "--"
-    }
-    
-    private var vpnSocket: String {
-        if let sharedDefaults = UserDefaults(suiteName: appGroup),
-            let value = sharedDefaults.string(forKey: "vpn.widget.socket") {
-            return value
-        }
-        return "--"
-    }
-    
     func placeholder(in context: Context) -> WidgetContent {
-        WidgetContent(date: Date(), connected: false, vpnProtocol: "WireGuard", vpnPort: "1337", vpnSocket: "UDP")
+        WidgetContent(date: Date(),
+                      connected: false,
+                      vpnProtocol: "IPSec (IKEv2)",
+                      vpnPort: "500",
+                      vpnSocket: "UDP")
     }
 
     func getSnapshot(in context: Context, completion: @escaping (WidgetContent) -> ()) {
         let entry: WidgetContent
-        entry = WidgetContent(date: Date(), connected: isVPNConnected, vpnProtocol: vpnProtocol, vpnPort: vpnPort, vpnSocket: vpnSocket)
+        entry = WidgetContent(date: Date(),
+                              connected: WidgetUtils.isVPNConnected,
+                              vpnProtocol: WidgetUtils.vpnProtocol,
+                              vpnPort: WidgetUtils.vpnPort,
+                              vpnSocket: WidgetUtils.vpnSocket)
         completion(entry)
     }
 
@@ -82,7 +50,11 @@ struct Provider: TimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = WidgetContent(date: entryDate, connected: isVPNConnected, vpnProtocol: vpnProtocol, vpnPort: vpnPort, vpnSocket: vpnSocket)
+            let entry = WidgetContent(date: entryDate,
+                                      connected: WidgetUtils.isVPNConnected,
+                                      vpnProtocol: WidgetUtils.vpnProtocol,
+                                      vpnPort: WidgetUtils.vpnPort,
+                                      vpnSocket: WidgetUtils.vpnSocket)
             entries.append(entry)
         }
 
@@ -95,47 +67,8 @@ struct PIAWidgetEntryView : View {
     
     @Environment(\.widgetFamily) var widgetFamily
     
-    private let appGroup = "group.com.privateinternetaccess"
-
     var entry: Provider.Entry
     
-    private var isVPNConnected: Bool {
-        var connected = false
-        if let sharedDefaults = UserDefaults(suiteName: appGroup),
-            let status = sharedDefaults.string(forKey: "vpn.status") {
-        
-            if status == "connected" {
-                connected = true
-            }
-            
-        }
-        return connected
-    }
-
-    private var vpnProtocol: String {
-        if let sharedDefaults = UserDefaults(suiteName: appGroup),
-            let value = sharedDefaults.string(forKey: "vpn.widget.protocol") {
-            return value
-        }
-        return "--"
-    }
-    
-    private var vpnPort: String {
-        if let sharedDefaults = UserDefaults(suiteName: appGroup),
-            let value = sharedDefaults.string(forKey: "vpn.widget.port") {
-            return value
-        }
-        return "--"
-    }
-    
-    private var vpnSocket: String {
-        if let sharedDefaults = UserDefaults(suiteName: appGroup),
-            let value = sharedDefaults.string(forKey: "vpn.widget.socket") {
-            return value
-        }
-        return "--"
-    }
-
     var body: some View {
 
         ZStack(alignment: .bottomTrailing) {
@@ -152,10 +85,10 @@ struct PIAWidgetEntryView : View {
                 Circle()
                     .strokeBorder(Color("BorderColor"),lineWidth: 6)
                    .background(Circle()
-                                .strokeBorder(Color(isVPNConnected ? "AccentColor" : "RedColor"),lineWidth: 8)
+                                .strokeBorder(Color(WidgetUtils.isVPNConnected ? "AccentColor" : "RedColor"),lineWidth: 8)
                                 .background(Image("vpn-button")
                                                 .resizable()
-                                                .renderingMode(.template).foregroundColor(Color(isVPNConnected ? "AccentColor" : "RedColor"))
+                                                .renderingMode(.template).foregroundColor(Color(WidgetUtils.isVPNConnected ? "AccentColor" : "RedColor"))
                                                 .aspectRatio(contentMode: .fit)
                                                 .frame(width: 40, height: 40, alignment: .center)
                                                 .padding(0)))
@@ -166,17 +99,17 @@ struct PIAWidgetEntryView : View {
                         HStack(alignment: .center, spacing: 0) {
                             Image("icon-protocol").resizable().frame(width: 25, height: 25, alignment: .leading)
                             Spacer()
-                            Text(vpnProtocol).font(.system(size: 14)).foregroundColor(Color("FontColor")).frame(maxWidth: .infinity, alignment: .leading)
+                            Text(WidgetUtils.vpnProtocol).font(.system(size: 14)).foregroundColor(Color("FontColor")).frame(maxWidth: .infinity, alignment: .leading)
                         }
                         HStack(alignment: .center, spacing: 0) {
                             Image("icon-port").resizable().frame(width: 25, height: 25, alignment: .leading)
                             Spacer()
-                            Text(vpnPort).font(.system(size: 14)).foregroundColor(Color("FontColor")).frame(maxWidth: .infinity, alignment: .leading)
+                            Text(WidgetUtils.vpnPort).font(.system(size: 14)).foregroundColor(Color("FontColor")).frame(maxWidth: .infinity, alignment: .leading)
                         }
                         HStack(alignment: .center, spacing: 0) {
                             Image("icon-socket").resizable().frame(width: 25, height: 25, alignment: .leading)
                             Spacer()
-                            Text(vpnSocket).font(.system(size: 14)).foregroundColor(Color("FontColor")).frame(maxWidth: .infinity, alignment: .leading)
+                            Text(WidgetUtils.vpnSocket).font(.system(size: 14)).foregroundColor(Color("FontColor")).frame(maxWidth: .infinity, alignment: .leading)
                         }
                     }.padding(.trailing, 40)
 
@@ -200,7 +133,6 @@ struct PIAWidget: Widget {
             PIAWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("PIA VPN")
-        .description("Always use protection")
         .supportedFamilies([.systemSmall, .systemMedium])
 
     }

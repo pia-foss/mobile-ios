@@ -152,6 +152,7 @@
 		82183D9C25014FDC0033023F /* NetworkHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82183D9525014FDC0033023F /* NetworkHeaderCollectionViewCell.xib */; };
 		82183D9D25014FDC0033023F /* NetworkHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82183D9525014FDC0033023F /* NetworkHeaderCollectionViewCell.xib */; };
 		8221922B24CECFE700C24F1C /* NMTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221922A24CECFE700C24F1C /* NMTTests.swift */; };
+		822F97B4251DD53100644EF2 /* WidgetUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822F97B3251DD53100644EF2 /* WidgetUtils.swift */; };
 		824C530824C046CB003DB740 /* ConnectionTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824C530724C046CA003DB740 /* ConnectionTile.swift */; };
 		824C530924C046CB003DB740 /* ConnectionTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824C530724C046CA003DB740 /* ConnectionTile.swift */; };
 		824C531524C04796003DB740 /* ConnectionTileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824C531324C04796003DB740 /* ConnectionTileCollectionViewCell.swift */; };
@@ -561,6 +562,7 @@
 		82183D9425014FDC0033023F /* NetworkFooterCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkFooterCollectionViewCell.xib; sourceTree = "<group>"; };
 		82183D9525014FDC0033023F /* NetworkHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
 		8221922A24CECFE700C24F1C /* NMTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMTTests.swift; sourceTree = "<group>"; };
+		822F97B3251DD53100644EF2 /* WidgetUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetUtils.swift; sourceTree = "<group>"; };
 		824C530724C046CA003DB740 /* ConnectionTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionTile.swift; sourceTree = "<group>"; };
 		824C531324C04796003DB740 /* ConnectionTileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionTileCollectionViewCell.swift; sourceTree = "<group>"; };
 		824C531424C04796003DB740 /* ConnectionTileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectionTileCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1085,6 +1087,7 @@
 			children = (
 				8269A6D9251CB5E0000B4DBF /* PIAWidget.swift */,
 				8269A6FD251CBB36000B4DBF /* WidgetContent.swift */,
+				822F97B3251DD53100644EF2 /* WidgetUtils.swift */,
 				8269A6DB251CB5E0000B4DBF /* PIAWidget.intentdefinition */,
 				8269A6DC251CB5E3000B4DBF /* Assets.xcassets */,
 				8269A6DE251CB5E3000B4DBF /* Info.plist */,
@@ -2298,6 +2301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8269A6FE251CBB36000B4DBF /* WidgetContent.swift in Sources */,
+				822F97B4251DD53100644EF2 /* WidgetUtils.swift in Sources */,
 				8269A6DA251CB5E0000B4DBF /* PIAWidget.swift in Sources */,
 				8269A6DF251CB5E3000B4DBF /* PIAWidget.intentdefinition in Sources */,
 			);
