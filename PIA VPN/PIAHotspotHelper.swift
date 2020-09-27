@@ -97,6 +97,10 @@ class PIAHotspotHelper {
                                                             if !currentNetwork.isSecure { // Open WiFi
                                                                 log.info("Evaluate")
 
+                                                                guard Client.providers.accountProvider.isLoggedIn else {
+                                                                    return
+                                                                }
+
                                                                 let preferences = Client.preferences.editable()
                                                                 preferences.nmtTemporaryOpenNetworks = [currentNetwork.ssid]
                                                                 preferences.commit()
