@@ -247,6 +247,12 @@
 		82E20B1224F652ED0065EFE3 /* AccountInfo+Kotlin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E20B1024F652ED0065EFE3 /* AccountInfo+Kotlin.swift */; };
 		82E20B1624F6AA110065EFE3 /* RegionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E20B1524F6AA110065EFE3 /* RegionData.swift */; };
 		82E20B1724F6AA110065EFE3 /* RegionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E20B1524F6AA110065EFE3 /* RegionData.swift */; };
+		82FD5D562521F2DD00E390CB /* PIARegionClientStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FD5D552521F2DD00E390CB /* PIARegionClientStateProvider.swift */; };
+		82FD5D572521F2DD00E390CB /* PIARegionClientStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FD5D552521F2DD00E390CB /* PIARegionClientStateProvider.swift */; };
+		82FD5D5E2521F30300E390CB /* PIAAccountClientStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FD5D5D2521F30300E390CB /* PIAAccountClientStateProvider.swift */; };
+		82FD5D5F2521F30300E390CB /* PIAAccountClientStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FD5D5D2521F30300E390CB /* PIAAccountClientStateProvider.swift */; };
+		82FD5D662521F32B00E390CB /* PIAAccountStagingClientStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FD5D652521F32B00E390CB /* PIAAccountStagingClientStateProvider.swift */; };
+		82FD5D672521F32B00E390CB /* PIAAccountStagingClientStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FD5D652521F32B00E390CB /* PIAAccountStagingClientStateProvider.swift */; };
 		84125E08213D7DFF001BCC19 /* PIAColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84125E07213D7DFF001BCC19 /* PIAColors.swift */; };
 		84125E09213D7E04001BCC19 /* PIAColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84125E07213D7DFF001BCC19 /* PIAColors.swift */; };
 		84125E0B213D7E0E001BCC19 /* PIAFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84125E0A213D7E0E001BCC19 /* PIAFonts.swift */; };
@@ -552,15 +558,15 @@
 		82183D7D25011D200033023F /* MagicLinkLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLinkLoginViewController.swift; sourceTree = "<group>"; };
 		8221921B24CEBA3800C24F1C /* NMTRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMTRules.swift; sourceTree = "<group>"; };
 		8221921E24CEBABA00C24F1C /* NMTType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMTType.swift; sourceTree = "<group>"; };
-		8221922124CEC1E400C24F1C /* Invites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invites.swift; sourceTree = "<group>"; };
-		8221922224CEC1E400C24F1C /* InvitesInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitesInformation.swift; sourceTree = "<group>"; };
-		8221922724CEC1ED00C24F1C /* GlossInvitesInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossInvitesInformation.swift; sourceTree = "<group>"; };
 		822BC1CF24BF20C90041BF9A /* UIControl+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Action.swift"; sourceTree = "<group>"; };
 		82C374F42514DC6D00E391EE /* EndpointManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointManagerTests.swift; sourceTree = "<group>"; };
 		82C374F62514DC7200E391EE /* server.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = server.json; sourceTree = "<group>"; };
 		82C374FA2514DEC700E391EE /* EndpointManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointManager.swift; sourceTree = "<group>"; };
 		82E20B1024F652ED0065EFE3 /* AccountInfo+Kotlin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountInfo+Kotlin.swift"; sourceTree = "<group>"; };
 		82E20B1524F6AA110065EFE3 /* RegionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionData.swift; sourceTree = "<group>"; };
+		82FD5D552521F2DD00E390CB /* PIARegionClientStateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIARegionClientStateProvider.swift; sourceTree = "<group>"; };
+		82FD5D5D2521F30300E390CB /* PIAAccountClientStateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAAccountClientStateProvider.swift; sourceTree = "<group>"; };
+		82FD5D652521F32B00E390CB /* PIAAccountStagingClientStateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAAccountStagingClientStateProvider.swift; sourceTree = "<group>"; };
 		84125E07213D7DFF001BCC19 /* PIAColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAColors.swift; sourceTree = "<group>"; };
 		84125E0A213D7E0E001BCC19 /* PIAFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAFonts.swift; sourceTree = "<group>"; };
 		841BE60C212AD0F3002EF2D1 /* ValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorTests.swift; sourceTree = "<group>"; };
@@ -761,7 +767,6 @@
 			isa = PBXGroup;
 			children = (
 				82C374FA2514DEC700E391EE /* EndpointManager.swift */,
-				8221922724CEC1ED00C24F1C /* GlossInvitesInformation.swift */,
 				0E392DA21FE3247E0002160D /* Endpoint.swift */,
 				0E3D13D21F9E270A00434A48 /* GlossAccountInfo.swift */,
 				0E392D8E1FE2FBBE0002160D /* GlossConnectivityStatus.swift */,
@@ -837,8 +842,6 @@
 		0EA7065C1F80F448001E4F88 /* WebServices */ = {
 			isa = PBXGroup;
 			children = (
-				8221922124CEC1E400C24F1C /* Invites.swift */,
-				8221922224CEC1E400C24F1C /* InvitesInformation.swift */,
 				0EE78AF71F818815002E4CDD /* AccountInfo.swift */,
 				82E20B1024F652ED0065EFE3 /* AccountInfo+Kotlin.swift */,
 				0E392D8B1FE2F8780002160D /* ConnectivityStatus.swift */,
@@ -1082,6 +1085,7 @@
 		0EFB51281F82D4450033B81F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				82FD5D542521F2B600E390CB /* Providers */,
 				DDFCFAA621E9008E0081F235 /* Tiles */,
 				0EE14CF31FF0F91C008D9AC2 /* Account */,
 				0E2ADCD71FE072ED00BB170C /* Daemons */,
@@ -1143,6 +1147,16 @@
 				8221921E24CEBABA00C24F1C /* NMTType.swift */,
 			);
 			path = NMT;
+			sourceTree = "<group>";
+		};
+		82FD5D542521F2B600E390CB /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				82FD5D552521F2DD00E390CB /* PIARegionClientStateProvider.swift */,
+				82FD5D5D2521F30300E390CB /* PIAAccountClientStateProvider.swift */,
+				82FD5D652521F32B00E390CB /* PIAAccountStagingClientStateProvider.swift */,
+			);
+			path = Providers;
 			sourceTree = "<group>";
 		};
 		84577FB9213D8EB2006DEC3D /* Styles */ = {
@@ -1687,6 +1701,7 @@
 				0E7BC6FB1F96B1120035C8B2 /* LibraryCallback.swift in Sources */,
 				0E3D13D41F9E270A00434A48 /* GlossAccountInfo.swift in Sources */,
 				0E9D62D31FDEBBFD009A90CF /* GlossServer.swift in Sources */,
+				82FD5D672521F32B00E390CB /* PIAAccountStagingClientStateProvider.swift in Sources */,
 				0E9D62DB1FDEE3FE009A90CF /* ServerProvider.swift in Sources */,
 				0E7BC6FA1F96B1120035C8B2 /* Notification+Core.swift in Sources */,
 				0EA4C4321FDDD48F0041C3D8 /* Server.swift in Sources */,
@@ -1697,6 +1712,7 @@
 				0E7BC6F51F96B1120035C8B2 /* Credentials.swift in Sources */,
 				0E2ADCCB1FE06D7A00BB170C /* Array+Math.swift in Sources */,
 				DD36CB7F21CD000200FC815A /* CAGradientLayer+Image.swift in Sources */,
+				82FD5D5F2521F30300E390CB /* PIAAccountClientStateProvider.swift in Sources */,
 				82E20B1224F652ED0065EFE3 /* AccountInfo+Kotlin.swift in Sources */,
 				0E7BC6EE1F96B1120035C8B2 /* AccountProvider.swift in Sources */,
 				841BE610212AFE69002EF2D1 /* GiftCardUtil.swift in Sources */,
@@ -1777,6 +1793,7 @@
 				0E392D7E1FE2E4C10002160D /* MemoryStore.swift in Sources */,
 				DD76292921ECDFF80092DF50 /* Usage.swift in Sources */,
 				0E2ADD381FE14F0000BB170C /* DefaultVPNProvider.swift in Sources */,
+				82FD5D572521F2DD00E390CB /* PIARegionClientStateProvider.swift in Sources */,
 				0E75D8D41F9E3F9F00658D1E /* UserAccount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1793,6 +1810,7 @@
 				0E392DB01FE3366B0002160D /* NSData+Compression.m in Sources */,
 				0E53A84D1FE5BB25000C2A18 /* VPNDaemon.swift in Sources */,
 				84577FBB213D8ED1006DEC3D /* StyleGuideHelpers.swift in Sources */,
+				82FD5D5E2521F30300E390CB /* PIAAccountClientStateProvider.swift in Sources */,
 				DD314991218350D1008E26E8 /* SwiftGen+SeguesStoryboards.swift in Sources */,
 				0EB8C0701F9CD38B005857E4 /* WelcomePageViewController.swift in Sources */,
 				DD0AC790218715B8009B576B /* PIAButton.swift in Sources */,
@@ -1829,6 +1847,7 @@
 				0E392D8F1FE2FBBE0002160D /* GlossConnectivityStatus.swift in Sources */,
 				0EB8C06F1F9CD38B005857E4 /* SignupSuccessViewController.swift in Sources */,
 				0E492C5E1FE5F7C0007F23DF /* MockAccountProvider.swift in Sources */,
+				82FD5D662521F32B00E390CB /* PIAAccountStagingClientStateProvider.swift in Sources */,
 				0E2ADCDD1FE072ED00BB170C /* Pinger.m in Sources */,
 				0EB8C0721F9CD38B005857E4 /* Macros+UI.swift in Sources */,
 				0E3D13D01F9E26FD00434A48 /* GlossCredentials.swift in Sources */,
@@ -1905,6 +1924,7 @@
 				0EF14E4B1FEAE6350007485A /* Client+Providers.swift in Sources */,
 				DD2683E924617F0300C65DAA /* PingTask.swift in Sources */,
 				84577FC1213D9A23006DEC3D /* UIImage+Color.swift in Sources */,
+				82FD5D562521F2DD00E390CB /* PIARegionClientStateProvider.swift in Sources */,
 				0E38E4101FF81722008223AB /* Notification+UI.swift in Sources */,
 				0E392DA91FE329AD0002160D /* PlatformVPNLog.swift in Sources */,
 				0EB8C0481F9CCE07005857E4 /* Macros.swift in Sources */,

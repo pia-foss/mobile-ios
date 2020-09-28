@@ -43,8 +43,6 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
     
     private var failedConnectivityAttempts: Int
     
-    private var pendingConnectivityCheck: URLSessionDataTask?
-
     private var wasConnected: Bool
 
     private init() {
@@ -57,7 +55,6 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
 
         isCheckingConnectivity = false
         failedConnectivityAttempts = 0
-        pendingConnectivityCheck = nil
         wasConnected = false
     }
     
@@ -128,8 +125,7 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
         Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
 
         isCheckingConnectivity = true
-        pendingConnectivityCheck?.cancel()
-        pendingConnectivityCheck = accessedWebServices.taskForConnectivityCheck { (connectivity, error) in
+        accessedWebServices.taskForConnectivityCheck { (connectivity, error) in
             self.isCheckingConnectivity = false
 
             guard let connectivity = connectivity else {
@@ -168,7 +164,6 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
             
             Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
         }
-        pendingConnectivityCheck?.resume()
     }
 
     // MARK: Notifications

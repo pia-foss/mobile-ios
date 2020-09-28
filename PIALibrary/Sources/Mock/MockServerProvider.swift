@@ -148,12 +148,7 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
     public func find(withIdentifier identifier: String) -> Server? {
         return delegate.find(withIdentifier: identifier)
     }
-    
-    /// :nodoc:
-    public func flagURL(for server: Server) -> URL {
-        return delegate.flagURL(for: server)
-    }
-    
+        
     public func resetCurrentServers() {
     }
 }

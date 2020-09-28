@@ -100,8 +100,8 @@ class MockWebServices: WebServices {
         return URL(fileURLWithPath: "")
     }
     
-    func taskForConnectivityCheck(_ callback: ((ConnectivityStatus?, Error?) -> Void)?) -> URLSessionDataTask {
-        return URLSessionDataTask()
+    func taskForConnectivityCheck(_ callback: ((ConnectivityStatus?, Error?) -> Void)?) {
+        callback?(nil, nil)
     }
     
     func submitDebugLog(_ log: DebugLog, _ callback: SuccessLibraryCallback?) {

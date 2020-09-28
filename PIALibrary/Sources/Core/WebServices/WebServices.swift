@@ -62,9 +62,7 @@ protocol WebServices: class {
 
     func downloadRegionsStaticData(_ callback: LibraryCallback<RegionData>?)
 
-    func flagURL(for country: String) -> URL
-
-    func taskForConnectivityCheck(_ callback: LibraryCallback<ConnectivityStatus>?) -> URLSessionDataTask
+    func taskForConnectivityCheck(_ callback: LibraryCallback<ConnectivityStatus>?)
 
     func submitDebugLog(_ log: DebugLog, _ callback: SuccessLibraryCallback?)
 

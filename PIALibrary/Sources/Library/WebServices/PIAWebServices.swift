@@ -30,55 +30,22 @@ import Regions
 
 private let log = SwiftyBeaver.self
 
-class RegClientStateProvider : RegionClientStateProvider {
-
-    func regionEndpoints() -> [RegionEndpoint] {
-        let validEndpoints = EndpointManager.shared.availableRegionEndpoints()
-        var clientEndpoints = [RegionEndpoint]()
-        for endpoint in validEndpoints.reversed() {
-            clientEndpoints.append(RegionEndpoint(endpoint: endpoint.host, usePinnedCertificate: endpoint.useCertificatePinning ?? false, certificateCommonName: endpoint.commonName))
-        }
-        return clientEndpoints
-
-    }
-    
-}
-
-class ClientStateProvider : AccountClientStateProvider {
-    func accountEndpoints() -> [AccountEndpoint] {
-        let validEndpoints = EndpointManager.shared.availableEndpoints()
-        var clientEndpoints = [AccountEndpoint]()
-        for endpoint in validEndpoints.reversed() {
-            clientEndpoints.append(AccountEndpoint(endpoint: endpoint.host, usePinnedCertificate: endpoint.useCertificatePinning ?? false, certificateCommonName: endpoint.commonName))
-        }
-        return clientEndpoints
-    }
-}
-
-class ClientStagingStateProvider : AccountClientStateProvider {
-    func accountEndpoints() -> [AccountEndpoint] {
-        return [
-            AccountEndpoint(endpoint: Client.configuration.baseUrl, usePinnedCertificate: false, certificateCommonName: "nil"),
-        ]
-    }
-}
-
 class PIAWebServices: WebServices, ConfigurationAccess {
     
     private static let serversVersion = 1002
     private static let store = "apple_app_store"
     
-    private let regionsTask = RegionsTask(stateProvider: RegClientStateProvider())
-    private let accountAPI: IOSAccountAPI!
+    private let regionsTask = RegionsTask(stateProvider: PIARegionClientStateProvider())
+    let accountAPI: IOSAccountAPI!
     
     init() {
         if Client.environment == .staging {
             self.accountAPI = AccountBuilder<IOSAccountAPI>().setPlatform(platform: .ios)
-                .setClientStateProvider(clientStateProvider: ClientStagingStateProvider())
+                .setClientStateProvider(clientStateProvider: PIAAccountStagingClientStateProvider())
                     .setUserAgentValue(userAgentValue: userAgent).build() as? IOSAccountAPI
         } else {
             self.accountAPI = AccountBuilder<IOSAccountAPI>().setPlatform(platform: .ios)
-                .setClientStateProvider(clientStateProvider: ClientStateProvider())
+                .setClientStateProvider(clientStateProvider: PIAAccountClientStateProvider())
                 .setUserAgentValue(userAgentValue: userAgent).build() as? IOSAccountAPI
         }
     }

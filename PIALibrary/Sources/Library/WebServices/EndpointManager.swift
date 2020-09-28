@@ -46,10 +46,25 @@ public class EndpointManager {
         var currentServers = Client.providers.serverProvider.currentServers.filter { $0.serverNetwork == .gen4 }
         currentServers = currentServers.sorted(by: { $0.pingTime ?? 1000 < $1.pingTime ?? 1000 })
         
-        if currentServers.count > 2 {
-            availableEndpoints.append(PinningEndpoint(host: currentServers[0].meta!.ip, useCertificatePinning: true, commonName: currentServers[0].meta?.cn))
-            availableEndpoints.append(PinningEndpoint(host: currentServers[1].meta!.ip, useCertificatePinning: true, commonName: currentServers[1].meta?.cn))
+        if let historicalServer = Client.providers.serverProvider.historicalServers.first {
+            availableEndpoints.append(PinningEndpoint(host: historicalServer.meta!.ip,
+                                                      useCertificatePinning: true,
+                                                      commonName: historicalServer.meta?.cn))
         }
+
+        if currentServers.count > 2 {
+            if currentServers[0].pingTime == nil && currentServers[1].pingTime == nil {
+                while availableEndpoints.count < 2 {
+                    availableEndpoints.append(PinningEndpoint(host: currentServers.randomElement()!.meta!.ip, useCertificatePinning: true, commonName: currentServers.randomElement()?.meta?.cn))
+                }
+            } else {
+                availableEndpoints.append(PinningEndpoint(host: currentServers[0].meta!.ip, useCertificatePinning: true, commonName: currentServers[0].meta?.cn))
+                if availableEndpoints.count < 2 {
+                    availableEndpoints.append(PinningEndpoint(host: currentServers[1].meta!.ip, useCertificatePinning: true, commonName: currentServers[1].meta?.cn))
+                }
+            }
+        }
+        
     }
     
     public func availableRegionEndpoints() -> [PinningEndpoint] {

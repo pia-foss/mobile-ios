@@ -171,10 +171,6 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
         return currentServers.first { $0.identifier == identifier }
     }
     
-    func flagURL(for server: Server) -> URL {
-        return webServices.flagURL(for: server.country.lowercased())
-    }
-
     func resetCurrentServers() {
         currentServers = []
     }
@@ -182,14 +178,6 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
 
     var webServices: WebServices {
         return customWebServices ?? accessedWebServices
-    }
-}
-
-extension Server: ProvidersAccess {
-
-    /// Shortcut for `ServerProvider.flagURL(for:)` as per `Client.Providers.serverProvider`. Requires `Library` subspec.
-    public var flagURL: URL {
-        return accessedProviders.serverProvider.flagURL(for: self)
     }
 }
 

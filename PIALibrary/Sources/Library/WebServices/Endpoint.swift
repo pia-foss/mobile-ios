@@ -26,15 +26,6 @@ protocol Endpoint: ConfigurationAccess {
     var url: URL { get }
 }
 
-enum ClientEndpoint: String, Endpoint {
-
-    case status
-
-    var url: URL {
-        return URL(string: "\(accessedConfiguration.baseUrl)/api/client/\(rawValue)")!
-    }
-}
-
 enum VPNEndpoint: String, Endpoint {
     case servers
     

@@ -561,10 +561,9 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
     }
     
     func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?) {
-        let task = webServices.taskForConnectivityCheck { (_, error) in
+        webServices.taskForConnectivityCheck { (_, error) in
             callback?(error == nil, error)
         }
-        task.resume()
     }
     
 }
