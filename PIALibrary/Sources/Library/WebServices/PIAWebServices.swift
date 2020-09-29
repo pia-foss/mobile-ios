@@ -26,6 +26,7 @@ import Gloss
 import SwiftyBeaver
 import PIARegions
 import PIAAccount
+import Regions
 
 private let log = SwiftyBeaver.self
 
@@ -34,17 +35,18 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     private static let serversVersion = 1002
     private static let store = "apple_app_store"
     
-    private let regionsTask = RegionsTask()
-    private let accountAPI: IOSAccountAPI!
+    private let regionsTask = RegionsTask(stateProvider: PIARegionClientStateProvider())
+    let accountAPI: IOSAccountAPI!
     
     init() {
         if Client.environment == .staging {
-            self.accountAPI = AccountBuilder().setPlatform(platform: .ios)
-                .setStagingEndpoint(stagingEndpoint: Client.configuration.baseUrl)
+            self.accountAPI = AccountBuilder<IOSAccountAPI>().setPlatform(platform: .ios)
+                .setClientStateProvider(clientStateProvider: PIAAccountStagingClientStateProvider())
                     .setUserAgentValue(userAgentValue: userAgent).build() as? IOSAccountAPI
         } else {
-            self.accountAPI = AccountBuilder().setPlatform(platform: .ios)
-                    .setUserAgentValue(userAgentValue: userAgent).build() as? IOSAccountAPI
+            self.accountAPI = AccountBuilder<IOSAccountAPI>().setPlatform(platform: .ios)
+                .setClientStateProvider(clientStateProvider: PIAAccountClientStateProvider())
+                .setUserAgentValue(userAgentValue: userAgent).build() as? IOSAccountAPI
         }
     }
     
@@ -308,7 +310,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             self.regionsTask.fetch { response, jsonResponse, error in
                 
                 if let error = error {
-                    callback?(nil, ClientError.malformedResponseData)
+                    callback?(nil, ClientError.noRegions)
                     return
                 }
 

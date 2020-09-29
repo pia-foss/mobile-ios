@@ -2,6 +2,9 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '11.0'
 use_frameworks!
 
+install! 'cocoapods',
+         :deterministic_uuids => false
+
 # ignore all warnings from all pods
 inhibit_all_warnings!
 
@@ -9,15 +12,15 @@ abstract_target 'PIALibrary' do
     pod 'SwiftyBeaver', '~> 1.7.0'
     pod 'Gloss', '~> 2'
     pod 'Alamofire', '~> 4'
-    pod 'ReachabilitySwift'
+    pod 'ReachabilitySwift', '4.3.0'
     pod 'SwiftEntryKit', '0.7.2'
     pod 'lottie-ios'
     pod 'FXPageControl'
     pod 'PopupDialog'
     pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :commit => 'd19b9de'
     pod 'PIAWireguard', :git => "https://github.com/pia-foss/ios-wireguard"
-    pod "PIAAccountModule", :git => "https://github.com/pia-foss/mobile-common-account"
-    pod 'PIARegions',  :git => "https://github.com/pia-foss/mobile-common-regions", :commit => '4567597'
+    pod "PIAAccountModule", :path => "/Users/jose/Projects/PIA/account"
+    pod 'PIARegions',  :path => "/Users/jose/Projects/PIA/regions"
 
     target 'PIALibrary-iOS' do
         platform :ios, '11.0'

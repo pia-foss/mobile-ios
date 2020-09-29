@@ -77,6 +77,8 @@ public enum ClientError: String, Error {
     /// The selected sandbox subscription is not available in production.
     case sandboxPurchase
     
+    /// Cant retrieve regions
+    case noRegions
     #endif
 }
 

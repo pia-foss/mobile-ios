@@ -422,10 +422,9 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
             callback?(false, nil)
             return
         }
-        let task = webServices.taskForConnectivityCheck { (_, error) in
+        webServices.taskForConnectivityCheck { (_, error) in
             callback?(error == nil, error)
         }
-        task.resume()
     }
 
 }

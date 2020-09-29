@@ -71,6 +71,9 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
             self.scheduleServersUpdate(withDelay: pollInterval)
             
             guard let servers = servers else {
+                if let error = error as? ClientError, error == ClientError.noRegions {
+                    self.pingIfOffline(servers: Client.providers.serverProvider.currentServers)
+                }
                 completionBlock(error)
                 return
             }
@@ -116,6 +119,9 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
             self.scheduleServersUpdate(withDelay: pollInterval)
             
             guard let servers = servers else {
+                if let error = error as? ClientError, error == ClientError.noRegions {
+                    self.pingIfOffline(servers: Client.providers.serverProvider.currentServers)
+                }
                 return
             }
             self.pingIfOffline(servers: servers)

@@ -89,14 +89,6 @@ public protocol ServerProvider: class {
      - Returns: The found `Server` object or `nil`.
      */
     func find(withIdentifier identifier: String) -> Server?
-
-    /**
-     Returns the URL where to find a flag asset associated with a server.
-
-     - Parameter server: The `Server` to fetch the flag for.
-     - Returns: The `URL` of the flag asset. The asset is not guaranteed to be available.
-     */
-    func flagURL(for server: Server) -> URL
     
     /**
      Reset the currentServers object

@@ -26,34 +26,6 @@ protocol Endpoint: ConfigurationAccess {
     var url: URL { get }
 }
 
-enum ClientEndpoint: String, Endpoint {
-    case signup
-    
-    case redeem = "giftcard_redeem"
-    
-    case token = "v2/token"
-
-    case account = "v2/account"
-
-    case updateAccount = "account"
-    
-    case logout = "v2/expire_token"
-
-    case payment
-
-    case status
-
-    case ios
-    
-    case invites
-    
-    case login_link = "v2/login_link"
-
-    var url: URL {
-        return URL(string: "\(accessedConfiguration.baseUrl)/api/client/\(rawValue)")!
-    }
-}
-
 enum VPNEndpoint: String, Endpoint {
     case servers
     
@@ -65,11 +37,3 @@ enum VPNEndpoint: String, Endpoint {
     
 }
 
-enum ServerEndpoint: String, Endpoint {
-    case gen4
-    
-    var url: URL {
-        return URL(string: "https://serverlist.piaservers.net/vpninfo/servers/new")!
-    }
-    
-}

@@ -24,53 +24,24 @@ import Foundation
 import Gloss
 
 extension PIAWebServices {
-    func flagURL(for country: String) -> URL {
-        return URL(string: "\(accessedConfiguration.baseUrl)/images/flags/\(country)_3x.png")!
-    }
-    
-    func taskForConnectivityCheck(_ callback: ((ConnectivityStatus?, Error?) -> Void)?) -> URLSessionDataTask {
-        
-        // every status check should use a new HTTP connection (no Keep-Alive), so we
-        // skip using AFNetworking here and just use NSURLSession directly
-        let config: URLSessionConfiguration = .ephemeral
-        config.timeoutIntervalForRequest = Double(accessedConfiguration.connectivityTimeout) / 1000.0
-        config.timeoutIntervalForResource = Double(accessedConfiguration.connectivityTimeout) / 1000.0
-        let session = URLSession(configuration: config)
-        
-        let url = ClientEndpoint.status.url
-        
-        return session.dataTask(with: url, completionHandler: { (data, response, error) in
+
+    func taskForConnectivityCheck(_ callback: ((ConnectivityStatus?, Error?) -> Void)?) {
+                
+        self.accountAPI.clientStatus { (information, error) in
             DispatchQueue.main.async {
-                if let error = error {
-                    callback?(nil, error)
+                if let _ = error {
+                    callback?(nil, ClientError.internetUnreachable)
                     return
                 }
-                guard let httpResponse = response as? HTTPURLResponse, let data = data else {
+
+                if let information = information {
+                    callback?(ConnectivityStatus(ipAddress: information.ip, isVPN: information.connected), nil)
+                } else {
                     callback?(nil, ClientError.malformedResponseData)
-                    return
                 }
-
-                let statusCode = httpResponse.statusCode
-                guard (statusCode == 200) else {
-                    callback?(nil, ClientError.unexpectedReply)
-                    return
-                }
-
-                let jsonObject: Any
-                do {
-                    jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
-                } catch let e {
-                    callback?(nil, e)
-                    return
-                }
-
-                guard let json = jsonObject as? JSON, let connectivity = GlossConnectivityStatus(json: json) else {
-                    callback?(nil, ClientError.malformedResponseData)
-                    return
-                }
-                callback?(connectivity.parsed, nil)
             }
-        })
+        }
+        
     }
     
     func submitDebugLog(_ log: DebugLog, _ callback: SuccessLibraryCallback?) {
