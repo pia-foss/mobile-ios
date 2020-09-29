@@ -28,7 +28,7 @@ class PIARegionClientStateProvider : RegionClientStateProvider {
         let validEndpoints = EndpointManager.shared.availableRegionEndpoints()
         var clientEndpoints = [RegionEndpoint]()
         for endpoint in validEndpoints.reversed() {
-            clientEndpoints.append(RegionEndpoint(endpoint: endpoint.host, usePinnedCertificate: endpoint.useCertificatePinning ?? false, certificateCommonName: endpoint.commonName))
+            clientEndpoints.append(RegionEndpoint(endpoint: endpoint.host, isProxy: endpoint.isProxy, usePinnedCertificate: endpoint.useCertificatePinning, certificateCommonName: endpoint.commonName))
         }
         return clientEndpoints
 

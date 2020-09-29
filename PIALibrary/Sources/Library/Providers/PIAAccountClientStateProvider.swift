@@ -27,7 +27,7 @@ class PIAAccountClientStateProvider : AccountClientStateProvider {
         let validEndpoints = EndpointManager.shared.availableEndpoints()
         var clientEndpoints = [AccountEndpoint]()
         for endpoint in validEndpoints.reversed() {
-            clientEndpoints.append(AccountEndpoint(endpoint: endpoint.host, usePinnedCertificate: endpoint.useCertificatePinning ?? false, certificateCommonName: endpoint.commonName))
+            clientEndpoints.append(AccountEndpoint(endpoint: endpoint.host, isProxy: endpoint.isProxy, usePinnedCertificate: endpoint.useCertificatePinning, certificateCommonName: endpoint.commonName))
         }
         return clientEndpoints
     }

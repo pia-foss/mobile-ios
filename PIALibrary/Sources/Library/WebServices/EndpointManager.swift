@@ -23,11 +23,13 @@ import Foundation
 
 public struct PinningEndpoint {
     let host: String
-    let useCertificatePinning: Bool?
+    let isProxy: Bool
+    let useCertificatePinning: Bool
     let commonName: String?
     
-    init(host: String, useCertificatePinning: Bool? = false, commonName: String? = nil) {
+    init(host: String, isProxy: Bool = false, useCertificatePinning: Bool = false, commonName: String? = nil) {
         self.host = host
+        self.isProxy = isProxy
         self.useCertificatePinning = useCertificatePinning
         self.commonName = commonName
     }
@@ -95,20 +97,20 @@ public class EndpointManager {
             if Client.providers.vpnProvider.isVPNConnected {
                 return [PinningEndpoint(host: internalUrl),
                         PinningEndpoint(host: pia),
-                        PinningEndpoint(host: proxy)]
+                        PinningEndpoint(host: proxy, isProxy: true)]
             }
             
             var availableEndpoints = [PinningEndpoint]()
             availableMetaEndpoints(&availableEndpoints)
 
             availableEndpoints.append(PinningEndpoint(host: pia))
-            availableEndpoints.append(PinningEndpoint(host: proxy))
+            availableEndpoints.append(PinningEndpoint(host: proxy, isProxy: true))
             
             return availableEndpoints
 
         } else {
             return [PinningEndpoint(host: pia),
-                    PinningEndpoint(host: proxy)]
+                    PinningEndpoint(host: proxy, isProxy: true)]
         }
     }
     
