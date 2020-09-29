@@ -181,4 +181,7 @@ struct AppConstants {
         static let url = "piavpn:login?token="
     }
     
+    struct Widget {
+        static let connect = "piavpn:connect"
+    }
 }

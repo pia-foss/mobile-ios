@@ -2,6 +2,9 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '11.0'
 use_frameworks!
 
+install! 'cocoapods',
+         :deterministic_uuids => false
+
 # ignore all warnings from all pods
 inhibit_all_warnings!
 
@@ -91,7 +94,6 @@ end
 target 'PIA VPN WG Tunnel' do
     piawireguard_pod
 end
-
 
 target 'PIA VPNTests' do
     app_pods

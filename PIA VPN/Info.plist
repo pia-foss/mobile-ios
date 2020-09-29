@@ -53,6 +53,7 @@
 	<string>Authenticate to reveal</string>
 	<key>NSUserActivityTypes</key>
 	<array>
+		<string>PIAConfigurationIntent</string>
 		<string>com.privateinternetaccess.ios.PIA-VPN.connect</string>
 		<string>com.privateinternetaccess.ios.PIA-VPN.disconnect</string>
 	</array>

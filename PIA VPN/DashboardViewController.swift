@@ -24,6 +24,7 @@ import UIKit
 import PIALibrary
 import SideMenu
 import SwiftyBeaver
+import WidgetKit
 
 private let log = SwiftyBeaver.self
 
@@ -632,7 +633,10 @@ class DashboardViewController: AutolayoutViewController {
 //            labelStatus.text = L10n.Dashboard.Vpn.changingRegion
         }
 
-        
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadTimelines(ofKind: "PIAWidget")
+        } 
+
     }
     
     private func handleDisconnectedAndTrustedNetwork() {

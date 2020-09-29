@@ -63,6 +63,9 @@ class AppPreferences {
 
         static let todayWidgetVpnStatus = "vpn.status"
         static let todayWidgetButtonTitle = "vpn.button.description"
+        static let todayWidgetVpnProtocol = "vpn.widget.protocol"
+        static let todayWidgetVpnPort = "vpn.widget.port"
+        static let todayWidgetVpnSocket = "vpn.widget.socket"
         
         // Quick Settings options
         static let quickSettingThemeVisible = "quickSettingThemeVisible"
@@ -232,6 +235,33 @@ class AppPreferences {
         }
     }
     
+    var todayWidgetVpnProtocol: String? {
+        get {
+            return defaults.string(forKey: Entries.todayWidgetVpnProtocol) ?? nil
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.todayWidgetVpnProtocol)
+        }
+    }
+    
+    var todayWidgetVpnPort: String? {
+        get {
+            return defaults.string(forKey: Entries.todayWidgetVpnPort) ?? nil
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.todayWidgetVpnPort)
+        }
+    }
+    
+    var todayWidgetVpnSocket: String? {
+        get {
+            return defaults.string(forKey: Entries.todayWidgetVpnSocket) ?? nil
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.todayWidgetVpnSocket)
+        }
+    }
+
     var useSmallPackets: Bool {
         get {
             return defaults.bool(forKey: Entries.useSmallPackets)
@@ -383,6 +413,9 @@ class AppPreferences {
             Entries.useConnectSiriShortcuts: false,
             Entries.useDisconnectSiriShortcuts: false,
             Entries.todayWidgetButtonTitle: L10n.Today.Widget.login,
+            Entries.todayWidgetVpnProtocol: IKEv2Profile.vpnType,
+            Entries.todayWidgetVpnPort: "500",
+            Entries.todayWidgetVpnSocket: "UDP",
             Entries.quickSettingThemeVisible: true,
             Entries.quickSettingKillswitchVisible: true,
             Entries.quickSettingNetworkToolVisible: true,
@@ -540,6 +573,9 @@ class AppPreferences {
         quickSettingNetworkToolVisible = true
         quickSettingPrivateBrowserVisible = true
         useSmallPackets = false
+        todayWidgetVpnProtocol = IKEv2Profile.vpnType
+        todayWidgetVpnPort = "500"
+        todayWidgetVpnSocket = "UDP"
         Client.configuration.setServerNetworks(to: .gen4)
         Client.resetServers(completionBlock: {_ in })
         failureConnections = 0
@@ -559,6 +595,9 @@ class AppPreferences {
         }
         todayWidgetVpnStatus = L10n.Today.Widget.login
         todayWidgetButtonTitle = L10n.Today.Widget.login
+        todayWidgetVpnProtocol = IKEv2Profile.vpnType
+        todayWidgetVpnPort = "500"
+        todayWidgetVpnSocket = "UDP"
         quickSettingThemeVisible = true
         quickSettingKillswitchVisible = true
         quickSettingNetworkToolVisible = true
