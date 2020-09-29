@@ -85,13 +85,6 @@ class ConnectionTile: UIView, Tileable  {
         self.socketLabel.text = Client.preferences.vpnType.socket
         self.handshakeLabel.text = Client.preferences.vpnType.handshake
         
-        AppPreferences.shared.todayWidgetVpnProtocol = Client.preferences.vpnType.vpnProtocol
-        AppPreferences.shared.todayWidgetVpnSocket = Client.preferences.vpnType.port
-        AppPreferences.shared.todayWidgetVpnPort = Client.preferences.vpnType.socket
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadTimelines(ofKind: "PIAWidget")
-        }
-
     }
     
     private func resetValues() {
@@ -118,106 +111,6 @@ class ConnectionTile: UIView, Tileable  {
     }
     
     private func statusUpdated() {
-    }
-    
-}
-
-private extension String {
-    
-    var vpnProtocol: String {
-        switch self {
-        case PIAWGTunnelProfile.vpnType:
-            return "WireGuard®"
-        case PIATunnelProfile.vpnType:
-            return "OpenVPN"
-        case IKEv2Profile.vpnType:
-            return "IPSec (IKEv2)"
-        default:
-            return self
-        }
-    }
-    
-    var port: String {
-        switch self {
-        case PIAWGTunnelProfile.vpnType:
-            return "1337"
-        case PIATunnelProfile.vpnType:
-            if AppPreferences.shared.piaSocketType != nil {
-                let preferences = Client.preferences.editable()
-                if let currentOpenVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration {
-                    let port = currentOpenVPNConfiguration.sessionConfiguration.builder().endpointProtocols?.first?.port ?? 0
-                    return "\(port)"
-                }
-            } else {
-                return L10n.Global.automatic
-            }
-            return "---"
-        case IKEv2Profile.vpnType:
-            return "500"
-        default:
-            return "---"
-        }
-    }
-    
-    var socket: String {
-        switch self {
-        case PIAWGTunnelProfile.vpnType, IKEv2Profile.vpnType:
-            return "UDP"
-        case PIATunnelProfile.vpnType:
-            return AppPreferences.shared.piaSocketType?.rawValue ?? L10n.Global.automatic
-        default:
-            return self
-
-        }
-    }
-    
-    var handshake: String {
-        switch self {
-        case PIAWGTunnelProfile.vpnType:
-            return "Noise_IK"
-        case PIATunnelProfile.vpnType:
-            return AppPreferences.shared.piaHandshake.description
-        case IKEv2Profile.vpnType:
-            let preferences = Client.preferences.editable()
-            return preferences.ikeV2IntegrityAlgorithm
-        default:
-            return self
-        }
-    }
-
-    var encryption: String {
-        switch self {
-        case PIAWGTunnelProfile.vpnType:
-            return "ChaCha20"
-        case PIATunnelProfile.vpnType:
-            let preferences = Client.preferences.editable()
-            if let currentOpenVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration {
-                return currentOpenVPNConfiguration.sessionConfiguration.builder().cipher?.rawValue ?? ""
-            }
-            return "---"
-        case IKEv2Profile.vpnType:
-            let preferences = Client.preferences.editable()
-            return preferences.ikeV2EncryptionAlgorithm
-        default:
-            return self
-        }
-    }
-    
-    var authentication: String {
-        switch self {
-        case PIAWGTunnelProfile.vpnType:
-            return "Poly1305"
-        case PIATunnelProfile.vpnType:
-            let preferences = Client.preferences.editable()
-            if let currentOpenVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration {
-                return currentOpenVPNConfiguration.sessionConfiguration.builder().digest?.rawValue ?? ""
-            }
-            return "---"
-        case IKEv2Profile.vpnType:
-            return "---"
-        default:
-            return self
-        }
     }
     
 }

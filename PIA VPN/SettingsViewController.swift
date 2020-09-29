@@ -26,6 +26,7 @@ import TunnelKit
 import SafariServices
 import SwiftyBeaver
 import PIAWireguard
+import WidgetKit
 
 private let log = SwiftyBeaver.self
 
@@ -709,6 +710,14 @@ class SettingsViewController: AutolayoutViewController {
     private func commitAppPreferences() {
         AppPreferences.shared.piaSocketType = pendingOpenVPNSocketType
         AppPreferences.shared.piaHandshake = pendingHandshake
+        
+        AppPreferences.shared.todayWidgetVpnProtocol = Client.preferences.vpnType.vpnProtocol
+        AppPreferences.shared.todayWidgetVpnSocket = Client.preferences.vpnType.port
+        AppPreferences.shared.todayWidgetVpnPort = Client.preferences.vpnType.socket
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadTimelines(ofKind: "PIAWidget")
+        }
+
     }
     
     private func commitPreferences() {

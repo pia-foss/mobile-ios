@@ -189,6 +189,8 @@
 		82A1AD2A24B87CCD0003DD02 /* PIACard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82A1AD2824B87CCD0003DD02 /* PIACard.xib */; };
 		82A1AD2F24B87CF20003DD02 /* PIACard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A1AD2E24B87CF20003DD02 /* PIACard.swift */; };
 		82A1AD3024B87CF20003DD02 /* PIACard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A1AD2E24B87CF20003DD02 /* PIACard.swift */; };
+		82C0071325231F2800F21AF2 /* String+VPNType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C0071225231F2800F21AF2 /* String+VPNType.swift */; };
+		82C0071425231F2800F21AF2 /* String+VPNType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C0071225231F2800F21AF2 /* String+VPNType.swift */; };
 		C391BE5194263927CFEF42C8 /* Pods_PIA_VPN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D69C53FAA7FD1546A32A54 /* Pods_PIA_VPN.framework */; };
 		DD052AC32419003300AD3A24 /* ProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD052AC22419003300AD3A24 /* ProtocolTableViewCell.swift */; };
 		DD052AC42419020E00AD3A24 /* ProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD052AC22419003300AD3A24 /* ProtocolTableViewCell.swift */; };
@@ -587,6 +589,7 @@
 		82A1AD2524B86AF60003DD02 /* PIACardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACardsViewController.swift; sourceTree = "<group>"; };
 		82A1AD2824B87CCD0003DD02 /* PIACard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PIACard.xib; sourceTree = "<group>"; };
 		82A1AD2E24B87CF20003DD02 /* PIACard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACard.swift; sourceTree = "<group>"; };
+		82C0071225231F2800F21AF2 /* String+VPNType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+VPNType.swift"; sourceTree = "<group>"; };
 		82E20B0D24F5666E0065EFE3 /* PIAAccount.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PIAAccount.framework; path = ../account/build/bin/iOS/PIAAccountReleaseFramework/PIAAccount.framework; sourceTree = "<group>"; };
 		85D69C53FAA7FD1546A32A54 /* Pods_PIA_VPN.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIA_VPN.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		879456456EB49FC0FF6A182F /* Pods-PIA VPN dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPN dev.release.xcconfig"; path = "Target Support Files/Pods-PIA VPN dev/Pods-PIA VPN dev.release.xcconfig"; sourceTree = "<group>"; };
@@ -837,6 +840,7 @@
 				DDD271E021D6262100B6D20F /* PropertyStoring.swift */,
 				DDE432DE2498EADA0095B197 /* Array+Group.swift */,
 				82183D7A2500FD460033023F /* String+Substrings.swift */,
+				82C0071225231F2800F21AF2 /* String+VPNType.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -2166,6 +2170,7 @@
 				0EFDC1E71FE4ABAA007C0B9B /* Notification+App.swift in Sources */,
 				827570E224DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift in Sources */,
 				DD918577246BFA7F006B3A2B /* RatingManager.swift in Sources */,
+				82C0071425231F2800F21AF2 /* String+VPNType.swift in Sources */,
 				DD1C138721E60BAE004004B3 /* IPTile.swift in Sources */,
 				0E9452971FDB4C5800891948 /* AboutComponentCell.swift in Sources */,
 				0E53A83C1FE5A156000C2A18 /* AccountProvider+Refresh.swift in Sources */,
@@ -2247,6 +2252,7 @@
 				82A1AD2F24B87CF20003DD02 /* PIACard.swift in Sources */,
 				0EFB839020209CF200980F69 /* VPNPermissionViewController.swift in Sources */,
 				0EFDC1D71FE46177007C0B9B /* SensitiveOperation.swift in Sources */,
+				82C0071325231F2800F21AF2 /* String+VPNType.swift in Sources */,
 				0E3A35281FD9A960000B0F99 /* DashboardViewController.swift in Sources */,
 				DDB6B95021C94E2E00DE8C5F /* TrustedNetworksViewController.swift in Sources */,
 				827570D424DAA317008F9800 /* NetworkRuleOptionView.swift in Sources */,
