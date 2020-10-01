@@ -1496,7 +1496,7 @@
 					8269A6D4251CB5E0000B4DBF = {
 						CreatedOnToolsVersion = 12.0;
 						DevelopmentTeam = 5357M5NW9W;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					DDC8F5EB23EC106F005D19C6 = {
 						CreatedOnToolsVersion = 11.3.1;
@@ -1540,8 +1540,8 @@
 				0EFB606F203D7A2C0095398C /* PIA VPN AdBlocker */,
 				0E67FC211E3F802D00EF9929 /* PIA VPN Tunnel */,
 				DDC8F5EB23EC106F005D19C6 /* PIA VPN WG Tunnel */,
-				0EEE1BE61E4F6EF400397DE2 /* PIA VPNTests */,
 				8269A6D4251CB5E0000B4DBF /* PIAWidgetExtension */,
+				0EEE1BE61E4F6EF400397DE2 /* PIA VPNTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1807,12 +1807,12 @@
 				"${BUILT_PRODUCTS_DIR}/GradientProgressBar/GradientProgressBar.framework",
 				"${BUILT_PRODUCTS_DIR}/LightweightObservable/LightweightObservable.framework",
 				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
-				"${PODS_ROOT}/../../account/build/cocoapods/framework/PIAAccount.framework",
-				"${PODS_ROOT}/../../account/build/cocoapods/framework/PIAAccount.framework.dSYM",
+				"${PODS_ROOT}/PIAAccountModule/build/cocoapods/framework/PIAAccount.framework",
+				"${PODS_ROOT}/PIAAccountModule/build/cocoapods/framework/PIAAccount.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/PIAAccountModule/PIAAccountModule.framework",
 				"${BUILT_PRODUCTS_DIR}/PIALibrary/PIALibrary.framework",
-				"${PODS_ROOT}/../../regions/regions/build/cocoapods/framework/Regions.framework",
-				"${PODS_ROOT}/../../regions/regions/build/cocoapods/framework/Regions.framework.dSYM",
+				"${PODS_ROOT}/PIARegions/regions/build/cocoapods/framework/Regions.framework",
+				"${PODS_ROOT}/PIARegions/regions/build/cocoapods/framework/Regions.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/PIARegions/PIARegions.framework",
 				"${BUILT_PRODUCTS_DIR}/PIAWireguard/PIAWireguard.framework",
 				"${BUILT_PRODUCTS_DIR}/Popover/Popover.framework",
@@ -1905,12 +1905,12 @@
 				"${BUILT_PRODUCTS_DIR}/GradientProgressBar/GradientProgressBar.framework",
 				"${BUILT_PRODUCTS_DIR}/LightweightObservable/LightweightObservable.framework",
 				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
-				"${PODS_ROOT}/../../account/build/cocoapods/framework/PIAAccount.framework",
-				"${PODS_ROOT}/../../account/build/cocoapods/framework/PIAAccount.framework.dSYM",
+				"${PODS_ROOT}/PIAAccountModule/build/cocoapods/framework/PIAAccount.framework",
+				"${PODS_ROOT}/PIAAccountModule/build/cocoapods/framework/PIAAccount.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/PIAAccountModule/PIAAccountModule.framework",
 				"${BUILT_PRODUCTS_DIR}/PIALibrary/PIALibrary.framework",
-				"${PODS_ROOT}/../../regions/regions/build/cocoapods/framework/Regions.framework",
-				"${PODS_ROOT}/../../regions/regions/build/cocoapods/framework/Regions.framework.dSYM",
+				"${PODS_ROOT}/PIARegions/regions/build/cocoapods/framework/Regions.framework",
+				"${PODS_ROOT}/PIARegions/regions/build/cocoapods/framework/Regions.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/PIARegions/PIARegions.framework",
 				"${BUILT_PRODUCTS_DIR}/PIAWireguard/PIAWireguard.framework",
 				"${BUILT_PRODUCTS_DIR}/Popover/Popover.framework",
@@ -1977,12 +1977,12 @@
 				"${BUILT_PRODUCTS_DIR}/GradientProgressBar/GradientProgressBar.framework",
 				"${BUILT_PRODUCTS_DIR}/LightweightObservable/LightweightObservable.framework",
 				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
-				"${PODS_ROOT}/../../account/build/cocoapods/framework/PIAAccount.framework",
-				"${PODS_ROOT}/../../account/build/cocoapods/framework/PIAAccount.framework.dSYM",
+				"${PODS_ROOT}/PIAAccountModule/build/cocoapods/framework/PIAAccount.framework",
+				"${PODS_ROOT}/PIAAccountModule/build/cocoapods/framework/PIAAccount.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/PIAAccountModule/PIAAccountModule.framework",
 				"${BUILT_PRODUCTS_DIR}/PIALibrary/PIALibrary.framework",
-				"${PODS_ROOT}/../../regions/regions/build/cocoapods/framework/Regions.framework",
-				"${PODS_ROOT}/../../regions/regions/build/cocoapods/framework/Regions.framework.dSYM",
+				"${PODS_ROOT}/PIARegions/regions/build/cocoapods/framework/Regions.framework",
+				"${PODS_ROOT}/PIARegions/regions/build/cocoapods/framework/Regions.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/PIARegions/PIARegions.framework",
 				"${BUILT_PRODUCTS_DIR}/PIAWireguard/PIAWireguard.framework",
 				"${BUILT_PRODUCTS_DIR}/Popover/Popover.framework",
@@ -2452,7 +2452,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN Tunnel/PIA VPN Tunnel.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16873;
+				CURRENT_PROJECT_VERSION = 16878;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -2482,7 +2482,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 16873;
+				CURRENT_PROJECT_VERSION = 16878;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -2510,7 +2510,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN/PIA VPN.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16873;
+				CURRENT_PROJECT_VERSION = 16878;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2555,7 +2555,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN/PIA VPN.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16873;
+				CURRENT_PROJECT_VERSION = 16878;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2661,7 +2661,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16873;
+				CURRENT_PROJECT_VERSION = 16878;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2693,7 +2693,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 16873;
+				CURRENT_PROJECT_VERSION = 16878;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2831,7 +2831,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN/PIA VPN.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16873;
+				CURRENT_PROJECT_VERSION = 16878;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2869,7 +2869,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN/PIA VPN.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16873;
+				CURRENT_PROJECT_VERSION = 16878;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2909,7 +2909,8 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = PIAWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 16878;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2917,10 +2918,12 @@
 				INFOPLIST_FILE = PIAWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 3.8.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PIAWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.privateinternetaccess.ios.PIA-VPN.PIAWidget";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2943,8 +2946,9 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = PIAWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 16878;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2952,10 +2956,12 @@
 				INFOPLIST_FILE = PIAWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 3.8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PIAWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.privateinternetaccess.ios.PIA-VPN.PIAWidget";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2975,7 +2981,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN WG Tunnel/PIA_VPN_WG_Tunnel.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16873;
+				CURRENT_PROJECT_VERSION = 16878;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -3011,7 +3017,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 16873;
+				CURRENT_PROJECT_VERSION = 16878;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
