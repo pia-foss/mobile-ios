@@ -183,5 +183,6 @@ struct AppConstants {
     
     struct Widget {
         static let connect = "piavpn:connect"
+        static let view = "piavpn:view"
     }
 }

@@ -117,7 +117,7 @@ struct PIAWidgetEntryView : View {
 
             }
 
-        }.widgetURL(URL(string: "piavpn:connect"))
+        }.widgetURL(URL(string: widgetFamily == .systemMedium ? "piavpn:view" : "piavpn:connect"))
         .background(Color("WidgetBackground"))
             
     }
