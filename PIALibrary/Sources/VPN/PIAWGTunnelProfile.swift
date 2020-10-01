@@ -222,6 +222,7 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
     public func remove(_ callback: SuccessLibraryCallback?) {
         find { (vpn, error) in
             guard let vpn = vpn else {
+                callback?(nil)
                 return
             }
             vpn.removeFromPreferences(completionHandler: callback)

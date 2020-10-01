@@ -155,14 +155,17 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
                     !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) &&
                     (previousProfile.vpnType == IPSecProfile.vpnType || previousProfile.vpnType == IKEv2Profile.vpnType)) {
                     //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead
-                    previousProfile.remove(nil)
+                    previousProfile.remove({ _ in
+                        Macros.postNotification(.PIAVPNDidInstall)
+                        callback?(nil)
+                    })
                 } else {
                     if let previousProfile = previousProfile { // dont connect after install
                         self.connect(nil)
+                        Macros.postNotification(.PIAVPNDidInstall)
+                        callback?(nil)
                     }
                 }
-                Macros.postNotification(.PIAVPNDidInstall)
-                callback?(nil)
             }
         }
 
