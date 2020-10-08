@@ -19,7 +19,9 @@
 "login.error.title" = "Inloggen";
 "login.error.unauthorized" = "Uw gebruikersnaam of wachtwoord is onjuist.";
 "login.error.validation" = "U moet een gebruikersnaam en wachtwoord invoeren.";
+"login.magic.link.invalid.email" = "Ongeldige e-mail. Probeer het opnieuw.";
 "login.magic.link.response" = "Controleer uw e-mail voor een inloglink.";
+"login.magic.link.send" = "Link verzenden";
 "login.magic.link.title" = "Log in met de magische link in uw e-mail";
 "login.password.placeholder" = "Wachtwoord";
 "login.receipt.button" = "Inloggen met aankoopbewijs";

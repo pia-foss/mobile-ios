@@ -19,7 +19,9 @@
 "login.error.title" = "Войти";
 "login.error.unauthorized" = "Неправильное имя пользователя или пароль.";
 "login.error.validation" = "Нужно ввести имя пользователя и пароль.";
+"login.magic.link.invalid.email" = "Недействительный эл. адрес. Повторите попытку.";
 "login.magic.link.response" = "Поищите ссылку для входа в письме.";
+"login.magic.link.send" = "Отправить ссылку";
 "login.magic.link.title" = "Войти через волшебную ссылку из письма";
 "login.password.placeholder" = "Пароль";
 "login.receipt.button" = "Выполните вход по квитанции о покупке";

@@ -19,7 +19,9 @@
 "login.error.title" = "เข้าสู่ระบบ";
 "login.error.unauthorized" = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
 "login.error.validation" = "คุณต้องกรอกชื่อผู้ใช้และรหัสผ่าน";
+"login.magic.link.invalid.email" = "อีเมลไม่ถูกต้อง กรุณาลองอีกครั้ง";
 "login.magic.link.response" = "โปรดตรวจสอบอีเมลของคุณเพื่อดูลิงค์สำหรับเข้าสู่ระบบ";
+"login.magic.link.send" = "ส่งลิงก์";
 "login.magic.link.title" = "เข้าสู่ระบบโดยใช้ลิงก์อีเมลวิเศษ";
 "login.password.placeholder" = "รหัสผ่าน";
 "login.receipt.button" = "เข้าสู่ระบบโดยใช้ใบเสร็จรับเงิน";

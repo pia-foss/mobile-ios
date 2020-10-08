@@ -19,7 +19,9 @@
 "login.error.title" = "تسجيل الدخول";
 "login.error.unauthorized" = "اسم المستخدم أو كلمة المرور غير صحيحة.";
 "login.error.validation" = "يجب إدخال اسم المستخدم وكلمة المرور";
+"login.magic.link.invalid.email" = "البريد الإلكتروني غير صحيح. يرجى إعادة المحاولة.";
 "login.magic.link.response" = "يرجى إلقاء نظرة على بريدك الإلكتروني للحصول على رابط تسجيل الدخول.";
+"login.magic.link.send" = "إرسال الرابط";
 "login.magic.link.title" = "تسجيل الدخول باستخدام رابط البريد الإلكتروني السحري";
 "login.password.placeholder" = "كلمة المرور";
 "login.receipt.button" = "تسجيل الدخول باستخدام إيصال الشراء";

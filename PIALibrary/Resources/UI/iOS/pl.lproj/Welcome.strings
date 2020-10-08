@@ -19,7 +19,9 @@
 "login.error.title" = "Zaloguj";
 "login.error.unauthorized" = "Twoja nazwa użytkownika i hasło są nieprawidłowe.";
 "login.error.validation" = "Musisz podać nazwę użytkownika i hasło.";
+"login.magic.link.invalid.email" = "Nieprawidłowy e-mail. Spróbuj ponownie";
 "login.magic.link.response" = "Link do logowania wysłaliśmy e-mailem,";
+"login.magic.link.send" = "Wyślij link";
 "login.magic.link.title" = "Zaloguj się, używając sekretnego linku z e-maila";
 "login.password.placeholder" = "Hasło";
 "login.receipt.button" = "Zaloguj się, używając pokwitowania zakupu";

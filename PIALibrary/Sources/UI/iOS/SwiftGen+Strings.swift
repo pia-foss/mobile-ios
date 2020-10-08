@@ -213,20 +213,6 @@ internal enum L10n {
         }
       }
     }
-    internal enum Camera {
-      internal enum Access {
-        internal enum Denied {
-          /// Enable camera access so you can scan QR codes to redeem a gift card.
-          internal static let message = L10n.tr("Welcome", "camera.access.denied.message")
-        }
-        internal enum Error {
-          /// Your device does not support scanning QR codes. Please use a device with a camera.
-          internal static let message = L10n.tr("Welcome", "camera.access.error.message")
-          /// Camera not available
-          internal static let title = L10n.tr("Welcome", "camera.access.error.title")
-        }
-      }
-    }
     internal enum Gdpr {
       internal enum Accept {
         internal enum Button {

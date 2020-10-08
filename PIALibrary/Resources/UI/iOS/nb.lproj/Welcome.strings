@@ -19,7 +19,9 @@
 "login.error.title" = "Logg på";
 "login.error.unauthorized" = "Brukernavnet eller passordet ditt er feil.";
 "login.error.validation" = "Du må oppgi et brukernavn og passord.";
+"login.magic.link.invalid.email" = "Ugyldig e-post. Prøv igjen.";
 "login.magic.link.response" = "Sjekk e-posten din for å finne påloggingskoblingen.";
+"login.magic.link.send" = "Send kobling";
 "login.magic.link.title" = "Pålogging med magisk e-postkobling";
 "login.password.placeholder" = "Passord";
 "login.receipt.button" = "Logg på med kjøpsbevis";

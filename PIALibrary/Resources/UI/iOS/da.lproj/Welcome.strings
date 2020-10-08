@@ -19,7 +19,9 @@
 "login.error.title" = "Log ind";
 "login.error.unauthorized" = "Dit brugernavn eller kodeord er forkert.";
 "login.error.validation" = "Du skal indtaste et brugernavn og et kodeord.";
+"login.magic.link.invalid.email" = "Ugyldig e-mail. Prøv igen.";
 "login.magic.link.response" = "Se i din e-mail for et login-link.";
+"login.magic.link.send" = "Send link";
 "login.magic.link.title" = "Log ind ved hjælp af magisk e-maillink";
 "login.password.placeholder" = "Kodeord";
 "login.receipt.button" = "Log på med købskvittering";

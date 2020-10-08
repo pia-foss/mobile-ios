@@ -19,7 +19,9 @@
 "login.error.title" = "Iniciar sesión";
 "login.error.unauthorized" = "Tu nombre de usuario o contraseña son incorrectos.";
 "login.error.validation" = "Debe ingresar un nombre de usuario y una contraseña.";
+"login.magic.link.invalid.email" = "Correo electrónico no válido. Vuelve a intentarlo.";
 "login.magic.link.response" = "Busca en tu correo electrónico un enlace de inicio de sesión.";
+"login.magic.link.send" = "Enviar enlace";
 "login.magic.link.title" = "Inicia sesión con el vínculo mágico del correo electrónico.";
 "login.password.placeholder" = "Contraseña ";
 "login.receipt.button" = "Inicia sesión con el recibo de compra";

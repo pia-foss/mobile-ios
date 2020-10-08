@@ -19,7 +19,9 @@
 "login.error.title" = "ログイン";
 "login.error.unauthorized" = "ユーザー名またはパスワードが間違っています。";
 "login.error.validation" = "ユーザー名とパスワードを入力してください。";
+"login.magic.link.invalid.email" = "無効なメールアドレス。もう一度お試しください。";
 "login.magic.link.response" = "ログインリンクについては、メールを確認してください。";
+"login.magic.link.send" = "リンクを送信";
 "login.magic.link.title" = "魔法のメールリンクを使用してログイン";
 "login.password.placeholder" = "パスワード";
 "login.receipt.button" = "購入領収書を使用してログイン";

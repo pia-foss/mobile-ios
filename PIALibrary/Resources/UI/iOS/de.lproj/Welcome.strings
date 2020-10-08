@@ -19,7 +19,9 @@
 "login.error.title" = "Anmelden";
 "login.error.unauthorized" = "Dein Benutzername oder Passwort ist falsch.";
 "login.error.validation" = "Du musst einen Benutzernamen und ein Passwort angeben.";
+"login.magic.link.invalid.email" = "Ungültige E-Mail-Adresse. Bitte erneut versuchen.";
 "login.magic.link.response" = "Bitte überprüfen Sie Ihre E-Mail auf einen Login-Link.";
+"login.magic.link.send" = "Link senden";
 "login.magic.link.title" = "Anmeldung mit magischem E-Mail-Link";
 "login.password.placeholder" = "Passwort";
 "login.receipt.button" = "Anmeldung mit Kaufbeleg";

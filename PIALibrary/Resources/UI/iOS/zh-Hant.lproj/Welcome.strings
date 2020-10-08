@@ -19,7 +19,9 @@
 "login.error.title" = "登入";
 "login.error.unauthorized" = "您的使用者名稱或密碼不正確。";
 "login.error.validation" = "您必須輸入使用者名稱及密碼。";
+"login.magic.link.invalid.email" = "無效的電子郵件。請重試。";
 "login.magic.link.response" = "請確認電子信箱是否已收到登入連結。";
+"login.magic.link.send" = "傳送連結";
 "login.magic.link.title" = "使用神奇的電子郵件連結登入";
 "login.password.placeholder" = "密碼";
 "login.receipt.button" = "使用購買收據登入";

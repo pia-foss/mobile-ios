@@ -19,7 +19,9 @@
 "login.error.title" = "Giriş yap";
 "login.error.unauthorized" = "Kullanıcı adınız ya da şifreniz hatalı.";
 "login.error.validation" = "Bir kullanıcı adı ve şifre girmelisiniz.";
+"login.magic.link.invalid.email" = "E-posta adresi geçersiz. Lütfen tekrar deneyin.";
 "login.magic.link.response" = "Giriş linkini bulmak için lütfen e-postalarınıza bakın.";
+"login.magic.link.send" = "Link Gönder";
 "login.magic.link.title" = "Sihirli e-posta linki ile giriş yap";
 "login.password.placeholder" = "Şifre";
 "login.receipt.button" = "Satın alım faturasıyla giriş yapın";
