@@ -273,16 +273,24 @@
                             <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1DO-6R-6fa">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0tn-sS-h37" customClass="TPKeyboardAvoidingScrollView">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NKH-cJ-zlw">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
-                                    </scrollView>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Nba-UB-kjD">
+                                            <size key="itemSize" width="128" height="128"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells/>
+                                    </collectionView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="0tn-sS-h37" secondAttribute="bottom" id="J97-5F-KGm"/>
-                                    <constraint firstItem="0tn-sS-h37" firstAttribute="top" secondItem="1DO-6R-6fa" secondAttribute="top" id="KRX-gC-aUO"/>
-                                    <constraint firstAttribute="trailing" secondItem="0tn-sS-h37" secondAttribute="trailing" id="Unm-z1-bSC"/>
-                                    <constraint firstItem="0tn-sS-h37" firstAttribute="leading" secondItem="1DO-6R-6fa" secondAttribute="leading" id="jIe-k0-jIH"/>
+                                    <constraint firstAttribute="bottom" secondItem="NKH-cJ-zlw" secondAttribute="bottom" id="Jbt-Q6-Ecj"/>
+                                    <constraint firstItem="NKH-cJ-zlw" firstAttribute="top" secondItem="1DO-6R-6fa" secondAttribute="top" id="LwM-zZ-9vQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="NKH-cJ-zlw" secondAttribute="trailing" id="aXL-ak-msd"/>
+                                    <constraint firstItem="NKH-cJ-zlw" firstAttribute="leading" secondItem="1DO-6R-6fa" secondAttribute="leading" id="afd-0S-QRB"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -297,7 +305,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="TLs-Dr-ZRv"/>
                     <connections>
-                        <outlet property="scrollView" destination="0tn-sS-h37" id="R5H-LA-Woh"/>
+                        <outlet property="collectionView" destination="NKH-cJ-zlw" id="1xy-pt-D7U"/>
                         <outlet property="viewContainer" destination="1DO-6R-6fa" id="l6R-K6-7BW"/>
                     </connections>
                 </viewController>

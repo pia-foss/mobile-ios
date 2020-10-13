@@ -27,8 +27,24 @@ private let log = SwiftyBeaver.self
 
 class DedicatedIpViewController: AutolayoutViewController {
     
+    @IBOutlet private weak var collectionView: UICollectionView!
+    private var data = [String]()
 
-    @IBOutlet private weak var scrollView: UIScrollView!
+    private struct Sections {
+        static let header = 0
+        static let dedicatedIps = 1
+        
+        static func numberOfSections() -> Int {
+            return 2
+        }
+        
+    }
+    
+    private struct Cells {
+        static let dedicatedIpRow = "DedicatedIpRowCollectionViewCell"
+        static let header = "DedicatedIpEmptyHeaderCollectionViewCell"
+        static let titleHeader = "DedicatedIPTitleHeaderCollectionViewCell"
+    }
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -41,6 +57,9 @@ class DedicatedIpViewController: AutolayoutViewController {
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        nc.addObserver(self, selector: #selector(reloadCollectionView), name: .DedicatedIpReload, object: nil)
+
+        configureCollectionView()
 
     }
 
@@ -58,6 +77,37 @@ class DedicatedIpViewController: AutolayoutViewController {
         styleNavigationBarWithTitle("Dedicated IP")
     }
     
+    @objc private func reloadCollectionView() {
+        data.append("a")
+        collectionView.reloadData()
+    }
+    
+    private func configureCollectionView() {
+
+        let layout = collectionView.collectionViewLayout
+        if let flowLayout = layout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = CGSize(
+                width: collectionView.widestCellWidth,
+                height: 100
+            )
+        }
+
+        collectionView.collectionViewLayout = AutoInvalidatingLayout()
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(UINib(nibName: Cells.dedicatedIpRow,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.dedicatedIpRow)
+        collectionView.register(UINib(nibName: Cells.header, bundle: nil),
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier:Cells.header)
+        collectionView.register(UINib(nibName: Cells.titleHeader, bundle: nil),
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier:Cells.titleHeader)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
+
+    
     // MARK: Restylable
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
@@ -69,7 +119,76 @@ class DedicatedIpViewController: AutolayoutViewController {
             Theme.current.applyPrincipalBackground(viewContainer)
         }
         
+        Theme.current.applyPrincipalBackground(collectionView)
+        self.collectionView.reloadData()
+
     }
 
 }
 
+extension DedicatedIpViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return data.isEmpty ? 1 : Sections.numberOfSections()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return Sections.header == section ? 0 : data.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.dedicatedIpRow, for: indexPath) as! DedicatedIpRowCollectionViewCell
+        cell.fill(withServer: Server.automatic)
+        Theme.current.applySecondaryBackground(cell)
+
+        let backgroundView = UIView()
+        Theme.current.applyPrincipalBackground(backgroundView)
+        cell.selectedBackgroundView = backgroundView
+
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+
+        case UICollectionView.elementKindSectionHeader:
+            if Sections.header == indexPath.section {
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Cells.header, for: indexPath) as! DedicatedIpEmptyHeaderCollectionViewCell
+                headerView.setup()
+                return headerView
+            } else {
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Cells.titleHeader, for: indexPath) as! DedicatedIPTitleHeaderCollectionViewCell
+                return headerView
+            }
+
+        default:
+            return UICollectionReusableView()
+
+        }
+
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+
+        let indexPath = IndexPath(row: 0, section: section)
+        
+        if Sections.header == indexPath.section {
+            let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as! DedicatedIpEmptyHeaderCollectionViewCell
+            return headerView.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height),
+                                                      withHorizontalFittingPriority: .defaultHigh,
+                                                      verticalFittingPriority: .fittingSizeLevel)
+        } else {
+            let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as! DedicatedIPTitleHeaderCollectionViewCell
+            return headerView.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height),
+                                                      withHorizontalFittingPriority: .defaultHigh,
+                                                      verticalFittingPriority: .fittingSizeLevel)
+        }
+
+
+    }
+    
+}

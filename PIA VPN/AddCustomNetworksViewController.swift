@@ -29,7 +29,7 @@ class AddCustomNetworksViewController: AutolayoutViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     private struct Cells {
         static let network = "CustomNetworkCollectionViewCell"
-        static let header = "NetworkHeaderCollectionViewCell"
+        static let header = "PIAHeaderCollectionViewCell"
         static let footer = "NetworkFooterCollectionViewCell"
     }
 
@@ -126,7 +126,7 @@ extension AddCustomNetworksViewController: UICollectionViewDelegateFlowLayout, U
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
 
-        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Cells.header, for: indexPath) as! NetworkHeaderCollectionViewCell
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Cells.header, for: indexPath) as! PIAHeaderCollectionViewCell
         headerView.setup(withTitle: L10n.Network.Management.Tool.Add.rule, andSubtitle: L10n.Network.Management.Tool.Choose.wifi + L10n.Settings.Hotspothelper.Available.help)
         return headerView
 
@@ -135,7 +135,7 @@ extension AddCustomNetworksViewController: UICollectionViewDelegateFlowLayout, U
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
 
         let indexPath = IndexPath(row: 0, section: section)
-        let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as! NetworkHeaderCollectionViewCell
+        let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as! PIAHeaderCollectionViewCell
 
         return headerView.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height),
                                                   withHorizontalFittingPriority: .defaultHigh,

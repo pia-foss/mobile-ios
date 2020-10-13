@@ -149,8 +149,8 @@
 		82183D9925014FDC0033023F /* CustomNetworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82183D9325014FDC0033023F /* CustomNetworkCollectionViewCell.xib */; };
 		82183D9A25014FDC0033023F /* NetworkFooterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82183D9425014FDC0033023F /* NetworkFooterCollectionViewCell.xib */; };
 		82183D9B25014FDC0033023F /* NetworkFooterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82183D9425014FDC0033023F /* NetworkFooterCollectionViewCell.xib */; };
-		82183D9C25014FDC0033023F /* NetworkHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82183D9525014FDC0033023F /* NetworkHeaderCollectionViewCell.xib */; };
-		82183D9D25014FDC0033023F /* NetworkHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82183D9525014FDC0033023F /* NetworkHeaderCollectionViewCell.xib */; };
+		82183D9C25014FDC0033023F /* PIAHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82183D9525014FDC0033023F /* PIAHeaderCollectionViewCell.xib */; };
+		82183D9D25014FDC0033023F /* PIAHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82183D9525014FDC0033023F /* PIAHeaderCollectionViewCell.xib */; };
 		8221922B24CECFE700C24F1C /* NMTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221922A24CECFE700C24F1C /* NMTTests.swift */; };
 		822F97B4251DD53100644EF2 /* WidgetUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822F97B3251DD53100644EF2 /* WidgetUtils.swift */; };
 		824C530824C046CB003DB740 /* ConnectionTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824C530724C046CA003DB740 /* ConnectionTile.swift */; };
@@ -171,8 +171,8 @@
 		8269A6FE251CBB36000B4DBF /* WidgetContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8269A6FD251CBB36000B4DBF /* WidgetContent.swift */; };
 		827570CF24DAA128008F9800 /* NetworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570C924DAA128008F9800 /* NetworkCollectionViewCell.swift */; };
 		827570D024DAA128008F9800 /* NetworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570C924DAA128008F9800 /* NetworkCollectionViewCell.swift */; };
-		827570D124DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570CA24DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift */; };
-		827570D224DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570CA24DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift */; };
+		827570D124DAA128008F9800 /* PIAHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570CA24DAA128008F9800 /* PIAHeaderCollectionViewCell.swift */; };
+		827570D224DAA128008F9800 /* PIAHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570CA24DAA128008F9800 /* PIAHeaderCollectionViewCell.swift */; };
 		827570D424DAA317008F9800 /* NetworkRuleOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570D324DAA317008F9800 /* NetworkRuleOptionView.swift */; };
 		827570D524DAA317008F9800 /* NetworkRuleOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570D324DAA317008F9800 /* NetworkRuleOptionView.swift */; };
 		827570D824DAB6E4008F9800 /* NetworkFooterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570D624DAB6E4008F9800 /* NetworkFooterCollectionViewCell.swift */; };
@@ -183,6 +183,20 @@
 		827570E224DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570DF24DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift */; };
 		829EB507253598BD003E74DD /* DedicatedIpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB506253598BD003E74DD /* DedicatedIpViewController.swift */; };
 		829EB508253598BD003E74DD /* DedicatedIpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB506253598BD003E74DD /* DedicatedIpViewController.swift */; };
+		829EB51125359DBB003E74DD /* DedicatedIpRowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB50F25359DBB003E74DD /* DedicatedIpRowCollectionViewCell.swift */; };
+		829EB51225359DBB003E74DD /* DedicatedIpRowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB50F25359DBB003E74DD /* DedicatedIpRowCollectionViewCell.swift */; };
+		829EB51325359DBB003E74DD /* DedicatedIpRowCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 829EB51025359DBB003E74DD /* DedicatedIpRowCollectionViewCell.xib */; };
+		829EB51425359DBB003E74DD /* DedicatedIpRowCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 829EB51025359DBB003E74DD /* DedicatedIpRowCollectionViewCell.xib */; };
+		829EB51C2535A8FF003E74DD /* CollectionViewAutoSizeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB51B2535A8FF003E74DD /* CollectionViewAutoSizeUtils.swift */; };
+		829EB51D2535A8FF003E74DD /* CollectionViewAutoSizeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB51B2535A8FF003E74DD /* CollectionViewAutoSizeUtils.swift */; };
+		829EB5322535AD27003E74DD /* DedicatedIpEmptyHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB5302535AD27003E74DD /* DedicatedIpEmptyHeaderCollectionViewCell.swift */; };
+		829EB5332535AD27003E74DD /* DedicatedIpEmptyHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB5302535AD27003E74DD /* DedicatedIpEmptyHeaderCollectionViewCell.swift */; };
+		829EB5342535AD27003E74DD /* DedicatedIpEmptyHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 829EB5312535AD27003E74DD /* DedicatedIpEmptyHeaderCollectionViewCell.xib */; };
+		829EB5352535AD27003E74DD /* DedicatedIpEmptyHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 829EB5312535AD27003E74DD /* DedicatedIpEmptyHeaderCollectionViewCell.xib */; };
+		829EB54A2535BA40003E74DD /* DedicatedIPTitleHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB5482535BA40003E74DD /* DedicatedIPTitleHeaderCollectionViewCell.swift */; };
+		829EB54B2535BA40003E74DD /* DedicatedIPTitleHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB5482535BA40003E74DD /* DedicatedIPTitleHeaderCollectionViewCell.swift */; };
+		829EB54C2535BA40003E74DD /* DedicatedIPTitleHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 829EB5492535BA40003E74DD /* DedicatedIPTitleHeaderCollectionViewCell.xib */; };
+		829EB54D2535BA40003E74DD /* DedicatedIPTitleHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 829EB5492535BA40003E74DD /* DedicatedIPTitleHeaderCollectionViewCell.xib */; };
 		82A1AD1F24B7BF4E0003DD02 /* Array+Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE432DE2498EADA0095B197 /* Array+Group.swift */; };
 		82A1AD2324B7C0020003DD02 /* PIACardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A1AD2224B7C0020003DD02 /* PIACardTests.swift */; };
 		82A1AD2624B86AF60003DD02 /* PIACardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A1AD2524B86AF60003DD02 /* PIACardsViewController.swift */; };
@@ -564,7 +578,7 @@
 		82183D9225014FDC0033023F /* NetworkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkCollectionViewCell.xib; sourceTree = "<group>"; };
 		82183D9325014FDC0033023F /* CustomNetworkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomNetworkCollectionViewCell.xib; sourceTree = "<group>"; };
 		82183D9425014FDC0033023F /* NetworkFooterCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkFooterCollectionViewCell.xib; sourceTree = "<group>"; };
-		82183D9525014FDC0033023F /* NetworkHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
+		82183D9525014FDC0033023F /* PIAHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PIAHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
 		8221922A24CECFE700C24F1C /* NMTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMTTests.swift; sourceTree = "<group>"; };
 		822F97B3251DD53100644EF2 /* WidgetUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetUtils.swift; sourceTree = "<group>"; };
 		824C530724C046CA003DB740 /* ConnectionTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionTile.swift; sourceTree = "<group>"; };
@@ -582,12 +596,19 @@
 		8269A6ED251CB5ED000B4DBF /* PIAWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PIAWidgetExtension.entitlements; sourceTree = "<group>"; };
 		8269A6FD251CBB36000B4DBF /* WidgetContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetContent.swift; sourceTree = "<group>"; };
 		827570C924DAA128008F9800 /* NetworkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkCollectionViewCell.swift; sourceTree = "<group>"; };
-		827570CA24DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		827570CA24DAA128008F9800 /* PIAHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIAHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		827570D324DAA317008F9800 /* NetworkRuleOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRuleOptionView.swift; sourceTree = "<group>"; };
 		827570D624DAB6E4008F9800 /* NetworkFooterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFooterCollectionViewCell.swift; sourceTree = "<group>"; };
 		827570DC24DABE88008F9800 /* AddCustomNetworksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomNetworksViewController.swift; sourceTree = "<group>"; };
 		827570DF24DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNetworkCollectionViewCell.swift; sourceTree = "<group>"; };
 		829EB506253598BD003E74DD /* DedicatedIpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DedicatedIpViewController.swift; sourceTree = "<group>"; };
+		829EB50F25359DBB003E74DD /* DedicatedIpRowCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DedicatedIpRowCollectionViewCell.swift; sourceTree = "<group>"; };
+		829EB51025359DBB003E74DD /* DedicatedIpRowCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DedicatedIpRowCollectionViewCell.xib; sourceTree = "<group>"; };
+		829EB51B2535A8FF003E74DD /* CollectionViewAutoSizeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewAutoSizeUtils.swift; sourceTree = "<group>"; };
+		829EB5302535AD27003E74DD /* DedicatedIpEmptyHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DedicatedIpEmptyHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		829EB5312535AD27003E74DD /* DedicatedIpEmptyHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DedicatedIpEmptyHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
+		829EB5482535BA40003E74DD /* DedicatedIPTitleHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DedicatedIPTitleHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		829EB5492535BA40003E74DD /* DedicatedIPTitleHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DedicatedIPTitleHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
 		82A1AD2224B7C0020003DD02 /* PIACardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACardTests.swift; sourceTree = "<group>"; };
 		82A1AD2524B86AF60003DD02 /* PIACardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACardsViewController.swift; sourceTree = "<group>"; };
 		82A1AD2824B87CCD0003DD02 /* PIACard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PIACard.xib; sourceTree = "<group>"; };
@@ -797,12 +818,18 @@
 				DD052AC22419003300AD3A24 /* ProtocolTableViewCell.swift */,
 				DD07AACB242CBFF2000EE1A3 /* AddEmailToAccountViewController.swift */,
 				827570C924DAA128008F9800 /* NetworkCollectionViewCell.swift */,
-				827570CA24DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift */,
+				827570CA24DAA128008F9800 /* PIAHeaderCollectionViewCell.swift */,
 				827570D624DAB6E4008F9800 /* NetworkFooterCollectionViewCell.swift */,
 				827570D324DAA317008F9800 /* NetworkRuleOptionView.swift */,
 				827570DC24DABE88008F9800 /* AddCustomNetworksViewController.swift */,
 				827570DF24DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift */,
 				829EB506253598BD003E74DD /* DedicatedIpViewController.swift */,
+				829EB50F25359DBB003E74DD /* DedicatedIpRowCollectionViewCell.swift */,
+				829EB51025359DBB003E74DD /* DedicatedIpRowCollectionViewCell.xib */,
+				829EB5302535AD27003E74DD /* DedicatedIpEmptyHeaderCollectionViewCell.swift */,
+				829EB5312535AD27003E74DD /* DedicatedIpEmptyHeaderCollectionViewCell.xib */,
+				829EB5482535BA40003E74DD /* DedicatedIPTitleHeaderCollectionViewCell.swift */,
+				829EB5492535BA40003E74DD /* DedicatedIPTitleHeaderCollectionViewCell.xib */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -873,6 +900,7 @@
 				DD522D21237D74380072F555 /* BooleanUtil.swift */,
 				DD918575246BFA7F006B3A2B /* RatingManager.swift */,
 				DDD65312247E66AD00F0A897 /* CoordinatesFinder.swift */,
+				829EB51B2535A8FF003E74DD /* CollectionViewAutoSizeUtils.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1085,7 +1113,7 @@
 				82183D9325014FDC0033023F /* CustomNetworkCollectionViewCell.xib */,
 				82183D9225014FDC0033023F /* NetworkCollectionViewCell.xib */,
 				82183D9425014FDC0033023F /* NetworkFooterCollectionViewCell.xib */,
-				82183D9525014FDC0033023F /* NetworkHeaderCollectionViewCell.xib */,
+				82183D9525014FDC0033023F /* PIAHeaderCollectionViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1594,16 +1622,19 @@
 				0ED984211FC48C6500542EE6 /* Roboto-Regular.ttf in Resources */,
 				DD125DCF21E772B6004ECCB6 /* QuickConnectTileCollectionViewCell.xib in Resources */,
 				0E3C9A5E20EC004E00B199F9 /* custom.servers in Resources */,
+				829EB5352535AD27003E74DD /* DedicatedIpEmptyHeaderCollectionViewCell.xib in Resources */,
 				DD1C139C21E65F90004004B3 /* IPTileCollectionViewCell.xib in Resources */,
 				0EFDC1D51FE4607D007C0B9B /* Images.xcassets in Resources */,
 				0ED9841F1FC48C6500542EE6 /* Roboto-Light.ttf in Resources */,
 				0EE2206A1F4EF307002805AE /* Components.plist in Resources */,
+				829EB51425359DBB003E74DD /* DedicatedIpRowCollectionViewCell.xib in Resources */,
 				0ED984221FC48C6500542EE6 /* Roboto-Thin.ttf in Resources */,
 				824C531824C04796003DB740 /* ConnectionTileCollectionViewCell.xib in Resources */,
 				DD51F8BE2372E494009FEED3 /* PIA-ECC-521r1.pem in Resources */,
+				829EB54D2535BA40003E74DD /* DedicatedIPTitleHeaderCollectionViewCell.xib in Resources */,
 				DD9706AE224262E000630220 /* QuickSettingsTileCollectionViewCell.xib in Resources */,
 				DD125DC921E7704F004ECCB6 /* QuickConnectTile.xib in Resources */,
-				82183D9D25014FDC0033023F /* NetworkHeaderCollectionViewCell.xib in Resources */,
+				82183D9D25014FDC0033023F /* PIAHeaderCollectionViewCell.xib in Resources */,
 				0EE220701F4EF307002805AE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1631,6 +1662,7 @@
 				DD76291921ECBDA50092DF50 /* SubscriptionTile.xib in Resources */,
 				DD125DC821E7704F004ECCB6 /* QuickConnectTile.xib in Resources */,
 				DD51F8BD2372E494009FEED3 /* PIA-ECC-521r1.pem in Resources */,
+				829EB51325359DBB003E74DD /* DedicatedIpRowCollectionViewCell.xib in Resources */,
 				DD9706A7224262CD00630220 /* QuickSettingsTile.xib in Resources */,
 				DDFCFA9721E8921F0081F235 /* RegionTile.xib in Resources */,
 				0ED9841B1FC48C6000542EE6 /* Roboto-Medium.ttf in Resources */,
@@ -1650,7 +1682,7 @@
 				DD76292521ECCD650092DF50 /* UsageTile.xib in Resources */,
 				DD172A9C2254C36D00071CFB /* FavoriteServersTileCollectionViewCell.xib in Resources */,
 				DD51F8B92372E494009FEED3 /* PIA-RSA-4096.pem in Resources */,
-				82183D9C25014FDC0033023F /* NetworkHeaderCollectionViewCell.xib in Resources */,
+				82183D9C25014FDC0033023F /* PIAHeaderCollectionViewCell.xib in Resources */,
 				291C6398183EBC210039EC03 /* Images.xcassets in Resources */,
 				82183D9625014FDC0033023F /* NetworkCollectionViewCell.xib in Resources */,
 				82183D9825014FDC0033023F /* CustomNetworkCollectionViewCell.xib in Resources */,
@@ -1661,11 +1693,13 @@
 				0E7EC0302093265C0029811E /* InfoPlist.strings in Resources */,
 				DD51F8BF2372E494009FEED3 /* PIA-ECC-256r1.pem in Resources */,
 				291C6393183EBC210039EC03 /* Main.storyboard in Resources */,
+				829EB54C2535BA40003E74DD /* DedicatedIPTitleHeaderCollectionViewCell.xib in Resources */,
 				824C531D24C04800003DB740 /* ConnectionTile.xib in Resources */,
 				DD6DC5C221B6C27F00F9D538 /* pia-spinner.json in Resources */,
 				DD746957217F070700B7BD73 /* DNS.plist in Resources */,
 				DD51F8B72372E494009FEED3 /* PIA-RSA-3072.pem in Resources */,
 				DD1C139B21E65F90004004B3 /* IPTileCollectionViewCell.xib in Resources */,
+				829EB5342535AD27003E74DD /* DedicatedIpEmptyHeaderCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2132,6 +2166,7 @@
 				DD829EE02449A1EF00E2EE55 /* SiriShortcutsBuilder.swift in Sources */,
 				0EFB839120209CF200980F69 /* VPNPermissionViewController.swift in Sources */,
 				0EFDC1D81FE46177007C0B9B /* SensitiveOperation.swift in Sources */,
+				829EB51D2535A8FF003E74DD /* CollectionViewAutoSizeUtils.swift in Sources */,
 				82A1AD3024B87CF20003DD02 /* PIACard.swift in Sources */,
 				0E3A35291FD9A960000B0F99 /* DashboardViewController.swift in Sources */,
 				DDB6B95121C94E2E00DE8C5F /* TrustedNetworksViewController.swift in Sources */,
@@ -2143,7 +2178,7 @@
 				827570DE24DABE88008F9800 /* AddCustomNetworksViewController.swift in Sources */,
 				DD125DD221E7A694004ECCB6 /* ServerButton.swift in Sources */,
 				824C530924C046CB003DB740 /* ConnectionTile.swift in Sources */,
-				827570D224DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift in Sources */,
+				827570D224DAA128008F9800 /* PIAHeaderCollectionViewCell.swift in Sources */,
 				0E2215CA2008BA9100F5FB4D /* SwiftGen+Strings.swift in Sources */,
 				DD9329A3237AFD0A0025B6BC /* ShowQuickSettingsViewController.swift in Sources */,
 				DD606ABD21C904BB00E0781D /* PIAHotspotHelper.swift in Sources */,
@@ -2161,6 +2196,7 @@
 				0E7361EC1FD99A1000706BFF /* MenuViewController.swift in Sources */,
 				0EB966781FDF11B80086ABC2 /* Server+UI.swift in Sources */,
 				DD1C139A21E65F90004004B3 /* IPTileCollectionViewCell.swift in Sources */,
+				829EB5332535AD27003E74DD /* DedicatedIpEmptyHeaderCollectionViewCell.swift in Sources */,
 				827570D024DAA128008F9800 /* NetworkCollectionViewCell.swift in Sources */,
 				0E9452AC1FDB5EF600891948 /* UINavigationItem+Shortcuts.swift in Sources */,
 				DD052AC42419020E00AD3A24 /* ProtocolTableViewCell.swift in Sources */,
@@ -2171,6 +2207,8 @@
 				DD3B504424B7576F0002F4B5 /* Card.swift in Sources */,
 				82183D7C2500FD460033023F /* String+Substrings.swift in Sources */,
 				0E7361A11FD86F8300706BFF /* AccountObserver.swift in Sources */,
+				829EB54B2535BA40003E74DD /* DedicatedIPTitleHeaderCollectionViewCell.swift in Sources */,
+				829EB51225359DBB003E74DD /* DedicatedIpRowCollectionViewCell.swift in Sources */,
 				DDFCFA9521E892130081F235 /* RegionTile.swift in Sources */,
 				0EFDC1E71FE4ABAA007C0B9B /* Notification+App.swift in Sources */,
 				827570E224DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift in Sources */,
@@ -2232,6 +2270,7 @@
 				DD1AA4962180AD92005116D7 /* CustomDNSSettingsViewController.swift in Sources */,
 				0EFDC1EF1FE4B9E6007C0B9B /* AppConfiguration.swift in Sources */,
 				0E9452A21FDB568700891948 /* MenuItemCell.swift in Sources */,
+				829EB51125359DBB003E74DD /* DedicatedIpRowCollectionViewCell.swift in Sources */,
 				0EFDC1DA1FE4640C007C0B9B /* DNSResolver.swift in Sources */,
 				0E9452991FDB4DF500891948 /* GradientView.swift in Sources */,
 				0E7361E81FD98C3400706BFF /* AccountViewController.swift in Sources */,
@@ -2268,7 +2307,7 @@
 				827570DD24DABE88008F9800 /* AddCustomNetworksViewController.swift in Sources */,
 				DD58F4BF21B12CFE00D043F7 /* PIAConnectionButton.swift in Sources */,
 				824C530824C046CB003DB740 /* ConnectionTile.swift in Sources */,
-				827570D124DAA128008F9800 /* NetworkHeaderCollectionViewCell.swift in Sources */,
+				827570D124DAA128008F9800 /* PIAHeaderCollectionViewCell.swift in Sources */,
 				DD125DD121E7A694004ECCB6 /* ServerButton.swift in Sources */,
 				DD9329A2237AFD0A0025B6BC /* ShowQuickSettingsViewController.swift in Sources */,
 				0E2215C920084CD700F5FB4D /* SwiftGen+Strings.swift in Sources */,
@@ -2304,6 +2343,7 @@
 				0E9452961FDB4C5800891948 /* AboutComponentCell.swift in Sources */,
 				0E53A83B1FE5A156000C2A18 /* AccountProvider+Refresh.swift in Sources */,
 				0EFDC1E01FE4A450007C0B9B /* AppPreferences.swift in Sources */,
+				829EB54A2535BA40003E74DD /* DedicatedIPTitleHeaderCollectionViewCell.swift in Sources */,
 				DDC8124F21761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift in Sources */,
 				0E492C671FE60907007F23DF /* Flags.swift in Sources */,
 				0EE14D181FF15812008D9AC2 /* ModalNavigationSegue.swift in Sources */,
@@ -2313,6 +2353,8 @@
 				DD07AACC242CBFF2000EE1A3 /* AddEmailToAccountViewController.swift in Sources */,
 				DDE432DF2498EADB0095B197 /* Array+Group.swift in Sources */,
 				DDB6B95321C95CD400DE8C5F /* EnumsBuilder.swift in Sources */,
+				829EB5322535AD27003E74DD /* DedicatedIpEmptyHeaderCollectionViewCell.swift in Sources */,
+				829EB51C2535A8FF003E74DD /* CollectionViewAutoSizeUtils.swift in Sources */,
 				0E9AEA6220683FDF00B6E59A /* AboutComponent.swift in Sources */,
 				DD4E84572243BD1200929B39 /* DashboardCollectionViewUtil.swift in Sources */,
 				829EB507253598BD003E74DD /* DedicatedIpViewController.swift in Sources */,
@@ -2456,7 +2498,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN Tunnel/PIA VPN Tunnel.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 16881;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -2469,7 +2511,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.Tunnel";
 				PRODUCT_NAME = "PIA VPN Tunnel";
 				PROVISIONING_PROFILE = "b5b9e54d-7aba-4fc6-9320-adbce64c544a";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.privateinternetaccess.ios.PIA-VPN.Tunnel";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.privateinternetaccess.ios.PIA-VPN.Tunnel";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2485,7 +2527,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN Tunnel/PIA VPN Tunnel.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 16881;
@@ -2499,7 +2541,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.Tunnel";
 				PRODUCT_NAME = "PIA VPN Tunnel";
 				PROVISIONING_PROFILE = "b5b9e54d-7aba-4fc6-9320-adbce64c544a";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.privateinternetaccess.ios.PIA-VPN.Tunnel";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.privateinternetaccess.ios.PIA-VPN.Tunnel";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2514,7 +2556,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN/PIA VPN.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 16881;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
@@ -2541,7 +2583,7 @@
 				PRODUCT_MODULE_NAME = PIA_VPN_dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "420cc0bf-ef09-4d4c-b1b3-9d7cffd4d201";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.privateinternetaccess.ios.PIA-VPN";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.privateinternetaccess.ios.PIA-VPN";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = PIA_DEV;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2559,7 +2601,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN/PIA VPN.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 16881;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
@@ -2586,7 +2628,7 @@
 				PRODUCT_MODULE_NAME = PIA_VPN_dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "420cc0bf-ef09-4d4c-b1b3-9d7cffd4d201";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.privateinternetaccess.ios.PIA-VPN";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.privateinternetaccess.ios.PIA-VPN";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = PIA_DEV;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2665,7 +2707,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 16881;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -2679,7 +2721,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.AdBlocker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5aba703f-4bee-46e6-a5e4-42b785d1db55";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.privateinternetaccess.ios.PIA-VPN.AdBlocker";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.privateinternetaccess.ios.PIA-VPN.AdBlocker";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2696,7 +2738,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 16881;
@@ -2711,7 +2753,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.AdBlocker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5aba703f-4bee-46e6-a5e4-42b785d1db55";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.privateinternetaccess.ios.PIA-VPN.AdBlocker";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.privateinternetaccess.ios.PIA-VPN.AdBlocker";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2835,7 +2877,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN/PIA VPN.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 16881;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
@@ -2856,7 +2898,7 @@
 				MARKETING_VERSION = 3.8.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.privateinternetaccess.ios.PIA-VPN";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.privateinternetaccess.ios.PIA-VPN";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2873,7 +2915,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN/PIA VPN.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 16881;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
@@ -2894,7 +2936,7 @@
 				MARKETING_VERSION = 3.8.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.privateinternetaccess.ios.PIA-VPN";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.privateinternetaccess.ios.PIA-VPN";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -2914,7 +2956,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = PIAWidgetExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 16881;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -2929,7 +2971,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PIAWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.privateinternetaccess.ios.PIA-VPN.PIAWidget";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.privateinternetaccess.ios.PIA-VPN.PIAWidget";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2951,7 +2993,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = PIAWidgetExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 16881;
@@ -2967,7 +3009,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PIAWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.privateinternetaccess.ios.PIA-VPN.PIAWidget";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.privateinternetaccess.ios.PIA-VPN.PIAWidget";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2985,7 +3027,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN WG Tunnel/PIA_VPN_WG_Tunnel.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 16881;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -3000,7 +3042,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -3020,7 +3062,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN WG Tunnel/PIA_VPN_WG_Tunnel.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 16881;
@@ -3036,7 +3078,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

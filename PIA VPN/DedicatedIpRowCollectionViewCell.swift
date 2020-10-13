@@ -1,8 +1,8 @@
 //
-//  NetworkHeaderCollectionViewCell.swift
+//  DedicatedIpRowCollectionViewCell.swift
 //  PIA VPN
 //  
-//  Created by Jose Blaya on 04/08/2020.
+//  Created by Jose Blaya on 13/10/2020.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
@@ -22,27 +22,46 @@
 import UIKit
 import PIALibrary
 
-class NetworkHeaderCollectionViewCell: UICollectionViewCell {
+class DedicatedIpRowCollectionViewCell: FullWidthCollectionViewCell, Restylable {
 
-    @IBOutlet private weak var title: UILabel!
-    @IBOutlet private weak var subtitle: UILabel!
+    @IBOutlet private weak var imvFlag: UIImageView!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.backgroundColor = .clear
-    }
+    @IBOutlet private weak var labelRegion: UILabel!
 
-    func setup(withTitle title: String, andSubtitle subtitle: String) {
-        self.title.text = title
-        self.subtitle.text = subtitle
+    @IBOutlet private weak var labelIp: UILabel!
+
+    private weak var server: Server!
+
+    func fill(withServer server: Server) {
+        
         viewShouldRestyle()
+        self.server = server
+
+        imvFlag.setImage(fromServer: server)
+        
+        if let _ = Client.providers.serverProvider.regionStaticData {
+            labelRegion.text = Client.providers.serverProvider.regionStaticData.localisedServerName(forCountryName: server.name)
+        } else {
+            labelRegion.text = server.name
+        }
+        
+        labelIp.text = "1.1.1.1"
+        labelIp.accessibilityLabel = "1.1.1.1"
+
+
     }
+    
     // MARK: Restylable
 
     func viewShouldRestyle() {
         
-        title.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyle22 : TextStyle.textStyle23)
-        subtitle.style(style: TextStyle.textStyle8)
+        Theme.current.applyRegionSolidLightBackground(self)
+        Theme.current.applyRegionSolidLightBackground(self.contentView)
+
+        Theme.current.applySettingsCellTitle(labelRegion, appearance: .dark)
+        Theme.current.applyTag(labelIp, appearance: .dark)
+                
     }
+
 
 }
