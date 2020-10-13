@@ -181,6 +181,8 @@
 		827570DE24DABE88008F9800 /* AddCustomNetworksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570DC24DABE88008F9800 /* AddCustomNetworksViewController.swift */; };
 		827570E124DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570DF24DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift */; };
 		827570E224DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570DF24DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift */; };
+		829EB507253598BD003E74DD /* DedicatedIpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB506253598BD003E74DD /* DedicatedIpViewController.swift */; };
+		829EB508253598BD003E74DD /* DedicatedIpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB506253598BD003E74DD /* DedicatedIpViewController.swift */; };
 		82A1AD1F24B7BF4E0003DD02 /* Array+Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE432DE2498EADA0095B197 /* Array+Group.swift */; };
 		82A1AD2324B7C0020003DD02 /* PIACardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A1AD2224B7C0020003DD02 /* PIACardTests.swift */; };
 		82A1AD2624B86AF60003DD02 /* PIACardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A1AD2524B86AF60003DD02 /* PIACardsViewController.swift */; };
@@ -585,6 +587,7 @@
 		827570D624DAB6E4008F9800 /* NetworkFooterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFooterCollectionViewCell.swift; sourceTree = "<group>"; };
 		827570DC24DABE88008F9800 /* AddCustomNetworksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomNetworksViewController.swift; sourceTree = "<group>"; };
 		827570DF24DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNetworkCollectionViewCell.swift; sourceTree = "<group>"; };
+		829EB506253598BD003E74DD /* DedicatedIpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DedicatedIpViewController.swift; sourceTree = "<group>"; };
 		82A1AD2224B7C0020003DD02 /* PIACardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACardTests.swift; sourceTree = "<group>"; };
 		82A1AD2524B86AF60003DD02 /* PIACardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACardsViewController.swift; sourceTree = "<group>"; };
 		82A1AD2824B87CCD0003DD02 /* PIACard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PIACard.xib; sourceTree = "<group>"; };
@@ -799,6 +802,7 @@
 				827570D324DAA317008F9800 /* NetworkRuleOptionView.swift */,
 				827570DC24DABE88008F9800 /* AddCustomNetworksViewController.swift */,
 				827570DF24DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift */,
+				829EB506253598BD003E74DD /* DedicatedIpViewController.swift */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -2101,6 +2105,7 @@
 				DDD271DF21D616AA00B6D20F /* Server+Favorite.swift in Sources */,
 				DD125DC621E77046004ECCB6 /* QuickConnectTile.swift in Sources */,
 				82A1AD2724B86AF60003DD02 /* PIACardsViewController.swift in Sources */,
+				829EB508253598BD003E74DD /* DedicatedIpViewController.swift in Sources */,
 				DD1AA4972180AD92005116D7 /* CustomDNSSettingsViewController.swift in Sources */,
 				0E9452A31FDB568700891948 /* MenuItemCell.swift in Sources */,
 				0EFDC1DB1FE4640C007C0B9B /* DNSResolver.swift in Sources */,
@@ -2310,6 +2315,7 @@
 				DDB6B95321C95CD400DE8C5F /* EnumsBuilder.swift in Sources */,
 				0E9AEA6220683FDF00B6E59A /* AboutComponent.swift in Sources */,
 				DD4E84572243BD1200929B39 /* DashboardCollectionViewUtil.swift in Sources */,
+				829EB507253598BD003E74DD /* DedicatedIpViewController.swift in Sources */,
 				DD74695A217F07AC00B7BD73 /* DNSList.swift in Sources */,
 				0E9452AE1FDB5F7A00891948 /* PIAPageControl.swift in Sources */,
 				DDD271F021D6718F00B6D20F /* RegionFilter.swift in Sources */,

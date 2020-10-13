@@ -394,6 +394,10 @@ class DashboardViewController: AutolayoutViewController {
         perform(segue: StoryboardSegue.Main.accountSegueIdentifier)
     }
 
+    func openDedicatedIp() {
+        perform(segue: StoryboardSegue.Main.dedicatedIpSegueIdentifier)
+    }
+
     func openAbout() {
         perform(segue: StoryboardSegue.Main.aboutSegueIdentifier)
     }
@@ -752,6 +756,8 @@ extension DashboardViewController: MenuViewControllerDelegate {
             selectRegion(animated: true)
         case .settings:
             openSettings()
+        case .dedicatedIp:
+            openDedicatedIp()
         case .account:
             openAccount()
         case .about:

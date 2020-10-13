@@ -37,7 +37,9 @@ class MenuViewController: AutolayoutViewController {
         case selectRegion
 
         case account
-        
+
+        case dedicatedIp
+
         case settings
         
         case logout
@@ -77,6 +79,7 @@ class MenuViewController: AutolayoutViewController {
         [
             .selectRegion,
             .account,
+            .dedicatedIp,
             .settings,
             .logout
         ], [
@@ -91,6 +94,7 @@ class MenuViewController: AutolayoutViewController {
     private lazy var stringForItem: [Item: String] = [
         .selectRegion: L10n.Menu.Item.region,
         .account: L10n.Menu.Item.account,
+        .dedicatedIp: "Dedicated IP",
         .settings: L10n.Menu.Item.settings,
         .logout: L10n.Menu.Item.logout,
         .about: L10n.Menu.Item.about,
@@ -103,6 +107,7 @@ class MenuViewController: AutolayoutViewController {
     private lazy var iconForItem: [Item: ImageAsset] = [
         .selectRegion: Asset.iconRegion,
         .account: Asset.iconAccount,
+        .dedicatedIp: Asset.iconAccount,
         .settings: Asset.iconSettings,
         .logout: Asset.iconLogout,
         .about: Asset.iconAbout,
