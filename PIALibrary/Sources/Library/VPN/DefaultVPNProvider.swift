@@ -162,9 +162,9 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
                 } else {
                     if let previousProfile = previousProfile { // dont connect after install
                         self.connect(nil)
-                        Macros.postNotification(.PIAVPNDidInstall)
-                        callback?(nil)
                     }
+                    Macros.postNotification(.PIAVPNDidInstall)
+                    callback?(nil)
                 }
             }
         }
