@@ -105,7 +105,7 @@ class DedicatedIpViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         
-        styleNavigationBarWithTitle(L10n.Menu.Item.account)
+        styleNavigationBarWithTitle("Dedicated IP")
 
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
@@ -148,6 +148,9 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
             let dipRegion = data[indexPath.row]
             if let token = dipRegion.dipToken {
                 Client.providers.serverProvider.removeDIPToken(token)
+                NotificationCenter.default.post(name: .PIAThemeDidChange,
+                                                object: self,
+                                                userInfo: nil)
             }
             reloadTableView()
         }
@@ -168,7 +171,7 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if Sections.header == section {
             let headerView = tableView.dequeueReusableCell(withIdentifier: Cells.header) as! DedicatedIpEmptyHeaderViewCell
-            headerView.setup()
+            headerView.setup(withTableView: tableView)
             return headerView
         } else {
             let headerView = tableView.dequeueReusableCell(withIdentifier: Cells.titleHeader) as! DedicatedIPTitleHeaderViewCell

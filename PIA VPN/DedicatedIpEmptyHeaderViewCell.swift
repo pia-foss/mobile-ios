@@ -29,6 +29,8 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
     @IBOutlet private weak var activateView: UIView!
     @IBOutlet private weak var addTokenButton: PIAButton!
     @IBOutlet private weak var addTokenTextfield: UITextField!
+    
+    private weak var tableView: UITableView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,7 +41,8 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
         self.addTokenTextfield.delegate = self
     }
 
-    func setup() {
+    func setup(withTableView tableView: UITableView) {
+        self.tableView = tableView
         styleButton()
         styleContainer()
         viewShouldRestyle()
@@ -48,6 +51,8 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
     
     private func styleContainer() {
         activateView.layer.cornerRadius = 6.0
+        activateView.layer.borderWidth = 0.5
+        activateView.layer.borderColor = UIColor.piaGrey4.cgColor
     }
 
     private func styleButton() {
@@ -84,6 +89,7 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
                                              andImage: Asset.iconWarning.image)
                 }
                 NotificationCenter.default.post(name: .DedicatedIpReload, object: nil)
+                NotificationCenter.default.post(name: .PIAThemeDidChange, object: nil)
             }
         }
     }
@@ -93,7 +99,8 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
 extension DedicatedIpEmptyHeaderViewCell: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        tableView.endEditing(true)
+        tableView.reloadData()
         return false
     }
     

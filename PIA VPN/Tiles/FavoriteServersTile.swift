@@ -95,9 +95,8 @@ class FavoriteServersTile: UIView, Tileable {
             AppPreferences.shared.favoriteServerIdentifiers
 
         for identifier in favoriteServers.reversed() {
-            if let server = currentServers.first(where: { return $0.identifier == identifier && $0.serverNetwork == Client.configuration.currentServerNetwork() }) {
-                favServers.append(server)
-            }
+            let servers = currentServers.filter({ $0.identifier+($0.dipToken ?? "") == identifier && $0.serverNetwork == Client.configuration.currentServerNetwork() })
+            favServers.append(contentsOf: servers)
         }
 
         for (index, server) in favServers.enumerated() where index < stackView.subviews.count {
@@ -113,6 +112,9 @@ class FavoriteServersTile: UIView, Tileable {
             
             if let label = labelsStackView.subviews[index] as? UILabel {
                 label.text = server.country
+                if server.dipToken != nil {
+                    label.text = "DIP"
+                }
                 Theme.current.applyCountryNameStyleFor(label)
             }
 

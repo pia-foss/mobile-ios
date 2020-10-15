@@ -34,7 +34,7 @@ public extension Tileable {
         let isConnected = Client.providers.vpnProvider.isVPNConnected
         let currentServer = Client.preferences.displayedServer
         if isConnected {
-            guard (server.identifier != currentServer.identifier) else {
+            guard (server.identifier != currentServer.identifier || server.dipToken != currentServer.dipToken) else {
                 return
             }
         }

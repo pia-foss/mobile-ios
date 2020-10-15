@@ -129,6 +129,9 @@ class QuickConnectTile: UIView, Tileable {
             
             if let label = labelsStackView.subviews[buttonIndex] as? UILabel {
                 label.text = server.country
+                if server.dipToken != nil {
+                    label.text = "DIP"
+                }
                 Theme.current.applyCountryNameStyleFor(label)
             }
 
@@ -139,7 +142,7 @@ class QuickConnectTile: UIView, Tileable {
         var currentServers = Client.providers.serverProvider.currentServers.filter { $0.serverNetwork == Client.configuration.currentServerNetwork() }
         currentServers = currentServers.sorted(by: { $0.pingTime ?? 1000 < $1.pingTime ?? 1000 })
         currentServers = currentServers.filter({!historicalServers.contains($0)})
-        currentServers = currentServers.filterDuplicate{ ($0.country) }
+        currentServers = currentServers.filterDuplicate{ ($0.country, $0.dipToken) }
         if AppPreferences.shared.showGeoServers == false {
             currentServers = currentServers.filter {
                 $0.geo == false
