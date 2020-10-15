@@ -144,9 +144,6 @@ extension Client {
         /// Store the account password in memory when the email is set and the user is LoggedIn.
         public var tempAccountPassword: String
 
-        /// The server network to use.
-        private(set) var serverNetwork: ServersNetwork
-
         // MARK: Initialization
         
         init() {
@@ -218,7 +215,6 @@ extension Client {
             
             maxQuickConnectServers = 6
             tempAccountPassword = ""
-            serverNetwork = Client.database.plain.serverNetwork
 
         }
         
@@ -306,15 +302,6 @@ extension Client {
         }
         
         #endif
-        
-        public func setServerNetworks(to serverNetwork: ServersNetwork) {
-            self.serverNetwork = serverNetwork
-            Client.database.plain.serverNetwork = serverNetwork
-        }
-        
-        public func currentServerNetwork() -> ServersNetwork {
-            return Client.database.plain.serverNetwork
-        }
         
 //        public init(name: String) {
 //            guard let path = Bundle.main.path(forResource: name, ofType: "plist") else {

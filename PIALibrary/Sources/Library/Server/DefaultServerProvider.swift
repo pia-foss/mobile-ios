@@ -79,8 +79,7 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
 //            guard (avg < bestResponseTime) else {
 //                continue
 //            }
-        let servers = currentServers.filter { $0.serverNetwork == Client.configuration.currentServerNetwork() }
-        for server in servers {
+        for server in currentServers {
             guard let responseTime = accessedDatabase.plain.ping(forServerIdentifier: server.identifier) else {
                 continue
             }
@@ -127,7 +126,7 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
     public var regionStaticData: RegionData!
     
     func loadLocalJSON(fromJSON jsonData: Data) {
-        guard let bundle = GlossServersBundle(jsonData: jsonData, forServerNetwork: .gen4) else {
+        guard let bundle = GlossServersBundle(jsonData: jsonData) else {
             return
         }
         if let configuration = bundle.parsed.configuration {

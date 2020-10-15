@@ -237,7 +237,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                         //Replace ES with dipServer.id
                         var firstServer = Client.providers.serverProvider.currentServers.first(where: {$0.country == "ES"})
                         
-                        let dipRegion = Server(serial: firstServer!.serial, name: firstServer!.name, country: firstServer!.country, hostname: firstServer!.hostname, bestOpenVPNAddressForTCP: firstServer!.bestOpenVPNAddressForTCP, bestOpenVPNAddressForUDP: firstServer!.bestOpenVPNAddressForUDP, openVPNAddressesForTCP: [Server.ServerAddressIP(ip: dipServer.ip!, cn: dipServer.cn!)], openVPNAddressesForUDP: [Server.ServerAddressIP(ip: dipServer.ip!, cn: dipServer.cn!)], wireGuardAddressesForUDP: [Server.ServerAddressIP(ip: dipServer.ip!, cn: dipServer.cn!)], iKEv2AddressesForUDP: [Server.ServerAddressIP(ip: dipServer.ip!, cn: dipServer.cn!)], pingAddress: firstServer!.pingAddress, serverNetwork: ServersNetwork.gen4, geo: false, meta: nil, dipExpire: Date(timeIntervalSince1970: TimeInterval(dipServer.dip_expire!)), dipToken: dipServer.dipToken, dipStatus: DedicatedIPStatus.active, regionIdentifier: firstServer!.regionIdentifier)
+                        let dipRegion = Server(serial: firstServer!.serial, name: firstServer!.name, country: firstServer!.country, hostname: firstServer!.hostname, bestOpenVPNAddressForTCP: firstServer!.bestOpenVPNAddressForTCP, bestOpenVPNAddressForUDP: firstServer!.bestOpenVPNAddressForUDP, openVPNAddressesForTCP: [Server.ServerAddressIP(ip: dipServer.ip!, cn: dipServer.cn!)], openVPNAddressesForUDP: [Server.ServerAddressIP(ip: dipServer.ip!, cn: dipServer.cn!)], wireGuardAddressesForUDP: [Server.ServerAddressIP(ip: dipServer.ip!, cn: dipServer.cn!)], iKEv2AddressesForUDP: [Server.ServerAddressIP(ip: dipServer.ip!, cn: dipServer.cn!)], pingAddress: firstServer!.pingAddress, geo: false, meta: nil, dipExpire: Date(timeIntervalSince1970: TimeInterval(dipServer.dip_expire!)), dipToken: dipServer.dipToken, dipStatus: DedicatedIPStatus.active, regionIdentifier: firstServer!.regionIdentifier)
                         
                         dipRegions.append(dipRegion)
                         Client.database.secure.setDIPToken(dipServer.dipToken)
@@ -336,51 +336,21 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             "version": PIAWebServices.serversVersion
         ]
 
-        if Client.configuration.serverNetwork == .gen4 {
-            self.regionsTask.fetch { response, jsonResponse, error in
-                
-                if let error = error {
-                    callback?(nil, ClientError.noRegions)
-                    return
-                }
-
-                guard let bundle = GlossServersBundle(jsonString: jsonResponse)?.parsed else {
-                    callback?(nil, ClientError.malformedResponseData)
-                    return
-                }
-                
-                callback?(bundle, nil)
-                
+        self.regionsTask.fetch { response, jsonResponse, error in
+            
+            if let error = error {
+                callback?(nil, ClientError.noRegions)
+                return
             }
 
-        } else {
-            req(nil, .get, VPNEndpoint.servers, parameters, status, DataRequestExecutor() { (data, status, error) in
-                if let error = error {
-                    callback?(nil, error)
-                    return
-                }
-                guard let data = data else {
-                    callback?(nil, ClientError.malformedResponseData)
-                    return
-                }
-                guard let response = ServersResponse(data: data) else {
-                    callback?(nil, ClientError.malformedResponseData)
-                    return
-                }
-                if self.accessedConfiguration.verifiesServersSignature {
-                    guard response.verifySignature() else {
-                        callback?(nil, ClientError.badServersSignature)
-                        return
-                    }
-                }
-                guard let bundle = response.bundle() else {
-                    callback?(nil, ClientError.malformedResponseData)
-                    return
-                }
-                callback?(bundle, nil)
-            })
+            guard let bundle = GlossServersBundle(jsonString: jsonResponse)?.parsed else {
+                callback?(nil, ClientError.malformedResponseData)
+                return
+            }
+            
+            callback?(bundle, nil)
+            
         }
-        
 
     }
     

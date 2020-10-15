@@ -135,44 +135,15 @@ class GlossServersBundle: GlossParser {
         self.init(json: json)
     }
 
-    convenience init?(jsonData: Data, forServerNetwork network: ServersNetwork) {
-        guard let anyJSON = try? JSONSerialization.jsonObject(with: jsonData, options: []), let json = anyJSON as? JSON else {
-            return nil
-        }
-        self.init(json: json, forServerNetwork: network)
-    }
-
     // MARK: Decodable
 
     public required init?(json: JSON) {
         
         // Init configuration object
         parsed = ServersBundle(servers: [], configuration: nil)
-        
-        if Client.configuration.serverNetwork == .gen4 {
-            parseGEN4Data(json)
-        } else {
-            parseLegacyData(json)
-        }
-        
-    }
-    
-    public init?(json: JSON, forServerNetwork network: ServersNetwork) {
-        
-        // Init configuration object
-        parsed = ServersBundle(servers: [], configuration: nil)
-        
-        if network == .legacy {
-            let currentNetwork = Client.configuration.serverNetwork
-            Client.configuration.setServerNetworks(to: .legacy) //Set legacy as current network
-            parseLegacyData(json)
-            Client.configuration.setServerNetworks(to: currentNetwork) //Rollback
-        } else {
-            parseGEN4Data(json)
-        }
-        
-    }
+        parseGEN4Data(json)
 
+    }
     
     private func parseGEN4Data(_ json: JSON) {
         //groups and regions

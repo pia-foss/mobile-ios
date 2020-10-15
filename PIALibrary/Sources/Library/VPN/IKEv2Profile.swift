@@ -167,21 +167,13 @@ public class IKEv2Profile: NetworkExtensionProfile {
         var iKEv2Username = ""
         var iKEv2Password: Data?
         
-        if Client.configuration.currentServerNetwork() == .gen4 {
-            if let username = Client.providers.accountProvider.token {
-                iKEv2Username = username
-            }
-            iKEv2Password = ikev2PasswordReference()
-        } else {
-            if let username = Client.providers.accountProvider.currentUser?.credentials.username {
-                iKEv2Username = username
-            }
-            iKEv2Password = configuration.passwordReference
+        if let username = Client.providers.accountProvider.token {
+            iKEv2Username = username
         }
-        
+        iKEv2Password = ikev2PasswordReference()
+
         let cfg = NEVPNProtocolIKEv2()
-        if Client.configuration.serverNetwork == .gen4,
-            let ip = configuration.server.bestAddressForIKEv2()?.ip {
+        if let ip = configuration.server.bestAddressForIKEv2()?.ip {
             cfg.serverAddress = ip
         } else {
             cfg.serverAddress = configuration.server.hostname

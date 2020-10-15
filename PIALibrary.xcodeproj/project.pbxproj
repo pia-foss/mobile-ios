@@ -298,7 +298,6 @@
 		DD76292921ECDFF80092DF50 /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD76292721ECDFF80092DF50 /* Usage.swift */; };
 		DD76292E21ECEC3F0092DF50 /* DataManipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD76292D21ECEC3F0092DF50 /* DataManipulation.swift */; };
 		DD76292F21ECEC3F0092DF50 /* DataManipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD76292D21ECEC3F0092DF50 /* DataManipulation.swift */; };
-		DD7AD3E12462EC7E00CDCE0F /* ServerNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7AD3E02462EC7E00CDCE0F /* ServerNetwork.swift */; };
 		DD86BAF121EF5B6D004A988F /* UIViewAutolayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD86BAF021EF5B6D004A988F /* UIViewAutolayout.swift */; };
 		DD8BF3CB219C6BAA0041357C /* ConfirmVPNPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8BF3CA219C6BAA0041357C /* ConfirmVPNPlanViewController.swift */; };
 		DD8C3E612327EF4C00BAD18E /* IKEv2IntegrityAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8C3E602327EF4C00BAD18E /* IKEv2IntegrityAlgorithm.swift */; };
@@ -606,7 +605,6 @@
 		DD7411A823EC35B40058CEF3 /* PIAWGTunnelProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAWGTunnelProfile.swift; sourceTree = "<group>"; };
 		DD76292721ECDFF80092DF50 /* Usage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usage.swift; sourceTree = "<group>"; };
 		DD76292D21ECEC3F0092DF50 /* DataManipulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManipulation.swift; sourceTree = "<group>"; };
-		DD7AD3E02462EC7E00CDCE0F /* ServerNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerNetwork.swift; sourceTree = "<group>"; };
 		DD86BAF021EF5B6D004A988F /* UIViewAutolayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewAutolayout.swift; sourceTree = "<group>"; };
 		DD8BF3CA219C6BAA0041357C /* ConfirmVPNPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmVPNPlanViewController.swift; sourceTree = "<group>"; };
 		DD8C3E602327EF4C00BAD18E /* IKEv2IntegrityAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IKEv2IntegrityAlgorithm.swift; sourceTree = "<group>"; };
@@ -837,7 +835,6 @@
 			isa = PBXGroup;
 			children = (
 				0E9D62D91FDEE3FE009A90CF /* ServerProvider.swift */,
-				DD7AD3E02462EC7E00CDCE0F /* ServerNetwork.swift */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -1934,7 +1931,6 @@
 				0E38E4101FF81722008223AB /* Notification+UI.swift in Sources */,
 				0E392DA91FE329AD0002160D /* PlatformVPNLog.swift in Sources */,
 				0EB8C0481F9CCE07005857E4 /* Macros.swift in Sources */,
-				DD7AD3E12462EC7E00CDCE0F /* ServerNetwork.swift in Sources */,
 				84577FC3213D9AEA006DEC3D /* UITextField+PlaceholderColor.swift in Sources */,
 				0EFEB4C12007784A00F81029 /* PIATunnelProvider+Profile.swift in Sources */,
 				DD8C3E612327EF4C00BAD18E /* IKEv2IntegrityAlgorithm.swift in Sources */,

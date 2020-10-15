@@ -45,7 +45,7 @@ public class EndpointManager {
     public static let shared = EndpointManager()
 
     private func availableMetaEndpoints(_ availableEndpoints: inout [PinningEndpoint]) {
-        var currentServers = Client.providers.serverProvider.currentServers.filter { $0.serverNetwork == .gen4 }
+        var currentServers = Client.providers.serverProvider.currentServers
         currentServers = currentServers.sorted(by: { $0.pingTime ?? 1000 < $1.pingTime ?? 1000 })
         currentServers = currentServers.filter({$0.meta != nil})
 
@@ -71,48 +71,33 @@ public class EndpointManager {
     }
     
     public func availableRegionEndpoints() -> [PinningEndpoint] {
-    
-        if Client.configuration.currentServerNetwork() == .gen4 {
-            
-            if Client.providers.vpnProvider.isVPNConnected {
-                return [PinningEndpoint(host: internalUrl),
-                        PinningEndpoint(host: region)]
-            }
-            
-            var availableEndpoints = [PinningEndpoint]()
-            availableMetaEndpoints(&availableEndpoints)
-            
-            availableEndpoints.append(PinningEndpoint(host: region))
-            
-            return availableEndpoints
-
-        } else {
-            return [PinningEndpoint(host: region)]
+        if Client.providers.vpnProvider.isVPNConnected {
+            return [PinningEndpoint(host: internalUrl),
+                    PinningEndpoint(host: region)]
         }
+        
+        var availableEndpoints = [PinningEndpoint]()
+        availableMetaEndpoints(&availableEndpoints)
+        
+        availableEndpoints.append(PinningEndpoint(host: region))
+        
+        return availableEndpoints
     }
     
     public func availableEndpoints() -> [PinningEndpoint] {
-    
-        if Client.configuration.currentServerNetwork() == .gen4 {
-            
-            if Client.providers.vpnProvider.isVPNConnected {
-                return [PinningEndpoint(host: internalUrl),
-                        PinningEndpoint(host: pia),
-                        PinningEndpoint(host: proxy, isProxy: true)]
-            }
-            
-            var availableEndpoints = [PinningEndpoint]()
-            availableMetaEndpoints(&availableEndpoints)
-
-            availableEndpoints.append(PinningEndpoint(host: pia))
-            availableEndpoints.append(PinningEndpoint(host: proxy, isProxy: true))
-            
-            return availableEndpoints
-
-        } else {
-            return [PinningEndpoint(host: pia),
+        if Client.providers.vpnProvider.isVPNConnected {
+            return [PinningEndpoint(host: internalUrl),
+                    PinningEndpoint(host: pia),
                     PinningEndpoint(host: proxy, isProxy: true)]
         }
+        
+        var availableEndpoints = [PinningEndpoint]()
+        availableMetaEndpoints(&availableEndpoints)
+
+        availableEndpoints.append(PinningEndpoint(host: pia))
+        availableEndpoints.append(PinningEndpoint(host: proxy, isProxy: true))
+        
+        return availableEndpoints
     }
     
 }
