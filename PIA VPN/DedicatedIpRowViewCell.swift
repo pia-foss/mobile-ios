@@ -22,7 +22,7 @@
 import UIKit
 import PIALibrary
 
-class DedicatedIpRowCollectionViewCell: FullWidthCollectionViewCell, Restylable {
+class DedicatedIpRowViewCell: UITableViewCell, Restylable {
 
     @IBOutlet private weak var imvFlag: UIImageView!
 
@@ -59,7 +59,7 @@ class DedicatedIpRowCollectionViewCell: FullWidthCollectionViewCell, Restylable 
         Theme.current.applyRegionSolidLightBackground(self.contentView)
 
         Theme.current.applySettingsCellTitle(labelRegion, appearance: .dark)
-        Theme.current.applyTag(labelIp, appearance: .dark)
+        Theme.current.applySettingsCellTitle(labelIp, appearance: .dark)
                 
     }
 

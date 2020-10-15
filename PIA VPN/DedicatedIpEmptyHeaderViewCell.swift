@@ -1,5 +1,5 @@
 //
-//  DedicatedIpEmptyHeaderCollectionViewCell.swift
+//  DedicatedIpEmptyHeaderViewCell.swift
 //  PIA VPN
 //  
 //  Created by Jose Blaya on 13/10/2020.
@@ -22,7 +22,7 @@
 import UIKit
 import PIALibrary
 
-class DedicatedIpEmptyHeaderCollectionViewCell: UICollectionViewCell {
+class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
 
     @IBOutlet private weak var title: UILabel!
     @IBOutlet private weak var subtitle: UILabel!
@@ -34,7 +34,7 @@ class DedicatedIpEmptyHeaderCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         self.backgroundColor = .clear
         self.title.text = "Dedicated IP"
-        self.subtitle.text = "Activate your Dedicated IP pasting your token in the form below. If you've recently purchased a dedicated IP, you can generate the token by going to the PIA website."
+        self.subtitle.text = "Activate your Dedicated IP by pasting your token in the form below. If you've recently purchased a dedicated IP, you can generate the token by going to the PIA website."
         self.addTokenTextfield.placeholder = "Paste in your token here"
         self.addTokenTextfield.delegate = self
     }
@@ -66,12 +66,31 @@ class DedicatedIpEmptyHeaderCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction private func activateToken() {
-        NotificationCenter.default.post(name: .DedicatedIpReload, object: nil)
+        if let token = addTokenTextfield.text, !token.isEmpty {
+            Client.providers.serverProvider.activateDIPToken(token) { [weak self] (server, error) in
+                self?.addTokenTextfield.text = ""
+                guard let dipServer = server else {
+                    Macros.displayStickyNote(withMessage: "Your token is invalid. Please make sure you have entered the token correctly.",
+                                             andImage: Asset.iconWarning.image)
+                    return
+                }
+                switch dipServer?.dipStatus {
+                case .active:
+                    Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image, message: "Your Dedicated IP has been activated successfully. It will be available in your Region selection list.")
+                case .expired:
+                    Macros.displayWarningImageNote(withImage: Asset.iconWarning.image, message: "Your token is expired. Please generate a new one from your Account page in the website.")
+                default:
+                    Macros.displayStickyNote(withMessage: "Your token is invalid. Please make sure you have entered the token correctly.",
+                                             andImage: Asset.iconWarning.image)
+                }
+                NotificationCenter.default.post(name: .DedicatedIpReload, object: nil)
+            }
+        }
     }
 
 }
 
-extension DedicatedIpEmptyHeaderCollectionViewCell: UITextFieldDelegate {
+extension DedicatedIpEmptyHeaderViewCell: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

@@ -22,7 +22,7 @@
 import UIKit
 import PIALibrary
 
-class DedicatedIPTitleHeaderCollectionViewCell: UICollectionViewCell {
+class DedicatedIPTitleHeaderViewCell: UITableViewCell {
 
     @IBOutlet private weak var titleLabel: UILabel!
 

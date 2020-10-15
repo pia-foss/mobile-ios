@@ -27,8 +27,8 @@ private let log = SwiftyBeaver.self
 
 class DedicatedIpViewController: AutolayoutViewController {
     
-    @IBOutlet private weak var collectionView: UICollectionView!
-    private var data = [String]()
+    @IBOutlet private weak var tableView: UITableView!
+    private var data = [Server]()
 
     private struct Sections {
         static let header = 0
@@ -41,9 +41,9 @@ class DedicatedIpViewController: AutolayoutViewController {
     }
     
     private struct Cells {
-        static let dedicatedIpRow = "DedicatedIpRowCollectionViewCell"
-        static let header = "DedicatedIpEmptyHeaderCollectionViewCell"
-        static let titleHeader = "DedicatedIPTitleHeaderCollectionViewCell"
+        static let dedicatedIpRow = "DedicatedIpRowViewCell"
+        static let header = "DedicatedIpEmptyHeaderViewCell"
+        static let titleHeader = "DedicatedIPTitleHeaderViewCell"
     }
 
     deinit {
@@ -57,9 +57,9 @@ class DedicatedIpViewController: AutolayoutViewController {
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
-        nc.addObserver(self, selector: #selector(reloadCollectionView), name: .DedicatedIpReload, object: nil)
+        nc.addObserver(self, selector: #selector(reloadTableView), name: .DedicatedIpReload, object: nil)
 
-        configureCollectionView()
+        configureTableView()
 
     }
 
@@ -77,34 +77,27 @@ class DedicatedIpViewController: AutolayoutViewController {
         styleNavigationBarWithTitle("Dedicated IP")
     }
     
-    @objc private func reloadCollectionView() {
-        data.append("a")
-        collectionView.reloadData()
+    @objc private func reloadTableView() {
+        data = Client.providers.serverProvider.currentServers.filter({ $0.dipToken != nil })
+        tableView.reloadData()
     }
     
-    private func configureCollectionView() {
-
-        let layout = collectionView.collectionViewLayout
-        if let flowLayout = layout as? UICollectionViewFlowLayout {
-            flowLayout.estimatedItemSize = CGSize(
-                width: collectionView.widestCellWidth,
-                height: 100
-            )
-        }
-
-        collectionView.collectionViewLayout = AutoInvalidatingLayout()
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(UINib(nibName: Cells.dedicatedIpRow,
+    private func configureTableView() {
+        
+        tableView.sectionFooterHeight = UITableView.automaticDimension
+        tableView.estimatedSectionFooterHeight = 1.0
+        tableView.estimatedSectionHeaderHeight = 1.0
+        tableView.register(UINib(nibName: Cells.dedicatedIpRow,
                                       bundle: nil),
-                                forCellWithReuseIdentifier: Cells.dedicatedIpRow)
-        collectionView.register(UINib(nibName: Cells.header, bundle: nil),
-                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier:Cells.header)
-        collectionView.register(UINib(nibName: Cells.titleHeader, bundle: nil),
-                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier:Cells.titleHeader)
-        collectionView.delegate = self
-        collectionView.dataSource = self
+                           forCellReuseIdentifier: Cells.dedicatedIpRow)
+        tableView.register(UINib(nibName: Cells.header, bundle: nil),
+                           forCellReuseIdentifier:Cells.header)
+        tableView.register(UINib(nibName: Cells.titleHeader, bundle: nil),
+                           forCellReuseIdentifier:Cells.titleHeader)
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        reloadTableView()
     }
 
     
@@ -119,26 +112,28 @@ class DedicatedIpViewController: AutolayoutViewController {
             Theme.current.applyPrincipalBackground(viewContainer)
         }
         
-        Theme.current.applyPrincipalBackground(collectionView)
-        self.collectionView.reloadData()
+        Theme.current.applyPrincipalBackground(tableView)
+        self.tableView.reloadData()
 
     }
 
 }
 
-extension DedicatedIpViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource {
 
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return data.isEmpty ? 1 : Sections.numberOfSections()
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Sections.header == section ? 0 : data.count
+
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.dedicatedIpRow, for: indexPath) as! DedicatedIpRowCollectionViewCell
-        cell.fill(withServer: Server.automatic)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Cells.dedicatedIpRow, for: indexPath) as! DedicatedIpRowViewCell
+        let server = data[indexPath.row]
+        cell.fill(withServer: server)
         Theme.current.applySecondaryBackground(cell)
 
         let backgroundView = UIView()
@@ -147,48 +142,38 @@ extension DedicatedIpViewController: UICollectionViewDelegateFlowLayout, UIColle
 
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
 
-        case UICollectionView.elementKindSectionHeader:
-            if Sections.header == indexPath.section {
-                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Cells.header, for: indexPath) as! DedicatedIpEmptyHeaderCollectionViewCell
-                headerView.setup()
-                return headerView
-            } else {
-                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Cells.titleHeader, for: indexPath) as! DedicatedIPTitleHeaderCollectionViewCell
-                return headerView
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let dipRegion = data[indexPath.row]
+            if let token = dipRegion.dipToken {
+                Client.providers.serverProvider.removeDIPToken(token)
             }
-
-        default:
-            return UICollectionReusableView()
-
+            reloadTableView()
         }
-
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.0
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-
-        let indexPath = IndexPath(row: 0, section: section)
-        
-        if Sections.header == indexPath.section {
-            let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as! DedicatedIpEmptyHeaderCollectionViewCell
-            return headerView.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height),
-                                                      withHorizontalFittingPriority: .defaultHigh,
-                                                      verticalFittingPriority: .fittingSizeLevel)
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if Sections.header == section {
+            let headerView = tableView.dequeueReusableCell(withIdentifier: Cells.header) as! DedicatedIpEmptyHeaderViewCell
+            headerView.setup()
+            return headerView
         } else {
-            let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as! DedicatedIPTitleHeaderCollectionViewCell
-            return headerView.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height),
-                                                      withHorizontalFittingPriority: .defaultHigh,
-                                                      verticalFittingPriority: .fittingSizeLevel)
+            let headerView = tableView.dequeueReusableCell(withIdentifier: Cells.titleHeader) as! DedicatedIPTitleHeaderViewCell
+            return headerView
         }
-
-
     }
     
 }
