@@ -175,7 +175,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                     callback?(nil)
                 }
             } else {
-                callback?(ClientError.invalidParameter)
+                callback?(ClientError.unauthorized)
             }
         } else {
             //We use the email and the password returned by the signup endpoint in the previous step, we don't update the password
@@ -217,9 +217,39 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                 callback?(true, nil)
             }
         } else {
-            callback?(false, ClientError.invalidParameter)
+            callback?(false, ClientError.unauthorized)
         }
 
+    }
+    
+    func activateDIPToken(tokens: [String], _ callback: LibraryCallback<[Server]>?) {
+        if let token = Client.providers.accountProvider.token {
+            self.accountAPI.dedicatedIPs(token: token, ipTokens: tokens) { (dedicatedIps, error) in
+                if let _ = error {
+                    callback?([], ClientError.invalidParameter)
+                    return
+                }
+                
+                var dipRegions = [Server]()
+                for dipServer in dedicatedIps {
+                    if dipServer.status == DedicatedIPInformationResponse.Status.active {
+
+                        //Replace ES with dipServer.id
+                        var firstServer = Client.providers.serverProvider.currentServers.first(where: {$0.country == "ES"})
+                        
+                        let dipRegion = Server(serial: firstServer!.serial, name: firstServer!.name, country: firstServer!.country, hostname: firstServer!.hostname, bestOpenVPNAddressForTCP: firstServer!.bestOpenVPNAddressForTCP, bestOpenVPNAddressForUDP: firstServer!.bestOpenVPNAddressForUDP, openVPNAddressesForTCP: [Server.ServerAddressIP(ip: dipServer.ip!, cn: dipServer.cn!)], openVPNAddressesForUDP: [Server.ServerAddressIP(ip: dipServer.ip!, cn: dipServer.cn!)], wireGuardAddressesForUDP: [Server.ServerAddressIP(ip: dipServer.ip!, cn: dipServer.cn!)], iKEv2AddressesForUDP: [Server.ServerAddressIP(ip: dipServer.ip!, cn: dipServer.cn!)], pingAddress: firstServer!.pingAddress, serverNetwork: ServersNetwork.gen4, geo: false, meta: nil, dipExpire: Date(timeIntervalSince1970: TimeInterval(dipServer.dip_expire!)), dipToken: dipServer.dipToken, dipStatus: DedicatedIPStatus.active, regionIdentifier: firstServer!.regionIdentifier)
+                        
+                        dipRegions.append(dipRegion)
+                        Client.database.secure.setDIPToken(dipServer.dipToken)
+
+                    }
+                }
+
+                callback?(dipRegions, nil)
+            }
+        }else {
+            callback?([], ClientError.unauthorized)
+        }
     }
     
     #if os(iOS)

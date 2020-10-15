@@ -46,5 +46,13 @@ protocol SecureStore: class {
     
     func tokenKey(for username: String) -> String
 
+    func dipTokens() -> [String]?
+    
+    func setDIPToken(_ dipToken: String)
+    
+    func remove(_ dipToken: String)
+
+    func removeDIPTokens()
+
     func clear(for username: String)
 }

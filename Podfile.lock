@@ -50,7 +50,7 @@ DEPENDENCIES:
   - FXPageControl
   - Gloss (~> 2)
   - lottie-ios
-  - PIAAccountModule (from `https://github.com/pia-foss/mobile-common-account`)
+  - PIAAccountModule (from `/Users/jose/Projects/PIA/account`)
   - PIARegions (from `https://github.com/pia-foss/mobile-common-regions`)
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
   - PopupDialog
@@ -76,7 +76,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIAAccountModule:
-    :git: https://github.com/pia-foss/mobile-common-account
+    :path: "/Users/jose/Projects/PIA/account"
   PIARegions:
     :git: https://github.com/pia-foss/mobile-common-regions
   PIAWireguard:
@@ -86,9 +86,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/pia-foss/tunnelkit
 
 CHECKOUT OPTIONS:
-  PIAAccountModule:
-    :commit: a72a9739bccf99ac42959645e1ee4e61a0cc7e37
-    :git: https://github.com/pia-foss/mobile-common-account
   PIARegions:
     :commit: 0b35229144ad12fa2a857ab6f41fa4f550f42a7e
     :git: https://github.com/pia-foss/mobile-common-regions
@@ -117,6 +114,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 97fb9c22df2e690aea63be18927deca715d4057c
+PODFILE CHECKSUM: 7b505471eb03240fadcb14de86defe1d40d92822
 
 COCOAPODS: 1.9.3

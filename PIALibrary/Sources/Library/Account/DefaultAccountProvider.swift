@@ -544,6 +544,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             accessedDatabase.secure.clear(for: username)
             accessedDatabase.secure.setToken(nil, for: accessedDatabase.secure.tokenKey(for: username))
         }
+        accessedDatabase.secure.removeDIPTokens()
         accessedDatabase.secure.setPublicUsername(nil)
         accessedDatabase.plain.accountInfo = nil
         accessedDatabase.plain.visibleTiles = AvailableTiles.defaultTiles()

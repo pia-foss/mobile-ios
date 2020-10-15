@@ -46,6 +46,9 @@ public protocol ServerProvider: class {
 
     var regionStaticData: RegionData! { get }
     
+    /// The array of DIP tokens stored in the keychain, or `nil` if logged out.
+    var dipTokens: [String]? { get }
+
     /**
      Loads this provider with a local JSON, as seen on the /servers web client API.
 
@@ -94,4 +97,31 @@ public protocol ServerProvider: class {
      Reset the currentServers object
      */
     func resetCurrentServers()
+    
+    /**
+     Activates the dedicated IP tokens.
+
+     - Precondition: `isLoggedIn` is `true`.
+     - Parameter tokens: The `String` array of DIP token to activate.
+     - Parameter callback: Returns the status of the DIP region `Server` array.
+     */
+    func activateDIPTokens(_ tokens: [String], _ callback: LibraryCallback<[Server]>?)
+
+    /**
+     Activates the dedicated IP token.
+
+     - Precondition: `isLoggedIn` is `true`.
+     - Parameter tokens: The `String`  DIP token to activate.
+     - Parameter callback: Returns the status of the DIP region `Server`.
+     */
+    func activateDIPToken(_ token: String, _ callback: LibraryCallback<Server?>?) 
+
+    /**
+     Removes the dedicated IP region.
+
+     - Precondition: `isLoggedIn` is `true`.
+     - Parameter dipToken: The `String` DIP token to remove.
+     */
+    func removeDIPToken(_ dipToken: String)
+    
 }

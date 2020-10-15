@@ -183,7 +183,7 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     public var currentPasswordReference: Data? {
         return delegate.currentPasswordReference
     }
-    
+        
     #if os(iOS)
     /// :nodoc:
     public var lastSignupRequest: SignupRequest? {

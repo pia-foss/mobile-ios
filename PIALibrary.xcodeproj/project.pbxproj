@@ -240,6 +240,8 @@
 		8221921F24CEBABA00C24F1C /* NMTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921E24CEBABA00C24F1C /* NMTType.swift */; };
 		8221922024CEBABA00C24F1C /* NMTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921E24CEBABA00C24F1C /* NMTType.swift */; };
 		822BC1D024BF20C90041BF9A /* UIControl+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BC1CF24BF20C90041BF9A /* UIControl+Action.swift */; };
+		829EB63F2535C432003E74DD /* DedicatedIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB63E2535C432003E74DD /* DedicatedIP.swift */; };
+		829EB6402535C432003E74DD /* DedicatedIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB63E2535C432003E74DD /* DedicatedIP.swift */; };
 		82C374F82514DE7D00E391EE /* EndpointManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C374F42514DC6D00E391EE /* EndpointManagerTests.swift */; };
 		82C374F92514DE8200E391EE /* server.json in Resources */ = {isa = PBXBuildFile; fileRef = 82C374F62514DC7200E391EE /* server.json */; };
 		82C374FB2514DEC700E391EE /* EndpointManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C374FA2514DEC700E391EE /* EndpointManager.swift */; };
@@ -559,6 +561,7 @@
 		8221921B24CEBA3800C24F1C /* NMTRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMTRules.swift; sourceTree = "<group>"; };
 		8221921E24CEBABA00C24F1C /* NMTType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMTType.swift; sourceTree = "<group>"; };
 		822BC1CF24BF20C90041BF9A /* UIControl+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Action.swift"; sourceTree = "<group>"; };
+		829EB63E2535C432003E74DD /* DedicatedIP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DedicatedIP.swift; sourceTree = "<group>"; };
 		82C374F42514DC6D00E391EE /* EndpointManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointManagerTests.swift; sourceTree = "<group>"; };
 		82C374F62514DC7200E391EE /* server.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = server.json; sourceTree = "<group>"; };
 		82C374FA2514DEC700E391EE /* EndpointManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointManager.swift; sourceTree = "<group>"; };
@@ -858,6 +861,7 @@
 				DD56E3F5225F5D77002EDFB2 /* Product.swift */,
 				DD6768E222FAB19D00B9FDD0 /* AppStoreInformation.swift */,
 				82E20B1524F6AA110065EFE3 /* RegionData.swift */,
+				829EB63E2535C432003E74DD /* DedicatedIP.swift */,
 			);
 			path = WebServices;
 			sourceTree = "<group>";
@@ -1526,7 +1530,11 @@
 				"${BUILT_PRODUCTS_DIR}/FXPageControl/FXPageControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Gloss/Gloss.framework",
 				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
+				"${PODS_ROOT}/../../account/build/cocoapods/framework/PIAAccount.framework",
+				"${PODS_ROOT}/../../account/build/cocoapods/framework/PIAAccount.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/PIAAccountModule/PIAAccountModule.framework",
+				"${PODS_ROOT}/PIARegions/regions/build/cocoapods/framework/Regions.framework",
+				"${PODS_ROOT}/PIARegions/regions/build/cocoapods/framework/Regions.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/PIARegions/PIARegions.framework",
 				"${BUILT_PRODUCTS_DIR}/PIAWireguard/PIAWireguard.framework",
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
@@ -1545,7 +1553,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FXPageControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gloss.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAAccount.framework",
+				"${DWARF_DSYM_FOLDER_PATH}/PIAAccount.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAAccountModule.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regions.framework",
+				"${DWARF_DSYM_FOLDER_PATH}/Regions.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIARegions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAWireguard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
@@ -1574,7 +1586,11 @@
 				"${BUILT_PRODUCTS_DIR}/FXPageControl/FXPageControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Gloss/Gloss.framework",
 				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
+				"${PODS_ROOT}/../../account/build/cocoapods/framework/PIAAccount.framework",
+				"${PODS_ROOT}/../../account/build/cocoapods/framework/PIAAccount.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/PIAAccountModule/PIAAccountModule.framework",
+				"${PODS_ROOT}/PIARegions/regions/build/cocoapods/framework/Regions.framework",
+				"${PODS_ROOT}/PIARegions/regions/build/cocoapods/framework/Regions.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/PIARegions/PIARegions.framework",
 				"${BUILT_PRODUCTS_DIR}/PIAWireguard/PIAWireguard.framework",
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
@@ -1593,7 +1609,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FXPageControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gloss.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAAccount.framework",
+				"${DWARF_DSYM_FOLDER_PATH}/PIAAccount.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAAccountModule.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regions.framework",
+				"${DWARF_DSYM_FOLDER_PATH}/Regions.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIARegions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAWireguard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
@@ -1679,6 +1699,7 @@
 				0E3D13DA1F9E273300434A48 /* GlossSignup.swift in Sources */,
 				0E392D961FE316860002160D /* DebugLog.swift in Sources */,
 				0E7BC6EB1F96B1040035C8B2 /* PIAWebServices.swift in Sources */,
+				829EB6402535C432003E74DD /* DedicatedIP.swift in Sources */,
 				0E245C9E1FECF0C20010DEF2 /* ClientAccess.swift in Sources */,
 				DD2683EA24617F0300C65DAA /* PingTask.swift in Sources */,
 				0E9D62D21FDEBBC8009A90CF /* GlossServersBundle.swift in Sources */,
@@ -1852,6 +1873,7 @@
 				0EBBC6DC1F9F64E700B8BD21 /* Client+Environment.swift in Sources */,
 				0EB3D9821FF02FE5005B11F4 /* VPNAction.swift in Sources */,
 				0E2ADD371FE14F0000BB170C /* DefaultVPNProvider.swift in Sources */,
+				829EB63F2535C432003E74DD /* DedicatedIP.swift in Sources */,
 				0EA8073220A2F50A0033EC1A /* SignupMetadata.swift in Sources */,
 				0E4D4E9F1FA4CA7A007DA6DA /* Restylable.swift in Sources */,
 				0EB8C06E1F9CD38B005857E4 /* SignupInternetUnreachableViewController.swift in Sources */,

@@ -43,6 +43,7 @@ public class Keychain {
     
     private let usernameKey = "USERNAME_KEY"
     private let publicUsernameKey = "PUBLIC_USERNAME_KEY"
+    private let dipTokensKey = "DIP_TOKENS_KEY"
 
     /**
      Default initializer. Uses the default keychain associated with the main bundle identifier.
@@ -396,4 +397,97 @@ extension Keychain {
         return password
     }
 
+}
+
+extension Keychain {
+    
+    // MARK: DIP Region
+    
+    /// :nodoc:
+    public func set(dipToken: String) throws {
+        
+        var tokens = [String]()
+        if let storedTokens = try? dipTokens() {
+            removeDIPTokens()
+            if !storedTokens.contains(where: {$0 == dipToken }){
+                tokens.append(contentsOf: storedTokens)
+            }
+        }
+        
+        tokens.append(dipToken)
+
+        var query = [String: Any]()
+        setScope(query: &query)
+        query[kSecClass as String] = kSecClassGenericPassword
+        query[kSecAttrAccount as String] = dipTokensKey
+        query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
+        let encoder = JSONEncoder()
+        query[kSecValueData as String] = try? encoder.encode(tokens)
+        
+        let status = SecItemAdd(query as CFDictionary, nil)
+        guard (status == errSecSuccess) else {
+            throw KeychainError.add
+        }
+        
+    }
+    
+    /// :nodoc:
+    @discardableResult public func remove(dipToken: String) throws {
+        
+        var tokens = [String]()
+        if let storedTokens = try? dipTokens() {
+            removeDIPTokens()
+            tokens = storedTokens.filter({ $0 != dipToken })
+        }
+        
+        var query = [String: Any]()
+        setScope(query: &query)
+        query[kSecClass as String] = kSecClassGenericPassword
+        query[kSecAttrAccount as String] = dipTokensKey
+        query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
+        let encoder = JSONEncoder()
+        query[kSecValueData as String] = try? encoder.encode(tokens)
+        
+        let status = SecItemAdd(query as CFDictionary, nil)
+        guard (status == errSecSuccess) else {
+            throw KeychainError.add
+        }
+        
+    }
+    
+    /// :nodoc:
+    @discardableResult public func removeDIPTokens() -> Bool {
+        var query = [String: Any]()
+        setScope(query: &query)
+        query[kSecClass as String] = kSecClassGenericPassword
+        query[kSecAttrAccount as String] = dipTokensKey
+        
+        let status = SecItemDelete(query as CFDictionary)
+        return (status == errSecSuccess)
+    }
+    
+    /// :nodoc:
+    public func dipTokens() throws -> [String] {
+        var query = [String: Any]()
+        setScope(query: &query)
+        query[kSecClass as String] = kSecClassGenericPassword
+        query[kSecAttrAccount as String] = dipTokensKey
+        query[kSecMatchLimit as String] = kSecMatchLimitOne
+        query[kSecReturnData as String] = true
+        
+        var result: AnyObject?
+        let status = SecItemCopyMatching(query as CFDictionary, &result)
+        guard (status == errSecSuccess) else {
+            throw KeychainError.notFound
+        }
+        guard let data = result as? Data else {
+            throw KeychainError.notFound
+        }
+        let decoder = JSONDecoder()
+        guard let tokens = try? decoder.decode([String].self, from: data) else {
+            throw KeychainError.notFound
+        }
+        return tokens
+    }
+    
 }

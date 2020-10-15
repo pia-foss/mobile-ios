@@ -145,6 +145,12 @@ public class Server: Hashable {
     /// The meta IP.
     public let meta: ServerAddressIP?
 
+    public let dipExpire: Date?
+    
+    public let dipToken: String?
+    
+    public let dipStatus: DedicatedIPStatus?
+
     var isAutomatic: Bool
 
     /// :nodoc:
@@ -164,6 +170,9 @@ public class Server: Hashable {
         serverNetwork: ServersNetwork? = .legacy,
         geo: Bool = false,
         meta: ServerAddressIP? = nil,
+        dipExpire: Date? = nil,
+        dipToken: String? = nil,
+        dipStatus: DedicatedIPStatus? = nil,
         regionIdentifier: String) {
         
         self.serial = serial
@@ -184,6 +193,10 @@ public class Server: Hashable {
         self.meta = meta
         self.pingAddress = pingAddress
         self.serverNetwork = serverNetwork
+
+        self.dipExpire = dipExpire
+        self.dipToken = dipToken
+        self.dipStatus = dipStatus
 
         isAutomatic = true
     }

@@ -117,6 +117,10 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
         return server
     }
     
+    var dipTokens: [String]? {
+        return accessedDatabase.secure.dipTokens()
+    }
+    
     public var regionStaticData: RegionData!
     
     func loadLocalJSON(fromJSON jsonData: Data) {
@@ -153,8 +157,20 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
             if let configuration = bundle.configuration {
                 self.accessedDatabase.transient.serversConfiguration = configuration
             }
+            
             self.currentServers = bundle.servers
-            callback?(bundle.servers, error)
+            
+            if let tokens = self.accessedDatabase.secure.dipTokens() {
+                self.webServices.activateDIPToken(tokens: tokens) { (servers, error) in
+                    if let servers = servers {
+                        self.currentServers.append(contentsOf: servers)
+                    }
+                    callback?(self.currentServers, error)
+                }
+            } else {
+                callback?(self.currentServers, error)
+            }
+            
         }
     }
     
@@ -165,6 +181,49 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
             }
             callback?(nil)
         }
+    }
+    
+    func activateDIPToken(_ token: String, _ callback: LibraryCallback<Server?>?) {
+        guard Client.providers.accountProvider.isLoggedIn else {
+            preconditionFailure()
+        }
+        webServices.activateDIPToken(tokens: [token]) { (servers, error) in
+            if let servers = servers,
+               let first = servers.first {
+               if !self.currentServers.contains(where: {$0.dipToken == first.dipToken}) {
+                    self.currentServers.append(contentsOf: servers)
+               }
+                callback?(first, error)
+            } else {
+                callback?(nil, error)
+            }
+        }
+    }
+
+    func activateDIPTokens(_ tokens: [String], _ callback: LibraryCallback<[Server]>?) {
+        guard Client.providers.accountProvider.isLoggedIn else {
+            preconditionFailure()
+        }
+        webServices.activateDIPToken(tokens: tokens) { (servers, error) in
+            if let servers = servers {
+                for server in servers {
+                    if !self.currentServers.contains(where: {$0.dipToken == server.dipToken}) {
+                        self.currentServers.append(server)
+                    }
+                }
+                callback?(servers, error)
+            } else {
+                callback?([], error)
+            }
+        }
+    }
+    
+    func removeDIPToken(_ dipToken: String) {
+        guard Client.providers.accountProvider.isLoggedIn else {
+            preconditionFailure()
+        }
+        accessedDatabase.secure.remove(dipToken)
+        self.currentServers = self.currentServers.filter({$0.dipToken != dipToken})
     }
     
     func find(withIdentifier identifier: String) -> Server? {

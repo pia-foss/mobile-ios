@@ -371,6 +371,10 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
         fatalError("Not implemented")
     }
 
+    func activateDIPTokens(_ dipToken: String, _ callback: LibraryCallback<DedicatedIPStatus>?) {
+        fatalError("Not implemented")
+    }
+    
     func cleanDatabase() {
         fatalError("Not implemented")
     }
