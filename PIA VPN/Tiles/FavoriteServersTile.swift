@@ -71,7 +71,7 @@ class FavoriteServersTile: UIView, Tileable {
     }
     
     @objc private func updateFavoriteList() {
-        var currentServers = Client.providers.serverProvider.currentServers.filter { $0.serverNetwork == Client.configuration.currentServerNetwork() }
+        var currentServers = Client.providers.serverProvider.currentServers
         currentServers.append(Server.automatic)
         for containerView in stackView.subviews {
             if let button = containerView.subviews.first as? ServerButton {
@@ -90,12 +90,10 @@ class FavoriteServersTile: UIView, Tileable {
         }
         
         var favServers: [Server] = []
-        let favoriteServers = Client.configuration.currentServerNetwork() == .gen4 ?
-            AppPreferences.shared.favoriteServerIdentifiersGen4 :
-            AppPreferences.shared.favoriteServerIdentifiers
+        let favoriteServers = AppPreferences.shared.favoriteServerIdentifiersGen4
 
         for identifier in favoriteServers.reversed() {
-            let servers = currentServers.filter({ $0.identifier+($0.dipToken ?? "") == identifier && $0.serverNetwork == Client.configuration.currentServerNetwork() })
+            let servers = currentServers.filter({ $0.identifier+($0.dipToken ?? "") == identifier })
             favServers.append(contentsOf: servers)
         }
 

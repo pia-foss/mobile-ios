@@ -76,9 +76,7 @@ class QuickConnectTile: UIView, Tileable {
     
     @objc private func updateQuickConnectList() {
         
-        historicalServers = Client.providers.serverProvider.historicalServers.filter {
-            $0.serverNetwork == Client.configuration.currentServerNetwork()
-        }
+        historicalServers = Client.providers.serverProvider.historicalServers
         
         if AppPreferences.shared.showGeoServers == false {
             historicalServers = Client.providers.serverProvider.historicalServers.filter {
@@ -104,9 +102,7 @@ class QuickConnectTile: UIView, Tileable {
             }
         }
         
-        let favoriteServers = Client.configuration.currentServerNetwork() == .gen4 ?
-            AppPreferences.shared.favoriteServerIdentifiersGen4 :
-            AppPreferences.shared.favoriteServerIdentifiers
+        let favoriteServers = AppPreferences.shared.favoriteServerIdentifiersGen4
 
         autocompleteRecentServers()
         
@@ -139,7 +135,7 @@ class QuickConnectTile: UIView, Tileable {
     }
     
     private func autocompleteRecentServers() {
-        var currentServers = Client.providers.serverProvider.currentServers.filter { $0.serverNetwork == Client.configuration.currentServerNetwork() }
+        var currentServers = Client.providers.serverProvider.currentServers
         currentServers = currentServers.sorted(by: { $0.pingTime ?? 1000 < $1.pingTime ?? 1000 })
         currentServers = currentServers.filter({!historicalServers.contains($0)})
         currentServers = currentServers.filterDuplicate{ ($0.country, $0.dipToken) }

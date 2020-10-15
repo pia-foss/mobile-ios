@@ -76,8 +76,6 @@ enum Setting: Int {
 
     case disconnectShortcut
     
-    case serversNetwork
-
     case geoServers
 
     case contentBlockerState
@@ -222,7 +220,6 @@ class SettingsViewController: AutolayoutViewController {
             .resolveGoogleAdsDomain
         ],
         .info: [
-            .serversNetwork,
             .cardsHistory
         ]
     ]
@@ -247,8 +244,6 @@ class SettingsViewController: AutolayoutViewController {
     private lazy var switchDarkMode = UISwitch()
         
     private lazy var switchSmallPackets = UISwitch()
-
-    private lazy var switchServersNetwork = UISwitch()
 
     private lazy var switchGeoServers = UISwitch()
 
@@ -312,7 +307,6 @@ class SettingsViewController: AutolayoutViewController {
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
         switchDarkMode.addTarget(self, action: #selector(toggleDarkMode(_:)), for: .valueChanged)
         switchSmallPackets.addTarget(self, action: #selector(toggleSmallPackets(_:)), for: .valueChanged)
-        switchServersNetwork.addTarget(self, action: #selector(toggleServerNetwork(_:)), for: .valueChanged)
         switchGeoServers.addTarget(self, action: #selector(toggleGEOServers(_:)), for: .valueChanged)
         switchEnableNMT.addTarget(self, action: #selector(toggleNMT(_:)), for: .valueChanged)
         redisplaySettings()
@@ -412,35 +406,7 @@ class SettingsViewController: AutolayoutViewController {
         AppPreferences.shared.useSmallPackets = sender.isOn
         savePreferences()
     }
-    
-    @objc private func toggleServerNetwork(_ sender: UISwitch) {
         
-        guard Client.providers.vpnProvider.vpnStatus == .disconnected else {
-            sender.setOn(!sender.isOn, animated: true)
-            let message = L10n.Settings.Server.Network.alert
-            let alert = Macros.alert(nil, message)
-            alert.addDefaultAction(L10n.Global.ok)
-            self.present(alert, animated: true, completion: nil)
-            return
-        }
-
-        self.showLoadingAnimation()
-        let currentValue = Client.configuration.currentServerNetwork()
-        Client.configuration.setServerNetworks(to: sender.isOn ? .gen4 : .legacy)
-        Client.resetServers(completionBlock: { error in
-            self.hideLoadingAnimation()
-            if error == nil {
-                NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
-                object: self,
-                userInfo: nil)
-            } else {
-                Client.configuration.setServerNetworks(to: currentValue)
-                self.tableView.reloadData()
-            }
-        })
-        
-    }
-    
     @objc private func toggleGEOServers(_ sender: UISwitch) {
         AppPreferences.shared.showGeoServers = sender.isOn
         NotificationCenter.default.post(name: .PIADaemonsDidPingServers,
@@ -1202,13 +1168,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryView = switchPersistent
             cell.selectionStyle = .none
             switchPersistent.isOn = pendingPreferences.isPersistentConnection
-
-        case .serversNetwork:
-            cell.textLabel?.text = L10n.Settings.Server.Network.description
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchServersNetwork
-            cell.selectionStyle = .none
-            switchServersNetwork.isOn = Client.configuration.currentServerNetwork() == ServersNetwork.gen4
 
         case .cardsHistory:
             cell.textLabel?.text = L10n.Settings.Cards.History.title

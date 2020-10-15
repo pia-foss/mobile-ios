@@ -50,7 +50,6 @@ class AppPreferences {
 
         static let useSmallPackets = "UseSmallPackets"
 
-        static let favoriteServerIdentifiers = "FavoriteServerIdentifiers"
         static let favoriteServerIdentifiersGen4 = "FavoriteServerIdentifiersGen4"
 
         static let regionFilter = "RegionFilter"
@@ -159,18 +158,6 @@ class AppPreferences {
         }
         set {
             defaults.set(newValue.rawValue, forKey: Entries.piaHandshake)
-        }
-    }
-
-    var favoriteServerIdentifiers: [String] {
-        get {
-            if let serverIdentifiers = defaults.array(forKey: Entries.favoriteServerIdentifiers) as? [String] {
-                return serverIdentifiers
-            }
-            return []
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.favoriteServerIdentifiers)
         }
     }
     
@@ -406,7 +393,6 @@ class AppPreferences {
             Entries.appVersion: "",
             Entries.launched: false,
             Entries.regionFilter: RegionFilter.name.rawValue,
-            Entries.favoriteServerIdentifiers: [],
             Entries.favoriteServerIdentifiersGen4: [],
             Entries.didAskToEnableNotifications: false,
             Entries.themeCode: ThemeCode.light.rawValue,
@@ -554,7 +540,6 @@ class AppPreferences {
     func reset() {
         piaHandshake = .rsa2048
         piaSocketType = nil
-        favoriteServerIdentifiers = []
         favoriteServerIdentifiersGen4 = []
         useConnectSiriShortcuts = false
         useDisconnectSiriShortcuts = false
@@ -576,7 +561,6 @@ class AppPreferences {
         todayWidgetVpnProtocol = IKEv2Profile.vpnType
         todayWidgetVpnPort = "500"
         todayWidgetVpnSocket = "UDP"
-        Client.configuration.setServerNetworks(to: .gen4)
         Client.resetServers(completionBlock: {_ in })
         failureConnections = 0
         showGeoServers = true
@@ -585,7 +569,6 @@ class AppPreferences {
     func clean() {
         piaHandshake = .rsa2048
         piaSocketType = nil
-        favoriteServerIdentifiers = []
         favoriteServerIdentifiersGen4 = []
         useConnectSiriShortcuts = false
         useDisconnectSiriShortcuts = false
@@ -605,7 +588,6 @@ class AppPreferences {
         useSmallPackets = false
         let preferences = Client.preferences.editable().reset()
         preferences.commit()
-        Client.configuration.setServerNetworks(to: .gen4)
         Client.resetServers(completionBlock: {_ in })
         failureConnections = 0
         showGeoServers = true
