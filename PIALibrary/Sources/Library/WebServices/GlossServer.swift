@@ -39,6 +39,8 @@ class GlossServer: GlossParser {
             return nil
         }
         
+        let dipToken: String? = "dipToken" <~~ json ?? nil
+
         let geo: Bool = "geo" <~~ json ?? false
 
         var internalServerNetwork: ServersNetwork?
@@ -132,6 +134,7 @@ class GlossServer: GlossParser {
                             serverNetwork: internalServerNetwork ?? .gen4,
                             geo: geo,
                             meta: meta,
+                            dipToken: dipToken,
                             regionIdentifier: regionIdentifier
             )
             
@@ -223,7 +226,9 @@ extension Server: JSONEncodable {
                 "wg" ~~> wgUDPobj,
                 "ikev2" ~~> ikeV2UDPobj,
             ]),
-            "internal_server_network" ~~> serverNetwork?.rawValue
+            "internal_server_network" ~~> serverNetwork?.rawValue,
+            "dipToken" ~~> dipToken,
+            "id" ~~> regionIdentifier
         ])
 
         

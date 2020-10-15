@@ -245,6 +245,24 @@ public extension TextStyle {
         lineHeight: 18
     )
     
+    static let ipTextStyle = TextStyle(
+        font: UIFont.regularFontWith(size: 12),
+        color: UIColor.piaGrey4,
+        foregroundColor: nil,
+        backgroundColor: nil,
+        tintColor: nil,
+        lineHeight: 16
+    )
+
+    static let ipTitleTextStyle = TextStyle(
+        font: UIFont.regularFontWith(size: 10),
+        color: UIColor.piaGrey4,
+        foregroundColor: nil,
+        backgroundColor: nil,
+        tintColor: nil,
+        lineHeight: 10
+    )
+
     static let textStyle22 = TextStyle(
         font: UIFont.mediumFontWith(size: 26),
         color: UIColor.piaWhite,

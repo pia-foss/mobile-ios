@@ -47,8 +47,9 @@ public class EndpointManager {
     private func availableMetaEndpoints(_ availableEndpoints: inout [PinningEndpoint]) {
         var currentServers = Client.providers.serverProvider.currentServers.filter { $0.serverNetwork == .gen4 }
         currentServers = currentServers.sorted(by: { $0.pingTime ?? 1000 < $1.pingTime ?? 1000 })
-        
-        if let historicalServer = Client.providers.serverProvider.historicalServers.first {
+        currentServers = currentServers.filter({$0.meta != nil})
+
+        if let historicalServer = Client.providers.serverProvider.historicalServers.first(where: {$0.meta != nil}) {
             availableEndpoints.append(PinningEndpoint(host: historicalServer.meta!.ip,
                                                       useCertificatePinning: true,
                                                       commonName: historicalServer.meta?.cn))

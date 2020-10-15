@@ -43,6 +43,9 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
     
     var historicalServers: [Server] {
         get {
+            if let dipTokens = dipTokens {
+                return accessedDatabase.plain.historicalServers.filter({$0.dipToken == nil || dipTokens.contains($0.dipToken ?? "")})
+            }
             return accessedDatabase.plain.historicalServers
         }
         set {
@@ -160,11 +163,18 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
             
             self.currentServers = bundle.servers
             
-            if let tokens = self.accessedDatabase.secure.dipTokens() {
+            if let tokens = self.accessedDatabase.secure.dipTokens(), !tokens.isEmpty {
                 self.webServices.activateDIPToken(tokens: tokens) { (servers, error) in
                     if let servers = servers {
-                        self.currentServers.append(contentsOf: servers)
+                        for server in servers {
+                            if !self.currentServers.contains(where: {$0.dipToken == server.dipToken}) {
+                                self.currentServers.append(server)
+                            }
+                        }
                     }
+                    NotificationCenter.default.post(name: .PIAThemeDidChange,
+                                                    object: self,
+                                                    userInfo: nil)
                     callback?(self.currentServers, error)
                 }
             } else {

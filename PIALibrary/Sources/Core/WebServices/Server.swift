@@ -205,7 +205,7 @@ public class Server: Hashable {
     
     /// :nodoc:
     public static func ==(lhs: Server, rhs: Server) -> Bool {
-        return (lhs.identifier == rhs.identifier)
+        return (lhs.identifier == rhs.identifier && lhs.dipToken == rhs.dipToken)
     }
     
     /// :nodoc:

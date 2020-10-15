@@ -44,6 +44,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         
         static let preferredServer = "CurrentRegion" // legacy
 
+        static let preferredServerDIPToken = "CurrentRegionDIPToken"
+        
         static let pingByServerIdentifier = "PingByServerIdentifier"
         
         static let vpnType = "VPNType"
@@ -285,10 +287,12 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
     var preferredServer: Server? {
         get {
             let identifier = backend.string(forKey: Entries.preferredServer)
-            return cachedServers.first { $0.identifier == identifier }
+            let dipToken = preferredServerDIPToken
+            return cachedServers.first { $0.identifier == identifier && $0.dipToken == dipToken }
         }
         set {
             backend.set(newValue?.identifier, forKey: Entries.preferredServer)
+            backend.set(newValue?.dipToken, forKey: Entries.preferredServerDIPToken)
             var lastServers = historicalServers
             if let server = newValue {
                 
@@ -305,6 +309,15 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
     
+    var preferredServerDIPToken: String? {
+        get {
+            return backend.string(forKey: Entries.preferredServerDIPToken)
+        }
+        set {
+            backend.set(preferredServerDIPToken, forKey: Entries.preferredServerDIPToken)
+        }
+    }
+
     var serverNetwork: ServersNetwork {
         get {
             let network = backend.string(forKey: Entries.serverNetwork)
