@@ -41,9 +41,9 @@
       <CodeCoverageTargets>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0EBFFFD41F693F800009D4F4"
-            BuildableName = "PIALibrary.framework"
-            BlueprintName = "PIALibrary-iOS"
+            BlueprintIdentifier = "0EE78B0B1F818A32002E4CDD"
+            BuildableName = "PIALibraryHost-iOS.app"
+            BlueprintName = "PIALibraryHost-iOS"
             ReferencedContainer = "container:PIALibrary.xcodeproj">
          </BuildableReference>
       </CodeCoverageTargets>

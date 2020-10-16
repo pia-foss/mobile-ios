@@ -101,7 +101,7 @@ class AccountTests: XCTestCase {
             }
             XCTAssert(factory.accountProvider.isLoggedIn)
             XCTAssertNotNil(factory.accountProvider.currentUser)
-            print("Logged in with: \(factory.accountProvider.currentUser!)")
+            print("Logged in with: \(factory.accountProvider.currentUser)")
             expLogin.fulfill()
         }
         waitForExpectations(timeout: 5.0, handler: nil)

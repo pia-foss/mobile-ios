@@ -133,7 +133,7 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
     
     /// :nodoc:
     public func loadLocalJSON(fromJSON jsonData: Data) {
-        return delegate.load(fromJSON: jsonData)
+        return delegate.loadLocalJSON(fromJSON: jsonData)
     }
     
     /// :nodoc:
