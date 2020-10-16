@@ -125,9 +125,23 @@ class Bootstrapper {
         ]
         
         Client.providers.serverProvider.downloadRegionStaticData { (error) in
+            
             NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
             object: self,
             userInfo: nil)
+            
+            //FORCE THE MIGRATION TO GEN4
+            if Client.providers.vpnProvider.needsMigrationToGEN4() {
+
+                Client.preferences.displayedServer = Server.automatic
+                NotificationCenter.default.post(name: .PIAThemeDidChange,
+                                                object: self,
+                                                userInfo: nil)
+                Client.providers.vpnProvider.reconnect(after: 200, forceDisconnect: true, { _ in
+                })
+                
+            }
+
         }
         
         Client.providers.accountProvider.subscriptionInformation { [weak self] (info, error) in
