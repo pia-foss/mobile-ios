@@ -151,10 +151,10 @@ DEPENDENCIES:
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
   - PIAAccountModule (from `https://github.com/pia-foss/mobile-common-account`)
-  - PIALibrary/Library (from `/Users/jose/Projects/PIA/client-library-apple`)
-  - PIALibrary/Mock (from `/Users/jose/Projects/PIA/client-library-apple`)
-  - PIALibrary/UI (from `/Users/jose/Projects/PIA/client-library-apple`)
-  - PIALibrary/VPN (from `/Users/jose/Projects/PIA/client-library-apple`)
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `ba3cd1f`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `ba3cd1f`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `ba3cd1f`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `ba3cd1f`)
   - PIARegions (from `https://github.com/pia-foss/mobile-common-regions`)
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
   - Popover
@@ -200,7 +200,8 @@ EXTERNAL SOURCES:
   PIAAccountModule:
     :git: https://github.com/pia-foss/mobile-common-account
   PIALibrary:
-    :path: "/Users/jose/Projects/PIA/client-library-apple"
+    :commit: ba3cd1f
+    :git: https://github.com/pia-foss/client-library-apple
   PIARegions:
     :git: https://github.com/pia-foss/mobile-common-regions
   PIAWireguard:
@@ -213,6 +214,9 @@ CHECKOUT OPTIONS:
   PIAAccountModule:
     :commit: a72a9739bccf99ac42959645e1ee4e61a0cc7e37
     :git: https://github.com/pia-foss/mobile-common-account
+  PIALibrary:
+    :commit: ba3cd1f
+    :git: https://github.com/pia-foss/client-library-apple
   PIARegions:
     :commit: 0b35229144ad12fa2a857ab6f41fa4f550f42a7e
     :git: https://github.com/pia-foss/mobile-common-regions
@@ -259,6 +263,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: f56a5fbfcfbf31fcf8b65d78cca06e9a4eab8a0e
+PODFILE CHECKSUM: 04aa5968e98b6248f08c0522f72a9b9c42b03d54
 
 COCOAPODS: 1.9.3
