@@ -25,6 +25,7 @@ import PIALibrary
 import TunnelKit
 import SwiftyBeaver
 import PIAWireguard
+import NetworkExtension
 #if PIA_DEV
 import AppCenter
 import AppCenterAnalytics
@@ -74,18 +75,9 @@ class Bootstrapper {
         // Load the database first
         Client.database = Client.Database(team: AppConstants.teamId, group: AppConstants.appGroup)
         
-        // Override GEN4 in beta and dev versions
-        if !Client.configuration.arePurchasesAvailable() {
-            if Client.configuration.currentServerNetwork() == .legacy {
-                Client.configuration.setServerNetworks(to: .gen4)
-            }
-        }
-
-        // Override GEN4 in beta and dev versions
-        if !Client.configuration.arePurchasesAvailable() {
-            if Client.configuration.currentServerNetwork() == .legacy {
-                Client.configuration.setServerNetworks(to: .gen4)
-            }
+        //FORCE THE MIGRATION TO GEN4
+        if Client.configuration.currentServerNetwork() == .legacy {
+            Client.configuration.setServerNetworks(to: .gen4)
         }
 
         // Check if should clean the account after delete the app and install again
@@ -139,9 +131,28 @@ class Bootstrapper {
         ]
         
         Client.providers.serverProvider.downloadRegionStaticData { (error) in
+            
             NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
             object: self,
             userInfo: nil)
+            
+            //FORCE THE MIGRATION TO GEN4
+            if Client.providers.vpnProvider.isVPNConnected {
+                
+                let manager = NEVPNManager.shared()
+                if let protocolConfiguration = manager.protocolConfiguration,
+                   let address = protocolConfiguration.serverAddress,
+                   address.contains("privateinternetaccess.com") {
+                    Client.preferences.displayedServer = Server.automatic
+                    NotificationCenter.default.post(name: .PIAThemeDidChange,
+                                                    object: self,
+                                                    userInfo: nil)
+                    Client.providers.vpnProvider.reconnect(after: 200, forceDisconnect: true, { _ in
+                    })
+                }
+
+            }
+
         }
         
         Client.providers.accountProvider.subscriptionInformation { [weak self] (info, error) in
@@ -164,7 +175,6 @@ class Bootstrapper {
 
             Client.refreshProducts()
             Client.observeTransactions()
-            
             
         }
 
