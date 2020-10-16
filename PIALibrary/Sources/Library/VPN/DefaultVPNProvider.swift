@@ -22,6 +22,7 @@
 
 import Foundation
 import __PIALibraryNative
+import NetworkExtension
 
 class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, PreferencesAccess, ProvidersAccess, WebServicesAccess {
     
@@ -363,5 +364,18 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
     
     var webServices: WebServices {
         return customWebServices ?? accessedWebServices
+    }
+    
+    // MARK: Migration
+    func needsMigrationToGEN4() -> Bool {
+        if isVPNConnected {
+            let manager = NEVPNManager.shared()
+            if let protocolConfiguration = manager.protocolConfiguration,
+               let address = protocolConfiguration.serverAddress,
+               address.contains("privateinternetaccess.com") {
+                return true
+            }
+        }
+        return false
     }
 }

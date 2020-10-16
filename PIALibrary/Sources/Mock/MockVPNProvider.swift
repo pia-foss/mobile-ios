@@ -141,4 +141,8 @@ public class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess {
     public func dataUsage(_ callback: LibraryCallback<Usage>?) {
         callback?(nil, ClientError.unsupported)
     }
+    
+    public func needsMigrationToGEN4() -> Bool {
+        return false
+    }
 }
