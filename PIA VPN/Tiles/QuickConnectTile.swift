@@ -109,25 +109,28 @@ class QuickConnectTile: UIView, Tileable {
         for (index, server) in historicalServers.enumerated().reversed()  {
             let buttonIndex = historicalServers.count - (index + 1)
             let view = stackView.subviews[buttonIndex]
-            if let button = view.subviews.first as? ServerButton,
-                let favoriteImage = view.subviews.last as? UIImageView {
-                button.alpha = 1
-                button.setImage(fromServer: server)
-                button.imageView?.contentMode = .scaleAspectFit
-                button.isUserInteractionEnabled = true
-                button.server = server
-                button.accessibilityLabel = server.description
-                favoriteImage.isHidden = !favoriteServers.contains(server.identifier)
-                if status != .normal { //only when edit mode 
-                    favoriteImage.isHidden = true
+            for element in view.subviews {
+                if let button = element as? ServerButton {
+                    button.alpha = 1
+                    button.setImage(fromServer: server)
+                    button.imageView?.contentMode = .scaleAspectFit
+                    button.isUserInteractionEnabled = true
+                    button.server = server
+                    button.accessibilityLabel = server.description
+                } else if let imageView = element as? UIImageView {
+                    if imageView.tag == 0 {
+                        imageView.isHidden = !favoriteServers.contains(server.identifier)
+                    } else {
+                        imageView.isHidden = server.dipToken == nil
+                    }
+                    if status != .normal { //only when edit mode
+                        imageView.isHidden = true
+                    }
                 }
             }
             
             if let label = labelsStackView.subviews[buttonIndex] as? UILabel {
                 label.text = server.country
-                if server.dipToken != nil {
-                    label.text = "DIP"
-                }
                 Theme.current.applyCountryNameStyleFor(label)
             }
 

@@ -271,7 +271,7 @@
 "region.accessibility.unfavorite" = "Remove a favorite region";
 
 // TILES
-"tiles.quick.connect.title" = "Recent servers";
+"tiles.quick.connect.title" = "Quick connect";
 "tiles.favorite.servers.title" = "Favorite servers";
 "tiles.region.title" = "VPN Server";
 "tiles.subscription.title" = "Subscription";

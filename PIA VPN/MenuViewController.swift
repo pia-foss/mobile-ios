@@ -107,7 +107,7 @@ class MenuViewController: AutolayoutViewController {
     private lazy var iconForItem: [Item: ImageAsset] = [
         .selectRegion: Asset.iconRegion,
         .account: Asset.iconAccount,
-        .dedicatedIp: Asset.iconAccount,
+        .dedicatedIp: Asset.iconDip,
         .settings: Asset.iconSettings,
         .logout: Asset.iconLogout,
         .about: Asset.iconAbout,

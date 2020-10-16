@@ -29,6 +29,13 @@
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" id="nLt-Uq-06i"/>
                         </constraints>
                     </imageView>
+                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dip-badge-dark" translatesAutoresizingMaskIntoConstraints="NO" id="gIe-1U-KaG">
+                        <rect key="frame" x="45" y="8" width="12" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="8HX-ck-GVL"/>
+                            <constraint firstAttribute="width" constant="12" id="NA4-c3-zr3"/>
+                        </constraints>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100ms" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Kt-Io-znj">
                         <rect key="frame" x="275" y="5" width="120" height="34"/>
                         <constraints>
@@ -46,7 +53,9 @@
                     <constraint firstAttribute="bottom" secondItem="7Kt-Io-znj" secondAttribute="bottom" constant="5" id="IhJ-Wq-V2f"/>
                     <constraint firstItem="Ma2-r8-dPQ" firstAttribute="top" secondItem="BCJ-Zo-rKL" secondAttribute="top" constant="5" id="Iob-ZS-u5p"/>
                     <constraint firstAttribute="bottom" secondItem="l15-wQ-QpA" secondAttribute="bottom" constant="5" id="JTf-dE-Vgc"/>
+                    <constraint firstItem="gIe-1U-KaG" firstAttribute="centerX" secondItem="Ma2-r8-dPQ" secondAttribute="centerX" constant="16" id="QVv-MO-GgT"/>
                     <constraint firstAttribute="trailing" secondItem="7Kt-Io-znj" secondAttribute="trailing" constant="19" id="SXr-yt-0l6"/>
+                    <constraint firstItem="gIe-1U-KaG" firstAttribute="centerY" secondItem="Ma2-r8-dPQ" secondAttribute="centerY" constant="-8" id="UDA-06-vQM"/>
                     <constraint firstItem="l15-wQ-QpA" firstAttribute="top" secondItem="BCJ-Zo-rKL" secondAttribute="top" constant="5" id="dpv-2y-IbW"/>
                     <constraint firstAttribute="bottom" secondItem="Ma2-r8-dPQ" secondAttribute="bottom" constant="5" id="e3I-qe-EbR"/>
                     <constraint firstItem="l15-wQ-QpA" firstAttribute="leading" secondItem="Ma2-r8-dPQ" secondAttribute="trailing" constant="14" id="lyf-wv-nSC"/>
@@ -60,4 +69,7 @@
             <point key="canvasLocation" x="-312" y="-17"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="dip-badge-dark" width="44" height="44"/>
+    </resources>
 </document>

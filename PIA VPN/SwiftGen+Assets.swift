@@ -139,6 +139,8 @@ enum Asset {
   static let buttonDown = ImageAsset(name: "button-down")
   static let buttonUp = ImageAsset(name: "button-up")
   static let copyIcon = ImageAsset(name: "copy-icon")
+  static let dipBadgeDark = ImageAsset(name: "dip-badge-dark")
+  static let dipBadgeLight = ImageAsset(name: "dip-badge-light")
   enum Flags {
     static let flagAd = ImageAsset(name: "flag-ad")
     static let flagAe = ImageAsset(name: "flag-ae")
@@ -406,6 +408,7 @@ enum Asset {
   static let iconAdd = ImageAsset(name: "icon-add")
   static let iconClose = ImageAsset(name: "icon-close")
   static let iconContact = ImageAsset(name: "icon-contact")
+  static let iconDip = ImageAsset(name: "icon-dip")
   static let iconGeoDarkSelected = ImageAsset(name: "icon-geo-dark-selected")
   static let iconGeoDark = ImageAsset(name: "icon-geo-dark")
   static let iconGeoSelected = ImageAsset(name: "icon-geo-selected")
@@ -504,6 +507,8 @@ enum Asset {
     buttonDown,
     buttonUp,
     copyIcon,
+    dipBadgeDark,
+    dipBadgeLight,
     Flags.flagAd,
     Flags.flagAe,
     Flags.flagAf,
@@ -769,6 +774,7 @@ enum Asset {
     iconAdd,
     iconClose,
     iconContact,
+    iconDip,
     iconGeoDarkSelected,
     iconGeoDark,
     iconGeoSelected,

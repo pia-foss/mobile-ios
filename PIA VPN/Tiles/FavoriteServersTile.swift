@@ -99,20 +99,24 @@ class FavoriteServersTile: UIView, Tileable {
 
         for (index, server) in favServers.enumerated() where index < stackView.subviews.count {
             let view = stackView.subviews[index]
-            if let button = view.subviews.first as? ServerButton {
-                button.alpha = 1
-                button.setImage(fromServer: server)
-                button.imageView?.contentMode = .scaleAspectFit
-                button.isUserInteractionEnabled = true
-                button.server = server
-                button.accessibilityLabel = server.description
+            for element in view.subviews {
+                if let button = element as? ServerButton {
+                    button.alpha = 1
+                    button.setImage(fromServer: server)
+                    button.imageView?.contentMode = .scaleAspectFit
+                    button.isUserInteractionEnabled = true
+                    button.server = server
+                    button.accessibilityLabel = server.description
+                } else if let imageView = element as? UIImageView {
+                    imageView.isHidden = server.dipToken == nil
+                    if status != .normal { //only when edit mode
+                        imageView.isHidden = true
+                    }
+                }
             }
             
             if let label = labelsStackView.subviews[index] as? UILabel {
                 label.text = server.country
-                if server.dipToken != nil {
-                    label.text = "DIP"
-                }
                 Theme.current.applyCountryNameStyleFor(label)
             }
 
