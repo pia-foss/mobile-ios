@@ -85,6 +85,13 @@ class ConnectionTile: UIView, Tileable  {
         self.socketLabel.text = Client.preferences.vpnType.socket
         self.handshakeLabel.text = Client.preferences.vpnType.handshake
         
+        self.protocolLabel.accessibilityLabel = Client.preferences.vpnType.vpnProtocol
+        self.portLabel.accessibilityLabel = Client.preferences.vpnType.port
+        self.authenticationLabel.accessibilityLabel = Client.preferences.vpnType.authentication
+        self.encryptionLabel.accessibilityLabel = Client.preferences.vpnType.encryption
+        self.socketLabel.accessibilityLabel = Client.preferences.vpnType.socket
+        self.handshakeLabel.accessibilityLabel = Client.preferences.vpnType.handshake
+
     }
     
     private func resetValues() {
@@ -94,6 +101,13 @@ class ConnectionTile: UIView, Tileable  {
         self.encryptionLabel.text = "---"
         self.socketLabel.text = "---"
         self.handshakeLabel.text = "---"
+        
+        self.protocolLabel.accessibilityLabel = L10n.Global.empty
+        self.portLabel.accessibilityLabel = L10n.Global.empty
+        self.authenticationLabel.accessibilityLabel = L10n.Global.empty
+        self.encryptionLabel.accessibilityLabel = L10n.Global.empty
+        self.socketLabel.accessibilityLabel = L10n.Global.empty
+        self.handshakeLabel.accessibilityLabel = L10n.Global.empty
     }
     
     @objc private func viewShouldRestyle() {
