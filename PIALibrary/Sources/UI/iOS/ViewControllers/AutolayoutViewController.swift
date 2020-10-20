@@ -236,7 +236,7 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
         }
     }
 
-    public func showLoadingAnimation() {
+    @objc public func showLoadingAnimation() {
         if graphLoad == nil {
             containerView = UIView(frame: UIScreen.main.bounds)
             containerView?.backgroundColor = Theme.current.palette.appearance == .dark ?
@@ -260,7 +260,7 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
         }
     }
     
-    public func hideLoadingAnimation() {
+    @objc public func hideLoadingAnimation() {
         graphLoad?.stop()
         graphLoad?.removeFromSuperview()
         containerView?.removeFromSuperview()

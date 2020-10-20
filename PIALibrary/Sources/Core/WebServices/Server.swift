@@ -252,7 +252,7 @@ extension Server {
         return nil 
     }
 
-    func bestPingAddress() -> [Address] {
+    public func bestPingAddress() -> [Address] {
         
         switch Client.providers.vpnProvider.currentVPNType {
         case IKEv2Profile.vpnType:

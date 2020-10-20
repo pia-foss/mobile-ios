@@ -235,9 +235,17 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                     if dipServer.status == DedicatedIPInformationResponse.Status.active {
 
                         //Replace ES with dipServer.id
-                        var firstServer = Client.providers.serverProvider.currentServers.first(where: {$0.country == "ES"})
+                        guard let firstServer = Client.providers.serverProvider.currentServers.first(where: {$0.country == "ES"}) else {
+                            callback?([], ClientError.malformedResponseData)
+                            return
+                        }
                         
-                        let dipRegion = Server(serial: firstServer!.serial, name: firstServer!.name, country: firstServer!.country, hostname: firstServer!.hostname, bestOpenVPNAddressForTCP: firstServer!.bestOpenVPNAddressForTCP, bestOpenVPNAddressForUDP: firstServer!.bestOpenVPNAddressForUDP, openVPNAddressesForTCP: [Server.ServerAddressIP(ip: dipServer.ip!, cn: dipServer.cn!)], openVPNAddressesForUDP: [Server.ServerAddressIP(ip: dipServer.ip!, cn: dipServer.cn!)], wireGuardAddressesForUDP: [Server.ServerAddressIP(ip: dipServer.ip!, cn: dipServer.cn!)], iKEv2AddressesForUDP: [Server.ServerAddressIP(ip: dipServer.ip!, cn: dipServer.cn!)], pingAddress: firstServer!.pingAddress, geo: false, meta: nil, dipExpire: Date(timeIntervalSince1970: TimeInterval(dipServer.dip_expire!)), dipToken: dipServer.dipToken, dipStatus: DedicatedIPStatus.active, regionIdentifier: firstServer!.regionIdentifier)
+                        guard let ip = dipServer.ip, let cn = dipServer.cn, let expirationTime = dipServer.dip_expire else {
+                            callback?([], ClientError.malformedResponseData)
+                            return
+                        }
+                        
+                        let dipRegion = Server(serial: firstServer.serial, name: firstServer.name, country: firstServer.country, hostname: firstServer.hostname, bestOpenVPNAddressForTCP: firstServer.bestOpenVPNAddressForTCP, bestOpenVPNAddressForUDP: firstServer.bestOpenVPNAddressForUDP, openVPNAddressesForTCP: [Server.ServerAddressIP(ip: ip, cn: cn)], openVPNAddressesForUDP: [Server.ServerAddressIP(ip: ip, cn: cn)], wireGuardAddressesForUDP: [Server.ServerAddressIP(ip: ip, cn: cn)], iKEv2AddressesForUDP: [Server.ServerAddressIP(ip: ip, cn: cn)], pingAddress: firstServer.pingAddress, geo: false, meta: nil, dipExpire: Date(timeIntervalSince1970: TimeInterval(expirationTime)), dipToken: dipServer.dipToken, dipStatus: DedicatedIPStatus.active, regionIdentifier: firstServer.regionIdentifier)
                         
                         dipRegions.append(dipRegion)
                         Client.database.secure.setDIPToken(dipServer.dipToken)
