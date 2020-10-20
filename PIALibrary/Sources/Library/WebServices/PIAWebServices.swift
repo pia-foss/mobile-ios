@@ -371,11 +371,6 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     
     // MARK: Store
     func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?) {
-        
-        guard let receipt = receipt else {
-            callback?(nil, ClientError.invalidParameter)
-            return
-        }
 
         self.accountAPI.subscriptions(receipt: nil) { (response, error) in
             
