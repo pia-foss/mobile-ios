@@ -72,7 +72,9 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
     
     @IBAction private func activateToken() {
         if let token = addTokenTextfield.text, !token.isEmpty {
+            NotificationCenter.default.post(name: .DedicatedIpShowAnimation, object: nil)
             Client.providers.serverProvider.activateDIPToken(token) { [weak self] (server, error) in
+                NotificationCenter.default.post(name: .DedicatedIpHideAnimation, object: nil)
                 self?.addTokenTextfield.text = ""
                 guard let dipServer = server else {
                     Macros.displayStickyNote(withMessage: "Your token is invalid. Please make sure you have entered the token correctly.",
