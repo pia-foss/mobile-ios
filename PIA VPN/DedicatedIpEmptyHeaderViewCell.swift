@@ -93,6 +93,9 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
                 NotificationCenter.default.post(name: .DedicatedIpReload, object: nil)
                 NotificationCenter.default.post(name: .PIAThemeDidChange, object: nil)
             }
+        } else {
+            Macros.displayStickyNote(withMessage: "Please make sure you have entered the token correctly.",
+                                     andImage: Asset.iconWarning.image)
         }
     }
 
