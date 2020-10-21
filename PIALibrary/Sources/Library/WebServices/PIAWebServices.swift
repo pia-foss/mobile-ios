@@ -260,6 +260,11 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         }
     }
     
+    
+    func featureFlags(_ callback: LibraryCallback<[String]>?) {
+        callback?(["dedicated-ip"], nil)
+    }
+    
     #if os(iOS)
     func signup(with request: Signup, _ callback: ((Credentials?, Error?) -> Void)?) {
         

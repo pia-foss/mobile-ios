@@ -131,4 +131,8 @@ class MockWebServices: WebServices {
 
     }
     
+    func featureFlags(_ callback: LibraryCallback<[String]>?) {
+        callback?(["mock-test"], nil)
+    }
+    
 }

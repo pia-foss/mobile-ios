@@ -306,4 +306,7 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
         callback?(true, nil)
     }
     
+    public func featureFlags(_ callback: SuccessLibraryCallback?) {
+        callback?(nil)
+    }
 }

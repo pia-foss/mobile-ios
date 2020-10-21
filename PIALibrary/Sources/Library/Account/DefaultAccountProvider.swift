@@ -319,6 +319,15 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
     }
     
+    func featureFlags(_ callback: SuccessLibraryCallback?) {
+        webServices.featureFlags { (features, nil) in
+            if let features = features, !features.isEmpty {
+                Client.configuration.featureFlags.append(contentsOf: features)
+            }
+            callback?(nil)
+        }
+    }
+    
     #if os(iOS)
     func subscriptionInformation(_ callback: LibraryCallback<AppStoreInformation>?) {
         log.debug("Fetching available product keys...")

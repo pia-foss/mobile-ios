@@ -137,6 +137,14 @@ public protocol AccountProvider: class {
      */
     func cleanDatabase()
     
+    /**
+     Returns the enabled features in the app.
+ 
+     - Parameter callback: Returns `nil` on success.
+     */
+    func featureFlags(_ callback: SuccessLibraryCallback?)
+
+    
     #if os(iOS)
     /**
      Lists the available plans with their corresponding product to purchase in order to get them.

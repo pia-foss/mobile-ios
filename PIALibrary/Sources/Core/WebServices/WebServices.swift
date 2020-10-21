@@ -70,4 +70,6 @@ protocol WebServices: class {
 
     func submitDebugLog(_ log: DebugLog, _ callback: SuccessLibraryCallback?)
 
+    func featureFlags(_ callback: LibraryCallback<[String]>?)
+    
 }

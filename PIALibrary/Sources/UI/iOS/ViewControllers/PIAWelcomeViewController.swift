@@ -431,4 +431,8 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
         }
     }
 
+    func featureFlags(_ callback: SuccessLibraryCallback?) {
+        callback?(nil)
+    }
+    
 }

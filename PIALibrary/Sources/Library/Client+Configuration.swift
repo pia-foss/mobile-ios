@@ -144,6 +144,9 @@ extension Client {
         /// Store the account password in memory when the email is set and the user is LoggedIn.
         public var tempAccountPassword: String
 
+        /// Enabled features
+        public var featureFlags: [String]
+
         // MARK: Initialization
         
         init() {
@@ -216,6 +219,7 @@ extension Client {
             maxQuickConnectServers = 6
             tempAccountPassword = ""
 
+            featureFlags = []
         }
         
         // MARK: WebServices
