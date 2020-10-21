@@ -182,4 +182,9 @@ struct AppConstants {
         static let connect = "piavpn:connect"
         static let view = "piavpn:view"
     }
+    
+    struct FeatureFlags {
+        static let dedicatedIp = "dedicated-ip"
+    }
+    
 }
