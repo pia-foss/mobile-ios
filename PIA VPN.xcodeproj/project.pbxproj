@@ -2506,13 +2506,14 @@
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN Tunnel/PIA VPN Tunnel.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16881;
+				CURRENT_PROJECT_VERSION = 16890;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "PIA VPN Tunnel/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 3.8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.Tunnel";
 				PRODUCT_NAME = "PIA VPN Tunnel";
@@ -2536,13 +2537,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 16881;
+				CURRENT_PROJECT_VERSION = 16890;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "PIA VPN Tunnel/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 3.8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.Tunnel";
 				PRODUCT_NAME = "PIA VPN Tunnel";
@@ -2564,7 +2566,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN/PIA VPN.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16881;
+				CURRENT_PROJECT_VERSION = 16890;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2584,7 +2586,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 3.8.2;
+				MARKETING_VERSION = 3.8.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN";
 				PRODUCT_MODULE_NAME = PIA_VPN_dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2609,7 +2611,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN/PIA VPN.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16881;
+				CURRENT_PROJECT_VERSION = 16890;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2629,7 +2631,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 3.8.2;
+				MARKETING_VERSION = 3.8.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN";
 				PRODUCT_MODULE_NAME = PIA_VPN_dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2715,7 +2717,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16881;
+				CURRENT_PROJECT_VERSION = 16890;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2723,6 +2725,7 @@
 				INFOPLIST_FILE = "PIA VPN AdBlocker/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 3.8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.AdBlocker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2747,7 +2750,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 16881;
+				CURRENT_PROJECT_VERSION = 16890;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2755,6 +2758,7 @@
 				INFOPLIST_FILE = "PIA VPN AdBlocker/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 3.8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.AdBlocker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2885,7 +2889,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN/PIA VPN.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16881;
+				CURRENT_PROJECT_VERSION = 16890;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2901,7 +2905,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 3.8.2;
+				MARKETING_VERSION = 3.8.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.privateinternetaccess.ios.PIA-VPN";
@@ -2923,7 +2927,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN/PIA VPN.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16881;
+				CURRENT_PROJECT_VERSION = 16890;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2939,7 +2943,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 3.8.2;
+				MARKETING_VERSION = 3.8.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.privateinternetaccess.ios.PIA-VPN";
@@ -2964,7 +2968,7 @@
 				CODE_SIGN_ENTITLEMENTS = PIAWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16881;
+				CURRENT_PROJECT_VERSION = 16890;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2972,7 +2976,7 @@
 				INFOPLIST_FILE = PIAWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 3.8.2;
+				MARKETING_VERSION = 3.8.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PIAWidget";
@@ -3002,7 +3006,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 16881;
+				CURRENT_PROJECT_VERSION = 16890;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -3010,7 +3014,7 @@
 				INFOPLIST_FILE = PIAWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 3.8.2;
+				MARKETING_VERSION = 3.8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PIAWidget";
@@ -3035,7 +3039,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN WG Tunnel/PIA_VPN_WG_Tunnel.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16881;
+				CURRENT_PROJECT_VERSION = 16890;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -3043,7 +3047,7 @@
 				INFOPLIST_FILE = "PIA VPN WG Tunnel/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 3.8.2;
+				MARKETING_VERSION = 3.8.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel";
@@ -3071,7 +3075,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 16881;
+				CURRENT_PROJECT_VERSION = 16890;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -3079,7 +3083,7 @@
 				INFOPLIST_FILE = "PIA VPN WG Tunnel/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 3.8.2;
+				MARKETING_VERSION = 3.8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel";
