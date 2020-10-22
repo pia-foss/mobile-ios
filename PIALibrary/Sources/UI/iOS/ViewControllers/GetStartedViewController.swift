@@ -335,12 +335,14 @@ public class GetStartedViewController: PIAWelcomeViewController {
 
     private func disableInteractions(fully: Bool) {
         self.subscribeNowButton.isEnabled = false
+        self.buyButton.isEnabled = false
         self.spinner.startAnimating()
     }
 
     private func enableInteractions() {
         if !isPurchasing { //dont reenable the screen if we are still purchasing
             self.subscribeNowButton.isEnabled = true
+            self.buyButton.isEnabled = true
             self.spinner.stopAnimating()
         }
     }
