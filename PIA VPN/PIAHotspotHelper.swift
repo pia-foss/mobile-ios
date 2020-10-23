@@ -109,7 +109,9 @@ class PIAHotspotHelper {
                                                                 preferences.nmtTemporaryOpenNetworks = [currentNetwork.ssid]
                                                                 preferences.commit()
                                                                 
-                                                                if Client.preferences.nmtRulesEnabled {
+                                                                if Client.preferences.nmtRulesEnabled &&
+                                                                   (Client.preferences.nmtGenericRules[NMTType.openWiFi.rawValue] == NMTRules.alwaysConnect.rawValue ||
+                                                                        Client.preferences.nmtTrustedNetworkRules[currentNetwork.ssid] == NMTRules.alwaysConnect.rawValue){
                                                                     if Client.providers.vpnProvider.isVPNConnected {
                                                                         Client.providers.vpnProvider.reconnect(after: 0, forceDisconnect: true, nil)
                                                                     } else {
