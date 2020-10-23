@@ -62,6 +62,10 @@ class PIAHotspotHelper {
      */
     public func configureHotspotHelper() -> Bool {
         
+        guard Client.preferences.nmtRulesEnabled else {
+            return false
+        }
+        
         var options: [String: NSObject] = [:]
         if Client.preferences.nmtRulesEnabled {
             options = [kNEHotspotHelperOptionDisplayName : self.hotspotHelperMessage() as NSObject]
@@ -104,10 +108,13 @@ class PIAHotspotHelper {
                                                                 let preferences = Client.preferences.editable()
                                                                 preferences.nmtTemporaryOpenNetworks = [currentNetwork.ssid]
                                                                 preferences.commit()
-                                                                if Client.providers.vpnProvider.isVPNConnected {
-                                                                    Client.providers.vpnProvider.reconnect(after: 0, forceDisconnect: true, nil)
-                                                                } else {
-                                                                    Client.providers.vpnProvider.connect(nil)
+                                                                
+                                                                if Client.preferences.nmtRulesEnabled {
+                                                                    if Client.providers.vpnProvider.isVPNConnected {
+                                                                        Client.providers.vpnProvider.reconnect(after: 0, forceDisconnect: true, nil)
+                                                                    } else {
+                                                                        Client.providers.vpnProvider.connect(nil)
+                                                                    }
                                                                 }
                                                                 
                                                             }

@@ -67,4 +67,20 @@ class PIAHotspotHelperTests: XCTestCase {
         XCTAssertTrue(trustedNetworks.isEmpty)
 
     }
+    
+    func testConfiguration() {
+        var pref = Client.preferences.editable()
+        pref.nmtRulesEnabled = true
+        pref.commit()
+        
+        var response = hotspotHelper.configureHotspotHelper()
+        XCTAssertTrue(response)
+        
+        pref = Client.preferences.editable()
+        pref.nmtRulesEnabled = false
+        pref.commit()
+        
+        response = hotspotHelper.configureHotspotHelper()
+        XCTAssertFalse(response)
+    }
 }
