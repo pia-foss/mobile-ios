@@ -124,7 +124,7 @@ class Bootstrapper {
             PIAWGTunnelProfile.vpnType: PIAWireguardConfiguration(customDNSServers: [])
         ]
         
-        Client.providers.accountProvider.featureFlags(nil)
+        //Client.providers.accountProvider.featureFlags(nil)
         
         Client.providers.serverProvider.downloadRegionStaticData { (error) in
             
