@@ -122,6 +122,10 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
         return RegionData(translations: [String : [String : String]](), geolocations: [String : [String]]())
     }
     
+    public var dipTokens: [String]? {
+        return []
+    }
+    
     /// :nodoc:
     public func load(fromJSON jsonData: Data) {
         return delegate.load(fromJSON: jsonData)
@@ -129,7 +133,7 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
     
     /// :nodoc:
     public func loadLocalJSON(fromJSON jsonData: Data) {
-        return delegate.load(fromJSON: jsonData)
+        return delegate.loadLocalJSON(fromJSON: jsonData)
     }
     
     /// :nodoc:
@@ -150,5 +154,17 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
     }
         
     public func resetCurrentServers() {
+    }
+    
+    public func removeDIPToken(_ dipToken: String) {
+        delegate.removeDIPToken(dipToken)
+    }
+    
+    public func activateDIPToken(_ token: String, _ callback: LibraryCallback<Server?>?) {
+        delegate.activateDIPToken(token, callback)
+    }
+    
+    public func activateDIPTokens(_ tokens: [String], _ callback: LibraryCallback<[Server]>?) {
+        delegate.activateDIPTokens(tokens, callback)
     }
 }

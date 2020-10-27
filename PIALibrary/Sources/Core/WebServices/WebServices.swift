@@ -40,6 +40,10 @@ protocol WebServices: class {
 
     func loginLink(email: String, _ callback: SuccessLibraryCallback?)
     
+    // MARK: DIP Token
+    
+    func activateDIPToken(tokens: [String], _ callback: LibraryCallback<[Server]>?) 
+
     /**
          Invalidates the access token.
          - Parameter callback: Returns an `Bool` if the token was expired.
@@ -66,4 +70,6 @@ protocol WebServices: class {
 
     func submitDebugLog(_ log: DebugLog, _ callback: SuccessLibraryCallback?)
 
+    func featureFlags(_ callback: LibraryCallback<[String]>?)
+    
 }

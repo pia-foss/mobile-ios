@@ -41,9 +41,7 @@ protocol PlainStore: class {
     var cachedServers: [Server] { get set }
     
     var preferredServer: Server? { get set }
-    
-    var serverNetwork: ServersNetwork { get set }
-    
+        
     func ping(forServerIdentifier serverIdentifier: String) -> Int?
     
     func setPing(_ ping: Int, forServerIdentifier serverIdentifier: String)

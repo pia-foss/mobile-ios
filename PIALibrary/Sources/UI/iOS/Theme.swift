@@ -687,6 +687,15 @@ public class Theme {
         }
     }
     
+    /// :nodoc:
+    public func applyRegionIPCell(_ label: UILabel, appearance: Appearance) {
+        label.style(style: TextStyle.ipTextStyle)
+    }
+    
+    public func applyRegionIPTitleCell(_ label: UILabel, appearance: Appearance) {
+        label.style(style: TextStyle.ipTitleTextStyle)
+    }
+
     //MARK: Tile Usage
     /// :nodoc:
     public func applySubtitleTileUsage(_ label: UILabel, appearance: Appearance) {

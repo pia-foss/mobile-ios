@@ -117,6 +117,14 @@ public protocol VPNProvider: class {
      - Parameter callback: Returns the `Usage` information on success.
      */
     func dataUsage(_ callback: LibraryCallback<Usage>?)
+    
+    /**
+     Check if the VPN profile needs to be migrated to GEN4.
+     - Precondition: isVPNConnected == true
+     - Returns: `Bool`
+     */
+    func needsMigrationToGEN4() -> Bool
+    
 }
 
 public extension VPNProvider {

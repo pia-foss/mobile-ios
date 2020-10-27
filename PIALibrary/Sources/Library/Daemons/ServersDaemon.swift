@@ -171,15 +171,7 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
     @objc private func applicationDidBecomeActive(notification: Notification) {
         if hasEnabledUpdates {
             let currentServers = accessedProviders.serverProvider.currentServers
-            if let serverNetwork = currentServers.first?.serverNetwork, serverNetwork != Client.configuration.serverNetwork {
-                Client.providers.serverProvider.resetCurrentServers()
-                if let data = Client.configuration.bundledServersJSON {
-                    Client.providers.serverProvider.loadLocalJSON(fromJSON: data)
-                }
-                pingIfOffline(servers: accessedProviders.serverProvider.currentServers)
-            } else {
-                pingIfOffline(servers: currentServers)
-            }
+            pingIfOffline(servers: currentServers)
         }
     }
     

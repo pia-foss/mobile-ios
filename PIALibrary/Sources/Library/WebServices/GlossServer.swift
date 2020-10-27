@@ -39,150 +39,99 @@ class GlossServer: GlossParser {
             return nil
         }
         
+        let dipToken: String? = "dipToken" <~~ json ?? nil
+
         let geo: Bool = "geo" <~~ json ?? false
 
-        var internalServerNetwork: ServersNetwork?
-        if let serverNetwork: String = "internal_server_network" <~~ json { //We need this tmp key when storing the server in userdefault as json
-            internalServerNetwork = ServersNetwork(rawValue: serverNetwork)
+        var meta: Server.ServerAddressIP?
+        if let metaServer: [String: Any] = "servers" <~~ json {
+            if let addressArray: [JSON] = "meta" <~~ metaServer {
+                for address in addressArray {
+                    if let ip: String = "ip" <~~ address,
+                        let cn: String = "cn" <~~ address {
+                        meta = Server.ServerAddressIP(ip: ip, cn: cn)
+                    }
+                }
+            }
         }
 
-        if Client.configuration.serverNetwork == .gen4 {
-            
-            var meta: Server.ServerAddressIP?
-            if let metaServer: [String: Any] = "servers" <~~ json {
-                if let addressArray: [JSON] = "meta" <~~ metaServer {
-                    for address in addressArray {
-                        if let ip: String = "ip" <~~ address,
-                            let cn: String = "cn" <~~ address {
-                            meta = Server.ServerAddressIP(ip: ip, cn: cn)
-                        }
+        guard let regionIdentifier: String = "id" <~~ json else {
+           return nil
+        }
+        
+        var ovpnTCPServerAddressIP: [Server.ServerAddressIP] = []
+        if let ovpnTCP: [String: Any] = "servers" <~~ json {
+            if let addressArray: [JSON] = "ovpntcp" <~~ ovpnTCP {
+                for address in addressArray {
+                    if let ip: String = "ip" <~~ address,
+                        let cn: String = "cn" <~~ address {
+                        ovpnTCPServerAddressIP.append(Server.ServerAddressIP(ip: ip, cn: cn))
                     }
                 }
             }
+        }
+        
+        var ovpnUDPServerAddressIP: [Server.ServerAddressIP] = []
+        if let ovpnUDP: [String: Any] = "servers" <~~ json {
+            if let addressArray: [JSON] = "ovpnudp" <~~ ovpnUDP {
+                for address in addressArray {
+                    if let ip: String = "ip" <~~ address,
+                        let cn: String = "cn" <~~ address {
+                        ovpnUDPServerAddressIP.append(Server.ServerAddressIP(ip: ip, cn: cn))
+                    }
+                }
+            }
+        }
+        
+        var wgServerAddressIP: [Server.ServerAddressIP] = []
+        if let wgUDP: [String: Any] = "servers" <~~ json {
+            if let addressArray: [JSON] = "wg" <~~ wgUDP {
+                for address in addressArray {
+                    if let ip: String = "ip" <~~ address,
+                        let cn: String = "cn" <~~ address {
+                        wgServerAddressIP.append(Server.ServerAddressIP(ip: ip, cn: cn))
+                    }
+                }
+            }
+        }
+        
+        var ikev2ServerAddressIP: [Server.ServerAddressIP] = []
+        if let ikev2UDP: [String: Any] = "servers" <~~ json {
+            if let addressArray: [JSON] = "ikev2" <~~ ikev2UDP {
+                for address in addressArray {
+                    if let ip: String = "ip" <~~ address,
+                        let cn: String = "cn" <~~ address {
+                        ikev2ServerAddressIP.append(Server.ServerAddressIP(ip: ip, cn: cn))
+                    }
+                }
+            }
+        }
 
-            guard let regionIdentifier: String = "id" <~~ json else {
-               return nil
-            }
-            
-            var ovpnTCPServerAddressIP: [Server.ServerAddressIP] = []
-            if let ovpnTCP: [String: Any] = "servers" <~~ json {
-                if let addressArray: [JSON] = "ovpntcp" <~~ ovpnTCP {
-                    for address in addressArray {
-                        if let ip: String = "ip" <~~ address,
-                            let cn: String = "cn" <~~ address {
-                            ovpnTCPServerAddressIP.append(Server.ServerAddressIP(ip: ip, cn: cn))
-                        }
-                    }
-                }
-            }
-            
-            var ovpnUDPServerAddressIP: [Server.ServerAddressIP] = []
-            if let ovpnUDP: [String: Any] = "servers" <~~ json {
-                if let addressArray: [JSON] = "ovpnudp" <~~ ovpnUDP {
-                    for address in addressArray {
-                        if let ip: String = "ip" <~~ address,
-                            let cn: String = "cn" <~~ address {
-                            ovpnUDPServerAddressIP.append(Server.ServerAddressIP(ip: ip, cn: cn))
-                        }
-                    }
-                }
-            }
-            
-            var wgServerAddressIP: [Server.ServerAddressIP] = []
-            if let wgUDP: [String: Any] = "servers" <~~ json {
-                if let addressArray: [JSON] = "wg" <~~ wgUDP {
-                    for address in addressArray {
-                        if let ip: String = "ip" <~~ address,
-                            let cn: String = "cn" <~~ address {
-                            wgServerAddressIP.append(Server.ServerAddressIP(ip: ip, cn: cn))
-                        }
-                    }
-                }
-            }
-            
-            var ikev2ServerAddressIP: [Server.ServerAddressIP] = []
-            if let ikev2UDP: [String: Any] = "servers" <~~ json {
-                if let addressArray: [JSON] = "ikev2" <~~ ikev2UDP {
-                    for address in addressArray {
-                        if let ip: String = "ip" <~~ address,
-                            let cn: String = "cn" <~~ address {
-                            ikev2ServerAddressIP.append(Server.ServerAddressIP(ip: ip, cn: cn))
-                        }
-                    }
-                }
-            }
+        var pingAddress: Server.Address?
+        if let pingString: String = "ping" <~~ json {
+            pingAddress = try? Server.Address(string: pingString)
+        }
 
-            var pingAddress: Server.Address?
-            if let pingString: String = "ping" <~~ json {
-                pingAddress = try? Server.Address(string: pingString)
-            }
-
-            parsed = Server(serial: "",
-                            name: name,
-                            country: country,
-                            hostname: hostname,
-                            bestOpenVPNAddressForTCP: nil,
-                            bestOpenVPNAddressForUDP: nil,
-                            openVPNAddressesForTCP: ovpnTCPServerAddressIP,
-                            openVPNAddressesForUDP: ovpnUDPServerAddressIP,
-                            wireGuardAddressesForUDP: wgServerAddressIP,
-                            iKEv2AddressesForUDP: ikev2ServerAddressIP,
-                            pingAddress: pingAddress,
-                            responseTime: 0,
-                            serverNetwork: internalServerNetwork ?? .gen4,
-                            geo: geo,
-                            meta: meta,
-                            regionIdentifier: regionIdentifier
-            )
-            
-            if let autoRegion: Bool = "auto_region" <~~ json {
-                parsed.isAutomatic = autoRegion
-            }
-            
-        } else {
-            
-            var regionIdentifier = name
-            if let serverName = hostname.split(separator: ".").first {
-                regionIdentifier = serverName.description
-                regionIdentifier = regionIdentifier.replacingOccurrences(of: "-", with: "_")
-            }
-            
-            var serial = ""
-            if let serialValue: String = "serial" <~~ json {
-                serial = serialValue
-            }
-            
-            var ovpnTCPAddress: Server.Address?
-            if let ovpnTCP: [String: Any] = "openvpn_tcp" <~~ json {
-                if let addressString: String = "best" <~~ ovpnTCP {
-                    ovpnTCPAddress = try? Server.Address(string: addressString)
-                }
-            }
-            var ovpnUDPAddress: Server.Address?
-            if let ovpnUDP: [String: Any] = "openvpn_udp" <~~ json {
-                if let addressString: String = "best" <~~ ovpnUDP {
-                    ovpnUDPAddress = try? Server.Address(string: addressString)
-                }
-            }
-            
-            var pingAddress: Server.Address?
-            if let pingString: String = "ping" <~~ json {
-                pingAddress = try? Server.Address(string: pingString)
-            }
-
-            parsed = Server(
-                serial: serial,
-                name: name,
-                country: country,
-                hostname: hostname,
-                bestOpenVPNAddressForTCP: ovpnTCPAddress,
-                bestOpenVPNAddressForUDP: ovpnUDPAddress,
-                pingAddress: pingAddress,
-                serverNetwork: internalServerNetwork ?? .legacy,
-                geo: geo,
-                regionIdentifier: regionIdentifier
-            )
-            
+        parsed = Server(serial: "",
+                        name: name,
+                        country: country,
+                        hostname: hostname,
+                        bestOpenVPNAddressForTCP: nil,
+                        bestOpenVPNAddressForUDP: nil,
+                        openVPNAddressesForTCP: ovpnTCPServerAddressIP,
+                        openVPNAddressesForUDP: ovpnUDPServerAddressIP,
+                        wireGuardAddressesForUDP: wgServerAddressIP,
+                        iKEv2AddressesForUDP: ikev2ServerAddressIP,
+                        pingAddress: pingAddress,
+                        responseTime: 0,
+                        geo: geo,
+                        meta: meta,
+                        dipToken: dipToken,
+                        regionIdentifier: regionIdentifier
+        )
+        
+        if let autoRegion: Bool = "auto_region" <~~ json {
+            parsed.isAutomatic = autoRegion
         }
 
     }
@@ -223,7 +172,8 @@ extension Server: JSONEncodable {
                 "wg" ~~> wgUDPobj,
                 "ikev2" ~~> ikeV2UDPobj,
             ]),
-            "internal_server_network" ~~> serverNetwork?.rawValue
+            "dipToken" ~~> dipToken,
+            "id" ~~> regionIdentifier
         ])
 
         

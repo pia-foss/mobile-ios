@@ -68,6 +68,10 @@ class MockWebServices: WebServices {
         callback?(true, nil)
     }
     
+    func activateDIPToken(tokens: [String], _ callback: LibraryCallback<[Server]>?) {
+        callback?([], nil)
+    }
+    
     func signup(with request: Signup, _ callback: ((Credentials?, Error?) -> Void)?) {
         let result = credentials?()
         let error: ClientError? = (result == nil) ? .unsupported : nil
@@ -125,6 +129,10 @@ class MockWebServices: WebServices {
 
         callback?(result(), nil)
 
+    }
+    
+    func featureFlags(_ callback: LibraryCallback<[String]>?) {
+        callback?(["mock-test"], nil)
     }
     
 }

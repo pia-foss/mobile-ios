@@ -70,6 +70,8 @@ class AccountInfoTests: XCTestCase {
 
     public func testRenewableProduct() {
         
+        Client.providers.accountProvider.logout(nil)
+        
         let factory = MockProviders()
         let expLogin = expectation(description: "login")
         let credentials = Credentials(username: "p0000000", password: "foobarbogus")

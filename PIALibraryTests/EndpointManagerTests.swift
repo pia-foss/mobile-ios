@@ -43,15 +43,8 @@ class EndpointManagerTests: XCTestCase {
 
     }
 
-    func testLegacy() throws {
-        Client.configuration.setServerNetworks(to: .legacy) //Set legacy as current network
-        let endpoints = EndpointManager.shared.availableEndpoints()
-        XCTAssertTrue(endpoints.count == 2)
-    }
-
     func testGEN4Endpoints() throws {
         
-        Client.configuration.setServerNetworks(to: .gen4) //Set gen4 as current network
         ServersPinger.shared.ping(withDestinations: Client.providers.serverProvider.currentServers)
         
         eventually(timeout: 10.0) {

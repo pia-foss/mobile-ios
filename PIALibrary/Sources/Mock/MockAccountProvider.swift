@@ -183,7 +183,7 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     public var currentPasswordReference: Data? {
         return delegate.currentPasswordReference
     }
-    
+        
     #if os(iOS)
     /// :nodoc:
     public var lastSignupRequest: SignupRequest? {
@@ -306,4 +306,7 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
         callback?(true, nil)
     }
     
+    public func featureFlags(_ callback: SuccessLibraryCallback?) {
+        callback?(nil)
+    }
 }

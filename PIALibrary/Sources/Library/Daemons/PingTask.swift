@@ -54,50 +54,27 @@ class PingTask {
         let persistence = Client.database.plain
         self.state = .pending
         
-        if Client.configuration.serverNetwork == .gen4 {
-            log.debug("Starting to Ping \(server.identifier) with address: \(address.hostname)")
-            
-            queue.async() { [weak self] in
+        log.debug("Starting to Ping \(server.identifier) with address: \(address.hostname)")
+        
+        queue.async() { [weak self] in
 
-                guard let address = self?.address, let server = self?.server else {
-                    return
-                }
-                
-                let tcpAddress = Server.Address(hostname: address.hostname, port: 443)
-                response = server.ping(toAddress: tcpAddress, withProtocol: .TCP)
-                DispatchQueue.main.async {
-                    self?.parsePingResponse(response: response, withServer: server)
-                    if let responseTime = response {
-                        server.updateResponseTime(responseTime, forAddress: address)
-                        persistence.setPing(responseTime, forServerIdentifier: server.identifier)
-                    }
-                    self?.state = .completed
-                }
-
+            guard let address = self?.address, let server = self?.server else {
+                return
             }
             
-        } else {
-            
-            queue.async() { [weak self] in
-
-                guard let address = self?.address, let server = self?.server else {
-                    return
+            let tcpAddress = Server.Address(hostname: address.hostname, port: 443)
+            response = server.ping(toAddress: tcpAddress, withProtocol: .TCP)
+            DispatchQueue.main.async {
+                self?.parsePingResponse(response: response, withServer: server)
+                if let responseTime = response {
+                    server.updateResponseTime(responseTime, forAddress: address)
+                    persistence.setPing(responseTime, forServerIdentifier: server.identifier)
                 }
-
-                response = server.ping(toAddress: address, withProtocol: .UDP)
-                DispatchQueue.main.async {
-                    self?.parsePingResponse(response: response, withServer: server)
-                    if let responseTime = response {
-                        server.updateResponseTime(responseTime, forAddress: address)
-                        persistence.setPing(responseTime, forServerIdentifier: server.identifier)
-                    }
-                    self?.state = .completed
-                }
-
+                self?.state = .completed
             }
 
         }
-            
+
     }
     
     private func parsePingResponse(response: Int?, withServer server: Server) {

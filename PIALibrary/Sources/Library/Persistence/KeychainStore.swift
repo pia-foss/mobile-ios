@@ -117,3 +117,23 @@ extension KeychainStore {
     }
 
 }
+
+extension KeychainStore {
+    
+    func dipTokens() -> [String]? {
+        return try? backend.dipTokens()
+    }
+    
+    func setDIPToken(_ dipToken: String) {
+        try? backend.set(dipToken: dipToken)
+    }
+    
+    func remove(_ dipToken: String) {
+        try? backend.remove(dipToken: dipToken)
+    }
+    
+    func removeDIPTokens() {
+        try? backend.removeDIPTokens()
+    }
+
+}

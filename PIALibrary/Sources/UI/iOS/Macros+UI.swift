@@ -303,6 +303,41 @@ extension Macros {
                               using: attributes)
         
     }
+
+    /**
+     Shortcut to display a warning `EKImageNoteMessageView`.
+     
+     - Parameter image: The note image
+     - Parameter message: The note message
+     - Parameter duration: Optional duration of the note
+     */
+    public static func displayWarningImageNote(withImage image: UIImage,
+                                        message: String,
+                                        andDuration duration: Double? = nil) {
+        
+        
+        var attributes = EKAttributes()
+        attributes = .topToast
+        attributes.hapticFeedbackType = .success
+        attributes.entryBackground = .color(color: UIColor.piaOrange)
+        attributes.positionConstraints.size = .init(width: EKAttributes.PositionConstraints.Edge.fill,
+                                                    height: EKAttributes.PositionConstraints.Edge.constant(value: bannerHeight))
+        
+        if let duration = duration {
+            attributes.displayDuration = duration
+        }
+        
+        let labelContent = EKProperty.LabelContent(text: message,
+                                                   style: .init(font: TextStyle.textStyle7.font!,
+                                                                color: .white))
+        let imageContent = EKProperty.ImageContent(image: image)
+        let contentView = EKImageNoteMessageView(with: labelContent,
+                                                 imageContent: imageContent)
+        
+        SwiftEntryKit.display(entry: contentView,
+                              using: attributes)
+        
+    }
     /**
      Shortcut to display an infinite `EKImageNoteMessageView`.
      
