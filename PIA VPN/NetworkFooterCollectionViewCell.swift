@@ -43,6 +43,7 @@ class NetworkFooterCollectionViewCell: UICollectionViewCell {
         let optionsImage = Asset.Piax.Nmt.iconAddRule.image.withRenderingMode(.alwaysTemplate)
         addRuleButton.setImage(optionsImage, for: .normal)
         addRuleButton.tintColor = TextStyle.textStyle4.color
+        addRuleButton.accessibilityLabel = L10n.Network.Management.Tool.Add.rule
     }
 
     @IBAction private func addNewRule() {

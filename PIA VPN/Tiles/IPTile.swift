@@ -66,8 +66,10 @@ class IPTile: UIView, Tileable  {
         self.localIpTitle.text = "IP"
         self.vpnIpTitle.text = "VPN IP"
         self.localIpValue.text = Client.daemons.publicIP ?? emptyIPValue
+        self.localIpValue.accessibilityLabel = Client.daemons.publicIP ?? L10n.Global.empty
         self.vpnIpValue.text = emptyIPValue
-        
+        self.vpnIpValue.accessibilityLabel = L10n.Global.empty
+
     }
     
     @objc private func viewShouldRestyle() {
@@ -83,6 +85,7 @@ class IPTile: UIView, Tileable  {
         let vpn = Client.providers.vpnProvider
         if (vpn.vpnStatus == .connected) {
             self.vpnIpValue.text = Client.daemons.vpnIP ?? self.emptyIPValue
+            self.vpnIpValue.accessibilityLabel = Client.daemons.vpnIP ?? L10n.Global.empty
         } else if (!Client.daemons.isInternetReachable && (vpn.vpnStatus == .disconnected)) {
             self.vpnIpValue.text = L10n.Dashboard.Connection.Ip.unreachable
         }
@@ -93,6 +96,7 @@ class IPTile: UIView, Tileable  {
         switch vpn.vpnStatus {
         case .connecting, .disconnecting, .disconnected:
             self.vpnIpValue.text = self.emptyIPValue
+            self.vpnIpValue.accessibilityLabel = L10n.Global.empty
         default:
             break
         }

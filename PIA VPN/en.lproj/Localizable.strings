@@ -14,6 +14,7 @@
 "global.enabled" = "Enabled";
 "global.disabled" = "Disabled";
 "global.enable" = "Enable";
+"global.disable" = "Disable";
 "global.add" = "Add";
 "global.remove" = "Remove";
 "global.empty" = "Empty";
@@ -23,6 +24,7 @@
 "global.yes" = "Yes";
 "global.no" = "No";
 "global.or" = "or";
+"global.row.selection" = "Row selection";
 
 // NOTIFICATIONS
 

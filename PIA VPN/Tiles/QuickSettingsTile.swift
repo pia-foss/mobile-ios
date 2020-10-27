@@ -107,16 +107,20 @@ class QuickSettingsTile: UIView, Tileable  {
         }
 
         if Client.preferences.isPersistentConnection {
+            killSwitchButton.accessibilityLabel = L10n.Global.disable + " " + L10n.Settings.ApplicationSettings.KillSwitch.title
             killSwitchButton.setImage(Asset.Piax.Global.killswitchDarkActive.image, for: [])
         } else {
+            killSwitchButton.accessibilityLabel = L10n.Global.enable + " " + L10n.Settings.ApplicationSettings.KillSwitch.title
             killSwitchButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.killswitchLightInactive.image :
                 Asset.Piax.Global.killswitchDarkInactive.image, for: [])
         }
         
         if Client.preferences.nmtRulesEnabled {
+            nmtButton.accessibilityLabel = L10n.Global.disable + " " + L10n.Tiles.Quicksetting.Nmt.title
             nmtButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.nmtLightActive.image :
                 Asset.Piax.Global.nmtDarkActive.image, for: [])
         } else {
+            nmtButton.accessibilityLabel = L10n.Global.enable + " " + L10n.Tiles.Quicksetting.Nmt.title
             nmtButton.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Global.nmtLightInactive.image :
                 Asset.Piax.Global.nmtDarkInactive.image, for: [])
         }

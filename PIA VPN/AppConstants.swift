@@ -50,12 +50,13 @@ struct AppConstants {
     }
 
     struct InApp {
-        static let yearlyProductIdentifier = "com.privateinternetaccess.subscription.1year.2020"
+        static let yearlyProductIdentifier = "com.privateinternetaccess.subscription.year.october.2020"
         static let monthlyProductIdentifier = "com.privateinternetaccess.subscription.month.october.2020"
     }
     
     struct LegacyInApp {
-        static let monthly2020SubscriptionProductIdentifier = "com.privateinternetaccess.subscription.1month.2020"
+        static let yearly2020ProductIdentifier = "com.privateinternetaccess.subscription.1year.2020"
+        static let monthly2020ProductIdentifier = "com.privateinternetaccess.subscription.1month.2020"
         static let yearlySubscriptionProductIdentifier = "com.privateinternetaccess.subscription.1year"
         static let monthlySubscriptionProductIdentifier = "com.privateinternetaccess.subscription.1month"
         static let yearlyProductIdentifier = "com.privateinternetaccess.ios.iap.2019.1year"
