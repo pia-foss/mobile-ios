@@ -101,6 +101,7 @@ class QuickConnectTile: UIView, Tileable {
         for label in labelsStackView.subviews {
             if let label = label as? UILabel {
                 label.text = ""
+                label.accessibilityLabel = L10n.Global.empty
             }
         }
         
@@ -120,7 +121,7 @@ class QuickConnectTile: UIView, Tileable {
                 button.imageView?.contentMode = .scaleAspectFit
                 button.isUserInteractionEnabled = true
                 button.server = server
-                button.accessibilityLabel = server.description
+                button.accessibilityLabel = server.name
                 favoriteImage.isHidden = !favoriteServers.contains(server.identifier)
                 if status != .normal { //only when edit mode 
                     favoriteImage.isHidden = true
@@ -129,6 +130,7 @@ class QuickConnectTile: UIView, Tileable {
             
             if let label = labelsStackView.subviews[buttonIndex] as? UILabel {
                 label.text = server.country
+                label.accessibilityLabel = server.name
                 Theme.current.applyCountryNameStyleFor(label)
             }
 

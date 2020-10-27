@@ -332,6 +332,8 @@ internal enum L10n {
     internal static let copied = L10n.tr("Localizable", "global.copied")
     /// Copy
     internal static let copy = L10n.tr("Localizable", "global.copy")
+    /// Disable
+    internal static let disable = L10n.tr("Localizable", "global.disable")
     /// Disabled
     internal static let disabled = L10n.tr("Localizable", "global.disabled")
     /// Edit
@@ -364,6 +366,10 @@ internal enum L10n {
     internal static let update = L10n.tr("Localizable", "global.update")
     /// Yes
     internal static let yes = L10n.tr("Localizable", "global.yes")
+    internal enum Row {
+      /// Row selection
+      internal static let selection = L10n.tr("Localizable", "global.row.selection")
+    }
   }
 
   internal enum Hotspothelper {

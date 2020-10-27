@@ -86,6 +86,7 @@ class FavoriteServersTile: UIView, Tileable {
         for label in labelsStackView.subviews {
             if let label = label as? UILabel {
                 label.text = ""
+                label.accessibilityLabel = L10n.Global.empty
             }
         }
         
@@ -108,11 +109,12 @@ class FavoriteServersTile: UIView, Tileable {
                 button.imageView?.contentMode = .scaleAspectFit
                 button.isUserInteractionEnabled = true
                 button.server = server
-                button.accessibilityLabel = server.description
+                button.accessibilityLabel = server.name
             }
             
             if let label = labelsStackView.subviews[index] as? UILabel {
                 label.text = server.country
+                label.accessibilityLabel = server.name
                 Theme.current.applyCountryNameStyleFor(label)
             }
 
