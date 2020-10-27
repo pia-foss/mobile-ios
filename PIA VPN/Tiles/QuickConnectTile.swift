@@ -76,9 +76,7 @@ class QuickConnectTile: UIView, Tileable {
     
     @objc private func updateQuickConnectList() {
         
-        historicalServers = Client.providers.serverProvider.historicalServers.filter {
-            $0.serverNetwork == Client.configuration.currentServerNetwork()
-        }
+        historicalServers = Client.providers.serverProvider.historicalServers
         
         if AppPreferences.shared.showGeoServers == false {
             historicalServers = Client.providers.serverProvider.historicalServers.filter {
@@ -105,26 +103,30 @@ class QuickConnectTile: UIView, Tileable {
             }
         }
         
-        let favoriteServers = Client.configuration.currentServerNetwork() == .gen4 ?
-            AppPreferences.shared.favoriteServerIdentifiersGen4 :
-            AppPreferences.shared.favoriteServerIdentifiers
+        let favoriteServers = AppPreferences.shared.favoriteServerIdentifiersGen4
 
         autocompleteRecentServers()
         
         for (index, server) in historicalServers.enumerated().reversed()  {
             let buttonIndex = historicalServers.count - (index + 1)
             let view = stackView.subviews[buttonIndex]
-            if let button = view.subviews.first as? ServerButton,
-                let favoriteImage = view.subviews.last as? UIImageView {
-                button.alpha = 1
-                button.setImage(fromServer: server)
-                button.imageView?.contentMode = .scaleAspectFit
-                button.isUserInteractionEnabled = true
-                button.server = server
-                button.accessibilityLabel = server.name
-                favoriteImage.isHidden = !favoriteServers.contains(server.identifier)
-                if status != .normal { //only when edit mode 
-                    favoriteImage.isHidden = true
+            for element in view.subviews {
+                if let button = element as? ServerButton {
+                    button.alpha = 1
+                    button.setImage(fromServer: server)
+                    button.imageView?.contentMode = .scaleAspectFit
+                    button.isUserInteractionEnabled = true
+                    button.server = server
+                    button.accessibilityLabel = server.name
+                } else if let imageView = element as? UIImageView {
+                    if imageView.tag == 0 {
+                        imageView.isHidden = !favoriteServers.contains(server.identifier)
+                    } else {
+                        imageView.isHidden = server.dipToken == nil
+                    }
+                    if status != .normal { //only when edit mode
+                        imageView.isHidden = true
+                    }
                 }
             }
             
@@ -138,10 +140,10 @@ class QuickConnectTile: UIView, Tileable {
     }
     
     private func autocompleteRecentServers() {
-        var currentServers = Client.providers.serverProvider.currentServers.filter { $0.serverNetwork == Client.configuration.currentServerNetwork() }
+        var currentServers = Client.providers.serverProvider.currentServers
         currentServers = currentServers.sorted(by: { $0.pingTime ?? 1000 < $1.pingTime ?? 1000 })
         currentServers = currentServers.filter({!historicalServers.contains($0)})
-        currentServers = currentServers.filterDuplicate{ ($0.country) }
+        currentServers = currentServers.filterDuplicate{ ($0.country, $0.dipToken) }
         if AppPreferences.shared.showGeoServers == false {
             currentServers = currentServers.filter {
                 $0.geo == false

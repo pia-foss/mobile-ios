@@ -44,13 +44,9 @@ struct AppConstants {
     struct About {
         static var componentsPath = Bundle.main.path(forResource: "Components", ofType: "plist")
     }
-    
-    struct Regions {
-        static var bundleURL = Bundle.main.url(forResource: "Regions", withExtension: "json")
-    }
 
     struct RegionsGEN4 {
-        static var bundleURL = Bundle.main.url(forResource: "RegionsGEN4", withExtension: "json")
+        static var bundleURL = Bundle.main.url(forResource: "Regions", withExtension: "json")
     }
 
     struct InApp {
@@ -187,4 +183,9 @@ struct AppConstants {
         static let connect = "piavpn:connect"
         static let view = "piavpn:view"
     }
+    
+    struct FeatureFlags {
+        static let dedicatedIp = "dedicated-ip"
+    }
+    
 }

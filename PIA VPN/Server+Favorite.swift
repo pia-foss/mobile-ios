@@ -52,28 +52,16 @@ extension Server: Favoritable, PropertyStoring {
 
     func favorite() {
         self.isFavorite = true
-        if Client.configuration.currentServerNetwork() == .gen4 {
-            var currentFavorites = AppPreferences.shared.favoriteServerIdentifiersGen4
-            currentFavorites.append(self.identifier)
-            AppPreferences.shared.favoriteServerIdentifiersGen4 = currentFavorites
-        } else {
-            var currentFavorites = AppPreferences.shared.favoriteServerIdentifiers
-            currentFavorites.append(self.identifier)
-            AppPreferences.shared.favoriteServerIdentifiers = currentFavorites
-        }
+        var currentFavorites = AppPreferences.shared.favoriteServerIdentifiersGen4
+        currentFavorites.append(self.identifier+(self.dipToken ?? ""))
+        AppPreferences.shared.favoriteServerIdentifiersGen4 = currentFavorites
     }
     
     func unfavorite() {
         self.isFavorite = false
-        if Client.configuration.currentServerNetwork() == .gen4 {
-            let currentFavorites = AppPreferences.shared.favoriteServerIdentifiersGen4
-            let filteredFavorites = currentFavorites.filter({$0 != self.identifier})
-            AppPreferences.shared.favoriteServerIdentifiersGen4 = filteredFavorites
-        } else {
-            let currentFavorites = AppPreferences.shared.favoriteServerIdentifiers
-            let filteredFavorites = currentFavorites.filter({$0 != self.identifier})
-            AppPreferences.shared.favoriteServerIdentifiers = filteredFavorites
-        }
+        let currentFavorites = AppPreferences.shared.favoriteServerIdentifiersGen4
+        let filteredFavorites = currentFavorites.filter({$0 != self.identifier+(self.dipToken ?? "")})
+        AppPreferences.shared.favoriteServerIdentifiersGen4 = filteredFavorites
     }
     
 }

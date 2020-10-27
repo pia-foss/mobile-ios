@@ -71,7 +71,7 @@ class FavoriteServersTile: UIView, Tileable {
     }
     
     @objc private func updateFavoriteList() {
-        var currentServers = Client.providers.serverProvider.currentServers.filter { $0.serverNetwork == Client.configuration.currentServerNetwork() }
+        var currentServers = Client.providers.serverProvider.currentServers
         currentServers.append(Server.automatic)
         for containerView in stackView.subviews {
             if let button = containerView.subviews.first as? ServerButton {
@@ -91,25 +91,29 @@ class FavoriteServersTile: UIView, Tileable {
         }
         
         var favServers: [Server] = []
-        let favoriteServers = Client.configuration.currentServerNetwork() == .gen4 ?
-            AppPreferences.shared.favoriteServerIdentifiersGen4 :
-            AppPreferences.shared.favoriteServerIdentifiers
+        let favoriteServers = AppPreferences.shared.favoriteServerIdentifiersGen4
 
         for identifier in favoriteServers.reversed() {
-            if let server = currentServers.first(where: { return $0.identifier == identifier && $0.serverNetwork == Client.configuration.currentServerNetwork() }) {
-                favServers.append(server)
-            }
+            let servers = currentServers.filter({ $0.identifier+($0.dipToken ?? "") == identifier })
+            favServers.append(contentsOf: servers)
         }
 
         for (index, server) in favServers.enumerated() where index < stackView.subviews.count {
             let view = stackView.subviews[index]
-            if let button = view.subviews.first as? ServerButton {
-                button.alpha = 1
-                button.setImage(fromServer: server)
-                button.imageView?.contentMode = .scaleAspectFit
-                button.isUserInteractionEnabled = true
-                button.server = server
-                button.accessibilityLabel = server.name
+            for element in view.subviews {
+                if let button = element as? ServerButton {
+                    button.alpha = 1
+                    button.setImage(fromServer: server)
+                    button.imageView?.contentMode = .scaleAspectFit
+                    button.isUserInteractionEnabled = true
+                    button.server = server
+                    button.accessibilityLabel = server.name
+                } else if let imageView = element as? UIImageView {
+                    imageView.isHidden = server.dipToken == nil
+                    if status != .normal { //only when edit mode
+                        imageView.isHidden = true
+                    }
+                }
             }
             
             if let label = labelsStackView.subviews[index] as? UILabel {

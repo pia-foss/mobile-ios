@@ -43,7 +43,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
     
     private struct Cells {
         static let network = "NetworkCollectionViewCell"
-        static let header = "NetworkHeaderCollectionViewCell"
+        static let header = "PIAHeaderCollectionViewCell"
         static let footer = "NetworkFooterCollectionViewCell"
     }
 
@@ -216,7 +216,7 @@ extension TrustedNetworksViewController: UICollectionViewDelegateFlowLayout, UIC
         switch kind {
 
         case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Cells.header, for: indexPath) as! NetworkHeaderCollectionViewCell
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Cells.header, for: indexPath) as! PIAHeaderCollectionViewCell
             headerView.setup(withTitle: L10n.Network.Management.Tool.title, andSubtitle: L10n.Settings.Hotspothelper.description)
             return headerView
 
@@ -232,7 +232,7 @@ extension TrustedNetworksViewController: UICollectionViewDelegateFlowLayout, UIC
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
 
         let indexPath = IndexPath(row: 0, section: section)
-        let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as! NetworkHeaderCollectionViewCell
+        let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as! PIAHeaderCollectionViewCell
 
         return headerView.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height),
                                                   withHorizontalFittingPriority: .defaultHigh,

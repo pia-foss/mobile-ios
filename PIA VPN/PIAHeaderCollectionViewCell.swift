@@ -1,5 +1,5 @@
 //
-//  NetworkHeaderCollectionViewCell.swift
+//  PIAHeaderCollectionViewCell.swift
 //  PIA VPN
 //  
 //  Created by Jose Blaya on 04/08/2020.
@@ -22,7 +22,7 @@
 import UIKit
 import PIALibrary
 
-class NetworkHeaderCollectionViewCell: UICollectionViewCell {
+class PIAHeaderCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet private weak var title: UILabel!
     @IBOutlet private weak var subtitle: UILabel!

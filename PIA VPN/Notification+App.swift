@@ -33,6 +33,9 @@ extension Notification.Name {
     static let TrustedNetworkAdded = Notification.Name("TrustedNetworkAdded")
     static let OpenSettingsAndActivateWireGuard = Notification.Name("OpenSettingsAndActivateWireGuard")
     static let RefreshWireGuardSettings = Notification.Name("RefreshWireGuardSettings")
+    static let DedicatedIpReload = Notification.Name("DedicatedIpReload")
+    static let DedicatedIpShowAnimation = Notification.Name("DedicatedIpShowAnimation")
+    static let DedicatedIpHideAnimation = Notification.Name("DedicatedIpHideAnimation")
 
 }
 

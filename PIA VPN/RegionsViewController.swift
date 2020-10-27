@@ -30,8 +30,22 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 class RegionsViewController: AutolayoutViewController {
+    
+    private enum Section: Int {
+
+        case automatic = 0
+        case dip
+        case regions
+        
+        static func numberOfSections() -> Int {
+            return 3
+        }
+
+    }
+    
     private struct Cells {
         static let region = "RegionCell"
+        static let dedicatedRegion = "DedicatedRegionCell"
     }
 
     @IBOutlet private weak var tableView: UITableView!
@@ -53,18 +67,15 @@ class RegionsViewController: AutolayoutViewController {
     
         title = L10n.Menu.Item.region
         var servers = Client.providers.serverProvider.currentServers
-        servers.insert(Server.automatic, at: 0)
         
         if Client.configuration.isDevelopment, let customServers = AppConstants.Servers.customServers {
             servers.append(contentsOf: customServers)
         }
         
-        let favoriteServers = Client.configuration.currentServerNetwork() == .gen4 ?
-            AppPreferences.shared.favoriteServerIdentifiersGen4 :
-            AppPreferences.shared.favoriteServerIdentifiers
+        let favoriteServers = AppPreferences.shared.favoriteServerIdentifiersGen4
         
         for server in servers {
-            server.isFavorite = favoriteServers.contains(server.identifier)
+            server.isFavorite = favoriteServers.contains(server.identifier+(server.dipToken ?? ""))
         }
         
         self.servers = servers
@@ -72,6 +83,7 @@ class RegionsViewController: AutolayoutViewController {
 
         selectedServer = Client.preferences.displayedServer
 
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadRegions), name: .PIAThemeDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(pingsDidComplete(notification:)), name: .PIADaemonsDidPingServers, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
 
@@ -93,7 +105,7 @@ class RegionsViewController: AutolayoutViewController {
         refreshControl.addTarget(self, action: #selector(refreshLatency), for: .valueChanged)
         tableView.addSubview(refreshControl)
     }
-    
+        
     @objc func refreshLatency(_ sender: Any) {
 
         refreshControl.endRefreshing()
@@ -148,15 +160,28 @@ class RegionsViewController: AutolayoutViewController {
         
         styleNavigationBarWithTitle(L10n.Menu.Item.region)
         setupRightBarButton()
-        
-        let selectedRow = servers.index { (server) -> Bool in
-            return (server.identifier == selectedServer.identifier)
-        }
-
         tableView.reloadData()
-        if let row = selectedRow {
-            tableView.selectRow(at: IndexPath(row: row, section: 0), animated: false, scrollPosition: .middle)
+
+        if selectedServer.isAutomatic {
+            tableView.selectRow(at: IndexPath(row: Section.automatic.rawValue, section: Section.automatic.rawValue), animated: false, scrollPosition: UITableView.ScrollPosition.top)
+        } else {
+            if selectedServer.dipToken == nil {
+                let selectedRow = servers.filter({$0.dipToken == nil}).firstIndex { (server) -> Bool in
+                    return (server.identifier == selectedServer.identifier)
+                }
+                if let row = selectedRow {
+                    tableView.selectRow(at: IndexPath(row: row, section: Section.regions.rawValue), animated: false, scrollPosition: UITableView.ScrollPosition.middle)
+                }
+            } else {
+                let selectedRow = servers.filter({$0.dipToken != nil}).firstIndex { (server) -> Bool in
+                    return (server.identifier == selectedServer.identifier)
+                }
+                if let row = selectedRow {
+                    tableView.selectRow(at: IndexPath(row: row, section: Section.dip.rawValue), animated: false, scrollPosition: UITableView.ScrollPosition.top)
+                }
+            }
         }
+        
     }
     
     // MARK: Actions
@@ -216,7 +241,6 @@ class RegionsViewController: AutolayoutViewController {
         if AppPreferences.shared.showGeoServers == false {
             self.servers = self.servers.filter({ $0.geo == AppPreferences.shared.showGeoServers })
         }
-        self.servers.insert(Server.automatic, at: 0)
         
         tableView.reloadData()
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
@@ -233,7 +257,7 @@ class RegionsViewController: AutolayoutViewController {
         switch segue {
         case .unwindRegionsSegueIdentifier:
             let currentServer = Client.preferences.displayedServer
-            guard (selectedServer.identifier != currentServer.identifier) else {
+            guard (selectedServer.identifier != currentServer.identifier || selectedServer.dipToken != currentServer.dipToken) else {
                 return
             }
             Client.preferences.displayedServer = selectedServer
@@ -256,10 +280,22 @@ class RegionsViewController: AutolayoutViewController {
             }
             
             let newSelectedServer: Server
-            if isFiltering() {
-                newSelectedServer = filteredServers[indexPath.row]
-            } else {
-                newSelectedServer = servers[indexPath.row]
+
+            switch indexPath.section {
+            case Section.automatic.rawValue:
+                newSelectedServer = Server.automatic
+            case Section.dip.rawValue:
+                if isFiltering() {
+                    newSelectedServer = filteredServers.filter({$0.dipToken != nil})[indexPath.row]
+                } else {
+                    newSelectedServer = servers.filter({$0.dipToken != nil})[indexPath.row]
+                }
+            default:
+                if isFiltering() {
+                    newSelectedServer = filteredServers.filter({$0.dipToken == nil})[indexPath.row]
+                } else {
+                    newSelectedServer = servers.filter({$0.dipToken == nil})[indexPath.row]
+                }
             }
 
             selectedServer = newSelectedServer
@@ -280,6 +316,10 @@ class RegionsViewController: AutolayoutViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + AppConfiguration.Animations.duration, execute: {
             self.gradientProgressBar.setProgress(0, animated: true)
         })
+        self.filterServers()
+    }
+    
+    @objc private func reloadRegions() {
         self.filterServers()
     }
     
@@ -309,30 +349,87 @@ class RegionsViewController: AutolayoutViewController {
 }
 
 extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return Section.numberOfSections()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == 1 && !isFiltering() ? 20 : 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 20))
+        footerView.backgroundColor = Theme.current.palette.secondaryColor
+        return footerView
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering() {
-            return filteredServers.count
+        if section == 0 {
+            //automatic
+            return isFiltering() ? 0 : 1
+        } else if section == 1 {
+            //dip
+            if isFiltering() {
+                return filteredServers.filter({$0.dipToken != nil}).count
+            }
+            return servers.filter({$0.dipToken != nil}).count
+        } else {
+            if isFiltering() {
+                return filteredServers.filter({$0.dipToken == nil}).count
+            }
+            return servers.filter({$0.dipToken == nil}).count
+
         }
-        
-        return servers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Cells.region, for: indexPath) as! RegionCell
-        cell.selectionStyle = .none
-        cell.separatorInset = .zero
         
-        let server: Server
-        if isFiltering() {
-            server = filteredServers[indexPath.row]
-        } else {
-            server = servers[indexPath.row]
+        switch indexPath.section {
+        case Section.automatic.rawValue:
+            let cell = tableView.dequeueReusableCell(withIdentifier: Cells.region, for: indexPath) as! RegionCell
+            cell.selectionStyle = .none
+            cell.separatorInset = .zero
+            let server = Server.automatic
+            let isSelected = (server.identifier == selectedServer.identifier)
+            cell.fill(withServer: server, isSelected: isSelected)
+            return cell
+        case Section.dip.rawValue:
+            let cell = tableView.dequeueReusableCell(withIdentifier: Cells.dedicatedRegion, for: indexPath) as! DedicatedRegionCell
+            cell.selectionStyle = .none
+            cell.separatorInset = .zero
+            
+            var dipServers = [Server]()
+            if isFiltering() {
+                dipServers = filteredServers.filter({$0.dipToken != nil})
+            } else {
+                dipServers = servers.filter({$0.dipToken != nil})
+            }
+            
+            if dipServers.count > 0 {
+                let dipServer = dipServers[indexPath.row]
+                let isSelected = (dipServer.identifier == selectedServer.identifier && selectedServer.dipToken != nil)
+                cell.fill(withServer: dipServer, isSelected: isSelected)
+            }
+            return cell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: Cells.region, for: indexPath) as! RegionCell
+            cell.selectionStyle = .none
+            cell.separatorInset = .zero
+            
+            let server: Server
+            if isFiltering() {
+                server = filteredServers.filter({$0.dipToken == nil})[indexPath.row]
+            } else {
+                server = servers.filter({$0.dipToken == nil})[indexPath.row]
+            }
+
+            let isSelected = (server.identifier == selectedServer.identifier && selectedServer.dipToken == nil)
+            cell.fill(withServer: server, isSelected: isSelected)
+
+            return cell
         }
-
-        let isSelected = (server.identifier == selectedServer.identifier)
-        cell.fill(withServer: server, isSelected: isSelected)
-
-        return cell
+        
     }
 }
 

@@ -25,7 +25,6 @@ import PIALibrary
 import TunnelKit
 import SwiftyBeaver
 import PIAWireguard
-import NetworkExtension
 #if PIA_DEV
 import AppCenter
 import AppCenterAnalytics
@@ -75,11 +74,6 @@ class Bootstrapper {
         // Load the database first
         Client.database = Client.Database(team: AppConstants.teamId, group: AppConstants.appGroup)
         
-        //FORCE THE MIGRATION TO GEN4
-        if Client.configuration.currentServerNetwork() == .legacy {
-            Client.configuration.setServerNetworks(to: .gen4)
-        }
-
         // Check if should clean the account after delete the app and install again
         if Client.providers.accountProvider.shouldCleanAccount {
             //If first install, we need to ensure we don't have data from previous sessions in the Secure Keychain
@@ -91,7 +85,7 @@ class Bootstrapper {
 
         // PIALibrary
         
-        guard let bundledRegionsURL = AppConstants.Regions.bundleURL else {
+        guard let bundledRegionsURL = AppConstants.RegionsGEN4.bundleURL else {
             fatalError("Could not find bundled regions file")
         }
         let bundledServersJSON: Data
@@ -130,6 +124,8 @@ class Bootstrapper {
             PIAWGTunnelProfile.vpnType: PIAWireguardConfiguration(customDNSServers: [])
         ]
         
+        Client.providers.accountProvider.featureFlags(nil)
+        
         Client.providers.serverProvider.downloadRegionStaticData { (error) in
             
             NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
@@ -137,20 +133,15 @@ class Bootstrapper {
             userInfo: nil)
             
             //FORCE THE MIGRATION TO GEN4
-            if Client.providers.vpnProvider.isVPNConnected {
-                
-                let manager = NEVPNManager.shared()
-                if let protocolConfiguration = manager.protocolConfiguration,
-                   let address = protocolConfiguration.serverAddress,
-                   address.contains("privateinternetaccess.com") {
-                    Client.preferences.displayedServer = Server.automatic
-                    NotificationCenter.default.post(name: .PIAThemeDidChange,
-                                                    object: self,
-                                                    userInfo: nil)
-                    Client.providers.vpnProvider.reconnect(after: 200, forceDisconnect: true, { _ in
-                    })
-                }
+            if Client.providers.vpnProvider.needsMigrationToGEN4() {
 
+                Client.preferences.displayedServer = Server.automatic
+                NotificationCenter.default.post(name: .PIAThemeDidChange,
+                                                object: self,
+                                                userInfo: nil)
+                Client.providers.vpnProvider.reconnect(after: 200, forceDisconnect: true, { _ in
+                })
+                
             }
 
         }
@@ -175,6 +166,7 @@ class Bootstrapper {
 
             Client.refreshProducts()
             Client.observeTransactions()
+            
             
         }
 

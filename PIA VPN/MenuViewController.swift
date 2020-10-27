@@ -37,7 +37,9 @@ class MenuViewController: AutolayoutViewController {
         case selectRegion
 
         case account
-        
+
+        case dedicatedIp
+
         case settings
         
         case logout
@@ -91,6 +93,7 @@ class MenuViewController: AutolayoutViewController {
     private lazy var stringForItem: [Item: String] = [
         .selectRegion: L10n.Menu.Item.region,
         .account: L10n.Menu.Item.account,
+        .dedicatedIp: "Dedicated IP",
         .settings: L10n.Menu.Item.settings,
         .logout: L10n.Menu.Item.logout,
         .about: L10n.Menu.Item.about,
@@ -103,6 +106,7 @@ class MenuViewController: AutolayoutViewController {
     private lazy var iconForItem: [Item: ImageAsset] = [
         .selectRegion: Asset.iconRegion,
         .account: Asset.iconAccount,
+        .dedicatedIp: Asset.iconDip,
         .settings: Asset.iconSettings,
         .logout: Asset.iconLogout,
         .about: Asset.iconAbout,
@@ -118,6 +122,11 @@ class MenuViewController: AutolayoutViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.dedicatedIp),
+           !allItems[0].contains(.dedicatedIp) {
+            allItems[0].insert(.dedicatedIp, at: 2)
+        }
         
         Theme.current.applySideMenu()
 
@@ -229,6 +238,7 @@ class MenuViewController: AutolayoutViewController {
             case AppConstants.InApp.monthlyProductIdentifier,
                  AppConstants.LegacyInApp.monthly2020ProductIdentifier,
                  AppConstants.LegacyInApp.monthlySubscriptionProductIdentifier,
+                 AppConstants.LegacyInApp.monthly2020SubscriptionProductIdentifier,
                  AppConstants.LegacyInApp.monthlyProductIdentifier,
                  AppConstants.LegacyInApp.oldMonthlyProductIdentifier:
                 uniquePlan = .monthly
