@@ -30,6 +30,7 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
     static let shared = VPNDaemon()
 
     private(set) var hasEnabledUpdates: Bool
+    private var timer: Timer!
     
     private init() {
         hasEnabledUpdates = false
@@ -61,10 +62,24 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         switch connection.status {
         case .connected:
             nextStatus = .connected
-            
+            timer.invalidate()
+
         case .connecting, .reasserting:
             nextStatus = .connecting
             
+            let previousStatus = accessedDatabase.transient.vpnStatus
+            if nextStatus != previousStatus {
+                timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
+                    let status = NEVPNManager.shared().connection.status
+                    if status == .invalid {
+                        log.debug("NEVPNManager connection is invalid. Reconnecting...")
+                        Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, { error in
+                            timer.invalidate()
+                        })
+                    }
+                }
+            }
+
         case .disconnecting:
             nextStatus = .disconnecting
             
