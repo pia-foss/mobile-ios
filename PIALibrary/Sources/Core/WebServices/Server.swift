@@ -117,6 +117,9 @@ public class Server: Hashable {
     /// The server is virtually located.
     public let geo: Bool
 
+    /// The server is unavailable.
+    public let offline: Bool
+
     /// The best address for establishing an OpenVPN connection over TCP.
     public let bestOpenVPNAddressForTCP: Address?
 
@@ -166,6 +169,7 @@ public class Server: Hashable {
         pingAddress: Address?,
         responseTime: Int? = 0,
         geo: Bool = false,
+        offline: Bool = false,
         meta: ServerAddressIP? = nil,
         dipExpire: Date? = nil,
         dipToken: String? = nil,
@@ -177,6 +181,7 @@ public class Server: Hashable {
         self.country = country
         self.hostname = hostname
         self.geo = geo
+        self.offline = offline
         self.regionIdentifier = regionIdentifier
         identifier = hostname.components(separatedBy: ".").first ?? ""
         

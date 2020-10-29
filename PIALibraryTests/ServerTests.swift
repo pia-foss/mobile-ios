@@ -62,10 +62,11 @@ class ServerTests: XCTestCase {
     func testMockDownload() {
         __testProviderDownload(factory: MockProviders())
     }
-
-    //    func testWebDownload() {
-//        __testProviderDownload(factory: Client.Providers())
-//    }
+    
+    func testOfflineServers() {
+        __testProviderDownload(factory: MockProviders())
+        XCTAssertTrue(Client.providers.serverProvider.currentServers.filter({$0.offline == true}).count == 1)
+    }
 
     private func __testProviderDownload(factory: Client.Providers) {
         let exp = expectation(description: "download")
@@ -86,13 +87,4 @@ class ServerTests: XCTestCase {
         waitForExpectations(timeout: 5.0, handler: nil)
     }
     
-//    func testSelection() {
-//        let cached = Client.providers.serverProvider.currentServers
-//        guard !cached.isEmpty else {
-//            return
-//        }
-//
-//        let selected = cached[Int(arc4random()) % cached.count]
-//        Client.preferences.editable().preferredServer = selected
-//    }
 }

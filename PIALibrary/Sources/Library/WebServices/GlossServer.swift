@@ -42,6 +42,7 @@ class GlossServer: GlossParser {
         let dipToken: String? = "dipToken" <~~ json ?? nil
 
         let geo: Bool = "geo" <~~ json ?? false
+        let offline: Bool = "offline" <~~ json ?? false
 
         var meta: Server.ServerAddressIP?
         if let metaServer: [String: Any] = "servers" <~~ json {
@@ -125,6 +126,7 @@ class GlossServer: GlossParser {
                         pingAddress: pingAddress,
                         responseTime: 0,
                         geo: geo,
+                        offline: offline,
                         meta: meta,
                         dipToken: dipToken,
                         regionIdentifier: regionIdentifier
@@ -158,6 +160,7 @@ extension Server: JSONEncodable {
             "name" ~~> name,
             "country" ~~> country,
             "geo" ~~> geo,
+            "offline" ~~> offline,
             "dns" ~~> hostname,
             "openvpn_tcp" ~~> jsonify([
                 "best" ~~> bestOpenVPNAddressForTCP?.description

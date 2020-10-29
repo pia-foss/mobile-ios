@@ -75,6 +75,18 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
                 pingAddress: nil,
                 responseTime: 0,
                 regionIdentifier: ""
+            ), Server(
+                serial: "8a55f03812851897f6e43b2ae22b1234",
+                name: "US East Offline",
+                country: "us",
+                hostname: "us-east.example.com",
+                bestOpenVPNAddressForTCP: nil,
+                bestOpenVPNAddressForUDP: nil,
+                pingAddress: nil,
+                responseTime: 0,
+                geo: true,
+                offline: true,
+                regionIdentifier: ""
             )
         ]
 
