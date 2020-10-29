@@ -115,7 +115,11 @@ class QuickConnectTile: UIView, Tileable {
                     button.alpha = 1
                     button.setImage(fromServer: server)
                     button.imageView?.contentMode = .scaleAspectFit
-                    button.isUserInteractionEnabled = true
+                    if !server.offline {
+                        button.isUserInteractionEnabled = true
+                    } else {
+                        button.isUserInteractionEnabled = false
+                    }
                     button.server = server
                     button.accessibilityLabel = server.name
                 } else if let imageView = element as? UIImageView {

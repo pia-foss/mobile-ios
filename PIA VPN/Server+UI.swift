@@ -90,7 +90,12 @@ extension UIButton {
             return
         }
         let original = image.withRenderingMode(.alwaysOriginal)
-        self.setImage(original.image(alpha: 0.7), for: .normal)
+
+        if !server.offline {
+            self.setImage(original.image(alpha: 0.7), for: .normal)
+        } else {
+            self.setImage(original.image(alpha: 0.3), for: .normal)
+        }
         self.setImage(image.withRenderingMode(.alwaysOriginal), for: .highlighted)
         
     }

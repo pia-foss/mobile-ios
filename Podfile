@@ -47,7 +47,7 @@ end
 def shared_main_pods
     pod 'AlamofireImage'
     pod "PIAAccountModule", :path => "/Users/jose/Projects/PIA/account"
-    pod "PIARegions", :git => "#{$git_root}/#{$regions_repo}"
+    pod "PIARegions", :path => "/Users/jose/Projects/PIA/regions"
     library_by_path('/Users/jose/Projects/PIA')
     #library_by_git('ba3cd1f')
     #library_by_version('~> 1.1.3')
