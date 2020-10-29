@@ -56,21 +56,23 @@ public class EndpointManager {
         }
 
         if currentServers.count > 2 {
+            let filtered = currentServers.filter({$0.pingTime != nil}).sorted(by: { $0.pingTime ?? 0 < $1.pingTime ?? 0 })
+            
             guard !currentServers.filter({$0.meta != nil}).isEmpty else {
                 return
             }
-            if currentServers[0].pingTime == nil && currentServers[1].pingTime == nil {
+            if filtered.count < 2 {
                 while availableEndpoints.count < 2 {
                     if let random = currentServers.randomElement(), let meta = random.meta {
                         availableEndpoints.append(PinningEndpoint(host: meta.ip, useCertificatePinning: true, commonName: meta.cn))
                     }
                 }
             } else {
-                if let meta = currentServers[0].meta {
+                if let meta = filtered.first?.meta {
                     availableEndpoints.append(PinningEndpoint(host: meta.ip, useCertificatePinning: true, commonName: meta.cn))
                 }
                 if availableEndpoints.count < 2 {
-                    if let meta = currentServers[1].meta {
+                    if let meta = filtered[1].meta {
                         availableEndpoints.append(PinningEndpoint(host: meta.ip, useCertificatePinning: true, commonName: meta.cn))
                     }
                 }
