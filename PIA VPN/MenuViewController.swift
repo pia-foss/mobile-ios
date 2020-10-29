@@ -125,7 +125,7 @@ class MenuViewController: AutolayoutViewController {
         
         if Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.dedicatedIp),
            !allItems[0].contains(.dedicatedIp) {
-            //allItems[0].insert(.dedicatedIp, at: 2)
+            allItems[0].insert(.dedicatedIp, at: 2)
         }
         
         Theme.current.applySideMenu()
