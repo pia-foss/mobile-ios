@@ -45,6 +45,10 @@ class RegionTile: UIView, Tileable {
     @IBOutlet private weak var geoImageView: UIImageView!
     private var greenDot: UIView!
 
+    @IBOutlet private weak var labelIP: UILabel!
+    @IBOutlet private weak var labelDedicatedIPTitle: UILabel!
+    @IBOutlet private weak var viewIP: UIView!
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.xibSetup()
@@ -86,14 +90,37 @@ class RegionTile: UIView, Tileable {
         self.serverName.text = effectiveServer.name(forStatus: vpn.vpnStatus)
         self.mapImageView.image = Theme.current.mapImage()
 
-        setupRegionTileAndMapForServer(effectiveServer)
+        setupDIP(withServer: effectiveServer)
+        setupRegionTileAndMap(withServer: effectiveServer)
 
         if let _ = Client.providers.serverProvider.regionStaticData {
             self.mapImageView.addSubview(greenDot)
         }
     }
     
-    private func setupRegionTileAndMapForServer(_ server: Server) {
+    private func setupDIP(withServer server: Server) {
+        if server.dipToken != nil {
+            labelIP.isHidden = false
+            labelDedicatedIPTitle.isHidden = false
+            viewIP.isHidden = false
+            labelIP.text = server.wireGuardAddressesForUDP?.first?.ip ?? ""
+            labelDedicatedIPTitle.text = "DEDICATED IP"
+            viewIP.layer.cornerRadius = 10.0
+            viewIP.layer.borderWidth = 0.5
+            viewIP.layer.borderColor = UIColor.piaGrey4.cgColor
+        } else {
+            labelIP.isHidden = true
+            labelDedicatedIPTitle.isHidden = true
+            viewIP.isHidden = true
+            labelIP.text = ""
+            labelDedicatedIPTitle.text = ""
+            viewIP.layer.cornerRadius = 0.0
+            viewIP.layer.borderWidth = 0.0
+            viewIP.layer.borderColor = UIColor.clear.cgColor
+        }
+    }
+
+    private func setupRegionTileAndMap(withServer server: Server) {
         let coordFinder = CoordinatesFinder(forServer: server.regionIdentifier, usingMapImage: self.mapImageView)
         if let _ = Client.providers.serverProvider.regionStaticData {
             greenDot = coordFinder.dot()
@@ -107,6 +134,9 @@ class RegionTile: UIView, Tileable {
         tileTitle.style(style: TextStyle.textStyle21)
         Theme.current.applyPrincipalBackground(self)
         Theme.current.applySettingsCellTitle(serverName, appearance: .dark)
+        Theme.current.applyRegionSolidLightBackground(self.viewIP)
+        Theme.current.applyRegionIPCell(labelIP, appearance: .dark)
+        Theme.current.applyRegionIPTitleCell(labelDedicatedIPTitle, appearance: .dark)
     }
     
     private func statusUpdated() {
