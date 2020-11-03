@@ -45,6 +45,8 @@ class RegionCell: UITableViewCell, Restylable {
     
     func fill(withServer server: Server, isSelected: Bool) {
         viewShouldRestyle()
+        favoriteButton.isHidden = server.isAutomatic
+        favoriteImageView.isHidden = server.isAutomatic
         self.server = server
 
         imvFlag.setImage(fromServer: server)
