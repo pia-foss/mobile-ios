@@ -62,7 +62,7 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         switch connection.status {
         case .connected:
             nextStatus = .connected
-            timer.invalidate()
+            timer?.invalidate()
 
         case .connecting, .reasserting:
             nextStatus = .connecting
