@@ -235,7 +235,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                 for dipServer in dedicatedIps {
                     if dipServer.status == DedicatedIPInformationResponse.Status.active {
 
-                        guard let firstServer = Client.providers.serverProvider.currentServers.first(where: {$0.country == dipServer.id}) else {
+                        guard let firstServer = Client.providers.serverProvider.currentServers.first(where: {$0.identifier == dipServer.id}) else {
                             callback?([], ClientError.malformedResponseData)
                             return
                         }
