@@ -223,6 +223,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     }
     
     func activateDIPToken(tokens: [String], _ callback: LibraryCallback<[Server]>?) {
+        
         if let token = Client.providers.accountProvider.token {
             self.accountAPI.dedicatedIPs(token: token, ipTokens: tokens) { (dedicatedIps, error) in
                 if let _ = error {
@@ -234,8 +235,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                 for dipServer in dedicatedIps {
                     if dipServer.status == DedicatedIPInformationResponse.Status.active {
 
-                        //Replace ES with dipServer.id
-                        guard let firstServer = Client.providers.serverProvider.currentServers.first(where: {$0.country == "ES"}) else {
+                        guard let firstServer = Client.providers.serverProvider.currentServers.first(where: {$0.country == dipServer.id}) else {
                             callback?([], ClientError.malformedResponseData)
                             return
                         }

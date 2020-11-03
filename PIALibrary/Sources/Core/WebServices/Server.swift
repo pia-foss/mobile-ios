@@ -300,3 +300,20 @@ extension Server {
     }
     
 }
+
+extension Server {
+    
+    func dipUsername() -> String? {
+        if let dipToken = dipToken {
+            return "dedicated_ip_"+dipToken
+        }
+        return nil
+    }
+    
+    func dipPassword() -> String? {
+        if let _ = dipToken, let address = bestAddressForIKEv2() {
+            return address.ip
+        }
+        return nil
+    }
+}

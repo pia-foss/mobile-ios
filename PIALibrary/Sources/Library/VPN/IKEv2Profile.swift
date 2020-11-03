@@ -170,7 +170,16 @@ public class IKEv2Profile: NetworkExtensionProfile {
         if let username = Client.providers.accountProvider.token {
             iKEv2Username = username
         }
+        
+        if let dipUsername = configuration.server.dipUsername() { //override the username if DIP
+            iKEv2Username = dipUsername
+        }
+        
         iKEv2Password = ikev2PasswordReference()
+        
+        if let dipPassword = configuration.server.dipPassword() { //override the password if DIP
+            iKEv2Password = dipPassword.data(using: .utf8)
+        }
 
         let cfg = NEVPNProtocolIKEv2()
         if let ip = configuration.server.bestAddressForIKEv2()?.ip {
