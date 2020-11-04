@@ -11,9 +11,12 @@ inhibit_all_warnings!
 # Libraries
 
 $git_root = "https://github.com/pia-foss"
+$gitlab_vpn_root = "git@codex.londontrustmedia.com:ios"
+$gitlab_kn_root = "git@codex.londontrustmedia.com:mobile"
 
 $library_pod = 'PIALibrary'
 $library_repo = 'client-library-apple'
+$library_gitlab_repo = 'client-library-apple.git'
 $library_subspecs = [
     'Library',
     'UI',
@@ -23,6 +26,9 @@ $library_subspecs = [
 
 $regions_repo = 'mobile-common-regions'
 $accounts_repo = 'mobile-common-account'
+
+$regions_gitlab_repo = 'regions.git'
+$accounts_gitlab_repo = 'account.git'
 
 def library_by_path(root)
     $library_subspecs.each { |name|
@@ -36,6 +42,12 @@ def library_by_git(sha)
     }
 end
 
+def library_by_gitlab_branch(branch)
+    $library_subspecs.each { |name|
+        pod "#{$library_pod}/#{name}", :git => "#{$gitlab_vpn_root}/#{$library_gitlab_repo}", :branch => branch
+    }
+end
+
 def library_by_version(version)
     $library_subspecs.each { |name|
         pod "#{$library_pod}/#{name}", version
@@ -46,10 +58,15 @@ end
 
 def shared_main_pods
     pod 'AlamofireImage'
-    pod "PIAAccountModule", :path => "/Users/jose/Projects/PIA/account"
-    pod "PIARegions", :git => "#{$git_root}/#{$regions_repo}"
-    library_by_path('/Users/jose/Projects/PIA')
+    
+    #pod "PIAAccountModule", :git => "#{$git_root}/#{$accounts_repo}"
+    pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :branch => 'develop'
+    #pod "PIARegions", :git => "#{$git_root}/#{$regions_repo}"
+    pod "PIARegions", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}"
+    
+    #library_by_path('')
     #library_by_git('ba3cd1f')
+    library_by_gitlab_branch('feature/dip_connection')
     #library_by_version('~> 1.1.3')
 end
 
@@ -69,7 +86,11 @@ def tunnel_pods
 end
 
 def piawireguard_pod
-    pod 'PIAWireguard', :git => "https://github.com/pia-foss/ios-wireguard"
+    pod 'PIAWireguard', :git => "#{$git_root}/ios-wireguard"
+end
+
+def piawireguard_gitlab_pod
+    pod 'PIAWireguard', :git => "#{$gitlab_vpn_root}/ios-wireguard.git"
 end
 
 # Targets
@@ -93,6 +114,7 @@ end
 
 target 'PIA VPN WG Tunnel' do
     piawireguard_pod
+    #piawireguard_gitlab_pod
 end
 
 target 'PIA VPNTests' do
