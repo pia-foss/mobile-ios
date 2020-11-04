@@ -54,5 +54,9 @@ protocol SecureStore: class {
 
     func removeDIPTokens()
 
+    func setPassword(_ password: String?, forDipToken dip: String)
+    
+    func passwordReference(forDipToken dip: String) -> Data?
+    
     func clear(for username: String)
 }

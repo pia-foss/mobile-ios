@@ -249,6 +249,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                         
                         dipRegions.append(dipRegion)
                         Client.database.secure.setDIPToken(dipServer.dipToken)
+                        Client.database.secure.setPassword(ip, forDipToken: dipServer.dipToken)
 
                     }
                 }

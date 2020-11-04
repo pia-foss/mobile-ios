@@ -310,9 +310,9 @@ extension Server {
         return nil
     }
     
-    func dipPassword() -> String? {
-        if let _ = dipToken, let address = bestAddressForIKEv2() {
-            return address.ip
+    func dipPassword() -> Data? {
+        if let dipUsername = dipToken {
+            return Client.database.secure.passwordReference(forDipToken: dipUsername)
         }
         return nil
     }

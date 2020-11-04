@@ -135,5 +135,17 @@ extension KeychainStore {
     func removeDIPTokens() {
         try? backend.removeDIPTokens()
     }
+    
+    func setPassword(_ password: String?, forDipToken dip: String) {
+        if let password = password {
+            try? backend.set(password: password, for: dip)
+        } else {
+            backend.removePassword(for: dip)
+        }
+    }
+    
+    func passwordReference(forDipToken dip: String) -> Data? {
+        return try? backend.passwordReference(for: dip)
+    }
 
 }

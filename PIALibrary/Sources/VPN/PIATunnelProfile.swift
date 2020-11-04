@@ -228,29 +228,31 @@ public class PIATunnelProfile: NetworkExtensionProfile {
     
     /// :nodoc:
     public func generatedProtocol(withConfiguration configuration: VPNConfiguration) -> NEVPNProtocol {
-        let cfg = NETunnelProviderProtocol()
-        cfg.disconnectOnSleep = configuration.disconnectsOnSleep
         
-        cfg.username = configuration.server.dipUsername() != nil ? configuration.server.dipUsername() : configuration.username
-        cfg.passwordReference = configuration.server.dipPassword() != nil ? configuration.server.dipPassword()?.data(using: .utf8) : configuration.passwordReference
-        cfg.serverAddress = configuration.server.hostname
-        cfg.providerBundleIdentifier = bundleIdentifier
-        
+        var serverAddress = ""
         var customCfg = configuration.customConfiguration
         if let piaCfg = customCfg as? OpenVPNTunnelProvider.Configuration {
             var builder = piaCfg.builder()
             if let protocols = builder.sessionConfiguration.endpointProtocols, protocols.contains(where: {$0.socketType == .tcp }) {
                 if let bestAddress = configuration.server.openVPNAddressesForTCP?.first?.ip {
+                    serverAddress = bestAddress
                     builder.resolvedAddresses = [bestAddress]
                 }
             } else {
-                if let bestAddress = configuration.server.openVPNAddressesForUDP?.first?.ip { 
+                if let bestAddress = configuration.server.openVPNAddressesForUDP?.first?.ip {
+                    serverAddress = bestAddress
                     builder.resolvedAddresses = [bestAddress]
                 }
             }
             customCfg = builder.build()
         }
 
+        let cfg = NETunnelProviderProtocol()
+        cfg.disconnectOnSleep = configuration.disconnectsOnSleep
+        cfg.username = configuration.server.dipUsername() != nil ? configuration.server.dipUsername() : configuration.username
+        cfg.passwordReference = configuration.server.dipUsername() != nil ? configuration.server.dipPassword() : configuration.passwordReference
+        cfg.serverAddress = serverAddress
+        cfg.providerBundleIdentifier = bundleIdentifier
         cfg.providerConfiguration = customCfg?.serialized()
         return cfg
     }
