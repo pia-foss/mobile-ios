@@ -109,4 +109,14 @@ extension DedicatedIpEmptyHeaderViewCell: UITextFieldDelegate {
         return false
     }
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        activateView.layer.borderColor = Theme.current.palette.emphasis.cgColor
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        activateView.layer.borderColor = UIColor.piaGrey4.cgColor
+        return true
+    }
+    
 }
