@@ -79,7 +79,7 @@ class QuickConnectTile: UIView, Tileable {
         historicalServers = Client.providers.serverProvider.historicalServers.filter({
             if let tokens = Client.providers.serverProvider.dipTokens {
                 if let dipToken = $0.dipToken {
-                    return !tokens.contains(dipToken)
+                    return tokens.contains(dipToken)
                 }
                 return true
             }
