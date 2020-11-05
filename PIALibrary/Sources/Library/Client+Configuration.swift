@@ -109,6 +109,15 @@ extension Client {
         /// Sets the maximum number of failed connectivity checks before giving up.
         public var connectivityMaxAttempts: Int
         
+        /// Sets the timeout for VPN connectivity checks.
+        public var vpnConnectivityTimeout: TimeInterval
+
+        /// Sets the delay after which to retry VPN connectivity checks.
+        public var vpnConnectivityRetryDelay: TimeInterval
+        
+        /// Sets the maximum number of failed VPN connectivity attempts before giving up.
+        public var vpnConnectivityMaxAttempts: Int
+
         let maceHostname: String
         
         let macePort: UInt16
@@ -200,6 +209,10 @@ extension Client {
             connectivityTimeout = 3000
             connectivityRetryDelay = 5000
             connectivityMaxAttempts = 3
+
+            vpnConnectivityTimeout = 2.0
+            vpnConnectivityRetryDelay = 5.0
+            vpnConnectivityMaxAttempts = 3
 
             maceHostname = "209.222.18.222"
             macePort = 1111

@@ -117,8 +117,6 @@ class GlossServer: GlossParser {
                         name: name,
                         country: country,
                         hostname: hostname,
-                        bestOpenVPNAddressForTCP: nil,
-                        bestOpenVPNAddressForUDP: nil,
                         openVPNAddressesForTCP: ovpnTCPServerAddressIP,
                         openVPNAddressesForUDP: ovpnUDPServerAddressIP,
                         wireGuardAddressesForUDP: wgServerAddressIP,
@@ -162,12 +160,6 @@ extension Server: JSONEncodable {
             "geo" ~~> geo,
             "offline" ~~> offline,
             "dns" ~~> hostname,
-            "openvpn_tcp" ~~> jsonify([
-                "best" ~~> bestOpenVPNAddressForTCP?.description
-            ]),
-            "openvpn_udp" ~~> jsonify([
-                "best" ~~> bestOpenVPNAddressForUDP?.description
-            ]),
             "ping" ~~> pingAddress?.description,
             "servers" ~~> jsonify([
                 "ovpnudp" ~~> ovpnTCPobj,

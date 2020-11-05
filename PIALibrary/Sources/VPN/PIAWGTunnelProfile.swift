@@ -238,8 +238,8 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
 
             var serverAddress = configuration.server.hostname
             var serverCN = ""
-            if let ip = configuration.server.bestAddressForWireGuard()?.ip,
-                let cn = configuration.server.bestAddressForWireGuard()?.cn {
+            if let ip = configuration.server.bestAddress()?.ip,
+                let cn = configuration.server.bestAddress()?.cn {
                 serverAddress = ip
                 serverCN = cn
             }
@@ -251,7 +251,7 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
             cfg.disconnectOnSleep = configuration.disconnectsOnSleep
 
             cfg.providerConfiguration = [PIAWireguardConfiguration.Keys.token: Client.providers.accountProvider.token,
-                                         PIAWireguardConfiguration.Keys.ping: configuration.server.bestPingAddress().first?.description,
+                                         PIAWireguardConfiguration.Keys.ping: configuration.server.bestAddress()?.description,
                                          PIAWireguardConfiguration.Keys.serial: configuration.server.serial,
                                          PIAWireguardConfiguration.Keys.cn: serverCN,
                                          PIAWireguardConfiguration.Keys.useIP: true]

@@ -30,10 +30,14 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
     static let shared = VPNDaemon()
 
     private(set) var hasEnabledUpdates: Bool
-    private var timer: Timer!
-    
+    private var fallbackTimer: Timer!
+    private var numberOfAttempts: Int
+    private var isReconnecting: Bool
+
     private init() {
         hasEnabledUpdates = false
+        isReconnecting = false
+        numberOfAttempts = 0
     }
     
     func start() {
@@ -62,30 +66,49 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         switch connection.status {
         case .connected:
             nextStatus = .connected
-            timer?.invalidate()
+            invalidateTimer()
+            reset()
 
         case .connecting, .reasserting:
-            nextStatus = .connecting
             
+            nextStatus = .connecting
+                        
             let previousStatus = accessedDatabase.transient.vpnStatus
-            if nextStatus != previousStatus {
-                timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
-                    let status = NEVPNManager.shared().connection.status
-                    if status == .invalid {
-                        log.debug("NEVPNManager connection is invalid. Reconnecting...")
-                        Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, { error in
-                            timer.invalidate()
+                
+            if fallbackTimer == nil {
+                
+                fallbackTimer = Timer.scheduledTimer(withTimeInterval: Client.configuration.vpnConnectivityRetryDelay, repeats: true) { timer in
+                    let address = Client.providers.serverProvider.targetServer.bestAddress()
+                    address?.markServerAsUnavailable()
+                    
+                    log.debug("NEVPNManager is still connecting. Reconnecting with a different server...")
+                    self.numberOfAttempts += 1
+                    if self.numberOfAttempts < Client.configuration.vpnConnectivityMaxAttempts {
+                        self.updateUIWithAttemptNumber(self.numberOfAttempts)
+                        self.isReconnecting = true
+                        Client.providers.vpnProvider.reconnect(after: 0, { _ in
+                            self.isReconnecting = false
+                        })
+                    } else {
+                        log.debug("MAX number of VPN reconnections. Disconnecting...")
+                        Client.providers.vpnProvider.disconnect({ error in
+                            Macros.postNotification(.PIAVPNDidFail)
+                            self.reset()
+                            self.invalidateTimer()
                         })
                     }
                 }
+                
             }
 
         case .disconnecting:
             nextStatus = .disconnecting
-            
         case .disconnected:
             nextStatus = .disconnected
-            
+            if !isReconnecting {
+                invalidateTimer()
+                reset()
+            }
         default:
             nextStatus = .disconnected
         }
@@ -94,7 +117,10 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         guard (nextStatus != previousStatus) else {
             return
         }
-        accessedDatabase.transient.vpnStatus = nextStatus
+        
+        if !isReconnecting {
+            accessedDatabase.transient.vpnStatus = nextStatus
+        }
         
         if #available(iOS 12.0, *) {
             if let error = connection.value(forKey: "_lastDisconnectError") {
@@ -105,6 +131,27 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             }
         }
         
+    }
+    
+    // MARK: Invalidate
+    private func invalidateTimer() {
+        fallbackTimer?.invalidate()
+        fallbackTimer = nil
+    }
+    
+    // MARK: Reset
+    
+    private func reset() {
+        self.isReconnecting = false
+        self.numberOfAttempts = 0
+        self.updateUIWithAttemptNumber(0)
+        Client.providers.serverProvider.targetServer.addresses().forEach({$0.reset()})
+    }
+    
+    // MARK: Update UI
+    
+    private func updateUIWithAttemptNumber(_ number: Int) {
+        NotificationCenter.default.post(name: .PIADaemonsConnectingVPNStatus, object: number)
     }
     
     // MARK: Notifications

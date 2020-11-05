@@ -239,7 +239,7 @@ public class PIATunnelProfile: NetworkExtensionProfile {
         var customCfg = configuration.customConfiguration
         if let piaCfg = customCfg as? OpenVPNTunnelProvider.Configuration {
             var builder = piaCfg.builder()
-            if let bestAddress = configuration.server.bestAddressForOpenVPNUDP()?.hostname { // XXX: UDP address = TCP address
+            if let bestAddress = configuration.server.openVPNAddressesForTCP?.first?.ip { // XXX: UDP address = TCP address
                 builder.resolvedAddresses = [bestAddress]
             }
             customCfg = builder.build()
