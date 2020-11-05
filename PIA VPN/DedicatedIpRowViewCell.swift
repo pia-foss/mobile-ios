@@ -45,11 +45,10 @@ class DedicatedIpRowViewCell: UITableViewCell, Restylable {
             labelRegion.text = server.name
         }
         
-        if let pingAddress = server.bestPingAddress().first {
-            labelIp.text = pingAddress.hostname
-            labelIp.accessibilityLabel = pingAddress.hostname
+        if let pingAddress = server.bestAddress() {
+            labelIp.text = pingAddress.ip
+            labelIp.accessibilityLabel = pingAddress.ip
         }
-
 
     }
     
