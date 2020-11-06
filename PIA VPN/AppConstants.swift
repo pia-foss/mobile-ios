@@ -135,8 +135,6 @@ struct AppConstants {
                     name: name,
                     country: country,
                     hostname: hostname,
-                    bestOpenVPNAddressForTCP: Server.Address(hostname: address, port: tcpPort),
-                    bestOpenVPNAddressForUDP: Server.Address(hostname: address, port: udpPort),
                     pingAddress: nil,
                     regionIdentifier: ""
                 ))

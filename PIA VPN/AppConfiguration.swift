@@ -126,7 +126,7 @@ struct AppConfiguration {
 
         static let successConnectionsUntilPrompt: Int = 3
         static let successConnectionsUntilPromptAgain: Int = 50
-        static let errorInConnectionsUntilPrompt: Int = 2
+        static let errorInConnectionsUntilPrompt: Int = 1
         static let timeIntervalUntilPromptAgain: Double = 2592000
 
     }

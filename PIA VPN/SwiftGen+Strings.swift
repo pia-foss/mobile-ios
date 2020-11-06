@@ -520,9 +520,9 @@ internal enum L10n {
       internal static let subtitle = L10n.tr("Localizable", "rating.enjoy.subtitle")
     }
     internal enum Error {
-      /// Oh no, what went wrong?
+      /// The connection couldn't be established
       internal static let question = L10n.tr("Localizable", "rating.error.question")
-      /// Let us know about it. We really want to fix it for you.
+      /// You can try selecting a different region or letting us know about it by opening a support ticket.
       internal static let subtitle = L10n.tr("Localizable", "rating.error.subtitle")
       internal enum Button {
         /// Send feedback

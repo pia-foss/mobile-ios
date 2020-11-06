@@ -428,6 +428,7 @@ enum Asset {
   static let itemMenu = ImageAsset(name: "item-menu")
   static let navLogoWhite = ImageAsset(name: "nav-logo-white")
   static let navLogo = ImageAsset(name: "nav-logo")
+  static let offlineServerIcon = ImageAsset(name: "offline-server-icon")
   static let shareIcon = ImageAsset(name: "share-icon")
 
   // swiftlint:disable trailing_comma
@@ -794,6 +795,7 @@ enum Asset {
     itemMenu,
     navLogoWhite,
     navLogo,
+    offlineServerIcon,
     shareIcon,
   ]
   // swiftlint:enable trailing_comma

@@ -23,6 +23,11 @@
 import UIKit
 import PIALibrary
 
+public enum RegionStatus {
+    case available
+    case offline
+}
+
 class RegionCell: UITableViewCell, Restylable {
     
     @IBOutlet private weak var imvFlag: UIImageView!
@@ -45,10 +50,10 @@ class RegionCell: UITableViewCell, Restylable {
     
     func fill(withServer server: Server, isSelected: Bool) {
         viewShouldRestyle()
-        favoriteButton.isHidden = server.isAutomatic
-        favoriteImageView.isHidden = server.isAutomatic
+        
         self.server = server
-
+        setupServerAvailability()
+        
         imvFlag.setImage(fromServer: server)
         
         if let _ = Client.providers.serverProvider.regionStaticData {
@@ -57,29 +62,9 @@ class RegionCell: UITableViewCell, Restylable {
             labelRegion.text = server.name
         }
         
-        var pingTimeString: String?
-        if let pingTime = server.pingTime {
-            pingTimeString = "\(pingTime)ms"
-
-            Theme.current.applyPingTime(labelPingTime, time: pingTime)
-        }
-        labelPingTime.text = pingTimeString
-
         iconSelected = isSelected
-        
-        prepareCellIcons()
-        
-        if let pingTimeString = pingTimeString {
-            accessibilityLabel = "\(server.name), \(pingTimeString)"
-        } else {
-            accessibilityLabel = server.name
-        }
+                
         accessibilityIdentifier = "uitests.regions.region_name"
-        
-        self.favoriteImageView.image = self.favoriteImageView.image?.withRenderingMode(.alwaysTemplate)
-
-        self.isFavorite = server.isFavorite
-        self.updateFavoriteImage()
         
         self.setSelected(false, animated: false)
     }
@@ -102,6 +87,52 @@ class RegionCell: UITableViewCell, Restylable {
         }
     }
     
+    private func setupServerAvailability() {
+        if server.offline == false {
+
+            imvFlag.alpha = 1.0
+            labelRegion.alpha = 1.0
+            leftIconImageView.alpha = 1.0
+            rightIconImageView.alpha = 1.0
+            
+            var pingTimeString: String?
+            if let pingTime = server.pingTime {
+                pingTimeString = "\(pingTime)ms"
+
+                Theme.current.applyPingTime(labelPingTime, time: pingTime)
+            }
+            labelPingTime.text = pingTimeString
+
+            if let pingTimeString = pingTimeString {
+                accessibilityLabel = "\(server.name), \(pingTimeString)"
+            } else {
+                accessibilityLabel = server.name
+            }
+            
+            self.favoriteImageView.image = self.favoriteImageView.image?.withRenderingMode(.alwaysTemplate)
+            self.isFavorite = server.isFavorite
+            self.updateFavoriteImage()
+            favoriteButton.isUserInteractionEnabled = true
+            self.isUserInteractionEnabled = true
+
+        } else {
+
+            imvFlag.alpha = 0.3
+            labelRegion.alpha = 0.3
+            leftIconImageView.alpha = 0.3
+            rightIconImageView.alpha = 0.3
+            labelPingTime.text = ""
+            labelPingTime.accessibilityLabel = ""
+            updateOfflineImage()
+            favoriteButton.isUserInteractionEnabled = false
+            self.isUserInteractionEnabled = false
+
+        }
+        
+        prepareCellIcons()
+
+    }
+
     // MARK: Restylable
 
     func viewShouldRestyle() {
@@ -149,4 +180,10 @@ class RegionCell: UITableViewCell, Restylable {
             L10n.Region.Accessibility.favorite :
             L10n.Region.Accessibility.unfavorite
     }
+    
+    private func updateOfflineImage() {
+        self.favoriteImageView.image = Asset.offlineServerIcon.image
+        self.favoriteButton.accessibilityLabel = L10n.Global.disabled
+    }
+
 }

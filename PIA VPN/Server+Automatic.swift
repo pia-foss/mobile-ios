@@ -29,8 +29,6 @@ extension Server {
         name: L10n.Global.automatic,
         country: "universal",
         hostname: "auto.bogus.domain",
-        bestOpenVPNAddressForTCP: nil,
-        bestOpenVPNAddressForUDP: nil,
         pingAddress: nil,
         regionIdentifier: "auto"
     )

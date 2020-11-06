@@ -28,6 +28,13 @@ import WidgetKit
 
 private let log = SwiftyBeaver.self
 
+enum DashboardVPNConnectingStatus: Int {
+    case none = 0
+    case pleaseWait
+    case takingTime
+    case stillLoading
+}
+
 class DashboardViewController: AutolayoutViewController {
     
     enum TileSize: CGFloat {
@@ -51,6 +58,7 @@ class DashboardViewController: AutolayoutViewController {
     private var isUnauthorized = false
 
     private var currentStatus: VPNStatus = .disconnected
+    private var connectingStatus: DashboardVPNConnectingStatus = .none
 
     private var tileModeStatus: TileStatus = .normal {
         didSet {
@@ -98,7 +106,8 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(openSettings), name: .OpenSettings, object: nil)
         nc.addObserver(self, selector: #selector(openSettingsAndWireGuard), name: .OpenSettingsAndActivateWireGuard, object: nil)
         nc.addObserver(self, selector: #selector(checkInternetConnection), name: .PIADaemonsDidUpdateConnectivity, object: nil)
-
+        nc.addObserver(self, selector: #selector(checkVPNConnectingStatus(notification:)), name: .PIADaemonsConnectingVPNStatus, object: nil)
+        
         self.viewContentHeight = self.viewContentHeightConstraint.constant
         
     }
@@ -304,6 +313,13 @@ class DashboardViewController: AutolayoutViewController {
         }
     }
     
+    @objc private func checkVPNConnectingStatus(notification: Notification) {
+        if let attempt = notification.object as? Int {
+            connectingStatus = DashboardVPNConnectingStatus(rawValue: attempt) ?? .stillLoading
+            updateCurrentStatus()
+        }
+    }
+    
     @objc private func openMenu(_ sender: Any?) {
         perform(segue: StoryboardSegue.Main.menuSegueIdentifier)
     }
@@ -363,6 +379,7 @@ class DashboardViewController: AutolayoutViewController {
     
     private func disconnectWithOneSecondDelay() {
         Client.providers.vpnProvider.disconnect({ [weak self] _ in
+            self?.updateCurrentStatus()
             self?.reloadUsageTileAfter(seconds: 1) //Reset the usage statistics after stop the VPN
         })
     }
@@ -522,6 +539,7 @@ class DashboardViewController: AutolayoutViewController {
             Client.providers.vpnProvider.disconnect { _ in
                 RatingManager.shared.logError()
                 self.isDisconnecting = false
+                self.connectingStatus = .none
             }
         }
     }
@@ -589,7 +607,8 @@ class DashboardViewController: AutolayoutViewController {
             AppPreferences.shared.todayWidgetVpnStatus = VPNStatus.connected.rawValue
             AppPreferences.shared.todayWidgetButtonTitle = L10n.Shortcuts.disconnect
             Macros.removeStickyNote()
-
+            connectingStatus = .none
+            
         case .disconnected:
             
             toggleConnection.isOn = false
@@ -597,7 +616,7 @@ class DashboardViewController: AutolayoutViewController {
 
             handleDisconnectedAndTrustedNetwork()
             toggleConnection.stopButtonAnimation()
-
+            
         case .connecting:
             Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
             toggleConnection.isOn = false
@@ -609,7 +628,14 @@ class DashboardViewController: AutolayoutViewController {
             titleLabelView.style(style: Theme.current.palette.appearance == .dark ?
                 TextStyle.textStyle6 :
                 TextStyle.textStyle7)
-            titleLabelView.text = L10n.Dashboard.Vpn.connecting.uppercased()
+            switch connectingStatus {
+            case .pleaseWait:
+                titleLabelView.text = "PLEASE WAIT..."
+            case .takingTime, .stillLoading:
+                titleLabelView.text = "STILL TRYING TO CONNECT..."
+            default:
+                titleLabelView.text = L10n.Dashboard.Vpn.connecting.uppercased()
+            }
             Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
                                                    withTintColor: nil,
                                                    andBarTintColors: nil)
