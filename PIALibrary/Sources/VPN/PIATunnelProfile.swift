@@ -234,12 +234,12 @@ public class PIATunnelProfile: NetworkExtensionProfile {
         if let piaCfg = customCfg as? OpenVPNTunnelProvider.Configuration {
             var builder = piaCfg.builder()
             if let protocols = builder.sessionConfiguration.endpointProtocols, protocols.contains(where: {$0.socketType == .tcp }) {
-                if let bestAddress = configuration.server.openVPNAddressesForTCP?.first?.ip {
+                if let bestAddress = configuration.server.bestAddressForOVPN(tcp: true)?.ip {
                     serverAddress = bestAddress
                     builder.resolvedAddresses = [bestAddress]
                 }
             } else {
-                if let bestAddress = configuration.server.openVPNAddressesForUDP?.first?.ip {
+                if let bestAddress = configuration.server.bestAddressForOVPN(tcp: false)?.ip {
                     serverAddress = bestAddress
                     builder.resolvedAddresses = [bestAddress]
                 }

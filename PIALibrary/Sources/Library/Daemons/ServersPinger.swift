@@ -61,7 +61,7 @@ class ServersPinger: DatabaseAccess {
 
             log.verbose("Pinging \(server.identifier)")
             
-            for address in server.bestPingAddress() {
+            for address in server.addresses() {
 
                 let pingTask = PingTask(identifier: server.identifier, server: server, address: address, stateUpdateHandler: { (task) in
                     

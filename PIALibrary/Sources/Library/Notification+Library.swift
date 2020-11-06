@@ -41,6 +41,8 @@ extension Notification.Name {
     /// - Seealso: `Client.Daemons`
     public static let PIADaemonsDidUpdateVPNStatus = Notification.Name("PIADaemonsDidUpdateVPNStatus")
     
+    public static let PIADaemonsConnectingVPNStatus = Notification.Name("PIADaemonsStillConnectingVPNStatus")
+
     // MARK: Servers
     
     /// The target server has been updated.

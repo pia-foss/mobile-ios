@@ -33,7 +33,7 @@ class PingTask {
     
     let identifier: String
     let server: Server
-    let address: Server.Address
+    let address: Server.ServerAddressIP
     let stateUpdateHandler: (PingTask) -> ()
     var state = PingTaskState.pending {
         didSet {
@@ -41,7 +41,7 @@ class PingTask {
         }
     }
 
-    init(identifier: String, server: Server, address: Server.Address, stateUpdateHandler: @escaping (PingTask) -> ()) {
+    init(identifier: String, server: Server, address: Server.ServerAddressIP, stateUpdateHandler: @escaping (PingTask) -> ()) {
         self.identifier = identifier
         self.server = server
         self.address = address
@@ -54,7 +54,7 @@ class PingTask {
         let persistence = Client.database.plain
         self.state = .pending
         
-        log.debug("Starting to Ping \(server.identifier) with address: \(address.hostname)")
+        log.debug("Starting to Ping \(server.identifier) with address: \(address.ip)")
         
         queue.async() { [weak self] in
 
@@ -62,7 +62,7 @@ class PingTask {
                 return
             }
             
-            let tcpAddress = Server.Address(hostname: address.hostname, port: 443)
+            let tcpAddress = Server.Address(hostname: address.ip, port: 443)
             response = server.ping(toAddress: tcpAddress, withProtocol: .TCP)
             DispatchQueue.main.async {
                 self?.parsePingResponse(response: response, withServer: server)

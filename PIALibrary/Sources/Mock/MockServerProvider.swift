@@ -40,8 +40,6 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
                 name: "France",
                 country: "fr",
                 hostname: "france.example.com",
-                bestOpenVPNAddressForTCP: nil,
-                bestOpenVPNAddressForUDP: nil,
                 pingAddress: nil,
                 responseTime: 0,
                 regionIdentifier: ""
@@ -50,8 +48,6 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
                 name: "Germany",
                 country: "de",
                 hostname: "germany.example.com",
-                bestOpenVPNAddressForTCP: nil,
-                bestOpenVPNAddressForUDP: nil,
                 pingAddress: nil,
                 responseTime: 0,
                 regionIdentifier: ""
@@ -60,8 +56,6 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
                 name: "Italy",
                 country: "it",
                 hostname: "italy.example.com",
-                bestOpenVPNAddressForTCP: nil,
-                bestOpenVPNAddressForUDP: nil,
                 pingAddress: nil,
                 responseTime: 0,
                 regionIdentifier: ""
@@ -70,10 +64,18 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
                 name: "US East",
                 country: "us",
                 hostname: "us-east.example.com",
-                bestOpenVPNAddressForTCP: nil,
-                bestOpenVPNAddressForUDP: nil,
                 pingAddress: nil,
                 responseTime: 0,
+                regionIdentifier: ""
+            ), Server(
+                serial: "8a55f03812851897f6e43b2ae22b1234",
+                name: "US East Offline",
+                country: "us",
+                hostname: "us-east.example.com",
+                pingAddress: nil,
+                responseTime: 0,
+                geo: true,
+                offline: true,
                 regionIdentifier: ""
             )
         ]
