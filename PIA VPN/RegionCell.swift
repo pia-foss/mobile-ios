@@ -63,7 +63,8 @@ class RegionCell: UITableViewCell, Restylable {
         }
         
         iconSelected = isSelected
-                
+        prepareCellIcons()
+
         accessibilityIdentifier = "uitests.regions.region_name"
         
         self.setSelected(false, animated: false)
@@ -129,8 +130,6 @@ class RegionCell: UITableViewCell, Restylable {
 
         }
         
-        prepareCellIcons()
-
     }
 
     // MARK: Restylable
