@@ -151,10 +151,10 @@ DEPENDENCIES:
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
   - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, branch `develop`)"
-  - "PIALibrary/Library (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `feature/dip_connection`)"
-  - "PIALibrary/Mock (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `feature/dip_connection`)"
-  - "PIALibrary/UI (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `feature/dip_connection`)"
-  - "PIALibrary/VPN (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `feature/dip_connection`)"
+  - "PIALibrary/Library (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `develop`)"
+  - "PIALibrary/Mock (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `develop`)"
+  - "PIALibrary/UI (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `develop`)"
+  - "PIALibrary/VPN (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `develop`)"
   - "PIARegions (from `git@codex.londontrustmedia.com:mobile/regions.git`)"
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
   - Popover
@@ -201,7 +201,7 @@ EXTERNAL SOURCES:
     :branch: develop
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
   PIALibrary:
-    :branch: feature/dip_connection
+    :branch: develop
     :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
   PIARegions:
     :git: "git@codex.londontrustmedia.com:mobile/regions.git"
@@ -216,7 +216,7 @@ CHECKOUT OPTIONS:
     :commit: f10de2b0ce3bdd5088c3a4eee2022ac949652099
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
   PIALibrary:
-    :commit: d24f51d68203e011627affa5b9ced98a2a41dcc8
+    :commit: 0a668e296328bd2ce6cc7efde70de0dd7e07f419
     :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
   PIARegions:
     :commit: c8abe4c5d61a32c8bdcfa728bd6e0fa1e0d1104a
@@ -264,6 +264,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: b0a1a2c3534cea9199a63e62cddd3c61bcd9450e
+PODFILE CHECKSUM: 8668c05ab5babaeb832af3fdd186fb3f908437d2
 
 COCOAPODS: 1.9.3
