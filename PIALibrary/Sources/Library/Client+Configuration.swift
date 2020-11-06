@@ -207,7 +207,7 @@ extension Client {
             enablesConnectivityUpdates = false
             connectivityVPNLag = 1000
             connectivityTimeout = 3000
-            connectivityRetryDelay = 5000
+            connectivityRetryDelay = 10000
             connectivityMaxAttempts = 3
 
             vpnConnectivityTimeout = 2.0
