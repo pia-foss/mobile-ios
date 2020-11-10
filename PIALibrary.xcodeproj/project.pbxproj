@@ -246,6 +246,10 @@
 		82C374F82514DE7D00E391EE /* EndpointManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C374F42514DC6D00E391EE /* EndpointManagerTests.swift */; };
 		82C374F92514DE8200E391EE /* server.json in Resources */ = {isa = PBXBuildFile; fileRef = 82C374F62514DC7200E391EE /* server.json */; };
 		82C374FB2514DEC700E391EE /* EndpointManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C374FA2514DEC700E391EE /* EndpointManager.swift */; };
+		82CAB808255A9ACB00BB08EF /* InAppMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB807255A9ACB00BB08EF /* InAppMessage.swift */; };
+		82CAB809255A9ACB00BB08EF /* InAppMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB807255A9ACB00BB08EF /* InAppMessage.swift */; };
+		82CAB86A255AE6F100BB08EF /* Client+Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB869255AE6F100BB08EF /* Client+Messages.swift */; };
+		82CAB86B255AE6F100BB08EF /* Client+Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB869255AE6F100BB08EF /* Client+Messages.swift */; };
 		82DDD5302539CFDC0049E79E /* DIPTokenKeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DDD52F2539CFDC0049E79E /* DIPTokenKeychainTests.swift */; };
 		82E20B1124F652ED0065EFE3 /* AccountInfo+Kotlin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E20B1024F652ED0065EFE3 /* AccountInfo+Kotlin.swift */; };
 		82E20B1224F652ED0065EFE3 /* AccountInfo+Kotlin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E20B1024F652ED0065EFE3 /* AccountInfo+Kotlin.swift */; };
@@ -568,6 +572,8 @@
 		82C374F42514DC6D00E391EE /* EndpointManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointManagerTests.swift; sourceTree = "<group>"; };
 		82C374F62514DC7200E391EE /* server.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = server.json; sourceTree = "<group>"; };
 		82C374FA2514DEC700E391EE /* EndpointManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointManager.swift; sourceTree = "<group>"; };
+		82CAB807255A9ACB00BB08EF /* InAppMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppMessage.swift; sourceTree = "<group>"; };
+		82CAB869255AE6F100BB08EF /* Client+Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+Messages.swift"; sourceTree = "<group>"; };
 		82DDD52F2539CFDC0049E79E /* DIPTokenKeychainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIPTokenKeychainTests.swift; sourceTree = "<group>"; };
 		82E20B1024F652ED0065EFE3 /* AccountInfo+Kotlin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountInfo+Kotlin.swift"; sourceTree = "<group>"; };
 		82E20B1524F6AA110065EFE3 /* RegionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionData.swift; sourceTree = "<group>"; };
@@ -865,6 +871,7 @@
 				DD6768E222FAB19D00B9FDD0 /* AppStoreInformation.swift */,
 				82E20B1524F6AA110065EFE3 /* RegionData.swift */,
 				829EB63E2535C432003E74DD /* DedicatedIP.swift */,
+				82CAB807255A9ACB00BB08EF /* InAppMessage.swift */,
 			);
 			path = WebServices;
 			sourceTree = "<group>";
@@ -1110,6 +1117,7 @@
 				0EBBC6DB1F9F64E700B8BD21 /* Client+Environment.swift */,
 				0ED2B5121F82444E00C9DB2B /* Client+Preferences.swift */,
 				0EF14E4A1FEAE6350007485A /* Client+Providers.swift */,
+				82CAB869255AE6F100BB08EF /* Client+Messages.swift */,
 				0EE78AEF1F818767002E4CDD /* ClientError.swift */,
 				0EE261DF1FEFD69F00E11955 /* Notification+Library.swift */,
 			);
@@ -1717,6 +1725,7 @@
 				0E2ADCEA1FE0843000BB170C /* Macros+Pinger.swift in Sources */,
 				0E7BC6F71F96B1120035C8B2 /* WebServices.swift in Sources */,
 				0E7BC6E71F96B1000035C8B2 /* ClientError.swift in Sources */,
+				82CAB86B255AE6F100BB08EF /* Client+Messages.swift in Sources */,
 				0E53A8541FE5D73F000C2A18 /* Client+Mock.swift in Sources */,
 				0E2ADCDE1FE072ED00BB170C /* Pinger.m in Sources */,
 				0EB9667F1FDF36490086ABC2 /* GlossParser.swift in Sources */,
@@ -1747,6 +1756,7 @@
 				DD8C3E652327EF6000BAD18E /* IKEv2EncryptionAlgorithm.swift in Sources */,
 				0EF14E4C1FEAE6350007485A /* Client+Providers.swift in Sources */,
 				0E7BC6E61F96B1000035C8B2 /* Client.swift in Sources */,
+				82CAB809255A9ACB00BB08EF /* InAppMessage.swift in Sources */,
 				0E392D7E1FE2E4C10002160D /* MemoryStore.swift in Sources */,
 				DD76292921ECDFF80092DF50 /* Usage.swift in Sources */,
 				0E2ADD381FE14F0000BB170C /* DefaultVPNProvider.swift in Sources */,
@@ -1819,6 +1829,7 @@
 				0EC849C91F82329F002480CA /* WebServices.swift in Sources */,
 				0E9D62711FDE83BD009A90CF /* GlossServer.swift in Sources */,
 				0EE14D1B1FF16B39008D9AC2 /* InvalidatingFlowLayout.swift in Sources */,
+				82CAB808255A9ACB00BB08EF /* InAppMessage.swift in Sources */,
 				82183D7F25011D200033023F /* MagicLinkLoginViewController.swift in Sources */,
 				0EE1068C1F8250A1009514E9 /* Plan.swift in Sources */,
 				DD36CB7E21CCFFFB00FC815A /* CAGradientLayer+Image.swift in Sources */,
@@ -1931,6 +1942,7 @@
 				DDFCFAB021E925B60081F235 /* Tileable.swift in Sources */,
 				0E4D4EA01FA4CA7A007DA6DA /* Validator.swift in Sources */,
 				0E0E5B111F8297D200022CD0 /* UserDefaultsStore.swift in Sources */,
+				82CAB86A255AE6F100BB08EF /* Client+Messages.swift in Sources */,
 				0E3D13D61F9E272B00434A48 /* GlossPayment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
