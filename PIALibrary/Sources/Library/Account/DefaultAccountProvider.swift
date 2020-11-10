@@ -328,6 +328,12 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
     }
     
+    func inAppMessages(_ callback: SuccessLibraryCallback?) {
+        webServices.messages { (error) in
+            callback?(nil)
+        }
+    }
+    
     #if os(iOS)
     func subscriptionInformation(_ callback: LibraryCallback<AppStoreInformation>?) {
         log.debug("Fetching available product keys...")

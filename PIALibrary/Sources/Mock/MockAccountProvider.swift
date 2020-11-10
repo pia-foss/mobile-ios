@@ -309,4 +309,8 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     public func featureFlags(_ callback: SuccessLibraryCallback?) {
         callback?(nil)
     }
+    
+    public func inAppMessages(_ callback: SuccessLibraryCallback?) {
+        callback?(nil)
+    }
 }
