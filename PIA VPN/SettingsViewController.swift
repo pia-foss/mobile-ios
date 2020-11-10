@@ -106,6 +106,8 @@ enum Setting: Int {
     
     case password
     
+    case environment
+    
     case resolveGoogleAdsDomain
 
     case cardsHistory
@@ -217,6 +219,7 @@ class SettingsViewController: AutolayoutViewController {
             .publicUsername,
             .username,
             .password,
+            .environment,
             .resolveGoogleAdsDomain
         ],
         .info: [
@@ -246,6 +249,8 @@ class SettingsViewController: AutolayoutViewController {
     private lazy var switchSmallPackets = UISwitch()
 
     private lazy var switchGeoServers = UISwitch()
+
+    private lazy var switchEnvironment = UISwitch()
 
     private lazy var imvSelectedOption = UIImageView(image: Asset.accessorySelected.image)
 
@@ -309,6 +314,7 @@ class SettingsViewController: AutolayoutViewController {
         switchSmallPackets.addTarget(self, action: #selector(toggleSmallPackets(_:)), for: .valueChanged)
         switchGeoServers.addTarget(self, action: #selector(toggleGEOServers(_:)), for: .valueChanged)
         switchEnableNMT.addTarget(self, action: #selector(toggleNMT(_:)), for: .valueChanged)
+        switchEnvironment.addTarget(self, action: #selector(toggleEnv(_:)), for: .valueChanged)
         redisplaySettings()
 
         NotificationCenter.default.addObserver(self,
@@ -418,6 +424,16 @@ class SettingsViewController: AutolayoutViewController {
         let preferences = Client.preferences.editable()
         preferences.nmtRulesEnabled = sender.isOn
         preferences.commit()
+        redisplaySettings()
+    }
+
+    @objc private func toggleEnv(_ sender: UISwitch) {
+        if (Client.environment == .production) {
+            Client.environment = .staging
+        } else {
+            Client.environment = .production
+        }
+        Client.resetWebServices()
         redisplaySettings()
     }
 
@@ -1262,6 +1278,11 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.textLabel?.text = "Password"
             cell.detailTextLabel?.text = Client.providers.accountProvider.currentUser?.credentials.password ?? ""
             cell.accessoryType = .none
+        case .environment:
+            cell.textLabel?.text = "Staging"
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchEnvironment
+            cell.selectionStyle = .none
         case .customServers:
             cell.textLabel?.text = "Custom Servers"
             cell.detailTextLabel?.text = nil
