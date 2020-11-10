@@ -126,11 +126,10 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
     @IBAction private func toggleEnvironment(_ sender: Any?) {
         if (Client.environment == .production) {
             Client.environment = .staging
-            Client.webServices = PIAWebServices()
         } else {
             Client.environment = .production
-            Client.webServices = PIAWebServices()
         }
+        Client.resetWebServices()
         refreshEnvironmentButton()
     }
     

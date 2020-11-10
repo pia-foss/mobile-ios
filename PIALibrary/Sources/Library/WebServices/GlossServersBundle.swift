@@ -251,31 +251,4 @@ class GlossServersBundle: GlossParser {
         
     }
     
-    func parseLegacyData(_ json: JSON) {
-        
-        let glossConfiguration: GlossServersBundle.Configuration? = "info" <~~ json
-        
-        var servers: [Server] = []
-        for (code, serverDict) in json {
-            guard let serverJSON = serverDict as? JSON else {
-                continue
-            }
-            guard let _ = serverJSON["country"] as? String else {
-                continue
-            }
-            guard let server = GlossServer(json: serverJSON)?.parsed else {
-                continue
-            }
-            server.isAutomatic = glossConfiguration?.parsed.automaticIdentifiers?.contains(code) ?? true
-            servers.append(server)
-        }
-        servers.sort { $0.name < $1.name }
-
-        parsed = ServersBundle(
-            servers: servers,
-            configuration: glossConfiguration?.parsed
-        )
-
-    }
-    
 }

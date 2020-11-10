@@ -88,6 +88,10 @@ public final class Client {
         ServersDaemon.shared.forceUpdates(completionBlock: completionBlock)
     }
     
+    public static func resetWebServices() {
+        Client.webServices = PIAWebServices()
+    }
+    
     /**
      Refresh the list of plan products
      */

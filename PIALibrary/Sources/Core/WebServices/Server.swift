@@ -203,7 +203,7 @@ public class Server: Hashable {
         self.dipToken = dipToken
         self.dipStatus = dipStatus
 
-        isAutomatic = true
+        isAutomatic = false
     }
     
     // MARK: Hashable
