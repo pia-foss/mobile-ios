@@ -184,6 +184,9 @@ class ActionCommand: Command {
     private func enableNMT(enable: Bool) {
         let preferences = Client.preferences.editable()
         preferences.nmtRulesEnabled = enable
+        if enable {
+            preferences.isPersistentConnection = enable
+        }
         preferences.commit()
     }
     

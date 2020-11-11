@@ -36,7 +36,7 @@ public class MessagesManager: NSObject {
         }
     }
     
-    func availableMessages() -> InAppMessage? {
+    func availableMessage() -> InAppMessage? {
         
         if let message = updateMessages() {
             return message
@@ -52,6 +52,7 @@ public class MessagesManager: NSObject {
     
     func dismiss(message id: String) {
         AppPreferences.shared.dismissedMessages.append(id)
+        apiMessage = nil
         //TODO check if the append saves in UserDefaults
     }
     
