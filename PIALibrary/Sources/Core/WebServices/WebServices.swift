@@ -74,5 +74,5 @@ protocol WebServices: class {
     
     // MARK: Messages
     
-    func messages(_ callback: SuccessLibraryCallback?)
+    func messages(_ callback: LibraryCallback<InAppMessage>?)
 }

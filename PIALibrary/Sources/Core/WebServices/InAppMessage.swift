@@ -28,18 +28,41 @@ public enum InAppMessageType {
     case link
 }
 
+public enum InAppMessageLevel {
+    case system
+    case api
+}
+
 public struct InAppMessage {
     
-    private let message: [String: String]
-    private let linkMessage: [String: String]
-    private let type: InAppMessageType
-    
-    private let settingAction: [String: Bool]?
-    private let settingView: String?
-    private let settingLink: String?
-    
-    init(withMessage messageInformation: MessagesInformation.Message) {
+    public let id: String
+    public let message: [String: String]
+    public let linkMessage: [String: String]
+    public let type: InAppMessageType
+    public let level: InAppMessageLevel
+
+    public let settingAction: [String: Bool]?
+    public let settingView: String?
+    public let settingLink: String?
         
+    init(withMessage message: [String: String], id: String, link: [String: String], type: InAppMessageType, level: InAppMessageLevel, actions: [String:Bool]?, view: String?, uri: String?) {
+        self.id = id
+        self.message = message
+        self.linkMessage = link
+        self.type = type
+        self.level = level
+        self.settingAction = actions
+        self.settingView = view
+        self.settingLink = uri
+    }
+    
+}
+
+extension InAppMessage {
+    
+    init(withMessage messageInformation: MessagesInformation.Message, andLevel level: InAppMessageLevel) {
+        
+        self.id = "messageInformation.id"
         self.message = messageInformation.message
         self.linkMessage = messageInformation.link.text
         
@@ -64,6 +87,8 @@ public struct InAppMessage {
             self.settingAction = nil
         }
         
+        self.level = level
+        
     }
-    
+
 }

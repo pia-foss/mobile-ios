@@ -310,7 +310,7 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
         callback?(nil)
     }
     
-    public func inAppMessages(_ callback: SuccessLibraryCallback?) {
-        callback?(nil)
+    public func inAppMessages(_ callback: LibraryCallback<InAppMessage>?) {
+        callback?(nil, nil)
     }
 }
