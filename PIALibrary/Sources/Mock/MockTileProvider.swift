@@ -26,6 +26,8 @@ public class MockTileProvider: TileProvider {
     
     public var visibleTiles: [AvailableTiles] = AvailableTiles.defaultTiles()
     
+    public var fixedTiles: [AvailableTiles] = AvailableTiles.fixedTiles()
+
     public var orderedTiles: [AvailableTiles] = AvailableTiles.defaultOrderedTiles()
 
     /// :nodoc:

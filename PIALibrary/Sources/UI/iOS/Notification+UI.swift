@@ -35,6 +35,9 @@ public extension Notification.Name {
     /// Reload the tiles.
     static let PIATilesDidChange = Notification.Name("PIATilesDidChange")
     
+    /// Reload the tiles with animation.
+    static let PIAUpdateFixedTiles = Notification.Name("PIAUpdateFixedTiles")
+
     /// Present Recover Signup page
     static let PIARecoverAccount = Notification.Name("PIARecoverAccount")
 

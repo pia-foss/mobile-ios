@@ -502,6 +502,29 @@ public class Theme {
         return attributed
     }
     
+    public func messageWithLinkText(withMessage message: String, link: String) -> NSAttributedString {
+        let plain = message.replacingOccurrences(
+            of: "$1",
+            with: link
+            ) as NSString
+        
+        let attributed = NSMutableAttributedString(string: plain as String)
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
+        paragraph.minimumLineHeight = 16
+        let fullRange = NSMakeRange(0, plain.length)
+        attributed.addAttribute(.font, value: UIFont.regularFontWith(size: 14), range: fullRange)
+        if Theme.current.palette.appearance == .dark {
+            attributed.addAttribute(.foregroundColor, value: UIColor.white, range: fullRange)
+        } else {
+            attributed.addAttribute(.foregroundColor, value: UIColor.piaGrey6, range: fullRange)
+        }
+        attributed.addAttribute(.paragraphStyle, value: paragraph, range: fullRange)
+        let range1 = plain.range(of: link)
+        attributed.addAttribute(.link, value: link, range: range1)
+        return attributed
+    }
+    
 
     // MARK: Composite
 

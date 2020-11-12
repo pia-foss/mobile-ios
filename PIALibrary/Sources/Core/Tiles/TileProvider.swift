@@ -28,6 +28,9 @@ public protocol TileProvider: class {
     /// the visible tiles in the dashboard.
     var visibleTiles: [AvailableTiles] { get set }
 
+    /// the fixed tiles in the dashboard.
+    var fixedTiles: [AvailableTiles] { get }
+
     /// the order of the tiles to appear in the dashboard.
     var orderedTiles: [AvailableTiles] { get set }
 

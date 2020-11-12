@@ -45,7 +45,7 @@ public struct InAppMessage {
     public let settingView: String?
     public let settingLink: String?
         
-    init(withMessage message: [String: String], id: String, link: [String: String], type: InAppMessageType, level: InAppMessageLevel, actions: [String:Bool]?, view: String?, uri: String?) {
+    public init(withMessage message: [String: String], id: String, link: [String: String], type: InAppMessageType, level: InAppMessageLevel, actions: [String:Bool]?, view: String?, uri: String?) {
         self.id = id
         self.message = message
         self.linkMessage = link
@@ -60,9 +60,9 @@ public struct InAppMessage {
 
 extension InAppMessage {
     
-    init(withMessage messageInformation: MessagesInformation.Message, andLevel level: InAppMessageLevel) {
+    init(withMessage messageInformation: MessageInformation, andLevel level: InAppMessageLevel) {
         
-        self.id = "messageInformation.id"
+        self.id = messageInformation.id
         self.message = messageInformation.message
         self.linkMessage = messageInformation.link.text
         

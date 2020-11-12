@@ -425,14 +425,14 @@ class PIAWebServices: WebServices, ConfigurationAccess {
 
         if let token = Client.providers.accountProvider.token {
 
-            self.accountAPI.messages(token: token, callback: { (messages, error) in
+            self.accountAPI.message(token: token, callback: { (message, error) in
                 
                 if let error = error {
                     callback?(nil, ClientError.malformedResponseData)
                     return
                 }
 
-                if let message = messages.first {
+                if let message = message {
                     let inAppMessage = InAppMessage(withMessage: message, andLevel: .api)
                     callback?(inAppMessage, nil)
                 } else {
