@@ -32,6 +32,7 @@ public class MessagesManager: NSObject {
         Client.providers.accountProvider.inAppMessages { (message, error) in
             if let message = message, !message.wasDismissed() {
                 self.apiMessage = message
+                Macros.postNotification(.PIAUpdateFixedTiles)
             }
         }
     }

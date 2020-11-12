@@ -96,6 +96,7 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         nc.addObserver(self, selector: #selector(updateCurrentStatus), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateTiles), name: .PIATilesDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(updateFixedTileWithAnimation), name: .PIAUpdateFixedTiles, object: nil)
         nc.addObserver(self, selector: #selector(vpnShouldReconnect), name: .PIAQuickSettingsHaveChanged, object: nil)
         nc.addObserver(self, selector: #selector(vpnShouldReconnect), name: .PIASettingsHaveChanged, object: nil)
         nc.addObserver(self, selector: #selector(presentKillSwitchAlert), name: .PIAPersistentConnectionTileHaveChanged, object: nil)
@@ -566,6 +567,12 @@ class DashboardViewController: AutolayoutViewController {
         collectionView.reloadData()
     }
     
+    @objc private func updateFixedTileWithAnimation() {
+        self.collectionView.performBatchUpdates({
+            self.collectionView.reloadSections(IndexSet(0...0))
+        }, completion: nil)
+    }
+    
     @objc private func reloadTheme() {
         AppPreferences.shared.reloadTheme()
     }
@@ -812,17 +819,23 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let tileIndex = tileModeStatus == .normal ?
-            Client.providers.tileProvider.visibleTiles[indexPath.row].rawValue :
-            Client.providers.tileProvider.orderedTiles[indexPath.row].rawValue
+        if indexPath.section == DashboardSections.tiles.rawValue {
+            let tileIndex = tileModeStatus == .normal ?
+                Client.providers.tileProvider.visibleTiles[indexPath.row].rawValue :
+                Client.providers.tileProvider.orderedTiles[indexPath.row].rawValue
 
-        var tileHeight = TileSize.standard.rawValue
-        if Cells.objectIdentifyBy(index: tileIndex).identifier == Cells.connectionTile.identifier {
-            tileHeight = TileSize.big.rawValue
+            var tileHeight = TileSize.standard.rawValue
+            if Cells.objectIdentifyBy(index: tileIndex).identifier == Cells.connectionTile.identifier {
+                tileHeight = TileSize.big.rawValue
+            }
+            
+            return CGSize(width: collectionView.frame.width,
+                          height: tileHeight)
+        } else {
+            return CGSize(width: collectionView.frame.width,
+                          height: TileSize.standard.rawValue)
         }
         
-        return CGSize(width: collectionView.frame.width,
-                      height: tileHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -844,11 +857,16 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let tileIndex = tileModeStatus == .normal ?
-            Client.providers.tileProvider.visibleTiles[indexPath.row].rawValue :
-            Client.providers.tileProvider.orderedTiles[indexPath.row].rawValue
+        var tileIndex = 0
+        var identifier = FixedCells.objectIdentifyBy(index: tileIndex).identifier
         
-        let identifier = Cells.objectIdentifyBy(index: tileIndex).identifier
+        if indexPath.section == DashboardSections.tiles.rawValue {
+            tileIndex = tileModeStatus == .normal ?
+                Client.providers.tileProvider.visibleTiles[indexPath.row].rawValue :
+                Client.providers.tileProvider.orderedTiles[indexPath.row].rawValue
+            identifier = Cells.objectIdentifyBy(index: tileIndex).identifier
+        }
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier,
                                                       for: indexPath)
         if let cell = cell as? EditableTileCell {
@@ -858,16 +876,22 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if !Client.providers.accountProvider.isLoggedIn {
             return 0
         }
-        return tileModeStatus == .normal ?
-            Client.providers.tileProvider.visibleTiles.count :
-            Client.providers.tileProvider.orderedTiles.count
+        if section == DashboardSections.fixedTiles.rawValue {
+            return tileModeStatus == .normal && MessagesManager.shared.availableMessage() != nil ?
+                Client.providers.tileProvider.fixedTiles.count :
+                0
+        } else {
+            return tileModeStatus == .normal ?
+                Client.providers.tileProvider.visibleTiles.count :
+                Client.providers.tileProvider.orderedTiles.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -902,14 +926,20 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
-        return self.tileModeStatus == .edit
+        if indexPath.section == DashboardSections.tiles.rawValue {
+            return self.tileModeStatus == .edit
+        } else {
+            return false
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        var orderedTiles = Client.providers.tileProvider.orderedTiles
-        let tile = orderedTiles.remove(at: sourceIndexPath.row)
-        orderedTiles.insert(tile, at: destinationIndexPath.row)
-        Client.providers.tileProvider.orderedTiles = orderedTiles
-        collectionView.reloadData()
+        if sourceIndexPath.section == DashboardSections.tiles.rawValue, destinationIndexPath.section == DashboardSections.tiles.rawValue {
+            var orderedTiles = Client.providers.tileProvider.orderedTiles
+            let tile = orderedTiles.remove(at: sourceIndexPath.row)
+            orderedTiles.insert(tile, at: destinationIndexPath.row)
+            Client.providers.tileProvider.orderedTiles = orderedTiles
+            collectionView.reloadData()
+        }
     }
 }

@@ -48,11 +48,11 @@ class LinkCommand: Command {
 class ViewCommand: Command {
     
     private enum AvailableViews: String {
-        case settings = "SettingsViewController"
-        case regions = "RegionsViewController"
-        case account = "AccountViewController"
-        case dip = "DedicatedIpViewController"
-        case about = "AboutViewController"
+        case settings = "settings"
+        case regions = "regions"
+        case account = "account"
+        case dip = "dip"
+        case about = "about"
     }
 
     private var payload: String
@@ -86,7 +86,6 @@ class ViewCommand: Command {
     }
 
     func execute() {
-        print("SimpleCommand: See, I can do simple things like printing (" + payload + ")")
     }
 }
 

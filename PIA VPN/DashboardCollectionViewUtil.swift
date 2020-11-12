@@ -23,6 +23,29 @@
 
 import UIKit
 
+enum DashboardSections: Int {
+    case fixedTiles = 0
+    case tiles
+}
+
+enum FixedCells: Int, EnumsBuilder {
+    
+    case messages = 0
+    
+    var identifier: String {
+        switch self {
+        case .messages: return "MessagesTileCell"
+        }
+    }
+    
+    var className: String {
+        switch self {
+        case .messages: return "MessagesTileCollectionViewCell"
+        }
+    }
+
+}
+
 enum Cells: Int, EnumsBuilder {
     
     case region = 0
@@ -64,6 +87,9 @@ enum Cells: Int, EnumsBuilder {
 class DashboardCollectionViewUtil: NSObject {
 
     func registerCellsFor(_ collectionView: UICollectionView) {
+        collectionView.register(UINib(nibName: FixedCells.messages.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: FixedCells.messages.identifier)
         collectionView.register(UINib(nibName: Cells.ipTile.className,
                                       bundle: nil),
                                 forCellWithReuseIdentifier: Cells.ipTile.identifier)
