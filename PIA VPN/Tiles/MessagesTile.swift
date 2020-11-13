@@ -80,7 +80,7 @@ class MessagesTile: UIView, Tileable  {
     }
     
     @objc private func viewShouldRestyle() {
-        Theme.current.applyPrincipalBackground(self)
+        Theme.current.applyMessagesBackground(self)
         if let message = MessagesManager.shared.availableMessage() {
             self.messageTextView.attributedText = Theme.current.messageWithLinkText(
                 withMessage: message.localisedMessage(),
@@ -88,8 +88,8 @@ class MessagesTile: UIView, Tileable  {
             )
             self.messageTextView.textAlignment = .left
             if message.level == .api {
-                self.alertIcon.tintColor = Theme.current.palette.emphasis
-                Theme.current.applyMessageLinkAttributes(messageTextView, withColor: Theme.current.palette.emphasis)
+                self.alertIcon.tintColor = UIColor.piaGreen
+                Theme.current.applyMessageLinkAttributes(messageTextView, withColor: UIColor.piaGreen)
             } else {
                 self.alertIcon.tintColor = UIColor.piaOrange
                 Theme.current.applyMessageLinkAttributes(messageTextView, withColor: UIColor.piaOrange)
