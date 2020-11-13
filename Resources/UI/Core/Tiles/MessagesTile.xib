@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MessagesTile" customModule="PIA_VPN" customModuleProvider="target">
+            <connections>
+                <outlet property="alertIcon" destination="hzC-Bb-HIP" id="KTG-Hr-sqa"/>
+                <outlet property="messageTextView" destination="qQL-eN-nvJ" id="0BN-JK-TGd"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="scQ-h9-FrY">
+            <rect key="frame" x="0.0" y="0.0" width="365" height="89"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-alert" translatesAutoresizingMaskIntoConstraints="NO" id="hzC-Bb-HIP">
+                    <rect key="frame" x="25" y="13" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="Bzt-Sz-PnY"/>
+                        <constraint firstAttribute="width" constant="25" id="c13-XC-9Sj"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Urx-86-Cgu">
+                    <rect key="frame" x="325" y="0.0" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="IgR-5R-aPA"/>
+                        <constraint firstAttribute="height" constant="40" id="Q52-9d-xaS"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                    <connections>
+                        <action selector="dismiss:" destination="-1" eventType="touchUpInside" id="TqM-um-8Ci"/>
+                    </connections>
+                </button>
+                <textView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQL-eN-nvJ">
+                    <rect key="frame" x="60" y="9" width="265" height="33"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="textColor" systemColor="labelColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-close" translatesAutoresizingMaskIntoConstraints="NO" id="Ase-29-RzS">
+                    <rect key="frame" x="340" y="15" width="10" height="10"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="EVk-5Y-fR7"/>
+                        <constraint firstAttribute="width" constant="10" id="gAV-pt-hce"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="2sr-nA-SXq"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Urx-86-Cgu" firstAttribute="top" secondItem="scQ-h9-FrY" secondAttribute="top" id="2Ue-WJ-GAe"/>
+                <constraint firstItem="hzC-Bb-HIP" firstAttribute="top" secondItem="scQ-h9-FrY" secondAttribute="top" constant="13" id="390-IU-uO8"/>
+                <constraint firstItem="qQL-eN-nvJ" firstAttribute="top" secondItem="hzC-Bb-HIP" secondAttribute="top" constant="-4" id="4vu-KD-LFe"/>
+                <constraint firstItem="Urx-86-Cgu" firstAttribute="leading" secondItem="qQL-eN-nvJ" secondAttribute="trailing" id="75v-0b-r4l"/>
+                <constraint firstItem="hzC-Bb-HIP" firstAttribute="leading" secondItem="scQ-h9-FrY" secondAttribute="leading" constant="25" id="7Su-PY-JLq"/>
+                <constraint firstItem="Ase-29-RzS" firstAttribute="top" secondItem="scQ-h9-FrY" secondAttribute="top" constant="15" id="NSC-xB-U0d"/>
+                <constraint firstAttribute="trailing" secondItem="Urx-86-Cgu" secondAttribute="trailing" id="UvY-bd-Mhk"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="qQL-eN-nvJ" secondAttribute="bottom" constant="10" id="XR7-8q-GyG"/>
+                <constraint firstItem="qQL-eN-nvJ" firstAttribute="leading" secondItem="hzC-Bb-HIP" secondAttribute="trailing" constant="10" id="c9O-jY-5gI"/>
+                <constraint firstAttribute="trailing" secondItem="Ase-29-RzS" secondAttribute="trailing" constant="15" id="xgd-GR-PQj"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="264.49275362318843" y="-655.24553571428567"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon-alert" width="24" height="24"/>
+        <image name="icon-close" width="14" height="14"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

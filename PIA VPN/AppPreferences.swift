@@ -81,6 +81,9 @@ class AppPreferences {
         // GEO servers
         static let showGeoServers = "ShowGeoServers"
 
+        // Dismissed messages
+        static let dismissedMessages = "DismissedMessages"
+
     }
 
     static let shared = AppPreferences()
@@ -381,6 +384,16 @@ class AppPreferences {
             defaults.set(newValue, forKey: Entries.appVersion)
         }
     }
+    
+    var dismissedMessages: [String]{
+        get {
+            return defaults.array(forKey: Entries.dismissedMessages) as? [String] ?? []
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.dismissedMessages)
+        }
+    }
+
 
     private init() {
         guard let defaults = UserDefaults(suiteName: AppConstants.appGroup) else {
@@ -410,7 +423,8 @@ class AppPreferences {
             Entries.canAskAgainForReview: false,
             Entries.successConnections: 0,
             Entries.failureConnections: 0,
-            Entries.showGeoServers: true
+            Entries.showGeoServers: true,
+            Entries.dismissedMessages: []
         ])
     }
     
@@ -591,6 +605,7 @@ class AppPreferences {
         Client.resetServers(completionBlock: {_ in })
         failureConnections = 0
         showGeoServers = true
+        dismissedMessages = []
     }
     
 //    + (void)eraseForTesting;

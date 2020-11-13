@@ -150,7 +150,7 @@ DEPENDENCIES:
   - Fabric
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
-  - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, branch `develop`)"
+  - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, commit `b4d1335`)"
   - PIALibrary/Library (from `/Users/jose/Projects/PIA/client-library-apple`)
   - PIALibrary/Mock (from `/Users/jose/Projects/PIA/client-library-apple`)
   - PIALibrary/UI (from `/Users/jose/Projects/PIA/client-library-apple`)
@@ -198,7 +198,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIAAccountModule:
-    :branch: develop
+    :commit: b4d1335
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
   PIALibrary:
     :path: "/Users/jose/Projects/PIA/client-library-apple"
@@ -212,7 +212,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PIAAccountModule:
-    :commit: f10de2b0ce3bdd5088c3a4eee2022ac949652099
+    :commit: b4d1335
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
   PIARegions:
     :commit: c8abe4c5d61a32c8bdcfa728bd6e0fa1e0d1104a
@@ -260,6 +260,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 525ca4f200455e481517deefaf9b4782503c9204
+PODFILE CHECKSUM: e3188f1cb1fc369bbc44e43785b9c35b8952574b
 
 COCOAPODS: 1.9.3

@@ -125,6 +125,7 @@ class Bootstrapper {
         ]
         
         Client.providers.accountProvider.featureFlags(nil)
+        MessagesManager.shared.refreshMessages()
         
         Client.providers.serverProvider.downloadRegionStaticData { (error) in
             
