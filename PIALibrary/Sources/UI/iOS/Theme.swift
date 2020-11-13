@@ -275,6 +275,11 @@ public class Theme {
         view.backgroundColor = palette.accent1
     }
     
+    /// :nodoc:
+    public func applyMessagesBackground(_ view: UIView) {
+        view.backgroundColor = palette.appearance == .dark ? UIColor.piaGrey8 : UIColor.piaGrey2
+    }
+    
     // MARK: Table View Utils
     
     /// :nodoc:
@@ -513,7 +518,7 @@ public class Theme {
         paragraph.alignment = .center
         paragraph.minimumLineHeight = 16
         let fullRange = NSMakeRange(0, plain.length)
-        attributed.addAttribute(.font, value: UIFont.regularFontWith(size: 14), range: fullRange)
+        attributed.addAttribute(.font, value: UIFont.mediumFontWith(size: 14), range: fullRange)
         if Theme.current.palette.appearance == .dark {
             attributed.addAttribute(.foregroundColor, value: UIColor.white, range: fullRange)
         } else {
@@ -606,6 +611,10 @@ public class Theme {
     /// :nodoc:
     public func applyLinkAttributes(_ textView: UITextView) {
         textView.tintColor = palette.lineColor
+    }
+    
+    public func applyMessageLinkAttributes(_ textView: UITextView, withColor color: UIColor) {
+        textView.tintColor = color
     }
     
     /// :nodoc:
