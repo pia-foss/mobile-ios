@@ -676,10 +676,14 @@ class DashboardViewController: AutolayoutViewController {
         AppPreferences.shared.todayWidgetVpnProtocol = Client.preferences.vpnType.vpnProtocol
         AppPreferences.shared.todayWidgetVpnSocket = Client.preferences.vpnType.port
         AppPreferences.shared.todayWidgetVpnPort = Client.preferences.vpnType.socket
+        reloadWidget()
+        
+    }
+
+    private func reloadWidget() {
         if #available(iOS 14.0, *) {
             WidgetCenter.shared.reloadTimelines(ofKind: "PIAWidget")
-        } 
-
+        }
     }
     
     private func handleDisconnectedAndTrustedNetwork() {
@@ -711,17 +715,24 @@ class DashboardViewController: AutolayoutViewController {
             if let ssid = PIAHotspotHelper().currentWiFiNetwork() {
                 if Client.preferences.nmtGenericRules[NMTType.protectedWiFi.rawValue] == NMTRules.alwaysDisconnect.rawValue ||
                     (Client.preferences.nmtTrustedNetworkRules[ssid] == NMTRules.alwaysDisconnect.rawValue){
+                    setWidgetTrustedNetworkStatus(isTrustedNetwork: true)
                     return true
                 }
             } else {
                 if Client.preferences.nmtGenericRules[NMTType.cellular.rawValue] == NMTRules.alwaysDisconnect.rawValue {
+                    setWidgetTrustedNetworkStatus(isTrustedNetwork: true)
                     return true
                 }
             }
         }
+        setWidgetTrustedNetworkStatus(isTrustedNetwork: false)
         return false
     }
-
+    
+    private func setWidgetTrustedNetworkStatus(isTrustedNetwork: Bool) {
+        AppPreferences.shared.todayWidgetTrustedNetwork = isTrustedNetwork
+        reloadWidget()
+    }
 
     // MARK: Restylable
 

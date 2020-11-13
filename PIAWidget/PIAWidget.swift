@@ -82,17 +82,34 @@ struct PIAWidgetEntryView : View {
 
             HStack {
 
-                Circle()
-                    .strokeBorder(Color("BorderColor"),lineWidth: 6)
-                   .background(Circle()
-                                .strokeBorder(Color(WidgetUtils.isVPNConnected ? "AccentColor" : "RedColor"),lineWidth: 8)
-                                .background(Image("vpn-button")
-                                                .resizable()
-                                                .renderingMode(.template).foregroundColor(Color(WidgetUtils.isVPNConnected ? "AccentColor" : "RedColor"))
-                                                .aspectRatio(contentMode: .fit)
-                                                .frame(width: 40, height: 40, alignment: .center)
-                                                .padding(0)))
-                    .padding(20)
+                if WidgetUtils.isTrustedNetwork {
+                    
+                    Circle()
+                        .strokeBorder(Color("BorderColor"),lineWidth: 6)
+                       .background(Circle()
+                                    .strokeBorder(Color("TrustedNetworkColor"),lineWidth: 8)
+                                    .background(Image("vpn-button")
+                                                    .resizable()
+                                                    .renderingMode(.template).foregroundColor(Color("TrustedNetworkColor"))
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(width: 40, height: 40, alignment: .center)
+                                                    .padding(0)))
+                        .padding(20)
+
+                } else {
+                    Circle()
+                        .strokeBorder(Color("BorderColor"),lineWidth: 6)
+                       .background(Circle()
+                                    .strokeBorder(Color(WidgetUtils.isVPNConnected ? "AccentColor" : "RedColor"),lineWidth: 8)
+                                    .background(Image("vpn-button")
+                                                    .resizable()
+                                                    .renderingMode(.template).foregroundColor(Color(WidgetUtils.isVPNConnected ? "AccentColor" : "RedColor"))
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(width: 40, height: 40, alignment: .center)
+                                                    .padding(0)))
+                        .padding(20)
+
+                }
                 
                 if widgetFamily == .systemMedium {
                     VStack {

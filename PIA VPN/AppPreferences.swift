@@ -65,7 +65,8 @@ class AppPreferences {
         static let todayWidgetVpnProtocol = "vpn.widget.protocol"
         static let todayWidgetVpnPort = "vpn.widget.port"
         static let todayWidgetVpnSocket = "vpn.widget.socket"
-        
+        static let todayWidgetTrustedNetwork = "vpn.widget.trusted.network"
+
         // Quick Settings options
         static let quickSettingThemeVisible = "quickSettingThemeVisible"
         static let quickSettingKillswitchVisible = "quickSettingKillswitchVisible"
@@ -252,6 +253,15 @@ class AppPreferences {
         }
     }
 
+    var todayWidgetTrustedNetwork: Bool {
+        get {
+            return defaults.bool(forKey: Entries.todayWidgetTrustedNetwork) ?? false
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.todayWidgetTrustedNetwork)
+        }
+    }
+
     var useSmallPackets: Bool {
         get {
             return defaults.bool(forKey: Entries.useSmallPackets)
@@ -415,6 +425,7 @@ class AppPreferences {
             Entries.todayWidgetVpnProtocol: IKEv2Profile.vpnType,
             Entries.todayWidgetVpnPort: "500",
             Entries.todayWidgetVpnSocket: "UDP",
+            Entries.todayWidgetTrustedNetwork: false,
             Entries.quickSettingThemeVisible: true,
             Entries.quickSettingKillswitchVisible: true,
             Entries.quickSettingNetworkToolVisible: true,
@@ -575,6 +586,7 @@ class AppPreferences {
         todayWidgetVpnProtocol = IKEv2Profile.vpnType
         todayWidgetVpnPort = "500"
         todayWidgetVpnSocket = "UDP"
+        todayWidgetTrustedNetwork = false
         Client.resetServers(completionBlock: {_ in })
         failureConnections = 0
         showGeoServers = true
@@ -595,6 +607,7 @@ class AppPreferences {
         todayWidgetVpnProtocol = IKEv2Profile.vpnType
         todayWidgetVpnPort = "500"
         todayWidgetVpnSocket = "UDP"
+        todayWidgetTrustedNetwork = false
         quickSettingThemeVisible = true
         quickSettingKillswitchVisible = true
         quickSettingNetworkToolVisible = true

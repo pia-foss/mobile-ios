@@ -38,6 +38,13 @@ public class WidgetUtils {
         return connected
     }
     
+    static var isTrustedNetwork: Bool {
+        if let sharedDefaults = UserDefaults(suiteName: appGroup) {
+            return sharedDefaults.bool(forKey: "vpn.widget.trusted.network")
+        }
+        return false
+    }
+    
     static var vpnProtocol: String {
         if let sharedDefaults = UserDefaults(suiteName: appGroup),
             let value = sharedDefaults.string(forKey: "vpn.widget.protocol") {
