@@ -24,6 +24,8 @@ import Foundation
 
 class MockWebServices: WebServices {
     
+    var messageType: InAppMessageType = .view
+    
     var credentials: (() -> Credentials)?
 
     var accountInfo: (() -> AccountInfo)?
@@ -133,6 +135,13 @@ class MockWebServices: WebServices {
     
     func featureFlags(_ callback: LibraryCallback<[String]>?) {
         callback?(["mock-test"], nil)
+    }
+
+    func messages(_ callback: LibraryCallback<InAppMessage>?) {
+        
+        let testLink = InAppMessage(withMessage: ["en" : "This is a message"], id: "1", link: ["en" : "message"], type: .link, level: .api, actions: nil, view: nil, uri: "https://www.privateinternetaccess.com")
+        callback?(testLink, nil)
+
     }
     
 }

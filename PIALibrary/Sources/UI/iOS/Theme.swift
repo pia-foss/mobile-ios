@@ -275,6 +275,11 @@ public class Theme {
         view.backgroundColor = palette.accent1
     }
     
+    /// :nodoc:
+    public func applyMessagesBackground(_ view: UIView) {
+        view.backgroundColor = palette.appearance == .dark ? UIColor.piaGrey8 : UIColor.piaGrey2
+    }
+    
     // MARK: Table View Utils
     
     /// :nodoc:
@@ -502,6 +507,29 @@ public class Theme {
         return attributed
     }
     
+    public func messageWithLinkText(withMessage message: String, link: String) -> NSAttributedString {
+        let plain = message.replacingOccurrences(
+            of: "$1",
+            with: link
+            ) as NSString
+        
+        let attributed = NSMutableAttributedString(string: plain as String)
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
+        paragraph.minimumLineHeight = 16
+        let fullRange = NSMakeRange(0, plain.length)
+        attributed.addAttribute(.font, value: UIFont.mediumFontWith(size: 14), range: fullRange)
+        if Theme.current.palette.appearance == .dark {
+            attributed.addAttribute(.foregroundColor, value: UIColor.white, range: fullRange)
+        } else {
+            attributed.addAttribute(.foregroundColor, value: UIColor.piaGrey6, range: fullRange)
+        }
+        attributed.addAttribute(.paragraphStyle, value: paragraph, range: fullRange)
+        let range1 = plain.range(of: link)
+        attributed.addAttribute(.link, value: link, range: range1)
+        return attributed
+    }
+    
 
     // MARK: Composite
 
@@ -583,6 +611,10 @@ public class Theme {
     /// :nodoc:
     public func applyLinkAttributes(_ textView: UITextView) {
         textView.tintColor = palette.lineColor
+    }
+    
+    public func applyMessageLinkAttributes(_ textView: UITextView, withColor color: UIColor) {
+        textView.tintColor = color
     }
     
     /// :nodoc:

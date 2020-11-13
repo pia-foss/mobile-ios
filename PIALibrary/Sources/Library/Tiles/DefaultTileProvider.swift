@@ -44,6 +44,13 @@ class DefaultTileProvider: TileProvider, DatabaseAccess {
     }
     
     // MARK: TileProvider
+    var fixedTiles: [AvailableTiles] {
+        get {
+            return AvailableTiles.fixedTiles()
+        }
+    }
+    
+    // MARK: TileProvider
     var orderedTiles: [AvailableTiles] {
         get {
             return accessedDatabase.plain.orderedTiles

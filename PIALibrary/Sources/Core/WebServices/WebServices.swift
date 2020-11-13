@@ -72,4 +72,7 @@ protocol WebServices: class {
 
     func featureFlags(_ callback: LibraryCallback<[String]>?)
     
+    // MARK: Messages
+    
+    func messages(_ callback: LibraryCallback<InAppMessage>?)
 }

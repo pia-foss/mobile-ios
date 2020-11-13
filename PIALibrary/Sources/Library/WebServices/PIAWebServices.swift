@@ -419,6 +419,35 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         }
         
     }
+    
+    // MARK: Messages
+    func messages(_ callback: LibraryCallback<InAppMessage>?) {
+
+        if let token = Client.providers.accountProvider.token {
+
+            self.accountAPI.message(token: token, callback: { (message, error) in
+                
+                if let error = error {
+                    callback?(nil, ClientError.malformedResponseData)
+                    return
+                }
+
+                if let message = message {
+                    let inAppMessage = InAppMessage(withMessage: message, andLevel: .api)
+                    callback?(inAppMessage, nil)
+                } else {
+                    callback?(nil, nil)
+                }
+                
+
+            })
+
+        } else {
+            callback?(nil, ClientError.unauthorized)
+        }
+        
+    }
+
         
     // MARK: Helpers
 
