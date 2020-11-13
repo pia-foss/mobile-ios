@@ -58,18 +58,7 @@ class MessagesTile: UIView, Tileable  {
 
         viewShouldRestyle()
         if let message = MessagesManager.shared.availableMessage() {
-            self.messageTextView.text = message.localisedMessage()
-            self.messageTextView.attributedText = Theme.current.messageWithLinkText(
-                withMessage: message.localisedMessage(),
-                link: message.localisedLink()
-            )
-            self.messageTextView.textAlignment = .left
-            self.alertIcon.image = Asset.iconWarning.image.withRenderingMode(.alwaysTemplate)
-            if message.level == .api {
-                self.alertIcon.tintColor = Theme.current.palette.lineColor
-            } else {
-                self.alertIcon.tintColor = UIColor.piaOrange
-            }
+            self.alertIcon.image = Asset.iconAlert.image.withRenderingMode(.alwaysTemplate)
         }
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(openLink))
@@ -91,8 +80,21 @@ class MessagesTile: UIView, Tileable  {
     }
     
     @objc private func viewShouldRestyle() {
-        Theme.current.applyLinkAttributes(messageTextView)
         Theme.current.applyPrincipalBackground(self)
+        if let message = MessagesManager.shared.availableMessage() {
+            self.messageTextView.attributedText = Theme.current.messageWithLinkText(
+                withMessage: message.localisedMessage(),
+                link: "killswitch"
+            )
+            self.messageTextView.textAlignment = .left
+            if message.level == .api {
+                self.alertIcon.tintColor = Theme.current.palette.emphasis
+                Theme.current.applyMessageLinkAttributes(messageTextView, withColor: Theme.current.palette.emphasis)
+            } else {
+                self.alertIcon.tintColor = UIColor.piaOrange
+                Theme.current.applyMessageLinkAttributes(messageTextView, withColor: UIColor.piaOrange)
+            }
+        }
     }
 
     private func statusUpdated() {

@@ -406,6 +406,7 @@ enum Asset {
   static let iconAbout = ImageAsset(name: "icon-about")
   static let iconAccount = ImageAsset(name: "icon-account")
   static let iconAdd = ImageAsset(name: "icon-add")
+  static let iconAlert = ImageAsset(name: "icon-alert")
   static let iconClose = ImageAsset(name: "icon-close")
   static let iconContact = ImageAsset(name: "icon-contact")
   static let iconDip = ImageAsset(name: "icon-dip")
@@ -773,6 +774,7 @@ enum Asset {
     iconAbout,
     iconAccount,
     iconAdd,
+    iconAlert,
     iconClose,
     iconContact,
     iconDip,
