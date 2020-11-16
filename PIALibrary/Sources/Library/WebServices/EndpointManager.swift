@@ -38,7 +38,7 @@ public struct PinningEndpoint {
 public class EndpointManager {
     
     private let internalUrl = "10.0.0.1"
-    private let proxy = "piaproxy.net"
+    private let proxy = "www.piaproxy.net"
     private let pia = "www.privateinternetaccess.com"
     private let region = "serverlist.piaservers.net"
 

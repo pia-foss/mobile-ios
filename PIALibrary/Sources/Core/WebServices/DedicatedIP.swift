@@ -20,9 +20,25 @@
 //
 
 import Foundation
+import PIAAccount
 
 public enum DedicatedIPStatus {
+    
     case active
     case expired
     case invalid
+    case error
+    
+    init(fromAPIStatus dipStatus: DedicatedIPInformationResponse.Status) {
+        switch dipStatus {
+        case .invalid:
+            self = .invalid
+        case .expired:
+            self = .expired
+        case .error:
+            self = .error
+        default:
+            self = .active
+        }
+    }
 }

@@ -23,6 +23,7 @@ import Foundation
 import PIAAccount
 
 public enum InAppMessageType {
+    case none
     case action
     case view
     case link
@@ -37,7 +38,7 @@ public struct InAppMessage {
     
     public let id: String
     public let message: [String: String]
-    public let linkMessage: [String: String]
+    public let linkMessage: [String: String]?
     public let type: InAppMessageType
     public let level: InAppMessageLevel
 
@@ -62,29 +63,38 @@ extension InAppMessage {
     
     init(withMessage messageInformation: MessageInformation, andLevel level: InAppMessageLevel) {
         
-        self.id = messageInformation.id
+        self.id = "\(messageInformation.id)"
         self.message = messageInformation.message
-        self.linkMessage = messageInformation.link.text
         
-        if !messageInformation.link.action.settings.isEmpty {
-            self.type = .action
-            var actions = [String: Bool]()
-            for setting in messageInformation.link.action.settings {
-                actions[setting.key] = setting.value.boolValue
+        if let link = messageInformation.link {
+            self.linkMessage = link.text
+            
+            if !link.action.settings.isEmpty {
+                self.type = .action
+                var actions = [String: Bool]()
+                for setting in link.action.settings {
+                    actions[setting.key] = setting.value.boolValue
+                }
+                self.settingAction = actions
+                self.settingLink = nil
+                self.settingView = nil
+            } else if !link.action.uri.isEmpty {
+                self.type = .link
+                self.settingLink = link.action.uri
+                self.settingAction = nil
+                self.settingView = nil
+            } else {
+                self.type = .view
+                self.settingView = link.action.view
+                self.settingLink = nil
+                self.settingAction = nil
             }
-            self.settingAction = actions
-            self.settingLink = nil
-            self.settingView = nil
-        } else if !messageInformation.link.action.uri.isEmpty {
-            self.type = .link
-            self.settingLink = messageInformation.link.action.uri
-            self.settingAction = nil
-            self.settingView = nil
         } else {
-            self.type = .view
-            self.settingView = messageInformation.link.action.view
+            self.type = .none
+            self.linkMessage = nil
             self.settingLink = nil
             self.settingAction = nil
+            self.settingView = nil
         }
         
         self.level = level

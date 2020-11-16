@@ -198,8 +198,9 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
         }
         webServices.activateDIPToken(tokens: [token]) { (servers, error) in
             if let servers = servers,
-               let first = servers.first {
-               if !self.currentServers.contains(where: {$0.dipToken == first.dipToken}) {
+               let first = servers.first,
+               let status = first.dipStatus {
+                if !self.currentServers.contains(where: {$0.dipToken == first.dipToken}) && status == .active {
                     self.currentServers.append(contentsOf: servers)
                }
                 callback?(first, error)

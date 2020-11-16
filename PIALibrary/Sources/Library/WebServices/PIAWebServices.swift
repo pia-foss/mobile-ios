@@ -233,25 +233,30 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                 
                 var dipRegions = [Server]()
                 for dipServer in dedicatedIps {
-                    if dipServer.status == DedicatedIPInformationResponse.Status.active {
 
-                        guard let firstServer = Client.providers.serverProvider.currentServers.first(where: {$0.identifier == dipServer.id}) else {
-                            callback?([], ClientError.malformedResponseData)
-                            return
-                        }
-                        
-                        guard let ip = dipServer.ip, let cn = dipServer.cn, let expirationTime = dipServer.dip_expire else {
-                            callback?([], ClientError.malformedResponseData)
-                            return
-                        }
-                        
-                        let dipRegion = Server(serial: firstServer.serial, name: firstServer.name, country: firstServer.country, hostname: firstServer.hostname, openVPNAddressesForTCP: [Server.ServerAddressIP(ip: ip, cn: cn)], openVPNAddressesForUDP: [Server.ServerAddressIP(ip: ip, cn: cn)], wireGuardAddressesForUDP: [Server.ServerAddressIP(ip: ip, cn: cn)], iKEv2AddressesForUDP: [Server.ServerAddressIP(ip: ip, cn: cn)], pingAddress: firstServer.pingAddress, geo: false, meta: nil, dipExpire: Date(timeIntervalSince1970: TimeInterval(expirationTime)), dipToken: dipServer.dipToken, dipStatus: DedicatedIPStatus.active, regionIdentifier: firstServer.regionIdentifier)
-                        
-                        dipRegions.append(dipRegion)
+                    guard let firstServer = Client.providers.serverProvider.currentServers.first(where: {$0.identifier == dipServer.id}) else {
+                        callback?([], ClientError.malformedResponseData)
+                        return
+                    }
+                    
+                    guard let ip = dipServer.ip, let cn = dipServer.cn, let expirationTime = dipServer.dip_expire else {
+                        callback?([], ClientError.malformedResponseData)
+                        return
+                    }
+                    
+                    let expiringDate = Date(timeIntervalSince1970: TimeInterval(expirationTime))
+                    let status = DedicatedIPStatus(fromAPIStatus: dipServer.status)
+                    let server = Server.ServerAddressIP(ip: ip, cn: cn)
+                    
+                    let dipRegion = Server(serial: firstServer.serial, name: firstServer.name, country: firstServer.country, hostname: firstServer.hostname, openVPNAddressesForTCP: [server], openVPNAddressesForUDP: [server], wireGuardAddressesForUDP: [server], iKEv2AddressesForUDP: [server], pingAddress: firstServer.pingAddress, geo: false, meta: nil, dipExpire: expiringDate, dipToken: dipServer.dipToken, dipStatus: status, regionIdentifier: firstServer.regionIdentifier)
+                    
+                    dipRegions.append(dipRegion)
+                    
+                    if status == .active {
                         Client.database.secure.setDIPToken(dipServer.dipToken)
                         Client.database.secure.setPassword(ip, forDipToken: dipServer.dipToken)
-
                     }
+
                 }
 
                 callback?(dipRegions, nil)
