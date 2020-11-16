@@ -57,12 +57,12 @@ class MessagesTile: UIView, Tileable  {
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
 
         viewShouldRestyle()
-        if let message = MessagesManager.shared.availableMessage() {
-            self.alertIcon.image = Asset.iconAlert.image.withRenderingMode(.alwaysTemplate)
+        self.alertIcon.image = Asset.iconAlert.image.withRenderingMode(.alwaysTemplate)
+    
+        if let message = MessagesManager.shared.availableMessage(), let _ = message.linkMessage {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(openLink))
+            messageTextView.addGestureRecognizer(tap)
         }
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(openLink))
-        messageTextView.addGestureRecognizer(tap)
 
     }
     

@@ -27,7 +27,8 @@ public class MessagesManager: NSObject {
 
     public static let shared = MessagesManager()
     private var apiMessage: InAppMessage!
-    
+    private var systemMessage: InAppMessage!
+
     func refreshMessages() {
         Client.providers.accountProvider.inAppMessages { (message, error) in
             if let message = message, !message.wasDismissed() {
@@ -35,6 +36,11 @@ public class MessagesManager: NSObject {
                 Macros.postNotification(.PIAUpdateFixedTiles)
             }
         }
+    }
+    
+    func postSystemMessage(message: InAppMessage) {
+        self.systemMessage = message
+        Macros.postNotification(.PIAUpdateFixedTiles)
     }
     
     func availableMessage() -> InAppMessage? {
@@ -53,8 +59,11 @@ public class MessagesManager: NSObject {
     
     func dismiss(message id: String) {
         AppPreferences.shared.dismissedMessages.append(id)
-        apiMessage = nil
-        //TODO check if the append saves in UserDefaults
+        if id == apiMessage.id {
+            apiMessage = nil
+        } else if id == systemMessage.id {
+            systemMessage = nil
+        }
     }
     
     private func updateMessages() -> InAppMessage? {
@@ -62,7 +71,7 @@ public class MessagesManager: NSObject {
     }
     
     private func systemMessages() -> InAppMessage? {
-        return nil
+        return self.systemMessage
     }
 
 }
@@ -89,10 +98,12 @@ extension InAppMessage {
             if let view = self.settingView {
                 command = ViewCommand(view)
             }
-        default:
+        case .action:
             if let actions = self.settingAction {
                 command = ActionCommand(actions)
             }
+        default:
+            break
         }
 
         command?.execute()
@@ -107,7 +118,10 @@ extension InAppMessage {
     
     func localisedLink() -> String {
         
-        return searchIn(dictionary: self.linkMessage)
+        if let linkMessage = self.linkMessage {
+            return searchIn(dictionary: linkMessage)
+        }
+        return ""
                 
     }
 

@@ -38,6 +38,7 @@ class DedicatedIpRowViewCell: UITableViewCell, Restylable {
         self.server = server
 
         imvFlag.setImage(fromServer: server)
+        imvFlag.accessibilityLabel = "Country flag for \(server.name)"
         
         if let _ = Client.providers.serverProvider.regionStaticData {
             labelRegion.text = Client.providers.serverProvider.regionStaticData.localisedServerName(forCountryName: server.name)

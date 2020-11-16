@@ -150,11 +150,11 @@ DEPENDENCIES:
   - Fabric
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
-  - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, commit `b4d1335`)"
-  - PIALibrary/Library (from `/Users/jose/Projects/PIA/client-library-apple`)
-  - PIALibrary/Mock (from `/Users/jose/Projects/PIA/client-library-apple`)
-  - PIALibrary/UI (from `/Users/jose/Projects/PIA/client-library-apple`)
-  - PIALibrary/VPN (from `/Users/jose/Projects/PIA/client-library-apple`)
+  - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, commit `09aac45`)"
+  - "PIALibrary/Library (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `develop`)"
+  - "PIALibrary/Mock (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `develop`)"
+  - "PIALibrary/UI (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `develop`)"
+  - "PIALibrary/VPN (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `develop`)"
   - "PIARegions (from `git@codex.londontrustmedia.com:mobile/regions.git`)"
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
   - Popover
@@ -198,10 +198,11 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIAAccountModule:
-    :commit: b4d1335
+    :commit: 09aac45
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
   PIALibrary:
-    :path: "/Users/jose/Projects/PIA/client-library-apple"
+    :branch: develop
+    :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
   PIARegions:
     :git: "git@codex.londontrustmedia.com:mobile/regions.git"
   PIAWireguard:
@@ -212,8 +213,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PIAAccountModule:
-    :commit: b4d1335
+    :commit: 09aac45
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
+  PIALibrary:
+    :commit: 25ddece9bdeef11ba3891ea139556232023e9bff
+    :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
   PIARegions:
     :commit: c8abe4c5d61a32c8bdcfa728bd6e0fa1e0d1104a
     :git: "git@codex.londontrustmedia.com:mobile/regions.git"
@@ -260,6 +264,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: e3188f1cb1fc369bbc44e43785b9c35b8952574b
+PODFILE CHECKSUM: ff4d92b80893deea5c6c6ff2d0d30f3e3214b281
 
 COCOAPODS: 1.9.3

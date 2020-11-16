@@ -37,6 +37,7 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
         self.backgroundColor = .clear
         self.title.text = "Dedicated IP"
         self.subtitle.text = "Activate your Dedicated IP by pasting your token in the form below. If you've recently purchased a dedicated IP, you can generate the token by going to the PIA website."
+        self.addTokenTextfield.accessibilityLabel = "The textfield to type the Dedicated IP token"
         self.addTokenTextfield.placeholder = "Paste in your token here"
         self.addTokenTextfield.delegate = self
     }
@@ -84,8 +85,17 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
                 switch dipServer?.dipStatus {
                 case .active:
                     Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image, message: "Your Dedicated IP has been activated successfully. It will be available in your Region selection list.")
+                    if let token = dipServer?.dipToken, let expiringDate = dipServer?.dipExpire, let substractedDate = expiringDate.removing(days: 5) {
+                        if Calendar.current.isDateInToday(substractedDate) {
+                            //Expiring in 5 days
+                            let message = InAppMessage(withMessage: ["en": "Your dedicated IP will expire soon. Get a new one"], id: token, link: ["en": "Get a new one"], type: .link, level: .system, actions: nil, view: nil, uri: "https://www.privateinternetaccess.com")
+                            MessagesManager.shared.postSystemMessage(message: message)
+                        }
+                    }
                 case .expired:
-                    Macros.displayWarningImageNote(withImage: Asset.iconWarning.image, message: "Your token is expired. Please generate a new one from your Account page in the website.")
+                    Macros.displayWarningImageNote(withImage: Asset.iconWarning.image, message: "Your token is expired. Please generate a new one from your Account page on the website.")
+                case .error:
+                    Macros.displayWarningImageNote(withImage: Asset.iconWarning.image, message: "Your token is invalid. Please generate a new one from your Account page on the website.")
                 default:
                     Macros.displayStickyNote(withMessage: "Your token is invalid. Please make sure you have entered the token correctly.",
                                              andImage: Asset.iconWarning.image)
