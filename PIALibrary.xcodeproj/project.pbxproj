@@ -246,6 +246,8 @@
 		82C374F82514DE7D00E391EE /* EndpointManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C374F42514DC6D00E391EE /* EndpointManagerTests.swift */; };
 		82C374F92514DE8200E391EE /* server.json in Resources */ = {isa = PBXBuildFile; fileRef = 82C374F62514DC7200E391EE /* server.json */; };
 		82C374FB2514DEC700E391EE /* EndpointManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C374FA2514DEC700E391EE /* EndpointManager.swift */; };
+		82C4962925642D5800233CB1 /* String+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C4962825642D5800233CB1 /* String+Random.swift */; };
+		82C4962A25642D5800233CB1 /* String+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C4962825642D5800233CB1 /* String+Random.swift */; };
 		82CAB808255A9ACB00BB08EF /* InAppMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB807255A9ACB00BB08EF /* InAppMessage.swift */; };
 		82CAB809255A9ACB00BB08EF /* InAppMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB807255A9ACB00BB08EF /* InAppMessage.swift */; };
 		82DDD5302539CFDC0049E79E /* DIPTokenKeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DDD52F2539CFDC0049E79E /* DIPTokenKeychainTests.swift */; };
@@ -570,6 +572,7 @@
 		82C374F42514DC6D00E391EE /* EndpointManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointManagerTests.swift; sourceTree = "<group>"; };
 		82C374F62514DC7200E391EE /* server.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = server.json; sourceTree = "<group>"; };
 		82C374FA2514DEC700E391EE /* EndpointManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointManager.swift; sourceTree = "<group>"; };
+		82C4962825642D5800233CB1 /* String+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Random.swift"; sourceTree = "<group>"; };
 		82CAB807255A9ACB00BB08EF /* InAppMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppMessage.swift; sourceTree = "<group>"; };
 		82DDD52F2539CFDC0049E79E /* DIPTokenKeychainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIPTokenKeychainTests.swift; sourceTree = "<group>"; };
 		82E20B1024F652ED0065EFE3 /* AccountInfo+Kotlin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountInfo+Kotlin.swift"; sourceTree = "<group>"; };
@@ -722,6 +725,7 @@
 				0E492C591FE5EA06007F23DF /* CMacros.h */,
 				0E492C5A1FE5EA06007F23DF /* CMacros.m */,
 				DD58F4BC21AEF76100D043F7 /* String+Components.swift */,
+				82C4962825642D5800233CB1 /* String+Random.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -1663,6 +1667,7 @@
 				0E3D13D41F9E270A00434A48 /* GlossAccountInfo.swift in Sources */,
 				0E9D62D31FDEBBFD009A90CF /* GlossServer.swift in Sources */,
 				82FD5D672521F32B00E390CB /* PIAAccountStagingClientStateProvider.swift in Sources */,
+				82C4962A25642D5800233CB1 /* String+Random.swift in Sources */,
 				0E9D62DB1FDEE3FE009A90CF /* ServerProvider.swift in Sources */,
 				0E7BC6FA1F96B1120035C8B2 /* Notification+Core.swift in Sources */,
 				0EA4C4321FDDD48F0041C3D8 /* Server.swift in Sources */,
@@ -1780,6 +1785,7 @@
 				DD76292E21ECEC3F0092DF50 /* DataManipulation.swift in Sources */,
 				DDFCFABA21E929660081F235 /* MockTileProvider.swift in Sources */,
 				0EA4C4391FDDE24B0041C3D8 /* ServersBundle.swift in Sources */,
+				82C4962925642D5800233CB1 /* String+Random.swift in Sources */,
 				0E53A84A1FE5BA52000C2A18 /* Daemon.swift in Sources */,
 				0E492C641FE5F949007F23DF /* MockServerProvider.swift in Sources */,
 				0E53A8471FE5BA0B000C2A18 /* ServersDaemon.swift in Sources */,

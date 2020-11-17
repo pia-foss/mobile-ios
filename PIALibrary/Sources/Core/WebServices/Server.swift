@@ -290,7 +290,7 @@ extension Server {
     
     func dipUsername() -> String? {
         if let dipToken = dipToken {
-            return "dedicated_ip_"+dipToken
+            return "dedicated_ip_"+dipToken+"_"+String.random(length: 8)
         }
         return nil
     }
@@ -301,4 +301,5 @@ extension Server {
         }
         return nil
     }
+    
 }
