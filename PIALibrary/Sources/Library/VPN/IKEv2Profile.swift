@@ -167,9 +167,9 @@ public class IKEv2Profile: NetworkExtensionProfile {
         var iKEv2Username = ""
         var iKEv2Password: Data?
         
-        if let dipUsername = configuration.server.dipUsername() { //override the username if DIP
+        if let dipUsername = configuration.server.dipUsername, let dipToken = configuration.server.dipToken { //override the username if DIP
             iKEv2Username = dipUsername
-            iKEv2Password = Client.database.secure.passwordReference(forDipToken: dipUsername)
+            iKEv2Password = configuration.server.dipPassword()
         } else {
             if let username = Client.providers.accountProvider.token {
                 iKEv2Username = username

@@ -159,6 +159,8 @@ public class Server: Hashable {
     public let dipToken: String?
     
     public let dipStatus: DedicatedIPStatus?
+    
+    public let dipUsername: String?
 
     var isAutomatic: Bool
 
@@ -180,6 +182,7 @@ public class Server: Hashable {
         dipExpire: Date? = nil,
         dipToken: String? = nil,
         dipStatus: DedicatedIPStatus? = nil,
+        dipUsername: String? = nil,
         regionIdentifier: String) {
         
         self.serial = serial
@@ -202,7 +205,8 @@ public class Server: Hashable {
         self.dipExpire = dipExpire
         self.dipToken = dipToken
         self.dipStatus = dipStatus
-
+        self.dipUsername = dipUsername
+        
         isAutomatic = false
     }
     
@@ -293,16 +297,9 @@ extension Server {
 }
 
 extension Server {
-    
-    func dipUsername() -> String? {
-        if let dipToken = dipToken {
-            return "dedicated_ip_"+dipToken+"_"+String.random(length: 8)
-        }
-        return nil
-    }
-    
+        
     func dipPassword() -> Data? {
-        if let dipUsername = dipToken {
+        if let dipUsername = dipUsername {
             return Client.database.secure.passwordReference(forDipToken: dipUsername)
         }
         return nil

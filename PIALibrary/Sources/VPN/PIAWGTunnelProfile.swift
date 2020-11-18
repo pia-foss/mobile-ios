@@ -250,7 +250,7 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
             cfg.username = Client.providers.accountProvider.publicUsername
             cfg.disconnectOnSleep = configuration.disconnectsOnSleep
 
-            let token = configuration.server.dipUsername() != nil ? configuration.server.dipUsername() : Client.providers.accountProvider.token
+            let token = configuration.server.dipUsername != nil ? configuration.server.dipUsername : Client.providers.accountProvider.token
 
             cfg.providerConfiguration = [PIAWireguardConfiguration.Keys.token: token,
                                          PIAWireguardConfiguration.Keys.ping: configuration.server.bestAddress()?.description,

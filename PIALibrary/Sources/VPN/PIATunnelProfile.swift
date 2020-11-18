@@ -249,8 +249,8 @@ public class PIATunnelProfile: NetworkExtensionProfile {
 
         let cfg = NETunnelProviderProtocol()
         cfg.disconnectOnSleep = configuration.disconnectsOnSleep
-        cfg.username = configuration.server.dipUsername() != nil ? configuration.server.dipUsername() : configuration.username
-        cfg.passwordReference = configuration.server.dipUsername() != nil ? configuration.server.dipPassword() : configuration.passwordReference
+        cfg.username = configuration.server.dipUsername != nil ? configuration.server.dipUsername : configuration.username
+        cfg.passwordReference = configuration.server.dipUsername != nil ? configuration.server.dipPassword() : configuration.passwordReference
         cfg.serverAddress = serverAddress
         cfg.providerBundleIdentifier = bundleIdentifier
         cfg.providerConfiguration = customCfg?.serialized()
