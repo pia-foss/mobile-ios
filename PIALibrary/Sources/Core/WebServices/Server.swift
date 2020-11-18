@@ -248,6 +248,9 @@ extension Server {
     }
     
     public func bestAddress() -> ServerAddressIP? {
+        guard !addresses().isEmpty else {
+            return nil
+        }
         let availableServer = addresses().first(where: {$0.available})
         if availableServer == nil {
             addresses().map({$0.reset()})
@@ -257,6 +260,9 @@ extension Server {
     }
     
     public func bestAddressForOVPN(tcp: Bool) -> ServerAddressIP? {
+        guard !ovpnAddresses(tcp: tcp).isEmpty else {
+            return nil
+        }
         let availableServer = ovpnAddresses(tcp: tcp).first(where: {$0.available})
         if availableServer == nil {
             ovpnAddresses(tcp: tcp).map({$0.reset()})
