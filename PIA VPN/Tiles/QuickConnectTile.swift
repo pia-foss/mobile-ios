@@ -83,7 +83,7 @@ class QuickConnectTile: UIView, Tileable {
                 }
                 return true
             }
-            return true
+            return $0.dipToken == nil
         })
         
         if AppPreferences.shared.showGeoServers == false {

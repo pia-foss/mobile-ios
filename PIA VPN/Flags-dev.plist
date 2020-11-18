@@ -5,7 +5,7 @@
 	<key>usesDevelopmentClient</key>
 	<true/>
 	<key>customizesClientEnvironment</key>
-	<false/>
+	<true/>
 	<key>customizesWelcomePreset</key>
 	<false/>
 	<key>usesMockAccount</key>
