@@ -129,10 +129,8 @@ class Bootstrapper {
         
         Client.providers.serverProvider.downloadRegionStaticData { (error) in
             
-            NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
-            object: self,
-            userInfo: nil)
-            
+            Macros.postNotification(.PIAServerHasBeenUpdated)
+
             //FORCE THE MIGRATION TO GEN4
             if Client.providers.vpnProvider.needsMigrationToGEN4() {
 

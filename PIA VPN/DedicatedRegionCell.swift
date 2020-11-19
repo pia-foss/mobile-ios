@@ -107,9 +107,7 @@ class DedicatedRegionCell: UITableViewCell, Restylable {
         self.isFavorite = !self.isFavorite
         self.isFavorite ? self.server.favorite() : self.server.unfavorite()
         self.animateFavoriteImage()
-        NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
-                                        object: self,
-                                        userInfo: nil)
+        Macros.postNotification(.PIAServerHasBeenUpdated)
     }
     
     private func animateFavoriteImage() {

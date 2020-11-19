@@ -368,9 +368,9 @@ class DashboardViewController: AutolayoutViewController {
                 }
                 self?.reloadUsageTileAfter(seconds: 5) //Show some usage after 5 seconds of activity
             })
-            NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
-                                            object: self,
-                                            userInfo: nil)
+            
+            Macros.postNotification(.PIAServerHasBeenUpdated)
+            
         } else {
             
             disconnectWithOneSecondDelay()
@@ -585,10 +585,7 @@ class DashboardViewController: AutolayoutViewController {
 
         currentStatus = Client.providers.vpnProvider.vpnStatus
 
-        NotificationCenter.default.post(name: .PIAServerHasBeenUpdated,
-                                        object: self,
-                                        userInfo: nil)
-        
+        Macros.postNotification(.PIAServerHasBeenUpdated)
         Macros.postNotification(.PIAVPNUsageUpdate)
 
         switch currentStatus {
