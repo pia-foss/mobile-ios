@@ -1,1 +1,0 @@
-vpn,privado,internet,acceso,anóniomo,cambio,ip,dirección,seguridad,navegar,conectar,proxy,roxy
