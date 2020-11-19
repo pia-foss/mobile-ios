@@ -160,23 +160,25 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
                 self.accessedDatabase.transient.serversConfiguration = configuration
             }
             
-            self.currentServers = bundle.servers
             
             if let tokens = self.accessedDatabase.secure.dipTokens(), !tokens.isEmpty {
                 self.webServices.activateDIPToken(tokens: tokens) { (servers, error) in
+                    var allServers = bundle.servers
+                    
                     if let servers = servers {
                         for server in servers {
-                            if !self.currentServers.contains(where: {$0.dipToken == server.dipToken}) {
-                                self.currentServers.append(server)
+                            if !bundle.servers.contains(where: {$0.dipToken == server.dipToken}) {
+                                allServers.append(server)
                             }
                         }
                     }
-                    NotificationCenter.default.post(name: .PIAThemeDidChange,
-                                                    object: self,
-                                                    userInfo: nil)
+                    
+                    self.currentServers = allServers
+                    Macros.postNotification(.PIAThemeDidChange)
                     callback?(self.currentServers, error)
                 }
             } else {
+                self.currentServers = bundle.servers
                 callback?(self.currentServers, error)
             }
             
