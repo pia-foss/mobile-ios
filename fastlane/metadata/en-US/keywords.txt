@@ -1,1 +1,0 @@
-vpn,private,internet,access,anonymous,change,ip,address,security,browse,connect,proxy,roxy,hotspot

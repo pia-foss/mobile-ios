@@ -1,6 +1,0 @@
-app_identifier "com.privateinternetaccess.ios.PIA-VPN" # The bundle identifier of your app
-
-team_id "5357M5NW9W"  # Developer Portal Team ID
-
-# you can even provide different app identifiers, Apple IDs and team names per lane:
-# More information: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Appfile.md

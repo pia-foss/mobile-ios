@@ -1,1 +1,0 @@
-W tej wersji skoncentrowaliśmy się na aktualizacjach wizualnych, stabilności i naprawie błędów. Poprawiliśmy również działanie aplikacji na telefonach iPhone X.

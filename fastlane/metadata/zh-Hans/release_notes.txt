@@ -1,2 +1,0 @@
-- Added GCM encryption ciphers to OpenVPN.
-- Added ECC-256k1 handshake certificate to OpenVPN.
