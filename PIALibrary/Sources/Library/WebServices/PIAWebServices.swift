@@ -270,6 +270,9 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     
     
     func featureFlags(_ callback: LibraryCallback<[String]>?) {
+        #if PIA_DEV
+        callback?(["dedicated-ip"], nil)
+        #endif
         self.accountAPI.featureFlags(stagingEndpoint: nil) { (info, error) in
             if let flags = info?.flags {
                 callback?(flags, nil)
@@ -277,7 +280,6 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                 callback?([], ClientError.malformedResponseData)
             }
         }
-        //dedicated-ip
     }
     
     #if os(iOS)
