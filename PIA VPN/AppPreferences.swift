@@ -84,6 +84,9 @@ class AppPreferences {
 
         // Dismissed messages
         static let dismissedMessages = "DismissedMessages"
+        
+        // Dedicated IP relations
+        static let tokenIPRelation = "TokenIPRelation"
 
     }
 
@@ -271,6 +274,17 @@ class AppPreferences {
         }
     }
 
+    var dedicatedTokenIPReleation: [String: String] {
+        get {
+            if let relation = defaults.dictionary(forKey: Entries.tokenIPRelation) as? [String: String] {
+                return relation
+            }
+            return [String:String]()
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.tokenIPRelation)
+        }
+    }
     
     @available(iOS 12.0, *)
     var connectShortcut: INVoiceShortcut? {
@@ -590,6 +604,7 @@ class AppPreferences {
         Client.resetServers(completionBlock: {_ in })
         failureConnections = 0
         showGeoServers = true
+        dedicatedTokenIPReleation = [:]
     }
     
     func clean() {
@@ -619,6 +634,7 @@ class AppPreferences {
         failureConnections = 0
         showGeoServers = true
         dismissedMessages = []
+        dedicatedTokenIPReleation = [:]
     }
     
 //    + (void)eraseForTesting;

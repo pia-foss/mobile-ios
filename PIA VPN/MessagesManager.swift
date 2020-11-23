@@ -59,7 +59,7 @@ public class MessagesManager: NSObject {
     
     func dismiss(message id: String) {
         AppPreferences.shared.dismissedMessages.append(id)
-        if id == apiMessage.id {
+        if apiMessage != nil, id == apiMessage.id {
             apiMessage = nil
         } else if id == systemMessage.id {
             systemMessage = nil

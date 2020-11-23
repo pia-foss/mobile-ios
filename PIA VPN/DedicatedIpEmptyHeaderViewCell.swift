@@ -85,13 +85,33 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
                 switch dipServer?.dipStatus {
                 case .active:
                     Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image, message: "Your Dedicated IP has been activated successfully. It will be available in your Region selection list.")
-                    if let token = dipServer?.dipToken, let expiringDate = dipServer?.dipExpire, let substractedDate = expiringDate.removing(days: 5) {
+                    
+                    guard let token = dipServer?.dipToken, let address = dipServer?.bestAddress() else {
+                        return
+                    }
+                        
+                    if let expiringDate = dipServer?.dipExpire, let substractedDate = expiringDate.removing(days: 5) {
                         if Calendar.current.isDateInToday(substractedDate) {
                             //Expiring in 5 days
                             let message = InAppMessage(withMessage: ["en": "Your dedicated IP will expire soon. Get a new one"], id: token, link: ["en": "Get a new one"], type: .link, level: .system, actions: nil, view: nil, uri: "https://www.privateinternetaccess.com")
                             MessagesManager.shared.postSystemMessage(message: message)
                         }
                     }
+                    
+                    var relation = AppPreferences.shared.dedicatedTokenIPReleation
+                    if relation.isEmpty {
+                        //no data
+                        relation[token] = address.ip
+                    } else {
+                        if relation[token] != address.ip {
+                            //changes
+                            relation[token] = address.ip
+                            let message = InAppMessage(withMessage: ["en": "Your dedicated IP was updated"], id: token, link: ["en":""], type: .none, level: .system, actions: nil, view: nil, uri: nil)
+                            MessagesManager.shared.postSystemMessage(message: message)
+                        }
+                    }
+                    AppPreferences.shared.dedicatedTokenIPReleation[token] = address.ip
+
                 case .expired:
                     Macros.displayWarningImageNote(withImage: Asset.iconWarning.image, message: "Your token is expired. Please generate a new one from your Account page on the website.")
                 case .error:
