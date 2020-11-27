@@ -124,7 +124,11 @@ class Bootstrapper {
             PIAWGTunnelProfile.vpnType: PIAWireguardConfiguration(customDNSServers: [])
         ]
         
+        #if PIA_DEV
+        Client.configuration.featureFlags.append(contentsOf: ["dedicated-ip"])
+        #else
         Client.providers.accountProvider.featureFlags(nil)
+        #endif
         MessagesManager.shared.refreshMessages()
         
         Client.providers.serverProvider.downloadRegionStaticData { (error) in
