@@ -235,6 +235,8 @@ extension Server {
             return openVPNAddressesForTCP ?? []
         case PIAWGTunnelProfile.vpnType:
             return wireGuardAddressesForUDP ?? []
+        case "Mock":
+            return iKEv2AddressesForUDP ?? []
         default:
             return []
         }
