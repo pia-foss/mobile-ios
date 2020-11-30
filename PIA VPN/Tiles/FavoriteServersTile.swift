@@ -115,7 +115,7 @@ class FavoriteServersTile: UIView, Tileable {
                 } else if let imageView = element as? UIImageView {
                     imageView.isHidden = server.dipToken == nil
                     if status != .normal { //only when edit mode
-                        imageView.isHidden = true
+                        imageView.isHidden = imageView.tag == 0 ? true : server.dipToken == nil
                     }
                 }
             }
