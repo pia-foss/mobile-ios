@@ -215,7 +215,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         webServices.token(credentials: request.credentials) { (token, error) in
             
             guard let token = token else {
-                callback?(nil, error)
+                callback?(nil, ClientError.unauthorized)
                 return
             }
 
@@ -224,7 +224,9 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
 
             self.webServices.info(token: token) { (accountInfo, error) in
                 guard let accountInfo = accountInfo else {
-                    callback?(nil, error)
+                    self.webServices.logout(nil)
+                    self.cleanDatabase()
+                    callback?(nil, ClientError.unauthorized)
                     return
                 }
                 
