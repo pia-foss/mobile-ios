@@ -84,7 +84,7 @@ class MessagesTile: UIView, Tileable  {
         if let message = MessagesManager.shared.availableMessage() {
             self.messageTextView.attributedText = Theme.current.messageWithLinkText(
                 withMessage: message.localisedMessage(),
-                link: "killswitch"
+                link: message.localisedLink()
             )
             self.messageTextView.textAlignment = .left
             if message.level == .api {

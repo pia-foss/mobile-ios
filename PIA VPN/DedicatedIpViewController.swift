@@ -53,7 +53,7 @@ class DedicatedIpViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Dedicated IP"
+        title = L10n.Dedicated.Ip.title
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
@@ -67,7 +67,7 @@ class DedicatedIpViewController: AutolayoutViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        styleNavigationBarWithTitle("Dedicated IP")
+        styleNavigationBarWithTitle(L10n.Dedicated.Ip.title)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -76,7 +76,7 @@ class DedicatedIpViewController: AutolayoutViewController {
     }
 
     @objc private func viewHasRotated() {
-        styleNavigationBarWithTitle("Dedicated IP")
+        styleNavigationBarWithTitle(L10n.Dedicated.Ip.title)
     }
     
     @objc private func reloadTableView() {
@@ -107,7 +107,7 @@ class DedicatedIpViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         
-        styleNavigationBarWithTitle("Dedicated IP")
+        styleNavigationBarWithTitle(L10n.Dedicated.Ip.title)
 
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)

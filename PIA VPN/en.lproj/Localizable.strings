@@ -358,3 +358,24 @@
 "card.wireguard.cta.activate" = "Try WireGuard® now";
 "card.wireguard.cta.settings" = "Open Settings";
 "card.wireguard.cta.learn" = "Learn more";
+
+// DEDICATED IP
+"dedicated.ip.title" = "Dedicated IP";
+"dedicated.ip.plural.title" = "Your Dedicated IPs";
+"dedicated.ip.activation.description" = "Activate your Dedicated IP by pasting your token in the form below. If you've recently purchased a dedicated IP, you can generate the token by going to the PIA website.";
+"dedicated.ip.token.textfield.placeholder" = "Paste in your token here";
+"dedicated.ip.token.textfield.accessibility" = "The textfield to type the Dedicated IP token";
+"dedicated.ip.activate.button.title" = "Activate";
+"dedicated.ip.message.incorrect.token" = "Please make sure you have entered the token correctly";
+"dedicated.ip.message.invalid.token" = "Your token is invalid. Please make sure you have entered the token correctly.";
+"dedicated.ip.message.valid.token" = "Your Dedicated IP has been activated successfully. It will be available in your Region selection list.";
+"dedicated.ip.message.expired.token" = "Your token is expired. Please generate a new one from your Account page on the website.";
+"dedicated.ip.message.error.token" = "Your token is expired. Please generate a new one from your Account page on the website.";
+"dedicated.ip.message.token.willexpire" = "Your dedicated IP will expire soon. Get a new one";
+"dedicated.ip.message.token.willexpire.link" = "Get a new one";
+"dedicated.ip.message.ip.updated" = "Your dedicated IP was updated";
+"dedicated.ip.country.flag.accessibility" = "Country flag for %@";
+
+// RECONNECTIONS
+"server.reconnection.please.wait" = "Please wait...";
+"server.reconnection.still.connection" = "Still trying to connect...";

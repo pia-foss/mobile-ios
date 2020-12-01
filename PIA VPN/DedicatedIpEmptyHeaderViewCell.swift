@@ -35,10 +35,10 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = .clear
-        self.title.text = "Dedicated IP"
-        self.subtitle.text = "Activate your Dedicated IP by pasting your token in the form below. If you've recently purchased a dedicated IP, you can generate the token by going to the PIA website."
-        self.addTokenTextfield.accessibilityLabel = "The textfield to type the Dedicated IP token"
-        self.addTokenTextfield.placeholder = "Paste in your token here"
+        self.title.text = L10n.Dedicated.Ip.title
+        self.subtitle.text = L10n.Dedicated.Ip.Activation.description
+        self.addTokenTextfield.accessibilityLabel = L10n.Dedicated.Ip.Token.Textfield.accessibility
+        self.addTokenTextfield.placeholder = L10n.Dedicated.Ip.Token.Textfield.placeholder
         self.addTokenTextfield.delegate = self
     }
 
@@ -59,7 +59,7 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
     private func styleButton() {
         addTokenButton.setRounded()
         addTokenButton.style(style: TextStyle.Buttons.piaGreenButton)
-        addTokenButton.setTitle("Activate",
+        addTokenButton.setTitle(L10n.Dedicated.Ip.Activate.Button.title,
                                for: [])
     }
 
@@ -78,13 +78,13 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
                 NotificationCenter.default.post(name: .DedicatedIpHideAnimation, object: nil)
                 self?.addTokenTextfield.text = ""
                 guard let dipServer = server else {
-                    Macros.displayStickyNote(withMessage: "Your token is invalid. Please make sure you have entered the token correctly.",
+                    Macros.displayStickyNote(withMessage: L10n.Dedicated.Ip.Message.Invalid.token,
                                              andImage: Asset.iconWarning.image)
                     return
                 }
                 switch dipServer?.dipStatus {
                 case .active:
-                    Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image, message: "Your Dedicated IP has been activated successfully. It will be available in your Region selection list.")
+                    Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image, message: L10n.Dedicated.Ip.Message.Valid.token)
                     
                     guard let token = dipServer?.dipToken, let address = dipServer?.bestAddress() else {
                         return
@@ -93,7 +93,7 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
                     if let expiringDate = dipServer?.dipExpire, let substractedDate = expiringDate.removing(days: 5) {
                         if Calendar.current.isDateInToday(substractedDate) {
                             //Expiring in 5 days
-                            let message = InAppMessage(withMessage: ["en": "Your dedicated IP will expire soon. Get a new one"], id: token, link: ["en": "Get a new one"], type: .link, level: .system, actions: nil, view: nil, uri: "https://www.privateinternetaccess.com")
+                            let message = InAppMessage(withMessage: ["en": L10n.Dedicated.Ip.Message.Token.willexpire], id: token, link: ["en": L10n.Dedicated.Ip.Message.Token.Willexpire.link], type: .link, level: .system, actions: nil, view: nil, uri: AppConstants.Web.homeURL.absoluteString)
                             MessagesManager.shared.postSystemMessage(message: message)
                         }
                     }
@@ -106,25 +106,25 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
                         if relation[token] != address.ip {
                             //changes
                             relation[token] = address.ip
-                            let message = InAppMessage(withMessage: ["en": "Your dedicated IP was updated"], id: token, link: ["en":""], type: .none, level: .system, actions: nil, view: nil, uri: nil)
+                            let message = InAppMessage(withMessage: ["en": L10n.Dedicated.Ip.Message.Ip.updated], id: token, link: ["en":""], type: .none, level: .system, actions: nil, view: nil, uri: nil)
                             MessagesManager.shared.postSystemMessage(message: message)
                         }
                     }
                     AppPreferences.shared.dedicatedTokenIPReleation[token] = address.ip
 
                 case .expired:
-                    Macros.displayWarningImageNote(withImage: Asset.iconWarning.image, message: "Your token is expired. Please generate a new one from your Account page on the website.")
+                    Macros.displayWarningImageNote(withImage: Asset.iconWarning.image, message: L10n.Dedicated.Ip.Message.Expired.token)
                 case .error:
-                    Macros.displayWarningImageNote(withImage: Asset.iconWarning.image, message: "Your token is invalid. Please generate a new one from your Account page on the website.")
+                    Macros.displayWarningImageNote(withImage: Asset.iconWarning.image, message: L10n.Dedicated.Ip.Message.Error.token)
                 default:
-                    Macros.displayStickyNote(withMessage: "Your token is invalid. Please make sure you have entered the token correctly.",
+                    Macros.displayStickyNote(withMessage: L10n.Dedicated.Ip.Message.Invalid.token,
                                              andImage: Asset.iconWarning.image)
                 }
                 NotificationCenter.default.post(name: .DedicatedIpReload, object: nil)
                 NotificationCenter.default.post(name: .PIAThemeDidChange, object: nil)
             }
         } else {
-            Macros.displayStickyNote(withMessage: "Please make sure you have entered the token correctly.",
+            Macros.displayStickyNote(withMessage: L10n.Dedicated.Ip.Message.Incorrect.token,
                                      andImage: Asset.iconWarning.image)
         }
     }

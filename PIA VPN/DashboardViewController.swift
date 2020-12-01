@@ -635,9 +635,9 @@ class DashboardViewController: AutolayoutViewController {
                 TextStyle.textStyle7)
             switch connectingStatus {
             case .pleaseWait:
-                titleLabelView.text = "PLEASE WAIT..."
+                titleLabelView.text = L10n.Server.Reconnection.Please.wait.uppercased()
             case .takingTime, .stillLoading:
-                titleLabelView.text = "STILL TRYING TO CONNECT..."
+                titleLabelView.text = L10n.Server.Reconnection.Still.connection.uppercased()
             default:
                 titleLabelView.text = L10n.Dashboard.Vpn.connecting.uppercased()
             }

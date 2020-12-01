@@ -192,6 +192,77 @@ internal enum L10n {
     }
   }
 
+  internal enum Dedicated {
+    internal enum Ip {
+      /// Dedicated IP
+      internal static let title = L10n.tr("Localizable", "dedicated.ip.title")
+      internal enum Activate {
+        internal enum Button {
+          /// Activate
+          internal static let title = L10n.tr("Localizable", "dedicated.ip.activate.button.title")
+        }
+      }
+      internal enum Activation {
+        /// Activate your Dedicated IP by pasting your token in the form below. If you've recently purchased a dedicated IP, you can generate the token by going to the PIA website.
+        internal static let description = L10n.tr("Localizable", "dedicated.ip.activation.description")
+      }
+      internal enum Country {
+        internal enum Flag {
+          /// Country flag for %@
+          internal static func accessibility(_ p1: Any) -> String {
+            return L10n.tr("Localizable", "dedicated.ip.country.flag.accessibility", String(describing: p1))
+          }
+        }
+      }
+      internal enum Message {
+        internal enum Error {
+          /// Your token is expired. Please generate a new one from your Account page on the website.
+          internal static let token = L10n.tr("Localizable", "dedicated.ip.message.error.token")
+        }
+        internal enum Expired {
+          /// Your token is expired. Please generate a new one from your Account page on the website.
+          internal static let token = L10n.tr("Localizable", "dedicated.ip.message.expired.token")
+        }
+        internal enum Incorrect {
+          /// Please make sure you have entered the token correctly
+          internal static let token = L10n.tr("Localizable", "dedicated.ip.message.incorrect.token")
+        }
+        internal enum Invalid {
+          /// Your token is invalid. Please make sure you have entered the token correctly.
+          internal static let token = L10n.tr("Localizable", "dedicated.ip.message.invalid.token")
+        }
+        internal enum Ip {
+          /// Your dedicated IP was updated
+          internal static let updated = L10n.tr("Localizable", "dedicated.ip.message.ip.updated")
+        }
+        internal enum Token {
+          /// Your dedicated IP will expire soon. Get a new one
+          internal static let willexpire = L10n.tr("Localizable", "dedicated.ip.message.token.willexpire")
+          internal enum Willexpire {
+            /// Get a new one
+            internal static let link = L10n.tr("Localizable", "dedicated.ip.message.token.willexpire.link")
+          }
+        }
+        internal enum Valid {
+          /// Your Dedicated IP has been activated successfully. It will be available in your Region selection list.
+          internal static let token = L10n.tr("Localizable", "dedicated.ip.message.valid.token")
+        }
+      }
+      internal enum Plural {
+        /// Your Dedicated IPs
+        internal static let title = L10n.tr("Localizable", "dedicated.ip.plural.title")
+      }
+      internal enum Token {
+        internal enum Textfield {
+          /// The textfield to type the Dedicated IP token
+          internal static let accessibility = L10n.tr("Localizable", "dedicated.ip.token.textfield.accessibility")
+          /// Paste in your token here
+          internal static let placeholder = L10n.tr("Localizable", "dedicated.ip.token.textfield.placeholder")
+        }
+      }
+    }
+  }
+
   internal enum Expiration {
     /// Your subscription expires soon. Renew to stay protected.
     internal static let message = L10n.tr("Localizable", "expiration.message")
@@ -578,6 +649,19 @@ internal enum L10n {
       internal static let message = L10n.tr("Localizable", "renewal.success.message")
       /// Thank you
       internal static let title = L10n.tr("Localizable", "renewal.success.title")
+    }
+  }
+
+  internal enum Server {
+    internal enum Reconnection {
+      internal enum Please {
+        /// Please wait...
+        internal static let wait = L10n.tr("Localizable", "server.reconnection.please.wait")
+      }
+      internal enum Still {
+        /// Still trying to connect...
+        internal static let connection = L10n.tr("Localizable", "server.reconnection.still.connection")
+      }
     }
   }
 

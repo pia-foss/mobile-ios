@@ -104,7 +104,7 @@ class RegionTile: UIView, Tileable {
             labelDedicatedIPTitle.isHidden = false
             viewIP.isHidden = false
             labelIP.text = server.wireGuardAddressesForUDP?.first?.ip ?? ""
-            labelDedicatedIPTitle.text = "DEDICATED IP"
+            labelDedicatedIPTitle.text = L10n.Dedicated.Ip.title.uppercased()
             viewIP.layer.cornerRadius = 10.0
             viewIP.layer.borderWidth = 0.5
             viewIP.layer.borderColor = UIColor.piaGrey4.cgColor

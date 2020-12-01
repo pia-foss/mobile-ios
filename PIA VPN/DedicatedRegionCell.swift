@@ -57,7 +57,7 @@ class DedicatedRegionCell: UITableViewCell, Restylable {
         }
         
         labelIP.text = server.wireGuardAddressesForUDP?.first?.ip ?? ""
-        labelDedicatedIPTitle.text = "DEDICATED IP"
+        labelDedicatedIPTitle.text = L10n.Dedicated.Ip.title.uppercased()
 
         iconSelected = isSelected
         
