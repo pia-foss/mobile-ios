@@ -147,15 +147,29 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let dipRegion = data[indexPath.row]
-            if let token = dipRegion.dipToken {
-                Client.providers.serverProvider.removeDIPToken(token)
-                NotificationCenter.default.post(name: .PIAThemeDidChange,
-                                                object: self,
-                                                userInfo: nil)
+            let alert = Macros.alert(nil, L10n.Dedicated.Ip.remove)
+            alert.addCancelActionWithTitle(L10n.Global.cancel, handler: {
+                self.reloadTableView()
+            })
+            
+            alert.addActionWithTitle(L10n.Global.ok) {
+                self.confirmDelete(row: indexPath.row)
             }
-            reloadTableView()
+            
+            self.present(alert, animated: true, completion: nil)
+
         }
+    }
+    
+    private func confirmDelete(row: Int) {
+        let dipRegion = data[row]
+        if let token = dipRegion.dipToken {
+            Client.providers.serverProvider.removeDIPToken(token)
+            NotificationCenter.default.post(name: .PIAThemeDidChange,
+                                            object: self,
+                                            userInfo: nil)
+        }
+        reloadTableView()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

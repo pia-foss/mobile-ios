@@ -194,6 +194,8 @@ internal enum L10n {
 
   internal enum Dedicated {
     internal enum Ip {
+      /// Are you sure you want to remove the selected region?
+      internal static let remove = L10n.tr("Localizable", "dedicated.ip.remove")
       /// Dedicated IP
       internal static let title = L10n.tr("Localizable", "dedicated.ip.title")
       internal enum Activate {

@@ -375,6 +375,7 @@
 "dedicated.ip.message.token.willexpire.link" = "Get a new one";
 "dedicated.ip.message.ip.updated" = "Your dedicated IP was updated";
 "dedicated.ip.country.flag.accessibility" = "Country flag for %@";
+"dedicated.ip.remove" = "Are you sure you want to remove the selected region?";
 
 // RECONNECTIONS
 "server.reconnection.please.wait" = "Please wait...";
