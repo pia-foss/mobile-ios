@@ -110,10 +110,17 @@ class RegionCell: UITableViewCell, Restylable {
                 accessibilityLabel = server.name
             }
             
-            self.favoriteImageView.image = self.favoriteImageView.image?.withRenderingMode(.alwaysTemplate)
-            self.isFavorite = server.isFavorite
-            self.updateFavoriteImage()
-            favoriteButton.isUserInteractionEnabled = true
+            if !self.server.isAutomatic {
+                self.favoriteImageView.image = self.favoriteImageView.image?.withRenderingMode(.alwaysTemplate)
+                self.isFavorite = server.isFavorite
+                self.updateFavoriteImage()
+                favoriteButton.isUserInteractionEnabled = true
+            } else {
+                self.favoriteImageView.image = nil
+                self.isFavorite = true
+                favoriteButton.isUserInteractionEnabled = false
+            }
+            
             self.isUserInteractionEnabled = true
 
         } else {

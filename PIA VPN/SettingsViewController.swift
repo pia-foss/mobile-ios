@@ -610,7 +610,7 @@ class SettingsViewController: AutolayoutViewController {
         guard let action = pendingVPNAction else {
             commitNMTPreferences()
             commitAppPreferences()
-            completionHandler()
+            super.dismissModal()
             return
         }
         

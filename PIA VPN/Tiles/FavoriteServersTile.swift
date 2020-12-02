@@ -98,6 +98,15 @@ class FavoriteServersTile: UIView, Tileable {
             favServers.append(contentsOf: servers)
         }
 
+        //reset dip images
+        for view in stackView.subviews {
+            for element in view.subviews {
+                if let imageView = element as? UIImageView {
+                    imageView.isHidden = true
+                }
+            }
+        }
+        
         for (index, server) in favServers.enumerated() where index < stackView.subviews.count {
             let view = stackView.subviews[index]
             for element in view.subviews {
