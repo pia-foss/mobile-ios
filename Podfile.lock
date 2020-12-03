@@ -72,11 +72,11 @@ PODS:
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - OpenSSL-Apple (1.1.1d.5a)
-  - PIAAccountModule (1.0.1):
-    - PIAAccountModule/account (= 1.0.1)
-    - PIAAccountModule/gradle (= 1.0.1)
-  - PIAAccountModule/account (1.0.1)
-  - PIAAccountModule/gradle (1.0.1)
+  - PIAAccountModule (1.1.0):
+    - PIAAccountModule/account (= 1.1.0)
+    - PIAAccountModule/gradle (= 1.1.0)
+  - PIAAccountModule/account (1.1.0)
+  - PIAAccountModule/gradle (1.1.0)
   - PIALibrary/Core (2.9.0):
     - PIAAccountModule
   - PIALibrary/Library (2.9.0):
@@ -104,13 +104,13 @@ PODS:
     - PIALibrary/Library
     - PIAWireguard
     - TunnelKit
-  - PIARegions (1.0.7):
-    - PIARegions/Core (= 1.0.7)
-    - PIARegions/gradle (= 1.0.7)
-    - PIARegions/regions (= 1.0.7)
-  - PIARegions/Core (1.0.7)
-  - PIARegions/gradle (1.0.7)
-  - PIARegions/regions (1.0.7)
+  - PIARegions (1.1.0):
+    - PIARegions/Core (= 1.1.0)
+    - PIARegions/gradle (= 1.1.0)
+    - PIARegions/regions (= 1.1.0)
+  - PIARegions/Core (1.1.0)
+  - PIARegions/gradle (1.1.0)
+  - PIARegions/regions (1.1.0)
   - PIAWireguard (1.0.1):
     - PIAWireguard/AppExtension (= 1.0.1)
     - PIAWireguard/Core (= 1.0.1)
@@ -150,12 +150,12 @@ DEPENDENCIES:
   - Fabric
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
-  - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, commit `09aac45`)"
-  - "PIALibrary/Library (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `develop`)"
-  - "PIALibrary/Mock (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `develop`)"
-  - "PIALibrary/UI (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `develop`)"
-  - "PIALibrary/VPN (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `develop`)"
-  - "PIARegions (from `git@codex.londontrustmedia.com:mobile/regions.git`)"
+  - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, commit `6116a38`)"
+  - PIALibrary/Library (from `/Users/jose/Projects/PIA/client-library-apple`)
+  - PIALibrary/Mock (from `/Users/jose/Projects/PIA/client-library-apple`)
+  - PIALibrary/UI (from `/Users/jose/Projects/PIA/client-library-apple`)
+  - PIALibrary/VPN (from `/Users/jose/Projects/PIA/client-library-apple`)
+  - "PIARegions (from `git@codex.londontrustmedia.com:mobile/regions.git`, commit `3b9395f`)"
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
   - Popover
   - PopupDialog
@@ -198,12 +198,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIAAccountModule:
-    :commit: 09aac45
+    :commit: 6116a38
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
   PIALibrary:
-    :branch: develop
-    :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
+    :path: "/Users/jose/Projects/PIA/client-library-apple"
   PIARegions:
+    :commit: 3b9395f
     :git: "git@codex.londontrustmedia.com:mobile/regions.git"
   PIAWireguard:
     :git: https://github.com/pia-foss/ios-wireguard
@@ -213,13 +213,10 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PIAAccountModule:
-    :commit: 09aac45
+    :commit: 6116a38
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
-  PIALibrary:
-    :commit: 25ddece9bdeef11ba3891ea139556232023e9bff
-    :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
   PIARegions:
-    :commit: c8abe4c5d61a32c8bdcfa728bd6e0fa1e0d1104a
+    :commit: 3b9395f
     :git: "git@codex.londontrustmedia.com:mobile/regions.git"
   PIAWireguard:
     :commit: 10ddb6b3e79b695358d4fa58a85d663039f7509e
@@ -249,9 +246,9 @@ SPEC CHECKSUMS:
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
-  PIAAccountModule: 701b3183ca642c675c65b72fdddf7d4f8b68183f
+  PIAAccountModule: 5d617eb89a69ac31cfabf11666c4ec04c6ae82ad
   PIALibrary: de9aa8b4226c0297391ee671cce030ba9e2625c6
-  PIARegions: 6e4054b7f850e8c588306773bed516036a665ba3
+  PIARegions: 4b67e9dbe23e0cd97329474bff562303e424de08
   PIAWireguard: 9d71dabc9e483b149236eebbd0e6bb8fa5c8317f
   Popover: 10e1d9528f81d9504df984b7b3f491292bc1822d
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
@@ -264,6 +261,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: ff4d92b80893deea5c6c6ff2d0d30f3e3214b281
+PODFILE CHECKSUM: 0876c502b108b080328b86e1488171d3fc0322e6
 
 COCOAPODS: 1.9.3

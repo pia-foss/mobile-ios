@@ -30,7 +30,8 @@ public class MessagesManager: NSObject {
     private var systemMessage: InAppMessage!
 
     func refreshMessages() {
-        Client.providers.accountProvider.inAppMessages { (message, error) in
+        
+        Client.providers.accountProvider.inAppMessages(forAppVersion: Macros.localizedVersionNumber()) { (message, error) in
             if let message = message, !message.wasDismissed() {
                 self.apiMessage = message
                 Macros.postNotification(.PIAUpdateFixedTiles)
