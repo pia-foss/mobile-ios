@@ -434,7 +434,7 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
         callback?(nil)
     }
     
-    func inAppMessages(_ callback: LibraryCallback<InAppMessage>?) {
+    func inAppMessages(forAppVersion version: String, _ callback: LibraryCallback<InAppMessage>?) {
         callback?(nil, nil)
     }
 }

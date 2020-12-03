@@ -310,8 +310,8 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
         callback?(nil)
     }
     
-    public func inAppMessages(_ callback: LibraryCallback<InAppMessage>?) {
-        delegate.inAppMessages { (message, error) in
+    public func inAppMessages(forAppVersion version: String, _ callback: LibraryCallback<InAppMessage>?) {
+        delegate.inAppMessages(forAppVersion: version) { (message, error) in
             callback?(message, error)
         }
     }

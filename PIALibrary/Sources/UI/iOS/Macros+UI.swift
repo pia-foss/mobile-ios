@@ -119,9 +119,6 @@ extension Macros {
     /**
      Returns a localized full version string.
 
-     - Parameter format: A localized format string with two `String` parameters:
-         - The first one is replaced with the x.y.z version
-         - The second one is replaced with the build number
      - Returns: A localized full version string built upon the input `format`
      */
     public static func localizedVersionFullString() -> String? {
@@ -131,6 +128,17 @@ extension Macros {
         let versionNumber = info["CFBundleShortVersionString"] as! String
         let buildNumber = info[kCFBundleVersionKey as String] as! String
         return L10n.Ui.Global.Version.format(versionNumber, buildNumber)
+    }
+    
+    /**
+     Returns a localized version number string. Example "3.9.0"
+     */
+    public static func localizedVersionNumber() -> String {
+        guard let info = Bundle.main.infoDictionary else {
+            return ""
+        }
+        let versionNumber = info["CFBundleShortVersionString"] as! String
+        return versionNumber
     }
 
     /**

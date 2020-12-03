@@ -147,9 +147,10 @@ public protocol AccountProvider: class {
     /**
      Returns the available messages from the API.
  
+     - Parameter version: App version.
      - Parameter callback: Returns the message`InAppMessage` on success.
      */
-    func inAppMessages(_ callback: LibraryCallback<InAppMessage>?)
+    func inAppMessages(forAppVersion version: String, _ callback: LibraryCallback<InAppMessage>?)
 
     #if os(iOS)
     /**

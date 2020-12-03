@@ -137,7 +137,7 @@ class MockWebServices: WebServices {
         callback?(["mock-test"], nil)
     }
 
-    func messages(_ callback: LibraryCallback<InAppMessage>?) {
+    func messages(forAppVersion version: String, _ callback: LibraryCallback<InAppMessage>?) {
         
         let testLink = InAppMessage(withMessage: ["en" : "This is a message"], id: "1", link: ["en" : "message"], type: .link, level: .api, actions: nil, view: nil, uri: "https://www.privateinternetaccess.com")
         callback?(testLink, nil)

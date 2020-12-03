@@ -78,7 +78,7 @@ extension InAppMessage {
                 self.settingAction = actions
                 self.settingLink = nil
                 self.settingView = nil
-            } else if !link.action.uri.isEmpty {
+            } else if let uri = link.action.uri, !uri.isEmpty {
                 self.type = .link
                 self.settingLink = link.action.uri
                 self.settingAction = nil

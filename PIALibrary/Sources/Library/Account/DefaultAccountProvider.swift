@@ -330,8 +330,8 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
     }
     
-    func inAppMessages(_ callback: LibraryCallback<InAppMessage>?) {
-        webServices.messages { (message, error) in
+    func inAppMessages(forAppVersion version: String, _ callback: LibraryCallback<InAppMessage>?) {
+        webServices.messages(forAppVersion: version) { (message, error) in
             callback?(message, error)
         }
     }

@@ -434,11 +434,11 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     }
     
     // MARK: Messages
-    func messages(_ callback: LibraryCallback<InAppMessage>?) {
+    func messages(forAppVersion version: String, _ callback: LibraryCallback<InAppMessage>?) {
 
         if let token = Client.providers.accountProvider.token {
 
-            self.accountAPI.message(token: token, callback: { (message, error) in
+            self.accountAPI.message(token: token, appVersion: version, callback: { (message, error) in
                 
                 if let error = error {
                     callback?(nil, ClientError.malformedResponseData)
