@@ -204,7 +204,7 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
                let status = first.dipStatus {
                 if !self.currentServers.contains(where: {$0.dipToken == first.dipToken}) && status == .active {
                     self.currentServers.append(contentsOf: servers)
-               }
+                }
                 callback?(first, error)
             } else {
                 callback?(nil, error)

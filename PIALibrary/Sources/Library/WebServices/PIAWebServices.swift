@@ -234,34 +234,43 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                 var dipRegions = [Server]()
                 for dipServer in dedicatedIps {
 
-                    guard let firstServer = Client.providers.serverProvider.currentServers.first(where: {$0.identifier == dipServer.id}) else {
-                        callback?([], ClientError.malformedResponseData)
-                        return
-                    }
-                    
-                    guard let ip = dipServer.ip, let cn = dipServer.cn, let expirationTime = dipServer.dip_expire else {
-                        callback?([], ClientError.malformedResponseData)
-                        return
-                    }
-                    
-                    let expiringDate = Date(timeIntervalSince1970: TimeInterval(expirationTime))
                     let status = DedicatedIPStatus(fromAPIStatus: dipServer.status)
-                    let server = Server.ServerAddressIP(ip: ip, cn: cn)
-                    
-                    if let nextDays = Calendar.current.date(byAdding: .day, value: 5, to: Date()), nextDays >= expiringDate  {
-                        //Expiring in 5 days or less
-                        Macros.postNotification(.PIADIPRegionExpiring, [.token : token])
-                    }
 
-                    let dipUsername = "dedicated_ip_"+dipServer.dipToken+"_"+String.random(length: 8)
+                    switch status {
+                    case .active:
+                        
+                        guard let firstServer = Client.providers.serverProvider.currentServers.first(where: {$0.identifier == dipServer.id}) else {
+                            callback?([], ClientError.malformedResponseData)
+                            return
+                        }
+                        
+                        guard let ip = dipServer.ip, let cn = dipServer.cn, let expirationTime = dipServer.dip_expire else {
+                            callback?([], ClientError.malformedResponseData)
+                            return
+                        }
+                        
+                        let expiringDate = Date(timeIntervalSince1970: TimeInterval(expirationTime))
+                        let server = Server.ServerAddressIP(ip: ip, cn: cn)
+                        
+                        if let nextDays = Calendar.current.date(byAdding: .day, value: 5, to: Date()), nextDays >= expiringDate  {
+                            //Expiring in 5 days or less
+                            Macros.postNotification(.PIADIPRegionExpiring, [.token : token])
+                        }
 
-                    let dipRegion = Server(serial: firstServer.serial, name: firstServer.name, country: firstServer.country, hostname: firstServer.hostname, openVPNAddressesForTCP: [server], openVPNAddressesForUDP: [server], wireGuardAddressesForUDP: [server], iKEv2AddressesForUDP: [server], pingAddress: firstServer.pingAddress, geo: false, meta: nil, dipExpire: expiringDate, dipToken: dipServer.dipToken, dipStatus: status, dipUsername: dipUsername, regionIdentifier: firstServer.regionIdentifier)
-                    
-                    dipRegions.append(dipRegion)
-                    
-                    if status == .active {
+                        let dipUsername = "dedicated_ip_"+dipServer.dipToken+"_"+String.random(length: 8)
+
+                        let dipRegion = Server(serial: firstServer.serial, name: firstServer.name, country: firstServer.country, hostname: firstServer.hostname, openVPNAddressesForTCP: [server], openVPNAddressesForUDP: [server], wireGuardAddressesForUDP: [server], iKEv2AddressesForUDP: [server], pingAddress: firstServer.pingAddress, geo: false, meta: nil, dipExpire: expiringDate, dipToken: dipServer.dipToken, dipStatus: status, dipUsername: dipUsername, regionIdentifier: firstServer.regionIdentifier)
+                        
+                        dipRegions.append(dipRegion)
+                        
                         Client.database.secure.setDIPToken(dipServer.dipToken)
                         Client.database.secure.setPassword(ip, forDipToken: dipUsername)
+
+                    default:
+                        
+                        let dipRegion = Server(serial: "", name: "", country: "", hostname: "", openVPNAddressesForTCP: [], openVPNAddressesForUDP: [], wireGuardAddressesForUDP: [], iKEv2AddressesForUDP: [], pingAddress: nil, geo: false, meta: nil, dipExpire: nil, dipToken: nil, dipStatus: status, dipUsername: nil, regionIdentifier: "")
+                        dipRegions.append(dipRegion)
+
                     }
 
                 }
