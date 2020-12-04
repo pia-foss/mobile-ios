@@ -56,6 +56,8 @@ extension Notification.Name {
     public static let PIAPersistentConnectionSettingHaveChanged = Notification.Name("PIAPersistentConnectionSettingHaveChanged")
     public static let PIAPersistentConnectionTileHaveChanged = Notification.Name("PIAPersistentConnectionTileHaveChanged")
 
+    public static let PIADIPRegionExpiring = Notification.Name("PIADIPRegionExpiring")
+
 }
 
 extension NotificationKey {

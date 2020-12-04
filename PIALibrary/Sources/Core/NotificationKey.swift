@@ -26,6 +26,8 @@ import Foundation
 public struct NotificationKey: Hashable {
     static let products = NotificationKey("ProductsKey")
     
+    public static let token = NotificationKey("TokenKey")
+    
     /// An `UserAccount` object.
     public static let user = NotificationKey("UserKey")
     

@@ -250,6 +250,8 @@
 		82C4962A25642D5800233CB1 /* String+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C4962825642D5800233CB1 /* String+Random.swift */; };
 		82CAB808255A9ACB00BB08EF /* InAppMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB807255A9ACB00BB08EF /* InAppMessage.swift */; };
 		82CAB809255A9ACB00BB08EF /* InAppMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB807255A9ACB00BB08EF /* InAppMessage.swift */; };
+		82CDC2E2257A5B440001669D /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CDC2E1257A5B440001669D /* DateUtil.swift */; };
+		82CDC2E3257A5B440001669D /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CDC2E1257A5B440001669D /* DateUtil.swift */; };
 		82DDD5302539CFDC0049E79E /* DIPTokenKeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DDD52F2539CFDC0049E79E /* DIPTokenKeychainTests.swift */; };
 		82E20B1124F652ED0065EFE3 /* AccountInfo+Kotlin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E20B1024F652ED0065EFE3 /* AccountInfo+Kotlin.swift */; };
 		82E20B1224F652ED0065EFE3 /* AccountInfo+Kotlin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E20B1024F652ED0065EFE3 /* AccountInfo+Kotlin.swift */; };
@@ -574,6 +576,7 @@
 		82C374FA2514DEC700E391EE /* EndpointManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointManager.swift; sourceTree = "<group>"; };
 		82C4962825642D5800233CB1 /* String+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Random.swift"; sourceTree = "<group>"; };
 		82CAB807255A9ACB00BB08EF /* InAppMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppMessage.swift; sourceTree = "<group>"; };
+		82CDC2E1257A5B440001669D /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		82DDD52F2539CFDC0049E79E /* DIPTokenKeychainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIPTokenKeychainTests.swift; sourceTree = "<group>"; };
 		82E20B1024F652ED0065EFE3 /* AccountInfo+Kotlin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountInfo+Kotlin.swift"; sourceTree = "<group>"; };
 		82E20B1524F6AA110065EFE3 /* RegionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionData.swift; sourceTree = "<group>"; };
@@ -701,6 +704,7 @@
 				DDD824E4218996CD00151709 /* Pages.swift */,
 				DD76292D21ECEC3F0092DF50 /* DataManipulation.swift */,
 				DD6FB0362224355600A84F05 /* UIDevice+WiFi.swift */,
+				82CDC2E1257A5B440001669D /* DateUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1654,6 +1658,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E492C5F1FE5F7C0007F23DF /* MockAccountProvider.swift in Sources */,
+				82CDC2E3257A5B440001669D /* DateUtil.swift in Sources */,
 				0E392DBC1FE34B5A0002160D /* NSString+URL.m in Sources */,
 				84125E0C213D7E0E001BCC19 /* PIAFonts.swift in Sources */,
 				0E3D13DA1F9E273300434A48 /* GlossSignup.swift in Sources */,
@@ -1902,6 +1907,7 @@
 				0EFEB4C12007784A00F81029 /* PIATunnelProvider+Profile.swift in Sources */,
 				DD8C3E612327EF4C00BAD18E /* IKEv2IntegrityAlgorithm.swift in Sources */,
 				0E392DA31FE3247E0002160D /* Endpoint.swift in Sources */,
+				82CDC2E2257A5B440001669D /* DateUtil.swift in Sources */,
 				0E53A8581FE5DA16000C2A18 /* MockInAppProvider.swift in Sources */,
 				822BC1D024BF20C90041BF9A /* UIControl+Action.swift in Sources */,
 				DDD824E32189969400151709 /* Preset.swift in Sources */,

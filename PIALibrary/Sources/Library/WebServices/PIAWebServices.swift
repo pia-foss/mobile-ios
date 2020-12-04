@@ -248,6 +248,11 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                     let status = DedicatedIPStatus(fromAPIStatus: dipServer.status)
                     let server = Server.ServerAddressIP(ip: ip, cn: cn)
                     
+                    if let nextDays = Calendar.current.date(byAdding: .day, value: 5, to: Date()), nextDays >= expiringDate  {
+                        //Expiring in 5 days or less
+                        Macros.postNotification(.PIADIPRegionExpiring, [.token : token])
+                    }
+
                     let dipUsername = "dedicated_ip_"+dipServer.dipToken+"_"+String.random(length: 8)
 
                     let dipRegion = Server(serial: firstServer.serial, name: firstServer.name, country: firstServer.country, hostname: firstServer.hostname, openVPNAddressesForTCP: [server], openVPNAddressesForUDP: [server], wireGuardAddressesForUDP: [server], iKEv2AddressesForUDP: [server], pingAddress: firstServer.pingAddress, geo: false, meta: nil, dipExpire: expiringDate, dipToken: dipServer.dipToken, dipStatus: status, dipUsername: dipUsername, regionIdentifier: firstServer.regionIdentifier)
