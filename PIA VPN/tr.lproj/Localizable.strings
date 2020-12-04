@@ -1,3 +1,4 @@
+"Localizable" = "Yerelleştirilebilir";
 "about.accessibility.component.expand" = "Lisansın tamamını görmek için dokunun";
 "about.app" = "Private Internet Access'ten VPN";
 "about.intro" = "Bu program şu bileşenleri kullanmaktadır:";
@@ -58,6 +59,22 @@
 "dashboard.vpn.disconnected" = "Bağlantı Kesildi";
 "dashboard.vpn.disconnecting" = "Bağlantı Kesiliyor";
 "dashboard.vpn.on" = "VPN: AÇIK";
+"dedicated.ip.activate.button.title" = "Etkinleştir";
+"dedicated.ip.activation.description" = "Belirtecinizi aşağı yapıştırarak Özel IP'nizi etkinleştirin. Kısa süre önce bir özel IP aldıysanız PIA web sitesine giderek belirteci üretebilirsiniz.";
+"dedicated.ip.country.flag.accessibility" = "%@ için ülke bayrağı";
+"dedicated.ip.message.error.token" = "Belirtecinizin süresi dolmuş. Lütfen web sitesindeki Hesap sayfanıza giderek yenisini üretin.";
+"dedicated.ip.message.expired.token" = "Belirtecinizin süresi dolmuş. Lütfen web sitesindeki Hesap sayfanıza giderek yenisini üretin.";
+"dedicated.ip.message.incorrect.token" = "Lütfen belirteci doğru şekilde girdiğinizden emin olun";
+"dedicated.ip.message.invalid.token" = "Belirteciniz geçersiz. Lütfen belirteci doğru şekilde girdiğinizden emin olun";
+"dedicated.ip.message.ip.updated" = "Özel IP'niz güncellendi";
+"dedicated.ip.message.token.willexpire" = "Özel IP'nizin süresi yakında dolacak. Yenisini alın";
+"dedicated.ip.message.token.willexpire.link" = "Yenisini alın";
+"dedicated.ip.message.valid.token" = "Özel IP'niz başarıyla etkinleştirildi. Bölge seçim listenizde mevcut olacak.";
+"dedicated.ip.plural.title" = "Özel IP'leriniz";
+"dedicated.ip.remove" = "Seçilen bölgeyi silmek istediğinizden emin misiniz?";
+"dedicated.ip.title" = "Özel IP";
+"dedicated.ip.token.textfield.accessibility" = "Özel IP belirtecinin yazılacağı metin alanı";
+"dedicated.ip.token.textfield.placeholder" = "Belirtecinizi buraya yapıştırın";
 "expiration.message" = "Üyeliğiniz yakında sona erecek. Koruma altında kalmak için yenileyin.";
 "expiration.title" = "Yenileme";
 "friend.referrals.days.acquired" = "Ücretsiz günler alındı";
@@ -93,6 +110,7 @@
 "global.close" = "Kapat";
 "global.copied" = "Panoya kopyalandı";
 "global.copy" = "Kopyala";
+"global.disable" = "Kapat";
 "global.disabled" = "Kapalı";
 "global.edit" = "Düzenle";
 "global.empty" = "Boş";
@@ -105,6 +123,7 @@
 "global.or" = "veya";
 "global.remove" = "Kaldır";
 "global.required" = "Gerekli";
+"global.row.selection" = "Sıra seçimi";
 "global.share" = "Paylaş";
 "global.unreachable" = "İnternet bağlantısı bulunamadı. Lütfen İnternet bağlantınızın olduğunu doğrulayın.";
 "global.update" = "Güncelle";
@@ -153,8 +172,8 @@
 "rating.enjoy.question" = "PIA VPN hoşunuza gidiyor mu?";
 "rating.enjoy.subtitle" = "Umarız VPN ürünümüz beklentilerinizi karşılıyordur";
 "rating.error.button.send" = "Geri bildirim gönder";
-"rating.error.question" = "Hay aksi! Sorun nedir?";
-"rating.error.subtitle" = "Bize bu konuda bilgi verin. Bu sorunu sizin için düzeltmek isteriz.";
+"rating.error.question" = "Bağlantı kurulamadı";
+"rating.error.subtitle" = "Farklı bir bölge seçebilir ya da bir destek bileti açarak bize bilgi verebilirsiniz.";
 "rating.problems.question" = "Sorun nedir?";
 "rating.problems.subtitle" = "Geri bildirim göndermek ister misiniz? PIA kullanırken yaşadığınız deneyimi geliştirmenize yardımcı olabiliriz";
 "rating.rate.question" = "AppStore değerlendirmesi verebilir misiniz?";
@@ -170,6 +189,8 @@
 "renewal.failure.message" = "Satın alım işleminizin faturası gönderilemedi; lütfen daha sonra tekrar deneyin.";
 "renewal.success.message" = "Hesabınız başarıyla yenilendi.";
 "renewal.success.title" = "Teşekkürler";
+"server.reconnection.please.wait" = "Lütfen bekleyin...";
+"server.reconnection.still.connection" = "Bağlanma işlemi devam ediyor...";
 "set.email.error.validation" = "Bir e-posta adresi girmeniz gerekiyor.";
 "set.email.form.email" = "E-posta adresinizi girin";
 "set.email.password.caption" = "Şifre";
@@ -269,7 +290,7 @@
 "tiles.nmt.accessibility.trusted" = "Güvenilir ağ";
 "tiles.nmt.accessibility.untrusted" = "Güvenilmeyen ağ";
 "tiles.nmt.cellular" = "Hücresel";
-"tiles.quick.connect.title" = "Son kullanılan";
+"tiles.quick.connect.title" = "Hızlı bağlan";
 "tiles.quicksetting.nmt.title" = "Ağ Yönetimi";
 "tiles.quicksetting.private.browser.title" = "Özel Tarayıcı";
 "tiles.quicksettings.min.elements.message" = "Hızlı Ayarlar Kısmında en az bir unsuru görünür tutmanız gerekiyor";

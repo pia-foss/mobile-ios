@@ -1,3 +1,4 @@
+"Localizable" = "Lokaliseerbaar";
 "about.accessibility.component.expand" = "Tik om volledige licentie te lezen";
 "about.app" = "VPN door Private Internet Access";
 "about.intro" = "Dit programma gebruikt de volgende componenten:";
@@ -58,6 +59,22 @@
 "dashboard.vpn.disconnected" = "Verbinding verbroken";
 "dashboard.vpn.disconnecting" = "Verbinding verbreken...";
 "dashboard.vpn.on" = "VPN: AAN";
+"dedicated.ip.activate.button.title" = "Activeren";
+"dedicated.ip.activation.description" = "Activeer uw dedicated IP door uw code in het formulier hieronder te plakken. Als u onlangs een dedicated IP hebt gekocht, kunt u de code op de PIA-website genereren.";
+"dedicated.ip.country.flag.accessibility" = "Landsvlag voor %@";
+"dedicated.ip.message.error.token" = "Uw code is verlopen. Genereer een nieuwe via uw accountpagina op de website.";
+"dedicated.ip.message.expired.token" = "Uw code is verlopen. Genereer een nieuwe via uw accountpagina op de website.";
+"dedicated.ip.message.incorrect.token" = "Zorg ervoor dat u de code juist heeft ingevoerd";
+"dedicated.ip.message.invalid.token" = "Uw code is ongeldig. Zorg ervoor dat u de code juist heeft ingevoerd.";
+"dedicated.ip.message.ip.updated" = "Uw dedicated IP is bijgewerkt";
+"dedicated.ip.message.token.willexpire" = "Uw dedicated IP verloopt binnenkort. Haal een nieuwe";
+"dedicated.ip.message.token.willexpire.link" = "Haal een nieuwe";
+"dedicated.ip.message.valid.token" = "Uw dedicated IP is geactiveerd. Het is beschikbaar in uw regioselectielijst.";
+"dedicated.ip.plural.title" = "Uw dedicated IP's";
+"dedicated.ip.remove" = "Weet u zeker dat u de geselecteerde regio wilt verwijderen?";
+"dedicated.ip.title" = "Dedicated IP";
+"dedicated.ip.token.textfield.accessibility" = "Het tekstveld om uw dedicated IP-code in te voeren";
+"dedicated.ip.token.textfield.placeholder" = "Plak uw code hier";
 "expiration.message" = "Uw abonnement verloopt binnenkort. Vernieuw uw abonnement om beschermd te blijven.";
 "expiration.title" = "Vernieuwing";
 "friend.referrals.days.acquired" = "Ontvangen gratis dagen";
@@ -93,6 +110,7 @@
 "global.close" = "Sluiten";
 "global.copied" = "Naar klembord gekopieerd";
 "global.copy" = "Kopiëren";
+"global.disable" = "Uitschakelen";
 "global.disabled" = "Uitgeschakeld";
 "global.edit" = "Bewerken";
 "global.empty" = "Leeg";
@@ -105,6 +123,7 @@
 "global.or" = "of";
 "global.remove" = "Verwijderen";
 "global.required" = "Vereist";
+"global.row.selection" = "Rijselectie";
 "global.share" = "Delen";
 "global.unreachable" = "Geen internetverbinding gevonden. Controleer uw internetverbinding.";
 "global.update" = "Updaten";
@@ -153,8 +172,8 @@
 "rating.enjoy.question" = "Geniet u van PIA VPN?";
 "rating.enjoy.subtitle" = "We hopen dat ons VPN-product aan uw verwachtingen voldoet";
 "rating.error.button.send" = "Feedback sturen";
-"rating.error.question" = "O nee, wat is er fout gegaan?";
-"rating.error.subtitle" = "Laat het ons weten. We willen het graag voor u verhelpen.";
+"rating.error.question" = "De verbinding kan niet tot stand worden gebracht";
+"rating.error.subtitle" = "U kunt een andere regio selecteren of ons hiervan op de hoogte stellen door een supportticket te openen.";
 "rating.problems.question" = "Wat is er fout gegaan?";
 "rating.problems.subtitle" = "Wilt u feedback geven? We kunnen u helpen met het verbeteren van uw ervaring met PIA.";
 "rating.rate.question" = "Waarom laat u geen beoordeling achter in de AppStore?";
@@ -170,6 +189,8 @@
 "renewal.failure.message" = "Uw aankoopbewijs kan niet worden verzonden. Probeer het later opnieuw.";
 "renewal.success.message" = "Uw account is vernieuwd.";
 "renewal.success.title" = "Dank u wel";
+"server.reconnection.please.wait" = "Even geduld...";
+"server.reconnection.still.connection" = "Nog steeds bezig met verbinding maken...";
 "set.email.error.validation" = "U moet een e-mailadres invoeren.";
 "set.email.form.email" = "Voer uw e-mailadres in";
 "set.email.password.caption" = "Wachtwoord";
@@ -269,7 +290,7 @@
 "tiles.nmt.accessibility.trusted" = "Vertrouwd netwerk";
 "tiles.nmt.accessibility.untrusted" = "Niet-vertrouwd netwerk";
 "tiles.nmt.cellular" = "Cellulair";
-"tiles.quick.connect.title" = "Recente servers";
+"tiles.quick.connect.title" = "Snel verbinden";
 "tiles.quicksetting.nmt.title" = "Netwerkbeheer";
 "tiles.quicksetting.private.browser.title" = "Privébrowser";
 "tiles.quicksettings.min.elements.message" = "Houd ten minste één element zichtbaar in de tegel Snelle instellingen";

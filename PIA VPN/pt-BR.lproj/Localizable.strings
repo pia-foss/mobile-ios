@@ -1,3 +1,4 @@
+"Localizable" = "Localizável";
 "about.accessibility.component.expand" = "Toque para ler a licença completa";
 "about.app" = "VPN da Private Internet Access";
 "about.intro" = "Este programa utiliza os seguintes elementos:";
@@ -58,6 +59,22 @@
 "dashboard.vpn.disconnected" = "Desconectado";
 "dashboard.vpn.disconnecting" = "Desconectando...";
 "dashboard.vpn.on" = "VPN: ON";
+"dedicated.ip.activate.button.title" = "Ativar";
+"dedicated.ip.activation.description" = "Ative o seu IP dedicado colando o token no formulário abaixo. Se comprou um IP dedicado recentemente, você pode gerar o token acessando o site da PIA.";
+"dedicated.ip.country.flag.accessibility" = "Bandeira do país %@";
+"dedicated.ip.message.error.token" = "Seu token expirou. Gere um novo na página da sua conta no site.";
+"dedicated.ip.message.expired.token" = "Seu token expirou. Gere um novo na página da sua conta no site.";
+"dedicated.ip.message.incorrect.token" = "Verifique se você inseriu o token corretamente";
+"dedicated.ip.message.invalid.token" = "O seu token é inválido. Verifique se você inseriu o token corretamente.";
+"dedicated.ip.message.ip.updated" = "O seu IP dedicado foi atualizado";
+"dedicated.ip.message.token.willexpire" = "O seu IP dedicado irá expirar em breve.";
+"dedicated.ip.message.token.willexpire.link" = "Obtenha um novo";
+"dedicated.ip.message.valid.token" = "O seu IP dedicado foi ativado com sucesso. Ele estará disponível em sua lista de seleção de regiões.";
+"dedicated.ip.plural.title" = "Seus IPs dedicados";
+"dedicated.ip.remove" = "Tem certeza de que deseja remover a região selecionada?";
+"dedicated.ip.title" = "IP dedicado";
+"dedicated.ip.token.textfield.accessibility" = "O campo de texto para digitar o token de IP dedicado";
+"dedicated.ip.token.textfield.placeholder" = "Cole o seu token aqui";
 "expiration.message" = "Sua assinatura expirará em breve. Renove para continuar protegido.";
 "expiration.title" = "Renovação";
 "friend.referrals.days.acquired" = "Dias grátis obtidos";
@@ -93,6 +110,7 @@
 "global.close" = "Fechar";
 "global.copied" = "Copiado para a área de transferência";
 "global.copy" = "Copiar";
+"global.disable" = "Desativar";
 "global.disabled" = "Desativado";
 "global.edit" = "Editar";
 "global.empty" = "Vazia";
@@ -105,6 +123,7 @@
 "global.or" = "ou";
 "global.remove" = "Remover";
 "global.required" = "Obrigatório";
+"global.row.selection" = "Seleção de linha";
 "global.share" = "Compartilhar";
 "global.unreachable" = "Nenhuma conexão de internet encontrada. Confirme que você tem uma conexão de internet.";
 "global.update" = "Atualizar";
@@ -153,8 +172,8 @@
 "rating.enjoy.question" = "Está gostando da VPN da PIA?";
 "rating.enjoy.subtitle" = "Esperamos que nosso produto de VPN atenda às suas expectativas";
 "rating.error.button.send" = "Enviar feedback";
-"rating.error.question" = "Ah não, o que aconteceu de errado?";
-"rating.error.subtitle" = "Conte-nos sobre o que aconteceu. Nós realmente queremos corrigir isso para você.";
+"rating.error.question" = "Não foi possível estabelecer a conexão";
+"rating.error.subtitle" = "Você pode tentar selecionar uma região diferente ou nos contar o que aconteceu abrindo um tíquete de suporte.";
 "rating.problems.question" = "O que aconteceu de errado?";
 "rating.problems.subtitle" = "Deseja dar seu feedback? Podemos ajudá-lo a melhorar sua experiência com o uso da PIA";
 "rating.rate.question" = "Que tal uma avaliação na App Store?";
@@ -170,6 +189,8 @@
 "renewal.failure.message" = "O recibo da compra não pôde ser enviado. Por favor tente novamente mais tarde.";
 "renewal.success.message" = "Sua conta foi renovada com sucesso.";
 "renewal.success.title" = "Obrigado";
+"server.reconnection.please.wait" = "Aguarde...";
+"server.reconnection.still.connection" = "Ainda tentando conectar...";
 "set.email.error.validation" = "É necessário que você insira um endereço de e-mail.";
 "set.email.form.email" = "Insira seu endereço de e-mail";
 "set.email.password.caption" = "Senha";
@@ -269,7 +290,7 @@
 "tiles.nmt.accessibility.trusted" = "Rede de confiança";
 "tiles.nmt.accessibility.untrusted" = "Rede não confiável";
 "tiles.nmt.cellular" = "Celular";
-"tiles.quick.connect.title" = "Servidores recentes";
+"tiles.quick.connect.title" = "Conexão rápida";
 "tiles.quicksetting.nmt.title" = "Gestão de Rede";
 "tiles.quicksetting.private.browser.title" = "Navegador privado";
 "tiles.quicksettings.min.elements.message" = "Você deve manter pelo menos um elemento visível no bloco Configurações Rápidas";

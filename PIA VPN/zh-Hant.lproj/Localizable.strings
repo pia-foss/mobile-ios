@@ -1,3 +1,4 @@
+"Localizable" = "可本地化";
 "about.accessibility.component.expand" = "點一下即可閱讀完整授權條款";
 "about.app" = "Private Internet Access 虛擬私人網路";
 "about.intro" = "本程式使用下列元件：";
@@ -58,6 +59,22 @@
 "dashboard.vpn.disconnected" = "已解除連線";
 "dashboard.vpn.disconnecting" = "正在解除連線…";
 "dashboard.vpn.on" = "VPN 已開啟";
+"dedicated.ip.activate.button.title" = "啟用";
+"dedicated.ip.activation.description" = "請在下方表格中貼上權杖以啟用專屬 IP。若您近期有購買專屬 IP，即可前往 PIA 網站頁面產生權杖。";
+"dedicated.ip.country.flag.accessibility" = "%@ 國旗";
+"dedicated.ip.message.error.token" = "您的權杖已到期。請到網站的帳戶頁面產生新權杖。";
+"dedicated.ip.message.expired.token" = "您的權杖已到期。請到網站的帳戶頁面產生新權杖。";
+"dedicated.ip.message.incorrect.token" = "請確保輸入的權杖正確無誤";
+"dedicated.ip.message.invalid.token" = "您的權杖無效。請確保輸入的權杖正確無誤。";
+"dedicated.ip.message.ip.updated" = "您的專屬 IP 已更新";
+"dedicated.ip.message.token.willexpire" = "您的專屬 IP 即將到期。取得新權杖";
+"dedicated.ip.message.token.willexpire.link" = "取得新權杖";
+"dedicated.ip.message.valid.token" = "您的專屬 IP 已成功啟用。它將會出現在區域選擇清單中。";
+"dedicated.ip.plural.title" = "您的專屬 IP";
+"dedicated.ip.remove" = "確定要移除所選的區域嗎？";
+"dedicated.ip.title" = "專屬 IP";
+"dedicated.ip.token.textfield.accessibility" = "輸入專屬 IP 權杖的文字輸入框";
+"dedicated.ip.token.textfield.placeholder" = "在此貼上權杖";
 "expiration.message" = "您的訂購計劃即將屆滿，請續約以讓自己繼續獲得保障。";
 "expiration.title" = "續訂";
 "friend.referrals.days.acquired" = "已獲得免費天數";
@@ -93,6 +110,7 @@
 "global.close" = "關閉";
 "global.copied" = "已複製到剪貼簿";
 "global.copy" = "複製";
+"global.disable" = "停用";
 "global.disabled" = "已停用";
 "global.edit" = "編輯";
 "global.empty" = "空白";
@@ -105,6 +123,7 @@
 "global.or" = "或";
 "global.remove" = "移除";
 "global.required" = "必須";
+"global.row.selection" = "列選擇";
 "global.share" = "分享";
 "global.unreachable" = "找不到網際網路連線。請確認您已連線至網際網路。";
 "global.update" = "更新";
@@ -153,8 +172,8 @@
 "rating.enjoy.question" = "您喜歡 PIA VPN 嗎？";
 "rating.enjoy.subtitle" = "我們希望我們的 VPN 產品符合您的期望";
 "rating.error.button.send" = "發送反饋";
-"rating.error.question" = "很抱歉，發生了什麼錯誤？";
-"rating.error.subtitle" = "告訴我們詳情。我們真的很想為您修復它。";
+"rating.error.question" = "無法建立連線";
+"rating.error.subtitle" = "您可嘗試選擇不同區域，或開立支援單來通知我們。";
 "rating.problems.question" = "發生了什麼錯誤？";
 "rating.problems.subtitle" = "您想提供反饋嗎？我們可以幫助您改善使用 PIA 的體驗";
 "rating.rate.question" = "可否為我們在 AppStore 評價？";
@@ -170,6 +189,8 @@
 "renewal.failure.message" = "目前無法提交您的購買項目發票，請稍後再試。";
 "renewal.success.message" = "您的帳戶已成功續訂。";
 "renewal.success.title" = "感謝您的支持";
+"server.reconnection.please.wait" = "請稍候…";
+"server.reconnection.still.connection" = "仍在嘗試連線…";
 "set.email.error.validation" = "您必須輸入電子郵件地址。";
 "set.email.form.email" = "輸入電子郵件地址";
 "set.email.password.caption" = "密碼";
@@ -269,7 +290,7 @@
 "tiles.nmt.accessibility.trusted" = "信任網路";
 "tiles.nmt.accessibility.untrusted" = "非信任網路";
 "tiles.nmt.cellular" = "行動網路";
-"tiles.quick.connect.title" = "最近的伺服器";
+"tiles.quick.connect.title" = "快速連線";
 "tiles.quicksetting.nmt.title" = "網路管理";
 "tiles.quicksetting.private.browser.title" = "私人瀏覽器";
 "tiles.quicksettings.min.elements.message" = "您應在快速設定磚中保留至少一個可見的元素";

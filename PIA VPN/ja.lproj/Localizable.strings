@@ -1,3 +1,4 @@
+"Localizable" = "ローカライズ可能";
 "about.accessibility.component.expand" = "タップしてフルライセンスを読む";
 "about.app" = "Private Internet AccessによるVPN";
 "about.intro" = "このプログラムは次の構成要素を使用します:";
@@ -58,6 +59,22 @@
 "dashboard.vpn.disconnected" = "切断済み";
 "dashboard.vpn.disconnecting" = "切断中...";
 "dashboard.vpn.on" = "VPN: 有効";
+"dedicated.ip.activate.button.title" = "アクティベート";
+"dedicated.ip.activation.description" = "下のフォームにトークンを貼り付けて、専用IPをアクティブにします。最近専用IPを購入した場合は、PIAウェブサイトにアクセスしてトークンを生成することができます。";
+"dedicated.ip.country.flag.accessibility" = "%@の国旗";
+"dedicated.ip.message.error.token" = "トークンの有効期限が切れています。ウェブサイトのアカウントページから新しいトークンを生成してください。";
+"dedicated.ip.message.expired.token" = "トークンの有効期限が切れています。ウェブサイトのアカウントページから新しいトークンを生成してください。";
+"dedicated.ip.message.incorrect.token" = "トークンが正しく入力されていることを確認してください";
+"dedicated.ip.message.invalid.token" = "トークンが無効です。トークンが正しく入力されていることを確認してください。";
+"dedicated.ip.message.ip.updated" = "あなたの専用IPが更新されました";
+"dedicated.ip.message.token.willexpire" = "あなたの専用IPは間もなく期限が切れます。新しい専用IPを入手してください";
+"dedicated.ip.message.token.willexpire.link" = "新しい専用IPを入手する";
+"dedicated.ip.message.valid.token" = "専用IPが正常にアクティベートされました。地域選択リストで利用できるようになります。";
+"dedicated.ip.plural.title" = "あなたの専用IP";
+"dedicated.ip.remove" = "選択された地域を削除してよろしいですか？";
+"dedicated.ip.title" = "専用IP";
+"dedicated.ip.token.textfield.accessibility" = "専用IPトークンを入力するためのテキストフィールド";
+"dedicated.ip.token.textfield.placeholder" = "ここにトークンを貼り付けます";
 "expiration.message" = "ご利用のサブスクリプションがもうすぐ期限切れとなります。更新して保護された状態を保ちましょう。";
 "expiration.title" = "更新";
 "friend.referrals.days.acquired" = "無料期間を取得しました";
@@ -93,6 +110,7 @@
 "global.close" = "閉じる";
 "global.copied" = "クリップボードにコピーされました";
 "global.copy" = "コピー";
+"global.disable" = "無効にする";
 "global.disabled" = "無効化済み";
 "global.edit" = "編集";
 "global.empty" = "空";
@@ -105,6 +123,7 @@
 "global.or" = "または";
 "global.remove" = "削除";
 "global.required" = "必須";
+"global.row.selection" = "行の選択";
 "global.share" = "共有";
 "global.unreachable" = "インターネット接続が見つかりません。インターネット接続があることを確認してください。";
 "global.update" = "アップデート";
@@ -153,8 +172,8 @@
 "rating.enjoy.question" = "PIA VPNを楽しんでいますか？";
 "rating.enjoy.subtitle" = "VPN製品にご満足いただいていることを願っています";
 "rating.error.button.send" = "フィードバックを送信";
-"rating.error.question" = "どのような問題があったのでしょうか？";
-"rating.error.subtitle" = "問題解決に努めたいと思いますので、問題について説明してください。";
+"rating.error.question" = "接続を確立できませんでした";
+"rating.error.subtitle" = "別の地域を選択するか、サポートチケットを開いてそれについてお知らせください。";
 "rating.problems.question" = "どのような問題があったのでしょうか？";
 "rating.problems.subtitle" = "フィードバックを送信しますか？PIAご利用にあたり、お客様のエクスペリエンス改善のお手伝いをいたします。";
 "rating.rate.question" = "AppStoreでレビューしていただけますか？";
@@ -170,6 +189,8 @@
 "renewal.failure.message" = "購入レシートを送信できませんでした。後でもう一度お試しください。";
 "renewal.success.message" = "アカウントが正常に更新されました。";
 "renewal.success.title" = "ありがとうございます";
+"server.reconnection.please.wait" = "お待ちください…";
+"server.reconnection.still.connection" = "まだ接続試行中です...";
 "set.email.error.validation" = "メールアドレスを入力する必要があります。";
 "set.email.form.email" = "メールアドレスを入力してください";
 "set.email.password.caption" = "パスワード";
@@ -269,7 +290,7 @@
 "tiles.nmt.accessibility.trusted" = "信頼されたネットワーク";
 "tiles.nmt.accessibility.untrusted" = "信頼されていないネットワーク";
 "tiles.nmt.cellular" = "セルラー";
-"tiles.quick.connect.title" = "最近のサーバー";
+"tiles.quick.connect.title" = "クイック接続";
 "tiles.quicksetting.nmt.title" = "ネットワーク管理";
 "tiles.quicksetting.private.browser.title" = "プライベートブラウザ";
 "tiles.quicksettings.min.elements.message" = "クイック設定タイルの少なくとも1つのエレメントを可視状態にしておくべきです";

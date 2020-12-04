@@ -1,3 +1,4 @@
+"Localizable" = "Lokaliserbar";
 "about.accessibility.component.expand" = "Tryk for at læse fuld licens";
 "about.app" = "VPN fra Private Internet Access";
 "about.intro" = "Dette program bruger følgende komponenter:";
@@ -58,6 +59,22 @@
 "dashboard.vpn.disconnected" = "Forbindelse afbrudt";
 "dashboard.vpn.disconnecting" = "Afbryder forbindelse...";
 "dashboard.vpn.on" = "VPN: TIL";
+"dedicated.ip.activate.button.title" = "Aktiver";
+"dedicated.ip.activation.description" = "Aktiver din dedikerede IP ved at indsætte dit token i nedenstående formular. Hvis du for nylig har købt en dedikeret IP, kan du generere tokenet ved at gå til PIA-websiden.";
+"dedicated.ip.country.flag.accessibility" = "Landeflag for %@";
+"dedicated.ip.message.error.token" = "Dit token er udløbet. Generer et nyt fra din kontoside på websiden.";
+"dedicated.ip.message.expired.token" = "Dit token er udløbet. Generer et nyt fra din kontoside på websiden.";
+"dedicated.ip.message.incorrect.token" = "Sørg for, at du har indtastet tokenet korrekt";
+"dedicated.ip.message.invalid.token" = "Dit token er ugyldigt. Sørg for, at du har indtastet tokenet korrekt.";
+"dedicated.ip.message.ip.updated" = "Din dedikerede IP blev opdateret";
+"dedicated.ip.message.token.willexpire" = "Din dedikerede IP udløber snart. Få en ny";
+"dedicated.ip.message.token.willexpire.link" = "Få en ny";
+"dedicated.ip.message.valid.token" = "Din dedikerede IP er blevet aktiveret. Den vil være tilgængelig på din liste over Valg af regioner.";
+"dedicated.ip.plural.title" = "Dine dedikerede IP'er";
+"dedicated.ip.remove" = "Er du sikker på, at du vil fjerne den valgte region?";
+"dedicated.ip.title" = "Dedikeret IP";
+"dedicated.ip.token.textfield.accessibility" = "Tekstfeltet til at indtaste det dedikerede IP-token";
+"dedicated.ip.token.textfield.placeholder" = "Indtast dit token her";
 "expiration.message" = "Dit abonnement udløber snart. Forny for at forblive beskyttet.";
 "expiration.title" = "Fornyelse";
 "friend.referrals.days.acquired" = "Gratis dage erhvervet";
@@ -93,6 +110,7 @@
 "global.close" = "Luk";
 "global.copied" = "Kopieret til udklipsholder";
 "global.copy" = "Kopier";
+"global.disable" = "Deaktiver";
 "global.disabled" = "Deaktiveret";
 "global.edit" = "Rediger";
 "global.empty" = "Tom";
@@ -105,6 +123,7 @@
 "global.or" = "eller";
 "global.remove" = "Fjern";
 "global.required" = "Påkrævet";
+"global.row.selection" = "Valg af række";
 "global.share" = "Del";
 "global.unreachable" = "Ingen internetforbindelse fundet. Bekræft venligst, at du har en internetforbindelse.";
 "global.update" = "Opdater";
@@ -153,8 +172,8 @@
 "rating.enjoy.question" = "Har du glæde af PIA VPN?";
 "rating.enjoy.subtitle" = "Vi håber, at vores VPN lever op til dine forventninger.";
 "rating.error.button.send" = "Send feedback";
-"rating.error.question" = "Åh nej, hvad gik galt?";
-"rating.error.subtitle" = "Fortæl os om det. Vi vil meget gerne løse det for dig.";
+"rating.error.question" = "Forbindelsen kunne ikke oprettes";
+"rating.error.subtitle" = "Du kan prøve at vælge en anden region, eller fortælle os om det, ved at åbne en supportbillet.";
 "rating.problems.question" = "Hvad gik galt?";
 "rating.problems.subtitle" = "Vil du give noget feedback? Vi kan hjælpe dig med at forbedre din oplevelse med PIA";
 "rating.rate.question" = "Hvad med en AppStore-anmeldelse?";
@@ -170,6 +189,8 @@
 "renewal.failure.message" = "Din købskvittering kunne ikke indsendes, prøv igen på et senere tidspunkt.";
 "renewal.success.message" = "Din konto blev fornyet.";
 "renewal.success.title" = "Mange tak";
+"server.reconnection.please.wait" = "Vent venligst...";
+"server.reconnection.still.connection" = "Prøver stadigt at oprette forbindelse...";
 "set.email.error.validation" = "Du skal angive en e-mailadresse.";
 "set.email.form.email" = "Angiv din e-mailadresse";
 "set.email.password.caption" = "Adgangskode";
@@ -269,7 +290,7 @@
 "tiles.nmt.accessibility.trusted" = "Betroet netværk";
 "tiles.nmt.accessibility.untrusted" = "Ubetroet netværk";
 "tiles.nmt.cellular" = "Mobil";
-"tiles.quick.connect.title" = "Seneste servere";
+"tiles.quick.connect.title" = "Hurtig tilslutning";
 "tiles.quicksetting.nmt.title" = "Netværksstyring";
 "tiles.quicksetting.private.browser.title" = "Privat browser";
 "tiles.quicksettings.min.elements.message" = "Du skal holde mindst et element synligt i flisen Hurtig-indstillinger";

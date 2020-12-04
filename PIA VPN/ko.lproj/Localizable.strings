@@ -1,3 +1,4 @@
+"Localizable" = "현지화 가능";
 "about.accessibility.component.expand" = "라이선스 전문을 보려면 누르세요";
 "about.app" = "Private Internet Access의 VPN";
 "about.intro" = "이 프로그램이 사용하는 구성 요소는 다음과 같습니다.";
@@ -58,6 +59,22 @@
 "dashboard.vpn.disconnected" = "연결 해제됨";
 "dashboard.vpn.disconnecting" = "연결 해제 중...";
 "dashboard.vpn.on" = "VPN: 켬";
+"dedicated.ip.activate.button.title" = "활성화";
+"dedicated.ip.activation.description" = "아래 양식에 회원님의 토큰을 붙여넣어서 전용 IP를 활성화하세요. 최근에 전용 IP를 구매하신 경우 PIA 웹사이트로 이동하여 토큰을 생성하실 수 있습니다.";
+"dedicated.ip.country.flag.accessibility" = "%@의 국기";
+"dedicated.ip.message.error.token" = "회원님의 토큰은 만료되었습니다. 웹사이트의 계정 페이지에서 새로운 토큰을 생성하세요.";
+"dedicated.ip.message.expired.token" = "회원님의 토큰은 만료되었습니다. 웹사이트의 계정 페이지에서 새로운 토큰을 생성하세요.";
+"dedicated.ip.message.incorrect.token" = "올바른 토큰을 입력했는지 확인하세요";
+"dedicated.ip.message.invalid.token" = "토큰이 유효하지 않습니다. 올바른 토큰을 입력했는지 확인하세요.";
+"dedicated.ip.message.ip.updated" = "회원님의 전용 IP가 업데이트되었습니다";
+"dedicated.ip.message.token.willexpire" = "회원님의 전용 IP가 곧 만료됩니다. 새로 획득하세요";
+"dedicated.ip.message.token.willexpire.link" = "새로 획득하기";
+"dedicated.ip.message.valid.token" = "회원님의 전용 IP가 성공적으로 활성화되었습니다. 지역 선택 목록에서 사용하실 수 있습니다.";
+"dedicated.ip.plural.title" = "회원님의 전용 IP";
+"dedicated.ip.remove" = "선택된 지역을 제거하시겠습니까?";
+"dedicated.ip.title" = "전용 IP";
+"dedicated.ip.token.textfield.accessibility" = "전용 IP 토큰을 입력하는 텍스트 필드";
+"dedicated.ip.token.textfield.placeholder" = "여기에 회원님의 토큰을 붙여넣으세요";
 "expiration.message" = "구독이 곧 만료됩니다. 갱신하여 계속 보호를 받으세요.";
 "expiration.title" = "갱신";
 "friend.referrals.days.acquired" = "무료 일수 획득";
@@ -93,6 +110,7 @@
 "global.close" = "닫기";
 "global.copied" = "클립보드로 복사 완료";
 "global.copy" = "복사";
+"global.disable" = "해제";
 "global.disabled" = "비활성화됨";
 "global.edit" = "편집";
 "global.empty" = "비어 있음";
@@ -105,6 +123,7 @@
 "global.or" = "또는";
 "global.remove" = "제거";
 "global.required" = "필수";
+"global.row.selection" = "행 선택";
 "global.share" = "공유";
 "global.unreachable" = "인터넷에 연결되지 않았습니다. 인터넷에 연결되어 있는지 확인하세요.";
 "global.update" = "업데이트";
@@ -153,8 +172,8 @@
 "rating.enjoy.question" = "PIA VPN이 마음에 드세요?";
 "rating.enjoy.subtitle" = "저희 VPN 제품이 고객님의 기대에 부응하기를 바랍니다";
 "rating.error.button.send" = "피드백 보내기";
-"rating.error.question" = "어떤 문제가 있었습니까?";
-"rating.error.subtitle" = "저희에게 알려 주세요. 최선을 다해 해결해 드리겠습니다.";
+"rating.error.question" = "연결을 수립할 수 없습니다";
+"rating.error.subtitle" = "다른 지역을 선택해 보시거나 지원 티켓을 열어서 저희에게 알려 주세요.";
 "rating.problems.question" = "어떤 문제가 있었습니까?";
 "rating.problems.subtitle" = "피드백을 보내 주시겠습니까? 더 나은 PIA를 경험하실 수 있도록 도와 드리겠습니다";
 "rating.rate.question" = "App Store에 리뷰를 남겨 주시겠습니까?";
@@ -170,6 +189,8 @@
 "renewal.failure.message" = "구매 영수증을 제출하지 못했습니다. 나중에 다시 시도하세요.";
 "renewal.success.message" = "귀하의 계정이 갱신되었습니다.";
 "renewal.success.title" = "감사합니다";
+"server.reconnection.please.wait" = "잠시만 기다리세요...";
+"server.reconnection.still.connection" = "아직 연결을 시도하는 중입니다...";
 "set.email.error.validation" = "이메일 주소를 입력해야 합니다.";
 "set.email.form.email" = "이메일 주소를 입력하세요";
 "set.email.password.caption" = "비밀번호";
@@ -269,7 +290,7 @@
 "tiles.nmt.accessibility.trusted" = "신뢰할 수 있는 네트워크";
 "tiles.nmt.accessibility.untrusted" = "신뢰할 수 없는 네트워크";
 "tiles.nmt.cellular" = "셀룰러";
-"tiles.quick.connect.title" = "최근 서버";
+"tiles.quick.connect.title" = "빠른 연결";
 "tiles.quicksetting.nmt.title" = "네트워크 관리";
 "tiles.quicksetting.private.browser.title" = "전용 브라우저";
 "tiles.quicksettings.min.elements.message" = "빠른 설정 타일에서 적어도 하나 이상의 항목이 표시되게 해야 합니다";

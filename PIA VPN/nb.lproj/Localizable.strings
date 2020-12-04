@@ -1,3 +1,4 @@
+"Localizable" = "Localizable";
 "about.accessibility.component.expand" = "Trykk for å lese hele lisensen";
 "about.app" = "VPN fra Private Internet Access";
 "about.intro" = "Dette programmet bruker følgende komponenter:";
@@ -58,6 +59,22 @@
 "dashboard.vpn.disconnected" = "Frakoblet";
 "dashboard.vpn.disconnecting" = "Kobler fra …";
 "dashboard.vpn.on" = "VPN: PÅ";
+"dedicated.ip.activate.button.title" = "Aktiver";
+"dedicated.ip.activation.description" = "Aktiver din dedikerte IP ved å lime inn tokenet ditt i skjemaet nedenfor. Hvis du nylig har kjøpt en dedikert IP, kan du generere tokenet ved å gå til PIA-nettstedet.";
+"dedicated.ip.country.flag.accessibility" = "Landsflagg for %@";
+"dedicated.ip.message.error.token" = "Tokenet er utløpt. Generer et nytt et fra kontosiden din på nettstedet.";
+"dedicated.ip.message.expired.token" = "Tokenet er utløpt. Generer et nytt et fra kontosiden din på nettstedet.";
+"dedicated.ip.message.incorrect.token" = "Kontroller at du har skrevet tokenet riktig";
+"dedicated.ip.message.invalid.token" = "Tokenet er ugyldig. Kontroller at du har skrevet tokenet riktig.";
+"dedicated.ip.message.ip.updated" = "Den dedikerte IP-en din ble oppdatert";
+"dedicated.ip.message.token.willexpire" = "Den dedikerte IP-en din utløper snart. Skaff deg en ny en";
+"dedicated.ip.message.token.willexpire.link" = "Skaff deg en ny en";
+"dedicated.ip.message.valid.token" = "Den dedikerte IP-en din ble aktivert. Den blir tilgjengelig i regionvalg-listen.";
+"dedicated.ip.plural.title" = "Dine dedikerte IP-er";
+"dedicated.ip.remove" = "Er du sikker på at du vil fjerne den valgte regionen?";
+"dedicated.ip.title" = "Dedikert IP";
+"dedicated.ip.token.textfield.accessibility" = "Tekstfeltet for å skrive inn dedikert IP-token";
+"dedicated.ip.token.textfield.placeholder" = "Lim inn tokenet her";
 "expiration.message" = "Abonnementet ditt utløper snart. Forny det for å forbli beskyttet.";
 "expiration.title" = "Forny";
 "friend.referrals.days.acquired" = "Gratis dager oppnådd";
@@ -93,6 +110,7 @@
 "global.close" = "Lukk";
 "global.copied" = "Kopiert til utklippstavle";
 "global.copy" = "Kopier";
+"global.disable" = "Deaktiver";
 "global.disabled" = "Deaktivert";
 "global.edit" = "Rediger";
 "global.empty" = "Tom";
@@ -105,6 +123,7 @@
 "global.or" = "eller";
 "global.remove" = "Fjern";
 "global.required" = "Påkrevd";
+"global.row.selection" = "Radvalg";
 "global.share" = "Del";
 "global.unreachable" = "Ingen internettforbindelse. Kontroller at du er koblet til Internett.";
 "global.update" = "Oppdater";
@@ -153,8 +172,8 @@
 "rating.enjoy.question" = "Liker du PIA VPN?";
 "rating.enjoy.subtitle" = "Vi håper VPN-produktet svarer til forventningene dine";
 "rating.error.button.send" = "Send tilbakemelding";
-"rating.error.question" = "Å nei, hva gikk galt?";
-"rating.error.subtitle" = "La oss få høre. Vi vil gjerne fikse det for deg.";
+"rating.error.question" = "Tilkoblingen kunne ikke opprettes";
+"rating.error.subtitle" = "Du kan velge en annen region eller fortelle oss om det ved å åpne en støttesak.";
 "rating.problems.question" = "Hva gikk galt?";
 "rating.problems.subtitle" = "Ønsker du å sende en tilbakemelding? Vi kan bidra til å forbedre opplevelsen din med PIA";
 "rating.rate.question" = "Hva med en anmeldelse på AppStore?";
@@ -170,6 +189,8 @@
 "renewal.failure.message" = "Kunne ikke sende inn kvittering for kjøpet ditt, prøv igjen senere.";
 "renewal.success.message" = "Kontoen din ble fornyet.";
 "renewal.success.title" = "Takk";
+"server.reconnection.please.wait" = "Vent litt …";
+"server.reconnection.still.connection" = "Prøver fortsatt å koble til …";
 "set.email.error.validation" = "Du må angi en e-postadresse.";
 "set.email.form.email" = "Skriv inn e-postadressen din";
 "set.email.password.caption" = "Passord";
@@ -269,7 +290,7 @@
 "tiles.nmt.accessibility.trusted" = "Klarert nettverk";
 "tiles.nmt.accessibility.untrusted" = "Uklarert nettverk";
 "tiles.nmt.cellular" = "Mobilnettverk";
-"tiles.quick.connect.title" = "Nylige servere";
+"tiles.quick.connect.title" = "Hurtigtilkobling";
 "tiles.quicksetting.nmt.title" = "Nettverksadministrering";
 "tiles.quicksetting.private.browser.title" = "Privat nettleser";
 "tiles.quicksettings.min.elements.message" = "Du burde ha minst ett element synlig i feltet Hurtiginnstillinger.";

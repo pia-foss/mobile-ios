@@ -58,6 +58,22 @@
 "dashboard.vpn.disconnected" = "تم قطع الاتصال";
 "dashboard.vpn.disconnecting" = "جارٍ قطع الاتصال...";
 "dashboard.vpn.on" = "VPN: تشغيل";
+"dedicated.ip.activate.button.title" = "تنشيط";
+"dedicated.ip.activation.description" = "قم بتنشيط عنوان IP المخصّص عن طريق لصق الرمز في النموذج أدناه. إذا كنت قد اشتريت عنوان IP مخصصًا مؤخرًا، يمكنك إنشاء الرمز من خلال الذهاب إلى موقع PIA الإلكتروني.";
+"dedicated.ip.country.flag.accessibility" = "علم الدولة لـ %@";
+"dedicated.ip.message.error.token" = "انتهت صلاحية الرمز. يرجى إنشاء رمز جديد من صفحة حسابك على الموقع الإلكتروني.";
+"dedicated.ip.message.expired.token" = "انتهت صلاحية الرمز. يرجى إنشاء رمز جديد من صفحة حسابك على الموقع الإلكتروني.";
+"dedicated.ip.message.incorrect.token" = "يرجى التأكد من إدخال الرمز بشكل صحيح.";
+"dedicated.ip.message.invalid.token" = "الرمز غير صالح. يرجى التأكد من إدخال الرمز بشكل صحيح.";
+"dedicated.ip.message.ip.updated" = "تم تحديث عنوان IP المخصّص";
+"dedicated.ip.message.token.willexpire" = "ستنتهي صلاحية عنوان IP المخصّص قريبًا. احصل على واحد جديد";
+"dedicated.ip.message.token.willexpire.link" = "احصل على واحد جديد";
+"dedicated.ip.message.valid.token" = "تم تنشيط عنوان IP المخصّص بنجاح. سيكون متاحًا في قائمة اختيار المنطقة.";
+"dedicated.ip.plural.title" = "عناوين IP المخصّصة";
+"dedicated.ip.remove" = "هل تريد بالتأكيد إزالة المنطقة المحددة؟";
+"dedicated.ip.title" = "عنوان IP مخصّص";
+"dedicated.ip.token.textfield.accessibility" = "حقل النص الخاص بكتابة رمز IP المخصّص";
+"dedicated.ip.token.textfield.placeholder" = "الصق الرمز هنا";
 "expiration.message" = "سينتهي اشتراكك قريبًا. قم بتجديده لتبقى محميًا.";
 "expiration.title" = "تجديد";
 "friend.referrals.days.acquired" = "تم الحصول على الأيام المجانية";
@@ -93,6 +109,7 @@
 "global.close" = "إغلاق";
 "global.copied" = "تم النسخ إلى الحافظة";
 "global.copy" = "نسخ";
+"global.disable" = "تعطيل";
 "global.disabled" = "معطل";
 "global.edit" = "تحرير";
 "global.empty" = "فارغ";
@@ -105,6 +122,7 @@
 "global.or" = "أو";
 "global.remove" = "إزالة";
 "global.required" = "مطلوب";
+"global.row.selection" = "تحديد الصف";
 "global.share" = "مشاركة";
 "global.unreachable" = "لم يتم العثور على اتصال بالإنترنت. يرجى التأكيد أن لديك اتصال بالإنترنت.";
 "global.update" = "تحديث";
@@ -153,8 +171,8 @@
 "rating.enjoy.question" = "هل تستمتع بـ PIA VPN؟";
 "rating.enjoy.subtitle" = "نأمل أن يلبي منتجنا لشبكات VPN توقعاتك";
 "rating.error.button.send" = "إرسال ملاحظات";
-"rating.error.question" = "للأسف، حدث خلل";
-"rating.error.subtitle" = "أخبرنا عن الخلل. نأمل أن نصلحه في أقرب وقت.";
+"rating.error.question" = "تعذّر تأسيس اتصال";
+"rating.error.subtitle" = "يمكنك محاولة تحديد منطقة مختلفة أو إعلامنا بها عن طريق فتح تذكرة دعم.";
 "rating.problems.question" = "ما الخلل الذي حصل؟";
 "rating.problems.subtitle" = "هل لديك أي ملاحظات؟ يمكننا مساعدتك على تحسين تجربتك في استخدام PIA";
 "rating.rate.question" = "ما رأيك بترك مراجعة في AppStore؟";
@@ -170,6 +188,8 @@
 "renewal.failure.message" = "تعذر إرسال إيصال الشراء، يرجى إعادة المحاولة في وقت لاحق.";
 "renewal.success.message" = "تم تجديد حسابك بنجاح.";
 "renewal.success.title" = "شكرًا لك";
+"server.reconnection.please.wait" = "يرجى الانتظار...";
+"server.reconnection.still.connection" = "قيد محاولة الاتصال...";
 "set.email.error.validation" = "يجب إدخال عنوان البريد الإلكتروني.";
 "set.email.form.email" = "أدخل عنوان بريدك الإلكتروني";
 "set.email.password.caption" = "كلمة المرور";
@@ -269,7 +289,7 @@
 "tiles.nmt.accessibility.trusted" = "شبكة موثوقة";
 "tiles.nmt.accessibility.untrusted" = "شبكة غير موثوقة";
 "tiles.nmt.cellular" = "خلوية";
-"tiles.quick.connect.title" = "الخوادم الأخيرة";
+"tiles.quick.connect.title" = "اتصال سريع";
 "tiles.quicksetting.nmt.title" = "إدارة الشبكات";
 "tiles.quicksetting.private.browser.title" = "المتصفح الخاص";
 "tiles.quicksettings.min.elements.message" = "يجب أن تبقي عنصرًا واحدًا على الأقل مرئيًا في لوح الإعدادات السريعة";

@@ -1,3 +1,4 @@
+"Localizable" = "Lokalizowalny";
 "about.accessibility.component.expand" = "Tap, aby usłyszeć przeczytany tekst licencji";
 "about.app" = "VPN firmy Private Internet Access";
 "about.intro" = "Ten program wykorzystuje następujące elementy:";
@@ -58,6 +59,22 @@
 "dashboard.vpn.disconnected" = "Rozłączono";
 "dashboard.vpn.disconnecting" = "Rozłączanie";
 "dashboard.vpn.on" = "VPN: WŁ";
+"dedicated.ip.activate.button.title" = "Aktywuj";
+"dedicated.ip.activation.description" = "Aktywuj dedykowany adres IP, wklejając swój token w poniższym formularzu. Jeśli niedawno nabyłeś(-aś) dedykowany adres IP, możesz wygenerować token przechodząc na stronę PIA.";
+"dedicated.ip.country.flag.accessibility" = "Flaga państwowa %@";
+"dedicated.ip.message.error.token" = "Twój token stracił ważność. Wygeneruj nowy na stronie swojego konta w serwisie.";
+"dedicated.ip.message.expired.token" = "Twój token stracił ważność. Wygeneruj nowy na stronie swojego konta w serwisie.";
+"dedicated.ip.message.incorrect.token" = "Sprawdź, czy wprowadzony token jest prawidłowy.";
+"dedicated.ip.message.invalid.token" = "Twój token jest nieprawidłowy. Sprawdź, czy wpisany token jest prawidłowy.";
+"dedicated.ip.message.ip.updated" = "Zaktualizowano Twój dedykowany adres IP";
+"dedicated.ip.message.token.willexpire" = "Twój dedykowany adres IP wkrótce wygasa. Kup nowy adres.";
+"dedicated.ip.message.token.willexpire.link" = "Uzyskaj nowy adres";
+"dedicated.ip.message.valid.token" = "Twój dedykowany adres IP został aktywowany. Będzie dostępny na liście wyboru regionu.";
+"dedicated.ip.plural.title" = "Twoje dedykowane adresy IP";
+"dedicated.ip.remove" = "Na pewno chcesz usunąć zaznaczony region?";
+"dedicated.ip.title" = "Dedykowany adres IP";
+"dedicated.ip.token.textfield.accessibility" = "Pole tekstowe do wpisania tokena dedykowanego adresu IP";
+"dedicated.ip.token.textfield.placeholder" = "Wklej tu swój token";
 "expiration.message" = "Twoja subskrypcja wkrótce wygasa. Odnów ją, aby utrzymać ochronę.";
 "expiration.title" = "Odnowienie";
 "friend.referrals.days.acquired" = "Uzyskano darmowe dni";
@@ -93,6 +110,7 @@
 "global.close" = "Zamknij";
 "global.copied" = "Skopiowano do schowka";
 "global.copy" = "Kopiuj";
+"global.disable" = "Wyłącz";
 "global.disabled" = "Wyłączona";
 "global.edit" = "Edytuj";
 "global.empty" = "Pusty";
@@ -105,6 +123,7 @@
 "global.or" = "lub";
 "global.remove" = "Usuń";
 "global.required" = "Wymagane";
+"global.row.selection" = "Wybór wiersza";
 "global.share" = "Udostępnij";
 "global.unreachable" = "Nie stwierdzono połączenia z internetem.";
 "global.update" = "Aktualizuj";
@@ -153,8 +172,8 @@
 "rating.enjoy.question" = "Jesteś zadowolony/zadowolona z VPN PIA?";
 "rating.enjoy.subtitle" = "Mamy nadzieję, że nasz produkt VPN spełnia Twoje oczekiwania";
 "rating.error.button.send" = "Wyślij opinię";
-"rating.error.question" = "Och nie, co poszło źle?";
-"rating.error.subtitle" = "Poinformuj nas o tym. Naprawdę chcemy to naprawić.";
+"rating.error.question" = "Nie udało się nawiązać połączenia";
+"rating.error.subtitle" = "Możesz spróbować wybrać inny region lub powiadomić nas o tym, wypełniając zgłoszenie do pomocy technicznej.";
 "rating.problems.question" = "Co poszło źle?";
 "rating.problems.subtitle" = "Czy zechcesz podzielić się z nami swoją opinią? Może pomóc i sprawić, ze będzie Ci się lepiej korzystało z PIA";
 "rating.rate.question" = "A może napiszesz recenzję w App Store?";
@@ -170,6 +189,8 @@
 "renewal.failure.message" = "Nie udało się przesłać twojego potwierdzenia zakupu, spróbuj ponownie później.";
 "renewal.success.message" = "Twoja subskrypcja została odnowiona.";
 "renewal.success.title" = "Dziękujemy";
+"server.reconnection.please.wait" = "Proszę czekać...";
+"server.reconnection.still.connection" = "Trwa próba połączenia";
 "set.email.error.validation" = "Musisz podać adres e-mail.";
 "set.email.form.email" = "Wpisz swój adres e-mail";
 "set.email.password.caption" = "Hasło";
@@ -269,7 +290,7 @@
 "tiles.nmt.accessibility.trusted" = "Zaufana sieć";
 "tiles.nmt.accessibility.untrusted" = "Niezaufana sieć";
 "tiles.nmt.cellular" = "Komórkowa";
-"tiles.quick.connect.title" = "Najnowsze serwery";
+"tiles.quick.connect.title" = "Szybkie połączenie";
 "tiles.quicksetting.nmt.title" = "Zarządzanie sieciami";
 "tiles.quicksetting.private.browser.title" = "Prywatna przeglądarka";
 "tiles.quicksettings.min.elements.message" = "Na kafelku Szybkich ustawień musisz zachować widoczny co najmniej jeden element.";

@@ -1,3 +1,4 @@
+"Localizable" = "แปลได้";
 "about.accessibility.component.expand" = "แตะเพื่ออ่านการอนุญาตฉบับเต็ม";
 "about.app" = "VPN โดย Private Internet Access";
 "about.intro" = "โปรแกรมนี้ใช้องค์ประกอบต่อไปนี้:";
@@ -58,6 +59,22 @@
 "dashboard.vpn.disconnected" = "ขาดการเชื่อมต่อ";
 "dashboard.vpn.disconnecting" = "กำลังยกเลิกการเชื่อมต่อ...";
 "dashboard.vpn.on" = "VPN : เปิด";
+"dedicated.ip.activate.button.title" = "เปิดการใช้งาน";
+"dedicated.ip.activation.description" = "เปิดใช้งาน IP เฉพาะของคุณโดยวางโทเค็นของคุณในแบบฟอร์มด้านล่าง หากคุณเพิ่งซื้อ IP เฉพาะ คุณสามารถสร้างโทเค็นได้โดยไปที่เว็บไซต์ PIA";
+"dedicated.ip.country.flag.accessibility" = "ธงประเทศสำหรับ %@";
+"dedicated.ip.message.error.token" = "โทเค็นของคุณหมดอายุแล้ว โปรดสร้างใหม่จากหน้าบัญชีของคุณบนเว็บไซต์";
+"dedicated.ip.message.expired.token" = "โทเค็นของคุณหมดอายุแล้ว โปรดสร้างใหม่จากหน้าบัญชีของคุณบนเว็บไซต์";
+"dedicated.ip.message.incorrect.token" = "โปรดตรวจสอบว่าคุณได้ป้อนโทเค็นอย่างถูกต้อง";
+"dedicated.ip.message.invalid.token" = "โทเค็นของคุณไม่ถูกต้อง โปรดตรวจสอบว่าคุณได้ป้อนโทเค็นอย่างถูกต้อง";
+"dedicated.ip.message.ip.updated" = "อัปเดต IP เฉพาะของคุณแล้ว";
+"dedicated.ip.message.token.willexpire" = "IP เฉพาะของคุณจะหมดอายุในไม่ช้า รับใหม่";
+"dedicated.ip.message.token.willexpire.link" = "รับ IP ใหม่";
+"dedicated.ip.message.valid.token" = "IP เฉพาะของคุณเปิดใช้งานสำเร็จแล้ว จะมีอยู่ในรายการการเลือกภูมิภาคของคุณ";
+"dedicated.ip.plural.title" = "IP เฉพาะของคุณ";
+"dedicated.ip.remove" = "แน่ใจหรือไม่ว่าต้องการลบภูมิภาคที่เลือก";
+"dedicated.ip.title" = "IP เฉพาะ";
+"dedicated.ip.token.textfield.accessibility" = "ช่องข้อความสำหรับพิมพ์โทเค็น IP เฉพาะ";
+"dedicated.ip.token.textfield.placeholder" = "วางโทเค็นของคุณที่นี่";
 "expiration.message" = "สถานะสมาชิกของคุณจะหมดอายุเร็วๆนี้ ต่ออายุเพื่อรับการป้องกันต่อ";
 "expiration.title" = "การต่ออายุ";
 "friend.referrals.days.acquired" = "วันที่ได้รับฟรี";
@@ -93,6 +110,7 @@
 "global.close" = "ปิด";
 "global.copied" = "คัดลอกไปยังคลิปบอร์ดแล้ว";
 "global.copy" = "คัดลอก";
+"global.disable" = "ปิดการใช้งาน";
 "global.disabled" = "ปิดใช้งาน";
 "global.edit" = "แก้ไข";
 "global.empty" = "ว่างเปล่า";
@@ -105,6 +123,7 @@
 "global.or" = "หรือ";
 "global.remove" = "ลบออก";
 "global.required" = "จำเป็น";
+"global.row.selection" = "การเลือกแถว";
 "global.share" = "แชร์";
 "global.unreachable" = "ไม่พบการเชื่อมต่ออินเทอร์เน็ต กรุณายืนยันว่าคุณมีการเชื่อมต่ออินเทอร์เน็ต";
 "global.update" = "อัพเดท";
@@ -153,8 +172,8 @@
 "rating.enjoy.question" = "คุณชอบใช้ PIA VPN หรือไม่";
 "rating.enjoy.subtitle" = "เราหวังว่าผลิตภัณฑ์ VPN ของเราจะตอบโจทย์ความต้องการของคุณ";
 "rating.error.button.send" = "ส่งความคิดเห็น";
-"rating.error.question" = "ไม่นะ เกิดอะไรขึ้น";
-"rating.error.subtitle" = "โปรดแจ้งให้เราทราบ เราอยากที่จะแก้ไขให้คุณจริงๆ";
+"rating.error.question" = "ไม่สามารถสร้างการเชื่อมต่อได้";
+"rating.error.subtitle" = "คุณสามารถลองเลือกภูมิภาคอื่นหรือแจ้งให้เราทราบโดยเปิดทิกเก็ตความช่วยเหลือ";
 "rating.problems.question" = "มีอะไรผิดปกติเหรอ";
 "rating.problems.subtitle" = "คุณอยากที่จะให้ข้อเสนอแนะไหม เราช่วยปรับปรุงประสบการณ์การใช้งาน PIA ของคุณได้";
 "rating.rate.question" = "รีวิว AppStore เป็นอย่างไร?";
@@ -170,6 +189,8 @@
 "renewal.failure.message" = "ไม่สามารถส่งใบเสร็จการสั่งซื้อของคุณได้ โปรดลองอีกครั้งภายหลัง";
 "renewal.success.message" = "บัญชีของคุณได้รับการต่ออายุเรียบร้อยแล้ว";
 "renewal.success.title" = "ขอบคุณ";
+"server.reconnection.please.wait" = "โปรดรอ...";
+"server.reconnection.still.connection" = "ยังคงพยายามเชื่อมต่อ...";
 "set.email.error.validation" = "คุณต้องใส่อีเมล";
 "set.email.form.email" = "ใส่อีเมลของคุณ";
 "set.email.password.caption" = "รหัสผ่าน";
@@ -269,7 +290,7 @@
 "tiles.nmt.accessibility.trusted" = "เครือข่ายที่เชื่อถือ";
 "tiles.nmt.accessibility.untrusted" = "เครือข่ายที่ไม่เชื่อถือ";
 "tiles.nmt.cellular" = "เซลลูลาร์";
-"tiles.quick.connect.title" = "เซิร์ฟเวอร์ล่าสุด";
+"tiles.quick.connect.title" = "เชื่อมต่อด่วน";
 "tiles.quicksetting.nmt.title" = "การจัดการเครือข่าย";
 "tiles.quicksetting.private.browser.title" = "เบราว์เซอร์ส่วนตัว";
 "tiles.quicksettings.min.elements.message" = "คุณควรเปิดไว้อย่างน้อยหนึ่งรายการในช่องการตั้งค่าด่วน";

@@ -1,3 +1,4 @@
+"Localizable" = "可本地化";
 "about.accessibility.component.expand" = "点击阅读完整许可";
 "about.app" = "由 Private Internet Access 打造的 VPN";
 "about.intro" = "此程序使用以下组件：";
@@ -58,6 +59,22 @@
 "dashboard.vpn.disconnected" = "已断开连接";
 "dashboard.vpn.disconnecting" = "正在断开连接";
 "dashboard.vpn.on" = "VPN：开";
+"dedicated.ip.activate.button.title" = "激活";
+"dedicated.ip.activation.description" = "将您的令牌粘贴到以下表格中，激活您的专用 IP。如果您最近购买了专用 IP，则可以访问 PIA 网站来生成令牌。";
+"dedicated.ip.country.flag.accessibility" = "%@ 的国旗";
+"dedicated.ip.message.error.token" = "您的令牌已过期。请从网站的“账户”页面中生成一个新的令牌。";
+"dedicated.ip.message.expired.token" = "您的令牌已过期。请从网站的“账户”页面中生成一个新的令牌。";
+"dedicated.ip.message.incorrect.token" = "请确保您输入的令牌正确无误";
+"dedicated.ip.message.invalid.token" = "您的令牌无效。请确保您输入的令牌正确无误。";
+"dedicated.ip.message.ip.updated" = "您的专用 IP 已更新";
+"dedicated.ip.message.token.willexpire" = "您的专用 IP 即将过期。请获取一个新的专用 IP";
+"dedicated.ip.message.token.willexpire.link" = "获取新 IP";
+"dedicated.ip.message.valid.token" = "您的专用 IP 已成功激活。您可以在“地区”选择列表中使用该专用 IP。";
+"dedicated.ip.plural.title" = "您的专用 IP";
+"dedicated.ip.remove" = "确定要删除所选区域吗？";
+"dedicated.ip.title" = "专用 IP";
+"dedicated.ip.token.textfield.accessibility" = "用于输入专用 IP 令牌的文本域";
+"dedicated.ip.token.textfield.placeholder" = "在这里粘贴你的令牌";
 "expiration.message" = "您的订阅即将到期。请续期以持续受到保护。";
 "expiration.title" = "续订";
 "friend.referrals.days.acquired" = "已获得免费天数";
@@ -93,6 +110,7 @@
 "global.close" = "关闭";
 "global.copied" = "已复制到剪贴板";
 "global.copy" = "复制";
+"global.disable" = "禁用";
 "global.disabled" = "已禁用";
 "global.edit" = "编辑";
 "global.empty" = "空";
@@ -105,6 +123,7 @@
 "global.or" = "或";
 "global.remove" = "删除";
 "global.required" = "必填";
+"global.row.selection" = "行选择";
 "global.share" = "共享";
 "global.unreachable" = "未找到网络连接。请确认您已接入网络。";
 "global.update" = "更新";
@@ -153,8 +172,8 @@
 "rating.enjoy.question" = "您觉得 PIA VPN 好用吗？";
 "rating.enjoy.subtitle" = "希望我们的 VPN 产品符合您的期望";
 "rating.error.button.send" = "发送反馈";
-"rating.error.question" = "出什么问题了？";
-"rating.error.subtitle" = "告诉我们吧。我们会尽力改进。";
+"rating.error.question" = "无法建立连接";
+"rating.error.subtitle" = "您可以尝试选择其他地区，也可以提交支持请求来告知我们。";
 "rating.problems.question" = "出什么问题了？";
 "rating.problems.subtitle" = "您希望提供反馈意见吗？我们可以帮助您改善使用 PIA 的体验";
 "rating.rate.question" = "在 AppStore 上发表评论如何？";
@@ -170,6 +189,8 @@
 "renewal.failure.message" = "无法提交您的购买收据，请稍后再试。";
 "renewal.success.message" = "您的账户已成功续期。";
 "renewal.success.title" = "谢谢";
+"server.reconnection.please.wait" = "请稍候...";
+"server.reconnection.still.connection" = "仍在尝试连接...";
 "set.email.error.validation" = "您必须输入一个电子邮箱地址。";
 "set.email.form.email" = "请输入您的电子邮件地址";
 "set.email.password.caption" = "密码";
@@ -269,7 +290,7 @@
 "tiles.nmt.accessibility.trusted" = "受信任网络";
 "tiles.nmt.accessibility.untrusted" = "不受信任网站";
 "tiles.nmt.cellular" = "蜂窝";
-"tiles.quick.connect.title" = "近期服务器";
+"tiles.quick.connect.title" = "快速连接";
 "tiles.quicksetting.nmt.title" = "网络管理";
 "tiles.quicksetting.private.browser.title" = "专用浏览器";
 "tiles.quicksettings.min.elements.message" = "应该在“快速设置”图块中保持至少一个元素可见";

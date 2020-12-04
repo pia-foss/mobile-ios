@@ -1,3 +1,4 @@
+"Localizable" = "Lokalisierbar";
 "about.accessibility.component.expand" = "Tippen, um komplette Lizenz zu lesen";
 "about.app" = "VPN by Private Internet Access";
 "about.intro" = "Dieses Programm verwendet folgende Komponenten:";
@@ -58,6 +59,22 @@
 "dashboard.vpn.disconnected" = "Nicht verbunden";
 "dashboard.vpn.disconnecting" = "Verbindung wird unterbrochen...";
 "dashboard.vpn.on" = "VPN: EIN";
+"dedicated.ip.activate.button.title" = "Aktivieren";
+"dedicated.ip.activation.description" = "Aktivieren Sie Ihre Dedizierte IP, indem Sie Ihr Token in das unten stehende Formular einfügen. Wenn Sie kürzlich eine dedizierte IP erworben haben, können Sie das Token generieren, indem Sie die PIA-Website aufrufen.";
+"dedicated.ip.country.flag.accessibility" = "Länderflagge für %@";
+"dedicated.ip.message.error.token" = "Ihr Token ist abgelaufen. Bitte generieren Sie ein neues auf Ihrer Konto-Seite auf der Webseite.";
+"dedicated.ip.message.expired.token" = "Ihr Token ist abgelaufen. Bitte generieren Sie von Ihrer Konto-Seite auf der Webseite ein neues.";
+"dedicated.ip.message.incorrect.token" = "Bitte vergewissern Sie sich, dass Sie das Token korrekt eingegeben haben";
+"dedicated.ip.message.invalid.token" = "Ihr Token ist ungültig. Bitte stellen Sie sicher, dass Sie das Token korrekt eingegeben haben.";
+"dedicated.ip.message.ip.updated" = "Ihre dedizierte IP wurde aktualisiert";
+"dedicated.ip.message.token.willexpire" = "Ihre dedizierte IP wird bald ablaufen. Eine neue abrufen";
+"dedicated.ip.message.token.willexpire.link" = "Neue abrufen";
+"dedicated.ip.message.valid.token" = "Ihre Dedizierte IP wurde erfolgreich aktiviert. Sie wird in der Auswahlliste Ihrer Region verfügbar sein.";
+"dedicated.ip.plural.title" = "Ihre dedizierten IPs";
+"dedicated.ip.remove" = "Wirklich die ausgewählte Region entfernen?";
+"dedicated.ip.title" = "Dedizierte IP";
+"dedicated.ip.token.textfield.accessibility" = "Das Textfeld zur Eingabe des Dedizierten IP-Tokens";
+"dedicated.ip.token.textfield.placeholder" = "Fügen Sie Ihr Token hier ein";
 "expiration.message" = "Dein Abonnement endet bald. Verlängere deinen Schutz.";
 "expiration.title" = "Verlängerung";
 "friend.referrals.days.acquired" = "Erworbene freie Tage";
@@ -93,6 +110,7 @@
 "global.close" = "Schließen";
 "global.copied" = "In Zwischenablage kopiert";
 "global.copy" = "Kopieren";
+"global.disable" = "Deaktivieren";
 "global.disabled" = "Deaktiviert";
 "global.edit" = "Bearbeiten";
 "global.empty" = "Leer";
@@ -105,6 +123,7 @@
 "global.or" = "oder";
 "global.remove" = "Entfernen";
 "global.required" = "Erforderlich";
+"global.row.selection" = "Zeilenauswahl";
 "global.share" = "Teilen";
 "global.unreachable" = "Keine Internet. Bitte überprüfen Sie Ihre Internetverbindung.";
 "global.update" = "Aktualisieren";
@@ -153,8 +172,8 @@
 "rating.enjoy.question" = "Gefällt Ihnen PIA VPN?";
 "rating.enjoy.subtitle" = "Wir hoffen, dass unsere VPN-Lösung Ihre Erwartungen erfüllt.";
 "rating.error.button.send" = "Feedback senden";
-"rating.error.question" = "Oh nein, was ist schiefgelaufen?";
-"rating.error.subtitle" = "Informieren Sie uns. Wir möchten das Problem wirklich beheben.";
+"rating.error.question" = "Die Verbindung konnte nicht hergestellt werden";
+"rating.error.subtitle" = "Sie können versuchen, eine andere Region auszuwählen oder uns darüber zu informieren, indem Sie ein Support-Ticket öffnen.";
 "rating.problems.question" = "Was ist schiefgelaufen?";
 "rating.problems.subtitle" = "Möchten Sie Feedback geben? Wir können Ihnen helfen, Ihre Erfahrungen mit PIA zu verbessern";
 "rating.rate.question" = "Wie wäre es mit einer Bewertung im AppStore?";
@@ -170,6 +189,8 @@
 "renewal.failure.message" = "Ihre Kaufbestätigung konnte nicht abgeschickt werden. Bitte versuchen Sie es später erneut.";
 "renewal.success.message" = "Ihr Konto wurde erfolgreich verlängert.";
 "renewal.success.title" = "Vielen Dank!";
+"server.reconnection.please.wait" = "Bitte warten...";
+"server.reconnection.still.connection" = "Versucht immer noch, eine Verbindung herzustellen";
 "set.email.error.validation" = "Sie müssen eine E-Mail-Adresse eingeben.";
 "set.email.form.email" = "Ihre E-Mail-Adresse eingeben";
 "set.email.password.caption" = "Passwort";
@@ -269,7 +290,7 @@
 "tiles.nmt.accessibility.trusted" = "Vertrauenswürdiges Netzwerk";
 "tiles.nmt.accessibility.untrusted" = "Nicht vertrauenswürdiges Netzwerk";
 "tiles.nmt.cellular" = "Mobilfunk";
-"tiles.quick.connect.title" = "Letzte Server";
+"tiles.quick.connect.title" = "Schnellverbindung";
 "tiles.quicksetting.nmt.title" = "Netzwerkverwaltung";
 "tiles.quicksetting.private.browser.title" = "Privater Browser";
 "tiles.quicksettings.min.elements.message" = "Sie sollten mindestens ein Element in den Schnelleinstellungen sichtbar halten.";
