@@ -29,6 +29,15 @@ public class MessagesManager: NSObject {
     private var apiMessage: InAppMessage!
     private var systemMessage: InAppMessage!
 
+    public override init() {
+        super.init()
+        NotificationCenter.default.addObserver(self, selector: #selector(presentExpiringDIPRegionSystemMessage(notification:)), name: .PIADIPRegionExpiring, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     func refreshMessages() {
         
         Client.providers.accountProvider.inAppMessages(forAppVersion: Macros.localizedVersionNumber()) { (message, error) in
@@ -65,6 +74,11 @@ public class MessagesManager: NSObject {
         } else if id == systemMessage.id {
             systemMessage = nil
         }
+    }
+    
+    func reset() {
+        self.apiMessage = nil
+        self.systemMessage = nil
     }
     
     private func updateMessages() -> InAppMessage? {
@@ -150,4 +164,16 @@ extension InAppMessage {
 
     }
     
+}
+
+extension MessagesManager {
+    
+    @objc private func presentExpiringDIPRegionSystemMessage(notification: Notification) {
+
+        if let userInfo = notification.userInfo, let token = userInfo[NotificationKey.token] as? String {
+            let message = InAppMessage(withMessage: ["en": L10n.Dedicated.Ip.Message.Token.willexpire], id: token, link: ["en": L10n.Dedicated.Ip.Message.Token.Willexpire.link], type: .link, level: .system, actions: nil, view: nil, uri: AppConstants.Web.homeURL.absoluteString)
+            MessagesManager.shared.postSystemMessage(message: message)
+        }
+
+    }
 }

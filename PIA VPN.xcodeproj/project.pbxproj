@@ -208,8 +208,6 @@
 		82A1AD3024B87CF20003DD02 /* PIACard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A1AD2E24B87CF20003DD02 /* PIACard.swift */; };
 		82C0071325231F2800F21AF2 /* String+VPNType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C0071225231F2800F21AF2 /* String+VPNType.swift */; };
 		82C0071425231F2800F21AF2 /* String+VPNType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C0071225231F2800F21AF2 /* String+VPNType.swift */; };
-		82C495B82562A53000233CB1 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C495B72562A53000233CB1 /* DateUtil.swift */; };
-		82C495B92562A53000233CB1 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C495B72562A53000233CB1 /* DateUtil.swift */; };
 		82CAB87A255AEA3500BB08EF /* MessagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB879255AEA3500BB08EF /* MessagesManager.swift */; };
 		82CAB87B255AEA3500BB08EF /* MessagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB879255AEA3500BB08EF /* MessagesManager.swift */; };
 		82CAB8B0255B050000BB08EF /* MessagesCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB8AF255B050000BB08EF /* MessagesCommands.swift */; };
@@ -632,7 +630,6 @@
 		82A1AD2824B87CCD0003DD02 /* PIACard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PIACard.xib; sourceTree = "<group>"; };
 		82A1AD2E24B87CF20003DD02 /* PIACard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACard.swift; sourceTree = "<group>"; };
 		82C0071225231F2800F21AF2 /* String+VPNType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+VPNType.swift"; sourceTree = "<group>"; };
-		82C495B72562A53000233CB1 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		82CAB879255AEA3500BB08EF /* MessagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesManager.swift; sourceTree = "<group>"; };
 		82CAB8AF255B050000BB08EF /* MessagesCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesCommands.swift; sourceTree = "<group>"; };
 		82CAB8D9255BEC7000BB08EF /* PIACommandTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACommandTests.swift; sourceTree = "<group>"; };
@@ -928,7 +925,6 @@
 				DD918575246BFA7F006B3A2B /* RatingManager.swift */,
 				DDD65312247E66AD00F0A897 /* CoordinatesFinder.swift */,
 				829EB51B2535A8FF003E74DD /* CollectionViewAutoSizeUtils.swift */,
-				82C495B72562A53000233CB1 /* DateUtil.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -2111,7 +2107,6 @@
 				82CAB8B1255B050000BB08EF /* MessagesCommands.swift in Sources */,
 				DD4E84582243BD1200929B39 /* DashboardCollectionViewUtil.swift in Sources */,
 				DD74695B217F07AC00B7BD73 /* DNSList.swift in Sources */,
-				82C495B92562A53000233CB1 /* DateUtil.swift in Sources */,
 				0E9452AF1FDB5F7A00891948 /* PIAPageControl.swift in Sources */,
 				DDD271F121D6718F00B6D20F /* RegionFilter.swift in Sources */,
 			);
@@ -2217,7 +2212,6 @@
 				DDFCFA8F21E892070081F235 /* RegionTileCollectionViewCell.swift in Sources */,
 				0E2215CC2008BF8300F5FB4D /* SwiftGen+Assets.swift in Sources */,
 				DD3B504624B758330002F4B5 /* Collectable.swift in Sources */,
-				82C495B82562A53000233CB1 /* DateUtil.swift in Sources */,
 				DD9706A4224262BF00630220 /* QuickSettingsTile.swift in Sources */,
 				82183D7B2500FD460033023F /* String+Substrings.swift in Sources */,
 				DDFCFA9421E892130081F235 /* RegionTile.swift in Sources */,

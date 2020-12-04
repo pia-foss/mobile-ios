@@ -90,14 +90,6 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
                         return
                     }
                         
-                    if let expiringDate = dipServer?.dipExpire, let substractedDate = expiringDate.removing(days: 5) {
-                        if Calendar.current.isDateInToday(substractedDate) {
-                            //Expiring in 5 days
-                            let message = InAppMessage(withMessage: ["en": L10n.Dedicated.Ip.Message.Token.willexpire], id: token, link: ["en": L10n.Dedicated.Ip.Message.Token.Willexpire.link], type: .link, level: .system, actions: nil, view: nil, uri: AppConstants.Web.homeURL.absoluteString)
-                            MessagesManager.shared.postSystemMessage(message: message)
-                        }
-                    }
-                    
                     var relation = AppPreferences.shared.dedicatedTokenIPReleation
                     if relation.isEmpty {
                         //no data

@@ -151,10 +151,10 @@ DEPENDENCIES:
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
   - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, commit `6116a38`)"
-  - PIALibrary/Library (from `/Users/jose/Projects/PIA/client-library-apple`)
-  - PIALibrary/Mock (from `/Users/jose/Projects/PIA/client-library-apple`)
-  - PIALibrary/UI (from `/Users/jose/Projects/PIA/client-library-apple`)
-  - PIALibrary/VPN (from `/Users/jose/Projects/PIA/client-library-apple`)
+  - "PIALibrary/Library (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `8673da1`)"
+  - "PIALibrary/Mock (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `8673da1`)"
+  - "PIALibrary/UI (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `8673da1`)"
+  - "PIALibrary/VPN (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `8673da1`)"
   - "PIARegions (from `git@codex.londontrustmedia.com:mobile/regions.git`, commit `3b9395f`)"
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
   - Popover
@@ -201,7 +201,8 @@ EXTERNAL SOURCES:
     :commit: 6116a38
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
   PIALibrary:
-    :path: "/Users/jose/Projects/PIA/client-library-apple"
+    :commit: 8673da1
+    :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
   PIARegions:
     :commit: 3b9395f
     :git: "git@codex.londontrustmedia.com:mobile/regions.git"
@@ -215,6 +216,9 @@ CHECKOUT OPTIONS:
   PIAAccountModule:
     :commit: 6116a38
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
+  PIALibrary:
+    :commit: 8673da1
+    :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
   PIARegions:
     :commit: 3b9395f
     :git: "git@codex.londontrustmedia.com:mobile/regions.git"
@@ -261,6 +265,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 0876c502b108b080328b86e1488171d3fc0322e6
+PODFILE CHECKSUM: 81391fc96f3771a369e7c3b26e2f73dc862e34ef
 
 COCOAPODS: 1.9.3

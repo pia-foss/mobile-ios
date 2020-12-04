@@ -605,6 +605,7 @@ class AppPreferences {
         failureConnections = 0
         showGeoServers = true
         dedicatedTokenIPReleation = [:]
+        MessagesManager.shared.reset()
     }
     
     func clean() {
@@ -635,6 +636,7 @@ class AppPreferences {
         showGeoServers = true
         dismissedMessages = []
         dedicatedTokenIPReleation = [:]
+        MessagesManager.shared.reset()
     }
     
 //    + (void)eraseForTesting;
