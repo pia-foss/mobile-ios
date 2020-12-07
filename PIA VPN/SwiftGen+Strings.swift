@@ -456,6 +456,15 @@ internal enum L10n {
     }
   }
 
+  internal enum Inapp {
+    internal enum Messages {
+      internal enum Toggle {
+        /// Stop in-app communication messages
+        internal static let title = L10n.tr("Localizable", "inapp.messages.toggle.title")
+      }
+    }
+  }
+
   internal enum Menu {
     internal enum Accessibility {
       /// Menu

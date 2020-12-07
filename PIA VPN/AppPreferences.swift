@@ -88,6 +88,9 @@ class AppPreferences {
         // Dedicated IP relations
         static let tokenIPRelation = "TokenIPRelation"
 
+        // In app messages
+        static let stopInAppMessages = "stopInAppMessages"
+
     }
 
     static let shared = AppPreferences()
@@ -418,6 +421,14 @@ class AppPreferences {
         }
     }
 
+    var stopInAppMessages: Bool {
+        get {
+            return defaults.bool(forKey: Entries.stopInAppMessages) ?? false
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.stopInAppMessages)
+        }
+    }
 
     private init() {
         guard let defaults = UserDefaults(suiteName: AppConstants.appGroup) else {
@@ -449,7 +460,8 @@ class AppPreferences {
             Entries.successConnections: 0,
             Entries.failureConnections: 0,
             Entries.showGeoServers: true,
-            Entries.dismissedMessages: []
+            Entries.dismissedMessages: [],
+            Entries.stopInAppMessages: false
         ])
     }
     
@@ -604,6 +616,7 @@ class AppPreferences {
         Client.resetServers(completionBlock: {_ in })
         failureConnections = 0
         showGeoServers = true
+        stopInAppMessages = false
         dedicatedTokenIPReleation = [:]
         MessagesManager.shared.reset()
     }
@@ -634,6 +647,7 @@ class AppPreferences {
         Client.resetServers(completionBlock: {_ in })
         failureConnections = 0
         showGeoServers = true
+        stopInAppMessages = false
         dismissedMessages = []
         dedicatedTokenIPReleation = [:]
         MessagesManager.shared.reset()

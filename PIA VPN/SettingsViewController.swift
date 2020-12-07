@@ -85,7 +85,9 @@ enum Setting: Int {
     case mace
     
     case darkTheme
-    
+
+    case stopInAppMessages
+
     case sendDebugLog
     
     case resetSettings
@@ -148,6 +150,8 @@ class SettingsViewController: AutolayoutViewController {
                 
         case autoConnectSettings
 
+        case inAppSettings
+
         case geoSettings
 
         case contentBlocker
@@ -168,6 +172,7 @@ class SettingsViewController: AutolayoutViewController {
         .ikeV2encryption,
         .applicationSettings,
         .autoConnectSettings,
+        .inAppSettings,
         .geoSettings,
         .applicationInformation,
         .reset,
@@ -197,6 +202,9 @@ class SettingsViewController: AutolayoutViewController {
         ], // dynamic
         .applicationSettings: [], // dynamic
         .autoConnectSettings: [], // dynamic
+        .inAppSettings: [
+            .stopInAppMessages
+        ],
         .geoSettings: [
             .geoServers
         ],
@@ -251,6 +259,8 @@ class SettingsViewController: AutolayoutViewController {
     private lazy var switchGeoServers = UISwitch()
 
     private lazy var switchEnvironment = UISwitch()
+
+    private lazy var switchInAppMessages = UISwitch()
 
     private lazy var imvSelectedOption = UIImageView(image: Asset.accessorySelected.image)
 
@@ -315,6 +325,7 @@ class SettingsViewController: AutolayoutViewController {
         switchGeoServers.addTarget(self, action: #selector(toggleGEOServers(_:)), for: .valueChanged)
         switchEnableNMT.addTarget(self, action: #selector(toggleNMT(_:)), for: .valueChanged)
         switchEnvironment.addTarget(self, action: #selector(toggleEnv(_:)), for: .valueChanged)
+        switchInAppMessages.addTarget(self, action: #selector(toggleStopInAppMessages(_:)), for: .valueChanged)
         redisplaySettings()
 
         NotificationCenter.default.addObserver(self,
@@ -437,6 +448,11 @@ class SettingsViewController: AutolayoutViewController {
         redisplaySettings()
     }
 
+    @objc private func toggleStopInAppMessages(_ sender: UISwitch) {
+        AppPreferences.shared.stopInAppMessages = sender.isOn
+        redisplaySettings()
+    }
+    
     @objc private func showContentBlockerTutorial() {
         perform(segue: StoryboardSegue.Main.contentBlockerSegueIdentifier)
     }
@@ -953,6 +969,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
            
         case .autoConnectSettings:
             return nil
+            
+        case .inAppSettings:
+            return nil
 
         case .geoSettings:
             return nil
@@ -1283,6 +1302,13 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchEnvironment
             cell.selectionStyle = .none
+            switchEnvironment.isOn = Client.environment == .staging
+        case .stopInAppMessages:
+            cell.textLabel?.text = L10n.Inapp.Messages.Toggle.title
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchInAppMessages
+            cell.selectionStyle = .none
+            switchInAppMessages.isOn = AppPreferences.shared.stopInAppMessages
         case .customServers:
             cell.textLabel?.text = "Custom Servers"
             cell.detailTextLabel?.text = nil

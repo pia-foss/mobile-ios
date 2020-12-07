@@ -380,3 +380,6 @@
 // RECONNECTIONS
 "server.reconnection.please.wait" = "Please wait...";
 "server.reconnection.still.connection" = "Still trying to connect...";
+
+// INAPP MESSAGES
+"inapp.messages.toggle.title" = "Stop in-app communication messages";

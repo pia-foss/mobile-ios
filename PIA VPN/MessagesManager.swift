@@ -40,14 +40,14 @@ public class MessagesManager: NSObject {
 
     func refreshMessages() {
         
-        /* Not available yet
-        Client.providers.accountProvider.inAppMessages(forAppVersion: Macros.localizedVersionNumber()) { (message, error) in
-            if let message = message, !message.wasDismissed() {
-                self.apiMessage = message
-                Macros.postNotification(.PIAUpdateFixedTiles)
+        if !AppPreferences.shared.stopInAppMessages {
+            Client.providers.accountProvider.inAppMessages(forAppVersion: Macros.localizedVersionNumber()) { (message, error) in
+                if let message = message, !message.wasDismissed() {
+                    self.apiMessage = message
+                    Macros.postNotification(.PIAUpdateFixedTiles)
+                }
             }
         }
-         */
     }
     
     func postSystemMessage(message: InAppMessage) {
