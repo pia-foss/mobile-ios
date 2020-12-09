@@ -130,6 +130,7 @@
 "global.yes" = "Ja";
 "hotspothelper.display.name" = "🔒 Aktiver VPN WiFi-beskyttelse i PIAs innstillinger for å sikre denne tilkoblingen.";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi-beskyttelse er aktivert – vi beskytter deg.";
+"inapp.messages.toggle.title" = "Stopp kommunikasjonsmeldinger i appen";
 "menu.accessibility.edit.tile" = "Rediger";
 "menu.accessibility.item" = "Meny";
 "menu.accessibility.logged_as" = "Logget på som %@";

@@ -130,6 +130,7 @@
 "global.yes" = "Oui";
 "hotspothelper.display.name" = "🔒 Activez la protection WiFi VPN dans les paramètres de PIA pour sécuriser cette connexion.";
 "hotspothelper.display.protected.name" = "🔒 Protection WiFi VPN PIA activée - On vous protège.";
+"inapp.messages.toggle.title" = "Arrêter les messages de communication intégrés";
 "menu.accessibility.edit.tile" = "Éditer";
 "menu.accessibility.item" = "Menu";
 "menu.accessibility.logged_as" = "Connecté en tant que %@";

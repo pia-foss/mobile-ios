@@ -130,6 +130,7 @@
 "global.yes" = "是";
 "hotspothelper.display.name" = "🔒 在 PIA 設定中啟動 VPN WiFi 保護功能，為此網路連線增添一層安全保障。";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi 保護功能已啟用，我們會為您提供防護。";
+"inapp.messages.toggle.title" = "停止應用程式內的通訊訊息";
 "menu.accessibility.edit.tile" = "編輯";
 "menu.accessibility.item" = "選單";
 "menu.accessibility.logged_as" = "已以「%@」的身分登入";
