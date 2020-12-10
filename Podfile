@@ -74,10 +74,10 @@ def shared_main_pods
     pod "PIARegions", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :commit => '3b9395f'
     pod "PIACrashlabModule", :git => "#{$gitlab_kn_root}/#{$crashlab_gitlab_repo}", :branch => 'master'
     
-    #library_by_path('/Users/jose/Projects/PIA')
+    library_by_path('/Users/jose/Projects/PIA')
     #library_by_git('ba3cd1f')
     #library_by_gitlab_branch('develop')
-    library_by_gitlab_by_git('e72f699')
+    #library_by_gitlab_by_git('e72f699')
     #library_by_version('~> 1.1.3')
 end
 

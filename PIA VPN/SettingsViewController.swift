@@ -90,6 +90,8 @@ enum Setting: Int {
 
     case submitDebugReport
     
+    case enableDebugLogging
+    
     case resetSettings
     
     // development
@@ -213,7 +215,8 @@ class SettingsViewController: AutolayoutViewController {
             .contentBlockerRefreshRules
         ],
         .applicationInformation: [
-            .submitDebugReport
+            .submitDebugReport,
+            .enableDebugLogging
         ],
         .reset: [
             .resetSettings
@@ -261,6 +264,8 @@ class SettingsViewController: AutolayoutViewController {
     private lazy var switchEnvironment = UISwitch()
 
     private lazy var switchInAppMessages = UISwitch()
+
+    private lazy var switchEnableDebugLogging = UISwitch()
 
     private lazy var imvSelectedOption = UIImageView(image: Asset.accessorySelected.image)
 
@@ -326,6 +331,7 @@ class SettingsViewController: AutolayoutViewController {
         switchEnableNMT.addTarget(self, action: #selector(toggleNMT(_:)), for: .valueChanged)
         switchEnvironment.addTarget(self, action: #selector(toggleEnv(_:)), for: .valueChanged)
         switchInAppMessages.addTarget(self, action: #selector(toggleStopInAppMessages(_:)), for: .valueChanged)
+        switchEnableDebugLogging.addTarget(self, action: #selector(toggleEnableDebugLogging(_:)), for: .valueChanged)
         redisplaySettings()
 
         NotificationCenter.default.addObserver(self,
@@ -450,6 +456,11 @@ class SettingsViewController: AutolayoutViewController {
 
     @objc private func toggleStopInAppMessages(_ sender: UISwitch) {
         AppPreferences.shared.stopInAppMessages = sender.isOn
+        redisplaySettings()
+    }
+    
+    @objc private func toggleEnableDebugLogging(_ sender: UISwitch) {
+        AppPreferences.shared.enableDebugLogging = sender.isOn
         redisplaySettings()
     }
     
@@ -807,6 +818,18 @@ class SettingsViewController: AutolayoutViewController {
         if !Flags.shared.enablesContentBlockerSetting {
             sections.remove(at: sections.firstIndex(of: .contentBlocker)!)
         }
+        
+        if AppPreferences.shared.enableDebugLogging {
+            rowsBySection[.applicationInformation] = [.enableDebugLogging, .submitDebugReport]
+        } else {
+            if (pendingPreferences.vpnType != PIATunnelProfile.vpnType &&
+                pendingPreferences.vpnType != PIAWGTunnelProfile.vpnType) {
+                rowsBySection[.applicationInformation] = [.enableDebugLogging]
+            } else {
+                rowsBySection[.applicationInformation] = [.enableDebugLogging, .submitDebugReport]
+            }
+        }
+        
         if !Flags.shared.enablesResetSettings {
             sections.remove(at: sections.firstIndex(of: .reset)!)
         }
@@ -1007,6 +1030,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 } else {
                     return nil
                 }
+                
+            case .applicationInformation:
+                cell.textLabel?.text = "Save debug logs which can be submitted to technical support to help troubleshoot problems."
                 
             case .reset:
                 cell.textLabel?.text = L10n.Settings.Reset.footer
@@ -1230,7 +1256,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.detailTextLabel?.text = SiriShortcutsManager.shared.descriptionActionForDisconnectShortcut()
 
         case .submitDebugReport:
-            cell.textLabel?.text = L10n.Settings.ApplicationInformation.Debug.title
+            cell.textLabel?.text = AppPreferences.shared.enableDebugLogging ? "Send debug & VPN log" : "Send VPN log"
             cell.detailTextLabel?.text = nil
             
         case .resetSettings:
@@ -1287,6 +1313,12 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.textLabel?.text = L10n.Inapp.Messages.Toggle.title
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchInAppMessages
+            cell.selectionStyle = .none
+            switchInAppMessages.isOn = AppPreferences.shared.stopInAppMessages
+        case .enableDebugLogging:
+            cell.textLabel?.text = "Enable debug logging"
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchEnableDebugLogging
             cell.selectionStyle = .none
             switchInAppMessages.isOn = AppPreferences.shared.stopInAppMessages
         case .customServers:

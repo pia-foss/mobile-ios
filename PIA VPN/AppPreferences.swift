@@ -90,6 +90,9 @@ class AppPreferences {
 
         // In app messages
         static let stopInAppMessages = "stopInAppMessages"
+        
+        // Debug
+        static let enableDebugLogging = "EnableDebugLogging"
 
     }
 
@@ -430,6 +433,15 @@ class AppPreferences {
         }
     }
 
+    var enableDebugLogging: Bool {
+        get {
+            return defaults.bool(forKey: Entries.enableDebugLogging) ?? false
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.enableDebugLogging)
+        }
+    }
+
     private init() {
         guard let defaults = UserDefaults(suiteName: AppConstants.appGroup) else {
             fatalError("Unable to initialize app preferences")
@@ -461,7 +473,8 @@ class AppPreferences {
             Entries.failureConnections: 0,
             Entries.showGeoServers: true,
             Entries.dismissedMessages: [],
-            Entries.stopInAppMessages: false
+            Entries.stopInAppMessages: false,
+            Entries.enableDebugLogging: false
         ])
     }
     
@@ -617,6 +630,7 @@ class AppPreferences {
         failureConnections = 0
         showGeoServers = true
         stopInAppMessages = false
+        enableDebugLogging = false
         dedicatedTokenIPReleation = [:]
         MessagesManager.shared.reset()
     }
@@ -648,6 +662,7 @@ class AppPreferences {
         failureConnections = 0
         showGeoServers = true
         stopInAppMessages = false
+        enableDebugLogging = false
         dismissedMessages = []
         dedicatedTokenIPReleation = [:]
         MessagesManager.shared.reset()
