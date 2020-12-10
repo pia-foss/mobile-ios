@@ -272,28 +272,14 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         }
     }
     
-    func submitLog(_ callback: ((DebugLog?, Error?) -> Void)?) {
+    func submitDebugReport(_ callback: LibraryCallback<String>?) {
         guard let activeProfile = activeProfile else {
             preconditionFailure()
         }
         let configuration = vpnClientConfiguration()
         activeProfile.requestLog(withCustomConfiguration: configuration.customConfiguration) { (content, error) in
-            guard let rawContent = content else {
-                callback?(nil, error)
-                return
-            }
-            let vpnLog = PlatformVPNLog(rawContent: rawContent)
-            guard !vpnLog.isEmpty else {
-                callback?(vpnLog, error)
-                return
-            }
-            self.webServices.submitDebugLog(vpnLog) { (error) in
-                if let _ = error {
-                    callback?(nil, error)
-                    return
-                }
-                callback?(vpnLog, nil)
-            }
+            let rawContent = content ?? "Unknown Protocol Logs \(error.debugDescription)"
+            self.webServices.submitDebugReport(rawContent, callback)
         }
     }
     

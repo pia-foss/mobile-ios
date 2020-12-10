@@ -62,7 +62,7 @@ class VPNTests: XCTestCase {
         let log = PlatformVPNLog(rawContent: content)
     
         let exp = expectation(description: "Debug submission")
-        PIAWebServices().submitDebugLog(log) { (error) in
+        PIAWebServices().submitDebugReport(log) { (error) in
             if let error = error {
                 print("Debug log not submitted: \(error)")
                 return

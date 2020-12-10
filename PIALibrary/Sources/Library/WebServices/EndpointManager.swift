@@ -41,6 +41,7 @@ public class EndpointManager {
     private let proxy = "www.piaproxy.net"
     private let pia = "www.privateinternetaccess.com"
     private let region = "serverlist.piaservers.net"
+    private let crashlab = "csi.supreme.tools"
 
     public static let shared = EndpointManager()
 
@@ -79,6 +80,10 @@ public class EndpointManager {
             }
         }
         
+    }
+    
+    public func availableCrashlabEndpoints() -> [PinningEndpoint] {
+        return [PinningEndpoint(host: crashlab)]
     }
     
     public func availableRegionEndpoints() -> [PinningEndpoint] {

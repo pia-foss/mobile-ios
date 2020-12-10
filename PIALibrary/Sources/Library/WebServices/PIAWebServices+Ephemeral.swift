@@ -44,50 +44,19 @@ extension PIAWebServices {
         
     }
     
-    func submitDebugLog(_ log: DebugLog, _ callback: SuccessLibraryCallback?) {
-        let data = log.serialized()
-        guard let bigdata = String(data: data, encoding: .isoLatin1)?.urlEncoded() else {
-            callback?(nil)
-            return
-        }
-
-        let body = "bigdata=\(bigdata)"
-        let url = VPNEndpoint.debugLog.url
-
-        let config: URLSessionConfiguration = .ephemeral
-        config.timeoutIntervalForRequest = Double(accessedConfiguration.webTimeout) / 1000.0
-        config.timeoutIntervalForResource = Double(accessedConfiguration.webTimeout) / 1000.0
-        let session = URLSession(configuration: config)
-
-        var request = URLRequest(
-            url: url,
-            cachePolicy: .reloadIgnoringLocalCacheData,
-            timeoutInterval: Double(accessedConfiguration.webTimeout) / 1000.0
-        )
-        request.httpMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.httpBody = body.data(using: .isoLatin1)
-
-        session.dataTask(with: request) { (data, response, error) in
-            DispatchQueue.main.async {
-                guard let httpResponse = response as? HTTPURLResponse else {
-                    callback?(ClientError.malformedResponseData)
-                    return
-                }
-                guard (httpResponse.statusCode == 200) else {
-                    callback?(ClientError.unexpectedReply)
-                    return
-                }
-                callback?(nil)
+    func submitDebugReport(_ protocolLogs: String, _ callback: LibraryCallback<String>?) {
+        crashlabProtocolInformationProvider.setProtocolLogs(protocolLogs: protocolLogs)
+        crashlabAPI.send { (reportIdentifier, error) in
+            if let _ = error {
+                callback?(nil, ClientError.internetUnreachable)
+                return
             }
-        }.resume()
+
+            if let reportIdentifier = reportIdentifier {
+                callback?(reportIdentifier, nil)
+            } else {
+                callback?(nil, ClientError.malformedResponseData)
+            }
+        }
     }
 }
-
-//private extension String {
-//    private static let urlEncodedSet = CharacterSet(charactersIn: "!'();:@&=+$,/?%#[]")
-//
-//    func urlEncoded() -> String? {
-//        return addingPercentEncoding(withAllowedCharacters: String.urlEncodedSet)
-//    }
-//}
