@@ -88,7 +88,7 @@ enum Setting: Int {
 
     case stopInAppMessages
 
-    case sendDebugLog
+    case submitDebugReport
     
     case resetSettings
     
@@ -213,7 +213,7 @@ class SettingsViewController: AutolayoutViewController {
             .contentBlockerRefreshRules
         ],
         .applicationInformation: [
-            .sendDebugLog
+            .submitDebugReport
         ],
         .reset: [
             .resetSettings
@@ -505,50 +505,34 @@ class SettingsViewController: AutolayoutViewController {
         }
     }
     
-    private func submitTunnelLog() {
-        
-        if Client.providers.vpnProvider.isVPNConnected {
+    private func submitDebugReport() {
+        self.showLoadingAnimation()
+        Client.providers.vpnProvider.submitDebugReport { (reportIdentifier, error) in
+            self.hideLoadingAnimation()
             
-            self.showLoadingAnimation()
+            let title: String
+            let message: String
 
-            Client.providers.vpnProvider.submitLog { (log, error) in
-                self.hideLoadingAnimation()
-                
-                let title: String
-                let message: String
-            
-                defer {
-                    let alert = Macros.alert(title, message)
-                    alert.addDefaultAction(L10n.Global.ok)
-                    self.present(alert, animated: true, completion: nil)
-                }
-                
-                guard let log = log else {
-                    title = L10n.Settings.ApplicationInformation.Debug.Failure.title
-                    message = L10n.Settings.ApplicationInformation.Debug.Failure.message
-                    return
-                }
-                guard !log.isEmpty else {
-                    title = L10n.Settings.ApplicationInformation.Debug.Empty.title
-                    message = L10n.Settings.ApplicationInformation.Debug.Empty.message
-                    return
-                }
-
-                title = L10n.Settings.ApplicationInformation.Debug.Success.title
-                message = L10n.Settings.ApplicationInformation.Debug.Success.message(log.identifier)
+            defer {
+                let alert = Macros.alert(title, message)
+                alert.addDefaultAction(L10n.Global.ok)
+                self.present(alert, animated: true, completion: nil)
             }
 
-        } else {
-            
-            let alert = Macros.alert(
-                nil,
-                L10n.Settings.Log.Connected.error
-            )
-            alert.addCancelAction(L10n.Global.close)
-            self.present(alert, animated: true, completion: nil)
+            guard let reportId = reportIdentifier else {
+                title = L10n.Settings.ApplicationInformation.Debug.Failure.title
+                message = L10n.Settings.ApplicationInformation.Debug.Failure.message
+                return
+            }
+            guard !reportId.isEmpty else {
+                title = L10n.Settings.ApplicationInformation.Debug.Empty.title
+                message = L10n.Settings.ApplicationInformation.Debug.Empty.message
+                return
+            }
 
+            title = L10n.Settings.ApplicationInformation.Debug.Success.title
+            message = L10n.Settings.ApplicationInformation.Debug.Success.message(reportId)
         }
-        
     }
     
     private func resetToDefaultSettings() {
@@ -822,10 +806,6 @@ class SettingsViewController: AutolayoutViewController {
         
         if !Flags.shared.enablesContentBlockerSetting {
             sections.remove(at: sections.firstIndex(of: .contentBlocker)!)
-        }
-        if (pendingPreferences.vpnType != PIATunnelProfile.vpnType &&
-            pendingPreferences.vpnType != PIAWGTunnelProfile.vpnType) {
-            sections.remove(at: sections.firstIndex(of: .applicationInformation)!)
         }
         if !Flags.shared.enablesResetSettings {
             sections.remove(at: sections.firstIndex(of: .reset)!)
@@ -1249,7 +1229,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.textLabel?.text = L10n.Siri.Shortcuts.Disconnect.Row.title
             cell.detailTextLabel?.text = SiriShortcutsManager.shared.descriptionActionForDisconnectShortcut()
 
-        case .sendDebugLog:
+        case .submitDebugReport:
             cell.textLabel?.text = L10n.Settings.ApplicationInformation.Debug.title
             cell.detailTextLabel?.text = nil
             
@@ -1522,8 +1502,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .contentBlockerRefreshRules:
             refreshContentBlockerRules()
 
-        case .sendDebugLog:
-            submitTunnelLog()
+        case .submitDebugReport:
+            submitDebugReport()
             
         case .resetSettings:
             resetToDefaultSettings()
