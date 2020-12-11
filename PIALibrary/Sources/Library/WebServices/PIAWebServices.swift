@@ -259,7 +259,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                     switch status {
                     case .active:
                         
-                        guard let firstServer = Client.providers.serverProvider.currentServers.first(where: {$0.identifier == dipServer.id}) else {
+                        guard let firstServer = Client.providers.serverProvider.currentServers.first(where: {$0.regionIdentifier == dipServer.id}) else {
                             callback?([], ClientError.malformedResponseData)
                             return
                         }
