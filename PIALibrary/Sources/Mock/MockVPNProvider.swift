@@ -133,7 +133,7 @@ public class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess {
     }
     
     /// :nodoc:
-    public func submitDebugReport(_ callback: LibraryCallback<String>?) {
+    public func submitDebugReport(_ shouldSendPersistedData: Bool, _ callback: LibraryCallback<String>?) {
         callback?(nil, ClientError.unsupported)
     }
     

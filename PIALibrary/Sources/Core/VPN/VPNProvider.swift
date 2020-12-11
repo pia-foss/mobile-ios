@@ -106,10 +106,11 @@ public protocol VPNProvider: class {
     
     /**
      Submits the debug report containing all relevant information foor the current session.
-
+     
+     - Parameter shouldSendPersistedData: Specifies whether to send the user persisted data along with the report.
      - Parameter callback: Returns the report identifier  on success.
      */
-    func submitDebugReport(_ callback: LibraryCallback<String>?)
+    func submitDebugReport(_ shouldSendPersistedData: Bool, _ callback: LibraryCallback<String>?)
     
     /**
      Submits the usage information associated with the current VPN connection.

@@ -110,7 +110,7 @@ class MockWebServices: WebServices {
         callback?(nil, nil)
     }
     
-    func submitDebugReport(_ protocolLogs: String, _ callback: LibraryCallback<String>?) {
+    func submitDebugReport(_ shouldSendPersistedData: Bool, _ protocolLogs: String, _ callback: LibraryCallback<String>?) {
         callback?(nil, nil)
     }
     

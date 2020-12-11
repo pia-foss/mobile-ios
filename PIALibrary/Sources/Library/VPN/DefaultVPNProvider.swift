@@ -272,14 +272,14 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         }
     }
     
-    func submitDebugReport(_ callback: LibraryCallback<String>?) {
+    func submitDebugReport(_ shouldSendPersistedData: Bool, _ callback: LibraryCallback<String>?) {
         guard let activeProfile = activeProfile else {
             preconditionFailure()
         }
         let configuration = vpnClientConfiguration()
         activeProfile.requestLog(withCustomConfiguration: configuration.customConfiguration) { (content, error) in
             let rawContent = content ?? "Unknown Protocol Logs \(error.debugDescription)"
-            self.webServices.submitDebugReport(rawContent, callback)
+            self.webServices.submitDebugReport(shouldSendPersistedData, rawContent, callback)
         }
     }
     
