@@ -518,7 +518,7 @@ class SettingsViewController: AutolayoutViewController {
     
     private func submitDebugReport() {
         self.showLoadingAnimation()
-        Client.providers.vpnProvider.submitDebugReport { (reportIdentifier, error) in
+        Client.providers.vpnProvider.submitDebugReport(AppPreferences.shared.enableDebugLogging) { (reportIdentifier, error) in
             self.hideLoadingAnimation()
             
             let title: String
