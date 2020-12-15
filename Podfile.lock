@@ -151,10 +151,10 @@ DEPENDENCIES:
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
   - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, commit `6116a38`)"
-  - "PIALibrary/Library (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `e72f699`)"
-  - "PIALibrary/Mock (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `e72f699`)"
-  - "PIALibrary/UI (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `e72f699`)"
-  - "PIALibrary/VPN (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `e72f699`)"
+  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `cb5134e`)
+  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `cb5134e`)
+  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `cb5134e`)
+  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `cb5134e`)
   - "PIARegions (from `git@codex.londontrustmedia.com:mobile/regions.git`, commit `3b9395f`)"
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
   - Popover
@@ -201,8 +201,8 @@ EXTERNAL SOURCES:
     :commit: 6116a38
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
   PIALibrary:
-    :commit: e72f699
-    :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
+    :commit: cb5134e
+    :git: https://github.com/pia-foss/client-library-apple
   PIARegions:
     :commit: 3b9395f
     :git: "git@codex.londontrustmedia.com:mobile/regions.git"
@@ -217,8 +217,8 @@ CHECKOUT OPTIONS:
     :commit: 6116a38
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
   PIALibrary:
-    :commit: e72f699
-    :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
+    :commit: cb5134e
+    :git: https://github.com/pia-foss/client-library-apple
   PIARegions:
     :commit: 3b9395f
     :git: "git@codex.londontrustmedia.com:mobile/regions.git"
@@ -265,6 +265,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 22b4caa3e98023bb13d8a462300b60245dcd9ea3
+PODFILE CHECKSUM: 7ee345add8272a421e06c09abc0d8e8fa9a9e922
 
 COCOAPODS: 1.9.3
