@@ -936,10 +936,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
             switch visibleSections[section] {
             case .connection:
-                label.text =  "VPN Settings".uppercased()
+                label.text =  L10n.Global.Vpn.settings.uppercased()
 
             case .applicationSettings:
-                label.text =  "General Settings".uppercased()
+                label.text =  L10n.Global.General.settings.uppercased()
 
             default:
                 return nil
