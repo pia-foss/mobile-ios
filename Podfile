@@ -31,6 +31,7 @@ $accounts_repo = 'mobile-common-account'
 
 $regions_gitlab_repo = 'regions.git'
 $accounts_gitlab_repo = 'account.git'
+$csi_gitlab_repo = 'csi.git'
 
 def library_by_path(root)
     $library_subspecs.each { |name|
@@ -71,11 +72,12 @@ def shared_main_pods
     pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :commit => '6116a38'
     #pod "PIARegions", :git => "#{$git_root}/#{$regions_repo}"
     pod "PIARegions", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :commit => '3b9395f'
-    
+    pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :branch => 'master'
+
     #library_by_path('/Users/jose/Projects/PIA')
-    library_by_git('cb5134e')
+    #library_by_git('b73d9e5')
     #library_by_gitlab_branch('develop')
-    #library_by_gitlab_by_git('cb5134e')
+    library_by_gitlab_by_git('b73d9e5')
     #library_by_version('~> 1.1.3')
 end
 
