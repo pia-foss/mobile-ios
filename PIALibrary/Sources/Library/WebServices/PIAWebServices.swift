@@ -26,6 +26,7 @@ import Gloss
 import SwiftyBeaver
 import PIARegions
 import PIAAccount
+import PIACSI
 import Regions
 
 private let log = SwiftyBeaver.self
@@ -36,18 +37,37 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     private static let store = "apple_app_store"
     
     private let regionsTask = RegionsTask(stateProvider: PIARegionClientStateProvider())
+
     let accountAPI: IOSAccountAPI!
+    let csiAPI: CSIAPI!
+    let csiProtocolInformationProvider = PIACSIProtocolInformationProvider()
     
     init() {
         if Client.environment == .staging {
-            self.accountAPI = AccountBuilder<IOSAccountAPI>().setPlatform(platform: .ios)
+            self.accountAPI = AccountBuilder<IOSAccountAPI>()
+                .setPlatform(platform: .ios)
                 .setClientStateProvider(clientStateProvider: PIAAccountStagingClientStateProvider())
-                    .setUserAgentValue(userAgentValue: userAgent).build() as? IOSAccountAPI
+                .setUserAgentValue(userAgentValue: userAgent)
+                .build() as? IOSAccountAPI
         } else {
-            self.accountAPI = AccountBuilder<IOSAccountAPI>().setPlatform(platform: .ios)
+            self.accountAPI = AccountBuilder<IOSAccountAPI>()
+                .setPlatform(platform: .ios)
                 .setClientStateProvider(clientStateProvider: PIAAccountClientStateProvider())
-                .setUserAgentValue(userAgentValue: userAgent).build() as? IOSAccountAPI
+                .setUserAgentValue(userAgentValue: userAgent)
+                .build() as? IOSAccountAPI
         }
+        
+        var appVersion = "Unknown"
+        if let info = Bundle.main.infoDictionary {
+            appVersion = info["CFBundleShortVersionString"] as? String ?? "Unknown"
+        }
+        self.csiAPI = CSIBuilder()
+            .setPlatform(platform: .ios)
+            .setAppVersion(appVersion: appVersion)
+            .setCSIClientStateProvider(csiClientStateProvider: PIACSIClientStateProvider())
+            .setProtocolInformationProvider(protocolInformationProvider: csiProtocolInformationProvider)
+            .setRegionInformationProvider(regionInformationProvider: PIACSIRegionInformationProvider())
+            .build()
     }
     
     private let userAgent: String = {

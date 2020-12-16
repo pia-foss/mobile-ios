@@ -56,7 +56,6 @@
 		0E392D8D1FE2F8780002160D /* ConnectivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D8B1FE2F8780002160D /* ConnectivityStatus.swift */; };
 		0E392D8F1FE2FBBE0002160D /* GlossConnectivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D8E1FE2FBBE0002160D /* GlossConnectivityStatus.swift */; };
 		0E392D901FE2FBBE0002160D /* GlossConnectivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D8E1FE2FBBE0002160D /* GlossConnectivityStatus.swift */; };
-		0E392D951FE316860002160D /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D941FE316860002160D /* DebugLog.swift */; };
 		0E392D961FE316860002160D /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D941FE316860002160D /* DebugLog.swift */; };
 		0E392D9D1FE31D630002160D /* MockVPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2ADD3F1FE156EA00BB170C /* MockVPNProvider.swift */; };
 		0E392D9E1FE31D630002160D /* MockVPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2ADD3F1FE156EA00BB170C /* MockVPNProvider.swift */; };
@@ -64,7 +63,6 @@
 		0E392DA11FE323ED0002160D /* PIAWebServices+Ephemeral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D9F1FE323ED0002160D /* PIAWebServices+Ephemeral.swift */; };
 		0E392DA31FE3247E0002160D /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392DA21FE3247E0002160D /* Endpoint.swift */; };
 		0E392DA41FE3247E0002160D /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392DA21FE3247E0002160D /* Endpoint.swift */; };
-		0E392DA91FE329AD0002160D /* PlatformVPNLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392DA81FE329AD0002160D /* PlatformVPNLog.swift */; };
 		0E392DAA1FE329AD0002160D /* PlatformVPNLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392DA81FE329AD0002160D /* PlatformVPNLog.swift */; };
 		0E392DB01FE3366B0002160D /* NSData+Compression.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E392DAE1FE3366A0002160D /* NSData+Compression.m */; };
 		0E392DB11FE3366B0002160D /* NSData+Compression.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E392DAF1FE3366B0002160D /* NSData+Compression.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -279,6 +277,12 @@
 		84577FC1213D9A23006DEC3D /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84577FC0213D9A23006DEC3D /* UIImage+Color.swift */; };
 		84577FC3213D9AEA006DEC3D /* UITextField+PlaceholderColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84577FC2213D9AEA006DEC3D /* UITextField+PlaceholderColor.swift */; };
 		84577FC5213D9B4D006DEC3D /* UILabel+LineHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84577FC4213D9B4D006DEC3D /* UILabel+LineHeight.swift */; };
+		AA319C4D25833088004BECF6 /* PIACrashlabRegionInformationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA319C4A25833088004BECF6 /* PIACrashlabRegionInformationProvider.swift */; };
+		AA319C4E25833088004BECF6 /* PIACrashlabRegionInformationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA319C4A25833088004BECF6 /* PIACrashlabRegionInformationProvider.swift */; };
+		AA319C4F25833088004BECF6 /* PIACrashlabProtocolInformationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA319C4B25833088004BECF6 /* PIACrashlabProtocolInformationProvider.swift */; };
+		AA319C5025833088004BECF6 /* PIACrashlabProtocolInformationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA319C4B25833088004BECF6 /* PIACrashlabProtocolInformationProvider.swift */; };
+		AA319C5125833088004BECF6 /* PIACrashlabClientStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA319C4C25833088004BECF6 /* PIACrashlabClientStateProvider.swift */; };
+		AA319C5225833088004BECF6 /* PIACrashlabClientStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA319C4C25833088004BECF6 /* PIACrashlabClientStateProvider.swift */; };
 		DD0AC790218715B8009B576B /* PIAButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0AC78F218715B8009B576B /* PIAButton.swift */; };
 		DD0DE85022366090002A6E82 /* GDPRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0DE84F22366090002A6E82 /* GDPRViewController.swift */; };
 		DD1AB10123FAD79000396E74 /* PIAPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1AB10023FAD79000396E74 /* PIAPageControl.swift */; };
@@ -596,6 +600,9 @@
 		84577FC2213D9AEA006DEC3D /* UITextField+PlaceholderColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+PlaceholderColor.swift"; sourceTree = "<group>"; };
 		84577FC4213D9B4D006DEC3D /* UILabel+LineHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+LineHeight.swift"; sourceTree = "<group>"; };
 		9F97BBBE243946070EEB8AEB /* Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig"; path = "Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		AA319C4A25833088004BECF6 /* PIACrashlabRegionInformationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIACrashlabRegionInformationProvider.swift; sourceTree = "<group>"; };
+		AA319C4B25833088004BECF6 /* PIACrashlabProtocolInformationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIACrashlabProtocolInformationProvider.swift; sourceTree = "<group>"; };
+		AA319C4C25833088004BECF6 /* PIACrashlabClientStateProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIACrashlabClientStateProvider.swift; sourceTree = "<group>"; };
 		BA594D4EE5B40D700256BD0B /* Pods-PIALibraryTests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibraryTests-iOS.debug.xcconfig"; path = "Target Support Files/Pods-PIALibraryTests-iOS/Pods-PIALibraryTests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		C40F52933BC09B28A65AA3FC /* Pods_PIALibrary_PIALibrary_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibrary_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7C9CB9E34675631E74C17A8 /* Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig"; path = "Target Support Files/Pods-PIALibrary-PIALibrary-iOS/Pods-PIALibrary-PIALibrary-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1172,6 +1179,9 @@
 		82FD5D542521F2B600E390CB /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				AA319C4C25833088004BECF6 /* PIACrashlabClientStateProvider.swift */,
+				AA319C4B25833088004BECF6 /* PIACrashlabProtocolInformationProvider.swift */,
+				AA319C4A25833088004BECF6 /* PIACrashlabRegionInformationProvider.swift */,
 				82FD5D552521F2DD00E390CB /* PIARegionClientStateProvider.swift */,
 				82FD5D5D2521F30300E390CB /* PIAAccountClientStateProvider.swift */,
 				82FD5D652521F32B00E390CB /* PIAAccountStagingClientStateProvider.swift */,
@@ -1671,6 +1681,7 @@
 				0E7BC6FB1F96B1120035C8B2 /* LibraryCallback.swift in Sources */,
 				0E3D13D41F9E270A00434A48 /* GlossAccountInfo.swift in Sources */,
 				0E9D62D31FDEBBFD009A90CF /* GlossServer.swift in Sources */,
+				AA319C4E25833088004BECF6 /* PIACrashlabRegionInformationProvider.swift in Sources */,
 				82FD5D672521F32B00E390CB /* PIAAccountStagingClientStateProvider.swift in Sources */,
 				82C4962A25642D5800233CB1 /* String+Random.swift in Sources */,
 				0E9D62DB1FDEE3FE009A90CF /* ServerProvider.swift in Sources */,
@@ -1737,9 +1748,11 @@
 				0EB3D9831FF02FE5005B11F4 /* VPNAction.swift in Sources */,
 				0EBBC6DD1F9F64E700B8BD21 /* Client+Environment.swift in Sources */,
 				0E3D13CE1F9DDD2400434A48 /* NotificationKey.swift in Sources */,
+				AA319C5225833088004BECF6 /* PIACrashlabClientStateProvider.swift in Sources */,
 				0E7BC6EC1F96B1040035C8B2 /* KeychainStore.swift in Sources */,
 				0E392D7B1FE2E47D0002160D /* TransientStore.swift in Sources */,
 				0EA8073020A1E7C60033EC1A /* GlossRedeem.swift in Sources */,
+				AA319C5025833088004BECF6 /* PIACrashlabProtocolInformationProvider.swift in Sources */,
 				0E392DAA1FE329AD0002160D /* PlatformVPNLog.swift in Sources */,
 				0E53A8551FE5D770000C2A18 /* MockWebServices.swift in Sources */,
 				0E7BC6F91F96B1120035C8B2 /* Signup.swift in Sources */,
@@ -1845,6 +1858,7 @@
 				829EB63F2535C432003E74DD /* DedicatedIP.swift in Sources */,
 				0EA8073220A2F50A0033EC1A /* SignupMetadata.swift in Sources */,
 				0E4D4E9F1FA4CA7A007DA6DA /* Restylable.swift in Sources */,
+				AA319C5125833088004BECF6 /* PIACrashlabClientStateProvider.swift in Sources */,
 				0EB8C06E1F9CD38B005857E4 /* SignupInternetUnreachableViewController.swift in Sources */,
 				0E75D8D31F9E3F9F00658D1E /* UserAccount.swift in Sources */,
 				0EB8C0691F9CD38B005857E4 /* PurchasePlanCell.swift in Sources */,
@@ -1859,7 +1873,6 @@
 				82E20B1124F652ED0065EFE3 /* AccountInfo+Kotlin.swift in Sources */,
 				0EA8072720A1A0090033EC1A /* Redeem.swift in Sources */,
 				DDFCFAB121E925B60081F235 /* AvailableTiles.swift in Sources */,
-				0E392D951FE316860002160D /* DebugLog.swift in Sources */,
 				84125E0B213D7E0E001BCC19 /* PIAFonts.swift in Sources */,
 				0EAA38981F9CC7E4000149CF /* AppStoreProduct.swift in Sources */,
 				0E1743131F82E1A4001E7DD6 /* Client.swift in Sources */,
@@ -1881,6 +1894,7 @@
 				8221921C24CEBA3800C24F1C /* NMTRules.swift in Sources */,
 				0E2ADCF01FE09C6C00BB170C /* ConnectivityDaemon.swift in Sources */,
 				0EAA38971F9CC7E4000149CF /* AppStoreProvider.swift in Sources */,
+				AA319C4D25833088004BECF6 /* PIACrashlabRegionInformationProvider.swift in Sources */,
 				0EB8C0661F9CD38B005857E4 /* LoginViewController.swift in Sources */,
 				0EA8072C20A1C7A30033EC1A /* RedeemRequest.swift in Sources */,
 				0EC7A2A41F9D3D78006DDB91 /* RenewRequest.swift in Sources */,
@@ -1901,7 +1915,6 @@
 				84577FC1213D9A23006DEC3D /* UIImage+Color.swift in Sources */,
 				82FD5D562521F2DD00E390CB /* PIARegionClientStateProvider.swift in Sources */,
 				0E38E4101FF81722008223AB /* Notification+UI.swift in Sources */,
-				0E392DA91FE329AD0002160D /* PlatformVPNLog.swift in Sources */,
 				0EB8C0481F9CCE07005857E4 /* Macros.swift in Sources */,
 				84577FC3213D9AEA006DEC3D /* UITextField+PlaceholderColor.swift in Sources */,
 				0EFEB4C12007784A00F81029 /* PIATunnelProvider+Profile.swift in Sources */,
@@ -1923,6 +1936,7 @@
 				0EFEB4C22007784A00F81029 /* PIATunnelProfile.swift in Sources */,
 				DD1AB10523FC280000396E74 /* DeviceModel.swift in Sources */,
 				0E392DBB1FE34B5A0002160D /* NSString+URL.m in Sources */,
+				AA319C4F25833088004BECF6 /* PIACrashlabProtocolInformationProvider.swift in Sources */,
 				0E2ADCCA1FE06D7A00BB170C /* Array+Math.swift in Sources */,
 				0E2ADD331FE1472F00BB170C /* VPNStatus.swift in Sources */,
 				0E0F95961FD560C40046DC64 /* CircleProgressView.swift in Sources */,

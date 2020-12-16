@@ -110,8 +110,8 @@ class MockWebServices: WebServices {
         callback?(nil, nil)
     }
     
-    func submitDebugLog(_ log: DebugLog, _ callback: SuccessLibraryCallback?) {
-        callback?(nil)
+    func submitDebugReport(_ shouldSendPersistedData: Bool, _ protocolLogs: String, _ callback: LibraryCallback<String>?) {
+        callback?(nil, nil)
     }
     
     func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?) {

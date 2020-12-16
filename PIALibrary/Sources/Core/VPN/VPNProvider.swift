@@ -105,11 +105,12 @@ public protocol VPNProvider: class {
     func reconnect(after delay: Int?, forceDisconnect: Bool, _ callback: SuccessLibraryCallback?)
     
     /**
-     Submits the debug log associated with the current VPN connection.
-
-     - Parameter callback: Returns the submitted `DebugLog` on success.
+     Submits the debug report containing all relevant information foor the current session.
+     
+     - Parameter shouldSendPersistedData: Specifies whether to send the user persisted data along with the report.
+     - Parameter callback: Returns the report identifier  on success.
      */
-    func submitLog(_ callback: LibraryCallback<DebugLog>?)
+    func submitDebugReport(_ shouldSendPersistedData: Bool, _ callback: LibraryCallback<String>?)
     
     /**
      Submits the usage information associated with the current VPN connection.

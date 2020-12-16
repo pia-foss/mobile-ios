@@ -31,7 +31,5 @@ class PIARegionClientStateProvider : RegionClientStateProvider {
             clientEndpoints.append(RegionEndpoint(endpoint: endpoint.host, isProxy: endpoint.isProxy, usePinnedCertificate: endpoint.useCertificatePinning, certificateCommonName: endpoint.commonName))
         }
         return clientEndpoints
-
     }
-    
 }

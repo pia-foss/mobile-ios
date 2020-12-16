@@ -44,10 +44,6 @@ class VPNTests: XCTestCase {
         super.tearDown()
     }
     
-//    func testInstall() {
-//        Client.providers.vpnProvider.install(profile: <#T##VPNProfile#>, completionHandler: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
-//    }
-    
     func testCompression() {
         let orig = "This is a test"
         let deflated = (orig.data(using: .utf8)! as NSData).deflated()! as NSData
@@ -59,15 +55,14 @@ class VPNTests: XCTestCase {
 
     func testDebugLogSubmission() {
         let content = "2017-08-05 14:31:45.409 DEBUG SessionProxy.handleControlData():733 - Parsed control message (0)\n2017-08-05 14:31:45.409 DEBUG SessionProxy.handleControlData():733 - Parsed control message (0)"
-        let log = PlatformVPNLog(rawContent: content)
     
         let exp = expectation(description: "Debug submission")
-        PIAWebServices().submitDebugLog(log) { (error) in
+        PIAWebServices().submitDebugReport(false, content) { (reportIdentifier, error) in
             if let error = error {
                 print("Debug log not submitted: \(error)")
                 return
             }
-            print("Debug id: \(log.identifier)")
+            print("Debug id: \(reportIdentifier)")
             exp.fulfill()
         }
         waitForExpectations(timeout: 3.0, handler: nil)
