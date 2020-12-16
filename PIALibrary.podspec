@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
         p.dependency "PopupDialog"
         p.dependency "PIARegions"
         p.dependency "PIAAccountModule"
-        p.dependency "PIACrashlabModule"
+        p.dependency "PIACSIModule"
         
     end
 

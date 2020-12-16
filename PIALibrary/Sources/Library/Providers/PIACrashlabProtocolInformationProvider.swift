@@ -1,5 +1,5 @@
 //
-//  PIACrashlabProtocolInformationProvider.swift
+//  PIACSIProtocolInformationProvider.swift
 //  PIALibrary
 //
 //  Created by Juan Docal on 9/12/20.
@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import PIACrashlab
+import PIACSI
 
-class PIACrashlabProtocolInformationProvider : ProtocolInformationProvider {
+class PIACSIProtocolInformationProvider : ProtocolInformationProvider {
     
     private var protocolLogs: String?
     

@@ -21,7 +21,7 @@ abstract_target 'PIALibrary' do
     pod 'PIAWireguard', :git => "https://github.com/pia-foss/ios-wireguard"
     pod "PIAAccountModule", :git => "https://github.com/pia-foss/mobile-common-account"
     pod 'PIARegions',  :git => "https://github.com/pia-foss/mobile-common-regions"
-    pod "PIACrashlabModule", :git => "https://github.com/pia-foss/mobile-common-crashlab"
+    pod "PIACSIModule", :git => "https://github.com/pia-foss/mobile-common-csi"
 
     target 'PIALibrary-iOS' do
         platform :ios, '11.0'

@@ -1,5 +1,5 @@
 //
-//  PIACrashlabClientStateProvider.swift
+//  PIACSIClientStateProvider.swift
 //  PIALibrary
 //
 //  Created by Juan Docal on 9/12/20.
@@ -7,16 +7,16 @@
 //
 
 import Foundation
-import PIACrashlab
+import PIACSI
 
-class PIACrashlabClientStateProvider : CrashlabClientStateProvider {
+class PIACSIClientStateProvider : CSIClientStateProvider {
 
-    func crashlabEndpoints() -> [CrashlabEndpoint] {
-        let validEndpoints = EndpointManager.shared.availableCrashlabEndpoints()
-        var clientEndpoints = [CrashlabEndpoint]()
+    func csiEndpoints() -> [CSIEndpoint] {
+        let validEndpoints = EndpointManager.shared.availableCSIEndpoints()
+        var clientEndpoints = [CSIEndpoint]()
         for endpoint in validEndpoints.reversed() {
             clientEndpoints.append(
-                CrashlabEndpoint(
+                CSIEndpoint(
                     endpoint: endpoint.host,
                     isProxy: endpoint.isProxy,
                     usePinnedCertificate: endpoint.useCertificatePinning,

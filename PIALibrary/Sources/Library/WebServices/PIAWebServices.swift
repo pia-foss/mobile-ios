@@ -26,7 +26,7 @@ import Gloss
 import SwiftyBeaver
 import PIARegions
 import PIAAccount
-import PIACrashlab
+import PIACSI
 import Regions
 
 private let log = SwiftyBeaver.self
@@ -39,8 +39,8 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     private let regionsTask = RegionsTask(stateProvider: PIARegionClientStateProvider())
 
     let accountAPI: IOSAccountAPI!
-    let crashlabAPI: CrashlabAPI!
-    let crashlabProtocolInformationProvider = PIACrashlabProtocolInformationProvider()
+    let csiAPI: CSIAPI!
+    let csiProtocolInformationProvider = PIACSIProtocolInformationProvider()
     
     init() {
         if Client.environment == .staging {
@@ -61,12 +61,12 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         if let info = Bundle.main.infoDictionary {
             appVersion = info["CFBundleShortVersionString"] as? String ?? "Unknown"
         }
-        self.crashlabAPI = CrashlabBuilder()
+        self.csiAPI = CSIBuilder()
             .setPlatform(platform: .ios)
             .setAppVersion(appVersion: appVersion)
-            .setCrashlabClientStateProvider(crashlabClientStateProvider: PIACrashlabClientStateProvider())
-            .setProtocolInformationProvider(protocolInformationProvider: crashlabProtocolInformationProvider)
-            .setRegionInformationProvider(regionInformationProvider: PIACrashlabRegionInformationProvider())
+            .setCSIClientStateProvider(csiClientStateProvider: PIACSIClientStateProvider())
+            .setProtocolInformationProvider(protocolInformationProvider: csiProtocolInformationProvider)
+            .setRegionInformationProvider(regionInformationProvider: PIACSIRegionInformationProvider())
             .build()
     }
     

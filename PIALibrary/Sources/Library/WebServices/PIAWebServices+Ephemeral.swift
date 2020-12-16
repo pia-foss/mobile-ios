@@ -45,8 +45,8 @@ extension PIAWebServices {
     }
     
     func submitDebugReport(_ shouldSendPersistedData: Bool, _ protocolLogs: String, _ callback: LibraryCallback<String>?) {
-        crashlabProtocolInformationProvider.setProtocolLogs(protocolLogs: protocolLogs)
-        self.crashlabAPI.send { (reportIdentifier, error) in
+        csiProtocolInformationProvider.setProtocolLogs(protocolLogs: protocolLogs)
+        self.csiAPI.send(shouldSendPersistedData: shouldSendPersistedData) { (reportIdentifier, error) in
             if let _ = error {
                 callback?(nil, ClientError.internetUnreachable)
                 return

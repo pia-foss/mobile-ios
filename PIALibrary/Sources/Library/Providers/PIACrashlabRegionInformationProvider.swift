@@ -1,5 +1,5 @@
 //
-//  PIACrashlabRegionInformationProvider.swift
+//  PIACSIRegionInformationProvider.swift
 //  PIALibrary
 //
 //  Created by Juan Docal on 9/12/20.
@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import PIACrashlab
+import PIACSI
 
-class PIACrashlabRegionInformationProvider : RegionInformationProvider {
+class PIACSIRegionInformationProvider : RegionInformationProvider {
 
     func regionInformation() -> String {
         return Client.providers.serverProvider.targetServer.toJSON()?.description ?? "Unknown region information"

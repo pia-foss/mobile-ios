@@ -56,7 +56,6 @@
 		0E392D8D1FE2F8780002160D /* ConnectivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D8B1FE2F8780002160D /* ConnectivityStatus.swift */; };
 		0E392D8F1FE2FBBE0002160D /* GlossConnectivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D8E1FE2FBBE0002160D /* GlossConnectivityStatus.swift */; };
 		0E392D901FE2FBBE0002160D /* GlossConnectivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D8E1FE2FBBE0002160D /* GlossConnectivityStatus.swift */; };
-		0E392D951FE316860002160D /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D941FE316860002160D /* DebugLog.swift */; };
 		0E392D961FE316860002160D /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D941FE316860002160D /* DebugLog.swift */; };
 		0E392D9D1FE31D630002160D /* MockVPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2ADD3F1FE156EA00BB170C /* MockVPNProvider.swift */; };
 		0E392D9E1FE31D630002160D /* MockVPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2ADD3F1FE156EA00BB170C /* MockVPNProvider.swift */; };
@@ -64,7 +63,6 @@
 		0E392DA11FE323ED0002160D /* PIAWebServices+Ephemeral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D9F1FE323ED0002160D /* PIAWebServices+Ephemeral.swift */; };
 		0E392DA31FE3247E0002160D /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392DA21FE3247E0002160D /* Endpoint.swift */; };
 		0E392DA41FE3247E0002160D /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392DA21FE3247E0002160D /* Endpoint.swift */; };
-		0E392DA91FE329AD0002160D /* PlatformVPNLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392DA81FE329AD0002160D /* PlatformVPNLog.swift */; };
 		0E392DAA1FE329AD0002160D /* PlatformVPNLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392DA81FE329AD0002160D /* PlatformVPNLog.swift */; };
 		0E392DB01FE3366B0002160D /* NSData+Compression.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E392DAE1FE3366A0002160D /* NSData+Compression.m */; };
 		0E392DB11FE3366B0002160D /* NSData+Compression.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E392DAF1FE3366B0002160D /* NSData+Compression.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -1875,7 +1873,6 @@
 				82E20B1124F652ED0065EFE3 /* AccountInfo+Kotlin.swift in Sources */,
 				0EA8072720A1A0090033EC1A /* Redeem.swift in Sources */,
 				DDFCFAB121E925B60081F235 /* AvailableTiles.swift in Sources */,
-				0E392D951FE316860002160D /* DebugLog.swift in Sources */,
 				84125E0B213D7E0E001BCC19 /* PIAFonts.swift in Sources */,
 				0EAA38981F9CC7E4000149CF /* AppStoreProduct.swift in Sources */,
 				0E1743131F82E1A4001E7DD6 /* Client.swift in Sources */,
@@ -1918,7 +1915,6 @@
 				84577FC1213D9A23006DEC3D /* UIImage+Color.swift in Sources */,
 				82FD5D562521F2DD00E390CB /* PIARegionClientStateProvider.swift in Sources */,
 				0E38E4101FF81722008223AB /* Notification+UI.swift in Sources */,
-				0E392DA91FE329AD0002160D /* PlatformVPNLog.swift in Sources */,
 				0EB8C0481F9CCE07005857E4 /* Macros.swift in Sources */,
 				84577FC3213D9AEA006DEC3D /* UITextField+PlaceholderColor.swift in Sources */,
 				0EFEB4C12007784A00F81029 /* PIATunnelProvider+Profile.swift in Sources */,
