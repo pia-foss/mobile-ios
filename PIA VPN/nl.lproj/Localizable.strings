@@ -130,6 +130,7 @@
 "global.yes" = "Ja";
 "hotspothelper.display.name" = "🔒 Activeer VPN-wifibescherming via PIA-instellingen om deze verbinding te beveiligen.";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN-wifibescherming ingeschakeld - Wij zorgen voor uw veiligheid.";
+"inapp.messages.toggle.title" = "Stop communicatieberichten in de app";
 "menu.accessibility.edit.tile" = "Bewerken";
 "menu.accessibility.item" = "Menu";
 "menu.accessibility.logged_as" = "Ingelogd als %@";

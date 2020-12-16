@@ -130,6 +130,7 @@
 "global.yes" = "はい";
 "hotspothelper.display.name" = "🔒 この接続を保護するには、PIA設定でVPN WiFi保護を有効にします。";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi保護が有効にされました - 保護はお任せください。";
+"inapp.messages.toggle.title" = "アプリ内通信メッセージを停止";
 "menu.accessibility.edit.tile" = "編集";
 "menu.accessibility.item" = "メニュー";
 "menu.accessibility.logged_as" = "%@としてログインされています";

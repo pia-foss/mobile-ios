@@ -25,6 +25,8 @@
 "global.no" = "No";
 "global.or" = "or";
 "global.row.selection" = "Row selection";
+"global.vpn.settings" = "VPN Settings";
+"global.general.settings" = "General Settings";
 
 // NOTIFICATIONS
 

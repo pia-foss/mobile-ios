@@ -439,9 +439,17 @@ internal enum L10n {
     internal static let update = L10n.tr("Localizable", "global.update")
     /// Yes
     internal static let yes = L10n.tr("Localizable", "global.yes")
+    internal enum General {
+      /// General Settings
+      internal static let settings = L10n.tr("Localizable", "global.general.settings")
+    }
     internal enum Row {
       /// Row selection
       internal static let selection = L10n.tr("Localizable", "global.row.selection")
+    }
+    internal enum Vpn {
+      /// VPN Settings
+      internal static let settings = L10n.tr("Localizable", "global.vpn.settings")
     }
   }
 

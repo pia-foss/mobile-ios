@@ -1,3 +1,4 @@
+"Localizable" = "قابل للترجمة";
 "about.accessibility.component.expand" = "اضغط لقراءة الترخيص الكامل";
 "about.app" = "VPN من Private Internet Access";
 "about.intro" = "يستخدم هذا البرنامج المكونات التالية:";
@@ -129,6 +130,7 @@
 "global.yes" = "نعم";
 "hotspothelper.display.name" = "🔒 قم بتنشيط حماية VPN WiFi في إعدادات PIA لتأمين هذا الاتصال.";
 "hotspothelper.display.protected.name" = "🔒 حماية VPN WiFi من PIA نشطة - نحن نحمي ظهرك.";
+"inapp.messages.toggle.title" = "إيقاف رسائل الاتصال من داخل التطبيق";
 "menu.accessibility.edit.tile" = "تحرير";
 "menu.accessibility.item" = "القائمة";
 "menu.accessibility.logged_as" = "تم تسجيل الدخول باسم %@";

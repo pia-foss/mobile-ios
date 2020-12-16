@@ -93,7 +93,7 @@ class MenuViewController: AutolayoutViewController {
     private lazy var stringForItem: [Item: String] = [
         .selectRegion: L10n.Menu.Item.region,
         .account: L10n.Menu.Item.account,
-        .dedicatedIp: "Dedicated IP",
+        .dedicatedIp: L10n.Dedicated.Ip.title,
         .settings: L10n.Menu.Item.settings,
         .logout: L10n.Menu.Item.logout,
         .about: L10n.Menu.Item.about,
