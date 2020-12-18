@@ -243,7 +243,9 @@ class RegionsViewController: AutolayoutViewController {
         }
         
         tableView.reloadData()
-        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        if tableView.numberOfRows(inSection: 0) > 0 {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
     }
 
     @objc private func viewHasRotated() {

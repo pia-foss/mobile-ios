@@ -528,7 +528,7 @@ class DashboardViewController: AutolayoutViewController {
             
             present(alert, animated: true, completion: nil)
         } else {
-            Client.providers.vpnProvider.install(force: true, { _ in
+            Client.providers.vpnProvider.install(force: false, { _ in
                 self.updateCurrentStatus()
             })
         }
@@ -833,7 +833,7 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout {
                 Client.providers.tileProvider.orderedTiles[indexPath.row].rawValue
 
             var tileHeight = TileSize.standard.rawValue
-            if Cells.objectIdentifyBy(index: tileIndex).identifier == Cells.connectionTile.identifier {
+            if tileIndex < Cells.countCases() && Cells.objectIdentifyBy(index: tileIndex).identifier == Cells.connectionTile.identifier {
                 tileHeight = TileSize.big.rawValue
             }
             

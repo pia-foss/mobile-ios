@@ -159,6 +159,7 @@
 "settings.small.packets.description" = "Will slightly lower the IP packet size to improve compatibility with some routers and mobile networks.";
 
 "settings.log.connected.error" = "A VPN connection is required. Please connect to the VPN and retry.";
+"settings.log.information" = "Save debug logs which can be submitted to technical support to help troubleshoot problems.";
 
 "settings.preview.title" = "Preview";
 "settings.server.network.description" = "Next generation network";
@@ -385,3 +386,4 @@
 
 // INAPP MESSAGES
 "inapp.messages.toggle.title" = "Stop in-app communication messages";
+"inapp.messages.settings.updated" = "Settings have been updated";

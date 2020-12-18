@@ -466,6 +466,10 @@ internal enum L10n {
 
   internal enum Inapp {
     internal enum Messages {
+      internal enum Settings {
+        /// Settings have been updated
+        internal static let updated = L10n.tr("Localizable", "inapp.messages.settings.updated")
+      }
       internal enum Toggle {
         /// Stop in-app communication messages
         internal static let title = L10n.tr("Localizable", "inapp.messages.toggle.title")
@@ -915,6 +919,8 @@ internal enum L10n {
       }
     }
     internal enum Log {
+      /// Save debug logs which can be submitted to technical support to help troubleshoot problems.
+      internal static let information = L10n.tr("Localizable", "settings.log.information")
       internal enum Connected {
         /// A VPN connection is required. Please connect to the VPN and retry.
         internal static let error = L10n.tr("Localizable", "settings.log.connected.error")

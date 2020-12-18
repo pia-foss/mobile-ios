@@ -1009,7 +1009,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 }
                 
             case .applicationInformation:
-                cell.textLabel?.text = "Save debug logs which can be submitted to technical support to help troubleshoot problems."
+                cell.textLabel?.text = L10n.Settings.Log.information
                 
             case .reset:
                 cell.textLabel?.text = L10n.Settings.Reset.footer
