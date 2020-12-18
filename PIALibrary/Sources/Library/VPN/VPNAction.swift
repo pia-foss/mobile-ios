@@ -59,17 +59,27 @@ class VPNActionReinstall: VPNAction, ProvidersAccess {
     let priority = 20
 
     let canRetainConnection = true
-    let forceConnection = Client.providers.vpnProvider.isVPNConnected
-    
+
     func execute(_ callback: SuccessLibraryCallback?) {
         let vpn = accessedProviders.vpnProvider
-        vpn.install(force: forceConnection, { (error) in
-            if let _ = error {
-                callback?(error)
-                return
+        let connected = accessedProviders.vpnProvider.isVPNConnected
+        if connected {
+            vpn.install(force: true, { (error) in
+                if let _ = error {
+                    callback?(error)
+                    return
+                }
+                callback?(nil)
+            })
+        } else {
+            vpn.updatePreferences { (error) in
+                if let _ = error {
+                    callback?(error)
+                    return
+                }
+                callback?(nil)
             }
-            callback?(nil)
-        })
+        }
     }
 }
 
