@@ -197,6 +197,8 @@ class Bootstrapper {
         
         pref.commit()
         
+        AppPreferences.shared.migrateOVPN()
+
         // Business objects
         
         AccountObserver.shared.start()

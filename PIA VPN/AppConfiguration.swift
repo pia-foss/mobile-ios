@@ -69,7 +69,7 @@ struct AppConfiguration {
             var sessionBuilder = OpenVPN.ConfigurationBuilder()
             sessionBuilder.renegotiatesAfter = piaRenegotiationInterval
             sessionBuilder.cipher = .aes128gcm
-            sessionBuilder.digest = .sha1
+            sessionBuilder.digest = .sha256
             if let pem = AppPreferences.shared.piaHandshake.pemString() {
                 sessionBuilder.ca = OpenVPN.CryptoContainer(pem: pem)
             }

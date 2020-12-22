@@ -161,10 +161,10 @@ class AppPreferences {
     var piaHandshake: OpenVPN.Configuration.Handshake {
         get {
             guard let rawValue = defaults.string(forKey: Entries.piaHandshake) else {
-                return .rsa2048
+                return .rsa4096
             }
             return OpenVPN.Configuration.Handshake(rawValue: rawValue) ??
-                OpenVPN.Configuration.Handshake.rsa2048
+                OpenVPN.Configuration.Handshake.rsa4096
         }
         set {
             defaults.set(newValue.rawValue, forKey: Entries.piaHandshake)
@@ -465,6 +465,37 @@ class AppPreferences {
         ])
     }
     
+    func migrateOVPN() {
+
+        guard let currentOpenVPNConfiguration = Client.preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration ??
+            Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration else {
+            return
+        }
+        
+        let handshake = AppPreferences.shared.piaHandshake
+        //override the default handshake
+        AppPreferences.shared.piaHandshake = handshake
+
+        var pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
+
+        if pendingOpenVPNConfiguration.digest != OpenVPN.Digest.sha256 {
+            pendingOpenVPNConfiguration.digest = OpenVPN.Digest.sha256
+            
+            var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: pendingOpenVPNConfiguration.build())
+            if AppPreferences.shared.useSmallPackets {
+                builder.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
+            } else {
+                builder.mtu = AppConstants.OpenVPNPacketSize.defaultPacketSize
+            }
+            builder.shouldDebug = true
+
+            let pendingPreferences = Client.preferences.editable()
+            pendingPreferences.setVPNCustomConfiguration(builder.build(), for: pendingPreferences.vpnType)
+            pendingPreferences.commit()
+        }
+        
+    }
+    
     func migrateNMT() {
         
         if !Client.preferences.nmtMigrationSuccess {
@@ -589,7 +620,7 @@ class AppPreferences {
     }
 
     func reset() {
-        piaHandshake = .rsa2048
+        piaHandshake = .rsa4096
         piaSocketType = nil
         favoriteServerIdentifiersGen4 = []
         useConnectSiriShortcuts = false
@@ -622,7 +653,7 @@ class AppPreferences {
     }
     
     func clean() {
-        piaHandshake = .rsa2048
+        piaHandshake = .rsa4096
         piaSocketType = nil
         favoriteServerIdentifiersGen4 = []
         useConnectSiriShortcuts = false

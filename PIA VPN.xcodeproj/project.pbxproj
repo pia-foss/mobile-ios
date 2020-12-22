@@ -270,18 +270,8 @@
 		DD3B504A24B75A1E0002F4B5 /* CardFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3B504824B75A1E0002F4B5 /* CardFactory.swift */; };
 		DD4E84572243BD1200929B39 /* DashboardCollectionViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4E84562243BD1200929B39 /* DashboardCollectionViewUtil.swift */; };
 		DD4E84582243BD1200929B39 /* DashboardCollectionViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4E84562243BD1200929B39 /* DashboardCollectionViewUtil.swift */; };
-		DD51F8B72372E494009FEED3 /* PIA-RSA-3072.pem in Resources */ = {isa = PBXBuildFile; fileRef = DD51F8B12372E494009FEED3 /* PIA-RSA-3072.pem */; };
-		DD51F8B82372E494009FEED3 /* PIA-RSA-3072.pem in Resources */ = {isa = PBXBuildFile; fileRef = DD51F8B12372E494009FEED3 /* PIA-RSA-3072.pem */; };
 		DD51F8B92372E494009FEED3 /* PIA-RSA-4096.pem in Resources */ = {isa = PBXBuildFile; fileRef = DD51F8B22372E494009FEED3 /* PIA-RSA-4096.pem */; };
 		DD51F8BA2372E494009FEED3 /* PIA-RSA-4096.pem in Resources */ = {isa = PBXBuildFile; fileRef = DD51F8B22372E494009FEED3 /* PIA-RSA-4096.pem */; };
-		DD51F8BB2372E494009FEED3 /* PIA-RSA-2048.pem in Resources */ = {isa = PBXBuildFile; fileRef = DD51F8B32372E494009FEED3 /* PIA-RSA-2048.pem */; };
-		DD51F8BC2372E494009FEED3 /* PIA-RSA-2048.pem in Resources */ = {isa = PBXBuildFile; fileRef = DD51F8B32372E494009FEED3 /* PIA-RSA-2048.pem */; };
-		DD51F8BD2372E494009FEED3 /* PIA-ECC-521r1.pem in Resources */ = {isa = PBXBuildFile; fileRef = DD51F8B42372E494009FEED3 /* PIA-ECC-521r1.pem */; };
-		DD51F8BE2372E494009FEED3 /* PIA-ECC-521r1.pem in Resources */ = {isa = PBXBuildFile; fileRef = DD51F8B42372E494009FEED3 /* PIA-ECC-521r1.pem */; };
-		DD51F8BF2372E494009FEED3 /* PIA-ECC-256r1.pem in Resources */ = {isa = PBXBuildFile; fileRef = DD51F8B52372E494009FEED3 /* PIA-ECC-256r1.pem */; };
-		DD51F8C02372E494009FEED3 /* PIA-ECC-256r1.pem in Resources */ = {isa = PBXBuildFile; fileRef = DD51F8B52372E494009FEED3 /* PIA-ECC-256r1.pem */; };
-		DD51F8C12372E494009FEED3 /* PIA-ECC-256k1.pem in Resources */ = {isa = PBXBuildFile; fileRef = DD51F8B62372E494009FEED3 /* PIA-ECC-256k1.pem */; };
-		DD51F8C22372E494009FEED3 /* PIA-ECC-256k1.pem in Resources */ = {isa = PBXBuildFile; fileRef = DD51F8B62372E494009FEED3 /* PIA-ECC-256k1.pem */; };
 		DD51F8C42372E4C8009FEED3 /* PemUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD51F8C32372E4C8009FEED3 /* PemUtil.swift */; };
 		DD51F8C52372E4C8009FEED3 /* PemUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD51F8C32372E4C8009FEED3 /* PemUtil.swift */; };
 		DD522D22237D74380072F555 /* BooleanUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD522D21237D74380072F555 /* BooleanUtil.swift */; };
@@ -667,12 +657,7 @@
 		DD3B504524B758330002F4B5 /* Collectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collectable.swift; sourceTree = "<group>"; };
 		DD3B504824B75A1E0002F4B5 /* CardFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFactory.swift; sourceTree = "<group>"; };
 		DD4E84562243BD1200929B39 /* DashboardCollectionViewUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCollectionViewUtil.swift; sourceTree = "<group>"; };
-		DD51F8B12372E494009FEED3 /* PIA-RSA-3072.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "PIA-RSA-3072.pem"; sourceTree = "<group>"; };
 		DD51F8B22372E494009FEED3 /* PIA-RSA-4096.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "PIA-RSA-4096.pem"; sourceTree = "<group>"; };
-		DD51F8B32372E494009FEED3 /* PIA-RSA-2048.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "PIA-RSA-2048.pem"; sourceTree = "<group>"; };
-		DD51F8B42372E494009FEED3 /* PIA-ECC-521r1.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "PIA-ECC-521r1.pem"; sourceTree = "<group>"; };
-		DD51F8B52372E494009FEED3 /* PIA-ECC-256r1.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "PIA-ECC-256r1.pem"; sourceTree = "<group>"; };
-		DD51F8B62372E494009FEED3 /* PIA-ECC-256k1.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "PIA-ECC-256k1.pem"; sourceTree = "<group>"; };
 		DD51F8C32372E4C8009FEED3 /* PemUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PemUtil.swift; sourceTree = "<group>"; };
 		DD522D21237D74380072F555 /* BooleanUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooleanUtil.swift; sourceTree = "<group>"; };
 		DD58F4B721AD579A00D043F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1292,12 +1277,7 @@
 		DD51F8B02372E494009FEED3 /* PublicCerts */ = {
 			isa = PBXGroup;
 			children = (
-				DD51F8B12372E494009FEED3 /* PIA-RSA-3072.pem */,
 				DD51F8B22372E494009FEED3 /* PIA-RSA-4096.pem */,
-				DD51F8B32372E494009FEED3 /* PIA-RSA-2048.pem */,
-				DD51F8B42372E494009FEED3 /* PIA-ECC-521r1.pem */,
-				DD51F8B52372E494009FEED3 /* PIA-ECC-256r1.pem */,
-				DD51F8B62372E494009FEED3 /* PIA-ECC-256k1.pem */,
 			);
 			path = PublicCerts;
 			sourceTree = "<group>";
@@ -1638,12 +1618,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				82A1AD2A24B87CCD0003DD02 /* PIACard.xib in Resources */,
-				DD51F8B82372E494009FEED3 /* PIA-RSA-3072.pem in Resources */,
 				82183D9925014FDC0033023F /* CustomNetworkCollectionViewCell.xib in Resources */,
 				DD172AA02254C39300071CFB /* FavoriteServersTile.xib in Resources */,
 				0ED66BD020A9918000333B35 /* staging.endpoint in Resources */,
 				DD76292021ECCD510092DF50 /* UsageTileCollectionViewCell.xib in Resources */,
-				DD51F8C02372E494009FEED3 /* PIA-ECC-256r1.pem in Resources */,
 				DD6DC5C321B6C27F00F9D538 /* pia-spinner.json in Resources */,
 				0E0715E7201CBB7100D6F666 /* Flags-dev.plist in Resources */,
 				DD1C138A21E60C63004004B3 /* IPTile.xib in Resources */,
@@ -1658,7 +1636,6 @@
 				0E7EC0312093265C0029811E /* InfoPlist.strings in Resources */,
 				82CAB8FE255C115100BB08EF /* MessagesTile.xib in Resources */,
 				DD76292621ECCD650092DF50 /* UsageTile.xib in Resources */,
-				DD51F8BC2372E494009FEED3 /* PIA-RSA-2048.pem in Resources */,
 				DDFCFA9221E892070081F235 /* RegionTileCollectionViewCell.xib in Resources */,
 				DDFCFA9821E8921F0081F235 /* RegionTile.xib in Resources */,
 				824C531E24C04800003DB740 /* ConnectionTile.xib in Resources */,
@@ -1667,7 +1644,6 @@
 				DD172A9D2254C36D00071CFB /* FavoriteServersTileCollectionViewCell.xib in Resources */,
 				82183D9B25014FDC0033023F /* NetworkFooterCollectionViewCell.xib in Resources */,
 				0ED984201FC48C6500542EE6 /* Roboto-Medium.ttf in Resources */,
-				DD51F8C22372E494009FEED3 /* PIA-ECC-256k1.pem in Resources */,
 				0ED984211FC48C6500542EE6 /* Roboto-Regular.ttf in Resources */,
 				DD125DCF21E772B6004ECCB6 /* QuickConnectTileCollectionViewCell.xib in Resources */,
 				0E3C9A5E20EC004E00B199F9 /* custom.servers in Resources */,
@@ -1679,7 +1655,6 @@
 				829EB51425359DBB003E74DD /* DedicatedIpRowViewCell.xib in Resources */,
 				0ED984221FC48C6500542EE6 /* Roboto-Thin.ttf in Resources */,
 				824C531824C04796003DB740 /* ConnectionTileCollectionViewCell.xib in Resources */,
-				DD51F8BE2372E494009FEED3 /* PIA-ECC-521r1.pem in Resources */,
 				829EB54D2535BA40003E74DD /* DedicatedIPTitleHeaderViewCell.xib in Resources */,
 				DD9706AE224262E000630220 /* QuickSettingsTileCollectionViewCell.xib in Resources */,
 				DD125DC921E7704F004ECCB6 /* QuickConnectTile.xib in Resources */,
@@ -1707,10 +1682,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD51F8BB2372E494009FEED3 /* PIA-RSA-2048.pem in Resources */,
 				DD76291921ECBDA50092DF50 /* SubscriptionTile.xib in Resources */,
 				DD125DC821E7704F004ECCB6 /* QuickConnectTile.xib in Resources */,
-				DD51F8BD2372E494009FEED3 /* PIA-ECC-521r1.pem in Resources */,
 				829EB51325359DBB003E74DD /* DedicatedIpRowViewCell.xib in Resources */,
 				DD9706A7224262CD00630220 /* QuickSettingsTile.xib in Resources */,
 				DDFCFA9721E8921F0081F235 /* RegionTile.xib in Resources */,
@@ -1722,7 +1695,6 @@
 				824C531724C04796003DB740 /* ConnectionTileCollectionViewCell.xib in Resources */,
 				DD9706AD224262E000630220 /* QuickSettingsTileCollectionViewCell.xib in Resources */,
 				DD172A9F2254C39300071CFB /* FavoriteServersTile.xib in Resources */,
-				DD51F8C12372E494009FEED3 /* PIA-ECC-256k1.pem in Resources */,
 				DD125DCE21E772B6004ECCB6 /* QuickConnectTileCollectionViewCell.xib in Resources */,
 				DD1C138921E60C63004004B3 /* IPTile.xib in Resources */,
 				82A1AD2924B87CCD0003DD02 /* PIACard.xib in Resources */,
@@ -1742,13 +1714,11 @@
 				0ED9841C1FC48C6000542EE6 /* Roboto-Light.ttf in Resources */,
 				0ED9841E1FC48C6000542EE6 /* Roboto-Thin.ttf in Resources */,
 				0E7EC0302093265C0029811E /* InfoPlist.strings in Resources */,
-				DD51F8BF2372E494009FEED3 /* PIA-ECC-256r1.pem in Resources */,
 				291C6393183EBC210039EC03 /* Main.storyboard in Resources */,
 				829EB54C2535BA40003E74DD /* DedicatedIPTitleHeaderViewCell.xib in Resources */,
 				824C531D24C04800003DB740 /* ConnectionTile.xib in Resources */,
 				DD6DC5C221B6C27F00F9D538 /* pia-spinner.json in Resources */,
 				DD746957217F070700B7BD73 /* DNS.plist in Resources */,
-				DD51F8B72372E494009FEED3 /* PIA-RSA-3072.pem in Resources */,
 				DD1C139B21E65F90004004B3 /* IPTileCollectionViewCell.xib in Resources */,
 				829EB5342535AD27003E74DD /* DedicatedIpEmptyHeaderViewCell.xib in Resources */,
 			);

@@ -1473,7 +1473,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 break
             }
             let options: [OpenVPN.Digest] = [
-                .sha1,
                 .sha256
             ]
             controller = OptionsViewController()
@@ -1485,11 +1484,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 break
             }
             let options: [OpenVPN.Configuration.Handshake] = [
-                .rsa2048,
-                .rsa3072,
-                .rsa4096,
-                .ecc256r1,
-                .ecc521r1
+                .rsa4096
             ]
             controller = OptionsViewController()
             controller?.options = options.map { $0.rawValue }
