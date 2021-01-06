@@ -64,8 +64,6 @@ protocol WebServices: class {
 
     func downloadServers(_ callback: LibraryCallback<ServersBundle>?)
 
-    func downloadRegionsStaticData(_ callback: LibraryCallback<RegionData>?)
-
     func taskForConnectivityCheck(_ callback: LibraryCallback<ConnectivityStatus>?)
 
     func submitDebugReport(_ shouldSendPersistedData: Bool, _ protocolLogs: String, _ callback: LibraryCallback<String>?)

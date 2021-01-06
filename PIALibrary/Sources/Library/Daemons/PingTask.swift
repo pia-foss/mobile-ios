@@ -23,13 +23,10 @@
 import Foundation
 import SwiftyBeaver
 import __PIALibraryNative
-import PIARegions
 
 private let log = SwiftyBeaver.self
 
 class PingTask {
-    
-    var icmpPinger: ICMPPing!
     
     let identifier: String
     let server: Server

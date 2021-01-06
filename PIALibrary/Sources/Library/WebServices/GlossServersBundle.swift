@@ -22,7 +22,6 @@
 
 import Foundation
 import Gloss
-import PIARegions
 
 class ServersResponse {
     private let originalLength: Int
@@ -46,11 +45,6 @@ class ServersResponse {
         originalLength = data.count
         self.jsonString = jsonString
         self.signature = signature
-    }
-    
-    func verifySignature() -> Bool {
-        let verifySignature = VerifySignature(json: jsonString, signature: signature)
-        return verifySignature.verify()
     }
 
     func writeBundle(to file: String) throws {

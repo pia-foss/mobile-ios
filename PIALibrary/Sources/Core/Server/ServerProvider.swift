@@ -43,8 +43,6 @@ public protocol ServerProvider: class {
     ///
     /// - Seealso: `VPNProvider`
     var targetServer: Server { get }
-
-    var regionStaticData: RegionData! { get }
     
     /// The array of DIP tokens stored in the keychain, or `nil` if logged out.
     var dipTokens: [String]? { get }
@@ -77,13 +75,6 @@ public protocol ServerProvider: class {
      - Parameter callback: Returns the new list of `Server` objects.
      */
     func download(_ callback: LibraryCallback<[Server]>?)
-    
-    /**
-     Downloads the region static data (geolocation, localized server name, etc).
-     - Parameter callback: Returns the callback when the operation is completed.
-
-     */
-    func downloadRegionStaticData(_ callback: SuccessLibraryCallback?)
 
     /**
      Looks for a server via its `Server.identifier`.

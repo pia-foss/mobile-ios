@@ -37,8 +37,6 @@ class MockWebServices: WebServices {
     var appstoreInformationEligibleButDisabledFromBackend: (() -> AppStoreInformation)?
 
     var serversBundle: (() -> ServersBundle)?
-    
-    var regionStaticData: (() -> RegionData)?
 
     func token(credentials: Credentials, _ callback: ((String?, Error?) -> Void)?) {
         let result = "AUTH_TOKEN"
@@ -92,12 +90,6 @@ class MockWebServices: WebServices {
     
     func downloadServers(_ callback: ((ServersBundle?, Error?) -> Void)?) {
         let result = serversBundle?()
-        let error: ClientError? = (result == nil) ? .unsupported : nil
-        callback?(result, error)
-    }
-    
-    func downloadRegionsStaticData(_ callback: LibraryCallback<RegionData>?) {
-        let result = regionStaticData?()
         let error: ClientError? = (result == nil) ? .unsupported : nil
         callback?(result, error)
     }
