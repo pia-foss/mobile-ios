@@ -43,6 +43,8 @@ class GlossServer: GlossParser {
 
         let geo: Bool = "geo" <~~ json ?? false
         let offline: Bool = "offline" <~~ json ?? false
+        let latitude: String? = "latitude" <~~ json ?? nil
+        let longitude: String? = "longitude" <~~ json ?? nil
 
         var meta: Server.ServerAddressIP?
         if let metaServer: [String: Any] = "servers" <~~ json {
@@ -125,6 +127,8 @@ class GlossServer: GlossParser {
                         responseTime: 0,
                         geo: geo,
                         offline: offline,
+                        latitude: latitude,
+                        longitude: longitude,
                         meta: meta,
                         dipToken: dipToken,
                         regionIdentifier: regionIdentifier
