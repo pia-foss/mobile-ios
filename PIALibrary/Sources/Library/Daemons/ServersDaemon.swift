@@ -59,7 +59,7 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
     }
     
     func forceUpdates(completionBlock: @escaping (Error?) -> Void) {
-        
+        print("ClientLibraryDebug forceUpdates start \(hasEnabledUpdates)")
         guard !hasEnabledUpdates else {
             return
         }

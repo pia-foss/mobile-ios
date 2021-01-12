@@ -149,7 +149,9 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
     }
     
     func download(_ callback: (([Server]?, Error?) -> Void)?) {
+        print("ClientLibraryDebug download start \(String(describing: webServices))")
         webServices.downloadServers { (bundle, error) in
+            print("ClientLibraryDebug download end error \(String(describing: error.debugDescription))")
             guard let bundle = bundle else {
                 callback?(nil, error)
                 return
