@@ -393,10 +393,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     #endif
     
     func downloadServers(_ callback: ((ServersBundle?, Error?) -> Void)?) {
-        print("ClientLibraryDebug downloadServers start \(String(describing: self.regionsAPI))")
         self.regionsAPI.fetchRegions(locale: Locale.current.identifier.replacingOccurrences(of: "_", with: "-")) { (response, error) in
-            print("ClientLibraryDebug downloadServers end response \(String(describing: response?.description()))")
-            print("ClientLibraryDebug downloadServers end error \(error.debugDescription)")
             if let error = error {
                 callback?(nil, ClientError.noRegions)
                 return
