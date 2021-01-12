@@ -65,7 +65,7 @@ PODS:
   - GradientProgressBar (2.0.3):
     - LightweightObservable (~> 2.0)
   - LightweightObservable (2.1.1)
-  - lottie-ios (3.1.8)
+  - lottie-ios (3.1.9)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
     - nanopb/encode (= 0.3.9011)
@@ -91,7 +91,7 @@ PODS:
     - PIACSIModule
     - PIALibrary/Core
     - PIALibrary/Util
-    - PIARegions
+    - PIARegionsModule
     - PopupDialog
     - ReachabilitySwift
     - SwiftyBeaver
@@ -110,13 +110,11 @@ PODS:
     - PIALibrary/Library
     - PIAWireguard
     - TunnelKit
-  - PIARegions (1.1.0):
-    - PIARegions/Core (= 1.1.0)
-    - PIARegions/gradle (= 1.1.0)
-    - PIARegions/regions (= 1.1.0)
-  - PIARegions/Core (1.1.0)
-  - PIARegions/gradle (1.1.0)
-  - PIARegions/regions (1.1.0)
+  - PIARegionsModule (1.1.0):
+    - PIARegionsModule/gradle (= 1.1.0)
+    - PIARegionsModule/regions (= 1.1.0)
+  - PIARegionsModule/gradle (1.1.0)
+  - PIARegionsModule/regions (1.1.0)
   - PIAWireguard (1.0.1):
     - PIAWireguard/AppExtension (= 1.0.1)
     - PIAWireguard/Core (= 1.0.1)
@@ -133,7 +131,7 @@ PODS:
   - SideMenu (6.1.3)
   - SwiftEntryKit (0.7.2):
     - QuickLayout (= 2.0.2)
-  - SwiftyBeaver (1.9.1)
+  - SwiftyBeaver (1.9.3)
   - TPKeyboardAvoiding (1.3.3)
   - TunnelKit (2.2.2):
     - TunnelKit/Protocols/OpenVPN (= 2.2.2)
@@ -156,13 +154,13 @@ DEPENDENCIES:
   - Fabric
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
-  - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, commit `6116a38`)"
+  - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, branch `develop`)"
   - "PIACSIModule (from `git@codex.londontrustmedia.com:mobile/csi.git`, branch `master`)"
-  - "PIALibrary/Library (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `4e0beba`)"
-  - "PIALibrary/Mock (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `4e0beba`)"
-  - "PIALibrary/UI (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `4e0beba`)"
-  - "PIALibrary/VPN (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `4e0beba`)"
-  - "PIARegions (from `git@codex.londontrustmedia.com:mobile/regions.git`, commit `3b9395f`)"
+  - "PIALibrary/Library (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `juan.docal/regions_integration`)"
+  - "PIALibrary/Mock (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `juan.docal/regions_integration`)"
+  - "PIALibrary/UI (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `juan.docal/regions_integration`)"
+  - "PIALibrary/VPN (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, branch `juan.docal/regions_integration`)"
+  - "PIARegionsModule (from `git@codex.londontrustmedia.com:mobile/regions.git`, branch `juan.docal/move_message_verification_to_native_layer`)"
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
   - Popover
   - PopupDialog
@@ -205,16 +203,16 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIAAccountModule:
-    :commit: 6116a38
+    :branch: develop
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
   PIACSIModule:
     :branch: master
     :git: "git@codex.londontrustmedia.com:mobile/csi.git"
   PIALibrary:
-    :commit: 4e0beba
+    :branch: juan.docal/regions_integration
     :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
-  PIARegions:
-    :commit: 3b9395f
+  PIARegionsModule:
+    :branch: juan.docal/move_message_verification_to_native_layer
     :git: "git@codex.londontrustmedia.com:mobile/regions.git"
   PIAWireguard:
     :git: https://github.com/pia-foss/ios-wireguard
@@ -224,16 +222,16 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PIAAccountModule:
-    :commit: 6116a38
+    :commit: 6116a38f2ecbcbce30b74ca856a20d6fdc2f548a
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
   PIACSIModule:
     :commit: 511aba44281f3aa9befb735f2d68575296f3b411
     :git: "git@codex.londontrustmedia.com:mobile/csi.git"
   PIALibrary:
-    :commit: 4e0beba
+    :commit: 9165de337bd3d405c98ddaf0f965a70a659c83e3
     :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
-  PIARegions:
-    :commit: 3b9395f
+  PIARegionsModule:
+    :commit: 33cb77dd6064a0783ad5df05fea1142403db2cd0
     :git: "git@codex.londontrustmedia.com:mobile/regions.git"
   PIAWireguard:
     :commit: 10ddb6b3e79b695358d4fa58a85d663039f7509e
@@ -243,42 +241,42 @@ CHECKOUT OPTIONS:
     :git: https://github.com/pia-foss/tunnelkit
 
 SPEC CHECKSUMS:
-  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
-  AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
-  AppCenter: 765ff38c4d360fc5ec61b61a8be24d74cd6d4d83
-  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
-  DynamicBlurView: ccf9acd2b20c883cc2c72e3524a04d8d3ee20533
-  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
-  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
-  Firebase: dedc9e48ea3f3649ad5f6b982f8a0c73508a14b5
-  FirebaseAnalytics: 3fb375bc9d13779add4039716f868d233a473fad
-  FirebaseCore: aecf02fb2274ec361b9bebeac112f5daa18273bd
-  FirebaseInstanceID: ebd2ea79ee38db0cb5f5167b17a0d387e1cc7b6e
-  FXPageControl: 97620412515365d10a3282ec0660f49f6401a8f0
-  Gloss: 9df15229b2f6484c14752a738474fd2528b4c5cd
-  GoogleAppMeasurement: 183bd916af7f80deb67c01888368f1108d641832
-  GoogleUtilities: ad0f3b691c67909d03a3327cc205222ab8f42e0e
-  GradientProgressBar: f11fb57cffc615a4794da558ce283171a992130a
-  LightweightObservable: 52abe2a01c8273921b1f66cd66526eb3328ca35a
-  lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
-  nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
-  OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
+  Alamofire: 28c415d308b2bd57d32024b9a901f922490a7052
+  AlamofireImage: a591d9343ba987c4f52bf372e546768f34e44564
+  AppCenter: cf1b8bd3670d927a19e63af753b3c2729d54bc3c
+  Crashlytics: 9220f5bc89e7a618df411b4f639389dbfb0e03d2
+  DynamicBlurView: 8bee5ce2f86551e3afd0860eb88f7a5e452d364e
+  DZNEmptyDataSet: 10fd1b0652388d42219b2265b94a49f14b443135
+  Fabric: ea977e3cd9c20425516d3dafd3bf8c941c51223f
+  Firebase: 116513d6e4884904c8f631c60fcd0815484fc1f7
+  FirebaseAnalytics: e394418f0b95ff5c005312740cd6c5c2c66606e9
+  FirebaseCore: 1de9cf0a96e66992be3733fbe7a89237374faedf
+  FirebaseInstanceID: 096e1984357d998b54c1128316dea046603e6627
+  FXPageControl: e3b89828c27a6ec2f01952d09c5737a680f81ced
+  Gloss: 839624aa3452a88556c45c192c2a8067a60dd6b5
+  GoogleAppMeasurement: c0a62fef8f94a0cb2c0467a614f3ccc3757a3384
+  GoogleUtilities: 6f9c895854d14ce5f1cdf0251a21699bff373296
+  GradientProgressBar: 07b9b1096ed932fc9d1fa79a6af82529e4f7b125
+  LightweightObservable: 3e21327f8676a406f7d41d9452cda2c5e2b17027
+  lottie-ios: 3a3758ef5a008e762faec9c9d50a39842f26d124
+  nanopb: a4bed434513987831d27cee6e85a22f9417c2e12
+  OpenSSL-Apple: 4c93867c3813c617f82bd273c7c1c39aee8747b9
   PIAAccountModule: 5d617eb89a69ac31cfabf11666c4ec04c6ae82ad
   PIACSIModule: 0f94fd5d8d21a25e12b4cc2a3b52578ece5e1a0e
-  PIALibrary: 9a753a604fdd84389852da0e01b383d1efdbcf37
-  PIARegions: 4b67e9dbe23e0cd97329474bff562303e424de08
+  PIALibrary: a22ef6cd449798a99409678b6698bbc87f8237b6
+  PIARegionsModule: e05133052c0fa0da47b46501938ed1e858b8cba4
   PIAWireguard: 9d71dabc9e483b149236eebbd0e6bb8fa5c8317f
-  Popover: 10e1d9528f81d9504df984b7b3f491292bc1822d
-  PopupDialog: 720c92befd8bc23c13442254945213db5612f149
-  QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
-  ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
-  SideMenu: 46c1b79dab51fc2f1c1ff3e1212ca47cc231b0bf
-  SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145
-  SwiftyBeaver: a1f5691458561414bcfab51874b2b7445451602b
-  TPKeyboardAvoiding: 6dd3fe3268b8f2627beb7ff3d82a3cacbdf66a36
+  Popover: 9858c475fa8e84be8d97354e559b886e26b2139b
+  PopupDialog: e1b41fbd8dfcefa43dc50d96da4519c64920160b
+  QuickLayout: 10384f7db74f2303a776e5edc0409270d8bb0a6a
+  ReachabilitySwift: 27b55e9b60a0d9f5eda6a91bba1852f5982a3467
+  SideMenu: 46aa7a12e1c2bcce45d044efc02c0f56c90a94bc
+  SwiftEntryKit: 6da87bb561409684bd330619857533116e98d132
+  SwiftyBeaver: 2e8acd6fc90c6d0a27055867a290794926d57c02
+  TPKeyboardAvoiding: a6693446dab06fc6ed6ce7c9b4927eb023e25984
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
-  TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
+  TweetNacl: 3f1d3a198ace99c4a17d7a6e165f051da9e8ceda
 
-PODFILE CHECKSUM: 6974a2de9cb4aa1d1b2d37da2b73d251591f92e7
+PODFILE CHECKSUM: c76eda8501940aceabdcabf87bd897df6204b098
 
 COCOAPODS: 1.9.3

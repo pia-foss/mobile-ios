@@ -130,23 +130,16 @@ class Bootstrapper {
         Client.providers.accountProvider.featureFlags(nil)
         #endif
         MessagesManager.shared.refreshMessages()
-        
-        Client.providers.serverProvider.downloadRegionStaticData { (error) in
-            
-            Macros.postNotification(.PIAServerHasBeenUpdated)
 
-            //FORCE THE MIGRATION TO GEN4
-            if Client.providers.vpnProvider.needsMigrationToGEN4() {
+        //FORCE THE MIGRATION TO GEN4
+        if Client.providers.vpnProvider.needsMigrationToGEN4() {
 
-                Client.preferences.displayedServer = Server.automatic
-                NotificationCenter.default.post(name: .PIAThemeDidChange,
-                                                object: self,
-                                                userInfo: nil)
-                Client.providers.vpnProvider.reconnect(after: 200, forceDisconnect: true, { _ in
-                })
-                
-            }
-
+            Client.preferences.displayedServer = Server.automatic
+            NotificationCenter.default.post(name: .PIAThemeDidChange,
+                                            object: self,
+                                            userInfo: nil)
+            Client.providers.vpnProvider.reconnect(after: 200, forceDisconnect: true, { _ in
+            })
         }
         
         Client.providers.accountProvider.subscriptionInformation { [weak self] (info, error) in

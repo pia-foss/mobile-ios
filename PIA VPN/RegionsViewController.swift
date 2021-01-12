@@ -227,11 +227,7 @@ class RegionsViewController: AutolayoutViewController {
         switch AppPreferences.shared.regionFilter {
         case .name:
             self.servers = self.servers.sorted(by: {
-                if let _ = Client.providers.serverProvider.regionStaticData {
-                    return Client.providers.serverProvider.regionStaticData.localisedServerName(forCountryName: $0.name) < Client.providers.serverProvider.regionStaticData.localisedServerName(forCountryName: $1.name)
-                } else {
-                    return $0.name < $1.name
-                }
+                return $0.name < $1.name
             })
         case .latency:
             self.servers = self.servers.sorted(by: { $0.pingTime ?? 0 < $1.pingTime ?? 0 })

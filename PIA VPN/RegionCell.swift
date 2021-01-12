@@ -55,12 +55,8 @@ class RegionCell: UITableViewCell, Restylable {
         setupServerAvailability()
         
         imvFlag.setImage(fromServer: server)
-        
-        if let _ = Client.providers.serverProvider.regionStaticData {
-            labelRegion.text = Client.providers.serverProvider.regionStaticData.localisedServerName(forCountryName: server.name)
-        } else {
-            labelRegion.text = server.name
-        }
+
+        labelRegion.text = server.name
         
         iconSelected = isSelected
         prepareCellIcons()
