@@ -251,65 +251,6 @@ class RegionsViewController: AutolayoutViewController {
     @objc private func viewHasRotated() {
         styleNavigationBarWithTitle(L10n.Menu.Item.region)
     }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let identifier = segue.identifier, let segue = StoryboardSegue.Main(rawValue: identifier) else {
-            return
-        }
-        switch segue {
-        case .unwindRegionsSegueIdentifier:
-            let currentServer = Client.preferences.displayedServer
-            guard (selectedServer.identifier != currentServer.identifier || selectedServer.dipToken != currentServer.dipToken) else {
-                return
-            }
-            Client.preferences.displayedServer = selectedServer
-            NotificationCenter.default.post(name: .PIAThemeDidChange,
-                                            object: self,
-                                            userInfo: nil)
-        default:
-            break
-        }
-    }
-    
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        guard let segue = StoryboardSegue.Main(rawValue: identifier) else {
-            return false
-        }
-        switch segue {
-        case .unwindRegionsSegueIdentifier:
-            guard let indexPath = tableView.indexPath(for: sender as! UITableViewCell) else {
-                fatalError("Segue triggered without an input cell?")
-            }
-            
-            let newSelectedServer: Server
-
-            switch indexPath.section {
-            case Section.automatic.rawValue:
-                newSelectedServer = Server.automatic
-            case Section.dip.rawValue:
-                if isFiltering() {
-                    newSelectedServer = filteredServers.filter({$0.dipToken != nil})[indexPath.row]
-                } else {
-                    newSelectedServer = servers.filter({$0.dipToken != nil})[indexPath.row]
-                }
-            default:
-                if isFiltering() {
-                    newSelectedServer = filteredServers.filter({$0.dipToken == nil})[indexPath.row]
-                } else {
-                    newSelectedServer = servers.filter({$0.dipToken == nil})[indexPath.row]
-                }
-            }
-
-            selectedServer = newSelectedServer
-            tableView.reloadData()
-            
-            TransientState.shouldDisplayRegionPicker = false
-
-        default:
-            break
-        }
-        return true
-    }
     
     // MARK: Notifications
     
@@ -431,6 +372,44 @@ extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
 
             return cell
         }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let newSelectedServer: Server
+
+        switch indexPath.section {
+        case Section.automatic.rawValue:
+            newSelectedServer = Server.automatic
+        case Section.dip.rawValue:
+            if isFiltering() {
+                newSelectedServer = filteredServers.filter({$0.dipToken != nil})[indexPath.row]
+            } else {
+                newSelectedServer = servers.filter({$0.dipToken != nil})[indexPath.row]
+            }
+        default:
+            if isFiltering() {
+                newSelectedServer = filteredServers.filter({$0.dipToken == nil})[indexPath.row]
+            } else {
+                newSelectedServer = servers.filter({$0.dipToken == nil})[indexPath.row]
+            }
+        }
+
+        selectedServer = newSelectedServer
+
+        TransientState.shouldDisplayRegionPicker = false
+        
+        let currentServer = Client.preferences.displayedServer
+        guard (selectedServer.identifier != currentServer.identifier || selectedServer.dipToken != currentServer.dipToken) else {
+            return
+        }
+        Client.preferences.displayedServer = selectedServer
+        NotificationCenter.default.post(name: .PIAThemeDidChange,
+                                        object: self,
+                                        userInfo: nil)
+        
+        self.dismissModal()
         
     }
 }
