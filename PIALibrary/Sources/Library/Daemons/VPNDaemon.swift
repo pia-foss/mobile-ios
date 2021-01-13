@@ -105,6 +105,12 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             nextStatus = .disconnecting
         case .disconnected:
             nextStatus = .disconnected
+            
+            let previousStatus = accessedDatabase.transient.vpnStatus
+            guard (nextStatus != previousStatus) else {
+                return
+            }
+
             if !isReconnecting {
                 invalidateTimer()
                 reset()
