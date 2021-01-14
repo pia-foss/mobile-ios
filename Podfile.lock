@@ -5,21 +5,18 @@ PODS:
   - Gloss (2.1.0)
   - lottie-ios (3.0.3)
   - OpenSSL-Apple (1.1.1d.5a)
-  - PIAAccountModule (1.1.0):
-    - PIAAccountModule/account (= 1.1.0)
-    - PIAAccountModule/gradle (= 1.1.0)
-  - PIAAccountModule/account (1.1.0)
-  - PIAAccountModule/gradle (1.1.0)
-  - PIACSIModule (1.0.0):
-    - PIACSIModule/csi (= 1.0.0)
-    - PIACSIModule/gradle (= 1.0.0)
-  - PIACSIModule/csi (1.0.0)
-  - PIACSIModule/gradle (1.0.0)
-  - PIARegionsModule (1.1.0):
-    - PIARegionsModule/gradle (= 1.1.0)
-    - PIARegionsModule/regions (= 1.1.0)
-  - PIARegionsModule/gradle (1.1.0)
-  - PIARegionsModule/regions (1.1.0)
+  - PIAAccountModule (1.0.1):
+    - PIAAccountModule/account (= 1.0.1)
+    - PIAAccountModule/gradle (= 1.0.1)
+  - PIAAccountModule/account (1.0.1)
+  - PIAAccountModule/gradle (1.0.1)
+  - PIARegions (1.0.7):
+    - PIARegions/Core (= 1.0.7)
+    - PIARegions/gradle (= 1.0.7)
+    - PIARegions/regions (= 1.0.7)
+  - PIARegions/Core (1.0.7)
+  - PIARegions/gradle (1.0.7)
+  - PIARegions/regions (1.0.7)
   - PIAWireguard (1.0.1):
     - PIAWireguard/AppExtension (= 1.0.1)
     - PIAWireguard/Core (= 1.0.1)
@@ -53,9 +50,8 @@ DEPENDENCIES:
   - FXPageControl
   - Gloss (~> 2)
   - lottie-ios
-  - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, branch `develop`)"
-  - "PIACSIModule (from `git@codex.londontrustmedia.com:mobile/csi.git`, branch `master`)"
-  - "PIARegionsModule (from `git@codex.londontrustmedia.com:mobile/regions.git`, branch `juan.docal/move_message_verification_to_native_layer`)"
+  - PIAAccountModule (from `/Users/jose/Projects/PIA/account`)
+  - PIARegions (from `https://github.com/pia-foss/mobile-common-regions`)
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
   - PopupDialog
   - ReachabilitySwift (= 4.3.0)
@@ -80,14 +76,9 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIAAccountModule:
-    :branch: develop
-    :git: "git@codex.londontrustmedia.com:mobile/account.git"
-  PIACSIModule:
-    :branch: master
-    :git: "git@codex.londontrustmedia.com:mobile/csi.git"
-  PIARegionsModule:
-    :branch: juan.docal/move_message_verification_to_native_layer
-    :git: "git@codex.londontrustmedia.com:mobile/regions.git"
+    :path: "/Users/jose/Projects/PIA/account"
+  PIARegions:
+    :git: https://github.com/pia-foss/mobile-common-regions
   PIAWireguard:
     :git: https://github.com/pia-foss/ios-wireguard
   TunnelKit:
@@ -95,15 +86,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/pia-foss/tunnelkit
 
 CHECKOUT OPTIONS:
-  PIAAccountModule:
-    :commit: 6116a38f2ecbcbce30b74ca856a20d6fdc2f548a
-    :git: "git@codex.londontrustmedia.com:mobile/account.git"
-  PIACSIModule:
-    :commit: 511aba44281f3aa9befb735f2d68575296f3b411
-    :git: "git@codex.londontrustmedia.com:mobile/csi.git"
-  PIARegionsModule:
-    :commit: 33cb77dd6064a0783ad5df05fea1142403db2cd0
-    :git: "git@codex.londontrustmedia.com:mobile/regions.git"
+  PIARegions:
+    :commit: 0b35229144ad12fa2a857ab6f41fa4f550f42a7e
+    :git: https://github.com/pia-foss/mobile-common-regions
   PIAWireguard:
     :commit: 10ddb6b3e79b695358d4fa58a85d663039f7509e
     :git: https://github.com/pia-foss/ios-wireguard
@@ -112,24 +97,23 @@ CHECKOUT OPTIONS:
     :git: https://github.com/pia-foss/tunnelkit
 
 SPEC CHECKSUMS:
-  Alamofire: 2ad20d0a5a6e593fb8fa4556060a68918a58fe5b
-  DynamicBlurView: 8ecc633fc8e66d445fa1267d2b405e7cbf7c894f
-  FXPageControl: e3b89828c27a6ec2f01952d09c5737a680f81ced
-  Gloss: 51fbd000cbba87e032dced8925b2bb55c960337f
-  lottie-ios: 92aecc6f5aee59f2d5bfbe19b0f2b57050b4b8c0
-  OpenSSL-Apple: 4c93867c3813c617f82bd273c7c1c39aee8747b9
-  PIAAccountModule: 5d617eb89a69ac31cfabf11666c4ec04c6ae82ad
-  PIACSIModule: 0f94fd5d8d21a25e12b4cc2a3b52578ece5e1a0e
-  PIARegionsModule: e05133052c0fa0da47b46501938ed1e858b8cba4
+  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
+  DynamicBlurView: b1df5415f9bd31897549e5d7077e5ec120a4d636
+  FXPageControl: 97620412515365d10a3282ec0660f49f6401a8f0
+  Gloss: 13ab6b4b0ff4cb2448466edc957479b1bccea8ba
+  lottie-ios: 06e0b54aab85ba128e332687d7f4ac4861a7a7ae
+  OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
+  PIAAccountModule: 701b3183ca642c675c65b72fdddf7d4f8b68183f
+  PIARegions: 6e4054b7f850e8c588306773bed516036a665ba3
   PIAWireguard: 9d71dabc9e483b149236eebbd0e6bb8fa5c8317f
-  PopupDialog: 70009b0bdff82db3796eb06fe16a2af6e265f662
-  QuickLayout: 10384f7db74f2303a776e5edc0409270d8bb0a6a
-  ReachabilitySwift: 8610aeb4af1844f38c44f05482de0ab537f852eb
-  SwiftEntryKit: 6da87bb561409684bd330619857533116e98d132
-  SwiftyBeaver: faff13c9b69e467c2d21425a0f8e5efaed8e6a35
+  PopupDialog: f4bb461bf70ff422be0b56656566424ee9273080
+  QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
+  ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
+  SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145
+  SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
-  TweetNacl: 3f1d3a198ace99c4a17d7a6e165f051da9e8ceda
+  TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 91cc708ffb7a5c6b28f40ff3b91ca260f601f5d1
+PODFILE CHECKSUM: 7b505471eb03240fadcb14de86defe1d40d92822
 
 COCOAPODS: 1.9.3
