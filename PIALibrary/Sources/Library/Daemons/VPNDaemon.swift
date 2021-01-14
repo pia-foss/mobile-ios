@@ -66,6 +66,12 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         switch connection.status {
         case .connected:
             nextStatus = .connected
+            
+            let previousStatus = accessedDatabase.transient.vpnStatus
+            guard (nextStatus != previousStatus) else {
+                return
+            }
+
             invalidateTimer()
             reset()
 
