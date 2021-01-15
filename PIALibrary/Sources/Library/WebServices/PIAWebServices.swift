@@ -27,7 +27,7 @@ import SwiftyBeaver
 import PIARegions
 import PIAAccount
 import PIACSI
-import Regions
+import PIARegions
 
 private let log = SwiftyBeaver.self
 
@@ -35,14 +35,17 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     
     private static let serversVersion = 1002
     private static let store = "apple_app_store"
-    
-    private let regionsTask = RegionsTask(stateProvider: PIARegionClientStateProvider())
 
+    let regionsAPI: RegionsAPI!
     let accountAPI: IOSAccountAPI!
     let csiAPI: CSIAPI!
     let csiProtocolInformationProvider = PIACSIProtocolInformationProvider()
     
     init() {
+        self.regionsAPI = RegionsBuilder()
+            .setClientStateProvider(clientStateProvider: PIARegionClientStateProvider())
+            .build()
+        
         if Client.environment == .staging {
             self.accountAPI = AccountBuilder<IOSAccountAPI>()
                 .setPlatform(platform: .ios)
@@ -390,43 +393,23 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     #endif
     
     func downloadServers(_ callback: ((ServersBundle?, Error?) -> Void)?) {
-        
-        let status = [200]
-        let parameters: JSON = [
-            "os": "ios",
-            "version": PIAWebServices.serversVersion
-        ]
-
-        self.regionsTask.fetch { response, jsonResponse, error in
-            
+        self.regionsAPI.fetchRegions(locale: Locale.current.identifier.replacingOccurrences(of: "_", with: "-")) { (response, error) in
             if let error = error {
                 callback?(nil, ClientError.noRegions)
                 return
             }
 
-            guard let bundle = GlossServersBundle(jsonString: jsonResponse)?.parsed else {
+            guard let response = response else {
+                callback?(nil, ClientError.noRegions)
+                return
+            }
+            
+            guard let bundle = GlossServersBundle(jsonString: RegionsUtils.init().stringify(regionsResponse: response))?.parsed else {
                 callback?(nil, ClientError.malformedResponseData)
                 return
             }
             
             callback?(bundle, nil)
-            
-        }
-
-    }
-    
-    func downloadRegionsStaticData(_ callback: LibraryCallback<RegionData>?) {
-        
-        self.regionsTask.fetchLocalization { (response, error) in
-            
-            var regionData = RegionData(translations: [String : [String : String]](), geolocations: [String : [String]]())
-
-            if let response = response {
-                regionData = RegionData(translations: response.translations, geolocations: response.gps)
-            }
-                        
-            callback?(regionData, nil)
-
         }
     }
     

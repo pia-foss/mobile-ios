@@ -133,6 +133,12 @@ public class Server: Hashable {
 
     /// The server is unavailable.
     public let offline: Bool
+
+    /// The server's latitude.
+    public let latitude: String?
+
+    /// The server's longitude.
+    public let longitude: String?
     
     /// The best address for establishing an OpenVPN connection over TCP.
     public let openVPNAddressesForTCP: [ServerAddressIP]?
@@ -178,6 +184,8 @@ public class Server: Hashable {
         responseTime: Int? = 0,
         geo: Bool = false,
         offline: Bool = false,
+        latitude: String? = nil,
+        longitude: String? = nil,
         meta: ServerAddressIP? = nil,
         dipExpire: Date? = nil,
         dipToken: String? = nil,
@@ -191,6 +199,8 @@ public class Server: Hashable {
         self.hostname = hostname
         self.geo = geo
         self.offline = offline
+        self.latitude = latitude
+        self.longitude = longitude
         self.regionIdentifier = regionIdentifier
         identifier = hostname.components(separatedBy: ".").first ?? ""
         

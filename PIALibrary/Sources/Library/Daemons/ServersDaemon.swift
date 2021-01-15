@@ -59,7 +59,6 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
     }
     
     func forceUpdates(completionBlock: @escaping (Error?) -> Void) {
-        
         guard !hasEnabledUpdates else {
             return
         }

@@ -21,7 +21,6 @@
 //
 
 import Foundation
-import PIARegions
 
 class KeychainStore: SecureStore {
     
@@ -60,7 +59,6 @@ class KeychainStore: SecureStore {
     func clear(for username: String) {
         backend.removePassword(for: username)
         backend.removeToken(for: tokenKey(for: username))
-        PublicKeyKeychainStore().clearPubKey()
     }
 }
 

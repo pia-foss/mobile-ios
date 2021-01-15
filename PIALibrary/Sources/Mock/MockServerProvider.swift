@@ -120,10 +120,6 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
         return mockServers.last!
     }
     
-    public var regionStaticData: RegionData! {
-        return RegionData(translations: [String : [String : String]](), geolocations: [String : [String]]())
-    }
-    
     public var dipTokens: [String]? {
         return []
     }
@@ -141,13 +137,6 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
     /// :nodoc:
     public func download(_ callback: (([Server]?, Error?) -> Void)?) {
         delegate.download(callback)
-    }
-    
-    /// :nodoc:
-    public func downloadRegionStaticData(_ callback: SuccessLibraryCallback?) {
-        delegate.downloadRegionStaticData { (error) in
-            callback?(error)
-        }
     }
     
     /// :nodoc:

@@ -123,8 +123,6 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
         return accessedDatabase.secure.dipTokens()
     }
     
-    public var regionStaticData: RegionData!
-    
     func loadLocalJSON(fromJSON jsonData: Data) {
         guard let bundle = GlossServersBundle(jsonData: jsonData) else {
             return
@@ -182,15 +180,6 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
                 callback?(self.currentServers, error)
             }
             
-        }
-    }
-    
-    public func downloadRegionStaticData( _ callback: SuccessLibraryCallback?) {
-        webServices.downloadRegionsStaticData { (regionData, error) in
-            if let regionStaticData = regionData {
-                self.regionStaticData = regionStaticData
-            }
-            callback?(nil)
         }
     }
     
