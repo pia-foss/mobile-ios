@@ -28,6 +28,9 @@ private let log = SwiftyBeaver.self
 
 class PingTask {
     
+    var icmpPinger: ICMPPing!
+    let timeout = 3000
+    
     let identifier: String
     let server: Server
     let address: Server.ServerAddressIP
@@ -70,6 +73,15 @@ class PingTask {
                 self?.state = .completed
             }
 
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            if self.state != .completed {
+                self.parsePingResponse(response: self.timeout, withServer: self.server)
+                self.server.updateResponseTime(self.timeout, forAddress: self.address)
+                persistence.setPing(self.timeout, forServerIdentifier: self.server.identifier)
+                self.state = .completed
+            }
         }
 
     }
