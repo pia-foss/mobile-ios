@@ -24,33 +24,16 @@ import Foundation
 import UIKit
 import PIALibrary
 
-class Coordinates {
-    
-    var latitude: Double
-    var longitude: Double
-    
-    init(forServer server: String) {
-    
-        if let data = Client.providers.serverProvider.regionStaticData {
-            let coordinates = data.geolocation(forIdentifier: server)
-            self.latitude = Double(coordinates.first ?? "0") ?? 0.0
-            self.longitude = Double(coordinates.last ?? "0") ?? 0.0
-        } else {
-            self.latitude = Double.zero
-            self.longitude = Double.zero
-        }
-
-    }
-    
-}
 class CoordinatesFinder {
     
     private var worldMap: UIImageView!
-    private var locationMeta: Coordinates!
+    private var latitude: Double
+    private var longitude: Double
 
-    init(forServer server: String, usingMapImage imageView: UIImageView) {
+    init(forLatitude latitude: String?, andLongitude longitude: String?, usingMapImage imageView: UIImageView) {
         self.worldMap = imageView
-        self.locationMeta = Coordinates(forServer: server)
+        self.latitude = Double(latitude ?? "0") ?? 0.0
+        self.longitude = Double(longitude ?? "0") ?? 0.0
     }
     
     private var markerRadius = 2.0
@@ -82,13 +65,9 @@ class CoordinatesFinder {
     }
 
     private var locationX: Double {
-    
-        if(locationMeta == nil) {
-            return -1.0
-        }
 
         // Longitude is locationMeta.long -> range [-180, 180]
-        var x = locationMeta.longitude
+        var x = longitude
         // Adjust for actual left edge of graphic -> range [-168, 192]
         if(x < leftLong) {
             x += 360.0
@@ -103,12 +82,8 @@ class CoordinatesFinder {
     
     private var locationY: Double {
 
-        if(locationMeta == nil) {
-            return -1.0
-        }
-
         // Project the latitude -> range [-2.3034..., 2.3034...]
-        let millerLat = millerProjectLat(latitudeDeg: locationMeta.latitude)
+        let millerLat = millerProjectLat(latitudeDeg: latitude)
         
         // Map to the actual range shown by the map.  (If this point is outside
         // the map bound, it returns a negative value or a value greater than

@@ -49,13 +49,7 @@ class DedicatedRegionCell: UITableViewCell, Restylable {
         self.server = server
 
         imvFlag.setImage(fromServer: server)
-        
-        if let _ = Client.providers.serverProvider.regionStaticData {
-            labelRegion.text = Client.providers.serverProvider.regionStaticData.localisedServerName(forCountryName: server.name)
-        } else {
-            labelRegion.text = server.name
-        }
-        
+        labelRegion.text = server.name
         labelIP.text = server.wireGuardAddressesForUDP?.first?.ip ?? ""
         labelDedicatedIPTitle.text = L10n.Dedicated.Ip.title.uppercased()
 

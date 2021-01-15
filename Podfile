@@ -70,8 +70,8 @@ def shared_main_pods
     
     #pod "PIAAccountModule", :git => "#{$git_root}/#{$accounts_repo}"
     pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :commit => '6116a38'
-    #pod "PIARegions", :git => "#{$git_root}/#{$regions_repo}"
-    pod "PIARegions", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :commit => '3b9395f'
+    #pod "PIARegionsModule", :git => "#{$git_root}/#{$regions_repo}"
+    pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :commit => '3b9395f'
     pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :branch => 'master'
 
     #library_by_path('/Users/jose/Projects/PIA')

@@ -27,20 +27,14 @@ import AlamofireImage
 extension Server: CustomStringConvertible {
     func name(forStatus status: VPNStatus) -> String {
         
-        var localizedName = name
-        if let _ = Client.providers.serverProvider.regionStaticData {
-            localizedName = Client.providers.serverProvider.regionStaticData.localisedServerName(forCountryName: name)
-        }
+        let localizedName = name
         
         switch status {
 //        case .connecting, .changingServer, .connected:
         case .connected:
             guard !isAutomatic else {
                 let effectiveServer = Client.providers.vpnProvider.profileServer ?? Client.providers.serverProvider.targetServer
-                var localizedName = effectiveServer.name
-                if let _ = Client.providers.serverProvider.regionStaticData {
-                    localizedName = Client.providers.serverProvider.regionStaticData.localisedServerName(forCountryName: effectiveServer.name)
-                }
+                let localizedName = effectiveServer.name
                 return "\(name) (\(localizedName))"
             }
             return localizedName

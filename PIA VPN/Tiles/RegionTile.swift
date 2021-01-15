@@ -93,7 +93,8 @@ class RegionTile: UIView, Tileable {
         setupDIP(withServer: effectiveServer)
         setupRegionTileAndMap(withServer: effectiveServer)
 
-        if let _ = Client.providers.serverProvider.regionStaticData {
+        let validCoordinates = (effectiveServer.latitude != nil) && (effectiveServer.longitude != nil)
+        if validCoordinates {
             self.mapImageView.addSubview(greenDot)
         }
     }
@@ -121,8 +122,9 @@ class RegionTile: UIView, Tileable {
     }
 
     private func setupRegionTileAndMap(withServer server: Server) {
-        let coordFinder = CoordinatesFinder(forServer: server.regionIdentifier, usingMapImage: self.mapImageView)
-        if let _ = Client.providers.serverProvider.regionStaticData {
+        let coordFinder = CoordinatesFinder(forLatitude: server.latitude, andLongitude: server.longitude, usingMapImage: self.mapImageView)
+        let validCoordinates = (server.latitude != nil) && (server.longitude != nil)
+        if validCoordinates {
             greenDot = coordFinder.dot()
         }
         self.geoImageView.isHidden = !server.geo
