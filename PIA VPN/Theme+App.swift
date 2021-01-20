@@ -272,5 +272,29 @@ extension Theme {
         attributed.addAttribute(.foregroundColor, value: TextStyle.textStyle9.color!, range: range1)
         return attributed
     }
+    
+    // MARK: -Settings
+    public func settingsFooterWithLinkText(withMessage message: String, link: String) -> NSAttributedString {
+        
+        let plain = message.replacingOccurrences(
+            of: "$1",
+            with: link
+            ) as NSString
+        
+        let attributed = NSMutableAttributedString(string: plain as String)
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
+        paragraph.minimumLineHeight = 16
+        let fullRange = NSMakeRange(0, plain.length)
+        attributed.addAttribute(.font, value: TextStyle.textStyle21.font!, range: fullRange)
+        attributed.addAttribute(.foregroundColor, value: TextStyle.textStyle21.color!, range: fullRange)
+        attributed.addAttribute(.paragraphStyle, value: paragraph, range: fullRange)
+        let range1 = plain.range(of: link)
+        attributed.addAttribute(.attachment, value: link, range: range1)
+        attributed.addAttribute(.foregroundColor, value: Theme.current.palette.lineColor, range: range1)
+
+        return attributed
+    
+    }
 
 }
