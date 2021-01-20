@@ -618,24 +618,7 @@
 		82A1AD2524B86AF60003DD02 /* PIACardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACardsViewController.swift; sourceTree = "<group>"; };
 		82A1AD2824B87CCD0003DD02 /* PIACard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PIACard.xib; sourceTree = "<group>"; };
 		82A1AD2E24B87CF20003DD02 /* PIACard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACard.swift; sourceTree = "<group>"; };
-		82BAACFC25B09C9200B3C733 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = en; path = en.lproj/PIAWidget.intentdefinition; sourceTree = "<group>"; };
-		82BAAD0525B09C9800B3C733 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/PIAWidget.strings; sourceTree = "<group>"; };
-		82BAAD0D25B09C9900B3C733 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PIAWidget.strings"; sourceTree = "<group>"; };
-		82BAAD0F25B09C9900B3C733 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/PIAWidget.strings"; sourceTree = "<group>"; };
-		82BAAD1125B09C9A00B3C733 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/PIAWidget.strings; sourceTree = "<group>"; };
-		82BAAD1325B09C9B00B3C733 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/PIAWidget.strings; sourceTree = "<group>"; };
-		82BAAD1525B09C9B00B3C733 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PIAWidget.strings; sourceTree = "<group>"; };
-		82BAAD1D25B09C9C00B3C733 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PIAWidget.strings; sourceTree = "<group>"; };
-		82BAAD1F25B09C9C00B3C733 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/PIAWidget.strings; sourceTree = "<group>"; };
-		82BAAD2725B09C9D00B3C733 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/PIAWidget.strings; sourceTree = "<group>"; };
-		82BAAD2925B09C9E00B3C733 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/PIAWidget.strings; sourceTree = "<group>"; };
-		82BAAD2B25B09C9F00B3C733 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/PIAWidget.strings; sourceTree = "<group>"; };
-		82BAAD3325B09C9F00B3C733 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/PIAWidget.strings; sourceTree = "<group>"; };
-		82BAAD3525B09CA000B3C733 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/PIAWidget.strings"; sourceTree = "<group>"; };
-		82BAAD3725B09CA100B3C733 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/PIAWidget.strings; sourceTree = "<group>"; };
-		82BAAD3F25B09CA100B3C733 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/PIAWidget.strings"; sourceTree = "<group>"; };
-		82BAAD4125B09CA200B3C733 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/PIAWidget.strings; sourceTree = "<group>"; };
-		82BAAD4325B09CA300B3C733 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/PIAWidget.strings; sourceTree = "<group>"; };
+		82BAB0FC25B84B9B00B3C733 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/PIAWidget.intentdefinition; sourceTree = "<group>"; };
 		82C0071225231F2800F21AF2 /* String+VPNType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+VPNType.swift"; sourceTree = "<group>"; };
 		82CAB879255AEA3500BB08EF /* MessagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesManager.swift; sourceTree = "<group>"; };
 		82CAB8AF255B050000BB08EF /* MessagesCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesCommands.swift; sourceTree = "<group>"; };
@@ -2360,24 +2343,7 @@
 		82BAACFD25B09C9200B3C733 /* PIAWidget.intentdefinition */ = {
 			isa = PBXVariantGroup;
 			children = (
-				82BAACFC25B09C9200B3C733 /* en */,
-				82BAAD0525B09C9800B3C733 /* ar */,
-				82BAAD0D25B09C9900B3C733 /* zh-Hans */,
-				82BAAD0F25B09C9900B3C733 /* zh-Hant */,
-				82BAAD1125B09C9A00B3C733 /* da */,
-				82BAAD1325B09C9B00B3C733 /* nl */,
-				82BAAD1525B09C9B00B3C733 /* fr */,
-				82BAAD1D25B09C9C00B3C733 /* de */,
-				82BAAD1F25B09C9C00B3C733 /* it */,
-				82BAAD2725B09C9D00B3C733 /* ja */,
-				82BAAD2925B09C9E00B3C733 /* ko */,
-				82BAAD2B25B09C9F00B3C733 /* nb */,
-				82BAAD3325B09C9F00B3C733 /* pl */,
-				82BAAD3525B09CA000B3C733 /* pt-BR */,
-				82BAAD3725B09CA100B3C733 /* ru */,
-				82BAAD3F25B09CA100B3C733 /* es-MX */,
-				82BAAD4125B09CA200B3C733 /* th */,
-				82BAAD4325B09CA300B3C733 /* tr */,
+				82BAB0FC25B84B9B00B3C733 /* Base */,
 			);
 			name = PIAWidget.intentdefinition;
 			sourceTree = "<group>";
