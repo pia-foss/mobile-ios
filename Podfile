@@ -77,7 +77,7 @@ def shared_main_pods
     #library_by_path('/Users/jose/Projects/PIA')
     #library_by_git('b73d9e5')
     #library_by_gitlab_branch('develop')
-    library_by_gitlab_by_git('c43f5d2')
+    library_by_gitlab_by_git('e1bf258')
     #library_by_version('~> 1.1.3')
 end
 

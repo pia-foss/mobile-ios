@@ -168,6 +168,9 @@
 "settings.geo.servers.description" = "Include geo-located regions";
 "settings.cards.history.title" = "Latest news";
 
+"settings.ovpn.migration.footer" = "We are updating our OpenVPN implementation, for more information, click here";
+"settings.ovpn.migration.footer.link" = "here";
+
 // CONTENT BLOCKER
 
 "content_blocker.title" = "Content Blocker";

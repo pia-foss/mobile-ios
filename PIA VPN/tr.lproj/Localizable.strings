@@ -117,6 +117,7 @@
 "global.enable" = "Aç";
 "global.enabled" = "Açık";
 "global.error" = "Hata";
+"global.general.settings" = "Genel Ayarlar";
 "global.no" = "Hayır";
 "global.ok" = "Tamam";
 "global.optional" = "İsteğe bağlı";
@@ -127,9 +128,11 @@
 "global.share" = "Paylaş";
 "global.unreachable" = "İnternet bağlantısı bulunamadı. Lütfen İnternet bağlantınızın olduğunu doğrulayın.";
 "global.update" = "Güncelle";
+"global.vpn.settings" = "VPN Ayarları";
 "global.yes" = "Evet";
 "hotspothelper.display.name" = "🔒 Bu bağlantıyı güvenlik altına almak için PIA Ayarları kısmından VPN WiFi Korumasını açın.";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi Koruması Açık! Arkanızdayız.";
+"inapp.messages.settings.updated" = "Ayarlar güncellendi";
 "inapp.messages.toggle.title" = "Uygulama içi iletişim mesajlarını durdur";
 "menu.accessibility.edit.tile" = "Düzenle";
 "menu.accessibility.item" = "Menü";
@@ -254,10 +257,13 @@
 "settings.hotspothelper.wifi.networks" = "WiFi ağları";
 "settings.hotspothelper.wifi.trust.title" = "VPN WiFi Koruması";
 "settings.log.connected.error" = "VPN bağlantısı gerekli. Lütfen VPN'ye bağlanıp tekrar deneyin.";
+"settings.log.information" = "Sorunların giderilmesine yardımcı olması için, teknik desteğe gönderilebilen hata ayıklama günlüklerini kaydedin.";
 "settings.nmt.killswitch.disabled" = "VPN sonlandırma anahtarı şu anda devre dışı. Ağ Yönetim Aracının çalıştığından ve ağ değiştirdiğinizde bağlanabileceğinizden emin olmak için lütfen ayarlarınızdan VPN sonlandırma anahtarını etkinleştirin.";
 "settings.nmt.optout.disconnect.alerts" = "Bağlantı kesilmesi onay uyarısını kapat";
 "settings.nmt.optout.disconnect.alerts.description" = "VPN bağlantısı kesilirken gösterilen uyarıyı devre dışı bırakır.";
 "settings.nmt.wireguard.warning" = "Farklı ağlar arasında geçiş yaptığınızda WireGuard®'ın tekrar bağlanmasına gerek yoktur. VPN bağlantısını güvenilir ağlarda manuel yoldan kesmeniz gerekebilir.";
+"settings.ovpn.migration.footer" = "OpenVPN hizmetinin gerçekleştirilme şeklini güncelliyoruz; daha çok bilgi almak için buraya tıklayın";
+"settings.ovpn.migration.footer.link" = "buraya";
 "settings.preview.title" = "Önizleme";
 "settings.reset.defaults.confirm.button" = "Sıfırla";
 "settings.reset.defaults.confirm.message" = "Bu işlem uygulama ayarlarını sıfırlayacak. Yapmış olduğun bütün değişiklikler kaybolacaktır.";

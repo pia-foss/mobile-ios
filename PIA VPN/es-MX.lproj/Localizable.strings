@@ -117,6 +117,7 @@
 "global.enable" = "Habilitar";
 "global.enabled" = "Habilitado";
 "global.error" = "Error";
+"global.general.settings" = "Ajustes generales";
 "global.no" = "No";
 "global.ok" = "OK";
 "global.optional" = "Opcional";
@@ -127,9 +128,11 @@
 "global.share" = "Compartir";
 "global.unreachable" = "No hay conexión a internet. Confirma que tienes conexión a internet.";
 "global.update" = "Actualizar";
+"global.vpn.settings" = "Ajustes de VPN";
 "global.yes" = "Sí";
 "hotspothelper.display.name" = "🔒 Activa la protección wifi VPN en los ajustes de PIA para proteger esta conexión.";
 "hotspothelper.display.protected.name" = "🔒 Protección wifi VPN de PIA activada: Te protegemos.";
+"inapp.messages.settings.updated" = "Se actualizaron los ajustes";
 "inapp.messages.toggle.title" = "Detener mensajes de comunicación en la aplicación";
 "menu.accessibility.edit.tile" = "Editar";
 "menu.accessibility.item" = "Menú";
@@ -254,10 +257,13 @@
 "settings.hotspothelper.wifi.networks" = "Redes wifi";
 "settings.hotspothelper.wifi.trust.title" = "Protección wifi VPN";
 "settings.log.connected.error" = "Se requiere una conexión VPN. Conéctate a la VPN y vuelve a intentarlo.";
+"settings.log.information" = "Guarda los registros de depuración, que podrás enviar al servicio de asistencia técnica para ayudar a resolver problemas.";
 "settings.nmt.killswitch.disabled" = "El interruptor de desconexión de emergencia está deshabilitado. Para garantizar que el interruptor de desconexión de emergencia funciona y que puedes reconectar al cambiar de red, habilita el interruptor de desconexión de emergencia de VPN en los ajustes.";
 "settings.nmt.optout.disconnect.alerts" = "Alerta de confirmación de desconexión";
 "settings.nmt.optout.disconnect.alerts.description" = "Deshabilita la alerta de aviso al desconectar del VPN.";
 "settings.nmt.wireguard.warning" = "WireGuard® doesn't need to reconnect when you switch between different networks. It may be necessary to manually disconnect the VPN on trusted networks.";
+"settings.ovpn.migration.footer" = "Estamos actualizando nuestra implementación de OpenVPN. Para obtener más información haz clic aquí";
+"settings.ovpn.migration.footer.link" = "aquí";
 "settings.preview.title" = "Vista previa";
 "settings.reset.defaults.confirm.button" = "Restablecer";
 "settings.reset.defaults.confirm.message" = "Esto llevará a la aplicación a los valores predeterminados. Perderá todos los cambios que haya realizado.";
