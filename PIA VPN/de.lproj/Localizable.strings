@@ -117,6 +117,7 @@
 "global.enable" = "Aktivieren";
 "global.enabled" = "Aktiviert";
 "global.error" = "Fehler";
+"global.general.settings" = "Allgemeine Einstellungen";
 "global.no" = "Nein";
 "global.ok" = "OK";
 "global.optional" = "Optional";
@@ -127,9 +128,11 @@
 "global.share" = "Teilen";
 "global.unreachable" = "Keine Internet. Bitte überprüfen Sie Ihre Internetverbindung.";
 "global.update" = "Aktualisieren";
+"global.vpn.settings" = "VPN-Einstellungen";
 "global.yes" = "Ja";
 "hotspothelper.display.name" = "🔒 Aktivieren Sie den VPN-WLAN-Schutz in den PIA-Einstellungen, um diese Verbindung zu schützen.";
 "hotspothelper.display.protected.name" = "🔒 Der VPN-WLAN-Schutz in PIA wurde aktiviert. Sie können sich zurücklehnen.";
+"inapp.messages.settings.updated" = "Die Einstellungen wurden aktualisiert";
 "inapp.messages.toggle.title" = "In-App-Kommunikation beenden";
 "menu.accessibility.edit.tile" = "Bearbeiten";
 "menu.accessibility.item" = "Menü";
@@ -254,10 +257,13 @@
 "settings.hotspothelper.wifi.networks" = "WLAN";
 "settings.hotspothelper.wifi.trust.title" = "VPN-WLAN-Schutz";
 "settings.log.connected.error" = "Eine VPN-Verbindung ist erforderlich. Bitte mit dem VPN und erneut versuchen.";
+"settings.log.information" = "Speichern Sie Fehlerprotokolle, um sie bei Problemen an unser technisches Supportteam zu senden.";
 "settings.nmt.killswitch.disabled" = "Der VPN-Notausschalter ist derzeit deaktiviert. Um sicherzustellen, dass das Network Management Tool funktioniert und Sie beim Netzwerkwechsel die Verbindung wiederherstellen können, aktivieren Sie bitte den VPN-Notausschalter in Ihren Einstellungen.";
 "settings.nmt.optout.disconnect.alerts" = "Deaktivierung der Warnung zur Bestätigung bei Verbindungsabbruch";
 "settings.nmt.optout.disconnect.alerts.description" = "Deaktiviert den Warnhinweis beim Trennen der Verbindung vom VPN.";
 "settings.nmt.wireguard.warning" = "WireGuard® muss nicht erneut verbunden werden, wenn Sie zwischen verschiedenen Netzwerken wechseln. In vertrauenswürdigen Netzwerken kann es notwendig sein, die VPN-Verbindung manuell zu trennen.";
+"settings.ovpn.migration.footer" = "Wir aktualisieren unsere OpenVPN-Implementierung. Für weitere Infos klicken Sie hier";
+"settings.ovpn.migration.footer.link" = "hier";
 "settings.preview.title" = "Vorschau";
 "settings.reset.defaults.confirm.button" = "Zurücksetzen";
 "settings.reset.defaults.confirm.message" = "Damit wird die App in den Ausgangszustand versetzt. Alle Änderungen gehen verloren.";

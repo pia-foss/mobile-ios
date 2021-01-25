@@ -117,6 +117,7 @@
 "global.enable" = "Włącz";
 "global.enabled" = "Włączona";
 "global.error" = "Błąd";
+"global.general.settings" = "Ustawienia ogólne";
 "global.no" = "Nie";
 "global.ok" = "OK";
 "global.optional" = "Opcjonalnie";
@@ -127,9 +128,11 @@
 "global.share" = "Udostępnij";
 "global.unreachable" = "Nie stwierdzono połączenia z internetem.";
 "global.update" = "Aktualizuj";
+"global.vpn.settings" = "Ustawienia VPN";
 "global.yes" = "Tak";
 "hotspothelper.display.name" = "Aktywuj ochronę VPN WiFi w ustawieniach PIA, aby zabezpieczyć to połączenie.";
 "hotspothelper.display.protected.name" = "Ochrona VPN WiFi PIA jest Włączona — Osłaniamy Cię";
+"inapp.messages.settings.updated" = "Zaktualizowano ustawienia";
 "inapp.messages.toggle.title" = "Zatrzymaj komunikaty wewnętrzne w aplikacji";
 "menu.accessibility.edit.tile" = "Edytuj";
 "menu.accessibility.item" = "Menu";
@@ -254,10 +257,13 @@
 "settings.hotspothelper.wifi.networks" = "Sieci WIFi";
 "settings.hotspothelper.wifi.trust.title" = "Ochrona VPN WiFi";
 "settings.log.connected.error" = "To wymaga połączenia z siecią VPN. Połącz się z siecią VPN i spróbuj ponownie.";
+"settings.log.information" = "Zapisz dzienniki debugowania, które można przesłać do działu pomocy technicznego, gdzie  uzyskasz pomoc przy rozwiązywaniu problemów.";
 "settings.nmt.killswitch.disabled" = "Wyłącznik awaryjny  VPN jest obecnie wyłączony. co zapewnia prawidłowe działanie narzędzia do zarządzania siecią oraz możliwość ponownego podłączenia się przy zmianie sieci, wktywuj wyłącznik awaryjny  VPN w ustawieniach.";
 "settings.nmt.optout.disconnect.alerts" = "Ostrzeżenie o rezygnacji z potwierdzenia odłączenia";
 "settings.nmt.optout.disconnect.alerts.description" = "Wyłącza ostrzeżenie o odłączeniu od VPN.";
 "settings.nmt.wireguard.warning" = "WireGuard® nie musi się ponownie łączyć przy przełączaniu między różnymi sieciami. Może zajść konieczność ręcznego odłączenia VPN w zaufanych sieciach.";
+"settings.ovpn.migration.footer" = "Aktualizujemy nasze wdrożenie OpenVPN implementation, Aby uzyskać więcej informacji, kliknij tutaj";
+"settings.ovpn.migration.footer.link" = "tutaj";
 "settings.preview.title" = "Podgląd";
 "settings.reset.defaults.confirm.button" = "Resetuj";
 "settings.reset.defaults.confirm.message" = "Spowoduje to przywrócenie domyślnych ustawień aplikacji. Stracisz wszystkie wprowadzone zmiany.";

@@ -117,6 +117,7 @@
 "global.enable" = "Ativar";
 "global.enabled" = "Ativado";
 "global.error" = "Erro";
+"global.general.settings" = "Configurações gerais";
 "global.no" = "Não";
 "global.ok" = "OK";
 "global.optional" = "Opcional";
@@ -127,9 +128,11 @@
 "global.share" = "Compartilhar";
 "global.unreachable" = "Nenhuma conexão de internet encontrada. Confirme que você tem uma conexão de internet.";
 "global.update" = "Atualizar";
+"global.vpn.settings" = "Configurações da VPN";
 "global.yes" = "Sim";
 "hotspothelper.display.name" = "🔒 Ative a proteção VPN WiFi nas configurações do PIA para assegurar esta conexão.";
 "hotspothelper.display.protected.name" = "🔒 Proteção VPN WiFi PIA ativada - Nós te protegemos.";
+"inapp.messages.settings.updated" = "As configurações foram atualizadas";
 "inapp.messages.toggle.title" = "Interrompa as mensagens de comunicação no aplicativo";
 "menu.accessibility.edit.tile" = "Editar";
 "menu.accessibility.item" = "Menu";
@@ -254,10 +257,13 @@
 "settings.hotspothelper.wifi.networks" = "Redes WiFi";
 "settings.hotspothelper.wifi.trust.title" = "Proteção VPN WiFi";
 "settings.log.connected.error" = "É necessária uma conexão VPN. Conecte-se à VPN e tente novamente.";
+"settings.log.information" = "Salve logs de depuração que podem ser enviados para o suporte técnico para ajudar na solução de problemas.";
 "settings.nmt.killswitch.disabled" = "O kill switch do VPN está desativado. Para garantir que a Ferramenta de Gestão de Rede esteja funcionando e que você pode reconectar-se ao trocar de rede, ative o kill switch do VPN em suas configurações.";
 "settings.nmt.optout.disconnect.alerts" = "Desativar alerta de confirmação de desconexão";
 "settings.nmt.optout.disconnect.alerts.description" = "Desativa o alerta ao desconectar da VPN";
 "settings.nmt.wireguard.warning" = "O WireGuard® não precisa se reconectar quando você troca de rede. Pode ser necessário desconectar manualmente a VPN em redes confiáveis.";
+"settings.ovpn.migration.footer" = "Estamos atualizando nossa implementação do OpenVPN. Para mais informações, clique aqui.";
+"settings.ovpn.migration.footer.link" = "aqui";
 "settings.preview.title" = "Visualização";
 "settings.reset.defaults.confirm.button" = "Redefinir";
 "settings.reset.defaults.confirm.message" = "Isto irá restaurar o app para as opções padrão. Você perderá todas as mudanças que fez.";

@@ -117,6 +117,7 @@
 "global.enable" = "启用";
 "global.enabled" = "已启用";
 "global.error" = "错误";
+"global.general.settings" = "通用设置";
 "global.no" = "否";
 "global.ok" = "确定";
 "global.optional" = "可选";
@@ -127,9 +128,11 @@
 "global.share" = "共享";
 "global.unreachable" = "未找到网络连接。请确认您已接入网络。";
 "global.update" = "更新";
+"global.vpn.settings" = "VPN 设置";
 "global.yes" = "是";
 "hotspothelper.display.name" = "🔒 在 PIA 设置中激活 VPN WiFi 保护以保护此连接。";
 "hotspothelper.display.protected.name" = "🔒 已启用 PIA VPN WiFi 保护 - 我们会保障您的安全。";
+"inapp.messages.settings.updated" = "设置已更新";
 "inapp.messages.toggle.title" = "停止应用内通信消息";
 "menu.accessibility.edit.tile" = "编辑";
 "menu.accessibility.item" = "菜单";
@@ -254,10 +257,13 @@
 "settings.hotspothelper.wifi.networks" = "WiFi 网络";
 "settings.hotspothelper.wifi.trust.title" = "VPN WiFi 保护";
 "settings.log.connected.error" = "需要有 VPN 连接。请连接到 VPN，然后重试。";
+"settings.log.information" = "保存调试日志，以便提交给技术支持团队帮助排查问题。";
 "settings.nmt.killswitch.disabled" = "VPN 终止开关目前已禁用。为了确保网络管理工具正常运行，并确保您在切换网络时能够重新连接，请在设置中启用 VPN 终止开关。";
 "settings.nmt.optout.disconnect.alerts" = "禁用断开确认提醒";
 "settings.nmt.optout.disconnect.alerts.description" = "与 VPN 断开时禁用警告提醒。";
 "settings.nmt.wireguard.warning" = "当您在不同网络之间切换时，WireGuard® 无需重新连接。可能需要在受信任网络上手动断开 VPN 连接。";
+"settings.ovpn.migration.footer" = "我们正在更新 OpenVPN 实施，有关更多信息，请点击此处";
+"settings.ovpn.migration.footer.link" = "此处";
 "settings.preview.title" = "预览";
 "settings.reset.defaults.confirm.button" = "重置";
 "settings.reset.defaults.confirm.message" = "此操作会将应用恢复为默认状态。您将丢失您做出的所有变更。";
