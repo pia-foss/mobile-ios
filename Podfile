@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '11.0'
+platform :ios, '12.0'
 use_frameworks!
 
 install! 'cocoapods',
@@ -71,13 +71,13 @@ def shared_main_pods
     #pod "PIAAccountModule", :git => "#{$git_root}/#{$accounts_repo}"
     pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :commit => '6116a38'
     #pod "PIARegionsModule", :git => "#{$git_root}/#{$regions_repo}"
-    pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :commit => '3b9395f'
+    pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :commit => 'ca41c33'
     pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :branch => 'master'
 
-    #library_by_path('/Users/jose/Projects/PIA')
+    library_by_path('/Users/jose/Projects/PIA')
     #library_by_git('b73d9e5')
     #library_by_gitlab_branch('develop')
-    library_by_gitlab_by_git('e1bf258')
+    #library_by_gitlab_by_git('e1bf258')
     #library_by_version('~> 1.1.3')
 end
 
@@ -93,7 +93,8 @@ def app_pods
 end
 
 def tunnel_pods
-    pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :commit => 'd19b9de'
+  #pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :commit => 'd19b9de'
+  pod 'TunnelKit', :path => "/Users/jose/Projects/PIA/tunnelkit"
 end
 
 def piawireguard_pod

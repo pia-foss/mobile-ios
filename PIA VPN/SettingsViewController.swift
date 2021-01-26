@@ -1844,13 +1844,12 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             
             if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
                 if AppPreferences.shared.useSmallPackets {
-                    builder.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
+                    builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
                 } else {
-                    builder.mtu = AppConstants.OpenVPNPacketSize.defaultPacketSize
+                    builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.defaultPacketSize
                 }
             }
             builder.shouldDebug = true
-
             pendingPreferences.setVPNCustomConfiguration(builder.build(), for: pendingPreferences.vpnType)
         } else {
             pendingPreferences.setVPNCustomConfiguration(pendingWireguardVPNConfiguration, for: pendingPreferences.vpnType)

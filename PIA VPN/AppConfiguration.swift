@@ -32,7 +32,7 @@ struct AppConfiguration {
     }
     
     struct About {
-        static let copyright = "2014-2020"
+        static let copyright = "2014-2021"
 
         static let companyName = "Private Internet Access, Inc."
     }
@@ -78,9 +78,9 @@ struct AppConfiguration {
             sessionBuilder.usesPIAPatches = true
             var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())            
             if AppPreferences.shared.useSmallPackets {
-                builder.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
+                builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
             } else {
-                builder.mtu = AppConstants.OpenVPNPacketSize.defaultPacketSize
+                builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.defaultPacketSize
             }
             builder.shouldDebug = true
             return builder
