@@ -33,7 +33,7 @@ extension OpenVPNTunnelProvider.Configuration: VPNCustomConfiguration {
         guard let other = to as? OpenVPNTunnelProvider.Configuration else {
             return false
         }
-        guard (mtu == other.mtu) else {
+        guard (sessionConfiguration.mtu == other.sessionConfiguration.mtu) else {
             return false
         }
         guard (shouldDebug == other.shouldDebug) else {

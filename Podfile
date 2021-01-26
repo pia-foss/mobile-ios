@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '11.0'
+platform :ios, '12.0'
 use_frameworks!
 
 install! 'cocoapods',
@@ -17,20 +17,20 @@ abstract_target 'PIALibrary' do
     pod 'lottie-ios'
     pod 'FXPageControl'
     pod 'PopupDialog'
-    pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :commit => 'd19b9de'
+    pod 'TunnelKit', :path => '/Users/jose/Projects/PIA/tunnelkit'
     pod 'PIAWireguard', :git => "https://github.com/pia-foss/ios-wireguard"
     pod "PIAAccountModule", :git => "https://github.com/pia-foss/mobile-common-account"
     pod 'PIARegionsModule',  :git => "https://github.com/pia-foss/mobile-common-regions"
     pod "PIACSIModule", :git => "https://github.com/pia-foss/mobile-common-csi"
 
     target 'PIALibrary-iOS' do
-        platform :ios, '11.0'
+        platform :ios, '12.0'
     end
     target 'PIALibraryTests-iOS' do
-        platform :ios, '11.0'
+        platform :ios, '12.0'
     end
     target 'PIALibraryHost-iOS' do
-        platform :ios, '11.0'
+        platform :ios, '12.0'
     end
 
     #target 'PIALibrary-macOS' do

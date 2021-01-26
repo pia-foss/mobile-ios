@@ -28,7 +28,6 @@ private let log = SwiftyBeaver.self
 
 class PingTask {
     
-    var icmpPinger: ICMPPing!
     let timeout = 3000
     
     let identifier: String
