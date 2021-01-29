@@ -8,6 +8,17 @@ install! 'cocoapods',
 # ignore all warnings from all pods
 inhibit_all_warnings!
 
+$git_root = "https://github.com/pia-foss"
+$gitlab_vpn_root = "git@codex.londontrustmedia.com:ios"
+$gitlab_kn_root = "git@codex.londontrustmedia.com:mobile"
+
+$regions_repo = 'mobile-common-regions'
+$accounts_repo = 'mobile-common-account'
+
+$regions_gitlab_repo = 'regions.git'
+$accounts_gitlab_repo = 'account.git'
+$csi_gitlab_repo = 'csi.git'
+
 abstract_target 'PIALibrary' do
     pod 'SwiftyBeaver', '~> 1.7.0'
     pod 'Gloss', '~> 2'
@@ -19,9 +30,9 @@ abstract_target 'PIALibrary' do
     pod 'PopupDialog'
     pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :commit => 'd19b9de'
     pod 'PIAWireguard', :git => "https://github.com/pia-foss/ios-wireguard"
-    pod "PIAAccountModule", :git => "https://github.com/pia-foss/mobile-common-account"
-    pod 'PIARegionsModule',  :git => "https://github.com/pia-foss/mobile-common-regions"
-    pod "PIACSIModule", :git => "https://github.com/pia-foss/mobile-common-csi"
+    pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :commit => '6116a38'
+    pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :commit => 'ca41c33'
+    pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :branch => 'master'
 
     target 'PIALibrary-iOS' do
         platform :ios, '11.0'
