@@ -379,6 +379,7 @@
 "dedicated.ip.message.ip.updated" = "Your dedicated IP was updated";
 "dedicated.ip.country.flag.accessibility" = "Country flag for %@";
 "dedicated.ip.remove" = "Are you sure you want to remove the selected region?";
+"dedicated.ip.limit.title" = "Secure your remote connections to any asset with a dedicated IP from a country of your choice. During your subscription, this IP will be yours and yours alone, protecting your data transfers with the strongest encryption out there.";
 
 // RECONNECTIONS
 "server.reconnection.please.wait" = "Please wait...";

@@ -216,6 +216,10 @@ internal enum L10n {
           }
         }
       }
+      internal enum Limit {
+        /// Secure your remote connections to any asset with a dedicated IP from a country of your choice. During your subscription, this IP will be yours and yours alone, protecting your data transfers with the strongest encryption out there.
+        internal static let title = L10n.tr("Localizable", "dedicated.ip.limit.title")
+      }
       internal enum Message {
         internal enum Error {
           /// Your token is expired. Please generate a new one from your Account page on the website.

@@ -43,6 +43,7 @@ class DedicatedIpViewController: AutolayoutViewController {
     private struct Cells {
         static let dedicatedIpRow = "DedicatedIpRowViewCell"
         static let header = "DedicatedIpEmptyHeaderViewCell"
+        static let activeHeader = "ActiveDedicatedIpHeaderViewCell"
         static let titleHeader = "DedicatedIPTitleHeaderViewCell"
     }
 
@@ -94,6 +95,8 @@ class DedicatedIpViewController: AutolayoutViewController {
                            forCellReuseIdentifier: Cells.dedicatedIpRow)
         tableView.register(UINib(nibName: Cells.header, bundle: nil),
                            forCellReuseIdentifier:Cells.header)
+        tableView.register(UINib(nibName: Cells.activeHeader, bundle: nil),
+                           forCellReuseIdentifier:Cells.activeHeader)
         tableView.register(UINib(nibName: Cells.titleHeader, bundle: nil),
                            forCellReuseIdentifier:Cells.titleHeader)
         tableView.delegate = self
@@ -186,9 +189,15 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if Sections.header == section {
-            let headerView = tableView.dequeueReusableCell(withIdentifier: Cells.header) as! DedicatedIpEmptyHeaderViewCell
-            headerView.setup(withTableView: tableView)
-            return headerView
+            if !data.isEmpty {
+                let headerView = tableView.dequeueReusableCell(withIdentifier: Cells.activeHeader) as! ActiveDedicatedIpHeaderViewCell
+                headerView.setup()
+                return headerView
+            } else {
+                let headerView = tableView.dequeueReusableCell(withIdentifier: Cells.header) as! DedicatedIpEmptyHeaderViewCell
+                headerView.setup(withTableView: tableView)
+                return headerView
+            }
         } else {
             let headerView = tableView.dequeueReusableCell(withIdentifier: Cells.titleHeader) as! DedicatedIPTitleHeaderViewCell
             return headerView
