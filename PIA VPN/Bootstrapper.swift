@@ -26,9 +26,6 @@ import TunnelKit
 import SwiftyBeaver
 import PIAWireguard
 #if PIA_DEV
-import AppCenter
-import AppCenterAnalytics
-import AppCenterCrashes
 import Firebase
 import Fabric
 import Crashlytics
@@ -54,10 +51,6 @@ class Bootstrapper {
         let console = ConsoleDestination()
         #if PIA_DEV
         console.minLevel = .debug
-        
-        MSAppCenter.start(AppConstants.appCenterAppId,
-                        withServices: [MSAnalytics.self,
-                                       MSCrashes.self])
         
         if let path = Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist"),
             let plist = NSDictionary(contentsOf: path) as? [String: Any],
