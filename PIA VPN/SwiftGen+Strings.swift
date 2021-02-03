@@ -946,6 +946,16 @@ internal enum L10n {
         internal static let warning = L10n.tr("Localizable", "settings.nmt.wireguard.warning")
       }
     }
+    internal enum Ovpn {
+      internal enum Migration {
+        /// We are updating our OpenVPN implementation, for more information, click here
+        internal static let footer = L10n.tr("Localizable", "settings.ovpn.migration.footer")
+        internal enum Footer {
+          /// here
+          internal static let link = L10n.tr("Localizable", "settings.ovpn.migration.footer.link")
+        }
+      }
+    }
     internal enum Preview {
       /// Preview
       internal static let title = L10n.tr("Localizable", "settings.preview.title")

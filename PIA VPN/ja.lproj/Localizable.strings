@@ -117,6 +117,7 @@
 "global.enable" = "有効にする";
 "global.enabled" = "有効化済み";
 "global.error" = "エラー";
+"global.general.settings" = "一般設定";
 "global.no" = "いいえ";
 "global.ok" = "OK";
 "global.optional" = "任意";
@@ -127,9 +128,11 @@
 "global.share" = "共有";
 "global.unreachable" = "インターネット接続が見つかりません。インターネット接続があることを確認してください。";
 "global.update" = "アップデート";
+"global.vpn.settings" = "VPN設定";
 "global.yes" = "はい";
 "hotspothelper.display.name" = "🔒 この接続を保護するには、PIA設定でVPN WiFi保護を有効にします。";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi保護が有効にされました - 保護はお任せください。";
+"inapp.messages.settings.updated" = "設定が更新されました";
 "inapp.messages.toggle.title" = "アプリ内通信メッセージを停止";
 "menu.accessibility.edit.tile" = "編集";
 "menu.accessibility.item" = "メニュー";
@@ -254,10 +257,13 @@
 "settings.hotspothelper.wifi.networks" = "WiFiネットワーク";
 "settings.hotspothelper.wifi.trust.title" = "VPN WiFi保護";
 "settings.log.connected.error" = "VPN接続が必要です。VPNに接続してからもう一度お試しください。";
+"settings.log.information" = "デバッグログを保存してください。問題解決に役立てるため、保存したログをテクニカルサポートに送信できます。";
 "settings.nmt.killswitch.disabled" = "現在VPNキルスイッチが無効になっています。「ネットワーク管理ツール」が確かに機能している状態にし、ネットワークを切り替えたときに再度接続できるようにするには、設定でVPNキルスイッチを有効にしてください。";
 "settings.nmt.optout.disconnect.alerts" = "切断確認アラートのオプトアウト";
 "settings.nmt.optout.disconnect.alerts.description" = "VPNから切断されたときの警告アラートをオフにします。";
 "settings.nmt.wireguard.warning" = "異なるネットワーク間で切り替える際、WireGuard®は再接続を必要としません。信頼されるネットワーク上ではVPNを手動で切断しなければならない場合もあります。";
+"settings.ovpn.migration.footer" = "OpenVPNの導入を更新しています。詳細は、こちらをクリックしてご確認ください。";
+"settings.ovpn.migration.footer.link" = "こちら";
 "settings.preview.title" = "プレビュー";
 "settings.reset.defaults.confirm.button" = "リセット";
 "settings.reset.defaults.confirm.message" = "アプリを標準設定に戻します。これまでの変更はすべて失われます。";

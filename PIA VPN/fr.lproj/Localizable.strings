@@ -117,6 +117,7 @@
 "global.enable" = "Activer";
 "global.enabled" = "Activé";
 "global.error" = "Erreur";
+"global.general.settings" = "Paramètres généraux";
 "global.no" = "Non";
 "global.ok" = "OK";
 "global.optional" = "Facultatif";
@@ -127,9 +128,11 @@
 "global.share" = "Partager";
 "global.unreachable" = "Aucune connexion Internet trouvée. Confirmez que vous avez une connexion Internet.";
 "global.update" = "Mettre à jour";
+"global.vpn.settings" = "Paramètres du VPN";
 "global.yes" = "Oui";
 "hotspothelper.display.name" = "🔒 Activez la protection WiFi VPN dans les paramètres de PIA pour sécuriser cette connexion.";
 "hotspothelper.display.protected.name" = "🔒 Protection WiFi VPN PIA activée - On vous protège.";
+"inapp.messages.settings.updated" = "Les paramètres ont été mis à jour";
 "inapp.messages.toggle.title" = "Arrêter les messages de communication intégrés";
 "menu.accessibility.edit.tile" = "Éditer";
 "menu.accessibility.item" = "Menu";
@@ -254,10 +257,13 @@
 "settings.hotspothelper.wifi.networks" = "Réseaux WiFi";
 "settings.hotspothelper.wifi.trust.title" = "Protection WiFi VPN";
 "settings.log.connected.error" = "Une connexion VPN est requise. Veuillez vous connecter au VPN et réessayer.";
+"settings.log.information" = "Enregistrez les journaux de debug qui peuvent être envoyés à l'assistance technique afin d'aider à réparer les problèmes.";
 "settings.nmt.killswitch.disabled" = "Le killswitch du VPN est actuellement désactivé. Pour assurer que l'Outil de gestion du réseau fonctionne, et que vous pouvez vous reconnecter en changeant de réseau, activez le killswitch du VPN dans vos paramètres.";
 "settings.nmt.optout.disconnect.alerts" = "Retirer l'alerte de confirmation de déconnexion";
 "settings.nmt.optout.disconnect.alerts.description" = "Désactive l'alerte d'avertissement quand le VPN est déconnecté.";
 "settings.nmt.wireguard.warning" = "WireGuard® n'a pas besoin de se reconnecter lorsque vous passez d'un réseau à l'autre. Il peut être nécessaire de déconnecter manuellement le VPN sur les réseaux approuvés.";
+"settings.ovpn.migration.footer" = "Nous mettons à jour notre implémentation OpenVPN, pour plus d'informations, cliquez ici";
+"settings.ovpn.migration.footer.link" = "ici";
 "settings.preview.title" = "Aperçu";
 "settings.reset.defaults.confirm.button" = "Réinitialiser";
 "settings.reset.defaults.confirm.message" = "Cette action rétablira les paramètres par défaut de l'application. Toutes les modifications effectuées seront perdues.";

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="boO-X9-UIe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="boO-X9-UIe">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -126,7 +126,6 @@
                                                     <outlet property="labelRegion" destination="0df-FZ-CRz" id="j0p-l0-ig6"/>
                                                     <outlet property="leftIconImageView" destination="5u6-4W-5WT" id="NHN-Gh-Ehk"/>
                                                     <outlet property="rightIconImageView" destination="h1y-EN-pdB" id="lCQ-DS-f2e"/>
-                                                    <segue destination="4OD-n8-oW7" kind="unwind" identifier="UnwindRegionsSegueIdentifier" unwindAction="unwoundRegionsViewController:" id="fV8-af-tUY"/>
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DedicatedRegionCell" rowHeight="135" id="GMn-Ol-zXm" customClass="DedicatedRegionCell" customModule="PIA_VPN" customModuleProvider="target">
@@ -267,7 +266,6 @@
                                                     <outlet property="labelRegion" destination="aFC-SE-ObX" id="hqF-Oz-Nbg"/>
                                                     <outlet property="leftIconImageView" destination="Q48-DR-cTr" id="mPy-9w-eib"/>
                                                     <outlet property="viewIP" destination="iCQ-SL-L3l" id="bZp-VE-pv9"/>
-                                                    <segue destination="4OD-n8-oW7" kind="unwind" identifier="UnwindRegionsSegueIdentifier" unwindAction="unwoundRegionsViewController:" id="DBP-17-mnO"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -312,7 +310,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yui-RU-skk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="4OD-n8-oW7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2176.8000000000002" y="934.72906403940885"/>
         </scene>
