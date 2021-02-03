@@ -123,7 +123,7 @@ class MenuViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.dedicatedIp),
+        if AppPreferences.shared.showsDedicatedIPView,
            !allItems[0].contains(.dedicatedIp) {
             allItems[0].insert(.dedicatedIp, at: 2)
         }

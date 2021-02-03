@@ -118,9 +118,15 @@ class Bootstrapper {
         ]
         
         #if PIA_DEV
-        Client.configuration.featureFlags.append(contentsOf: ["dedicated-ip", "disable-multi-dip-tokens", "check-dip-expiration-request"])
+        AppPreferences.shared.showsDedicatedIPView = true
+        AppPreferences.shared.checksDipExpirationRequest = true
+        AppPreferences.shared.disablesMultiDipTokens = true
         #else
-        Client.configuration.featureFlags.append(contentsOf: ["dedicated-ip"])
+        Client.providers.accountProvider.featureFlags({ _ in
+            AppPreferences.shared.showsDedicatedIPView = Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.dedicatedIp)
+            AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.checkDipExpirationRequest)
+            AppPreferences.shared.disablesMultiDipTokens = Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.disableMultiDipTokens)
+        })
         #endif
         MessagesManager.shared.refreshMessages()
 
@@ -205,6 +211,11 @@ class Bootstrapper {
         // show walkthrough on upgrade except for logged in users
         if Client.providers.accountProvider.isLoggedIn {
             AppPreferences.shared.wasLaunched = true
+        }
+        
+        // Check the DIP token for renewal
+        if AppPreferences.shared.checksDipExpirationRequest, let dipToken = Client.providers.serverProvider.dipTokens?.first {
+            Client.providers.serverProvider.handleDIPTokenExpiration(dipToken: dipToken, nil)
         }
 
     }

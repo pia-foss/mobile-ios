@@ -83,9 +83,9 @@ PODS:
     - PIACSIModule/gradle (= 1.0.0)
   - PIACSIModule/csi (1.0.0)
   - PIACSIModule/gradle (1.0.0)
-  - PIALibrary/Core (2.10.0):
+  - PIALibrary/Core (2.10.1):
     - PIAAccountModule
-  - PIALibrary/Library (2.10.0):
+  - PIALibrary/Library (2.10.1):
     - Alamofire (~> 4)
     - Gloss (~> 2)
     - PIAAccountModule
@@ -96,18 +96,18 @@ PODS:
     - PopupDialog
     - ReachabilitySwift
     - SwiftyBeaver
-  - PIALibrary/Mock (2.10.0):
+  - PIALibrary/Mock (2.10.1):
     - PIALibrary/Library
-  - PIALibrary/UI (2.10.0):
+  - PIALibrary/UI (2.10.1):
     - FXPageControl
     - lottie-ios
     - PIALibrary/Library
     - SwiftEntryKit (= 0.7.2)
     - SwiftyBeaver
     - TPKeyboardAvoiding
-  - PIALibrary/Util (2.10.0):
+  - PIALibrary/Util (2.10.1):
     - PIALibrary/Core
-  - PIALibrary/VPN (2.10.0):
+  - PIALibrary/VPN (2.10.1):
     - PIALibrary/Library
     - PIAWireguard
     - TunnelKit
@@ -156,12 +156,12 @@ DEPENDENCIES:
   - Fabric
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
-  - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, commit `6116a38`)"
+  - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, commit `defdab8`)"
   - "PIACSIModule (from `git@codex.londontrustmedia.com:mobile/csi.git`, branch `master`)"
-  - "PIALibrary/Library (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `0e09d37`)"
-  - "PIALibrary/Mock (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `0e09d37`)"
-  - "PIALibrary/UI (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `0e09d37`)"
-  - "PIALibrary/VPN (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `0e09d37`)"
+  - "PIALibrary/Library (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `bbef813`)"
+  - "PIALibrary/Mock (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `bbef813`)"
+  - "PIALibrary/UI (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `bbef813`)"
+  - "PIALibrary/VPN (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `bbef813`)"
   - "PIARegionsModule (from `git@codex.londontrustmedia.com:mobile/regions.git`, commit `ca41c33`)"
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
   - Popover
@@ -206,13 +206,13 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIAAccountModule:
-    :commit: 6116a38
+    :commit: defdab8
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
   PIACSIModule:
     :branch: master
     :git: "git@codex.londontrustmedia.com:mobile/csi.git"
   PIALibrary:
-    :commit: 0e09d37
+    :commit: bbef813
     :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
   PIARegionsModule:
     :commit: ca41c33
@@ -225,13 +225,13 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PIAAccountModule:
-    :commit: 6116a38
+    :commit: defdab8
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
   PIACSIModule:
     :commit: 8185dc9215cf942dc4691efb9ae1d62066f3a9e2
     :git: "git@codex.londontrustmedia.com:mobile/csi.git"
   PIALibrary:
-    :commit: 0e09d37
+    :commit: bbef813
     :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
   PIARegionsModule:
     :commit: ca41c33
@@ -266,7 +266,7 @@ SPEC CHECKSUMS:
   OpenSSL-Apple: c9c1b9c5b2b1fc4e1758fc5f0836b58ae7fd8183
   PIAAccountModule: 5d617eb89a69ac31cfabf11666c4ec04c6ae82ad
   PIACSIModule: 0f94fd5d8d21a25e12b4cc2a3b52578ece5e1a0e
-  PIALibrary: a22ef6cd449798a99409678b6698bbc87f8237b6
+  PIALibrary: 5032a58d17a6e240444ed8307a6a8fa2652e431e
   PIARegionsModule: 1d46bbea8a2cc1941413ddc7261f376ca2b9265f
   PIAWireguard: 9d71dabc9e483b149236eebbd0e6bb8fa5c8317f
   Popover: 10e1d9528f81d9504df984b7b3f491292bc1822d
@@ -281,6 +281,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: ec280e5e8f05199985ac1da9cff555b4aa8bf2d3
+PODFILE CHECKSUM: 4d46d1661d7ff8e9d52d602cab51637415d15bd2
 
 COCOAPODS: 1.10.1
