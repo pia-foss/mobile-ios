@@ -42,6 +42,8 @@ protocol WebServices: class {
     
     // MARK: DIP Token
     
+    func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?)
+    
     func activateDIPToken(tokens: [String], _ callback: LibraryCallback<[Server]>?) 
 
     /**

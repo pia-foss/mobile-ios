@@ -227,6 +227,13 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
         self.currentServers = self.currentServers.filter({$0.dipToken != dipToken})
     }
     
+    func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
+        guard Client.providers.accountProvider.isLoggedIn else {
+            preconditionFailure()
+        }
+        webServices.handleDIPTokenExpiration(dipToken: dipToken, nil)
+    }
+    
     func find(withIdentifier identifier: String) -> Server? {
         return currentServers.first { $0.identifier == identifier }
     }

@@ -245,10 +245,24 @@ class PIAWebServices: WebServices, ConfigurationAccess {
 
     }
     
+    func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
+
+        if let token = Client.providers.accountProvider.token {
+            self.accountAPI.renewDedicatedIP(authToken: token, ipToken: dipToken) { (error) in
+                if let error = error {
+                    callback?(ClientError.dipTokenRenewalError)
+                    return
+                }
+                callback?(nil)
+            }
+        }
+        
+    }
+    
     func activateDIPToken(tokens: [String], _ callback: LibraryCallback<[Server]>?) {
         
         if let token = Client.providers.accountProvider.token {
-            self.accountAPI.dedicatedIPs(token: token, ipTokens: tokens) { (dedicatedIps, error) in
+            self.accountAPI.dedicatedIPs(authToken: token, ipTokens: tokens) { (dedicatedIps, error) in
                 if let _ = error {
                     callback?([], ClientError.invalidParameter)
                     return
