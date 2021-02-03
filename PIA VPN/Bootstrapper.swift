@@ -118,9 +118,9 @@ class Bootstrapper {
         ]
         
         #if PIA_DEV
-        Client.configuration.featureFlags.append(contentsOf: ["dedicated-ip"])
+        Client.configuration.featureFlags.append(contentsOf: ["dedicated-ip", "disable-multi-dip-tokens", "check-dip-expiration-request"])
         #else
-        Client.providers.accountProvider.featureFlags(nil)
+        Client.configuration.featureFlags.append(contentsOf: ["dedicated-ip"])
         #endif
         MessagesManager.shared.refreshMessages()
 
