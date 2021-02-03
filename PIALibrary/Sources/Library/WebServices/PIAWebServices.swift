@@ -250,7 +250,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         if let token = Client.providers.accountProvider.token {
             self.accountAPI.renewDedicatedIP(authToken: token, ipToken: dipToken) { (error) in
                 if let error = error {
-                    callback?(ClientError.dipTokenRenewalError)
+                    callback?(error.code == 401 ? ClientError.unauthorized : ClientError.dipTokenRenewalError)
                     return
                 }
                 callback?(nil)
@@ -263,8 +263,8 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         
         if let token = Client.providers.accountProvider.token {
             self.accountAPI.dedicatedIPs(authToken: token, ipTokens: tokens) { (dedicatedIps, error) in
-                if let _ = error {
-                    callback?([], ClientError.invalidParameter)
+                if let error = error as? AccountRequestError {
+                    callback?([], error.code == 401 ? ClientError.unauthorized : ClientError.invalidParameter)
                     return
                 }
                 

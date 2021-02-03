@@ -46,5 +46,8 @@ public extension Notification.Name {
 
     /// User clicked the magic link and got a valid token
     static let PIAFinishLoginWithMagicLink = Notification.Name("PIALoginWithMagicLink")
+    
+    /// User is unathorized
+    static let PIAUnauthorized = Notification.Name("Unauthorized")
 
 }

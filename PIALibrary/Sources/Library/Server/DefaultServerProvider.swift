@@ -161,6 +161,13 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
             
             if let tokens = self.accessedDatabase.secure.dipTokens(), !tokens.isEmpty {
                 self.webServices.activateDIPToken(tokens: tokens) { (servers, error) in
+                    
+                    if error != nil, error as! ClientError == ClientError.unauthorized {
+                        Client.providers.accountProvider.logout(nil)
+                        Macros.postNotification(.PIAUnauthorized)
+                        return
+                    }
+
                     var allServers = bundle.servers
                     
                     if let servers = servers {
