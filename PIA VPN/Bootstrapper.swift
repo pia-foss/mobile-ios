@@ -117,17 +117,11 @@ class Bootstrapper {
             PIAWGTunnelProfile.vpnType: PIAWireguardConfiguration(customDNSServers: [])
         ]
         
-        #if PIA_DEV
-        AppPreferences.shared.showsDedicatedIPView = true
-        AppPreferences.shared.checksDipExpirationRequest = true
-        AppPreferences.shared.disablesMultiDipTokens = true
-        #else
         Client.providers.accountProvider.featureFlags({ _ in
             AppPreferences.shared.showsDedicatedIPView = Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.dedicatedIp)
             AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.checkDipExpirationRequest)
             AppPreferences.shared.disablesMultiDipTokens = Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.disableMultiDipTokens)
         })
-        #endif
         MessagesManager.shared.refreshMessages()
 
         //FORCE THE MIGRATION TO GEN4
