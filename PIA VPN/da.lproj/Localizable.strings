@@ -117,6 +117,7 @@
 "global.enable" = "Aktiver";
 "global.enabled" = "Aktiveret";
 "global.error" = "Fejl";
+"global.general.settings" = "Generelle indstillinger";
 "global.no" = "Nej";
 "global.ok" = "OK";
 "global.optional" = "Valgfri";
@@ -127,9 +128,11 @@
 "global.share" = "Del";
 "global.unreachable" = "Ingen internetforbindelse fundet. Bekræft venligst, at du har en internetforbindelse.";
 "global.update" = "Opdater";
+"global.vpn.settings" = "VPN-indstillinger";
 "global.yes" = "Ja";
 "hotspothelper.display.name" = "🔒 Aktiver VPN WiFi-beskyttelse i PIA Indstillinger, for at sikre denne forbindelse.";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi-beskyttelse aktiveret - Vi passer på dig.";
+"inapp.messages.settings.updated" = "Indstillinger er blevet opdateret";
 "inapp.messages.toggle.title" = "Stop kommunikationsmeddelelser i appen";
 "menu.accessibility.edit.tile" = "Rediger";
 "menu.accessibility.item" = "Menu";
@@ -254,10 +257,13 @@
 "settings.hotspothelper.wifi.networks" = "WiFi-netværk";
 "settings.hotspothelper.wifi.trust.title" = "VPN WiFi-beskyttelse";
 "settings.log.connected.error" = "Der kræves en VPN-forbindelse. Opret forbindelse til VPN igen, og prøv igen.";
+"settings.log.information" = "Gem fejlfindingslogfiler, som kan indsendes til teknisk support til fejlfinding af problemer.";
 "settings.nmt.killswitch.disabled" = "VPN kill-switch er for øjeblikket deaktiveret. For at sikre, at netværksstyringsværktøjet fungerer, og at du er i stand til at genoprette forbindelse, når du skifter netværk, skal du aktivere VPN kill-switch i dine indstillinger.";
 "settings.nmt.optout.disconnect.alerts" = "Frameld dig bekræftelsesalarm om afbrydelse";
 "settings.nmt.optout.disconnect.alerts.description" = "Deaktiverer advarselsalarmen, når du afbryder forbindelsen fra VPN'en.";
 "settings.nmt.wireguard.warning" = "WireGuard® har ikke brug for at genoprette forbindelsen, når du skifter mellem forskellige netværk. Det kan være nødvendigt at afbryde forbindelsen til VPN'en manuelt på netværk, der er tillid til.";
+"settings.ovpn.migration.footer" = "Vi opdaterer vores OpenVPN-implementering. Klik her for at få flere oplysninger";
+"settings.ovpn.migration.footer.link" = "her";
 "settings.preview.title" = "Forhåndsvisning";
 "settings.reset.defaults.confirm.button" = "Nulstil";
 "settings.reset.defaults.confirm.message" = "Det fører appen tilbage til standard. Du vil miste alle dine ændringer.";

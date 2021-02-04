@@ -117,6 +117,7 @@
 "global.enable" = "Inschakelen";
 "global.enabled" = "Ingeschakeld";
 "global.error" = "Fout";
+"global.general.settings" = "Algemene instellingen";
 "global.no" = "Nee";
 "global.ok" = "OK";
 "global.optional" = "Optioneel";
@@ -127,9 +128,11 @@
 "global.share" = "Delen";
 "global.unreachable" = "Geen internetverbinding gevonden. Controleer uw internetverbinding.";
 "global.update" = "Updaten";
+"global.vpn.settings" = "VPN-instellingen";
 "global.yes" = "Ja";
 "hotspothelper.display.name" = "🔒 Activeer VPN-wifibescherming via PIA-instellingen om deze verbinding te beveiligen.";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN-wifibescherming ingeschakeld - Wij zorgen voor uw veiligheid.";
+"inapp.messages.settings.updated" = "De instellingen zijn bijgewerkt";
 "inapp.messages.toggle.title" = "Stop communicatieberichten in de app";
 "menu.accessibility.edit.tile" = "Bewerken";
 "menu.accessibility.item" = "Menu";
@@ -254,10 +257,13 @@
 "settings.hotspothelper.wifi.networks" = "Wifi-netwerken";
 "settings.hotspothelper.wifi.trust.title" = "VPN-wifibescherming";
 "settings.log.connected.error" = "Een VPN-verbinding is vereist. Maak verbinding met de VPN en probeer het opnieuw.";
+"settings.log.information" = "Sla debuglogboeken op die kunnen worden verzonden naar de technische ondersteuning voor het oplossen van problemen.";
 "settings.nmt.killswitch.disabled" = "De VPN kill switch is op dit moment uitgeschakeld. Schakel de VPN kill switch in via uw instellingen om ervoor te zorgen dat de netwerkbeheertool werkt en dat u verbinding kunt maken als u van netwerk wisselt.";
 "settings.nmt.optout.disconnect.alerts" = "Bevestigingsmelding voor verbreken verbinding uitschakelen";
 "settings.nmt.optout.disconnect.alerts.description" = "Schakelt de melding bij het verbreken van de verbinding met de VPN uit.";
 "settings.nmt.wireguard.warning" = "WireGuard® hoeft niet opnieuw verbinding te maken als u tussen verschillende netwerken schakelt. Het kan noodzakelijk zijn om de verbinding met de VPN op vertrouwde netwerken te verbreken.";
+"settings.ovpn.migration.footer" = "We werken onze OpenVPN-implementatie bij. Klik hier voor meer informatie.";
+"settings.ovpn.migration.footer.link" = "hier";
 "settings.preview.title" = "Voorbeeld";
 "settings.reset.defaults.confirm.button" = "Resetten";
 "settings.reset.defaults.confirm.message" = "Hiermee zet u de standaardinstellingen van de app terug. Alle wijzigingen die u heeft gemaakt, gaan verloren.";

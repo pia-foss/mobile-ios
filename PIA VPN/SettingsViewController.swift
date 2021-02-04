@@ -1017,6 +1017,16 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             case .contentBlocker:
                 cell.textLabel?.text = L10n.Settings.ContentBlocker.footer
                 
+            case .encryption:
+                cell.textLabel?.attributedText = Theme.current.settingsFooterWithLinkText(
+                    withMessage: L10n.Settings.Ovpn.Migration.footer,
+                    link: L10n.Settings.Ovpn.Migration.Footer.link
+                )
+                cell.textLabel?.textAlignment = .left
+                
+                let tap = UITapGestureRecognizer(target: self, action: #selector(openLink))
+                cell.textLabel?.addGestureRecognizer(tap)
+
             default:
                 return nil
             }
@@ -1025,6 +1035,11 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         }
         return nil
 
+    }
+    
+    @objc private func openLink() {
+        guard UIApplication.shared.canOpenURL(AppConstants.Web.ovpnMigrationURL) else { return }
+        UIApplication.shared.open(AppConstants.Web.ovpnMigrationURL, options: [:], completionHandler: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

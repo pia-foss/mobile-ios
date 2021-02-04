@@ -117,6 +117,7 @@
 "global.enable" = "활성화";
 "global.enabled" = "활성화됨";
 "global.error" = "오류";
+"global.general.settings" = "일반 설정";
 "global.no" = "아니요";
 "global.ok" = "확인";
 "global.optional" = "선택";
@@ -127,9 +128,11 @@
 "global.share" = "공유";
 "global.unreachable" = "인터넷에 연결되지 않았습니다. 인터넷에 연결되어 있는지 확인하세요.";
 "global.update" = "업데이트";
+"global.vpn.settings" = "VPN 설정";
 "global.yes" = "예";
 "hotspothelper.display.name" = "🔒 PIA 설정에서 VPN WiFi 보호를 활성화해서 이 연결을 보호하세요.";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi 보호가 활성화되었습니다 - 현재 보호를 받고 계십니다.";
+"inapp.messages.settings.updated" = "설정이 업데이트되었습니다";
 "inapp.messages.toggle.title" = "앱 내 연락 메시지 중지";
 "menu.accessibility.edit.tile" = "편집";
 "menu.accessibility.item" = "메뉴";
@@ -254,10 +257,13 @@
 "settings.hotspothelper.wifi.networks" = "WiFi 네트워크";
 "settings.hotspothelper.wifi.trust.title" = "VPN WiFi 보호";
 "settings.log.connected.error" = "VPN 연결이 필요합니다. VPN에 연결한 후 다시 시도하세요.";
+"settings.log.information" = "문제 해결을 돕기 위하여 기술 지원팀에 제출할 디버그 로그를 저장합니다.";
 "settings.nmt.killswitch.disabled" = "VPN 킬 스위치가 현재 비활성화되었습니다. 네트워크 관리 도구가 작동하게 하고, 네트워크 전환 시 다시 연결할 수 있으려면 설정에서 VPN 킬 스위치를 활성화하세요.";
 "settings.nmt.optout.disconnect.alerts" = "연결 해제 확인 알림 거부";
 "settings.nmt.optout.disconnect.alerts.description" = "VPN 연결이 해제될 때 발신되는 경고 알림을 비활성화합니다.";
 "settings.nmt.wireguard.warning" = "다른 네트워크 사이를 전환할 경우 WireGuard®를 다시 연결할 필요가 없습니다. 신뢰할 수 있는 네트워크에서는 VPN의 연결을 직접 해제할 필요가 있을 수 있습니다.";
+"settings.ovpn.migration.footer" = "OpenVPN 구현 기능이 업데이트되었습니다. 자세한 정보를 보려면 이곳을 클릭하세요";
+"settings.ovpn.migration.footer.link" = "이곳";
 "settings.preview.title" = "미리 보기";
 "settings.reset.defaults.confirm.button" = "초기화";
 "settings.reset.defaults.confirm.message" = "앱이 기본 설정으로 돌아갑니다. 모든 변경 사항을 잃게 됩니다.";

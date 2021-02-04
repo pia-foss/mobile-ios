@@ -30,7 +30,6 @@ internal enum StoryboardSegue {
     case showQuickSettingsViewController = "ShowQuickSettingsViewController"
     case trustedNetworksSegueIdentifier = "TrustedNetworksSegueIdentifier"
     case unwindContentBlockerSegueIdentifier = "UnwindContentBlockerSegueIdentifier"
-    case unwindRegionsSegueIdentifier = "UnwindRegionsSegueIdentifier"
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

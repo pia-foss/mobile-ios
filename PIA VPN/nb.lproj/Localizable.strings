@@ -117,6 +117,7 @@
 "global.enable" = "Aktiver";
 "global.enabled" = "Aktivert";
 "global.error" = "Feil";
+"global.general.settings" = "Generelle innstillinger";
 "global.no" = "Nei";
 "global.ok" = "OK";
 "global.optional" = "Valgfritt";
@@ -127,9 +128,11 @@
 "global.share" = "Del";
 "global.unreachable" = "Ingen internettforbindelse. Kontroller at du er koblet til Internett.";
 "global.update" = "Oppdater";
+"global.vpn.settings" = "VPN-innstillinger";
 "global.yes" = "Ja";
 "hotspothelper.display.name" = "🔒 Aktiver VPN WiFi-beskyttelse i PIAs innstillinger for å sikre denne tilkoblingen.";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi-beskyttelse er aktivert – vi beskytter deg.";
+"inapp.messages.settings.updated" = "Innstillingene ble oppdatert";
 "inapp.messages.toggle.title" = "Stopp kommunikasjonsmeldinger i appen";
 "menu.accessibility.edit.tile" = "Rediger";
 "menu.accessibility.item" = "Meny";
@@ -254,10 +257,13 @@
 "settings.hotspothelper.wifi.networks" = "WiFi-nettverk";
 "settings.hotspothelper.wifi.trust.title" = "VPN WiFi-beskyttelse";
 "settings.log.connected.error" = "VPN-tilkobling kreves. Koble til VPN og prøv på nytt.";
+"settings.log.information" = "Lagre feillogger, som kan sendes til teknisk kundestøtte for å feilsøke problemer.";
 "settings.nmt.killswitch.disabled" = "VPN-avbruddsbryteren er for øyeblikket deaktivert. For å sikre at verktøyet for nettverksadministrering fungerer og at du kan koble til på nytt når du bytter nettverk, må du aktivere VPN-avbruddsbryteren i innstillingene.";
 "settings.nmt.optout.disconnect.alerts" = "Slå av bekreftelse på frakobling";
 "settings.nmt.optout.disconnect.alerts.description" = "Deaktiverer advarselvarselet når du kobler fra VPN-en.";
 "settings.nmt.wireguard.warning" = "WireGuard® må ikke koble til igjen når du bytter mellom ulike nettverk. Det kan være nødvendig å manuelt koble fra VPN-en på pålitelige nettverk.";
+"settings.ovpn.migration.footer" = "Vi oppdaterer OpenVPN-implementeringen. Du får mer informasjon ved å klikke her";
+"settings.ovpn.migration.footer.link" = "her";
 "settings.preview.title" = "Forhåndsvisning";
 "settings.reset.defaults.confirm.button" = "Tilbakestill";
 "settings.reset.defaults.confirm.message" = "Dette bringer appen tilbake til fabrikkinnstillingene. Du mister alle endringer.";
