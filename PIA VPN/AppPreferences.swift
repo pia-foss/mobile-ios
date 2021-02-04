@@ -625,10 +625,8 @@ class AppPreferences {
         favoriteServerIdentifiersGen4 = []
         useConnectSiriShortcuts = false
         useDisconnectSiriShortcuts = false
-        if #available(iOS 12.0, *) {
-            connectShortcut = nil
-            disconnectShortcut = nil
-        }
+        connectShortcut = nil
+        disconnectShortcut = nil
         let preferences = Client.preferences.editable().reset()
         preferences.commit()
         guard #available(iOS 13.0, *) else {
@@ -658,10 +656,8 @@ class AppPreferences {
         favoriteServerIdentifiersGen4 = []
         useConnectSiriShortcuts = false
         useDisconnectSiriShortcuts = false
-        if #available(iOS 12.0, *) {
-            connectShortcut = nil
-            disconnectShortcut = nil
-        }
+        connectShortcut = nil
+        disconnectShortcut = nil
         todayWidgetVpnStatus = L10n.Today.Widget.login
         todayWidgetButtonTitle = L10n.Today.Widget.login
         todayWidgetVpnProtocol = IKEv2Profile.vpnType

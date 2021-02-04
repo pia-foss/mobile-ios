@@ -146,9 +146,7 @@ class RegionsViewController: AutolayoutViewController {
     
     private func setupSearchBarController() {
         searchController.searchResultsUpdater = self
-        if #available(iOS 9.1, *) {
-            searchController.obscuresBackgroundDuringPresentation = false
-        }
+        searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = L10n.Region.Search.placeholder
         self.tableView.tableHeaderView = self.searchController.searchBar
        

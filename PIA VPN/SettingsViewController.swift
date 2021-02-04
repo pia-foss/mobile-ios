@@ -458,17 +458,15 @@ class SettingsViewController: AutolayoutViewController {
     }
 
     @objc private func refreshContentBlockerState(withHUD: Bool = false) {
-        if #available(iOS 10, *) {
-            if withHUD {
-                self.showLoadingAnimation()
-            }
-            SFContentBlockerManager.getStateOfContentBlocker(withIdentifier: AppConstants.Extensions.adBlockerBundleIdentifier) { (state, error) in
-                DispatchQueue.main.async {
-                    self.hideLoadingAnimation()
-                    
-                    self.isContentBlockerEnabled = state?.isEnabled ?? false
-                    self.redisplaySettings()
-                }
+        if withHUD {
+            self.showLoadingAnimation()
+        }
+        SFContentBlockerManager.getStateOfContentBlocker(withIdentifier: AppConstants.Extensions.adBlockerBundleIdentifier) { (state, error) in
+            DispatchQueue.main.async {
+                self.hideLoadingAnimation()
+                
+                self.isContentBlockerEnabled = state?.isEnabled ?? false
+                self.redisplaySettings()
             }
         }
     }
@@ -793,9 +791,7 @@ class SettingsViewController: AutolayoutViewController {
             rowsBySection[.applicationSettings]?.insert(.darkTheme, at: 0)
         }
         
-        if #available(iOS 12.0, *) {
-            rowsBySection[.applicationSettings]?.insert(contentsOf: [.connectShortcut, .disconnectShortcut], at: 0)
-        }
+        rowsBySection[.applicationSettings]?.insert(contentsOf: [.connectShortcut, .disconnectShortcut], at: 0)
 
         if (pendingPreferences.vpnType == PIATunnelProfile.vpnType) {
             rowsBySection[.smallPackets] = [.useSmallPackets]
@@ -1345,18 +1341,11 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             
             controller = OptionsViewController()
 
-            if #available(iOS 12.0, *) {
-                controller?.options = [
-                    IKEv2Profile.vpnType,
-                    PIAWGTunnelProfile.vpnType, //WG only available for iOS12+
-                    PIATunnelProfile.vpnType,
-                ]
-            } else {
-                controller?.options = [
-                    IKEv2Profile.vpnType,
-                    PIATunnelProfile.vpnType,
-                ]
-            }
+            controller?.options = [
+                IKEv2Profile.vpnType,
+                PIAWGTunnelProfile.vpnType,
+                PIATunnelProfile.vpnType,
+            ]
             controller?.selectedOption = pendingPreferences.vpnType
             
         case .vpnSocket:
@@ -1505,13 +1494,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             controller?.options = options.map { $0.rawValue }
             controller?.selectedOption = pendingHandshake.description
             
-        case .contentBlockerState:
-            if #available(iOS 10, *) {
-                
-            } else {
-                showContentBlockerTutorial()
-            }
-            
         case .contentBlockerRefreshRules:
             refreshContentBlockerRules()
 
@@ -1551,14 +1533,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             self.perform(segue: StoryboardSegue.Main.customServerSegueIdentifier)
 
         case .connectShortcut:
-            if #available(iOS 12.0, *) {
-                SiriShortcutsManager.shared.presentConnectShortcut(inViewController: self)
-            }
+            SiriShortcutsManager.shared.presentConnectShortcut(inViewController: self)
 
         case .disconnectShortcut:
-            if #available(iOS 12.0, *) {
-                SiriShortcutsManager.shared.presentDisconnectShortcut(inViewController: self)
-            }
+            SiriShortcutsManager.shared.presentDisconnectShortcut(inViewController: self)
 
         default:
             break
