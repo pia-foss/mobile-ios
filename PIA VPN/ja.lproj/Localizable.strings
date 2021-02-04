@@ -62,6 +62,7 @@
 "dedicated.ip.activate.button.title" = "アクティベート";
 "dedicated.ip.activation.description" = "下のフォームにトークンを貼り付けて、専用IPをアクティブにします。最近専用IPを購入した場合は、PIAウェブサイトにアクセスしてトークンを生成することができます。";
 "dedicated.ip.country.flag.accessibility" = "%@の国旗";
+"dedicated.ip.limit.title" = "選択した国の専用IPを使用して、あらゆるアセットへのリモート接続を保護しましょう。サブスクリプション中、このIPはあなただけのIPとなり、最も強力な暗号化でデータ転送を保護します。";
 "dedicated.ip.message.error.token" = "トークンの有効期限が切れています。ウェブサイトのアカウントページから新しいトークンを生成してください。";
 "dedicated.ip.message.expired.token" = "トークンの有効期限が切れています。ウェブサイトのアカウントページから新しいトークンを生成してください。";
 "dedicated.ip.message.incorrect.token" = "トークンが正しく入力されていることを確認してください";

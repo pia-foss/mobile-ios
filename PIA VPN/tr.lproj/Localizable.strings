@@ -62,6 +62,7 @@
 "dedicated.ip.activate.button.title" = "Etkinleştir";
 "dedicated.ip.activation.description" = "Belirtecinizi aşağı yapıştırarak Özel IP'nizi etkinleştirin. Kısa süre önce bir özel IP aldıysanız PIA web sitesine giderek belirteci üretebilirsiniz.";
 "dedicated.ip.country.flag.accessibility" = "%@ için ülke bayrağı";
+"dedicated.ip.limit.title" = "Seçeceğiniz bir ülkeden bir özel IP alarak, herhangi bir valığa olan uzak bağlantılarınızı güvence altına alın. Aboneliğiniz süresince bu IP yalnızca ama yalnızca size ait olacak ve veri aktarımlarınızı mümkün olan en güçlü şifrelemeyle koruyacak.";
 "dedicated.ip.message.error.token" = "Belirtecinizin süresi dolmuş. Lütfen web sitesindeki Hesap sayfanıza giderek yenisini üretin.";
 "dedicated.ip.message.expired.token" = "Belirtecinizin süresi dolmuş. Lütfen web sitesindeki Hesap sayfanıza giderek yenisini üretin.";
 "dedicated.ip.message.incorrect.token" = "Lütfen belirteci doğru şekilde girdiğinizden emin olun";

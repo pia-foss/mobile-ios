@@ -62,6 +62,7 @@
 "dedicated.ip.activate.button.title" = "Aktivieren";
 "dedicated.ip.activation.description" = "Aktivieren Sie Ihre Dedizierte IP, indem Sie Ihr Token in das unten stehende Formular einfügen. Wenn Sie kürzlich eine dedizierte IP erworben haben, können Sie das Token generieren, indem Sie die PIA-Website aufrufen.";
 "dedicated.ip.country.flag.accessibility" = "Länderflagge für %@";
+"dedicated.ip.limit.title" = "Sichern Sie Ihre Remote-Verbindungen zu jeder Ressource mit einer dedizierten IP aus einem Land Ihrer Wahl. Während Ihres Abonnements gehört diese IP Ihnen und nur Ihnen und schützt Ihre Datenübertragungen mit der stärksten Verschlüsselung, die es gibt.";
 "dedicated.ip.message.error.token" = "Ihr Token ist abgelaufen. Bitte generieren Sie ein neues auf Ihrer Konto-Seite auf der Webseite.";
 "dedicated.ip.message.expired.token" = "Ihr Token ist abgelaufen. Bitte generieren Sie von Ihrer Konto-Seite auf der Webseite ein neues.";
 "dedicated.ip.message.incorrect.token" = "Bitte vergewissern Sie sich, dass Sie das Token korrekt eingegeben haben";

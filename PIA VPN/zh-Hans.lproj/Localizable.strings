@@ -62,6 +62,7 @@
 "dedicated.ip.activate.button.title" = "激活";
 "dedicated.ip.activation.description" = "将您的令牌粘贴到以下表格中，激活您的专用 IP。如果您最近购买了专用 IP，则可以访问 PIA 网站来生成令牌。";
 "dedicated.ip.country.flag.accessibility" = "%@ 的国旗";
+"dedicated.ip.limit.title" = "使用来自您所选国家/地区的专用 IP 保护您与任何资产的远程连接。在您订阅期间，此 IP 仅属于您本人，并通过最强大的加密技术保护您的数据传输。";
 "dedicated.ip.message.error.token" = "您的令牌已过期。请从网站的“账户”页面中生成一个新的令牌。";
 "dedicated.ip.message.expired.token" = "您的令牌已过期。请从网站的“账户”页面中生成一个新的令牌。";
 "dedicated.ip.message.incorrect.token" = "请确保您输入的令牌正确无误";
