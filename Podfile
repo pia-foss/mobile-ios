@@ -28,6 +28,7 @@ $library_subspecs = [
 
 $regions_repo = 'mobile-common-regions'
 $accounts_repo = 'mobile-common-account'
+$csi_repo = 'mobile-common-csi'
 
 $regions_gitlab_repo = 'regions.git'
 $accounts_gitlab_repo = 'account.git'
@@ -68,16 +69,17 @@ end
 def shared_main_pods
     pod 'AlamofireImage'
     
-    #pod "PIAAccountModule", :git => "#{$git_root}/#{$accounts_repo}"
-    pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :commit => '6116a38'
-    #pod "PIARegionsModule", :git => "#{$git_root}/#{$regions_repo}"
-    pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :commit => '3b9395f'
-    pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :branch => 'master'
+    pod "PIAAccountModule", :git => "#{$git_root}/#{$accounts_repo}", :commit => 'f7c02a3'
+    #pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :commit => '6116a38'
+    pod "PIARegionsModule", :git => "#{$git_root}/#{$regions_repo}", :commit => '263afd8'
+    #pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :commit => '3b9395f'
+    #pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :branch => 'master'
+    pod "PIACSIModule", :git => "#{$git_root}/#{$csi_repo}"
 
     #library_by_path('/Users/jose/Projects/PIA')
-    #library_by_git('b73d9e5')
+    library_by_git('d69ba81')
     #library_by_gitlab_branch('develop')
-    library_by_gitlab_by_git('e1bf258')
+    #library_by_gitlab_by_git('e1bf258')
     #library_by_version('~> 1.1.3')
 end
 
