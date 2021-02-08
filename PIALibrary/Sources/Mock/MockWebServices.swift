@@ -72,6 +72,10 @@ class MockWebServices: WebServices {
         callback?([], nil)
     }
     
+    func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
+        callback?(nil)
+    }
+    
     func signup(with request: Signup, _ callback: ((Credentials?, Error?) -> Void)?) {
         let result = credentials?()
         let error: ClientError? = (result == nil) ? .unsupported : nil

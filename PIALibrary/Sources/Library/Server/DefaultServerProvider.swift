@@ -161,6 +161,13 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
             
             if let tokens = self.accessedDatabase.secure.dipTokens(), !tokens.isEmpty {
                 self.webServices.activateDIPToken(tokens: tokens) { (servers, error) in
+                    
+                    if error != nil, error as! ClientError == ClientError.unauthorized {
+                        Client.providers.accountProvider.logout(nil)
+                        Macros.postNotification(.PIAUnauthorized)
+                        return
+                    }
+
                     var allServers = bundle.servers
                     
                     if let servers = servers {
@@ -225,6 +232,13 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
         }
         accessedDatabase.secure.remove(dipToken)
         self.currentServers = self.currentServers.filter({$0.dipToken != dipToken})
+    }
+    
+    func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
+        guard Client.providers.accountProvider.isLoggedIn else {
+            preconditionFailure()
+        }
+        webServices.handleDIPTokenExpiration(dipToken: dipToken, nil)
     }
     
     func find(withIdentifier identifier: String) -> Server? {

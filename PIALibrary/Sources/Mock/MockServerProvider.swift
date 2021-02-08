@@ -158,4 +158,8 @@ public class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesCons
     public func activateDIPTokens(_ tokens: [String], _ callback: LibraryCallback<[Server]>?) {
         delegate.activateDIPTokens(tokens, callback)
     }
+    
+    public func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
+        delegate.handleDIPTokenExpiration(dipToken: dipToken, callback)
+    }
 }

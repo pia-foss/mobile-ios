@@ -49,6 +49,9 @@ public enum ClientError: String, Error {
     /// The specified VPN profile protocol is unavailable.
     case vpnProfileUnavailable
 
+    /// Error while checking the dip token renewal.
+    case dipTokenRenewalError
+
     #if os(iOS)
     /// No in-app history receipt is available.
     case noReceipt

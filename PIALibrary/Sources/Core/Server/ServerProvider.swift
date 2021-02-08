@@ -115,4 +115,14 @@ public protocol ServerProvider: class {
      */
     func removeDIPToken(_ dipToken: String)
     
+    
+    /**
+     Checks the expiration dip token for the active user
+
+     - Precondition: `isLoggedIn` is `true`.
+     - Parameter dipToken: The `String` DIP token to check.
+     - Parameter callback: Returns the response from the server
+     */
+    func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?)
+    
 }

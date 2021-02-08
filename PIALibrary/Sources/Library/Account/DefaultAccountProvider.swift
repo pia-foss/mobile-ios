@@ -323,6 +323,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
     
     func featureFlags(_ callback: SuccessLibraryCallback?) {
         webServices.featureFlags { (features, nil) in
+            Client.configuration.featureFlags.removeAll()
             if let features = features, !features.isEmpty {
                 Client.configuration.featureFlags.append(contentsOf: features)
             }
