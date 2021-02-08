@@ -95,6 +95,12 @@ class AppPreferences {
         static let showsDedicatedIPView = "showsDedicatedIPView"
         static let disablesMultiDipTokens = "disablesMultiDipTokens"
         static let checksDipExpirationRequest = "checksDipExpirationRequest"
+        
+        // Dev
+        static let appEnvironmentIsProduction = "AppEnvironmentIsProduction"
+        static let ffEnableDIP = "ffEnableDIP"
+        static let ffDIPExpirationRequest = "ffDIPExpirationRequest"
+        static let ffDisableMultiDIP = "ffDisableMultiDIP"
 
     }
 
@@ -461,6 +467,42 @@ class AppPreferences {
             defaults.set(newValue, forKey: Entries.checksDipExpirationRequest)
         }
     }
+    
+    var appEnvironmentIsProduction: Bool {
+        get {
+            return defaults.bool(forKey: Entries.appEnvironmentIsProduction)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.appEnvironmentIsProduction)
+        }
+    }
+    
+    var ffEnableDIP: Bool {
+        get {
+            return defaults.bool(forKey: Entries.ffEnableDIP)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.ffEnableDIP)
+        }
+    }
+
+    var ffDIPExpirationRequest: Bool {
+        get {
+            return defaults.bool(forKey: Entries.ffDIPExpirationRequest)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.ffDIPExpirationRequest)
+        }
+    }
+    
+    var ffDisableMultiDIP: Bool {
+        get {
+            return defaults.bool(forKey: Entries.ffDisableMultiDIP)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.ffDisableMultiDIP)
+        }
+    }
 
     private init() {
         guard let defaults = UserDefaults(suiteName: AppConstants.appGroup) else {
@@ -497,6 +539,7 @@ class AppPreferences {
             Entries.showsDedicatedIPView: true,
             Entries.disablesMultiDipTokens: true,
             Entries.checksDipExpirationRequest: true,
+            Entries.appEnvironmentIsProduction: Client.environment == .production ? true : false,
         ])
     }
     
@@ -684,6 +727,7 @@ class AppPreferences {
         showGeoServers = true
         stopInAppMessages = false
         dedicatedTokenIPReleation = [:]
+        appEnvironmentIsProduction = Client.environment == .production ? true : false
         MessagesManager.shared.reset()
     }
     
@@ -717,6 +761,7 @@ class AppPreferences {
         dismissedMessages = []
         dedicatedTokenIPReleation = [:]
         MessagesManager.shared.reset()
+        appEnvironmentIsProduction = Client.environment == .production ? true : false
     }
     
 //    + (void)eraseForTesting;
