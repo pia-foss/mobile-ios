@@ -62,6 +62,7 @@
 "dedicated.ip.activate.button.title" = "Activer";
 "dedicated.ip.activation.description" = "Activez votre adresse IP dédiée en collant votre jeton dans le formulaire ci-dessous. Si vous avez récemment acheté une adresse IP dédiée, vous pouvez générer le jeton en vous rendant sur le site Web de PIA.";
 "dedicated.ip.country.flag.accessibility" = "Drapeau de pays pour %@";
+"dedicated.ip.limit.title" = "Sécurisez vos connexions à distance à n'importe quelle ressource grâce à une adresse IP dédiée d'un pays de votre choix. Lors de votre abonnement, cette adresse IP sera la vôtre et la vôtre seule, protégeant ainsi vos transferts de données avec le cryptage le plus puissant du monde.";
 "dedicated.ip.message.error.token" = "Votre jeton est expiré. Veuillez en générer un nouveau à partir de la page de votre compte sur le site Web.";
 "dedicated.ip.message.expired.token" = "Votre jeton est expiré. Veuillez en générer un nouveau à partir de la page de votre compte sur le site Web.";
 "dedicated.ip.message.incorrect.token" = "Veuillez vous assurer que vous avez saisi le jeton correctement.";

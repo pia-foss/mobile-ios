@@ -30,8 +30,6 @@ struct AppConstants {
 
     static let appGroup = "group.com.privateinternetaccess"
     
-    static let appCenterAppId = "a2397c42-40ac-48e8-97e6-7498f0df0e1a"
-    
     struct Reviews {
         static var appReviewUrl = "https://itunes.apple.com/app/id\(appId)?action=write-review"
         static var feedbackUrl = "https://www.privateinternetaccess.com/helpdesk/new-ticket"
@@ -186,6 +184,8 @@ struct AppConstants {
     
     struct FeatureFlags {
         static let dedicatedIp = "dedicated-ip"
+        static let disableMultiDipTokens = "disable-multi-dip-tokens"
+        static let checkDipExpirationRequest = "check-dip-expiration-request"
     }
     
 }

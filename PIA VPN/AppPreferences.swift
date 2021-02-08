@@ -91,6 +91,11 @@ class AppPreferences {
         // In app messages
         static let stopInAppMessages = "stopInAppMessages"
 
+        // Features
+        static let showsDedicatedIPView = "showsDedicatedIPView"
+        static let disablesMultiDipTokens = "disablesMultiDipTokens"
+        static let checksDipExpirationRequest = "checksDipExpirationRequest"
+
     }
 
     static let shared = AppPreferences()
@@ -423,10 +428,37 @@ class AppPreferences {
 
     var stopInAppMessages: Bool {
         get {
-            return defaults.bool(forKey: Entries.stopInAppMessages) ?? false
+            return defaults.bool(forKey: Entries.stopInAppMessages)
         }
         set {
             defaults.set(newValue, forKey: Entries.stopInAppMessages)
+        }
+    }
+    
+    var showsDedicatedIPView: Bool {
+        get {
+            return defaults.bool(forKey: Entries.showsDedicatedIPView)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.showsDedicatedIPView)
+        }
+    }
+    
+    var disablesMultiDipTokens: Bool {
+        get {
+            return defaults.bool(forKey: Entries.disablesMultiDipTokens)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.disablesMultiDipTokens)
+        }
+    }
+    
+    var checksDipExpirationRequest: Bool {
+        get {
+            return defaults.bool(forKey: Entries.checksDipExpirationRequest)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.checksDipExpirationRequest)
         }
     }
 
@@ -461,7 +493,10 @@ class AppPreferences {
             Entries.failureConnections: 0,
             Entries.showGeoServers: true,
             Entries.dismissedMessages: [],
-            Entries.stopInAppMessages: false
+            Entries.stopInAppMessages: false,
+            Entries.showsDedicatedIPView: true,
+            Entries.disablesMultiDipTokens: true,
+            Entries.checksDipExpirationRequest: true,
         ])
     }
     

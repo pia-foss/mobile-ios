@@ -62,6 +62,7 @@
 "dedicated.ip.activate.button.title" = "Activeren";
 "dedicated.ip.activation.description" = "Activeer uw dedicated IP door uw code in het formulier hieronder te plakken. Als u onlangs een dedicated IP hebt gekocht, kunt u de code op de PIA-website genereren.";
 "dedicated.ip.country.flag.accessibility" = "Landsvlag voor %@";
+"dedicated.ip.limit.title" = "Beveilig uw verbindingen op afstand met een speciaal IP-adres uit een land naar keuze. Tijdens uw abonnement is dit IP-adres alleen van u en wordt de overdracht van uw gegevens beschermd met de sterkste encryptie die er is.";
 "dedicated.ip.message.error.token" = "Uw code is verlopen. Genereer een nieuwe via uw accountpagina op de website.";
 "dedicated.ip.message.expired.token" = "Uw code is verlopen. Genereer een nieuwe via uw accountpagina op de website.";
 "dedicated.ip.message.incorrect.token" = "Zorg ervoor dat u de code juist heeft ingevoerd";

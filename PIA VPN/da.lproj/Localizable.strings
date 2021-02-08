@@ -62,6 +62,7 @@
 "dedicated.ip.activate.button.title" = "Aktiver";
 "dedicated.ip.activation.description" = "Aktiver din dedikerede IP ved at indsætte dit token i nedenstående formular. Hvis du for nylig har købt en dedikeret IP, kan du generere tokenet ved at gå til PIA-websiden.";
 "dedicated.ip.country.flag.accessibility" = "Landeflag for %@";
+"dedicated.ip.limit.title" = "Nu kan du sikre dine fjernforbindelser til ethvert aktiv med en dedikeret IP fra et land efter eget valg. Under dit abonnement vil denne IP være din og din alene og beskytte dine dataoverførsler med den stærkeste kryptering på markedet.";
 "dedicated.ip.message.error.token" = "Dit token er udløbet. Generer et nyt fra din kontoside på websiden.";
 "dedicated.ip.message.expired.token" = "Dit token er udløbet. Generer et nyt fra din kontoside på websiden.";
 "dedicated.ip.message.incorrect.token" = "Sørg for, at du har indtastet tokenet korrekt";

@@ -26,9 +26,6 @@ import TunnelKit
 import SwiftyBeaver
 import PIAWireguard
 #if PIA_DEV
-import AppCenter
-import AppCenterAnalytics
-import AppCenterCrashes
 import Firebase
 import Fabric
 import Crashlytics
@@ -54,10 +51,6 @@ class Bootstrapper {
         let console = ConsoleDestination()
         #if PIA_DEV
         console.minLevel = .debug
-        
-        MSAppCenter.start(AppConstants.appCenterAppId,
-                        withServices: [MSAnalytics.self,
-                                       MSCrashes.self])
         
         if let path = Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist"),
             let plist = NSDictionary(contentsOf: path) as? [String: Any],
@@ -124,11 +117,11 @@ class Bootstrapper {
             PIAWGTunnelProfile.vpnType: PIAWireguardConfiguration(customDNSServers: [])
         ]
         
-        #if PIA_DEV
-        Client.configuration.featureFlags.append(contentsOf: ["dedicated-ip"])
-        #else
-        Client.providers.accountProvider.featureFlags(nil)
-        #endif
+        Client.providers.accountProvider.featureFlags({ _ in
+            AppPreferences.shared.showsDedicatedIPView = Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.dedicatedIp)
+            AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.checkDipExpirationRequest)
+            AppPreferences.shared.disablesMultiDipTokens = Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.disableMultiDipTokens)
+        })
         MessagesManager.shared.refreshMessages()
 
         //FORCE THE MIGRATION TO GEN4
@@ -212,6 +205,11 @@ class Bootstrapper {
         // show walkthrough on upgrade except for logged in users
         if Client.providers.accountProvider.isLoggedIn {
             AppPreferences.shared.wasLaunched = true
+        }
+        
+        // Check the DIP token for renewal
+        if AppPreferences.shared.checksDipExpirationRequest, let dipToken = Client.providers.serverProvider.dipTokens?.first {
+            Client.providers.serverProvider.handleDIPTokenExpiration(dipToken: dipToken, nil)
         }
 
     }

@@ -62,6 +62,7 @@
 "dedicated.ip.activate.button.title" = "활성화";
 "dedicated.ip.activation.description" = "아래 양식에 회원님의 토큰을 붙여넣어서 전용 IP를 활성화하세요. 최근에 전용 IP를 구매하신 경우 PIA 웹사이트로 이동하여 토큰을 생성하실 수 있습니다.";
 "dedicated.ip.country.flag.accessibility" = "%@의 국기";
+"dedicated.ip.limit.title" = "원하는 국가의 전용 IP를 사용하여 어떤 자산에 대한 원격 연결이든 안전하게 보호하세요. 구독 기간 중 이 IP는 오직 회원님만 사용하실 수 있습니다. 가장 강력한 암호화 기술로 데이터 전송을 보호하세요.";
 "dedicated.ip.message.error.token" = "회원님의 토큰은 만료되었습니다. 웹사이트의 계정 페이지에서 새로운 토큰을 생성하세요.";
 "dedicated.ip.message.expired.token" = "회원님의 토큰은 만료되었습니다. 웹사이트의 계정 페이지에서 새로운 토큰을 생성하세요.";
 "dedicated.ip.message.incorrect.token" = "올바른 토큰을 입력했는지 확인하세요";

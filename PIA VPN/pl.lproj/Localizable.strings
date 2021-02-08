@@ -62,6 +62,7 @@
 "dedicated.ip.activate.button.title" = "Aktywuj";
 "dedicated.ip.activation.description" = "Aktywuj dedykowany adres IP, wklejając swój token w poniższym formularzu. Jeśli niedawno nabyłeś(-aś) dedykowany adres IP, możesz wygenerować token przechodząc na stronę PIA.";
 "dedicated.ip.country.flag.accessibility" = "Flaga państwowa %@";
+"dedicated.ip.limit.title" = "Zabezpiecz swoje zdalne połączenia z dowolnym zasobem, korzystając z dedykowanego adresu IP z wybranego kraju. Przy ważnej subskrypcji ten adres IP będzie wyłącznie Twój i będzie chronić transfer danych za pomocą najsilniejszego szyfrowania dostępnego n rynku.";
 "dedicated.ip.message.error.token" = "Twój token stracił ważność. Wygeneruj nowy na stronie swojego konta w serwisie.";
 "dedicated.ip.message.expired.token" = "Twój token stracił ważność. Wygeneruj nowy na stronie swojego konta w serwisie.";
 "dedicated.ip.message.incorrect.token" = "Sprawdź, czy wprowadzony token jest prawidłowy.";

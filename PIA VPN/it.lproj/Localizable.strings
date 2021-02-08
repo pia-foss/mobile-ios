@@ -62,6 +62,7 @@
 "dedicated.ip.activate.button.title" = "Attiva";
 "dedicated.ip.activation.description" = "Attiva il tuo IP dedicato incollando il token nel modulo qui sotto. Se hai recentemente acquistato un IP dedicato, puoi generare il token accedendo al sito web di PIA.";
 "dedicated.ip.country.flag.accessibility" = "Bandiera per %@";
+"dedicated.ip.limit.title" = "Proteggi le tue connessioni remote a qualsiasi asset con un IP dedicato da un paese a tuo piacimento. Durante l'abbonamento, questo IP sarà solo e soltanto tuo, e proteggerà i trasferimenti dei dati con la più forte crittografia esistente.";
 "dedicated.ip.message.error.token" = "Token scaduto. Generane uno nuovo dalla pagina del tuo account sul sito web.";
 "dedicated.ip.message.expired.token" = "Token scaduto. Generane uno nuovo dalla pagina del tuo account sul sito web.";
 "dedicated.ip.message.incorrect.token" = "Assicurati di aver inserito correttamente il token";

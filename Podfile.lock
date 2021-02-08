@@ -2,14 +2,6 @@ PODS:
   - Alamofire (4.9.1)
   - AlamofireImage (3.6.0):
     - Alamofire (~> 4.9)
-  - AppCenter (3.3.1):
-    - AppCenter/Analytics (= 3.3.1)
-    - AppCenter/Crashes (= 3.3.1)
-  - AppCenter/Analytics (3.3.1):
-    - AppCenter/Core
-  - AppCenter/Core (3.3.1)
-  - AppCenter/Crashes (3.3.1):
-    - AppCenter/Core
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
   - DynamicBlurView (4.1.0)
@@ -44,28 +36,28 @@ PODS:
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (~> 0.3)
-  - GoogleUtilities/AppDelegateSwizzler (6.6.0):
+  - GoogleUtilities/AppDelegateSwizzler (6.7.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (6.6.0):
+  - GoogleUtilities/Environment (6.7.2):
     - PromisesObjC (~> 1.2)
-  - GoogleUtilities/Logger (6.6.0):
+  - GoogleUtilities/Logger (6.7.2):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (6.6.0):
+  - GoogleUtilities/MethodSwizzler (6.7.2):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (6.6.0):
+  - GoogleUtilities/Network (6.7.2):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (6.6.0)"
-  - GoogleUtilities/Reachability (6.6.0):
+  - "GoogleUtilities/NSData+zlib (6.7.2)"
+  - GoogleUtilities/Reachability (6.7.2):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (6.6.0):
+  - GoogleUtilities/UserDefaults (6.7.2):
     - GoogleUtilities/Logger
   - GradientProgressBar (2.0.3):
     - LightweightObservable (~> 2.0)
-  - LightweightObservable (2.1.1)
+  - LightweightObservable (2.1.2)
   - lottie-ios (3.1.9)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
@@ -83,9 +75,9 @@ PODS:
     - PIACSIModule/gradle (= 1.0.0)
   - PIACSIModule/csi (1.0.0)
   - PIACSIModule/gradle (1.0.0)
-  - PIALibrary/Core (2.10.0):
+  - PIALibrary/Core (2.10.1):
     - PIAAccountModule
-  - PIALibrary/Library (2.10.0):
+  - PIALibrary/Library (2.10.1):
     - Alamofire (~> 4)
     - Gloss (~> 2)
     - PIAAccountModule
@@ -96,26 +88,26 @@ PODS:
     - PopupDialog
     - ReachabilitySwift
     - SwiftyBeaver
-  - PIALibrary/Mock (2.10.0):
+  - PIALibrary/Mock (2.10.1):
     - PIALibrary/Library
-  - PIALibrary/UI (2.10.0):
+  - PIALibrary/UI (2.10.1):
     - FXPageControl
     - lottie-ios
     - PIALibrary/Library
     - SwiftEntryKit (= 0.7.2)
     - SwiftyBeaver
     - TPKeyboardAvoiding
-  - PIALibrary/Util (2.10.0):
+  - PIALibrary/Util (2.10.1):
     - PIALibrary/Core
-  - PIALibrary/VPN (2.10.0):
+  - PIALibrary/VPN (2.10.1):
     - PIALibrary/Library
     - PIAWireguard
     - TunnelKit
-  - PIARegionsModule (1.1.0):
-    - PIARegionsModule/gradle (= 1.1.0)
-    - PIARegionsModule/regions (= 1.1.0)
-  - PIARegionsModule/gradle (1.1.0)
-  - PIARegionsModule/regions (1.1.0)
+  - PIARegionsModule (1.2.0):
+    - PIARegionsModule/gradle (= 1.2.0)
+    - PIARegionsModule/regions (= 1.2.0)
+  - PIARegionsModule/gradle (1.2.0)
+  - PIARegionsModule/regions (1.2.0)
   - PIAWireguard (1.0.1):
     - PIAWireguard/AppExtension (= 1.0.1)
     - PIAWireguard/Core (= 1.0.1)
@@ -127,14 +119,14 @@ PODS:
   - Popover (1.3.0)
   - PopupDialog (1.1.1):
     - DynamicBlurView (~> 4.0)
-  - PromisesObjC (1.2.9)
+  - PromisesObjC (1.2.12)
   - QuickLayout (2.0.2)
   - ReachabilitySwift (4.3.1)
   - SideMenu (6.1.3)
   - SwiftEntryKit (0.7.2):
     - QuickLayout (= 2.0.2)
   - SwiftyBeaver (1.9.3)
-  - TPKeyboardAvoiding (1.3.3)
+  - TPKeyboardAvoiding (1.3.5)
   - TunnelKit (2.2.2):
     - TunnelKit/Protocols/OpenVPN (= 2.2.2)
   - TunnelKit/AppExtension (2.2.2):
@@ -150,19 +142,18 @@ PODS:
 
 DEPENDENCIES:
   - AlamofireImage
-  - AppCenter
   - Crashlytics
   - DZNEmptyDataSet
   - Fabric
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
-  - PIAAccountModule (from `https://github.com/pia-foss/mobile-common-account`, commit `f7c02a3`)
-  - PIACSIModule (from `https://github.com/pia-foss/mobile-common-csi`)
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `d69ba81`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `d69ba81`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `d69ba81`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `d69ba81`)
-  - PIARegionsModule (from `https://github.com/pia-foss/mobile-common-regions`, commit `263afd8`)
+  - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, commit `defdab8`)"
+  - "PIACSIModule (from `git@codex.londontrustmedia.com:mobile/csi.git`, branch `master`)"
+  - "PIALibrary/Library (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `4c8452a`)"
+  - "PIALibrary/Mock (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `4c8452a`)"
+  - "PIALibrary/UI (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `4c8452a`)"
+  - "PIALibrary/VPN (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `4c8452a`)"
+  - "PIARegionsModule (from `git@codex.londontrustmedia.com:mobile/regions.git`, commit `ca41c33`)"
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
   - Popover
   - PopupDialog
@@ -175,7 +166,6 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - AlamofireImage
-    - AppCenter
     - Crashlytics
     - DynamicBlurView
     - DZNEmptyDataSet
@@ -206,16 +196,17 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIAAccountModule:
-    :commit: f7c02a3
-    :git: https://github.com/pia-foss/mobile-common-account
+    :commit: defdab8
+    :git: "git@codex.londontrustmedia.com:mobile/account.git"
   PIACSIModule:
-    :git: https://github.com/pia-foss/mobile-common-csi
+    :branch: master
+    :git: "git@codex.londontrustmedia.com:mobile/csi.git"
   PIALibrary:
-    :commit: d69ba81
-    :git: https://github.com/pia-foss/client-library-apple
+    :commit: 4c8452a
+    :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
   PIARegionsModule:
-    :commit: 263afd8
-    :git: https://github.com/pia-foss/mobile-common-regions
+    :commit: ca41c33
+    :git: "git@codex.londontrustmedia.com:mobile/regions.git"
   PIAWireguard:
     :git: https://github.com/pia-foss/ios-wireguard
   TunnelKit:
@@ -224,17 +215,17 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PIAAccountModule:
-    :commit: f7c02a3
-    :git: https://github.com/pia-foss/mobile-common-account
+    :commit: defdab8
+    :git: "git@codex.londontrustmedia.com:mobile/account.git"
   PIACSIModule:
-    :commit: 56c20c65941ca8ec6c2b466333e60c6a60dd9a45
-    :git: https://github.com/pia-foss/mobile-common-csi
+    :commit: 8185dc9215cf942dc4691efb9ae1d62066f3a9e2
+    :git: "git@codex.londontrustmedia.com:mobile/csi.git"
   PIALibrary:
-    :commit: d69ba81
-    :git: https://github.com/pia-foss/client-library-apple
+    :commit: 4c8452a
+    :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
   PIARegionsModule:
-    :commit: 263afd8
-    :git: https://github.com/pia-foss/mobile-common-regions
+    :commit: ca41c33
+    :git: "git@codex.londontrustmedia.com:mobile/regions.git"
   PIAWireguard:
     :commit: 10ddb6b3e79b695358d4fa58a85d663039f7509e
     :git: https://github.com/pia-foss/ios-wireguard
@@ -245,7 +236,6 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
-  AppCenter: 76ecf7e959a68e36b0fd314e8dc5897660214423
   Crashlytics: 9220f5bc89e7a618df411b4f639389dbfb0e03d2
   DynamicBlurView: 58e18fae80bb614e34681a4486870e7d257b62e8
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
@@ -257,29 +247,29 @@ SPEC CHECKSUMS:
   FXPageControl: 97620412515365d10a3282ec0660f49f6401a8f0
   Gloss: 9df15229b2f6484c14752a738474fd2528b4c5cd
   GoogleAppMeasurement: 183bd916af7f80deb67c01888368f1108d641832
-  GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
+  GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   GradientProgressBar: f11fb57cffc615a4794da558ce283171a992130a
-  LightweightObservable: 52abe2a01c8273921b1f66cd66526eb3328ca35a
+  LightweightObservable: c5ac85423a5edbed9a920b4d5c7b8f94ab3688c4
   lottie-ios: 3a3758ef5a008e762faec9c9d50a39842f26d124
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OpenSSL-Apple: c9c1b9c5b2b1fc4e1758fc5f0836b58ae7fd8183
   PIAAccountModule: 5d617eb89a69ac31cfabf11666c4ec04c6ae82ad
   PIACSIModule: 0f94fd5d8d21a25e12b4cc2a3b52578ece5e1a0e
-  PIALibrary: a22ef6cd449798a99409678b6698bbc87f8237b6
-  PIARegionsModule: e05133052c0fa0da47b46501938ed1e858b8cba4
+  PIALibrary: 5032a58d17a6e240444ed8307a6a8fa2652e431e
+  PIARegionsModule: 1d46bbea8a2cc1941413ddc7261f376ca2b9265f
   PIAWireguard: 9d71dabc9e483b149236eebbd0e6bb8fa5c8317f
   Popover: 10e1d9528f81d9504df984b7b3f491292bc1822d
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
-  PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
+  PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
   SideMenu: 46c1b79dab51fc2f1c1ff3e1212ca47cc231b0bf
   SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145
   SwiftyBeaver: 2e8acd6fc90c6d0a27055867a290794926d57c02
-  TPKeyboardAvoiding: 6dd3fe3268b8f2627beb7ff3d82a3cacbdf66a36
+  TPKeyboardAvoiding: d55b3ea7b362540af8fcf36aa3ed2e87bf210cc6
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 7f21a652164a94a54d096003d6a400b792c190c3
+PODFILE CHECKSUM: 9efd871d321ae71d8258c7bd9b6ab61cbdf72b7a
 
 COCOAPODS: 1.10.1

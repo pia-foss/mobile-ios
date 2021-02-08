@@ -78,6 +78,13 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
                 NotificationCenter.default.post(name: .DedicatedIpHideAnimation, object: nil)
                 self?.addTokenTextfield.text = ""
                 guard let dipServer = server else {
+                   
+                    if error != nil, error as! ClientError == ClientError.unauthorized {
+                        Client.providers.accountProvider.logout(nil)
+                        Macros.postNotification(.PIAUnauthorized)
+                        return
+                    }
+
                     Macros.displayStickyNote(withMessage: L10n.Dedicated.Ip.Message.Invalid.token,
                                              andImage: Asset.iconWarning.image)
                     return
