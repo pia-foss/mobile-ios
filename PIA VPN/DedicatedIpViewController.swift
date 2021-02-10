@@ -81,7 +81,8 @@ class DedicatedIpViewController: AutolayoutViewController {
     }
     
     @objc private func reloadTableView() {
-        data = Client.providers.serverProvider.currentServers.filter({ $0.dipToken != nil })
+        let dipTokens = Client.providers.serverProvider.dipTokens ?? []
+        data = Client.providers.serverProvider.currentServers.filter({ $0.dipToken != nil && dipTokens.contains($0.dipToken!) })
         tableView.reloadData()
     }
     

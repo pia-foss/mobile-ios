@@ -173,7 +173,8 @@ class RegionsViewController: AutolayoutViewController {
                     tableView.selectRow(at: IndexPath(row: row, section: Section.regions.rawValue), animated: false, scrollPosition: UITableView.ScrollPosition.middle)
                 }
             } else {
-                let selectedRow = servers.filter({$0.dipToken != nil}).firstIndex { (server) -> Bool in
+                let dipTokens = Client.providers.serverProvider.dipTokens ?? []
+                let selectedRow = servers.filter({$0.dipToken != nil && dipTokens.contains($0.dipToken!)}).firstIndex { (server) -> Bool in
                     return (server.identifier == selectedServer.identifier)
                 }
                 if let row = selectedRow {
@@ -309,10 +310,11 @@ extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
             return isFiltering() ? 0 : 1
         } else if section == 1 {
             //dip
+            let dipTokens = Client.providers.serverProvider.dipTokens ?? []
             if isFiltering() {
-                return filteredServers.filter({$0.dipToken != nil}).count
+                return filteredServers.filter({$0.dipToken != nil && dipTokens.contains($0.dipToken!) }).count
             }
-            return servers.filter({$0.dipToken != nil}).count
+            return servers.filter({$0.dipToken != nil && dipTokens.contains($0.dipToken!) }).count
         } else {
             if isFiltering() {
                 return filteredServers.filter({$0.dipToken == nil}).count
@@ -338,11 +340,13 @@ extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.selectionStyle = .none
             cell.separatorInset = .zero
             
+            let dipTokens = Client.providers.serverProvider.dipTokens ?? []
+
             var dipServers = [Server]()
             if isFiltering() {
-                dipServers = filteredServers.filter({$0.dipToken != nil})
+                dipServers = filteredServers.filter({$0.dipToken != nil && dipTokens.contains($0.dipToken!) })
             } else {
-                dipServers = servers.filter({$0.dipToken != nil})
+                dipServers = servers.filter({$0.dipToken != nil && dipTokens.contains($0.dipToken!) })
             }
             
             if dipServers.count > 0 {

@@ -149,10 +149,10 @@ DEPENDENCIES:
   - GradientProgressBar (~> 2.0)
   - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, commit `defdab8`)"
   - "PIACSIModule (from `git@codex.londontrustmedia.com:mobile/csi.git`, branch `master`)"
-  - "PIALibrary/Library (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `4c8452a`)"
-  - "PIALibrary/Mock (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `4c8452a`)"
-  - "PIALibrary/UI (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `4c8452a`)"
-  - "PIALibrary/VPN (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `4c8452a`)"
+  - PIALibrary/Library (from `/Users/jose/Projects/PIA/client-library-apple`)
+  - PIALibrary/Mock (from `/Users/jose/Projects/PIA/client-library-apple`)
+  - PIALibrary/UI (from `/Users/jose/Projects/PIA/client-library-apple`)
+  - PIALibrary/VPN (from `/Users/jose/Projects/PIA/client-library-apple`)
   - "PIARegionsModule (from `git@codex.londontrustmedia.com:mobile/regions.git`, commit `ca41c33`)"
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
   - Popover
@@ -202,8 +202,7 @@ EXTERNAL SOURCES:
     :branch: master
     :git: "git@codex.londontrustmedia.com:mobile/csi.git"
   PIALibrary:
-    :commit: 4c8452a
-    :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
+    :path: "/Users/jose/Projects/PIA/client-library-apple"
   PIARegionsModule:
     :commit: ca41c33
     :git: "git@codex.londontrustmedia.com:mobile/regions.git"
@@ -220,9 +219,6 @@ CHECKOUT OPTIONS:
   PIACSIModule:
     :commit: 8185dc9215cf942dc4691efb9ae1d62066f3a9e2
     :git: "git@codex.londontrustmedia.com:mobile/csi.git"
-  PIALibrary:
-    :commit: 4c8452a
-    :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
   PIARegionsModule:
     :commit: ca41c33
     :git: "git@codex.londontrustmedia.com:mobile/regions.git"
@@ -270,6 +266,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 9efd871d321ae71d8258c7bd9b6ab61cbdf72b7a
+PODFILE CHECKSUM: 9aa0829a6a5da18c24ec192815af54f4fea33397
 
 COCOAPODS: 1.10.1
