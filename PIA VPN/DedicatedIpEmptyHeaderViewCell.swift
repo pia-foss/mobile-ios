@@ -102,7 +102,7 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
                         //no data
                         relation[token] = address.ip
                     } else {
-                        if relation[token] != address.ip {
+                        if relation[token] != nil && relation[token] != address.ip {
                             //changes
                             relation[token] = address.ip
                             let message = InAppMessage(withMessage: ["en": L10n.Dedicated.Ip.Message.Ip.updated], id: token, link: ["en":""], type: .none, level: .system, actions: nil, view: nil, uri: nil)
