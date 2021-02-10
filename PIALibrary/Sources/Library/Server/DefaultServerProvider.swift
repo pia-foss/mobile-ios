@@ -231,7 +231,7 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
             preconditionFailure()
         }
         accessedDatabase.secure.remove(dipToken)
-        self.currentServers = self.currentServers.filter({$0.dipToken != dipToken})
+        //self.currentServers = self.currentServers.filter({$0.dipToken != dipToken})
     }
     
     func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
