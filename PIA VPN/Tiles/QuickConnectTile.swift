@@ -76,7 +76,23 @@ class QuickConnectTile: UIView, Tileable {
     
     @objc private func updateQuickConnectList() {
         
+        //Check changes on DIPs first
         historicalServers = Client.providers.serverProvider.historicalServers.filter({
+            if let dipToken = $0.dipToken {
+                if let ip = AppPreferences.shared.dedicatedTokenIPReleation[dipToken] {
+                    if ip == $0.bestAddress()?.ip {
+                        return true
+                    } else {
+                        return false
+                    }
+                } else {
+                    return true
+                }
+            }
+            return true
+        })
+        
+        historicalServers = historicalServers.filter({
             if let tokens = Client.providers.serverProvider.dipTokens {
                 if let dipToken = $0.dipToken {
                     return tokens.contains(dipToken)

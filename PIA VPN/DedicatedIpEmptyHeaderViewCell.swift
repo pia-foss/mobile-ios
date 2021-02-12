@@ -92,29 +92,8 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
                 switch dipServer?.dipStatus {
                 case .active:
                     Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image, message: L10n.Dedicated.Ip.Message.Valid.token)
-                    
-                    guard let token = dipServer?.dipToken, let address = dipServer?.bestAddress() else {
-                        return
-                    }
-                        
-                    var relation = AppPreferences.shared.dedicatedTokenIPReleation
-                    if relation.isEmpty {
-                        //no data
-                        relation[token] = address.ip
-                    } else {
-                        if relation[token] != nil && relation[token] != address.ip {
-                            //changes
-                            relation[token] = address.ip
-                            let message = InAppMessage(withMessage: ["en": L10n.Dedicated.Ip.Message.Ip.updated], id: token, link: ["en":""], type: .none, level: .system, actions: nil, view: nil, uri: nil)
-                            MessagesManager.shared.postSystemMessage(message: message)
-                        }
-                    }
-                    AppPreferences.shared.dedicatedTokenIPReleation[token] = address.ip
-
                 case .expired:
                     Macros.displayWarningImageNote(withImage: Asset.iconWarning.image, message: L10n.Dedicated.Ip.Message.Expired.token)
-                case .error:
-                    Macros.displayWarningImageNote(withImage: Asset.iconWarning.image, message: L10n.Dedicated.Ip.Message.Error.token)
                 default:
                     Macros.displayStickyNote(withMessage: L10n.Dedicated.Ip.Message.Invalid.token,
                                              andImage: Asset.iconWarning.image)

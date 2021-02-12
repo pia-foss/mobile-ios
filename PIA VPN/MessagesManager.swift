@@ -32,6 +32,7 @@ public class MessagesManager: NSObject {
     public override init() {
         super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(presentExpiringDIPRegionSystemMessage(notification:)), name: .PIADIPRegionExpiring, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(presentIPUpdatedSystemMessage(notification:)), name: .PIADIPCheckIP, object: nil)
     }
     
     deinit {
@@ -176,6 +177,28 @@ extension MessagesManager {
         if let userInfo = notification.userInfo, let token = userInfo[NotificationKey.token] as? String {
             let message = InAppMessage(withMessage: ["en": L10n.Dedicated.Ip.Message.Token.willexpire], id: token, link: ["en": L10n.Dedicated.Ip.Message.Token.Willexpire.link], type: .link, level: .system, actions: nil, view: nil, uri: AppConstants.Web.homeURL.absoluteString)
             MessagesManager.shared.postSystemMessage(message: message)
+        }
+
+    }
+    
+    @objc private func presentIPUpdatedSystemMessage(notification: Notification) {
+
+        if let userInfo = notification.userInfo, let token = userInfo[NotificationKey.token] as? String, let ip = userInfo[NotificationKey.ip] as? String {
+            
+            var relation = AppPreferences.shared.dedicatedTokenIPReleation
+            if relation.isEmpty {
+                //no data
+                relation[token] = ip
+            } else {
+                if relation[token] != nil && relation[token] != ip {
+                    //changes
+                    relation[token] = ip
+                    let message = InAppMessage(withMessage: ["en": L10n.Dedicated.Ip.Message.Ip.updated], id: token, link: ["en":""], type: .none, level: .system, actions: nil, view: nil, uri: nil)
+                    MessagesManager.shared.postSystemMessage(message: message)
+                }
+            }
+            AppPreferences.shared.dedicatedTokenIPReleation[token] = ip
+            
         }
 
     }
