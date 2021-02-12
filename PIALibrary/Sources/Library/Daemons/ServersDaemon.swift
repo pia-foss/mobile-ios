@@ -29,7 +29,9 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
     static let shared = ServersDaemon()
     
     private(set) var hasEnabledUpdates: Bool
-    
+
+    private(set) var updating: Bool
+
     private var lastUpdateDate: Date?
     
     private var lastPingDate: Date?
@@ -38,6 +40,7 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
 
     private init() {
         hasEnabledUpdates = false
+        updating = false
     }
     
     func start() {
@@ -89,6 +92,11 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
     }
 
     @objc private func checkOutdatedServers() {
+        
+        if updating {
+            return
+        }
+                
         let pollInterval = accessedDatabase.transient.serversConfiguration.pollInterval
         log.debug("Poll interval is \(pollInterval)")
             
@@ -112,7 +120,9 @@ class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAcces
             return
         }
         
+        updating = true
         accessedProviders.serverProvider.download { (servers, error) in
+            self.updating = false
             self.lastUpdateDate = Date()
             log.debug("Servers updated on \(self.lastUpdateDate!), will repeat in \(pollInterval) milliseconds")
             self.scheduleServersUpdate(withDelay: pollInterval)

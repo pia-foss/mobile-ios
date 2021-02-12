@@ -286,13 +286,17 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                             return
                         }
                         
+                        let dipToken = dipServer.dipToken
+                        
                         let expiringDate = Date(timeIntervalSince1970: TimeInterval(expirationTime))
                         let server = Server.ServerAddressIP(ip: ip, cn: cn)
                         
                         if let nextDays = Calendar.current.date(byAdding: .day, value: 5, to: Date()), nextDays >= expiringDate  {
                             //Expiring in 5 days or less
-                            Macros.postNotification(.PIADIPRegionExpiring, [.token : token])
+                            Macros.postNotification(.PIADIPRegionExpiring, [.token : dipToken])
                         }
+                        
+                        Macros.postNotification(.PIADIPCheckIP, [.token : dipToken, .ip : ip])
 
                         let dipUsername = "dedicated_ip_"+dipServer.dipToken+"_"+String.random(length: 8)
 

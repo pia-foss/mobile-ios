@@ -27,7 +27,8 @@ public struct NotificationKey: Hashable {
     static let products = NotificationKey("ProductsKey")
     
     public static let token = NotificationKey("TokenKey")
-    
+    public static let ip = NotificationKey("IPKey")
+
     /// An `UserAccount` object.
     public static let user = NotificationKey("UserKey")
     
