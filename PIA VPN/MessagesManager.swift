@@ -175,7 +175,7 @@ extension MessagesManager {
     @objc private func presentExpiringDIPRegionSystemMessage(notification: Notification) {
 
         if let userInfo = notification.userInfo, let token = userInfo[NotificationKey.token] as? String {
-            let message = InAppMessage(withMessage: ["en": L10n.Dedicated.Ip.Message.Token.willexpire], id: token, link: ["en": L10n.Dedicated.Ip.Message.Token.Willexpire.link], type: .link, level: .system, actions: nil, view: nil, uri: AppConstants.Web.homeURL.absoluteString)
+            let message = InAppMessage(withMessage: ["en-US": L10n.Dedicated.Ip.Message.Token.willexpire], id: token, link: ["en-US": L10n.Dedicated.Ip.Message.Token.Willexpire.link], type: .link, level: .system, actions: nil, view: nil, uri: AppConstants.Web.homeURL.absoluteString)
             MessagesManager.shared.postSystemMessage(message: message)
         }
 
@@ -193,7 +193,7 @@ extension MessagesManager {
                 if relation[token] != nil && relation[token] != ip {
                     //changes
                     relation[token] = ip
-                    let message = InAppMessage(withMessage: ["en": L10n.Dedicated.Ip.Message.Ip.updated], id: token, link: ["en":""], type: .none, level: .system, actions: nil, view: nil, uri: nil)
+                    let message = InAppMessage(withMessage: ["en-US": L10n.Dedicated.Ip.Message.Ip.updated], id: token, link: ["en-US":""], type: .none, level: .system, actions: nil, view: nil, uri: nil)
                     MessagesManager.shared.postSystemMessage(message: message)
                 }
             }
