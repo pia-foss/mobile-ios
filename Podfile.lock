@@ -65,11 +65,11 @@ PODS:
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - OpenSSL-Apple (1.1.1g.6)
-  - PIAAccountModule (1.1.0):
-    - PIAAccountModule/account (= 1.1.0)
-    - PIAAccountModule/gradle (= 1.1.0)
-  - PIAAccountModule/account (1.1.0)
-  - PIAAccountModule/gradle (1.1.0)
+  - PIAAccountModule (1.1.2):
+    - PIAAccountModule/account (= 1.1.2)
+    - PIAAccountModule/gradle (= 1.1.2)
+  - PIAAccountModule/account (1.1.2)
+  - PIAAccountModule/gradle (1.1.2)
   - PIACSIModule (1.0.0):
     - PIACSIModule/csi (= 1.0.0)
     - PIACSIModule/gradle (= 1.0.0)
@@ -147,7 +147,7 @@ DEPENDENCIES:
   - Fabric
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
-  - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, commit `defdab8`)"
+  - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, commit `720e6bc`)"
   - "PIACSIModule (from `git@codex.londontrustmedia.com:mobile/csi.git`, branch `master`)"
   - "PIALibrary/Library (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `d7b5d1b`)"
   - "PIALibrary/Mock (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `d7b5d1b`)"
@@ -196,7 +196,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PIAAccountModule:
-    :commit: defdab8
+    :commit: 720e6bc
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
   PIACSIModule:
     :branch: master
@@ -215,7 +215,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PIAAccountModule:
-    :commit: defdab8
+    :commit: 720e6bc
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
   PIACSIModule:
     :commit: 8185dc9215cf942dc4691efb9ae1d62066f3a9e2
@@ -253,7 +253,7 @@ SPEC CHECKSUMS:
   lottie-ios: 3a3758ef5a008e762faec9c9d50a39842f26d124
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OpenSSL-Apple: c9c1b9c5b2b1fc4e1758fc5f0836b58ae7fd8183
-  PIAAccountModule: 5d617eb89a69ac31cfabf11666c4ec04c6ae82ad
+  PIAAccountModule: e92ac441fc24532a5d9f10b5733cfc0b56245584
   PIACSIModule: 0f94fd5d8d21a25e12b4cc2a3b52578ece5e1a0e
   PIALibrary: 5032a58d17a6e240444ed8307a6a8fa2652e431e
   PIARegionsModule: 1d46bbea8a2cc1941413ddc7261f376ca2b9265f
@@ -270,6 +270,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 361a36deff94318daf395f8f58ed9feb66be863b
+PODFILE CHECKSUM: 5103fe9fa93e06c0d905bd60eab611e7bfc94562
 
 COCOAPODS: 1.10.1

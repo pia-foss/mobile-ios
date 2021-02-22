@@ -70,7 +70,7 @@ def shared_main_pods
     pod 'AlamofireImage'
     
     #pod "PIAAccountModule", :git => "#{$git_root}/#{$accounts_repo}"
-    pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :commit => 'defdab8'
+    pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :commit => '720e6bc'
     #pod "PIARegionsModule", :git => "#{$git_root}/#{$regions_repo}"
     pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :commit => 'ca41c33'
     #pod "PIACSIModule", :git => "#{$git_root}/#{$csi_repo}"
