@@ -101,6 +101,7 @@ class AppPreferences {
         static let ffEnableDIP = "ffEnableDIP"
         static let ffDIPExpirationRequest = "ffDIPExpirationRequest"
         static let ffDisableMultiDIP = "ffDisableMultiDIP"
+        static let stagingVersion = "StagingVersion"
 
     }
 
@@ -503,6 +504,15 @@ class AppPreferences {
             defaults.set(newValue, forKey: Entries.ffDisableMultiDIP)
         }
     }
+    
+    var stagingVersion: Int {
+        get {
+            return defaults.integer(forKey: Entries.stagingVersion)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.stagingVersion)
+        }
+    }
 
     private init() {
         guard let defaults = UserDefaults(suiteName: AppConstants.appGroup) else {
@@ -539,6 +549,7 @@ class AppPreferences {
             Entries.showsDedicatedIPView: true,
             Entries.disablesMultiDipTokens: true,
             Entries.checksDipExpirationRequest: true,
+            Entries.stagingVersion: 1,
             Entries.appEnvironmentIsProduction: Client.environment == .production ? true : false,
         ])
     }
@@ -726,6 +737,7 @@ class AppPreferences {
         failureConnections = 0
         showGeoServers = true
         stopInAppMessages = false
+        stagingVersion = 1
         dedicatedTokenIPReleation = [:]
         appEnvironmentIsProduction = Client.environment == .production ? true : false
         MessagesManager.shared.reset()
@@ -759,6 +771,7 @@ class AppPreferences {
         showGeoServers = true
         stopInAppMessages = false
         dismissedMessages = []
+        stagingVersion = 1
         dedicatedTokenIPReleation = [:]
         MessagesManager.shared.reset()
         appEnvironmentIsProduction = Client.environment == .production ? true : false

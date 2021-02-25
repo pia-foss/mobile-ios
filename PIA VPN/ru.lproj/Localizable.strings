@@ -69,7 +69,7 @@
 "dedicated.ip.message.invalid.token" = "Недействительный токен. Убедитесь, что вы правильно ввели токен.";
 "dedicated.ip.message.ip.updated" = "Ваш выделенный IP-адрес обновлен";
 "dedicated.ip.message.token.willexpire" = "Действие вашего выделенного IP-адреса скоро заканчивается. Получите новый адрес";
-"dedicated.ip.message.token.willexpire.link" = "Получить новый";
+"dedicated.ip.message.token.willexpire.link" = "Получите новый адрес";
 "dedicated.ip.message.valid.token" = "Ваш выделенный IP-адрес успешно активирован. Теперь он будет доступен в списке выбора региона.";
 "dedicated.ip.plural.title" = "Ваши выделенные IP-адреса";
 "dedicated.ip.remove" = "Действительно удалить выбранный регион?";

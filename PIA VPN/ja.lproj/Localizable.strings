@@ -69,7 +69,7 @@
 "dedicated.ip.message.invalid.token" = "トークンが無効です。トークンが正しく入力されていることを確認してください。";
 "dedicated.ip.message.ip.updated" = "あなたの専用IPが更新されました";
 "dedicated.ip.message.token.willexpire" = "あなたの専用IPは間もなく期限が切れます。新しい専用IPを入手してください";
-"dedicated.ip.message.token.willexpire.link" = "新しい専用IPを入手する";
+"dedicated.ip.message.token.willexpire.link" = "新しい専用IPを入手してください";
 "dedicated.ip.message.valid.token" = "専用IPが正常にアクティベートされました。地域選択リストで利用できるようになります。";
 "dedicated.ip.plural.title" = "あなたの専用IP";
 "dedicated.ip.remove" = "選択された地域を削除してよろしいですか？";

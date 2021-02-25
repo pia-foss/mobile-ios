@@ -68,7 +68,7 @@
 "dedicated.ip.message.incorrect.token" = "Verifique se você inseriu o token corretamente";
 "dedicated.ip.message.invalid.token" = "O seu token é inválido. Verifique se você inseriu o token corretamente.";
 "dedicated.ip.message.ip.updated" = "O seu IP dedicado foi atualizado";
-"dedicated.ip.message.token.willexpire" = "O seu IP dedicado irá expirar em breve.";
+"dedicated.ip.message.token.willexpire" = "O seu IP dedicado irá expirar em breve. Obtenha um novo.";
 "dedicated.ip.message.token.willexpire.link" = "Obtenha um novo";
 "dedicated.ip.message.valid.token" = "O seu IP dedicado foi ativado com sucesso. Ele estará disponível em sua lista de seleção de regiões.";
 "dedicated.ip.plural.title" = "Seus IPs dedicados";

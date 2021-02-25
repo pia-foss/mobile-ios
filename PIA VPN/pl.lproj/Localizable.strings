@@ -69,7 +69,7 @@
 "dedicated.ip.message.invalid.token" = "Twój token jest nieprawidłowy. Sprawdź, czy wpisany token jest prawidłowy.";
 "dedicated.ip.message.ip.updated" = "Zaktualizowano Twój dedykowany adres IP";
 "dedicated.ip.message.token.willexpire" = "Twój dedykowany adres IP wkrótce wygasa. Kup nowy adres.";
-"dedicated.ip.message.token.willexpire.link" = "Uzyskaj nowy adres";
+"dedicated.ip.message.token.willexpire.link" = "Kup nowy adres";
 "dedicated.ip.message.valid.token" = "Twój dedykowany adres IP został aktywowany. Będzie dostępny na liście wyboru regionu.";
 "dedicated.ip.plural.title" = "Twoje dedykowane adresy IP";
 "dedicated.ip.remove" = "Na pewno chcesz usunąć zaznaczony region?";

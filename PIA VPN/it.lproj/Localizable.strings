@@ -69,7 +69,7 @@
 "dedicated.ip.message.invalid.token" = "Token non valido. Assicurati di aver inserito correttamente il token.";
 "dedicated.ip.message.ip.updated" = "Il tuo IP dedicato è aggiornato";
 "dedicated.ip.message.token.willexpire" = "Il tuo IP dedicato scade a breve. Ottieni uno nuovo";
-"dedicated.ip.message.token.willexpire.link" = "Ne voglio uno nuovo";
+"dedicated.ip.message.token.willexpire.link" = "Ottieni uno nuovo";
 "dedicated.ip.message.valid.token" = "Il tuo IP dedicato è stato attivato. Sarà disponibile nell'elenco di selezione del paese.";
 "dedicated.ip.plural.title" = "I tuoi IP dedicati";
 "dedicated.ip.remove" = "Vuoi davvero rimuovere il Paese selezionato?";

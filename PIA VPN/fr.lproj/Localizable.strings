@@ -69,7 +69,7 @@
 "dedicated.ip.message.invalid.token" = "Votre jeton n'est pas valide. Veuillez vous assurer que vous avez saisi le jeton correctement.";
 "dedicated.ip.message.ip.updated" = "Votre IP dédiée a été mise à jour";
 "dedicated.ip.message.token.willexpire" = "Votre adresse IP dédiée expirera bientôt. Obtenez-en une nouvelle";
-"dedicated.ip.message.token.willexpire.link" = "Obtenir une nouvelle";
+"dedicated.ip.message.token.willexpire.link" = "Obtenez-en une nouvelle";
 "dedicated.ip.message.valid.token" = "Votre adresse IP dédiée a été activée avec succès. Elle sera disponible dans votre liste de sélection de région.";
 "dedicated.ip.plural.title" = "Vos IP dédiées";
 "dedicated.ip.remove" = "Voulez-vous vraiment supprimer la région sélectionnée ?";

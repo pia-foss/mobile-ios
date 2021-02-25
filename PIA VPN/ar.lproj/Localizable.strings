@@ -69,7 +69,7 @@
 "dedicated.ip.message.invalid.token" = "الرمز غير صالح. يرجى التأكد من إدخال الرمز بشكل صحيح.";
 "dedicated.ip.message.ip.updated" = "تم تحديث عنوان IP المخصّص";
 "dedicated.ip.message.token.willexpire" = "ستنتهي صلاحية عنوان IP المخصّص قريبًا. احصل على واحد جديد";
-"dedicated.ip.message.token.willexpire.link" = "احصل على واحد جديد";
+"dedicated.ip.message.token.willexpire.link" = "المخصّص قريبًا";
 "dedicated.ip.message.valid.token" = "تم تنشيط عنوان IP المخصّص بنجاح. سيكون متاحًا في قائمة اختيار المنطقة.";
 "dedicated.ip.plural.title" = "عناوين IP المخصّصة";
 "dedicated.ip.remove" = "هل تريد بالتأكيد إزالة المنطقة المحددة؟";

@@ -69,7 +69,7 @@
 "dedicated.ip.message.invalid.token" = "โทเค็นของคุณไม่ถูกต้อง โปรดตรวจสอบว่าคุณได้ป้อนโทเค็นอย่างถูกต้อง";
 "dedicated.ip.message.ip.updated" = "อัปเดต IP เฉพาะของคุณแล้ว";
 "dedicated.ip.message.token.willexpire" = "IP เฉพาะของคุณจะหมดอายุในไม่ช้า รับใหม่";
-"dedicated.ip.message.token.willexpire.link" = "รับ IP ใหม่";
+"dedicated.ip.message.token.willexpire.link" = "รับใหม่";
 "dedicated.ip.message.valid.token" = "IP เฉพาะของคุณเปิดใช้งานสำเร็จแล้ว จะมีอยู่ในรายการการเลือกภูมิภาคของคุณ";
 "dedicated.ip.plural.title" = "IP เฉพาะของคุณ";
 "dedicated.ip.remove" = "แน่ใจหรือไม่ว่าต้องการลบภูมิภาคที่เลือก";

@@ -69,7 +69,7 @@
 "dedicated.ip.message.invalid.token" = "Ihr Token ist ungültig. Bitte stellen Sie sicher, dass Sie das Token korrekt eingegeben haben.";
 "dedicated.ip.message.ip.updated" = "Ihre dedizierte IP wurde aktualisiert";
 "dedicated.ip.message.token.willexpire" = "Ihre dedizierte IP wird bald ablaufen. Eine neue abrufen";
-"dedicated.ip.message.token.willexpire.link" = "Neue abrufen";
+"dedicated.ip.message.token.willexpire.link" = "Eine neue abrufen";
 "dedicated.ip.message.valid.token" = "Ihre Dedizierte IP wurde erfolgreich aktiviert. Sie wird in der Auswahlliste Ihrer Region verfügbar sein.";
 "dedicated.ip.plural.title" = "Ihre dedizierten IPs";
 "dedicated.ip.remove" = "Wirklich die ausgewählte Region entfernen?";

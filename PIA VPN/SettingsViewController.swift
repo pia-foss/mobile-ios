@@ -100,6 +100,8 @@ enum Setting: Int {
     //
     //        case invokeMACERequest
     
+    case stagingVersion
+
     case customServers
     
     case publicUsername
@@ -229,6 +231,7 @@ class SettingsViewController: AutolayoutViewController {
 //            .recalculatePingTimes,
 //            .invokeMACERequest,
 //            .mace,
+            .stagingVersion,
             .customServers,
             .publicUsername,
             .username,
@@ -1372,7 +1375,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .customServers:
             cell.textLabel?.text = "Custom Servers"
             cell.detailTextLabel?.text = nil
-
+        case .stagingVersion:
+            cell.textLabel?.text = "Staging version"
+            cell.detailTextLabel?.text = "\(AppPreferences.shared.stagingVersion)"
         }
         
 
@@ -1621,6 +1626,14 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             if #available(iOS 12.0, *) {
                 SiriShortcutsManager.shared.presentDisconnectShortcut(inViewController: self)
             }
+            
+        case.stagingVersion:
+            let options: [Int] = [
+                1,2,3,4,5
+            ]
+            controller = OptionsViewController()
+            controller?.options = options.map { $0 }
+            controller?.selectedOption = AppPreferences.shared.stagingVersion
 
         default:
             break
@@ -1729,6 +1742,11 @@ extension SettingsViewController: OptionsViewControllerDelegate {
         case .encryptionHandshake:
             let rawHandshake = option as! String
             cell.textLabel?.text = OpenVPN.Configuration.Handshake(rawValue: rawHandshake)?.description
+
+        case .stagingVersion:
+            if let value = option as? Int {
+                cell.textLabel?.text = "\(value)"
+            }
 
         default:
             break
@@ -1888,6 +1906,19 @@ extension SettingsViewController: OptionsViewControllerDelegate {
                 let pem = handshake.pemString() {
                 pendingOpenVPNConfiguration.ca = OpenVPN.CryptoContainer(pem: pem)
                 pendingHandshake = OpenVPN.Configuration.Handshake(rawValue: rawHandshake)
+            }
+            
+        case .stagingVersion:
+            if let value = option as? Int {
+                AppPreferences.shared.stagingVersion = value
+                
+                if let stagingUrl = AppConstants.Web.stagingEndpointURL {
+                    let url = stagingUrl.absoluteString.replacingOccurrences(of: "staging-[0-9]", with: "staging-\(value)", options: .regularExpression)
+                    Client.configuration.setBaseURL(url, for: .staging)
+                    Client.resetWebServices()
+                    redisplaySettings()
+                }
+
             }
         default:
             break
