@@ -231,20 +231,27 @@ extension AppStoreProvider: SKPaymentTransactionObserver {
                 break
 
             case .failed:
-                if let error = transaction.error {
-                    log.error("Failed transaction: \(transaction) (error: \(error))")
+                
+                if let error = transaction.error as? SKError, error.code == .unknown {
+                    log.error("Unknown error code. To support PSD2 and Strong Customer Authentication, Apple is returning a failed state instead deferred, so we need to keep the app waiting for the response without removing the callback.")
+                    break
                 } else {
-                    log.warning("Transaction was cancelled")
+                    if let error = transaction.error {
+                        log.error("Failed transaction: \(transaction) (error: \(error))")
+                    } else {
+                        log.warning("Transaction was cancelled")
+                    }
+
+                    finishAndRemoveTransaction(transaction, success: false)
+
+                    if let error = transaction.error as? SKError, (error.code == .paymentCancelled) {
+                        purchaseCallback?(nil, nil)
+                    } else {
+                        purchaseCallback?(nil, transaction.error)
+                    }
+                    purchaseCallback = nil
                 }
 
-                finishAndRemoveTransaction(transaction, success: false)
-
-                if let error = transaction.error as? SKError, (error.code == .paymentCancelled) {
-                    purchaseCallback?(nil, nil)
-                } else {
-                    purchaseCallback?(nil, transaction.error)
-                }
-                purchaseCallback = nil
             }
         }
     }
