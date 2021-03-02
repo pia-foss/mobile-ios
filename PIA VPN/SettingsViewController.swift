@@ -118,6 +118,8 @@ enum Setting: Int {
     
     case environment
     
+    case crash
+    
     case resolveGoogleAdsDomain
 
     case cardsHistory
@@ -240,7 +242,8 @@ class SettingsViewController: AutolayoutViewController {
             .resolveGoogleAdsDomain,
             .ffEnableDIP,
             .ffDisableMultiDIP,
-            .ffCheckExpirationDIP
+            .ffCheckExpirationDIP,
+            .crash
         ],
         .info: [
             .cardsHistory
@@ -1378,6 +1381,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .stagingVersion:
             cell.textLabel?.text = "Staging version"
             cell.detailTextLabel?.text = "\(AppPreferences.shared.stagingVersion)"
+        case .crash:
+            cell.textLabel?.text = "Crash"
+            cell.detailTextLabel?.text = nil
         }
         
 
@@ -1635,6 +1641,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             controller?.options = options.map { $0 }
             controller?.selectedOption = AppPreferences.shared.stagingVersion
 
+        case .crash:
+            fatalError("Crashing staging app")
         default:
             break
         }
