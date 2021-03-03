@@ -122,15 +122,9 @@ class Bootstrapper {
         ]
         
         Client.providers.accountProvider.featureFlags({ _ in
-            #if PIA_DEV
-            AppPreferences.shared.showsDedicatedIPView = AppPreferences.shared.ffEnableDIP
-            AppPreferences.shared.checksDipExpirationRequest = AppPreferences.shared.ffDIPExpirationRequest
-            AppPreferences.shared.disablesMultiDipTokens = AppPreferences.shared.ffDisableMultiDIP
-            #else
             AppPreferences.shared.showsDedicatedIPView = Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.dedicatedIp)
             AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.checkDipExpirationRequest)
             AppPreferences.shared.disablesMultiDipTokens = Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.disableMultiDipTokens)
-            #endif
         })
         MessagesManager.shared.refreshMessages()
 

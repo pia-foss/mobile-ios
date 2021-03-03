@@ -98,9 +98,6 @@ class AppPreferences {
         
         // Dev
         static let appEnvironmentIsProduction = "AppEnvironmentIsProduction"
-        static let ffEnableDIP = "ffEnableDIP"
-        static let ffDIPExpirationRequest = "ffDIPExpirationRequest"
-        static let ffDisableMultiDIP = "ffDisableMultiDIP"
         static let stagingVersion = "StagingVersion"
 
     }
@@ -475,33 +472,6 @@ class AppPreferences {
         }
         set {
             defaults.set(newValue, forKey: Entries.appEnvironmentIsProduction)
-        }
-    }
-    
-    var ffEnableDIP: Bool {
-        get {
-            return defaults.bool(forKey: Entries.ffEnableDIP)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.ffEnableDIP)
-        }
-    }
-
-    var ffDIPExpirationRequest: Bool {
-        get {
-            return defaults.bool(forKey: Entries.ffDIPExpirationRequest)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.ffDIPExpirationRequest)
-        }
-    }
-    
-    var ffDisableMultiDIP: Bool {
-        get {
-            return defaults.bool(forKey: Entries.ffDisableMultiDIP)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.ffDisableMultiDIP)
         }
     }
     

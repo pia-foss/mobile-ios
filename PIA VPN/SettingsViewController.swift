@@ -106,12 +106,6 @@ enum Setting: Int {
     
     case publicUsername
     
-    case ffEnableDIP
-    
-    case ffDisableMultiDIP
-
-    case ffCheckExpirationDIP
-    
     case username
     
     case password
@@ -240,9 +234,6 @@ class SettingsViewController: AutolayoutViewController {
             .password,
             .environment,
             .resolveGoogleAdsDomain,
-            .ffEnableDIP,
-            .ffDisableMultiDIP,
-            .ffCheckExpirationDIP,
             .crash
         ],
         .info: [
@@ -276,10 +267,6 @@ class SettingsViewController: AutolayoutViewController {
     private lazy var switchEnvironment = UISwitch()
 
     private lazy var switchInAppMessages = UISwitch()
-
-    private lazy var switchFFEnableDip = UISwitch()
-    private lazy var switchFFDisableMultiDip = UISwitch()
-    private lazy var switchFFExpirationRequest = UISwitch()
 
     private lazy var imvSelectedOption = UIImageView(image: Asset.accessorySelected.image)
 
@@ -346,10 +333,6 @@ class SettingsViewController: AutolayoutViewController {
         switchEnvironment.addTarget(self, action: #selector(toggleEnv(_:)), for: .valueChanged)
         switchInAppMessages.addTarget(self, action: #selector(toggleStopInAppMessages(_:)), for: .valueChanged)
         
-        switchFFEnableDip.addTarget(self, action: #selector(toggleFFEnableDIP(_:)), for: .valueChanged)
-        switchFFDisableMultiDip.addTarget(self, action: #selector(toggleFFDisableMultiDIP(_:)), for: .valueChanged)
-        switchFFExpirationRequest.addTarget(self, action: #selector(toggleFFCheckExpirationDIP(_:)), for: .valueChanged)
-
         redisplaySettings()
 
         NotificationCenter.default.addObserver(self,
@@ -473,31 +456,7 @@ class SettingsViewController: AutolayoutViewController {
         Client.resetWebServices()
         redisplaySettings()
     }
-
-    @objc private func toggleFFEnableDIP(_ sender: UISwitch) {
-        AppPreferences.shared.ffEnableDIP = sender.isOn
-        redisplaySettings()
-        updateFeatureFlags()
-    }
-
-    @objc private func toggleFFDisableMultiDIP(_ sender: UISwitch) {
-        AppPreferences.shared.ffDisableMultiDIP = sender.isOn
-        redisplaySettings()
-        updateFeatureFlags()
-    }
-
-    @objc private func toggleFFCheckExpirationDIP(_ sender: UISwitch) {
-        AppPreferences.shared.ffDIPExpirationRequest = sender.isOn
-        redisplaySettings()
-        updateFeatureFlags()
-    }
     
-    private func updateFeatureFlags() {
-        AppPreferences.shared.showsDedicatedIPView = AppPreferences.shared.ffEnableDIP
-        AppPreferences.shared.checksDipExpirationRequest = AppPreferences.shared.ffDIPExpirationRequest
-        AppPreferences.shared.disablesMultiDipTokens = AppPreferences.shared.ffDisableMultiDIP
-    }
-
     @objc private func toggleStopInAppMessages(_ sender: UISwitch) {
         AppPreferences.shared.stopInAppMessages = sender.isOn
         redisplaySettings()
@@ -1351,24 +1310,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryView = switchEnvironment
             cell.selectionStyle = .none
             switchEnvironment.isOn = Client.environment == .staging
-        case .ffEnableDIP:
-            cell.textLabel?.text = "Enable DIP FF"
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchFFEnableDip
-            cell.selectionStyle = .none
-            switchFFEnableDip.isOn = AppPreferences.shared.ffEnableDIP
-        case .ffCheckExpirationDIP:
-            cell.textLabel?.text = "Expiration request FF"
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchFFExpirationRequest
-            cell.selectionStyle = .none
-            switchFFExpirationRequest.isOn = AppPreferences.shared.ffDIPExpirationRequest
-        case .ffDisableMultiDIP:
-            cell.textLabel?.text = "Disable Multi DIP FF"
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchFFDisableMultiDip
-            cell.selectionStyle = .none
-            switchFFDisableMultiDip.isOn = AppPreferences.shared.ffDisableMultiDIP
         case .stopInAppMessages:
             cell.textLabel?.text = L10n.Inapp.Messages.Toggle.title
             cell.detailTextLabel?.text = nil
