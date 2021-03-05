@@ -70,14 +70,14 @@ PODS:
     - PIAAccountModule/gradle (= 1.1.2)
   - PIAAccountModule/account (1.1.2)
   - PIAAccountModule/gradle (1.1.2)
-  - PIACSIModule (1.0.0):
-    - PIACSIModule/csi (= 1.0.0)
-    - PIACSIModule/gradle (= 1.0.0)
-  - PIACSIModule/csi (1.0.0)
-  - PIACSIModule/gradle (1.0.0)
-  - PIALibrary/Core (2.10.2):
+  - PIACSIModule (1.0.1):
+    - PIACSIModule/csi (= 1.0.1)
+    - PIACSIModule/gradle (= 1.0.1)
+  - PIACSIModule/csi (1.0.1)
+  - PIACSIModule/gradle (1.0.1)
+  - PIALibrary/Core (2.10.3):
     - PIAAccountModule
-  - PIALibrary/Library (2.10.2):
+  - PIALibrary/Library (2.10.3):
     - Alamofire (~> 4)
     - Gloss (~> 2)
     - PIAAccountModule
@@ -88,18 +88,18 @@ PODS:
     - PopupDialog
     - ReachabilitySwift
     - SwiftyBeaver
-  - PIALibrary/Mock (2.10.2):
+  - PIALibrary/Mock (2.10.3):
     - PIALibrary/Library
-  - PIALibrary/UI (2.10.2):
+  - PIALibrary/UI (2.10.3):
     - FXPageControl
     - lottie-ios
     - PIALibrary/Library
     - SwiftEntryKit (= 0.7.2)
     - SwiftyBeaver
     - TPKeyboardAvoiding
-  - PIALibrary/Util (2.10.2):
+  - PIALibrary/Util (2.10.3):
     - PIALibrary/Core
-  - PIALibrary/VPN (2.10.2):
+  - PIALibrary/VPN (2.10.3):
     - PIALibrary/Library
     - PIAWireguard
     - TunnelKit
@@ -148,11 +148,11 @@ DEPENDENCIES:
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
   - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, commit `720e6bc`)"
-  - "PIACSIModule (from `git@codex.londontrustmedia.com:mobile/csi.git`, branch `master`)"
-  - "PIALibrary/Library (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `fe1b5e4`)"
-  - "PIALibrary/Mock (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `fe1b5e4`)"
-  - "PIALibrary/UI (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `fe1b5e4`)"
-  - "PIALibrary/VPN (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `fe1b5e4`)"
+  - "PIACSIModule (from `git@codex.londontrustmedia.com:mobile/csi.git`, commit `b62d1bab`)"
+  - "PIALibrary/Library (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `0f83783`)"
+  - "PIALibrary/Mock (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `0f83783`)"
+  - "PIALibrary/UI (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `0f83783`)"
+  - "PIALibrary/VPN (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `0f83783`)"
   - "PIARegionsModule (from `git@codex.londontrustmedia.com:mobile/regions.git`, commit `ca41c33`)"
   - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
   - Popover
@@ -199,10 +199,10 @@ EXTERNAL SOURCES:
     :commit: 720e6bc
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
   PIACSIModule:
-    :branch: master
+    :commit: b62d1bab
     :git: "git@codex.londontrustmedia.com:mobile/csi.git"
   PIALibrary:
-    :commit: fe1b5e4
+    :commit: 0f83783
     :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
   PIARegionsModule:
     :commit: ca41c33
@@ -218,10 +218,10 @@ CHECKOUT OPTIONS:
     :commit: 720e6bc
     :git: "git@codex.londontrustmedia.com:mobile/account.git"
   PIACSIModule:
-    :commit: 8185dc9215cf942dc4691efb9ae1d62066f3a9e2
+    :commit: b62d1bab
     :git: "git@codex.londontrustmedia.com:mobile/csi.git"
   PIALibrary:
-    :commit: fe1b5e4
+    :commit: 0f83783
     :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
   PIARegionsModule:
     :commit: ca41c33
@@ -254,8 +254,8 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OpenSSL-Apple: c9c1b9c5b2b1fc4e1758fc5f0836b58ae7fd8183
   PIAAccountModule: e92ac441fc24532a5d9f10b5733cfc0b56245584
-  PIACSIModule: 0f94fd5d8d21a25e12b4cc2a3b52578ece5e1a0e
-  PIALibrary: bbbb0067b35b24538dcca97b63e866bcda46d10f
+  PIACSIModule: 32df98c20a0fc4cad5fadbb1b72f7b74315aa8ea
+  PIALibrary: 66e1cb0813025fcd8aec96245d39f823782392a5
   PIARegionsModule: 1d46bbea8a2cc1941413ddc7261f376ca2b9265f
   PIAWireguard: 9d71dabc9e483b149236eebbd0e6bb8fa5c8317f
   Popover: 10e1d9528f81d9504df984b7b3f491292bc1822d
@@ -270,6 +270,6 @@ SPEC CHECKSUMS:
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 94edc9670716d95a3000e4b3c988e64fa00edbda
+PODFILE CHECKSUM: c568c7000a1d4c2dd98ad34b7c9a0bbe47657850
 
 COCOAPODS: 1.10.1
