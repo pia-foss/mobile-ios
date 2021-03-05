@@ -12,6 +12,33 @@ import PIACSI
 class PIACSIRegionInformationProvider : RegionInformationProvider {
 
     func regionInformation() -> String {
-        return Client.providers.serverProvider.targetServer.toJSON()?.description ?? "Unknown region information"
+        var redactedServers: [String] = []
+        for server in Client.providers.serverProvider.currentServers {
+            if let redactedServer = Server(
+                serial: server.serial,
+                name: server.name,
+                country: server.country,
+                hostname: "REDACTED",
+                openVPNAddressesForTCP: nil,
+                openVPNAddressesForUDP: nil,
+                wireGuardAddressesForUDP: nil,
+                iKEv2AddressesForUDP: nil,
+                pingAddress: nil,
+                responseTime: nil,
+                geo: server.geo,
+                offline: server.offline,
+                latitude: server.latitude,
+                longitude: server.longitude,
+                meta: nil,
+                dipExpire: nil,
+                dipToken: nil,
+                dipStatus: nil,
+                dipUsername: nil,
+                regionIdentifier: server.regionIdentifier
+            ).toJSON()?.description {
+                redactedServers.append(redactedServer)
+            }
+        }
+        return redactedServers.debugDescription
     }
 }

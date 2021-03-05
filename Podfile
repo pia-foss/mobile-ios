@@ -32,7 +32,7 @@ abstract_target 'PIALibrary' do
     pod 'PIAWireguard', :git => "https://github.com/pia-foss/ios-wireguard"
     pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :commit => '6116a38'
     pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :commit => 'ca41c33'
-    pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :branch => 'master'
+    pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :branch => 'juan.docal/rename_regions_file'
 
     target 'PIALibrary-iOS' do
         platform :ios, '11.0'
