@@ -138,7 +138,7 @@ class AppPreferences {
         }
     }
     
-    var lastVPNConnectionStatus: VPNStatus {
+    var lastVPNConnectionStatus: PIALibrary.VPNStatus {
         get {
             guard let rawValue = defaults.string(forKey: Entries.lastVPNConnectionStatus) else {
                 return .disconnected
@@ -542,9 +542,9 @@ class AppPreferences {
             
             var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: pendingOpenVPNConfiguration.build())
             if AppPreferences.shared.useSmallPackets {
-                builder.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
+                builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
             } else {
-                builder.mtu = AppConstants.OpenVPNPacketSize.defaultPacketSize
+                builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.defaultPacketSize
             }
             builder.shouldDebug = true
 
@@ -684,10 +684,8 @@ class AppPreferences {
         favoriteServerIdentifiersGen4 = []
         useConnectSiriShortcuts = false
         useDisconnectSiriShortcuts = false
-        if #available(iOS 12.0, *) {
-            connectShortcut = nil
-            disconnectShortcut = nil
-        }
+        connectShortcut = nil
+        disconnectShortcut = nil
         let preferences = Client.preferences.editable().reset()
         preferences.commit()
         guard #available(iOS 13.0, *) else {
@@ -719,10 +717,8 @@ class AppPreferences {
         favoriteServerIdentifiersGen4 = []
         useConnectSiriShortcuts = false
         useDisconnectSiriShortcuts = false
-        if #available(iOS 12.0, *) {
-            connectShortcut = nil
-            disconnectShortcut = nil
-        }
+        connectShortcut = nil
+        disconnectShortcut = nil
         todayWidgetVpnStatus = L10n.Today.Widget.login
         todayWidgetButtonTitle = L10n.Today.Widget.login
         todayWidgetVpnProtocol = IKEv2Profile.vpnType
