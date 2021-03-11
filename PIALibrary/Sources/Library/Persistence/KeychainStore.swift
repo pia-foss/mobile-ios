@@ -145,5 +145,4 @@ extension KeychainStore {
     func passwordReference(forDipToken dip: String) -> Data? {
         return try? backend.passwordReference(for: dip)
     }
-
 }
