@@ -50,7 +50,7 @@ class AppPreferences {
 
         static let useSmallPackets = "UseSmallPackets"
 
-        static let favoriteServerIdentifiersGen4 = "FavoriteServerIdentifiersGen4"
+        static let favoriteServerIdentifiersGen4_deprecated = "FavoriteServerIdentifiersGen4"
 
         static let regionFilter = "RegionFilter"
 
@@ -86,7 +86,7 @@ class AppPreferences {
         static let dismissedMessages = "DismissedMessages"
         
         // Dedicated IP relations
-        static let tokenIPRelation = "TokenIPRelation"
+        static let tokenIPRelation_deprecated = "TokenIPRelation"
 
         // In app messages
         static let stopInAppMessages = "stopInAppMessages"
@@ -182,16 +182,17 @@ class AppPreferences {
     
     var favoriteServerIdentifiersGen4: [String] {
         get {
-            if let serverIdentifiers = defaults.array(forKey: Entries.favoriteServerIdentifiersGen4) as? [String] {
-                return serverIdentifiers
+            let keychain = PIALibrary.Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
+            if let favorites = try? keychain.getFavorites() {
+                return favorites
             }
             return []
         }
         set {
-            defaults.set(newValue, forKey: Entries.favoriteServerIdentifiersGen4)
+            let keychain = PIALibrary.Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
+            try? keychain.set(favorites: newValue)
         }
     }
-
 
     var regionFilter: RegionFilter {
         get {
@@ -288,13 +289,17 @@ class AppPreferences {
 
     var dedicatedTokenIPReleation: [String: String] {
         get {
-            if let relation = defaults.dictionary(forKey: Entries.tokenIPRelation) as? [String: String] {
-                return relation
+            let keychain = PIALibrary.Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
+            if let relations = try? keychain.getDIPRelations() {
+                return relations
             }
-            return [String:String]()
+            return [:]
         }
         set {
-            defaults.set(newValue, forKey: Entries.tokenIPRelation)
+            let keychain = PIALibrary.Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
+            for (key, value) in newValue {
+                try? keychain.set(dipRelationKey: key, dipRelationValue: value)
+            }
         }
     }
     
@@ -495,7 +500,6 @@ class AppPreferences {
             Entries.appVersion: "",
             Entries.launched: false,
             Entries.regionFilter: RegionFilter.name.rawValue,
-            Entries.favoriteServerIdentifiersGen4: [],
             Entries.didAskToEnableNotifications: false,
             Entries.themeCode: ThemeCode.light.rawValue,
             Entries.useConnectSiriShortcuts: false,
@@ -522,6 +526,34 @@ class AppPreferences {
             Entries.stagingVersion: 1,
             Entries.appEnvironmentIsProduction: Client.environment == .production ? true : false,
         ])
+
+        migrateDIP()
+    }
+
+    private func migrateDIP() {
+        let keychain = PIALibrary.Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
+
+        // Migrate relations
+        if let relations = defaults.dictionary(forKey: Entries.tokenIPRelation_deprecated) as? [String: String] {
+            if (relations.isEmpty) {
+                return
+            }
+
+            defaults.removeObject(forKey: Entries.tokenIPRelation_deprecated)
+            for (key, value) in relations {
+                try? keychain.set(dipRelationKey: key, dipRelationValue: value)
+            }
+        }
+
+        // Migrate favorites
+        if let favorites = defaults.array(forKey: Entries.favoriteServerIdentifiersGen4_deprecated) as? [String] {
+            if (favorites.isEmpty) {
+                return
+            }
+
+            defaults.removeObject(forKey: Entries.favoriteServerIdentifiersGen4_deprecated)
+            try? keychain.set(favorites: favorites)
+        }
     }
     
     func migrateOVPN() {

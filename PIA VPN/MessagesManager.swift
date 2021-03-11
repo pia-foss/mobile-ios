@@ -184,7 +184,6 @@ extension MessagesManager {
     @objc private func presentIPUpdatedSystemMessage(notification: Notification) {
 
         if let userInfo = notification.userInfo, let token = userInfo[NotificationKey.token] as? String, let ip = userInfo[NotificationKey.ip] as? String {
-            
             var relation = AppPreferences.shared.dedicatedTokenIPReleation
             if relation.isEmpty {
                 //no data
@@ -198,8 +197,6 @@ extension MessagesManager {
                 }
             }
             AppPreferences.shared.dedicatedTokenIPReleation[token] = ip
-            
         }
-
     }
 }
