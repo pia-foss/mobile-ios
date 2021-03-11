@@ -233,6 +233,7 @@ public class PIATunnelProfile: NetworkExtensionProfile {
         var customCfg = configuration.customConfiguration
         if let piaCfg = customCfg as? OpenVPNTunnelProvider.Configuration {
             var builder = piaCfg.builder()
+            builder.sessionConfiguration.usesPIAPatches = true //SET TO FALSE TO USE NATIVE OVPN 
             if let protocols = builder.sessionConfiguration.endpointProtocols, protocols.contains(where: {$0.socketType == .tcp }) {
                 if let bestAddress = configuration.server.bestAddressForOVPN(tcp: true)?.ip {
                     serverAddress = bestAddress

@@ -48,9 +48,7 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
         view.addSubview(viewContainer)
         self.viewContainer = viewContainer
         
-        if #available(iOS 11.0, *) {
-            viewContainer.insetsLayoutMarginsFromSafeArea = false
-        }
+        viewContainer.insetsLayoutMarginsFromSafeArea = false
 
         super.viewDidLoad()
         
