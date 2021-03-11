@@ -44,6 +44,8 @@ public class Keychain {
     private let usernameKey = "USERNAME_KEY"
     private let publicUsernameKey = "PUBLIC_USERNAME_KEY"
     private let dipTokensKey = "DIP_TOKENS_KEY"
+    private let dipRelationsKey = "DIP_RELATIONS_KEY"
+    private let favoritesKey = "FAVORITES_KEY"
 
     /**
      Default initializer. Uses the default keychain associated with the main bundle identifier.
@@ -489,5 +491,128 @@ extension Keychain {
         }
         return tokens
     }
-    
+
+    // MARK: DIP Relation Region
+
+    /// :nodoc:
+    public func set(dipRelationKey: String, dipRelationValue: String) throws {
+
+        var relations = [String: String]()
+        if let storedDipRelations = try? getDIPRelations() {
+            removeDIPRelations()
+            relations = storedDipRelations
+        }
+
+        relations[dipRelationKey] = dipRelationValue
+
+        var query = [String: Any]()
+        setScope(query: &query)
+        query[kSecClass as String] = kSecClassGenericPassword
+        query[kSecAttrAccount as String] = dipRelationsKey
+        query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
+        let encoder = JSONEncoder()
+        query[kSecValueData as String] = try? encoder.encode(relations)
+
+        let status = SecItemAdd(query as CFDictionary, nil)
+        guard (status == errSecSuccess) else {
+            throw KeychainError.add
+        }
+    }
+
+    /// :nodoc:
+    public func getDIPRelations() throws -> [String: String] {
+        var query = [String: Any]()
+        setScope(query: &query)
+        query[kSecClass as String] = kSecClassGenericPassword
+        query[kSecAttrAccount as String] = dipRelationsKey
+        query[kSecMatchLimit as String] = kSecMatchLimitOne
+        query[kSecReturnData as String] = true
+
+        var result: AnyObject?
+        let status = SecItemCopyMatching(query as CFDictionary, &result)
+        guard (status == errSecSuccess) else {
+            throw KeychainError.notFound
+        }
+        guard let data = result as? Data else {
+            throw KeychainError.notFound
+        }
+        let decoder = JSONDecoder()
+        guard let relations = try? decoder.decode([String: String].self, from: data) else {
+            throw KeychainError.notFound
+        }
+        return relations
+    }
+
+    /// :nodoc:
+    @discardableResult private func removeDIPRelations() -> Bool {
+        var query = [String: Any]()
+        setScope(query: &query)
+        query[kSecClass as String] = kSecClassGenericPassword
+        query[kSecAttrAccount as String] = dipRelationsKey
+
+        let status = SecItemDelete(query as CFDictionary)
+        return (status == errSecSuccess)
+    }
+
+    // MARK: Favorites
+
+    /// :nodoc:
+    public func set(favorites: [String]) throws {
+
+        var knownFavorites = [String]()
+        if let storedFavorites = try? getFavorites() {
+            removeFavorites()
+            knownFavorites = storedFavorites
+        }
+
+        knownFavorites.append(contentsOf: favorites)
+
+        var query = [String: Any]()
+        setScope(query: &query)
+        query[kSecClass as String] = kSecClassGenericPassword
+        query[kSecAttrAccount as String] = favoritesKey
+        query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
+        let encoder = JSONEncoder()
+        query[kSecValueData as String] = try? encoder.encode(knownFavorites)
+
+        let status = SecItemAdd(query as CFDictionary, nil)
+        guard (status == errSecSuccess) else {
+            throw KeychainError.add
+        }
+    }
+
+    /// :nodoc:
+    public func getFavorites() throws -> [String] {
+        var query = [String: Any]()
+        setScope(query: &query)
+        query[kSecClass as String] = kSecClassGenericPassword
+        query[kSecAttrAccount as String] = favoritesKey
+        query[kSecMatchLimit as String] = kSecMatchLimitOne
+        query[kSecReturnData as String] = true
+
+        var result: AnyObject?
+        let status = SecItemCopyMatching(query as CFDictionary, &result)
+        guard (status == errSecSuccess) else {
+            throw KeychainError.notFound
+        }
+        guard let data = result as? Data else {
+            throw KeychainError.notFound
+        }
+        let decoder = JSONDecoder()
+        guard let favorites = try? decoder.decode([String].self, from: data) else {
+            throw KeychainError.notFound
+        }
+        return favorites
+    }
+
+    /// :nodoc:
+    @discardableResult private func removeFavorites() -> Bool {
+        var query = [String: Any]()
+        setScope(query: &query)
+        query[kSecClass as String] = kSecClassGenericPassword
+        query[kSecAttrAccount as String] = favoritesKey
+
+        let status = SecItemDelete(query as CFDictionary)
+        return (status == errSecSuccess)
+    }
 }
