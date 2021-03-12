@@ -79,7 +79,7 @@ def shared_main_pods
     #library_by_path('/Users/jose/Projects/PIA')
     #library_by_git('b73d9e5')
     #library_by_gitlab_branch('develop')
-    library_by_gitlab_by_git('fe1b5e4')
+    library_by_gitlab_by_git('24ad7c0')
     #library_by_version('~> 1.1.3')
 end
 
@@ -95,7 +95,7 @@ def app_pods
 end
 
 def tunnel_pods
-    pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :commit => 'd19b9de'
+    pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :branch => 'master'
 end
 
 def piawireguard_pod
