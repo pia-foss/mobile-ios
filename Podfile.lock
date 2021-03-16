@@ -108,12 +108,12 @@ PODS:
     - PIARegionsModule/regions (= 1.2.0)
   - PIARegionsModule/gradle (1.2.0)
   - PIARegionsModule/regions (1.2.0)
-  - PIAWireguard (1.0.1):
-    - PIAWireguard/AppExtension (= 1.0.1)
-    - PIAWireguard/Core (= 1.0.1)
-  - PIAWireguard/AppExtension (1.0.1):
+  - PIAWireguard (1.1.0):
+    - PIAWireguard/AppExtension (= 1.1.0)
+    - PIAWireguard/Core (= 1.1.0)
+  - PIAWireguard/AppExtension (1.1.0):
     - PIAWireguard/Core
-  - PIAWireguard/Core (1.0.1):
+  - PIAWireguard/Core (1.1.0):
     - Alamofire
     - TweetNacl
   - Popover (1.3.0)
@@ -150,14 +150,14 @@ DEPENDENCIES:
   - Fabric
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
-  - "PIAAccountModule (from `git@codex.londontrustmedia.com:mobile/account.git`, commit `720e6bc`)"
-  - "PIACSIModule (from `git@codex.londontrustmedia.com:mobile/csi.git`, branch `master`)"
-  - "PIALibrary/Library (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `24ad7c0`)"
-  - "PIALibrary/Mock (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `24ad7c0`)"
-  - "PIALibrary/UI (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `24ad7c0`)"
-  - "PIALibrary/VPN (from `git@codex.londontrustmedia.com:ios/client-library-apple.git`, commit `24ad7c0`)"
-  - "PIARegionsModule (from `git@codex.londontrustmedia.com:mobile/regions.git`, commit `ca41c33`)"
-  - PIAWireguard (from `https://github.com/pia-foss/ios-wireguard`)
+  - "PIAAccountModule (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/shared/account.git`, commit `720e6bc`)"
+  - "PIACSIModule (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/shared/csi.git`, branch `master`)"
+  - "PIALibrary/Library (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/client-library-apple.git`, commit `24ad7c0`)"
+  - "PIALibrary/Mock (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/client-library-apple.git`, commit `24ad7c0`)"
+  - "PIALibrary/UI (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/client-library-apple.git`, commit `24ad7c0`)"
+  - "PIALibrary/VPN (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/client-library-apple.git`, commit `24ad7c0`)"
+  - "PIARegionsModule (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/shared/regions.git`, commit `ca41c33`)"
+  - "PIAWireguard (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/pia-wireguard.git`)"
   - Popover
   - PopupDialog
   - ReachabilitySwift (~> 4.3.0)
@@ -200,18 +200,18 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   PIAAccountModule:
     :commit: 720e6bc
-    :git: "git@codex.londontrustmedia.com:mobile/account.git"
+    :git: "git@gitlab-server.cyberghostvpn.com:pia-mobile/shared/account.git"
   PIACSIModule:
     :branch: master
-    :git: "git@codex.londontrustmedia.com:mobile/csi.git"
+    :git: "git@gitlab-server.cyberghostvpn.com:pia-mobile/shared/csi.git"
   PIALibrary:
     :commit: 24ad7c0
-    :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
+    :git: "git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/client-library-apple.git"
   PIARegionsModule:
     :commit: ca41c33
-    :git: "git@codex.londontrustmedia.com:mobile/regions.git"
+    :git: "git@gitlab-server.cyberghostvpn.com:pia-mobile/shared/regions.git"
   PIAWireguard:
-    :git: https://github.com/pia-foss/ios-wireguard
+    :git: "git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/pia-wireguard.git"
   TunnelKit:
     :branch: master
     :git: https://github.com/pia-foss/tunnelkit
@@ -219,19 +219,19 @@ EXTERNAL SOURCES:
 CHECKOUT OPTIONS:
   PIAAccountModule:
     :commit: 720e6bc
-    :git: "git@codex.londontrustmedia.com:mobile/account.git"
+    :git: "git@gitlab-server.cyberghostvpn.com:pia-mobile/shared/account.git"
   PIACSIModule:
     :commit: b62d1bab4e5b8627b1e9aafa20dc76e9966da921
-    :git: "git@codex.londontrustmedia.com:mobile/csi.git"
+    :git: "git@gitlab-server.cyberghostvpn.com:pia-mobile/shared/csi.git"
   PIALibrary:
     :commit: 24ad7c0
-    :git: "git@codex.londontrustmedia.com:ios/client-library-apple.git"
+    :git: "git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/client-library-apple.git"
   PIARegionsModule:
     :commit: ca41c33
-    :git: "git@codex.londontrustmedia.com:mobile/regions.git"
+    :git: "git@gitlab-server.cyberghostvpn.com:pia-mobile/shared/regions.git"
   PIAWireguard:
-    :commit: 10ddb6b3e79b695358d4fa58a85d663039f7509e
-    :git: https://github.com/pia-foss/ios-wireguard
+    :commit: 549b6c2fbc83ca0c49b729e9f1d75d745152cbda
+    :git: "git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/pia-wireguard.git"
   TunnelKit:
     :commit: 9130179079194e9e7e0e1a8ae4b1df16f3681466
     :git: https://github.com/pia-foss/tunnelkit
@@ -260,7 +260,7 @@ SPEC CHECKSUMS:
   PIACSIModule: 32df98c20a0fc4cad5fadbb1b72f7b74315aa8ea
   PIALibrary: 55deb9ae82cc6ac250afb4105c8ae3015a676f5c
   PIARegionsModule: 1d46bbea8a2cc1941413ddc7261f376ca2b9265f
-  PIAWireguard: 9d71dabc9e483b149236eebbd0e6bb8fa5c8317f
+  PIAWireguard: c7db452e73df1ffb1b91c113a7f6872123b8317f
   Popover: 10e1d9528f81d9504df984b7b3f491292bc1822d
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
@@ -273,6 +273,6 @@ SPEC CHECKSUMS:
   TunnelKit: 2a6aadea2d772a2760b153aee27d1c334c9ca6db
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 279596360020bf312be8c8f874080c0b223beeb5
+PODFILE CHECKSUM: ddc55afbe5df8ba9a99195cb66c365a4272a31b5
 
 COCOAPODS: 1.10.1

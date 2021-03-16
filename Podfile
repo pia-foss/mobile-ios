@@ -13,8 +13,8 @@ inhibit_all_warnings!
 # Libraries
 
 $git_root = "https://github.com/pia-foss"
-$gitlab_vpn_root = "git@codex.londontrustmedia.com:ios"
-$gitlab_kn_root = "git@codex.londontrustmedia.com:mobile"
+$gitlab_vpn_root = "git@gitlab-server.cyberghostvpn.com:pia-mobile/ios"
+$gitlab_kn_root = "git@gitlab-server.cyberghostvpn.com:pia-mobile/shared"
 
 $library_pod = 'PIALibrary'
 $library_repo = 'client-library-apple'
@@ -99,11 +99,11 @@ def tunnel_pods
 end
 
 def piawireguard_pod
-    pod 'PIAWireguard', :git => "#{$git_root}/ios-wireguard"
+    pod 'PIAWireguard', :git => "#{$git_root}/pia-wireguard"
 end
 
 def piawireguard_gitlab_pod
-    pod 'PIAWireguard', :git => "#{$gitlab_vpn_root}/ios-wireguard.git"
+    pod 'PIAWireguard', :git => "#{$gitlab_vpn_root}/pia-wireguard.git"
 end
 
 # Targets
@@ -125,8 +125,8 @@ target 'PIA VPN Tunnel' do
 end
 
 target 'PIA VPN WG Tunnel' do
-    piawireguard_pod
-    #piawireguard_gitlab_pod
+    #piawireguard_pod
+    piawireguard_gitlab_pod
 end
 
 target 'PIA VPNTests' do
