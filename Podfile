@@ -9,8 +9,8 @@ install! 'cocoapods',
 inhibit_all_warnings!
 
 $git_root = "https://github.com/pia-foss"
-$gitlab_vpn_root = "git@codex.londontrustmedia.com:ios"
-$gitlab_kn_root = "git@codex.londontrustmedia.com:mobile"
+$gitlab_vpn_root = "git@gitlab-server.cyberghostvpn.com:pia-mobile/ios"
+$gitlab_kn_root = "git@gitlab-server.cyberghostvpn.com:pia-mobile/shared"
 
 $regions_repo = 'mobile-common-regions'
 $accounts_repo = 'mobile-common-account'
@@ -28,8 +28,8 @@ abstract_target 'PIALibrary' do
     pod 'lottie-ios'
     pod 'FXPageControl'
     pod 'PopupDialog'
-    pod 'TunnelKit', :path => '/Users/jose/Projects/PIA/tunnelkit'
-    pod 'PIAWireguard', :git => "https://github.com/pia-foss/ios-wireguard"
+    pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :commit => '9130179'
+    pod 'PIAWireguard', :git => "#{$gitlab_vpn_root}/pia-wireguard.git"
     pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :commit => '6116a38'
     pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :commit => 'ca41c33'
     pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :branch => 'master'
