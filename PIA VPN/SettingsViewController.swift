@@ -89,7 +89,9 @@ enum Setting: Int {
     case stopInAppMessages
 
     case submitDebugReport
-        
+
+    case shareServiceQualityData
+
     case resetSettings
     
     // development
@@ -162,6 +164,8 @@ class SettingsViewController: AutolayoutViewController {
 
         case applicationInformation
         
+        case serviceQualityGroup
+        
         case reset
 
         case development
@@ -179,6 +183,7 @@ class SettingsViewController: AutolayoutViewController {
         .inAppSettings,
         .geoSettings,
         .applicationInformation,
+        .serviceQualityGroup,
         .reset,
         .contentBlocker,
         .info
@@ -218,6 +223,9 @@ class SettingsViewController: AutolayoutViewController {
         ],
         .applicationInformation: [
             .submitDebugReport,
+        ],
+        .serviceQualityGroup: [
+            .shareServiceQualityData
         ],
         .reset: [
             .resetSettings
@@ -267,6 +275,8 @@ class SettingsViewController: AutolayoutViewController {
     private lazy var switchEnvironment = UISwitch()
 
     private lazy var switchInAppMessages = UISwitch()
+    
+    private lazy var switchShareServiceQualityData = UISwitch()
 
     private lazy var imvSelectedOption = UIImageView(image: Asset.accessorySelected.image)
 
@@ -332,7 +342,8 @@ class SettingsViewController: AutolayoutViewController {
         switchEnableNMT.addTarget(self, action: #selector(toggleNMT(_:)), for: .valueChanged)
         switchEnvironment.addTarget(self, action: #selector(toggleEnv(_:)), for: .valueChanged)
         switchInAppMessages.addTarget(self, action: #selector(toggleStopInAppMessages(_:)), for: .valueChanged)
-        
+        switchShareServiceQualityData.addTarget(self, action: #selector(toggleShareServiceQualityData(_:)), for: .valueChanged)
+
         redisplaySettings()
 
         NotificationCenter.default.addObserver(self,
@@ -459,6 +470,11 @@ class SettingsViewController: AutolayoutViewController {
     
     @objc private func toggleStopInAppMessages(_ sender: UISwitch) {
         AppPreferences.shared.stopInAppMessages = sender.isOn
+        redisplaySettings()
+    }
+    
+    @objc private func toggleShareServiceQualityData(_ sender: UISwitch) {
+        AppPreferences.shared.shareServiceQualityData = sender.isOn
         redisplaySettings()
     }
     
@@ -970,6 +986,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .applicationInformation:
             return L10n.Settings.ApplicationInformation.title
 
+        case .serviceQualityGroup:
+            return nil
+
         case .reset:
             return L10n.Settings.Reset.title
 
@@ -1015,6 +1034,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 
             case .applicationInformation:
                 cell.textLabel?.text = L10n.Settings.Log.information
+                
+            case .serviceQualityGroup:
+                cell.textLabel?.text = L10n.Settings.Service.Quality.Share.description
                 
             case .reset:
                 cell.textLabel?.text = L10n.Settings.Reset.footer
@@ -1321,6 +1343,13 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .crash:
             cell.textLabel?.text = "Crash"
             cell.detailTextLabel?.text = nil
+        case .shareServiceQualityData:
+            cell.textLabel?.text = L10n.Settings.Service.Quality.Share.title
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchMACE
+            cell.selectionStyle = .none
+            switchShareServiceQualityData.isOn = AppPreferences.shared.shareServiceQualityData
+
         }
         
 

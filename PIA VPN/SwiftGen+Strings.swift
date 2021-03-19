@@ -990,6 +990,16 @@ internal enum L10n {
         internal static let description = L10n.tr("Localizable", "settings.server.network.description")
       }
     }
+    internal enum Service {
+      internal enum Quality {
+        internal enum Share {
+          /// To help us ensure the performance of our service, you can share your connection stats with us. These reports do not include any personally identifiable information.
+          internal static let description = L10n.tr("Localizable", "settings.service.quality.share.description")
+          /// Share your connection stats
+          internal static let title = L10n.tr("Localizable", "settings.service.quality.share.title")
+        }
+      }
+    }
     internal enum Small {
       internal enum Packets {
         /// Will slightly lower the IP packet size to improve compatibility with some routers and mobile networks.
