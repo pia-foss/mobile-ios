@@ -835,7 +835,7 @@ class SettingsViewController: AutolayoutViewController {
         if Flags.shared.enablesDevelopmentSettings {
             sections.append(.development)
         }
-        if Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.shareServiceQualityData) {
+        if Client.configuration.featureFlags.contains(Client.FeatureFlags.shareServiceQualityData) {
             rowsBySection[.serviceQualityGroup]?.insert(contentsOf: [.shareServiceQualityData], at: 0)
         } else {
             sections.remove(at: sections.firstIndex(of: .serviceQualityGroup)!)
@@ -1042,7 +1042,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.textLabel?.text = L10n.Settings.Log.information
                 
             case .serviceQualityGroup:
-                cell.textLabel?.text = Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.shareServiceQualityData) ?
+                cell.textLabel?.text = Client.configuration.featureFlags.contains(Client.FeatureFlags.shareServiceQualityData) ?
                     L10n.Settings.Service.Quality.Share.description : nil
                 
             case .reset:
