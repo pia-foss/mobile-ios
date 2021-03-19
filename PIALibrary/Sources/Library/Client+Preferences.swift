@@ -62,6 +62,8 @@ private protocol PreferencesStore: class {
 
     var signInWithAppleFakeEmail: String? { get set }
 
+    var shareServiceQualityData: Bool { get set }
+
     func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration?
     
     func setVPNCustomConfiguration(_ customConfiguration: VPNCustomConfiguration, for vpnType: String)
@@ -92,6 +94,7 @@ private extension PreferencesStore {
         ikeV2IntegrityAlgorithm = source.ikeV2IntegrityAlgorithm
         ikeV2EncryptionAlgorithm = source.ikeV2EncryptionAlgorithm
         signInWithAppleFakeEmail = source.signInWithAppleFakeEmail
+        shareServiceQualityData = source.shareServiceQualityData
     }
 }
 
@@ -342,6 +345,15 @@ extension Client {
             }
         }
 
+        /// Shares anonymous data to the service quality library.
+        public fileprivate(set) var shareServiceQualityData: Bool {
+            get {
+                return accessedDatabase.plain.shareServiceQualityData ?? false
+            }
+            set {
+                accessedDatabase.plain.shareServiceQualityData = newValue
+            }
+        }
 
     }
 }
@@ -376,6 +388,7 @@ extension Client.Preferences {
             ikeV2IntegrityAlgorithm = IKEv2IntegrityAlgorithm.defaultIntegrity.value()
             ikeV2EncryptionAlgorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm.value()
             signInWithAppleFakeEmail = nil
+            shareServiceQualityData = false
         }
 
         /**
@@ -454,6 +467,9 @@ extension Client.Preferences {
 
         /// :nodoc:
         public var signInWithAppleFakeEmail: String?
+        
+        /// :nodoc:
+        public var shareServiceQualityData: Bool
 
         /// :nodoc:
         public func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration? {

@@ -88,6 +88,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         static let nmtGenericRules = "NMTGenericRules"
 
+        static let shareServiceQualityData = "ShareServiceQualityData"
+
     }
     
     private let backend: UserDefaults
@@ -441,6 +443,15 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.signInWithAppleFakeEmail)
         }
     }
+    
+    var shareServiceQualityData: Bool? {
+        get {
+            return backend.bool(forKey: Entries.shareServiceQualityData)
+        }
+        set {
+            backend.set(newValue, forKey: Entries.shareServiceQualityData)
+        }
+    }
 
     //MARK: Networks
     var cachedNetworks: [String] {
@@ -565,6 +576,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.ikeV2EncryptionAlgorithm)
         backend.removeObject(forKey: Entries.serverNetwork)
         backend.removeObject(forKey: Entries.signInWithAppleFakeEmail)
+        backend.removeObject(forKey: Entries.shareServiceQualityData)
         backend.synchronize()
     }
 

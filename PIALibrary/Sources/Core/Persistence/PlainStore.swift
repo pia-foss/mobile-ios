@@ -102,5 +102,7 @@ protocol PlainStore: class {
     var trustCellularData: Bool? { get set }
 
     var trustedNetworks: [String] { get set }
+    
+    var shareServiceQualityData: Bool? { get set }
 
 }
