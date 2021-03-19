@@ -105,6 +105,24 @@ internal enum L10n {
         }
       }
     }
+    internal enum Share {
+      internal enum Data {
+        internal enum Buttons {
+          /// Accept
+          internal static let accept = L10n.tr("Signup", "share.data.buttons.accept")
+          /// No thanks
+          internal static let noThanks = L10n.tr("Signup", "share.data.buttons.noThanks")
+        }
+        internal enum Text {
+          /// To help us ensure the performance of our service, you can share your connection stats with us. These reports do not include any personally identifiable information.
+          internal static let description = L10n.tr("Signup", "share.data.text.description")
+          /// You can always control this from your settings
+          internal static let footer = L10n.tr("Signup", "share.data.text.footer")
+          /// Please help us improve our service
+          internal static let title = L10n.tr("Signup", "share.data.text.title")
+        }
+      }
+    }
     internal enum Success {
       /// Thank you for signing up with us. We have sent your account username and password at your email address at %@
       internal static func messageFormat(_ p1: Any) -> String {

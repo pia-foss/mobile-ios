@@ -37,6 +37,15 @@ public class SignupSuccessViewController: AutolayoutViewController, BrandableNav
     @IBOutlet private weak var buttonSubmit: PIAButton!
     @IBOutlet private weak var usernameContainer: UIView!
     @IBOutlet private weak var passwordContainer: UIView!
+    
+    //Share data
+    @IBOutlet private weak var shareDataContainer: UIView!
+    @IBOutlet private weak var shareDataImageView: UIImageView!
+    @IBOutlet private weak var shareDataTitleLabel: UILabel!
+    @IBOutlet private weak var shareDataDescriptionLabel: UILabel!
+    @IBOutlet private weak var acceptButton: PIAButton!
+    @IBOutlet private weak var cancelButton: PIAButton!
+    @IBOutlet private weak var shareDataFooterLabel: UILabel!
 
     @IBOutlet private weak var constraintPictureXOffset: NSLayoutConstraint!
     
@@ -69,6 +78,17 @@ public class SignupSuccessViewController: AutolayoutViewController, BrandableNav
         self.styleSubmitButton()
         self.styleContainers()
                 
+        shareDataImageView.image = UIImage(named: "image-purchase-success")
+        shareDataTitleLabel.text = L10n.Signup.Share.Data.Text.title
+        shareDataDescriptionLabel.text = L10n.Signup.Share.Data.Text.description
+        shareDataFooterLabel.text = L10n.Signup.Share.Data.Text.footer
+        self.styleShareDataButtons()
+
+        if !Client.configuration.featureFlags.contains(Client.FeatureFlags.shareServiceQualityData) {
+            shareDataContainer.removeFromSuperview()
+        }
+
+        
     }
     
     @IBAction private func submit() {
@@ -76,6 +96,28 @@ public class SignupSuccessViewController: AutolayoutViewController, BrandableNav
             fatalError("User account not set in metadata")
         }
         completionDelegate?.welcomeDidSignup(withUser: user, topViewController: self)
+    }
+    
+    @IBAction private func acceptShareData() {
+        let preferences = Client.preferences.editable()
+        preferences.shareServiceQualityData = true
+        preferences.commit()
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.3) {
+                self.shareDataContainer.alpha = 0
+            }
+        }
+    }
+    
+    @IBAction private func rejectShareData() {
+        let preferences = Client.preferences.editable()
+        preferences.shareServiceQualityData = false
+        preferences.commit()
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.3) {
+                self.shareDataContainer.alpha = 0
+            }
+        }
     }
 
     // MARK: Restylable
@@ -86,9 +128,17 @@ public class SignupSuccessViewController: AutolayoutViewController, BrandableNav
         Theme.current.applyNavigationBarStyle(to: self)
         Theme.current.applyPrincipalBackground(view)
         Theme.current.applyPrincipalBackground(viewContainer!)
+        Theme.current.applyPrincipalBackground(shareDataContainer!)
 
         Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applySubtitle(labelMessage)
+
+        Theme.current.applyTitle(shareDataTitleLabel, appearance: .dark)
+        Theme.current.applySubtitle(shareDataDescriptionLabel)
+        Theme.current.applySmallSubtitle(shareDataFooterLabel)
+        Theme.current.applyTransparentButton(cancelButton,
+                                             withSize: 1.0)
+        Theme.current.applyButtonLabelMediumStyle(acceptButton)
 
         Theme.current.applySubtitle(labelUsernameCaption)
         Theme.current.applyTitle(labelUsername, appearance: .dark)
@@ -101,6 +151,19 @@ public class SignupSuccessViewController: AutolayoutViewController, BrandableNav
         buttonSubmit.style(style: TextStyle.Buttons.piaGreenButton)
         buttonSubmit.setTitle(L10n.Signup.Success.submit.uppercased(),
                               for: [])
+    }
+    
+    private func styleShareDataButtons() {
+        acceptButton.setRounded()
+        acceptButton.style(style: TextStyle.Buttons.piaGreenButton)
+        acceptButton.setTitle(L10n.Signup.Share.Data.Buttons.accept.uppercased(),
+                              for: [])
+        cancelButton.setRounded()
+        cancelButton.style(style: TextStyle.Buttons.piaPlainTextButton)
+        cancelButton.setTitle(L10n.Signup.Share.Data.Buttons.noThanks.uppercased(),
+                              for: [])
+        Theme.current.applyTransparentButton(cancelButton,
+                                             withSize: 1.0)
     }
     
     private func styleContainers() {

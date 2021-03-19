@@ -63,3 +63,9 @@
 "walkthrough.page.2.description" = "With servers around the globe, you are always under protection.";
 "walkthrough.page.3.title" = "Protect yourself from ads";
 "walkthrough.page.3.description" = "Enabling our Content Blocker prevents ads from showing in Safari.";
+
+"share.data.buttons.accept" = "Accept";
+"share.data.buttons.noThanks" = "No thanks";
+"share.data.text.title" = "Please help us improve our service";
+"share.data.text.description" = "To help us ensure the performance of our service, you can share your connection stats with us. These reports do not include any personally identifiable information.";
+"share.data.text.footer" = "You can always control this from your settings";
