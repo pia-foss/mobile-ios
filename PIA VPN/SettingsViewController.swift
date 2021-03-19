@@ -225,7 +225,6 @@ class SettingsViewController: AutolayoutViewController {
             .submitDebugReport,
         ],
         .serviceQualityGroup: [
-            .shareServiceQualityData
         ],
         .reset: [
             .resetSettings
@@ -474,7 +473,9 @@ class SettingsViewController: AutolayoutViewController {
     }
     
     @objc private func toggleShareServiceQualityData(_ sender: UISwitch) {
-        AppPreferences.shared.shareServiceQualityData = sender.isOn
+        let preferences = Client.preferences.editable()
+        preferences.shareServiceQualityData = sender.isOn
+        preferences.commit()
         redisplaySettings()
     }
     
@@ -834,6 +835,11 @@ class SettingsViewController: AutolayoutViewController {
         if Flags.shared.enablesDevelopmentSettings {
             sections.append(.development)
         }
+        if Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.shareServiceQualityData) {
+            rowsBySection[.serviceQualityGroup]?.insert(contentsOf: [.shareServiceQualityData], at: 0)
+        } else {
+            sections.remove(at: sections.firstIndex(of: .serviceQualityGroup)!)
+        }
         visibleSections = sections
         
         let dnsSettingsEnabled = Flags.shared.enablesDNSSettings
@@ -1036,7 +1042,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.textLabel?.text = L10n.Settings.Log.information
                 
             case .serviceQualityGroup:
-                cell.textLabel?.text = L10n.Settings.Service.Quality.Share.description
+                cell.textLabel?.text = Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.shareServiceQualityData) ?
+                    L10n.Settings.Service.Quality.Share.description : nil
                 
             case .reset:
                 cell.textLabel?.text = L10n.Settings.Reset.footer
@@ -1348,7 +1355,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchMACE
             cell.selectionStyle = .none
-            switchShareServiceQualityData.isOn = AppPreferences.shared.shareServiceQualityData
+            switchShareServiceQualityData.isOn = Client.preferences.shareServiceQualityData
 
         }
         

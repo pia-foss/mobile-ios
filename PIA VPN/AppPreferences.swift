@@ -99,9 +99,6 @@ class AppPreferences {
         // Dev
         static let appEnvironmentIsProduction = "AppEnvironmentIsProduction"
         static let stagingVersion = "StagingVersion"
-        
-        // Service Quality
-        static let shareServiceQualityData = "ShareServiceQualityData"
 
     }
 
@@ -447,15 +444,6 @@ class AppPreferences {
         }
     }
     
-    var shareServiceQualityData: Bool {
-        get {
-            return defaults.bool(forKey: Entries.shareServiceQualityData)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.shareServiceQualityData)
-        }
-    }
-    
     var showsDedicatedIPView: Bool {
         get {
             return defaults.bool(forKey: Entries.showsDedicatedIPView)
@@ -536,7 +524,6 @@ class AppPreferences {
             Entries.disablesMultiDipTokens: true,
             Entries.checksDipExpirationRequest: true,
             Entries.stagingVersion: 1,
-            Entries.shareServiceQualityData: false,
             Entries.appEnvironmentIsProduction: Client.environment == .production ? true : false,
         ])
 
@@ -750,7 +737,6 @@ class AppPreferences {
         failureConnections = 0
         showGeoServers = true
         stopInAppMessages = false
-        shareServiceQualityData = false
         stagingVersion = 1
         dedicatedTokenIPReleation = [:]
         appEnvironmentIsProduction = Client.environment == .production ? true : false
@@ -782,7 +768,6 @@ class AppPreferences {
         failureConnections = 0
         showGeoServers = true
         stopInAppMessages = false
-        shareServiceQualityData = false
         dismissedMessages = []
         stagingVersion = 1
         dedicatedTokenIPReleation = [:]

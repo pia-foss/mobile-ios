@@ -186,6 +186,7 @@ struct AppConstants {
         static let dedicatedIp = "dedicated-ip"
         static let disableMultiDipTokens = "disable-multi-dip-tokens"
         static let checkDipExpirationRequest = "check-dip-expiration-request"
+        static let shareServiceQualityData = "service-quality-enabled"
     }
     
 }

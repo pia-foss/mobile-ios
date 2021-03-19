@@ -125,6 +125,12 @@ class Bootstrapper {
             AppPreferences.shared.showsDedicatedIPView = Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.dedicatedIp)
             AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.checkDipExpirationRequest)
             AppPreferences.shared.disablesMultiDipTokens = Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.disableMultiDipTokens)
+            
+            if !Client.configuration.featureFlags.contains(AppConstants.FeatureFlags.disableMultiDipTokens) {
+                let preferences = Client.preferences.editable()
+                preferences.shareServiceQualityData = false
+                preferences.commit()
+            }
         })
         MessagesManager.shared.refreshMessages()
 
