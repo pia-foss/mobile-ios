@@ -181,6 +181,8 @@
 		827570DE24DABE88008F9800 /* AddCustomNetworksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570DC24DABE88008F9800 /* AddCustomNetworksViewController.swift */; };
 		827570E124DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570DF24DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift */; };
 		827570E224DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827570DF24DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift */; };
+		8276DFE62608B63800BB7B40 /* ShowConnectionStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8276DFE52608B63800BB7B40 /* ShowConnectionStatsViewController.swift */; };
+		8276DFE72608B63800BB7B40 /* ShowConnectionStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8276DFE52608B63800BB7B40 /* ShowConnectionStatsViewController.swift */; };
 		829EB507253598BD003E74DD /* DedicatedIpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB506253598BD003E74DD /* DedicatedIpViewController.swift */; };
 		829EB508253598BD003E74DD /* DedicatedIpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB506253598BD003E74DD /* DedicatedIpViewController.swift */; };
 		829EB51125359DBB003E74DD /* DedicatedIpRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB50F25359DBB003E74DD /* DedicatedIpRowViewCell.swift */; };
@@ -611,6 +613,7 @@
 		827570D624DAB6E4008F9800 /* NetworkFooterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFooterCollectionViewCell.swift; sourceTree = "<group>"; };
 		827570DC24DABE88008F9800 /* AddCustomNetworksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomNetworksViewController.swift; sourceTree = "<group>"; };
 		827570DF24DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNetworkCollectionViewCell.swift; sourceTree = "<group>"; };
+		8276DFE52608B63800BB7B40 /* ShowConnectionStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowConnectionStatsViewController.swift; sourceTree = "<group>"; };
 		829EB506253598BD003E74DD /* DedicatedIpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DedicatedIpViewController.swift; sourceTree = "<group>"; };
 		829EB50F25359DBB003E74DD /* DedicatedIpRowViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DedicatedIpRowViewCell.swift; sourceTree = "<group>"; };
 		829EB51025359DBB003E74DD /* DedicatedIpRowViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DedicatedIpRowViewCell.xib; sourceTree = "<group>"; };
@@ -843,6 +846,7 @@
 				829EB5302535AD27003E74DD /* DedicatedIpEmptyHeaderViewCell.swift */,
 				82C9F3CA25C43863005039F9 /* ActiveDedicatedIpHeaderViewCell.swift */,
 				829EB5482535BA40003E74DD /* DedicatedIPTitleHeaderViewCell.swift */,
+				8276DFE52608B63800BB7B40 /* ShowConnectionStatsViewController.swift */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -2023,6 +2027,7 @@
 				82A1AD3024B87CF20003DD02 /* PIACard.swift in Sources */,
 				0E3A35291FD9A960000B0F99 /* DashboardViewController.swift in Sources */,
 				DDB6B95121C94E2E00DE8C5F /* TrustedNetworksViewController.swift in Sources */,
+				8276DFE72608B63800BB7B40 /* ShowConnectionStatsViewController.swift in Sources */,
 				0E9452A61FDB578400891948 /* RegionCell.swift in Sources */,
 				827570D524DAA317008F9800 /* NetworkRuleOptionView.swift in Sources */,
 				0EFDC1ED1FE4B9DC007C0B9B /* AppConstants.swift in Sources */,
@@ -2160,6 +2165,7 @@
 				0E3A35281FD9A960000B0F99 /* DashboardViewController.swift in Sources */,
 				DDB6B95021C94E2E00DE8C5F /* TrustedNetworksViewController.swift in Sources */,
 				82C9F3CC25C43863005039F9 /* ActiveDedicatedIpHeaderViewCell.swift in Sources */,
+				8276DFE62608B63800BB7B40 /* ShowConnectionStatsViewController.swift in Sources */,
 				827570D424DAA317008F9800 /* NetworkRuleOptionView.swift in Sources */,
 				0E9452A51FDB578400891948 /* RegionCell.swift in Sources */,
 				DD829EE22449A4A400E2EE55 /* SiriShortcutsManager.swift in Sources */,

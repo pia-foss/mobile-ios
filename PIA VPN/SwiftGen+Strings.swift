@@ -998,6 +998,10 @@ internal enum L10n {
           /// Share your connection stats
           internal static let title = L10n.tr("Localizable", "settings.service.quality.share.title")
         }
+        internal enum Show {
+          /// Connection stats
+          internal static let title = L10n.tr("Localizable", "settings.service.quality.show.title")
+        }
       }
     }
     internal enum Small {

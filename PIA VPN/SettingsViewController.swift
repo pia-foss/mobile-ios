@@ -91,6 +91,8 @@ enum Setting: Int {
     case submitDebugReport
 
     case shareServiceQualityData
+    
+    case showServiceQualityData
 
     case resetSettings
     
@@ -476,6 +478,7 @@ class SettingsViewController: AutolayoutViewController {
         let preferences = Client.preferences.editable()
         preferences.shareServiceQualityData = sender.isOn
         preferences.commit()
+        
         redisplaySettings()
     }
     
@@ -835,8 +838,12 @@ class SettingsViewController: AutolayoutViewController {
         if Flags.shared.enablesDevelopmentSettings {
             sections.append(.development)
         }
+        rowsBySection[.serviceQualityGroup]?.removeAll()
         if Client.configuration.featureFlags.contains(Client.FeatureFlags.shareServiceQualityData) {
             rowsBySection[.serviceQualityGroup]?.insert(contentsOf: [.shareServiceQualityData], at: 0)
+            if Client.preferences.shareServiceQualityData {
+                rowsBySection[.serviceQualityGroup]?.insert(contentsOf: [.showServiceQualityData], at: 1)
+            }
         } else {
             sections.remove(at: sections.firstIndex(of: .serviceQualityGroup)!)
         }
@@ -1353,10 +1360,12 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .shareServiceQualityData:
             cell.textLabel?.text = L10n.Settings.Service.Quality.Share.title
             cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchMACE
+            cell.accessoryView = switchShareServiceQualityData
             cell.selectionStyle = .none
             switchShareServiceQualityData.isOn = Client.preferences.shareServiceQualityData
-
+        case .showServiceQualityData:
+            cell.textLabel?.text = L10n.Settings.Service.Quality.Show.title
+            cell.detailTextLabel?.text = nil
         }
         
 
@@ -1595,6 +1604,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             controller = OptionsViewController()
             controller?.options = options.map { $0 }
             controller?.selectedOption = AppPreferences.shared.stagingVersion
+
+        case .showServiceQualityData:
+            self.perform(segue: StoryboardSegue.Main.serviceQualityDataSegueIdentifier)
 
         case .crash:
             fatalError("Crashing staging app")
