@@ -36,6 +36,7 @@ Pod::Spec.new do |s|
         p.dependency "PIARegionsModule"
         p.dependency "PIAAccountModule"
         p.dependency "PIACSIModule"
+        p.dependency "PIAKPIModule"
         
     end
 
