@@ -479,6 +479,12 @@ class SettingsViewController: AutolayoutViewController {
         preferences.shareServiceQualityData = sender.isOn
         preferences.commit()
         
+        if sender.isOn {
+            ServiceQualityManager.shared.start()
+        } else {
+            ServiceQualityManager.shared.stop()
+        }
+        
         redisplaySettings()
     }
     

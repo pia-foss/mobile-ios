@@ -130,6 +130,12 @@ class Bootstrapper {
                 let preferences = Client.preferences.editable()
                 preferences.shareServiceQualityData = false
                 preferences.commit()
+            } else {
+                if Client.preferences.shareServiceQualityData {
+                    ServiceQualityManager.shared.start()
+                } else {
+                    ServiceQualityManager.shared.stop()
+                }
             }
         })
         MessagesManager.shared.refreshMessages()

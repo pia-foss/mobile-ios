@@ -70,7 +70,7 @@ extension Theme {
         case .connecting, .disconnecting:
             label.textColor = palette.accent1
         
-        case .disconnected:
+        case .disconnected, .unknown:
             label.textColor = palette.accent2
         }
     }

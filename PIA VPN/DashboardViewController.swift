@@ -373,6 +373,10 @@ class DashboardViewController: AutolayoutViewController {
             
         } else {
             
+            if Client.preferences.shareServiceQualityData {
+                ServiceQualityManager.shared.connectionCancelledEvent()
+            }
+
             disconnectWithOneSecondDelay()
 
         }
@@ -665,6 +669,8 @@ class DashboardViewController: AutolayoutViewController {
             navigationItem.titleView = titleLabelView
             setNeedsStatusBarAppearanceUpdate()
 
+        case .unknown:
+            break
 //        case .changingServer:
 //            powerConnection.powerState = .pending
 //            labelStatus.text = L10n.Dashboard.Vpn.changingRegion
