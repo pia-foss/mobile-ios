@@ -56,14 +56,12 @@
 		0E392D8D1FE2F8780002160D /* ConnectivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D8B1FE2F8780002160D /* ConnectivityStatus.swift */; };
 		0E392D8F1FE2FBBE0002160D /* GlossConnectivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D8E1FE2FBBE0002160D /* GlossConnectivityStatus.swift */; };
 		0E392D901FE2FBBE0002160D /* GlossConnectivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D8E1FE2FBBE0002160D /* GlossConnectivityStatus.swift */; };
-		0E392D961FE316860002160D /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D941FE316860002160D /* DebugLog.swift */; };
 		0E392D9D1FE31D630002160D /* MockVPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2ADD3F1FE156EA00BB170C /* MockVPNProvider.swift */; };
 		0E392D9E1FE31D630002160D /* MockVPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2ADD3F1FE156EA00BB170C /* MockVPNProvider.swift */; };
 		0E392DA01FE323ED0002160D /* PIAWebServices+Ephemeral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D9F1FE323ED0002160D /* PIAWebServices+Ephemeral.swift */; };
 		0E392DA11FE323ED0002160D /* PIAWebServices+Ephemeral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D9F1FE323ED0002160D /* PIAWebServices+Ephemeral.swift */; };
 		0E392DA31FE3247E0002160D /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392DA21FE3247E0002160D /* Endpoint.swift */; };
 		0E392DA41FE3247E0002160D /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392DA21FE3247E0002160D /* Endpoint.swift */; };
-		0E392DAA1FE329AD0002160D /* PlatformVPNLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392DA81FE329AD0002160D /* PlatformVPNLog.swift */; };
 		0E392DB01FE3366B0002160D /* NSData+Compression.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E392DAE1FE3366A0002160D /* NSData+Compression.m */; };
 		0E392DB11FE3366B0002160D /* NSData+Compression.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E392DAF1FE3366B0002160D /* NSData+Compression.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		0E392DB21FE33AF00002160D /* NSData+Compression.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E392DAF1FE3366B0002160D /* NSData+Compression.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -237,6 +235,9 @@
 		8221921F24CEBABA00C24F1C /* NMTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921E24CEBABA00C24F1C /* NMTType.swift */; };
 		8221922024CEBABA00C24F1C /* NMTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921E24CEBABA00C24F1C /* NMTType.swift */; };
 		822BC1D024BF20C90041BF9A /* UIControl+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BC1CF24BF20C90041BF9A /* UIControl+Action.swift */; };
+		8276E175260B5ED400BB7B40 /* ServiceQualityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8276E174260B5ED400BB7B40 /* ServiceQualityManager.swift */; };
+		8276E1E6260B961C00BB7B40 /* PIAKPIClientStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8276E1E5260B961B00BB7B40 /* PIAKPIClientStateProvider.swift */; };
+		8276E1ED260B962900BB7B40 /* PIAKPIStagingClientStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8276E1EC260B962900BB7B40 /* PIAKPIStagingClientStateProvider.swift */; };
 		829EB63F2535C432003E74DD /* DedicatedIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB63E2535C432003E74DD /* DedicatedIP.swift */; };
 		829EB6402535C432003E74DD /* DedicatedIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB63E2535C432003E74DD /* DedicatedIP.swift */; };
 		82C374F82514DE7D00E391EE /* EndpointManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C374F42514DC6D00E391EE /* EndpointManagerTests.swift */; };
@@ -394,10 +395,8 @@
 		0E392D7C1FE2E4C10002160D /* MemoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStore.swift; sourceTree = "<group>"; };
 		0E392D8B1FE2F8780002160D /* ConnectivityStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityStatus.swift; sourceTree = "<group>"; };
 		0E392D8E1FE2FBBE0002160D /* GlossConnectivityStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlossConnectivityStatus.swift; sourceTree = "<group>"; };
-		0E392D941FE316860002160D /* DebugLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
 		0E392D9F1FE323ED0002160D /* PIAWebServices+Ephemeral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PIAWebServices+Ephemeral.swift"; sourceTree = "<group>"; };
 		0E392DA21FE3247E0002160D /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
-		0E392DA81FE329AD0002160D /* PlatformVPNLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformVPNLog.swift; sourceTree = "<group>"; };
 		0E392DAE1FE3366A0002160D /* NSData+Compression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Compression.m"; sourceTree = "<group>"; };
 		0E392DAF1FE3366B0002160D /* NSData+Compression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Compression.h"; sourceTree = "<group>"; };
 		0E392DB71FE34B5A0002160D /* NSString+URL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+URL.h"; sourceTree = "<group>"; };
@@ -573,6 +572,9 @@
 		8221921B24CEBA3800C24F1C /* NMTRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMTRules.swift; sourceTree = "<group>"; };
 		8221921E24CEBABA00C24F1C /* NMTType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMTType.swift; sourceTree = "<group>"; };
 		822BC1CF24BF20C90041BF9A /* UIControl+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Action.swift"; sourceTree = "<group>"; };
+		8276E174260B5ED400BB7B40 /* ServiceQualityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceQualityManager.swift; sourceTree = "<group>"; };
+		8276E1E5260B961B00BB7B40 /* PIAKPIClientStateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAKPIClientStateProvider.swift; sourceTree = "<group>"; };
+		8276E1EC260B962900BB7B40 /* PIAKPIStagingClientStateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAKPIStagingClientStateProvider.swift; sourceTree = "<group>"; };
 		829EB63E2535C432003E74DD /* DedicatedIP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DedicatedIP.swift; sourceTree = "<group>"; };
 		82C374F42514DC6D00E391EE /* EndpointManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointManagerTests.swift; sourceTree = "<group>"; };
 		82C374F62514DC7200E391EE /* server.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = server.json; sourceTree = "<group>"; };
@@ -803,7 +805,6 @@
 				DD56E3F3225F5D22002EDFB2 /* GlossProduct.swift */,
 				0EFB512D1F82D7C50033B81F /* PIAWebServices.swift */,
 				0E392D9F1FE323ED0002160D /* PIAWebServices+Ephemeral.swift */,
-				0E392DA81FE329AD0002160D /* PlatformVPNLog.swift */,
 			);
 			path = WebServices;
 			sourceTree = "<group>";
@@ -867,7 +868,6 @@
 				82E20B1024F652ED0065EFE3 /* AccountInfo+Kotlin.swift */,
 				0E392D8B1FE2F8780002160D /* ConnectivityStatus.swift */,
 				0EE78AF51F81880E002E4CDD /* Credentials.swift */,
-				0E392D941FE316860002160D /* DebugLog.swift */,
 				0EE771081F9D21020029A77B /* Payment.swift */,
 				0EE1068B1F8250A1009514E9 /* Plan.swift */,
 				0EA8072620A1A0090033EC1A /* Redeem.swift */,
@@ -1028,6 +1028,7 @@
 		0EE106901F82900B009514E9 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				8276E173260B5EC500BB7B40 /* ServiceQuality */,
 				8221921A24CEBA0800C24F1C /* NMT */,
 				DDFCFAB821E926750081F235 /* Util */,
 				DDFCFAA521E900650081F235 /* Tiles */,
@@ -1172,6 +1173,14 @@
 			path = NMT;
 			sourceTree = "<group>";
 		};
+		8276E173260B5EC500BB7B40 /* ServiceQuality */ = {
+			isa = PBXGroup;
+			children = (
+				8276E174260B5ED400BB7B40 /* ServiceQualityManager.swift */,
+			);
+			path = ServiceQuality;
+			sourceTree = "<group>";
+		};
 		82FD5D542521F2B600E390CB /* Providers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1181,6 +1190,8 @@
 				82FD5D552521F2DD00E390CB /* PIARegionClientStateProvider.swift */,
 				82FD5D5D2521F30300E390CB /* PIAAccountClientStateProvider.swift */,
 				82FD5D652521F32B00E390CB /* PIAAccountStagingClientStateProvider.swift */,
+				8276E1E5260B961B00BB7B40 /* PIAKPIClientStateProvider.swift */,
+				8276E1EC260B962900BB7B40 /* PIAKPIStagingClientStateProvider.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -1713,7 +1724,6 @@
 				0E392DBC1FE34B5A0002160D /* NSString+URL.m in Sources */,
 				84125E0C213D7E0E001BCC19 /* PIAFonts.swift in Sources */,
 				0E3D13DA1F9E273300434A48 /* GlossSignup.swift in Sources */,
-				0E392D961FE316860002160D /* DebugLog.swift in Sources */,
 				0E7BC6EB1F96B1040035C8B2 /* PIAWebServices.swift in Sources */,
 				829EB6402535C432003E74DD /* DedicatedIP.swift in Sources */,
 				0E245C9E1FECF0C20010DEF2 /* ClientAccess.swift in Sources */,
@@ -1793,7 +1803,6 @@
 				0E392D7B1FE2E47D0002160D /* TransientStore.swift in Sources */,
 				0EA8073020A1E7C60033EC1A /* GlossRedeem.swift in Sources */,
 				AA319C5025833088004BECF6 /* PIACrashlabProtocolInformationProvider.swift in Sources */,
-				0E392DAA1FE329AD0002160D /* PlatformVPNLog.swift in Sources */,
 				0E53A8551FE5D770000C2A18 /* MockWebServices.swift in Sources */,
 				0E7BC6F91F96B1120035C8B2 /* Signup.swift in Sources */,
 				0E492C6B1FE61485007F23DF /* Client+Database.swift in Sources */,
@@ -1905,6 +1914,7 @@
 				0EA8072F20A1E7C60033EC1A /* GlossRedeem.swift in Sources */,
 				0EA4C4311FDDD48F0041C3D8 /* Server.swift in Sources */,
 				DD56E3F4225F5D22002EDFB2 /* GlossProduct.swift in Sources */,
+				8276E175260B5ED400BB7B40 /* ServiceQualityManager.swift in Sources */,
 				DD7411A923EC35B40058CEF3 /* PIAWGTunnelProfile.swift in Sources */,
 				84577FC5213D9B4D006DEC3D /* UILabel+LineHeight.swift in Sources */,
 				0EB9667E1FDF36490086ABC2 /* GlossParser.swift in Sources */,
@@ -1977,6 +1987,7 @@
 				DD1AB10523FC280000396E74 /* DeviceModel.swift in Sources */,
 				0E392DBB1FE34B5A0002160D /* NSString+URL.m in Sources */,
 				AA319C4F25833088004BECF6 /* PIACrashlabProtocolInformationProvider.swift in Sources */,
+				8276E1E6260B961C00BB7B40 /* PIAKPIClientStateProvider.swift in Sources */,
 				0E2ADCCA1FE06D7A00BB170C /* Array+Math.swift in Sources */,
 				0E2ADD331FE1472F00BB170C /* VPNStatus.swift in Sources */,
 				0E0F95961FD560C40046DC64 /* CircleProgressView.swift in Sources */,
@@ -1990,6 +2001,7 @@
 				0EAA388C1F9CC4C4000149CF /* InAppProvider.swift in Sources */,
 				DDFCFAA821E924A70081F235 /* TileProvider.swift in Sources */,
 				0EB8C06D1F9CD38B005857E4 /* SignupInProgressViewController.swift in Sources */,
+				8276E1ED260B962900BB7B40 /* PIAKPIStagingClientStateProvider.swift in Sources */,
 				0ED1585A1FDC083F008F6522 /* SwiftGen+Strings.swift in Sources */,
 				0E2ADCE91FE0843000BB170C /* Macros+Pinger.swift in Sources */,
 				DDD824EA2189CD5700151709 /* NavigationLogoView.swift in Sources */,

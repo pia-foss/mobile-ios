@@ -54,6 +54,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         
         static let vpnCustomConfigurationMaps = "VPNCustomConfigurationMaps"
 
+        static let lastKnownVpnStatus = "LastKnownVPNStatus"
+
         static let persistentConnection = "PersistentConnection" // legacy
 
         static let mace = "MACE" // legacy
@@ -372,6 +374,17 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.vpnCustomConfigurationMaps)
         }
     }
+    
+    var lastKnownVpnStatus: VPNStatus {
+        get {
+            return VPNStatus(rawValue: backend.string(forKey: Entries.lastKnownVpnStatus) ?? "") ?? .unknown
+        }
+        set {
+            backend.set(newValue.rawValue, forKey: Entries.lastKnownVpnStatus)
+        }
+
+    }
+
     
     // MARK: Preferences
 
