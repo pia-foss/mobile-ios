@@ -69,7 +69,7 @@ public class ServiceQualityManager: NSObject {
         guard kpiManager != nil else {
             return
         }
-        kpiManager.submit(event: KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.connectionAttempt, eventProperties: KPIClientEvent.EventProperties(connectionSource: "manual", data: nil, preRelease: Client.environment == .staging ? true : false, reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: Client.providers.vpnProvider.currentVPNType), eventToken: kpiToken)) { (error) in
+        kpiManager.submit(event: KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.connectionAttempt, eventProperties: KPIClientEvent.EventProperties(connectionSource: KPIConnectionSource.manual, data: nil, preRelease: Client.environment == .staging ? true : false, reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)) { (error) in
             print("sent")
         }
     }
@@ -78,7 +78,8 @@ public class ServiceQualityManager: NSObject {
         guard kpiManager != nil else {
             return
         }
-        kpiManager.submit(event: KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.connectionEstablished, eventProperties: KPIClientEvent.EventProperties(connectionSource: "manual", data: nil, preRelease: Client.environment == .staging ? true : false, reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: Client.providers.vpnProvider.currentVPNType), eventToken: kpiToken)) { (error) in
+        
+        kpiManager.submit(event: KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.connectionEstablished, eventProperties: KPIClientEvent.EventProperties(connectionSource: KPIConnectionSource.manual, data: nil, preRelease: Client.environment == .staging ? true : false, reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)) { (error) in
             print("sent")
         }
     }
@@ -87,7 +88,7 @@ public class ServiceQualityManager: NSObject {
         guard kpiManager != nil else {
             return
         }
-        kpiManager.submit(event: KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.connectionCanceled, eventProperties: KPIClientEvent.EventProperties(connectionSource: "manual", data: nil, preRelease: Client.environment == .staging ? true : false, reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: Client.providers.vpnProvider.currentVPNType), eventToken: kpiToken)) { (error) in
+        kpiManager.submit(event: KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.connectionCancelled, eventProperties: KPIClientEvent.EventProperties(connectionSource: KPIConnectionSource.manual, data: nil, preRelease: Client.environment == .staging ? true : false, reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)) { (error) in
             print("sent")
         }
     }
@@ -99,6 +100,21 @@ public class ServiceQualityManager: NSObject {
         kpiManager.recentEvents { events in
             completion(events)
         }
+    }
+    
+    private func currentProtocol() -> KPIVpnProtocol {
+        
+        switch Client.providers.vpnProvider.currentVPNType {
+        case IKEv2Profile.vpnType:
+            return KPIVpnProtocol.ipsec
+        case PIATunnelProfile.vpnType:
+            return KPIVpnProtocol.openvpn
+        case PIAWGTunnelProfile.vpnType:
+            return KPIVpnProtocol.wireguard
+        default:
+            return KPIVpnProtocol.ipsec
+        }
+
     }
 
 }
