@@ -127,7 +127,7 @@ class QuickConnectTile: UIView, Tileable {
             }
         }
         
-        let favoriteServers = AppPreferences.shared.favoriteServerIdentifiersGen4
+        let favoriteServers = AppPreferences.shared.favoriteServerIdentifiersGen4.filterDuplicate{ ($0) }
 
         autocompleteRecentServers()
         
@@ -148,7 +148,11 @@ class QuickConnectTile: UIView, Tileable {
                     button.accessibilityLabel = server.name
                 } else if let imageView = element as? UIImageView {
                     if imageView.tag == 0 {
-                        imageView.isHidden = !favoriteServers.contains(server.identifier)
+                        if let dipToken = server.dipToken {
+                            imageView.isHidden = !favoriteServers.contains(server.identifier+dipToken)
+                        } else {
+                            imageView.isHidden = !favoriteServers.contains(server.identifier)
+                        }
                     } else {
                         imageView.isHidden = server.dipToken == nil
                     }

@@ -72,7 +72,7 @@ class RegionsViewController: AutolayoutViewController {
             servers.append(contentsOf: customServers)
         }
         
-        let favoriteServers = AppPreferences.shared.favoriteServerIdentifiersGen4
+        let favoriteServers = AppPreferences.shared.favoriteServerIdentifiersGen4.filterDuplicate{ ($0) }
         
         for server in servers {
             server.isFavorite = favoriteServers.contains(server.identifier+(server.dipToken ?? ""))
