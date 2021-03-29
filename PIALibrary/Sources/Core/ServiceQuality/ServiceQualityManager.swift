@@ -34,13 +34,13 @@ public class ServiceQualityManager: NSObject {
         
         if Client.environment == .staging {
             kpiManager = KPIBuilder()
-                .setAppVersion(appVersion: "3.2.0")
+                .setAppVersion(appVersion: Macros.localizedVersionNumber())
                 .setKPIFlushEventMode(kpiSendEventMode: .perBatch)
                 .setKPIClientStateProvider(kpiClientStateProvider: PIAKPIClientStateProvider())
                 .build()
         } else {
             kpiManager = KPIBuilder()
-                .setAppVersion(appVersion: "3.2.0")
+                .setAppVersion(appVersion: Macros.localizedVersionNumber())
                 .setKPIFlushEventMode(kpiSendEventMode: .perBatch)
                 .setKPIClientStateProvider(kpiClientStateProvider: PIAKPIStagingClientStateProvider())
                 .build()
