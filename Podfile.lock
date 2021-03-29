@@ -158,11 +158,11 @@ DEPENDENCIES:
   - GradientProgressBar (~> 2.0)
   - "PIAAccountModule (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/shared/account.git`, commit `720e6bc`)"
   - "PIACSIModule (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/shared/csi.git`, branch `master`)"
-  - "PIAKPIModule (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/shared/kpi.git`, commit `ab3951d`)"
-  - "PIALibrary/Library (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/client-library-apple.git`, commit `2eda454`)"
-  - "PIALibrary/Mock (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/client-library-apple.git`, commit `2eda454`)"
-  - "PIALibrary/UI (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/client-library-apple.git`, commit `2eda454`)"
-  - "PIALibrary/VPN (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/client-library-apple.git`, commit `2eda454`)"
+  - "PIAKPIModule (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/shared/kpi.git`, commit `b054ac6`)"
+  - "PIALibrary/Library (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/client-library-apple.git`, commit `b8480b6`)"
+  - "PIALibrary/Mock (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/client-library-apple.git`, commit `b8480b6`)"
+  - "PIALibrary/UI (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/client-library-apple.git`, commit `b8480b6`)"
+  - "PIALibrary/VPN (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/client-library-apple.git`, commit `b8480b6`)"
   - "PIARegionsModule (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/shared/regions.git`, commit `ca41c33`)"
   - "PIAWireguard (from `git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/pia-wireguard.git`)"
   - Popover
@@ -212,10 +212,10 @@ EXTERNAL SOURCES:
     :branch: master
     :git: "git@gitlab-server.cyberghostvpn.com:pia-mobile/shared/csi.git"
   PIAKPIModule:
-    :commit: ab3951d
+    :commit: b054ac6
     :git: "git@gitlab-server.cyberghostvpn.com:pia-mobile/shared/kpi.git"
   PIALibrary:
-    :commit: 2eda454
+    :commit: b8480b6
     :git: "git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/client-library-apple.git"
   PIARegionsModule:
     :commit: ca41c33
@@ -234,10 +234,10 @@ CHECKOUT OPTIONS:
     :commit: b62d1bab4e5b8627b1e9aafa20dc76e9966da921
     :git: "git@gitlab-server.cyberghostvpn.com:pia-mobile/shared/csi.git"
   PIAKPIModule:
-    :commit: ab3951d
+    :commit: b054ac6
     :git: "git@gitlab-server.cyberghostvpn.com:pia-mobile/shared/kpi.git"
   PIALibrary:
-    :commit: 2eda454
+    :commit: b8480b6
     :git: "git@gitlab-server.cyberghostvpn.com:pia-mobile/ios/client-library-apple.git"
   PIARegionsModule:
     :commit: ca41c33
@@ -287,6 +287,6 @@ SPEC CHECKSUMS:
   TunnelKit: 2a6aadea2d772a2760b153aee27d1c334c9ca6db
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 8bfc64fd4973695016ef65146261fcbc65207023
+PODFILE CHECKSUM: e2e65b75d4d97091c7d803752eaa4bc1af1b313e
 
 COCOAPODS: 1.10.1
