@@ -560,11 +560,7 @@ extension Keychain {
     public func set(favorites: [String]) throws {
 
         var knownFavorites = [String]()
-        if let storedFavorites = try? getFavorites() {
-            removeFavorites()
-            knownFavorites = storedFavorites
-        }
-
+        removeFavorites()
         knownFavorites.append(contentsOf: favorites)
 
         var query = [String: Any]()
