@@ -13,8 +13,8 @@ inhibit_all_warnings!
 # Libraries
 
 $git_root = "https://github.com/pia-foss"
-$gitlab_vpn_root = "git@gitlab-server.cyberghostvpn.com:pia-mobile/ios"
-$gitlab_kn_root = "git@gitlab-server.cyberghostvpn.com:pia-mobile/shared"
+$gitlab_vpn_root = "git@gitlab.kape.com:pia-mobile/ios"
+$gitlab_kn_root = "git@gitlab.kape.com:pia-mobile/shared"
 
 $library_pod = 'PIALibrary'
 $library_repo = 'client-library-apple'
@@ -72,14 +72,14 @@ def shared_main_pods
     #pod "PIAAccountModule", :git => "#{$git_root}/#{$accounts_repo}"
     pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :commit => '720e6bc'
     #pod "PIARegionsModule", :git => "#{$git_root}/#{$regions_repo}"
-    pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :commit => 'ca41c33'
+    pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :commit => '338b673'
     #pod "PIACSIModule", :git => "#{$git_root}/#{$csi_repo}"
     pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :branch => 'master'
 
     #library_by_path('/Users/jose/Projects/PIA')
     #library_by_git('b73d9e5')
     #library_by_gitlab_branch('develop')
-    library_by_gitlab_by_git('59d4523')
+    library_by_gitlab_by_git('40ca223')
     #library_by_version('~> 1.1.3')
 end
 
