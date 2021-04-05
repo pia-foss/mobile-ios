@@ -52,7 +52,7 @@ class GlossServer: GlossParser {
                 for address in addressArray {
                     if let ip: String = "ip" <~~ address,
                         let cn: String = "cn" <~~ address {
-                        meta = Server.ServerAddressIP(ip: ip, cn: cn)
+                        meta = Server.ServerAddressIP(ip: ip, cn: cn, van: false)
                     }
                 }
             }
@@ -67,8 +67,9 @@ class GlossServer: GlossParser {
             if let addressArray: [JSON] = "ovpntcp" <~~ ovpnTCP {
                 for address in addressArray {
                     if let ip: String = "ip" <~~ address,
-                        let cn: String = "cn" <~~ address {
-                        ovpnTCPServerAddressIP.append(Server.ServerAddressIP(ip: ip, cn: cn))
+                        let cn: String = "cn" <~~ address,
+                        let van: Bool = "van" <~~ address {
+                        ovpnTCPServerAddressIP.append(Server.ServerAddressIP(ip: ip, cn: cn, van: van))
                     }
                 }
             }
@@ -79,8 +80,9 @@ class GlossServer: GlossParser {
             if let addressArray: [JSON] = "ovpnudp" <~~ ovpnUDP {
                 for address in addressArray {
                     if let ip: String = "ip" <~~ address,
-                        let cn: String = "cn" <~~ address {
-                        ovpnUDPServerAddressIP.append(Server.ServerAddressIP(ip: ip, cn: cn))
+                        let cn: String = "cn" <~~ address,
+                        let van: Bool = "van" <~~ address {
+                        ovpnUDPServerAddressIP.append(Server.ServerAddressIP(ip: ip, cn: cn, van: van))
                     }
                 }
             }
@@ -92,7 +94,7 @@ class GlossServer: GlossParser {
                 for address in addressArray {
                     if let ip: String = "ip" <~~ address,
                         let cn: String = "cn" <~~ address {
-                        wgServerAddressIP.append(Server.ServerAddressIP(ip: ip, cn: cn))
+                        wgServerAddressIP.append(Server.ServerAddressIP(ip: ip, cn: cn, van: false))
                     }
                 }
             }
@@ -104,7 +106,7 @@ class GlossServer: GlossParser {
                 for address in addressArray {
                     if let ip: String = "ip" <~~ address,
                         let cn: String = "cn" <~~ address {
-                        ikev2ServerAddressIP.append(Server.ServerAddressIP(ip: ip, cn: cn))
+                        ikev2ServerAddressIP.append(Server.ServerAddressIP(ip: ip, cn: cn, van: false))
                     }
                 }
             }

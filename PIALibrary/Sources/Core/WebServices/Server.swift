@@ -83,6 +83,9 @@ public class Server: Hashable {
         
         /// The endpoint common name.
         public let cn: String
+        
+        /// The server is using the latest OVPN version.
+        public let van: Bool
 
         /// The response time for this address.
         private(set) var responseTime: Int?
@@ -94,9 +97,10 @@ public class Server: Hashable {
         }
         
         /// :nodoc:
-        public init(ip: String, cn: String) {
+        public init(ip: String, cn: String, van: Bool) {
             self.ip = ip
             self.cn = cn
+            self.van = van
         }
         
         func updateResponseTime(_ time: Int) {
