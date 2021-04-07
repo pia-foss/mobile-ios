@@ -1476,8 +1476,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             let options: [OpenVPN.Cipher] = [
                 .aes128gcm,
                 .aes256gcm,
-                .aes128cbc,
-                .aes256cbc
             ]
             controller = OptionsViewController()
             controller?.options = options.map { $0.rawValue }
