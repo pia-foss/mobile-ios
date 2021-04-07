@@ -79,7 +79,7 @@ def shared_main_pods
     #library_by_path('/Users/jose/Projects/PIA')
     #library_by_git('b73d9e5')
     #library_by_gitlab_branch('develop')
-    library_by_gitlab_by_git('40ca223')
+    library_by_gitlab_by_git('f95e61b')
     #library_by_version('~> 1.1.3')
 end
 
