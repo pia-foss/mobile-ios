@@ -39,6 +39,6 @@ class PIACSIRegionInformationProvider : RegionInformationProvider {
                 redactedServers.append(redactedServer)
             }
         }
-        return redactedServers.debugDescription
+        return redactedServers.debugDescription.redactIPs()
     }
 }

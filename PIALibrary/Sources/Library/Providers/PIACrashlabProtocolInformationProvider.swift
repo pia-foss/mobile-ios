@@ -10,14 +10,15 @@ import Foundation
 import PIACSI
 
 class PIACSIProtocolInformationProvider : ProtocolInformationProvider {
-    
+
     private var protocolLogs: String?
-    
+
     func setProtocolLogs(protocolLogs: String) {
         self.protocolLogs = protocolLogs
     }
 
     func protocolInformation() -> String {
-        return protocolLogs ?? "Unknown"
+        protocolLogs = protocolLogs == nil ? protocolLogs : "Unknown"
+        return protocolLogs!.redactIPs()
     }
 }
