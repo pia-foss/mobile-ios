@@ -67,8 +67,8 @@ class GlossServer: GlossParser {
             if let addressArray: [JSON] = "ovpntcp" <~~ ovpnTCP {
                 for address in addressArray {
                     if let ip: String = "ip" <~~ address,
-                        let cn: String = "cn" <~~ address,
-                        let van: Bool = "van" <~~ address {
+                        let cn: String = "cn" <~~ address {
+                        let van: Bool = "van" <~~ address ?? false
                         ovpnTCPServerAddressIP.append(Server.ServerAddressIP(ip: ip, cn: cn, van: van))
                     }
                 }
@@ -80,8 +80,8 @@ class GlossServer: GlossParser {
             if let addressArray: [JSON] = "ovpnudp" <~~ ovpnUDP {
                 for address in addressArray {
                     if let ip: String = "ip" <~~ address,
-                        let cn: String = "cn" <~~ address,
-                        let van: Bool = "van" <~~ address {
+                        let cn: String = "cn" <~~ address {
+                        let van: Bool = "van" <~~ address ?? false
                         ovpnUDPServerAddressIP.append(Server.ServerAddressIP(ip: ip, cn: cn, van: van))
                     }
                 }
@@ -168,8 +168,8 @@ extension Server: JSONEncodable {
             "dns" ~~> hostname,
             "ping" ~~> pingAddress?.description,
             "servers" ~~> jsonify([
-                "ovpnudp" ~~> ovpnTCPobj,
-                "ovpntcp" ~~> ovpnUDPobj,
+                "ovpnudp" ~~> ovpnUDPobj,
+                "ovpntcp" ~~> ovpnTCPobj,
                 "wg" ~~> wgUDPobj,
                 "ikev2" ~~> ikeV2UDPobj,
             ]),

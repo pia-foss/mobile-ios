@@ -28,7 +28,7 @@ abstract_target 'PIALibrary' do
     pod 'lottie-ios'
     pod 'FXPageControl'
     pod 'PopupDialog'
-    pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :commit => '9130179'
+    pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :commit => '2556fbe'
     pod 'PIAWireguard', :git => "#{$gitlab_vpn_root}/pia-wireguard.git"
     pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :commit => '6116a38'
     pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :commit => '338b673'
