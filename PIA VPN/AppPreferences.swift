@@ -568,10 +568,19 @@ class AppPreferences {
         AppPreferences.shared.piaHandshake = handshake
 
         var pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
-
+        var shouldUpdate = false
+        
+        if pendingOpenVPNConfiguration.cipher == nil || pendingOpenVPNConfiguration.cipher == OpenVPN.Cipher.aes128cbc || pendingOpenVPNConfiguration.cipher == OpenVPN.Cipher.aes256cbc {
+            shouldUpdate = true
+            pendingOpenVPNConfiguration.cipher = .aes256gcm
+        }
+        
         if pendingOpenVPNConfiguration.digest != OpenVPN.Digest.sha256 {
+            shouldUpdate = true
             pendingOpenVPNConfiguration.digest = OpenVPN.Digest.sha256
-            
+        }
+        
+        if shouldUpdate {
             var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: pendingOpenVPNConfiguration.build())
             if AppPreferences.shared.useSmallPackets {
                 builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
