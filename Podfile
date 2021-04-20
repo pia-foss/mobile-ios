@@ -103,7 +103,7 @@ def piawireguard_pod
 end
 
 def piawireguard_gitlab_pod
-    pod 'PIAWireguard', :git => "#{$gitlab_vpn_root}/pia-wireguard.git"
+    pod 'PIAWireguard', :git => "#{$gitlab_vpn_root}/pia-wireguard.git", :commit => '0187076'
 end
 
 # Targets
