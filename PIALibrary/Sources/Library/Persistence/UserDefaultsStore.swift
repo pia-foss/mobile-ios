@@ -76,6 +76,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         
         static let ikeV2EncryptionAlgorithm = "IKEV2EncryptionAlgorithm"
 
+        static let ikeV2PacketSize = "IKEV2PacketSize"
+
         static let signInWithAppleFakeEmail = "SignInWithAppleFakeEmail"
 
         static let nmtRulesEnabled = "NMTRulesEnabled"
@@ -408,6 +410,18 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.ikeV2EncryptionAlgorithm)
         }
     }
+    
+    var ikeV2PacketSize: Int {
+        get {
+            guard let value = backend.object(forKey: Entries.ikeV2PacketSize) as? Int else {
+                return 0
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.ikeV2PacketSize)
+        }
+    }
 
     var nmtMigrationSuccess: Bool? {
         get {
@@ -563,6 +577,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.trustedNetworks)
         backend.removeObject(forKey: Entries.ikeV2IntegrityAlgorithm)
         backend.removeObject(forKey: Entries.ikeV2EncryptionAlgorithm)
+        backend.removeObject(forKey: Entries.ikeV2PacketSize)
         backend.removeObject(forKey: Entries.serverNetwork)
         backend.removeObject(forKey: Entries.signInWithAppleFakeEmail)
         backend.synchronize()
