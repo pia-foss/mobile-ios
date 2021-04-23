@@ -25,7 +25,7 @@ import PIAWireguard
 
 extension PIAWireguardConfiguration: VPNCustomConfiguration {
     public func serialized() -> [String: Any] {
-        return ["customDNSServers": customDNSServers]
+        return ["customDNSServers": customDNSServers, "packetSize": packetSize]
     }
     
     public func isEqual(to: VPNCustomConfiguration) -> Bool {
@@ -33,6 +33,9 @@ extension PIAWireguardConfiguration: VPNCustomConfiguration {
             return false
         }
         guard (customDNSServers == other.customDNSServers) else {
+            return false
+        }
+        guard (packetSize == other.packetSize) else {
             return false
         }
         return true
