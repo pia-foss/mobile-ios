@@ -431,6 +431,9 @@ class SettingsViewController: AutolayoutViewController {
             AppPreferences.shared.wireGuardUseSmallPackets = sender.isOn
         } else if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
             AppPreferences.shared.useSmallPackets = sender.isOn
+        } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
+            AppPreferences.shared.ikeV2UseSmallPackets = sender.isOn
+            pendingPreferences.ikeV2PacketSize = sender.isOn ? AppConstants.IKEv2PacketSize.defaultPacketSize : AppConstants.IKEv2PacketSize.highPacketSize
         }
         savePreferences()
     }
@@ -581,6 +584,7 @@ class SettingsViewController: AutolayoutViewController {
 
         preferences.ikeV2IntegrityAlgorithm = pendingPreferences.ikeV2IntegrityAlgorithm
         preferences.ikeV2EncryptionAlgorithm = pendingPreferences.ikeV2EncryptionAlgorithm
+        preferences.ikeV2PacketSize = pendingPreferences.ikeV2PacketSize
         preferences.commit()
 
         guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration else {
@@ -809,8 +813,14 @@ class SettingsViewController: AutolayoutViewController {
         if (pendingPreferences.vpnType == PIATunnelProfile.vpnType || pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType) {
             rowsBySection[.smallPackets] = [.useSmallPackets]
         } else {
-            rowsBySection[.smallPackets] = []
-            sections.remove(at: sections.firstIndex(of: .smallPackets)!)
+            if #available(iOS 14.0, *) {
+                if pendingPreferences.vpnType == IKEv2Profile.vpnType {
+                    rowsBySection[.smallPackets] = [.useSmallPackets]
+                }
+            } else {
+                rowsBySection[.smallPackets] = []
+                sections.remove(at: sections.firstIndex(of: .smallPackets)!)
+            }
         }
         
         if !Flags.shared.enablesContentBlockerSetting {
@@ -1011,12 +1021,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.textLabel?.text =  L10n.Settings.Hotspothelper.description
 
             case .smallPackets:
-                if (pendingPreferences.vpnType == PIATunnelProfile.vpnType || pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType) {
-                    cell.textLabel?.text = L10n.Settings.Small.Packets.description
-                } else {
-                    return nil
-                }
-                
+                cell.textLabel?.text = L10n.Settings.Small.Packets.description
+
             case .applicationInformation:
                 cell.textLabel?.text = L10n.Settings.Log.information
                 
@@ -1204,8 +1210,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.selectionStyle = .none
             if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
                 switchSmallPackets.isOn = AppPreferences.shared.useSmallPackets
-            } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType{
+            } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
                 switchSmallPackets.isOn = AppPreferences.shared.wireGuardUseSmallPackets
+            } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
+                switchSmallPackets.isOn = AppPreferences.shared.ikeV2UseSmallPackets
             }
 
         case .automaticReconnection:
