@@ -262,6 +262,7 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
             var customCfg = configuration.customConfiguration
             if let piaCfg = customCfg as? PIAWireguardConfiguration {
                 cfg.providerConfiguration?[PIAWireguardConfiguration.Keys.dnsServers] = piaCfg.customDNSServers
+                cfg.providerConfiguration?[PIAWireguardConfiguration.Keys.packetSize] = piaCfg.packetSize
             }
 
             return cfg
