@@ -79,7 +79,7 @@ def shared_main_pods
     #library_by_path('/Users/jose/Projects/PIA')
     #library_by_git('b73d9e5')
     #library_by_gitlab_branch('develop')
-    library_by_gitlab_by_git('b5834c4')
+    library_by_gitlab_by_git('f8a5180')
     #library_by_version('~> 1.1.3')
 end
 
@@ -103,7 +103,7 @@ def piawireguard_pod
 end
 
 def piawireguard_gitlab_pod
-    pod 'PIAWireguard', :git => "#{$gitlab_vpn_root}/pia-wireguard.git", :commit => '0187076'
+    pod 'PIAWireguard', :git => "#{$gitlab_vpn_root}/pia-wireguard.git", :commit => '2f9dff0'
 end
 
 # Targets

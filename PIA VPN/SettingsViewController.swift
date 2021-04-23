@@ -427,7 +427,11 @@ class SettingsViewController: AutolayoutViewController {
     }
 
     @objc private func toggleSmallPackets(_ sender: UISwitch) {
-        AppPreferences.shared.useSmallPackets = sender.isOn
+        if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+            AppPreferences.shared.wireGuardUseSmallPackets = sender.isOn
+        } else if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+            AppPreferences.shared.useSmallPackets = sender.isOn
+        }
         savePreferences()
     }
         
@@ -587,7 +591,7 @@ class SettingsViewController: AutolayoutViewController {
         pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
         pendingHandshake = AppPreferences.shared.piaHandshake
         pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
-        pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: [])
+        pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: [], packetSize: AppConstants.WireGuardPacketSize.defaultPacketSize)
 
         redisplaySettings()
         reportUpdatedPreferences()
@@ -802,7 +806,7 @@ class SettingsViewController: AutolayoutViewController {
         
         rowsBySection[.applicationSettings]?.insert(contentsOf: [.connectShortcut, .disconnectShortcut], at: 0)
 
-        if (pendingPreferences.vpnType == PIATunnelProfile.vpnType) {
+        if (pendingPreferences.vpnType == PIATunnelProfile.vpnType || pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType) {
             rowsBySection[.smallPackets] = [.useSmallPackets]
         } else {
             rowsBySection[.smallPackets] = []
@@ -883,7 +887,7 @@ class SettingsViewController: AutolayoutViewController {
                            }
                        }
                        if !isValid {
-                           pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: [])
+                        pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: [], packetSize: AppPreferences.shared.wireGuardUseSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
                        }
             }
         } else {
@@ -1007,7 +1011,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.textLabel?.text =  L10n.Settings.Hotspothelper.description
 
             case .smallPackets:
-                if (pendingPreferences.vpnType == PIATunnelProfile.vpnType) {
+                if (pendingPreferences.vpnType == PIATunnelProfile.vpnType || pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType) {
                     cell.textLabel?.text = L10n.Settings.Small.Packets.description
                 } else {
                     return nil
@@ -1198,7 +1202,11 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchSmallPackets
             cell.selectionStyle = .none
-            switchSmallPackets.isOn = AppPreferences.shared.useSmallPackets
+            if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+                switchSmallPackets.isOn = AppPreferences.shared.useSmallPackets
+            } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType{
+                switchSmallPackets.isOn = AppPreferences.shared.wireGuardUseSmallPackets
+            }
 
         case .automaticReconnection:
             cell.textLabel?.text = L10n.Settings.ApplicationSettings.KillSwitch.title
@@ -1780,7 +1788,7 @@ extension SettingsViewController: OptionsViewControllerDelegate {
                         if key == option {
                             isFound = true
                             if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                                pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: value)
+                                pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: value, packetSize: AppPreferences.shared.wireGuardUseSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
                             } else {
                                 pendingOpenVPNConfiguration.dnsServers = value
                             }
@@ -1870,7 +1878,13 @@ extension SettingsViewController: OptionsViewControllerDelegate {
             builder.shouldDebug = true
             pendingPreferences.setVPNCustomConfiguration(builder.build(), for: pendingPreferences.vpnType)
         } else {
-            pendingPreferences.setVPNCustomConfiguration(pendingWireguardVPNConfiguration, for: pendingPreferences.vpnType)
+            if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+                if AppPreferences.shared.wireGuardUseSmallPackets {
+                    pendingPreferences.setVPNCustomConfiguration(PIAWireguardConfiguration(customDNSServers: pendingWireguardVPNConfiguration.customDNSServers, packetSize: AppConstants.WireGuardPacketSize.defaultPacketSize), for: pendingPreferences.vpnType)
+                } else {
+                    pendingPreferences.setVPNCustomConfiguration(PIAWireguardConfiguration(customDNSServers: pendingWireguardVPNConfiguration.customDNSServers, packetSize: AppConstants.WireGuardPacketSize.highPacketSize), for: pendingPreferences.vpnType)
+                }
+            }
         }
 
         redisplaySettings()
@@ -1910,7 +1924,7 @@ extension SettingsViewController: SettingsViewControllerDelegate {
                 if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
                     pendingOpenVPNConfiguration.dnsServers = DNSList.shared.valueForKey(settingValue)
                 } else {
-                    pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: DNSList.shared.valueForKey(settingValue))
+                    pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: DNSList.shared.valueForKey(settingValue), packetSize: AppPreferences.shared.wireGuardUseSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
                 }
             }
         default:

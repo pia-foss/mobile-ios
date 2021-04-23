@@ -118,7 +118,7 @@ class Bootstrapper {
         defaults.vpnType = IKEv2Profile.vpnType
         defaults.vpnCustomConfigurations = [
             PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build(),
-            PIAWGTunnelProfile.vpnType: PIAWireguardConfiguration(customDNSServers: [])
+            PIAWGTunnelProfile.vpnType: PIAWireguardConfiguration(customDNSServers: [], packetSize: AppConstants.WireGuardPacketSize.defaultPacketSize)
         ]
         
         Client.providers.accountProvider.featureFlags({ _ in

@@ -49,7 +49,8 @@ class AppPreferences {
         static let piaSocketType = "PIASocketType"
 
         static let useSmallPackets = "UseSmallPackets"
-
+        static let wireGuardUseSmallPackets = "WireGuardUseSmallPackets"
+        
         static let favoriteServerIdentifiersGen4_deprecated = "FavoriteServerIdentifiersGen4"
 
         static let regionFilter = "RegionFilter"
@@ -286,6 +287,15 @@ class AppPreferences {
             defaults.set(newValue, forKey: Entries.useSmallPackets)
         }
     }
+    
+    var wireGuardUseSmallPackets: Bool {
+        get {
+            return defaults.bool(forKey: Entries.wireGuardUseSmallPackets)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.wireGuardUseSmallPackets)
+        }
+    }
 
     var dedicatedTokenIPReleation: [String: String] {
         get {
@@ -514,6 +524,7 @@ class AppPreferences {
             Entries.quickSettingNetworkToolVisible: true,
             Entries.quickSettingPrivateBrowserVisible: true,
             Entries.useSmallPackets: false,
+            Entries.wireGuardUseSmallPackets: true,
             Entries.canAskAgainForReview: false,
             Entries.successConnections: 0,
             Entries.failureConnections: 0,
@@ -738,6 +749,7 @@ class AppPreferences {
         quickSettingNetworkToolVisible = true
         quickSettingPrivateBrowserVisible = true
         useSmallPackets = false
+        wireGuardUseSmallPackets = true
         todayWidgetVpnProtocol = IKEv2Profile.vpnType
         todayWidgetVpnPort = "500"
         todayWidgetVpnSocket = "UDP"
@@ -771,6 +783,7 @@ class AppPreferences {
         quickSettingNetworkToolVisible = true
         quickSettingPrivateBrowserVisible = true
         useSmallPackets = false
+        wireGuardUseSmallPackets = true
         let preferences = Client.preferences.editable().reset()
         preferences.commit()
         Client.resetServers(completionBlock: {_ in })
