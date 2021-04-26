@@ -65,4 +65,6 @@ class MemoryStore: TransientStore, ConfigurationAccess {
     var publicIP: String?
     
     var vpnIP: String?
+
+    var vpnLog: String = ""
 }

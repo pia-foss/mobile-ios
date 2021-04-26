@@ -151,7 +151,7 @@ public class IKEv2Profile: NetworkExtensionProfile {
     
     /// :nodoc:
     public func requestLog(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: ((String?, Error?) -> Void)?) {
-        callback?(nil, ClientError.unsupported)
+        callback?(self.currentVPN.description, nil)
     }
 
     /// :nodoc:

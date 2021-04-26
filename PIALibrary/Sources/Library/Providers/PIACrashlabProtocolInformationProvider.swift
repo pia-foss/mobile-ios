@@ -18,7 +18,7 @@ class PIACSIProtocolInformationProvider : ProtocolInformationProvider {
     }
 
     func protocolInformation() -> String {
-        protocolLogs = protocolLogs == nil ? protocolLogs : "Unknown"
+        protocolLogs = protocolLogs != nil ? protocolLogs : "Unknown"
         return protocolLogs!.redactIPs()
     }
 }

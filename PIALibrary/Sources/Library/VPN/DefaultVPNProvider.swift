@@ -74,6 +74,10 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         return accessedDatabase.transient.vpnIP
     }
     
+    var vpnLog: String {
+        return accessedDatabase.transient.vpnLog
+    }
+    
     private var activeProfile: VPNProfile? {
         get {
             return accessedDatabase.transient.activeVPNProfile
@@ -231,7 +235,14 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         guard let activeProfile = activeProfile else {
             preconditionFailure()
         }
-        activeProfile.disconnect(callback)
+        
+        let configuration = vpnClientConfiguration()
+        activeProfile.requestLog(withCustomConfiguration: configuration.customConfiguration) { (content, error) in
+            var log = self.accessedDatabase.transient.vpnLog + "\n\n" + (content ?? "Unknown Protocol Logs \(error.debugDescription)")
+            self.accessedDatabase.transient.vpnLog = log
+            activeProfile.disconnect(callback)
+        }
+        
     }
     
     func updatePreferences(_ callback: SuccessLibraryCallback?) {
@@ -276,10 +287,15 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
         guard let activeProfile = activeProfile else {
             preconditionFailure()
         }
-        let configuration = vpnClientConfiguration()
-        activeProfile.requestLog(withCustomConfiguration: configuration.customConfiguration) { (content, error) in
-            let rawContent = content ?? "Unknown Protocol Logs \(error.debugDescription)"
-            self.webServices.submitDebugReport(shouldSendPersistedData, rawContent, callback)
+        
+        if vpnStatus == .disconnected {
+            self.webServices.submitDebugReport(shouldSendPersistedData, vpnLog ?? "Unknown", callback)
+        } else {
+            let configuration = vpnClientConfiguration()
+            activeProfile.requestLog(withCustomConfiguration: configuration.customConfiguration) { (content, error) in
+                let rawContent = self.accessedDatabase.transient.vpnLog + "\n\n" + (content ?? "Unknown Protocol Logs \(error.debugDescription)")
+                self.webServices.submitDebugReport(shouldSendPersistedData, rawContent, callback)
+            }
         }
     }
     
