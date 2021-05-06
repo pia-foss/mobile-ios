@@ -93,7 +93,7 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
                 case .active:
                     Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image, message: L10n.Dedicated.Ip.Message.Valid.token)
                 case .expired:
-                    Macros.displayWarningImageNote(withImage: Asset.iconWarning.image, message: L10n.Dedicated.Ip.Message.Expired.token)
+                    print(L10n.Dedicated.Ip.Message.Expired.token) // we dont show the message to the user
                 default:
                     Macros.displayStickyNote(withMessage: L10n.Dedicated.Ip.Message.Invalid.token,
                                              andImage: Asset.iconWarning.image)
