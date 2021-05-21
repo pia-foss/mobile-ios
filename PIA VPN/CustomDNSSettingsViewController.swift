@@ -59,9 +59,10 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
             }
             DNSList.shared.addNewServerWithName((vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY),
                                                 andIPs: ips)
-            self.delegate?.updateSetting(Setting.vpnDns,
+            self.delegate?.updateSetting(NetworkSections.dns,
                                          withValue: (vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY))
-            self.navigationController?.popToRootViewController(animated: true)
+            Macros.postNotification(.PIASettingsHaveChanged)
+            self.navigationController?.popViewController(animated: true)
         }
     }
 
@@ -72,7 +73,7 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
         alertController.addActionWithTitle(L10n.Global.ok) {
             if let firstKey = DNSList.shared.firstKey() {
                 DNSList.shared.removeServer(name: (self.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY))
-                self.delegate?.updateSetting(Setting.vpnDns,
+                self.delegate?.updateSetting(NetworkSections.dns,
                                              withValue: firstKey)
             }
             self.navigationController?.popToRootViewController(animated: true)

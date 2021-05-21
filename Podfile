@@ -76,10 +76,10 @@ def shared_main_pods
     #pod "PIACSIModule", :git => "#{$git_root}/#{$csi_repo}"
     pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :branch => 'master'
 
-    #library_by_path('/Users/jose/Projects/PIA')
+    library_by_path('/Users/jose/Projects/PIA')
     #library_by_git('b73d9e5')
     #library_by_gitlab_branch('develop')
-    library_by_gitlab_by_git('b676f90')
+    #library_by_gitlab_by_git('b676f90')
     #library_by_version('~> 1.1.3')
 end
 
