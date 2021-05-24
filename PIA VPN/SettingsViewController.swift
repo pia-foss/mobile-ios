@@ -97,7 +97,6 @@ class SettingsViewController: AutolayoutViewController {
 
         tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.estimatedSectionFooterHeight = 1.0
-        tableView.estimatedSectionHeaderHeight = 1.0
         
         redisplaySettings()
         
@@ -550,6 +549,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         cell.textLabel?.text = section.localizedTitleMessage()
         cell.detailTextLabel?.text = ""
+        cell.imageView?.image = section.imageForSection().af_imageAspectScaled(toFit: CGSize(width: 30, height: 30))
 
         switch section {
             case .automation:
@@ -604,10 +604,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        Theme.current.applyTableSectionHeader(view)
     }
     
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {

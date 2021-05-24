@@ -40,7 +40,6 @@ class NetworkSettingsViewController: PIABaseSettingsViewController {
         
         tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.estimatedSectionFooterHeight = 1.0
-        tableView.estimatedSectionHeaderHeight = 1.0
                 
         tableView.delegate = self
         tableView.dataSource = self
@@ -55,7 +54,7 @@ class NetworkSettingsViewController: PIABaseSettingsViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        styleNavigationBarWithTitle("Network")
+        styleNavigationBarWithTitle(L10n.Settings.Section.network)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -87,7 +86,7 @@ class NetworkSettingsViewController: PIABaseSettingsViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
+        styleNavigationBarWithTitle(L10n.Settings.Section.network)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
@@ -235,10 +234,6 @@ extension NetworkSettingsViewController: UITableViewDelegate, UITableViewDataSou
         self.perform(segue: StoryboardSegue.Main.customDNSSegueIdentifier)
     }
 
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        Theme.current.applyTableSectionHeader(view)
-    }
-    
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         Theme.current.applyTableSectionFooter(view)
     }

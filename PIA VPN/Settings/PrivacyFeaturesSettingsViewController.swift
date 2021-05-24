@@ -39,7 +39,6 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
         
         tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.estimatedSectionFooterHeight = 1.0
-        tableView.estimatedSectionHeaderHeight = 1.0
                 
         tableView.delegate = self
         tableView.dataSource = self
@@ -64,7 +63,7 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refreshContentBlockerState()
-        styleNavigationBarWithTitle("Privacy Features")
+        styleNavigationBarWithTitle(L10n.Settings.Section.privacyFeatures)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -124,7 +123,7 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
+        styleNavigationBarWithTitle(L10n.Settings.Section.privacyFeatures)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
@@ -240,10 +239,6 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
                 self.hideLoadingAnimation()
             }
         }
-    }
-
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        Theme.current.applyTableSectionHeader(view)
     }
     
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {

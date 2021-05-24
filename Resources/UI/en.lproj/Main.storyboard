@@ -641,7 +641,7 @@
                             <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y48-1b-51o">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Koq-Ia-5Qo">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Koq-Ia-5Qo">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <prototypes>
@@ -679,7 +679,7 @@
                                                     </subviews>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingCell" textLabel="b42-md-11x" detailTextLabel="gEk-yF-DU5" style="IBUITableViewCellStyleValue1" id="H5j-r8-6Tp">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingCell" textLabel="b42-md-11x" detailTextLabel="gEk-yF-DU5" imageView="5ax-Gj-TKY" style="IBUITableViewCellStyleValue1" id="H5j-r8-6Tp">
                                                 <rect key="frame" x="0.0" y="136.33333587646484" width="375" height="43.666667938232422"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H5j-r8-6Tp" id="uLF-Sz-8Nd">
@@ -687,19 +687,23 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontSizeToFit="NO" id="b42-md-11x">
-                                                            <rect key="frame" x="16" y="11.999999999999998" width="33" height="20.333333333333332"/>
+                                                            <rect key="frame" x="73" y="11.999999999999998" width="33" height="20.333333333333332"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gEk-yF-DU5">
-                                                            <rect key="frame" x="315.33333333333331" y="11.999999999999998" width="43.666666666666664" height="20.333333333333332"/>
+                                                            <rect key="frame" x="315.33333333333337" y="11.999999999999998" width="43.666666666666664" height="20.333333333333332"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="icon-privacy-1" id="5ax-Gj-TKY">
+                                                            <rect key="frame" x="16" y="0.66666666666666785" width="42" height="42"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </imageView>
                                                     </subviews>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
@@ -3571,6 +3575,7 @@
     <resources>
         <image name="dip-badge-dark" width="44" height="44"/>
         <image name="favorite-selected" width="18" height="15"/>
+        <image name="icon-privacy-1" width="42" height="42"/>
         <image name="image-content-blocker" width="86" height="112"/>
         <image name="image-purchase-success" width="65.666664123535156" height="71.666664123535156"/>
         <image name="image-vpn-allow" width="77" height="111"/>

@@ -38,7 +38,6 @@ class DevelopmentSettingsViewController: PIABaseSettingsViewController {
         
         tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.estimatedSectionFooterHeight = 1.0
-        tableView.estimatedSectionHeaderHeight = 1.0
                 
         tableView.delegate = self
         tableView.dataSource = self
@@ -53,7 +52,7 @@ class DevelopmentSettingsViewController: PIABaseSettingsViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        styleNavigationBarWithTitle("Automation")
+        styleNavigationBarWithTitle("Development")
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -89,7 +88,7 @@ class DevelopmentSettingsViewController: PIABaseSettingsViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
+        styleNavigationBarWithTitle("Development")
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
@@ -243,10 +242,6 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
             alert.addDefaultAction(L10n.Global.close)
             self.present(alert, animated: true, completion: nil)
         }
-    }
-
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        Theme.current.applyTableSectionHeader(view)
     }
     
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {

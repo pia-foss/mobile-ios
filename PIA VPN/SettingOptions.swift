@@ -20,6 +20,7 @@
 //
 
 import Foundation
+import UIKit
 
 public enum SettingOptions: Int, EnumsBuilder {
 
@@ -33,12 +34,12 @@ public enum SettingOptions: Int, EnumsBuilder {
 
     public func localizedTitleMessage() -> String {
         switch self {
-            case .general: return "General"
-            case .protocols: return "Protocols"
-            case .network: return "Network"
-            case .privacyFeatures: return "Privacy Features"
-            case .automation: return "Automation"
-            case .help: return "Help"
+            case .general: return L10n.Settings.Section.general
+            case .protocols: return L10n.Settings.Section.protocols
+            case .network: return L10n.Settings.Section.network
+            case .privacyFeatures: return L10n.Settings.Section.privacyFeatures
+            case .automation: return L10n.Settings.Section.automation
+            case .help: return L10n.Settings.Section.help
             case .development: return "Development"
         }
     }
@@ -55,6 +56,17 @@ public enum SettingOptions: Int, EnumsBuilder {
         }
     }
 
+    public func imageForSection() -> UIImage {
+        switch self {
+            case .general: return Asset.Piax.Settings.iconGeneral.image
+            case .protocols: return Asset.Piax.Settings.iconProtocols.image
+            case .network: return Asset.Piax.Settings.iconNetwork.image
+            case .privacyFeatures: return Asset.Piax.Settings.iconPrivacy.image
+            case .automation: return Asset.Piax.Settings.iconAutomation.image
+            case .help: return Asset.Piax.Settings.iconAbout.image
+            case .development: return Asset.Piax.Settings.iconGeneral.image
+        }
+    }
 
     public func sectionsForSetting() -> [SettingSection] {
         switch self {
@@ -91,11 +103,11 @@ public enum GeneralSections: Int, SettingSection, EnumsBuilder {
     
     public func localizedTitleMessage() -> String {
         switch self {
-            case .connectSiri: return "Connect Siri"
-            case .disconnectSiri: return "Disconnect Siri"
-            case .showGeoRegions: return "Show Geo-located Regions"
-            case .showServiceCommunicationMessages: return "Show Service Communication Messages"
-            case .resetSettings: return "Reset settings to default"
+            case .connectSiri: return L10n.Siri.Shortcuts.Connect.Row.title
+            case .disconnectSiri: return L10n.Siri.Shortcuts.Disconnect.Row.title
+            case .showGeoRegions: return L10n.Settings.Geo.Servers.description
+            case .showServiceCommunicationMessages: return L10n.Inapp.Messages.Toggle.title
+            case .resetSettings: return L10n.Settings.Reset.Defaults.title
         }
     }
     
@@ -126,23 +138,23 @@ public enum ProtocolsSections: Int, SettingSection, EnumsBuilder {
     
     public func localizedTitleMessage() -> String {
         switch self {
-            case .protocolSelection: return "Protocol Selection"
-            case .transport: return "Transport"
-            case .remotePort: return "Remote Port"
-            case .dataEncryption: return "Data Encryption"
-            case .handshake: return "Handshake"
-            case .useSmallPackets: return "Use Small Packets"
+            case .protocolSelection: return L10n.Settings.Connection.VpnProtocol.title
+            case .transport: return L10n.Settings.Connection.Transport.title
+            case .remotePort: return L10n.Settings.Connection.RemotePort.title
+            case .dataEncryption: return L10n.Settings.Encryption.Cipher.title
+            case .handshake: return L10n.Settings.Encryption.Handshake.title
+            case .useSmallPackets: return L10n.Settings.Small.Packets.title
         }
     }
     
     public func localizedSubtitleMessage() -> String {
         switch self {
-        case .protocolSelection: return ""
-        case .transport: return ""
-        case .remotePort: return ""
-        case .dataEncryption: return ""
-        case .handshake: return ""
-        case .useSmallPackets: return ""
+            case .protocolSelection: return ""
+            case .transport: return ""
+            case .remotePort: return ""
+            case .dataEncryption: return ""
+            case .handshake: return ""
+            case .useSmallPackets: return ""
         }
     }
     
@@ -182,17 +194,17 @@ public enum PrivacyFeaturesSections: Int, SettingSection, EnumsBuilder {
 
     public func localizedTitleMessage() -> String {
         switch self {
-        case .killswitch: return "VPN Kill Switch"
-        case .safariContentBlocker: return "Safari Content blocker state"
-        case .refresh: return "Refresh block list"
+            case .killswitch: return L10n.Settings.ApplicationSettings.KillSwitch.title
+            case .safariContentBlocker: return L10n.Settings.ContentBlocker.title
+            case .refresh: return L10n.Settings.ContentBlocker.Refresh.title
         }
     }
     
     public func localizedSubtitleMessage() -> String {
         switch self {
-        case .killswitch: return ""
-        case .safariContentBlocker: return ""
-        case .refresh: return ""
+            case .killswitch: return ""
+            case .safariContentBlocker: return ""
+            case .refresh: return ""
         }
     }
     
@@ -209,8 +221,8 @@ public enum AutomationSections: Int, SettingSection, EnumsBuilder {
 
     public func localizedTitleMessage() -> String {
         switch self {
-        case .automation: return "Enable Automation"
-        case .manageAutomation: return "Manage Automation"
+            case .automation: return L10n.Network.Management.Tool.Enable.automation
+            case .manageAutomation: return L10n.Network.Management.Tool.title
         }
     }
     
@@ -235,9 +247,9 @@ public enum HelpSections: Int, SettingSection, EnumsBuilder {
 
     public func localizedTitleMessage() -> String {
         switch self {
-        case .sendDebugLogs: return "Send Debug Log to support"
-        case .latestNews: return "Latest News"
-        case .version: return "Version"
+        case .sendDebugLogs: return L10n.Settings.ApplicationInformation.Debug.title
+        case .latestNews: return L10n.Settings.Cards.History.title
+        case .version: return L10n.Global.version
         }
     }
     

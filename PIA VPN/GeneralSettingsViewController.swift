@@ -35,7 +35,6 @@ class GeneralSettingsViewController: PIABaseSettingsViewController {
         
         tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.estimatedSectionFooterHeight = 1.0
-        tableView.estimatedSectionHeaderHeight = 1.0
         
         switchGeoServers.addTarget(self, action: #selector(toggleGEOServers(_:)), for: .valueChanged)
         switchInAppMessages.addTarget(self, action: #selector(toggleStopInAppMessages(_:)), for: .valueChanged)
@@ -53,7 +52,7 @@ class GeneralSettingsViewController: PIABaseSettingsViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        styleNavigationBarWithTitle("General")
+        styleNavigationBarWithTitle(L10n.Settings.Section.general)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -82,7 +81,7 @@ class GeneralSettingsViewController: PIABaseSettingsViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
+        styleNavigationBarWithTitle(L10n.Settings.Section.general)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
@@ -124,26 +123,22 @@ extension GeneralSettingsViewController: UITableViewDelegate, UITableViewDataSou
 
         let section = GeneralSections.all()[indexPath.row]
         
+        cell.textLabel?.text = section.localizedTitleMessage()
+
         switch section {
             case .showServiceCommunicationMessages:
-                cell.textLabel?.text = L10n.Inapp.Messages.Toggle.title
                 cell.accessoryView = switchInAppMessages
                 cell.selectionStyle = .none
                 switchInAppMessages.isOn = AppPreferences.shared.stopInAppMessages //invert the boolean as the title has change to Show messages instead of Stop messages
 
             case .showGeoRegions:
-                cell.textLabel?.text = L10n.Settings.Geo.Servers.description
                 cell.textLabel?.numberOfLines = 0
                 cell.accessoryView = switchGeoServers
                 cell.selectionStyle = .none
                 switchGeoServers.isOn = AppPreferences.shared.showGeoServers
-                
-            case .resetSettings:
-                cell.textLabel?.text = section.localizedTitleMessage()
 
             default:
-                cell.textLabel?.text = section.localizedTitleMessage()
-
+                break
         }
 
         Theme.current.applySecondaryBackground(cell)
@@ -186,10 +181,6 @@ extension GeneralSettingsViewController: UITableViewDelegate, UITableViewDataSou
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        Theme.current.applyTableSectionHeader(view)
-    }
-    
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         Theme.current.applyTableSectionFooter(view)
     }

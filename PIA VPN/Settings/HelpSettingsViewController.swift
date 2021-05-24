@@ -37,7 +37,6 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
         
         tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.estimatedSectionFooterHeight = 1.0
-        tableView.estimatedSectionHeaderHeight = 1.0
                 
         tableView.delegate = self
         tableView.dataSource = self
@@ -53,7 +52,7 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        styleNavigationBarWithTitle("Automation")
+        styleNavigationBarWithTitle(L10n.Settings.Section.help)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -85,7 +84,7 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
+        styleNavigationBarWithTitle(L10n.Settings.Section.help)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
@@ -214,10 +213,6 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
         }
     }
 
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        Theme.current.applyTableSectionHeader(view)
-    }
-    
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         Theme.current.applyTableSectionFooter(view)
     }

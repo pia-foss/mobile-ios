@@ -46,6 +46,11 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        styleNavigationBarWithTitle(L10n.Settings.Dns.Custom.dns)
+    }
+    
     // MARK: Actions
     @objc private func update(_ sender: Any?) {
         if isValidForm() {
