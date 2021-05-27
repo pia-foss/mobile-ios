@@ -770,7 +770,6 @@ class AppPreferences {
         failureConnections = 0
         showGeoServers = true
         stopInAppMessages = false
-        stagingVersion = 1
         dedicatedTokenIPReleation = [:]
         appEnvironmentIsProduction = Client.environment == .production ? true : false
         MessagesManager.shared.reset()
@@ -804,7 +803,6 @@ class AppPreferences {
         showGeoServers = true
         stopInAppMessages = false
         dismissedMessages = []
-        stagingVersion = 1
         dedicatedTokenIPReleation = [:]
         MessagesManager.shared.reset()
         appEnvironmentIsProduction = Client.environment == .production ? true : false
