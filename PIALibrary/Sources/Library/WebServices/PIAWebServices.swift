@@ -440,7 +440,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                     return
                 }
                 
-                guard let bundle = GlossServersBundle(jsonString: RegionsUtils.init().stringify(regionsResponse: response))?.parsed else {
+                guard let bundle = GlossServersBundle(jsonString: RegionsUtils().stringify(regionsResponse: response))?.parsed else {
                     callback?(nil, ClientError.malformedResponseData)
                     return
                 }
