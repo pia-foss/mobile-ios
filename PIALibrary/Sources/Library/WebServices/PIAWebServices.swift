@@ -411,24 +411,45 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     #endif
     
     func downloadServers(_ callback: ((ServersBundle?, Error?) -> Void)?) {
-        self.regionsAPI.fetchRegions(locale: Locale.current.identifier.replacingOccurrences(of: "_", with: "-")) { (response, error) in
-            if let error = error {
-                callback?(nil, ClientError.noRegions)
-                return
-            }
+        
+        if Client.environment == .staging {
+            
+            if let url = Bundle(for: Self.self).url(forResource: "staging", withExtension: "json"), let jsonData = try? Data(contentsOf: url) {
+            
+                guard let bundle = GlossServersBundle(data: jsonData)?.parsed else {
+                    callback?(nil, ClientError.malformedResponseData)
+                    return
+                }
 
-            guard let response = response else {
+                callback?(bundle, nil)
+                
+            } else {
                 callback?(nil, ClientError.noRegions)
-                return
             }
             
-            guard let bundle = GlossServersBundle(jsonString: RegionsUtils.init().stringify(regionsResponse: response))?.parsed else {
-                callback?(nil, ClientError.malformedResponseData)
-                return
+        } else {
+            
+            self.regionsAPI.fetchRegions(locale: Locale.current.identifier.replacingOccurrences(of: "_", with: "-")) { (response, error) in
+                if let error = error {
+                    callback?(nil, ClientError.noRegions)
+                    return
+                }
+
+                guard let response = response else {
+                    callback?(nil, ClientError.noRegions)
+                    return
+                }
+                
+                guard let bundle = GlossServersBundle(jsonString: RegionsUtils().stringify(regionsResponse: response))?.parsed else {
+                    callback?(nil, ClientError.malformedResponseData)
+                    return
+                }
+                
+                callback?(bundle, nil)
             }
             
-            callback?(bundle, nil)
         }
+        
     }
     
     // MARK: Store
