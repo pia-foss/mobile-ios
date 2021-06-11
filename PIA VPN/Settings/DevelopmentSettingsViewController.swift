@@ -308,7 +308,7 @@ extension DevelopmentSettingsViewController: OptionsViewControllerDelegate {
                     Client.resetWebServices()
                 }
 
-                settingsDelegate.redisplaySettings()
+                settingsDelegate.refreshSettings()
                 Macros.postNotification(.PIASettingsHaveChanged)
 
             }

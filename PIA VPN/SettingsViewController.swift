@@ -76,29 +76,7 @@ class SettingsViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        pendingPreferences = Client.preferences.editable()
-        
-        guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration ??
-            Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration else {
-            fatalError("No default VPN custom configuration provided for PIA OpenVPN protocol")
-        }
-        
-        guard let currentWireguardVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ??
-            Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
-            fatalError("No default VPN custom configuration provided for PIA Wireguard protocol")
-        }
-        
-        pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
-        pendingHandshake = AppPreferences.shared.piaHandshake
-        pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
-        pendingWireguardVPNConfiguration = currentWireguardVPNConfiguration
-
-        validateDNSList()
-
-        tableView.sectionFooterHeight = UITableView.automaticDimension
-        tableView.estimatedSectionFooterHeight = 1.0
-        
-        redisplaySettings()
+        reloadSettings()
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(viewHasRotated),
@@ -107,8 +85,14 @@ class SettingsViewController: AutolayoutViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshSettings),
                                                name: .RefreshSettings,
                                                object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadSettings),
+                                               name: .ReloadSettings,
+                                               object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshWireGuardSettings),
                                                name: .RefreshWireGuardSettings,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(resetSettingsNavigationStack),
+                                               name: .ResetSettingsNavigationStack,
                                                object: nil)
 
         if shouldSetWireGuardSettings {
@@ -220,6 +204,10 @@ class SettingsViewController: AutolayoutViewController {
         tableView.reloadData()
     }
     
+    @objc func resetSettingsNavigationStack() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
     @objc private func refreshWireGuardSettings() {
         guard let currentWireguardVPNConfiguration = Client.preferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ??
             Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
@@ -279,7 +267,7 @@ class SettingsViewController: AutolayoutViewController {
         pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
         pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: [], packetSize: AppConstants.WireGuardPacketSize.defaultPacketSize)
 
-        redisplaySettings()
+        refreshSettings()
         reportUpdatedPreferences()
 
         Macros.postNotification(.PIASettingsHaveChanged)
@@ -414,7 +402,25 @@ class SettingsViewController: AutolayoutViewController {
         
     // MARK: Helpers
     
-    @objc func redisplaySettings() {
+    @objc func reloadSettings() {
+        pendingPreferences = Client.preferences.editable()
+        
+        guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration ??
+            Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration else {
+            fatalError("No default VPN custom configuration provided for PIA OpenVPN protocol")
+        }
+        
+        guard let currentWireguardVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ??
+            Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
+            fatalError("No default VPN custom configuration provided for PIA Wireguard protocol")
+        }
+        
+        pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
+        pendingHandshake = AppPreferences.shared.piaHandshake
+        pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
+        pendingWireguardVPNConfiguration = currentWireguardVPNConfiguration
+
+        validateDNSList()
         tableView.reloadData()
     }
     
@@ -447,7 +453,7 @@ class SettingsViewController: AutolayoutViewController {
             }
         }
 
-        redisplaySettings()
+        refreshSettings()
         reportUpdatedPreferences()
     }
     
@@ -549,7 +555,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         cell.textLabel?.text = section.localizedTitleMessage()
         cell.detailTextLabel?.text = ""
-        cell.imageView?.image = section.imageForSection().af_imageAspectScaled(toFit: CGSize(width: 30, height: 30))
+        cell.imageView?.image = section.imageForSection().af_imageAspectScaled(toFit: CGSize(width: 25, height: 25))
 
         switch section {
             case .automation:

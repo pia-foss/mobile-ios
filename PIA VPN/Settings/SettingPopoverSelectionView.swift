@@ -108,7 +108,8 @@ extension ProtocolPopoverSelectionView: UITableViewDelegate, UITableViewDataSour
         pendingPreferences.vpnType = vpnType
         
         Macros.postNotification(.PIASettingsHaveChanged)
-        
+        Macros.postNotification(.RefreshSettings)
+
         currentPopover.dismiss()
     }
 

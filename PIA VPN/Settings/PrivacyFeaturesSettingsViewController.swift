@@ -87,7 +87,7 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
                 alert.addCancelAction(L10n.Global.close)
                 alert.addActionWithTitle(L10n.Global.enable) { [weak self] in
                     self?.pendingPreferences.isPersistentConnection = true
-                    self?.settingsDelegate.redisplaySettings()
+                    self?.settingsDelegate.refreshSettings()
                     self?.settingsDelegate.reportUpdatedPreferences()
                     self?.reloadSettings()
                 }
