@@ -116,17 +116,17 @@
 "settings.connection.vpn_protocol.title" = "Protocol Selection";
 "settings.connection.transport.title" = "Transport";
 "settings.connection.socket_protocol.title" = "Socket";
-"settings.connection.remote_port.title" = "Remote port";
+"settings.connection.remote_port.title" = "Remote Port";
 
 "settings.encryption.title" = "ENCRYPTION";
-"settings.encryption.cipher.title" = "Data encryption";
-"settings.encryption.digest.title" = "Data authentication";
+"settings.encryption.cipher.title" = "Data Encryption";
+"settings.encryption.digest.title" = "Data Authentication";
 "settings.encryption.handshake.title" = "Handshake";
 
 "settings.application_settings.title" = "APPLICATION SETTINGS";
 "settings.application_settings.dark_theme.title" = "Dark theme";
 "settings.application_settings.active_theme.title" = "Active theme";
-"settings.application_settings.kill_switch.title" = "VPN kill switch";
+"settings.application_settings.kill_switch.title" = "VPN Kill Switch";
 "settings.application_settings.kill_switch.footer" = "The VPN kill switch prevents access to the Internet if the VPN connection is reconnecting. This excludes disconnecting manually.";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.mace.footer" = "PIA MACE™ blocks ads, trackers, and malware while you're connected to the VPN.";
@@ -137,7 +137,7 @@
 "settings.content_blocker.footer" = "To enable or disable Content Blocker go to Settings > Safari > Content Blockers and toggle PIA VPN.";
 
 "settings.application_information.title" = "APPLICATION INFORMATION";
-"settings.application_information.debug.title" = "Send debug to support";
+"settings.application_information.debug.title" = "Send Debug Log to support";
 "settings.application_information.debug.failure.title" = "Error during submission";
 "settings.application_information.debug.failure.message" = "Debug information could not be submitted.";
 "settings.application_information.debug.empty.title" = "Empty debug information";
@@ -157,7 +157,7 @@
 "settings.reset.defaults.confirm.button" = "Reset";
 "settings.reset.footer" = "This will reset all of the above settings to default.";
 
-"settings.small.packets.title" = "Use small packets";
+"settings.small.packets.title" = "Use Small Packets";
 "settings.small.packets.description" = "Will slightly lower the IP packet size to improve compatibility with some routers and mobile networks.";
 
 "settings.log.connected.error" = "A VPN connection is required. Please connect to the VPN and retry.";
@@ -168,7 +168,7 @@
 "settings.server.network.alert" = "The VPN has to be disconnected to change the server network.";
 
 "settings.geo.servers.description" = "Show Geo-located Regions";
-"settings.cards.history.title" = "Latest news";
+"settings.cards.history.title" = "Latest News";
 
 "settings.ovpn.migration.footer" = "We are updating our OpenVPN implementation, for more information, click here";
 "settings.ovpn.migration.footer.link" = "here";
