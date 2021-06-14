@@ -414,18 +414,18 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         
         if Client.environment == .staging {
             
-            if let url = Bundle(for: Self.self).url(forResource: "staging", withExtension: "json"), let jsonData = try? Data(contentsOf: url) {
-            
-                guard let bundle = GlossServersBundle(data: jsonData)?.parsed else {
-                    callback?(nil, ClientError.malformedResponseData)
-                    return
-                }
-
-                callback?(bundle, nil)
-                
-            } else {
+            guard let url = Bundle(for: Self.self).url(forResource: "staging", withExtension: "json"),
+                  let jsonData = try? Data(contentsOf: url) else {
                 callback?(nil, ClientError.noRegions)
+                return
             }
+            
+            guard let bundle = GlossServersBundle(data: jsonData)?.parsed else {
+                callback?(nil, ClientError.malformedResponseData)
+                return
+            }
+
+            callback?(bundle, nil)
             
         } else {
             
