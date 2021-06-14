@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
     s.subspec "Library" do |p|
         p.source_files          = "PIALibrary/Sources/Library/**/*.swift"
         #p.osx.exclude_files     = "PIALibrary/Sources/Library/InApp"
-        p.resources             = "PIALibrary/Resources/Library/**/*"
+        p.resources             = "PIALibrary/Resources/Staging/**/*"
         p.ios.frameworks        = "UIKit"
         #p.osx.frameworks        = "Cocoa"
         p.dependency "PIALibrary/Core"
