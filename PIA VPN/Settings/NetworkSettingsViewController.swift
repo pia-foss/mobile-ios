@@ -67,7 +67,7 @@ class NetworkSettingsViewController: PIABaseSettingsViewController {
             customDNSSettingsVC.delegate = self
             customDNSSettingsVC.vpnType = pendingPreferences.vpnType == PIATunnelProfile.vpnType ? PIATunnelProfile.vpnType : PIAWGTunnelProfile.vpnType
             let ips = DNSList.shared.valueForKey(pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY)
-            if ips.count > 0 {
+            if !ips.isEmpty {
                 customDNSSettingsVC.primaryDNSValue = ips.first
                 if ips.count > 1 {
                     customDNSSettingsVC.secondaryDNSValue = ips.last
@@ -105,6 +105,31 @@ extension NetworkSettingsViewController: UITableViewDelegate, UITableViewDataSou
         return NetworkSections.all().count
     }
     
+    fileprivate func configure( _ cell: UITableViewCell, forSection section: NetworkSections) {
+        switch section {
+        case .dns:
+            cell.textLabel?.text = Self.DNS
+            
+            var dnsValue = settingsDelegate.pendingOpenVPNConfiguration.dnsServers
+            if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+                dnsValue = settingsDelegate.pendingWireguardVPNConfiguration.customDNSServers
+            }
+            for dns in DNSList.shared.dnsList {
+                for (key, value) in dns {
+                    if dnsValue == value {
+                        cell.detailTextLabel?.text = DNSList.shared.descriptionForKey(key, andCustomKey: (pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY))
+                        break
+                    }
+                }
+            }
+            
+            if !Flags.shared.enablesDNSSettings {
+                cell.accessoryType = .none
+                cell.selectionStyle = .none
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.setting, for: indexPath)
         cell.accessoryType = .disclosureIndicator
@@ -114,28 +139,7 @@ extension NetworkSettingsViewController: UITableViewDelegate, UITableViewDataSou
 
         let section = NetworkSections.all()[indexPath.row]
 
-        switch section {
-            case .dns:
-                cell.textLabel?.text = Self.DNS
-                
-                var dnsValue = settingsDelegate.pendingOpenVPNConfiguration.dnsServers
-                if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                    dnsValue = settingsDelegate.pendingWireguardVPNConfiguration.customDNSServers
-                }
-                for dns in DNSList.shared.dnsList {
-                    for (key, value) in dns {
-                        if dnsValue == value {
-                            cell.detailTextLabel?.text = DNSList.shared.descriptionForKey(key, andCustomKey: (pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY))
-                            break
-                        }
-                    }
-                }
-                
-                if !Flags.shared.enablesDNSSettings {
-                    cell.accessoryType = .none
-                    cell.selectionStyle = .none
-                }
-        }
+        configure(cell, forSection: section)
 
         Theme.current.applySecondaryBackground(cell)
         if let textLabel = cell.textLabel {
@@ -155,77 +159,81 @@ extension NetworkSettingsViewController: UITableViewDelegate, UITableViewDataSou
         return cell
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let section = NetworkSections.all()[indexPath.row]
-
+    fileprivate func select(_ section: NetworkSections, inTableView tableView: UITableView, forIndexPath indexPath: IndexPath) {
         switch section {
-            case .dns:
-                guard Flags.shared.enablesDNSSettings else {
-                    break
-                }
-                
-                controller = OptionsViewController()
-                if let dnsList = DNSList.shared.dnsList {
-                    let filtered = dnsList.filter({
-                        if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-                            return $0.first?.key != DNSList.CUSTOM_WIREGUARD_DNS_KEY
-                        } else {
-                            return $0.first?.key != DNSList.CUSTOM_OPENVPN_DNS_KEY
-                        }
-                    })
-                    controller?.options = filtered.compactMap {
-                        if let first = $0.first {
-                            return first.key
-                        }
-                        return nil
-                    }
-                }
-                
-                if let options = controller?.options,
-                    !options.contains(pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
+        case .dns:
+            guard Flags.shared.enablesDNSSettings else {
+                break
+            }
+            
+            controller = OptionsViewController()
+            if let dnsList = DNSList.shared.dnsList {
+                let filtered = dnsList.filter({
                     if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-                        controller?.options.append(DNSList.CUSTOM_OPENVPN_DNS_KEY)
+                        return $0.first?.key != DNSList.CUSTOM_WIREGUARD_DNS_KEY
                     } else {
-                        controller?.options.append(DNSList.CUSTOM_WIREGUARD_DNS_KEY)
+                        return $0.first?.key != DNSList.CUSTOM_OPENVPN_DNS_KEY
                     }
+                })
+                controller?.options = filtered.compactMap {
+                    if let first = $0.first {
+                        return first.key
+                    }
+                    return nil
+                }
+            }
+            
+            if let options = controller?.options,
+               !options.contains(pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
+                if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+                    controller?.options.append(DNSList.CUSTOM_OPENVPN_DNS_KEY)
                 } else {
-                    for dns in DNSList.shared.dnsList {
-                        for (key, value) in dns {
-                            if key == (pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
-                                if !value.isEmpty {
-                                    controller?.navigationItem.rightBarButtonItem = UIBarButtonItem(
-                                        title: L10n.Global.edit,
-                                        style: .plain,
-                                        target: self,
-                                        action: #selector(edit(_:))
-                                    )
-                                }
+                    controller?.options.append(DNSList.CUSTOM_WIREGUARD_DNS_KEY)
+                }
+            } else {
+                for dns in DNSList.shared.dnsList {
+                    for (key, value) in dns {
+                        if key == (pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
+                            if !value.isEmpty {
+                                controller?.navigationItem.rightBarButtonItem = UIBarButtonItem(
+                                    title: L10n.Global.edit,
+                                    style: .plain,
+                                    target: self,
+                                    action: #selector(edit(_:))
+                                )
                             }
                         }
                     }
                 }
+            }
+            
+            if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+                controller?.selectedOption = settingsDelegate.pendingWireguardVPNConfiguration.customDNSServers
+            } else {
+                controller?.selectedOption = settingsDelegate.pendingOpenVPNConfiguration.dnsServers
+            }
+            
+            if let controller = controller {
+                guard let cell = tableView.cellForRow(at: indexPath) else {
+                    fatalError("Cell not found at \(indexPath)")
+                }
                 
-                if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                    controller?.selectedOption = settingsDelegate.pendingWireguardVPNConfiguration.customDNSServers
-                } else {
-                    controller?.selectedOption = settingsDelegate.pendingOpenVPNConfiguration.dnsServers
-                }
-
-                if let controller = controller {
-                    guard let cell = tableView.cellForRow(at: indexPath) else {
-                        fatalError("Cell not found at \(indexPath)")
-                    }
-
-                    controller.title = cell.textLabel?.text
-                    controller.tag = section.rawValue
-                    controller.delegate = self
-
-                    parent?.navigationItem.setEmptyBackButton()
-                    navigationController?.pushViewController(controller, animated: true)
-                }
-
+                controller.title = cell.textLabel?.text
+                controller.tag = section.rawValue
+                controller.delegate = self
+                
+                parent?.navigationItem.setEmptyBackButton()
+                navigationController?.pushViewController(controller, animated: true)
+            }
+            
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let section = NetworkSections.all()[indexPath.row]
+
+        select(section, inTableView: tableView, forIndexPath: indexPath)
 
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -261,14 +269,9 @@ extension NetworkSettingsViewController: OptionsViewControllerDelegate {
         return tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
     }
     
-    func optionsController(_ controller: OptionsViewController, renderOption option: AnyHashable, in cell: UITableViewCell, at row: Int, isSelected: Bool) {
-        
-        guard let setting = NetworkSections(rawValue: controller.tag) else {
-            fatalError("Unhandled setting \(controller.tag)")
-        }
-
+    fileprivate func configure(_ option: AnyHashable, withCell cell: UITableViewCell, andSetting setting: NetworkSections) {
         switch setting {
-
+        
         case .dns:
             if let option = option as? String {
                 cell.textLabel?.text = DNSList.shared.descriptionForKey(option, andCustomKey: pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY)
@@ -288,30 +291,34 @@ extension NetworkSettingsViewController: OptionsViewControllerDelegate {
                         cell.accessoryType = .disclosureIndicator
                     }
                 }
-            }
-
-        }
-        
-        cell.accessoryView = (isSelected ? imvSelectedOption : nil)
-        
-        if setting == .dns,
-            let option = option as? String {
-            
-            var dnsJoinedValue = settingsDelegate.pendingOpenVPNConfiguration.dnsServers?.joined()
-            if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                dnsJoinedValue = settingsDelegate.pendingWireguardVPNConfiguration.customDNSServers.joined()
-            }
-
-            for dns in DNSList.shared.dnsList {
-                for (key, value) in dns {
-                    if key == option,
-                        dnsJoinedValue == value.joined() {
-                        cell.accessoryView = imvSelectedOption
+                
+                var dnsJoinedValue = settingsDelegate.pendingOpenVPNConfiguration.dnsServers?.joined()
+                if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+                    dnsJoinedValue = settingsDelegate.pendingWireguardVPNConfiguration.customDNSServers.joined()
+                }
+                
+                for dns in DNSList.shared.dnsList {
+                    for (key, value) in dns {
+                        if key == option,
+                           dnsJoinedValue == value.joined() {
+                            cell.accessoryView = imvSelectedOption
+                        }
                     }
                 }
             }
+            
+        }
+    }
+    
+    func optionsController(_ controller: OptionsViewController, renderOption option: AnyHashable, in cell: UITableViewCell, at row: Int, isSelected: Bool) {
+        
+        guard let setting = NetworkSections(rawValue: controller.tag) else {
+            fatalError("Unhandled setting \(controller.tag)")
         }
 
+        configure(option, withCell: cell, andSetting: setting)
+        
+        cell.accessoryView = (isSelected ? imvSelectedOption : nil)
         
         let backgroundView = UIView()
         backgroundView.backgroundColor = Theme.current.palette.principalBackground
@@ -321,13 +328,9 @@ extension NetworkSettingsViewController: OptionsViewControllerDelegate {
         Theme.current.applyDetailTableCell(cell)
     }
 
-    func optionsController(_ controller: OptionsViewController, didSelectOption option: AnyHashable, at row: Int) {
-        guard let setting = NetworkSections(rawValue: controller.tag) else {
-            fatalError("Unhandled setting \(controller.tag)")
-        }
-
+    fileprivate func select(_ option: AnyHashable, withSetting setting: NetworkSections) {
         switch setting {
-
+        
         case .dns:
             if let option = option as? String {
                 var isFound = false
@@ -360,6 +363,14 @@ extension NetworkSettingsViewController: OptionsViewControllerDelegate {
                 
             }
         }
+    }
+    
+    func optionsController(_ controller: OptionsViewController, didSelectOption option: AnyHashable, at row: Int) {
+        guard let setting = NetworkSections(rawValue: controller.tag) else {
+            fatalError("Unhandled setting \(controller.tag)")
+        }
+
+        select(option, withSetting: setting)
         
         settingsDelegate.savePreferences()
         Macros.postNotification(.PIASettingsHaveChanged)

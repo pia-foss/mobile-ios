@@ -182,7 +182,7 @@
 
 // CONTENT BLOCKER
 
-"content_blocker.title" = "Content Blocker";
+"content_blocker.title" = "Safari Content Blocker";
 "content_blocker.body.subtitle" = "To enable our Content Blocker for use with Safari please go to Settings > Safari, and under General touch Content Blockers toggle on PIA VPN.";
 "content_blocker.body.footer" = "Please note: You do not need to be connected to the VPN for this Content Blocker to work, but it will only work while browsing with Safari.";
 

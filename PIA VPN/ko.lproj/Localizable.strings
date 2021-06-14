@@ -42,7 +42,7 @@
 "card.wireguard.title" = "지금 WireGuard®를 사용해 보세요!";
 "content_blocker.body.footer" = "주의: Content Blocker를 작동시키기 위해 VPN에 연결할 필요가 없지만, Safari로 검색할 때만 작동합니다.";
 "content_blocker.body.subtitle" = "Content Blocker를 활성화하여 Safari로 사용하려면 설정 > Safari로 가서 '일반'에서 Content Blockers를 눌러 PIA VPN을 켜세요.";
-"content_blocker.title" = "Content Blocker";
+"content_blocker.title" = "Safari Content Blocker";
 "dashboard.accessibility.vpn.button" = "VPN 연결 버튼";
 "dashboard.accessibility.vpn.button.isOff" = "VPN 연결 버튼. VPN이 현재 연결 해제되었습니다";
 "dashboard.accessibility.vpn.button.isOn" = "VPN 연결 버튼. VPN이 현재 연결되었습니다";

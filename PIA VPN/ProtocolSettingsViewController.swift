@@ -81,6 +81,10 @@ class ProtocolSettingsViewController: PIABaseSettingsViewController {
         super.viewWillTransition(to: size, with: coordinator)
         self.tableView.reloadData()
     }
+    
+    private func heightForOptions(_ options: [Any]) -> Int {
+        return 44 * options.count
+    }
 
     private func showProtocolOptions(sender: UITableViewCell) {
         
@@ -91,7 +95,7 @@ class ProtocolSettingsViewController: PIABaseSettingsViewController {
         ]
         
         let width = self.view.frame.width / 2
-        let height = 44 * options.count //Default height * 3 for 3 protocols
+        let height = heightForOptions(options) //Default height * 3 for 3 protocols
         let optionsView = ProtocolPopoverSelectionView(frame: CGRect(x: 0, y: 0, width: Int(width), height: height))
         optionsView.pendingPreferences = self.pendingPreferences
         optionsView.currentPopover = protocolPopover
@@ -109,7 +113,7 @@ class ProtocolSettingsViewController: PIABaseSettingsViewController {
         ]
 
         let width = self.view.frame.width / 2
-        let height = 44 * options.count //Default height * 3 for 3 protocols
+        let height = heightForOptions(options) //Default height * 3 for 3 protocols
         let optionsView = TransportPopoverSelectionView(frame: CGRect(x: 0, y: 0, width: Int(width), height: height))
         optionsView.pendingPreferences = self.pendingPreferences
         optionsView.settingsDelegate = self.settingsDelegate
@@ -131,7 +135,7 @@ class ProtocolSettingsViewController: PIABaseSettingsViewController {
         options.insert(Self.AUTOMATIC_PORT, at: 0)
         
         let width = self.view.frame.width / 2
-        let height = 44 * options.count //Default height * 3 for 3 protocols
+        let height = heightForOptions(options) //Default height * 3 for 3 protocols
         let optionsView = PortPopoverSelectionView(frame: CGRect(x: 0, y: 0, width: Int(width), height: height))
         optionsView.pendingPreferences = self.pendingPreferences
         optionsView.settingsDelegate = self.settingsDelegate
@@ -157,7 +161,7 @@ class ProtocolSettingsViewController: PIABaseSettingsViewController {
         }
 
         let width = self.view.frame.width / 2
-        let height = 44 * options.count //Default height * 3 for 3 protocols
+        let height = heightForOptions(options)
         let optionsView = DataEncryptionPopoverSelectionView(frame: CGRect(x: 0, y: 0, width: Int(width), height: height))
         optionsView.pendingPreferences = self.pendingPreferences
         optionsView.settingsDelegate = self.settingsDelegate
@@ -176,7 +180,7 @@ class ProtocolSettingsViewController: PIABaseSettingsViewController {
         }
 
         let width = self.view.frame.width / 2
-        let height = 44 * options.count //Default height * 3 for 3 protocols
+        let height = 44 * options.count
         let optionsView = HandshakePopoverSelectionView(frame: CGRect(x: 0, y: 0, width: Int(width), height: height))
         optionsView.pendingPreferences = self.pendingPreferences
         optionsView.settingsDelegate = self.settingsDelegate
@@ -250,6 +254,67 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
     }
 
     
+    fileprivate func configure(_ cell: UITableViewCell, forSection section: ProtocolsSections?) {
+        switch section {
+        case .protocolSelection:
+            cell.detailTextLabel?.text = pendingPreferences.vpnType.vpnProtocol
+        case .transport:
+            cell.detailTextLabel?.text = settingsDelegate.pendingOpenVPNSocketType?.rawValue ?? L10n.Global.automatic
+        case .remotePort:
+            if let port = settingsDelegate.pendingOpenVPNConfiguration.currentPort, port != ProtocolSettingsViewController.AUTOMATIC_PORT {
+                cell.detailTextLabel?.text = port.description
+            } else {
+                cell.detailTextLabel?.text = L10n.Global.automatic
+            }
+        case .dataEncryption:
+            
+            if pendingPreferences.vpnType == PIATunnelProfile.vpnType, let cipher = settingsDelegate.pendingOpenVPNConfiguration.cipher {
+                cell.detailTextLabel?.text = cipher.description
+            } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
+                
+                guard Flags.shared.enablesEncryptionSettings else {
+                    break
+                }
+                
+                if let encryptionAlgorithm = IKEv2EncryptionAlgorithm(rawValue: pendingPreferences.ikeV2EncryptionAlgorithm) {
+                    cell.detailTextLabel?.text = encryptionAlgorithm.rawValue
+                } else {
+                    cell.detailTextLabel?.text = IKEv2EncryptionAlgorithm.defaultAlgorithm.rawValue
+                }
+                
+            } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+                cell.detailTextLabel?.text = "ChaCha20"
+                cell.accessoryType = .none
+            }
+        case .handshake:
+            if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+                cell.detailTextLabel?.text = AppPreferences.shared.piaHandshake.description
+                cell.accessoryType = .none
+            } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
+                cell.detailTextLabel?.text = IKEv2IntegrityAlgorithm.objectIdentifyBy(name: pendingPreferences.ikeV2IntegrityAlgorithm).rawValue
+            } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+                cell.detailTextLabel?.text = "Noise_IK"
+                cell.accessoryType = .none
+            }
+        case .useSmallPackets:
+            cell.textLabel?.text = L10n.Settings.Small.Packets.title
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchSmallPackets
+            cell.selectionStyle = .none
+            if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+                switchSmallPackets.isOn = AppPreferences.shared.useSmallPackets
+            } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+                switchSmallPackets.isOn = AppPreferences.shared.wireGuardUseSmallPackets
+            } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
+                switchSmallPackets.isOn = AppPreferences.shared.ikeV2UseSmallPackets
+            }
+            
+        default:
+            cell.detailTextLabel?.text = ""
+            
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.setting, for: indexPath)
         cell.accessoryType = .disclosureIndicator
@@ -266,64 +331,7 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
 
         cell.textLabel?.text = section.localizedTitleMessage()
 
-        switch section {
-            case .protocolSelection:
-                cell.detailTextLabel?.text = pendingPreferences.vpnType.vpnProtocol
-            case .transport:
-                cell.detailTextLabel?.text = settingsDelegate.pendingOpenVPNSocketType?.rawValue ?? L10n.Global.automatic
-            case .remotePort:
-                if let port = settingsDelegate.pendingOpenVPNConfiguration.currentPort, port != ProtocolSettingsViewController.AUTOMATIC_PORT {
-                    cell.detailTextLabel?.text = port.description
-                } else {
-                    cell.detailTextLabel?.text = L10n.Global.automatic
-                }
-            case .dataEncryption:
-                
-                if pendingPreferences.vpnType == PIATunnelProfile.vpnType, let cipher = settingsDelegate.pendingOpenVPNConfiguration.cipher {
-                    cell.detailTextLabel?.text = cipher.description
-                } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-                    
-                    guard Flags.shared.enablesEncryptionSettings else {
-                        break
-                    }
-                    
-                    if let encryptionAlgorithm = IKEv2EncryptionAlgorithm(rawValue: pendingPreferences.ikeV2EncryptionAlgorithm) {
-                        cell.detailTextLabel?.text = encryptionAlgorithm.rawValue
-                    } else {
-                        cell.detailTextLabel?.text = IKEv2EncryptionAlgorithm.defaultAlgorithm.rawValue
-                    }
-
-                } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                    cell.detailTextLabel?.text = "ChaCha20"
-                    cell.accessoryType = .none
-                }
-            case .handshake:
-                if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-                    cell.detailTextLabel?.text = AppPreferences.shared.piaHandshake.description
-                    cell.accessoryType = .none
-                } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-                    cell.detailTextLabel?.text = IKEv2IntegrityAlgorithm.objectIdentifyBy(name: pendingPreferences.ikeV2IntegrityAlgorithm).rawValue
-                } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                    cell.detailTextLabel?.text = "Noise_IK"
-                    cell.accessoryType = .none
-                }
-            case .useSmallPackets:
-                cell.textLabel?.text = L10n.Settings.Small.Packets.title
-                cell.detailTextLabel?.text = nil
-                cell.accessoryView = switchSmallPackets
-                cell.selectionStyle = .none
-                if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-                    switchSmallPackets.isOn = AppPreferences.shared.useSmallPackets
-                } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                    switchSmallPackets.isOn = AppPreferences.shared.wireGuardUseSmallPackets
-                } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-                    switchSmallPackets.isOn = AppPreferences.shared.ikeV2UseSmallPackets
-                }
-                
-            default:
-                cell.detailTextLabel?.text = ""
-
-        }
+        configure(cell, forSection: section)
 
         Theme.current.applySecondaryBackground(cell)
         if let textLabel = cell.textLabel {
@@ -343,17 +351,7 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
         return cell
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        var section: ProtocolsSections!
-        if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-            section = ProtocolsSections.all()[indexPath.row]
-        } else {
-            section = [ProtocolsSections.protocolSelection, ProtocolsSections.dataEncryption, ProtocolsSections.handshake, ProtocolsSections.useSmallPackets][indexPath.row]
-        }
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: Cells.setting, for: indexPath)
-
+    fileprivate func select(_ cell: UITableViewCell, forSection section: ProtocolsSections?) {
         switch section {
         case .protocolSelection:
             showProtocolOptions(sender: cell)
@@ -378,6 +376,20 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
         default:
             break
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        var section: ProtocolsSections!
+        if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+            section = ProtocolsSections.all()[indexPath.row]
+        } else {
+            section = [ProtocolsSections.protocolSelection, ProtocolsSections.dataEncryption, ProtocolsSections.handshake, ProtocolsSections.useSmallPackets][indexPath.row]
+        }
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: Cells.setting, for: indexPath)
+
+        select(cell, forSection: section)
 
         tableView.deselectRow(at: indexPath, animated: true)
     }

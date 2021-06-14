@@ -38,6 +38,10 @@ class SettingPopoverSelectionView: UIView {
         return table
     }()
     
+    let cellTextStyle = {
+        Theme.current.palette.appearance == .dark ? TextStyle.textStyle6 : TextStyle.textStyle7
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -88,7 +92,7 @@ extension ProtocolPopoverSelectionView: UITableViewDelegate, UITableViewDataSour
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) else {
             fatalError("no protocol available")
         }
-        cell.textLabel?.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyle6 : TextStyle.textStyle7)
+        cell.textLabel?.style(style: cellTextStyle)
 
         cell.textLabel?.text = protocols[indexPath.row].vpnProtocol
         cell.textLabel?.accessibilityLabel = protocols[indexPath.row].vpnProtocol
@@ -142,7 +146,7 @@ extension TransportPopoverSelectionView: UITableViewDelegate, UITableViewDataSou
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) else {
             fatalError("no transport available")
         }
-        cell.textLabel?.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyle6 : TextStyle.textStyle7)
+        cell.textLabel?.style(style: cellTextStyle)
 
         if options[indexPath.row] == ProtocolSettingsViewController.AUTOMATIC_SOCKET {
             cell.textLabel?.text = L10n.Global.automatic
@@ -200,7 +204,7 @@ extension PortPopoverSelectionView: UITableViewDelegate, UITableViewDataSource {
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) else {
             fatalError("no transport available")
         }
-        cell.textLabel?.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyle6 : TextStyle.textStyle7)
+        cell.textLabel?.style(style: cellTextStyle)
 
         if options[indexPath.row] == ProtocolSettingsViewController.AUTOMATIC_PORT {
             cell.textLabel?.text = L10n.Global.automatic
@@ -257,7 +261,7 @@ extension DataEncryptionPopoverSelectionView: UITableViewDelegate, UITableViewDa
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) else {
             fatalError("no transport available")
         }
-        cell.textLabel?.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyle6 : TextStyle.textStyle7)
+        cell.textLabel?.style(style: cellTextStyle)
 
         cell.textLabel?.text = options[indexPath.row].description
         cell.textLabel?.accessibilityLabel = options[indexPath.row].description
@@ -310,7 +314,7 @@ extension HandshakePopoverSelectionView: UITableViewDelegate, UITableViewDataSou
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) else {
             fatalError("no transport available")
         }
-        cell.textLabel?.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyle6 : TextStyle.textStyle7)
+        cell.textLabel?.style(style: cellTextStyle)
 
         cell.textLabel?.text = options[indexPath.row].description
         cell.textLabel?.accessibilityLabel = options[indexPath.row].description

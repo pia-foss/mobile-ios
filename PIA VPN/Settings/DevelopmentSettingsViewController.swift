@@ -28,6 +28,8 @@ private let log = SwiftyBeaver.self
 
 class DevelopmentSettingsViewController: PIABaseSettingsViewController {
     
+    private let dnsResolverURL = "google-analytics.com"
+
     @IBOutlet weak var tableView: UITableView!
     private lazy var switchEnvironment = UISwitch()
     private var controller: OptionsViewController?
@@ -107,6 +109,41 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
         return DevelopmentSections.all().count
     }
     
+    fileprivate func configure(_ cell: UITableViewCell, forSection section: DevelopmentSections) {
+        switch section {
+        case .resolveGoogleAdsDomain:
+            cell.textLabel?.text = "Resolve google-analytics.com"
+            cell.detailTextLabel?.text = nil
+        case .publicUsername:
+            cell.textLabel?.text = "Public username"
+            cell.detailTextLabel?.text = Client.providers.accountProvider.publicUsername ?? ""
+            cell.accessoryType = .none
+        case .username:
+            cell.textLabel?.text = "Username"
+            cell.detailTextLabel?.text = Client.providers.accountProvider.currentUser?.credentials.username ?? ""
+            cell.accessoryType = .none
+        case .password:
+            cell.textLabel?.text = "Password"
+            cell.detailTextLabel?.text = Client.providers.accountProvider.currentUser?.credentials.password ?? ""
+            cell.accessoryType = .none
+        case .environment:
+            cell.textLabel?.text = "Staging"
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchEnvironment
+            cell.selectionStyle = .none
+            switchEnvironment.isOn = Client.environment == .staging
+        case .customServers:
+            cell.textLabel?.text = "Custom Servers"
+            cell.detailTextLabel?.text = nil
+        case .stagingVersion:
+            cell.textLabel?.text = "Staging version"
+            cell.detailTextLabel?.text = "\(AppPreferences.shared.stagingVersion)"
+        case .crash:
+            cell.textLabel?.text = "Crash"
+            cell.detailTextLabel?.text = nil
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.setting, for: indexPath)
         cell.accessoryType = .disclosureIndicator
@@ -116,38 +153,7 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
 
         let section = DevelopmentSections.all()[indexPath.row]
         
-        switch section {
-            case .resolveGoogleAdsDomain:
-                cell.textLabel?.text = "Resolve google-analytics.com"
-                cell.detailTextLabel?.text = nil
-            case .publicUsername:
-                cell.textLabel?.text = "Public username"
-                cell.detailTextLabel?.text = Client.providers.accountProvider.publicUsername ?? ""
-                cell.accessoryType = .none
-            case .username:
-                cell.textLabel?.text = "Username"
-                cell.detailTextLabel?.text = Client.providers.accountProvider.currentUser?.credentials.username ?? ""
-                cell.accessoryType = .none
-            case .password:
-                cell.textLabel?.text = "Password"
-                cell.detailTextLabel?.text = Client.providers.accountProvider.currentUser?.credentials.password ?? ""
-                cell.accessoryType = .none
-            case .environment:
-                cell.textLabel?.text = "Staging"
-                cell.detailTextLabel?.text = nil
-                cell.accessoryView = switchEnvironment
-                cell.selectionStyle = .none
-                switchEnvironment.isOn = Client.environment == .staging
-            case .customServers:
-                cell.textLabel?.text = "Custom Servers"
-                cell.detailTextLabel?.text = nil
-            case .stagingVersion:
-                cell.textLabel?.text = "Staging version"
-                cell.detailTextLabel?.text = "\(AppPreferences.shared.stagingVersion)"
-            case .crash:
-                cell.textLabel?.text = "Crash"
-                cell.detailTextLabel?.text = nil
-        }
+        configure(cell, forSection: section)
         
         Theme.current.applySecondaryBackground(cell)
         if let textLabel = cell.textLabel {
@@ -229,7 +235,7 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
     }
     
     private func resolveGoogleAdsDomain() {
-        let resolver = DNSResolver(hostname: "google-analytics.com")
+        let resolver = DNSResolver(hostname: dnsResolverURL)
         resolver.resolve { (entries, error) in
             let addresses: [String]
             if let entries = entries, !entries.isEmpty {
@@ -303,7 +309,8 @@ extension DevelopmentSettingsViewController: OptionsViewControllerDelegate {
                 AppPreferences.shared.stagingVersion = value
                 
                 if let stagingUrl = AppConstants.Web.stagingEndpointURL {
-                    let url = stagingUrl.absoluteString.replacingOccurrences(of: "staging-[0-9]", with: "staging-\(value)", options: .regularExpression)
+                    let regexExpression = "staging-[0-9]"
+                    let url = stagingUrl.absoluteString.replacingOccurrences(of: regexExpression, with: "staging-\(value)", options: .regularExpression)
                     Client.configuration.setBaseURL(url, for: .staging)
                     Client.resetWebServices()
                 }

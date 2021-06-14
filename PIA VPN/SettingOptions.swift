@@ -188,7 +188,7 @@ public enum NetworkSections: Int, SettingSection, EnumsBuilder {
 
 public enum PrivacyFeaturesSections: Int, SettingSection, EnumsBuilder {
     
-    case killswitch
+    case killswitch = 0
     case safariContentBlocker
     case refresh
 

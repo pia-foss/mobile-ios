@@ -168,19 +168,23 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
             case .sendDebugLogs:
                 submitDebugReport()
             case .latestNews:
-                let callingCards = CardFactory.getAllCards()
-                if !callingCards.isEmpty {
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    if let cardsController = storyboard.instantiateViewController(withIdentifier: "PIACardsViewController") as? PIACardsViewController {
-                        cardsController.setupWith(cards: callingCards)
-                        cardsController.modalPresentationStyle = .overCurrentContext
-                        self.present(cardsController, animated: true)
-                    }
-                }
+                showLatestNews()
             default: break
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    private func showLatestNews() {
+        let callingCards = CardFactory.getAllCards()
+        if !callingCards.isEmpty {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let cardsController = storyboard.instantiateViewController(withIdentifier: "PIACardsViewController") as? PIACardsViewController {
+                cardsController.setupWith(cards: callingCards)
+                cardsController.modalPresentationStyle = .overCurrentContext
+                self.present(cardsController, animated: true)
+            }
+        }
     }
     
     private func submitDebugReport() {

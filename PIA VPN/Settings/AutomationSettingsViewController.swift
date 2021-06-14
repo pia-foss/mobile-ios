@@ -35,17 +35,12 @@ class AutomationSettingsViewController: PIABaseSettingsViewController {
         
         super.viewDidLoad()
         
-        tableView.sectionFooterHeight = UITableView.automaticDimension
-        tableView.estimatedSectionFooterHeight = 1.0
-                
-        tableView.delegate = self
-        tableView.dataSource = self
-        
+        self.setupTableView()
         switchEnableNMT.addTarget(self, action: #selector(toggleNMT(_:)), for: .valueChanged)
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSettings), name: .PIASettingsHaveChanged, object: nil)
     }
-    
+        
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -65,6 +60,15 @@ class AutomationSettingsViewController: PIABaseSettingsViewController {
             trustedNetworksVC.persistentConnectionValue = pendingPreferences.isPersistentConnection
             trustedNetworksVC.vpnType = pendingPreferences.vpnType
         }
+    }
+    
+    // MARK: Private functions
+    
+    private func setupTableView() {
+        tableView.sectionFooterHeight = UITableView.automaticDimension
+        tableView.estimatedSectionFooterHeight = 1.0
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     @objc private func reloadSettings() {
@@ -115,28 +119,51 @@ extension AutomationSettingsViewController: UITableViewDelegate, UITableViewData
         return nil
 
     }
-    
+        
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.setting, for: indexPath)
+        setupCell(cell, indexPath)
+
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let section = AutomationSections.all()[indexPath.row]
+
+        switch section {
+            case .manageAutomation:
+                perform(segue: StoryboardSegue.Main.trustedNetworksSegueIdentifier)
+            default: break
+        }
+
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        Theme.current.applyTableSectionFooter(view)
+    }
+
+    fileprivate func setupCell(_ cell: UITableViewCell, _ indexPath: IndexPath) {
         cell.accessoryType = .disclosureIndicator
         cell.accessoryView = nil
         cell.selectionStyle = .default
         cell.detailTextLabel?.text = nil
-
+        
         let section = AutomationSections.all()[indexPath.row]
         
         switch section {
-            case .automation:
-                cell.textLabel?.text = section.localizedTitleMessage()
-                cell.textLabel?.numberOfLines = 0
-                cell.detailTextLabel?.text = nil
-                cell.accessoryView = switchEnableNMT
-                cell.selectionStyle = .none
-                switchEnableNMT.isOn = Client.preferences.nmtRulesEnabled
-            case .manageAutomation:
-                cell.textLabel?.text = L10n.Network.Management.Tool.title
+        case .automation:
+            cell.textLabel?.text = section.localizedTitleMessage()
+            cell.textLabel?.numberOfLines = 0
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchEnableNMT
+            cell.selectionStyle = .none
+            switchEnableNMT.isOn = Client.preferences.nmtRulesEnabled
+        case .manageAutomation:
+            cell.textLabel?.text = L10n.Network.Management.Tool.title
         }
-
+        
         Theme.current.applySecondaryBackground(cell)
         if let textLabel = cell.textLabel {
             Theme.current.applySettingsCellTitle(textLabel,
@@ -151,25 +178,6 @@ extension AutomationSettingsViewController: UITableViewDelegate, UITableViewData
         let backgroundView = UIView()
         Theme.current.applyPrincipalBackground(backgroundView)
         cell.selectedBackgroundView = backgroundView
-
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let section = AutomationSections.all()[indexPath.row]
-
-        switch section {
-            case .manageAutomation:
-                self.perform(segue: StoryboardSegue.Main.trustedNetworksSegueIdentifier)
-            default: break
-        }
-
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        Theme.current.applyTableSectionFooter(view)
     }
 
 }

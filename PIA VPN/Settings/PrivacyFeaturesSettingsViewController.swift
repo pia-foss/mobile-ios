@@ -148,11 +148,11 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
-        if section != 2, let cell = tableView.dequeueReusableCell(withIdentifier: Cells.footer) {
+        if section != PrivacyFeaturesSections.refresh.rawValue, let cell = tableView.dequeueReusableCell(withIdentifier: Cells.footer) {
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.style(style: TextStyle.textStyle21)
             cell.backgroundColor = .clear
-            if section == 0 {
+            if section == PrivacyFeaturesSections.killswitch.rawValue {
                 cell.textLabel?.text =  L10n.Settings.ApplicationSettings.KillSwitch.footer
             } else {
                 cell.textLabel?.text =  L10n.Settings.ContentBlocker.footer
