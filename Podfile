@@ -13,8 +13,8 @@ inhibit_all_warnings!
 # Libraries
 
 $git_root = "https://github.com/pia-foss"
-$gitlab_vpn_root = "git@gitlab-server.cyberghostvpn.com:pia-mobile/ios"
-$gitlab_kn_root = "git@gitlab-server.cyberghostvpn.com:pia-mobile/shared"
+$gitlab_vpn_root = "git@gitlab.kape.com:pia-mobile/ios"
+$gitlab_kn_root = "git@gitlab.kape.com:pia-mobile/shared"
 
 $library_pod = 'PIALibrary'
 $library_repo = 'client-library-apple'
