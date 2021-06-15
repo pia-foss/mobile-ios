@@ -30,7 +30,7 @@ import WidgetKit
 
 private let log = SwiftyBeaver.self
 
-class SettingsViewController: AutolayoutViewController, SettingsViewControllerDelegate {
+class SettingsViewController: AutolayoutViewController, SettingsDelegate {
 
     private struct Cells {
         static let setting = "SettingCell"

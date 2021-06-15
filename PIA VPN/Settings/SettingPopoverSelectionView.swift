@@ -28,7 +28,7 @@ class SettingPopoverSelectionView: UIView {
 
     weak var currentPopover: Popover!
     weak var pendingPreferences: Client.Preferences.Editable!
-    weak var settingsDelegate: SettingsViewControllerDelegate!
+    weak var settingsDelegate: SettingsDelegate!
     
     let cellReuseIdentifier = "cell"
 

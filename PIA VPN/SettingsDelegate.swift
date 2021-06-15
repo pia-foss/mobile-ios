@@ -1,5 +1,5 @@
 //
-//  SettingsViewControllerDelegate.swift
+//  SettingsDelegate.swift
 //  PIA VPN
 //  
 //  Created by Jose Blaya on 15/6/21.
@@ -23,7 +23,7 @@ import Foundation
 import PIAWireguard
 import TunnelKit
 
-protocol SettingsViewControllerDelegate: AnyObject {
+protocol SettingsDelegate: AnyObject {
     
     var pendingOpenVPNSocketType: SocketType? { get set }
 

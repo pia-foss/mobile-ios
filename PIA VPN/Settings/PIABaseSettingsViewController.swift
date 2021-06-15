@@ -25,7 +25,7 @@ import TunnelKit
 
 class PIABaseSettingsViewController: AutolayoutViewController {
 
-    weak var settingsDelegate: SettingsViewControllerDelegate!
+    weak var settingsDelegate: SettingsDelegate!
     weak var pendingPreferences: Client.Preferences.Editable!
 
     struct Cells {
