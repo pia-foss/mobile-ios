@@ -158,7 +158,6 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
                 self.accessedDatabase.transient.serversConfiguration = configuration
             }
             
-            
             if let tokens = self.accessedDatabase.secure.dipTokens(), !tokens.isEmpty {
                 self.webServices.activateDIPToken(tokens: tokens) { (servers, error) in
                     

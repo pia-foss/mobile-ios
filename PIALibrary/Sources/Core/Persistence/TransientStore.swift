@@ -41,4 +41,6 @@ protocol TransientStore: class {
     var isInternetReachable: Bool { get set }
         
     var vpnIP: String? { get set }
+
+    var vpnLog: String { get set }
 }

@@ -122,12 +122,12 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                                                     return
                                                 }
                                                 
-                                                guard let token = response else {
+                                                guard let loginResponse = response else {
                                                     callback?(nil, ClientError.malformedResponseData)
                                                     return
                                                 }
                                                 
-                                                callback?(token, nil)
+                                                callback?(loginResponse.token, nil)
                                                 
         }
         
@@ -289,7 +289,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                         let dipToken = dipServer.dipToken
                         
                         let expiringDate = Date(timeIntervalSince1970: TimeInterval(expirationTime))
-                        let server = Server.ServerAddressIP(ip: ip, cn: cn)
+                        let server = Server.ServerAddressIP(ip: ip, cn: cn, van: false)
                         
                         if let nextDays = Calendar.current.date(byAdding: .day, value: 5, to: Date()), nextDays >= expiringDate  {
                             //Expiring in 5 days or less
@@ -411,24 +411,45 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     #endif
     
     func downloadServers(_ callback: ((ServersBundle?, Error?) -> Void)?) {
-        self.regionsAPI.fetchRegions(locale: Locale.current.identifier.replacingOccurrences(of: "_", with: "-")) { (response, error) in
-            if let error = error {
-                callback?(nil, ClientError.noRegions)
-                return
-            }
-
-            guard let response = response else {
+        
+        if Client.environment == .staging {
+            
+            guard let url = Bundle(for: Self.self).url(forResource: "staging", withExtension: "json"),
+                  let jsonData = try? Data(contentsOf: url) else {
                 callback?(nil, ClientError.noRegions)
                 return
             }
             
-            guard let bundle = GlossServersBundle(jsonString: RegionsUtils.init().stringify(regionsResponse: response))?.parsed else {
+            guard let bundle = GlossServersBundle(data: jsonData)?.parsed else {
                 callback?(nil, ClientError.malformedResponseData)
                 return
             }
-            
+
             callback?(bundle, nil)
+            
+        } else {
+            
+            self.regionsAPI.fetchRegions(locale: Locale.current.identifier.replacingOccurrences(of: "_", with: "-")) { (response, error) in
+                if let error = error {
+                    callback?(nil, ClientError.noRegions)
+                    return
+                }
+
+                guard let response = response else {
+                    callback?(nil, ClientError.noRegions)
+                    return
+                }
+                
+                guard let bundle = GlossServersBundle(jsonString: RegionsUtils().stringify(regionsResponse: response))?.parsed else {
+                    callback?(nil, ClientError.malformedResponseData)
+                    return
+                }
+                
+                callback?(bundle, nil)
+            }
+            
         }
+        
     }
     
     // MARK: Store

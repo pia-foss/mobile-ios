@@ -157,7 +157,35 @@ public class PIATunnelProfile: NetworkExtensionProfile {
     
     /// :nodoc:
     public func parsedCustomConfiguration(from map: [String : Any]) -> VPNCustomConfiguration? {
+        //Migrate OVPN library
+        if map.count > 5 {
+            //old client. needs migration
+            var newMap = migrateOVPNConfigurationMap(from: map)
+            return try? OpenVPNTunnelProvider.Configuration.parsed(from: newMap)
+        }
         return try? OpenVPNTunnelProvider.Configuration.parsed(from: map)
+    }
+    
+    private func migrateOVPNConfigurationMap(from map: [String: Any]) -> [String: Any] {
+        var updatedMap = [String: Any]()
+        updatedMap["appGroup"] = map["AppGroup"]
+        updatedMap["prefersResolvedAddresses"] = map["PrefersResolvedAddresses"]
+        updatedMap["masksPrivateData"] = map["MasksPrivateData"]
+        updatedMap["shouldDebug"] = map["Debug"]
+        
+        var sessionConfigurationMap = [String: Any]()
+        sessionConfigurationMap["cipher"] = map["CipherAlgorithm"]
+        sessionConfigurationMap["digest"] = map["DigestAlgorithm"]
+        sessionConfigurationMap["ca"] = map["CA"]
+        sessionConfigurationMap["mtu"] = map["MTU"]
+        sessionConfigurationMap["usesPIAPatches"] = map["UsesPIAPatches"]
+        sessionConfigurationMap["dnsServers"] = map["DNSServers"]
+        sessionConfigurationMap["endpointProtocols"] = map["EndpointProtocols"]
+        sessionConfigurationMap["renegotiatesAfter"] = map["RenegotiatesAfter"]
+
+        updatedMap["sessionConfiguration"] = sessionConfigurationMap
+        
+        return updatedMap
     }
     
     /// :nodoc:
@@ -233,7 +261,13 @@ public class PIATunnelProfile: NetworkExtensionProfile {
         var customCfg = configuration.customConfiguration
         if let piaCfg = customCfg as? OpenVPNTunnelProvider.Configuration {
             var builder = piaCfg.builder()
-            builder.sessionConfiguration.usesPIAPatches = true //SET TO FALSE TO USE NATIVE OVPN 
+            
+            if let usesVanillaOpenVPN = configuration.server.bestAddressForOVPN(tcp: true)?.van, usesVanillaOpenVPN == true {
+                builder.sessionConfiguration.usesPIAPatches = false
+            } else {
+                builder.sessionConfiguration.usesPIAPatches = true //SET TO FALSE TO USE NATIVE OVPN
+            }
+            
             if let protocols = builder.sessionConfiguration.endpointProtocols, protocols.contains(where: {$0.socketType == .tcp }) {
                 if let bestAddress = configuration.server.bestAddressForOVPN(tcp: true)?.ip {
                     serverAddress = bestAddress

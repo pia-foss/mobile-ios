@@ -147,10 +147,15 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             accessedDatabase.transient.vpnStatus = nextStatus
         }
         
-        if let error = connection.value(forKey: "_lastDisconnectError") {
-            if previousStatus == .connecting {
-                log.error("The VPN did fail \(error)")
-                Macros.postNotification(.PIAVPNDidFail)
+        if let error = connection.value(forKey: "_lastDisconnectError") as? NSError {
+            if error.description.contains("Domain=TunnelKit.OpenVPNTunnelProvider.ProviderConfigurationError Code=0") {
+                Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, nil)
+                return
+            } else {
+                if previousStatus == .connecting {
+                    log.error("The VPN did fail \(error)")
+                    Macros.postNotification(.PIAVPNDidFail)
+                }
             }
         }
 

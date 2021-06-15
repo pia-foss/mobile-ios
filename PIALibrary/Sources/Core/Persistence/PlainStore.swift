@@ -95,6 +95,8 @@ protocol PlainStore: class {
     
     var ikeV2EncryptionAlgorithm: String { get set }
 
+    var ikeV2PacketSize: Int { get set }
+
     //MARK: Sign in with Apple
     var signInWithAppleFakeEmail: String? { get set }
 

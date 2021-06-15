@@ -79,6 +79,10 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
         
     }
     
+    public func reload() {
+        self.tableView.reloadData()
+    }
+    
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         styleNavigationBarWithTitle(self.navigationController?.title ?? "")

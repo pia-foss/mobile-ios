@@ -60,6 +60,8 @@ private protocol PreferencesStore: class {
     
     var ikeV2EncryptionAlgorithm: String { get set }
 
+    var ikeV2PacketSize: Int { get set }
+
     var signInWithAppleFakeEmail: String? { get set }
 
     var shareServiceQualityData: Bool { get set }
@@ -93,6 +95,7 @@ private extension PreferencesStore {
         nmtRulesEnabled = source.nmtRulesEnabled
         ikeV2IntegrityAlgorithm = source.ikeV2IntegrityAlgorithm
         ikeV2EncryptionAlgorithm = source.ikeV2EncryptionAlgorithm
+        ikeV2PacketSize = source.ikeV2PacketSize
         signInWithAppleFakeEmail = source.signInWithAppleFakeEmail
         shareServiceQualityData = source.shareServiceQualityData
     }
@@ -220,6 +223,16 @@ extension Client {
             }
             set {
                 accessedDatabase.plain.ikeV2EncryptionAlgorithm = newValue
+            }
+        }
+        
+        /// Packet size value for IKEv2 VPN configuration
+        public fileprivate(set) var ikeV2PacketSize: Int {
+            get {
+                return accessedDatabase.plain.ikeV2PacketSize
+            }
+            set {
+                accessedDatabase.plain.ikeV2PacketSize = newValue
             }
         }
         
@@ -387,6 +400,7 @@ extension Client.Preferences {
             nmtRulesEnabled = false
             ikeV2IntegrityAlgorithm = IKEv2IntegrityAlgorithm.defaultIntegrity.value()
             ikeV2EncryptionAlgorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm.value()
+            ikeV2PacketSize = 0
             signInWithAppleFakeEmail = nil
             shareServiceQualityData = false
         }
@@ -464,6 +478,9 @@ extension Client.Preferences {
         
         /// :nodoc:
         public var ikeV2EncryptionAlgorithm: String
+        
+        /// :nodoc:
+        public var ikeV2PacketSize: Int
 
         /// :nodoc:
         public var signInWithAppleFakeEmail: String?
@@ -525,6 +542,9 @@ extension Client.Preferences {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
             if (ikeV2EncryptionAlgorithm != target.ikeV2EncryptionAlgorithm) {
+                queue.append(VPNActionDisconnectAndReinstall())
+            }
+            if (ikeV2PacketSize != target.ikeV2PacketSize) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
             if let configuration = vpnCustomConfigurations[vpnType],

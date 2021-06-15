@@ -151,7 +151,7 @@ public class IKEv2Profile: NetworkExtensionProfile {
     
     /// :nodoc:
     public func requestLog(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: ((String?, Error?) -> Void)?) {
-        callback?(nil, ClientError.unsupported)
+        callback?(self.currentVPN.description, nil)
     }
 
     /// :nodoc:
@@ -203,6 +203,12 @@ public class IKEv2Profile: NetworkExtensionProfile {
         if let integrity = IKEv2IntegrityAlgorithm(rawValue: Client.preferences.ikeV2IntegrityAlgorithm) {
             cfg.ikeSecurityAssociationParameters.integrityAlgorithm = integrity.networkExtensionValue()
             cfg.childSecurityAssociationParameters.integrityAlgorithm = integrity.networkExtensionValue()
+        }
+        
+        if #available(iOS 14.0, *) {
+            if Client.preferences.ikeV2PacketSize != 0 {
+                cfg.mtu = Client.preferences.ikeV2PacketSize
+            }
         }
         
         log.debug("IKEv2 Configuration")

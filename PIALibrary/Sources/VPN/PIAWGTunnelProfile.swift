@@ -30,12 +30,13 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
     public func parsedCustomConfiguration(from map: [String : Any]) -> VPNCustomConfiguration? {
         
         let S = PIAWireguardConfiguration.Keys.self
-        
-        if let dnsServers = map[S.dnsServers] as? [String] {
-            return PIAWireguardConfiguration(customDNSServers: dnsServers)
+        let defaultMTU = 1280
+
+        if let dnsServers = map[S.dnsServers] as? [String], let packetSize = map[S.packetSize] as? Int {
+            return PIAWireguardConfiguration(customDNSServers: dnsServers, packetSize: packetSize)
         }
         
-        return PIAWireguardConfiguration(customDNSServers: [])
+        return PIAWireguardConfiguration(customDNSServers: [], packetSize: defaultMTU)
 
     }
     
@@ -261,6 +262,7 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
             var customCfg = configuration.customConfiguration
             if let piaCfg = customCfg as? PIAWireguardConfiguration {
                 cfg.providerConfiguration?[PIAWireguardConfiguration.Keys.dnsServers] = piaCfg.customDNSServers
+                cfg.providerConfiguration?[PIAWireguardConfiguration.Keys.packetSize] = piaCfg.packetSize
             }
 
             return cfg
