@@ -116,6 +116,14 @@ enum Asset {
       static let noResultsDark = ImageAsset(name: "no-results-dark")
       static let noResultsLight = ImageAsset(name: "no-results-light")
     }
+    enum Settings {
+      static let iconAbout = ImageAsset(name: "icon-about")
+      static let iconAutomation = ImageAsset(name: "icon-automation")
+      static let iconGeneral = ImageAsset(name: "icon-general")
+      static let iconNetwork = ImageAsset(name: "icon-network")
+      static let iconPrivacy = ImageAsset(name: "icon-privacy")
+      static let iconProtocols = ImageAsset(name: "icon-protocols")
+    }
     enum Splash {
       static let splash = ImageAsset(name: "splash")
     }
@@ -403,20 +411,26 @@ enum Asset {
   static let icon3dtConnect = ImageAsset(name: "icon-3dt-connect")
   static let icon3dtDisconnect = ImageAsset(name: "icon-3dt-disconnect")
   static let icon3dtSelectRegion = ImageAsset(name: "icon-3dt-select-region")
+  static let iconAbout1 = ImageAsset(name: "icon-about-1")
   static let iconAbout = ImageAsset(name: "icon-about")
   static let iconAccount = ImageAsset(name: "icon-account")
   static let iconAdd = ImageAsset(name: "icon-add")
   static let iconAlert = ImageAsset(name: "icon-alert")
+  static let iconAutomation = ImageAsset(name: "icon-automation")
   static let iconClose = ImageAsset(name: "icon-close")
   static let iconContact = ImageAsset(name: "icon-contact")
   static let iconDip = ImageAsset(name: "icon-dip")
+  static let iconGeneral = ImageAsset(name: "icon-general")
   static let iconGeoDarkSelected = ImageAsset(name: "icon-geo-dark-selected")
   static let iconGeoDark = ImageAsset(name: "icon-geo-dark")
   static let iconGeoSelected = ImageAsset(name: "icon-geo-selected")
   static let iconGeo = ImageAsset(name: "icon-geo")
   static let iconHomepage = ImageAsset(name: "icon-homepage")
   static let iconLogout = ImageAsset(name: "icon-logout")
+  static let iconNetwork = ImageAsset(name: "icon-network")
+  static let iconPrivacy1 = ImageAsset(name: "icon-privacy-1")
   static let iconPrivacy = ImageAsset(name: "icon-privacy")
+  static let iconProtocols = ImageAsset(name: "icon-protocols")
   static let iconRegion = ImageAsset(name: "icon-region")
   static let iconRemove = ImageAsset(name: "icon-remove")
   static let iconSettings = ImageAsset(name: "icon-settings")
@@ -493,6 +507,12 @@ enum Asset {
     Piax.Nmt.iconSelect,
     Piax.Regions.noResultsDark,
     Piax.Regions.noResultsLight,
+    Piax.Settings.iconAbout,
+    Piax.Settings.iconAutomation,
+    Piax.Settings.iconGeneral,
+    Piax.Settings.iconNetwork,
+    Piax.Settings.iconPrivacy,
+    Piax.Settings.iconProtocols,
     Piax.Splash.splash,
     Piax.Tiles.ConnectionTile.iconAuthentication,
     Piax.Tiles.ConnectionTile.iconEncryption,
@@ -771,20 +791,26 @@ enum Asset {
     icon3dtConnect,
     icon3dtDisconnect,
     icon3dtSelectRegion,
+    iconAbout1,
     iconAbout,
     iconAccount,
     iconAdd,
     iconAlert,
+    iconAutomation,
     iconClose,
     iconContact,
     iconDip,
+    iconGeneral,
     iconGeoDarkSelected,
     iconGeoDark,
     iconGeoSelected,
     iconGeo,
     iconHomepage,
     iconLogout,
+    iconNetwork,
+    iconPrivacy1,
     iconPrivacy,
+    iconProtocols,
     iconRegion,
     iconRemove,
     iconSettings,

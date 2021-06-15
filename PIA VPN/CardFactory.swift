@@ -88,6 +88,10 @@ struct CardFactory {
         preferences.vpnType = PIAWGTunnelProfile.vpnType
         preferences.commit()
         
+        Macros.postNotification(.PIASettingsHaveChanged)
+        Macros.postNotification(.ReloadSettings)
+        Macros.postNotification(.ResetSettingsNavigationStack)
+
     }
     
     private static func connect() {
