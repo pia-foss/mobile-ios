@@ -122,12 +122,12 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                                                     return
                                                 }
                                                 
-                                                guard let token = response else {
+                                                guard let loginResponse = response else {
                                                     callback?(nil, ClientError.malformedResponseData)
                                                     return
                                                 }
                                                 
-                                                callback?(token, nil)
+                                                callback?(loginResponse.token, nil)
                                                 
         }
         
