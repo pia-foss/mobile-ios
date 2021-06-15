@@ -137,7 +137,7 @@ internal enum L10n {
   }
 
   internal enum ContentBlocker {
-    /// Content Blocker
+    /// Safari Content Blocker
     internal static let title = L10n.tr("Localizable", "content_blocker.title")
     internal enum Body {
       /// Please note: You do not need to be connected to the VPN for this Content Blocker to work, but it will only work while browsing with Safari.
@@ -441,6 +441,8 @@ internal enum L10n {
     internal static let unreachable = L10n.tr("Localizable", "global.unreachable")
     /// Update
     internal static let update = L10n.tr("Localizable", "global.update")
+    /// Version
+    internal static let version = L10n.tr("Localizable", "global.version")
     /// Yes
     internal static let yes = L10n.tr("Localizable", "global.yes")
     internal enum General {
@@ -475,7 +477,7 @@ internal enum L10n {
         internal static let updated = L10n.tr("Localizable", "inapp.messages.settings.updated")
       }
       internal enum Toggle {
-        /// Stop in-app communication messages
+        /// Show Service Communication Messages
         internal static let title = L10n.tr("Localizable", "inapp.messages.toggle.title")
       }
     }
@@ -578,6 +580,10 @@ internal enum L10n {
         internal enum Choose {
           /// Choose a WiFi network to add a new rule. 
           internal static let wifi = L10n.tr("Localizable", "network.management.tool.choose.wifi")
+        }
+        internal enum Enable {
+          /// Enable Automation
+          internal static let automation = L10n.tr("Localizable", "network.management.tool.enable.automation")
         }
         internal enum Mobile {
           /// Mobile data
@@ -722,7 +728,7 @@ internal enum L10n {
       /// APPLICATION INFORMATION
       internal static let title = L10n.tr("Localizable", "settings.application_information.title")
       internal enum Debug {
-        /// Send debug to support
+        /// Send Debug Log to support
         internal static let title = L10n.tr("Localizable", "settings.application_information.debug.title")
         internal enum Empty {
           /// Debug information is empty, please attempt a connection before retrying submission.
@@ -760,7 +766,7 @@ internal enum L10n {
       internal enum KillSwitch {
         /// The VPN kill switch prevents access to the Internet if the VPN connection is reconnecting. This excludes disconnecting manually.
         internal static let footer = L10n.tr("Localizable", "settings.application_settings.kill_switch.footer")
-        /// VPN kill switch
+        /// VPN Kill Switch
         internal static let title = L10n.tr("Localizable", "settings.application_settings.kill_switch.title")
       }
       internal enum Mace {
@@ -772,7 +778,7 @@ internal enum L10n {
     }
     internal enum Cards {
       internal enum History {
-        /// Latest news
+        /// Latest News
         internal static let title = L10n.tr("Localizable", "settings.cards.history.title")
       }
     }
@@ -794,22 +800,26 @@ internal enum L10n {
       /// CONNECTION
       internal static let title = L10n.tr("Localizable", "settings.connection.title")
       internal enum RemotePort {
-        /// Remote port
+        /// Remote Port
         internal static let title = L10n.tr("Localizable", "settings.connection.remote_port.title")
       }
       internal enum SocketProtocol {
         /// Socket
         internal static let title = L10n.tr("Localizable", "settings.connection.socket_protocol.title")
       }
+      internal enum Transport {
+        /// Transport
+        internal static let title = L10n.tr("Localizable", "settings.connection.transport.title")
+      }
       internal enum VpnProtocol {
-        /// Protocol
+        /// Protocol Selection
         internal static let title = L10n.tr("Localizable", "settings.connection.vpn_protocol.title")
       }
     }
     internal enum ContentBlocker {
       /// To enable or disable Content Blocker go to Settings > Safari > Content Blockers and toggle PIA VPN.
       internal static let footer = L10n.tr("Localizable", "settings.content_blocker.footer")
-      /// Safari Content Blocker
+      /// Safari Content Blocker state
       internal static let title = L10n.tr("Localizable", "settings.content_blocker.title")
       internal enum Refresh {
         /// Refresh block list
@@ -860,11 +870,11 @@ internal enum L10n {
       /// ENCRYPTION
       internal static let title = L10n.tr("Localizable", "settings.encryption.title")
       internal enum Cipher {
-        /// Data encryption
+        /// Data Encryption
         internal static let title = L10n.tr("Localizable", "settings.encryption.cipher.title")
       }
       internal enum Digest {
-        /// Data authentication
+        /// Data Authentication
         internal static let title = L10n.tr("Localizable", "settings.encryption.digest.title")
       }
       internal enum Handshake {
@@ -874,7 +884,7 @@ internal enum L10n {
     }
     internal enum Geo {
       internal enum Servers {
-        /// Include geo-located regions
+        /// Show Geo-located Regions
         internal static let description = L10n.tr("Localizable", "settings.geo.servers.description")
       }
     }
@@ -970,7 +980,7 @@ internal enum L10n {
       /// RESET
       internal static let title = L10n.tr("Localizable", "settings.reset.title")
       internal enum Defaults {
-        /// Reset to default settings
+        /// Reset settings to default
         internal static let title = L10n.tr("Localizable", "settings.reset.defaults.title")
         internal enum Confirm {
           /// Reset
@@ -981,6 +991,20 @@ internal enum L10n {
           internal static let title = L10n.tr("Localizable", "settings.reset.defaults.confirm.title")
         }
       }
+    }
+    internal enum Section {
+      /// Automation
+      internal static let automation = L10n.tr("Localizable", "settings.section.automation")
+      /// General
+      internal static let general = L10n.tr("Localizable", "settings.section.general")
+      /// Help
+      internal static let help = L10n.tr("Localizable", "settings.section.help")
+      /// Network
+      internal static let network = L10n.tr("Localizable", "settings.section.network")
+      /// Privacy Features
+      internal static let privacyFeatures = L10n.tr("Localizable", "settings.section.privacyFeatures")
+      /// Protocols
+      internal static let protocols = L10n.tr("Localizable", "settings.section.protocols")
     }
     internal enum Server {
       internal enum Network {
@@ -1008,7 +1032,7 @@ internal enum L10n {
       internal enum Packets {
         /// Will slightly lower the IP packet size to improve compatibility with some routers and mobile networks.
         internal static let description = L10n.tr("Localizable", "settings.small.packets.description")
-        /// Use small packets
+        /// Use Small Packets
         internal static let title = L10n.tr("Localizable", "settings.small.packets.title")
       }
     }

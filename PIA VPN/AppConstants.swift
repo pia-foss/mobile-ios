@@ -173,6 +173,16 @@ struct AppConstants {
         static let smallPacketSize = 1350
     }
     
+    struct IKEv2PacketSize {
+        static let defaultPacketSize = 0
+        static let highPacketSize = 1420
+    }
+
+    struct WireGuardPacketSize {
+        static let defaultPacketSize = 1280
+        static let highPacketSize = 1420
+    }
+    
     struct MagicLink {
         static let url = "piavpn:login?token="
     }

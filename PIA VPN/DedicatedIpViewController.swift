@@ -168,6 +168,7 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
     private func confirmDelete(row: Int) {
         let dipRegion = data[row]
         if let token = dipRegion.dipToken {
+            dipRegion.unfavorite()
             Client.providers.serverProvider.removeDIPToken(token)
             NotificationCenter.default.post(name: .PIAThemeDidChange,
                                             object: self,

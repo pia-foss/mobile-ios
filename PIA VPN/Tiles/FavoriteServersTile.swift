@@ -91,7 +91,7 @@ class FavoriteServersTile: UIView, Tileable {
         }
         
         var favServers: [Server] = []
-        let favoriteServers = AppPreferences.shared.favoriteServerIdentifiersGen4
+        let favoriteServers = AppPreferences.shared.favoriteServerIdentifiersGen4.filterDuplicate{ ($0) }
 
         for identifier in favoriteServers.reversed() {
             let servers = currentServers.filter({ $0.identifier+($0.dipToken ?? "") == identifier })

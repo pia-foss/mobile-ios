@@ -49,6 +49,8 @@ class AppPreferences {
         static let piaSocketType = "PIASocketType"
 
         static let useSmallPackets = "UseSmallPackets"
+        static let wireGuardUseSmallPackets = "WireGuardUseSmallPackets"
+        static let ikeV2UseSmallPackets = "IKEV2UseSmallPackets"
 
         static let favoriteServerIdentifiersGen4_deprecated = "FavoriteServerIdentifiersGen4"
 
@@ -286,7 +288,25 @@ class AppPreferences {
             defaults.set(newValue, forKey: Entries.useSmallPackets)
         }
     }
-
+    
+    var wireGuardUseSmallPackets: Bool {
+        get {
+            return defaults.bool(forKey: Entries.wireGuardUseSmallPackets)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.wireGuardUseSmallPackets)
+        }
+    }
+    
+    var ikeV2UseSmallPackets: Bool {
+        get {
+            return defaults.bool(forKey: Entries.ikeV2UseSmallPackets)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.ikeV2UseSmallPackets)
+        }
+    }
+    
     var dedicatedTokenIPReleation: [String: String] {
         get {
             let keychain = PIALibrary.Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
@@ -514,6 +534,8 @@ class AppPreferences {
             Entries.quickSettingNetworkToolVisible: true,
             Entries.quickSettingPrivateBrowserVisible: true,
             Entries.useSmallPackets: false,
+            Entries.wireGuardUseSmallPackets: true,
+            Entries.ikeV2UseSmallPackets: true,
             Entries.canAskAgainForReview: false,
             Entries.successConnections: 0,
             Entries.failureConnections: 0,
@@ -568,10 +590,19 @@ class AppPreferences {
         AppPreferences.shared.piaHandshake = handshake
 
         var pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
-
+        var shouldUpdate = false
+        
+        if pendingOpenVPNConfiguration.cipher == nil || pendingOpenVPNConfiguration.cipher == OpenVPN.Cipher.aes128cbc || pendingOpenVPNConfiguration.cipher == OpenVPN.Cipher.aes256cbc {
+            shouldUpdate = true
+            pendingOpenVPNConfiguration.cipher = .aes256gcm
+        }
+        
         if pendingOpenVPNConfiguration.digest != OpenVPN.Digest.sha256 {
+            shouldUpdate = true
             pendingOpenVPNConfiguration.digest = OpenVPN.Digest.sha256
-            
+        }
+        
+        if shouldUpdate {
             var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: pendingOpenVPNConfiguration.build())
             if AppPreferences.shared.useSmallPackets {
                 builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
@@ -729,6 +760,8 @@ class AppPreferences {
         quickSettingNetworkToolVisible = true
         quickSettingPrivateBrowserVisible = true
         useSmallPackets = false
+        ikeV2UseSmallPackets = true
+        wireGuardUseSmallPackets = true
         todayWidgetVpnProtocol = IKEv2Profile.vpnType
         todayWidgetVpnPort = "500"
         todayWidgetVpnSocket = "UDP"
@@ -737,7 +770,6 @@ class AppPreferences {
         failureConnections = 0
         showGeoServers = true
         stopInAppMessages = false
-        stagingVersion = 1
         dedicatedTokenIPReleation = [:]
         appEnvironmentIsProduction = Client.environment == .production ? true : false
         MessagesManager.shared.reset()
@@ -762,6 +794,8 @@ class AppPreferences {
         quickSettingNetworkToolVisible = true
         quickSettingPrivateBrowserVisible = true
         useSmallPackets = false
+        ikeV2UseSmallPackets = true
+        wireGuardUseSmallPackets = true
         let preferences = Client.preferences.editable().reset()
         preferences.commit()
         Client.resetServers(completionBlock: {_ in })
@@ -769,7 +803,6 @@ class AppPreferences {
         showGeoServers = true
         stopInAppMessages = false
         dismissedMessages = []
-        stagingVersion = 1
         dedicatedTokenIPReleation = [:]
         MessagesManager.shared.reset()
         appEnvironmentIsProduction = Client.environment == .production ? true : false

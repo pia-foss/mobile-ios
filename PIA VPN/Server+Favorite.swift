@@ -52,14 +52,14 @@ extension Server: Favoritable, PropertyStoring {
 
     func favorite() {
         self.isFavorite = true
-        var currentFavorites = AppPreferences.shared.favoriteServerIdentifiersGen4
+        var currentFavorites = AppPreferences.shared.favoriteServerIdentifiersGen4.filterDuplicate{ ($0) }
         currentFavorites.append(self.identifier+(self.dipToken ?? ""))
         AppPreferences.shared.favoriteServerIdentifiersGen4 = currentFavorites
     }
     
     func unfavorite() {
         self.isFavorite = false
-        let currentFavorites = AppPreferences.shared.favoriteServerIdentifiersGen4
+        let currentFavorites = AppPreferences.shared.favoriteServerIdentifiersGen4.filterDuplicate{ ($0) }
         let filteredFavorites = currentFavorites.filter({$0 != self.identifier+(self.dipToken ?? "")})
         AppPreferences.shared.favoriteServerIdentifiersGen4 = filteredFavorites
     }

@@ -71,17 +71,17 @@ def shared_main_pods
     pod 'AlamofireImage'
     
     #pod "PIAAccountModule", :git => "#{$git_root}/#{$accounts_repo}"
-    pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :commit => '720e6bc'
+    pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :branch => 'master'
     #pod "PIARegionsModule", :git => "#{$git_root}/#{$regions_repo}"
-    pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :commit => 'ca41c33'
+    pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :branch => 'master'
     #pod "PIACSIModule", :git => "#{$git_root}/#{$csi_repo}"
     pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :branch => 'master'
     pod "PIAKPIModule", :git => "#{$gitlab_kn_root}/#{$kpi_gitlab_repo}", :commit => 'b054ac6'
-    
-    #library_by_path('/Users/jose/Projects/PIA')
+
+    #library_by_path('')
     #library_by_git('b73d9e5')
     #library_by_gitlab_branch('develop')
-    library_by_gitlab_by_git('b8480b6')
+    library_by_gitlab_by_git('ec53a06')
     #library_by_version('~> 1.1.3')
 end
 
@@ -97,7 +97,7 @@ def app_pods
 end
 
 def tunnel_pods
-    pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :branch => 'master'
+    pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :commit => '2556fbe'
 end
 
 def piawireguard_pod
@@ -105,7 +105,7 @@ def piawireguard_pod
 end
 
 def piawireguard_gitlab_pod
-    pod 'PIAWireguard', :git => "#{$gitlab_vpn_root}/pia-wireguard.git"
+    pod 'PIAWireguard', :git => "#{$gitlab_vpn_root}/pia-wireguard.git", :commit => '2f9dff0'
 end
 
 # Targets
