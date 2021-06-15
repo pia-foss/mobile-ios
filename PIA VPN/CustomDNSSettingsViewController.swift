@@ -33,7 +33,7 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
     @IBOutlet private weak var labelSecondaryDNS: UILabel!
     @IBOutlet private weak var textSecondaryDNS: BorderedTextField!
 
-    weak var delegate: SettingsViewControllerDelegate?
+    weak var delegate: DNSSettingsDelegate?
     var vpnType: String?
 
     override func viewDidLoad() {

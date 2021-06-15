@@ -30,19 +30,7 @@ import WidgetKit
 
 private let log = SwiftyBeaver.self
 
-protocol SettingsViewControllerDelegate: class {
-    
-    /**
-     Called to update the setting sent as parameter.
-     
-     - Parameter setting: The setting to update.
-     - Parameter value: Optional value to update the setting
-     */
-    func updateSetting(_ setting: SettingSection, withValue value: Any?)
-}
-
-
-class SettingsViewController: AutolayoutViewController {
+class SettingsViewController: AutolayoutViewController, SettingsViewControllerDelegate {
 
     private struct Cells {
         static let setting = "SettingCell"
@@ -57,7 +45,7 @@ class SettingsViewController: AutolayoutViewController {
 
     private var pendingPreferences: Client.Preferences.Editable!
     
-    private(set) var pendingOpenVPNSocketType: SocketType?
+    var pendingOpenVPNSocketType: SocketType?
     
     private var pendingHandshake: OpenVPN.Configuration.Handshake!
 
@@ -192,6 +180,25 @@ class SettingsViewController: AutolayoutViewController {
     func updateHandshake(handshake value: String) {
         pendingPreferences.ikeV2IntegrityAlgorithm = value
         savePreferences()
+    }
+    
+    func updateSetting(_ setting: SettingSection, withValue value: Any?) {
+        
+        if let networkSection = setting as? NetworkSections {
+            switch networkSection {
+            case .dns:
+                if let settingValue = value as? String {
+                    if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+                        pendingOpenVPNConfiguration.dnsServers = DNSList.shared.valueForKey(settingValue)
+                    } else {
+                        pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: DNSList.shared.valueForKey(settingValue), packetSize: AppPreferences.shared.wireGuardUseSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
+                    }
+                }
+            }
+        }
+        
+        savePreferences()
+
     }
     
     // MARK: Actions
@@ -633,27 +640,4 @@ extension OpenVPN.ConfigurationBuilder {
     func isEncryptionGCM() -> Bool {
         return (cipher == .aes128gcm) || (cipher == .aes256gcm)
     }
-}
-
-extension SettingsViewController: SettingsViewControllerDelegate {
-    
-    func updateSetting(_ setting: SettingSection, withValue value: Any?) {
-        
-        if let networkSection = setting as? NetworkSections {
-            switch networkSection {
-            case .dns:
-                if let settingValue = value as? String {
-                    if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-                        pendingOpenVPNConfiguration.dnsServers = DNSList.shared.valueForKey(settingValue)
-                    } else {
-                        pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: DNSList.shared.valueForKey(settingValue), packetSize: AppPreferences.shared.wireGuardUseSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
-                    }
-                }
-            }
-        }
-        
-        savePreferences()
-
-    }
-    
 }

@@ -26,6 +26,12 @@ import PIALibrary
 import TunnelKit
 import PIAWireguard
 
+protocol DNSSettingsDelegate: AnyObject {
+    
+    func updateSetting(_ setting: SettingSection, withValue value: Any?)
+    
+}
+
 class NetworkSettingsViewController: PIABaseSettingsViewController {
     
     @IBOutlet weak var tableView: UITableView!
@@ -380,7 +386,7 @@ extension NetworkSettingsViewController: OptionsViewControllerDelegate {
     
 }
 
-extension NetworkSettingsViewController: SettingsViewControllerDelegate {
+extension NetworkSettingsViewController: DNSSettingsDelegate {
     
     func updateSetting(_ setting: SettingSection, withValue value: Any?) {
         settingsDelegate.updateSetting(setting, withValue: value)
