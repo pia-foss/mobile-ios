@@ -17,7 +17,7 @@ $gitlab_vpn_root = "git@gitlab.kape.com:pia-mobile/ios"
 $gitlab_kn_root = "git@gitlab.kape.com:pia-mobile/shared"
 
 $library_pod = 'PIALibrary'
-$library_repo = 'pia-library'
+$library_repo = 'client-library-apple'
 $library_gitlab_repo = 'client-library-apple.git'
 $library_subspecs = [
     'Library',
@@ -70,16 +70,16 @@ def shared_main_pods
     pod 'AlamofireImage'
     
     #pod "PIAAccountModule", :git => "#{$git_root}/#{$accounts_repo}"
-    pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :commit => '720e6bc'
+    pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :branch => 'master'
     #pod "PIARegionsModule", :git => "#{$git_root}/#{$regions_repo}"
-    pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :commit => '338b673'
+    pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :branch => 'master'
     #pod "PIACSIModule", :git => "#{$git_root}/#{$csi_repo}"
     pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :branch => 'master'
 
-    library_by_path('~/Repositories/')
+    #library_by_path('')
     #library_by_git('b73d9e5')
     #library_by_gitlab_branch('develop')
-    #library_by_gitlab_by_git('b676f90')
+    library_by_gitlab_by_git('3f80d1d')
     #library_by_version('~> 1.1.3')
 end
 

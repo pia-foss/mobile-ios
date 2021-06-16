@@ -82,12 +82,8 @@ class DashboardViewController: AutolayoutViewController {
         
         currentPageIndex = 0
 
-        if SideMenuManager.default.leftMenuNavigationController == nil {
-            SideMenuManager.default.leftMenuNavigationController = StoryboardScene.Main.sideMenuNavigationController.instantiate()
-        }
-        SideMenuManager.default.addPanGestureToPresent(toView: self.navigationController!.navigationBar)
-        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
-
+        setupMenu()
+        
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(accountDidLogout(notification:)), name: .PIAAccountDidLogout, object: nil)
         nc.addObserver(self, selector: #selector(vpnDidInstall(notification:)), name: .PIAVPNDidInstall, object: nil)
@@ -168,6 +164,26 @@ class DashboardViewController: AutolayoutViewController {
         // check account email
         checkAccountEmail()
 
+    }
+    
+    // MARK: Menu
+    private func setupMenu() {
+        if SideMenuManager.default.leftMenuNavigationController == nil {
+            SideMenuManager.default.leftMenuNavigationController = StoryboardScene.Main.sideMenuNavigationController.instantiate()
+        }
+        SideMenuManager.default.addPanGestureToPresent(toView: self.navigationController!.navigationBar)
+        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
+        
+        if let menuNavigationController = SideMenuManager.default.leftMenuNavigationController {
+            setMenuDelegate(menuNavigationController: menuNavigationController)
+        }
+    }
+    
+    private func setMenuDelegate(menuNavigationController: UINavigationController) {
+        guard let menu = menuNavigationController.topViewController as? MenuViewController else {
+            return
+        }
+        menu.delegate = self
     }
     
     // MARK: Calling Cards
@@ -425,10 +441,7 @@ class DashboardViewController: AutolayoutViewController {
         navigationItem.setEmptyBackButton()
 
         if let sideMenu = segue.destination as? UISideMenuNavigationController {
-            guard let menu = sideMenu.topViewController as? MenuViewController else {
-                return
-            }
-            menu.delegate = self
+            setMenuDelegate(menuNavigationController: sideMenu)
         } else if let nmt = segue.destination as? TrustedNetworksViewController {
             nmt.shouldReconnectAutomatically = true
             nmt.persistentConnectionValue = Client.preferences.isPersistentConnection

@@ -30,217 +30,8 @@ import WidgetKit
 
 private let log = SwiftyBeaver.self
 
-private extension String {
-    var vpnTypeDescription: String {
-        switch self {
-        case PIAWGTunnelProfile.vpnType:
-            return "WireGuard®"
-        case PIATunnelProfile.vpnType:
-            return "OpenVPN"
-        case IKEv2Profile.vpnType:
-            return "IPSec (IKEv2)"
-        default:
-            return self
-        }
-    }
-}
+class SettingsViewController: AutolayoutViewController, SettingsDelegate {
 
-enum Setting: Int {
-    case vpnProtocolSelection
-    
-    case vpnSocket
-    
-    case vpnPort
-    
-    case vpnDns
-    
-    case encryptionCipher
-    
-    case encryptionDigest
-    
-    case encryptionHandshake
-        
-    case useSmallPackets
-
-    case ikeV2EncryptionAlgorithm
-    
-    case ikeV2IntegrityAlgorithm
-    
-    case automaticReconnection
-
-    case nmtSelection
-    
-    case trustedNetworks
-
-    case connectShortcut
-
-    case disconnectShortcut
-    
-    case geoServers
-
-    case contentBlockerState
-    
-    case contentBlockerRefreshRules
-    
-    case mace
-    
-    case darkTheme
-
-    case stopInAppMessages
-
-    case submitDebugReport
-        
-    case resetSettings
-    
-    // development
-    
-    //        case truncateDebugLog
-    //
-    //        case recalculatePingTimes
-    //
-    //        case invokeMACERequest
-    
-    case stagingVersion
-
-    case customServers
-    
-    case publicUsername
-    
-    case username
-    
-    case password
-    
-    case environment
-    
-    case crash
-    
-    case resolveGoogleAdsDomain
-
-    case cardsHistory
-    
-}
-
-protocol SettingsViewControllerDelegate: class {
-    
-    /**
-     Called to update the setting sent as parameter.
-     
-     - Parameter setting: The setting to update.
-     - Parameter value: Optional value to update the setting
-     */
-    func updateSetting(_ setting: Setting, withValue value: Any?)
-}
-
-
-class SettingsViewController: AutolayoutViewController {
-
-    fileprivate static let DNS: String = "DNS"
-
-    fileprivate static let AUTOMATIC_SOCKET = "automatic"
-
-    fileprivate static let AUTOMATIC_PORT: UInt16 = 0
-
-    private enum Section: Int {
-        
-        case connection
-
-        case encryption
-        
-        case smallPackets
-
-        case ikeV2encryption
-        
-        case applicationSettings
-                
-        case autoConnectSettings
-
-        case inAppSettings
-
-        case geoSettings
-
-        case contentBlocker
-
-        case applicationInformation
-        
-        case reset
-
-        case development
-
-        case info
-    }
-
-    private static let allSections: [Section] = [
-        .connection,
-        .encryption,
-        .smallPackets,
-        .ikeV2encryption,
-        .applicationSettings,
-        .autoConnectSettings,
-        .inAppSettings,
-        .geoSettings,
-        .applicationInformation,
-        .reset,
-        .contentBlocker,
-        .info
-    ]
-
-    private var visibleSections: [Section] = []
-
-    private var rowsBySection: [Section: [Setting]] = [
-        .connection: [
-            .vpnProtocolSelection,
-            .vpnSocket,
-            .vpnPort,
-            .vpnDns
-        ],
-        .encryption: [
-            .encryptionCipher,
-            .encryptionDigest,
-            .encryptionHandshake,
-        ],
-        .ikeV2encryption: [
-            .ikeV2EncryptionAlgorithm,
-            .ikeV2IntegrityAlgorithm,
-        ],
-        .smallPackets: [
-        ], // dynamic
-        .applicationSettings: [], // dynamic
-        .autoConnectSettings: [], // dynamic
-        .inAppSettings: [
-            .stopInAppMessages
-        ],
-        .geoSettings: [
-            .geoServers
-        ],
-        .contentBlocker: [
-            .contentBlockerState,
-            .contentBlockerRefreshRules
-        ],
-        .applicationInformation: [
-            .submitDebugReport,
-        ],
-        .reset: [
-            .resetSettings
-        ],
-        .development: [
-//            .truncateDebugLog,
-//            .recalculatePingTimes,
-//            .invokeMACERequest,
-//            .mace,
-            .stagingVersion,
-            .customServers,
-            .publicUsername,
-            .username,
-            .password,
-            .environment,
-            .resolveGoogleAdsDomain,
-            .crash
-        ],
-        .info: [
-            .cardsHistory
-        ]
-    ]
-    
     private struct Cells {
         static let setting = "SettingCell"
         static let protocolCell = "ProtocolTableViewCell"
@@ -250,39 +41,17 @@ class SettingsViewController: AutolayoutViewController {
     
     @IBOutlet private weak var tableView: UITableView!
 
-    private lazy var switchEnableNMT = UISwitch()
-
-    private lazy var switchPersistent = UISwitch()
-
-    private lazy var switchMACE = UISwitch()
-    
-    private lazy var switchContentBlocker = UISwitch()
-    
-    private lazy var switchDarkMode = UISwitch()
-        
-    private lazy var switchSmallPackets = UISwitch()
-
-    private lazy var switchGeoServers = UISwitch()
-
-    private lazy var switchEnvironment = UISwitch()
-
-    private lazy var switchInAppMessages = UISwitch()
-
-    private lazy var imvSelectedOption = UIImageView(image: Asset.accessorySelected.image)
-
-    private var isContentBlockerEnabled = false
-
     private var isResetting = false
 
     private var pendingPreferences: Client.Preferences.Editable!
     
-    private var pendingOpenVPNSocketType: SocketType?
+    var pendingOpenVPNSocketType: SocketType?
     
     private var pendingHandshake: OpenVPN.Configuration.Handshake!
 
-    private var pendingOpenVPNConfiguration: OpenVPN.ConfigurationBuilder!
+    var pendingOpenVPNConfiguration: OpenVPN.ConfigurationBuilder!
 
-    private var pendingWireguardVPNConfiguration: PIAWireguardConfiguration!
+    var pendingWireguardVPNConfiguration: PIAWireguardConfiguration!
 
     private var pendingVPNAction: VPNAction?
     
@@ -294,54 +63,8 @@ class SettingsViewController: AutolayoutViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-//        buttonConfirm.isEnabled = false
-//        navigationItem.rightBarButtonItem = buttonConfirm
         
-        pendingPreferences = Client.preferences.editable()
-
-        // XXX: fall back to default configuration (don't rely on client library)
-        
-        guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration ??
-            Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration else {
-            fatalError("No default VPN custom configuration provided for PIA OpenVPN protocol")
-        }
-        
-        guard let currentWireguardVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ??
-            Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
-            fatalError("No default VPN custom configuration provided for PIA Wireguard protocol")
-        }
-        
-        pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
-        pendingHandshake = AppPreferences.shared.piaHandshake
-        pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
-        pendingWireguardVPNConfiguration = currentWireguardVPNConfiguration
-
-        validateDNSList()
-
-        tableView.sectionFooterHeight = UITableView.automaticDimension
-        tableView.estimatedSectionFooterHeight = 1.0
-        tableView.estimatedSectionHeaderHeight = 1.0
-        
-        switchPersistent.addTarget(self, action: #selector(togglePersistentConnection(_:)), for: .valueChanged)
-        switchMACE.addTarget(self, action: #selector(toggleMACE(_:)), for: .valueChanged)
-        switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
-        switchDarkMode.addTarget(self, action: #selector(toggleDarkMode(_:)), for: .valueChanged)
-        switchSmallPackets.addTarget(self, action: #selector(toggleSmallPackets(_:)), for: .valueChanged)
-        switchGeoServers.addTarget(self, action: #selector(toggleGEOServers(_:)), for: .valueChanged)
-        switchEnableNMT.addTarget(self, action: #selector(toggleNMT(_:)), for: .valueChanged)
-        switchEnvironment.addTarget(self, action: #selector(toggleEnv(_:)), for: .valueChanged)
-        switchInAppMessages.addTarget(self, action: #selector(toggleStopInAppMessages(_:)), for: .valueChanged)
-        
-        redisplaySettings()
-
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(refreshContentBlockerState), name: UIApplication.didBecomeActiveNotification,
-                                               object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshPersistentConnectionValue),
-                                               name: .PIAPersistentConnectionSettingHaveChanged,
-                                               object: nil)
+        reloadSettings()
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(viewHasRotated),
@@ -350,18 +73,24 @@ class SettingsViewController: AutolayoutViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshSettings),
                                                name: .RefreshSettings,
                                                object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadSettings),
+                                               name: .ReloadSettings,
+                                               object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshWireGuardSettings),
                                                name: .RefreshWireGuardSettings,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(resetSettingsNavigationStack),
+                                               name: .ResetSettingsNavigationStack,
                                                object: nil)
 
         if shouldSetWireGuardSettings {
             refreshWireGuardSettings()
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        refreshContentBlockerState()
         styleNavigationBarWithTitle(L10n.Menu.Item.settings)
     }
     
@@ -371,129 +100,119 @@ class SettingsViewController: AutolayoutViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let customDNSSettingsVC = segue.destination as? CustomDNSSettingsViewController {
-            customDNSSettingsVC.delegate = self
-            customDNSSettingsVC.vpnType = pendingPreferences.vpnType == PIATunnelProfile.vpnType ? PIATunnelProfile.vpnType : PIAWGTunnelProfile.vpnType
-            let ips = DNSList.shared.valueForKey(pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY)
-            if ips.count > 0 {
-                customDNSSettingsVC.primaryDNSValue = ips.first
-                if ips.count > 1 {
-                    customDNSSettingsVC.secondaryDNSValue = ips.last
-                }
-            }
-        } else if let trustedNetworksVC = segue.destination as? TrustedNetworksViewController {
-            trustedNetworksVC.persistentConnectionValue = pendingPreferences.isPersistentConnection
-            trustedNetworksVC.vpnType = pendingPreferences.vpnType
+        if let base = segue.destination as? PIABaseSettingsViewController {
+            base.settingsDelegate = self
+            base.pendingPreferences = pendingPreferences
         }
     }
     
-    // MARK: Actions
-    @objc private func edit(_ sender: Any?) {
-        self.perform(segue: StoryboardSegue.Main.customDNSSegueIdentifier)
-    }
+    func updateSocketType(socketType: SocketType?) {
+        
+        let currentProtocols = pendingOpenVPNConfiguration.endpointProtocols
+        let serversCfg = Client.providers.serverProvider.currentServersConfiguration
+        var newProtocols: [EndpointProtocol] = []
 
-    @objc private func togglePersistentConnection(_ sender: UISwitch) {
-        if !sender.isOn,
-            Client.preferences.nmtRulesEnabled {
-                let alert = Macros.alert(nil, L10n.Settings.Nmt.Killswitch.disabled)
-                alert.addCancelAction(L10n.Global.close)
-                alert.addActionWithTitle(L10n.Global.enable) { [weak self] in
-                    self?.pendingPreferences.isPersistentConnection = true
-                    self?.redisplaySettings()
-                    self?.reportUpdatedPreferences()
+        if let socketType = socketType {
+            let ports = (socketType == .udp) ? serversCfg.ovpnPorts.udp : serversCfg.ovpnPorts.tcp
+            if currentProtocols?.count == 1, let currentPort = pendingOpenVPNConfiguration?.currentPort, ports.contains(currentPort) {
+                newProtocols.append(EndpointProtocol(socketType, currentPort))
+            } else {
+                for port in ports {
+                    newProtocols.append(EndpointProtocol(socketType, port))
                 }
-                present(alert, animated: true, completion: nil)
+            }
+        } else {
+            newProtocols = AppConfiguration.VPN.piaAutomaticProtocols
+        }
+        pendingOpenVPNSocketType = socketType
+        pendingOpenVPNConfiguration.endpointProtocols = newProtocols
+        savePreferences()
+
+    }
+    
+    func updateRemotePort(port: UInt16) {
+
+        let serversCfg = Client.providers.serverProvider.currentServersConfiguration
+
+        var newProtocols: [EndpointProtocol] = []
+        if (port != ProtocolSettingsViewController.AUTOMATIC_PORT) {
+            guard let socketType = pendingOpenVPNSocketType else {
+                fatalError("Port cannot be set manually when socket type is automatic")
+            }
+            newProtocols.append(EndpointProtocol(socketType, port))
+        } else {
+            if (pendingOpenVPNSocketType == nil) {
+                newProtocols = AppConfiguration.VPN.piaAutomaticProtocols
+            }
+            else if (pendingOpenVPNSocketType == .udp) {
+                for port in serversCfg.ovpnPorts.udp {
+                    newProtocols.append(EndpointProtocol(.udp, port))
+                }
+            }
+            else if (pendingOpenVPNSocketType == .tcp) {
+                for port in serversCfg.ovpnPorts.tcp {
+                    newProtocols.append(EndpointProtocol(.tcp, port))
+                }
+            }
+        }
+        pendingOpenVPNConfiguration.endpointProtocols = newProtocols
+        savePreferences()
+
+    }
+    
+    func updateDataEncryption(encryption value: String) {
+        if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+            pendingOpenVPNConfiguration.cipher = OpenVPN.Cipher(rawValue: value)!
+        } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
+            pendingPreferences.ikeV2EncryptionAlgorithm = value
+            //reset integrity algorithm if the encryption changes
+            var algorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm
+            if let currentAlgorithm = IKEv2EncryptionAlgorithm(rawValue: value) {
+                algorithm = currentAlgorithm
+            }
+            if let integrity = algorithm.integrityAlgorithms().first {
+                pendingPreferences.ikeV2IntegrityAlgorithm = integrity.rawValue
+            }
+        }
+        savePreferences()
+    }
+    
+    func updateHandshake(handshake value: String) {
+        pendingPreferences.ikeV2IntegrityAlgorithm = value
+        savePreferences()
+    }
+    
+    func updateSetting(_ setting: SettingSection, withValue value: Any?) {
+        
+        if let networkSection = setting as? NetworkSections {
+            switch networkSection {
+            case .dns:
+                if let settingValue = value as? String {
+                    if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+                        pendingOpenVPNConfiguration.dnsServers = DNSList.shared.valueForKey(settingValue)
+                    } else {
+                        pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: DNSList.shared.valueForKey(settingValue), packetSize: AppPreferences.shared.wireGuardUseSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
+                    }
+                }
+            }
         }
         
-        pendingPreferences.isPersistentConnection = sender.isOn
-        redisplaySettings()
-        reportUpdatedPreferences()
+        savePreferences()
 
     }
-     
-    @objc private func toggleMACE(_ sender: UISwitch) {
-        pendingPreferences.mace = sender.isOn
-        redisplaySettings()
-        reportUpdatedPreferences()
-    }
+    
+    // MARK: Actions
     
     @objc private func viewHasRotated() {
         styleNavigationBarWithTitle(L10n.Menu.Item.settings)
     }
 
-    // XXX: no need to bufferize app preferences
-    @objc private func toggleDarkMode(_ sender: UISwitch) {
-        AppPreferences.shared.transitionTheme(to: sender.isOn ? .dark : .light)
-    }
-
-    @objc private func toggleSmallPackets(_ sender: UISwitch) {
-        if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-            AppPreferences.shared.wireGuardUseSmallPackets = sender.isOn
-        } else if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-            AppPreferences.shared.useSmallPackets = sender.isOn
-        } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-            AppPreferences.shared.ikeV2UseSmallPackets = sender.isOn
-            pendingPreferences.ikeV2PacketSize = sender.isOn ? AppConstants.IKEv2PacketSize.defaultPacketSize : AppConstants.IKEv2PacketSize.highPacketSize
-        }
-        savePreferences()
-    }
-        
-    @objc private func toggleGEOServers(_ sender: UISwitch) {
-        AppPreferences.shared.showGeoServers = sender.isOn
-        NotificationCenter.default.post(name: .PIADaemonsDidPingServers,
-        object: self,
-        userInfo: nil)
-    }
-    
-    @objc private func toggleNMT(_ sender: UISwitch) {
-        let preferences = Client.preferences.editable()
-        preferences.nmtRulesEnabled = sender.isOn
-        preferences.commit()
-        redisplaySettings()
-    }
-
-    @objc private func toggleEnv(_ sender: UISwitch) {
-        if (Client.environment == .production) {
-            AppPreferences.shared.appEnvironmentIsProduction = false
-            Client.environment = .staging
-        } else {
-            AppPreferences.shared.appEnvironmentIsProduction = true
-            Client.environment = .production
-        }
-        Client.resetWebServices()
-        redisplaySettings()
-    }
-    
-    @objc private func toggleStopInAppMessages(_ sender: UISwitch) {
-        AppPreferences.shared.stopInAppMessages = sender.isOn
-        redisplaySettings()
-    }
-    
-    @objc private func showContentBlockerTutorial() {
-        perform(segue: StoryboardSegue.Main.contentBlockerSegueIdentifier)
-    }
-
-    @objc private func refreshContentBlockerState(withHUD: Bool = false) {
-        if withHUD {
-            self.showLoadingAnimation()
-        }
-        SFContentBlockerManager.getStateOfContentBlocker(withIdentifier: AppConstants.Extensions.adBlockerBundleIdentifier) { (state, error) in
-            DispatchQueue.main.async {
-                self.hideLoadingAnimation()
-                
-                self.isContentBlockerEnabled = state?.isEnabled ?? false
-                self.redisplaySettings()
-            }
-        }
-    }
-    
-    @objc private func refreshPersistentConnectionValue() {
-        pendingPreferences.isPersistentConnection = Client.preferences.isPersistentConnection
+    @objc func refreshSettings() {
         tableView.reloadData()
     }
     
-    @objc private func refreshSettings() {
-        tableView.reloadData()
+    @objc func resetSettingsNavigationStack() {
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @objc private func refreshWireGuardSettings() {
@@ -506,50 +225,8 @@ class SettingsViewController: AutolayoutViewController {
         pendingPreferences.vpnType = PIAWGTunnelProfile.vpnType
         savePreferences()
     }
-    
-    private func refreshContentBlockerRules() {
-        self.showLoadingAnimation()
-        SFContentBlockerManager.reloadContentBlocker(withIdentifier: AppConstants.Extensions.adBlockerBundleIdentifier) { (error) in
-            if let error = error {
-                log.error("Could not reload Safari Content Blocker: \(error)")
-            }
-            DispatchQueue.main.async {
-                self.hideLoadingAnimation()
-            }
-        }
-    }
-    
-    private func submitDebugReport() {
-        self.showLoadingAnimation()
-        Client.providers.vpnProvider.submitDebugReport(true) { (reportIdentifier, error) in
-            self.hideLoadingAnimation()
-            
-            let title: String
-            let message: String
-
-            defer {
-                let alert = Macros.alert(title, message)
-                alert.addDefaultAction(L10n.Global.ok)
-                self.present(alert, animated: true, completion: nil)
-            }
-
-            guard let reportId = reportIdentifier else {
-                title = L10n.Settings.ApplicationInformation.Debug.Failure.title
-                message = L10n.Settings.ApplicationInformation.Debug.Failure.message
-                return
-            }
-            guard !reportId.isEmpty else {
-                title = L10n.Settings.ApplicationInformation.Debug.Empty.title
-                message = L10n.Settings.ApplicationInformation.Debug.Empty.message
-                return
-            }
-
-            title = L10n.Settings.ApplicationInformation.Debug.Success.title
-            message = L10n.Settings.ApplicationInformation.Debug.Success.message(reportId)
-        }
-    }
-    
-    private func resetToDefaultSettings() {
+        
+    func resetToDefaultSettings() {
         let alert = Macros.alert(
             L10n.Settings.Reset.Defaults.Confirm.title,
             L10n.Settings.Reset.Defaults.Confirm.message
@@ -597,21 +274,15 @@ class SettingsViewController: AutolayoutViewController {
         pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
         pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: [], packetSize: AppConstants.WireGuardPacketSize.defaultPacketSize)
 
-        redisplaySettings()
+        refreshSettings()
         reportUpdatedPreferences()
+
+        Macros.postNotification(.PIASettingsHaveChanged)
+
     }
     
-//    @IBAction private func confirmChangesImmediately(_ sender: Any?) {
-//        confirmChanges(retainingConnection: false) {
-//            self.buttonConfirm.isEnabled = false
-//        }
-//    }
-    
     func commitChanges(_ completionHandler: @escaping () -> Void) {
-        if !Flags.shared.enablesMACESetting && !visibleSections.contains(.development) {
-            pendingPreferences.mace = false
-        }
-        
+        pendingPreferences.mace = false
         pendingVPNAction = pendingPreferences.requiredVPNAction()
 
         if pendingVPNAction == nil &&
@@ -735,126 +406,62 @@ class SettingsViewController: AutolayoutViewController {
     
     @IBAction private func unwoundContentBlockerViewController(_ segue: UIStoryboardSegue) {
     }
-
-    // MARK: Development
-    
-//    private func truncateDebugLog() {
-//        connectionBusiness.truncateTunnelSnapshot()
-//    }
-    
-//    private func recalculatePingTimes() {
-//        PingerDaemon.shared.pingAllRegions()
-//    }
-    
-//    private func invokeMACERequest() {
-//        PIAEphemeralClient.shared()!.enableMACE(nil)
-//    }
-    
-    private func resolveGoogleAdsDomain() {
-        let resolver = DNSResolver(hostname: "google-analytics.com")
-        resolver.resolve { (entries, error) in
-            let addresses: [String]
-            if let entries = entries, !entries.isEmpty {
-                addresses = entries
-            } else {
-                addresses = ["Can't resolve"]
-            }
-            
-            let alert = Macros.alert(nil, addresses.joined(separator: ","))
-            alert.addDefaultAction(L10n.Global.close)
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
+        
     // MARK: Helpers
     
-    @objc private func redisplaySettings() {
-        var sections = SettingsViewController.allSections
-        if !Flags.shared.enablesProtocolSelection {
-            sections.remove(at: sections.firstIndex(of: .connection)!)
-            sections.remove(at: sections.firstIndex(of: .encryption)!)
-        } else {
-            if (pendingPreferences.vpnType == IKEv2Profile.vpnType ||
-                pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType) {
-                sections.remove(at: sections.firstIndex(of: .encryption)!)
-            }
-            if (pendingPreferences.vpnType == PIATunnelProfile.vpnType ||
-                pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType) {
-                sections.remove(at: sections.firstIndex(of: .ikeV2encryption)!)
-            }
-        }
-        if Client.preferences.nmtRulesEnabled {
-            rowsBySection[.autoConnectSettings] = [
-                .nmtSelection,
-                .trustedNetworks
-            ]
-        } else {
-            rowsBySection[.autoConnectSettings] = [
-                .nmtSelection
-            ]
-        }
-        if Flags.shared.enablesMACESetting {
-            rowsBySection[.applicationSettings] = [
-                .automaticReconnection,
-                .mace
-            ]
-        } else {
-            rowsBySection[.applicationSettings] = [
-                .automaticReconnection,
-            ]
+    @objc func reloadSettings() {
+        pendingPreferences = Client.preferences.editable()
+        
+        guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration ??
+            Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration else {
+            fatalError("No default VPN custom configuration provided for PIA OpenVPN protocol")
         }
         
-        if Flags.shared.enablesThemeSwitch {
-            rowsBySection[.applicationSettings]?.insert(.darkTheme, at: 0)
+        guard let currentWireguardVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ??
+            Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
+            fatalError("No default VPN custom configuration provided for PIA Wireguard protocol")
         }
         
-        rowsBySection[.applicationSettings]?.insert(contentsOf: [.connectShortcut, .disconnectShortcut], at: 0)
+        pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
+        pendingHandshake = AppPreferences.shared.piaHandshake
+        pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
+        pendingWireguardVPNConfiguration = currentWireguardVPNConfiguration
 
-        if (pendingPreferences.vpnType == PIATunnelProfile.vpnType || pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType) {
-            rowsBySection[.smallPackets] = [.useSmallPackets]
-        } else {
-            if #available(iOS 14.0, *) {
-                if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-                    rowsBySection[.smallPackets] = [.useSmallPackets]
-                }
-            } else {
-                rowsBySection[.smallPackets] = []
-                sections.remove(at: sections.firstIndex(of: .smallPackets)!)
-            }
-        }
-        
-        if !Flags.shared.enablesContentBlockerSetting {
-            sections.remove(at: sections.firstIndex(of: .contentBlocker)!)
-        }
-        if !Flags.shared.enablesResetSettings {
-            sections.remove(at: sections.firstIndex(of: .reset)!)
-        }
-        if Flags.shared.enablesDevelopmentSettings {
-            sections.append(.development)
-        }
-        visibleSections = sections
-        
-        let dnsSettingsEnabled = Flags.shared.enablesDNSSettings
-
-        if (pendingPreferences.vpnType == PIATunnelProfile.vpnType) {
-            rowsBySection[.connection] = dnsSettingsEnabled ?
-                [.vpnProtocolSelection, .vpnSocket, .vpnPort, .vpnDns] :
-                [.vpnProtocolSelection, .vpnSocket, .vpnPort]
-        } else if (pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType) {
-            rowsBySection[.connection] = dnsSettingsEnabled ?
-                [.vpnProtocolSelection, .vpnDns] :
-                [.vpnProtocolSelection]
-        } else {
-            rowsBySection[.connection] = [
-                .vpnProtocolSelection
-            ]
-        }
-        
+        validateDNSList()
         tableView.reloadData()
     }
     
-    private func reportUpdatedPreferences() {
+    func reportUpdatedPreferences() {
         pendingVPNAction = pendingPreferences.requiredVPNAction()
+    }
+    
+    func savePreferences() {
+        log.debug("OpenVPN endpoints: \(pendingOpenVPNConfiguration.endpointProtocols ?? [])")
+        
+        if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+            var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: pendingOpenVPNConfiguration.build())
+            
+            if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+                if AppPreferences.shared.useSmallPackets {
+                    builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
+                } else {
+                    builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.defaultPacketSize
+                }
+            }
+            builder.shouldDebug = true
+            pendingPreferences.setVPNCustomConfiguration(builder.build(), for: pendingPreferences.vpnType)
+        } else {
+            if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+                if AppPreferences.shared.wireGuardUseSmallPackets {
+                    pendingPreferences.setVPNCustomConfiguration(PIAWireguardConfiguration(customDNSServers: pendingWireguardVPNConfiguration.customDNSServers, packetSize: AppConstants.WireGuardPacketSize.defaultPacketSize), for: pendingPreferences.vpnType)
+                } else {
+                    pendingPreferences.setVPNCustomConfiguration(PIAWireguardConfiguration(customDNSServers: pendingWireguardVPNConfiguration.customDNSServers, packetSize: AppConstants.WireGuardPacketSize.highPacketSize), for: pendingPreferences.vpnType)
+                }
+            }
+        }
+
+        refreshSettings()
+        reportUpdatedPreferences()
     }
     
     // MARK: ModalController
@@ -921,170 +528,24 @@ class SettingsViewController: AutolayoutViewController {
 }
 
 extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return visibleSections.count
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        if let cell = tableView.dequeueReusableCell(withIdentifier: Cells.header),
-            let label = cell.textLabel {
-            
-            label.style(style: TextStyle.textStyle9)
-            label.font = UIFont.mediumFontWith(size: 14.0)
-
-            switch visibleSections[section] {
-            case .connection:
-                label.text =  L10n.Global.Vpn.settings.uppercased()
-
-            case .applicationSettings:
-                label.text =  L10n.Global.General.settings.uppercased()
-
-            default:
-                return nil
-            }
-            
-            cell.backgroundColor = .clear
-            return cell
-        }
-        return nil
-
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch visibleSections[section] {
-
-        case .connection:
-            return nil
-            
-        case .encryption:
-            return L10n.Settings.Encryption.title
-
-        case .ikeV2encryption:
-            return L10n.Settings.Encryption.title
-
-        case .applicationSettings:
-            return nil
-           
-        case .autoConnectSettings:
-            return nil
-            
-        case .inAppSettings:
-            return nil
-
-        case .geoSettings:
-            return nil
-
-        case .smallPackets:
-            return nil
-            
-        case .contentBlocker:
-            return L10n.Settings.ContentBlocker.title
-
-        case .applicationInformation:
-            return L10n.Settings.ApplicationInformation.title
-
-        case .reset:
-            return L10n.Settings.Reset.title
-
-        case .development:
-            return "DEVELOPMENT"
-            
-        case .info:
-            return nil
-
-        }
-    }
-
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
-        if let cell = tableView.dequeueReusableCell(withIdentifier: Cells.footer) {
-            cell.textLabel?.numberOfLines = 0
-            cell.textLabel?.style(style: TextStyle.textStyle21)
-            cell.backgroundColor = .clear
-
-            switch visibleSections[section] {
-            case .applicationSettings:
-                var footer: [String] = [
-                    L10n.Settings.ApplicationSettings.KillSwitch.footer
-                ]
-                if Flags.shared.enablesMACESetting {
-                    footer.append(L10n.Settings.ApplicationSettings.Mace.footer)
-                }
-                cell.textLabel?.text = footer.joined(separator: "\n\n")
-
-            case .autoConnectSettings:
-                cell.textLabel?.text =  L10n.Settings.Hotspothelper.description
-
-            case .smallPackets:
-                cell.textLabel?.text = L10n.Settings.Small.Packets.description
-
-            case .applicationInformation:
-                cell.textLabel?.text = L10n.Settings.Log.information
-                
-            case .reset:
-                cell.textLabel?.text = L10n.Settings.Reset.footer
-
-            case .contentBlocker:
-                cell.textLabel?.text = L10n.Settings.ContentBlocker.footer
-                
-            case .encryption:
-                cell.textLabel?.attributedText = Theme.current.settingsFooterWithLinkText(
-                    withMessage: L10n.Settings.Ovpn.Migration.footer,
-                    link: L10n.Settings.Ovpn.Migration.Footer.link
-                )
-                cell.textLabel?.textAlignment = .left
-                
-                let tap = UITapGestureRecognizer(target: self, action: #selector(openLink))
-                cell.textLabel?.addGestureRecognizer(tap)
-
-            default:
-                return nil
-            }
-            
-            return cell
-        }
-        return nil
-
-    }
-    
-    @objc private func openLink() {
-        guard UIApplication.shared.canOpenURL(AppConstants.Web.ovpnMigrationURL) else { return }
-        UIApplication.shared.open(AppConstants.Web.ovpnMigrationURL, options: [:], completionHandler: nil)
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rowsBySection[visibleSections[section]]!.count
+        var sections = SettingOptions.all()
+        if !Flags.shared.enablesDevelopmentSettings {
+            sections.removeAll(where: {$0 == SettingOptions.development})
+        }
+        if pendingPreferences?.vpnType == IKEv2Profile.vpnType {
+            sections.removeAll(where: {$0 == SettingOptions.network})
+            return sections.count
+        } else {
+            return sections.count
+        }
     }
     
-    func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
-        let section = visibleSections[indexPath.section]
-        guard let setting = rowsBySection[section]?[indexPath.row] else {
-            fatalError("Data source is incorrect")
-        }
-        switch setting {
-        case .username, .publicUsername, .password:
-            return true
-        default:
-            return false
-        }
-    }
-
-    func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return action == #selector(copy(_:))
-    }
-
-    func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
-        if action == #selector(copy(_:)) {
-            let cell = tableView.cellForRow(at: indexPath)
-            let pasteboard = UIPasteboard.general
-            pasteboard.string = cell?.detailTextLabel?.text
-        }
-    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.setting, for: indexPath)
@@ -1092,253 +553,24 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         cell.accessoryView = nil
         cell.selectionStyle = .default
 
-        let section = visibleSections[indexPath.section]
-        guard let setting = rowsBySection[section]?[indexPath.row] else {
-            fatalError("Data source is incorrect")
+        var section = SettingOptions.all()[indexPath.row]
+        if pendingPreferences?.vpnType == IKEv2Profile.vpnType {
+            var sections = SettingOptions.all()
+            sections.removeAll(where: {$0 == SettingOptions.network})
+            section = sections[indexPath.row]
         }
-        
-        switch setting {
-        case .vpnProtocolSelection:
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: Cells.protocolCell, for: indexPath) as! ProtocolTableViewCell
-            cell.accessoryType = .disclosureIndicator
-            cell.accessoryView = nil
-            cell.selectionStyle = .default
 
-            cell.setupCell(withTitle: L10n.Settings.Connection.VpnProtocol.title,
-                           description: pendingPreferences.vpnType.vpnTypeDescription,
-                           shouldShowBadge: false)
+        cell.textLabel?.text = section.localizedTitleMessage()
+        cell.detailTextLabel?.text = ""
+        cell.imageView?.image = section.imageForSection().af_imageAspectScaled(toFit: CGSize(width: 25, height: 25))
 
-            if !Flags.shared.enablesProtocolSelection {
-                cell.accessoryType = .none
-                cell.selectionStyle = .none
-            }
-            
-            Theme.current.applySecondaryBackground(cell)
-            let backgroundView = UIView()
-            Theme.current.applyPrincipalBackground(backgroundView)
-            cell.selectedBackgroundView = backgroundView
-            return cell
-
-        case .vpnSocket:
-            cell.textLabel?.text = L10n.Settings.Connection.SocketProtocol.title
-            cell.detailTextLabel?.text = pendingOpenVPNSocketType?.description ?? L10n.Global.automatic
-            
-        case .vpnPort:
-            cell.textLabel?.text = L10n.Settings.Connection.RemotePort.title
-            guard pendingOpenVPNSocketType != nil else {
-                cell.detailTextLabel?.text = L10n.Global.automatic
-                break
-            }
-            cell.detailTextLabel?.text = pendingOpenVPNConfiguration.currentPort?.description ?? L10n.Global.automatic
-
-        case .vpnDns:
-            cell.textLabel?.text = SettingsViewController.DNS
-            
-            var dnsValue = pendingOpenVPNConfiguration.dnsServers
-            if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                dnsValue = pendingWireguardVPNConfiguration.customDNSServers
-            }
-            for dns in DNSList.shared.dnsList {
-                for (key, value) in dns {
-                    if dnsValue == value {
-                        cell.detailTextLabel?.text = DNSList.shared.descriptionForKey(key, andCustomKey: (pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY))
-                        break
-                    }
-                }
-            }
-            
-            if !Flags.shared.enablesDNSSettings {
-                cell.accessoryType = .none
-                cell.selectionStyle = .none
-            }
-
-        case .encryptionCipher:
-            cell.textLabel?.text = L10n.Settings.Encryption.Cipher.title
-            cell.detailTextLabel?.text = pendingOpenVPNConfiguration.cipher?.description
-            if !Flags.shared.enablesEncryptionSettings {
-                cell.accessoryType = .none
-                cell.selectionStyle = .none
-            }
-            
-        case .ikeV2EncryptionAlgorithm:
-            cell.textLabel?.text = L10n.Settings.Encryption.Cipher.title
-            if let encryptionAlgorithm = IKEv2EncryptionAlgorithm(rawValue: pendingPreferences.ikeV2EncryptionAlgorithm) {
-                cell.detailTextLabel?.text = encryptionAlgorithm.description()
-            } else {
-                pendingPreferences.ikeV2EncryptionAlgorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm.rawValue
-                cell.detailTextLabel?.text = IKEv2EncryptionAlgorithm.defaultAlgorithm.description()
-            }
-            if !Flags.shared.enablesEncryptionSettings {
-                cell.accessoryType = .none
-                cell.selectionStyle = .none
-            }
-
-        case .ikeV2IntegrityAlgorithm:
-            cell.textLabel?.text = L10n.Settings.Encryption.Handshake.title
-            cell.detailTextLabel?.text = IKEv2IntegrityAlgorithm.objectIdentifyBy(name: pendingPreferences.ikeV2IntegrityAlgorithm).description()
-            if !Flags.shared.enablesEncryptionSettings {
-                cell.accessoryType = .none
-                cell.selectionStyle = .none
-            }
-
-        case .encryptionDigest:
-            cell.textLabel?.text = L10n.Settings.Encryption.Digest.title
-            guard !pendingOpenVPNConfiguration.isEncryptionGCM() else {
-                cell.detailTextLabel?.text = "GCM"
-                break
-            }
-            cell.detailTextLabel?.text = pendingOpenVPNConfiguration.digest?.description
-            if !Flags.shared.enablesEncryptionSettings {
-                cell.accessoryType = .none
-                cell.selectionStyle = .none
-            }
-
-        case .encryptionHandshake:
-            cell.textLabel?.text = L10n.Settings.Encryption.Handshake.title
-            
-            cell.detailTextLabel?.text = pendingHandshake.description
-            if !Flags.shared.enablesEncryptionSettings {
-                cell.accessoryType = .none
-                cell.selectionStyle = .none
-            }
-            
-        case .useSmallPackets:
-            cell.textLabel?.text = L10n.Settings.Small.Packets.title
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchSmallPackets
-            cell.selectionStyle = .none
-            if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-                switchSmallPackets.isOn = AppPreferences.shared.useSmallPackets
-            } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                switchSmallPackets.isOn = AppPreferences.shared.wireGuardUseSmallPackets
-            } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-                switchSmallPackets.isOn = AppPreferences.shared.ikeV2UseSmallPackets
-            }
-
-        case .automaticReconnection:
-            cell.textLabel?.text = L10n.Settings.ApplicationSettings.KillSwitch.title
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchPersistent
-            cell.selectionStyle = .none
-            switchPersistent.isOn = pendingPreferences.isPersistentConnection
-
-        case .cardsHistory:
-            cell.textLabel?.text = L10n.Settings.Cards.History.title
-            cell.detailTextLabel?.text = nil
-
-        case .geoServers:
-            cell.textLabel?.text = L10n.Settings.Geo.Servers.description
-            cell.textLabel?.numberOfLines = 0
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchGeoServers
-            cell.selectionStyle = .none
-            switchGeoServers.isOn = AppPreferences.shared.showGeoServers
-
-        case .mace:
-            cell.textLabel?.text = L10n.Settings.ApplicationSettings.Mace.title
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchMACE
-            cell.selectionStyle = .none
-            switchMACE.isOn = pendingPreferences.mace
-            
-        case .contentBlockerState:
-            cell.textLabel?.text = L10n.Settings.ContentBlocker.State.title
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchContentBlocker
-            cell.selectionStyle = .none
-            switchContentBlocker.isOn = isContentBlockerEnabled
-
-        case .contentBlockerRefreshRules:
-            cell.textLabel?.text = L10n.Settings.ContentBlocker.Refresh.title
-            cell.detailTextLabel?.text = nil
-            
-        case .darkTheme:
-            cell.textLabel?.text = L10n.Settings.ApplicationSettings.DarkTheme.title
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchDarkMode
-            cell.selectionStyle = .none
-            switchDarkMode.isOn = (AppPreferences.shared.currentThemeCode == .dark)
-
-        case .connectShortcut:
-            cell.textLabel?.text = L10n.Siri.Shortcuts.Connect.Row.title
-            cell.detailTextLabel?.text = SiriShortcutsManager.shared.descriptionActionForConnectShortcut()
-
-        case .disconnectShortcut:
-            cell.textLabel?.text = L10n.Siri.Shortcuts.Disconnect.Row.title
-            cell.detailTextLabel?.text = SiriShortcutsManager.shared.descriptionActionForDisconnectShortcut()
-
-        case .submitDebugReport:
-            cell.textLabel?.text = L10n.Settings.ApplicationInformation.Debug.title
-            cell.detailTextLabel?.text = nil
-            
-        case .resetSettings:
-            cell.textLabel?.text = L10n.Settings.Reset.Defaults.title
-            cell.detailTextLabel?.text = nil
-
-//        case .truncateDebugLog:
-//            cell.textLabel?.text = "Truncate debug log (disconnect first)"
-//            cell.detailTextLabel?.text = nil
-//
-//        case .recalculatePingTimes:
-//            cell.textLabel?.text = "Recalculate ping times (disconnect first)"
-//            cell.detailTextLabel?.text = nil
-//
-//        case .invokeMACERequest:
-//            cell.textLabel?.text = "Invoke MACE request"
-//            cell.detailTextLabel?.text = nil
-
-        case .resolveGoogleAdsDomain:
-            cell.textLabel?.text = "Resolve google-analytics.com"
-            cell.detailTextLabel?.text = nil
-            
-        case .nmtSelection:
-            cell.textLabel?.text = L10n.Settings.Hotspothelper.title
-            cell.textLabel?.numberOfLines = 0
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchEnableNMT
-            cell.selectionStyle = .none
-            switchEnableNMT.isOn = Client.preferences.nmtRulesEnabled
-
-        case .trustedNetworks:
-            cell.textLabel?.text = L10n.Network.Management.Tool.title
-            cell.detailTextLabel?.text = nil
-
-        case .publicUsername:
-            cell.textLabel?.text = "Public username"
-            cell.detailTextLabel?.text = Client.providers.accountProvider.publicUsername ?? ""
-            cell.accessoryType = .none
-        case .username:
-            cell.textLabel?.text = "Username"
-            cell.detailTextLabel?.text = Client.providers.accountProvider.currentUser?.credentials.username ?? ""
-            cell.accessoryType = .none
-        case .password:
-            cell.textLabel?.text = "Password"
-            cell.detailTextLabel?.text = Client.providers.accountProvider.currentUser?.credentials.password ?? ""
-            cell.accessoryType = .none
-        case .environment:
-            cell.textLabel?.text = "Staging"
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchEnvironment
-            cell.selectionStyle = .none
-            switchEnvironment.isOn = Client.environment == .staging
-        case .stopInAppMessages:
-            cell.textLabel?.text = L10n.Inapp.Messages.Toggle.title
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchInAppMessages
-            cell.selectionStyle = .none
-            switchInAppMessages.isOn = AppPreferences.shared.stopInAppMessages
-        case .customServers:
-            cell.textLabel?.text = "Custom Servers"
-            cell.detailTextLabel?.text = nil
-        case .stagingVersion:
-            cell.textLabel?.text = "Staging version"
-            cell.detailTextLabel?.text = "\(AppPreferences.shared.stagingVersion)"
-        case .crash:
-            cell.textLabel?.text = "Crash"
-            cell.detailTextLabel?.text = nil
+        switch section {
+            case .automation:
+                cell.detailTextLabel?.text = Client.preferences.nmtRulesEnabled ? L10n.Global.enabled : L10n.Global.disabled
+            case .protocols:
+                cell.detailTextLabel?.text = pendingPreferences?.vpnType.vpnProtocol
+            default: break
         }
-        
 
         Theme.current.applySecondaryBackground(cell)
         if let textLabel = cell.textLabel {
@@ -1359,245 +591,32 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let section = visibleSections[indexPath.section]
-        guard let setting = rowsBySection[section]?[indexPath.row] else {
-            fatalError("Data source is incorrect")
-        }
-
-        var controller: OptionsViewController?
         
-        switch setting {
-        case .vpnProtocolSelection:
-            
-            controller = OptionsViewController()
-
-            controller?.options = [
-                IKEv2Profile.vpnType,
-                PIAWGTunnelProfile.vpnType,
-                PIATunnelProfile.vpnType,
-            ]
-            controller?.selectedOption = pendingPreferences.vpnType
-            
-        case .vpnSocket:
-            let options: [SocketType] = [
-                .udp,
-                .tcp
-            ]
-            controller = OptionsViewController()
-            controller?.options = options.map { $0.rawValue }
-            controller?.options.insert(SettingsViewController.AUTOMATIC_SOCKET, at: 0)
-            controller?.selectedOption = pendingOpenVPNSocketType?.rawValue ?? SettingsViewController.AUTOMATIC_SOCKET
-
-        case .vpnPort:
-            guard let socketType = pendingOpenVPNSocketType else {
-                break
-            }
-            let availablePorts = Client.providers.serverProvider.currentServersConfiguration.ovpnPorts
-            var options = (socketType == .udp) ? availablePorts.udp : availablePorts.tcp
-            options.insert(SettingsViewController.AUTOMATIC_PORT, at: 0)
-            controller = OptionsViewController()
-            controller?.options = options
-            controller?.selectedOption = pendingOpenVPNConfiguration.currentPort ?? SettingsViewController.AUTOMATIC_PORT
-
-        case .vpnDns:
-            guard Flags.shared.enablesDNSSettings else {
-                break
-            }
-            
-            controller = OptionsViewController()
-            if let dnsList = DNSList.shared.dnsList {
-                let filtered = dnsList.filter({
-                    if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-                        return $0.first?.key != DNSList.CUSTOM_WIREGUARD_DNS_KEY
-                    } else {
-                        return $0.first?.key != DNSList.CUSTOM_OPENVPN_DNS_KEY
-                    }
-                })
-                controller?.options = filtered.compactMap {
-                    if let first = $0.first {
-                        return first.key
-                    }
-                    return nil
-                }
-            }
-            
-            if let options = controller?.options,
-                !options.contains(pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
-                if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-                    controller?.options.append(DNSList.CUSTOM_OPENVPN_DNS_KEY)
-                } else {
-                    controller?.options.append(DNSList.CUSTOM_WIREGUARD_DNS_KEY)
-                }
-            } else {
-                for dns in DNSList.shared.dnsList {
-                    for (key, value) in dns {
-                        if key == (pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
-                            if !value.isEmpty {
-                                controller?.navigationItem.rightBarButtonItem = UIBarButtonItem(
-                                    title: L10n.Global.edit,
-                                    style: .plain,
-                                    target: self,
-                                    action: #selector(edit(_:))
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-            
-            if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                controller?.selectedOption = pendingWireguardVPNConfiguration.customDNSServers
-            } else {
-                controller?.selectedOption = pendingOpenVPNConfiguration.dnsServers
-            }
-            
-        case .ikeV2EncryptionAlgorithm:
-            guard Flags.shared.enablesEncryptionSettings else {
-                break
-            }
-            let options = IKEv2EncryptionAlgorithm.allValues()
-            if #available(iOS 13, *) {
-                //options.append(NEVPNIKEv2EncryptionAlgorithm.algorithmChaCha20Poly1305)
-            }
-            controller = OptionsViewController()
-            controller?.options = options.map { $0.description() }
-            
-            if let encryptionAlgorithm = IKEv2EncryptionAlgorithm(rawValue: pendingPreferences.ikeV2EncryptionAlgorithm) {
-                controller?.selectedOption = encryptionAlgorithm.rawValue
-            } else {
-                controller?.selectedOption = IKEv2EncryptionAlgorithm.defaultAlgorithm.rawValue
-            }
-
-        case .ikeV2IntegrityAlgorithm:
-            guard Flags.shared.enablesEncryptionSettings else {
-                break
-            }
-            
-            var options = IKEv2EncryptionAlgorithm.defaultAlgorithm.integrityAlgorithms()
-
-            if let encryptionAlgorithm = IKEv2EncryptionAlgorithm(rawValue: pendingPreferences.ikeV2EncryptionAlgorithm) {
-                options = encryptionAlgorithm.integrityAlgorithms()
-            } else {
-                options = IKEv2EncryptionAlgorithm.defaultAlgorithm.integrityAlgorithms()
-            }
-            
-            controller = OptionsViewController()
-            controller?.options = options.map { $0.description() }
-            controller?.selectedOption = IKEv2IntegrityAlgorithm.objectIdentifyBy(name: pendingPreferences.ikeV2IntegrityAlgorithm).rawValue
-
-        case .encryptionCipher:
-            guard Flags.shared.enablesEncryptionSettings else {
-                break
-            }
-            let options: [OpenVPN.Cipher] = [
-                .aes128gcm,
-                .aes256gcm,
-            ]
-            controller = OptionsViewController()
-            controller?.options = options.map { $0.rawValue }
-            controller?.selectedOption = pendingOpenVPNConfiguration.cipher?.rawValue
-
-        case .encryptionDigest:
-            guard Flags.shared.enablesEncryptionSettings else {
-                break
-            }
-            guard !pendingOpenVPNConfiguration.isEncryptionGCM() else {
-                break
-            }
-            let options: [OpenVPN.Digest] = [
-                .sha256
-            ]
-            controller = OptionsViewController()
-            controller?.options = options.map { $0.rawValue }
-            controller?.selectedOption = pendingOpenVPNConfiguration.digest?.rawValue
-
-        case .encryptionHandshake:
-            guard Flags.shared.enablesEncryptionSettings else {
-                break
-            }
-            let options: [OpenVPN.Configuration.Handshake] = [
-                .rsa4096
-            ]
-            controller = OptionsViewController()
-            controller?.options = options.map { $0.rawValue }
-            controller?.selectedOption = pendingHandshake.description
-            
-        case .contentBlockerRefreshRules:
-            refreshContentBlockerRules()
-
-        case .submitDebugReport:
-            submitDebugReport()
-            
-        case .resetSettings:
-            resetToDefaultSettings()
-            
-        case .cardsHistory:
-            let callingCards = CardFactory.getAllCards()
-            if !callingCards.isEmpty {
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                if let cardsController = storyboard.instantiateViewController(withIdentifier: "PIACardsViewController") as? PIACardsViewController {
-                    cardsController.setupWith(cards: callingCards)
-                    cardsController.modalPresentationStyle = .overCurrentContext
-                    self.present(cardsController, animated: true)
-                }
-            }
-
-//        case .truncateDebugLog:
-//            truncateDebugLog()
-//
-//        case .recalculatePingTimes:
-//            recalculatePingTimes()
-//
-//        case .invokeMACERequest:
-//            invokeMACERequest()
-
-        case .resolveGoogleAdsDomain:
-            resolveGoogleAdsDomain()
-
-        case .trustedNetworks:
-            self.perform(segue: StoryboardSegue.Main.trustedNetworksSegueIdentifier)
-
-        case .customServers:
-            self.perform(segue: StoryboardSegue.Main.customServerSegueIdentifier)
-
-        case .connectShortcut:
-            SiriShortcutsManager.shared.presentConnectShortcut(inViewController: self)
-
-        case .disconnectShortcut:
-            SiriShortcutsManager.shared.presentDisconnectShortcut(inViewController: self)
-
-        case.stagingVersion:
-            let options: [Int] = [
-                1,2,3,4,5
-            ]
-            controller = OptionsViewController()
-            controller?.options = options.map { $0 }
-            controller?.selectedOption = AppPreferences.shared.stagingVersion
-
-        case .crash:
-            fatalError("Crashing staging app")
-        default:
-            break
+        var section = SettingOptions.all()[indexPath.row]
+        if pendingPreferences?.vpnType == IKEv2Profile.vpnType {
+            var sections = SettingOptions.all()
+            sections.removeAll(where: {$0 == SettingOptions.network})
+            section = sections[indexPath.row]
         }
-
-        if let controller = controller {
-            guard let cell = tableView.cellForRow(at: indexPath) else {
-                fatalError("Cell not found at \(indexPath)")
-            }
-
-            controller.title = cell.textLabel?.text
-            controller.tag = setting.rawValue
-            controller.delegate = self
-
-            parent?.navigationItem.setEmptyBackButton()
-            navigationController?.pushViewController(controller, animated: true)
+        
+        switch section {
+        case .protocols:
+            self.perform(segue: StoryboardSegue.Main.protocolSettingsSegue, sender: nil)
+        case .network:
+            self.perform(segue: StoryboardSegue.Main.networkSettingsSegue, sender: nil)
+        case .privacyFeatures:
+            self.perform(segue: StoryboardSegue.Main.privacyFeaturesSettingsSegue, sender: nil)
+        case .automation:
+            self.perform(segue: StoryboardSegue.Main.automationSettingsSegue, sender: nil)
+        case .help:
+            self.perform(segue: StoryboardSegue.Main.helpSettingsSegue, sender: nil)
+        case .development:
+            self.perform(segue: StoryboardSegue.Main.developmentSettingsSegue, sender: nil)
+        default:
+            self.perform(segue: StoryboardSegue.Main.generalSettingsSegue, sender: nil)
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        Theme.current.applyTableSectionHeader(view)
     }
     
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
@@ -1606,307 +625,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
 }
 
-extension SettingsViewController: OptionsViewControllerDelegate {
-    func backgroundColorForOptionsController(_ controller: OptionsViewController) -> UIColor {
-        return Theme.current.palette.principalBackground
-    }
-    
-    func tableStyleForOptionsController(_ controller: OptionsViewController) -> UITableView.Style {
-        return .grouped
-    }
-    
-    func optionsController(_ controller: OptionsViewController, didLoad tableView: UITableView) {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        tableView.cellLayoutMarginsFollowReadableWidth = false
-    }
-
-    func optionsController(_ controller: OptionsViewController, tableView: UITableView, reusableCellAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-    }
-    
-    func optionsController(_ controller: OptionsViewController, renderOption option: AnyHashable, in cell: UITableViewCell, at row: Int, isSelected: Bool) {
-        guard let setting = Setting(rawValue: controller.tag) else {
-            fatalError("Unhandled setting \(controller.tag)")
-        }
-
-        switch setting {
-        case .vpnProtocolSelection:
-            let vpnType = option as! String
-            let message = vpnType.vpnTypeDescription
-            cell.textLabel?.text = message
-        case .vpnSocket:
-            let rawSocketType = option as? String
-            if rawSocketType != SettingsViewController.AUTOMATIC_SOCKET {
-                cell.textLabel?.text = rawSocketType?.description
-            } else {
-                cell.textLabel?.text = L10n.Global.automatic
-            }
-            
-        case .vpnPort:
-            if let port = option as? UInt16, (port != SettingsViewController.AUTOMATIC_PORT) {
-                cell.textLabel?.text = (option as? UInt16)?.description
-            } else {
-                cell.textLabel?.text = L10n.Global.automatic
-            }
-            
-        case .vpnDns:
-            if let option = option as? String {
-                cell.textLabel?.text = DNSList.shared.descriptionForKey(option, andCustomKey: pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY)
-                if option == (pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
-                    var isFound = false
-                    for dns in DNSList.shared.dnsList {
-                        for (key, value) in dns {
-                            if key == option {
-                                isFound = true
-                                if value.isEmpty {
-                                    cell.accessoryType = .disclosureIndicator
-                                }
-                            }
-                        }
-                    }
-                    if !isFound { //first time
-                        cell.accessoryType = .disclosureIndicator
-                    }
-                }
-            }
-        case .encryptionCipher:
-            let rawCipher = option as! String
-            cell.textLabel?.text = OpenVPN.Cipher(rawValue: rawCipher)?.description
-
-        case .encryptionDigest:
-            let rawDigest = option as! String
-            cell.textLabel?.text = OpenVPN.Digest(rawValue: rawDigest)?.description
-
-        case .ikeV2EncryptionAlgorithm, .ikeV2IntegrityAlgorithm:
-            cell.textLabel?.text = option as? String
-            
-        case .encryptionHandshake:
-            let rawHandshake = option as! String
-            cell.textLabel?.text = OpenVPN.Configuration.Handshake(rawValue: rawHandshake)?.description
-
-        case .stagingVersion:
-            if let value = option as? Int {
-                cell.textLabel?.text = "\(value)"
-            }
-
-        default:
-            break
-        }
-        
-        cell.accessoryView = (isSelected ? imvSelectedOption : nil)
-
-        if setting == .vpnDns,
-            let option = option as? String {
-            
-            var dnsJoinedValue = pendingOpenVPNConfiguration.dnsServers?.joined()
-            if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                dnsJoinedValue = pendingWireguardVPNConfiguration.customDNSServers.joined()
-            }
-
-            for dns in DNSList.shared.dnsList {
-                for (key, value) in dns {
-                    if key == option,
-                        dnsJoinedValue == value.joined() {
-                        cell.accessoryView = imvSelectedOption
-                    }
-                }
-            }
-        }
-        
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = Theme.current.palette.principalBackground
-        cell.selectedBackgroundView = backgroundView
-
-        Theme.current.applySecondaryBackground(cell)
-        Theme.current.applyDetailTableCell(cell)
-    }
-
-    func optionsController(_ controller: OptionsViewController, didSelectOption option: AnyHashable, at row: Int) {
-        guard let setting = Setting(rawValue: controller.tag) else {
-            fatalError("Unhandled setting \(controller.tag)")
-        }
-
-        let serversCfg = Client.providers.serverProvider.currentServersConfiguration
-
-        switch setting {
-        case .vpnProtocolSelection:
-            let vpnType = option as! String
-            pendingPreferences.vpnType = vpnType
-            
-        case .vpnSocket:
-            let rawSocketType = option as! String
-            let optSocketType = SocketType(rawValue: rawSocketType)
-
-            let currentProtocols = pendingOpenVPNConfiguration.endpointProtocols
-            var newProtocols: [EndpointProtocol] = []
-
-            if let socketType = optSocketType {
-                let ports = (socketType == .udp) ? serversCfg.ovpnPorts.udp : serversCfg.ovpnPorts.tcp
-                if currentProtocols?.count == 1, let currentPort = pendingOpenVPNConfiguration?.currentPort, ports.contains(currentPort) {
-                    newProtocols.append(EndpointProtocol(socketType, currentPort))
-                } else {
-                    for port in ports {
-                        newProtocols.append(EndpointProtocol(socketType, port))
-                    }
-                }
-            } else {
-//                for port in serversCfg.vpnPorts.udp {
-//                    newProtocols.append(PIATunnelProvider.EndpointProtocol(.udp, port, .pia))
-//                }
-//                for port in serversCfg.vpnPorts.tcp {
-//                    newProtocols.append(PIATunnelProvider.EndpointProtocol(.tcp, port, .pia))
-//                }
-                newProtocols = AppConfiguration.VPN.piaAutomaticProtocols
-            }
-            pendingOpenVPNSocketType = optSocketType
-            pendingOpenVPNConfiguration.endpointProtocols = newProtocols
-
-        case .vpnPort:
-            let port = option as! UInt16
-
-            var newProtocols: [EndpointProtocol] = []
-            if (port != SettingsViewController.AUTOMATIC_PORT) {
-                guard let socketType = pendingOpenVPNSocketType else {
-                    fatalError("Port cannot be set manually when socket type is automatic")
-                }
-                newProtocols.append(EndpointProtocol(socketType, port))
-            } else {
-                if (pendingOpenVPNSocketType == nil) {
-                    newProtocols = AppConfiguration.VPN.piaAutomaticProtocols
-                }
-                else if (pendingOpenVPNSocketType == .udp) {
-                    for port in serversCfg.ovpnPorts.udp {
-                        newProtocols.append(EndpointProtocol(.udp, port))
-                    }
-                }
-                else if (pendingOpenVPNSocketType == .tcp) {
-                    for port in serversCfg.ovpnPorts.tcp {
-                        newProtocols.append(EndpointProtocol(.tcp, port))
-                    }
-                }
-            }
-            pendingOpenVPNConfiguration.endpointProtocols = newProtocols
-
-        case .vpnDns:
-            if let option = option as? String {
-                var isFound = false
-                
-                for dns in DNSList.shared.dnsList {
-                    for (key, value) in dns {
-                        if key == option {
-                            isFound = true
-                            if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                                pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: value, packetSize: AppPreferences.shared.wireGuardUseSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
-                            } else {
-                                pendingOpenVPNConfiguration.dnsServers = value
-                            }
-                            break
-                        }
-                    }
-                }
-                
-                if !isFound && option == (pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
-                    let alertController = Macros.alert(L10n.Settings.Dns.Custom.dns,
-                                                       L10n.Settings.Dns.Alert.Create.message)
-                    alertController.addActionWithTitle(L10n.Global.ok) {
-                        self.perform(segue: StoryboardSegue.Main.customDNSSegueIdentifier)
-                    }
-                    alertController.addCancelAction(L10n.Global.cancel)
-                    self.present(alertController,
-                                 animated: true,
-                                 completion: nil)
-                }
-                
-            }
-        case .encryptionCipher:
-            let rawCipher = option as! String
-            pendingOpenVPNConfiguration.cipher = OpenVPN.Cipher(rawValue: rawCipher)!
-
-        case .encryptionDigest:
-            let rawDigest = option as! String
-            pendingOpenVPNConfiguration.digest = OpenVPN.Digest(rawValue: rawDigest)!
-
-        case .ikeV2EncryptionAlgorithm:
-            let rawEncryption = option as! String
-            pendingPreferences.ikeV2EncryptionAlgorithm = rawEncryption
-            //reset integrity algorithm if the encryption changes
-            var algorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm
-            if let currentAlgorithm = IKEv2EncryptionAlgorithm(rawValue: rawEncryption) {
-                algorithm = currentAlgorithm
-            }
-            if let integrity = algorithm.integrityAlgorithms().first {
-                pendingPreferences.ikeV2IntegrityAlgorithm = integrity.rawValue
-            }
-        case .ikeV2IntegrityAlgorithm:
-            let rawIntegrity = option as! String
-            pendingPreferences.ikeV2IntegrityAlgorithm = rawIntegrity
-
-        case .encryptionHandshake:
-            let rawHandshake = option as! String
-            if let handshake = OpenVPN.Configuration.Handshake(rawValue: rawHandshake),
-                let pem = handshake.pemString() {
-                pendingOpenVPNConfiguration.ca = OpenVPN.CryptoContainer(pem: pem)
-                pendingHandshake = OpenVPN.Configuration.Handshake(rawValue: rawHandshake)
-            }
-            
-        case .stagingVersion:
-            if let value = option as? Int {
-                AppPreferences.shared.stagingVersion = value
-                
-                if let stagingUrl = AppConstants.Web.stagingEndpointURL {
-                    let url = stagingUrl.absoluteString.replacingOccurrences(of: "staging-[0-9]", with: "staging-\(value)", options: .regularExpression)
-                    Client.configuration.setBaseURL(url, for: .staging)
-                    Client.resetWebServices()
-                    redisplaySettings()
-                }
-
-            }
-        default:
-            break
-        }
-        
-        savePreferences()
-        navigationController?.popViewController(animated: true)
-
-    }
-    
-    private func savePreferences() {
-        log.debug("OpenVPN endpoints: \(pendingOpenVPNConfiguration.endpointProtocols ?? [])")
-        
-        if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-            var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: pendingOpenVPNConfiguration.build())
-            
-            if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-                if AppPreferences.shared.useSmallPackets {
-                    builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
-                } else {
-                    builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.defaultPacketSize
-                }
-            }
-            builder.shouldDebug = true
-            pendingPreferences.setVPNCustomConfiguration(builder.build(), for: pendingPreferences.vpnType)
-        } else {
-            if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                if AppPreferences.shared.wireGuardUseSmallPackets {
-                    pendingPreferences.setVPNCustomConfiguration(PIAWireguardConfiguration(customDNSServers: pendingWireguardVPNConfiguration.customDNSServers, packetSize: AppConstants.WireGuardPacketSize.defaultPacketSize), for: pendingPreferences.vpnType)
-                } else {
-                    pendingPreferences.setVPNCustomConfiguration(PIAWireguardConfiguration(customDNSServers: pendingWireguardVPNConfiguration.customDNSServers, packetSize: AppConstants.WireGuardPacketSize.highPacketSize), for: pendingPreferences.vpnType)
-                }
-            }
-        }
-
-        redisplaySettings()
-        reportUpdatedPreferences()
-    }
-}
-
-private extension OpenVPN.ConfigurationBuilder {
-//    var currentSocketType: PIATunnelProvider.SocketType {
-//        guard let currentType = endpointProtocols.first?.socketType else {
-//            fatalError("Zero current protocols")
-//        }
-//        return currentType
-//    }
+extension OpenVPN.ConfigurationBuilder {
 
     var currentPort: UInt16? {
         guard endpointProtocols?.count == 1 else {
@@ -1921,26 +640,4 @@ private extension OpenVPN.ConfigurationBuilder {
     func isEncryptionGCM() -> Bool {
         return (cipher == .aes128gcm) || (cipher == .aes256gcm)
     }
-}
-
-extension SettingsViewController: SettingsViewControllerDelegate {
-    
-    func updateSetting(_ setting: Setting, withValue value: Any?) {
-        switch setting {
-        case .vpnDns:
-            if let settingValue = value as? String {
-                if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-                    pendingOpenVPNConfiguration.dnsServers = DNSList.shared.valueForKey(settingValue)
-                } else {
-                    pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: DNSList.shared.valueForKey(settingValue), packetSize: AppPreferences.shared.wireGuardUseSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
-                }
-            }
-        default:
-            break
-        }
-        
-        savePreferences()
-
-    }
-    
 }
