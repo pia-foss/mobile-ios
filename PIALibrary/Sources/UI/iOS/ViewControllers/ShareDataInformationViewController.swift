@@ -11,7 +11,7 @@ class ShareDataInformationViewController: AutolayoutViewController {
 
     @IBOutlet private weak var labelInformation: UILabel!
 
-    @IBOutlet weak var contentView: UIView!
+    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var closeButton: UIButton!
     
     override func viewDidLoad() {
