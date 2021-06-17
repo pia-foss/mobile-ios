@@ -98,9 +98,6 @@ public class SignupSuccessViewController: AutolayoutViewController, BrandableNav
         }
         completionDelegate?.welcomeDidSignup(withUser: user, topViewController: self)
     }
-    @IBAction private func readMore() {
-        
-    }
     
     @IBAction private func acceptShareData() {
         let preferences = Client.preferences.editable()

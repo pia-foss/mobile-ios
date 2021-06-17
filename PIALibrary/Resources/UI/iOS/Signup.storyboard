@@ -245,7 +245,6 @@
                                                         </constraints>
                                                         <state key="normal" title="Button"/>
                                                         <connections>
-                                                            <action selector="readMore" destination="Zr7-rl-bTc" eventType="touchUpInside" id="mwl-BX-Evh"/>
                                                             <segue destination="EOm-5g-8UI" kind="presentation" id="u9y-1A-I3U"/>
                                                         </connections>
                                                     </button>
@@ -378,17 +377,78 @@
             </objects>
             <point key="canvasLocation" x="-2466.4000000000001" y="-1102.4630541871923"/>
         </scene>
-        <!--View Controller-->
+        <!--Share Data Information View Controller-->
         <scene sceneID="K9h-dc-MXD">
             <objects>
-                <viewController id="EOm-5g-8UI" sceneMemberID="viewController">
+                <viewController id="EOm-5g-8UI" customClass="ShareDataInformationViewController" customModule="PIALibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cqO-er-OWx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zde-Ks-mDB">
+                                <rect key="frame" x="0.0" y="49" width="375" height="675"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EIf-QE-dzb" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="20.333333333333332"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOLA QUE ASE" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ucY-Ui-qE9">
+                                                <rect key="frame" x="19" y="0.0" width="337" height="20.333333333333332"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="ucY-Ui-qE9" firstAttribute="leading" secondItem="EIf-QE-dzb" secondAttribute="leading" constant="19" id="1rG-wM-WJk"/>
+                                            <constraint firstItem="ucY-Ui-qE9" firstAttribute="top" secondItem="EIf-QE-dzb" secondAttribute="top" id="57U-9w-PjJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="ucY-Ui-qE9" secondAttribute="trailing" constant="19" id="Cjf-Hc-6dq"/>
+                                            <constraint firstAttribute="bottom" secondItem="ucY-Ui-qE9" secondAttribute="bottom" id="GE5-By-dnp"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="EIf-QE-dzb" secondAttribute="bottom" id="PRn-ur-Toc"/>
+                                    <constraint firstItem="EIf-QE-dzb" firstAttribute="width" secondItem="zde-Ks-mDB" secondAttribute="width" id="iwr-Yf-87a"/>
+                                    <constraint firstItem="EIf-QE-dzb" firstAttribute="leading" secondItem="zde-Ks-mDB" secondAttribute="leading" id="x6q-2h-MXp"/>
+                                    <constraint firstItem="EIf-QE-dzb" firstAttribute="top" secondItem="zde-Ks-mDB" secondAttribute="top" id="y7a-vJ-XjU"/>
+                                    <constraint firstAttribute="trailing" secondItem="EIf-QE-dzb" secondAttribute="trailing" id="ztx-sU-N0s"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Gub-St-zI2"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="3Y8-eY-1e6"/>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3V-Rp-wEv">
+                                <rect key="frame" x="5" y="5" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="Bv6-SN-X9R"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="QnE-uK-xOs"/>
+                                    <constraint firstAttribute="height" constant="44" id="cNg-cp-7FJ"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" image="close-icon"/>
+                                <connections>
+                                    <action selector="close" destination="EOm-5g-8UI" eventType="touchUpInside" id="zc3-I7-OGG"/>
+                                    <action selector="reject:" destination="6bm-eY-LuK" eventType="touchUpInside" id="nfL-wH-Jd8"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="ojY-X3-WiH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ojY-X3-WiH" firstAttribute="bottom" secondItem="zde-Ks-mDB" secondAttribute="bottom" id="1wi-ue-2IC"/>
+                            <constraint firstItem="zde-Ks-mDB" firstAttribute="leading" secondItem="ojY-X3-WiH" secondAttribute="leading" id="Jbc-Tx-wmZ"/>
+                            <constraint firstItem="q3V-Rp-wEv" firstAttribute="top" secondItem="ojY-X3-WiH" secondAttribute="top" constant="5" id="nBd-VD-UhO"/>
+                            <constraint firstItem="q3V-Rp-wEv" firstAttribute="leading" secondItem="ojY-X3-WiH" secondAttribute="leading" constant="5" id="pBU-42-Kpn"/>
+                            <constraint firstItem="zde-Ks-mDB" firstAttribute="trailing" secondItem="ojY-X3-WiH" secondAttribute="trailing" id="rJq-R5-pxC"/>
+                            <constraint firstItem="zde-Ks-mDB" firstAttribute="top" secondItem="q3V-Rp-wEv" secondAttribute="bottom" id="uMn-dR-CtK"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aKr-dX-YXZ"/>
+                    <connections>
+                        <outlet property="closeButton" destination="q3V-Rp-wEv" id="iHC-Mx-UHh"/>
+                        <outlet property="contentView" destination="EIf-QE-dzb" id="cvT-FL-W48"/>
+                        <outlet property="labelInformation" destination="ucY-Ui-qE9" id="jEH-RT-XQq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BZQ-ba-XJU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
