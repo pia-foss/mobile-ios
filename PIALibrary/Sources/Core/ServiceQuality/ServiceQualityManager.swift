@@ -23,8 +23,8 @@ import Foundation
 import PIAKPI
 
 public class ServiceQualityManager: NSObject {
-
-    private var kpiToken = "123456"
+    
+    private var kpiToken = ""
     private let connectionType = "manual"
     public static let shared = ServiceQualityManager()
     private var kpiManager: KPIAPI!
@@ -33,12 +33,14 @@ public class ServiceQualityManager: NSObject {
         super.init()
         
         if Client.environment == .staging {
+            kpiToken = LibraryConstants.Elastic.stagingToken
             kpiManager = KPIBuilder()
                 .setAppVersion(appVersion: Macros.localizedVersionNumber())
                 .setKPIFlushEventMode(kpiSendEventMode: .perBatch)
                 .setKPIClientStateProvider(kpiClientStateProvider: PIAKPIClientStateProvider())
                 .build()
         } else {
+            kpiToken = LibraryConstants.Elastic.liveToken
             kpiManager = KPIBuilder()
                 .setAppVersion(appVersion: Macros.localizedVersionNumber())
                 .setKPIFlushEventMode(kpiSendEventMode: .perBatch)

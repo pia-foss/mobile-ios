@@ -229,6 +229,8 @@
 		0EFEB4C520077AC900F81029 /* PIATunnelProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFEB4C02007784A00F81029 /* PIATunnelProfile.swift */; };
 		33A542AFDFD3AF0C27B27F45 /* Pods_PIALibrary_PIALibraryTests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C71CB55833441BB6B5D0B9FD /* Pods_PIALibrary_PIALibraryTests_iOS.framework */; };
 		3D93D3414A3DA19ECB04B778 /* Pods_PIALibrary_PIALibraryHost_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB01CE68711A898531418458 /* Pods_PIALibrary_PIALibraryHost_iOS.framework */; };
+		821674F7267A47670028E4FD /* LibraryConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821674F6267A47670028E4FD /* LibraryConstants.swift */; };
+		821674F8267A47670028E4FD /* LibraryConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821674F6267A47670028E4FD /* LibraryConstants.swift */; };
 		82183D7F25011D200033023F /* MagicLinkLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82183D7D25011D200033023F /* MagicLinkLoginViewController.swift */; };
 		82183D8025011D200033023F /* MagicLinkLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82183D7D25011D200033023F /* MagicLinkLoginViewController.swift */; };
 		8221921C24CEBA3800C24F1C /* NMTRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921B24CEBA3800C24F1C /* NMTRules.swift */; };
@@ -236,11 +238,11 @@
 		8221921F24CEBABA00C24F1C /* NMTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921E24CEBABA00C24F1C /* NMTType.swift */; };
 		8221922024CEBABA00C24F1C /* NMTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921E24CEBABA00C24F1C /* NMTType.swift */; };
 		822BC1D024BF20C90041BF9A /* UIControl+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BC1CF24BF20C90041BF9A /* UIControl+Action.swift */; };
+		824D981E266A1AC500FCD7DA /* staging.json in Resources */ = {isa = PBXBuildFile; fileRef = 824D981D266A1AC500FCD7DA /* staging.json */; };
+		824D981F266A1AC500FCD7DA /* staging.json in Resources */ = {isa = PBXBuildFile; fileRef = 824D981D266A1AC500FCD7DA /* staging.json */; };
 		8276E175260B5ED400BB7B40 /* ServiceQualityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8276E174260B5ED400BB7B40 /* ServiceQualityManager.swift */; };
 		8276E1E6260B961C00BB7B40 /* PIAKPIClientStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8276E1E5260B961B00BB7B40 /* PIAKPIClientStateProvider.swift */; };
 		8276E1ED260B962900BB7B40 /* PIAKPIStagingClientStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8276E1EC260B962900BB7B40 /* PIAKPIStagingClientStateProvider.swift */; };
-		824D981E266A1AC500FCD7DA /* staging.json in Resources */ = {isa = PBXBuildFile; fileRef = 824D981D266A1AC500FCD7DA /* staging.json */; };
-		824D981F266A1AC500FCD7DA /* staging.json in Resources */ = {isa = PBXBuildFile; fileRef = 824D981D266A1AC500FCD7DA /* staging.json */; };
 		829EB63F2535C432003E74DD /* DedicatedIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB63E2535C432003E74DD /* DedicatedIP.swift */; };
 		829EB6402535C432003E74DD /* DedicatedIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB63E2535C432003E74DD /* DedicatedIP.swift */; };
 		82C374F82514DE7D00E391EE /* EndpointManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C374F42514DC6D00E391EE /* EndpointManagerTests.swift */; };
@@ -565,14 +567,15 @@
 		10DD9676BB5539C7984C65D9 /* Pods-PIALibrary-PIALibrary-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibrary-iOS.release.xcconfig"; path = "Target Support Files/Pods-PIALibrary-PIALibrary-iOS/Pods-PIALibrary-PIALibrary-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		67D8A0C15205E19B5912E3B7 /* Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig"; path = "Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		81CAB800806A3F61AEBB267F /* Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig"; path = "Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		821674F6267A47670028E4FD /* LibraryConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryConstants.swift; sourceTree = "<group>"; };
 		82183D7D25011D200033023F /* MagicLinkLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLinkLoginViewController.swift; sourceTree = "<group>"; };
 		8221921B24CEBA3800C24F1C /* NMTRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMTRules.swift; sourceTree = "<group>"; };
 		8221921E24CEBABA00C24F1C /* NMTType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMTType.swift; sourceTree = "<group>"; };
 		822BC1CF24BF20C90041BF9A /* UIControl+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Action.swift"; sourceTree = "<group>"; };
+		824D981D266A1AC500FCD7DA /* staging.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = staging.json; sourceTree = "<group>"; };
 		8276E174260B5ED400BB7B40 /* ServiceQualityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceQualityManager.swift; sourceTree = "<group>"; };
 		8276E1E5260B961B00BB7B40 /* PIAKPIClientStateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAKPIClientStateProvider.swift; sourceTree = "<group>"; };
 		8276E1EC260B962900BB7B40 /* PIAKPIStagingClientStateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAKPIStagingClientStateProvider.swift; sourceTree = "<group>"; };
-		824D981D266A1AC500FCD7DA /* staging.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = staging.json; sourceTree = "<group>"; };
 		829EB63E2535C432003E74DD /* DedicatedIP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DedicatedIP.swift; sourceTree = "<group>"; };
 		82C374F42514DC6D00E391EE /* EndpointManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointManagerTests.swift; sourceTree = "<group>"; };
 		82C374F62514DC7200E391EE /* server.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = server.json; sourceTree = "<group>"; };
@@ -1042,6 +1045,7 @@
 				0EB8C0471F9CCE07005857E4 /* Macros.swift */,
 				0EFB51261F82A5F80033B81F /* Notification+Core.swift */,
 				0E3D13CC1F9DDD2400434A48 /* NotificationKey.swift */,
+				821674F6267A47670028E4FD /* LibraryConstants.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1173,20 +1177,20 @@
 			path = NMT;
 			sourceTree = "<group>";
 		};
-		8276E173260B5EC500BB7B40 /* ServiceQuality */ = {
-			isa = PBXGroup;
-			children = (
-				8276E174260B5ED400BB7B40 /* ServiceQualityManager.swift */,
-			);
-			path = ServiceQuality;
-			sourceTree = "<group>";
-		};
 		824D981C266A1A4900FCD7DA /* Staging */ = {
 			isa = PBXGroup;
 			children = (
 				824D981D266A1AC500FCD7DA /* staging.json */,
 			);
 			path = Staging;
+			sourceTree = "<group>";
+		};
+		8276E173260B5EC500BB7B40 /* ServiceQuality */ = {
+			isa = PBXGroup;
+			children = (
+				8276E174260B5ED400BB7B40 /* ServiceQualityManager.swift */,
+			);
+			path = ServiceQuality;
 			sourceTree = "<group>";
 		};
 		82FD5D542521F2B600E390CB /* Providers */ = {
@@ -1738,6 +1742,7 @@
 				829EB6402535C432003E74DD /* DedicatedIP.swift in Sources */,
 				0E245C9E1FECF0C20010DEF2 /* ClientAccess.swift in Sources */,
 				DD2683EA24617F0300C65DAA /* PingTask.swift in Sources */,
+				821674F8267A47670028E4FD /* LibraryConstants.swift in Sources */,
 				0E9D62D21FDEBBC8009A90CF /* GlossServersBundle.swift in Sources */,
 				0E7BC6FB1F96B1120035C8B2 /* LibraryCallback.swift in Sources */,
 				0E3D13D41F9E270A00434A48 /* GlossAccountInfo.swift in Sources */,
@@ -1993,6 +1998,7 @@
 				0E2ADD481FE1595300BB170C /* IPSecProfile.swift in Sources */,
 				0EFB51271F82A5F80033B81F /* Notification+Core.swift in Sources */,
 				0EE261E01FEFD69F00E11955 /* Notification+Library.swift in Sources */,
+				821674F7267A47670028E4FD /* LibraryConstants.swift in Sources */,
 				0EFEB4C22007784A00F81029 /* PIATunnelProfile.swift in Sources */,
 				DD1AB10523FC280000396E74 /* DeviceModel.swift in Sources */,
 				0E392DBB1FE34B5A0002160D /* NSString+URL.m in Sources */,
