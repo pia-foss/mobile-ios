@@ -97,7 +97,8 @@ def app_pods
 end
 
 def tunnel_pods
-    pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :commit => '2556fbe'
+    pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :branch => 'master'
+    pod 'OpenSSL-Apple', :git => 'https://github.com/keeshux/openssl-apple'
 end
 
 def piawireguard_pod
