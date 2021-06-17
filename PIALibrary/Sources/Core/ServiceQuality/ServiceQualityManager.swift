@@ -31,7 +31,7 @@ public class ServiceQualityManager: NSObject {
     private var kpiToken = ""
     private let connectionType = "manual"
     public static let shared = ServiceQualityManager()
-    private var kpiManager: KPIAPI!
+    private var kpiManager: KPIAPI?
 
     public override init() {
         super.init()
@@ -64,26 +64,17 @@ public class ServiceQualityManager: NSObject {
     }
 
     public func start() {
-        guard kpiManager != nil else {
-            return
-        }
-        kpiManager.start()
+        kpiManager?.start()
         log.debug("KPI manager starts collecting statistics")
     }
 
     public func stop() {
-        guard kpiManager != nil else {
-            return
-        }
-        kpiManager.stop()
+        kpiManager?.stop()
         log.debug("KPI manager stopped")
     }
     
     @objc private func flushEvents() {
-        guard kpiManager != nil else {
-            return
-        }
-        kpiManager.flush(callback: { error in
+        kpiManager?.flush(callback: { error in
             guard error == nil else {
                 return
             }
@@ -92,40 +83,28 @@ public class ServiceQualityManager: NSObject {
     }
     
     public func connectionAttemptEvent() {
-        guard kpiManager != nil else {
-            return
-        }
         let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.connectionAttempt, eventProperties: KPIClientEvent.EventProperties(connectionSource: KPIConnectionSource.manual, data: nil, preRelease: Client.environment == .staging ? true : false, reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
-        kpiManager.submit(event: event) { (error) in
+        kpiManager?.submit(event: event) { (error) in
             log.debug("Event sent \(event)")
         }
     }
 
     public func connectionEstablishedEvent() {
-        guard kpiManager != nil else {
-            return
-        }
         let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.connectionEstablished, eventProperties: KPIClientEvent.EventProperties(connectionSource: KPIConnectionSource.manual, data: nil, preRelease: Client.environment == .staging ? true : false, reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
-        kpiManager.submit(event: event) { (error) in
+        kpiManager?.submit(event: event) { (error) in
             log.debug("Event sent \(event)")
         }
     }
 
     public func connectionCancelledEvent() {
-        guard kpiManager != nil else {
-            return
-        }
         let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.connectionCancelled, eventProperties: KPIClientEvent.EventProperties(connectionSource: KPIConnectionSource.manual, data: nil, preRelease: Client.environment == .staging ? true : false, reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
-        kpiManager.submit(event: event) { (error) in
+        kpiManager?.submit(event: event) { (error) in
             log.debug("Event sent \(event)")
         }
     }
 
     public func availableData(completion: @escaping (([String]) -> Void)) {
-        guard kpiManager != nil else {
-            return
-        }
-        kpiManager.recentEvents { events in
+        kpiManager?.recentEvents { events in
             completion(events)
         }
     }
