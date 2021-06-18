@@ -17,7 +17,7 @@ $gitlab_vpn_root = "git@gitlab.kape.com:pia-mobile/ios"
 $gitlab_kn_root = "git@gitlab.kape.com:pia-mobile/shared"
 
 $library_pod = 'PIALibrary'
-$library_repo = 'client-library-apple'
+$library_repo = 'pia-library'
 $library_gitlab_repo = 'client-library-apple.git'
 $library_subspecs = [
     'Library',
@@ -78,8 +78,8 @@ def shared_main_pods
 
     #library_by_path('')
     #library_by_git('b73d9e5')
-    #library_by_gitlab_branch('develop')
-    library_by_gitlab_by_git('3f80d1d')
+    library_by_gitlab_branch('feature/update_icons')
+    #library_by_gitlab_by_git('3f80d1d')
     #library_by_version('~> 1.1.3')
 end
 
