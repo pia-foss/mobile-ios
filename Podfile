@@ -17,7 +17,7 @@ $gitlab_vpn_root = "git@gitlab.kape.com:pia-mobile/ios"
 $gitlab_kn_root = "git@gitlab.kape.com:pia-mobile/shared"
 
 $library_pod = 'PIALibrary'
-$library_repo = 'pia-library'
+$library_repo = 'client-library-apple'
 $library_gitlab_repo = 'client-library-apple.git'
 $library_subspecs = [
     'Library',
