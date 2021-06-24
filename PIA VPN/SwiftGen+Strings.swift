@@ -1017,9 +1017,9 @@ internal enum L10n {
     internal enum Service {
       internal enum Quality {
         internal enum Share {
-          /// To help us ensure the performance of our service, you can share your connection stats with us. These reports do not include any personally identifiable information. Tap to find out more
+          /// Help us improve by sharing VPN connection statistics. These reports never contain personally identifiable information. Tap to find out more.
           internal static let description = L10n.tr("Localizable", "settings.service.quality.share.description")
-          /// Share your connection stats
+          /// Help improve PIA
           internal static let title = L10n.tr("Localizable", "settings.service.quality.share.title")
         }
         internal enum Show {
