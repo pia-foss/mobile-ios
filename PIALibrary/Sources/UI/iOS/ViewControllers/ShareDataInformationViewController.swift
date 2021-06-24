@@ -7,14 +7,14 @@
 
 
 import Foundation
-class ShareDataInformationViewController: AutolayoutViewController {
+public class ShareDataInformationViewController: AutolayoutViewController {
 
     @IBOutlet private weak var labelInformation: UILabel!
 
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var closeButton: UIButton!
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         self.labelInformation.text = L10n.Signup.Share.Data.ReadMore.Text.description
@@ -22,7 +22,7 @@ class ShareDataInformationViewController: AutolayoutViewController {
 
     // MARK: Restylable
     
-    override func viewShouldRestyle() {
+    public override func viewShouldRestyle() {
         super.viewShouldRestyle()
         Theme.current.applyPrincipalBackground(contentView)
         Theme.current.applySubtitle(labelInformation)
