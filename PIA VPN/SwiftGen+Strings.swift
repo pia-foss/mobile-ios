@@ -8,7 +8,7 @@ import Foundation
 // MARK: - Strings
 
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
-// swiftlint:disable nesting type_body_length type_name
+// swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
 
   internal enum About {
@@ -1017,7 +1017,7 @@ internal enum L10n {
     internal enum Service {
       internal enum Quality {
         internal enum Share {
-          /// To help us ensure the performance of our service, you can share your connection stats with us. These reports do not include any personally identifiable information.
+          /// To help us ensure the performance of our service, you can share your connection stats with us. These reports do not include any personally identifiable information. Tap to find out more
           internal static let description = L10n.tr("Localizable", "settings.service.quality.share.description")
           /// Share your connection stats
           internal static let title = L10n.tr("Localizable", "settings.service.quality.share.title")
@@ -1226,7 +1226,7 @@ internal enum L10n {
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
-// swiftlint:enable nesting type_body_length type_name
+// swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces
 
 // MARK: - Implementation Details
 
@@ -1240,7 +1240,11 @@ extension L10n {
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
   }()
 }
 // swiftlint:enable convenience_type
