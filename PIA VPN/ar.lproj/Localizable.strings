@@ -129,12 +129,13 @@
 "global.share" = "مشاركة";
 "global.unreachable" = "لم يتم العثور على اتصال بالإنترنت. يرجى التأكيد أن لديك اتصال بالإنترنت.";
 "global.update" = "تحديث";
+"global.version" = "الإصدار";
 "global.vpn.settings" = "إعدادات VPN";
 "global.yes" = "نعم";
 "hotspothelper.display.name" = "🔒 قم بتنشيط حماية VPN WiFi في إعدادات PIA لتأمين هذا الاتصال.";
 "hotspothelper.display.protected.name" = "🔒 حماية VPN WiFi من PIA نشطة - نحن نحمي ظهرك.";
 "inapp.messages.settings.updated" = "تم تحديث الإعدادات";
-"inapp.messages.toggle.title" = "إيقاف رسائل الاتصال من داخل التطبيق";
+"inapp.messages.toggle.title" = "إظهار رسائل اتصال الخدمة";
 "menu.accessibility.edit.tile" = "تحرير";
 "menu.accessibility.item" = "القائمة";
 "menu.accessibility.logged_as" = "تم تسجيل الدخول باسم %@";
@@ -166,6 +167,7 @@
 "network.management.tool.always.disconnect" = "قطع اتصال VPN دائمًا";
 "network.management.tool.choose.wifi" = "اختر شبكة WiFi لإضافة قاعدة جديدة. ";
 "network.management.tool.disable" = "تعطيل الأتمتة";
+"network.management.tool.enable.automation" = "تمكين الأتمتة";
 "network.management.tool.mobile.data" = "بيانات الموبايل";
 "network.management.tool.open.wifi" = "فتح WiFi";
 "network.management.tool.retain.state" = "احتفاظ بحالة VPN";
@@ -224,11 +226,12 @@
 "settings.connection.remote_port.title" = "منفذ بعيد";
 "settings.connection.socket_protocol.title" = "مقبس";
 "settings.connection.title" = "الاتصال";
-"settings.connection.vpn_protocol.title" = "البروتوكول";
+"settings.connection.transport.title" = "نقل";
+"settings.connection.vpn_protocol.title" = "اختيار البروتوكول";
 "settings.content_blocker.footer" = "لتفعيل أو تعطيل حظر المحتوى على متصفح Safari، اذهب الى الإعدادات > Safari > حظر المحتوى وتفعيل PIA VPN";
 "settings.content_blocker.refresh.title" = "تحديث قائمة الحظر";
 "settings.content_blocker.state.title" = "الحالة الحالية";
-"settings.content_blocker.title" = "حظر المحتوى في Safari";
+"settings.content_blocker.title" = "حالة حظر المحتوى في Safari";
 "settings.dns.alert.clear.message" = "سيؤدي هذا إلى مسح DNS المخصص والعودة تلقائيًا إلى PIA DNS الافتراضي.";
 "settings.dns.alert.clear.title" = "مسح DNS";
 "settings.dns.alert.create.message" = "قد يؤدي استخدام عناوين DNS غير المزودة عن طريق PIA إلى كشف حركة مرور DNS بأجهزتك لأطراف ثالثة وتهديد خصوصيتك.";
@@ -243,7 +246,7 @@
 "settings.encryption.digest.title" = "مصادقة البيانات";
 "settings.encryption.handshake.title" = "مصافحة";
 "settings.encryption.title" = "التشفير";
-"settings.geo.servers.description" = "تضمين المناطق المحدد موقعها جغرافيًا";
+"settings.geo.servers.description" = "إظهار المناطق المحدد موقعها جغرافيًا";
 "settings.hotspothelper.all.description" = "سيتم تنشيط حماية VPN WiFi على جميع الشبكات، بما في ذلك الشبكات الموثوقة.";
 "settings.hotspothelper.all.title" = "حماية كل الشبكات";
 "settings.hotspothelper.available.add.help" = "اضغط + للإضافة إلى الشبكات الموثوقة.";
@@ -269,9 +272,15 @@
 "settings.reset.defaults.confirm.button" = "إعادة تعيين";
 "settings.reset.defaults.confirm.message" = "سيؤدي هذا الإجراء إلى عودة التطبيق إلى حالته الافتراضية وستفقد كل التغييرات التي أجريتها.";
 "settings.reset.defaults.confirm.title" = "إعادة تعيين الإعدادات";
-"settings.reset.defaults.title" = "إعادة تعيين إلى إعدادات افتراضية";
+"settings.reset.defaults.title" = "إعادة تعيين الإعدادات إلى الافتراضية";
 "settings.reset.footer" = "سيؤدي هذا الإجراء إلى إعادة تعيين جميع الإعدادات أعلاه.";
 "settings.reset.title" = "إعادة تعيين";
+"settings.section.automation" = "الأتمتة";
+"settings.section.general" = "عام";
+"settings.section.help" = "مساعدة";
+"settings.section.network" = "الشبكة";
+"settings.section.privacyFeatures" = "ميزات الخصوصية";
+"settings.section.protocols" = "البروتوكولات";
 "settings.server.network.alert" = "يجب قطع اتصال VPN لتغيير شبكة الخادم.";
 "settings.server.network.description" = "شبكة الجيل القادم";
 "settings.small.packets.description" = "سيخفض حجم حزمة IP قليلًا لتحسين التوافق مع بعض أنواع الموجهات وشبكات الجوَّال.";
