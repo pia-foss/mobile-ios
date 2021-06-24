@@ -199,9 +199,9 @@ class AppPreferences {
     var regionFilter: RegionFilter {
         get {
             guard let rawValue = defaults.string(forKey: Entries.regionFilter) else {
-                return .name
+                return .latency
             }
-            return RegionFilter(rawValue: rawValue) ?? .name
+            return RegionFilter(rawValue: rawValue) ?? .latency
         }
         set {
             defaults.set(newValue.rawValue, forKey: Entries.regionFilter)
@@ -519,7 +519,7 @@ class AppPreferences {
             Entries.version: AppPreferences.currentVersion,
             Entries.appVersion: "",
             Entries.launched: false,
-            Entries.regionFilter: RegionFilter.name.rawValue,
+            Entries.regionFilter: RegionFilter.latency.rawValue,
             Entries.didAskToEnableNotifications: false,
             Entries.themeCode: ThemeCode.light.rawValue,
             Entries.useConnectSiriShortcuts: false,
