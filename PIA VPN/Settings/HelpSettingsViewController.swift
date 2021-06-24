@@ -218,7 +218,9 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     @objc private func showShareDataInformation() {
-
+        let storyboard = UIStoryboard(name: "Signup", bundle: Bundle(for: ShareDataInformationViewController.self))
+        let shareDataInformationViewController = storyboard.instantiateViewController(withIdentifier: ViewControllerIdentifiers.shareDataInformation)
+        presentModally(viewController: shareDataInformationViewController)
     }
     
     private func showKPIStats() {
@@ -231,10 +233,14 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let cardsController = storyboard.instantiateViewController(withIdentifier: ViewControllerIdentifiers.piaCards) as? PIACardsViewController {
                 cardsController.setupWith(cards: callingCards)
-                cardsController.modalPresentationStyle = .overCurrentContext
-                self.present(cardsController, animated: true)
+                presentModally(viewController: cardsController)
             }
         }
+    }
+    
+    private func presentModally(viewController: UIViewController) {
+        viewController.modalPresentationStyle = .overCurrentContext
+        self.present(viewController, animated: true, completion: nil)
     }
     
     private func submitDebugReport() {
