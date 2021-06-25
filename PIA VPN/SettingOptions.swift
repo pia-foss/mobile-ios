@@ -20,6 +20,7 @@
 //
 
 import Foundation
+import PIALibrary
 import UIKit
 
 public enum SettingOptions: Int, EnumsBuilder {
@@ -268,11 +269,19 @@ public enum HelpSections: Int, SettingSection, EnumsBuilder {
     }
     
     public static func all() -> [Self] {
-        return [.sendDebugLogs, .kpiShareStatistics, .latestNews, .version]
+        if Client.configuration.featureFlags.contains(Client.FeatureFlags.shareServiceQualityData) {
+            return [.sendDebugLogs, .kpiShareStatistics, .latestNews, .version]
+        } else {
+            return [.sendDebugLogs, .latestNews, .version]
+        }
     }
     
     public static func allWithEvents() -> [Self] {
-        return [.sendDebugLogs, .kpiShareStatistics, .kpiViewEvents, .latestNews, .version,]
+        if Client.configuration.featureFlags.contains(Client.FeatureFlags.shareServiceQualityData) {
+            return [.sendDebugLogs, .kpiShareStatistics, .kpiViewEvents, .latestNews, .version,]
+        } else {
+            return [.sendDebugLogs, .latestNews, .version]
+        }
     }
 
 }
