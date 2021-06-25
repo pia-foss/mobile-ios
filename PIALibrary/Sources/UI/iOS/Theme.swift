@@ -482,6 +482,18 @@ public class Theme {
         button.setTitleColor(palette.textColor(forRelevance: 1, appearance: appearance), for: .normal)
     }
     
+    public func applyUnderlinedSubtitleButton(_ button: UIButton) {
+        button.style(style: TextStyle.textStyle8)
+        let attributes: [NSAttributedString.Key: Any] = [
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ]
+        let title = button.title(for: .normal) ?? ""
+       
+        let attributedString = NSAttributedString(string: title, attributes: attributes)
+        button.setAttributedTitle(attributedString, for: .normal)
+        
+    }
+    
     /// :nodoc:
     public func agreementText(withMessage message: String, tos: String, tosUrl: String, privacy: String, privacyUrl: String) -> NSAttributedString {
         let plain = message.replacingOccurrences(

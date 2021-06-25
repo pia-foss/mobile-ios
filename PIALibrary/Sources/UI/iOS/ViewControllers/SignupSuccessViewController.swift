@@ -43,6 +43,7 @@ public class SignupSuccessViewController: AutolayoutViewController, BrandableNav
     @IBOutlet private weak var shareDataImageView: UIImageView!
     @IBOutlet private weak var shareDataTitleLabel: UILabel!
     @IBOutlet private weak var shareDataDescriptionLabel: UILabel!
+    @IBOutlet private weak var readMoreButton: PIAButton!
     @IBOutlet private weak var acceptButton: PIAButton!
     @IBOutlet private weak var cancelButton: PIAButton!
     @IBOutlet private weak var shareDataFooterLabel: UILabel!
@@ -164,6 +165,8 @@ public class SignupSuccessViewController: AutolayoutViewController, BrandableNav
                               for: [])
         Theme.current.applyTransparentButton(cancelButton,
                                              withSize: 1.0)
+        readMoreButton.setTitle(L10n.Signup.Share.Data.Buttons.readMore, for: .normal)
+        Theme.current.applyUnderlinedSubtitleButton(readMoreButton)
     }
     
     private func styleContainers() {
