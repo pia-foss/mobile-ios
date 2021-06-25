@@ -80,7 +80,7 @@ def shared_main_pods
 
     #library_by_path('')
     #library_by_git('b73d9e5')
-    library_by_gitlab_branch('feature/share_data_read_more')
+    library_by_gitlab_branch('feature/share_data_read_more_settings')
     #library_by_gitlab_by_git('ec53a06')
     #library_by_version('~> 1.1.3')
 end
