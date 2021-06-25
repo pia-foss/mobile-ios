@@ -75,7 +75,7 @@ public class ServiceQualityManager: NSObject {
     
     @objc private func flushEvents() {
         kpiManager?.flush(callback: { error in
-            guard error == nil else {
+            guard error != nil else {
                 return
             }
             log.error("\(error)")
