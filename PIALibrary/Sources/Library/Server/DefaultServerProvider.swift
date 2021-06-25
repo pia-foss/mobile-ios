@@ -110,7 +110,7 @@ class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess
     }
     
     var targetServer: Server {
-        guard let server = accessedPreferences.preferredServer ?? bestServer else {
+        guard let server = accessedPreferences.preferredServer ?? bestServer ?? accessedDatabase.plain.lastConnectedRegion else {
             guard let fallbackServer = currentServers.first else {
                 fatalError("No servers available")
             }

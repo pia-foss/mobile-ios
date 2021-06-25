@@ -28,6 +28,8 @@ private let log = SwiftyBeaver.self
 private protocol PreferencesStore: class {
     var preferredServer: Server? { get set }
     
+    var lastConnectedRegion: Server? { get set }
+    
     var isPersistentConnection: Bool { get set }
         
     var mace: Bool { get set }
@@ -98,6 +100,7 @@ private extension PreferencesStore {
         ikeV2PacketSize = source.ikeV2PacketSize
         signInWithAppleFakeEmail = source.signInWithAppleFakeEmail
         shareServiceQualityData = source.shareServiceQualityData
+        lastConnectedRegion = source.lastConnectedRegion
     }
 }
 
@@ -130,6 +133,15 @@ extension Client {
             }
             set {
                 accessedDatabase.plain.preferredServer = newValue
+            }
+        }
+        
+        public fileprivate(set) var lastConnectedRegion: Server? {
+            get {
+                return accessedDatabase.plain.lastConnectedRegion
+            }
+            set {
+                accessedDatabase.plain.lastConnectedRegion = newValue
             }
         }
         
@@ -382,6 +394,7 @@ extension Client.Preferences {
         
         fileprivate init() {
             preferredServer = nil
+            lastConnectedRegion = nil
             isPersistentConnection = true
             mace = false
             useWiFiProtection = true
@@ -431,6 +444,9 @@ extension Client.Preferences {
         /// :nodoc:
         public var preferredServer: Server?
         
+        /// :nodoc:
+        public var lastConnectedRegion: Server?
+
         /// :nodoc:
         public var isPersistentConnection: Bool
         

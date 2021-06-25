@@ -44,6 +44,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         
         static let preferredServer = "CurrentRegion" // legacy
 
+        static let lastConnectedRegion = "LastConnectedRegion" 
+
         static let preferredServerDIPToken = "CurrentRegionDIPToken"
         
         static let pingByServerIdentifier = "PingByServerIdentifier"
@@ -312,6 +314,16 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
                 }
                 historicalServers = lastServers
             }
+        }
+    }
+    
+    var lastConnectedRegion: Server? {
+        get {
+            let identifier = backend.string(forKey: Entries.lastConnectedRegion)
+            return cachedServers.first { $0.identifier == identifier }
+        }
+        set {
+            backend.set(newValue?.identifier, forKey: Entries.lastConnectedRegion)
         }
     }
     
