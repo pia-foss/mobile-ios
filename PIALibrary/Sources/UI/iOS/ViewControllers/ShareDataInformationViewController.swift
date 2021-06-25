@@ -7,6 +7,8 @@
 
 
 import Foundation
+import UIKit
+
 public class ShareDataInformationViewController: AutolayoutViewController {
 
     @IBOutlet private weak var labelInformation: UILabel!
