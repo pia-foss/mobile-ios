@@ -30,6 +30,11 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
     
     @IBOutlet weak var tableView: UITableView!
     private lazy var switchShareServiceQualityData = UISwitch()
+    
+    struct ViewControllerIdentifiers {
+        static let piaCards = "PIACardsViewController"
+        static let shareDataInformation = "ShareDataInformationViewController"
+    }
 
     override func viewDidLoad() {
         
@@ -116,29 +121,20 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-
+        
+        guard let cell = configureCommonFooterCell(for: tableView) else {
+            return nil
+        }
+        
         switch section {
         case HelpSections.sendDebugLogs.rawValue:
-            if let cell = tableView.dequeueReusableCell(withIdentifier: Cells.footer) {
-                cell.textLabel?.numberOfLines = 0
-                cell.textLabel?.style(style: TextStyle.textStyle21)
-                cell.backgroundColor = .clear
-                cell.textLabel?.text =  L10n.Settings.Log.information
-                return cell
-            }
-            return nil
+            cell.textLabel?.text = L10n.Settings.Log.information
         case HelpSections.kpiShareStatistics.rawValue:
-            if let cell = tableView.dequeueReusableCell(withIdentifier: Cells.footer) {
-                cell.textLabel?.numberOfLines = 0
-                cell.textLabel?.style(style: TextStyle.textStyle21)
-                cell.backgroundColor = .clear
-                cell.textLabel?.text =  L10n.Settings.Service.Quality.Share.description
-                return cell
-            }
-            return nil
+            configureShareDataFooterCell(cell)
         default:
             return nil
         }
+        return cell
 
     }
     
@@ -205,6 +201,28 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    private func configureCommonFooterCell(for tableView: UITableView) -> UITableViewCell? {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.footer) else {
+            return nil
+        }
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.style(style: TextStyle.textStyle21)
+        cell.backgroundColor = .clear
+        return cell
+    }
+    
+    private func configureShareDataFooterCell(_ cell: UITableViewCell) {
+        cell.textLabel?.text =  L10n.Settings.Service.Quality.Share.description
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showShareDataInformation))
+        cell.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func showShareDataInformation() {
+        let storyboard = UIStoryboard(name: "Signup", bundle: Bundle(for: ShareDataInformationViewController.self))
+        let shareDataInformationViewController = storyboard.instantiateViewController(withIdentifier: ViewControllerIdentifiers.shareDataInformation)
+        presentModally(viewController: shareDataInformationViewController)
+    }
+    
     private func showKPIStats() {
         perform(segue: StoryboardSegue.Main.serviceQualityDataSegueIdentifier)
     }
@@ -213,12 +231,16 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
         let callingCards = CardFactory.getAllCards()
         if !callingCards.isEmpty {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let cardsController = storyboard.instantiateViewController(withIdentifier: "PIACardsViewController") as? PIACardsViewController {
+            if let cardsController = storyboard.instantiateViewController(withIdentifier: ViewControllerIdentifiers.piaCards) as? PIACardsViewController {
                 cardsController.setupWith(cards: callingCards)
-                cardsController.modalPresentationStyle = .overCurrentContext
-                self.present(cardsController, animated: true)
+                presentModally(viewController: cardsController)
             }
         }
+    }
+    
+    private func presentModally(viewController: UIViewController) {
+        viewController.modalPresentationStyle = .overCurrentContext
+        self.present(viewController, animated: true, completion: nil)
     }
     
     private func submitDebugReport() {
