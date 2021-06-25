@@ -41,14 +41,14 @@ public class ServiceQualityManager: NSObject {
             kpiManager = KPIBuilder()
                 .setAppVersion(appVersion: Macros.localizedVersionNumber())
                 .setKPIFlushEventMode(kpiSendEventMode: .perBatch)
-                .setKPIClientStateProvider(kpiClientStateProvider: PIAKPIClientStateProvider())
+                .setKPIClientStateProvider(kpiClientStateProvider: PIAKPIStagingClientStateProvider())
                 .build()
         } else {
             kpiToken = LibraryConstants.Elastic.liveToken
             kpiManager = KPIBuilder()
                 .setAppVersion(appVersion: Macros.localizedVersionNumber())
                 .setKPIFlushEventMode(kpiSendEventMode: .perBatch)
-                .setKPIClientStateProvider(kpiClientStateProvider: PIAKPIStagingClientStateProvider())
+                .setKPIClientStateProvider(kpiClientStateProvider: PIAKPIClientStateProvider())
                 .build()
         }
         
