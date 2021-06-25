@@ -620,12 +620,14 @@ class DashboardViewController: AutolayoutViewController {
             let vpn = Client.providers.vpnProvider
 
             titleLabelView.text = L10n.Dashboard.Vpn.connected+": "+effectiveServer.name(forStatus: vpn.vpnStatus)
-            Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
-                                                   withTintColor: .white,
-                                                   andBarTintColors: [UIColor.piaGreen,
-                                                                      UIColor.piaGreenDark20])
-            navigationItem.titleView = titleLabelView
-            setNeedsStatusBarAppearanceUpdate()
+            DispatchQueue.main.async {
+                Theme.current.applyCustomNavigationBar(self.navigationController!.navigationBar,
+                                                       withTintColor: .white,
+                                                       andBarTintColors: [UIColor.piaGreen,
+                                                                          UIColor.piaGreenDark20])
+                self.navigationItem.titleView = titleLabelView
+                self.setNeedsStatusBarAppearanceUpdate()
+            }
             AppPreferences.shared.todayWidgetVpnStatus = VPNStatus.connected.rawValue
             AppPreferences.shared.todayWidgetButtonTitle = L10n.Shortcuts.disconnect
             Macros.removeStickyNote()
@@ -658,11 +660,14 @@ class DashboardViewController: AutolayoutViewController {
             default:
                 titleLabelView.text = L10n.Dashboard.Vpn.connecting.uppercased()
             }
-            Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
-                                                   withTintColor: nil,
-                                                   andBarTintColors: nil)
-            navigationItem.titleView = titleLabelView
-            setNeedsStatusBarAppearanceUpdate()
+            
+            DispatchQueue.main.async {
+                Theme.current.applyCustomNavigationBar(self.navigationController!.navigationBar,
+                                                       withTintColor: nil,
+                                                       andBarTintColors: nil)
+                self.navigationItem.titleView = titleLabelView
+                self.setNeedsStatusBarAppearanceUpdate()
+            }
 
         case .disconnecting:
             toggleConnection.isOn = true
@@ -676,11 +681,14 @@ class DashboardViewController: AutolayoutViewController {
                 TextStyle.textStyle7)
             titleLabelView.text = L10n.Dashboard.Vpn.disconnecting.uppercased()
 
-            Theme.current.applyCustomNavigationBar(navigationController!.navigationBar,
-                                                   withTintColor: nil,
-                                                   andBarTintColors: nil)
-            navigationItem.titleView = titleLabelView
-            setNeedsStatusBarAppearanceUpdate()
+            DispatchQueue.main.async {
+                Theme.current.applyCustomNavigationBar(self.navigationController!.navigationBar,
+                                                       withTintColor: nil,
+                                                       andBarTintColors: nil)
+                self.navigationItem.titleView = titleLabelView
+                self.setNeedsStatusBarAppearanceUpdate()
+            }
+
 
         case .unknown:
             break
