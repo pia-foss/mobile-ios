@@ -275,9 +275,9 @@
 "network.management.tool.retain.state" = "Retain VPN State";
 "network.management.tool.add.rule" = "Add new rule";
 "network.management.tool.choose.wifi" = "Choose a WiFi network to add a new rule. ";
-"network.management.tool.title" = "Manage automation";
+"network.management.tool.title" = "Manage Automation";
 "network.management.tool.alert" = "Your automation settings are configured to keep the VPN disconnected under the current network conditions.";
-"network.management.tool.disable" = "Disable automation";
+"network.management.tool.disable" = "Disable Automation";
 "network.management.tool.enable.automation" = "Enable Automation";
 
 // REGION
