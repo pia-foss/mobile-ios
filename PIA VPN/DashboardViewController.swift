@@ -785,9 +785,9 @@ class DashboardViewController: AutolayoutViewController {
     
     private func resetNavigationBar() {
         //First reset the green background
+        self.setNavBarTheme(.normal, with: NavigationLogoView())
         DispatchQueue.main.async {
             //Show the PIA logo
-            self.setNavBarTheme(.normal, with: NavigationLogoView())
             if let navController = self.navigationController {
                 //Apply the theme background color
                 Theme.current.applyLightNavigationBar(navController.navigationBar)
