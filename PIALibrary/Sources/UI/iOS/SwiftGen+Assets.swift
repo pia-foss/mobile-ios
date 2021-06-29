@@ -27,8 +27,6 @@ internal enum Asset {
   internal static let iconCamera = ImageAsset(name: "icon-camera")
   internal static let iconClose = ImageAsset(name: "icon-close")
   internal static let iconWarning = ImageAsset(name: "icon-warning")
-  internal static let logoDark = ImageAsset(name: "logo-dark")
-  internal static let logoLight = ImageAsset(name: "logo-light")
   internal static let pagecontrolSelectedDot = ImageAsset(name: "pagecontrol-selected-dot")
   internal static let pagecontrolUnselectedDot = ImageAsset(name: "pagecontrol-unselected-dot")
   internal static let planSelected = ImageAsset(name: "plan-selected")
