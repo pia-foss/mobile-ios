@@ -191,11 +191,5 @@ struct AppConstants {
         static let connect = "piavpn:connect"
         static let view = "piavpn:view"
     }
-    
-    struct FeatureFlags {
-        static let dedicatedIp = "dedicated-ip"
-        static let disableMultiDipTokens = "disable-multi-dip-tokens"
-        static let checkDipExpirationRequest = "check-dip-expiration-request"
-    }
-    
+        
 }

@@ -34,6 +34,7 @@ extension Client.Preferences {
             let ed = editable()
             if newValue.isAutomatic {
                 ed.preferredServer = nil
+                ed.lastConnectedRegion = Client.providers.serverProvider.bestServer
             } else {
                 ed.preferredServer = newValue
             }

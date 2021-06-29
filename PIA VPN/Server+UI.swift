@@ -43,7 +43,7 @@ extension Server: CustomStringConvertible {
             return L10n.Dashboard.Vpn.connecting
         case .disconnecting:
             return L10n.Dashboard.Vpn.disconnecting
-        case .disconnected:
+        case .disconnected, .unknown:
             return localizedName
         }
     }

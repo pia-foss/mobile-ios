@@ -29,7 +29,12 @@ private let log = SwiftyBeaver.self
 class HelpSettingsViewController: PIABaseSettingsViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    private lazy var switchEnableNMT = UISwitch()
+    private lazy var switchShareServiceQualityData = UISwitch()
+    
+    struct ViewControllerIdentifiers {
+        static let piaCards = "PIACardsViewController"
+        static let shareDataInformation = "ShareDataInformationViewController"
+    }
 
     override func viewDidLoad() {
         
@@ -41,7 +46,7 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        switchEnableNMT.addTarget(self, action: #selector(toggleNMT(_:)), for: .valueChanged)
+        switchShareServiceQualityData.addTarget(self, action: #selector(toggleShareServiceQualityData(_:)), for: .valueChanged)
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSettings), name: .PIASettingsHaveChanged, object: nil)
     }
@@ -71,12 +76,18 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
         tableView.reloadData()
     }
 
-    @objc private func toggleNMT(_ sender: UISwitch) {
+    @objc private func toggleShareServiceQualityData(_ sender: UISwitch) {
         let preferences = Client.preferences.editable()
-        preferences.nmtRulesEnabled = sender.isOn
+        preferences.shareServiceQualityData = sender.isOn
         preferences.commit()
+        
+        if sender.isOn {
+            ServiceQualityManager.shared.start()
+        } else {
+            ServiceQualityManager.shared.stop()
+        }
+        
         reloadSettings()
-        settingsDelegate.refreshSettings()
     }
 
     // MARK: Restylable
@@ -104,19 +115,26 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return HelpSections.all().count
+        return Client.preferences.shareServiceQualityData ?
+            HelpSections.allWithEvents().count :
+            HelpSections.all().count
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
-        if section == 0, let cell = tableView.dequeueReusableCell(withIdentifier: Cells.footer) {
-            cell.textLabel?.numberOfLines = 0
-            cell.textLabel?.style(style: TextStyle.textStyle21)
-            cell.backgroundColor = .clear
-            cell.textLabel?.text =  L10n.Settings.Log.information
-            return cell
+        guard let cell = configureCommonFooterCell(for: tableView) else {
+            return nil
         }
-        return nil
+        
+        switch section {
+        case HelpSections.sendDebugLogs.rawValue:
+            cell.textLabel?.text = L10n.Settings.Log.information
+        case HelpSections.kpiShareStatistics.rawValue:
+            configureShareDataFooterCell(cell)
+        default:
+            return nil
+        }
+        return cell
 
     }
     
@@ -127,19 +145,23 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
         cell.selectionStyle = .default
         cell.detailTextLabel?.text = nil
 
-        let section = HelpSections.all()[indexPath.section]
-        
+        let section = Client.preferences.shareServiceQualityData ?
+            HelpSections.allWithEvents()[indexPath.section] :
+            HelpSections.all()[indexPath.section]
+        cell.textLabel?.text =  section.localizedTitleMessage()
+        cell.detailTextLabel?.text = nil
+
         switch section {
-        case .sendDebugLogs:
-            cell.textLabel?.text = L10n.Settings.ApplicationInformation.Debug.title
-            cell.detailTextLabel?.text = nil
-        case .latestNews:
-            cell.textLabel?.text = L10n.Settings.Cards.History.title
-            cell.detailTextLabel?.text = nil
         case .version:
             cell.textLabel?.text = Macros.localizedVersionFullString()
             cell.detailTextLabel?.text = nil
             cell.accessoryType = .none
+        case .kpiShareStatistics:
+            cell.accessoryView = switchShareServiceQualityData
+            cell.selectionStyle = .none
+            switchShareServiceQualityData.isOn = Client.preferences.shareServiceQualityData
+        default:
+            break
         }
 
         Theme.current.applySecondaryBackground(cell)
@@ -162,29 +184,75 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let section = HelpSections.all()[indexPath.section]
+        let section = Client.preferences.shareServiceQualityData ?
+            HelpSections.allWithEvents()[indexPath.section] :
+            HelpSections.all()[indexPath.section]
 
         switch section {
             case .sendDebugLogs:
                 submitDebugReport()
             case .latestNews:
                 showLatestNews()
+            case .kpiViewEvents:
+                showKPIStats()
             default: break
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    private func configureCommonFooterCell(for tableView: UITableView) -> UITableViewCell? {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.footer) else {
+            return nil
+        }
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.style(style: TextStyle.textStyle21)
+        cell.backgroundColor = .clear
+        return cell
+    }
+    
+    private func configureShareDataFooterCell(_ cell: UITableViewCell) {
+        setupShareDataInformationLabel(cell.textLabel)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showShareDataInformation))
+        cell.addGestureRecognizer(tapGesture)
+    }
+    
+    private func setupShareDataInformationLabel(_ label: UILabel?) {
+        let attributedString = NSMutableAttributedString()
+        let description = L10n.Settings.Service.Quality.Share.description
+        let carriageReturn = "\n"
+        let findOutMore = L10n.Settings.Service.Quality.Share.findoutmore
+        attributedString.append(NSAttributedString(string: description+carriageReturn,
+                                                   attributes: [.underlineStyle: 0]))
+        attributedString.append(NSAttributedString(string: findOutMore,
+                                                   attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue]))
+        label?.attributedText = attributedString
+    }
+    
+    @objc private func showShareDataInformation() {
+        let storyboard = UIStoryboard(name: "Signup", bundle: Bundle(for: ShareDataInformationViewController.self))
+        let shareDataInformationViewController = storyboard.instantiateViewController(withIdentifier: ViewControllerIdentifiers.shareDataInformation)
+        presentModally(viewController: shareDataInformationViewController)
+    }
+    
+    private func showKPIStats() {
+        perform(segue: StoryboardSegue.Main.serviceQualityDataSegueIdentifier)
+    }
+    
     private func showLatestNews() {
         let callingCards = CardFactory.getAllCards()
         if !callingCards.isEmpty {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let cardsController = storyboard.instantiateViewController(withIdentifier: "PIACardsViewController") as? PIACardsViewController {
+            if let cardsController = storyboard.instantiateViewController(withIdentifier: ViewControllerIdentifiers.piaCards) as? PIACardsViewController {
                 cardsController.setupWith(cards: callingCards)
-                cardsController.modalPresentationStyle = .overCurrentContext
-                self.present(cardsController, animated: true)
+                presentModally(viewController: cardsController)
             }
         }
+    }
+    
+    private func presentModally(viewController: UIViewController) {
+        viewController.modalPresentationStyle = .overCurrentContext
+        self.present(viewController, animated: true, completion: nil)
     }
     
     private func submitDebugReport() {

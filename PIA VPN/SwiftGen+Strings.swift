@@ -8,7 +8,7 @@ import Foundation
 // MARK: - Strings
 
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
-// swiftlint:disable nesting type_body_length type_name
+// swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
 
   internal enum About {
@@ -137,7 +137,7 @@ internal enum L10n {
   }
 
   internal enum ContentBlocker {
-    /// Content Blocker
+    /// Safari Content Blocker
     internal static let title = L10n.tr("Localizable", "content_blocker.title")
     internal enum Body {
       /// Please note: You do not need to be connected to the VPN for this Content Blocker to work, but it will only work while browsing with Safari.
@@ -563,9 +563,9 @@ internal enum L10n {
       internal enum Tool {
         /// Your automation settings are configured to keep the VPN disconnected under the current network conditions.
         internal static let alert = L10n.tr("Localizable", "network.management.tool.alert")
-        /// Disable automation
+        /// Disable Automation
         internal static let disable = L10n.tr("Localizable", "network.management.tool.disable")
-        /// Manage automation
+        /// Manage Automation
         internal static let title = L10n.tr("Localizable", "network.management.tool.title")
         internal enum Add {
           /// Add new rule
@@ -728,7 +728,7 @@ internal enum L10n {
       /// APPLICATION INFORMATION
       internal static let title = L10n.tr("Localizable", "settings.application_information.title")
       internal enum Debug {
-        /// Send debug to support
+        /// Send Debug Log to support
         internal static let title = L10n.tr("Localizable", "settings.application_information.debug.title")
         internal enum Empty {
           /// Debug information is empty, please attempt a connection before retrying submission.
@@ -766,7 +766,7 @@ internal enum L10n {
       internal enum KillSwitch {
         /// The VPN kill switch prevents access to the Internet if the VPN connection is reconnecting. This excludes disconnecting manually.
         internal static let footer = L10n.tr("Localizable", "settings.application_settings.kill_switch.footer")
-        /// VPN kill switch
+        /// VPN Kill Switch
         internal static let title = L10n.tr("Localizable", "settings.application_settings.kill_switch.title")
       }
       internal enum Mace {
@@ -778,7 +778,7 @@ internal enum L10n {
     }
     internal enum Cards {
       internal enum History {
-        /// Latest news
+        /// Latest News
         internal static let title = L10n.tr("Localizable", "settings.cards.history.title")
       }
     }
@@ -800,7 +800,7 @@ internal enum L10n {
       /// CONNECTION
       internal static let title = L10n.tr("Localizable", "settings.connection.title")
       internal enum RemotePort {
-        /// Remote port
+        /// Remote Port
         internal static let title = L10n.tr("Localizable", "settings.connection.remote_port.title")
       }
       internal enum SocketProtocol {
@@ -870,11 +870,11 @@ internal enum L10n {
       /// ENCRYPTION
       internal static let title = L10n.tr("Localizable", "settings.encryption.title")
       internal enum Cipher {
-        /// Data encryption
+        /// Data Encryption
         internal static let title = L10n.tr("Localizable", "settings.encryption.cipher.title")
       }
       internal enum Digest {
-        /// Data authentication
+        /// Data Authentication
         internal static let title = L10n.tr("Localizable", "settings.encryption.digest.title")
       }
       internal enum Handshake {
@@ -1014,11 +1014,27 @@ internal enum L10n {
         internal static let description = L10n.tr("Localizable", "settings.server.network.description")
       }
     }
+    internal enum Service {
+      internal enum Quality {
+        internal enum Share {
+          /// Help us improve by sharing VPN connection statistics. These reports never contain personally identifiable information.
+          internal static let description = L10n.tr("Localizable", "settings.service.quality.share.description")
+          /// Find out more
+          internal static let findoutmore = L10n.tr("Localizable", "settings.service.quality.share.findoutmore")
+          /// Help improve PIA
+          internal static let title = L10n.tr("Localizable", "settings.service.quality.share.title")
+        }
+        internal enum Show {
+          /// Connection stats
+          internal static let title = L10n.tr("Localizable", "settings.service.quality.show.title")
+        }
+      }
+    }
     internal enum Small {
       internal enum Packets {
         /// Will slightly lower the IP packet size to improve compatibility with some routers and mobile networks.
         internal static let description = L10n.tr("Localizable", "settings.small.packets.description")
-        /// Use small packets
+        /// Use Small Packets
         internal static let title = L10n.tr("Localizable", "settings.small.packets.title")
       }
     }
@@ -1212,7 +1228,7 @@ internal enum L10n {
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
-// swiftlint:enable nesting type_body_length type_name
+// swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces
 
 // MARK: - Implementation Details
 
@@ -1226,7 +1242,11 @@ extension L10n {
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
   }()
 }
 // swiftlint:enable convenience_type
