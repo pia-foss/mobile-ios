@@ -18,6 +18,7 @@ $accounts_repo = 'mobile-common-account'
 $regions_gitlab_repo = 'regions.git'
 $accounts_gitlab_repo = 'account.git'
 $csi_gitlab_repo = 'csi.git'
+$kpi_gitlab_repo = 'kpi.git'
 
 abstract_target 'PIALibrary' do
     pod 'SwiftyBeaver', '~> 1.7.0'
@@ -34,6 +35,7 @@ abstract_target 'PIALibrary' do
     pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :branch => 'master'
     pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :branch => 'master'
     pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :branch => 'master'
+    pod "PIAKPIModule", :git => "#{$gitlab_kn_root}/#{$kpi_gitlab_repo}", :branch => 'master'
 
     target 'PIALibrary-iOS' do
         platform :ios, '12.0'

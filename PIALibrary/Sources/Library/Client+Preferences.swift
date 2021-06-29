@@ -28,6 +28,8 @@ private let log = SwiftyBeaver.self
 private protocol PreferencesStore: class {
     var preferredServer: Server? { get set }
     
+    var lastConnectedRegion: Server? { get set }
+    
     var isPersistentConnection: Bool { get set }
         
     var mace: Bool { get set }
@@ -64,6 +66,8 @@ private protocol PreferencesStore: class {
 
     var signInWithAppleFakeEmail: String? { get set }
 
+    var shareServiceQualityData: Bool { get set }
+
     func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration?
     
     func setVPNCustomConfiguration(_ customConfiguration: VPNCustomConfiguration, for vpnType: String)
@@ -95,6 +99,8 @@ private extension PreferencesStore {
         ikeV2EncryptionAlgorithm = source.ikeV2EncryptionAlgorithm
         ikeV2PacketSize = source.ikeV2PacketSize
         signInWithAppleFakeEmail = source.signInWithAppleFakeEmail
+        shareServiceQualityData = source.shareServiceQualityData
+        lastConnectedRegion = source.lastConnectedRegion
     }
 }
 
@@ -127,6 +133,15 @@ extension Client {
             }
             set {
                 accessedDatabase.plain.preferredServer = newValue
+            }
+        }
+        
+        public fileprivate(set) var lastConnectedRegion: Server? {
+            get {
+                return accessedDatabase.plain.lastConnectedRegion
+            }
+            set {
+                accessedDatabase.plain.lastConnectedRegion = newValue
             }
         }
         
@@ -355,6 +370,15 @@ extension Client {
             }
         }
 
+        /// Shares anonymous data to the service quality library.
+        public fileprivate(set) var shareServiceQualityData: Bool {
+            get {
+                return accessedDatabase.plain.shareServiceQualityData ?? false
+            }
+            set {
+                accessedDatabase.plain.shareServiceQualityData = newValue
+            }
+        }
 
     }
 }
@@ -370,6 +394,7 @@ extension Client.Preferences {
         
         fileprivate init() {
             preferredServer = nil
+            lastConnectedRegion = nil
             isPersistentConnection = true
             mace = false
             useWiFiProtection = true
@@ -390,6 +415,7 @@ extension Client.Preferences {
             ikeV2EncryptionAlgorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm.value()
             ikeV2PacketSize = 0
             signInWithAppleFakeEmail = nil
+            shareServiceQualityData = false
         }
 
         /**
@@ -418,6 +444,9 @@ extension Client.Preferences {
         /// :nodoc:
         public var preferredServer: Server?
         
+        /// :nodoc:
+        public var lastConnectedRegion: Server?
+
         /// :nodoc:
         public var isPersistentConnection: Bool
         
@@ -471,6 +500,9 @@ extension Client.Preferences {
 
         /// :nodoc:
         public var signInWithAppleFakeEmail: String?
+        
+        /// :nodoc:
+        public var shareServiceQualityData: Bool
 
         /// :nodoc:
         public func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration? {

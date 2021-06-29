@@ -63,3 +63,29 @@
 "walkthrough.page.2.description" = "With servers around the globe, you are always under protection.";
 "walkthrough.page.3.title" = "Protect yourself from ads";
 "walkthrough.page.3.description" = "Enabling our Content Blocker prevents ads from showing in Safari.";
+
+"share.data.buttons.accept" = "Accept";
+"share.data.buttons.noThanks" = "No, thanks";
+"share.data.buttons.readMore" = "Read more";
+"share.data.text.title" = "Please help us improve our service";
+"share.data.text.description" = "To help us ensure our service's connection performance, you can anonymously share your connection stats with us. These reports do not include any personally identifiable information.";
+"share.data.text.footer" = "You can always control this from your settings";
+
+"share.data.readMore.text.description" = "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";

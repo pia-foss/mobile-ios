@@ -36,6 +36,7 @@ internal enum Asset {
   internal static let shieldIcon = ImageAsset(name: "shield-icon")
   internal static let closeIcon = ImageAsset(name: "close-icon")
   internal static let imageAccountFailed = ImageAsset(name: "image-account-failed")
+  internal static let imageDocumentConsent = ImageAsset(name: "image-document-consent")
   internal static let imageNoInternet = ImageAsset(name: "image-no-internet")
   internal static let imagePurchaseSuccess = ImageAsset(name: "image-purchase-success")
   internal static let imageReceiptBackground = ImageAsset(name: "image-receipt-background")

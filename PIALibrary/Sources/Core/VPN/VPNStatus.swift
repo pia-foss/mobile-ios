@@ -36,6 +36,9 @@ public enum VPNStatus: String {
 
     /// The VPN is disconnected.
     case disconnected
+    
+    /// Unknown.
+    case unknown
 
 //    case changingServer
 }

@@ -41,7 +41,9 @@ protocol PlainStore: class {
     var cachedServers: [Server] { get set }
     
     var preferredServer: Server? { get set }
-        
+
+    var lastConnectedRegion: Server? { get set }
+
     func ping(forServerIdentifier serverIdentifier: String) -> Int?
     
     func setPing(_ ping: Int, forServerIdentifier serverIdentifier: String)
@@ -62,6 +64,8 @@ protocol PlainStore: class {
     var vpnDisconnectsOnSleep: Bool { get set }
     
     var vpnCustomConfigurationMaps: [String: [String: Any]]? { get set }
+
+    var lastKnownVpnStatus: VPNStatus { get set }
 
     // MARK: Preferences
     
@@ -104,5 +108,7 @@ protocol PlainStore: class {
     var trustCellularData: Bool? { get set }
 
     var trustedNetworks: [String] { get set }
+    
+    var shareServiceQualityData: Bool? { get set }
 
 }

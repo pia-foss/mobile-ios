@@ -105,6 +105,32 @@ internal enum L10n {
         }
       }
     }
+    internal enum Share {
+      internal enum Data {
+        internal enum Buttons {
+          /// Accept
+          internal static let accept = L10n.tr("Signup", "share.data.buttons.accept")
+          /// No, thanks
+          internal static let noThanks = L10n.tr("Signup", "share.data.buttons.noThanks")
+          /// Read more
+          internal static let readMore = L10n.tr("Signup", "share.data.buttons.readMore")
+        }
+        internal enum ReadMore {
+          internal enum Text {
+            /// This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.\n\nWe will collect information about the following events:\n\n    Connection Attempt\n\n    Connection Canceled\n\n    Connection Established\n\nFor all of these events, we will collect the following information:\n\n    Platform\n\n    App version\n\n    App type (pre-release or not)\n\n    Protocol used\n\n    Connection source (manual or using automation)\n\nAll events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.\n\nYou will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.
+            internal static let description = L10n.tr("Signup", "share.data.readMore.text.description")
+          }
+        }
+        internal enum Text {
+          /// To help us ensure our service's connection performance, you can anonymously share your connection stats with us. These reports do not include any personally identifiable information.
+          internal static let description = L10n.tr("Signup", "share.data.text.description")
+          /// You can always control this from your settings
+          internal static let footer = L10n.tr("Signup", "share.data.text.footer")
+          /// Please help us improve our service
+          internal static let title = L10n.tr("Signup", "share.data.text.title")
+        }
+      }
+    }
     internal enum Success {
       /// Thank you for signing up with us. We have sent your account username and password at your email address at %@
       internal static func messageFormat(_ p1: Any) -> String {
