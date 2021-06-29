@@ -33,6 +33,7 @@ $csi_repo = 'mobile-common-csi'
 $regions_gitlab_repo = 'regions.git'
 $accounts_gitlab_repo = 'account.git'
 $csi_gitlab_repo = 'csi.git'
+$kpi_gitlab_repo = 'kpi.git'
 
 def library_by_path(root)
     $library_subspecs.each { |name|
@@ -75,11 +76,12 @@ def shared_main_pods
     pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :branch => 'master'
     #pod "PIACSIModule", :git => "#{$git_root}/#{$csi_repo}"
     pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :branch => 'master'
+    pod "PIAKPIModule", :git => "#{$gitlab_kn_root}/#{$kpi_gitlab_repo}", :commit => 'b074f00'
 
     #library_by_path('')
     #library_by_git('b73d9e5')
-    library_by_gitlab_branch('feature/update_icons')
-    #library_by_gitlab_by_git('3f80d1d')
+    #library_by_gitlab_branch('')
+    library_by_gitlab_by_git('b61bdf5')
     #library_by_version('~> 1.1.3')
 end
 

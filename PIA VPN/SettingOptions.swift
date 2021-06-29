@@ -20,6 +20,7 @@
 //
 
 import Foundation
+import PIALibrary
 import UIKit
 
 public enum SettingOptions: Int, EnumsBuilder {
@@ -242,12 +243,16 @@ public enum AutomationSections: Int, SettingSection, EnumsBuilder {
 public enum HelpSections: Int, SettingSection, EnumsBuilder {
     
     case sendDebugLogs
+    case kpiShareStatistics
+    case kpiViewEvents
     case latestNews
     case version
 
     public func localizedTitleMessage() -> String {
         switch self {
         case .sendDebugLogs: return L10n.Settings.ApplicationInformation.Debug.title
+        case .kpiShareStatistics: return L10n.Settings.Service.Quality.Share.title
+        case .kpiViewEvents: return L10n.Settings.Service.Quality.Show.title
         case .latestNews: return L10n.Settings.Cards.History.title
         case .version: return L10n.Global.version
         }
@@ -256,13 +261,27 @@ public enum HelpSections: Int, SettingSection, EnumsBuilder {
     public func localizedSubtitleMessage() -> String {
         switch self {
         case .sendDebugLogs: return ""
+        case .kpiShareStatistics: return ""
+        case .kpiViewEvents: return ""
         case .latestNews: return ""
         case .version: return ""
         }
     }
     
     public static func all() -> [Self] {
-        return [.sendDebugLogs, .latestNews, .version]
+        if Client.configuration.featureFlags.contains(Client.FeatureFlags.shareServiceQualityData) {
+            return [.sendDebugLogs, .kpiShareStatistics, .latestNews, .version]
+        } else {
+            return [.sendDebugLogs, .latestNews, .version]
+        }
+    }
+    
+    public static func allWithEvents() -> [Self] {
+        if Client.configuration.featureFlags.contains(Client.FeatureFlags.shareServiceQualityData) {
+            return [.sendDebugLogs, .kpiShareStatistics, .kpiViewEvents, .latestNews, .version,]
+        } else {
+            return [.sendDebugLogs, .latestNews, .version]
+        }
     }
 
 }

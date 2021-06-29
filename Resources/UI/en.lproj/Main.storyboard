@@ -3408,6 +3408,7 @@
                     <connections>
                         <outlet property="tableView" destination="rdW-H6-pqW" id="6gm-1V-3VO"/>
                         <outlet property="viewContainer" destination="ArV-an-WLg" id="jrN-0X-5US"/>
+                        <segue destination="Ltp-Dt-4e7" kind="show" identifier="ServiceQualityDataSegueIdentifier" id="cX1-27-tCb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V0V-33-abO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3566,6 +3567,78 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XKF-x9-xRv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2916" y="-1450"/>
+        </scene>
+        <!--Stats-->
+        <scene sceneID="xVi-Kl-8nd">
+            <objects>
+                <viewController title="Stats" automaticallyAdjustsScrollViewInsets="NO" id="Ltp-Dt-4e7" customClass="ShowConnectionStatsViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kgw-5Z-a7U">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rci-Xn-b18">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nar-BK-d0k">
+                                        <rect key="frame" x="19" y="19" width="337" height="720"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmN-Nf-41V">
+                                                <rect key="frame" x="0.0" y="0.0" width="337" height="720"/>
+                                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <bool key="isElement" value="NO"/>
+                                                </accessibility>
+                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="13"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ia-VG-cL7">
+                                                <rect key="frame" x="0.0" y="670" width="337" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="LZn-on-mMG"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="2ia-VG-cL7" firstAttribute="trailing" secondItem="vmN-Nf-41V" secondAttribute="trailing" id="12n-nR-5u1"/>
+                                            <constraint firstItem="vmN-Nf-41V" firstAttribute="top" secondItem="nar-BK-d0k" secondAttribute="top" id="8Hi-bJ-1UG"/>
+                                            <constraint firstItem="2ia-VG-cL7" firstAttribute="bottom" secondItem="vmN-Nf-41V" secondAttribute="bottom" id="S4M-cH-bV7"/>
+                                            <constraint firstItem="2ia-VG-cL7" firstAttribute="leading" secondItem="vmN-Nf-41V" secondAttribute="leading" id="chf-lo-2x4"/>
+                                            <constraint firstAttribute="bottom" secondItem="vmN-Nf-41V" secondAttribute="bottom" id="lOs-tf-CqQ"/>
+                                            <constraint firstItem="vmN-Nf-41V" firstAttribute="leading" secondItem="nar-BK-d0k" secondAttribute="leading" id="mJp-vj-JNR"/>
+                                            <constraint firstAttribute="trailing" secondItem="vmN-Nf-41V" secondAttribute="trailing" id="zhF-ya-mKb"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="nar-BK-d0k" secondAttribute="trailing" constant="19" id="C4B-OR-thp"/>
+                                    <constraint firstItem="nar-BK-d0k" firstAttribute="top" secondItem="Rci-Xn-b18" secondAttribute="top" constant="19" id="ief-DI-AJj"/>
+                                    <constraint firstItem="nar-BK-d0k" firstAttribute="leading" secondItem="Rci-Xn-b18" secondAttribute="leading" constant="19" id="iro-JI-BQb"/>
+                                    <constraint firstAttribute="bottom" secondItem="nar-BK-d0k" secondAttribute="bottom" constant="19" id="jc6-kf-SmD"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="b11-U6-shN"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Rci-Xn-b18" secondAttribute="bottom" id="8h5-iF-kVe"/>
+                            <constraint firstItem="Rci-Xn-b18" firstAttribute="leading" secondItem="kgw-5Z-a7U" secondAttribute="leading" id="H0K-4q-IUc"/>
+                            <constraint firstItem="Rci-Xn-b18" firstAttribute="top" secondItem="b11-U6-shN" secondAttribute="top" id="MlO-VP-bd8"/>
+                            <constraint firstAttribute="trailing" secondItem="Rci-Xn-b18" secondAttribute="trailing" id="sMo-Sg-cYt"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="JAm-82-S5N"/>
+                    <connections>
+                        <outlet property="textData" destination="vmN-Nf-41V" id="TO3-eA-ku1"/>
+                        <outlet property="textDataContainer" destination="nar-BK-d0k" id="FPc-IQ-Zpg"/>
+                        <outlet property="viewContainer" destination="Rci-Xn-b18" id="dO3-JX-4Vx"/>
+                        <outlet property="viewDataFooter" destination="2ia-VG-cL7" id="Qr9-tw-hoB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iir-r1-gDA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1058" y="-2176"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
