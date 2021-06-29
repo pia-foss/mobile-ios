@@ -212,9 +212,21 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     private func configureShareDataFooterCell(_ cell: UITableViewCell) {
-        cell.textLabel?.text =  L10n.Settings.Service.Quality.Share.description
+        setupShareDataInformationLabel(cell.textLabel)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showShareDataInformation))
         cell.addGestureRecognizer(tapGesture)
+    }
+    
+    private func setupShareDataInformationLabel(_ label: UILabel?) {
+        let attributedString = NSMutableAttributedString()
+        let description = L10n.Settings.Service.Quality.Share.description
+        let carriageReturn = "\n"
+        let findOutMore = L10n.Settings.Service.Quality.Share.findoutmore
+        attributedString.append(NSAttributedString(string: description+carriageReturn,
+                                                   attributes: [.underlineStyle: 0]))
+        attributedString.append(NSAttributedString(string: findOutMore,
+                                                   attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue]))
+        label?.attributedText = attributedString
     }
     
     @objc private func showShareDataInformation() {

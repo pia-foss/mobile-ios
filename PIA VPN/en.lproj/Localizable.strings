@@ -264,7 +264,8 @@
 "settings.nmt.optout.disconnect.alerts.description" = "Disables the warning alert when disconnecting from the VPN.";
 "settings.nmt.wireguard.warning" = "WireGuard® doesn't need to reconnect when you switch between different networks. It may be necessary to manually disconnect the VPN on trusted networks.";
 "settings.service.quality.share.title" = "Help improve PIA";
-"settings.service.quality.share.description" = "Help us improve by sharing VPN connection statistics. These reports never contain personally identifiable information. Tap to find out more.";
+"settings.service.quality.share.description" = "Help us improve by sharing VPN connection statistics. These reports never contain personally identifiable information.";
+"settings.service.quality.share.findoutmore" = "Find out more";
 "settings.service.quality.show.title" = "Connection stats";
 
 "network.management.tool.open.wifi" = "Open WiFi";

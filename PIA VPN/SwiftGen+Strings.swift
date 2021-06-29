@@ -563,9 +563,9 @@ internal enum L10n {
       internal enum Tool {
         /// Your automation settings are configured to keep the VPN disconnected under the current network conditions.
         internal static let alert = L10n.tr("Localizable", "network.management.tool.alert")
-        /// Disable automation
+        /// Disable Automation
         internal static let disable = L10n.tr("Localizable", "network.management.tool.disable")
-        /// Manage automation
+        /// Manage Automation
         internal static let title = L10n.tr("Localizable", "network.management.tool.title")
         internal enum Add {
           /// Add new rule
@@ -1017,8 +1017,10 @@ internal enum L10n {
     internal enum Service {
       internal enum Quality {
         internal enum Share {
-          /// Help us improve by sharing VPN connection statistics. These reports never contain personally identifiable information. Tap to find out more.
+          /// Help us improve by sharing VPN connection statistics. These reports never contain personally identifiable information.
           internal static let description = L10n.tr("Localizable", "settings.service.quality.share.description")
+          /// Find out more
+          internal static let findoutmore = L10n.tr("Localizable", "settings.service.quality.share.findoutmore")
           /// Help improve PIA
           internal static let title = L10n.tr("Localizable", "settings.service.quality.share.title")
         }
