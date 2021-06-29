@@ -27,8 +27,6 @@ internal enum Asset {
   internal static let iconCamera = ImageAsset(name: "icon-camera")
   internal static let iconClose = ImageAsset(name: "icon-close")
   internal static let iconWarning = ImageAsset(name: "icon-warning")
-  internal static let logoDark = ImageAsset(name: "logo-dark")
-  internal static let logoLight = ImageAsset(name: "logo-light")
   internal static let pagecontrolSelectedDot = ImageAsset(name: "pagecontrol-selected-dot")
   internal static let pagecontrolUnselectedDot = ImageAsset(name: "pagecontrol-unselected-dot")
   internal static let planSelected = ImageAsset(name: "plan-selected")
@@ -68,7 +66,8 @@ internal struct ImageAsset {
     #if os(iOS) || os(tvOS)
     let image = Image(named: name, in: bundle, compatibleWith: nil)
     #elseif os(macOS)
-    let image = bundle.image(forResource: NSImage.Name(name))
+    let name = NSImage.Name(self.name)
+    let image = (bundle == .main) ? NSImage(named: name) : bundle.image(forResource: name)
     #elseif os(watchOS)
     let image = Image(named: name)
     #endif
@@ -97,7 +96,11 @@ internal extension ImageAsset.Image {
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
   }()
 }
 // swiftlint:enable convenience_type
