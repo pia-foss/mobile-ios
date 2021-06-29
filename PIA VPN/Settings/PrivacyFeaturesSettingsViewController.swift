@@ -182,7 +182,7 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
 
             
         case .safariContentBlocker:
-            cell.textLabel?.text = L10n.Settings.ContentBlocker.State.title
+            cell.textLabel?.text = L10n.Settings.ContentBlocker.title
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchContentBlocker
             cell.selectionStyle = .none
