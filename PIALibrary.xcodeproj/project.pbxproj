@@ -56,7 +56,6 @@
 		0E392D8D1FE2F8780002160D /* ConnectivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D8B1FE2F8780002160D /* ConnectivityStatus.swift */; };
 		0E392D8F1FE2FBBE0002160D /* GlossConnectivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D8E1FE2FBBE0002160D /* GlossConnectivityStatus.swift */; };
 		0E392D901FE2FBBE0002160D /* GlossConnectivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D8E1FE2FBBE0002160D /* GlossConnectivityStatus.swift */; };
-		0E392D961FE316860002160D /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D941FE316860002160D /* DebugLog.swift */; };
 		0E392D9D1FE31D630002160D /* MockVPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2ADD3F1FE156EA00BB170C /* MockVPNProvider.swift */; };
 		0E392D9E1FE31D630002160D /* MockVPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2ADD3F1FE156EA00BB170C /* MockVPNProvider.swift */; };
 		0E392DA01FE323ED0002160D /* PIAWebServices+Ephemeral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E392D9F1FE323ED0002160D /* PIAWebServices+Ephemeral.swift */; };
@@ -230,6 +229,8 @@
 		0EFEB4C520077AC900F81029 /* PIATunnelProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFEB4C02007784A00F81029 /* PIATunnelProfile.swift */; };
 		33A542AFDFD3AF0C27B27F45 /* Pods_PIALibrary_PIALibraryTests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C71CB55833441BB6B5D0B9FD /* Pods_PIALibrary_PIALibraryTests_iOS.framework */; };
 		3D93D3414A3DA19ECB04B778 /* Pods_PIALibrary_PIALibraryHost_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB01CE68711A898531418458 /* Pods_PIALibrary_PIALibraryHost_iOS.framework */; };
+		821674F7267A47670028E4FD /* LibraryConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821674F6267A47670028E4FD /* LibraryConstants.swift */; };
+		821674F8267A47670028E4FD /* LibraryConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821674F6267A47670028E4FD /* LibraryConstants.swift */; };
 		82183D7F25011D200033023F /* MagicLinkLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82183D7D25011D200033023F /* MagicLinkLoginViewController.swift */; };
 		82183D8025011D200033023F /* MagicLinkLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82183D7D25011D200033023F /* MagicLinkLoginViewController.swift */; };
 		8221921C24CEBA3800C24F1C /* NMTRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221921B24CEBA3800C24F1C /* NMTRules.swift */; };
@@ -239,6 +240,13 @@
 		822BC1D024BF20C90041BF9A /* UIControl+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BC1CF24BF20C90041BF9A /* UIControl+Action.swift */; };
 		824D981E266A1AC500FCD7DA /* staging.json in Resources */ = {isa = PBXBuildFile; fileRef = 824D981D266A1AC500FCD7DA /* staging.json */; };
 		824D981F266A1AC500FCD7DA /* staging.json in Resources */ = {isa = PBXBuildFile; fileRef = 824D981D266A1AC500FCD7DA /* staging.json */; };
+		8276E175260B5ED400BB7B40 /* ServiceQualityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8276E174260B5ED400BB7B40 /* ServiceQualityManager.swift */; };
+		8276E1E6260B961C00BB7B40 /* PIAKPIClientStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8276E1E5260B961B00BB7B40 /* PIAKPIClientStateProvider.swift */; };
+		8276E1ED260B962900BB7B40 /* PIAKPIStagingClientStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8276E1EC260B962900BB7B40 /* PIAKPIStagingClientStateProvider.swift */; };
+		8289AD882685C1FC00DA6A17 /* ShareDataInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8289AD862685C1FC00DA6A17 /* ShareDataInformationViewController.swift */; };
+		8289AD892685C1FC00DA6A17 /* ShareDataInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8289AD862685C1FC00DA6A17 /* ShareDataInformationViewController.swift */; };
+		8289AD8A2685C1FC00DA6A17 /* GDPRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8289AD872685C1FC00DA6A17 /* GDPRViewController.swift */; };
+		8289AD8B2685C1FC00DA6A17 /* GDPRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8289AD872685C1FC00DA6A17 /* GDPRViewController.swift */; };
 		829EB63F2535C432003E74DD /* DedicatedIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB63E2535C432003E74DD /* DedicatedIP.swift */; };
 		829EB6402535C432003E74DD /* DedicatedIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829EB63E2535C432003E74DD /* DedicatedIP.swift */; };
 		82C374F82514DE7D00E391EE /* EndpointManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C374F42514DC6D00E391EE /* EndpointManagerTests.swift */; };
@@ -283,7 +291,6 @@
 		AA319C5225833088004BECF6 /* PIACrashlabClientStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA319C4C25833088004BECF6 /* PIACrashlabClientStateProvider.swift */; };
 		BB70402C95EE5B6078D88D96 /* Pods_PIALibrary_PIALibrary_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC846CEFD1620AE3960B8AD /* Pods_PIALibrary_PIALibrary_iOS.framework */; };
 		DD0AC790218715B8009B576B /* PIAButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0AC78F218715B8009B576B /* PIAButton.swift */; };
-		DD0DE85022366090002A6E82 /* GDPRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0DE84F22366090002A6E82 /* GDPRViewController.swift */; };
 		DD1AB10123FAD79000396E74 /* PIAPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1AB10023FAD79000396E74 /* PIAPageControl.swift */; };
 		DD1AB10323FAD83900396E74 /* WalkthroughPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1AB10223FAD83900396E74 /* WalkthroughPageView.swift */; };
 		DD1AB10523FC280000396E74 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1AB10423FC280000396E74 /* DeviceModel.swift */; };
@@ -396,7 +403,6 @@
 		0E392D7C1FE2E4C10002160D /* MemoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStore.swift; sourceTree = "<group>"; };
 		0E392D8B1FE2F8780002160D /* ConnectivityStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityStatus.swift; sourceTree = "<group>"; };
 		0E392D8E1FE2FBBE0002160D /* GlossConnectivityStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlossConnectivityStatus.swift; sourceTree = "<group>"; };
-		0E392D941FE316860002160D /* DebugLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
 		0E392D9F1FE323ED0002160D /* PIAWebServices+Ephemeral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PIAWebServices+Ephemeral.swift"; sourceTree = "<group>"; };
 		0E392DA21FE3247E0002160D /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		0E392DAE1FE3366A0002160D /* NSData+Compression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Compression.m"; sourceTree = "<group>"; };
@@ -564,11 +570,17 @@
 		10DD9676BB5539C7984C65D9 /* Pods-PIALibrary-PIALibrary-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibrary-iOS.release.xcconfig"; path = "Target Support Files/Pods-PIALibrary-PIALibrary-iOS/Pods-PIALibrary-PIALibrary-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		67D8A0C15205E19B5912E3B7 /* Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig"; path = "Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		81CAB800806A3F61AEBB267F /* Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig"; path = "Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		821674F6267A47670028E4FD /* LibraryConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryConstants.swift; sourceTree = "<group>"; };
 		82183D7D25011D200033023F /* MagicLinkLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLinkLoginViewController.swift; sourceTree = "<group>"; };
 		8221921B24CEBA3800C24F1C /* NMTRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMTRules.swift; sourceTree = "<group>"; };
 		8221921E24CEBABA00C24F1C /* NMTType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMTType.swift; sourceTree = "<group>"; };
 		822BC1CF24BF20C90041BF9A /* UIControl+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Action.swift"; sourceTree = "<group>"; };
 		824D981D266A1AC500FCD7DA /* staging.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = staging.json; sourceTree = "<group>"; };
+		8276E174260B5ED400BB7B40 /* ServiceQualityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceQualityManager.swift; sourceTree = "<group>"; };
+		8276E1E5260B961B00BB7B40 /* PIAKPIClientStateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAKPIClientStateProvider.swift; sourceTree = "<group>"; };
+		8276E1EC260B962900BB7B40 /* PIAKPIStagingClientStateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAKPIStagingClientStateProvider.swift; sourceTree = "<group>"; };
+		8289AD862685C1FC00DA6A17 /* ShareDataInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareDataInformationViewController.swift; sourceTree = "<group>"; };
+		8289AD872685C1FC00DA6A17 /* GDPRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GDPRViewController.swift; sourceTree = "<group>"; };
 		829EB63E2535C432003E74DD /* DedicatedIP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DedicatedIP.swift; sourceTree = "<group>"; };
 		82C374F42514DC6D00E391EE /* EndpointManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointManagerTests.swift; sourceTree = "<group>"; };
 		82C374F62514DC7200E391EE /* server.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = server.json; sourceTree = "<group>"; };
@@ -601,7 +613,6 @@
 		D9F51336EB1D7EC915A230E8 /* Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig"; path = "Target Support Files/Pods-PIALibrary-PIALibraryHost-iOS/Pods-PIALibrary-PIALibraryHost-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		DB01CE68711A898531418458 /* Pods_PIALibrary_PIALibraryHost_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIALibrary_PIALibraryHost_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD0AC78F218715B8009B576B /* PIAButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAButton.swift; sourceTree = "<group>"; };
-		DD0DE84F22366090002A6E82 /* GDPRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GDPRViewController.swift; path = PIALibrary/Sources/UI/iOS/GDPRViewController.swift; sourceTree = SOURCE_ROOT; };
 		DD1AB10023FAD79000396E74 /* PIAPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIAPageControl.swift; sourceTree = "<group>"; };
 		DD1AB10223FAD83900396E74 /* WalkthroughPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkthroughPageView.swift; sourceTree = "<group>"; };
 		DD1AB10423FC280000396E74 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
@@ -863,7 +874,6 @@
 				82E20B1024F652ED0065EFE3 /* AccountInfo+Kotlin.swift */,
 				0E392D8B1FE2F8780002160D /* ConnectivityStatus.swift */,
 				0EE78AF51F81880E002E4CDD /* Credentials.swift */,
-				0E392D941FE316860002160D /* DebugLog.swift */,
 				0EE771081F9D21020029A77B /* Payment.swift */,
 				0EE1068B1F8250A1009514E9 /* Plan.swift */,
 				0EA8072620A1A0090033EC1A /* Redeem.swift */,
@@ -1025,6 +1035,7 @@
 		0EE106901F82900B009514E9 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				8276E173260B5EC500BB7B40 /* ServiceQuality */,
 				8221921A24CEBA0800C24F1C /* NMT */,
 				DDFCFAB821E926750081F235 /* Util */,
 				DDFCFAA521E900650081F235 /* Tiles */,
@@ -1038,6 +1049,7 @@
 				0EB8C0471F9CCE07005857E4 /* Macros.swift */,
 				0EFB51261F82A5F80033B81F /* Notification+Core.swift */,
 				0E3D13CC1F9DDD2400434A48 /* NotificationKey.swift */,
+				821674F6267A47670028E4FD /* LibraryConstants.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1177,6 +1189,14 @@
 			path = Staging;
 			sourceTree = "<group>";
 		};
+		8276E173260B5EC500BB7B40 /* ServiceQuality */ = {
+			isa = PBXGroup;
+			children = (
+				8276E174260B5ED400BB7B40 /* ServiceQualityManager.swift */,
+			);
+			path = ServiceQuality;
+			sourceTree = "<group>";
+		};
 		82FD5D542521F2B600E390CB /* Providers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1186,6 +1206,8 @@
 				82FD5D552521F2DD00E390CB /* PIARegionClientStateProvider.swift */,
 				82FD5D5D2521F30300E390CB /* PIAAccountClientStateProvider.swift */,
 				82FD5D652521F32B00E390CB /* PIAAccountStagingClientStateProvider.swift */,
+				8276E1E5260B961B00BB7B40 /* PIAKPIClientStateProvider.swift */,
+				8276E1EC260B962900BB7B40 /* PIAKPIStagingClientStateProvider.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -1203,13 +1225,14 @@
 		84577FC6213E7D68006DEC3D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8289AD872685C1FC00DA6A17 /* GDPRViewController.swift */,
+				8289AD862685C1FC00DA6A17 /* ShareDataInformationViewController.swift */,
 				0EB8C0521F9CD38A005857E4 /* AutolayoutViewController.swift */,
 				0EB8C0511F9CD38A005857E4 /* LoginViewController.swift */,
 				0E48A8521FDAD60900B9A4C0 /* OptionsViewController.swift */,
 				0EB8C0531F9CD38A005857E4 /* PIAWelcomeViewController.swift */,
 				0EB8C0551F9CD38A005857E4 /* PurchaseViewController.swift */,
 				DDA184D022FC1F79003239CC /* TermsAndConditionsViewController.swift */,
-				DD0DE84F22366090002A6E82 /* GDPRViewController.swift */,
 				0EB8C0561F9CD38A005857E4 /* RestoreSignupViewController.swift */,
 				0EB8C0571F9CD38A005857E4 /* SignupFailureViewController.swift */,
 				0EB8C0581F9CD38A005857E4 /* SignupInProgressViewController.swift */,
@@ -1541,6 +1564,8 @@
 				"${BUILT_PRODUCTS_DIR}/PIAAccountModule/PIAAccountModule.framework",
 				"${PODS_ROOT}/PIACSIModule/build/cocoapods/framework/PIACSI.framework",
 				"${BUILT_PRODUCTS_DIR}/PIACSIModule/PIACSIModule.framework",
+				"${PODS_ROOT}/PIAKPIModule/build/cocoapods/framework/PIAKPI.framework",
+				"${BUILT_PRODUCTS_DIR}/PIAKPIModule/PIAKPIModule.framework",
 				"${PODS_ROOT}/PIARegionsModule/build/cocoapods/framework/PIARegions.framework",
 				"${BUILT_PRODUCTS_DIR}/PIARegionsModule/PIARegionsModule.framework",
 				"${BUILT_PRODUCTS_DIR}/PIAWireguard/PIAWireguard.framework",
@@ -1552,7 +1577,6 @@
 				"${BUILT_PRODUCTS_DIR}/TunnelKit/TunnelKit.framework",
 				"${BUILT_PRODUCTS_DIR}/TweetNacl/TweetNacl.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/openssl/openssl.framework/openssl",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1564,6 +1588,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAAccountModule.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIACSI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIACSIModule.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAKPI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAKPIModule.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIARegions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIARegionsModule.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAWireguard.framework",
@@ -1575,7 +1601,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TunnelKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TweetNacl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1663,6 +1688,8 @@
 				"${BUILT_PRODUCTS_DIR}/PIAAccountModule/PIAAccountModule.framework",
 				"${PODS_ROOT}/PIACSIModule/build/cocoapods/framework/PIACSI.framework",
 				"${BUILT_PRODUCTS_DIR}/PIACSIModule/PIACSIModule.framework",
+				"${PODS_ROOT}/PIAKPIModule/build/cocoapods/framework/PIAKPI.framework",
+				"${BUILT_PRODUCTS_DIR}/PIAKPIModule/PIAKPIModule.framework",
 				"${PODS_ROOT}/PIARegionsModule/build/cocoapods/framework/PIARegions.framework",
 				"${BUILT_PRODUCTS_DIR}/PIARegionsModule/PIARegionsModule.framework",
 				"${BUILT_PRODUCTS_DIR}/PIAWireguard/PIAWireguard.framework",
@@ -1674,7 +1701,6 @@
 				"${BUILT_PRODUCTS_DIR}/TunnelKit/TunnelKit.framework",
 				"${BUILT_PRODUCTS_DIR}/TweetNacl/TweetNacl.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/openssl/openssl.framework/openssl",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1686,6 +1712,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAAccountModule.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIACSI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIACSIModule.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAKPI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAKPIModule.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIARegions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIARegionsModule.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAWireguard.framework",
@@ -1697,7 +1725,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TunnelKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TweetNacl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1728,15 +1755,16 @@
 				0E392DBC1FE34B5A0002160D /* NSString+URL.m in Sources */,
 				84125E0C213D7E0E001BCC19 /* PIAFonts.swift in Sources */,
 				0E3D13DA1F9E273300434A48 /* GlossSignup.swift in Sources */,
-				0E392D961FE316860002160D /* DebugLog.swift in Sources */,
 				0E7BC6EB1F96B1040035C8B2 /* PIAWebServices.swift in Sources */,
 				829EB6402535C432003E74DD /* DedicatedIP.swift in Sources */,
 				0E245C9E1FECF0C20010DEF2 /* ClientAccess.swift in Sources */,
 				DD2683EA24617F0300C65DAA /* PingTask.swift in Sources */,
+				821674F8267A47670028E4FD /* LibraryConstants.swift in Sources */,
 				0E9D62D21FDEBBC8009A90CF /* GlossServersBundle.swift in Sources */,
 				0E7BC6FB1F96B1120035C8B2 /* LibraryCallback.swift in Sources */,
 				0E3D13D41F9E270A00434A48 /* GlossAccountInfo.swift in Sources */,
 				0E9D62D31FDEBBFD009A90CF /* GlossServer.swift in Sources */,
+				8289AD8B2685C1FC00DA6A17 /* GDPRViewController.swift in Sources */,
 				AA319C4E25833088004BECF6 /* PIACrashlabRegionInformationProvider.swift in Sources */,
 				82FD5D672521F32B00E390CB /* PIAAccountStagingClientStateProvider.swift in Sources */,
 				82C4962A25642D5800233CB1 /* String+Random.swift in Sources */,
@@ -1760,6 +1788,7 @@
 				0E3D13D71F9E272B00434A48 /* GlossPayment.swift in Sources */,
 				0E2ADD491FE1595300BB170C /* IPSecProfile.swift in Sources */,
 				0E7BC6F41F96B1120035C8B2 /* SecureStore.swift in Sources */,
+				8289AD892685C1FC00DA6A17 /* ShareDataInformationViewController.swift in Sources */,
 				8221922024CEBABA00C24F1C /* NMTType.swift in Sources */,
 				0EFEB4C3200778BC00F81029 /* NSData+Compression.m in Sources */,
 				0EFEB4C520077AC900F81029 /* PIATunnelProfile.swift in Sources */,
@@ -1919,6 +1948,7 @@
 				0EA8072F20A1E7C60033EC1A /* GlossRedeem.swift in Sources */,
 				0EA4C4311FDDD48F0041C3D8 /* Server.swift in Sources */,
 				DD56E3F4225F5D22002EDFB2 /* GlossProduct.swift in Sources */,
+				8276E175260B5ED400BB7B40 /* ServiceQualityManager.swift in Sources */,
 				DD7411A923EC35B40058CEF3 /* PIAWGTunnelProfile.swift in Sources */,
 				84577FC5213D9B4D006DEC3D /* UILabel+LineHeight.swift in Sources */,
 				0EB9667E1FDF36490086ABC2 /* GlossParser.swift in Sources */,
@@ -1965,6 +1995,7 @@
 				0E3D13D31F9E270A00434A48 /* GlossAccountInfo.swift in Sources */,
 				0E245C9D1FECF0C20010DEF2 /* ClientAccess.swift in Sources */,
 				0EF14E4B1FEAE6350007485A /* Client+Providers.swift in Sources */,
+				8289AD882685C1FC00DA6A17 /* ShareDataInformationViewController.swift in Sources */,
 				DD2683E924617F0300C65DAA /* PingTask.swift in Sources */,
 				84577FC1213D9A23006DEC3D /* UIImage+Color.swift in Sources */,
 				82FD5D562521F2DD00E390CB /* PIARegionClientStateProvider.swift in Sources */,
@@ -1987,23 +2018,26 @@
 				0E2ADD481FE1595300BB170C /* IPSecProfile.swift in Sources */,
 				0EFB51271F82A5F80033B81F /* Notification+Core.swift in Sources */,
 				0EE261E01FEFD69F00E11955 /* Notification+Library.swift in Sources */,
+				821674F7267A47670028E4FD /* LibraryConstants.swift in Sources */,
 				0EFEB4C22007784A00F81029 /* PIATunnelProfile.swift in Sources */,
 				DD1AB10523FC280000396E74 /* DeviceModel.swift in Sources */,
 				0E392DBB1FE34B5A0002160D /* NSString+URL.m in Sources */,
 				AA319C4F25833088004BECF6 /* PIACrashlabProtocolInformationProvider.swift in Sources */,
+				8276E1E6260B961C00BB7B40 /* PIAKPIClientStateProvider.swift in Sources */,
 				0E2ADCCA1FE06D7A00BB170C /* Array+Math.swift in Sources */,
 				0E2ADD331FE1472F00BB170C /* VPNStatus.swift in Sources */,
 				0E0F95961FD560C40046DC64 /* CircleProgressView.swift in Sources */,
 				DD6DC5B921B6A83400F9D538 /* UIViewLoading.swift in Sources */,
 				0E2ADCF11FE09C6C00BB170C /* ServersPinger.swift in Sources */,
 				0E2ADD4F1FE15C2200BB170C /* VPNConfiguration.swift in Sources */,
+				8289AD8A2685C1FC00DA6A17 /* GDPRViewController.swift in Sources */,
 				0EA7065F1F80F448001E4F88 /* AccountProvider.swift in Sources */,
 				0E392D7A1FE2E47D0002160D /* TransientStore.swift in Sources */,
-				DD0DE85022366090002A6E82 /* GDPRViewController.swift in Sources */,
 				8221921F24CEBABA00C24F1C /* NMTType.swift in Sources */,
 				0EAA388C1F9CC4C4000149CF /* InAppProvider.swift in Sources */,
 				DDFCFAA821E924A70081F235 /* TileProvider.swift in Sources */,
 				0EB8C06D1F9CD38B005857E4 /* SignupInProgressViewController.swift in Sources */,
+				8276E1ED260B962900BB7B40 /* PIAKPIStagingClientStateProvider.swift in Sources */,
 				0ED1585A1FDC083F008F6522 /* SwiftGen+Strings.swift in Sources */,
 				0E2ADCE91FE0843000BB170C /* Macros+Pinger.swift in Sources */,
 				DDD824EA2189CD5700151709 /* NavigationLogoView.swift in Sources */,

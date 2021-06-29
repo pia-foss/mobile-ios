@@ -25,6 +25,13 @@ import Alamofire
 
 extension Client {
     
+    public struct FeatureFlags {
+        public static let dedicatedIp = "dedicated-ip"
+        public static let disableMultiDipTokens = "disable-multi-dip-tokens"
+        public static let checkDipExpirationRequest = "check-dip-expiration-request"
+        public static let shareServiceQualityData = "service-quality-enabled"
+    }
+    
     /// Encapsulates internal and public parameters of the client. When not specified otherwise, time intervals are in milliseconds.
     public final class Configuration {
 

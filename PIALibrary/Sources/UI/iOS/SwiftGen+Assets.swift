@@ -38,6 +38,7 @@ internal enum Asset {
   internal static let shieldIcon = ImageAsset(name: "shield-icon")
   internal static let closeIcon = ImageAsset(name: "close-icon")
   internal static let imageAccountFailed = ImageAsset(name: "image-account-failed")
+  internal static let imageDocumentConsent = ImageAsset(name: "image-document-consent")
   internal static let imageNoInternet = ImageAsset(name: "image-no-internet")
   internal static let imagePurchaseSuccess = ImageAsset(name: "image-purchase-success")
   internal static let imageReceiptBackground = ImageAsset(name: "image-receipt-background")
@@ -68,7 +69,8 @@ internal struct ImageAsset {
     #if os(iOS) || os(tvOS)
     let image = Image(named: name, in: bundle, compatibleWith: nil)
     #elseif os(macOS)
-    let image = bundle.image(forResource: NSImage.Name(name))
+    let name = NSImage.Name(self.name)
+    let image = (bundle == .main) ? NSImage(named: name) : bundle.image(forResource: name)
     #elseif os(watchOS)
     let image = Image(named: name)
     #endif
@@ -97,7 +99,11 @@ internal extension ImageAsset.Image {
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
   }()
 }
 // swiftlint:enable convenience_type

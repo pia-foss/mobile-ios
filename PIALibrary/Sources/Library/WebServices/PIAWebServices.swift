@@ -50,13 +50,13 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             self.accountAPI = AccountBuilder<IOSAccountAPI>()
                 .setPlatform(platform: .ios)
                 .setClientStateProvider(clientStateProvider: PIAAccountStagingClientStateProvider())
-                .setUserAgentValue(userAgentValue: userAgent)
+                .setUserAgentValue(userAgentValue: PIAWebServices.userAgent)
                 .build() as? IOSAccountAPI
         } else {
             self.accountAPI = AccountBuilder<IOSAccountAPI>()
                 .setPlatform(platform: .ios)
                 .setClientStateProvider(clientStateProvider: PIAAccountClientStateProvider())
-                .setUserAgentValue(userAgentValue: userAgent)
+                .setUserAgentValue(userAgentValue: PIAWebServices.userAgent)
                 .build() as? IOSAccountAPI
         }
         
@@ -73,7 +73,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             .build()
     }
     
-    private let userAgent: String = {
+    public static let userAgent: String = {
         if let info = Bundle.main.infoDictionary {
             let executable = info[kCFBundleExecutableKey as String] as? String ?? "Unknown"
             let bundle = info[kCFBundleIdentifierKey as String] as? String ?? "Unknown"

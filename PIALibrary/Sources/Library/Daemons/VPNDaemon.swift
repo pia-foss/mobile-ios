@@ -68,19 +68,30 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             nextStatus = .connected
             
             let previousStatus = accessedDatabase.transient.vpnStatus
+            let lastKnownVpnStatus = accessedDatabase.plain.lastKnownVpnStatus
+            
             guard (nextStatus != previousStatus) else {
                 return
             }
 
             invalidateTimer()
             reset()
-
+            
+            if lastKnownVpnStatus != .unknown, lastKnownVpnStatus != .connected, Client.preferences.shareServiceQualityData {
+                ServiceQualityManager.shared.connectionEstablishedEvent()
+            }
+            
         case .connecting, .reasserting:
             
             nextStatus = .connecting
                         
             let previousStatus = accessedDatabase.transient.vpnStatus
-                
+            let lastKnownVpnStatus = accessedDatabase.plain.lastKnownVpnStatus
+            
+            if lastKnownVpnStatus == .disconnected, Client.preferences.shareServiceQualityData, self.numberOfAttempts == 0 {
+                ServiceQualityManager.shared.connectionAttemptEvent()
+            }
+
             if fallbackTimer == nil {
                 
                 fallbackTimer = Timer.scheduledTimer(withTimeInterval: Client.configuration.vpnConnectivityRetryDelay, repeats: true) { timer in
@@ -129,6 +140,8 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         guard (nextStatus != previousStatus) else {
             return
         }
+        
+        accessedDatabase.plain.lastKnownVpnStatus = nextStatus
         
         if !isReconnecting {
             accessedDatabase.transient.vpnStatus = nextStatus

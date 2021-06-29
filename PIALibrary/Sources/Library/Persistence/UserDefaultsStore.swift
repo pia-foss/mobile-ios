@@ -44,6 +44,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         
         static let preferredServer = "CurrentRegion" // legacy
 
+        static let lastConnectedRegion = "LastConnectedRegion" 
+
         static let preferredServerDIPToken = "CurrentRegionDIPToken"
         
         static let pingByServerIdentifier = "PingByServerIdentifier"
@@ -53,6 +55,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         static let vpnDisconnectsOnSleep = "VPNDisconnectsOnSleep"
         
         static let vpnCustomConfigurationMaps = "VPNCustomConfigurationMaps"
+
+        static let lastKnownVpnStatus = "LastKnownVPNStatus"
 
         static let persistentConnection = "PersistentConnection" // legacy
 
@@ -89,6 +93,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         static let nmtTemporaryOpenNetworks = "NMTTemporaryOpenNetworks"
 
         static let nmtGenericRules = "NMTGenericRules"
+
+        static let shareServiceQualityData = "ShareServiceQualityData"
 
     }
     
@@ -311,6 +317,16 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
     
+    var lastConnectedRegion: Server? {
+        get {
+            let identifier = backend.string(forKey: Entries.lastConnectedRegion)
+            return cachedServers.first { $0.identifier == identifier }
+        }
+        set {
+            backend.set(newValue?.identifier, forKey: Entries.lastConnectedRegion)
+        }
+    }
+    
     var preferredServerDIPToken: String? {
         get {
             return backend.string(forKey: Entries.preferredServerDIPToken)
@@ -372,6 +388,17 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.vpnCustomConfigurationMaps)
         }
     }
+    
+    var lastKnownVpnStatus: VPNStatus {
+        get {
+            return VPNStatus(rawValue: backend.string(forKey: Entries.lastKnownVpnStatus) ?? "") ?? .unknown
+        }
+        set {
+            backend.set(newValue.rawValue, forKey: Entries.lastKnownVpnStatus)
+        }
+
+    }
+
     
     // MARK: Preferences
 
@@ -453,6 +480,15 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
         set {
             backend.set(newValue, forKey: Entries.signInWithAppleFakeEmail)
+        }
+    }
+    
+    var shareServiceQualityData: Bool? {
+        get {
+            return backend.bool(forKey: Entries.shareServiceQualityData)
+        }
+        set {
+            backend.set(newValue, forKey: Entries.shareServiceQualityData)
         }
     }
 
@@ -580,6 +616,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.ikeV2PacketSize)
         backend.removeObject(forKey: Entries.serverNetwork)
         backend.removeObject(forKey: Entries.signInWithAppleFakeEmail)
+        backend.removeObject(forKey: Entries.shareServiceQualityData)
         backend.synchronize()
     }
 
