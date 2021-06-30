@@ -109,8 +109,8 @@ class MenuViewController: AutolayoutViewController {
         .dedicatedIp: Asset.iconDip,
         .settings: Asset.iconSettings,
         .logout: Asset.iconLogout,
-        .about: Asset.iconAbout,
-        .privacy: Asset.iconPrivacy,
+        .about: Asset.iconmenuAbout,
+        .privacy: Asset.iconmenuPrivacy,
         .homepage: Asset.iconHomepage,
         .support: Asset.iconContact,
         .version: Asset.iconAccount
