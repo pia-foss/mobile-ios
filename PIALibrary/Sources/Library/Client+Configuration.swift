@@ -44,6 +44,9 @@ extension Client {
         /// If `true`, expose development features.
         public var isDevelopment: Bool
         
+        /// If `true`, expose development features.
+        public var isManualConnection: Bool
+
         // MARK: WebServices
         
         private var baseUrls: [Client.Environment: String]
@@ -168,6 +171,7 @@ extension Client {
         init() {
 
             isDevelopment = false
+            isManualConnection = false
 
             let production = "https://www.privateinternetaccess.com"
             baseUrls = [

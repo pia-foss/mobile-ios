@@ -81,6 +81,9 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                 ServiceQualityManager.shared.connectionEstablishedEvent()
             }
             
+            //Connection successful, the user interaction finished
+            Client.configuration.isManualConnection = false
+            
         case .connecting, .reasserting:
             
             nextStatus = .connecting
@@ -124,6 +127,8 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             nextStatus = .disconnected
             
             let previousStatus = accessedDatabase.transient.vpnStatus
+            let lastKnownVpnStatus = accessedDatabase.plain.lastKnownVpnStatus
+            
             guard (nextStatus != previousStatus) else {
                 return
             }
@@ -132,6 +137,17 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                 invalidateTimer()
                 reset()
             }
+            
+            //triggered only when the user is manually aborting connection (before being established).
+            if Client.configuration.isManualConnection,
+               lastKnownVpnStatus != .unknown, lastKnownVpnStatus != .disconnected,
+               Client.preferences.shareServiceQualityData {
+                ServiceQualityManager.shared.connectionCancelledEvent()
+            }
+
+            //VPN disconnected, the user interaction finished
+            Client.configuration.isManualConnection = false
+
         default:
             nextStatus = .disconnected
         }
