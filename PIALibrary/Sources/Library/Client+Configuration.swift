@@ -44,7 +44,7 @@ extension Client {
         /// If `true`, expose development features.
         public var isDevelopment: Bool
         
-        /// If `true`, expose development features.
+        /// If `true`, the connection to the VPN was initiated by the user
         public var isManualConnection: Bool
 
         // MARK: WebServices

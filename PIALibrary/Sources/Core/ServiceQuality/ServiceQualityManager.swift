@@ -83,14 +83,14 @@ public class ServiceQualityManager: NSObject {
     }
     
     public func connectionAttemptEvent() {
-        let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.vpnConnectionAttempt, eventProperties: KPIClientEvent.EventProperties(connectionSource: isManual(), data: nil, preRelease: isPreRelease(), reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
+        let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.vpnConnectionAttempt, eventProperties: KPIClientEvent.EventProperties(connectionSource: connectionSource(), data: nil, preRelease: isPreRelease(), reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
         kpiManager?.submit(event: event) { (error) in
             log.debug("Event sent \(event)")
         }
     }
 
     public func connectionEstablishedEvent() {
-        let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.vpnConnectionEstablished, eventProperties: KPIClientEvent.EventProperties(connectionSource: isManual(), data: nil, preRelease: isPreRelease(), reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
+        let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.vpnConnectionEstablished, eventProperties: KPIClientEvent.EventProperties(connectionSource: connectionSource(), data: nil, preRelease: isPreRelease(), reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
         kpiManager?.submit(event: event) { (error) in
             log.debug("Event sent \(event)")
         }
@@ -98,7 +98,7 @@ public class ServiceQualityManager: NSObject {
 
     
     public func connectionCancelledEvent() {
-        let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.vpnConnectionCancelled, eventProperties: KPIClientEvent.EventProperties(connectionSource: isManual(), data: nil, preRelease: isPreRelease(), reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
+        let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.vpnConnectionCancelled, eventProperties: KPIClientEvent.EventProperties(connectionSource: connectionSource(), data: nil, preRelease: isPreRelease(), reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
         kpiManager?.submit(event: event) { (error) in
             log.debug("Event sent \(event)")
         }
@@ -114,7 +114,7 @@ public class ServiceQualityManager: NSObject {
         return Client.environment == .staging ? true : false
     }
     
-    private func isManual() -> KPIConnectionSource {
+    private func connectionSource() -> KPIConnectionSource {
         return Client.configuration.isManualConnection ? .manual : .automatic
     }
     
