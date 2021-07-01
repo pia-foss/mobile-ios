@@ -26,6 +26,10 @@ import UIKit
 public class NavigationLogoView: UIView {
     private let imvLogo: UIImageView
     
+    private struct Defaults {
+        static let maxWidth: CGFloat = 100
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("Not implemented")
     }
@@ -49,7 +53,7 @@ public class NavigationLogoView: UIView {
         var imageSize = imageLogo.size
         //        if !Macros.isDevicePad {
         let logoRatio: CGFloat = imageLogo.size.width / imageLogo.size.height
-        imageSize.width = min(imageLogo.size.width, 150.0)
+        imageSize.width = min(imageLogo.size.width, Defaults.maxWidth)
         imageSize.height = imageSize.width / logoRatio
         //        }
         
