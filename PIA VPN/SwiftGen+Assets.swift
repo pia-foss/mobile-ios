@@ -412,7 +412,6 @@ enum Asset {
   static let icon3dtDisconnect = ImageAsset(name: "icon-3dt-disconnect")
   static let icon3dtSelectRegion = ImageAsset(name: "icon-3dt-select-region")
   static let iconAbout1 = ImageAsset(name: "icon-about-1")
-  static let iconAbout = ImageAsset(name: "icon-about")
   static let iconAccount = ImageAsset(name: "icon-account")
   static let iconAdd = ImageAsset(name: "icon-add")
   static let iconAlert = ImageAsset(name: "icon-alert")
@@ -429,13 +428,14 @@ enum Asset {
   static let iconLogout = ImageAsset(name: "icon-logout")
   static let iconNetwork = ImageAsset(name: "icon-network")
   static let iconPrivacy1 = ImageAsset(name: "icon-privacy-1")
-  static let iconPrivacy = ImageAsset(name: "icon-privacy")
   static let iconProtocols = ImageAsset(name: "icon-protocols")
   static let iconRegion = ImageAsset(name: "icon-region")
   static let iconRemove = ImageAsset(name: "icon-remove")
   static let iconSettings = ImageAsset(name: "icon-settings")
   static let iconWarning = ImageAsset(name: "icon-warning")
   static let iconWifi = ImageAsset(name: "icon-wifi")
+  static let iconmenuAbout = ImageAsset(name: "iconmenu-about")
+  static let iconmenuPrivacy = ImageAsset(name: "iconmenu-privacy")
   static let imageContentBlocker = ImageAsset(name: "image-content-blocker")
   static let imagePurchaseSuccess = ImageAsset(name: "image-purchase-success")
   static let imageRobot = ImageAsset(name: "image-robot")
@@ -792,7 +792,6 @@ enum Asset {
     icon3dtDisconnect,
     icon3dtSelectRegion,
     iconAbout1,
-    iconAbout,
     iconAccount,
     iconAdd,
     iconAlert,
@@ -809,13 +808,14 @@ enum Asset {
     iconLogout,
     iconNetwork,
     iconPrivacy1,
-    iconPrivacy,
     iconProtocols,
     iconRegion,
     iconRemove,
     iconSettings,
     iconWarning,
     iconWifi,
+    iconmenuAbout,
+    iconmenuPrivacy,
     imageContentBlocker,
     imagePurchaseSuccess,
     imageRobot,

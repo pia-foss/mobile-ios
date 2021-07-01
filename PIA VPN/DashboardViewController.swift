@@ -362,6 +362,10 @@ class DashboardViewController: AutolayoutViewController {
     }
 
     @IBAction func vpnButtonClicked(_ sender: Any?) {
+        
+        //User clicked the button, the connection or disconnection of the VPN was manual
+        Client.configuration.isManualConnection = true
+        
         if !toggleConnection.isOn,
             Client.providers.vpnProvider.vpnStatus != .disconnecting,
             Client.providers.vpnProvider.vpnStatus != .connecting {
@@ -400,10 +404,6 @@ class DashboardViewController: AutolayoutViewController {
             
         } else {
             
-            if Client.preferences.shareServiceQualityData {
-                ServiceQualityManager.shared.connectionCancelledEvent()
-            }
-
             disconnectWithOneSecondDelay()
 
         }

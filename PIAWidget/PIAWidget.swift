@@ -150,6 +150,7 @@ struct PIAWidget: Widget {
             PIAWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("PIA VPN")
+        .description("")
         .supportedFamilies([.systemSmall, .systemMedium])
 
     }

@@ -41,10 +41,6 @@ class ShowConnectionStatsViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        var textInset = textData.textContainerInset
-        textInset.bottom = 20.0
-        textData.textContainerInset = textInset
-
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
 

@@ -31,6 +31,10 @@ public extension Tileable {
      - Parameter server: The server to connect.
      */
     func connectTo(server: Server) {
+        
+        //User clicked the button, the selection of the region to connect the VPN was manual
+        Client.configuration.isManualConnection = true
+
         let isConnected = Client.providers.vpnProvider.isVPNConnected
         let currentServer = Client.preferences.displayedServer
         if isConnected {
