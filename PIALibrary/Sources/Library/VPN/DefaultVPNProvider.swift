@@ -135,7 +135,8 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
     
     func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?) {
         guard accessedProviders.accountProvider.isLoggedIn else {
-            preconditionFailure()
+            callback?(ClientError.unauthorized)
+            return
         }
         let newVPNType = accessedPreferences.vpnType
         guard let profile = accessedConfiguration.profile(forVPNType: newVPNType) else {
@@ -220,7 +221,8 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
     
     func connect(_ callback: SuccessLibraryCallback?) {
         guard accessedProviders.accountProvider.isLoggedIn else {
-            preconditionFailure()
+            callback?(ClientError.unauthorized)
+            return
         }
         guard let activeProfile = activeProfile else {
             preconditionFailure()
@@ -230,7 +232,8 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
     
     func disconnect(_ callback: SuccessLibraryCallback?) {
         guard accessedProviders.accountProvider.isLoggedIn else {
-            preconditionFailure()
+            callback?(ClientError.unauthorized)
+            return
         }
         guard let activeProfile = activeProfile else {
             preconditionFailure()
@@ -247,7 +250,8 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
     
     func updatePreferences(_ callback: SuccessLibraryCallback?) {
         guard accessedProviders.accountProvider.isLoggedIn else {
-            preconditionFailure()
+            callback?(ClientError.unauthorized)
+            return
         }
         guard let activeProfile = activeProfile else {
             preconditionFailure()
@@ -257,7 +261,8 @@ class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, Pref
 
     func reconnect(after delay: Int?, forceDisconnect: Bool = false,  _ callback: SuccessLibraryCallback?) {
         guard accessedProviders.accountProvider.isLoggedIn else {
-            preconditionFailure()
+            callback?(ClientError.unauthorized)
+            return
         }
         guard let activeProfile = activeProfile else {
             preconditionFailure()
