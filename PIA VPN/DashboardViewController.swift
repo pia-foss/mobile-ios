@@ -371,6 +371,11 @@ class DashboardViewController: AutolayoutViewController {
                 if let _ = error {
                     RatingManager.shared.logError()
                 }
+                
+                let preferences = Client.preferences.editable()
+                preferences.lastConnectedRegion = Client.providers.serverProvider.targetServer
+                preferences.commit()
+
                 if Client.providers.vpnProvider.vpnStatus == .disconnected {
                     weakSelf.handleDisconnectedAndTrustedNetwork()
                     if weakSelf.isTrustedNetwork() {
