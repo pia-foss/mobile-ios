@@ -375,6 +375,9 @@ extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        //User clicked the button, the selection of the region to connect the VPN was manual
+        Client.configuration.isManualConnection = true
+
         let newSelectedServer: Server
 
         switch indexPath.section {
