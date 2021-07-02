@@ -143,10 +143,11 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                lastKnownVpnStatus != .unknown, lastKnownVpnStatus != .disconnected,
                Client.preferences.shareServiceQualityData {
                 ServiceQualityManager.shared.connectionCancelledEvent()
-            }
+                
+                //VPN disconnected, the user interaction finished. Only reset the value when the source was manual.
+                Client.configuration.isManualConnection = false
 
-            //VPN disconnected, the user interaction finished
-            Client.configuration.isManualConnection = false
+            }
 
         default:
             nextStatus = .disconnected
