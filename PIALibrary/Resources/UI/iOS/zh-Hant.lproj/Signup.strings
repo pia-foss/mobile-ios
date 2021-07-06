@@ -25,6 +25,13 @@
 "purchase.uncredited.alert.button.cancel" = "取消";
 "purchase.uncredited.alert.button.recover" = "回復帳戶";
 "purchase.uncredited.alert.message" = "您有未貸記的交易，要回復帳戶資料嗎？";
+"share.data.buttons.accept" = "接受";
+"share.data.buttons.noThanks" = "不了，謝謝";
+"share.data.buttons.readMore" = "閱讀更多內容";
+"share.data.readMore.text.description" = "這些基本資訊可協助我們辨識及修正可能的連線問題。請注意，分享這些資訊需要您的同意，且該功能預設為關閉，因此必須手動開啟。\n\n我們會收集以下事件的資訊：\n\n- 連線嘗試\n- 取消的連線\n- 建立的連線\n\n我們會針對上述事件收集下列資訊：\n- 平台\n- 應用程式版本\n- 應用程式類型 (是否為預先發布版)\n- 使用的通訊協定\n- 連線來源 (手動或自動)\n\n所有事件均有一組隨機產生的不重複識別碼。此識別碼不會和您的使用者帳戶建立關聯。為保護隱私，這個唯一識別碼每天都會重新產生。\n\n控制權始終都在您的掌握中。您可以在「設定」中看到我們收集了哪些資料，且隨時可關閉此功能。";
+"share.data.text.description" = "為了確保服務的連線品質，您可以匿名與我們分享您的連線統計資料。這些報告不會包含任何個人識別資訊。";
+"share.data.text.footer" = "您隨時都可以在設定中控制。";
+"share.data.text.title" = "請協助我們改善服務";
 "success.message_format" = "感謝您註冊我們的服務！我們已將您的帳戶使用者名稱和密碼寄送到您的電子郵件地址：%@";
 "success.password.caption" = "密碼";
 "success.redeem.message" = "您很快就會收到一封電子郵件，內有使用者名稱及密碼。\n\n您的登入資料";

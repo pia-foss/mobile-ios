@@ -25,6 +25,13 @@
 "purchase.uncredited.alert.button.cancel" = "Abryt";
 "purchase.uncredited.alert.button.recover" = "Gjenopprett konto";
 "purchase.uncredited.alert.message" = "Du har ikke krediterte transaksjoner. Vil du gjenopprette kontoinformasjonen din?";
+"share.data.buttons.accept" = "Godta";
+"share.data.buttons.noThanks" = "Nei takk";
+"share.data.buttons.readMore" = "Les mer";
+"share.data.readMore.text.description" = "Denne minimale informasjonen hjelper oss med å identifisere og rette opp potensielle tilkoblingsproblemer. Merk at deling av denne informasjonen krever samtykke og manuell aktivering fordi den er slått av som standard.\n\nVi henter inn informasjon om følgende hendelser:\n\n- Tilkoblingsforsøk\n- Tilkoblinger som blir avbrutt\n- Forbindelser som etableres\n\nFor alle disse hendelsene henter vi inn følgende informasjon:\n- Plattform\n- App-versjon\n- App-type (forhåndsutgivelse eller ikke)\n- Protokoll brukt\n- Tilkoblingskilde (manuell eller ved bruk av automatisering)\n\nAlle hendelsene inneholder en unik ID, som genereres tilfeldig. Denne ID-en er ikke tilknyttet brukerkontoen din. Den unike ID-en genereres på nytt hver dag for å sikre personvernet.\n\nDu beholder alltid kontrollen. Du kan se hvilke data vi har hentet inn fra Innstillinger, og du kan slå den av når som helst.";
+"share.data.text.description" = "For å hjelpe oss med å sikre tjenestens tilkoblingsytelse, kan du anonymt dele tilkoblingsstatistikken din med oss. Disse rapportene inkluderer informasjon som ikke er personlig identifiserbar.";
+"share.data.text.footer" = "Du kan kontrollere dette fra innstillingene dine";
+"share.data.text.title" = "Hjelp oss med å forbedre tjenesten vår";
 "success.message_format" = "Takk for at du registrerte deg. Vi har sendt deg kontonavnet og passordet ditt til e-postadressen din %@";
 "success.password.caption" = "Passord";
 "success.redeem.message" = "Du mottar en e-post med brukernavn og passord.\n\nPåloggingsinformasjonen din";

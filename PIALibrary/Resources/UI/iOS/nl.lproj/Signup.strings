@@ -25,6 +25,13 @@
 "purchase.uncredited.alert.button.cancel" = "Annuleren";
 "purchase.uncredited.alert.button.recover" = "Account herstellen";
 "purchase.uncredited.alert.message" = "U heeft niet-gecrediteerde transacties. Wilt u uw accountgegevens herstellen?";
+"share.data.buttons.accept" = "Accepteren";
+"share.data.buttons.noThanks" = "Nee, bedankt";
+"share.data.buttons.readMore" = "Meer informatie";
+"share.data.readMore.text.description" = "Deze minimuminformatie helpt ons bij het identificeren en oplossen van potentiële verbindingsproblemen. Let op: voor het delen van deze informatie is toestemming vereist en de handmatige activatie is standaard uitgeschakeld.\n\nWe verzamelen gegevens over de volgende zaken:\n\n- Verbindingspoging\n- Verbinding geannuleerd\n- Verbinding gemaakt\n\nVoor al deze zaken verzamelen we de volgende informatie:\n- Platform\n- App-versie\n- App-type (pre-release of niet)\n- Gebruikt protocol\n- Verbindingsbron (handmatig of automatisch)\n\nAlle zaken krijgen een unieke ID die willekeurig wordt aangemaakt. Deze ID is niet gekoppeld aan uw gebruikersaccount. Dit unieke ID wordt vanwege de privacy dagelijks opnieuw aangemaakt.\n\nU houdt altijd de touwtjes in handen. Via Instellingen kunt u altijd zien welke gegevens we hebben verzameld en u kunt de verzameling te allen tijde uitschakelen.";
+"share.data.text.description" = "Om ons te helpen de verbindingsprestaties van onze dienst te verbeteren, kunt u uw verbindingsstatistieken anoniem met ons delen. Deze rapporten bevatten geen persoonsgegevens.";
+"share.data.text.footer" = "U kunt dit via de Instellingen beheren";
+"share.data.text.title" = "Help ons onze service te verbeteren";
 "success.message_format" = "Bedankt voor uw aanmelding. We hebben de gebruikersnaam en het wachtwoord voor uw account naar het volgende e-mailadres gestuurd: %@";
 "success.password.caption" = "Wachtwoord";
 "success.redeem.message" = "U ontvangt zo een e-mail met uw gebruikersnaam en wachtwoord.";

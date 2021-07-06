@@ -25,6 +25,13 @@
 "purchase.uncredited.alert.button.cancel" = "Abbrechen";
 "purchase.uncredited.alert.button.recover" = "Konto wiederherstellen";
 "purchase.uncredited.alert.message" = "Sie haben Transaktionen, die noch nicht gutgeschrieben wurden. Möchten Sie Ihre Kontodaten wiederherstellen?";
+"share.data.buttons.accept" = "Akzeptieren";
+"share.data.buttons.noThanks" = "Nein danke";
+"share.data.buttons.readMore" = "Mehr erfahren";
+"share.data.readMore.text.description" = "Diese minimalen Informationen helfen uns, mögliche Verbindungsprobleme zu erkennen und zu beheben. Beachten Sie, dass die Weitergabe dieser Informationen eine Zustimmung und manuelle Aktivierung erfordert, da sie standardmäßig deaktiviert ist.\n\nWir erfassen Informationen über die folgenden Ereignisse:\n\n- Verbindungsversuch\n- Verbindung abgebrochen\n- Verbindung hergestellt\n\nFür alle diese Ereignisse werden wir die folgenden Informationen erfassen:\n- Plattform\n- App-Version\n- App-Typ (Vorabversion oder nicht)\n- Verwendetes Protokoll\n- Verbindungsquelle (manuell oder über Automatisierung)\n\nAlle Ereignisse enthalten eine eindeutige ID, die zufällig generiert wird. Diese ID ist nicht mit Ihrem Benutzerkonto verknüpft. Diese eindeutige ID wird aus Datenschutzgründen täglich neu generiert.\n\nSie werden immer die Kontrolle haben. Sie können sehen, welche Daten wir über Einstellungen erfasst haben, und Sie können sie jederzeit deaktivieren.";
+"share.data.text.description" = "Um uns zu helfen, die Verbindungsleistung unseres Dienstes sicherzustellen, können Sie Ihre Verbindungsstatistiken anonym mit uns teilen. Diese Berichte enthalten keine persönlich identifizierbaren Informationen.";
+"share.data.text.footer" = "Sie können dies jederzeit über Ihre Einstellungen steuern";
+"share.data.text.title" = "Bitte helfen Sie uns, unseren Service zu verbessern";
 "success.message_format" = "Vielen Dank für deine Registrierung. Wir haben dir deinen Benutzernamen und dein Passwort an deine E-Mail-Adresse unter %@ gesendet.";
 "success.password.caption" = "Passwort";
 "success.redeem.message" = "Sie werden in Kürze eine E-Mail mit Ihrem Benutzernamen und Passwort erhalten.\n\nIhre Zugangsdaten";

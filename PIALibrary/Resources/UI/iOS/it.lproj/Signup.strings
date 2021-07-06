@@ -25,6 +25,13 @@
 "purchase.uncredited.alert.button.cancel" = "Annulla";
 "purchase.uncredited.alert.button.recover" = "Recupera account";
 "purchase.uncredited.alert.message" = "Hai transazioni non accreditate. Vuoi recuperare i dati del tuo account?";
+"share.data.buttons.accept" = "Accetta";
+"share.data.buttons.noThanks" = "No, grazie";
+"share.data.buttons.readMore" = "Leggi di più";
+"share.data.readMore.text.description" = "Queste informazioni minime ci aiutano a identificare e risolvere potenziali problemi di connessione. Tieni presente che la condivisione di queste informazioni richiede il consenso e l'attivazione manuale poiché è disattivata per impostazione predefinita.\n\nRaccoglieremo informazioni sui seguenti eventi:\n\n- Tentativo di connessione\n- Connessione annullata\n- Connessione stabilita\n\nPer tutti questi eventi, raccoglieremo le seguenti informazioni:\n- Piattaforma\n- Versione dell'app\n- Tipo di app (pre-lancio o no)\n- Protocollo utilizzato\n- Sorgente di connessione (manuale o tramite automazione)\n\nTutti gli eventi conterranno un ID univoco, generato casualmente. Questo ID non è associato al tuo account utente. Questo ID univoco viene rigenerato quotidianamente per motivi di privacy.\n\nAvrai sempre il controllo. Puoi vedere quali dati abbiamo raccolto da Impostazioni e puoi disattivarlo in qualsiasi momento.";
+"share.data.text.description" = "Per aiutarci a garantire le prestazioni di connessione del nostro servizio, puoi condividere in modo anonimo le tue statistiche di connessione con noi. Questi rapporti non contengono informazioni d'identificazione personale.";
+"share.data.text.footer" = "Puoi sempre controllare questa funzione dalle tue impostazioni";
+"share.data.text.title" = "Aiutaci a migliorare il tuo servizio";
 "success.message_format" = "Grazie per la registrazione. Ti abbiamo inviato nome utente e password del tuo account all'indirizzo e-mail %@";
 "success.password.caption" = "Password";
 "success.redeem.message" = "Riceverai un'email a breve con nome utente e password.\n\nI tuoi dati d'accesso";

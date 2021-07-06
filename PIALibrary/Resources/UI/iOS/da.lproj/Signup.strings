@@ -25,6 +25,13 @@
 "purchase.uncredited.alert.button.cancel" = "Annuller";
 "purchase.uncredited.alert.button.recover" = "Gendan konto";
 "purchase.uncredited.alert.message" = "Du har ukrediterede transaktioner. Vil du gendanne dine kontooplysninger?";
+"share.data.buttons.accept" = "Accepter";
+"share.data.buttons.noThanks" = "Nej tak";
+"share.data.buttons.readMore" = "Læs mere";
+"share.data.readMore.text.description" = "Denne minimale information hjælper os med at identificere og løse potentielle forbindelsesproblemer. Bemærk, at deling af disse oplysninger kræver samtykke og manuel aktivering, da de er slået fra som standard.\n\nVi indsamler oplysninger om følgende begivenheder:\n\n- Forbindelsesforsøg\n- Afbrudt forbindelse\n- Forbindelse oprettet\n\nFor alle disse begivenheder indsamler vi følgende oplysninger:\n- Platform\n- Appversion\n- Apptype (forudgivelse eller ej)\n- Protokol anvendt\n- Forbindelseskilde (manuel eller ved hjælp af automatisering)\n\nAlle begivenheder vil indeholde et unikt id, der genereres tilfældigt. Dette id er ikke knyttet til din brugerkonto. Dette unikke id genoprettes dagligt for din fortroligheds skyld.\n\nDu vil altid have kontrol. Du kan se, hvilke data vi har indsamlet fra Indstillinger, og du kan til enhver tid slå dem fra.";
+"share.data.text.description" = "For at hjælpe os med at sikre vores tjenestes forbindelsesydelse, kan du anonymt dele dine forbindelsesstatistikker med os. Disse rapporter inkluderer ikke personligt identificerbare oplysninger.";
+"share.data.text.footer" = "Du kan altid kontrollere dette fra dine indstillinger";
+"share.data.text.title" = "Hjælp os med at forbedre vores service";
 "success.message_format" = "Tak fordi du tilmeldte dig hos os. Vi har sendt dit brugernavn og kodeord til din e-mailadresse %@";
 "success.password.caption" = "Kodeord";
 "success.redeem.message" = "Du modtager snart en e-mail med dit brugernavn og adgangskode.\n\nDine loginoplysninger";

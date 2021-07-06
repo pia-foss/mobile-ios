@@ -25,6 +25,13 @@
 "purchase.uncredited.alert.button.cancel" = "İptal";
 "purchase.uncredited.alert.button.recover" = "Hesabı kurtar";
 "purchase.uncredited.alert.message" = "Hesaba yansıtılmamış olan işlemleriniz var. Hesap bilgilerinizi kurtarmak ister misiniz?";
+"share.data.buttons.accept" = "Kabul Et";
+"share.data.buttons.noThanks" = "Hayır, teşekkürler";
+"share.data.buttons.readMore" = "Devamını oku";
+"share.data.readMore.text.description" = "Bu asgari bilgi, potansiyel bağlantı sorunlarını tanımlayıp düzeltmemize yardımcı olur. Bu bilgiyi paylaşmak için onay verilmesi ve varsayılan olarak kapalı olduğu için elle etkinleştirilmesi gerektiğini dikkate alın.\n\nŞu olaylarla ilgili bilgi toplayacağız:\n\n    - Bağlantı Denemesi\n    - Bağlantı İptal Edildi\n    - Bağlantı Kuruldu\n\nTüm bu olaylar için şu bilgileri toplayacağız:\n    - Platform\n    - Uygulama sürümü\n    - Uygulama türü (ön sürüm olup olmadığı)\n    - Kullanılan protokol\n    - Bağlantı kaynağı (manuel ya da otomasyon ile)\n\nTüm olaylarda rastgele oluşturulan eşsiz bir kimlik yer alacak. Bu kimlik kullanıcı hesabınızla bağlantılı değildir. Bu eşsiz kimlik, gizliliğin korunması açısından günlük olarak üretilir.\n\nKontrol daima sizde olacak. Ayarlardan hangi verileri topladığımızı görebilir ve bunu istediğiniz zaman kapatabilirsiniz.";
+"share.data.text.description" = "Hizmetimizin bağlantı performansını korumamıza yardımcı olmak için bağlantı istatistiklerinizi isimsiz olarak bizimle paylaşabilirsiniz. Bu raporlarda kişiyi tanımlayabilecek herhangi bir bilgi yer almaz.";
+"share.data.text.footer" = "Bunu istediğiniz zaman ayarlarınızdan kontrol edebilirsiniz";
+"share.data.text.title" = "Lütfen hizmetimizi geliştirmemize yardım edin";
 "success.message_format" = "Bize kayıt olduğunuz için teşekkürler. Hesap kullanıcı adı ve parolanızı %@ e-posta adresinize gönderdik";
 "success.password.caption" = "Şifre";
 "success.redeem.message" = "Kısa süre içinde kullanıcı adınızı ve şifrenizi içeren bir e-posta alacaksınız.\n\nGiriş bilgileriniz";

@@ -25,6 +25,13 @@
 "purchase.uncredited.alert.button.cancel" = "Anuluj";
 "purchase.uncredited.alert.button.recover" = "Odzyskaj konto";
 "purchase.uncredited.alert.message" = "Masz nieuznane transakcje. Chcesz odzyskać dane swojego konta?";
+"share.data.buttons.accept" = "Akceptuj";
+"share.data.buttons.noThanks" = "Nie, dziękuję";
+"share.data.buttons.readMore" = "Dowiedz się więcej";
+"share.data.readMore.text.description" = "Te minimalne informacje pomagają nam zidentyfikować i naprawić potencjalne problemy z połączeniem. Pamiętaj, że udostępnianie tych informacji wymaga zgody i ręcznej aktywacji, ponieważ jest domyślnie wyłączone.\n\nBędziemy zbierać informacje o następujących zdarzeniach:\n\n    - Próba połączenia\n    - Połączenie anulowane\n    - Połączenie ustanowione\n\nW przypadku wszystkich tych wydarzeń zbieramy następujące informacje:\n     - Platforma\n     - Wersja aplikacji\n     - Typ aplikacji (w wersji wstępnej lub nie)\n     - Używany protokół\n     - Źródło połączenia (ręcznie lub za pomocą automatyzacji)\n\nWszystkie zdarzenia będą zawierały unikalny identyfikator, który jest generowany losowo. Ten identyfikator nie jest powiązany z Twoim kontem użytkownika. Ten unikalny identyfikator jest codziennie ponownie generowany w celu zachowania prywatności.\n\nZawsze będziesz mieć kontrolę. Możesz zobaczyć, jakie dane zebraliśmy w Ustawieniach, i możesz wyłączyć zbieranie danych w dowolnym momencie.";
+"share.data.text.description" = "Aby pomóc nam zapewnić najlepszą wydajność naszych usług, możesz anonimowo udostępniać nam swoje statystyki połączeń. Raporty te nie zawierają żadnych informacji umożliwiających identyfikację osób.";
+"share.data.text.footer" = "Zawsze możesz to kontrolować w swoich ustawieniach";
+"share.data.text.title" = "Prosimy o pomoc w ulepszeniu naszych usług";
 "success.message_format" = "Dziękujemy za rejestrację. Przesłaliśmy Twoją nazwę użytkownika i hasło na Twój adres e-mail: %@";
 "success.password.caption" = "Hasło";
 "success.redeem.message" = "Wkrótce otrzymasz e-mail z nazwą użytkownika i hasłem.\n\nTwoje dane do logowania";

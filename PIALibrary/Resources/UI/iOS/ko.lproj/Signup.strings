@@ -25,6 +25,13 @@
 "purchase.uncredited.alert.button.cancel" = "취소";
 "purchase.uncredited.alert.button.recover" = "계정 복구";
 "purchase.uncredited.alert.message" = "처리되지 않은 거래가 있습니다. 계정 정보를 복구하시겠습니까?";
+"share.data.buttons.accept" = "수락";
+"share.data.buttons.noThanks" = "아니요";
+"share.data.buttons.readMore" = "자세히 보기";
+"share.data.readMore.text.description" = "이 최소한의 정보는 잠재적인 연결 문제를 식별하고 해결하는 데 도움이 됩니다. 이 정보를 공유하려면 기본적으로 해제되어 있는 승인과 수동 활성화가 필요합니다.\n\n저희가 수집하는 이벤트에 관한 정보는 다음과 같습니다.\n\n    - 연결 시도\n    - 취소된 연결\n    - 수립된 연결\n\n이러한 이벤트에 관하여 저희가 수집하는 정보는 다음과 같습니다.\n    - 플랫폼\n    - 앱 버전\n    - 앱 유형 (사전 출시 여부)\n    - 사용된 프로토콜\n    - 연결 소스 (수동 또는 자동 사용)\n\n모든 이벤트에는 무작위로 생성된 고유 ID가 포함됩니다. 이 ID는 사용자 계정과 연결되지 않습니다. 이 고유 ID는 개인 정보 보호 목적을 위하여 매일 다시 생성됩니다.\n\n회원님은 언제나 이를 통제할 수 있습니다. 설정에서 저희가 수집하는 데이터를 확인하고, 언제든지 해제하실 수 있습니다.";
+"share.data.text.description" = "연결 상태를 저희와 익명으로 공유해 주시면 저희 서비스의 연결 성능을 개선하는 데 도움이 됩니다. 이 보고서에는 개인 식별 정보가 포함되지 않습니다.";
+"share.data.text.footer" = "언제든지 설정에서 이 옵션을 관리할 수 있습니다.";
+"share.data.text.title" = "저희 서비스를 개선하도록 도와 주세요";
 "success.message_format" = "회원으로 가입해 주셔서 감사합니다. 계정 사용자명과 비밀번호를 귀하의 이메일 주소(%@)로 발송했습니다.";
 "success.password.caption" = "비밀번호";
 "success.redeem.message" = "사용자 이름 및 비밀번호가 담긴 이메일을 곧 보내드리겠습니다.\n\n귀하의 로그인 정보";

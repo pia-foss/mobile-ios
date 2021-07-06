@@ -25,6 +25,13 @@
 "purchase.uncredited.alert.button.cancel" = "Annuler";
 "purchase.uncredited.alert.button.recover" = "Restaurer le compte";
 "purchase.uncredited.alert.message" = "Vous avez des transaction non créditées. Voulez-vous restaurer les détails de votre compte ?";
+"share.data.buttons.accept" = "Accepter";
+"share.data.buttons.noThanks" = "Non, merci";
+"share.data.buttons.readMore" = "Lire plus";
+"share.data.readMore.text.description" = "Ces informations minimales nous aident à identifier et à résoudre les problèmes de connexion potentiels. Notez que le partage de ces informations nécessite un consentement et une activation manuelle car ils sont désactivés par défaut.\n\nNous collecterons des informations sur les événements suivants :\n\n - Tentative de connexion\n - Connexion annulée\n - Connexion établie\n\nPour tous ces événements, nous collecterons les informations suivantes :\n - Plateforme\n - Version de l'application\n - Type d'application (pré-version ou non)\n - Protocole utilisé\n - Source de connexion (manuelle ou utilisant l'automatisation)\n\nTous les événements contiendront un ID unique généré aléatoirement. Cet ID n'est pas associé à votre compte utilisateur. Cet ID unique est régénéré quotidiennement à des fins de confidentialité.\n\nVous aurez toujours le contrôle. Vous pouvez voir quelles données nous avons collectées à partir de Paramètres, et vous pouvez les désactiver à tout moment.";
+"share.data.text.description" = "Pour nous aider à garantir les performances de connexion de notre service, vous pouvez partager vos statistiques de connexion de manière anonyme avec nous. Ces rapports ne contiennent aucune information personnellement identifiable.";
+"share.data.text.footer" = "Vous pouvez toujours contrôler cela à partir de vos paramètres.";
+"share.data.text.title" = "Merci de nous aider à améliorer notre service";
 "success.message_format" = "Merci pour votre inscription. L'identifiant et le mot de passe de votre compte ont été envoyés à votre adresse e-mail %@";
 "success.password.caption" = "Mot de passe";
 "success.redeem.message" = "Vous allez bientôt recevoir un e-mail contenant votre nom d'utilisateur et votre mot de passe.\n\nDétails de vos identifiants";

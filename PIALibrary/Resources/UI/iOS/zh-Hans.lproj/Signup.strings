@@ -25,6 +25,13 @@
 "purchase.uncredited.alert.button.cancel" = "取消";
 "purchase.uncredited.alert.button.recover" = "恢复账户";
 "purchase.uncredited.alert.message" = "你有未入账的的交易。要恢复您的账户详情吗？";
+"share.data.buttons.accept" = "接受";
+"share.data.buttons.noThanks" = "不用，谢谢";
+"share.data.buttons.readMore" = "阅读更多";
+"share.data.readMore.text.description" = "这些有限的信息有助于我们识别并解决潜在的连接问题。请注意，分享这些信息需要您同意并手动激活，因为这是默认关闭的。\n\n我们将收集关于以下事件的信息：\n\n    - 连接尝试\n    - 连接已取消\n    - 连接已建立\n\n对于上述所有事件，我们将收集以下信息：\n    - 平台\n    - 应用程序版本\n    - 应用程序类型（预先发布或不预先发布）\n    - 使用的协议\n    - 连接来源（手动或使用自动化）\n\n所有事件都将包含一个随机生成的唯一 ID。这个 ID 与您的用户账户没有关联。为了保护隐私，这个唯一 ID 每天都会重新生成。\n\n您将始终处于掌控地位。您可以看到我们从设置中收集了哪些数据，您可以随时将其关闭。";
+"share.data.text.description" = "为了帮助我们保持服务的连接性能，您可以匿名与我们共享您的连接统计数据。这些报告不包括任何可识别个人身份的信息。";
+"share.data.text.footer" = "您始终可以从设置中进行控制";
+"share.data.text.title" = "请帮助我们改进服务";
 "success.message_format" = "感谢注册。我们已将您的用户名和密码发送至您的电子邮箱：%@";
 "success.password.caption" = "密码";
 "success.redeem.message" = "您将很快收到一封电子邮件，记有您的用户名和密码。\n\n您的登录详情";

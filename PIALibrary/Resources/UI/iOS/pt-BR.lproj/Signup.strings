@@ -25,6 +25,13 @@
 "purchase.uncredited.alert.button.cancel" = "Cancelar";
 "purchase.uncredited.alert.button.recover" = "Recuperar conta";
 "purchase.uncredited.alert.message" = "Você tem transações não creditadas. Deseja recuperar os detalhes da sua conta?";
+"share.data.buttons.accept" = "Aceitar";
+"share.data.buttons.noThanks" = "Não, obrigado";
+"share.data.buttons.readMore" = "Leia mais";
+"share.data.readMore.text.description" = "Essas informações mínimas nos ajudam a identificar e a corrigir possíveis problemas de conexão. Observe que o compartilhamento dessas informações requer consentimento e ativação manual, pois ele é desativado por padrão.\n\nColetaremos informações sobre os seguintes eventos:\n\n- Tentativa de conexão\n- Conexão cancelada \n- Conexão estabelecida \n\nPara todos esses eventos, coletaremos as seguintes informações:\n- Plataforma\n- Versão do aplicativo \n- Tipo de aplicativo (pré-lançamento ou não) \n- Protocolo usado \n- Origem da conexão (manual ou automática) \n\nTodos os eventos conterão um ID único, gerado aleatoriamente. Esse ID não está associado à sua conta de usuário. O ID único é gerado novamente todos os dias para fins de privacidade.\n\nVocê sempre estará no controle e poderá ver quais dados coletamos nas Configurações, podendo desativar essa opção a qualquer momento.";
+"share.data.text.description" = "Para nos ajudar a garantir o desempenho da conexão de nosso serviço, você pode compartilhar anonimamente as estatísticas da sua conexão conosco. Esses relatórios não incluem nenhuma informação de identificação pessoal.";
+"share.data.text.footer" = "Você sempre poderá controlar isso em suas configurações";
+"share.data.text.title" = "Ajude-nos a melhorar nosso serviço";
 "success.message_format" = "Obrigado por se registrar conosco. Nós enviamos o nome de usuário e a senha da sua conta para o seu endereço de e-mail em %@";
 "success.password.caption" = "Senha";
 "success.redeem.message" = "Você receberá um e-mail com seu nome de usuário e senha em breve.\n\nSeus dados de login";
