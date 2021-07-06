@@ -45,7 +45,10 @@ extension Client {
         public var isDevelopment: Bool
         
         /// If `true`, the connection to the VPN was initiated by the user
-        public var isManualConnection: Bool
+        public var connectedManually: Bool
+        
+        /// If `true`, the connection to the VPN was stopped by the user
+        public var disconnectedManually: Bool
 
         // MARK: WebServices
         
@@ -171,7 +174,8 @@ extension Client {
         init() {
 
             isDevelopment = false
-            isManualConnection = false
+            connectedManually = false
+            disconnectedManually = false
 
             let production = "https://www.privateinternetaccess.com"
             baseUrls = [

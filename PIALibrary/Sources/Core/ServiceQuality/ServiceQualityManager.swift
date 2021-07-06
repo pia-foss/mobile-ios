@@ -98,7 +98,7 @@ public class ServiceQualityManager: NSObject {
 
     
     public func connectionCancelledEvent() {
-        let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.vpnConnectionCancelled, eventProperties: KPIClientEvent.EventProperties(connectionSource: connectionSource(), data: nil, preRelease: isPreRelease(), reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
+        let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.vpnConnectionCancelled, eventProperties: KPIClientEvent.EventProperties(connectionSource: disconnectionSource(), data: nil, preRelease: isPreRelease(), reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
         kpiManager?.submit(event: event) { (error) in
             log.debug("Event sent \(event)")
         }
@@ -115,9 +115,13 @@ public class ServiceQualityManager: NSObject {
     }
     
     private func connectionSource() -> KPIConnectionSource {
-        return Client.configuration.isManualConnection ? .manual : .automatic
+        return Client.configuration.connectedManually ? .manual : .automatic
     }
-    
+
+    private func disconnectionSource() -> KPIConnectionSource {
+        return Client.configuration.disconnectedManually ? .manual : .automatic
+    }
+
     private func currentProtocol() -> KPIVpnProtocol {
         
         switch Client.providers.vpnProvider.currentVPNType {
