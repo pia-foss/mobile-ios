@@ -42,7 +42,7 @@
 "card.wireguard.title" = "جرّب ®WireGuard اليوم!";
 "content_blocker.body.footer" = "يرجى الملاحظة: يعمل حظر المحتوى دون الحاجة للاتصال بشبكة VPN، ولكنه لن يعمل إلا على متصفح Safari.";
 "content_blocker.body.subtitle" = "لتفعيل استخدام حظر المحتوى على متصفح Safari، يرجى الذهاب الى الإعدادات > Safari وتفعيل PIA VPN تحت General touch Content Blockers";
-"content_blocker.title" = "حظر المحتوى";
+"content_blocker.title" = "حظر المحتوى في Safari";
 "dashboard.accessibility.vpn.button" = "زر اتصال VPN";
 "dashboard.accessibility.vpn.button.isOff" = "زر اتصال VPN. خدمة VPN غير متصلة حاليًا";
 "dashboard.accessibility.vpn.button.isOn" = "زر اتصال VPN. خدمة VPN متصلة حاليًا";
@@ -209,7 +209,7 @@
 "settings.application_information.debug.failure.title" = "حدث خطأ أثناء الإرسال";
 "settings.application_information.debug.success.message" = "تم إرسال معلومات تتبع الأخطاء بنجاح.\nالمعرف: %@\nيرجى تدوين هذا المعرف، حيث أن فريق الدعم سيحتاجه لتحديد ما أرسلته.";
 "settings.application_information.debug.success.title" = "تم إرسال معلومات تتبع الأخطاء";
-"settings.application_information.debug.title" = "إرسال تتبع الأخطاء إلى الدعم";
+"settings.application_information.debug.title" = "إرسال سجل تتبع الأخطاء إلى الدعم";
 "settings.application_information.title" = "معلومات التطبيق";
 "settings.application_settings.active_theme.title" = "النسق النشط";
 "settings.application_settings.dark_theme.title" = "النسق الداكن";
@@ -283,6 +283,10 @@
 "settings.section.protocols" = "البروتوكولات";
 "settings.server.network.alert" = "يجب قطع اتصال VPN لتغيير شبكة الخادم.";
 "settings.server.network.description" = "شبكة الجيل القادم";
+"settings.service.quality.share.description" = "ساعدنا في التحسين من خلال مشاركة إحصائيات اتصال VPN. لا تحتوي هذه التقارير أبدًا على معلومات محددة للهوية.";
+"settings.service.quality.share.findoutmore" = "معرفة المزيد";
+"settings.service.quality.share.title" = "المساعدة في تحسين PIA";
+"settings.service.quality.show.title" = "إحصائيات الاتصال";
 "settings.small.packets.description" = "سيخفض حجم حزمة IP قليلًا لتحسين التوافق مع بعض أنواع الموجهات وشبكات الجوَّال.";
 "settings.small.packets.title" = "استخدام حزم صغيرة";
 "settings.trusted.networks.connect.message" = "هل تريد حماية هذه الشبكة عبر الاتصال بخدمة VPN؟";

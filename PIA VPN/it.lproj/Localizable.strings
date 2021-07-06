@@ -42,7 +42,7 @@
 "card.wireguard.title" = "Prova subito WireGuard®!";
 "content_blocker.body.footer" = "Nota bene: Non c'è bisogno di essere connessi alla VPN affinché il blocco dei contenuti sia attivo, ma il blocco avrà effetto solo navigando con Safari.";
 "content_blocker.body.subtitle" = "Per abilitare il nostro Blocco dei contenuti in Safari, per favore vai su Impostazioni > Safari, e in Blocchi dei contenuti nella sezione Generali aziona PIA VPN.";
-"content_blocker.title" = "Blocco dei contenuti";
+"content_blocker.title" = "Blocco dei contenuti Safari";
 "dashboard.accessibility.vpn.button" = "Pulsante di Conneessione VPN";
 "dashboard.accessibility.vpn.button.isOff" = "Pulsante di connessione VPN. VPN attualmente disconnesso";
 "dashboard.accessibility.vpn.button.isOn" = "Pulsante di connessione VPN. VPN attualmente connesso";
@@ -166,7 +166,7 @@
 "network.management.tool.always.connect" = "Connetti sempre VPN";
 "network.management.tool.always.disconnect" = "Disconnetti sempre VPN";
 "network.management.tool.choose.wifi" = "Scegli una rete WiFi per aggiungere una nuova regola. ";
-"network.management.tool.disable" = "Disattiva automazione";
+"network.management.tool.disable" = "Automazione disattivata";
 "network.management.tool.enable.automation" = "Attiva automazione";
 "network.management.tool.mobile.data" = "Dati mobili";
 "network.management.tool.open.wifi" = "WiFi aperta";
@@ -283,6 +283,10 @@
 "settings.section.protocols" = "Protocolli";
 "settings.server.network.alert" = "Per cambiare la rete server, il VPN dev'essere disconnesso.";
 "settings.server.network.description" = "Rete di nuova generazione";
+"settings.service.quality.share.description" = "Aiutaci a migliorare condividendo le statistiche di connessione al VPN. Questi rapporti non contengono mai informazioni d'identificazione personale.";
+"settings.service.quality.share.findoutmore" = "Scopri di più";
+"settings.service.quality.share.title" = "Aiuta a migliorare PIA";
+"settings.service.quality.show.title" = "Statistiche di connessione";
 "settings.small.packets.description" = "Diminuirà leggermente le dimensioni del pacchetto IP per migliorare la compatibilità con alcuni router e reti mobili.";
 "settings.small.packets.title" = "Usa pacchetti piccoli";
 "settings.trusted.networks.connect.message" = "Proteggi la rete collegandoti al VPN?";

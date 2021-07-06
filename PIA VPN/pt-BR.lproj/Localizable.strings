@@ -42,7 +42,7 @@
 "card.wireguard.title" = "Experimente o WireGuard® hoje mesmo!";
 "content_blocker.body.footer" = "Observação: Você não precisa estar conectado à VPN para este Bloqueador de Conteúdo funcionar, porém ele só funcionará enquanto estiver navegando no Safari.";
 "content_blocker.body.subtitle" = "Para ativar nosso Bloqueador de Conteúdo para usar com o Safari, por favor, vá para Ajustes > Safari, e, em Geral, toque em Bloqueadores de Conteúdo e ative PIA VPN.";
-"content_blocker.title" = "Bloqueador de Conteúdo";
+"content_blocker.title" = "Bloqueador de conteúdo do Safari";
 "dashboard.accessibility.vpn.button" = "Botão de conexão da VPN";
 "dashboard.accessibility.vpn.button.isOff" = "Botão de conexão da VPN. A VPN está desconectada no momento.";
 "dashboard.accessibility.vpn.button.isOn" = "Botão de conexão da VPN. A VPN está conectada no momento.";
@@ -209,12 +209,12 @@
 "settings.application_information.debug.failure.title" = "Erro durante o envio";
 "settings.application_information.debug.success.message" = "Informações de depuração enviadas com sucesso.\nID: %@\nPor favor, anote este ID, pois a nossa equipe de suporte irá solicitá-lo para localizar o envio.";
 "settings.application_information.debug.success.title" = "Informações de depuração enviadas";
-"settings.application_information.debug.title" = "Enviar depuração para suporte";
+"settings.application_information.debug.title" = "Enviar log de depuração para suporte";
 "settings.application_information.title" = "INFORMAÇÕES DO APLICATIVO";
 "settings.application_settings.active_theme.title" = "Tema ativo";
 "settings.application_settings.dark_theme.title" = "Tema escuro";
 "settings.application_settings.kill_switch.footer" = "O kill switch do VPN impede o acesso à internet se a conexão de VPN estiver se reconectando. Isto exclui a desconexão manual.";
-"settings.application_settings.kill_switch.title" = "Kill switch do VPN";
+"settings.application_settings.kill_switch.title" = "Kill switch de VPN";
 "settings.application_settings.mace.footer" = "O PIA MACE™ bloqueia anúncios, rastreadores e malware enquanto você está conectado à VPN.";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.title" = "CONFIGURAÇÕES DO APLICATIVO";
@@ -283,8 +283,12 @@
 "settings.section.protocols" = "Protocolos";
 "settings.server.network.alert" = "A VPN deve ser desconectada para alterar a rede do servidor.";
 "settings.server.network.description" = "Rede de última geração";
+"settings.service.quality.share.description" = "Ajude-nos a melhorar compartilhando as estatísticas da conexão VPN. Esses relatórios não contêm informações de identificação pessoal.";
+"settings.service.quality.share.findoutmore" = "Saiba mais";
+"settings.service.quality.share.title" = "Ajude a melhorar a PIA";
+"settings.service.quality.show.title" = "Estatísticas de conexão";
 "settings.small.packets.description" = "O tamanho do seu pacote de IP será diminuído um pouco para melhorar a compatibilidade com alguns roteadores e redes móveis.";
-"settings.small.packets.title" = "Usar pacotes pequenos";
+"settings.small.packets.title" = "Usar pacotes pequens";
 "settings.trusted.networks.connect.message" = "Proteger esta rede conectando VPN?";
 "settings.trusted.networks.message" = "O PIA não se conectará automaticamente nestas redes.";
 "settings.trusted.networks.sections.available" = "Redes disponíveis";

@@ -42,7 +42,7 @@
 "card.wireguard.title" = "ลอง WireGuard® ได้แล้ววันนี้!";
 "content_blocker.body.footer" = "โปรดทราบ: คุณไม่จำเป็นต้องเชื่อมต่อไปยัง VPN เพื่อใช้งานตัวปิดกั้นเนื้อหา แต่จะใช้ได้ก็ต่อเมื่อใช้ Safari เท่านั้น";
 "content_blocker.body.subtitle" = "ในการเปิดใช้งานตัวปิดกั้นเนื้อหาเพื่อใช้ใน Safari กรุณาไปยัง การตั้งค่า > Safari และภายใต้หมวดทั่วไป ให้แตะ ตัวปิดกั้นเนื้อหา ใน PIA VPN";
-"content_blocker.title" = "ตัวปิดกั้นเนื้อหา";
+"content_blocker.title" = "ตัวปิดกั้นเนื้อหา Safari";
 "dashboard.accessibility.vpn.button" = "ปุ่มเชื่อมต่อ VPN";
 "dashboard.accessibility.vpn.button.isOff" = "ปุ่มเชื่อมต่อ VPN ขณะนี้ VPN ขาดการเชื่อมต่อ";
 "dashboard.accessibility.vpn.button.isOn" = "ปุ่มเชื่อมต่อ VPN ขณะนี้ VPN เชื่อมต่ออยู่";
@@ -209,12 +209,12 @@
 "settings.application_information.debug.failure.title" = "เกิดข้อผิดพลาดระหว่างการส่ง";
 "settings.application_information.debug.success.message" = "ส่งข้อมูลแก้จุดบกพร่องเรียบร้อยแล้ว \nID: %@\nกรุณาจด ID นี้ไว้ เนื่องจากทีมสนับสนุนของเราอาจสอบถามข้อมูลนี้เพื่อตรวจสอบการส่งข้อมูลของคุณ";
 "settings.application_information.debug.success.title" = "ส่งข้อมูลแก้จุดบกพร่องเรียบร้อยแล้ว";
-"settings.application_information.debug.title" = "ส่งการแก้จุดบกพร่องไปยังฝ่ายสนับสนุน";
+"settings.application_information.debug.title" = "ส่งประวัติการแก้จุดบกพร่องไปยังฝ่ายสนับสนุน";
 "settings.application_information.title" = "ข้อมูลแอพพลิเคชั่น";
 "settings.application_settings.active_theme.title" = "ธีมที่ใช้งานอยู่";
 "settings.application_settings.dark_theme.title" = "ธีมมึด";
 "settings.application_settings.kill_switch.footer" = "Kill switch ของ VPN จะป้องกันการเข้าถึงอินเทอร์เน็ตหากการเชื่อมต่อ VPN กำลังเชื่อมต่อใหม่ ไม่รวมการตัดการเชื่อมต่อด้วยตนเอง";
-"settings.application_settings.kill_switch.title" = "Kill switch ของ VPN";
+"settings.application_settings.kill_switch.title" = "ปุ่มตัดการทำงาน VPN";
 "settings.application_settings.mace.footer" = "PIA MACE™ บล็อกโฆษณา, ตัวติดตาม และมัลแวร์ ในขณะที่คุณกำลังเชื่อมต่อ VPN อยู่";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.title" = "การตั้งค่าแอพพลิเคชั่น";
@@ -283,6 +283,10 @@
 "settings.section.protocols" = "โปรโตคอล";
 "settings.server.network.alert" = "VPN ต้องถูกตัดการเชื่อมต่อเพื่อเปลี่ยนเครือข่ายเซิร์ฟเวอร์";
 "settings.server.network.description" = "เครือข่ายรุ่นต่อไป";
+"settings.service.quality.share.description" = "ช่วยเราปรับปรุงด้วยการแชร์สถิติการเชื่อมต่อ VPN โดยที่รายงานเหล่านี้จะไม่มีข้อมูลส่วนบุคคลที่สามารถระบุตัวตนได้";
+"settings.service.quality.share.findoutmore" = "ค้นหาข้อมูลเพิ่มเติม";
+"settings.service.quality.share.title" = "ช่วยปรับปรุง PIA";
+"settings.service.quality.show.title" = "สถิติการเชื่อมต่อ";
 "settings.small.packets.description" = "จะค่อยๆ ลดขนาดแพ็กเกต IP เพื่อปรับปรุงให้สามารถทำงานร่วมกับเราเตอร์และเครือข่ายโทรศัพท์บางประเภทได้";
 "settings.small.packets.title" = "ใช้แพ็กเกตขนาดเล็ก";
 "settings.trusted.networks.connect.message" = "ป้องกันเครือข่ายนี้ด้วยการเชื่อมต่อกับ VPN หรือไม่";

@@ -42,7 +42,7 @@
 "card.wireguard.title" = "Prøv WireGuard® i dag!";
 "content_blocker.body.footer" = "Bemærk: Du behøver ikke have forbindelse til VPN for, at denne Indholdsblokering kan fungere, men den virker kun, når du anvender Safari-browseren.";
 "content_blocker.body.subtitle" = "For at aktivere vores Indholdsblokering til brug med Safari skal du gå til Indstillinger > Safari og under Generelt trykke på Indholdsblokering til for PIA VPN.";
-"content_blocker.title" = "Indholdsblokering";
+"content_blocker.title" = "Safari-indholdsblokering";
 "dashboard.accessibility.vpn.button" = "VPN-forbindelse-knap";
 "dashboard.accessibility.vpn.button.isOff" = "VPN-forbindelse-knap. VPN er i øjeblikket afbrudt";
 "dashboard.accessibility.vpn.button.isOn" = "VPN-forbindelse-knap. VPN er i øjeblikket forbundet";
@@ -209,7 +209,7 @@
 "settings.application_information.debug.failure.title" = "Kunne ikke indsende";
 "settings.application_information.debug.success.message" = "Fejloplysninger indsendt.\nID: %@\nGem venligst dette ID, da vores supportteam har brug for det, for at finde din indsendelse.";
 "settings.application_information.debug.success.title" = "Fejloplysninger indsendt";
-"settings.application_information.debug.title" = "Send fejloplysninger til support";
+"settings.application_information.debug.title" = "Send fejlfindingslog til support";
 "settings.application_information.title" = "INFORMATIN OM APPLIKATIONEN";
 "settings.application_settings.active_theme.title" = "Aktivt tema";
 "settings.application_settings.dark_theme.title" = "Mørkt tema";
@@ -283,6 +283,10 @@
 "settings.section.protocols" = "Protokoller";
 "settings.server.network.alert" = "VPN'en skal afbrydes for at skifte servernetværk.";
 "settings.server.network.description" = "Næste generations netværk";
+"settings.service.quality.share.description" = "Hjælp os med at blive bedre, ved at dele VPN-forbindelsesstatistikker. Disse rapporter indeholder aldrig personligt identificerbare oplysninger.";
+"settings.service.quality.share.findoutmore" = "Find ud af mere";
+"settings.service.quality.share.title" = "Hjælp med at forbedre PIA";
+"settings.service.quality.show.title" = "Forbindelsesstatistikker";
 "settings.small.packets.description" = "Vil sænke IP-pakkens størrelse en smule for at forbedre kompatibiliteten med nogle routere og mobilnetværk.";
 "settings.small.packets.title" = "Brug små pakker";
 "settings.trusted.networks.connect.message" = "Beskyt dette netværk ved at oprette forbindelse til VPN?";

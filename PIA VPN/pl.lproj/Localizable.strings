@@ -42,7 +42,7 @@
 "card.wireguard.title" = "Wypróbuj WireGuard® dzisiaj!";
 "content_blocker.body.footer" = "Uwaga: musisz być połączony z VPN, aby Blokada zawartości działała, ale będzie działać tylko podczas przeglądania stron za pomocą Safari.";
 "content_blocker.body.subtitle" = "Aby włączyć naszą blokadę reklam do użycia z przeglądarką Safari, przejdź do „Ustawienia > Safari”, pod „Ogólne” wybierz przełącznik „Blokady zawartości” na PIA VPN.";
-"content_blocker.title" = "Blokada zawartości";
+"content_blocker.title" = "Blokada zawartości Safari";
 "dashboard.accessibility.vpn.button" = "Przycisk połączenia z VPN";
 "dashboard.accessibility.vpn.button.isOff" = "Przycisk połączenia z VPN. VPN jest teraz odłączona.";
 "dashboard.accessibility.vpn.button.isOn" = "Przycisk połączenia z VPN. VPN jest teraz podłączona.";
@@ -209,7 +209,7 @@
 "settings.application_information.debug.failure.title" = "Wystąpił błąd w czasie wysyłania";
 "settings.application_information.debug.success.message" = "Wysłano informacje z debugowania.\nIdentyfikator: %@\nProszę zapisać ten identyfikator, gdyż poprosi o niego nasz dział obsługi, aby znaleźć twoją przesyłkę.";
 "settings.application_information.debug.success.title" = "Wysłano informacje z debugowania";
-"settings.application_information.debug.title" = "Wyślij wyniki debugowania do działu obsługi";
+"settings.application_information.debug.title" = "Wyślij dziennik debugowania do działu obsługi";
 "settings.application_information.title" = "INFORMACJE O APLIKACJI";
 "settings.application_settings.active_theme.title" = "Aktywny motyw";
 "settings.application_settings.dark_theme.title" = "Ciemny motyw";
@@ -283,6 +283,10 @@
 "settings.section.protocols" = "Protokoły";
 "settings.server.network.alert" = "VPN musi zostać odłączona do zmiany sieci serwerów.";
 "settings.server.network.description" = "Sieć nowej generacji";
+"settings.service.quality.share.description" = "Pomóż nam udoskonalić nasze usługi, udostępniając statystyki połączeń VPN. Raporty te nigdy nie zawierają informacji umożliwiających identyfikację osób.";
+"settings.service.quality.share.findoutmore" = "Dowiedz się więcej";
+"settings.service.quality.share.title" = "Pomóż udoskonalić PIA";
+"settings.service.quality.show.title" = "Statystyki połączenia";
 "settings.small.packets.description" = "Nieznacznie zmniejszy rozmiar pakietu IP, aby poprawić kompatybilność z częścią routerów i sieci komórkowych.";
 "settings.small.packets.title" = "Używaj małych pakietów";
 "settings.trusted.networks.connect.message" = "Chronić tę sieć poprzez zastosowanie podłączenia doVPN";

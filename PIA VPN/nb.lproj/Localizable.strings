@@ -42,7 +42,7 @@
 "card.wireguard.title" = "Prøv WireGuard® i dag!";
 "content_blocker.body.footer" = "Merk: Du trenger ikke å være tilkoblet VPN-tjenesten for at innholdsblokkereren skal virke, men den virker bare når du surfer med Safari.";
 "content_blocker.body.subtitle" = "For å aktivere innholdsblokkereren (for Safari), kan du gå til Innstillinger > Safari, og under Generelt slår du på innholdsblokkerer for PIA VPN.";
-"content_blocker.title" = "Innholdsblokkerer";
+"content_blocker.title" = "Innholdsblokkerer for Safari";
 "dashboard.accessibility.vpn.button" = "VPN-tilkoblingsknapp";
 "dashboard.accessibility.vpn.button.isOff" = "VPN-tilkoblingsknapp. VPN-klienten er for øyeblikket frakoblet";
 "dashboard.accessibility.vpn.button.isOn" = "VPN-tilkoblingsknapp. VPN-klienten er for øyeblikket tilkoblet";
@@ -209,7 +209,7 @@
 "settings.application_information.debug.failure.title" = "Feil ved innsending";
 "settings.application_information.debug.success.message" = "Feilsøkinfo sendt. \nID: %@\nSkriv ned ID-en. Kundestøtte trenger den for å finne meldingen din.";
 "settings.application_information.debug.success.title" = "Feilsøkinfo sendt inn";
-"settings.application_information.debug.title" = "Send feilsøk til kundestøtte";
+"settings.application_information.debug.title" = "Send feilsøkingslogg til kundestøtte";
 "settings.application_information.title" = "APPINFORMASJON";
 "settings.application_settings.active_theme.title" = "Aktivt tema";
 "settings.application_settings.dark_theme.title" = "Mørkt tema";
@@ -283,6 +283,10 @@
 "settings.section.protocols" = "Protokoller";
 "settings.server.network.alert" = "VPN må kobles fra for å endre nettverkstjeneren.";
 "settings.server.network.description" = "Neste generasjons nettverk";
+"settings.service.quality.share.description" = "Hjelp oss med å forbedre oss ved å dele VPN-tilkoblingsstatistikk. Disse rapportene inneholder aldri personlig identifiserbar informasjon.";
+"settings.service.quality.share.findoutmore" = "Finn ut mer";
+"settings.service.quality.share.title" = "Hjelp med å forbedre PIA";
+"settings.service.quality.show.title" = "Tilkoblingsstatistikk";
 "settings.small.packets.description" = "IP-pakkens størrelse vil bli noe mindre for å forbedre kompatibilitet med noen rutere og mobile nettverk.";
 "settings.small.packets.title" = "Bruk små pakker";
 "settings.trusted.networks.connect.message" = "Vil du beskytte dette nettverket ved å koble til VPN?";

@@ -42,7 +42,7 @@
 "card.wireguard.title" = "WireGuard®を今すぐお試しください！";
 "content_blocker.body.footer" = "注意：コンテンツブロッカーは、VPNへの接続がなくても機能しますが、Safariを使ったブラウジングのみで利用できます。";
 "content_blocker.body.subtitle" = "コンテンツブロッカーをオンにしてSafariで使えるようにするには、「設定」>「Safari」にアクセスし、「一般」からPIA VPNで「コンテンツブロッカー」をオンにしてください。";
-"content_blocker.title" = "コンテンツブロッカー";
+"content_blocker.title" = "Safari コンテンツブロッカー";
 "dashboard.accessibility.vpn.button" = "VPN接続ボタン";
 "dashboard.accessibility.vpn.button.isOff" = "VPN接続ボタン。VPNは現在切断されています";
 "dashboard.accessibility.vpn.button.isOn" = "VPN接続ボタン。VPNに現在接続されています";
@@ -209,7 +209,7 @@
 "settings.application_information.debug.failure.title" = "送信中のエラー";
 "settings.application_information.debug.success.message" = "デバッグ情報が正常に送信されました。\nID: %@\n送信された情報を特定するためにサポートチームがこのIDを必要としますので、このIDを書き留めておいてください。";
 "settings.application_information.debug.success.title" = "デバッグ情報が送信されました";
-"settings.application_information.debug.title" = "サポートにデバッグを送信";
+"settings.application_information.debug.title" = "サポートにデバッグログを送信";
 "settings.application_information.title" = "アプリ情報";
 "settings.application_settings.active_theme.title" = "アクティブなテーマ";
 "settings.application_settings.dark_theme.title" = "ダークテーマ";
@@ -283,6 +283,10 @@
 "settings.section.protocols" = "プロトコル";
 "settings.server.network.alert" = "サーバーネットワークを変更するにはVPNを切断してください。";
 "settings.server.network.description" = "次世代ネットワーク";
+"settings.service.quality.share.description" = "VPN接続データを共有することにより、改善にご協力ください。これらのレポートには、個人を特定できる情報は含まれません。";
+"settings.service.quality.share.findoutmore" = "詳しく知る";
+"settings.service.quality.share.title" = "PIAの改善に協力する";
+"settings.service.quality.show.title" = "接続状態";
 "settings.small.packets.description" = "IPパケットサイズを少し小さくして、いくつかのルーターおよびモバイルネットワークとの互換性を改善します。";
 "settings.small.packets.title" = "小さなパケットを使用";
 "settings.trusted.networks.connect.message" = "VPNに接続することによりこのネットワークを保護しますか？";

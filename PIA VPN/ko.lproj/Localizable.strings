@@ -42,7 +42,7 @@
 "card.wireguard.title" = "지금 WireGuard®를 사용해 보세요!";
 "content_blocker.body.footer" = "주의: Content Blocker를 작동시키기 위해 VPN에 연결할 필요가 없지만, Safari로 검색할 때만 작동합니다.";
 "content_blocker.body.subtitle" = "Content Blocker를 활성화하여 Safari로 사용하려면 설정 > Safari로 가서 '일반'에서 Content Blockers를 눌러 PIA VPN을 켜세요.";
-"content_blocker.title" = "Content Blocker";
+"content_blocker.title" = "Safari 콘텐츠 차단기";
 "dashboard.accessibility.vpn.button" = "VPN 연결 버튼";
 "dashboard.accessibility.vpn.button.isOff" = "VPN 연결 버튼. VPN이 현재 연결 해제되었습니다";
 "dashboard.accessibility.vpn.button.isOn" = "VPN 연결 버튼. VPN이 현재 연결되었습니다";
@@ -209,7 +209,7 @@
 "settings.application_information.debug.failure.title" = "제출 중 오류 발생";
 "settings.application_information.debug.success.message" = "디버그 정보 제출 성공. \nID: %@\n저희 지원팀이 귀하의 제출 정보를 확인하려면 이 ID가 필요하므로 적어두시기 바랍니다.";
 "settings.application_information.debug.success.title" = "디버그 정보 제출 완료";
-"settings.application_information.debug.title" = "지원팀에 디버그 보내기";
+"settings.application_information.debug.title" = "지원팀에 디버그 로그 보내기";
 "settings.application_information.title" = "애플리케이션 정보";
 "settings.application_settings.active_theme.title" = "활성화된 테마";
 "settings.application_settings.dark_theme.title" = "다크 테마";
@@ -283,6 +283,10 @@
 "settings.section.protocols" = "프로토콜";
 "settings.server.network.alert" = "서버 네트워크를 변경하려면 VPN의 연결을 해제해야 합니다.";
 "settings.server.network.description" = "차세대 네트워크";
+"settings.service.quality.share.description" = "VPN 연결 통계를 공유하여 저희 서비스를 개선할 수 있도록 도와 주세요. 이 보고서에는 개인 식별 정보가 절대로 포함되지 않습니다.";
+"settings.service.quality.share.findoutmore" = "자세히 보기";
+"settings.service.quality.share.title" = "PIA 개선 작업 지원하기";
+"settings.service.quality.show.title" = "연결 통계";
 "settings.small.packets.description" = "일부 라우터 및 모바일 네트워크와의 호환성을 향상시키기 위해 IP 패킷의 크기를 약간 줄입니다.";
 "settings.small.packets.title" = "작은 패킷 사용";
 "settings.trusted.networks.connect.message" = "VPN에 연결해서 이 네트워크를 보호하시겠습니까?";

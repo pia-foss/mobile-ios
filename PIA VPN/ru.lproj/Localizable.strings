@@ -42,7 +42,7 @@
 "card.wireguard.title" = "Опробуйте WireGuard® сегодня!";
 "content_blocker.body.footer" = "Примечание. Для работы этого правила блокирования контента подключаться к VPN необязательно, но оно будет работать только при просмотре сайтов в Safari.";
 "content_blocker.body.subtitle" = "Чтобы включить наше правило блокирования контента в Safari, перейдите в \"Настроки\" > Safari, а затем во вкладке \"Основные\" коснитесь пункта \"Правила блокирования контента\" и включите PIA VPN.";
-"content_blocker.title" = "Правило блокирования контента";
+"content_blocker.title" = "Блокировщик контента для Safari";
 "dashboard.accessibility.vpn.button" = "Кнопка VPN-подключения";
 "dashboard.accessibility.vpn.button.isOff" = "Кнопка VPN-подключения. VPN сейчас отключен";
 "dashboard.accessibility.vpn.button.isOn" = "Кнопка VPN-подключения. VPN сейчас подключен";
@@ -209,7 +209,7 @@
 "settings.application_information.debug.failure.title" = "Ошибка при отправке";
 "settings.application_information.debug.success.message" = "Отладочная информация успешно отправлена.\nКод: %@\nЗапишите этот код, т. к. наша служба поддержки запрашивает его для поиска переданных вами данных.";
 "settings.application_information.debug.success.title" = "Отладочная информация отправлена";
-"settings.application_information.debug.title" = "Отправить отладочную информацию в службу поддержки";
+"settings.application_information.debug.title" = "Отправить журнал отладки в службу поддержки";
 "settings.application_information.title" = "СВЕДЕНИЯ О ПРИЛОЖЕНИИ";
 "settings.application_settings.active_theme.title" = "Активная тема";
 "settings.application_settings.dark_theme.title" = "Темная тема";
@@ -283,6 +283,10 @@
 "settings.section.protocols" = "Протоколы";
 "settings.server.network.alert" = "Для смены сети сервера VPN необходимо отключить.";
 "settings.server.network.description" = "Сеть следующего поколения";
+"settings.service.quality.share.description" = "Помогите нам стать лучше, передавая статистику по VPN-соединению. Эти отчеты не содержат каких-либо персональных данных.";
+"settings.service.quality.share.findoutmore" = "Подробнее";
+"settings.service.quality.share.title" = "Помогать делать PIA лучше";
+"settings.service.quality.show.title" = "Статистика по соединению";
 "settings.small.packets.description" = "Размер IP-пакета будет слегка уменьшен, чтобы улучшить совместимость с некоторыми роутерами и мобильными сетями.";
 "settings.small.packets.title" = "Использовать маленькие пакеты";
 "settings.trusted.networks.connect.message" = "Защитить эту сеть, подключившись к VPN?";

@@ -42,7 +42,7 @@
 "card.wireguard.title" = "立即试用 WireGuard®！";
 "content_blocker.body.footer" = "请注意：无需连接到 VPN，此内容拦截器也可正常工作，但该功能只有在使用 Safari 进行浏览时才能发挥作用。";
 "content_blocker.body.subtitle" = "要启用内容拦截器以用于 Safari，请转至设置 > Safari，然后在“通用”下，触摸 PIA VPN 上的内容拦截器开关。";
-"content_blocker.title" = "内容拦截器";
+"content_blocker.title" = "Safari 内容拦截器";
 "dashboard.accessibility.vpn.button" = "VPN 连接按钮";
 "dashboard.accessibility.vpn.button.isOff" = "VPN 连接按钮。VPN 当前已断开连接";
 "dashboard.accessibility.vpn.button.isOn" = "VPN 连接按钮。VPN 当前已断开连接";
@@ -209,12 +209,12 @@
 "settings.application_information.debug.failure.title" = "提交时出错";
 "settings.application_information.debug.success.message" = "调试信息成功提交。\nID：%@\n请记下此 ID，因为我们的支持团队需要该信息来找到您提交的内容。";
 "settings.application_information.debug.success.title" = "调试信息已提交";
-"settings.application_information.debug.title" = "向支持人员发送调试";
+"settings.application_information.debug.title" = "向支持人员发送调试日志";
 "settings.application_information.title" = "应用程序信息";
 "settings.application_settings.active_theme.title" = "活跃主题";
 "settings.application_settings.dark_theme.title" = "黑暗主题";
 "settings.application_settings.kill_switch.footer" = "如果 VPN 连接重新连线，VPN 终止开关会阻止访问互联网。这不包括手动断开连接。";
-"settings.application_settings.kill_switch.title" = "VPN kill switch";
+"settings.application_settings.kill_switch.title" = "VPN 切断开关";
 "settings.application_settings.mace.footer" = "PIA MACE™可在您连接到 VPN 时阻止广告、跟踪和恶意软件。";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.title" = "应用程序设置";
@@ -283,6 +283,10 @@
 "settings.section.protocols" = "协议";
 "settings.server.network.alert" = "必须断开 VPN 才能更改服务器网络。";
 "settings.server.network.description" = "下一代网络";
+"settings.service.quality.share.description" = "共享连接统计数据以帮助我们改进服务。这些报告绝不包括可识别个人身份的信息。";
+"settings.service.quality.share.findoutmore" = "了解详情";
+"settings.service.quality.share.title" = "帮助改进 PIA";
+"settings.service.quality.show.title" = "连接统计";
 "settings.small.packets.description" = "稍微降低 IP 数据包的大小，以改进与一些路由器和移动网络的兼容性";
 "settings.small.packets.title" = "使用小数据包";
 "settings.trusted.networks.connect.message" = "通过连接到 VPN 来保护此网络？";

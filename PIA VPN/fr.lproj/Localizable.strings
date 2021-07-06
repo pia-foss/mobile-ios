@@ -42,7 +42,7 @@
 "card.wireguard.title" = "Essayez WireGuard® aujourd'hui !";
 "content_blocker.body.footer" = "Veuillez noter : vous n'avez pas besoin d'être connecté au VPN pour que ce bloqueur de contenu fonctionne, mais il ne fonctionnera qu'en naviguant avec Safari.";
 "content_blocker.body.subtitle" = "Pour activer l'utilisation de notre bloqueur de contenu sur Safari, veuillez accéder aux Réglages > Safari et dans la section Général, activez le bouton Bloqueurs de contenu sur PIA VPN.";
-"content_blocker.title" = "Bloqueur de contenu";
+"content_blocker.title" = "Bloqueur de contenu Safari";
 "dashboard.accessibility.vpn.button" = "Bouton de connexion VPN";
 "dashboard.accessibility.vpn.button.isOff" = "Bouton de connexion VPN. Le VPN est actuellement déconnecté";
 "dashboard.accessibility.vpn.button.isOn" = "Bouton de connexion VPN. Le VPN est actuellement connecté";
@@ -209,7 +209,7 @@
 "settings.application_information.debug.failure.title" = "Erreur au cours de l'envoi";
 "settings.application_information.debug.success.message" = "Informations de débogage envoyées avec succès.\nID : %@\nVeuillez noter cet ID car notre équipe d'assistance en a besoin pour localiser votre message.";
 "settings.application_information.debug.success.title" = "Informations de débogage envoyées";
-"settings.application_information.debug.title" = "Envoyer le débogage à l'assistance";
+"settings.application_information.debug.title" = "Envoyer le journal de débogage à l'assistance";
 "settings.application_information.title" = "INFORMATIONS DE L'APPLICATION";
 "settings.application_settings.active_theme.title" = "Thème actif";
 "settings.application_settings.dark_theme.title" = "Thème sombre";
@@ -283,6 +283,10 @@
 "settings.section.protocols" = "Protocoles";
 "settings.server.network.alert" = "Le VPN doit être déconnecté pour changer le réseau du serveur.";
 "settings.server.network.description" = "Réseau nouvelle génération";
+"settings.service.quality.share.description" = "Aidez-nous à nous améliorer en partageant les statistiques de connexion VPN. Ces rapports ne contiennent jamais d'informations personnelles identifiables.";
+"settings.service.quality.share.findoutmore" = "En savoir plus";
+"settings.service.quality.share.title" = "Aidez à améliorer PIA";
+"settings.service.quality.show.title" = "Stats de connexion";
 "settings.small.packets.description" = "Diminue légèrement la taille des paquets IP pour améliorer la compatibilité avec certains routeurs et réseaux mobiles.";
 "settings.small.packets.title" = "Utiliser des petits paquets";
 "settings.trusted.networks.connect.message" = "Protéger ce réseau en vous connectant au VPN ?";
