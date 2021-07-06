@@ -362,15 +362,15 @@ class DashboardViewController: AutolayoutViewController {
     }
 
     @IBAction func vpnButtonClicked(_ sender: Any?) {
-        
-        //User clicked the button, the connection or disconnection of the VPN was manual
-        Client.configuration.isManualConnection = true
-        
+                
         if !toggleConnection.isOn,
             Client.providers.vpnProvider.vpnStatus != .disconnecting,
             Client.providers.vpnProvider.vpnStatus != .connecting {
             Client.providers.vpnProvider.connect({ [weak self] error in
                 
+                //User clicked the button, the connection of the VPN was manual
+                Client.configuration.connectedManually = true
+
                 guard let weakSelf = self else { return }
                 if let _ = error {
                     RatingManager.shared.logError()
@@ -404,6 +404,9 @@ class DashboardViewController: AutolayoutViewController {
             
         } else {
             
+            //User clicked the button, the disconnection of the VPN was manual
+            Client.configuration.disconnectedManually = true
+
             disconnectWithOneSecondDelay()
 
         }
