@@ -79,8 +79,8 @@ def shared_main_pods
     pod "PIAKPIModule", :git => "#{$gitlab_kn_root}/#{$kpi_gitlab_repo}", :commit => '3e2c385'
 
     #library_by_path('')
-    #library_by_git('b73d9e5')
-    library_by_gitlab_branch('release/2.12.0')
+    library_by_git('3fb9fb7')
+    #library_by_gitlab_branch('')
     #library_by_gitlab_by_git('38a7754')
     #library_by_version('~> 1.1.3')
 end
