@@ -363,45 +363,8 @@ class DashboardViewController: AutolayoutViewController {
 
     @IBAction func vpnButtonClicked(_ sender: Any?) {
                 
-        if !toggleConnection.isOn,
-            Client.providers.vpnProvider.vpnStatus != .disconnecting,
-            Client.providers.vpnProvider.vpnStatus != .connecting {
-            Client.providers.vpnProvider.connect({ [weak self] error in
-                
-                //User clicked the button, the connection of the VPN was manual
-                Client.configuration.connectedManually = true
-
-                guard let weakSelf = self else { return }
-                if let _ = error {
-                    RatingManager.shared.logError()
-                }
-                
-                let preferences = Client.preferences.editable()
-                preferences.lastConnectedRegion = Client.providers.serverProvider.targetServer
-                preferences.commit()
-
-                if Client.providers.vpnProvider.vpnStatus == .disconnected {
-                    weakSelf.handleDisconnectedAndTrustedNetwork()
-                    if weakSelf.isTrustedNetwork() {
-                        //Show additionally a message indicating the VPN is enabled but disconnected given the current NMT settings
-                        let alert = Macros.alert(nil, L10n.Network.Management.Tool.alert)
-                        alert.addCancelAction(L10n.Global.close)
-                        alert.addActionWithTitle(L10n.Network.Management.Tool.disable) {
-                            let preferences = Client.preferences.editable()
-                            preferences.nmtRulesEnabled = !Client.preferences.nmtRulesEnabled
-                            preferences.commit()
-                            NotificationCenter.default.post(name: .PIAQuickSettingsHaveChanged,
-                                                            object: self,
-                                                            userInfo: nil)
-                        }
-                        weakSelf.present(alert, animated: true, completion: nil)
-                    }
-                }
-                self?.reloadUsageTileAfter(seconds: 5) //Show some usage after 5 seconds of activity
-            })
-            
-            Macros.postNotification(.PIAServerHasBeenUpdated)
-            
+        if canConnectVPN() {
+            manuallyConnect()
         } else {
             
             //User clicked the button, the disconnection of the VPN was manual
@@ -411,6 +374,57 @@ class DashboardViewController: AutolayoutViewController {
 
         }
         Macros.postNotification(.PIAVPNUsageUpdate)
+    }
+    
+    private func canConnectVPN() -> Bool {
+        return !toggleConnection.isOn &&
+        Client.providers.vpnProvider.vpnStatus != .disconnecting &&
+        Client.providers.vpnProvider.vpnStatus != .connecting
+    }
+    
+    private func manuallyConnect() {
+        Client.providers.vpnProvider.connect({ [weak self] error in
+            
+            //User clicked the button, the connection of the VPN was manual
+            Client.configuration.connectedManually = true
+            
+            guard let weakSelf = self else { return }
+            if let _ = error {
+                RatingManager.shared.logError()
+            }
+            
+            let preferences = Client.preferences.editable()
+            preferences.lastConnectedRegion = Client.providers.serverProvider.targetServer
+            preferences.commit()
+            
+            if Client.providers.vpnProvider.vpnStatus == .disconnected {
+                weakSelf.handleDisconnectedAndTrustedNetwork()
+                if weakSelf.isTrustedNetwork() {
+                    //Show additionally a message indicating the VPN is enabled but disconnected given the current NMT settings
+                    weakSelf.showAutomationAlert() {
+                        weakSelf.manuallyConnect()
+                    }
+                }
+            }
+            self?.reloadUsageTileAfter(seconds: 5) //Show some usage after 5 seconds of activity
+        })
+        
+        Macros.postNotification(.PIAServerHasBeenUpdated)
+    }
+    
+    private func showAutomationAlert(onNMTDisableAction: (() -> ())? = nil) {
+        let alert = Macros.alert(nil, L10n.Network.Management.Tool.alert)
+        alert.addCancelAction(L10n.Global.close)
+        alert.addActionWithTitle(L10n.Network.Management.Tool.disable) {
+            let preferences = Client.preferences.editable()
+            preferences.nmtRulesEnabled = !Client.preferences.nmtRulesEnabled
+            preferences.commit()
+            NotificationCenter.default.post(name: .PIAQuickSettingsHaveChanged,
+                                            object: self,
+                                            userInfo: nil)
+            onNMTDisableAction?()
+        }
+        self.present(alert, animated: true, completion: nil)
     }
     
     private func disconnectWithOneSecondDelay() {
@@ -465,6 +479,8 @@ class DashboardViewController: AutolayoutViewController {
             nmt.persistentConnectionValue = Client.preferences.isPersistentConnection
         } else if let vc = segue.destination as? AddEmailToAccountViewController {
             vc.modalPresentationStyle = .fullScreen
+        } else if let vc = segue.destination as? RegionsViewController {
+            vc.serverSelectionDelegate = self
         } else if let identifier = segue.identifier,
             identifier == StoryboardSegue.Main.settingsAndWireGuardSegueIdentifier.rawValue,
             let vc = segue.destination as? SettingsViewController {
@@ -858,6 +874,8 @@ extension DashboardViewController: MenuViewControllerDelegate {
     }
 }
 
+// MARK: CollectionView
+
 extension DashboardViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView,
@@ -916,6 +934,9 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
                                                       for: indexPath)
         if let cell = cell as? EditableTileCell {
             cell.setupCellForStatus(self.tileModeStatus)
+        }
+        if let cell = cell as? ServerSelectingCell {
+            cell.delegate = self
         }
         return cell
     }
@@ -985,6 +1006,29 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             orderedTiles.insert(tile, at: destinationIndexPath.row)
             Client.providers.tileProvider.orderedTiles = orderedTiles
             collectionView.reloadData()
+        }
+    }
+}
+
+extension DashboardViewController: ServerSelectionDelegate {
+    
+    func didSelectServer(_ server: Server) {
+        
+        let isConnected = Client.providers.vpnProvider.isVPNConnected
+        let currentServer = Client.preferences.displayedServer
+        if isConnected {
+            guard (server.identifier != currentServer.identifier || server.dipToken != currentServer.dipToken) else {
+                return
+            }
+        }
+        if isTrustedNetwork() {
+            showAutomationAlert() {
+                Client.preferences.displayedServer = server
+            }
+        }
+        else {
+            //Setting this triggers a connection attempt
+            Client.preferences.displayedServer = server
         }
     }
 }

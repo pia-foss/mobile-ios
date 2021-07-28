@@ -26,6 +26,8 @@ import PIALibrary
 
 class FavoriteServersTile: UIView, Tileable {
     
+    weak var delegate: ServerSelectionDelegate?
+    
     var view: UIView!
     var detailSegueIdentifier: String!
     var status: TileStatus = .normal {

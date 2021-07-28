@@ -50,6 +50,8 @@ class RegionsViewController: AutolayoutViewController {
 
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var gradientProgressBar: GradientProgressBar!
+    
+    weak var serverSelectionDelegate: ServerSelectionDelegate!
 
     private var servers: [Server] = []
     private var filteredServers = [Server]()
@@ -405,13 +407,10 @@ extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
         guard (selectedServer.identifier != currentServer.identifier || selectedServer.dipToken != currentServer.dipToken) else {
             return
         }
-        Client.preferences.displayedServer = selectedServer
-        NotificationCenter.default.post(name: .PIAThemeDidChange,
-                                        object: self,
-                                        userInfo: nil)
         
         self.dismissModal()
-        
+        serverSelectionDelegate.didSelectServer(selectedServer)
+
     }
 }
 
