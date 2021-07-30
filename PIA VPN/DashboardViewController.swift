@@ -399,7 +399,7 @@ class DashboardViewController: AutolayoutViewController {
             
             if Client.providers.vpnProvider.vpnStatus == .disconnected {
                 weakSelf.handleDisconnectedAndTrustedNetwork()
-                if weakSelf.isTrustedNetwork() {
+                if TrustedNetworkUtils.isTrustedNetwork {
                     //Show additionally a message indicating the VPN is enabled but disconnected given the current NMT settings
                     weakSelf.showAutomationAlert() {
                         weakSelf.manuallyConnect()
@@ -412,7 +412,7 @@ class DashboardViewController: AutolayoutViewController {
         Macros.postNotification(.PIAServerHasBeenUpdated)
     }
     
-    private func showAutomationAlert(onNMTDisableAction: (() -> ())? = nil) {
+    func showAutomationAlert(onNMTDisableAction: (() -> ())? = nil) {
         let alert = Macros.alert(nil, L10n.Network.Management.Tool.alert)
         alert.addCancelAction(L10n.Global.close)
         alert.addActionWithTitle(L10n.Network.Management.Tool.disable) {
@@ -745,7 +745,7 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     private func handleDisconnectedAndTrustedNetwork() {
-        if isTrustedNetwork() {
+        if TrustedNetworkUtils.isTrustedNetwork {
             toggleConnection.isIndeterminate = false
             toggleConnection.isWarning = true
             let titleLabelView = UILabel(frame: CGRect.zero)
@@ -763,31 +763,6 @@ class DashboardViewController: AutolayoutViewController {
             AppPreferences.shared.todayWidgetButtonTitle = L10n.Shortcuts.connect
         }
     }
-    
-    private func isTrustedNetwork() -> Bool {
-        if Client.preferences.nmtRulesEnabled {
-            if let ssid = PIAHotspotHelper().currentWiFiNetwork() {
-                if Client.preferences.nmtGenericRules[NMTType.protectedWiFi.rawValue] == NMTRules.alwaysDisconnect.rawValue ||
-                    (Client.preferences.nmtTrustedNetworkRules[ssid] == NMTRules.alwaysDisconnect.rawValue){
-                    setWidgetTrustedNetworkStatus(isTrustedNetwork: true)
-                    return true
-                }
-            } else {
-                if Client.preferences.nmtGenericRules[NMTType.cellular.rawValue] == NMTRules.alwaysDisconnect.rawValue {
-                    setWidgetTrustedNetworkStatus(isTrustedNetwork: true)
-                    return true
-                }
-            }
-        }
-        setWidgetTrustedNetworkStatus(isTrustedNetwork: false)
-        return false
-    }
-    
-    private func setWidgetTrustedNetworkStatus(isTrustedNetwork: Bool) {
-        AppPreferences.shared.todayWidgetTrustedNetwork = isTrustedNetwork
-        reloadWidget()
-    }
-
     // MARK: Restylable
 
     override func viewShouldRestyle() {
@@ -1006,29 +981,6 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             orderedTiles.insert(tile, at: destinationIndexPath.row)
             Client.providers.tileProvider.orderedTiles = orderedTiles
             collectionView.reloadData()
-        }
-    }
-}
-
-extension DashboardViewController: ServerSelectionDelegate {
-    
-    func didSelectServer(_ server: Server) {
-        
-        let isConnected = Client.providers.vpnProvider.isVPNConnected
-        let currentServer = Client.preferences.displayedServer
-        if isConnected {
-            guard (server.identifier != currentServer.identifier || server.dipToken != currentServer.dipToken) else {
-                return
-            }
-        }
-        if isTrustedNetwork() {
-            showAutomationAlert() {
-                Client.preferences.displayedServer = server
-            }
-        }
-        else {
-            //Setting this triggers a connection attempt
-            Client.preferences.displayedServer = server
         }
     }
 }

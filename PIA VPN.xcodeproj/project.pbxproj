@@ -138,6 +138,10 @@
 		2985E5671856BD1200D70E28 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2985E5661856BD1200D70E28 /* QuartzCore.framework */; };
 		299E58511856BD31004CFD63 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 299E58501856BD31004CFD63 /* SystemConfiguration.framework */; };
 		299E585F1856C6EE004CFD63 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 299E585E1856C6EE004CFD63 /* libz.dylib */; };
+		3524670B26B431B800E3F0AC /* TrustedNetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3524670A26B431B800E3F0AC /* TrustedNetworkHelper.swift */; };
+		3524670C26B432BC00E3F0AC /* TrustedNetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3524670A26B431B800E3F0AC /* TrustedNetworkHelper.swift */; };
+		3524670E26B432ED00E3F0AC /* DashboardViewController+ServerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3524670D26B432ED00E3F0AC /* DashboardViewController+ServerSelection.swift */; };
+		3524670F26B4332E00E3F0AC /* DashboardViewController+ServerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3524670D26B432ED00E3F0AC /* DashboardViewController+ServerSelection.swift */; };
 		3545E98026AAD60C00B812CC /* ServerSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545E97F26AAD60C00B812CC /* ServerSelectionDelegate.swift */; };
 		3545E98226AADB2B00B812CC /* ServerSelectingTileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545E98126AADB2B00B812CC /* ServerSelectingTileCell.swift */; };
 		3545E98326AADC7C00B812CC /* ServerSelectingTileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545E98126AADB2B00B812CC /* ServerSelectingTileCell.swift */; };
@@ -602,6 +606,8 @@
 		299E58501856BD31004CFD63 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		299E585E1856C6EE004CFD63 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		2CD3B4DC052067DC129066C5 /* Pods-PIA VPN.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPN.debug.xcconfig"; path = "Target Support Files/Pods-PIA VPN/Pods-PIA VPN.debug.xcconfig"; sourceTree = "<group>"; };
+		3524670A26B431B800E3F0AC /* TrustedNetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedNetworkHelper.swift; sourceTree = "<group>"; };
+		3524670D26B432ED00E3F0AC /* DashboardViewController+ServerSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DashboardViewController+ServerSelection.swift"; sourceTree = "<group>"; };
 		3545E97F26AAD60C00B812CC /* ServerSelectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSelectionDelegate.swift; sourceTree = "<group>"; };
 		3545E98126AADB2B00B812CC /* ServerSelectingTileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSelectingTileCell.swift; sourceTree = "<group>"; };
 		37354B0E1581D036781A7379 /* Pods-PIA VPN Tunnel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPN Tunnel.release.xcconfig"; path = "Target Support Files/Pods-PIA VPN Tunnel/Pods-PIA VPN Tunnel.release.xcconfig"; sourceTree = "<group>"; };
@@ -845,6 +851,7 @@
 			isa = PBXGroup;
 			children = (
 				0E3A35271FD9A960000B0F99 /* DashboardViewController.swift */,
+				3524670D26B432ED00E3F0AC /* DashboardViewController+ServerSelection.swift */,
 				DD4E84562243BD1200929B39 /* DashboardCollectionViewUtil.swift */,
 				0EFB838F20209CF200980F69 /* VPNPermissionViewController.swift */,
 			);
@@ -953,6 +960,7 @@
 				DD918575246BFA7F006B3A2B /* RatingManager.swift */,
 				DDD65312247E66AD00F0A897 /* CoordinatesFinder.swift */,
 				829EB51B2535A8FF003E74DD /* CollectionViewAutoSizeUtils.swift */,
+				3524670A26B431B800E3F0AC /* TrustedNetworkHelper.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -2037,6 +2045,7 @@
 				0EFDC1CD1FE35C9A007C0B9B /* Server+Automatic.swift in Sources */,
 				0E98BB6F1FD5BC6200B41D6B /* Bootstrapper.swift in Sources */,
 				8272C6342657EE4E00D846A8 /* AutomationSettingsViewController.swift in Sources */,
+				3524670F26B4332E00E3F0AC /* DashboardViewController+ServerSelection.swift in Sources */,
 				0E9452A01FDB547D00891948 /* ExpirationCell.swift in Sources */,
 				0EFDC1F01FE4B9E6007C0B9B /* AppConfiguration.swift in Sources */,
 				DD76292321ECCD5C0092DF50 /* UsageTile.swift in Sources */,
@@ -2134,6 +2143,7 @@
 				82C0071425231F2800F21AF2 /* String+VPNType.swift in Sources */,
 				DD1C138721E60BAE004004B3 /* IPTile.swift in Sources */,
 				0E9452971FDB4C5800891948 /* AboutComponentCell.swift in Sources */,
+				3524670C26B432BC00E3F0AC /* TrustedNetworkHelper.swift in Sources */,
 				0E53A83C1FE5A156000C2A18 /* AccountProvider+Refresh.swift in Sources */,
 				0EFDC1E11FE4A450007C0B9B /* AppPreferences.swift in Sources */,
 				0E441E272055AEDF007528D5 /* ThemeStrategy+App.swift in Sources */,
@@ -2273,12 +2283,14 @@
 				0E7361A01FD86F8300706BFF /* AccountObserver.swift in Sources */,
 				0EFDC1E61FE4ABAA007C0B9B /* Notification+App.swift in Sources */,
 				827570E124DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift in Sources */,
+				3524670E26B432ED00E3F0AC /* DashboardViewController+ServerSelection.swift in Sources */,
 				DD918576246BFA7F006B3A2B /* RatingManager.swift in Sources */,
 				DD1C138621E60BAE004004B3 /* IPTile.swift in Sources */,
 				0E9452961FDB4C5800891948 /* AboutComponentCell.swift in Sources */,
 				0E53A83B1FE5A156000C2A18 /* AccountProvider+Refresh.swift in Sources */,
 				82B7374B26527E330097FFF6 /* GeneralSettingsViewController.swift in Sources */,
 				0EFDC1E01FE4A450007C0B9B /* AppPreferences.swift in Sources */,
+				3524670B26B431B800E3F0AC /* TrustedNetworkHelper.swift in Sources */,
 				829EB54A2535BA40003E74DD /* DedicatedIPTitleHeaderViewCell.swift in Sources */,
 				82B7374F265280180097FFF6 /* PIABaseSettingsViewController.swift in Sources */,
 				DDC8124F21761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift in Sources */,
