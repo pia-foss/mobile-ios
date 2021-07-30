@@ -277,8 +277,6 @@
 		DD172A9D2254C36D00071CFB /* FavoriteServersTileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD172A992254C36D00071CFB /* FavoriteServersTileCollectionViewCell.xib */; };
 		DD172A9F2254C39300071CFB /* FavoriteServersTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD172A9E2254C39300071CFB /* FavoriteServersTile.xib */; };
 		DD172AA02254C39300071CFB /* FavoriteServersTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD172A9E2254C39300071CFB /* FavoriteServersTile.xib */; };
-		DD172AA322573EDC00071CFB /* ServerTile+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD172AA222573EDC00071CFB /* ServerTile+App.swift */; };
-		DD172AA422573EDC00071CFB /* ServerTile+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD172AA222573EDC00071CFB /* ServerTile+App.swift */; };
 		DD1AA4962180AD92005116D7 /* CustomDNSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1AA4952180AD92005116D7 /* CustomDNSSettingsViewController.swift */; };
 		DD1AA4972180AD92005116D7 /* CustomDNSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1AA4952180AD92005116D7 /* CustomDNSSettingsViewController.swift */; };
 		DD1AB0E923F2993600396E74 /* PIA VPN WG Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DDC8F5EC23EC106F005D19C6 /* PIA VPN WG Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -690,7 +688,6 @@
 		DD172A982254C36D00071CFB /* FavoriteServersTileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteServersTileCollectionViewCell.swift; sourceTree = "<group>"; };
 		DD172A992254C36D00071CFB /* FavoriteServersTileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteServersTileCollectionViewCell.xib; sourceTree = "<group>"; };
 		DD172A9E2254C39300071CFB /* FavoriteServersTile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteServersTile.xib; sourceTree = "<group>"; };
-		DD172AA222573EDC00071CFB /* ServerTile+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ServerTile+App.swift"; sourceTree = "<group>"; };
 		DD1AA4952180AD92005116D7 /* CustomDNSSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDNSSettingsViewController.swift; sourceTree = "<group>"; };
 		DD1C138521E60BAE004004B3 /* IPTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPTile.swift; sourceTree = "<group>"; };
 		DD1C138821E60C63004004B3 /* IPTile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IPTile.xib; sourceTree = "<group>"; };
@@ -1255,18 +1252,9 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		DD172AA122573ECA00071CFB /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				DD172AA222573EDC00071CFB /* ServerTile+App.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		DD1C137E21E6073A004004B3 /* Tiles */ = {
 			isa = PBXGroup;
 			children = (
-				DD172AA122573ECA00071CFB /* Extensions */,
 				DD1C13A321E6743F004004B3 /* TileFlowLayout.swift */,
 				DD1C138521E60BAE004004B3 /* IPTile.swift */,
 				3545E97F26AAD60C00B812CC /* ServerSelectionDelegate.swift */,
@@ -2081,7 +2069,6 @@
 				8272C6372657F23400D846A8 /* HelpSettingsViewController.swift in Sources */,
 				DD3B504724B758330002F4B5 /* Collectable.swift in Sources */,
 				0E3A35361FD9EBDA000B0F99 /* AppDelegate.swift in Sources */,
-				DD172AA422573EDC00071CFB /* ServerTile+App.swift in Sources */,
 				3545E98326AADC7C00B812CC /* ServerSelectingTileCell.swift in Sources */,
 				824C531624C04796003DB740 /* ConnectionTileCollectionViewCell.swift in Sources */,
 				DDC8124D2176185D00CB290C /* SwiftGen+SeguesStoryboards.swift in Sources */,
@@ -2226,7 +2213,6 @@
 				DDF7F755240D35BA00A671C7 /* CustomServerSettingsViewController.swift in Sources */,
 				0ECF5C082017EBAD0047596C /* ThemeCode.swift in Sources */,
 				3545E98026AAD60C00B812CC /* ServerSelectionDelegate.swift in Sources */,
-				DD172AA322573EDC00071CFB /* ServerTile+App.swift in Sources */,
 				0E392DA61FE3283C0002160D /* TransientState.swift in Sources */,
 				82F41376264E8AC20098FF4B /* SettingOptions.swift in Sources */,
 				824C531524C04796003DB740 /* ConnectionTileCollectionViewCell.swift in Sources */,
