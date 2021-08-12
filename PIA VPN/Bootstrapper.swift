@@ -31,7 +31,7 @@ import Fabric
 import Crashlytics
 #endif
 
-class Bootstrapper {
+class Bootstrapper: CertificateDependency {
     
     static let shared = Bootstrapper()
     
@@ -47,6 +47,7 @@ class Bootstrapper {
     }
 
     func bootstrap() {
+        Client.certificateDependency = self
         
         let console = ConsoleDestination()
         #if PIA_DEV
@@ -188,7 +189,7 @@ class Bootstrapper {
         if Flags.shared.usesMockAccount {
             Client.useMockAccountProvider(AppConfiguration.Mock.accountProvider)
         }
-        
+
         Client.bootstrap()
         
         // Preferences
@@ -240,6 +241,12 @@ class Bootstrapper {
 
     func dispose() {
         Client.dispose()
+    }
+
+    // MARK: CertificateDependency
+
+    func rsa4096Certificate() -> String? {
+        return AppPreferences.shared.piaHandshake.pemString()
     }
     
     // MARK: Notifications
