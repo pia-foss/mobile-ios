@@ -22,7 +22,7 @@
 import Foundation
 import PIARegions
 
-class PIARegionClientStateProvider : RegionClientStateProvider {
+class PIARegionClientStateProvider : IRegionEndpointProvider {
 
     func regionEndpoints() -> [RegionEndpoint] {
         let validEndpoints = EndpointManager.shared.availableRegionEndpoints()

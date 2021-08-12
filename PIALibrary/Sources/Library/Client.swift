@@ -25,6 +25,11 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
+public protocol CertificateDependency {
+
+    func rsa4096Certificate() -> String?
+}
+
 /// The entry point for client initialization and usage.
 public final class Client {
 
@@ -48,7 +53,9 @@ public final class Client {
     /// The business providers (customizable).
     public static var providers = Client.Providers()
     
-    static var webServices: WebServices = PIAWebServices()
+    static var webServices: WebServices = PIAWebServices(rsa4096Certificate: certificateDependency?.rsa4096Certificate())
+
+    public static var certificateDependency: CertificateDependency?
 
     #if os(iOS)
     static var store: InAppProvider = AppStoreProvider()
@@ -89,7 +96,7 @@ public final class Client {
     }
     
     public static func resetWebServices() {
-        Client.webServices = PIAWebServices()
+        Client.webServices = PIAWebServices(rsa4096Certificate: certificateDependency?.rsa4096Certificate())
     }
     
     /**
