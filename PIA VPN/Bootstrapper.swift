@@ -31,7 +31,7 @@ import Fabric
 import Crashlytics
 #endif
 
-class Bootstrapper: CertificateDependency {
+class Bootstrapper {
     
     static let shared = Bootstrapper()
     
@@ -47,8 +47,6 @@ class Bootstrapper: CertificateDependency {
     }
 
     func bootstrap() {
-        Client.certificateDependency = self
-        
         let console = ConsoleDestination()
         #if PIA_DEV
         console.minLevel = .debug
@@ -88,6 +86,8 @@ class Bootstrapper: CertificateDependency {
         } catch let e {
             fatalError("Could not parse bundled regions file: \(e)")
         }
+
+        Client.configuration.rsa4096Certificate = rsa4096Certificate()
 
         #if PIA_DEV
         Client.environment =  AppPreferences.shared.appEnvironmentIsProduction ? .production : .staging
@@ -243,7 +243,7 @@ class Bootstrapper: CertificateDependency {
         Client.dispose()
     }
 
-    // MARK: CertificateDependency
+    // MARK: Certificate
 
     func rsa4096Certificate() -> String? {
         return AppPreferences.shared.piaHandshake.pemString()
