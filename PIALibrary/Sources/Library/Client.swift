@@ -48,7 +48,7 @@ public final class Client {
     /// The business providers (customizable).
     public static var providers = Client.Providers()
     
-    static var webServices: WebServices! = PIAWebServices()
+    static var webServices: WebServices = PIAWebServices()
 
     #if os(iOS)
     static var store: InAppProvider = AppStoreProvider()
