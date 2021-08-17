@@ -41,7 +41,9 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     let csiAPI: CSIAPI!
     let csiProtocolInformationProvider = PIACSIProtocolInformationProvider()
     
-    init(rsa4096Certificate: String?) {
+    init() {
+        let rsa4096Certificate = Client.configuration.rsa4096Certificate
+        
         self.regionsAPI = RegionsBuilder()
             .setEndpointProvider(endpointsProvider: PIARegionClientStateProvider())
             .setCertificate(certificate: rsa4096Certificate)
