@@ -47,7 +47,12 @@ class DashboardViewController: AutolayoutViewController {
         case orange
         case normal
     }
-
+    
+    struct UsageTileReloadSeconds {
+        static let afterConnect: TimeInterval = 5
+        static let afterDisconnect: TimeInterval = 1
+    }
+    
     private var viewContentHeight: CGFloat = 0
     @IBOutlet weak var viewContentHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewContentLandscapeHeightConstraint: NSLayoutConstraint!
@@ -406,7 +411,8 @@ class DashboardViewController: AutolayoutViewController {
                     }
                 }
             }
-            self?.reloadUsageTileAfter(seconds: 5) //Show some usage after 5 seconds of activity
+            weakSelf.reloadUsageTileAfter(seconds: UsageTileReloadSeconds.afterConnect) //Show usage statistics after connecting
+
         })
         
         Macros.postNotification(.PIAServerHasBeenUpdated)
@@ -430,7 +436,7 @@ class DashboardViewController: AutolayoutViewController {
     private func disconnectWithOneSecondDelay() {
         Client.providers.vpnProvider.disconnect({ [weak self] _ in
             self?.updateCurrentStatus()
-            self?.reloadUsageTileAfter(seconds: 1) //Reset the usage statistics after stop the VPN
+            self?.reloadUsageTileAfter(seconds: UsageTileReloadSeconds.afterDisconnect) //Reset the usage statistics after stop the VPN
         })
     }
     
