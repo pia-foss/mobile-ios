@@ -26,6 +26,8 @@ import PIALibrary
 
 class FavoriteServersTile: UIView, Tileable {
     
+    weak var delegate: ServerSelectionDelegate?
+    
     var view: UIView!
     var detailSegueIdentifier: String!
     var status: TileStatus = .normal {
@@ -140,10 +142,10 @@ class FavoriteServersTile: UIView, Tileable {
     }
     
     @IBAction private func connectToServer(_ sender: ServerButton) {
-        if Client.providers.vpnProvider.vpnStatus != .connecting,
-            let server = sender.server {
-            self.connectTo(server: server)
+        guard let server = sender.server else {
+            return
         }
+        delegate?.didSelectServer(server)
     }
     
     private func statusUpdated() {

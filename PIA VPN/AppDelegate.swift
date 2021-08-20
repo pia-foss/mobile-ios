@@ -37,6 +37,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         case selectRegion
     }
+    
+    private let defaultMilliseconds = 200
 
     var window: UIWindow?
     private var hotspotHelper: PIAHotspotHelper!
@@ -140,9 +142,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
         } else if url.absoluteString.starts(with: AppConstants.Widget.connect) {
             if Client.providers.vpnProvider.isVPNConnected {
-                disconnectAfter(milliseconds: 200)
+                disconnectAfter(milliseconds: defaultMilliseconds)
             } else {
-                connectAfter(milliseconds: 200)
+                connectAfter(milliseconds: defaultMilliseconds)
             }
         }
         
@@ -158,11 +160,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             
         case VPNStatus.connected.rawValue:
             if Client.providers.vpnProvider.isVPNConnected {
-                disconnectAfter(milliseconds: 200)
+                disconnectAfter(milliseconds: defaultMilliseconds)
             }
         case VPNStatus.disconnected.rawValue:
             if !Client.providers.vpnProvider.isVPNConnected {
-                connectAfter(milliseconds: 200)
+                connectAfter(milliseconds: defaultMilliseconds)
             }
 
         default:
@@ -244,7 +246,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         case .connect:
             if !Client.providers.vpnProvider.isVPNConnected {
                 // this time delay seems to fix a strange issue of the VPN connecting from a fresh launch
-                connectAfter(milliseconds: 200)
+                connectAfter(milliseconds: defaultMilliseconds)
             }
 
         case .disconnect:
@@ -252,7 +254,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 
                 // this time delay seems to fix a strange issue of the VPN disconnecting and
                 // then automatically reconnecting when it's done from a fresh launch
-                disconnectAfter(milliseconds: 200)
+                disconnectAfter(milliseconds: defaultMilliseconds)
             }
 
         case .selectRegion:
@@ -269,17 +271,20 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     //MARK: Siri Shortcuts
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if userActivity.activityType == AppConstants.SiriShortcuts.shortcutConnect {
-            if AppPreferences.shared.useConnectSiriShortcuts {
-                connectAfter(milliseconds: 200)
+            guard AppPreferences.shared.useConnectSiriShortcuts, !TrustedNetworkUtils.isTrustedNetwork else {
+                return false
             }
-            return AppPreferences.shared.useConnectSiriShortcuts
+            Client.configuration.connectedManually = true
+            connectAfter(milliseconds: defaultMilliseconds)
         } else {
-            if AppPreferences.shared.useDisconnectSiriShortcuts {
-                disconnectAfter(milliseconds: 200)
+            guard AppPreferences.shared.useDisconnectSiriShortcuts, !TrustedNetworkUtils.isTrustedNetwork else {
+                return false
             }
-            return AppPreferences.shared.useDisconnectSiriShortcuts
+            
+            Client.configuration.disconnectedManually = true
+            disconnectAfter(milliseconds: defaultMilliseconds)
         }
-
+        return true
     }
     
     private func connectAfter(milliseconds: Int) {
