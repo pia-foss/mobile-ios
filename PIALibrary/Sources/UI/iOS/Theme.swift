@@ -305,7 +305,7 @@ public class Theme {
     /// :nodoc:
     public func applyBrandNavigationBar(_ navigationBar: UINavigationBar) {
         navigationBar.tintColor = palette.textColor(forRelevance: 1, appearance: .light)
-        navigationBar.barTintColor = palette.brandBackground
+        navigationBar.setBackgroundAppearenceColor(palette.brandBackground)
     }
     
     // MARK: Typography
@@ -663,8 +663,9 @@ public class Theme {
     // MARK: Navigation bar
     
     public func applyLightNavigationBar(_ navigationBar: UINavigationBar) {
+        navigationBar.setBackgroundAppearenceColor(palette.principalBackground)
         navigationBar.tintColor = UIColor.piaGrey4
-        navigationBar.barTintColor = palette.principalBackground
+
     }
     
     // MARK: Refresh control
@@ -698,17 +699,17 @@ public class Theme {
                 barTintColors.count > 0,
                 barTintColors.count <= 2 {
                 if barTintColors.count == 1 {
-                    navigationBar.barTintColor = barTintColors.first
-                    navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
+                    navigationBar.setBackgroundAppearenceColor(barTintColors.first)
+                    navigationBar.setBackgroundAppearenceImage(nil)
                 } else {
                     var updatedFrame = navigationBar.bounds
                     updatedFrame.size.height += navigationBar.frame.origin.y
                     let gradientLayer = CAGradientLayer(frame: updatedFrame, colors: barTintColors)
-                    navigationBar.setBackgroundImage(gradientLayer.createGradientImage(), for: UIBarMetrics.default)
+                    navigationBar.setBackgroundAppearenceImage(gradientLayer.createGradientImage())
                 }
             } else {
-                navigationBar.barTintColor = self.palette.principalBackground
-                navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
+                navigationBar.setBackgroundAppearenceColor(self.palette.principalBackground)
+                navigationBar.setBackgroundAppearenceImage(nil)
             }
             navigationBar.layoutIfNeeded()
         }
@@ -718,7 +719,7 @@ public class Theme {
     
     public func applyLightBrandLogoNavigationBar(_ navigationBar: UINavigationBar) {
         navigationBar.tintColor = palette.textColor(forRelevance: 1, appearance: .dark)
-        navigationBar.barTintColor = palette.principalBackground
+        navigationBar.setBackgroundAppearenceColor(palette.principalBackground)
     }
     
     //MARK: Cell
