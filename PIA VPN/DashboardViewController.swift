@@ -47,7 +47,12 @@ class DashboardViewController: AutolayoutViewController {
         case orange
         case normal
     }
-
+    
+    struct UsageTileReloadSeconds {
+        static let afterConnect: TimeInterval = 5
+        static let afterDisconnect: TimeInterval = 1
+    }
+    
     private var viewContentHeight: CGFloat = 0
     @IBOutlet weak var viewContentHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewContentLandscapeHeightConstraint: NSLayoutConstraint!
@@ -363,45 +368,8 @@ class DashboardViewController: AutolayoutViewController {
 
     @IBAction func vpnButtonClicked(_ sender: Any?) {
                 
-        if !toggleConnection.isOn,
-            Client.providers.vpnProvider.vpnStatus != .disconnecting,
-            Client.providers.vpnProvider.vpnStatus != .connecting {
-            Client.providers.vpnProvider.connect({ [weak self] error in
-                
-                //User clicked the button, the connection of the VPN was manual
-                Client.configuration.connectedManually = true
-
-                guard let weakSelf = self else { return }
-                if let _ = error {
-                    RatingManager.shared.logError()
-                }
-                
-                let preferences = Client.preferences.editable()
-                preferences.lastConnectedRegion = Client.providers.serverProvider.targetServer
-                preferences.commit()
-
-                if Client.providers.vpnProvider.vpnStatus == .disconnected {
-                    weakSelf.handleDisconnectedAndTrustedNetwork()
-                    if weakSelf.isTrustedNetwork() {
-                        //Show additionally a message indicating the VPN is enabled but disconnected given the current NMT settings
-                        let alert = Macros.alert(nil, L10n.Network.Management.Tool.alert)
-                        alert.addCancelAction(L10n.Global.close)
-                        alert.addActionWithTitle(L10n.Network.Management.Tool.disable) {
-                            let preferences = Client.preferences.editable()
-                            preferences.nmtRulesEnabled = !Client.preferences.nmtRulesEnabled
-                            preferences.commit()
-                            NotificationCenter.default.post(name: .PIAQuickSettingsHaveChanged,
-                                                            object: self,
-                                                            userInfo: nil)
-                        }
-                        weakSelf.present(alert, animated: true, completion: nil)
-                    }
-                }
-                self?.reloadUsageTileAfter(seconds: 5) //Show some usage after 5 seconds of activity
-            })
-            
-            Macros.postNotification(.PIAServerHasBeenUpdated)
-            
+        if canConnectVPN() {
+            manuallyConnect()
         } else {
             
             //User clicked the button, the disconnection of the VPN was manual
@@ -413,10 +381,62 @@ class DashboardViewController: AutolayoutViewController {
         Macros.postNotification(.PIAVPNUsageUpdate)
     }
     
+    private func canConnectVPN() -> Bool {
+        return !toggleConnection.isOn &&
+        Client.providers.vpnProvider.vpnStatus != .disconnecting &&
+        Client.providers.vpnProvider.vpnStatus != .connecting
+    }
+    
+    private func manuallyConnect() {
+        Client.providers.vpnProvider.connect({ [weak self] error in
+            
+            //User clicked the button, the connection of the VPN was manual
+            Client.configuration.connectedManually = true
+            
+            guard let weakSelf = self else { return }
+            if let _ = error {
+                RatingManager.shared.logError()
+            }
+            
+            let preferences = Client.preferences.editable()
+            preferences.lastConnectedRegion = Client.providers.serverProvider.targetServer
+            preferences.commit()
+            
+            if Client.providers.vpnProvider.vpnStatus == .disconnected {
+                weakSelf.handleDisconnectedAndTrustedNetwork()
+                if TrustedNetworkUtils.isTrustedNetwork {
+                    //Show additionally a message indicating the VPN is enabled but disconnected given the current NMT settings
+                    weakSelf.showAutomationAlert() {
+                        weakSelf.manuallyConnect()
+                    }
+                }
+            }
+            weakSelf.reloadUsageTileAfter(seconds: UsageTileReloadSeconds.afterConnect) //Show usage statistics after connecting
+
+        })
+        
+        Macros.postNotification(.PIAServerHasBeenUpdated)
+    }
+    
+    func showAutomationAlert(onNMTDisableAction: (() -> ())? = nil) {
+        let alert = Macros.alert(nil, L10n.Network.Management.Tool.alert)
+        alert.addCancelAction(L10n.Global.close)
+        alert.addActionWithTitle(L10n.Network.Management.Tool.disable) {
+            let preferences = Client.preferences.editable()
+            preferences.nmtRulesEnabled = !Client.preferences.nmtRulesEnabled
+            preferences.commit()
+            NotificationCenter.default.post(name: .PIAQuickSettingsHaveChanged,
+                                            object: self,
+                                            userInfo: nil)
+            onNMTDisableAction?()
+        }
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     private func disconnectWithOneSecondDelay() {
         Client.providers.vpnProvider.disconnect({ [weak self] _ in
             self?.updateCurrentStatus()
-            self?.reloadUsageTileAfter(seconds: 1) //Reset the usage statistics after stop the VPN
+            self?.reloadUsageTileAfter(seconds: UsageTileReloadSeconds.afterDisconnect) //Reset the usage statistics after stop the VPN
         })
     }
     
@@ -465,6 +485,8 @@ class DashboardViewController: AutolayoutViewController {
             nmt.persistentConnectionValue = Client.preferences.isPersistentConnection
         } else if let vc = segue.destination as? AddEmailToAccountViewController {
             vc.modalPresentationStyle = .fullScreen
+        } else if let vc = segue.destination as? RegionsViewController {
+            vc.serverSelectionDelegate = self
         } else if let identifier = segue.identifier,
             identifier == StoryboardSegue.Main.settingsAndWireGuardSegueIdentifier.rawValue,
             let vc = segue.destination as? SettingsViewController {
@@ -729,7 +751,7 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     private func handleDisconnectedAndTrustedNetwork() {
-        if isTrustedNetwork() {
+        if TrustedNetworkUtils.isTrustedNetwork {
             toggleConnection.isIndeterminate = false
             toggleConnection.isWarning = true
             let titleLabelView = UILabel(frame: CGRect.zero)
@@ -747,31 +769,6 @@ class DashboardViewController: AutolayoutViewController {
             AppPreferences.shared.todayWidgetButtonTitle = L10n.Shortcuts.connect
         }
     }
-    
-    private func isTrustedNetwork() -> Bool {
-        if Client.preferences.nmtRulesEnabled {
-            if let ssid = PIAHotspotHelper().currentWiFiNetwork() {
-                if Client.preferences.nmtGenericRules[NMTType.protectedWiFi.rawValue] == NMTRules.alwaysDisconnect.rawValue ||
-                    (Client.preferences.nmtTrustedNetworkRules[ssid] == NMTRules.alwaysDisconnect.rawValue){
-                    setWidgetTrustedNetworkStatus(isTrustedNetwork: true)
-                    return true
-                }
-            } else {
-                if Client.preferences.nmtGenericRules[NMTType.cellular.rawValue] == NMTRules.alwaysDisconnect.rawValue {
-                    setWidgetTrustedNetworkStatus(isTrustedNetwork: true)
-                    return true
-                }
-            }
-        }
-        setWidgetTrustedNetworkStatus(isTrustedNetwork: false)
-        return false
-    }
-    
-    private func setWidgetTrustedNetworkStatus(isTrustedNetwork: Bool) {
-        AppPreferences.shared.todayWidgetTrustedNetwork = isTrustedNetwork
-        reloadWidget()
-    }
-
     // MARK: Restylable
 
     override func viewShouldRestyle() {
@@ -858,6 +855,8 @@ extension DashboardViewController: MenuViewControllerDelegate {
     }
 }
 
+// MARK: CollectionView
+
 extension DashboardViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView,
@@ -916,6 +915,9 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
                                                       for: indexPath)
         if let cell = cell as? EditableTileCell {
             cell.setupCellForStatus(self.tileModeStatus)
+        }
+        if let cell = cell as? ServerSelectingCell {
+            cell.delegate = self
         }
         return cell
     }

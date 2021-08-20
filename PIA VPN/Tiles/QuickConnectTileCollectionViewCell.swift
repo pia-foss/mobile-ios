@@ -24,7 +24,7 @@
 import UIKit
 import PIALibrary
 
-class QuickConnectTileCollectionViewCell: UICollectionViewCell, TileableCell {
+class QuickConnectTileCollectionViewCell: UICollectionViewCell, TileableCell, ServerSelectingCell {
     
     var tileType: AvailableTiles = .quickConnect
 
@@ -34,6 +34,15 @@ class QuickConnectTileCollectionViewCell: UICollectionViewCell, TileableCell {
     @IBOutlet weak var accessoryButtonLeft: UIButton!
     @IBOutlet weak var tileLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var tileRightConstraint: NSLayoutConstraint!
+    
+    weak var delegate: ServerSelectionDelegate? {
+        get {
+            tile.delegate
+        }
+        set {
+            tile.delegate = newValue
+        }
+    }
     
     private var currentTileStatus: TileStatus?
 
