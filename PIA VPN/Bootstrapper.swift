@@ -97,7 +97,7 @@ class Bootstrapper {
         Client.configuration.isDevelopment = Flags.shared.usesDevelopmentClient
         if let stagingUrl = AppConstants.Web.stagingEndpointURL {
             
-            let url = stagingUrl.absoluteString.replacingOccurrences(of: "staging-[0-9]", with: "staging-4", options: .regularExpression)
+            let url = stagingUrl.absoluteString.replacingOccurrences(of: "staging-[0-9]", with: "staging-\(AppPreferences.shared.stagingVersion)", options: .regularExpression)
             Client.configuration.setBaseURL(url, for: .staging)
 
         }
