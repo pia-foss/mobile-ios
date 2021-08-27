@@ -556,7 +556,6 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             accessedDatabase.secure.setPassword(nil, for: username)
             accessedDatabase.secure.setUsername(nil)
             accessedDatabase.secure.clear(for: username)
-            accessedDatabase.secure.clear(for: accessedDatabase.secure.tokenKey(for: username))
         }
         accessedDatabase.secure.removeDIPTokens()
         accessedDatabase.secure.setPublicUsername(nil)
