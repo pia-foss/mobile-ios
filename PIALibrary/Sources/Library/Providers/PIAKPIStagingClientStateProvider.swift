@@ -24,7 +24,7 @@ import PIAKPI
 
 class PIAKPIStagingClientStateProvider : KPIClientStateProvider {
     func kpiAuthToken() -> String {
-        return Client.providers.accountProvider.token ?? ""
+        return Client.providers.accountProvider.vpnToken ?? ""
     }
     
     func kpiEndpoints() -> [KPIEndpoint] {

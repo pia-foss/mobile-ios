@@ -80,6 +80,15 @@ public final class Client {
         }
         VPNDaemon.shared.start()
         VPNDaemon.shared.enableUpdates()
+
+        // migrate from old token
+        providers.accountProvider.migrateOldTokenIfNeeded { (error) in
+            // If there was an error. It will retry on the next boostrap.
+            if (error != nil) {
+                print("Client bootstrap migrateOldTokenIfNeeded error: \(error!)")
+                return
+            }
+        }
     }
     
     public static func resetServers(completionBlock: @escaping (Error?) -> Void) {

@@ -287,10 +287,12 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
     var shouldCleanAccount = false
 
     var isLoggedIn = false
-    
-    var token: String?
 
     var currentUser: UserAccount?
+
+    var vpnToken: String?
+
+    var apiToken: String?
     
     var publicUsername: String?
 
@@ -301,16 +303,20 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
     var lastSignupRequest: SignupRequest? {
         return nil
     }
-    
+
+    func migrateOldTokenIfNeeded(_ callback: ((Error?) -> Void)?) {
+        fatalError("Not implemented")
+    }
+
     func login(with request: LoginRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         
-        webServices?.token(credentials: request.credentials) { (token, error) in
-            guard let token = token else {
+        webServices?.token(credentials: request.credentials) { (error) in
+            if error != nil {
                 callback?(nil, error)
                 return
             }
             
-            self.webServices?.info(token: token) { (info, error) in
+            self.webServices?.info() { (info, error) in
                 guard let info = info else {
                     callback?(nil, error)
                     return
@@ -320,19 +326,18 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
                 self.isLoggedIn = true
                 callback?(user, nil)
             }
-
         }
     }
 
     func login(with receiptRequest: LoginReceiptRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         
-        webServices?.token(receipt: receiptRequest.receipt) { (token, error) in
-            guard let token = token else {
+        webServices?.token(receipt: receiptRequest.receipt) { (error) in
+            if error != nil {
                 callback?(nil, error)
                 return
             }
             
-            self.webServices?.info(token: token) { (info, error) in
+            self.webServices?.info() { (info, error) in
                 guard let info = info else {
                     callback?(nil, error)
                     return
@@ -342,7 +347,6 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
                 self.isLoggedIn = true
                 callback?(user, nil)
             }
-
         }
     }
 
