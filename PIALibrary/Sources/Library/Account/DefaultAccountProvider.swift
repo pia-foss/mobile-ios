@@ -169,19 +169,8 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
         
         webServices.token(receipt: receiptRequest.receipt) { (error) in
-            guard error == nil else {
-                callback?(nil, error)
-                return
-            }
-
-            //Save after confirm the login was successful.
             let credentials = Credentials(username: "", password: "")
-            self.updateUser(credentials: credentials) { userAccount, error in
-                if let userAccount = userAccount {
-                    Macros.postNotification(.PIAAccountDidLogin, [.user: userAccount])
-                }
-                callback?(userAccount, error)
-            }
+            self.handleLoginResult(error: error, credentials: credentials, callback: callback)
         }
     }
 
@@ -191,20 +180,8 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
 
         self.webServices.migrateToken(token: linkToken) { (error) in
-            guard error == nil else {
-                callback?(nil, error)
-                return
-            }
-
-
-            //Save after confirm the login was successful.
             let credentials = Credentials(username: "", password: "")
-            self.updateUser(credentials: credentials) { userAccount, error in
-                if let userAccount = userAccount {
-                    Macros.postNotification(.PIAAccountDidLogin, [.user: userAccount])
-                }
-                callback?(userAccount, error)
-            }
+            self.handleLoginResult(error: error, credentials: credentials, callback: callback)
         }
     }
 
@@ -214,23 +191,25 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
 
         webServices.token(credentials: request.credentials) { (error) in
-            guard error == nil else {
-                callback?(nil, error)
-                return
-            }
-
-            //Save after confirm the login was successful.
-            self.updateUser(credentials: request.credentials) { userAccount, error in
-                if let userAccount = userAccount {
-                    Macros.postNotification(.PIAAccountDidLogin, [.user: userAccount])
-                }
-                callback?(userAccount, error)
-            }
+            self.handleLoginResult(error: error, credentials: request.credentials, callback: callback)
         }
 
     }
+    
+    private func handleLoginResult(error: Error?, credentials: Credentials, callback: ((UserAccount?, Error?) -> Void)?) {
+        guard error == nil else {
+            callback?(nil, error)
+            return
+        }
+        self.updateUser(credentials: credentials) { userAccount, error in
+            if let userAccount = userAccount {
+                Macros.postNotification(.PIAAccountDidLogin, [.user: userAccount])
+            }
+            callback?(userAccount, error)
+        }
+    }
         
-    private func updateUser(credentials: Credentials,callback: ((UserAccount?, Error?) -> Void)? ) {
+    private func updateUser(credentials: Credentials, callback: ((UserAccount?, Error?) -> Void)? ) {
         self.updateUsernamePassword()
         self.updateUserAccount(credentials: credentials, callback: callback)
     }
