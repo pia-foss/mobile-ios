@@ -311,7 +311,7 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
     func login(with request: LoginRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         
         webServices?.token(credentials: request.credentials) { (error) in
-            if error != nil {
+            guard error == nil else {
                 callback?(nil, error)
                 return
             }
@@ -332,7 +332,7 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
     func login(with receiptRequest: LoginReceiptRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         
         webServices?.token(receipt: receiptRequest.receipt) { (error) in
-            if error != nil {
+            guard error == nil else {
                 callback?(nil, error)
                 return
             }
