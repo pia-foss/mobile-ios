@@ -160,10 +160,10 @@ DEPENDENCIES:
   - "PIAAccountModule (from `git@gitlab.kape.com:pia-mobile/shared/account.git`, branch `master`)"
   - "PIACSIModule (from `git@gitlab.kape.com:pia-mobile/shared/csi.git`, branch `master`)"
   - "PIAKPIModule (from `git@gitlab.kape.com:pia-mobile/shared/kpi.git`, commit `3e2c385`)"
-  - PIALibrary/Library (from `https://github.com/pia-foss/client-library-apple`, commit `3fb9fb7`)
-  - PIALibrary/Mock (from `https://github.com/pia-foss/client-library-apple`, commit `3fb9fb7`)
-  - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `3fb9fb7`)
-  - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `3fb9fb7`)
+  - "PIALibrary/Library (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `b7022e6`)"
+  - "PIALibrary/Mock (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `b7022e6`)"
+  - "PIALibrary/UI (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `b7022e6`)"
+  - "PIALibrary/VPN (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `b7022e6`)"
   - "PIARegionsModule (from `git@gitlab.kape.com:pia-mobile/shared/regions.git`, branch `master`)"
   - "PIAWireguard (from `git@gitlab.kape.com:pia-mobile/ios/pia-wireguard.git`, commit `7e9d8d48`)"
   - Popover
@@ -217,8 +217,8 @@ EXTERNAL SOURCES:
     :commit: 3e2c385
     :git: "git@gitlab.kape.com:pia-mobile/shared/kpi.git"
   PIALibrary:
-    :commit: 3fb9fb7
-    :git: https://github.com/pia-foss/client-library-apple
+    :commit: b7022e6
+    :git: "git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git"
   PIARegionsModule:
     :branch: master
     :git: "git@gitlab.kape.com:pia-mobile/shared/regions.git"
@@ -243,8 +243,8 @@ CHECKOUT OPTIONS:
     :commit: 3e2c385
     :git: "git@gitlab.kape.com:pia-mobile/shared/kpi.git"
   PIALibrary:
-    :commit: 3fb9fb7
-    :git: https://github.com/pia-foss/client-library-apple
+    :commit: b7022e6
+    :git: "git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git"
   PIARegionsModule:
     :commit: 11edfd2a634599849b403633fdbef3c24bfa4061
     :git: "git@gitlab.kape.com:pia-mobile/shared/regions.git"
@@ -293,6 +293,6 @@ SPEC CHECKSUMS:
   TunnelKit: 2a6aadea2d772a2760b153aee27d1c334c9ca6db
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: bb1c455f1c36f214089fc7a9b39acf448de58721
+PODFILE CHECKSUM: a2524afdf508dccd805165d78fbe40c82e8c8970
 
 COCOAPODS: 1.10.1
