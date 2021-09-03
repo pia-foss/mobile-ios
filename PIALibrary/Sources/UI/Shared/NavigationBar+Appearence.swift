@@ -16,17 +16,21 @@ extension UINavigationBar {
             standardAppearance = appearance;
             scrollEdgeAppearance = standardAppearance
         }
-        barTintColor = color
+        else {
+            barTintColor = color
+        }
     }
     
     func setBackgroundAppearenceImage(_ image: UIImage?) {
-        setBackgroundImage(image, for: UIBarMetrics.default)
         if #available(iOSApplicationExtension 13.0, *), image != nil {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
             appearance.backgroundImage = image
             standardAppearance = appearance;
             scrollEdgeAppearance = standardAppearance
+        }
+        else {
+        setBackgroundImage(image, for: UIBarMetrics.default)
         }
     }
 }

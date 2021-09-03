@@ -688,31 +688,29 @@ public class Theme {
                                          withTintColor tintColor: UIColor?,
                                          andBarTintColors barTintColors: [UIColor]?) {
         
-        UIView.animate(withDuration: 0.3) {
-            if let tintColor = tintColor {
-                navigationBar.tintColor = tintColor
-            } else {
-                navigationBar.tintColor = UIColor.piaGrey4
-            }
-            
-            if let barTintColors = barTintColors,
-                barTintColors.count > 0,
-                barTintColors.count <= 2 {
-                if barTintColors.count == 1 {
-                    navigationBar.setBackgroundAppearenceColor(barTintColors.first)
-                    navigationBar.setBackgroundAppearenceImage(nil)
-                } else {
-                    var updatedFrame = navigationBar.bounds
-                    updatedFrame.size.height += navigationBar.frame.origin.y
-                    let gradientLayer = CAGradientLayer(frame: updatedFrame, colors: barTintColors)
-                    navigationBar.setBackgroundAppearenceImage(gradientLayer.createGradientImage())
-                }
-            } else {
-                navigationBar.setBackgroundAppearenceColor(self.palette.principalBackground)
-                navigationBar.setBackgroundAppearenceImage(nil)
-            }
-            navigationBar.layoutIfNeeded()
+        if let tintColor = tintColor {
+            navigationBar.tintColor = tintColor
+        } else {
+            navigationBar.tintColor = UIColor.piaGrey4
         }
+        
+        if let barTintColors = barTintColors,
+           barTintColors.count > 0,
+           barTintColors.count <= 2 {
+            if barTintColors.count == 1 {
+                navigationBar.setBackgroundAppearenceColor(barTintColors.first)
+                navigationBar.setBackgroundAppearenceImage(nil)
+            } else {
+                var updatedFrame = navigationBar.bounds
+                updatedFrame.size.height += navigationBar.frame.origin.y
+                let gradientLayer = CAGradientLayer(frame: updatedFrame, colors: barTintColors)
+                navigationBar.setBackgroundAppearenceImage(gradientLayer.createGradientImage())
+            }
+        } else {
+            navigationBar.setBackgroundAppearenceColor(self.palette.principalBackground)
+            navigationBar.setBackgroundAppearenceImage(nil)
+        }
+        navigationBar.layoutIfNeeded()
         
     }
     
