@@ -165,7 +165,7 @@ DEPENDENCIES:
   - PIALibrary/UI (from `https://github.com/pia-foss/client-library-apple`, commit `3fb9fb7`)
   - PIALibrary/VPN (from `https://github.com/pia-foss/client-library-apple`, commit `3fb9fb7`)
   - "PIARegionsModule (from `git@gitlab.kape.com:pia-mobile/shared/regions.git`, branch `master`)"
-  - "PIAWireguard (from `git@gitlab.kape.com:pia-mobile/ios/pia-wireguard.git`, commit `2f9dff0`)"
+  - "PIAWireguard (from `git@gitlab.kape.com:pia-mobile/ios/pia-wireguard.git`, commit `7e9d8d48`)"
   - Popover
   - PopupDialog
   - ReachabilitySwift (~> 4.3.0)
@@ -223,7 +223,7 @@ EXTERNAL SOURCES:
     :branch: master
     :git: "git@gitlab.kape.com:pia-mobile/shared/regions.git"
   PIAWireguard:
-    :commit: 2f9dff0
+    :commit: 7e9d8d48
     :git: "git@gitlab.kape.com:pia-mobile/ios/pia-wireguard.git"
   TunnelKit:
     :branch: master
@@ -249,7 +249,7 @@ CHECKOUT OPTIONS:
     :commit: 11edfd2a634599849b403633fdbef3c24bfa4061
     :git: "git@gitlab.kape.com:pia-mobile/shared/regions.git"
   PIAWireguard:
-    :commit: 2f9dff0
+    :commit: 7e9d8d48
     :git: "git@gitlab.kape.com:pia-mobile/ios/pia-wireguard.git"
   TunnelKit:
     :commit: 2556fbe9feb53adc88e97e5bdc09779da31468f5
@@ -293,6 +293,6 @@ SPEC CHECKSUMS:
   TunnelKit: 2a6aadea2d772a2760b153aee27d1c334c9ca6db
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 2334c46b5c0930a71e41c80e06c84bd1d39f088e
+PODFILE CHECKSUM: bb1c455f1c36f214089fc7a9b39acf448de58721
 
 COCOAPODS: 1.10.1
