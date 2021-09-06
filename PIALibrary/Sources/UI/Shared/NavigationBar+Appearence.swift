@@ -13,7 +13,7 @@ extension UINavigationBar {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
             appearance.backgroundColor = color
-            standardAppearance = appearance;
+            standardAppearance = appearance
             scrollEdgeAppearance = standardAppearance
         }
         else {
@@ -26,11 +26,11 @@ extension UINavigationBar {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
             appearance.backgroundImage = image
-            standardAppearance = appearance;
+            standardAppearance = appearance
             scrollEdgeAppearance = standardAppearance
         }
         else {
-        setBackgroundImage(image, for: UIBarMetrics.default)
+            setBackgroundImage(image, for: UIBarMetrics.default)
         }
     }
 }

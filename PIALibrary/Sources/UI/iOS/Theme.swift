@@ -710,7 +710,7 @@ public class Theme {
             navigationBar.setBackgroundAppearenceColor(self.palette.principalBackground)
             navigationBar.setBackgroundAppearenceImage(nil)
         }
-        navigationBar.layoutIfNeeded()
+        navigationBar.setNeedsLayout()
         
     }
     
