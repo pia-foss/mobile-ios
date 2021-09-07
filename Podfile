@@ -78,9 +78,9 @@ def shared_main_pods
     pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :commit => 'b62d1bab'
     pod "PIAKPIModule", :git => "#{$gitlab_kn_root}/#{$kpi_gitlab_repo}", :commit => '3e2c385'
 
-    library_by_path('/Users/juandocal/Documents/work')
-    # library_by_git('3fb9fb7')
-    #library_by_gitlab_branch('')
+    #library_by_path('')
+    #library_by_git('3fb9fb7')
+    library_by_gitlab_branch('juan.docal/new_auth_integration')
     #library_by_gitlab_by_git('38a7754')
     #library_by_version('~> 1.1.3')
 end
