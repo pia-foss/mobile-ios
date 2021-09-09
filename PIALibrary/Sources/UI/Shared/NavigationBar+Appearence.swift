@@ -9,7 +9,7 @@ import UIKit
 
 extension UINavigationBar {
     func setBackgroundAppearenceColor(_ color: UIColor?) {
-        if #available(iOSApplicationExtension 13.0, *) {
+        if #available(iOSApplicationExtension 13.0, *), color != nil {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
             appearance.backgroundColor = color
