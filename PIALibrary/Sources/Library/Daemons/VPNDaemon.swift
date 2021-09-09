@@ -33,7 +33,8 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
     private var fallbackTimer: Timer!
     private var numberOfAttempts: Int
     private var isReconnecting: Bool
-    private var canRecordEventsWhileReconnecting: Bool = true
+    
+    private var lastKnownVpnStatus: VPNStatus = .disconnected
 
     private init() {
         hasEnabledUpdates = false
@@ -46,6 +47,9 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         nc.addObserver(self, selector: #selector(neStatusDidChange(notification:)), name: .NEVPNStatusDidChange, object: nil)
 
         accessedProviders.vpnProvider.prepare()
+        if Client.providers.vpnProvider.isVPNConnected {
+            self.lastKnownVpnStatus = .connected
+        }
     }
     
     private func tryUpdateStatus(via connection: NEVPNConnection) {
@@ -69,7 +73,6 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             nextStatus = .connected
             
             let previousStatus = accessedDatabase.transient.vpnStatus
-            let lastKnownVpnStatus = accessedDatabase.plain.lastKnownVpnStatus
             
             guard (nextStatus != previousStatus) else {
                 return
@@ -78,9 +81,9 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             invalidateTimer()
             reset()
             
-            if self.canRecordEventsWhileReconnecting, Client.preferences.shareServiceQualityData {
+            if self.lastKnownVpnStatus == .disconnected, Client.preferences.shareServiceQualityData {
                 ServiceQualityManager.shared.connectionEstablishedEvent()
-                self.canRecordEventsWhileReconnecting = false
+                self.lastKnownVpnStatus = .connected
             }
             
             //Connection successful, the user interaction finished
@@ -91,10 +94,9 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             nextStatus = .connecting
                         
             let previousStatus = accessedDatabase.transient.vpnStatus
-            let lastKnownVpnStatus = accessedDatabase.plain.lastKnownVpnStatus
             
-            if lastKnownVpnStatus == .disconnected,
-               self.canRecordEventsWhileReconnecting,
+            if accessedDatabase.transient.vpnStatus == .disconnected,
+               self.lastKnownVpnStatus == .disconnected,
                Client.preferences.shareServiceQualityData,
                self.numberOfAttempts == 0 {
                 ServiceQualityManager.shared.connectionAttemptEvent()
@@ -132,7 +134,6 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             nextStatus = .disconnected
             
             let previousStatus = accessedDatabase.transient.vpnStatus
-            let lastKnownVpnStatus = accessedDatabase.plain.lastKnownVpnStatus
             
             guard (nextStatus != previousStatus) else {
                 return
@@ -145,7 +146,7 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             
             //triggered only when the user is manually aborting connection (before being established).
             if Client.configuration.disconnectedManually,
-               self.canRecordEventsWhileReconnecting,
+               self.lastKnownVpnStatus != .connected,
                (previousStatus == .connecting || previousStatus == .disconnecting),
                Client.preferences.shareServiceQualityData {
                 ServiceQualityManager.shared.connectionCancelledEvent()
@@ -155,7 +156,7 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
             }
 
-            self.canRecordEventsWhileReconnecting = true
+            self.lastKnownVpnStatus = .disconnected
 
         default:
             nextStatus = .disconnected
