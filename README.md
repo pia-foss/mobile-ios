@@ -33,6 +33,7 @@ The PIA VPN app features:
 - Ruby (preinstalled with macOS)
 - [CocoaPods 1.5.0][dep-cocoapods]
 - [SwiftGen][dep-swiftgen]
+- [Go][dep-golang]
 
 It's highly recommended to use the Git and Ruby packages provided by [Homebrew][dep-brew].
 
@@ -102,3 +103,4 @@ This project is licensed under the [MIT (Expat) license](https://choosealicense.
 [dep-swiftgen]: https://github.com/SwiftGen/SwiftGen
 [dep-jazzy]: https://github.com/realm/jazzy
 [dep-brew]: https://brew.sh/
+[dep-golang]: https://golang.org/
