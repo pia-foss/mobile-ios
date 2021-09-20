@@ -145,12 +145,14 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             }
             
             //triggered only when the user is manually aborting connection (before being established).
-            if Client.configuration.disconnectedManually,
-               self.lastKnownVpnStatus != .connected,
-               (previousStatus == .connecting || previousStatus == .disconnecting),
-               Client.preferences.shareServiceQualityData {
-                ServiceQualityManager.shared.connectionCancelledEvent()
+            if Client.configuration.disconnectedManually {
                 
+                if self.lastKnownVpnStatus != .connected,
+                   (previousStatus == .connecting || previousStatus == .disconnecting),
+                   Client.preferences.shareServiceQualityData {
+                    ServiceQualityManager.shared.connectionCancelledEvent()
+                }
+
                 //VPN disconnected, the user interaction finished. Only reset the value when the source was manual.
                 Client.configuration.disconnectedManually = false
 
