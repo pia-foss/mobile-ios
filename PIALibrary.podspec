@@ -18,7 +18,6 @@ Pod::Spec.new do |s|
         #p.osx.exclude_files     = "PIALibrary/Sources/Core/InApp",
         #                          "PIALibrary/Sources/Core/Account/InApp"
         p.dependency "PIAAccountModule"
-        p.resources             = "PIALibrary/Resources/Certs/**/*"
 
     end
 
@@ -38,6 +37,7 @@ Pod::Spec.new do |s|
         p.dependency "PIARegionsModule"
         p.dependency "PIAAccountModule"
         p.dependency "PIACSIModule"
+        p.dependency "PIAKPIModule"
         
     end
 
