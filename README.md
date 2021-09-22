@@ -49,6 +49,8 @@ Assuming you have a [working CocoaPods environment][dep-cocoapods], setting up t
 
 After that, open `PIA VPN.xcworkspace` in Xcode and run the `PIA VPN` target.
 
+If the build does not complete due to missing modules (often `PIAAccount`), run `pod install` again with the partial build, then build again.
+
 For the VPN to work properly, the app requires:
 
 - _App Groups_ and _Keychain Sharing_ capabilities
