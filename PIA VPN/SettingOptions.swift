@@ -269,19 +269,11 @@ public enum HelpSections: Int, SettingSection, EnumsBuilder {
     }
     
     public static func all() -> [Self] {
-        if Client.configuration.featureFlags.contains(Client.FeatureFlags.shareServiceQualityData) {
-            return [.sendDebugLogs, .kpiShareStatistics, .latestNews, .version]
-        } else {
-            return [.sendDebugLogs, .latestNews, .version]
-        }
+        return [.sendDebugLogs, .kpiShareStatistics, .latestNews, .version]
     }
     
     public static func allWithEvents() -> [Self] {
-        if Client.configuration.featureFlags.contains(Client.FeatureFlags.shareServiceQualityData) {
-            return [.sendDebugLogs, .kpiShareStatistics, .kpiViewEvents, .latestNews, .version,]
-        } else {
-            return [.sendDebugLogs, .latestNews, .version]
-        }
+        return [.sendDebugLogs, .kpiShareStatistics, .kpiViewEvents, .latestNews, .version,]
     }
 
 }
