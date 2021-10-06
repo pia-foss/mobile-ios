@@ -22,18 +22,19 @@
 
 import Foundation
 import SystemConfiguration
+import NetworkExtension
 import UIKit
 
 public extension UIDevice {
     
     public var WiFiSSID: String? {
-        guard let interfaces = CNCopySupportedInterfaces() as? [String] else { return nil }
-        let key = kCNNetworkInfoKeySSID as String
-        for interface in interfaces {
-            guard let interfaceInfo = CNCopyCurrentNetworkInfo(interface as CFString) as NSDictionary? else { continue }
-            return interfaceInfo[key] as? String
+        guard let interfaces = NEHotspotHelper.supportedNetworkInterfaces(),
+              interfaces.count > 0,
+              let interface = interfaces[0] as? NEHotspotNetwork,
+            !interface.ssid.isEmpty else {
+            return nil
         }
-        return nil
+        return interface.ssid
     }
-    
+
 }
