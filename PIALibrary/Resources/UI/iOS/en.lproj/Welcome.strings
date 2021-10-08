@@ -39,6 +39,8 @@
 
 "upgrade.header" = "Welcome Back!";
 "upgrade.title" = "In order to use Private Internet Access, you’ll need to renew your subscription.";
+"upgrade.renew.now" = "Renew now";
+
 
 
 "redeem.title" = "Redeem gift card";

@@ -62,13 +62,13 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        styleButtons()
-
         guard let preset = self.preset else {
             fatalError("Preset not propagated")
         }
         
         isExpired = preset.isExpired
+        
+        styleButtons()
 
         collectionPlans.isUserInteractionEnabled = false
 
@@ -301,8 +301,12 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
     private func styleButtons() {
         buttonPurchase.setRounded()
         buttonPurchase.style(style: TextStyle.Buttons.piaGreenButton)
-        buttonPurchase.setTitle(L10n.Signup.Purchase.Subscribe.now.uppercased(),
-                              for: [])
+        if !isExpired {
+            buttonPurchase.setTitle(L10n.Signup.Purchase.Subscribe.now.uppercased(), for: [])
+        }
+        else {
+            buttonPurchase.setTitle(L10n.Welcome.Upgrade.Renew.now.uppercased(), for: [])
+        }
     }
 
 }

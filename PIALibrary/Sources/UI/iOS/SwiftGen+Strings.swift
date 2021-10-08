@@ -452,6 +452,10 @@ internal enum L10n {
       internal static let header = L10n.tr("Welcome", "upgrade.header")
       /// In order to use Private Internet Access, you’ll need to renew your subscription.
       internal static let title = L10n.tr("Welcome", "upgrade.title")
+      internal enum Renew {
+        /// Renew now
+        internal static let now = L10n.tr("Welcome", "upgrade.renew.now")
+      }
     }
   }
 }
