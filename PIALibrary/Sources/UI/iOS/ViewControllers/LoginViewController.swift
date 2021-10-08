@@ -196,14 +196,14 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
     }
     
     private func getValidCredentials() -> Credentials? {
-        guard let username = getValidUsername() else {
+        guard let username = getValidTextFrom(textField: textUsername) else {
             handleUsernameFieldInvalid()
             return nil
         }
         
         self.status = .restore(element: textUsername)
         
-        guard let password = getValidPassword() else {
+        guard let password = getValidTextFrom(textField: textPassword) else {
             handleLoginFieldInvalid(textField: textPassword)
             return nil
         }
@@ -215,19 +215,12 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
 
         return Credentials(username: username, password: password)
     }
-        
-    private func getValidUsername() -> String? {
-        guard let username = textUsername.text?.trimmed(), !username.isEmpty else {
-            return nil
-        }
-        return username
-    }
     
-    private func getValidPassword() -> String? {
-        guard let password = textPassword.text?.trimmed(), !password.isEmpty else {
+    private func getValidTextFrom(textField: UITextField) -> String? {
+        guard let text = textField.text?.trimmed(), !text.isEmpty else {
             return nil
         }
-        return password
+        return text
     }
     
     private func handleUsernameFieldInvalid() {
