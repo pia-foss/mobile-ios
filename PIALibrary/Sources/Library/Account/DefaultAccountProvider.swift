@@ -214,6 +214,11 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         
         webServices.token(credentials: request.credentials) { (token, error) in
             
+            guard error == nil else {
+                callback?(nil,error)
+                return
+            }
+            
             guard let token = token else {
                 callback?(nil, ClientError.unauthorized)
                 return

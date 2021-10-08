@@ -115,19 +115,9 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     func token(credentials: Credentials, _ callback: ((String?, Error?) -> Void)?) {
         
         self.accountAPI.loginWithCredentials(username: credentials.username,
-                                             password: credentials.password) { (response, error) in
-
-                                                if let error = error {
-                                                    callback?(nil, ClientError.unauthorized)
-                                                    return
-                                                }
-                                                
-                                                guard let loginResponse = response else {
-                                                    callback?(nil, ClientError.malformedResponseData)
-                                                    return
-                                                }
-                                                
-                                                callback?(loginResponse.token, nil)
+                                             password: credentials.password) { [weak self] (response, error) in
+            
+            self?.handleLoginResponse(response: response?.token, error: error, callback: callback, mapError: self?.mapLoginError)
                                                 
         }
         
@@ -138,32 +128,68 @@ class PIAWebServices: WebServices, ConfigurationAccess {
      */
     func token(receipt: Data, _ callback: ((String?, Error?) -> Void)?) {
         
-        self.accountAPI.loginWithReceipt(receiptBase64: receipt.base64EncodedString()) { (response, error) in
+        self.accountAPI.loginWithReceipt(receiptBase64: receipt.base64EncodedString()) { [weak self] (response, error) in
             
-            if let error = error {
-                callback?(nil, error.code == 400 ? ClientError.badReceipt : ClientError.unauthorized)
-                return
-            }
-
-            guard let token = response else {
-                callback?(nil, ClientError.malformedResponseData)
-                return
-            }
-            
-            callback?(token, nil)
+            self?.handleLoginResponse(response: response, error: error, callback: callback, mapError: self?.mapLoginFromReceiptError)
             
         }
         
     }
+    
+    private func handleLoginResponse(response: String?, error: AccountRequestError?,  callback: ((String?, Error?) -> Void)?, mapError: ((AccountRequestError) -> (ClientError))? = nil) {
+        
+        if let error = error {
+            callback?(nil, mapError?(error))
+            return
+        }
 
+        guard let token = response else {
+            callback?(nil, ClientError.malformedResponseData)
+            return
+        }
+    }
+    
+    private func mapLoginError(_ error: AccountRequestError) -> ClientError {
+        switch error.code {
+        case 402:
+            return .expired
+        default:
+            return .unauthorized
+        }
+    }
+    
+    
+    private func mapLoginFromReceiptError(_ error:AccountRequestError) -> ClientError {
+        switch error.code {
+        case 400:
+            return .badReceipt
+        default:
+            return mapLoginError(error)
+        }
+    }
+    
+    private func mapLoginLinkError(_ error:AccountRequestError) -> ClientError {
+        switch error.code {
+        case 401,402:
+            return mapLoginError(error)
+        default:
+            return .invalidParameter
+        }
+    }
+        
+    private func mapAccountDetailsError(_ error:AccountRequestError) -> ClientError {
+        return mapLoginLinkError(error)
+    }
+    
+    
     func info(token: String, _ callback: ((AccountInfo?, Error?) -> Void)?) {
         
         if let token = Client.providers.accountProvider.token {
             
-            self.accountAPI.accountDetails(token: token) { (response, error) in
+            self.accountAPI.accountDetails(token: token) { [weak self] (response, error) in
                 
                 if let error = error {
-                    callback?(nil, error.code == 401 ? ClientError.unauthorized : ClientError.invalidParameter)
+                    callback?(nil, self?.mapAccountDetailsError(error))
                     return
                 }
                 
@@ -215,9 +241,9 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     
     func loginLink(email: String, _ callback: SuccessLibraryCallback?) {
         
-        self.accountAPI.loginLink(email: email) { (error) in
+        self.accountAPI.loginLink(email: email) { [weak self] (error) in
             if let error = error {
-                callback?(ClientError.invalidParameter)
+                callback?(self?.mapLoginLinkError(error))
                 return
             }
             callback?(nil)

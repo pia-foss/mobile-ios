@@ -50,6 +50,7 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
 
     var selectedPlanIndex: Int?
     
+    private var isExpired = false
     private var signupEmail: String?
     private var signupTransaction: InAppTransaction?
     private var isPurchasing = false
@@ -60,12 +61,14 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         styleButtons()
 
-        guard let _ = self.preset else {
+        guard let preset = self.preset else {
             fatalError("Preset not propagated")
         }
+        
+        isExpired = preset.isExpired
 
         collectionPlans.isUserInteractionEnabled = false
 
@@ -77,8 +80,15 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
         )
         self.navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Welcome.Redeem.Accessibility.back
 
-        labelTitle.text = L10n.Welcome.Purchase.title
-        labelSubtitle.text = L10n.Welcome.Purchase.subtitle
+        if isExpired {
+            labelTitle.text = L10n.Welcome.Upgrade.title
+            labelTitle.textAlignment = .left
+            labelSubtitle.text = ""
+        }
+        else {
+            labelTitle.text = L10n.Welcome.Purchase.title
+            labelSubtitle.text = L10n.Welcome.Purchase.subtitle
+        }
         textAgreement.attributedText = Theme.current.agreementText(
             withMessage: L10n.Welcome.Agreement.message(""),
             tos: L10n.Welcome.Agreement.Message.tos,
@@ -279,7 +289,6 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
     
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
-        navigationItem.titleView = NavigationLogoView()
         Theme.current.applyNavigationBarStyle(to: self)
         Theme.current.applyPrincipalBackground(view)
         Theme.current.applyPrincipalBackground(scrollView)

@@ -49,6 +49,9 @@ public struct Preset: ProvidersAccess {
     /// If `true`, tries to recover any pending signup process.
     public var shouldRecoverPendingSignup = true
     
+    /// If `true`, shows variations based on the user expiration.
+    public var isExpired = false
+    
     /// If `true`, doesn't persist state to current `Client.database`.
     public var isEphemeral = false
     

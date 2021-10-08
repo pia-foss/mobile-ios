@@ -37,6 +37,10 @@
 "purchase.submit" = "Submit";
 "purchase.or" = "or";
 
+"upgrade.header" = "Welcome Back!";
+"upgrade.title" = "In order to use Private Internet Access, you’ll need to renew your subscription.";
+
+
 "redeem.title" = "Redeem gift card";
 "redeem.subtitle" = "Type in your email address and the %lu digit PIN from your gift card or trial card below.";
 "redeem.email.placeholder" = "Email address";
