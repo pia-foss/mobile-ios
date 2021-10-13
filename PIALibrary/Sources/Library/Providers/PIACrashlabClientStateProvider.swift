@@ -14,7 +14,7 @@ class PIACSIClientStateProvider : CSIClientStateProvider {
     func csiEndpoints() -> [CSIEndpoint] {
         let validEndpoints = EndpointManager.shared.availableCSIEndpoints()
         var clientEndpoints = [CSIEndpoint]()
-        for endpoint in validEndpoints.reversed() {
+        for endpoint in validEndpoints {
             clientEndpoints.append(
                 CSIEndpoint(
                     endpoint: endpoint.host,
