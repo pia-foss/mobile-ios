@@ -147,6 +147,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             callback?(nil, ClientError.malformedResponseData)
             return
         }
+        callback?(token, nil)
     }
     
     private func mapLoginError(_ error: AccountRequestError) -> ClientError {
