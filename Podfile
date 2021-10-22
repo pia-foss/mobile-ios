@@ -71,17 +71,17 @@ def shared_main_pods
     pod 'AlamofireImage'
     
     #pod "PIAAccountModule", :git => "#{$git_root}/#{$accounts_repo}"
-    pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :branch => 'master'
+    pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :branch => 'juan.docal/update_domains_logic'
     #pod "PIARegionsModule", :git => "#{$git_root}/#{$regions_repo}"
     pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :branch => 'master'
     #pod "PIACSIModule", :git => "#{$git_root}/#{$csi_repo}"
     pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :branch => 'master'
     pod "PIAKPIModule", :git => "#{$gitlab_kn_root}/#{$kpi_gitlab_repo}", :commit => '831793c'
 
-    #library_by_path('')
+    library_by_path('/Users/juandocal/Documents/work')
     #library_by_git('')
     #library_by_gitlab_branch('')
-    library_by_gitlab_by_git('3fcc450')
+    #library_by_gitlab_by_git('3fcc450')
     #library_by_version('~> 1.1.3')
 end
 
