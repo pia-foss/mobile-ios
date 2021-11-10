@@ -82,7 +82,7 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
 
         if isExpired {
             labelTitle.text = L10n.Welcome.Upgrade.title
-            labelTitle.textAlignment = .center
+            labelTitle.textAlignment = .left
             labelSubtitle.text = ""
         }
         else {
