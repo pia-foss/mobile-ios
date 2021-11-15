@@ -27,9 +27,9 @@ extension PIAWebServices {
 
     func taskForConnectivityCheck(_ callback: ((ConnectivityStatus?, Error?) -> Void)?) {
                 
-        self.accountAPI.clientStatus { (information, errors) in
+        self.accountAPI.clientStatus { (information, error) in
             DispatchQueue.main.async {
-                if !errors.isEmpty {
+                if let _ = error {
                     callback?(nil, ClientError.internetUnreachable)
                     return
                 }
