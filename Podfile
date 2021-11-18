@@ -32,7 +32,7 @@ abstract_target 'PIALibrary' do
     pod 'TunnelKit', :git => 'https://github.com/pia-foss/tunnelkit', :branch => 'master'
     pod 'OpenSSL-Apple', :git => 'https://github.com/keeshux/openssl-apple'
     pod 'PIAWireguard', :git => "#{$gitlab_vpn_root}/pia-wireguard.git", :commit => '2f9dff0'
-    pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :branch => 'juan.docal/update_domains_logic'
+    pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :branch => 'release/1.1.4'
     pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :branch => 'master'
     pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :branch => 'master'
     pod "PIAKPIModule", :git => "#{$gitlab_kn_root}/#{$kpi_gitlab_repo}", :branch => 'master'

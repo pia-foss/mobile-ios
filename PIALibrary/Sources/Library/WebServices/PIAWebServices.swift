@@ -50,16 +50,14 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         if Client.environment == .staging {
             self.accountAPI = AccountBuilder<IOSAccountAPI>()
                 .setPlatform(platform: .ios)
-                .setEndpointProvider(endpointsProvider: PIAAccountStagingClientStateProvider())
+                .setClientStateProvider(clientStateProvider: PIAAccountStagingClientStateProvider())
                 .setUserAgentValue(userAgentValue: PIAWebServices.userAgent)
-                .setCertificate(certificate: rsa4096Certificate)
                 .build() as? IOSAccountAPI
         } else {
             self.accountAPI = AccountBuilder<IOSAccountAPI>()
                 .setPlatform(platform: .ios)
-                .setEndpointProvider(endpointsProvider: PIAAccountClientStateProvider())
+                .setClientStateProvider(clientStateProvider: PIAAccountClientStateProvider())
                 .setUserAgentValue(userAgentValue: PIAWebServices.userAgent)
-                .setCertificate(certificate: rsa4096Certificate)
                 .build() as? IOSAccountAPI
         }
         
@@ -118,9 +116,9 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     func token(credentials: Credentials, _ callback: ((String?, Error?) -> Void)?) {
         
         self.accountAPI.loginWithCredentials(username: credentials.username,
-                                             password: credentials.password) { (response, errors) in
+                                             password: credentials.password) { (response, error) in
 
-                                                if !errors.isEmpty {
+                                                if let error = error {
                                                     callback?(nil, ClientError.unauthorized)
                                                     return
                                                 }
@@ -141,10 +139,10 @@ class PIAWebServices: WebServices, ConfigurationAccess {
      */
     func token(receipt: Data, _ callback: ((String?, Error?) -> Void)?) {
         
-        self.accountAPI.loginWithReceipt(receiptBase64: receipt.base64EncodedString()) { (response, errors) in
+        self.accountAPI.loginWithReceipt(receiptBase64: receipt.base64EncodedString()) { (response, error) in
             
-            if !errors.isEmpty {
-                callback?(nil, errors.last?.code == 400 ? ClientError.badReceipt : ClientError.unauthorized)
+            if let error = error {
+                callback?(nil, error.code == 400 ? ClientError.badReceipt : ClientError.unauthorized)
                 return
             }
 
@@ -163,10 +161,10 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         
         if let token = Client.providers.accountProvider.token {
             
-            self.accountAPI.accountDetails(token: token) { (response, errors) in
+            self.accountAPI.accountDetails(token: token) { (response, error) in
                 
-                if !errors.isEmpty {
-                    callback?(nil, errors.last?.code == 401 ? ClientError.unauthorized : ClientError.invalidParameter)
+                if let error = error {
+                    callback?(nil, error.code == 401 ? ClientError.unauthorized : ClientError.invalidParameter)
                     return
                 }
                 
@@ -190,9 +188,9 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         if reset {
             //Reset password, we use the token
             if let token = Client.providers.accountProvider.token {
-                self.accountAPI.setEmail(token: token, email: email, resetPassword: reset) { (newPassword, errors) in
-                    if !errors.isEmpty {
-                        callback?(errors.last?.code == 401 ? ClientError.unauthorized : ClientError.unsupported)
+                self.accountAPI.setEmail(token: token, email: email, resetPassword: reset) { (newPassword, error) in
+                    if let error = error {
+                        callback?(error.code == 401 ? ClientError.unauthorized : ClientError.unsupported)
                         return
                     }
                     if let newPassword = newPassword {
@@ -205,8 +203,8 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             }
         } else {
             //We use the email and the password returned by the signup endpoint in the previous step, we don't update the password
-            self.accountAPI.setEmail(username: credentials.username, password: credentials.password, email: email, resetPassword: reset) { (newPassword, errors) in
-                if !errors.isEmpty {
+            self.accountAPI.setEmail(username: credentials.username, password: credentials.password, email: email, resetPassword: reset) { (newPassword, error) in
+                if let error = error {
                     callback?(ClientError.unsupported)
                     return
                 }
@@ -218,8 +216,8 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     
     func loginLink(email: String, _ callback: SuccessLibraryCallback?) {
         
-        self.accountAPI.loginLink(email: email) { (errors) in
-            if !errors.isEmpty {
+        self.accountAPI.loginLink(email: email) { (error) in
+            if let error = error {
                 callback?(ClientError.invalidParameter)
                 return
             }
@@ -231,9 +229,9 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     func logout(_ callback: LibraryCallback<Bool>?) {
         
         if let token = Client.providers.accountProvider.token {
-            self.accountAPI.logout(token: token) { (errors) in
-                if !errors.isEmpty {
-                    if errors.last?.code == 401 {
+            self.accountAPI.logout(token: token) { (accountError) in
+                if let error = accountError {
+                    if error.code == 401 {
                         callback?(true, nil)
                         return
                     }
@@ -251,9 +249,9 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
 
         if let token = Client.providers.accountProvider.token {
-            self.accountAPI.renewDedicatedIP(authToken: token, ipToken: dipToken) { (errors) in
-                if !errors.isEmpty {
-                    callback?(errors.last?.code == 401 ? ClientError.unauthorized : ClientError.dipTokenRenewalError)
+            self.accountAPI.renewDedicatedIP(authToken: token, ipToken: dipToken) { (error) in
+                if let error = error {
+                    callback?(error.code == 401 ? ClientError.unauthorized : ClientError.dipTokenRenewalError)
                     return
                 }
                 callback?(nil)
@@ -265,9 +263,9 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     func activateDIPToken(tokens: [String], _ callback: LibraryCallback<[Server]>?) {
         
         if let token = Client.providers.accountProvider.token {
-            self.accountAPI.dedicatedIPs(authToken: token, ipTokens: tokens) { (dedicatedIps, errors) in
-                if !errors.isEmpty {
-                    callback?([], errors.last?.code == 401 ? ClientError.unauthorized : ClientError.invalidParameter)
+            self.accountAPI.dedicatedIPs(authToken: token, ipTokens: tokens) { (dedicatedIps, error) in
+                if let error = error as? AccountRequestError {
+                    callback?([], error.code == 401 ? ClientError.unauthorized : ClientError.invalidParameter)
                     return
                 }
                 
@@ -353,10 +351,10 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         request.toJSON()
         
         let info = IOSSignupInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), email: request.email, marketing: marketingJSON.isEmpty ? nil : marketingJSON, debug: debugJSON.isEmpty ? nil : debugJSON)
-        self.accountAPI.signUp(information: info) { (response, errors) in
+        self.accountAPI.signUp(information: info) { (response, error) in
             
-            if !errors.isEmpty {
-                callback?(nil, errors.last?.code == 400 ? ClientError.badReceipt : ClientError.invalidParameter)
+            if let error = error {
+                callback?(nil, error.code == 400 ? ClientError.badReceipt : ClientError.invalidParameter)
                 return
             }
 
@@ -403,8 +401,8 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         
         let info = IOSPaymentInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), marketing: marketingJSON, debug: debugJSON)
 
-        self.accountAPI.payment(username: credentials.username, password: credentials.password, information: info) { (errors) in
-            if !errors.isEmpty {
+        self.accountAPI.payment(username: credentials.username, password: credentials.password, information: info) { (error) in
+            if let error = error {
                 callback?(ClientError.badReceipt)
                 return
             }
@@ -458,10 +456,10 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     // MARK: Store
     func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?) {
 
-        self.accountAPI.subscriptions(receipt: nil) { (response, errors) in
+        self.accountAPI.subscriptions(receipt: nil) { (response, error) in
             
-            if !errors.isEmpty {
-                callback?(nil, errors.last?.code == 400 ? ClientError.badReceipt : ClientError.invalidParameter)
+            if let error = error {
+                callback?(nil, error.code == 400 ? ClientError.badReceipt : ClientError.invalidParameter)
                 return
             }
 
@@ -497,9 +495,9 @@ class PIAWebServices: WebServices, ConfigurationAccess {
 
         if let token = Client.providers.accountProvider.token {
 
-            self.accountAPI.message(token: token, appVersion: version, callback: { (message, errors) in
+            self.accountAPI.message(token: token, appVersion: version, callback: { (message, error) in
                 
-                if !errors.isEmpty {
+                if let error = error {
                     callback?(nil, ClientError.malformedResponseData)
                     return
                 }

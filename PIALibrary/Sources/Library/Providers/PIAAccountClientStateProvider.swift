@@ -22,7 +22,7 @@
 import Foundation
 import PIAAccount
 
-class PIAAccountClientStateProvider : IAccountEndpointProvider {
+class PIAAccountClientStateProvider : AccountClientStateProvider {
     func accountEndpoints() -> [AccountEndpoint] {
         let validEndpoints = EndpointManager.shared.availableEndpoints()
         var clientEndpoints = [AccountEndpoint]()
