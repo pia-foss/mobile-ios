@@ -80,7 +80,7 @@ def shared_main_pods
 
     #library_by_path('')
     #library_by_git('')
-    library_by_gitlab_branch('miguel.berrocal/update_accounts_integration_with_api_changes')
+    library_by_gitlab_branch('release/2.12.5')
     #library_by_gitlab_by_git('3fcc450')
     #library_by_version('~> 1.1.3')
 end
