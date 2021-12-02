@@ -33,6 +33,7 @@ The PIA VPN app features:
 - Ruby (preinstalled with macOS)
 - [CocoaPods 1.5.0][dep-cocoapods]
 - [SwiftGen][dep-swiftgen]
+- [Go][dep-golang]
 
 It's highly recommended to use the Git and Ruby packages provided by [Homebrew][dep-brew].
 
@@ -47,6 +48,8 @@ Assuming you have a [working CocoaPods environment][dep-cocoapods], setting up t
     $ pod install
 
 After that, open `PIA VPN.xcworkspace` in Xcode and run the `PIA VPN` target.
+
+If the build does not complete due to missing modules (often `PIAAccount`), run `pod install` again with the partial build, then build again.
 
 For the VPN to work properly, the app requires:
 
@@ -102,3 +105,4 @@ This project is licensed under the [MIT (Expat) license](https://choosealicense.
 [dep-swiftgen]: https://github.com/SwiftGen/SwiftGen
 [dep-jazzy]: https://github.com/realm/jazzy
 [dep-brew]: https://brew.sh/
+[dep-golang]: https://golang.org/

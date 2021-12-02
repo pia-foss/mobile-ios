@@ -1,3 +1,2 @@
-"CFBundleName" = "$(PRODUCT_NAME)";
 "NSCameraUsageDescription" = "Vi trenger tilgang til kameraet slik at du kan skanne QR-koder for å løse inn gavekort";
 "NSFaceIDUsageDescription" = "Autentiser for å vise";
