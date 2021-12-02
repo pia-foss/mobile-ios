@@ -88,6 +88,8 @@ class Bootstrapper {
             fatalError("Could not parse bundled regions file: \(e)")
         }
 
+        Client.configuration.rsa4096Certificate = rsa4096Certificate()
+
         #if PIA_DEV
         Client.environment =  AppPreferences.shared.appEnvironmentIsProduction ? .production : .staging
         #else
@@ -234,6 +236,12 @@ class Bootstrapper {
 
     func dispose() {
         Client.dispose()
+    }
+
+    // MARK: Certificate
+
+    func rsa4096Certificate() -> String? {
+        return AppPreferences.shared.piaHandshake.pemString()
     }
     
     // MARK: Notifications
