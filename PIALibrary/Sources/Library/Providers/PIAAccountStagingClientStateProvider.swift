@@ -25,7 +25,7 @@ import PIAAccount
 class PIAAccountStagingClientStateProvider : AccountClientStateProvider {
     func accountEndpoints() -> [AccountEndpoint] {
         return [
-            AccountEndpoint(endpoint: Client.configuration.baseUrl, isProxy: false, usePinnedCertificate: false, certificateCommonName: nil),
+            AccountEndpoint(ipOrRootDomain: Client.configuration.baseUrl, isProxy: false, usePinnedCertificate: false, certificateCommonName: nil),
         ]
     }
 }
