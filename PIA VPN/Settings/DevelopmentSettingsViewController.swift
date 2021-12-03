@@ -82,6 +82,7 @@ class DevelopmentSettingsViewController: PIABaseSettingsViewController {
             Client.environment = .production
         }
         Client.resetWebServices()
+        Client.providers.serverProvider.download(nil)
         reloadSettings()
     }
 
