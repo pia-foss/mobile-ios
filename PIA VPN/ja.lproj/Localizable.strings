@@ -1,345 +1,407 @@
-"Localizable" = "ローカライズ可能";
-"about.accessibility.component.expand" = "タップしてフルライセンスを読む";
-"about.app" = "Private Internet AccessによるVPN";
-"about.intro" = "このプログラムは次の構成要素を使用します:";
-"account.accessibility.eye" = "目のアイコン";
-"account.accessibility.eye.hint.conceal" = "タップしてパスワードを非表示";
-"account.accessibility.eye.hint.reveal" = "タップしてパスワードを表示";
-"account.email.caption" = "メールアドレス";
-"account.email.placeholder" = "メールアドレス";
-"account.error.unauthorized" = "ユーザー名またはパスワードが間違っています。";
-"account.expiry_date.expired" = "プランが期限切れとなりました。";
-"account.expiry_date.information" = "プランが%@に期限切れとなります。";
-"account.eye.footer" = "目のアイコンをタップして、パスワードを表示または非表示にします。";
-"account.other.footer" = "他の端末でもPrivate Internet Access アプリを入手し、上のユーザー名とパスワードでログインし、インターネット接続を保護することができます。\n\nパスワードをタップしてコピーするかパスワードを表示します。";
-"account.password.caption" = "パスワード";
-"account.restore.button" = "購入を復元";
-"account.restore.description" = "プランを更新したにも関わらず、有効期限があと少しで切れるとアカウントに表示される場合、こちらから更新を再度開始することができます。この処理の実行中、請求は発生しません。";
-"account.restore.failure.message" = "ご利用可能な更新の購入は見つかりませんでした。";
-"account.restore.failure.title" = "購入を復元";
-"account.restore.title" = "追加されていない購入を復元";
-"account.reveal.prompt" = "認証して表示";
-"account.save.item" = "メールアドレス変更";
-"account.save.prompt" = "認証して変更を保存";
-"account.save.success" = "メールアドレスが保存されました。";
-"account.set.email.error" = "メールを追加中にエラーが発生しました。後でもう一度お試しください。";
-"account.subscriptions.linkMessage" = "こちら";
-"account.subscriptions.message" = "こちらからサブスクリプションを管理できます。";
-"account.subscriptions.monthly" = "月間プラン";
-"account.subscriptions.short.linkMessage" = "サブスクリプションを管理する";
-"account.subscriptions.short.message" = "サブスクリプションを管理する";
-"account.subscriptions.trial" = "トライアルプラン";
-"account.subscriptions.yearly" = "年間プラン";
-"account.unauthorized" = "問題が発生しました。もう一度ログインしてみてください";
-"account.update.email.require.password.button" = "送信";
-"account.update.email.require.password.message" = "安全のため、お使いのアカウントのPIAパスワードの変更を行う必要があります。先へ進むにはPIAパスワードを入力してください。";
-"account.update.email.require.password.title" = "PIAパスワードが必要です";
-"account.username.caption" = "ユーザー名";
-"card.wireguard.cta.activate" = "WireGuard®を今すぐ試す";
-"card.wireguard.cta.learn" = "詳しく知る";
-"card.wireguard.cta.settings" = "[設定]を開く";
-"card.wireguard.description" = "より優れたパフォーマンス、より低いCPU使用率、およびより長いバッテリー寿命を提供する、新しくより効率的なVPNプロトコルです。";
-"card.wireguard.title" = "WireGuard®を今すぐお試しください！";
-"content_blocker.body.footer" = "注意：コンテンツブロッカーは、VPNへの接続がなくても機能しますが、Safariを使ったブラウジングのみで利用できます。";
-"content_blocker.body.subtitle" = "コンテンツブロッカーをオンにしてSafariで使えるようにするには、「設定」>「Safari」にアクセスし、「一般」からPIA VPNで「コンテンツブロッカー」をオンにしてください。";
-"content_blocker.title" = "Safari コンテンツブロッカー";
-"dashboard.accessibility.vpn.button" = "VPN接続ボタン";
-"dashboard.accessibility.vpn.button.isOff" = "VPN接続ボタン。VPNは現在切断されています";
-"dashboard.accessibility.vpn.button.isOn" = "VPN接続ボタン。VPNに現在接続されています";
-"dashboard.connection.ip.caption" = "パブリックIP";
-"dashboard.connection.ip.unreachable" = "インターネットに接続できません";
-"dashboard.connection.region.caption" = "現在の地域";
-"dashboard.connection.region.change" = "地域変更";
-"dashboard.content_blocker.intro.message" = "このバージョンはMACEを弊社のSafariコンテンツブロッカーに取り換えるものです。\n\n「設定」セクションで確認してください。";
-"dashboard.status" = "ステータス";
-"dashboard.vpn.changing_region" = "地域を変更中...";
-"dashboard.vpn.connected" = "VPN に接続済み";
-"dashboard.vpn.connecting" = "接続中...";
-"dashboard.vpn.disconnect.untrusted" = "このネットワークは信頼されていません。本当にVPNを切断しますか？";
-"dashboard.vpn.disconnected" = "切断済み";
-"dashboard.vpn.disconnecting" = "切断中...";
-"dashboard.vpn.on" = "VPN: 有効";
-"dedicated.ip.activate.button.title" = "アクティベート";
-"dedicated.ip.activation.description" = "下のフォームにトークンを貼り付けて、専用IPをアクティブにします。最近専用IPを購入した場合は、PIAウェブサイトにアクセスしてトークンを生成することができます。";
-"dedicated.ip.country.flag.accessibility" = "%@の国旗";
-"dedicated.ip.limit.title" = "選択した国の専用IPを使用して、あらゆるアセットへのリモート接続を保護しましょう。サブスクリプション中、このIPはあなただけのIPとなり、最も強力な暗号化でデータ転送を保護します。";
-"dedicated.ip.message.error.token" = "トークンの有効期限が切れています。ウェブサイトのアカウントページから新しいトークンを生成してください。";
-"dedicated.ip.message.expired.token" = "トークンの有効期限が切れています。ウェブサイトのアカウントページから新しいトークンを生成してください。";
-"dedicated.ip.message.incorrect.token" = "トークンが正しく入力されていることを確認してください";
-"dedicated.ip.message.invalid.token" = "トークンが無効です。トークンが正しく入力されていることを確認してください。";
-"dedicated.ip.message.ip.updated" = "あなたの専用IPが更新されました";
-"dedicated.ip.message.token.willexpire" = "あなたの専用IPは間もなく期限が切れます。新しい専用IPを入手してください";
-"dedicated.ip.message.token.willexpire.link" = "新しい専用IPを入手してください";
-"dedicated.ip.message.valid.token" = "専用IPが正常にアクティベートされました。地域選択リストで利用できるようになります。";
-"dedicated.ip.plural.title" = "あなたの専用IP";
-"dedicated.ip.remove" = "選択された地域を削除してよろしいですか？";
-"dedicated.ip.title" = "専用IP";
-"dedicated.ip.token.textfield.accessibility" = "専用IPトークンを入力するためのテキストフィールド";
-"dedicated.ip.token.textfield.placeholder" = "ここにトークンを貼り付けます";
-"expiration.message" = "ご利用のサブスクリプションがもうすぐ期限切れとなります。更新して保護された状態を保ちましょう。";
-"expiration.title" = "更新";
-"friend.referrals.days.acquired" = "無料期間を取得しました";
-"friend.referrals.days.number" = "%d日";
-"friend.referrals.description.short" = "お友達を紹介してください。30日間無料がもらえます。";
-"friend.referrals.email.validation" = "無効なメールアドレス。もう一度お試しください。";
-"friend.referrals.family.friends.program" = "ご家族・お友達紹介プログラム";
-"friend.referrals.friends.family.title" = "お友達やご家族を紹介してください。サインアップするごとに、あなたとご登録者の両方に30日間無料がプレゼントされます。　";
-"friend.referrals.fullName" = "氏名";
-"friend.referrals.invitation.terms" = "この招待状を送信することにより、私は「ご家族・お友達紹介プログラム」のすべての利用規約に同意します。";
-"friend.referrals.invite.error" = "招待状を再送信できませんでした。後でもう一度お試しください。";
-"friend.referrals.invite.success" = "招待状が送信されました";
-"friend.referrals.invites.number" = "%d件の招待状を送信しました";
-"friend.referrals.invites.sent.title" = "招待状が送信されました";
-"friend.referrals.pending.invites" = "%d件の招待状が保留中です";
-"friend.referrals.pending.invites.title" = "保留中の招待状";
-"friend.referrals.privacy.note" = "プライバシー保護の理由により、30日以前に送信された招待状はすべて削除されますのでご注意ください。";
-"friend.referrals.reward.given" = "報酬が取得されました";
-"friend.referrals.send.invite" = "招待状を送信";
-"friend.referrals.share.link" = "あなた専用の招待リンクを共有する";
-"friend.referrals.share.link.terms" = "このリンクを共有することにより、あなたは「ご家族・お友達紹介プログラム」のすべての利用規約に同意します。";
-"friend.referrals.signedup" = "サインアップ";
-"friend.referrals.signups.number" = "%d件のサインアップ";
-"friend.referrals.title" = "友達を紹介する";
-"friend.referrals.view.invites.sent" = "送信済みの招待状を表示する";
-"gdpr.accept.button.title" = "同意して続行する";
-"gdpr.collect.data.description" = "メールアドレスは、アカウント管理および乱用防止の目的にのみ使用されます。\n\nメールアドレスは、サブスクリプション情報、お支払確認、お客様とのやり取り、およびPrivate Internet Access のプロモーションオファーを送信するために使用されます。";
-"gdpr.collect.data.title" = "弊社が収集する個人情報";
-"global.add" = "追加";
-"global.automatic" = "自動";
-"global.cancel" = "キャンセル";
-"global.clear" = "消去";
-"global.close" = "閉じる";
-"global.copied" = "クリップボードにコピーされました";
-"global.copy" = "コピー";
-"global.disable" = "無効にする";
-"global.disabled" = "無効化済み";
-"global.edit" = "編集";
-"global.empty" = "空";
-"global.enable" = "有効にする";
-"global.enabled" = "有効化済み";
-"global.error" = "エラー";
-"global.general.settings" = "一般設定";
-"global.no" = "いいえ";
+// GLOBAL
+
 "global.ok" = "OK";
-"global.optional" = "任意";
-"global.or" = "または";
-"global.remove" = "削除";
+"global.cancel" = "キャンセル";
+"global.close" = "閉じる";
+"global.error" = "エラー";
+"global.automatic" = "自動";
 "global.required" = "必須";
-"global.row.selection" = "行の選択";
-"global.share" = "共有";
-"global.unreachable" = "インターネット接続が見つかりません。インターネット接続があることを確認してください。";
+"global.optional" = "任意";
+"global.clear" = "消去";
 "global.update" = "アップデート";
-"global.version" = "バージョン";
-"global.vpn.settings" = "VPN設定";
+"global.edit" = "編集";
+"global.unreachable" = "インターネット接続が見つかりません。インターネット接続があることを確認してください。";
+"global.enabled" = "有効化済み";
+"global.disabled" = "無効化済み";
+"global.enable" = "有効にする";
+"global.disable" = "無効にする";
+"global.add" = "追加";
+"global.remove" = "削除";
+"global.empty" = "空";
+"global.copy" = "コピー";
+"global.share" = "共有";
+"global.copied" = "クリップボードにコピーされました";
 "global.yes" = "はい";
-"hotspothelper.display.name" = "🔒 この接続を保護するには、PIA設定でVPN WiFi保護を有効にします。";
-"hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi保護が有効にされました - 保護はお任せください。";
-"inapp.messages.settings.updated" = "設定が更新されました";
-"inapp.messages.toggle.title" = "サービス通信メッセージを表示";
+"global.no" = "いいえ";
+"global.or" = "または";
+"global.row.selection" = "行の選択";
+"global.vpn.settings" = "VPN設定";
+"global.general.settings" = "一般設定";
+"global.version" = "バージョン";
+
+// NOTIFICATIONS
+
+"notifications.disabled.title" = "通知が無効にされました";
+"notifications.disabled.message" = "通知を有効にし、期限が切れる前にサブスクリプション更新のリマインダーを受け取りましょう。";
+"notifications.disabled.settings" = "設定";
+
+"expiration.title" = "更新";
+"expiration.message" = "ご利用のサブスクリプションがもうすぐ期限切れとなります。更新して保護された状態を保ちましょう。";
+
+// SHORTCUTS
+
+"shortcuts.connect" = "接続";
+"shortcuts.disconnect" = "切断";
+"shortcuts.select_region" = "地域の選択";
+
+// RENEWAL
+
+"renewal.success.title" = "ありがとうございます";
+"renewal.success.message" = "アカウントが正常に更新されました。";
+"renewal.failure.message" = "購入レシートを送信できませんでした。後でもう一度お試しください。";
+
+// MENU
 "menu.accessibility.edit.tile" = "編集";
 "menu.accessibility.item" = "メニュー";
 "menu.accessibility.logged_as" = "%@としてログインされています";
-"menu.expiration.days" = "%d 日";
 "menu.expiration.expires_in" = "サブスクリプション残り期間:";
+"menu.expiration.days" = "%d 日";
 "menu.expiration.hours" = "%d 時間";
 "menu.expiration.one_hour" = "1時間";
 "menu.expiration.upgrade" = "アカウントをアップグレード";
+"menu.item.region" = "地域選択";
 "menu.item.about" = "アプリについて";
 "menu.item.account" = "アカウント";
-"menu.item.logout" = "ログアウト";
-"menu.item.region" = "地域選択";
 "menu.item.settings" = "設定";
-"menu.item.web.home" = "ホームページ";
+"menu.item.logout" = "ログアウト";
 "menu.item.web.privacy" = "プライバシーポリシー";
+"menu.item.web.home" = "ホームページ";
 "menu.item.web.support" = "サポート";
-"menu.logout.confirm" = "ログアウト";
-"menu.logout.message" = "ログアウトするとVPN が無効になり、保護された状態でなくなります。";
+
 "menu.logout.title" = "ログアウト";
-"menu.renewal.message.trial" = "トライアルアカウントは更新できません。サービスを引き続きご利用いただくには、期限切れの際に新規アカウントを購入してください。";
-"menu.renewal.message.unavailable" = "Appleサーバーが現在ご利用いただけません。後でもう一度お試しください。";
-"menu.renewal.message.website" = "サブスクリプションを更新するには、弊社のウェブサイトをご使用ください。";
+"menu.logout.message" = "ログアウトするとVPN が無効になり、保護された状態でなくなります。";
+"menu.logout.confirm" = "ログアウト";
+
+"menu.renewal.title" = "更新";
 "menu.renewal.purchase" = "購入";
 "menu.renewal.renew" = "更新";
-"menu.renewal.title" = "更新";
-"network.management.tool.add.rule" = "新しいルールを追加する";
-"network.management.tool.alert" = "自動化設定は、現在のネットワーク条件下でVPNを切断された状態に保つように構成されています。";
-"network.management.tool.always.connect" = "常にVPNを接続する";
-"network.management.tool.always.disconnect" = "常にVPNを切断する";
-"network.management.tool.choose.wifi" = "新しいルールを追加するWiFiネットワークを選択してください。 ";
-"network.management.tool.disable" = "自動化を無効にする";
-"network.management.tool.enable.automation" = "自動化を有効にする";
-"network.management.tool.mobile.data" = "モバイルデータ";
-"network.management.tool.open.wifi" = "オープン状態のWiFi";
-"network.management.tool.retain.state" = "VPN状態を保持する";
-"network.management.tool.secure.wifi" = "安全なWiFi";
-"network.management.tool.title" = "自動化を管理する";
-"notifications.disabled.message" = "通知を有効にし、期限が切れる前にサブスクリプション更新のリマインダーを受け取りましょう。";
-"notifications.disabled.settings" = "設定";
-"notifications.disabled.title" = "通知が無効にされました";
-"rating.enjoy.question" = "PIA VPNを楽しんでいますか？";
-"rating.enjoy.subtitle" = "VPN製品にご満足いただいていることを願っています";
-"rating.error.button.send" = "フィードバックを送信";
-"rating.error.question" = "接続を確立できませんでした";
-"rating.error.subtitle" = "別の地域を選択するか、サポートチケットを開いてそれについてお知らせください。";
-"rating.problems.question" = "どのような問題があったのでしょうか？";
-"rating.problems.subtitle" = "フィードバックを送信しますか？PIAご利用にあたり、お客様のエクスペリエンス改善のお手伝いをいたします。";
-"rating.rate.question" = "AppStoreでレビューしていただけますか？";
-"rating.rate.subtitle" = "お客様のご感想を共有していただければありがたいです";
-"region.accessibility.favorite" = "お気に入りの地域を追加";
-"region.accessibility.filter" = "フィルター";
-"region.accessibility.unfavorite" = "お気に入りの地域を削除";
-"region.filter.favorites" = "お気に入り";
-"region.filter.latency" = "レイテンシ";
-"region.filter.name" = "名前";
-"region.filter.sortby" = "地域絞り込み条件:";
-"region.search.placeholder" = "地域検索";
-"renewal.failure.message" = "購入レシートを送信できませんでした。後でもう一度お試しください。";
-"renewal.success.message" = "アカウントが正常に更新されました。";
-"renewal.success.title" = "ありがとうございます";
-"server.reconnection.please.wait" = "お待ちください…";
-"server.reconnection.still.connection" = "まだ接続試行中です...";
-"set.email.error.validation" = "メールアドレスを入力する必要があります。";
-"set.email.form.email" = "メールアドレスを入力してください";
-"set.email.password.caption" = "パスワード";
-"set.email.success.message_format" = "お客様のメールアドレス（%@）にアカウントユーザー名とパスワードが送信されました";
-"set.email.why" = "ユーザー名とパスワードを送信するためのメールアドレスを入力してください。";
-"settings.application_information.debug.empty.message" = "デバッグ情報が空です。送信を再試行する前に接続してみてください。";
-"settings.application_information.debug.empty.title" = "空のデバッグ情報";
-"settings.application_information.debug.failure.message" = "デバッグ情報を送信できませんでした。";
-"settings.application_information.debug.failure.title" = "送信中のエラー";
-"settings.application_information.debug.success.message" = "デバッグ情報が正常に送信されました。\nID: %@\n送信された情報を特定するためにサポートチームがこのIDを必要としますので、このIDを書き留めておいてください。";
-"settings.application_information.debug.success.title" = "デバッグ情報が送信されました";
-"settings.application_information.debug.title" = "サポートにデバッグログを送信";
-"settings.application_information.title" = "アプリ情報";
-"settings.application_settings.active_theme.title" = "アクティブなテーマ";
-"settings.application_settings.dark_theme.title" = "ダークテーマ";
-"settings.application_settings.kill_switch.footer" = "VPNキルスイッチは、VPNの再接続時にインターネット接続を無効にします。これには手動での切断が含まれません。";
-"settings.application_settings.kill_switch.title" = "VPNキルスイッチ";
-"settings.application_settings.mace.footer" = "PIA MACE™はVPNに接続されている間、広告、閲覧行動の追跡、そしてマルウェアをブロックします。";
-"settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.title" = "アプリ設定";
-"settings.cards.history.title" = "最新情報";
-"settings.commit.buttons.later" = "後で";
-"settings.commit.buttons.reconnect" = "再接続";
-"settings.commit.messages.must_disconnect" = "変更を反映するには、VPNを再接続する必要があります。";
-"settings.commit.messages.should_reconnect" = "変更を適用するにはVPNに再度接続してください。";
-"settings.connection.remote_port.title" = "リモートポート";
-"settings.connection.socket_protocol.title" = "ソケット";
+"menu.renewal.message.trial" = "トライアルアカウントは更新できません。サービスを引き続きご利用いただくには、期限切れの際に新規アカウントを購入してください。";
+"menu.renewal.message.website" = "サブスクリプションを更新するには、弊社のウェブサイトをご使用ください。";
+"menu.renewal.message.unavailable" = "Appleサーバーが現在ご利用いただけません。後でもう一度お試しください。";
+
+// ACCOUNT
+
+"account.email.caption" = "メールアドレス";
+"account.email.placeholder" = "メールアドレス";
+"account.username.caption" = "ユーザー名";
+"account.other.footer" = "他の端末でもPrivate Internet Access アプリを入手し、上のユーザー名とパスワードでログインし、インターネット接続を保護することができます。\n\nパスワードをタップしてコピーするかパスワードを表示します。";
+"account.restore.title" = "追加されていない購入を復元";
+"account.restore.description" = "プランを更新したにも関わらず、有効期限があと少しで切れるとアカウントに表示される場合、こちらから更新を再度開始することができます。この処理の実行中、請求は発生しません。";
+"account.restore.button" = "購入を復元";
+"account.restore.failure.title" = "購入を復元";
+"account.restore.failure.message" = "ご利用可能な更新の購入は見つかりませんでした。";
+"account.save.item" = "メールアドレス変更";
+"account.save.prompt" = "認証して変更を保存";
+"account.save.success" = "メールアドレスが保存されました。";
+"account.reveal.prompt" = "認証して表示";
+"account.expiry_date.information" = "プランが%@に期限切れとなります。";
+"account.expiry_date.expired" = "プランが期限切れとなりました。";
+"account.update.email.require.password.title" = "PIAパスワードが必要です";
+"account.update.email.require.password.message" = "安全のため、お使いのアカウントのPIAパスワードの変更を行う必要があります。先へ進むにはPIAパスワードを入力してください。";
+"account.update.email.require.password.button" = "送信";
+"account.error.unauthorized" = "ユーザー名またはパスワードが間違っています。";
+"account.subscriptions.message" = "こちらからサブスクリプションを管理できます。";
+"account.subscriptions.linkMessage" = "こちら";
+"account.set.email.error" = "メールを追加中にエラーが発生しました。後でもう一度お試しください。";
+"account.subscriptions.short.message" = "サブスクリプションを管理する";
+"account.subscriptions.short.linkMessage" = "サブスクリプションを管理する";
+"account.subscriptions.yearly" = "年間プラン";
+"account.subscriptions.monthly" = "月間プラン";
+"account.subscriptions.trial" = "トライアルプラン";
+"account.unauthorized" = "問題が発生しました。もう一度ログインしてみてください";
+
+// SETTINGS
+
 "settings.connection.title" = "接続";
-"settings.connection.transport.title" = "転送";
 "settings.connection.vpn_protocol.title" = "プロトコル選択";
-"settings.content_blocker.footer" = "コンテンツブロッカーのオン、オフは「設定」>「Safari」>「コンテンツブロッカー」から、PIA VPNをオンにしてください。";
-"settings.content_blocker.refresh.title" = "ブロックリストをリフレッシュ";
-"settings.content_blocker.state.title" = "現在の状況";
-"settings.content_blocker.title" = "Safariコンテンツブロッカーの状態";
-"settings.dns.alert.clear.message" = "この操作により、あなたのDNSとデフォルトが消去され、PIA DNSに変更されます。";
-"settings.dns.alert.clear.title" = "DNSを消去";
-"settings.dns.alert.create.message" = "非PIA DNSを使用すると、DNSトラフィックがサードパーティーに暴露され、プライバシーが損なわれる場合があります。";
-"settings.dns.custom" = "カスタム";
-"settings.dns.custom.dns" = "カスタムDNS";
-"settings.dns.primaryDNS" = "プライマリDNS";
-"settings.dns.secondaryDNS" = "セカンダリDNS";
-"settings.dns.validation.primary.invalid" = "プライマリDNSが有効でありません。";
-"settings.dns.validation.primary.mandatory" = "プライマリDNSは必須です。";
-"settings.dns.validation.secondary.invalid" = "セカンダリDNSが有効でありません。";
+"settings.connection.transport.title" = "転送";
+"settings.connection.socket_protocol.title" = "ソケット";
+"settings.connection.remote_port.title" = "リモートポート";
+
+"settings.encryption.title" = "暗号化";
 "settings.encryption.cipher.title" = "データ暗号化";
 "settings.encryption.digest.title" = "データ認証";
 "settings.encryption.handshake.title" = "ハンドシェイク";
-"settings.encryption.title" = "暗号化";
-"settings.geo.servers.description" = "ジオロケーション地域を表示";
-"settings.hotspothelper.all.description" = "VPN WiFi保護が信頼されているネットワークを含むすべてのネットワークで有効になります。";
-"settings.hotspothelper.all.title" = "すべてのネットワークを保護";
-"settings.hotspothelper.available.add.help" = "信頼されたネットワークを追加するには「+」をタップします。";
-"settings.hotspothelper.available.help" = "このリストに自動入力するには、「iOS設定」>「WiFi」へと進みます。";
-"settings.hotspothelper.cellular.description" = "このオプションが有効になっている場合、セルラーネットワークの接続時に、PIAがVPNを自動的に有効にします。";
-"settings.hotspothelper.cellular.networks" = "セルラーネットワーク";
-"settings.hotspothelper.cellular.title" = "セルラーネットワークでの保護";
-"settings.hotspothelper.description" = "WiFiまたはセルラーネットワークへの接続でPIAがどのように動作するかを構成します。これには手動での切断は含まれません。";
-"settings.hotspothelper.enable.description" = "このオプションが有効にされている場合、信頼されていないWiFiネットワークへの接続時に、PIAがVPNを自動的に有効にします。";
-"settings.hotspothelper.rules.title" = "ルール";
-"settings.hotspothelper.title" = "ネットワーク管理ツール";
-"settings.hotspothelper.wifi.networks" = "WiFiネットワーク";
-"settings.hotspothelper.wifi.trust.title" = "VPN WiFi保護";
+
+"settings.application_settings.title" = "アプリ設定";
+"settings.application_settings.dark_theme.title" = "ダークテーマ";
+"settings.application_settings.active_theme.title" = "アクティブなテーマ";
+"settings.application_settings.kill_switch.title" = "VPNキルスイッチ";
+"settings.application_settings.kill_switch.footer" = "VPNキルスイッチは、VPNの再接続時にインターネット接続を無効にします。これには手動での切断が含まれません。";
+"settings.application_settings.mace.title" = "PIA MACE™";
+"settings.application_settings.mace.footer" = "PIA MACE™はVPNに接続されている間、広告、閲覧行動の追跡、そしてマルウェアをブロックします。";
+
+"settings.content_blocker.title" = "Safariコンテンツブロッカーの状態";
+"settings.content_blocker.state.title" = "現在の状況";
+"settings.content_blocker.refresh.title" = "ブロックリストをリフレッシュ";
+"settings.content_blocker.footer" = "コンテンツブロッカーのオン、オフは「設定」>「Safari」>「コンテンツブロッカー」から、PIA VPNをオンにしてください。";
+
+"settings.application_information.title" = "アプリ情報";
+"settings.application_information.debug.title" = "サポートにデバッグログを送信";
+"settings.application_information.debug.failure.title" = "送信中のエラー";
+"settings.application_information.debug.failure.message" = "デバッグ情報を送信できませんでした。";
+"settings.application_information.debug.empty.title" = "空のデバッグ情報";
+"settings.application_information.debug.empty.message" = "デバッグ情報が空です。送信を再試行する前に接続してみてください。";
+"settings.application_information.debug.success.title" = "デバッグ情報が送信されました";
+"settings.application_information.debug.success.message" = "デバッグ情報が正常に送信されました。\nID: %@\n送信された情報を特定するためにサポートチームがこのIDを必要としますので、このIDを書き留めておいてください。";
+
+"settings.commit.messages.must_disconnect" = "変更を反映するには、VPNを再接続する必要があります。";
+"settings.commit.messages.should_reconnect" = "変更を適用するにはVPNに再度接続してください。";
+"settings.commit.buttons.reconnect" = "再接続";
+"settings.commit.buttons.later" = "後で";
+
+"settings.reset.title" = "リセット";
+"settings.reset.defaults.title" = "設定を標準にリセット";
+"settings.reset.defaults.confirm.title" = "リセットの設定";
+"settings.reset.defaults.confirm.message" = "アプリを標準設定に戻します。これまでの変更はすべて失われます。";
+"settings.reset.defaults.confirm.button" = "リセット";
+"settings.reset.footer" = "上記すべての設定を標準設定に戻します。";
+
+"settings.small.packets.title" = "小さなパケットを使用";
+"settings.small.packets.description" = "IPパケットサイズを少し小さくして、いくつかのルーターおよびモバイルネットワークとの互換性を改善します。";
+
 "settings.log.connected.error" = "VPN接続が必要です。VPNに接続してからもう一度お試しください。";
 "settings.log.information" = "デバッグログを保存してください。問題解決に役立てるため、保存したログをテクニカルサポートに送信できます。";
+
+"settings.preview.title" = "プレビュー";
+"settings.server.network.description" = "次世代ネットワーク";
+"settings.server.network.alert" = "サーバーネットワークを変更するにはVPNを切断してください。";
+
+"settings.geo.servers.description" = "ジオロケーション地域を表示";
+"settings.cards.history.title" = "最新情報";
+
+"settings.ovpn.migration.footer" = "OpenVPNの導入を更新しています。詳細は、こちらをクリックしてご確認ください。";
+"settings.ovpn.migration.footer.link" = "こちら";
+
+"settings.section.general" = "一般";
+"settings.section.protocols" = "プロトコル";
+"settings.section.network" = "ネットワーク";
+"settings.section.privacyFeatures" = "プライバシー機能";
+"settings.section.automation" = "自動化";
+"settings.section.help" = "ヘルプ";
+
+// CONTENT BLOCKER
+
+"content_blocker.title" = "Safari コンテンツブロッカー";
+"content_blocker.body.subtitle" = "コンテンツブロッカーをオンにしてSafariで使えるようにするには、「設定」>「Safari」にアクセスし、「一般」からPIA VPNで「コンテンツブロッカー」をオンにしてください。";
+"content_blocker.body.footer" = "注意：コンテンツブロッカーは、VPNへの接続がなくても機能しますが、Safariを使ったブラウジングのみで利用できます。";
+
+// ABOUT
+
+"about.app" = "Private Internet AccessによるVPN";
+"about.intro" = "このプログラムは次の構成要素を使用します:";
+"about.accessibility.component.expand" = "タップしてフルライセンスを読む";
+
+// DASHBOARD
+
+"dashboard.content_blocker.intro.message" = "このバージョンはMACEを弊社のSafariコンテンツブロッカーに取り換えるものです。\n\n「設定」セクションで確認してください。";
+
+"dashboard.connection.ip.unreachable" = "インターネットに接続できません";
+
+"dashboard.vpn.disconnected" = "切断済み";
+"dashboard.vpn.connecting" = "接続中...";
+"dashboard.vpn.connected" = "VPN に接続済み";
+"dashboard.vpn.on" = "VPN: 有効";
+"dashboard.vpn.disconnecting" = "切断中...";
+"dashboard.vpn.changing_region" = "地域を変更中...";
+"dashboard.vpn.disconnect.untrusted" = "このネットワークは信頼されていません。本当にVPNを切断しますか？";
+"dashboard.accessibility.vpn.button" = "VPN接続ボタン";
+"dashboard.accessibility.vpn.button.isOn" = "VPN接続ボタン。VPNに現在接続されています";
+"dashboard.accessibility.vpn.button.isOff" = "VPN接続ボタン。VPNは現在切断されています";
+
+// VPN PERMISSION
+
+"vpn_permission.title" = "PIA";
+"vpn_permission.body.title" = "PIAはお客様のトラフィックを確保するために、VPN設定にアクセスする必要があります。";
+"vpn_permission.body.subtitle" = "PIA VPNのプロンプトが表示されますので、VPN構成へのアクセスを許可してください。先に進むには「%@」をタップしてください。";
+"vpn_permission.body.footer" = "弊社はネットワークアクティビティの監視、フィルタリング、記録は一切行いません。";
+"vpn_permission.disallow.message.basic" = "アプリケーションが機能するためにはこの許可が必要です。";
+"vpn_permission.disallow.message.support" = "ヘルプが必要な場合はカスタマーサポートにご連絡ください。";
+"vpn_permission.disallow.contact" = "お問い合わせ";
+
+// CUSTOM DNS
+
+"settings.dns.custom" = "カスタム";
+"settings.dns.alert.create.message" = "非PIA DNSを使用すると、DNSトラフィックがサードパーティーに暴露され、プライバシーが損なわれる場合があります。";
+"settings.dns.alert.clear.title" = "DNSを消去";
+"settings.dns.alert.clear.message" = "この操作により、あなたのDNSとデフォルトが消去され、PIA DNSに変更されます。";
+"settings.dns.custom.dns" = "カスタムDNS";
+"settings.dns.primaryDNS" = "プライマリDNS";
+"settings.dns.secondaryDNS" = "セカンダリDNS";
+"settings.dns.validation.primary.mandatory" = "プライマリDNSは必須です。";
+"settings.dns.validation.primary.invalid" = "プライマリDNSが有効でありません。";
+"settings.dns.validation.secondary.invalid" = "セカンダリDNSが有効でありません。";
+
+// HOTSPOT HELPER
+
+"settings.hotspothelper.title" = "ネットワーク管理ツール";
+"settings.hotspothelper.description" = "WiFiまたはセルラーネットワークへの接続でPIAがどのように動作するかを構成します。これには手動での切断は含まれません。";
+"settings.hotspothelper.enable.description" = "このオプションが有効にされている場合、信頼されていないWiFiネットワークへの接続時に、PIAがVPNを自動的に有効にします。";
+"settings.hotspothelper.all.title" = "すべてのネットワークを保護";
+"settings.hotspothelper.all.description" = "VPN WiFi保護が信頼されているネットワークを含むすべてのネットワークで有効になります。";
+"settings.hotspothelper.available.help" = "このリストに自動入力するには、「iOS設定」>「WiFi」へと進みます。";
+"settings.hotspothelper.available.add.help" = "信頼されたネットワークを追加するには「+」をタップします。";
+"settings.trusted.networks.sections.current" = "現在のネットワーク";
+"settings.trusted.networks.sections.available" = "利用可能なネットワーク";
+"settings.trusted.networks.sections.trusted" = "信頼されたネットワーク";
+"settings.trusted.networks.message" = "これらのネットワークでは、PIAは自動的に接続しません。";
+"settings.trusted.networks.connect.message" = "VPNに接続することによりこのネットワークを保護しますか？";
+"hotspothelper.display.name" = "🔒 この接続を保護するには、PIA設定でVPN WiFi保護を有効にします。";
+"hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi保護が有効にされました - 保護はお任せください。";
+"settings.hotspothelper.cellular.title" = "セルラーネットワークでの保護";
+"settings.hotspothelper.wifi.trust.title" = "VPN WiFi保護";
+"settings.hotspothelper.cellular.description" = "このオプションが有効になっている場合、セルラーネットワークの接続時に、PIAがVPNを自動的に有効にします。";
+"settings.hotspothelper.cellular.networks" = "セルラーネットワーク";
+"settings.hotspothelper.wifi.networks" = "WiFiネットワーク";
+"settings.trusted.networks.sections.untrusted" = "信頼できるネットワーク";
+"settings.hotspothelper.rules.title" = "ルール";
+"settings.trusted.networks.sections.trusted.rule.description" = "VPNキルスイッチが有効になっている状態でこの機能を有効にして、WiFiまたはセルラーネットワークへの接続でPIAがどのように動作するかを構成します。手動で切断すると、「ネットワーク管理ツール」の機能が無効になることにご留意ください。";
+"settings.trusted.networks.sections.trusted.rule.action" = "PIA VPNからの接続を切断";
+"tiles.quicksetting.nmt.title" = "ネットワーク管理";
+"tiles.quicksetting.private.browser.title" = "プライベートブラウザ";
 "settings.nmt.killswitch.disabled" = "現在VPNキルスイッチが無効になっています。「ネットワーク管理ツール」が確かに機能している状態にし、ネットワークを切り替えたときに再度接続できるようにするには、設定でVPNキルスイッチを有効にしてください。";
 "settings.nmt.optout.disconnect.alerts" = "切断確認アラートのオプトアウト";
 "settings.nmt.optout.disconnect.alerts.description" = "VPNから切断されたときの警告アラートをオフにします。";
 "settings.nmt.wireguard.warning" = "異なるネットワーク間で切り替える際、WireGuard®は再接続を必要としません。信頼されるネットワーク上ではVPNを手動で切断しなければならない場合もあります。";
-"settings.ovpn.migration.footer" = "OpenVPNの導入を更新しています。詳細は、こちらをクリックしてご確認ください。";
-"settings.ovpn.migration.footer.link" = "こちら";
-"settings.preview.title" = "プレビュー";
-"settings.reset.defaults.confirm.button" = "リセット";
-"settings.reset.defaults.confirm.message" = "アプリを標準設定に戻します。これまでの変更はすべて失われます。";
-"settings.reset.defaults.confirm.title" = "リセットの設定";
-"settings.reset.defaults.title" = "設定を標準にリセット";
-"settings.reset.footer" = "上記すべての設定を標準設定に戻します。";
-"settings.reset.title" = "リセット";
-"settings.section.automation" = "自動化";
-"settings.section.general" = "一般";
-"settings.section.help" = "ヘルプ";
-"settings.section.network" = "ネットワーク";
-"settings.section.privacyFeatures" = "プライバシー機能";
-"settings.section.protocols" = "プロトコル";
-"settings.server.network.alert" = "サーバーネットワークを変更するにはVPNを切断してください。";
-"settings.server.network.description" = "次世代ネットワーク";
+"settings.service.quality.share.title" = "PIAの改善に協力する";
 "settings.service.quality.share.description" = "VPN接続データを共有することにより、改善にご協力ください。これらのレポートには、個人を特定できる情報は含まれません。";
 "settings.service.quality.share.findoutmore" = "詳しく知る";
-"settings.service.quality.share.title" = "PIAの改善に協力する";
 "settings.service.quality.show.title" = "接続状態";
-"settings.small.packets.description" = "IPパケットサイズを少し小さくして、いくつかのルーターおよびモバイルネットワークとの互換性を改善します。";
-"settings.small.packets.title" = "小さなパケットを使用";
-"settings.trusted.networks.connect.message" = "VPNに接続することによりこのネットワークを保護しますか？";
-"settings.trusted.networks.message" = "これらのネットワークでは、PIAは自動的に接続しません。";
-"settings.trusted.networks.sections.available" = "利用可能なネットワーク";
-"settings.trusted.networks.sections.current" = "現在のネットワーク";
-"settings.trusted.networks.sections.trusted" = "信頼されたネットワーク";
-"settings.trusted.networks.sections.trusted.rule.action" = "PIA VPNからの接続を切断";
-"settings.trusted.networks.sections.trusted.rule.description" = "VPNキルスイッチが有効になっている状態でこの機能を有効にして、WiFiまたはセルラーネットワークへの接続でPIAがどのように動作するかを構成します。手動で切断すると、「ネットワーク管理ツール」の機能が無効になることにご留意ください。";
-"settings.trusted.networks.sections.untrusted" = "信頼できるネットワーク";
-"shortcuts.connect" = "接続";
-"shortcuts.disconnect" = "切断";
-"shortcuts.select_region" = "地域の選択";
-"siri.shortcuts.add.error" = "Siriショートカットの追加中にエラーが発生しました。もう一度お試しください。";
-"siri.shortcuts.connect.row.title" = "Siriショートカットを接続";
-"siri.shortcuts.connect.title" = "PIA VPNを接続";
-"siri.shortcuts.disconnect.row.title" = "Siriショートカットを切断";
-"siri.shortcuts.disconnect.title" = "PIA VPNを切断";
-"tiles.accessibility.invisible.tile.action" = "タップしてこのタイトルをダッシュボードに追加";
-"tiles.accessibility.visible.tile.action" = "タップしてこのタイトルをダッシュボードから削除";
-"tiles.favorite.servers.title" = "お気に入りのサーバー";
-"tiles.nmt.accessibility.trusted" = "信頼されたネットワーク";
-"tiles.nmt.accessibility.untrusted" = "信頼されていないネットワーク";
-"tiles.nmt.cellular" = "セルラー";
+
+"network.management.tool.open.wifi" = "オープン状態のWiFi";
+"network.management.tool.secure.wifi" = "安全なWiFi";
+"network.management.tool.mobile.data" = "モバイルデータ";
+"network.management.tool.always.connect" = "常にVPNを接続する";
+"network.management.tool.always.disconnect" = "常にVPNを切断する";
+"network.management.tool.retain.state" = "VPN状態を保持する";
+"network.management.tool.add.rule" = "新しいルールを追加する";
+"network.management.tool.choose.wifi" = "新しいルールを追加するWiFiネットワークを選択してください。 ";
+"network.management.tool.title" = "自動化を管理する";
+"network.management.tool.alert" = "自動化設定は、現在のネットワーク条件下でVPNを切断された状態に保つように構成されています。";
+"network.management.tool.disable" = "自動化を無効にする";
+"network.management.tool.enable.automation" = "自動化を有効にする";
+
+// REGION
+
+"region.search.placeholder" = "地域検索";
+"region.accessibility.filter" = "フィルター";
+"region.filter.sortby" = "地域絞り込み条件:";
+"region.filter.name" = "名前";
+"region.filter.latency" = "レイテンシ";
+"region.filter.favorites" = "お気に入り";
+"region.accessibility.favorite" = "お気に入りの地域を追加";
+"region.accessibility.unfavorite" = "お気に入りの地域を削除";
+
+// TILES
 "tiles.quick.connect.title" = "クイック接続";
-"tiles.quicksetting.nmt.title" = "ネットワーク管理";
-"tiles.quicksetting.private.browser.title" = "プライベートブラウザ";
-"tiles.quicksettings.min.elements.message" = "クイック設定タイルの少なくとも1つのエレメントを可視状態にしておくべきです";
-"tiles.quicksettings.title" = "クイック設定";
+"tiles.favorite.servers.title" = "お気に入りのサーバー";
 "tiles.region.title" = "VPNサーバー";
-"tiles.subscription.days.left" = "（残り%d日）";
-"tiles.subscription.monthly" = "月間";
 "tiles.subscription.title" = "サブスクリプション";
 "tiles.subscription.trial" = "トライアル";
+"tiles.subscription.monthly" = "月間";
 "tiles.subscription.yearly" = "年間";
-"tiles.usage.download" = "ダウンロード";
-"tiles.usage.ipsec.title" = "使用（IKEv2では利用不可）";
+"tiles.subscription.days.left" = "（残り%d日）";
 "tiles.usage.title" = "使用量";
+"tiles.usage.ipsec.title" = "使用（IKEv2では利用不可）";
 "tiles.usage.upload" = "アップロード";
+"tiles.usage.download" = "ダウンロード";
+"tiles.nmt.cellular" = "セルラー";
+"tiles.nmt.accessibility.trusted" = "信頼されたネットワーク";
+"tiles.nmt.accessibility.untrusted" = "信頼されていないネットワーク";
+"tiles.quicksettings.title" = "クイック設定";
+"tiles.quicksettings.min.elements.message" = "クイック設定タイルの少なくとも1つのエレメントを可視状態にしておくべきです";
+"tiles.accessibility.visible.tile.action" = "タップしてこのタイトルをダッシュボードから削除";
+"tiles.accessibility.invisible.tile.action" = "タップしてこのタイトルをダッシュボードに追加";
+
+//SIRI SHORTCUTS
+"siri.shortcuts.connect.row.title" = "Siriショートカットを接続";
+"siri.shortcuts.disconnect.row.title" = "Siriショートカットを切断";
+"siri.shortcuts.connect.title" = "PIA VPNを接続";
+"siri.shortcuts.disconnect.title" = "PIA VPNを切断";
+"siri.shortcuts.add.error" = "Siriショートカットの追加中にエラーが発生しました。もう一度お試しください。";
+
+//TODAY WIDGET
 "today.widget.login" = "ログイン";
-"vpn_permission.body.footer" = "弊社はネットワークアクティビティの監視、フィルタリング、記録は一切行いません。";
-"vpn_permission.body.subtitle" = "PIA VPNのプロンプトが表示されますので、VPN構成へのアクセスを許可してください。先に進むには「%@」をタップしてください。";
-"vpn_permission.body.title" = "PIAはお客様のトラフィックを確保するために、VPN設定にアクセスする必要があります。";
-"vpn_permission.disallow.contact" = "お問い合わせ";
-"vpn_permission.disallow.message.basic" = "アプリケーションが機能するためにはこの許可が必要です。";
-"vpn_permission.disallow.message.support" = "ヘルプが必要な場合はカスタマーサポートにご連絡ください。";
-"vpn_permission.title" = "PIA";
-"walkthrough.action.done" = "完了";
-"walkthrough.action.next" = "次へ";
-"walkthrough.action.skip" = "スキップ";
-"walkthrough.page.1.description" = "一度に最大10台の端末を保護して自分を守ることができます。";
-"walkthrough.page.1.title" = "一度に10台の端末をサポート";
-"walkthrough.page.2.description" = "世界中にサーバがあるので、常に保護された状態でいることができます。";
-"walkthrough.page.2.title" = "あらゆる地域に簡単に接続";
-"walkthrough.page.3.description" = "コンテンツブロッカーを有効にすると、Safariで広告表示をブロックできます。";
-"walkthrough.page.3.title" = "広告から自分を守りましょう";
+
+//FRIEND REFERRALS
+"friend.referrals.email.validation" = "無効なメールアドレス。もう一度お試しください。";
+"friend.referrals.title" = "友達を紹介する";
+"friend.referrals.view.invites.sent" = "送信済みの招待状を表示する";
+"friend.referrals.pending.invites" = "%d件の招待状が保留中です";
+"friend.referrals.signups.number" = "%d件のサインアップ";
+"friend.referrals.fullName" = "氏名";
+"friend.referrals.invitation.terms" = "この招待状を送信することにより、私は「ご家族・お友達紹介プログラム」のすべての利用規約に同意します。";
+"friend.referrals.family.friends.program" = "ご家族・お友達紹介プログラム";
+"friend.referrals.send.invite" = "招待状を送信";
+"friend.referrals.invite.error" = "招待状を再送信できませんでした。後でもう一度お試しください。";
+"friend.referrals.invite.success" = "招待状が送信されました";
+"friend.referrals.share.link" = "あなた専用の招待リンクを共有する";
+"friend.referrals.share.link.terms" = "このリンクを共有することにより、あなたは「ご家族・お友達紹介プログラム」のすべての利用規約に同意します。";
+"friend.referrals.invites.sent.title" = "招待状が送信されました";
+"friend.referrals.pending.invites.title" = "保留中の招待状";
+"friend.referrals.invites.number" = "%d件の招待状を送信しました";
+"friend.referrals.privacy.note" = "プライバシー保護の理由により、30日以前に送信された招待状はすべて削除されますのでご注意ください。";
+"friend.referrals.signedup" = "サインアップ";
+"friend.referrals.reward.given" = "報酬が取得されました";
+"friend.referrals.days.acquired" = "無料期間を取得しました";
+"friend.referrals.days.number" = "%d日";
+
+"friend.referrals.friends.family.title" = "お友達やご家族を紹介してください。サインアップするごとに、あなたとご登録者の両方に30日間無料がプレゼントされます。　";
+"friend.referrals.description.short" = "お友達を紹介してください。30日間無料がもらえます。";
+
+// GDPR
+"gdpr.collect.data.title" = "弊社が収集する個人情報";
+"gdpr.collect.data.description" = "メールアドレスは、アカウント管理および乱用防止の目的にのみ使用されます。\n\nメールアドレスは、サブスクリプション情報、お支払確認、お客様とのやり取り、およびPrivate Internet Access のプロモーションオファーを送信するために使用されます。";
+"gdpr.accept.button.title" = "同意して続行する";
+
+// SET EMAIL
+"set.email.form.email" = "メールアドレスを入力してください";
+"set.email.why" = "ユーザー名とパスワードを送信するためのメールアドレスを入力してください。";
+"set.email.success.message_format" = "お客様のメールアドレス（%@）にアカウントユーザー名とパスワードが送信されました";
+"set.email.password.caption" = "パスワード";
+"set.email.error.validation" = "メールアドレスを入力する必要があります。";
+
+// RATING
+"rating.enjoy.question" = "PIA VPNを楽しんでいますか？";
+"rating.enjoy.subtitle" = "VPN製品にご満足いただいていることを願っています";
+"rating.problems.question" = "どのような問題があったのでしょうか？";
+"rating.problems.subtitle" = "フィードバックを送信しますか？PIAご利用にあたり、お客様のエクスペリエンス改善のお手伝いをいたします。";
+"rating.rate.question" = "AppStoreでレビューしていただけますか？";
+"rating.rate.subtitle" = "お客様のご感想を共有していただければありがたいです";
+"rating.error.question" = "接続を確立できませんでした";
+"rating.error.subtitle" = "別の地域を選択するか、サポートチケットを開いてそれについてお知らせください。";
+"rating.error.button.send" = "フィードバックを送信";
+
+// CALLING CARDS
+"card.wireguard.title" = "WireGuard®を今すぐお試しください！";
+"card.wireguard.description" = "より優れたパフォーマンス、より低いCPU使用率、およびより長いバッテリー寿命を提供する、新しくより効率的なVPNプロトコルです。";
+"card.wireguard.cta.activate" = "WireGuard®を今すぐ試す";
+"card.wireguard.cta.settings" = "[設定]を開く";
+"card.wireguard.cta.learn" = "詳しく知る";
+
+// DEDICATED IP
+"dedicated.ip.title" = "専用IP";
+"dedicated.ip.plural.title" = "あなたの専用IP";
+"dedicated.ip.activation.description" = "下のフォームにトークンを貼り付けて、専用IPをアクティブにします。最近専用IPを購入した場合は、PIAウェブサイトにアクセスしてトークンを生成することができます。";
+"dedicated.ip.token.textfield.placeholder" = "ここにトークンを貼り付けます";
+"dedicated.ip.token.textfield.accessibility" = "専用IPトークンを入力するためのテキストフィールド";
+"dedicated.ip.activate.button.title" = "アクティベート";
+"dedicated.ip.message.incorrect.token" = "トークンが正しく入力されていることを確認してください";
+"dedicated.ip.message.invalid.token" = "トークンが無効です。トークンが正しく入力されていることを確認してください。";
+"dedicated.ip.message.valid.token" = "専用IPが正常にアクティベートされました。地域選択リストで利用できるようになります。";
+"dedicated.ip.message.expired.token" = "トークンの有効期限が切れています。ウェブサイトのアカウントページから新しいトークンを生成してください。";
+"dedicated.ip.message.error.token" = "トークンの有効期限が切れています。ウェブサイトのアカウントページから新しいトークンを生成してください。";
+"dedicated.ip.message.token.willexpire" = "あなたの専用IPは間もなく期限が切れます。新しい専用IPを入手してください";
+"dedicated.ip.message.token.willexpire.link" = "新しい専用IPを入手してください";
+"dedicated.ip.message.ip.updated" = "あなたの専用IPが更新されました";
+"dedicated.ip.country.flag.accessibility" = "%@の国旗";
+"dedicated.ip.remove" = "選択された地域を削除してよろしいですか？";
+"dedicated.ip.limit.title" = "選択した国の専用IPを使用して、あらゆるアセットへのリモート接続を保護しましょう。サブスクリプション中、このIPはあなただけのIPとなり、最も強力な暗号化でデータ転送を保護します。";
+
+// RECONNECTIONS
+"server.reconnection.please.wait" = "お待ちください…";
+"server.reconnection.still.connection" = "まだ接続試行中です...";
+
+// INAPP MESSAGES
+"inapp.messages.toggle.title" = "サービス通信メッセージを表示";
+"inapp.messages.settings.updated" = "設定が更新されました";
