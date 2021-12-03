@@ -130,6 +130,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
             Client.environment = .production
         }
         Client.resetWebServices()
+        Client.providers.serverProvider.download(nil)
         refreshEnvironmentButton()
     }
     
