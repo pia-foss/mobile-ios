@@ -148,18 +148,27 @@ class GlossServer: GlossParser {
 extension Server: JSONEncodable {
     public func toJSON() -> JSON? {
         
+        //Add meta into array if not null
+        var metaArray:[Server.ServerAddressIP]? = []
+        
+        if let meta = meta {
+            metaArray?.append(meta)
+        }
+        
         //Retrieve values for each protocol
         let ovpnTCP = try? JSONEncoder().encode(openVPNAddressesForTCP)
         let ovpnUDP = try? JSONEncoder().encode(openVPNAddressesForUDP)
         let wgUDP = try? JSONEncoder().encode(wireGuardAddressesForUDP)
         let ikeV2UDP = try? JSONEncoder().encode(iKEv2AddressesForUDP)
-        let meta = try? JSONEncoder().encode([meta])
+        let metaArrayData = try? JSONEncoder().encode(metaArray)
+
+
 
         let ovpnTCPobj = try? JSONSerialization.jsonObject(with: ovpnTCP ?? Data(), options: .mutableContainers)
         let ovpnUDPobj = try? JSONSerialization.jsonObject(with: ovpnUDP ?? Data(), options: .mutableContainers)
         let wgUDPobj = try? JSONSerialization.jsonObject(with: wgUDP ?? Data(), options: .mutableContainers)
         let ikeV2UDPobj = try? JSONSerialization.jsonObject(with: ikeV2UDP ?? Data(), options: .mutableContainers)
-        let metaObj = try? JSONSerialization.jsonObject(with: meta ?? Data(), options: .mutableContainers)
+        let metaObj = try? JSONSerialization.jsonObject(with: metaArrayData ?? Data(), options: .mutableContainers)
 
         var jsonified = jsonify([
             "serial" ~~> serial,

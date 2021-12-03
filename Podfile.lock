@@ -5,11 +5,11 @@ PODS:
   - Gloss (2.1.0)
   - lottie-ios (3.0.3)
   - OpenSSL-Apple (1.1.1j.11)
-  - PIAAccountModule (1.1.3):
-    - PIAAccountModule/account (= 1.1.3)
-    - PIAAccountModule/gradle (= 1.1.3)
-  - PIAAccountModule/account (1.1.3)
-  - PIAAccountModule/gradle (1.1.3)
+  - PIAAccountModule (1.1.4):
+    - PIAAccountModule/account (= 1.1.4)
+    - PIAAccountModule/gradle (= 1.1.4)
+  - PIAAccountModule/account (1.1.4)
+  - PIAAccountModule/gradle (1.1.4)
   - PIACSIModule (1.0.1):
     - PIACSIModule/csi (= 1.0.1)
     - PIACSIModule/gradle (= 1.0.1)
@@ -62,7 +62,7 @@ DEPENDENCIES:
   - Gloss (~> 2)
   - lottie-ios
   - OpenSSL-Apple (from `https://github.com/keeshux/openssl-apple`)
-  - "PIAAccountModule (from `git@gitlab.kape.com:pia-mobile/shared/account.git`, branch `master`)"
+  - "PIAAccountModule (from `git@gitlab.kape.com:pia-mobile/shared/account.git`, branch `release/1.1.4`)"
   - "PIACSIModule (from `git@gitlab.kape.com:pia-mobile/shared/csi.git`, branch `master`)"
   - "PIAKPIModule (from `git@gitlab.kape.com:pia-mobile/shared/kpi.git`, branch `master`)"
   - "PIARegionsModule (from `git@gitlab.kape.com:pia-mobile/shared/regions.git`, branch `master`)"
@@ -91,7 +91,7 @@ EXTERNAL SOURCES:
   OpenSSL-Apple:
     :git: https://github.com/keeshux/openssl-apple
   PIAAccountModule:
-    :branch: master
+    :branch: release/1.1.4
     :git: "git@gitlab.kape.com:pia-mobile/shared/account.git"
   PIACSIModule:
     :branch: master
@@ -114,7 +114,7 @@ CHECKOUT OPTIONS:
     :commit: ada87845f854a21fea436c76deb97be2acc58c8a
     :git: https://github.com/keeshux/openssl-apple
   PIAAccountModule:
-    :commit: 5c9abfea2ad116920566f511f1272ae57b3673ef
+    :commit: 85e02e55932e68ea6015d0a9c3d91311de96a7fb
     :git: "git@gitlab.kape.com:pia-mobile/shared/account.git"
   PIACSIModule:
     :commit: b62d1bab4e5b8627b1e9aafa20dc76e9966da921
@@ -139,7 +139,7 @@ SPEC CHECKSUMS:
   Gloss: 13ab6b4b0ff4cb2448466edc957479b1bccea8ba
   lottie-ios: 06e0b54aab85ba128e332687d7f4ac4861a7a7ae
   OpenSSL-Apple: bb7c9715a259404de040f5359ed3b3170cedf8d6
-  PIAAccountModule: 557600024f0a6804918e36852a0825c31f2df1d6
+  PIAAccountModule: a8c4e8e276baed48dce704c7eafb23820eed2e83
   PIACSIModule: 32df98c20a0fc4cad5fadbb1b72f7b74315aa8ea
   PIAKPIModule: a3a069d2ec8a7875b0e8258f9a00880dc8247b3e
   PIARegionsModule: 976adf95626a265ecf0233cc7ca3499348ca1095
@@ -152,6 +152,6 @@ SPEC CHECKSUMS:
   TunnelKit: 2a6aadea2d772a2760b153aee27d1c334c9ca6db
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 5db2c46170d3d920fe1bf189045a35d31b400213
+PODFILE CHECKSUM: aa28ecb5f03bd4d897d93e9207fe90db3e776a83
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

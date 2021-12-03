@@ -129,6 +129,9 @@ extension Client {
         
         /// Sets the maximum number of failed VPN connectivity attempts before giving up.
         public var vpnConnectivityMaxAttempts: Int
+        
+        /// Sets the rsa certificate to use for pinning puposes.
+        public var rsa4096Certificate: String?
 
         let maceHostname: String
         
@@ -227,6 +230,8 @@ extension Client {
             vpnConnectivityTimeout = 2.0
             vpnConnectivityRetryDelay = 5.0
             vpnConnectivityMaxAttempts = 3
+            
+            rsa4096Certificate = nil
 
             maceHostname = "209.222.18.222"
             macePort = 1111

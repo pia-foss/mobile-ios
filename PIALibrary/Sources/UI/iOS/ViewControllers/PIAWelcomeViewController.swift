@@ -130,6 +130,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
             Client.environment = .production
         }
         Client.resetWebServices()
+        Client.providers.serverProvider.download(nil)
         refreshEnvironmentButton()
     }
     
@@ -216,7 +217,12 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
     /// :nodoc:
     public override func viewShouldRestyle() {
         super.viewShouldRestyle()
-        navigationItem.titleView = NavigationLogoView()
+        if !preset.isExpired {
+            navigationItem.titleView = NavigationLogoView()
+        }
+        else {
+            navigationItem.title = L10n.Welcome.Upgrade.header
+        }
         Theme.current.applyPrincipalBackground(view)
         Theme.current.applyNavigationBarStyle(to: self)
         Theme.current.applyCancelButton(buttonCancel, appearance: .dark)

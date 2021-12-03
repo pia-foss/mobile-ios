@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VHM-bG-giz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VHM-bG-giz">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -448,6 +448,7 @@ You will not be charged during this process.</string>
                         <outlet property="scrollView" destination="RgS-fn-CJH" id="gQR-aC-e9f"/>
                         <outlet property="textPassword" destination="Wtm-HW-6FS" id="bvM-nY-mSr"/>
                         <outlet property="textUsername" destination="Gcb-kt-Yu7" id="5rD-If-yIW"/>
+                        <segue destination="vXZ-lx-hvc" kind="show" identifier="ExpiredAccountPurchaseSegue" id="ms1-ev-pif"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MPJ-r6-Xjn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -479,8 +480,8 @@ You will not be charged during this process.</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hTy-4A-jv9">
                                                 <rect key="frame" x="27" y="29" width="266" height="427.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a VPN plan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPa-uO-IxH">
-                                                        <rect key="frame" x="67" y="0.0" width="132" height="19.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Select a VPN plan" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPa-uO-IxH">
+                                                        <rect key="frame" x="0.0" y="0.0" width="266" height="19.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -649,6 +650,7 @@ You will not be charged during this process.</string>
                                                     <constraint firstItem="KyF-30-stz" firstAttribute="top" secondItem="G5a-CO-RKC" secondAttribute="bottom" constant="16" id="1DG-jO-PEV"/>
                                                     <constraint firstAttribute="bottom" secondItem="KyF-30-stz" secondAttribute="bottom" id="30v-I9-NUH"/>
                                                     <constraint firstItem="1AP-NP-8y0" firstAttribute="top" secondItem="Peu-Da-gWl" secondAttribute="bottom" constant="33" id="3L3-SU-nCw"/>
+                                                    <constraint firstAttribute="trailing" secondItem="hPa-uO-IxH" secondAttribute="trailing" id="5iq-Xc-A77"/>
                                                     <constraint firstItem="KyF-30-stz" firstAttribute="leading" secondItem="hTy-4A-jv9" secondAttribute="leading" id="7kA-ah-cv8"/>
                                                     <constraint firstAttribute="trailing" secondItem="1AP-NP-8y0" secondAttribute="trailing" id="ESc-uJ-tfw"/>
                                                     <constraint firstItem="Peu-Da-gWl" firstAttribute="centerX" secondItem="hTy-4A-jv9" secondAttribute="centerX" id="QdA-NI-LNZ"/>
@@ -657,6 +659,7 @@ You will not be charged during this process.</string>
                                                     <constraint firstAttribute="trailing" secondItem="KyF-30-stz" secondAttribute="trailing" id="ZBr-4g-lGZ"/>
                                                     <constraint firstItem="G5a-CO-RKC" firstAttribute="leading" secondItem="hTy-4A-jv9" secondAttribute="leading" id="ZxJ-o3-ToY"/>
                                                     <constraint firstItem="G5a-CO-RKC" firstAttribute="top" secondItem="1AP-NP-8y0" secondAttribute="bottom" constant="20" id="afu-UC-s1H"/>
+                                                    <constraint firstItem="hPa-uO-IxH" firstAttribute="leading" secondItem="hTy-4A-jv9" secondAttribute="leading" id="cry-80-veK"/>
                                                     <constraint firstItem="hPa-uO-IxH" firstAttribute="centerX" secondItem="hTy-4A-jv9" secondAttribute="centerX" id="hF5-2v-dnV"/>
                                                     <constraint firstItem="Peu-Da-gWl" firstAttribute="top" secondItem="hPa-uO-IxH" secondAttribute="bottom" constant="12" id="qnZ-7w-aXv"/>
                                                     <constraint firstItem="hPa-uO-IxH" firstAttribute="top" secondItem="hTy-4A-jv9" secondAttribute="top" id="re9-Hq-JJu"/>
@@ -730,7 +733,7 @@ You will not be charged during this process.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zXr-6i-iXN" customClass="BorderedTextField" customModule="PIALibrary" customModuleProvider="target">
-                                <rect key="frame" x="19" y="19" width="282" height="530"/>
+                                <rect key="frame" x="19" y="19" width="282" height="18.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="pAP-q7-PIs"/>
                                 </constraints>
@@ -1087,8 +1090,8 @@ You will not be charged during this process.</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="aVb-49-Y5l"/>
-        <segue reference="kNL-g4-6nK"/>
+        <segue reference="ms1-ev-pif"/>
+        <segue reference="YiM-4D-yJt"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="close-icon" width="50" height="50"/>
