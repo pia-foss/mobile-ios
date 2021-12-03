@@ -25,7 +25,7 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-class LoginViewController: AutolayoutViewController, WelcomeChild {
+class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeViewControllerDelegate {
     
     @IBOutlet private weak var scrollView: UIScrollView!
 
@@ -93,7 +93,7 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
             return
         }
         
-        vc.delegate = self.delegate
+        vc.delegate = delegate ?? self
         if let preset = preset {
             vc.preset = preset
         }
@@ -187,9 +187,6 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
         }
         
         let request = LoginRequest(credentials: credentials)
-
-        textUsername.text = credentials.username
-        textPassword.text = credentials.password
         
         prepareLogin()
         preset?.accountProvider.login(with: request, handleLoginResult)
@@ -331,6 +328,15 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
                                for: [])
         loginWithLink.titleLabel?.numberOfLines = 0
         loginWithLink.titleLabel?.textAlignment = .center
+    }
+    
+    func welcomeController(_ welcomeController: PIAWelcomeViewController, didSignupWith user: UserAccount, topViewController: UIViewController) {
+        completionDelegate?.welcomeDidSignup(withUser: user, topViewController: topViewController)
+    }
+    
+    func welcomeController(_ welcomeController: PIAWelcomeViewController, didLoginWith user: UserAccount, topViewController: UIViewController) {
+        completionDelegate?.welcomeDidLogin(withUser: user, topViewController: topViewController)
+        
     }
 
 }
