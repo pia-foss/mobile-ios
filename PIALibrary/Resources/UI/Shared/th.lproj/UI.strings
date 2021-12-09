@@ -1,4 +1,4 @@
-"global.cancel" = "ยกเลิก";
+"global.version.format" = "เวอร์ชั่น %@ (%@)";
 "global.close" = "ปิด";
 "global.ok" = "ตกลง";
-"global.version.format" = "เวอร์ชั่น %@ (%@)";
+"global.cancel" = "ยกเลิก";

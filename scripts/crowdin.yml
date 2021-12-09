@@ -1,0 +1,46 @@
+# CrowdIn Configuration File.
+# 
+# 
+# Setup
+# =================
+# 1. Download CrowdIn CLI from homebrew or 
+# 2. Create an API token from CrowdIn website
+# 3. Optional - set this token in your Bash/ZSH env as $CROWDIN_API_TOKEN or something similar
+# 
+# Sending English Sources to CrowdIn
+# ====================================
+# 
+# $ cd scripts/
+# $ crowdin upload sources -T $CROWDIN_API_TOKEN
+# (note - you'll have to paste in the token if you haven't exported it in your env)
+# 
+# Downloading updated translations
+# ==================================
+# 
+# $ cd scripts/
+# $ crowdin download -T $CROWDIN_API_TOKEN
+# (note - you'll have to paste in the token if you haven't exported it in your env)
+# 
+# Notes:
+# ======
+# 
+# This only updates PIA VPN/lang.lproj/*.strings
+
+
+"project_id" : "487811"
+"api_token" : ""
+"base_path" : "../"
+"base_url" : "https://api.crowdin.com"
+
+"preserve_hierarchy": true
+
+files: [
+ {
+  "source" : "PIALibrary/Resources/UI/iOS/en.lproj/*.strings",
+  "translation" : "PIALibrary/Resources/UI/iOS/%osx_code%/%original_file_name%"
+ },
+ {
+  "source" : "PIALibrary/Resources/UI/Shared/en.lproj/*.strings",
+  "translation" : "PIALibrary/Resources/UI/Shared/%osx_code%/%original_file_name%"
+ }
+]

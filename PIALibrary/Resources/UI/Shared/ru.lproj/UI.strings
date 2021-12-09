@@ -1,4 +1,4 @@
-"global.cancel" = "Отмена";
+"global.version.format" = "Версия %@ (%@)";
 "global.close" = "Закрыть";
 "global.ok" = "ОК";
-"global.version.format" = "Версия %@ (%@)";
+"global.cancel" = "Отмена";

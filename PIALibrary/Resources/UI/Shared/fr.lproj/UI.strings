@@ -1,4 +1,4 @@
-"global.cancel" = "Annuler";
+"global.version.format" = "Version %@ (%@)";
 "global.close" = "Fermer";
 "global.ok" = "OK";
-"global.version.format" = "Version %@ (%@)";
+"global.cancel" = "Annuler";

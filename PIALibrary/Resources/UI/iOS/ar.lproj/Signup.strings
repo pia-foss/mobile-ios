@@ -1,54 +1,74 @@
-"failure.message" = "يتعذر علينا إنشاء حساب في الوقت الحالي. يرجى إعادة المحاولة لاحقًا. \n\nعند إعادة فتح التطبيق سيتم إعادة محاولة إنشاء حساب.";
-"failure.purchase.sandbox.message" = "اشتراك الصندوق المحدد غير متاح في الإنتاج.";
-"failure.redeem.claimed.message" = "يبدو أن هذه البطاقة استُخدمت في حساب آخر. حاول إدخال رمز جديد.";
-"failure.redeem.claimed.title" = "تم استخدام هذه البطاقة بالفعل";
-"failure.redeem.invalid.message" = "يبدو أنك أدخلت رمز بطاقة غير صالح. يرجى إعادة المحاولة.";
-"failure.redeem.invalid.title" = "رمز بطاقة غير صالح";
-"failure.submit" = "عودة";
-"failure.title" = "فشل إنشاء الحساب";
-"failure.vc_title" = "فشل تسجيل الآن";
+/* 
+  Signup.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
+"in_progress.title" = "تأكيد التسجيل";
 "in_progress.message" = "جارٍ تأكيد عملية الشراء مع نظامنا. يمكن أن يستغرق ذلك لحظة لذلك انتظر قليلًا.";
 "in_progress.redeem.message" = "جارٍ تأكيد رمز بطاقتك مع نظامنا. قد يستغرق ذلك بضع لحظات، انتظر قليلًا.";
-"in_progress.title" = "تأكيد التسجيل";
-"purchase.subscribe.now" = "اشتراك الآن";
+
+"success.title" = "تم الشراء";
+"success.message_format" = "شضكراً على اشتراكك معنا. لقد أرسلنا اسم المستخدم وكلمة المرور الخاصين بك إلى بريدك الإلكتروني %@";
+"success.redeem.title" = "تم استبدال البطاقة بنجاح";
+"success.redeem.message" = "ستصلك رسالة عبر البريد الإلكتروني تتضمن اسم المستخدم وكلمة المرور.\n\nتفاصيل تسجيل الدخول";
+"success.username.caption" = "اسم المستخدم";
+"success.password.caption" = "كلمة المرور";
+"success.submit" = "كيف تبدأ";
+
+"failure.vc_title" = "فشل تسجيل الآن";
+"failure.title" = "فشل إنشاء الحساب";
+"failure.message" = "يتعذر علينا إنشاء حساب في الوقت الحالي. يرجى إعادة المحاولة لاحقًا. \n\nعند إعادة فتح التطبيق سيتم إعادة محاولة إنشاء حساب.";
+"failure.purchase.sandbox.message" = "اشتراك الصندوق المحدد غير متاح في الإنتاج.";
+"failure.redeem.invalid.title" = "رمز بطاقة غير صالح";
+"failure.redeem.invalid.message" = "يبدو أنك أدخلت رمز بطاقة غير صالح. يرجى إعادة المحاولة.";
+"failure.redeem.claimed.title" = "تم استخدام هذه البطاقة بالفعل";
+"failure.redeem.claimed.message" = "يبدو أن هذه البطاقة استُخدمت في حساب آخر. حاول إدخال رمز جديد.";
+"failure.submit" = "عودة";
+
+"unreachable.vc_title" = "خطأ";
+"unreachable.title" = "أوبس!";
+"unreachable.message" = "لم يتم العثور على اتصال بالإنترنت. يرجى التأكد من اتصالك بالإنترنت وضغط زر إعادة المحاولة أدناه.\n\nيمكنك العودة إلى التطبيق في وقت لاحق لإنهاء العملية.";
+"unreachable.submit" = "أعد المحاولة";
+
+"purchase.uncredited.alert.message" = "لديك معاملات غير معتمدة. هل تريد استعادة تفاصيل حسابك؟";
+"purchase.uncredited.alert.button.cancel" = "إلغاء";
+"purchase.uncredited.alert.button.recover" = "استعادة الحساب";
+
+"purchase.trials.intro" = "ابدأ تجربتك المجانية لمدة 7 ايام";
+"purchase.trials.price.after" = "ثم %@";
+"purchase.trials.money.back" = "ضمان استرداد المال لمدة 30 أيام";
 "purchase.trials.1year.protection" = "1 سنة من الخصوصية وحماية الهوية";
-"purchase.trials.all.plans" = "مشاهدة جميع الخطط المتاحة";
 "purchase.trials.anonymous" = "تصفح مجهول الهوية وإخفاء عنوان IP.";
 "purchase.trials.devices" = "يدعم 10 أجهزة في المرة الواحدة";
 "purchase.trials.devices.description" = "احمي نفسك على ما يصل إلى 10 أجهزة في وقت واحد.";
-"purchase.trials.intro" = "ابدأ تجربتك المجانية لمدة 7 ايام";
-"purchase.trials.money.back" = "ضمان استرداد المال لمدة 30 أيام";
-"purchase.trials.price.after" = "ثم %@";
 "purchase.trials.region" = "اتصل بأي منطقة بسهولة";
 "purchase.trials.servers" = "أكثر من 3300 خادم في 32 دولة";
 "purchase.trials.start" = "ابدأ الاشتراك";
-"purchase.uncredited.alert.button.cancel" = "إلغاء";
-"purchase.uncredited.alert.button.recover" = "استعادة الحساب";
-"purchase.uncredited.alert.message" = "لديك معاملات غير معتمدة. هل تريد استعادة تفاصيل حسابك؟";
+"purchase.trials.all.plans" = "مشاهدة جميع الخطط المتاحة";
+
+"purchase.subscribe.now" = "اشتراك الآن";
+
+// WALKTHROUGH
+
+"walkthrough.action.next" = "التالي";
+"walkthrough.action.done" = "تم";
+"walkthrough.action.skip" = "تخطي";
+
+"walkthrough.page.1.title" = "يدعم 10 أجهزة في المرة الواحدة";
+"walkthrough.page.1.description" = "احمي نفسك على ما يصل إلى 10 أجهزة في وقت واحد.";
+"walkthrough.page.2.title" = "اتصل بأي منطقة بسهولة";
+"walkthrough.page.2.description" = "مع خوادم في جميع أنحاء العالم، أنت دائما تحت الحماية.";
+"walkthrough.page.3.title" = "احمي نفسك من الإعلانات";
+"walkthrough.page.3.description" = "تمكين ميزة حظر المحتوى يمنع الإعلانات من الظهور في Safari.";
+
 "share.data.buttons.accept" = "قبول";
 "share.data.buttons.noThanks" = "لا، شكرًا";
 "share.data.buttons.readMore" = "قراءة المزيد";
-"share.data.readMore.text.description" = "يساعدنا هذا الحد الأدنى من المعلومات في تحديد مشكلات الاتصال المحتملة وإصلاحها. لاحظ أن مشاركة هذه المعلومات تتطلب الموافقة والتفعيل اليدوي حيث أنها متوقفة بشكل افتراضي.\n\nسنجمع معلومات حول الأحداث التالية:\n\n- محاولة الاتصال\n- الاتصال الملغى\n- الاتصال المؤسس\n\nلجميع هذه الأحداث، سنجمع المعلومات التالية:\n- المنصة\n- إصدار التطبيق\n- نوع التطبيق (إصدار تجريبي أم لا)\n- البروتوكول المستخدم\n- مصدر الاتصال (يدوي أو مؤتمت)\n\nستحتوي جميع الأحداث على معرّف فريد يتم إنشاؤه عشوائيًا. هذا المعرف غير مرتبط بحساب المستخدم الخاص بك. يتم إعادة إنشاء هذا المعرف الفريد يوميًا لأغراض الخصوصية.\n\nستكون دائما أنت المتحكم. يمكنك معرفة البيانات التي جمعناها من \"الإعدادات\"، ويمكنك إيقافها في أي وقت.";
+"share.data.text.title" = "يرجى مساعدتنا في تحسين خدمتنا";
 "share.data.text.description" = "لمساعدتنا في ضمان أداء اتصال خدمتنا، يمكنك مشاركة إحصائيات اتصالك معنا دون الكشف عن هويتك. لا تتضمن هذه التقارير أي معلومات محددة للشخصية.";
 "share.data.text.footer" = "يمكنك دائمًا التحكم في ذلك من إعداداتك";
-"share.data.text.title" = "يرجى مساعدتنا في تحسين خدمتنا";
-"success.message_format" = "شضكراً على اشتراكك معنا. لقد أرسلنا اسم المستخدم وكلمة المرور الخاصين بك إلى بريدك الإلكتروني %@";
-"success.password.caption" = "كلمة المرور";
-"success.redeem.message" = "ستصلك رسالة عبر البريد الإلكتروني تتضمن اسم المستخدم وكلمة المرور.\n\nتفاصيل تسجيل الدخول";
-"success.redeem.title" = "تم استبدال البطاقة بنجاح";
-"success.submit" = "كيف تبدأ";
-"success.title" = "تم الشراء";
-"success.username.caption" = "اسم المستخدم";
-"unreachable.message" = "لم يتم العثور على اتصال بالإنترنت. يرجى التأكد من اتصالك بالإنترنت وضغط زر إعادة المحاولة أدناه.\n\nيمكنك العودة إلى التطبيق في وقت لاحق لإنهاء العملية.";
-"unreachable.submit" = "أعد المحاولة";
-"unreachable.title" = "أوبس!";
-"unreachable.vc_title" = "خطأ";
-"walkthrough.action.done" = "تم";
-"walkthrough.action.next" = "التالي";
-"walkthrough.action.skip" = "تخطي";
-"walkthrough.page.1.description" = "احمي نفسك على ما يصل إلى 10 أجهزة في وقت واحد.";
-"walkthrough.page.1.title" = "يدعم 10 أجهزة في المرة الواحدة";
-"walkthrough.page.2.description" = "مع خوادم في جميع أنحاء العالم، أنت دائما تحت الحماية.";
-"walkthrough.page.2.title" = "اتصل بأي منطقة بسهولة";
-"walkthrough.page.3.description" = "تمكين ميزة حظر المحتوى يمنع الإعلانات من الظهور في Safari.";
-"walkthrough.page.3.title" = "احمي نفسك من الإعلانات";
+
+"share.data.readMore.text.description" = "يساعدنا هذا الحد الأدنى من المعلومات في تحديد مشكلات الاتصال المحتملة وإصلاحها. لاحظ أن مشاركة هذه المعلومات تتطلب الموافقة والتفعيل اليدوي حيث أنها متوقفة بشكل افتراضي.\n\nسنجمع معلومات حول الأحداث التالية:\n\n- محاولة الاتصال\n- الاتصال الملغى\n- الاتصال المؤسس\n\nلجميع هذه الأحداث، سنجمع المعلومات التالية:\n- المنصة\n- إصدار التطبيق\n- نوع التطبيق (إصدار تجريبي أم لا)\n- البروتوكول المستخدم\n- مصدر الاتصال (يدوي أو مؤتمت)\n\nستحتوي جميع الأحداث على معرّف فريد يتم إنشاؤه عشوائيًا. هذا المعرف غير مرتبط بحساب المستخدم الخاص بك. يتم إعادة إنشاء هذا المعرف الفريد يوميًا لأغراض الخصوصية.\n\nستكون دائما أنت المتحكم. يمكنك معرفة البيانات التي جمعناها من \"الإعدادات\"، ويمكنك إيقافها في أي وقت.";

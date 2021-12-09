@@ -1,4 +1,4 @@
-"global.cancel" = "取消";
+"global.version.format" = "版本 %@ (%@)";
 "global.close" = "关闭";
 "global.ok" = "确定";
-"global.version.format" = "版本 %@ (%@)";
+"global.cancel" = "取消";

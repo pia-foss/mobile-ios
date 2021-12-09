@@ -1,67 +1,82 @@
-"agreement.message" = "Efter den gratis prøveperiode på 7 dage, fornyes dette abonnement automatisk for %@, medmindre det annulleres mindst 24 timer før prøveperioden er afsluttet. Din Apple ID-konto bliver debiteret for fornyelse inden for 24 timer inden udløbet af prøveperioden. Du kan administrere og annullere dine abonnementer ved at gå til din App Store-kontoindstillinger efter købet. Tilbudet med en 7-dages prøveperiode er begrænset til en 7-dages prøveperiode pr. bruger. Enhver ubrugt del af en gratis prøveperiode, hvis den tilbydes, fortabes, når brugeren køber et abonnement. Alle priser inkluderer gældende lokal moms.";
-"agreement.message.privacy" = "Fortrolighedspolitik";
-"agreement.message.tos" = "Vilkår for brug";
-"agreement.trials.message" = "Betaling debiteres din Apple ID-konto ved bekræftelsen af ​​købet. Abonnementet fornyes automatisk, medmindre det annulleres mindst 24 timer inden udgangen af ​​den aktuelle periode. Din konto bliver debiteret for fornyelse inden for 24 timer inden udgangen af ​​den aktuelle periode. Du kan administrere og annullere dine abonnementer ved at gå til dine kontoindstillinger i App Store efter køb.\n\nVisse betalte abonnementer kan muligvis tilbyde en gratis prøveperiode, inden de opkræver din betalingsmetode. Hvis du beslutter at afmelde dig et betalt abonnement, før vi begynder at opkræve din betalingsmetode, skal du annullere abonnementet mindst 24 timer før den gratis prøveperiode afsluttes.\n\nGratis prøveperioder er kun tilgængelige for nye brugere og er efter vores eget skøn, og hvis du forsøger at tilmelde dig en ekstra gratis prøveperiode, bliver du straks debiteret for det almindelige abonnementsgebyr.\n\nVi forbeholder os retten til at tilbagekalde din gratis prøveperiode til enhver tid.\n\nEnhver ubrugt del af din gratis prøveperiode fortabes ved køb af et abonnement.\n\nTilmelding udgør accept af disse vilkår og betingelser.";
-"agreement.trials.monthly.plan" = "måned";
-"agreement.trials.title" = "Vilkår og betingelser for gratis prøveperioder";
-"agreement.trials.yearly.plan" = "år";
-"camera.access.error.message" = "Din enhed understøtter ikke scanning af QR-koder. Brug venligst en enhed med et kamera.";
-"camera.access.error.title" = "Kamera ikke tilgængeligt";
-"gdpr.accept.button.title" = "Accepter og fortsæt";
-"gdpr.collect.data.description" = "E-mailadresse med henblik på kontohåndtering og beskyttelse mod misbrug.";
-"gdpr.collect.data.title" = "Personlige oplysninger, vi indsamler";
-"gdpr.usage.data.description" = "E-mailadresse bruges kun til at sende abonnementsoplysninger, betalingsbekræftelser, kundekorrespondance og salgsfremmende tilbud fra Private Internet Access.";
-"gdpr.usage.data.title" = "Anvendelse af personlige oplysninger indsamlet af os";
-"getstarted.buttons.buyaccount" = "Køb konto";
-"iap.error.message.unavailable" = "Apple-servere er ikke tilgængelige i øjeblikket. Prøv venligst igen senere.";
-"iap.error.title" = "Fejl";
-"login.error.throttled" = "Alt for mange mislykkede forsøg på at logge ind med dette brugernavn. Prøv venligst igen senere.";
-"login.error.title" = "Log ind";
-"login.error.unauthorized" = "Dit brugernavn eller kodeord er forkert.";
-"login.error.validation" = "Du skal indtaste et brugernavn og et kodeord.";
-"login.magic.link.invalid.email" = "Ugyldig e-mail. Prøv igen.";
-"login.magic.link.response" = "Se i din e-mail for et login-link.";
-"login.magic.link.send" = "Send link";
-"login.magic.link.title" = "Log ind ved hjælp af magisk e-maillink";
-"login.password.placeholder" = "Kodeord";
-"login.receipt.button" = "Log på med købskvittering";
-"login.restore.button" = "Modtog du ikke dine kontodetaljer?";
-"login.submit" = "LOG IND";
+/* 
+  Welcome.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
 "login.title" = "Log ind på din konto";
 "login.username.placeholder" = "Brugernavn (p1234567)";
-"plan.accessibility.per_month" = "per måned";
-"plan.best_value" = "Bedste værdi";
-"plan.monthly.title" = "Månedligt";
-"plan.price_format" = "%@/mdr";
-"plan.yearly.detail_format" = "%@%@ per år";
-"plan.yearly.title" = "Årligt";
-"purchase.confirm.form.email" = "Indtast din e-mailadresse";
-"purchase.confirm.plan" = "Du køber %@-planen";
-"purchase.continue" = "Fortsæt";
+"login.password.placeholder" = "Kodeord";
+"login.submit" = "LOG IND";
+"login.restore.button" = "Modtog du ikke dine kontodetaljer?";
+"login.error.title" = "Log ind";
+"login.error.validation" = "Du skal indtaste et brugernavn og et kodeord.";
+"login.error.unauthorized" = "Dit brugernavn eller kodeord er forkert.";
+"login.error.throttled" = "Alt for mange mislykkede forsøg på at logge ind med dette brugernavn. Prøv venligst igen senere.";
+"login.receipt.button" = "Log på med købskvittering";
+"login.magic.link.title" = "Log ind ved hjælp af magisk e-maillink";
+"login.magic.link.response" = "Se i din e-mail for et login-link.";
+"login.magic.link.send" = "Send link";
+"login.magic.link.invalid.email" = "Ugyldig e-mail. Prøv igen.";
+
+"purchase.title" = "Vælg en VPN-plan";
+"purchase.subtitle" = "30-dages pengene tilbage garanti";
 "purchase.email.placeholder" = "E-mailadresse";
-"purchase.email.why" = "Vi har brug for din e-mail for at sende dit brugernavn og din adgangskode.";
-"purchase.error.connectivity.description" = "Vi kan ikke nå Private Internet Access. Dette kan skyldes dårlig internet eller at vores service er blokeret i dit land.";
-"purchase.error.connectivity.title" = "Forbindelsesfejl";
+"purchase.continue" = "Fortsæt";
+"purchase.login.footer" = "Har du allerede en konto?";
+"purchase.login.button" = "Log ind";
 "purchase.error.title" = "Køb";
 "purchase.error.validation" = "Du skal indtaste en e-mailadresse";
-"purchase.login.button" = "Log ind";
-"purchase.login.footer" = "Har du allerede en konto?";
-"purchase.or" = "eller";
+"purchase.error.connectivity.title" = "Forbindelsesfejl";
+"purchase.error.connectivity.description" = "Vi kan ikke nå Private Internet Access. Dette kan skyldes dårlig internet eller at vores service er blokeret i dit land.";
+"purchase.confirm.form.email" = "Indtast din e-mailadresse";
+"purchase.confirm.plan" = "Du køber %@-planen";
+"purchase.email.why" = "Vi har brug for din e-mail for at sende dit brugernavn og din adgangskode.";
 "purchase.submit" = "Indsend";
-"purchase.subtitle" = "30-dages pengene tilbage garanti";
-"purchase.title" = "Vælg en VPN-plan";
-"redeem.accessibility.back" = "Tilbage";
-"redeem.email.placeholder" = "E-mailadresse";
-"redeem.error.allfields" = "Indtast venligst din e-mail og dit korts PIN-kode.";
-"redeem.error.code" = "Koden skal være %lu numeriske cifre.";
-"redeem.error.qrcode.invalid" = "Ugyldig QR-kode sekvens. Prøv igen.";
-"redeem.error.title" = "Indløs";
-"redeem.giftcard.placeholder" = "Gavekortets PIN-kode";
-"redeem.submit" = "INDSEND";
-"redeem.subtitle" = "Indtast din e-mailadresse, og %lu-cifrede pinkode frra dit gavekort eller prøvekort herunder.";
+"purchase.or" = "eller";
+
 "redeem.title" = "Indløs gavekort";
+"redeem.subtitle" = "Indtast din e-mailadresse, og %lu-cifrede pinkode frra dit gavekort eller prøvekort herunder.";
+"redeem.email.placeholder" = "E-mailadresse";
+"redeem.submit" = "INDSEND";
+"redeem.error.title" = "Indløs";
+"redeem.error.code" = "Koden skal være %lu numeriske cifre.";
+"redeem.error.allfields" = "Indtast venligst din e-mail og dit korts PIN-kode.";
+"redeem.accessibility.back" = "Tilbage";
+"redeem.giftcard.placeholder" = "Gavekortets PIN-kode";
+
+"plan.monthly.title" = "Månedligt";
+"plan.yearly.title" = "Årligt";
+"plan.yearly.detail_format" = "%@%@ per år";
+"plan.price_format" = "%@/mdr";
+"plan.best_value" = "Bedste værdi";
+"plan.accessibility.per_month" = "per måned";
+
+"restore.title" = "Gendan ukrediteret køb";
+"restore.subtitle" = "Hvis du har købt en plan gennem denne app og ikke har modtaget dine legitimationsoplysninger, kan du anmode om at sende dem igen herfra. Du vil ikke blive opkrævet i løbet af denne proces.";
 "restore.email.placeholder" = "E-mailadresse";
 "restore.submit" = "BEKRÆFT";
-"restore.subtitle" = "Hvis du har købt en plan gennem denne app og ikke har modtaget dine legitimationsoplysninger, kan du anmode om at sende dem igen herfra. Du vil ikke blive opkrævet i løbet af denne proces.";
-"restore.title" = "Gendan ukrediteret køb";
+
+"iap.error.message.unavailable" = "Apple-servere er ikke tilgængelige i øjeblikket. Prøv venligst igen senere.";
+"iap.error.title" = "Fejl";
+
+"agreement.trials.title" = "Vilkår og betingelser for gratis prøveperioder";
+"agreement.trials.message" = "Betaling debiteres din Apple ID-konto ved bekræftelsen af ​​købet. Abonnementet fornyes automatisk, medmindre det annulleres mindst 24 timer inden udgangen af ​​den aktuelle periode. Din konto bliver debiteret for fornyelse inden for 24 timer inden udgangen af ​​den aktuelle periode. Du kan administrere og annullere dine abonnementer ved at gå til dine kontoindstillinger i App Store efter køb.\n\nVisse betalte abonnementer kan muligvis tilbyde en gratis prøveperiode, inden de opkræver din betalingsmetode. Hvis du beslutter at afmelde dig et betalt abonnement, før vi begynder at opkræve din betalingsmetode, skal du annullere abonnementet mindst 24 timer før den gratis prøveperiode afsluttes.\n\nGratis prøveperioder er kun tilgængelige for nye brugere og er efter vores eget skøn, og hvis du forsøger at tilmelde dig en ekstra gratis prøveperiode, bliver du straks debiteret for det almindelige abonnementsgebyr.\n\nVi forbeholder os retten til at tilbagekalde din gratis prøveperiode til enhver tid.\n\nEnhver ubrugt del af din gratis prøveperiode fortabes ved køb af et abonnement.\n\nTilmelding udgør accept af disse vilkår og betingelser.";
+"agreement.message" = "Efter den gratis prøveperiode på 7 dage, fornyes dette abonnement automatisk for %@, medmindre det annulleres mindst 24 timer før prøveperioden er afsluttet. Din Apple ID-konto bliver debiteret for fornyelse inden for 24 timer inden udløbet af prøveperioden. Du kan administrere og annullere dine abonnementer ved at gå til din App Store-kontoindstillinger efter købet. Tilbudet med en 7-dages prøveperiode er begrænset til en 7-dages prøveperiode pr. bruger. Enhver ubrugt del af en gratis prøveperiode, hvis den tilbydes, fortabes, når brugeren køber et abonnement. Alle priser inkluderer gældende lokal moms.";
+"agreement.trials.yearly.plan" = "år";
+"agreement.trials.monthly.plan" = "måned";
+
+"agreement.message.tos" = "Vilkår for brug";
+"agreement.message.privacy" = "Fortrolighedspolitik";
+
+"getstarted.buttons.buyaccount" = "Køb konto";
+
+"gdpr.collect.data.title" = "Personlige oplysninger, vi indsamler";
+"gdpr.collect.data.description" = "E-mailadresse med henblik på kontohåndtering og beskyttelse mod misbrug.";
+"gdpr.usage.data.title" = "Anvendelse af personlige oplysninger indsamlet af os";
+"gdpr.usage.data.description" = "E-mailadresse bruges kun til at sende abonnementsoplysninger, betalingsbekræftelser, kundekorrespondance og salgsfremmende tilbud fra Private Internet Access.";
+"gdpr.accept.button.title" = "Accepter og fortsæt";
+
 "update.account.email.error" = "Lykkedes ikke at ændre konto-e-mail";
