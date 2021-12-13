@@ -97,6 +97,7 @@ class AppPreferences {
         static let showsDedicatedIPView = "showsDedicatedIPView"
         static let disablesMultiDipTokens = "disablesMultiDipTokens"
         static let checksDipExpirationRequest = "checksDipExpirationRequest"
+        static let showNewInitialScreen = "showNewInitialScreen"
         
         // Dev
         static let appEnvironmentIsProduction = "AppEnvironmentIsProduction"
@@ -479,6 +480,15 @@ class AppPreferences {
         }
         set {
             defaults.set(newValue, forKey: Entries.disablesMultiDipTokens)
+        }
+    }
+    
+    var showNewInitialScreen: Bool {
+        get {
+            return defaults.bool(forKey: Entries.showNewInitialScreen)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.showNewInitialScreen)
         }
     }
     
