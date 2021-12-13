@@ -50,6 +50,9 @@ public class GetStartedViewController: PIAWelcomeViewController {
     @IBOutlet private weak var textAgreement: UITextView!
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
+    private var isFetchingProducts = true
+    private var isFetchingFF = true
+    
     private var signupEmail: String?
     private var signupTransaction: InAppTransaction?
     private var isPurchasing = false
@@ -79,7 +82,7 @@ public class GetStartedViewController: PIAWelcomeViewController {
         }
     }
     
-    private var allData: [WalkthroughPageView.PageData] = [
+    private lazy var allData: [WalkthroughPageView.PageData] = [
         WalkthroughPageView.PageData(
             title: L10n.Signup.Walkthrough.Page._1.title,
             detail: L10n.Signup.Walkthrough.Page._1.description,
@@ -161,6 +164,8 @@ public class GetStartedViewController: PIAWelcomeViewController {
         visualEffectView.layer.cornerRadius = 15
         visualEffectView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
 
+        fireTimeourForFeatureFlags()
+        
         super.viewDidLoad()
 
     }
@@ -312,42 +317,54 @@ public class GetStartedViewController: PIAWelcomeViewController {
     // MARK: Notifications
     
     @objc private func productsDidFetch(notification: Notification) {
+        isFetchingProducts = false
         let products: [Plan: InAppProduct] = notification.userInfo(for: .products)
         DispatchQueue.main.async {
-            self.hideLoadingAnimation()
+            self.handleVisibilityOfVIews()
             self.refreshPlans(products)
             self.enableInteractions()
         }
     }
     
     @objc private func featureFlagsDidFetch(notification: Notification) {
+        isFetchingFF = false
         self.isNewFlow = Client.configuration.featureFlags.contains(Client.FeatureFlags.showNewInitialScreen)
-        DispatchQueue.main.async {
+        self.handleVisibilityOfVIews()
+    }
+    
+    private func handleVisibilityOfVIews() {
+        if !isFetchingFF && !isFetchingProducts {
+            self.hideLoadingAnimation()
             
-            self.containerNewFlow.isHidden = !self.isNewFlow
-            self.scrollContent.isHidden = self.isNewFlow
-            
-            if self.isNewFlow {
-                if let products = self.preset.accountProvider.planProducts {
-                    self.refreshPlans(products)
-                }
-            } else {
-                self.visualEffectView.isHidden = false
-                self.pageControl.isHidden = false
-
-                let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-                swipeDown.direction = UISwipeGestureRecognizer.Direction.down
-                self.view.addGestureRecognizer(swipeDown)
-
-                let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-                swipeUp.direction = UISwipeGestureRecognizer.Direction.up
-                self.view.addGestureRecognizer(swipeUp)
+            DispatchQueue.main.async {
                 
-                self.subscribeNowTitle.text = L10n.Signup.Purchase.Trials.intro
+                self.containerNewFlow.isHidden = !self.isNewFlow
+                self.scrollContent.isHidden = self.isNewFlow
+                
+                if self.isNewFlow {
+                    if let products = self.preset.accountProvider.planProducts {
+                        self.refreshPlans(products)
+                    }
+                } else {
+                    self.visualEffectView.isHidden = false
+                    self.pageControl.isHidden = false
+
+                    let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+                    swipeDown.direction = UISwipeGestureRecognizer.Direction.down
+                    self.view.addGestureRecognizer(swipeDown)
+
+                    let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+                    swipeUp.direction = UISwipeGestureRecognizer.Direction.up
+                    self.view.addGestureRecognizer(swipeUp)
+                    
+                    self.subscribeNowTitle.text = L10n.Signup.Purchase.Trials.intro
+                }
+                self.addPages()
+                self.pageControl.numberOfPages = self.allData.count
             }
-            self.addPages()
-            self.pageControl.numberOfPages = self.allData.count
+
         }
+        
     }
 
     /// :nodoc:
@@ -431,6 +448,17 @@ public class GetStartedViewController: PIAWelcomeViewController {
         }
     }
     
+    private func fireTimeourForFeatureFlags() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            // Cancel the FF request
+            if self.isFetchingFF {
+                NotificationCenter.default.removeObserver(self, name: .__AppDidFetchFeatureFlags, object: nil)
+                self.isFetchingFF = false
+                self.isNewFlow = false
+                self.handleVisibilityOfVIews()
+            }
+        }
+    }
     public func navigateToLoginView() {
         self.performSegue(withIdentifier: StoryboardSegue.Welcome.loginAccountSegue.rawValue,
                           sender: nil)
