@@ -164,7 +164,7 @@ public class GetStartedViewController: PIAWelcomeViewController {
         visualEffectView.layer.cornerRadius = 15
         visualEffectView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
 
-        fireTimeourForFeatureFlags()
+        fireTimeoutForFeatureFlags()
         
         super.viewDidLoad()
 
@@ -448,7 +448,7 @@ public class GetStartedViewController: PIAWelcomeViewController {
         }
     }
     
-    private func fireTimeourForFeatureFlags() {
+    private func fireTimeoutForFeatureFlags() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             // Cancel the FF request
             if self.isFetchingFF {
