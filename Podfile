@@ -81,7 +81,7 @@ def shared_main_pods
     #library_by_path('')
     #library_by_git('')
     #library_by_gitlab_branch('')
-    library_by_gitlab_by_git('55267ac')
+    library_by_gitlab_by_git('6664b1a')
     #library_by_version('~> 1.1.3')
 end
 
