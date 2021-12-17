@@ -120,6 +120,8 @@ public class GetStartedViewController: PIAWelcomeViewController {
     }
     
     override public func viewDidLoad() {
+        
+        handleInitialStatus()
         setupNavigationBarButtons()
         self.containerNewFlow.isHidden = true
         self.visualEffectView.isHidden = true
@@ -311,6 +313,23 @@ public class GetStartedViewController: PIAWelcomeViewController {
                 
     }
     
+    public func handleInitialStatus() {
+        
+        if Client.configuration.featureFlags.contains(Client.FeatureFlags.showNewInitialScreen) {
+            isFetchingFF = false
+            isNewFlow = true
+        }
+        
+        if let _ = preset.accountProvider.planProducts {
+            isFetchingProducts = false
+        }
+        
+        if !isFetchingProducts && !isFetchingProducts {
+            self.handleVisibilityOfVIews()
+        }
+
+    }
+    
     // MARK: Orientation
     @objc func onlyPortrait() -> Void {}
     
@@ -334,7 +353,9 @@ public class GetStartedViewController: PIAWelcomeViewController {
     
     private func handleVisibilityOfVIews() {
         if !isFetchingFF && !isFetchingProducts {
-            self.hideLoadingAnimation()
+            if !isPurchasing {
+                self.hideLoadingAnimation()
+            }
             
             DispatchQueue.main.async {
                 
