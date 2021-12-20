@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VHM-bG-giz">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -897,25 +898,25 @@ You will not be charged during this process.</string>
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="image-walkthrough-2" translatesAutoresizingMaskIntoConstraints="NO" id="jfg-1z-cTb">
-                                        <rect key="frame" x="50.5" y="29" width="274" height="169"/>
+                                        <rect key="frame" x="50.5" y="24" width="274" height="164"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="66" id="72V-XQ-0gQ"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCM-sf-tzW">
-                                        <rect key="frame" x="19" y="208" width="337" height="20.5"/>
+                                        <rect key="frame" x="19" y="198" width="337" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAE-GG-f9t">
-                                        <rect key="frame" x="19" y="233.5" width="337" height="20.5"/>
+                                        <rect key="frame" x="19" y="223.5" width="337" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="f4w-dQ-rat">
-                                        <rect key="frame" x="19" y="284" width="337" height="223"/>
+                                        <rect key="frame" x="19" y="274" width="337" height="223"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="223" id="ueL-56-6xP"/>
@@ -1048,7 +1049,7 @@ You will not be charged during this process.</string>
                                         </connections>
                                     </collectionView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7oE-jf-tjX" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
-                                        <rect key="frame" x="19" y="507" width="337" height="50"/>
+                                        <rect key="frame" x="19" y="497" width="337" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="prf-nD-f8g"/>
                                         </constraints>
@@ -1057,7 +1058,7 @@ You will not be charged during this process.</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="waI-5t-fqH" customClass="PIAButton" customModule="PIALibrary" customModuleProvider="target">
-                                        <rect key="frame" x="19" y="562" width="337" height="50"/>
+                                        <rect key="frame" x="19" y="552" width="337" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="s5I-fj-v4i"/>
                                         </constraints>
@@ -1066,9 +1067,9 @@ You will not be charged during this process.</string>
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="&lt;Agreement&gt;" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TnO-Bm-adV">
-                                        <rect key="frame" x="19" y="617" width="337" height="40"/>
+                                        <rect key="frame" x="19" y="607" width="337" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="el7-qc-ivN"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="el7-qc-ivN"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1083,7 +1084,7 @@ You will not be charged during this process.</string>
                                     <constraint firstItem="TnO-Bm-adV" firstAttribute="leading" secondItem="w9B-qn-C1x" secondAttribute="leading" constant="19" id="7BM-ge-LM2"/>
                                     <constraint firstItem="7oE-jf-tjX" firstAttribute="leading" secondItem="w9B-qn-C1x" secondAttribute="leading" constant="19" id="LOd-ua-ivF"/>
                                     <constraint firstAttribute="trailing" secondItem="waI-5t-fqH" secondAttribute="trailing" constant="19" id="Nt6-ac-pBd"/>
-                                    <constraint firstItem="jfg-1z-cTb" firstAttribute="top" secondItem="w9B-qn-C1x" secondAttribute="top" constant="29" id="PnX-Lo-Xvc"/>
+                                    <constraint firstItem="jfg-1z-cTb" firstAttribute="top" secondItem="w9B-qn-C1x" secondAttribute="top" constant="24" id="PnX-Lo-Xvc"/>
                                     <constraint firstItem="TnO-Bm-adV" firstAttribute="top" secondItem="waI-5t-fqH" secondAttribute="bottom" constant="5" id="Smb-W4-TC9"/>
                                     <constraint firstAttribute="bottom" secondItem="TnO-Bm-adV" secondAttribute="bottom" constant="10" id="TjO-46-DNm"/>
                                     <constraint firstItem="jAE-GG-f9t" firstAttribute="leading" secondItem="w9B-qn-C1x" secondAttribute="leading" constant="19" id="UCv-gC-uJ3"/>
