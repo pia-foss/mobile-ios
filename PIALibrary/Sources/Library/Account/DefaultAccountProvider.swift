@@ -22,6 +22,7 @@
 
 import Foundation
 import SwiftyBeaver
+import UIKit
 
 private let log = SwiftyBeaver.self
 
@@ -332,6 +333,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             if let features = features, !features.isEmpty {
                 Client.configuration.featureFlags.append(contentsOf: features)
             }
+            Macros.postNotification(Notification.Name.__AppDidFetchFeatureFlags)
             callback?(nil)
         }
     }
