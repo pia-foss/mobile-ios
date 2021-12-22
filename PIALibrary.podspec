@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name              = "PIALibrary"
-    s.version           = "2.12.0"
+    s.version           = "2.12.5"
     s.summary           = "PIA client library in Swift."
 
     s.homepage          = "https://www.privateinternetaccess.com/"
@@ -18,6 +18,7 @@ Pod::Spec.new do |s|
         #p.osx.exclude_files     = "PIALibrary/Sources/Core/InApp",
         #                          "PIALibrary/Sources/Core/Account/InApp"
         p.dependency "PIAAccountModule"
+
     end
 
     s.subspec "Library" do |p|

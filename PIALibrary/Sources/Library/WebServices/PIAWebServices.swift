@@ -43,7 +43,6 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     
     init() {
         let rsa4096Certificate = Client.configuration.rsa4096Certificate
-        
         self.regionsAPI = RegionsBuilder()
             .setEndpointProvider(endpointsProvider: PIARegionClientStateProvider())
             .setCertificate(certificate: rsa4096Certificate)
@@ -144,13 +143,8 @@ class PIAWebServices: WebServices, ConfigurationAccess {
      */
     func token(credentials: Credentials, _ callback: ((Error?) -> Void)?) {
         self.accountAPI.loginWithCredentials(username: credentials.username,
-                                             password: credentials.password) { (errors) in
-            if !errors.isEmpty {
-                callback?(ClientError.unauthorized)
-                return
-            }
-
-            callback?(nil)
+                                             password: credentials.password) { [weak self] (errors) in
+            self?.handleLoginResponse(errors: errors, callback: callback, mapError: self?.mapLoginError)
         }
     }
 
@@ -158,20 +152,56 @@ class PIAWebServices: WebServices, ConfigurationAccess {
      Generates a new auth token for the specific user
      */
     func token(receipt: Data, _ callback: ((Error?) -> Void)?) {
-        self.accountAPI.loginWithReceipt(receiptBase64: receipt.base64EncodedString()) { (errors) in
-            if !errors.isEmpty {
-                callback?(errors.last?.code == 400 ? ClientError.badReceipt : ClientError.unauthorized)
-                return
-            }
-            
-            callback?(nil)
+        self.accountAPI.loginWithReceipt(receiptBase64: receipt.base64EncodedString()) { [weak self] (errors) in
+            self?.handleLoginResponse(errors: errors, callback: callback, mapError: self?.mapLoginFromReceiptError)
         }
     }
 
+    private func handleLoginResponse(errors: [AccountRequestError],  callback: ((Error?) -> Void)?, mapError: ((AccountRequestError) -> (ClientError))? = nil) {
+        if !errors.isEmpty {
+            callback?(mapError?(errors.last!))
+            return
+        }
+
+        callback?(nil)
+    }
+
+    private func mapLoginError(_ error: AccountRequestError) -> ClientError {
+        switch error.code {
+        case 402:
+            return .expired
+        default:
+            return .unauthorized
+        }
+    }
+
+
+    private func mapLoginFromReceiptError(_ error:AccountRequestError) -> ClientError {
+        switch error.code {
+        case 400:
+            return .badReceipt
+        default:
+            return mapLoginError(error)
+        }
+    }
+
+    private func mapLoginLinkError(_ error:AccountRequestError) -> ClientError {
+        switch error.code {
+        case 401,402:
+            return mapLoginError(error)
+        default:
+            return .invalidParameter
+        }
+    }
+
+    private func mapAccountDetailsError(_ error:AccountRequestError) -> ClientError {
+        return mapLoginLinkError(error)
+    }
+
     func info(_ callback: ((AccountInfo?, Error?) -> Void)?) {
-        self.accountAPI.accountDetails() { (response, errors) in
+        self.accountAPI.accountDetails() { [weak self] (response, errors) in
             if !errors.isEmpty {
-                callback?(nil, errors.last?.code == 401 ? ClientError.unauthorized : ClientError.invalidParameter)
+                callback?(nil, self?.mapAccountDetailsError(errors.last!))
                 return
             }
 
@@ -187,9 +217,9 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     func update(credentials: Credentials, resetPassword reset: Bool, email: String, _ callback: SuccessLibraryCallback?) {
         if reset {
             //Reset password, we use the token within accounts
-            self.accountAPI.setEmail(email: email, resetPassword: reset) { (newPassword, errors) in
+            self.accountAPI.setEmail(email: email, resetPassword: reset) { [weak self] (newPassword, errors) in
                 if !errors.isEmpty {
-                    callback?(errors.last?.code == 401 ? ClientError.unauthorized : ClientError.unsupported)
+                    callback?(self?.mapLoginError(errors.last!))
                     return
                 }
                 if let newPassword = newPassword {
@@ -210,11 +240,13 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     }
     
     func loginLink(email: String, _ callback: SuccessLibraryCallback?) {
-        self.accountAPI.loginLink(email: email) { (errors) in
+        
+        self.accountAPI.loginLink(email: email) { [weak self] (errors) in
             if !errors.isEmpty {
-                callback?(ClientError.invalidParameter)
+                callback?(self?.mapLoginLinkError(errors.last!))
                 return
             }
+
             callback?(nil)
         }
     }
@@ -302,7 +334,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     }
     
     func featureFlags(_ callback: LibraryCallback<[String]>?) {
-        self.accountAPI.featureFlags(stagingEndpoint: nil) { (info, error) in
+        self.accountAPI.featureFlags { (info, errors) in
             if let flags = info?.flags {
                 callback?(flags, nil)
             } else {

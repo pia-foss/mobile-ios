@@ -1562,6 +1562,7 @@
 				"${BUILT_PRODUCTS_DIR}/Gloss/Gloss.framework",
 				"${PODS_ROOT}/PIAAccountModule/build/cocoapods/framework/PIAAccount.framework",
 				"${BUILT_PRODUCTS_DIR}/PIAAccountModule/PIAAccountModule.framework",
+				"${PODS_ROOT}/PIACSIModule/build/cocoapods/framework/PIACSI.framework",
 				"${BUILT_PRODUCTS_DIR}/PIACSIModule/PIACSIModule.framework",
 				"${PODS_ROOT}/PIAKPIModule/build/cocoapods/framework/PIAKPI.framework",
 				"${BUILT_PRODUCTS_DIR}/PIAKPIModule/PIAKPIModule.framework",
@@ -1576,6 +1577,7 @@
 				"${BUILT_PRODUCTS_DIR}/TunnelKit/TunnelKit.framework",
 				"${BUILT_PRODUCTS_DIR}/TweetNacl/TweetNacl.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Apple/openssl.framework/openssl",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1585,6 +1587,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gloss.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAAccount.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAAccountModule.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIACSI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIACSIModule.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAKPI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAKPIModule.framework",
@@ -1599,6 +1602,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TunnelKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TweetNacl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1684,6 +1688,7 @@
 				"${BUILT_PRODUCTS_DIR}/Gloss/Gloss.framework",
 				"${PODS_ROOT}/PIAAccountModule/build/cocoapods/framework/PIAAccount.framework",
 				"${BUILT_PRODUCTS_DIR}/PIAAccountModule/PIAAccountModule.framework",
+				"${PODS_ROOT}/PIACSIModule/build/cocoapods/framework/PIACSI.framework",
 				"${BUILT_PRODUCTS_DIR}/PIACSIModule/PIACSIModule.framework",
 				"${PODS_ROOT}/PIAKPIModule/build/cocoapods/framework/PIAKPI.framework",
 				"${BUILT_PRODUCTS_DIR}/PIAKPIModule/PIAKPIModule.framework",
@@ -1698,6 +1703,7 @@
 				"${BUILT_PRODUCTS_DIR}/TunnelKit/TunnelKit.framework",
 				"${BUILT_PRODUCTS_DIR}/TweetNacl/TweetNacl.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Apple/openssl.framework/openssl",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1707,6 +1713,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gloss.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAAccount.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAAccountModule.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIACSI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIACSIModule.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAKPI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIAKPIModule.framework",
@@ -1721,6 +1728,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TunnelKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TweetNacl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

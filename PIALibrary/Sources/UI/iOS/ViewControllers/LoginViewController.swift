@@ -25,7 +25,7 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-class LoginViewController: AutolayoutViewController, WelcomeChild {
+class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeViewControllerDelegate {
     
     @IBOutlet private weak var scrollView: UIScrollView!
 
@@ -88,11 +88,12 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+
         guard let vc = segue.destination as? PIAWelcomeViewController else {
             return
         }
         
-        vc.delegate = self.delegate
+        vc.delegate = delegate ?? self
         if let preset = preset {
             vc.preset = preset
         }
@@ -100,6 +101,9 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
         switch segue.identifier  {
         case StoryboardSegue.Welcome.restoreLoginPurchaseSegue.rawValue:
             vc.preset.pages = .restore
+        case StoryboardSegue.Welcome.expiredAccountPurchaseSegue.rawValue:
+            vc.preset.isExpired = true
+            vc.preset.pages = .purchase
         default:
             break
         }
@@ -129,6 +133,11 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
                 self.showLoadingAnimation()
 
                 self.preset?.accountProvider.loginUsingMagicLink(withEmail: email, { (error) in
+                    
+                    guard error == nil else {
+                        self.handleLoginFailed(error)
+                        return
+                    }
                     
                     Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image,
                                                    message: L10n.Welcome.Login.Magic.Link.response)
@@ -162,52 +171,9 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
         }
 
         let request = LoginReceiptRequest(receipt: receipt)
-
-        log.debug("Logging in...")
-
-        enableInteractions(false)
-
-        self.showLoadingAnimation()
         
-        preset?.accountProvider.login(with: request) { (user, error) in
-            self.enableInteractions(true)
-
-            self.hideLoadingAnimation()
-
-            guard let user = user else {
-                var errorMessage: String?
-                if let error = error {
-                    if let clientError = error as? ClientError {
-                        switch clientError {
-                        case .unauthorized:
-                            errorMessage = L10n.Welcome.Login.Error.unauthorized
-
-                        case .throttled:
-                            errorMessage = L10n.Welcome.Login.Error.throttled
-                            
-                        default:
-                            break
-                        }
-                    }
-                    if (errorMessage == nil) {
-                        errorMessage = error.localizedDescription
-                    }
-                    log.error("Failed to log in (error: \(error))")
-                } else {
-                    log.error("Failed to log in")
-                }
-
-                Macros.displayImageNote(withImage: Asset.iconWarning.image,
-                                        message: errorMessage ?? L10n.Welcome.Login.Error.title)
-                return
-            }
-            
-            log.debug("Login succeeded!")
-            
-            self.completionDelegate?.welcomeDidLogin(withUser: user, topViewController: self)
-        }
-
-
+        prepareLogin()
+        preset?.accountProvider.login(with: request, handleLoginResult)
     }
 
     @IBAction private func logIn(_ sender: Any?) {
@@ -216,27 +182,27 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
             return
         }
 
-        let errorMessage = L10n.Welcome.Login.Error.validation
-        guard let username = textUsername.text?.trimmed(), !username.isEmpty else {
-            
-            Macros.displayImageNote(withImage: Asset.iconWarning.image,
-                                    message: errorMessage)
-            self.status = .error(element: textUsername)
-            
-            if textPassword.text == nil || textPassword.text!.isEmpty {
-                self.status = .error(element: textPassword)
-            }
-
+        guard let credentials = getValidCredentials() else {
             return
+        }
+        
+        let request = LoginRequest(credentials: credentials)
+        
+        prepareLogin()
+        preset?.accountProvider.login(with: request, handleLoginResult)
+    }
+    
+    private func getValidCredentials() -> Credentials? {
+        guard let username = getValidTextFrom(textField: textUsername) else {
+            handleUsernameFieldInvalid()
+            return nil
         }
         
         self.status = .restore(element: textUsername)
         
-        guard let password = textPassword.text?.trimmed(), !password.isEmpty else {
-            Macros.displayImageNote(withImage: Asset.iconWarning.image,
-                                    message: errorMessage)
-            self.status = .error(element: textPassword)
-            return
+        guard let password = getValidTextFrom(textField: textPassword) else {
+            handleLoginFieldInvalid(textField: textPassword)
+            return nil
         }
 
         self.status = .restore(element: textPassword)
@@ -244,54 +210,83 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
 
         view.endEditing(false)
 
-        let credentials = Credentials(username: username, password: password)
-        let request = LoginRequest(credentials: credentials)
-
-        textUsername.text = username
-        textPassword.text = password
-        log.debug("Logging in...")
-
-        enableInteractions(false)
-
-        self.showLoadingAnimation()
-        
-        preset?.accountProvider.login(with: request) { (user, error) in
-            self.enableInteractions(true)
-
-            self.hideLoadingAnimation()
-
-            guard let user = user else {
-                var errorMessage: String?
-                if let error = error {
-                    if let clientError = error as? ClientError {
-                        switch clientError {
-                        case .unauthorized:
-                            errorMessage = L10n.Welcome.Login.Error.unauthorized
-
-                        case .throttled:
-                            errorMessage = L10n.Welcome.Login.Error.throttled
-                            
-                        default:
-                            break
-                        }
-                    }
-                    if (errorMessage == nil) {
-                        errorMessage = error.localizedDescription
-                    }
-                    log.error("Failed to log in (error: \(error))")
-                } else {
-                    log.error("Failed to log in")
-                }
-
-                Macros.displayImageNote(withImage: Asset.iconWarning.image,
-                                        message: errorMessage ?? L10n.Welcome.Login.Error.title)
-                return
-            }
-            
-            log.debug("Login succeeded!")
-            
-            self.completionDelegate?.welcomeDidLogin(withUser: user, topViewController: self)
+        return Credentials(username: username, password: password)
+    }
+    
+    private func getValidTextFrom(textField: UITextField) -> String? {
+        guard let text = textField.text?.trimmed(), !text.isEmpty else {
+            return nil
         }
+        return text
+    }
+    
+    private func handleUsernameFieldInvalid() {
+        handleLoginFieldInvalid(textField: textUsername)
+        if textPassword.text == nil || textPassword.text!.isEmpty {
+            self.status = .error(element: textPassword)
+        }
+    }
+    
+    private func handleLoginFieldInvalid(textField: UITextField) {
+        let errorMessage = L10n.Welcome.Login.Error.validation
+        Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                message: errorMessage)
+        self.status = .error(element: textField)
+    }
+    
+    
+    private func prepareLogin() {
+        log.debug("Logging in...")
+        enableInteractions(false)
+        showLoadingAnimation()
+    }
+    
+    private func handleLoginResult(user: UserAccount?, error: Error?) {
+        enableInteractions(true)
+
+        hideLoadingAnimation()
+
+        guard let user = user else {
+            handleLoginFailed(error)
+            return
+        }
+        
+        log.debug("Login succeeded!")
+        
+        self.completionDelegate?.welcomeDidLogin(withUser: user, topViewController: self)
+    }
+    
+    private func handleLoginFailed(_ error: Error?) {
+        var errorMessage: String?
+        if let error = error {
+            if let clientError = error as? ClientError {
+                switch clientError {
+                case .unauthorized:
+                    errorMessage = L10n.Welcome.Login.Error.unauthorized
+
+                case .throttled:
+                    errorMessage = L10n.Welcome.Login.Error.throttled
+                case .expired:
+                    handleExpiredAccount()
+                    return
+                default:
+                    break
+                }
+            }
+            if (errorMessage == nil) {
+                errorMessage = error.localizedDescription
+            }
+            log.error("Failed to log in (error: \(error))")
+        } else {
+            log.error("Failed to log in")
+        }
+
+        Macros.displayImageNote(withImage: Asset.iconWarning.image,
+                                message: errorMessage ?? L10n.Welcome.Login.Error.title)
+    }
+    
+    private func handleExpiredAccount() {
+        perform(segue: StoryboardSegue.Welcome.expiredAccountPurchaseSegue, sender: self)
     }
     
     private func enableInteractions(_ enable: Bool) {
@@ -333,6 +328,15 @@ class LoginViewController: AutolayoutViewController, WelcomeChild {
                                for: [])
         loginWithLink.titleLabel?.numberOfLines = 0
         loginWithLink.titleLabel?.textAlignment = .center
+    }
+    
+    func welcomeController(_ welcomeController: PIAWelcomeViewController, didSignupWith user: UserAccount, topViewController: UIViewController) {
+        completionDelegate?.welcomeDidSignup(withUser: user, topViewController: topViewController)
+    }
+    
+    func welcomeController(_ welcomeController: PIAWelcomeViewController, didLoginWith user: UserAccount, topViewController: UIViewController) {
+        completionDelegate?.welcomeDidLogin(withUser: user, topViewController: topViewController)
+        
     }
 
 }

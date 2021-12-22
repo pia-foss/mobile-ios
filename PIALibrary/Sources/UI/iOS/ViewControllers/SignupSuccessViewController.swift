@@ -84,12 +84,6 @@ public class SignupSuccessViewController: AutolayoutViewController, BrandableNav
         shareDataDescriptionLabel.text = L10n.Signup.Share.Data.Text.description
         shareDataFooterLabel.text = L10n.Signup.Share.Data.Text.footer
         self.styleShareDataButtons()
-
-        if !Client.configuration.featureFlags.contains(Client.FeatureFlags.shareServiceQualityData) {
-            shareDataContainer.removeFromSuperview()
-        }
-
-        
     }
     
     @IBAction private func submit() {
