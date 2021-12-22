@@ -79,9 +79,9 @@ def shared_main_pods
     pod "PIAKPIModule", :git => "#{$gitlab_kn_root}/#{$kpi_gitlab_repo}", :commit => '31186b1d'
 
     #library_by_path('')
-    #library_by_git('3fb9fb7')
-    library_by_gitlab_branch('juan.docal/new_auth_integration')
-    #library_by_gitlab_by_git('38a7754')
+    #library_by_git('')
+    #library_by_gitlab_branch('')
+    library_by_gitlab_by_git('bf003cf')
     #library_by_version('~> 1.1.3')
 end
 
@@ -106,7 +106,7 @@ def piawireguard_pod
 end
 
 def piawireguard_gitlab_pod
-    pod 'PIAWireguard', :git => "#{$gitlab_vpn_root}/pia-wireguard.git", :branch => 'develop'
+    pod 'PIAWireguard', :git => "#{$gitlab_vpn_root}/pia-wireguard.git", :commit => '7e9d8d48'
 end
 
 # Targets

@@ -26,6 +26,8 @@ import PIALibrary
 
 class QuickConnectTile: UIView, Tileable {
 
+    weak var delegate: ServerSelectionDelegate?
+
     private let maxElementsInArray = 6
     
     var view: UIView!
@@ -197,10 +199,10 @@ class QuickConnectTile: UIView, Tileable {
     }
     
     @IBAction private func connectToServer(_ sender: ServerButton) {
-        if Client.providers.vpnProvider.vpnStatus != .connecting,
-            let server = sender.server {
-            self.connectTo(server: server)
+        guard let server = sender.server else {
+            return
         }
+        delegate?.didSelectServer(server)
     }
 
     private func statusUpdated() {

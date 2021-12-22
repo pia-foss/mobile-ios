@@ -97,6 +97,7 @@ class AppPreferences {
         static let showsDedicatedIPView = "showsDedicatedIPView"
         static let disablesMultiDipTokens = "disablesMultiDipTokens"
         static let checksDipExpirationRequest = "checksDipExpirationRequest"
+        static let showNewInitialScreen = "showNewInitialScreen"
         
         // Dev
         static let appEnvironmentIsProduction = "AppEnvironmentIsProduction"
@@ -482,6 +483,15 @@ class AppPreferences {
         }
     }
     
+    var showNewInitialScreen: Bool {
+        get {
+            return defaults.bool(forKey: Entries.showNewInitialScreen)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.showNewInitialScreen)
+        }
+    }
+    
     var checksDipExpirationRequest: Bool {
         get {
             return defaults.bool(forKey: Entries.checksDipExpirationRequest)
@@ -545,7 +555,7 @@ class AppPreferences {
             Entries.showsDedicatedIPView: true,
             Entries.disablesMultiDipTokens: true,
             Entries.checksDipExpirationRequest: true,
-            Entries.stagingVersion: 1,
+            Entries.stagingVersion: 0,
             Entries.appEnvironmentIsProduction: Client.environment == .production ? true : false,
         ])
 

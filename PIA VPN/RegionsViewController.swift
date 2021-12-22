@@ -50,6 +50,8 @@ class RegionsViewController: AutolayoutViewController {
 
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var gradientProgressBar: GradientProgressBar!
+    
+    weak var serverSelectionDelegate: ServerSelectionDelegate!
 
     private var servers: [Server] = []
     private var filteredServers = [Server]()
@@ -374,9 +376,6 @@ extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        //User clicked the button, the selection of the region to connect the VPN was manual
-        Client.configuration.connectedManually = true
 
         let newSelectedServer: Server
 
@@ -405,13 +404,10 @@ extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
         guard (selectedServer.identifier != currentServer.identifier || selectedServer.dipToken != currentServer.dipToken) else {
             return
         }
-        Client.preferences.displayedServer = selectedServer
-        NotificationCenter.default.post(name: .PIAThemeDidChange,
-                                        object: self,
-                                        userInfo: nil)
         
         self.dismissModal()
-        
+        serverSelectionDelegate.didSelectServer(selectedServer)
+
     }
 }
 
