@@ -46,6 +46,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         self.regionsAPI = RegionsBuilder()
             .setEndpointProvider(endpointsProvider: PIARegionClientStateProvider())
             .setCertificate(certificate: rsa4096Certificate)
+            .setUserAgent(userAgent: PIAWebServices.userAgent)
             .build()
         
         if Client.environment == .staging {

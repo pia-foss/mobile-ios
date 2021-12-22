@@ -133,24 +133,24 @@ CHECKOUT OPTIONS:
     :git: https://github.com/pia-foss/tunnelkit
 
 SPEC CHECKSUMS:
-  Alamofire: 2ad20d0a5a6e593fb8fa4556060a68918a58fe5b
-  DynamicBlurView: 8ecc633fc8e66d445fa1267d2b405e7cbf7c894f
-  FXPageControl: e3b89828c27a6ec2f01952d09c5737a680f81ced
-  Gloss: 51fbd000cbba87e032dced8925b2bb55c960337f
-  lottie-ios: 92aecc6f5aee59f2d5bfbe19b0f2b57050b4b8c0
+  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
+  DynamicBlurView: b1df5415f9bd31897549e5d7077e5ec120a4d636
+  FXPageControl: 97620412515365d10a3282ec0660f49f6401a8f0
+  Gloss: 13ab6b4b0ff4cb2448466edc957479b1bccea8ba
+  lottie-ios: 06e0b54aab85ba128e332687d7f4ac4861a7a7ae
   OpenSSL-Apple: bb7c9715a259404de040f5359ed3b3170cedf8d6
   PIAAccountModule: e81a47491b646121a8db272016db00a1980d2955
   PIACSIModule: 32df98c20a0fc4cad5fadbb1b72f7b74315aa8ea
   PIAKPIModule: ec04bedfc7e6eccc7dfe4bc630a99c104ffbb7ea
   PIARegionsModule: eff00bd28dea554d7b766ec5d7e9a74ab448f5fe
   PIAWireguard: e6fc3a37758af8d83704dd61e327c2ff6da88b13
-  PopupDialog: 70009b0bdff82db3796eb06fe16a2af6e265f662
-  QuickLayout: 10384f7db74f2303a776e5edc0409270d8bb0a6a
-  ReachabilitySwift: 8610aeb4af1844f38c44f05482de0ab537f852eb
-  SwiftEntryKit: 6da87bb561409684bd330619857533116e98d132
-  SwiftyBeaver: faff13c9b69e467c2d21425a0f8e5efaed8e6a35
+  PopupDialog: f4bb461bf70ff422be0b56656566424ee9273080
+  QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
+  ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
+  SwiftEntryKit: 83d312243af7397e38a222b17b7a744b9a7d2145
+  SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
   TunnelKit: 2a6aadea2d772a2760b153aee27d1c334c9ca6db
-  TweetNacl: 3f1d3a198ace99c4a17d7a6e165f051da9e8ceda
+  TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
 PODFILE CHECKSUM: 9a4fe235c0b55800d3e349444a2fff9dbd22f61f
 

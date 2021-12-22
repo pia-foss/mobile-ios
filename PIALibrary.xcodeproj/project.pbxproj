@@ -228,6 +228,7 @@
 		0EFEB4C420077AC900F81029 /* PIATunnelProvider+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFEB4BF2007784A00F81029 /* PIATunnelProvider+Profile.swift */; };
 		0EFEB4C520077AC900F81029 /* PIATunnelProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFEB4C02007784A00F81029 /* PIATunnelProfile.swift */; };
 		33A542AFDFD3AF0C27B27F45 /* Pods_PIALibrary_PIALibraryTests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C71CB55833441BB6B5D0B9FD /* Pods_PIALibrary_PIALibraryTests_iOS.framework */; };
+		354B015F27732095000A73B4 /* NavigationBar+Appearence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354B015E27732095000A73B4 /* NavigationBar+Appearence.swift */; };
 		3D93D3414A3DA19ECB04B778 /* Pods_PIALibrary_PIALibraryHost_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB01CE68711A898531418458 /* Pods_PIALibrary_PIALibraryHost_iOS.framework */; };
 		821674F7267A47670028E4FD /* LibraryConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821674F6267A47670028E4FD /* LibraryConstants.swift */; };
 		821674F8267A47670028E4FD /* LibraryConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821674F6267A47670028E4FD /* LibraryConstants.swift */; };
@@ -568,6 +569,7 @@
 		0EFEB4BF2007784A00F81029 /* PIATunnelProvider+Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PIATunnelProvider+Profile.swift"; sourceTree = "<group>"; };
 		0EFEB4C02007784A00F81029 /* PIATunnelProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIATunnelProfile.swift; sourceTree = "<group>"; };
 		10DD9676BB5539C7984C65D9 /* Pods-PIALibrary-PIALibrary-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibrary-iOS.release.xcconfig"; path = "Target Support Files/Pods-PIALibrary-PIALibrary-iOS/Pods-PIALibrary-PIALibrary-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		354B015E27732095000A73B4 /* NavigationBar+Appearence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NavigationBar+Appearence.swift"; sourceTree = "<group>"; };
 		67D8A0C15205E19B5912E3B7 /* Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig"; path = "Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		81CAB800806A3F61AEBB267F /* Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig"; path = "Target Support Files/Pods-PIALibrary-PIALibraryTests-iOS/Pods-PIALibrary-PIALibraryTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		821674F6267A47670028E4FD /* LibraryConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryConstants.swift; sourceTree = "<group>"; };
@@ -844,6 +846,7 @@
 				841BE60E212AFE49002EF2D1 /* GiftCardUtil.swift */,
 				84125E07213D7DFF001BCC19 /* PIAColors.swift */,
 				84125E0A213D7E0E001BCC19 /* PIAFonts.swift */,
+				354B015E27732095000A73B4 /* NavigationBar+Appearence.swift */,
 				DDD824E62189C0E800151709 /* BrandableNavigationBar.swift */,
 				DD36CB7D21CCFFFB00FC815A /* CAGradientLayer+Image.swift */,
 				DD1AB10423FC280000396E74 /* DeviceModel.swift */,
@@ -1937,6 +1940,7 @@
 				0EE14D1B1FF16B39008D9AC2 /* InvalidatingFlowLayout.swift in Sources */,
 				82CAB808255A9ACB00BB08EF /* InAppMessage.swift in Sources */,
 				82183D7F25011D200033023F /* MagicLinkLoginViewController.swift in Sources */,
+				354B015F27732095000A73B4 /* NavigationBar+Appearence.swift in Sources */,
 				0EE1068C1F8250A1009514E9 /* Plan.swift in Sources */,
 				DD36CB7E21CCFFFB00FC815A /* CAGradientLayer+Image.swift in Sources */,
 				0EBBC6DC1F9F64E700B8BD21 /* Client+Environment.swift in Sources */,
