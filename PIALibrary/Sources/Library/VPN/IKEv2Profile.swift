@@ -171,7 +171,7 @@ public class IKEv2Profile: NetworkExtensionProfile {
             iKEv2Username = dipUsername
             iKEv2Password = configuration.server.dipPassword()
         } else {
-            if let username = Client.providers.accountProvider.token {
+            if let username = Client.providers.accountProvider.vpnToken {
                 iKEv2Username = username
             }
             iKEv2Password = ikev2PasswordReference()
@@ -226,7 +226,7 @@ extension IKEv2Profile {
         
         var query = [String: Any]()
         query[kSecClass as String] = kSecClassGenericPassword
-        query[kSecAttrAccount as String] = Client.providers.accountProvider.token 
+        query[kSecAttrAccount as String] = Client.providers.accountProvider.vpnToken
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         query[kSecReturnPersistentRef as String] = true
         
@@ -251,7 +251,7 @@ extension IKEv2Profile {
         
         guard let reference = getGEN4IKEv2PasswordReference() else {
             
-            if let token = Client.providers.accountProvider.token {
+            if let token = Client.providers.accountProvider.vpnToken {
                 
                     var query = [String: Any]()
                     query[kSecClass as String] = kSecClassGenericPassword
