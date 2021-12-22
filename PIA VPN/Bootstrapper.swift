@@ -175,8 +175,6 @@ class Bootstrapper {
 
             Client.refreshProducts()
             Client.observeTransactions()
-            
-            
         }
 
         if (self.isSimulator || Flags.shared.usesMockVPN) {
