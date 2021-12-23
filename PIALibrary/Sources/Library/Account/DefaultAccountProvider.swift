@@ -133,7 +133,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
 
     private func updateUsernamePassword() {
         if let token = self.vpnToken {
-            let tokenComponents = token.split{$0 == ":"}.map(String.init)
+            let tokenComponents = token.components(separatedBy: ":")
             if let username = tokenComponents.first,
                 let password = tokenComponents.last {
                 self.accessedDatabase.secure.setUsername(username)
@@ -245,7 +245,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
     }
     
     public func accountInformation(_ callback: ((AccountInfo?, Error?) -> Void)?) {
-        guard !isLoggedIn else {
+        guard isLoggedIn else {
             callback?(nil, ClientError.unauthorized)
             return
         }
