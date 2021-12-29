@@ -144,6 +144,12 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
 
     func migrateOldTokenIfNeeded(_ callback: SuccessLibraryCallback?) {
 
+        // If it was already migrated
+        if (self.accessedDatabase.plain.tokenMigrated) {
+            callback?(nil)
+            return
+        }
+
         // If there is something persisted. Try to migrate it.
         if let username = self.accessedDatabase.secure.username(),
            let token = self.accessedDatabase.secure.token(for: self.accessedDatabase.secure.tokenKey(for: username)) {
@@ -153,8 +159,12 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                     return
                 }
 
-                // If the migration was successfull. Clear the old persisted token.
-                self?.accessedDatabase.secure.clearToken(for: username)
+                guard let unwrappedVpnToken = self?.vpnToken else {
+                    preconditionFailure()
+                }
+
+                self?.accessedDatabase.secure.setPassword(unwrappedVpnToken, for: username)
+                self?.accessedDatabase.plain.tokenMigrated = true
                 callback?(nil)
             }
         } else {

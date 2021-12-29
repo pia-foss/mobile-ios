@@ -33,6 +33,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         static let accountInfo = "LoggedAccountInfo" // legacy
 
         static let lastSignupEmail = "LastSignupEmail"
+
+        static let tokenMigrated = "TokenMigrated"
         
         static let publicIP = "PublicIP"
 
@@ -180,6 +182,15 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
             } else {
                 backend.removeObject(forKey: Entries.lastSignupEmail)
             }
+        }
+    }
+
+    var tokenMigrated: Bool {
+        get {
+            return backend.bool(forKey: Entries.tokenMigrated)
+        }
+        set {
+            backend.set(newValue, forKey: Entries.tokenMigrated)
         }
     }
     
