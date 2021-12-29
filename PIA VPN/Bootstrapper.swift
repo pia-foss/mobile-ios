@@ -47,7 +47,6 @@ class Bootstrapper {
     }
 
     func bootstrap() {
-        
         let console = ConsoleDestination()
         #if PIA_DEV
         console.minLevel = .debug
@@ -177,8 +176,6 @@ class Bootstrapper {
 
             Client.refreshProducts()
             Client.observeTransactions()
-            
-            
         }
 
         if (self.isSimulator || Flags.shared.usesMockVPN) {
@@ -191,7 +188,7 @@ class Bootstrapper {
         if Flags.shared.usesMockAccount {
             Client.useMockAccountProvider(AppConfiguration.Mock.accountProvider)
         }
-        
+
         Client.bootstrap()
         
         // Preferences
