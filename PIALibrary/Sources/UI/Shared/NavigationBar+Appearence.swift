@@ -9,7 +9,7 @@ import UIKit
 
 extension UINavigationBar {
     func setBackgroundAppearenceColor(_ color: UIColor?) {
-        if #available(iOSApplicationExtension 13.0, *), color != nil {
+        if #available(iOS 13.0, *), color != nil {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
             appearance.backgroundColor = color
@@ -22,7 +22,7 @@ extension UINavigationBar {
     }
     
     func setBackgroundAppearenceImage(_ image: UIImage?) {
-        if #available(iOSApplicationExtension 13.0, *), image != nil {
+        if #available(iOS 13.0, *), image != nil {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
             appearance.backgroundImage = image

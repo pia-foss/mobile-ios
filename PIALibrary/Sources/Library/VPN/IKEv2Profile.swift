@@ -171,9 +171,7 @@ public class IKEv2Profile: NetworkExtensionProfile {
             iKEv2Username = dipUsername
             iKEv2Password = configuration.server.dipPassword()
         } else {
-            if let username = Client.providers.accountProvider.token {
-                iKEv2Username = username
-            }
+            iKEv2Username = getTokenUsername() ?? iKEv2Username
             iKEv2Password = ikev2PasswordReference()
         }
 
@@ -218,15 +216,50 @@ public class IKEv2Profile: NetworkExtensionProfile {
 
         return cfg
     }
+
+    // MARK: Private
+
+    /// :nodoc:
+    private func getTokenUsernameAndPassword() -> (username: String, password: String)? {
+        let token = Client.providers.accountProvider.vpnToken
+        guard let unwrappedToken = token else {
+            return nil
+        }
+
+        let tokenComponents = unwrappedToken.components(separatedBy: ":")
+        guard tokenComponents.count == 2 else {
+            return nil
+        }
+
+        guard let username = tokenComponents.first,
+              let password = tokenComponents.last else {
+            return nil
+        }
+
+        return (username, password)
+    }
+
+    /// :nodoc:
+    private func getTokenUsername() -> String? {
+        return getTokenUsernameAndPassword()?.username
+    }
+
+    /// :nodoc:
+    private func getTokenPassword() -> String? {
+        return getTokenUsernameAndPassword()?.password
+    }
 }
 
 extension IKEv2Profile {
     
     private func getGEN4IKEv2PasswordReference() -> Data? {
+        guard let username = getTokenUsername() else {
+            return nil
+        }
         
         var query = [String: Any]()
         query[kSecClass as String] = kSecClassGenericPassword
-        query[kSecAttrAccount as String] = Client.providers.accountProvider.token 
+        query[kSecAttrAccount as String] = username
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         query[kSecReturnPersistentRef as String] = true
         
@@ -250,25 +283,23 @@ extension IKEv2Profile {
     public func ikev2PasswordReference() -> Data? {
         
         guard let reference = getGEN4IKEv2PasswordReference() else {
-            
-            if let token = Client.providers.accountProvider.token {
-                
-                    var query = [String: Any]()
-                    query[kSecClass as String] = kSecClassGenericPassword
-                    query[kSecAttrAccount as String] = token
-                    query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
-                    query[kSecValueData as String] = token.data(using: .utf8)
-                
-                    SecItemAdd(query as CFDictionary, nil)
-                    
-                    query.removeAll()
+            guard let username = getTokenUsername(),
+                  let password = getTokenPassword() else {
+                      return nil
+                  }
 
-            }
+            var query = [String: Any]()
+            query[kSecClass as String] = kSecClassGenericPassword
+            query[kSecAttrAccount as String] = username
+            query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
+            query[kSecValueData as String] = password.data(using: .utf8)
+            SecItemAdd(query as CFDictionary, nil)
+            query.removeAll()
 
             return getGEN4IKEv2PasswordReference()
 
         }
-        
+
         return reference
         
     }

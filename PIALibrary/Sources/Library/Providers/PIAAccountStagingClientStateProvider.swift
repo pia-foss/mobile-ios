@@ -22,7 +22,7 @@
 import Foundation
 import PIAAccount
 
-class PIAAccountStagingClientStateProvider : AccountClientStateProvider {
+class PIAAccountStagingClientStateProvider : IAccountEndpointProvider {
     func accountEndpoints() -> [AccountEndpoint] {
         return [
             AccountEndpoint(ipOrRootDomain: Client.configuration.baseUrl, isProxy: false, usePinnedCertificate: false, certificateCommonName: nil),

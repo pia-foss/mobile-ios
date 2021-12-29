@@ -29,6 +29,8 @@ protocol PlainStore: class {
     var accountInfo: AccountInfo? { get set }
     
     var lastSignupEmail: String? { get set }
+
+    var tokenMigrated: Bool { get set }
     
     // MARK: IP
 

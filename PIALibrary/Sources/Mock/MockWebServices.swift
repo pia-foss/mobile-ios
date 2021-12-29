@@ -38,19 +38,23 @@ class MockWebServices: WebServices {
 
     var serversBundle: (() -> ServersBundle)?
 
-    func token(credentials: Credentials, _ callback: ((String?, Error?) -> Void)?) {
-        let result = "AUTH_TOKEN"
-        let error: ClientError? = (result == nil) ? .unsupported : nil
-        callback?(result, error)
+    var vpnToken: String?
+
+    var apiToken: String?
+
+    func migrateToken(token: String, _ callback: SuccessLibraryCallback?) {
+        callback?(nil)
     }
 
-    func token(receipt: Data, _ callback: ((String?, Error?) -> Void)?) {
-        let result = "AUTH_TOKEN"
-        let error: ClientError? = (result == nil) ? .unsupported : nil
-        callback?(result, error)
+    func token(credentials: Credentials, _ callback: ((Error?) -> Void)?) {
+        callback?(nil)
     }
 
-    func info(token: String, _ callback: ((AccountInfo?, Error?) -> Void)?) {
+    func token(receipt: Data, _ callback: ((Error?) -> Void)?) {
+        callback?(nil)
+    }
+
+    func info(_ callback: ((AccountInfo?, Error?) -> Void)?) {
         let result = accountInfo?()
         let error: ClientError? = (result == nil) ? .unsupported : nil
         callback?(result, error)

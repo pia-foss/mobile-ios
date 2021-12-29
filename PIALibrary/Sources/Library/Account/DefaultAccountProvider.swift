@@ -70,6 +70,14 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
         return false
     }
+
+    var apiToken: String? {
+        return webServices.apiToken
+    }
+
+    var vpnToken: String? {
+        return webServices.vpnToken
+    }
     
     var publicUsername: String? {
         guard let username = accessedDatabase.secure.publicUsername() else {
@@ -107,14 +115,6 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
     }
     
-    var token: String? {
-        guard let username = accessedDatabase.secure.username() else {
-            return nil
-        }
-        return accessedDatabase.secure.token(for: accessedDatabase.secure.tokenKey(for: username))
-    }
-
-    
     var currentPasswordReference: Data? {
         guard let username = accessedDatabase.secure.username() else {
             return nil
@@ -131,28 +131,46 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
     }
     #endif
 
-    private func updateDatabaseWith(_ token: String, andUsername username: String) {
-        let tokenComponents = token.split(by: token.count/2)
-        if let first = tokenComponents.first,
-            let last = tokenComponents.last {
-            self.accessedDatabase.secure.setPublicUsername(username)
-            self.accessedDatabase.secure.setUsername(first)
-            self.accessedDatabase.secure.setToken(token,
-                                                  for: self.accessedDatabase.secure.tokenKey(for: first))
-            self.accessedDatabase.secure.setPassword(last,
-                                                     for: first)
+    private func updateUsernamePassword() {
+        if let token = self.vpnToken {
+            let tokenComponents = token.components(separatedBy: ":")
+            if let username = tokenComponents.first,
+                let password = tokenComponents.last {
+                self.accessedDatabase.secure.setUsername(username)
+                self.accessedDatabase.secure.setPassword(password, for: username)
+            }
         }
     }
-    
-    private func updateToken(_ token: String) {
-        let tokenComponents = token.split(by: token.count/2)
-        if let first = tokenComponents.first,
-            let last = tokenComponents.last {
-            self.accessedDatabase.secure.setUsername(first)
-            self.accessedDatabase.secure.setToken(token,
-                                                  for: self.accessedDatabase.secure.tokenKey(for: first))
-            self.accessedDatabase.secure.setPassword(last,
-                                                     for: first)
+
+    func migrateOldTokenIfNeeded(_ callback: SuccessLibraryCallback?) {
+
+        // If it was already migrated
+        if (self.accessedDatabase.plain.tokenMigrated) {
+            callback?(nil)
+            return
+        }
+
+        // If there is something persisted. Try to migrate it.
+        if let username = self.accessedDatabase.secure.username(),
+           let token = self.accessedDatabase.secure.token(for: self.accessedDatabase.secure.tokenKey(for: username)) {
+            webServices.migrateToken(token: token) { [weak self] (error) in
+                guard error == nil else {
+                    callback?(error)
+                    return
+                }
+
+                guard let unwrappedVpnToken = self?.vpnToken else {
+                    preconditionFailure()
+                }
+
+                self?.accessedDatabase.secure.setPassword(unwrappedVpnToken, for: username)
+                self?.accessedDatabase.plain.tokenMigrated = true
+                callback?(nil)
+            }
+        } else {
+
+            // Nothing persisted. Continue.
+            callback?(nil)
         }
     }
     
@@ -161,131 +179,98 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             preconditionFailure()
         }
         
-        webServices.token(receipt: receiptRequest.receipt) { (token, error) in
-            self.saveToken(token: token, error: error, callback)
+        webServices.token(receipt: receiptRequest.receipt) { (error) in
+            let credentials = Credentials(username: "", password: "")
+            self.handleLoginResult(error: error, credentials: credentials, callback: callback)
         }
-
     }
-    
-    func login(with token: String, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        
+
+    func login(with linkToken: String, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard !isLoggedIn else {
             preconditionFailure()
         }
 
-        self.saveToken(token: token, error: nil, callback)
-        
-    }
-    
-    private func saveToken(token: String?, error: Error?, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        
-        guard let token = token else {
-            callback?(nil, error)
-            return
+        self.webServices.migrateToken(token: linkToken) { (error) in
+            let credentials = Credentials(username: "", password: "")
+            self.handleLoginResult(error: error, credentials: credentials, callback: callback)
         }
-
-        self.updateToken(token)
-
-        self.webServices.info(token: token) { (accountInfo, error) in
-            guard let accountInfo = accountInfo else {
-                callback?(nil, error)
-                return
-            }
-            
-            self.updateDatabaseWith(token,
-                                    andUsername: accountInfo.username)
-
-            //Save after confirm the login was successful.
-            self.accessedDatabase.plain.accountInfo = accountInfo
-
-            let user = UserAccount(credentials: Credentials(username: "", password: ""), info: accountInfo)
-            Macros.postNotification(.PIAAccountDidLogin, [
-                .user: user
-                ])
-            callback?(user, nil)
-        }
-
     }
-
 
     func login(with request: LoginRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard !isLoggedIn else {
             preconditionFailure()
         }
-        
-        webServices.token(credentials: request.credentials) { (token, error) in
-            
-            guard error == nil else {
-                callback?(nil,error)
-                return
-            }
-            
-            guard let token = token else {
-                callback?(nil, ClientError.unauthorized)
-                return
-            }
 
-            self.updateDatabaseWith(token,
-                                    andUsername: request.credentials.username)
-
-            self.webServices.info(token: token) { (accountInfo, error) in
-                guard let accountInfo = accountInfo else {
-                    self.webServices.logout(nil)
-                    self.cleanDatabase()
-                    callback?(nil, ClientError.unauthorized)
-                    return
-                }
-                
-                //Save after confirm the login was successful.
-                self.accessedDatabase.plain.accountInfo = accountInfo
-
-                let user = UserAccount(credentials: request.credentials, info: accountInfo)
-                Macros.postNotification(.PIAAccountDidLogin, [
-                    .user: user
-                    ])
-                callback?(user, nil)
-            }
-
+        webServices.token(credentials: request.credentials) { (error) in
+            self.handleLoginResult(error: error, credentials: request.credentials, callback: callback)
         }
 
     }
     
-    func refreshAccountInfo(_ callback: ((AccountInfo?, Error?) -> Void)?) {
+    private func handleLoginResult(error: Error?, credentials: Credentials, callback: ((UserAccount?, Error?) -> Void)?) {
+        guard error == nil else {
+            callback?(nil, error)
+            return
+        }
+        self.updateUser(credentials: credentials) { userAccount, error in
+            if let userAccount = userAccount {
+                Macros.postNotification(.PIAAccountDidLogin, [.user: userAccount])
+            }
+            callback?(userAccount, error)
+        }
+    }
         
-        guard let token = self.token,
-            let _ = self.publicUsername else {
+    private func updateUser(credentials: Credentials, callback: ((UserAccount?, Error?) -> Void)? ) {
+        self.updateUsernamePassword()
+        self.updateUserAccount(credentials: credentials, callback: callback)
+    }
+        
+    private func updateUserAccount(credentials: Credentials, callback: ((UserAccount?, Error?) -> Void)?) {
+        self.webServices.info() { (accountInfo, error) in
+            guard let accountInfo = accountInfo else {
+                self.webServices.logout(nil)
+                self.cleanDatabase()
+                callback?(nil,ClientError.unauthorized)
+                return
+            }
 
+            self.accessedDatabase.plain.accountInfo = accountInfo
+            self.accessedDatabase.secure.setPublicUsername(accountInfo.username)
+            let userAccount = UserAccount(credentials: credentials, info: accountInfo)
+            callback?(userAccount, nil)
+        }
+    }
+    
+    func refreshAccountInfo(_ callback: ((AccountInfo?, Error?) -> Void)?) {
+        guard isLoggedIn,
+            let _ = self.publicUsername else {
             guard let user = currentUser else {
                 preconditionFailure()
             }
 
             self.logout(nil)
-            
             return
         }
-
-        accountInfoWith(token, callback)
-        
+        accountInfoWith(callback)
     }
     
     public func accountInformation(_ callback: ((AccountInfo?, Error?) -> Void)?) {
-        guard let token = self.token else {
+        guard isLoggedIn else {
             callback?(nil, ClientError.unauthorized)
             return
         }
-        accountInfoWith(token, callback)
+        accountInfoWith(callback)
     }
     
-    private func accountInfoWith(_ token: String, _ callback: ((AccountInfo?, Error?) -> Void)?) {
-        webServices.info(token: token) { (accountInfo, error) in
+    private func accountInfoWith(_ callback: ((AccountInfo?, Error?) -> Void)?) {
+        webServices.info() { (accountInfo, error) in
             guard let accountInfo = accountInfo else {
                 callback?(nil, error)
                 return
             }
+
             self.accessedDatabase.plain.accountInfo = accountInfo
-            Macros.postNotification(.PIAAccountDidRefresh, [
-                .accountInfo: accountInfo
-                ])
+            Macros.postNotification(.PIAAccountDidRefresh, [.accountInfo: accountInfo])
             callback?(accountInfo, nil)
         }
     }
@@ -297,7 +282,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         let credentials = Credentials(username: Client.providers.accountProvider.publicUsername ?? "",
                                       password: password)
         webServices.update(credentials: credentials, resetPassword: reset, email: request.email) { (error) in
-            if let _ = error {
+            guard error == nil else {
                 callback?(nil, error)
                 return
             }
@@ -352,7 +337,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         
         webServices.subscriptionInformation(with: receipt, { appStoreInformation, error in
         
-            if let _ = error {
+            guard error == nil else {
                 callback?(nil, error)
                 return
             }
@@ -394,10 +379,6 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 return
             }
 
-//            if let uncredited = self.accessedStore.uncreditedTransaction(for: product) {
-//                callback?(uncredited, nil)
-//                return
-//            }
             self.accessedStore.purchaseProduct(product) { (transaction, error) in
                 guard let transaction = transaction else {
                     callback?(nil, error)
@@ -451,36 +432,29 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             
             self.accessedDatabase.plain.lastSignupEmail = nil
             self.accessedDatabase.secure.setPublicUsername(credentials.username)
+            self.accessedDatabase.secure.setUsername(credentials.username)
             self.accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
 
-            self.webServices.token(credentials: credentials) { (token, error) in
-                
-                guard let token = token else {
+            self.webServices.token(credentials: credentials) { (error) in
+                if error != nil {
                     callback?(nil, error)
                     return
                 }
-                
-                self.updateDatabaseWith(token,
-                                        andUsername: credentials.username)
-                
-                self.webServices.info(token: token) { (accountInfo, error) in
+
+                self.webServices.info() { (accountInfo, error) in
                     guard let accountInfo = accountInfo else {
                         callback?(nil, error)
                         return
                     }
-                    
-                    //Save after confirm the login was successful.
+
                     self.accessedDatabase.plain.accountInfo = accountInfo
+                    self.accessedDatabase.secure.setPublicUsername(accountInfo.username)
                     
                     let user = UserAccount(credentials: credentials, info: nil)
-                    Macros.postNotification(.PIAAccountDidSignup, [
-                        .user: user
-                        ])
+                    Macros.postNotification(.PIAAccountDidSignup, [.user: user])
                     callback?(user, nil)
                 }
-                
             }
-
         }
     }
 
@@ -488,8 +462,9 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         guard let info = currentUser?.info else {
             preconditionFailure()
         }
+
         listPlanProducts { (_, error) in
-            if let error = error {
+            guard error == nil else {
                 callback?(nil, error)
                 return
             }
@@ -519,7 +494,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
     }
     
     func renew(with request: RenewRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        guard let token = token else {
+        guard isLoggedIn else {
             preconditionFailure()
         }
         guard let user = currentUser else {
@@ -543,7 +518,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             }
             Macros.postNotification(.PIAAccountDidRenew)
 
-            self.webServices.info(token: token) { (accountInfo, error) in
+            self.webServices.info() { (accountInfo, error) in
                 guard let newAccountInfo = accountInfo else {
                     callback?(nil, nil)
                     return
@@ -551,9 +526,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                 self.accessedDatabase.plain.accountInfo = newAccountInfo
                 
                 let user = UserAccount(credentials: user.credentials, info: newAccountInfo)
-                Macros.postNotification(.PIAAccountDidRefresh, [
-                    .user: user
-                    ])
+                Macros.postNotification(.PIAAccountDidRefresh, [.user: user])
                 callback?(user, nil)
             }
         }
@@ -567,7 +540,6 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             accessedDatabase.secure.setPassword(nil, for: username)
             accessedDatabase.secure.setUsername(nil)
             accessedDatabase.secure.clear(for: username)
-            accessedDatabase.secure.setToken(nil, for: accessedDatabase.secure.tokenKey(for: username))
         }
         accessedDatabase.secure.removeDIPTokens()
         accessedDatabase.secure.setPublicUsername(nil)
