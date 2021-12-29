@@ -168,12 +168,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     }
 
     private func mapLoginError(_ error: AccountRequestError) -> ClientError {
-        switch error.code {
-        case 402:
-            return .expired
-        default:
             return .unauthorized
-        }
     }
 
 
