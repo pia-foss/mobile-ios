@@ -146,7 +146,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
 
         // If there is something persisted. Try to migrate it.
         if let username = self.accessedDatabase.secure.username(),
-           let token = self.accessedDatabase.secure.token(for: username) {
+           let token = self.accessedDatabase.secure.token(for: self.accessedDatabase.secure.tokenKey(for: username)) {
             webServices.migrateToken(token: token) { [weak self] (error) in
                 guard error == nil else {
                     callback?(error)
