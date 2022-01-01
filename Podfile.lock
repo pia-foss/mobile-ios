@@ -80,9 +80,9 @@ PODS:
     - PIAKPIModule/kpi (= 1.0.1)
   - PIAKPIModule/gradle (1.0.1)
   - PIAKPIModule/kpi (1.0.1)
-  - PIALibrary/Core (2.12.5):
+  - PIALibrary/Core (2.13.0):
     - PIAAccountModule
-  - PIALibrary/Library (2.12.5):
+  - PIALibrary/Library (2.13.0):
     - Alamofire (~> 4)
     - Gloss (~> 2)
     - PIAAccountModule
@@ -94,18 +94,18 @@ PODS:
     - PopupDialog
     - ReachabilitySwift
     - SwiftyBeaver
-  - PIALibrary/Mock (2.12.5):
+  - PIALibrary/Mock (2.13.0):
     - PIALibrary/Library
-  - PIALibrary/UI (2.12.5):
+  - PIALibrary/UI (2.13.0):
     - FXPageControl
     - lottie-ios
     - PIALibrary/Library
     - SwiftEntryKit (= 0.7.2)
     - SwiftyBeaver
     - TPKeyboardAvoiding
-  - PIALibrary/Util (2.12.5):
+  - PIALibrary/Util (2.13.0):
     - PIALibrary/Core
-  - PIALibrary/VPN (2.12.5):
+  - PIALibrary/VPN (2.13.0):
     - PIALibrary/Library
     - PIAWireguard
     - TunnelKit
@@ -160,10 +160,10 @@ DEPENDENCIES:
   - "PIAAccountModule (from `git@gitlab.kape.com:pia-mobile/shared/account.git`, branch `release/1.2.0`)"
   - "PIACSIModule (from `git@gitlab.kape.com:pia-mobile/shared/csi.git`, commit `b62d1bab`)"
   - "PIAKPIModule (from `git@gitlab.kape.com:pia-mobile/shared/kpi.git`, commit `31186b1d`)"
-  - "PIALibrary/Library (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `8f1c781`)"
-  - "PIALibrary/Mock (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `8f1c781`)"
-  - "PIALibrary/UI (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `8f1c781`)"
-  - "PIALibrary/VPN (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `8f1c781`)"
+  - "PIALibrary/Library (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `f8aa029`)"
+  - "PIALibrary/Mock (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `f8aa029`)"
+  - "PIALibrary/UI (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `f8aa029`)"
+  - "PIALibrary/VPN (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `f8aa029`)"
   - "PIARegionsModule (from `git@gitlab.kape.com:pia-mobile/shared/regions.git`, branch `release/1.3.1`)"
   - "PIAWireguard (from `git@gitlab.kape.com:pia-mobile/ios/pia-wireguard.git`, commit `7e9d8d48`)"
   - Popover
@@ -217,7 +217,7 @@ EXTERNAL SOURCES:
     :commit: 31186b1d
     :git: "git@gitlab.kape.com:pia-mobile/shared/kpi.git"
   PIALibrary:
-    :commit: 8f1c781
+    :commit: f8aa029
     :git: "git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git"
   PIARegionsModule:
     :branch: release/1.3.1
@@ -243,7 +243,7 @@ CHECKOUT OPTIONS:
     :commit: 31186b1d
     :git: "git@gitlab.kape.com:pia-mobile/shared/kpi.git"
   PIALibrary:
-    :commit: 8f1c781
+    :commit: f8aa029
     :git: "git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git"
   PIARegionsModule:
     :commit: 6b3b763b3b1d066cb73d2d8833563669ff8e87bb
@@ -278,7 +278,7 @@ SPEC CHECKSUMS:
   PIAAccountModule: e81a47491b646121a8db272016db00a1980d2955
   PIACSIModule: 32df98c20a0fc4cad5fadbb1b72f7b74315aa8ea
   PIAKPIModule: ec04bedfc7e6eccc7dfe4bc630a99c104ffbb7ea
-  PIALibrary: df5401f5b3ac256804f93f36c3d9673cc2ad420c
+  PIALibrary: 65cf227091e0cd75b19375e606a5e3d95ca59317
   PIARegionsModule: eff00bd28dea554d7b766ec5d7e9a74ab448f5fe
   PIAWireguard: e6fc3a37758af8d83704dd61e327c2ff6da88b13
   Popover: 10e1d9528f81d9504df984b7b3f491292bc1822d
@@ -293,6 +293,6 @@ SPEC CHECKSUMS:
   TunnelKit: 2a6aadea2d772a2760b153aee27d1c334c9ca6db
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 253fb6d9981076a455d2c1f00e64e9e0cb878ed2
+PODFILE CHECKSUM: 4ee087b5909c643e230cb90f7297cf3c9474ad1c
 
 COCOAPODS: 1.11.2
