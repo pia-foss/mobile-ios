@@ -79,6 +79,14 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         return webServices.vpnToken
     }
     
+    var vpnTokenUsername: String? {
+        return getVpnTokenUsernameAndPassword()?.username
+    }
+    
+    var vpnTokenPassword: String? {
+        return getVpnTokenUsernameAndPassword()?.password
+    }
+    
     var publicUsername: String? {
         guard let username = accessedDatabase.secure.publicUsername() else {
             return nil
@@ -564,4 +572,25 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
     }
     
+    // MARK: Private
+
+    /// :nodoc:
+    func getVpnTokenUsernameAndPassword() -> (username: String, password: String)? {
+        let token = Client.providers.accountProvider.vpnToken
+        guard let unwrappedToken = token else {
+            return nil
+        }
+
+        let tokenComponents = unwrappedToken.components(separatedBy: ":")
+        guard tokenComponents.count == 2 else {
+            return nil
+        }
+
+        guard let username = tokenComponents.first,
+              let password = tokenComponents.last else {
+            return nil
+        }
+
+        return (username, password)
+    }
 }

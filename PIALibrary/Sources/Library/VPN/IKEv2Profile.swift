@@ -171,7 +171,7 @@ public class IKEv2Profile: NetworkExtensionProfile {
             iKEv2Username = dipUsername
             iKEv2Password = configuration.server.dipPassword()
         } else {
-            iKEv2Username = getTokenUsername() ?? iKEv2Username
+            iKEv2Username = Client.providers.accountProvider.vpnTokenUsername ?? iKEv2Username
             iKEv2Password = ikev2PasswordReference()
         }
 
@@ -216,44 +216,12 @@ public class IKEv2Profile: NetworkExtensionProfile {
 
         return cfg
     }
-
-    // MARK: Private
-
-    /// :nodoc:
-    private func getTokenUsernameAndPassword() -> (username: String, password: String)? {
-        let token = Client.providers.accountProvider.vpnToken
-        guard let unwrappedToken = token else {
-            return nil
-        }
-
-        let tokenComponents = unwrappedToken.components(separatedBy: ":")
-        guard tokenComponents.count == 2 else {
-            return nil
-        }
-
-        guard let username = tokenComponents.first,
-              let password = tokenComponents.last else {
-            return nil
-        }
-
-        return (username, password)
-    }
-
-    /// :nodoc:
-    private func getTokenUsername() -> String? {
-        return getTokenUsernameAndPassword()?.username
-    }
-
-    /// :nodoc:
-    private func getTokenPassword() -> String? {
-        return getTokenUsernameAndPassword()?.password
-    }
 }
 
 extension IKEv2Profile {
     
     private func getGEN4IKEv2PasswordReference() -> Data? {
-        guard let username = getTokenUsername() else {
+        guard let username = Client.providers.accountProvider.vpnTokenUsername else {
             return nil
         }
         
@@ -283,8 +251,8 @@ extension IKEv2Profile {
     public func ikev2PasswordReference() -> Data? {
         
         guard let reference = getGEN4IKEv2PasswordReference() else {
-            guard let username = getTokenUsername(),
-                  let password = getTokenPassword() else {
+            guard let username = Client.providers.accountProvider.vpnTokenUsername,
+                  let password = Client.providers.accountProvider.vpnTokenPassword else {
                       return nil
                   }
 

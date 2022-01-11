@@ -168,6 +168,14 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
         return "TOKEN"
     }
     
+    public var vpnTokenUsername: String? {
+        return "USERNAME"
+    }
+    
+    public var vpnTokenPassword: String? {
+        return "PASSWORD"
+    }
+    
     public var publicUsername: String? {
         return "p0000000"
     }
