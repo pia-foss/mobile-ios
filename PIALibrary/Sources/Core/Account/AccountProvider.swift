@@ -44,6 +44,12 @@ public protocol AccountProvider: class {
 
     /// The token to use for protocol authentication.
     var vpnToken: String? { get }
+    
+    /// The username extracted from the vpn token
+    var vpnTokenUsername: String? { get }
+    
+    /// The password extracted from the vpn token
+    var vpnTokenPassword: String? { get }
 
     /// The public username to be displayed in the views.
     var publicUsername: String? { get }
