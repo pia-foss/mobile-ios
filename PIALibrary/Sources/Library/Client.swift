@@ -83,6 +83,14 @@ public final class Client {
 
         // migrate from old token
         providers.accountProvider.migrateOldTokenIfNeeded { (error) in
+            
+            Client.providers.vpnProvider.install(force: true) { error in
+                if (error != nil) {
+                    log.debug("Could not install profile: \(error)")
+                    return
+                }
+            }
+                        
             // If there was an error. It will retry on the next boostrap.
             if (error != nil) {
                 log.debug("Client bootstrap migrateOldTokenIfNeeded error: \(error)")

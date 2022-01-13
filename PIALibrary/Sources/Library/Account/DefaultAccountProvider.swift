@@ -166,12 +166,12 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
                     callback?(error)
                     return
                 }
-
-                guard let unwrappedVpnToken = self?.vpnToken else {
+                
+                guard let username = self?.vpnTokenUsername, let password = self?.vpnTokenPassword else {
                     preconditionFailure()
                 }
-
-                self?.accessedDatabase.secure.setPassword(unwrappedVpnToken, for: username)
+        
+                self?.accessedDatabase.secure.setPassword(password, for: username)
                 self?.accessedDatabase.plain.tokenMigrated = true
                 callback?(nil)
             }
