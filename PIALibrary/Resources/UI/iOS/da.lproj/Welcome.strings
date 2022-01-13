@@ -1,67 +1,205 @@
+/* (No Comment) */
 "agreement.message" = "Efter den gratis prøveperiode på 7 dage, fornyes dette abonnement automatisk for %@, medmindre det annulleres mindst 24 timer før prøveperioden er afsluttet. Din Apple ID-konto bliver debiteret for fornyelse inden for 24 timer inden udløbet af prøveperioden. Du kan administrere og annullere dine abonnementer ved at gå til din App Store-kontoindstillinger efter købet. Tilbudet med en 7-dages prøveperiode er begrænset til en 7-dages prøveperiode pr. bruger. Enhver ubrugt del af en gratis prøveperiode, hvis den tilbydes, fortabes, når brugeren køber et abonnement. Alle priser inkluderer gældende lokal moms.";
+
+/* (No Comment) */
 "agreement.message.privacy" = "Fortrolighedspolitik";
+
+/* (No Comment) */
 "agreement.message.tos" = "Vilkår for brug";
+
+/* (No Comment) */
 "agreement.trials.message" = "Betaling debiteres din Apple ID-konto ved bekræftelsen af ​​købet. Abonnementet fornyes automatisk, medmindre det annulleres mindst 24 timer inden udgangen af ​​den aktuelle periode. Din konto bliver debiteret for fornyelse inden for 24 timer inden udgangen af ​​den aktuelle periode. Du kan administrere og annullere dine abonnementer ved at gå til dine kontoindstillinger i App Store efter køb.\n\nVisse betalte abonnementer kan muligvis tilbyde en gratis prøveperiode, inden de opkræver din betalingsmetode. Hvis du beslutter at afmelde dig et betalt abonnement, før vi begynder at opkræve din betalingsmetode, skal du annullere abonnementet mindst 24 timer før den gratis prøveperiode afsluttes.\n\nGratis prøveperioder er kun tilgængelige for nye brugere og er efter vores eget skøn, og hvis du forsøger at tilmelde dig en ekstra gratis prøveperiode, bliver du straks debiteret for det almindelige abonnementsgebyr.\n\nVi forbeholder os retten til at tilbagekalde din gratis prøveperiode til enhver tid.\n\nEnhver ubrugt del af din gratis prøveperiode fortabes ved køb af et abonnement.\n\nTilmelding udgør accept af disse vilkår og betingelser.";
+
+/* (No Comment) */
 "agreement.trials.monthly.plan" = "måned";
+
+/* (No Comment) */
 "agreement.trials.title" = "Vilkår og betingelser for gratis prøveperioder";
+
+/* (No Comment) */
 "agreement.trials.yearly.plan" = "år";
-"camera.access.error.message" = "Din enhed understøtter ikke scanning af QR-koder. Brug venligst en enhed med et kamera.";
-"camera.access.error.title" = "Kamera ikke tilgængeligt";
+
+/* (No Comment) */
 "gdpr.accept.button.title" = "Accepter og fortsæt";
+
+/* (No Comment) */
 "gdpr.collect.data.description" = "E-mailadresse med henblik på kontohåndtering og beskyttelse mod misbrug.";
+
+/* (No Comment) */
 "gdpr.collect.data.title" = "Personlige oplysninger, vi indsamler";
+
+/* (No Comment) */
 "gdpr.usage.data.description" = "E-mailadresse bruges kun til at sende abonnementsoplysninger, betalingsbekræftelser, kundekorrespondance og salgsfremmende tilbud fra Private Internet Access.";
+
+/* (No Comment) */
 "gdpr.usage.data.title" = "Anvendelse af personlige oplysninger indsamlet af os";
+
+/* (No Comment) */
 "getstarted.buttons.buyaccount" = "Køb konto";
+
+/* (No Comment) */
 "iap.error.message.unavailable" = "Apple-servere er ikke tilgængelige i øjeblikket. Prøv venligst igen senere.";
+
+/* (No Comment) */
 "iap.error.title" = "Fejl";
+
+/* (No Comment) */
 "login.error.throttled" = "Alt for mange mislykkede forsøg på at logge ind med dette brugernavn. Prøv venligst igen senere.";
+
+/* (No Comment) */
 "login.error.title" = "Log ind";
+
+/* (No Comment) */
 "login.error.unauthorized" = "Dit brugernavn eller kodeord er forkert.";
+
+/* (No Comment) */
 "login.error.validation" = "Du skal indtaste et brugernavn og et kodeord.";
+
+/* (No Comment) */
 "login.magic.link.invalid.email" = "Ugyldig e-mail. Prøv igen.";
+
+/* (No Comment) */
 "login.magic.link.response" = "Se i din e-mail for et login-link.";
+
+/* (No Comment) */
 "login.magic.link.send" = "Send link";
+
+/* (No Comment) */
 "login.magic.link.title" = "Log ind ved hjælp af magisk e-maillink";
+
+/* (No Comment) */
 "login.password.placeholder" = "Kodeord";
+
+/* (No Comment) */
 "login.receipt.button" = "Log på med købskvittering";
+
+/* (No Comment) */
 "login.restore.button" = "Modtog du ikke dine kontodetaljer?";
+
+/* (No Comment) */
 "login.submit" = "LOG IND";
+
+/* Welcome.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved. */
 "login.title" = "Log ind på din konto";
+
+/* (No Comment) */
 "login.username.placeholder" = "Brugernavn (p1234567)";
+
+/* (No Comment) */
 "plan.accessibility.per_month" = "per måned";
+
+/* (No Comment) */
 "plan.best_value" = "Bedste værdi";
+
+/* (No Comment) */
 "plan.monthly.title" = "Månedligt";
+
+/* (No Comment) */
 "plan.price_format" = "%@/mdr";
+
+/* (No Comment) */
 "plan.yearly.detail_format" = "%@%@ per år";
+
+/* (No Comment) */
 "plan.yearly.title" = "Årligt";
+
+/* (No Comment) */
 "purchase.confirm.form.email" = "Indtast din e-mailadresse";
+
+/* (No Comment) */
 "purchase.confirm.plan" = "Du køber %@-planen";
+
+/* (No Comment) */
 "purchase.continue" = "Fortsæt";
+
+/* (No Comment) */
 "purchase.email.placeholder" = "E-mailadresse";
+
+/* (No Comment) */
 "purchase.email.why" = "Vi har brug for din e-mail for at sende dit brugernavn og din adgangskode.";
+
+/* (No Comment) */
 "purchase.error.connectivity.description" = "Vi kan ikke nå Private Internet Access. Dette kan skyldes dårlig internet eller at vores service er blokeret i dit land.";
+
+/* (No Comment) */
 "purchase.error.connectivity.title" = "Forbindelsesfejl";
+
+/* (No Comment) */
 "purchase.error.title" = "Køb";
+
+/* (No Comment) */
 "purchase.error.validation" = "Du skal indtaste en e-mailadresse";
+
+/* (No Comment) */
 "purchase.login.button" = "Log ind";
+
+/* (No Comment) */
 "purchase.login.footer" = "Har du allerede en konto?";
+
+/* (No Comment) */
 "purchase.or" = "eller";
+
+/* (No Comment) */
 "purchase.submit" = "Indsend";
+
+/* (No Comment) */
 "purchase.subtitle" = "30-dages pengene tilbage garanti";
+
+/* (No Comment) */
 "purchase.title" = "Vælg en VPN-plan";
+
+/* (No Comment) */
 "redeem.accessibility.back" = "Tilbage";
+
+/* (No Comment) */
 "redeem.email.placeholder" = "E-mailadresse";
+
+/* (No Comment) */
 "redeem.error.allfields" = "Indtast venligst din e-mail og dit korts PIN-kode.";
+
+/* (No Comment) */
 "redeem.error.code" = "Koden skal være %lu numeriske cifre.";
-"redeem.error.qrcode.invalid" = "Ugyldig QR-kode sekvens. Prøv igen.";
+
+/* (No Comment) */
 "redeem.error.title" = "Indløs";
+
+/* (No Comment) */
 "redeem.giftcard.placeholder" = "Gavekortets PIN-kode";
+
+/* (No Comment) */
 "redeem.submit" = "INDSEND";
+
+/* (No Comment) */
 "redeem.subtitle" = "Indtast din e-mailadresse, og %lu-cifrede pinkode frra dit gavekort eller prøvekort herunder.";
+
+/* (No Comment) */
 "redeem.title" = "Indløs gavekort";
+
+/* (No Comment) */
 "restore.email.placeholder" = "E-mailadresse";
+
+/* (No Comment) */
 "restore.submit" = "BEKRÆFT";
+
+/* (No Comment) */
 "restore.subtitle" = "Hvis du har købt en plan gennem denne app og ikke har modtaget dine legitimationsoplysninger, kan du anmode om at sende dem igen herfra. Du vil ikke blive opkrævet i løbet af denne proces.";
+
+/* (No Comment) */
 "restore.title" = "Gendan ukrediteret køb";
+
+/* (No Comment) */
 "update.account.email.error" = "Lykkedes ikke at ændre konto-e-mail";
+
+/* (No Comment) */
+"upgrade.header" = "Velkommen tilbage!";
+
+/* (No Comment) */
+"upgrade.renew.now" = "Forny nu";
+
+/* (No Comment) */
+"upgrade.title" = "For at bruge Private Internet Access skal du forny dit abonnement.";
+

@@ -1,54 +1,166 @@
+/* (No Comment) */
 "failure.message" = "Нам не удалось создать учетную запись. Повторите попытку позже.\nПри повторном открытии приложения создание учетной записи будет возобновлено.";
+
+/* (No Comment) */
 "failure.purchase.sandbox.message" = "Выбранная подписка на «песочницу» недоступна в производственной среде.";
+
+/* (No Comment) */
 "failure.redeem.claimed.message" = "Похоже, эту карту уже использовали с другой учетной записи. Попробуйте ввести другой PIN.";
+
+/* (No Comment) */
 "failure.redeem.claimed.title" = "Карта уже использована";
+
+/* (No Comment) */
 "failure.redeem.invalid.message" = "Похоже, вы ввели неверный PIN-код карты. Попробуйте еще раз.";
+
+/* (No Comment) */
 "failure.redeem.invalid.title" = "Неверный PIN-код карты";
+
+/* (No Comment) */
 "failure.submit" = "ВОЗВРАТ";
+
+/* (No Comment) */
 "failure.title" = "Сбой создания учетной записи";
+
+/* (No Comment) */
 "failure.vc_title" = "Ошибка регистрации";
+
+/* (No Comment) */
 "in_progress.message" = "Мы проверяем вашу покупку в системе. На это может понадобиться время, так что оставайтесь с нами.";
+
+/* (No Comment) */
 "in_progress.redeem.message" = "Мы подтверждаем ваш PIN-код в системе. Это займет какое-то время, подождите немного.";
+
+/* Signup.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved. */
 "in_progress.title" = "Подтверждение регистрации";
+
+/* (No Comment) */
 "purchase.subscribe.now" = "Подписаться";
+
+/* (No Comment) */
 "purchase.trials.1year.protection" = "1 год защиты конфиденциальности и личных данных";
+
+/* (No Comment) */
 "purchase.trials.all.plans" = "Смотреть все доступные планы";
+
+/* (No Comment) */
 "purchase.trials.anonymous" = "Пользуйтесь Интернетом анонимно и скрывайте свой IP-адрес.";
+
+/* (No Comment) */
 "purchase.trials.devices" = "Поддержка сразу 10 устройств";
+
+/* (No Comment) */
 "purchase.trials.devices.description" = "Защищайте себя на нескольких устройствах одновременно (до 10).";
+
+/* (No Comment) */
 "purchase.trials.intro" = "Начните 7-дневную бесплатную пробу";
+
+/* (No Comment) */
 "purchase.trials.money.back" = "30-дневная гарантия возврата денег";
+
+/* (No Comment) */
 "purchase.trials.price.after" = "После этого %@";
+
+/* (No Comment) */
 "purchase.trials.region" = "Простое подключение к любому региону";
+
+/* (No Comment) */
 "purchase.trials.servers" = "Более 3300 серверов в 32 странах";
+
+/* (No Comment) */
 "purchase.trials.start" = "Запустить подписку.";
+
+/* (No Comment) */
 "purchase.uncredited.alert.button.cancel" = "Отмена";
+
+/* (No Comment) */
 "purchase.uncredited.alert.button.recover" = "Восстановить учетную запись";
+
+/* (No Comment) */
 "purchase.uncredited.alert.message" = "У вас есть непроведенные транзакции. Хотите восстановить данные своей учетной записи?";
+
+/* (No Comment) */
 "share.data.buttons.accept" = "Принять";
+
+/* (No Comment) */
 "share.data.buttons.noThanks" = "Спасибо, не надо";
+
+/* (No Comment) */
 "share.data.buttons.readMore" = "Подробнее";
+
+/* (No Comment) */
 "share.data.readMore.text.description" = "Эта минимальная информация помогает нам идентифицировать и исправлять потенциальные неполадки соединения. Обращаем ваше внимание, что для передачи этой информации требуется согласие и активация вручную, т.к. по умолчанию этот параметр отключен.\n\nМы будем собирать информацию о следующих событиях:\n\n- Попытки соединения\n- Отмененное соединение\n- Установленное соединение\n\nДля всех указанных событий мы будем собирать следующую информацию:\n- Платформа\n- Версия приложения\n- Тип приложения (предварительный выпуск или нет)\n- Источник соединения (вручную или с использованием автоматизации)\n\nВсе события будут включать уникальный идентификатор, генерируемый случайным образом. Этот идентификатор не сопоставляется с вашей учетной записью. Данный уникальный код в целях обеспечения конфиденциальности ежедневно генерируется повторно.\n\nКонтроль во всех случаях будет в ваших руках. Вы сможете увидеть, какие данные мы собрали, в настройках, а также можете в любое время отключить этот параметр.";
+
+/* (No Comment) */
 "share.data.text.description" = "Вы можете анонимно делиться с нами своей статистикой соединения, чтобы помочь нам обеспечить производительность подключения нашей службы. Эти отчеты не включают какую-либо личную информацию.";
+
+/* (No Comment) */
 "share.data.text.footer" = "Вы всегда можете управлять этим параметром через настройки";
+
+/* (No Comment) */
 "share.data.text.title" = "Помогите нам сделать нашу службу еще лучше";
+
+/* (No Comment) */
 "success.message_format" = "Спасибо за регистрацию. Мы отправили имя пользователя и пароль на адрес электронной почты %@";
+
+/* (No Comment) */
 "success.password.caption" = "Пароль";
+
+/* (No Comment) */
 "success.redeem.message" = "Также вы получите эл. письмо с именем пользователя и паролем.\n\nВаши учетные данные";
+
+/* (No Comment) */
 "success.redeem.title" = "Карта успешно использована";
+
+/* (No Comment) */
 "success.submit" = "Начать";
+
+/* (No Comment) */
 "success.title" = "Покупка завершена";
+
+/* (No Comment) */
 "success.username.caption" = "Имя пользователя";
+
+/* (No Comment) */
 "unreachable.message" = "Интернет-соединение не найдено. Пожалуйста, убедитесь, что у вас есть подключение к Интернету, и повторите попытку позже.\n\nМожно вернуться в приложение позже и завершить процесс.";
+
+/* (No Comment) */
 "unreachable.submit" = "ПОВТОРИТЬ";
+
+/* (No Comment) */
 "unreachable.title" = "Ой!";
+
+/* (No Comment) */
 "unreachable.vc_title" = "Ошибка";
+
+/* (No Comment) */
 "walkthrough.action.done" = "ГОТОВО";
+
+/* WALKTHROUGH */
 "walkthrough.action.next" = "ДАЛЕЕ";
+
+/* (No Comment) */
 "walkthrough.action.skip" = "ПРОПУСК";
+
+/* (No Comment) */
 "walkthrough.page.1.description" = "Защищайте себя на нескольких устройствах одновременно (до 10).";
+
+/* (No Comment) */
 "walkthrough.page.1.title" = "Поддержка 10 устройств одновременно";
+
+/* (No Comment) */
 "walkthrough.page.2.description" = "У нас есть серверы по всему миру, так что вы всегда будете под защитой.";
+
+/* (No Comment) */
 "walkthrough.page.2.title" = "Простое подключение к любому региону";
+
+/* (No Comment) */
 "walkthrough.page.3.description" = "Активация нашего правила блокирования контента препятствует отображению рекламы в Safari.";
+
+/* (No Comment) */
 "walkthrough.page.3.title" = "Защита от рекламы";
+

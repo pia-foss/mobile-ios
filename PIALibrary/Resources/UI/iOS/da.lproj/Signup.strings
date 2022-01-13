@@ -1,54 +1,166 @@
+/* (No Comment) */
 "failure.message" = "Vi kan ikke oprette en konto på nuværende tidspunkt. Prøv igen senere.\n\nGenåbning af appen vil genoptage forsøget på at oprette en konto.";
+
+/* (No Comment) */
 "failure.purchase.sandbox.message" = "Det valgte sandbox-abonnement er ikke tilgængeligt i produktionen.";
+
+/* (No Comment) */
 "failure.redeem.claimed.message" = "Det ser ud til, at dette kort allerede er taget af en anden konto. Prøv at indtaste en anden pinkode.";
+
+/* (No Comment) */
 "failure.redeem.claimed.title" = "Kort allerede taget";
+
+/* (No Comment) */
 "failure.redeem.invalid.message" = "Det ser ud til, at du har indtastet en ugyldig kort-pinkode. Prøv igen.";
+
+/* (No Comment) */
 "failure.redeem.invalid.title" = "Ugyldig kort-pinkode";
+
+/* (No Comment) */
 "failure.submit" = "GÅ TILBAGE";
+
+/* (No Comment) */
 "failure.title" = "Kunne ikke oprette konto";
+
+/* (No Comment) */
 "failure.vc_title" = "Tilmelding mislykkedes";
+
+/* (No Comment) */
 "in_progress.message" = "Vi bekræfter dit køb i vores system. Det kan tage et øjeblik, så bliv her venligst.";
+
+/* (No Comment) */
 "in_progress.redeem.message" = "Vi bekræfter din kort-pinkode i vores system. Det kan tage et øjeblik, så bliv her venligst.";
+
+/* Signup.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved. */
 "in_progress.title" = "Bekræft tilmelding";
+
+/* (No Comment) */
 "purchase.subscribe.now" = "Tilmeld nu";
+
+/* (No Comment) */
 "purchase.trials.1year.protection" = "1 års beskyttelse af personlige oplysninger og identitet";
+
+/* (No Comment) */
 "purchase.trials.all.plans" = "Se alle tilgængelige planer";
+
+/* (No Comment) */
 "purchase.trials.anonymous" = "Gennemse anonymt og skjul din ip.";
+
+/* (No Comment) */
 "purchase.trials.devices" = "Understøtter 10 enheder på én gang";
+
+/* (No Comment) */
 "purchase.trials.devices.description" = "Beskyt dig selv på op til 10 enheder ad gangen.";
+
+/* (No Comment) */
 "purchase.trials.intro" = "Start din 7-dages gratis prøveperiode";
+
+/* (No Comment) */
 "purchase.trials.money.back" = "30-dages pengene tilbage garanti";
+
+/* (No Comment) */
 "purchase.trials.price.after" = "Derefter %@";
+
+/* (No Comment) */
 "purchase.trials.region" = "Forbind nemt til en hvilken som helst region";
+
+/* (No Comment) */
 "purchase.trials.servers" = "Mere end 3300 servere i 32 lande";
+
+/* (No Comment) */
 "purchase.trials.start" = "Start abonnement";
+
+/* (No Comment) */
 "purchase.uncredited.alert.button.cancel" = "Annuller";
+
+/* (No Comment) */
 "purchase.uncredited.alert.button.recover" = "Gendan konto";
+
+/* (No Comment) */
 "purchase.uncredited.alert.message" = "Du har ukrediterede transaktioner. Vil du gendanne dine kontooplysninger?";
+
+/* (No Comment) */
 "share.data.buttons.accept" = "Accepter";
+
+/* (No Comment) */
 "share.data.buttons.noThanks" = "Nej tak";
+
+/* (No Comment) */
 "share.data.buttons.readMore" = "Læs mere";
+
+/* (No Comment) */
 "share.data.readMore.text.description" = "Denne minimale information hjælper os med at identificere og løse potentielle forbindelsesproblemer. Bemærk, at deling af disse oplysninger kræver samtykke og manuel aktivering, da de er slået fra som standard.\n\nVi indsamler oplysninger om følgende begivenheder:\n\n- Forbindelsesforsøg\n- Afbrudt forbindelse\n- Forbindelse oprettet\n\nFor alle disse begivenheder indsamler vi følgende oplysninger:\n- Platform\n- Appversion\n- Apptype (forudgivelse eller ej)\n- Protokol anvendt\n- Forbindelseskilde (manuel eller ved hjælp af automatisering)\n\nAlle begivenheder vil indeholde et unikt id, der genereres tilfældigt. Dette id er ikke knyttet til din brugerkonto. Dette unikke id genoprettes dagligt for din fortroligheds skyld.\n\nDu vil altid have kontrol. Du kan se, hvilke data vi har indsamlet fra Indstillinger, og du kan til enhver tid slå dem fra.";
+
+/* (No Comment) */
 "share.data.text.description" = "For at hjælpe os med at sikre vores tjenestes forbindelsesydelse, kan du anonymt dele dine forbindelsesstatistikker med os. Disse rapporter inkluderer ikke personligt identificerbare oplysninger.";
+
+/* (No Comment) */
 "share.data.text.footer" = "Du kan altid kontrollere dette fra dine indstillinger";
+
+/* (No Comment) */
 "share.data.text.title" = "Hjælp os med at forbedre vores service";
+
+/* (No Comment) */
 "success.message_format" = "Tak fordi du tilmeldte dig hos os. Vi har sendt dit brugernavn og kodeord til din e-mailadresse %@";
+
+/* (No Comment) */
 "success.password.caption" = "Kodeord";
+
+/* (No Comment) */
 "success.redeem.message" = "Du modtager snart en e-mail med dit brugernavn og adgangskode.\n\nDine loginoplysninger";
+
+/* (No Comment) */
 "success.redeem.title" = "Kort indløst med succes";
+
+/* (No Comment) */
 "success.submit" = "Kom i gang";
+
+/* (No Comment) */
 "success.title" = "Køb fuldført";
+
+/* (No Comment) */
 "success.username.caption" = "Brugernavn";
+
+/* (No Comment) */
 "unreachable.message" = "Ingen internetforbindelse fundet. Bekræft venligst, at du har en internetforbindelse, og tryk på \"prøv igen\" herunder.\n\nDu kan vende tilbage til appen senere for at afslutte processen.";
+
+/* (No Comment) */
 "unreachable.submit" = "PRØV IGEN";
+
+/* (No Comment) */
 "unreachable.title" = "Ups!";
+
+/* (No Comment) */
 "unreachable.vc_title" = "Fejl";
+
+/* (No Comment) */
 "walkthrough.action.done" = "UDFØRT";
+
+/* WALKTHROUGH */
 "walkthrough.action.next" = "NÆSTE";
+
+/* (No Comment) */
 "walkthrough.action.skip" = "SPRING OVER";
+
+/* (No Comment) */
 "walkthrough.page.1.description" = "Beskyt dig selv på op til 10 enheder ad gangen.";
+
+/* (No Comment) */
 "walkthrough.page.1.title" = "Understøtter 10 enheder på en gang";
+
+/* (No Comment) */
 "walkthrough.page.2.description" = "Med servere rundt om i verden er du altid beskyttet.";
+
+/* (No Comment) */
 "walkthrough.page.2.title" = "Forbind nemt til en hvilken som helst region";
+
+/* (No Comment) */
 "walkthrough.page.3.description" = "Aktivering af vores Indholdsblokering forhindrer reklamer i at blive vist i Safari.";
+
+/* (No Comment) */
 "walkthrough.page.3.title" = "Beskyt dig mod annoncer";
+
