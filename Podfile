@@ -71,7 +71,7 @@ def shared_main_pods
     pod 'AlamofireImage'
     
     #pod "PIAAccountModule", :git => "#{$git_root}/#{$accounts_repo}"
-    pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :commit => '0570236'
+    pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :commit => 'ad7b8ac'
     #pod "PIARegionsModule", :git => "#{$git_root}/#{$regions_repo}"
     pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :branch => 'release/1.3.1'
     #pod "PIACSIModule", :git => "#{$git_root}/#{$csi_repo}"
@@ -81,7 +81,7 @@ def shared_main_pods
     #library_by_path('')
     #library_by_git('')
     #library_by_gitlab_branch('')
-    library_by_gitlab_by_git('5e6bea6')
+    library_by_gitlab_by_git('a5f2916')
     #library_by_version('~> 1.1.3')
 end
 
