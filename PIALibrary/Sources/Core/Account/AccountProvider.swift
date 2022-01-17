@@ -38,6 +38,9 @@ public protocol AccountProvider: class {
     
     /// The user account currently logged in, or `nil` if logged out.
     var currentUser: UserAccount? { get set }
+    
+    /// The old auth token
+    var oldToken: String? { get }
 
     /// The token to use for api authentication.
     var apiToken: String? { get }

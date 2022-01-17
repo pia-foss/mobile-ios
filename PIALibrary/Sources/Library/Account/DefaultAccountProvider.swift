@@ -70,6 +70,13 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
         return false
     }
+    
+    var oldToken: String? {
+        guard let username = accessedDatabase.secure.username() else {
+            return nil
+        }
+        return accessedDatabase.secure.token(for: accessedDatabase.secure.tokenKey(for: username))
+    }
 
     var apiToken: String? {
         return webServices.apiToken
@@ -159,8 +166,7 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
 
         // If there is something persisted. Try to migrate it.
-        if let username = self.accessedDatabase.secure.username(),
-           let token = self.accessedDatabase.secure.token(for: self.accessedDatabase.secure.tokenKey(for: username)) {
+        if let token = oldToken {
             webServices.migrateToken(token: token) { [weak self] (error) in
                 guard error == nil else {
                     callback?(error)
