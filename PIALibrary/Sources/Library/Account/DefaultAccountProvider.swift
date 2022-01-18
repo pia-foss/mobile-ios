@@ -226,6 +226,12 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             callback?(nil, error)
             return
         }
+        
+        guard vpnToken != nil else {
+            callback?(nil, ClientError.unauthorized)
+            return
+        }
+        
         self.updateUser(credentials: credentials) { userAccount, error in
             if let userAccount = userAccount {
                 Macros.postNotification(.PIAAccountDidLogin, [.user: userAccount])
