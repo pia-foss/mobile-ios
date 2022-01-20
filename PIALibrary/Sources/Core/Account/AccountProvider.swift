@@ -143,6 +143,15 @@ public protocol AccountProvider: class {
     func logout(_ callback: SuccessLibraryCallback?)
     
     /**
+     Deletes the user from PIA servers.
+
+     - Precondition: `isLoggedIn` is `true`.
+     - Parameter callback: Returns `nil` on success.
+     */
+    
+    func deleteAccount(_ callback: SuccessLibraryCallback?)
+    
+    /**
      Remove all data from the plain and secure internal database
      */
     func cleanDatabase()
