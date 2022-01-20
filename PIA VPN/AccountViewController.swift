@@ -43,6 +43,8 @@ class AccountViewController: AutolayoutViewController {
     
     @IBOutlet weak var labelExpiryInformation: UILabel!
         
+    @IBOutlet private weak var labelDeleteAccount: UILabel!
+    
     @IBOutlet private weak var viewAccountInfo: UIView!
     
     @IBOutlet private weak var viewUncredited: UIView!
@@ -70,6 +72,7 @@ class AccountViewController: AutolayoutViewController {
         labelUsername.text = L10n.Account.Username.caption
         labelRestoreTitle.text = L10n.Account.Restore.title
         labelRestoreInfo.text = L10n.Account.Restore.description
+        labelDeleteAccount.text = L10n.Account.delete
         buttonRestore.setTitle(L10n.Account.Restore.button.uppercased(), for: .normal)
         labelSubscriptions.attributedText = Theme.current.textWithColoredLink(
             withMessage: L10n.Account.Subscriptions.message,
@@ -122,6 +125,21 @@ class AccountViewController: AutolayoutViewController {
             }
             self.handleReceiptRefresh()
         }
+    }
+    
+    @IBAction private func deleteUserAccount(_ sender: Any?) {
+        let sheet = Macros.alert(
+            L10n.Account.Delete.Alert.title,
+            L10n.Account.Delete.Alert.message
+        )
+        sheet.addCancelAction(L10n.Global.no)
+        sheet.addDestructiveActionWithTitle(L10n.Global.yes) {
+            self.dismiss(animated: true) {
+                        
+                log.debug("Account: Logging out and Deleting from Server DB...")
+            }
+        }
+        present(sheet, animated: true, completion: nil)
     }
     
     private func handleReceiptRefresh() {

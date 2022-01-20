@@ -25,8 +25,20 @@ internal enum L10n {
   }
 
   internal enum Account {
+    /// Delete Account
+    internal static let delete = L10n.tr("Localizable", "account.delete")
     /// Something went wrong. Please try logging in again
     internal static let unauthorized = L10n.tr("Localizable", "account.unauthorized")
+    internal enum Delete {
+      internal enum Alert {
+        /// Apple account
+        internal static let linkMessage = L10n.tr("Localizable", "account.delete.alert.linkMessage")
+        /// Deleting your PIA account is permanent and irreversible. You will not be able to retrieve your PIA credentials after performing this action. Please note that this action only deletes your PIA account from our database, but it does NOT delete your subscription. You will need to go to your Apple account and cancel the Private Internet Access subscription from there. Otherwise, you will still be charged, even though your PIA account will no longer be active.
+        internal static let message = L10n.tr("Localizable", "account.delete.alert.message")
+        /// Are you sure?
+        internal static let title = L10n.tr("Localizable", "account.delete.alert.title")
+      }
+    }
     internal enum Email {
       /// Email
       internal static let caption = L10n.tr("Localizable", "account.email.caption")
