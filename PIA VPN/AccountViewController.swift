@@ -43,6 +43,8 @@ class AccountViewController: AutolayoutViewController {
     
     @IBOutlet weak var labelExpiryInformation: UILabel!
         
+    @IBOutlet private weak var imageViewTrash: UIImageView!
+    
     @IBOutlet private weak var labelDeleteAccount: UILabel!
     
     @IBOutlet private weak var viewAccountInfo: UIView!
@@ -72,6 +74,7 @@ class AccountViewController: AutolayoutViewController {
         labelUsername.text = L10n.Account.Username.caption
         labelRestoreTitle.text = L10n.Account.Restore.title
         labelRestoreInfo.text = L10n.Account.Restore.description
+        imageViewTrash.image = Theme.current.trashIconImage()
         labelDeleteAccount.text = L10n.Account.delete
         buttonRestore.setTitle(L10n.Account.Restore.button.uppercased(), for: .normal)
         labelSubscriptions.attributedText = Theme.current.textWithColoredLink(
@@ -135,8 +138,33 @@ class AccountViewController: AutolayoutViewController {
         sheet.addCancelAction(L10n.Global.no)
         sheet.addDestructiveActionWithTitle(L10n.Global.yes) {
             self.dismiss(animated: true) {
-                        
-                log.debug("Account: Logging out and Deleting from Server DB...")
+                
+                var topViewController = UIViewController()
+                if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+                    let rootNavVC = appDelegate.window?.rootViewController as? UINavigationController,
+                    let dashboard = rootNavVC.viewControllers.first as? DashboardViewController {
+                    topViewController = dashboard
+                }
+                
+                if let dashboard = topViewController as? DashboardViewController {
+                    dashboard.showLoadingAnimation()
+                }
+                Client.providers.accountProvider.deleteAccount({ error in
+                    if error == nil {
+                        log.debug("Account: Deleted from Server DB and now Logging out...")
+                        Client.providers.accountProvider.logout({ error in
+                            guard let _ = error else {
+                                AppPreferences.shared.clean()
+                                if let dashboard = topViewController as? DashboardViewController {
+                                    dashboard.hideLoadingAnimation()
+                                }
+                                return
+                            }
+                            log.debug("Account: Error logging out the user")
+                        })
+                    }
+                    log.debug("Account: Logging out and Deleting failed...")
+                })
             }
         }
         present(sheet, animated: true, completion: nil)
@@ -254,6 +282,7 @@ class AccountViewController: AutolayoutViewController {
         for label in [labelExpiryInformation!] {
             Theme.current.applySubtitle(label)
         }
+        labelDeleteAccount.textColor = .piaRed
         Theme.current.applyTitle(labelRestoreTitle, appearance: .dark)
         Theme.current.applySubtitle(labelRestoreInfo)
         buttonRestore.style(style: TextStyle.textStyle9)
