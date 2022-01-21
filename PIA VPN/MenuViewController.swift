@@ -378,9 +378,7 @@ class MenuViewController: AutolayoutViewController {
                         
                 log.debug("Account: Logging out...")
 
-                if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-                    let rootNavVC = appDelegate.window?.rootViewController as? UINavigationController,
-                    let dashboard = rootNavVC.viewControllers.first as? DashboardViewController {
+                if let dashboard = DashboardViewController.instanceInNavigationStack() {
 
                     dashboard.showLoadingAnimation()
                     Client.providers.accountProvider.logout({ error in

@@ -138,14 +138,7 @@ class AccountViewController: AutolayoutViewController {
         sheet.addDestructiveActionWithTitle(L10n.Global.yes) {
             self.dismiss(animated: true) {
                 
-                var topViewController = UIViewController()
-                if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-                    let rootNavVC = appDelegate.window?.rootViewController as? UINavigationController,
-                    let dashboard = rootNavVC.viewControllers.first as? DashboardViewController {
-                    topViewController = dashboard
-                }
-                
-                if let dashboard = topViewController as? DashboardViewController {
+                if let dashboard = DashboardViewController.instanceInNavigationStack() {
                     dashboard.showLoadingAnimation()
                 }
                 Client.providers.accountProvider.deleteAccount({ error in
@@ -154,7 +147,7 @@ class AccountViewController: AutolayoutViewController {
                         Client.providers.accountProvider.logout({ error in
                             guard let _ = error else {
                                 AppPreferences.shared.clean()
-                                if let dashboard = topViewController as? DashboardViewController {
+                                if let dashboard = DashboardViewController.instanceInNavigationStack() {
                                     dashboard.hideLoadingAnimation()
                                 }
                                 return
