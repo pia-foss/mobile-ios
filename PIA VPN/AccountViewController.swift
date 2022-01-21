@@ -75,7 +75,6 @@ class AccountViewController: AutolayoutViewController {
         labelRestoreTitle.text = L10n.Account.Restore.title
         labelRestoreInfo.text = L10n.Account.Restore.description
         imageViewTrash.image = Theme.current.trashIconImage()
-        labelDeleteAccount.text = L10n.Account.delete
         buttonRestore.setTitle(L10n.Account.Restore.button.uppercased(), for: .normal)
         labelSubscriptions.attributedText = Theme.current.textWithColoredLink(
             withMessage: L10n.Account.Subscriptions.message,
@@ -282,7 +281,7 @@ class AccountViewController: AutolayoutViewController {
         for label in [labelExpiryInformation!] {
             Theme.current.applySubtitle(label)
         }
-        labelDeleteAccount.textColor = .piaRed
+        Theme.current.applyUnderline(labelDeleteAccount, with: L10n.Account.delete)
         Theme.current.applyTitle(labelRestoreTitle, appearance: .dark)
         Theme.current.applySubtitle(labelRestoreInfo)
         buttonRestore.style(style: TextStyle.textStyle9)
