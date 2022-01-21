@@ -317,12 +317,11 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             preconditionFailure()
         }
         webServices.deleteAccount { (result, error) in
-            if result == true {
-                callback?(nil)
-            } else {
+            guard let _ = result else {
                 callback?(error)
+                return
             }
-            
+            callback?(nil)
         }
     }
     
