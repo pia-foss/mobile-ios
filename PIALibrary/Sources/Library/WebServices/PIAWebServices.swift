@@ -265,8 +265,9 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         self.accountAPI.deleteAccount(callback: { errors in
             if !errors.isEmpty {
                 callback?(false, ClientError.invalidParameter)
+            } else {
+                callback?(true, nil)
             }
-            callback?(true, nil)
         })
     }
     
