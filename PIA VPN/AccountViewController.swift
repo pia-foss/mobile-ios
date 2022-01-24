@@ -154,8 +154,12 @@ class AccountViewController: AutolayoutViewController {
                             }
                             log.debug("Account: Error logging out the user")
                         })
+                    } else {
+                        let sheet = Macros.alert(nil, L10n.Account.Delete.Alert.failureMessage)
+                        sheet.addCancelAction(L10n.Global.ok)
+                        self.present(sheet, animated: true, completion: nil)
+                        log.debug("Account: Logging out and Deleting failed...")
                     }
-                    log.debug("Account: Logging out and Deleting failed...")
                 })
             }
         }
