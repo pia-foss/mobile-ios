@@ -259,6 +259,8 @@ class AccountViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         
+        self.viewAccountInfo.layer.cornerRadius = 5.0
+        
         styleNavigationBarWithTitle(L10n.Menu.Item.account)
 
         if let viewContainer = viewContainer {

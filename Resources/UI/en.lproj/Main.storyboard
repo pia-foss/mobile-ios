@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="boO-X9-UIe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="boO-X9-UIe">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -462,7 +462,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="596"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PNt-Yg-Bg9">
-                                                        <rect key="frame" x="0.0" y="15" width="320" height="206.33333333333334"/>
+                                                        <rect key="frame" x="15" y="15" width="290" height="206.33333333333334"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbP-zB-wZm">
                                                                 <rect key="frame" x="24.999999999999996" y="24.999999999999996" width="57.666666666666657" height="14.333333333333332"/>
@@ -471,7 +471,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hy4-4b-gfa">
-                                                                <rect key="frame" x="25" y="39.333333333333336" width="253" height="30.000000000000007"/>
+                                                                <rect key="frame" x="25" y="39.333333333333336" width="223" height="30.000000000000007"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="30" id="heY-Tr-mHw"/>
                                                                 </constraints>
@@ -482,19 +482,19 @@
                                                                 </connections>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get the Private Internet " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oH2-mq-Efa">
-                                                                <rect key="frame" x="25" y="89.333333333333329" width="270" height="17"/>
+                                                                <rect key="frame" x="25" y="89.333333333333329" width="240" height="17"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get the Private Internet " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h12-Wf-V6Z">
-                                                                <rect key="frame" x="25" y="126.33333333333334" width="270" height="17"/>
+                                                                <rect key="frame" x="25" y="126.33333333333334" width="240" height="17"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Q0z-yX-NxF">
-                                                                <rect key="frame" x="108.66666666666669" y="163.33333333333334" width="103" height="35"/>
+                                                                <rect key="frame" x="93.666666666666686" y="163.33333333333334" width="103" height="35"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kb7-yi-Is9">
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="35"/>
@@ -512,7 +512,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="urR-k4-bQF">
-                                                                <rect key="frame" x="108.66666666666669" y="163.33333333333334" width="103" height="35"/>
+                                                                <rect key="frame" x="93.666666666666686" y="163.33333333333334" width="103" height="35"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <connections>
                                                                     <action selector="deleteUserAccount:" destination="W4F-zm-KqY" eventType="touchUpInside" id="z6K-fV-G2I"/>
@@ -583,11 +583,11 @@
                                                     </view>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="PNt-Yg-Bg9" secondAttribute="trailing" id="0Em-rz-hIZ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="PNt-Yg-Bg9" secondAttribute="trailing" constant="15" id="0Em-rz-hIZ"/>
                                                     <constraint firstItem="E1e-eL-IsV" firstAttribute="top" secondItem="PNt-Yg-Bg9" secondAttribute="bottom" constant="35.666666666666657" id="6F6-PW-qZW"/>
                                                     <constraint firstItem="PNt-Yg-Bg9" firstAttribute="top" secondItem="y5u-fx-j5D" secondAttribute="top" constant="15" id="MG0-Cl-V1y"/>
                                                     <constraint firstItem="E1e-eL-IsV" firstAttribute="leading" secondItem="y5u-fx-j5D" secondAttribute="leading" constant="8" id="d6Z-D6-qPU"/>
-                                                    <constraint firstItem="PNt-Yg-Bg9" firstAttribute="leading" secondItem="y5u-fx-j5D" secondAttribute="leading" id="dty-Px-oLi"/>
+                                                    <constraint firstItem="PNt-Yg-Bg9" firstAttribute="leading" secondItem="y5u-fx-j5D" secondAttribute="leading" constant="15" id="dty-Px-oLi"/>
                                                     <constraint firstAttribute="trailing" secondItem="E1e-eL-IsV" secondAttribute="trailing" constant="8" id="gQ7-Tv-G8B"/>
                                                 </constraints>
                                             </view>
@@ -2796,7 +2796,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="aeb-89-wap"/>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="1J8-pD-cu8">
-                                <rect key="frame" x="110.33333333333333" y="753" width="154.66666666666669" height="25"/>
+                                <rect key="frame" x="131.33333333333334" y="753" width="112.66666666666666" height="25"/>
                             </pageControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9mt-va-Ael"/>
