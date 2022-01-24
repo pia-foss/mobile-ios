@@ -136,13 +136,13 @@ class AccountViewController: AutolayoutViewController {
         )
         sheet.addCancelAction(L10n.Global.no)
         sheet.addDestructiveActionWithTitle(L10n.Global.yes) {
-            DashboardViewController.instanceInNavigationStack()?.showLoadingAnimation()
             self.showLoadingAnimation()
             log.debug("Account: Deleting...")
             
             Client.providers.accountProvider.deleteAccount({ error in
                 if error == nil {
                     self.hideLoadingAnimation()
+                    DashboardViewController.instanceInNavigationStack()?.showLoadingAnimation()
                     self.dismiss(animated: true) {
                         log.debug("Account: Deleted successfully, now Logging out...")
                         AccountViewController.logout { success in
@@ -153,7 +153,6 @@ class AccountViewController: AutolayoutViewController {
                         }
                     }
                 } else {
-                    DashboardViewController.instanceInNavigationStack()?.hideLoadingAnimation()
                     self.hideLoadingAnimation()
                     let sheet = Macros.alert(nil, L10n.Account.Delete.Alert.failureMessage)
                     sheet.addCancelAction(L10n.Global.ok)
