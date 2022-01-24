@@ -136,32 +136,32 @@ class AccountViewController: AutolayoutViewController {
         )
         sheet.addCancelAction(L10n.Global.no)
         sheet.addDestructiveActionWithTitle(L10n.Global.yes) {
-            self.dismiss(animated: true) {
-                
-                if let dashboard = DashboardViewController.instanceInNavigationStack() {
-                    dashboard.showLoadingAnimation()
-                }
-                Client.providers.accountProvider.deleteAccount({ error in
-                    if error == nil {
-                        log.debug("Account: Deleted from Server DB and now Logging out...")
-                        Client.providers.accountProvider.logout({ error in
-                            guard let _ = error else {
-                                AppPreferences.shared.clean()
-                                if let dashboard = DashboardViewController.instanceInNavigationStack() {
-                                    dashboard.hideLoadingAnimation()
-                                }
-                                return
+            DashboardViewController.instanceInNavigationStack()?.showLoadingAnimation()
+            self.showLoadingAnimation()
+            log.debug("Account: Deleting...")
+            
+            Client.providers.accountProvider.deleteAccount({ error in
+                if error == nil {
+                    self.hideLoadingAnimation()
+                    self.dismiss(animated: true) {
+                        log.debug("Account: Deleted successfully, now Logging out...")
+                        AccountViewController.logout { success in
+                            DashboardViewController.instanceInNavigationStack()?.hideLoadingAnimation()
+                            if success == false {
+                                log.debug("Account: Error logging out the user")
                             }
-                            log.debug("Account: Error logging out the user")
-                        })
-                    } else {
-                        let sheet = Macros.alert(nil, L10n.Account.Delete.Alert.failureMessage)
-                        sheet.addCancelAction(L10n.Global.ok)
-                        self.present(sheet, animated: true, completion: nil)
-                        log.debug("Account: Logging out and Deleting failed...")
+                        }
                     }
-                })
-            }
+                } else {
+                    DashboardViewController.instanceInNavigationStack()?.hideLoadingAnimation()
+                    self.hideLoadingAnimation()
+                    let sheet = Macros.alert(nil, L10n.Account.Delete.Alert.failureMessage)
+                    sheet.addCancelAction(L10n.Global.ok)
+                    self.present(sheet, animated: true, completion: nil)
+                    log.debug("Account: Deleting failed...")
+                }
+            })
+            
         }
         present(sheet, animated: true, completion: nil)
     }
@@ -299,3 +299,16 @@ class AccountViewController: AutolayoutViewController {
     }
 }
 
+extension AccountViewController {
+    
+    class func logout(_ completion: ((Bool?) -> ())? = nil) {
+        Client.providers.accountProvider.logout({ error in
+            guard let _ = error else {
+                AppPreferences.shared.clean()
+                completion?(false)
+                return
+            }
+            completion?(true)
+        })
+    }
+}
