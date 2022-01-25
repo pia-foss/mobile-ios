@@ -38,12 +38,21 @@ public protocol AccountProvider: class {
     
     /// The user account currently logged in, or `nil` if logged out.
     var currentUser: UserAccount? { get set }
+    
+    /// The old auth token
+    var oldToken: String? { get }
 
     /// The token to use for api authentication.
     var apiToken: String? { get }
 
     /// The token to use for protocol authentication.
     var vpnToken: String? { get }
+    
+    /// The username extracted from the vpn token
+    var vpnTokenUsername: String? { get }
+    
+    /// The password extracted from the vpn token
+    var vpnTokenPassword: String? { get }
 
     /// The public username to be displayed in the views.
     var publicUsername: String? { get }

@@ -1,54 +1,166 @@
+/* (No Comment) */
 "failure.message" = "We kunnen op dit moment geen account maken. Probeer het later opnieuw. \n\nAls u de app opnieuw opent, wordt opnieuw geprobeerd een account te maken.";
+
+/* (No Comment) */
 "failure.purchase.sandbox.message" = "Het geselecteerde sandbox-abonnement is niet beschikbaar in productie.";
+
+/* (No Comment) */
 "failure.redeem.claimed.message" = "Deze kaart is door een ander account geclaimd. Probeer een andere pincode.";
+
+/* (No Comment) */
 "failure.redeem.claimed.title" = "Kaart al geclaimd";
+
+/* (No Comment) */
 "failure.redeem.invalid.message" = "U heeft een ongeldige pincode ingevoerd. Probeer het opnieuw.";
+
+/* (No Comment) */
 "failure.redeem.invalid.title" = "Ongeldige pincode";
+
+/* (No Comment) */
 "failure.submit" = "GA TERUG";
+
+/* (No Comment) */
 "failure.title" = "Account aanmaken mislukt";
+
+/* (No Comment) */
 "failure.vc_title" = "Aanmelden mislukt";
+
+/* (No Comment) */
 "in_progress.message" = "We zijn uw aankoop aan het verifiëren in ons systeem. Dit kan eventjes duren, daarom vragen we u vriendelijk om geduld.";
+
+/* (No Comment) */
 "in_progress.redeem.message" = "We zijn uw pincode aan het verifiëren in ons systeem. Dit kan eventjes duren, daarom vragen we u vriendelijk om geduld.";
+
+/* Signup.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved. */
 "in_progress.title" = "Aanmelding bevestigen";
+
+/* (No Comment) */
 "purchase.subscribe.now" = "Nu abonneren";
+
+/* (No Comment) */
 "purchase.trials.1year.protection" = "1 jaar aan privacy- en identiteitsbescherming";
+
+/* (No Comment) */
 "purchase.trials.all.plans" = "Bekijk de beschikbare abonnementen";
+
+/* (No Comment) */
 "purchase.trials.anonymous" = "Browse anoniem en verberg uw ip.";
+
+/* (No Comment) */
 "purchase.trials.devices" = "Ondersteun tien apparaten tegelijk";
+
+/* (No Comment) */
 "purchase.trials.devices.description" = "Bescherm uzelf op tien apparaten tegelijk.";
+
+/* (No Comment) */
 "purchase.trials.intro" = "Start je gratis proefabonnement van 7 dagen";
+
+/* (No Comment) */
 "purchase.trials.money.back" = "30 dagen lang niet-goed-geld-teruggarantie";
+
+/* (No Comment) */
 "purchase.trials.price.after" = "Daarna %@";
+
+/* (No Comment) */
 "purchase.trials.region" = "Maak eenvoudig verbinding met elke regio";
+
+/* (No Comment) */
 "purchase.trials.servers" = "Meer dan 3300 servers in 32 landen";
+
+/* (No Comment) */
 "purchase.trials.start" = "Abonnement starten";
+
+/* (No Comment) */
 "purchase.uncredited.alert.button.cancel" = "Annuleren";
+
+/* (No Comment) */
 "purchase.uncredited.alert.button.recover" = "Account herstellen";
+
+/* (No Comment) */
 "purchase.uncredited.alert.message" = "U heeft niet-gecrediteerde transacties. Wilt u uw accountgegevens herstellen?";
+
+/* (No Comment) */
 "share.data.buttons.accept" = "Accepteren";
+
+/* (No Comment) */
 "share.data.buttons.noThanks" = "Nee, bedankt";
+
+/* (No Comment) */
 "share.data.buttons.readMore" = "Meer informatie";
+
+/* (No Comment) */
 "share.data.readMore.text.description" = "Deze minimuminformatie helpt ons bij het identificeren en oplossen van potentiële verbindingsproblemen. Let op: voor het delen van deze informatie is toestemming vereist en de handmatige activatie is standaard uitgeschakeld.\n\nWe verzamelen gegevens over de volgende zaken:\n\n- Verbindingspoging\n- Verbinding geannuleerd\n- Verbinding gemaakt\n\nVoor al deze zaken verzamelen we de volgende informatie:\n- Platform\n- App-versie\n- App-type (pre-release of niet)\n- Gebruikt protocol\n- Verbindingsbron (handmatig of automatisch)\n\nAlle zaken krijgen een unieke ID die willekeurig wordt aangemaakt. Deze ID is niet gekoppeld aan uw gebruikersaccount. Dit unieke ID wordt vanwege de privacy dagelijks opnieuw aangemaakt.\n\nU houdt altijd de touwtjes in handen. Via Instellingen kunt u altijd zien welke gegevens we hebben verzameld en u kunt de verzameling te allen tijde uitschakelen.";
+
+/* (No Comment) */
 "share.data.text.description" = "Om ons te helpen de verbindingsprestaties van onze dienst te verbeteren, kunt u uw verbindingsstatistieken anoniem met ons delen. Deze rapporten bevatten geen persoonsgegevens.";
+
+/* (No Comment) */
 "share.data.text.footer" = "U kunt dit via de Instellingen beheren";
+
+/* (No Comment) */
 "share.data.text.title" = "Help ons onze service te verbeteren";
+
+/* (No Comment) */
 "success.message_format" = "Bedankt voor uw aanmelding. We hebben de gebruikersnaam en het wachtwoord voor uw account naar het volgende e-mailadres gestuurd: %@";
+
+/* (No Comment) */
 "success.password.caption" = "Wachtwoord";
+
+/* (No Comment) */
 "success.redeem.message" = "U ontvangt zo een e-mail met uw gebruikersnaam en wachtwoord.";
+
+/* (No Comment) */
 "success.redeem.title" = "Kaart ingewisseld";
+
+/* (No Comment) */
 "success.submit" = "Aan de slag";
+
+/* (No Comment) */
 "success.title" = "Aankoop voltooid";
+
+/* (No Comment) */
 "success.username.caption" = "Gebruikersnaam";
+
+/* (No Comment) */
 "unreachable.message" = "Geen internetverbinding gevonden. Controleer uw internetverbinding en probeer het hieronder opnieuw.\n\nU kunt later naar de app terugkeren om het proces te voltooien.";
+
+/* (No Comment) */
 "unreachable.submit" = "OPNIEUW PROBEREN";
+
+/* (No Comment) */
 "unreachable.title" = "Oeps!";
+
+/* (No Comment) */
 "unreachable.vc_title" = "Fout";
+
+/* (No Comment) */
 "walkthrough.action.done" = "KLAAR";
+
+/* WALKTHROUGH */
 "walkthrough.action.next" = "VOLGENDE";
+
+/* (No Comment) */
 "walkthrough.action.skip" = "OVERSLAAN";
+
+/* (No Comment) */
 "walkthrough.page.1.description" = "Bescherm uzelf op tien apparaten tegelijk.";
+
+/* (No Comment) */
 "walkthrough.page.1.title" = "Ondersteun tien apparaten tegelijk";
+
+/* (No Comment) */
 "walkthrough.page.2.description" = "Met servers over de hele wereld wordt u altijd beschermd.";
+
+/* (No Comment) */
 "walkthrough.page.2.title" = "Maak eenvoudig verbinding met elke regio";
+
+/* (No Comment) */
 "walkthrough.page.3.description" = "Als u onze Content Blocker inschakelt, krijgt u geen advertenties meer te zien in Safari.";
+
+/* (No Comment) */
 "walkthrough.page.3.title" = "Bescherm uzelf tegen advertenties";
+

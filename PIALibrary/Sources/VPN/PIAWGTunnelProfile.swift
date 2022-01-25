@@ -251,7 +251,7 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
             cfg.username = Client.providers.accountProvider.publicUsername
             cfg.disconnectOnSleep = configuration.disconnectsOnSleep
 
-            let token = configuration.server.dipUsername != nil ? configuration.server.dipUsername : Client.providers.accountProvider.vpnToken
+            let token = configuration.server.dipUsername != nil ? configuration.server.dipUsername : (Client.providers.accountProvider.vpnToken ?? Client.providers.accountProvider.oldToken)
             guard let token = token else {
                 fatalError("Invalid Wireguard Token")
             }

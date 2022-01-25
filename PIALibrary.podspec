@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name              = "PIALibrary"
-    s.version           = "2.12.5"
+    s.version           = "2.13.0"
     s.summary           = "PIA client library in Swift."
 
     s.homepage          = "https://www.privateinternetaccess.com/"
