@@ -25,7 +25,6 @@ import Foundation
 /// Simulates account-related operations
 public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     
-    
     /// Mocks the outcome of a sign-up operation.
     ///
     /// - Seealso: `AccountProvider.signup(...)`
@@ -161,12 +160,32 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
         return delegate.isLoggedIn
     }
     
-    public var token: String? {
+    public var oldToken: String? {
         return "TOKEN"
+    }
+    
+    public var vpnToken: String? {
+        return "TOKEN"
+    }
+
+    public var apiToken: String? {
+        return "TOKEN"
+    }
+    
+    public var vpnTokenUsername: String? {
+        return "USERNAME"
+    }
+    
+    public var vpnTokenPassword: String? {
+        return "PASSWORD"
     }
     
     public var publicUsername: String? {
         return "p0000000"
+    }
+
+    public var currentPasswordReference: Data? {
+        return nil
     }
 
     /// :nodoc:
@@ -178,11 +197,6 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
             delegate.currentUser = newValue
         }
     }
-    
-    /// :nodoc:
-    public var currentPasswordReference: Data? {
-        return delegate.currentPasswordReference
-    }
         
     #if os(iOS)
     /// :nodoc:
@@ -190,8 +204,16 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
         return delegate.lastSignupRequest
     }
     #endif
-    
+
     /// :nodoc:
+    public func migrateOldTokenIfNeeded(_ callback: SuccessLibraryCallback?) {
+        guard !mockIsUnauthorized else {
+            callback?(ClientError.unauthorized)
+            return
+        }
+        delegate.migrateOldTokenIfNeeded(callback)
+    }
+
     public func login(with request: LoginRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard !mockIsUnauthorized else {
             callback?(nil, ClientError.unauthorized)

@@ -1,67 +1,205 @@
+/* (No Comment) */
 "agreement.message" = "Después de los 7 días de prueba gratuita, esta suscripción se renueva automáticamente por %@ a menos que se cancele al menos 24 horas antes del final del período de prueba. Se cobrará la renovación en tu cuenta de ID de Apple en un plazo de 24 horas antes de que finalice el periodo de prueba. Puedes gestionar y cancelar tus suscripciones accediendo a los ajustes de tu cuenta de App Store después de la compra. La oferta de prueba de 7 días se limita a una oferta de prueba de 7 días por usuario. Cualquier parte no utilizada de un período de prueba gratuito, si se ofrece, se perderá cuando el usuario compre una suscripción. Todos los precios incluyen los impuestos de venta locales aplicables.\n\nSi te registras, aceptas los $1 y la $2.";
+
+/* (No Comment) */
 "agreement.message.privacy" = "Política de privacidad";
+
+/* (No Comment) */
 "agreement.message.tos" = "Términos de servicio";
+
+/* (No Comment) */
 "agreement.trials.message" = "Se realizará un cobro en tu cuenta de Apple ID en el momento de confirmar la compra. Las suscripciones se renuevan automáticamente a menos que se cancelen como mínimo 24 horas antes de la finalización del periodo actual. Se cobrará la cantidad de la renovación en un plazo de 24 horas antes de la finalización del período actual. Tu mismo podrás gestionar y cancelar las suscripciones en los ajustes de App Store después de la compra. \n\nAlgunas suscripciones de pago pueden ofrecer una prueba gratuita antes de realizar cobros según tu método de pago. Si decides darte de baja de una suscripción de pago antes de que comencemos a cobrar tu método de pago, cancela la suscripción al menos 24 horas antes de que finalice la prueba gratuita.\n\nLas pruebas gratuitas solo están disponibles para nuevos usuarios y quedan a nuestra entera discreción. Si intentas registrarte para obtener una prueba gratuita adicional, se te cobrará de inmediato la tarifa de suscripción estándar.\n\nNos reservamos el derecho de revocar tu prueba gratuita en cualquier momento.\n\nLas secciones sin usar del periodo de prueba gratuito se perderán si el usuario compra una suscripción.\n\nSi te registras, aceptas estos términos y condiciones.";
+
+/* (No Comment) */
 "agreement.trials.monthly.plan" = "mes";
+
+/* (No Comment) */
 "agreement.trials.title" = "Términos y condiciones de la prueba gratuita.";
+
+/* (No Comment) */
 "agreement.trials.yearly.plan" = "año";
-"camera.access.error.message" = "Su dispositivo no es compatible con el escaneo de códigos QR. Use un dispositivo con cámara.";
-"camera.access.error.title" = "La cámara no está disponible";
+
+/* (No Comment) */
 "gdpr.accept.button.title" = "Aceptar y continuar";
+
+/* (No Comment) */
 "gdpr.collect.data.description" = "Dirección de correo electrónico con fines de gestión de cuenta y protección frente a abusos.";
+
+/* (No Comment) */
 "gdpr.collect.data.title" = "Información personal que recopilamos";
+
+/* (No Comment) */
 "gdpr.usage.data.description" = "La dirección de correo electrónico solo se usa para enviar información de suscripción, confirmaciones de pago, correspondencia al cliente y ofertas promocionales de Private Internet Access.";
+
+/* (No Comment) */
 "gdpr.usage.data.title" = "Usos de la información personal que recopilamos";
+
+/* (No Comment) */
 "getstarted.buttons.buyaccount" = "Comprar cuenta";
+
+/* (No Comment) */
 "iap.error.message.unavailable" = "Actualmente, los servidores de Apple no están disponibles. Por favor, inténtalo de nuevo más tarde.";
+
+/* (No Comment) */
 "iap.error.title" = "Error";
+
+/* (No Comment) */
 "login.error.throttled" = "Demasiados intentos fallidos de inicio de sesión con este nombre de usuario. Por favor, inténtelo de nuevo más tarde.";
+
+/* (No Comment) */
 "login.error.title" = "Iniciar sesión";
+
+/* (No Comment) */
 "login.error.unauthorized" = "Tu nombre de usuario o contraseña son incorrectos.";
+
+/* (No Comment) */
 "login.error.validation" = "Debe ingresar un nombre de usuario y una contraseña.";
+
+/* (No Comment) */
 "login.magic.link.invalid.email" = "Correo electrónico no válido. Vuelve a intentarlo.";
+
+/* (No Comment) */
 "login.magic.link.response" = "Busca en tu correo electrónico un enlace de inicio de sesión.";
+
+/* (No Comment) */
 "login.magic.link.send" = "Enviar enlace";
+
+/* (No Comment) */
 "login.magic.link.title" = "Inicia sesión con el vínculo mágico del correo electrónico.";
+
+/* (No Comment) */
 "login.password.placeholder" = "Contraseña ";
+
+/* (No Comment) */
 "login.receipt.button" = "Inicia sesión con el recibo de compra";
+
+/* (No Comment) */
 "login.restore.button" = "¿No has recibido los detalles de la cuenta?";
+
+/* (No Comment) */
 "login.submit" = "INICIAR SESIÓN";
+
+/* Welcome.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved. */
 "login.title" = "Inicia sesión en tu cuenta";
+
+/* (No Comment) */
 "login.username.placeholder" = "Nombre de usuario (p1234567)";
+
+/* (No Comment) */
 "plan.accessibility.per_month" = "por mes";
+
+/* (No Comment) */
 "plan.best_value" = "Mejor oferta";
+
+/* (No Comment) */
 "plan.monthly.title" = "Mensual";
+
+/* (No Comment) */
 "plan.price_format" = "%@/m";
+
+/* (No Comment) */
 "plan.yearly.detail_format" = "%@%@ al año";
+
+/* (No Comment) */
 "plan.yearly.title" = "Anual";
+
+/* (No Comment) */
 "purchase.confirm.form.email" = "Introduce tu dirección de correo electrónico";
+
+/* (No Comment) */
 "purchase.confirm.plan" = "Estás comprando el plan %@.";
+
+/* (No Comment) */
 "purchase.continue" = "Continuar";
+
+/* (No Comment) */
 "purchase.email.placeholder" = "Dirección de correo electrónico";
+
+/* (No Comment) */
 "purchase.email.why" = "Necesitamos tu dirección de correo electrónico para enviar tu nombre de usuario y tu contraseña.";
+
+/* (No Comment) */
 "purchase.error.connectivity.description" = "No pudimos localizar a Private Internet Access. Esto puede ser debido a una mala conexión con Internet o a que nuestro servicio está bloqueado en su país.";
+
+/* (No Comment) */
 "purchase.error.connectivity.title" = "Falla en la conexión";
+
+/* (No Comment) */
 "purchase.error.title" = "Comprar";
+
+/* (No Comment) */
 "purchase.error.validation" = "Debes ingresar una dirección de email.";
+
+/* (No Comment) */
 "purchase.login.button" = "Inicia sesión";
+
+/* (No Comment) */
 "purchase.login.footer" = "¿Ya tienes una cuenta?";
+
+/* (No Comment) */
 "purchase.or" = "o";
+
+/* (No Comment) */
 "purchase.submit" = "Enviar";
+
+/* (No Comment) */
 "purchase.subtitle" = "Garantía de devolución de 30 días";
+
+/* (No Comment) */
 "purchase.title" = "Selecciona un plan VPN";
+
+/* (No Comment) */
 "redeem.accessibility.back" = "Volver";
+
+/* (No Comment) */
 "redeem.email.placeholder" = "Dirección de correo electrónico";
+
+/* (No Comment) */
 "redeem.error.allfields" = "Escribe tu dirección de correo electrónico y el PIN de tu tarjeta.";
+
+/* (No Comment) */
 "redeem.error.code" = "El código debe tener %lu dígitos numéricos.";
-"redeem.error.qrcode.invalid" = "La secuencia del código QR no es válida. Inténtelo de nuevo.";
+
+/* (No Comment) */
 "redeem.error.title" = "Canjear";
+
+/* (No Comment) */
 "redeem.giftcard.placeholder" = "PIN de tarjeta regalo";
+
+/* (No Comment) */
 "redeem.submit" = "ENVIAR";
+
+/* (No Comment) */
 "redeem.subtitle" = "Escribe abajo tu dirección de correo electrónico y el PIN de %lu dígitos de tu tarjeta de regalo o tarjeta de prueba.";
+
+/* (No Comment) */
 "redeem.title" = "Canjear tarjeta de regalo";
+
+/* (No Comment) */
 "restore.email.placeholder" = "Correo electrónico";
+
+/* (No Comment) */
 "restore.submit" = "CONFIRMAR";
+
+/* (No Comment) */
 "restore.subtitle" = "Si compraste un plan a través de esta aplicación y no recibes tus credenciales, puedes reiniciar la renovación desde aquí. No se realizarán cargos durante este proceso. \n";
+
+/* (No Comment) */
 "restore.title" = "Restablecer compra no acreditada";
+
+/* (No Comment) */
 "update.account.email.error" = "Error al modificar el correo electrónico de la cuenta";
+
+/* (No Comment) */
+"upgrade.header" = "¡Hola otra vez!";
+
+/* (No Comment) */
+"upgrade.renew.now" = "Renovar ahora";
+
+/* (No Comment) */
+"upgrade.title" = "Para usar Private Internet Access debes renovar tu suscripción.";
+

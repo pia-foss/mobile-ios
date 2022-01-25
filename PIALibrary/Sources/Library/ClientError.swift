@@ -34,6 +34,9 @@ public enum ClientError: String, Error {
     /// The service has been throttled for exceeded rate limits.
     case throttled
     
+    /// The service has been expired.
+    case expired
+    
     /// The operation is not supported.
     case unsupported
     

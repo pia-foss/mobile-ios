@@ -306,23 +306,6 @@ extension Keychain {
     // MARK: Token
     
     /// :nodoc:
-    public func set(token: String, for username: String) throws {
-        removeToken(for: username)
-        
-        var query = [String: Any]()
-        setScope(query: &query)
-        query[kSecClass as String] = kSecClassGenericPassword
-        query[kSecAttrAccount as String] = username
-        query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
-        query[kSecValueData as String] = token.data(using: .utf8)
-        
-        let status = SecItemAdd(query as CFDictionary, nil)
-        guard (status == errSecSuccess) else {
-            throw KeychainError.add
-        }
-    }
-    
-    /// :nodoc:
     @discardableResult public func removeToken(for username: String) -> Bool {
         var query = [String: Any]()
         setScope(query: &query)
@@ -355,26 +338,6 @@ extension Keychain {
             throw KeychainError.notFound
         }
         return token
-    }
-    
-    /// :nodoc:
-    public func tokenReference(for username: String) throws -> Data {
-        var query = [String: Any]()
-        query[kSecClass as String] = kSecClassGenericPassword
-        setScope(query: &query)
-        query[kSecAttrAccount as String] = username
-        query[kSecMatchLimit as String] = kSecMatchLimitOne
-        query[kSecReturnPersistentRef as String] = true
-        
-        var result: AnyObject?
-        let status = SecItemCopyMatching(query as CFDictionary, &result)
-        guard (status == errSecSuccess) else {
-            throw KeychainError.notFound
-        }
-        guard let data = result as? Data else {
-            throw KeychainError.notFound
-        }
-        return data
     }
     
     /// :nodoc:

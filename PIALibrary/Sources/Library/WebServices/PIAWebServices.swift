@@ -44,20 +44,24 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     init() {
         let rsa4096Certificate = Client.configuration.rsa4096Certificate
         self.regionsAPI = RegionsBuilder()
-            .setClientStateProvider(clientStateProvider: PIARegionClientStateProvider())
+            .setEndpointProvider(endpointsProvider: PIARegionClientStateProvider())
+            .setCertificate(certificate: rsa4096Certificate)
+            .setUserAgent(userAgent: PIAWebServices.userAgent)
             .build()
         
         if Client.environment == .staging {
             self.accountAPI = AccountBuilder<IOSAccountAPI>()
                 .setPlatform(platform: .ios)
-                .setClientStateProvider(clientStateProvider: PIAAccountStagingClientStateProvider())
+                .setEndpointProvider(endpointsProvider: PIAAccountStagingClientStateProvider())
                 .setUserAgentValue(userAgentValue: PIAWebServices.userAgent)
+                .setCertificate(certificate: rsa4096Certificate)
                 .build() as? IOSAccountAPI
         } else {
             self.accountAPI = AccountBuilder<IOSAccountAPI>()
                 .setPlatform(platform: .ios)
-                .setClientStateProvider(clientStateProvider: PIAAccountClientStateProvider())
+                .setEndpointProvider(endpointsProvider: PIAAccountClientStateProvider())
                 .setUserAgentValue(userAgentValue: PIAWebServices.userAgent)
+                .setCertificate(certificate: rsa4096Certificate)
                 .build() as? IOSAccountAPI
         }
         
@@ -100,233 +104,233 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                         return "Unknown"
                     #endif
                 }()
-
                 return "\(osName) \(versionString)"
             }()
-
             return "\(executable)/\(appVersion) (\(bundle); build:\(appBuild); \(osNameVersion))"
         }
-
         return "PIA"
     }()
 
     /***
-     Generates a new auth token for the specific user
+     The token to use for protocol authentication.
      */
-    func token(credentials: Credentials, _ callback: ((String?, Error?) -> Void)?) {
-        
-        self.accountAPI.loginWithCredentials(username: credentials.username,
-                                             password: credentials.password) { (response, error) in
+    var vpnToken: String? {
+        return self.accountAPI.vpnToken()
+    }
 
-                                                if let error = error {
-                                                    callback?(nil, ClientError.unauthorized)
-                                                    return
-                                                }
-                                                
-                                                guard let loginResponse = response else {
-                                                    callback?(nil, ClientError.malformedResponseData)
-                                                    return
-                                                }
-                                                
-                                                callback?(loginResponse.token, nil)
-                                                
+    /***
+     The token to use for api authentication.
+     */
+    var apiToken: String? {
+        return self.accountAPI.apiToken()
+    }
+
+    /***
+     Generates a new auth expiring token based on a previous non-expiry one.
+     */
+    func migrateToken(token: String, _ callback: ((Error?) -> Void)?) {
+        self.accountAPI.migrateApiToken(apiToken: token) { (errors) in
+            if !errors.isEmpty {
+                callback?(ClientError.unauthorized)
+                return
+            }
+
+            callback?(nil)
         }
-        
     }
 
     /***
      Generates a new auth token for the specific user
      */
-    func token(receipt: Data, _ callback: ((String?, Error?) -> Void)?) {
-        
-        self.accountAPI.loginWithReceipt(receiptBase64: receipt.base64EncodedString()) { (response, error) in
-            
-            if let error = error {
-                callback?(nil, error.code == 400 ? ClientError.badReceipt : ClientError.unauthorized)
-                return
-            }
-
-            guard let token = response else {
-                callback?(nil, ClientError.malformedResponseData)
-                return
-            }
-            
-            callback?(token, nil)
-            
+    func token(credentials: Credentials, _ callback: ((Error?) -> Void)?) {
+        self.accountAPI.loginWithCredentials(username: credentials.username,
+                                             password: credentials.password) { [weak self] (errors) in
+            self?.handleLoginResponse(errors: errors, callback: callback, mapError: self?.mapLoginError)
         }
-        
     }
 
-    func info(token: String, _ callback: ((AccountInfo?, Error?) -> Void)?) {
-        
-        if let token = Client.providers.accountProvider.token {
-            
-            self.accountAPI.accountDetails(token: token) { (response, error) in
-                
-                if let error = error {
-                    callback?(nil, error.code == 401 ? ClientError.unauthorized : ClientError.invalidParameter)
-                    return
-                }
-                
-                if let response = response {
-                    let account = AccountInfo(accountInformation: response)
-                    callback?(account, nil)
-                } else {
-                    callback?(nil, ClientError.malformedResponseData)
-                }
-                
+    /***
+     Generates a new auth token for the specific user
+     */
+    func token(receipt: Data, _ callback: ((Error?) -> Void)?) {
+        self.accountAPI.loginWithReceipt(receiptBase64: receipt.base64EncodedString()) { [weak self] (errors) in
+            self?.handleLoginResponse(errors: errors, callback: callback, mapError: self?.mapLoginFromReceiptError)
+        }
+    }
+
+    private func handleLoginResponse(errors: [AccountRequestError],  callback: ((Error?) -> Void)?, mapError: ((AccountRequestError) -> (ClientError))? = nil) {
+        if !errors.isEmpty {
+            callback?(mapError?(errors.last!))
+            return
+        }
+
+        callback?(nil)
+    }
+
+    private func mapLoginError(_ error: AccountRequestError) -> ClientError {
+            return .unauthorized
+    }
+
+
+    private func mapLoginFromReceiptError(_ error:AccountRequestError) -> ClientError {
+        switch error.code {
+        case 400:
+            return .badReceipt
+        default:
+            return mapLoginError(error)
+        }
+    }
+
+    private func mapLoginLinkError(_ error:AccountRequestError) -> ClientError {
+        switch error.code {
+        case 401,402:
+            return mapLoginError(error)
+        default:
+            return .invalidParameter
+        }
+    }
+
+    private func mapAccountDetailsError(_ error:AccountRequestError) -> ClientError {
+        return mapLoginLinkError(error)
+    }
+
+    func info(_ callback: ((AccountInfo?, Error?) -> Void)?) {
+        self.accountAPI.accountDetails() { [weak self] (response, errors) in
+            if !errors.isEmpty {
+                callback?(nil, self?.mapAccountDetailsError(errors.last!))
+                return
             }
 
-        } else {
-            callback?(nil, ClientError.unauthorized)
+            if let response = response {
+                let account = AccountInfo(accountInformation: response)
+                callback?(account, nil)
+            } else {
+                callback?(nil, ClientError.malformedResponseData)
+            }
         }
-        
     }
     
     func update(credentials: Credentials, resetPassword reset: Bool, email: String, _ callback: SuccessLibraryCallback?) {
-        
         if reset {
-            //Reset password, we use the token
-            if let token = Client.providers.accountProvider.token {
-                self.accountAPI.setEmail(token: token, email: email, resetPassword: reset) { (newPassword, error) in
-                    if let error = error {
-                        callback?(error.code == 401 ? ClientError.unauthorized : ClientError.unsupported)
-                        return
-                    }
-                    if let newPassword = newPassword {
-                        Client.configuration.tempAccountPassword = newPassword
-                    }
-                    callback?(nil)
+            //Reset password, we use the token within accounts
+            self.accountAPI.setEmail(email: email, resetPassword: reset) { [weak self] (newPassword, errors) in
+                if !errors.isEmpty {
+                    callback?(self?.mapLoginError(errors.last!))
+                    return
                 }
-            } else {
-                callback?(ClientError.unauthorized)
+                if let newPassword = newPassword {
+                    Client.configuration.tempAccountPassword = newPassword
+                }
+                callback?(nil)
             }
         } else {
             //We use the email and the password returned by the signup endpoint in the previous step, we don't update the password
-            self.accountAPI.setEmail(username: credentials.username, password: credentials.password, email: email, resetPassword: reset) { (newPassword, error) in
-                if let error = error {
+            self.accountAPI.setEmail(username: credentials.username, password: credentials.password, email: email, resetPassword: reset) { (newPassword, errors) in
+                if !errors.isEmpty {
                     callback?(ClientError.unsupported)
                     return
                 }
                 callback?(nil)
             }
         }
-        
     }
     
     func loginLink(email: String, _ callback: SuccessLibraryCallback?) {
         
-        self.accountAPI.loginLink(email: email) { (error) in
-            if let error = error {
-                callback?(ClientError.invalidParameter)
+        self.accountAPI.loginLink(email: email) { [weak self] (errors) in
+            if !errors.isEmpty {
+                callback?(self?.mapLoginLinkError(errors.last!))
+                return
+            }
+
+            callback?(nil)
+        }
+    }
+    
+    func logout(_ callback: LibraryCallback<Bool>?) {
+        self.accountAPI.logout() { (errors) in
+            if !errors.isEmpty {
+                if errors.last?.code == 401 {
+                    callback?(true, nil)
+                    return
+                }
+                callback?(false, ClientError.invalidParameter)
+                return
+            }
+            callback?(true, nil)
+        }
+    }
+    
+    func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
+        self.accountAPI.renewDedicatedIP(ipToken: dipToken) { (errors) in
+            if !errors.isEmpty {
+                callback?(errors.last?.code == 401 ? ClientError.unauthorized : ClientError.dipTokenRenewalError)
                 return
             }
             callback?(nil)
         }
-        
-    }
-    
-    func logout(_ callback: LibraryCallback<Bool>?) {
-        
-        if let token = Client.providers.accountProvider.token {
-            self.accountAPI.logout(token: token) { (accountError) in
-                if let error = accountError {
-                    if error.code == 401 {
-                        callback?(true, nil)
-                        return
-                    }
-                    callback?(false, ClientError.invalidParameter)
-                    return
-                }
-                callback?(true, nil)
-            }
-        } else {
-            callback?(false, ClientError.unauthorized)
-        }
-
-    }
-    
-    func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
-
-        if let token = Client.providers.accountProvider.token {
-            self.accountAPI.renewDedicatedIP(authToken: token, ipToken: dipToken) { (error) in
-                if let error = error {
-                    callback?(error.code == 401 ? ClientError.unauthorized : ClientError.dipTokenRenewalError)
-                    return
-                }
-                callback?(nil)
-            }
-        }
-        
     }
     
     func activateDIPToken(tokens: [String], _ callback: LibraryCallback<[Server]>?) {
-        
-        if let token = Client.providers.accountProvider.token {
-            self.accountAPI.dedicatedIPs(authToken: token, ipTokens: tokens) { (dedicatedIps, error) in
-                if let error = error as? AccountRequestError {
-                    callback?([], error.code == 401 ? ClientError.unauthorized : ClientError.invalidParameter)
-                    return
-                }
-                
-                var dipRegions = [Server]()
-                for dipServer in dedicatedIps {
+        self.accountAPI.dedicatedIPs(ipTokens: tokens) { (dedicatedIps, errors) in
+            if !errors.isEmpty {
+                callback?([], errors.last?.code == 401 ? ClientError.unauthorized : ClientError.invalidParameter)
+                return
+            }
 
-                    let status = DedicatedIPStatus(fromAPIStatus: dipServer.status)
+            var dipRegions = [Server]()
+            for dipServer in dedicatedIps {
 
-                    switch status {
-                    case .active:
-                        
-                        guard let firstServer = Client.providers.serverProvider.currentServers.first(where: {$0.regionIdentifier == dipServer.id}) else {
-                            callback?([], ClientError.malformedResponseData)
-                            return
-                        }
-                        
-                        guard let ip = dipServer.ip, let cn = dipServer.cn, let expirationTime = dipServer.dip_expire else {
-                            callback?([], ClientError.malformedResponseData)
-                            return
-                        }
-                        
-                        let dipToken = dipServer.dipToken
-                        
-                        let expiringDate = Date(timeIntervalSince1970: TimeInterval(expirationTime))
-                        let server = Server.ServerAddressIP(ip: ip, cn: cn, van: false)
-                        
-                        if let nextDays = Calendar.current.date(byAdding: .day, value: 5, to: Date()), nextDays >= expiringDate  {
-                            //Expiring in 5 days or less
-                            Macros.postNotification(.PIADIPRegionExpiring, [.token : dipToken])
-                        }
-                        
-                        Macros.postNotification(.PIADIPCheckIP, [.token : dipToken, .ip : ip])
+                let status = DedicatedIPStatus(fromAPIStatus: dipServer.status)
 
-                        let dipUsername = "dedicated_ip_"+dipServer.dipToken+"_"+String.random(length: 8)
+                switch status {
+                case .active:
 
-                        let dipRegion = Server(serial: firstServer.serial, name: firstServer.name, country: firstServer.country, hostname: firstServer.hostname, openVPNAddressesForTCP: [server], openVPNAddressesForUDP: [server], wireGuardAddressesForUDP: [server], iKEv2AddressesForUDP: [server], pingAddress: firstServer.pingAddress, geo: false, meta: nil, dipExpire: expiringDate, dipToken: dipServer.dipToken, dipStatus: status, dipUsername: dipUsername, regionIdentifier: firstServer.regionIdentifier)
-                        
-                        dipRegions.append(dipRegion)
-                        
-                        Client.database.secure.setDIPToken(dipServer.dipToken)
-                        Client.database.secure.setPassword(ip, forDipToken: dipUsername)
-
-                    default:
-                        
-                        let dipRegion = Server(serial: "", name: "", country: "", hostname: "", openVPNAddressesForTCP: [], openVPNAddressesForUDP: [], wireGuardAddressesForUDP: [], iKEv2AddressesForUDP: [], pingAddress: nil, geo: false, meta: nil, dipExpire: nil, dipToken: nil, dipStatus: status, dipUsername: nil, regionIdentifier: "")
-                        dipRegions.append(dipRegion)
-
+                    guard let firstServer = Client.providers.serverProvider.currentServers.first(where: {$0.regionIdentifier == dipServer.id}) else {
+                        callback?([], ClientError.malformedResponseData)
+                        return
                     }
 
+                    guard let ip = dipServer.ip, let cn = dipServer.cn, let expirationTime = dipServer.dip_expire else {
+                        callback?([], ClientError.malformedResponseData)
+                        return
+                    }
+
+                    let dipToken = dipServer.dipToken
+
+                    let expiringDate = Date(timeIntervalSince1970: TimeInterval(expirationTime))
+                    let server = Server.ServerAddressIP(ip: ip, cn: cn, van: false)
+
+                    if let nextDays = Calendar.current.date(byAdding: .day, value: 5, to: Date()), nextDays >= expiringDate  {
+                        //Expiring in 5 days or less
+                        Macros.postNotification(.PIADIPRegionExpiring, [.token : dipToken])
+                    }
+
+                    Macros.postNotification(.PIADIPCheckIP, [.token : dipToken, .ip : ip])
+
+                    let dipUsername = "dedicated_ip_"+dipServer.dipToken+"_"+String.random(length: 8)
+
+                    let dipRegion = Server(serial: firstServer.serial, name: firstServer.name, country: firstServer.country, hostname: firstServer.hostname, openVPNAddressesForTCP: [server], openVPNAddressesForUDP: [server], wireGuardAddressesForUDP: [server], iKEv2AddressesForUDP: [server], pingAddress: firstServer.pingAddress, geo: false, meta: nil, dipExpire: expiringDate, dipToken: dipServer.dipToken, dipStatus: status, dipUsername: dipUsername, regionIdentifier: firstServer.regionIdentifier)
+
+                    dipRegions.append(dipRegion)
+
+                    Client.database.secure.setDIPToken(dipServer.dipToken)
+                    Client.database.secure.setPassword(ip, forDipToken: dipUsername)
+
+                default:
+
+                    let dipRegion = Server(serial: "", name: "", country: "", hostname: "", openVPNAddressesForTCP: [], openVPNAddressesForUDP: [], wireGuardAddressesForUDP: [], iKEv2AddressesForUDP: [], pingAddress: nil, geo: false, meta: nil, dipExpire: nil, dipToken: nil, dipStatus: status, dipUsername: nil, regionIdentifier: "")
+                    dipRegions.append(dipRegion)
+
                 }
 
-                callback?(dipRegions, nil)
             }
-        }else {
-            callback?([], ClientError.unauthorized)
+            callback?(dipRegions, nil)
         }
     }
     
-    
     func featureFlags(_ callback: LibraryCallback<[String]>?) {
-        self.accountAPI.featureFlags(stagingEndpoint: nil) { (info, error) in
+        self.accountAPI.featureFlags { (info, errors) in
             if let flags = info?.flags {
                 callback?(flags, nil)
             } else {
@@ -337,7 +341,6 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     
     #if os(iOS)
     func signup(with request: Signup, _ callback: ((Credentials?, Error?) -> Void)?) {
-        
         var marketingJSON = ""
         if let json = request.marketing as? JSON {
             marketingJSON = stringify(json: json)
@@ -351,10 +354,9 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         request.toJSON()
         
         let info = IOSSignupInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), email: request.email, marketing: marketingJSON.isEmpty ? nil : marketingJSON, debug: debugJSON.isEmpty ? nil : debugJSON)
-        self.accountAPI.signUp(information: info) { (response, error) in
-            
-            if let error = error {
-                callback?(nil, error.code == 400 ? ClientError.badReceipt : ClientError.invalidParameter)
+        self.accountAPI.signUp(information: info) { (response, errors) in
+            if !errors.isEmpty {
+                callback?(nil, errors.last?.code == 400 ? ClientError.badReceipt : ClientError.invalidParameter)
                 return
             }
 
@@ -364,31 +366,28 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             }
 
             callback?(Credentials(username: response.username, password: response.password), nil)
-            
         }
-        
     }
         
     private func stringify(json: Any, prettyPrinted: Bool = false) -> String {
         var options: JSONSerialization.WritingOptions = []
         if prettyPrinted {
-          options = JSONSerialization.WritingOptions.prettyPrinted
+            options = JSONSerialization.WritingOptions.prettyPrinted
         }
 
         do {
-          let data = try JSONSerialization.data(withJSONObject: json, options: options)
-          if let string = String(data: data, encoding: String.Encoding.utf8) {
-            return string
-          }
+            let data = try JSONSerialization.data(withJSONObject: json, options: options)
+            if let string = String(data: data, encoding: String.Encoding.utf8) {
+                return string
+            }
         } catch {
-          print(error)
+            print(error)
         }
 
         return ""
     }
 
     func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?) {
-        
         var marketingJSON = ""
         if let json = request.marketing as? JSON {
             marketingJSON = stringify(json: json)
@@ -401,8 +400,8 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         
         let info = IOSPaymentInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), marketing: marketingJSON, debug: debugJSON)
 
-        self.accountAPI.payment(username: credentials.username, password: credentials.password, information: info) { (error) in
-            if let error = error {
+        self.accountAPI.payment(username: credentials.username, password: credentials.password, information: info) { (errors) in
+            if !errors.isEmpty {
                 callback?(ClientError.badReceipt)
                 return
             }
@@ -412,9 +411,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     #endif
     
     func downloadServers(_ callback: ((ServersBundle?, Error?) -> Void)?) {
-        
         if Client.environment == .staging {
-            
             guard let url = Bundle(for: Self.self).url(forResource: "staging", withExtension: "json"),
                   let jsonData = try? Data(contentsOf: url) else {
                 callback?(nil, ClientError.noRegions)
@@ -429,9 +426,8 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             callback?(bundle, nil)
             
         } else {
-            
-            self.regionsAPI.fetchRegions(locale: Locale.current.identifier.replacingOccurrences(of: "_", with: "-")) { (response, error) in
-                if let error = error {
+            self.regionsAPI.fetchRegions(locale: Locale.current.identifier.replacingOccurrences(of: "_", with: "-")) { (response, errors) in
+                if !errors.isEmpty {
                     callback?(nil, ClientError.noRegions)
                     return
                 }
@@ -445,21 +441,17 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                     callback?(nil, ClientError.malformedResponseData)
                     return
                 }
-                
+
                 callback?(bundle, nil)
             }
-            
         }
-        
     }
     
     // MARK: Store
     func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?) {
-
-        self.accountAPI.subscriptions(receipt: nil) { (response, error) in
-            
-            if let error = error {
-                callback?(nil, error.code == 400 ? ClientError.badReceipt : ClientError.invalidParameter)
+        self.accountAPI.subscriptions(receipt: nil) { (response, errors) in
+            if !errors.isEmpty {
+                callback?(nil, errors.last?.code == 400 ? ClientError.badReceipt : ClientError.invalidParameter)
                 return
             }
 
@@ -487,88 +479,23 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                 return
             }
         }
-        
     }
     
     // MARK: Messages
     func messages(forAppVersion version: String, _ callback: LibraryCallback<InAppMessage>?) {
+        self.accountAPI.message(appVersion: version, callback: { (message, errors) in
+            if !errors.isEmpty {
+                callback?(nil, ClientError.malformedResponseData)
+                return
+            }
 
-        if let token = Client.providers.accountProvider.token {
-
-            self.accountAPI.message(token: token, appVersion: version, callback: { (message, error) in
-                
-                if let error = error {
-                    callback?(nil, ClientError.malformedResponseData)
-                    return
-                }
-
-                if let message = message {
-                    let inAppMessage = InAppMessage(withMessage: message, andLevel: .api)
-                    callback?(inAppMessage, nil)
-                } else {
-                    callback?(nil, nil)
-                }
-                
-
-            })
-
-        } else {
-            callback?(nil, ClientError.unauthorized)
-        }
-        
-    }
-
-        
-    // MARK: Helpers
-
-    private func req(
-        _ credentials: Credentials?,
-        _ method: HTTPMethod,
-        _ endpoint: Endpoint,
-        useAuthToken useToken: Bool = false,
-        _ parameters: [String: Any]?,
-        _ statuses: [Int],
-        _ executor: RequestExecutor) {
-        
-        req(credentials, method, endpoint.url, useToken, parameters, statuses, executor)
-    }
-    
-    private func req(
-        _ credentials: Credentials?,
-        _ method: HTTPMethod,
-        _ url: URL,
-        _ useToken: Bool,
-        _ parameters: [String: Any]?,
-        _ statuses: [Int],
-        _ executor: RequestExecutor) {
-        
-        var headers = SessionManager.defaultHTTPHeaders
-//        headers["X-Device"] = "ios-\(Constants.iosVersion)/\(Constants.appVersion)/\(Constants.language)/\(Constants.region)"
-        if let credentials = credentials, let authHeader = Request.authorizationHeader(user: credentials.username, password: credentials.password) {
-            headers[authHeader.key] = authHeader.value
-        }
-        
-        if useToken,
-            let token = Client.providers.accountProvider.token {
-            headers["Authorization"] = "Token \(token)"
-        }
-
-        if let parameters = parameters {
-            log.debug("Request: \(method) \"\(url)\", parameters: \(parameters), headers: \(headers)")
-        } else {
-            log.debug("Request: \(method) \"\(url)\", headers: \(headers)")
-        }
-
-        let request = accessedConfiguration.sessionManager.request(url, method: method, parameters: parameters, headers: headers).validate(statusCode: statuses)
-        executor.execute(method, url, request)
-    }
-
-    private func knownError(_ endpoint: Endpoint, _ status: Int?, _ errors: [Int: ClientError]) -> ClientError? {
-        guard let status = status, let error = errors[status] else {
-            return nil
-        }
-        log.error("Request failed: \(endpoint) -> \(error)")
-        return error
+            if let message = message {
+                let inAppMessage = InAppMessage(withMessage: message, andLevel: .api)
+                callback?(inAppMessage, nil)
+            } else {
+                callback?(nil, nil)
+            }
+        })
     }
 }
 

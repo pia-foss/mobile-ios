@@ -130,6 +130,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
             Client.environment = .production
         }
         Client.resetWebServices()
+        Client.providers.serverProvider.download(nil)
         refreshEnvironmentButton()
     }
     
@@ -216,7 +217,12 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
     /// :nodoc:
     public override func viewShouldRestyle() {
         super.viewShouldRestyle()
-        navigationItem.titleView = NavigationLogoView()
+        if !preset.isExpired {
+            navigationItem.titleView = NavigationLogoView()
+        }
+        else {
+            navigationItem.title = L10n.Welcome.Upgrade.header
+        }
         Theme.current.applyPrincipalBackground(view)
         Theme.current.applyNavigationBarStyle(to: self)
         Theme.current.applyCancelButton(buttonCancel, appearance: .dark)
@@ -287,10 +293,18 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
     var shouldCleanAccount = false
 
     var isLoggedIn = false
-    
-    var token: String?
 
     var currentUser: UserAccount?
+    
+    var oldToken: String?
+
+    var vpnToken: String?
+    
+    var vpnTokenUsername: String?
+    
+    var vpnTokenPassword: String?
+
+    var apiToken: String?
     
     var publicUsername: String?
 
@@ -301,16 +315,20 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
     var lastSignupRequest: SignupRequest? {
         return nil
     }
-    
+
+    func migrateOldTokenIfNeeded(_ callback: ((Error?) -> Void)?) {
+        fatalError("Not implemented")
+    }
+
     func login(with request: LoginRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         
-        webServices?.token(credentials: request.credentials) { (token, error) in
-            guard let token = token else {
+        webServices?.token(credentials: request.credentials) { (error) in
+            guard error == nil else {
                 callback?(nil, error)
                 return
             }
             
-            self.webServices?.info(token: token) { (info, error) in
+            self.webServices?.info() { (info, error) in
                 guard let info = info else {
                     callback?(nil, error)
                     return
@@ -320,19 +338,18 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
                 self.isLoggedIn = true
                 callback?(user, nil)
             }
-
         }
     }
 
     func login(with receiptRequest: LoginReceiptRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         
-        webServices?.token(receipt: receiptRequest.receipt) { (token, error) in
-            guard let token = token else {
+        webServices?.token(receipt: receiptRequest.receipt) { (error) in
+            guard error == nil else {
                 callback?(nil, error)
                 return
             }
             
-            self.webServices?.info(token: token) { (info, error) in
+            self.webServices?.info() { (info, error) in
                 guard let info = info else {
                     callback?(nil, error)
                     return
@@ -342,7 +359,6 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
                 self.isLoggedIn = true
                 callback?(user, nil)
             }
-
         }
     }
 

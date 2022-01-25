@@ -117,7 +117,7 @@ internal enum L10n {
         }
         internal enum ReadMore {
           internal enum Text {
-            /// This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.\n\nWe will collect information about the following events:\n\n    Connection Attempt\n\n    Connection Canceled\n\n    Connection Established\n\nFor all of these events, we will collect the following information:\n\n    Platform\n\n    App version\n\n    App type (pre-release or not)\n\n    Protocol used\n\n    Connection source (manual or using automation)\n\nAll events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.\n\nYou will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.
+            /// This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.\n\nWe will collect information about the following events:\n\n    - Connection Attempt\n    - Connection Canceled\n    - Connection Established\n\nFor all of these events, we will collect the following information:\n    - Platform\n    - App version\n    - App type (pre-release or not)\n    - Protocol used\n    - Connection source (manual or using automation)\n\nAll events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.\n\nYou will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.
             internal static let description = L10n.tr("Signup", "share.data.readMore.text.description")
           }
         }
@@ -445,6 +445,16 @@ internal enum L10n {
           /// Failed to modify account email
           internal static let error = L10n.tr("Welcome", "update.account.email.error")
         }
+      }
+    }
+    internal enum Upgrade {
+      /// Welcome Back!
+      internal static let header = L10n.tr("Welcome", "upgrade.header")
+      /// In order to use Private Internet Access, you’ll need to renew your subscription.
+      internal static let title = L10n.tr("Welcome", "upgrade.title")
+      internal enum Renew {
+        /// Renew now
+        internal static let now = L10n.tr("Welcome", "upgrade.renew.now")
       }
     }
   }
