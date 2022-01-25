@@ -65,24 +65,24 @@ PODS:
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - OpenSSL-Apple (1.1.1j.11)
-  - PIAAccountModule (1.1.4):
-    - PIAAccountModule/account (= 1.1.4)
-    - PIAAccountModule/gradle (= 1.1.4)
-  - PIAAccountModule/account (1.1.4)
-  - PIAAccountModule/gradle (1.1.4)
+  - PIAAccountModule (1.2.0):
+    - PIAAccountModule/account (= 1.2.0)
+    - PIAAccountModule/gradle (= 1.2.0)
+  - PIAAccountModule/account (1.2.0)
+  - PIAAccountModule/gradle (1.2.0)
   - PIACSIModule (1.0.1):
     - PIACSIModule/csi (= 1.0.1)
     - PIACSIModule/gradle (= 1.0.1)
   - PIACSIModule/csi (1.0.1)
   - PIACSIModule/gradle (1.0.1)
-  - PIAKPIModule (1.0.0):
-    - PIAKPIModule/gradle (= 1.0.0)
-    - PIAKPIModule/kpi (= 1.0.0)
-  - PIAKPIModule/gradle (1.0.0)
-  - PIAKPIModule/kpi (1.0.0)
-  - PIALibrary/Core (2.12.5):
+  - PIAKPIModule (1.0.1):
+    - PIAKPIModule/gradle (= 1.0.1)
+    - PIAKPIModule/kpi (= 1.0.1)
+  - PIAKPIModule/gradle (1.0.1)
+  - PIAKPIModule/kpi (1.0.1)
+  - PIALibrary/Core (2.13.0):
     - PIAAccountModule
-  - PIALibrary/Library (2.12.5):
+  - PIALibrary/Library (2.13.0):
     - Alamofire (~> 4)
     - Gloss (~> 2)
     - PIAAccountModule
@@ -94,26 +94,26 @@ PODS:
     - PopupDialog
     - ReachabilitySwift
     - SwiftyBeaver
-  - PIALibrary/Mock (2.12.5):
+  - PIALibrary/Mock (2.13.0):
     - PIALibrary/Library
-  - PIALibrary/UI (2.12.5):
+  - PIALibrary/UI (2.13.0):
     - FXPageControl
     - lottie-ios
     - PIALibrary/Library
     - SwiftEntryKit (= 0.7.2)
     - SwiftyBeaver
     - TPKeyboardAvoiding
-  - PIALibrary/Util (2.12.5):
+  - PIALibrary/Util (2.13.0):
     - PIALibrary/Core
-  - PIALibrary/VPN (2.12.5):
+  - PIALibrary/VPN (2.13.0):
     - PIALibrary/Library
     - PIAWireguard
     - TunnelKit
-  - PIARegionsModule (1.2.2):
-    - PIARegionsModule/gradle (= 1.2.2)
-    - PIARegionsModule/regions (= 1.2.2)
-  - PIARegionsModule/gradle (1.2.2)
-  - PIARegionsModule/regions (1.2.2)
+  - PIARegionsModule (1.3.1):
+    - PIARegionsModule/gradle (= 1.3.1)
+    - PIARegionsModule/regions (= 1.3.1)
+  - PIARegionsModule/gradle (1.3.1)
+  - PIARegionsModule/regions (1.3.1)
   - PIAWireguard (1.2.0):
     - PIAWireguard/AppExtension (= 1.2.0)
     - PIAWireguard/Core (= 1.2.0)
@@ -157,14 +157,14 @@ DEPENDENCIES:
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
   - OpenSSL-Apple (from `https://github.com/keeshux/openssl-apple`)
-  - "PIAAccountModule (from `git@gitlab.kape.com:pia-mobile/shared/account.git`, branch `release/1.1.4`)"
-  - "PIACSIModule (from `git@gitlab.kape.com:pia-mobile/shared/csi.git`, branch `master`)"
-  - "PIAKPIModule (from `git@gitlab.kape.com:pia-mobile/shared/kpi.git`, commit `831793c`)"
-  - "PIALibrary/Library (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, branch `release/2.12.5`)"
-  - "PIALibrary/Mock (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, branch `release/2.12.5`)"
-  - "PIALibrary/UI (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, branch `release/2.12.5`)"
-  - "PIALibrary/VPN (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, branch `release/2.12.5`)"
-  - "PIARegionsModule (from `git@gitlab.kape.com:pia-mobile/shared/regions.git`, branch `master`)"
+  - "PIAAccountModule (from `git@gitlab.kape.com:pia-mobile/shared/account.git`, commit `ad7b8ac`)"
+  - "PIACSIModule (from `git@gitlab.kape.com:pia-mobile/shared/csi.git`, commit `b62d1bab`)"
+  - "PIAKPIModule (from `git@gitlab.kape.com:pia-mobile/shared/kpi.git`, commit `31186b1d`)"
+  - "PIALibrary/Library (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `630a62d`)"
+  - "PIALibrary/Mock (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `630a62d`)"
+  - "PIALibrary/UI (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `630a62d`)"
+  - "PIALibrary/VPN (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `630a62d`)"
+  - "PIARegionsModule (from `git@gitlab.kape.com:pia-mobile/shared/regions.git`, branch `release/1.3.1`)"
   - "PIAWireguard (from `git@gitlab.kape.com:pia-mobile/ios/pia-wireguard.git`, commit `7e9d8d48`)"
   - Popover
   - PopupDialog
@@ -208,19 +208,19 @@ EXTERNAL SOURCES:
   OpenSSL-Apple:
     :git: https://github.com/keeshux/openssl-apple
   PIAAccountModule:
-    :branch: release/1.1.4
+    :commit: ad7b8ac
     :git: "git@gitlab.kape.com:pia-mobile/shared/account.git"
   PIACSIModule:
-    :branch: master
+    :commit: b62d1bab
     :git: "git@gitlab.kape.com:pia-mobile/shared/csi.git"
   PIAKPIModule:
-    :commit: 831793c
+    :commit: 31186b1d
     :git: "git@gitlab.kape.com:pia-mobile/shared/kpi.git"
   PIALibrary:
-    :branch: release/2.12.5
+    :commit: 630a62d
     :git: "git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git"
   PIARegionsModule:
-    :branch: master
+    :branch: release/1.3.1
     :git: "git@gitlab.kape.com:pia-mobile/shared/regions.git"
   PIAWireguard:
     :commit: 7e9d8d48
@@ -234,19 +234,19 @@ CHECKOUT OPTIONS:
     :commit: ada87845f854a21fea436c76deb97be2acc58c8a
     :git: https://github.com/keeshux/openssl-apple
   PIAAccountModule:
-    :commit: 85e02e55932e68ea6015d0a9c3d91311de96a7fb
+    :commit: ad7b8ac
     :git: "git@gitlab.kape.com:pia-mobile/shared/account.git"
   PIACSIModule:
-    :commit: b62d1bab4e5b8627b1e9aafa20dc76e9966da921
+    :commit: b62d1bab
     :git: "git@gitlab.kape.com:pia-mobile/shared/csi.git"
   PIAKPIModule:
-    :commit: 831793c
+    :commit: 31186b1d
     :git: "git@gitlab.kape.com:pia-mobile/shared/kpi.git"
   PIALibrary:
-    :commit: 9a29cce3e3e8aa099456590eaef7c02464771e9d
+    :commit: 630a62d
     :git: "git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git"
   PIARegionsModule:
-    :commit: 11edfd2a634599849b403633fdbef3c24bfa4061
+    :commit: 6b3b763b3b1d066cb73d2d8833563669ff8e87bb
     :git: "git@gitlab.kape.com:pia-mobile/shared/regions.git"
   PIAWireguard:
     :commit: 7e9d8d48
@@ -275,11 +275,11 @@ SPEC CHECKSUMS:
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OpenSSL-Apple: bb7c9715a259404de040f5359ed3b3170cedf8d6
-  PIAAccountModule: a8c4e8e276baed48dce704c7eafb23820eed2e83
+  PIAAccountModule: e81a47491b646121a8db272016db00a1980d2955
   PIACSIModule: 32df98c20a0fc4cad5fadbb1b72f7b74315aa8ea
-  PIAKPIModule: a3a069d2ec8a7875b0e8258f9a00880dc8247b3e
-  PIALibrary: df5401f5b3ac256804f93f36c3d9673cc2ad420c
-  PIARegionsModule: 976adf95626a265ecf0233cc7ca3499348ca1095
+  PIAKPIModule: ec04bedfc7e6eccc7dfe4bc630a99c104ffbb7ea
+  PIALibrary: 65cf227091e0cd75b19375e606a5e3d95ca59317
+  PIARegionsModule: eff00bd28dea554d7b766ec5d7e9a74ab448f5fe
   PIAWireguard: e6fc3a37758af8d83704dd61e327c2ff6da88b13
   Popover: 10e1d9528f81d9504df984b7b3f491292bc1822d
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
@@ -293,6 +293,6 @@ SPEC CHECKSUMS:
   TunnelKit: 2a6aadea2d772a2760b153aee27d1c334c9ca6db
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 3fc2ead574d5a49b0e511700b78cf0028df6d6ae
+PODFILE CHECKSUM: a503de0ce9290dbe26478706d4454162bff7e91b
 
 COCOAPODS: 1.11.2

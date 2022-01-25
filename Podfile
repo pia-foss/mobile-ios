@@ -71,17 +71,17 @@ def shared_main_pods
     pod 'AlamofireImage'
     
     #pod "PIAAccountModule", :git => "#{$git_root}/#{$accounts_repo}"
-    pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :branch => 'release/1.1.4'
+    pod "PIAAccountModule", :git => "#{$gitlab_kn_root}/#{$accounts_gitlab_repo}", :commit => 'ad7b8ac'
     #pod "PIARegionsModule", :git => "#{$git_root}/#{$regions_repo}"
-    pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :branch => 'master'
+    pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :branch => 'release/1.3.1'
     #pod "PIACSIModule", :git => "#{$git_root}/#{$csi_repo}"
-    pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :branch => 'master'
-    pod "PIAKPIModule", :git => "#{$gitlab_kn_root}/#{$kpi_gitlab_repo}", :commit => '831793c'
+    pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :commit => 'b62d1bab'
+    pod "PIAKPIModule", :git => "#{$gitlab_kn_root}/#{$kpi_gitlab_repo}", :commit => '31186b1d'
 
-    #library_by_path('')
+    #library_by_path('~/Repositories')
     #library_by_git('')
-    library_by_gitlab_branch('release/2.12.5')
-    #library_by_gitlab_by_git('3fcc450')
+    #library_by_gitlab_branch('')
+    library_by_gitlab_by_git('630a62d')
     #library_by_version('~> 1.1.3')
 end
 

@@ -82,6 +82,7 @@ class DevelopmentSettingsViewController: PIABaseSettingsViewController {
             Client.environment = .production
         }
         Client.resetWebServices()
+        Client.providers.serverProvider.download(nil)
         reloadSettings()
     }
 
@@ -138,6 +139,9 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
         case .stagingVersion:
             cell.textLabel?.text = "Staging version"
             cell.detailTextLabel?.text = "\(AppPreferences.shared.stagingVersion)"
+        case .deleteKeychain:
+            cell.textLabel?.text = "Delete Keychain"
+            cell.detailTextLabel?.text = nil
         case .crash:
             cell.textLabel?.text = "Crash"
             cell.detailTextLabel?.text = nil
@@ -228,10 +232,20 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
 
             case .crash:
                 fatalError("Crashing staging app")
+        case .deleteKeychain:
+                deleteKeychain()
             default: break
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    private func deleteKeychain() {
+        let secItemClasses = [kSecClassGenericPassword, kSecClassInternetPassword, kSecClassCertificate, kSecClassKey, kSecClassIdentity]
+        for itemClass in secItemClasses {
+            let spec: NSDictionary = [kSecClass: itemClass]
+            SecItemDelete(spec)
+        }
     }
     
     private func resolveGoogleAdsDomain() {
