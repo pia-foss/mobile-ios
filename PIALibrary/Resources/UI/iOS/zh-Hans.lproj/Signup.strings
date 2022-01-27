@@ -1,74 +1,166 @@
-/* 
-  Signup.strings
+/* (No Comment) */
+"failure.message" = "我们现在无法创建账号。\n请稍后再试。\n\n重新打开本应用将会再次尝试创建账号。";
+
+/* (No Comment) */
+"failure.purchase.sandbox.message" = "所选的沙盒订阅不适用于生产";
+
+/* (No Comment) */
+"failure.redeem.claimed.message" = "此卡片似乎已被另一个账号使用。您可尝试输入另一个PIN。";
+
+/* (No Comment) */
+"failure.redeem.claimed.title" = "卡片已使用";
+
+/* (No Comment) */
+"failure.redeem.invalid.message" = "您输入的卡片PIN似乎无效。请重试。";
+
+/* (No Comment) */
+"failure.redeem.invalid.title" = "卡片PIN无效";
+
+/* (No Comment) */
+"failure.submit" = "返回";
+
+/* (No Comment) */
+"failure.title" = "账户创建失败";
+
+/* (No Comment) */
+"failure.vc_title" = "注册失败";
+
+/* (No Comment) */
+"in_progress.message" = "我们正在确认您在我们系统中的购买。这可能需要一点时间，请耐心等待。";
+
+/* (No Comment) */
+"in_progress.redeem.message" = "我们正在通过系统确认您的卡片PIN。这可能需要一些时间，请耐心等待。";
+
+/* Signup.strings
   PIALibrary
 
   Created by Davide De Rosa on 12/7/17.
-  Copyright © 2017 London Trust Media. All rights reserved.
-*/
-
+  Copyright © 2017 London Trust Media. All rights reserved. */
 "in_progress.title" = "确认注册";
-"in_progress.message" = "我们正在确认您在我们系统中的购买。这可能需要一点时间，请耐心等待。";
-"in_progress.redeem.message" = "我们正在通过系统确认您的卡片PIN。这可能需要一些时间，请耐心等待。";
 
-"success.title" = "购买完成";
-"success.message_format" = "感谢注册。我们已将您的用户名和密码发送至您的电子邮箱：%@";
-"success.redeem.title" = "卡片兑换成功";
-"success.redeem.message" = "您将很快收到一封电子邮件，记有您的用户名和密码。\n\n您的登录详情";
-"success.username.caption" = "用户名";
-"success.password.caption" = "密码";
-"success.submit" = "开始体验";
-
-"failure.vc_title" = "注册失败";
-"failure.title" = "账户创建失败";
-"failure.message" = "我们现在无法创建账号。\n请稍后再试。\n\n重新打开本应用将会再次尝试创建账号。";
-"failure.purchase.sandbox.message" = "所选的沙盒订阅不适用于生产";
-"failure.redeem.invalid.title" = "卡片PIN无效";
-"failure.redeem.invalid.message" = "您输入的卡片PIN似乎无效。请重试。";
-"failure.redeem.claimed.title" = "卡片已使用";
-"failure.redeem.claimed.message" = "此卡片似乎已被另一个账号使用。您可尝试输入另一个PIN。";
-"failure.submit" = "返回";
-
-"unreachable.vc_title" = "错误";
-"unreachable.title" = "糟糕！";
-"unreachable.message" = "未找到网络连接。请确认您已接入网络，然后点击下面的重试。\n\n您可在稍后再回到本应用完成该操作。";
-"unreachable.submit" = "重试";
-
-"purchase.uncredited.alert.message" = "你有未入账的的交易。要恢复您的账户详情吗？";
-"purchase.uncredited.alert.button.cancel" = "取消";
-"purchase.uncredited.alert.button.recover" = "恢复账户";
-
-"purchase.trials.intro" = "开始 7 天免费试用";
-"purchase.trials.price.after" = "然后 %@";
-"purchase.trials.money.back" = "30 天退款保证";
-"purchase.trials.1year.protection" = "1 年隐私和身份保护";
-"purchase.trials.anonymous" = "匿名浏览并隐藏您的 IP。";
-"purchase.trials.devices" = "一次支持 10 台设备";
-"purchase.trials.devices.description" = "一次在多达 10 台设备上保护自己。";
-"purchase.trials.region" = "轻松连接到任何地区";
-"purchase.trials.servers" = "在 32 个国家h地区拥有超过 3300 台服务器";
-"purchase.trials.start" = "开始订阅";
-"purchase.trials.all.plans" = "查看所有可用套餐";
-
+/* (No Comment) */
 "purchase.subscribe.now" = "立即订阅";
 
-// WALKTHROUGH
+/* (No Comment) */
+"purchase.trials.1year.protection" = "1 年隐私和身份保护";
 
-"walkthrough.action.next" = "下一个";
-"walkthrough.action.done" = "完成";
-"walkthrough.action.skip" = "跳过";
+/* (No Comment) */
+"purchase.trials.all.plans" = "查看所有可用套餐";
 
-"walkthrough.page.1.title" = "一次支持 10 台设备";
-"walkthrough.page.1.description" = "一次在多达 10 台设备上保护自己。";
-"walkthrough.page.2.title" = "轻松连接到任何地区";
-"walkthrough.page.2.description" = "服务器遍布世界各地，您始终受到保护。";
-"walkthrough.page.3.title" = "让自己远离广告";
-"walkthrough.page.3.description" = "启用内容拦截器以防止 Safari 中出现广告。";
+/* (No Comment) */
+"purchase.trials.anonymous" = "匿名浏览并隐藏您的 IP。";
 
+/* (No Comment) */
+"purchase.trials.devices" = "一次支持 10 台设备";
+
+/* (No Comment) */
+"purchase.trials.devices.description" = "一次在多达 10 台设备上保护自己。";
+
+/* (No Comment) */
+"purchase.trials.intro" = "开始 7 天免费试用";
+
+/* (No Comment) */
+"purchase.trials.money.back" = "7 天退款保证";
+
+/* (No Comment) */
+"purchase.trials.price.after" = "然后 %@";
+
+/* (No Comment) */
+"purchase.trials.region" = "轻松连接到任何地区";
+
+/* (No Comment) */
+"purchase.trials.servers" = "在 32 个国家h地区拥有超过 3300 台服务器";
+
+/* (No Comment) */
+"purchase.trials.start" = "开始订阅";
+
+/* (No Comment) */
+"purchase.uncredited.alert.button.cancel" = "取消";
+
+/* (No Comment) */
+"purchase.uncredited.alert.button.recover" = "恢复账户";
+
+/* (No Comment) */
+"purchase.uncredited.alert.message" = "你有未入账的的交易。要恢复您的账户详情吗？";
+
+/* (No Comment) */
 "share.data.buttons.accept" = "接受";
+
+/* (No Comment) */
 "share.data.buttons.noThanks" = "不用，谢谢";
+
+/* (No Comment) */
 "share.data.buttons.readMore" = "阅读更多";
-"share.data.text.title" = "请帮助我们改进服务";
+
+/* (No Comment) */
+"share.data.readMore.text.description" = "这些有限的信息有助于我们识别并解决潜在的连接问题。请注意，分享这些信息需要您同意并手动激活，因为这是默认关闭的。\n\n我们将收集关于以下事件的信息：\n\n    - 连接尝试\n    - 连接已取消\n    - 连接已建立\n\n对于上述所有事件，我们将收集以下信息：\n    - 平台\n    - 应用程序版本\n    - 应用程序类型（预先发布或不预先发布）\n    - 使用的协议\n    - 连接来源（手动或使用自动化）\n\n所有事件都将包含一个随机生成的唯一 ID。这个 ID 与您的用户账户没有关联。为了保护隐私，这个唯一 ID 每天都会重新生成。\n\n您将始终处于掌控地位。您可以看到我们从设置中收集了哪些数据，您可以随时将其关闭。";
+
+/* (No Comment) */
 "share.data.text.description" = "为了帮助我们保持服务的连接性能，您可以匿名与我们共享您的连接统计数据。这些报告不包括任何可识别个人身份的信息。";
+
+/* (No Comment) */
 "share.data.text.footer" = "您始终可以从设置中进行控制";
 
-"share.data.readMore.text.description" = "这些有限的信息有助于我们识别并解决潜在的连接问题。请注意，分享这些信息需要您同意并手动激活，因为这是默认关闭的。\n\n我们将收集关于以下事件的信息：\n\n    - 连接尝试\n    - 连接已取消\n    - 连接已建立\n\n对于上述所有事件，我们将收集以下信息：\n    - 平台\n    - 应用程序版本\n    - 应用程序类型（预先发布或不预先发布）\n    - 使用的协议\n    - 连接来源（手动或使用自动化）\n\n所有事件都将包含一个随机生成的唯一 ID。这个 ID 与您的用户账户没有关联。为了保护隐私，这个唯一 ID 每天都会重新生成。\n\n您将始终处于掌控地位。您可以看到我们从设置中收集了哪些数据，您可以随时将其关闭。";
+/* (No Comment) */
+"share.data.text.title" = "请帮助我们改进服务";
+
+/* (No Comment) */
+"success.message_format" = "感谢注册。我们已将您的用户名和密码发送至您的电子邮箱：%@";
+
+/* (No Comment) */
+"success.password.caption" = "密码";
+
+/* (No Comment) */
+"success.redeem.message" = "您将很快收到一封电子邮件，记有您的用户名和密码。\n\n您的登录详情";
+
+/* (No Comment) */
+"success.redeem.title" = "卡片兑换成功";
+
+/* (No Comment) */
+"success.submit" = "开始体验";
+
+/* (No Comment) */
+"success.title" = "购买完成";
+
+/* (No Comment) */
+"success.username.caption" = "用户名";
+
+/* (No Comment) */
+"unreachable.message" = "未找到网络连接。请确认您已接入网络，然后点击下面的重试。\n\n您可在稍后再回到本应用完成该操作。";
+
+/* (No Comment) */
+"unreachable.submit" = "重试";
+
+/* (No Comment) */
+"unreachable.title" = "糟糕！";
+
+/* (No Comment) */
+"unreachable.vc_title" = "错误";
+
+/* (No Comment) */
+"walkthrough.action.done" = "完成";
+
+/* WALKTHROUGH */
+"walkthrough.action.next" = "下一个";
+
+/* (No Comment) */
+"walkthrough.action.skip" = "跳过";
+
+/* (No Comment) */
+"walkthrough.page.1.description" = "一次在多达 10 台设备上保护自己。";
+
+/* (No Comment) */
+"walkthrough.page.1.title" = "一次支持 10 台设备";
+
+/* (No Comment) */
+"walkthrough.page.2.description" = "服务器遍布世界各地，您始终受到保护。";
+
+/* (No Comment) */
+"walkthrough.page.2.title" = "轻松连接到任何地区";
+
+/* (No Comment) */
+"walkthrough.page.3.description" = "启用内容拦截器以防止 Safari 中出现广告。";
+
+/* (No Comment) */
+"walkthrough.page.3.title" = "让自己远离广告";
+

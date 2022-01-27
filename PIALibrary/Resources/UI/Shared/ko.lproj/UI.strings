@@ -1,4 +1,12 @@
-"global.version.format" = "버전 %@ (%@)";
-"global.close" = "닫기";
-"global.ok" = "확인";
+/* (No Comment) */
 "global.cancel" = "취소";
+
+/* (No Comment) */
+"global.close" = "닫기";
+
+/* (No Comment) */
+"global.ok" = "확인";
+
+/* (No Comment) */
+"global.version.format" = "버전 %@ (%@)";
+

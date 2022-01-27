@@ -494,6 +494,16 @@ public class Theme {
         
     }
     
+    public func applyUnderline(_ label: UILabel, with text: String) {
+        label.style(style: TextStyle.textStyle10)
+        let attributes: [NSAttributedString.Key: Any] = [
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ]
+        
+        let attributedString = NSAttributedString(string: text, attributes: attributes)
+        label.attributedText = attributedString
+    }
+    
     /// :nodoc:
     public func agreementText(withMessage message: String, tos: String, tosUrl: String, privacy: String, privacyUrl: String) -> NSAttributedString {
         let plain = message.replacingOccurrences(

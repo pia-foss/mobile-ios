@@ -38,9 +38,21 @@ public protocol AccountProvider: class {
     
     /// The user account currently logged in, or `nil` if logged out.
     var currentUser: UserAccount? { get set }
+    
+    /// The old auth token
+    var oldToken: String? { get }
 
-    /// The current auth token, or 'nil' if logged out.
-    var token: String? { get }
+    /// The token to use for api authentication.
+    var apiToken: String? { get }
+
+    /// The token to use for protocol authentication.
+    var vpnToken: String? { get }
+    
+    /// The username extracted from the vpn token
+    var vpnTokenUsername: String? { get }
+    
+    /// The password extracted from the vpn token
+    var vpnTokenPassword: String? { get }
 
     /// The public username to be displayed in the views.
     var publicUsername: String? { get }
@@ -52,6 +64,13 @@ public protocol AccountProvider: class {
     /// The last pending signup request (useful for recovery).
     var lastSignupRequest: SignupRequest? { get }
     #endif
+
+    /**
+     It migrates an old persisted non-expiry token into a new expiry one managed by the accounts module.
+
+     - Parameter callback: Returns `nil` on success.
+     */
+    func migrateOldTokenIfNeeded(_ callback: SuccessLibraryCallback?)
 
     /**
      Logs into system. The `isLoggedIn` variable becomes `true` on success.
@@ -78,16 +97,16 @@ public protocol AccountProvider: class {
     func login(with receiptRequest: LoginReceiptRequest, _ callback: LibraryCallback<UserAccount>?)
 
     /**
-    Logs into system using the token directly. The `isLoggedIn` variable becomes `true` on success.
+    Logs into system using the login link token directly. The `isLoggedIn` variable becomes `true` on success.
 
     - Precondition: `isLoggedIn` is `false`.
     - Postcondition:
        - Sets `currentUser` on success.
        - Posts `Notification.Name.PIAAccountDidLogin` on success.
-    - Parameter token: A valid token.
+    - Parameter linkToken: A valid token.
     - Parameter callback: Returns an `UserAccount`.
     */
-    func login(with token: String, _ callback: ((UserAccount?, Error?) -> Void)?)
+    func login(with linkToken: String, _ callback: ((UserAccount?, Error?) -> Void)?)
     /**
      Refreshes information associated with the account currently logged in.
  
@@ -131,6 +150,15 @@ public protocol AccountProvider: class {
      - Parameter callback: Returns `nil` on success.
      */
     func logout(_ callback: SuccessLibraryCallback?)
+    
+    /**
+     Deletes the user from PIA servers.
+
+     - Precondition: `isLoggedIn` is `true`.
+     - Parameter callback: Returns `nil` on success.
+     */
+    
+    func deleteAccount(_ callback: SuccessLibraryCallback?)
     
     /**
      Remove all data from the plain and secure internal database

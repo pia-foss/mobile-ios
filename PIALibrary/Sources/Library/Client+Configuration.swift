@@ -29,6 +29,7 @@ extension Client {
         public static let dedicatedIp = "dedicated-ip"
         public static let disableMultiDipTokens = "disable-multi-dip-tokens"
         public static let checkDipExpirationRequest = "check-dip-expiration-request"
+        public static let showNewInitialScreen = "show-new-initial-screen"
     }
     
     /// Encapsulates internal and public parameters of the client. When not specified otherwise, time intervals are in milliseconds.
@@ -129,6 +130,9 @@ extension Client {
         
         /// Sets the maximum number of failed VPN connectivity attempts before giving up.
         public var vpnConnectivityMaxAttempts: Int
+        
+        /// Sets the rsa certificate to use for pinning puposes.
+        public var rsa4096Certificate: String?
 
         let maceHostname: String
         
@@ -227,6 +231,8 @@ extension Client {
             vpnConnectivityTimeout = 2.0
             vpnConnectivityRetryDelay = 5.0
             vpnConnectivityMaxAttempts = 3
+            
+            rsa4096Certificate = nil
 
             maceHostname = "209.222.18.222"
             macePort = 1111

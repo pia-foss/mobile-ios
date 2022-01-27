@@ -163,18 +163,18 @@ public class IKEv2Profile: NetworkExtensionProfile {
     
     /// :nodoc:
     public func generatedProtocol(withConfiguration configuration: VPNConfiguration) -> NEVPNProtocol {
+                
+        var username = configuration.username
+        var passwordReference = configuration.passwordReference
         
-        var iKEv2Username = ""
-        var iKEv2Password: Data?
+        if let accountVpnUsername = Client.providers.accountProvider.vpnTokenUsername,
+           let accountVpnPassword = Client.providers.accountProvider.vpnTokenPassword {
+            username = accountVpnUsername
+            Client.database.secure.setPassword(accountVpnPassword, for: username)
+        }
         
-        if let dipUsername = configuration.server.dipUsername, let dipToken = configuration.server.dipToken { //override the username if DIP
-            iKEv2Username = dipUsername
-            iKEv2Password = configuration.server.dipPassword()
-        } else {
-            if let username = Client.providers.accountProvider.token {
-                iKEv2Username = username
-            }
-            iKEv2Password = ikev2PasswordReference()
+        if let accountVpnPasswordreference = Client.database.secure.passwordReference(for: username) {
+            passwordReference = accountVpnPasswordreference
         }
 
         let cfg = NEVPNProtocolIKEv2()
@@ -184,9 +184,9 @@ public class IKEv2Profile: NetworkExtensionProfile {
             cfg.serverAddress = configuration.server.hostname
         }
         cfg.remoteIdentifier = configuration.server.hostname
-        cfg.localIdentifier = iKEv2Username
-        cfg.username = iKEv2Username
-        cfg.passwordReference = iKEv2Password
+        cfg.localIdentifier = configuration.server.dipUsername ?? username
+        cfg.username = configuration.server.dipUsername ?? username
+        cfg.passwordReference = configuration.server.dipToken != nil ? configuration.server.dipPassword() : passwordReference
         
         cfg.authenticationMethod = .none
         cfg.disconnectOnSleep = false
@@ -218,59 +218,4 @@ public class IKEv2Profile: NetworkExtensionProfile {
 
         return cfg
     }
-}
-
-extension IKEv2Profile {
-    
-    private func getGEN4IKEv2PasswordReference() -> Data? {
-        
-        var query = [String: Any]()
-        query[kSecClass as String] = kSecClassGenericPassword
-        query[kSecAttrAccount as String] = Client.providers.accountProvider.token 
-        query[kSecMatchLimit as String] = kSecMatchLimitOne
-        query[kSecReturnPersistentRef as String] = true
-        
-        var result: AnyObject?
-        let status = SecItemCopyMatching(query as CFDictionary, &result)
-        guard (status == errSecSuccess) else {
-            return nil
-        }
-        guard let data = result as? Data else {
-            return nil
-        }
-        return data
-
-    }
-    
-    /**
-     Gets a password reference for GEN4 IKEv2 .
-
-     - Returns: The password reference for the GEN4 IKEv2 protocol.
-     **/
-    public func ikev2PasswordReference() -> Data? {
-        
-        guard let reference = getGEN4IKEv2PasswordReference() else {
-            
-            if let token = Client.providers.accountProvider.token {
-                
-                    var query = [String: Any]()
-                    query[kSecClass as String] = kSecClassGenericPassword
-                    query[kSecAttrAccount as String] = token
-                    query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
-                    query[kSecValueData as String] = token.data(using: .utf8)
-                
-                    SecItemAdd(query as CFDictionary, nil)
-                    
-                    query.removeAll()
-
-            }
-
-            return getGEN4IKEv2PasswordReference()
-
-        }
-        
-        return reference
-        
-    }
-    
 }

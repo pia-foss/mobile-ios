@@ -97,17 +97,9 @@ extension KeychainStore {
     func token(for username: String) -> String? {
         return try? backend.token(for: username)
     }
-    
-    func setToken(_ token: String?, for username: String) {
-        if let token = token {
-            try? backend.set(token: token, for: username)
-        } else {
-            backend.removeToken(for: username)
-        }
-    }
-    
-    func tokenReference(for username: String) -> Data? {
-        return try? backend.tokenReference(for: username)
+
+    func clearToken(for username: String) {
+        backend.removeToken(for: username)
     }
     
     func tokenKey(for username: String) -> String {

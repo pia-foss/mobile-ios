@@ -1,82 +1,205 @@
-/* 
-  Welcome.strings
+/* (No Comment) */
+"agreement.message" = "Na de gratis proefperiode van 7 dagen wordt het abonnement automatisch verlengd voor %@, tenzij u het ten minste 24 uur voor het einde van de proefperiode annuleert. De kosten voor de verlenging worden binnen 24 uur voor het einde van de proefperiode via uw Apple ID-account in rekening gebracht. U kunt uw abonnementen beheren en annuleren door na de aankoop naar uw accountinstellingen in de App Store te gaan. De proefperiode van 7 dagen is beperkt tot één proefperiode van 7 dagen per gebruiker. Een eventueel ongebruikt deel van uw gratis proefperiode vervalt bij aankoop van een abonnement. Alle prijzen zijn inclusief lokale omzetbelasting, indien van toepassing.\n\nAls u zich aanmeldt, gaat u akkoord met de $1 en het $2.";
+
+/* (No Comment) */
+"agreement.message.privacy" = "Privacybeleid";
+
+/* (No Comment) */
+"agreement.message.tos" = "Servicevoorwaarden";
+
+/* (No Comment) */
+"agreement.trials.message" = "De betaling wordt bij de bevestiging van uw aankoop via uw Apple ID-account in rekening gebracht. Het abonnement wordt automatisch verlengd, tenzij het ten minste 24 uur voor het einde van de huidige periode wordt geannuleerd. De verlenging van uw account wordt binnen 24 uur voor het einde van de huidige periode in rekening gebracht. U kunt uw abonnementen beheren en annuleren door na de aankoop naar uw accountinstellingen in de App Store te gaan.\n\nBepaalde betaalde abonnementen kunnen een gratis proefabonnement aanbieden voordat er kosten in rekening worden gebracht. Als u zich wilt afmelden voor een betaald abonnement voordat we kosten in rekening brengen, moet u het abonnement ten minste 24 uur voor het einde van de gratis proefperiode annuleren.\n\nGratis proefabonnementen zijn alleen beschikbaar voor nieuwe gebruikers. Als u zich aanmeldt voor een aanvullend gratis proefabonnement worden onmiddellijk de standaard abonnementskosten in rekening gebracht.\n\nWij behouden ons het recht voor om uw gratis proefabonnement te allen tijde in te trekken.\n\nEen eventueel ongebruikt deel van uw gratis proefperiode vervalt bij aankoop van een abonnement.\n\nAls u zich aanmeldt, gaat u akkoord met deze algemene voorwaarden.";
+
+/* (No Comment) */
+"agreement.trials.monthly.plan" = "maand";
+
+/* (No Comment) */
+"agreement.trials.title" = "Algemene voorwaarden gratis proefabonnementen";
+
+/* (No Comment) */
+"agreement.trials.yearly.plan" = "jaar";
+
+/* (No Comment) */
+"gdpr.accept.button.title" = "Akkoord en doorgaan";
+
+/* (No Comment) */
+"gdpr.collect.data.description" = "E-mailadres voor accountbeheer en bescherming tegen misbruik.";
+
+/* (No Comment) */
+"gdpr.collect.data.title" = "Persoonlijke informatie die we verzamelen";
+
+/* (No Comment) */
+"gdpr.usage.data.description" = "E-mailadres wordt alleen gebruikt voor het verzenden van abonnementsinformatie, betalingsbevestigingen, correspondentie met klanten en promotionele aanbiedingen van Private Internet Access.";
+
+/* (No Comment) */
+"gdpr.usage.data.title" = "Gebruik van de persoonlijke informatie die we verzamelen";
+
+/* (No Comment) */
+"getstarted.buttons.buyaccount" = "Account kopen";
+
+/* (No Comment) */
+"iap.error.message.unavailable" = "De Apple-servers zijn momenteel niet beschikbaar. Probeer het later opnieuw.";
+
+/* (No Comment) */
+"iap.error.title" = "Fout";
+
+/* (No Comment) */
+"login.error.throttled" = "Te veel mislukte inlogpogingen met deze gebruikersnaam. Probeer het later opnieuw.";
+
+/* (No Comment) */
+"login.error.title" = "Inloggen";
+
+/* (No Comment) */
+"login.error.unauthorized" = "Uw gebruikersnaam of wachtwoord is onjuist.";
+
+/* (No Comment) */
+"login.error.validation" = "U moet een gebruikersnaam en wachtwoord invoeren.";
+
+/* (No Comment) */
+"login.magic.link.invalid.email" = "Ongeldige e-mail. Probeer het opnieuw.";
+
+/* (No Comment) */
+"login.magic.link.response" = "Controleer uw e-mail voor een inloglink.";
+
+/* (No Comment) */
+"login.magic.link.send" = "Link verzenden";
+
+/* (No Comment) */
+"login.magic.link.title" = "Log in met de magische link in uw e-mail";
+
+/* (No Comment) */
+"login.password.placeholder" = "Wachtwoord";
+
+/* (No Comment) */
+"login.receipt.button" = "Inloggen met aankoopbewijs";
+
+/* (No Comment) */
+"login.restore.button" = "Geen accountgegevens ontvangen?";
+
+/* (No Comment) */
+"login.submit" = "INLOGGEN";
+
+/* Welcome.strings
   PIALibrary
 
   Created by Davide De Rosa on 12/7/17.
-  Copyright © 2017 London Trust Media. All rights reserved.
-*/
-
+  Copyright © 2017 London Trust Media. All rights reserved. */
 "login.title" = "Aanmelden bij uw account";
+
+/* (No Comment) */
 "login.username.placeholder" = "Gebruikersnaam (p1234567)";
-"login.password.placeholder" = "Wachtwoord";
-"login.submit" = "INLOGGEN";
-"login.restore.button" = "Geen accountgegevens ontvangen?";
-"login.error.title" = "Inloggen";
-"login.error.validation" = "U moet een gebruikersnaam en wachtwoord invoeren.";
-"login.error.unauthorized" = "Uw gebruikersnaam of wachtwoord is onjuist.";
-"login.error.throttled" = "Te veel mislukte inlogpogingen met deze gebruikersnaam. Probeer het later opnieuw.";
-"login.receipt.button" = "Inloggen met aankoopbewijs";
-"login.magic.link.title" = "Log in met de magische link in uw e-mail";
-"login.magic.link.response" = "Controleer uw e-mail voor een inloglink.";
-"login.magic.link.send" = "Link verzenden";
-"login.magic.link.invalid.email" = "Ongeldige e-mail. Probeer het opnieuw.";
 
-"purchase.title" = "Selecteer een VPN-abonnement";
-"purchase.subtitle" = "30 dagen lang niet-goed-geld-teruggarantie";
-"purchase.email.placeholder" = "E-mailadres";
-"purchase.continue" = "Doorgaan";
-"purchase.login.footer" = "Heeft u al een account?";
-"purchase.login.button" = "Aanmelden";
-"purchase.error.title" = "Kopen";
-"purchase.error.validation" = "U moet een e-mailadres invoeren";
-"purchase.error.connectivity.title" = "Verbindingsfout";
-"purchase.error.connectivity.description" = "We kunnen Private Internet Access niet bereiken. Dit kan komen door een slechte internetverbinding of omdat onze dienst in uw land is geblokkeerd.";
-"purchase.confirm.form.email" = "Voer uw e-mailadres in";
-"purchase.confirm.plan" = "U koop het %@-abonnement";
-"purchase.email.why" = "We hebben uw e-mailadres nodig om uw gebruikersnaam en wachtwoord te versturen.";
-"purchase.submit" = "Versturen";
-"purchase.or" = "of";
-
-"redeem.title" = "Cadeaubon inwisselen";
-"redeem.subtitle" = "Voer uw e-mailadres en de %lu-cijferige pincode van uw cadeaubon of proefperiodekaart hieronder in.";
-"redeem.email.placeholder" = "E-mailadres";
-"redeem.submit" = "VERSTUREN";
-"redeem.error.title" = "Inwisselen";
-"redeem.error.code" = "Code moet uit %lu getallen bestaan.";
-"redeem.error.allfields" = "Voer uw e-mailadres en pincode in.";
-"redeem.accessibility.back" = "Terug";
-"redeem.giftcard.placeholder" = "Pincode cadeaubon";
-
-"plan.monthly.title" = "Maandelijks";
-"plan.yearly.title" = "Jaarlijks";
-"plan.yearly.detail_format" = "%@%@ per jaar";
-"plan.price_format" = "%@/ma";
-"plan.best_value" = "Beste waarde";
+/* (No Comment) */
 "plan.accessibility.per_month" = "per maand";
 
-"restore.title" = "Aankoop herstellen";
-"restore.subtitle" = "Als u een abonnement via deze app heeft aangeschaft en u heeft uw gegevens niet ontvangen, dan kunt u ze hier opnieuw verzenden. Er worden geen kosten in rekening gebracht tijdens dit proces.";
+/* (No Comment) */
+"plan.best_value" = "Beste waarde";
+
+/* (No Comment) */
+"plan.monthly.title" = "Maandelijks";
+
+/* (No Comment) */
+"plan.price_format" = "%@/ma";
+
+/* (No Comment) */
+"plan.yearly.detail_format" = "%@%@ per jaar";
+
+/* (No Comment) */
+"plan.yearly.title" = "Jaarlijks";
+
+/* (No Comment) */
+"purchase.confirm.form.email" = "Voer uw e-mailadres in";
+
+/* (No Comment) */
+"purchase.confirm.plan" = "U koop het %@-abonnement";
+
+/* (No Comment) */
+"purchase.continue" = "Doorgaan";
+
+/* (No Comment) */
+"purchase.email.placeholder" = "E-mailadres";
+
+/* (No Comment) */
+"purchase.email.why" = "We hebben uw e-mailadres nodig om uw gebruikersnaam en wachtwoord te versturen.";
+
+/* (No Comment) */
+"purchase.error.connectivity.description" = "We kunnen Private Internet Access niet bereiken. Dit kan komen door een slechte internetverbinding of omdat onze dienst in uw land is geblokkeerd.";
+
+/* (No Comment) */
+"purchase.error.connectivity.title" = "Verbindingsfout";
+
+/* (No Comment) */
+"purchase.error.title" = "Kopen";
+
+/* (No Comment) */
+"purchase.error.validation" = "U moet een e-mailadres invoeren";
+
+/* (No Comment) */
+"purchase.login.button" = "Aanmelden";
+
+/* (No Comment) */
+"purchase.login.footer" = "Heeft u al een account?";
+
+/* (No Comment) */
+"purchase.or" = "of";
+
+/* (No Comment) */
+"purchase.submit" = "Versturen";
+
+/* (No Comment) */
+"purchase.subtitle" = "30 dagen lang niet-goed-geld-teruggarantie";
+
+/* (No Comment) */
+"purchase.title" = "Selecteer een VPN-abonnement";
+
+/* (No Comment) */
+"redeem.accessibility.back" = "Terug";
+
+/* (No Comment) */
+"redeem.email.placeholder" = "E-mailadres";
+
+/* (No Comment) */
+"redeem.error.allfields" = "Voer uw e-mailadres en pincode in.";
+
+/* (No Comment) */
+"redeem.error.code" = "Code moet uit %lu getallen bestaan.";
+
+/* (No Comment) */
+"redeem.error.title" = "Inwisselen";
+
+/* (No Comment) */
+"redeem.giftcard.placeholder" = "Pincode cadeaubon";
+
+/* (No Comment) */
+"redeem.submit" = "VERSTUREN";
+
+/* (No Comment) */
+"redeem.subtitle" = "Voer uw e-mailadres en de %lu-cijferige pincode van uw cadeaubon of proefperiodekaart hieronder in.";
+
+/* (No Comment) */
+"redeem.title" = "Cadeaubon inwisselen";
+
+/* (No Comment) */
 "restore.email.placeholder" = "E-mailadres";
+
+/* (No Comment) */
 "restore.submit" = "BEVESTIGEN";
 
-"iap.error.message.unavailable" = "De Apple-servers zijn momenteel niet beschikbaar. Probeer het later opnieuw.";
-"iap.error.title" = "Fout";
+/* (No Comment) */
+"restore.subtitle" = "Als u een abonnement via deze app heeft aangeschaft en u heeft uw gegevens niet ontvangen, dan kunt u ze hier opnieuw verzenden. Er worden geen kosten in rekening gebracht tijdens dit proces.";
 
-"agreement.trials.title" = "Algemene voorwaarden gratis proefabonnementen";
-"agreement.trials.message" = "De betaling wordt bij de bevestiging van uw aankoop via uw Apple ID-account in rekening gebracht. Het abonnement wordt automatisch verlengd, tenzij het ten minste 24 uur voor het einde van de huidige periode wordt geannuleerd. De verlenging van uw account wordt binnen 24 uur voor het einde van de huidige periode in rekening gebracht. U kunt uw abonnementen beheren en annuleren door na de aankoop naar uw accountinstellingen in de App Store te gaan.\n\nBepaalde betaalde abonnementen kunnen een gratis proefabonnement aanbieden voordat er kosten in rekening worden gebracht. Als u zich wilt afmelden voor een betaald abonnement voordat we kosten in rekening brengen, moet u het abonnement ten minste 24 uur voor het einde van de gratis proefperiode annuleren.\n\nGratis proefabonnementen zijn alleen beschikbaar voor nieuwe gebruikers. Als u zich aanmeldt voor een aanvullend gratis proefabonnement worden onmiddellijk de standaard abonnementskosten in rekening gebracht.\n\nWij behouden ons het recht voor om uw gratis proefabonnement te allen tijde in te trekken.\n\nEen eventueel ongebruikt deel van uw gratis proefperiode vervalt bij aankoop van een abonnement.\n\nAls u zich aanmeldt, gaat u akkoord met deze algemene voorwaarden.";
-"agreement.message" = "Na de gratis proefperiode van 7 dagen wordt het abonnement automatisch verlengd voor %@, tenzij u het ten minste 24 uur voor het einde van de proefperiode annuleert. De kosten voor de verlenging worden binnen 24 uur voor het einde van de proefperiode via uw Apple ID-account in rekening gebracht. U kunt uw abonnementen beheren en annuleren door na de aankoop naar uw accountinstellingen in de App Store te gaan. De proefperiode van 7 dagen is beperkt tot één proefperiode van 7 dagen per gebruiker. Een eventueel ongebruikt deel van uw gratis proefperiode vervalt bij aankoop van een abonnement. Alle prijzen zijn inclusief lokale omzetbelasting, indien van toepassing.\n\nAls u zich aanmeldt, gaat u akkoord met de $1 en het $2.";
-"agreement.trials.yearly.plan" = "jaar";
-"agreement.trials.monthly.plan" = "maand";
+/* (No Comment) */
+"restore.title" = "Aankoop herstellen";
 
-"agreement.message.tos" = "Servicevoorwaarden";
-"agreement.message.privacy" = "Privacybeleid";
-
-"getstarted.buttons.buyaccount" = "Account kopen";
-
-"gdpr.collect.data.title" = "Persoonlijke informatie die we verzamelen";
-"gdpr.collect.data.description" = "E-mailadres voor accountbeheer en bescherming tegen misbruik.";
-"gdpr.usage.data.title" = "Gebruik van de persoonlijke informatie die we verzamelen";
-"gdpr.usage.data.description" = "E-mailadres wordt alleen gebruikt voor het verzenden van abonnementsinformatie, betalingsbevestigingen, correspondentie met klanten en promotionele aanbiedingen van Private Internet Access.";
-"gdpr.accept.button.title" = "Akkoord en doorgaan";
-
+/* (No Comment) */
 "update.account.email.error" = "Kan accountmail niet aanpassen";
+
+/* (No Comment) */
+"upgrade.header" = "Welkom terug!";
+
+/* (No Comment) */
+"upgrade.renew.now" = "Nu vernieuwen";
+
+/* (No Comment) */
+"upgrade.title" = "U moet uw abonnement vernieuwen om Private Internet Access te kunnen gebruiken.";
+

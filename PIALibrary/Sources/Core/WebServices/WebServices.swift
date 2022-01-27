@@ -30,15 +30,23 @@ protocol WebServices: class {
     
     // MARK: Account
 
-    func token(credentials: Credentials, _ callback: LibraryCallback<String>?)
+    func migrateToken(token: String, _ callback: SuccessLibraryCallback?)
 
-    func token(receipt: Data, _ callback: LibraryCallback<String>?)
+    func token(credentials: Credentials, _ callback: SuccessLibraryCallback?)
 
-    func info(token: String, _ callback: LibraryCallback<AccountInfo>?)
+    func token(receipt: Data, _ callback: SuccessLibraryCallback?)
+
+    func info(_ callback: LibraryCallback<AccountInfo>?)
 
     func update(credentials: Credentials, resetPassword reset: Bool, email: String, _ callback: SuccessLibraryCallback?)
 
     func loginLink(email: String, _ callback: SuccessLibraryCallback?)
+
+    /// The token to use for protocol authentication.
+    var vpnToken: String? { get }
+
+    /// The token to use for api authentication.
+    var apiToken: String? { get }
     
     // MARK: DIP Token
     
@@ -52,6 +60,12 @@ protocol WebServices: class {
      */
     func logout(_ callback: LibraryCallback<Bool>?)
 
+    /**
+         Deletes the user accout on PIA servers.
+         - Parameter callback: Returns an `Bool` if the API returns a success.
+     */
+    func deleteAccount(_ callback: LibraryCallback<Bool>?)
+    
     #if os(iOS)
     func signup(with request: Signup, _ callback: LibraryCallback<Credentials>?)
 

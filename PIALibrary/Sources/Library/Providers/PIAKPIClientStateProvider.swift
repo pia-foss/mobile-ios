@@ -25,13 +25,13 @@ import PIAKPI
 class PIAKPIClientStateProvider : KPIClientStateProvider {
     
     func kpiAuthToken() -> String {
-        return Client.providers.accountProvider.token ?? ""
+        return Client.providers.accountProvider.apiToken ?? ""
     }
 
     func kpiEndpoints() -> [KPIEndpoint] {
         let validEndpoints = EndpointManager.shared.availableEndpoints()
         var clientEndpoints = [KPIEndpoint]()
-        for endpoint in validEndpoints.reversed() {
+        for endpoint in validEndpoints {
             clientEndpoints.append(KPIEndpoint(endpoint: endpoint.host, isProxy: endpoint.isProxy, usePinnedCertificate: endpoint.useCertificatePinning, certificateCommonName: endpoint.commonName))
         }
         return clientEndpoints

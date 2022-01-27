@@ -1,4 +1,12 @@
-"global.version.format" = "Versie %@ (%@)";
-"global.close" = "Sluiten";
-"global.ok" = "OK";
+/* (No Comment) */
 "global.cancel" = "Annuleren";
+
+/* (No Comment) */
+"global.close" = "Sluiten";
+
+/* (No Comment) */
+"global.ok" = "OK";
+
+/* (No Comment) */
+"global.version.format" = "Versie %@ (%@)";
+
