@@ -133,8 +133,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                     Macros.dispatch(after: .milliseconds(1000)) { //TODO: Improve this, we are giving some time to push the view
                         let token = url.absoluteString[AppConstants.MagicLink.url.count...]
                         Client.providers.accountProvider.login(with: token) { (user, error) in
+                            var userInfo: [NotificationKey: Any]? = nil
+                            if let error = error {
+                                userInfo = [.error: error]
+                            }
                             getStartedViewController.hideLoadingAnimation()
-                            Macros.postNotification(.PIAFinishLoginWithMagicLink)
+                            Macros.postNotification(.PIAFinishLoginWithMagicLink, userInfo)
                         }
                     }
                 }

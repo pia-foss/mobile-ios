@@ -287,6 +287,7 @@ public enum DevelopmentSections: Int, SettingSection, EnumsBuilder {
     case password
     case environment
     case resolveGoogleAdsDomain
+    case deleteKeychain
     case crash
 
     public func localizedTitleMessage() -> String {
@@ -298,6 +299,7 @@ public enum DevelopmentSections: Int, SettingSection, EnumsBuilder {
         case .password: return "Password"
         case .environment: return "Environment"
         case .resolveGoogleAdsDomain: return "Resolve Google Ads Domain"
+        case .deleteKeychain: return "Delete the Keychain"
         case .crash: return "Crash the app"
         }
     }
@@ -311,12 +313,13 @@ public enum DevelopmentSections: Int, SettingSection, EnumsBuilder {
         case .password: return ""
         case .environment: return ""
         case .resolveGoogleAdsDomain: return ""
+        case .deleteKeychain: return ""
         case .crash: return ""
         }
     }
     
     public static func all() -> [Self] {
-        return [.stagingVersion, .customServers, .publicUsername, .username, .password, .environment, .resolveGoogleAdsDomain, .crash]
+        return [.stagingVersion, .customServers, .publicUsername, .username, .password, .environment, .resolveGoogleAdsDomain, .deleteKeychain, .crash]
     }
 
 }

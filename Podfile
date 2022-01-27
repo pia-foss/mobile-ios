@@ -78,7 +78,7 @@ def shared_main_pods
     pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :commit => 'b62d1bab'
     pod "PIAKPIModule", :git => "#{$gitlab_kn_root}/#{$kpi_gitlab_repo}", :commit => '31186b1d'
 
-    #library_by_path('')
+    #library_by_path('~/Repositories')
     #library_by_git('')
     #library_by_gitlab_branch('')
     library_by_gitlab_by_git('d424a364')
