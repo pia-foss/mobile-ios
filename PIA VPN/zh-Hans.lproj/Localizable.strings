@@ -109,6 +109,10 @@
 "account.subscriptions.monthly" = "包月套餐";
 "account.subscriptions.trial" = "试用套餐";
 "account.unauthorized" = "出现问题。请尝试重新登录";
+"account.delete" = "Delete Account";
+"account.delete.alert.title" = "Are you sure?";
+"account.delete.alert.message" = "Deleting your PIA account is permanent and irreversible. You will not be able to retrieve your PIA credentials after performing this action. Please note that this action only deletes your PIA account from our database, but it does NOT delete your subscription. You will need to go to your Apple account and cancel the Private Internet Access subscription from there. Otherwise, you will still be charged, even though your PIA account will no longer be active.";
+"account.delete.alert.failureMessage" = "Something went wrong while deleting your account, please try again later.";
 
 // SETTINGS
 
