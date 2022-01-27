@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="boO-X9-UIe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="boO-X9-UIe">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,7 +27,7 @@
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RegionCell" id="BFi-yz-4kG" customClass="RegionCell" customModule="PIA_VPN" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="24.333333969116211" width="375" height="50"/>
+                                                <rect key="frame" x="0.0" y="44.666666030883789" width="375" height="50"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BFi-yz-4kG" id="Ilu-ub-CEQ">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -129,7 +129,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DedicatedRegionCell" rowHeight="135" id="GMn-Ol-zXm" customClass="DedicatedRegionCell" customModule="PIA_VPN" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="74.333333969116211" width="375" height="135"/>
+                                                <rect key="frame" x="0.0" y="94.666666030883789" width="375" height="135"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GMn-Ol-zXm" id="6RK-aV-ZuY">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
@@ -459,128 +459,142 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="596"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y5u-fx-j5D">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="392.33333333333331"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="596"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UmJ-XK-Iyd">
-                                                        <rect key="frame" x="8" y="0.0" width="304" height="392.33333333333331"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PNt-Yg-Bg9">
+                                                        <rect key="frame" x="15" y="15" width="290" height="206.33333333333334"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PNt-Yg-Bg9">
-                                                                <rect key="frame" x="0.0" y="20" width="304" height="158.33333333333334"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbP-zB-wZm">
+                                                                <rect key="frame" x="24.999999999999996" y="24.999999999999996" width="57.666666666666657" height="14.333333333333332"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hy4-4b-gfa">
+                                                                <rect key="frame" x="25" y="39.333333333333336" width="223" height="30.000000000000007"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="30" id="heY-Tr-mHw"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="W4F-zm-KqY" id="Csi-0d-3Zr"/>
+                                                                </connections>
+                                                            </textField>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get the Private Internet " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oH2-mq-Efa">
+                                                                <rect key="frame" x="25" y="89.333333333333329" width="240" height="17"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get the Private Internet " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h12-Wf-V6Z">
+                                                                <rect key="frame" x="25" y="126.33333333333334" width="240" height="17"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Q0z-yX-NxF">
+                                                                <rect key="frame" x="93.666666666666686" y="163.33333333333334" width="103" height="35"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbP-zB-wZm">
-                                                                        <rect key="frame" x="24.999999999999996" y="24.999999999999996" width="57.666666666666657" height="14.333333333333332"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                        <nil key="textColor"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hy4-4b-gfa">
-                                                                        <rect key="frame" x="25" y="39.333333333333336" width="237" height="30.000000000000007"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="30" id="heY-Tr-mHw"/>
-                                                                        </constraints>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kb7-yi-Is9">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="35"/>
+                                                                        <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </imageView>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TYG-L7-xgH">
+                                                                        <rect key="frame" x="52.999999999999986" y="0.0" width="50" height="35"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
-                                                                        <connections>
-                                                                            <outlet property="delegate" destination="W4F-zm-KqY" id="Csi-0d-3Zr"/>
-                                                                        </connections>
-                                                                    </textField>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get the Private Internet " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oH2-mq-Efa">
-                                                                        <rect key="frame" x="25" y="89.333333333333329" width="254" height="17"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <nil key="textColor"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get the Private Internet " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h12-Wf-V6Z">
-                                                                        <rect key="frame" x="25" y="126.33333333333334" width="254" height="17"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <nil key="textColor"/>
+                                                                        <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="trailing" secondItem="oH2-mq-Efa" secondAttribute="trailing" constant="25" id="2ee-d0-8gm"/>
-                                                                    <constraint firstItem="h12-Wf-V6Z" firstAttribute="leading" secondItem="PNt-Yg-Bg9" secondAttribute="leading" constant="25" id="9gH-Di-ce7"/>
-                                                                    <constraint firstItem="vbP-zB-wZm" firstAttribute="leading" secondItem="PNt-Yg-Bg9" secondAttribute="leading" constant="25" id="DMq-vJ-4E6"/>
-                                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vbP-zB-wZm" secondAttribute="trailing" constant="20" symbolic="YES" id="Exv-Cn-1fy"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="h12-Wf-V6Z" secondAttribute="bottom" constant="15" id="G9v-eu-qEc"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="h12-Wf-V6Z" secondAttribute="trailing" constant="25" id="Gwo-dE-Phc"/>
-                                                                    <constraint firstItem="hy4-4b-gfa" firstAttribute="leading" secondItem="PNt-Yg-Bg9" secondAttribute="leading" constant="25" id="KBY-tY-BZi"/>
-                                                                    <constraint firstItem="oH2-mq-Efa" firstAttribute="leading" secondItem="PNt-Yg-Bg9" secondAttribute="leading" constant="25" id="NoP-Ek-Xuz"/>
-                                                                    <constraint firstItem="vbP-zB-wZm" firstAttribute="top" secondItem="PNt-Yg-Bg9" secondAttribute="top" constant="25" id="Qvy-mN-kte"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="hy4-4b-gfa" secondAttribute="trailing" constant="42" id="TFd-Kw-62K"/>
-                                                                    <constraint firstItem="hy4-4b-gfa" firstAttribute="top" secondItem="vbP-zB-wZm" secondAttribute="bottom" id="eGB-Rb-x7J"/>
-                                                                    <constraint firstItem="oH2-mq-Efa" firstAttribute="top" secondItem="hy4-4b-gfa" secondAttribute="bottom" constant="20" id="o4m-Bp-DUk"/>
-                                                                    <constraint firstItem="h12-Wf-V6Z" firstAttribute="top" secondItem="oH2-mq-Efa" secondAttribute="bottom" constant="20" id="okR-OG-vSn"/>
+                                                                    <constraint firstAttribute="height" constant="35" id="Liu-lt-VN7"/>
                                                                 </constraints>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E1e-eL-IsV">
-                                                                <rect key="frame" x="0.0" y="198.33333333333337" width="304" height="174"/>
-                                                                <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restore uncredited purchase" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MN6-GE-zWd">
-                                                                        <rect key="frame" x="25" y="0.0" width="254" height="20.333333333333332"/>
-                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                                                        <nil key="textColor"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WVl-6h-tT4">
-                                                                        <rect key="frame" x="25" y="40.333333333333321" width="254" height="83.666666666666686"/>
-                                                                        <string key="text">If you renewed your plan but your account still says it's about to expire, you can restart the renewal from here. You will not be charged during this process.</string>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <nil key="textColor"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCX-mJ-yUF">
-                                                                        <rect key="frame" x="25" y="133.99999999999997" width="254" height="40"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="40" id="dqu-St-R8A"/>
-                                                                        </constraints>
-                                                                        <state key="normal" title="Restore purchase"/>
-                                                                        <connections>
-                                                                            <action selector="renewSubscriptionWithUncreditedPurchase:" destination="W4F-zm-KqY" eventType="touchUpInside" id="YyJ-Az-jl7"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                </subviews>
-                                                                <constraints>
-                                                                    <constraint firstItem="MN6-GE-zWd" firstAttribute="leading" secondItem="E1e-eL-IsV" secondAttribute="leading" constant="25" id="JuZ-OP-Xys"/>
-                                                                    <constraint firstItem="WVl-6h-tT4" firstAttribute="leading" secondItem="E1e-eL-IsV" secondAttribute="leading" constant="25" id="QX5-1h-qL7"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="FCX-mJ-yUF" secondAttribute="trailing" constant="25" id="VW3-3q-rBt"/>
-                                                                    <constraint firstItem="FCX-mJ-yUF" firstAttribute="leading" secondItem="E1e-eL-IsV" secondAttribute="leading" constant="25" id="Z2m-Jc-wwd"/>
-                                                                    <constraint firstItem="WVl-6h-tT4" firstAttribute="top" secondItem="MN6-GE-zWd" secondAttribute="bottom" constant="20" id="Z6c-76-y9J"/>
-                                                                    <constraint firstItem="MN6-GE-zWd" firstAttribute="top" secondItem="E1e-eL-IsV" secondAttribute="top" id="bL8-2y-LUe"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="MN6-GE-zWd" secondAttribute="trailing" constant="25" id="cEu-oi-5iO"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="WVl-6h-tT4" secondAttribute="trailing" constant="25" id="dHK-RT-fPO"/>
-                                                                    <constraint firstItem="FCX-mJ-yUF" firstAttribute="top" secondItem="WVl-6h-tT4" secondAttribute="bottom" constant="10" id="gF8-fM-FIa"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="FCX-mJ-yUF" secondAttribute="bottom" id="vpd-Nv-aHf"/>
-                                                                </constraints>
-                                                            </view>
+                                                            </stackView>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="urR-k4-bQF">
+                                                                <rect key="frame" x="93.666666666666686" y="163.33333333333334" width="103" height="35"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <connections>
+                                                                    <action selector="deleteUserAccount:" destination="W4F-zm-KqY" eventType="touchUpInside" id="z6K-fV-G2I"/>
+                                                                </connections>
+                                                            </button>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstItem="E1e-eL-IsV" firstAttribute="top" secondItem="PNt-Yg-Bg9" secondAttribute="bottom" constant="20" id="1cB-Rk-sFg"/>
-                                                            <constraint firstAttribute="bottom" secondItem="E1e-eL-IsV" secondAttribute="bottom" constant="20" id="6SU-ry-xEc"/>
-                                                            <constraint firstItem="E1e-eL-IsV" firstAttribute="leading" secondItem="UmJ-XK-Iyd" secondAttribute="leading" id="AXx-LH-k1X"/>
-                                                            <constraint firstAttribute="trailing" secondItem="E1e-eL-IsV" secondAttribute="trailing" id="PKv-ji-wyd"/>
-                                                            <constraint firstItem="PNt-Yg-Bg9" firstAttribute="top" secondItem="UmJ-XK-Iyd" secondAttribute="top" constant="20" id="hBX-s5-wux"/>
-                                                            <constraint firstAttribute="trailing" secondItem="PNt-Yg-Bg9" secondAttribute="trailing" id="kk6-wd-azo"/>
-                                                            <constraint firstItem="PNt-Yg-Bg9" firstAttribute="leading" secondItem="UmJ-XK-Iyd" secondAttribute="leading" id="ySg-Bd-oJy"/>
-                                                            <constraint firstAttribute="bottom" secondItem="PNt-Yg-Bg9" secondAttribute="bottom" constant="20" id="zNr-Qb-NVg"/>
+                                                            <constraint firstAttribute="trailing" secondItem="oH2-mq-Efa" secondAttribute="trailing" constant="25" id="2ee-d0-8gm"/>
+                                                            <constraint firstAttribute="bottom" secondItem="Q0z-yX-NxF" secondAttribute="bottom" constant="8" id="2uI-af-Eiw"/>
+                                                            <constraint firstItem="Q0z-yX-NxF" firstAttribute="centerX" secondItem="PNt-Yg-Bg9" secondAttribute="centerX" id="5Ns-58-Sty"/>
+                                                            <constraint firstItem="h12-Wf-V6Z" firstAttribute="leading" secondItem="PNt-Yg-Bg9" secondAttribute="leading" constant="25" id="9gH-Di-ce7"/>
+                                                            <constraint firstItem="vbP-zB-wZm" firstAttribute="leading" secondItem="PNt-Yg-Bg9" secondAttribute="leading" constant="25" id="DMq-vJ-4E6"/>
+                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vbP-zB-wZm" secondAttribute="trailing" constant="20" symbolic="YES" id="Exv-Cn-1fy"/>
+                                                            <constraint firstAttribute="trailing" secondItem="h12-Wf-V6Z" secondAttribute="trailing" constant="25" id="Gwo-dE-Phc"/>
+                                                            <constraint firstItem="urR-k4-bQF" firstAttribute="centerY" secondItem="Q0z-yX-NxF" secondAttribute="centerY" id="Jm9-KU-2OF"/>
+                                                            <constraint firstItem="hy4-4b-gfa" firstAttribute="leading" secondItem="PNt-Yg-Bg9" secondAttribute="leading" constant="25" id="KBY-tY-BZi"/>
+                                                            <constraint firstItem="oH2-mq-Efa" firstAttribute="leading" secondItem="PNt-Yg-Bg9" secondAttribute="leading" constant="25" id="NoP-Ek-Xuz"/>
+                                                            <constraint firstItem="vbP-zB-wZm" firstAttribute="top" secondItem="PNt-Yg-Bg9" secondAttribute="top" constant="25" id="Qvy-mN-kte"/>
+                                                            <constraint firstAttribute="trailing" secondItem="hy4-4b-gfa" secondAttribute="trailing" constant="42" id="TFd-Kw-62K"/>
+                                                            <constraint firstItem="urR-k4-bQF" firstAttribute="centerX" secondItem="Q0z-yX-NxF" secondAttribute="centerX" id="WEl-wf-zdy"/>
+                                                            <constraint firstItem="hy4-4b-gfa" firstAttribute="top" secondItem="vbP-zB-wZm" secondAttribute="bottom" id="eGB-Rb-x7J"/>
+                                                            <constraint firstItem="urR-k4-bQF" firstAttribute="height" secondItem="Q0z-yX-NxF" secondAttribute="height" id="n7R-fc-6gQ"/>
+                                                            <constraint firstItem="oH2-mq-Efa" firstAttribute="top" secondItem="hy4-4b-gfa" secondAttribute="bottom" constant="20" id="o4m-Bp-DUk"/>
+                                                            <constraint firstItem="h12-Wf-V6Z" firstAttribute="top" secondItem="oH2-mq-Efa" secondAttribute="bottom" constant="20" id="okR-OG-vSn"/>
+                                                            <constraint firstItem="urR-k4-bQF" firstAttribute="width" secondItem="Q0z-yX-NxF" secondAttribute="width" id="v0K-Ze-gRx"/>
+                                                            <constraint firstItem="Q0z-yX-NxF" firstAttribute="top" secondItem="h12-Wf-V6Z" secondAttribute="bottom" constant="20" id="xA3-xh-vZb"/>
                                                         </constraints>
-                                                        <variation key="default">
-                                                            <mask key="constraints">
-                                                                <exclude reference="zNr-Qb-NVg"/>
-                                                            </mask>
-                                                        </variation>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E1e-eL-IsV">
+                                                        <rect key="frame" x="8" y="257" width="304" height="174"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restore uncredited purchase" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MN6-GE-zWd">
+                                                                <rect key="frame" x="25" y="0.0" width="254" height="20.333333333333332"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WVl-6h-tT4">
+                                                                <rect key="frame" x="25" y="40.333333333333321" width="254" height="83.666666666666686"/>
+                                                                <string key="text">If you renewed your plan but your account still says it's about to expire, you can restart the renewal from here. You will not be charged during this process.</string>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCX-mJ-yUF">
+                                                                <rect key="frame" x="25" y="134" width="254" height="40"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="40" id="dqu-St-R8A"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Restore purchase"/>
+                                                                <connections>
+                                                                    <action selector="renewSubscriptionWithUncreditedPurchase:" destination="W4F-zm-KqY" eventType="touchUpInside" id="YyJ-Az-jl7"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="MN6-GE-zWd" firstAttribute="leading" secondItem="E1e-eL-IsV" secondAttribute="leading" constant="25" id="JuZ-OP-Xys"/>
+                                                            <constraint firstItem="WVl-6h-tT4" firstAttribute="leading" secondItem="E1e-eL-IsV" secondAttribute="leading" constant="25" id="QX5-1h-qL7"/>
+                                                            <constraint firstAttribute="trailing" secondItem="FCX-mJ-yUF" secondAttribute="trailing" constant="25" id="VW3-3q-rBt"/>
+                                                            <constraint firstItem="FCX-mJ-yUF" firstAttribute="leading" secondItem="E1e-eL-IsV" secondAttribute="leading" constant="25" id="Z2m-Jc-wwd"/>
+                                                            <constraint firstItem="WVl-6h-tT4" firstAttribute="top" secondItem="MN6-GE-zWd" secondAttribute="bottom" constant="20" id="Z6c-76-y9J"/>
+                                                            <constraint firstItem="MN6-GE-zWd" firstAttribute="top" secondItem="E1e-eL-IsV" secondAttribute="top" id="bL8-2y-LUe"/>
+                                                            <constraint firstAttribute="trailing" secondItem="MN6-GE-zWd" secondAttribute="trailing" constant="25" id="cEu-oi-5iO"/>
+                                                            <constraint firstAttribute="trailing" secondItem="WVl-6h-tT4" secondAttribute="trailing" constant="25" id="dHK-RT-fPO"/>
+                                                            <constraint firstItem="FCX-mJ-yUF" firstAttribute="top" secondItem="WVl-6h-tT4" secondAttribute="bottom" constant="10" id="gF8-fM-FIa"/>
+                                                            <constraint firstAttribute="bottom" secondItem="FCX-mJ-yUF" secondAttribute="bottom" id="vpd-Nv-aHf"/>
+                                                        </constraints>
                                                     </view>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="UmJ-XK-Iyd" firstAttribute="top" secondItem="y5u-fx-j5D" secondAttribute="top" id="4oB-qh-1IK"/>
-                                                    <constraint firstItem="UmJ-XK-Iyd" firstAttribute="leading" secondItem="y5u-fx-j5D" secondAttribute="leadingMargin" id="Tf3-qA-o8k"/>
-                                                    <constraint firstAttribute="trailingMargin" secondItem="UmJ-XK-Iyd" secondAttribute="trailing" id="WF5-x1-YqK"/>
-                                                    <constraint firstAttribute="bottom" secondItem="UmJ-XK-Iyd" secondAttribute="bottom" id="yqt-87-xPH"/>
+                                                    <constraint firstAttribute="trailing" secondItem="PNt-Yg-Bg9" secondAttribute="trailing" constant="15" id="0Em-rz-hIZ"/>
+                                                    <constraint firstItem="E1e-eL-IsV" firstAttribute="top" secondItem="PNt-Yg-Bg9" secondAttribute="bottom" constant="35.666666666666657" id="6F6-PW-qZW"/>
+                                                    <constraint firstItem="PNt-Yg-Bg9" firstAttribute="top" secondItem="y5u-fx-j5D" secondAttribute="top" constant="15" id="MG0-Cl-V1y"/>
+                                                    <constraint firstItem="E1e-eL-IsV" firstAttribute="leading" secondItem="y5u-fx-j5D" secondAttribute="leading" constant="8" id="d6Z-D6-qPU"/>
+                                                    <constraint firstItem="PNt-Yg-Bg9" firstAttribute="leading" secondItem="y5u-fx-j5D" secondAttribute="leading" constant="15" id="dty-Px-oLi"/>
+                                                    <constraint firstAttribute="trailing" secondItem="E1e-eL-IsV" secondAttribute="trailing" constant="8" id="gQ7-Tv-G8B"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="y5u-fx-j5D" secondAttribute="bottom" id="2JB-l1-rXX"/>
+                                            <constraint firstItem="y5u-fx-j5D" firstAttribute="height" secondItem="6vR-J1-3Pa" secondAttribute="height" priority="250" id="4FL-mV-M18"/>
                                             <constraint firstItem="y5u-fx-j5D" firstAttribute="top" secondItem="6vR-J1-3Pa" secondAttribute="top" id="Aax-FG-cwW"/>
                                             <constraint firstItem="y5u-fx-j5D" firstAttribute="width" secondItem="6vR-J1-3Pa" secondAttribute="width" id="aLa-pB-YQ9"/>
                                             <constraint firstAttribute="trailing" secondItem="y5u-fx-j5D" secondAttribute="trailing" id="wKx-AG-LTp"/>
@@ -612,6 +626,8 @@
                     <size key="freeformSize" width="320" height="650"/>
                     <connections>
                         <outlet property="buttonRestore" destination="FCX-mJ-yUF" id="8nc-LF-QdD"/>
+                        <outlet property="imageViewTrash" destination="kb7-yi-Is9" id="qF8-Ph-sNJ"/>
+                        <outlet property="labelDeleteAccount" destination="TYG-L7-xgH" id="ORf-Ws-jtq"/>
                         <outlet property="labelExpiryInformation" destination="oH2-mq-Efa" id="zZE-3D-xO3"/>
                         <outlet property="labelRestoreInfo" destination="WVl-6h-tT4" id="ouB-mI-FIF"/>
                         <outlet property="labelRestoreTitle" destination="MN6-GE-zWd" id="V2U-29-EI2"/>
@@ -1028,7 +1044,7 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ExpirationCell" id="y4W-aR-JVk" customClass="ExpirationCell" customModule="PIA_VPN" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="134.33333396911621" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="154.66666603088379" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="y4W-aR-JVk" id="YJR-fZ-bDJ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -1086,7 +1102,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ItemCell" id="3Lb-bI-Xez" customClass="MenuItemCell" customModule="PIA_VPN" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="184.33333396911621" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="204.66666603088379" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3Lb-bI-Xez" id="mIh-dY-Zs3">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -1196,7 +1212,7 @@
                                         </view>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoticeCell" rowHeight="120" id="3xG-dz-slc" customClass="AboutNoticeCell" customModule="PIA_VPN" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="121.83333396911621" width="375" height="120"/>
+                                                <rect key="frame" x="0.0" y="142.16666603088379" width="375" height="120"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3xG-dz-slc" id="FCF-nh-86z">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
@@ -1260,7 +1276,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LicenseCell" id="Hpn-yc-gw3" customClass="AboutLicenseCell" customModule="PIA_VPN" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="241.83333396911621" width="375" height="250"/>
+                                                <rect key="frame" x="0.0" y="262.16666603088379" width="375" height="250"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hpn-yc-gw3" id="nYi-os-1ZE">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
@@ -2160,16 +2176,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QCe-pR-3PN">
-                                <rect key="frame" x="0.0" y="56" width="375" height="668"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="702"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVx-G5-8Dl">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="668"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="702"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HWN-wJ-W1w">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="668"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="702"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BXC-yS-Lv0">
-                                                        <rect key="frame" x="0.0" y="83.333333333333343" width="375" height="501.33333333333326"/>
+                                                        <rect key="frame" x="0.0" y="100.33333333333334" width="375" height="501.33333333333326"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GBN-9r-4MZ">
                                                                 <rect key="frame" x="47.666666666666657" y="0.0" width="280" height="411.33333333333331"/>
@@ -2780,7 +2796,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="aeb-89-wap"/>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="1J8-pD-cu8">
-                                <rect key="frame" x="127" y="751.66666666666663" width="121.33333333333331" height="26.333333333333371"/>
+                                <rect key="frame" x="131.33333333333334" y="753" width="112.66666666666666" height="25"/>
                             </pageControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9mt-va-Ael"/>

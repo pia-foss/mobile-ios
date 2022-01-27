@@ -43,6 +43,10 @@ class AccountViewController: AutolayoutViewController {
     
     @IBOutlet weak var labelExpiryInformation: UILabel!
         
+    @IBOutlet private weak var imageViewTrash: UIImageView!
+    
+    @IBOutlet private weak var labelDeleteAccount: UILabel!
+    
     @IBOutlet private weak var viewAccountInfo: UIView!
     
     @IBOutlet private weak var viewUncredited: UIView!
@@ -70,6 +74,7 @@ class AccountViewController: AutolayoutViewController {
         labelUsername.text = L10n.Account.Username.caption
         labelRestoreTitle.text = L10n.Account.Restore.title
         labelRestoreInfo.text = L10n.Account.Restore.description
+        imageViewTrash.image = Theme.current.trashIconImage()
         buttonRestore.setTitle(L10n.Account.Restore.button.uppercased(), for: .normal)
         labelSubscriptions.attributedText = Theme.current.textWithColoredLink(
             withMessage: L10n.Account.Subscriptions.message,
@@ -122,6 +127,42 @@ class AccountViewController: AutolayoutViewController {
             }
             self.handleReceiptRefresh()
         }
+    }
+    
+    @IBAction private func deleteUserAccount(_ sender: Any?) {
+        let sheet = Macros.alert(
+            L10n.Account.Delete.Alert.title,
+            L10n.Account.Delete.Alert.message
+        )
+        sheet.addCancelAction(L10n.Global.no)
+        sheet.addDestructiveActionWithTitle(L10n.Global.yes) {
+            self.showLoadingAnimation()
+            log.debug("Account: Deleting...")
+            
+            Client.providers.accountProvider.deleteAccount({ error in
+                if error == nil {
+                    self.hideLoadingAnimation()
+                    DashboardViewController.instanceInNavigationStack()?.showLoadingAnimation()
+                    self.dismiss(animated: true) {
+                        log.debug("Account: Deleted successfully, now Logging out...")
+                        AccountViewController.logout { success in
+                            DashboardViewController.instanceInNavigationStack()?.hideLoadingAnimation()
+                            if success == false {
+                                log.debug("Account: Error logging out the user")
+                            }
+                        }
+                    }
+                } else {
+                    self.hideLoadingAnimation()
+                    let sheet = Macros.alert(nil, L10n.Account.Delete.Alert.failureMessage)
+                    sheet.addCancelAction(L10n.Global.ok)
+                    self.present(sheet, animated: true, completion: nil)
+                    log.debug("Account: Deleting failed...")
+                }
+            })
+            
+        }
+        present(sheet, animated: true, completion: nil)
     }
     
     private func handleReceiptRefresh() {
@@ -221,6 +262,8 @@ class AccountViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         
+        self.viewAccountInfo.layer.cornerRadius = 5.0
+        
         styleNavigationBarWithTitle(L10n.Menu.Item.account)
 
         if let viewContainer = viewContainer {
@@ -236,6 +279,7 @@ class AccountViewController: AutolayoutViewController {
         for label in [labelExpiryInformation!] {
             Theme.current.applySubtitle(label)
         }
+        Theme.current.applyUnderline(labelDeleteAccount, with: L10n.Account.delete)
         Theme.current.applyTitle(labelRestoreTitle, appearance: .dark)
         Theme.current.applySubtitle(labelRestoreInfo)
         buttonRestore.style(style: TextStyle.textStyle9)
@@ -254,3 +298,16 @@ class AccountViewController: AutolayoutViewController {
     }
 }
 
+extension AccountViewController {
+    
+    class func logout(_ completion: ((Bool?) -> ())? = nil) {
+        Client.providers.accountProvider.logout({ error in
+            guard let _ = error else {
+                AppPreferences.shared.clean()
+                completion?(false)
+                return
+            }
+            completion?(true)
+        })
+    }
+}

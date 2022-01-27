@@ -24,6 +24,7 @@ import Foundation
 import PIALibrary
 import SideMenu
 import FXPageControl
+import UIKit
 
 extension Theme {
     
@@ -224,7 +225,11 @@ extension Theme {
             Asset.Piax.Global.eyeInactiveDark.image :
             Asset.Piax.Global.eyeInactiveLight.image
     }
-
+    
+    public func trashIconImage() -> UIImage {
+        return palette.appearance == .dark ? Asset.iconTrashDark.image : Asset.iconTrash.image
+    }
+    
     public func applyLicenseMonospaceFontAndColor(_ textView: UITextView,
                                                   appearance: Appearance) {
         textView.font = typeface.monospaceFont(size: 14.0)

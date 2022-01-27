@@ -375,35 +375,15 @@ class MenuViewController: AutolayoutViewController {
         sheet.addCancelAction(L10n.Global.cancel)
         sheet.addDestructiveActionWithTitle(L10n.Menu.Logout.confirm) {
             self.dismiss(animated: true) {
-                        
                 log.debug("Account: Logging out...")
-
-                if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-                    let rootNavVC = appDelegate.window?.rootViewController as? UINavigationController,
-                    let dashboard = rootNavVC.viewControllers.first as? DashboardViewController {
-
-                    dashboard.showLoadingAnimation()
-                    Client.providers.accountProvider.logout({ error in
-                        guard let _ = error else {
-                            AppPreferences.shared.clean()
-                            dashboard.hideLoadingAnimation()
-                            return
-                        }
-                        log.debug("Account: Error logging out the user")
-                    })
-
-                } else {
-                    
-                    Client.providers.accountProvider.logout({ error in
-                        guard let _ = error else {
-                            AppPreferences.shared.clean()
-                            return
-                        }
-                        log.debug("Account: Error logging out the user")
-                    })
-
-                }
+                DashboardViewController.instanceInNavigationStack()?.showLoadingAnimation()
                 
+                AccountViewController.logout { success in
+                    DashboardViewController.instanceInNavigationStack()?.hideLoadingAnimation()
+                    if success == false {
+                        log.debug("Account: Error logging out the user")
+                    }
+                }
             }
         }
         present(sheet, animated: true, completion: nil)
