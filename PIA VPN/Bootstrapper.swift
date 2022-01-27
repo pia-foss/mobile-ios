@@ -47,7 +47,6 @@ class Bootstrapper {
     }
 
     func bootstrap() {
-        
         let console = ConsoleDestination()
         #if PIA_DEV
         console.minLevel = .debug
@@ -88,6 +87,8 @@ class Bootstrapper {
             fatalError("Could not parse bundled regions file: \(e)")
         }
 
+        Client.configuration.rsa4096Certificate = rsa4096Certificate()
+
         #if PIA_DEV
         Client.environment =  AppPreferences.shared.appEnvironmentIsProduction ? .production : .staging
         #else
@@ -95,6 +96,12 @@ class Bootstrapper {
         #endif
         Client.configuration.isDevelopment = Flags.shared.usesDevelopmentClient
         if let stagingUrl = AppConstants.Web.stagingEndpointURL {
+                        
+            if AppPreferences.shared.stagingVersion < 1 {
+                Client.environment = .staging
+                let stagingVersion = Int(stagingUrl.absoluteString.split(separator: "-")[1]) ?? 1
+                AppPreferences.shared.stagingVersion = stagingVersion
+            }
             
             let url = stagingUrl.absoluteString.replacingOccurrences(of: "staging-[0-9]", with: "staging-\(AppPreferences.shared.stagingVersion)", options: .regularExpression)
             Client.configuration.setBaseURL(url, for: .staging)
@@ -134,6 +141,7 @@ class Bootstrapper {
             AppPreferences.shared.showsDedicatedIPView = Client.configuration.featureFlags.contains(Client.FeatureFlags.dedicatedIp)
             AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags.contains(Client.FeatureFlags.checkDipExpirationRequest)
             AppPreferences.shared.disablesMultiDipTokens = Client.configuration.featureFlags.contains(Client.FeatureFlags.disableMultiDipTokens)
+            AppPreferences.shared.showNewInitialScreen = Client.configuration.featureFlags.contains(Client.FeatureFlags.showNewInitialScreen)
         })
         MessagesManager.shared.refreshMessages()
 
@@ -168,8 +176,6 @@ class Bootstrapper {
 
             Client.refreshProducts()
             Client.observeTransactions()
-            
-            
         }
 
         if (self.isSimulator || Flags.shared.usesMockVPN) {
@@ -182,7 +188,7 @@ class Bootstrapper {
         if Flags.shared.usesMockAccount {
             Client.useMockAccountProvider(AppConfiguration.Mock.accountProvider)
         }
-        
+
         Client.bootstrap()
         
         // Preferences
@@ -234,6 +240,12 @@ class Bootstrapper {
 
     func dispose() {
         Client.dispose()
+    }
+
+    // MARK: Certificate
+
+    func rsa4096Certificate() -> String? {
+        return AppPreferences.shared.piaHandshake.pemString()
     }
     
     // MARK: Notifications
