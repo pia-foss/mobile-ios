@@ -60,6 +60,12 @@ protocol WebServices: class {
      */
     func logout(_ callback: LibraryCallback<Bool>?)
 
+    /**
+         Deletes the user accout on PIA servers.
+         - Parameter callback: Returns an `Bool` if the API returns a success.
+     */
+    func deleteAccount(_ callback: LibraryCallback<Bool>?)
+    
     #if os(iOS)
     func signup(with request: Signup, _ callback: LibraryCallback<Credentials>?)
 

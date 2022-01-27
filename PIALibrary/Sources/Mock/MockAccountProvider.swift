@@ -267,6 +267,11 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
     }
     
     /// :nodoc:
+    public func deleteAccount(_ callback: SuccessLibraryCallback?) {
+        delegate.deleteAccount(callback)
+    }
+    
+    /// :nodoc:
     public func cleanDatabase() {
         delegate.cleanDatabase()
     }

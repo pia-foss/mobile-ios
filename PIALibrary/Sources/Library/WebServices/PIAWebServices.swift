@@ -261,6 +261,16 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         }
     }
     
+    func deleteAccount(_ callback: LibraryCallback<Bool>?) {
+        self.accountAPI.deleteAccount(callback: { errors in
+            if !errors.isEmpty {
+                callback?(false, ClientError.invalidParameter)
+            } else {
+                callback?(true, nil)
+            }
+        })
+    }
+    
     func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
         self.accountAPI.renewDedicatedIP(ipToken: dipToken) { (errors) in
             if !errors.isEmpty {

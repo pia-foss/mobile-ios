@@ -332,6 +332,19 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
     }
     
+    func deleteAccount(_ callback: SuccessLibraryCallback?) {
+        guard isLoggedIn else {
+            preconditionFailure()
+        }
+        webServices.deleteAccount { (result, error) in
+            guard let result = result, result != false else {
+                callback?(error)
+                return
+            }
+            callback?(nil)
+        }
+    }
+    
     func featureFlags(_ callback: SuccessLibraryCallback?) {
         webServices.featureFlags { (features, nil) in
             Client.configuration.featureFlags.removeAll()

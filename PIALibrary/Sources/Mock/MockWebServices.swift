@@ -72,6 +72,10 @@ class MockWebServices: WebServices {
         callback?(true, nil)
     }
     
+    func deleteAccount(_ callback: LibraryCallback<Bool>?) {
+        callback?(true, nil)
+    }
+    
     func activateDIPToken(tokens: [String], _ callback: LibraryCallback<[Server]>?) {
         callback?([], nil)
     }
