@@ -1,67 +1,205 @@
+/* (No Comment) */
 "agreement.message" = "หลังจากทดลองใช้ฟรี 7 วัน ระบบจะต่ออายุสมาชิกนี้โดยอัตโนมัติในราคา %@ เว้นแต่จะมีการยกเลิกล่วงหน้าอย่างน้อย 24 ชั่วโมงก่อนที่จะสิ้นสุดรอบใช้งานปัจจุบัน บัญชี Apple ID ของคุณจะถูกเรียกเก็บเงินค่าต่ออายุสมาชิกภายใน 24 ชั่วโมงก่อนสิ้นสุดรอบใช้งานปัจจุบัน คุณสามารถจัดการและยกเลิกการเป็นสมาชิกได้โดยไปที่การตั้งค่าบัญชีใน App Store หลังจากซื้อแล้ว จำกัดสิทธิ์การทดลองใช้ฟรี 7 วัน เพียง 1 สิทธิ์ต่อผู้ใช้หนึ่งราย ส่วนที่ไม่ได้ใช้งานของช่วงทดลองใช้ฟรีหากมีให้จะถูกริบเมื่อผู้ใช้ซื้อการสมัครสมาชิก ราคาทั้งหมดรวมภาษีการขายในท้องที่\n\nการลงทะเบียนจะถือว่าคุณยินยอมตาม $1 และ $2";
+
+/* (No Comment) */
 "agreement.message.privacy" = "นโยบายความเป็นส่วนตัว";
+
+/* (No Comment) */
 "agreement.message.tos" = "ข้อตกลงการใช้บริการ";
+
+/* (No Comment) */
 "agreement.trials.message" = "ยอดชำระเงินจะถูกหักจากบัญชี Apple ID ของคุณเมื่อมีการยืนยันคำสั่งซื้อ ระบบจะต่ออายุสมาชิกโดยอัตโนมัติเว้นแต่จะมีการยกเลิกล่วงหน้าอย่างน้อย 24 ชั่วโมงก่อนที่จะสิ้นสุดรอบใช้งานปัจจุบัน บัญชีของคุณจะถูกเรียกเก็บเงินค่าต่ออายุสมาชิกภายใน 24 ชั่วโมงก่อนสิ้นสุดรอบใช้งานปัจจุบัน คุณสามารถจัดการและยกเลิกการเป็นสมาชิกได้โดยไปที่การตั้งค่าบัญชีใน App Store หลังจากซื้อแล้ว\n\nบางระบบสมาชิกแบบชำระเงินอาจเสนอให้คุณทดลองใช้ฟรีก่อนที่จะเรียกเก็บเงินผ่านช่องทางการชำระเงินที่คุณเลือกไว้ หากคุณตัดสินใจที่จะยกเลิกการสมัครสมาชิกแบบชำระเงินก่อนที่เราจะเริ่มเรียกเก็บเงินผ่านช่องทางการชำระเงินที่เลือกไว้ ให้ทำการยกเลิกสมาชิกล่วงหน้าอย่างน้อย 24 ชั่วโมงก่อนที่ช่วงทดลองใช้ฟรีจะสิ้นสุดลง\n\nสามารถทดลองใช้ฟรีเฉพาะผู้ใช้ใหม่เท่านั้นและขึ้นอยู่กับดุลยพินิจของเราแต่เพียงผู้เดียว และหากคุณพยายามที่จะสมัครเพื่อทดลองใช้ฟรีซ้ำอีก คุณจะถูกเรียกเก็บค่าธรรมเนียมการสมัครสมาชิกตามมาตรฐานทันที\n\nเราขอสงวนสิทธิ์ในการเพิกถอนสิทธิ์ทดลองใช้ฟรีของคุณได้ตลอดเวลา\n\nส่วนที่ไม่ได้ใช้งานของช่วงทดลองใช้ฟรีจะถูกหักทิ้งเมื่อมีการสมัครสมาชิก\n\nการสมัครสมาชิกถือว่าเป็นการยอมรับข้อกำหนดและเงื่อนไขนี้";
+
+/* (No Comment) */
 "agreement.trials.monthly.plan" = "เดือน";
+
+/* (No Comment) */
 "agreement.trials.title" = "ข้อกำหนดและเงื่อนไขการทดลองใช้ฟรี";
+
+/* (No Comment) */
 "agreement.trials.yearly.plan" = "ปี";
-"camera.access.error.message" = "อุปกรณ์ของคุณไม่รองรับการสแกน QR โค้ด กรุณาใช้อุปกรณ์ที่มีกล้องถ่ายรูป";
-"camera.access.error.title" = "กล้องไม่พร้อมใช้งาน";
+
+/* (No Comment) */
 "gdpr.accept.button.title" = "ยอมรับและดำเนินการต่อ";
+
+/* (No Comment) */
 "gdpr.collect.data.description" = "อีเมลเพื่อจุดประสงค์ในการจัดการและการป้องกันบัญชีจากการใช้งานในทางที่ผิด";
+
+/* (No Comment) */
 "gdpr.collect.data.title" = "ข้อมูลส่วนบุคคลที่เรารวบรวม";
+
+/* (No Comment) */
 "gdpr.usage.data.description" = "ที่อยู่อีเมลใช้ในการส่งข้อมูลการสมัครสมาชิก การยืนยันการชำระเงิน การติดต่อกับลูกค้า และข้อเสนอส่งเสริมการขาย Private Internet Access เท่านั้น";
+
+/* (No Comment) */
 "gdpr.usage.data.title" = "การใช้ข้อมูลส่วนบุคคลที่เรารวบรวม";
+
+/* (No Comment) */
 "getstarted.buttons.buyaccount" = "ซื้อบัญชี";
+
+/* (No Comment) */
 "iap.error.message.unavailable" = "ไม่พบเซิร์ฟเวอร์แอปเปิ้ลในขณะนี้ โปรดลองใหม่ภายหลัง";
+
+/* (No Comment) */
 "iap.error.title" = "ข้อผิดพลาด";
+
+/* (No Comment) */
 "login.error.throttled" = "มีการลงชื่อเข้าใช้ล้มเหลวด้วยชื่อผู้ใช้นี้เกินจำนวนครั้งที่กำหนด โปรดลองใหม่อีกครั้งภายใน";
+
+/* (No Comment) */
 "login.error.title" = "เข้าสู่ระบบ";
+
+/* (No Comment) */
 "login.error.unauthorized" = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
+
+/* (No Comment) */
 "login.error.validation" = "คุณต้องกรอกชื่อผู้ใช้และรหัสผ่าน";
+
+/* (No Comment) */
 "login.magic.link.invalid.email" = "อีเมลไม่ถูกต้อง กรุณาลองอีกครั้ง";
+
+/* (No Comment) */
 "login.magic.link.response" = "โปรดตรวจสอบอีเมลของคุณเพื่อดูลิงค์สำหรับเข้าสู่ระบบ";
+
+/* (No Comment) */
 "login.magic.link.send" = "ส่งลิงก์";
+
+/* (No Comment) */
 "login.magic.link.title" = "เข้าสู่ระบบโดยใช้ลิงก์อีเมลวิเศษ";
+
+/* (No Comment) */
 "login.password.placeholder" = "รหัสผ่าน";
+
+/* (No Comment) */
 "login.receipt.button" = "เข้าสู่ระบบโดยใช้ใบเสร็จรับเงิน";
+
+/* (No Comment) */
 "login.restore.button" = "ยังไม่ได้รับรายละเอียดบัญชีหรือ";
+
+/* (No Comment) */
 "login.submit" = "เข้าสู่ระบบ";
+
+/* Welcome.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved. */
 "login.title" = "ลงชื่อเข้าใช้บัญชีของคุณ";
+
+/* (No Comment) */
 "login.username.placeholder" = "ชื่อผู้ใช้ (p1234567)";
+
+/* (No Comment) */
 "plan.accessibility.per_month" = "ต่อเดือน";
+
+/* (No Comment) */
 "plan.best_value" = "คุ้มค่าที่สุด";
+
+/* (No Comment) */
 "plan.monthly.title" = "รายเดือน";
+
+/* (No Comment) */
 "plan.price_format" = "%@/เดือน";
+
+/* (No Comment) */
 "plan.yearly.detail_format" = "%@%@ ต่อปี";
+
+/* (No Comment) */
 "plan.yearly.title" = "รายปี";
+
+/* (No Comment) */
 "purchase.confirm.form.email" = "กรุณากรอกอีเมลของคุณ";
+
+/* (No Comment) */
 "purchase.confirm.plan" = "คุณกำลังซื้อแผน %@";
+
+/* (No Comment) */
 "purchase.continue" = "ดำเนินการต่อ";
+
+/* (No Comment) */
 "purchase.email.placeholder" = "อีเมลแอดเดรส";
+
+/* (No Comment) */
 "purchase.email.why" = "โปรดแจ้งอีเมลสำหรับส่งชื่อผู้ใช้และรหัสผ่านของคุณ";
+
+/* (No Comment) */
 "purchase.error.connectivity.description" = "เราไม่สามารถเข้าถึง Private Internet Access ซึ่งอาจเป็นเพราะอินเทอร์เน็ตไม่เสถียรหรือบริการของเราถูกบล็อกในประเทศของคุณ";
+
+/* (No Comment) */
 "purchase.error.connectivity.title" = "ความล้มเหลวในการเชื่อมต่อ";
+
+/* (No Comment) */
 "purchase.error.title" = "ซื้อ";
+
+/* (No Comment) */
 "purchase.error.validation" = "คุณต้องใส่ที่อยู่อีเมล";
+
+/* (No Comment) */
 "purchase.login.button" = "ลงชื่อเข้าใช้";
+
+/* (No Comment) */
 "purchase.login.footer" = "มีบัญชีแล้วหรือยัง";
+
+/* (No Comment) */
 "purchase.or" = "หรือ";
+
+/* (No Comment) */
 "purchase.submit" = "ส่ง";
+
+/* (No Comment) */
 "purchase.subtitle" = "รับประกันการคืนเงินภายใน 30 วัน";
+
+/* (No Comment) */
 "purchase.title" = "เลือกแผน VPN";
+
+/* (No Comment) */
 "redeem.accessibility.back" = "กลับ";
+
+/* (No Comment) */
 "redeem.email.placeholder" = "ที่อยู่อีเมล";
+
+/* (No Comment) */
 "redeem.error.allfields" = "กรุณากรอกอีเมลและ PIN";
+
+/* (No Comment) */
 "redeem.error.code" = "รหัสต้องประกอบด้วยตัวเลข %lu หลัก";
-"redeem.error.qrcode.invalid" = "ลำดับ QR โค้ดไม่ถูกต้อง กรุณาลองอีกครั้ง";
+
+/* (No Comment) */
 "redeem.error.title" = "ใช้สิทธิ์";
+
+/* (No Comment) */
 "redeem.giftcard.placeholder" = "PIN บัตรของขวัญ";
+
+/* (No Comment) */
 "redeem.submit" = "ส่ง";
+
+/* (No Comment) */
 "redeem.subtitle" = "พิมพ์ที่อยู่อีเมลของคุณและ PIN %lu หลักจากบัตรของขวัญหรือบัตรทดลองด้านล่าง";
+
+/* (No Comment) */
 "redeem.title" = "ใช้สิทธิ์บัตรของขวัญ";
+
+/* (No Comment) */
 "restore.email.placeholder" = "อีเมลแอดเดรส";
+
+/* (No Comment) */
 "restore.submit" = "ยืนยัน";
+
+/* (No Comment) */
 "restore.subtitle" = "หากคุณทำการซื้อแผนผ่านแอพนี้และยังไม่ได้รับข้อมูลประจำตัว คุณสามารถส่งอีกครั้งได้จากที่นี่ คุณจะไม่ถูกเรียกเก็บเงินซ้ำอีกครั้งในกระบวนการนี้";
+
+/* (No Comment) */
 "restore.title" = "คืนค่าการซื้อยังไม่ได้คิดเครดิต";
+
+/* (No Comment) */
 "update.account.email.error" = "ไม่สามารถแก้ไขอีเมลบัญชีได้";
+
+/* (No Comment) */
+"upgrade.header" = "ยินดีต้อนรับกลับมา!";
+
+/* (No Comment) */
+"upgrade.renew.now" = "ต่ออายุตอนนี้";
+
+/* (No Comment) */
+"upgrade.title" = "หากต้องการใช้ Private Internet Access คุณจะต้องต่ออายุสมาชิกของคุณ";
+

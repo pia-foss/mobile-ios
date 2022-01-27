@@ -295,8 +295,14 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
     var isLoggedIn = false
 
     var currentUser: UserAccount?
+    
+    var oldToken: String?
 
     var vpnToken: String?
+    
+    var vpnTokenUsername: String?
+    
+    var vpnTokenPassword: String?
 
     var apiToken: String?
     

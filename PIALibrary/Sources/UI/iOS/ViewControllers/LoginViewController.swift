@@ -65,7 +65,7 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
             fatalError("Preset not propagated")
         }
 
-        NotificationCenter.default.addObserver(self, selector: #selector(finishLoginWithMagicLink), name: .PIAFinishLoginWithMagicLink, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(finishLoginWithMagicLink(notification:)), name: .PIAFinishLoginWithMagicLink, object: nil)
 
         labelTitle.text = L10n.Welcome.Login.title
         textUsername.placeholder = L10n.Welcome.Login.Username.placeholder
@@ -152,7 +152,13 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         
     }
     
-    @objc private func finishLoginWithMagicLink() {
+    @objc private func finishLoginWithMagicLink(notification: Notification) {
+        
+        if let userInfo = notification.userInfo, let error = userInfo[NotificationKey.error] as? Error {
+            displayErrorMessage(errorMessage: L10n.Welcome.Purchase.Error.Connectivity.title)
+            return
+        }
+        
         self.completionDelegate?.welcomeDidLogin(withUser:
             UserAccount(credentials: Credentials(username: "",
                                                  password: ""),
@@ -280,7 +286,12 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         } else {
             log.error("Failed to log in")
         }
-
+        
+        displayErrorMessage(errorMessage: errorMessage)
+    }
+    
+    private func displayErrorMessage(errorMessage: String?) {
+        
         Macros.displayImageNote(withImage: Asset.iconWarning.image,
                                 message: errorMessage ?? L10n.Welcome.Login.Error.title)
     }

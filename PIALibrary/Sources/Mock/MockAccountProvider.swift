@@ -160,12 +160,24 @@ public class MockAccountProvider: AccountProvider, WebServicesConsumer {
         return delegate.isLoggedIn
     }
     
+    public var oldToken: String? {
+        return "TOKEN"
+    }
+    
     public var vpnToken: String? {
         return "TOKEN"
     }
 
     public var apiToken: String? {
         return "TOKEN"
+    }
+    
+    public var vpnTokenUsername: String? {
+        return "USERNAME"
+    }
+    
+    public var vpnTokenPassword: String? {
+        return "PASSWORD"
     }
     
     public var publicUsername: String? {

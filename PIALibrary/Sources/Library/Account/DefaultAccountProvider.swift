@@ -70,6 +70,13 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
         return false
     }
+    
+    var oldToken: String? {
+        guard let username = accessedDatabase.secure.username() else {
+            return nil
+        }
+        return accessedDatabase.secure.token(for: accessedDatabase.secure.tokenKey(for: username))
+    }
 
     var apiToken: String? {
         return webServices.apiToken
@@ -77,6 +84,14 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
 
     var vpnToken: String? {
         return webServices.vpnToken
+    }
+    
+    var vpnTokenUsername: String? {
+        return getVpnTokenUsernameAndPassword()?.username
+    }
+    
+    var vpnTokenPassword: String? {
+        return getVpnTokenUsernameAndPassword()?.password
     }
     
     var publicUsername: String? {
@@ -151,19 +166,18 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
 
         // If there is something persisted. Try to migrate it.
-        if let username = self.accessedDatabase.secure.username(),
-           let token = self.accessedDatabase.secure.token(for: self.accessedDatabase.secure.tokenKey(for: username)) {
+        if let token = oldToken {
             webServices.migrateToken(token: token) { [weak self] (error) in
                 guard error == nil else {
                     callback?(error)
                     return
                 }
-
-                guard let unwrappedVpnToken = self?.vpnToken else {
+                
+                guard let username = self?.vpnTokenUsername, let password = self?.vpnTokenPassword else {
                     preconditionFailure()
                 }
-
-                self?.accessedDatabase.secure.setPassword(unwrappedVpnToken, for: username)
+        
+                self?.accessedDatabase.secure.setPassword(password, for: username)
                 self?.accessedDatabase.plain.tokenMigrated = true
                 callback?(nil)
             }
@@ -212,6 +226,12 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
             callback?(nil, error)
             return
         }
+        
+        guard vpnToken != nil else {
+            callback?(nil, ClientError.unauthorized)
+            return
+        }
+        
         self.updateUser(credentials: credentials) { userAccount, error in
             if let userAccount = userAccount {
                 Macros.postNotification(.PIAAccountDidLogin, [.user: userAccount])
@@ -577,4 +597,25 @@ class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAcce
         }
     }
     
+    // MARK: Private
+
+    /// :nodoc:
+    func getVpnTokenUsernameAndPassword() -> (username: String, password: String)? {
+        let token = Client.providers.accountProvider.vpnToken
+        guard let unwrappedToken = token else {
+            return nil
+        }
+
+        let tokenComponents = unwrappedToken.components(separatedBy: ":")
+        guard tokenComponents.count == 2 else {
+            return nil
+        }
+
+        guard let username = tokenComponents.first,
+              let password = tokenComponents.last else {
+            return nil
+        }
+
+        return (username, password)
+    }
 }

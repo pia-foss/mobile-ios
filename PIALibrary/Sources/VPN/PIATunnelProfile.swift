@@ -281,11 +281,24 @@ public class PIATunnelProfile: NetworkExtensionProfile {
             }
             customCfg = builder.build()
         }
+        
+        var username = configuration.username
+        var passwordReference = configuration.passwordReference
+        
+        if let accountVpnUsername = Client.providers.accountProvider.vpnTokenUsername,
+           let accountVpnPassword = Client.providers.accountProvider.vpnTokenPassword {
+            username =  accountVpnUsername
+            Client.database.secure.setPassword(accountVpnPassword, for: username)
+        }
+        
+        if let accountVpnPasswordreference = Client.database.secure.passwordReference(for: username) {
+            passwordReference = accountVpnPasswordreference
+        }
 
         let cfg = NETunnelProviderProtocol()
         cfg.disconnectOnSleep = configuration.disconnectsOnSleep
-        cfg.username = configuration.server.dipUsername != nil ? configuration.server.dipUsername : configuration.username
-        cfg.passwordReference = configuration.server.dipUsername != nil ? configuration.server.dipPassword() : configuration.passwordReference
+        cfg.username = configuration.server.dipUsername ?? username
+        cfg.passwordReference =  configuration.server.dipUsername != nil ? configuration.server.dipPassword() : passwordReference
         cfg.serverAddress = serverAddress
         cfg.providerBundleIdentifier = bundleIdentifier
         cfg.providerConfiguration = customCfg?.serialized()
