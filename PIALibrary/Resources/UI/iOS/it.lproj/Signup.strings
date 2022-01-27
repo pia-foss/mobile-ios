@@ -1,166 +1,74 @@
-/* (No Comment) */
-"failure.message" = "Impossibile creare un account in questo momento. Riprova più tardi. \n\nRiaprendo l'app si riproverà a creare un account.";
-
-/* (No Comment) */
-"failure.purchase.sandbox.message" = "L'abbonamento del sandbox selezionato on è disponibile in produzione.";
-
-/* (No Comment) */
-"failure.redeem.claimed.message" = "Questa carta è già stata riscattata da un altro account. Prova a inserire un PIN diverso.";
-
-/* (No Comment) */
-"failure.redeem.claimed.title" = "Carta già riscattata";
-
-/* (No Comment) */
-"failure.redeem.invalid.message" = "Hai inserito un PIN della carta non valido. Riprova.";
-
-/* (No Comment) */
-"failure.redeem.invalid.title" = "PIN della carta non valido";
-
-/* (No Comment) */
-"failure.submit" = "INDIETRO";
-
-/* (No Comment) */
-"failure.title" = "Errore di creazione account";
-
-/* (No Comment) */
-"failure.vc_title" = "Registrazione non riuscita";
-
-/* (No Comment) */
-"in_progress.message" = "Conferma dell'acquisto col sistema in corso. Potrebbe impiegare qualche secondo. Attendi.";
-
-/* (No Comment) */
-"in_progress.redeem.message" = "Conferma del PIN della tua carta col sistema in corso. Potrebbe impiegare qualche secondo. Attendi.";
-
-/* Signup.strings
+/* 
+  Signup.strings
   PIALibrary
 
   Created by Davide De Rosa on 12/7/17.
-  Copyright © 2017 London Trust Media. All rights reserved. */
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
 "in_progress.title" = "Conferma registrazione";
+"in_progress.message" = "Conferma dell'acquisto col sistema in corso. Potrebbe impiegare qualche secondo. Attendi.";
+"in_progress.redeem.message" = "Conferma del PIN della tua carta col sistema in corso. Potrebbe impiegare qualche secondo. Attendi.";
 
-/* (No Comment) */
-"purchase.subscribe.now" = "Iscriviti ora";
-
-/* (No Comment) */
-"purchase.trials.1year.protection" = "1 anno di privacy e protezione d'indentità";
-
-/* (No Comment) */
-"purchase.trials.all.plans" = "Vedi tutti i piani disponibili";
-
-/* (No Comment) */
-"purchase.trials.anonymous" = "Sfoglia anonimamente e nascondi il tuo IP.";
-
-/* (No Comment) */
-"purchase.trials.devices" = "Supporta 10 dispositivi alla volta";
-
-/* (No Comment) */
-"purchase.trials.devices.description" = "Proteggi un massimo di 10 dispositivi alla volta.";
-
-/* (No Comment) */
-"purchase.trials.intro" = "Inizia la tua prova gratuita da 7 giorni";
-
-/* (No Comment) */
-"purchase.trials.money.back" = "Garanzia di rimborso entro 30 giorni";
-
-/* (No Comment) */
-"purchase.trials.price.after" = "Poi a %@";
-
-/* (No Comment) */
-"purchase.trials.region" = "Connettiti facilmente a qualsiasi regione";
-
-/* (No Comment) */
-"purchase.trials.servers" = "Oltre 3300 server in 32 Paesi";
-
-/* (No Comment) */
-"purchase.trials.start" = "Inizia abbonamento";
-
-/* (No Comment) */
-"purchase.uncredited.alert.button.cancel" = "Annulla";
-
-/* (No Comment) */
-"purchase.uncredited.alert.button.recover" = "Recupera account";
-
-/* (No Comment) */
-"purchase.uncredited.alert.message" = "Hai transazioni non accreditate. Vuoi recuperare i dati del tuo account?";
-
-/* (No Comment) */
-"share.data.buttons.accept" = "Accetta";
-
-/* (No Comment) */
-"share.data.buttons.noThanks" = "No, grazie";
-
-/* (No Comment) */
-"share.data.buttons.readMore" = "Leggi di più";
-
-/* (No Comment) */
-"share.data.readMore.text.description" = "Queste informazioni minime ci aiutano a identificare e risolvere potenziali problemi di connessione. Tieni presente che la condivisione di queste informazioni richiede il consenso e l'attivazione manuale poiché è disattivata per impostazione predefinita.\n\nRaccoglieremo informazioni sui seguenti eventi:\n\n- Tentativo di connessione\n- Connessione annullata\n- Connessione stabilita\n\nPer tutti questi eventi, raccoglieremo le seguenti informazioni:\n- Piattaforma\n- Versione dell'app\n- Tipo di app (pre-lancio o no)\n- Protocollo utilizzato\n- Sorgente di connessione (manuale o tramite automazione)\n\nTutti gli eventi conterranno un ID univoco, generato casualmente. Questo ID non è associato al tuo account utente. Questo ID univoco viene rigenerato quotidianamente per motivi di privacy.\n\nAvrai sempre il controllo. Puoi vedere quali dati abbiamo raccolto da Impostazioni e puoi disattivarlo in qualsiasi momento.";
-
-/* (No Comment) */
-"share.data.text.description" = "Per aiutarci a garantire le prestazioni di connessione del nostro servizio, puoi condividere in modo anonimo le tue statistiche di connessione con noi. Questi rapporti non contengono informazioni d'identificazione personale.";
-
-/* (No Comment) */
-"share.data.text.footer" = "Puoi sempre controllare questa funzione dalle tue impostazioni";
-
-/* (No Comment) */
-"share.data.text.title" = "Aiutaci a migliorare il tuo servizio";
-
-/* (No Comment) */
+"success.title" = "Acquisto completato";
 "success.message_format" = "Grazie per la registrazione. Ti abbiamo inviato nome utente e password del tuo account all'indirizzo e-mail %@";
-
-/* (No Comment) */
-"success.password.caption" = "Password";
-
-/* (No Comment) */
-"success.redeem.message" = "Riceverai un'email a breve con nome utente e password.\n\nI tuoi dati d'accesso";
-
-/* (No Comment) */
 "success.redeem.title" = "Carta riscossa";
-
-/* (No Comment) */
+"success.redeem.message" = "Riceverai un'email a breve con nome utente e password.\n\nI tuoi dati d'accesso";
+"success.username.caption" = "Nome utente";
+"success.password.caption" = "Password";
 "success.submit" = "Inizia";
 
-/* (No Comment) */
-"success.title" = "Acquisto completato";
+"failure.vc_title" = "Registrazione non riuscita";
+"failure.title" = "Errore di creazione account";
+"failure.message" = "Impossibile creare un account in questo momento. Riprova più tardi. \n\nRiaprendo l'app si riproverà a creare un account.";
+"failure.purchase.sandbox.message" = "L'abbonamento del sandbox selezionato on è disponibile in produzione.";
+"failure.redeem.invalid.title" = "PIN della carta non valido";
+"failure.redeem.invalid.message" = "Hai inserito un PIN della carta non valido. Riprova.";
+"failure.redeem.claimed.title" = "Carta già riscattata";
+"failure.redeem.claimed.message" = "Questa carta è già stata riscattata da un altro account. Prova a inserire un PIN diverso.";
+"failure.submit" = "INDIETRO";
 
-/* (No Comment) */
-"success.username.caption" = "Nome utente";
-
-/* (No Comment) */
+"unreachable.vc_title" = "Errore";
+"unreachable.title" = "Ops!";
 "unreachable.message" = "Nessuna connessione Internet trovata. Verifica la connessione Internet e premi Riprova di seguito.\n\nPuoi tornare all'app più tardi per terminare il processo.";
-
-/* (No Comment) */
 "unreachable.submit" = "RIPROVA";
 
-/* (No Comment) */
-"unreachable.title" = "Ops!";
+"purchase.uncredited.alert.message" = "Hai transazioni non accreditate. Vuoi recuperare i dati del tuo account?";
+"purchase.uncredited.alert.button.cancel" = "Annulla";
+"purchase.uncredited.alert.button.recover" = "Recupera account";
 
-/* (No Comment) */
-"unreachable.vc_title" = "Errore";
+"purchase.trials.intro" = "Inizia la tua prova gratuita da 7 giorni";
+"purchase.trials.price.after" = "Poi a %@";
+"purchase.trials.money.back" = "Garanzia di rimborso entro 30 giorni";
+"purchase.trials.1year.protection" = "1 anno di privacy e protezione d'indentità";
+"purchase.trials.anonymous" = "Sfoglia anonimamente e nascondi il tuo IP.";
+"purchase.trials.devices" = "Supporta 10 dispositivi alla volta";
+"purchase.trials.devices.description" = "Proteggi un massimo di 10 dispositivi alla volta.";
+"purchase.trials.region" = "Connettiti facilmente a qualsiasi regione";
+"purchase.trials.servers" = "Oltre 3300 server in 32 Paesi";
+"purchase.trials.start" = "Inizia abbonamento";
+"purchase.trials.all.plans" = "Vedi tutti i piani disponibili";
 
-/* (No Comment) */
-"walkthrough.action.done" = "FATTO";
+"purchase.subscribe.now" = "Iscriviti ora";
 
-/* WALKTHROUGH */
+// WALKTHROUGH
+
 "walkthrough.action.next" = "AVANTI";
-
-/* (No Comment) */
+"walkthrough.action.done" = "FATTO";
 "walkthrough.action.skip" = "SALTA";
 
-/* (No Comment) */
-"walkthrough.page.1.description" = "Proteggi te stesso su un massimo di 10 dispositivi alla volta.";
-
-/* (No Comment) */
 "walkthrough.page.1.title" = "Supporta 10 dispositivi alla volta";
-
-/* (No Comment) */
-"walkthrough.page.2.description" = "Con server in tutto il mondo, sei sempre protetto.";
-
-/* (No Comment) */
+"walkthrough.page.1.description" = "Proteggi te stesso su un massimo di 10 dispositivi alla volta.";
 "walkthrough.page.2.title" = "Connettiti facilmente a qualsiasi regione";
-
-/* (No Comment) */
+"walkthrough.page.2.description" = "Con server in tutto il mondo, sei sempre protetto.";
+"walkthrough.page.3.title" = "Proteggiti dalle pubblicità";
 "walkthrough.page.3.description" = "Abilitando il nostro Blocco dei contenuti non visualizzerai la pubblicità mentre navighi con Safari.";
 
-/* (No Comment) */
-"walkthrough.page.3.title" = "Proteggiti dalle pubblicità";
+"share.data.buttons.accept" = "Accetta";
+"share.data.buttons.noThanks" = "No, grazie";
+"share.data.buttons.readMore" = "Leggi di più";
+"share.data.text.title" = "Aiutaci a migliorare il tuo servizio";
+"share.data.text.description" = "Per aiutarci a garantire le prestazioni di connessione del nostro servizio, puoi condividere in modo anonimo le tue statistiche di connessione con noi. Questi rapporti non contengono informazioni d'identificazione personale.";
+"share.data.text.footer" = "Puoi sempre controllare questa funzione dalle tue impostazioni";
 
+"share.data.readMore.text.description" = "Queste informazioni minime ci aiutano a identificare e risolvere potenziali problemi di connessione. Tieni presente che la condivisione di queste informazioni richiede il consenso e l'attivazione manuale poiché è disattivata per impostazione predefinita.\n\nRaccoglieremo informazioni sui seguenti eventi:\n\n- Tentativo di connessione\n- Connessione annullata\n- Connessione stabilita\n\nPer tutti questi eventi, raccoglieremo le seguenti informazioni:\n- Piattaforma\n- Versione dell'app\n- Tipo di app (pre-lancio o no)\n- Protocollo utilizzato\n- Sorgente di connessione (manuale o tramite automazione)\n\nTutti gli eventi conterranno un ID univoco, generato casualmente. Questo ID non è associato al tuo account utente. Questo ID univoco viene rigenerato quotidianamente per motivi di privacy.\n\nAvrai sempre il controllo. Puoi vedere quali dati abbiamo raccolto da Impostazioni e puoi disattivarlo in qualsiasi momento.";

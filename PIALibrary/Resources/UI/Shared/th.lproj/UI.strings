@@ -1,12 +1,4 @@
-/* (No Comment) */
-"global.cancel" = "ยกเลิก";
-
-/* (No Comment) */
-"global.close" = "ปิด";
-
-/* (No Comment) */
-"global.ok" = "ตกลง";
-
-/* (No Comment) */
 "global.version.format" = "เวอร์ชั่น %@ (%@)";
-
+"global.close" = "ปิด";
+"global.ok" = "ตกลง";
+"global.cancel" = "ยกเลิก";
