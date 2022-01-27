@@ -1,166 +1,74 @@
-/* (No Comment) */
-"failure.message" = "Vi kunne ikke opprette en konto nå. Prøv på nytt senere.\n\nNår du åpner appen igjen, vil den prøve å opprette kontoen på nytt.";
-
-/* (No Comment) */
-"failure.purchase.sandbox.message" = "Det valgte sandboksabonnementet er ikke tilgjengelig i produksjon.";
-
-/* (No Comment) */
-"failure.redeem.claimed.message" = "Ser ut til at kortet allerede er brukt av en annen konto. Du kan prøve med en annen PIN.";
-
-/* (No Comment) */
-"failure.redeem.claimed.title" = "Kortet er allerede brukt";
-
-/* (No Comment) */
-"failure.redeem.invalid.message" = "Ser ut til at du brukte en ugyldig kort-PIN. Prøv igjen";
-
-/* (No Comment) */
-"failure.redeem.invalid.title" = "Ugyldig kort-PIN";
-
-/* (No Comment) */
-"failure.submit" = "GÅ TILBAKE";
-
-/* (No Comment) */
-"failure.title" = "Kunne ikke opprette kontoen";
-
-/* (No Comment) */
-"failure.vc_title" = "Registrering mislyktes";
-
-/* (No Comment) */
-"in_progress.message" = "Vi bekrefter kjøpet i systemet vårt. Dette kan ta litt tid.";
-
-/* (No Comment) */
-"in_progress.redeem.message" = "Vi bekrefter kort-PIN-en din i systemet vårt. Det kan ta et øyeblikk, så vennligst vent.";
-
-/* Signup.strings
+/* 
+  Signup.strings
   PIALibrary
 
   Created by Davide De Rosa on 12/7/17.
-  Copyright © 2017 London Trust Media. All rights reserved. */
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
 "in_progress.title" = "Bekrefter registrering";
+"in_progress.message" = "Vi bekrefter kjøpet i systemet vårt. Dette kan ta litt tid.";
+"in_progress.redeem.message" = "Vi bekrefter kort-PIN-en din i systemet vårt. Det kan ta et øyeblikk, så vennligst vent.";
 
-/* (No Comment) */
-"purchase.subscribe.now" = "Abonner nå";
-
-/* (No Comment) */
-"purchase.trials.1year.protection" = "Et års personverns- og identitetsbeskyttelse";
-
-/* (No Comment) */
-"purchase.trials.all.plans" = "Vis alle tilgjengelige abonnement";
-
-/* (No Comment) */
-"purchase.trials.anonymous" = "Surf anonymt og skjul IP-adressen din.";
-
-/* (No Comment) */
-"purchase.trials.devices" = "Støtter ti enheter om gangen";
-
-/* (No Comment) */
-"purchase.trials.devices.description" = "Beskytt deg på opptil ti enheter samtidig.";
-
-/* (No Comment) */
-"purchase.trials.intro" = "Start din gratis 7-dagers prøveperiode";
-
-/* (No Comment) */
-"purchase.trials.money.back" = "30 dagers pengene-tilbake-garanti";
-
-/* (No Comment) */
-"purchase.trials.price.after" = "Deretter %@";
-
-/* (No Comment) */
-"purchase.trials.region" = "Koble til hvilken som helst region på en enkel måte";
-
-/* (No Comment) */
-"purchase.trials.servers" = "Over 3300 servere i 32 land";
-
-/* (No Comment) */
-"purchase.trials.start" = "Start abonnementet";
-
-/* (No Comment) */
-"purchase.uncredited.alert.button.cancel" = "Abryt";
-
-/* (No Comment) */
-"purchase.uncredited.alert.button.recover" = "Gjenopprett konto";
-
-/* (No Comment) */
-"purchase.uncredited.alert.message" = "Du har ikke krediterte transaksjoner. Vil du gjenopprette kontoinformasjonen din?";
-
-/* (No Comment) */
-"share.data.buttons.accept" = "Godta";
-
-/* (No Comment) */
-"share.data.buttons.noThanks" = "Nei takk";
-
-/* (No Comment) */
-"share.data.buttons.readMore" = "Les mer";
-
-/* (No Comment) */
-"share.data.readMore.text.description" = "Denne minimale informasjonen hjelper oss med å identifisere og rette opp potensielle tilkoblingsproblemer. Merk at deling av denne informasjonen krever samtykke og manuell aktivering fordi den er slått av som standard.\n\nVi henter inn informasjon om følgende hendelser:\n\n- Tilkoblingsforsøk\n- Tilkoblinger som blir avbrutt\n- Forbindelser som etableres\n\nFor alle disse hendelsene henter vi inn følgende informasjon:\n- Plattform\n- App-versjon\n- App-type (forhåndsutgivelse eller ikke)\n- Protokoll brukt\n- Tilkoblingskilde (manuell eller ved bruk av automatisering)\n\nAlle hendelsene inneholder en unik ID, som genereres tilfeldig. Denne ID-en er ikke tilknyttet brukerkontoen din. Den unike ID-en genereres på nytt hver dag for å sikre personvernet.\n\nDu beholder alltid kontrollen. Du kan se hvilke data vi har hentet inn fra Innstillinger, og du kan slå den av når som helst.";
-
-/* (No Comment) */
-"share.data.text.description" = "For å hjelpe oss med å sikre tjenestens tilkoblingsytelse, kan du anonymt dele tilkoblingsstatistikken din med oss. Disse rapportene inkluderer informasjon som ikke er personlig identifiserbar.";
-
-/* (No Comment) */
-"share.data.text.footer" = "Du kan kontrollere dette fra innstillingene dine";
-
-/* (No Comment) */
-"share.data.text.title" = "Hjelp oss med å forbedre tjenesten vår";
-
-/* (No Comment) */
+"success.title" = "Kjøp fullført";
 "success.message_format" = "Takk for at du registrerte deg. Vi har sendt deg kontonavnet og passordet ditt til e-postadressen din %@";
-
-/* (No Comment) */
-"success.password.caption" = "Passord";
-
-/* (No Comment) */
-"success.redeem.message" = "Du mottar en e-post med brukernavn og passord.\n\nPåloggingsinformasjonen din";
-
-/* (No Comment) */
 "success.redeem.title" = "Kortet har blitt innløst";
-
-/* (No Comment) */
+"success.redeem.message" = "Du mottar en e-post med brukernavn og passord.\n\nPåloggingsinformasjonen din";
+"success.username.caption" = "Brukernavn";
+"success.password.caption" = "Passord";
 "success.submit" = "Komme i gang";
 
-/* (No Comment) */
-"success.title" = "Kjøp fullført";
+"failure.vc_title" = "Registrering mislyktes";
+"failure.title" = "Kunne ikke opprette kontoen";
+"failure.message" = "Vi kunne ikke opprette en konto nå. Prøv på nytt senere.\n\nNår du åpner appen igjen, vil den prøve å opprette kontoen på nytt.";
+"failure.purchase.sandbox.message" = "Det valgte sandboksabonnementet er ikke tilgjengelig i produksjon.";
+"failure.redeem.invalid.title" = "Ugyldig kort-PIN";
+"failure.redeem.invalid.message" = "Ser ut til at du brukte en ugyldig kort-PIN. Prøv igjen";
+"failure.redeem.claimed.title" = "Kortet er allerede brukt";
+"failure.redeem.claimed.message" = "Ser ut til at kortet allerede er brukt av en annen konto. Du kan prøve med en annen PIN.";
+"failure.submit" = "GÅ TILBAKE";
 
-/* (No Comment) */
-"success.username.caption" = "Brukernavn";
-
-/* (No Comment) */
+"unreachable.vc_title" = "Feil";
+"unreachable.title" = "Ups!";
 "unreachable.message" = "Ingen internettilkobling. Bekreft at du er koblet til Internett og trykk på Prøv igjen nedenfor.\n\nDu kan komme tilbake til appen senere for å fullføre prosessen.";
-
-/* (No Comment) */
 "unreachable.submit" = "PRØV PÅ NYTT";
 
-/* (No Comment) */
-"unreachable.title" = "Ups!";
+"purchase.uncredited.alert.message" = "Du har ikke krediterte transaksjoner. Vil du gjenopprette kontoinformasjonen din?";
+"purchase.uncredited.alert.button.cancel" = "Abryt";
+"purchase.uncredited.alert.button.recover" = "Gjenopprett konto";
 
-/* (No Comment) */
-"unreachable.vc_title" = "Feil";
+"purchase.trials.intro" = "Start din gratis 7-dagers prøveperiode";
+"purchase.trials.price.after" = "Deretter %@";
+"purchase.trials.money.back" = "30 dagers pengene-tilbake-garanti";
+"purchase.trials.1year.protection" = "Et års personverns- og identitetsbeskyttelse";
+"purchase.trials.anonymous" = "Surf anonymt og skjul IP-adressen din.";
+"purchase.trials.devices" = "Støtter ti enheter om gangen";
+"purchase.trials.devices.description" = "Beskytt deg på opptil ti enheter samtidig.";
+"purchase.trials.region" = "Koble til hvilken som helst region på en enkel måte";
+"purchase.trials.servers" = "Over 3300 servere i 32 land";
+"purchase.trials.start" = "Start abonnementet";
+"purchase.trials.all.plans" = "Vis alle tilgjengelige abonnement";
 
-/* (No Comment) */
-"walkthrough.action.done" = "FERDIG";
+"purchase.subscribe.now" = "Abonner nå";
 
-/* WALKTHROUGH */
+// WALKTHROUGH
+
 "walkthrough.action.next" = "NESTE";
-
-/* (No Comment) */
+"walkthrough.action.done" = "FERDIG";
 "walkthrough.action.skip" = "HOPP OVER";
 
-/* (No Comment) */
-"walkthrough.page.1.description" = "Beskytt deg på opptil ti enheter samtidig.";
-
-/* (No Comment) */
 "walkthrough.page.1.title" = "Støtter ti enheter samtidig";
-
-/* (No Comment) */
-"walkthrough.page.2.description" = "Med serverer rundt om i hele verden, er du alltid beskyttet.";
-
-/* (No Comment) */
+"walkthrough.page.1.description" = "Beskytt deg på opptil ti enheter samtidig.";
 "walkthrough.page.2.title" = "Koble til hvilken som helst region på en enkel måte";
-
-/* (No Comment) */
+"walkthrough.page.2.description" = "Med serverer rundt om i hele verden, er du alltid beskyttet.";
+"walkthrough.page.3.title" = "Beskytt deg selv mot reklame";
 "walkthrough.page.3.description" = "Aktivering av innholdsblokkereren sikrer at reklame ikke blir vist når du bruker Safari.";
 
-/* (No Comment) */
-"walkthrough.page.3.title" = "Beskytt deg selv mot reklame";
+"share.data.buttons.accept" = "Godta";
+"share.data.buttons.noThanks" = "Nei takk";
+"share.data.buttons.readMore" = "Les mer";
+"share.data.text.title" = "Hjelp oss med å forbedre tjenesten vår";
+"share.data.text.description" = "For å hjelpe oss med å sikre tjenestens tilkoblingsytelse, kan du anonymt dele tilkoblingsstatistikken din med oss. Disse rapportene inkluderer informasjon som ikke er personlig identifiserbar.";
+"share.data.text.footer" = "Du kan kontrollere dette fra innstillingene dine";
 
+"share.data.readMore.text.description" = "Denne minimale informasjonen hjelper oss med å identifisere og rette opp potensielle tilkoblingsproblemer. Merk at deling av denne informasjonen krever samtykke og manuell aktivering fordi den er slått av som standard.\n\nVi henter inn informasjon om følgende hendelser:\n\n- Tilkoblingsforsøk\n- Tilkoblinger som blir avbrutt\n- Forbindelser som etableres\n\nFor alle disse hendelsene henter vi inn følgende informasjon:\n- Plattform\n- App-versjon\n- App-type (forhåndsutgivelse eller ikke)\n- Protokoll brukt\n- Tilkoblingskilde (manuell eller ved bruk av automatisering)\n\nAlle hendelsene inneholder en unik ID, som genereres tilfeldig. Denne ID-en er ikke tilknyttet brukerkontoen din. Den unike ID-en genereres på nytt hver dag for å sikre personvernet.\n\nDu beholder alltid kontrollen. Du kan se hvilke data vi har hentet inn fra Innstillinger, og du kan slå den av når som helst.";

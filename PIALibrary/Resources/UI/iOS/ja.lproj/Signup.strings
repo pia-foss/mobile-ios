@@ -1,166 +1,74 @@
-/* (No Comment) */
-"failure.message" = "ただ今アカウントを作成できません。後ほどもう一度お試しください。\n\nアプリを再起動すると、アカウント作成が再試行されます。";
-
-/* (No Comment) */
-"failure.purchase.sandbox.message" = "選択されたサンドボックスのサブスクリプションは生産中のため利用できません。";
-
-/* (No Comment) */
-"failure.redeem.claimed.message" = "このカードは、すでに別のアカウントが獲得したようです。別のPINを入力してください。";
-
-/* (No Comment) */
-"failure.redeem.claimed.title" = "すでに獲得されたカードです";
-
-/* (No Comment) */
-"failure.redeem.invalid.message" = "無効なカードPINを入力したようです。もう一度お試しください。";
-
-/* (No Comment) */
-"failure.redeem.invalid.title" = "無効なカードPIN";
-
-/* (No Comment) */
-"failure.submit" = "戻る";
-
-/* (No Comment) */
-"failure.title" = "アカウントの作成に失敗しました";
-
-/* (No Comment) */
-"failure.vc_title" = "サインアップできませんでした";
-
-/* (No Comment) */
-"in_progress.message" = "システムがご購入を確定しています。しばらく時間がかかることがありますので、そのままお待ちください。";
-
-/* (No Comment) */
-"in_progress.redeem.message" = "システムがご購入を確定しています。しばらく時間がかかることがありますので、そのままお待ちください。";
-
-/* Signup.strings
+/* 
+  Signup.strings
   PIALibrary
 
   Created by Davide De Rosa on 12/7/17.
-  Copyright © 2017 London Trust Media. All rights reserved. */
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
 "in_progress.title" = "サインアップを確定";
+"in_progress.message" = "システムがご購入を確定しています。しばらく時間がかかることがありますので、そのままお待ちください。";
+"in_progress.redeem.message" = "システムがご購入を確定しています。しばらく時間がかかることがありますので、そのままお待ちください。";
 
-/* (No Comment) */
-"purchase.subscribe.now" = "今すぐ定期購読を購入";
-
-/* (No Comment) */
-"purchase.trials.1year.protection" = "1年間のプライバシーおよび個人情報の保護";
-
-/* (No Comment) */
-"purchase.trials.all.plans" = "利用可能なプランをすべて見る";
-
-/* (No Comment) */
-"purchase.trials.anonymous" = "ウェブの匿名利用でIPを非表示にします。";
-
-/* (No Comment) */
-"purchase.trials.devices" = "一度に10台の端末をサポート";
-
-/* (No Comment) */
-"purchase.trials.devices.description" = "一度に最大10台の端末を保護して自分を守ることができます。";
-
-/* (No Comment) */
-"purchase.trials.intro" = "7日間無料トライアルを開始";
-
-/* (No Comment) */
-"purchase.trials.money.back" = "30日間返金保証";
-
-/* (No Comment) */
-"purchase.trials.price.after" = "以後%@";
-
-/* (No Comment) */
-"purchase.trials.region" = "すべての地域に簡単に接続";
-
-/* (No Comment) */
-"purchase.trials.servers" = "32か国の3300以上のサーバー";
-
-/* (No Comment) */
-"purchase.trials.start" = "サブスクリプションを開始";
-
-/* (No Comment) */
-"purchase.uncredited.alert.button.cancel" = "キャンセル";
-
-/* (No Comment) */
-"purchase.uncredited.alert.button.recover" = "アカウントを回復";
-
-/* (No Comment) */
-"purchase.uncredited.alert.message" = "反映されていない取引があります。アカウントの詳細を回復しますか？";
-
-/* (No Comment) */
-"share.data.buttons.accept" = "同意する";
-
-/* (No Comment) */
-"share.data.buttons.noThanks" = "いいえ、結構です";
-
-/* (No Comment) */
-"share.data.buttons.readMore" = "もっと読む";
-
-/* (No Comment) */
-"share.data.readMore.text.description" = "この最小限の情報は、潜在的な接続の問題を特定して修正するのに役立ちます。この情報を共有するには、同意と手動による有効化が必要であることに注意してください（この設定はデフォルトでオフになっています）。\n\n弊社は次のイベントに関する情報を収集します:\n\n- 接続の試み\n- キャンセルされた接続\n- 確立された接続\n- これらすべてのイベントについて、弊社は次の情報を収集します:\n- プラットフォーム\n- アプリのバージョン\n- アプリの種類（プレリリースか否か）\n- 使用されたプロトコル\n- 接続ソース（手動または自動を使用）\n\nすべてのイベントには、ランダムに生成される一意のIDが含まれます。このIDはユーザーアカウントに関連付けられているものではありません。この一意のIDは、プライバシー保護のために毎日再生成されます。\n\n主導権は常にお客様にあります。収集したデータは、設定から確認することができ、いつでもオフにすることができます。";
-
-/* (No Comment) */
-"share.data.text.description" = "弊社のサービスの接続パフォーマンス確保にご協力いただくには、接続データを匿名で弊社と共有してください。これらのレポートには、個人を特定できる情報は含まれません。";
-
-/* (No Comment) */
-"share.data.text.footer" = "これは、設定からいつでもコントロール可能です";
-
-/* (No Comment) */
-"share.data.text.title" = "弊社のサービス改善にご協力ください";
-
-/* (No Comment) */
+"success.title" = "購入完了";
 "success.message_format" = "サインアップありがとうございます。アカウントのユーザー名とパスワードをお客様のメールアドレス（%@）に送信いたしました。";
-
-/* (No Comment) */
-"success.password.caption" = "パスワード";
-
-/* (No Comment) */
-"success.redeem.message" = "ユーザーネームとパスワードを記載したメールがまもなく届きます。\n\nお客様のログイン詳細";
-
-/* (No Comment) */
 "success.redeem.title" = "カードの引き換えが完了しました";
-
-/* (No Comment) */
+"success.redeem.message" = "ユーザーネームとパスワードを記載したメールがまもなく届きます。\n\nお客様のログイン詳細";
+"success.username.caption" = "ユーザー名";
+"success.password.caption" = "パスワード";
 "success.submit" = "始める";
 
-/* (No Comment) */
-"success.title" = "購入完了";
+"failure.vc_title" = "サインアップできませんでした";
+"failure.title" = "アカウントの作成に失敗しました";
+"failure.message" = "ただ今アカウントを作成できません。後ほどもう一度お試しください。\n\nアプリを再起動すると、アカウント作成が再試行されます。";
+"failure.purchase.sandbox.message" = "選択されたサンドボックスのサブスクリプションは生産中のため利用できません。";
+"failure.redeem.invalid.title" = "無効なカードPIN";
+"failure.redeem.invalid.message" = "無効なカードPINを入力したようです。もう一度お試しください。";
+"failure.redeem.claimed.title" = "すでに獲得されたカードです";
+"failure.redeem.claimed.message" = "このカードは、すでに別のアカウントが獲得したようです。別のPINを入力してください。";
+"failure.submit" = "戻る";
 
-/* (No Comment) */
-"success.username.caption" = "ユーザー名";
-
-/* (No Comment) */
+"unreachable.vc_title" = "エラー";
+"unreachable.title" = "おっと！";
 "unreachable.message" = "インターネット接続が見つかりません。インターネットに接続していることを確認してから下の再試行をタップしてください。\n\n後ほどアプリでこのプロセスを完了することができます。";
-
-/* (No Comment) */
 "unreachable.submit" = "再試行";
 
-/* (No Comment) */
-"unreachable.title" = "おっと！";
+"purchase.uncredited.alert.message" = "反映されていない取引があります。アカウントの詳細を回復しますか？";
+"purchase.uncredited.alert.button.cancel" = "キャンセル";
+"purchase.uncredited.alert.button.recover" = "アカウントを回復";
 
-/* (No Comment) */
-"unreachable.vc_title" = "エラー";
+"purchase.trials.intro" = "7日間無料トライアルを開始";
+"purchase.trials.price.after" = "以後%@";
+"purchase.trials.money.back" = "30日間返金保証";
+"purchase.trials.1year.protection" = "1年間のプライバシーおよび個人情報の保護";
+"purchase.trials.anonymous" = "ウェブの匿名利用でIPを非表示にします。";
+"purchase.trials.devices" = "一度に10台の端末をサポート";
+"purchase.trials.devices.description" = "一度に最大10台の端末を保護して自分を守ることができます。";
+"purchase.trials.region" = "すべての地域に簡単に接続";
+"purchase.trials.servers" = "32か国の3300以上のサーバー";
+"purchase.trials.start" = "サブスクリプションを開始";
+"purchase.trials.all.plans" = "利用可能なプランをすべて見る";
 
-/* (No Comment) */
-"walkthrough.action.done" = "完了";
+"purchase.subscribe.now" = "今すぐ定期購読を購入";
 
-/* WALKTHROUGH */
+// WALKTHROUGH
+
 "walkthrough.action.next" = "次へ";
-
-/* (No Comment) */
+"walkthrough.action.done" = "完了";
 "walkthrough.action.skip" = "スキップ";
 
-/* (No Comment) */
-"walkthrough.page.1.description" = "一度に最大10台の端末を保護して自分を守ることができます。";
-
-/* (No Comment) */
 "walkthrough.page.1.title" = "一度に10台の端末をサポート";
-
-/* (No Comment) */
-"walkthrough.page.2.description" = "世界中にサーバがあるので、常に保護された状態でいることができます。";
-
-/* (No Comment) */
+"walkthrough.page.1.description" = "一度に最大10台の端末を保護して自分を守ることができます。";
 "walkthrough.page.2.title" = "あらゆる地域に簡単に接続";
-
-/* (No Comment) */
+"walkthrough.page.2.description" = "世界中にサーバがあるので、常に保護された状態でいることができます。";
+"walkthrough.page.3.title" = "広告から自分を守りましょう";
 "walkthrough.page.3.description" = "コンテンツブロッカーを有効にすると、Safariで広告表示をブロックできます。";
 
-/* (No Comment) */
-"walkthrough.page.3.title" = "広告から自分を守りましょう";
+"share.data.buttons.accept" = "同意する";
+"share.data.buttons.noThanks" = "いいえ、結構です";
+"share.data.buttons.readMore" = "もっと読む";
+"share.data.text.title" = "弊社のサービス改善にご協力ください";
+"share.data.text.description" = "弊社のサービスの接続パフォーマンス確保にご協力いただくには、接続データを匿名で弊社と共有してください。これらのレポートには、個人を特定できる情報は含まれません。";
+"share.data.text.footer" = "これは、設定からいつでもコントロール可能です";
 
+"share.data.readMore.text.description" = "この最小限の情報は、潜在的な接続の問題を特定して修正するのに役立ちます。この情報を共有するには、同意と手動による有効化が必要であることに注意してください（この設定はデフォルトでオフになっています）。\n\n弊社は次のイベントに関する情報を収集します:\n\n- 接続の試み\n- キャンセルされた接続\n- 確立された接続\n- これらすべてのイベントについて、弊社は次の情報を収集します:\n- プラットフォーム\n- アプリのバージョン\n- アプリの種類（プレリリースか否か）\n- 使用されたプロトコル\n- 接続ソース（手動または自動を使用）\n\nすべてのイベントには、ランダムに生成される一意のIDが含まれます。このIDはユーザーアカウントに関連付けられているものではありません。この一意のIDは、プライバシー保護のために毎日再生成されます。\n\n主導権は常にお客様にあります。収集したデータは、設定から確認することができ、いつでもオフにすることができます。";

@@ -1,205 +1,88 @@
-/* (No Comment) */
-"agreement.message" = "Po 7 dniach bezpłatnego okresu próbnego ta subskrypcja odnowi się automatycznie na %@, jeżeli nie zostanie anulowana co najmniej 24 godziny przed końcem okresu próbnego. Twoje konto Apple ID zostanie obciążone opłatą za odnowienie w ciągu 24 godzin przed końcem okresu próbnego. Możesz zarządzać swoimi subskrypcjami i je  anulować, wchodząc po zakupie w ustawienia swojego konta w  App Store  Oferta 7-dniowego okresu próbnego jest ograniczona –  każdemu użytkownikowi przysługuje jeden 7-dniowy okres próbny. Każda niewykorzystana część bezpłatnego okresu próbnego, jeśli zostanie zaoferowany, przepada wraz zakupem subskrypcji przez użytkownika. Wszystkie ceny zawierają obowiązujące lokalne podatki obrotowe.\n\nRejestracja oznacza akceptację artykułów. $1 i $2.";
-
-/* (No Comment) */
-"agreement.message.privacy" = "Zasady ochrony prywatności";
-
-/* (No Comment) */
-"agreement.message.tos" = "Warunki użytkowania";
-
-/* (No Comment) */
-"agreement.trials.message" = "Płatność zostanie pobrana z Twojego konta Apple ID z chwilą potwierdzenia zakupu. Subskrypcja odnawia się automatycznie, chyba że zostanie anulowana co najmniej 24 godziny przed końcem bieżącego okresu rozliczeniowego. Opłata za odnowienie subskrypcji  zostanie pobrana w ciągu 24 godzin przed końcem bieżącego okresu. Możesz zarządzać subskrypcjami i je anulować, przechodząc do ustawień konta w App Store po dokonaniu zakupu.\n\nCzęść płatnych Subskrypcji może obejmować bezpłatną wersję próbną, z której możesz skorzystać przed naliczeniem opłaty. Jeśli postanowisz zrezygnować z płatnej subskrypcji przed rozpoczęciem naliczania opłat zgodnie z wybraną metodą płatności, anuluj subskrypcję co najmniej 24 godziny przed zakończeniem bezpłatnej wersji próbnej.\n\nBezpłatne wersje próbne są dostępne tylko dla nowych użytkowników i są przyznawane wyłącznie według naszego uznania, a w przypadku próby zarejestrowania w celu uzyskania dodatkowej bezpłatnej wersji próbnej, zostaniesz natychmiast obciążony standardową opłatą subskrypcyjną.\n\nRejestracja oznacza akceptację niniejszego regulaminu.";
-
-/* (No Comment) */
-"agreement.trials.monthly.plan" = "miesiąc";
-
-/* (No Comment) */
-"agreement.trials.title" = "Regulamin korzystania z bezpłatnej wersji próbnej";
-
-/* (No Comment) */
-"agreement.trials.yearly.plan" = "rok";
-
-/* (No Comment) */
-"gdpr.accept.button.title" = "Zaakceptuj i kontynuuj";
-
-/* (No Comment) */
-"gdpr.collect.data.description" = "Adres e-mail do zarządzania kontem i ochrony przed nadużyciami.";
-
-/* (No Comment) */
-"gdpr.collect.data.title" = "Zbierane przez dane asobowe";
-
-/* (No Comment) */
-"gdpr.usage.data.description" = "Adres e-mail; używany go do wysyłania informacji o subskrypcji, potwierdzeń płatności, korespondencji z klientami i wysyłania ofert promocyjnych wyłącznie Private Internet Access";
-
-/* (No Comment) */
-"gdpr.usage.data.title" = "Sposoby wykorzystania zbieranych przez nas danych osobowych";
-
-/* (No Comment) */
-"getstarted.buttons.buyaccount" = "Zakup konto";
-
-/* (No Comment) */
-"iap.error.message.unavailable" = "Serwery Apple'a są w tej chwili niedostępne. Spróbuj ponownie później.";
-
-/* (No Comment) */
-"iap.error.title" = "Błąd";
-
-/* (No Comment) */
-"login.error.throttled" = "Zbyt wiele nieudanych prób logowania z tą nazwą użytkownika. Spróbuj ponownie później.";
-
-/* (No Comment) */
-"login.error.title" = "Zaloguj";
-
-/* (No Comment) */
-"login.error.unauthorized" = "Twoja nazwa użytkownika i hasło są nieprawidłowe.";
-
-/* (No Comment) */
-"login.error.validation" = "Musisz podać nazwę użytkownika i hasło.";
-
-/* (No Comment) */
-"login.magic.link.invalid.email" = "Nieprawidłowy e-mail. Spróbuj ponownie";
-
-/* (No Comment) */
-"login.magic.link.response" = "Link do logowania wysłaliśmy e-mailem,";
-
-/* (No Comment) */
-"login.magic.link.send" = "Wyślij link";
-
-/* (No Comment) */
-"login.magic.link.title" = "Zaloguj się, używając sekretnego linku z e-maila";
-
-/* (No Comment) */
-"login.password.placeholder" = "Hasło";
-
-/* (No Comment) */
-"login.receipt.button" = "Zaloguj się, używając pokwitowania zakupu";
-
-/* (No Comment) */
-"login.restore.button" = "Nie dostałeś(-aś) Danych swojego konta?";
-
-/* (No Comment) */
-"login.submit" = "ZALOGUJ";
-
-/* Welcome.strings
+/* 
+  Welcome.strings
   PIALibrary
 
   Created by Davide De Rosa on 12/7/17.
-  Copyright © 2017 London Trust Media. All rights reserved. */
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
 "login.title" = "Zaloguj się na konto";
-
-/* (No Comment) */
 "login.username.placeholder" = "Nazwa użytkownika (p1234567)";
+"login.password.placeholder" = "Hasło";
+"login.submit" = "ZALOGUJ";
+"login.restore.button" = "Nie dostałeś(-aś) Danych swojego konta?";
+"login.error.title" = "Zaloguj";
+"login.error.validation" = "Musisz podać nazwę użytkownika i hasło.";
+"login.error.unauthorized" = "Twoja nazwa użytkownika i hasło są nieprawidłowe.";
+"login.error.throttled" = "Zbyt wiele nieudanych prób logowania z tą nazwą użytkownika. Spróbuj ponownie później.";
+"login.receipt.button" = "Zaloguj się, używając pokwitowania zakupu";
+"login.magic.link.title" = "Zaloguj się, używając sekretnego linku z e-maila";
+"login.magic.link.response" = "Link do logowania wysłaliśmy e-mailem,";
+"login.magic.link.send" = "Wyślij link";
+"login.magic.link.invalid.email" = "Nieprawidłowy e-mail. Spróbuj ponownie";
 
-/* (No Comment) */
-"plan.accessibility.per_month" = "miesięcznie";
-
-/* (No Comment) */
-"plan.best_value" = "Najlepsza wartość";
-
-/* (No Comment) */
-"plan.monthly.title" = "Miesięcznie";
-
-/* (No Comment) */
-"plan.price_format" = "%@/msc.";
-
-/* (No Comment) */
-"plan.yearly.detail_format" = "%@%@ rocznie";
-
-/* (No Comment) */
-"plan.yearly.title" = "Rocznie";
-
-/* (No Comment) */
-"purchase.confirm.form.email" = "Podaj swój adres e-mail";
-
-/* (No Comment) */
-"purchase.confirm.plan" = "Kupujesz abonament %@";
-
-/* (No Comment) */
-"purchase.continue" = "Kontynuuj";
-
-/* (No Comment) */
+"purchase.title" = "Wybierz plan VPN";
+"purchase.subtitle" = "30-dniowej gwarancji zwrotu pieniędzy";
 "purchase.email.placeholder" = "Adres e-mail";
-
-/* (No Comment) */
-"purchase.email.why" = "Twój e-mail jest nam potrzebny do przesłania Ci nazwy użytkownika i hasła,";
-
-/* (No Comment) */
-"purchase.error.connectivity.description" = "Nie można połączyć z Private Internet Access. Może to być spowodowane słabym połączeniem z internetem lub nasza usługa może być zablokowana w Twoim kraju.";
-
-/* (No Comment) */
-"purchase.error.connectivity.title" = "Błąd połączenia";
-
-/* (No Comment) */
-"purchase.error.title" = "Zakup";
-
-/* (No Comment) */
-"purchase.error.validation" = "Musisz podać adres e-mail.";
-
-/* (No Comment) */
-"purchase.login.button" = "Zaloguj";
-
-/* (No Comment) */
+"purchase.continue" = "Kontynuuj";
 "purchase.login.footer" = "Masz już konto?";
-
-/* (No Comment) */
+"purchase.login.button" = "Zaloguj";
+"purchase.error.title" = "Zakup";
+"purchase.error.validation" = "Musisz podać adres e-mail.";
+"purchase.error.connectivity.title" = "Błąd połączenia";
+"purchase.error.connectivity.description" = "Nie można połączyć z Private Internet Access. Może to być spowodowane słabym połączeniem z internetem lub nasza usługa może być zablokowana w Twoim kraju.";
+"purchase.confirm.form.email" = "Podaj swój adres e-mail";
+"purchase.confirm.plan" = "Kupujesz abonament %@";
+"purchase.email.why" = "Twój e-mail jest nam potrzebny do przesłania Ci nazwy użytkownika i hasła,";
+"purchase.submit" = "Wyślij";
 "purchase.or" = "lub";
 
-/* (No Comment) */
-"purchase.submit" = "Wyślij";
-
-/* (No Comment) */
-"purchase.subtitle" = "30-dniowej gwarancji zwrotu pieniędzy";
-
-/* (No Comment) */
-"purchase.title" = "Wybierz plan VPN";
-
-/* (No Comment) */
-"redeem.accessibility.back" = "Wstecz";
-
-/* (No Comment) */
-"redeem.email.placeholder" = "Adres e-mail";
-
-/* (No Comment) */
-"redeem.error.allfields" = "Podaj swój adres r-mail i PIN karty";
-
-/* (No Comment) */
-"redeem.error.code" = "Kod musi składać się z %lu znaków numerycznych.";
-
-/* (No Comment) */
-"redeem.error.title" = "Wykorzystaj";
-
-/* (No Comment) */
-"redeem.giftcard.placeholder" = "PIN karty upominkowej";
-
-/* (No Comment) */
-"redeem.submit" = "PRZEŚLIJ";
-
-/* (No Comment) */
-"redeem.subtitle" = "Wpisz swój adres e-mail oraz %lu-cyfrowy PIN z karty podarunkowej lub karty próbnej poniżej.";
-
-/* (No Comment) */
-"redeem.title" = "Wykorzystaj kartę podarunkową";
-
-/* (No Comment) */
-"restore.email.placeholder" = "Adres e-mail";
-
-/* (No Comment) */
-"restore.submit" = "POTWIERDŹ";
-
-/* (No Comment) */
-"restore.subtitle" = "Jeśli kupił(a)ś abonament, korzystając z tej aplikacji, ale nie dostałe(a)ś danych logowania, możesz wysłać je ponownie stąd.\nOpłata nie zostanie za to pobrana za tę czynność";
-
-/* (No Comment) */
-"restore.title" = "Przywróć pominięty zakup";
-
-/* (No Comment) */
-"update.account.email.error" = "Nie udało się zmienić -emalia konta";
-
-/* (No Comment) */
 "upgrade.header" = "Witaj ponownie!";
-
-/* (No Comment) */
+"upgrade.title" = "Aby korzystać z Private Internet Access, musisz odnowić swoją subskrypcję.";
 "upgrade.renew.now" = "Odnów teraz";
 
-/* (No Comment) */
-"upgrade.title" = "Aby korzystać z Private Internet Access, musisz odnowić swoją subskrypcję.";
 
+
+"redeem.title" = "Wykorzystaj kartę podarunkową";
+"redeem.subtitle" = "Wpisz swój adres e-mail oraz %lu-cyfrowy PIN z karty podarunkowej lub karty próbnej poniżej.";
+"redeem.email.placeholder" = "Adres e-mail";
+"redeem.submit" = "PRZEŚLIJ";
+"redeem.error.title" = "Wykorzystaj";
+"redeem.error.code" = "Kod musi składać się z %lu znaków numerycznych.";
+"redeem.error.allfields" = "Podaj swój adres r-mail i PIN karty";
+"redeem.accessibility.back" = "Wstecz";
+"redeem.giftcard.placeholder" = "PIN karty upominkowej";
+
+"plan.monthly.title" = "Miesięcznie";
+"plan.yearly.title" = "Rocznie";
+"plan.yearly.detail_format" = "%@%@ rocznie";
+"plan.price_format" = "%@/msc.";
+"plan.best_value" = "Najlepsza wartość";
+"plan.accessibility.per_month" = "miesięcznie";
+
+"restore.title" = "Przywróć pominięty zakup";
+"restore.subtitle" = "Jeśli kupił(a)ś abonament, korzystając z tej aplikacji, ale nie dostałe(a)ś danych logowania, możesz wysłać je ponownie stąd.\nOpłata nie zostanie za to pobrana za tę czynność";
+"restore.email.placeholder" = "Adres e-mail";
+"restore.submit" = "POTWIERDŹ";
+
+"iap.error.message.unavailable" = "Serwery Apple'a są w tej chwili niedostępne. Spróbuj ponownie później.";
+"iap.error.title" = "Błąd";
+
+"agreement.trials.title" = "Regulamin korzystania z bezpłatnej wersji próbnej";
+"agreement.trials.message" = "Płatność zostanie pobrana z Twojego konta Apple ID z chwilą potwierdzenia zakupu. Subskrypcja odnawia się automatycznie, chyba że zostanie anulowana co najmniej 24 godziny przed końcem bieżącego okresu rozliczeniowego. Opłata za odnowienie subskrypcji  zostanie pobrana w ciągu 24 godzin przed końcem bieżącego okresu. Możesz zarządzać subskrypcjami i je anulować, przechodząc do ustawień konta w App Store po dokonaniu zakupu.\n\nCzęść płatnych Subskrypcji może obejmować bezpłatną wersję próbną, z której możesz skorzystać przed naliczeniem opłaty. Jeśli postanowisz zrezygnować z płatnej subskrypcji przed rozpoczęciem naliczania opłat zgodnie z wybraną metodą płatności, anuluj subskrypcję co najmniej 24 godziny przed zakończeniem bezpłatnej wersji próbnej.\n\nBezpłatne wersje próbne są dostępne tylko dla nowych użytkowników i są przyznawane wyłącznie według naszego uznania, a w przypadku próby zarejestrowania w celu uzyskania dodatkowej bezpłatnej wersji próbnej, zostaniesz natychmiast obciążony standardową opłatą subskrypcyjną.\n\nRejestracja oznacza akceptację niniejszego regulaminu.";
+"agreement.message" = "Po 7 dniach bezpłatnego okresu próbnego ta subskrypcja odnowi się automatycznie na %@, jeżeli nie zostanie anulowana co najmniej 24 godziny przed końcem okresu próbnego. Twoje konto Apple ID zostanie obciążone opłatą za odnowienie w ciągu 24 godzin przed końcem okresu próbnego. Możesz zarządzać swoimi subskrypcjami i je  anulować, wchodząc po zakupie w ustawienia swojego konta w  App Store  Oferta 7-dniowego okresu próbnego jest ograniczona –  każdemu użytkownikowi przysługuje jeden 7-dniowy okres próbny. Każda niewykorzystana część bezpłatnego okresu próbnego, jeśli zostanie zaoferowany, przepada wraz zakupem subskrypcji przez użytkownika. Wszystkie ceny zawierają obowiązujące lokalne podatki obrotowe.\n\nRejestracja oznacza akceptację artykułów. $1 i $2.";
+"agreement.trials.yearly.plan" = "rok";
+"agreement.trials.monthly.plan" = "miesiąc";
+
+"agreement.message.tos" = "Warunki użytkowania";
+"agreement.message.privacy" = "Zasady ochrony prywatności";
+
+"getstarted.buttons.buyaccount" = "Zakup konto";
+
+"gdpr.collect.data.title" = "Zbierane przez dane asobowe";
+"gdpr.collect.data.description" = "Adres e-mail do zarządzania kontem i ochrony przed nadużyciami.";
+"gdpr.usage.data.title" = "Sposoby wykorzystania zbieranych przez nas danych osobowych";
+"gdpr.usage.data.description" = "Adres e-mail; używany go do wysyłania informacji o subskrypcji, potwierdzeń płatności, korespondencji z klientami i wysyłania ofert promocyjnych wyłącznie Private Internet Access";
+"gdpr.accept.button.title" = "Zaakceptuj i kontynuuj";
+
+"update.account.email.error" = "Nie udało się zmienić -emalia konta";
