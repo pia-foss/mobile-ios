@@ -1,2 +1,4 @@
-"NSCameraUsageDescription" = "Нам нужен доступ к камере, чтобы сканировать QR-коды и использовать подарочную карту";
+/* Localized versions of Info.plist keys */
+
 "NSFaceIDUsageDescription" = "Выполните аутентификацию для показа";
+"NSCameraUsageDescription" = "Нам нужен доступ к камере, чтобы сканировать QR-коды и использовать подарочную карту";
