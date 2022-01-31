@@ -286,12 +286,7 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         } else {
             log.error("Failed to log in")
         }
-        if let displayDuration = displayDuration {
-            displayErrorMessage(errorMessage: errorMessage, displayDuration: displayDuration)
-        } else {
-            displayErrorMessage(errorMessage: errorMessage)
-        }
-        
+        displayErrorMessage(errorMessage: errorMessage, displayDuration: displayDuration)
     }
     
     private func displayErrorMessage(errorMessage: String?, displayDuration: Double? = nil) {

@@ -168,10 +168,9 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     }
 
     private func mapLoginError(_ error: AccountRequestError) -> ClientError {
-        let retry = UInt(error.retryAfter)
         switch error.code {
         case 429:
-            return .throttled(retryAfter: retry)
+            return .throttled(retryAfter: UInt(error.retryAfterSeconds))
         default:
             return .unauthorized
         }
