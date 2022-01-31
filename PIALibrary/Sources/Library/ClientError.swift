@@ -23,7 +23,7 @@
 import Foundation
 
 /// All the errors raised by the client.
-public enum ClientError: String, Error {
+public enum ClientError: Error, Equatable {
 
     /// The Internet is unreachable.
     case internetUnreachable
@@ -32,7 +32,7 @@ public enum ClientError: String, Error {
     case unauthorized
     
     /// The service has been throttled for exceeded rate limits.
-    case throttled
+    case throttled(retryAfter: UInt)
     
     /// The service has been expired.
     case expired
@@ -94,6 +94,9 @@ extension ClientError: LocalizedError {
         case .sandboxPurchase:
             return NSLocalizedString(L10n.Signup.Failure.Purchase.Sandbox.message,
                                      comment: L10n.Signup.Failure.Purchase.Sandbox.message)
+        case .throttled(retryAfter: let retryAfter):
+            let localisedThrottlingString = L10n.Welcome.Login.Error.throttled("\(retryAfter)")
+            return NSLocalizedString(localisedThrottlingString, comment: localisedThrottlingString)
         default:
             return nil
         }

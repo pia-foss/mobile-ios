@@ -168,7 +168,13 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     }
 
     private func mapLoginError(_ error: AccountRequestError) -> ClientError {
+        let retry = UInt(error.retryAfter)
+        switch error.code {
+        case 429:
+            return .throttled(retryAfter: retry)
+        default:
             return .unauthorized
+        }
     }
 
 
@@ -183,7 +189,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
 
     private func mapLoginLinkError(_ error:AccountRequestError) -> ClientError {
         switch error.code {
-        case 401,402:
+        case 401,402,429:
             return mapLoginError(error)
         default:
             return .invalidParameter

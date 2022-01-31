@@ -134,6 +134,7 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
 
                 self.preset?.accountProvider.loginUsingMagicLink(withEmail: email, { (error) in
                     
+                    self.hideLoadingAnimation()
                     guard error == nil else {
                         self.handleLoginFailed(error)
                         return
@@ -141,9 +142,6 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
                     
                     Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image,
                                                    message: L10n.Welcome.Login.Magic.Link.response)
-
-                    self.hideLoadingAnimation()
-
                 })
                 
             })
@@ -263,6 +261,7 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
     }
     
     private func handleLoginFailed(_ error: Error?) {
+        var displayDuration: Double?
         var errorMessage: String?
         if let error = error {
             if let clientError = error as? ClientError {
@@ -270,8 +269,9 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
                 case .unauthorized:
                     errorMessage = L10n.Welcome.Login.Error.unauthorized
 
-                case .throttled:
-                    errorMessage = L10n.Welcome.Login.Error.throttled
+                case .throttled(retryAfter: let retryAfter):
+                    errorMessage = clientError.errorDescription
+                    displayDuration = Double(retryAfter)
                 case .expired:
                     handleExpiredAccount()
                     return
@@ -286,14 +286,18 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         } else {
             log.error("Failed to log in")
         }
+        if let displayDuration = displayDuration {
+            displayErrorMessage(errorMessage: errorMessage, displayDuration: displayDuration)
+        } else {
+            displayErrorMessage(errorMessage: errorMessage)
+        }
         
-        displayErrorMessage(errorMessage: errorMessage)
     }
     
-    private func displayErrorMessage(errorMessage: String?) {
+    private func displayErrorMessage(errorMessage: String?, displayDuration: Double? = nil) {
         
         Macros.displayImageNote(withImage: Asset.iconWarning.image,
-                                message: errorMessage ?? L10n.Welcome.Login.Error.title)
+                                message: errorMessage ?? L10n.Welcome.Login.Error.title, andDuration: displayDuration)
     }
     
     private func handleExpiredAccount() {
