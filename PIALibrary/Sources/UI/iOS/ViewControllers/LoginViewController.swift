@@ -27,6 +27,12 @@ private let log = SwiftyBeaver.self
 
 class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeViewControllerDelegate {
     
+    private enum LoginOption {
+        case credentials
+        case receipt
+        case magicLink
+    }
+    
     @IBOutlet private weak var scrollView: UIScrollView!
 
     @IBOutlet private weak var labelTitle: UILabel!
@@ -54,7 +60,14 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
     
     private var isLogging = false
     
+    private var timeToRetryCredentials: TimeInterval? = nil
+    private var timeToRetryReceipt: TimeInterval? = nil
+    private var timeToRetryMagicLink: TimeInterval? = nil
+    
     deinit {
+        timeToRetryCredentials = nil
+        timeToRetryReceipt = nil
+        timeToRetryMagicLink = nil
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -111,6 +124,10 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
     }
     // MARK: Actions
     @IBAction private func logInWithLink(_ sender: Any?) {
+        if let timeUntilNextTry = timeToRetryMagicLink?.timeIntervalUntilNextRetry() {
+            displayErrorMessage(errorMessage: L10n.Welcome.Login.Error.throttled("\(Int(timeUntilNextTry))"), displayDuration: timeUntilNextTry)
+            return
+        }
         
         let bundle = Bundle(for: LoginViewController.self)
         let storyboard = UIStoryboard(name: "Welcome", bundle: bundle)
@@ -131,12 +148,11 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
                 }
                 
                 self.showLoadingAnimation()
-
                 self.preset?.accountProvider.loginUsingMagicLink(withEmail: email, { (error) in
                     
                     self.hideLoadingAnimation()
                     guard error == nil else {
-                        self.handleLoginFailed(error)
+                        self.handleLoginFailed(error, loginOption: .magicLink)
                         return
                     }
                     
@@ -165,6 +181,10 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
     }
     
     @IBAction private func logInWithReceipt(_ sender: Any?) {
+        if let timeUntilNextTry = timeToRetryReceipt?.timeIntervalUntilNextRetry() {
+            displayErrorMessage(errorMessage: L10n.Welcome.Login.Error.throttled("\(Int(timeUntilNextTry))"), displayDuration: timeUntilNextTry)
+            return
+        }
         
         guard !isLogging else {
             return
@@ -177,11 +197,17 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         let request = LoginReceiptRequest(receipt: receipt)
         
         prepareLogin()
-        preset?.accountProvider.login(with: request, handleLoginResult)
+        preset?.accountProvider.login(with: request, { userAccount, error in
+            self.handleLoginResult(user: userAccount, error: error, loginOption: .receipt)
+        })
     }
 
     @IBAction private func logIn(_ sender: Any?) {
-    
+        if let timeUntilNextTry = timeToRetryCredentials?.timeIntervalUntilNextRetry() {
+            displayErrorMessage(errorMessage: L10n.Welcome.Login.Error.throttled("\(Int(timeUntilNextTry))"), displayDuration: timeUntilNextTry)
+            return
+        }
+        
         guard !isLogging else {
             return
         }
@@ -193,7 +219,9 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         let request = LoginRequest(credentials: credentials)
         
         prepareLogin()
-        preset?.accountProvider.login(with: request, handleLoginResult)
+        preset?.accountProvider.login(with: request, { userAccount, error in
+            self.handleLoginResult(user: userAccount, error: error, loginOption: .credentials)
+        })
     }
     
     private func getValidCredentials() -> Credentials? {
@@ -245,13 +273,13 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         showLoadingAnimation()
     }
     
-    private func handleLoginResult(user: UserAccount?, error: Error?) {
+    private func handleLoginResult(user: UserAccount?, error: Error?, loginOption: LoginOption) {
         enableInteractions(true)
 
         hideLoadingAnimation()
 
         guard let user = user else {
-            handleLoginFailed(error)
+            handleLoginFailed(error, loginOption: loginOption)
             return
         }
         
@@ -260,7 +288,19 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         self.completionDelegate?.welcomeDidLogin(withUser: user, topViewController: self)
     }
     
-    private func handleLoginFailed(_ error: Error?) {
+    private func updateTimeToRetry(loginOption: LoginOption, retryAfterSeconds: Double) {
+        let retryAfterTimeStamp = Date().timeIntervalSince1970 + retryAfterSeconds
+        switch loginOption {
+        case .credentials:
+            timeToRetryCredentials = retryAfterTimeStamp
+        case .receipt:
+            timeToRetryReceipt = retryAfterTimeStamp
+        case .magicLink:
+            timeToRetryMagicLink = retryAfterTimeStamp
+        }
+    }
+    
+    private func handleLoginFailed(_ error: Error?, loginOption: LoginOption) {
         var displayDuration: Double?
         var errorMessage: String?
         if let error = error {
@@ -271,7 +311,12 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
 
                 case .throttled(retryAfter: let retryAfter):
                     errorMessage = clientError.errorDescription
-                    displayDuration = Double(retryAfter)
+                    
+                    let retryAfterSeconds = Double(retryAfter)
+                    displayDuration = retryAfterSeconds
+                    
+                    updateTimeToRetry(loginOption: loginOption, retryAfterSeconds: retryAfterSeconds)
+                    
                 case .expired:
                     handleExpiredAccount()
                     return
@@ -359,5 +404,12 @@ extension LoginViewController: UITextFieldDelegate {
             logIn(nil)
         }
         return true
+    }
+}
+
+private extension TimeInterval {
+    func timeIntervalUntilNextRetry() -> Double? {
+        let now = Date().timeIntervalSince1970
+        return now > self ? nil : self - now
     }
 }
