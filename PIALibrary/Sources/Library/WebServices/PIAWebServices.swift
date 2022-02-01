@@ -286,10 +286,24 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         }
     }
     
+    fileprivate func mapDIPError(_ error: AccountRequestError?) -> ClientError {
+        guard let error = error else {
+            return ClientError.invalidParameter
+        }
+        switch error.code {
+        case 401:
+            return ClientError.unauthorized
+        case 429:
+            return ClientError.throttled(retryAfter: UInt(error.retryAfterSeconds))
+        default:
+            return ClientError.invalidParameter
+        }
+    }
+    
     func activateDIPToken(tokens: [String], _ callback: LibraryCallback<[Server]>?) {
         self.accountAPI.dedicatedIPs(ipTokens: tokens) { (dedicatedIps, errors) in
             if !errors.isEmpty {
-                callback?([], errors.last?.code == 401 ? ClientError.unauthorized : ClientError.invalidParameter)
+                callback?([], self.mapDIPError(errors.last))
                 return
             }
 
