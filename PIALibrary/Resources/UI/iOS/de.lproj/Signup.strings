@@ -1,166 +1,74 @@
-/* (No Comment) */
-"failure.message" = "Zur Zeit können wir kein Konto erstellen. Bitte später erneut versuchen.\n\nBeim erneuten Öffnen der App wird wieder versucht, ein Konto zu erstellen.";
-
-/* (No Comment) */
-"failure.purchase.sandbox.message" = "Das ausgewählte Sandbox-Abonnement ist in der Produktion nicht verfügbar.";
-
-/* (No Comment) */
-"failure.redeem.claimed.message" = "Anscheinend wurde diese Karte bereits über ein anderes Konto eingelöst. Geben Sie eine andere PIN ein.";
-
-/* (No Comment) */
-"failure.redeem.claimed.title" = "Karte bereits eingelöst";
-
-/* (No Comment) */
-"failure.redeem.invalid.message" = "Anscheinend haben Sie eine ungültige PIN eingegeben. Bitte erneut versuchen.";
-
-/* (No Comment) */
-"failure.redeem.invalid.title" = "Ungültige Karten-PIN";
-
-/* (No Comment) */
-"failure.submit" = "ZURÜCK";
-
-/* (No Comment) */
-"failure.title" = "Konto nicht erstellt";
-
-/* (No Comment) */
-"failure.vc_title" = "Registrierung fehlgeschlagen";
-
-/* (No Comment) */
-"in_progress.message" = "Wir bestätigen deinen Kauf in unserem System. Es kann einen Moment dauern, also gedulde dich bitte etwas.";
-
-/* (No Comment) */
-"in_progress.redeem.message" = "Wir überprüfen derzeit Ihre Karten-PIN in unserem System. Dies kann einen Moment dauern. Bitte haben Sie etwas Geduld.";
-
-/* Signup.strings
+/* 
+  Signup.strings
   PIALibrary
 
   Created by Davide De Rosa on 12/7/17.
-  Copyright © 2017 London Trust Media. All rights reserved. */
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
 "in_progress.title" = "Registrierung bestätigen";
+"in_progress.message" = "Wir bestätigen deinen Kauf in unserem System. Es kann einen Moment dauern, also gedulde dich bitte etwas.";
+"in_progress.redeem.message" = "Wir überprüfen derzeit Ihre Karten-PIN in unserem System. Dies kann einen Moment dauern. Bitte haben Sie etwas Geduld.";
 
-/* (No Comment) */
-"purchase.subscribe.now" = "Jetzt abonnieren";
-
-/* (No Comment) */
-"purchase.trials.1year.protection" = "1 Jahr Daten- und Identitätsschutz";
-
-/* (No Comment) */
-"purchase.trials.all.plans" = "Alle verfügbaren Pläne anzeigen";
-
-/* (No Comment) */
-"purchase.trials.anonymous" = "Anonym surfen und Ihre IP-Adresse verbergen";
-
-/* (No Comment) */
-"purchase.trials.devices" = "Unterstützung für 10 Geräte";
-
-/* (No Comment) */
-"purchase.trials.devices.description" = "Schützen Sie sich auf bis zu 10 Geräten gleichzeitig.";
-
-/* (No Comment) */
-"purchase.trials.intro" = "Jetzt 7 Tage gratis testen";
-
-/* (No Comment) */
-"purchase.trials.money.back" = "30-Tage-Geld-zurück-Garantie";
-
-/* (No Comment) */
-"purchase.trials.price.after" = "Dann %@";
-
-/* (No Comment) */
-"purchase.trials.region" = "Einfache Verbindung zu jeder Region";
-
-/* (No Comment) */
-"purchase.trials.servers" = "Mehr als 3300 Server in 32 Ländern";
-
-/* (No Comment) */
-"purchase.trials.start" = "Abonnement beginnen";
-
-/* (No Comment) */
-"purchase.uncredited.alert.button.cancel" = "Abbrechen";
-
-/* (No Comment) */
-"purchase.uncredited.alert.button.recover" = "Konto wiederherstellen";
-
-/* (No Comment) */
-"purchase.uncredited.alert.message" = "Sie haben Transaktionen, die noch nicht gutgeschrieben wurden. Möchten Sie Ihre Kontodaten wiederherstellen?";
-
-/* (No Comment) */
-"share.data.buttons.accept" = "Akzeptieren";
-
-/* (No Comment) */
-"share.data.buttons.noThanks" = "Nein danke";
-
-/* (No Comment) */
-"share.data.buttons.readMore" = "Mehr erfahren";
-
-/* (No Comment) */
-"share.data.readMore.text.description" = "Diese minimalen Informationen helfen uns, mögliche Verbindungsprobleme zu erkennen und zu beheben. Beachten Sie, dass die Weitergabe dieser Informationen eine Zustimmung und manuelle Aktivierung erfordert, da sie standardmäßig deaktiviert ist.\n\nWir erfassen Informationen über die folgenden Ereignisse:\n\n- Verbindungsversuch\n- Verbindung abgebrochen\n- Verbindung hergestellt\n\nFür alle diese Ereignisse werden wir die folgenden Informationen erfassen:\n- Plattform\n- App-Version\n- App-Typ (Vorabversion oder nicht)\n- Verwendetes Protokoll\n- Verbindungsquelle (manuell oder über Automatisierung)\n\nAlle Ereignisse enthalten eine eindeutige ID, die zufällig generiert wird. Diese ID ist nicht mit Ihrem Benutzerkonto verknüpft. Diese eindeutige ID wird aus Datenschutzgründen täglich neu generiert.\n\nSie werden immer die Kontrolle haben. Sie können sehen, welche Daten wir über Einstellungen erfasst haben, und Sie können sie jederzeit deaktivieren.";
-
-/* (No Comment) */
-"share.data.text.description" = "Um uns zu helfen, die Verbindungsleistung unseres Dienstes sicherzustellen, können Sie Ihre Verbindungsstatistiken anonym mit uns teilen. Diese Berichte enthalten keine persönlich identifizierbaren Informationen.";
-
-/* (No Comment) */
-"share.data.text.footer" = "Sie können dies jederzeit über Ihre Einstellungen steuern";
-
-/* (No Comment) */
-"share.data.text.title" = "Bitte helfen Sie uns, unseren Service zu verbessern";
-
-/* (No Comment) */
+"success.title" = "Kauf abgeschlossen";
 "success.message_format" = "Vielen Dank für deine Registrierung. Wir haben dir deinen Benutzernamen und dein Passwort an deine E-Mail-Adresse unter %@ gesendet.";
-
-/* (No Comment) */
-"success.password.caption" = "Passwort";
-
-/* (No Comment) */
-"success.redeem.message" = "Sie werden in Kürze eine E-Mail mit Ihrem Benutzernamen und Passwort erhalten.\n\nIhre Zugangsdaten";
-
-/* (No Comment) */
 "success.redeem.title" = "Karte erfolgreich eingelöst!";
-
-/* (No Comment) */
+"success.redeem.message" = "Sie werden in Kürze eine E-Mail mit Ihrem Benutzernamen und Passwort erhalten.\n\nIhre Zugangsdaten";
+"success.username.caption" = "Benutzername";
+"success.password.caption" = "Passwort";
 "success.submit" = "Erste Schritte";
 
-/* (No Comment) */
-"success.title" = "Kauf abgeschlossen";
+"failure.vc_title" = "Registrierung fehlgeschlagen";
+"failure.title" = "Konto nicht erstellt";
+"failure.message" = "Zur Zeit können wir kein Konto erstellen. Bitte später erneut versuchen.\n\nBeim erneuten Öffnen der App wird wieder versucht, ein Konto zu erstellen.";
+"failure.purchase.sandbox.message" = "Das ausgewählte Sandbox-Abonnement ist in der Produktion nicht verfügbar.";
+"failure.redeem.invalid.title" = "Ungültige Karten-PIN";
+"failure.redeem.invalid.message" = "Anscheinend haben Sie eine ungültige PIN eingegeben. Bitte erneut versuchen.";
+"failure.redeem.claimed.title" = "Karte bereits eingelöst";
+"failure.redeem.claimed.message" = "Anscheinend wurde diese Karte bereits über ein anderes Konto eingelöst. Geben Sie eine andere PIN ein.";
+"failure.submit" = "ZURÜCK";
 
-/* (No Comment) */
-"success.username.caption" = "Benutzername";
-
-/* (No Comment) */
+"unreachable.vc_title" = "Fehler";
+"unreachable.title" = "Ups!";
 "unreachable.message" = "Keine Internetverbindung gefunden. Bitte deine Internetverbindung überprüfen und erneut versuchen.\n\nDu kannst die App später erneut aufrufen, um den Vorgang abzuschließen.";
-
-/* (No Comment) */
 "unreachable.submit" = "WIEDERHOLEN";
 
-/* (No Comment) */
-"unreachable.title" = "Ups!";
+"purchase.uncredited.alert.message" = "Sie haben Transaktionen, die noch nicht gutgeschrieben wurden. Möchten Sie Ihre Kontodaten wiederherstellen?";
+"purchase.uncredited.alert.button.cancel" = "Abbrechen";
+"purchase.uncredited.alert.button.recover" = "Konto wiederherstellen";
 
-/* (No Comment) */
-"unreachable.vc_title" = "Fehler";
+"purchase.trials.intro" = "Jetzt 7 Tage gratis testen";
+"purchase.trials.price.after" = "Dann %@";
+"purchase.trials.money.back" = "30-Tage-Geld-zurück-Garantie";
+"purchase.trials.1year.protection" = "1 Jahr Daten- und Identitätsschutz";
+"purchase.trials.anonymous" = "Anonym surfen und Ihre IP-Adresse verbergen";
+"purchase.trials.devices" = "Unterstützung für 10 Geräte";
+"purchase.trials.devices.description" = "Schützen Sie sich auf bis zu 10 Geräten gleichzeitig.";
+"purchase.trials.region" = "Einfache Verbindung zu jeder Region";
+"purchase.trials.servers" = "Mehr als 3300 Server in 32 Ländern";
+"purchase.trials.start" = "Abonnement beginnen";
+"purchase.trials.all.plans" = "Alle verfügbaren Pläne anzeigen";
 
-/* (No Comment) */
-"walkthrough.action.done" = "FERTIG";
+"purchase.subscribe.now" = "Jetzt abonnieren";
 
-/* WALKTHROUGH */
+// WALKTHROUGH
+
 "walkthrough.action.next" = "WEITER";
-
-/* (No Comment) */
+"walkthrough.action.done" = "FERTIG";
 "walkthrough.action.skip" = "ÜBERSPRINGEN";
 
-/* (No Comment) */
-"walkthrough.page.1.description" = "Schützen Sie sich auf bis zu 10 Geräten gleichzeitig.";
-
-/* (No Comment) */
 "walkthrough.page.1.title" = "Unterstützung für 10 Geräte";
-
-/* (No Comment) */
-"walkthrough.page.2.description" = "Mit Servern auf der ganzen Welt bist du immer geschützt.";
-
-/* (No Comment) */
+"walkthrough.page.1.description" = "Schützen Sie sich auf bis zu 10 Geräten gleichzeitig.";
 "walkthrough.page.2.title" = "Bequem mit jeder beliebigen Region verbinden";
-
-/* (No Comment) */
+"walkthrough.page.2.description" = "Mit Servern auf der ganzen Welt bist du immer geschützt.";
+"walkthrough.page.3.title" = "Schütze dich vor Werbung";
 "walkthrough.page.3.description" = "Mit der Aktivierung unseres Inhalts-Blockers sehen Sie keine Anzeigen in Safari mehr.";
 
-/* (No Comment) */
-"walkthrough.page.3.title" = "Schütze dich vor Werbung";
+"share.data.buttons.accept" = "Akzeptieren";
+"share.data.buttons.noThanks" = "Nein danke";
+"share.data.buttons.readMore" = "Mehr erfahren";
+"share.data.text.title" = "Bitte helfen Sie uns, unseren Service zu verbessern";
+"share.data.text.description" = "Um uns zu helfen, die Verbindungsleistung unseres Dienstes sicherzustellen, können Sie Ihre Verbindungsstatistiken anonym mit uns teilen. Diese Berichte enthalten keine persönlich identifizierbaren Informationen.";
+"share.data.text.footer" = "Sie können dies jederzeit über Ihre Einstellungen steuern";
 
+"share.data.readMore.text.description" = "Diese minimalen Informationen helfen uns, mögliche Verbindungsprobleme zu erkennen und zu beheben. Beachten Sie, dass die Weitergabe dieser Informationen eine Zustimmung und manuelle Aktivierung erfordert, da sie standardmäßig deaktiviert ist.\n\nWir erfassen Informationen über die folgenden Ereignisse:\n\n- Verbindungsversuch\n- Verbindung abgebrochen\n- Verbindung hergestellt\n\nFür alle diese Ereignisse werden wir die folgenden Informationen erfassen:\n- Plattform\n- App-Version\n- App-Typ (Vorabversion oder nicht)\n- Verwendetes Protokoll\n- Verbindungsquelle (manuell oder über Automatisierung)\n\nAlle Ereignisse enthalten eine eindeutige ID, die zufällig generiert wird. Diese ID ist nicht mit Ihrem Benutzerkonto verknüpft. Diese eindeutige ID wird aus Datenschutzgründen täglich neu generiert.\n\nSie werden immer die Kontrolle haben. Sie können sehen, welche Daten wir über Einstellungen erfasst haben, und Sie können sie jederzeit deaktivieren.";
