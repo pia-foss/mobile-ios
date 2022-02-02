@@ -1,2 +1,4 @@
-"NSCameraUsageDescription" = "نحتاج للوصول إلى الكاميرا لقراءة رموز QR لتتمكن من استلام محتوى بطاقة الهدايا.";
+/* Localized versions of Info.plist keys */
+
 "NSFaceIDUsageDescription" = "مصادقة للإظهار";
+"NSCameraUsageDescription" = "نحتاج للوصول إلى الكاميرا لقراءة رموز QR لتتمكن من استلام محتوى بطاقة الهدايا.";

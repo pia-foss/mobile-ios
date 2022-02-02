@@ -1,2 +1,4 @@
-"NSCameraUsageDescription" = "Aby skanować kody QR i korzystać z kart upominkowych, musisz zezwolić na dostęp do aparatu.";
+/* Localized versions of Info.plist keys */
+
 "NSFaceIDUsageDescription" = "Potwierdź swoją tożsamość, aby wyświetlić";
+"NSCameraUsageDescription" = "Aby skanować kody QR i korzystać z kart upominkowych, musisz zezwolić na dostęp do aparatu.";
