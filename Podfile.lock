@@ -160,10 +160,10 @@ DEPENDENCIES:
   - "PIAAccountModule (from `git@gitlab.kape.com:pia-mobile/shared/account.git`, commit `6692a21`)"
   - "PIACSIModule (from `git@gitlab.kape.com:pia-mobile/shared/csi.git`, commit `b62d1bab`)"
   - "PIAKPIModule (from `git@gitlab.kape.com:pia-mobile/shared/kpi.git`, commit `31186b1d`)"
-  - "PIALibrary/Library (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `a84c2f75`)"
-  - "PIALibrary/Mock (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `a84c2f75`)"
-  - "PIALibrary/UI (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `a84c2f75`)"
-  - "PIALibrary/VPN (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `a84c2f75`)"
+  - "PIALibrary/Library (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `e1b11ce1`)"
+  - "PIALibrary/Mock (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `e1b11ce1`)"
+  - "PIALibrary/UI (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `e1b11ce1`)"
+  - "PIALibrary/VPN (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `e1b11ce1`)"
   - "PIARegionsModule (from `git@gitlab.kape.com:pia-mobile/shared/regions.git`, branch `release/1.3.1`)"
   - "PIAWireguard (from `git@gitlab.kape.com:pia-mobile/ios/pia-wireguard.git`, commit `7e9d8d48`)"
   - Popover
@@ -217,7 +217,7 @@ EXTERNAL SOURCES:
     :commit: 31186b1d
     :git: "git@gitlab.kape.com:pia-mobile/shared/kpi.git"
   PIALibrary:
-    :commit: a84c2f75
+    :commit: e1b11ce1
     :git: "git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git"
   PIARegionsModule:
     :branch: release/1.3.1
@@ -243,7 +243,7 @@ CHECKOUT OPTIONS:
     :commit: 31186b1d
     :git: "git@gitlab.kape.com:pia-mobile/shared/kpi.git"
   PIALibrary:
-    :commit: a84c2f75
+    :commit: e1b11ce1
     :git: "git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git"
   PIARegionsModule:
     :commit: 6b3b763b3b1d066cb73d2d8833563669ff8e87bb
@@ -293,6 +293,6 @@ SPEC CHECKSUMS:
   TunnelKit: 2a6aadea2d772a2760b153aee27d1c334c9ca6db
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 98bc177d6ae9431df9558d3cde415bacadbbf45c
+PODFILE CHECKSUM: e892b5b0b58fe976ef968f3129ca9c43a13d9bd4
 
 COCOAPODS: 1.11.2

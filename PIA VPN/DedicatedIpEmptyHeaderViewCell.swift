@@ -22,6 +22,11 @@
 import UIKit
 import PIALibrary
 
+protocol DedicatedIpEmptyHeaderViewCellDelegate: AnyObject {
+    func getTimeToRetryDIP() -> TimeInterval?
+    func setTimeToRetryDIP(newInterval: TimeInterval)
+}
+
 class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
 
     @IBOutlet private weak var title: UILabel!
@@ -31,7 +36,8 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
     @IBOutlet private weak var addTokenTextfield: UITextField!
     
     private weak var tableView: UITableView!
-
+    weak var delegate: DedicatedIpEmptyHeaderViewCellDelegate? = nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = .clear
@@ -42,8 +48,9 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
         self.addTokenTextfield.delegate = self
     }
 
-    func setup(withTableView tableView: UITableView) {
+    func setup(withTableView tableView: UITableView, delegate: DedicatedIpEmptyHeaderViewCellDelegate) {
         self.tableView = tableView
+        self.delegate = delegate
         styleButton()
         styleContainer()
         viewShouldRestyle()
@@ -91,7 +98,9 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
             Client.providers.accountProvider.logout(nil)
             Macros.postNotification(.PIAUnauthorized)
         case .throttled(let retryAfter):
-            self.displayErrorMessage(errorMessage: error.errorDescription, displayDuration: Double(retryAfter))
+            let retryAfterSeconds = Double(retryAfter)
+            self.displayErrorMessage(errorMessage: error.errorDescription, displayDuration: retryAfterSeconds)
+            self.delegate?.setTimeToRetryDIP(newInterval: Date().timeIntervalSince1970 + retryAfterSeconds)
         default:
             self.showInvalidTokenMessage()
         }
@@ -126,6 +135,11 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
     }
     
     @IBAction private func activateToken() {
+        if let timeUntilNextTry = self.delegate?.getTimeToRetryDIP()?.timeSinceNow() {
+            displayErrorMessage(errorMessage: L10n.Dedicated.Ip.Message.Error.retryafter("\(Int(timeUntilNextTry))"), displayDuration: timeUntilNextTry)
+            return
+        }
+        
         if let token = addTokenTextfield.text, !token.isEmpty {
             handleDIPActivation(token: token)
         } else {
