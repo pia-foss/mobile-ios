@@ -65,9 +65,6 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
     private var timeToRetryMagicLink: TimeInterval? = nil
     
     deinit {
-        timeToRetryCredentials = nil
-        timeToRetryReceipt = nil
-        timeToRetryMagicLink = nil
         NotificationCenter.default.removeObserver(self)
     }
 
