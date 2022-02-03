@@ -121,7 +121,7 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
     }
     // MARK: Actions
     @IBAction private func logInWithLink(_ sender: Any?) {
-        if let timeUntilNextTry = timeToRetryMagicLink?.timeIntervalUntilNextRetry() {
+        if let timeUntilNextTry = timeToRetryMagicLink?.timeSinceNow() {
             displayErrorMessage(errorMessage: L10n.Welcome.Login.Error.throttled("\(Int(timeUntilNextTry))"), displayDuration: timeUntilNextTry)
             return
         }
@@ -178,7 +178,7 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
     }
     
     @IBAction private func logInWithReceipt(_ sender: Any?) {
-        if let timeUntilNextTry = timeToRetryReceipt?.timeIntervalUntilNextRetry() {
+        if let timeUntilNextTry = timeToRetryReceipt?.timeSinceNow() {
             displayErrorMessage(errorMessage: L10n.Welcome.Login.Error.throttled("\(Int(timeUntilNextTry))"), displayDuration: timeUntilNextTry)
             return
         }
@@ -200,7 +200,7 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
     }
 
     @IBAction private func logIn(_ sender: Any?) {
-        if let timeUntilNextTry = timeToRetryCredentials?.timeIntervalUntilNextRetry() {
+        if let timeUntilNextTry = timeToRetryCredentials?.timeSinceNow() {
             displayErrorMessage(errorMessage: L10n.Welcome.Login.Error.throttled("\(Int(timeUntilNextTry))"), displayDuration: timeUntilNextTry)
             return
         }
@@ -401,12 +401,5 @@ extension LoginViewController: UITextFieldDelegate {
             logIn(nil)
         }
         return true
-    }
-}
-
-private extension TimeInterval {
-    func timeIntervalUntilNextRetry() -> Double? {
-        let now = Date().timeIntervalSince1970
-        return now > self ? nil : self - now
     }
 }
