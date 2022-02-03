@@ -157,7 +157,7 @@ DEPENDENCIES:
   - Firebase/Core (= 6.5.0)
   - GradientProgressBar (~> 2.0)
   - OpenSSL-Apple (from `https://github.com/keeshux/openssl-apple`)
-  - "PIAAccountModule (from `git@gitlab.kape.com:pia-mobile/shared/account.git`, commit `4bcb54a`)"
+  - "PIAAccountModule (from `git@gitlab.kape.com:pia-mobile/shared/account.git`, commit `6692a21`)"
   - "PIACSIModule (from `git@gitlab.kape.com:pia-mobile/shared/csi.git`, commit `b62d1bab`)"
   - "PIAKPIModule (from `git@gitlab.kape.com:pia-mobile/shared/kpi.git`, commit `31186b1d`)"
   - "PIALibrary/Library (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `a84c2f75`)"
@@ -208,7 +208,7 @@ EXTERNAL SOURCES:
   OpenSSL-Apple:
     :git: https://github.com/keeshux/openssl-apple
   PIAAccountModule:
-    :commit: 4bcb54a
+    :commit: 6692a21
     :git: "git@gitlab.kape.com:pia-mobile/shared/account.git"
   PIACSIModule:
     :commit: b62d1bab
@@ -234,7 +234,7 @@ CHECKOUT OPTIONS:
     :commit: ada87845f854a21fea436c76deb97be2acc58c8a
     :git: https://github.com/keeshux/openssl-apple
   PIAAccountModule:
-    :commit: 4bcb54a
+    :commit: 6692a21
     :git: "git@gitlab.kape.com:pia-mobile/shared/account.git"
   PIACSIModule:
     :commit: b62d1bab
@@ -293,6 +293,6 @@ SPEC CHECKSUMS:
   TunnelKit: 2a6aadea2d772a2760b153aee27d1c334c9ca6db
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 31353bffad7b2d6f6dcb2ab6120873af1f4c76f1
+PODFILE CHECKSUM: 98bc177d6ae9431df9558d3cde415bacadbbf45c
 
 COCOAPODS: 1.11.2
