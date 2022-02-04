@@ -99,7 +99,10 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
             Macros.postNotification(.PIAUnauthorized)
         case .throttled(let retryAfter):
             let retryAfterSeconds = Double(retryAfter)
-            self.displayErrorMessage(errorMessage: error.errorDescription, displayDuration: retryAfterSeconds)
+            let localisedThrottlingString = L10n.Dedicated.Ip.Message.Error.retryafter("\(Int(retryAfter))")
+            
+            self.displayErrorMessage(errorMessage: NSLocalizedString(localisedThrottlingString, comment: localisedThrottlingString),
+                                     displayDuration: retryAfterSeconds)
             self.delegate?.setTimeToRetryDIP(newInterval: Date().timeIntervalSince1970 + retryAfterSeconds)
         default:
             self.showInvalidTokenMessage()
