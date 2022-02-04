@@ -78,11 +78,12 @@ public class ServiceQualityManager: NSObject {
     }
     
     @objc private func appChangedState(with notification: Notification) {
-        if notification.name == UIApplication.didBecomeActiveNotification || notification.name ==  UIApplication.didFinishLaunchingNotification {
-            isAppActive = true
-        } else if notification.name == UIApplication.didEnterBackgroundNotification {
+        switch notification.name {
+        case UIApplication.didEnterBackgroundNotification:
             isAppActive = false
             flushEvents()
+        default:
+            isAppActive = true
         }
     }
     
@@ -96,9 +97,12 @@ public class ServiceQualityManager: NSObject {
     }
     
     public func connectionAttemptEvent() {
-        let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.vpnConnectionAttempt, eventProperties: KPIClientEvent.EventProperties(connectionSource: connectionSource(), data: nil, preRelease: isPreRelease(), reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
-        kpiManager?.submit(event: event) { (error) in
-            log.debug("Event sent \(event)")
+        let connectionSource = connectionSource()
+        if connectionSource == .manual && isAppActive == true {
+            let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.vpnConnectionAttempt, eventProperties: KPIClientEvent.EventProperties(connectionSource: connectionSource, data: nil, preRelease: isPreRelease(), reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
+            kpiManager?.submit(event: event) { (error) in
+                log.debug("Event sent \(event)")
+            }
         }
     }
 
@@ -114,9 +118,12 @@ public class ServiceQualityManager: NSObject {
 
     
     public func connectionCancelledEvent() {
-        let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.vpnConnectionCancelled, eventProperties: KPIClientEvent.EventProperties(connectionSource: disconnectionSource(), data: nil, preRelease: isPreRelease(), reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
-        kpiManager?.submit(event: event) { (error) in
-            log.debug("Event sent \(event)")
+        let disconnectionSource = disconnectionSource()
+        if disconnectionSource == .manual && isAppActive == true {
+            let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.vpnConnectionCancelled, eventProperties: KPIClientEvent.EventProperties(connectionSource: disconnectionSource, data: nil, preRelease: isPreRelease(), reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
+            kpiManager?.submit(event: event) { (error) in
+                log.debug("Event sent \(event)")
+            }
         }
     }
 
