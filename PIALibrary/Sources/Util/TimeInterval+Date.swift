@@ -1,12 +1,11 @@
 //
-//  TimeInterval+RequestCalculations.swift
+//  TimeInterval+Date.swift
 //  PIALibrary
 //
-//  Created by Waleed Mahmood on 03.02.22.
+//  Created by Waleed Mahmood on 04.02.22.
 //
 
 import Foundation
-
 
 public extension TimeInterval {
     /// Returns time in seconds between receiver & now
