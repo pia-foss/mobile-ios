@@ -234,7 +234,7 @@ internal enum L10n {
       }
       internal enum Message {
         internal enum Error {
-          /// Too many failed token activation requests. Please try again later after %@ second(s).
+          /// Too many failed token activation requests. Please try again after %@ second(s).
           internal static func retryafter(_ p1: Any) -> String {
             return L10n.tr("Localizable", "dedicated.ip.message.error.retryafter", String(describing: p1))
           }
