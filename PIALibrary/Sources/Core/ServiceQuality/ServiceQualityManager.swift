@@ -29,10 +29,10 @@ private let log = SwiftyBeaver.self
 public class ServiceQualityManager: NSObject {
     
     private var kpiToken = ""
-    private let connectionType = "manual"
     public static let shared = ServiceQualityManager()
     private var kpiManager: KPIAPI?
-
+    private var isAppActive = true
+    
     public override init() {
         super.init()
         
@@ -53,8 +53,12 @@ public class ServiceQualityManager: NSObject {
         }
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(flushEvents),
+                                               selector: #selector(appChangedState(with:)),
                                                name: UIApplication.didEnterBackgroundNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(appChangedState(with:)),
+                                               name: UIApplication.didBecomeActiveNotification,
                                                object: nil)
 
     }
@@ -71,6 +75,15 @@ public class ServiceQualityManager: NSObject {
     public func stop() {
         kpiManager?.stop()
         log.debug("KPI manager stopped")
+    }
+    
+    @objc private func appChangedState(with notification: Notification) {
+        if notification.name == UIApplication.didBecomeActiveNotification || notification.name ==  UIApplication.didFinishLaunchingNotification {
+            isAppActive = true
+        } else if notification.name == UIApplication.didEnterBackgroundNotification {
+            isAppActive = false
+            flushEvents()
+        }
     }
     
     @objc private func flushEvents() {
@@ -90,9 +103,12 @@ public class ServiceQualityManager: NSObject {
     }
 
     public func connectionEstablishedEvent() {
-        let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.vpnConnectionEstablished, eventProperties: KPIClientEvent.EventProperties(connectionSource: connectionSource(), data: nil, preRelease: isPreRelease(), reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
-        kpiManager?.submit(event: event) { (error) in
-            log.debug("Event sent \(event)")
+        let connectionSource = connectionSource()
+        if connectionSource == .manual && isAppActive == true {
+            let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.vpnConnectionEstablished, eventProperties: KPIClientEvent.EventProperties(connectionSource: connectionSource, data: nil, preRelease: isPreRelease(), reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
+            kpiManager?.submit(event: event) { (error) in
+                log.debug("Event sent \(event)")
+            }
         }
     }
 
