@@ -98,7 +98,7 @@ public class ServiceQualityManager: NSObject {
     
     public func connectionAttemptEvent() {
         let connectionSource = connectionSource()
-        if connectionSource == .manual && isAppActive == true {
+        if connectionSource == .manual && isAppActive {
             let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.vpnConnectionAttempt, eventProperties: KPIClientEvent.EventProperties(connectionSource: connectionSource, data: nil, preRelease: isPreRelease(), reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
             kpiManager?.submit(event: event) { (error) in
                 log.debug("Event sent \(event)")
@@ -108,7 +108,7 @@ public class ServiceQualityManager: NSObject {
 
     public func connectionEstablishedEvent() {
         let connectionSource = connectionSource()
-        if connectionSource == .manual && isAppActive == true {
+        if connectionSource == .manual && isAppActive {
             let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.vpnConnectionEstablished, eventProperties: KPIClientEvent.EventProperties(connectionSource: connectionSource, data: nil, preRelease: isPreRelease(), reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
             kpiManager?.submit(event: event) { (error) in
                 log.debug("Event sent \(event)")
@@ -119,7 +119,7 @@ public class ServiceQualityManager: NSObject {
     
     public func connectionCancelledEvent() {
         let disconnectionSource = disconnectionSource()
-        if disconnectionSource == .manual && isAppActive == true {
+        if disconnectionSource == .manual && isAppActive {
             let event = KPIClientEvent(eventCountry: nil, eventName: KPIConnectionEvent.vpnConnectionCancelled, eventProperties: KPIClientEvent.EventProperties(connectionSource: disconnectionSource, data: nil, preRelease: isPreRelease(), reason: nil, serverIdentifier: nil, userAgent: PIAWebServices.userAgent, vpnProtocol: currentProtocol()), eventToken: kpiToken)
             kpiManager?.submit(event: event) { (error) in
                 log.debug("Event sent \(event)")
