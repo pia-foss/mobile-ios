@@ -307,7 +307,8 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
                     errorMessage = L10n.Welcome.Login.Error.unauthorized
 
                 case .throttled(retryAfter: let retryAfter):
-                    errorMessage = clientError.errorDescription
+                    let localisedThrottlingString = L10n.Welcome.Login.Error.throttled("\(retryAfter)")
+                    errorMessage = NSLocalizedString(localisedThrottlingString, comment: localisedThrottlingString)
                     
                     let retryAfterSeconds = Double(retryAfter)
                     displayDuration = retryAfterSeconds

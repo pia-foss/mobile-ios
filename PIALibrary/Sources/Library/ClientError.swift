@@ -94,9 +94,6 @@ extension ClientError: LocalizedError {
         case .sandboxPurchase:
             return NSLocalizedString(L10n.Signup.Failure.Purchase.Sandbox.message,
                                      comment: L10n.Signup.Failure.Purchase.Sandbox.message)
-        case .throttled(retryAfter: let retryAfter):
-            let localisedThrottlingString = L10n.Welcome.Login.Error.throttled("\(retryAfter)")
-            return NSLocalizedString(localisedThrottlingString, comment: localisedThrottlingString)
         default:
             return nil
         }
