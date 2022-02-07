@@ -395,6 +395,7 @@
 "dedicated.ip.message.valid.token" = "Your Dedicated IP has been activated successfully. It will be available in your Region selection list.";
 "dedicated.ip.message.expired.token" = "Your token is expired. Please generate a new one from your Account page on the website.";
 "dedicated.ip.message.error.token" = "Your token is expired. Please generate a new one from your Account page on the website.";
+"dedicated.ip.message.error.retryafter" = "Too many failed token activation requests. Please try again after %@ second(s).";
 "dedicated.ip.message.token.willexpire" = "Your dedicated IP will expire soon. Get a new one";
 "dedicated.ip.message.token.willexpire.link" = "Get a new one";
 "dedicated.ip.message.ip.updated" = "Your dedicated IP was updated";

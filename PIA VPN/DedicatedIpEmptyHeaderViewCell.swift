@@ -22,6 +22,11 @@
 import UIKit
 import PIALibrary
 
+protocol DedicatedIpEmptyHeaderViewCellDelegate: AnyObject {
+    func getTimeToRetryDIP() -> TimeInterval?
+    func setTimeToRetryDIP(newInterval: TimeInterval)
+}
+
 class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
 
     @IBOutlet private weak var title: UILabel!
@@ -31,7 +36,8 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
     @IBOutlet private weak var addTokenTextfield: UITextField!
     
     private weak var tableView: UITableView!
-
+    weak var delegate: DedicatedIpEmptyHeaderViewCellDelegate? = nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = .clear
@@ -42,8 +48,9 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
         self.addTokenTextfield.delegate = self
     }
 
-    func setup(withTableView tableView: UITableView) {
+    func setup(withTableView tableView: UITableView, delegate: DedicatedIpEmptyHeaderViewCellDelegate) {
         self.tableView = tableView
+        self.delegate = delegate
         styleButton()
         styleContainer()
         viewShouldRestyle()
@@ -71,36 +78,73 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
         subtitle.style(style: TextStyle.textStyle8)
     }
     
-    @IBAction private func activateToken() {
-        if let token = addTokenTextfield.text, !token.isEmpty {
-            NotificationCenter.default.post(name: .DedicatedIpShowAnimation, object: nil)
-            Client.providers.serverProvider.activateDIPToken(token) { [weak self] (server, error) in
-                NotificationCenter.default.post(name: .DedicatedIpHideAnimation, object: nil)
-                self?.addTokenTextfield.text = ""
-                guard let dipServer = server else {
-                   
-                    if error != nil, error as! ClientError == ClientError.unauthorized {
-                        Client.providers.accountProvider.logout(nil)
-                        Macros.postNotification(.PIAUnauthorized)
-                        return
-                    }
-
-                    Macros.displayStickyNote(withMessage: L10n.Dedicated.Ip.Message.Invalid.token,
-                                             andImage: Asset.iconWarning.image)
+    private var invalidTokenLocalisedString: String {
+        get {
+            return L10n.Dedicated.Ip.Message.Invalid.token
+        }
+    }
+    
+    private func showInvalidTokenMessage() {
+        Macros.displayStickyNote(withMessage: invalidTokenLocalisedString, andImage: Asset.iconWarning.image)
+    }
+    
+    private func displayErrorMessage(errorMessage: String?, displayDuration: Double? = nil) {
+        Macros.displayImageNote(withImage: Asset.iconWarning.image, message: errorMessage ?? invalidTokenLocalisedString, andDuration: displayDuration)
+    }
+    
+    private func handleDIPActivationError(_ error: ClientError) {
+        switch error {
+        case .unauthorized:
+            Client.providers.accountProvider.logout(nil)
+            Macros.postNotification(.PIAUnauthorized)
+        case .throttled(let retryAfter):
+            let retryAfterSeconds = Double(retryAfter)
+            let localisedThrottlingString = L10n.Dedicated.Ip.Message.Error.retryafter("\(Int(retryAfter))")
+            
+            self.displayErrorMessage(errorMessage: NSLocalizedString(localisedThrottlingString, comment: localisedThrottlingString),
+                                     displayDuration: retryAfterSeconds)
+            self.delegate?.setTimeToRetryDIP(newInterval: Date().timeIntervalSince1970 + retryAfterSeconds)
+        default:
+            self.showInvalidTokenMessage()
+        }
+    }
+    
+    private func handleDIPActivation(token: String) {
+        NotificationCenter.default.post(name: .DedicatedIpShowAnimation, object: nil)
+        Client.providers.serverProvider.activateDIPToken(token) { [weak self] (server, error) in
+            NotificationCenter.default.post(name: .DedicatedIpHideAnimation, object: nil)
+            self?.addTokenTextfield.text = ""
+            guard let dipServer = server else {
+                
+                guard let error = error as? ClientError else {
+                    self?.showInvalidTokenMessage()
                     return
                 }
-                switch dipServer?.dipStatus {
-                case .active:
-                    Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image, message: L10n.Dedicated.Ip.Message.Valid.token)
-                case .expired:
-                    print(L10n.Dedicated.Ip.Message.Expired.token) // we dont show the message to the user
-                default:
-                    Macros.displayStickyNote(withMessage: L10n.Dedicated.Ip.Message.Invalid.token,
-                                             andImage: Asset.iconWarning.image)
-                }
-                NotificationCenter.default.post(name: .DedicatedIpReload, object: nil)
-                NotificationCenter.default.post(name: .PIAThemeDidChange, object: nil)
+                
+                self?.handleDIPActivationError(error)
+                return
             }
+            switch dipServer?.dipStatus {
+            case .active:
+                Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image, message: L10n.Dedicated.Ip.Message.Valid.token)
+            case .expired:
+                print(L10n.Dedicated.Ip.Message.Expired.token) // we dont show the message to the user
+            default:
+                Macros.displayStickyNote(withMessage: self?.invalidTokenLocalisedString ?? "", andImage: Asset.iconWarning.image)
+            }
+            NotificationCenter.default.post(name: .DedicatedIpReload, object: nil)
+            NotificationCenter.default.post(name: .PIAThemeDidChange, object: nil)
+        }
+    }
+    
+    @IBAction private func activateToken() {
+        if let timeUntilNextTry = self.delegate?.getTimeToRetryDIP()?.timeSinceNow() {
+            displayErrorMessage(errorMessage: L10n.Dedicated.Ip.Message.Error.retryafter("\(Int(timeUntilNextTry))"), displayDuration: timeUntilNextTry)
+            return
+        }
+        
+        if let token = addTokenTextfield.text, !token.isEmpty {
+            handleDIPActivation(token: token)
         } else {
             Macros.displayStickyNote(withMessage: L10n.Dedicated.Ip.Message.Incorrect.token,
                                      andImage: Asset.iconWarning.image)
