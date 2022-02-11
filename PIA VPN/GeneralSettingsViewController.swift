@@ -52,7 +52,7 @@ class GeneralSettingsViewController: PIABaseSettingsViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        styleNavigationBarWithTitle(L10n.Settings.Section.general)
+        styleNavigationBarWithTitle(L10n.Localizable.Settings.Section.general)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -81,7 +81,7 @@ class GeneralSettingsViewController: PIABaseSettingsViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        styleNavigationBarWithTitle(L10n.Settings.Section.general)
+        styleNavigationBarWithTitle(L10n.Localizable.Settings.Section.general)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
@@ -107,7 +107,7 @@ extension GeneralSettingsViewController: UITableViewDelegate, UITableViewDataSou
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.style(style: TextStyle.textStyle21)
             cell.backgroundColor = .clear
-            cell.textLabel?.text =  L10n.Settings.Reset.footer
+            cell.textLabel?.text =  L10n.Localizable.Settings.Reset.footer
             return cell
         }
         return nil

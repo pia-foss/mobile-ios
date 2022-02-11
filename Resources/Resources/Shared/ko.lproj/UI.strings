@@ -1,0 +1,4 @@
+"global.version.format" = "버전 %@ (%@)";
+"global.close" = "닫기";
+"global.ok" = "확인";
+"global.cancel" = "취소";

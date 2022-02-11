@@ -62,11 +62,11 @@ class ConnectionTileCollectionViewCell: UICollectionViewCell, TileableCell {
         if Client.providers.tileProvider.visibleTiles.contains(tileType) {
             accessoryButtonLeft.setImage(Theme.current.activeEyeImage(), for: .normal)
             accessoryButtonLeft.setImage(Theme.current.inactiveEyeImage(), for: .highlighted)
-            accessoryButtonLeft.accessibilityLabel = L10n.Tiles.Accessibility.Visible.Tile.action
+            accessoryButtonLeft.accessibilityLabel = L10n.Localizable.Tiles.Accessibility.Visible.Tile.action
         } else {
             accessoryButtonLeft.setImage(Theme.current.inactiveEyeImage(), for: .normal)
             accessoryButtonLeft.setImage(Theme.current.activeEyeImage(), for: .highlighted)
-            accessoryButtonLeft.accessibilityLabel = L10n.Tiles.Accessibility.Invisible.Tile.action
+            accessoryButtonLeft.accessibilityLabel = L10n.Localizable.Tiles.Accessibility.Invisible.Tile.action
         }
     }
     

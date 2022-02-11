@@ -288,7 +288,7 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
             }
             
             let alert = Macros.alert(nil, addresses.joined(separator: ","))
-            alert.addDefaultAction(L10n.Global.close)
+            alert.addDefaultAction(L10n.Localizable.Global.close)
             self.present(alert, animated: true, completion: nil)
         }
     }

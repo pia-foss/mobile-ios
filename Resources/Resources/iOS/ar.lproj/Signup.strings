@@ -1,0 +1,92 @@
+/* 
+  Signup.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
+"in_progress.title" = "تأكيد التسجيل";
+"in_progress.message" = "جارٍ تأكيد عملية الشراء مع نظامنا. يمكن أن يستغرق ذلك لحظة لذلك انتظر قليلًا.";
+"in_progress.redeem.message" = "جارٍ تأكيد رمز بطاقتك مع نظامنا. قد يستغرق ذلك بضع لحظات، انتظر قليلًا.";
+
+"success.title" = "تم الشراء";
+"success.message_format" = "شضكراً على اشتراكك معنا. لقد أرسلنا اسم المستخدم وكلمة المرور الخاصين بك إلى بريدك الإلكتروني %@";
+"success.redeem.title" = "تم استبدال البطاقة بنجاح";
+"success.redeem.message" = "ستصلك رسالة عبر البريد الإلكتروني تتضمن اسم المستخدم وكلمة المرور.\n\nتفاصيل تسجيل الدخول";
+"success.username.caption" = "اسم المستخدم";
+"success.password.caption" = "كلمة المرور";
+"success.submit" = "كيف تبدأ";
+
+"failure.vc_title" = "فشل تسجيل الآن";
+"failure.title" = "فشل إنشاء الحساب";
+"failure.message" = "يتعذر علينا إنشاء حساب في الوقت الحالي. يرجى إعادة المحاولة لاحقًا. \n\nعند إعادة فتح التطبيق سيتم إعادة محاولة إنشاء حساب.";
+"failure.purchase.sandbox.message" = "اشتراك الصندوق المحدد غير متاح في الإنتاج.";
+"failure.redeem.invalid.title" = "رمز بطاقة غير صالح";
+"failure.redeem.invalid.message" = "يبدو أنك أدخلت رمز بطاقة غير صالح. يرجى إعادة المحاولة.";
+"failure.redeem.claimed.title" = "تم استخدام هذه البطاقة بالفعل";
+"failure.redeem.claimed.message" = "يبدو أن هذه البطاقة استُخدمت في حساب آخر. حاول إدخال رمز جديد.";
+"failure.submit" = "عودة";
+
+"unreachable.vc_title" = "خطأ";
+"unreachable.title" = "أوبس!";
+"unreachable.message" = "لم يتم العثور على اتصال بالإنترنت. يرجى التأكد من اتصالك بالإنترنت وضغط زر إعادة المحاولة أدناه.\n\nيمكنك العودة إلى التطبيق في وقت لاحق لإنهاء العملية.";
+"unreachable.submit" = "أعد المحاولة";
+
+"purchase.uncredited.alert.message" = "لديك معاملات غير معتمدة. هل تريد استعادة تفاصيل حسابك؟";
+"purchase.uncredited.alert.button.cancel" = "إلغاء";
+"purchase.uncredited.alert.button.recover" = "استعادة الحساب";
+
+"purchase.trials.intro" = "ابدأ تجربتك المجانية لمدة 7 ايام";
+"purchase.trials.price.after" = "ثم %@";
+"purchase.trials.money.back" = "ضمان استرداد المال لمدة 30 أيام";
+"purchase.trials.1year.protection" = "1 سنة من الخصوصية وحماية الهوية";
+"purchase.trials.anonymous" = "تصفح مجهول الهوية وإخفاء عنوان IP.";
+"purchase.trials.devices" = "يدعم 10 أجهزة في المرة الواحدة";
+"purchase.trials.devices.description" = "احمي نفسك على ما يصل إلى 10 أجهزة في وقت واحد.";
+"purchase.trials.region" = "اتصل بأي منطقة بسهولة";
+"purchase.trials.servers" = "أكثر من 3300 خادم في 32 دولة";
+"purchase.trials.start" = "ابدأ الاشتراك";
+"purchase.trials.all.plans" = "مشاهدة جميع الخطط المتاحة";
+
+"purchase.subscribe.now" = "اشتراك الآن";
+
+// WALKTHROUGH
+
+"walkthrough.action.next" = "التالي";
+"walkthrough.action.done" = "تم";
+"walkthrough.action.skip" = "تخطي";
+
+"walkthrough.page.1.title" = "يدعم 10 أجهزة في المرة الواحدة";
+"walkthrough.page.1.description" = "احمي نفسك على ما يصل إلى 10 أجهزة في وقت واحد.";
+"walkthrough.page.2.title" = "اتصل بأي منطقة بسهولة";
+"walkthrough.page.2.description" = "مع خوادم في جميع أنحاء العالم، أنت دائما تحت الحماية.";
+"walkthrough.page.3.title" = "احمي نفسك من الإعلانات";
+"walkthrough.page.3.description" = "تمكين ميزة حظر المحتوى يمنع الإعلانات من الظهور في Safari.";
+
+"share.data.buttons.accept" = "قبول";
+"share.data.buttons.noThanks" = "لا، شكرًا";
+"share.data.buttons.readMore" = "قراءة المزيد";
+"share.data.text.title" = "يرجى مساعدتنا في تحسين خدمتنا";
+"share.data.text.description" = "لمساعدتنا في ضمان أداء اتصال خدمتنا، يمكنك مشاركة إحصائيات اتصالك معنا دون الكشف عن هويتك. لا تتضمن هذه التقارير أي معلومات محددة للشخصية.";
+"share.data.text.footer" = "يمكنك دائمًا التحكم في ذلك من إعداداتك";
+
+"share.data.readMore.text.description" = "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";

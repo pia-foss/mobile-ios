@@ -117,17 +117,17 @@ class AboutLicenseCell: UITableViewCell, Restylable {
 
         var moreImage: UIImage?
         if isExpanded {
-            moreImage = Asset.buttonUp.image
+            moreImage = Asset.Images.buttonUp.image
             textLicense.isScrollEnabled = true
         } else {
-            moreImage = Asset.buttonDown.image
+            moreImage = Asset.Images.buttonDown.image
             textLicense.isScrollEnabled = false
         }
         buttonMore.setImage(moreImage, for: .normal)
 
         buttonName.accessibilityTraits = UIAccessibilityTraits.none
         buttonName.accessibilityLabel = component.name
-        buttonName.accessibilityHint = L10n.About.Accessibility.Component.expand
+        buttonName.accessibilityHint = L10n.Localizable.About.Accessibility.Component.expand
     }
 
     // MARK: Actions

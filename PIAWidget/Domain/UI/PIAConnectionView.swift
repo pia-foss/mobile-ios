@@ -7,8 +7,8 @@ internal struct PIAConnectionView: View {
     
     internal let context: ActivityViewContext<PIAConnectionAttributes>
     internal let showProtocol: Bool
-    let localizedRegionText = L10n.Widget.LiveActivity.Region.title
-    let localizedProtocolText = L10n.Widget.LiveActivity.SelectedProtocol.title
+    let localizedRegionText = L10n.Localizable.Widget.LiveActivity.Region.title
+    let localizedProtocolText = L10n.Localizable.Widget.LiveActivity.SelectedProtocol.title
     
     init(context: ActivityViewContext<PIAConnectionAttributes>, showProtocol: Bool = false) {
         self.context = context

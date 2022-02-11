@@ -56,7 +56,7 @@ class DedicatedIpViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = L10n.Dedicated.Ip.title
+        title = L10n.Localizable.Dedicated.Ip.title
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
@@ -70,7 +70,7 @@ class DedicatedIpViewController: AutolayoutViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        styleNavigationBarWithTitle(L10n.Dedicated.Ip.title)
+        styleNavigationBarWithTitle(L10n.Localizable.Dedicated.Ip.title)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -79,7 +79,7 @@ class DedicatedIpViewController: AutolayoutViewController {
     }
 
     @objc private func viewHasRotated() {
-        styleNavigationBarWithTitle(L10n.Dedicated.Ip.title)
+        styleNavigationBarWithTitle(L10n.Localizable.Dedicated.Ip.title)
     }
     
     @objc private func reloadTableView() {
@@ -113,7 +113,7 @@ class DedicatedIpViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         
-        styleNavigationBarWithTitle(L10n.Dedicated.Ip.title)
+        styleNavigationBarWithTitle(L10n.Localizable.Dedicated.Ip.title)
 
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
@@ -129,16 +129,16 @@ class DedicatedIpViewController: AutolayoutViewController {
     
     private var invalidTokenLocalisedString: String {
         get {
-            return L10n.Dedicated.Ip.Message.Invalid.token
+            return L10n.Localizable.Dedicated.Ip.Message.Invalid.token
         }
     }
     
     private func showInvalidTokenMessage() {
-        Macros.displayStickyNote(withMessage: invalidTokenLocalisedString, andImage: Asset.iconWarning.image)
+        Macros.displayStickyNote(withMessage: invalidTokenLocalisedString, andImage: Asset.Images.iconWarning.image)
     }
     
     private func displayErrorMessage(errorMessage: String?, displayDuration: Double? = nil) {
-        Macros.displayImageNote(withImage: Asset.iconWarning.image, message: errorMessage ?? invalidTokenLocalisedString, andDuration: displayDuration)
+        Macros.displayImageNote(withImage: Asset.Images.iconWarning.image, message: errorMessage ?? invalidTokenLocalisedString, andDuration: displayDuration)
     }
     
     private func handleDIPActivationError(_ error: ClientError) {
@@ -148,7 +148,7 @@ class DedicatedIpViewController: AutolayoutViewController {
             Macros.postNotification(.PIAUnauthorized)
         case .throttled(let retryAfter):
             let retryAfterSeconds = Double(retryAfter)
-            let localisedThrottlingString = L10n.Dedicated.Ip.Message.Error.retryafter("\(Int(retryAfter))")
+            let localisedThrottlingString = L10n.Localizable.Dedicated.Ip.Message.Error.retryafter("\(Int(retryAfter))")
             
             displayErrorMessage(errorMessage: NSLocalizedString(localisedThrottlingString, comment: localisedThrottlingString),
                                      displayDuration: retryAfterSeconds)
@@ -185,12 +185,12 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let alert = Macros.alert(nil, L10n.Dedicated.Ip.remove)
-            alert.addCancelActionWithTitle(L10n.Global.cancel, handler: {
+            let alert = Macros.alert(nil, L10n.Localizable.Dedicated.Ip.remove)
+            alert.addCancelActionWithTitle(L10n.Localizable.Global.cancel, handler: {
                 self.reloadTableView()
             })
             
-            alert.addActionWithTitle(L10n.Global.ok) {
+            alert.addActionWithTitle(L10n.Localizable.Global.ok) {
                 self.confirmDelete(row: indexPath.row)
             }
             
@@ -245,13 +245,13 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
 extension DedicatedIpViewController: DedicatedIpEmptyHeaderViewCellDelegate {
     func handleDIPActivation(with token: String, cell: DedicatedIpEmptyHeaderViewCell) {
         if let timeUntilNextTry = timeToRetryDIP?.timeSinceNow() {
-            displayErrorMessage(errorMessage: L10n.Dedicated.Ip.Message.Error.retryafter("\(Int(timeUntilNextTry))"), displayDuration: timeUntilNextTry)
+            displayErrorMessage(errorMessage: L10n.Localizable.Dedicated.Ip.Message.Error.retryafter("\(Int(timeUntilNextTry))"), displayDuration: timeUntilNextTry)
             return
         }
         
         if token.isEmpty {
-            Macros.displayStickyNote(withMessage: L10n.Dedicated.Ip.Message.Incorrect.token,
-                                     andImage: Asset.iconWarning.image)
+            Macros.displayStickyNote(withMessage: L10n.Localizable.Dedicated.Ip.Message.Incorrect.token,
+                                     andImage: Asset.Images.iconWarning.image)
             return
         }
         
@@ -271,11 +271,11 @@ extension DedicatedIpViewController: DedicatedIpEmptyHeaderViewCellDelegate {
             }
             switch dipServer?.dipStatus {
             case .active:
-                Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image, message: L10n.Dedicated.Ip.Message.Valid.token)
+                Macros.displaySuccessImageNote(withImage: Asset.Images.iconWarning.image, message: L10n.Localizable.Dedicated.Ip.Message.Valid.token)
             case .expired:
-                print(L10n.Dedicated.Ip.Message.Expired.token) // we dont show the message to the user
+                print(L10n.Localizable.Dedicated.Ip.Message.Expired.token) // we dont show the message to the user
             default:
-                Macros.displayStickyNote(withMessage: self?.invalidTokenLocalisedString ?? "", andImage: Asset.iconWarning.image)
+                Macros.displayStickyNote(withMessage: self?.invalidTokenLocalisedString ?? "", andImage: Asset.Images.iconWarning.image)
             }
             NotificationCenter.default.post(name: .DedicatedIpReload, object: nil)
             NotificationCenter.default.post(name: .PIAThemeDidChange, object: nil)

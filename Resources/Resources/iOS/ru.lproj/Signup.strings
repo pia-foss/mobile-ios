@@ -1,0 +1,92 @@
+/* 
+  Signup.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
+"in_progress.title" = "Подтверждение регистрации";
+"in_progress.message" = "Мы проверяем вашу покупку в системе. На это может понадобиться время, так что оставайтесь с нами.";
+"in_progress.redeem.message" = "Мы подтверждаем ваш PIN-код в системе. Это займет какое-то время, подождите немного.";
+
+"success.title" = "Покупка завершена";
+"success.message_format" = "Спасибо за регистрацию. Мы отправили имя пользователя и пароль на адрес электронной почты %@";
+"success.redeem.title" = "Карта успешно использована";
+"success.redeem.message" = "Также вы получите эл. письмо с именем пользователя и паролем.\n\nВаши учетные данные";
+"success.username.caption" = "Имя пользователя";
+"success.password.caption" = "Пароль";
+"success.submit" = "Начать";
+
+"failure.vc_title" = "Ошибка регистрации";
+"failure.title" = "Сбой создания учетной записи";
+"failure.message" = "Нам не удалось создать учетную запись. Повторите попытку позже.\nПри повторном открытии приложения создание учетной записи будет возобновлено.";
+"failure.purchase.sandbox.message" = "Выбранная подписка на «песочницу» недоступна в производственной среде.";
+"failure.redeem.invalid.title" = "Неверный PIN-код карты";
+"failure.redeem.invalid.message" = "Похоже, вы ввели неверный PIN-код карты. Попробуйте еще раз.";
+"failure.redeem.claimed.title" = "Карта уже использована";
+"failure.redeem.claimed.message" = "Похоже, эту карту уже использовали с другой учетной записи. Попробуйте ввести другой PIN.";
+"failure.submit" = "ВОЗВРАТ";
+
+"unreachable.vc_title" = "Ошибка";
+"unreachable.title" = "Ой!";
+"unreachable.message" = "Интернет-соединение не найдено. Пожалуйста, убедитесь, что у вас есть подключение к Интернету, и повторите попытку позже.\n\nМожно вернуться в приложение позже и завершить процесс.";
+"unreachable.submit" = "ПОВТОРИТЬ";
+
+"purchase.uncredited.alert.message" = "У вас есть непроведенные транзакции. Хотите восстановить данные своей учетной записи?";
+"purchase.uncredited.alert.button.cancel" = "Отмена";
+"purchase.uncredited.alert.button.recover" = "Восстановить учетную запись";
+
+"purchase.trials.intro" = "Начните 7-дневную бесплатную пробу";
+"purchase.trials.price.after" = "После этого %@";
+"purchase.trials.money.back" = "30-дневная гарантия возврата денег";
+"purchase.trials.1year.protection" = "1 год защиты конфиденциальности и личных данных";
+"purchase.trials.anonymous" = "Пользуйтесь Интернетом анонимно и скрывайте свой IP-адрес.";
+"purchase.trials.devices" = "Поддержка сразу 10 устройств";
+"purchase.trials.devices.description" = "Защищайте себя на нескольких устройствах одновременно (до 10).";
+"purchase.trials.region" = "Простое подключение к любому региону";
+"purchase.trials.servers" = "Более 3300 серверов в 32 странах";
+"purchase.trials.start" = "Запустить подписку.";
+"purchase.trials.all.plans" = "Смотреть все доступные планы";
+
+"purchase.subscribe.now" = "Подписаться";
+
+// WALKTHROUGH
+
+"walkthrough.action.next" = "ДАЛЕЕ";
+"walkthrough.action.done" = "ГОТОВО";
+"walkthrough.action.skip" = "ПРОПУСК";
+
+"walkthrough.page.1.title" = "Поддержка 10 устройств одновременно";
+"walkthrough.page.1.description" = "Защищайте себя на нескольких устройствах одновременно (до 10).";
+"walkthrough.page.2.title" = "Простое подключение к любому региону";
+"walkthrough.page.2.description" = "У нас есть серверы по всему миру, так что вы всегда будете под защитой.";
+"walkthrough.page.3.title" = "Защита от рекламы";
+"walkthrough.page.3.description" = "Активация нашего правила блокирования контента препятствует отображению рекламы в Safari.";
+
+"share.data.buttons.accept" = "Принять";
+"share.data.buttons.noThanks" = "Спасибо, не надо";
+"share.data.buttons.readMore" = "Подробнее";
+"share.data.text.title" = "Помогите нам сделать нашу службу еще лучше";
+"share.data.text.description" = "Вы можете анонимно делиться с нами своей статистикой соединения, чтобы помочь нам обеспечить производительность подключения нашей службы. Эти отчеты не включают какую-либо личную информацию.";
+"share.data.text.footer" = "Вы всегда можете управлять этим параметром через настройки";
+
+"share.data.readMore.text.description" = "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";

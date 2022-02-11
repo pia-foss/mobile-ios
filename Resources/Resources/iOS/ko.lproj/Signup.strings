@@ -1,0 +1,92 @@
+/* 
+  Signup.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
+"in_progress.title" = "회원 가입 확인";
+"in_progress.message" = "저희 시스템에서 고객님의 구매를 확인하고 있습니다. 약간 시간이 소요될 수 있으므로 양해 부탁드립니다.";
+"in_progress.redeem.message" = "저희 시스템에서 고객님의 카드 PIN을 확인하고 있습니다. 약간 시간이 소요될 수 있으므로 양해 부탁드립니다.";
+
+"success.title" = "구매 완료";
+"success.message_format" = "회원으로 가입해 주셔서 감사합니다. 계정 사용자명과 비밀번호를 귀하의 이메일 주소(%@)로 발송했습니다.";
+"success.redeem.title" = "카드 사용 성공";
+"success.redeem.message" = "사용자 이름 및 비밀번호가 담긴 이메일을 곧 보내드리겠습니다.\n\n귀하의 로그인 정보";
+"success.username.caption" = "사용자 이름";
+"success.password.caption" = "비밀번호";
+"success.submit" = "시작하기";
+
+"failure.vc_title" = "회원 가입 실패";
+"failure.title" = "계정 생성 실패";
+"failure.message" = "지금은 계정을 생성할 수 없습니다. 나중에 다시 시도해주십시오.\n\n 앱을 다시 열면 계정 생성을 다시 시도합니다.";
+"failure.purchase.sandbox.message" = "선택하신 샌드박스 구독은 생산에 사용할 수 없습니다.";
+"failure.redeem.invalid.title" = "유효하지 않은 카드 PIN";
+"failure.redeem.invalid.message" = "유효하지 않은 카드 PIN을 입력한 것 같습니다. 다시 시도하세요.";
+"failure.redeem.claimed.title" = "이미 청구한 카드";
+"failure.redeem.claimed.message" = "이 카드는 이미 다른 계정에서 청구한 것 같습니다. 다른 PIN을 입력해 보세요.";
+"failure.submit" = "뒤로";
+
+"unreachable.vc_title" = "오류";
+"unreachable.title" = "앗!";
+"unreachable.message" = "인터넷에 연결되지 않았습니다. 인터넷에 연결되어 있는지 확인하신 후 아래에서 다시 시도를 누르십시오.\n\n나중에 앱에 다시 돌아와서 이 과정을 완료할 수 있습니다.";
+"unreachable.submit" = "다시 시도";
+
+"purchase.uncredited.alert.message" = "처리되지 않은 거래가 있습니다. 계정 정보를 복구하시겠습니까?";
+"purchase.uncredited.alert.button.cancel" = "취소";
+"purchase.uncredited.alert.button.recover" = "계정 복구";
+
+"purchase.trials.intro" = "7일 무료 체험 시작";
+"purchase.trials.price.after" = "그 후 %@";
+"purchase.trials.money.back" = "30일 이내 환불 보장";
+"purchase.trials.1year.protection" = "1년간 프라이버시 및 신원 보호";
+"purchase.trials.anonymous" = "익명으로 검색하고 IP를 숨기세요.";
+"purchase.trials.devices" = "동시에 10대의 장치 지원";
+"purchase.trials.devices.description" = "한 번에 최대 10대의 장치에서 보호를 받으세요.";
+"purchase.trials.region" = "모든 지역에 쉽게 연결";
+"purchase.trials.servers" = "32개국 3300개 이상의 서버";
+"purchase.trials.start" = "구독 시작";
+"purchase.trials.all.plans" = "이용 가능한 모든 플랜 보기";
+
+"purchase.subscribe.now" = "지금 구독";
+
+// WALKTHROUGH
+
+"walkthrough.action.next" = "다음";
+"walkthrough.action.done" = "완료";
+"walkthrough.action.skip" = "건너뛰기";
+
+"walkthrough.page.1.title" = "한 번의 10대의 장치 지원";
+"walkthrough.page.1.description" = "한 번에 최대 10대의 장치에서 보호를 받으세요.";
+"walkthrough.page.2.title" = "모든 지역에 쉽게 연결";
+"walkthrough.page.2.description" = "전 세계에 있는 서버를 통해 언제나 보호를 받습니다.";
+"walkthrough.page.3.title" = "광고로부터 보호";
+"walkthrough.page.3.description" = "Content Blocker를 활성화하면 Safari에서 광고가 표시되지 않습니다.";
+
+"share.data.buttons.accept" = "수락";
+"share.data.buttons.noThanks" = "아니요";
+"share.data.buttons.readMore" = "자세히 보기";
+"share.data.text.title" = "저희 서비스를 개선하도록 도와 주세요";
+"share.data.text.description" = "연결 상태를 저희와 익명으로 공유해 주시면 저희 서비스의 연결 성능을 개선하는 데 도움이 됩니다. 이 보고서에는 개인 식별 정보가 포함되지 않습니다.";
+"share.data.text.footer" = "언제든지 설정에서 이 옵션을 관리할 수 있습니다.";
+
+"share.data.readMore.text.description" = "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";

@@ -1,0 +1,88 @@
+/* 
+  Welcome.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
+"login.title" = "Logg inn på kontoen din";
+"login.username.placeholder" = "Brukernavn (p1234567)";
+"login.password.placeholder" = "Passord";
+"login.submit" = "LOGG INN";
+"login.restore.button" = "Har du ikke fått kontodetaljene?";
+"login.error.title" = "Logg på";
+"login.error.validation" = "Du må oppgi et brukernavn og passord.";
+"login.error.unauthorized" = "Brukernavnet eller passordet ditt er feil.";
+"login.error.throttled" = "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"login.receipt.button" = "Logg på med kjøpsbevis";
+"login.magic.link.title" = "Pålogging med magisk e-postkobling";
+"login.magic.link.response" = "Sjekk e-posten din for å finne påloggingskoblingen.";
+"login.magic.link.send" = "Send kobling";
+"login.magic.link.invalid.email" = "Ugyldig e-post. Prøv igjen.";
+
+"purchase.title" = "Velg et VPN-abonnement";
+"purchase.subtitle" = "30 dagers pengene-tilbake-garanti";
+"purchase.email.placeholder" = "E-postadresse";
+"purchase.continue" = "Fortsett";
+"purchase.login.footer" = "Har du allerede en konto?";
+"purchase.login.button" = "Logg inn";
+"purchase.error.title" = "Kjøp";
+"purchase.error.validation" = "Du må angi en e-postadresse.";
+"purchase.error.connectivity.title" = "Tilkoblingsfeil";
+"purchase.error.connectivity.description" = "Vi kunne ikke nå Private Internet Access. Dette kan skyldes dårlig Internett eller at tjenesten vår er blokkert i landet ditt.";
+"purchase.confirm.form.email" = "Angi e-postadressen din";
+"purchase.confirm.plan" = "Du kjøper %@-abonnementet";
+"purchase.email.why" = "Vi trenger e-posten din for å sende deg brukernavnet og passordet ditt.";
+"purchase.submit" = "Send inn";
+"purchase.or" = "eller";
+
+"upgrade.header" = "Velkommen tilbake!";
+"upgrade.title" = "For å bruke en privat internettilgang, må du fornye abonnementet ditt.";
+"upgrade.renew.now" = "Forny nå";
+
+
+
+"redeem.title" = "Løs inn gavekort";
+"redeem.subtitle" = "Angi e-postadressen og den %lu-sifrede PIN-koden fra gavekortet eller prøvekortet nedenfor.";
+"redeem.email.placeholder" = "E-postadresse";
+"redeem.submit" = "SEND";
+"redeem.error.title" = "Løs inn";
+"redeem.error.code" = "Koden må bestå av %lu siffer.";
+"redeem.error.allfields" = "Angi e-postadressen din og kortet PIN-kode.";
+"redeem.accessibility.back" = "Tilbake";
+"redeem.giftcard.placeholder" = "PIN-kode for gavekort";
+
+"plan.monthly.title" = "Månedlig";
+"plan.yearly.title" = "Årlig";
+"plan.yearly.detail_format" = "%@%@ per år";
+"plan.price_format" = "%@/mnd";
+"plan.best_value" = "Mest for pengene";
+"plan.accessibility.per_month" = "per måned";
+
+"restore.title" = "Gjenopprett ukreditert kjøp";
+"restore.subtitle" = "Hvis du har kjøpt en plan via appen og ikke har mottatt opplysningene dine, kan du sende dem på nytt herfra.\nDu belastes ikke under denne prosessen.";
+"restore.email.placeholder" = "E-postadresse";
+"restore.submit" = "BEKREFT";
+
+"iap.error.message.unavailable" = "Apple-serverne er for øyeblikket ikke tilgjengelige. Prøv igjen senere.";
+"iap.error.title" = "Feil";
+
+"agreement.trials.title" = "Vilkår og betingelser for gratis prøveperiode";
+"agreement.trials.message" = "Betalingen belastes Apple ID-kontoen din når du bekrefter kjøpet. Abonnementet fornyes automatisk med mindre det kanselleres minst 24 timer før slutten av den inneværende perioden. Kontoen blir belastet for fornyelse innen 24 timer før slutten av den inneværende perioden. Du kan administrere og kansellere abonnementene dine ved  besøke kontoinnstillingene på App Store etter kjøpet.\n\nEnkelte betalte abonnementer kan tilby en gratis prøveperiode før det belaster betalingsmetoden din. Hvis du bestemmer deg for å avslutte et betalt abonnement før vi begynner å belaste betalingsmetoden din, må du kansellere abonnementet minst 24 timer før prøveperioden er slutt.\n\nGratis prøveperioder er kun tilgjengelig for nye brukere og utføres etter vårt eget skjønn. Hvis du forsøker å registrere deg med flere gratis prøveperioder, blir du øyeblikkelig belastet standard abonnementsavgift.\n\nVi forbeholder oss retten til å tilbakekalle din gratis prøveperiode når som helst.\n\nEventuell ubrukt del av en gratis prøveperiode går tapt ved kjøpe av et abonnement.\n\nVed å registrere deg samtykker du til disse vilkårene og betingelsene.";
+"agreement.message" = "Etter den gratis 7-dagers prøveperioden fornyes abonnementet automatisk for %@, med mindre det kanselleres minst 24 timer før slutten av prøveperioden. Din Apple ID-konto belastes for fornyingen innen 24 timer før slutten av prøveperioden. Du kan administrere og avbryte abonnementene dine ved å gå til App Store-kontoinnstillingene etter kjøp. Det 7-dagers prøvetilbudet er begrenset til én 7-dagers prøveperiode per bruker. Eventuell ubrukt tid av den gratis prøveperioden går tapt hvis brukeren kjøper et abonnement. Alle priser inkluderer gjeldende lokale avgifter.\n\nVed å signere godtar du $1 og $2.";
+"agreement.trials.yearly.plan" = "år";
+"agreement.trials.monthly.plan" = "måned";
+
+"agreement.message.tos" = "Tjenestevilkår";
+"agreement.message.privacy" = "REntingslinjer om personvern";
+
+"getstarted.buttons.buyaccount" = "Kjøpskonto";
+
+"gdpr.collect.data.title" = "Personlig informasjon vi tar vare på";
+"gdpr.collect.data.description" = "E-postadresse for kontoadministrasjon og beskyttelse mot misbruk.";
+"gdpr.usage.data.title" = "Bruk av personlig informasjon samlet inn av oss";
+"gdpr.usage.data.description" = "E-postadresse blir kun brukt for å sende ut informasjon om abonnementet, betalingsbekreftelser, kundekorrespondanse og tilbud om privat internettilgang.";
+"gdpr.accept.button.title" = "Godta og fortsett";
+
+"update.account.email.error" = "Kunne ikke endre kontoens e-post";

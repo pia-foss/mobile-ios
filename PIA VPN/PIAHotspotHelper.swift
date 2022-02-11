@@ -147,9 +147,9 @@ class PIAHotspotHelper {
     private func hotspotHelperMessage() -> String {
         if Client.preferences.nmtRulesEnabled,
             Client.preferences.useWiFiProtection {
-            return L10n.Hotspothelper.Display.Protected.name
+            return L10n.Localizable.Hotspothelper.Display.Protected.name
         } else {
-            return L10n.Hotspothelper.Display.name
+            return L10n.Localizable.Hotspothelper.Display.name
         }
     }
     

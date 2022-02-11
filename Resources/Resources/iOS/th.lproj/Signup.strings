@@ -1,0 +1,92 @@
+/* 
+  Signup.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
+"in_progress.title" = "ยืนยันการสมัคร";
+"in_progress.message" = "เรากำลังยืนยันการซื้อของคุณกับระบบของเรา กรุณารอสักครู่";
+"in_progress.redeem.message" = "เรากำลังยืนยัน PIN การ์ดของคุณกับระบบของเรา กรุณารอสักครู่";
+
+"success.title" = "ซื้อสำเร็จ";
+"success.message_format" = "ขอบคุณที่สมัครสมาชิกกับเรา เราได้ส่งชื่อผู้ใช้และรหัสผ่านไปยังอีเมลของคุณแล้วที่ %@";
+"success.redeem.title" = "คืนบัตรเสร็จสมบูรณ์!";
+"success.redeem.message" = "คุณจะได้รับอีเมลพร้อมชื่อผู้ใช้และรหัสผ่านในไม่ช้า\n\nข้อมูลการล็อกอิน";
+"success.username.caption" = "ชื่อผู้ใช้";
+"success.password.caption" = "รหัสผ่าน";
+"success.submit" = "เริ่มใช้งาน";
+
+"failure.vc_title" = "การสมัครล้มเหลว";
+"failure.title" = "สร้างบัญชีผู้ใช้ไม่สำเร็จ";
+"failure.message" = "เราไม่สามารถสร้างบัญชีได้ในขณะนี้ กรุณาลองใหม่อีกครั้งภายหลัง การปิดเปิดแอปใหม่จะเป็นการพยายามสร้างบัญชีใหม่";
+"failure.purchase.sandbox.message" = "ไม่มีระบบสมาชิก Sandbox ที่คุณเลือกอยู่ในการผลิต";
+"failure.redeem.invalid.title" = "PIN การ์ดไม่ถูกต้อง";
+"failure.redeem.invalid.message" = "ดูเหมือนว่าคุณใส่ PIN การ์ดไม่ถูกต้อง กรุณาลองใหม่";
+"failure.redeem.claimed.title" = "บัตรมีการใช้สิทธิ์แล้ว";
+"failure.redeem.claimed.message" = "ดูเหมือนว่าบัตรนี้มีการใช้สิทธิ์แล้วโดยบัญชีอื่น กรุณาลองใส่ PIN อื่น";
+"failure.submit" = "ย้อนกลับ";
+
+"unreachable.vc_title" = "ข้อผิดพลาด";
+"unreachable.title" = "อุ๊ปส์!";
+"unreachable.message" = "ไม่พบการเชื่อมต่ออินเทอร์เน็ต กรุณายืนยันว่าคุณมีการเชื่อมต่ออินเทอร์เน็ตแล้วกดลองอีกครั้งด้านล่างนี้\n\nคุณสามารถกลับมาใหม่ในภายหลังเพื่อดำเนินการต่อให้เสร็จ";
+"unreachable.submit" = "ลองใหม่";
+
+"purchase.uncredited.alert.message" = "คุณได้ยกเลิกการทำธุรกรรมแล้ว คุณต้องการกู้คืนรายละเอียดบัญชีหรือไม่";
+"purchase.uncredited.alert.button.cancel" = "ยกเลิก";
+"purchase.uncredited.alert.button.recover" = "กู้คืนบัญชี";
+
+"purchase.trials.intro" = "เริ่มทดลองใช้ฟรี 7 วัน";
+"purchase.trials.price.after" = "จากนั้น %@";
+"purchase.trials.money.back" = "รับประกันการคืนเงินภายใน 30 วัน";
+"purchase.trials.1year.protection" = "การป้องกันข้อมูลประจำตัวและความเป็นส่วนตัว 1 ปี";
+"purchase.trials.anonymous" = "เรียกดูโดยไม่ระบุชื่อและซ่อน ip ของคุณ";
+"purchase.trials.devices" = "รับรองอุปกรณ์ 10 เครื่องในเวลาเดียวกัน";
+"purchase.trials.devices.description" = "ปกป้องตัวคุณบนอุปกรณ์ถึง 10 เครื่องในเวลาเดียวกัน";
+"purchase.trials.region" = "เชื่อมต่อไปยังภูมิภาคใดก็ตามได้อย่างง่ายดาย";
+"purchase.trials.servers" = "กว่า 3300 เซิร์ฟเวอร์ใน 32 ประเทศ";
+"purchase.trials.start" = "เริ่มการเป็นสมาชิก";
+"purchase.trials.all.plans" = "ดูแผนที่มีทั้งหมด";
+
+"purchase.subscribe.now" = "สมัครสมาชิกตอนนี้";
+
+// WALKTHROUGH
+
+"walkthrough.action.next" = "ถัดไป";
+"walkthrough.action.done" = "เสร็จสิ้น";
+"walkthrough.action.skip" = "ข้าม";
+
+"walkthrough.page.1.title" = "รับรองอุปกรณ์ 10 เครื่องในคราวเดียว";
+"walkthrough.page.1.description" = "ปกป้องตัวคุณบนอุปกรณ์ถึง 10 เครื่องในเวลาเดียวกัน";
+"walkthrough.page.2.title" = "เชื่อมต่อไปยังภูมิภาคใดก็ตามได้อย่างง่ายดาย";
+"walkthrough.page.2.description" = "ด้วยเซิร์ฟเวอร์ที่มีอยู่ทั่วโลก คุณจะได้รับความคุ้มครองตลอดเวลา";
+"walkthrough.page.3.title" = "ปกป้องตัวคุณจากโฆษณา";
+"walkthrough.page.3.description" = "การเปิดใช้งานตัวปิดกั้นเนื้อหาของเราจะเป็นการป้องกันไม่ให้แสดงโฆษณาใน Safari";
+
+"share.data.buttons.accept" = "ยอมรับ";
+"share.data.buttons.noThanks" = "ไม่ล่ะ ขอบคุณ";
+"share.data.buttons.readMore" = "อ่านเพิ่มเติม";
+"share.data.text.title" = "โปรดช่วยเราปรับปรุงบริการของเรา";
+"share.data.text.description" = "เพื่อช่วยให้เรามั่นใจในประสิทธิภาพการเชื่อมต่อของบริการของเรา คุณสามารถแชร์สถิติการเชื่อมต่อของคุณกับเราโดยไม่ระบุชื่อ รายงานเหล่านี้ไม่รวมข้อมูลส่วนบุคคลที่สามารถระบุตัวตนได้";
+"share.data.text.footer" = "คุณสามารถควบคุมสิ่งนี้ได้จากการตั้งค่าของคุณ";
+
+"share.data.readMore.text.description" = "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";

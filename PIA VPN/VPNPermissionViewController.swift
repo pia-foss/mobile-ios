@@ -44,14 +44,14 @@ class VPNPermissionViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = L10n.VpnPermission.title
+        title = L10n.Localizable.VpnPermission.title
         navigationItem.hidesBackButton = true
         self.view.accessibilityIdentifier = AccessibilityId.VPNPermission.screen
 
-        imvPicture.image = Asset.imageVpnAllow.image
-        labelTitle.text = L10n.VpnPermission.Body.title
-        labelMessage.text = L10n.VpnPermission.Body.subtitle(L10n.Global.ok)
-        labelFooter.text = L10n.VpnPermission.Body.footer
+        imvPicture.image = Asset.Images.imageVpnAllow.image
+        labelTitle.text = L10n.Localizable.VpnPermission.Body.title
+        labelMessage.text = L10n.Localizable.VpnPermission.Body.subtitle(L10n.Localizable.Global.ok)
+        labelFooter.text = L10n.Localizable.VpnPermission.Body.footer
         styleSubmitButton()
     }
     
@@ -74,17 +74,17 @@ class VPNPermissionViewController: AutolayoutViewController {
     }
     
     private func alertRequiredPermission() {
-        var message = L10n.VpnPermission.Disallow.Message.basic
+        var message = L10n.Localizable.VpnPermission.Disallow.Message.basic
         if MFMailComposeViewController.canSendMail() {
-            message += "\n" + L10n.VpnPermission.Disallow.Message.support
+            message += "\n" + L10n.Localizable.VpnPermission.Disallow.Message.support
         }
-        let alert = Macros.alert(L10n.VpnPermission.title, message)
+        let alert = Macros.alert(L10n.Localizable.VpnPermission.title, message)
         if MFMailComposeViewController.canSendMail() {
-            alert.addActionWithTitle(L10n.VpnPermission.Disallow.contact) {
+            alert.addActionWithTitle(L10n.Localizable.VpnPermission.Disallow.contact) {
                 self.contactCustomerSupport()
             }
         }
-        alert.addCancelActionWithTitle(L10n.Global.ok) {
+        alert.addCancelActionWithTitle(L10n.Localizable.Global.ok) {
             self.submit()
         }
         present(alert, animated: true, completion: nil)
@@ -111,7 +111,7 @@ class VPNPermissionViewController: AutolayoutViewController {
     private func styleSubmitButton() {
         buttonSubmit.setRounded()
         buttonSubmit.style(style: TextStyle.Buttons.piaGreenButton)
-        buttonSubmit.setTitle(L10n.Global.ok.uppercased(),
+        buttonSubmit.setTitle(L10n.Localizable.Global.ok.uppercased(),
                               for: [])
       buttonSubmit.accessibilityIdentifier = AccessibilityId.VPNPermission.submit
     }

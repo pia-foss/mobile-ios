@@ -4,7 +4,7 @@ import SwiftUI
 
 @available(iOSApplicationExtension 16.1, *)
 struct PIAConnectionActivityWidget: Widget {
-    let localizedRegionText = L10n.Widget.LiveActivity.Region.title
+    let localizedRegionText = L10n.Localizable.Widget.LiveActivity.Region.title
     
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: PIAConnectionAttributes.self) { context in

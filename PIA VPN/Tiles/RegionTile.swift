@@ -77,7 +77,7 @@ class RegionTile: UIView, Tileable {
         nc.addObserver(self, selector: #selector(updateServer), name: .PIAServerHasBeenUpdated, object: nil)
 
         viewShouldRestyle()
-        self.tileTitle.text = L10n.Tiles.Region.title.uppercased()
+        self.tileTitle.text = L10n.Localizable.Tiles.Region.title.uppercased()
         self.updateServer()
     }
     
@@ -105,7 +105,7 @@ class RegionTile: UIView, Tileable {
             labelDedicatedIPTitle.isHidden = false
             viewIP.isHidden = false
             labelIP.text = server.wireGuardAddressesForUDP?.first?.ip ?? ""
-            labelDedicatedIPTitle.text = L10n.Dedicated.Ip.title.uppercased()
+            labelDedicatedIPTitle.text = L10n.Localizable.Dedicated.Ip.title.uppercased()
             viewIP.layer.cornerRadius = 10.0
             viewIP.layer.borderWidth = 0.5
             viewIP.layer.borderColor = UIColor.piaGrey4.cgColor
