@@ -126,7 +126,7 @@ extension InAppMessage {
         }
 
         command?.execute()
-        
+        callbackDidFinishExecution?()
     }
     
     func localisedMessage() -> String {
@@ -198,5 +198,15 @@ extension MessagesManager {
             }
             AppPreferences.shared.dedicatedTokenIPReleation[token] = ip
         }
+    }
+    
+    
+    func showInAppSurveyMessage() {
+        let messageID = "take-the-survey-message-banner"
+        let message = InAppMessage(withMessage: ["en-US": L10n.Account.Survey.message], id: messageID, link: ["en-US": L10n.Account.Survey.messageLink], type: .link, level: .api, actions: nil, view: nil, uri: AppConstants.Survey.formURL.absoluteString) { [weak self] in
+            guard let weakSelf = self else { return }
+            weakSelf.dismiss(message: messageID)
+        }
+        MessagesManager.shared.postSystemMessage(message: message)
     }
 }

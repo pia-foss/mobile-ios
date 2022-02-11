@@ -191,5 +191,9 @@ struct AppConstants {
         static let connect = "piavpn:connect"
         static let view = "piavpn:view"
     }
-        
+    
+    struct Survey {
+        static let numberOfConnections = 15
+        static let formURL = URL(string: "https://privateinternetaccess.typeform.com/to/WTFcN77r")!
+    }
 }

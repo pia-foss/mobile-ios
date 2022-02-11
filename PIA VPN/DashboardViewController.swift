@@ -403,6 +403,12 @@ class DashboardViewController: AutolayoutViewController {
             Client.configuration.connectedManually = true
             
             guard let weakSelf = self else { return }
+            
+            AppPreferences.shared.connectionEstablished()
+            if AppPreferences.shared.showTakeASurveryMessage() {
+                MessagesManager.shared.showInAppSurveyMessage()
+            }
+            
             if let _ = error {
                 RatingManager.shared.logError()
             }
