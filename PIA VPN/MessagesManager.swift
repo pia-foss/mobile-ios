@@ -126,7 +126,7 @@ extension InAppMessage {
         }
 
         command?.execute()
-        callbackDidFinishExecution?()
+        executionCompletionHandler?()
     }
     
     func localisedMessage() -> String {
