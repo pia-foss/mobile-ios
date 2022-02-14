@@ -193,7 +193,7 @@ struct AppConstants {
     }
     
     struct Survey {
-        static let numberOfConnections = 15
+        static let numberOfConnectionsUntilPrompt = 15
         static let formURL = URL(string: "https://privateinternetaccess.typeform.com/to/WTFcN77r")!
     }
 }

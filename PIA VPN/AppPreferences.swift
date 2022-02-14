@@ -103,9 +103,6 @@ class AppPreferences {
         static let appEnvironmentIsProduction = "AppEnvironmentIsProduction"
         static let stagingVersion = "StagingVersion"
         
-        // Survey Settings
-        static let consecutiveConnections = "consecutiveConnections"
-        static let showUserSurvey = "showUserSurvey"
     }
 
     static let shared = AppPreferences()
@@ -522,28 +519,6 @@ class AppPreferences {
         }
     }
     
-    private var consecutiveConnections: Int {
-        get {
-            return defaults.integer(forKey: Entries.consecutiveConnections)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.consecutiveConnections)
-        }
-    }
-    
-    private var showUserSurvey: Bool? {
-        get {
-            if let showSurvey = defaults.value(forKey: Entries.showUserSurvey) as? Bool {
-                return showSurvey
-            } else {
-                return nil
-            }
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.showUserSurvey)
-        }
-    }
-    
     private init() {
         guard let defaults = UserDefaults(suiteName: AppConstants.appGroup) else {
             fatalError("Unable to initialize app preferences")
@@ -582,7 +557,6 @@ class AppPreferences {
             Entries.checksDipExpirationRequest: true,
             Entries.stagingVersion: 0,
             Entries.appEnvironmentIsProduction: Client.environment == .production ? true : false,
-            Entries.consecutiveConnections: 0,
         ])
 
         migrateDIP()
@@ -803,14 +777,13 @@ class AppPreferences {
         todayWidgetVpnSocket = "UDP"
         todayWidgetTrustedNetwork = false
         Client.resetServers(completionBlock: {_ in })
+        successConnections = 0
         failureConnections = 0
         showGeoServers = true
         stopInAppMessages = false
         dedicatedTokenIPReleation = [:]
         appEnvironmentIsProduction = Client.environment == .production ? true : false
         MessagesManager.shared.reset()
-        consecutiveConnections = 0
-        showUserSurvey = nil
     }
     
     func clean() {
@@ -837,6 +810,7 @@ class AppPreferences {
         let preferences = Client.preferences.editable().reset()
         preferences.commit()
         Client.resetServers(completionBlock: {_ in })
+        successConnections = 0
         failureConnections = 0
         showGeoServers = true
         stopInAppMessages = false
@@ -844,8 +818,6 @@ class AppPreferences {
         dedicatedTokenIPReleation = [:]
         MessagesManager.shared.reset()
         appEnvironmentIsProduction = Client.environment == .production ? true : false
-        consecutiveConnections = 0
-        showUserSurvey = nil
     }
     
 //    + (void)eraseForTesting;
@@ -889,21 +861,9 @@ class AppPreferences {
         }
     }
     
-    // MARK: Survey Settings
-    func connectionEstablished() {
-        consecutiveConnections = consecutiveConnections + 1
-        if consecutiveConnections > AppConstants.Survey.numberOfConnections {
-            showUserSurvey = false
-        } else {
-            showUserSurvey = true
-        }
-    }
-    
-    func showTakeASurveryMessage() -> Bool {
-        guard let showUserSurvey = showUserSurvey else {
-            return false
-        }
-        return (showUserSurvey && consecutiveConnections >= AppConstants.Survey.numberOfConnections) ? true : false
+    // MARK: Connections
+    func incrementSuccessConnections() {
+        self.successConnections += 1
     }
     
 }

@@ -45,9 +45,8 @@ class RatingManager {
         self.timeIntervalUntilPromptAgain = AppConfiguration.Rating.timeIntervalUntilPromptAgain
     }
     
-    func logSuccessConnection() {
+    func showRating() {
 
-        AppPreferences.shared.successConnections += 1
         if AppPreferences.shared.successConnections == self.successConnectionsUntilPrompt {
             log.debug("Show rating")
             reviewApp()
