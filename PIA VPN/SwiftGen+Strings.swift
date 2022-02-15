@@ -187,9 +187,7 @@ internal enum L10n {
     }
     internal enum ContentBlocker {
       internal enum Intro {
-        /// This version replaces MACE with our Safari Content Blocker.
-        /// 
-        /// Check it out in the 'Settings' section.
+        /// This version replaces MACE with our Safari Content Blocker.\n\nCheck it out in the 'Settings' section.
         internal static let message = L10n.tr("Localizable", "dashboard.content_blocker.intro.message")
       }
     }
@@ -411,7 +409,7 @@ internal enum L10n {
     }
     internal enum Collect {
       internal enum Data {
-          /// E-mail Address for the purposes of account management and protection from abuse.\n\nE-mail address is used to send subscription information, payment confirmations, customer correspondence, and Private Internet Access promotional offers only.
+        /// E-mail Address for the purposes of account management and protection from abuse.\n\nE-mail address is used to send subscription information, payment confirmations, customer correspondence, and Private Internet Access promotional offers only.
         internal static let description = L10n.tr("Localizable", "gdpr.collect.data.description")
         /// Personal information we collect
         internal static let title = L10n.tr("Localizable", "gdpr.collect.data.title")
