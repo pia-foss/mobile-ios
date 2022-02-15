@@ -15,7 +15,7 @@ class UserSurveyManager {
         
     }
     
-    func showUserSurveyIfPossible() {
+    func handleConnectionSuccess() {
         if shouldShowSurveryMessage() {
             MessagesManager.shared.showInAppSurveyMessage()
         }

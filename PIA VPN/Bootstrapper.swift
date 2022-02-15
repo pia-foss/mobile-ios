@@ -260,9 +260,8 @@ class Bootstrapper {
             return
         }
         AppPreferences.shared.incrementSuccessConnections()
-        let ratingManager = RatingManager.shared
-        ratingManager.showRating(of: ratingManager.ratingType())
-        UserSurveyManager.shared.showUserSurveyIfPossible()
+        RatingManager.shared.handleConnectionSuccess()
+        UserSurveyManager.shared.handleConnectionSuccess()
     }
     
     @objc private func internetReachable(notification: Notification) {
