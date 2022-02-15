@@ -113,9 +113,9 @@ internal enum L10n {
     }
     internal enum Survey {
       /// Want to help make PIA better? Let us know how we can improve!
-      /// Take The Survey ⟩
+      /// Take The Survey
       internal static let message = L10n.tr("Localizable", "account.survey.message")
-      /// Take The Survey ⟩
+      /// Take The Survey
       internal static let messageLink = L10n.tr("Localizable", "account.survey.messageLink")
     }
     internal enum Update {
@@ -187,7 +187,9 @@ internal enum L10n {
     }
     internal enum ContentBlocker {
       internal enum Intro {
-        /// This version replaces MACE with our Safari Content Blocker.\n\nCheck it out in the 'Settings' section.
+        /// This version replaces MACE with our Safari Content Blocker.
+        /// 
+        /// Check it out in the 'Settings' section.
         internal static let message = L10n.tr("Localizable", "dashboard.content_blocker.intro.message")
       }
     }
@@ -409,7 +411,9 @@ internal enum L10n {
     }
     internal enum Collect {
       internal enum Data {
-        /// E-mail Address for the purposes of account management and protection from abuse.\n\nE-mail address is used to send subscription information, payment confirmations, customer correspondence, and Private Internet Access promotional offers only.
+        /// E-mail Address for the purposes of account management and protection from abuse.
+        /// 
+        /// E-mail address is used to send subscription information, payment confirmations, customer correspondence, and Private Internet Access promotional offers only.
         internal static let description = L10n.tr("Localizable", "gdpr.collect.data.description")
         /// Personal information we collect
         internal static let title = L10n.tr("Localizable", "gdpr.collect.data.title")
@@ -766,7 +770,9 @@ internal enum L10n {
           internal static let title = L10n.tr("Localizable", "settings.application_information.debug.failure.title")
         }
         internal enum Success {
-          /// Debug information successfully submitted.\nID: %@\nPlease note this ID, as our support team will require this to locate your submission.
+          /// Debug information successfully submitted.
+          /// ID: %@
+          /// Please note this ID, as our support team will require this to locate your submission.
           internal static func message(_ p1: Any) -> String {
             return L10n.tr("Localizable", "settings.application_information.debug.success.message", String(describing: p1))
           }
@@ -1231,7 +1237,8 @@ internal enum L10n {
     internal enum Body {
       /// We don’t monitor, filter or log any network activity.
       internal static let footer = L10n.tr("Localizable", "vpn_permission.body.footer")
-      /// You’ll see a prompt for PIA VPN and need to allow access to VPN configurations.\nTo proceed tap on “%@”.
+      /// You’ll see a prompt for PIA VPN and need to allow access to VPN configurations.
+      /// To proceed tap on “%@”.
       internal static func subtitle(_ p1: Any) -> String {
         return L10n.tr("Localizable", "vpn_permission.body.subtitle", String(describing: p1))
       }

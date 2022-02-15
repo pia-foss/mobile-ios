@@ -203,7 +203,7 @@ extension MessagesManager {
     
     func showInAppSurveyMessage() {
         let messageID = "take-the-survey-message-banner"
-        let message = InAppMessage(withMessage: ["en-US": L10n.Account.Survey.message], id: messageID, link: ["en-US": L10n.Account.Survey.messageLink], type: .link, level: .api, actions: nil, view: nil, uri: AppConstants.Survey.formURL.absoluteString) { [weak self] in
+        let message = InAppMessage(withMessage: ["en-US": L10n.Account.Survey.message.appendDetailSymbol()], id: messageID, link: ["en-US": L10n.Account.Survey.messageLink.appendDetailSymbol()], type: .link, level: .api, actions: nil, view: nil, uri: AppConstants.Survey.formURL.absoluteString) { [weak self] in
             self?.dismiss(message: messageID)
         }
         MessagesManager.shared.postSystemMessage(message: message)
