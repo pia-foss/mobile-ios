@@ -260,7 +260,8 @@ class Bootstrapper {
             return
         }
         AppPreferences.shared.incrementSuccessConnections()
-        RatingManager.shared.showRating()
+        let ratingManager = RatingManager.shared
+        ratingManager.showRating(of: ratingManager.ratingType())
         UserSurveyManager.shared.showUserSurveyIfPossible()
     }
     

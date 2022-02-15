@@ -37,7 +37,13 @@ class RatingManager {
     private var successConnectionsUntilPromptAgain: Int
     private var timeIntervalUntilPromptAgain: Double
     private var errorInConnectionsUntilPrompt: Int
-
+    
+    enum RatingType {
+        case promopt
+        case withoutPrompt
+        case none
+    }
+    
     init() {
         self.successConnectionsUntilPrompt = AppConfiguration.Rating.successConnectionsUntilPrompt
         self.successConnectionsUntilPromptAgain = AppConfiguration.Rating.successConnectionsUntilPromptAgain
@@ -45,13 +51,23 @@ class RatingManager {
         self.timeIntervalUntilPromptAgain = AppConfiguration.Rating.timeIntervalUntilPromptAgain
     }
     
-    func showRating() {
-
+    func ratingType() -> RatingType {
         if AppPreferences.shared.successConnections == self.successConnectionsUntilPrompt {
+            return .promopt
+        } else if AppPreferences.shared.canAskAgainForReview {
+            return .withoutPrompt
+        } else {
+            return .none
+        }
+    }
+    
+    func showRating(of type: RatingType) {
+
+        switch type {
+        case .promopt:
             log.debug("Show rating")
             reviewApp()
-        } else if AppPreferences.shared.canAskAgainForReview {
-            
+        case .withoutPrompt:
             let now = Date()
 
             if AppPreferences.shared.successConnections >= self.successConnectionsUntilPromptAgain,
@@ -60,6 +76,8 @@ class RatingManager {
                 log.debug("Show rating")
                 reviewAppWithoutPrompt()
             }
+        case .none:
+            log.debug("No rating to be shown")
         }
         
     }
