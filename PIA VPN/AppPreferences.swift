@@ -99,6 +99,9 @@ class AppPreferences {
         static let checksDipExpirationRequest = "checksDipExpirationRequest"
         static let showNewInitialScreen = "showNewInitialScreen"
         
+        // Survey
+        static let userInteractedWithSurvey = "userInteractedWithSurvey"
+        
         // Dev
         static let appEnvironmentIsProduction = "AppEnvironmentIsProduction"
         static let stagingVersion = "StagingVersion"
@@ -519,6 +522,15 @@ class AppPreferences {
         }
     }
     
+    var userInteractedWithSurvey: Bool {
+        get {
+            return defaults.bool(forKey: Entries.userInteractedWithSurvey)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.userInteractedWithSurvey)
+        }
+    }
+    
     private init() {
         guard let defaults = UserDefaults(suiteName: AppConstants.appGroup) else {
             fatalError("Unable to initialize app preferences")
@@ -555,6 +567,7 @@ class AppPreferences {
             Entries.showsDedicatedIPView: true,
             Entries.disablesMultiDipTokens: true,
             Entries.checksDipExpirationRequest: true,
+            Entries.userInteractedWithSurvey: false,
             Entries.stagingVersion: 0,
             Entries.appEnvironmentIsProduction: Client.environment == .production ? true : false,
         ])
@@ -784,6 +797,7 @@ class AppPreferences {
         dedicatedTokenIPReleation = [:]
         appEnvironmentIsProduction = Client.environment == .production ? true : false
         MessagesManager.shared.reset()
+        userInteractedWithSurvey = false
     }
     
     func clean() {
@@ -818,6 +832,7 @@ class AppPreferences {
         dedicatedTokenIPReleation = [:]
         MessagesManager.shared.reset()
         appEnvironmentIsProduction = Client.environment == .production ? true : false
+        userInteractedWithSurvey = false
     }
     
 //    + (void)eraseForTesting;

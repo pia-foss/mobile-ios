@@ -16,13 +16,14 @@ class UserSurveyManager {
     }
     
     func handleConnectionSuccess() {
-        if shouldShowSurveryMessage() {
+        if shouldShowSurveyMessage() {
             MessagesManager.shared.showInAppSurveyMessage()
         }
     }
     
     // MARK: Survey Settings
-    private func shouldShowSurveryMessage() -> Bool {
-        return AppPreferences.shared.successConnections == AppConstants.Survey.numberOfConnectionsUntilPrompt
+    private func shouldShowSurveyMessage() -> Bool {
+        let appPreferences = AppPreferences.shared
+        return !appPreferences.userInteractedWithSurvey && appPreferences.successConnections >= AppConstants.Survey.numberOfConnectionsUntilPrompt
     }
 }
