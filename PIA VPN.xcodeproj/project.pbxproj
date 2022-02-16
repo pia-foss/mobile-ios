@@ -151,8 +151,6 @@
 		73E0B0544DF023785B11C4B9 /* Pods_PIA_VPN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E23999135612F39173E9C1E /* Pods_PIA_VPN.framework */; };
 		7ECBB8DD27B6C4F500C0C774 /* UserSurveyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */; };
 		7ECBB8DE27BA5FCE00C0C774 /* UserSurveyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */; };
-		7ECBB8E027BC229600C0C774 /* String+AddDetailSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBB8DF27BC229600C0C774 /* String+AddDetailSymbol.swift */; };
-		7ECBB8E127BC247A00C0C774 /* String+AddDetailSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBB8DF27BC229600C0C774 /* String+AddDetailSymbol.swift */; };
 		821674F12678A1BE0028E4FD /* SettingsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821674F02678A1BE0028E4FD /* SettingsDelegate.swift */; };
 		821674F22678A1BE0028E4FD /* SettingsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821674F02678A1BE0028E4FD /* SettingsDelegate.swift */; };
 		82183D7B2500FD460033023F /* String+Substrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82183D7A2500FD460033023F /* String+Substrings.swift */; };
@@ -620,7 +618,6 @@
 		678A887CFC02122F4FB83216 /* Pods-PIA VPNTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPNTests.release.xcconfig"; path = "Target Support Files/Pods-PIA VPNTests/Pods-PIA VPNTests.release.xcconfig"; sourceTree = "<group>"; };
 		6CA493DF6602BFDE96E0E77F /* Pods_PIA_VPN_dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIA_VPN_dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSurveyManager.swift; sourceTree = "<group>"; };
-		7ECBB8DF27BC229600C0C774 /* String+AddDetailSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+AddDetailSymbol.swift"; sourceTree = "<group>"; };
 		7F6FF659836C1192332662A8 /* Pods-PIA VPN dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPN dev.debug.xcconfig"; path = "Target Support Files/Pods-PIA VPN dev/Pods-PIA VPN dev.debug.xcconfig"; sourceTree = "<group>"; };
 		821674F02678A1BE0028E4FD /* SettingsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDelegate.swift; sourceTree = "<group>"; };
 		82183D7A2500FD460033023F /* String+Substrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Substrings.swift"; sourceTree = "<group>"; };
@@ -937,7 +934,6 @@
 				DDE432DE2498EADA0095B197 /* Array+Group.swift */,
 				82183D7A2500FD460033023F /* String+Substrings.swift */,
 				82C0071225231F2800F21AF2 /* String+VPNType.swift */,
-				7ECBB8DF27BC229600C0C774 /* String+AddDetailSymbol.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -2117,7 +2113,6 @@
 				827570D924DAB6E4008F9800 /* NetworkFooterCollectionViewCell.swift in Sources */,
 				0EFDC1C71FE35B78007C0B9B /* Macros+App.swift in Sources */,
 				0ECC1E421FDB45100039891D /* AboutViewController.swift in Sources */,
-				7ECBB8E127BC247A00C0C774 /* String+AddDetailSymbol.swift in Sources */,
 				82C9F3CD25C43863005039F9 /* ActiveDedicatedIpHeaderViewCell.swift in Sources */,
 				DD125DCD21E772B6004ECCB6 /* QuickConnectTileCollectionViewCell.swift in Sources */,
 				0E8DCA06204D94E800B086DE /* ContentBlockerViewController.swift in Sources */,
@@ -2247,7 +2242,6 @@
 				7ECBB8DD27B6C4F500C0C774 /* UserSurveyManager.swift in Sources */,
 				821674F12678A1BE0028E4FD /* SettingsDelegate.swift in Sources */,
 				0EFDC1D71FE46177007C0B9B /* SensitiveOperation.swift in Sources */,
-				7ECBB8E027BC229600C0C774 /* String+AddDetailSymbol.swift in Sources */,
 				82C0071325231F2800F21AF2 /* String+VPNType.swift in Sources */,
 				826BE8EE253861BE002339F3 /* DedicatedRegionCell.swift in Sources */,
 				0E3A35281FD9A960000B0F99 /* DashboardViewController.swift in Sources */,

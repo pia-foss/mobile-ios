@@ -23,6 +23,6 @@ class UserSurveyManager {
     
     // MARK: Survey Settings
     private func shouldShowSurveryMessage() -> Bool {
-        return AppPreferences.shared.successConnections == AppConstants.Survey.numberOfConnectionsUntilPrompt ? true : false
+        return AppPreferences.shared.successConnections == AppConstants.Survey.numberOfConnectionsUntilPrompt
     }
 }

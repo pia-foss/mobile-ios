@@ -209,3 +209,10 @@ extension MessagesManager {
         MessagesManager.shared.postSystemMessage(message: message)
     }
 }
+
+private extension String {
+    func appendDetailSymbol() -> String {
+        let symbol = UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft ? "⟨ " : " ⟩"
+        return "\(self)\(symbol)"
+    }
+}
