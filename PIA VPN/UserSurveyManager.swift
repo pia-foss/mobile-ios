@@ -24,6 +24,6 @@ class UserSurveyManager {
     // MARK: Survey Settings
     private func shouldShowSurveyMessage() -> Bool {
         let appPreferences = AppPreferences.shared
-        return !appPreferences.userInteractedWithSurvey && appPreferences.successConnections >= AppConstants.Survey.numberOfConnectionsUntilPrompt
+        return !appPreferences.userInteractedWithSurvey && appPreferences.consecutiveSuccessConnections >= AppConstants.Survey.numberOfConnectionsUntilPrompt
     }
 }

@@ -260,6 +260,7 @@ class Bootstrapper {
             return
         }
         AppPreferences.shared.incrementSuccessConnections()
+        AppPreferences.shared.incrementConsecutiveSuccessConnections()
         RatingManager.shared.handleConnectionSuccess()
         UserSurveyManager.shared.handleConnectionSuccess()
     }

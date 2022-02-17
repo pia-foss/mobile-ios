@@ -155,6 +155,8 @@ class DashboardViewController: AutolayoutViewController {
         updateCurrentStatus()
         setupCallingCards()
         
+        // Checks if survey needs to be shown
+        UserSurveyManager.shared.handleConnectionSuccess()
     }
 
     override func viewDidAppear(_ animated: Bool) {

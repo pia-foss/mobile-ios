@@ -101,6 +101,7 @@ class AppPreferences {
         
         // Survey
         static let userInteractedWithSurvey = "userInteractedWithSurvey"
+        static let consecutiveSuccessConnections = "consecutiveSuccessConnections"
         
         // Dev
         static let appEnvironmentIsProduction = "AppEnvironmentIsProduction"
@@ -531,6 +532,15 @@ class AppPreferences {
         }
     }
     
+    private(set) var consecutiveSuccessConnections: Int {
+        get {
+            return defaults.integer(forKey: Entries.consecutiveSuccessConnections)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.consecutiveSuccessConnections)
+        }
+    }
+    
     private init() {
         guard let defaults = UserDefaults(suiteName: AppConstants.appGroup) else {
             fatalError("Unable to initialize app preferences")
@@ -568,6 +578,7 @@ class AppPreferences {
             Entries.disablesMultiDipTokens: true,
             Entries.checksDipExpirationRequest: true,
             Entries.userInteractedWithSurvey: false,
+            Entries.consecutiveSuccessConnections: 0,
             Entries.stagingVersion: 0,
             Entries.appEnvironmentIsProduction: Client.environment == .production ? true : false,
         ])
@@ -798,6 +809,7 @@ class AppPreferences {
         appEnvironmentIsProduction = Client.environment == .production ? true : false
         MessagesManager.shared.reset()
         userInteractedWithSurvey = false
+        consecutiveSuccessConnections = 0
     }
     
     func clean() {
@@ -833,6 +845,7 @@ class AppPreferences {
         MessagesManager.shared.reset()
         appEnvironmentIsProduction = Client.environment == .production ? true : false
         userInteractedWithSurvey = false
+        consecutiveSuccessConnections = 0
     }
     
 //    + (void)eraseForTesting;
@@ -879,6 +892,10 @@ class AppPreferences {
     // MARK: Connections
     func incrementSuccessConnections() {
         self.successConnections += 1
+    }
+    
+    func incrementConsecutiveSuccessConnections() {
+        self.consecutiveSuccessConnections += 1
     }
     
 }
