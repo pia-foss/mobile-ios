@@ -404,7 +404,7 @@ class DashboardViewController: AutolayoutViewController {
             
             guard let weakSelf = self else { return }
             if let _ = error {
-                RatingManager.shared.logError()
+                RatingManager.shared.handleConnectionError()
             }
             
             let preferences = Client.preferences.editable()
@@ -601,7 +601,7 @@ class DashboardViewController: AutolayoutViewController {
         if !isDisconnecting {
             isDisconnecting = true
             Client.providers.vpnProvider.disconnect { _ in
-                RatingManager.shared.logError()
+                RatingManager.shared.handleConnectionError()
                 self.isDisconnecting = false
                 self.connectingStatus = .none
             }

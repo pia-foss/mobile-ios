@@ -76,12 +76,12 @@ def shared_main_pods
     pod "PIARegionsModule", :git => "#{$gitlab_kn_root}/#{$regions_gitlab_repo}", :branch => 'release/1.3.1'
     #pod "PIACSIModule", :git => "#{$git_root}/#{$csi_repo}"
     pod "PIACSIModule", :git => "#{$gitlab_kn_root}/#{$csi_gitlab_repo}", :commit => 'b62d1bab'
-    pod "PIAKPIModule", :git => "#{$gitlab_kn_root}/#{$kpi_gitlab_repo}", :commit => '31186b1d'
+    pod "PIAKPIModule", :git => "#{$gitlab_kn_root}/#{$kpi_gitlab_repo}", :branch => 'release/1.1.0'
 
     #library_by_path('~/Repositories')
     #library_by_git('')
     #library_by_gitlab_branch('')
-    library_by_gitlab_by_git('6d34ee34')
+    library_by_gitlab_by_git('703113f4')
     #library_by_version('~> 1.1.3')
 end
 

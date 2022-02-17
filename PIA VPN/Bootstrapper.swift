@@ -259,7 +259,9 @@ class Bootstrapper {
         guard (Client.providers.vpnProvider.vpnStatus == .connected) else {
             return
         }
-        RatingManager.shared.logSuccessConnection()
+        AppPreferences.shared.incrementSuccessConnections()
+        RatingManager.shared.handleConnectionSuccess()
+        UserSurveyManager.shared.handleConnectionSuccess()
     }
     
     @objc private func internetReachable(notification: Notification) {
