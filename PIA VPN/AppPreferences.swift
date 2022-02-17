@@ -101,7 +101,7 @@ class AppPreferences {
         
         // Survey
         static let userInteractedWithSurvey = "userInteractedWithSurvey"
-        static let consecutiveSuccessConnections = "consecutiveSuccessConnections"
+        static let successConnectionsUntilSurvey = "successConnectionsUntilSurvey"
         
         // Dev
         static let appEnvironmentIsProduction = "AppEnvironmentIsProduction"
@@ -532,12 +532,12 @@ class AppPreferences {
         }
     }
     
-    private(set) var consecutiveSuccessConnections: Int {
+    private(set) var successConnectionsUntilSurvey: Int? {
         get {
-            return defaults.integer(forKey: Entries.consecutiveSuccessConnections)
+            return defaults.value(forKey: Entries.successConnectionsUntilSurvey) as? Int ?? nil
         }
         set {
-            defaults.set(newValue, forKey: Entries.consecutiveSuccessConnections)
+            defaults.set(newValue, forKey: Entries.successConnectionsUntilSurvey)
         }
     }
     
@@ -578,7 +578,6 @@ class AppPreferences {
             Entries.disablesMultiDipTokens: true,
             Entries.checksDipExpirationRequest: true,
             Entries.userInteractedWithSurvey: false,
-            Entries.consecutiveSuccessConnections: 0,
             Entries.stagingVersion: 0,
             Entries.appEnvironmentIsProduction: Client.environment == .production ? true : false,
         ])
@@ -809,7 +808,7 @@ class AppPreferences {
         appEnvironmentIsProduction = Client.environment == .production ? true : false
         MessagesManager.shared.reset()
         userInteractedWithSurvey = false
-        consecutiveSuccessConnections = 0
+        successConnectionsUntilSurvey = nil
     }
     
     func clean() {
@@ -845,7 +844,7 @@ class AppPreferences {
         MessagesManager.shared.reset()
         appEnvironmentIsProduction = Client.environment == .production ? true : false
         userInteractedWithSurvey = false
-        consecutiveSuccessConnections = 0
+        successConnectionsUntilSurvey = nil
     }
     
 //    + (void)eraseForTesting;
@@ -891,11 +890,14 @@ class AppPreferences {
     
     // MARK: Connections
     func incrementSuccessConnections() {
+        updateSuccessConnectionsUntilSurvey()
         self.successConnections += 1
     }
     
-    func incrementConsecutiveSuccessConnections() {
-        self.consecutiveSuccessConnections += 1
+    private func updateSuccessConnectionsUntilSurvey() {
+        if let _ = successConnectionsUntilSurvey {
+            return
+        }
+        self.successConnectionsUntilSurvey = successConnections + AppConstants.Survey.numberOfConnectionsUntilPrompt
     }
-    
 }
