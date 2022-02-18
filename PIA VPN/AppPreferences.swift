@@ -532,9 +532,9 @@ class AppPreferences {
         }
     }
     
-    private(set) var successConnectionsUntilSurvey: Int? {
+    var successConnectionsUntilSurvey: Int? {
         get {
-            return defaults.value(forKey: Entries.successConnectionsUntilSurvey) as? Int ?? nil
+            return defaults.value(forKey: Entries.successConnectionsUntilSurvey) as? Int
         }
         set {
             defaults.set(newValue, forKey: Entries.successConnectionsUntilSurvey)
@@ -890,14 +890,7 @@ class AppPreferences {
     
     // MARK: Connections
     func incrementSuccessConnections() {
-        updateSuccessConnectionsUntilSurvey()
-        self.successConnections += 1
+        successConnections += 1
     }
     
-    private func updateSuccessConnectionsUntilSurvey() {
-        if let _ = successConnectionsUntilSurvey {
-            return
-        }
-        self.successConnectionsUntilSurvey = successConnections + AppConstants.Survey.numberOfConnectionsUntilPrompt
-    }
 }
