@@ -81,10 +81,10 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
         preferences.shareServiceQualityData = sender.isOn
         
         if sender.isOn {
-            preferences.versionServiceQualityOpted = Macros.versionString()
+            preferences.versionWhenServiceQualityOpted = Macros.versionString()
             ServiceQualityManager.shared.start()
         } else {
-            preferences.versionServiceQualityOpted = nil
+            preferences.versionWhenServiceQualityOpted = nil
             ServiceQualityManager.shared.stop()
         }
         
