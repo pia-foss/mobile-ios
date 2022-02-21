@@ -79,15 +79,16 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
     @objc private func toggleShareServiceQualityData(_ sender: UISwitch) {
         let preferences = Client.preferences.editable()
         preferences.shareServiceQualityData = sender.isOn
-        preferences.versionServiceQualityOpted = Macros.versionString()
-        preferences.commit()
         
         if sender.isOn {
+            preferences.versionServiceQualityOpted = Macros.versionString()
             ServiceQualityManager.shared.start()
         } else {
+            preferences.versionServiceQualityOpted = nil
             ServiceQualityManager.shared.stop()
         }
         
+        preferences.commit()
         reloadSettings()
     }
 
