@@ -160,10 +160,10 @@ DEPENDENCIES:
   - "PIAAccountModule (from `git@gitlab.kape.com:pia-mobile/shared/account.git`, commit `697fd4f`)"
   - "PIACSIModule (from `git@gitlab.kape.com:pia-mobile/shared/csi.git`, commit `b62d1bab`)"
   - "PIAKPIModule (from `git@gitlab.kape.com:pia-mobile/shared/kpi.git`, branch `release/1.1.0`)"
-  - "PIALibrary/Library (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `703113f4`)"
-  - "PIALibrary/Mock (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `703113f4`)"
-  - "PIALibrary/UI (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `703113f4`)"
-  - "PIALibrary/VPN (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `703113f4`)"
+  - "PIALibrary/Library (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `aca720b4`)"
+  - "PIALibrary/Mock (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `aca720b4`)"
+  - "PIALibrary/UI (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `aca720b4`)"
+  - "PIALibrary/VPN (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `aca720b4`)"
   - "PIARegionsModule (from `git@gitlab.kape.com:pia-mobile/shared/regions.git`, branch `release/1.3.1`)"
   - "PIAWireguard (from `git@gitlab.kape.com:pia-mobile/ios/pia-wireguard.git`, commit `7e9d8d48`)"
   - Popover
@@ -217,7 +217,7 @@ EXTERNAL SOURCES:
     :branch: release/1.1.0
     :git: "git@gitlab.kape.com:pia-mobile/shared/kpi.git"
   PIALibrary:
-    :commit: 703113f4
+    :commit: aca720b4
     :git: "git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git"
   PIARegionsModule:
     :branch: release/1.3.1
@@ -243,7 +243,7 @@ CHECKOUT OPTIONS:
     :commit: 4ffb43cc4bb9d66da9b0b966d98934507b2cb04f
     :git: "git@gitlab.kape.com:pia-mobile/shared/kpi.git"
   PIALibrary:
-    :commit: 703113f4
+    :commit: aca720b4
     :git: "git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git"
   PIARegionsModule:
     :commit: 6b3b763b3b1d066cb73d2d8833563669ff8e87bb
@@ -293,6 +293,6 @@ SPEC CHECKSUMS:
   TunnelKit: 2a6aadea2d772a2760b153aee27d1c334c9ca6db
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: fbe608d4e51826ba47ee0dd2639c4847fcf22089
+PODFILE CHECKSUM: 550cd625da7289a3e72c629a5309558f17f979c6
 
 COCOAPODS: 1.11.2
