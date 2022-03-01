@@ -149,6 +149,8 @@
 		3545E98426AADC7E00B812CC /* ServerSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545E97F26AAD60C00B812CC /* ServerSelectionDelegate.swift */; };
 		3732E0F0C64DA8513903087D /* Pods_PIA_VPN_Tunnel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02823EF3398B7E2C32FA7544 /* Pods_PIA_VPN_Tunnel.framework */; };
 		73E0B0544DF023785B11C4B9 /* Pods_PIA_VPN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E23999135612F39173E9C1E /* Pods_PIA_VPN.framework */; };
+		7EB8D11F27CE2B020030B060 /* PIAUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB8D11E27CE2B020030B060 /* PIAUITests.swift */; };
+		7EB8D12127CE2B5D0030B060 /* PIALaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB8D12027CE2B5D0030B060 /* PIALaunchTests.swift */; };
 		7ECBB8DD27B6C4F500C0C774 /* UserSurveyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */; };
 		7ECBB8DE27BA5FCE00C0C774 /* UserSurveyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */; };
 		821674F12678A1BE0028E4FD /* SettingsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821674F02678A1BE0028E4FD /* SettingsDelegate.swift */; };
@@ -433,6 +435,13 @@
 			remoteGlobalIDString = 0EFB606F203D7A2C0095398C;
 			remoteInfo = "PIA VPN AdBlocker";
 		};
+		7EB8D11927CCF4C20030B060 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 291C6374183EBC210039EC03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 291C637B183EBC210039EC03;
+			remoteInfo = "PIA VPN";
+		};
 		8269A6E1251CB5E3000B4DBF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 291C6374183EBC210039EC03 /* Project object */;
@@ -617,6 +626,9 @@
 		59EC919445EA680B691ACC88 /* Pods-PIA VPNTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPNTests.debug.xcconfig"; path = "Target Support Files/Pods-PIA VPNTests/Pods-PIA VPNTests.debug.xcconfig"; sourceTree = "<group>"; };
 		678A887CFC02122F4FB83216 /* Pods-PIA VPNTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPNTests.release.xcconfig"; path = "Target Support Files/Pods-PIA VPNTests/Pods-PIA VPNTests.release.xcconfig"; sourceTree = "<group>"; };
 		6CA493DF6602BFDE96E0E77F /* Pods_PIA_VPN_dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PIA_VPN_dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EB8D11327CCF4C20030B060 /* PIA VPN UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA VPN UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EB8D11E27CE2B020030B060 /* PIAUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAUITests.swift; sourceTree = "<group>"; };
+		7EB8D12027CE2B5D0030B060 /* PIALaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIALaunchTests.swift; sourceTree = "<group>"; };
 		7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSurveyManager.swift; sourceTree = "<group>"; };
 		7F6FF659836C1192332662A8 /* Pods-PIA VPN dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPN dev.debug.xcconfig"; path = "Target Support Files/Pods-PIA VPN dev/Pods-PIA VPN dev.debug.xcconfig"; sourceTree = "<group>"; };
 		821674F02678A1BE0028E4FD /* SettingsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDelegate.swift; sourceTree = "<group>"; };
@@ -816,6 +828,13 @@
 				291C6380183EBC210039EC03 /* Foundation.framework in Frameworks */,
 				0E9785861DA82FF000711A24 /* StoreKit.framework in Frameworks */,
 				73E0B0544DF023785B11C4B9 /* Pods_PIA_VPN.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EB8D11027CCF4C20030B060 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1049,6 +1068,7 @@
 				0EEE1C191E4F719E00397DE2 /* Resources */,
 				DDC8F5ED23EC1070005D19C6 /* PIA VPN WG Tunnel */,
 				8269A6D8251CB5E0000B4DBF /* PIAWidget */,
+				7EB8D11427CCF4C20030B060 /* PIA VPN UITests */,
 				291C637E183EBC210039EC03 /* Frameworks */,
 				291C637D183EBC210039EC03 /* Products */,
 				90B2842B07AEDA4CF8A2035B /* Pods */,
@@ -1065,6 +1085,7 @@
 				0EFB6070203D7A2C0095398C /* PIA VPN AdBlocker.appex */,
 				DDC8F5EC23EC106F005D19C6 /* PIA VPN WG Tunnel.appex */,
 				8269A6D5251CB5E0000B4DBF /* PIAWidgetExtension.appex */,
+				7EB8D11327CCF4C20030B060 /* PIA VPN UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1163,6 +1184,15 @@
 				296B7BB21A1840CB005606AD /* Shared */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		7EB8D11427CCF4C20030B060 /* PIA VPN UITests */ = {
+			isa = PBXGroup;
+			children = (
+				7EB8D11E27CE2B020030B060 /* PIAUITests.swift */,
+				7EB8D12027CE2B5D0030B060 /* PIALaunchTests.swift */,
+			);
+			path = "PIA VPN UITests";
 			sourceTree = "<group>";
 		};
 		82183D8425014F940033023F /* Menu */ = {
@@ -1510,6 +1540,24 @@
 			productReference = 291C637C183EBC210039EC03 /* PIA VPN.app */;
 			productType = "com.apple.product-type.application";
 		};
+		7EB8D11227CCF4C20030B060 /* PIA VPN UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7EB8D11D27CCF4C20030B060 /* Build configuration list for PBXNativeTarget "PIA VPN UITests" */;
+			buildPhases = (
+				7EB8D10F27CCF4C20030B060 /* Sources */,
+				7EB8D11027CCF4C20030B060 /* Frameworks */,
+				7EB8D11127CCF4C20030B060 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7EB8D11A27CCF4C20030B060 /* PBXTargetDependency */,
+			);
+			name = "PIA VPN UITests";
+			productName = "PIA VPN UITests";
+			productReference = 7EB8D11327CCF4C20030B060 /* PIA VPN UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		8269A6D4251CB5E0000B4DBF /* PIAWidgetExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8269A6E4251CB5E3000B4DBF /* Build configuration list for PBXNativeTarget "PIAWidgetExtension" */;
@@ -1552,7 +1600,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = PIA;
-				LastSwiftUpdateCheck = 1200;
+				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Private Internet Access Inc.";
 				TargetAttributes = {
@@ -1624,6 +1672,12 @@
 							};
 						};
 					};
+					7EB8D11227CCF4C20030B060 = {
+						CreatedOnToolsVersion = 13.0;
+						DevelopmentTeam = 5357M5NW9W;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 291C637B183EBC210039EC03;
+					};
 					8269A6D4251CB5E0000B4DBF = {
 						CreatedOnToolsVersion = 12.0;
 						DevelopmentTeam = 5357M5NW9W;
@@ -1673,6 +1727,7 @@
 				DDC8F5EB23EC106F005D19C6 /* PIA VPN WG Tunnel */,
 				8269A6D4251CB5E0000B4DBF /* PIAWidgetExtension */,
 				0EEE1BE61E4F6EF400397DE2 /* PIA VPNTests */,
+				7EB8D11227CCF4C20030B060 /* PIA VPN UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1795,6 +1850,13 @@
 				DD746957217F070700B7BD73 /* DNS.plist in Resources */,
 				DD1C139B21E65F90004004B3 /* IPTileCollectionViewCell.xib in Resources */,
 				829EB5342535AD27003E74DD /* DedicatedIpEmptyHeaderViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EB8D11127CCF4C20030B060 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2325,6 +2387,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7EB8D10F27CCF4C20030B060 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EB8D11F27CE2B020030B060 /* PIAUITests.swift in Sources */,
+				7EB8D12127CE2B5D0030B060 /* PIALaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8269A6D1251CB5E0000B4DBF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2376,6 +2447,11 @@
 			isa = PBXTargetDependency;
 			target = 0EFB606F203D7A2C0095398C /* PIA VPN AdBlocker */;
 			targetProxy = 0EFB607E203D893E0095398C /* PBXContainerItemProxy */;
+		};
+		7EB8D11A27CCF4C20030B060 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 291C637B183EBC210039EC03 /* PIA VPN */;
+			targetProxy = 7EB8D11927CCF4C20030B060 /* PBXContainerItemProxy */;
 		};
 		8269A6E2251CB5E3000B4DBF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2908,6 +2984,73 @@
 			};
 			name = Release;
 		};
+		7EB8D11B27CCF4C20030B060 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 5357M5NW9W;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cyberghostsrl.PIA-VPN-UITests";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "PIA VPN";
+			};
+			name = Debug;
+		};
+		7EB8D11C27CCF4C20030B060 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 5357M5NW9W;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cyberghostsrl.PIA-VPN-UITests";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "PIA VPN";
+			};
+			name = Release;
+		};
 		8269A6E5251CB5E3000B4DBF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3103,6 +3246,15 @@
 			buildConfigurations = (
 				291C63AF183EBC220039EC03 /* Debug */,
 				291C63B0183EBC220039EC03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7EB8D11D27CCF4C20030B060 /* Build configuration list for PBXNativeTarget "PIA VPN UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7EB8D11B27CCF4C20030B060 /* Debug */,
+				7EB8D11C27CCF4C20030B060 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
