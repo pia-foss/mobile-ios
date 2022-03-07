@@ -101,6 +101,7 @@ class AppPreferences {
         
         // Survey
         static let userInteractedWithSurvey = "userInteractedWithSurvey"
+        static let successConnectionsUntilSurvey = "successConnectionsUntilSurvey"
         
         // Dev
         static let appEnvironmentIsProduction = "AppEnvironmentIsProduction"
@@ -531,6 +532,15 @@ class AppPreferences {
         }
     }
     
+    var successConnectionsUntilSurvey: Int? {
+        get {
+            return defaults.value(forKey: Entries.successConnectionsUntilSurvey) as? Int
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.successConnectionsUntilSurvey)
+        }
+    }
+    
     private init() {
         guard let defaults = UserDefaults(suiteName: AppConstants.appGroup) else {
             fatalError("Unable to initialize app preferences")
@@ -798,6 +808,7 @@ class AppPreferences {
         appEnvironmentIsProduction = Client.environment == .production ? true : false
         MessagesManager.shared.reset()
         userInteractedWithSurvey = false
+        successConnectionsUntilSurvey = nil
     }
     
     func clean() {
@@ -833,6 +844,7 @@ class AppPreferences {
         MessagesManager.shared.reset()
         appEnvironmentIsProduction = Client.environment == .production ? true : false
         userInteractedWithSurvey = false
+        successConnectionsUntilSurvey = nil
     }
     
 //    + (void)eraseForTesting;
@@ -878,7 +890,7 @@ class AppPreferences {
     
     // MARK: Connections
     func incrementSuccessConnections() {
-        self.successConnections += 1
+        successConnections += 1
     }
     
 }
