@@ -27,6 +27,12 @@ private let log = SwiftyBeaver.self
 
 class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeViewControllerDelegate {
     
+    private enum LoginOption {
+        case credentials
+        case receipt
+        case magicLink
+    }
+    
     @IBOutlet private weak var scrollView: UIScrollView!
 
     @IBOutlet private weak var labelTitle: UILabel!
@@ -53,6 +59,10 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
     private var signupEmail: String?
     
     private var isLogging = false
+    
+    private var timeToRetryCredentials: TimeInterval? = nil
+    private var timeToRetryReceipt: TimeInterval? = nil
+    private var timeToRetryMagicLink: TimeInterval? = nil
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -111,6 +121,10 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
     }
     // MARK: Actions
     @IBAction private func logInWithLink(_ sender: Any?) {
+        if let timeUntilNextTry = timeToRetryMagicLink?.timeSinceNow() {
+            displayErrorMessage(errorMessage: L10n.Welcome.Login.Error.throttled("\(Int(timeUntilNextTry))"), displayDuration: timeUntilNextTry)
+            return
+        }
         
         let bundle = Bundle(for: LoginViewController.self)
         let storyboard = UIStoryboard(name: "Welcome", bundle: bundle)
@@ -131,19 +145,16 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
                 }
                 
                 self.showLoadingAnimation()
-
                 self.preset?.accountProvider.loginUsingMagicLink(withEmail: email, { (error) in
                     
+                    self.hideLoadingAnimation()
                     guard error == nil else {
-                        self.handleLoginFailed(error)
+                        self.handleLoginFailed(error, loginOption: .magicLink)
                         return
                     }
                     
                     Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image,
                                                    message: L10n.Welcome.Login.Magic.Link.response)
-
-                    self.hideLoadingAnimation()
-
                 })
                 
             })
@@ -167,6 +178,10 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
     }
     
     @IBAction private func logInWithReceipt(_ sender: Any?) {
+        if let timeUntilNextTry = timeToRetryReceipt?.timeSinceNow() {
+            displayErrorMessage(errorMessage: L10n.Welcome.Login.Error.throttled("\(Int(timeUntilNextTry))"), displayDuration: timeUntilNextTry)
+            return
+        }
         
         guard !isLogging else {
             return
@@ -179,11 +194,17 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         let request = LoginReceiptRequest(receipt: receipt)
         
         prepareLogin()
-        preset?.accountProvider.login(with: request, handleLoginResult)
+        preset?.accountProvider.login(with: request, { userAccount, error in
+            self.handleLoginResult(user: userAccount, error: error, loginOption: .receipt)
+        })
     }
 
     @IBAction private func logIn(_ sender: Any?) {
-    
+        if let timeUntilNextTry = timeToRetryCredentials?.timeSinceNow() {
+            displayErrorMessage(errorMessage: L10n.Welcome.Login.Error.throttled("\(Int(timeUntilNextTry))"), displayDuration: timeUntilNextTry)
+            return
+        }
+        
         guard !isLogging else {
             return
         }
@@ -195,7 +216,9 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         let request = LoginRequest(credentials: credentials)
         
         prepareLogin()
-        preset?.accountProvider.login(with: request, handleLoginResult)
+        preset?.accountProvider.login(with: request, { userAccount, error in
+            self.handleLoginResult(user: userAccount, error: error, loginOption: .credentials)
+        })
     }
     
     private func getValidCredentials() -> Credentials? {
@@ -247,13 +270,13 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         showLoadingAnimation()
     }
     
-    private func handleLoginResult(user: UserAccount?, error: Error?) {
+    private func handleLoginResult(user: UserAccount?, error: Error?, loginOption: LoginOption) {
         enableInteractions(true)
 
         hideLoadingAnimation()
 
         guard let user = user else {
-            handleLoginFailed(error)
+            handleLoginFailed(error, loginOption: loginOption)
             return
         }
         
@@ -262,7 +285,20 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         self.completionDelegate?.welcomeDidLogin(withUser: user, topViewController: self)
     }
     
-    private func handleLoginFailed(_ error: Error?) {
+    private func updateTimeToRetry(loginOption: LoginOption, retryAfterSeconds: Double) {
+        let retryAfterTimeStamp = Date().timeIntervalSince1970 + retryAfterSeconds
+        switch loginOption {
+        case .credentials:
+            timeToRetryCredentials = retryAfterTimeStamp
+        case .receipt:
+            timeToRetryReceipt = retryAfterTimeStamp
+        case .magicLink:
+            timeToRetryMagicLink = retryAfterTimeStamp
+        }
+    }
+    
+    private func handleLoginFailed(_ error: Error?, loginOption: LoginOption) {
+        var displayDuration: Double?
         var errorMessage: String?
         if let error = error {
             if let clientError = error as? ClientError {
@@ -270,8 +306,15 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
                 case .unauthorized:
                     errorMessage = L10n.Welcome.Login.Error.unauthorized
 
-                case .throttled:
-                    errorMessage = L10n.Welcome.Login.Error.throttled
+                case .throttled(retryAfter: let retryAfter):
+                    let localisedThrottlingString = L10n.Welcome.Login.Error.throttled("\(retryAfter)")
+                    errorMessage = NSLocalizedString(localisedThrottlingString, comment: localisedThrottlingString)
+                    
+                    let retryAfterSeconds = Double(retryAfter)
+                    displayDuration = retryAfterSeconds
+                    
+                    updateTimeToRetry(loginOption: loginOption, retryAfterSeconds: retryAfterSeconds)
+                    
                 case .expired:
                     handleExpiredAccount()
                     return
@@ -286,14 +329,13 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         } else {
             log.error("Failed to log in")
         }
-        
-        displayErrorMessage(errorMessage: errorMessage)
+        displayErrorMessage(errorMessage: errorMessage, displayDuration: displayDuration)
     }
     
-    private func displayErrorMessage(errorMessage: String?) {
+    private func displayErrorMessage(errorMessage: String?, displayDuration: Double? = nil) {
         
         Macros.displayImageNote(withImage: Asset.iconWarning.image,
-                                message: errorMessage ?? L10n.Welcome.Login.Error.title)
+                                message: errorMessage ?? L10n.Welcome.Login.Error.title, andDuration: displayDuration)
     }
     
     private func handleExpiredAccount() {

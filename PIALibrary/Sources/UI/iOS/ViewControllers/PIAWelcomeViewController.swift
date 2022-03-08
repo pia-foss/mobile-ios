@@ -385,7 +385,11 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
     func logout(_ callback: SuccessLibraryCallback?) {
         fatalError("Not implemented")
     }
-
+    
+    func deleteAccount(_ callback: SuccessLibraryCallback?) {
+        fatalError("Not implemented")
+    }
+    
     func activateDIPTokens(_ dipToken: String, _ callback: LibraryCallback<DedicatedIPStatus>?) {
         fatalError("Not implemented")
     }

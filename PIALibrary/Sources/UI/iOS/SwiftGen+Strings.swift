@@ -285,8 +285,10 @@ internal enum L10n {
       /// Sign in to your account
       internal static let title = L10n.tr("Welcome", "login.title")
       internal enum Error {
-        /// Too many failed login attempts with this username. Please try again later.
-        internal static let throttled = L10n.tr("Welcome", "login.error.throttled")
+        /// Too many failed login attempts with this username. Please try again after %@ second(s).
+        internal static func throttled(_ p1: Any) -> String {
+          return L10n.tr("Welcome", "login.error.throttled", String(describing: p1))
+        }
         /// Log in
         internal static let title = L10n.tr("Welcome", "login.error.title")
         /// Your username or password is incorrect.

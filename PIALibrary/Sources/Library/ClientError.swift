@@ -23,7 +23,7 @@
 import Foundation
 
 /// All the errors raised by the client.
-public enum ClientError: String, Error {
+public enum ClientError: Error, Equatable {
 
     /// The Internet is unreachable.
     case internetUnreachable
@@ -32,7 +32,7 @@ public enum ClientError: String, Error {
     case unauthorized
     
     /// The service has been throttled for exceeded rate limits.
-    case throttled
+    case throttled(retryAfter: UInt)
     
     /// The service has been expired.
     case expired

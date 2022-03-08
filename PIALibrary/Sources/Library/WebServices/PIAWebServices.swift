@@ -168,7 +168,12 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     }
 
     private func mapLoginError(_ error: AccountRequestError) -> ClientError {
+        switch error.code {
+        case 429:
+            return .throttled(retryAfter: UInt(error.retryAfterSeconds))
+        default:
             return .unauthorized
+        }
     }
 
 
@@ -183,7 +188,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
 
     private func mapLoginLinkError(_ error:AccountRequestError) -> ClientError {
         switch error.code {
-        case 401,402:
+        case 401,402,429:
             return mapLoginError(error)
         default:
             return .invalidParameter
@@ -261,6 +266,16 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         }
     }
     
+    func deleteAccount(_ callback: LibraryCallback<Bool>?) {
+        self.accountAPI.deleteAccount(callback: { errors in
+            if !errors.isEmpty {
+                callback?(false, ClientError.invalidParameter)
+            } else {
+                callback?(true, nil)
+            }
+        })
+    }
+    
     func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
         self.accountAPI.renewDedicatedIP(ipToken: dipToken) { (errors) in
             if !errors.isEmpty {
@@ -271,10 +286,24 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         }
     }
     
+    fileprivate func mapDIPError(_ error: AccountRequestError?) -> ClientError {
+        guard let error = error else {
+            return ClientError.invalidParameter
+        }
+        switch error.code {
+        case 401:
+            return ClientError.unauthorized
+        case 429:
+            return ClientError.throttled(retryAfter: UInt(error.retryAfterSeconds))
+        default:
+            return ClientError.invalidParameter
+        }
+    }
+    
     func activateDIPToken(tokens: [String], _ callback: LibraryCallback<[Server]>?) {
         self.accountAPI.dedicatedIPs(ipTokens: tokens) { (dedicatedIps, errors) in
             if !errors.isEmpty {
-                callback?([], errors.last?.code == 401 ? ClientError.unauthorized : ClientError.invalidParameter)
+                callback?([], self.mapDIPError(errors.last))
                 return
             }
 
