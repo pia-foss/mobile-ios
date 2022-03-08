@@ -29,7 +29,8 @@ class DedicatedIpViewController: AutolayoutViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     private var data = [Server]()
-
+    private var timeToRetryDIP: TimeInterval? = nil
+    
     private struct Sections {
         static let header = 0
         static let dedicatedIps = 1
@@ -197,7 +198,7 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
                 return headerView
             } else {
                 let headerView = tableView.dequeueReusableCell(withIdentifier: Cells.header) as! DedicatedIpEmptyHeaderViewCell
-                headerView.setup(withTableView: tableView)
+                headerView.setup(withTableView: tableView, delegate: self)
                 return headerView
             }
         } else {
@@ -205,5 +206,17 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
             return headerView
         }
     }
+    
+}
+
+extension DedicatedIpViewController: DedicatedIpEmptyHeaderViewCellDelegate {
+    func getTimeToRetryDIP() -> TimeInterval? {
+        return timeToRetryDIP
+    }
+    
+    func setTimeToRetryDIP(newInterval: TimeInterval) {
+        timeToRetryDIP = newInterval
+    }
+    
     
 }

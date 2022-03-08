@@ -313,6 +313,15 @@ class DashboardViewController: AutolayoutViewController {
         
     }
     
+    public static func instanceInNavigationStack() -> DashboardViewController? {
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+            let rootNavVC = appDelegate.window?.rootViewController as? UINavigationController,
+            let dashboard = rootNavVC.viewControllers.first as? DashboardViewController {
+            return dashboard
+        }
+        return nil
+    }
+    
     func dismissExistingViewController() {
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }

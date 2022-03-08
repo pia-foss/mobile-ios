@@ -1,2 +1,4 @@
-"NSCameraUsageDescription" = "Precisamos de acesso à câmera para que você possa digitalizar códigos QR para resgatar um cartão-presente";
+/* Localized versions of Info.plist keys */
+
 "NSFaceIDUsageDescription" = "Autenticar para revelar";
+"NSCameraUsageDescription" = "Precisamos de acesso à câmera para que você possa digitalizar códigos QR para resgatar um cartão-presente";

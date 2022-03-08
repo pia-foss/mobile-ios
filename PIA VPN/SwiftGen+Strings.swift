@@ -25,8 +25,20 @@ internal enum L10n {
   }
 
   internal enum Account {
+    /// Delete Account
+    internal static let delete = L10n.tr("Localizable", "account.delete")
     /// Something went wrong. Please try logging in again
     internal static let unauthorized = L10n.tr("Localizable", "account.unauthorized")
+    internal enum Delete {
+      internal enum Alert {
+        /// Something went wrong while deleting your account, please try again later.
+        internal static let failureMessage = L10n.tr("Localizable", "account.delete.alert.failureMessage")
+        /// Deleting your PIA account is permanent and irreversible. You will not be able to retrieve your PIA credentials after performing this action. Please note that this action only deletes your PIA account from our database, but it does NOT delete your subscription. You will need to go to your Apple account and cancel the Private Internet Access subscription from there. Otherwise, you will still be charged, even though your PIA account will no longer be active.
+        internal static let message = L10n.tr("Localizable", "account.delete.alert.message")
+        /// Are you sure?
+        internal static let title = L10n.tr("Localizable", "account.delete.alert.title")
+      }
+    }
     internal enum Email {
       /// Email
       internal static let caption = L10n.tr("Localizable", "account.email.caption")
@@ -222,6 +234,10 @@ internal enum L10n {
       }
       internal enum Message {
         internal enum Error {
+          /// Too many failed token activation requests. Please try again after %@ second(s).
+          internal static func retryafter(_ p1: Any) -> String {
+            return L10n.tr("Localizable", "dedicated.ip.message.error.retryafter", String(describing: p1))
+          }
           /// Your token is expired. Please generate a new one from your Account page on the website.
           internal static let token = L10n.tr("Localizable", "dedicated.ip.message.error.token")
         }
