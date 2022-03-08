@@ -60,11 +60,11 @@ class PIALoginTests: XCTestCase {
             if usernameTextField.exists && passwordTextField.exists {
                 // Type username
                 usernameTextField.tap()
-                app.typeString(with: "randomusername")
+                usernameTextField.typeText("random.username")
                 
                 // Type password
                 passwordTextField.tap()
-                app.typeString(with: "randompassword")
+                passwordTextField.typeText("passWord@342")
                 
                 let expectation = XCTestExpectation(description: "Perform login")
                 loginButton.tap()
@@ -92,13 +92,6 @@ class PIALoginTests: XCTestCase {
 }
 
 private extension XCUIApplication {
-    func typeString(with text: String) {
-        // Issue with custome fields:
-        // https://stackoverflow.com/questions/32184837/ui-testing-failure-neither-element-nor-any-descendant-has-keyboard-focus-on-se
-        for str in Array(text) {
-            self.keys[String(str)].tap()
-        }
-    }
     
     func switchEnvironmentToStaging() {
         if Client.environment == .production {
