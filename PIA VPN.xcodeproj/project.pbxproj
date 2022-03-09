@@ -153,7 +153,8 @@
 		7EB8D11F27CE2B020030B060 /* PIAUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB8D11E27CE2B020030B060 /* PIAUITests.swift */; };
 		7EB8D12127CE2B5D0030B060 /* PIALaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB8D12027CE2B5D0030B060 /* PIALaunchTests.swift */; };
 		7EB8D12327CE7D4C0030B060 /* PIALoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB8D12227CE7D4C0030B060 /* PIALoginTests.swift */; };
-		7EC2971C27D791530061C56A /* user.credentials in Resources */ = {isa = PBXBuildFile; fileRef = 7EC2971B27D791530061C56A /* user.credentials */; };
+		7EC2972F27D8B8580061C56A /* CredentialsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */; };
+		7EC2973027D8B8580061C56A /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EC2972E27D8B8580061C56A /* Credentials.plist */; };
 		7ECBB8DD27B6C4F500C0C774 /* UserSurveyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */; };
 		7ECBB8DE27BA5FCE00C0C774 /* UserSurveyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */; };
 		821674F12678A1BE0028E4FD /* SettingsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821674F02678A1BE0028E4FD /* SettingsDelegate.swift */; };
@@ -445,6 +446,13 @@
 			remoteGlobalIDString = 291C637B183EBC210039EC03;
 			remoteInfo = "PIA VPN";
 		};
+		7EC2973127D8BCB60061C56A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 291C6374183EBC210039EC03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0EE2200B1F4EF307002805AE;
+			remoteInfo = "PIA VPN dev";
+		};
 		8269A6E1251CB5E3000B4DBF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 291C6374183EBC210039EC03 /* Project object */;
@@ -634,7 +642,8 @@
 		7EB8D11E27CE2B020030B060 /* PIAUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAUITests.swift; sourceTree = "<group>"; };
 		7EB8D12027CE2B5D0030B060 /* PIALaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIALaunchTests.swift; sourceTree = "<group>"; };
 		7EB8D12227CE7D4C0030B060 /* PIALoginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIALoginTests.swift; sourceTree = "<group>"; };
-		7EC2971B27D791530061C56A /* user.credentials */ = {isa = PBXFileReference; lastKnownFileType = text; path = user.credentials; sourceTree = "<group>"; };
+		7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialsUtil.swift; sourceTree = "<group>"; };
+		7EC2972E27D8B8580061C56A /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
 		7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSurveyManager.swift; sourceTree = "<group>"; };
 		7F6FF659836C1192332662A8 /* Pods-PIA VPN dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PIA VPN dev.debug.xcconfig"; path = "Target Support Files/Pods-PIA VPN dev/Pods-PIA VPN dev.debug.xcconfig"; sourceTree = "<group>"; };
 		821674F02678A1BE0028E4FD /* SettingsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDelegate.swift; sourceTree = "<group>"; };
@@ -1199,10 +1208,11 @@
 		7EB8D11427CCF4C20030B060 /* PIA VPN UITests */ = {
 			isa = PBXGroup;
 			children = (
+				7EC2972E27D8B8580061C56A /* Credentials.plist */,
+				7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */,
 				7EB8D12227CE7D4C0030B060 /* PIALoginTests.swift */,
 				7EB8D11E27CE2B020030B060 /* PIAUITests.swift */,
 				7EB8D12027CE2B5D0030B060 /* PIALaunchTests.swift */,
-				7EC2971B27D791530061C56A /* user.credentials */,
 			);
 			path = "PIA VPN UITests";
 			sourceTree = "<group>";
@@ -1568,6 +1578,7 @@
 			);
 			dependencies = (
 				7EB8D11A27CCF4C20030B060 /* PBXTargetDependency */,
+				7EC2973227D8BCB60061C56A /* PBXTargetDependency */,
 			);
 			name = "PIA VPN UITests";
 			productName = "PIA VPN UITests";
@@ -1692,7 +1703,7 @@
 						CreatedOnToolsVersion = 13.0;
 						DevelopmentTeam = 5357M5NW9W;
 						ProvisioningStyle = Automatic;
-						TestTargetID = 291C637B183EBC210039EC03;
+						TestTargetID = 0EE2200B1F4EF307002805AE;
 					};
 					8269A6D4251CB5E0000B4DBF = {
 						CreatedOnToolsVersion = 12.0;
@@ -1873,7 +1884,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EC2971C27D791530061C56A /* user.credentials in Resources */,
+				7EC2973027D8B8580061C56A /* Credentials.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2445,6 +2456,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EC2972F27D8B8580061C56A /* CredentialsUtil.swift in Sources */,
 				7EB8D12327CE7D4C0030B060 /* PIALoginTests.swift in Sources */,
 				7EB8D11F27CE2B020030B060 /* PIAUITests.swift in Sources */,
 				7EB8D12127CE2B5D0030B060 /* PIALaunchTests.swift in Sources */,
@@ -2507,6 +2519,11 @@
 			isa = PBXTargetDependency;
 			target = 291C637B183EBC210039EC03 /* PIA VPN */;
 			targetProxy = 7EB8D11927CCF4C20030B060 /* PBXContainerItemProxy */;
+		};
+		7EC2973227D8BCB60061C56A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0EE2200B1F4EF307002805AE /* PIA VPN dev */;
+			targetProxy = 7EC2973127D8BCB60061C56A /* PBXContainerItemProxy */;
 		};
 		8269A6E2251CB5E3000B4DBF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3070,7 +3087,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "PIA VPN";
+				TEST_TARGET_NAME = "PIA VPN dev";
 			};
 			name = Debug;
 		};
@@ -3104,7 +3121,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "PIA VPN";
+				TEST_TARGET_NAME = "PIA VPN dev";
 			};
 			name = Release;
 		};

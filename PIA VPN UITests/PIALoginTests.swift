@@ -33,6 +33,7 @@ class PIALoginTests: XCTestCase {
     
     func testInvalidUserLogin() throws {
         
+        let credentials = CredentialsUtil.credentials(type: .invalid)
         var isNewButtonUsed = false
         
         // wait for feature flags
@@ -60,11 +61,11 @@ class PIALoginTests: XCTestCase {
             if usernameTextField.exists && passwordTextField.exists {
                 // Type username
                 usernameTextField.tap()
-                usernameTextField.typeText("random.username")
+                usernameTextField.typeText(credentials.username)
                 
                 // Type password
                 passwordTextField.tap()
-                passwordTextField.typeText("passWord@342")
+                passwordTextField.typeText(credentials.password)
                 
                 let expectation = XCTestExpectation(description: "Perform login")
                 loginButton.tap()
