@@ -30,10 +30,7 @@ class PIALoginTests: XCTestCase {
         XCTAssert(false, message)
     }
     
-    
-    func testInvalidUserLogin() throws {
-        
-        let credentials = CredentialsUtil.credentials(type: .invalid)
+    private func navigateToLoginViewController() {
         var isNewButtonUsed = false
         
         // wait for feature flags
@@ -45,8 +42,6 @@ class PIALoginTests: XCTestCase {
             isNewButtonUsed = true
         }
         
-        app.switchEnvironmentToStaging()
-        
         if submitButtonExists {
             if submitButtonExists && !isNewButtonUsed {
                 app.buttons[Accessibility.UITests.Login.submit].tap()
@@ -54,41 +49,52 @@ class PIALoginTests: XCTestCase {
                 app.buttons[Accessibility.UITests.Login.submitNew].tap()
             }
             
-            let usernameTextField = app.textFields[Accessibility.UITests.Login.username]
-            let passwordTextField = app.secureTextFields[Accessibility.UITests.Login.password]
-            let loginButton = app.buttons[Accessibility.UITests.Login.submit]
-            
-            if usernameTextField.exists && passwordTextField.exists {
-                // Type username
-                usernameTextField.tap()
-                usernameTextField.typeText(credentials.username)
-                
-                // Type password
-                passwordTextField.tap()
-                passwordTextField.typeText(credentials.password)
-                
-                let expectation = XCTestExpectation(description: "Perform login")
-                loginButton.tap()
-                DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(5)) {
-                    XCTAssert(loginButton.exists, "testInvalideUserLogin failed")
-                    expectation.fulfill()
-                }
-                wait(for: [expectation], timeout: PIALoginTests.timeoutUIOps)
-            } else {
-                assertfalse(with: "Username and Password text fields did not exist or are moved")
-            }
         } else {
-            assertfalse(with: "Login button did not exist or is moved")
+            assertfalse(with: "One of the Login buttons on GetStartedViewController is either not identifiable or have been moved")
         }
+    }
+    
+    private func fillLoginScreen(with credentials: Credentials) {
+        let usernameTextField = app.textFields[Accessibility.UITests.Login.username]
+        let passwordTextField = app.secureTextFields[Accessibility.UITests.Login.password]
+        
+        if usernameTextField.exists && passwordTextField.exists {
+            // Type username
+            usernameTextField.tap()
+            usernameTextField.typeText(credentials.username)
+            
+            // Type password
+            passwordTextField.tap()
+            passwordTextField.typeText(credentials.password)
+        } else {
+            assertfalse(with: "Username and Password text fields on LoginViewController are either not identifiable or are moved")
+        }
+    }
+    
+    func testInvalidUserLogin() throws {
+        
+        app.switchEnvironmentToStaging()
+        navigateToLoginViewController()
+        fillLoginScreen(with: CredentialsUtil.credentials(type: .invalid))
+        
+        let loginButton = app.buttons[Accessibility.UITests.Login.submit]
+        let expectation = XCTestExpectation(description: "Perform login")
+        loginButton.tap()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(5)) {
+            XCTAssert(loginButton.exists, "testInvalideUserLogin failed")
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: PIALoginTests.timeoutUIOps)
+    }
+    
+    func testExpiredUserLogin() throws {
+        
     }
     
     func testActiveUserLogin() throws {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testInactiveUserLogin() throws {
-        
     }
 }
 
