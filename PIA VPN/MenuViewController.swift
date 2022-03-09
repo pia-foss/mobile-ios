@@ -460,7 +460,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.accessibilityIdentifier = "uitests.menu.account"
 
             case .logout:
-                cell.accessibilityIdentifier = "uitests.menu.logout"
+                cell.accessibilityIdentifier = Accessibility.UITests.Menu.logout
 
             default:
                 break

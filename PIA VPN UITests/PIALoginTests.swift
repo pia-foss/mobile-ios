@@ -18,8 +18,8 @@ class PIALoginTests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
         app.launch()
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        //app.switchEnvironmentToStaging()
+        navigateToGetStartedViewController()
     }
 
     override func tearDownWithError() throws {
@@ -28,6 +28,31 @@ class PIALoginTests: XCTestCase {
     
     private func assertfalse(with message: String) {
         XCTAssert(false, message)
+    }
+    
+    private func navigateToGetStartedViewController() {
+        // wait 5 second for Dashboard to settle down
+        sleep(5)
+        
+        // check if we have a side menu
+        if app.navigationBars.buttons[Accessibility.UITests.Dashboard.menu].exists {
+            openSideMenuAndTapLogout()
+        }
+    }
+    
+    private func openSideMenuAndTapLogout() {
+        app.navigationBars.buttons[Accessibility.UITests.Dashboard.menu].tap()
+        
+        if app.cells[Accessibility.UITests.Menu.logout].waitForExistence(timeout: PIALoginTests.timeoutUIOps) {
+            app.cells[Accessibility.UITests.Menu.logout].tap()
+        } else {
+            assertfalse(with: "PIALoginTests:: A side menu is found but no logout cell is found")
+        }
+        if app.buttons[Accessibility.UITests.Dialog.destructive].waitForExistence(timeout: PIALoginTests.timeoutUIOps) {
+            app.buttons[Accessibility.UITests.Dialog.destructive].tap()
+        } else {
+            assertfalse(with: "PIALoginTests:: Logout alert destructive button is not found")
+        }
     }
     
     private func navigateToLoginViewController() {
@@ -50,7 +75,7 @@ class PIALoginTests: XCTestCase {
             }
             
         } else {
-            assertfalse(with: "One of the Login buttons on GetStartedViewController is either not identifiable or have been moved")
+            assertfalse(with: "PIALoginTests:: One of the Login buttons on GetStartedViewController is either not identifiable or have been moved")
         }
     }
     
@@ -67,34 +92,42 @@ class PIALoginTests: XCTestCase {
             passwordTextField.tap()
             passwordTextField.typeText(credentials.password)
         } else {
-            assertfalse(with: "Username and Password text fields on LoginViewController are either not identifiable or are moved")
+            assertfalse(with: "PIALoginTests:: Username and Password text fields on LoginViewController are either not identifiable or are moved")
         }
     }
     
-    func testInvalidUserLogin() throws {
-        
-        app.switchEnvironmentToStaging()
+    private func loginUser(ofType: CredentialsType) {
         navigateToLoginViewController()
-        fillLoginScreen(with: CredentialsUtil.credentials(type: .invalid))
+        switch ofType {
+        case .valid:
+            fillLoginScreen(with: CredentialsUtil.credentials(type: .valid))
+        case .expired:
+            fillLoginScreen(with: CredentialsUtil.credentials(type: .expired))
+        case .invalid:
+            fillLoginScreen(with: CredentialsUtil.credentials(type: .invalid))
+        }
         
         let loginButton = app.buttons[Accessibility.UITests.Login.submit]
-        let expectation = XCTestExpectation(description: "Perform login")
         loginButton.tap()
+    }
+    
+    func testInvalidUserLogin() throws {
+        loginUser(ofType: .invalid)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(5)) {
-            XCTAssert(loginButton.exists, "testInvalideUserLogin failed")
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: PIALoginTests.timeoutUIOps)
+        let bannerViewExists = app.staticTexts["Your username or password is incorrect."].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
+        XCTAssertTrue(bannerViewExists, "PIALoginTests::testInvalidUserLogin() failed")
     }
     
     func testExpiredUserLogin() throws {
         
     }
     
-    func testActiveUserLogin() throws {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testValidUserLogin() throws {
+        loginUser(ofType: .valid)
+
+        let viewTitleExists = app.staticTexts["PIA needs access to your VPN profiles to secure your traffic"].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
+        let okButtonExist = app.buttons[Accessibility.UITests.Permissions.submit].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
+        XCTAssertTrue(viewTitleExists && okButtonExist, "PIALoginTests::testActiveUserLogin() failed")
     }
 }
 

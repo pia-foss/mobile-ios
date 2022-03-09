@@ -248,6 +248,7 @@ class DashboardViewController: AutolayoutViewController {
                 )
             }
             navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.item
+            navigationItem.leftBarButtonItem?.accessibilityIdentifier = Accessibility.UITests.Dashboard.menu
             
             if navigationItem.rightBarButtonItem == nil {
                 navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -267,6 +268,7 @@ class DashboardViewController: AutolayoutViewController {
                 action: #selector(closeTileEditingMode(_:))
             )
             navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Global.cancel
+            navigationItem.leftBarButtonItem?.accessibilityIdentifier = nil
             navigationItem.rightBarButtonItem = nil
             
         }
