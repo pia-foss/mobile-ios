@@ -25,10 +25,6 @@ class PIALoginTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    private func assertfalse(with message: String) {
-        XCTAssert(false, message)
-    }
-    
     private func navigateToGetStartedViewController() {
         // wait 5 second for Dashboard to settle down
         sleep(5)
@@ -45,12 +41,12 @@ class PIALoginTests: XCTestCase {
         if app.cells[Accessibility.UITests.Menu.logout].waitForExistence(timeout: PIALoginTests.timeoutUIOps) {
             app.cells[Accessibility.UITests.Menu.logout].tap()
         } else {
-            assertfalse(with: "PIALoginTests:: A side menu is found but no logout cell is found")
+            XCTAssert(false, "PIALoginTests:: A side menu is found but no logout cell is found")
         }
         if app.buttons[Accessibility.UITests.Dialog.destructive].waitForExistence(timeout: PIALoginTests.timeoutUIOps) {
             app.buttons[Accessibility.UITests.Dialog.destructive].tap()
         } else {
-            assertfalse(with: "PIALoginTests:: Logout alert destructive button is not found")
+            XCTAssert(false, "PIALoginTests:: Logout alert destructive button is not found")
         }
     }
     
@@ -74,7 +70,7 @@ class PIALoginTests: XCTestCase {
             }
             
         } else {
-            assertfalse(with: "PIALoginTests:: One of the Login buttons on GetStartedViewController is either not identifiable or have been moved")
+            XCTAssert(false, "PIALoginTests:: One of the Login buttons on GetStartedViewController is either not identifiable or have been moved")
         }
     }
     
@@ -91,7 +87,7 @@ class PIALoginTests: XCTestCase {
             passwordTextField.tap()
             passwordTextField.typeText(credentials.password)
         } else {
-            assertfalse(with: "PIALoginTests:: Username and Password text fields on LoginViewController are either not identifiable or are moved")
+            XCTAssert(false, "PIALoginTests:: Username and Password text fields on LoginViewController are either not identifiable or are moved")
         }
     }
     
