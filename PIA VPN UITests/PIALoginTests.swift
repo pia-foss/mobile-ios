@@ -22,13 +22,11 @@ class PIALoginTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        // when test finishes logout
+        navigateToGetStartedViewController()
     }
     
     private func navigateToGetStartedViewController() {
-        // wait 5 second for Dashboard to settle down
-        sleep(5)
-        
         // check if we have a side menu
         if app.navigationBars.buttons[Accessibility.UITests.Dashboard.menu].exists {
             openSideMenuAndTapLogout()
