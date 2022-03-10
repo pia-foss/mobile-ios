@@ -7,23 +7,42 @@
 //
 
 import Foundation
+import PIALibrary
 
 class UserSurveyManager {
     static let shared = UserSurveyManager()
     
     private init() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(setupConnectionCounters), name: .PIAAccountDidRefresh, object: nil)
         
+        setupConnectionCounters()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc private func setupConnectionCounters() {
+        let appPreferences = AppPreferences.shared
+        if let _ = appPreferences.successConnectionsUntilSurvey {
+            return
+        }
+        appPreferences.successConnectionsUntilSurvey = appPreferences.successConnections + AppConstants.Survey.numberOfConnectionsUntilPrompt
     }
     
     func handleConnectionSuccess() {
-        if shouldShowSurveyMessage() {
+        if UserSurveyManager.shouldShowSurveyMessage() {
             MessagesManager.shared.showInAppSurveyMessage()
         }
     }
     
     // MARK: Survey Settings
-    private func shouldShowSurveyMessage() -> Bool {
+    static func shouldShowSurveyMessage() -> Bool {
         let appPreferences = AppPreferences.shared
-        return !appPreferences.userInteractedWithSurvey && appPreferences.successConnections >= AppConstants.Survey.numberOfConnectionsUntilPrompt
+        guard let successConnectionUntilSurvey = appPreferences.successConnectionsUntilSurvey else {
+            return false
+        }
+        return !appPreferences.userInteractedWithSurvey && appPreferences.successConnections >= successConnectionUntilSurvey
     }
 }

@@ -240,7 +240,7 @@ CHECKOUT OPTIONS:
     :commit: b62d1bab
     :git: "git@gitlab.kape.com:pia-mobile/shared/csi.git"
   PIAKPIModule:
-    :commit: 4ffb43cc4bb9d66da9b0b966d98934507b2cb04f
+    :commit: e444c78b61e280a1ce444d8d8a3a4c0eeb50b981
     :git: "git@gitlab.kape.com:pia-mobile/shared/kpi.git"
   PIALibrary:
     :commit: f1f3551c
