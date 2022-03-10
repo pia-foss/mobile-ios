@@ -18,7 +18,6 @@ class PIALoginTests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
         app.launch()
-        //app.switchEnvironmentToStaging()
         navigateToGetStartedViewController()
     }
 
@@ -119,10 +118,15 @@ class PIALoginTests: XCTestCase {
     }
     
     func testExpiredUserLogin() throws {
+        app.switchEnvironment(to: .staging)
+        loginUser(ofType: .expired)
         
+        let bannerViewExists = app.staticTexts["Your username or password is incorrect."].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
+        XCTAssertTrue(bannerViewExists, "PIALoginTests::testExpiredUserLogin() failed")
     }
     
     func testValidUserLogin() throws {
+        app.switchEnvironment(to: .production)
         loginUser(ofType: .valid)
 
         let viewTitleExists = app.staticTexts["PIA needs access to your VPN profiles to secure your traffic"].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
@@ -133,13 +137,15 @@ class PIALoginTests: XCTestCase {
 
 private extension XCUIApplication {
     
-    func switchEnvironmentToStaging() {
-        if Client.environment == .production {
-            // wait until the button is available
-            _ = self.buttons[Accessibility.UITests.Welcome.environment].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
+    func switchEnvironment(to environment: Client.Environment) {
+        // wait until the button is available
+        _ = self.buttons[Accessibility.UITests.Welcome.environment].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
+        let environmentButton = self.buttons[Accessibility.UITests.Welcome.environment]
+        
+        if environmentButton.label.lowercased() != environment.rawValue.lowercased() {
             
             // then click it to switch environment
-            self.buttons[Accessibility.UITests.Welcome.environment].tap()
+            environmentButton.tap()
         }
     }
 }
