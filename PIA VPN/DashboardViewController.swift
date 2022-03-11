@@ -252,7 +252,7 @@ class DashboardViewController: AutolayoutViewController {
                 )
             }
             navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.item
-            navigationItem.leftBarButtonItem?.accessibilityIdentifier = Accessibility.UITests.Dashboard.menu
+            navigationItem.leftBarButtonItem?.accessibilityIdentifier = Accessibility.Id.Dashboard.menu
             
             if navigationItem.rightBarButtonItem == nil {
                 navigationItem.rightBarButtonItem = UIBarButtonItem(

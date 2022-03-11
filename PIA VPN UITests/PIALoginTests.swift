@@ -28,43 +28,43 @@ class PIALoginTests: XCTestCase {
     
     private func navigateToGetStartedViewController() {
         // check if we have a side menu
-        if app.navigationBars.buttons[Accessibility.UITests.Dashboard.menu].exists {
+        if app.navigationBars.buttons[Accessibility.Id.Dashboard.menu].exists {
             openSideMenuAndTapLogout()
         }
     }
     
     private func openSideMenuAndTapLogout() {
-        app.navigationBars.buttons[Accessibility.UITests.Dashboard.menu].tap()
+        app.navigationBars.buttons[Accessibility.Id.Dashboard.menu].tap()
         
-        if app.cells[Accessibility.UITests.Menu.logout].waitForExistence(timeout: PIALoginTests.timeoutUIOps) {
-            app.cells[Accessibility.UITests.Menu.logout].tap()
+        if app.cells[Accessibility.Id.Menu.logout].waitForExistence(timeout: PIALoginTests.timeoutUIOps) {
+            app.cells[Accessibility.Id.Menu.logout].tap()
         } else {
             XCTAssert(false, "PIALoginTests:: A side menu is found but no logout cell is found")
         }
-        if app.buttons[Accessibility.UITests.Dialog.destructive].waitForExistence(timeout: PIALoginTests.timeoutUIOps) {
-            app.buttons[Accessibility.UITests.Dialog.destructive].tap()
+        if app.buttons[Accessibility.Id.Dialog.destructive].waitForExistence(timeout: PIALoginTests.timeoutUIOps) {
+            app.buttons[Accessibility.Id.Dialog.destructive].tap()
         } else {
             XCTAssert(false, "PIALoginTests:: Logout alert destructive button is not found")
         }
     }
     
     private func navigateToLoginViewController() {
-        var isNewButtonUsed = false
+        var loginUsingFeatureFlags = false
         
         // wait for feature flags
-        var submitButtonExists = app.buttons[Accessibility.UITests.Login.submit].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
+        var submitButtonExists = app.buttons[Accessibility.Id.Login.submit].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
         
         // check if new button should be used
         if !submitButtonExists {
-            submitButtonExists = app.buttons[Accessibility.UITests.Login.submitNew].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
-            isNewButtonUsed = true
+            submitButtonExists = app.buttons[Accessibility.Id.Login.submitNew].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
+            loginUsingFeatureFlags = true
         }
         
         if submitButtonExists {
-            if submitButtonExists && !isNewButtonUsed {
-                app.buttons[Accessibility.UITests.Login.submit].tap()
+            if submitButtonExists && !loginUsingFeatureFlags {
+                app.buttons[Accessibility.Id.Login.submit].tap()
             } else {
-                app.buttons[Accessibility.UITests.Login.submitNew].tap()
+                app.buttons[Accessibility.Id.Login.submitNew].tap()
             }
             
         } else {
@@ -73,8 +73,8 @@ class PIALoginTests: XCTestCase {
     }
     
     private func fillLoginScreen(with credentials: Credentials) {
-        let usernameTextField = app.textFields[Accessibility.UITests.Login.username]
-        let passwordTextField = app.secureTextFields[Accessibility.UITests.Login.password]
+        let usernameTextField = app.textFields[Accessibility.Id.Login.username]
+        let passwordTextField = app.secureTextFields[Accessibility.Id.Login.password]
         
         if usernameTextField.exists && passwordTextField.exists {
             // Type username
@@ -100,7 +100,7 @@ class PIALoginTests: XCTestCase {
             fillLoginScreen(with: CredentialsUtil.credentials(type: .invalid))
         }
         
-        let loginButton = app.buttons[Accessibility.UITests.Login.submit]
+        let loginButton = app.buttons[Accessibility.Id.Login.submit]
         loginButton.tap()
     }
     
@@ -124,7 +124,7 @@ class PIALoginTests: XCTestCase {
         loginUser(ofType: .valid)
 
         let viewTitleExists = app.staticTexts["PIA needs access to your VPN profiles to secure your traffic"].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
-        let okButtonExist = app.buttons[Accessibility.UITests.Permissions.submit].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
+        let okButtonExist = app.buttons[Accessibility.Id.Permissions.submit].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
         XCTAssertTrue(viewTitleExists && okButtonExist, "PIALoginTests::testActiveUserLogin() failed")
     }
 }
@@ -133,8 +133,8 @@ private extension XCUIApplication {
     
     func switchEnvironment(to environment: Client.Environment) {
         // wait until the button is available
-        _ = self.buttons[Accessibility.UITests.Welcome.environment].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
-        let environmentButton = self.buttons[Accessibility.UITests.Welcome.environment]
+        _ = self.buttons[Accessibility.Id.Welcome.environment].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
+        let environmentButton = self.buttons[Accessibility.Id.Welcome.environment]
         
         if environmentButton.label.lowercased() != environment.rawValue.lowercased() {
             
