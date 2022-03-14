@@ -81,7 +81,7 @@ def shared_main_pods
     #library_by_path('~/Repositories')
     #library_by_git('')
     #library_by_gitlab_branch('')
-    library_by_gitlab_by_git('f3211dd7')
+    library_by_gitlab_by_git('c786f8a8')
     #library_by_version('~> 1.1.3')
 end
 
@@ -137,6 +137,10 @@ target 'PIA VPNTests' do
     pod 'Firebase/Core', '6.5.0'
     pod 'Crashlytics'
     pod 'Fabric'
+end
+
+target 'PIA VPN UITests' do
+  app_pods
 end
 
 post_install do |installer|
