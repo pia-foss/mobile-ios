@@ -49,7 +49,7 @@ class PIALoginTests: XCTestCase {
     }
     
     private func navigateToLoginViewController() {
-        var loginUsingFeatureFlags = false
+        var conversionSubviewVisible = false
         
         // wait for feature flags
         var submitButtonExists = app.buttons[Accessibility.Id.Login.submit].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
@@ -57,11 +57,11 @@ class PIALoginTests: XCTestCase {
         // check if new button should be used
         if !submitButtonExists {
             submitButtonExists = app.buttons[Accessibility.Id.Login.submitNew].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
-            loginUsingFeatureFlags = true
+            conversionSubviewVisible = true
         }
         
         if submitButtonExists {
-            if submitButtonExists && !loginUsingFeatureFlags {
+            if submitButtonExists && !conversionSubviewVisible {
                 app.buttons[Accessibility.Id.Login.submit].tap()
             } else {
                 app.buttons[Accessibility.Id.Login.submitNew].tap()
