@@ -21,6 +21,7 @@
 //
 
 import Foundation
+import PIALibrary
 
 class DNSList: NSObject {
     
@@ -155,6 +156,22 @@ class DNSList: NSObject {
             }
         }
         return L10n.Settings.Dns.custom
+    }
+    
+    /// Return if a custom DNS is set for given protocol and its configured DNS servers
+    func hasCustomDNS(for vpnType: String, in dnsServers: [String]) -> Bool {
+        if vpnType == IKEv2Profile.vpnType || dnsServers.isEmpty {
+            return false
+        }
+        
+        for dns in self.dnsList {
+            for (_, ipsList) in dns {
+                if dnsServers == ipsList {
+                    return true
+                }
+            }
+        }
+        return false
     }
     
     /// Updates the content of the dnsList object into the plist

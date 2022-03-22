@@ -208,6 +208,7 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
     }
 
     @objc func refreshSettings() {
+        updateCustomDNSAppPreferences()
         tableView.reloadData()
     }
     
@@ -462,6 +463,19 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
 
         refreshSettings()
         reportUpdatedPreferences()
+    }
+    
+    private func updateCustomDNSAppPreferences() {
+        var dnsServers = pendingOpenVPNConfiguration.dnsServers
+        if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+            dnsServers = pendingWireguardVPNConfiguration.customDNSServers
+        }
+        
+        if let dnsServers = dnsServers {
+            AppPreferences.shared.usesCustomDNS = DNSList.shared.hasCustomDNS(for: pendingPreferences.vpnType, in: dnsServers)
+        } else {
+            AppPreferences.shared.usesCustomDNS = false
+        }
     }
     
     // MARK: ModalController
