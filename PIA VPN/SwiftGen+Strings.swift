@@ -111,6 +111,13 @@ internal enum L10n {
         internal static let message = L10n.tr("Localizable", "account.subscriptions.short.message")
       }
     }
+    internal enum Survey {
+      /// Want to help make PIA better? Let us know how we can improve!
+      /// Take The Survey
+      internal static let message = L10n.tr("Localizable", "account.survey.message")
+      /// Take The Survey
+      internal static let messageLink = L10n.tr("Localizable", "account.survey.messageLink")
+    }
     internal enum Update {
       internal enum Email {
         internal enum Require {

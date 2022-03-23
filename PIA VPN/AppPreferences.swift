@@ -99,10 +99,14 @@ class AppPreferences {
         static let checksDipExpirationRequest = "checksDipExpirationRequest"
         static let showNewInitialScreen = "showNewInitialScreen"
         
+        // Survey
+        static let userInteractedWithSurvey = "userInteractedWithSurvey"
+        static let successConnectionsUntilSurvey = "successConnectionsUntilSurvey"
+        
         // Dev
         static let appEnvironmentIsProduction = "AppEnvironmentIsProduction"
         static let stagingVersion = "StagingVersion"
-
+        
     }
 
     static let shared = AppPreferences()
@@ -518,7 +522,25 @@ class AppPreferences {
             defaults.set(newValue, forKey: Entries.stagingVersion)
         }
     }
-
+    
+    var userInteractedWithSurvey: Bool {
+        get {
+            return defaults.bool(forKey: Entries.userInteractedWithSurvey)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.userInteractedWithSurvey)
+        }
+    }
+    
+    var successConnectionsUntilSurvey: Int? {
+        get {
+            return defaults.value(forKey: Entries.successConnectionsUntilSurvey) as? Int
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.successConnectionsUntilSurvey)
+        }
+    }
+    
     private init() {
         guard let defaults = UserDefaults(suiteName: AppConstants.appGroup) else {
             fatalError("Unable to initialize app preferences")
@@ -555,6 +577,7 @@ class AppPreferences {
             Entries.showsDedicatedIPView: true,
             Entries.disablesMultiDipTokens: true,
             Entries.checksDipExpirationRequest: true,
+            Entries.userInteractedWithSurvey: false,
             Entries.stagingVersion: 0,
             Entries.appEnvironmentIsProduction: Client.environment == .production ? true : false,
         ])
@@ -777,12 +800,15 @@ class AppPreferences {
         todayWidgetVpnSocket = "UDP"
         todayWidgetTrustedNetwork = false
         Client.resetServers(completionBlock: {_ in })
+        successConnections = 0
         failureConnections = 0
         showGeoServers = true
         stopInAppMessages = false
         dedicatedTokenIPReleation = [:]
         appEnvironmentIsProduction = Client.environment == .production ? true : false
         MessagesManager.shared.reset()
+        userInteractedWithSurvey = false
+        successConnectionsUntilSurvey = nil
     }
     
     func clean() {
@@ -809,6 +835,7 @@ class AppPreferences {
         let preferences = Client.preferences.editable().reset()
         preferences.commit()
         Client.resetServers(completionBlock: {_ in })
+        successConnections = 0
         failureConnections = 0
         showGeoServers = true
         stopInAppMessages = false
@@ -816,6 +843,8 @@ class AppPreferences {
         dedicatedTokenIPReleation = [:]
         MessagesManager.shared.reset()
         appEnvironmentIsProduction = Client.environment == .production ? true : false
+        userInteractedWithSurvey = false
+        successConnectionsUntilSurvey = nil
     }
     
 //    + (void)eraseForTesting;
@@ -858,4 +887,10 @@ class AppPreferences {
             }
         }
     }
+    
+    // MARK: Connections
+    func incrementSuccessConnections() {
+        successConnections += 1
+    }
+    
 }

@@ -37,7 +37,7 @@ class RatingManager {
     private var successConnectionsUntilPromptAgain: Int
     private var timeIntervalUntilPromptAgain: Double
     private var errorInConnectionsUntilPrompt: Int
-
+    
     init() {
         self.successConnectionsUntilPrompt = AppConfiguration.Rating.successConnectionsUntilPrompt
         self.successConnectionsUntilPromptAgain = AppConfiguration.Rating.successConnectionsUntilPromptAgain
@@ -45,14 +45,12 @@ class RatingManager {
         self.timeIntervalUntilPromptAgain = AppConfiguration.Rating.timeIntervalUntilPromptAgain
     }
     
-    func logSuccessConnection() {
+    func handleConnectionSuccess() {
 
-        AppPreferences.shared.successConnections += 1
         if AppPreferences.shared.successConnections == self.successConnectionsUntilPrompt {
             log.debug("Show rating")
             reviewApp()
         } else if AppPreferences.shared.canAskAgainForReview {
-            
             let now = Date()
 
             if AppPreferences.shared.successConnections >= self.successConnectionsUntilPromptAgain,
@@ -65,7 +63,7 @@ class RatingManager {
         
     }
     
-    func logError() {
+    func handleConnectionError() {
         if Client.daemons.isNetworkReachable {
             if AppPreferences.shared.failureConnections == self.errorInConnectionsUntilPrompt {
                 askForConnectionIssuesFeedback()

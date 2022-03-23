@@ -109,10 +109,12 @@
 "account.subscriptions.monthly" = "Månedsplan";
 "account.subscriptions.trial" = "Prøveplan";
 "account.unauthorized" = "Noe gikk galt. Prøv å logge inn igjen.";
-"account.delete" = "Delete Account";
-"account.delete.alert.title" = "Are you sure?";
-"account.delete.alert.message" = "Deleting your PIA account is permanent and irreversible. You will not be able to retrieve your PIA credentials after performing this action. Please note that this action only deletes your PIA account from our database, but it does NOT delete your subscription. You will need to go to your Apple account and cancel the Private Internet Access subscription from there. Otherwise, you will still be charged, even though your PIA account will no longer be active.";
-"account.delete.alert.failureMessage" = "Something went wrong while deleting your account, please try again later.";
+"account.delete" = "Slett konto";
+"account.delete.alert.title" = "Er du sikker?";
+"account.delete.alert.message" = "Sletting av PIA-kontoen er permanent og kan ikke reverseres. Du vil ikke kunne hente PIA-legitimasjonen etter at denne handlingen er utført. Vær oppmerksom på at denne handlingen bare sletter PIA-kontoen fra databasen, og sletter IKKE abonnementet. Du må gå til Apple-kontoen og kansellere abonnementet på Private Internet Access derfra. Ellers blir du fortsatt belastet, selv om PIA-kontoen ikke lenger er aktiv.";
+"account.delete.alert.failureMessage" = "Noe gikk galt ved sletting av kontoen. Prøv på nytt senere.";
+"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
+"account.survey.messageLink" = "Take The Survey";
 
 // SETTINGS
 
@@ -395,6 +397,7 @@
 "dedicated.ip.message.valid.token" = "Den dedikerte IP-en din ble aktivert. Den blir tilgjengelig i regionvalg-listen.";
 "dedicated.ip.message.expired.token" = "Tokenet er utløpt. Generer et nytt et fra kontosiden din på nettstedet.";
 "dedicated.ip.message.error.token" = "Tokenet er utløpt. Generer et nytt et fra kontosiden din på nettstedet.";
+"dedicated.ip.message.error.retryafter" = "Too many failed token activation requests. Please try again after %@ second(s).";
 "dedicated.ip.message.token.willexpire" = "Den dedikerte IP-en din utløper snart. Skaff deg en ny en";
 "dedicated.ip.message.token.willexpire.link" = "Skaff deg en ny en";
 "dedicated.ip.message.ip.updated" = "Den dedikerte IP-en din ble oppdatert";
