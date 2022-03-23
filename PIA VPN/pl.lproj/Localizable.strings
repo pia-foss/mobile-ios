@@ -109,10 +109,12 @@
 "account.subscriptions.monthly" = "Plan miesięczny";
 "account.subscriptions.trial" = "Plan próbny";
 "account.unauthorized" = "Coś poszło nie tak. zalogować się ponownie.";
-"account.delete" = "Delete Account";
-"account.delete.alert.title" = "Are you sure?";
-"account.delete.alert.message" = "Deleting your PIA account is permanent and irreversible. You will not be able to retrieve your PIA credentials after performing this action. Please note that this action only deletes your PIA account from our database, but it does NOT delete your subscription. You will need to go to your Apple account and cancel the Private Internet Access subscription from there. Otherwise, you will still be charged, even though your PIA account will no longer be active.";
-"account.delete.alert.failureMessage" = "Something went wrong while deleting your account, please try again later.";
+"account.delete" = "Usuń konto";
+"account.delete.alert.title" = "Czy na pewno?";
+"account.delete.alert.message" = "Usunięcie Twojego konta PIA będzie trwałe i nieodwracalne. Po tej akcji nie będziesz mógł pobrać swoich danych logowania PIA. Ta akcja powoduje tylko usunięcie konta PIA z naszej bazy danych, ale NIE powoduje usunięcia subskrypcji. W tym celu należy przejść do swojego konta Apple i anulować tam subskrypcję Private Internet Access. W przeciwnym razie nadal będą pobierane opłaty, mimo że konto PIA nie będzie już aktywne.";
+"account.delete.alert.failureMessage" = "Coś poszło nie tak podczas usuwania konta, spróbuj jeszcze raz później.";
+"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
+"account.survey.messageLink" = "Take The Survey";
 
 // SETTINGS
 
@@ -395,6 +397,7 @@
 "dedicated.ip.message.valid.token" = "Twój dedykowany adres IP został aktywowany. Będzie dostępny na liście wyboru regionu.";
 "dedicated.ip.message.expired.token" = "Twój token stracił ważność. Wygeneruj nowy na stronie swojego konta w serwisie.";
 "dedicated.ip.message.error.token" = "Twój token stracił ważność. Wygeneruj nowy na stronie swojego konta w serwisie.";
+"dedicated.ip.message.error.retryafter" = "Too many failed token activation requests. Please try again after %@ second(s).";
 "dedicated.ip.message.token.willexpire" = "Twój dedykowany adres IP wkrótce wygasa. Kup nowy adres.";
 "dedicated.ip.message.token.willexpire.link" = "Kup nowy adres.";
 "dedicated.ip.message.ip.updated" = "Zaktualizowano Twój dedykowany adres IP";

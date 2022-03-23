@@ -109,10 +109,12 @@
 "account.subscriptions.monthly" = "月間プラン";
 "account.subscriptions.trial" = "トライアルプラン";
 "account.unauthorized" = "問題が発生しました。もう一度ログインしてみてください";
-"account.delete" = "Delete Account";
-"account.delete.alert.title" = "Are you sure?";
-"account.delete.alert.message" = "Deleting your PIA account is permanent and irreversible. You will not be able to retrieve your PIA credentials after performing this action. Please note that this action only deletes your PIA account from our database, but it does NOT delete your subscription. You will need to go to your Apple account and cancel the Private Internet Access subscription from there. Otherwise, you will still be charged, even though your PIA account will no longer be active.";
-"account.delete.alert.failureMessage" = "Something went wrong while deleting your account, please try again later.";
+"account.delete" = "アカウントを削除";
+"account.delete.alert.title" = "本当によろしいですか？";
+"account.delete.alert.message" = "PIA アカウントの削除は永久的な操作であり、元に戻すことはできません。この操作を実行した後に、お持ちのPIA資格情報を取得することはできません。この操作ではお持ちのPIAアカウントが削除されるだけで、ご契約が削除されるわけではないことにご留意ください。お持ちのAppleアカウントにアクセスし、そこでPrivate Internet Access契約をキャンセルしない限り、お持ちのPIAアカウントが無効になった後も請求が行われます。";
+"account.delete.alert.failureMessage" = "お持ちのアカウントを削除中に問題が発生しました。後でもう一度試してください。";
+"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
+"account.survey.messageLink" = "Take The Survey";
 
 // SETTINGS
 
@@ -395,6 +397,7 @@
 "dedicated.ip.message.valid.token" = "専用IPが正常にアクティベートされました。地域選択リストで利用できるようになります。";
 "dedicated.ip.message.expired.token" = "トークンの有効期限が切れています。ウェブサイトのアカウントページから新しいトークンを生成してください。";
 "dedicated.ip.message.error.token" = "トークンの有効期限が切れています。ウェブサイトのアカウントページから新しいトークンを生成してください。";
+"dedicated.ip.message.error.retryafter" = "Too many failed token activation requests. Please try again after %@ second(s).";
 "dedicated.ip.message.token.willexpire" = "あなたの専用IPは間もなく期限が切れます。新しい専用IPを入手してください";
 "dedicated.ip.message.token.willexpire.link" = "新しい専用IPを入手してください";
 "dedicated.ip.message.ip.updated" = "あなたの専用IPが更新されました";

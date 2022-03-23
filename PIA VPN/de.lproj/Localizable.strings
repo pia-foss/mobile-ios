@@ -109,10 +109,12 @@
 "account.subscriptions.monthly" = "Monatsabo";
 "account.subscriptions.trial" = "Testversion";
 "account.unauthorized" = "Etwas ging schief. Bitte versuchen, erneut anzumelden";
-"account.delete" = "Delete Account";
-"account.delete.alert.title" = "Are you sure?";
-"account.delete.alert.message" = "Deleting your PIA account is permanent and irreversible. You will not be able to retrieve your PIA credentials after performing this action. Please note that this action only deletes your PIA account from our database, but it does NOT delete your subscription. You will need to go to your Apple account and cancel the Private Internet Access subscription from there. Otherwise, you will still be charged, even though your PIA account will no longer be active.";
-"account.delete.alert.failureMessage" = "Something went wrong while deleting your account, please try again later.";
+"account.delete" = "Konto löschen";
+"account.delete.alert.title" = "Sind Sie sicher?";
+"account.delete.alert.message" = "Die Löschung Ihres PIA-Kontos ist dauerhaft und unwiderruflich. Sie können Ihre PIA-Anmeldedaten nach dieser Aktion nicht wiederherstellen. Bitte beachten Sie, dass diese Aktion nur Ihr PIA-Konto aus unserer Datenbank löscht, aber NICHT Ihr Abonnement. Sie müssen zu Ihrem Apple-Konto gehen und das Private Internet Access-Abonnement von dort aus kündigen. Anderenfalls werden Sie weiterhin belastet, auch wenn Ihr PIA-Konto nicht mehr aktiv ist.";
+"account.delete.alert.failureMessage" = "Etwas schlug beim Löschen Ihres Kontos fehl. Versuchen Sie es bitte später noch einmal.";
+"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
+"account.survey.messageLink" = "Take The Survey";
 
 // SETTINGS
 
@@ -395,6 +397,7 @@
 "dedicated.ip.message.valid.token" = "Ihre Dedizierte IP wurde erfolgreich aktiviert. Sie wird in der Auswahlliste Ihrer Region verfügbar sein.";
 "dedicated.ip.message.expired.token" = "Ihr Token ist abgelaufen. Bitte generieren Sie von Ihrer Konto-Seite auf der Webseite ein neues.";
 "dedicated.ip.message.error.token" = "Ihr Token ist abgelaufen. Bitte generieren Sie ein neues auf Ihrer Konto-Seite auf der Webseite.";
+"dedicated.ip.message.error.retryafter" = "Too many failed token activation requests. Please try again after %@ second(s).";
 "dedicated.ip.message.token.willexpire" = "Ihre dedizierte IP wird bald ablaufen. Eine neue abrufen";
 "dedicated.ip.message.token.willexpire.link" = "Eine neue abrufen";
 "dedicated.ip.message.ip.updated" = "Ihre dedizierte IP wurde aktualisiert";

@@ -109,10 +109,12 @@
 "account.subscriptions.monthly" = "Maandelijks abonnement";
 "account.subscriptions.trial" = "Proefabonnement";
 "account.unauthorized" = "Er is iets fout gegaan. Probeer opnieuw in te loggen.";
-"account.delete" = "Delete Account";
-"account.delete.alert.title" = "Are you sure?";
-"account.delete.alert.message" = "Deleting your PIA account is permanent and irreversible. You will not be able to retrieve your PIA credentials after performing this action. Please note that this action only deletes your PIA account from our database, but it does NOT delete your subscription. You will need to go to your Apple account and cancel the Private Internet Access subscription from there. Otherwise, you will still be charged, even though your PIA account will no longer be active.";
-"account.delete.alert.failureMessage" = "Something went wrong while deleting your account, please try again later.";
+"account.delete" = "Verwijder account";
+"account.delete.alert.title" = "Weet u het zeker?";
+"account.delete.alert.message" = "Het verwijderen van uw PIA-account is definitief en onomkeerbaar. U zult uw PIA-inloggegevens niet kunnen ophalen na het uitvoeren van deze actie. Houd ermee rekening dat deze actie alleen uw PIA-account verwijdert uit onze database, maar NIET uw abonnement. Hiervoor moet u naar uw Apple-account gaan en daar het Private Internet Access-abonnement annuleren. Anders worden u nog steeds kosten aangerekend, hoewel uw PIA-account niet langer actief is.";
+"account.delete.alert.failureMessage" = "Er ging iets fout bij het verwijderen van uw account. Probeer het later nog een keer.";
+"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
+"account.survey.messageLink" = "Take The Survey";
 
 // SETTINGS
 
@@ -395,6 +397,7 @@
 "dedicated.ip.message.valid.token" = "Uw dedicated IP is geactiveerd. Het is beschikbaar in uw regioselectielijst.";
 "dedicated.ip.message.expired.token" = "Uw code is verlopen. Genereer een nieuwe via uw accountpagina op de website.";
 "dedicated.ip.message.error.token" = "Uw code is verlopen. Genereer een nieuwe via uw accountpagina op de website.";
+"dedicated.ip.message.error.retryafter" = "Too many failed token activation requests. Please try again after %@ second(s).";
 "dedicated.ip.message.token.willexpire" = "Uw dedicated IP verloopt binnenkort. Haal een nieuwe";
 "dedicated.ip.message.token.willexpire.link" = "Haal een nieuwe";
 "dedicated.ip.message.ip.updated" = "Uw dedicated IP is bijgewerkt";
