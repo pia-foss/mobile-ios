@@ -25,7 +25,6 @@ import PIALibrary
 import TunnelKit
 import SwiftyBeaver
 import Intents
-import UIKit
 
 private let log = SwiftyBeaver.self
 
@@ -121,9 +120,9 @@ class AppPreferences {
 
     private var isTransitioningTheme = false
     
-    private var deviceType: String {
+    var deviceType: String {
         get {
-            return defaults.string(forKey: Entries.deviceType) ?? UIDevice.current.type.rawValue
+            return defaults.string(forKey: Entries.deviceType) ?? ""
         }
         set {
             defaults.set(newValue, forKey: Entries.deviceType)
@@ -571,7 +570,6 @@ class AppPreferences {
 
         defaults.register(defaults: [
             Entries.version: AppPreferences.currentVersion,
-            Entries.deviceType: UIDevice.current.type.rawValue,
             Entries.appVersion: "",
             Entries.launched: false,
             Entries.regionFilter: RegionFilter.latency.rawValue,
