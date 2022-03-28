@@ -208,7 +208,6 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
     }
 
     @objc func refreshSettings() {
-        updateCustomDNSAppPreferences()
         tableView.reloadData()
     }
     
@@ -461,6 +460,7 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
             }
         }
 
+        updateCustomDNSAppPreferences()
         refreshSettings()
         reportUpdatedPreferences()
     }

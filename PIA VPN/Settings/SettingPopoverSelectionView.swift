@@ -110,6 +110,7 @@ extension ProtocolPopoverSelectionView: UITableViewDelegate, UITableViewDataSour
         
         let vpnType = protocols[indexPath.row]
         pendingPreferences.vpnType = vpnType
+        settingsDelegate.updateSetting(ProtocolsSections.protocolSelection, withValue: nil)
         
         Macros.postNotification(.PIASettingsHaveChanged)
         Macros.postNotification(.RefreshSettings)
