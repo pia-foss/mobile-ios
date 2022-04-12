@@ -123,7 +123,7 @@ struct AppConfiguration {
     }
 
     struct Rating {
-
+        static let successfulDisconnectionsUntilPrompt: Int = 2
         static let successConnectionsUntilPrompt: Int = 3
         static let successConnectionsUntilPromptAgain: Int = 50
         static let errorInConnectionsUntilPrompt: Int = 1

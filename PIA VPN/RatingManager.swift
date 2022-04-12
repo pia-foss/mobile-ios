@@ -33,23 +33,44 @@ class RatingManager {
     
     static let shared = RatingManager()
 
+    private var successfulDisconnectionsUntilPrompt: Int
     private var successConnectionsUntilPrompt: Int
     private var successConnectionsUntilPromptAgain: Int
     private var timeIntervalUntilPromptAgain: Double
     private var errorInConnectionsUntilPrompt: Int
     
     init() {
+        self.successfulDisconnectionsUntilPrompt = AppConfiguration.Rating.successfulDisconnectionsUntilPrompt
         self.successConnectionsUntilPrompt = AppConfiguration.Rating.successConnectionsUntilPrompt
         self.successConnectionsUntilPromptAgain = AppConfiguration.Rating.successConnectionsUntilPromptAgain
         self.errorInConnectionsUntilPrompt = AppConfiguration.Rating.errorInConnectionsUntilPrompt
         self.timeIntervalUntilPromptAgain = AppConfiguration.Rating.timeIntervalUntilPromptAgain
     }
     
-    func handleConnectionSuccess() {
-
-        if AppPreferences.shared.successConnections == self.successConnectionsUntilPrompt {
+    func handleConnectionStatusChanged() {
+        // By default do not use custom alert
+        // and compare should be: when vpn is disconnected
+        var useCustomAlert: Bool = false
+        var vpnComparisonState: VPNStatus = .disconnected
+        if Client.configuration.featureFlags.contains(Client.FeatureFlags.useCustomRatingPopup) {
+            useCustomAlert = true
+            vpnComparisonState = .connected
+        }
+        
+        if Client.providers.vpnProvider.vpnStatus == vpnComparisonState {
+            showAppReviewWith(customPopup: useCustomAlert)
+        }
+    }
+    
+    private func showAppReviewWith(customPopup useCustomDialog: Bool) {
+        let requirementMetForRatingAlert = useCustomDialog ? connectionCondition() : disonnectionCondition()
+        if requirementMetForRatingAlert {
             log.debug("Show rating")
-            showDefaultAlertForAppReview()
+            if useCustomDialog {
+                showCustomAlertForAppReview()
+            } else {
+                showDefaultAlertForAppReview()
+            }
         } else if AppPreferences.shared.canAskAgainForReview {
             let now = Date()
 
@@ -60,7 +81,14 @@ class RatingManager {
                 reviewAppWithoutPrompt()
             }
         }
-        
+    }
+    
+    private func disonnectionCondition() -> Bool {
+        return AppPreferences.shared.successDisconnections == self.successfulDisconnectionsUntilPrompt
+    }
+    
+    private func connectionCondition() -> Bool {
+        return AppPreferences.shared.successConnections == self.successConnectionsUntilPrompt
     }
     
     func handleConnectionError() {
