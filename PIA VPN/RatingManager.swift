@@ -49,7 +49,7 @@ class RatingManager {
 
         if AppPreferences.shared.successConnections == self.successConnectionsUntilPrompt {
             log.debug("Show rating")
-            reviewApp()
+            showDefaultAlertForAppReview()
         } else if AppPreferences.shared.canAskAgainForReview {
             let now = Date()
 
@@ -72,7 +72,15 @@ class RatingManager {
             AppPreferences.shared.failureConnections += 1
         }
     }
-
+    
+    private func ratingAlertCancelHandler() {
+        log.debug("No review but maybe we can try in the future")
+        AppPreferences.shared.canAskAgainForReview = true
+        if AppPreferences.shared.lastRatingRejection == nil {
+            AppPreferences.shared.lastRatingRejection = Date()
+        }
+    }
+    
     private func openRatingViewInAppstore() {
         
         let urlStr = AppConstants.Reviews.appReviewUrl
@@ -92,7 +100,40 @@ class RatingManager {
         SKStoreReviewController.requestReview()
     }
     
-    private func reviewApp() {
+    // MARK: Default Alerts
+    
+    private func showDefaultAlertForAppReview() {
+        guard let rootView = AppDelegate.delegate().topViewControllerWithRootViewController(rootViewController: UIApplication.shared.keyWindow?.rootViewController) else {
+            return
+        }
+        
+        let sheet = Macros.alertController(L10n.Rating.Enjoy.question, nil)
+        sheet.addAction(UIAlertAction(title: L10n.Rating.Alert.Button.notreally, style: .default, handler: { action in
+            // Ask for feedback
+            let alert = self.createCustomFeedbackDialog()
+            rootView.present(alert, animated: true, completion: nil)
+        }))
+        sheet.addAction(UIAlertAction(title: L10n.Global.yes, style: .default, handler: { action in
+            let alert = self.createDefaultReviewAlert()
+            rootView.present(alert, animated: true, completion: nil)
+        }))
+        rootView.present(sheet, animated: true, completion: nil)
+    }
+    
+    private func createDefaultReviewAlert() -> UIAlertController {
+        let sheet = Macros.alertController(L10n.Rating.Rate.question, nil)
+        sheet.addAction(UIAlertAction(title: L10n.Rating.Alert.Button.nothanks, style: .default, handler: { action in
+            self.ratingAlertCancelHandler()
+        }))
+        sheet.addAction(UIAlertAction(title: L10n.Rating.Alert.Button.oksure, style: .default, handler: { action in
+            self.openRatingViewInAppstore()
+        }))
+        return sheet
+    }
+    
+    // MARK: Custom Alerts
+    
+    private func showCustomAlertForAppReview() {
         
         guard let rootView = AppDelegate.delegate().topViewControllerWithRootViewController(rootViewController: UIApplication.shared.keyWindow?.rootViewController) else {
             return
@@ -104,12 +145,12 @@ class RatingManager {
         )
         sheet.addCancelActionWithTitle(L10n.Global.no, handler: {
             // Ask for feedback
-            let alert = self.feedback()
+            let alert = self.createCustomFeedbackDialog()
             rootView.present(alert, animated: true, completion: nil)
         })
         
         sheet.addActionWithTitle(L10n.Global.yes) {
-            let alert = self.askForReview()
+            let alert = self.createCustomReviewDialog()
             rootView.present(alert, animated: true, completion: nil)
         }
         
@@ -117,7 +158,7 @@ class RatingManager {
 
     }
     
-    private func feedback() -> PopupDialog {
+    private func createCustomFeedbackDialog() -> PopupDialog {
         
         let sheet = Macros.alert(
             L10n.Rating.Problems.question,
@@ -135,18 +176,14 @@ class RatingManager {
 
     }
     
-    private func askForReview() -> PopupDialog {
+    private func createCustomReviewDialog() -> PopupDialog {
         
         let sheet = Macros.alert(
-            L10n.Rating.Rate.question,
+            L10n.Rating.Review.question,
             L10n.Rating.Rate.subtitle
         )
         sheet.addCancelActionWithTitle(L10n.Global.no, handler: {
-            log.debug("No review but maybe we can try in the future")
-            AppPreferences.shared.canAskAgainForReview = true
-            if AppPreferences.shared.lastRatingRejection == nil {
-                AppPreferences.shared.lastRatingRejection = Date()
-            }
+            self.ratingAlertCancelHandler()
         })
         
         sheet.addActionWithTitle(L10n.Global.yes) {

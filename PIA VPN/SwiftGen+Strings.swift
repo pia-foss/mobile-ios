@@ -640,6 +640,16 @@ internal enum L10n {
   }
 
   internal enum Rating {
+    internal enum Alert {
+      internal enum Button {
+        /// No, thanks.
+        internal static let nothanks = L10n.tr("Localizable", "rating.alert.button.nothanks")
+        /// Not Really
+        internal static let notreally = L10n.tr("Localizable", "rating.alert.button.notreally")
+        /// Ok, sure!
+        internal static let oksure = L10n.tr("Localizable", "rating.alert.button.oksure")
+      }
+    }
     internal enum Enjoy {
       /// Are you enjoying PIA VPN?
       internal static let question = L10n.tr("Localizable", "rating.enjoy.question")
@@ -663,10 +673,14 @@ internal enum L10n {
       internal static let subtitle = L10n.tr("Localizable", "rating.problems.subtitle")
     }
     internal enum Rate {
-      /// How about an AppStore review?
+      /// How about a rating on the AppStore?
       internal static let question = L10n.tr("Localizable", "rating.rate.question")
       /// We appreciate you sharing your experience
       internal static let subtitle = L10n.tr("Localizable", "rating.rate.subtitle")
+    }
+    internal enum Review {
+      /// How about an AppStore review?
+      internal static let question = L10n.tr("Localizable", "rating.review.question")
     }
   }
 
