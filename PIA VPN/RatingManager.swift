@@ -33,14 +33,26 @@ class RatingManager {
     
     static let shared = RatingManager()
 
-    private var successfulDisconnectionsUntilPrompt: Int
+    private var successDisconnectionsUntilPrompt: Int
     private var successConnectionsUntilPrompt: Int
     private var successConnectionsUntilPromptAgain: Int
     private var timeIntervalUntilPromptAgain: Double
     private var errorInConnectionsUntilPrompt: Int
     
+    private var isRatingFlagAvailable: Bool {
+        return Client.configuration.featureFlags.contains(Client.FeatureFlags.useCustomRatingPopup)
+    }
+    
+    private var disconnectionCondition: Bool {
+        return AppPreferences.shared.successDisconnections == self.successDisconnectionsUntilPrompt
+    }
+    
+    private var connectionCondition: Bool {
+        return AppPreferences.shared.successConnections == self.successConnectionsUntilPrompt
+    }
+    
     init() {
-        self.successfulDisconnectionsUntilPrompt = AppConfiguration.Rating.successfulDisconnectionsUntilPrompt
+        self.successDisconnectionsUntilPrompt = AppConfiguration.Rating.successDisconnectionsUntilPrompt
         self.successConnectionsUntilPrompt = AppConfiguration.Rating.successConnectionsUntilPrompt
         self.successConnectionsUntilPromptAgain = AppConfiguration.Rating.successConnectionsUntilPromptAgain
         self.errorInConnectionsUntilPrompt = AppConfiguration.Rating.errorInConnectionsUntilPrompt
@@ -49,22 +61,15 @@ class RatingManager {
     
     func handleConnectionStatusChanged() {
         // By default do not use custom alert
-        // and compare should be: when vpn is disconnected
-        var useCustomAlert: Bool = false
-        var vpnComparisonState: VPNStatus = .disconnected
-        if Client.configuration.featureFlags.contains(Client.FeatureFlags.useCustomRatingPopup) {
-            useCustomAlert = true
-            vpnComparisonState = .connected
-        }
-        
-        if Client.providers.vpnProvider.vpnStatus == vpnComparisonState {
-            showAppReviewWith(customPopup: useCustomAlert)
+        // and comparison should be: when vpn is disconnected
+        if Client.providers.vpnProvider.vpnStatus == (isRatingFlagAvailable ? .connected : .disconnected) {
+            showAppReviewWith(customPopup: isRatingFlagAvailable)
         }
     }
     
     private func showAppReviewWith(customPopup useCustomDialog: Bool) {
-        let requirementMetForRatingAlert = useCustomDialog ? connectionCondition() : disonnectionCondition()
-        if requirementMetForRatingAlert {
+        let shouldShowRatingAlert = useCustomDialog ? connectionCondition : disconnectionCondition
+        if shouldShowRatingAlert {
             log.debug("Show rating")
             if useCustomDialog {
                 showCustomAlertForAppReview()
@@ -81,14 +86,6 @@ class RatingManager {
                 reviewAppWithoutPrompt()
             }
         }
-    }
-    
-    private func disonnectionCondition() -> Bool {
-        return AppPreferences.shared.successDisconnections == self.successfulDisconnectionsUntilPrompt
-    }
-    
-    private func connectionCondition() -> Bool {
-        return AppPreferences.shared.successConnections == self.successConnectionsUntilPrompt
     }
     
     func handleConnectionError() {
@@ -138,7 +135,7 @@ class RatingManager {
         let sheet = Macros.alertController(L10n.Rating.Enjoy.question, nil)
         sheet.addAction(UIAlertAction(title: L10n.Rating.Alert.Button.notreally, style: .default, handler: { action in
             // Ask for feedback
-            let alert = self.createCustomFeedbackDialog()
+            let alert = self.createDefaultFeedbackDialog()
             rootView.present(alert, animated: true, completion: nil)
         }))
         sheet.addAction(UIAlertAction(title: L10n.Global.yes, style: .default, handler: { action in
@@ -146,6 +143,17 @@ class RatingManager {
             rootView.present(alert, animated: true, completion: nil)
         }))
         rootView.present(sheet, animated: true, completion: nil)
+    }
+    
+    private func createDefaultFeedbackDialog() -> UIAlertController {
+        let sheet = Macros.alertController(L10n.Rating.Problems.question, L10n.Rating.Problems.subtitle)
+        sheet.addAction(UIAlertAction(title: L10n.Global.no, style: .default, handler: { action in
+            log.debug("No feedback")
+        }))
+        sheet.addAction(UIAlertAction(title: L10n.Global.yes, style: .default, handler: { action in
+            self.openFeedbackWebsite()
+        }))
+        return sheet
     }
     
     private func createDefaultReviewAlert() -> UIAlertController {
