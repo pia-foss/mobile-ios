@@ -40,7 +40,7 @@ class RatingManager {
     private var errorInConnectionsUntilPrompt: Int
     
     private var isRatingFlagAvailable: Bool {
-        return Client.configuration.featureFlags.contains(Client.FeatureFlags.useCustomRatingPopup)
+        return Client.configuration.featureFlags.contains(Client.FeatureFlags.disableSystemRatingDialog)
     }
     
     private var disconnectionCondition: Bool {
