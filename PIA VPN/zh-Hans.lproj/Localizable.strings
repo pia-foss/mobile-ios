@@ -372,11 +372,15 @@
 "rating.enjoy.subtitle" = "希望我们的 VPN 产品符合您的期望";
 "rating.problems.question" = "出什么问题了？";
 "rating.problems.subtitle" = "您希望提供反馈意见吗？我们可以帮助您改善使用 PIA 的体验";
-"rating.rate.question" = "在 AppStore 上发表评论如何？";
+"rating.review.question" = "在 AppStore 上发表评论如何？";
+"rating.rate.question" = "在 AppStore 上评级如何？";
 "rating.rate.subtitle" = "感谢您分享使用体验";
 "rating.error.question" = "无法建立连接";
 "rating.error.subtitle" = "您可以尝试选择其他地区，也可以提交支持请求来告知我们。";
 "rating.error.button.send" = "发送反馈";
+"rating.alert.button.notreally" = "不太想";
+"rating.alert.button.nothanks" = "不用，谢谢.";
+"rating.alert.button.oksure" = "好的，没问题！";
 
 // CALLING CARDS
 "card.wireguard.title" = "立即试用 WireGuard®！";
@@ -397,7 +401,7 @@
 "dedicated.ip.message.valid.token" = "您的专用 IP 已成功激活。您可以在“地区”选择列表中使用该专用 IP。";
 "dedicated.ip.message.expired.token" = "您的令牌已过期。请从网站的“账户”页面中生成一个新的令牌。";
 "dedicated.ip.message.error.token" = "您的令牌已过期。请从网站的“账户”页面中生成一个新的令牌。";
-"dedicated.ip.message.error.retryafter" = "Too many failed token activation requests. Please try again after %@ second(s).";
+"dedicated.ip.message.error.retryafter" = "令牌激活请求失败次数太多。请在 %@ 秒后重试。";
 "dedicated.ip.message.token.willexpire" = "您的专用 IP 即将过期。请获取一个新的专用 IP";
 "dedicated.ip.message.token.willexpire.link" = "请获取一个新的专用 IP";
 "dedicated.ip.message.ip.updated" = "您的专用 IP 已更新";

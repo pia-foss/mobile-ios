@@ -372,11 +372,15 @@
 "rating.enjoy.subtitle" = "نأمل أن يلبي منتجنا لشبكات VPN توقعاتك";
 "rating.problems.question" = "ما الخلل الذي حصل؟";
 "rating.problems.subtitle" = "هل لديك أي ملاحظات؟ يمكننا مساعدتك على تحسين تجربتك في استخدام PIA";
-"rating.rate.question" = "ما رأيك بترك مراجعة في AppStore؟";
+"rating.review.question" = "ما رأيك بترك مراجعة في AppStore؟";
+"rating.rate.question" = "ماذا عن ترك تقييم في App Store؟";
 "rating.rate.subtitle" = "نقدّر لك مشاركة تجربتك";
 "rating.error.question" = "تعذّر تأسيس اتصال";
 "rating.error.subtitle" = "يمكنك محاولة تحديد منطقة مختلفة أو إعلامنا بها عن طريق فتح تذكرة دعم.";
 "rating.error.button.send" = "إرسال ملاحظات";
+"rating.alert.button.notreally" = "لا أرغب";
+"rating.alert.button.nothanks" = "لا، شكرًا.";
+"rating.alert.button.oksure" = "بالتأكيد";
 
 // CALLING CARDS
 "card.wireguard.title" = "جرّب ®WireGuard اليوم!";
@@ -397,7 +401,7 @@
 "dedicated.ip.message.valid.token" = "تم تنشيط عنوان IP المخصّص بنجاح. سيكون متاحًا في قائمة اختيار المنطقة.";
 "dedicated.ip.message.expired.token" = "انتهت صلاحية الرمز. يرجى إنشاء رمز جديد من صفحة حسابك على الموقع الإلكتروني.";
 "dedicated.ip.message.error.token" = "انتهت صلاحية الرمز. يرجى إنشاء رمز جديد من صفحة حسابك على الموقع الإلكتروني.";
-"dedicated.ip.message.error.retryafter" = "Too many failed token activation requests. Please try again after %@ second(s).";
+"dedicated.ip.message.error.retryafter" = "عدد طلبات تفعيل التوكن كبير جداً. يرجى إعادة المحاولة بعد %@ ثانية.";
 "dedicated.ip.message.token.willexpire" = "ستنتهي صلاحية عنوان IP المخصّص قريبًا. احصل على واحد جديد";
 "dedicated.ip.message.token.willexpire.link" = "احصل على واحد جديد";
 "dedicated.ip.message.ip.updated" = "تم تحديث عنوان IP المخصّص";
