@@ -312,4 +312,8 @@ extension AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
     
+    class func getRootViewController() -> UIViewController? {
+        return AppDelegate.delegate().topViewControllerWithRootViewController(rootViewController: UIApplication.shared.keyWindow?.rootViewController)
+    }
+    
 }

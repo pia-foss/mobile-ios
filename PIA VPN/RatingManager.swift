@@ -43,11 +43,11 @@ class RatingManager {
         return Client.configuration.featureFlags.contains(Client.FeatureFlags.disableSystemRatingDialog)
     }
     
-    private var disconnectionCondition: Bool {
+    private var targetDisconnectionsReachedForPrompt: Bool {
         return AppPreferences.shared.successDisconnections == self.successDisconnectionsUntilPrompt
     }
     
-    private var connectionCondition: Bool {
+    private var targetConnectionsReachedForPrompt: Bool {
         return AppPreferences.shared.successConnections == self.successConnectionsUntilPrompt
     }
     
@@ -68,13 +68,13 @@ class RatingManager {
     }
     
     private func showAppReviewWith(customPopup useCustomDialog: Bool) {
-        let shouldShowRatingAlert = useCustomDialog ? connectionCondition : disconnectionCondition
+        let shouldShowRatingAlert = useCustomDialog ? targetConnectionsReachedForPrompt : targetDisconnectionsReachedForPrompt
         if shouldShowRatingAlert {
             log.debug("Show rating")
             if useCustomDialog {
-                showCustomAlertForAppReview()
+                showCustomAlertForReview()
             } else {
-                showDefaultAlertForAppReview()
+                showDefaultAlertForReview()
             }
         } else if AppPreferences.shared.canAskAgainForReview {
             let now = Date()
@@ -127,8 +127,8 @@ class RatingManager {
     
     // MARK: Default Alerts
     
-    private func showDefaultAlertForAppReview() {
-        guard let rootView = AppDelegate.delegate().topViewControllerWithRootViewController(rootViewController: UIApplication.shared.keyWindow?.rootViewController) else {
+    private func showDefaultAlertForReview() {
+        guard let rootView = AppDelegate.getRootViewController() else {
             return
         }
         
@@ -169,9 +169,9 @@ class RatingManager {
     
     // MARK: Custom Alerts
     
-    private func showCustomAlertForAppReview() {
+    private func showCustomAlertForReview() {
         
-        guard let rootView = AppDelegate.delegate().topViewControllerWithRootViewController(rootViewController: UIApplication.shared.keyWindow?.rootViewController) else {
+        guard let rootView = AppDelegate.getRootViewController() else {
             return
         }
         
@@ -232,7 +232,7 @@ class RatingManager {
 
     private func askForConnectionIssuesFeedback() {
         
-        guard let rootView = AppDelegate.delegate().topViewControllerWithRootViewController(rootViewController: UIApplication.shared.keyWindow?.rootViewController) else {
+        guard let rootView = AppDelegate.getRootViewController() else {
             return
         }
         
