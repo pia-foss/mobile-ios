@@ -372,11 +372,15 @@
 "rating.enjoy.subtitle" = "เราหวังว่าผลิตภัณฑ์ VPN ของเราจะตอบโจทย์ความต้องการของคุณ";
 "rating.problems.question" = "มีอะไรผิดปกติเหรอ";
 "rating.problems.subtitle" = "คุณอยากที่จะให้ข้อเสนอแนะไหม เราช่วยปรับปรุงประสบการณ์การใช้งาน PIA ของคุณได้";
-"rating.rate.question" = "รีวิว AppStore เป็นอย่างไร?";
+"rating.review.question" = "รีวิวเราใน AppStore หน่อยไหม?";
+"rating.rate.question" = "ให้คะแนนเราใน AppStore หน่อยไหม?";
 "rating.rate.subtitle" = "ขอขอบคุณที่คุณช่วยแชร์ประสบการณ์";
 "rating.error.question" = "ไม่สามารถสร้างการเชื่อมต่อได้";
 "rating.error.subtitle" = "คุณสามารถลองเลือกภูมิภาคอื่นหรือแจ้งให้เราทราบโดยเปิดทิกเก็ตความช่วยเหลือ";
 "rating.error.button.send" = "ส่งความคิดเห็น";
+"rating.alert.button.notreally" = "ไม่ดีกว่า";
+"rating.alert.button.nothanks" = "ไม่ล่ะ ขอบคุณ.";
+"rating.alert.button.oksure" = "ได้เลย!";
 
 // CALLING CARDS
 "card.wireguard.title" = "ลอง WireGuard® ได้แล้ววันนี้!";
@@ -397,7 +401,7 @@
 "dedicated.ip.message.valid.token" = "IP เฉพาะของคุณเปิดใช้งานสำเร็จแล้ว จะมีอยู่ในรายการการเลือกภูมิภาคของคุณ";
 "dedicated.ip.message.expired.token" = "โทเค็นของคุณหมดอายุแล้ว โปรดสร้างใหม่จากหน้าบัญชีของคุณบนเว็บไซต์";
 "dedicated.ip.message.error.token" = "โทเค็นของคุณหมดอายุแล้ว โปรดสร้างใหม่จากหน้าบัญชีของคุณบนเว็บไซต์";
-"dedicated.ip.message.error.retryafter" = "Too many failed token activation requests. Please try again after %@ second(s).";
+"dedicated.ip.message.error.retryafter" = "มีคำขอเปิดใช้งานโทเค็นที่ล้มเหลวมากเกินไป โปรดลองอีกครั้งหลังเวลาผ่านไป %@ วินาที";
 "dedicated.ip.message.token.willexpire" = "IP เฉพาะของคุณจะหมดอายุในไม่ช้า รับใหม่";
 "dedicated.ip.message.token.willexpire.link" = "รับใหม่";
 "dedicated.ip.message.ip.updated" = "อัปเดต IP เฉพาะของคุณแล้ว";

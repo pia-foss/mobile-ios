@@ -372,11 +372,15 @@
 "rating.enjoy.subtitle" = "Nous espérons que notre produit VPN répond à vos attentes";
 "rating.problems.question" = "Quel était le problème ?";
 "rating.problems.subtitle" = "Vous voulez nous envoyer un commentaire ? Nous pouvons vous aider à améliorer votre expérience sur PIA";
-"rating.rate.question" = "Et un avis sur l'App Store ?";
+"rating.review.question" = "Et un avis sur l'App Store ?";
+"rating.rate.question" = "Et une note sur l’App Store ?";
 "rating.rate.subtitle" = "Nous apprécions que vous partagiez votre expérience";
 "rating.error.question" = "La connexion n'a pas pu être établie";
 "rating.error.subtitle" = "Vous pouvez essayer de sélectionner une autre région ou de nous en informer en ouvrant un ticket de support.";
 "rating.error.button.send" = "Envoyer un commentaire";
+"rating.alert.button.notreally" = "Non merci";
+"rating.alert.button.nothanks" = "Non, merci.";
+"rating.alert.button.oksure" = "Bien sûr !";
 
 // CALLING CARDS
 "card.wireguard.title" = "Essayez WireGuard® aujourd'hui !";
@@ -397,7 +401,7 @@
 "dedicated.ip.message.valid.token" = "Votre adresse IP dédiée a été activée avec succès. Elle sera disponible dans votre liste de sélection de région.";
 "dedicated.ip.message.expired.token" = "Votre jeton est expiré. Veuillez en générer un nouveau à partir de la page de votre compte sur le site Web.";
 "dedicated.ip.message.error.token" = "Votre jeton est expiré. Veuillez en générer un nouveau à partir de la page de votre compte sur le site Web.";
-"dedicated.ip.message.error.retryafter" = "Too many failed token activation requests. Please try again after %@ second(s).";
+"dedicated.ip.message.error.retryafter" = "Nombre trop élevé de demandes d’activation de jeton manquées. Veuillez réessayer dans %@ seconde(s).";
 "dedicated.ip.message.token.willexpire" = "Votre adresse IP dédiée expirera bientôt. Obtenez-en une nouvelle";
 "dedicated.ip.message.token.willexpire.link" = "Obtenez-en une nouvelle";
 "dedicated.ip.message.ip.updated" = "Votre IP dédiée a été mise à jour";

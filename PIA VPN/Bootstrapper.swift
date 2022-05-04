@@ -256,12 +256,17 @@ class Bootstrapper {
     }
     
     @objc private func vpnStatusDidChange(notification: Notification) {
-        guard (Client.providers.vpnProvider.vpnStatus == .connected) else {
-            return
+        let vpnStatus = Client.providers.vpnProvider.vpnStatus
+        switch vpnStatus {
+        case .connected:
+            AppPreferences.shared.incrementSuccessConnections()
+            UserSurveyManager.shared.handleConnectionSuccess()
+        case .disconnected:
+            AppPreferences.shared.incrementSuccessDisconnections()
+        default:
+            break
         }
-        AppPreferences.shared.incrementSuccessConnections()
-        RatingManager.shared.handleConnectionSuccess()
-        UserSurveyManager.shared.handleConnectionSuccess()
+        RatingManager.shared.handleConnectionStatusChanged()
     }
     
     @objc private func internetReachable(notification: Notification) {
