@@ -80,9 +80,9 @@ PODS:
     - PIAKPIModule/kpi (= 1.1.0)
   - PIAKPIModule/gradle (1.1.0)
   - PIAKPIModule/kpi (1.1.0)
-  - PIALibrary/Core (2.15.0):
+  - PIALibrary/Core (2.16.1):
     - PIAAccountModule
-  - PIALibrary/Library (2.15.0):
+  - PIALibrary/Library (2.16.1):
     - Alamofire (~> 4)
     - Gloss (~> 2)
     - PIAAccountModule
@@ -94,18 +94,18 @@ PODS:
     - PopupDialog
     - ReachabilitySwift
     - SwiftyBeaver
-  - PIALibrary/Mock (2.15.0):
+  - PIALibrary/Mock (2.16.1):
     - PIALibrary/Library
-  - PIALibrary/UI (2.15.0):
+  - PIALibrary/UI (2.16.1):
     - FXPageControl
     - lottie-ios
     - PIALibrary/Library
     - SwiftEntryKit (= 0.7.2)
     - SwiftyBeaver
     - TPKeyboardAvoiding
-  - PIALibrary/Util (2.15.0):
+  - PIALibrary/Util (2.16.1):
     - PIALibrary/Core
-  - PIALibrary/VPN (2.15.0):
+  - PIALibrary/VPN (2.16.1):
     - PIALibrary/Library
     - PIAWireguard
     - TunnelKit
@@ -278,7 +278,7 @@ SPEC CHECKSUMS:
   PIAAccountModule: 31264ad54dfa98cd8be6810885f910b8bedc9592
   PIACSIModule: 32df98c20a0fc4cad5fadbb1b72f7b74315aa8ea
   PIAKPIModule: 37c56c0153d693db4d4adb43fd12b9c96ec7ad6d
-  PIALibrary: 4ac21b0958f5f77186297c302df26ae99fb27fb7
+  PIALibrary: 75247afe6cea9f3ccf8ab2bbbf39aa37264983d0
   PIARegionsModule: eff00bd28dea554d7b766ec5d7e9a74ab448f5fe
   PIAWireguard: e6fc3a37758af8d83704dd61e327c2ff6da88b13
   Popover: 10e1d9528f81d9504df984b7b3f491292bc1822d
