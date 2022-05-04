@@ -98,7 +98,7 @@ class RatingManager {
         }
     }
     
-    private func ratingAlertCancelHandler() {
+    private func handleRatingAlertCancel() {
         log.debug("No review but maybe we can try in the future")
         AppPreferences.shared.canAskAgainForReview = true
         if AppPreferences.shared.lastRatingRejection == nil {
@@ -159,7 +159,7 @@ class RatingManager {
     private func createDefaultReviewAlert() -> UIAlertController {
         let sheet = Macros.alertController(L10n.Rating.Rate.question, nil)
         sheet.addAction(UIAlertAction(title: L10n.Rating.Alert.Button.nothanks, style: .default, handler: { action in
-            self.ratingAlertCancelHandler()
+            self.handleRatingAlertCancel()
         }))
         sheet.addAction(UIAlertAction(title: L10n.Rating.Alert.Button.oksure, style: .default, handler: { action in
             self.openRatingViewInAppstore()
@@ -219,7 +219,7 @@ class RatingManager {
             L10n.Rating.Rate.subtitle
         )
         sheet.addCancelActionWithTitle(L10n.Global.no, handler: {
-            self.ratingAlertCancelHandler()
+            self.handleRatingAlertCancel()
         })
         
         sheet.addActionWithTitle(L10n.Global.yes) {
