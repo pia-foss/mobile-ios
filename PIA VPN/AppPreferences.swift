@@ -821,6 +821,7 @@ class AppPreferences {
         MessagesManager.shared.reset()
         userInteractedWithSurvey = false
         successConnectionsUntilSurvey = nil
+        Client.preferences.lastKnownException = nil
     }
     
     func clean() {
@@ -858,6 +859,7 @@ class AppPreferences {
         appEnvironmentIsProduction = Client.environment == .production ? true : false
         userInteractedWithSurvey = false
         successConnectionsUntilSurvey = nil
+        Client.preferences.lastKnownException = nil
     }
     
 //    + (void)eraseForTesting;

@@ -70,11 +70,11 @@ PODS:
     - PIAAccountModule/gradle (= 1.2.1)
   - PIAAccountModule/account (1.2.1)
   - PIAAccountModule/gradle (1.2.1)
-  - PIACSIModule (1.0.1):
-    - PIACSIModule/csi (= 1.0.1)
-    - PIACSIModule/gradle (= 1.0.1)
-  - PIACSIModule/csi (1.0.1)
-  - PIACSIModule/gradle (1.0.1)
+  - PIACSIModule (1.1.1):
+    - PIACSIModule/csi (= 1.1.1)
+    - PIACSIModule/gradle (= 1.1.1)
+  - PIACSIModule/csi (1.1.1)
+  - PIACSIModule/gradle (1.1.1)
   - PIAKPIModule (1.1.0):
     - PIAKPIModule/gradle (= 1.1.0)
     - PIAKPIModule/kpi (= 1.1.0)
@@ -158,12 +158,12 @@ DEPENDENCIES:
   - GradientProgressBar (~> 2.0)
   - OpenSSL-Apple (from `https://github.com/keeshux/openssl-apple`)
   - "PIAAccountModule (from `git@gitlab.kape.com:pia-mobile/shared/account.git`, commit `697fd4f`)"
-  - "PIACSIModule (from `git@gitlab.kape.com:pia-mobile/shared/csi.git`, commit `b62d1bab`)"
+  - "PIACSIModule (from `git@gitlab.kape.com:pia-mobile/shared/csi.git`, branch `release/1.1.1`)"
   - "PIAKPIModule (from `git@gitlab.kape.com:pia-mobile/shared/kpi.git`, branch `release/1.1.0`)"
-  - "PIALibrary/Library (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `4152a87b`)"
-  - "PIALibrary/Mock (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `4152a87b`)"
-  - "PIALibrary/UI (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `4152a87b`)"
-  - "PIALibrary/VPN (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `4152a87b`)"
+  - "PIALibrary/Library (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `1a5856c1`)"
+  - "PIALibrary/Mock (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `1a5856c1`)"
+  - "PIALibrary/UI (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `1a5856c1`)"
+  - "PIALibrary/VPN (from `git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git`, commit `1a5856c1`)"
   - "PIARegionsModule (from `git@gitlab.kape.com:pia-mobile/shared/regions.git`, branch `release/1.3.1`)"
   - "PIAWireguard (from `git@gitlab.kape.com:pia-mobile/ios/pia-wireguard.git`, commit `7e9d8d48`)"
   - Popover
@@ -211,13 +211,13 @@ EXTERNAL SOURCES:
     :commit: 697fd4f
     :git: "git@gitlab.kape.com:pia-mobile/shared/account.git"
   PIACSIModule:
-    :commit: b62d1bab
+    :branch: release/1.1.1
     :git: "git@gitlab.kape.com:pia-mobile/shared/csi.git"
   PIAKPIModule:
     :branch: release/1.1.0
     :git: "git@gitlab.kape.com:pia-mobile/shared/kpi.git"
   PIALibrary:
-    :commit: 4152a87b
+    :commit: 1a5856c1
     :git: "git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git"
   PIARegionsModule:
     :branch: release/1.3.1
@@ -237,13 +237,13 @@ CHECKOUT OPTIONS:
     :commit: 697fd4f
     :git: "git@gitlab.kape.com:pia-mobile/shared/account.git"
   PIACSIModule:
-    :commit: b62d1bab
+    :commit: 5e93ae8ff84bc04ac4e1cfbb6d3dd0aa7dc92a01
     :git: "git@gitlab.kape.com:pia-mobile/shared/csi.git"
   PIAKPIModule:
     :commit: e444c78b61e280a1ce444d8d8a3a4c0eeb50b981
     :git: "git@gitlab.kape.com:pia-mobile/shared/kpi.git"
   PIALibrary:
-    :commit: 4152a87b
+    :commit: 1a5856c1
     :git: "git@gitlab.kape.com:pia-mobile/ios/client-library-apple.git"
   PIARegionsModule:
     :commit: 6b3b763b3b1d066cb73d2d8833563669ff8e87bb
@@ -276,7 +276,7 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OpenSSL-Apple: bb7c9715a259404de040f5359ed3b3170cedf8d6
   PIAAccountModule: 31264ad54dfa98cd8be6810885f910b8bedc9592
-  PIACSIModule: 32df98c20a0fc4cad5fadbb1b72f7b74315aa8ea
+  PIACSIModule: 2db8a7fa393d5bef757e856fff3327b8c37dac5d
   PIAKPIModule: 37c56c0153d693db4d4adb43fd12b9c96ec7ad6d
   PIALibrary: 75247afe6cea9f3ccf8ab2bbbf39aa37264983d0
   PIARegionsModule: eff00bd28dea554d7b766ec5d7e9a74ab448f5fe
@@ -293,6 +293,6 @@ SPEC CHECKSUMS:
   TunnelKit: 2a6aadea2d772a2760b153aee27d1c334c9ca6db
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 4ddc29c4d4919c150641fb4f20c17f3dce81fa45
+PODFILE CHECKSUM: b17cd675b73fcdc9ab5bcebe57aa5914a3b37fb7
 
 COCOAPODS: 1.11.2
