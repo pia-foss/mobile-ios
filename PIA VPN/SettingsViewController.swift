@@ -460,8 +460,22 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
             }
         }
 
+        updateCustomDNSAppPreferences()
         refreshSettings()
         reportUpdatedPreferences()
+    }
+    
+    private func updateCustomDNSAppPreferences() {
+        var dnsServers = pendingOpenVPNConfiguration.dnsServers
+        if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+            dnsServers = pendingWireguardVPNConfiguration.customDNSServers
+        }
+        
+        if let dnsServers = dnsServers {
+            AppPreferences.shared.usesCustomDNS = DNSList.shared.hasCustomDNS(for: pendingPreferences.vpnType, in: dnsServers)
+        } else {
+            AppPreferences.shared.usesCustomDNS = false
+        }
     }
     
     // MARK: ModalController

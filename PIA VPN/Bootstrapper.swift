@@ -230,6 +230,7 @@ class Bootstrapper {
         if AppPreferences.shared.checksDipExpirationRequest, let dipToken = Client.providers.serverProvider.dipTokens?.first {
             Client.providers.serverProvider.handleDIPTokenExpiration(dipToken: dipToken, nil)
         }
+        AppPreferences.shared.deviceType = UIDevice.current.type.rawValue
         setupExceptionHandler()
     }
     
