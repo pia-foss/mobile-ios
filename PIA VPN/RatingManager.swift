@@ -44,6 +44,9 @@ class RatingManager {
     }
     
     private var targetDisconnectionsReachedForPrompt: Bool {
+        if AppPreferences.shared.successConnections >= self.successConnectionsUntilPrompt {
+            return false // We do not check this because alert was already shown
+        }
         return AppPreferences.shared.successDisconnections == self.successDisconnectionsUntilPrompt
     }
     
