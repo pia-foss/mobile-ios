@@ -34,8 +34,6 @@ class AppPreferences {
         
         static let appVersion = "AppVersion"
         
-        static let deviceType = "deviceType"
-        
         static let version = "Version"
         
         static let launched = "Launched" // discard 2.2 key and invert logic
@@ -120,15 +118,6 @@ class AppPreferences {
     private let defaults: UserDefaults
 
     private var isTransitioningTheme = false
-    
-    var deviceType: String {
-        get {
-            return defaults.string(forKey: Entries.deviceType) ?? ""
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.deviceType)
-        }
-    }
     
     var wasLaunched: Bool {
         get {
@@ -808,7 +797,6 @@ class AppPreferences {
     }
 
     func reset() {
-        deviceType = ""
         piaHandshake = .rsa4096
         piaSocketType = nil
         favoriteServerIdentifiersGen4 = []
@@ -849,7 +837,6 @@ class AppPreferences {
     }
     
     func clean() {
-        deviceType = ""
         piaHandshake = .rsa4096
         piaSocketType = nil
         favoriteServerIdentifiersGen4 = []
