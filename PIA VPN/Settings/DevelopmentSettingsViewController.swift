@@ -231,13 +231,17 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
                 }
 
             case .crash:
-                fatalError("Crashing staging app")
+                crashStagingApp()
         case .deleteKeychain:
                 deleteKeychain()
             default: break
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    private func crashStagingApp() {
+        NSException(name: NSExceptionName(rawValue: "App Crash"), reason: "Crashing the staging app manually").raise()
     }
     
     private func deleteKeychain() {
