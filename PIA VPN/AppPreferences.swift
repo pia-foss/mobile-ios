@@ -51,7 +51,8 @@ class AppPreferences {
         static let useSmallPackets = "UseSmallPackets"
         static let wireGuardUseSmallPackets = "WireGuardUseSmallPackets"
         static let ikeV2UseSmallPackets = "IKEV2UseSmallPackets"
-
+        static let usesCustomDNS = "usesCustomDNS"
+        
         static let favoriteServerIdentifiersGen4_deprecated = "FavoriteServerIdentifiersGen4"
 
         static let regionFilter = "RegionFilter"
@@ -310,6 +311,15 @@ class AppPreferences {
         }
         set {
             defaults.set(newValue, forKey: Entries.ikeV2UseSmallPackets)
+        }
+    }
+    
+    var usesCustomDNS: Bool {
+        get {
+            return defaults.bool(forKey: Entries.usesCustomDNS)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.usesCustomDNS)
         }
     }
     
@@ -578,6 +588,7 @@ class AppPreferences {
             Entries.useSmallPackets: false,
             Entries.wireGuardUseSmallPackets: true,
             Entries.ikeV2UseSmallPackets: true,
+            Entries.usesCustomDNS: false,
             Entries.canAskAgainForReview: false,
             Entries.successDisconnections: 0,
             Entries.successConnections: 0,
@@ -805,6 +816,7 @@ class AppPreferences {
         quickSettingPrivateBrowserVisible = true
         useSmallPackets = false
         ikeV2UseSmallPackets = true
+        usesCustomDNS = false
         wireGuardUseSmallPackets = true
         todayWidgetVpnProtocol = IKEv2Profile.vpnType
         todayWidgetVpnPort = "500"
@@ -821,6 +833,7 @@ class AppPreferences {
         MessagesManager.shared.reset()
         userInteractedWithSurvey = false
         successConnectionsUntilSurvey = nil
+        Client.preferences.lastKnownException = nil
     }
     
     func clean() {
@@ -843,6 +856,7 @@ class AppPreferences {
         quickSettingPrivateBrowserVisible = true
         useSmallPackets = false
         ikeV2UseSmallPackets = true
+        usesCustomDNS = false
         wireGuardUseSmallPackets = true
         let preferences = Client.preferences.editable().reset()
         preferences.commit()
@@ -858,6 +872,7 @@ class AppPreferences {
         appEnvironmentIsProduction = Client.environment == .production ? true : false
         userInteractedWithSurvey = false
         successConnectionsUntilSurvey = nil
+        Client.preferences.lastKnownException = nil
     }
     
 //    + (void)eraseForTesting;

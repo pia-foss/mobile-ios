@@ -230,7 +230,7 @@ class Bootstrapper {
         if AppPreferences.shared.checksDipExpirationRequest, let dipToken = Client.providers.serverProvider.dipTokens?.first {
             Client.providers.serverProvider.handleDIPTokenExpiration(dipToken: dipToken, nil)
         }
-
+        setupExceptionHandler()
     }
     
     private func setDefaultPlanProducts() {
@@ -241,7 +241,13 @@ class Bootstrapper {
     func dispose() {
         Client.dispose()
     }
-
+    
+    private func setupExceptionHandler() {
+        NSSetUncaughtExceptionHandler { exception in
+            Client.preferences.lastKnownException = "$exception,\n\(exception.callStackSymbols.joined(separator: "\n"))"
+        }
+    }
+    
     // MARK: Certificate
 
     func rsa4096Certificate() -> String? {
