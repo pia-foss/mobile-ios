@@ -93,7 +93,7 @@ class AppPreferences {
         static let tokenIPRelation_deprecated = "TokenIPRelation"
 
         // In app messages
-        static let stopInAppMessages = "stopInAppMessages"
+        static let showServiceMessages = "showServiceMessages"
 
         // Features
         static let showsDedicatedIPView = "showsDedicatedIPView"
@@ -480,12 +480,12 @@ class AppPreferences {
         }
     }
 
-    var stopInAppMessages: Bool {
+    var showServiceMessages: Bool {
         get {
-            return defaults.bool(forKey: Entries.stopInAppMessages)
+            return defaults.bool(forKey: Entries.showServiceMessages)
         }
         set {
-            defaults.set(newValue, forKey: Entries.stopInAppMessages)
+            defaults.set(newValue, forKey: Entries.showServiceMessages)
         }
     }
     
@@ -595,7 +595,7 @@ class AppPreferences {
             Entries.failureConnections: 0,
             Entries.showGeoServers: true,
             Entries.dismissedMessages: [],
-            Entries.stopInAppMessages: false,
+            Entries.showServiceMessages: false,
             Entries.showsDedicatedIPView: true,
             Entries.disablesMultiDipTokens: true,
             Entries.checksDipExpirationRequest: true,
@@ -827,7 +827,7 @@ class AppPreferences {
         successConnections = 0
         failureConnections = 0
         showGeoServers = true
-        stopInAppMessages = false
+        showServiceMessages = false
         dedicatedTokenIPReleation = [:]
         appEnvironmentIsProduction = Client.environment == .production ? true : false
         MessagesManager.shared.reset()
@@ -865,7 +865,7 @@ class AppPreferences {
         successConnections = 0
         failureConnections = 0
         showGeoServers = true
-        stopInAppMessages = false
+        showServiceMessages = false
         dismissedMessages = []
         dedicatedTokenIPReleation = [:]
         MessagesManager.shared.reset()
