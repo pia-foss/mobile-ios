@@ -372,11 +372,15 @@
 "rating.enjoy.subtitle" = "Vi håber, at vores VPN lever op til dine forventninger.";
 "rating.problems.question" = "Hvad gik galt?";
 "rating.problems.subtitle" = "Vil du give noget feedback? Vi kan hjælpe dig med at forbedre din oplevelse med PIA";
-"rating.rate.question" = "Hvad med en AppStore-anmeldelse?";
+"rating.review.question" = "Hvad med en AppStore-anmeldelse?";
+"rating.rate.question" = "Hvad med en vurdering i AppStore?";
 "rating.rate.subtitle" = "Vi sætter pris på, at du deler din oplevelse";
 "rating.error.question" = "Forbindelsen kunne ikke oprettes";
 "rating.error.subtitle" = "Du kan prøve at vælge en anden region, eller fortælle os om det, ved at åbne en supportbillet.";
 "rating.error.button.send" = "Send feedback";
+"rating.alert.button.notreally" = "Nej, helst ikke";
+"rating.alert.button.nothanks" = "Nej tak.";
+"rating.alert.button.oksure" = "OK, selvfølgelig!";
 
 // CALLING CARDS
 "card.wireguard.title" = "Prøv WireGuard® i dag!";
@@ -397,7 +401,7 @@
 "dedicated.ip.message.valid.token" = "Din dedikerede IP er blevet aktiveret. Den vil være tilgængelig på din liste over Valg af regioner.";
 "dedicated.ip.message.expired.token" = "Dit token er udløbet. Generer et nyt fra din kontoside på websiden.";
 "dedicated.ip.message.error.token" = "Dit token er udløbet. Generer et nyt fra din kontoside på websiden.";
-"dedicated.ip.message.error.retryafter" = "Too many failed token activation requests. Please try again after %@ second(s).";
+"dedicated.ip.message.error.retryafter" = "For mange mislykkede anmodninger om aktivering af token. Prøv igen efter %@ sekund(er).";
 "dedicated.ip.message.token.willexpire" = "Din dedikerede IP udløber snart. Få en ny";
 "dedicated.ip.message.token.willexpire.link" = "Få en ny";
 "dedicated.ip.message.ip.updated" = "Din dedikerede IP blev opdateret";

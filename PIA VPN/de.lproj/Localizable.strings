@@ -372,11 +372,15 @@
 "rating.enjoy.subtitle" = "Wir hoffen, dass unsere VPN-Lösung Ihre Erwartungen erfüllt.";
 "rating.problems.question" = "Was ist schiefgelaufen?";
 "rating.problems.subtitle" = "Möchten Sie Feedback geben? Wir können Ihnen helfen, Ihre Erfahrungen mit PIA zu verbessern";
-"rating.rate.question" = "Wie wäre es mit einer Bewertung im AppStore?";
+"rating.review.question" = "Wie wäre es mit einer Rezension im App Store?";
+"rating.rate.question" = "Wie wäre es mit einer Bewertung im App Store?";
 "rating.rate.subtitle" = "Wir wissen es zu schätzen, dass Sie uns Ihre Erfahrungen mitteilen";
 "rating.error.question" = "Die Verbindung konnte nicht hergestellt werden";
 "rating.error.subtitle" = "Sie können versuchen, eine andere Region auszuwählen oder uns darüber zu informieren, indem Sie ein Support-Ticket öffnen.";
 "rating.error.button.send" = "Feedback senden";
+"rating.alert.button.notreally" = "Nicht wirklich";
+"rating.alert.button.nothanks" = "Nein danke.";
+"rating.alert.button.oksure" = "Okay, sicher!";
 
 // CALLING CARDS
 "card.wireguard.title" = "WireGuard® noch heute testen!";
@@ -397,7 +401,7 @@
 "dedicated.ip.message.valid.token" = "Ihre Dedizierte IP wurde erfolgreich aktiviert. Sie wird in der Auswahlliste Ihrer Region verfügbar sein.";
 "dedicated.ip.message.expired.token" = "Ihr Token ist abgelaufen. Bitte generieren Sie von Ihrer Konto-Seite auf der Webseite ein neues.";
 "dedicated.ip.message.error.token" = "Ihr Token ist abgelaufen. Bitte generieren Sie ein neues auf Ihrer Konto-Seite auf der Webseite.";
-"dedicated.ip.message.error.retryafter" = "Too many failed token activation requests. Please try again after %@ second(s).";
+"dedicated.ip.message.error.retryafter" = "Zu viele fehlgeschlagene Token-Aktivierungsanforderungen. Bitte versuche es nach %@ Sekunde(n) erneut.";
 "dedicated.ip.message.token.willexpire" = "Ihre dedizierte IP wird bald ablaufen. Eine neue abrufen";
 "dedicated.ip.message.token.willexpire.link" = "Eine neue abrufen";
 "dedicated.ip.message.ip.updated" = "Ihre dedizierte IP wurde aktualisiert";

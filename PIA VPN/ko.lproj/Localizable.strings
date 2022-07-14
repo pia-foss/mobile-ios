@@ -372,11 +372,15 @@
 "rating.enjoy.subtitle" = "저희 VPN 제품이 고객님의 기대에 부응하기를 바랍니다";
 "rating.problems.question" = "어떤 문제가 있었습니까?";
 "rating.problems.subtitle" = "피드백을 보내 주시겠습니까? 더 나은 PIA를 경험하실 수 있도록 도와 드리겠습니다";
-"rating.rate.question" = "App Store에 리뷰를 남겨 주시겠습니까?";
+"rating.review.question" = "App Store에 리뷰를 남겨 주시겠습니까?";
+"rating.rate.question" = "App Store에서 점수를 매겨주시겠어요?";
 "rating.rate.subtitle" = "고객님의 경험을 공유해 주시면 감사하겠습니다";
 "rating.error.question" = "연결을 수립할 수 없습니다";
 "rating.error.subtitle" = "다른 지역을 선택해 보시거나 지원 티켓을 열어서 저희에게 알려 주세요.";
 "rating.error.button.send" = "피드백 보내기";
+"rating.alert.button.notreally" = "아니요";
+"rating.alert.button.nothanks" = "아니요.";
+"rating.alert.button.oksure" = "네, 좋아요!";
 
 // CALLING CARDS
 "card.wireguard.title" = "지금 WireGuard®를 사용해 보세요!";
@@ -397,7 +401,7 @@
 "dedicated.ip.message.valid.token" = "회원님의 전용 IP가 성공적으로 활성화되었습니다. 지역 선택 목록에서 사용하실 수 있습니다.";
 "dedicated.ip.message.expired.token" = "회원님의 토큰은 만료되었습니다. 웹사이트의 계정 페이지에서 새로운 토큰을 생성하세요.";
 "dedicated.ip.message.error.token" = "회원님의 토큰은 만료되었습니다. 웹사이트의 계정 페이지에서 새로운 토큰을 생성하세요.";
-"dedicated.ip.message.error.retryafter" = "Too many failed token activation requests. Please try again after %@ second(s).";
+"dedicated.ip.message.error.retryafter" = "토큰 활성화 요청이 너무 많이 실패했습니다. %@초 후 다시 시도하십시오.";
 "dedicated.ip.message.token.willexpire" = "회원님의 전용 IP가 곧 만료됩니다. 새로 획득하세요";
 "dedicated.ip.message.token.willexpire.link" = "새로 획득하세요";
 "dedicated.ip.message.ip.updated" = "회원님의 전용 IP가 업데이트되었습니다";

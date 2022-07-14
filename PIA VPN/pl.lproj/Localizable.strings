@@ -372,11 +372,15 @@
 "rating.enjoy.subtitle" = "Mamy nadzieję, że nasz produkt VPN spełnia Twoje oczekiwania";
 "rating.problems.question" = "Co poszło źle?";
 "rating.problems.subtitle" = "Czy zechcesz podzielić się z nami swoją opinią? Może pomóc i sprawić, ze będzie Ci się lepiej korzystało z PIA";
-"rating.rate.question" = "A może napiszesz recenzję w App Store?";
+"rating.review.question" = "A może napiszesz recenzję w App Store?";
+"rating.rate.question" = "A może ocenisz nas w sklepie App Store?";
 "rating.rate.subtitle" = "Będziemy wdzięczni za opowiedzenie o swoich doświadczeniach";
 "rating.error.question" = "Nie udało się nawiązać połączenia";
 "rating.error.subtitle" = "Możesz spróbować wybrać inny region lub powiadomić nas o tym, wypełniając zgłoszenie do pomocy technicznej.";
 "rating.error.button.send" = "Wyślij opinię";
+"rating.alert.button.notreally" = "Nie za bardzo";
+"rating.alert.button.nothanks" = "Nie, dziękuję.";
+"rating.alert.button.oksure" = "OK, jasne!";
 
 // CALLING CARDS
 "card.wireguard.title" = "Wypróbuj WireGuard® dzisiaj!";
@@ -397,7 +401,7 @@
 "dedicated.ip.message.valid.token" = "Twój dedykowany adres IP został aktywowany. Będzie dostępny na liście wyboru regionu.";
 "dedicated.ip.message.expired.token" = "Twój token stracił ważność. Wygeneruj nowy na stronie swojego konta w serwisie.";
 "dedicated.ip.message.error.token" = "Twój token stracił ważność. Wygeneruj nowy na stronie swojego konta w serwisie.";
-"dedicated.ip.message.error.retryafter" = "Too many failed token activation requests. Please try again after %@ second(s).";
+"dedicated.ip.message.error.retryafter" = "Za dużo nieprawidłowych żądań aktywacji tokena. Spróbuj ponownie za %@ s.";
 "dedicated.ip.message.token.willexpire" = "Twój dedykowany adres IP wkrótce wygasa. Kup nowy adres.";
 "dedicated.ip.message.token.willexpire.link" = "Kup nowy adres.";
 "dedicated.ip.message.ip.updated" = "Zaktualizowano Twój dedykowany adres IP";

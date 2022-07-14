@@ -80,6 +80,7 @@ class AppPreferences {
         static let failureConnections = "failureConnections"
         static let canAskAgainForReview = "canAskAgainForReview"
         static let lastRatingRejection = "lastRatingRejection"
+        static let successDisconnections = "successDisconnections"
 
         // GEO servers
         static let showGeoServers = "ShowGeoServers"
@@ -442,6 +443,15 @@ class AppPreferences {
         }
     }
     
+    var successDisconnections: Int {
+        get {
+            return defaults.integer(forKey: Entries.successDisconnections)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.successDisconnections)
+        }
+    }
+    
     var appVersion: String? {
         get {
             return defaults.string(forKey: Entries.appVersion)
@@ -569,6 +579,7 @@ class AppPreferences {
             Entries.wireGuardUseSmallPackets: true,
             Entries.ikeV2UseSmallPackets: true,
             Entries.canAskAgainForReview: false,
+            Entries.successDisconnections: 0,
             Entries.successConnections: 0,
             Entries.failureConnections: 0,
             Entries.showGeoServers: true,
@@ -800,6 +811,7 @@ class AppPreferences {
         todayWidgetVpnSocket = "UDP"
         todayWidgetTrustedNetwork = false
         Client.resetServers(completionBlock: {_ in })
+        successDisconnections = 0
         successConnections = 0
         failureConnections = 0
         showGeoServers = true
@@ -835,6 +847,7 @@ class AppPreferences {
         let preferences = Client.preferences.editable().reset()
         preferences.commit()
         Client.resetServers(completionBlock: {_ in })
+        successDisconnections = 0
         successConnections = 0
         failureConnections = 0
         showGeoServers = true
@@ -893,4 +906,7 @@ class AppPreferences {
         successConnections += 1
     }
     
+    func incrementSuccessDisconnections() {
+        successDisconnections += 1
+    }
 }

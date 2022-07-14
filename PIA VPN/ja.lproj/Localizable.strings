@@ -372,11 +372,15 @@
 "rating.enjoy.subtitle" = "VPN製品にご満足いただいていることを願っています";
 "rating.problems.question" = "どのような問題があったのでしょうか？";
 "rating.problems.subtitle" = "フィードバックを送信しますか？PIAご利用にあたり、お客様のエクスペリエンス改善のお手伝いをいたします。";
-"rating.rate.question" = "AppStoreでレビューしていただけますか？";
+"rating.review.question" = "AppStoreでレビューしていただけますか？";
+"rating.rate.question" = "AppStoreで評価していただけますか？";
 "rating.rate.subtitle" = "お客様のご感想を共有していただければありがたいです";
 "rating.error.question" = "接続を確立できませんでした";
 "rating.error.subtitle" = "別の地域を選択するか、サポートチケットを開いてそれについてお知らせください。";
 "rating.error.button.send" = "フィードバックを送信";
+"rating.alert.button.notreally" = "いいえ";
+"rating.alert.button.nothanks" = "いいえ、結構です";
+"rating.alert.button.oksure" = "はい、評価します";
 
 // CALLING CARDS
 "card.wireguard.title" = "WireGuard®を今すぐお試しください！";
@@ -397,7 +401,7 @@
 "dedicated.ip.message.valid.token" = "専用IPが正常にアクティベートされました。地域選択リストで利用できるようになります。";
 "dedicated.ip.message.expired.token" = "トークンの有効期限が切れています。ウェブサイトのアカウントページから新しいトークンを生成してください。";
 "dedicated.ip.message.error.token" = "トークンの有効期限が切れています。ウェブサイトのアカウントページから新しいトークンを生成してください。";
-"dedicated.ip.message.error.retryafter" = "Too many failed token activation requests. Please try again after %@ second(s).";
+"dedicated.ip.message.error.retryafter" = "失敗したトークン有効化リクエストの数が多すぎます。%@秒後にもう一度お試しください。";
 "dedicated.ip.message.token.willexpire" = "あなたの専用IPは間もなく期限が切れます。新しい専用IPを入手してください";
 "dedicated.ip.message.token.willexpire.link" = "新しい専用IPを入手してください";
 "dedicated.ip.message.ip.updated" = "あなたの専用IPが更新されました";

@@ -372,11 +372,15 @@
 "rating.enjoy.subtitle" = "我們希望我們的 VPN 產品符合您的期望";
 "rating.problems.question" = "發生了什麼錯誤？";
 "rating.problems.subtitle" = "您想提供反饋嗎？我們可以幫助您改善使用 PIA 的體驗";
-"rating.rate.question" = "可否為我們在 AppStore 評價？";
+"rating.review.question" = "可否為我們在 AppStore 評價？";
+"rating.rate.question" = "幫我們在 App Store 上評分好嗎？";
 "rating.rate.subtitle" = "我們非常感謝您分享您的經驗";
 "rating.error.question" = "無法建立連線";
 "rating.error.subtitle" = "您可嘗試選擇不同區域，或開立支援單來通知我們。";
 "rating.error.button.send" = "發送反饋";
+"rating.alert.button.notreally" = "不要";
+"rating.alert.button.nothanks" = "不了，謝謝.";
+"rating.alert.button.oksure" = "沒問題！";
 
 // CALLING CARDS
 "card.wireguard.title" = "立即體驗 WireGuard®！";
@@ -397,7 +401,7 @@
 "dedicated.ip.message.valid.token" = "您的專屬 IP 已成功啟用。它將會出現在區域選擇清單中。";
 "dedicated.ip.message.expired.token" = "您的權杖已到期。請到網站的帳戶頁面產生新權杖。";
 "dedicated.ip.message.error.token" = "您的權杖已到期。請到網站的帳戶頁面產生新權杖。";
-"dedicated.ip.message.error.retryafter" = "Too many failed token activation requests. Please try again after %@ second(s).";
+"dedicated.ip.message.error.retryafter" = "權杖啟用要求失敗次數太多。請在 %@ 秒後再試一次。";
 "dedicated.ip.message.token.willexpire" = "您的專屬 IP 即將到期。取得新權杖";
 "dedicated.ip.message.token.willexpire.link" = "取得新權杖";
 "dedicated.ip.message.ip.updated" = "您的專屬 IP 已更新";
