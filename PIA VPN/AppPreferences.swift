@@ -51,7 +51,8 @@ class AppPreferences {
         static let useSmallPackets = "UseSmallPackets"
         static let wireGuardUseSmallPackets = "WireGuardUseSmallPackets"
         static let ikeV2UseSmallPackets = "IKEV2UseSmallPackets"
-
+        static let usesCustomDNS = "usesCustomDNS"
+        
         static let favoriteServerIdentifiersGen4_deprecated = "FavoriteServerIdentifiersGen4"
 
         static let regionFilter = "RegionFilter"
@@ -92,7 +93,7 @@ class AppPreferences {
         static let tokenIPRelation_deprecated = "TokenIPRelation"
 
         // In app messages
-        static let stopInAppMessages = "stopInAppMessages"
+        static let showServiceMessages = "showServiceMessages"
 
         // Features
         static let showsDedicatedIPView = "showsDedicatedIPView"
@@ -313,6 +314,15 @@ class AppPreferences {
         }
     }
     
+    var usesCustomDNS: Bool {
+        get {
+            return defaults.bool(forKey: Entries.usesCustomDNS)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.usesCustomDNS)
+        }
+    }
+    
     var dedicatedTokenIPReleation: [String: String] {
         get {
             let keychain = PIALibrary.Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
@@ -470,12 +480,12 @@ class AppPreferences {
         }
     }
 
-    var stopInAppMessages: Bool {
+    var showServiceMessages: Bool {
         get {
-            return defaults.bool(forKey: Entries.stopInAppMessages)
+            return defaults.bool(forKey: Entries.showServiceMessages)
         }
         set {
-            defaults.set(newValue, forKey: Entries.stopInAppMessages)
+            defaults.set(newValue, forKey: Entries.showServiceMessages)
         }
     }
     
@@ -578,13 +588,14 @@ class AppPreferences {
             Entries.useSmallPackets: false,
             Entries.wireGuardUseSmallPackets: true,
             Entries.ikeV2UseSmallPackets: true,
+            Entries.usesCustomDNS: false,
             Entries.canAskAgainForReview: false,
             Entries.successDisconnections: 0,
             Entries.successConnections: 0,
             Entries.failureConnections: 0,
             Entries.showGeoServers: true,
             Entries.dismissedMessages: [],
-            Entries.stopInAppMessages: false,
+            Entries.showServiceMessages: false,
             Entries.showsDedicatedIPView: true,
             Entries.disablesMultiDipTokens: true,
             Entries.checksDipExpirationRequest: true,
@@ -805,6 +816,7 @@ class AppPreferences {
         quickSettingPrivateBrowserVisible = true
         useSmallPackets = false
         ikeV2UseSmallPackets = true
+        usesCustomDNS = false
         wireGuardUseSmallPackets = true
         todayWidgetVpnProtocol = IKEv2Profile.vpnType
         todayWidgetVpnPort = "500"
@@ -815,12 +827,13 @@ class AppPreferences {
         successConnections = 0
         failureConnections = 0
         showGeoServers = true
-        stopInAppMessages = false
+        showServiceMessages = false
         dedicatedTokenIPReleation = [:]
         appEnvironmentIsProduction = Client.environment == .production ? true : false
         MessagesManager.shared.reset()
         userInteractedWithSurvey = false
         successConnectionsUntilSurvey = nil
+        Client.preferences.lastKnownException = nil
     }
     
     func clean() {
@@ -843,6 +856,7 @@ class AppPreferences {
         quickSettingPrivateBrowserVisible = true
         useSmallPackets = false
         ikeV2UseSmallPackets = true
+        usesCustomDNS = false
         wireGuardUseSmallPackets = true
         let preferences = Client.preferences.editable().reset()
         preferences.commit()
@@ -851,13 +865,14 @@ class AppPreferences {
         successConnections = 0
         failureConnections = 0
         showGeoServers = true
-        stopInAppMessages = false
+        showServiceMessages = false
         dismissedMessages = []
         dedicatedTokenIPReleation = [:]
         MessagesManager.shared.reset()
         appEnvironmentIsProduction = Client.environment == .production ? true : false
         userInteractedWithSurvey = false
         successConnectionsUntilSurvey = nil
+        Client.preferences.lastKnownException = nil
     }
     
 //    + (void)eraseForTesting;
