@@ -23,7 +23,6 @@
 import Foundation
 import PIALibrary
 import SideMenu
-import FXPageControl
 import UIKit
 
 extension Theme {

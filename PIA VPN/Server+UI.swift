@@ -22,7 +22,8 @@
 
 import Foundation
 import PIALibrary
-import AlamofireImage
+import Alamofire
+import UIKit
 
 extension Server: CustomStringConvertible {
     func name(forStatus status: VPNStatus) -> String {

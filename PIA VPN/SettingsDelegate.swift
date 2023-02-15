@@ -21,7 +21,8 @@
 
 import Foundation
 import PIAWireguard
-import TunnelKit
+import TunnelKitCore
+import TunnelKitOpenVPN
 
 protocol SettingsDelegate: AnyObject {
     

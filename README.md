@@ -31,32 +31,10 @@ The PIA VPN app features:
 - Xcode 9+ (Swift 4)
 - Git (preinstalled with Xcode Command Line Tools)
 - Ruby (preinstalled with macOS)
-- [CocoaPods 1.5.0][dep-cocoapods]
 - [SwiftGen][dep-swiftgen]
 - [Go][dep-golang]
 
 It's highly recommended to use the Git and Ruby packages provided by [Homebrew][dep-brew].
-
-### Testing
-
-Download the app codebase locally:
-
-    $ git clone https://github.com/pia-foss/vpn-ios.git
-
-Assuming you have a [working CocoaPods environment][dep-cocoapods], setting up the app workspace only requires installing the pod dependencies:
-
-    $ pod install
-
-After that, open `PIA VPN.xcworkspace` in Xcode and run the `PIA VPN` target.
-
-If the build does not complete due to missing modules (often `PIAAccount`), run `pod install` again with the partial build, then build again.
-
-For the VPN to work properly, the app requires:
-
-- _App Groups_ and _Keychain Sharing_ capabilities
-- App IDs with _Packet Tunnel_ entitlements
-
-both in the main app and the tunnel extension target.
 
 ### Hotspot Helper API
 
@@ -101,7 +79,6 @@ This project is licensed under the [MIT (Expat) license](https://choosealicense.
 [pia-url]: https://www.privateinternetaccess.com/
 [pia-wiki]: https://en.wikipedia.org/wiki/Private_Internet_Access
 
-[dep-cocoapods]: https://guides.cocoapods.org/using/getting-started.html
 [dep-swiftgen]: https://github.com/SwiftGen/SwiftGen
 [dep-jazzy]: https://github.com/realm/jazzy
 [dep-brew]: https://brew.sh/

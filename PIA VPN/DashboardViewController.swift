@@ -365,7 +365,8 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     @objc private func openMenu(_ sender: Any?) {
-        perform(segue: StoryboardSegue.Main.menuSegueIdentifier)
+        Theme.current.applySideMenu()
+        present(SideMenuManager.default.leftMenuNavigationController!, animated: true)
     }
     
     @objc private func closeTileEditingMode(_ sender: Any?) {
@@ -493,7 +494,7 @@ class DashboardViewController: AutolayoutViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         navigationItem.setEmptyBackButton()
 
-        if let sideMenu = segue.destination as? UISideMenuNavigationController {
+        if let sideMenu = segue.destination as? SideMenuNavigationController {
             setMenuDelegate(menuNavigationController: sideMenu)
         } else if let nmt = segue.destination as? TrustedNetworksViewController {
             nmt.shouldReconnectAutomatically = true

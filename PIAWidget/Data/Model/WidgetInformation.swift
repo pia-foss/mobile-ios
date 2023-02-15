@@ -1,9 +1,9 @@
 //
-//  PIABaseSettingsViewController.swift
+//  WidgetInformation.swift
 //  PIA VPN
 //  
-//  Created by Jose Blaya on 17/5/21.
-//  Copyright © 2021 Private Internet Access, Inc.
+//  Created by Jose Blaya on 24/09/2020.
+//  Copyright © 2020 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
 //
@@ -19,25 +19,13 @@
 
 //
 
-import UIKit
-import PIALibrary
-import TunnelKitCore
-import TunnelKitOpenVPN
+import Foundation
+import WidgetKit
 
-class PIABaseSettingsViewController: AutolayoutViewController {
-
-    weak var settingsDelegate: SettingsDelegate!
-    weak var pendingPreferences: Client.Preferences.Editable!
-
-    struct Cells {
-        static let setting = "SettingCell"
-        static let protocolCell = "ProtocolTableViewCell"
-        static let footer = "FooterCell"
-        static let header = "HeaderCell"
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
+struct WidgetInformation: Codable, TimelineEntry {
+    var date: Date = Date()
+    let connected: Bool
+    let vpnProtocol: String
+    let vpnPort: String
+    let vpnSocket: String
 }

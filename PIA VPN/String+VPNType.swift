@@ -21,7 +21,8 @@
 
 import Foundation
 import PIALibrary
-import TunnelKit
+import TunnelKitCore
+import TunnelKitOpenVPN
 import PIAWireguard
 
 public extension String {
@@ -46,7 +47,7 @@ public extension String {
         case PIATunnelProfile.vpnType:
             if AppPreferences.shared.piaSocketType != nil {
                 let preferences = Client.preferences.editable()
-                if let currentOpenVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration {
+                if let currentOpenVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration {
                     let port = currentOpenVPNConfiguration.sessionConfiguration.builder().endpointProtocols?.first?.port ?? 0
                     return "\(port)"
                 }
@@ -93,7 +94,7 @@ public extension String {
             return "ChaCha20"
         case PIATunnelProfile.vpnType:
             let preferences = Client.preferences.editable()
-            if let currentOpenVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration {
+            if let currentOpenVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration {
                 return currentOpenVPNConfiguration.sessionConfiguration.builder().cipher?.rawValue ?? ""
             }
             return "---"
@@ -111,7 +112,7 @@ public extension String {
             return "Poly1305"
         case PIATunnelProfile.vpnType:
             let preferences = Client.preferences.editable()
-            if let currentOpenVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration {
+            if let currentOpenVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration {
                 return currentOpenVPNConfiguration.sessionConfiguration.builder().digest?.rawValue ?? ""
             }
             return "---"

@@ -22,7 +22,9 @@
 
 import Foundation
 import PIALibrary
-import TunnelKit
+import TunnelKitCore
+import TunnelKitOpenVPN
+import UIKit
 
 struct AppConfiguration {
     private static let customClientEnvironment: Client.Environment = .staging
@@ -65,7 +67,7 @@ struct AppConfiguration {
         
         static let profileName = "Private Internet Access"
 
-        static let piaDefaultConfigurationBuilder: OpenVPNTunnelProvider.ConfigurationBuilder = {
+        static let piaDefaultConfigurationBuilder: OpenVPNProvider.ConfigurationBuilder = {
             var sessionBuilder = OpenVPN.ConfigurationBuilder()
             sessionBuilder.renegotiatesAfter = piaRenegotiationInterval
             sessionBuilder.cipher = .aes128gcm
@@ -76,7 +78,7 @@ struct AppConfiguration {
             sessionBuilder.endpointProtocols = piaAutomaticProtocols
             sessionBuilder.dnsServers = []
             sessionBuilder.usesPIAPatches = true
-            var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())            
+            var builder = OpenVPNProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())            
             if AppPreferences.shared.useSmallPackets {
                 builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
             } else {

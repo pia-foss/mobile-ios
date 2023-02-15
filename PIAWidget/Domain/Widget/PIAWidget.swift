@@ -1,5 +1,5 @@
 //
-//  WidgetContent.swift
+//  PIAWidget.swift
 //  PIA VPN
 //  
 //  Created by Jose Blaya on 24/09/2020.
@@ -19,16 +19,30 @@
 
 //
 
-import Foundation
 import WidgetKit
+import SwiftUI
+import Intents
 
-struct WidgetContent: Codable, TimelineEntry {
-    
-    var date = Date()
+@main
+struct PIAWidget: Widget {
 
-    let connected: Bool
-    let vpnProtocol: String
-    let vpnPort: String
-    let vpnSocket: String
+    let kind: String = "PIAWidget"
+    let displayName: String = "PIA VPN"
 
+    var body: some WidgetConfiguration {
+        let widgetPersistenceDatasource = WidgetUserDefaultsDatasource()
+        return StaticConfiguration(
+            kind: kind,
+            provider: PIAWidgetProvider(
+                widgetPersistenceDatasource: widgetPersistenceDatasource
+            )
+        ) { entry in
+            PIAWidgetView(
+                entry: entry,
+                widgetPersistenceDatasource: widgetPersistenceDatasource
+            )
+        }
+        .configurationDisplayName(displayName)
+        .supportedFamilies([.systemSmall, .systemMedium])
+    }
 }

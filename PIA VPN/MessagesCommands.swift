@@ -23,7 +23,8 @@ import Foundation
 import UIKit
 import PIALibrary
 import PIAWireguard
-import TunnelKit
+import TunnelKitCore
+import TunnelKitOpenVPN
 
 protocol Command {
     func execute()
@@ -157,8 +158,8 @@ class ActionCommand: Command {
     private func activateOpenVPN() {
         
         let preferences = Client.preferences.editable()
-        guard let currentVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration ??
-            Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration else {
+        guard let currentVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration ??
+            Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration else {
             fatalError("No default VPN custom configuration provided for PIA OpenVPN protocol")
         }
 

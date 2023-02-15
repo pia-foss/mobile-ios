@@ -18,7 +18,7 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Main.self)
 
-    internal static let sideMenuNavigationController = SceneType<SideMenu.UISideMenuNavigationController>(storyboard: Main.self, identifier: "SideMenuNavigationController")
+    internal static let sideMenuNavigationController = SceneType<SideMenu.SideMenuNavigationController>(storyboard: Main.self, identifier: "SideMenuNavigationController")
 
     internal static let vpnPermissionViewController = SceneType<VPNPermissionViewController>(storyboard: Main.self, identifier: "VPNPermissionViewController")
   }

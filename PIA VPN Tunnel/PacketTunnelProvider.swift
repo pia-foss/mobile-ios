@@ -20,7 +20,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import TunnelKit
+import TunnelKitOpenVPNAppExtension
 
 class PacketTunnelProvider: OpenVPNTunnelProvider {
 }

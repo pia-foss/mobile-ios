@@ -22,7 +22,8 @@
 import UIKit
 import PIALibrary
 import Popover
-import TunnelKit
+import TunnelKitCore
+import TunnelKitOpenVPN
 
 class SettingPopoverSelectionView: UIView {
 

@@ -23,7 +23,8 @@ import UIKit
 import Popover
 import SwiftyBeaver
 import PIALibrary
-import TunnelKit
+import TunnelKitCore
+import TunnelKitOpenVPN
 import PIAWireguard
 
 protocol DNSSettingsDelegate: AnyObject {

@@ -20,7 +20,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import FXPageControl
+import __PIALibraryNative
 
 class PIAPageControl: FXPageControl {
     override func draw(_ rect: CGRect) {

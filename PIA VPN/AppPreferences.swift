@@ -22,9 +22,11 @@
 
 import Foundation
 import PIALibrary
-import TunnelKit
+import TunnelKitCore
+import TunnelKitOpenVPN
 import SwiftyBeaver
 import Intents
+import UIKit
 
 private let log = SwiftyBeaver.self
 
@@ -635,8 +637,8 @@ class AppPreferences {
     
     func migrateOVPN() {
 
-        guard let currentOpenVPNConfiguration = Client.preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration ??
-            Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration else {
+        guard let currentOpenVPNConfiguration = Client.preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration ??
+            Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration else {
             return
         }
         
@@ -658,7 +660,7 @@ class AppPreferences {
         }
         
         if shouldUpdate {
-            var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: pendingOpenVPNConfiguration.build())
+            var builder = OpenVPNProvider.ConfigurationBuilder(sessionConfiguration: pendingOpenVPNConfiguration.build())
             if AppPreferences.shared.useSmallPackets {
                 builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
             } else {

@@ -23,7 +23,8 @@ import UIKit
 import Popover
 import SwiftyBeaver
 import PIALibrary
-import TunnelKit
+import TunnelKitCore
+import TunnelKitOpenVPN
 
 class ProtocolSettingsViewController: PIABaseSettingsViewController {
     

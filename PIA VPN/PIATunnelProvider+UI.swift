@@ -21,7 +21,8 @@
 //
 
 import Foundation
-import TunnelKit
+import TunnelKitCore
+import TunnelKitOpenVPN
 
 extension SocketType: CustomStringConvertible {
     public var description: String {

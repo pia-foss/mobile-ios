@@ -1,5 +1,5 @@
 //
-//  WidgetUtils.swift
+//  WidgetUserDefaultsDatasource.swift
 //  PIA VPN
 //  
 //  Created by Jose Blaya on 25/09/2020.
@@ -21,53 +21,51 @@
 
 import Foundation
 
-public class WidgetUtils {
-    
-    private static let appGroup = "group.com.privateinternetaccess"
+internal class WidgetUserDefaultsDatasource: WidgetPersistenceDatasource {
 
-    static var isVPNConnected: Bool {
+    private let appGroup = "group.com.privateinternetaccess"
+
+    // MARK: WidgetPersistenceDatasource
+
+    func getIsVPNConnected() -> Bool {
         var connected = false
         if let sharedDefaults = UserDefaults(suiteName: appGroup),
             let status = sharedDefaults.string(forKey: "vpn.status") {
-        
             if status == "connected" {
                 connected = true
             }
-            
         }
         return connected
     }
-    
-    static var isTrustedNetwork: Bool {
+
+    func getIsTrustedNetwork() -> Bool {
         if let sharedDefaults = UserDefaults(suiteName: appGroup) {
             return sharedDefaults.bool(forKey: "vpn.widget.trusted.network")
         }
         return false
     }
-    
-    static var vpnProtocol: String {
+
+    func getVpnProtocol() -> String {
         if let sharedDefaults = UserDefaults(suiteName: appGroup),
             let value = sharedDefaults.string(forKey: "vpn.widget.protocol") {
             return value
         }
         return "--"
     }
-    
-    static var vpnPort: String {
+
+    func getVpnPort() -> String {
         if let sharedDefaults = UserDefaults(suiteName: appGroup),
             let value = sharedDefaults.string(forKey: "vpn.widget.port") {
             return value
         }
         return "--"
     }
-    
-    static var vpnSocket: String {
+
+    func getVpnSocket() -> String {
         if let sharedDefaults = UserDefaults(suiteName: appGroup),
             let value = sharedDefaults.string(forKey: "vpn.widget.socket") {
             return value
         }
         return "--"
     }
-    
-    
 }

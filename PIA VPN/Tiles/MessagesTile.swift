@@ -21,6 +21,7 @@
 
 import Foundation
 import PIALibrary
+import UIKit
 
 class MessagesTile: UIView, Tileable  {
     

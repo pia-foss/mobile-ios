@@ -232,7 +232,7 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     @objc private func showShareDataInformation() {
-        let storyboard = UIStoryboard(name: "Signup", bundle: Bundle(for: ShareDataInformationViewController.self))
+        let storyboard = Client.signupStoryboard()
         let shareDataInformationViewController = storyboard.instantiateViewController(withIdentifier: ViewControllerIdentifiers.shareDataInformation)
         presentModally(viewController: shareDataInformationViewController)
     }

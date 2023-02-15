@@ -22,7 +22,8 @@
 //
 
 import Foundation
-import TunnelKit
+import TunnelKitCore
+import TunnelKitOpenVPN
 
 public extension OpenVPN.Configuration {
     

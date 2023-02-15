@@ -22,14 +22,10 @@
 
 import Foundation
 import PIALibrary
-import TunnelKit
+import TunnelKitCore
+import TunnelKitOpenVPN
 import SwiftyBeaver
 import PIAWireguard
-#if PIA_DEV
-import Firebase
-import Fabric
-import Crashlytics
-#endif
 
 class Bootstrapper {
     
@@ -50,21 +46,13 @@ class Bootstrapper {
         let console = ConsoleDestination()
         #if PIA_DEV
         console.minLevel = .debug
-        
-        if let path = Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist"),
-            let plist = NSDictionary(contentsOf: path) as? [String: Any],
-            plist.count > 0 {
-            FirebaseApp.configure()
-            Fabric.sharedSDK().debug = true
-            Fabric.with([Crashlytics.self()])
-        }
         #else
         console.minLevel = .info
         #endif
         SwiftyBeaver.addDestination(console)
 
         // Load the database first
-        Client.database = Client.Database(team: AppConstants.teamId, group: AppConstants.appGroup)
+        Client.database = Client.Database(group: AppConstants.appGroup)
         
         // Check if should clean the account after delete the app and install again
         if Client.providers.accountProvider.shouldCleanAccount {
