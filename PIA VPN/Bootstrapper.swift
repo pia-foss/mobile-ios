@@ -131,7 +131,6 @@ class Bootstrapper {
             AppPreferences.shared.disablesMultiDipTokens = Client.configuration.featureFlags.contains(Client.FeatureFlags.disableMultiDipTokens)
             AppPreferences.shared.showNewInitialScreen = Client.configuration.featureFlags.contains(Client.FeatureFlags.showNewInitialScreen)
         })
-        MessagesManager.shared.refreshMessages()
 
         //FORCE THE MIGRATION TO GEN4
         if Client.providers.vpnProvider.needsMigrationToGEN4() {

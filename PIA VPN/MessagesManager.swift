@@ -40,18 +40,6 @@ public class MessagesManager: NSObject {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
-    func refreshMessages() {
-        
-        if AppPreferences.shared.showServiceMessages {
-            Client.providers.accountProvider.inAppMessages(forAppVersion: Macros.localizedVersionNumber()) { (message, error) in
-                if let message = message, !message.wasDismissed() {
-                    self.apiMessage = message
-                    Macros.postNotification(.PIAUpdateFixedTiles)
-                }
-            }
-        }
-    }
     
     func postSystemMessage(message: InAppMessage) {
         self.systemMessage = message
