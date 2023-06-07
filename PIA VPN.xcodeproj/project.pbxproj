@@ -3338,7 +3338,7 @@
 			repositoryURL = "git@github.com:xvpn/cpz_pia-mobile_ios_client-library-apple.git";
 			requirement = {
 				kind = revision;
-				revision = 3aefb632854b3838910d5948117bec06cac63f2f;
+				revision = 197536330933dd1b393e6bf7d408d3f6fd185546;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
