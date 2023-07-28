@@ -806,6 +806,16 @@ internal enum L10n {
         /// VPN Kill Switch
         internal static let title = L10n.tr("Localizable", "settings.application_settings.kill_switch.title")
       }
+      internal enum LeakProtection {
+        internal static let footer = L10n.tr("Localizable", "settings.application_settings.leak_protection.footer")
+        /// VPN Leak Protection
+        internal static let title = L10n.tr("Localizable", "settings.application_settings.leak_protection.title")
+      }
+      internal enum AllowAccessOnLocalNetwork {
+        internal static let footer = L10n.tr("Localizable", "settings.application_settings.allow_local_network.footer")
+        /// Allow access to devices on local network
+        internal static let title = L10n.tr("Localizable", "settings.application_settings.allow_local_network.title")
+      }
       internal enum Mace {
         /// PIA MACE™ blocks ads, trackers, and malware while you're connected to the VPN.
         internal static let footer = L10n.tr("Localizable", "settings.application_settings.mace.footer")
