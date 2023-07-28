@@ -102,6 +102,8 @@ class AppPreferences {
         static let disablesMultiDipTokens = "disablesMultiDipTokens"
         static let checksDipExpirationRequest = "checksDipExpirationRequest"
         static let showNewInitialScreen = "showNewInitialScreen"
+        static let showLeakProtection = "showLeakProtection"
+        static let showLeakProtectionNotifications = "showLeakProtectionNotifications"
         
         // Survey
         static let userInteractedWithSurvey = "userInteractedWithSurvey"
@@ -515,6 +517,24 @@ class AppPreferences {
         }
         set {
             defaults.set(newValue, forKey: Entries.showNewInitialScreen)
+        }
+    }
+    
+    var showLeakProtection: Bool {
+        get {
+            return defaults.bool(forKey: Entries.showLeakProtection)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.showLeakProtection)
+        }
+    }
+    
+    var showLeakProtectionNotifications: Bool {
+        get {
+            return defaults.bool(forKey: Entries.showLeakProtectionNotifications)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.showLeakProtectionNotifications)
         }
     }
     

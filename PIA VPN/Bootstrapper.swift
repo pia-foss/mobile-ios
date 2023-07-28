@@ -130,6 +130,8 @@ class Bootstrapper {
             AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags.contains(Client.FeatureFlags.checkDipExpirationRequest)
             AppPreferences.shared.disablesMultiDipTokens = Client.configuration.featureFlags.contains(Client.FeatureFlags.disableMultiDipTokens)
             AppPreferences.shared.showNewInitialScreen = Client.configuration.featureFlags.contains(Client.FeatureFlags.showNewInitialScreen)
+            AppPreferences.shared.showLeakProtection = Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtection)
+            AppPreferences.shared.showLeakProtectionNotifications = Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtectionNotifications)
         })
 
         //FORCE THE MIGRATION TO GEN4
