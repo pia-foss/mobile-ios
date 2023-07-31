@@ -190,12 +190,16 @@ public enum NetworkSections: Int, SettingSection, EnumsBuilder {
 public enum PrivacyFeaturesSections: Int, SettingSection, EnumsBuilder {
     
     case killswitch = 0
+    case leakProtection
+    case allowAccessOnLocalNetwork
     case safariContentBlocker
     case refresh
 
     public func localizedTitleMessage() -> String {
         switch self {
             case .killswitch: return L10n.Settings.ApplicationSettings.KillSwitch.title
+            case .leakProtection: return L10n.Settings.ApplicationSettings.LeakProtection.title
+            case .allowAccessOnLocalNetwork: return L10n.Settings.ApplicationSettings.AllowAccessOnLocalNetwork.title
             case .safariContentBlocker: return L10n.Settings.ContentBlocker.title
             case .refresh: return L10n.Settings.ContentBlocker.Refresh.title
         }
@@ -204,13 +208,15 @@ public enum PrivacyFeaturesSections: Int, SettingSection, EnumsBuilder {
     public func localizedSubtitleMessage() -> String {
         switch self {
             case .killswitch: return ""
+            case .leakProtection: return ""
+            case .allowAccessOnLocalNetwork: return ""
             case .safariContentBlocker: return ""
             case .refresh: return ""
         }
     }
     
     public static func all() -> [Self] {
-        return [.killswitch, .safariContentBlocker, .refresh]
+        return [.killswitch, .leakProtection, .allowAccessOnLocalNetwork, .safariContentBlocker, .refresh]
     }
 
 }

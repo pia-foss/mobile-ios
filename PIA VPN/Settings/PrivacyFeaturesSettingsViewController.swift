@@ -31,6 +31,8 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
     @IBOutlet weak var tableView: UITableView!
     private lazy var switchPersistent = UISwitch()
     private lazy var switchContentBlocker = UISwitch()
+    private lazy var switchLeakProtection = UISwitch()
+    private lazy var switchAllowDevicesOnLocalNetwork = UISwitch()
     private var isContentBlockerEnabled = false
 
     override func viewDidLoad() {
@@ -147,19 +149,31 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
-        if section != PrivacyFeaturesSections.refresh.rawValue, let cell = tableView.dequeueReusableCell(withIdentifier: Cells.footer) {
-            cell.textLabel?.numberOfLines = 0
-            cell.textLabel?.style(style: TextStyle.textStyle21)
-            cell.backgroundColor = .clear
-            if section == PrivacyFeaturesSections.killswitch.rawValue {
-                cell.textLabel?.text =  L10n.Settings.ApplicationSettings.KillSwitch.footer
-            } else {
-                cell.textLabel?.text =  L10n.Settings.ContentBlocker.footer
-            }
-            return cell
+        guard let privacySettingsSection = PrivacyFeaturesSections(rawValue: section),
+        let cell = tableView.dequeueReusableCell(withIdentifier: Cells.footer) else {
+             return nil
         }
-        return nil
+        
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.style(style: TextStyle.textStyle21)
+        cell.backgroundColor = .clear
+        
+        switch privacySettingsSection {
+        case .killswitch:
+            cell.textLabel?.text =  L10n.Settings.ApplicationSettings.KillSwitch.footer
+            return cell
+        case .leakProtection:
+            cell.textLabel?.text =  L10n.Settings.ApplicationSettings.LeakProtection.footer
+            return cell
+        case .allowAccessOnLocalNetwork:
+            cell.textLabel?.text =  L10n.Settings.ApplicationSettings.AllowAccessOnLocalNetwork.footer
+            return cell
+        case .safariContentBlocker:
+            cell.textLabel?.text =   L10n.Settings.ContentBlocker.footer
+            return cell
+        case .refresh:
+            return nil
+        }
 
     }
 
@@ -179,8 +193,22 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
             cell.accessoryView = switchPersistent
             cell.selectionStyle = .none
             switchPersistent.isOn = pendingPreferences.isPersistentConnection
-
-            
+        case .leakProtection:
+          cell.textLabel?.text = L10n.Settings.ApplicationSettings.LeakProtection.title
+          cell.detailTextLabel?.text = nil
+          cell.accessoryView = switchLeakProtection
+          cell.selectionStyle = .none
+          // TODO: Persist the state of this toggle
+          // To be done on ticket: CXAPP-3162
+          switchLeakProtection.isOn = true
+        case .allowAccessOnLocalNetwork:
+          cell.textLabel?.text = L10n.Settings.ApplicationSettings.AllowAccessOnLocalNetwork.title
+          cell.detailTextLabel?.text = nil
+          cell.accessoryView = switchAllowDevicesOnLocalNetwork
+          cell.selectionStyle = .none
+          // TODO: Persist the state of this toggle
+          // To be done on ticket: CXAPP-3162
+          switchAllowDevicesOnLocalNetwork.isOn = false
         case .safariContentBlocker:
             cell.textLabel?.text = L10n.Settings.ContentBlocker.title
             cell.detailTextLabel?.text = nil
