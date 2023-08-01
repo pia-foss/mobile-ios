@@ -34,10 +34,22 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
     private lazy var switchLeakProtection = UISwitch()
     private lazy var switchAllowDevicesOnLocalNetwork = UISwitch()
     private var isContentBlockerEnabled = false
+    
+    private var preferences: AppPreferences?
+    private var sections = [PrivacyFeaturesSections]()
+    
+    private var leakProtection = true
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        preferences = AppPreferences.shared
+        if let preferences = preferences, preferences.showLeakProtection {
+            sections = PrivacyFeaturesSections.all()
+        } else {
+            sections = PrivacyFeaturesSections.all().filter { $0 != .leakProtection && $0 != .allowAccessOnLocalNetwork }
+        }
         
         tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.estimatedSectionFooterHeight = 1.0
@@ -47,6 +59,8 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
         
         switchPersistent.addTarget(self, action: #selector(togglePersistentConnection(_:)), for: .valueChanged)
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
+        switchLeakProtection.addTarget(self, action: #selector(toggleLeakProtection(_:)), for: .valueChanged)
+        switchAllowDevicesOnLocalNetwork.addTarget(self, action: #selector(toggleAllowDevicesOnLocalNetwork(_:)), for: .valueChanged)
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSettings), name: .PIASettingsHaveChanged, object: nil)
         NotificationCenter.default.addObserver(self,
@@ -118,7 +132,15 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
     @objc private func showContentBlockerTutorial() {
         perform(segue: StoryboardSegue.Main.contentBlockerSegueIdentifier)
     }
-
+    
+    @objc private func toggleLeakProtection(_ sender: UISwitch) {
+        leakProtection = sender.isOn
+        tableView.reloadData()
+    }
+    
+    @objc private func toggleAllowDevicesOnLocalNetwork(_ sender: UISwitch) {
+        print(sender.isOn)
+    }
 
     // MARK: Restylable
     
@@ -141,7 +163,7 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
 extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return PrivacyFeaturesSections.all().count
+        return sections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -149,10 +171,12 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard let privacySettingsSection = PrivacyFeaturesSections(rawValue: section),
+        guard sections.count > section,
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.footer) else {
              return nil
         }
+        
+        let privacySettingsSection = sections[section]
         
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.style(style: TextStyle.textStyle21)
@@ -184,7 +208,7 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
         cell.selectionStyle = .default
         cell.detailTextLabel?.text = nil
 
-        let section = PrivacyFeaturesSections.all()[indexPath.section]
+        let section = sections[indexPath.section]
         
         switch section {
         case .killswitch:
@@ -200,7 +224,7 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
           cell.selectionStyle = .none
           // TODO: Persist the state of this toggle
           // To be done on ticket: CXAPP-3162
-          switchLeakProtection.isOn = true
+          switchLeakProtection.isOn = leakProtection
         case .allowAccessOnLocalNetwork:
           cell.textLabel?.text = L10n.Settings.ApplicationSettings.AllowAccessOnLocalNetwork.title
           cell.detailTextLabel?.text = nil
@@ -209,6 +233,7 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
           // TODO: Persist the state of this toggle
           // To be done on ticket: CXAPP-3162
           switchAllowDevicesOnLocalNetwork.isOn = false
+          switchAllowDevicesOnLocalNetwork.isEnabled = leakProtection
         case .safariContentBlocker:
             cell.textLabel?.text = L10n.Settings.ContentBlocker.title
             cell.detailTextLabel?.text = nil
@@ -242,7 +267,7 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let section = PrivacyFeaturesSections.all()[indexPath.section]
+        let section = sections[indexPath.section]
 
         switch section {
             case .refresh:
