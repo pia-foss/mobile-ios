@@ -41,7 +41,6 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
         preferences = AppPreferences.shared
         if let preferences = preferences, preferences.showLeakProtection {
             sections = PrivacyFeaturesSections.all()
