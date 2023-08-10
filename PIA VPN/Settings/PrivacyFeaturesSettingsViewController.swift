@@ -37,11 +37,14 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
     
     private var preferences: AppPreferences?
     private var sections = [PrivacyFeaturesSections]()
+    private var vpnProvider: VPNProvider?
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
         preferences = AppPreferences.shared
+        vpnProvider = Client.providers.vpnProvider
+        
         if let preferences = preferences, preferences.showLeakProtection {
             sections = PrivacyFeaturesSections.all()
         } else {
@@ -133,10 +136,22 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
     @objc private func toggleLeakProtection(_ sender: UISwitch) {
         Client.preferences.leakProtection = sender.isOn
         tableView.reloadData()
+        presentUpdateSettingsAlertWhenConnected()
     }
     
     @objc private func toggleAllowDevicesOnLocalNetwork(_ sender: UISwitch) {
         Client.preferences.allowLocalDeviceAccess = sender.isOn
+        presentUpdateSettingsAlertWhenConnected()
+    }
+    
+    private func presentUpdateSettingsAlertWhenConnected() {
+        guard let vpnProvider = vpnProvider, vpnProvider.vpnStatus == .connected else {
+            return
+        }
+        
+        let sheet = Macros.alertController(L10n.Settings.ApplicationSettings.LeakProtectionAlert.title, nil)
+        sheet.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
+        present(sheet, animated: true)
     }
 
     // MARK: Restylable
