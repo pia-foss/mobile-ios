@@ -3337,8 +3337,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:xvpn/cpz_pia-mobile_ios_client-library-apple.git";
 			requirement = {
-				kind = revision;
-				revision = 197536330933dd1b393e6bf7d408d3f6fd185546;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
