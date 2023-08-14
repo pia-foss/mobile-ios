@@ -58,17 +58,6 @@ class PIAHotspotHelper {
         return UIDevice.current.WiFiSSID
     }
     
-    public private(set) var currentRFC1918VulnerableWifi: String? {
-        get {
-            guard networkMonitor.isConnected() else { return nil }
-            
-            return UserDefaults.standard.string(forKey: "currentRFC1918VulnerableWifi")
-        }
-         set {
-            UserDefaults.standard.set(newValue, forKey: "currentRFC1918VulnerableWifi")
-        }
-    }
-    
     /**
      Configures the HotspotHelper API to perform actions depending of the command.
      
@@ -110,7 +99,7 @@ class PIAHotspotHelper {
                     if AppPreferences.shared.showLeakProtectionNotifications {
                         weakSelf.checkForRFC1918VulnerableWifi(cmd: cmd)
                     } else {
-                        weakSelf.currentRFC1918VulnerableWifi = nil
+                        Client.preferences.currentRFC1918VulnerableWifi = nil
                     }
                     
                     if let currentNetwork = cmd.network {
@@ -146,11 +135,11 @@ class PIAHotspotHelper {
     private func checkForRFC1918VulnerableWifi(cmd: NEHotspotHelperCommand) {
         if networkMonitor.checkForRFC1918Vulnerability() {
             log.info("HotspotHelper: APIHotspotDidDetectRFC1918VulnerableWifi detected")
-            currentRFC1918VulnerableWifi = cmd.network?.ssid.trimmingCharacters(in: CharacterSet.whitespaces)
+            Client.preferences.currentRFC1918VulnerableWifi = cmd.network?.ssid.trimmingCharacters(in: CharacterSet.whitespaces)
             NotificationCenter.default.post(name: .DeviceDidConnectToRFC1918VulnerableWifi, object: nil)
         } else {
             log.info("HotspotHelper: APIHotspotDidDetectRFC1918VulnerableWifi NOT detected")
-            currentRFC1918VulnerableWifi = nil
+            Client.preferences.currentRFC1918VulnerableWifi = nil
             NotificationCenter.default.post(name: .DeviceDidConnectToRFC1918CompliantWifi, object: nil)
         }
     }
