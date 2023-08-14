@@ -25,6 +25,7 @@ import PIALibrary
 import SideMenu
 import SwiftyBeaver
 import WidgetKit
+import NetworkExtension
 
 private let log = SwiftyBeaver.self
 
@@ -116,6 +117,10 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(openSettingsAndWireGuard), name: .OpenSettingsAndActivateWireGuard, object: nil)
         nc.addObserver(self, selector: #selector(checkInternetConnection), name: .PIADaemonsDidUpdateConnectivity, object: nil)
         nc.addObserver(self, selector: #selector(checkVPNConnectingStatus(notification:)), name: .PIADaemonsConnectingVPNStatus, object: nil)
+        
+        nc.addObserver(self, selector: #selector(checkConnectToRFC1918VulnerableWifi(_:)), name: NSNotification.Name.NEVPNStatusDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(handleDidConnectToRFC1918CompliantWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918CompliantWifi, object: nil)
+        nc.addObserver(self, selector: #selector(checkConnectToRFC1918VulnerableWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918VulnerableWifi, object: nil)
         
         self.viewContentHeight = self.viewContentHeightConstraint.constant
         
@@ -601,6 +606,60 @@ class DashboardViewController: AutolayoutViewController {
                 self.updateCurrentStatus()
             })
         }
+    }
+    
+    @objc func checkConnectToRFC1918VulnerableWifi(_ notification: Notification? = nil) {
+        
+        guard let currentRFC1918VulnerableWifiName = Client.preferences.currentRFC1918VulnerableWifi,
+        WifiNetworkMonitor().isConnected() else { return }
+        
+        guard Client.preferences.allowLocalDeviceAccess
+                && Client.preferences.leakProtection else { return }
+        
+        guard let connection = notification?.object as? NEVPNConnection else {
+            if Client.providers.vpnProvider.isVPNConnected {
+                DispatchQueue.main.async {
+                    self.presentRFC1918VulnerableWifiAlert()
+                }
+            }
+            
+            return
+        }
+        
+        if connection.status == .connected {
+            DispatchQueue.main.async {
+                self.presentRFC1918VulnerableWifiAlert()
+            }
+        }
+    }
+    
+    private func presentRFC1918VulnerableWifiAlert() {
+        guard let window = UIApplication.shared.delegate?.window,
+            let presentedViewController = window?.rootViewController?.presentedViewController ?? window?.rootViewController
+        else { return }
+        
+        let title = L10n.Dashboard.Vpn.LeakProtectionAlert.title
+        
+        if let alertController = presentedViewController as? UIAlertController,
+            alertController.title == title { return }
+        
+        let sheet = Macros.alertController(title, L10n.Dashboard.Vpn.LeakProtectionAlert.message)
+        sheet.addAction(UIAlertAction(title: L10n.Dashboard.Vpn.LeakProtectionAlert.cta1, style: .default, handler: { _ in
+            
+        }))
+        
+        sheet.addAction(UIAlertAction(title: L10n.Dashboard.Vpn.LeakProtectionAlert.cta2, style: .default, handler: { _ in
+            
+        }))
+        
+        sheet.addAction(UIAlertAction(title: L10n.Dashboard.Vpn.LeakProtectionAlert.cta3, style: .default, handler: nil))
+    
+        presentedViewController.present(sheet, animated: true, completion: nil)
+    }
+    
+    @objc func handleDidConnectToRFC1918CompliantWifi(_ notification: Notification) {
+        // Remove non compliant wifi notification if it was present in notification center
+        //removeNonCompliantWifiLocalNotification()
     }
     
     // MARK: Helpers
