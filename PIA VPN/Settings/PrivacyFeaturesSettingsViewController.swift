@@ -37,8 +37,6 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
     
     private var preferences: AppPreferences?
     private var sections = [PrivacyFeaturesSections]()
-    
-    private var leakProtection = true
 
     override func viewDidLoad() {
         
@@ -134,12 +132,12 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
     }
     
     @objc private func toggleLeakProtection(_ sender: UISwitch) {
-        leakProtection = sender.isOn
+        Client.preferences.leakProtection = sender.isOn
         tableView.reloadData()
     }
     
     @objc private func toggleAllowDevicesOnLocalNetwork(_ sender: UISwitch) {
-        print(sender.isOn)
+        Client.preferences.allowLocalDeviceAccess = sender.isOn
     }
 
     // MARK: Restylable
@@ -222,18 +220,14 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
           cell.detailTextLabel?.text = nil
           cell.accessoryView = switchLeakProtection
           cell.selectionStyle = .none
-          // TODO: Persist the state of this toggle
-          // To be done on ticket: CXAPP-3162
-          switchLeakProtection.isOn = leakProtection
+          switchLeakProtection.isOn = Client.preferences.leakProtection
         case .allowAccessOnLocalNetwork:
           cell.textLabel?.text = L10n.Settings.ApplicationSettings.AllowAccessOnLocalNetwork.title
           cell.detailTextLabel?.text = nil
           cell.accessoryView = switchAllowDevicesOnLocalNetwork
           cell.selectionStyle = .none
-          // TODO: Persist the state of this toggle
-          // To be done on ticket: CXAPP-3162
-          switchAllowDevicesOnLocalNetwork.isOn = false
-          switchAllowDevicesOnLocalNetwork.isEnabled = leakProtection
+          switchAllowDevicesOnLocalNetwork.isEnabled = Client.preferences.leakProtection
+          switchAllowDevicesOnLocalNetwork.isOn = !Client.preferences.leakProtection ? false : Client.preferences.allowLocalDeviceAccess
         case .safariContentBlocker:
             cell.textLabel?.text = L10n.Settings.ContentBlocker.title
             cell.detailTextLabel?.text = nil
