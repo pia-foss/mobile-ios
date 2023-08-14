@@ -140,6 +140,7 @@
 "settings.application_settings.allow_local_network.footer" = "Stay connected to local devices like printers or file servers while connected to the VPN. (Allow this only if you trust the people and devices on your network.)";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.mace.footer" = "PIA MACE™ blocks ads, trackers, and malware while you're connected to the VPN.";
+"settings.application_settings.leak_protection.alert.title" = "Changes to the VPN Settings will take effect on the next connection";
 
 "settings.content_blocker.title" = "Safari Content Blocker state";
 "settings.content_blocker.state.title" = "Current state";

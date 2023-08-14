@@ -822,6 +822,10 @@ internal enum L10n {
         /// PIA MACE™
         internal static let title = L10n.tr("Localizable", "settings.application_settings.mace.title")
       }
+      internal enum LeakProtectionAlert {
+        /// VPN Leak Protection update settings alert
+        internal static let title = L10n.tr("Localizable", "settings.application_settings.leak_protection.alert.title")
+        }
     }
     internal enum Cards {
       internal enum History {
