@@ -413,6 +413,12 @@
 		DDFCFA9521E892130081F235 /* RegionTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFCFA9321E892130081F235 /* RegionTile.swift */; };
 		DDFCFA9721E8921F0081F235 /* RegionTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDFCFA9621E8921F0081F235 /* RegionTile.xib */; };
 		DDFCFA9821E8921F0081F235 /* RegionTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDFCFA9621E8921F0081F235 /* RegionTile.xib */; };
+		E5F52A182A8A5D5300828883 /* WifiNetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F52A172A8A5D5300828883 /* WifiNetworkMonitor.swift */; };
+		E5F52A192A8A5D5300828883 /* WifiNetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F52A172A8A5D5300828883 /* WifiNetworkMonitor.swift */; };
+		E5F52A1B2A8A5E1E00828883 /* IPv4Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F52A1A2A8A5E1E00828883 /* IPv4Address.swift */; };
+		E5F52A1C2A8A5E1E00828883 /* IPv4Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F52A1A2A8A5E1E00828883 /* IPv4Address.swift */; };
+		E5F52A1F2A8A614900828883 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F52A1E2A8A614900828883 /* NetworkMonitor.swift */; };
+		E5F52A202A8A614900828883 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F52A1E2A8A614900828883 /* NetworkMonitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -802,6 +808,9 @@
 		DDFCFA8E21E892070081F235 /* RegionTileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegionTileCollectionViewCell.xib; sourceTree = "<group>"; };
 		DDFCFA9321E892130081F235 /* RegionTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionTile.swift; sourceTree = "<group>"; };
 		DDFCFA9621E8921F0081F235 /* RegionTile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegionTile.xib; sourceTree = "<group>"; };
+		E5F52A172A8A5D5300828883 /* WifiNetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WifiNetworkMonitor.swift; sourceTree = "<group>"; };
+		E5F52A1A2A8A5E1E00828883 /* IPv4Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPv4Address.swift; sourceTree = "<group>"; };
+		E5F52A1E2A8A614900828883 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1013,6 +1022,7 @@
 		0E76AE201D35447A00421248 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E5F52A1D2A8A613400828883 /* Network */,
 				0EB0A849204F0CE2008BCF1D /* DataCounter.h */,
 				0EB0A84A204F0CE2008BCF1D /* DataCounter.m */,
 				0EB0A84B204F0CE2008BCF1D /* DataCounter.swift */,
@@ -1508,6 +1518,24 @@
 				DDC8F5F123EC1070005D19C6 /* PIA_VPN_WG_Tunnel.entitlements */,
 			);
 			path = "PIA VPN WG Tunnel";
+			sourceTree = "<group>";
+		};
+		E5F52A162A8A5D3800828883 /* Wifi */ = {
+			isa = PBXGroup;
+			children = (
+				E5F52A172A8A5D5300828883 /* WifiNetworkMonitor.swift */,
+			);
+			name = Wifi;
+			sourceTree = "<group>";
+		};
+		E5F52A1D2A8A613400828883 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E5F52A162A8A5D3800828883 /* Wifi */,
+				E5F52A1A2A8A5E1E00828883 /* IPv4Address.swift */,
+				E5F52A1E2A8A614900828883 /* NetworkMonitor.swift */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2047,6 +2075,7 @@
 				8272C6342657EE4E00D846A8 /* AutomationSettingsViewController.swift in Sources */,
 				3524670F26B4332E00E3F0AC /* DashboardViewController+ServerSelection.swift in Sources */,
 				0E9452A01FDB547D00891948 /* ExpirationCell.swift in Sources */,
+				E5F52A202A8A614900828883 /* NetworkMonitor.swift in Sources */,
 				0EFDC1F01FE4B9E6007C0B9B /* AppConfiguration.swift in Sources */,
 				DD76292321ECCD5C0092DF50 /* UsageTile.swift in Sources */,
 				DDD65314247E66AD00F0A897 /* CoordinatesFinder.swift in Sources */,
@@ -2067,6 +2096,7 @@
 				0E1F318720176A6300FC1000 /* Theme+DarkPalette.swift in Sources */,
 				8272C6312657D42700D846A8 /* PrivacyFeaturesSettingsViewController.swift in Sources */,
 				0ECC1E3F1FDB3F2F0039891D /* RegionsViewController.swift in Sources */,
+				E5F52A192A8A5D5300828883 /* WifiNetworkMonitor.swift in Sources */,
 				8272C62B26551F9B00D846A8 /* SettingPopoverSelectionView.swift in Sources */,
 				0EB9ED1B1FDA1C4D00D1214D /* SettingsViewController.swift in Sources */,
 				0EB966751FDF0D6E0086ABC2 /* ServerProvider+UI.swift in Sources */,
@@ -2138,6 +2168,7 @@
 				829EB51225359DBB003E74DD /* DedicatedIpRowViewCell.swift in Sources */,
 				DDFCFA9521E892130081F235 /* RegionTile.swift in Sources */,
 				0EFDC1E71FE4ABAA007C0B9B /* Notification+App.swift in Sources */,
+				E5F52A1C2A8A5E1E00828883 /* IPv4Address.swift in Sources */,
 				827570E224DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift in Sources */,
 				DD918577246BFA7F006B3A2B /* RatingManager.swift in Sources */,
 				82C0071425231F2800F21AF2 /* String+VPNType.swift in Sources */,
@@ -2258,6 +2289,7 @@
 				DD9329A2237AFD0A0025B6BC /* ShowQuickSettingsViewController.swift in Sources */,
 				0E2215C920084CD700F5FB4D /* SwiftGen+Strings.swift in Sources */,
 				827570D824DAB6E4008F9800 /* NetworkFooterCollectionViewCell.swift in Sources */,
+				E5F52A1F2A8A614900828883 /* NetworkMonitor.swift in Sources */,
 				DD3B504324B7576F0002F4B5 /* Card.swift in Sources */,
 				82CAB8F2255C0CD100BB08EF /* MessagesTileCollectionViewCell.swift in Sources */,
 				DD606ABC21C904BB00E0781D /* PIAHotspotHelper.swift in Sources */,
@@ -2272,6 +2304,7 @@
 				0EA660081FEC7A9500CB2B0D /* PIATunnelProvider+UI.swift in Sources */,
 				0E7361EB1FD99A1000706BFF /* MenuViewController.swift in Sources */,
 				DD1C139921E65F90004004B3 /* IPTileCollectionViewCell.swift in Sources */,
+				E5F52A182A8A5D5300828883 /* WifiNetworkMonitor.swift in Sources */,
 				827570CF24DAA128008F9800 /* NetworkCollectionViewCell.swift in Sources */,
 				0EB966771FDF11B80086ABC2 /* Server+UI.swift in Sources */,
 				DD052AC32419003300AD3A24 /* ProtocolTableViewCell.swift in Sources */,
@@ -2315,6 +2348,7 @@
 				DD4E84572243BD1200929B39 /* DashboardCollectionViewUtil.swift in Sources */,
 				829EB507253598BD003E74DD /* DedicatedIpViewController.swift in Sources */,
 				DD74695A217F07AC00B7BD73 /* DNSList.swift in Sources */,
+				E5F52A1B2A8A5E1E00828883 /* IPv4Address.swift in Sources */,
 				0E9452AE1FDB5F7A00891948 /* PIAPageControl.swift in Sources */,
 				DDD271F021D6718F00B6D20F /* RegionFilter.swift in Sources */,
 				82CAB87A255AEA3500BB08EF /* MessagesManager.swift in Sources */,
