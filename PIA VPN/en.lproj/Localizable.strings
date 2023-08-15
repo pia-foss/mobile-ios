@@ -220,6 +220,12 @@
 "dashboard.accessibility.vpn.button.isOn" = "VPN Connection button. The VPN is currently connected";
 "dashboard.accessibility.vpn.button.isOff" = "VPN Connection button. The VPN is currently disconnected";
 
+"dashboard.vpn.leakprotection.alert.title" = "Unsecured Wi-Fi detected";
+"dashboard.vpn.leakprotection.alert.message" = "To prevent data leaks, tap Disable Now to turn off “Allow access to devices on local network\" and automatically reconnect.";
+"dashboard.vpn.leakprotection.alert.cta1" = "Disable Now";
+"dashboard.vpn.leakprotection.alert.cta2" = "Learn more";
+"dashboard.vpn.leakprotection.alert.cta3" = "Ignore";
+
 // VPN PERMISSION
 
 "vpn_permission.title" = "PIA";

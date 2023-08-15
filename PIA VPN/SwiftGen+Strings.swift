@@ -208,6 +208,14 @@ internal enum L10n {
         /// This network is untrusted. Do you really want to disconnect the VPN?
         internal static let untrusted = L10n.tr("Localizable", "dashboard.vpn.disconnect.untrusted")
       }
+      internal enum LeakProtectionAlert {
+        /// This network is untrusted. Do you really want to disconnect the VPN?
+        internal static let title = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.title")
+        internal static let message = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.message")
+        internal static let cta1 = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.cta1")
+        internal static let cta2 = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.cta2")
+        internal static let cta3 = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.cta3")
+      }
     }
   }
 
