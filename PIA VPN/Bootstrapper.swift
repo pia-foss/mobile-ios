@@ -41,6 +41,25 @@ class Bootstrapper {
             return false
         #endif
     }
+  
+    var isDevelopmentBuild: Bool {
+        #if PIA_DEV
+            return true
+        #else
+            return false
+        #endif
+    }
+    
+    /// Update the values of the flags from the CSI server
+    private func updateFeatureFlagsForReleaseIfNeeded() {
+        // Some feature flags like Leak Protection are controled from the Developer menu on Dev builds.
+        // So we skip updating the flag from the server on dev builds
+        guard !isDevelopmentBuild else { return }
+       
+       // Leak Protection feature flags
+        AppPreferences.shared.showLeakProtection = Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtection)
+        AppPreferences.shared.showLeakProtectionNotifications = Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtectionNotifications)
+    }
 
     func bootstrap() {
         let console = ConsoleDestination()
@@ -130,8 +149,12 @@ class Bootstrapper {
             AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags.contains(Client.FeatureFlags.checkDipExpirationRequest)
             AppPreferences.shared.disablesMultiDipTokens = Client.configuration.featureFlags.contains(Client.FeatureFlags.disableMultiDipTokens)
             AppPreferences.shared.showNewInitialScreen = Client.configuration.featureFlags.contains(Client.FeatureFlags.showNewInitialScreen)
-            AppPreferences.shared.showLeakProtection = Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtection)
-            AppPreferences.shared.showLeakProtectionNotifications = Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtectionNotifications)
+            
+
+            /// Updates the feature flags values to the ones set on the server only on Release builds.
+            /// (like Leak protection feature)
+            self.updateFeatureFlagsForReleaseIfNeeded()
+            
         })
 
         //FORCE THE MIGRATION TO GEN4
