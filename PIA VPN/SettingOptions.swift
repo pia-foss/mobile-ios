@@ -295,6 +295,8 @@ public enum DevelopmentSections: Int, SettingSection, EnumsBuilder {
     case resolveGoogleAdsDomain
     case deleteKeychain
     case crash
+    case leakProtectionFlag
+    case leakProtectionNotificationsFlag
 
     public func localizedTitleMessage() -> String {
         switch self {
@@ -307,6 +309,8 @@ public enum DevelopmentSections: Int, SettingSection, EnumsBuilder {
         case .resolveGoogleAdsDomain: return "Resolve Google Ads Domain"
         case .deleteKeychain: return "Delete the Keychain"
         case .crash: return "Crash the app"
+        case .leakProtectionFlag: return "FF - Leak Protection"
+        case .leakProtectionNotificationsFlag: return "FF - Leak Protection Notifications"
         }
     }
     
@@ -321,11 +325,13 @@ public enum DevelopmentSections: Int, SettingSection, EnumsBuilder {
         case .resolveGoogleAdsDomain: return ""
         case .deleteKeychain: return ""
         case .crash: return ""
+        case .leakProtectionFlag: return ""
+        case .leakProtectionNotificationsFlag: return ""
         }
     }
     
     public static func all() -> [Self] {
-        return [.stagingVersion, .customServers, .publicUsername, .username, .password, .environment, .resolveGoogleAdsDomain, .deleteKeychain, .crash]
+      return [.stagingVersion, .customServers, .publicUsername, .username, .password, .environment, .resolveGoogleAdsDomain, .deleteKeychain, .crash, .leakProtectionFlag, .leakProtectionNotificationsFlag]
     }
 
 }
