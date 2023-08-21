@@ -632,7 +632,8 @@ class DashboardViewController: AutolayoutViewController {
         
         guard Client.preferences.allowLocalDeviceAccess
                 && Client.preferences.leakProtection else { return }
-        
+        guard AppPreferences.shared.showLeakProtectionNotifications else { return }
+      
         DispatchQueue.main.async {
             self.presentNonCompliantWifiAlert()
             self.showNonCompliantWifiLocalNotification(currentRFC1918VulnerableWifiName: currentRFC1918VulnerableWifiName)
@@ -666,7 +667,11 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     func showNonCompliantWifiLocalNotification(currentRFC1918VulnerableWifiName: String) {
-        //TODO: Will be implemented on https://polymoon.atlassian.net/browse/PIA-57
+      // 1. Remove previous non-compliant wifi notification
+      Macros.removeLocalNotification(NotificationCategory.nonCompliantWifi)
+      
+      // 2. Show the local notification for the current non-compliant wifi
+      Macros.showLocalNotificationIfNotAlreadyPresent(NotificationCategory.nonCompliantWifi, type: NotificationCategory.nonCompliantWifi, body: L10n.LocalNotification.NonCompliantWifi.text, title: L10n.LocalNotification.NonCompliantWifi.title(currentRFC1918VulnerableWifiName), delay: 0)
     }
     
     // MARK: Helpers
