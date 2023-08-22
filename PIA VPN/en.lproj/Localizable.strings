@@ -38,6 +38,9 @@
 "expiration.title" = "Renewal";
 "expiration.message" = "Your subscription expires soon. Renew to stay protected.";
 
+"local_notification.non_compliant_wifi.title" = "Unsecured Wi-Fi: %@";
+"local_notification.non_compliant_wifi.text" = "Tap here to secure your device";
+
 // SHORTCUTS
 
 "shortcuts.connect" = "Connect";

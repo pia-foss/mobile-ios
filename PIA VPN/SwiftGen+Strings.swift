@@ -513,6 +513,17 @@ internal enum L10n {
       }
     }
   }
+  
+  internal enum LocalNotification {
+    internal enum NonCompliantWifi {
+      /// Tap here to secure your device
+      internal static let text = L10n.tr("Localizable", "local_notification.non_compliant_wifi.text")
+      /// Unsecured Wi-Fi: %@
+      internal static func title(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "local_notification.non_compliant_wifi.title", String(describing: p1))
+      }
+    }
+  }
 
   internal enum Menu {
     internal enum Accessibility {
