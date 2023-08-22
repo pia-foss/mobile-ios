@@ -623,7 +623,7 @@ class DashboardViewController: AutolayoutViewController {
     
     @objc func handleDidConnectToRFC1918CompliantWifi(_ notification: Notification) {
         // Remove non compliant wifi notification if it was present in notification center
-        //removeNonCompliantWifiLocalNotification()
+        Macros.removeLocalNotification(NotificationCategory.nonCompliantWifi)
     }
     
     private func handleNonCompliantWifiConnection() {

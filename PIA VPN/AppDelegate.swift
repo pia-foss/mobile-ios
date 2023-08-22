@@ -198,6 +198,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         application.applicationIconBadgeNumber = 0
+        // Remove the Non compliant Wifi local notification as the app is in foreground now
+        Macros.removeLocalNotification(NotificationCategory.nonCompliantWifi)
     }
 
     private func refreshShortcutItems(in application: UIApplication) {
