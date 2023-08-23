@@ -609,10 +609,16 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     @objc func connectionVPNStatusDidChange(_ notification: Notification? = nil) {
-        guard let connection = notification?.object as? NEVPNConnection,
-              connection.status == .connected else { return }
+        guard let connection = notification?.object as? NEVPNConnection else { return }
         
-        handleNonCompliantWifiConnection()
+        switch connection.status {
+        case .connected:
+            handleNonCompliantWifiConnection()
+        case .disconnected:
+            removeNonCompliantWifiLocalNotification()
+        default:
+            break
+        }
     }
     
     @objc func checkConnectToRFC1918VulnerableWifi(_ notification: Notification? = nil) {
@@ -623,7 +629,7 @@ class DashboardViewController: AutolayoutViewController {
     
     @objc func handleDidConnectToRFC1918CompliantWifi(_ notification: Notification) {
         // Remove non compliant wifi notification if it was present in notification center
-        Macros.removeLocalNotification(NotificationCategory.nonCompliantWifi)
+        removeNonCompliantWifiLocalNotification()
     }
     
     private func handleNonCompliantWifiConnection() {
@@ -667,11 +673,16 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     func showNonCompliantWifiLocalNotification(currentRFC1918VulnerableWifiName: String) {
-      // 1. Remove previous non-compliant wifi notification
-      Macros.removeLocalNotification(NotificationCategory.nonCompliantWifi)
-      
-      // 2. Show the local notification for the current non-compliant wifi
-      Macros.showLocalNotificationIfNotAlreadyPresent(NotificationCategory.nonCompliantWifi, type: NotificationCategory.nonCompliantWifi, body: L10n.LocalNotification.NonCompliantWifi.text, title: L10n.LocalNotification.NonCompliantWifi.title(currentRFC1918VulnerableWifiName), delay: 0)
+        // 1. Remove previous non-compliant wifi notification
+        removeNonCompliantWifiLocalNotification()
+        
+        // 2. Show the local notification for the current non-compliant wifi
+        Macros.showLocalNotificationIfNotAlreadyPresent(NotificationCategory.nonCompliantWifi, type: NotificationCategory.nonCompliantWifi, body: L10n.LocalNotification.NonCompliantWifi.text, title: L10n.LocalNotification.NonCompliantWifi.title(currentRFC1918VulnerableWifiName), delay: 0)
+    }
+    
+    private func removeNonCompliantWifiLocalNotification() {
+        // Remove non compliant wifi notification if it was present in notification center
+        Macros.removeLocalNotification(NotificationCategory.nonCompliantWifi)
     }
     
     // MARK: Helpers
