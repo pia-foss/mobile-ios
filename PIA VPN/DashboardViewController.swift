@@ -77,6 +77,8 @@ class DashboardViewController: AutolayoutViewController {
             self.updateTileLayout()
         }
     }
+    
+    private var shouldReconnect = false
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -616,6 +618,10 @@ class DashboardViewController: AutolayoutViewController {
             handleNonCompliantWifiConnection()
         case .disconnected:
             removeNonCompliantWifiLocalNotification()
+            if shouldReconnect {
+                Client.providers.vpnProvider.connect { _ in }
+                shouldReconnect = false
+            }
         default:
             break
         }
@@ -659,8 +665,9 @@ class DashboardViewController: AutolayoutViewController {
         let sheet = Macros.alertController(title, L10n.Dashboard.Vpn.LeakProtectionAlert.message)
         sheet.addAction(UIAlertAction(title: L10n.Dashboard.Vpn.LeakProtectionAlert.cta1, style: .default, handler: { _ in
             Client.preferences.allowLocalDeviceAccess = false
-            Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, { error in
-            })
+            Client.providers.vpnProvider.disconnect { _ in
+                self.shouldReconnect = true
+            }
         }))
         
         sheet.addAction(UIAlertAction(title: L10n.Dashboard.Vpn.LeakProtectionAlert.cta2, style: .default, handler: { _ in
