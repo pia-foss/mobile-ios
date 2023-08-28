@@ -615,7 +615,9 @@ class DashboardViewController: AutolayoutViewController {
         
         switch connection.status {
         case .connected:
-            handleNonCompliantWifiConnection()
+            if !Client.providers.vpnProvider.isVPNConnected {
+                handleNonCompliantWifiConnection()
+            }
         case .disconnected:
             removeNonCompliantWifiLocalNotification()
             if shouldReconnect {
