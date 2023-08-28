@@ -89,6 +89,8 @@ struct AppConstants {
         static let csEmail = "helpdesk+vpnpermissions.ios@privateinternetaccess.com"
         
         static let ovpnMigrationURL = URL(string: "https://www.privateinternetaccess.com/helpdesk/kb/articles/removing-openvpn-handshake-and-authentication-settings")!
+        
+        static let leakProtectionURL = URL(string: "\(Self.supportURL.absoluteString)/kb/articles/what-is-pia-s-leak-protection-feature-on-ios")!
 
         static var stagingEndpointURL: URL? = {
             guard let path = Bundle.main.path(forResource: "staging", ofType: "endpoint") else {
