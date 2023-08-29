@@ -641,12 +641,17 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     private func handleNonCompliantWifiConnection() {
-        guard let currentRFC1918VulnerableWifiName = Client.preferences.currentRFC1918VulnerableWifi,
-        WifiNetworkMonitor().isConnected() else { return }
+        guard WifiNetworkMonitor().isConnected() else { return }
+        
+        guard Client.preferences.currentRFC1918VulnerableWifi != nil
+                || WifiNetworkMonitor().checkForRFC1918Vulnerability() else { return }
         
         guard Client.preferences.allowLocalDeviceAccess
                 && Client.preferences.leakProtection else { return }
+        
         guard AppPreferences.shared.showLeakProtectionNotifications else { return }
+        
+        let currentRFC1918VulnerableWifiName = Client.preferences.currentRFC1918VulnerableWifi ?? ""
       
         DispatchQueue.main.async {
             self.presentNonCompliantWifiAlert()
