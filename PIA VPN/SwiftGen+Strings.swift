@@ -208,13 +208,19 @@ internal enum L10n {
         /// This network is untrusted. Do you really want to disconnect the VPN?
         internal static let untrusted = L10n.tr("Localizable", "dashboard.vpn.disconnect.untrusted")
       }
-      internal enum LeakProtectionAlert {
-        /// This network is untrusted. Do you really want to disconnect the VPN?
-        internal static let title = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.title")
-        internal static let message = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.message")
-        internal static let cta1 = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.cta1")
-        internal static let cta2 = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.cta2")
-        internal static let cta3 = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.cta3")
+      internal enum Leakprotection {
+        internal enum Alert {
+          /// Disable Now
+          internal static let cta1 = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.cta1", fallback: "Disable Now")
+          /// Learn more
+          internal static let cta2 = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.cta2", fallback: "Learn more")
+          /// Ignore
+          internal static let cta3 = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.cta3", fallback: "Ignore")
+          /// To prevent data leaks, tap Disable Now to turn off “Allow access to devices on local network" and automatically reconnect.
+          internal static let message = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.message", fallback: "To prevent data leaks, tap Disable Now to turn off “Allow access to devices on local network\" and automatically reconnect.")
+          /// Unsecured Wi-Fi detected
+          internal static let title = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.title", fallback: "Unsecured Wi-Fi detected")
+        }
       }
     }
   }
@@ -826,16 +832,22 @@ internal enum L10n {
         internal static let title = L10n.tr("Localizable", "settings.application_settings.kill_switch.title")
       }
       internal enum LeakProtection {
-        internal static let footer = L10n.tr("Localizable", "settings.application_settings.leak_protection.footer")
-        /// VPN Leak Protection
-        internal static let title = L10n.tr("Localizable", "settings.application_settings.leak_protection.title")
+        /// iOS includes features designed to operate outside the VPN by default, such as AirDrop, CarPlay, AirPlay, and Personal Hotspots. Enabling custom leak protection routes this traffic through the VPN but may affect how these features function. More info
+        internal static let footer = L10n.tr("Localizable", "settings.application_settings.leak_protection.footer", fallback: "iOS includes features designed to operate outside the VPN by default, such as AirDrop, CarPlay, AirPlay, and Personal Hotspots. Enabling custom leak protection routes this traffic through the VPN but may affect how these features function. More info")
         /// More info
-        internal static let moreInfo = L10n.tr("Localizable", "settings.application_settings.leak_protection.more_info")
-      }
-      internal enum AllowAccessOnLocalNetwork {
-        internal static let footer = L10n.tr("Localizable", "settings.application_settings.allow_local_network.footer")
+        internal static let moreInfo = L10n.tr("Localizable", "settings.application_settings.leak_protection.more_info", fallback: "More info")
+        /// Leak Protection
+        internal static let title = L10n.tr("Localizable", "settings.application_settings.leak_protection.title", fallback: "Leak Protection")
+        internal enum Alert {
+          /// Changes to the VPN Settings will take effect on the next connection
+          internal static let title = L10n.tr("Localizable", "settings.application_settings.leak_protection.alert.title", fallback: "Changes to the VPN Settings will take effect on the next connection")
+        }
+      }	
+      internal enum AllowLocalNetwork {
+        /// Stay connected to local devices like printers or file servers while connected to the VPN. (Allow this only if you trust the people and devices on your network.)
+        internal static let footer = L10n.tr("Localizable", "settings.application_settings.allow_local_network.footer", fallback: "Stay connected to local devices like printers or file servers while connected to the VPN. (Allow this only if you trust the people and devices on your network.)")
         /// Allow access to devices on local network
-        internal static let title = L10n.tr("Localizable", "settings.application_settings.allow_local_network.title")
+        internal static let title = L10n.tr("Localizable", "settings.application_settings.allow_local_network.title", fallback: "Allow access to devices on local network")
       }
       internal enum Mace {
         /// PIA MACE™ blocks ads, trackers, and malware while you're connected to the VPN.
@@ -1305,8 +1317,8 @@ internal enum L10n {
 // MARK: - Implementation Details
 
 extension L10n {
-  private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
-    let format = BundleToken.bundle.localizedString(forKey: key, value: nil, table: table)
+  private static func tr(_ table: String, _ key: String, _ args: CVarArg..., fallback value: String? = nil) -> String {
+    let format = BundleToken.bundle.localizedString(forKey: key, value: value, table: table)
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }

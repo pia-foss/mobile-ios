@@ -664,13 +664,13 @@ class DashboardViewController: AutolayoutViewController {
             let presentedViewController = window?.rootViewController?.presentedViewController ?? window?.rootViewController
         else { return }
         
-        let title = L10n.Dashboard.Vpn.LeakProtectionAlert.title
+      let title = L10n.Dashboard.Vpn.Leakprotection.Alert.title
         
         if let alertController = presentedViewController as? UIAlertController,
             alertController.title == title { return }
         
-        let sheet = Macros.alertController(title, L10n.Dashboard.Vpn.LeakProtectionAlert.message)
-        sheet.addAction(UIAlertAction(title: L10n.Dashboard.Vpn.LeakProtectionAlert.cta1, style: .default, handler: { _ in
+      let sheet = Macros.alertController(title, L10n.Dashboard.Vpn.Leakprotection.Alert.message)
+      sheet.addAction(UIAlertAction(title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta1, style: .default, handler: { _ in
             Client.preferences.allowLocalDeviceAccess = false
             Client.providers.vpnProvider.disconnect { _ in
                 self.shouldReconnect = true
@@ -678,7 +678,7 @@ class DashboardViewController: AutolayoutViewController {
         }))
         
         // Learn More action
-        sheet.addAction(UIAlertAction(title: L10n.Dashboard.Vpn.LeakProtectionAlert.cta2, style: .default, handler: { _ in
+      sheet.addAction(UIAlertAction(title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta2, style: .default, handler: { _ in
             let application = UIApplication.shared
             let learnMoreURL = AppConstants.Web.leakProtectionURL
             
@@ -687,7 +687,7 @@ class DashboardViewController: AutolayoutViewController {
             }
         }))
         
-        sheet.addAction(UIAlertAction(title: L10n.Dashboard.Vpn.LeakProtectionAlert.cta3, style: .default, handler: nil))
+      sheet.addAction(UIAlertAction(title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta3, style: .default, handler: nil))
     
         presentedViewController.present(sheet, animated: true, completion: nil)
     }

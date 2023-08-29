@@ -149,7 +149,7 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
             return
         }
         
-        let sheet = Macros.alertController(L10n.Settings.ApplicationSettings.LeakProtectionAlert.title, nil)
+      let sheet = Macros.alertController(L10n.Settings.ApplicationSettings.LeakProtection.Alert.title, nil)
         sheet.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
         present(sheet, animated: true)
     }
@@ -207,7 +207,7 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
             cell.textLabel?.attributedText = attributtedDescription
             return cell
         case .allowAccessOnLocalNetwork:
-            cell.textLabel?.text =  L10n.Settings.ApplicationSettings.AllowAccessOnLocalNetwork.footer
+            cell.textLabel?.text =  L10n.Settings.ApplicationSettings.AllowLocalNetwork.footer
             return cell
         case .safariContentBlocker:
             cell.textLabel?.text =   L10n.Settings.ContentBlocker.footer
@@ -241,7 +241,7 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
           cell.selectionStyle = .none
           switchLeakProtection.isOn = Client.preferences.leakProtection
         case .allowAccessOnLocalNetwork:
-          cell.textLabel?.text = L10n.Settings.ApplicationSettings.AllowAccessOnLocalNetwork.title
+          cell.textLabel?.text = L10n.Settings.ApplicationSettings.AllowLocalNetwork.title
           cell.detailTextLabel?.text = nil
           cell.accessoryView = switchAllowDevicesOnLocalNetwork
           cell.selectionStyle = .none

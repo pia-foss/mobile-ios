@@ -199,7 +199,7 @@ public enum PrivacyFeaturesSections: Int, SettingSection, EnumsBuilder {
         switch self {
             case .killswitch: return L10n.Settings.ApplicationSettings.KillSwitch.title
             case .leakProtection: return L10n.Settings.ApplicationSettings.LeakProtection.title
-            case .allowAccessOnLocalNetwork: return L10n.Settings.ApplicationSettings.AllowAccessOnLocalNetwork.title
+            case .allowAccessOnLocalNetwork: return L10n.Settings.ApplicationSettings.AllowLocalNetwork.title
             case .safariContentBlocker: return L10n.Settings.ContentBlocker.title
             case .refresh: return L10n.Settings.ContentBlocker.Refresh.title
         }
