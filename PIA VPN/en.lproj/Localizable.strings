@@ -138,7 +138,8 @@
 "settings.application_settings.kill_switch.title" = "VPN Kill Switch";
 "settings.application_settings.kill_switch.footer" = "The VPN kill switch prevents access to the Internet if the VPN connection is reconnecting. This excludes disconnecting manually.";
 "settings.application_settings.leak_protection.title" = "Leak Protection";
-"settings.application_settings.leak_protection.footer" = "When enabled, all traffic will be routed over the VPN including iOS System services including AirDrop, CarPlay, Airplay and Personal Hotspots. These systems may not function as expected while network protection is enabled. Learn More.";
+"settings.application_settings.leak_protection.footer" = "iOS includes features designed to operate outside the VPN by default, such as AirDrop, CarPlay, AirPlay, and Personal Hotspots. Enabling custom leak protection routes this traffic through the VPN but may affect how these features function. More info";
+"settings.application_settings.leak_protection.more_info" = "More info";
 "settings.application_settings.allow_local_network.title" = "Allow access to devices on local network";
 "settings.application_settings.allow_local_network.footer" = "Stay connected to local devices like printers or file servers while connected to the VPN. (Allow this only if you trust the people and devices on your network.)";
 "settings.application_settings.mace.title" = "PIA MACE™";

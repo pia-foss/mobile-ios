@@ -672,8 +672,14 @@ class DashboardViewController: AutolayoutViewController {
             }
         }))
         
+        // Learn More action
         sheet.addAction(UIAlertAction(title: L10n.Dashboard.Vpn.LeakProtectionAlert.cta2, style: .default, handler: { _ in
+            let application = UIApplication.shared
+            let learnMoreURL = AppConstants.Web.leakProtectionURL
             
+            if application.canOpenURL(learnMoreURL) {
+                application.open(learnMoreURL)
+            }
         }))
         
         sheet.addAction(UIAlertAction(title: L10n.Dashboard.Vpn.LeakProtectionAlert.cta3, style: .default, handler: nil))

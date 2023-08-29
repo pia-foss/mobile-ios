@@ -829,6 +829,8 @@ internal enum L10n {
         internal static let footer = L10n.tr("Localizable", "settings.application_settings.leak_protection.footer")
         /// VPN Leak Protection
         internal static let title = L10n.tr("Localizable", "settings.application_settings.leak_protection.title")
+        /// More info
+        internal static let moreInfo = L10n.tr("Localizable", "settings.application_settings.leak_protection.more_info")
       }
       internal enum AllowAccessOnLocalNetwork {
         internal static let footer = L10n.tr("Localizable", "settings.application_settings.allow_local_network.footer")

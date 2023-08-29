@@ -199,7 +199,12 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
             cell.textLabel?.text =  L10n.Settings.ApplicationSettings.KillSwitch.footer
             return cell
         case .leakProtection:
-            cell.textLabel?.text =  L10n.Settings.ApplicationSettings.LeakProtection.footer
+            let leakProtectionDescription = L10n.Settings.ApplicationSettings.LeakProtection.footer
+            let attributtedDescription = NSMutableAttributedString(string: leakProtectionDescription)
+            let moreInfoText = L10n.Settings.ApplicationSettings.LeakProtection.moreInfo
+            let moreInfoTextRange = (leakProtectionDescription as NSString).range(of: moreInfoText)
+            attributtedDescription.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: moreInfoTextRange)
+            cell.textLabel?.attributedText = attributtedDescription
             return cell
         case .allowAccessOnLocalNetwork:
             cell.textLabel?.text =  L10n.Settings.ApplicationSettings.AllowAccessOnLocalNetwork.footer
@@ -276,11 +281,20 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let section = sections[indexPath.section]
-
+        
         switch section {
-            case .refresh:
-                refreshContentBlockerRules()
-            default: break
+        case .refresh:
+            refreshContentBlockerRules()
+        case .leakProtection:
+            let application = UIApplication.shared
+            let learnMoreURL = AppConstants.Web.leakProtectionURL
+            
+            // Open the Learn more url when the user taps on the Leak Protection cell
+            if application.canOpenURL(learnMoreURL) {
+                application.open(learnMoreURL)
+            }
+            
+        default: break
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
