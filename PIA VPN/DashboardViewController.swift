@@ -619,7 +619,14 @@ class DashboardViewController: AutolayoutViewController {
                 handleNonCompliantWifiConnection()
             }
         case .disconnected:
-            removeNonCompliantWifiLocalNotification()
+           
+            let state = UIApplication.shared.applicationState
+            
+            // Only remove the notification if the app is on the foreground
+            if state == .active {
+                removeNonCompliantWifiLocalNotification()
+            }
+            
             if shouldReconnect {
                 Client.providers.vpnProvider.connect { _ in }
                 shouldReconnect = false
