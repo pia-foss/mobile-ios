@@ -257,6 +257,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
         case .disconnect:
             if Client.providers.vpnProvider.isVPNConnected {
+                // Dismiss the Leak Protection alert if present when disconnecting from a Quick Action
+                dismissLeakProtectionAlert()
                 
                 // this time delay seems to fix a strange issue of the VPN disconnecting and
                 // then automatically reconnecting when it's done from a fresh launch
@@ -318,4 +320,18 @@ extension AppDelegate {
         return AppDelegate.delegate().topViewControllerWithRootViewController(rootViewController: UIApplication.shared.keyWindow?.rootViewController)
     }
     
+}
+
+
+extension AppDelegate {
+    
+    private func dismissLeakProtectionAlert() {
+        if let presentedAlert = window?.rootViewController?.presentedViewController as? UIAlertController {
+            let leakProtectionAlertTitle = L10n.Dashboard.Vpn.Leakprotection.Alert.title
+            
+            if presentedAlert.title == leakProtectionAlertTitle {
+                presentedAlert.dismiss(animated: true)
+            }
+        }
+    }
 }
