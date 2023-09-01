@@ -645,6 +645,9 @@ class DashboardViewController: AutolayoutViewController {
     @objc func handleDidConnectToRFC1918CompliantWifi(_ notification: Notification) {
         // Remove non compliant wifi notification if it was present in notification center
         removeNonCompliantWifiLocalNotification()
+        
+        // Remove leak protection alert when connecting to a compliant Wi-Fi
+        removeLeakProtectionAlert()
     }
     
     private func handleNonCompliantWifiConnection() {
@@ -711,6 +714,14 @@ class DashboardViewController: AutolayoutViewController {
         // Remove non compliant wifi notification if it was present in notification center
         Macros.removeLocalNotification(NotificationCategory.nonCompliantWifi)
     }
+  
+    private func removeLeakProtectionAlert() {
+        guard let presentedLeakProtectionAlert = UIApplication.shared.delegate?.window??.rootViewController?.presentedViewController as? UIAlertController,
+              presentedLeakProtectionAlert.title == L10n.Dashboard.Vpn.Leakprotection.Alert.title else { return }
+        
+        presentedLeakProtectionAlert.dismiss(animated: true)
+    }
+  
     
     // MARK: Helpers
     @objc private func vpnDidFail() {
