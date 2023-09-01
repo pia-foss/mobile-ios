@@ -1,0 +1,10 @@
+module __PIAWireGuardNative {
+    
+    header "unzip.h"
+    header "zip.h"
+    header "ringlogger.h"
+    header "api-ios.h"
+    header "WireGuardKitC.h"
+    export *
+}
+
