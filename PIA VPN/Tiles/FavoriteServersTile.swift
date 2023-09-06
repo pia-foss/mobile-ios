@@ -23,6 +23,7 @@
 
 import Foundation
 import PIALibrary
+import UIKit
 
 class FavoriteServersTile: UIView, Tileable {
     

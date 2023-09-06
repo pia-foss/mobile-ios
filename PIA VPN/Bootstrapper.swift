@@ -22,14 +22,10 @@
 
 import Foundation
 import PIALibrary
-import TunnelKit
+import TunnelKitCore
+import TunnelKitOpenVPN
 import SwiftyBeaver
 import PIAWireguard
-#if PIA_DEV
-import Firebase
-import Fabric
-import Crashlytics
-#endif
 
 class Bootstrapper {
     
@@ -45,26 +41,37 @@ class Bootstrapper {
             return false
         #endif
     }
+  
+    var isDevelopmentBuild: Bool {
+        #if PIA_DEV
+            return true
+        #else
+            return false
+        #endif
+    }
+    
+    /// Update the values of the flags from the CSI server
+    private func updateFeatureFlagsForReleaseIfNeeded() {
+        // Some feature flags like Leak Protection are controled from the Developer menu on Dev builds.
+        // So we skip updating the flag from the server on dev builds
+        guard !isDevelopmentBuild else { return }
+       
+       // Leak Protection feature flags
+        AppPreferences.shared.showLeakProtection = Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtection)
+        AppPreferences.shared.showLeakProtectionNotifications = Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtectionNotifications)
+    }
 
     func bootstrap() {
         let console = ConsoleDestination()
         #if PIA_DEV
         console.minLevel = .debug
-        
-        if let path = Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist"),
-            let plist = NSDictionary(contentsOf: path) as? [String: Any],
-            plist.count > 0 {
-            FirebaseApp.configure()
-            Fabric.sharedSDK().debug = true
-            Fabric.with([Crashlytics.self()])
-        }
         #else
         console.minLevel = .info
         #endif
         SwiftyBeaver.addDestination(console)
 
         // Load the database first
-        Client.database = Client.Database(team: AppConstants.teamId, group: AppConstants.appGroup)
+        Client.database = Client.Database(group: AppConstants.appGroup)
         
         // Check if should clean the account after delete the app and install again
         if Client.providers.accountProvider.shouldCleanAccount {
@@ -142,8 +149,13 @@ class Bootstrapper {
             AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags.contains(Client.FeatureFlags.checkDipExpirationRequest)
             AppPreferences.shared.disablesMultiDipTokens = Client.configuration.featureFlags.contains(Client.FeatureFlags.disableMultiDipTokens)
             AppPreferences.shared.showNewInitialScreen = Client.configuration.featureFlags.contains(Client.FeatureFlags.showNewInitialScreen)
+            
+
+            /// Updates the feature flags values to the ones set on the server only on Release builds.
+            /// (like Leak protection feature)
+            self.updateFeatureFlagsForReleaseIfNeeded()
+            
         })
-        MessagesManager.shared.refreshMessages()
 
         //FORCE THE MIGRATION TO GEN4
         if Client.providers.vpnProvider.needsMigrationToGEN4() {
@@ -230,7 +242,7 @@ class Bootstrapper {
         if AppPreferences.shared.checksDipExpirationRequest, let dipToken = Client.providers.serverProvider.dipTokens?.first {
             Client.providers.serverProvider.handleDIPTokenExpiration(dipToken: dipToken, nil)
         }
-
+        setupExceptionHandler()
     }
     
     private func setDefaultPlanProducts() {
@@ -241,7 +253,13 @@ class Bootstrapper {
     func dispose() {
         Client.dispose()
     }
-
+    
+    private func setupExceptionHandler() {
+        NSSetUncaughtExceptionHandler { exception in
+            Client.preferences.lastKnownException = "$exception,\n\(exception.callStackSymbols.joined(separator: "\n"))"
+        }
+    }
+    
     // MARK: Certificate
 
     func rsa4096Certificate() -> String? {
@@ -256,10 +274,17 @@ class Bootstrapper {
     }
     
     @objc private func vpnStatusDidChange(notification: Notification) {
-        guard (Client.providers.vpnProvider.vpnStatus == .connected) else {
-            return
+        let vpnStatus = Client.providers.vpnProvider.vpnStatus
+        switch vpnStatus {
+        case .connected:
+            AppPreferences.shared.incrementSuccessConnections()
+            UserSurveyManager.shared.handleConnectionSuccess()
+        case .disconnected:
+            AppPreferences.shared.incrementSuccessDisconnections()
+        default:
+            break
         }
-        RatingManager.shared.logSuccessConnection()
+        RatingManager.shared.handleConnectionStatusChanged()
     }
     
     @objc private func internetReachable(notification: Notification) {

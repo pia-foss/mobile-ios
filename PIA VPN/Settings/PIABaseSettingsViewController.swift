@@ -21,7 +21,8 @@
 
 import UIKit
 import PIALibrary
-import TunnelKit
+import TunnelKitCore
+import TunnelKitOpenVPN
 
 class PIABaseSettingsViewController: AutolayoutViewController {
 

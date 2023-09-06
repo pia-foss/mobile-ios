@@ -22,6 +22,7 @@
 
 import Foundation
 import PIALibrary
+import UIKit
 
 extension Theme.Palette {
     static var dark: Theme.Palette {

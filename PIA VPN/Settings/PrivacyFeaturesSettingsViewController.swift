@@ -31,11 +31,25 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
     @IBOutlet weak var tableView: UITableView!
     private lazy var switchPersistent = UISwitch()
     private lazy var switchContentBlocker = UISwitch()
+    private lazy var switchLeakProtection = UISwitch()
+    private lazy var switchAllowDevicesOnLocalNetwork = UISwitch()
     private var isContentBlockerEnabled = false
+    
+    private var preferences: AppPreferences?
+    private var sections = [PrivacyFeaturesSections]()
+    private var vpnProvider: VPNProvider?
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        preferences = AppPreferences.shared
+        vpnProvider = Client.providers.vpnProvider
+        
+        if let preferences = preferences, preferences.showLeakProtection {
+            sections = PrivacyFeaturesSections.all()
+        } else {
+            sections = PrivacyFeaturesSections.all().filter { $0 != .leakProtection && $0 != .allowAccessOnLocalNetwork }
+        }
         
         tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.estimatedSectionFooterHeight = 1.0
@@ -45,6 +59,8 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
         
         switchPersistent.addTarget(self, action: #selector(togglePersistentConnection(_:)), for: .valueChanged)
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
+        switchLeakProtection.addTarget(self, action: #selector(toggleLeakProtection(_:)), for: .valueChanged)
+        switchAllowDevicesOnLocalNetwork.addTarget(self, action: #selector(toggleAllowDevicesOnLocalNetwork(_:)), for: .valueChanged)
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSettings), name: .PIASettingsHaveChanged, object: nil)
         NotificationCenter.default.addObserver(self,
@@ -116,7 +132,27 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
     @objc private func showContentBlockerTutorial() {
         perform(segue: StoryboardSegue.Main.contentBlockerSegueIdentifier)
     }
-
+    
+    @objc private func toggleLeakProtection(_ sender: UISwitch) {
+        Client.preferences.leakProtection = sender.isOn
+        tableView.reloadData()
+        presentUpdateSettingsAlertWhenConnected()
+    }
+    
+    @objc private func toggleAllowDevicesOnLocalNetwork(_ sender: UISwitch) {
+        Client.preferences.allowLocalDeviceAccess = sender.isOn
+        presentUpdateSettingsAlertWhenConnected()
+    }
+    
+    private func presentUpdateSettingsAlertWhenConnected() {
+        guard let vpnProvider = vpnProvider, vpnProvider.vpnStatus == .connected else {
+            return
+        }
+        
+      let sheet = Macros.alertController(L10n.Settings.ApplicationSettings.LeakProtection.Alert.title, nil)
+        sheet.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
+        present(sheet, animated: true)
+    }
 
     // MARK: Restylable
     
@@ -139,7 +175,7 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
 extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return PrivacyFeaturesSections.all().count
+        return sections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -147,19 +183,38 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
-        if section != PrivacyFeaturesSections.refresh.rawValue, let cell = tableView.dequeueReusableCell(withIdentifier: Cells.footer) {
-            cell.textLabel?.numberOfLines = 0
-            cell.textLabel?.style(style: TextStyle.textStyle21)
-            cell.backgroundColor = .clear
-            if section == PrivacyFeaturesSections.killswitch.rawValue {
-                cell.textLabel?.text =  L10n.Settings.ApplicationSettings.KillSwitch.footer
-            } else {
-                cell.textLabel?.text =  L10n.Settings.ContentBlocker.footer
-            }
-            return cell
+        guard sections.count > section,
+        let cell = tableView.dequeueReusableCell(withIdentifier: Cells.footer) else {
+             return nil
         }
-        return nil
+        
+        let privacySettingsSection = sections[section]
+        
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.style(style: TextStyle.textStyle21)
+        cell.backgroundColor = .clear
+        
+        switch privacySettingsSection {
+        case .killswitch:
+            cell.textLabel?.text =  L10n.Settings.ApplicationSettings.KillSwitch.footer
+            return cell
+        case .leakProtection:
+            let leakProtectionDescription = L10n.Settings.ApplicationSettings.LeakProtection.footer
+            let attributtedDescription = NSMutableAttributedString(string: leakProtectionDescription)
+            let moreInfoText = L10n.Settings.ApplicationSettings.LeakProtection.moreInfo
+            let moreInfoTextRange = (leakProtectionDescription as NSString).range(of: moreInfoText)
+            attributtedDescription.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: moreInfoTextRange)
+            cell.textLabel?.attributedText = attributtedDescription
+            return cell
+        case .allowAccessOnLocalNetwork:
+            cell.textLabel?.text =  L10n.Settings.ApplicationSettings.AllowLocalNetwork.footer
+            return cell
+        case .safariContentBlocker:
+            cell.textLabel?.text =   L10n.Settings.ContentBlocker.footer
+            return cell
+        case .refresh:
+            return nil
+        }
 
     }
 
@@ -170,7 +225,7 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
         cell.selectionStyle = .default
         cell.detailTextLabel?.text = nil
 
-        let section = PrivacyFeaturesSections.all()[indexPath.section]
+        let section = sections[indexPath.section]
         
         switch section {
         case .killswitch:
@@ -179,8 +234,19 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
             cell.accessoryView = switchPersistent
             cell.selectionStyle = .none
             switchPersistent.isOn = pendingPreferences.isPersistentConnection
-
-            
+        case .leakProtection:
+          cell.textLabel?.text = L10n.Settings.ApplicationSettings.LeakProtection.title
+          cell.detailTextLabel?.text = nil
+          cell.accessoryView = switchLeakProtection
+          cell.selectionStyle = .none
+          switchLeakProtection.isOn = Client.preferences.leakProtection
+        case .allowAccessOnLocalNetwork:
+          cell.textLabel?.text = L10n.Settings.ApplicationSettings.AllowLocalNetwork.title
+          cell.detailTextLabel?.text = nil
+          cell.accessoryView = switchAllowDevicesOnLocalNetwork
+          cell.selectionStyle = .none
+          switchAllowDevicesOnLocalNetwork.isEnabled = Client.preferences.leakProtection
+          switchAllowDevicesOnLocalNetwork.isOn = !Client.preferences.leakProtection ? false : Client.preferences.allowLocalDeviceAccess
         case .safariContentBlocker:
             cell.textLabel?.text = L10n.Settings.ContentBlocker.title
             cell.detailTextLabel?.text = nil
@@ -214,12 +280,21 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let section = PrivacyFeaturesSections.all()[indexPath.section]
-
+        let section = sections[indexPath.section]
+        
         switch section {
-            case .refresh:
-                refreshContentBlockerRules()
-            default: break
+        case .refresh:
+            refreshContentBlockerRules()
+        case .leakProtection:
+            let application = UIApplication.shared
+            let learnMoreURL = AppConstants.Web.leakProtectionURL
+            
+            // Open the Learn more url when the user taps on the Leak Protection cell
+            if application.canOpenURL(learnMoreURL) {
+                application.open(learnMoreURL)
+            }
+            
+        default: break
         }
 
         tableView.deselectRow(at: indexPath, animated: true)

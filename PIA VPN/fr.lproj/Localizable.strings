@@ -109,10 +109,12 @@
 "account.subscriptions.monthly" = "Forfait mensuel";
 "account.subscriptions.trial" = "Forfait d'essai";
 "account.unauthorized" = "Un problème est survenu. Veuillez réessayer de vous connecter";
-"account.delete" = "Delete Account";
-"account.delete.alert.title" = "Are you sure?";
-"account.delete.alert.message" = "Deleting your PIA account is permanent and irreversible. You will not be able to retrieve your PIA credentials after performing this action. Please note that this action only deletes your PIA account from our database, but it does NOT delete your subscription. You will need to go to your Apple account and cancel the Private Internet Access subscription from there. Otherwise, you will still be charged, even though your PIA account will no longer be active.";
-"account.delete.alert.failureMessage" = "Something went wrong while deleting your account, please try again later.";
+"account.delete" = "Supprimer le compte";
+"account.delete.alert.title" = "Êtes-vous sûr ?";
+"account.delete.alert.message" = "La suppression de votre compte PIA est permanente et irréversible. Vous ne pourrez plus récupérer vos identifiants PIA après avoir effectué cette opération. Veuillez noter que cette opération supprime uniquement votre compte PIA de notre base de données, mais qu’elle ne supprime PAS votre abonnement. Vous devrez ensuite accéder à votre compte Apple et annuler l’abonnement à Private Internet Access à cet endroit. Vous risquez sinon de continuer à payer, même si votre compte PIA n’est plus actif.";
+"account.delete.alert.failureMessage" = "Un problème est survenu lors de la suppression de votre compte. Veuillez réessayer plus tard.";
+"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
+"account.survey.messageLink" = "Take The Survey";
 
 // SETTINGS
 
@@ -370,11 +372,15 @@
 "rating.enjoy.subtitle" = "Nous espérons que notre produit VPN répond à vos attentes";
 "rating.problems.question" = "Quel était le problème ?";
 "rating.problems.subtitle" = "Vous voulez nous envoyer un commentaire ? Nous pouvons vous aider à améliorer votre expérience sur PIA";
-"rating.rate.question" = "Et un avis sur l'App Store ?";
+"rating.review.question" = "Et un avis sur l'App Store ?";
+"rating.rate.question" = "Et une note sur l’App Store ?";
 "rating.rate.subtitle" = "Nous apprécions que vous partagiez votre expérience";
 "rating.error.question" = "La connexion n'a pas pu être établie";
 "rating.error.subtitle" = "Vous pouvez essayer de sélectionner une autre région ou de nous en informer en ouvrant un ticket de support.";
 "rating.error.button.send" = "Envoyer un commentaire";
+"rating.alert.button.notreally" = "Non merci";
+"rating.alert.button.nothanks" = "Non, merci.";
+"rating.alert.button.oksure" = "Bien sûr !";
 
 // CALLING CARDS
 "card.wireguard.title" = "Essayez WireGuard® aujourd'hui !";
@@ -395,6 +401,7 @@
 "dedicated.ip.message.valid.token" = "Votre adresse IP dédiée a été activée avec succès. Elle sera disponible dans votre liste de sélection de région.";
 "dedicated.ip.message.expired.token" = "Votre jeton est expiré. Veuillez en générer un nouveau à partir de la page de votre compte sur le site Web.";
 "dedicated.ip.message.error.token" = "Votre jeton est expiré. Veuillez en générer un nouveau à partir de la page de votre compte sur le site Web.";
+"dedicated.ip.message.error.retryafter" = "Nombre trop élevé de demandes d’activation de jeton manquées. Veuillez réessayer dans %@ seconde(s).";
 "dedicated.ip.message.token.willexpire" = "Votre adresse IP dédiée expirera bientôt. Obtenez-en une nouvelle";
 "dedicated.ip.message.token.willexpire.link" = "Obtenez-en une nouvelle";
 "dedicated.ip.message.ip.updated" = "Votre IP dédiée a été mise à jour";

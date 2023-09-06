@@ -109,10 +109,12 @@
 "account.subscriptions.monthly" = "월간 플랜";
 "account.subscriptions.trial" = "체험 플랜";
 "account.unauthorized" = "문제가 발생했습니다. 다시 로그인해 보세요";
-"account.delete" = "Delete Account";
-"account.delete.alert.title" = "Are you sure?";
-"account.delete.alert.message" = "Deleting your PIA account is permanent and irreversible. You will not be able to retrieve your PIA credentials after performing this action. Please note that this action only deletes your PIA account from our database, but it does NOT delete your subscription. You will need to go to your Apple account and cancel the Private Internet Access subscription from there. Otherwise, you will still be charged, even though your PIA account will no longer be active.";
-"account.delete.alert.failureMessage" = "Something went wrong while deleting your account, please try again later.";
+"account.delete" = "계정 삭제";
+"account.delete.alert.title" = "계속하시겠습니까?";
+"account.delete.alert.message" = "PIA 계정 삭제는 영구적이고 되돌릴 수 없습니다. 이 작업을 수행한 후에는 PIA 인증 정보를 복구할 수 없습니다. 이 작업은 본사 데이터베이스에서 사용자의 PIA 계정만 삭제합니다. 사용자의 구독은 삭제되지 않습니다. 따라서 자신의 Apple 계정으로 이동해서 Private Internet Access 구독을 취소해야 합니다. 그렇지 않으면 PIA를 더 이상 사용할 수 없더라도 요금이 부과됩니다.";
+"account.delete.alert.failureMessage" = "계정을 삭제하는 중 문제가 발생했습니다. 나중에 다시 시도하십시오.";
+"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
+"account.survey.messageLink" = "Take The Survey";
 
 // SETTINGS
 
@@ -370,11 +372,15 @@
 "rating.enjoy.subtitle" = "저희 VPN 제품이 고객님의 기대에 부응하기를 바랍니다";
 "rating.problems.question" = "어떤 문제가 있었습니까?";
 "rating.problems.subtitle" = "피드백을 보내 주시겠습니까? 더 나은 PIA를 경험하실 수 있도록 도와 드리겠습니다";
-"rating.rate.question" = "App Store에 리뷰를 남겨 주시겠습니까?";
+"rating.review.question" = "App Store에 리뷰를 남겨 주시겠습니까?";
+"rating.rate.question" = "App Store에서 점수를 매겨주시겠어요?";
 "rating.rate.subtitle" = "고객님의 경험을 공유해 주시면 감사하겠습니다";
 "rating.error.question" = "연결을 수립할 수 없습니다";
 "rating.error.subtitle" = "다른 지역을 선택해 보시거나 지원 티켓을 열어서 저희에게 알려 주세요.";
 "rating.error.button.send" = "피드백 보내기";
+"rating.alert.button.notreally" = "아니요";
+"rating.alert.button.nothanks" = "아니요.";
+"rating.alert.button.oksure" = "네, 좋아요!";
 
 // CALLING CARDS
 "card.wireguard.title" = "지금 WireGuard®를 사용해 보세요!";
@@ -395,6 +401,7 @@
 "dedicated.ip.message.valid.token" = "회원님의 전용 IP가 성공적으로 활성화되었습니다. 지역 선택 목록에서 사용하실 수 있습니다.";
 "dedicated.ip.message.expired.token" = "회원님의 토큰은 만료되었습니다. 웹사이트의 계정 페이지에서 새로운 토큰을 생성하세요.";
 "dedicated.ip.message.error.token" = "회원님의 토큰은 만료되었습니다. 웹사이트의 계정 페이지에서 새로운 토큰을 생성하세요.";
+"dedicated.ip.message.error.retryafter" = "토큰 활성화 요청이 너무 많이 실패했습니다. %@초 후 다시 시도하십시오.";
 "dedicated.ip.message.token.willexpire" = "회원님의 전용 IP가 곧 만료됩니다. 새로 획득하세요";
 "dedicated.ip.message.token.willexpire.link" = "새로 획득하세요";
 "dedicated.ip.message.ip.updated" = "회원님의 전용 IP가 업데이트되었습니다";

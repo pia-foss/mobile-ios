@@ -33,26 +33,53 @@ class RatingManager {
     
     static let shared = RatingManager()
 
+    private var successDisconnectionsUntilPrompt: Int
     private var successConnectionsUntilPrompt: Int
     private var successConnectionsUntilPromptAgain: Int
     private var timeIntervalUntilPromptAgain: Double
     private var errorInConnectionsUntilPrompt: Int
-
+    
+    private var isRatingFlagAvailable: Bool {
+        return Client.configuration.featureFlags.contains(Client.FeatureFlags.disableSystemRatingDialog)
+    }
+    
+    private var targetDisconnectionsReachedForPrompt: Bool {
+        guard AppPreferences.shared.successConnections < self.successConnectionsUntilPrompt else {
+            return false // We do not check this because alert was already shown
+        }
+        return AppPreferences.shared.successDisconnections == self.successDisconnectionsUntilPrompt
+    }
+    
+    private var targetConnectionsReachedForPrompt: Bool {
+        return AppPreferences.shared.successConnections == self.successConnectionsUntilPrompt
+    }
+    
     init() {
+        self.successDisconnectionsUntilPrompt = AppConfiguration.Rating.successDisconnectionsUntilPrompt
         self.successConnectionsUntilPrompt = AppConfiguration.Rating.successConnectionsUntilPrompt
         self.successConnectionsUntilPromptAgain = AppConfiguration.Rating.successConnectionsUntilPromptAgain
         self.errorInConnectionsUntilPrompt = AppConfiguration.Rating.errorInConnectionsUntilPrompt
         self.timeIntervalUntilPromptAgain = AppConfiguration.Rating.timeIntervalUntilPromptAgain
     }
     
-    func logSuccessConnection() {
-
-        AppPreferences.shared.successConnections += 1
-        if AppPreferences.shared.successConnections == self.successConnectionsUntilPrompt {
+    func handleConnectionStatusChanged() {
+        // By default do not use custom alert
+        // and comparison should be: when vpn is disconnected
+        if Client.providers.vpnProvider.vpnStatus == (isRatingFlagAvailable ? .connected : .disconnected) {
+            showAppReviewWith(customPopup: isRatingFlagAvailable)
+        }
+    }
+    
+    private func showAppReviewWith(customPopup useCustomDialog: Bool) {
+        let shouldShowRatingAlert = useCustomDialog ? targetConnectionsReachedForPrompt : targetDisconnectionsReachedForPrompt
+        if shouldShowRatingAlert {
             log.debug("Show rating")
-            reviewApp()
+            if useCustomDialog {
+                showCustomAlertForReview()
+            } else {
+                showDefaultAlertForReview()
+            }
         } else if AppPreferences.shared.canAskAgainForReview {
-            
             let now = Date()
 
             if AppPreferences.shared.successConnections >= self.successConnectionsUntilPromptAgain,
@@ -62,10 +89,9 @@ class RatingManager {
                 reviewAppWithoutPrompt()
             }
         }
-        
     }
     
-    func logError() {
+    func handleConnectionError() {
         if Client.daemons.isNetworkReachable {
             if AppPreferences.shared.failureConnections == self.errorInConnectionsUntilPrompt {
                 askForConnectionIssuesFeedback()
@@ -74,7 +100,15 @@ class RatingManager {
             AppPreferences.shared.failureConnections += 1
         }
     }
-
+    
+    private func handleRatingAlertCancel() {
+        log.debug("No review but maybe we can try in the future")
+        AppPreferences.shared.canAskAgainForReview = true
+        if AppPreferences.shared.lastRatingRejection == nil {
+            AppPreferences.shared.lastRatingRejection = Date()
+        }
+    }
+    
     private func openRatingViewInAppstore() {
         
         let urlStr = AppConstants.Reviews.appReviewUrl
@@ -94,9 +128,53 @@ class RatingManager {
         SKStoreReviewController.requestReview()
     }
     
-    private func reviewApp() {
+    // MARK: Default Alerts
+    
+    private func showDefaultAlertForReview() {
+        guard let rootView = AppDelegate.getRootViewController() else {
+            return
+        }
         
-        guard let rootView = AppDelegate.delegate().topViewControllerWithRootViewController(rootViewController: UIApplication.shared.keyWindow?.rootViewController) else {
+        let sheet = Macros.alertController(L10n.Rating.Enjoy.question, nil)
+        sheet.addAction(UIAlertAction(title: L10n.Rating.Alert.Button.notreally, style: .default, handler: { action in
+            // Ask for feedback
+            let alert = self.createDefaultFeedbackDialog()
+            rootView.present(alert, animated: true, completion: nil)
+        }))
+        sheet.addAction(UIAlertAction(title: L10n.Global.yes, style: .default, handler: { action in
+            let alert = self.createDefaultReviewAlert()
+            rootView.present(alert, animated: true, completion: nil)
+        }))
+        rootView.present(sheet, animated: true, completion: nil)
+    }
+    
+    private func createDefaultFeedbackDialog() -> UIAlertController {
+        let sheet = Macros.alertController(L10n.Rating.Problems.question, L10n.Rating.Problems.subtitle)
+        sheet.addAction(UIAlertAction(title: L10n.Global.no, style: .default, handler: { action in
+            log.debug("No feedback")
+        }))
+        sheet.addAction(UIAlertAction(title: L10n.Global.yes, style: .default, handler: { action in
+            self.openFeedbackWebsite()
+        }))
+        return sheet
+    }
+    
+    private func createDefaultReviewAlert() -> UIAlertController {
+        let sheet = Macros.alertController(L10n.Rating.Rate.question, nil)
+        sheet.addAction(UIAlertAction(title: L10n.Rating.Alert.Button.nothanks, style: .default, handler: { action in
+            self.handleRatingAlertCancel()
+        }))
+        sheet.addAction(UIAlertAction(title: L10n.Rating.Alert.Button.oksure, style: .default, handler: { action in
+            self.openRatingViewInAppstore()
+        }))
+        return sheet
+    }
+    
+    // MARK: Custom Alerts
+    
+    private func showCustomAlertForReview() {
+        
+        guard let rootView = AppDelegate.getRootViewController() else {
             return
         }
         
@@ -106,12 +184,12 @@ class RatingManager {
         )
         sheet.addCancelActionWithTitle(L10n.Global.no, handler: {
             // Ask for feedback
-            let alert = self.feedback()
+            let alert = self.createCustomFeedbackDialog()
             rootView.present(alert, animated: true, completion: nil)
         })
         
         sheet.addActionWithTitle(L10n.Global.yes) {
-            let alert = self.askForReview()
+            let alert = self.createCustomReviewDialog()
             rootView.present(alert, animated: true, completion: nil)
         }
         
@@ -119,7 +197,7 @@ class RatingManager {
 
     }
     
-    private func feedback() -> PopupDialog {
+    private func createCustomFeedbackDialog() -> PopupDialog {
         
         let sheet = Macros.alert(
             L10n.Rating.Problems.question,
@@ -137,18 +215,14 @@ class RatingManager {
 
     }
     
-    private func askForReview() -> PopupDialog {
+    private func createCustomReviewDialog() -> PopupDialog {
         
         let sheet = Macros.alert(
-            L10n.Rating.Rate.question,
+            L10n.Rating.Review.question,
             L10n.Rating.Rate.subtitle
         )
         sheet.addCancelActionWithTitle(L10n.Global.no, handler: {
-            log.debug("No review but maybe we can try in the future")
-            AppPreferences.shared.canAskAgainForReview = true
-            if AppPreferences.shared.lastRatingRejection == nil {
-                AppPreferences.shared.lastRatingRejection = Date()
-            }
+            self.handleRatingAlertCancel()
         })
         
         sheet.addActionWithTitle(L10n.Global.yes) {
@@ -161,7 +235,7 @@ class RatingManager {
 
     private func askForConnectionIssuesFeedback() {
         
-        guard let rootView = AppDelegate.delegate().topViewControllerWithRootViewController(rootViewController: UIApplication.shared.keyWindow?.rootViewController) else {
+        guard let rootView = AppDelegate.getRootViewController() else {
             return
         }
         

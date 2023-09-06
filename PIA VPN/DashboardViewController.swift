@@ -25,6 +25,7 @@ import PIALibrary
 import SideMenu
 import SwiftyBeaver
 import WidgetKit
+import NetworkExtension
 
 private let log = SwiftyBeaver.self
 
@@ -76,6 +77,8 @@ class DashboardViewController: AutolayoutViewController {
             self.updateTileLayout()
         }
     }
+    
+    private var shouldReconnect = false
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -117,6 +120,10 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(checkInternetConnection), name: .PIADaemonsDidUpdateConnectivity, object: nil)
         nc.addObserver(self, selector: #selector(checkVPNConnectingStatus(notification:)), name: .PIADaemonsConnectingVPNStatus, object: nil)
         
+        nc.addObserver(self, selector: #selector(connectionVPNStatusDidChange(_:)), name: NSNotification.Name.NEVPNStatusDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(handleDidConnectToRFC1918CompliantWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918CompliantWifi, object: nil)
+        nc.addObserver(self, selector: #selector(checkConnectToRFC1918VulnerableWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918VulnerableWifi, object: nil)
+        
         self.viewContentHeight = self.viewContentHeightConstraint.constant
         
     }
@@ -155,6 +162,10 @@ class DashboardViewController: AutolayoutViewController {
         updateCurrentStatus()
         setupCallingCards()
         
+        // Checks if survey needs to be shown
+        if UserSurveyManager.shouldShowSurveyMessage() {
+            MessagesManager.shared.showInAppSurveyMessage()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -248,6 +259,7 @@ class DashboardViewController: AutolayoutViewController {
                 )
             }
             navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.item
+            navigationItem.leftBarButtonItem?.accessibilityIdentifier = Accessibility.Id.Dashboard.menu
             
             if navigationItem.rightBarButtonItem == nil {
                 navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -267,6 +279,7 @@ class DashboardViewController: AutolayoutViewController {
                 action: #selector(closeTileEditingMode(_:))
             )
             navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Global.cancel
+            navigationItem.leftBarButtonItem?.accessibilityIdentifier = nil
             navigationItem.rightBarButtonItem = nil
             
         }
@@ -359,7 +372,8 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     @objc private func openMenu(_ sender: Any?) {
-        perform(segue: StoryboardSegue.Main.menuSegueIdentifier)
+        Theme.current.applySideMenu()
+        present(SideMenuManager.default.leftMenuNavigationController!, animated: true)
     }
     
     @objc private func closeTileEditingMode(_ sender: Any?) {
@@ -404,7 +418,7 @@ class DashboardViewController: AutolayoutViewController {
             
             guard let weakSelf = self else { return }
             if let _ = error {
-                RatingManager.shared.logError()
+                RatingManager.shared.handleConnectionError()
             }
             
             let preferences = Client.preferences.editable()
@@ -487,7 +501,7 @@ class DashboardViewController: AutolayoutViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         navigationItem.setEmptyBackButton()
 
-        if let sideMenu = segue.destination as? UISideMenuNavigationController {
+        if let sideMenu = segue.destination as? SideMenuNavigationController {
             setMenuDelegate(menuNavigationController: sideMenu)
         } else if let nmt = segue.destination as? TrustedNetworksViewController {
             nmt.shouldReconnectAutomatically = true
@@ -596,12 +610,125 @@ class DashboardViewController: AutolayoutViewController {
         }
     }
     
+    @objc func connectionVPNStatusDidChange(_ notification: Notification? = nil) {
+        guard let connection = notification?.object as? NEVPNConnection else { return }
+        
+        switch connection.status {
+        case .connected:
+            if !Client.providers.vpnProvider.isVPNConnected {
+                handleNonCompliantWifiConnection()
+            }
+        case .disconnected:
+           
+            let state = UIApplication.shared.applicationState
+            
+            // Only remove the notification if the app is on the foreground
+            if state == .active {
+                removeNonCompliantWifiLocalNotification()
+            }
+            
+            if shouldReconnect {
+                Client.providers.vpnProvider.connect { _ in }
+                shouldReconnect = false
+            }
+        default:
+            break
+        }
+    }
+    
+    @objc func checkConnectToRFC1918VulnerableWifi(_ notification: Notification? = nil) {
+        guard Client.providers.vpnProvider.isVPNConnected else { return }
+        
+        handleNonCompliantWifiConnection()
+    }
+    
+    @objc func handleDidConnectToRFC1918CompliantWifi(_ notification: Notification) {
+        // Remove non compliant wifi notification if it was present in notification center
+        removeNonCompliantWifiLocalNotification()
+        
+        // Remove leak protection alert when connecting to a compliant Wi-Fi
+        removeLeakProtectionAlert()
+    }
+    
+    private func handleNonCompliantWifiConnection() {
+        guard WifiNetworkMonitor().isConnected() else { return }
+        
+        guard Client.preferences.currentRFC1918VulnerableWifi != nil
+                || WifiNetworkMonitor().checkForRFC1918Vulnerability() else { return }
+        
+        guard Client.preferences.allowLocalDeviceAccess
+                && Client.preferences.leakProtection else { return }
+        
+        guard AppPreferences.shared.showLeakProtectionNotifications else { return }
+        
+        let currentRFC1918VulnerableWifiName = Client.preferences.currentRFC1918VulnerableWifi ?? ""
+      
+        DispatchQueue.main.async {
+            self.presentNonCompliantWifiAlert()
+            self.showNonCompliantWifiLocalNotification(currentRFC1918VulnerableWifiName: currentRFC1918VulnerableWifiName)
+        }
+    }
+    
+    private func presentNonCompliantWifiAlert() {
+        guard let window = UIApplication.shared.delegate?.window,
+            let presentedViewController = window?.rootViewController?.presentedViewController ?? window?.rootViewController
+        else { return }
+        
+      let title = L10n.Dashboard.Vpn.Leakprotection.Alert.title
+        
+        if let alertController = presentedViewController as? UIAlertController,
+            alertController.title == title { return }
+        
+      let sheet = Macros.alertController(title, L10n.Dashboard.Vpn.Leakprotection.Alert.message)
+      sheet.addAction(UIAlertAction(title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta1, style: .default, handler: { _ in
+            Client.preferences.allowLocalDeviceAccess = false
+            Client.providers.vpnProvider.disconnect { _ in
+                self.shouldReconnect = true
+            }
+        }))
+        
+        // Learn More action
+      sheet.addAction(UIAlertAction(title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta2, style: .default, handler: { _ in
+            let application = UIApplication.shared
+            let learnMoreURL = AppConstants.Web.leakProtectionURL
+            
+            if application.canOpenURL(learnMoreURL) {
+                application.open(learnMoreURL)
+            }
+        }))
+        
+      sheet.addAction(UIAlertAction(title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta3, style: .default, handler: nil))
+    
+        presentedViewController.present(sheet, animated: true, completion: nil)
+    }
+    
+    func showNonCompliantWifiLocalNotification(currentRFC1918VulnerableWifiName: String) {
+        // 1. Remove previous non-compliant wifi notification
+        removeNonCompliantWifiLocalNotification()
+        
+        // 2. Show the local notification for the current non-compliant wifi
+        Macros.showLocalNotificationIfNotAlreadyPresent(NotificationCategory.nonCompliantWifi, type: NotificationCategory.nonCompliantWifi, body: L10n.LocalNotification.NonCompliantWifi.text, title: L10n.LocalNotification.NonCompliantWifi.title(currentRFC1918VulnerableWifiName), delay: 0)
+    }
+    
+    private func removeNonCompliantWifiLocalNotification() {
+        // Remove non compliant wifi notification if it was present in notification center
+        Macros.removeLocalNotification(NotificationCategory.nonCompliantWifi)
+    }
+  
+    private func removeLeakProtectionAlert() {
+        guard let presentedLeakProtectionAlert = UIApplication.shared.delegate?.window??.rootViewController?.presentedViewController as? UIAlertController,
+              presentedLeakProtectionAlert.title == L10n.Dashboard.Vpn.Leakprotection.Alert.title else { return }
+        
+        presentedLeakProtectionAlert.dismiss(animated: true)
+    }
+  
+    
     // MARK: Helpers
     @objc private func vpnDidFail() {
         if !isDisconnecting {
             isDisconnecting = true
             Client.providers.vpnProvider.disconnect { _ in
-                RatingManager.shared.logError()
+                RatingManager.shared.handleConnectionError()
                 self.isDisconnecting = false
                 self.connectingStatus = .none
             }

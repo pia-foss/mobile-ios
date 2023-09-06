@@ -37,7 +37,7 @@ class GeneralSettingsViewController: PIABaseSettingsViewController {
         tableView.estimatedSectionFooterHeight = 1.0
         
         switchGeoServers.addTarget(self, action: #selector(toggleGEOServers(_:)), for: .valueChanged)
-        switchInAppMessages.addTarget(self, action: #selector(toggleStopInAppMessages(_:)), for: .valueChanged)
+        switchInAppMessages.addTarget(self, action: #selector(toggleShowServiceMessages(_:)), for: .valueChanged)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -60,8 +60,8 @@ class GeneralSettingsViewController: PIABaseSettingsViewController {
         self.tableView.reloadData()
     }
 
-    @objc private func toggleStopInAppMessages(_ sender: UISwitch) {
-        AppPreferences.shared.stopInAppMessages = sender.isOn
+    @objc private func toggleShowServiceMessages(_ sender: UISwitch) {
+        AppPreferences.shared.showServiceMessages = sender.isOn
     }
     
     @objc private func toggleGEOServers(_ sender: UISwitch) {
@@ -129,7 +129,7 @@ extension GeneralSettingsViewController: UITableViewDelegate, UITableViewDataSou
             case .showServiceCommunicationMessages:
                 cell.accessoryView = switchInAppMessages
                 cell.selectionStyle = .none
-                switchInAppMessages.isOn = AppPreferences.shared.stopInAppMessages //invert the boolean as the title has change to Show messages instead of Stop messages
+                switchInAppMessages.isOn = AppPreferences.shared.showServiceMessages //invert the boolean as the title has change to Show messages instead of Stop messages
 
             case .showGeoRegions:
                 cell.textLabel?.numberOfLines = 0

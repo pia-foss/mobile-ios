@@ -109,10 +109,12 @@
 "account.subscriptions.monthly" = "Месячный план";
 "account.subscriptions.trial" = "Пробный план";
 "account.unauthorized" = "Что-то пошло не так. Попробуйте выполнить вход еще раз";
-"account.delete" = "Delete Account";
-"account.delete.alert.title" = "Are you sure?";
-"account.delete.alert.message" = "Deleting your PIA account is permanent and irreversible. You will not be able to retrieve your PIA credentials after performing this action. Please note that this action only deletes your PIA account from our database, but it does NOT delete your subscription. You will need to go to your Apple account and cancel the Private Internet Access subscription from there. Otherwise, you will still be charged, even though your PIA account will no longer be active.";
-"account.delete.alert.failureMessage" = "Something went wrong while deleting your account, please try again later.";
+"account.delete" = "﻿Удалить аккаунт";
+"account.delete.alert.title" = "Вы уверены?";
+"account.delete.alert.message" = "Удаление аккаунта PIA окончательно и необратимо. Выполнив это действие, вы не сможете восстановить свои учетные данные PIA. Обратите внимание, что это действие приведет только к удалению аккаунта из нашей базы данных, Но НЕ к удалению подписки. Вам потребуется перейти в аккаунт Apple и отменить подписку на Private Internet Access. В противном случае плата будет начисляться даже в отсутствие активного аккаунта PIA.";
+"account.delete.alert.failureMessage" = "При удалении аккаунта что-то пошло не так. Повторите попытку позже.";
+"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
+"account.survey.messageLink" = "Take The Survey";
 
 // SETTINGS
 
@@ -370,11 +372,15 @@
 "rating.enjoy.subtitle" = "Надеемся, что наш продукт VPN соответствует вашим ожиданиям";
 "rating.problems.question" = "Что пошло не так?";
 "rating.problems.subtitle" = "Хотите дать отзыв? Мы сделаем все возможное, чтобы ваши впечатления от PIA стали лучше";
-"rating.rate.question" = "Как насчет отзыва в AppStore?";
+"rating.review.question" = "Как насчет отзыва в App Store?";
+"rating.rate.question" = "Как насчет оценки в App Store?";
 "rating.rate.subtitle" = "Благодарим за согласие поделиться своим опытом";
 "rating.error.question" = "Не удалось установить соединение";
 "rating.error.subtitle" = "Попробуйте выбрать другой регион или расскажите нам, что произошло, открыв заявку в службу поддержки.";
 "rating.error.button.send" = "Отправить отзыв";
+"rating.alert.button.notreally" = "Не особо";
+"rating.alert.button.nothanks" = "Спасибо, не надо.";
+"rating.alert.button.oksure" = "С удовольствием!";
 
 // CALLING CARDS
 "card.wireguard.title" = "Опробуйте WireGuard® сегодня!";
@@ -395,6 +401,7 @@
 "dedicated.ip.message.valid.token" = "Ваш выделенный IP-адрес успешно активирован. Теперь он будет доступен в списке выбора региона.";
 "dedicated.ip.message.expired.token" = "Срок действия вашего токена истек. Сгенерируйте новый на странице своей учетной записи на нашем веб-сайте.";
 "dedicated.ip.message.error.token" = "Срок действия вашего токена истек. Сгенерируйте новый на странице своей учетной записи на нашем веб-сайте.";
+"dedicated.ip.message.error.retryafter" = "Слишком много неудачных запросов активации токена. Повторите попытку через %@ сек.";
 "dedicated.ip.message.token.willexpire" = "Действие вашего выделенного IP-адреса скоро заканчивается. Получите новый адрес";
 "dedicated.ip.message.token.willexpire.link" = "Получите новый адрес";
 "dedicated.ip.message.ip.updated" = "Ваш выделенный IP-адрес обновлен";

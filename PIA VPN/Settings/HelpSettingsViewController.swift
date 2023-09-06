@@ -79,14 +79,16 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
     @objc private func toggleShareServiceQualityData(_ sender: UISwitch) {
         let preferences = Client.preferences.editable()
         preferences.shareServiceQualityData = sender.isOn
-        preferences.commit()
         
         if sender.isOn {
+            preferences.versionWhenServiceQualityOpted = Macros.versionString()
             ServiceQualityManager.shared.start()
         } else {
+            preferences.versionWhenServiceQualityOpted = nil
             ServiceQualityManager.shared.stop()
         }
         
+        preferences.commit()
         reloadSettings()
     }
 
@@ -230,7 +232,7 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     @objc private func showShareDataInformation() {
-        let storyboard = UIStoryboard(name: "Signup", bundle: Bundle(for: ShareDataInformationViewController.self))
+        let storyboard = Client.signupStoryboard()
         let shareDataInformationViewController = storyboard.instantiateViewController(withIdentifier: ViewControllerIdentifiers.shareDataInformation)
         presentModally(viewController: shareDataInformationViewController)
     }

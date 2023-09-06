@@ -22,11 +22,13 @@
 
 import UIKit
 import PIALibrary
-import TunnelKit
+import TunnelKitCore
+import TunnelKitOpenVPN
 import SafariServices
 import SwiftyBeaver
 import PIAWireguard
 import WidgetKit
+import AlamofireImage
 
 private let log = SwiftyBeaver.self
 
@@ -264,7 +266,7 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         preferences.ikeV2PacketSize = pendingPreferences.ikeV2PacketSize
         preferences.commit()
 
-        guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration else {
+        guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration else {
             fatalError("No default VPN custom configuration provided for PIA protocol")
         }
         AppPreferences.shared.reset()
@@ -412,8 +414,8 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
     @objc func reloadSettings() {
         pendingPreferences = Client.preferences.editable()
         
-        guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration ??
-            Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNTunnelProvider.Configuration else {
+        guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration ??
+            Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration else {
             fatalError("No default VPN custom configuration provided for PIA OpenVPN protocol")
         }
         
@@ -439,7 +441,7 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         log.debug("OpenVPN endpoints: \(pendingOpenVPNConfiguration.endpointProtocols ?? [])")
         
         if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-            var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: pendingOpenVPNConfiguration.build())
+            var builder = OpenVPNProvider.ConfigurationBuilder(sessionConfiguration: pendingOpenVPNConfiguration.build())
             
             if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
                 if AppPreferences.shared.useSmallPackets {
@@ -460,8 +462,22 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
             }
         }
 
+        updateCustomDNSAppPreferences()
         refreshSettings()
         reportUpdatedPreferences()
+    }
+    
+    private func updateCustomDNSAppPreferences() {
+        var dnsServers = pendingOpenVPNConfiguration.dnsServers
+        if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+            dnsServers = pendingWireguardVPNConfiguration.customDNSServers
+        }
+        
+        if let dnsServers = dnsServers {
+            AppPreferences.shared.usesCustomDNS = DNSList.shared.hasCustomDNS(for: pendingPreferences.vpnType, in: dnsServers)
+        } else {
+            AppPreferences.shared.usesCustomDNS = false
+        }
     }
     
     // MARK: ModalController

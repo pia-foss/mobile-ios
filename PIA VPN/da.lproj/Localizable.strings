@@ -109,10 +109,12 @@
 "account.subscriptions.monthly" = "Månedsabonnement";
 "account.subscriptions.trial" = "Prøveabonnement";
 "account.unauthorized" = "Noget gik galt. Prøv at logge på igen.";
-"account.delete" = "Delete Account";
-"account.delete.alert.title" = "Are you sure?";
-"account.delete.alert.message" = "Deleting your PIA account is permanent and irreversible. You will not be able to retrieve your PIA credentials after performing this action. Please note that this action only deletes your PIA account from our database, but it does NOT delete your subscription. You will need to go to your Apple account and cancel the Private Internet Access subscription from there. Otherwise, you will still be charged, even though your PIA account will no longer be active.";
-"account.delete.alert.failureMessage" = "Something went wrong while deleting your account, please try again later.";
+"account.delete" = "Slet konto";
+"account.delete.alert.title" = "Er du sikker?";
+"account.delete.alert.message" = "Hvis du sletter din PIA-konto, er det permanent og uigenkaldeligt. Du vil ikke kunne gendanne dine PIA-legitimationsoplysninger, når du har udført denne handling. Bemærk, at denne handling kun sletter din PIA-konto fra vores database, men IKKE sletter dit aabonnement. Du er nødt til at gå til din Apple-konto og annullere dit Private Internet Access-abonnement derfra. Ellers vil du fortsat blive faktureret, også selv om din PIA-konto ikke længere er aktiv.";
+"account.delete.alert.failureMessage" = "Noget gik galt, da du slettede din konto, prøv igen senere.";
+"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
+"account.survey.messageLink" = "Take The Survey";
 
 // SETTINGS
 
@@ -370,11 +372,15 @@
 "rating.enjoy.subtitle" = "Vi håber, at vores VPN lever op til dine forventninger.";
 "rating.problems.question" = "Hvad gik galt?";
 "rating.problems.subtitle" = "Vil du give noget feedback? Vi kan hjælpe dig med at forbedre din oplevelse med PIA";
-"rating.rate.question" = "Hvad med en AppStore-anmeldelse?";
+"rating.review.question" = "Hvad med en AppStore-anmeldelse?";
+"rating.rate.question" = "Hvad med en vurdering i AppStore?";
 "rating.rate.subtitle" = "Vi sætter pris på, at du deler din oplevelse";
 "rating.error.question" = "Forbindelsen kunne ikke oprettes";
 "rating.error.subtitle" = "Du kan prøve at vælge en anden region, eller fortælle os om det, ved at åbne en supportbillet.";
 "rating.error.button.send" = "Send feedback";
+"rating.alert.button.notreally" = "Nej, helst ikke";
+"rating.alert.button.nothanks" = "Nej tak.";
+"rating.alert.button.oksure" = "OK, selvfølgelig!";
 
 // CALLING CARDS
 "card.wireguard.title" = "Prøv WireGuard® i dag!";
@@ -395,6 +401,7 @@
 "dedicated.ip.message.valid.token" = "Din dedikerede IP er blevet aktiveret. Den vil være tilgængelig på din liste over Valg af regioner.";
 "dedicated.ip.message.expired.token" = "Dit token er udløbet. Generer et nyt fra din kontoside på websiden.";
 "dedicated.ip.message.error.token" = "Dit token er udløbet. Generer et nyt fra din kontoside på websiden.";
+"dedicated.ip.message.error.retryafter" = "For mange mislykkede anmodninger om aktivering af token. Prøv igen efter %@ sekund(er).";
 "dedicated.ip.message.token.willexpire" = "Din dedikerede IP udløber snart. Få en ny";
 "dedicated.ip.message.token.willexpire.link" = "Få en ny";
 "dedicated.ip.message.ip.updated" = "Din dedikerede IP blev opdateret";

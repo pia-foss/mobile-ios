@@ -22,13 +22,15 @@
 import Foundation
 import PIALibrary
 import PIAAccount
+import UIKit
 
 public class MessagesManager: NSObject {
 
     public static let shared = MessagesManager()
     private var apiMessage: InAppMessage!
     private var systemMessage: InAppMessage!
-
+    private static let surveyMessageID = "take-the-survey-message-banner"
+    
     public override init() {
         super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(presentExpiringDIPRegionSystemMessage(notification:)), name: .PIADIPRegionExpiring, object: nil)
@@ -37,18 +39,6 @@ public class MessagesManager: NSObject {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-    }
-
-    func refreshMessages() {
-        
-        if !AppPreferences.shared.stopInAppMessages {
-            Client.providers.accountProvider.inAppMessages(forAppVersion: Macros.localizedVersionNumber()) { (message, error) in
-                if let message = message, !message.wasDismissed() {
-                    self.apiMessage = message
-                    Macros.postNotification(.PIAUpdateFixedTiles)
-                }
-            }
-        }
     }
     
     func postSystemMessage(message: InAppMessage) {
@@ -71,6 +61,10 @@ public class MessagesManager: NSObject {
     }
     
     func dismiss(message id: String) {
+        if id == MessagesManager.surveyMessageID {
+            AppPreferences.shared.userInteractedWithSurvey = true
+        }
+        
         AppPreferences.shared.dismissedMessages.append(id)
         if apiMessage != nil, id == apiMessage.id {
             apiMessage = nil
@@ -126,7 +120,7 @@ extension InAppMessage {
         }
 
         command?.execute()
-        
+        executionCompletionHandler?()
     }
     
     func localisedMessage() -> String {
@@ -198,5 +192,20 @@ extension MessagesManager {
             }
             AppPreferences.shared.dedicatedTokenIPReleation[token] = ip
         }
+    }
+    
+    
+    func showInAppSurveyMessage() {
+        let message = InAppMessage(withMessage: ["en-US": L10n.Account.Survey.message.appendDetailSymbol()], id: MessagesManager.surveyMessageID, link: ["en-US": L10n.Account.Survey.messageLink.appendDetailSymbol()], type: .link, level: .api, actions: nil, view: nil, uri: AppConstants.Survey.formURL.absoluteString) { [weak self] in
+            self?.dismiss(message: MessagesManager.surveyMessageID)
+        }
+        MessagesManager.shared.postSystemMessage(message: message)
+    }
+}
+
+private extension String {
+    func appendDetailSymbol() -> String {
+        let symbol = UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft ? "⟨ " : " ⟩"
+        return "\(self)\(symbol)"
     }
 }

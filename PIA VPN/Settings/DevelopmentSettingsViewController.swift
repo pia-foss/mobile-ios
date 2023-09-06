@@ -32,6 +32,8 @@ class DevelopmentSettingsViewController: PIABaseSettingsViewController {
 
     @IBOutlet weak var tableView: UITableView!
     private lazy var switchEnvironment = UISwitch()
+    private lazy var switchLeakProtectionFlag = UISwitch()
+    private lazy var switchLeakProtectionNotificationsFlag = UISwitch()
     private var controller: OptionsViewController?
 
     override func viewDidLoad() {
@@ -44,6 +46,8 @@ class DevelopmentSettingsViewController: PIABaseSettingsViewController {
         tableView.delegate = self
         tableView.dataSource = self
         switchEnvironment.addTarget(self, action: #selector(toggleEnv(_:)), for: .valueChanged)
+        
+        addFeatureFlagsTogglesActions()
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSettings), name: .PIASettingsHaveChanged, object: nil)
     }
@@ -145,6 +149,18 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
         case .crash:
             cell.textLabel?.text = "Crash"
             cell.detailTextLabel?.text = nil
+        case .leakProtectionFlag:
+          cell.textLabel?.text = "FF - Leak Protection"
+          cell.detailTextLabel?.text = nil
+          cell.accessoryView = switchLeakProtectionFlag
+          cell.selectionStyle = .none
+            switchLeakProtectionFlag.isOn = AppPreferences.shared.showLeakProtection
+        case .leakProtectionNotificationsFlag:
+          cell.textLabel?.text = "FF - Leak Protection Notifications"
+          cell.detailTextLabel?.text = nil
+          cell.accessoryView = switchLeakProtectionNotificationsFlag
+          cell.selectionStyle = .none
+            switchLeakProtectionNotificationsFlag.isOn = AppPreferences.shared.showLeakProtectionNotifications
         }
     }
     
@@ -231,13 +247,17 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
                 }
 
             case .crash:
-                fatalError("Crashing staging app")
+                crashStagingApp()
         case .deleteKeychain:
                 deleteKeychain()
             default: break
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    private func crashStagingApp() {
+        NSException(name: NSExceptionName(rawValue: "App Crash"), reason: "Crashing the staging app manually").raise()
     }
     
     private func deleteKeychain() {
@@ -341,4 +361,24 @@ extension DevelopmentSettingsViewController: OptionsViewControllerDelegate {
 
     }
     
+}
+
+
+// MARK: - Feature Flags Toggles
+
+extension DevelopmentSettingsViewController {
+    @objc private func toggleLeakProtectionFlag(_ sender: UISwitch) {
+        AppPreferences.shared.showLeakProtection = sender.isOn
+    }
+    
+    @objc private func toggleLeakProtectionNotificationsFlag(_ sender: UISwitch) {
+        AppPreferences.shared.showLeakProtectionNotifications = sender.isOn
+    }
+    
+    private func addFeatureFlagsTogglesActions() {
+        switchLeakProtectionFlag.addTarget(self, action: #selector(toggleLeakProtectionFlag(_:)), for: .valueChanged)
+        switchLeakProtectionNotificationsFlag.addTarget(self, action: #selector(toggleLeakProtectionNotificationsFlag(_:)), for: .valueChanged)
+        
+        // Additional Feature Flags toggles actions here
+    }
 }

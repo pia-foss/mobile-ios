@@ -109,10 +109,12 @@
 "account.subscriptions.monthly" = "แผนรายเดือน";
 "account.subscriptions.trial" = "แผนทดลองใช้";
 "account.unauthorized" = "บางอย่างผิดปกติ โปรดลองลงชื่อเข้าใช้อีกครั้ง";
-"account.delete" = "Delete Account";
-"account.delete.alert.title" = "Are you sure?";
-"account.delete.alert.message" = "Deleting your PIA account is permanent and irreversible. You will not be able to retrieve your PIA credentials after performing this action. Please note that this action only deletes your PIA account from our database, but it does NOT delete your subscription. You will need to go to your Apple account and cancel the Private Internet Access subscription from there. Otherwise, you will still be charged, even though your PIA account will no longer be active.";
-"account.delete.alert.failureMessage" = "Something went wrong while deleting your account, please try again later.";
+"account.delete" = "ลบบัญชี";
+"account.delete.alert.title" = "คุณแน่ใจหรือไม่";
+"account.delete.alert.message" = "การลบบัญชี PIA ของคุณจะเป็นการถาวรและไม่สามารถย้อนกลับได้ คุณจะไม่สามารถดึงข้อมูลประจำตัว PIA ของคุณหลังจากดำเนินการนี้ โปรดทราบว่าการดำเนินการนี้จะลบบัญชี PIA ของคุณจากฐานข้อมูลของเราเท่านั้น แต่จะไม่ลบการสมัครใช้งานของคุณ คุณจะต้องไปที่บัญชี Apple ของคุณแล้วยกเลิกการสมัครใช้งาน Private Internet Access จากที่นั่น ไม่เช่นนั้นคุณจะยังคงถูกเรียกเก็บค่าบริการแม้ว่าบัญชี PIA ของคุณจะไม่เปิดใช้งานอีกต่อไป";
+"account.delete.alert.failureMessage" = "เกิดข้อผิดพลาดขณะลบบัญชีของคุณ โปรดลองอีกครั้งในภายหลัง";
+"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
+"account.survey.messageLink" = "Take The Survey";
 
 // SETTINGS
 
@@ -370,11 +372,15 @@
 "rating.enjoy.subtitle" = "เราหวังว่าผลิตภัณฑ์ VPN ของเราจะตอบโจทย์ความต้องการของคุณ";
 "rating.problems.question" = "มีอะไรผิดปกติเหรอ";
 "rating.problems.subtitle" = "คุณอยากที่จะให้ข้อเสนอแนะไหม เราช่วยปรับปรุงประสบการณ์การใช้งาน PIA ของคุณได้";
-"rating.rate.question" = "รีวิว AppStore เป็นอย่างไร?";
+"rating.review.question" = "รีวิวเราใน AppStore หน่อยไหม?";
+"rating.rate.question" = "ให้คะแนนเราใน AppStore หน่อยไหม?";
 "rating.rate.subtitle" = "ขอขอบคุณที่คุณช่วยแชร์ประสบการณ์";
 "rating.error.question" = "ไม่สามารถสร้างการเชื่อมต่อได้";
 "rating.error.subtitle" = "คุณสามารถลองเลือกภูมิภาคอื่นหรือแจ้งให้เราทราบโดยเปิดทิกเก็ตความช่วยเหลือ";
 "rating.error.button.send" = "ส่งความคิดเห็น";
+"rating.alert.button.notreally" = "ไม่ดีกว่า";
+"rating.alert.button.nothanks" = "ไม่ล่ะ ขอบคุณ.";
+"rating.alert.button.oksure" = "ได้เลย!";
 
 // CALLING CARDS
 "card.wireguard.title" = "ลอง WireGuard® ได้แล้ววันนี้!";
@@ -395,6 +401,7 @@
 "dedicated.ip.message.valid.token" = "IP เฉพาะของคุณเปิดใช้งานสำเร็จแล้ว จะมีอยู่ในรายการการเลือกภูมิภาคของคุณ";
 "dedicated.ip.message.expired.token" = "โทเค็นของคุณหมดอายุแล้ว โปรดสร้างใหม่จากหน้าบัญชีของคุณบนเว็บไซต์";
 "dedicated.ip.message.error.token" = "โทเค็นของคุณหมดอายุแล้ว โปรดสร้างใหม่จากหน้าบัญชีของคุณบนเว็บไซต์";
+"dedicated.ip.message.error.retryafter" = "มีคำขอเปิดใช้งานโทเค็นที่ล้มเหลวมากเกินไป โปรดลองอีกครั้งหลังเวลาผ่านไป %@ วินาที";
 "dedicated.ip.message.token.willexpire" = "IP เฉพาะของคุณจะหมดอายุในไม่ช้า รับใหม่";
 "dedicated.ip.message.token.willexpire.link" = "รับใหม่";
 "dedicated.ip.message.ip.updated" = "อัปเดต IP เฉพาะของคุณแล้ว";

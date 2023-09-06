@@ -23,7 +23,8 @@ import UIKit
 import Popover
 import SwiftyBeaver
 import PIALibrary
-import TunnelKit
+import TunnelKitCore
+import TunnelKitOpenVPN
 
 class ProtocolSettingsViewController: PIABaseSettingsViewController {
     
@@ -98,6 +99,7 @@ class ProtocolSettingsViewController: PIABaseSettingsViewController {
         let height = heightForOptions(options) //Default height * 3 for 3 protocols
         let optionsView = ProtocolPopoverSelectionView(frame: CGRect(x: 0, y: 0, width: Int(width), height: height))
         optionsView.pendingPreferences = self.pendingPreferences
+        optionsView.settingsDelegate = self.settingsDelegate
         optionsView.currentPopover = protocolPopover
         optionsView.protocols = options
         protocolPopover.show(optionsView, fromView: sender)
