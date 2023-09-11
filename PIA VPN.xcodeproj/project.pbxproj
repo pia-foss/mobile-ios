@@ -250,7 +250,6 @@
 		82CAB87B255AEA3500BB08EF /* MessagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB879255AEA3500BB08EF /* MessagesManager.swift */; };
 		82CAB8B0255B050000BB08EF /* MessagesCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB8AF255B050000BB08EF /* MessagesCommands.swift */; };
 		82CAB8B1255B050000BB08EF /* MessagesCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB8AF255B050000BB08EF /* MessagesCommands.swift */; };
-		82CAB8DA255BEC7000BB08EF /* PIACommandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB8D9255BEC7000BB08EF /* PIACommandTests.swift */; };
 		82CAB8E8255C0CB000BB08EF /* MessagesTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB8E7255C0CB000BB08EF /* MessagesTile.swift */; };
 		82CAB8E9255C0CB000BB08EF /* MessagesTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB8E7255C0CB000BB08EF /* MessagesTile.swift */; };
 		82CAB8F2255C0CD100BB08EF /* MessagesTileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB8F0255C0CD100BB08EF /* MessagesTileCollectionViewCell.swift */; };
@@ -1754,9 +1753,7 @@
 					};
 					0EEE1BE61E4F6EF400397DE2 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 5357M5NW9W;
 						LastSwiftMigration = 1010;
-						ProvisioningStyle = Automatic;
 						TestTargetID = 291C637B183EBC210039EC03;
 					};
 					0EFB606F203D7A2C0095398C = {
@@ -2208,7 +2205,6 @@
 				DD606AC821C9344100E0781D /* AppTests.swift in Sources */,
 				82A1AD2324B7C0020003DD02 /* PIACardTests.swift in Sources */,
 				8221922B24CECFE700C24F1C /* NMTTests.swift in Sources */,
-				82CAB8DA255BEC7000BB08EF /* PIACommandTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2720,7 +2716,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2739,7 +2734,6 @@
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PIA VPN.app/PIA VPN";
