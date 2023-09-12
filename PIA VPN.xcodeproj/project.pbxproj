@@ -145,6 +145,16 @@
 		3545E98226AADB2B00B812CC /* ServerSelectingTileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545E98126AADB2B00B812CC /* ServerSelectingTileCell.swift */; };
 		3545E98326AADC7C00B812CC /* ServerSelectingTileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545E98126AADB2B00B812CC /* ServerSelectingTileCell.swift */; };
 		3545E98426AADC7E00B812CC /* ServerSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545E97F26AAD60C00B812CC /* ServerSelectionDelegate.swift */; };
+		6924831A2AB045A5002A0407 /* PIAWidgetAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483192AB045A5002A0407 /* PIAWidgetAttributes.swift */; };
+		6924831B2AB045A5002A0407 /* PIAWidgetAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483192AB045A5002A0407 /* PIAWidgetAttributes.swift */; };
+		6924831C2AB045A5002A0407 /* PIAWidgetAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483192AB045A5002A0407 /* PIAWidgetAttributes.swift */; };
+		6924831E2AB04FFD002A0407 /* PIAWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6924831D2AB04FFD002A0407 /* PIAWidgetBundle.swift */; };
+		692483202AB05F18002A0407 /* PIAConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6924831F2AB05F18002A0407 /* PIAConnectionView.swift */; };
+		692483222AB05F37002A0407 /* PIACircleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483212AB05F37002A0407 /* PIACircleIcon.swift */; };
+		692483242AB05F67002A0407 /* PIACircleIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483232AB05F67002A0407 /* PIACircleIndicator.swift */; };
+		692483262AB05F85002A0407 /* PIAConnectionActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483252AB05F85002A0407 /* PIAConnectionActivityWidget.swift */; };
+		692483272AB06720002A0407 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8269A6DC251CB5E3000B4DBF /* Assets.xcassets */; };
+		692483282AB06721002A0407 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8269A6DC251CB5E3000B4DBF /* Assets.xcassets */; };
 		7EB8D11F27CE2B020030B060 /* PIAUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB8D11E27CE2B020030B060 /* PIAUITests.swift */; };
 		7EB8D12127CE2B5D0030B060 /* PIALaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB8D12027CE2B5D0030B060 /* PIALaunchTests.swift */; };
 		7EB8D12327CE7D4C0030B060 /* PIALoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB8D12227CE7D4C0030B060 /* PIALoginTests.swift */; };
@@ -549,7 +559,7 @@
 		0E257AC41DA45D2F0000D3C3 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		0E325DA62093277F0020BEDB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0E392DA51FE3283C0002160D /* TransientState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransientState.swift; sourceTree = "<group>"; };
-		0E3A35271FD9A960000B0F99 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		0E3A35271FD9A960000B0F99 /* DashboardViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		0E3A352B1FD9CDC5000B0F99 /* Theme+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+App.swift"; sourceTree = "<group>"; };
 		0E3A35341FD9EBDA000B0F99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E3C9A5D20EC004D00B199F9 /* custom.servers */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = custom.servers; sourceTree = "<group>"; };
@@ -662,6 +672,12 @@
 		3524670D26B432ED00E3F0AC /* DashboardViewController+ServerSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DashboardViewController+ServerSelection.swift"; sourceTree = "<group>"; };
 		3545E97F26AAD60C00B812CC /* ServerSelectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSelectionDelegate.swift; sourceTree = "<group>"; };
 		3545E98126AADB2B00B812CC /* ServerSelectingTileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSelectingTileCell.swift; sourceTree = "<group>"; };
+		692483192AB045A5002A0407 /* PIAWidgetAttributes.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAWidgetAttributes.swift; sourceTree = "<group>"; tabWidth = 4; };
+		6924831D2AB04FFD002A0407 /* PIAWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAWidgetBundle.swift; sourceTree = "<group>"; };
+		6924831F2AB05F18002A0407 /* PIAConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAConnectionView.swift; sourceTree = "<group>"; };
+		692483212AB05F37002A0407 /* PIACircleIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACircleIcon.swift; sourceTree = "<group>"; };
+		692483232AB05F67002A0407 /* PIACircleIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACircleIndicator.swift; sourceTree = "<group>"; };
+		692483252AB05F85002A0407 /* PIAConnectionActivityWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAConnectionActivityWidget.swift; sourceTree = "<group>"; };
 		7EB8D11327CCF4C20030B060 /* PIA VPN UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA VPN UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EB8D11E27CE2B020030B060 /* PIAUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAUITests.swift; sourceTree = "<group>"; };
 		7EB8D12027CE2B5D0030B060 /* PIALaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIALaunchTests.swift; sourceTree = "<group>"; };
@@ -1369,6 +1385,9 @@
 				AAE878A628E473A400557F26 /* PIAWidgetVpnDetailsView.swift */,
 				AAE878A828E4765F00557F26 /* PIAIconView.swift */,
 				AA52C59E28E5ECD400D025AF /* PIAWidgetVpnDetaislRow.swift */,
+				6924831F2AB05F18002A0407 /* PIAConnectionView.swift */,
+				692483212AB05F37002A0407 /* PIACircleIcon.swift */,
+				692483232AB05F67002A0407 /* PIACircleIndicator.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1379,6 +1398,9 @@
 				8269A6D9251CB5E0000B4DBF /* PIAWidget.swift */,
 				AAE8789E28E4696300557F26 /* PIAWidgetProvider.swift */,
 				AAE878A028E46C1600557F26 /* PIAWidgetPreview.swift */,
+				692483192AB045A5002A0407 /* PIAWidgetAttributes.swift */,
+				6924831D2AB04FFD002A0407 /* PIAWidgetBundle.swift */,
+				692483252AB05F85002A0407 /* PIAConnectionActivityWidget.swift */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -1878,6 +1900,7 @@
 			files = (
 				82A1AD2A24B87CCD0003DD02 /* PIACard.xib in Resources */,
 				82183D9925014FDC0033023F /* CustomNetworkCollectionViewCell.xib in Resources */,
+				692483272AB06720002A0407 /* Assets.xcassets in Resources */,
 				DD172AA02254C39300071CFB /* FavoriteServersTile.xib in Resources */,
 				0ED66BD020A9918000333B35 /* staging.endpoint in Resources */,
 				DD76292021ECCD510092DF50 /* UsageTileCollectionViewCell.xib in Resources */,
@@ -1966,6 +1989,7 @@
 				DD172A9C2254C36D00071CFB /* FavoriteServersTileCollectionViewCell.xib in Resources */,
 				DD51F8B92372E494009FEED3 /* PIA-RSA-4096.pem in Resources */,
 				82183D9C25014FDC0033023F /* PIAHeaderCollectionViewCell.xib in Resources */,
+				692483282AB06721002A0407 /* Assets.xcassets in Resources */,
 				291C6398183EBC210039EC03 /* Images.xcassets in Resources */,
 				82183D9625014FDC0033023F /* NetworkCollectionViewCell.xib in Resources */,
 				82183D9825014FDC0033023F /* CustomNetworkCollectionViewCell.xib in Resources */,
@@ -2156,6 +2180,7 @@
 				0E2215CD2008C01D00F5FB4D /* SwiftGen+Assets.swift in Sources */,
 				8272C62E2657B46100D846A8 /* NetworkSettingsViewController.swift in Sources */,
 				DDFCFA9021E892070081F235 /* RegionTileCollectionViewCell.swift in Sources */,
+				6924831B2AB045A5002A0407 /* PIAWidgetAttributes.swift in Sources */,
 				DD9706A5224262BF00630220 /* QuickSettingsTile.swift in Sources */,
 				82CAB8E9255C0CB000BB08EF /* MessagesTile.swift in Sources */,
 				DD3B504424B7576F0002F4B5 /* Card.swift in Sources */,
@@ -2252,6 +2277,7 @@
 				0ECF5C082017EBAD0047596C /* ThemeCode.swift in Sources */,
 				3545E98026AAD60C00B812CC /* ServerSelectionDelegate.swift in Sources */,
 				0E392DA61FE3283C0002160D /* TransientState.swift in Sources */,
+				6924831A2AB045A5002A0407 /* PIAWidgetAttributes.swift in Sources */,
 				82F41376264E8AC20098FF4B /* SettingOptions.swift in Sources */,
 				824C531524C04796003DB740 /* ConnectionTileCollectionViewCell.swift in Sources */,
 				0E3A35351FD9EBDA000B0F99 /* AppDelegate.swift in Sources */,
@@ -2366,16 +2392,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				692483242AB05F67002A0407 /* PIACircleIndicator.swift in Sources */,
 				8269A6FE251CBB36000B4DBF /* WidgetInformation.swift in Sources */,
 				822F97B4251DD53100644EF2 /* WidgetUserDefaultsDatasource.swift in Sources */,
 				8269A6DA251CB5E0000B4DBF /* PIAWidget.swift in Sources */,
+				692483222AB05F37002A0407 /* PIACircleIcon.swift in Sources */,
 				AAE878A928E4765F00557F26 /* PIAIconView.swift in Sources */,
+				6924831E2AB04FFD002A0407 /* PIAWidgetBundle.swift in Sources */,
 				AAE8789F28E4696300557F26 /* PIAWidgetProvider.swift in Sources */,
 				AAE878A128E46C1600557F26 /* PIAWidgetPreview.swift in Sources */,
+				692483262AB05F85002A0407 /* PIAConnectionActivityWidget.swift in Sources */,
 				AAE878A528E4723B00557F26 /* PIACircleVpnButton.swift in Sources */,
 				82BAACFB25B09C9200B3C733 /* PIAWidget.intentdefinition in Sources */,
 				AAE8789C28E4679500557F26 /* WidgetPersistenceDatasource.swift in Sources */,
 				AAE878A328E46D2B00557F26 /* PIAWidgetView.swift in Sources */,
+				6924831C2AB045A5002A0407 /* PIAWidgetAttributes.swift in Sources */,
+				692483202AB05F18002A0407 /* PIAConnectionView.swift in Sources */,
 				AAE878A728E473A400557F26 /* PIAWidgetVpnDetailsView.swift in Sources */,
 				AA52C59F28E5ECD400D025AF /* PIAWidgetVpnDetaislRow.swift in Sources */,
 			);

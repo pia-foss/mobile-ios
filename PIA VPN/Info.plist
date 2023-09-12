@@ -51,6 +51,8 @@
 	<string>We need camera access to scan a code from an gift card</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Authenticate to reveal</string>
+	<key>NSSupportsLiveActivities</key>
+	<true/>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>PIAConfigurationIntent</string>

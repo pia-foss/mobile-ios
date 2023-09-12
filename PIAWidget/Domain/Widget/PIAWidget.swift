@@ -22,8 +22,9 @@
 import WidgetKit
 import SwiftUI
 import Intents
+import ActivityKit
 
-@main
+//@main
 struct PIAWidget: Widget {
 
     let kind: String = "PIAWidget"
