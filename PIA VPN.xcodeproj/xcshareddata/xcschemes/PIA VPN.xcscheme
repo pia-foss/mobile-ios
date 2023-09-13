@@ -48,6 +48,20 @@
                ReferencedContainer = "container:PIA VPN.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7EB8D11227CCF4C20030B060"
+               BuildableName = "PIA VPN UITests.xctest"
+               BlueprintName = "PIA VPN UITests"
+               ReferencedContainer = "container:PIA VPN.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -72,16 +86,6 @@
                BlueprintIdentifier = "0EEE1BE61E4F6EF400397DE2"
                BuildableName = "PIA VPNTests.xctest"
                BlueprintName = "PIA VPNTests"
-               ReferencedContainer = "container:PIA VPN.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7EB8D11227CCF4C20030B060"
-               BuildableName = "PIA VPN UITests.xctest"
-               BlueprintName = "PIA VPN UITests"
                ReferencedContainer = "container:PIA VPN.xcodeproj">
             </BuildableReference>
          </TestableReference>
