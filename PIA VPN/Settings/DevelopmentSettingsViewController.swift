@@ -34,6 +34,7 @@ class DevelopmentSettingsViewController: PIABaseSettingsViewController {
     private lazy var switchEnvironment = UISwitch()
     private lazy var switchLeakProtectionFlag = UISwitch()
     private lazy var switchLeakProtectionNotificationsFlag = UISwitch()
+    private lazy var switchDynamicIslandLiveActivityFlag = UISwitch()
     private var controller: OptionsViewController?
 
     override func viewDidLoad() {
@@ -150,18 +151,26 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
             cell.textLabel?.text = "Crash"
             cell.detailTextLabel?.text = nil
         case .leakProtectionFlag:
-          cell.textLabel?.text = "FF - Leak Protection"
-          cell.detailTextLabel?.text = nil
-          cell.accessoryView = switchLeakProtectionFlag
-          cell.selectionStyle = .none
+            cell.textLabel?.text = "FF - Leak Protection"
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchLeakProtectionFlag
+            cell.selectionStyle = .none
             switchLeakProtectionFlag.isOn = AppPreferences.shared.showLeakProtection
         case .leakProtectionNotificationsFlag:
-          cell.textLabel?.text = "FF - Leak Protection Notifications"
-          cell.detailTextLabel?.text = nil
-          cell.accessoryView = switchLeakProtectionNotificationsFlag
-          cell.selectionStyle = .none
+            cell.textLabel?.text = "FF - Leak Protection Notifications"
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchLeakProtectionNotificationsFlag
+            cell.selectionStyle = .none
             switchLeakProtectionNotificationsFlag.isOn = AppPreferences.shared.showLeakProtectionNotifications
+        case .dynamicIslandLiveActivityFlag:
+            cell.textLabel?.text = "FF - Dynamic Island Live Activity"
+            cell.detailTextLabel?.text = nil
+            cell.accessoryView = switchDynamicIslandLiveActivityFlag
+            cell.selectionStyle = .none
+            switchDynamicIslandLiveActivityFlag.isOn = AppPreferences.shared.showDynamicIslandLiveActivity
+            
         }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -375,9 +384,14 @@ extension DevelopmentSettingsViewController {
         AppPreferences.shared.showLeakProtectionNotifications = sender.isOn
     }
     
+    @objc private func toggleDynamicIslandLiveActivityFlag(_ sender: UISwitch) {
+        AppPreferences.shared.showDynamicIslandLiveActivity = sender.isOn
+    }
+    
     private func addFeatureFlagsTogglesActions() {
         switchLeakProtectionFlag.addTarget(self, action: #selector(toggleLeakProtectionFlag(_:)), for: .valueChanged)
         switchLeakProtectionNotificationsFlag.addTarget(self, action: #selector(toggleLeakProtectionNotificationsFlag(_:)), for: .valueChanged)
+        switchDynamicIslandLiveActivityFlag.addTarget(self, action: #selector(toggleDynamicIslandLiveActivityFlag(_:)), for: .valueChanged)
         
         // Additional Feature Flags toggles actions here
     }

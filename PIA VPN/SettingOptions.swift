@@ -297,6 +297,7 @@ public enum DevelopmentSections: Int, SettingSection, EnumsBuilder {
     case crash
     case leakProtectionFlag
     case leakProtectionNotificationsFlag
+    case dynamicIslandLiveActivityFlag
 
     public func localizedTitleMessage() -> String {
         switch self {
@@ -311,6 +312,7 @@ public enum DevelopmentSections: Int, SettingSection, EnumsBuilder {
         case .crash: return "Crash the app"
         case .leakProtectionFlag: return "FF - Leak Protection"
         case .leakProtectionNotificationsFlag: return "FF - Leak Protection Notifications"
+        case .dynamicIslandLiveActivityFlag: return "FF - Dynamic Island Live Activity"
         }
     }
     
@@ -327,11 +329,12 @@ public enum DevelopmentSections: Int, SettingSection, EnumsBuilder {
         case .crash: return ""
         case .leakProtectionFlag: return ""
         case .leakProtectionNotificationsFlag: return ""
+        case .dynamicIslandLiveActivityFlag: return ""
         }
     }
     
     public static func all() -> [Self] {
-      return [.stagingVersion, .customServers, .publicUsername, .username, .password, .environment, .resolveGoogleAdsDomain, .deleteKeychain, .crash, .leakProtectionFlag, .leakProtectionNotificationsFlag]
+      return [.stagingVersion, .customServers, .publicUsername, .username, .password, .environment, .resolveGoogleAdsDomain, .deleteKeychain, .crash, .leakProtectionFlag, .leakProtectionNotificationsFlag, .dynamicIslandLiveActivityFlag]
     }
 
 }

@@ -396,8 +396,6 @@ class DashboardViewController: AutolayoutViewController {
     }
 
     @IBAction func vpnButtonClicked(_ sender: Any?) {
-        NSLog(">>> >>> VPN button clicked...")
-                
         if canConnectVPN() {
             manuallyConnect()
         } else {
@@ -1147,6 +1145,9 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
 extension DashboardViewController {
     func startLiveActivityIfNeeded() {
         if #available(iOS 16.1, *) {
+            // Start Live Activity only if the Feature Flag for it is enabled
+            guard AppPreferences.shared.showDynamicIslandLiveActivity else { return }
+            
             if isActivityStarted {
                 NSLog("Will stop live activity")
                 let state = PIAConnectionAttributes.ContentState(connected: true, regionName: "Barcelona", vpnProtocol: "IKEv2")
@@ -1156,16 +1157,22 @@ extension DashboardViewController {
                         return
                     }
                     await act.end(using: state, dismissalPolicy: .immediate)
+                    startLiveActivity()
                 }
             } else {
-                NSLog("Will start live activity")
-                let attributes = PIAConnectionAttributes()
-                let state = PIAConnectionAttributes.ContentState(connected: true, regionName: "Spain", vpnProtocol: "IKEv2")
-                activity = try? Activity<PIAConnectionAttributes>.request(attributes: attributes, contentState: state)
+                startLiveActivity()
             }
             
             isActivityStarted.toggle()
             
         }
+    }
+    
+    @available(iOS 16.1, *)
+    private func startLiveActivity() {
+        NSLog("Will start live activity")
+        let attributes = PIAConnectionAttributes()
+        let state = PIAConnectionAttributes.ContentState(connected: true, regionName: "Barcelona", vpnProtocol: "IKEv2")
+        activity = try? Activity<PIAConnectionAttributes>.request(attributes: attributes, contentState: state)
     }
 }
