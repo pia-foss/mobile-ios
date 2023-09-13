@@ -45,7 +45,11 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
         preferences = AppPreferences.shared
         vpnProvider = Client.providers.vpnProvider
         
-        if let preferences = preferences, preferences.showLeakProtection {
+        // Show Leak protection settings when:
+        // - The feature flag is ON (`showLeakProtection`)
+        // - Wireguard or OpenVPN is NOT selected
+        if let preferences = preferences, preferences.showLeakProtection,
+           !isCurrentProtocolWireguardOrOpenVPN() {
             sections = PrivacyFeaturesSections.all()
         } else {
             sections = PrivacyFeaturesSections.all().filter { $0 != .leakProtection && $0 != .allowAccessOnLocalNetwork }
@@ -320,4 +324,22 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
         Theme.current.applyTableSectionFooter(view)
     }
 
+}
+
+
+extension PrivacyFeaturesSettingsViewController {
+  func isCurrentProtocolWireguardOrOpenVPN() -> Bool {
+
+    // Selected protocol is OpenVPN
+    if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+      return true
+    }
+    
+    // Selected protocol is Wireguard
+    if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+      return true
+    }
+    
+    return false
+  }
 }

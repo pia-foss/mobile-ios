@@ -663,6 +663,13 @@ class DashboardViewController: AutolayoutViewController {
         
         let currentRFC1918VulnerableWifiName = Client.preferences.currentRFC1918VulnerableWifi ?? ""
       
+        let selectedProtocol = Client.preferences.vpnType.vpnProtocol
+        let isWireguardSelected = selectedProtocol == PIAWGTunnelProfile.vpnType.vpnProtocol
+        let isOpenVPNSelected = selectedProtocol == PIATunnelProfile.vpnType.vpnProtocol
+      
+        guard !isWireguardSelected,
+              !isOpenVPNSelected else { return }
+      
         DispatchQueue.main.async {
             self.presentNonCompliantWifiAlert()
             self.showNonCompliantWifiLocalNotification(currentRFC1918VulnerableWifiName: currentRFC1918VulnerableWifiName)
