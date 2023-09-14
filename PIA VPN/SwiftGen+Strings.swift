@@ -220,6 +220,12 @@ internal enum L10n {
           internal static let message = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.message", fallback: "To prevent data leaks, tap Disable Now to turn off “Allow access to devices on local network\" and automatically reconnect.")
           /// Unsecured Wi-Fi detected
           internal static let title = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.title", fallback: "Unsecured Wi-Fi detected")
+          internal enum IKEV2 {
+            /// Switch now
+            internal static let cta1 = L10n.tr("Localizable", "dashboard.vpn.leakprotection.ikev2.alert.cta1", fallback: "Switch Now")
+            /// To prevent data leaks, tap Switch Now to change to the IKEv2 VPN protocol and automatically reconnect.
+            internal static let message = L10n.tr("Localizable", "dashboard.vpn.leakprotection.ikev2.alert.message", fallback: "To prevent data leaks, tap Switch Now to change to the IKEv2 VPN protocol and automatically reconnect.")
+          }
         }
       }
     }

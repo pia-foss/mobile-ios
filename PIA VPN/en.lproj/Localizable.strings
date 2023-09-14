@@ -230,6 +230,9 @@
 "dashboard.vpn.leakprotection.alert.cta2" = "Learn more";
 "dashboard.vpn.leakprotection.alert.cta3" = "Ignore";
 
+"dashboard.vpn.leakprotection.ikev2.alert.message" = "To prevent data leaks, tap Switch Now to change to the IKEv2 VPN protocol and automatically reconnect.";
+"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Switch Now";
+
 // VPN PERMISSION
 
 "vpn_permission.title" = "PIA";
