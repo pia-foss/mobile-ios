@@ -783,6 +783,8 @@ class DashboardViewController: AutolayoutViewController {
         let editable = Client.preferences.editable()
         editable.vpnType = IKEv2Profile.vpnType
         editable.commit()
+        Client.preferences.leakProtection = true
+        Client.preferences.allowLocalDeviceAccess = false
         
         Client.providers.vpnProvider.disconnect { _ in
             self.shouldReconnect = true
