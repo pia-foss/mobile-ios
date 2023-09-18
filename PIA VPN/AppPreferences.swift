@@ -104,6 +104,7 @@ class AppPreferences {
         static let showNewInitialScreen = "showNewInitialScreen"
         static let showLeakProtection = "showLeakProtection"
         static let showLeakProtectionNotifications = "showLeakProtectionNotifications"
+        static let showDynamicIslandLiveActivity = "showDynamicIslandLiveActivity"
         
         // Survey
         static let userInteractedWithSurvey = "userInteractedWithSurvey"
@@ -535,6 +536,15 @@ class AppPreferences {
         }
         set {
             defaults.set(newValue, forKey: Entries.showLeakProtectionNotifications)
+        }
+    }
+  
+    var showDynamicIslandLiveActivity: Bool {
+        get {
+            return defaults.bool(forKey: Entries.showDynamicIslandLiveActivity)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.showDynamicIslandLiveActivity)
         }
     }
     

@@ -26,6 +26,7 @@ import SideMenu
 import SwiftyBeaver
 import WidgetKit
 import NetworkExtension
+import ActivityKit
 
 private let log = SwiftyBeaver.self
 
@@ -68,6 +69,8 @@ class DashboardViewController: AutolayoutViewController {
     private var currentPageIndex = 0
     private var isDisconnecting = false
     private var isUnauthorized = false
+    private var activity: Any? = nil
+    private var isActivityStarted: Bool = false
 
     private var currentStatus: VPNStatus = .disconnected
     private var connectingStatus: DashboardVPNConnectingStatus = .none
@@ -185,7 +188,10 @@ class DashboardViewController: AutolayoutViewController {
         
         // check account email
         checkAccountEmail()
-
+        
+        // Start the live activities (and DynamicIsland)
+        startLiveActivityIfNeeded()
+        
     }
     
     // MARK: Menu
@@ -390,7 +396,6 @@ class DashboardViewController: AutolayoutViewController {
     }
 
     @IBAction func vpnButtonClicked(_ sender: Any?) {
-                
         if canConnectVPN() {
             manuallyConnect()
         } else {
@@ -1213,5 +1218,43 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             Client.providers.tileProvider.orderedTiles = orderedTiles
             collectionView.reloadData()
         }
+    }
+}
+
+
+// MARK: Live Activities
+
+extension DashboardViewController {
+    func startLiveActivityIfNeeded() {
+        if #available(iOS 16.1, *) {
+            // Start Live Activity only if the Feature Flag for it is enabled
+            guard AppPreferences.shared.showDynamicIslandLiveActivity else { return }
+            
+            if isActivityStarted {
+                NSLog("Will stop live activity")
+                let state = PIAConnectionAttributes.ContentState(connected: true, regionName: "Barcelona", vpnProtocol: "IKEv2")
+                Task {
+                    guard let act = activity as? Activity<PIAConnectionAttributes> else {
+                        NSLog("No conn activity found to stop..")
+                        return
+                    }
+                    await act.end(using: state, dismissalPolicy: .immediate)
+                    startLiveActivity()
+                }
+            } else {
+                startLiveActivity()
+            }
+            
+            isActivityStarted.toggle()
+            
+        }
+    }
+    
+    @available(iOS 16.1, *)
+    private func startLiveActivity() {
+        NSLog("Will start live activity")
+        let attributes = PIAConnectionAttributes()
+        let state = PIAConnectionAttributes.ContentState(connected: true, regionName: "Barcelona", vpnProtocol: "IKEv2")
+        activity = try? Activity<PIAConnectionAttributes>.request(attributes: attributes, contentState: state)
     }
 }
