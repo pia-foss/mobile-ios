@@ -782,11 +782,13 @@ class DashboardViewController: AutolayoutViewController {
     private func handleSwitchProtocolAction(_ action: UIAlertAction) {
         let editable = Client.preferences.editable()
         editable.vpnType = IKEv2Profile.vpnType
+        let action = editable.requiredVPNAction()
         editable.commit()
+        
         Client.preferences.leakProtection = true
         Client.preferences.allowLocalDeviceAccess = false
         
-        Client.providers.vpnProvider.disconnect { _ in
+        action?.execute { _ in
             self.shouldReconnect = true
         }
     }
