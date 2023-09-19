@@ -10,17 +10,19 @@ struct PIAConnectionActivityWidget: Widget {
             // banner on the Home Screen of devices that don't support the
             // Dynamic Island.
             VStack {
-                HStack {
-                    PIACircleIcon(size: 25.0, strokeWidth: 1.0)
-                    Text("Private Internet Access")
-                        .foregroundColor(Color.white)
-                        .font(.title3)
+                HStack(alignment: .bottom, spacing: 4) {
+                    Image("ios-widget")
+                        .resizable()
+                        .frame(width: 16, height: 22)
+                    Image("PIA-logo")
+                        .resizable()
+                        .frame(width: 30, height: 14)
                 }
                 .padding(.bottom)
-                PIAConnectionView(context: context)
+                PIAConnectionView(context: context, showProtocol: true)
             }
             .padding()
-
+            
         } dynamicIsland: { context in
             // Create the views that appear in the Dynamic Island.
             DynamicIsland {
@@ -28,27 +30,27 @@ struct PIAConnectionActivityWidget: Widget {
                 DynamicIslandExpandedRegion(.leading) {
                     // Empty
                 }
-
+                
                 DynamicIslandExpandedRegion(.trailing) {
                     // Empty
                 }
-
+                
                 DynamicIslandExpandedRegion(.center) {
                     // Empty
                 }
-
+                
                 DynamicIslandExpandedRegion(.bottom) {
                     PIAConnectionView(context: context)
                 }
             } compactLeading: {
                 // When the island is wider than the display cutout
-                PIACircleIcon(size: 25.0, strokeWidth: 1.0)
+                PIACircleIcon(size: 28.0)
             } compactTrailing: {
                 // When the island is wider than the display cutout
-                PIACircleIndicator(size: 25.0, strokeWidth: 1.0, color: Color("AccentColor"))
+                PIACircleImageView(size: 24.0, image: "green-checkmark")
             } minimal: {
                 // This is used when there are multiple activities
-                PIACircleIcon(size: 25.0, strokeWidth: 1.0)
+                PIACircleIcon(size: 30.0)
             }
         }
     }

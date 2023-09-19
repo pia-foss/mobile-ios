@@ -8,7 +8,9 @@ public struct PIAConnectionAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
         var connected: Bool
         var regionName: String
+        var regionFlag: String
         var vpnProtocol: String
+        
     }
     
 } 

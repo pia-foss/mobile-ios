@@ -151,10 +151,12 @@
 		6924831E2AB04FFD002A0407 /* PIAWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6924831D2AB04FFD002A0407 /* PIAWidgetBundle.swift */; };
 		692483202AB05F18002A0407 /* PIAConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6924831F2AB05F18002A0407 /* PIAConnectionView.swift */; };
 		692483222AB05F37002A0407 /* PIACircleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483212AB05F37002A0407 /* PIACircleIcon.swift */; };
-		692483242AB05F67002A0407 /* PIACircleIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483232AB05F67002A0407 /* PIACircleIndicator.swift */; };
 		692483262AB05F85002A0407 /* PIAConnectionActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483252AB05F85002A0407 /* PIAConnectionActivityWidget.swift */; };
 		692483272AB06720002A0407 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8269A6DC251CB5E3000B4DBF /* Assets.xcassets */; };
 		692483282AB06721002A0407 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8269A6DC251CB5E3000B4DBF /* Assets.xcassets */; };
+		698F4F2B2AB8A2080010B2B0 /* PIAWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8269A6D5251CB5E0000B4DBF /* PIAWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		698F4F2D2AB978BF0010B2B0 /* PIACircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F4F2C2AB978BF0010B2B0 /* PIACircleImageView.swift */; };
+		698F4F2E2AB97BAD0010B2B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 291C6397183EBC210039EC03 /* Images.xcassets */; };
 		7EB8D11F27CE2B020030B060 /* PIAUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB8D11E27CE2B020030B060 /* PIAUITests.swift */; };
 		7EB8D12127CE2B5D0030B060 /* PIALaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB8D12027CE2B5D0030B060 /* PIALaunchTests.swift */; };
 		7EB8D12327CE7D4C0030B060 /* PIALoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB8D12227CE7D4C0030B060 /* PIALoginTests.swift */; };
@@ -541,6 +543,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				698F4F2B2AB8A2080010B2B0 /* PIAWidgetExtension.appex in Embed App Extensions */,
 				DD1AB0E923F2993600396E74 /* PIA VPN WG Tunnel.appex in Embed App Extensions */,
 				0EFB6079203D7A2C0095398C /* PIA VPN AdBlocker.appex in Embed App Extensions */,
 				0EE220741F4EF307002805AE /* PIA VPN Tunnel.appex in Embed App Extensions */,
@@ -674,10 +677,10 @@
 		3545E98126AADB2B00B812CC /* ServerSelectingTileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSelectingTileCell.swift; sourceTree = "<group>"; };
 		692483192AB045A5002A0407 /* PIAWidgetAttributes.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAWidgetAttributes.swift; sourceTree = "<group>"; tabWidth = 4; };
 		6924831D2AB04FFD002A0407 /* PIAWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAWidgetBundle.swift; sourceTree = "<group>"; };
-		6924831F2AB05F18002A0407 /* PIAConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAConnectionView.swift; sourceTree = "<group>"; };
-		692483212AB05F37002A0407 /* PIACircleIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACircleIcon.swift; sourceTree = "<group>"; };
-		692483232AB05F67002A0407 /* PIACircleIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIACircleIndicator.swift; sourceTree = "<group>"; };
-		692483252AB05F85002A0407 /* PIAConnectionActivityWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAConnectionActivityWidget.swift; sourceTree = "<group>"; };
+		6924831F2AB05F18002A0407 /* PIAConnectionView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionView.swift; sourceTree = "<group>"; tabWidth = 4; };
+		692483212AB05F37002A0407 /* PIACircleIcon.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIACircleIcon.swift; sourceTree = "<group>"; tabWidth = 4; };
+		692483252AB05F85002A0407 /* PIAConnectionActivityWidget.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionActivityWidget.swift; sourceTree = "<group>"; tabWidth = 4; };
+		698F4F2C2AB978BF0010B2B0 /* PIACircleImageView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIACircleImageView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		7EB8D11327CCF4C20030B060 /* PIA VPN UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA VPN UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EB8D11E27CE2B020030B060 /* PIAUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAUITests.swift; sourceTree = "<group>"; };
 		7EB8D12027CE2B5D0030B060 /* PIALaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIALaunchTests.swift; sourceTree = "<group>"; };
@@ -1387,7 +1390,7 @@
 				AA52C59E28E5ECD400D025AF /* PIAWidgetVpnDetaislRow.swift */,
 				6924831F2AB05F18002A0407 /* PIAConnectionView.swift */,
 				692483212AB05F37002A0407 /* PIACircleIcon.swift */,
-				692483232AB05F67002A0407 /* PIACircleIndicator.swift */,
+				698F4F2C2AB978BF0010B2B0 /* PIACircleImageView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2021,6 +2024,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8269A6DD251CB5E3000B4DBF /* Assets.xcassets in Resources */,
+				698F4F2E2AB97BAD0010B2B0 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2392,8 +2396,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				692483242AB05F67002A0407 /* PIACircleIndicator.swift in Sources */,
 				8269A6FE251CBB36000B4DBF /* WidgetInformation.swift in Sources */,
+				698F4F2D2AB978BF0010B2B0 /* PIACircleImageView.swift in Sources */,
 				822F97B4251DD53100644EF2 /* WidgetUserDefaultsDatasource.swift in Sources */,
 				8269A6DA251CB5E0000B4DBF /* PIAWidget.swift in Sources */,
 				692483222AB05F37002A0407 /* PIACircleIcon.swift in Sources */,
