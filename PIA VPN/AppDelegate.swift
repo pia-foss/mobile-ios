@@ -42,6 +42,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
     var window: UIWindow?
     private var hotspotHelper: PIAHotspotHelper!
+    private (set) var liveActivityManager: PIAConnectionLiveActivityManagerType?
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -55,12 +56,27 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         application.shortcutItems = []
         hotspotHelper = PIAHotspotHelper()
         _ = hotspotHelper.configureHotspotHelper()
-        
+
+        instantiateLiveActivityManagerIfNeeded()
         return true
+    }
+    
+    private func instantiateLiveActivityManagerIfNeeded() {
+        if #available(iOS 16.2, *) {
+            // Only instantiates the LiveActivities if the Feature Flag for it is enabled
+            guard AppPreferences.shared.showDynamicIslandLiveActivity else {
+                liveActivityManager = nil
+                return
+            }
+            
+            liveActivityManager = PIAConnectionLiveActivityManager.shared
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         Bootstrapper.shared.dispose()
+
+        liveActivityManager?.endLiveActivities()
     }
     
     // MARK: Orientations
@@ -200,6 +216,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         application.applicationIconBadgeNumber = 0
         // Remove the Non compliant Wifi local notification as the app is in foreground now
         Macros.removeLocalNotification(NotificationCategory.nonCompliantWifi)
+        
+        instantiateLiveActivityManagerIfNeeded()
+
     }
 
     private func refreshShortcutItems(in application: UIApplication) {

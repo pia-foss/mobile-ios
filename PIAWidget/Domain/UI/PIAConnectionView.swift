@@ -16,24 +16,27 @@ internal struct PIAConnectionView: View {
     var body: some View {
         HStack {
             HStack {
-                PIACircleImageView(size: 24, image: context.state.regionFlag)
+                PIACircleImageView(size: 24, image: context.state.regionFlag, contentMode: .fill)
                 VStack(alignment: .leading) {
                     Text("Region")
                         .font(.caption)
+                        .foregroundColor(.white)
                     Text(context.state.regionName)
                         .font(.caption)
+                        .foregroundColor(.white)
                         .bold()
                 }
-                if showProtocol {
-                    
+                if showProtocol && context.state.connected {
                     HStack {
                         Spacer()
                         PIACircleImageView(size: 24, image: "green-checkmark")
                         VStack(alignment: .leading) {
                             Text("Protocol")
                                 .font(.caption)
+                                .foregroundColor(.white)
                             Text(context.state.vpnProtocol)
                                 .font(.caption)
+                                .foregroundColor(.white)
                                 .bold()
                         }
                         Spacer()
@@ -42,7 +45,12 @@ internal struct PIAConnectionView: View {
                     Spacer()
                 }
                 
-                PIACircleImageView(size: 44, image: "connect-button")
+                Link(destination: URL(string: "piavpn:connect")!) {
+                    PIACircleImageView(
+                        size: 54,
+                        image: context.state.connected ? "connected-button" : "disconnected-button"
+                    )
+                }
             }
         }
         
