@@ -4,59 +4,48 @@ import WidgetKit
 
 @available(iOSApplicationExtension 16.1, *)
 internal struct PIAConnectionView: View {
-
+    
     internal let context: ActivityViewContext<PIAConnectionAttributes>
-
-    init(context: ActivityViewContext<PIAConnectionAttributes>) {
+    internal let showProtocol: Bool
+    
+    init(context: ActivityViewContext<PIAConnectionAttributes>, showProtocol: Bool = false) {
         self.context = context
+        self.showProtocol = showProtocol
     }
-
+    
     var body: some View {
-        let connected = context.state.connected ? "Connected" : "Disconnected"
-        return HStack(spacing: 0) {
-            VStack {
-                Text("Region")
-                    .italic()
-                    .font(.caption)
-                    .foregroundColor(Color(uiColor: UIColor.lightGray))
-                Divider()
-                    .cornerRadius(0.0)
-                    .frame(height: 2.0)
-                    .background(
-                        LinearGradient(colors: [Color.clear, Color("AccentColor")], startPoint: .leading, endPoint: .trailing)
-                    )
-              Text("\(context.state.regionName)")
-                    .foregroundColor(Color.white)
-                    .font(.caption)
-                    .bold()
-            }
-            VStack {
-                Text("\(connected)")
-                    .font(.caption)
-                    .frame(maxWidth: .infinity, maxHeight: 30.0)
-                    .foregroundColor(Color.white)
-                    .background(Color("AccentColor"))
-                    .cornerRadius(30.0 / 2.0)
-                    .textCase(.uppercase)
-                    .bold()
-            }
-            VStack {
-                Text("Protocol")
-                    .italic()
-                    .font(.caption)
-                    .foregroundColor(Color(uiColor: UIColor.lightGray))
-                Divider()
-                    .cornerRadius(0.0)
-                    .frame(height: 2.0)
-                    .background(
-                        LinearGradient(colors: [Color.clear, Color("AccentColor")], startPoint: .trailing, endPoint: .leading)
-                    )
-                Text("\(context.state.vpnProtocol)")
-                    .foregroundColor(Color.white)
-                    .font(.caption)
-                    .bold()
+        HStack {
+            HStack {
+                PIACircleImageView(size: 24, image: context.state.regionFlag)
+                VStack(alignment: .leading) {
+                    Text("Region")
+                        .font(.caption)
+                    Text(context.state.regionName)
+                        .font(.caption)
+                        .bold()
+                }
+                if showProtocol {
+                    
+                    HStack {
+                        Spacer()
+                        PIACircleImageView(size: 24, image: "green-checkmark")
+                        VStack(alignment: .leading) {
+                            Text("Protocol")
+                                .font(.caption)
+                            Text(context.state.vpnProtocol)
+                                .font(.caption)
+                                .bold()
+                        }
+                        Spacer()
+                    }
+                } else {
+                    Spacer()
+                }
+                
+                PIACircleImageView(size: 44, image: "connect-button")
             }
         }
+        
     }
 }
 

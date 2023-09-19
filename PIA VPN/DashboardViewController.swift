@@ -1234,7 +1234,7 @@ extension DashboardViewController {
             
             if isActivityStarted {
                 NSLog("Will stop live activity")
-                let state = PIAConnectionAttributes.ContentState(connected: true, regionName: "Barcelona", vpnProtocol: "IKEv2")
+                let state = PIAConnectionAttributes.ContentState(connected: true, regionName: "Barcelona", regionFlag: "flag-es", vpnProtocol: "IKEv2")
                 Task {
                     guard let act = activity as? Activity<PIAConnectionAttributes> else {
                         NSLog("No conn activity found to stop..")
@@ -1256,7 +1256,7 @@ extension DashboardViewController {
     private func startLiveActivity() {
         NSLog("Will start live activity")
         let attributes = PIAConnectionAttributes()
-        let state = PIAConnectionAttributes.ContentState(connected: true, regionName: "Barcelona", vpnProtocol: "IKEv2")
+        let state = PIAConnectionAttributes.ContentState(connected: true, regionName: "Barcelona", regionFlag: "flag-es", vpnProtocol: "IKEv2")
         activity = try? Activity<PIAConnectionAttributes>.request(attributes: attributes, contentState: state)
     }
 }
