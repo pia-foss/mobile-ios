@@ -69,10 +69,14 @@ class DashboardViewController: AutolayoutViewController {
     private var currentPageIndex = 0
     private var isDisconnecting = false
     private var isUnauthorized = false
-    private var activity: Any? = nil
-    private var isActivityStarted: Bool = false
 
-    private var currentStatus: VPNStatus = .disconnected
+    private var currentStatus: VPNStatus = .disconnected {
+        didSet {
+            if #available(iOS 16.2, *) {
+                startConnectionLiveActivityIfNeeded()
+            }
+        }
+    }
     private var connectingStatus: DashboardVPNConnectingStatus = .none
 
     private var tileModeStatus: TileStatus = .normal {
@@ -188,10 +192,7 @@ class DashboardViewController: AutolayoutViewController {
         
         // check account email
         checkAccountEmail()
-        
-        // Start the live activities (and DynamicIsland)
-        startLiveActivityIfNeeded()
-        
+
     }
     
     // MARK: Menu
@@ -867,6 +868,10 @@ class DashboardViewController: AutolayoutViewController {
         guard Client.providers.accountProvider.isLoggedIn else {
             return
         }
+        
+        if #available(iOS 16.2, *) {
+            startConnectionLiveActivityIfNeeded()
+        }
 
         currentStatus = Client.providers.vpnProvider.vpnStatus
 
@@ -1227,36 +1232,23 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
 // MARK: Live Activities
 
 extension DashboardViewController {
-    func startLiveActivityIfNeeded() {
-        if #available(iOS 16.1, *) {
-            // Start Live Activity only if the Feature Flag for it is enabled
-            guard AppPreferences.shared.showDynamicIslandLiveActivity else { return }
-            
-            if isActivityStarted {
-                NSLog("Will stop live activity")
-                let state = PIAConnectionAttributes.ContentState(connected: true, regionName: "Barcelona", regionFlag: "flag-es", vpnProtocol: "IKEv2")
-                Task {
-                    guard let act = activity as? Activity<PIAConnectionAttributes> else {
-                        NSLog("No conn activity found to stop..")
-                        return
-                    }
-                    await act.end(using: state, dismissalPolicy: .immediate)
-                    startLiveActivity()
-                }
-            } else {
-                startLiveActivity()
-            }
-            
-            isActivityStarted.toggle()
-            
-        }
+    @available(iOS 16.2, *)
+    private func makeLiveActivityStateForCurrentConnection() -> PIAConnectionAttributes.ContentState {
+        let vpnProvider = Client.providers.vpnProvider
+        let currentServer = Client.preferences.displayedServer
+
+        let vpnProtocol = vpnProvider.currentVPNType.vpnProtocol
+        
+        let state = PIAConnectionAttributes.ContentState(connected: vpnProvider.isVPNConnected, regionName: currentServer.name, regionFlag: "flag-\(currentServer.country.lowercased())", vpnProtocol: vpnProtocol)
+        return state
     }
+
     
-    @available(iOS 16.1, *)
-    private func startLiveActivity() {
-        NSLog("Will start live activity")
-        let attributes = PIAConnectionAttributes()
-        let state = PIAConnectionAttributes.ContentState(connected: true, regionName: "Barcelona", regionFlag: "flag-es", vpnProtocol: "IKEv2")
-        activity = try? Activity<PIAConnectionAttributes>.request(attributes: attributes, contentState: state)
+    @available(iOS 16.2, *)
+    private func startConnectionLiveActivityIfNeeded() {
+       guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+        let liveActivityManager = appDelegate.liveActivityManager else { return }
+        let connState = makeLiveActivityStateForCurrentConnection()
+        liveActivityManager.startLiveActivity(with: connState)
     }
 }
