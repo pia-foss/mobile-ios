@@ -8,6 +8,7 @@ concurrency:
 jobs:
   build:
     runs-on: macos-latest
+
     steps:
     - name: Setup Git credentials
       run: |
@@ -25,3 +26,5 @@ jobs:
 
     - name: Run tests
       run: bundle exec fastlane tests
+
+      
