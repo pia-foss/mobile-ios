@@ -1,22 +1,95 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
-
 default_platform(:ios)
+import("./Certificates")
 
 platform :ios do
+  key_id = ENV['APP_STORE_CONNECT_KEY_ID']
+  issuer_id = ENV['APP_STORE_CONNECT_ISSUER_ID']
+  key_content = ENV['APP_STORE_CONNECT_KEY']
+
   lane :tests do
     run_tests(scheme: "PIA VPN")
+  end
+
+  desc "This line is for settin up the certificates and provisioning profiles"
+  lane :get_profiles do
+    api_key = app_store_connect_api_key(
+      key_id: key_id,
+      issuer_id: issuer_id,
+      key_content: key_content
+    )
+
+    certificates
+
+    get_provisioning_profile(
+      api_key: api_key,
+      app_identifier: "com.privateinternetaccess.ios.PIA-VPN"
+    )
+
+    get_provisioning_profile(
+      api_key: api_key,
+      app_identifier: "com.privateinternetaccess.ios.PIA-VPN.Tunnel"
+    )
+
+    get_provisioning_profile(
+      api_key: api_key,
+      app_identifier: "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel"
+    )
+
+    get_provisioning_profile(
+      api_key: api_key,
+      app_identifier: "com.privateinternetaccess.ios.PIA-VPN.PIAWidget"
+    )
+
+    get_provisioning_profile(
+      api_key: api_key,
+      app_identifier: "com.privateinternetaccess.ios.PIA-VPN.AdBlocker"
+    )
+
+  end
+
+  desc "This line is for creating testflight build"
+  lane :testflight_build do
+    api_key = app_store_connect_api_key(
+      key_id: key_id,
+      issuer_id: issuer_id,
+      key_content: key_content
+    )
+
+    increment_build_number_testflight
+
+    build_app(scheme: "PIA VPN",
+      export_method: "app-store",
+      clean: true,
+      export_options: {
+        provisioningProfiles: { 
+          "com.privateinternetaccess.ios.PIA-VPN" => "match AppStore com.privateinternetaccess.ios.PIA-VPN",
+          "com.privateinternetaccess.ios.PIA-VPN.Tunnel" => "match AppStore com.privateinternetaccess.ios.PIA-VPN.Tunnel",
+          "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel" => "match AppStore com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel",
+          "com.privateinternetaccess.ios.PIA-VPN.PIAWidget" => "match AppStore com.privateinternetaccess.ios.PIA-VPN.PIAWidget",
+          "com.privateinternetaccess.ios.PIA-VPN.AdBlocker" => "match AppStore com.privateinternetaccess.ios.PIA-VPN.AdBlocker"
+        }
+      }
+    )
+
+    pilot(
+      api_key: api_key,
+      skip_waiting_for_build_processing: true
+    )
+
+  end
+
+  desc "Match certificates for app store"
+  lane :certificates do
+    import_certificates
+  end
+
+  desc "Increase build number for TestFlight"
+  private_lane :increment_build_number_testflight do 
+    build_number = latest_testflight_build_number(
+      app_identifier: "com.privateinternetaccess.ios.PIA-VPN"
+    )
+    increment_build_number(
+      build_number: build_number + 1 
+    )
   end
 end
