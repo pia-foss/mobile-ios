@@ -55,7 +55,7 @@ platform :ios do
       key_content: key_content
     )
 
-    #increment_build_number_testflight
+    increment_build_number_testflight
 
     build_app(scheme: "PIA VPN",
       export_method: "app-store",
