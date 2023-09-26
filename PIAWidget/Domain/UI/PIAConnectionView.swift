@@ -7,6 +7,8 @@ internal struct PIAConnectionView: View {
     
     internal let context: ActivityViewContext<PIAConnectionAttributes>
     internal let showProtocol: Bool
+    let localizedRegionText = L10n.Widget.LiveActivity.Region.title
+    let localizedProtocolText = L10n.Widget.LiveActivity.SelectedProtocol.title
     
     init(context: ActivityViewContext<PIAConnectionAttributes>, showProtocol: Bool = false) {
         self.context = context
@@ -18,7 +20,7 @@ internal struct PIAConnectionView: View {
             HStack {
                 PIACircleImageView(size: 24, image: context.state.regionFlag, contentMode: .fill)
                 VStack(alignment: .leading) {
-                    Text("Region")
+                    Text(localizedRegionText)
                         .font(.caption)
                         .foregroundColor(.white)
                     Text(context.state.regionName)
@@ -31,7 +33,7 @@ internal struct PIAConnectionView: View {
                         Spacer()
                         PIACircleImageView(size: 24, image: "green-checkmark")
                         VStack(alignment: .leading) {
-                            Text("Protocol")
+                            Text(localizedProtocolText)
                                 .font(.caption)
                                 .foregroundColor(.white)
                             Text(context.state.vpnProtocol)

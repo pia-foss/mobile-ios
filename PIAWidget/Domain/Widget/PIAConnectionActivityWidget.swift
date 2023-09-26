@@ -4,6 +4,8 @@ import SwiftUI
 
 @available(iOSApplicationExtension 16.1, *)
 struct PIAConnectionActivityWidget: Widget {
+    let localizedRegionText = L10n.Widget.LiveActivity.Region.title
+    
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: PIAConnectionAttributes.self) { context in
             // Create the view that appears on the Lock Screen and as a
@@ -45,7 +47,7 @@ struct PIAConnectionActivityWidget: Widget {
                 
                 DynamicIslandExpandedRegion(.center, priority: 100) {
                     VStack(alignment: .leading) {
-                        Text("Region")
+                        Text(localizedRegionText)
                             .font(.caption)
                             .foregroundColor(.white)
                             .padding(.top, -8)
