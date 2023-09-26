@@ -44,19 +44,17 @@ struct PIAConnectionActivityWidget: Widget {
                 }
                 
                 DynamicIslandExpandedRegion(.center, priority: 100) {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Region")
-                                .font(.caption)
-                                .foregroundColor(.white)
-                            Text(context.state.regionName)
-                                .font(.caption)
-                                .foregroundColor(.white)
-                                .bold()
-                        }
-                        
+                    VStack(alignment: .leading) {
+                        Text("Region")
+                            .font(.caption)
+                            .foregroundColor(.white)
+                            .padding(.top, -8)
+                        Text(context.state.regionName)
+                            .font(.caption)
+                            .foregroundColor(.white)
+                            .bold()
                     }
-                    .frame(minWidth: (UIScreen.main.bounds.size.width * 0.55), alignment: .leading)
+                    .frame(minWidth: (UIScreen.main.bounds.size.width * 0.56), alignment: .leading)
                     .dynamicIsland(verticalPlacement: .belowIfTooWide)
 
                 }
@@ -70,7 +68,7 @@ struct PIAConnectionActivityWidget: Widget {
                 // When the island is wider than the display cutout
                 PIACircleImageView(
                     size: 24,
-                    image: context.state.connected ? "green-checkmark" : "orange-cross"
+                    image: context.state.connected ? "green-checkmark" : "disconnected-cross"
                 )
             } minimal: {
                 // This is used when there are multiple activities
