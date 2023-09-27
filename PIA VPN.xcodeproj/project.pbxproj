@@ -152,6 +152,8 @@
 		692483202AB05F18002A0407 /* PIAConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6924831F2AB05F18002A0407 /* PIAConnectionView.swift */; };
 		692483222AB05F37002A0407 /* PIACircleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483212AB05F37002A0407 /* PIACircleIcon.swift */; };
 		692483262AB05F85002A0407 /* PIAConnectionActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483252AB05F85002A0407 /* PIAConnectionActivityWidget.swift */; };
+		695BF81D2AC30EFB00D1139C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E7EC043209326E30029811E /* Localizable.strings */; };
+		695BF81F2AC410E000D1139C /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2215C820084CD700F5FB4D /* SwiftGen+Strings.swift */; };
 		698F4F2B2AB8A2080010B2B0 /* PIAWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8269A6D5251CB5E0000B4DBF /* PIAWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		698F4F2D2AB978BF0010B2B0 /* PIACircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F4F2C2AB978BF0010B2B0 /* PIACircleImageView.swift */; };
 		698F4F2E2AB97BAD0010B2B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 291C6397183EBC210039EC03 /* Images.xcassets */; };
@@ -2025,6 +2027,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8269A6DD251CB5E3000B4DBF /* Assets.xcassets in Resources */,
+				695BF81D2AC30EFB00D1139C /* Localizable.strings in Resources */,
 				698F4F2E2AB97BAD0010B2B0 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2400,6 +2403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8269A6FE251CBB36000B4DBF /* WidgetInformation.swift in Sources */,
+				695BF81F2AC410E000D1139C /* SwiftGen+Strings.swift in Sources */,
 				698F4F2D2AB978BF0010B2B0 /* PIACircleImageView.swift in Sources */,
 				822F97B4251DD53100644EF2 /* WidgetUserDefaultsDatasource.swift in Sources */,
 				8269A6DA251CB5E0000B4DBF /* PIAWidget.swift in Sources */,

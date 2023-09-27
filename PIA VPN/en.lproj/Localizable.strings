@@ -434,3 +434,7 @@
 // INAPP MESSAGES
 "inapp.messages.toggle.title" = "Show Service Communication Messages";
 "inapp.messages.settings.updated" = "Settings have been updated";
+
+// PIA WIDGET
+"widget.liveActivity.region.title" = "Region";
+"widget.liveActivity.protocol.title" = "Protocol";
