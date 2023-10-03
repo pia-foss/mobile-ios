@@ -1,28 +1,17 @@
 
 import XCTest
 
-protocol WelcomeScreenElementsProvider {
-  var goToLoginScreenButton: XCUIElement { get }
-}
+// MARK: XCUIApplication + Welcome Screen UI elements
 
-// MARK: WelcomeScreenElementsProvider
-
-extension XCUIApplication: WelcomeScreenElementsProvider {
+extension XCUIApplication {
   var goToLoginScreenButton: XCUIElement {
     button(with: PIALibraryAccessibility.Id.Login.submitNew)
   }
 }
 
+// MARK: XCUIApplication + Login Screen UI elements
 
-protocol LoginScreenElementsProvider {
-  var loginButton: XCUIElement { get }
-  var willDisplayLoginErrorBanner: Bool { get }
-  var isDisplayingLoginErrorBanner: Bool { get }
-}
-
-// MARK: LoginScreenElementsProvider
-
-extension XCUIApplication: LoginScreenElementsProvider {
+extension XCUIApplication {
   var loginButton: XCUIElement {
     button(with: PIALibraryAccessibility.Id.Login.submit)
   }

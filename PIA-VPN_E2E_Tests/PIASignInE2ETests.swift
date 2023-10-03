@@ -55,7 +55,6 @@ final class PIASignInE2ETests: XCTestCase {
     }
     
     func testBDDSignInWithValidCredentials() throws {
-        // GIVEN that valid credentials are provided in the login screen
         XCTContext.runActivity(named: "GIVEN that valid credentials are provided in the login screen") { _ in
             navigateToLoginScreen()
             fillLoginScreen(with: CredentialsUtil.credentials(type: .valid))
@@ -71,7 +70,6 @@ final class PIASignInE2ETests: XCTestCase {
         
         
         XCTContext.runActivity(named: "AND no login error banner is displayed") { _ in
-        
             XCTAssertFalse(app.isDisplayingLoginErrorBanner)
         }
         
