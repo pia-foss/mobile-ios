@@ -85,6 +85,17 @@
                ReferencedContainer = "container:PIA VPN.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "69B70AAF2ACBF51C0072A09D"
+               BuildableName = "PIA-VPN_E2E_Tests.xctest"
+               BlueprintName = "PIA-VPN_E2E_Tests"
+               ReferencedContainer = "container:PIA VPN.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

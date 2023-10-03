@@ -10,7 +10,6 @@ import Foundation
 
 public enum CredentialsType: String {
     case valid = "valid"
-    case expired = "expired"
     case invalid = "invalid"
 }
 
@@ -41,7 +40,7 @@ public class CredentialsUtil {
             return try Credentials(from: dictionary)
         }
         catch {
-             fatalError("Credential file does not contain required information")
+                         fatalError("Credential file does not contain required information")
         }
     }
 }
