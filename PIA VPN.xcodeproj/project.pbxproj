@@ -162,7 +162,6 @@
 		698F4F322ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F4F2F2ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift */; };
 		69B70AB32ACBF51C0072A09D /* PIASignInE2ETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70AB22ACBF51C0072A09D /* PIASignInE2ETests.swift */; };
 		69B70AB52ACBF51C0072A09D /* XCUIApplication+LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70AB42ACBF51C0072A09D /* XCUIApplication+LoginScreen.swift */; };
-		69B70ABB2ACBF82C0072A09D /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EC2972E27D8B8580061C56A /* Credentials.plist */; };
 		69B70ABC2ACBF8300072A09D /* CredentialsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */; };
 		69B70ABE2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
 		69B70ABF2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
@@ -686,6 +685,7 @@
 		6924831F2AB05F18002A0407 /* PIAConnectionView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		692483212AB05F37002A0407 /* PIACircleIcon.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIACircleIcon.swift; sourceTree = "<group>"; tabWidth = 4; };
 		692483252AB05F85002A0407 /* PIAConnectionActivityWidget.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionActivityWidget.swift; sourceTree = "<group>"; tabWidth = 4; };
+		6947AADB2ACDC8AE001BCC66 /* PIA-VPN-e2e-simulator.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PIA-VPN-e2e-simulator.xctestplan"; sourceTree = "<group>"; };
 		698F4F2C2AB978BF0010B2B0 /* PIACircleImageView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIACircleImageView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		698F4F2F2ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionLiveActivityManager.swift; sourceTree = "<group>"; tabWidth = 4; };
 		69B70AB02ACBF51C0072A09D /* PIA-VPN_E2E_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA-VPN_E2E_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -694,7 +694,6 @@
 		69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityId.swift; sourceTree = "<group>"; };
 		69D12D132ACC70110053A81B /* XCUIApplication+Global.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Global.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = CredentialsUtil.swift; sourceTree = "<group>"; tabWidth = 4; };
-		7EC2972E27D8B8580061C56A /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
 		7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSurveyManager.swift; sourceTree = "<group>"; };
 		821674F02678A1BE0028E4FD /* SettingsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDelegate.swift; sourceTree = "<group>"; };
 		82183D7A2500FD460033023F /* String+Substrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Substrings.swift"; sourceTree = "<group>"; };
@@ -1264,6 +1263,7 @@
 		69B70AB12ACBF51C0072A09D /* PIA-VPN_E2E_Tests */ = {
 			isa = PBXGroup;
 			children = (
+				6947AADB2ACDC8AE001BCC66 /* PIA-VPN-e2e-simulator.xctestplan */,
 				69D12D152ACC75140053A81B /* Util */,
 				69D12D162ACC75440053A81B /* XCUIApplication+Extensions */,
 				69B70AB22ACBF51C0072A09D /* PIASignInE2ETests.swift */,
@@ -1274,7 +1274,6 @@
 		69D12D152ACC75140053A81B /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				7EC2972E27D8B8580061C56A /* Credentials.plist */,
 				7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */,
 			);
 			path = Util;
@@ -2037,7 +2036,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69B70ABB2ACBF82C0072A09D /* Credentials.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2087,7 +2085,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftgen >/dev/null; then\n    set -e\n    swiftgen\nelse\n    echo \"warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen\"\nfi\n";
+			shellScript = "if which swiftgen >/dev/null; then\n    set -e\n    #swiftgen\nelse\n    echo \"warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen\"\nfi\n";
 		};
 		2931563B18513F6500E769A7 /* Download Latest Regions List */ = {
 			isa = PBXShellScriptBuildPhase;

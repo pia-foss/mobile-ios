@@ -16,31 +16,17 @@ public enum CredentialsType: String {
 public struct Credentials: Codable {
     let username: String
     let password: String
-    
-    init(from dictionary: Any) throws {
-        let data = try JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
-        let decoder = JSONDecoder()
-        self = try decoder.decode(Self.self, from: data)
-    }
 }
 
 public class CredentialsUtil {
     public static func credentials(type: CredentialsType) -> Credentials {
-        let bundle = Bundle(for: CredentialsUtil.self)
-        guard let filePath = bundle.path(forResource: "Credentials", ofType: "plist") else {
-            fatalError("Couldn't find file 'Credentials.plist'")
-        }
-        
-        let plist = NSDictionary(contentsOfFile: filePath)
-        guard let dictionary = plist?.object(forKey: type.rawValue) as? [String: String] else {
-            fatalError("Couldn't find key '\(type.rawValue)' in 'Credentials.plist'")
-        }
-        
-        do {
-            return try Credentials(from: dictionary)
-        }
-        catch {
-            fatalError("Credential file does not contain required information")
+        switch type {
+        case .invalid:
+            return Credentials(username: "fakeUser", password: "fakePassword123")
+        case .valid:
+            let testUser = ProcessInfo.processInfo.environment["PIA_TEST_USER"] ?? "user-not-found"
+            let testPassword = ProcessInfo.processInfo.environment["PIA_TEST_PASSWORD"] ?? "password-not-found"
+            return Credentials(username: testUser, password: testPassword)
         }
     }
 }

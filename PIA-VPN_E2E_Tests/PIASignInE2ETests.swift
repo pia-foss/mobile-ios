@@ -17,7 +17,6 @@ final class PIASignInE2ETests: XCTestCase {
         app = XCUIApplication()
         app.launch()
         app.logOutIfNeeded()
-        
     }
     
     override func tearDownWithError() throws {
@@ -25,36 +24,6 @@ final class PIASignInE2ETests: XCTestCase {
     }
     
     func testSignInWithValidCredentials() throws {
-        // GIVEN that valid credentials are provided in the login screen
-        navigateToLoginScreen()
-        fillLoginScreen(with: CredentialsUtil.credentials(type: .valid))
-        
-        // WHEN tapping the 'Login' button
-        app.loginButton.tap()
-        
-        // THEN the Vpn Permission screen will appear
-        XCTAssertTrue(app.willDisplayVpnPermissionScreen)
-        
-        // AND no login error banner is displayed
-        XCTAssertFalse(app.isDisplayingLoginErrorBanner)
-    }
-    
-    func testSignInWithInvalidCredentials() throws {
-        // GIVEN that invalid credentials are provided in the login screen
-        navigateToLoginScreen()
-        fillLoginScreen(with: CredentialsUtil.credentials(type: .invalid))
-        
-        // WHEN tapping the 'Login' button
-        app.loginButton.tap()
-        
-        // THEN the login error banner is displayed
-        XCTAssertTrue(app.willDisplayLoginErrorBanner)
-        
-        // AND the app does NOT display the Vpn Permission Screen
-        XCTAssertFalse(app.willDisplayVpnPermissionScreen)
-    }
-    
-    func testBDDSignInWithValidCredentials() throws {
         XCTContext.runActivity(named: "GIVEN that valid credentials are provided in the login screen") { _ in
             navigateToLoginScreen()
             fillLoginScreen(with: CredentialsUtil.credentials(type: .valid))
@@ -68,14 +37,13 @@ final class PIASignInE2ETests: XCTestCase {
             XCTAssertTrue(app.willDisplayVpnPermissionScreen)
         }
         
-        
         XCTContext.runActivity(named: "AND no login error banner is displayed") { _ in
             XCTAssertFalse(app.isDisplayingLoginErrorBanner)
         }
         
     }
     
-    func testBDDSignInWithInvalidCredentials() throws {
+    func testSignInWithInvalidCredentials() throws {
         XCTContext.runActivity(named: "GIVEN that invalid credentials are provided in the login screen") { _ in
             navigateToLoginScreen()
             fillLoginScreen(with: CredentialsUtil.credentials(type: .invalid))
