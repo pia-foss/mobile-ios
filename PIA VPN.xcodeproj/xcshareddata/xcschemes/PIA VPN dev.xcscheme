@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "0930"
-   version = "1.3">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -54,7 +54,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "NO">
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
@@ -64,6 +64,24 @@
             ReferencedContainer = "container:PIA VPN.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "PIA_TEST_USER"
+            value = "xxx"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "PIA_TEST_PASSWORD"
+            value = "xxx"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
+      <TestPlans>
+         <TestPlanReference
+            reference = "container:PIA-VPN_E2E_Tests/PIA-VPN-e2e-simulator.xctestplan"
+            default = "YES">
+         </TestPlanReference>
+      </TestPlans>
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -76,12 +94,13 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "NO"
+            parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7EB8D11227CCF4C20030B060"
-               BuildableName = "PIA VPN UITests.xctest"
-               BlueprintName = "PIA VPN UITests"
+               BlueprintIdentifier = "69B70AAF2ACBF51C0072A09D"
+               BuildableName = "PIA-VPN_E2E_Tests.xctest"
+               BlueprintName = "PIA-VPN_E2E_Tests"
                ReferencedContainer = "container:PIA VPN.xcodeproj">
             </BuildableReference>
          </TestableReference>
