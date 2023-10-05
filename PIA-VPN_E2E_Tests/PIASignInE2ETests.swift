@@ -15,8 +15,16 @@ final class PIASignInE2ETests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
         app = XCUIApplication()
+        
+        // Handles any possible interruption in the test
+        // due to the appearence of a permission system alert
+        // (like Notifications permission, VPN profile installation, etc.)
+        app.dismissAnyPermissionSystemAlert(from: self)
+        
         app.launch()
+        
         app.logOutIfNeeded()
+        app.navigateToLoginScreenIfNeeded()
     }
     
     override func tearDownWithError() throws {
@@ -25,8 +33,7 @@ final class PIASignInE2ETests: XCTestCase {
     
     func testSignInWithValidCredentials() throws {
         XCTContext.runActivity(named: "GIVEN that valid credentials are provided in the login screen") { _ in
-            navigateToLoginScreen()
-            fillLoginScreen(with: CredentialsUtil.credentials(type: .valid))
+            app.fillLoginScreen(with: CredentialsUtil.credentials(type: .valid))
         }
         
         XCTContext.runActivity(named: "WHEN tapping the 'Login' button") { _ in
@@ -45,8 +52,7 @@ final class PIASignInE2ETests: XCTestCase {
     
     func testSignInWithInvalidCredentials() throws {
         XCTContext.runActivity(named: "GIVEN that invalid credentials are provided in the login screen") { _ in
-            navigateToLoginScreen()
-            fillLoginScreen(with: CredentialsUtil.credentials(type: .invalid))
+            app.fillLoginScreen(with: CredentialsUtil.credentials(type: .invalid))
         }
         
         XCTContext.runActivity(named: "WHEN tapping the 'Login' button") { _ in
@@ -62,36 +68,5 @@ final class PIASignInE2ETests: XCTestCase {
         }
     }
     
-}
-
-// MARK: Private methods
-
-extension PIASignInE2ETests {
-    
-    private func navigateToLoginScreen() {
-        if app.goToLoginScreenButton.waitForExistence(timeout: app.shortTimeout) {
-            app.goToLoginScreenButton.tap()
-        } else {
-            XCTFail("PIASigninE2ETests: Login button not found when trying to navigate to login screen")
-        }
-    }
-    
-    private func fillLoginScreen(with credentials: Credentials) {
-        let usernameTextField = app.textField(with: PIALibraryAccessibility.Id.Login.username)
-        
-        let passwordTextField = app.secureTextField(with: PIALibraryAccessibility.Id.Login.password)
-        
-        if usernameTextField.exists && passwordTextField.exists {
-            // Type username
-            usernameTextField.tap()
-            usernameTextField.typeText(credentials.username)
-            
-            // Type password
-            passwordTextField.tap()
-            passwordTextField.typeText(credentials.password)
-        } else {
-            XCTFail("PIASigninE2ETests: Username and Password text fields on LoginViewController are either not identifiable or are moved")
-        }
-    }
 }
 

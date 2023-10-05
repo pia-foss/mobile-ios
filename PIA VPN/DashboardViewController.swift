@@ -137,7 +137,7 @@ class DashboardViewController: AutolayoutViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    
+        
         setupNavigationBarButtons()
         
         AppPreferences.shared.wasLaunched = true
