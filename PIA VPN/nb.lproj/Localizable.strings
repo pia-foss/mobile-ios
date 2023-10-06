@@ -38,6 +38,9 @@
 "expiration.title" = "Forny";
 "expiration.message" = "Abonnementet ditt utløper snart. Forny det for å forbli beskyttet.";
 
+"local_notification.non_compliant_wifi.title" = "Usikret WiFi:%@";
+"local_notification.non_compliant_wifi.text" = "Trykk her for å sikre enheten din";
+
 // SHORTCUTS
 
 "shortcuts.connect" = "Koble til";
@@ -134,8 +137,14 @@
 "settings.application_settings.active_theme.title" = "Aktivt tema";
 "settings.application_settings.kill_switch.title" = "Kill switch for VPN";
 "settings.application_settings.kill_switch.footer" = "Kill switch for VPN hindrer tilgang til Internett hvis VPN-tilkoblingen mister forbindelsen og prøver å koble til igjen. Dette ekskluderer manuell frakobling.";
+"settings.application_settings.leak_protection.title" = "Lekkasjebeskyttelse";
+"settings.application_settings.leak_protection.footer" = "iOS har funksjoner som er utviklet for å fungere utenfor VPN-et, for eksempel AirDrop, CarPlay, AirPlay og delt Internett. Ved å aktivere tilpasset lekkasjebeskyttelse kan du rute denne trafikken gjennom VPN-et, men det kan påvirke hvordan disse funksjonene fungerer. Mer informasjon";
+"settings.application_settings.leak_protection.more_info" = "Mer informasjon";
+"settings.application_settings.allow_local_network.title" = "Tillat tilgang til enheter på lokalnettverk";
+"settings.application_settings.allow_local_network.footer" = "Behold tilgang til lokale enheter som skrivere eller filservere mens du er koblet til VPN-et. (Tillat dette bare hvis du stoler på personene og enhetene på nettverket ditt.)";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.mace.footer" = "PIA MACE™ blokkerer reklamer, sporere og skadelig programvare når du er koblet til VPN-en.";
+"settings.application_settings.leak_protection.alert.title" = "Endringer i VPN-innstillingene vil tre i kraft ved neste tilkobling";
 
 "settings.content_blocker.title" = "Safari Innholdsblokkerer – status";
 "settings.content_blocker.state.title" = "Gjeldene status";
@@ -214,6 +223,15 @@
 "dashboard.accessibility.vpn.button" = "VPN-tilkoblingsknapp";
 "dashboard.accessibility.vpn.button.isOn" = "VPN-tilkoblingsknapp. VPN-klienten er for øyeblikket tilkoblet";
 "dashboard.accessibility.vpn.button.isOff" = "VPN-tilkoblingsknapp. VPN-klienten er for øyeblikket frakoblet";
+
+"dashboard.vpn.leakprotection.alert.title" = "Usikret WiFi oppdaget";
+"dashboard.vpn.leakprotection.alert.message" = "For å hindre datalekkasjer trykker du på Deaktiver nå for å slå av \"Tillat tillat tilgang til enheter på lokalnettverk\" og automatisk koble til på nytt.";
+"dashboard.vpn.leakprotection.alert.cta1" = "Deaktiver nå";
+"dashboard.vpn.leakprotection.alert.cta2" = "Les mer";
+"dashboard.vpn.leakprotection.alert.cta3" = "Ignorer";
+
+"dashboard.vpn.leakprotection.ikev2.alert.message" = "For å hindre datalekkasjer trykker du på Bytt nå for å bytte til VPN-protokollen IKEv2 og automatisk koble til på nytt.";
+"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Bytt nå";
 
 // VPN PERMISSION
 
@@ -416,3 +434,7 @@
 // INAPP MESSAGES
 "inapp.messages.toggle.title" = "Vis tjenestekommunikasjonsmeldinger";
 "inapp.messages.settings.updated" = "Innstillingene ble oppdatert";
+
+// PIA WIDGET
+"widget.liveActivity.region.title" = "Region";
+"widget.liveActivity.protocol.title" = "Protokoll";

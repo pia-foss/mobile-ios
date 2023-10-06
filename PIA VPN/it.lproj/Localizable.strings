@@ -38,6 +38,9 @@
 "expiration.title" = "Rinnovo";
 "expiration.message" = "Il tuo abbonamento scade presto. Rinnovalo per mantenere la protezione.";
 
+"local_notification.non_compliant_wifi.title" = "Wi-Fi non protetto: %@";
+"local_notification.non_compliant_wifi.text" = "Tocca qui per proteggere il tuo dispositivo";
+
 // SHORTCUTS
 
 "shortcuts.connect" = "Connetti";
@@ -134,8 +137,14 @@
 "settings.application_settings.active_theme.title" = "Tema attivo";
 "settings.application_settings.kill_switch.title" = "Killswitch VPN";
 "settings.application_settings.kill_switch.footer" = "Il killswitch VPN impedisce l'accesso a Internet quando la connessione VPN si sta riconnettendo. Questo esclude la disconnessione manuale.";
+"settings.application_settings.leak_protection.title" = "Protezione perdita dati";
+"settings.application_settings.leak_protection.footer" = "iOS include funzioni per operare di default al di fuori della VPN, come AirDrop, CarPlay, AirPlay e hotspot personali. L’attivazione di una protezione personalizzata contro la perdita dei dati instrada questo traffico attraverso la VPN, ma può influire su queste funzioni. Ulteriori informazioni";
+"settings.application_settings.leak_protection.more_info" = "Ulteriori informazioni";
+"settings.application_settings.allow_local_network.title" = "Consenti l’accesso ai dispositivi sulla rete locale";
+"settings.application_settings.allow_local_network.footer" = "Rimani connesso ai dispositivi locali come stampanti o file server durante la connessione alla VPN. (Consenti solo se ti fidi delle persone e dei dispositivi sulla rete.)";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.mace.footer" = "PIA MACE™ blocca pubblicità, tracker e malware mentre sei connesso alla VPN.";
+"settings.application_settings.leak_protection.alert.title" = "Le modifiche alle impostazioni della VPN avranno effetto alla prossima connessione";
 
 "settings.content_blocker.title" = "Stato di blocco contenuti Safari";
 "settings.content_blocker.state.title" = "Stato corrente";
@@ -214,6 +223,15 @@
 "dashboard.accessibility.vpn.button" = "Pulsante di Conneessione VPN";
 "dashboard.accessibility.vpn.button.isOn" = "Pulsante di connessione VPN. VPN attualmente connesso";
 "dashboard.accessibility.vpn.button.isOff" = "Pulsante di connessione VPN. VPN attualmente disconnesso";
+
+"dashboard.vpn.leakprotection.alert.title" = "Rilevato Wi-Fi non sicuro";
+"dashboard.vpn.leakprotection.alert.message" = "Per prevenire perdite di dati, tocca Disabilita ora per disattivare “Consenti l’accesso ai dispositivi sulla rete locale“ e riconnettersi automaticamente.";
+"dashboard.vpn.leakprotection.alert.cta1" = "Disabilita ora";
+"dashboard.vpn.leakprotection.alert.cta2" = "Ulteriori informazioni";
+"dashboard.vpn.leakprotection.alert.cta3" = "Ignora";
+
+"dashboard.vpn.leakprotection.ikev2.alert.message" = "Per prevenire le perdite di dati, tocca Cambia ora per passare al protocollo VPN IKEv2 e riconnettersi automaticamente.";
+"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Cambia ora";
 
 // VPN PERMISSION
 
@@ -416,3 +434,7 @@
 // INAPP MESSAGES
 "inapp.messages.toggle.title" = "Mostra i messaggi di comunicazione sul servizio";
 "inapp.messages.settings.updated" = "Impostazioni aggiornate";
+
+// PIA WIDGET
+"widget.liveActivity.region.title" = "Area";
+"widget.liveActivity.protocol.title" = "Protocollo";

@@ -38,6 +38,9 @@
 "expiration.title" = "Продление";
 "expiration.message" = "Срок действия подписки истекает в ближайшее время. Продлите подписку, чтобы не потерять защиту.";
 
+"local_notification.non_compliant_wifi.title" = "Незащищенная сеть Wi-Fi: %@";
+"local_notification.non_compliant_wifi.text" = "Нажмите здесь, чтобы защитить ваше устройство";
+
 // SHORTCUTS
 
 "shortcuts.connect" = "Подключиться";
@@ -134,8 +137,14 @@
 "settings.application_settings.active_theme.title" = "Активная тема";
 "settings.application_settings.kill_switch.title" = "Авторазрыв соединения";
 "settings.application_settings.kill_switch.footer" = "Функция авторазрыва соединения рвет Интернет-соединение при отключении VPN. Она не срабатывает при ручном отключении VPN.";
+"settings.application_settings.leak_protection.title" = "Защита от утечек";
+"settings.application_settings.leak_protection.footer" = "iOS включает функции, по умолчанию предназначенные для работы вне VPN, такие как AirDrop, CarPlay, AirPlay и Персональная точка доступа. Включение защиты от утечек перенаправляет этот трафик через VPN, но может отразиться на работе этих функций. Подробнее";
+"settings.application_settings.leak_protection.more_info" = "Подробнее";
+"settings.application_settings.allow_local_network.title" = "Разрешить доступ к устройствам в локальной сети";
+"settings.application_settings.allow_local_network.footer" = "Оставайтесь подключенными к устройствам в локальной сети, таким как принтеры или файловые серверы, пользуясь при этом VPN-подключением (включайте эту опцию только если доверяете людям и устройствам в вашей сети.)";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.mace.footer" = "PIA MACE™ блокирует рекламу, следящие программы и вредоносное ПО, когда вы подключены к VPN.";
+"settings.application_settings.leak_protection.alert.title" = "Изменения в настройках VPN будут применены при следующем подключении";
 
 "settings.content_blocker.title" = "Состояние блокировщика контента для Safari";
 "settings.content_blocker.state.title" = "Текущее состояние";
@@ -214,6 +223,15 @@
 "dashboard.accessibility.vpn.button" = "Кнопка VPN-подключения";
 "dashboard.accessibility.vpn.button.isOn" = "Кнопка VPN-подключения. VPN сейчас подключен";
 "dashboard.accessibility.vpn.button.isOff" = "Кнопка VPN-подключения. VPN сейчас отключен";
+
+"dashboard.vpn.leakprotection.alert.title" = "Обнаружена незащищенная сеть Wi-Fi";
+"dashboard.vpn.leakprotection.alert.message" = "Во избежание утечек данных, нажмите «Отключить сейчас», чтобы выключить опцию «Разрешить доступ к устройствам в локальной сети» и автоматически переподключиться.";
+"dashboard.vpn.leakprotection.alert.cta1" = "Отключить сейчас";
+"dashboard.vpn.leakprotection.alert.cta2" = "Узнать больше";
+"dashboard.vpn.leakprotection.alert.cta3" = "Игнорировать";
+
+"dashboard.vpn.leakprotection.ikev2.alert.message" = "Для предотвращения утечек данных, нажмите «Переключить сейчас», чтобы перейти на протокол IKEv2 VPN и автоматически переподключиться.";
+"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Переключить сейчас";
 
 // VPN PERMISSION
 
@@ -416,3 +434,7 @@
 // INAPP MESSAGES
 "inapp.messages.toggle.title" = "Показать служебные сообщения обмена данными";
 "inapp.messages.settings.updated" = "Настройки обновлены";
+
+// PIA WIDGET
+"widget.liveActivity.region.title" = "Регион";
+"widget.liveActivity.protocol.title" = "Протокол";

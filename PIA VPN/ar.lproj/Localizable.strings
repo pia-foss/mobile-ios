@@ -38,6 +38,9 @@
 "expiration.title" = "تجديد";
 "expiration.message" = "سينتهي اشتراكك قريبًا. قم بتجديده لتبقى محميًا.";
 
+"local_notification.non_compliant_wifi.title" = "واي فاي غير آمنة: %@";
+"local_notification.non_compliant_wifi.text" = "اضغط هنا لحماية جهازك";
+
 // SHORTCUTS
 
 "shortcuts.connect" = "اتصال";
@@ -134,8 +137,14 @@
 "settings.application_settings.active_theme.title" = "النسق النشط";
 "settings.application_settings.kill_switch.title" = "مفتاح إيقاف VPN";
 "settings.application_settings.kill_switch.footer" = "يؤدي استخدام مفتاح إيقاف VPN إلى تعطيل اتصالك بالإنترنت إذا كان الـ VPN في وضع إعادة الاتصال. لا ينطبق ذلك ذلك على الاتصال اليدوي.";
+"settings.application_settings.leak_protection.title" = "حماية من تسريب المعلومات";
+"settings.application_settings.leak_protection.footer" = "يتضمن نظام iOS ميزات مصممة للعمل خارج شبكة VPN افتراضيًا مثل AirDrop و CarPlay و AirPlay ونقاط الاتصال الشخصية. يؤدي تمكين الحماية المخصصة من تسريب المعلومات إلى توجيه حركة البيانات عبر VPN ولكنه قد يؤثر على كيفية عمل هذه الميزات. المزيد من المعلومات";
+"settings.application_settings.leak_protection.more_info" = "المزيد من المعلومات";
+"settings.application_settings.allow_local_network.title" = "السماح بالوصول إلى الأجهزة الموجودة على الشبكة المحلية";
+"settings.application_settings.allow_local_network.footer" = "كن متصلًا بالأجهزة المحلية مثل الطابعات أو خوادم الملفات أثناء الاتصال بشبكة VPN. (اسمح بذلك فقط إذا كنت تثق في الأشخاص المتصلين بشبكتك والأجهزة التي عليها.)";
 "settings.application_settings.mace.title" = "™PIA MACE";
 "settings.application_settings.mace.footer" = "يحجب ™PIA MACE الإعلانات والمتعقبين والبرمجيات الضارة عندما تكون متصلًا بخدمة VPN.";
+"settings.application_settings.leak_protection.alert.title" = "سيتم تفعيل التعديلات على إعدادات الـ VPN عند معاودة الاتصال";
 
 "settings.content_blocker.title" = "حالة حظر المحتوى في Safari";
 "settings.content_blocker.state.title" = "الحالة الحالية";
@@ -214,6 +223,15 @@
 "dashboard.accessibility.vpn.button" = "زر اتصال VPN";
 "dashboard.accessibility.vpn.button.isOn" = "زر اتصال VPN. خدمة VPN متصلة حاليًا";
 "dashboard.accessibility.vpn.button.isOff" = "زر اتصال VPN. خدمة VPN غير متصلة حاليًا";
+
+"dashboard.vpn.leakprotection.alert.title" = "تم العثور على شبكة واي فاي غير آمنة";
+"dashboard.vpn.leakprotection.alert.message" = "لمنع تسريب البيانات، اضغط على تعطيل الآن لإغلاق \"السماح بالوصول إلى الأجهزة الموجودة على الشبكة المحلية\" وإعادة الاتصال تلقائيًا.";
+"dashboard.vpn.leakprotection.alert.cta1" = "تعطيل الآن";
+"dashboard.vpn.leakprotection.alert.cta2" = "اعرف أكثر";
+"dashboard.vpn.leakprotection.alert.cta3" = "تجاهل";
+
+"dashboard.vpn.leakprotection.ikev2.alert.message" = "لمنع تسرب البيانات، اضغط على التبديل الآن للتغير إلى بروتوكول IKEv2 VPN وإعادة الاتصال تلقائيًا.";
+"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "التبديل الآن";
 
 // VPN PERMISSION
 
@@ -416,3 +434,7 @@
 // INAPP MESSAGES
 "inapp.messages.toggle.title" = "إظهار رسائل اتصال الخدمة";
 "inapp.messages.settings.updated" = "تم تحديث الإعدادات";
+
+// PIA WIDGET
+"widget.liveActivity.region.title" = "المنطقة";
+"widget.liveActivity.protocol.title" = "البروتوكول";
