@@ -113,7 +113,7 @@ class VPNPermissionViewController: AutolayoutViewController {
         buttonSubmit.style(style: TextStyle.Buttons.piaGreenButton)
         buttonSubmit.setTitle(L10n.Global.ok.uppercased(),
                               for: [])
-        buttonSubmit.accessibilityIdentifier = Accessibility.Id.Permissions.submit
+      buttonSubmit.accessibilityIdentifier = AccessibilityId.VPNPermission.submit
     }
 
 }

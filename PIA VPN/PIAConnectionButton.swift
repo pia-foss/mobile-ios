@@ -68,6 +68,7 @@ class PIAConnectionButton: UIButton, Restylable {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.setupView()
+        self.accessibilityIdentifier = AccessibilityId.Dashboard.connectionButton
     }
 
     deinit {
