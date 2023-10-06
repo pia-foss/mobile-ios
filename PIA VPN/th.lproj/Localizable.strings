@@ -38,6 +38,9 @@
 "expiration.title" = "การต่ออายุ";
 "expiration.message" = "สถานะสมาชิกของคุณจะหมดอายุเร็วๆนี้ ต่ออายุเพื่อรับการป้องกันต่อ";
 
+"local_notification.non_compliant_wifi.title" = "Wi-Fi ที่ไม่ปลอดภัย: %@";
+"local_notification.non_compliant_wifi.text" = "แตะที่นี่เพื่อรักษาความปลอดภัยให้อุปกรณ์ของคุณ";
+
 // SHORTCUTS
 
 "shortcuts.connect" = "เชื่อมต่อ";
@@ -134,8 +137,14 @@
 "settings.application_settings.active_theme.title" = "ธีมที่ใช้งานอยู่";
 "settings.application_settings.kill_switch.title" = "ปุ่มตัดการทำงาน VPN";
 "settings.application_settings.kill_switch.footer" = "Kill switch ของ VPN จะป้องกันการเข้าถึงอินเทอร์เน็ตหากการเชื่อมต่อ VPN กำลังเชื่อมต่อใหม่ ไม่รวมการตัดการเชื่อมต่อด้วยตนเอง";
+"settings.application_settings.leak_protection.title" = "การป้องกันการรั่วไหล";
+"settings.application_settings.leak_protection.footer" = "iOS มีคุณสมบัติที่ออกแบบมาเพื่อทำงานนอก VPN ตามค่าเริ่มต้น เช่น AirDrop, CarPlay, AirPlay และฮอตสปอตส่วนบุคคล การเปิดใช้งานการปกป้องการรั่วไหลแบบกำหนดเองจะนำทางการรับส่งข้อมูลเหล่านี้ผ่าน VPN แต่อาจส่งผลกระทบต่อวิธีการทำงานของคุณสมบัติดังกล่าว ข้อมูลเพิ่มเติม";
+"settings.application_settings.leak_protection.more_info" = "ข้อมูลเพิ่มเติม";
+"settings.application_settings.allow_local_network.title" = "อนุญาตการเข้าถึงอุปกรณ์บนเครือข่ายท้องถิ่น";
+"settings.application_settings.allow_local_network.footer" = "คงความเชื่อมต่อกับอุปกรณ์ท้องถิ่นอย่างเครื่องพิมพ์หรือเซิร์ฟเวอร์ไฟล์ระหว่างที่เชื่อมต่อกับ VPN (อนุญาตเฉพาะหากคุณไว้ใจผู้คนและอุปกรณ์ในเครือข่ายของคุณ)";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.mace.footer" = "PIA MACE™ บล็อกโฆษณา, ตัวติดตาม และมัลแวร์ ในขณะที่คุณกำลังเชื่อมต่อ VPN อยู่";
+"settings.application_settings.leak_protection.alert.title" = "การเปลี่ยนแปลงการตั้งค่า VPN จะมีผลในการเชื่อมต่อครั้งต่อไป";
 
 "settings.content_blocker.title" = "สถานะตัวปิดกั้นเนื้อหา Safari";
 "settings.content_blocker.state.title" = "สถานะปัจจุบัน";
@@ -214,6 +223,15 @@
 "dashboard.accessibility.vpn.button" = "ปุ่มเชื่อมต่อ VPN";
 "dashboard.accessibility.vpn.button.isOn" = "ปุ่มเชื่อมต่อ VPN ขณะนี้ VPN เชื่อมต่ออยู่";
 "dashboard.accessibility.vpn.button.isOff" = "ปุ่มเชื่อมต่อ VPN ขณะนี้ VPN ขาดการเชื่อมต่อ";
+
+"dashboard.vpn.leakprotection.alert.title" = "ตรวจพบ Wi-Fi ที่ไม่ปลอดภัย";
+"dashboard.vpn.leakprotection.alert.message" = "หากต้องการป้องกันการรั่วไหลของข้อมูล ให้แตะ ปิดใช้งานเลย เพื่อปิด “อนุญาตการเข้าถึงอุปกรณ์บนเครือข่ายท้องถิ่น” และเชื่อมต่อใหม่โดยอัตโนมัติ";
+"dashboard.vpn.leakprotection.alert.cta1" = "ปิดใช้งานเลย";
+"dashboard.vpn.leakprotection.alert.cta2" = "เรียนรู้เพิ่มเติม";
+"dashboard.vpn.leakprotection.alert.cta3" = "เพิกเฉย";
+
+"dashboard.vpn.leakprotection.ikev2.alert.message" = "หากต้องการป้องกันการรั่วไหลของข้อมูล ให้แตะ เปลี่ยนเลย เพื่อเปลี่ยนเป็นโปรโตคอล VPN IKEv2 และเชื่อมต่อใหม่โดยอัตโนมัติ";
+"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "เปลี่ยนเลย";
 
 // VPN PERMISSION
 
@@ -416,3 +434,7 @@
 // INAPP MESSAGES
 "inapp.messages.toggle.title" = "แสดงข้อความสื่อสารบริการ";
 "inapp.messages.settings.updated" = "อัปเดตการตั้งค่าแล้ว";
+
+// PIA WIDGET
+"widget.liveActivity.region.title" = "ภูมิภาค";
+"widget.liveActivity.protocol.title" = "โปรโตคอล";
