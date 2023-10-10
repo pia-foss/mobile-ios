@@ -10,6 +10,16 @@ platform :ios do
     run_tests(scheme: "PIA VPN")
   end
 
+  lane :e2e_tests do
+    run_tests(
+      scheme: "PIA VPN dev",
+      testplan: "PIA-VPN-e2e-simulator",
+      devices: ["iPhone 14"],
+      prelaunch_simulator: true,
+      clean: true
+    )
+  end
+
   desc "This line is for settin up the certificates and provisioning profiles"
   lane :get_profiles do
     api_key = app_store_connect_api_key(
