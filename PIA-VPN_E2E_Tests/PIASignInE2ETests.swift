@@ -41,11 +41,11 @@ final class PIASignInE2ETests: XCTestCase {
         }
         
         XCTContext.runActivity(named: "THEN the VPN Permission screen will appear") { _ in
-            XCTAssertTrue(app.willDisplayVpnPermissionScreen)
+            XCTAssertTrue(app.vpnPermissionScreen.waitForExistence(timeout: app.defaultTimeout))
         }
         
         XCTContext.runActivity(named: "AND no login error banner is displayed") { _ in
-            XCTAssertFalse(app.isDisplayingLoginErrorBanner)
+            XCTAssertFalse(app.loginErrorMessage.exists)
         }
         
     }
@@ -60,11 +60,11 @@ final class PIASignInE2ETests: XCTestCase {
         }
         
         XCTContext.runActivity(named: "THEN the login error banner is displayed") { _ in
-            XCTAssertTrue(app.willDisplayLoginErrorBanner)
+            XCTAssertTrue(app.loginErrorMessage.waitForExistence(timeout: app.shortTimeout))
         }
         
         XCTContext.runActivity(named: "AND the app does NOT display the Vpn Permission Screen") { _ in
-            XCTAssertFalse(app.willDisplayVpnPermissionScreen)
+            XCTAssertFalse(app.vpnPermissionScreen.exists)
         }
     }
     
