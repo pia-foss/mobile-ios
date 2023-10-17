@@ -36,7 +36,7 @@ final class PIAOnboardingVPNPermissionE2ETests: XCTestCase {
         
         app.loginButton.tap()
         
-        guard app.willDisplayVpnPermissionScreen else {
+        guard app.vpnPermissionScreen.exists else {
             XCTFail("XCUIApplication: login failed")
             return
         }
@@ -82,7 +82,7 @@ final class PIAOnboardingVPNPermissionE2ETests: XCTestCase {
         }
         
         XCTContext.runActivity(named: "AND the VPN Permission screen is NOT shown") { _ in
-            XCTAssertFalse(app.willDisplayVpnPermissionScreen)
+            XCTAssertFalse(app.vpnPermissionScreen.exists)
         }
     }
     

@@ -85,7 +85,7 @@ extension XCUIApplication {
         
         loginButton.tap()
         
-        guard willDisplayVpnPermissionScreen else {
+        guard vpnPermissionScreen.exists else {
             XCTFail("XCUIApplication: login failed")
             return
         }
