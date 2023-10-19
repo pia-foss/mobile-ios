@@ -8,7 +8,7 @@
 
 import Nimble
 
-class SignInTests:BaseTest{
+class SignInTests: BaseTest {
     override class func spec(){
         super.spec()
         

@@ -36,7 +36,7 @@ final class PIAOnboardingVPNPermissionE2ETests: XCTestCase {
         
         app.loginButton.tap()
         
-        guard app.vpnPermissionScreen.exists else {
+        guard app.vpnPermissionScreen.waitForExistence(timeout: app.defaultTimeout) else {
             XCTFail("XCUIApplication: login failed")
             return
         }
