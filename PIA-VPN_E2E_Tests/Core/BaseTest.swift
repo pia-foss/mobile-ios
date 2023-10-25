@@ -9,7 +9,6 @@
 import Quick
 import Nimble
 import XCTest
-import Foundation
 
 class BaseTest: QuickSpec{
     static var app: XCUIApplication!
@@ -18,8 +17,8 @@ class BaseTest: QuickSpec{
         beforeEach {
             app = XCUIApplication()
             app.launch()
-            app.logOutIfNeeded()
-            app.navigateToLoginScreenIfNeeded()
+            app.logOut()
+            app.navigateToLoginScreen()
         }
         
         afterEach {

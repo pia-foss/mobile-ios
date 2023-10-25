@@ -11,7 +11,7 @@ import XCTest
 extension XCUIApplication{
     
     var vpnPermissionScreen: XCUIElement {
-        view(with: AccessibilityId.VPNPermission.screen)
+        otherElement(with: AccessibilityId.VPNPermission.screen)
     }
     
     var vpnPermissionButton: XCUIElement{
@@ -19,10 +19,10 @@ extension XCUIApplication{
     }
     
     var vpnPermissionAlertText: XCUIElement{
-        alerts["PIA VPN dev” Would Like to Add VPN Configurations"]
+        alert(with: "PIA VPN dev” Would Like to Add VPN Configurations")
     }
     
     var vpnAllowButton: XCUIElement{
-        buttons["Allow"].firstMatch
+        button(with: "Allow").firstMatch
     }
 }
