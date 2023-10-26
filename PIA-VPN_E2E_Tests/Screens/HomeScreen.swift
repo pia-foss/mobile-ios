@@ -9,11 +9,32 @@
 import XCTest
 
 extension XCUIApplication{
-    var dashboardMenuButton:XCUIElement{
-        navigationBars.buttons[PIALibraryAccessibility.Id.Dashboard.menu]
-    } 
+    var dashboardMenuButton: XCUIElement{
+        button(with: PIALibraryAccessibility.Id.Dashboard.menu)
+    }
     
     var connectionButton: XCUIElement {
         button(with: AccessibilityId.Dashboard.connectionButton)
+    }
+    
+    var confirmationDialogButton: XCUIElement{
+        button(with: PIALibraryAccessibility.Id.Dialog.destructive)
+    }
+    
+    var logOutButton: XCUIElement{
+        staticText(with: "Log out")
+    }
+    
+    func logOut() {
+        guard dashboardMenuButton.exists else { return }
+        dashboardMenuButton.tap()
+        
+        if logOutButton.waitForExistence(timeout: defaultTimeout) {
+            logOutButton.tap()
+            if confirmationDialogButton.waitForExistence(timeout: shortTimeout) {
+                confirmationDialogButton.tap()
+            }
+            welcomeLoginButton.waitForExistence(timeout: defaultTimeout)
+        }
     }
 }
