@@ -1,0 +1,33 @@
+{
+  "configurations" : [
+    {
+      "id" : "266D4459-F88E-44D2-B611-230657A392ED",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "environmentVariableEntries" : [
+      {
+        "key" : "PIA_TEST_USER",
+        "value" : "xxx"
+      },
+      {
+        "key" : "PIA_TEST_PASSWORD",
+        "value" : "xxx"
+      }
+    ]
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:PIA VPN.xcodeproj",
+        "identifier" : "69B70AAF2ACBF51C0072A09D",
+        "name" : "PIA-VPN_E2E_Tests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -31,6 +31,10 @@ extension Client.Preferences {
             return preferredServer ?? .automatic
         }
         set {
+            guard newValue != displayedServer else {
+                connectToSelectedServerIfNeeded()
+                return
+            }
             let ed = editable()
             if newValue.isAutomatic {
                 ed.preferredServer = nil
@@ -41,13 +45,21 @@ extension Client.Preferences {
             let action = ed.requiredVPNAction()
             ed.commit()
 
-            action?.execute { (error) in
-                let vpn = Client.providers.vpnProvider
-                if (vpn.vpnStatus != .disconnected) {
-                    vpn.reconnect(after: nil, forceDisconnect: true, nil)
-                } else {
-                    vpn.connect(nil)
-                }
+            action?.execute { [weak self] (error) in
+                self?.connectToSelectedServerIfNeeded(shouldReconnect: true)
+            }
+        }
+    }
+    
+    private func connectToSelectedServerIfNeeded(shouldReconnect: Bool = false) {
+        let vpn = Client.providers.vpnProvider
+        
+        switch vpn.vpnStatus {
+        case .disconnected:
+            vpn.connect(nil)
+        default:
+            if shouldReconnect {
+                vpn.reconnect(after: nil, forceDisconnect: true, nil)
             }
         }
     }

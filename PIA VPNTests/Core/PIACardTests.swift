@@ -24,15 +24,15 @@ import PIALibrary
 @testable import PIA_VPN
 
 class PIACardTests: XCTestCase {
-
-    func testCards() throws {
-
-        let appVersion = "3.7.1"
-
-        let cards = CardFactory.getCardsForVersion(appVersion)
-        XCTAssertTrue(cards.count == 1, "one card for version 3.7.1")
-
-    }
+  
+  func testCards() throws {
+    
+    let appVersion = "3.7.1"
+    
+    let cards = CardFactory.getCardsForVersion(appVersion)
+    XCTAssertTrue(cards.count == 1, "one card for version 3.7.1")
+    
+  }
 
     func testCardsInvalidVersion() throws {
 

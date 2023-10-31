@@ -35,7 +35,7 @@ class Bootstrapper {
     }
     
     private var isSimulator: Bool {
-        #if arch(i386) || arch(x86_64)
+        #if targetEnvironment(simulator)
             return true
         #else
             return false
@@ -59,6 +59,10 @@ class Bootstrapper {
        // Leak Protection feature flags
         AppPreferences.shared.showLeakProtection = Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtection)
         AppPreferences.shared.showLeakProtectionNotifications = Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtectionNotifications)
+        
+        // DynamicIsland LiveActivity
+        AppPreferences.shared.showDynamicIslandLiveActivity = Client.configuration.featureFlags.contains(Client.FeatureFlags.showDynamicIslandLiveActivity)
+    
     }
 
     func bootstrap() {

@@ -38,6 +38,9 @@
 "expiration.title" = "更新";
 "expiration.message" = "ご利用のサブスクリプションがもうすぐ期限切れとなります。更新して保護された状態を保ちましょう。";
 
+"local_notification.non_compliant_wifi.title" = "保護されていないWiFi：%@";
+"local_notification.non_compliant_wifi.text" = "お使いのデバイスを保護するには、ここをタップしてください";
+
 // SHORTCUTS
 
 "shortcuts.connect" = "接続";
@@ -134,8 +137,14 @@
 "settings.application_settings.active_theme.title" = "アクティブなテーマ";
 "settings.application_settings.kill_switch.title" = "VPNキルスイッチ";
 "settings.application_settings.kill_switch.footer" = "VPNキルスイッチは、VPNの再接続時にインターネット接続を無効にします。これには手動での切断が含まれません。";
+"settings.application_settings.leak_protection.title" = "漏えい防止";
+"settings.application_settings.leak_protection.footer" = "iOSには、デフォルトでAirDrop、CarPlay、AirPlay、パーソナルホットスポットなど、VPNの外部で動作するように設計された機能が含まれています。カスタムリーク保護機能を有効にすると、このトラフィックはVPN経由でルーティングされますが、これらの機能の動作に影響する可能性があります。詳細";
+"settings.application_settings.leak_protection.more_info" = "詳細";
+"settings.application_settings.allow_local_network.title" = "ローカルネットワーク内のデバイスへのアクセスを許可";
+"settings.application_settings.allow_local_network.footer" = "VPNに接続している間、プリンタやファイルサーバーなどのローカルデバイスへの接続を維持できます（ネットワーク内のユーザーとデバイスを信頼できる場合にのみ許可してください。）";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.mace.footer" = "PIA MACE™はVPNに接続されている間、広告、閲覧行動の追跡、そしてマルウェアをブロックします。";
+"settings.application_settings.leak_protection.alert.title" = "VPN設定への変更は次回の接続時に反映されます";
 
 "settings.content_blocker.title" = "Safariコンテンツブロッカーの状態";
 "settings.content_blocker.state.title" = "現在の状況";
@@ -214,6 +223,15 @@
 "dashboard.accessibility.vpn.button" = "VPN接続ボタン";
 "dashboard.accessibility.vpn.button.isOn" = "VPN接続ボタン。VPNに現在接続されています";
 "dashboard.accessibility.vpn.button.isOff" = "VPN接続ボタン。VPNは現在切断されています";
+
+"dashboard.vpn.leakprotection.alert.title" = "保護されていないWiFiが検出されました";
+"dashboard.vpn.leakprotection.alert.message" = "データ漏洩を防ぐには、[今すぐ無効にする]をタップして[ローカルネットワーク内のデバイスへのアクセスを許可]をオフにし、自動的に再接続してください。";
+"dashboard.vpn.leakprotection.alert.cta1" = "今すぐ無効にする";
+"dashboard.vpn.leakprotection.alert.cta2" = "詳細";
+"dashboard.vpn.leakprotection.alert.cta3" = "無視";
+
+"dashboard.vpn.leakprotection.ikev2.alert.message" = "データ漏洩を防ぐには、[今すぐ切り替える]をタップしてIKEv2 VPNプロトコルに変更し、自動的に再接続してください。";
+"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "今すぐ切り替える";
 
 // VPN PERMISSION
 
@@ -416,3 +434,7 @@
 // INAPP MESSAGES
 "inapp.messages.toggle.title" = "サービス通信メッセージを表示";
 "inapp.messages.settings.updated" = "設定が更新されました";
+
+// PIA WIDGET
+"widget.liveActivity.region.title" = "地域";
+"widget.liveActivity.protocol.title" = "プロトコル";
