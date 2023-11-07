@@ -8,7 +8,7 @@
 
 import XCTest
 
-extension XCUIApplication{
+extension XCUIApplication {
     var dashboardMenuButton: XCUIElement{
         button(with: PIALibraryAccessibility.Id.Dashboard.menu)
     }
@@ -17,13 +17,22 @@ extension XCUIApplication{
         button(with: AccessibilityId.Dashboard.connectionButton)
     }
     
-    var confirmationDialogButton: XCUIElement{
+    var confirmationDialogButton: XCUIElement {
         button(with: PIALibraryAccessibility.Id.Dialog.destructive)
     }
     
-    var logOutButton: XCUIElement{
+    var logOutButton: XCUIElement {
         staticText(with: "Log out")
     }
+    
+    var settingsButton: XCUIElement {
+        staticText(with: "Settings")
+    }
+    
+    var settingsBackButton: XCUIElement {
+        button(with: "Settings")
+    }
+    
     
     func logOut() {
         guard dashboardMenuButton.exists else { return }
@@ -36,5 +45,21 @@ extension XCUIApplication{
             }
             welcomeLoginButton.waitForExistence(timeout: defaultTimeout)
         }
+    }
+    
+    func navigateToSettings() {
+        guard dashboardMenuButton.exists else { return }
+        dashboardMenuButton.tap()
+        
+        if settingsButton.waitForExistence(timeout: defaultTimeout) {
+            settingsButton.tap()
+        }
+    }
+    
+    func navigateToHomeScreenFromSettings() {
+        if settingsBackButton.waitForExistence(timeout: defaultTimeout) {
+            settingsBackButton.tap()
+        }
+        closeButton.tap()
     }
 }
