@@ -1,0 +1,46 @@
+name: pia_vpn_ios
+on:
+  pull_request:
+  workflow_dispatch:
+concurrency:
+  group: "${{ github.ref }}"
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: macos-13
+    env:
+      TEST_RUNNER_PIA_TEST_USER: ${{ secrets.PIA_ACCOUNT_USERNAME}}
+      TEST_RUNNER_PIA_TEST_PASSWORD: ${{ secrets.PIA_ACCOUNT_PASSWORD }}
+
+    steps:
+    - name: Setup Git credentials
+      run: |
+        git config --global url."https://${{ secrets.ORG_GITHUB_USERNAME }}:${{ secrets.ORG_GITHUB_TOKEN }}@github.com/".insteadOf "git@github.com:"
+
+    - uses: actions/checkout@v3
+    
+    - name: Select XCode version
+      run: sudo xcode-select -s /Applications/Xcode_15.0.app
+    
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+
+    - name: Install Fastlane
+      run: gem install fastlane
+    
+    - name: Set credentials in fastlane env
+      run: echo "TEST_RUNNER_PIA_TEST_USER=${{ secrets.PIA_ACCOUNT_USERNAME}}"\n"TEST_RUNNER_PIA_TEST_PASSWORD=${{ secrets.PIA_ACCOUNT_PASSWORD }}" > fastlane/.env
+    
+    - name: Check fastlane env
+      run: cat fastlane/.env
+
+    - name: Run e2e tests with fastlane
+      run: bundle exec fastlane e2e_tests
+      continue-on-error: true
+
+    - name: Run tests
+      run: bundle exec fastlane tests
+
+      

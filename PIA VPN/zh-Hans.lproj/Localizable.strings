@@ -38,6 +38,9 @@
 "expiration.title" = "续订";
 "expiration.message" = "您的订阅即将到期。请续期以持续受到保护。";
 
+"local_notification.non_compliant_wifi.title" = "不安全的 Wi-Fi：%@";
+"local_notification.non_compliant_wifi.text" = "轻点此处以保护您的设备";
+
 // SHORTCUTS
 
 "shortcuts.connect" = "连接";
@@ -134,8 +137,14 @@
 "settings.application_settings.active_theme.title" = "活跃主题";
 "settings.application_settings.kill_switch.title" = "VPN 切断开关";
 "settings.application_settings.kill_switch.footer" = "如果 VPN 连接重新连线，VPN 终止开关会阻止访问互联网。这不包括手动断开连接。";
+"settings.application_settings.leak_protection.title" = "泄露保护";
+"settings.application_settings.leak_protection.footer" = "iOS 包含默认在 VPN 之外运行的功能，例如 AirDrop、CarPlay、AirPlay 和个人热点。启用自定义泄露保护会通过 VPN 路由这些流量，但可能会影响这些功能的运行。更多信息";
+"settings.application_settings.leak_protection.more_info" = "更多信息";
+"settings.application_settings.allow_local_network.title" = "允许访问本地网络上的设备";
+"settings.application_settings.allow_local_network.footer" = "连接到 VPN 时，保持与打印机或文件服务器等本地设备的连接。（仅当您信任网络上的人员和设备时才允许此功能。）";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.mace.footer" = "PIA MACE™可在您连接到 VPN 时阻止广告、跟踪和恶意软件。";
+"settings.application_settings.leak_protection.alert.title" = "对 VPN 设置的更改将在下次连接时生效";
 
 "settings.content_blocker.title" = "Safari 内容拦截器状态";
 "settings.content_blocker.state.title" = "当前状态";
@@ -214,6 +223,15 @@
 "dashboard.accessibility.vpn.button" = "VPN 连接按钮";
 "dashboard.accessibility.vpn.button.isOn" = "VPN 连接按钮。VPN 当前已断开连接";
 "dashboard.accessibility.vpn.button.isOff" = "VPN 连接按钮。VPN 当前已断开连接";
+
+"dashboard.vpn.leakprotection.alert.title" = "检测到不安全的 Wi-Fi";
+"dashboard.vpn.leakprotection.alert.message" = "为防止数据泄露，请轻点“立即停用”以关闭“允许访问本地网络上的设备”并自动重新连接。";
+"dashboard.vpn.leakprotection.alert.cta1" = "立即停用";
+"dashboard.vpn.leakprotection.alert.cta2" = "了解详情";
+"dashboard.vpn.leakprotection.alert.cta3" = "忽略";
+
+"dashboard.vpn.leakprotection.ikev2.alert.message" = "为防止数据泄露，请轻点“立即切换”以更改为 IKEv2 VPN 协议并自动重新连接。";
+"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "立即切换";
 
 // VPN PERMISSION
 
@@ -416,3 +434,7 @@
 // INAPP MESSAGES
 "inapp.messages.toggle.title" = "显示服务通信消息";
 "inapp.messages.settings.updated" = "设置已更新";
+
+// PIA WIDGET
+"widget.liveActivity.region.title" = "地区";
+"widget.liveActivity.protocol.title" = "协议";

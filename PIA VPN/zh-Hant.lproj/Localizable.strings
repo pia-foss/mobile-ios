@@ -38,6 +38,9 @@
 "expiration.title" = "續訂";
 "expiration.message" = "您的訂購計劃即將屆滿，請續約以讓自己繼續獲得保障。";
 
+"local_notification.non_compliant_wifi.title" = "不安全的 Wi-Fi 網路：%@";
+"local_notification.non_compliant_wifi.text" = "點一下這裡即可保護裝置";
+
 // SHORTCUTS
 
 "shortcuts.connect" = "連線";
@@ -134,8 +137,14 @@
 "settings.application_settings.active_theme.title" = "使用中的主題";
 "settings.application_settings.kill_switch.title" = "VPN 切斷開關";
 "settings.application_settings.kill_switch.footer" = "如果 VPN 重新連接，VPN 的終止開關將阻止互聯網連線。這不包括手動斷開連接。";
+"settings.application_settings.leak_protection.title" = "防漏";
+"settings.application_settings.leak_protection.footer" = "iOS 內建功能依預設能在 VPN 以外運作，例如 AirDrop、CarPlay、AirPlay 和個人熱點。如果啟用自定防漏功能，就會把這個流量透過 VPN 轉出，但也可能影響這些功能。詳情";
+"settings.application_settings.leak_protection.more_info" = "詳情";
+"settings.application_settings.allow_local_network.title" = "同意取用本機網路上的裝置";
+"settings.application_settings.allow_local_network.footer" = "在連接到 VPN 時繼續連線到本機裝置，例如印表機或檔案伺服器。（只有在您相信網路上的人和裝置時才能同意）";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.mace.footer" = "PIA MACE™ 會在您連線到 VPN 時封鎖廣告、追蹤器及惡意程式。";
+"settings.application_settings.leak_protection.alert.title" = "更改 VPN 設定後，將在下次連線時生效";
 
 "settings.content_blocker.title" = "Safari 內容阻擋器狀態";
 "settings.content_blocker.state.title" = "目前狀態";
@@ -214,6 +223,15 @@
 "dashboard.accessibility.vpn.button" = "VPN 連線按鈕";
 "dashboard.accessibility.vpn.button.isOn" = "VPN 連線按鈕。目前已連線至 VPN";
 "dashboard.accessibility.vpn.button.isOff" = "VPN 連線按鈕。目前已解除 VPN 連線";
+
+"dashboard.vpn.leakprotection.alert.title" = "系統偵測到無安全保護的 Wi-Fi 網路";
+"dashboard.vpn.leakprotection.alert.message" = "若要避免資料洩漏，請點一下「立即停用」，以便關掉「同意取用本機網路上的裝置」，然後自動重新連線。";
+"dashboard.vpn.leakprotection.alert.cta1" = "立即停用";
+"dashboard.vpn.leakprotection.alert.cta2" = "更多內容";
+"dashboard.vpn.leakprotection.alert.cta3" = "忽略";
+
+"dashboard.vpn.leakprotection.ikev2.alert.message" = "若要避免資料洩漏，請點一下「立即切換」，以便改成 IKEv2 VPN 通訊協定，然後自動重新連線。";
+"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "立即切換";
 
 // VPN PERMISSION
 
@@ -416,3 +434,7 @@
 // INAPP MESSAGES
 "inapp.messages.toggle.title" = "顯示服務通訊訊息";
 "inapp.messages.settings.updated" = "已更新設定";
+
+// PIA WIDGET
+"widget.liveActivity.region.title" = "區域";
+"widget.liveActivity.protocol.title" = "通訊協定";
