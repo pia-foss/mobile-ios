@@ -145,15 +145,38 @@
 		3545E98226AADB2B00B812CC /* ServerSelectingTileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545E98126AADB2B00B812CC /* ServerSelectingTileCell.swift */; };
 		3545E98326AADC7C00B812CC /* ServerSelectingTileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545E98126AADB2B00B812CC /* ServerSelectingTileCell.swift */; };
 		3545E98426AADC7E00B812CC /* ServerSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545E97F26AAD60C00B812CC /* ServerSelectionDelegate.swift */; };
-		69446CB32AA7502E0080F446 /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 69446CB22AA7502E0080F446 /* PIALibrary */; };
-		69446CB52AA7503A0080F446 /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 69446CB42AA7503A0080F446 /* PIALibrary */; };
-		69446CB72AA750440080F446 /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 69446CB62AA750440080F446 /* PIALibrary */; };
-		69446CB92AA7504B0080F446 /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 69446CB82AA7504B0080F446 /* PIALibrary */; };
-		7EB8D11F27CE2B020030B060 /* PIAUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB8D11E27CE2B020030B060 /* PIAUITests.swift */; };
-		7EB8D12127CE2B5D0030B060 /* PIALaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB8D12027CE2B5D0030B060 /* PIALaunchTests.swift */; };
-		7EB8D12327CE7D4C0030B060 /* PIALoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB8D12227CE7D4C0030B060 /* PIALoginTests.swift */; };
-		7EC2972F27D8B8580061C56A /* CredentialsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */; };
-		7EC2973027D8B8580061C56A /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EC2972E27D8B8580061C56A /* Credentials.plist */; };
+		35950B312ADD2996006F3CD9 /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = 35950B302ADD2996006F3CD9 /* Quick */; };
+		35950B342ADD2EE5006F3CD9 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 35950B332ADD2EE5006F3CD9 /* Nimble */; };
+		35EDD6282ADE5D31007B9ACB /* BaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD6272ADE5D31007B9ACB /* BaseTest.swift */; };
+		35EDD62A2ADE5F08007B9ACB /* SignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD6292ADE5F08007B9ACB /* SignInTests.swift */; };
+		35EDD6332ADE7281007B9ACB /* OnboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD6322ADE7281007B9ACB /* OnboardingTests.swift */; };
+		35EDD6352ADE7424007B9ACB /* VPNPermissionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD6342ADE7424007B9ACB /* VPNPermissionScreen.swift */; };
+		35EDD6372ADE761A007B9ACB /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD6362ADE761A007B9ACB /* HomeScreen.swift */; };
+		35EDD63B2AE62D15007B9ACB /* ElementHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD63A2AE62D15007B9ACB /* ElementHelper.swift */; };
+		35EDD63E2AE76A3B007B9ACB /* WaitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD63D2AE76A3B007B9ACB /* WaitHelper.swift */; };
+		35EDD6422AE7A83D007B9ACB /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD6412AE7A83D007B9ACB /* WelcomeScreen.swift */; };
+		35EDD6442AE7B480007B9ACB /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD6432AE7B480007B9ACB /* Common.swift */; };
+		6924831A2AB045A5002A0407 /* PIAWidgetAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483192AB045A5002A0407 /* PIAWidgetAttributes.swift */; };
+		6924831B2AB045A5002A0407 /* PIAWidgetAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483192AB045A5002A0407 /* PIAWidgetAttributes.swift */; };
+		6924831C2AB045A5002A0407 /* PIAWidgetAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483192AB045A5002A0407 /* PIAWidgetAttributes.swift */; };
+		6924831E2AB04FFD002A0407 /* PIAWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6924831D2AB04FFD002A0407 /* PIAWidgetBundle.swift */; };
+		692483202AB05F18002A0407 /* PIAConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6924831F2AB05F18002A0407 /* PIAConnectionView.swift */; };
+		692483222AB05F37002A0407 /* PIACircleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483212AB05F37002A0407 /* PIACircleIcon.swift */; };
+		692483262AB05F85002A0407 /* PIAConnectionActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483252AB05F85002A0407 /* PIAConnectionActivityWidget.swift */; };
+		695BF81D2AC30EFB00D1139C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E7EC043209326E30029811E /* Localizable.strings */; };
+		695BF81F2AC410E000D1139C /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2215C820084CD700F5FB4D /* SwiftGen+Strings.swift */; };
+		698F4F2B2AB8A2080010B2B0 /* PIAWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8269A6D5251CB5E0000B4DBF /* PIAWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		698F4F2D2AB978BF0010B2B0 /* PIACircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F4F2C2AB978BF0010B2B0 /* PIACircleImageView.swift */; };
+		698F4F2E2AB97BAD0010B2B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 291C6397183EBC210039EC03 /* Images.xcassets */; };
+		698F4F302ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F4F2F2ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift */; };
+		698F4F312ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F4F2F2ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift */; };
+		698F4F322ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F4F2F2ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift */; };
+		69B70AB52ACBF51C0072A09D /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70AB42ACBF51C0072A09D /* LoginScreen.swift */; };
+		69B70ABC2ACBF8300072A09D /* CredentialsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */; };
+		69B70ABE2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
+		69B70ABF2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
+		69B70AC02ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
+		69C587FD2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C587FC2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift */; };
 		7ECBB8DD27B6C4F500C0C774 /* UserSurveyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */; };
 		7ECBB8DE27BA5FCE00C0C774 /* UserSurveyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */; };
 		821674F12678A1BE0028E4FD /* SettingsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821674F02678A1BE0028E4FD /* SettingsDelegate.swift */; };
@@ -254,7 +277,6 @@
 		82CAB87B255AEA3500BB08EF /* MessagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB879255AEA3500BB08EF /* MessagesManager.swift */; };
 		82CAB8B0255B050000BB08EF /* MessagesCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB8AF255B050000BB08EF /* MessagesCommands.swift */; };
 		82CAB8B1255B050000BB08EF /* MessagesCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB8AF255B050000BB08EF /* MessagesCommands.swift */; };
-		82CAB8DA255BEC7000BB08EF /* PIACommandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB8D9255BEC7000BB08EF /* PIACommandTests.swift */; };
 		82CAB8E8255C0CB000BB08EF /* MessagesTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB8E7255C0CB000BB08EF /* MessagesTile.swift */; };
 		82CAB8E9255C0CB000BB08EF /* MessagesTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB8E7255C0CB000BB08EF /* MessagesTile.swift */; };
 		82CAB8F2255C0CD100BB08EF /* MessagesTileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAB8F0255C0CD100BB08EF /* MessagesTileCollectionViewCell.swift */; };
@@ -273,6 +295,10 @@
 		AA36CDDB28A6860F00180A33 /* TweetNacl in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDDA28A6860F00180A33 /* TweetNacl */; };
 		AA36CDDE28A6878000180A33 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDDD28A6878000180A33 /* AlamofireImage */; };
 		AA52C59F28E5ECD400D025AF /* PIAWidgetVpnDetaislRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA52C59E28E5ECD400D025AF /* PIAWidgetVpnDetaislRow.swift */; };
+		AA5F0EA928B7640B006D629D /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = AA5F0EA828B7640B006D629D /* PIALibrary */; };
+		AA5F0EAB28B7653A006D629D /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = AA5F0EAA28B7653A006D629D /* PIALibrary */; };
+		AA5F0EAD28B7653F006D629D /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = AA5F0EAC28B7653F006D629D /* PIALibrary */; };
+		AA5F0EAF28B76543006D629D /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = AA5F0EAE28B76543006D629D /* PIALibrary */; };
 		AABF826D28AD185E00CDAC64 /* TweetNacl in Frameworks */ = {isa = PBXBuildFile; productRef = AABF826C28AD185E00CDAC64 /* TweetNacl */; };
 		AABF826F28AD187800CDAC64 /* Popover in Frameworks */ = {isa = PBXBuildFile; productRef = AABF826E28AD187800CDAC64 /* Popover */; };
 		AABF827128AD188700CDAC64 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = AABF827028AD188700CDAC64 /* AlamofireImage */; };
@@ -464,7 +490,7 @@
 			remoteGlobalIDString = 0EFB606F203D7A2C0095398C;
 			remoteInfo = "PIA VPN AdBlocker";
 		};
-		7EC2973127D8BCB60061C56A /* PBXContainerItemProxy */ = {
+		69B70AB62ACBF51C0072A09D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 291C6374183EBC210039EC03 /* Project object */;
 			proxyType = 1;
@@ -532,6 +558,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				698F4F2B2AB8A2080010B2B0 /* PIAWidgetExtension.appex in Embed App Extensions */,
 				DD1AB0E923F2993600396E74 /* PIA VPN WG Tunnel.appex in Embed App Extensions */,
 				0EFB6079203D7A2C0095398C /* PIA VPN AdBlocker.appex in Embed App Extensions */,
 				0EE220741F4EF307002805AE /* PIA VPN Tunnel.appex in Embed App Extensions */,
@@ -550,9 +577,9 @@
 		0E257AC41DA45D2F0000D3C3 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		0E325DA62093277F0020BEDB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0E392DA51FE3283C0002160D /* TransientState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransientState.swift; sourceTree = "<group>"; };
-		0E3A35271FD9A960000B0F99 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		0E3A35271FD9A960000B0F99 /* DashboardViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		0E3A352B1FD9CDC5000B0F99 /* Theme+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+App.swift"; sourceTree = "<group>"; };
-		0E3A35341FD9EBDA000B0F99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0E3A35341FD9EBDA000B0F99 /* AppDelegate.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; tabWidth = 4; };
 		0E3C9A5D20EC004D00B199F9 /* custom.servers */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = custom.servers; sourceTree = "<group>"; };
 		0E441E252055AEDF007528D5 /* ThemeStrategy+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ThemeStrategy+App.swift"; sourceTree = "<group>"; };
 		0E492C661FE60907007F23DF /* Flags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flags.swift; sourceTree = "<group>"; };
@@ -610,7 +637,7 @@
 		0E9452AA1FDB5EF600891948 /* UINavigationItem+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+Shortcuts.swift"; sourceTree = "<group>"; };
 		0E9452AD1FDB5F7A00891948 /* PIAPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAPageControl.swift; sourceTree = "<group>"; };
 		0E9785851DA82FF000711A24 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		0E98BB6D1FD5BC6200B41D6B /* Bootstrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bootstrapper.swift; sourceTree = "<group>"; };
+		0E98BB6D1FD5BC6200B41D6B /* Bootstrapper.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = Bootstrapper.swift; sourceTree = "<group>"; tabWidth = 4; };
 		0E9AEA6120683FDF00B6E59A /* AboutComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutComponent.swift; sourceTree = "<group>"; };
 		0EA660071FEC7A9500CB2B0D /* PIATunnelProvider+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PIATunnelProvider+UI.swift"; sourceTree = "<group>"; };
 		0EB0A849204F0CE2008BCF1D /* DataCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCounter.h; sourceTree = "<group>"; };
@@ -663,12 +690,28 @@
 		3524670D26B432ED00E3F0AC /* DashboardViewController+ServerSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DashboardViewController+ServerSelection.swift"; sourceTree = "<group>"; };
 		3545E97F26AAD60C00B812CC /* ServerSelectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSelectionDelegate.swift; sourceTree = "<group>"; };
 		3545E98126AADB2B00B812CC /* ServerSelectingTileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSelectingTileCell.swift; sourceTree = "<group>"; };
-		7EB8D11327CCF4C20030B060 /* PIA VPN UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA VPN UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7EB8D11E27CE2B020030B060 /* PIAUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAUITests.swift; sourceTree = "<group>"; };
-		7EB8D12027CE2B5D0030B060 /* PIALaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIALaunchTests.swift; sourceTree = "<group>"; };
-		7EB8D12227CE7D4C0030B060 /* PIALoginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIALoginTests.swift; sourceTree = "<group>"; };
-		7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialsUtil.swift; sourceTree = "<group>"; };
-		7EC2972E27D8B8580061C56A /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
+		35EDD6272ADE5D31007B9ACB /* BaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTest.swift; sourceTree = "<group>"; };
+		35EDD6292ADE5F08007B9ACB /* SignInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInTests.swift; sourceTree = "<group>"; };
+		35EDD6322ADE7281007B9ACB /* OnboardingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTests.swift; sourceTree = "<group>"; };
+		35EDD6342ADE7424007B9ACB /* VPNPermissionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNPermissionScreen.swift; sourceTree = "<group>"; };
+		35EDD6362ADE761A007B9ACB /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		35EDD63A2AE62D15007B9ACB /* ElementHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementHelper.swift; sourceTree = "<group>"; };
+		35EDD63D2AE76A3B007B9ACB /* WaitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitHelper.swift; sourceTree = "<group>"; };
+		35EDD6412AE7A83D007B9ACB /* WelcomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
+		35EDD6432AE7B480007B9ACB /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		692483192AB045A5002A0407 /* PIAWidgetAttributes.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAWidgetAttributes.swift; sourceTree = "<group>"; tabWidth = 4; };
+		6924831D2AB04FFD002A0407 /* PIAWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAWidgetBundle.swift; sourceTree = "<group>"; };
+		6924831F2AB05F18002A0407 /* PIAConnectionView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionView.swift; sourceTree = "<group>"; tabWidth = 4; };
+		692483212AB05F37002A0407 /* PIACircleIcon.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIACircleIcon.swift; sourceTree = "<group>"; tabWidth = 4; };
+		692483252AB05F85002A0407 /* PIAConnectionActivityWidget.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionActivityWidget.swift; sourceTree = "<group>"; tabWidth = 4; };
+		6947AADB2ACDC8AE001BCC66 /* PIA-VPN-e2e-simulator.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PIA-VPN-e2e-simulator.xctestplan"; sourceTree = "<group>"; };
+		698F4F2C2AB978BF0010B2B0 /* PIACircleImageView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIACircleImageView.swift; sourceTree = "<group>"; tabWidth = 4; };
+		698F4F2F2ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionLiveActivityManager.swift; sourceTree = "<group>"; tabWidth = 4; };
+		69B70AB02ACBF51C0072A09D /* PIA-VPN_E2E_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA-VPN_E2E_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		69B70AB42ACBF51C0072A09D /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityId.swift; sourceTree = "<group>"; };
+		69C587FC2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PIAExampleWithAuthenticatedAppTest.swift; sourceTree = "<group>"; tabWidth = 2; };
+		7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = CredentialsUtil.swift; sourceTree = "<group>"; tabWidth = 4; };
 		7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSurveyManager.swift; sourceTree = "<group>"; };
 		821674F02678A1BE0028E4FD /* SettingsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDelegate.swift; sourceTree = "<group>"; };
 		82183D7A2500FD460033023F /* String+Substrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Substrings.swift"; sourceTree = "<group>"; };
@@ -818,7 +861,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69446CB72AA750440080F446 /* PIALibrary in Frameworks */,
+				AA5F0EAD28B7653F006D629D /* PIALibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -838,7 +881,7 @@
 				0EE2205C1F4EF307002805AE /* CoreGraphics.framework in Frameworks */,
 				AABF826F28AD187800CDAC64 /* Popover in Frameworks */,
 				0EE2205F1F4EF307002805AE /* StoreKit.framework in Frameworks */,
-				69446CB52AA7503A0080F446 /* PIALibrary in Frameworks */,
+				AA5F0EAB28B7653A006D629D /* PIALibrary in Frameworks */,
 				0EE2205D1F4EF307002805AE /* UIKit.framework in Frameworks */,
 				0EE2205E1F4EF307002805AE /* Foundation.framework in Frameworks */,
 				AABF826D28AD185E00CDAC64 /* TweetNacl in Frameworks */,
@@ -876,7 +919,7 @@
 				2985E5671856BD1200D70E28 /* QuartzCore.framework in Frameworks */,
 				291C6382183EBC210039EC03 /* CoreGraphics.framework in Frameworks */,
 				291C6384183EBC210039EC03 /* UIKit.framework in Frameworks */,
-				69446CB32AA7502E0080F446 /* PIALibrary in Frameworks */,
+				AA5F0EA928B7640B006D629D /* PIALibrary in Frameworks */,
 				DD606ABA21C7A17900E0781D /* NetworkExtension.framework in Frameworks */,
 				AA36CDC928A6733500180A33 /* DZNEmptyDataSet in Frameworks */,
 				291C6380183EBC210039EC03 /* Foundation.framework in Frameworks */,
@@ -884,10 +927,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7EB8D11027CCF4C20030B060 /* Frameworks */ = {
+		69B70AAD2ACBF51C0072A09D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35950B312ADD2996006F3CD9 /* Quick in Frameworks */,
+				35950B342ADD2EE5006F3CD9 /* Nimble in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -904,7 +949,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69446CB92AA7504B0080F446 /* PIALibrary in Frameworks */,
+				AA5F0EAF28B76543006D629D /* PIALibrary in Frameworks */,
 				AA36CDDB28A6860F00180A33 /* TweetNacl in Frameworks */,
 				DDC8F5F923EC10E4005D19C6 /* NetworkExtension.framework in Frameworks */,
 			);
@@ -1122,7 +1167,7 @@
 				0EEE1C191E4F719E00397DE2 /* Resources */,
 				DDC8F5ED23EC1070005D19C6 /* PIA VPN WG Tunnel */,
 				8269A6D8251CB5E0000B4DBF /* PIAWidget */,
-				7EB8D11427CCF4C20030B060 /* PIA VPN UITests */,
+				69B70AB12ACBF51C0072A09D /* PIA-VPN_E2E_Tests */,
 				291C637E183EBC210039EC03 /* Frameworks */,
 				291C637D183EBC210039EC03 /* Products */,
 			);
@@ -1138,7 +1183,7 @@
 				0EFB6070203D7A2C0095398C /* PIA VPN AdBlocker.appex */,
 				DDC8F5EC23EC106F005D19C6 /* PIA VPN WG Tunnel.appex */,
 				8269A6D5251CB5E0000B4DBF /* PIAWidgetExtension.appex */,
-				7EB8D11327CCF4C20030B060 /* PIA VPN UITests.xctest */,
+				69B70AB02ACBF51C0072A09D /* PIA-VPN_E2E_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1218,6 +1263,7 @@
 				0E2215C820084CD700F5FB4D /* SwiftGen+Strings.swift */,
 				DD58F4BE21B12CFE00D043F7 /* PIAConnectionButton.swift */,
 				DD125DD021E7A694004ECCB6 /* ServerButton.swift */,
+				69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -1234,16 +1280,64 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
-		7EB8D11427CCF4C20030B060 /* PIA VPN UITests */ = {
+		35EDD6262ADE5D1E007B9ACB /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				7EC2972E27D8B8580061C56A /* Credentials.plist */,
-				7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */,
-				7EB8D12227CE7D4C0030B060 /* PIALoginTests.swift */,
-				7EB8D11E27CE2B020030B060 /* PIAUITests.swift */,
-				7EB8D12027CE2B5D0030B060 /* PIALaunchTests.swift */,
+				69C587FC2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift */,
+				35EDD6292ADE5F08007B9ACB /* SignInTests.swift */,
+				35EDD6322ADE7281007B9ACB /* OnboardingTests.swift */,
 			);
-			path = "PIA VPN UITests";
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		35EDD62B2ADE62FE007B9ACB /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				69B70AB42ACBF51C0072A09D /* LoginScreen.swift */,
+				35EDD6342ADE7424007B9ACB /* VPNPermissionScreen.swift */,
+				35EDD6362ADE761A007B9ACB /* HomeScreen.swift */,
+				35EDD6412AE7A83D007B9ACB /* WelcomeScreen.swift */,
+				35EDD6432AE7B480007B9ACB /* Common.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		35EDD6382AE62CF0007B9ACB /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				35EDD63A2AE62D15007B9ACB /* ElementHelper.swift */,
+				35EDD63D2AE76A3B007B9ACB /* WaitHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		35EDD63C2AE7679B007B9ACB /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				35EDD6272ADE5D31007B9ACB /* BaseTest.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		69B70AB12ACBF51C0072A09D /* PIA-VPN_E2E_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				35EDD63C2AE7679B007B9ACB /* Core */,
+				35EDD6382AE62CF0007B9ACB /* Helpers */,
+				35EDD62B2ADE62FE007B9ACB /* Screens */,
+				35EDD6262ADE5D1E007B9ACB /* Tests */,
+				6947AADB2ACDC8AE001BCC66 /* PIA-VPN-e2e-simulator.xctestplan */,
+				69D12D152ACC75140053A81B /* Util */,
+			);
+			path = "PIA-VPN_E2E_Tests";
+			sourceTree = "<group>";
+		};
+		69D12D152ACC75140053A81B /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		82183D8425014F940033023F /* Menu */ = {
@@ -1370,6 +1464,9 @@
 				AAE878A628E473A400557F26 /* PIAWidgetVpnDetailsView.swift */,
 				AAE878A828E4765F00557F26 /* PIAIconView.swift */,
 				AA52C59E28E5ECD400D025AF /* PIAWidgetVpnDetaislRow.swift */,
+				6924831F2AB05F18002A0407 /* PIAConnectionView.swift */,
+				692483212AB05F37002A0407 /* PIACircleIcon.swift */,
+				698F4F2C2AB978BF0010B2B0 /* PIACircleImageView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1380,6 +1477,10 @@
 				8269A6D9251CB5E0000B4DBF /* PIAWidget.swift */,
 				AAE8789E28E4696300557F26 /* PIAWidgetProvider.swift */,
 				AAE878A028E46C1600557F26 /* PIAWidgetPreview.swift */,
+				692483192AB045A5002A0407 /* PIAWidgetAttributes.swift */,
+				6924831D2AB04FFD002A0407 /* PIAWidgetBundle.swift */,
+				692483252AB05F85002A0407 /* PIAConnectionActivityWidget.swift */,
+				698F4F2F2ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -1555,7 +1656,7 @@
 			);
 			name = "PIA VPN Tunnel";
 			packageProductDependencies = (
-				69446CB62AA750440080F446 /* PIALibrary */,
+				AA5F0EAC28B7653F006D629D /* PIALibrary */,
 			);
 			productName = "PIA OpenVPN";
 			productReference = 0E67FC221E3F802D00EF9929 /* PIA VPN Tunnel.appex */;
@@ -1589,7 +1690,7 @@
 				AABF827228AE2FF500CDAC64 /* GradientProgressBar */,
 				AABF827428AE2FFE00CDAC64 /* SideMenu */,
 				AABF827728AE333200CDAC64 /* DZNEmptyDataSet */,
-				69446CB42AA7503A0080F446 /* PIALibrary */,
+				AA5F0EAA28B7653A006D629D /* PIALibrary */,
 			);
 			productName = "PIA VPN";
 			productReference = 0EE2207A1F4EF307002805AE /* PIA VPN dev.app */;
@@ -1657,28 +1758,32 @@
 				AA36CDCB28A673C900180A33 /* GradientProgressBar */,
 				AA36CDCE28A6746500180A33 /* SideMenu */,
 				AA36CDDD28A6878000180A33 /* AlamofireImage */,
-				69446CB22AA7502E0080F446 /* PIALibrary */,
+				AA5F0EA828B7640B006D629D /* PIALibrary */,
 			);
 			productName = "PIA VPN";
 			productReference = 291C637C183EBC210039EC03 /* PIA VPN.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7EB8D11227CCF4C20030B060 /* PIA VPN UITests */ = {
+		69B70AAF2ACBF51C0072A09D /* PIA-VPN_E2E_Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7EB8D11D27CCF4C20030B060 /* Build configuration list for PBXNativeTarget "PIA VPN UITests" */;
+			buildConfigurationList = 69B70ABA2ACBF51C0072A09D /* Build configuration list for PBXNativeTarget "PIA-VPN_E2E_Tests" */;
 			buildPhases = (
-				7EB8D10F27CCF4C20030B060 /* Sources */,
-				7EB8D11027CCF4C20030B060 /* Frameworks */,
-				7EB8D11127CCF4C20030B060 /* Resources */,
+				69B70AAC2ACBF51C0072A09D /* Sources */,
+				69B70AAD2ACBF51C0072A09D /* Frameworks */,
+				69B70AAE2ACBF51C0072A09D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7EC2973227D8BCB60061C56A /* PBXTargetDependency */,
+				69B70AB72ACBF51C0072A09D /* PBXTargetDependency */,
 			);
-			name = "PIA VPN UITests";
-			productName = "PIA VPN UITests";
-			productReference = 7EB8D11327CCF4C20030B060 /* PIA VPN UITests.xctest */;
+			name = "PIA-VPN_E2E_Tests";
+			packageProductDependencies = (
+				35950B302ADD2996006F3CD9 /* Quick */,
+				35950B332ADD2EE5006F3CD9 /* Nimble */,
+			);
+			productName = "PIA-VPN_E2E_Tests";
+			productReference = 69B70AB02ACBF51C0072A09D /* PIA-VPN_E2E_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		8269A6D4251CB5E0000B4DBF /* PIAWidgetExtension */ = {
@@ -1713,7 +1818,7 @@
 			name = "PIA VPN WG Tunnel";
 			packageProductDependencies = (
 				AA36CDDA28A6860F00180A33 /* TweetNacl */,
-				69446CB82AA7504B0080F446 /* PIALibrary */,
+				AA5F0EAE28B76543006D629D /* PIALibrary */,
 			);
 			productName = "PIA VPN WG Tunnel";
 			productReference = DDC8F5EC23EC106F005D19C6 /* PIA VPN WG Tunnel.appex */;
@@ -1726,7 +1831,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = PIA;
-				LastSwiftUpdateCheck = 1300;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Private Internet Access Inc.";
 				TargetAttributes = {
@@ -1754,9 +1859,7 @@
 					};
 					0EEE1BE61E4F6EF400397DE2 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 5357M5NW9W;
 						LastSwiftMigration = 1010;
-						ProvisioningStyle = Automatic;
 						TestTargetID = 291C637B183EBC210039EC03;
 					};
 					0EFB606F203D7A2C0095398C = {
@@ -1798,10 +1901,8 @@
 							};
 						};
 					};
-					7EB8D11227CCF4C20030B060 = {
-						CreatedOnToolsVersion = 13.0;
-						DevelopmentTeam = 5357M5NW9W;
-						ProvisioningStyle = Automatic;
+					69B70AAF2ACBF51C0072A09D = {
+						CreatedOnToolsVersion = 14.3.1;
 						TestTargetID = 0EE2200B1F4EF307002805AE;
 					};
 					8269A6D4251CB5E0000B4DBF = {
@@ -1849,7 +1950,9 @@
 				AA36CDCA28A673C900180A33 /* XCRemoteSwiftPackageReference "GradientProgressBar" */,
 				AA36CDCD28A6746500180A33 /* XCRemoteSwiftPackageReference "SideMenu" */,
 				AA36CDDC28A6878000180A33 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
-				69446CB12AA74F880080F446 /* XCRemoteSwiftPackageReference "client-library-apple" */,
+				AA5F0EA728B7640B006D629D /* XCRemoteSwiftPackageReference "cpz_pia-mobile_ios_client-library-apple" */,
+				35950B2F2ADD2877006F3CD9 /* XCRemoteSwiftPackageReference "Quick" */,
+				35950B322ADD2EE5006F3CD9 /* XCRemoteSwiftPackageReference "Nimble" */,
 			);
 			productRefGroup = 291C637D183EBC210039EC03 /* Products */;
 			projectDirPath = "";
@@ -1862,7 +1965,7 @@
 				DDC8F5EB23EC106F005D19C6 /* PIA VPN WG Tunnel */,
 				8269A6D4251CB5E0000B4DBF /* PIAWidgetExtension */,
 				0EEE1BE61E4F6EF400397DE2 /* PIA VPNTests */,
-				7EB8D11227CCF4C20030B060 /* PIA VPN UITests */,
+				69B70AAF2ACBF51C0072A09D /* PIA-VPN_E2E_Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -1987,11 +2090,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7EB8D11127CCF4C20030B060 /* Resources */ = {
+		69B70AAE2ACBF51C0072A09D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EC2973027D8B8580061C56A /* Credentials.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2000,6 +2102,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8269A6DD251CB5E3000B4DBF /* Assets.xcassets in Resources */,
+				695BF81D2AC30EFB00D1139C /* Localizable.strings in Resources */,
+				698F4F2E2AB97BAD0010B2B0 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2039,7 +2143,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftgen >/dev/null; then\n    set -e\n    swiftgen\nelse\n    echo \"warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen\"\nfi\n";
+			shellScript = "if which swiftgen >/dev/null; then\n    set -e\n    #swiftgen\nelse\n    echo \"warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen\"\nfi\n";
 		};
 		2931563B18513F6500E769A7 /* Download Latest Regions List */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2080,6 +2184,7 @@
 				DD76292321ECCD5C0092DF50 /* UsageTile.swift in Sources */,
 				DDD65314247E66AD00F0A897 /* CoordinatesFinder.swift in Sources */,
 				DDD271DF21D616AA00B6D20F /* Server+Favorite.swift in Sources */,
+				698F4F312ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift in Sources */,
 				DD125DC621E77046004ECCB6 /* QuickConnectTile.swift in Sources */,
 				82A1AD2724B86AF60003DD02 /* PIACardsViewController.swift in Sources */,
 				829EB508253598BD003E74DD /* DedicatedIpViewController.swift in Sources */,
@@ -2159,6 +2264,7 @@
 				0E2215CD2008C01D00F5FB4D /* SwiftGen+Assets.swift in Sources */,
 				8272C62E2657B46100D846A8 /* NetworkSettingsViewController.swift in Sources */,
 				DDFCFA9021E892070081F235 /* RegionTileCollectionViewCell.swift in Sources */,
+				6924831B2AB045A5002A0407 /* PIAWidgetAttributes.swift in Sources */,
 				DD9706A5224262BF00630220 /* QuickSettingsTile.swift in Sources */,
 				82CAB8E9255C0CB000BB08EF /* MessagesTile.swift in Sources */,
 				DD3B504424B7576F0002F4B5 /* Card.swift in Sources */,
@@ -2179,6 +2285,7 @@
 				0EFDC1E11FE4A450007C0B9B /* AppPreferences.swift in Sources */,
 				0E441E272055AEDF007528D5 /* ThemeStrategy+App.swift in Sources */,
 				DDC8125021761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift in Sources */,
+				69B70ABF2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */,
 				7ECBB8DE27BA5FCE00C0C774 /* UserSurveyManager.swift in Sources */,
 				0E492C681FE60907007F23DF /* Flags.swift in Sources */,
 				DD172A972254C35000071CFB /* FavoriteServersTile.swift in Sources */,
@@ -2208,7 +2315,6 @@
 				DD606AC821C9344100E0781D /* AppTests.swift in Sources */,
 				82A1AD2324B7C0020003DD02 /* PIACardTests.swift in Sources */,
 				8221922B24CECFE700C24F1C /* NMTTests.swift in Sources */,
-				82CAB8DA255BEC7000BB08EF /* PIACommandTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2256,6 +2362,7 @@
 				0ECF5C082017EBAD0047596C /* ThemeCode.swift in Sources */,
 				3545E98026AAD60C00B812CC /* ServerSelectionDelegate.swift in Sources */,
 				0E392DA61FE3283C0002160D /* TransientState.swift in Sources */,
+				6924831A2AB045A5002A0407 /* PIAWidgetAttributes.swift in Sources */,
 				82F41376264E8AC20098FF4B /* SettingOptions.swift in Sources */,
 				824C531524C04796003DB740 /* ConnectionTileCollectionViewCell.swift in Sources */,
 				0E3A35351FD9EBDA000B0F99 /* AppDelegate.swift in Sources */,
@@ -2287,6 +2394,7 @@
 				827570D124DAA128008F9800 /* PIAHeaderCollectionViewCell.swift in Sources */,
 				DD125DD121E7A694004ECCB6 /* ServerButton.swift in Sources */,
 				DD9329A2237AFD0A0025B6BC /* ShowQuickSettingsViewController.swift in Sources */,
+				69B70ABE2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */,
 				0E2215C920084CD700F5FB4D /* SwiftGen+Strings.swift in Sources */,
 				827570D824DAB6E4008F9800 /* NetworkFooterCollectionViewCell.swift in Sources */,
 				E5F52A1F2A8A614900828883 /* NetworkMonitor.swift in Sources */,
@@ -2340,6 +2448,7 @@
 				8272C62726540B2100D846A8 /* ProtocolSettingsViewController.swift in Sources */,
 				82CAB8B0255B050000BB08EF /* MessagesCommands.swift in Sources */,
 				DDE432DF2498EADB0095B197 /* Array+Group.swift in Sources */,
+				698F4F302ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift in Sources */,
 				DDB6B95321C95CD400DE8C5F /* EnumsBuilder.swift in Sources */,
 				3545E98226AADB2B00B812CC /* ServerSelectingTileCell.swift in Sources */,
 				829EB5322535AD27003E74DD /* DedicatedIpEmptyHeaderViewCell.swift in Sources */,
@@ -2355,14 +2464,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7EB8D10F27CCF4C20030B060 /* Sources */ = {
+		69B70AAC2ACBF51C0072A09D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EC2972F27D8B8580061C56A /* CredentialsUtil.swift in Sources */,
-				7EB8D12327CE7D4C0030B060 /* PIALoginTests.swift in Sources */,
-				7EB8D11F27CE2B020030B060 /* PIAUITests.swift in Sources */,
-				7EB8D12127CE2B5D0030B060 /* PIALaunchTests.swift in Sources */,
+				35EDD6442AE7B480007B9ACB /* Common.swift in Sources */,
+				35EDD63E2AE76A3B007B9ACB /* WaitHelper.swift in Sources */,
+				35EDD6282ADE5D31007B9ACB /* BaseTest.swift in Sources */,
+				35EDD6352ADE7424007B9ACB /* VPNPermissionScreen.swift in Sources */,
+				69B70ABC2ACBF8300072A09D /* CredentialsUtil.swift in Sources */,
+				35EDD6372ADE761A007B9ACB /* HomeScreen.swift in Sources */,
+				35EDD63B2AE62D15007B9ACB /* ElementHelper.swift in Sources */,
+				69C587FD2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift in Sources */,
+				35EDD6422AE7A83D007B9ACB /* WelcomeScreen.swift in Sources */,
+				35EDD62A2ADE5F08007B9ACB /* SignInTests.swift in Sources */,
+				69B70AB52ACBF51C0072A09D /* LoginScreen.swift in Sources */,
+				35EDD6332ADE7281007B9ACB /* OnboardingTests.swift in Sources */,
+				69B70AC02ACC2CFE0072A09D /* AccessibilityId.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2371,15 +2489,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				8269A6FE251CBB36000B4DBF /* WidgetInformation.swift in Sources */,
+				695BF81F2AC410E000D1139C /* SwiftGen+Strings.swift in Sources */,
+				698F4F2D2AB978BF0010B2B0 /* PIACircleImageView.swift in Sources */,
 				822F97B4251DD53100644EF2 /* WidgetUserDefaultsDatasource.swift in Sources */,
 				8269A6DA251CB5E0000B4DBF /* PIAWidget.swift in Sources */,
+				692483222AB05F37002A0407 /* PIACircleIcon.swift in Sources */,
 				AAE878A928E4765F00557F26 /* PIAIconView.swift in Sources */,
+				6924831E2AB04FFD002A0407 /* PIAWidgetBundle.swift in Sources */,
 				AAE8789F28E4696300557F26 /* PIAWidgetProvider.swift in Sources */,
 				AAE878A128E46C1600557F26 /* PIAWidgetPreview.swift in Sources */,
+				692483262AB05F85002A0407 /* PIAConnectionActivityWidget.swift in Sources */,
 				AAE878A528E4723B00557F26 /* PIACircleVpnButton.swift in Sources */,
 				82BAACFB25B09C9200B3C733 /* PIAWidget.intentdefinition in Sources */,
 				AAE8789C28E4679500557F26 /* WidgetPersistenceDatasource.swift in Sources */,
 				AAE878A328E46D2B00557F26 /* PIAWidgetView.swift in Sources */,
+				6924831C2AB045A5002A0407 /* PIAWidgetAttributes.swift in Sources */,
+				698F4F322ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift in Sources */,
+				692483202AB05F18002A0407 /* PIAConnectionView.swift in Sources */,
 				AAE878A728E473A400557F26 /* PIAWidgetVpnDetailsView.swift in Sources */,
 				AA52C59F28E5ECD400D025AF /* PIAWidgetVpnDetaislRow.swift in Sources */,
 			);
@@ -2426,10 +2552,10 @@
 			target = 0EFB606F203D7A2C0095398C /* PIA VPN AdBlocker */;
 			targetProxy = 0EFB607E203D893E0095398C /* PBXContainerItemProxy */;
 		};
-		7EC2973227D8BCB60061C56A /* PBXTargetDependency */ = {
+		69B70AB72ACBF51C0072A09D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0EE2200B1F4EF307002805AE /* PIA VPN dev */;
-			targetProxy = 7EC2973127D8BCB60061C56A /* PBXContainerItemProxy */;
+			targetProxy = 69B70AB62ACBF51C0072A09D /* PBXContainerItemProxy */;
 		};
 		8269A6E2251CB5E3000B4DBF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2532,7 +2658,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN Tunnel/PIA VPN Tunnel.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20034;
+				CURRENT_PROJECT_VERSION = 20042;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -2543,7 +2669,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.23.0;
+				MARKETING_VERSION = 3.23.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.Tunnel";
 				PRODUCT_NAME = "PIA VPN Tunnel";
@@ -2566,9 +2692,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 20034;
+				CURRENT_PROJECT_VERSION = 20042;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 5357M5NW9W;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5357M5NW9W;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "PIA VPN Tunnel/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -2577,12 +2704,13 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.23.0;
+				MARKETING_VERSION = 3.23.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.Tunnel";
 				PRODUCT_NAME = "PIA VPN Tunnel";
 				PROVISIONING_PROFILE = "b5b9e54d-7aba-4fc6-9320-adbce64c544a";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.privateinternetaccess.ios.PIA-VPN.Tunnel";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.privateinternetaccess.ios.PIA-VPN.Tunnel";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2598,7 +2726,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN/PIA VPN.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20034;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -2618,7 +2746,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 3.23.0;
+				MARKETING_VERSION = 3.23.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN";
 				PRODUCT_MODULE_NAME = PIA_VPN_dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2642,7 +2770,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN/PIA VPN.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20034;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -2662,7 +2790,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 3.23.0;
+				MARKETING_VERSION = 3.23.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN";
 				PRODUCT_MODULE_NAME = PIA_VPN_dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2718,7 +2846,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2737,7 +2864,6 @@
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PIA VPN.app/PIA VPN";
@@ -2754,7 +2880,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20034;
+				CURRENT_PROJECT_VERSION = 20042;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2766,7 +2892,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.23.0;
+				MARKETING_VERSION = 3.23.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.AdBlocker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2791,9 +2917,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 20034;
+				CURRENT_PROJECT_VERSION = 20042;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 5357M5NW9W;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5357M5NW9W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "PIA VPN AdBlocker/Info.plist";
@@ -2803,12 +2930,13 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.23.0;
+				MARKETING_VERSION = 3.23.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.AdBlocker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5aba703f-4bee-46e6-a5e4-42b785d1db55";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.privateinternetaccess.ios.PIA-VPN.AdBlocker";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.privateinternetaccess.ios.PIA-VPN.AdBlocker";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2934,7 +3062,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN/PIA VPN.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20034;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2952,7 +3080,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 3.23.0;
+				MARKETING_VERSION = 3.23.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.privateinternetaccess.ios.PIA-VPN";
@@ -2971,10 +3099,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN/PIA VPN.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20034;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5357M5NW9W;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2991,22 +3121,23 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 3.23.0;
+				MARKETING_VERSION = 3.23.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.privateinternetaccess.ios.PIA-VPN";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.privateinternetaccess.ios.PIA-VPN";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.privateinternetaccess.ios.PIA-VPN";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
-		7EB8D11B27CCF4C20030B060 /* Debug */ = {
+		69B70AB82ACBF51C0072A09D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
@@ -3018,18 +3149,13 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cyberghostsrl.PIA-VPN-UITests";
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.e2e-Tests.PIA-VPN-E2E-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "420cc0bf-ef09-4d4c-b1b3-9d7cffd4d201";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -3039,12 +3165,12 @@
 			};
 			name = Debug;
 		};
-		7EB8D11C27CCF4C20030B060 /* Release */ = {
+		69B70AB92ACBF51C0072A09D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
@@ -3057,18 +3183,13 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cyberghostsrl.PIA-VPN-UITests";
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.e2e-Tests.PIA-VPN-E2E-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "420cc0bf-ef09-4d4c-b1b3-9d7cffd4d201";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3091,7 +3212,7 @@
 				CODE_SIGN_ENTITLEMENTS = PIAWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20034;
+				CURRENT_PROJECT_VERSION = 20042;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -3103,7 +3224,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.23.0;
+				MARKETING_VERSION = 3.23.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PIAWidget";
@@ -3133,9 +3254,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 20034;
+				CURRENT_PROJECT_VERSION = 20042;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 5357M5NW9W;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5357M5NW9W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = PIAWidget/Info.plist;
@@ -3145,12 +3267,13 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.23.0;
+				MARKETING_VERSION = 3.23.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PIAWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.privateinternetaccess.ios.PIA-VPN.PIAWidget";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.privateinternetaccess.ios.PIA-VPN.PIAWidget";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3169,7 +3292,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN WG Tunnel/PIA_VPN_WG_Tunnel.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20034;
+				CURRENT_PROJECT_VERSION = 20042;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -3181,7 +3304,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.23.0;
+				MARKETING_VERSION = 3.23.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel";
@@ -3208,9 +3331,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 20034;
+				CURRENT_PROJECT_VERSION = 20042;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 5357M5NW9W;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5357M5NW9W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "PIA VPN WG Tunnel/Info.plist";
@@ -3220,12 +3344,13 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.23.0;
+				MARKETING_VERSION = 3.23.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3289,11 +3414,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7EB8D11D27CCF4C20030B060 /* Build configuration list for PBXNativeTarget "PIA VPN UITests" */ = {
+		69B70ABA2ACBF51C0072A09D /* Build configuration list for PBXNativeTarget "PIA-VPN_E2E_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7EB8D11B27CCF4C20030B060 /* Debug */,
-				7EB8D11C27CCF4C20030B060 /* Release */,
+				69B70AB82ACBF51C0072A09D /* Debug */,
+				69B70AB92ACBF51C0072A09D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3319,12 +3444,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		69446CB12AA74F880080F446 /* XCRemoteSwiftPackageReference "client-library-apple" */ = {
+		35950B2F2ADD2877006F3CD9 /* XCRemoteSwiftPackageReference "Quick" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:pia-foss/client-library-apple.git";
+			repositoryURL = "https://github.com/Quick/Quick";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = exactVersion;
+				version = 7.3.0;
+			};
+		};
+		35950B322ADD2EE5006F3CD9 /* XCRemoteSwiftPackageReference "Nimble" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Quick/Nimble";
+			requirement = {
+				kind = exactVersion;
+				version = 13.0.0;
 			};
 		};
 		AA36CDB928A6622A00180A33 /* XCRemoteSwiftPackageReference "tweetnacl-swiftwrap" */ = {
@@ -3375,28 +3508,26 @@
 				version = 4.0.0;
 			};
 		};
+		AA5F0EA728B7640B006D629D /* XCRemoteSwiftPackageReference "cpz_pia-mobile_ios_client-library-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:xvpn/cpz_pia-mobile_ios_client-library-apple.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		69446CB22AA7502E0080F446 /* PIALibrary */ = {
+		35950B302ADD2996006F3CD9 /* Quick */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 69446CB12AA74F880080F446 /* XCRemoteSwiftPackageReference "client-library-apple" */;
-			productName = PIALibrary;
+			package = 35950B2F2ADD2877006F3CD9 /* XCRemoteSwiftPackageReference "Quick" */;
+			productName = Quick;
 		};
-		69446CB42AA7503A0080F446 /* PIALibrary */ = {
+		35950B332ADD2EE5006F3CD9 /* Nimble */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 69446CB12AA74F880080F446 /* XCRemoteSwiftPackageReference "client-library-apple" */;
-			productName = PIALibrary;
-		};
-		69446CB62AA750440080F446 /* PIALibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 69446CB12AA74F880080F446 /* XCRemoteSwiftPackageReference "client-library-apple" */;
-			productName = PIALibrary;
-		};
-		69446CB82AA7504B0080F446 /* PIALibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 69446CB12AA74F880080F446 /* XCRemoteSwiftPackageReference "client-library-apple" */;
-			productName = PIALibrary;
+			package = 35950B322ADD2EE5006F3CD9 /* XCRemoteSwiftPackageReference "Nimble" */;
+			productName = Nimble;
 		};
 		AA36CDBA28A6622A00180A33 /* TweetNacl */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -3432,6 +3563,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA36CDDC28A6878000180A33 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
 			productName = AlamofireImage;
+		};
+		AA5F0EA828B7640B006D629D /* PIALibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA5F0EA728B7640B006D629D /* XCRemoteSwiftPackageReference "cpz_pia-mobile_ios_client-library-apple" */;
+			productName = PIALibrary;
+		};
+		AA5F0EAA28B7653A006D629D /* PIALibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA5F0EA728B7640B006D629D /* XCRemoteSwiftPackageReference "cpz_pia-mobile_ios_client-library-apple" */;
+			productName = PIALibrary;
+		};
+		AA5F0EAC28B7653F006D629D /* PIALibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA5F0EA728B7640B006D629D /* XCRemoteSwiftPackageReference "cpz_pia-mobile_ios_client-library-apple" */;
+			productName = PIALibrary;
+		};
+		AA5F0EAE28B76543006D629D /* PIALibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA5F0EA728B7640B006D629D /* XCRemoteSwiftPackageReference "cpz_pia-mobile_ios_client-library-apple" */;
+			productName = PIALibrary;
 		};
 		AABF826C28AD185E00CDAC64 /* TweetNacl */ = {
 			isa = XCSwiftPackageProductDependency;

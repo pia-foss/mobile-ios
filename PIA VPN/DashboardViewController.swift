@@ -26,6 +26,7 @@ import SideMenu
 import SwiftyBeaver
 import WidgetKit
 import NetworkExtension
+import ActivityKit
 
 private let log = SwiftyBeaver.self
 
@@ -69,7 +70,13 @@ class DashboardViewController: AutolayoutViewController {
     private var isDisconnecting = false
     private var isUnauthorized = false
 
-    private var currentStatus: VPNStatus = .disconnected
+    private var currentStatus: VPNStatus = .disconnected {
+        didSet {
+            if #available(iOS 16.2, *) {
+                startConnectionLiveActivityIfNeeded()
+            }
+        }
+    }
     private var connectingStatus: DashboardVPNConnectingStatus = .none
 
     private var tileModeStatus: TileStatus = .normal {
@@ -130,7 +137,7 @@ class DashboardViewController: AutolayoutViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    
+        
         setupNavigationBarButtons()
         
         AppPreferences.shared.wasLaunched = true
@@ -390,7 +397,6 @@ class DashboardViewController: AutolayoutViewController {
     }
 
     @IBAction func vpnButtonClicked(_ sender: Any?) {
-                
         if canConnectVPN() {
             manuallyConnect()
         } else {
@@ -656,12 +662,26 @@ class DashboardViewController: AutolayoutViewController {
         guard Client.preferences.currentRFC1918VulnerableWifi != nil
                 || WifiNetworkMonitor().checkForRFC1918Vulnerability() else { return }
         
-        guard Client.preferences.allowLocalDeviceAccess
-                && Client.preferences.leakProtection else { return }
-        
         guard AppPreferences.shared.showLeakProtectionNotifications else { return }
         
         let currentRFC1918VulnerableWifiName = Client.preferences.currentRFC1918VulnerableWifi ?? ""
+      
+        let selectedProtocol = Client.preferences.vpnType.vpnProtocol
+        let isWireguardSelected = selectedProtocol == PIAWGTunnelProfile.vpnType.vpnProtocol
+        let isOpenVPNSelected = selectedProtocol == PIATunnelProfile.vpnType.vpnProtocol
+      
+        guard !isWireguardSelected,
+              !isOpenVPNSelected else {
+            DispatchQueue.main.async {
+                self.presentNonCompliantWireguardWifiAlert()
+                self.showNonCompliantWifiLocalNotification(currentRFC1918VulnerableWifiName: currentRFC1918VulnerableWifiName)
+            }
+            
+            return
+        }
+        
+        guard Client.preferences.allowLocalDeviceAccess
+                && Client.preferences.leakProtection else { return }
       
         DispatchQueue.main.async {
             self.presentNonCompliantWifiAlert()
@@ -669,37 +689,114 @@ class DashboardViewController: AutolayoutViewController {
         }
     }
     
-    private func presentNonCompliantWifiAlert() {
-        guard let window = UIApplication.shared.delegate?.window,
+    //MARK: Non compliant Wifi alert
+    
+    private struct WifiAlertAction {
+        let title: String
+        let style: UIAlertAction.Style
+        let action: ((UIAlertAction) -> Void)?
+    }
+    
+    private func showNonCompliantWifiAlert(title: String, message: String, actions: [WifiAlertAction]) {
+        guard
+            let window = UIApplication.shared.delegate?.window,
             let presentedViewController = window?.rootViewController?.presentedViewController ?? window?.rootViewController
         else { return }
         
-      let title = L10n.Dashboard.Vpn.Leakprotection.Alert.title
+        if let alertController = presentedViewController as? UIAlertController, alertController.title == title { return }
         
-        if let alertController = presentedViewController as? UIAlertController,
-            alertController.title == title { return }
+        let sheet = Macros.alertController(title, message)
         
-      let sheet = Macros.alertController(title, L10n.Dashboard.Vpn.Leakprotection.Alert.message)
-      sheet.addAction(UIAlertAction(title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta1, style: .default, handler: { _ in
-            Client.preferences.allowLocalDeviceAccess = false
-            Client.providers.vpnProvider.disconnect { _ in
-                self.shouldReconnect = true
-            }
-        }))
+        for action in actions {
+            let alertAction = UIAlertAction(title: action.title,
+                                       style: action.style,
+                                       handler: action.action)
+            sheet.addAction(alertAction)
+        }
         
-        // Learn More action
-      sheet.addAction(UIAlertAction(title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta2, style: .default, handler: { _ in
-            let application = UIApplication.shared
-            let learnMoreURL = AppConstants.Web.leakProtectionURL
-            
-            if application.canOpenURL(learnMoreURL) {
-                application.open(learnMoreURL)
-            }
-        }))
-        
-      sheet.addAction(UIAlertAction(title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta3, style: .default, handler: nil))
-    
         presentedViewController.present(sheet, animated: true, completion: nil)
+    }
+    
+    private func presentNonCompliantWifiAlert() {
+        let title = L10n.Dashboard.Vpn.Leakprotection.Alert.title
+        let message = L10n.Dashboard.Vpn.Leakprotection.Alert.message
+        
+        var alertActions = [WifiAlertAction]()
+        let reconnectAction = WifiAlertAction(
+            title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta1,
+            style: .default,
+            action: handleDisconnectAndReconnectAction)
+        alertActions.append(reconnectAction)
+        
+        let learnMoreAction = WifiAlertAction(
+            title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta2,
+            style: .default,
+            action: handleLearnMoreAction)
+        alertActions.append(learnMoreAction)
+        
+        let cancelAction = WifiAlertAction(
+            title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta3,
+            style: .cancel,
+            action: nil)
+        alertActions.append(cancelAction)
+        
+        showNonCompliantWifiAlert(title: title, message: message, actions: alertActions)
+    }
+    
+    private func presentNonCompliantWireguardWifiAlert() {
+        let title = L10n.Dashboard.Vpn.Leakprotection.Alert.title
+        let message = L10n.Dashboard.Vpn.Leakprotection.Alert.IKEV2.message
+        
+        var alertActions = [WifiAlertAction]()
+        let reconnectAction = WifiAlertAction(
+            title: L10n.Dashboard.Vpn.Leakprotection.Alert.IKEV2.cta1,
+            style: .default,
+            action: handleSwitchProtocolAction)
+        alertActions.append(reconnectAction)
+        
+        let learnMoreAction = WifiAlertAction(
+            title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta2,
+            style: .default,
+            action: handleLearnMoreAction)
+        alertActions.append(learnMoreAction)
+        
+        let cancelAction = WifiAlertAction(
+            title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta3,
+            style: .cancel,
+            action: nil)
+        alertActions.append(cancelAction)
+        
+        showNonCompliantWifiAlert(title: title, message: message, actions: alertActions)
+    }
+    
+    private func handleDisconnectAndReconnectAction(_ action: UIAlertAction) {
+        Client.preferences.allowLocalDeviceAccess = false
+        Client.providers.vpnProvider.disconnect { _ in
+            self.shouldReconnect = true
+        }
+    }
+    
+    private func handleLearnMoreAction(_ action: UIAlertAction) {
+        let application = UIApplication.shared
+        let learnMoreURL = AppConstants.Web.leakProtectionURL
+        
+        if application.canOpenURL(learnMoreURL) {
+            application.open(learnMoreURL)
+        }
+    }
+    
+    private func handleSwitchProtocolAction(_ action: UIAlertAction) {
+        let editable = Client.preferences.editable()
+        editable.vpnType = IKEv2Profile.vpnType
+        let action = editable.requiredVPNAction()
+        editable.commit()
+        
+        Client.preferences.leakProtection = true
+        Client.preferences.allowLocalDeviceAccess = false
+        
+        action?.execute { _ in
+            self.shouldReconnect = true
+        }
     }
     
     func showNonCompliantWifiLocalNotification(currentRFC1918VulnerableWifiName: String) {
@@ -770,6 +867,10 @@ class DashboardViewController: AutolayoutViewController {
         
         guard Client.providers.accountProvider.isLoggedIn else {
             return
+        }
+        
+        if #available(iOS 16.2, *) {
+            startConnectionLiveActivityIfNeeded()
         }
 
         currentStatus = Client.providers.vpnProvider.vpnStatus
@@ -1124,5 +1225,30 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             Client.providers.tileProvider.orderedTiles = orderedTiles
             collectionView.reloadData()
         }
+    }
+}
+
+
+// MARK: Live Activities
+
+extension DashboardViewController {
+    @available(iOS 16.2, *)
+    private func makeLiveActivityStateForCurrentConnection() -> PIAConnectionAttributes.ContentState {
+        let vpnProvider = Client.providers.vpnProvider
+        let currentServer = Client.preferences.displayedServer
+
+        let vpnProtocol = vpnProvider.currentVPNType.vpnProtocol
+        
+        let state = PIAConnectionAttributes.ContentState(connected: vpnProvider.isVPNConnected, regionName: currentServer.name, regionFlag: "flag-\(currentServer.country.lowercased())", vpnProtocol: vpnProtocol)
+        return state
+    }
+
+    
+    @available(iOS 16.2, *)
+    private func startConnectionLiveActivityIfNeeded() {
+       guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+        let liveActivityManager = appDelegate.liveActivityManager else { return }
+        let connState = makeLiveActivityStateForCurrentConnection()
+        liveActivityManager.startLiveActivity(with: connState)
     }
 }

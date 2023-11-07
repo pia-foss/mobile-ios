@@ -38,6 +38,9 @@
 "expiration.title" = "갱신";
 "expiration.message" = "구독이 곧 만료됩니다. 갱신하여 계속 보호를 받으세요.";
 
+"local_notification.non_compliant_wifi.title" = "비보안 Wi-Fi: %@";
+"local_notification.non_compliant_wifi.text" = "장치를 보호하려면 여기를 누르세요.";
+
 // SHORTCUTS
 
 "shortcuts.connect" = "연결";
@@ -134,8 +137,14 @@
 "settings.application_settings.active_theme.title" = "활성화된 테마";
 "settings.application_settings.kill_switch.title" = "VPN 킬 스위치";
 "settings.application_settings.kill_switch.footer" = "VPN 킬 스위치는 VPN 연결이 다시 연결 중이면 인터넷에 대한 액세스를 방지합니다. 수동으로 연결을 해제하는 경우는 제외입니다.";
+"settings.application_settings.leak_protection.title" = "보호 누출";
+"settings.application_settings.leak_protection.footer" = "iOS에는 기본적으로 AirDrop, CarPlay, AirPlay, 개인 핫스팟과 같이 VPN 외부에서 작동하도록 설계된 기능이 포함됩니다. 사용자 지정 누출 보호를 활성화하면 이 트래픽이 VPN을 통해 라우팅되지만 이러한 기능의 작동 방식에 영향을 줄 수 있습니다. 자세히 알아보기";
+"settings.application_settings.leak_protection.more_info" = "자세히 알아보기";
+"settings.application_settings.allow_local_network.title" = "로컬 네트워크의 장치 액세스 허용";
+"settings.application_settings.allow_local_network.footer" = "VPN에 연결된 상태에서 프린터 또는 파일 서버와 같은 로컬 장치 연결을 유지하세요. (네트워크의 사용자 및 장치를 신뢰하는 경우에만 이 옵션 허용)";
 "settings.application_settings.mace.title" = "PIA MACE™";
 "settings.application_settings.mace.footer" = "PIA MACE™는 VPN에 연결되어 있을 때 광고, 트래커 및 악성코드를 차단합니다.";
+"settings.application_settings.leak_protection.alert.title" = "VPN 설정을 변경하면 다음에 연결할 때 적용됩니다.";
 
 "settings.content_blocker.title" = "Safari 콘텐츠 차단기 상태";
 "settings.content_blocker.state.title" = "현재 상태";
@@ -214,6 +223,15 @@
 "dashboard.accessibility.vpn.button" = "VPN 연결 버튼";
 "dashboard.accessibility.vpn.button.isOn" = "VPN 연결 버튼. VPN이 현재 연결되었습니다";
 "dashboard.accessibility.vpn.button.isOff" = "VPN 연결 버튼. VPN이 현재 연결 해제되었습니다";
+
+"dashboard.vpn.leakprotection.alert.title" = "안전하지 않은 Wi-Fi 감지됨";
+"dashboard.vpn.leakprotection.alert.message" = "데이터 누출을 방지하려면 지금 비활성화를 눌러서 \"로컬 네트워크의 장치 액세스 허용\"을 해제하고 자동으로 다시 연결하세요.";
+"dashboard.vpn.leakprotection.alert.cta1" = "지금 비활성화";
+"dashboard.vpn.leakprotection.alert.cta2" = "자세히 알아보기";
+"dashboard.vpn.leakprotection.alert.cta3" = "무시";
+
+"dashboard.vpn.leakprotection.ikev2.alert.message" = "데이터 누출을 방지하려면 지금 전환을 눌러서 IKEv2 VPN 프로토콜로 변경하고 자동으로 다시 연결하세요.";
+"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "지금 전환";
 
 // VPN PERMISSION
 
@@ -416,3 +434,7 @@
 // INAPP MESSAGES
 "inapp.messages.toggle.title" = "서비스 통신 메시지 표시";
 "inapp.messages.settings.updated" = "설정이 업데이트되었습니다";
+
+// PIA WIDGET
+"widget.liveActivity.region.title" = "지역";
+"widget.liveActivity.protocol.title" = "프로토콜";

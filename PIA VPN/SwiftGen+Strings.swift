@@ -220,6 +220,12 @@ internal enum L10n {
           internal static let message = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.message", fallback: "To prevent data leaks, tap Disable Now to turn off “Allow access to devices on local network\" and automatically reconnect.")
           /// Unsecured Wi-Fi detected
           internal static let title = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.title", fallback: "Unsecured Wi-Fi detected")
+          internal enum IKEV2 {
+            /// Switch now
+            internal static let cta1 = L10n.tr("Localizable", "dashboard.vpn.leakprotection.ikev2.alert.cta1", fallback: "Switch Now")
+            /// To prevent data leaks, tap Switch Now to change to the IKEv2 VPN protocol and automatically reconnect.
+            internal static let message = L10n.tr("Localizable", "dashboard.vpn.leakprotection.ikev2.alert.message", fallback: "To prevent data leaks, tap Switch Now to change to the IKEv2 VPN protocol and automatically reconnect.")
+          }
         }
       }
     }
@@ -1310,6 +1316,20 @@ internal enum L10n {
       }
     }
   }
+  
+  internal enum Widget {
+    internal enum LiveActivity {
+      internal enum SelectedProtocol {
+        /// Protocol
+        internal static let title = L10n.tr("Localizable", "widget.liveActivity.protocol.title", fallback: "Protocol")
+      }
+      internal enum Region {
+        /// Region
+        internal static let title = L10n.tr("Localizable", "widget.liveActivity.region.title", fallback: "Region")
+      }
+    }
+  }
+  
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

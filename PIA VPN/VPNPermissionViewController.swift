@@ -46,6 +46,7 @@ class VPNPermissionViewController: AutolayoutViewController {
         
         title = L10n.VpnPermission.title
         navigationItem.hidesBackButton = true
+        self.view.accessibilityIdentifier = AccessibilityId.VPNPermission.screen
 
         imvPicture.image = Asset.imageVpnAllow.image
         labelTitle.text = L10n.VpnPermission.Body.title
@@ -112,7 +113,7 @@ class VPNPermissionViewController: AutolayoutViewController {
         buttonSubmit.style(style: TextStyle.Buttons.piaGreenButton)
         buttonSubmit.setTitle(L10n.Global.ok.uppercased(),
                               for: [])
-        buttonSubmit.accessibilityIdentifier = Accessibility.Id.Permissions.submit
+      buttonSubmit.accessibilityIdentifier = AccessibilityId.VPNPermission.submit
     }
 
 }
