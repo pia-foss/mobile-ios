@@ -10,10 +10,10 @@ import Quick
 import Nimble
 import XCTest
 
-class BaseTest: QuickSpec{
+class BaseTest: QuickSpec {
     static var app: XCUIApplication!
     
-    override class func spec(){
+    override class func spec() {
         beforeEach {
             app = XCUIApplication()
             app.launch()

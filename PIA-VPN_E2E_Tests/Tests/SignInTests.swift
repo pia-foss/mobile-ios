@@ -12,17 +12,15 @@ class SignInTests: BaseTest {
     override class func spec(){
         super.spec()
         
-        describe("test sign-in"){
-            context("account validations"){
-                it("should successfully sign in with valid credentials"){
-                    app.fillLoginScreen(with: CredentialsUtil.credentials(type: .valid))
-                    app.loginButton.tap()
+        describe("test sign-in") {
+            context("account validations") {
+                it("should successfully sign in with valid credentials") {
+                    app.logIn(with: CredentialsUtil.credentials(type: .valid))
                     expect(app.vpnPermissionScreen.waitForExistence(timeout:app.defaultTimeout))
                 }
                 
-                it("should display error mesages with invalid credentials"){
-                    app.fillLoginScreen(with: CredentialsUtil.credentials(type: .invalid))
-                    app.loginButton.tap()
+                it("should display error mesages with invalid credentials") {
+                    app.logIn(with: CredentialsUtil.credentials(type: .invalid))
                     expect(app.loginErrorMessage.waitForExistence(timeout: app.shortTimeout))
                     expect(app.vpnPermissionScreen.waitForExistence(timeout:app.defaultTimeout)).to(beFalse())
                 }
