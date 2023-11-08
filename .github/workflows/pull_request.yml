@@ -33,11 +33,10 @@ jobs:
     - name: Check fastlane env
       run: cat fastlane/.env
 
-    - name: Run e2e tests with fastlane
-      run: bundle exec fastlane e2e_tests
-      continue-on-error: true
-
-    - name: Run tests
+    - name: Run unit tests
       run: bundle exec fastlane tests
+
+    - name: Run e2e tests
+      run: bundle exec fastlane e2e_tests
 
       
