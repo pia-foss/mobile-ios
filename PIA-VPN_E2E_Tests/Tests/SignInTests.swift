@@ -16,12 +16,12 @@ class SignInTests: BaseTest {
             context("account validations") {
                 it("should successfully sign in with valid credentials") {
                     app.logIn(with: CredentialsUtil.credentials(type: .valid))
-                    expect(app.vpnPermissionScreen.waitForExistence(timeout:app.defaultTimeout))
+                    expect(app.vpnPermissionScreen.waitForExistence(timeout:app.defaultTimeout)).to(beTrue())
                 }
                 
                 it("should display error mesages with invalid credentials") {
                     app.logIn(with: CredentialsUtil.credentials(type: .invalid))
-                    expect(app.loginErrorMessage.waitForExistence(timeout: app.shortTimeout))
+                    expect(app.loginErrorMessage.waitForExistence(timeout: app.shortTimeout)).to(beTrue())
                     expect(app.vpnPermissionScreen.waitForExistence(timeout:app.defaultTimeout)).to(beFalse())
                 }
             }

@@ -13,17 +13,17 @@ class UpdateSettingsTests : BaseTest {
         var geoLocatedRegionDefaultValue = "1"
         var vpnKillSwitchDefaultValue = "1"
         var automationDefaultValue = "0"
-        var helpImproveDefaultValue = "0"
         
         super.spec()
         
-        describe("persistence for settings update") {
+        describe("settings return to default value after logging out") {
             context("updated settings for each category") {
                 it("should revert changes made on general settings to default after logging out and logging back in") {
                     app.logIn(with: CredentialsUtil.credentials(type: .valid))
                     app.acceptVPNPermission()
                     app.navigateToGeneralSettings()
                     app.geoLocatedRegionsSwitch.tap()
+                    expect((app.geoLocatedRegionsSwitch.value as! String)) != geoLocatedRegionDefaultValue
                     app.navigateToHomeScreenFromSettings()
                     app.logOut()
                     app.navigateToLoginScreen()
@@ -39,13 +39,14 @@ class UpdateSettingsTests : BaseTest {
                     app.navigateToProtocolSettings()
                     app.protocolSelectionButton.tap()
                     app.openVPN.tap()
+                    expect(app.openVPN.exists).to(beTrue())
                     app.navigateToHomeScreenFromSettings()
                     app.logOut()
                     app.navigateToLoginScreen()
                     app.logIn(with: CredentialsUtil.credentials(type: .valid))
                     app.acceptVPNPermission()
                     app.navigateToProtocolSettings()
-                    expect(app.ipsec.exists)
+                    expect(app.ipsec.exists).to(beTrue())
                 }
                 
                 it("should revert changes made on privacy features settings to default after logging out and logging back in") {
@@ -53,6 +54,7 @@ class UpdateSettingsTests : BaseTest {
                     app.acceptVPNPermission()
                     app.navigateToPrivacySettings()
                     app.vpnKillSwitch.tap()
+                    expect((app.vpnKillSwitch.value as! String)) != vpnKillSwitchDefaultValue
                     app.navigateToHomeScreenFromSettings()
                     app.logOut()
                     app.navigateToLoginScreen()
@@ -67,6 +69,7 @@ class UpdateSettingsTests : BaseTest {
                     app.acceptVPNPermission()
                     app.navigateToAutomationSettings()
                     app.enableAutomationSwitch.tap()
+                    expect((app.enableAutomationSwitch.value as! String)) != automationDefaultValue
                     app.navigateToHomeScreenFromSettings()
                     app.logOut()
                     app.navigateToLoginScreen()
