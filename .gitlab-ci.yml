@@ -1,0 +1,196 @@
+variables:
+    LC_ALL: "en_US.UTF-8"
+    LANG: "en_US.UTF-8"
+    STAGE_BUILD_PATH: "build"
+    STAGE_ARTIFACTS_PATH: "dist"
+    STAGE_TESTFLIGHT_ARTIFACTS_PATH: "apple_dist"
+    STAGE_ARCHIVE_NAME: "pia-vpn"
+    SERIALIZED_ARCHIVE_JSON: "$STAGE_ARTIFACTS_PATH/notify.json"
+
+before_script:
+    - gem install bundler --no-ri --no-rdoc
+    #- bundle install
+    - bundle update
+    #- bundle exec fastlane run ensure_git_status_clean
+    - echo "$PIA_STAGING_ENDPOINT" >"Resources/staging.endpoint"
+    - echo "$PIA_CUSTOM_SERVERS" >"Resources/custom.servers"
+    - echo "$PIA_FIREBASE_PLIST" >"Resources/GoogleService-Info.plist"
+stages:
+    - test
+    - archive
+    - deploy
+    - notify
+
+# hidden
+.unit_test:
+    stage: test
+    variables:
+        SCAN_SCHEME: "PIA VPN dev"
+        SCAN_DEVICES: "iPhone X"
+    script:
+        - bundle exec fastlane unit_test
+    only:
+        - branches
+    except:
+        - master
+    tags:
+        - ios
+
+qa_archive:
+    stage: archive
+    variables:
+        MATCH_TYPE: "adhoc"
+        GYM_SCHEME: "PIA VPN dev"
+        GYM_EXPORT_METHOD: "ad-hoc"
+    script:
+        - bundle exec fastlane create_archive
+    artifacts:
+        paths:
+            - "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.*"
+        expire_in: 1 week
+    only:
+        - develop
+        - /^release.*$/
+    tags:
+        - ios
+
+qa_deploy:
+    stage: deploy
+    variables:
+        IPA_OUTPUT_PATH: "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.ipa"
+        FL_HOCKEY_IPA: "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.ipa"
+        FL_HOCKEY_COMMIT_SHA: $CI_COMMIT_SHA
+        FL_HOCKEY_BUILD_SERVER_URL: "$CI_PROJECT_URL/-/jobs/$CI_JOB_ID"
+        FL_HOCKEY_REPOSITORY_URL: $CI_PROJECT_URL
+        FL_HOCKEY_NOTIFY: "false"
+        FL_HOCKEY_STRATEGY: "replace"
+    script:
+        - bundle exec fastlane qa_deploy
+    environment:
+        name: "hockey"
+        url: $HOCKEY_URL
+    artifacts:
+        paths:
+            - $SERIALIZED_ARCHIVE_JSON
+        expire_in: 1 week
+    only:
+        - develop
+        - /^release.*$/
+    tags:
+        - ios
+
+beta_manual_archive:
+    stage: archive
+    variables:
+        MATCH_TYPE: "appstore"
+        GYM_SCHEME: "PIA VPN"
+        GYM_EXPORT_METHOD: "app-store"
+    script:
+        #- bundle exec fastlane clean_openssl
+        - bundle exec fastlane create_beta_archive
+    artifacts:
+        paths:
+            - "$STAGE_TESTFLIGHT_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.*"
+        expire_in: 1 week
+    when:
+        manual
+    only:
+        - /^release.*$/
+    tags:
+        - ios
+
+beta_manual_deploy:
+    stage: deploy
+    variables:
+        PILOT_IPA: "$STAGE_TESTFLIGHT_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.ipa"
+        PILOT_DISTRIBUTE_EXTERNAL: "true"
+        DEMO_ACCOUNT_REQUIRED: "true"
+    script:
+        - bundle exec fastlane beta_deploy
+    environment:
+        name: "testflight"
+    when:
+        manual
+    only:
+        - /^release.*$/
+    tags:
+        - ios
+
+manual_qa_archive:
+    stage: archive
+    variables:
+        MATCH_TYPE: "adhoc"
+        GYM_SCHEME: "PIA VPN dev"
+        GYM_EXPORT_METHOD: "ad-hoc"
+    script:
+        - bundle exec fastlane create_archive
+    when:
+        manual
+    artifacts:
+        paths:
+            - "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.*"
+        expire_in: 1 week
+    only:
+        - branches
+    tags:
+        - ios
+
+manual_qa_deploy:
+    stage: deploy
+    variables:
+        IPA_OUTPUT_PATH: "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.ipa"
+        FL_HOCKEY_IPA: "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.ipa"
+        FL_HOCKEY_COMMIT_SHA: $CI_COMMIT_SHA
+        FL_HOCKEY_BUILD_SERVER_URL: "$CI_PROJECT_URL/-/jobs/$CI_JOB_ID"
+        FL_HOCKEY_REPOSITORY_URL: $CI_PROJECT_URL
+        FL_HOCKEY_NOTIFY: "false"
+        FL_HOCKEY_STRATEGY: "replace"
+    script:
+        - bundle exec fastlane qa_deploy
+    when:
+        manual
+    environment:
+        name: "hockey"
+        url: $HOCKEY_URL
+    artifacts:
+        paths:
+            - $SERIALIZED_ARCHIVE_JSON
+        expire_in: 1 week
+    only:
+        - branches
+    tags:
+        - ios
+
+#beta_archive:
+#    stage: archive
+#    variables:
+#        MATCH_TYPE: "appstore"
+#        GYM_SCHEME: "PIA VPN"
+#        GYM_EXPORT_METHOD: "app-store"
+#    script:
+#        #- bundle exec fastlane clean_openssl
+#        - bundle exec fastlane create_archive
+#    artifacts:
+#        paths:
+#            - "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.*"
+#        expire_in: 1 week
+#    only:
+#        - master
+#    tags:
+#        - ios
+
+#beta_deploy:
+#    stage: deploy
+#    variables:
+#        PILOT_IPA: "$STAGE_ARTIFACTS_PATH/$STAGE_ARCHIVE_NAME.ipa"
+#        PILOT_DISTRIBUTE_EXTERNAL: "true"
+#        DEMO_ACCOUNT_REQUIRED: "true"
+#    script:
+#        - bundle exec fastlane beta_deploy
+#    environment:
+#        name: "testflight"
+#    only:
+#        - master
+#    tags:
+#        - ios
+

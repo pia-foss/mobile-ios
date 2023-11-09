@@ -1,0 +1,22 @@
+strings:
+    paths:
+        - PIA VPN/en.lproj/Localizable.strings
+    templateName: structured-swift4
+    output: PIA VPN/SwiftGen+Strings.swift
+
+ib:
+    paths:
+        - Resources/UI/en.lproj/Main.storyboard
+    outputs:
+        templateName: scenes-swift4
+        output: PIA VPN/SwiftGen+ScenesStoryboards.swift
+        templateName: segues-swift4
+        output: PIA VPN/SwiftGen+SeguesStoryboards.swift
+    params:
+        module: PIA_VPN
+
+xcassets:
+    paths:
+        - PIA VPN/Images.xcassets
+    templatePath: Resources/SwiftGen/xcassets/swift4.stencil
+    output: PIA VPN/SwiftGen+Assets.swift

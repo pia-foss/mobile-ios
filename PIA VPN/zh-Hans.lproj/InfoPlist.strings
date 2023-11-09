@@ -1,0 +1,4 @@
+/* Localized versions of Info.plist keys */
+
+"NSFaceIDUsageDescription" = "验证以显示";
+"NSCameraUsageDescription" = "我们需要相机访问权限，以便您扫描二维码，兑换礼品卡";

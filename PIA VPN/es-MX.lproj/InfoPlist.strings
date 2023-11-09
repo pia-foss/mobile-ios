@@ -1,0 +1,4 @@
+/* Localized versions of Info.plist keys */
+
+"NSFaceIDUsageDescription" = "Autenticar para revelar";
+"NSCameraUsageDescription" = "Necesitamos acceso a la cámara para que pueda escanear códigos QR para canjear una tarjeta de regalo";

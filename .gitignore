@@ -1,0 +1,17 @@
+.DS_Store
+*.swp
+*.pbxuser
+**/*.xcworkspace/xcuserdata
+**/*.xcodeproj/project.xcworkspace
+**/*.xcodeproj/xcuserdata
+Pods
+fastlane/**/*.html
+fastlane/README.md
+fastlane/report.xml
+fastlane/test_output
+fastlane/review_information/demo_*
+build
+dist
+apple_dist
+Preview.html
+Gemfile.lock

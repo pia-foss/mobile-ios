@@ -1,0 +1,33 @@
+default_platform(:ios)
+platform :ios do
+  desc "install certificates"
+  lane :import_certificates do
+    create_temp_keychain
+    install_certificates
+  end
+
+  desc "create and unlock keychain"
+  lane :create_temp_keychain do
+    create_keychain(
+       	name: "temp_keychain",
+       	default_keychain: true,
+		unlock: true,
+	    timeout: 3600,
+       	password: ENV["KEYCHAIN_PASSWORD"]
+    )
+	unlock_keychain(
+       	path:  "~/Library/Keychains/temp_keychain",
+	    password: ENV["KEYCHAIN_PASSWORD"]
+    )
+  end
+
+  desc "install certificates to keychain"
+  lane :install_certificates do
+    import_certificate(
+      certificate_path: "./fastlane/Certificate.p12",
+      certificate_password: ENV["CERTIFICATE_PASSWORD"], 
+      keychain_name: "temp_keychain", 
+      keychain_password: ENV["KEYCHAIN_PASSWORD"]
+    )
+    end
+end

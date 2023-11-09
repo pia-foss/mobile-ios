@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DedicatedIpEmptyHeaderViewCell" rowHeight="270" id="i3C-mk-jge" customClass="DedicatedIpEmptyHeaderViewCell" customModule="PIA_VPN" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="270"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="i3C-mk-jge" id="T6q-Yg-mmv">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="270"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NbG-Sb-VM3">
+                        <rect key="frame" x="19" y="19" width="376" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mYM-TX-cqv">
+                        <rect key="frame" x="19" y="204" width="376" height="56"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mpn-qV-Rb6">
+                                <rect key="frame" x="8" y="8" width="252" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Jq-0d-rQf" customClass="PIAButton" customModule="PIALibrary">
+                                <rect key="frame" x="268" y="8" width="100" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="kM7-bQ-VAk"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="activateToken" destination="i3C-mk-jge" eventType="touchUpInside" id="NXG-80-zH7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="mpn-qV-Rb6" firstAttribute="leading" secondItem="mYM-TX-cqv" secondAttribute="leading" constant="8" id="L7o-8d-Gn6"/>
+                            <constraint firstItem="4Jq-0d-rQf" firstAttribute="top" secondItem="mYM-TX-cqv" secondAttribute="top" constant="8" id="PtU-Xu-xxO"/>
+                            <constraint firstAttribute="bottom" secondItem="mpn-qV-Rb6" secondAttribute="bottom" constant="8" id="VQq-ME-boQ"/>
+                            <constraint firstAttribute="height" constant="56" id="YUx-Mk-YOK"/>
+                            <constraint firstItem="4Jq-0d-rQf" firstAttribute="leading" secondItem="mpn-qV-Rb6" secondAttribute="trailing" constant="8" id="afy-We-1K0"/>
+                            <constraint firstAttribute="trailing" secondItem="4Jq-0d-rQf" secondAttribute="trailing" constant="8" id="kVj-mG-8QA"/>
+                            <constraint firstItem="mpn-qV-Rb6" firstAttribute="top" secondItem="mYM-TX-cqv" secondAttribute="top" constant="8" id="wt8-Gk-tHm"/>
+                            <constraint firstAttribute="bottom" secondItem="4Jq-0d-rQf" secondAttribute="bottom" constant="8" id="zGl-9z-gaY"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2yK-NL-N8Q">
+                        <rect key="frame" x="19" y="44.5" width="376" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="2yK-NL-N8Q" secondAttribute="trailing" constant="19" id="10k-UU-Q8O"/>
+                    <constraint firstItem="NbG-Sb-VM3" firstAttribute="top" secondItem="T6q-Yg-mmv" secondAttribute="top" constant="19" id="5cT-iH-re2"/>
+                    <constraint firstItem="2yK-NL-N8Q" firstAttribute="leading" secondItem="T6q-Yg-mmv" secondAttribute="leading" constant="19" id="HZX-CG-o7f"/>
+                    <constraint firstAttribute="trailing" secondItem="mYM-TX-cqv" secondAttribute="trailing" constant="19" id="Xpy-tR-MuW"/>
+                    <constraint firstAttribute="trailing" secondItem="NbG-Sb-VM3" secondAttribute="trailing" constant="19" id="e17-Jx-10g"/>
+                    <constraint firstItem="mYM-TX-cqv" firstAttribute="leading" secondItem="T6q-Yg-mmv" secondAttribute="leading" constant="19" id="fL1-II-Wtj"/>
+                    <constraint firstItem="2yK-NL-N8Q" firstAttribute="top" secondItem="NbG-Sb-VM3" secondAttribute="bottom" constant="5" id="jpv-eA-0Tg"/>
+                    <constraint firstItem="NbG-Sb-VM3" firstAttribute="leading" secondItem="T6q-Yg-mmv" secondAttribute="leading" constant="19" id="mNl-do-7t6"/>
+                    <constraint firstItem="mYM-TX-cqv" firstAttribute="top" secondItem="2yK-NL-N8Q" secondAttribute="bottom" priority="750" constant="15" id="sUM-7B-065"/>
+                    <constraint firstAttribute="bottom" secondItem="mYM-TX-cqv" secondAttribute="bottom" constant="10" id="wM5-c7-gAb"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="activateView" destination="mYM-TX-cqv" id="5Rl-89-Jwf"/>
+                <outlet property="addTokenButton" destination="4Jq-0d-rQf" id="rLz-qQ-Fe9"/>
+                <outlet property="addTokenTextfield" destination="mpn-qV-Rb6" id="KfQ-dL-OYM"/>
+                <outlet property="subtitle" destination="2yK-NL-N8Q" id="dwZ-1X-zuZ"/>
+                <outlet property="title" destination="NbG-Sb-VM3" id="8ht-Py-r2M"/>
+            </connections>
+            <point key="canvasLocation" x="-301.44927536231887" y="68.303571428571431"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

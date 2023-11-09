@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Notices</key>
+	<array>
+		<dict>
+			<key>Name</key>
+			<string>OpenVPN</string>
+			<key>Copyright</key>
+			<string>© 2002-2018 OpenVPN Inc.</string>
+			<key>Notice</key>
+			<string>OpenVPN is a registered trademark of OpenVPN Inc.</string>
+		</dict>
+	</array>
+	<key>Licenses</key>
+	<array>
+		<dict>
+			<key>Name</key>
+			<string>WireGuard</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2019 Jason A. Donenfeld. All rights reserved.</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/WireGuard/wireguard-apple/master/README.md</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>TunnelKit</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2019 Davide De Rosa. All rights reserved.</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/passepartoutvpn/tunnelkit/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>OpenSSL</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 1998-2018 The OpenSSL Project. All rights reserved.</string>
+			<key>LicenseURL</key>
+			<string>https://www.openssl.org/source/license.txt</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>SwifyBeaver</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2015 Sebastian Kreutzberger</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/SwiftyBeaver/SwiftyBeaver/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Gloss</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2017 Harlan Kellaway</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/hkellaway/Gloss/develop/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Alamofire</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2014-2018 Alamofire Software Foundation (http://alamofire.org/)</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/Alamofire/Alamofire/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>ReachabilitySwift</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2016 Ashley Mills</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/ashleymills/Reachability.swift/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>GradientProgressBar</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2017 fxm90</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/fxm90/GradientProgressBar/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>TPKeyboardAvoiding</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2013 Michael Tyson</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/michaeltyson/TPKeyboardAvoiding/master/LICENSE.txt</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>SideMenu</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2015 Jonathan Kent &lt;contact@jonkent.me&gt;</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/jonkykong/SideMenu/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>FXPageControl</string>
+			<key>Copyright</key>
+			<string>Copyright (C) 2010 Charcoal Design</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/nicklockwood/FXPageControl/master/LICENSE.md</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>DZNEmptyDataSet</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2016 Ignacio Romero Zurbuchen</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/dzenbot/DZNEmptyDataSet/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>DynamicBlurView</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2015 Kyohei Ito</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/KyoheiG3/DynamicBlurView/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>PopupDialog</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2016 Orderella Ltd.</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/Orderella/PopupDialog/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>QuickLayout</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2017 huri000@gmail.com</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/huri000/QuickLayout/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>SwiftEntryKit</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2018 Daniel Huri</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/huri000/SwiftEntryKit/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>lottie-ios</string>
+			<key>Copyright</key>
+			<string>Copyright 2018 Airbnb, Inc.</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/airbnb/lottie-ios/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>nanopb</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2011 Petteri Aimonen</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/nanopb/nanopb/master/LICENSE.txt</string>
+		</dict>
+        <dict>
+            <key>Name</key>
+            <string>Popover</string>
+            <key>Copyright</key>
+            <string>© 2020 corin8823</string>
+            <key>LicenseURL</key>
+            <string>https://raw.githubusercontent.com/corin8823/Popover/master/LICENSE</string>
+        </dict>
+	</array>
+</dict>
+</plist>

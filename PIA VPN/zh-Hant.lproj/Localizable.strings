@@ -1,0 +1,440 @@
+// GLOBAL
+
+"global.ok" = "確認";
+"global.cancel" = "取消";
+"global.close" = "關閉";
+"global.error" = "錯誤";
+"global.automatic" = "自動";
+"global.required" = "必須";
+"global.optional" = "非必須";
+"global.clear" = "清除";
+"global.update" = "更新";
+"global.edit" = "編輯";
+"global.unreachable" = "找不到網際網路連線。請確認您已連線至網際網路。";
+"global.enabled" = "已啟用";
+"global.disabled" = "已停用";
+"global.enable" = "啟用";
+"global.disable" = "停用";
+"global.add" = "新增";
+"global.remove" = "移除";
+"global.empty" = "空白";
+"global.copy" = "複製";
+"global.share" = "分享";
+"global.copied" = "已複製到剪貼簿";
+"global.yes" = "是";
+"global.no" = "否";
+"global.or" = "或";
+"global.row.selection" = "列選擇";
+"global.vpn.settings" = "VPN 設定";
+"global.general.settings" = "一般設定";
+"global.version" = "版本";
+
+// NOTIFICATIONS
+
+"notifications.disabled.title" = "通知功能已停用";
+"notifications.disabled.message" = "啟用通知功能以在您的訂購計劃屆滿前收到續約提示。";
+"notifications.disabled.settings" = "設定";
+
+"expiration.title" = "續訂";
+"expiration.message" = "您的訂購計劃即將屆滿，請續約以讓自己繼續獲得保障。";
+
+"local_notification.non_compliant_wifi.title" = "不安全的 Wi-Fi 網路：%@";
+"local_notification.non_compliant_wifi.text" = "點一下這裡即可保護裝置";
+
+// SHORTCUTS
+
+"shortcuts.connect" = "連線";
+"shortcuts.disconnect" = "解除連線";
+"shortcuts.select_region" = "選擇區域";
+
+// RENEWAL
+
+"renewal.success.title" = "感謝您的支持";
+"renewal.success.message" = "您的帳戶已成功續訂。";
+"renewal.failure.message" = "目前無法提交您的購買項目發票，請稍後再試。";
+
+// MENU
+"menu.accessibility.edit.tile" = "編輯";
+"menu.accessibility.item" = "選單";
+"menu.accessibility.logged_as" = "已以「%@」的身分登入";
+"menu.expiration.expires_in" = "您的訂閱有效期限還有";
+"menu.expiration.days" = "%d 日";
+"menu.expiration.hours" = "%d 小時";
+"menu.expiration.one_hour" = "1 小時";
+"menu.expiration.upgrade" = "升級帳戶";
+"menu.item.region" = "區域選擇";
+"menu.item.about" = "關於";
+"menu.item.account" = "帳戶";
+"menu.item.settings" = "設定";
+"menu.item.logout" = "登出";
+"menu.item.web.privacy" = "隱私權政策";
+"menu.item.web.home" = "主頁面";
+"menu.item.web.support" = "支援";
+
+"menu.logout.title" = "登出";
+"menu.logout.message" = "登出後將停用 VPN 並使您不再受保護。";
+"menu.logout.confirm" = "登出";
+
+"menu.renewal.title" = "續訂";
+"menu.renewal.purchase" = "購買";
+"menu.renewal.renew" = "續約";
+"menu.renewal.message.trial" = "試用版帳號不符合續訂資格，若您希望帳號到期後仍能繼續使用服務，請購買一個新帳戶。";
+"menu.renewal.message.website" = "請透過我們的網站進行續約。";
+"menu.renewal.message.unavailable" = "Apple 伺服器目前無法使用，請稍後再試。";
+
+// ACCOUNT
+
+"account.email.caption" = "Email";
+"account.email.placeholder" = "電子郵件地址";
+"account.username.caption" = "使用者名稱";
+"account.other.footer" = "您只要在您的其他裝置上安裝 Private Internet Access App，然後使用上方的使用者名稱及密碼登入，即可保障您的網路連線安全。";
+"account.restore.title" = "回復未貸記購買項目";
+"account.restore.description" = "如果您在續訂後還是看到您的帳戶提示限期即將屆滿，您可以透過這裡重新開始續訂。此操作不會收取任何費用。";
+"account.restore.button" = "回復購買項目";
+"account.restore.failure.title" = "回復購買項目";
+"account.restore.failure.message" = "沒有可兌換的購買項目可供續訂。";
+"account.save.item" = "更新電子郵件地址";
+"account.save.prompt" = "驗證以儲存變更";
+"account.save.success" = "您的電子郵件地址已儲存。";
+"account.reveal.prompt" = "驗證以顯示";
+"account.expiry_date.information" = "您的計劃將於 %@ 過期。";
+"account.expiry_date.expired" = "您的計劃已過期。";
+"account.update.email.require.password.title" = "需要 PIA 密碼";
+"account.update.email.require.password.message" = "基於安全考量，您必須輸入 PIA 密碼才能變更帳戶。請輸入您的 PIA 密碼以繼續。";
+"account.update.email.require.password.button" = "提交";
+"account.error.unauthorized" = "您的使用者名稱或密碼不正確。";
+"account.subscriptions.message" = "您可以從此處管理訂閱。";
+"account.subscriptions.linkMessage" = "此處。";
+"account.set.email.error" = "新增電子郵件時發生錯誤。請稍後再試。";
+"account.subscriptions.short.message" = "管理訂閱";
+"account.subscriptions.short.linkMessage" = "管理訂閱";
+"account.subscriptions.yearly" = "年度方案";
+"account.subscriptions.monthly" = "每月方案";
+"account.subscriptions.trial" = "試用方案";
+"account.unauthorized" = "發生錯誤，請稍後再嘗試登入。";
+"account.delete" = "刪除帳戶";
+"account.delete.alert.title" = "是否確定？";
+"account.delete.alert.message" = "PIA 帳戶一經刪除即無法還原。一旦執行這個動作，您會無法取回 PIA 憑證。請注意，這個動作只會在資料庫中刪除您的 PIA 帳戶，不會刪除訂購計劃。您必須前往 Apple 帳戶，在那裡取消 Private Internet Access 訂購計劃，否則就算 PIA 帳戶已經停用，您還是會遭到扣款。";
+"account.delete.alert.failureMessage" = "刪除帳戶時發生錯誤，請再試一次。";
+"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
+"account.survey.messageLink" = "Take The Survey";
+
+// SETTINGS
+
+"settings.connection.title" = "連線";
+"settings.connection.vpn_protocol.title" = "選擇協定";
+"settings.connection.transport.title" = "傳輸";
+"settings.connection.socket_protocol.title" = "插座";
+"settings.connection.remote_port.title" = "遠端連接埠";
+
+"settings.encryption.title" = "加密";
+"settings.encryption.cipher.title" = "資料加密";
+"settings.encryption.digest.title" = "資料驗證";
+"settings.encryption.handshake.title" = "Handshake";
+
+"settings.application_settings.title" = "應用程式設定";
+"settings.application_settings.dark_theme.title" = "黑色主題";
+"settings.application_settings.active_theme.title" = "使用中的主題";
+"settings.application_settings.kill_switch.title" = "VPN 切斷開關";
+"settings.application_settings.kill_switch.footer" = "如果 VPN 重新連接，VPN 的終止開關將阻止互聯網連線。這不包括手動斷開連接。";
+"settings.application_settings.leak_protection.title" = "防漏";
+"settings.application_settings.leak_protection.footer" = "iOS 內建功能依預設能在 VPN 以外運作，例如 AirDrop、CarPlay、AirPlay 和個人熱點。如果啟用自定防漏功能，就會把這個流量透過 VPN 轉出，但也可能影響這些功能。詳情";
+"settings.application_settings.leak_protection.more_info" = "詳情";
+"settings.application_settings.allow_local_network.title" = "同意取用本機網路上的裝置";
+"settings.application_settings.allow_local_network.footer" = "在連接到 VPN 時繼續連線到本機裝置，例如印表機或檔案伺服器。（只有在您相信網路上的人和裝置時才能同意）";
+"settings.application_settings.mace.title" = "PIA MACE™";
+"settings.application_settings.mace.footer" = "PIA MACE™ 會在您連線到 VPN 時封鎖廣告、追蹤器及惡意程式。";
+"settings.application_settings.leak_protection.alert.title" = "更改 VPN 設定後，將在下次連線時生效";
+
+"settings.content_blocker.title" = "Safari 內容阻擋器狀態";
+"settings.content_blocker.state.title" = "目前狀態";
+"settings.content_blocker.refresh.title" = "重新整理阻擋清單";
+"settings.content_blocker.footer" = "若要啟用或停用內容阻擋器，請前往設定 > Safari，然後點選「內容阻擋器」，開啟或關閉 PIA VPN。";
+
+"settings.application_information.title" = "應用程式資料";
+"settings.application_information.debug.title" = "將偵錯記錄傳送到支援中心";
+"settings.application_information.debug.failure.title" = "提交時發生錯誤";
+"settings.application_information.debug.failure.message" = "無法提交偵錯資料。";
+"settings.application_information.debug.empty.title" = "偵錯資料為空白";
+"settings.application_information.debug.empty.message" = "偵錯資料為空白，請先嘗試連線後再重新提交。";
+"settings.application_information.debug.success.title" = "偵錯資料已提交";
+"settings.application_information.debug.success.message" = "偵錯資料已成功提交。\nID：%@\n請記下此 ID，我們的支援團隊將需要它來處理您的個案。";
+
+"settings.commit.messages.must_disconnect" = "部分修改須待VPN 重新連接，方可生效。";
+"settings.commit.messages.should_reconnect" = "重新連接 VPN ，進行修改。";
+"settings.commit.buttons.reconnect" = "重新連接";
+"settings.commit.buttons.later" = "稍後";
+
+"settings.reset.title" = "重設";
+"settings.reset.defaults.title" = "重設至預設設定";
+"settings.reset.defaults.confirm.title" = "重設設定";
+"settings.reset.defaults.confirm.message" = "此操作會將應用程式重設為預設狀態。所有您所作的變更都將會被清除。";
+"settings.reset.defaults.confirm.button" = "重設";
+"settings.reset.footer" = "進行此操作會將以上所有設定都重設至預設狀態。";
+
+"settings.small.packets.title" = "使用小封包";
+"settings.small.packets.description" = "IP 封包尺寸將略為縮小，來改善與部分路由器和行動網路的相容性。";
+
+"settings.log.connected.error" = "需要 VPN 連線。請連線到 VPN 再重試一次。";
+"settings.log.information" = "儲存錯誤偵測記錄，再提交到技術支援中心可幫助解決問題。";
+
+"settings.preview.title" = "預覽";
+"settings.server.network.description" = "下一代網絡";
+"settings.server.network.alert" = "必須斷開 VPN 才能更改服務器網絡。";
+
+"settings.geo.servers.description" = "顯示地理定位區域";
+"settings.cards.history.title" = "最新消息";
+
+"settings.ovpn.migration.footer" = "我們正在更新我們的 OpenVPN 執行方式，如需更多資訊，請按一下此處";
+"settings.ovpn.migration.footer.link" = "此處";
+
+"settings.section.general" = "一般";
+"settings.section.protocols" = "協定";
+"settings.section.network" = "網路";
+"settings.section.privacyFeatures" = "隱私功能";
+"settings.section.automation" = "自動功能";
+"settings.section.help" = "幫助";
+
+// CONTENT BLOCKER
+
+"content_blocker.title" = "Safari 內容阻擋器";
+"content_blocker.body.subtitle" = "要在 Safari 上啟用我們的內容阻擋器，請前往設定 > Safari，然後在「一般」類項點選「內容阻擋器」，開啟 PIA VPN。";
+"content_blocker.body.footer" = "請注意：您不需要連接至 VPN，此內容阻擋器就能運作，但將只會在您使用 Safari 瀏覽時才會有效。";
+
+// ABOUT
+
+"about.app" = "Private Internet Access 虛擬私人網路";
+"about.intro" = "本程式使用下列元件：";
+"about.accessibility.component.expand" = "點一下即可閱讀完整授權條款";
+
+// DASHBOARD
+
+"dashboard.content_blocker.intro.message" = "這個版本會以我們的 Safari 內容阻擋器取代 MACE。\n\n可於「設定」中查看。";
+
+"dashboard.connection.ip.unreachable" = "無法連線上網";
+
+"dashboard.vpn.disconnected" = "已解除連線";
+"dashboard.vpn.connecting" = "連線中…";
+"dashboard.vpn.connected" = "連線到 VPN";
+"dashboard.vpn.on" = "VPN 已開啟";
+"dashboard.vpn.disconnecting" = "正在解除連線…";
+"dashboard.vpn.changing_region" = "正在變更區域…";
+"dashboard.vpn.disconnect.untrusted" = "此網路為非可信任網路，您確定要解除 VPN 連線嗎？";
+"dashboard.accessibility.vpn.button" = "VPN 連線按鈕";
+"dashboard.accessibility.vpn.button.isOn" = "VPN 連線按鈕。目前已連線至 VPN";
+"dashboard.accessibility.vpn.button.isOff" = "VPN 連線按鈕。目前已解除 VPN 連線";
+
+"dashboard.vpn.leakprotection.alert.title" = "系統偵測到無安全保護的 Wi-Fi 網路";
+"dashboard.vpn.leakprotection.alert.message" = "若要避免資料洩漏，請點一下「立即停用」，以便關掉「同意取用本機網路上的裝置」，然後自動重新連線。";
+"dashboard.vpn.leakprotection.alert.cta1" = "立即停用";
+"dashboard.vpn.leakprotection.alert.cta2" = "更多內容";
+"dashboard.vpn.leakprotection.alert.cta3" = "忽略";
+
+"dashboard.vpn.leakprotection.ikev2.alert.message" = "若要避免資料洩漏，請點一下「立即切換」，以便改成 IKEv2 VPN 通訊協定，然後自動重新連線。";
+"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "立即切換";
+
+// VPN PERMISSION
+
+"vpn_permission.title" = "PIA";
+"vpn_permission.body.title" = "PIA 需要存取您的 VPN 配置才能確保您的傳輸資料安全。";
+"vpn_permission.body.subtitle" = "您將看到 PIA VPN 彈出提示框，要求允許存取 VPN 配置。\n若要繼續，請點選「%@」。";
+"vpn_permission.body.footer" = "我們不會監控、過濾或記錄任何網路活動。";
+"vpn_permission.disallow.message.basic" = "我們需要獲得此權限才能讓應用程式正確運作。";
+"vpn_permission.disallow.message.support" = "若您需要協助，歡迎您與客戶支援中心聯繫。";
+"vpn_permission.disallow.contact" = "聯繫";
+
+// CUSTOM DNS
+
+"settings.dns.custom" = "自訂";
+"settings.dns.alert.create.message" = "使用非 PIA DNS 可令您的 DNS 傳輸資料披露予第三方，對您的隱私造成損害。";
+"settings.dns.alert.clear.title" = "清除 DNS";
+"settings.dns.alert.clear.message" = "這將清除您的自訂 DNS 並預設為 PIA DNS。";
+"settings.dns.custom.dns" = "自訂 DNS";
+"settings.dns.primaryDNS" = "主要 DNS";
+"settings.dns.secondaryDNS" = "次要 DNS";
+"settings.dns.validation.primary.mandatory" = "次要 DNS 為強制性。";
+"settings.dns.validation.primary.invalid" = "主要 DNS 無效。";
+"settings.dns.validation.secondary.invalid" = "次要 DNS 無效。";
+
+// HOTSPOT HELPER
+
+"settings.hotspothelper.title" = "網路管理工具";
+"settings.hotspothelper.description" = "配置 PIA 在與 WiFi 或行動網路連線時所執行的操作。不含手動解除連線。";
+"settings.hotspothelper.enable.description" = "如果停用此選項，當您連接非信任 WiFi 網路時，PIA 將自動啟動 VPN。";
+"settings.hotspothelper.all.title" = "保護所有網路";
+"settings.hotspothelper.all.description" = "VPN WiFi 保護功能將在所有網路上啟動，包括信任網路。";
+"settings.hotspothelper.available.help" = "若要填入此清單，請前往 iOS [設定] > [WiFi]。";
+"settings.hotspothelper.available.add.help" = "點一下「+」可新增為信任網路。";
+"settings.trusted.networks.sections.current" = "現有網路";
+"settings.trusted.networks.sections.available" = "可用網路";
+"settings.trusted.networks.sections.trusted" = "信任網路";
+"settings.trusted.networks.message" = "PIA 不會自動連線至這些網路。";
+"settings.trusted.networks.connect.message" = "要連線至 VPN 以為此網路提供保護嗎？";
+"hotspothelper.display.name" = "🔒 在 PIA 設定中啟動 VPN WiFi 保護功能，為此網路連線增添一層安全保障。";
+"hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi 保護功能已啟用，我們會為您提供防護。";
+"settings.hotspothelper.cellular.title" = "保護行動網路";
+"settings.hotspothelper.wifi.trust.title" = "VPN WiFi 保護";
+"settings.hotspothelper.cellular.description" = "如果啟用此選項，當您連接行動網路時，PIA 將自動啟動 VPN。";
+"settings.hotspothelper.cellular.networks" = "行動網路";
+"settings.hotspothelper.wifi.networks" = "WiFi 網路";
+"settings.trusted.networks.sections.untrusted" = "非信任網路";
+"settings.hotspothelper.rules.title" = "規則";
+"settings.trusted.networks.sections.trusted.rule.description" = "啟用此功能及 VPN 切斷開關後，可自訂 PIA 在 WiFi 及行動網路上所執行的操作。請注意，如果您手動解除連線，網路管理工具將會停用。";
+"settings.trusted.networks.sections.trusted.rule.action" = "解除 PIA VPN 連線";
+"tiles.quicksetting.nmt.title" = "網路管理";
+"tiles.quicksetting.private.browser.title" = "私人瀏覽器";
+"settings.nmt.killswitch.disabled" = "VPN 切斷開關目前已停用。為確保網路管理工具正常運作，以及在切換網路時能夠重新連線，請在設定中啟用 VPN 切斷開關功能。";
+"settings.nmt.optout.disconnect.alerts" = "取消解除連線確認提示";
+"settings.nmt.optout.disconnect.alerts.description" = "解除 VPN 連線時不發出警告提示。";
+"settings.nmt.wireguard.warning" = "您切換至其他網路後，不需重新連接 WireGuard®。但您可能必須將 WireGuard® 與信任網路解除連線 。";
+"settings.service.quality.share.title" = "協助改善 PIA";
+"settings.service.quality.share.description" = "請分享 VPN 連線統計資料，協助我們改善服務。這些報告絕不會包含任何個人識別資訊。";
+"settings.service.quality.share.findoutmore" = "了解詳情";
+"settings.service.quality.show.title" = "連線統計資料";
+
+"network.management.tool.open.wifi" = "開啟 WiFi";
+"network.management.tool.secure.wifi" = "安全 WiFi";
+"network.management.tool.mobile.data" = "行動數據";
+"network.management.tool.always.connect" = "永遠連線至 VPN";
+"network.management.tool.always.disconnect" = "永遠解除 VPN 連線";
+"network.management.tool.retain.state" = "保留 VPN 狀態";
+"network.management.tool.add.rule" = "加入新規則";
+"network.management.tool.choose.wifi" = "選擇 WiFi 網路以加入新規則。 ";
+"network.management.tool.title" = "管理自動功能";
+"network.management.tool.alert" = "在目前的網路狀況下，您的自動功能設定已設為保持中斷 VPN 連線。";
+"network.management.tool.disable" = "停用自動功能";
+"network.management.tool.enable.automation" = "啟用自動功能";
+
+// REGION
+
+"region.search.placeholder" = "搜尋區域";
+"region.accessibility.filter" = "篩選器";
+"region.filter.sortby" = "區域排序依據";
+"region.filter.name" = "名稱";
+"region.filter.latency" = "延遲";
+"region.filter.favorites" = "我的最愛";
+"region.accessibility.favorite" = "新增一個最愛區域";
+"region.accessibility.unfavorite" = "移除一個最愛區域";
+
+// TILES
+"tiles.quick.connect.title" = "快速連線";
+"tiles.favorite.servers.title" = "最愛伺服器";
+"tiles.region.title" = "VPN 伺服器";
+"tiles.subscription.title" = "訂購計劃";
+"tiles.subscription.trial" = "試用版";
+"tiles.subscription.monthly" = "月繳";
+"tiles.subscription.yearly" = "年繳";
+"tiles.subscription.days.left" = "（尚餘 %d 天）";
+"tiles.usage.title" = "使用狀況";
+"tiles.usage.ipsec.title" = "使用情況（無法用於 IKEv2）";
+"tiles.usage.upload" = "上傳";
+"tiles.usage.download" = "下載";
+"tiles.nmt.cellular" = "行動網路";
+"tiles.nmt.accessibility.trusted" = "信任網路";
+"tiles.nmt.accessibility.untrusted" = "非信任網路";
+"tiles.quicksettings.title" = "快速設定";
+"tiles.quicksettings.min.elements.message" = "您應在快速設定磚中保留至少一個可見的元素";
+"tiles.accessibility.visible.tile.action" = "點選將此標題從剪貼簿移除";
+"tiles.accessibility.invisible.tile.action" = "點選將此標題新增到剪貼簿";
+
+//SIRI SHORTCUTS
+"siri.shortcuts.connect.row.title" = "「連線」Siri 捷徑";
+"siri.shortcuts.disconnect.row.title" = "「解除連線」Siri 捷徑";
+"siri.shortcuts.connect.title" = "連接 PIA VPN";
+"siri.shortcuts.disconnect.title" = "解除 PIA VPN 連線";
+"siri.shortcuts.add.error" = "加入 Siri 捷徑時發生錯誤，請再試一次。";
+
+//TODAY WIDGET
+"today.widget.login" = "登入";
+
+//FRIEND REFERRALS
+"friend.referrals.email.validation" = "無效的電子郵件。請重試。";
+"friend.referrals.title" = "推薦一位朋友";
+"friend.referrals.view.invites.sent" = "檢視已送出的邀請";
+"friend.referrals.pending.invites" = "%d 個邀請擱置中";
+"friend.referrals.signups.number" = "%d 次註冊";
+"friend.referrals.fullName" = "全名";
+"friend.referrals.invitation.terms" = "若送出此邀請，即代表我同意親友推薦計畫的所有條款與條件。";
+"friend.referrals.family.friends.program" = "親友推薦計畫";
+"friend.referrals.send.invite" = "傳送邀請";
+"friend.referrals.invite.error" = "無法重新送出邀請。請稍後重試。";
+"friend.referrals.invite.success" = "已成功送出邀請";
+"friend.referrals.share.link" = "分享您獨有的推薦連結";
+"friend.referrals.share.link.terms" = "若分享此連結，即代表您同意親友推薦計畫的所有條件與條款。";
+"friend.referrals.invites.sent.title" = "已送出邀請";
+"friend.referrals.pending.invites.title" = "擱置的邀請";
+"friend.referrals.invites.number" = "您已送出 %d 個邀請";
+"friend.referrals.privacy.note" = "請注意，基於隱私權考量，我們將刪除超過 30 天的邀請。";
+"friend.referrals.signedup" = "已註冊";
+"friend.referrals.reward.given" = "已發送獎勵";
+"friend.referrals.days.acquired" = "已獲得免費天數";
+"friend.referrals.days.number" = "%d 天";
+
+"friend.referrals.friends.family.title" = "推薦您的親友。每一位親友註冊後，我們都會提供您和親友 30 天免費試用。";
+"friend.referrals.description.short" = "推薦一位朋友。享有 30 天免費。";
+
+// GDPR
+"gdpr.collect.data.title" = "我們收集的個人資料";
+"gdpr.collect.data.description" = "電子郵件地址僅用於管理帳戶與防止濫用。\n\n電子郵件地址將用於傳送訂閱資訊、付款確認、客戶通訊及 Private Internet Access 的促銷優惠。";
+"gdpr.accept.button.title" = "同意並繼續";
+
+// SET EMAIL
+"set.email.form.email" = "輸入電子郵件地址";
+"set.email.why" = "我們需要您的電子郵件以傳送使用者名稱與密碼。";
+"set.email.success.message_format" = "我們已將您的帳戶使用者名稱與密碼傳送到此電子郵件地址 %@";
+"set.email.password.caption" = "密碼";
+"set.email.error.validation" = "您必須輸入電子郵件地址。";
+
+// RATING
+"rating.enjoy.question" = "您喜歡 PIA VPN 嗎？";
+"rating.enjoy.subtitle" = "我們希望我們的 VPN 產品符合您的期望";
+"rating.problems.question" = "發生了什麼錯誤？";
+"rating.problems.subtitle" = "您想提供反饋嗎？我們可以幫助您改善使用 PIA 的體驗";
+"rating.review.question" = "可否為我們在 AppStore 評價？";
+"rating.rate.question" = "幫我們在 App Store 上評分好嗎？";
+"rating.rate.subtitle" = "我們非常感謝您分享您的經驗";
+"rating.error.question" = "無法建立連線";
+"rating.error.subtitle" = "您可嘗試選擇不同區域，或開立支援單來通知我們。";
+"rating.error.button.send" = "發送反饋";
+"rating.alert.button.notreally" = "不要";
+"rating.alert.button.nothanks" = "不了，謝謝.";
+"rating.alert.button.oksure" = "沒問題！";
+
+// CALLING CARDS
+"card.wireguard.title" = "立即體驗 WireGuard®！";
+"card.wireguard.description" = "這是款全新高效的 VPN 通訊協定，具備更佳的性能、更低的 CPU 使用率和更長的電池壽命。";
+"card.wireguard.cta.activate" = "立即體驗 WireGuard®";
+"card.wireguard.cta.settings" = "開啟設定";
+"card.wireguard.cta.learn" = "深入了解";
+
+// DEDICATED IP
+"dedicated.ip.title" = "專屬 IP";
+"dedicated.ip.plural.title" = "您的專屬 IP";
+"dedicated.ip.activation.description" = "請在下方表格中貼上權杖以啟用專屬 IP。若您近期有購買專屬 IP，即可前往 PIA 網站頁面產生權杖。";
+"dedicated.ip.token.textfield.placeholder" = "在此貼上權杖";
+"dedicated.ip.token.textfield.accessibility" = "輸入專屬 IP 權杖的文字輸入框";
+"dedicated.ip.activate.button.title" = "啟用";
+"dedicated.ip.message.incorrect.token" = "請確保輸入的權杖正確無誤";
+"dedicated.ip.message.invalid.token" = "您的權杖無效。請確保輸入的權杖正確無誤。";
+"dedicated.ip.message.valid.token" = "您的專屬 IP 已成功啟用。它將會出現在區域選擇清單中。";
+"dedicated.ip.message.expired.token" = "您的權杖已到期。請到網站的帳戶頁面產生新權杖。";
+"dedicated.ip.message.error.token" = "您的權杖已到期。請到網站的帳戶頁面產生新權杖。";
+"dedicated.ip.message.error.retryafter" = "權杖啟用要求失敗次數太多。請在 %@ 秒後再試一次。";
+"dedicated.ip.message.token.willexpire" = "您的專屬 IP 即將到期。取得新權杖";
+"dedicated.ip.message.token.willexpire.link" = "取得新權杖";
+"dedicated.ip.message.ip.updated" = "您的專屬 IP 已更新";
+"dedicated.ip.country.flag.accessibility" = "%@ 國旗";
+"dedicated.ip.remove" = "確定要移除所選的區域嗎？";
+"dedicated.ip.limit.title" = "使用所選國家的專屬 IP 保障與任何資產的遠端連線安全。訂閱期間，此 IP 僅供您本人使用，並透過最強而有力的加密來保護您的資料傳輸。";
+
+// RECONNECTIONS
+"server.reconnection.please.wait" = "請稍候…";
+"server.reconnection.still.connection" = "仍在嘗試連線…";
+
+// INAPP MESSAGES
+"inapp.messages.toggle.title" = "顯示服務通訊訊息";
+"inapp.messages.settings.updated" = "已更新設定";
+
+// PIA WIDGET
+"widget.liveActivity.region.title" = "區域";
+"widget.liveActivity.protocol.title" = "通訊協定";

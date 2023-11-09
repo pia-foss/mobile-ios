@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "icon-custom-wifi-disconnect.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

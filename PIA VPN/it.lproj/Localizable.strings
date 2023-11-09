@@ -1,0 +1,440 @@
+// GLOBAL
+
+"global.ok" = "OK";
+"global.cancel" = "Annulla";
+"global.close" = "Chiudi";
+"global.error" = "Errore";
+"global.automatic" = "Automatica";
+"global.required" = "Obbligatorio";
+"global.optional" = "Facoltativo";
+"global.clear" = "Cancella";
+"global.update" = "Aggiorna";
+"global.edit" = "Modifica";
+"global.unreachable" = "Nessuna connessione a internet rilevata. Conferma di avere una connessione a internet.";
+"global.enabled" = "Attivato";
+"global.disabled" = "Disattivato";
+"global.enable" = "Attiva";
+"global.disable" = "Disabilita";
+"global.add" = "Aggiungi";
+"global.remove" = "Elimina";
+"global.empty" = "Vuoto";
+"global.copy" = "Copia";
+"global.share" = "Condividi";
+"global.copied" = "Copiato sugli appunti";
+"global.yes" = "Sì";
+"global.no" = "No";
+"global.or" = "o";
+"global.row.selection" = "Selezione della riga";
+"global.vpn.settings" = "Impostazioni VPN";
+"global.general.settings" = "Impostazioni generali";
+"global.version" = "Versione";
+
+// NOTIFICATIONS
+
+"notifications.disabled.title" = "Notifiche disattivate";
+"notifications.disabled.message" = "Attiva le notifiche per ricevere un promemoria prima che scada il tuo abbonamento";
+"notifications.disabled.settings" = "Impostazioni";
+
+"expiration.title" = "Rinnovo";
+"expiration.message" = "Il tuo abbonamento scade presto. Rinnovalo per mantenere la protezione.";
+
+"local_notification.non_compliant_wifi.title" = "Wi-Fi non protetto: %@";
+"local_notification.non_compliant_wifi.text" = "Tocca qui per proteggere il tuo dispositivo";
+
+// SHORTCUTS
+
+"shortcuts.connect" = "Connetti";
+"shortcuts.disconnect" = "Disconnetti";
+"shortcuts.select_region" = "Seleziona una regione";
+
+// RENEWAL
+
+"renewal.success.title" = "Grazie";
+"renewal.success.message" = "Rinnovo dell'account completato.";
+"renewal.failure.message" = "Non è stato possibile inviare la tua ricevuta d'acquisto, riprova più tardi.";
+
+// MENU
+"menu.accessibility.edit.tile" = "Modifica";
+"menu.accessibility.item" = "Menu";
+"menu.accessibility.logged_as" = "Collegato come %@";
+"menu.expiration.expires_in" = "Il tuo abbonamento scade tra";
+"menu.expiration.days" = "%d giorni";
+"menu.expiration.hours" = "%d ore";
+"menu.expiration.one_hour" = "un'ora";
+"menu.expiration.upgrade" = "AGGIORNA ACCOUNT";
+"menu.item.region" = "Selezione della regione";
+"menu.item.about" = "Informazioni";
+"menu.item.account" = "Account";
+"menu.item.settings" = "Impostazioni";
+"menu.item.logout" = "Esci";
+"menu.item.web.privacy" = "Informativa sulla Privacy";
+"menu.item.web.home" = "Pagina iniziale";
+"menu.item.web.support" = "Supporto";
+
+"menu.logout.title" = "Esci";
+"menu.logout.message" = "Se esci, la VPN sarà disattivata e rimarrai senza protezione.";
+"menu.logout.confirm" = "Esci";
+
+"menu.renewal.title" = "Rinnovo";
+"menu.renewal.purchase" = "Acquista";
+"menu.renewal.renew" = "Rinnova";
+"menu.renewal.message.trial" = "Gli account di prova non prevedono il rinnovo. Acquista un nuovo account alla scadenza per proseguire con il servizio.";
+"menu.renewal.message.website" = "Usa il nostro sito web per rinnovare il tuo abbonamento.";
+"menu.renewal.message.unavailable" = "Server Apple attualmente non disponibili. Riprova più tardi.";
+
+// ACCOUNT
+
+"account.email.caption" = "Email";
+"account.email.placeholder" = "Indirizzo email";
+"account.username.caption" = "Nome utente";
+"account.other.footer" = "Ottieni Private Internet Access anche per i tuoi altri dispositivi e utilizza il nome utente e la password in alto per accedere e connetterti in tutta sicurezza.";
+"account.restore.title" = "Ripristina acquisto non accreditato";
+"account.restore.description" = "Se hai rinnovato il tuo piano ma risulta ancora che il tuo account stia per scadere, puoi riavviare il rinnovo da qui. Non verrà effettuato alcun addebito durante la procedura.";
+"account.restore.button" = "Ripristina acquisto";
+"account.restore.failure.title" = "Ripristina acquisto";
+"account.restore.failure.message" = "Nessun acquisto riscattabile rilevato per il rinnovo.";
+"account.save.item" = "Aggiorna email";
+"account.save.prompt" = "Autentica per salvare le modifiche";
+"account.save.success" = "Il tuo indirizzo email è stato salvato.";
+"account.reveal.prompt" = "Autentica per rivelare";
+"account.expiry_date.information" = "Il tuo piano scade il %@.";
+"account.expiry_date.expired" = "Il tuo piano è scaduto.";
+"account.update.email.require.password.title" = "Necessaria password PIA";
+"account.update.email.require.password.message" = "Per motivi di sicurezza, abbiamo bisogno che la tua password PIA completi una modifica sul tuo account. Inserisci la password PIA per continuare.";
+"account.update.email.require.password.button" = "Invia";
+"account.error.unauthorized" = "Nome utente o password non valida";
+"account.subscriptions.message" = "Da qui puoi gestire il tuo abbonamento.";
+"account.subscriptions.linkMessage" = "qui.";
+"account.set.email.error" = "Si è verificato un errore durante l'aggiunta dell'email. Riprova più tardi.";
+"account.subscriptions.short.message" = "Gestisci abbonamento";
+"account.subscriptions.short.linkMessage" = "Gestisci abbonamento";
+"account.subscriptions.yearly" = "Piano annuale";
+"account.subscriptions.monthly" = "Piano mensile";
+"account.subscriptions.trial" = "Piano di prova";
+"account.unauthorized" = "Qualcosa è andato storto. Prova ad accedere di nuovo";
+"account.delete" = "Elimina account";
+"account.delete.alert.title" = "Continuare?";
+"account.delete.alert.message" = "L’eliminazione del tuo account PIA è un’operazione definitiva e irreversibile, al termine della quale non potrai più recuperare le tue credenziali PIA. Tieni presente che questa azione elimina solo il tuo account PIA dal nostro database, NON l’abbonamento. Per cancellare l’abbonamento a Private Internet Access, dovrai accedere al tuo account Apple e cancellarlo da lì. Altrimenti continuerai a pagarlo anche se il tuo account PIA non sarà più attivo.";
+"account.delete.alert.failureMessage" = "Qualcosa non ha funzionato durante l’eliminazione dell’account. Riprova più tardi.";
+"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
+"account.survey.messageLink" = "Take The Survey";
+
+// SETTINGS
+
+"settings.connection.title" = "CONNESSIONE";
+"settings.connection.vpn_protocol.title" = "Selezione protocollo";
+"settings.connection.transport.title" = "Trasporto";
+"settings.connection.socket_protocol.title" = "Socket";
+"settings.connection.remote_port.title" = "Porta remota";
+
+"settings.encryption.title" = "CRITTOGRAFIA";
+"settings.encryption.cipher.title" = "Criptaggio dati";
+"settings.encryption.digest.title" = "Autenticazione dati";
+"settings.encryption.handshake.title" = "Handshake";
+
+"settings.application_settings.title" = "IMPOSTAZIONI DELL'APPLICAZIONE";
+"settings.application_settings.dark_theme.title" = "Tema scuro";
+"settings.application_settings.active_theme.title" = "Tema attivo";
+"settings.application_settings.kill_switch.title" = "Killswitch VPN";
+"settings.application_settings.kill_switch.footer" = "Il killswitch VPN impedisce l'accesso a Internet quando la connessione VPN si sta riconnettendo. Questo esclude la disconnessione manuale.";
+"settings.application_settings.leak_protection.title" = "Protezione perdita dati";
+"settings.application_settings.leak_protection.footer" = "iOS include funzioni per operare di default al di fuori della VPN, come AirDrop, CarPlay, AirPlay e hotspot personali. L’attivazione di una protezione personalizzata contro la perdita dei dati instrada questo traffico attraverso la VPN, ma può influire su queste funzioni. Ulteriori informazioni";
+"settings.application_settings.leak_protection.more_info" = "Ulteriori informazioni";
+"settings.application_settings.allow_local_network.title" = "Consenti l’accesso ai dispositivi sulla rete locale";
+"settings.application_settings.allow_local_network.footer" = "Rimani connesso ai dispositivi locali come stampanti o file server durante la connessione alla VPN. (Consenti solo se ti fidi delle persone e dei dispositivi sulla rete.)";
+"settings.application_settings.mace.title" = "PIA MACE™";
+"settings.application_settings.mace.footer" = "PIA MACE™ blocca pubblicità, tracker e malware mentre sei connesso alla VPN.";
+"settings.application_settings.leak_protection.alert.title" = "Le modifiche alle impostazioni della VPN avranno effetto alla prossima connessione";
+
+"settings.content_blocker.title" = "Stato di blocco contenuti Safari";
+"settings.content_blocker.state.title" = "Stato corrente";
+"settings.content_blocker.refresh.title" = "Aggiorna lista di blocco";
+"settings.content_blocker.footer" = "Per abilitare o disabilitare il Blocco dei contenuti, vai su Impostazioni > Safari > Blocchi dei contenuti ed aziona PIA VPN.";
+
+"settings.application_information.title" = "INFORMAZIONI SULL'APPLICAZIONE";
+"settings.application_information.debug.title" = "Invia debug all'assistenza";
+"settings.application_information.debug.failure.title" = "Errore nell'invio";
+"settings.application_information.debug.failure.message" = "Non è stato possibile inviare le informazioni di debug.";
+"settings.application_information.debug.empty.title" = "Informazioni di debug vuote";
+"settings.application_information.debug.empty.message" = "Non ci sono informazioni di debug, per favore prova a connetterti prima di riprovare l'invio.";
+"settings.application_information.debug.success.title" = "Informazioni di debug inviate";
+"settings.application_information.debug.success.message" = "Informazioni di debug inviate.\nID: %@\nPrendi nota di questo ID, il nostro team di assistenza te lo chiederà per localizzare la tua richiesta.";
+
+"settings.commit.messages.must_disconnect" = "La VPN deve riconnettersi perché alcune modifiche vengano applicate.";
+"settings.commit.messages.should_reconnect" = "Riconnetti la VPN per applicare le modifiche.";
+"settings.commit.buttons.reconnect" = "Riconnetti";
+"settings.commit.buttons.later" = "Più tardi";
+
+"settings.reset.title" = "RIPRISTINA";
+"settings.reset.defaults.title" = "Ripristina impostazioni predefinite";
+"settings.reset.defaults.confirm.title" = "Ripristina impostazioni";
+"settings.reset.defaults.confirm.message" = "Questo riporterà l'app alle impostazioni predefinite. Perderai tutte le modifiche apportate.";
+"settings.reset.defaults.confirm.button" = "Ripristina";
+"settings.reset.footer" = "Questo riporterà tutte le impostazioni a quelle predefinite";
+
+"settings.small.packets.title" = "Usa pacchetti piccoli";
+"settings.small.packets.description" = "Diminuirà leggermente le dimensioni del pacchetto IP per migliorare la compatibilità con alcuni router e reti mobili.";
+
+"settings.log.connected.error" = "È necessaria una connessione VPN. Collegati al VPN e riprova.";
+"settings.log.information" = "Salva i log dei debug che possono essere inviati al supporto tecnico per aiutare a risolvere problemi.";
+
+"settings.preview.title" = "Anteprima";
+"settings.server.network.description" = "Rete di nuova generazione";
+"settings.server.network.alert" = "Per cambiare la rete server, il VPN dev'essere disconnesso.";
+
+"settings.geo.servers.description" = "Mostra regioni geolocalizzate";
+"settings.cards.history.title" = "Ultime novità";
+
+"settings.ovpn.migration.footer" = "Stiamo aggiornando la nostra implementazione OpenVPN; per ulteriori informazioni, clicca qui";
+"settings.ovpn.migration.footer.link" = "qui";
+
+"settings.section.general" = "Generale";
+"settings.section.protocols" = "Protocolli";
+"settings.section.network" = "Rete";
+"settings.section.privacyFeatures" = "Funzionalità di privacy";
+"settings.section.automation" = "Automazione";
+"settings.section.help" = "Guida";
+
+// CONTENT BLOCKER
+
+"content_blocker.title" = "Blocco dei contenuti Safari";
+"content_blocker.body.subtitle" = "Per abilitare il nostro Blocco dei contenuti in Safari, per favore vai su Impostazioni > Safari, e in Blocchi dei contenuti nella sezione Generali aziona PIA VPN.";
+"content_blocker.body.footer" = "Nota bene: Non c'è bisogno di essere connessi alla VPN affinché il blocco dei contenuti sia attivo, ma il blocco avrà effetto solo navigando con Safari.";
+
+// ABOUT
+
+"about.app" = "VPN by Private Internet Access";
+"about.intro" = "Quest'applicazione usa i seguenti componenti:";
+"about.accessibility.component.expand" = "Tocca per leggere l'intera licenza";
+
+// DASHBOARD
+
+"dashboard.content_blocker.intro.message" = "Questa versione sostituisce MACE con il nostro Blocco dei contenuti Safari.\n\nDai un'occhiata alle 'Impostazioni'.";
+
+"dashboard.connection.ip.unreachable" = "Internet irraggiungibile";
+
+"dashboard.vpn.disconnected" = "Disconnesso";
+"dashboard.vpn.connecting" = "Connessione in corso...";
+"dashboard.vpn.connected" = "Connesso alla VPN";
+"dashboard.vpn.on" = "VPN: ON";
+"dashboard.vpn.disconnecting" = "Disconnessione in corso...";
+"dashboard.vpn.changing_region" = "Cambiando regione...";
+"dashboard.vpn.disconnect.untrusted" = "Questa rete non è affidabile. Vuoi disconnettere il VPN?";
+"dashboard.accessibility.vpn.button" = "Pulsante di Conneessione VPN";
+"dashboard.accessibility.vpn.button.isOn" = "Pulsante di connessione VPN. VPN attualmente connesso";
+"dashboard.accessibility.vpn.button.isOff" = "Pulsante di connessione VPN. VPN attualmente disconnesso";
+
+"dashboard.vpn.leakprotection.alert.title" = "Rilevato Wi-Fi non sicuro";
+"dashboard.vpn.leakprotection.alert.message" = "Per prevenire perdite di dati, tocca Disabilita ora per disattivare “Consenti l’accesso ai dispositivi sulla rete locale“ e riconnettersi automaticamente.";
+"dashboard.vpn.leakprotection.alert.cta1" = "Disabilita ora";
+"dashboard.vpn.leakprotection.alert.cta2" = "Ulteriori informazioni";
+"dashboard.vpn.leakprotection.alert.cta3" = "Ignora";
+
+"dashboard.vpn.leakprotection.ikev2.alert.message" = "Per prevenire le perdite di dati, tocca Cambia ora per passare al protocollo VPN IKEv2 e riconnettersi automaticamente.";
+"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Cambia ora";
+
+// VPN PERMISSION
+
+"vpn_permission.title" = "PIA";
+"vpn_permission.body.title" = "Per garantire la sicurezza del tuo traffico, PIA ha bisogno di accedere alle configurazioni del tuo VPN.";
+"vpn_permission.body.subtitle" = "Vedrai un messaggio per PIA VPN e dovrai consentire l'accesso alle configurazioni di VPN. Per continuare, tocca \"%@\".";
+"vpn_permission.body.footer" = "Non monitoriamo, filtriamo o registriamo alcuna attività di rete.";
+"vpn_permission.disallow.message.basic" = "Per garantire il funzionamento dell'applicazione, è necessaria questa autorizzazione.";
+"vpn_permission.disallow.message.support" = "Per informazioni, contatta il nostro ufficio assistenza.";
+"vpn_permission.disallow.contact" = "Contatti";
+
+// CUSTOM DNS
+
+"settings.dns.custom" = "Personalizza";
+"settings.dns.alert.create.message" = "Utilizzando un DNS non PIA potresti esporre il tuo traffico DNS a terzi e pregiudicare la tua privacy.";
+"settings.dns.alert.clear.title" = "Cancella DNS";
+"settings.dns.alert.clear.message" = "L'azione eliminerà il tuo DNS personalizzato e il tuo PIA DNS predefinito.";
+"settings.dns.custom.dns" = "Personalizza DNS";
+"settings.dns.primaryDNS" = "DNS principale";
+"settings.dns.secondaryDNS" = "DNS secondario";
+"settings.dns.validation.primary.mandatory" = "DNS principale obbligatorio.";
+"settings.dns.validation.primary.invalid" = "DNS principale non valido.";
+"settings.dns.validation.secondary.invalid" = "DNS secondario non valido.";
+
+// HOTSPOT HELPER
+
+"settings.hotspothelper.title" = "Strumento di gestione di rete";
+"settings.hotspothelper.description" = "Configura il comportamento di PIA in caso di connessione a reti WiFi o di telefonia mobile. Ciò esclude la disconnessione manuale.";
+"settings.hotspothelper.enable.description" = "Se l'opzione è attivata, PIA attiva automaticamente il VPN in caso di connessione a reti WiFi non affidabili.";
+"settings.hotspothelper.all.title" = "Proteggi tutte le reti";
+"settings.hotspothelper.all.description" = "La protezione WiFi VPN sarà attivata su tutte le reti, incluse le reti affidabili";
+"settings.hotspothelper.available.help" = "Per creare questo elenco, vai su Impostazinoi iOS > WiFi.";
+"settings.hotspothelper.available.add.help" = "Tocca + per aggiungere reti affidabili";
+"settings.trusted.networks.sections.current" = "Rete attuale";
+"settings.trusted.networks.sections.available" = "Reti disponibili";
+"settings.trusted.networks.sections.trusted" = "Reti affidabili";
+"settings.trusted.networks.message" = "PIA non si collega automaticamente a queste reti.";
+"settings.trusted.networks.connect.message" = "Proteggi la rete collegandoti al VPN?";
+"hotspothelper.display.name" = "🔒 Per garantire questa connessione, attiva la protezione WiFi VPN sulle Impostazioni di PIA.";
+"hotspothelper.display.protected.name" = "🔒 Protezione WiFi VPN attivata - Naviga in tutta sicurezza.";
+"settings.hotspothelper.cellular.title" = "Protezione su reti di telefonia mobile";
+"settings.hotspothelper.wifi.trust.title" = "Protezione WiFi VPN";
+"settings.hotspothelper.cellular.description" = "Se l'opzione è attivata, PIA attiva automaticamente il VPN in caso di connessione a reti cellulari.";
+"settings.hotspothelper.cellular.networks" = "Reti di telefonia mobile";
+"settings.hotspothelper.wifi.networks" = "Reti WiFi";
+"settings.trusted.networks.sections.untrusted" = "Reti non affidabili";
+"settings.hotspothelper.rules.title" = "Regole";
+"settings.trusted.networks.sections.trusted.rule.description" = "Attiva questa fuzione con il kill switch VPN attivato per personalizzare il comportamento di PIA su reti WiFi e di telefonia mobile. Ricorda che la funzionalità dello Strumento di gestione di rete sarà disattivato in caso di disconnessione manuale.";
+"settings.trusted.networks.sections.trusted.rule.action" = "Disconnessione dal VPN PIA";
+"tiles.quicksetting.nmt.title" = "Gestione di rete";
+"tiles.quicksetting.private.browser.title" = "Browser privato";
+"settings.nmt.killswitch.disabled" = "Il kill switch del VPN è attualmente disattivo. Per garantire il funzionamento dello Strumento di gestione di rete e la riconnessione durante il cambio di rete, attiva il kill switch del del VPN sulle impostazioni.";
+"settings.nmt.optout.disconnect.alerts" = "Non ricevere avviso di conferma disconnessione";
+"settings.nmt.optout.disconnect.alerts.description" = "Disattiva gli avvisi d'emergenza in caso di disconnessione da VPN.";
+"settings.nmt.wireguard.warning" = "WireGuard® non ha bisogno di riconnettersi quando passi da una rete all'altra. Potrebbe essere necessaria la disconnessione manuale del VPN su reti affidabili.";
+"settings.service.quality.share.title" = "Aiuta a migliorare PIA";
+"settings.service.quality.share.description" = "Aiutaci a migliorare condividendo le statistiche di connessione al VPN. Questi rapporti non contengono mai informazioni d'identificazione personale.";
+"settings.service.quality.share.findoutmore" = "Scopri di più";
+"settings.service.quality.show.title" = "Statistiche di connessione";
+
+"network.management.tool.open.wifi" = "WiFi aperta";
+"network.management.tool.secure.wifi" = "WiFi sicura";
+"network.management.tool.mobile.data" = "Dati mobili";
+"network.management.tool.always.connect" = "Connetti sempre VPN";
+"network.management.tool.always.disconnect" = "Disconnetti sempre VPN";
+"network.management.tool.retain.state" = "Conserva Stato VPN";
+"network.management.tool.add.rule" = "Aggiungi nuova regola";
+"network.management.tool.choose.wifi" = "Scegli una rete WiFi per aggiungere una nuova regola. ";
+"network.management.tool.title" = "Gestisci automazione";
+"network.management.tool.alert" = "Le impostazioni d'automazione sono configurate per mantenere la VPN disconnessa nelle condizioni di rete attuali.";
+"network.management.tool.disable" = "Automazione disattivata";
+"network.management.tool.enable.automation" = "Attiva automazione";
+
+// REGION
+
+"region.search.placeholder" = "Cerca una regione";
+"region.accessibility.filter" = "Filtro";
+"region.filter.sortby" = "Ordina regioni per";
+"region.filter.name" = "Nome";
+"region.filter.latency" = "Latenza";
+"region.filter.favorites" = "Preferiti";
+"region.accessibility.favorite" = "Aggiungi un'area preferita";
+"region.accessibility.unfavorite" = "Elimina un'area preferita";
+
+// TILES
+"tiles.quick.connect.title" = "Connessione rapida";
+"tiles.favorite.servers.title" = "Server preferiti";
+"tiles.region.title" = "Server VPN";
+"tiles.subscription.title" = "Abbonamento";
+"tiles.subscription.trial" = "Prova";
+"tiles.subscription.monthly" = "Mensile";
+"tiles.subscription.yearly" = "Annuale";
+"tiles.subscription.days.left" = "(%d giorni rimasti)";
+"tiles.usage.title" = "Uso";
+"tiles.usage.ipsec.title" = "USO (non disponibile su IKEv2)";
+"tiles.usage.upload" = "Carica";
+"tiles.usage.download" = "Download";
+"tiles.nmt.cellular" = "Cellulare";
+"tiles.nmt.accessibility.trusted" = "Rete affidabile";
+"tiles.nmt.accessibility.untrusted" = "Rete non affidabile";
+"tiles.quicksettings.title" = "Impostazioni rapide";
+"tiles.quicksettings.min.elements.message" = "Dovresti mantenere almeno un elemento visibile nel riquadro Impostazioni rapide";
+"tiles.accessibility.visible.tile.action" = "Tocca per eliminare questo riquadro dal dashboard";
+"tiles.accessibility.invisible.tile.action" = "Tocca per aggiungere questo riquadro al dashboard";
+
+//SIRI SHORTCUTS
+"siri.shortcuts.connect.row.title" = "\"Connetti\" collegamento a Siri";
+"siri.shortcuts.disconnect.row.title" = "\"Disconnetti\" collegamento a Siri";
+"siri.shortcuts.connect.title" = "Connetti PIA VPN";
+"siri.shortcuts.disconnect.title" = "Disconnetti PIA VPN";
+"siri.shortcuts.add.error" = "Errore durante l'aggiunta del collegamento a Siri. Riprova.";
+
+//TODAY WIDGET
+"today.widget.login" = "Accedi";
+
+//FRIEND REFERRALS
+"friend.referrals.email.validation" = "Indirizzo email non valido. Riprova.";
+"friend.referrals.title" = "Invita un amico";
+"friend.referrals.view.invites.sent" = "Vedi inviti spediti";
+"friend.referrals.pending.invites" = "%d inviti in sospeso";
+"friend.referrals.signups.number" = "%d registrazioni";
+"friend.referrals.fullName" = "Nome completo";
+"friend.referrals.invitation.terms" = "Con la spedizione di questo invito, accetti i termini e le condizioni del Programma invito di familiari e amici.";
+"friend.referrals.family.friends.program" = "Programma invito di familiari e amici";
+"friend.referrals.send.invite" = "Spedisci invito";
+"friend.referrals.invite.error" = "Impossibile inviare di nuovo l'invito. Riprova più tardi.";
+"friend.referrals.invite.success" = "Invito spedito";
+"friend.referrals.share.link" = "Condividi il tuo link unico d'invito";
+"friend.referrals.share.link.terms" = "Condividendo il link, accetti i termini e le condizioni del Programma invito di familiari e amici.";
+"friend.referrals.invites.sent.title" = "Inviti spediti";
+"friend.referrals.pending.invites.title" = "Inviti in sospeso";
+"friend.referrals.invites.number" = "Hai spedito %d inviti";
+"friend.referrals.privacy.note" = "Ricorda che, per motivi di privacy, dopo 30 giorni gli inviti saranno cancellati.";
+"friend.referrals.signedup" = "Registrato";
+"friend.referrals.reward.given" = "Ricompensa offerta";
+"friend.referrals.days.acquired" = "Giorni gratuiti acquisiti";
+"friend.referrals.days.number" = "%d giorni";
+
+"friend.referrals.friends.family.title" = "Invita familiari e amici: per ogni registrazione riceverete entrambi 30 giorni gratuiti. ";
+"friend.referrals.description.short" = "INVITA UN AMICO E OTTENI 30 GIORNI GRATUITI.";
+
+// GDPR
+"gdpr.collect.data.title" = "Dati personali da noi raccolti";
+"gdpr.collect.data.description" = "Indirizzo email per scopi di gestione dell'account e protezione dagli usi impropri.\n\nL'indirizzo email viene utilizzato solo per inviare informazioni sull'abbonamento, conferme di pagamento, corrispondenza col cliente e offerte promozionali di Private Internet Access.";
+"gdpr.accept.button.title" = "Accetta e continua";
+
+// SET EMAIL
+"set.email.form.email" = "Inserisci il tuo indirizzo email";
+"set.email.why" = "Per inviarti nome utente e password, abbiamo bisogno del tuo indirizzo email.";
+"set.email.success.message_format" = "Abbiamo inviato nome utente e password al tuo indirizzo email %@";
+"set.email.password.caption" = "Password";
+"set.email.error.validation" = "Devi inserire un indirizzo email.";
+
+// RATING
+"rating.enjoy.question" = "Ti piace PIA VPN?";
+"rating.enjoy.subtitle" = "Speriamo che il nostro prodotto VPN soddisfi le tue aspettative";
+"rating.problems.question" = "Cosa non ha funzionato?";
+"rating.problems.subtitle" = "Vuoi offrire il tuo feedback? Possiamo aiutarti a migliorare la tua esperienza d'uso di PIA";
+"rating.review.question" = "Che ne pensi di condividere una recensione sull'AppStore?";
+"rating.rate.question" = "Che ne dici di una valutazione su App Store?";
+"rating.rate.subtitle" = "Grazie per aver condiviso la tua esperienza";
+"rating.error.question" = "Impossibile stabilire la connessione";
+"rating.error.subtitle" = "Puoi provare a selezionare un altro paese o comunicarcelo aprendo un ticket di supporto.";
+"rating.error.button.send" = "Invia feedback";
+"rating.alert.button.notreally" = "No, grazie";
+"rating.alert.button.nothanks" = "No, grazie.";
+"rating.alert.button.oksure" = "Certo!";
+
+// CALLING CARDS
+"card.wireguard.title" = "Prova subito WireGuard®!";
+"card.wireguard.description" = "È un nuovo protocollo VPN più efficiente che offre migliori prestazioni, uso del CPU ridotto e maggior durata della batteria.";
+"card.wireguard.cta.activate" = "Prova subito WireGuard®";
+"card.wireguard.cta.settings" = "Apri Impostazioni";
+"card.wireguard.cta.learn" = "Maggiori informazioni";
+
+// DEDICATED IP
+"dedicated.ip.title" = "IP dedicato";
+"dedicated.ip.plural.title" = "I tuoi IP dedicati";
+"dedicated.ip.activation.description" = "Attiva il tuo IP dedicato incollando il token nel modulo qui sotto. Se hai recentemente acquistato un IP dedicato, puoi generare il token accedendo al sito web di PIA.";
+"dedicated.ip.token.textfield.placeholder" = "Incolla il token qui";
+"dedicated.ip.token.textfield.accessibility" = "Il campo di testo per digitare il token dell'IP dedicato";
+"dedicated.ip.activate.button.title" = "Attiva";
+"dedicated.ip.message.incorrect.token" = "Assicurati di aver inserito correttamente il token";
+"dedicated.ip.message.invalid.token" = "Token non valido. Assicurati di aver inserito correttamente il token.";
+"dedicated.ip.message.valid.token" = "Il tuo IP dedicato è stato attivato. Sarà disponibile nell'elenco di selezione del paese.";
+"dedicated.ip.message.expired.token" = "Token scaduto. Generane uno nuovo dalla pagina del tuo account sul sito web.";
+"dedicated.ip.message.error.token" = "Token scaduto. Generane uno nuovo dalla pagina del tuo account sul sito web.";
+"dedicated.ip.message.error.retryafter" = "Troppe richieste di attivazione token non riuscite. Riprova tra %@ secondo/i.";
+"dedicated.ip.message.token.willexpire" = "Il tuo IP dedicato scade a breve. Ottieni uno nuovo";
+"dedicated.ip.message.token.willexpire.link" = "Ottieni uno nuovo";
+"dedicated.ip.message.ip.updated" = "Il tuo IP dedicato è aggiornato";
+"dedicated.ip.country.flag.accessibility" = "Bandiera per %@";
+"dedicated.ip.remove" = "Vuoi davvero rimuovere il Paese selezionato?";
+"dedicated.ip.limit.title" = "Proteggi le tue connessioni remote a qualsiasi asset con un IP dedicato da un paese a tuo piacimento. Durante l'abbonamento, questo IP sarà solo e soltanto tuo, e proteggerà i trasferimenti dei dati con la più forte crittografia esistente.";
+
+// RECONNECTIONS
+"server.reconnection.please.wait" = "Attendi...";
+"server.reconnection.still.connection" = "Tentativo di riconnessione...";
+
+// INAPP MESSAGES
+"inapp.messages.toggle.title" = "Mostra i messaggi di comunicazione sul servizio";
+"inapp.messages.settings.updated" = "Impostazioni aggiornate";
+
+// PIA WIDGET
+"widget.liveActivity.region.title" = "Area";
+"widget.liveActivity.protocol.title" = "Protocollo";

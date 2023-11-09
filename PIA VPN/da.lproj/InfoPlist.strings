@@ -1,0 +1,4 @@
+/* Localized versions of Info.plist keys */
+
+"NSFaceIDUsageDescription" = "Autentificer for at afsløre";
+"NSCameraUsageDescription" = "Vi har brug for kameraadgang for at lade dig scanne QR-koder for at indløse et gavekort";

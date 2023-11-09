@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "icon-secure-wifi-retain.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
