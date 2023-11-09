@@ -165,22 +165,29 @@
 		692483262AB05F85002A0407 /* PIAConnectionActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483252AB05F85002A0407 /* PIAConnectionActivityWidget.swift */; };
 		695BF81D2AC30EFB00D1139C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E7EC043209326E30029811E /* Localizable.strings */; };
 		695BF81F2AC410E000D1139C /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2215C820084CD700F5FB4D /* SwiftGen+Strings.swift */; };
+		697C59AC2AFD0771008B6212 /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 697C59AB2AFD0770008B6212 /* PIALibrary */; };
+		697C59AE2AFD0786008B6212 /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 697C59AD2AFD0786008B6212 /* PIALibrary */; };
+		697C59B02AFD0791008B6212 /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 697C59AF2AFD0791008B6212 /* PIALibrary */; };
+		697C59B22AFD079B008B6212 /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 697C59B12AFD079B008B6212 /* PIALibrary */; };
 		698F4F2B2AB8A2080010B2B0 /* PIAWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8269A6D5251CB5E0000B4DBF /* PIAWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		698F4F2D2AB978BF0010B2B0 /* PIACircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F4F2C2AB978BF0010B2B0 /* PIACircleImageView.swift */; };
 		698F4F2E2AB97BAD0010B2B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 291C6397183EBC210039EC03 /* Images.xcassets */; };
 		698F4F302ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F4F2F2ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift */; };
 		698F4F312ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F4F2F2ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift */; };
 		698F4F322ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F4F2F2ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift */; };
+		699F23B22AFBA66000EBC5E6 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23AC2AFBA66000EBC5E6 /* SettingsScreen.swift */; };
+		699F23B32AFBA66000EBC5E6 /* HelpSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23AD2AFBA66000EBC5E6 /* HelpSettingsScreen.swift */; };
+		699F23B42AFBA66000EBC5E6 /* AutomationSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23AE2AFBA66000EBC5E6 /* AutomationSettingsScreen.swift */; };
+		699F23B52AFBA66000EBC5E6 /* ProtocolsSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23AF2AFBA66000EBC5E6 /* ProtocolsSettingsScreen.swift */; };
+		699F23B62AFBA66000EBC5E6 /* GeneralSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23B02AFBA66000EBC5E6 /* GeneralSettingsScreen.swift */; };
+		699F23B72AFBA66000EBC5E6 /* PrivacySettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23B12AFBA66000EBC5E6 /* PrivacySettingsScreen.swift */; };
+		699F23B92AFBAC0B00EBC5E6 /* UpdateSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23B82AFBAC0B00EBC5E6 /* UpdateSettingsTests.swift */; };
 		69B70AB52ACBF51C0072A09D /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70AB42ACBF51C0072A09D /* LoginScreen.swift */; };
 		69B70ABC2ACBF8300072A09D /* CredentialsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */; };
 		69B70ABE2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
 		69B70ABF2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
 		69B70AC02ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
 		69C587FD2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C587FC2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift */; };
-		69D57FB82AFA2B8200CEC43E /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 69D57FB72AFA2B8200CEC43E /* PIALibrary */; };
-		69D57FBA2AFA2B9700CEC43E /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 69D57FB92AFA2B9700CEC43E /* PIALibrary */; };
-		69D57FBC2AFA2BA300CEC43E /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 69D57FBB2AFA2BA300CEC43E /* PIALibrary */; };
-		69D57FBE2AFA2BB000CEC43E /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 69D57FBD2AFA2BB000CEC43E /* PIALibrary */; };
 		7ECBB8DD27B6C4F500C0C774 /* UserSurveyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */; };
 		7ECBB8DE27BA5FCE00C0C774 /* UserSurveyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */; };
 		821674F12678A1BE0028E4FD /* SettingsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821674F02678A1BE0028E4FD /* SettingsDelegate.swift */; };
@@ -707,6 +714,13 @@
 		6947AADB2ACDC8AE001BCC66 /* PIA-VPN-e2e-simulator.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PIA-VPN-e2e-simulator.xctestplan"; sourceTree = "<group>"; };
 		698F4F2C2AB978BF0010B2B0 /* PIACircleImageView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIACircleImageView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		698F4F2F2ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionLiveActivityManager.swift; sourceTree = "<group>"; tabWidth = 4; };
+		699F23AC2AFBA66000EBC5E6 /* SettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+		699F23AD2AFBA66000EBC5E6 /* HelpSettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpSettingsScreen.swift; sourceTree = "<group>"; };
+		699F23AE2AFBA66000EBC5E6 /* AutomationSettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutomationSettingsScreen.swift; sourceTree = "<group>"; };
+		699F23AF2AFBA66000EBC5E6 /* ProtocolsSettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtocolsSettingsScreen.swift; sourceTree = "<group>"; };
+		699F23B02AFBA66000EBC5E6 /* GeneralSettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralSettingsScreen.swift; sourceTree = "<group>"; };
+		699F23B12AFBA66000EBC5E6 /* PrivacySettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacySettingsScreen.swift; sourceTree = "<group>"; };
+		699F23B82AFBAC0B00EBC5E6 /* UpdateSettingsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateSettingsTests.swift; sourceTree = "<group>"; };
 		69B70AB02ACBF51C0072A09D /* PIA-VPN_E2E_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA-VPN_E2E_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69B70AB42ACBF51C0072A09D /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityId.swift; sourceTree = "<group>"; };
@@ -861,7 +875,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69D57FBC2AFA2BA300CEC43E /* PIALibrary in Frameworks */,
+				697C59B02AFD0791008B6212 /* PIALibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -881,7 +895,7 @@
 				0EE2205C1F4EF307002805AE /* CoreGraphics.framework in Frameworks */,
 				AABF826F28AD187800CDAC64 /* Popover in Frameworks */,
 				0EE2205F1F4EF307002805AE /* StoreKit.framework in Frameworks */,
-				69D57FBA2AFA2B9700CEC43E /* PIALibrary in Frameworks */,
+				697C59AE2AFD0786008B6212 /* PIALibrary in Frameworks */,
 				0EE2205D1F4EF307002805AE /* UIKit.framework in Frameworks */,
 				0EE2205E1F4EF307002805AE /* Foundation.framework in Frameworks */,
 				AABF826D28AD185E00CDAC64 /* TweetNacl in Frameworks */,
@@ -919,7 +933,7 @@
 				2985E5671856BD1200D70E28 /* QuartzCore.framework in Frameworks */,
 				291C6382183EBC210039EC03 /* CoreGraphics.framework in Frameworks */,
 				291C6384183EBC210039EC03 /* UIKit.framework in Frameworks */,
-				69D57FB82AFA2B8200CEC43E /* PIALibrary in Frameworks */,
+				697C59AC2AFD0771008B6212 /* PIALibrary in Frameworks */,
 				DD606ABA21C7A17900E0781D /* NetworkExtension.framework in Frameworks */,
 				AA36CDC928A6733500180A33 /* DZNEmptyDataSet in Frameworks */,
 				291C6380183EBC210039EC03 /* Foundation.framework in Frameworks */,
@@ -949,7 +963,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69D57FBE2AFA2BB000CEC43E /* PIALibrary in Frameworks */,
+				697C59B22AFD079B008B6212 /* PIALibrary in Frameworks */,
 				AA36CDDB28A6860F00180A33 /* TweetNacl in Frameworks */,
 				DDC8F5F923EC10E4005D19C6 /* NetworkExtension.framework in Frameworks */,
 			);
@@ -1283,6 +1297,7 @@
 		35EDD6262ADE5D1E007B9ACB /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				699F23B82AFBAC0B00EBC5E6 /* UpdateSettingsTests.swift */,
 				69C587FC2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift */,
 				35EDD6292ADE5F08007B9ACB /* SignInTests.swift */,
 				35EDD6322ADE7281007B9ACB /* OnboardingTests.swift */,
@@ -1293,6 +1308,7 @@
 		35EDD62B2ADE62FE007B9ACB /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				699F23AB2AFBA66000EBC5E6 /* Settings */,
 				69B70AB42ACBF51C0072A09D /* LoginScreen.swift */,
 				35EDD6342ADE7424007B9ACB /* VPNPermissionScreen.swift */,
 				35EDD6362ADE761A007B9ACB /* HomeScreen.swift */,
@@ -1317,6 +1333,19 @@
 				35EDD6272ADE5D31007B9ACB /* BaseTest.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		699F23AB2AFBA66000EBC5E6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				699F23AC2AFBA66000EBC5E6 /* SettingsScreen.swift */,
+				699F23AD2AFBA66000EBC5E6 /* HelpSettingsScreen.swift */,
+				699F23AE2AFBA66000EBC5E6 /* AutomationSettingsScreen.swift */,
+				699F23AF2AFBA66000EBC5E6 /* ProtocolsSettingsScreen.swift */,
+				699F23B02AFBA66000EBC5E6 /* GeneralSettingsScreen.swift */,
+				699F23B12AFBA66000EBC5E6 /* PrivacySettingsScreen.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		69B70AB12ACBF51C0072A09D /* PIA-VPN_E2E_Tests */ = {
@@ -1656,7 +1685,7 @@
 			);
 			name = "PIA VPN Tunnel";
 			packageProductDependencies = (
-				69D57FBB2AFA2BA300CEC43E /* PIALibrary */,
+				697C59AF2AFD0791008B6212 /* PIALibrary */,
 			);
 			productName = "PIA OpenVPN";
 			productReference = 0E67FC221E3F802D00EF9929 /* PIA VPN Tunnel.appex */;
@@ -1690,7 +1719,7 @@
 				AABF827228AE2FF500CDAC64 /* GradientProgressBar */,
 				AABF827428AE2FFE00CDAC64 /* SideMenu */,
 				AABF827728AE333200CDAC64 /* DZNEmptyDataSet */,
-				69D57FB92AFA2B9700CEC43E /* PIALibrary */,
+				697C59AD2AFD0786008B6212 /* PIALibrary */,
 			);
 			productName = "PIA VPN";
 			productReference = 0EE2207A1F4EF307002805AE /* PIA VPN dev.app */;
@@ -1758,7 +1787,7 @@
 				AA36CDCB28A673C900180A33 /* GradientProgressBar */,
 				AA36CDCE28A6746500180A33 /* SideMenu */,
 				AA36CDDD28A6878000180A33 /* AlamofireImage */,
-				69D57FB72AFA2B8200CEC43E /* PIALibrary */,
+				697C59AB2AFD0770008B6212 /* PIALibrary */,
 			);
 			productName = "PIA VPN";
 			productReference = 291C637C183EBC210039EC03 /* PIA VPN.app */;
@@ -1818,7 +1847,7 @@
 			name = "PIA VPN WG Tunnel";
 			packageProductDependencies = (
 				AA36CDDA28A6860F00180A33 /* TweetNacl */,
-				69D57FBD2AFA2BB000CEC43E /* PIALibrary */,
+				697C59B12AFD079B008B6212 /* PIALibrary */,
 			);
 			productName = "PIA VPN WG Tunnel";
 			productReference = DDC8F5EC23EC106F005D19C6 /* PIA VPN WG Tunnel.appex */;
@@ -1952,7 +1981,7 @@
 				AA36CDDC28A6878000180A33 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				35950B2F2ADD2877006F3CD9 /* XCRemoteSwiftPackageReference "Quick" */,
 				35950B322ADD2EE5006F3CD9 /* XCRemoteSwiftPackageReference "Nimble" */,
-				69D57FB62AFA2B8200CEC43E /* XCRemoteSwiftPackageReference "mobile-ios-library" */,
+				697C59AA2AFD0770008B6212 /* XCRemoteSwiftPackageReference "mobile-ios-library" */,
 			);
 			productRefGroup = 291C637D183EBC210039EC03 /* Products */;
 			projectDirPath = "";
@@ -2472,15 +2501,22 @@
 				35EDD63E2AE76A3B007B9ACB /* WaitHelper.swift in Sources */,
 				35EDD6282ADE5D31007B9ACB /* BaseTest.swift in Sources */,
 				35EDD6352ADE7424007B9ACB /* VPNPermissionScreen.swift in Sources */,
+				699F23B32AFBA66000EBC5E6 /* HelpSettingsScreen.swift in Sources */,
 				69B70ABC2ACBF8300072A09D /* CredentialsUtil.swift in Sources */,
 				35EDD6372ADE761A007B9ACB /* HomeScreen.swift in Sources */,
 				35EDD63B2AE62D15007B9ACB /* ElementHelper.swift in Sources */,
 				69C587FD2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift in Sources */,
+				699F23B22AFBA66000EBC5E6 /* SettingsScreen.swift in Sources */,
 				35EDD6422AE7A83D007B9ACB /* WelcomeScreen.swift in Sources */,
+				699F23B92AFBAC0B00EBC5E6 /* UpdateSettingsTests.swift in Sources */,
+				699F23B42AFBA66000EBC5E6 /* AutomationSettingsScreen.swift in Sources */,
 				35EDD62A2ADE5F08007B9ACB /* SignInTests.swift in Sources */,
 				69B70AB52ACBF51C0072A09D /* LoginScreen.swift in Sources */,
 				35EDD6332ADE7281007B9ACB /* OnboardingTests.swift in Sources */,
+				699F23B52AFBA66000EBC5E6 /* ProtocolsSettingsScreen.swift in Sources */,
 				69B70AC02ACC2CFE0072A09D /* AccessibilityId.swift in Sources */,
+				699F23B62AFBA66000EBC5E6 /* GeneralSettingsScreen.swift in Sources */,
+				699F23B72AFBA66000EBC5E6 /* PrivacySettingsScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3460,7 +3496,7 @@
 				version = 13.0.0;
 			};
 		};
-		69D57FB62AFA2B8200CEC43E /* XCRemoteSwiftPackageReference "mobile-ios-library" */ = {
+		697C59AA2AFD0770008B6212 /* XCRemoteSwiftPackageReference "mobile-ios-library" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:pia-foss/mobile-ios-library.git";
 			requirement = {
@@ -3529,24 +3565,24 @@
 			package = 35950B322ADD2EE5006F3CD9 /* XCRemoteSwiftPackageReference "Nimble" */;
 			productName = Nimble;
 		};
-		69D57FB72AFA2B8200CEC43E /* PIALibrary */ = {
+		697C59AB2AFD0770008B6212 /* PIALibrary */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 69D57FB62AFA2B8200CEC43E /* XCRemoteSwiftPackageReference "mobile-ios-library" */;
+			package = 697C59AA2AFD0770008B6212 /* XCRemoteSwiftPackageReference "mobile-ios-library" */;
 			productName = PIALibrary;
 		};
-		69D57FB92AFA2B9700CEC43E /* PIALibrary */ = {
+		697C59AD2AFD0786008B6212 /* PIALibrary */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 69D57FB62AFA2B8200CEC43E /* XCRemoteSwiftPackageReference "mobile-ios-library" */;
+			package = 697C59AA2AFD0770008B6212 /* XCRemoteSwiftPackageReference "mobile-ios-library" */;
 			productName = PIALibrary;
 		};
-		69D57FBB2AFA2BA300CEC43E /* PIALibrary */ = {
+		697C59AF2AFD0791008B6212 /* PIALibrary */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 69D57FB62AFA2B8200CEC43E /* XCRemoteSwiftPackageReference "mobile-ios-library" */;
+			package = 697C59AA2AFD0770008B6212 /* XCRemoteSwiftPackageReference "mobile-ios-library" */;
 			productName = PIALibrary;
 		};
-		69D57FBD2AFA2BB000CEC43E /* PIALibrary */ = {
+		697C59B12AFD079B008B6212 /* PIALibrary */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 69D57FB62AFA2B8200CEC43E /* XCRemoteSwiftPackageReference "mobile-ios-library" */;
+			package = 697C59AA2AFD0770008B6212 /* XCRemoteSwiftPackageReference "mobile-ios-library" */;
 			productName = PIALibrary;
 		};
 		AA36CDBA28A6622A00180A33 /* TweetNacl */ = {

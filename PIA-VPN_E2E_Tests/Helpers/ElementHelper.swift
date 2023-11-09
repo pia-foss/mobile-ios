@@ -12,7 +12,7 @@ extension XCUIApplication {
     var defaultTimeout: TimeInterval { 10.0 }
     var shortTimeout: TimeInterval { 5.0 }
     
-    func navigationbar(with id: String) -> XCUIElement{
+    func navigationbar(with id: String) -> XCUIElement {
         return navigationBars[id]
     }
     
@@ -50,6 +50,10 @@ extension XCUIApplication {
     
     func image(with id: String) -> XCUIElement {
         return images[id]
+    }
+    
+    func switches(with id: String) -> XCUIElement {
+        return switches[id]
     }
 }
 
