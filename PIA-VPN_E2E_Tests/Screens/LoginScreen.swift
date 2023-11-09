@@ -18,12 +18,13 @@ extension XCUIApplication {
         otherElement(with: PIALibraryAccessibility.Id.Login.Error.banner)
     }
     
-    func fillLoginScreen(with credentials: Credentials) {
+    func logIn(with credentials: Credentials) {
         loginUsernameTextField.waitForExistence(timeout: defaultTimeout) && loginPasswordTextField.waitForExistence(timeout: defaultTimeout)
         loginUsernameTextField.tap()
         loginUsernameTextField.typeText(credentials.username)
         loginPasswordTextField.tap()
         loginPasswordTextField.typeText(credentials.password)
+        loginButton.tap()
     }
     
     /// This method authenticates the user and installs the VPN profile
@@ -41,8 +42,7 @@ extension XCUIApplication {
         logOut()
         
         navigateToLoginScreen()
-        fillLoginScreen(with: CredentialsUtil.credentials(type: .valid))
-        loginButton.tap()
+        logIn(with: CredentialsUtil.credentials(type: .valid))
         
         guard vpnPermissionScreen.waitForExistence(timeout: defaultTimeout) else { return }
         guard vpnPermissionButton.exists else { return }
