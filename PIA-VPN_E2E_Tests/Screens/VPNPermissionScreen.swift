@@ -8,21 +8,27 @@
 
 import XCTest
 
-extension XCUIApplication{
+extension XCUIApplication {
     
     var vpnPermissionScreen: XCUIElement {
         otherElement(with: AccessibilityId.VPNPermission.screen)
     }
     
-    var vpnPermissionButton: XCUIElement{
+    var vpnPermissionButton: XCUIElement {
         button(with: AccessibilityId.VPNPermission.submit)
     }
     
-    var vpnPermissionAlertText: XCUIElement{
+    var vpnPermissionAlertText: XCUIElement {
         alert(with: "PIA VPN dev” Would Like to Add VPN Configurations")
     }
     
-    var vpnAllowButton: XCUIElement{
+    var vpnAllowButton: XCUIElement {
         button(with: "Allow").firstMatch
+    }
+    
+    func acceptVPNPermission() {
+        vpnPermissionScreen.waitForExistence(timeout:defaultTimeout)
+        vpnPermissionButton.waitForExistence(timeout:defaultTimeout)
+        vpnPermissionButton.tap()
     }
 }
