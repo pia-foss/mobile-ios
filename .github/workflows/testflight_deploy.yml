@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   build:
-    runs-on: macos-13
+    runs-on: macos-latest
     env:
       CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
       KEYCHAIN_NAME: ${{ secrets.KEYCHAIN_NAME }}
@@ -25,9 +25,6 @@ jobs:
         git config --global url."https://${{ secrets.ORG_GITHUB_USERNAME }}:${{ secrets.ORG_GITHUB_TOKEN }}@github.com/".insteadOf "git@github.com:"
 
     - uses: actions/checkout@v3
-    
-    - name: Select XCode version
-      run: sudo xcode-select -s /Applications/Xcode_15.0.app
     
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1

@@ -8,7 +8,7 @@
 
 import XCTest
 
-enum ElementError: Error, CustomStringConvertible{
+enum ElementError: Error, CustomStringConvertible {
     case visibilityTimeout
     case invisibilityTimeout
     
@@ -34,7 +34,7 @@ class WaitHelper{
             onSuccess()
         }
         
-        else{
+        else {
             onFailure(.visibilityTimeout)
         }
     }
@@ -48,7 +48,7 @@ class WaitHelper{
             onSuccess()
         }
         
-        else{
+        else {
             onFailure(.invisibilityTimeout)
         }
     }

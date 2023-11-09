@@ -8,7 +8,7 @@
 
 import XCTest
 
-extension XCUIApplication{
+extension XCUIApplication {
     /// Sometimes a system alert to request permissions about Notifications or VPN profile installation can appear
     /// at any time when the app is running
     /// This makes not possible to contitnue with the test unless the alert is dismissed
