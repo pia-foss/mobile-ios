@@ -1,4 +1,4 @@
-name: pia_vpn_ios
+name: build_and_test
 on:
   pull_request:
   workflow_dispatch:
@@ -29,12 +29,6 @@ jobs:
 
     - name: Install Fastlane
       run: gem install fastlane
-    
-    - name: Set credentials in fastlane env
-      run: echo "TEST_RUNNER_PIA_TEST_USER=${{ secrets.PIA_ACCOUNT_USERNAME}}"\n"TEST_RUNNER_PIA_TEST_PASSWORD=${{ secrets.PIA_ACCOUNT_PASSWORD }}" > fastlane/.env
-    
-    - name: Check fastlane env
-      run: cat fastlane/.env
 
     - name: Run unit tests
       run: bundle exec fastlane tests

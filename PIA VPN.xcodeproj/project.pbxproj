@@ -497,12 +497,12 @@
 			remoteGlobalIDString = 0EFB606F203D7A2C0095398C;
 			remoteInfo = "PIA VPN AdBlocker";
 		};
-		69B70AB62ACBF51C0072A09D /* PBXContainerItemProxy */ = {
+		69CB24A22B051CED00D83A52 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 291C6374183EBC210039EC03 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 0EE2200B1F4EF307002805AE;
-			remoteInfo = "PIA VPN dev";
+			remoteGlobalIDString = 291C637B183EBC210039EC03;
+			remoteInfo = "PIA VPN";
 		};
 		8269A6E1251CB5E3000B4DBF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1804,7 +1804,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				69B70AB72ACBF51C0072A09D /* PBXTargetDependency */,
+				69CB24A32B051CED00D83A52 /* PBXTargetDependency */,
 			);
 			name = "PIA-VPN_E2E_Tests";
 			packageProductDependencies = (
@@ -1932,7 +1932,7 @@
 					};
 					69B70AAF2ACBF51C0072A09D = {
 						CreatedOnToolsVersion = 14.3.1;
-						TestTargetID = 0EE2200B1F4EF307002805AE;
+						TestTargetID = 291C637B183EBC210039EC03;
 					};
 					8269A6D4251CB5E0000B4DBF = {
 						CreatedOnToolsVersion = 12.0;
@@ -2588,10 +2588,10 @@
 			target = 0EFB606F203D7A2C0095398C /* PIA VPN AdBlocker */;
 			targetProxy = 0EFB607E203D893E0095398C /* PBXContainerItemProxy */;
 		};
-		69B70AB72ACBF51C0072A09D /* PBXTargetDependency */ = {
+		69CB24A32B051CED00D83A52 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0EE2200B1F4EF307002805AE /* PIA VPN dev */;
-			targetProxy = 69B70AB62ACBF51C0072A09D /* PBXContainerItemProxy */;
+			target = 291C637B183EBC210039EC03 /* PIA VPN */;
+			targetProxy = 69CB24A22B051CED00D83A52 /* PBXContainerItemProxy */;
 		};
 		8269A6E2251CB5E3000B4DBF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3197,7 +3197,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "PIA VPN dev";
+				TEST_TARGET_NAME = "PIA VPN";
 			};
 			name = Debug;
 		};
@@ -3229,7 +3229,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "PIA VPN dev";
+				TEST_TARGET_NAME = "PIA VPN";
 			};
 			name = Release;
 		};

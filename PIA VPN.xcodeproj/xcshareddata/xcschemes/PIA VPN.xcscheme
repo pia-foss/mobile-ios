@@ -49,16 +49,16 @@
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
-            buildForTesting = "NO"
+            buildForTesting = "YES"
             buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7EB8D11227CCF4C20030B060"
-               BuildableName = "PIA VPN UITests.xctest"
-               BlueprintName = "PIA VPN UITests"
+               BlueprintIdentifier = "69B70AAF2ACBF51C0072A09D"
+               BuildableName = "PIA-VPN_E2E_Tests.xctest"
+               BlueprintName = "PIA-VPN_E2E_Tests"
                ReferencedContainer = "container:PIA VPN.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
