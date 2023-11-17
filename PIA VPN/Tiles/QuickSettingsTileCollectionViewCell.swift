@@ -46,6 +46,7 @@ class QuickSettingsTileCollectionViewCell: UICollectionViewCell, TileableCell {
     }
 
     func setupCellForStatus(_ status: TileStatus) {
+        self.accessibilityIdentifier = "QuickSettingsTileCollectionViewCell"
         Theme.current.applyPrincipalBackground(self)
         Theme.current.applyPrincipalBackground(self.contentView)
         self.accessoryImageRight.image = Theme.current.dragDropImage()

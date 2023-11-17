@@ -9,19 +9,32 @@
 import Quick
 import Nimble
 import XCTest
+import Foundation
 
 class BaseTest: QuickSpec {
     static var app: XCUIApplication!
     
     override class func spec() {
-        beforeEach {
+        beforeSuite {
             app = XCUIApplication()
             app.launch()
-            app.logOut()
-            app.navigateToLoginScreen()
+            if(!app.connectionButton.waitForExistence(timeout: app.defaultTimeout)) {
+                app.navigateToLoginScreen()
+                app.logIn(with: CredentialsUtil.credentials(type: .valid))
+                app.acceptVPNPermission()
+            }
+        }
+        
+        beforeEach {
+            app.launch()
+            
         }
         
         afterEach {
+            app.terminate()
+        }
+        
+        afterSuite {
             app.terminate()
         }
     }

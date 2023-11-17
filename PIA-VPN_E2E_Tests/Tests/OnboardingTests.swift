@@ -15,6 +15,9 @@ class OnboardingTests:BaseTest {
         describe("onboarding vpn permission tests") {
             context("vpn profile installation permission") {
                 it("should display the home screen after allowing vpn profile installation"){
+                    app.logOut()
+                    app.navigateToLoginScreen()
+                    
                     app.logIn(with: CredentialsUtil.credentials(type: .valid))
                     app.acceptVPNPermission()
                     
@@ -22,7 +25,7 @@ class OnboardingTests:BaseTest {
                     app.vpnAllowButton.waitForExistence(timeout: app.defaultTimeout)
                     app.swipeUp()
                     
-                    expect(app.dashboardMenuButton.waitForExistence(timeout: app.defaultTimeout))
+                    expect(app.dashboardMenuButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     expect(app.vpnPermissionScreen.exists).to(beFalse())
                 }
             }
