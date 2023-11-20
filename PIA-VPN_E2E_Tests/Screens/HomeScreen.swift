@@ -21,18 +21,29 @@ extension XCUIApplication {
         button(with: PIALibraryAccessibility.Id.Dialog.destructive)
     }
     
-    var logOutButton: XCUIElement {
-        staticText(with: "Log out")
+    var quickSettingsButton: XCUIElement {
+        cell(with: "QuickSettingsTileCollectionViewCell")
     }
     
-    var settingsButton: XCUIElement {
-        staticText(with: "Settings")
+    var privateBrowserButton: XCUIElement {
+        button(with: "Private Browser")
     }
     
-    var settingsBackButton: XCUIElement {
-        button(with: "Settings")
+    var enableNetworkManagementButton: XCUIElement {
+        button(with: "Enable Network Management")
     }
     
+    var disableNetworkManagementButton: XCUIElement {
+        button(with: "Disable Network Management")
+    }
+    
+    var enableVPNKillSwitchButton: XCUIElement {
+        button(with: "Enable VPN Kill Switch")
+    }
+    
+    var disableVPNKillSwitchButton: XCUIElement {
+        button(with: "Disable VPN Kill Switch")
+    }
     
     func logOut() {
         guard dashboardMenuButton.exists else { return }
@@ -56,10 +67,43 @@ extension XCUIApplication {
         }
     }
     
-    func navigateToHomeScreenFromSettings() {
+    func navigateToHomeFromSettings() {
         if settingsBackButton.waitForExistence(timeout: defaultTimeout) {
             settingsBackButton.tap()
+            navigateToHome()
         }
+    }
+    
+    func navigateToQuickSettings() {
+        quickSettingsButton.staticTexts["QUICK SETTINGS"].tap()
+    }
+    
+    func navigateToHome() {
         closeButton.tap()
+        dashboardMenuButton.waitForExistence(timeout: defaultTimeout)
+    }
+    
+    func enableVPNKillSwitchOnHome() {
+        if(enableVPNKillSwitchButton.exists) {
+            enableVPNKillSwitchButton.tap()
+        }
+    }
+    
+    func disableVPNKillSwitchOnHome() {
+        if(disableVPNKillSwitchButton.exists) {
+            disableVPNKillSwitchButton.tap()
+        }
+    }
+    
+    func enableNetworkManagementOnHome() {
+        if(enableNetworkManagementButton.exists) {
+            enableNetworkManagementButton.tap()
+        }
+    }
+    
+    func disableNetworkManagementOnHome() {
+        if(disableNetworkManagementButton.exists) {
+            disableNetworkManagementButton.tap()
+        }
     }
 }

@@ -10,17 +10,15 @@ import Nimble
 
 class UpdateSettingsTests : BaseTest {
     override class func spec() {
-        var geoLocatedRegionDefaultValue = "1"
-        var vpnKillSwitchDefaultValue = "1"
-        var automationDefaultValue = "0"
+        let geoLocatedRegionDefaultValue = "1"
+        let vpnKillSwitchDefaultValue = "1"
+        let automationDefaultValue = "0"
         
         super.spec()
         
         describe("settings return to default value after logging out") {
             context("updated settings for each category") {
                 it("should revert changes made on general settings to default after logging out and logging back in") {
-                    app.logIn(with: CredentialsUtil.credentials(type: .valid))
-                    app.acceptVPNPermission()
                     app.navigateToGeneralSettings()
                     app.geoLocatedRegionsSwitch.tap()
                     
@@ -28,7 +26,7 @@ class UpdateSettingsTests : BaseTest {
                     // TODO: Enable this check when we disable the animations on E2E tests
                     // expect((app.geoLocatedRegionsSwitch.value as! String)) != geoLocatedRegionDefaultValue
                     
-                    app.navigateToHomeScreenFromSettings()
+                    app.navigateToHomeFromSettings()
                     app.logOut()
                     app.navigateToLoginScreen()
                     app.logIn(with: CredentialsUtil.credentials(type: .valid))
@@ -38,13 +36,11 @@ class UpdateSettingsTests : BaseTest {
                 }
                 
                 it("should revert changes made on protocol settings to default after logging out and logging back in") {
-                    app.logIn(with: CredentialsUtil.credentials(type: .valid))
-                    app.acceptVPNPermission()
                     app.navigateToProtocolSettings()
                     app.protocolSelectionButton.tap()
                     app.openVPN.tap()
                     expect(app.openVPN.exists).to(beTrue())
-                    app.navigateToHomeScreenFromSettings()
+                    app.navigateToHomeFromSettings()
                     app.logOut()
                     app.navigateToLoginScreen()
                     app.logIn(with: CredentialsUtil.credentials(type: .valid))
@@ -54,12 +50,10 @@ class UpdateSettingsTests : BaseTest {
                 }
                 
                 it("should revert changes made on privacy features settings to default after logging out and logging back in") {
-                    app.logIn(with: CredentialsUtil.credentials(type: .valid))
-                    app.acceptVPNPermission()
                     app.navigateToPrivacySettings()
                     app.vpnKillSwitch.tap()
                     expect((app.vpnKillSwitch.value as! String)) != vpnKillSwitchDefaultValue
-                    app.navigateToHomeScreenFromSettings()
+                    app.navigateToHomeFromSettings()
                     app.logOut()
                     app.navigateToLoginScreen()
                     app.logIn(with: CredentialsUtil.credentials(type: .valid))
@@ -69,8 +63,6 @@ class UpdateSettingsTests : BaseTest {
                 }
                 
                 it("should revert changes made on automation settings to default after logging out and logging back in") {
-                    app.logIn(with: CredentialsUtil.credentials(type: .valid))
-                    app.acceptVPNPermission()
                     app.navigateToAutomationSettings()
                     app.enableAutomationSwitch.tap()
                     
@@ -78,7 +70,7 @@ class UpdateSettingsTests : BaseTest {
                       // TODO: Enable this check when we disable the animations on E2E tests
                     // expect((app.enableAutomationSwitch.value as! String)) != automationDefaultValue
                     
-                    app.navigateToHomeScreenFromSettings()
+                    app.navigateToHomeFromSettings()
                     app.logOut()
                     app.navigateToLoginScreen()
                     app.logIn(with: CredentialsUtil.credentials(type: .valid))

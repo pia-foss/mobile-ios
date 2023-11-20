@@ -36,4 +36,8 @@ extension XCUIApplication {
     var closeButton: XCUIElement {
         button(with: "Close")
     }
+    
+    var settingsBackButton: XCUIElement {
+        button(with: "Settings")
+    }
 }
