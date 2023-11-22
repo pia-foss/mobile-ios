@@ -41,11 +41,11 @@ struct CardFactory {
     
     private static let availableCards = [
         Card("3.7.1",
-             L10n.Card.Wireguard.title,
-             L10n.Card.Wireguard.description,
+             L10n.Localizable.Card.Wireguard.title,
+             L10n.Localizable.Card.Wireguard.description,
              "wg-background-",
              "wg-main",
-             L10n.Card.Wireguard.Cta.activate,
+             L10n.Localizable.Card.Wireguard.Cta.activate,
              URL(string: "https://www.privateinternetaccess.com/blog/wireguide-all-about-the-wireguard-vpn-protocol/"), {
                 
                 guard let rootView = AppDelegate.delegate().topViewControllerWithRootViewController(rootViewController: UIApplication.shared.keyWindow?.rootViewController) else {

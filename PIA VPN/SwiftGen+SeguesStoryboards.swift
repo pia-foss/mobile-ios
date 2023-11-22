@@ -3,6 +3,7 @@
 
 // swiftlint:disable sorted_imports
 import Foundation
+import PIALibrary
 import SideMenu
 import UIKit
 
@@ -38,6 +39,25 @@ internal enum StoryboardSegue {
     case showQuickSettingsViewController = "ShowQuickSettingsViewController"
     case trustedNetworksSegueIdentifier = "TrustedNetworksSegueIdentifier"
     case unwindContentBlockerSegueIdentifier = "UnwindContentBlockerSegueIdentifier"
+  }
+  internal enum Signup: String, SegueType {
+    case failureSegueIdentifier = "FailureSegueIdentifier"
+    case internetUnreachableSegueIdentifier = "InternetUnreachableSegueIdentifier"
+    case presentGDPRTermsSegue = "PresentGDPRTermsSegue"
+    case successSegueIdentifier = "SuccessSegueIdentifier"
+    case successShowCredentialsSegueIdentifier = "SuccessShowCredentialsSegueIdentifier"
+    case unwindFailureSegueIdentifier = "UnwindFailureSegueIdentifier"
+    case unwindInternetUnreachableSegueIdentifier = "UnwindInternetUnreachableSegueIdentifier"
+  }
+  internal enum Welcome: String, SegueType {
+    case expiredAccountPurchaseSegue = "ExpiredAccountPurchaseSegue"
+    case loginAccountSegue = "LoginAccountSegue"
+    case purchaseVPNPlanSegue = "PurchaseVPNPlanSegue"
+    case restoreLoginPurchaseSegue = "RestoreLoginPurchaseSegue"
+    case restorePurchaseSegue = "RestorePurchaseSegue"
+    case signupViaPurchaseSegue = "SignupViaPurchaseSegue"
+    case signupViaRecoverSegue = "SignupViaRecoverSegue"
+    case signupViaRestoreSegue = "SignupViaRestoreSegue"
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

@@ -1,0 +1,88 @@
+/* 
+  Welcome.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
+"login.title" = "Entre na sua conta";
+"login.username.placeholder" = "Nome de usuário (p1234567)";
+"login.password.placeholder" = "Senha";
+"login.submit" = "ENTRAR";
+"login.restore.button" = "Não recebeu detalhes da conta?";
+"login.error.title" = "Entrar";
+"login.error.validation" = "Você deve inserir um nome de usuário e senha.";
+"login.error.unauthorized" = "Seu nome de usuário ou senha está incorreto.";
+"login.error.throttled" = "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"login.receipt.button" = "Faça login usando o recibo de compra";
+"login.magic.link.title" = "Faça login usando o link mágico enviado por e-mail";
+"login.magic.link.response" = "Veja se você recebeu por e-mail um link para fazer login.";
+"login.magic.link.send" = "Enviar link";
+"login.magic.link.invalid.email" = "E-mail inválido. Tente novamente.";
+
+"purchase.title" = "Selecione um plano de VPN";
+"purchase.subtitle" = "Garantia do dinheiro de volta em até 30 dias";
+"purchase.email.placeholder" = "Endereço de e-mail";
+"purchase.continue" = "Continuar";
+"purchase.login.footer" = "Já tem uma conta?";
+"purchase.login.button" = "Faça login";
+"purchase.error.title" = "Comprar";
+"purchase.error.validation" = "Você precisa inserir um endereço de e-mail.";
+"purchase.error.connectivity.title" = "Falha na conexão";
+"purchase.error.connectivity.description" = "Não conseguimos acessar o Private Internet Access. Isso pode ser devido a uma conexão de internet fraca ou o nosso serviço está bloqueado em seu país.";
+"purchase.confirm.form.email" = "Insira seu endereço de e-mail";
+"purchase.confirm.plan" = "Você está adquirindo o plano %@";
+"purchase.email.why" = "Precisamos do seu e-mail para enviarmos seu nome de usuário e senha.";
+"purchase.submit" = "Enviar";
+"purchase.or" = "ou";
+
+"upgrade.header" = "Seja bem-vindo(a)!";
+"upgrade.title" = "Para usar a Private Internet Access, você precisará renovar sua assinatura.";
+"upgrade.renew.now" = "Renovar agora";
+
+
+
+"redeem.title" = "Resgatar cartão-presente";
+"redeem.subtitle" = "Digite o seu endereço de e-mail e o PIN de %lu dígitos do seu cartão-presente ou cartão de teste abaixo.";
+"redeem.email.placeholder" = "Endereço de e-mail";
+"redeem.submit" = "ENVIAR";
+"redeem.error.title" = "Resgatar";
+"redeem.error.code" = "O código precisa ter %lu dígitos numéricos.";
+"redeem.error.allfields" = "Digite o seu e-mail e PIN do cartão.";
+"redeem.accessibility.back" = "Voltar";
+"redeem.giftcard.placeholder" = "PIN do cartão-presente";
+
+"plan.monthly.title" = "Mensal";
+"plan.yearly.title" = "Anual";
+"plan.yearly.detail_format" = "%@%@ por ano";
+"plan.price_format" = "%@/mês";
+"plan.best_value" = "Melhor valor";
+"plan.accessibility.per_month" = "por mês";
+
+"restore.title" = "Restaurar compra não creditada";
+"restore.subtitle" = "Se você adquiriu um plano por este aplicativo e não recebeu as suas credenciais, você pode enviá-las novamente por aqui. Você não será cobrado durante esse processo.";
+"restore.email.placeholder" = "Endereço de e-mail";
+"restore.submit" = "CONFIRMAR";
+
+"iap.error.message.unavailable" = "Servidores da Apple indisponíveis no momento. Tente novamente mais tarde.";
+"iap.error.title" = "Erro";
+
+"agreement.trials.title" = "Termos e condições das avaliações gratuitas";
+"agreement.trials.message" = "O pagamento será cobrado na sua conta do ID Apple no ato da confirmação da compra. A assinatura será renovada automaticamente, a não ser que ela seja cancelada, pelo menos, 24 horas antes do fim do período atual. O valor da renovação será debitado na sua conta em até 24 horas antes do término do período da atual. Você pode gerenciar e cancelar suas assinaturas nos ajustes da conta na App Store após a compra.\n\nCertas assinaturas pagas podem oferecer uma avaliação gratuita antes da cobrança do pagamento. Se você decidir cancelar uma Assinatura Paga antes de começarmos a cobrar por ela, cancele-a, pelo menos, 24 horas antes do término da avaliação gratuita.\n\nAs avaliações gratuitas estão disponíveis apenas para novos usuários, e são a nosso critério. Se tentar se registrar para uma avaliação gratuita adicional, você será cobrado imediatamente com a Taxa de Assinatura padrão.\n\nReservamo-nos o direito de revogar sua avaliação gratuita a qualquer momento.\n\nQualquer parte não utilizada do período da sua avaliação gratuita será perdida após a compra de uma assinatura.\n\nO registro constitui da aceitação dos termos e condições.";
+"agreement.message" = "Após os 7 dias da avaliação gratuita, a assinatura será renovada automaticamente por %@, a não ser que ela seja cancelada, pelo menos, 24 horas antes do término do período de avaliação. O valor da renovação será debitado da conta do seu ID Apple em até 24 horas antes do término do período de avaliação. Você pode gerenciar e cancelar suas assinaturas nos ajustes da conta da App Store após a compra. A oferta de avaliação de 7 dias é limitada a uma oferta de avaliação de 7 dias por usuário. Qualquer parte não utilizada do período de avaliação gratuita, se oferecida, será perdida após a aquisição de uma assinatura. Todos os preços incluem impostos de vendas locais aplicáveis.\n\nO registro constitui da aceitação dos $1 e da $2.";
+"agreement.trials.yearly.plan" = "ano";
+"agreement.trials.monthly.plan" = "mês";
+
+"agreement.message.tos" = "Termos de Serviço";
+"agreement.message.privacy" = "Política de Privacidade";
+
+"getstarted.buttons.buyaccount" = "Comprar conta";
+
+"gdpr.collect.data.title" = "Informações pessoais que coletamos";
+"gdpr.collect.data.description" = "Endereço de e-mail para gerenciamento de conta e proteção contra abuso.";
+"gdpr.usage.data.title" = "Uso de informações pessoais coletadas por nós";
+"gdpr.usage.data.description" = "O endereço de e-mail é utilizado apenas para enviar informação de assinatura, confirmações de pagamento, correspondência com clientes e ofertas promocionais do Private Internet Access.";
+"gdpr.accept.button.title" = "Concordar e continuar";
+
+"update.account.email.error" = "Falha ao modificar o e-mail da conta";

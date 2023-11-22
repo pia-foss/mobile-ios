@@ -1,0 +1,92 @@
+/* 
+  Signup.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
+"in_progress.title" = "Confirm sign-up";
+"in_progress.message" = "We're confirming your purchase with our system. It could take a moment so hang in there.";
+"in_progress.redeem.message" = "We're confirming your card PIN with our system. It could take a moment so hang in there.";
+
+"success.title" = "Purchase complete";
+"success.message_format" = "Thank you for signing up with us. We have sent your account username and password at your email address at %@";
+"success.redeem.title" = "Card redeemed successfully";
+"success.redeem.message" = "You will receive an email shortly with your username and password.\n\nYour login details";
+"success.username.caption" = "Username";
+"success.password.caption" = "Password";
+"success.submit" = "GET STARTED";
+
+"failure.vc_title" = "Sign-up failed";
+"failure.title" = "Account creation failed";
+"failure.message" = "We're unable to create an account at this time. Please try again later. Reopening the app will re-attempt to create an account.";
+"failure.purchase.sandbox.message" = "The selected sandbox subscription is not available in production.";
+"failure.redeem.invalid.title" = "Invalid card PIN";
+"failure.redeem.invalid.message" = "Looks like you entered an invalid card PIN. Please try again.";
+"failure.redeem.claimed.title" = "Card claimed already";
+"failure.redeem.claimed.message" = "Looks like this card has already been claimed by another account. You can try entering a different PIN.";
+"failure.submit" = "GO BACK";
+
+"unreachable.vc_title" = "Error";
+"unreachable.title" = "Whoops!";
+"unreachable.message" = "No internet connection found. Please confirm that you have an internet connection and hit retry below.\n\nYou can come back to the app later to finish the process.";
+"unreachable.submit" = "TRY AGAIN";
+
+"purchase.uncredited.alert.message" = "You have uncredited transactions. Do you want to recover your account details?";
+"purchase.uncredited.alert.button.cancel" = "Cancel";
+"purchase.uncredited.alert.button.recover" = "Recover account";
+
+"purchase.trials.intro" = "Start your 7-day free trial";
+"purchase.trials.price.after" = "Then %@";
+"purchase.trials.money.back" = "30 day money back guarantee";
+"purchase.trials.1year.protection" = "1 year of privacy and identity protection";
+"purchase.trials.anonymous" = "Browse anonymously and hide your ip.";
+"purchase.trials.devices" = "Support 10 devices at once";
+"purchase.trials.devices.description" = "Protect yourself on up to 10 devices at a time.";
+"purchase.trials.region" = "Connect to any region easily";
+"purchase.trials.servers" = "More than 3300 servers in 32 countries";
+"purchase.trials.start" = "Start subscription";
+"purchase.trials.all.plans" = "See all available plans";
+
+"purchase.subscribe.now" = "Subscribe now";
+
+// WALKTHROUGH
+
+"walkthrough.action.next" = "NEXT";
+"walkthrough.action.done" = "DONE";
+"walkthrough.action.skip" = "SKIP";
+
+"walkthrough.page.1.title" = "Support 10 devices at once";
+"walkthrough.page.1.description" = "Protect yourself on up to 10 devices at a time.";
+"walkthrough.page.2.title" = "Connect to any region easily";
+"walkthrough.page.2.description" = "With servers around the globe, you are always under protection.";
+"walkthrough.page.3.title" = "Protect yourself from ads";
+"walkthrough.page.3.description" = "Enabling our Content Blocker prevents ads from showing in Safari.";
+
+"share.data.buttons.accept" = "Accept";
+"share.data.buttons.noThanks" = "No, thanks";
+"share.data.buttons.readMore" = "Read more";
+"share.data.text.title" = "Please help us improve our service";
+"share.data.text.description" = "To help us ensure our service's connection performance, you can anonymously share your connection stats with us. These reports do not include any personally identifiable information.";
+"share.data.text.footer" = "You can always control this from your settings";
+
+"share.data.readMore.text.description" = "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";

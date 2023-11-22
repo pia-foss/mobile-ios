@@ -69,7 +69,7 @@ class ConnectionTile: UIView, Tileable  {
 
         setConnectionValues()
         viewShouldRestyle()
-        self.tileTitle.text = L10n.Settings.Connection.title.uppercased()
+        self.tileTitle.text = L10n.Localizable.Settings.Connection.title.uppercased()
 
     }
     
@@ -103,12 +103,12 @@ class ConnectionTile: UIView, Tileable  {
         self.socketLabel.text = "---"
         self.handshakeLabel.text = "---"
         
-        self.protocolLabel.accessibilityLabel = L10n.Global.empty
-        self.portLabel.accessibilityLabel = L10n.Global.empty
-        self.authenticationLabel.accessibilityLabel = L10n.Global.empty
-        self.encryptionLabel.accessibilityLabel = L10n.Global.empty
-        self.socketLabel.accessibilityLabel = L10n.Global.empty
-        self.handshakeLabel.accessibilityLabel = L10n.Global.empty
+        self.protocolLabel.accessibilityLabel = L10n.Localizable.Global.empty
+        self.portLabel.accessibilityLabel = L10n.Localizable.Global.empty
+        self.authenticationLabel.accessibilityLabel = L10n.Localizable.Global.empty
+        self.encryptionLabel.accessibilityLabel = L10n.Localizable.Global.empty
+        self.socketLabel.accessibilityLabel = L10n.Localizable.Global.empty
+        self.handshakeLabel.accessibilityLabel = L10n.Localizable.Global.empty
     }
     
     @objc private func viewShouldRestyle() {

@@ -167,9 +167,9 @@ extension Theme {
 
     public func applyFavoriteUnselectedImage(_ imageView: UIImageView) {
         if palette.appearance == .dark {
-            imageView.image = Asset.Piax.Global.favoriteUnselectedDark.image
+            imageView.image = Asset.Images.Piax.Global.favoriteUnselectedDark.image
         } else {
-            imageView.image = Asset.Piax.Global.favoriteUnselected.image
+            imageView.image = Asset.Images.Piax.Global.favoriteUnselected.image
         }
     }
     
@@ -191,8 +191,8 @@ extension Theme {
     
     public func noResultsImage() -> UIImage {
         return palette.appearance == .dark ?
-            Asset.Piax.Regions.noResultsDark.image :
-            Asset.Piax.Regions.noResultsLight.image
+        Asset.Images.Piax.Regions.noResultsDark.image :
+        Asset.Images.Piax.Regions.noResultsLight.image
     }
     
     public func mapImage() -> UIImage? {
@@ -209,24 +209,24 @@ extension Theme {
     
     public func dragDropImage() -> UIImage {
         return palette.appearance == .dark ?
-            Asset.Piax.Global.dragDropIndicatorDark.image :
-            Asset.Piax.Global.dragDropIndicatorLight.image
+        Asset.Images.Piax.Global.dragDropIndicatorDark.image :
+        Asset.Images.Piax.Global.dragDropIndicatorLight.image
     }
 
     public func activeEyeImage() -> UIImage {
         return palette.appearance == .dark ?
-            Asset.Piax.Global.eyeActiveDark.image :
-            Asset.Piax.Global.eyeActiveLight.image
+        Asset.Images.Piax.Global.eyeActiveDark.image :
+        Asset.Images.Piax.Global.eyeActiveLight.image
     }
 
     public func inactiveEyeImage() -> UIImage {
         return palette.appearance == .dark ?
-            Asset.Piax.Global.eyeInactiveDark.image :
-            Asset.Piax.Global.eyeInactiveLight.image
+        Asset.Images.Piax.Global.eyeInactiveDark.image :
+        Asset.Images.Piax.Global.eyeInactiveLight.image
     }
     
     public func trashIconImage() -> UIImage {
-        return palette.appearance == .dark ? Asset.iconTrashDark.image : Asset.iconTrash.image
+        return palette.appearance == .dark ? Asset.Images.iconTrashDark.image : Asset.Images.iconTrash.image
     }
     
     public func applyLicenseMonospaceFontAndColor(_ textView: UITextView,

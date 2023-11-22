@@ -45,68 +45,68 @@ class NetworkCollectionViewCell: UICollectionViewCell {
             guard let data = data else { return }
             switch data.type {
             case .openWiFi:
-                title.text = L10n.Network.Management.Tool.Open.wifi
+                title.text = L10n.Localizable.Network.Management.Tool.Open.wifi
                 switch data.rule {
                 case .alwaysConnect:
-                    networkIcon.image = Asset.Piax.Nmt.iconOpenWifiConnect.image
-                    networkIcon.accessibilityLabel = L10n.Network.Management.Tool.Open.wifi + " " + L10n.Network.Management.Tool.Always.connect
+                    networkIcon.image = Asset.Images.Piax.Nmt.iconOpenWifiConnect.image
+                    networkIcon.accessibilityLabel = L10n.Localizable.Network.Management.Tool.Open.wifi + " " + L10n.Localizable.Network.Management.Tool.Always.connect
                 case .alwaysDisconnect:
-                    networkIcon.image = Asset.Piax.Nmt.iconOpenWifiDisconnect.image
-                    networkIcon.accessibilityLabel = L10n.Network.Management.Tool.Open.wifi + " " + L10n.Network.Management.Tool.Always.disconnect
+                    networkIcon.image = Asset.Images.Piax.Nmt.iconOpenWifiDisconnect.image
+                    networkIcon.accessibilityLabel = L10n.Localizable.Network.Management.Tool.Open.wifi + " " + L10n.Localizable.Network.Management.Tool.Always.disconnect
                 case .retainState:
-                    networkIcon.image = Asset.Piax.Nmt.iconOpenWifiRetain.image
-                    networkIcon.accessibilityLabel = L10n.Network.Management.Tool.Open.wifi + " " + L10n.Network.Management.Tool.Retain.state
+                    networkIcon.image = Asset.Images.Piax.Nmt.iconOpenWifiRetain.image
+                    networkIcon.accessibilityLabel = L10n.Localizable.Network.Management.Tool.Open.wifi + " " + L10n.Localizable.Network.Management.Tool.Retain.state
                 }
             case .protectedWiFi:
-                title.text = L10n.Network.Management.Tool.Secure.wifi
+                title.text = L10n.Localizable.Network.Management.Tool.Secure.wifi
                 switch data.rule {
                 case .alwaysConnect:
-                    networkIcon.image = Asset.Piax.Nmt.iconSecureWifiConnect.image
-                    networkIcon.accessibilityLabel = L10n.Network.Management.Tool.Secure.wifi + " " + L10n.Network.Management.Tool.Always.connect
+                    networkIcon.image = Asset.Images.Piax.Nmt.iconSecureWifiConnect.image
+                    networkIcon.accessibilityLabel = L10n.Localizable.Network.Management.Tool.Secure.wifi + " " + L10n.Localizable.Network.Management.Tool.Always.connect
                 case .alwaysDisconnect:
-                    networkIcon.image = Asset.Piax.Nmt.iconSecureWifiDisconnect.image
-                    networkIcon.accessibilityLabel = L10n.Network.Management.Tool.Secure.wifi + " " + L10n.Network.Management.Tool.Always.disconnect
+                    networkIcon.image = Asset.Images.Piax.Nmt.iconSecureWifiDisconnect.image
+                    networkIcon.accessibilityLabel = L10n.Localizable.Network.Management.Tool.Secure.wifi + " " + L10n.Localizable.Network.Management.Tool.Always.disconnect
                 case .retainState:
-                    networkIcon.image = Asset.Piax.Nmt.iconSecureWifiRetain.image
-                    networkIcon.accessibilityLabel = L10n.Network.Management.Tool.Secure.wifi + " " + L10n.Network.Management.Tool.Retain.state
+                    networkIcon.image = Asset.Images.Piax.Nmt.iconSecureWifiRetain.image
+                    networkIcon.accessibilityLabel = L10n.Localizable.Network.Management.Tool.Secure.wifi + " " + L10n.Localizable.Network.Management.Tool.Retain.state
                 }
             case .cellular:
-                title.text = L10n.Network.Management.Tool.Mobile.data
+                title.text = L10n.Localizable.Network.Management.Tool.Mobile.data
                 switch data.rule {
                 case .alwaysConnect:
-                    networkIcon.image = Asset.Piax.Nmt.iconMobileDataConnect.image
-                    networkIcon.accessibilityLabel = L10n.Network.Management.Tool.Mobile.data + " " + L10n.Network.Management.Tool.Always.connect
+                    networkIcon.image = Asset.Images.Piax.Nmt.iconMobileDataConnect.image
+                    networkIcon.accessibilityLabel = L10n.Localizable.Network.Management.Tool.Mobile.data + " " + L10n.Localizable.Network.Management.Tool.Always.connect
                 case .alwaysDisconnect:
-                    networkIcon.image = Asset.Piax.Nmt.iconMobileDataDisconnect.image
-                    networkIcon.accessibilityLabel = L10n.Network.Management.Tool.Mobile.data + " " + L10n.Network.Management.Tool.Always.disconnect
+                    networkIcon.image = Asset.Images.Piax.Nmt.iconMobileDataDisconnect.image
+                    networkIcon.accessibilityLabel = L10n.Localizable.Network.Management.Tool.Mobile.data + " " + L10n.Localizable.Network.Management.Tool.Always.disconnect
                 case .retainState:
-                    networkIcon.image = Asset.Piax.Nmt.iconMobileDataRetain.image
-                    networkIcon.accessibilityLabel = L10n.Network.Management.Tool.Mobile.data + " " + L10n.Network.Management.Tool.Retain.state
+                    networkIcon.image = Asset.Images.Piax.Nmt.iconMobileDataRetain.image
+                    networkIcon.accessibilityLabel = L10n.Localizable.Network.Management.Tool.Mobile.data + " " + L10n.Localizable.Network.Management.Tool.Retain.state
                 }
             case .trustedNetwork:
                 title.text = data.ssid
                 switch data.rule {
                 case .alwaysConnect:
-                    networkIcon.image = Asset.Piax.Nmt.iconCustomWifiConnect.image
-                    networkIcon.accessibilityLabel = data.ssid + " " + L10n.Network.Management.Tool.Always.connect
+                    networkIcon.image = Asset.Images.Piax.Nmt.iconCustomWifiConnect.image
+                    networkIcon.accessibilityLabel = data.ssid + " " + L10n.Localizable.Network.Management.Tool.Always.connect
                 case .alwaysDisconnect:
-                    networkIcon.image = Asset.Piax.Nmt.iconCustomWifiDisconnect.image
-                    networkIcon.accessibilityLabel = data.ssid + " " + L10n.Network.Management.Tool.Always.disconnect
+                    networkIcon.image = Asset.Images.Piax.Nmt.iconCustomWifiDisconnect.image
+                    networkIcon.accessibilityLabel = data.ssid + " " + L10n.Localizable.Network.Management.Tool.Always.disconnect
                 case .retainState:
-                    networkIcon.image = Asset.Piax.Nmt.iconCustomWifiRetain.image
-                    networkIcon.accessibilityLabel = data.ssid + " " + L10n.Network.Management.Tool.Retain.state
+                    networkIcon.image = Asset.Images.Piax.Nmt.iconCustomWifiRetain.image
+                    networkIcon.accessibilityLabel = data.ssid + " " + L10n.Localizable.Network.Management.Tool.Retain.state
                 }
             }
             
             switch data.rule {
             case .alwaysConnect:
-                subtitle.text = L10n.Network.Management.Tool.Always.connect
+                subtitle.text = L10n.Localizable.Network.Management.Tool.Always.connect
                 statusColor.backgroundColor = UIColor.piaNMTGreen
             case .alwaysDisconnect:
-                subtitle.text = L10n.Network.Management.Tool.Always.disconnect
+                subtitle.text = L10n.Localizable.Network.Management.Tool.Always.disconnect
                 statusColor.backgroundColor = UIColor.piaNMTRed
             case .retainState:
-                subtitle.text = L10n.Network.Management.Tool.Retain.state
+                subtitle.text = L10n.Localizable.Network.Management.Tool.Retain.state
                 statusColor.backgroundColor = UIColor.piaNMTBlue
             }
             
@@ -154,10 +154,10 @@ class NetworkCollectionViewCell: UICollectionViewCell {
         
         title.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyleCardTitleDark : TextStyle.textStyleCardTitleLight)
         subtitle.style(style: TextStyle.textStyle8)
-        let optionsImage = Asset.Piax.Nmt.iconOptions.image.withRenderingMode(.alwaysTemplate)
+        let optionsImage = Asset.Images.Piax.Nmt.iconOptions.image.withRenderingMode(.alwaysTemplate)
         manageButton.setImage(optionsImage, for: .normal)
         manageButton.tintColor = Theme.current.palette.appearance == .dark ? UIColor.white : UIColor.piaGrey6
-        manageButton.accessibilityLabel = L10n.Global.edit
+        manageButton.accessibilityLabel = L10n.Localizable.Global.edit
         
         popover.dismiss()
     }

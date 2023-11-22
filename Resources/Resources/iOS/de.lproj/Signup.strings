@@ -1,0 +1,92 @@
+/* 
+  Signup.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
+"in_progress.title" = "Registrierung bestätigen";
+"in_progress.message" = "Wir bestätigen deinen Kauf in unserem System. Es kann einen Moment dauern, also gedulde dich bitte etwas.";
+"in_progress.redeem.message" = "Wir überprüfen derzeit Ihre Karten-PIN in unserem System. Dies kann einen Moment dauern. Bitte haben Sie etwas Geduld.";
+
+"success.title" = "Kauf abgeschlossen";
+"success.message_format" = "Vielen Dank für deine Registrierung. Wir haben dir deinen Benutzernamen und dein Passwort an deine E-Mail-Adresse unter %@ gesendet.";
+"success.redeem.title" = "Karte erfolgreich eingelöst!";
+"success.redeem.message" = "Sie werden in Kürze eine E-Mail mit Ihrem Benutzernamen und Passwort erhalten.\n\nIhre Zugangsdaten";
+"success.username.caption" = "Benutzername";
+"success.password.caption" = "Passwort";
+"success.submit" = "Erste Schritte";
+
+"failure.vc_title" = "Registrierung fehlgeschlagen";
+"failure.title" = "Konto nicht erstellt";
+"failure.message" = "Zur Zeit können wir kein Konto erstellen. Bitte später erneut versuchen.\n\nBeim erneuten Öffnen der App wird wieder versucht, ein Konto zu erstellen.";
+"failure.purchase.sandbox.message" = "Das ausgewählte Sandbox-Abonnement ist in der Produktion nicht verfügbar.";
+"failure.redeem.invalid.title" = "Ungültige Karten-PIN";
+"failure.redeem.invalid.message" = "Anscheinend haben Sie eine ungültige PIN eingegeben. Bitte erneut versuchen.";
+"failure.redeem.claimed.title" = "Karte bereits eingelöst";
+"failure.redeem.claimed.message" = "Anscheinend wurde diese Karte bereits über ein anderes Konto eingelöst. Geben Sie eine andere PIN ein.";
+"failure.submit" = "ZURÜCK";
+
+"unreachable.vc_title" = "Fehler";
+"unreachable.title" = "Ups!";
+"unreachable.message" = "Keine Internetverbindung gefunden. Bitte deine Internetverbindung überprüfen und erneut versuchen.\n\nDu kannst die App später erneut aufrufen, um den Vorgang abzuschließen.";
+"unreachable.submit" = "WIEDERHOLEN";
+
+"purchase.uncredited.alert.message" = "Sie haben Transaktionen, die noch nicht gutgeschrieben wurden. Möchten Sie Ihre Kontodaten wiederherstellen?";
+"purchase.uncredited.alert.button.cancel" = "Abbrechen";
+"purchase.uncredited.alert.button.recover" = "Konto wiederherstellen";
+
+"purchase.trials.intro" = "Jetzt 7 Tage gratis testen";
+"purchase.trials.price.after" = "Dann %@";
+"purchase.trials.money.back" = "30-Tage-Geld-zurück-Garantie";
+"purchase.trials.1year.protection" = "1 Jahr Daten- und Identitätsschutz";
+"purchase.trials.anonymous" = "Anonym surfen und Ihre IP-Adresse verbergen";
+"purchase.trials.devices" = "Unterstützung für 10 Geräte";
+"purchase.trials.devices.description" = "Schützen Sie sich auf bis zu 10 Geräten gleichzeitig.";
+"purchase.trials.region" = "Einfache Verbindung zu jeder Region";
+"purchase.trials.servers" = "Mehr als 3300 Server in 32 Ländern";
+"purchase.trials.start" = "Abonnement beginnen";
+"purchase.trials.all.plans" = "Alle verfügbaren Pläne anzeigen";
+
+"purchase.subscribe.now" = "Jetzt abonnieren";
+
+// WALKTHROUGH
+
+"walkthrough.action.next" = "WEITER";
+"walkthrough.action.done" = "FERTIG";
+"walkthrough.action.skip" = "ÜBERSPRINGEN";
+
+"walkthrough.page.1.title" = "Unterstützung für 10 Geräte";
+"walkthrough.page.1.description" = "Schützen Sie sich auf bis zu 10 Geräten gleichzeitig.";
+"walkthrough.page.2.title" = "Bequem mit jeder beliebigen Region verbinden";
+"walkthrough.page.2.description" = "Mit Servern auf der ganzen Welt bist du immer geschützt.";
+"walkthrough.page.3.title" = "Schütze dich vor Werbung";
+"walkthrough.page.3.description" = "Mit der Aktivierung unseres Inhalts-Blockers sehen Sie keine Anzeigen in Safari mehr.";
+
+"share.data.buttons.accept" = "Akzeptieren";
+"share.data.buttons.noThanks" = "Nein danke";
+"share.data.buttons.readMore" = "Mehr erfahren";
+"share.data.text.title" = "Bitte helfen Sie uns, unseren Service zu verbessern";
+"share.data.text.description" = "Um uns zu helfen, die Verbindungsleistung unseres Dienstes sicherzustellen, können Sie Ihre Verbindungsstatistiken anonym mit uns teilen. Diese Berichte enthalten keine persönlich identifizierbaren Informationen.";
+"share.data.text.footer" = "Sie können dies jederzeit über Ihre Einstellungen steuern";
+
+"share.data.readMore.text.description" = "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";

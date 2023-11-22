@@ -32,7 +32,7 @@ class NetworkFooterCollectionViewCell: UICollectionViewCell {
     }
 
     func setup() {
-        self.addRuleButton.setTitle(L10n.Network.Management.Tool.Add.rule, for: .normal)
+        self.addRuleButton.setTitle(L10n.Localizable.Network.Management.Tool.Add.rule, for: .normal)
         viewShouldRestyle()
     }
     // MARK: Restylable
@@ -40,10 +40,10 @@ class NetworkFooterCollectionViewCell: UICollectionViewCell {
     func viewShouldRestyle() {
         addRuleButton.titleLabel?.font = TextStyle.textStyle4.font
         addRuleButton.setTitleColor(TextStyle.textStyle4.color, for: .normal) 
-        let optionsImage = Asset.Piax.Nmt.iconAddRule.image.withRenderingMode(.alwaysTemplate)
+        let optionsImage = Asset.Images.Piax.Nmt.iconAddRule.image.withRenderingMode(.alwaysTemplate)
         addRuleButton.setImage(optionsImage, for: .normal)
         addRuleButton.tintColor = TextStyle.textStyle4.color
-        addRuleButton.accessibilityLabel = L10n.Network.Management.Tool.Add.rule
+        addRuleButton.accessibilityLabel = L10n.Localizable.Network.Management.Tool.Add.rule
     }
 
     @IBAction private func addNewRule() {

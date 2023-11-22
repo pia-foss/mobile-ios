@@ -29,6 +29,7 @@
   },
   "testTargets" : [
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:PIA VPN.xcodeproj",
         "identifier" : "69B70AAF2ACBF51C0072A09D",

@@ -1,0 +1,92 @@
+/* 
+  Signup.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
+"in_progress.title" = "サインアップを確定";
+"in_progress.message" = "システムがご購入を確定しています。しばらく時間がかかることがありますので、そのままお待ちください。";
+"in_progress.redeem.message" = "システムがご購入を確定しています。しばらく時間がかかることがありますので、そのままお待ちください。";
+
+"success.title" = "購入完了";
+"success.message_format" = "サインアップありがとうございます。アカウントのユーザー名とパスワードをお客様のメールアドレス（%@）に送信いたしました。";
+"success.redeem.title" = "カードの引き換えが完了しました";
+"success.redeem.message" = "ユーザーネームとパスワードを記載したメールがまもなく届きます。\n\nお客様のログイン詳細";
+"success.username.caption" = "ユーザー名";
+"success.password.caption" = "パスワード";
+"success.submit" = "始める";
+
+"failure.vc_title" = "サインアップできませんでした";
+"failure.title" = "アカウントの作成に失敗しました";
+"failure.message" = "ただ今アカウントを作成できません。後ほどもう一度お試しください。\n\nアプリを再起動すると、アカウント作成が再試行されます。";
+"failure.purchase.sandbox.message" = "選択されたサンドボックスのサブスクリプションは生産中のため利用できません。";
+"failure.redeem.invalid.title" = "無効なカードPIN";
+"failure.redeem.invalid.message" = "無効なカードPINを入力したようです。もう一度お試しください。";
+"failure.redeem.claimed.title" = "すでに獲得されたカードです";
+"failure.redeem.claimed.message" = "このカードは、すでに別のアカウントが獲得したようです。別のPINを入力してください。";
+"failure.submit" = "戻る";
+
+"unreachable.vc_title" = "エラー";
+"unreachable.title" = "おっと！";
+"unreachable.message" = "インターネット接続が見つかりません。インターネットに接続していることを確認してから下の再試行をタップしてください。\n\n後ほどアプリでこのプロセスを完了することができます。";
+"unreachable.submit" = "再試行";
+
+"purchase.uncredited.alert.message" = "反映されていない取引があります。アカウントの詳細を回復しますか？";
+"purchase.uncredited.alert.button.cancel" = "キャンセル";
+"purchase.uncredited.alert.button.recover" = "アカウントを回復";
+
+"purchase.trials.intro" = "7日間無料トライアルを開始";
+"purchase.trials.price.after" = "以後%@";
+"purchase.trials.money.back" = "30日間返金保証";
+"purchase.trials.1year.protection" = "1年間のプライバシーおよび個人情報の保護";
+"purchase.trials.anonymous" = "ウェブの匿名利用でIPを非表示にします。";
+"purchase.trials.devices" = "一度に10台の端末をサポート";
+"purchase.trials.devices.description" = "一度に最大10台の端末を保護して自分を守ることができます。";
+"purchase.trials.region" = "すべての地域に簡単に接続";
+"purchase.trials.servers" = "32か国の3300以上のサーバー";
+"purchase.trials.start" = "サブスクリプションを開始";
+"purchase.trials.all.plans" = "利用可能なプランをすべて見る";
+
+"purchase.subscribe.now" = "今すぐ定期購読を購入";
+
+// WALKTHROUGH
+
+"walkthrough.action.next" = "次へ";
+"walkthrough.action.done" = "完了";
+"walkthrough.action.skip" = "スキップ";
+
+"walkthrough.page.1.title" = "一度に10台の端末をサポート";
+"walkthrough.page.1.description" = "一度に最大10台の端末を保護して自分を守ることができます。";
+"walkthrough.page.2.title" = "あらゆる地域に簡単に接続";
+"walkthrough.page.2.description" = "世界中にサーバがあるので、常に保護された状態でいることができます。";
+"walkthrough.page.3.title" = "広告から自分を守りましょう";
+"walkthrough.page.3.description" = "コンテンツブロッカーを有効にすると、Safariで広告表示をブロックできます。";
+
+"share.data.buttons.accept" = "同意する";
+"share.data.buttons.noThanks" = "いいえ、結構です";
+"share.data.buttons.readMore" = "もっと読む";
+"share.data.text.title" = "弊社のサービス改善にご協力ください";
+"share.data.text.description" = "弊社のサービスの接続パフォーマンス確保にご協力いただくには、接続データを匿名で弊社と共有してください。これらのレポートには、個人を特定できる情報は含まれません。";
+"share.data.text.footer" = "これは、設定からいつでもコントロール可能です";
+
+"share.data.readMore.text.description" = "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";

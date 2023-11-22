@@ -63,7 +63,7 @@ class FavoriteServersTile: UIView, Tileable {
         nc.addObserver(self, selector: #selector(updateFavoriteList), name: .PIAServerHasBeenUpdated, object: nil)
         
         viewShouldRestyle()
-        self.tileTitle.text = L10n.Tiles.Favorite.Servers.title.uppercased()
+        self.tileTitle.text = L10n.Localizable.Tiles.Favorite.Servers.title.uppercased()
         updateFavoriteList()
         
     }
@@ -78,18 +78,18 @@ class FavoriteServersTile: UIView, Tileable {
         currentServers.append(Server.automatic)
         for containerView in stackView.subviews {
             if let button = containerView.subviews.first as? ServerButton {
-                button.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Tiles.quickConnectPlaceholderLight.image :
-                    Asset.Piax.Tiles.quickConnectPlaceholderDark.image, for: .normal)
+                button.setImage(Theme.current.palette.appearance == .light ? Asset.Images.Piax.Tiles.quickConnectPlaceholderLight.image :
+                                    Asset.Images.Piax.Tiles.quickConnectPlaceholderDark.image, for: .normal)
                 button.imageView?.contentMode = .scaleAspectFit
                 button.isUserInteractionEnabled = false
-                button.accessibilityLabel = L10n.Global.empty
+                button.accessibilityLabel = L10n.Localizable.Global.empty
             }
         }
         
         for label in labelsStackView.subviews {
             if let label = label as? UILabel {
                 label.text = ""
-                label.accessibilityLabel = L10n.Global.empty
+                label.accessibilityLabel = L10n.Localizable.Global.empty
             }
         }
         

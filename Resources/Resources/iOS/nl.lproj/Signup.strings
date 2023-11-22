@@ -1,0 +1,92 @@
+/* 
+  Signup.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
+"in_progress.title" = "Aanmelding bevestigen";
+"in_progress.message" = "We zijn uw aankoop aan het verifiëren in ons systeem. Dit kan eventjes duren, daarom vragen we u vriendelijk om geduld.";
+"in_progress.redeem.message" = "We zijn uw pincode aan het verifiëren in ons systeem. Dit kan eventjes duren, daarom vragen we u vriendelijk om geduld.";
+
+"success.title" = "Aankoop voltooid";
+"success.message_format" = "Bedankt voor uw aanmelding. We hebben de gebruikersnaam en het wachtwoord voor uw account naar het volgende e-mailadres gestuurd: %@";
+"success.redeem.title" = "Kaart ingewisseld";
+"success.redeem.message" = "U ontvangt zo een e-mail met uw gebruikersnaam en wachtwoord.";
+"success.username.caption" = "Gebruikersnaam";
+"success.password.caption" = "Wachtwoord";
+"success.submit" = "Aan de slag";
+
+"failure.vc_title" = "Aanmelden mislukt";
+"failure.title" = "Account aanmaken mislukt";
+"failure.message" = "We kunnen op dit moment geen account maken. Probeer het later opnieuw. \n\nAls u de app opnieuw opent, wordt opnieuw geprobeerd een account te maken.";
+"failure.purchase.sandbox.message" = "Het geselecteerde sandbox-abonnement is niet beschikbaar in productie.";
+"failure.redeem.invalid.title" = "Ongeldige pincode";
+"failure.redeem.invalid.message" = "U heeft een ongeldige pincode ingevoerd. Probeer het opnieuw.";
+"failure.redeem.claimed.title" = "Kaart al geclaimd";
+"failure.redeem.claimed.message" = "Deze kaart is door een ander account geclaimd. Probeer een andere pincode.";
+"failure.submit" = "GA TERUG";
+
+"unreachable.vc_title" = "Fout";
+"unreachable.title" = "Oeps!";
+"unreachable.message" = "Geen internetverbinding gevonden. Controleer uw internetverbinding en probeer het hieronder opnieuw.\n\nU kunt later naar de app terugkeren om het proces te voltooien.";
+"unreachable.submit" = "OPNIEUW PROBEREN";
+
+"purchase.uncredited.alert.message" = "U heeft niet-gecrediteerde transacties. Wilt u uw accountgegevens herstellen?";
+"purchase.uncredited.alert.button.cancel" = "Annuleren";
+"purchase.uncredited.alert.button.recover" = "Account herstellen";
+
+"purchase.trials.intro" = "Start je gratis proefabonnement van 7 dagen";
+"purchase.trials.price.after" = "Daarna %@";
+"purchase.trials.money.back" = "30 dagen lang niet-goed-geld-teruggarantie";
+"purchase.trials.1year.protection" = "1 jaar aan privacy- en identiteitsbescherming";
+"purchase.trials.anonymous" = "Browse anoniem en verberg uw ip.";
+"purchase.trials.devices" = "Ondersteun tien apparaten tegelijk";
+"purchase.trials.devices.description" = "Bescherm uzelf op tien apparaten tegelijk.";
+"purchase.trials.region" = "Maak eenvoudig verbinding met elke regio";
+"purchase.trials.servers" = "Meer dan 3300 servers in 32 landen";
+"purchase.trials.start" = "Abonnement starten";
+"purchase.trials.all.plans" = "Bekijk de beschikbare abonnementen";
+
+"purchase.subscribe.now" = "Nu abonneren";
+
+// WALKTHROUGH
+
+"walkthrough.action.next" = "VOLGENDE";
+"walkthrough.action.done" = "KLAAR";
+"walkthrough.action.skip" = "OVERSLAAN";
+
+"walkthrough.page.1.title" = "Ondersteun tien apparaten tegelijk";
+"walkthrough.page.1.description" = "Bescherm uzelf op tien apparaten tegelijk.";
+"walkthrough.page.2.title" = "Maak eenvoudig verbinding met elke regio";
+"walkthrough.page.2.description" = "Met servers over de hele wereld wordt u altijd beschermd.";
+"walkthrough.page.3.title" = "Bescherm uzelf tegen advertenties";
+"walkthrough.page.3.description" = "Als u onze Content Blocker inschakelt, krijgt u geen advertenties meer te zien in Safari.";
+
+"share.data.buttons.accept" = "Accepteren";
+"share.data.buttons.noThanks" = "Nee, bedankt";
+"share.data.buttons.readMore" = "Meer informatie";
+"share.data.text.title" = "Help ons onze service te verbeteren";
+"share.data.text.description" = "Om ons te helpen de verbindingsprestaties van onze dienst te verbeteren, kunt u uw verbindingsstatistieken anoniem met ons delen. Deze rapporten bevatten geen persoonsgegevens.";
+"share.data.text.footer" = "U kunt dit via de Instellingen beheren";
+
+"share.data.readMore.text.description" = "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";

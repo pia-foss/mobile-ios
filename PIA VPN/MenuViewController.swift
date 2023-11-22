@@ -91,29 +91,29 @@ class MenuViewController: AutolayoutViewController {
     ]
 
     private lazy var stringForItem: [Item: String] = [
-        .selectRegion: L10n.Menu.Item.region,
-        .account: L10n.Menu.Item.account,
-        .dedicatedIp: L10n.Dedicated.Ip.title,
-        .settings: L10n.Menu.Item.settings,
-        .logout: L10n.Menu.Item.logout,
-        .about: L10n.Menu.Item.about,
-        .privacy: L10n.Menu.Item.Web.privacy,
-        .homepage: L10n.Menu.Item.Web.home,
-        .support: L10n.Menu.Item.Web.support,
+        .selectRegion: L10n.Localizable.Menu.Item.region,
+        .account: L10n.Localizable.Menu.Item.account,
+        .dedicatedIp: L10n.Localizable.Dedicated.Ip.title,
+        .settings: L10n.Localizable.Menu.Item.settings,
+        .logout: L10n.Localizable.Menu.Item.logout,
+        .about: L10n.Localizable.Menu.Item.about,
+        .privacy: L10n.Localizable.Menu.Item.Web.privacy,
+        .homepage: L10n.Localizable.Menu.Item.Web.home,
+        .support: L10n.Localizable.Menu.Item.Web.support,
         .version: Macros.localizedVersionFullString() ?? ""
     ]
 
     private lazy var iconForItem: [Item: ImageAsset] = [
-        .selectRegion: Asset.iconRegion,
-        .account: Asset.iconAccount,
-        .dedicatedIp: Asset.iconDip,
-        .settings: Asset.iconSettings,
-        .logout: Asset.iconLogout,
-        .about: Asset.iconmenuAbout,
-        .privacy: Asset.iconmenuPrivacy,
-        .homepage: Asset.iconHomepage,
-        .support: Asset.iconContact,
-        .version: Asset.iconAccount
+        .selectRegion: Asset.Images.iconRegion,
+        .account: Asset.Images.iconAccount,
+        .dedicatedIp: Asset.Images.iconDip,
+        .settings: Asset.Images.iconSettings,
+        .logout: Asset.Images.iconLogout,
+        .about: Asset.Images.iconmenuAbout,
+        .privacy: Asset.Images.iconmenuPrivacy,
+        .homepage: Asset.Images.iconHomepage,
+        .support: Asset.Images.iconContact,
+        .version: Asset.Images.iconAccount
     ]
     
     deinit {
@@ -132,7 +132,7 @@ class MenuViewController: AutolayoutViewController {
 
         modalPresentationCapturesStatusBarAppearance = true
 
-        imvAvatar.image = Asset.imageRobot.image
+        imvAvatar.image = Asset.Images.imageRobot.image
 
         var planDescription = ""
         if let currentUser = Client.providers.accountProvider.currentUser,
@@ -142,17 +142,17 @@ class MenuViewController: AutolayoutViewController {
                 
                 switch info.plan {
                     case .yearly:
-                        planDescription = L10n.Account.Subscriptions.yearly
+                        planDescription = L10n.Localizable.Account.Subscriptions.yearly
                     case .monthly:
-                        planDescription = L10n.Account.Subscriptions.monthly
+                        planDescription = L10n.Localizable.Account.Subscriptions.monthly
                     default:
-                        planDescription = L10n.Account.Subscriptions.trial
+                        planDescription = L10n.Localizable.Account.Subscriptions.trial
                 }
                 
                 labelVersion.numberOfLines = 0
                 labelVersion.attributedText = Theme.current.smallTextWithColoredLink(
-                    withMessage: planDescription + "\n" + L10n.Account.Subscriptions.Short.message,
-                    link: L10n.Account.Subscriptions.Short.linkMessage)
+                    withMessage: planDescription + "\n" + L10n.Localizable.Account.Subscriptions.Short.message,
+                    link: L10n.Localizable.Account.Subscriptions.Short.linkMessage)
                 labelVersion.isUserInteractionEnabled = true
                 let tap = UITapGestureRecognizer(target: self, action: #selector(openManageSubscription))
                 labelVersion.addGestureRecognizer(tap)
@@ -175,7 +175,7 @@ class MenuViewController: AutolayoutViewController {
         super.viewWillAppear(animated)
         currentUser = Client.providers.accountProvider.currentUser
         labelUsername.text = Client.providers.accountProvider.publicUsername ?? ""
-        labelUsername.accessibilityLabel = L10n.Menu.Accessibility.loggedAs(Client.providers.accountProvider.publicUsername ?? "")
+        labelUsername.accessibilityLabel = L10n.Localizable.Menu.Accessibility.loggedAs(Client.providers.accountProvider.publicUsername ?? "")
     }
     
     override func didRefreshOrientationConstraints() {
@@ -258,12 +258,12 @@ class MenuViewController: AutolayoutViewController {
     }
 
     private func handlePlansListingError(_ error: Error?) {
-        let errorMessage = error?.localizedDescription ?? L10n.Menu.Renewal.Message.unavailable
+        let errorMessage = error?.localizedDescription ?? L10n.Localizable.Menu.Renewal.Message.unavailable
         let alert = Macros.alert(
-            L10n.Global.error,
+            L10n.Localizable.Global.error,
             errorMessage
         )
-        alert.addDefaultAction(L10n.Global.close)
+        alert.addDefaultAction(L10n.Localizable.Global.close)
         present(alert, animated: true, completion: nil)
     }
 
@@ -271,11 +271,11 @@ class MenuViewController: AutolayoutViewController {
         log.error("Account: Cannot renew trial account")
 
         let alert = Macros.alert(
-            L10n.Menu.Renewal.title,
-            L10n.Menu.Renewal.Message.trial
+            L10n.Localizable.Menu.Renewal.title,
+            L10n.Localizable.Menu.Renewal.Message.trial
         )
-        alert.addCancelAction(L10n.Global.cancel)
-        alert.addActionWithTitle(L10n.Menu.Renewal.purchase) {
+        alert.addCancelAction(L10n.Localizable.Global.cancel)
+        alert.addActionWithTitle(L10n.Localizable.Menu.Renewal.purchase) {
             self.dismiss(animated: true) {
                 self.delegate?.menu(didDetectTrialUpgrade: self)
             }
@@ -288,11 +288,11 @@ class MenuViewController: AutolayoutViewController {
 
         // should never happen as the "Renew" button *should* only appear when the account is trial or renewable
         let alert = Macros.alert(
-            L10n.Menu.Renewal.title,
-            L10n.Menu.Renewal.Message.website
+            L10n.Localizable.Menu.Renewal.title,
+            L10n.Localizable.Menu.Renewal.Message.website
         )
-        alert.addCancelAction(L10n.Global.cancel)
-        alert.addActionWithTitle(L10n.Menu.Renewal.renew) {
+        alert.addCancelAction(L10n.Localizable.Global.cancel)
+        alert.addActionWithTitle(L10n.Localizable.Menu.Renewal.renew) {
             guard UIApplication.shared.canOpenURL(AppConstants.Web.homeURL) else { return }
             UIApplication.shared.open(AppConstants.Web.homeURL, options: [:], completionHandler: nil)
         }
@@ -335,8 +335,8 @@ class MenuViewController: AutolayoutViewController {
 
         log.error("IAP: Purchase failed (error: \(error)")
 
-        let alert = Macros.alert(L10n.Global.error, error.localizedDescription)
-        alert.addDefaultAction(L10n.Global.close)
+        let alert = Macros.alert(L10n.Localizable.Global.error, error.localizedDescription)
+        alert.addDefaultAction(L10n.Localizable.Global.close)
         present(alert, animated: true, completion: nil)
     }
 
@@ -344,10 +344,10 @@ class MenuViewController: AutolayoutViewController {
         log.debug("Account: Renewal successfully completed")
 
         let alert = Macros.alert(
-            L10n.Renewal.Success.title,
-            L10n.Renewal.Success.message
+            L10n.Localizable.Renewal.Success.title,
+            L10n.Localizable.Renewal.Success.message
         )
-        alert.addDefaultAction(L10n.Global.close)
+        alert.addDefaultAction(L10n.Localizable.Global.close)
         present(alert, animated: true, completion: nil)
     }
 
@@ -359,21 +359,21 @@ class MenuViewController: AutolayoutViewController {
         }
 
         let alert = Macros.alert(
-            L10n.Global.error,
-            L10n.Renewal.Failure.message
+            L10n.Localizable.Global.error,
+            L10n.Localizable.Renewal.Failure.message
         )
         
-        alert.addDefaultAction(L10n.Global.close)
+        alert.addDefaultAction(L10n.Localizable.Global.close)
         present(alert, animated: true, completion: nil)
     }
     
     private func logOut() {
         let sheet = Macros.alert(
-            L10n.Menu.Logout.title,
-            L10n.Menu.Logout.message
+            L10n.Localizable.Menu.Logout.title,
+            L10n.Localizable.Menu.Logout.message
         )
-        sheet.addCancelAction(L10n.Global.cancel)
-        sheet.addDestructiveActionWithTitle(L10n.Menu.Logout.confirm) {
+        sheet.addCancelAction(L10n.Localizable.Global.cancel)
+        sheet.addDestructiveActionWithTitle(L10n.Localizable.Menu.Logout.confirm) {
             self.dismiss(animated: true) {
                 log.debug("Account: Logging out...")
                 DashboardViewController.instanceInNavigationStack()?.showLoadingAnimation()

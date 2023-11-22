@@ -135,13 +135,13 @@ class RatingManager {
             return
         }
         
-        let sheet = Macros.alertController(L10n.Rating.Enjoy.question, nil)
-        sheet.addAction(UIAlertAction(title: L10n.Rating.Alert.Button.notreally, style: .default, handler: { action in
+        let sheet = Macros.alertController(L10n.Localizable.Rating.Enjoy.question, nil)
+        sheet.addAction(UIAlertAction(title: L10n.Localizable.Rating.Alert.Button.notreally, style: .default, handler: { action in
             // Ask for feedback
             let alert = self.createDefaultFeedbackDialog()
             rootView.present(alert, animated: true, completion: nil)
         }))
-        sheet.addAction(UIAlertAction(title: L10n.Global.yes, style: .default, handler: { action in
+        sheet.addAction(UIAlertAction(title: L10n.Localizable.Global.yes, style: .default, handler: { action in
             let alert = self.createDefaultReviewAlert()
             rootView.present(alert, animated: true, completion: nil)
         }))
@@ -149,22 +149,22 @@ class RatingManager {
     }
     
     private func createDefaultFeedbackDialog() -> UIAlertController {
-        let sheet = Macros.alertController(L10n.Rating.Problems.question, L10n.Rating.Problems.subtitle)
-        sheet.addAction(UIAlertAction(title: L10n.Global.no, style: .default, handler: { action in
+        let sheet = Macros.alertController(L10n.Localizable.Rating.Problems.question, L10n.Localizable.Rating.Problems.subtitle)
+        sheet.addAction(UIAlertAction(title: L10n.Localizable.Global.no, style: .default, handler: { action in
             log.debug("No feedback")
         }))
-        sheet.addAction(UIAlertAction(title: L10n.Global.yes, style: .default, handler: { action in
+        sheet.addAction(UIAlertAction(title: L10n.Localizable.Global.yes, style: .default, handler: { action in
             self.openFeedbackWebsite()
         }))
         return sheet
     }
     
     private func createDefaultReviewAlert() -> UIAlertController {
-        let sheet = Macros.alertController(L10n.Rating.Rate.question, nil)
-        sheet.addAction(UIAlertAction(title: L10n.Rating.Alert.Button.nothanks, style: .default, handler: { action in
+        let sheet = Macros.alertController(L10n.Localizable.Rating.Rate.question, nil)
+        sheet.addAction(UIAlertAction(title: L10n.Localizable.Rating.Alert.Button.nothanks, style: .default, handler: { action in
             self.handleRatingAlertCancel()
         }))
-        sheet.addAction(UIAlertAction(title: L10n.Rating.Alert.Button.oksure, style: .default, handler: { action in
+        sheet.addAction(UIAlertAction(title: L10n.Localizable.Rating.Alert.Button.oksure, style: .default, handler: { action in
             self.openRatingViewInAppstore()
         }))
         return sheet
@@ -179,16 +179,16 @@ class RatingManager {
         }
         
         let sheet = Macros.alert(
-            L10n.Rating.Enjoy.question,
-            L10n.Rating.Enjoy.subtitle
+            L10n.Localizable.Rating.Enjoy.question,
+            L10n.Localizable.Rating.Enjoy.subtitle
         )
-        sheet.addCancelActionWithTitle(L10n.Global.no, handler: {
+        sheet.addCancelActionWithTitle(L10n.Localizable.Global.no, handler: {
             // Ask for feedback
             let alert = self.createCustomFeedbackDialog()
             rootView.present(alert, animated: true, completion: nil)
         })
         
-        sheet.addActionWithTitle(L10n.Global.yes) {
+        sheet.addActionWithTitle(L10n.Localizable.Global.yes) {
             let alert = self.createCustomReviewDialog()
             rootView.present(alert, animated: true, completion: nil)
         }
@@ -200,14 +200,14 @@ class RatingManager {
     private func createCustomFeedbackDialog() -> PopupDialog {
         
         let sheet = Macros.alert(
-            L10n.Rating.Problems.question,
-            L10n.Rating.Problems.subtitle
+            L10n.Localizable.Rating.Problems.question,
+            L10n.Localizable.Rating.Problems.subtitle
         )
-        sheet.addCancelActionWithTitle(L10n.Global.no, handler: {
+        sheet.addCancelActionWithTitle(L10n.Localizable.Global.no, handler: {
             log.debug("No feedback")
         })
         
-        sheet.addActionWithTitle(L10n.Global.yes) {
+        sheet.addActionWithTitle(L10n.Localizable.Global.yes) {
             self.openFeedbackWebsite()
         }
 
@@ -218,14 +218,14 @@ class RatingManager {
     private func createCustomReviewDialog() -> PopupDialog {
         
         let sheet = Macros.alert(
-            L10n.Rating.Review.question,
-            L10n.Rating.Rate.subtitle
+            L10n.Localizable.Rating.Review.question,
+            L10n.Localizable.Rating.Rate.subtitle
         )
-        sheet.addCancelActionWithTitle(L10n.Global.no, handler: {
+        sheet.addCancelActionWithTitle(L10n.Localizable.Global.no, handler: {
             self.handleRatingAlertCancel()
         })
         
-        sheet.addActionWithTitle(L10n.Global.yes) {
+        sheet.addActionWithTitle(L10n.Localizable.Global.yes) {
             self.openRatingViewInAppstore()
         }
 
@@ -240,12 +240,12 @@ class RatingManager {
         }
         
         let sheet = Macros.alert(
-            L10n.Rating.Error.question,
-            L10n.Rating.Error.subtitle
+            L10n.Localizable.Rating.Error.question,
+            L10n.Localizable.Rating.Error.subtitle
         )
-        sheet.addCancelAction(L10n.Global.close)
+        sheet.addCancelAction(L10n.Localizable.Global.close)
         
-        sheet.addActionWithTitle(L10n.Rating.Error.Button.send) {
+        sheet.addActionWithTitle(L10n.Localizable.Rating.Error.Button.send) {
             self.openFeedbackWebsite()
         }
         

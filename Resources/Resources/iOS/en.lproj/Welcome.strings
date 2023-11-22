@@ -1,0 +1,88 @@
+/* 
+  Welcome.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
+"login.title" = "Sign in to your account";
+"login.username.placeholder" = "Username (p1234567)";
+"login.password.placeholder" = "Password";
+"login.submit" = "LOGIN";
+"login.restore.button" = "Didn't receive account details?";
+"login.error.title" = "Log in";
+"login.error.validation" = "You must enter a username and password.";
+"login.error.unauthorized" = "Your username or password is incorrect.";
+"login.error.throttled" = "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"login.receipt.button" = "Login using purchase receipt";
+"login.magic.link.title" = "Login using magic email link";
+"login.magic.link.response" = "Please check your e-mail for a login link.";
+"login.magic.link.send" = "Send Link";
+"login.magic.link.invalid.email" = "Invalid email. Please try again.";
+
+"purchase.title" = "Select a VPN plan";
+"purchase.subtitle" = "30-day money back guarantee";
+"purchase.email.placeholder" = "Email address";
+"purchase.continue" = "Continue";
+"purchase.login.footer" = "Already have an account?";
+"purchase.login.button" = "Sign in";
+"purchase.error.title" = "Purchase";
+"purchase.error.validation" = "You must enter an email address.";
+"purchase.error.connectivity.title" = "Connection Failure";
+"purchase.error.connectivity.description" = "We are unable to reach Private Internet Access. This may due to poor internet or our service is blocked in your country.";
+"purchase.confirm.form.email" = "Enter your email address";
+"purchase.confirm.plan" = "You are purchasing the %@ plan";
+"purchase.email.why" = "We need your email to send your username and password.";
+"purchase.submit" = "Submit";
+"purchase.or" = "or";
+
+"upgrade.header" = "Welcome Back!";
+"upgrade.title" = "In order to use Private Internet Access, you’ll need to renew your subscription.";
+"upgrade.renew.now" = "Renew now";
+
+
+
+"redeem.title" = "Redeem gift card";
+"redeem.subtitle" = "Type in your email address and the %lu digit PIN from your gift card or trial card below.";
+"redeem.email.placeholder" = "Email address";
+"redeem.submit" = "SUBMIT";
+"redeem.error.title" = "Redeem";
+"redeem.error.code" = "Code must be %lu numeric digits.";
+"redeem.error.allfields"="Please type in your email and card PIN.";
+"redeem.accessibility.back" = "Back";
+"redeem.giftcard.placeholder" = "Gift card PIN";
+
+"plan.monthly.title" = "Monthly";
+"plan.yearly.title" = "Yearly";
+"plan.yearly.detail_format" = "%@%@ per year";
+"plan.price_format" = "%@/mo";
+"plan.best_value" = "Best value";
+"plan.accessibility.per_month" = "per month";
+
+"restore.title" = "Restore uncredited purchase";
+"restore.subtitle" = "If you purchased a plan through this app and didn't receive your credentials, you can send them again from here. You will not be charged during this process.";
+"restore.email.placeholder" = "Email address";
+"restore.submit" = "CONFIRM";
+
+"iap.error.message.unavailable" = "Apple servers currently unavailable. Please try again later.";
+"iap.error.title" = "Error";
+
+"agreement.trials.title" = "Free trials terms and conditions";
+"agreement.trials.message" = "Payment will be charged to your Apple ID account at the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.\n\nCertain Paid Subscriptions may offer a free trial prior to charging your payment method. If you decide to unsubscribe from a Paid Subscription before we start charging your payment method, cancel the subscription at least 24 hours before the free trial ends.\n\nFree trials are only available to new users, and are at our sole discretion, and if you attempt to sign up for an additional free trial, you will be immediately charged with the standard Subscription Fee.\n\nWe reserve the right to revoke your free trial at any time.\n\nAny unused portion of your free trial period will be forfeited upon purchase of a subscription.\n\nSigning up constitutes acceptance of this terms and conditions.";
+"agreement.message" = "After the 7 days free trial this subscription automatically renews for %@ unless it is canceled at least 24 hours before the end of the trial period. Your Apple ID account will be charged for renewal within 24 hours before the end of the trial period. You can manage and cancel your subscriptions by going to your App Store account settings after purchase. 7-days trial offer is limited to one 7-days trial offer per user. Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription. All prices include applicable local sales taxes.\n\nSigning up constitutes acceptance of the $1 and the $2.";
+"agreement.trials.yearly.plan" = "year";
+"agreement.trials.monthly.plan" = "month";
+
+"agreement.message.tos" = "Terms of Service";
+"agreement.message.privacy" = "Privacy Policy";
+
+"getstarted.buttons.buyaccount" = "Buy account";
+
+"gdpr.collect.data.title" = "Personal information we collect";
+"gdpr.collect.data.description" = "E-mail Address for the purposes of account management and protection from abuse.";
+"gdpr.usage.data.title" = "Uses of personal information collected by us";
+"gdpr.usage.data.description" = "E-mail address is used to send subscription information, payment confirmations, customer correspondence, and Private Internet Access promotional offers only.";
+"gdpr.accept.button.title" = "Agree and continue";
+
+"update.account.email.error" = "Failed to modify account email";

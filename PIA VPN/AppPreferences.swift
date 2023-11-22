@@ -240,7 +240,7 @@ class AppPreferences {
     
     var todayWidgetVpnStatus: String? {
         get {
-            return defaults.string(forKey: Entries.todayWidgetVpnStatus) ?? L10n.Today.Widget.login
+            return defaults.string(forKey: Entries.todayWidgetVpnStatus) ?? L10n.Localizable.Today.Widget.login
         }
         set {
             defaults.set(newValue, forKey: Entries.todayWidgetVpnStatus)
@@ -608,7 +608,7 @@ class AppPreferences {
             Entries.themeCode: ThemeCode.light.rawValue,
             Entries.useConnectSiriShortcuts: false,
             Entries.useDisconnectSiriShortcuts: false,
-            Entries.todayWidgetButtonTitle: L10n.Today.Widget.login,
+            Entries.todayWidgetButtonTitle: L10n.Localizable.Today.Widget.login,
             Entries.todayWidgetVpnProtocol: IKEv2Profile.vpnType,
             Entries.todayWidgetVpnPort: "500",
             Entries.todayWidgetVpnSocket: "UDP",
@@ -876,8 +876,8 @@ class AppPreferences {
         useDisconnectSiriShortcuts = false
         connectShortcut = nil
         disconnectShortcut = nil
-        todayWidgetVpnStatus = L10n.Today.Widget.login
-        todayWidgetButtonTitle = L10n.Today.Widget.login
+        todayWidgetVpnStatus = L10n.Localizable.Today.Widget.login
+        todayWidgetButtonTitle = L10n.Localizable.Today.Widget.login
         todayWidgetVpnProtocol = IKEv2Profile.vpnType
         todayWidgetVpnPort = "500"
         todayWidgetVpnSocket = "UDP"

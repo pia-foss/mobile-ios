@@ -174,16 +174,16 @@ class RegionCell: UITableViewCell, Restylable {
     
     private func updateFavoriteImage() {
         self.isFavorite ?
-            self.favoriteImageView.image = Asset.Piax.Global.favoriteSelected.image :
+        self.favoriteImageView.image = Asset.Images.Piax.Global.favoriteSelected.image :
             Theme.current.applyFavoriteUnselectedImage(self.favoriteImageView)
         favoriteButton.accessibilityLabel = self.isFavorite ?
-            L10n.Region.Accessibility.favorite :
-            L10n.Region.Accessibility.unfavorite
+            L10n.Localizable.Region.Accessibility.favorite :
+            L10n.Localizable.Region.Accessibility.unfavorite
     }
     
     private func updateOfflineImage() {
-        self.favoriteImageView.image = Asset.offlineServerIcon.image
-        self.favoriteButton.accessibilityLabel = L10n.Global.disabled
+        self.favoriteImageView.image = Asset.Images.offlineServerIcon.image
+        self.favoriteButton.accessibilityLabel = L10n.Localizable.Global.disabled
     }
 
 }

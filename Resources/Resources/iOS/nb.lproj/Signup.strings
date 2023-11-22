@@ -1,0 +1,92 @@
+/* 
+  Signup.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
+"in_progress.title" = "Bekrefter registrering";
+"in_progress.message" = "Vi bekrefter kjøpet i systemet vårt. Dette kan ta litt tid.";
+"in_progress.redeem.message" = "Vi bekrefter kort-PIN-en din i systemet vårt. Det kan ta et øyeblikk, så vennligst vent.";
+
+"success.title" = "Kjøp fullført";
+"success.message_format" = "Takk for at du registrerte deg. Vi har sendt deg kontonavnet og passordet ditt til e-postadressen din %@";
+"success.redeem.title" = "Kortet har blitt innløst";
+"success.redeem.message" = "Du mottar en e-post med brukernavn og passord.\n\nPåloggingsinformasjonen din";
+"success.username.caption" = "Brukernavn";
+"success.password.caption" = "Passord";
+"success.submit" = "Komme i gang";
+
+"failure.vc_title" = "Registrering mislyktes";
+"failure.title" = "Kunne ikke opprette kontoen";
+"failure.message" = "Vi kunne ikke opprette en konto nå. Prøv på nytt senere.\n\nNår du åpner appen igjen, vil den prøve å opprette kontoen på nytt.";
+"failure.purchase.sandbox.message" = "Det valgte sandboksabonnementet er ikke tilgjengelig i produksjon.";
+"failure.redeem.invalid.title" = "Ugyldig kort-PIN";
+"failure.redeem.invalid.message" = "Ser ut til at du brukte en ugyldig kort-PIN. Prøv igjen";
+"failure.redeem.claimed.title" = "Kortet er allerede brukt";
+"failure.redeem.claimed.message" = "Ser ut til at kortet allerede er brukt av en annen konto. Du kan prøve med en annen PIN.";
+"failure.submit" = "GÅ TILBAKE";
+
+"unreachable.vc_title" = "Feil";
+"unreachable.title" = "Ups!";
+"unreachable.message" = "Ingen internettilkobling. Bekreft at du er koblet til Internett og trykk på Prøv igjen nedenfor.\n\nDu kan komme tilbake til appen senere for å fullføre prosessen.";
+"unreachable.submit" = "PRØV PÅ NYTT";
+
+"purchase.uncredited.alert.message" = "Du har ikke krediterte transaksjoner. Vil du gjenopprette kontoinformasjonen din?";
+"purchase.uncredited.alert.button.cancel" = "Abryt";
+"purchase.uncredited.alert.button.recover" = "Gjenopprett konto";
+
+"purchase.trials.intro" = "Start din gratis 7-dagers prøveperiode";
+"purchase.trials.price.after" = "Deretter %@";
+"purchase.trials.money.back" = "30 dagers pengene-tilbake-garanti";
+"purchase.trials.1year.protection" = "Et års personverns- og identitetsbeskyttelse";
+"purchase.trials.anonymous" = "Surf anonymt og skjul IP-adressen din.";
+"purchase.trials.devices" = "Støtter ti enheter om gangen";
+"purchase.trials.devices.description" = "Beskytt deg på opptil ti enheter samtidig.";
+"purchase.trials.region" = "Koble til hvilken som helst region på en enkel måte";
+"purchase.trials.servers" = "Over 3300 servere i 32 land";
+"purchase.trials.start" = "Start abonnementet";
+"purchase.trials.all.plans" = "Vis alle tilgjengelige abonnement";
+
+"purchase.subscribe.now" = "Abonner nå";
+
+// WALKTHROUGH
+
+"walkthrough.action.next" = "NESTE";
+"walkthrough.action.done" = "FERDIG";
+"walkthrough.action.skip" = "HOPP OVER";
+
+"walkthrough.page.1.title" = "Støtter ti enheter samtidig";
+"walkthrough.page.1.description" = "Beskytt deg på opptil ti enheter samtidig.";
+"walkthrough.page.2.title" = "Koble til hvilken som helst region på en enkel måte";
+"walkthrough.page.2.description" = "Med serverer rundt om i hele verden, er du alltid beskyttet.";
+"walkthrough.page.3.title" = "Beskytt deg selv mot reklame";
+"walkthrough.page.3.description" = "Aktivering av innholdsblokkereren sikrer at reklame ikke blir vist når du bruker Safari.";
+
+"share.data.buttons.accept" = "Godta";
+"share.data.buttons.noThanks" = "Nei takk";
+"share.data.buttons.readMore" = "Les mer";
+"share.data.text.title" = "Hjelp oss med å forbedre tjenesten vår";
+"share.data.text.description" = "For å hjelpe oss med å sikre tjenestens tilkoblingsytelse, kan du anonymt dele tilkoblingsstatistikken din med oss. Disse rapportene inkluderer informasjon som ikke er personlig identifiserbar.";
+"share.data.text.footer" = "Du kan kontrollere dette fra innstillingene dine";
+
+"share.data.readMore.text.description" = "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";

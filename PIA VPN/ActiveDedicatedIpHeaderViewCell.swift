@@ -30,8 +30,8 @@ class ActiveDedicatedIpHeaderViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = .clear
-        self.title.text = L10n.Dedicated.Ip.title
-        self.subtitle.text = L10n.Dedicated.Ip.Limit.title
+        self.title.text = L10n.Localizable.Dedicated.Ip.title
+        self.subtitle.text = L10n.Localizable.Dedicated.Ip.Limit.title
     }
 
     func setup() {
