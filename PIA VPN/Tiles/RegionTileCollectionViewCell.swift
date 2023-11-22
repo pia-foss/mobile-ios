@@ -46,6 +46,7 @@ class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
     }
     
     func setupCellForStatus(_ status: TileStatus) {
+        self.accessibilityIdentifier = "RegionTileCollectionViewCell"
         self.accessibilityLabel = L10n.Tiles.Region.title
         Theme.current.applyPrincipalBackground(self)
         Theme.current.applyPrincipalBackground(self.contentView)

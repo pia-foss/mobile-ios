@@ -45,6 +45,10 @@ extension XCUIApplication {
         button(with: "Disable VPN Kill Switch")
     }
     
+    var vpnServerButton: XCUIElement {
+        cell(with: "RegionTileCollectionViewCell")
+    }
+    
     func logOut() {
         guard dashboardMenuButton.exists else { return }
         dashboardMenuButton.tap()
@@ -54,7 +58,8 @@ extension XCUIApplication {
             if confirmationDialogButton.waitForExistence(timeout: shortTimeout) {
                 confirmationDialogButton.tap()
             }
-            welcomeLoginButton.waitForExistence(timeout: defaultTimeout)
+            WaitHelper.waitForElementToBeVisible(welcomeLoginButton, timeout: defaultTimeout,
+                                                 onSuccess:{print("successful logout")}, onFailure:{error in print("welcomeLoginButton is not visible")})
         }
     }
     
@@ -80,7 +85,13 @@ extension XCUIApplication {
     
     func navigateToHome() {
         closeButton.tap()
-        dashboardMenuButton.waitForExistence(timeout: defaultTimeout)
+        WaitHelper.waitForElementToBeVisible(dashboardMenuButton, timeout: defaultTimeout,
+                                             onSuccess:{print("successfully navigate to Home")}, onFailure:{error in print("dashboardMenuButton is not visible")})
+    }
+    
+    func navigateToRegionSelection(){
+        guard vpnServerButton.exists else { return }
+        vpnServerButton.tap()
     }
     
     func enableVPNKillSwitchOnHome() {

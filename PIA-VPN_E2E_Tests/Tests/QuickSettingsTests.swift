@@ -7,7 +7,6 @@
 //
 
 import Nimble
-import Foundation
 
 class QuickSettingsTests : BaseTest {
     override class func spec() {
