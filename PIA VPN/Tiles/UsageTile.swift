@@ -59,9 +59,9 @@ class UsageTile: UIView, Tileable  {
         nc.addObserver(self, selector: #selector(displayUsageInformation), name: .PIAVPNUsageUpdate, object: nil)
         
         viewShouldRestyle()
-        self.usageTitle.text = L10n.Tiles.Usage.title.uppercased()
-        self.uploadTitle.text = L10n.Tiles.Usage.upload
-        self.downloadTitle.text = L10n.Tiles.Usage.download
+        self.usageTitle.text = L10n.Localizable.Tiles.Usage.title.uppercased()
+        self.uploadTitle.text = L10n.Localizable.Tiles.Usage.upload
+        self.downloadTitle.text = L10n.Localizable.Tiles.Usage.download
         displayUsageInformation()
     }
     
@@ -102,9 +102,9 @@ class UsageTile: UIView, Tileable  {
                                                                 countStyle: .file)
             self.uploadValue.alpha = 0.2
             self.downloadValue.alpha = 0.2
-            self.usageTitle.text = L10n.Tiles.Usage.Ipsec.title
+            self.usageTitle.text = L10n.Localizable.Tiles.Usage.Ipsec.title
         } else {
-            self.usageTitle.text = L10n.Tiles.Usage.title.uppercased()
+            self.usageTitle.text = L10n.Localizable.Tiles.Usage.title.uppercased()
             self.uploadValue.alpha = 1
             self.downloadValue.alpha = 1
         }

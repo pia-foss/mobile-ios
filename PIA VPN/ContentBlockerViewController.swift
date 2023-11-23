@@ -37,13 +37,13 @@ class ContentBlockerViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = L10n.ContentBlocker.title
+        title = L10n.Localizable.ContentBlocker.title
 
-        imvPicture.image = Asset.imageContentBlocker.image
-        labelTitle.text = L10n.ContentBlocker.title
-        labelMessage.text = L10n.ContentBlocker.Body.subtitle
-        labelFooter.text = L10n.ContentBlocker.Body.footer
-        buttonSubmit.title = L10n.Global.ok
+        imvPicture.image = Asset.Images.imageContentBlocker.image
+        labelTitle.text = L10n.Localizable.ContentBlocker.title
+        labelMessage.text = L10n.Localizable.ContentBlocker.Body.subtitle
+        labelFooter.text = L10n.Localizable.ContentBlocker.Body.footer
+        buttonSubmit.title = L10n.Localizable.Global.ok
     }
 
     @IBAction private func submit() {

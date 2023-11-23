@@ -113,7 +113,7 @@ extension InAppMessage {
         case .action:
             if let actions = self.settingAction {
                 command = ActionCommand(actions)
-                Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image, message: L10n.Inapp.Messages.Settings.updated)
+                Macros.displaySuccessImageNote(withImage: Asset.Images.iconWarning.image, message: L10n.Localizable.Inapp.Messages.Settings.updated)
             }
         default:
             break
@@ -169,7 +169,7 @@ extension MessagesManager {
     @objc private func presentExpiringDIPRegionSystemMessage(notification: Notification) {
 
         if let userInfo = notification.userInfo, let token = userInfo[NotificationKey.token] as? String {
-            let message = InAppMessage(withMessage: ["en-US": L10n.Dedicated.Ip.Message.Token.willexpire], id: token, link: ["en-US": L10n.Dedicated.Ip.Message.Token.Willexpire.link], type: .link, level: .system, actions: nil, view: nil, uri: AppConstants.Web.homeURL.absoluteString)
+            let message = InAppMessage(withMessage: ["en-US": L10n.Localizable.Dedicated.Ip.Message.Token.willexpire], id: token, link: ["en-US": L10n.Localizable.Dedicated.Ip.Message.Token.Willexpire.link], type: .link, level: .system, actions: nil, view: nil, uri: AppConstants.Web.homeURL.absoluteString)
             MessagesManager.shared.postSystemMessage(message: message)
         }
 
@@ -186,7 +186,7 @@ extension MessagesManager {
                 if relation[token] != nil && relation[token] != ip {
                     //changes
                     relation[token] = ip
-                    let message = InAppMessage(withMessage: ["en-US": L10n.Dedicated.Ip.Message.Ip.updated], id: token, link: ["en-US":""], type: .none, level: .system, actions: nil, view: nil, uri: nil)
+                    let message = InAppMessage(withMessage: ["en-US": L10n.Localizable.Dedicated.Ip.Message.Ip.updated], id: token, link: ["en-US":""], type: .none, level: .system, actions: nil, view: nil, uri: nil)
                     MessagesManager.shared.postSystemMessage(message: message)
                 }
             }
@@ -196,7 +196,7 @@ extension MessagesManager {
     
     
     func showInAppSurveyMessage() {
-        let message = InAppMessage(withMessage: ["en-US": L10n.Account.Survey.message.appendDetailSymbol()], id: MessagesManager.surveyMessageID, link: ["en-US": L10n.Account.Survey.messageLink.appendDetailSymbol()], type: .link, level: .api, actions: nil, view: nil, uri: AppConstants.Survey.formURL.absoluteString) { [weak self] in
+        let message = InAppMessage(withMessage: ["en-US": L10n.Localizable.Account.Survey.message.appendDetailSymbol()], id: MessagesManager.surveyMessageID, link: ["en-US": L10n.Localizable.Account.Survey.messageLink.appendDetailSymbol()], type: .link, level: .api, actions: nil, view: nil, uri: AppConstants.Survey.formURL.absoluteString) { [weak self] in
             self?.dismiss(message: MessagesManager.surveyMessageID)
         }
         MessagesManager.shared.postSystemMessage(message: message)

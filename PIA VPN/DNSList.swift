@@ -144,18 +144,18 @@ class DNSList: NSObject {
                     if key == customKey { //L10n.Global.custom
                         switch value.count {
                         case 0:
-                            return L10n.Settings.Dns.custom
+                            return L10n.Localizable.Settings.Dns.custom
                         case 1:
-                            return L10n.Settings.Dns.custom + " (" + value.first! + ")"
+                            return L10n.Localizable.Settings.Dns.custom + " (" + value.first! + ")"
                         default:
-                            return L10n.Settings.Dns.custom + " (" + value.first! + " / " + value.last! + ")"
+                            return L10n.Localizable.Settings.Dns.custom + " (" + value.first! + " / " + value.last! + ")"
                         }
                     }
                     return key
                 }
             }
         }
-        return L10n.Settings.Dns.custom
+        return L10n.Localizable.Settings.Dns.custom
     }
     
     /// Return if a custom DNS is set for given protocol and its configured DNS servers

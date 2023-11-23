@@ -38,7 +38,7 @@ class DedicatedIpRowViewCell: UITableViewCell, Restylable {
         self.server = server
 
         imvFlag.setImage(fromServer: server)
-        imvFlag.accessibilityLabel = L10n.Dedicated.Ip.Country.Flag.accessibility(server.name)
+        imvFlag.accessibilityLabel = L10n.Localizable.Dedicated.Ip.Country.Flag.accessibility(server.name)
         labelRegion.text = server.name
         
         if let pingAddress = server.bestAddress() {

@@ -1,0 +1,88 @@
+/* 
+  Welcome.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
+"login.title" = "계정에 로그인";
+"login.username.placeholder" = "사용자 이름 (p1234567)";
+"login.password.placeholder" = "비밀번호";
+"login.submit" = "로그인";
+"login.restore.button" = "계정 정보를 받지 못하셨습니까?";
+"login.error.title" = "로그인";
+"login.error.validation" = "사용자 이름과 비밀번호를 입력하셔야 합니다.";
+"login.error.unauthorized" = "사용자명 또는 비밀번호가 틀립니다.";
+"login.error.throttled" = "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"login.receipt.button" = "구매 영수증을 사용해 로그인";
+"login.magic.link.title" = "이메일 링크를 사용해 간편하게 로그인";
+"login.magic.link.response" = "로그인 링크가 담긴 이메일을 확인하세요.";
+"login.magic.link.send" = "링크 보내기";
+"login.magic.link.invalid.email" = "이메일이 유효하지 않음. 다시 시도하세요.";
+
+"purchase.title" = "VPN 플랜 선택";
+"purchase.subtitle" = "30일 이내 환불 보장";
+"purchase.email.placeholder" = "이메일 주소";
+"purchase.continue" = "계속";
+"purchase.login.footer" = "이미 계정이 있으세요?";
+"purchase.login.button" = "로그인";
+"purchase.error.title" = "구매";
+"purchase.error.validation" = "이메일 주소를 입력하셔야 합니다.";
+"purchase.error.connectivity.title" = "연결 실패";
+"purchase.error.connectivity.description" = "Private Internet Access에 접속할 수 없습니다. 인터넷 연결 상태가 좋지 않거나 귀하의 국가에서 당사의 서비스가 차단된 것 같습니다.";
+"purchase.confirm.form.email" = "이메일 주소를 입력하세요";
+"purchase.confirm.plan" = "%@ 플랜을 구매합니다";
+"purchase.email.why" = "사용자 이름 및 비밀번호를 보내 드리면 고객님의 이메일 주소가 필요합니다.";
+"purchase.submit" = "제출";
+"purchase.or" = "또는";
+
+"upgrade.header" = "다시 오신 걸 환영합니다!";
+"upgrade.title" = "Private Internet Access를 사용하려면 구독을 갱신하셔야 합니다.";
+"upgrade.renew.now" = "지금 갱신";
+
+
+
+"redeem.title" = "기프트 카드 청구";
+"redeem.subtitle" = "기프트 카드 또는 체험 카드의 %lu자리 PIN과 이메일 주소를 입력하세요.";
+"redeem.email.placeholder" = "이메일 주소";
+"redeem.submit" = "제출";
+"redeem.error.title" = "청구";
+"redeem.error.code" = "코드는 %lu자리 숫자여야 합니다.";
+"redeem.error.allfields" = "이메일 및 카드 PIN을 입력하세요.";
+"redeem.accessibility.back" = "뒤로";
+"redeem.giftcard.placeholder" = "기프트 카드 PIN";
+
+"plan.monthly.title" = "월간";
+"plan.yearly.title" = "연간";
+"plan.yearly.detail_format" = "매년 %@%@";
+"plan.price_format" = "%@/월";
+"plan.best_value" = "최저가";
+"plan.accessibility.per_month" = "매월";
+
+"restore.title" = "인정되지 않은 구매 항목 복원";
+"restore.subtitle" = "이 앱을 통해 요금 플랜을 구매하셨는데 자격 증명 정보를 받지 못하신 경우 이곳에서 다시 보내실 수 있습니다. 이 과정 중 요금이 부과되지 않습니다.\n";
+"restore.email.placeholder" = "이메일 주소";
+"restore.submit" = "확인";
+
+"iap.error.message.unavailable" = "현재 Apple 서버를 이용할 수 없습니다. 나중에 다시 시도해주십시오.";
+"iap.error.title" = "오류";
+
+"agreement.trials.title" = "무료 체험 계약 조건";
+"agreement.trials.message" = "구매 확인 시 사용자의 Apple ID 계정으로 요금이 청구됩니다. 현재 기간이 종료하기 24시간 전에 취소하지 않으면 구독은 자동으로 갱신됩니다. 현재 기간이 종료하기 전 24시간 이내에 갱신 요금이 계정으로 청구됩니다. 구매 후 App Store의 계정 설정에서 구독을 관리하고 취소할 수 있습니다.\n\n일부 유료 구독은 사용자의 결제 수단으로 청구하기 전에 무료 체험을 제공할 수 있습니다. 결제 수단으로 청구가 시작되기 전에 유료 구독을 취소하려면, 무료 체험 기간이 종료하기 24시간 전에 구독을 취소하십시오.\n\n무료 체험은 신규 사용자만 이용할 수 있으며, 당사의 단독 재량으로 제공됩니다. 무료 체험을 추가로 이용하기 위해 가입한 경우 표준 구독 요금이 즉시 청구됩니다.\n\n당사는 언제든지 무료 체험을 철회할 권리를 보유합니다.\n\n구독 구매 시 무료 체험 기간의 미사용분은 소멸됩니다.\n\n가입 시 본 계약 조건에 동의하신 것으로 간주됩니다.";
+"agreement.message" = "체험 기간이 종료하기 24시간 전에 구독을 취소하지 않으면, 7일 무료 체험 후 이 구독은 %@에 자동으로 갱신됩니다. 체험 기간이 종료하기 전 24시간 이내에 사용자의 Apple ID로 갱신 요금이 청구됩니다. 구매 후 App Store 계정으로 이동하여 구독을 관리하고 취소할 수 있습니다. 7일 체험 혜택은 사용자당 한 번으로 제한됩니다. 사용자가 구독을 구매할 경우 무료 체험 기간의 미사용분은 소멸됩니다. 모든 가격에는 현지에서 적용되는 판매세가 포함됩니다.\n\n가입 시 $1 및 $2에 동의하신 것으로 간주됩니다.";
+"agreement.trials.yearly.plan" = "년";
+"agreement.trials.monthly.plan" = "개월";
+
+"agreement.message.tos" = "서비스 약관";
+"agreement.message.privacy" = "개인정보 취급방침";
+
+"getstarted.buttons.buyaccount" = "계정 구입";
+
+"gdpr.collect.data.title" = "당사가 수집하는 개인 정보";
+"gdpr.collect.data.description" = "계정 관리 및 악용 방지를 위한 이메일 주소.";
+"gdpr.usage.data.title" = "수집된 개인 정보의 사용";
+"gdpr.usage.data.description" = "이메일 주소는 구독 정보, 결제 확인, 고객 공지 사항 및 Private Internet Access 프로모션 정보를 보내는 데에만 사용됩니다.";
+"gdpr.accept.button.title" = "동의 및 계속";
+
+"update.account.email.error" = "계정 이메일을 수정하지 못했습니다";

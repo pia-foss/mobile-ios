@@ -73,20 +73,20 @@ extension NetworkRuleOptionView: UITableViewDelegate, UITableViewDataSource {
 
         switch indexPath.row {
         case NMTRules.alwaysConnect.rawValue:
-            cell.textLabel?.text = L10n.Network.Management.Tool.Always.connect
-            cell.textLabel?.accessibilityLabel = L10n.Global.Row.selection + " " + L10n.Network.Management.Tool.Always.connect
-            cell.accessoryView = UIImageView(image: Asset.Piax.Nmt.iconNmtConnect.image.withRenderingMode(.alwaysTemplate))
+            cell.textLabel?.text = L10n.Localizable.Network.Management.Tool.Always.connect
+            cell.textLabel?.accessibilityLabel = L10n.Localizable.Global.Row.selection + " " + L10n.Localizable.Network.Management.Tool.Always.connect
+            cell.accessoryView = UIImageView(image: Asset.Images.Piax.Nmt.iconNmtConnect.image.withRenderingMode(.alwaysTemplate))
         case NMTRules.alwaysDisconnect.rawValue:
-            cell.textLabel?.text = L10n.Network.Management.Tool.Always.disconnect
-            cell.textLabel?.accessibilityLabel = L10n.Global.Row.selection + " " + L10n.Network.Management.Tool.Always.disconnect
-            cell.accessoryView = UIImageView(image: Asset.Piax.Nmt.iconDisconnect.image.withRenderingMode(.alwaysTemplate))
+            cell.textLabel?.text = L10n.Localizable.Network.Management.Tool.Always.disconnect
+            cell.textLabel?.accessibilityLabel = L10n.Localizable.Global.Row.selection + " " + L10n.Localizable.Network.Management.Tool.Always.disconnect
+            cell.accessoryView = UIImageView(image: Asset.Images.Piax.Nmt.iconDisconnect.image.withRenderingMode(.alwaysTemplate))
         case NMTRules.retainState.rawValue:
-            cell.textLabel?.text = L10n.Network.Management.Tool.Retain.state
-            cell.textLabel?.accessibilityLabel = L10n.Global.Row.selection + " " + L10n.Network.Management.Tool.Retain.state
-            cell.accessoryView = UIImageView(image: Asset.Piax.Nmt.iconRetain.image.withRenderingMode(.alwaysTemplate))
+            cell.textLabel?.text = L10n.Localizable.Network.Management.Tool.Retain.state
+            cell.textLabel?.accessibilityLabel = L10n.Localizable.Global.Row.selection + " " + L10n.Localizable.Network.Management.Tool.Retain.state
+            cell.accessoryView = UIImageView(image: Asset.Images.Piax.Nmt.iconRetain.image.withRenderingMode(.alwaysTemplate))
         default:
-            cell.textLabel?.text = L10n.Global.remove
-            cell.textLabel?.accessibilityLabel = L10n.Global.Row.selection + " " + L10n.Global.remove
+            cell.textLabel?.text = L10n.Localizable.Global.remove
+            cell.textLabel?.accessibilityLabel = L10n.Localizable.Global.Row.selection + " " + L10n.Localizable.Global.remove
             cell.textLabel?.style(style: TextStyle.textStyle10)
             cell.accessoryView = nil
         }

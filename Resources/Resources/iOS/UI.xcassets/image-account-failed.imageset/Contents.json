@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "signup-error.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

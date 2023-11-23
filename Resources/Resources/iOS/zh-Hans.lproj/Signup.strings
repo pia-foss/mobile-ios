@@ -1,0 +1,92 @@
+/* 
+  Signup.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
+"in_progress.title" = "确认注册";
+"in_progress.message" = "我们正在确认您在我们系统中的购买。这可能需要一点时间，请耐心等待。";
+"in_progress.redeem.message" = "我们正在通过系统确认您的卡片PIN。这可能需要一些时间，请耐心等待。";
+
+"success.title" = "购买完成";
+"success.message_format" = "感谢注册。我们已将您的用户名和密码发送至您的电子邮箱：%@";
+"success.redeem.title" = "卡片兑换成功";
+"success.redeem.message" = "您将很快收到一封电子邮件，记有您的用户名和密码。\n\n您的登录详情";
+"success.username.caption" = "用户名";
+"success.password.caption" = "密码";
+"success.submit" = "开始体验";
+
+"failure.vc_title" = "注册失败";
+"failure.title" = "账户创建失败";
+"failure.message" = "我们现在无法创建账号。\n请稍后再试。\n\n重新打开本应用将会再次尝试创建账号。";
+"failure.purchase.sandbox.message" = "所选的沙盒订阅不适用于生产";
+"failure.redeem.invalid.title" = "卡片PIN无效";
+"failure.redeem.invalid.message" = "您输入的卡片PIN似乎无效。请重试。";
+"failure.redeem.claimed.title" = "卡片已使用";
+"failure.redeem.claimed.message" = "此卡片似乎已被另一个账号使用。您可尝试输入另一个PIN。";
+"failure.submit" = "返回";
+
+"unreachable.vc_title" = "错误";
+"unreachable.title" = "糟糕！";
+"unreachable.message" = "未找到网络连接。请确认您已接入网络，然后点击下面的重试。\n\n您可在稍后再回到本应用完成该操作。";
+"unreachable.submit" = "重试";
+
+"purchase.uncredited.alert.message" = "你有未入账的的交易。要恢复您的账户详情吗？";
+"purchase.uncredited.alert.button.cancel" = "取消";
+"purchase.uncredited.alert.button.recover" = "恢复账户";
+
+"purchase.trials.intro" = "开始 7 天免费试用";
+"purchase.trials.price.after" = "然后 %@";
+"purchase.trials.money.back" = "7 天退款保证";
+"purchase.trials.1year.protection" = "1 年隐私和身份保护";
+"purchase.trials.anonymous" = "匿名浏览并隐藏您的 IP。";
+"purchase.trials.devices" = "一次支持 10 台设备";
+"purchase.trials.devices.description" = "一次在多达 10 台设备上保护自己。";
+"purchase.trials.region" = "轻松连接到任何地区";
+"purchase.trials.servers" = "在 32 个国家h地区拥有超过 3300 台服务器";
+"purchase.trials.start" = "开始订阅";
+"purchase.trials.all.plans" = "查看所有可用套餐";
+
+"purchase.subscribe.now" = "立即订阅";
+
+// WALKTHROUGH
+
+"walkthrough.action.next" = "下一个";
+"walkthrough.action.done" = "完成";
+"walkthrough.action.skip" = "跳过";
+
+"walkthrough.page.1.title" = "一次支持 10 台设备";
+"walkthrough.page.1.description" = "一次在多达 10 台设备上保护自己。";
+"walkthrough.page.2.title" = "轻松连接到任何地区";
+"walkthrough.page.2.description" = "服务器遍布世界各地，您始终受到保护。";
+"walkthrough.page.3.title" = "让自己远离广告";
+"walkthrough.page.3.description" = "启用内容拦截器以防止 Safari 中出现广告。";
+
+"share.data.buttons.accept" = "接受";
+"share.data.buttons.noThanks" = "不用，谢谢";
+"share.data.buttons.readMore" = "阅读更多";
+"share.data.text.title" = "请帮助我们改进服务";
+"share.data.text.description" = "为了帮助我们保持服务的连接性能，您可以匿名与我们共享您的连接统计数据。这些报告不包括任何可识别个人身份的信息。";
+"share.data.text.footer" = "您始终可以从设置中进行控制";
+
+"share.data.readMore.text.description" = "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";

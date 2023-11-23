@@ -40,10 +40,10 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = .clear
-        self.title.text = L10n.Dedicated.Ip.title
-        self.subtitle.text = L10n.Dedicated.Ip.Activation.description
-        self.addTokenTextfield.accessibilityLabel = L10n.Dedicated.Ip.Token.Textfield.accessibility
-        self.addTokenTextfield.placeholder = L10n.Dedicated.Ip.Token.Textfield.placeholder
+        self.title.text = L10n.Localizable.Dedicated.Ip.title
+        self.subtitle.text = L10n.Localizable.Dedicated.Ip.Activation.description
+        self.addTokenTextfield.accessibilityLabel = L10n.Localizable.Dedicated.Ip.Token.Textfield.accessibility
+        self.addTokenTextfield.placeholder = L10n.Localizable.Dedicated.Ip.Token.Textfield.placeholder
         self.addTokenTextfield.delegate = self
     }
 
@@ -65,7 +65,7 @@ class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
     private func styleButton() {
         addTokenButton.setRounded()
         addTokenButton.style(style: TextStyle.Buttons.piaGreenButton)
-        addTokenButton.setTitle(L10n.Dedicated.Ip.Activate.Button.title,
+        addTokenButton.setTitle(L10n.Localizable.Dedicated.Ip.Activate.Button.title,
                                for: [])
     }
 

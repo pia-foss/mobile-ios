@@ -66,7 +66,7 @@ class QuickConnectTile: UIView, Tileable {
         nc.addObserver(self, selector: #selector(updateQuickConnectList), name: .PIAServerHasBeenUpdated, object: nil)
         nc.addObserver(self, selector: #selector(updateQuickConnectList), name: .PIADaemonsDidPingServers, object: nil)
         viewShouldRestyle()
-        self.tileTitle.text = L10n.Tiles.Quick.Connect.title.uppercased()
+        self.tileTitle.text = L10n.Localizable.Tiles.Quick.Connect.title.uppercased()
         updateQuickConnectList()
         
     }
@@ -113,11 +113,11 @@ class QuickConnectTile: UIView, Tileable {
         for containerView in stackView.subviews {
             if let button = containerView.subviews.first as? ServerButton,
                 let favoriteImage = containerView.subviews.last as? UIImageView {
-                button.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Tiles.quickConnectPlaceholderLight.image :
-                    Asset.Piax.Tiles.quickConnectPlaceholderDark.image, for: .normal)
+                button.setImage(Theme.current.palette.appearance == .light ? Asset.Images.Piax.Tiles.quickConnectPlaceholderLight.image :
+                                    Asset.Images.Piax.Tiles.quickConnectPlaceholderDark.image, for: .normal)
                 button.imageView?.contentMode = .scaleAspectFit
                 button.isUserInteractionEnabled = false
-                button.accessibilityLabel = L10n.Global.empty
+                button.accessibilityLabel = L10n.Localizable.Global.empty
                 favoriteImage.isHidden = true
             }
         }
@@ -125,7 +125,7 @@ class QuickConnectTile: UIView, Tileable {
         for label in labelsStackView.subviews {
             if let label = label as? UILabel {
                 label.text = ""
-                label.accessibilityLabel = L10n.Global.empty
+                label.accessibilityLabel = L10n.Localizable.Global.empty
             }
         }
         

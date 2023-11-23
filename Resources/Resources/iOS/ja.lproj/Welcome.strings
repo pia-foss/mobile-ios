@@ -1,0 +1,88 @@
+/* 
+  Welcome.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
+"login.title" = "アカウントにサインイン";
+"login.username.placeholder" = "ユーザー名 (p1234567)";
+"login.password.placeholder" = "パスワード";
+"login.submit" = "ログイン";
+"login.restore.button" = "アカウント詳細を受信しませんでしたか？";
+"login.error.title" = "ログイン";
+"login.error.validation" = "ユーザー名とパスワードを入力してください。";
+"login.error.unauthorized" = "ユーザー名またはパスワードが間違っています。";
+"login.error.throttled" = "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"login.receipt.button" = "購入領収書を使用してログイン";
+"login.magic.link.title" = "魔法のメールリンクを使用してログイン";
+"login.magic.link.response" = "ログインリンクについては、メールを確認してください。";
+"login.magic.link.send" = "リンクを送信";
+"login.magic.link.invalid.email" = "無効なメールアドレス。もう一度お試しください。";
+
+"purchase.title" = "VPNプランを選択";
+"purchase.subtitle" = "30日間返金保証";
+"purchase.email.placeholder" = "メールアドレス";
+"purchase.continue" = "続行";
+"purchase.login.footer" = "既にアカウントをお持ちですか？";
+"purchase.login.button" = "サインイン";
+"purchase.error.title" = "購入";
+"purchase.error.validation" = "必ずメールアドレスを入力してください。";
+"purchase.error.connectivity.title" = "接続エラー";
+"purchase.error.connectivity.description" = "Private Internet Accessに接続できませんでした。インターネットの接続が不安定、もしくはお住まいの国で当社サービスがブロックされている可能性があります。";
+"purchase.confirm.form.email" = "メールアドレスを入力してください";
+"purchase.confirm.plan" = "お客様は%@プランを購入しようとしています";
+"purchase.email.why" = "ユーザー名とパスワードを送信するためのメールアドレスを入力してください。";
+"purchase.submit" = "送信";
+"purchase.or" = "または";
+
+"upgrade.header" = "お帰りなさい！";
+"upgrade.title" = "Private Internet Accessのご利用を継続するには、サブスクリプションを更新する必要があります。";
+"upgrade.renew.now" = "今すぐ更新";
+
+
+
+"redeem.title" = "ギフトカード引換え";
+"redeem.subtitle" = "メールアドレスと、以下のギフトカードまたはトライアルカードの%lu桁のPINを入力してください。";
+"redeem.email.placeholder" = "メールアドレス";
+"redeem.submit" = "送信";
+"redeem.error.title" = "引換え";
+"redeem.error.code" = "コードは%lu桁でなければなりません。";
+"redeem.error.allfields" = "メールアドレスとカードのPINを入力してください。";
+"redeem.accessibility.back" = "戻る";
+"redeem.giftcard.placeholder" = "ギフトカードのPIN";
+
+"plan.monthly.title" = "月間";
+"plan.yearly.title" = "年間";
+"plan.yearly.detail_format" = "年間%@%@";
+"plan.price_format" = "%@/月";
+"plan.best_value" = "最もお得";
+"plan.accessibility.per_month" = "月々";
+
+"restore.title" = "追加されていない更新を復元";
+"restore.subtitle" = "このアプリでプランを購入した後、認証情報を受け取っていない方は、こちらから認証情報を再度送信することができます。この処理の実行中、課金は発生しません。";
+"restore.email.placeholder" = "メールアドレス";
+"restore.submit" = "確定";
+
+"iap.error.message.unavailable" = "Appleサーバーが現在ご利用いただけません。後でもう一度お試しください。";
+"iap.error.title" = "エラー";
+
+"agreement.trials.title" = "無料トライアル利用規約";
+"agreement.trials.message" = "ご購入確定時にお使いのApple IDアカウント支払額が請求されます。サブスクリプションは現在の期間が終了する24時間前までにキャンセルされない限り自動的に更新されます。更新料は現在の期間終了前の24時間以内にお使いのアカウントに請求されます。サブスクリプションはご購入後にApp Storeのアカウント設定からいつでも管理およびキャンセルすることができます。\n\n一部の有料サブスクリプションでは、ご希望の支払方法による請求が実施される前に無料トライアルが提供されている場合があります。ご選択の支払方法による請求が実施される前に有料サブスクリプションの解約をする場合は、無料トライアルが終了する24時間前までにサブスクリプションをキャンセルしてください。\n\n無料トライアルをご利用いただけるのは新規ユーザーのみとなり、無料トライアルを使用する目的で新たに追加のアカウントをサインアップした場合、弊社の裁量によって、通常のサブスクリプション料金が即時に請求されます。\n\n弊社は無料トライアル期間をいつでも無効にする権利を保持します。\n\nサブスクリプションご購入後、未使用分の無料トライアル期間は無効となります。\n\nサインアップすることで、$1と$2に同意したことになります。";
+"agreement.message" = "トライアル期間終了の少なくとも24時間前にキャンセルされない限り、7日間の無料トライアル後、この定期購読は自動的に%@で更新されます。更新料は、トライアル期間終了前の24時間以内にご利用のApple IDアカウントに請求されます。定期購読は、定期購読購入後にApp Storeアカウント設定から管理およびキャンセルすることができます。7日間のトライアルオファーは、ユーザー1人あたり1回の7日間トライアルに限られています。無料トライアルを利用した場合、無料トライアル期間の未使用分は、ユーザーが定期購読を購入した時点で無効となります。すべての料金には、適用可能な場合現地の消費税が含まれます。\n\nサインアップすることにより、$1および$2に同意したことになります。";
+"agreement.trials.yearly.plan" = "年";
+"agreement.trials.monthly.plan" = "月";
+
+"agreement.message.tos" = "利用規約";
+"agreement.message.privacy" = "プライバシーポリシー";
+
+"getstarted.buttons.buyaccount" = "アカウントを購入する";
+
+"gdpr.collect.data.title" = "弊社が収集する個人情報";
+"gdpr.collect.data.description" = "メールアドレスは、アカウント管理、および乱用からの保護を目的とします。";
+"gdpr.usage.data.title" = "弊社により収集される個人情報の使用";
+"gdpr.usage.data.description" = "メールアドレスはサブスクリプション情報、お支払確認、お客様とのやり取り、およびPrivate Internet Accessのプロモーションオファーを送信するためにのみ使用されます。";
+"gdpr.accept.button.title" = "同意して続行する";
+
+"update.account.email.error" = "アカウントのメールを変更できませんでした";

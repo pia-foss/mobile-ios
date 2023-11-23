@@ -151,7 +151,7 @@ extension TransportPopoverSelectionView: UITableViewDelegate, UITableViewDataSou
         cell.textLabel?.style(style: cellTextStyle)
 
         if options[indexPath.row] == ProtocolSettingsViewController.AUTOMATIC_SOCKET {
-            cell.textLabel?.text = L10n.Global.automatic
+            cell.textLabel?.text = L10n.Localizable.Global.automatic
         } else {
             cell.textLabel?.text = options[indexPath.row]
         }
@@ -209,7 +209,7 @@ extension PortPopoverSelectionView: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.style(style: cellTextStyle)
 
         if options[indexPath.row] == ProtocolSettingsViewController.AUTOMATIC_PORT {
-            cell.textLabel?.text = L10n.Global.automatic
+            cell.textLabel?.text = L10n.Localizable.Global.automatic
         } else {
             cell.textLabel?.text = options[indexPath.row].description
         }

@@ -72,11 +72,11 @@ class ShowQuickSettingsViewController: AutolayoutViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        styleNavigationBarWithTitle(L10n.Tiles.Quicksettings.title)
+        styleNavigationBarWithTitle(L10n.Localizable.Tiles.Quicksettings.title)
     }
 
     @objc private func viewHasRotated() {
-        styleNavigationBarWithTitle(L10n.Tiles.Quicksettings.title)
+        styleNavigationBarWithTitle(L10n.Localizable.Tiles.Quicksettings.title)
     }
     
     // MARK: Switch actions
@@ -123,10 +123,10 @@ class ShowQuickSettingsViewController: AutolayoutViewController {
     private func cancelDisablingAction() {
         tableView.reloadData()
         let alert = Macros.alert(
-            L10n.Tiles.Quicksettings.title,
-            L10n.Tiles.Quicksettings.Min.Elements.message
+            L10n.Localizable.Tiles.Quicksettings.title,
+            L10n.Localizable.Tiles.Quicksettings.Min.Elements.message
         )
-        alert.addActionWithTitle(L10n.Global.ok) {
+        alert.addActionWithTitle(L10n.Localizable.Global.ok) {
         }
         present(alert, animated: true, completion: nil)
     }
@@ -143,7 +143,7 @@ class ShowQuickSettingsViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        styleNavigationBarWithTitle(L10n.Tiles.Quicksettings.title)
+        styleNavigationBarWithTitle(L10n.Localizable.Tiles.Quicksettings.title)
 
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
@@ -183,32 +183,32 @@ extension ShowQuickSettingsViewController: UITableViewDataSource, UITableViewDel
             let option = options[indexPath.row]
             switch option {
             case .theme:
-                cell.titleLabel.text = L10n.Settings.ApplicationSettings.ActiveTheme.title
+                cell.titleLabel.text = L10n.Localizable.Settings.ApplicationSettings.ActiveTheme.title
                 cell.accessoryView = switchThemeSettings
-                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Piax.Global.themeLightInactive.image :
-                Asset.Piax.Global.themeDarkInactive.image
-                cell.settingImage.accessibilityLabel = L10n.Settings.ApplicationSettings.ActiveTheme.title
+                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Images.Piax.Global.themeLightInactive.image :
+                Asset.Images.Piax.Global.themeDarkInactive.image
+                cell.settingImage.accessibilityLabel = L10n.Localizable.Settings.ApplicationSettings.ActiveTheme.title
                 switchThemeSettings.isOn = AppPreferences.shared.quickSettingThemeVisible
             case .killswitch:
-                cell.titleLabel.text = L10n.Settings.ApplicationSettings.KillSwitch.title
+                cell.titleLabel.text = L10n.Localizable.Settings.ApplicationSettings.KillSwitch.title
                 cell.accessoryView = switchKillSwitchSetting
-                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Piax.Global.killswitchLightInactive.image :
-                Asset.Piax.Global.killswitchDarkInactive.image
-                cell.settingImage.accessibilityLabel = L10n.Settings.ApplicationSettings.KillSwitch.title
+                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Images.Piax.Global.killswitchLightInactive.image :
+                Asset.Images.Piax.Global.killswitchDarkInactive.image
+                cell.settingImage.accessibilityLabel = L10n.Localizable.Settings.ApplicationSettings.KillSwitch.title
                 switchKillSwitchSetting.isOn = AppPreferences.shared.quickSettingKillswitchVisible
             case .networkTools:
-                cell.titleLabel.text = L10n.Tiles.Quicksetting.Nmt.title
+                cell.titleLabel.text = L10n.Localizable.Tiles.Quicksetting.Nmt.title
                 cell.accessoryView = switchNetworkToolsSetting
-                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Piax.Global.nmtLightInactive.image :
-                Asset.Piax.Global.nmtDarkInactive.image
-                cell.settingImage.accessibilityLabel = L10n.Tiles.Quicksetting.Nmt.title
+                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Images.Piax.Global.nmtLightInactive.image :
+                Asset.Images.Piax.Global.nmtDarkInactive.image
+                cell.settingImage.accessibilityLabel = L10n.Localizable.Tiles.Quicksetting.Nmt.title
                 switchNetworkToolsSetting.isOn = AppPreferences.shared.quickSettingNetworkToolVisible
             case .privateBrowsing:
-                cell.titleLabel.text = L10n.Tiles.Quicksetting.Private.Browser.title
+                cell.titleLabel.text = L10n.Localizable.Tiles.Quicksetting.Private.Browser.title
                 cell.accessoryView = switchPrivateBrowserSetting
-                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Piax.Global.browserLightInactive.image :
-                Asset.Piax.Global.browserDarkInactive.image
-                cell.settingImage.accessibilityLabel = L10n.Tiles.Quicksetting.Private.Browser.title
+                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Images.Piax.Global.browserLightInactive.image :
+                Asset.Images.Piax.Global.browserDarkInactive.image
+                cell.settingImage.accessibilityLabel = L10n.Localizable.Tiles.Quicksetting.Private.Browser.title
                 switchPrivateBrowserSetting.isOn = AppPreferences.shared.quickSettingPrivateBrowserVisible
             }
             Theme.current.applySettingsCellTitle(cell.titleLabel,

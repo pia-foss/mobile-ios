@@ -49,7 +49,7 @@ class PIACardsViewController: UIViewController {
     
     func createSlides() -> [PIACard] {
         
-        let closeImage = Asset.iconClose.image.withRenderingMode(.alwaysTemplate)
+        let closeImage = Asset.Images.iconClose.image.withRenderingMode(.alwaysTemplate)
         
         var collectingCards = [PIACard]()
         for card in cards {
@@ -72,8 +72,8 @@ class PIACardsViewController: UIViewController {
             }
             if card.hasSecondCTA() {
                 slide.cardSecondaryCTAButton.isHidden = false
-                slide.cardSecondaryCTAButton.setTitle(L10n.Card.Wireguard.Cta.learn, for: [])
-                slide.cardSecondaryCTAButton.accessibilityIdentifier = L10n.Card.Wireguard.Cta.learn
+                slide.cardSecondaryCTAButton.setTitle(L10n.Localizable.Card.Wireguard.Cta.learn, for: [])
+                slide.cardSecondaryCTAButton.accessibilityIdentifier = L10n.Localizable.Card.Wireguard.Cta.learn
                 slide.cardSecondaryCTAButton.addAction(for: .touchUpInside) { (button) in
                     if let url = card.learnMoreLink {
                         if UIApplication.shared.canOpenURL(url) {

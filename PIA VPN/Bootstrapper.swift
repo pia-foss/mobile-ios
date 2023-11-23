@@ -296,7 +296,7 @@ class Bootstrapper {
     }
     
     @objc private func internetUnreachable(notification: Notification) {
-        Macros.displayStickyNote(withMessage: L10n.Global.unreachable,
-                                 andImage: Asset.iconWarning.image)
+        Macros.displayStickyNote(withMessage: L10n.Localizable.Global.unreachable,
+                                 andImage: Asset.Images.iconWarning.image)
     }
 }

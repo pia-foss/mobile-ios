@@ -106,9 +106,9 @@ class TrustedNetworksViewController: AutolayoutViewController {
     
     // MARK: Private Methods
     private func presentKillSwitchAlert() {
-        let alert = Macros.alert(nil, L10n.Settings.Nmt.Killswitch.disabled)
-        alert.addCancelAction(L10n.Global.close)
-        alert.addActionWithTitle(L10n.Global.enable) {
+        let alert = Macros.alert(nil, L10n.Localizable.Settings.Nmt.Killswitch.disabled)
+        alert.addCancelAction(L10n.Localizable.Global.close)
+        alert.addActionWithTitle(L10n.Localizable.Global.enable) {
             let preferences = Client.preferences.editable()
             preferences.isPersistentConnection = true
             preferences.commit()
@@ -217,7 +217,7 @@ extension TrustedNetworksViewController: UICollectionViewDelegateFlowLayout, UIC
 
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Cells.header, for: indexPath) as! PIAHeaderCollectionViewCell
-            headerView.setup(withTitle: L10n.Network.Management.Tool.title, andSubtitle: L10n.Settings.Hotspothelper.description)
+            headerView.setup(withTitle: L10n.Localizable.Network.Management.Tool.title, andSubtitle: L10n.Localizable.Settings.Hotspothelper.description)
             return headerView
 
         default:

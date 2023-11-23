@@ -1,0 +1,88 @@
+/* 
+  Welcome.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved.
+*/
+
+"login.title" = "登录到您的帐户";
+"login.username.placeholder" = "用户名 (p1234567)";
+"login.password.placeholder" = "密码";
+"login.submit" = "登录";
+"login.restore.button" = "没有收到账户详情？";
+"login.error.title" = "登录";
+"login.error.validation" = "您必须输入用户名和密码。";
+"login.error.unauthorized" = "您的用户名或密码不正确。";
+"login.error.throttled" = "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"login.receipt.button" = "使用购买收据登录";
+"login.magic.link.title" = "使用魔法电子邮件链接登录";
+"login.magic.link.response" = "请检查您的电子邮件，以查找登录链接。";
+"login.magic.link.send" = "发送链接";
+"login.magic.link.invalid.email" = "电子邮箱乎无效。请重试。";
+
+"purchase.title" = "选择 VPN 套餐";
+"purchase.subtitle" = "7 天退款保证";
+"purchase.email.placeholder" = "电子邮件地址";
+"purchase.continue" = "继续";
+"purchase.login.footer" = "已有帐号？";
+"purchase.login.button" = "登录";
+"purchase.error.title" = "购买";
+"purchase.error.validation" = "您必须输入一个电子邮箱地址。";
+"purchase.error.connectivity.title" = "连接失败";
+"purchase.error.connectivity.description" = "我们无法接入Private Internet Access。原因可能是互联网连接不良或者我们的服务在您的国家遭到屏蔽。";
+"purchase.confirm.form.email" = "请输入您的电子邮件地址";
+"purchase.confirm.plan" = "您正在购买 %@ 套餐";
+"purchase.email.why" = "我们需要您的电子邮件以发送您的用户名和密码。";
+"purchase.submit" = "提交";
+"purchase.or" = "或";
+
+"upgrade.header" = "欢迎回来！";
+"upgrade.title" = "您需要续订才能使用 Private Internet Access。";
+"upgrade.renew.now" = "立即续订";
+
+
+
+"redeem.title" = "兑换礼品卡";
+"redeem.subtitle" = "请输入您的电子邮箱地址以及礼品卡或试用卡上的%lu位数字PIN。";
+"redeem.email.placeholder" = "邮箱地址";
+"redeem.submit" = "提交";
+"redeem.error.title" = "兑换";
+"redeem.error.code" = "PIN码必须包含%lu个数字。";
+"redeem.error.allfields" = "请输入您的电子邮件和卡片 PIN 码。";
+"redeem.accessibility.back" = "返回";
+"redeem.giftcard.placeholder" = "礼品卡 PIN";
+
+"plan.monthly.title" = "每月";
+"plan.yearly.title" = "每年";
+"plan.yearly.detail_format" = "%@%@/每年";
+"plan.price_format" = "%@/每月";
+"plan.best_value" = "最超值";
+"plan.accessibility.per_month" = "每月";
+
+"restore.title" = "恢复未入账的购买";
+"restore.subtitle" = "如果您通过此 app 购买了套餐，但没有收到凭据，可以从这里重新发送。在此过程中您不会被收费。";
+"restore.email.placeholder" = "电子邮件地址";
+"restore.submit" = "确认";
+
+"iap.error.message.unavailable" = "Apple 服务器目前不可用。请稍后重试。";
+"iap.error.title" = "错误";
+
+"agreement.trials.title" = "免费试用条款和条件";
+"agreement.trials.message" = "确认购买后，将从您的 Apple ID 账户中收取款项。除非在当前使用期结束前至少提前 24 小时取消，否则会自动续订。您的账户将在当前使用期结束前 24 小时内收取续订费用。您可以在购买后前往 App Store 上的账户设置来管理和取消订阅。\n\n某些“付费订阅”可能会在向您收取款项之前先提供免费试用。如果您在我们开始收取款项之前决定取消订阅“付费订阅”，请在免费试用结束前至少提前 24 小时取消订阅。\n\n免费试用仅适用于新用户，并由我们自行决定，如果您尝试注册额外的免费试用，您将被立即收取标准订阅费。\n\n我们有权随时撤销您的免费试用。\n\n免费试用期的任何未使用部分将在购买订阅时取消。\n\n注册即表示接受上述条款和条件。";
+"agreement.message" = "免费试用 7 天后，除非在试用期结束前至少提前 24 小时取消，否则此订阅将自动续订 ％@。您的 Apple ID 账户将在试用期结束前 24 小时内收取续订费用。您可以在购买后前往 App Store 上的账户设置来管理和取消订阅。每个用户仅可享受一次 7 天试用优惠。免费试用期的任何未使用部分（如果提供）将在用户购买订阅时失效。所有价格均包含适用的当地营业税。\n\n注册即表示接受$1和$2。";
+"agreement.trials.yearly.plan" = "年";
+"agreement.trials.monthly.plan" = "月";
+
+"agreement.message.tos" = "服务条款";
+"agreement.message.privacy" = "隐私政策";
+
+"getstarted.buttons.buyaccount" = "购买账户";
+
+"gdpr.collect.data.title" = "我们收集的个人信息";
+"gdpr.collect.data.description" = "用于账户管理和防止滥用的电子邮件地址。";
+"gdpr.usage.data.title" = "我们收集的个人信息的使用方式";
+"gdpr.usage.data.description" = "电子邮件地址仅用于发送订阅信息、付款确认、客户通信以及 Private Internet Access 促销优惠。";
+"gdpr.accept.button.title" = "同意并继续";
+
+"update.account.email.error" = "无法修改账户电子邮件";

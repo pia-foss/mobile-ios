@@ -60,7 +60,7 @@ class CustomNetworkCollectionViewCell: UICollectionViewCell {
 
     func viewShouldRestyle() {
         title.style(style: TextStyle.textStyle3)
-        let wifiImage = Asset.Piax.Nmt.iconNmtWifi.image.withRenderingMode(.alwaysTemplate)
+        let wifiImage = Asset.Images.Piax.Nmt.iconNmtWifi.image.withRenderingMode(.alwaysTemplate)
         wifiIcon.image = wifiImage
         wifiIcon.tintColor = .piaGrey4
         popover.dismiss()

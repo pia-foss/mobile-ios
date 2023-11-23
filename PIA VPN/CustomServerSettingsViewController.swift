@@ -74,7 +74,7 @@ class CustomServerSettingsViewController: AutolayoutViewController {
         } else {
             let alertController = Macros.alert("",
                                                "You must provide a valid server information")
-            alertController.addCancelAction(L10n.Global.close)
+            alertController.addCancelAction(L10n.Localizable.Global.close)
 
         }
     }
@@ -83,12 +83,12 @@ class CustomServerSettingsViewController: AutolayoutViewController {
     private func configureNavigationBar() {
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: L10n.Global.add,
+            title: L10n.Localizable.Global.add,
             style: .plain,
             target: self,
             action: #selector(update(_:))
         )
-        navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Global.add
+        navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Localizable.Global.add
     }
     
     private func configureTextfields() {

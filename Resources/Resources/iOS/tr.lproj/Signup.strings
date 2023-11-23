@@ -1,0 +1,166 @@
+/* (No Comment) */
+"failure.message" = "Şu anda hesap oluşturamıyoruz.\nLütfen daha sonra tekrar deneyin.\n\nUygulama yeniden açıldığından hesap oluşturma tekrar denenecektir.";
+
+/* (No Comment) */
+"failure.purchase.sandbox.message" = "Seçilen Sandbox aboneliği üretim ortamında mevcut değil.";
+
+/* (No Comment) */
+"failure.redeem.claimed.message" = "Bu kart önceden başka bir hesap tarafından talep edilmiş. Farklı bir PIN girmeyi deneyebilirsiniz.";
+
+/* (No Comment) */
+"failure.redeem.claimed.title" = "Kart önceden talep edilmiş";
+
+/* (No Comment) */
+"failure.redeem.invalid.message" = "Görünüşe bakılırsa geçersiz bir kart PIN'i girdiniz. Lütfen tekrar deneyin.";
+
+/* (No Comment) */
+"failure.redeem.invalid.title" = "Geçersiz kart PIN'i";
+
+/* (No Comment) */
+"failure.submit" = "GERİ DÖN";
+
+/* (No Comment) */
+"failure.title" = "Hesap Oluşturma Hatası";
+
+/* (No Comment) */
+"failure.vc_title" = "Kaydolma başarısız oldu";
+
+/* (No Comment) */
+"in_progress.message" = "Sistemimizle satın alım işleminizi onaylıyoruz. Biraz zaman alabilir; lütfen bekleyin.";
+
+/* (No Comment) */
+"in_progress.redeem.message" = "Kart PIN'inizi sistemimizde onaylıyoruz. Bu biraz zaman alabilir, lütfen bekleyin.";
+
+/* Signup.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved. */
+"in_progress.title" = "Kaydolmayı onayla";
+
+/* (No Comment) */
+"purchase.subscribe.now" = "Hemen abone ol";
+
+/* (No Comment) */
+"purchase.trials.1year.protection" = "1 yıllık gizlilik ve kimlik koruması";
+
+/* (No Comment) */
+"purchase.trials.all.plans" = "Tüm mevcut planlara bakın";
+
+/* (No Comment) */
+"purchase.trials.anonymous" = "IP'nizi gizleyerek İnternet'te isimsiz gezinin.";
+
+/* (No Comment) */
+"purchase.trials.devices" = "Aynı anda 10 cihaz desteği";
+
+/* (No Comment) */
+"purchase.trials.devices.description" = "Aynı anda 10 cihazda kendinizi koruyun.";
+
+/* (No Comment) */
+"purchase.trials.intro" = "7 günlük ücretsiz deneme sürenizi başlatın";
+
+/* (No Comment) */
+"purchase.trials.money.back" = "30 günlük para iade garantisi";
+
+/* (No Comment) */
+"purchase.trials.price.after" = "Ardından %@";
+
+/* (No Comment) */
+"purchase.trials.region" = "Tüm bölgelere kolayca bağlanın";
+
+/* (No Comment) */
+"purchase.trials.servers" = "32 ülkede en az 3.300 sunucu";
+
+/* (No Comment) */
+"purchase.trials.start" = "Aboneliği başlat";
+
+/* (No Comment) */
+"purchase.uncredited.alert.button.cancel" = "İptal";
+
+/* (No Comment) */
+"purchase.uncredited.alert.button.recover" = "Hesabı kurtar";
+
+/* (No Comment) */
+"purchase.uncredited.alert.message" = "Hesaba yansıtılmamış olan işlemleriniz var. Hesap bilgilerinizi kurtarmak ister misiniz?";
+
+/* (No Comment) */
+"share.data.buttons.accept" = "Kabul Et";
+
+/* (No Comment) */
+"share.data.buttons.noThanks" = "Hayır, teşekkürler";
+
+/* (No Comment) */
+"share.data.buttons.readMore" = "Devamını oku";
+
+/* (No Comment) */
+"share.data.readMore.text.description" = "Bu asgari bilgi, potansiyel bağlantı sorunlarını tanımlayıp düzeltmemize yardımcı olur. Bu bilgiyi paylaşmak için onay verilmesi ve varsayılan olarak kapalı olduğu için elle etkinleştirilmesi gerektiğini dikkate alın.\n\nŞu olaylarla ilgili bilgi toplayacağız:\n\n    - Bağlantı Denemesi\n    - Bağlantı İptal Edildi\n    - Bağlantı Kuruldu\n\nTüm bu olaylar için şu bilgileri toplayacağız:\n    - Platform\n    - Uygulama sürümü\n    - Uygulama türü (ön sürüm olup olmadığı)\n    - Kullanılan protokol\n    - Bağlantı kaynağı (manuel ya da otomasyon ile)\n\nTüm olaylarda rastgele oluşturulan eşsiz bir kimlik yer alacak. Bu kimlik kullanıcı hesabınızla bağlantılı değildir. Bu eşsiz kimlik, gizliliğin korunması açısından günlük olarak üretilir.\n\nKontrol daima sizde olacak. Ayarlardan hangi verileri topladığımızı görebilir ve bunu istediğiniz zaman kapatabilirsiniz.";
+
+/* (No Comment) */
+"share.data.text.description" = "Hizmetimizin bağlantı performansını korumamıza yardımcı olmak için bağlantı istatistiklerinizi isimsiz olarak bizimle paylaşabilirsiniz. Bu raporlarda kişiyi tanımlayabilecek herhangi bir bilgi yer almaz.";
+
+/* (No Comment) */
+"share.data.text.footer" = "Bunu istediğiniz zaman ayarlarınızdan kontrol edebilirsiniz";
+
+/* (No Comment) */
+"share.data.text.title" = "Lütfen hizmetimizi geliştirmemize yardım edin";
+
+/* (No Comment) */
+"success.message_format" = "Bize kayıt olduğunuz için teşekkürler. Hesap kullanıcı adı ve parolanızı %@ e-posta adresinize gönderdik";
+
+/* (No Comment) */
+"success.password.caption" = "Şifre";
+
+/* (No Comment) */
+"success.redeem.message" = "Kısa süre içinde kullanıcı adınızı ve şifrenizi içeren bir e-posta alacaksınız.\n\nGiriş bilgileriniz";
+
+/* (No Comment) */
+"success.redeem.title" = "Kart başarıyla kullanıldı";
+
+/* (No Comment) */
+"success.submit" = "Başlarken";
+
+/* (No Comment) */
+"success.title" = "Satın Alma Tamamlandı";
+
+/* (No Comment) */
+"success.username.caption" = "Kullanıcı Adı";
+
+/* (No Comment) */
+"unreachable.message" = "İnternet bağlantısı yok. Lütfen İnternet bağlantınız olup olmadığını kontrol edin ve tekrar aşağıya tıklamayı deneyin.\n\nİşlemi bitirmek için uygulamaya daha sonra tekrar gelebilirsiniz.";
+
+/* (No Comment) */
+"unreachable.submit" = "TEKRAR DENE";
+
+/* (No Comment) */
+"unreachable.title" = "Heeey!";
+
+/* (No Comment) */
+"unreachable.vc_title" = "Hata";
+
+/* (No Comment) */
+"walkthrough.action.done" = "BİTTİ";
+
+/* WALKTHROUGH */
+"walkthrough.action.next" = "İLERİ";
+
+/* (No Comment) */
+"walkthrough.action.skip" = "ATLA";
+
+/* (No Comment) */
+"walkthrough.page.1.description" = "Aynı anda 10 cihazda koruma sağlayın.";
+
+/* (No Comment) */
+"walkthrough.page.1.title" = "Aynı anda 10 cihazı destekler";
+
+/* (No Comment) */
+"walkthrough.page.2.description" = "Dünya çapındaki sunucularla daima koruma altındasınız.";
+
+/* (No Comment) */
+"walkthrough.page.2.title" = "Herhangi bir bölgeye kolayca bağlanın";
+
+/* (No Comment) */
+"walkthrough.page.3.description" = "İçerik Engelleyicimizi etkinleştirdiğinizde Safari'de reklamların gösterilmesi engellenir.";
+
+/* (No Comment) */
+"walkthrough.page.3.title" = "Kendinizi reklamlardan koruyun";
+

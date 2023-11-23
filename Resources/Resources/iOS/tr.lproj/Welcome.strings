@@ -1,0 +1,205 @@
+/* (No Comment) */
+"agreement.message" = "Bu abonelik, deneme süresinin sonuna en az 24 saat kalana dek iptal edilmezse, otomatik olarak %@ karşılığında yenilenir. Deneme süresinin sonuna 24 saat kaldıktan sonra, Apple Kimliğinizin hesabından yenileme ücreti alınır. Satın alım işleminden sonra App Store hesap ayarlarına giderek abonelik ayarlarınızı değiştirebilir ve aboneliklerinizi iptal edebilirsiniz. 7 günlük deneme süresi, her kullanıcı için bir tane 7 günlük deneme süresi hakkı ile sınırlıdır. Kullanıcı bir abonelik satın aldığında, teklif edilmişse, ücretsiz deneme süresinin kullanılmayan herhangi bir kısmı geçerliliğini yitirir. Tüm fiyatlara uygulanabilir yerel satış vergileri dahildir.\n\nKaydolduğunuzda, $1 ile $2 unsurlarını kabul etmiş olursunuz.";
+
+/* (No Comment) */
+"agreement.message.privacy" = "Gizlilik Politikası";
+
+/* (No Comment) */
+"agreement.message.tos" = "Hizmet Koşulları";
+
+/* (No Comment) */
+"agreement.trials.message" = "Satın alım onaylandıktan sonra, ödeme ücreti, Apple Kimliği hesabınızdan alınır. Mevcut dönemin sonuna en az 24 saat kalana dek iptal edilmezse, abonelik otomatik olarak yenilenir. Mevcut dönemin sonuna 24 saat kaldıktan sonra hesabınızdan yenileme ücreti alınır. Satın alım işleminden sonra App Store'daki hesap ayarlarınıza giderek abonelik ayarlarınızı değiştirebilir ve aboneliğinizi iptal edebilirsiniz.\n\nBelirli Ücretli Abonelik planlarında, seçtiğiniz ödeme yöntemiyle ücret alınmadan önce, bir ücretsiz kullanım süresi sunulabilir. Seçtiğiniz ödeme yöntemiyle sizden ücret almaya başlamamızdan önce Ücretli Aboneliğinizi iptal etmek isterseniz, ücretsiz kullanım süresinin sonuna en az 24 saat kalana dek aboneliğinizi iptal etmelisiniz.\n\nÜcretsiz deneme süresinden sadece yeni kullanıcılar faydalanabilir ve bu tamamen bizim takdirimizdedir. Tekrar kaydolarak bir ücretsiz deneme süresi daha almaya çalışırsanız, standart Abonelik Ücreti anında hesabınızdan düşülür.\n\nÜcretsiz deneme sürenizi istediğimiz zaman iptal etme hakkına sahibiz.\n\nBir abonelik satın aldığınızda, ücretsiz kullanım sürenizin kullanılmayan kısmını yitirirsiniz.\n\nKaydolduğunuzda bu şart ve koşulları kabul etmiş olursunuz.";
+
+/* (No Comment) */
+"agreement.trials.monthly.plan" = "ay";
+
+/* (No Comment) */
+"agreement.trials.title" = "Ücretsiz deneme süresi şart ve koşulları";
+
+/* (No Comment) */
+"agreement.trials.yearly.plan" = "yıl";
+
+/* (No Comment) */
+"gdpr.accept.button.title" = "Kabul edip devam et";
+
+/* (No Comment) */
+"gdpr.collect.data.description" = "Hesap yönetimi ve ihlalden koruma için E-posta Adresi.";
+
+/* (No Comment) */
+"gdpr.collect.data.title" = "Topladığımız kişisel bilgiler";
+
+/* (No Comment) */
+"gdpr.usage.data.description" = "E-posta adresi sadece abonelik bilgilerinin, ödeme onaylarının, müşteri iletişim unsurlarının ve Private Internet Access'in promosyonel tekliflerinin gönderilmesi için kullanılır.";
+
+/* (No Comment) */
+"gdpr.usage.data.title" = "Tarafımızca toplanan kişisel bilgilerin kullanım şekilleri";
+
+/* (No Comment) */
+"getstarted.buttons.buyaccount" = "Hesap satın al";
+
+/* (No Comment) */
+"iap.error.message.unavailable" = "Apple sunucuları şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.";
+
+/* (No Comment) */
+"iap.error.title" = "Hata";
+
+/* (No Comment) */
+"login.error.throttled" = "Bu kullanıcı adı ile çok fazla kez yanlış giriş yapıldı. Lütfen daha sonra tekrar deneyin.";
+
+/* (No Comment) */
+"login.error.title" = "Giriş yap";
+
+/* (No Comment) */
+"login.error.unauthorized" = "Kullanıcı adınız ya da şifreniz hatalı.";
+
+/* (No Comment) */
+"login.error.validation" = "Bir kullanıcı adı ve şifre girmelisiniz.";
+
+/* (No Comment) */
+"login.magic.link.invalid.email" = "E-posta adresi geçersiz. Lütfen tekrar deneyin.";
+
+/* (No Comment) */
+"login.magic.link.response" = "Giriş linkini bulmak için lütfen e-postalarınıza bakın.";
+
+/* (No Comment) */
+"login.magic.link.send" = "Link Gönder";
+
+/* (No Comment) */
+"login.magic.link.title" = "Sihirli e-posta linki ile giriş yap";
+
+/* (No Comment) */
+"login.password.placeholder" = "Şifre";
+
+/* (No Comment) */
+"login.receipt.button" = "Satın alım faturasıyla giriş yapın";
+
+/* (No Comment) */
+"login.restore.button" = "Hesap bilgilerinizi almadınız mı?";
+
+/* (No Comment) */
+"login.submit" = "GİRİŞ YAP";
+
+/* Welcome.strings
+  PIALibrary
+
+  Created by Davide De Rosa on 12/7/17.
+  Copyright © 2017 London Trust Media. All rights reserved. */
+"login.title" = "Hesabınıza giriş yapın";
+
+/* (No Comment) */
+"login.username.placeholder" = "Kullanıcı Adı (p1234567)";
+
+/* (No Comment) */
+"plan.accessibility.per_month" = "aylık";
+
+/* (No Comment) */
+"plan.best_value" = "En iyi fiyat";
+
+/* (No Comment) */
+"plan.monthly.title" = "Aylık";
+
+/* (No Comment) */
+"plan.price_format" = "%@/ay";
+
+/* (No Comment) */
+"plan.yearly.detail_format" = "Yılda %@%@";
+
+/* (No Comment) */
+"plan.yearly.title" = "Yıllık";
+
+/* (No Comment) */
+"purchase.confirm.form.email" = "E-posta adresinizi girin";
+
+/* (No Comment) */
+"purchase.confirm.plan" = "%@ planını satın alıyorsunuz";
+
+/* (No Comment) */
+"purchase.continue" = "Devam et";
+
+/* (No Comment) */
+"purchase.email.placeholder" = "E-posta adresi";
+
+/* (No Comment) */
+"purchase.email.why" = "Kullanıcı adınızla şifrenizi gönderebilmemiz için e-posta adresinize ihtiyacımız var.";
+
+/* (No Comment) */
+"purchase.error.connectivity.description" = "Özel İnternet Erişimi'ne ulaşamıyoruz. Bu zayıf internet yüzünden olabilir veya hizmetimiz ülkenizde engelleniyor.";
+
+/* (No Comment) */
+"purchase.error.connectivity.title" = "Bağlantı Hatası";
+
+/* (No Comment) */
+"purchase.error.title" = "Satın Al";
+
+/* (No Comment) */
+"purchase.error.validation" = "Bir e-posta adresi girmeniz gerekiyor.";
+
+/* (No Comment) */
+"purchase.login.button" = "Giriş yapın";
+
+/* (No Comment) */
+"purchase.login.footer" = "Hesabınız var mı?";
+
+/* (No Comment) */
+"purchase.or" = "veya";
+
+/* (No Comment) */
+"purchase.submit" = "Gönder";
+
+/* (No Comment) */
+"purchase.subtitle" = "30 günlük para iade garantisi";
+
+/* (No Comment) */
+"purchase.title" = "Bir VPN planı seçin";
+
+/* (No Comment) */
+"redeem.accessibility.back" = "Geri";
+
+/* (No Comment) */
+"redeem.email.placeholder" = "E-posta adresi";
+
+/* (No Comment) */
+"redeem.error.allfields" = "Lütfen e-posta adresinizi ve kart PIN numaranızı girin.";
+
+/* (No Comment) */
+"redeem.error.code" = "Kod, %lu sayısal haneden oluşmalıdır.";
+
+/* (No Comment) */
+"redeem.error.title" = "Kullan";
+
+/* (No Comment) */
+"redeem.giftcard.placeholder" = "Hediye kartı ve PIN";
+
+/* (No Comment) */
+"redeem.submit" = "Gönder";
+
+/* (No Comment) */
+"redeem.subtitle" = "E-posta adresinizi ve hediye kartınızdaki ya da deneme kartınızdaki %lu haneli PIN'i aşağıya girin.";
+
+/* (No Comment) */
+"redeem.title" = "Hediye kartını kullan";
+
+/* (No Comment) */
+"restore.email.placeholder" = "E-posta adresi";
+
+/* (No Comment) */
+"restore.submit" = "ONAYLA";
+
+/* (No Comment) */
+"restore.subtitle" = "Bu uygulamadan bir plan satın aldıktan sonra hesap bilgilerinizi alamadıysanız, onları buradan tekrar gönderebilirsiniz. Bu işlem esnasında sizden ücret alınmayacak.";
+
+/* (No Comment) */
+"restore.title" = "Bilgileri gönderilmeyen satın alma işlemini tekrarlayın";
+
+/* (No Comment) */
+"update.account.email.error" = "Hesap e-posta adresi değiştirilemedi";
+
+/* (No Comment) */
+"upgrade.header" = "Tekrar Hoş Geldiniz!";
+
+/* (No Comment) */
+"upgrade.renew.now" = "Hemen yenileyin";
+
+/* (No Comment) */
+"upgrade.title" = "Private Internet Access kullanabilmek için aboneliğinizi yenilemeniz gerekiyor.";
+

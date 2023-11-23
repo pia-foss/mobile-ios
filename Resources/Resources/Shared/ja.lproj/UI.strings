@@ -1,0 +1,4 @@
+"global.version.format" = "バージョン%@ (%@)";
+"global.close" = "閉じる";
+"global.ok" = "OK";
+"global.cancel" = "キャンセル";

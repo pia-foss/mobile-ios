@@ -84,8 +84,8 @@ class AccountObserver {
             
             let note = UNMutableNotificationContent()
 
-            note.title = L10n.Expiration.title
-            note.body = L10n.Expiration.message
+            note.title = L10n.Localizable.Expiration.title
+            note.body = L10n.Localizable.Expiration.message
             note.userInfo = ["date": date]
             note.sound = .default
             note.badge = 1
