@@ -145,6 +145,8 @@
 		3545E98426AADC7E00B812CC /* ServerSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545E97F26AAD60C00B812CC /* ServerSelectionDelegate.swift */; };
 		35950B312ADD2996006F3CD9 /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = 35950B302ADD2996006F3CD9 /* Quick */; };
 		35950B342ADD2EE5006F3CD9 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 35950B332ADD2EE5006F3CD9 /* Nimble */; };
+		35DC7A5E2B0B325700502BED /* VPNServerListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DC7A5D2B0B325700502BED /* VPNServerListTests.swift */; };
+		35DC7A602B0B440200502BED /* RegionSelectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DC7A5F2B0B440200502BED /* RegionSelectionScreen.swift */; };
 		35EDD6282ADE5D31007B9ACB /* BaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD6272ADE5D31007B9ACB /* BaseTest.swift */; };
 		35EDD62A2ADE5F08007B9ACB /* SignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD6292ADE5F08007B9ACB /* SignInTests.swift */; };
 		35EDD6332ADE7281007B9ACB /* OnboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD6322ADE7281007B9ACB /* OnboardingTests.swift */; };
@@ -778,6 +780,8 @@
 		3524670D26B432ED00E3F0AC /* DashboardViewController+ServerSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DashboardViewController+ServerSelection.swift"; sourceTree = "<group>"; };
 		3545E97F26AAD60C00B812CC /* ServerSelectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSelectionDelegate.swift; sourceTree = "<group>"; };
 		3545E98126AADB2B00B812CC /* ServerSelectingTileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSelectingTileCell.swift; sourceTree = "<group>"; };
+		35DC7A5D2B0B325700502BED /* VPNServerListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNServerListTests.swift; sourceTree = "<group>"; };
+		35DC7A5F2B0B440200502BED /* RegionSelectionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionSelectionScreen.swift; sourceTree = "<group>"; };
 		35EDD6272ADE5D31007B9ACB /* BaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTest.swift; sourceTree = "<group>"; };
 		35EDD6292ADE5F08007B9ACB /* SignInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInTests.swift; sourceTree = "<group>"; };
 		35EDD6322ADE7281007B9ACB /* OnboardingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTests.swift; sourceTree = "<group>"; };
@@ -1511,6 +1515,7 @@
 				35EDD6292ADE5F08007B9ACB /* SignInTests.swift */,
 				35EDD6322ADE7281007B9ACB /* OnboardingTests.swift */,
 				35EDD65B2B047839007B9ACB /* QuickSettingsTests.swift */,
+				35DC7A5D2B0B325700502BED /* VPNServerListTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1525,6 +1530,7 @@
 				35EDD6412AE7A83D007B9ACB /* WelcomeScreen.swift */,
 				35EDD6432AE7B480007B9ACB /* Common.swift */,
 				35EDD6592B035B51007B9ACB /* SideMenuScreen.swift */,
+				35DC7A5F2B0B440200502BED /* RegionSelectionScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -2827,6 +2833,7 @@
 				35EDD6372ADE761A007B9ACB /* HomeScreen.swift in Sources */,
 				35EDD63B2AE62D15007B9ACB /* ElementHelper.swift in Sources */,
 				69C587FD2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift in Sources */,
+				35DC7A602B0B440200502BED /* RegionSelectionScreen.swift in Sources */,
 				699F23B22AFBA66000EBC5E6 /* SettingsScreen.swift in Sources */,
 				35EDD6422AE7A83D007B9ACB /* WelcomeScreen.swift in Sources */,
 				699F23B92AFBAC0B00EBC5E6 /* UpdateSettingsTests.swift in Sources */,
@@ -2837,6 +2844,7 @@
 				35EDD6332ADE7281007B9ACB /* OnboardingTests.swift in Sources */,
 				699F23B52AFBA66000EBC5E6 /* ProtocolsSettingsScreen.swift in Sources */,
 				69B70AC02ACC2CFE0072A09D /* AccessibilityId.swift in Sources */,
+				35DC7A5E2B0B325700502BED /* VPNServerListTests.swift in Sources */,
 				699F23B62AFBA66000EBC5E6 /* GeneralSettingsScreen.swift in Sources */,
 				699F23B72AFBA66000EBC5E6 /* PrivacySettingsScreen.swift in Sources */,
 			);

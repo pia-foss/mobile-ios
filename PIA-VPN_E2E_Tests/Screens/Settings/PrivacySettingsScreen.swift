@@ -33,4 +33,16 @@ extension XCUIApplication {
             privacySettingsButton.tap()
         }
     }
+    
+    func enableVPNKillSwitch(){
+        if ((vpnKillSwitch.value as! String) != "1") {
+            vpnKillSwitch.tap()
+        }
+    }
+    
+    func disableVPNKillSwitch(){
+        if ((vpnKillSwitch.value as! String) != "0") {
+            vpnKillSwitch.tap()
+        }
+    }
 }

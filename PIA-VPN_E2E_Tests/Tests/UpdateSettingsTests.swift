@@ -51,7 +51,7 @@ class UpdateSettingsTests : BaseTest {
                 
                 it("should revert changes made on privacy features settings to default after logging out and logging back in") {
                     app.navigateToPrivacySettings()
-                    app.vpnKillSwitch.tap()
+                    app.disableVPNKillSwitch()
                     expect((app.vpnKillSwitch.value as! String)) != vpnKillSwitchDefaultValue
                     app.navigateToHomeFromSettings()
                     app.logOut()
