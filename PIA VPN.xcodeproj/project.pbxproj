@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -4438,7 +4438,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pia-foss/mobile-ios-library.git";
 			requirement = {
-				branch = "PIA-906_xcode14_compatibility";
+				branch = master;
 				kind = branch;
 			};
 		};
