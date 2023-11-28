@@ -14,7 +14,7 @@ platform :ios do
     run_tests(
       scheme: "PIA VPN dev",
       testplan: "PIA-VPN-e2e-simulator",
-      devices: ["iPhone 15"],
+      devices: ["iPhone 14"],
       prelaunch_simulator: true,
       test_without_building: true
     )
