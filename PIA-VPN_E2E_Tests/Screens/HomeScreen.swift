@@ -17,6 +17,14 @@ extension XCUIApplication {
         button(with: AccessibilityId.Dashboard.connectionButton)
     }
     
+    var connectedStatusLabel: XCUIElement {
+        button(with: "VPN Connection button. The VPN is currently connected")
+    }
+    
+    var disconnectedStatusLabel: XCUIElement {
+        button(with: "VPN Connection button. The VPN is currently disconnected")
+    }
+    
     var confirmationDialogButton: XCUIElement {
         button(with: PIALibraryAccessibility.Id.Dialog.destructive)
     }
@@ -115,6 +123,18 @@ extension XCUIApplication {
     func disableNetworkManagementOnHome() {
         if(disableNetworkManagementButton.exists) {
             disableNetworkManagementButton.tap()
+        }
+    }
+    
+    func connectToVPN() {
+        if (disconnectedStatusLabel.exists) {
+            connectionButton.tap()
+        }
+    }
+    
+    func disconnectToVPN() {
+        if (connectedStatusLabel.exists) {
+            connectionButton.tap()
         }
     }
 }
