@@ -13,6 +13,10 @@ extension XCUIApplication {
         staticText(with: "Protocol Selection")
     }
     
+    var protocolSelectionPopover: XCUIElement {
+        otherElement(with: "ProtocolPopoverSelectionView")
+    }
+    
     var dataEncryptionButton: XCUIElement {
         staticText(with: "Data Encryption")
     }
@@ -33,6 +37,10 @@ extension XCUIApplication {
         staticText(with: "IPSec (IKEv2)")
     }
     
+    var wireguard: XCUIElement {
+        staticText(with: "WireGuard®")
+    }
+    
     func navigateToProtocolSettings() {
         guard dashboardMenuButton.exists else { return }
         dashboardMenuButton.tap()
@@ -44,5 +52,11 @@ extension XCUIApplication {
         if protocolsSettingsButton.waitForExistence(timeout: defaultTimeout) {
             protocolsSettingsButton.tap()
         }
+    }
+    
+    func selectProtocol(protocolName: String) {
+        protocolSelectionButton.tap()
+        guard protocolSelectionPopover.exists else {return}
+        protocolSelectionPopover.staticTexts[protocolName].tap()
     }
 }

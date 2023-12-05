@@ -15,6 +15,10 @@ class ServerConnectionTests : BaseTest {
         describe("server connection tests") {
             context("when the user navigates to homescreen upon logging in") {
                 it("should display the vpn server defaulted to 'Automatic'") {
+                    app.logOut()
+                    app.navigateToLoginScreen()
+                    app.logIn(with: CredentialsUtil.credentials(type: .valid))
+                    app.acceptVPNPermission()
                     expect(app.vpnServerButton.staticTexts["Automatic"].exists).to(beTrue())
                 }
                 
@@ -36,7 +40,7 @@ class ServerConnectionTests : BaseTest {
                     app.disconnectToVPN()
                     app.navigateToRegionSelection()
                     app.searchRegion(regionName: "Philippines").firstMatch.tap()
-                    expect(app.connectedStatusLabel.exists).to(beTrue())
+                    expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     expect(app.vpnServerButton.staticTexts["Philippines"].exists).to(beTrue())
                 }
             }

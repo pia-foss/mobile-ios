@@ -181,7 +181,7 @@
 		699F23B52AFBA66000EBC5E6 /* ProtocolsSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23AF2AFBA66000EBC5E6 /* ProtocolsSettingsScreen.swift */; };
 		699F23B62AFBA66000EBC5E6 /* GeneralSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23B02AFBA66000EBC5E6 /* GeneralSettingsScreen.swift */; };
 		699F23B72AFBA66000EBC5E6 /* PrivacySettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23B12AFBA66000EBC5E6 /* PrivacySettingsScreen.swift */; };
-		699F23B92AFBAC0B00EBC5E6 /* UpdateSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23B82AFBAC0B00EBC5E6 /* UpdateSettingsTests.swift */; };
+		699F23B92AFBAC0B00EBC5E6 /* SettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23B82AFBAC0B00EBC5E6 /* SettingsTests.swift */; };
 		69B70AB52ACBF51C0072A09D /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70AB42ACBF51C0072A09D /* LoginScreen.swift */; };
 		69B70ABC2ACBF8300072A09D /* CredentialsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */; };
 		69B70ABE2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
@@ -831,7 +831,7 @@
 		699F23AF2AFBA66000EBC5E6 /* ProtocolsSettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtocolsSettingsScreen.swift; sourceTree = "<group>"; };
 		699F23B02AFBA66000EBC5E6 /* GeneralSettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralSettingsScreen.swift; sourceTree = "<group>"; };
 		699F23B12AFBA66000EBC5E6 /* PrivacySettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacySettingsScreen.swift; sourceTree = "<group>"; };
-		699F23B82AFBAC0B00EBC5E6 /* UpdateSettingsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateSettingsTests.swift; sourceTree = "<group>"; };
+		699F23B82AFBAC0B00EBC5E6 /* SettingsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTests.swift; sourceTree = "<group>"; };
 		69B70AB02ACBF51C0072A09D /* PIA-VPN_E2E_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA-VPN_E2E_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69B70AB42ACBF51C0072A09D /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityId.swift; sourceTree = "<group>"; };
@@ -1570,7 +1570,7 @@
 		35EDD6262ADE5D1E007B9ACB /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				699F23B82AFBAC0B00EBC5E6 /* UpdateSettingsTests.swift */,
+				699F23B82AFBAC0B00EBC5E6 /* SettingsTests.swift */,
 				69C587FC2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift */,
 				35EDD6292ADE5F08007B9ACB /* SignInTests.swift */,
 				35EDD6322ADE7281007B9ACB /* OnboardingTests.swift */,
@@ -3024,7 +3024,7 @@
 				35DC7A602B0B440200502BED /* RegionSelectionScreen.swift in Sources */,
 				699F23B22AFBA66000EBC5E6 /* SettingsScreen.swift in Sources */,
 				35EDD6422AE7A83D007B9ACB /* WelcomeScreen.swift in Sources */,
-				699F23B92AFBAC0B00EBC5E6 /* UpdateSettingsTests.swift in Sources */,
+				699F23B92AFBAC0B00EBC5E6 /* SettingsTests.swift in Sources */,
 				699F23B42AFBA66000EBC5E6 /* AutomationSettingsScreen.swift in Sources */,
 				35EDD62A2ADE5F08007B9ACB /* SignInTests.swift in Sources */,
 				69B70AB52ACBF51C0072A09D /* LoginScreen.swift in Sources */,

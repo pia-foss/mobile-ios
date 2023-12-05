@@ -59,5 +59,12 @@ extension XCUIApplication {
     func dialog(with id: String) -> XCUIElement {
         return switches[id]
     }
+    
+    func findButtonWithPartialText(_ partialText: String) -> XCUIElement? {
+        let predicate = NSPredicate(format: "label CONTAINS[c] %@", partialText)
+        let matchingStaticTexts = staticTexts.matching(predicate)
+
+        return matchingStaticTexts.firstMatch
+    }
 }
 
