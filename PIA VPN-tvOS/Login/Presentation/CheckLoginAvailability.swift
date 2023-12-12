@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import PIALibrary
 
 protocol CheckLoginAvailabilityType {
     func disableLoginFor(_ delay: Double)

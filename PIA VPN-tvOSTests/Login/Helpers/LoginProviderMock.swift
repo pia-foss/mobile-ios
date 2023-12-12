@@ -7,19 +7,16 @@
 //
 
 import Foundation
-import PIALibrary
 @testable import PIA_VPN_tvOS
 
 class LoginProviderMock: LoginProviderType {
-    private let userResult: UserAccount?
-    private let errorResult: Error?
+    private let result: Result<UserAccount, Error>
     
-    init(userResult: UserAccount?, errorResult: Error?) {
-        self.userResult = userResult
-        self.errorResult = errorResult
+    init(result: Result<UserAccount, Error>) {
+        self.result = result
     }
     
-    func login(with request: LoginRequest, _ callback: LibraryCallback<UserAccount>?) {
-        callback?(userResult, errorResult)
+    func login(with credentials: Credentials, completion: @escaping (Result<UserAccount, Error>) -> Void) {
+        completion(result)
     }
 }

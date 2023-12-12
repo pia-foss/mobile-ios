@@ -8,7 +8,6 @@
 
 import Foundation
 @testable import PIA_VPN_tvOS
-import PIALibrary
 
 class LoginWithCredentialsUseCaseMock: LoginWithCredentialsUseCaseType {
     private let result: Result<UserAccount, LoginError>

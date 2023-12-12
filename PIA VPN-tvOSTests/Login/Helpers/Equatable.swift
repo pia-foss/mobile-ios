@@ -37,32 +37,3 @@ extension LoginError: Equatable {
         }
     }
 }
-
-extension UserAccount: Equatable {
-    public static func == (lhs: PIALibrary.UserAccount, rhs: PIALibrary.UserAccount) -> Bool {
-        lhs.credentials == rhs.credentials
-        && lhs.info == rhs.info
-    }
-}
-
-extension Credentials: Equatable {
-    public static func == (lhs: Credentials, rhs: Credentials) -> Bool {
-        lhs.username == rhs.username && lhs.password == rhs.password
-    }
-}
-
-extension AccountInfo: Equatable {
-    public static func == (lhs: AccountInfo, rhs: AccountInfo) -> Bool {
-        lhs.email == rhs.email
-        && lhs.username == rhs.username
-        && lhs.plan == rhs.plan
-        && lhs.productId == rhs.productId
-        && lhs.isRenewable == rhs.isRenewable
-        && lhs.isRecurring == rhs.isRecurring
-        && lhs.expirationDate == rhs.expirationDate
-        && lhs.canInvite == rhs.canInvite
-        && lhs.isExpired == rhs.isExpired
-        && lhs.shouldPresentExpirationAlert == rhs.shouldPresentExpirationAlert
-        && lhs.renewUrl == rhs.renewUrl
-    }
-}

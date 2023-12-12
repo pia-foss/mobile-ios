@@ -10,13 +10,32 @@ import Foundation
 import PIALibrary
 
 class LoginProvider: LoginProviderType {
-    private var accountProvider: AccountProvider
+    private let accountProvider: AccountProvider
+    private let userAccountMapper: UserAccountMapper
     
-    init(accountProvider: AccountProvider) {
+    init(accountProvider: AccountProvider, userAccountMapper: UserAccountMapper) {
         self.accountProvider = accountProvider
+        self.userAccountMapper = userAccountMapper
     }
     
-    func login(with request: LoginRequest, _ callback: LibraryCallback<UserAccount>?) {
-        accountProvider.login(with: request, callback)
+    func login(with credentials: Credentials, completion: @escaping (Result<UserAccount, Error>) -> Void) {
+        let pialibraryCredentials = PIALibrary.Credentials(username: credentials.username, password: credentials.password)
+        let request = LoginRequest(credentials: pialibraryCredentials)
+        
+        accountProvider.login(with: request) { [weak self] userAccount, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let userAccount = userAccount else {
+                completion(.failure(ClientError.unexpectedReply))
+                return
+            }
+            
+            completion(.success(userAccountMapper.map(userAccount: userAccount)))
+        }
     }
 }

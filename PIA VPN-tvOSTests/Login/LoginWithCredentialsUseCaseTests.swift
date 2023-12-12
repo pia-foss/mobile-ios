@@ -12,14 +12,14 @@ import PIALibrary
 
 final class LoginWithCredentialsUseCaseTests: XCTestCase {
 
-    func test_login_succeeds_when_loginprovider_completes_with_user_and_no_error() throws {
+    func test_login_succeeds_when_loginprovider_completes_with_success() {
         // GIVEN
-        let user = UserAccount.makeStub()
-        let loginProviderMock = LoginProviderMock(userResult: user, errorResult: nil)
+        let user = PIA_VPN_tvOS.UserAccount.makeStub()
+        let loginProviderMock = LoginProviderMock(result: .success(user))
         let sut = LoginWithCredentialsUseCase(loginProvider: loginProviderMock,
                                               errorMapper: LoginDomainErrorMapper())
         
-        var capturedResult: Result<UserAccount, LoginError>?
+        var capturedResult: Result<PIA_VPN_tvOS.UserAccount, LoginError>?
         let expectation = expectation(description: "Waiting for login to finish")
         
         // WHEN
@@ -33,14 +33,13 @@ final class LoginWithCredentialsUseCaseTests: XCTestCase {
         XCTAssertEqual(capturedResult, .success(user))
     }
     
-    func test_login_fails_when_loginprovider_completes_with_user_and_error() throws {
+    func test_login_fails_when_loginprovider_completes_with_failure() {
         // GIVEN
-        let user = UserAccount.makeStub()
-        let loginProviderMock = LoginProviderMock(userResult: user, errorResult: ClientError.expired)
+        let loginProviderMock = LoginProviderMock(result: .failure(ClientError.expired))
         let sut = LoginWithCredentialsUseCase(loginProvider: loginProviderMock,
                                               errorMapper: LoginDomainErrorMapper())
         
-        var capturedResult: Result<UserAccount, LoginError>?
+        var capturedResult: Result<PIA_VPN_tvOS.UserAccount, LoginError>?
         let expectation = expectation(description: "Waiting for login to finish")
         
         // WHEN
@@ -52,53 +51,5 @@ final class LoginWithCredentialsUseCaseTests: XCTestCase {
         // THEN
         wait(for: [expectation], timeout: 1.0)
         XCTAssertEqual(capturedResult, .failure(.expired))
-    }
-    
-    func test_login_fails_when_loginprovider_completes_with_no_user_and_error() throws {
-        // GIVEN
-        let loginProviderMock = LoginProviderMock(userResult: nil, errorResult: ClientError.expired)
-        let sut = LoginWithCredentialsUseCase(loginProvider: loginProviderMock,
-                                              errorMapper: LoginDomainErrorMapper())
-        
-        var capturedResult: Result<UserAccount, LoginError>?
-        let expectation = expectation(description: "Waiting for login to finish")
-        
-        // WHEN
-        sut.execute(username: "", password: "") { result in
-            expectation.fulfill()
-            capturedResult = result
-        }
-        
-        // THEN
-        wait(for: [expectation], timeout: 1.0)
-        XCTAssertEqual(capturedResult, .failure(.expired))
-    }
-    
-    func test_login_fails_when_loginprovider_completes_with_no_user_and_no_error() throws {
-        // GIVEN
-        let loginProviderMock = LoginProviderMock(userResult: nil, errorResult: nil)
-        let sut = LoginWithCredentialsUseCase(loginProvider: loginProviderMock,
-                                              errorMapper: LoginDomainErrorMapper())
-        
-        var capturedResult: Result<UserAccount, LoginError>?
-        let expectation = expectation(description: "Waiting for login to finish")
-        
-        // WHEN
-        sut.execute(username: "", password: "") { result in
-            expectation.fulfill()
-            capturedResult = result
-        }
-        
-        // THEN
-        wait(for: [expectation], timeout: 1.0)
-        guard case .failure(let error) = capturedResult else {
-            XCTFail("Expected failure, got success")
-            return
-        }
-        
-        guard case LoginError.generic = error else {
-            XCTFail("Expected generic error, got \(error)")
-            return
-        }
     }
 }

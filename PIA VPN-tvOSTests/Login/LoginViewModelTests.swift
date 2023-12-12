@@ -7,19 +7,7 @@
 //
 
 import XCTest
-import PIALibrary
-import account
 @testable import PIA_VPN_tvOS
-
-/*
- - success
- - isloggin
- - failure: availability
- - failure: valid credentials
- - failure: loginusecase
- */
-
-
 
 final class LoginViewModelTests: XCTestCase {
     
@@ -37,13 +25,13 @@ final class LoginViewModelTests: XCTestCase {
                                  validateLoginCredentials: ValidateCredentialsFormat(),
                                  errorMapper: LoginPresentableErrorMapper())
         
-        XCTAssertEqual(sut.loginStatus, .none)
+        XCTAssertEqual(sut.loginStatus, LoginStatus.none)
         
         // WHEN
         await sut.login(username: "username", password: "password")
         
         // THEN
-        XCTAssertEqual(sut.loginStatus, .failed(error: .throttled(retryAfter: 20)))
+        XCTAssertEqual(sut.loginStatus, LoginStatus.failed(error: .throttled(retryAfter: 20)))
     }
     
     func test_login_fails_when_username_is_invalid() async throws {
@@ -60,13 +48,13 @@ final class LoginViewModelTests: XCTestCase {
                                  validateLoginCredentials: ValidateCredentialsFormat(),
                                  errorMapper: LoginPresentableErrorMapper())
         
-        XCTAssertEqual(sut.loginStatus, .none)
+        XCTAssertEqual(sut.loginStatus, LoginStatus.none)
         
         // WHEN
         await sut.login(username: "", password: "password")
         
         // THEN
-        XCTAssertEqual(sut.loginStatus, .failed(error: .usernameWrongFormat))
+        XCTAssertEqual(sut.loginStatus, LoginStatus.failed(error: .usernameWrongFormat))
     }
     
     func test_login_fails_when_password_is_invalid() async throws {
@@ -83,13 +71,13 @@ final class LoginViewModelTests: XCTestCase {
                                  validateLoginCredentials: ValidateCredentialsFormat(),
                                  errorMapper: LoginPresentableErrorMapper())
         
-        XCTAssertEqual(sut.loginStatus, .none)
+        XCTAssertEqual(sut.loginStatus, LoginStatus.none)
         
         // WHEN
         await sut.login(username: "username", password: "")
         
         // THEN
-        XCTAssertEqual(sut.loginStatus, .failed(error: .passwordWrongFormat))
+        XCTAssertEqual(sut.loginStatus, LoginStatus.failed(error: .passwordWrongFormat))
     }
     
     
@@ -107,7 +95,7 @@ final class LoginViewModelTests: XCTestCase {
                                  validateLoginCredentials: ValidateCredentialsFormat(),
                                  errorMapper: LoginPresentableErrorMapper())
         
-        XCTAssertEqual(sut.loginStatus, .none)
+        XCTAssertEqual(sut.loginStatus, LoginStatus.none)
         
         // WHEN
         await sut.login(username: "username", password: "password")
@@ -129,12 +117,12 @@ final class LoginViewModelTests: XCTestCase {
                                  validateLoginCredentials: ValidateCredentialsFormat(),
                                  errorMapper: LoginPresentableErrorMapper())
         
-        XCTAssertEqual(sut.loginStatus, .none)
+        XCTAssertEqual(sut.loginStatus, LoginStatus.none)
         
         // WHEN
         await sut.login(username: "username", password: "password")
         
         // THEN
-        XCTAssertEqual(sut.loginStatus, .failed(error: .unauthorized))
+        XCTAssertEqual(sut.loginStatus, LoginStatus.failed(error: .unauthorized))
     }
 }

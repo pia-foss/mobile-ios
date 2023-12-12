@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import PIALibrary
 
 protocol LoginWithCredentialsUseCaseType {
     func execute(username: String, password: String, completion: @escaping (Result<UserAccount, LoginError>) -> Void)
@@ -25,22 +24,16 @@ class LoginWithCredentialsUseCase: LoginWithCredentialsUseCaseType {
     func execute(username: String, password: String, completion: @escaping (Result<UserAccount, LoginError>) -> Void) {
         let credentials = Credentials(username: username, 
                                       password: password)
-        let request = LoginRequest(credentials: credentials)
         
-        loginProvider.login(with: request) { [weak self] userAccount, error in
+        loginProvider.login(with: credentials) { [weak self] result in
             guard let self = self else { return }
             
-            if let error = error {
-                completion(.failure(errorMapper.map(error: error)))
-                return
+            switch result {
+                case .success(let userAccount):
+                    completion(.success(userAccount))
+                case .failure(let error):
+                    completion(.failure(errorMapper.map(error: error)))
             }
-            
-            guard let userAccount = userAccount else {
-                completion(.failure(.generic(message: nil)))
-                return
-            }
-            
-            completion(.success(userAccount))
         }
     }
 }

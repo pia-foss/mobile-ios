@@ -27,6 +27,7 @@ class LoginFactory {
     }
     
     private static func makeLoginProvider() -> LoginProviderType {
-        LoginProvider(accountProvider: Client.providers.accountProvider)
+        LoginProvider(accountProvider: Client.providers.accountProvider, 
+                      userAccountMapper: UserAccountMapper())
     }
 }

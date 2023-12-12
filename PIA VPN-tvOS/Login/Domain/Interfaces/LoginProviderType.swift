@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import PIALibrary
 
 protocol LoginProviderType {
-    func login(with request: LoginRequest, _ callback: LibraryCallback<UserAccount>?)
+    func login(with credentials: Credentials, completion: @escaping (Result<UserAccount, Error>) -> Void)
 }
