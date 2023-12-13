@@ -116,8 +116,8 @@
 "account.delete.alert.title" = "คุณแน่ใจหรือไม่";
 "account.delete.alert.message" = "การลบบัญชี PIA ของคุณจะเป็นการถาวรและไม่สามารถย้อนกลับได้ คุณจะไม่สามารถดึงข้อมูลประจำตัว PIA ของคุณหลังจากดำเนินการนี้ โปรดทราบว่าการดำเนินการนี้จะลบบัญชี PIA ของคุณจากฐานข้อมูลของเราเท่านั้น แต่จะไม่ลบการสมัครใช้งานของคุณ คุณจะต้องไปที่บัญชี Apple ของคุณแล้วยกเลิกการสมัครใช้งาน Private Internet Access จากที่นั่น ไม่เช่นนั้นคุณจะยังคงถูกเรียกเก็บค่าบริการแม้ว่าบัญชี PIA ของคุณจะไม่เปิดใช้งานอีกต่อไป";
 "account.delete.alert.failureMessage" = "เกิดข้อผิดพลาดขณะลบบัญชีของคุณ โปรดลองอีกครั้งในภายหลัง";
-"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
-"account.survey.messageLink" = "Take The Survey";
+"account.survey.message" = "ต้องการช่วยทำให้ PIA ดีขึ้นหรือไม่? แจ้งให้เราทราบว่าเราจะปรับปรุงได้อย่างไร!\nทำแบบสำรวจ";
+"account.survey.messageLink" = "ทำแบบสำรวจ";
 
 // SETTINGS
 

@@ -17,7 +17,7 @@
 "global.disable" = "禁用";
 "global.add" = "添加";
 "global.remove" = "删除";
-"global.empty" = "空";
+"global.empty" = "清空";
 "global.copy" = "复制";
 "global.share" = "共享";
 "global.copied" = "已复制到剪贴板";
@@ -116,8 +116,8 @@
 "account.delete.alert.title" = "确定？";
 "account.delete.alert.message" = "删除 PIA 账户是永久的、不可挽回的。执行此操作后，您将无法检索自己的 PIA 登录信息。请注意，此操作只会从我们的数据库中删除 PIA 帐户，但不会删除您的订阅。您需要进入苹果账户，从那里取消 Private Internet Access。否则，即使您的 PIA 账户不再有效，您仍将被收取费用。";
 "account.delete.alert.failureMessage" = "删除账户出错，请稍后再试。";
-"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
-"account.survey.messageLink" = "Take The Survey";
+"account.survey.message" = "想要帮助改进 PIA 吗? 欢迎您提供反馈！\n填写调查问卷";
+"account.survey.messageLink" = "填写调查问卷";
 
 // SETTINGS
 

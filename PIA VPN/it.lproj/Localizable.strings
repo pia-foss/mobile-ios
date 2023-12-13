@@ -116,8 +116,8 @@
 "account.delete.alert.title" = "Continuare?";
 "account.delete.alert.message" = "L’eliminazione del tuo account PIA è un’operazione definitiva e irreversibile, al termine della quale non potrai più recuperare le tue credenziali PIA. Tieni presente che questa azione elimina solo il tuo account PIA dal nostro database, NON l’abbonamento. Per cancellare l’abbonamento a Private Internet Access, dovrai accedere al tuo account Apple e cancellarlo da lì. Altrimenti continuerai a pagarlo anche se il tuo account PIA non sarà più attivo.";
 "account.delete.alert.failureMessage" = "Qualcosa non ha funzionato durante l’eliminazione dell’account. Riprova più tardi.";
-"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
-"account.survey.messageLink" = "Take The Survey";
+"account.survey.message" = "Vuoi aiutarci a migliorare PIA? Dicci la tua!\nPartecipa al sondaggio";
+"account.survey.messageLink" = "Partecipa al sondaggio";
 
 // SETTINGS
 
@@ -216,7 +216,7 @@
 "dashboard.vpn.disconnected" = "Disconnesso";
 "dashboard.vpn.connecting" = "Connessione in corso...";
 "dashboard.vpn.connected" = "Connesso alla VPN";
-"dashboard.vpn.on" = "VPN: ON";
+"dashboard.vpn.on" = "VPN: ATTIVA";
 "dashboard.vpn.disconnecting" = "Disconnessione in corso...";
 "dashboard.vpn.changing_region" = "Cambiando regione...";
 "dashboard.vpn.disconnect.untrusted" = "Questa rete non è affidabile. Vuoi disconnettere il VPN?";
@@ -328,7 +328,7 @@
 "tiles.usage.title" = "Uso";
 "tiles.usage.ipsec.title" = "USO (non disponibile su IKEv2)";
 "tiles.usage.upload" = "Carica";
-"tiles.usage.download" = "Download";
+"tiles.usage.download" = "Scarica";
 "tiles.nmt.cellular" = "Cellulare";
 "tiles.nmt.accessibility.trusted" = "Rete affidabile";
 "tiles.nmt.accessibility.untrusted" = "Rete non affidabile";

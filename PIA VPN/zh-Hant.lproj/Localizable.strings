@@ -84,7 +84,7 @@
 
 // ACCOUNT
 
-"account.email.caption" = "Email";
+"account.email.caption" = "電子郵件";
 "account.email.placeholder" = "電子郵件地址";
 "account.username.caption" = "使用者名稱";
 "account.other.footer" = "您只要在您的其他裝置上安裝 Private Internet Access App，然後使用上方的使用者名稱及密碼登入，即可保障您的網路連線安全。";
@@ -116,8 +116,8 @@
 "account.delete.alert.title" = "是否確定？";
 "account.delete.alert.message" = "PIA 帳戶一經刪除即無法還原。一旦執行這個動作，您會無法取回 PIA 憑證。請注意，這個動作只會在資料庫中刪除您的 PIA 帳戶，不會刪除訂購計劃。您必須前往 Apple 帳戶，在那裡取消 Private Internet Access 訂購計劃，否則就算 PIA 帳戶已經停用，您還是會遭到扣款。";
 "account.delete.alert.failureMessage" = "刪除帳戶時發生錯誤，請再試一次。";
-"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
-"account.survey.messageLink" = "Take The Survey";
+"account.survey.message" = "想要幫忙讓 PIA 變得更好嗎？讓我們知道該如何改進！\n參加調查";
+"account.survey.messageLink" = "參加調查";
 
 // SETTINGS
 
@@ -130,7 +130,7 @@
 "settings.encryption.title" = "加密";
 "settings.encryption.cipher.title" = "資料加密";
 "settings.encryption.digest.title" = "資料驗證";
-"settings.encryption.handshake.title" = "Handshake";
+"settings.encryption.handshake.title" = "握手";
 
 "settings.application_settings.title" = "應用程式設定";
 "settings.application_settings.dark_theme.title" = "黑色主題";
