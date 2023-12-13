@@ -548,6 +548,8 @@
 		E5AB287F2B28F6EF00744E5F /* Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB287E2B28F6EF00744E5F /* Stubs.swift */; };
 		E5AB28872B2911C900744E5F /* AccountProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28862B2911C900744E5F /* AccountProviderMock.swift */; };
 		E5AB288A2B29BDED00744E5F /* Foundation+PIA.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28892B29BDED00744E5F /* Foundation+PIA.swift */; };
+		E5AB288C2B2A487A00744E5F /* LoginViewModelErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB288B2B2A487A00744E5F /* LoginViewModelErrorHandler.swift */; };
+		E5AB288E2B2A489500744E5F /* LoginStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB288D2B2A489500744E5F /* LoginStatus.swift */; };
 		E5C507682B0D609300200A6A /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = E5C507672B0D609300200A6A /* PIALibrary */; };
 		E5C5076A2B0D60A500200A6A /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = E5C507692B0D60A500200A6A /* PIALibrary */; };
 		E5C5076C2B0D60AD00200A6A /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = E5C5076B2B0D60AD00200A6A /* PIALibrary */; };
@@ -1132,6 +1134,8 @@
 		E5AB28842B2902E700744E5F /* LoginProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginProviderTests.swift; path = ../../../../../../.Trash/LoginProviderTests.swift; sourceTree = "<group>"; };
 		E5AB28862B2911C900744E5F /* AccountProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProviderMock.swift; sourceTree = "<group>"; };
 		E5AB28892B29BDED00744E5F /* Foundation+PIA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Foundation+PIA.swift"; sourceTree = "<group>"; };
+		E5AB288B2B2A487A00744E5F /* LoginViewModelErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelErrorHandler.swift; sourceTree = "<group>"; };
+		E5AB288D2B2A489500744E5F /* LoginStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStatus.swift; sourceTree = "<group>"; };
 		E5C507772B0E144D00200A6A /* PIA VPN-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PIA VPN-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C507792B0E144E00200A6A /* PIA_VPN_tvOSApp.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIA_VPN_tvOSApp.swift; sourceTree = "<group>"; tabWidth = 4; };
 		E5C5077B2B0E144E00200A6A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -2208,6 +2212,8 @@
 				E5C507A42B153A2F00200A6A /* LoginViewModel.swift */,
 				E5C507AD2B17E45800200A6A /* LoginPresentableErrorMapper.swift */,
 				E5C507B82B17E7A400200A6A /* ValidateCredentialsFormat.swift */,
+				E5AB288B2B2A487A00744E5F /* LoginViewModelErrorHandler.swift */,
+				E5AB288D2B2A489500744E5F /* LoginStatus.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -3371,9 +3377,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5AB288C2B2A487A00744E5F /* LoginViewModelErrorHandler.swift in Sources */,
 				E5AB28732B279B7000744E5F /* LoginProvider.swift in Sources */,
 				E5C507A52B153A2F00200A6A /* LoginViewModel.swift in Sources */,
 				E5C507B72B17E75B00200A6A /* CheckLoginAvailability.swift in Sources */,
+				E5AB288E2B2A489500744E5F /* LoginStatus.swift in Sources */,
 				E5AB286F2B27977000744E5F /* LoginFactory.swift in Sources */,
 				69F1C29C2B2B299300E924AE /* VpnConnectionUseCase.swift in Sources */,
 				E5AB288A2B29BDED00744E5F /* Foundation+PIA.swift in Sources */,
