@@ -17,3 +17,9 @@ struct Credentials {
         self.password = password
     }
 }
+
+extension Credentials: Equatable {
+    public static func == (lhs: Credentials, rhs: Credentials) -> Bool {
+        lhs.username == rhs.username && lhs.password == rhs.password
+    }
+}
