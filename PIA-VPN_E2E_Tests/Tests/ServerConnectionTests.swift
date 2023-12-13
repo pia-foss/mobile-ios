@@ -15,6 +15,10 @@ class ServerConnectionTests : BaseTest {
         describe("server connection tests") {
             context("when the user navigates to homescreen upon logging in") {
                 it("should display the vpn server defaulted to 'Automatic'") {
+                    app.logOut()
+                    app.navigateToLoginScreen()
+                    app.logIn(with: CredentialsUtil.credentials(type: .valid))
+                    app.acceptVPNPermission()
                     expect(app.vpnServerButton.staticTexts["Automatic"].exists).to(beTrue())
                 }
                 
@@ -36,8 +40,70 @@ class ServerConnectionTests : BaseTest {
                     app.disconnectToVPN()
                     app.navigateToRegionSelection()
                     app.searchRegion(regionName: "Philippines").firstMatch.tap()
-                    expect(app.connectedStatusLabel.exists).to(beTrue())
+                    expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     expect(app.vpnServerButton.staticTexts["Philippines"].exists).to(beTrue())
+                }
+            }
+            
+            context("when the user changes protocol type") {
+                it("should connect the user to vpn successfully when the user enables small packet for IPSec(IKEv2)") {
+                    app.disconnectToVPN()
+                    app.navigateToProtocolSettings()
+                    app.enableSmallPackets()
+                    app.selectProtocol(protocolName: "IPSec (IKEv2)")
+                    app.navigateToHomeFromSettings()
+                    app.connectToVPN()
+                    expect(app.connectedStatusLabel.exists).to(beTrue())
+                }
+                
+                it("should connect the user to vpn successfully when the user disables small packet for IPSec(IKEv2)") {
+                    app.disconnectToVPN()
+                    app.navigateToProtocolSettings()
+                    app.disableSmallPackets()
+                    app.selectProtocol(protocolName: "IPSec (IKEv2)")
+                    app.navigateToHomeFromSettings()
+                    app.connectToVPN()
+                    expect(app.connectedStatusLabel.exists).to(beTrue())
+                }
+                
+                it("should connect the user to vpn successfully when the user enables small packet for Wireguard") {
+                    app.disconnectToVPN()
+                    app.navigateToProtocolSettings()
+                    app.enableSmallPackets()
+                    app.selectProtocol(protocolName: "WireGuard®")
+                    app.navigateToHomeFromSettings()
+                    app.connectToVPN()
+                    expect(app.connectedStatusLabel.exists).to(beTrue())
+                }
+                
+                it("should connect the user to vpn successfully when the user disables small packet for Wireguard") {
+                    app.disconnectToVPN()
+                    app.navigateToProtocolSettings()
+                    app.disableSmallPackets()
+                    app.selectProtocol(protocolName: "WireGuard®")
+                    app.navigateToHomeFromSettings()
+                    app.connectToVPN()
+                    expect(app.connectedStatusLabel.exists).to(beTrue())
+                }
+                
+                it("should connect the user to vpn successfully when the user enables small packet for OpenVPN") {
+                    app.disconnectToVPN()
+                    app.navigateToProtocolSettings()
+                    app.enableSmallPackets()
+                    app.selectProtocol(protocolName: "OpenVPN")
+                    app.navigateToHomeFromSettings()
+                    app.connectToVPN()
+                    expect(app.connectedStatusLabel.exists).to(beTrue())
+                }
+                
+                it("should connect the user to vpn successfully when the user disables small packet for OpenVPN") {
+                    app.disconnectToVPN()
+                    app.navigateToProtocolSettings()
+                    app.disableSmallPackets()
+                    app.selectProtocol(protocolName: "OpenVPN")
+                    app.navigateToHomeFromSettings()
+                    app.connectToVPN()
+                    expect(app.connectedStatusLabel.exists).to(beTrue())
                 }
             }
         }

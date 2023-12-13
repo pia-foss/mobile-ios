@@ -13,6 +13,10 @@ extension XCUIApplication {
         staticText(with: "Protocol Selection")
     }
     
+    var protocolSelectionPopover: XCUIElement {
+        otherElement(with: "ProtocolPopoverSelectionView")
+    }
+    
     var dataEncryptionButton: XCUIElement {
         staticText(with: "Data Encryption")
     }
@@ -22,7 +26,7 @@ extension XCUIApplication {
     }
     
     var useSmallPacketsSwitch: XCUIElement {
-        switches(with: "User Small Packets")
+        switches(with: "Use Small Packets")
     }
     
     var openVPN: XCUIElement {
@@ -31,6 +35,10 @@ extension XCUIApplication {
     
     var ipsec: XCUIElement {
         staticText(with: "IPSec (IKEv2)")
+    }
+    
+    var wireguard: XCUIElement {
+        staticText(with: "WireGuard®")
     }
     
     func navigateToProtocolSettings() {
@@ -43,6 +51,24 @@ extension XCUIApplication {
         
         if protocolsSettingsButton.waitForExistence(timeout: defaultTimeout) {
             protocolsSettingsButton.tap()
+        }
+    }
+    
+    func selectProtocol(protocolName: String) {
+        protocolSelectionButton.tap()
+        guard protocolSelectionPopover.exists else {return}
+        protocolSelectionPopover.staticTexts[protocolName].tap()
+    }
+    
+    func enableSmallPackets() {
+        if ((useSmallPacketsSwitch.value as! String) != "1") {
+            useSmallPacketsSwitch.tap()
+        }
+    }
+    
+    func disableSmallPackets() {
+        if ((useSmallPacketsSwitch.value as! String) != "0") {
+            useSmallPacketsSwitch.tap()
         }
     }
 }
