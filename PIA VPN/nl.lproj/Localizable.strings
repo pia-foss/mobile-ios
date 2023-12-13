@@ -116,8 +116,8 @@
 "account.delete.alert.title" = "Weet u het zeker?";
 "account.delete.alert.message" = "Het verwijderen van uw PIA-account is definitief en onomkeerbaar. U zult uw PIA-inloggegevens niet kunnen ophalen na het uitvoeren van deze actie. Houd ermee rekening dat deze actie alleen uw PIA-account verwijdert uit onze database, maar NIET uw abonnement. Hiervoor moet u naar uw Apple-account gaan en daar het Private Internet Access-abonnement annuleren. Anders worden u nog steeds kosten aangerekend, hoewel uw PIA-account niet langer actief is.";
 "account.delete.alert.failureMessage" = "Er ging iets fout bij het verwijderen van uw account. Probeer het later nog een keer.";
-"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
-"account.survey.messageLink" = "Take The Survey";
+"account.survey.message" = "Wil je helpen om PIA beter te maken? Laat ons weten hoe we kunnen verbeteren!\nVul de enquête in";
+"account.survey.messageLink" = "Vul de enquête in";
 
 // SETTINGS
 
@@ -408,7 +408,7 @@
 "card.wireguard.cta.learn" = "Meer informatie";
 
 // DEDICATED IP
-"dedicated.ip.title" = "Dedicated IP";
+"dedicated.ip.title" = "Toegewijde IP";
 "dedicated.ip.plural.title" = "Uw dedicated IP's";
 "dedicated.ip.activation.description" = "Activeer uw dedicated IP door uw code in het formulier hieronder te plakken. Als u onlangs een dedicated IP hebt gekocht, kunt u de code op de PIA-website genereren.";
 "dedicated.ip.token.textfield.placeholder" = "Plak uw code hier";

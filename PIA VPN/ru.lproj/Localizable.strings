@@ -116,8 +116,8 @@
 "account.delete.alert.title" = "Вы уверены?";
 "account.delete.alert.message" = "Удаление аккаунта PIA окончательно и необратимо. Выполнив это действие, вы не сможете восстановить свои учетные данные PIA. Обратите внимание, что это действие приведет только к удалению аккаунта из нашей базы данных, Но НЕ к удалению подписки. Вам потребуется перейти в аккаунт Apple и отменить подписку на Private Internet Access. В противном случае плата будет начисляться даже в отсутствие активного аккаунта PIA.";
 "account.delete.alert.failureMessage" = "При удалении аккаунта что-то пошло не так. Повторите попытку позже.";
-"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
-"account.survey.messageLink" = "Take The Survey";
+"account.survey.message" = "Хотите помочь сделать PIA лучше? Подскажите нам, что можно изменить!\nПройти опрос";
+"account.survey.messageLink" = "Пройти опрос";
 
 // SETTINGS
 

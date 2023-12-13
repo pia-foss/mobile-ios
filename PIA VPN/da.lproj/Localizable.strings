@@ -116,8 +116,8 @@
 "account.delete.alert.title" = "Er du sikker?";
 "account.delete.alert.message" = "Hvis du sletter din PIA-konto, er det permanent og uigenkaldeligt. Du vil ikke kunne gendanne dine PIA-legitimationsoplysninger, når du har udført denne handling. Bemærk, at denne handling kun sletter din PIA-konto fra vores database, men IKKE sletter dit aabonnement. Du er nødt til at gå til din Apple-konto og annullere dit Private Internet Access-abonnement derfra. Ellers vil du fortsat blive faktureret, også selv om din PIA-konto ikke længere er aktiv.";
 "account.delete.alert.failureMessage" = "Noget gik galt, da du slettede din konto, prøv igen senere.";
-"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
-"account.survey.messageLink" = "Take The Survey";
+"account.survey.message" = "Vil du hjælpe med at gøre PIA bedre? Fortæl os, hvordan vi kan forbedre platformen!\nTag undersøgelsen";
+"account.survey.messageLink" = "Tag undersøgelsen";
 
 // SETTINGS
 

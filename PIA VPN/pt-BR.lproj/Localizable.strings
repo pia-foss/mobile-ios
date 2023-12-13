@@ -116,8 +116,8 @@
 "account.delete.alert.title" = "Tem certeza?";
 "account.delete.alert.message" = "A exclusão da sua conta da PIA é permanente e irreversível. Você não poderá recuperar suas credenciais da PIA após executar essa ação. Observe que essa ação exclui apenas sua conta da PIA do nosso banco de dados, mas NÃO exclui sua assinatura. Você precisará ir até sua conta da Apple e cancelar a assinatura da Private Internet Access de lá. Caso contrário, você ainda será cobrado, mesmo que sua conta da PIA não esteja mais ativa.";
 "account.delete.alert.failureMessage" = "Algo deu errado ao excluir sua conta. Tente de novo mais tarde.";
-"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
-"account.survey.messageLink" = "Take The Survey";
+"account.survey.message" = "Quer ajudar a tornar a PIA melhor? Diga-nos como podemos melhorar!\nResponda à pesquisa";
+"account.survey.messageLink" = "Responda à pesquisa";
 
 // SETTINGS
 
@@ -130,7 +130,7 @@
 "settings.encryption.title" = "CRIPTOGRAFIA";
 "settings.encryption.cipher.title" = "Criptografia de dados";
 "settings.encryption.digest.title" = "Autenticação de dados";
-"settings.encryption.handshake.title" = "Handshake";
+"settings.encryption.handshake.title" = "Aperto de mãos";
 
 "settings.application_settings.title" = "CONFIGURAÇÕES DO APLICATIVO";
 "settings.application_settings.dark_theme.title" = "Tema escuro";
@@ -216,7 +216,7 @@
 "dashboard.vpn.disconnected" = "Desconectado";
 "dashboard.vpn.connecting" = "Conectando...";
 "dashboard.vpn.connected" = "Conectado a VPN";
-"dashboard.vpn.on" = "VPN: ON";
+"dashboard.vpn.on" = "VPN: ATIVADA";
 "dashboard.vpn.disconnecting" = "Desconectando...";
 "dashboard.vpn.changing_region" = "Alterando a região...";
 "dashboard.vpn.disconnect.untrusted" = "Esta não é uma rede de confiança. Tem certeza que deseja desconectar a VPN?";
@@ -328,7 +328,7 @@
 "tiles.usage.title" = "Uso";
 "tiles.usage.ipsec.title" = "USO (Não disponível no IKEv2)";
 "tiles.usage.upload" = "Upload";
-"tiles.usage.download" = "Download";
+"tiles.usage.download" = "Baixar";
 "tiles.nmt.cellular" = "Celular";
 "tiles.nmt.accessibility.trusted" = "Rede de confiança";
 "tiles.nmt.accessibility.untrusted" = "Rede não confiável";
@@ -345,7 +345,7 @@
 "siri.shortcuts.add.error" = "Aconteceu um erro ao adicionar o atalho da Siri. Tente de novo.";
 
 //TODAY WIDGET
-"today.widget.login" = "Login";
+"today.widget.login" = "Entrar";
 
 //FRIEND REFERRALS
 "friend.referrals.email.validation" = "E-mail inválido. Tente novamente.";

@@ -116,8 +116,8 @@
 "account.delete.alert.title" = "本当によろしいですか？";
 "account.delete.alert.message" = "PIA アカウントの削除は永久的な操作であり、元に戻すことはできません。この操作を実行した後に、お持ちのPIA資格情報を取得することはできません。この操作ではお持ちのPIAアカウントが削除されるだけで、ご契約が削除されるわけではないことにご留意ください。お持ちのAppleアカウントにアクセスし、そこでPrivate Internet Access契約をキャンセルしない限り、お持ちのPIAアカウントが無効になった後も請求が行われます。";
 "account.delete.alert.failureMessage" = "お持ちのアカウントを削除中に問題が発生しました。後でもう一度試してください。";
-"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
-"account.survey.messageLink" = "Take The Survey";
+"account.survey.message" = "PIAの改善にご協力いただけますか？\nアンケート調査を受ける";
+"account.survey.messageLink" = "アンケートを受ける";
 
 // SETTINGS
 

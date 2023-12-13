@@ -116,8 +116,8 @@
 "account.delete.alert.title" = "계속하시겠습니까?";
 "account.delete.alert.message" = "PIA 계정 삭제는 영구적이고 되돌릴 수 없습니다. 이 작업을 수행한 후에는 PIA 인증 정보를 복구할 수 없습니다. 이 작업은 본사 데이터베이스에서 사용자의 PIA 계정만 삭제합니다. 사용자의 구독은 삭제되지 않습니다. 따라서 자신의 Apple 계정으로 이동해서 Private Internet Access 구독을 취소해야 합니다. 그렇지 않으면 PIA를 더 이상 사용할 수 없더라도 요금이 부과됩니다.";
 "account.delete.alert.failureMessage" = "계정을 삭제하는 중 문제가 발생했습니다. 나중에 다시 시도하십시오.";
-"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
-"account.survey.messageLink" = "Take The Survey";
+"account.survey.message" = "PIA 서비스를 개선하도록 도와주시겠나요? 저희가 개선할 수 있는 부분을 알려주세요!\n설문조사 참여";
+"account.survey.messageLink" = "설문조사 참여";
 
 // SETTINGS
 
