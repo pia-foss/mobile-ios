@@ -20,17 +20,29 @@ struct LoginView: View {
     
     var body: some View {
         VStack {
-            Text("Sign in to your account")
-                .font(.system(size: 36))
-            TextField("Username(p1234567)", text: $userName)
-            TextField("Password", text: $password)
-            Button(action: {
-                Task {
-                    await viewModel.login(username: userName, password: password)
+            ZStack {
+                if viewModel.loginStatus == .isLogging {
+                    ProgressView().progressViewStyle(.circular)
                 }
-            }, label: {
-                Text("LOGIN")
-            })
-        }
+                
+                VStack {
+                    Text("Sign in to your account")
+                        .font(.system(size: 36))
+                    TextField("Username(p1234567)", text: $userName)
+                    SecureField("Password", text: $password)
+                    Button(action: {
+                        viewModel.login(username: userName, password: password)
+                    }, label: {
+                        Text("LOGIN")
+                    })
+                }
+            }
+        }.alert("Error", isPresented: $viewModel.shouldShowErrorMessage, actions: {
+            Button("OK") {}
+        }, message: {
+            if case .failed(let errorMessage, _) = viewModel.loginStatus, let errorMessage = errorMessage {
+                Text(errorMessage)
+            }
+        })
     }
 }

@@ -18,7 +18,8 @@ class LoginFactory {
         LoginViewModel(loginWithCredentialsUseCase: makeLoginWithCredentialsUseCase(),
                        checkLoginAvailability: CheckLoginAvailability(),
                        validateLoginCredentials: ValidateCredentialsFormat(),
-                       errorMapper: LoginPresentableErrorMapper())
+                       errorHandler: makeLoginViewModelErrorHandler())
+        
     }
     
     private static func makeLoginWithCredentialsUseCase() -> LoginWithCredentialsUseCaseType {
@@ -29,5 +30,9 @@ class LoginFactory {
     private static func makeLoginProvider() -> LoginProviderType {
         LoginProvider(accountProvider: Client.providers.accountProvider, 
                       userAccountMapper: UserAccountMapper())
+    }
+    
+    private static func makeLoginViewModelErrorHandler() -> LoginViewModelErrorHandlerType {
+        LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper())
     }
 }
