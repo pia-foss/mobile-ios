@@ -89,6 +89,7 @@ extension ProtocolPopoverSelectionView: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        self.accessibilityIdentifier = "ProtocolPopoverSelectionView"
         
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) else {
             fatalError("no protocol available")

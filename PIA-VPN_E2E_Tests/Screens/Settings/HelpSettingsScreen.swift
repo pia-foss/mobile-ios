@@ -13,12 +13,28 @@ extension XCUIApplication {
         staticText(with: "Send Debug Log to support")
     }
     
+    var successfulSendDebugMessage: XCUIElement {
+        staticText(with: "Debug information submitted")
+    }
+    
     var helpImprovePIASwitch: XCUIElement {
         switches(with: "Help improve PIA")
     }
     
+    var connectionStatsButton: XCUIElement {
+        staticText(with: "Connection stats")
+    }
+    
     var latestNewsButton: XCUIElement {
         staticText(with: "Latest News")
+    }
+    
+    var versionNo: XCUIElement {
+        findButtonWithPartialText("Version")!
+    }
+    
+    var tryWireguardNowButton: XCUIElement {
+        findButtonWithPartialText("Try WireGuard® now")!
     }
     
     func navigateToHelpSettings() {
@@ -30,7 +46,19 @@ extension XCUIApplication {
         }
         
         if helpSettingsButton.waitForExistence(timeout: defaultTimeout) {
-            automationSettingsButton.tap()
+            helpSettingsButton.tap()
+        }
+    }
+    
+    func enableHelpImprovePIA() {
+        if (helpImprovePIASwitch.value as! String == "0") {
+            helpImprovePIASwitch.tap()
+        }
+    }
+    
+    func disableHelpImprovePIA() {
+        if (helpImprovePIASwitch.value as! String == "1") {
+            helpImprovePIASwitch.tap()
         }
     }
 }
