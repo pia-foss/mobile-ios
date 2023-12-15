@@ -116,8 +116,8 @@
 "account.delete.alert.title" = "Czy na pewno?";
 "account.delete.alert.message" = "Usunięcie Twojego konta PIA będzie trwałe i nieodwracalne. Po tej akcji nie będziesz mógł pobrać swoich danych logowania PIA. Ta akcja powoduje tylko usunięcie konta PIA z naszej bazy danych, ale NIE powoduje usunięcia subskrypcji. W tym celu należy przejść do swojego konta Apple i anulować tam subskrypcję Private Internet Access. W przeciwnym razie nadal będą pobierane opłaty, mimo że konto PIA nie będzie już aktywne.";
 "account.delete.alert.failureMessage" = "Coś poszło nie tak podczas usuwania konta, spróbuj jeszcze raz później.";
-"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
-"account.survey.messageLink" = "Take The Survey";
+"account.survey.message" = "Chcesz pomóc ulepszyć PIA? Daj nam znać, jak możemy to zrobić!\nWeź udział w ankiecie";
+"account.survey.messageLink" = "Weź udział w ankiecie";
 
 // SETTINGS
 

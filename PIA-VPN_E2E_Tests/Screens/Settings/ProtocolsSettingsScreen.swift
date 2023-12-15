@@ -59,7 +59,7 @@ extension XCUIApplication {
         guard protocolSelectionPopover.exists else {return}
         protocolSelectionPopover.staticTexts[protocolName].tap()
     }
-    
+  
     func enableSmallPackets() {
         if ((useSmallPacketsSwitch.value as! String) != "1") {
             useSmallPacketsSwitch.tap()

@@ -116,14 +116,14 @@
 "account.delete.alert.title" = "Er du sikker?";
 "account.delete.alert.message" = "Sletting av PIA-kontoen er permanent og kan ikke reverseres. Du vil ikke kunne hente PIA-legitimasjonen etter at denne handlingen er utført. Vær oppmerksom på at denne handlingen bare sletter PIA-kontoen fra databasen, og sletter IKKE abonnementet. Du må gå til Apple-kontoen og kansellere abonnementet på Private Internet Access derfra. Ellers blir du fortsatt belastet, selv om PIA-kontoen ikke lenger er aktiv.";
 "account.delete.alert.failureMessage" = "Noe gikk galt ved sletting av kontoen. Prøv på nytt senere.";
-"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
-"account.survey.messageLink" = "Take The Survey";
+"account.survey.message" = "Vil du bidra til å gjøre PIA bedre? Fortell oss hvordan vi kan forbedre oss!\nBesvar undersøkelsen";
+"account.survey.messageLink" = "Besvar undersøkelsen";
 
 // SETTINGS
 
 "settings.connection.title" = "TILKOBLING";
 "settings.connection.vpn_protocol.title" = "Protokollseksjon";
-"settings.connection.transport.title" = "Transport";
+"settings.connection.transport.title" = "Transporter";
 "settings.connection.socket_protocol.title" = "Socket";
 "settings.connection.remote_port.title" = "Ekstern port";
 
@@ -308,7 +308,7 @@
 // REGION
 
 "region.search.placeholder" = "Søk etter en region";
-"region.accessibility.filter" = "Filter";
+"region.accessibility.filter" = "Filtrer";
 "region.filter.sortby" = "Sorter regioner etter";
 "region.filter.name" = "Navn";
 "region.filter.latency" = "Ventetid";
@@ -436,5 +436,5 @@
 "inapp.messages.settings.updated" = "Innstillingene ble oppdatert";
 
 // PIA WIDGET
-"widget.liveActivity.region.title" = "Region";
+"widget.liveActivity.region.title" = "Fylke";
 "widget.liveActivity.protocol.title" = "Protokoll";

@@ -5,38 +5,38 @@
 "global.close" = "Kapat";
 "global.error" = "Hata";
 "global.automatic" = "Otomatik";
-"global.required" = "Required";
-"global.optional" = "Optional";
+"global.required" = "Gerekli";
+"global.optional" = "İsteğe bağlı";
 "global.clear" = "Temizle";
 "global.update" = "Güncelle";
 "global.edit" = "Düzenle";
-"global.unreachable" = "No internet connection found. Please confirm that you have an internet connection.";
+"global.unreachable" = "İnternet bağlantısı bulunamadı. Lütfen bir internet bağlantısına sahip olduğunuzdan emin olun.";
 "global.enabled" = "Etkin";
 "global.disabled" = "Devre Dışı";
 "global.enable" = "Etkinleştir";
 "global.disable" = "Kapat";
 "global.add" = "Ekle";
 "global.remove" = "Kaldır";
-"global.empty" = "Empty";
+"global.empty" = "Boş";
 "global.copy" = "Kopyala";
-"global.share" = "Share";
+"global.share" = "Paylaş";
 "global.copied" = "Panoya kopyalandı";
 "global.yes" = "Evet";
 "global.no" = "Hayır";
-"global.or" = "or";
-"global.row.selection" = "Row selection";
+"global.or" = "veya";
+"global.row.selection" = "Satır seçimi";
 "global.vpn.settings" = "VPN Ayarları";
-"global.general.settings" = "General Settings";
+"global.general.settings" = "Genel Ayarlar";
 "global.version" = "Sürüm";
 
 // NOTIFICATIONS
 
-"notifications.disabled.title" = "Notifications disabled";
-"notifications.disabled.message" = "Enable notifications to get a reminder to renew your subscription before it expires.";
+"notifications.disabled.title" = "Bildirimler devre dışı";
+"notifications.disabled.message" = "Aboneliğiniz sona ermeden önce yenileme hatırlatması almak için bildirimleri etkinleştirin.";
 "notifications.disabled.settings" = "Ayarlar";
 
-"expiration.title" = "Renewal";
-"expiration.message" = "Your subscription expires soon. Renew to stay protected.";
+"expiration.title" = "Yenileme";
+"expiration.message" = "Aboneliğiniz yakında sona erecek. Korunmaya devam etmek için yenileyin.";
 
 "local_notification.non_compliant_wifi.title" = "Güvenilmeyen Wi-Fi: %@";
 "local_notification.non_compliant_wifi.text" = "Cihazınızı güvence altına almak için buraya dokunun";
@@ -45,79 +45,79 @@
 
 "shortcuts.connect" = "Bağlan";
 "shortcuts.disconnect" = "bağlantısını sonlandırın";
-"shortcuts.select_region" = "Select a region";
+"shortcuts.select_region" = "Bir bölge seçin";
 
 // RENEWAL
 
-"renewal.success.title" = "Thank you";
-"renewal.success.message" = "Your account was successfully renewed.";
-"renewal.failure.message" = "Your purchase receipt couldn't be submitted, please retry at a later time.";
+"renewal.success.title" = "Teşekkürler";
+"renewal.success.message" = "Hesabınız başarıyla yenilendi.";
+"renewal.failure.message" = "Satın alım faturanız gönderilemedi, lütfen daha sonra tekrar deneyin.";
 
 // MENU
 "menu.accessibility.edit.tile" = "Düzenle";
 "menu.accessibility.item" = "Menü";
-"menu.accessibility.logged_as" = "Logged in as %@";
-"menu.expiration.expires_in" = "Subscription expires in";
+"menu.accessibility.logged_as" = "%@ olarak giriş yapıldı";
+"menu.expiration.expires_in" = "Aboneliğin sona erme süresi:";
 "menu.expiration.days" = "%d gün";
 "menu.expiration.hours" = "%d saat";
 "menu.expiration.one_hour" = "bir saat";
-"menu.expiration.upgrade" = "UPGRADE ACCOUNT";
-"menu.item.region" = "Region selection";
+"menu.expiration.upgrade" = "HESABI YÜKSELTİN";
+"menu.item.region" = "Bölge seçimi";
 "menu.item.about" = "Hakkında";
 "menu.item.account" = "Hesap";
 "menu.item.settings" = "Ayarlar";
 "menu.item.logout" = "Çıkış yap";
-"menu.item.web.privacy" = "Privacy policy";
-"menu.item.web.home" = "Home page";
+"menu.item.web.privacy" = "Gizlilik politikası";
+"menu.item.web.home" = "Ana sayfa";
 "menu.item.web.support" = "Destek";
 
 "menu.logout.title" = "Çıkış yap";
-"menu.logout.message" = "Logging out will disable the VPN and leave you unprotected.";
+"menu.logout.message" = "Çıkış yapmak, VPN'i devre dışı bırakacak ve sizi korumasız bırakacak.";
 "menu.logout.confirm" = "Çıkış yap";
 
-"menu.renewal.title" = "Renewal";
+"menu.renewal.title" = "Yenileme";
 "menu.renewal.purchase" = "Satın Al";
 "menu.renewal.renew" = "Yenile";
 "menu.renewal.message.trial" = "Deneme hesabı yenilenemez. Hizmeti kullanmaya devam etmek için süresi dolduktan sonra lütfen yeni bir hesap satın alın.";
-"menu.renewal.message.website" = "Please use our website to renew your subscription.";
-"menu.renewal.message.unavailable" = "Apple servers currently unavailable. Please try again later.";
+"menu.renewal.message.website" = "Aboneliğinizi yenilemek için lütfen web sitemizi kullanın.";
+"menu.renewal.message.unavailable" = "Apple sunucuları şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.";
 
 // ACCOUNT
 
 "account.email.caption" = "E-posta";
 "account.email.placeholder" = "E-posta adresi";
 "account.username.caption" = "Kullanıcı Adı";
-"account.other.footer" = "Get the Private Internet Access app for your other devices and use the above username and password to login and secure your connection.";
-"account.restore.title" = "Restore uncredited purchase";
-"account.restore.description" = "If you renewed your plan but your account still says it's about to expire, you can restart the renewal from here. You will not be charged during this process.";
-"account.restore.button" = "RESTORE PURCHASE";
-"account.restore.failure.title" = "Restore purchase";
-"account.restore.failure.message" = "No redeemable purchase was found for renewal.";
+"account.other.footer" = "Diğer cihazlarınız için Private Internet Access uygulamasını edinin ve giriş yapmak ve bağlantınızı korumak için yukarıdaki kullanıcı adını ve şifreyi kullanın.";
+"account.restore.title" = "Bilgileri gönderilmeyen satın alma işlemini tekrarlayın";
+"account.restore.description" = "Planınızı yenilediyseniz ancak hesabınız yine de sona ermek üzere olduğunu belirtiyorsa yenilemeyi buradan yeniden başlatabilirsiniz. Bu işlem sırasında ücretlendirilmeyeceksiniz.";
+"account.restore.button" = "SATIN ALIMI GERİ YÜKLE";
+"account.restore.failure.title" = "Satın alımı geri yükle";
+"account.restore.failure.message" = "Yenileme için itfa edilebilir bir satın alım bulunamadı.";
 "account.save.item" = "E-posta adresini güncelle";
-"account.save.prompt" = "Authenticate to save changes";
-"account.save.success" = "Your email address has been saved.";
-"account.reveal.prompt" = "Authenticate to reveal";
-"account.expiry_date.information" = "Your plan will expire on %@.";
-"account.expiry_date.expired" = "Your plan has expired.";
+"account.save.prompt" = "Değişiklikleri kaydetmek için doğrulayın";
+"account.save.success" = "E-posta adresiniz kaydedildi.";
+"account.reveal.prompt" = "Ortaya çıkarmak için doğrulayın";
+"account.expiry_date.information" = "Planınız %@ tarihinde sona erecek.";
+"account.expiry_date.expired" = "Planınız sona erdi.";
 "account.update.email.require.password.title" = "PIA Parolası Gerekli";
 "account.update.email.require.password.message" = "Güvenlik nedenleriyle, hesabınızda herhangi bir değişiklik yapmak için PIA parolanızı girmeniz gerekli. Lütfen devam etmek için PIA parolanızı girin.";
 "account.update.email.require.password.button" = "Gönder";
-"account.error.unauthorized" = "Your username or password is incorrect.";
-"account.subscriptions.message" = "You can manage your subscription from here.";
+"account.error.unauthorized" = "Kullanıcı adınız ya da şifreniz hatalı.";
+"account.subscriptions.message" = "Aboneliğinizi buradan yönetebilirsiniz.";
 "account.subscriptions.linkMessage" = "buradan ulaşabilirsiniz";
-"account.set.email.error" = "There was an error adding email. Please try again later.";
-"account.subscriptions.short.message" = "Manage subscription";
-"account.subscriptions.short.linkMessage" = "Manage subscription";
-"account.subscriptions.yearly" = "Yearly plan";
-"account.subscriptions.monthly" = "Monthly plan";
-"account.subscriptions.trial" = "Trial plan";
+"account.set.email.error" = "E-posta ekleme sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyin.";
+"account.subscriptions.short.message" = "Aboneliği yönet";
+"account.subscriptions.short.linkMessage" = "Aboneliği yönet";
+"account.subscriptions.yearly" = "Yıllık plan";
+"account.subscriptions.monthly" = "Aylık plan";
+"account.subscriptions.trial" = "Deneme planı";
 "account.unauthorized" = "Bir sorun oluştu. Lütfen tekrar oturum açmayı deneyin";
 "account.delete" = "Hesabı Sil";
 "account.delete.alert.title" = "Emin misiniz?";
-"account.delete.alert.message" = "Deleting your PIA account is permanent and irreversible. You will not be able to retrieve your PIA credentials after performing this action. Please note that this action only deletes your PIA account from our database, but it does NOT delete your subscription. You will need to go to your Apple account and cancel the Private Internet Access subscription from there. Otherwise, you will still be charged, even though your PIA account will no longer be active.";
-"account.delete.alert.failureMessage" = "Something went wrong while deleting your account, please try again later.";
-"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
-"account.survey.messageLink" = "Take The Survey";
+"account.delete.alert.message" = "PIA hesabınızı silmek kalıcıdır ve geri alınamaz. Bu eylemi gerçekleştirdikten sonra PIA kimlik bilgilerinize erişemeyeceksiniz. Bu eylemin, PIA hesabınızı yalnızca veri tabanımızdan sildiğini ancak aboneliğinizi SİLMEDİĞİNİ unutmayın. Apple hesabınıza gitmeniz ve Private Internet Access aboneliğinizi buradan iptal etmeniz gerekecek. Aksi takdirde, PIA hesabınız artık aktif olmasa bile yine de ücretlendirileceksiniz.";
+"account.delete.alert.failureMessage" = "Hesabınız silinirken bir sorun oluştu, lütfen daha sonra tekrar deneyin.";
+"account.survey.message" = "PIA'yı daha iyi yapmak ister misiniz? Nasıl iyileştirebileceğimizi belirtin!\nAnkete Katılın";
+"account.survey.messageLink" = "Ankete Katıl";
 
 // SETTINGS
 
@@ -132,55 +132,55 @@
 "settings.encryption.digest.title" = "Veri Kimlik Doğrulama";
 "settings.encryption.handshake.title" = "El sıkışma";
 
-"settings.application_settings.title" = "APPLICATION SETTINGS";
-"settings.application_settings.dark_theme.title" = "Dark theme";
-"settings.application_settings.active_theme.title" = "Active theme";
+"settings.application_settings.title" = "UYGULAMA AYARLARI";
+"settings.application_settings.dark_theme.title" = "Koyu tema";
+"settings.application_settings.active_theme.title" = "Aktif tema";
 "settings.application_settings.kill_switch.title" = "VPN Acil Anahtarı";
-"settings.application_settings.kill_switch.footer" = "The VPN kill switch prevents access to the Internet if the VPN connection is reconnecting. This excludes disconnecting manually.";
+"settings.application_settings.kill_switch.footer" = "VPN kill switch, VPN bağlantınız yeniden bağlanırken internete erişimi önler. Bu, manuel bağlantı sonlandırmayı kapsamaz.";
 "settings.application_settings.leak_protection.title" = "Sızıntı Koruması";
 "settings.application_settings.leak_protection.footer" = "iOS, varsayılan olarak VPN dışında çalışacak şekilde tasarlanmış özellikleri içerir. Bunlar AirDrop, CarPlay, AirPlay ve Kişisel Erişim Noktaları gibi özellikleri içerir. Özel sızıntı koruması etkinleştirildiğinde, bu trafiğin VPN üzerinden yönlendirilmesi ancak bu özelliklerin işlevselliğini etkileyebilir. Daha fazla bilgi";
 "settings.application_settings.leak_protection.more_info" = "Daha fazla bilgi";
 "settings.application_settings.allow_local_network.title" = "Yerel ağdaki cihazlara erişim izni ver";
 "settings.application_settings.allow_local_network.footer" = "VPN'e bağlıyken yazıcılar veya dosya sunucuları gibi yerel cihazlara bağlı kalın. (Buna yalnızca ağınızdaki kişilere ve cihazlara güveniyorsanız izin verin.)";
 "settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.mace.footer" = "PIA MACE™ blocks ads, trackers, and malware while you're connected to the VPN.";
+"settings.application_settings.mace.footer" = "PIA MACE™, VPN'e bağlı olduğunuz sırada reklamları, takipçileri ve kötü amaçlı yazılımları engeller.";
 "settings.application_settings.leak_protection.alert.title" = "VPN Ayarlarındaki değişiklikler, bir sonraki bağlantıda etkili olacak";
 
-"settings.content_blocker.title" = "Safari Content Blocker state";
-"settings.content_blocker.state.title" = "Current state";
-"settings.content_blocker.refresh.title" = "Refresh block list";
-"settings.content_blocker.footer" = "To enable or disable Content Blocker go to Settings > Safari > Content Blockers and toggle PIA VPN.";
+"settings.content_blocker.title" = "Safari İçerik Engelleyici durumu";
+"settings.content_blocker.state.title" = "Geçerli durum";
+"settings.content_blocker.refresh.title" = "Engelleme listesini yenile";
+"settings.content_blocker.footer" = "İçerik Engelleyici'yi etkinleştirmek veya devre dışı bırakmak için Ayarlar > Safari > İçerik Engelleyiciler'e gidin ve PIA VPN için açın.";
 
 "settings.application_information.title" = "UYGULAMA BİLGİLERİ";
 "settings.application_information.debug.title" = "Hata Ayıklama Kaydını Destek Ekibine Gönderin";
-"settings.application_information.debug.failure.title" = "Error during submission";
-"settings.application_information.debug.failure.message" = "Debug information could not be submitted.";
-"settings.application_information.debug.empty.title" = "Empty debug information";
-"settings.application_information.debug.empty.message" = "Debug information is empty, please attempt a connection before retrying submission.";
+"settings.application_information.debug.failure.title" = "Gönderme sırasında hata";
+"settings.application_information.debug.failure.message" = "Hata bulma bilgileri gönderilemedi.";
+"settings.application_information.debug.empty.title" = "Hata bulma bilgileri boş";
+"settings.application_information.debug.empty.message" = "Hata bulma bilgileri boş, tekrar göndermeyi denemeden önce lütfen bir bağlantı gerçekleştirin.";
 "settings.application_information.debug.success.title" = "Hata ayıklama bilgileri gönderildi";
-"settings.application_information.debug.success.message" = "Debug information successfully submitted.\nID: %@\nPlease note this ID, as our support team will require this to locate your submission.";
+"settings.application_information.debug.success.message" = "Hata bulma bilgileri başarıyla gönderildi.\nID: %@\nLütfen bu ID'yi not edin, destek ekibimiz gönderinizi bulmak için isteyecek.";
 
-"settings.commit.messages.must_disconnect" = "The VPN must reconnect for some changes to take effect.";
-"settings.commit.messages.should_reconnect" = "Reconnect the VPN to apply changes.";
+"settings.commit.messages.must_disconnect" = "Bazı değişikliklerin uygulanması için VPN'in yeniden bağlanması gerekiyor.";
+"settings.commit.messages.should_reconnect" = "Değişiklikleri uygulamak için VPN'e tekrar bağlanın.";
 "settings.commit.buttons.reconnect" = "Yeniden bağlan";
 "settings.commit.buttons.later" = "Daha sonra";
 
-"settings.reset.title" = "RESET";
+"settings.reset.title" = "SIFIRLA";
 "settings.reset.defaults.title" = "Ayarları varsayılanlara sıfırla";
-"settings.reset.defaults.confirm.title" = "Reset settings";
+"settings.reset.defaults.confirm.title" = "Ayarları sıfırla";
 "settings.reset.defaults.confirm.message" = "Bu işlem uygulama ayarlarını sıfırlayacak. Yapmış olduğunuz bütün değişiklikler kaybolacaktır.";
 "settings.reset.defaults.confirm.button" = "Sıfırla";
-"settings.reset.footer" = "This will reset all of the above settings to default.";
+"settings.reset.footer" = "Bu işlem, yukarıdaki ayarların tamamını varsayılana sıfırlayacak.";
 
 "settings.small.packets.title" = "Küçük Paketler Kullan";
 "settings.small.packets.description" = "Bazı yönlendirici ve mobil ağlarla olan uyumluluğu artırmak için IP paket boyutunu hafif düşürecek.";
 
-"settings.log.connected.error" = "A VPN connection is required. Please connect to the VPN and retry.";
+"settings.log.connected.error" = "Bir VPN bağlantısı gerekiyor. Lütfen VPN'e bağlanın ve tekrar deneyin.";
 "settings.log.information" = "Sorunların giderilmesine yardımcı olması için teknik desteğe gönderilebilen hata ayıklama günlüklerini kaydedin.";
 
-"settings.preview.title" = "Preview";
-"settings.server.network.description" = "Next generation network";
-"settings.server.network.alert" = "The VPN has to be disconnected to change the server network.";
+"settings.preview.title" = "Önizleme";
+"settings.server.network.description" = "Yeni jenerasyon ağ";
+"settings.server.network.alert" = "Sunucu ağını değiştirmek için VPN bağlantısının sonlandırılması gerekiyor.";
 
 "settings.geo.servers.description" = "Coğrafi Konum Bölgelerini Göster";
 "settings.cards.history.title" = "Son haberler";
@@ -191,38 +191,38 @@
 "settings.section.general" = "Genel";
 "settings.section.protocols" = "Protokoller.";
 "settings.section.network" = "AĞ";
-"settings.section.privacyFeatures" = "Privacy Features";
+"settings.section.privacyFeatures" = "Gizlilik Özellikleri";
 "settings.section.automation" = "Otomasyon";
 "settings.section.help" = "Yardım";
 
 // CONTENT BLOCKER
 
-"content_blocker.title" = "Safari Content Blocker";
-"content_blocker.body.subtitle" = "To enable our Content Blocker for use with Safari please go to Settings > Safari, and under General touch Content Blockers toggle on PIA VPN.";
-"content_blocker.body.footer" = "Please note: You do not need to be connected to the VPN for this Content Blocker to work, but it will only work while browsing with Safari.";
+"content_blocker.title" = "Safari İçerik Engelleyici";
+"content_blocker.body.subtitle" = "İçerik Engelleyicimizi Safari ile kullanım için etkinleştirmek için lütfen Ayarlar > Safari'ye gidin ve Genel altında İçerik Engelleyiciler'e dokunun ve PIA VPN için açın.";
+"content_blocker.body.footer" = "Lütfen unutmayın: Bu İçerik Engelleyicinin çalışması için VPN'e bağlı olmanız gerekmiyor ancak yalnızca Safari'de gezinirken çalışacaktır.";
 
 // ABOUT
 
 "about.app" = "Private Internet Access'ten VPN";
-"about.intro" = "This program uses the following components:";
-"about.accessibility.component.expand" = "Tap to read full license";
+"about.intro" = "Bu program aşağıdaki bileşenleri kullanıyor:";
+"about.accessibility.component.expand" = "Tam lisansı okumak için dokunun";
 
 // DASHBOARD
 
-"dashboard.content_blocker.intro.message" = "This version replaces MACE with our Safari Content Blocker.\n\nCheck it out in the 'Settings' section.";
+"dashboard.content_blocker.intro.message" = "Bu versiyon, MACE'i Safari İçerik Engelleyici ile değiştiriyor.\n\n'Ayarlar' bölümünden göz atın.";
 
-"dashboard.connection.ip.unreachable" = "Internet unreachable";
+"dashboard.connection.ip.unreachable" = "İnternete erişilemiyor";
 
 "dashboard.vpn.disconnected" = "Bağlantı Kesildi";
 "dashboard.vpn.connecting" = "Bağlanıyor...";
-"dashboard.vpn.connected" = "Connected to VPN";
-"dashboard.vpn.on" = "VPN: ON";
+"dashboard.vpn.connected" = "VPN'e bağlandı";
+"dashboard.vpn.on" = "VPN: AÇIK";
 "dashboard.vpn.disconnecting" = "Bağlantı kesiliyor...";
-"dashboard.vpn.changing_region" = "Changing region...";
-"dashboard.vpn.disconnect.untrusted" = "This network is untrusted. Do you really want to disconnect the VPN?";
-"dashboard.accessibility.vpn.button" = "VPN Connection button";
-"dashboard.accessibility.vpn.button.isOn" = "VPN Connection button. The VPN is currently connected";
-"dashboard.accessibility.vpn.button.isOff" = "VPN Connection button. The VPN is currently disconnected";
+"dashboard.vpn.changing_region" = "Bölge değiştiriliyor...";
+"dashboard.vpn.disconnect.untrusted" = "Bu ağa güvenilmiyor. VPN bağlantısını gerçekten sonlandırmak istiyor musunuz?";
+"dashboard.accessibility.vpn.button" = "VPN Bağlantı butonu";
+"dashboard.accessibility.vpn.button.isOn" = "VPN Bağlantı butonu. VPN şu anda bağlı";
+"dashboard.accessibility.vpn.button.isOff" = "VPN Bağlantı butonu. VPN şu anda bağlı değil";
 
 "dashboard.vpn.leakprotection.alert.title" = "Güvenilmeyen Wi-Fi algılandı";
 "dashboard.vpn.leakprotection.alert.message" = "Veri sızıntısını önlemek için, \"Yerel ağdaki cihazlara erişime izin ver\" özelliğini devre dışı bırakmak ve otomatik olarak yeniden bağlanmak için Şimdi Devre Dışı Bırak'a dokunun.";
@@ -236,132 +236,132 @@
 // VPN PERMISSION
 
 "vpn_permission.title" = "PIA";
-"vpn_permission.body.title" = "PIA needs access to your VPN profiles to secure your traffic";
-"vpn_permission.body.subtitle" = "You’ll see a prompt for PIA VPN and need to allow access to VPN configurations.\nTo proceed tap on “%@”.";
-"vpn_permission.body.footer" = "We don’t monitor, filter or log any network activity.";
-"vpn_permission.disallow.message.basic" = "We need this permission for the application to function.";
-"vpn_permission.disallow.message.support" = "You can also get in touch with customer support if you need assistance.";
+"vpn_permission.body.title" = "PIA, trafiğinizi korumak için VPN profillerinize erişime ihtiyaç duyuyor";
+"vpn_permission.body.subtitle" = "PIA VPN için bir istem göreceksiniz ve VPN yapılandırmalarına erişime izin vermeniz gerekecek.\nİlerlemek için “%@” butonuna dokunun.";
+"vpn_permission.body.footer" = "Hiçbir ağ aktivitesini takip etmiyor, filtrelemiyor veya kaydetmiyoruz.";
+"vpn_permission.disallow.message.basic" = "Uygulamanın çalışması için bu izne ihtiyacımız var.";
+"vpn_permission.disallow.message.support" = "Yardıma ihtiyacınız varsa müşteri desteği ile iletişime geçebilirsiniz.";
 "vpn_permission.disallow.contact" = "İletişim";
 
 // CUSTOM DNS
 
 "settings.dns.custom" = "Özel";
-"settings.dns.alert.create.message" = "Using non PIA DNS could expose your DNS traffic to third parties and compromise your privacy.";
-"settings.dns.alert.clear.title" = "Clear DNS";
-"settings.dns.alert.clear.message" = "This will clear your custom DNS and default to PIA DNS.";
+"settings.dns.alert.create.message" = "PIA harici DNS kullanmak, DNS trafiğinizin üçüncü tarafların eline geçmesine neden olabilir ve gizliliğinizi tehlikeye atabilir.";
+"settings.dns.alert.clear.title" = "DNS'i Temizle";
+"settings.dns.alert.clear.message" = "Bu, özel DNS'inizi siler ve PIA DNS'i varsayılan yapar.";
 "settings.dns.custom.dns" = "Özel DNS";
 "settings.dns.primaryDNS" = "Birincil DNS";
 "settings.dns.secondaryDNS" = "İkincil DNS";
-"settings.dns.validation.primary.mandatory" = "Primary DNS is mandatory.";
+"settings.dns.validation.primary.mandatory" = "Birincil DNS zorunludur.";
 "settings.dns.validation.primary.invalid" = "Birincil DNS geçerli değil.";
 "settings.dns.validation.secondary.invalid" = "İkincil DNS geçerli değil.";
 
 // HOTSPOT HELPER
 
-"settings.hotspothelper.title" = "Network management tool";
-"settings.hotspothelper.description" = "Configure how PIA will behaves on connection to WiFi or cellular networks. This excludes disconnecting manually.";
-"settings.hotspothelper.enable.description" = "PIA automatically enables the VPN when connecting to untrusted WiFi networks if this option is enabled.";
-"settings.hotspothelper.all.title" = "Protect all networks";
-"settings.hotspothelper.all.description" = "VPN WiFi Protection will activate on all networks, including trusted networks.";
-"settings.hotspothelper.available.help" = "To populate this list go to iOS Settings > WiFi.";
-"settings.hotspothelper.available.add.help" = "Tap + to add to Trusted networks.";
-"settings.trusted.networks.sections.current" = "Current network";
-"settings.trusted.networks.sections.available" = "Available networks";
-"settings.trusted.networks.sections.trusted" = "Trusted networks";
-"settings.trusted.networks.message" = "PIA won't automatically connect on these networks.";
-"settings.trusted.networks.connect.message" = "Protect this network by connecting to VPN?";
-"hotspothelper.display.name" = "🔒 Activate VPN WiFi Protection in PIA Settings to secure this connection.";
-"hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi Protection Enabled - We got your back.";
-"settings.hotspothelper.cellular.title" = "Protect over cellular networks";
-"settings.hotspothelper.wifi.trust.title" = "VPN WiFi Protection";
-"settings.hotspothelper.cellular.description" = "PIA automatically enables the VPN when connecting to cellular networks if this option is enabled.";
-"settings.hotspothelper.cellular.networks" = "Cellular networks";
-"settings.hotspothelper.wifi.networks" = "WiFi networks";
-"settings.trusted.networks.sections.untrusted" = "Untrusted networks";
-"settings.hotspothelper.rules.title" = "Rules";
-"settings.trusted.networks.sections.trusted.rule.description" = "Enable this feature, with the VPN kill switch enabled, to customize how PIA will behave on WiFi and cellular networks. Please be aware, functionality of the Network Management Tool will be disabled if you manually disconnect.";
-"settings.trusted.networks.sections.trusted.rule.action" = "Disconnect from PIA VPN";
+"settings.hotspothelper.title" = "Ağ yönetimi aracı";
+"settings.hotspothelper.description" = "PIA'nın WiFi veya hücresel ağlara bağlantılarda davranışlarını ayarlayın. Bu, manuel bağlantı sonlandırmayı kapsamaz.";
+"settings.hotspothelper.enable.description" = "Bu seçenek etkinleştirilirse PIA, güvenilemeyen WiFi ağlarına bağlanıldığında VPN'i otomatik olarak etkinleştirir.";
+"settings.hotspothelper.all.title" = "Tüm ağları koru";
+"settings.hotspothelper.all.description" = "VPN WiFi Koruması, güvenilen ağlar dâhil olmak üzere, tüm ağlarda etkinleştirilecek.";
+"settings.hotspothelper.available.help" = "Bu listeyi oluşturmak için iOS Ayarları > WiFi'a gidin.";
+"settings.hotspothelper.available.add.help" = "Güvenilen ağlara eklemek için + simgesine dokunun.";
+"settings.trusted.networks.sections.current" = "Geçerli ağ";
+"settings.trusted.networks.sections.available" = "Mevcut ağlar";
+"settings.trusted.networks.sections.trusted" = "Güvenilen ağlar";
+"settings.trusted.networks.message" = "PIA, bu ağlarda otomatik olarak bağlanmayacak.";
+"settings.trusted.networks.connect.message" = "Bu ağ, VPN'e bağlanarak korunsun mu?";
+"hotspothelper.display.name" = "🔒 Bu bağlantıyı korumak için PIA Ayarlarında VPN WiFi Korumasını etkinleştirin.";
+"hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi Koruması Etkinleştirildi - Sizi koruyoruz.";
+"settings.hotspothelper.cellular.title" = "Hücresel ağlarda koru";
+"settings.hotspothelper.wifi.trust.title" = "VPN WiFi Koruması";
+"settings.hotspothelper.cellular.description" = "Bu seçenek etkinleştirilirse PIA, hücresel ağlara bağlanırken VPN'i otomatik olarak etkinleştirir.";
+"settings.hotspothelper.cellular.networks" = "Hücresel ağlar";
+"settings.hotspothelper.wifi.networks" = "WiFi ağlar";
+"settings.trusted.networks.sections.untrusted" = "Güvenilmeyen ağlar";
+"settings.hotspothelper.rules.title" = "Kurallar";
+"settings.trusted.networks.sections.trusted.rule.description" = "PIA'nın WiFi ve hücresel ağlarda nasıl davranacağını özelleştirmek için, VPN kill switch etkin iken, bu özelliği etkinleştirin. Bağlantıyı manuel olarak sonlandırırsanız Ağ Yönetim Aracı'nın devre dışı bırakılacağını lütfen unutmayın.";
+"settings.trusted.networks.sections.trusted.rule.action" = "PIA VPN bağlantısını sonlandır";
 "tiles.quicksetting.nmt.title" = "Ağ Yönetimi";
 "tiles.quicksetting.private.browser.title" = "Özel Tarayıcı";
-"settings.nmt.killswitch.disabled" = "The VPN kill switch is currently disabled. In order to ensure that the Network Management Tool is functioning, and that you are able to reconnect when switching networks, please enable the VPN kill switch in your settings.";
-"settings.nmt.optout.disconnect.alerts" = "Opt-out disconnect confirmation alert";
-"settings.nmt.optout.disconnect.alerts.description" = "Disables the warning alert when disconnecting from the VPN.";
-"settings.nmt.wireguard.warning" = "WireGuard® doesn't need to reconnect when you switch between different networks. It may be necessary to manually disconnect the VPN on trusted networks.";
+"settings.nmt.killswitch.disabled" = "VPN kill switch şu anda devre dışı. Ağ Yönetim Aracı'nın çalıştığından ve ağ değiştirirken tekrar bağlanbildiğinizden emin olmak için lütfen ayarlarınızdan VPN kill switch'i etkinleştirin.";
+"settings.nmt.optout.disconnect.alerts" = "Bağlantı sonlandırmayı doğrulama uyarısını alma";
+"settings.nmt.optout.disconnect.alerts.description" = "VPN bağlantısını sonlandırırken uyarı bildirimini devre dışı bırakır.";
+"settings.nmt.wireguard.warning" = "WireGuard®, farklı ağlara geçiş yaparken tekrar bağlanmanızı gerektirmez. Güvenilen ağlarda VPN'i manuel olarak sonlandırmanız gerekebilir.";
 "settings.service.quality.share.title" = "PIA'nın iyileştirilmesine yardım edin";
 "settings.service.quality.share.description" = "VPN bağlantı istatistiklerini bizimle paylaşarak uygulamamızı geliştirmemize yardımcı olun. Bu raporlar hiç bir şekilde kişisel olarak tanımlanabilir bilgiler içermez.";
 "settings.service.quality.share.findoutmore" = "Daha çok bilgi";
-"settings.service.quality.show.title" = "Connection stats";
+"settings.service.quality.show.title" = "Bağlantı istatistikleri";
 
-"network.management.tool.open.wifi" = "Open WiFi";
-"network.management.tool.secure.wifi" = "Secure WiFi";
+"network.management.tool.open.wifi" = "WiFi'ı Aç";
+"network.management.tool.secure.wifi" = "WiFi'ı Koru";
 "network.management.tool.mobile.data" = "Mobil veri";
 "network.management.tool.always.connect" = "Her zaman VPN bağlantısı yap";
 "network.management.tool.always.disconnect" = "Her zaman VPN bağlantısını kes";
-"network.management.tool.retain.state" = "Retain VPN State";
+"network.management.tool.retain.state" = "VPN Durumunu Koru";
 "network.management.tool.add.rule" = "Yeni kural ekle";
-"network.management.tool.choose.wifi" = "Choose a WiFi network to add a new rule. ";
+"network.management.tool.choose.wifi" = "Yeni bir kural eklemek için bir WiFi ağı seçin. ";
 "network.management.tool.title" = "Otomasyonu Yönet";
-"network.management.tool.alert" = "Your automation settings are configured to keep the VPN disconnected under the current network conditions.";
-"network.management.tool.disable" = "Disable Automation";
-"network.management.tool.enable.automation" = "Enable Automation";
+"network.management.tool.alert" = "Otomasyon ayarlarınız, geçerli ağ koşulları altında VPN'i devre dışı tutmanız için ayarlanmıştır.";
+"network.management.tool.disable" = "Otomasyonu Devre Dışı Bırak";
+"network.management.tool.enable.automation" = "Otomasyonu Etkinleştir";
 
 // REGION
 
 "region.search.placeholder" = "Bir bölge ara";
-"region.accessibility.filter" = "Filter";
+"region.accessibility.filter" = "Filtrele";
 "region.filter.sortby" = "Bölgeleri sırala:";
 "region.filter.name" = "İsim";
 "region.filter.latency" = "Gecikme";
 "region.filter.favorites" = "Favoriler";
-"region.accessibility.favorite" = "Add a favorite region";
-"region.accessibility.unfavorite" = "Remove a favorite region";
+"region.accessibility.favorite" = "Bir favori bölge seçin";
+"region.accessibility.unfavorite" = "Bir favori bölge silin";
 
 // TILES
-"tiles.quick.connect.title" = "Quick connect";
-"tiles.favorite.servers.title" = "Favorite servers";
+"tiles.quick.connect.title" = "Hızlı bağlan";
+"tiles.favorite.servers.title" = "Favori sunucular";
 "tiles.region.title" = "VPN Sunucusu";
 "tiles.subscription.title" = "Üyelik";
 "tiles.subscription.trial" = "Deneme";
 "tiles.subscription.monthly" = "Aylık";
 "tiles.subscription.yearly" = "Yıllık";
 "tiles.subscription.days.left" = "(%d gün kaldı)";
-"tiles.usage.title" = "Usage";
-"tiles.usage.ipsec.title" = "USAGE (Not available on IKEv2)";
+"tiles.usage.title" = "Kullanım";
+"tiles.usage.ipsec.title" = "KULLANIM (IKEv2 ile kullanılamaz)";
 "tiles.usage.upload" = "Yükle";
 "tiles.usage.download" = "İndir";
-"tiles.nmt.cellular" = "Cellular";
-"tiles.nmt.accessibility.trusted" = "Trusted network";
-"tiles.nmt.accessibility.untrusted" = "Untrusted network";
-"tiles.quicksettings.title" = "Quick settings";
-"tiles.quicksettings.min.elements.message" = "You should keep at least one element visible in the Quick Settings Tile";
-"tiles.accessibility.visible.tile.action" = "Tap to remove this tile from the dashboard";
-"tiles.accessibility.invisible.tile.action" = "Tap to add this tile to the dashboard";
+"tiles.nmt.cellular" = "Hücresel";
+"tiles.nmt.accessibility.trusted" = "Güvenilen ağ";
+"tiles.nmt.accessibility.untrusted" = "Güvenilmeyen ağ";
+"tiles.quicksettings.title" = "Hızlı ayarlar";
+"tiles.quicksettings.min.elements.message" = "Hızlı Ayarlar Deseninde en az bir öğeyi görünür tutmalısınız";
+"tiles.accessibility.visible.tile.action" = "Bu deseni panodan silmek için dokunun";
+"tiles.accessibility.invisible.tile.action" = "Bu deseni panoya eklemek için dokunun";
 
 //SIRI SHORTCUTS
-"siri.shortcuts.connect.row.title" = "'Connect' Siri Shortcut";
-"siri.shortcuts.disconnect.row.title" = "'Disconnect' Siri Shortcut";
-"siri.shortcuts.connect.title" = "Connect PIA VPN";
-"siri.shortcuts.disconnect.title" = "Disconnect PIA VPN";
-"siri.shortcuts.add.error" = "There was an error adding the Siri shortcut. Please, try it again.";
+"siri.shortcuts.connect.row.title" = "'Bağlan' Siri Kısayolu";
+"siri.shortcuts.disconnect.row.title" = "'Bağlantıyı Sonlandır' Siri Kısayolu";
+"siri.shortcuts.connect.title" = "PIA VPN'e Bağlan";
+"siri.shortcuts.disconnect.title" = "PIA VPN Bağlantısını Sonlandır";
+"siri.shortcuts.add.error" = "Siri kısayolunu eklerken bir hata oluştu. Lütfen tekrar deneyin.";
 
 //TODAY WIDGET
 "today.widget.login" = "Giriş Yapın";
 
 //FRIEND REFERRALS
-"friend.referrals.email.validation" = "Invalid email. Please try again.";
+"friend.referrals.email.validation" = "E-posta adresi geçersiz. Lütfen tekrar deneyin.";
 "friend.referrals.title" = "Arkadaş Referansı";
-"friend.referrals.view.invites.sent" = "View invites sent";
+"friend.referrals.view.invites.sent" = "Gönderilen davetleri görüntüle";
 "friend.referrals.pending.invites" = "%d bekleyen davet";
 "friend.referrals.signups.number" = "%d kayıt";
 "friend.referrals.fullName" = "Ad soyad";
-"friend.referrals.invitation.terms" = "By sending this invitation, I agree to all of the terms and conditions of the Family and Friends Referral Program.";
-"friend.referrals.family.friends.program" = "Family and Friends Referral Program";
-"friend.referrals.send.invite" = "Send invite";
-"friend.referrals.invite.error" = "Could not resend invite. Try again later.";
-"friend.referrals.invite.success" = "Invite sent successfully";
+"friend.referrals.invitation.terms" = "Bu daveti göndererek, Aile ve Arkadaşlara Önerme Programı'nın tüm şartlarını ve koşullarını kabul ediyorum.";
+"friend.referrals.family.friends.program" = "Aile ve Arkadaşlara Önerme Programı";
+"friend.referrals.send.invite" = "Davet gönder";
+"friend.referrals.invite.error" = "Davet tekrar gönderilemedi. Lütfen daha sonra tekrar deneyin.";
+"friend.referrals.invite.success" = "Davet başarıyla gönderildi";
 "friend.referrals.share.link" = "Kişiye özel tavsiye bağlantınızı paylaşın";
-"friend.referrals.share.link.terms" = "By sharing this link, you agree to all of the terms and conditions of the Family and Friends Referral Program.";
-"friend.referrals.invites.sent.title" = "Invites sent";
+"friend.referrals.share.link.terms" = "Bu bağlantıyı paylaşarak, Aile ve Arkadaşlara Önerme Programı'nın tüm şartlarını ve koşullarını kabul edersiniz.";
+"friend.referrals.invites.sent.title" = "Gönderilen davetler";
 "friend.referrals.pending.invites.title" = "Bekleyen davet";
 "friend.referrals.invites.number" = "%d davet gönderdiniz";
 "friend.referrals.privacy.note" = "Lütfen unutmayın, gizlilik nedeniyle, 30 günden eski tüm davetler silinir.";
@@ -374,31 +374,31 @@
 "friend.referrals.description.short" = "BİR ARKADAŞINIZI ARAMIZA KATIN. 30 GÜN ÜCRETSİZ KULLANIM KAZANIN.";
 
 // GDPR
-"gdpr.collect.data.title" = "Personal information we collect";
-"gdpr.collect.data.description" = "E-mail Address for the purposes of account management and protection from abuse.\n\nE-mail address is used to send subscription information, payment confirmations, customer correspondence, and Private Internet Access promotional offers only.";
-"gdpr.accept.button.title" = "Agree and continue";
+"gdpr.collect.data.title" = "Topladığımız kişisel bilgiler";
+"gdpr.collect.data.description" = "Hesap yönetimi ve suistimalden koruma amaçlarıyla e-posta adresi.\n\nE-posta adresi; yalnızca abonelik bilgilerini, ödeme doğrulamalarını, müşteri yazışmalarını ve Private Internet Access promosyon tekliflerini göndermek için kullanılır.";
+"gdpr.accept.button.title" = "Kabul edip devam et";
 
 // SET EMAIL
 "set.email.form.email" = "E-posta adresinizi girin";
 "set.email.why" = "Kullanıcı adınızla parolanızı gönderebilmemiz için e-posta adresinize ihtiyacımız var.";
-"set.email.success.message_format" = "We have sent your account username and password at your email address at %@";
+"set.email.success.message_format" = "Hesabınızın kullanıcı adını ve şifresini %@ e-posta adresinize gönderdik";
 "set.email.password.caption" = "Şifre";
-"set.email.error.validation" = "You must enter an email address.";
+"set.email.error.validation" = "Bir e-posta adresi girmeniz gerekiyor.";
 
 // RATING
 "rating.enjoy.question" = "PIA VPN'i beğeniyor musunuz?";
 "rating.enjoy.subtitle" = "Umarız VPN ürünümüz beklentilerinizi karşılıyordur";
 "rating.problems.question" = "Sorun nedir?";
 "rating.problems.subtitle" = "Geri bildirim göndermek ister misiniz? Bu, PIA kullanma deneyiminizi iyileştirmemize yardımcı olabilir";
-"rating.review.question" = "How about an AppStore review?";
-"rating.rate.question" = "How about a rating on the AppStore?";
+"rating.review.question" = "AppStore'da yorum yapmaya ne dersiniz?";
+"rating.rate.question" = "AppStore'da bir oy vermeye ne dersiniz?";
 "rating.rate.subtitle" = "Deneyiminizi paylaşmanız bizi memnun eder";
 "rating.error.question" = "Bağlantı kurulamadı";
 "rating.error.subtitle" = "Farklı bir bölge seçebilir ya da bir destek bileti açarak bize bilgi verebilirsiniz.";
-"rating.error.button.send" = "Send feedback";
-"rating.alert.button.notreally" = "Not Really";
-"rating.alert.button.nothanks" = "No, thanks.";
-"rating.alert.button.oksure" = "Ok, sure!";
+"rating.error.button.send" = "Geri bildirim gönder";
+"rating.alert.button.notreally" = "Hayır";
+"rating.alert.button.nothanks" = "Hayır, teşekkürler.";
+"rating.alert.button.oksure" = "Tamam, olur!";
 
 // CALLING CARDS
 "card.wireguard.title" = "WireGuard®'ı bugün deneyin!";
@@ -409,22 +409,22 @@
 
 // DEDICATED IP
 "dedicated.ip.title" = "Atanmış IP VPN";
-"dedicated.ip.plural.title" = "Your Dedicated IPs";
+"dedicated.ip.plural.title" = "Özel IP Adresleriniz";
 "dedicated.ip.activation.description" = "Belirtecinizi aşağıdaki forma yapıştırarak Özel IP'nizi etkinleştirin. Kısa süre önce bir özel IP satın aldıysanız belirteci PIA web sitesine giderek oluşturabilirsiniz.";
 "dedicated.ip.token.textfield.placeholder" = "Belirtecinizi buraya yapıştırın";
-"dedicated.ip.token.textfield.accessibility" = "The textfield to type the Dedicated IP token";
+"dedicated.ip.token.textfield.accessibility" = "Özel IP belirtecini yazmak için metin alanı";
 "dedicated.ip.activate.button.title" = "Etkinleştir";
-"dedicated.ip.message.incorrect.token" = "Please make sure you have entered the token correctly";
+"dedicated.ip.message.incorrect.token" = "Lütfen belirteci doğru girdiğinizden emin olun";
 "dedicated.ip.message.invalid.token" = "Belirteciniz geçersiz. Lütfen belirteci doğru şekilde girdiğinizden emin olun.";
 "dedicated.ip.message.valid.token" = "Özel IP'niz başarıyla etkinleştirildi. Bölge seçim listenizde mevcut olacak.";
-"dedicated.ip.message.expired.token" = "Your token is expired. Please generate a new one from your Account page on the website.";
-"dedicated.ip.message.error.token" = "Your token is expired. Please generate a new one from your Account page on the website.";
-"dedicated.ip.message.error.retryafter" = "Too many failed token activation requests. Please try again after %@ second(s).";
-"dedicated.ip.message.token.willexpire" = "Your dedicated IP will expire soon. Get a new one";
+"dedicated.ip.message.expired.token" = "Belirtecinizin süresi doldu. Lütfen web sitemizde Hesap sayfanızdan yenisini oluşturun.";
+"dedicated.ip.message.error.token" = "Belirtecinizin süresi doldu. Lütfen web sitemizde Hesap sayfanızdan yenisini oluşturun.";
+"dedicated.ip.message.error.retryafter" = "Çok fazla başarısız belirteç etkinleştirme talebi. Lütfen %@ saniye sonra tekrar deneyin.";
+"dedicated.ip.message.token.willexpire" = "Özel IP adresiniz yakında sona erecek. Yenisini edinin";
 "dedicated.ip.message.token.willexpire.link" = "Yenisini al";
 "dedicated.ip.message.ip.updated" = "Özel IP'niz güncellendi";
-"dedicated.ip.country.flag.accessibility" = "Country flag for %@";
-"dedicated.ip.remove" = "Are you sure you want to remove the selected region?";
+"dedicated.ip.country.flag.accessibility" = "%@ için ülke bayrağı";
+"dedicated.ip.remove" = "Seçilen bölgeyi silmek istediğinizden emin misiniz?";
 "dedicated.ip.limit.title" = "Herhangi bir  varlıkla olan uzaktan bağlantılarınızı, seçtiğiniz bir ülkeden özel bir IP ile  sabitleyin. Aboneliğiniz sırasında bu IP sadece size ait olacak ve veri transferleriniz en güçlü şifrelemeyle koruyacaktır.";
 
 // RECONNECTIONS

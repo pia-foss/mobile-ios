@@ -116,8 +116,8 @@
 "account.delete.alert.title" = "¿Estás seguro?";
 "account.delete.alert.message" = "Eliminar tu cuenta de PIA es permanente e irreversible. Una vez hecho, no podrás recuperar tus credenciales de PIA. Ten en cuenta que esta acción solo elimina tu cuenta de PIA de nuestra base de datos, pero NO cancela tu suscripción. Deberás ir a tu cuenta de Apple y cancelar allí la suscripción a Private Internet Access. De lo contrario, se te seguirá cobrando, aunque la cuenta de PIA ya no estará activa.";
 "account.delete.alert.failureMessage" = "Algo ha fallado durante la eliminación de la cuenta. Inténtalo más tarde, por favor.";
-"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
-"account.survey.messageLink" = "Take The Survey";
+"account.survey.message" = "¿Nos ayudas a mejorar PIA? ¡Dinos cómo podemos ser mejores!\nResponde la encuesta";
+"account.survey.messageLink" = "Responde la encuesta";
 
 // SETTINGS
 
@@ -173,7 +173,7 @@
 "settings.reset.footer" = "Esto restablecerá todos los ajustes anteriores a los valores predeterminados.";
 
 "settings.small.packets.title" = "Usar paquetes pequeños";
-"settings.small.packets.description" = "Will slightly lower the IP packet size to improve compatibility with some routers and mobile networks.";
+"settings.small.packets.description" = "Disminuirá un poco el tamaño del paquete de IP para mejorar la compatibilidad con algunos routers y redes móviles.";
 
 "settings.log.connected.error" = "Se requiere una conexión VPN. Conéctate a la VPN y vuelve a intentarlo.";
 "settings.log.information" = "Guarda los registros de depuración, que podrás enviar al servicio de asistencia técnica para ayudar a resolver problemas.";
@@ -286,7 +286,7 @@
 "settings.nmt.killswitch.disabled" = "El interruptor de desconexión de emergencia está deshabilitado. Para garantizar que el interruptor de desconexión de emergencia funciona y que puedes reconectar al cambiar de red, habilita el interruptor de desconexión de emergencia de VPN en los ajustes.";
 "settings.nmt.optout.disconnect.alerts" = "Alerta de confirmación de desconexión";
 "settings.nmt.optout.disconnect.alerts.description" = "Deshabilita la alerta de aviso al desconectar del VPN.";
-"settings.nmt.wireguard.warning" = "WireGuard® doesn't need to reconnect when you switch between different networks. It may be necessary to manually disconnect the VPN on trusted networks.";
+"settings.nmt.wireguard.warning" = "WireGuard® no tiene que reconectarse cuando cambias de red. Es posible que tengas que desconectar la VPN manualmente en redes de confianza.";
 "settings.service.quality.share.title" = "Ayúdanos a mejorar PIA";
 "settings.service.quality.share.description" = "Comparte tus estadísticas de conexión de VPN para ayudarnos a mejorar. Estos informes no contienen ninguna información personal identificable.";
 "settings.service.quality.share.findoutmore" = "Más información";
@@ -334,8 +334,8 @@
 "tiles.nmt.accessibility.untrusted" = "Red no fiable";
 "tiles.quicksettings.title" = "Ajustes rápidos";
 "tiles.quicksettings.min.elements.message" = "Debes mantener como mínimo un elemento visible en la casilla de configuración rápida.";
-"tiles.accessibility.visible.tile.action" = "Tap to remove this tile from the dashboard";
-"tiles.accessibility.invisible.tile.action" = "Tap to add this tile to the dashboard";
+"tiles.accessibility.visible.tile.action" = "Toca para quitar este cuadro del panel de control";
+"tiles.accessibility.invisible.tile.action" = "Toca para agregar este cuadro al panel de control";
 
 //SIRI SHORTCUTS
 "siri.shortcuts.connect.row.title" = "Conectar acceso directo de Siri";

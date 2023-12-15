@@ -116,8 +116,8 @@
 "account.delete.alert.title" = "هل أنت متأكد؟";
 "account.delete.alert.message" = "يعد حذف حساب PIA الخاص بك نهائي ولا رجعة فيه. لن تتمكن من استرجاع بيانات اعتماد PIA الخاصة بك بعد تنفيذ هذا الإجراء. يرجى الملاحظة بأن هذا الإجراء يعني حذف حسابك من قاعدة بياناتنا فقط، ولا يعني حذف اشتراكك. ستحتاج إلى زيارة حساب Apple الخاص بك وحذف اشتراك Private Internet Access الخاص بك من هناك. خلافاً لذلك، ستستمر في دفع رسوم الاشتراك رغم أن حسابك لن يكون نشطاً.";
 "account.delete.alert.failureMessage" = "حدث خطأ أثناء حذف حسابك. يرجى المحاولة مرة أخرى.";
-"account.survey.message" = "Want to help make PIA better? Let us know how we can improve!\nTake The Survey";
-"account.survey.messageLink" = "Take The Survey";
+"account.survey.message" = "هل ترغب في المساهمة لجعل تطبيق PIA أفضل؟ شاركنا بمقترحاتك في الاستطلاع!\n";
+"account.survey.messageLink" = "املأ الاستطلاع";
 
 // SETTINGS
 

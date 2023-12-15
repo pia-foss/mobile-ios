@@ -181,7 +181,7 @@
 		699F23B52AFBA66000EBC5E6 /* ProtocolsSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23AF2AFBA66000EBC5E6 /* ProtocolsSettingsScreen.swift */; };
 		699F23B62AFBA66000EBC5E6 /* GeneralSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23B02AFBA66000EBC5E6 /* GeneralSettingsScreen.swift */; };
 		699F23B72AFBA66000EBC5E6 /* PrivacySettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23B12AFBA66000EBC5E6 /* PrivacySettingsScreen.swift */; };
-		699F23B92AFBAC0B00EBC5E6 /* UpdateSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23B82AFBAC0B00EBC5E6 /* UpdateSettingsTests.swift */; };
+		699F23B92AFBAC0B00EBC5E6 /* SettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23B82AFBAC0B00EBC5E6 /* SettingsTests.swift */; };
 		69B70AB52ACBF51C0072A09D /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70AB42ACBF51C0072A09D /* LoginScreen.swift */; };
 		69B70ABC2ACBF8300072A09D /* CredentialsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */; };
 		69B70ABE2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
@@ -523,6 +523,20 @@
 		E59E8FC62AEA7A81009278F5 /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8FA72AEA7A81009278F5 /* TermsAndConditionsViewController.swift */; };
 		E59E8FC72AEA7A81009278F5 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8FA82AEA7A81009278F5 /* OptionsViewController.swift */; };
 		E59E8FC82AEA7A81009278F5 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8FA82AEA7A81009278F5 /* OptionsViewController.swift */; };
+		E5AB286C2B2796E700744E5F /* LoginProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB286B2B2796E700744E5F /* LoginProviderMock.swift */; };
+		E5AB286F2B27977000744E5F /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB286E2B27977000744E5F /* LoginFactory.swift */; };
+		E5AB28712B279B4000744E5F /* LoginProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28702B279B4000744E5F /* LoginProviderType.swift */; };
+		E5AB28732B279B7000744E5F /* LoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28722B279B7000744E5F /* LoginProvider.swift */; };
+		E5AB28752B279BB600744E5F /* LoginIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28742B279BB600744E5F /* LoginIntegrationTests.swift */; };
+		E5AB28772B28B49A00744E5F /* UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28762B28B49A00744E5F /* UserAccount.swift */; };
+		E5AB28792B28B4B300744E5F /* AccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28782B28B4B300744E5F /* AccountInfo.swift */; };
+		E5AB287B2B28B4C400744E5F /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB287A2B28B4C400744E5F /* Credentials.swift */; };
+		E5AB287D2B28E4E700744E5F /* UserAccountMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB287C2B28E4E700744E5F /* UserAccountMapper.swift */; };
+		E5AB287F2B28F6EF00744E5F /* Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB287E2B28F6EF00744E5F /* Stubs.swift */; };
+		E5AB28832B2902E200744E5F /* Stubs+PIALibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28822B2902E200744E5F /* Stubs+PIALibrary.swift */; };
+		E5AB28852B2902E700744E5F /* LoginProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28842B2902E700744E5F /* LoginProviderTests.swift */; };
+		E5AB28872B2911C900744E5F /* AccountProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28862B2911C900744E5F /* AccountProviderMock.swift */; };
+		E5AB288A2B29BDED00744E5F /* Foundation+PIA.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28892B29BDED00744E5F /* Foundation+PIA.swift */; };
 		E5C507682B0D609300200A6A /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = E5C507672B0D609300200A6A /* PIALibrary */; };
 		E5C5076A2B0D60A500200A6A /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = E5C507692B0D60A500200A6A /* PIALibrary */; };
 		E5C5076C2B0D60AD00200A6A /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = E5C5076B2B0D60AD00200A6A /* PIALibrary */; };
@@ -538,6 +552,22 @@
 		E5C5078B2B0E145100200A6A /* PIA_VPN_tvOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C5078A2B0E145100200A6A /* PIA_VPN_tvOSTests.swift */; };
 		E5C507952B0E145100200A6A /* PIA_VPN_tvOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C507942B0E145100200A6A /* PIA_VPN_tvOSUITests.swift */; };
 		E5C507972B0E145100200A6A /* PIA_VPN_tvOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C507962B0E145100200A6A /* PIA_VPN_tvOSUITestsLaunchTests.swift */; };
+		E5C507A22B0FE40000200A6A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C507A12B0FE40000200A6A /* LoginView.swift */; };
+		E5C507A52B153A2F00200A6A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C507A42B153A2F00200A6A /* LoginViewModel.swift */; };
+		E5C507A82B153E6B00200A6A /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C507A72B153E6B00200A6A /* LoginViewModelTests.swift */; };
+		E5C507AA2B17E3F100200A6A /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = E5C507A92B17E3F100200A6A /* PIALibrary */; };
+		E5C507AE2B17E45800200A6A /* LoginPresentableErrorMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C507AD2B17E45800200A6A /* LoginPresentableErrorMapper.swift */; };
+		E5C507B12B17E48900200A6A /* LoginWithCredentialsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C507B02B17E48900200A6A /* LoginWithCredentialsUseCase.swift */; };
+		E5C507B32B17E5AD00200A6A /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C507B22B17E5AD00200A6A /* LoginError.swift */; };
+		E5C507B72B17E75B00200A6A /* CheckLoginAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C507B62B17E75B00200A6A /* CheckLoginAvailability.swift */; };
+		E5C507B92B17E7A400200A6A /* ValidateCredentialsFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C507B82B17E7A400200A6A /* ValidateCredentialsFormat.swift */; };
+		E5C507BE2B1F6FA600200A6A /* Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C507BD2B1F6FA600200A6A /* Equatable.swift */; };
+		E5C507C02B1F700C00200A6A /* CheckLoginAvailabilityMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C507BF2B1F700C00200A6A /* CheckLoginAvailabilityMock.swift */; };
+		E5C507C22B1F702700200A6A /* LoginWithCredentialsUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C507C12B1F702700200A6A /* LoginWithCredentialsUseCaseMock.swift */; };
+		E5C507C42B1F72E700200A6A /* CheckLoginAvailabilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C507C32B1F72E700200A6A /* CheckLoginAvailabilityTests.swift */; };
+		E5C507C72B1FABFF00200A6A /* LoginDomainErrorMapperType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C507C62B1FABFF00200A6A /* LoginDomainErrorMapperType.swift */; };
+		E5C507CA2B1FAC3600200A6A /* LoginDomainErrorMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C507C92B1FAC3600200A6A /* LoginDomainErrorMapper.swift */; };
+		E5C507CC2B1FACE000200A6A /* LoginWithCredentialsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C507CB2B1FACE000200A6A /* LoginWithCredentialsUseCaseTests.swift */; };
 		E5F52A182A8A5D5300828883 /* WifiNetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F52A172A8A5D5300828883 /* WifiNetworkMonitor.swift */; };
 		E5F52A192A8A5D5300828883 /* WifiNetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F52A172A8A5D5300828883 /* WifiNetworkMonitor.swift */; };
 		E5F52A1B2A8A5E1E00828883 /* IPv4Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F52A1A2A8A5E1E00828883 /* IPv4Address.swift */; };
@@ -831,7 +861,7 @@
 		699F23AF2AFBA66000EBC5E6 /* ProtocolsSettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtocolsSettingsScreen.swift; sourceTree = "<group>"; };
 		699F23B02AFBA66000EBC5E6 /* GeneralSettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralSettingsScreen.swift; sourceTree = "<group>"; };
 		699F23B12AFBA66000EBC5E6 /* PrivacySettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacySettingsScreen.swift; sourceTree = "<group>"; };
-		699F23B82AFBAC0B00EBC5E6 /* UpdateSettingsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateSettingsTests.swift; sourceTree = "<group>"; };
+		699F23B82AFBAC0B00EBC5E6 /* SettingsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTests.swift; sourceTree = "<group>"; };
 		69B70AB02ACBF51C0072A09D /* PIA-VPN_E2E_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA-VPN_E2E_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69B70AB42ACBF51C0072A09D /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityId.swift; sourceTree = "<group>"; };
@@ -1067,6 +1097,20 @@
 		E59E8FA62AEA7A81009278F5 /* PurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseViewController.swift; sourceTree = "<group>"; };
 		E59E8FA72AEA7A81009278F5 /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
 		E59E8FA82AEA7A81009278F5 /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
+		E5AB286B2B2796E700744E5F /* LoginProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProviderMock.swift; sourceTree = "<group>"; };
+		E5AB286E2B27977000744E5F /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
+		E5AB28702B279B4000744E5F /* LoginProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProviderType.swift; sourceTree = "<group>"; };
+		E5AB28722B279B7000744E5F /* LoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProvider.swift; sourceTree = "<group>"; };
+		E5AB28742B279BB600744E5F /* LoginIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginIntegrationTests.swift; sourceTree = "<group>"; };
+		E5AB28762B28B49A00744E5F /* UserAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccount.swift; sourceTree = "<group>"; };
+		E5AB28782B28B4B300744E5F /* AccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfo.swift; sourceTree = "<group>"; };
+		E5AB287A2B28B4C400744E5F /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		E5AB287C2B28E4E700744E5F /* UserAccountMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountMapper.swift; sourceTree = "<group>"; };
+		E5AB287E2B28F6EF00744E5F /* Stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stubs.swift; sourceTree = "<group>"; };
+		E5AB28822B2902E200744E5F /* Stubs+PIALibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Stubs+PIALibrary.swift"; path = "../../../../../../../.Trash/Stubs+PIALibrary.swift"; sourceTree = "<group>"; };
+		E5AB28842B2902E700744E5F /* LoginProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginProviderTests.swift; path = ../../../../../../.Trash/LoginProviderTests.swift; sourceTree = "<group>"; };
+		E5AB28862B2911C900744E5F /* AccountProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProviderMock.swift; sourceTree = "<group>"; };
+		E5AB28892B29BDED00744E5F /* Foundation+PIA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Foundation+PIA.swift"; sourceTree = "<group>"; };
 		E5C507772B0E144D00200A6A /* PIA VPN-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PIA VPN-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C507792B0E144E00200A6A /* PIA_VPN_tvOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIA_VPN_tvOSApp.swift; sourceTree = "<group>"; };
 		E5C5077B2B0E144E00200A6A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -1077,6 +1121,21 @@
 		E5C507902B0E145100200A6A /* PIA VPN-tvOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA VPN-tvOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C507942B0E145100200A6A /* PIA_VPN_tvOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIA_VPN_tvOSUITests.swift; sourceTree = "<group>"; };
 		E5C507962B0E145100200A6A /* PIA_VPN_tvOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIA_VPN_tvOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E5C507A12B0FE40000200A6A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		E5C507A42B153A2F00200A6A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		E5C507A72B153E6B00200A6A /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
+		E5C507AD2B17E45800200A6A /* LoginPresentableErrorMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresentableErrorMapper.swift; sourceTree = "<group>"; };
+		E5C507B02B17E48900200A6A /* LoginWithCredentialsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithCredentialsUseCase.swift; sourceTree = "<group>"; };
+		E5C507B22B17E5AD00200A6A /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
+		E5C507B62B17E75B00200A6A /* CheckLoginAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckLoginAvailability.swift; sourceTree = "<group>"; };
+		E5C507B82B17E7A400200A6A /* ValidateCredentialsFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateCredentialsFormat.swift; sourceTree = "<group>"; };
+		E5C507BD2B1F6FA600200A6A /* Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equatable.swift; sourceTree = "<group>"; };
+		E5C507BF2B1F700C00200A6A /* CheckLoginAvailabilityMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckLoginAvailabilityMock.swift; sourceTree = "<group>"; };
+		E5C507C12B1F702700200A6A /* LoginWithCredentialsUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithCredentialsUseCaseMock.swift; sourceTree = "<group>"; };
+		E5C507C32B1F72E700200A6A /* CheckLoginAvailabilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckLoginAvailabilityTests.swift; sourceTree = "<group>"; };
+		E5C507C62B1FABFF00200A6A /* LoginDomainErrorMapperType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDomainErrorMapperType.swift; sourceTree = "<group>"; };
+		E5C507C92B1FAC3600200A6A /* LoginDomainErrorMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDomainErrorMapper.swift; sourceTree = "<group>"; };
+		E5C507CB2B1FACE000200A6A /* LoginWithCredentialsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithCredentialsUseCaseTests.swift; sourceTree = "<group>"; };
 		E5F52A172A8A5D5300828883 /* WifiNetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WifiNetworkMonitor.swift; sourceTree = "<group>"; };
 		E5F52A1A2A8A5E1E00828883 /* IPv4Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPv4Address.swift; sourceTree = "<group>"; };
 		E5F52A1E2A8A614900828883 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
@@ -1185,6 +1244,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5C507AA2B17E3F100200A6A /* PIALibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1570,7 +1630,7 @@
 		35EDD6262ADE5D1E007B9ACB /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				699F23B82AFBAC0B00EBC5E6 /* UpdateSettingsTests.swift */,
+				699F23B82AFBAC0B00EBC5E6 /* SettingsTests.swift */,
 				69C587FC2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift */,
 				35EDD6292ADE5F08007B9ACB /* SignInTests.swift */,
 				35EDD6322ADE7281007B9ACB /* OnboardingTests.swift */,
@@ -1958,9 +2018,26 @@
 			path = iOS;
 			sourceTree = "<group>";
 		};
+		E5AB286D2B27975E00744E5F /* CompositionRoot */ = {
+			isa = PBXGroup;
+			children = (
+				E5AB286E2B27977000744E5F /* LoginFactory.swift */,
+			);
+			path = CompositionRoot;
+			sourceTree = "<group>";
+		};
+		E5AB28882B29BDC700744E5F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E5AB28892B29BDED00744E5F /* Foundation+PIA.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		E5C507782B0E144E00200A6A /* PIA VPN-tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				E5C507A32B153A1800200A6A /* Login */,
 				E5C507792B0E144E00200A6A /* PIA_VPN_tvOSApp.swift */,
 				E5C5077B2B0E144E00200A6A /* ContentView.swift */,
 				E5C5077D2B0E145000200A6A /* Assets.xcassets */,
@@ -1980,6 +2057,7 @@
 		E5C507892B0E145100200A6A /* PIA VPN-tvOSTests */ = {
 			isa = PBXGroup;
 			children = (
+				E5C507A62B153E4800200A6A /* Login */,
 				E5C5078A2B0E145100200A6A /* PIA_VPN_tvOSTests.swift */,
 			);
 			path = "PIA VPN-tvOSTests";
@@ -1992,6 +2070,113 @@
 				E5C507962B0E145100200A6A /* PIA_VPN_tvOSUITestsLaunchTests.swift */,
 			);
 			path = "PIA VPN-tvOSUITests";
+			sourceTree = "<group>";
+		};
+		E5C507A32B153A1800200A6A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				E5AB28882B29BDC700744E5F /* Utils */,
+				E5AB286D2B27975E00744E5F /* CompositionRoot */,
+				E5C507C82B1FAC2B00200A6A /* Data */,
+				E5C507AF2B17E47A00200A6A /* Domain */,
+				E5C507AC2B17E44400200A6A /* UI */,
+				E5C507AB2B17E43400200A6A /* Presentation */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		E5C507A62B153E4800200A6A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				E5C507BA2B1F6F3800200A6A /* Helpers */,
+				E5C507A72B153E6B00200A6A /* LoginViewModelTests.swift */,
+				E5C507C32B1F72E700200A6A /* CheckLoginAvailabilityTests.swift */,
+				E5C507CB2B1FACE000200A6A /* LoginWithCredentialsUseCaseTests.swift */,
+				E5AB28742B279BB600744E5F /* LoginIntegrationTests.swift */,
+				E5AB28842B2902E700744E5F /* LoginProviderTests.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		E5C507AB2B17E43400200A6A /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				E5C507B62B17E75B00200A6A /* CheckLoginAvailability.swift */,
+				E5C507A42B153A2F00200A6A /* LoginViewModel.swift */,
+				E5C507AD2B17E45800200A6A /* LoginPresentableErrorMapper.swift */,
+				E5C507B82B17E7A400200A6A /* ValidateCredentialsFormat.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		E5C507AC2B17E44400200A6A /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				E5C507A12B0FE40000200A6A /* LoginView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		E5C507AF2B17E47A00200A6A /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				E5C507C52B1FABEB00200A6A /* Interfaces */,
+				E5C507B52B17E5BB00200A6A /* Entities */,
+				E5C507B42B17E5B400200A6A /* Use cases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		E5C507B42B17E5B400200A6A /* Use cases */ = {
+			isa = PBXGroup;
+			children = (
+				E5C507B02B17E48900200A6A /* LoginWithCredentialsUseCase.swift */,
+			);
+			path = "Use cases";
+			sourceTree = "<group>";
+		};
+		E5C507B52B17E5BB00200A6A /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				E5C507B22B17E5AD00200A6A /* LoginError.swift */,
+				E5AB28762B28B49A00744E5F /* UserAccount.swift */,
+				E5AB28782B28B4B300744E5F /* AccountInfo.swift */,
+				E5AB287A2B28B4C400744E5F /* Credentials.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		E5C507BA2B1F6F3800200A6A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E5C507BD2B1F6FA600200A6A /* Equatable.swift */,
+				E5C507BF2B1F700C00200A6A /* CheckLoginAvailabilityMock.swift */,
+				E5C507C12B1F702700200A6A /* LoginWithCredentialsUseCaseMock.swift */,
+				E5AB286B2B2796E700744E5F /* LoginProviderMock.swift */,
+				E5AB287E2B28F6EF00744E5F /* Stubs.swift */,
+				E5AB28822B2902E200744E5F /* Stubs+PIALibrary.swift */,
+				E5AB28862B2911C900744E5F /* AccountProviderMock.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		E5C507C52B1FABEB00200A6A /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				E5C507C62B1FABFF00200A6A /* LoginDomainErrorMapperType.swift */,
+				E5AB28702B279B4000744E5F /* LoginProviderType.swift */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		E5C507C82B1FAC2B00200A6A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E5C507C92B1FAC3600200A6A /* LoginDomainErrorMapper.swift */,
+				E5AB28722B279B7000744E5F /* LoginProvider.swift */,
+				E5AB287C2B28E4E700744E5F /* UserAccountMapper.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		E5F52A162A8A5D3800828883 /* Wifi */ = {
@@ -2210,6 +2395,9 @@
 			dependencies = (
 			);
 			name = "PIA VPN-tvOS";
+			packageProductDependencies = (
+				E5C507A92B17E3F100200A6A /* PIALibrary */,
+			);
 			productName = "PIA VPN-tvOS";
 			productReference = E5C507772B0E144D00200A6A /* PIA VPN-tvOS.app */;
 			productType = "com.apple.product-type.application";
@@ -3024,7 +3212,7 @@
 				35DC7A602B0B440200502BED /* RegionSelectionScreen.swift in Sources */,
 				699F23B22AFBA66000EBC5E6 /* SettingsScreen.swift in Sources */,
 				35EDD6422AE7A83D007B9ACB /* WelcomeScreen.swift in Sources */,
-				699F23B92AFBAC0B00EBC5E6 /* UpdateSettingsTests.swift in Sources */,
+				699F23B92AFBAC0B00EBC5E6 /* SettingsTests.swift in Sources */,
 				699F23B42AFBA66000EBC5E6 /* AutomationSettingsScreen.swift in Sources */,
 				35EDD62A2ADE5F08007B9ACB /* SignInTests.swift in Sources */,
 				69B70AB52ACBF51C0072A09D /* LoginScreen.swift in Sources */,
@@ -3078,8 +3266,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5AB28732B279B7000744E5F /* LoginProvider.swift in Sources */,
+				E5C507A52B153A2F00200A6A /* LoginViewModel.swift in Sources */,
+				E5C507B72B17E75B00200A6A /* CheckLoginAvailability.swift in Sources */,
+				E5AB286F2B27977000744E5F /* LoginFactory.swift in Sources */,
+				E5AB288A2B29BDED00744E5F /* Foundation+PIA.swift in Sources */,
+				E5C507A22B0FE40000200A6A /* LoginView.swift in Sources */,
+				E5AB287D2B28E4E700744E5F /* UserAccountMapper.swift in Sources */,
+				E5AB28792B28B4B300744E5F /* AccountInfo.swift in Sources */,
+				E5C507B12B17E48900200A6A /* LoginWithCredentialsUseCase.swift in Sources */,
+				E5C507B92B17E7A400200A6A /* ValidateCredentialsFormat.swift in Sources */,
+				E5C507AE2B17E45800200A6A /* LoginPresentableErrorMapper.swift in Sources */,
+				E5AB28712B279B4000744E5F /* LoginProviderType.swift in Sources */,
+				E5AB287B2B28B4C400744E5F /* Credentials.swift in Sources */,
 				E5C5077C2B0E144E00200A6A /* ContentView.swift in Sources */,
 				E5C5077A2B0E144E00200A6A /* PIA_VPN_tvOSApp.swift in Sources */,
+				E5C507C72B1FABFF00200A6A /* LoginDomainErrorMapperType.swift in Sources */,
+				E5C507B32B17E5AD00200A6A /* LoginError.swift in Sources */,
+				E5C507CA2B1FAC3600200A6A /* LoginDomainErrorMapper.swift in Sources */,
+				E5AB28772B28B49A00744E5F /* UserAccount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3087,7 +3292,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5C507CC2B1FACE000200A6A /* LoginWithCredentialsUseCaseTests.swift in Sources */,
+				E5C507A82B153E6B00200A6A /* LoginViewModelTests.swift in Sources */,
+				E5AB286C2B2796E700744E5F /* LoginProviderMock.swift in Sources */,
+				E5C507BE2B1F6FA600200A6A /* Equatable.swift in Sources */,
+				E5AB28872B2911C900744E5F /* AccountProviderMock.swift in Sources */,
 				E5C5078B2B0E145100200A6A /* PIA_VPN_tvOSTests.swift in Sources */,
+				E5AB287F2B28F6EF00744E5F /* Stubs.swift in Sources */,
+				E5AB28852B2902E700744E5F /* LoginProviderTests.swift in Sources */,
+				E5AB28832B2902E200744E5F /* Stubs+PIALibrary.swift in Sources */,
+				E5AB28752B279BB600744E5F /* LoginIntegrationTests.swift in Sources */,
+				E5C507C22B1F702700200A6A /* LoginWithCredentialsUseCaseMock.swift in Sources */,
+				E5C507C42B1F72E700200A6A /* CheckLoginAvailabilityTests.swift in Sources */,
+				E5C507C02B1F700C00200A6A /* CheckLoginAvailabilityMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4540,6 +4757,11 @@
 			productName = PIALibrary;
 		};
 		E5C5076D2B0D60B300200A6A /* PIALibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5C507662B0D609300200A6A /* XCRemoteSwiftPackageReference "mobile-ios-library" */;
+			productName = PIALibrary;
+		};
+		E5C507A92B17E3F100200A6A /* PIALibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E5C507662B0D609300200A6A /* XCRemoteSwiftPackageReference "mobile-ios-library" */;
 			productName = PIALibrary;
