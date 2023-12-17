@@ -26,7 +26,7 @@ extension XCUIApplication {
     }
     
     var useSmallPacketsSwitch: XCUIElement {
-        switches(with: "User Small Packets")
+        switches(with: "Use Small Packets")
     }
     
     var openVPN: XCUIElement {
@@ -58,5 +58,17 @@ extension XCUIApplication {
         protocolSelectionButton.tap()
         guard protocolSelectionPopover.exists else {return}
         protocolSelectionPopover.staticTexts[protocolName].tap()
+    }
+  
+    func enableSmallPackets() {
+        if ((useSmallPacketsSwitch.value as! String) != "1") {
+            useSmallPacketsSwitch.tap()
+        }
+    }
+    
+    func disableSmallPackets() {
+        if ((useSmallPacketsSwitch.value as! String) != "0") {
+            useSmallPacketsSwitch.tap()
+        }
     }
 }
