@@ -8,11 +8,12 @@
 
 import XCTest
 import PIALibrary
+import Combine
 @testable import PIA_VPN_tvOS
 
 final class LoginIntegrationTests: XCTestCase {
 
-    func test_login_succeeds() async throws {
+    func test_login_succeeds() throws {
         // GIVEN
         let userAccount = PIALibrary.UserAccount.makeStub()
         let accountProviderMock = AccountProviderMock(userResult: userAccount,
@@ -27,15 +28,34 @@ final class LoginIntegrationTests: XCTestCase {
         let sut = LoginViewModel(loginWithCredentialsUseCase: loginWithCredentialsUseCase,
                                  checkLoginAvailability: CheckLoginAvailability(),
                                  validateLoginCredentials: ValidateCredentialsFormat(),
-                                 errorMapper: LoginPresentableErrorMapper())
+                                 errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()))
         
+        var cancellables = Set<AnyCancellable>()
+        let expectation = expectation(description: "Waiting for didLoginSuccessfully property to be updated")
         XCTAssertEqual(sut.loginStatus, .none)
+                                 
+        var capturedLoginStatuses = [LoginStatus]()
+        
+        sut.$loginStatus.dropFirst().sink(receiveValue: { status in
+            capturedLoginStatuses.append(status)
+        }).store(in: &cancellables)
+        
+        sut.$didLoginSuccessfully.dropFirst().sink(receiveValue: { status in
+            XCTAssertTrue(status)
+            expectation.fulfill()
+        }).store(in: &cancellables)
         
         // WHEN
-        await sut.login(username: "username", password: "password")
+        sut.login(username: "username", password: "password")
         
         // THEN
-        guard case .succeeded(let capturedUserResult) = sut.loginStatus else {
+        wait(for: [expectation], timeout: 1)
+        XCTAssertFalse(sut.shouldShowErrorMessage)
+        XCTAssertFalse(sut.isAccountExpired)
+        XCTAssertEqual(capturedLoginStatuses.count, 2)
+        XCTAssertEqual(capturedLoginStatuses[0], LoginStatus.isLogging)
+        
+        guard case .succeeded(let capturedUserResult) = capturedLoginStatuses[1] else {
             XCTFail("Expected success, got failure")
             return
         }
@@ -60,11 +80,9 @@ final class LoginIntegrationTests: XCTestCase {
             default:
                 XCTFail("Expected the same plan, got \(capturedPlan) and \(userPlan)")
         }
-        
-        
     }
     
-    func test_login_fails() async throws {
+    func test_login_fails() {
         // GIVEN
         let accountProviderMock = AccountProviderMock(userResult: nil,
                                                       errorResult: ClientError.expired)
@@ -78,14 +96,32 @@ final class LoginIntegrationTests: XCTestCase {
         let sut = LoginViewModel(loginWithCredentialsUseCase: loginWithCredentialsUseCase,
                                  checkLoginAvailability: CheckLoginAvailability(),
                                  validateLoginCredentials: ValidateCredentialsFormat(),
-                                 errorMapper: LoginPresentableErrorMapper())
+                                 errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()))
         
+        var cancellables = Set<AnyCancellable>()
+        let expectation = expectation(description: "Waiting for isAccountExpired property to be updated")
         XCTAssertEqual(sut.loginStatus, .none)
+                                 
+        var capturedLoginStatuses = [LoginStatus]()
+        
+        sut.$loginStatus.dropFirst().sink(receiveValue: { status in
+            capturedLoginStatuses.append(status)
+        }).store(in: &cancellables)
+        
+        sut.$isAccountExpired.dropFirst().sink(receiveValue: { status in
+            XCTAssertTrue(status)
+            expectation.fulfill()
+        }).store(in: &cancellables)
         
         // WHEN
-        await sut.login(username: "username", password: "password")
+        sut.login(username: "username", password: "password")
         
         // THEN
-        XCTAssertEqual(sut.loginStatus, .failed(error: .expired))
+        wait(for: [expectation], timeout: 1)
+        XCTAssertFalse(sut.shouldShowErrorMessage)
+        XCTAssertFalse(sut.didLoginSuccessfully)
+        XCTAssertEqual(capturedLoginStatuses.count, 2)
+        XCTAssertEqual(capturedLoginStatuses[0], LoginStatus.isLogging)
+        XCTAssertEqual(capturedLoginStatuses[1], LoginStatus.failed(errorMessage: nil, field: .none))
     }
 }

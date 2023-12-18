@@ -8,68 +8,73 @@
 
 import Foundation
 
-enum LoginStatus {
-    case none
-    case isLogging
-    case failed(error: LoginError)
-    case succeeded(userAccount: UserAccount)
-}
-
 class LoginViewModel: ObservableObject {
     private let loginWithCredentialsUseCase: LoginWithCredentialsUseCaseType
     private let checkLoginAvailability: CheckLoginAvailabilityType
     private let validateLoginCredentials: ValidateCredentialsFormatType
-    private let errorMapper: LoginPresentableErrorMapper
+    private let errorHandler: LoginViewModelErrorHandlerType
     
-    var loginStatus: LoginStatus = .none
+    @Published var isAccountExpired = false
+    @Published var didLoginSuccessfully = false
+    @Published var shouldShowErrorMessage = false
+    @Published var loginStatus: LoginStatus = .none
     
-    init(loginWithCredentialsUseCase: LoginWithCredentialsUseCaseType, checkLoginAvailability: CheckLoginAvailabilityType, validateLoginCredentials: ValidateCredentialsFormatType, errorMapper: LoginPresentableErrorMapper) {
+    init(loginWithCredentialsUseCase: LoginWithCredentialsUseCaseType, checkLoginAvailability: CheckLoginAvailabilityType, validateLoginCredentials: ValidateCredentialsFormatType, errorHandler: LoginViewModelErrorHandlerType) {
         self.loginWithCredentialsUseCase = loginWithCredentialsUseCase
         self.checkLoginAvailability = checkLoginAvailability
         self.validateLoginCredentials = validateLoginCredentials
-        self.errorMapper = errorMapper
+        self.errorHandler = errorHandler
     }
     
-    func login(username: String, password: String) async {
+    func login(username: String, password: String) {
         if case .isLogging = loginStatus {
             return
         }
         
         if case .failure(let error) = checkLoginAvailability() {
-            handleError(error: error)
+            handleError(error)
             return
         }
         
         if case .failure(let error) = validateLoginCredentials(username: username, password: password) {
-            // Handle credentials wrong format
-            loginStatus = .failed(error: error)
+            handleError(error)
             return
         }
         
         loginStatus = .isLogging
         
-        await withCheckedContinuation { continuation in
-            loginWithCredentialsUseCase.execute(username: username, password: password) { [weak self] result in
-                guard let self = self else { return }
-                
-                switch result {
-                    case .success(let userAccount):
+        loginWithCredentialsUseCase.execute(username: username, password: password) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+                case .success(let userAccount):
+                    Task { @MainActor in
                         self.loginStatus = .succeeded(userAccount: userAccount)
+                        self.didLoginSuccessfully = true
+                    }
                     
-                    case .failure(let error):
-                        self.handleError(error: error)
-                }
-                continuation.resume()
+                case .failure(let error):
+                    handleError(error)
             }
         }
     }
     
-    private func handleError(error: LoginError) {
+    private func handleError(_ error: LoginError) {
+        guard error != .expired else {
+            Task { @MainActor in
+                loginStatus = .failed(errorMessage: nil, field: .none)
+                isAccountExpired = true
+            }
+            return
+        }
+        
         if case .throttled(let delay) = error {
             checkLoginAvailability.disableLoginFor(delay)
         }
         
-        let errorMessage = errorMapper.map(error: error)
-        loginStatus = .failed(error: error)
+        Task { @MainActor in
+            loginStatus = errorHandler(error: error)
+            shouldShowErrorMessage = true
+        }
     }
 }

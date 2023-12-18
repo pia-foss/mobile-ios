@@ -44,3 +44,19 @@ struct AccountInfo {
         return dateFormatter.string(from: self.expirationDate)
     }
 }
+
+extension AccountInfo: Equatable {
+    public static func == (lhs: AccountInfo, rhs: AccountInfo) -> Bool {
+        lhs.email == rhs.email
+        && lhs.username == rhs.username
+        && lhs.plan == rhs.plan
+        && lhs.productId == rhs.productId
+        && lhs.isRenewable == rhs.isRenewable
+        && lhs.isRecurring == rhs.isRecurring
+        && lhs.expirationDate == rhs.expirationDate
+        && lhs.canInvite == rhs.canInvite
+        && lhs.isExpired == rhs.isExpired
+        && lhs.shouldPresentExpirationAlert == rhs.shouldPresentExpirationAlert
+        && lhs.renewUrl == rhs.renewUrl
+    }
+}
