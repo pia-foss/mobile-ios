@@ -51,7 +51,7 @@ extension XCUIApplication {
         swipeUp()
         
         WaitHelper.waitForElementToBeVisible(connectionButton, timeout: defaultTimeout,
-                                             onSuccess:{print("successful login")}, onFailure:{error in print("connectionButton is not visible")})
+                                             onSuccess:{}, onFailure:{error in print("connectionButton is not visible")})
 
     }
 }

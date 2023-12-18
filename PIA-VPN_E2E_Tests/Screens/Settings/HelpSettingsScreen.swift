@@ -30,11 +30,11 @@ extension XCUIApplication {
     }
     
     var versionNo: XCUIElement {
-        findButtonWithPartialText("Version")!
+        findElementWithPartialText("Version")!
     }
     
     var tryWireguardNowButton: XCUIElement {
-        findButtonWithPartialText("Try WireGuard® now")!
+        findElementWithPartialText("Try WireGuard® now")!
     }
     
     func navigateToHelpSettings() {

@@ -60,11 +60,18 @@ extension XCUIApplication {
         return switches[id]
     }
     
-    func findButtonWithPartialText(_ partialText: String) -> XCUIElement? {
+    func findElementWithPartialText(_ partialText: String) -> XCUIElement? {
         let predicate = NSPredicate(format: "label CONTAINS[c] %@", partialText)
         let matchingStaticTexts = staticTexts.matching(predicate)
 
         return matchingStaticTexts.firstMatch
     }
+}
+
+extension XCUIElement {
+    func findChildElement(matching elementType: XCUIElement.ElementType, identifier: String) -> XCUIElement? {
+            let childElementQuery = descendants(matching: elementType).matching(identifier: identifier)
+            return childElementQuery.element
+        }
 }
 

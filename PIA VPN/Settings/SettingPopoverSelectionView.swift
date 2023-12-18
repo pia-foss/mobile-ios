@@ -145,7 +145,7 @@ extension TransportPopoverSelectionView: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        self.accessibilityIdentifier = "TransportPopoverSelectionView"
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) else {
             fatalError("no transport available")
         }
@@ -203,6 +203,7 @@ extension PortPopoverSelectionView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        self.accessibilityIdentifier = "PortPopoverSelectionView"
         
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) else {
             fatalError("no transport available")
@@ -260,7 +261,7 @@ extension DataEncryptionPopoverSelectionView: UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        self.accessibilityIdentifier = "DataEncryptionPopoverSelectionView"
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) else {
             fatalError("no transport available")
         }
@@ -313,7 +314,7 @@ extension HandshakePopoverSelectionView: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        self.accessibilityIdentifier = "HandshakePopoverSelectionView"
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) else {
             fatalError("no transport available")
         }

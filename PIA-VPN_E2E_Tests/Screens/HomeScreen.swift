@@ -13,6 +13,10 @@ extension XCUIApplication {
         button(with: PIALibraryAccessibility.Id.Dashboard.menu)
     }
     
+    var dashboardEditButton: XCUIElement{
+        button(with: "Edit")
+    }
+    
     var connectionButton: XCUIElement {
         button(with: AccessibilityId.Dashboard.connectionButton)
     }
@@ -53,7 +57,7 @@ extension XCUIApplication {
         button(with: "Disable VPN Kill Switch")
     }
     
-    var vpnServerButton: XCUIElement {
+    var regionTileCell: XCUIElement {
         cell(with: "RegionTileCollectionViewCell")
     }
     
@@ -71,35 +75,10 @@ extension XCUIApplication {
         }
     }
     
-    func navigateToSettings() {
-        guard dashboardMenuButton.exists else { return }
-        dashboardMenuButton.tap()
-        
-        if settingsButton.waitForExistence(timeout: defaultTimeout) {
-            settingsButton.tap()
-        }
-    }
-    
-    func navigateToHomeFromSettings() {
-        if settingsBackButton.waitForExistence(timeout: defaultTimeout) {
-            settingsBackButton.tap()
-            navigateToHome()
-        }
-    }
-    
-    func navigateToQuickSettings() {
-        quickSettingsButton.staticTexts["QUICK SETTINGS"].tap()
-    }
-    
     func navigateToHome() {
         closeButton.tap()
         WaitHelper.waitForElementToBeVisible(dashboardMenuButton, timeout: defaultTimeout,
-                                             onSuccess:{print("successfully navigate to Home")}, onFailure:{error in print("dashboardMenuButton is not visible")})
-    }
-    
-    func navigateToRegionSelection(){
-        guard vpnServerButton.exists else { return }
-        vpnServerButton.tap()
+                                             onSuccess:{print("successful navigation to Home screen")}, onFailure:{error in print("dashboardMenuButton is not visible")})
     }
     
     func enableVPNKillSwitchOnHome() {

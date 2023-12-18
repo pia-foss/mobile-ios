@@ -27,8 +27,10 @@ extension XCUIApplication {
     }
     
     func acceptVPNPermission() {
-        vpnPermissionScreen.waitForExistence(timeout:defaultTimeout)
-        vpnPermissionButton.waitForExistence(timeout:defaultTimeout)
+        WaitHelper.waitForElementToBeVisible(vpnPermissionScreen, timeout: defaultTimeout,
+                                             onSuccess:{}, onFailure:{error in print("vpn permission screen is not visible")})
+        WaitHelper.waitForElementToBeVisible(vpnPermissionButton, timeout: defaultTimeout,
+                                             onSuccess:{}, onFailure:{error in print("vpn permission button is not visible")})
         vpnPermissionButton.tap()
     }
 }

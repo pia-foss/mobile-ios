@@ -38,6 +38,8 @@ class IPTileCollectionViewCell: UICollectionViewCell, TileableCell {
     private var currentTileStatus: TileStatus?
 
     func setupCellForStatus(_ status: TileStatus) {
+        self.accessibilityIdentifier = "IPTileCollectionViewCell"
+        
         Theme.current.applyPrincipalBackground(self)
         Theme.current.applyPrincipalBackground(self.contentView)
         self.accessoryImageRight.image = Theme.current.dragDropImage()

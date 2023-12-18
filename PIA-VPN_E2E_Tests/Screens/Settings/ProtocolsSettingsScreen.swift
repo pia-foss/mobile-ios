@@ -21,8 +21,32 @@ extension XCUIApplication {
         staticText(with: "Data Encryption")
     }
     
+    var dataEncryptionPopover: XCUIElement {
+        otherElement(with: "DataEncryptionPopoverSelectionView")
+    }
+    
     var handshakeButton: XCUIElement {
         staticText(with: "Handshake")
+    }
+    
+    var handshakePopover: XCUIElement {
+        otherElement(with: "HandshakePopoverSelectionView")
+    }
+    
+    var transportButton: XCUIElement {
+        staticText(with: "Transport")
+    }
+    
+    var transportPopover: XCUIElement {
+        otherElement(with: "TransportPopoverSelectionView")
+    }
+    
+    var remotePortButton: XCUIElement {
+        staticText(with: "Remote Port")
+    }
+    
+    var remotePortPopover: XCUIElement {
+        otherElement(with: "PortPopoverSelectionView")
     }
     
     var useSmallPacketsSwitch: XCUIElement {
@@ -59,7 +83,31 @@ extension XCUIApplication {
         guard protocolSelectionPopover.exists else {return}
         protocolSelectionPopover.staticTexts[protocolName].tap()
     }
+    
+    func selectDataEncryption(dataEncryption: String) {
+        dataEncryptionButton.tap()
+        guard dataEncryptionPopover.exists else {return}
+        dataEncryptionPopover.staticTexts[dataEncryption].tap()
+    }
+    
+    func selectHandshake(handshake: String) {
+        handshakeButton.tap()
+        guard handshakePopover.exists else {return}
+        handshakePopover.staticTexts[handshake].tap()
+    }
   
+    func selectTransport(transport: String) {
+        transportButton.tap()
+        guard transportPopover.exists else {return}
+        transportPopover.staticTexts[transport].tap()
+    }
+    
+    func selectRemotePort(port: String) {
+        remotePortButton.tap()
+        guard remotePortPopover.exists else {return}
+        remotePortPopover.staticTexts[port].tap()
+    }
+    
     func enableSmallPackets() {
         if ((useSmallPacketsSwitch.value as! String) != "1") {
             useSmallPacketsSwitch.tap()
