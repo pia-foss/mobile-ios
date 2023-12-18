@@ -171,7 +171,9 @@
 		694AC74F2B17ADF9007E7B56 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 291C6397183EBC210039EC03 /* Images.xcassets */; };
 		695BF81D2AC30EFB00D1139C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E7EC043209326E30029811E /* Localizable.strings */; };
 		695BF81F2AC410E000D1139C /* (null) in Sources */ = {isa = PBXBuildFile; };
-		698C3B492B2B33650012D527 /* VpnConnectionUseCaseTypeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C3B482B2B33650012D527 /* VpnConnectionUseCaseTypeMock.swift */; };
+		696E8F0D2B31A8760080BB31 /* NotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696E8F0C2B31A8760080BB31 /* NotificationCenterMock.swift */; };
+		696E8F102B31AC690080BB31 /* RootContainerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696E8F0F2B31AC690080BB31 /* RootContainerViewModelTests.swift */; };
+		698C3B492B2B33650012D527 /* VpnConnectionUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C3B482B2B33650012D527 /* VpnConnectionUseCaseMock.swift */; };
 		698C3B4B2B2B34760012D527 /* PIAConnectionButtonViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C3B4A2B2B34760012D527 /* PIAConnectionButtonViewModelTests.swift */; };
 		698C3B4E2B2B3CBE0012D527 /* LoginIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28742B279BB600744E5F /* LoginIntegrationTests.swift */; };
 		698F4F2B2AB8A2080010B2B0 /* PIAWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8269A6D5251CB5E0000B4DBF /* PIAWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -180,6 +182,8 @@
 		698F4F302ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F4F2F2ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift */; };
 		698F4F312ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F4F2F2ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift */; };
 		698F4F322ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F4F2F2ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift */; };
+		699311A02B31894D00D316C8 /* Foundation+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6993119F2B31894D00D316C8 /* Foundation+Protocols.swift */; };
+		699311A22B318F6B00D316C8 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699311A12B318F6B00D316C8 /* DashboardViewModel.swift */; };
 		699F23B22AFBA66000EBC5E6 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23AC2AFBA66000EBC5E6 /* SettingsScreen.swift */; };
 		699F23B32AFBA66000EBC5E6 /* HelpSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23AD2AFBA66000EBC5E6 /* HelpSettingsScreen.swift */; };
 		699F23B42AFBA66000EBC5E6 /* AutomationSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23AE2AFBA66000EBC5E6 /* AutomationSettingsScreen.swift */; };
@@ -187,6 +191,11 @@
 		699F23B62AFBA66000EBC5E6 /* GeneralSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23B02AFBA66000EBC5E6 /* GeneralSettingsScreen.swift */; };
 		699F23B72AFBA66000EBC5E6 /* PrivacySettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23B12AFBA66000EBC5E6 /* PrivacySettingsScreen.swift */; };
 		699F23B92AFBAC0B00EBC5E6 /* SettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23B82AFBAC0B00EBC5E6 /* SettingsTests.swift */; };
+		69A226B32B3074D30065EDDB /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A226B22B3074D30065EDDB /* AppRouter.swift */; };
+		69A226B52B3075AB0065EDDB /* RootContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A226B42B3075AB0065EDDB /* RootContainerViewModel.swift */; };
+		69A226B82B3079EA0065EDDB /* PIA+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A226B72B3079EA0065EDDB /* PIA+String.swift */; };
+		69A226BE2B307D5F0065EDDB /* RootContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A226BD2B307D5F0065EDDB /* RootContainerView.swift */; };
+		69A226C02B307DBF0065EDDB /* RootContainerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A226BF2B307DBF0065EDDB /* RootContainerFactory.swift */; };
 		69B70AB52ACBF51C0072A09D /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70AB42ACBF51C0072A09D /* LoginScreen.swift */; };
 		69B70ABC2ACBF8300072A09D /* CredentialsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */; };
 		69B70ABE2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
@@ -866,10 +875,14 @@
 		692483252AB05F85002A0407 /* PIAConnectionActivityWidget.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionActivityWidget.swift; sourceTree = "<group>"; tabWidth = 4; };
 		6947AADB2ACDC8AE001BCC66 /* PIA-VPN-e2e-simulator.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PIA-VPN-e2e-simulator.xctestplan"; sourceTree = "<group>"; };
 		694AC74D2B17AB9C007E7B56 /* DashboardView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; tabWidth = 4; };
-		698C3B482B2B33650012D527 /* VpnConnectionUseCaseTypeMock.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = VpnConnectionUseCaseTypeMock.swift; sourceTree = "<group>"; tabWidth = 4; };
+		696E8F0C2B31A8760080BB31 /* NotificationCenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterMock.swift; sourceTree = "<group>"; };
+		696E8F0F2B31AC690080BB31 /* RootContainerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerViewModelTests.swift; sourceTree = "<group>"; };
+		698C3B482B2B33650012D527 /* VpnConnectionUseCaseMock.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = VpnConnectionUseCaseMock.swift; sourceTree = "<group>"; tabWidth = 4; };
 		698C3B4A2B2B34760012D527 /* PIAConnectionButtonViewModelTests.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionButtonViewModelTests.swift; sourceTree = "<group>"; tabWidth = 4; };
 		698F4F2C2AB978BF0010B2B0 /* PIACircleImageView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIACircleImageView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		698F4F2F2ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionLiveActivityManager.swift; sourceTree = "<group>"; tabWidth = 4; };
+		6993119F2B31894D00D316C8 /* Foundation+Protocols.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "Foundation+Protocols.swift"; sourceTree = "<group>"; tabWidth = 4; };
+		699311A12B318F6B00D316C8 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 		699F23AC2AFBA66000EBC5E6 /* SettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		699F23AD2AFBA66000EBC5E6 /* HelpSettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpSettingsScreen.swift; sourceTree = "<group>"; };
 		699F23AE2AFBA66000EBC5E6 /* AutomationSettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutomationSettingsScreen.swift; sourceTree = "<group>"; };
@@ -877,6 +890,11 @@
 		699F23B02AFBA66000EBC5E6 /* GeneralSettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralSettingsScreen.swift; sourceTree = "<group>"; };
 		699F23B12AFBA66000EBC5E6 /* PrivacySettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacySettingsScreen.swift; sourceTree = "<group>"; };
 		699F23B82AFBAC0B00EBC5E6 /* SettingsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTests.swift; sourceTree = "<group>"; };
+		69A226B22B3074D30065EDDB /* AppRouter.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; tabWidth = 4; };
+		69A226B42B3075AB0065EDDB /* RootContainerViewModel.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = RootContainerViewModel.swift; sourceTree = "<group>"; tabWidth = 4; };
+		69A226B72B3079EA0065EDDB /* PIA+String.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "PIA+String.swift"; sourceTree = "<group>"; tabWidth = 4; };
+		69A226BD2B307D5F0065EDDB /* RootContainerView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = RootContainerView.swift; sourceTree = "<group>"; tabWidth = 4; };
+		69A226BF2B307DBF0065EDDB /* RootContainerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerFactory.swift; sourceTree = "<group>"; };
 		69B70AB02ACBF51C0072A09D /* PIA-VPN_E2E_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA-VPN_E2E_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69B70AB42ACBF51C0072A09D /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityId.swift; sourceTree = "<group>"; };
@@ -1716,6 +1734,29 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		696E8F0E2B31AC3C0080BB31 /* RootContainer */ = {
+			isa = PBXGroup;
+			children = (
+				696E8F0F2B31AC690080BB31 /* RootContainerViewModelTests.swift */,
+			);
+			path = RootContainer;
+			sourceTree = "<group>";
+		};
+		696E8F132B31AF110080BB31 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				696E8F142B31AF200080BB31 /* Mocks */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		696E8F142B31AF200080BB31 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		698C3B462B2B33260012D527 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -1728,7 +1769,8 @@
 		698C3B472B2B33440012D527 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				698C3B482B2B33650012D527 /* VpnConnectionUseCaseTypeMock.swift */,
+				698C3B482B2B33650012D527 /* VpnConnectionUseCaseMock.swift */,
+				696E8F0C2B31A8760080BB31 /* NotificationCenterMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1745,6 +1787,57 @@
 				35EDD65D2B048C68007B9ACB /* QuickSettingsScreen.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		69A226AF2B3074110065EDDB /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				69A226B22B3074D30065EDDB /* AppRouter.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		69A226B62B3079D00065EDDB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				69A226B72B3079EA0065EDDB /* PIA+String.swift */,
+				6993119F2B31894D00D316C8 /* Foundation+Protocols.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		69A226B92B307C8A0065EDDB /* RootContainer */ = {
+			isa = PBXGroup;
+			children = (
+				69A226BC2B307CD70065EDDB /* Presentation */,
+				69A226BB2B307CCF0065EDDB /* UI */,
+				69A226BA2B307CB40065EDDB /* CompositionRoot */,
+			);
+			path = RootContainer;
+			sourceTree = "<group>";
+		};
+		69A226BA2B307CB40065EDDB /* CompositionRoot */ = {
+			isa = PBXGroup;
+			children = (
+				69A226BF2B307DBF0065EDDB /* RootContainerFactory.swift */,
+			);
+			path = CompositionRoot;
+			sourceTree = "<group>";
+		};
+		69A226BB2B307CCF0065EDDB /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				69A226BD2B307D5F0065EDDB /* RootContainerView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		69A226BC2B307CD70065EDDB /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				69A226B42B3075AB0065EDDB /* RootContainerViewModel.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		69B70AB12ACBF51C0072A09D /* PIA-VPN_E2E_Tests */ = {
@@ -1771,6 +1864,7 @@
 		69F053442B1E054900AE0665 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				69A226B62B3079D00065EDDB /* Utils */,
 				69F053452B1E055300AE0665 /* UI */,
 			);
 			path = Shared;
@@ -1798,6 +1892,7 @@
 			isa = PBXGroup;
 			children = (
 				69F1C2962B2B239000E924AE /* PIAConnectionButtonViewModel.swift */,
+				699311A12B318F6B00D316C8 /* DashboardViewModel.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -2139,6 +2234,8 @@
 		E5C507782B0E144E00200A6A /* PIA VPN-tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				69A226B92B307C8A0065EDDB /* RootContainer */,
+				69A226AF2B3074110065EDDB /* Navigation */,
 				E5C507A32B153A1800200A6A /* Login */,
 				69F053442B1E054900AE0665 /* Shared */,
 				694AC74B2B17AB73007E7B56 /* Dashboard */,
@@ -2161,6 +2258,8 @@
 		E5C507892B0E145100200A6A /* PIA VPN-tvOSTests */ = {
 			isa = PBXGroup;
 			children = (
+				696E8F132B31AF110080BB31 /* Common */,
+				696E8F0E2B31AC3C0080BB31 /* RootContainer */,
 				698C3B462B2B33260012D527 /* Dashboard */,
 				E5C507A62B153E4800200A6A /* Login */,
 				E5C5078A2B0E145100200A6A /* PIA_VPN_tvOSTests.swift */,
@@ -3380,10 +3479,14 @@
 				E5C507B72B17E75B00200A6A /* CheckLoginAvailability.swift in Sources */,
 				E5AB288E2B2A489500744E5F /* LoginStatus.swift in Sources */,
 				E5AB286F2B27977000744E5F /* LoginFactory.swift in Sources */,
+				699311A22B318F6B00D316C8 /* DashboardViewModel.swift in Sources */,
+				69A226B82B3079EA0065EDDB /* PIA+String.swift in Sources */,
 				69F1C29C2B2B299300E924AE /* VpnConnectionUseCase.swift in Sources */,
+				69A226B32B3074D30065EDDB /* AppRouter.swift in Sources */,
 				E5AB288A2B29BDED00744E5F /* Foundation+PIA.swift in Sources */,
 				E5C507A22B0FE40000200A6A /* LoginView.swift in Sources */,
 				E5AB287D2B28E4E700744E5F /* UserAccountMapper.swift in Sources */,
+				699311A02B31894D00D316C8 /* Foundation+Protocols.swift in Sources */,
 				E5AB28792B28B4B300744E5F /* AccountInfo.swift in Sources */,
 				E5C507B12B17E48900200A6A /* LoginWithCredentialsUseCase.swift in Sources */,
 				E5C507B92B17E7A400200A6A /* ValidateCredentialsFormat.swift in Sources */,
@@ -3392,15 +3495,18 @@
 				E5AB28712B279B4000744E5F /* LoginProviderType.swift in Sources */,
 				E5AB287B2B28B4C400744E5F /* Credentials.swift in Sources */,
 				E5C5077C2B0E144E00200A6A /* ContentView.swift in Sources */,
+				69A226BE2B307D5F0065EDDB /* RootContainerView.swift in Sources */,
 				694AC74E2B17AB9C007E7B56 /* DashboardView.swift in Sources */,
 				69F1C2932B2B10D400E924AE /* DashboardFactory.swift in Sources */,
 				E5C5077A2B0E144E00200A6A /* PIA_VPN_tvOSApp.swift in Sources */,
 				69F1C2952B2B216100E924AE /* PIA+Animation.swift in Sources */,
+				69A226B52B3075AB0065EDDB /* RootContainerViewModel.swift in Sources */,
 				E5C507C72B1FABFF00200A6A /* LoginDomainErrorMapperType.swift in Sources */,
 				69F1C2972B2B239000E924AE /* PIAConnectionButtonViewModel.swift in Sources */,
 				E5C507B32B17E5AD00200A6A /* LoginError.swift in Sources */,
 				E5C507CA2B1FAC3600200A6A /* LoginDomainErrorMapper.swift in Sources */,
 				E5AB28772B28B49A00744E5F /* UserAccount.swift in Sources */,
+				69A226C02B307DBF0065EDDB /* RootContainerFactory.swift in Sources */,
 				69F053472B1E056400AE0665 /* PIAColors+SwitUI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3409,11 +3515,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				698C3B492B2B33650012D527 /* VpnConnectionUseCaseTypeMock.swift in Sources */,
+				698C3B492B2B33650012D527 /* VpnConnectionUseCaseMock.swift in Sources */,
 				E5C507CC2B1FACE000200A6A /* LoginWithCredentialsUseCaseTests.swift in Sources */,
+				696E8F0D2B31A8760080BB31 /* NotificationCenterMock.swift in Sources */,
 				E5C507A82B153E6B00200A6A /* LoginViewModelTests.swift in Sources */,
 				E5AB286C2B2796E700744E5F /* LoginProviderMock.swift in Sources */,
 				E5AB28872B2911C900744E5F /* AccountProviderMock.swift in Sources */,
+				696E8F102B31AC690080BB31 /* RootContainerViewModelTests.swift in Sources */,
 				698C3B4E2B2B3CBE0012D527 /* LoginIntegrationTests.swift in Sources */,
 				E5C5078B2B0E145100200A6A /* PIA_VPN_tvOSTests.swift in Sources */,
 				698C3B4B2B2B34760012D527 /* PIAConnectionButtonViewModelTests.swift in Sources */,

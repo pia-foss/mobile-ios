@@ -1,12 +1,18 @@
 
 import Foundation
+import PIALibrary
 
 class DashboardFactory {
     
     static func makeDashboardView() -> DashboardView {
         return DashboardView(
+            viewModel: makeDashboardViewModel(), 
             connectionButton: makePIAConnectionButton()
         )
+    }
+    
+    static func makeDashboardViewModel() -> DashboardViewModel {
+        return DashboardViewModel(accountProvider: Client.providers.accountProvider)
     }
     
     static func makePIAConnectionButton(size: CGFloat = 160, lineWidth: CGFloat = 6) -> PIAConnectionButton {
