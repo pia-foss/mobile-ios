@@ -23,6 +23,8 @@ extension XCUIApplication {
         } else {
             if welcomeLoginButtonOldVersion.waitForExistence(timeout: shortTimeout) {
                 welcomeLoginButtonOldVersion.tap()
+                WaitHelper.waitForElementToBeVisible(loginButton, timeout: defaultTimeout,
+                                                     onSuccess:{print("successful navigation to login screen")}, onFailure:{error in print("loginButton is not visible")})
             }
         }
     }

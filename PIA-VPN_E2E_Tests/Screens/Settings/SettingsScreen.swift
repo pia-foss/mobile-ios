@@ -40,4 +40,20 @@ extension XCUIApplication {
     var settingsBackButton: XCUIElement {
         button(with: "Settings")
     }
+    
+    func navigateToSettings() {
+        guard dashboardMenuButton.exists else { return }
+        dashboardMenuButton.tap()
+        
+        if settingsButton.waitForExistence(timeout: defaultTimeout) {
+            settingsButton.tap()
+        }
+    }
+    
+    func navigateToHomeFromSettings() {
+        if settingsBackButton.waitForExistence(timeout: defaultTimeout) {
+            settingsBackButton.tap()
+            navigateToHome()
+        }
+    }
 }

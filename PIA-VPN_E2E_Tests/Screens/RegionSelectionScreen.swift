@@ -9,6 +9,10 @@
 import XCTest
 
 extension XCUIApplication {
+    var regionSelectionHeader: XCUIElement {
+        searchField(with: "Region selection")
+    }
+    
     var searchRegionField: XCUIElement {
         searchField(with: "Search for a region")
     }
@@ -23,6 +27,13 @@ extension XCUIApplication {
     
     var sortPopUpHeader: XCUIElement {
         staticText(with: "SORT REGIONS BY")
+    }
+    
+    func navigateToRegionSelection(){
+        guard regionTileCell.exists else { return }
+        regionTileCell.tap()
+        WaitHelper.waitForElementToBeVisible(regionSelectionHeader, timeout: defaultTimeout,
+                                             onSuccess:{print("successful navigation to region selection screen")}, onFailure:{error in print("regionSelectionHeader is not visible")})
     }
     
     func searchRegion(regionName: String) -> XCUIElementQuery {

@@ -21,6 +21,10 @@ extension XCUIApplication {
         cells.containing(.staticText, identifier: "Private Browser").firstMatch.switches.firstMatch
     }
     
+    func navigateToQuickSettings() {
+        quickSettingsButton.staticTexts["QUICK SETTINGS"].tap()
+    }
+    
     func enableVPNKillSwitchQuickSetting() {
         if(vpnKillSwitchQuickSettings.value as! String == "0"){
             vpnKillSwitchQuickSettings.tap()
