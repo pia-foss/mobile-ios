@@ -12,7 +12,7 @@ import XCTest
 final class RootContainerViewModelTests: XCTestCase {
     
     final class Fixture {
-        let accountProvierMock = AccountProviderMock(userResult: nil, errorResult: nil)
+        let accountProvierMock = AccountProviderTypeMock()
         let notificationCenterMock = NotificationCenterMock()
     }
 

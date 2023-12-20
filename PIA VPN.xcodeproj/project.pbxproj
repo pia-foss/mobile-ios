@@ -160,6 +160,8 @@
 		35EDD65A2B035B51007B9ACB /* SideMenuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD6592B035B51007B9ACB /* SideMenuScreen.swift */; };
 		35EDD65C2B047839007B9ACB /* QuickSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD65B2B047839007B9ACB /* QuickSettingsTests.swift */; };
 		35EDD65E2B048C68007B9ACB /* QuickSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD65D2B048C68007B9ACB /* QuickSettingsScreen.swift */; };
+		6913179F2B32E4D4009B4E85 /* PIALibrary+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6913179E2B32E4D4009B4E85 /* PIALibrary+Protocols.swift */; };
+		691317A12B32ED76009B4E85 /* AccountProviderTypeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691317A02B32ED76009B4E85 /* AccountProviderTypeMock.swift */; };
 		6924831A2AB045A5002A0407 /* PIAWidgetAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483192AB045A5002A0407 /* PIAWidgetAttributes.swift */; };
 		6924831B2AB045A5002A0407 /* PIAWidgetAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483192AB045A5002A0407 /* PIAWidgetAttributes.swift */; };
 		6924831C2AB045A5002A0407 /* PIAWidgetAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483192AB045A5002A0407 /* PIAWidgetAttributes.swift */; };
@@ -868,6 +870,8 @@
 		35EDD6592B035B51007B9ACB /* SideMenuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuScreen.swift; sourceTree = "<group>"; };
 		35EDD65B2B047839007B9ACB /* QuickSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSettingsTests.swift; sourceTree = "<group>"; };
 		35EDD65D2B048C68007B9ACB /* QuickSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSettingsScreen.swift; sourceTree = "<group>"; };
+		6913179E2B32E4D4009B4E85 /* PIALibrary+Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PIALibrary+Protocols.swift"; sourceTree = "<group>"; };
+		691317A02B32ED76009B4E85 /* AccountProviderTypeMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProviderTypeMock.swift; sourceTree = "<group>"; };
 		692483192AB045A5002A0407 /* PIAWidgetAttributes.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAWidgetAttributes.swift; sourceTree = "<group>"; tabWidth = 4; };
 		6924831D2AB04FFD002A0407 /* PIAWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAWidgetBundle.swift; sourceTree = "<group>"; };
 		6924831F2AB05F18002A0407 /* PIAConnectionView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionView.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -1753,6 +1757,7 @@
 		696E8F142B31AF200080BB31 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				691317A02B32ED76009B4E85 /* AccountProviderTypeMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1802,6 +1807,7 @@
 			children = (
 				69A226B72B3079EA0065EDDB /* PIA+String.swift */,
 				6993119F2B31894D00D316C8 /* Foundation+Protocols.swift */,
+				6913179E2B32E4D4009B4E85 /* PIALibrary+Protocols.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -3473,6 +3479,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6913179F2B32E4D4009B4E85 /* PIALibrary+Protocols.swift in Sources */,
 				E5AB288C2B2A487A00744E5F /* LoginViewModelErrorHandler.swift in Sources */,
 				E5AB28732B279B7000744E5F /* LoginProvider.swift in Sources */,
 				E5C507A52B153A2F00200A6A /* LoginViewModel.swift in Sources */,
@@ -3531,6 +3538,7 @@
 				E5C507C22B1F702700200A6A /* LoginWithCredentialsUseCaseMock.swift in Sources */,
 				E5C507C42B1F72E700200A6A /* CheckLoginAvailabilityTests.swift in Sources */,
 				E5C507C02B1F700C00200A6A /* CheckLoginAvailabilityMock.swift in Sources */,
+				691317A12B32ED76009B4E85 /* AccountProviderTypeMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

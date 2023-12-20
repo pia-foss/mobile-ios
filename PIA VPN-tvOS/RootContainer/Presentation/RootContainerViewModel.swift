@@ -1,9 +1,6 @@
 
 import Foundation
-import Combine
 import SwiftUI
-import PIALibrary
-
 
 class RootContainerViewModel: ObservableObject {
     enum State {
@@ -18,10 +15,10 @@ class RootContainerViewModel: ObservableObject {
     // TODO: Update this value from the Vpn OnBoarding installation profile screen
     @AppStorage(.kOnboardingVpnProfileInstalled) var onBoardingVpnProfileInstalled = true
     
-    let accountProvider: AccountProvider
+    let accountProvider: AccountProviderType
     let notificationCenter: NotificationCenterType
     
-    init(accountProvider: AccountProvider, notificationCenter: NotificationCenterType = NotificationCenter.default) {
+    init(accountProvider: AccountProviderType, notificationCenter: NotificationCenterType = NotificationCenter.default) {
         
         self.accountProvider = accountProvider
         self.notificationCenter = notificationCenter

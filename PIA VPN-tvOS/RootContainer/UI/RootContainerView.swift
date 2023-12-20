@@ -9,11 +9,12 @@ struct RootContainerView: View {
         switch viewModel.state {
         case .splash:
             VStack {
-                Text("Splash Screen")
+                // TODO: Add Splash screen here
             }
         case .notActivated:
             LoginFactory.makeLoginView()
         case .activatedNotOnboarded:
+            // TODO: Replace this view with the Onboarding Vpn Profile installation view
             VStack {
                 Text("Show Onboarding vpn installation view")
             }
