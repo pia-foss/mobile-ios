@@ -12,8 +12,7 @@ import SwiftUI
 struct PIA_VPN_tvOSApp: App {
     var body: some Scene {
         WindowGroup {
-            LoginFactory.makeLoginView()
-//            DashboardFactory.makeDashboardView()
+            RootContainerFactory.makeRootContainerView()
         }
     }
 }
