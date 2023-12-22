@@ -6,10 +6,10 @@ on:
 
   workflow_dispatch:
 concurrency:
-  group: "${{ github.ref }}"
+  group: "${{ github.run_id }}"
   cancel-in-progress: true
 jobs:
-  build:
+  development_build:
     runs-on: macos-13
     env:
       CERTIFICATE_PASSWORD: ${{ secrets.DEVELOPER_CERTIFICATE_PASSWORD }}
