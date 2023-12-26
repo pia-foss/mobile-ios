@@ -213,6 +213,13 @@
 		69F1C2972B2B239000E924AE /* PIAConnectionButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F1C2962B2B239000E924AE /* PIAConnectionButtonViewModel.swift */; };
 		69F1C2992B2B28DA00E924AE /* PIAConnectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F1C2982B2B28DA00E924AE /* PIAConnectionButton.swift */; };
 		69F1C29C2B2B299300E924AE /* VpnConnectionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F1C29B2B2B299300E924AE /* VpnConnectionUseCase.swift */; };
+		69FF0B042B3AD1D40074AA04 /* SelectedServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FF0B032B3AD1D40074AA04 /* SelectedServerView.swift */; };
+		69FF0B062B3AD2860074AA04 /* QuickConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FF0B052B3AD2860074AA04 /* QuickConnectView.swift */; };
+		69FF0B082B3AD3E60074AA04 /* SelectedServerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FF0B072B3AD3E60074AA04 /* SelectedServerViewModel.swift */; };
+		69FF0B0A2B3AD3F60074AA04 /* QuickConnectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FF0B092B3AD3F60074AA04 /* QuickConnectViewModel.swift */; };
+		69FF0B0B2B3AD4C70074AA04 /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51693D02AFADCC20089FB8F /* SwiftGen+Strings.swift */; };
+		69FF0B0D2B3AD57C0074AA04 /* SelectedServerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FF0B0C2B3AD57C0074AA04 /* SelectedServerUseCase.swift */; };
+		69FF0B0F2B3AE8F60074AA04 /* PIAImages+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FF0B0E2B3AE8F60074AA04 /* PIAImages+SwiftUI.swift */; };
 		7ECBB8DD27B6C4F500C0C774 /* UserSurveyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */; };
 		7ECBB8DE27BA5FCE00C0C774 /* UserSurveyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */; };
 		821674F12678A1BE0028E4FD /* SettingsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821674F02678A1BE0028E4FD /* SettingsDelegate.swift */; };
@@ -914,6 +921,12 @@
 		69F1C2962B2B239000E924AE /* PIAConnectionButtonViewModel.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionButtonViewModel.swift; sourceTree = "<group>"; tabWidth = 4; };
 		69F1C2982B2B28DA00E924AE /* PIAConnectionButton.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionButton.swift; sourceTree = "<group>"; tabWidth = 4; };
 		69F1C29B2B2B299300E924AE /* VpnConnectionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VpnConnectionUseCase.swift; sourceTree = "<group>"; };
+		69FF0B032B3AD1D40074AA04 /* SelectedServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedServerView.swift; sourceTree = "<group>"; };
+		69FF0B052B3AD2860074AA04 /* QuickConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickConnectView.swift; sourceTree = "<group>"; };
+		69FF0B072B3AD3E60074AA04 /* SelectedServerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedServerViewModel.swift; sourceTree = "<group>"; };
+		69FF0B092B3AD3F60074AA04 /* QuickConnectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickConnectViewModel.swift; sourceTree = "<group>"; };
+		69FF0B0C2B3AD57C0074AA04 /* SelectedServerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedServerUseCase.swift; sourceTree = "<group>"; };
+		69FF0B0E2B3AE8F60074AA04 /* PIAImages+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PIAImages+SwiftUI.swift"; sourceTree = "<group>"; };
 		7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = CredentialsUtil.swift; sourceTree = "<group>"; tabWidth = 4; };
 		7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSurveyManager.swift; sourceTree = "<group>"; };
 		821674F02678A1BE0028E4FD /* SettingsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDelegate.swift; sourceTree = "<group>"; };
@@ -1740,6 +1753,8 @@
 			children = (
 				694AC74D2B17AB9C007E7B56 /* DashboardView.swift */,
 				69F1C2982B2B28DA00E924AE /* PIAConnectionButton.swift */,
+				69FF0B032B3AD1D40074AA04 /* SelectedServerView.swift */,
+				69FF0B052B3AD2860074AA04 /* QuickConnectView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1888,6 +1903,7 @@
 				69F053462B1E056400AE0665 /* PIAColors+SwitUI.swift */,
 				69F053492B1F1D2800AE0665 /* Colors.xcassets */,
 				69F1C2942B2B216100E924AE /* PIA+Animation.swift */,
+				69FF0B0E2B3AE8F60074AA04 /* PIAImages+SwiftUI.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1905,6 +1921,8 @@
 			children = (
 				69F1C2962B2B239000E924AE /* PIAConnectionButtonViewModel.swift */,
 				699311A12B318F6B00D316C8 /* DashboardViewModel.swift */,
+				69FF0B072B3AD3E60074AA04 /* SelectedServerViewModel.swift */,
+				69FF0B092B3AD3F60074AA04 /* QuickConnectViewModel.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -1913,6 +1931,7 @@
 			isa = PBXGroup;
 			children = (
 				69F1C29B2B2B299300E924AE /* VpnConnectionUseCase.swift */,
+				69FF0B0C2B3AD57C0074AA04 /* SelectedServerUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -3488,6 +3507,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6913179F2B32E4D4009B4E85 /* PIALibrary+Protocols.swift in Sources */,
+				69FF0B082B3AD3E60074AA04 /* SelectedServerViewModel.swift in Sources */,
+				69FF0B0B2B3AD4C70074AA04 /* SwiftGen+Strings.swift in Sources */,
+				69FF0B062B3AD2860074AA04 /* QuickConnectView.swift in Sources */,
 				E5AB288C2B2A487A00744E5F /* LoginViewModelErrorHandler.swift in Sources */,
 				E5AB28732B279B7000744E5F /* LoginProvider.swift in Sources */,
 				E5C507A52B153A2F00200A6A /* LoginViewModel.swift in Sources */,
@@ -3495,18 +3517,21 @@
 				E5AB288E2B2A489500744E5F /* LoginStatus.swift in Sources */,
 				E5AB286F2B27977000744E5F /* LoginFactory.swift in Sources */,
 				699311A22B318F6B00D316C8 /* DashboardViewModel.swift in Sources */,
+				69FF0B042B3AD1D40074AA04 /* SelectedServerView.swift in Sources */,
 				69A226B82B3079EA0065EDDB /* PIA+String.swift in Sources */,
 				69F1C29C2B2B299300E924AE /* VpnConnectionUseCase.swift in Sources */,
 				69A226B32B3074D30065EDDB /* AppRouter.swift in Sources */,
 				E5AB288A2B29BDED00744E5F /* Foundation+PIA.swift in Sources */,
 				E5C507A22B0FE40000200A6A /* LoginView.swift in Sources */,
 				E5AB287D2B28E4E700744E5F /* UserAccountMapper.swift in Sources */,
+				69FF0B0A2B3AD3F60074AA04 /* QuickConnectViewModel.swift in Sources */,
 				699311A02B31894D00D316C8 /* Foundation+Protocols.swift in Sources */,
 				E5AB28792B28B4B300744E5F /* AccountInfo.swift in Sources */,
 				E5C507B12B17E48900200A6A /* LoginWithCredentialsUseCase.swift in Sources */,
 				E5C507B92B17E7A400200A6A /* ValidateCredentialsFormat.swift in Sources */,
 				69F1C2992B2B28DA00E924AE /* PIAConnectionButton.swift in Sources */,
 				E5C507AE2B17E45800200A6A /* LoginPresentableErrorMapper.swift in Sources */,
+				69FF0B0D2B3AD57C0074AA04 /* SelectedServerUseCase.swift in Sources */,
 				E5AB28712B279B4000744E5F /* LoginProviderType.swift in Sources */,
 				E5AB287B2B28B4C400744E5F /* Credentials.swift in Sources */,
 				E5C5077C2B0E144E00200A6A /* ContentView.swift in Sources */,
@@ -3520,6 +3545,7 @@
 				69F1C2972B2B239000E924AE /* PIAConnectionButtonViewModel.swift in Sources */,
 				E5C507B32B17E5AD00200A6A /* LoginError.swift in Sources */,
 				E5C507CA2B1FAC3600200A6A /* LoginDomainErrorMapper.swift in Sources */,
+				69FF0B0F2B3AE8F60074AA04 /* PIAImages+SwiftUI.swift in Sources */,
 				E5AB28772B28B49A00744E5F /* UserAccount.swift in Sources */,
 				69A226C02B307DBF0065EDDB /* RootContainerFactory.swift in Sources */,
 				69F053472B1E056400AE0665 /* PIAColors+SwitUI.swift in Sources */,

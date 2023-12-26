@@ -7,12 +7,17 @@ struct DashboardView: View {
     
     let viewModel: DashboardViewModel
     let connectionButton: PIAConnectionButton
+    let selectedServerView: SelectedServerView
     
     var body: some View {
         VStack {
             VStack(spacing: 20) {
                 connectionButton
                 .padding()
+                
+                Divider()
+                selectedServerView
+                Divider()
                 
                 Button {
                     viewModel.logOut()
@@ -36,6 +41,7 @@ struct DashboardView: View {
 #Preview {
     DashboardView(
         viewModel: DashboardFactory.makeDashboardViewModel(),
-        connectionButton: DashboardFactory.makePIAConnectionButton()
+        connectionButton: DashboardFactory.makePIAConnectionButton(),
+        selectedServerView: DashboardFactory.makeSelectedServerView()
     )
 }

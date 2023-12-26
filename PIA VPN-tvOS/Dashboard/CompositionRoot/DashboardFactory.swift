@@ -7,7 +7,8 @@ class DashboardFactory {
     static func makeDashboardView() -> DashboardView {
         return DashboardView(
             viewModel: makeDashboardViewModel(), 
-            connectionButton: makePIAConnectionButton()
+            connectionButton: makePIAConnectionButton(),
+            selectedServerView: makeSelectedServerView()
         )
     }
     
@@ -37,6 +38,18 @@ extension DashboardFactory {
     
     private static func makeVpnConnectionUseCase() -> VpnConnectionUseCaseType {
         return VpnConnectionUseCase()
+    }
+    
+    private static func makeSelectedServerUserCase() -> SelectedServerUseCaseType {
+        return SelectedServerUseCase()
+    }
+    
+    private static func makeSelectedServerViewModel() -> SelectedServerViewModel {
+        return SelectedServerViewModel(useCase: makeSelectedServerUserCase())
+    }
+    
+    internal static func makeSelectedServerView() -> SelectedServerView {
+        SelectedServerView(viewModel: makeSelectedServerViewModel())
     }
     
 }

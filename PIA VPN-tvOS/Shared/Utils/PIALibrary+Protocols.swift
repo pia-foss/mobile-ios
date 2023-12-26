@@ -9,3 +9,13 @@ protocol AccountProviderType {
 }
 
 extension DefaultAccountProvider: AccountProviderType { }
+
+protocol ServerType {
+    var name: String { get }
+    var identifier: String { get }
+    var regionIdentifier: String { get }
+    var country: String { get }
+    var geo: Bool { get }
+}
+
+extension Server: ServerType {}
