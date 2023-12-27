@@ -19,3 +19,14 @@ protocol ServerType {
 }
 
 extension Server: ServerType {}
+
+protocol ServerProviderType {
+    var historicalServers: [Server] { get }
+    var targetServer: Server { get }
+    var currentServers: [Server] { get }
+    
+    // Add methods from ServerProvider to this protocol as needed
+}
+
+extension DefaultServerProvider: ServerProviderType {
+}

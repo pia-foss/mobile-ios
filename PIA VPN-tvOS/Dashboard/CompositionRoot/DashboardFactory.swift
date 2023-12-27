@@ -5,11 +5,7 @@ import PIALibrary
 class DashboardFactory {
     
     static func makeDashboardView() -> DashboardView {
-        return DashboardView(
-            viewModel: makeDashboardViewModel(), 
-            connectionButton: makePIAConnectionButton(),
-            selectedServerView: makeSelectedServerView()
-        )
+        return DashboardView(viewModel: makeDashboardViewModel())
     }
     
     static func makeDashboardViewModel() -> DashboardViewModel {
@@ -37,11 +33,11 @@ extension DashboardFactory {
     }
     
     private static func makeVpnConnectionUseCase() -> VpnConnectionUseCaseType {
-        return VpnConnectionUseCase()
+        return VpnConnectionUseCase(serverProvider: makeServerProvider())
     }
     
     private static func makeSelectedServerUserCase() -> SelectedServerUseCaseType {
-        return SelectedServerUseCase()
+        return SelectedServerUseCase(serverProvider: makeServerProvider())
     }
     
     private static func makeSelectedServerViewModel() -> SelectedServerViewModel {
@@ -50,6 +46,39 @@ extension DashboardFactory {
     
     internal static func makeSelectedServerView() -> SelectedServerView {
         SelectedServerView(viewModel: makeSelectedServerViewModel())
+    }
+    
+}
+
+
+// MARK: QuickConnect section
+
+extension DashboardFactory {
+    
+    static func makeServerProvider() -> ServerProviderType {
+        guard let defaultServerProvider: DefaultServerProvider =
+                Client.providers.serverProvider as? DefaultServerProvider else {
+            fatalError("Incorrect server provider type")
+        }
+        
+        return defaultServerProvider
+        
+    }
+    
+    static internal func makeQuickConnectButtonViewModel(for server: ServerType, delegate: QuickConnectButtonViewModelDelegate?) -> QuickConnectButtonViewModel {
+        QuickConnectButtonViewModel(server: server, delegate: delegate)
+    }
+    
+    static func makeQuickConnectButton(for server: ServerType, delegate: QuickConnectButtonViewModelDelegate?) -> QuickConnectButton {
+        QuickConnectButton(viewModel: makeQuickConnectButtonViewModel(for: server, delegate: delegate))
+    }
+    
+    static internal func makeQuickConnectViewModel() -> QuickConnectViewModel {
+        QuickConnectViewModel(connectUseCase: makeVpnConnectionUseCase(), selectedServerUseCase: makeSelectedServerUserCase())
+    }
+    
+    static func makeQuickConnectView() -> QuickConnectView {
+        QuickConnectView(viewModel: makeQuickConnectViewModel())
     }
     
 }

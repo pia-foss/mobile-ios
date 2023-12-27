@@ -61,7 +61,7 @@ extension PIAConnectionButtonViewModel {
         vpnConnectionUseCase.connect()
         
         // TODO: Take the state from the real VpnManager state monitor
-        DispatchQueue.main.asyncAfter(deadline: .now()+1.2) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.2) { [weak self] in
             self?.state = .connected
         }
     }
@@ -73,7 +73,7 @@ extension PIAConnectionButtonViewModel {
         vpnConnectionUseCase.disconnect()
         
         // TODO: Take the state from the real VpnManager state monitor
-        DispatchQueue.main.asyncAfter(deadline: .now()+1.2) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.2) { [weak self] in
             self?.state = .disconnected
         }
     }
