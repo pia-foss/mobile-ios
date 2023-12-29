@@ -22,8 +22,10 @@
 
 import Foundation
 import PIALibrary
+#if canImport(TunnelKitCore)
 import TunnelKitCore
 import TunnelKitOpenVPN
+#endif
 import SwiftyBeaver
 import Intents
 import UIKit
@@ -141,7 +143,7 @@ class AppPreferences {
             defaults.set(newValue, forKey: Entries.didAskToEnableNotifications)
         }
     }
-    
+#if os(iOS)
     var currentThemeCode: ThemeCode {
         get {
             let rawCode = defaults.integer(forKey: Entries.themeCode)
@@ -151,7 +153,7 @@ class AppPreferences {
             defaults.set(newValue.rawValue, forKey: Entries.themeCode)
         }
     }
-    
+#endif
     var lastVPNConnectionStatus: PIALibrary.VPNStatus {
         get {
             guard let rawValue = defaults.string(forKey: Entries.lastVPNConnectionStatus) else {
@@ -163,7 +165,7 @@ class AppPreferences {
             defaults.set(newValue.rawValue, forKey: Entries.lastVPNConnectionStatus)
         }
     }
-    
+#if os(iOS)
     // nil = automatic
     var piaSocketType: SocketType? {
         get {
@@ -180,7 +182,7 @@ class AppPreferences {
             }
         }
     }
-    
+
     var piaHandshake: OpenVPN.Configuration.Handshake {
         get {
             guard let rawValue = defaults.string(forKey: Entries.piaHandshake) else {
@@ -193,7 +195,7 @@ class AppPreferences {
             defaults.set(newValue.rawValue, forKey: Entries.piaHandshake)
         }
     }
-    
+#endif
     var favoriteServerIdentifiersGen4: [String] {
         get {
             let keychain = PIALibrary.Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
@@ -343,7 +345,7 @@ class AppPreferences {
             }
         }
     }
-    
+#if os(iOS)
     @available(iOS 12.0, *)
     var connectShortcut: INVoiceShortcut? {
         get {
@@ -376,7 +378,7 @@ class AppPreferences {
                 defaults.set(encodedObject, forKey: Entries.disconnectShortcut)
             }
         }    }
-
+#endif
     var quickSettingThemeVisible: Bool{
         get {
             return defaults.bool(forKey: Entries.quickSettingThemeVisible)
@@ -664,7 +666,7 @@ class AppPreferences {
             try? keychain.set(favorites: favorites)
         }
     }
-    
+    #if os(iOS)
     func migrateOVPN() {
 
         guard let currentOpenVPNConfiguration = Client.preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration ??
@@ -704,6 +706,7 @@ class AppPreferences {
         }
         
     }
+    #endif
     
     func migrateNMT() {
         
@@ -829,6 +832,7 @@ class AppPreferences {
     }
 
     func reset() {
+        #if os(iOS)
         piaHandshake = .rsa4096
         piaSocketType = nil
         favoriteServerIdentifiersGen4 = []
@@ -842,6 +846,7 @@ class AppPreferences {
             transitionTheme(to: .light)
             return
         }
+        #endif
         quickSettingThemeVisible = true
         quickSettingKillswitchVisible = true
         quickSettingNetworkToolVisible = true
@@ -862,13 +867,16 @@ class AppPreferences {
         showServiceMessages = false
         dedicatedTokenIPReleation = [:]
         appEnvironmentIsProduction = Client.environment == .production ? true : false
+        #if os(iOS)
         MessagesManager.shared.reset()
+        #endif
         userInteractedWithSurvey = false
         successConnectionsUntilSurvey = nil
         Client.preferences.lastKnownException = nil
     }
     
     func clean() {
+        #if os(iOS)
         piaHandshake = .rsa4096
         piaSocketType = nil
         favoriteServerIdentifiersGen4 = []
@@ -882,6 +890,7 @@ class AppPreferences {
         todayWidgetVpnPort = "500"
         todayWidgetVpnSocket = "UDP"
         todayWidgetTrustedNetwork = false
+        #endif
         quickSettingThemeVisible = true
         quickSettingKillswitchVisible = true
         quickSettingNetworkToolVisible = true
@@ -900,7 +909,9 @@ class AppPreferences {
         showServiceMessages = false
         dismissedMessages = []
         dedicatedTokenIPReleation = [:]
+        #if os(iOS)
         MessagesManager.shared.reset()
+        #endif
         appEnvironmentIsProduction = Client.environment == .production ? true : false
         userInteractedWithSurvey = false
         successConnectionsUntilSurvey = nil
@@ -908,7 +919,7 @@ class AppPreferences {
     }
     
 //    + (void)eraseForTesting;
-
+#if os(iOS)
     func transitionTheme(to code: ThemeCode, withDuration duration: Double = AppConfiguration.Animations.duration) {
         guard !isTransitioningTheme else {
             return
@@ -947,6 +958,7 @@ class AppPreferences {
             }
         }
     }
+#endif
     
     // MARK: Connections
     func incrementSuccessConnections() {

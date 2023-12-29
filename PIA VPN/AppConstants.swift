@@ -144,7 +144,7 @@ struct AppConstants {
             return servers
         }()
     }
-    
+#if os(iOS)
     struct Fonts {
         static let typeface: Theme.Typeface = {
             let typeface = Theme.Typeface()
@@ -153,6 +153,7 @@ struct AppConstants {
             return typeface
         }()
     }
+#endif
     
     struct VPNWidget {
         static let vpnStatus = "vpn.status"

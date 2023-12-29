@@ -22,8 +22,10 @@
 
 import Foundation
 import PIALibrary
+#if canImport(TunnelKitCore)
 import TunnelKitCore
 import TunnelKitOpenVPN
+#endif
 import UIKit
 
 struct AppConfiguration {
@@ -66,7 +68,8 @@ struct AppConfiguration {
         }
         
         static let profileName = "Private Internet Access"
-
+        
+#if os(iOS)
         static let piaDefaultConfigurationBuilder: OpenVPNProvider.ConfigurationBuilder = {
             var sessionBuilder = OpenVPN.ConfigurationBuilder()
             sessionBuilder.renegotiatesAfter = piaRenegotiationInterval
@@ -88,11 +91,13 @@ struct AppConfiguration {
             return builder
         }()
         
+        
         static let piaAutomaticProtocols: [EndpointProtocol] = [
 //            let vpnPorts = Client.providers.serverProvider.currentServersConfiguration.vpnPorts
             EndpointProtocol(.udp, 8080),
             EndpointProtocol(.tcp, 443)
         ]
+#endif
 
         private static let piaCustomRenegotiation: Renegotiation = .qa
         

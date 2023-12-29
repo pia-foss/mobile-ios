@@ -1,5 +1,6 @@
 
 import Foundation
+import PIALibrary
 
 protocol VpnConnectionUseCaseType {
     func connect()
@@ -16,11 +17,20 @@ class VpnConnectionUseCase: VpnConnectionUseCaseType {
     }
     
     func connect() {
-        // TODO: Implement
+        // TODO: Inject VPNProvider object
+        let vpnProvider = Client.providers.vpnProvider
+        vpnProvider.connect { error in
+            NSLog("Connection error: \(error)")
+        }
     }
     
     func disconnect() {
-        // TODO: Implement
+        // TODO: Inject VPNProvider object
+        let vpnProvider = Client.providers.vpnProvider
+        vpnProvider.disconnect { error in
+            NSLog("Disconnect error: \(error)")
+        }
+        
     }
     
     func connect(to server: ServerType) {
