@@ -5157,7 +5157,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pia-foss/mobile-ios-library.git";
 			requirement = {
-				branch = "PIA-886_dashboard_selected_region_section";
+				branch = master;
 				kind = branch;
 			};
 		};
