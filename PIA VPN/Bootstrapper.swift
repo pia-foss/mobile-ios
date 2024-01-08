@@ -22,10 +22,13 @@
 
 import Foundation
 import PIALibrary
+#if canImport(TunnelKitCore)
 import TunnelKitCore
 import TunnelKitOpenVPN
-import SwiftyBeaver
 import PIAWireguard
+#endif
+import SwiftyBeaver
+
 
 class Bootstrapper {
     
@@ -87,7 +90,7 @@ class Bootstrapper {
         AppPreferences.shared.migrateNMT()
 
         // PIALibrary
-        
+        #if os(iOS)
         guard let bundledRegionsURL = AppConstants.RegionsGEN4.bundleURL else {
             fatalError("Could not find bundled regions file")
         }
@@ -97,6 +100,7 @@ class Bootstrapper {
         } catch let e {
             fatalError("Could not parse bundled regions file: \(e)")
         }
+        #endif
 
         Client.configuration.rsa4096Certificate = rsa4096Certificate()
 
@@ -127,20 +131,25 @@ class Bootstrapper {
         Client.configuration.enablesConnectivityUpdates = true
         Client.configuration.enablesServerUpdates = true
         Client.configuration.enablesServerPings = true
+        #if os(iOS)
         Client.configuration.bundledServersJSON = bundledServersJSON
+        #endif
         Client.configuration.webTimeout = AppConfiguration.ClientConfiguration.webTimeout
         Client.configuration.vpnProfileName = AppConfiguration.VPN.profileName
+    #if os(iOS)
         Client.configuration.addVPNProfile(PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier))
         Client.configuration.addVPNProfile(PIAWGTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier))
-
+    #endif
         let defaults = Client.preferences.defaults
         defaults.isPersistentConnection = true
         defaults.mace = false
         defaults.vpnType = IKEv2Profile.vpnType
+    #if os(iOS)
         defaults.vpnCustomConfigurations = [
             PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build(),
             PIAWGTunnelProfile.vpnType: PIAWireguardConfiguration(customDNSServers: [], packetSize: AppConstants.WireGuardPacketSize.defaultPacketSize)
         ]
+    #endif
         
         if Client.preferences.shareServiceQualityData {
             ServiceQualityManager.shared.start()
@@ -162,6 +171,7 @@ class Bootstrapper {
         })
 
         //FORCE THE MIGRATION TO GEN4
+    #if os(iOS)
         if Client.providers.vpnProvider.needsMigrationToGEN4() {
 
             Client.preferences.displayedServer = Server.automatic
@@ -171,7 +181,7 @@ class Bootstrapper {
             Client.providers.vpnProvider.reconnect(after: 200, forceDisconnect: true, { _ in
             })
         }
-        
+    #endif
         Client.providers.accountProvider.subscriptionInformation { [weak self] (info, error) in
             
             if let _ = error {
@@ -217,25 +227,28 @@ class Bootstrapper {
         }
         
         pref.commit()
-        
+        #if os(iOS)
         AppPreferences.shared.migrateOVPN()
-
+        
         // Business objects
         
         AccountObserver.shared.start()
         //        DataCounter.shared.startCounting()
-                
+        #endif
         // Notifications
         
         let nc = NotificationCenter.default
+        #if os(iOS)
         nc.addObserver(self, selector: #selector(reloadTheme), name: .PIAThemeDidChange, object: nil)
+        #endif
         nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
         nc.addObserver(self, selector: #selector(internetUnreachable(notification:)), name: .ConnectivityDaemonDidGetUnreachable, object: nil)
         nc.addObserver(self, selector: #selector(internetReachable(notification:)), name: .ConnectivityDaemonDidGetReachable, object: nil)
         
         // PIALibrary (Theme)
-        
+        #if os(iOS)
         AppPreferences.shared.currentThemeCode.apply(theme: Theme.current, reload: true)
+        #endif
         
         // show walkthrough on upgrade except for logged in users
         if Client.providers.accountProvider.isLoggedIn {
@@ -267,36 +280,49 @@ class Bootstrapper {
     // MARK: Certificate
 
     func rsa4096Certificate() -> String? {
+        #if os(iOS)
         return AppPreferences.shared.piaHandshake.pemString()
+        #else
+        // FIXME: Implement for tvOS
+        return nil
+        #endif
     }
     
     // MARK: Notifications
-
+#if os(iOS)
     @objc private func reloadTheme() {
         Theme.current.applySideMenu()
         Theme.current.applyAppearance()
     }
-    
+#endif
     @objc private func vpnStatusDidChange(notification: Notification) {
         let vpnStatus = Client.providers.vpnProvider.vpnStatus
         switch vpnStatus {
         case .connected:
             AppPreferences.shared.incrementSuccessConnections()
+        #if os(iOS)
             UserSurveyManager.shared.handleConnectionSuccess()
+        #endif
         case .disconnected:
             AppPreferences.shared.incrementSuccessDisconnections()
         default:
             break
         }
+        #if os(iOS)
         RatingManager.shared.handleConnectionStatusChanged()
+        #endif
     }
     
     @objc private func internetReachable(notification: Notification) {
+        #if os(iOS)
         Macros.removeStickyNote()
+        #endif
     }
     
     @objc private func internetUnreachable(notification: Notification) {
+        #if os(iOS)
         Macros.displayStickyNote(withMessage: L10n.Localizable.Global.unreachable,
                                  andImage: Asset.Images.iconWarning.image)
+        #endif
     }
 }

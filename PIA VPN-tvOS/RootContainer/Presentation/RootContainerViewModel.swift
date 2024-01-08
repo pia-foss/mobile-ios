@@ -1,6 +1,7 @@
 
 import Foundation
 import SwiftUI
+import PIALibrary
 
 class RootContainerViewModel: ObservableObject {
     enum State {
@@ -11,9 +12,10 @@ class RootContainerViewModel: ObservableObject {
     }
     
     @Published var state: State = .splash
+    @Published private var isBootstrapped: Bool = false
     
     // TODO: Update this value from the Vpn OnBoarding installation profile screen
-    @AppStorage(.kOnboardingVpnProfileInstalled) var onBoardingVpnProfileInstalled = true
+    @AppStorage(.kOnboardingVpnProfileInstalled) var onBoardingVpnProfileInstalled = false
     
     let accountProvider: AccountProviderType
     let notificationCenter: NotificationCenterType
@@ -30,7 +32,17 @@ class RootContainerViewModel: ObservableObject {
         notificationCenter.removeObserver(self)
     }
     
+    func phaseDidBecomeActive() {
+        // Bootstrap PIALibrary preferences and settings
+        Bootstrapper.shared.bootstrap()
+        isBootstrapped = true
+        updateState()
+    }
+    
     private func updateState() {
+        guard isBootstrapped else {
+            return
+        }
         switch (accountProvider.isLoggedIn, onBoardingVpnProfileInstalled) {
             // logged in, vpn profile installed
         case (true, true):
@@ -43,7 +55,12 @@ class RootContainerViewModel: ObservableObject {
             state = .notActivated
         }
     }
-    
+
+}
+
+// NotificationCenter subscriptions
+
+extension RootContainerViewModel {
     private func subscribeToAccountUpdates() {
         notificationCenter.addObserver(self, selector: #selector(handleAccountDidLogin), name: .PIAAccountDidLogin, object: nil)
         
@@ -57,6 +74,19 @@ class RootContainerViewModel: ObservableObject {
     @objc func handleAccountDidLogout() {
         updateState()
     }
-    
-    
+}
+
+extension RootContainerViewModel {
+    // FIXME: this method should be in the VpnProfile installation VM object
+    // Implemented in PIA-888
+    func installVpnProfile() {
+        let vpnProvider = Client.providers.vpnProvider
+        vpnProvider.install(force: true) { error in
+            NSLog("Install VPN profile error: \(String(describing: error))")
+            if error == nil {
+                self.onBoardingVpnProfileInstalled = true
+            }
+        }
+        
+    }
 }
