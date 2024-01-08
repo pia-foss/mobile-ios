@@ -587,6 +587,22 @@
 		E5AB288E2B2A489500744E5F /* LoginStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB288D2B2A489500744E5F /* LoginStatus.swift */; };
 		E5AB28972B2C782C00744E5F /* Stubs+PIALibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28962B2C782C00744E5F /* Stubs+PIALibrary.swift */; };
 		E5AB28992B2C783600744E5F /* LoginProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28982B2C783600744E5F /* LoginProviderTests.swift */; };
+		E5AB28A02B30C68A00744E5F /* VPNConfigurationInstallingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB289F2B30C68A00744E5F /* VPNConfigurationInstallingViewModel.swift */; };
+		E5AB28A52B3224C300744E5F /* InstallVPNConfigurationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28A42B3224C300744E5F /* InstallVPNConfigurationUseCase.swift */; };
+		E5AB28A82B32317900744E5F /* InstallVpnConfigurationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28A72B32317900744E5F /* InstallVpnConfigurationProvider.swift */; };
+		E5AB28AD2B32339C00744E5F /* VPNConfigurationInstallingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28AC2B32339C00744E5F /* VPNConfigurationInstallingView.swift */; };
+		E5AB28B42B35AA8C00744E5F /* VPNConfigurationInstallingFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28B32B35AA8C00744E5F /* VPNConfigurationInstallingFactory.swift */; };
+		E5AB28B62B361E6C00744E5F /* VPNConfigurationInstallingErrorMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28B52B361E6C00744E5F /* VPNConfigurationInstallingErrorMapper.swift */; };
+		E5AB28B92B361E9200744E5F /* InstallVPNConfigurationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28B82B361E9200744E5F /* InstallVPNConfigurationError.swift */; };
+		E5AB28BB2B48815300744E5F /* VPNConfigurationInstallingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28BA2B48815300744E5F /* VPNConfigurationInstallingStatus.swift */; };
+		E5AB28C22B4898D300744E5F /* VpnConfigurationProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28C12B4898D300744E5F /* VpnConfigurationProviderType.swift */; };
+		E5AB28C92B48AF9000744E5F /* VPNConfigurationAvailabilityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28C82B48AF9000744E5F /* VPNConfigurationAvailabilityType.swift */; };
+		E5AB28CB2B48AFA900744E5F /* VPNConfigurationAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28CA2B48AFA900744E5F /* VPNConfigurationAvailability.swift */; };
+		E5AB28D02B4B39F000744E5F /* InstallVpnConfigurationProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28CE2B4B39F000744E5F /* InstallVpnConfigurationProviderTests.swift */; };
+		E5AB28D12B4B39F000744E5F /* VPNConfigurationInstallingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28CF2B4B39F000744E5F /* VPNConfigurationInstallingViewModelTests.swift */; };
+		E5AB28E02B4C107F00744E5F /* VPNConfigurationAvailabilityMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28DD2B4C107F00744E5F /* VPNConfigurationAvailabilityMock.swift */; };
+		E5AB28E12B4C107F00744E5F /* VpnConfigurationProviderTypeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28DE2B4C107F00744E5F /* VpnConfigurationProviderTypeMock.swift */; };
+		E5AB28E22B4C107F00744E5F /* InstallVPNConfigurationUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28DF2B4C107F00744E5F /* InstallVPNConfigurationUseCaseMock.swift */; };
 		E5C507682B0D609300200A6A /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = E5C507672B0D609300200A6A /* PIALibrary */; };
 		E5C5076A2B0D60A500200A6A /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = E5C507692B0D60A500200A6A /* PIALibrary */; };
 		E5C5076C2B0D60AD00200A6A /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = E5C5076B2B0D60AD00200A6A /* PIALibrary */; };
@@ -1220,6 +1236,22 @@
 		E5AB288D2B2A489500744E5F /* LoginStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStatus.swift; sourceTree = "<group>"; };
 		E5AB28962B2C782C00744E5F /* Stubs+PIALibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stubs+PIALibrary.swift"; sourceTree = "<group>"; };
 		E5AB28982B2C783600744E5F /* LoginProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginProviderTests.swift; sourceTree = "<group>"; };
+		E5AB289F2B30C68A00744E5F /* VPNConfigurationInstallingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNConfigurationInstallingViewModel.swift; sourceTree = "<group>"; };
+		E5AB28A42B3224C300744E5F /* InstallVPNConfigurationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallVPNConfigurationUseCase.swift; sourceTree = "<group>"; };
+		E5AB28A72B32317900744E5F /* InstallVpnConfigurationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallVpnConfigurationProvider.swift; sourceTree = "<group>"; };
+		E5AB28AC2B32339C00744E5F /* VPNConfigurationInstallingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPNConfigurationInstallingView.swift; sourceTree = "<group>"; };
+		E5AB28B32B35AA8C00744E5F /* VPNConfigurationInstallingFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNConfigurationInstallingFactory.swift; sourceTree = "<group>"; };
+		E5AB28B52B361E6C00744E5F /* VPNConfigurationInstallingErrorMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNConfigurationInstallingErrorMapper.swift; sourceTree = "<group>"; };
+		E5AB28B82B361E9200744E5F /* InstallVPNConfigurationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallVPNConfigurationError.swift; sourceTree = "<group>"; };
+		E5AB28BA2B48815300744E5F /* VPNConfigurationInstallingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNConfigurationInstallingStatus.swift; sourceTree = "<group>"; };
+		E5AB28C12B4898D300744E5F /* VpnConfigurationProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VpnConfigurationProviderType.swift; sourceTree = "<group>"; };
+		E5AB28C82B48AF9000744E5F /* VPNConfigurationAvailabilityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNConfigurationAvailabilityType.swift; sourceTree = "<group>"; };
+		E5AB28CA2B48AFA900744E5F /* VPNConfigurationAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNConfigurationAvailability.swift; sourceTree = "<group>"; };
+		E5AB28CE2B4B39F000744E5F /* InstallVpnConfigurationProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstallVpnConfigurationProviderTests.swift; sourceTree = "<group>"; };
+		E5AB28CF2B4B39F000744E5F /* VPNConfigurationInstallingViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPNConfigurationInstallingViewModelTests.swift; sourceTree = "<group>"; };
+		E5AB28DD2B4C107F00744E5F /* VPNConfigurationAvailabilityMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPNConfigurationAvailabilityMock.swift; sourceTree = "<group>"; };
+		E5AB28DE2B4C107F00744E5F /* VpnConfigurationProviderTypeMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VpnConfigurationProviderTypeMock.swift; sourceTree = "<group>"; };
+		E5AB28DF2B4C107F00744E5F /* InstallVPNConfigurationUseCaseMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstallVPNConfigurationUseCaseMock.swift; sourceTree = "<group>"; };
 		E5C507772B0E144D00200A6A /* PIA VPN-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PIA VPN-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C507792B0E144E00200A6A /* PIA_VPN_tvOSApp.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIA_VPN_tvOSApp.swift; sourceTree = "<group>"; tabWidth = 4; };
 		E5C5077B2B0E144E00200A6A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -2334,12 +2366,107 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		E5AB289A2B30AC8700744E5F /* VPNConfigurationInstalling */ = {
+			isa = PBXGroup;
+			children = (
+				E5AB28B22B35AA6500744E5F /* CompositionRoot */,
+				E5AB28A62B32316E00744E5F /* Data */,
+				E5AB28A32B3224A000744E5F /* Domain */,
+				E5AB28A22B32249A00744E5F /* UI */,
+				E5AB28A12B32249100744E5F /* Presentation */,
+			);
+			path = VPNConfigurationInstalling;
+			sourceTree = "<group>";
+		};
+		E5AB28A12B32249100744E5F /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				E5AB289F2B30C68A00744E5F /* VPNConfigurationInstallingViewModel.swift */,
+				E5AB28B52B361E6C00744E5F /* VPNConfigurationInstallingErrorMapper.swift */,
+				E5AB28BA2B48815300744E5F /* VPNConfigurationInstallingStatus.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		E5AB28A22B32249A00744E5F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				E5AB28AC2B32339C00744E5F /* VPNConfigurationInstallingView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		E5AB28A32B3224A000744E5F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				E5AB28B72B361E8A00744E5F /* Entities */,
+				E5AB28A92B32318C00744E5F /* Interfaces */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		E5AB28A62B32316E00744E5F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E5AB28A72B32317900744E5F /* InstallVpnConfigurationProvider.swift */,
+				E5AB28C12B4898D300744E5F /* VpnConfigurationProviderType.swift */,
+				E5AB28CA2B48AFA900744E5F /* VPNConfigurationAvailability.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E5AB28A92B32318C00744E5F /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				E5AB28A42B3224C300744E5F /* InstallVPNConfigurationUseCase.swift */,
+				E5AB28C82B48AF9000744E5F /* VPNConfigurationAvailabilityType.swift */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		E5AB28AF2B34E06000744E5F /* VPNConfigurationInstalling */ = {
+			isa = PBXGroup;
+			children = (
+				E5AB28CE2B4B39F000744E5F /* InstallVpnConfigurationProviderTests.swift */,
+				E5AB28CF2B4B39F000744E5F /* VPNConfigurationInstallingViewModelTests.swift */,
+				E5AB28DC2B4C107F00744E5F /* Mocks */,
+			);
+			path = VPNConfigurationInstalling;
+			sourceTree = "<group>";
+		};
+		E5AB28B22B35AA6500744E5F /* CompositionRoot */ = {
+			isa = PBXGroup;
+			children = (
+				E5AB28B32B35AA8C00744E5F /* VPNConfigurationInstallingFactory.swift */,
+			);
+			path = CompositionRoot;
+			sourceTree = "<group>";
+		};
+		E5AB28B72B361E8A00744E5F /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				E5AB28B82B361E9200744E5F /* InstallVPNConfigurationError.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		E5AB28DC2B4C107F00744E5F /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				E5AB28DD2B4C107F00744E5F /* VPNConfigurationAvailabilityMock.swift */,
+				E5AB28DE2B4C107F00744E5F /* VpnConfigurationProviderTypeMock.swift */,
+				E5AB28DF2B4C107F00744E5F /* InstallVPNConfigurationUseCaseMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		E5C507782B0E144E00200A6A /* PIA VPN-tvOS */ = {
 			isa = PBXGroup;
 			children = (
 				693CA5AF2B3ED9E100D38378 /* PIA VPN-tvOS.entitlements */,
 				69A226B92B307C8A0065EDDB /* RootContainer */,
 				69A226AF2B3074110065EDDB /* Navigation */,
+				E5AB289A2B30AC8700744E5F /* VPNConfigurationInstalling */,
 				E5C507A32B153A1800200A6A /* Login */,
 				69F053442B1E054900AE0665 /* Shared */,
 				694AC74B2B17AB73007E7B56 /* Dashboard */,
@@ -2362,6 +2489,7 @@
 		E5C507892B0E145100200A6A /* PIA VPN-tvOSTests */ = {
 			isa = PBXGroup;
 			children = (
+				E5AB28AF2B34E06000744E5F /* VPNConfigurationInstalling */,
 				696E8F132B31AF110080BB31 /* Common */,
 				696E8F0E2B31AC3C0080BB31 /* RootContainer */,
 				698C3B462B2B33260012D527 /* Dashboard */,
@@ -3620,6 +3748,8 @@
 				69FF0B082B3AD3E60074AA04 /* SelectedServerViewModel.swift in Sources */,
 				69FF0B0B2B3AD4C70074AA04 /* SwiftGen+Strings.swift in Sources */,
 				69FF0B062B3AD2860074AA04 /* QuickConnectView.swift in Sources */,
+				E5AB28B42B35AA8C00744E5F /* VPNConfigurationInstallingFactory.swift in Sources */,
+				E5AB28A52B3224C300744E5F /* InstallVPNConfigurationUseCase.swift in Sources */,
 				E5AB288C2B2A487A00744E5F /* LoginViewModelErrorHandler.swift in Sources */,
 				E5AB28732B279B7000744E5F /* LoginProvider.swift in Sources */,
 				E5C507A52B153A2F00200A6A /* LoginViewModel.swift in Sources */,
@@ -3643,10 +3773,15 @@
 				E5AB28792B28B4B300744E5F /* AccountInfo.swift in Sources */,
 				E5C507B12B17E48900200A6A /* LoginWithCredentialsUseCase.swift in Sources */,
 				E5C507B92B17E7A400200A6A /* ValidateCredentialsFormat.swift in Sources */,
+				E5AB28C92B48AF9000744E5F /* VPNConfigurationAvailabilityType.swift in Sources */,
 				69F1C2992B2B28DA00E924AE /* PIAConnectionButton.swift in Sources */,
+				E5AB28C22B4898D300744E5F /* VpnConfigurationProviderType.swift in Sources */,
+				E5AB28A82B32317900744E5F /* InstallVpnConfigurationProvider.swift in Sources */,
 				E5C507AE2B17E45800200A6A /* LoginPresentableErrorMapper.swift in Sources */,
 				69FF0B0D2B3AD57C0074AA04 /* SelectedServerUseCase.swift in Sources */,
 				69FF0B112B3AF1F00074AA04 /* QuickConnectButton.swift in Sources */,
+				E5AB28AD2B32339C00744E5F /* VPNConfigurationInstallingView.swift in Sources */,
+				E5AB28CB2B48AFA900744E5F /* VPNConfigurationAvailability.swift in Sources */,
 				E5AB28712B279B4000744E5F /* LoginProviderType.swift in Sources */,
 				693CA5B02B3EDB4900D38378 /* RegionFilter.swift in Sources */,
 				E5AB287B2B28B4C400744E5F /* Credentials.swift in Sources */,
@@ -3655,18 +3790,22 @@
 				693CA5AA2B3ED5F600D38378 /* Bootstrapper.swift in Sources */,
 				694AC74E2B17AB9C007E7B56 /* DashboardView.swift in Sources */,
 				69F1C2932B2B10D400E924AE /* DashboardFactory.swift in Sources */,
+				E5AB28B62B361E6C00744E5F /* VPNConfigurationInstallingErrorMapper.swift in Sources */,
 				E5C5077A2B0E144E00200A6A /* PIA_VPN_tvOSApp.swift in Sources */,
 				69F1C2952B2B216100E924AE /* PIA+Animation.swift in Sources */,
 				69A226B52B3075AB0065EDDB /* RootContainerViewModel.swift in Sources */,
 				E5C507C72B1FABFF00200A6A /* LoginDomainErrorMapperType.swift in Sources */,
+				E5AB28A02B30C68A00744E5F /* VPNConfigurationInstallingViewModel.swift in Sources */,
 				69F1C2972B2B239000E924AE /* PIAConnectionButtonViewModel.swift in Sources */,
 				693CA5B12B3EDBEF00D38378 /* ThemeCode.swift in Sources */,
 				E5C507B32B17E5AD00200A6A /* LoginError.swift in Sources */,
+				E5AB28BB2B48815300744E5F /* VPNConfigurationInstallingStatus.swift in Sources */,
 				E5C507CA2B1FAC3600200A6A /* LoginDomainErrorMapper.swift in Sources */,
 				693CA5AC2B3ED69B00D38378 /* AppConstants.swift in Sources */,
 				69FF0B0F2B3AE8F60074AA04 /* PIAImages+SwiftUI.swift in Sources */,
 				E5AB28772B28B49A00744E5F /* UserAccount.swift in Sources */,
 				69A226C02B307DBF0065EDDB /* RootContainerFactory.swift in Sources */,
+				E5AB28B92B361E9200744E5F /* InstallVPNConfigurationError.swift in Sources */,
 				69F053472B1E056400AE0665 /* PIAColors+SwitUI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3675,6 +3814,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5AB28E22B4C107F00744E5F /* InstallVPNConfigurationUseCaseMock.swift in Sources */,
+				E5AB28D02B4B39F000744E5F /* InstallVpnConfigurationProviderTests.swift in Sources */,
 				698C3B492B2B33650012D527 /* VpnConnectionUseCaseMock.swift in Sources */,
 				E5C507CC2B1FACE000200A6A /* LoginWithCredentialsUseCaseTests.swift in Sources */,
 				696E8F0D2B31A8760080BB31 /* NotificationCenterMock.swift in Sources */,
@@ -3683,10 +3824,12 @@
 				E5AB28872B2911C900744E5F /* AccountProviderMock.swift in Sources */,
 				696E8F102B31AC690080BB31 /* RootContainerViewModelTests.swift in Sources */,
 				698C3B4E2B2B3CBE0012D527 /* LoginIntegrationTests.swift in Sources */,
+				E5AB28D12B4B39F000744E5F /* VPNConfigurationInstallingViewModelTests.swift in Sources */,
 				E5C5078B2B0E145100200A6A /* PIA_VPN_tvOSTests.swift in Sources */,
 				690FC4802B3C59AF00F6DCC8 /* QuickConnectButtonViewModelTests.swift in Sources */,
 				698C3B4B2B2B34760012D527 /* PIAConnectionButtonViewModelTests.swift in Sources */,
 				690FC4862B3C5F7300F6DCC8 /* SelectedServerUseCaseMock.swift in Sources */,
+				E5AB28E02B4C107F00744E5F /* VPNConfigurationAvailabilityMock.swift in Sources */,
 				690FC4822B3C5A4300F6DCC8 /* ServerMock.swift in Sources */,
 				690FC4842B3C5B0500F6DCC8 /* QuickConnectButtonViewModelDelegateMock.swift in Sources */,
 				E5AB287F2B28F6EF00744E5F /* Stubs.swift in Sources */,
@@ -3694,6 +3837,7 @@
 				690FC4882B3C60F500F6DCC8 /* QuickConnectViewModelTests.swift in Sources */,
 				E5AB28992B2C783600744E5F /* LoginProviderTests.swift in Sources */,
 				E5C507C22B1F702700200A6A /* LoginWithCredentialsUseCaseMock.swift in Sources */,
+				E5AB28E12B4C107F00744E5F /* VpnConfigurationProviderTypeMock.swift in Sources */,
 				E5C507C42B1F72E700200A6A /* CheckLoginAvailabilityTests.swift in Sources */,
 				E5C507C02B1F700C00200A6A /* CheckLoginAvailabilityMock.swift in Sources */,
 				691317A12B32ED76009B4E85 /* AccountProviderTypeMock.swift in Sources */,

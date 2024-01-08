@@ -16,22 +16,10 @@ struct RootContainerView: View {
             case .notActivated:
                 LoginFactory.makeLoginView()
             case .activatedNotOnboarded:
-                // TODO: Replace this view with the Onboarding Vpn Profile installation view
-                VStack {
-                    Text("Show Onboarding vpn installation view")
-                    Button {
-                        viewModel.installVpnProfile()
-                    } label: {
-                        Text("Install Vpn profile")
-                    }
-
-                }
+                VPNConfigurationInstallingFactory.makeVPNConfigurationInstallingView()
             case .activated:
                 DashboardFactory.makeDashboardView()
-
             }
-            
-            
         }.onChange(of: scenePhase) { newPhase in
             
             if newPhase == .active {

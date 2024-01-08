@@ -75,18 +75,3 @@ extension RootContainerViewModel {
         updateState()
     }
 }
-
-extension RootContainerViewModel {
-    // FIXME: this method should be in the VpnProfile installation VM object
-    // Implemented in PIA-888
-    func installVpnProfile() {
-        let vpnProvider = Client.providers.vpnProvider
-        vpnProvider.install(force: true) { error in
-            NSLog("Install VPN profile error: \(String(describing: error))")
-            if error == nil {
-                self.onBoardingVpnProfileInstalled = true
-            }
-        }
-        
-    }
-}
