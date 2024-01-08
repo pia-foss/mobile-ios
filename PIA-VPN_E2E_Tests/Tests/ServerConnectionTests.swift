@@ -19,19 +19,19 @@ class ServerConnectionTests : BaseTest {
                     app.navigateToLoginScreen()
                     app.logIn(with: CredentialsUtil.credentials(type: .valid))
                     app.acceptVPNPermission()
-                    expect(app.regionTileCell.staticTexts["Automatic"].exists).to(beTrue())
+                    expect(app.regionTileCell.staticTexts["Automatic"].waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
                 
                 it("should connect the user to vpn when the user taps the connect button") {
                     app.disconnectToVPN()
                     app.connectToVPN()
-                    expect(app.connectedStatusLabel.exists).to(beTrue())
+                    expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
                 
                 it("should disconnect the user from vpn when the user taps button to disconnect") {
                     app.connectToVPN()
                     app.disconnectToVPN()
-                    expect(app.disconnectedStatusLabel.exists).to(beTrue())
+                    expect(app.disconnectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
             }
             
@@ -41,7 +41,7 @@ class ServerConnectionTests : BaseTest {
                     app.navigateToRegionSelection()
                     app.searchRegion(regionName: "Philippines").firstMatch.tap()
                     expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    expect(app.regionTileCell.staticTexts["Philippines"].exists).to(beTrue())
+                    expect(app.regionTileCell.staticTexts["Philippines"].waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
             }
             
@@ -53,7 +53,7 @@ class ServerConnectionTests : BaseTest {
                     app.selectProtocol(protocolName: "IPSec (IKEv2)")
                     app.navigateToHomeFromSettings()
                     app.connectToVPN()
-                    expect(app.connectedStatusLabel.exists).to(beTrue())
+                    expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
                 
                 it("should connect the user to vpn successfully when the user disables small packet for IPSec(IKEv2)") {
@@ -63,7 +63,7 @@ class ServerConnectionTests : BaseTest {
                     app.selectProtocol(protocolName: "IPSec (IKEv2)")
                     app.navigateToHomeFromSettings()
                     app.connectToVPN()
-                    expect(app.connectedStatusLabel.exists).to(beTrue())
+                    expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
                 
                 it("should connect the user to vpn successfully when the user enables small packet for Wireguard") {
@@ -73,7 +73,7 @@ class ServerConnectionTests : BaseTest {
                     app.selectProtocol(protocolName: "WireGuard®")
                     app.navigateToHomeFromSettings()
                     app.connectToVPN()
-                    expect(app.connectedStatusLabel.exists).to(beTrue())
+                    expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
                 
                 it("should connect the user to vpn successfully when the user disables small packet for Wireguard") {
@@ -83,7 +83,7 @@ class ServerConnectionTests : BaseTest {
                     app.selectProtocol(protocolName: "WireGuard®")
                     app.navigateToHomeFromSettings()
                     app.connectToVPN()
-                    expect(app.connectedStatusLabel.exists).to(beTrue())
+                    expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
                 
                 it("should connect the user to vpn successfully when the user enables small packet for OpenVPN") {
@@ -93,7 +93,7 @@ class ServerConnectionTests : BaseTest {
                     app.selectProtocol(protocolName: "OpenVPN")
                     app.navigateToHomeFromSettings()
                     app.connectToVPN()
-                    expect(app.connectedStatusLabel.exists).to(beTrue())
+                    expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
                 
                 it("should connect the user to vpn successfully when the user disables small packet for OpenVPN") {
@@ -103,7 +103,7 @@ class ServerConnectionTests : BaseTest {
                     app.selectProtocol(protocolName: "OpenVPN")
                     app.navigateToHomeFromSettings()
                     app.connectToVPN()
-                    expect(app.connectedStatusLabel.exists).to(beTrue())
+                    expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
             }
         }

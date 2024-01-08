@@ -62,7 +62,7 @@ extension XCUIApplication {
     }
     
     func logOut() {
-        guard dashboardMenuButton.exists else { return }
+        guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else { return }
         dashboardMenuButton.tap()
         
         if logOutButton.waitForExistence(timeout: defaultTimeout) {
@@ -76,43 +76,44 @@ extension XCUIApplication {
     }
     
     func navigateToHome() {
+        closeButton.waitForExistence(timeout: defaultTimeout)
         closeButton.tap()
         WaitHelper.waitForElementToBeVisible(dashboardMenuButton, timeout: defaultTimeout,
                                              onSuccess:{print("successful navigation to Home screen")}, onFailure:{error in print("dashboardMenuButton is not visible")})
     }
     
     func enableVPNKillSwitchOnHome() {
-        if(enableVPNKillSwitchButton.exists) {
+        if(enableVPNKillSwitchButton.waitForExistence(timeout: defaultTimeout)) {
             enableVPNKillSwitchButton.tap()
         }
     }
     
     func disableVPNKillSwitchOnHome() {
-        if(disableVPNKillSwitchButton.exists) {
+        if(disableVPNKillSwitchButton.waitForExistence(timeout: defaultTimeout)) {
             disableVPNKillSwitchButton.tap()
         }
     }
     
     func enableNetworkManagementOnHome() {
-        if(enableNetworkManagementButton.exists) {
+        if(enableNetworkManagementButton.waitForExistence(timeout: defaultTimeout)) {
             enableNetworkManagementButton.tap()
         }
     }
     
     func disableNetworkManagementOnHome() {
-        if(disableNetworkManagementButton.exists) {
+        if(disableNetworkManagementButton.waitForExistence(timeout: defaultTimeout)) {
             disableNetworkManagementButton.tap()
         }
     }
     
     func connectToVPN() {
-        if (disconnectedStatusLabel.exists) {
+        if (disconnectedStatusLabel.waitForExistence(timeout: defaultTimeout)) {
             connectionButton.tap()
         }
     }
     
     func disconnectToVPN() {
-        if (connectedStatusLabel.exists) {
+        if (connectedStatusLabel.waitForExistence(timeout: defaultTimeout)) {
             connectionButton.tap()
         }
     }

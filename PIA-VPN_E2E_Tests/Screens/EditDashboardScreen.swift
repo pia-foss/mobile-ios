@@ -34,7 +34,7 @@ extension XCUIApplication {
     }
     
     func navigateToEditDashboardScreen () {
-        guard dashboardEditButton.exists else { return }
+        guard dashboardEditButton.waitForExistence(timeout: defaultTimeout) else { return }
         dashboardEditButton.tap()
         WaitHelper.waitForElementToNotBeVisible(regionTileCell, timeout: defaultTimeout, onSuccess: {}, onFailure: {error in print("RegionTileCollectionViewCell is not visible")})
     }
