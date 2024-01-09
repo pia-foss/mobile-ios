@@ -16,4 +16,16 @@ extension XCUIApplication {
     var settingsButton: XCUIElement {
         staticText(with: "Settings")
     }
+    
+    func selectSideMenu(menuName: String) {
+           guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else { return }
+           dashboardMenuButton.tap()
+           
+           if staticText(with: menuName).waitForExistence(timeout: defaultTimeout) {
+               staticText(with: menuName).tap()
+           }
+           
+           WaitHelper.waitForElementToBeVisible(staticText(with: menuName), timeout: defaultTimeout,
+                                                onSuccess:{print("successful navigation")}, onFailure:{error in print("side menu is not visible")})
+       }
 }
