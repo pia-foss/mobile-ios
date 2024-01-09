@@ -22,10 +22,10 @@ class DashboardTests:BaseTest {
                     app.navigateToHomeFromSettings()
                     
                     app.navigateToEditDashboardScreen()
-                    expect(app.connectionTileCell.exists).to(beTrue())
-                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"IPSec (IKEv2)")?.exists).to(beTrue())
-                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"AES-256-CBC")?.exists).to(beTrue())
-                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"SHA96")?.exists).to(beTrue())
+                    expect(app.connectionTileCell.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"IPSec (IKEv2)")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"AES-256-CBC")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"SHA96")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
                 
                 it("should update the connection details on dashboard, when the user sets up WireGuard®") {
@@ -34,10 +34,10 @@ class DashboardTests:BaseTest {
                     app.navigateToHomeFromSettings()
                     
                     app.navigateToEditDashboardScreen()
-                    expect(app.connectionTileCell.exists).to(beTrue())
-                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"WireGuard®")?.exists).to(beTrue())
-                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"ChaCha20")?.exists).to(beTrue())
-                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"Noise_IK")?.exists).to(beTrue())
+                    expect(app.connectionTileCell.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"WireGuard®")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"ChaCha20")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"Noise_IK")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
                 
                 it("should update the connection details on dashboard, when the user sets up OpenVPN") {
@@ -49,12 +49,12 @@ class DashboardTests:BaseTest {
                     app.navigateToHomeFromSettings()
                     
                     app.navigateToEditDashboardScreen()
-                    expect(app.connectionTileCell.exists).to(beTrue())
-                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"OpenVPN")?.exists).to(beTrue())
-                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"AES-256-GCM")?.exists).to(beTrue())
-                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"TCP")?.exists).to(beTrue())
-                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"443")?.exists).to(beTrue())
-                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"RSA-4096")?.exists).to(beTrue())
+                    expect(app.connectionTileCell.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"OpenVPN")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"AES-256-GCM")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"TCP")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"443")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.connectionTileCell.findChildElement(matching: .staticText, identifier:"RSA-4096")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
             }
         }

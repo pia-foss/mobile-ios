@@ -58,6 +58,11 @@
             value = "xxx"
             isEnabled = "YES">
          </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "PIA_TEST_DEDICATEDIP"
+            value = "xxx"
+            isEnabled = "YES">
+         </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
