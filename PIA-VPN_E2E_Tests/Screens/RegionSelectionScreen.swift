@@ -30,7 +30,7 @@ extension XCUIApplication {
     }
     
     func navigateToRegionSelection(){
-        guard regionTileCell.exists else { return }
+        guard regionTileCell.waitForExistence(timeout: defaultTimeout) else { return }
         regionTileCell.tap()
         WaitHelper.waitForElementToBeVisible(regionSelectionHeader, timeout: defaultTimeout,
                                              onSuccess:{print("successful navigation to region selection screen")}, onFailure:{error in print("regionSelectionHeader is not visible")})
@@ -52,6 +52,9 @@ extension XCUIApplication {
     }
     
     func getRegionList() -> XCUIElementQuery {
+        while(!searchRegionField.isHittable) {
+            swipeDown()
+        }
         let query = cells.matching(NSPredicate(format: "identifier == %@", "uitests.regions.region_name"))
         return query
     }
@@ -62,7 +65,7 @@ extension XCUIApplication {
         let regionAddAsAFavouriteButton = region.buttons["Add a favorite region"]
         let regionRemoveAsAFavouriteButton = region.buttons["Remove a favorite region"]
         
-        if(regionRemoveAsAFavouriteButton.exists) {
+        if(regionRemoveAsAFavouriteButton.waitForExistence(timeout: defaultTimeout)) {
             regionRemoveAsAFavouriteButton.tap()
         }
         WaitHelper.waitForElementToBeVisible(regionAddAsAFavouriteButton, timeout: defaultTimeout, onSuccess: {}, onFailure: {error in print("regionRemoveAsAFavouriteButton is not visible")})
@@ -90,7 +93,7 @@ extension XCUIApplication {
     }
     
     func sortRegionsBy(sortType: String) {
-        guard sortButton.exists else {return}
+        guard sortButton.waitForExistence(timeout: defaultTimeout) else {return}
         sortButton.tap()
         WaitHelper.waitForElementToBeVisible(sortPopUpHeader, timeout: defaultTimeout, onSuccess: {}, onFailure: {error in print("sortPopUpHeader is not visible")})
         button(with: sortType).tap()

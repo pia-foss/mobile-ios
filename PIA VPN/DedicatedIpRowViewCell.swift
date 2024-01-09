@@ -33,7 +33,7 @@ class DedicatedIpRowViewCell: UITableViewCell, Restylable {
     private weak var server: Server!
 
     func fill(withServer server: Server) {
-        
+        self.accessibilityIdentifier = "DedicatedIpRowViewCell"
         viewShouldRestyle()
         self.server = server
 

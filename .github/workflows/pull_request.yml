@@ -11,6 +11,7 @@ jobs:
     env:
       TEST_RUNNER_PIA_TEST_USER: ${{ secrets.PIA_ACCOUNT_USERNAME}}
       TEST_RUNNER_PIA_TEST_PASSWORD: ${{ secrets.PIA_ACCOUNT_PASSWORD }}
+      TEST_RUNNER_PIA_TEST_DEDICATEDIP: ${{ secrets.PIA_TEST_DEDICATEDIP }}
 
     steps:
     - name: Setup Git credentials

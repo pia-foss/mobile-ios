@@ -25,10 +25,10 @@ class QuickSettingsTests : BaseTest {
                     app.navigateToHome()
                     
                     app.enableVPNKillSwitchOnHome()
-                    expect(app.disableVPNKillSwitchButton.exists).to(beTrue())
+                    expect(app.disableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     
                     app.enableNetworkManagementOnHome()
-                    expect(app.disableNetworkManagementButton.exists).to(beTrue())
+                    expect(app.disableNetworkManagementButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
                 
                 it("should indicate that it's disabled when the user disables it") {
@@ -39,11 +39,11 @@ class QuickSettingsTests : BaseTest {
                     app.navigateToHome()
                     
                     app.disableVPNKillSwitchOnHome()
-                    expect(app.enableVPNKillSwitchButton.exists).to(beTrue())
+                    expect(app.enableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     
                     app.enableVPNKillSwitchOnHome()
                     app.disableNetworkManagementOnHome()
-                    expect(app.disableVPNKillSwitchButton.exists).to(beTrue())
+                    expect(app.disableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
                 
                 it("should display a notification message and not allow enabling the network management when vpn kill switch is disabled") {
@@ -58,13 +58,13 @@ class QuickSettingsTests : BaseTest {
                     app.enableNetworkManagementOnHome()
                     
                     app.staticText(with: "ENABLE").tap()
-                    expect(app.disableVPNKillSwitchButton.exists).to(beTrue())
-                    expect(app.disableNetworkManagementButton.exists).to(beTrue())
+                    expect(app.disableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.disableNetworkManagementButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     
                     app.disableVPNKillSwitchOnHome()
                     app.staticText(with: "CLOSE").tap()
-                    expect(app.enableVPNKillSwitchButton.exists).to(beTrue())
-                    expect(app.enableNetworkManagementButton.exists).to(beTrue())
+                    expect(app.enableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.enableNetworkManagementButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
             }
             
@@ -114,15 +114,15 @@ class QuickSettingsTests : BaseTest {
                     expect(app.privateBrowserQuickSettings.value as! String == enabledValue).to(beTrue())
                     
                     app.navigateToHome()
-                    expect(app.privateBrowserButton.exists).to(beTrue())
+                    expect(app.privateBrowserButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     expect{
-                        let enableVPNKillSwitchButtonPresent = app.enableVPNKillSwitchButton.exists
-                        let disableVPNKillSwitchButtonPresent = app.disableVPNKillSwitchButton.exists
+                        let enableVPNKillSwitchButtonPresent = app.enableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)
+                        let disableVPNKillSwitchButtonPresent = app.disableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)
                         return enableVPNKillSwitchButtonPresent || disableVPNKillSwitchButtonPresent
                     }.to(beTrue())
                     expect{
-                        let enableNetworkManagementButtonPresent = app.enableNetworkManagementButton.exists
-                        let disableNetworkManagementButtonPresent = app.disableNetworkManagementButton.exists
+                        let enableNetworkManagementButtonPresent = app.enableNetworkManagementButton.waitForExistence(timeout: app.defaultTimeout)
+                        let disableNetworkManagementButtonPresent = app.disableNetworkManagementButton.waitForExistence(timeout: app.defaultTimeout)
                         return enableNetworkManagementButtonPresent || disableNetworkManagementButtonPresent
                     }.to(beTrue())
                 }

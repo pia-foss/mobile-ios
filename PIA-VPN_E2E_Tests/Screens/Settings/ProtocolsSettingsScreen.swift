@@ -66,7 +66,7 @@ extension XCUIApplication {
     }
     
     func navigateToProtocolSettings() {
-        guard dashboardMenuButton.exists else { return }
+        guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else { return }
         dashboardMenuButton.tap()
         
         if settingsButton.waitForExistence(timeout: defaultTimeout) {
@@ -80,31 +80,31 @@ extension XCUIApplication {
     
     func selectProtocol(protocolName: String) {
         protocolSelectionButton.tap()
-        guard protocolSelectionPopover.exists else {return}
+        guard protocolSelectionPopover.waitForExistence(timeout: defaultTimeout) else {return}
         protocolSelectionPopover.staticTexts[protocolName].tap()
     }
     
     func selectDataEncryption(dataEncryption: String) {
         dataEncryptionButton.tap()
-        guard dataEncryptionPopover.exists else {return}
+        guard dataEncryptionPopover.waitForExistence(timeout: defaultTimeout) else {return}
         dataEncryptionPopover.staticTexts[dataEncryption].tap()
     }
     
     func selectHandshake(handshake: String) {
         handshakeButton.tap()
-        guard handshakePopover.exists else {return}
+        guard handshakePopover.waitForExistence(timeout: defaultTimeout) else {return}
         handshakePopover.staticTexts[handshake].tap()
     }
   
     func selectTransport(transport: String) {
         transportButton.tap()
-        guard transportPopover.exists else {return}
+        guard transportPopover.waitForExistence(timeout: defaultTimeout) else {return}
         transportPopover.staticTexts[transport].tap()
     }
     
     func selectRemotePort(port: String) {
         remotePortButton.tap()
-        guard remotePortPopover.exists else {return}
+        guard remotePortPopover.waitForExistence(timeout: defaultTimeout) else {return}
         remotePortPopover.staticTexts[port].tap()
     }
     

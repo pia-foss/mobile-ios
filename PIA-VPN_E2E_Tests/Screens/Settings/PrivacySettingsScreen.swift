@@ -22,7 +22,7 @@ extension XCUIApplication {
     }
     
     func navigateToPrivacySettings() {
-        guard dashboardMenuButton.exists else { return }
+        guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else { return }
         dashboardMenuButton.tap()
         
         if settingsButton.waitForExistence(timeout: defaultTimeout) {

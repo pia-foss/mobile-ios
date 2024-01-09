@@ -138,6 +138,9 @@
 		3507A7F02B4CF5000060DC98 /* SideMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3507A7EF2B4CF5000060DC98 /* SideMenuTests.swift */; };
 		3510B3B72B2F9C2D0004851B /* DashboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3510B3B62B2F9C2D0004851B /* DashboardTests.swift */; };
 		3510B3B92B2FB3A40004851B /* EditDashboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3510B3B82B2FB3A40004851B /* EditDashboardScreen.swift */; };
+		3510B3BB2B4394A80004851B /* DedicatedIPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3510B3BA2B4394A80004851B /* DedicatedIPTests.swift */; };
+		3510B3BD2B439B930004851B /* DedicatedIPUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3510B3BC2B439B930004851B /* DedicatedIPUtil.swift */; };
+		3510B3BF2B439D590004851B /* DedicatedIPScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3510B3BE2B439D590004851B /* DedicatedIPScreen.swift */; };
 		3524670B26B431B800E3F0AC /* TrustedNetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3524670A26B431B800E3F0AC /* TrustedNetworkHelper.swift */; };
 		3524670C26B432BC00E3F0AC /* TrustedNetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3524670A26B431B800E3F0AC /* TrustedNetworkHelper.swift */; };
 		3524670E26B432ED00E3F0AC /* DashboardViewController+ServerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3524670D26B432ED00E3F0AC /* DashboardViewController+ServerSelection.swift */; };
@@ -914,6 +917,9 @@
 		3507A7EF2B4CF5000060DC98 /* SideMenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTests.swift; sourceTree = "<group>"; };
 		3510B3B62B2F9C2D0004851B /* DashboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTests.swift; sourceTree = "<group>"; };
 		3510B3B82B2FB3A40004851B /* EditDashboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDashboardScreen.swift; sourceTree = "<group>"; };
+		3510B3BA2B4394A80004851B /* DedicatedIPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DedicatedIPTests.swift; sourceTree = "<group>"; };
+		3510B3BC2B439B930004851B /* DedicatedIPUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DedicatedIPUtil.swift; sourceTree = "<group>"; };
+		3510B3BE2B439D590004851B /* DedicatedIPScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DedicatedIPScreen.swift; sourceTree = "<group>"; };
 		3524670A26B431B800E3F0AC /* TrustedNetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedNetworkHelper.swift; sourceTree = "<group>"; };
 		3524670D26B432ED00E3F0AC /* DashboardViewController+ServerSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DashboardViewController+ServerSelection.swift"; sourceTree = "<group>"; };
 		3545E97F26AAD60C00B812CC /* ServerSelectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSelectionDelegate.swift; sourceTree = "<group>"; };
@@ -1790,6 +1796,7 @@
 				35C8064B2B1075620078A2C6 /* ServerConnectionTests.swift */,
 				3510B3B62B2F9C2D0004851B /* DashboardTests.swift */,
 				3507A7EF2B4CF5000060DC98 /* SideMenuTests.swift */,
+				3510B3BA2B4394A80004851B /* DedicatedIPTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1806,6 +1813,7 @@
 				35EDD6592B035B51007B9ACB /* SideMenuScreen.swift */,
 				35DC7A5F2B0B440200502BED /* RegionSelectionScreen.swift */,
 				3510B3B82B2FB3A40004851B /* EditDashboardScreen.swift */,
+				3510B3BE2B439D590004851B /* DedicatedIPScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1990,6 +1998,7 @@
 			isa = PBXGroup;
 			children = (
 				7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */,
+				3510B3BC2B439B930004851B /* DedicatedIPUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -3681,6 +3690,7 @@
 				35EDD6282ADE5D31007B9ACB /* BaseTest.swift in Sources */,
 				35EDD65E2B048C68007B9ACB /* QuickSettingsScreen.swift in Sources */,
 				35EDD65A2B035B51007B9ACB /* SideMenuScreen.swift in Sources */,
+				3510B3BB2B4394A80004851B /* DedicatedIPTests.swift in Sources */,
 				35EDD6352ADE7424007B9ACB /* VPNPermissionScreen.swift in Sources */,
 				35C8064C2B1075620078A2C6 /* ServerConnectionTests.swift in Sources */,
 				699F23B32AFBA66000EBC5E6 /* HelpSettingsScreen.swift in Sources */,
@@ -3692,6 +3702,8 @@
 				699F23B22AFBA66000EBC5E6 /* SettingsScreen.swift in Sources */,
 				35EDD6422AE7A83D007B9ACB /* WelcomeScreen.swift in Sources */,
 				3507A7F02B4CF5000060DC98 /* SideMenuTests.swift in Sources */,
+				3510B3BD2B439B930004851B /* DedicatedIPUtil.swift in Sources */,
+				3510B3BF2B439D590004851B /* DedicatedIPScreen.swift in Sources */,
 				699F23B92AFBAC0B00EBC5E6 /* SettingsTests.swift in Sources */,
 				699F23B42AFBA66000EBC5E6 /* AutomationSettingsScreen.swift in Sources */,
 				35EDD62A2ADE5F08007B9ACB /* SignInTests.swift in Sources */,

@@ -31,7 +31,7 @@ class SettingsTests : BaseTest {
                     app.navigateToHomeFromSettings()
                     app.navigateToProtocolSettings()
                     app.selectProtocol(protocolName: "OpenVPN")
-                    expect(app.openVPN.exists).to(beTrue())
+                    expect(app.openVPN.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     
                     //update privacy settings
                     app.navigateToHomeFromSettings()
@@ -56,7 +56,7 @@ class SettingsTests : BaseTest {
                     
                     app.navigateToHomeFromSettings()
                     app.navigateToProtocolSettings()
-                    expect(app.ipsec.exists).to(beTrue())
+                    expect(app.ipsec.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     
                     app.navigateToHomeFromSettings()
                     app.navigateToPrivacySettings()
@@ -77,22 +77,22 @@ class SettingsTests : BaseTest {
                     it("should when user clicks 'Latest News'") {
                         app.navigateToHelpSettings()
                         app.latestNewsButton.tap()
-                        expect(app.tryWireguardNowButton.exists).to(beTrue())
+                        expect(app.tryWireguardNowButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                         
                         app.tryWireguardNowButton.tap()
-                        expect(app.protocolsSettingsButton.exists).to(beTrue())
-                        expect(app.wireguard.exists).to(beTrue())
+                        expect(app.protocolsSettingsButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                        expect(app.wireguard.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     }
                     
                     it("should when user clicks 'Help improve PIA'") {
                         app.navigateToHelpSettings()
                         app.enableHelpImprovePIA()
-                        expect(app.connectionStatsButton.exists).to(beTrue())
+                        expect(app.connectionStatsButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     }
                     
                     it("should display version number") {
                         app.navigateToHelpSettings()
-                        expect(app.versionNo.exists).to(beTrue())
+                        expect(app.versionNo.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     }
                 }
             }

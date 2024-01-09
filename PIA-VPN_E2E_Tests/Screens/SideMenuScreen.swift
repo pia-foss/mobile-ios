@@ -16,7 +16,11 @@ extension XCUIApplication {
     var settingsButton: XCUIElement {
         staticText(with: "Settings")
     }
-    
+  
+    var dedicatedIPButton: XCUIElement {
+        staticText(with: "Dedicated IP")
+    }
+  
     func selectSideMenu(menuName: String) {
            guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else { return }
            dashboardMenuButton.tap()

@@ -45,7 +45,7 @@ extension XCUIApplication {
         logIn(with: CredentialsUtil.credentials(type: .valid))
         
         guard vpnPermissionScreen.waitForExistence(timeout: defaultTimeout) else { return }
-        guard vpnPermissionButton.exists else { return }
+        guard vpnPermissionButton.waitForExistence(timeout: defaultTimeout) else { return }
         vpnPermissionButton.tap()
         
         swipeUp()
