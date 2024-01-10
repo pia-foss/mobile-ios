@@ -12,7 +12,7 @@ class RootContainerViewModel: ObservableObject {
     }
     
     @Published var state: State = .splash
-    @Published private var isBootstrapped: Bool = false
+    @Published internal var isBootstrapped: Bool = false
     
     // TODO: Update this value from the Vpn OnBoarding installation profile screen
     @AppStorage(.kOnboardingVpnProfileInstalled) var onBoardingVpnProfileInstalled = false
@@ -34,6 +34,7 @@ class RootContainerViewModel: ObservableObject {
     
     func phaseDidBecomeActive() {
         // Bootstrap PIALibrary preferences and settings
+        // TODO: DI this object
         Bootstrapper.shared.bootstrap()
         isBootstrapped = true
         updateState()

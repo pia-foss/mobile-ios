@@ -5,7 +5,7 @@ struct DashboardView: View {
     let viewWidth = UIScreen.main.bounds.width
     let viewHeight = UIScreen.main.bounds.height
     
-    let viewModel: DashboardViewModel
+    @ObservedObject var viewModel: DashboardViewModel
     
     var body: some View {
         VStack {
@@ -15,7 +15,7 @@ struct DashboardView: View {
                 
                 Divider()
                 
-                SelectedServerSection()
+                SelectedServerSection(onRegionSelectionSectionTapped: viewModel.regionSelectionSectionWasTapped)
                     .padding()
                     
                 Divider()
@@ -58,9 +58,12 @@ fileprivate struct DashboardConnectionButtonSection: View {
 }
 
 fileprivate struct SelectedServerSection: View {
+
+    var onRegionSelectionSectionTapped: () -> Void
+    
     var body: some View {
         Button {
-            // TODO: Navigate to the regions list
+            onRegionSelectionSectionTapped()
         } label: {
             DashboardFactory.makeSelectedServerView()
         }
@@ -77,6 +80,5 @@ fileprivate struct QuickConnectSection: View {
 
 #Preview {
     DashboardView(
-        viewModel: DashboardFactory.makeDashboardViewModel()
-    )
+        viewModel: DashboardFactory.makeDashboardViewModel())
 }
