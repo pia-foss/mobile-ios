@@ -10,7 +10,7 @@ import XCTest
 
 extension XCUIApplication {
     var regionSelectionHeader: XCUIElement {
-        searchField(with: "Region selection")
+        staticText(with: "Region selection")
     }
     
     var searchRegionField: XCUIElement {
