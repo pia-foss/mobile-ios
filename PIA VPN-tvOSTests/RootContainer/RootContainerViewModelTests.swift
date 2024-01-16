@@ -14,6 +14,7 @@ final class RootContainerViewModelTests: XCTestCase {
     final class Fixture {
         let accountProvierMock = AccountProviderTypeMock()
         let notificationCenterMock = NotificationCenterMock()
+        var vpnConfigurationAvailabilityMock = VPNConfigurationAvailabilityMock(value: false)
     }
 
     var fixture: Fixture!
@@ -30,7 +31,9 @@ final class RootContainerViewModelTests: XCTestCase {
     }
     
     private func initializeSut(bootStrapped: Bool = true) {
-        sut = RootContainerViewModel(accountProvider: fixture.accountProvierMock, notificationCenter: fixture.notificationCenterMock)
+        sut = RootContainerViewModel(accountProvider: fixture.accountProvierMock, 
+                                     notificationCenter: fixture.notificationCenterMock,
+                                     vpnConfigurationAvailability: fixture.vpnConfigurationAvailabilityMock)
         sut.isBootstrapped = bootStrapped
     }
     
@@ -81,7 +84,6 @@ final class RootContainerViewModelTests: XCTestCase {
 
 extension RootContainerViewModelTests {
     private func stubOnboardingVpnInstallation(finished: Bool) {
-        UserDefaults.standard.setValue(finished, forKey: .kOnboardingVpnProfileInstalled)
-        UserDefaults.standard.synchronize()
+        fixture.vpnConfigurationAvailabilityMock = VPNConfigurationAvailabilityMock(value: finished)
     }
 }

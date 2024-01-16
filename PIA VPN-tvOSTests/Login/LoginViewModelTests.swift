@@ -21,10 +21,14 @@ final class LoginViewModelTests: XCTestCase {
         let resultCheckLoginAvailability: Result<Void, LoginError> = .failure(.throttled(retryAfter: 20))
         let checkLoginAvailabilityMock = CheckLoginAvailabilityMock(result: resultCheckLoginAvailability)
         
+        let appRouterSpy = AppRouterSpy()
+        
         let sut = LoginViewModel(loginWithCredentialsUseCase: loginWithCredentialsUseCaseMock,
                                  checkLoginAvailability: checkLoginAvailabilityMock,
                                  validateLoginCredentials: ValidateCredentialsFormat(),
-                                 errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()))
+                                 errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()),
+                                 appRouter: appRouterSpy,
+                                 successDestination: OnboardingDestinations.installVPNProfile)
         
         var cancellables = Set<AnyCancellable>()
         let expectation = expectation(description: "Waiting for shouldShowErrorMessage property to be updated")
@@ -47,9 +51,10 @@ final class LoginViewModelTests: XCTestCase {
         // THEN
         wait(for: [expectation], timeout: 1)
         XCTAssertFalse(sut.isAccountExpired)
-        XCTAssertFalse(sut.didLoginSuccessfully)
+        //XCTAssertFalse(sut.didLoginSuccessfully)
         XCTAssertEqual(capturedLoginStatuses.count, 1)
         XCTAssertEqual(capturedLoginStatuses[0], LoginStatus.failed(errorMessage: "Too many failed login attempts with this username. Please try again after 20.0 second(s).", field: .none))
+        XCTAssertEqual(appRouterSpy.requests, [])
     }
     
     func test_login_fails_when_username_is_invalid() {
@@ -61,10 +66,14 @@ final class LoginViewModelTests: XCTestCase {
         let resultCheckLoginAvailability: Result<Void, LoginError> = .success(())
         let checkLoginAvailabilityMock = CheckLoginAvailabilityMock(result: resultCheckLoginAvailability)
         
+        let appRouterSpy = AppRouterSpy()
+        
         let sut = LoginViewModel(loginWithCredentialsUseCase: loginWithCredentialsUseCaseMock,
                                  checkLoginAvailability: checkLoginAvailabilityMock,
                                  validateLoginCredentials: ValidateCredentialsFormat(),
-                                 errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()))
+                                 errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()),
+                                 appRouter: appRouterSpy,
+                                 successDestination: OnboardingDestinations.installVPNProfile)
         
         var cancellables = Set<AnyCancellable>()
         let expectation = expectation(description: "Waiting for shouldShowErrorMessage property to be updated")
@@ -87,9 +96,10 @@ final class LoginViewModelTests: XCTestCase {
         // THEN
         wait(for: [expectation], timeout: 1)
         XCTAssertFalse(sut.isAccountExpired)
-        XCTAssertFalse(sut.didLoginSuccessfully)
+        //XCTAssertFalse(sut.didLoginSuccessfully)
         XCTAssertEqual(capturedLoginStatuses.count, 1)
         XCTAssertEqual(capturedLoginStatuses[0], LoginStatus.failed(errorMessage: "You must enter a username and password.", field: .username))
+        XCTAssertEqual(appRouterSpy.requests, [])
     }
     
     func test_login_fails_when_password_is_invalid() {
@@ -101,10 +111,14 @@ final class LoginViewModelTests: XCTestCase {
         let resultCheckLoginAvailability: Result<Void, LoginError> = .success(())
         let checkLoginAvailabilityMock = CheckLoginAvailabilityMock(result: resultCheckLoginAvailability)
         
+        let appRouterSpy = AppRouterSpy()
+        
         let sut = LoginViewModel(loginWithCredentialsUseCase: loginWithCredentialsUseCaseMock,
                                  checkLoginAvailability: checkLoginAvailabilityMock,
                                  validateLoginCredentials: ValidateCredentialsFormat(),
-                                 errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()))
+                                 errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()),
+                                 appRouter: appRouterSpy,
+                                 successDestination: OnboardingDestinations.installVPNProfile)
         
         var cancellables = Set<AnyCancellable>()
         let expectation = expectation(description: "Waiting for shouldShowErrorMessage property to be updated")
@@ -127,9 +141,10 @@ final class LoginViewModelTests: XCTestCase {
         // THEN
         wait(for: [expectation], timeout: 1)
         XCTAssertFalse(sut.isAccountExpired)
-        XCTAssertFalse(sut.didLoginSuccessfully)
+        //XCTAssertFalse(sut.didLoginSuccessfully)
         XCTAssertEqual(capturedLoginStatuses.count, 1)
         XCTAssertEqual(capturedLoginStatuses[0], LoginStatus.failed(errorMessage: "You must enter a username and password.", field: .password))
+        XCTAssertEqual(appRouterSpy.requests, [])
     }
     
     
@@ -142,10 +157,14 @@ final class LoginViewModelTests: XCTestCase {
         let resultCheckLoginAvailability: Result<Void, LoginError> = .success(())
         let checkLoginAvailabilityMock = CheckLoginAvailabilityMock(result: resultCheckLoginAvailability)
         
+        let appRouterSpy = AppRouterSpy()
+        
         let sut = LoginViewModel(loginWithCredentialsUseCase: loginWithCredentialsUseCaseMock,
                                  checkLoginAvailability: checkLoginAvailabilityMock,
                                  validateLoginCredentials: ValidateCredentialsFormat(),
-                                 errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()))
+                                 errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()),
+                                 appRouter: appRouterSpy,
+                                 successDestination: OnboardingDestinations.installVPNProfile)
         
         var cancellables = Set<AnyCancellable>()
         let expectation = expectation(description: "Waiting for didLoginSuccessfully property to be updated")
@@ -157,10 +176,7 @@ final class LoginViewModelTests: XCTestCase {
             capturedLoginStatuses.append(status)
         }).store(in: &cancellables)
         
-        sut.$didLoginSuccessfully.dropFirst().sink(receiveValue: { status in
-            XCTAssertTrue(status)
-            expectation.fulfill()
-        }).store(in: &cancellables)
+        appRouterSpy.didGetARequest = { expectation.fulfill() }
         
         // WHEN
         sut.login(username: "username", password: "password")
@@ -172,6 +188,7 @@ final class LoginViewModelTests: XCTestCase {
         XCTAssertEqual(capturedLoginStatuses.count, 2)
         XCTAssertEqual(capturedLoginStatuses[0], LoginStatus.isLogging)
         XCTAssertEqual(capturedLoginStatuses[1], LoginStatus.succeeded(userAccount: userAccount))
+        XCTAssertEqual(appRouterSpy.requests, [.navigate(OnboardingDestinations.installVPNProfile)])
     }
     
     func test_login_fails_when_loginUseCase_completes_with_expired_error() {
@@ -182,10 +199,14 @@ final class LoginViewModelTests: XCTestCase {
         let resultCheckLoginAvailability: Result<Void, LoginError> = .success(())
         let checkLoginAvailabilityMock = CheckLoginAvailabilityMock(result: resultCheckLoginAvailability)
         
+        let appRouterSpy = AppRouterSpy()
+        
         let sut = LoginViewModel(loginWithCredentialsUseCase: loginWithCredentialsUseCaseMock,
                                  checkLoginAvailability: checkLoginAvailabilityMock,
                                  validateLoginCredentials: ValidateCredentialsFormat(),
-                                 errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()))
+                                 errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()),
+                                 appRouter: appRouterSpy,
+                                 successDestination: OnboardingDestinations.installVPNProfile)
         
         var cancellables = Set<AnyCancellable>()
         let expectation = expectation(description: "Waiting for isAccountExpired property to be updated")
@@ -208,10 +229,10 @@ final class LoginViewModelTests: XCTestCase {
         // THEN
         wait(for: [expectation], timeout: 1)
         XCTAssertFalse(sut.shouldShowErrorMessage)
-        XCTAssertFalse(sut.didLoginSuccessfully)
         XCTAssertEqual(capturedLoginStatuses.count, 2)
         XCTAssertEqual(capturedLoginStatuses[0], LoginStatus.isLogging)
         XCTAssertEqual(capturedLoginStatuses[1], LoginStatus.failed(errorMessage: nil, field: .none))
+        XCTAssertEqual(appRouterSpy.requests, [])
     }
     
     func test_login_fails_when_loginUseCase_completes_with_unauthorized_error() {
@@ -222,10 +243,14 @@ final class LoginViewModelTests: XCTestCase {
         let resultCheckLoginAvailability: Result<Void, LoginError> = .success(())
         let checkLoginAvailabilityMock = CheckLoginAvailabilityMock(result: resultCheckLoginAvailability)
         
+        let appRouterSpy = AppRouterSpy()
+        
         let sut = LoginViewModel(loginWithCredentialsUseCase: loginWithCredentialsUseCaseMock,
                                  checkLoginAvailability: checkLoginAvailabilityMock,
                                  validateLoginCredentials: ValidateCredentialsFormat(),
-                                 errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()))
+                                 errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()),
+                                 appRouter: appRouterSpy,
+                                 successDestination: OnboardingDestinations.installVPNProfile)
         
         var cancellables = Set<AnyCancellable>()
         let expectation = expectation(description: "Waiting for shouldShowErrorMessage property to be updated")
@@ -248,9 +273,9 @@ final class LoginViewModelTests: XCTestCase {
         // THEN
         wait(for: [expectation], timeout: 1)
         XCTAssertFalse(sut.isAccountExpired)
-        XCTAssertFalse(sut.didLoginSuccessfully)
         XCTAssertEqual(capturedLoginStatuses.count, 2)
         XCTAssertEqual(capturedLoginStatuses[0], LoginStatus.isLogging)
         XCTAssertEqual(capturedLoginStatuses[1], LoginStatus.failed(errorMessage: "Your username or password is incorrect.", field: .none))
+        XCTAssertEqual(appRouterSpy.requests, [])
     }
 }

@@ -6,15 +6,16 @@ class DashboardViewModel: ObservableObject {
     
     private let accountProvider: AccountProviderType
     private let appRouter: AppRouter
+    private let navigationDestination: any Destinations
     
-    
-    init(accountProvider: AccountProviderType, appRouter: AppRouter) {
+    init(accountProvider: AccountProviderType, appRouter: AppRouter, navigationDestination: any Destinations) {
         self.accountProvider = accountProvider
         self.appRouter = appRouter
+        self.navigationDestination = navigationDestination
     }
     
     func regionSelectionSectionWasTapped() {
-        appRouter.navigate(to: RegionsDestinations.serversList)
+        appRouter.navigate(to: navigationDestination)
     }
     
     

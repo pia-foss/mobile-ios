@@ -9,6 +9,7 @@
 import XCTest
 import PIALibrary
 import Combine
+import SwiftUI
 @testable import PIA_VPN_tvOS
 
 final class LoginIntegrationTests: XCTestCase {
@@ -25,10 +26,14 @@ final class LoginIntegrationTests: XCTestCase {
         let loginWithCredentialsUseCase = LoginWithCredentialsUseCase(loginProvider: loginProvider,
                                                                       errorMapper: LoginDomainErrorMapper())
         
+        let appRouter = AppRouter(with: NavigationPath())
+        
         let sut = LoginViewModel(loginWithCredentialsUseCase: loginWithCredentialsUseCase,
                                  checkLoginAvailability: CheckLoginAvailability(),
                                  validateLoginCredentials: ValidateCredentialsFormat(),
-                                 errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()))
+                                 errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()),
+                                 appRouter: appRouter,
+                                 successDestination: OnboardingDestinations.installVPNProfile)
         
         var cancellables = Set<AnyCancellable>()
         let expectation = expectation(description: "Waiting for didLoginSuccessfully property to be updated")
@@ -40,10 +45,10 @@ final class LoginIntegrationTests: XCTestCase {
             capturedLoginStatuses.append(status)
         }).store(in: &cancellables)
         
-        sut.$didLoginSuccessfully.dropFirst().sink(receiveValue: { status in
-            XCTAssertTrue(status)
+        appRouter.$path.dropFirst().sink(receiveValue: { path in
             expectation.fulfill()
         }).store(in: &cancellables)
+         
         
         // WHEN
         sut.login(username: "username", password: "password")
@@ -54,6 +59,7 @@ final class LoginIntegrationTests: XCTestCase {
         XCTAssertFalse(sut.isAccountExpired)
         XCTAssertEqual(capturedLoginStatuses.count, 2)
         XCTAssertEqual(capturedLoginStatuses[0], LoginStatus.isLogging)
+        XCTAssertEqual(appRouter.path, NavigationPath([OnboardingDestinations.installVPNProfile]))
         
         guard case .succeeded(let capturedUserResult) = capturedLoginStatuses[1] else {
             XCTFail("Expected success, got failure")
@@ -93,10 +99,14 @@ final class LoginIntegrationTests: XCTestCase {
         let loginWithCredentialsUseCase = LoginWithCredentialsUseCase(loginProvider: loginProvider,
                                     errorMapper: LoginDomainErrorMapper())
         
+        let appRouter = AppRouter(with: NavigationPath())
+        
         let sut = LoginViewModel(loginWithCredentialsUseCase: loginWithCredentialsUseCase,
                                  checkLoginAvailability: CheckLoginAvailability(),
                                  validateLoginCredentials: ValidateCredentialsFormat(),
-                                 errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()))
+                                 errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()),
+                                 appRouter: appRouter,
+                                 successDestination: OnboardingDestinations.installVPNProfile)
         
         var cancellables = Set<AnyCancellable>()
         let expectation = expectation(description: "Waiting for isAccountExpired property to be updated")
@@ -119,7 +129,7 @@ final class LoginIntegrationTests: XCTestCase {
         // THEN
         wait(for: [expectation], timeout: 1)
         XCTAssertFalse(sut.shouldShowErrorMessage)
-        XCTAssertFalse(sut.didLoginSuccessfully)
+        XCTAssertEqual(appRouter.path, NavigationPath())
         XCTAssertEqual(capturedLoginStatuses.count, 2)
         XCTAssertEqual(capturedLoginStatuses[0], LoginStatus.isLogging)
         XCTAssertEqual(capturedLoginStatuses[1], LoginStatus.failed(errorMessage: nil, field: .none))

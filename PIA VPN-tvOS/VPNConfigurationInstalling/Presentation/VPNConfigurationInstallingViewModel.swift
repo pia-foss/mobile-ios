@@ -11,14 +11,19 @@ import Foundation
 class VPNConfigurationInstallingViewModel: ObservableObject {
     private let installVPNConfiguration: InstallVPNConfigurationUseCaseType
     private let errorMapper: VPNConfigurationInstallingErrorMapper
+    private let appRouter: AppRouterType
+    
     @Published var shouldShowErrorMessage = false
-    @Published var didInstallVPNProfile = false
     @Published var installingStatus: VPNConfigurationInstallingStatus = .none
     var errorMessage: String?
     
-    init(installVPNConfiguration: InstallVPNConfigurationUseCaseType, errorMapper: VPNConfigurationInstallingErrorMapper) {
+    private let successDestination: any Destinations
+    
+    init(installVPNConfiguration: InstallVPNConfigurationUseCaseType, errorMapper: VPNConfigurationInstallingErrorMapper, appRouter: AppRouterType, successDestination: any Destinations) {
         self.installVPNConfiguration = installVPNConfiguration
         self.errorMapper = errorMapper
+        self.appRouter = appRouter
+        self.successDestination = successDestination
     }
     
     func install() {
@@ -32,8 +37,8 @@ class VPNConfigurationInstallingViewModel: ObservableObject {
             do {
                 try await installVPNConfiguration()
                 Task { @MainActor in
-                    didInstallVPNProfile = true
                     installingStatus = .succeeded
+                    appRouter.navigate(to: successDestination)
                 }
             } catch {
                 errorMessage = errorMapper.map(error: error)

@@ -18,7 +18,9 @@ class LoginFactory {
         LoginViewModel(loginWithCredentialsUseCase: makeLoginWithCredentialsUseCase(),
                        checkLoginAvailability: CheckLoginAvailability(),
                        validateLoginCredentials: ValidateCredentialsFormat(),
-                       errorHandler: makeLoginViewModelErrorHandler())
+                       errorHandler: makeLoginViewModelErrorHandler(),
+                       appRouter: AppRouter.shared,
+                       successDestination: OnboardingDestinations.installVPNProfile)
         
     }
     
