@@ -14,16 +14,15 @@ class RootContainerViewModel: ObservableObject {
     @Published var state: State = .splash
     @Published internal var isBootstrapped: Bool = false
     
-    // TODO: Update this value from the Vpn OnBoarding installation profile screen
-    @AppStorage(.kOnboardingVpnProfileInstalled) var onBoardingVpnProfileInstalled = false
+    private let accountProvider: AccountProviderType
+    private let notificationCenter: NotificationCenterType
+    private let vpnConfigurationAvailability: VPNConfigurationAvailabilityType
     
-    let accountProvider: AccountProviderType
-    let notificationCenter: NotificationCenterType
-    
-    init(accountProvider: AccountProviderType, notificationCenter: NotificationCenterType = NotificationCenter.default) {
+    init(accountProvider: AccountProviderType, notificationCenter: NotificationCenterType = NotificationCenter.default, vpnConfigurationAvailability: VPNConfigurationAvailabilityType) {
         
         self.accountProvider = accountProvider
         self.notificationCenter = notificationCenter
+        self.vpnConfigurationAvailability = vpnConfigurationAvailability
         updateState()
         subscribeToAccountUpdates()
     }
@@ -44,6 +43,9 @@ class RootContainerViewModel: ObservableObject {
         guard isBootstrapped else {
             return
         }
+        
+        let onBoardingVpnProfileInstalled = vpnConfigurationAvailability.get()
+        
         switch (accountProvider.isLoggedIn, onBoardingVpnProfileInstalled) {
             // logged in, vpn profile installed
         case (true, true):

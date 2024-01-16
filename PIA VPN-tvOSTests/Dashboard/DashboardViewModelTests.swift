@@ -29,7 +29,7 @@ class DashboardViewModelTests: XCTestCase {
     }
     
     private func initializeSut() {
-        sut = DashboardViewModel(accountProvider: fixture.accountProviderMock, appRouter: fixture.appRouter)
+        sut = DashboardViewModel(accountProvider: fixture.accountProviderMock, appRouter: fixture.appRouter, navigationDestination: RegionsDestinations.serversList)
     }
     
     func test_navigateToRegionsList() {

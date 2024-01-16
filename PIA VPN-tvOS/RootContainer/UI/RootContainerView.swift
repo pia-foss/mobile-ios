@@ -6,22 +6,32 @@ struct RootContainerView: View {
     @ObservedObject var viewModel: RootContainerViewModel
     @Environment(\.scenePhase) var scenePhase
     
+    @ObservedObject private var appRouter: AppRouter
+    
+    init(viewModel: RootContainerViewModel, appRouter: AppRouter) {
+        self.viewModel = viewModel
+        self.appRouter = appRouter
+    }
+    
     var body: some View {
-        VStack {
-            switch viewModel.state {
-            case .splash:
-                VStack {
-                    // TODO: Add Splash screen here
+        NavigationStack(path: $appRouter.path) {
+                // Add a root view here.
+                switch viewModel.state {
+                case .splash:
+                    VStack {
+                        // TODO: Add Splash screen here
+                    }
+                case .notActivated:
+                    LoginFactory.makeLoginView()
+                        .withAuthenticationRoutes()
+                        .withOnboardingRoutes()
+                case .activatedNotOnboarded:
+                    VPNConfigurationInstallingFactory.makeVPNConfigurationInstallingView()
+                        .withOnboardingRoutes()
+                case .activated:
+                    UserActivatedContainerFactory.makeUSerActivatedContainerView()
                 }
-            case .notActivated:
-                LoginFactory.makeLoginView()
-            case .activatedNotOnboarded:
-                VPNConfigurationInstallingFactory.makeVPNConfigurationInstallingView()
-            case .activated:
-                UserActivatedContainerFactory.makeUSerActivatedContainerView()
-            }
-        }.onChange(of: scenePhase) { newPhase in
-            
+        }.onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {
                 NSLog(">>> Active")
                 viewModel.phaseDidBecomeActive()

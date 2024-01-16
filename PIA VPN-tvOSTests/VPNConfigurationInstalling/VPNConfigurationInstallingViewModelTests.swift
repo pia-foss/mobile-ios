@@ -14,22 +14,25 @@ final class VPNConfigurationInstallingViewModelTests: XCTestCase {
     
     final class Fixture {
         let errorMapper = VPNConfigurationInstallingErrorMapper()
+        let appRouterSpy = AppRouterSpy()
         
         func makeInstallVPNConfiguration(error: InstallVPNConfigurationError?) -> InstallVPNConfigurationUseCaseType {
             return InstallVPNConfigurationUseCaseMock(error: error)
         }
     }
     
-    var fixture: Fixture = Fixture()
+    var fixture: Fixture!
     var sut: VPNConfigurationInstallingViewModel!
     var cancellables: Set<AnyCancellable>!
     
     override func setUp() {
+        fixture = Fixture()
         cancellables = Set<AnyCancellable>()
     }
     
     override func tearDown() {
         sut = nil
+        fixture = nil
         cancellables = nil
     }
 
@@ -37,7 +40,9 @@ final class VPNConfigurationInstallingViewModelTests: XCTestCase {
         // GIVEN
         sut = VPNConfigurationInstallingViewModel(
             installVPNConfiguration: fixture.makeInstallVPNConfiguration(error: .userCanceled),
-            errorMapper: fixture.errorMapper)
+            errorMapper: fixture.errorMapper,
+            appRouter: fixture.appRouterSpy,
+            successDestination: OnboardingDestinations.dashboard)
         
         let expectation = expectation(description: "Waiting for installing to finish with error message")
         let expectedErrorMessage = "We need this permission for the application to function."
@@ -58,16 +63,18 @@ final class VPNConfigurationInstallingViewModelTests: XCTestCase {
         // THEN
         wait(for: [expectation], timeout: 1)
         XCTAssertEqual(capturedInstallingStatuses, [.isInstalling, .failed(errorMessage: expectedErrorMessage)])
-        XCTAssertFalse(sut.didInstallVPNProfile)
         XCTAssert(sut.shouldShowErrorMessage)
         XCTAssertEqual(sut.errorMessage, expectedErrorMessage)
+        XCTAssertEqual(fixture.appRouterSpy.requests, [])
     }
     
     func test_install_succeeds_when_installVPNConfiguration_succeeds() {
         // GIVEN
         sut = VPNConfigurationInstallingViewModel(
             installVPNConfiguration: fixture.makeInstallVPNConfiguration(error: nil),
-            errorMapper: fixture.errorMapper)
+            errorMapper: fixture.errorMapper,
+            appRouter: fixture.appRouterSpy,
+            successDestination: OnboardingDestinations.dashboard)
         
         let expectation = expectation(description: "Waiting for installing to finish successfully")
         var capturedInstallingStatuses = [VPNConfigurationInstallingStatus]()
@@ -76,9 +83,7 @@ final class VPNConfigurationInstallingViewModelTests: XCTestCase {
             capturedInstallingStatuses.append(status)
         }).store(in: &cancellables)
         
-        sut.$didInstallVPNProfile.dropFirst().sink(receiveValue: { value in
-            expectation.fulfill()
-        }).store(in: &cancellables)
+        fixture.appRouterSpy.didGetARequest = { expectation.fulfill() }
         
         // WHEN
         sut.install()
@@ -86,8 +91,8 @@ final class VPNConfigurationInstallingViewModelTests: XCTestCase {
         // THEN
         wait(for: [expectation], timeout: 1)
         XCTAssertEqual(capturedInstallingStatuses, [.isInstalling, .succeeded])
-        XCTAssert(sut.didInstallVPNProfile)
         XCTAssertFalse(sut.shouldShowErrorMessage)
         XCTAssertNil(sut.errorMessage)
+        XCTAssertEqual(fixture.appRouterSpy.requests, [.navigate(OnboardingDestinations.dashboard)])
     }
 }

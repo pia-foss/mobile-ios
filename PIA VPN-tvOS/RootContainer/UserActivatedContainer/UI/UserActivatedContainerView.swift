@@ -14,21 +14,17 @@ struct UserActivatedContainerView: View {
     @ObservedObject var router: AppRouter
     
     var body: some View {
-        NavigationStack(path: $router.path) {
-            DashboardFactory.makeDashboardView()
-                .navigationDestination(for: RegionsDestinations.self) { destination in
-                    switch destination {
-                    case .serversList:
-                        RegionsSelectionFactory.makeRegionsListView()
-                    case .selectServer(let selectedServer):
-                        VStack {
-                            Text("Selected server: \(selectedServer.name)")
-                        }
+        DashboardFactory.makeDashboardView()
+            .navigationDestination(for: RegionsDestinations.self) { destination in
+                switch destination {
+                case .serversList:
+                    RegionsSelectionFactory.makeRegionsListView()
+                case .selectServer(let selectedServer):
+                    VStack {
+                        Text("Selected server: \(selectedServer.name)")
                     }
                 }
-            
-        }
-        
+            }
     }
     
 }

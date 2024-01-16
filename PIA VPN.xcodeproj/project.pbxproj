@@ -551,6 +551,8 @@
 		E5217F702AEB042800123442 /* ClientError+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5217F6E2AEB042800123442 /* ClientError+Localization.swift */; };
 		E5217F722AEB055D00123442 /* Client+Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5217F712AEB055D00123442 /* Client+Storyboard.swift */; };
 		E5217F732AEB055D00123442 /* Client+Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5217F712AEB055D00123442 /* Client+Storyboard.swift */; };
+		E52E68FE2B55E47600471913 /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E68FD2B55E47500471913 /* Routes.swift */; };
+		E52E69002B56ABE400471913 /* AppRouterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E68FF2B56ABE400471913 /* AppRouterSpy.swift */; };
 		E59E8F942AEA7A29009278F5 /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8F932AEA7A29009278F5 /* ActivityButton.swift */; };
 		E59E8F952AEA7A29009278F5 /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8F932AEA7A29009278F5 /* ActivityButton.swift */; };
 		E59E8F972AEA7A5A009278F5 /* AutolayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8F962AEA7A5A009278F5 /* AutolayoutViewController.swift */; };
@@ -1228,6 +1230,8 @@
 		E5217F652AEAF94C00123442 /* SwiftGen+Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Assets.swift"; sourceTree = "<group>"; };
 		E5217F6E2AEB042800123442 /* ClientError+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClientError+Localization.swift"; sourceTree = "<group>"; };
 		E5217F712AEB055D00123442 /* Client+Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+Storyboard.swift"; sourceTree = "<group>"; };
+		E52E68FD2B55E47500471913 /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
+		E52E68FF2B56ABE400471913 /* AppRouterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterSpy.swift; sourceTree = "<group>"; };
 		E59E8F932AEA7A29009278F5 /* ActivityButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityButton.swift; sourceTree = "<group>"; };
 		E59E8F962AEA7A5A009278F5 /* AutolayoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutolayoutViewController.swift; sourceTree = "<group>"; };
 		E59E8F992AEA7A7F009278F5 /* SignupInternetUnreachableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupInternetUnreachableViewController.swift; sourceTree = "<group>"; };
@@ -1910,6 +1914,7 @@
 				691317A02B32ED76009B4E85 /* AccountProviderTypeMock.swift */,
 				690FC4812B3C5A4300F6DCC8 /* ServerMock.swift */,
 				690FC4852B3C5F7300F6DCC8 /* SelectedServerUseCaseMock.swift */,
+				E52E68FF2B56ABE400471913 /* AppRouterSpy.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1988,6 +1993,7 @@
 				697A5F432B514B3D00661977 /* CompositionRoot */,
 				69A226B22B3074D30065EDDB /* AppRouter.swift */,
 				69816C3C2B4EBB3C00E3C86B /* Destinations.swift */,
+				E52E68FD2B55E47500471913 /* Routes.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -3908,6 +3914,7 @@
 				E5AB28712B279B4000744E5F /* LoginProviderType.swift in Sources */,
 				693CA5B02B3EDB4900D38378 /* RegionFilter.swift in Sources */,
 				E5AB287B2B28B4C400744E5F /* Credentials.swift in Sources */,
+				E52E68FE2B55E47600471913 /* Routes.swift in Sources */,
 				E5C5077C2B0E144E00200A6A /* ContentView.swift in Sources */,
 				69A226BE2B307D5F0065EDDB /* RootContainerView.swift in Sources */,
 				693CA5AA2B3ED5F600D38378 /* Bootstrapper.swift in Sources */,
@@ -3962,6 +3969,7 @@
 				690FC4882B3C60F500F6DCC8 /* QuickConnectViewModelTests.swift in Sources */,
 				E5AB28992B2C783600744E5F /* LoginProviderTests.swift in Sources */,
 				E5C507C22B1F702700200A6A /* LoginWithCredentialsUseCaseMock.swift in Sources */,
+				E52E69002B56ABE400471913 /* AppRouterSpy.swift in Sources */,
 				E5AB28E12B4C107F00744E5F /* VpnConfigurationProviderTypeMock.swift in Sources */,
 				E5C507C42B1F72E700200A6A /* CheckLoginAvailabilityTests.swift in Sources */,
 				E5C507C02B1F700C00200A6A /* CheckLoginAvailabilityMock.swift in Sources */,
