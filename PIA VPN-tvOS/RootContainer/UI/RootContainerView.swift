@@ -18,7 +18,7 @@ struct RootContainerView: View {
             case .activatedNotOnboarded:
                 VPNConfigurationInstallingFactory.makeVPNConfigurationInstallingView()
             case .activated:
-                DashboardFactory.makeDashboardView()
+                UserActivatedContainerFactory.makeUSerActivatedContainerView()
             }
         }.onChange(of: scenePhase) { newPhase in
             

@@ -12,7 +12,7 @@ class DashboardFactory {
         guard let defaultAccountProvider = Client.providers.accountProvider as? DefaultAccountProvider else {
             fatalError("Incorrect account provider type")
         }
-        return DashboardViewModel(accountProvider: defaultAccountProvider)
+        return DashboardViewModel(accountProvider: defaultAccountProvider, appRouter: AppRouterFactory.makeAppRouter())
     }
     
     static func makePIAConnectionButton(size: CGFloat = 160, lineWidth: CGFloat = 6) -> PIAConnectionButton {

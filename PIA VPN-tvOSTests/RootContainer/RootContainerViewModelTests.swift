@@ -29,16 +29,19 @@ final class RootContainerViewModelTests: XCTestCase {
         UserDefaults.standard.removeObject(forKey: .kOnboardingVpnProfileInstalled)
     }
     
-    private func initializeSut() {
+    private func initializeSut(bootStrapped: Bool = true) {
         sut = RootContainerViewModel(accountProvider: fixture.accountProvierMock, notificationCenter: fixture.notificationCenterMock)
+        sut.isBootstrapped = bootStrapped
     }
     
     func testState_WhenUserIsNotAuthenticated() {
         // GIVEN that the user is not logged in
         fixture.accountProvierMock.isLoggedIn = false
         
-        // WHEN the RootContainer is created
         initializeSut()
+        
+        // WHEN the app is launched
+        sut.phaseDidBecomeActive()
         
         // THEN the state becomes 'notActivated'
         XCTAssertEqual(sut.state, .notActivated)
@@ -50,8 +53,10 @@ final class RootContainerViewModelTests: XCTestCase {
         // AND GIVEN that the Onboarding Vpn Profile is NOT installed
         stubOnboardingVpnInstallation(finished: false)
         
-        // WHEN the RootContainer is created
         initializeSut()
+        
+        // WHEN the app is launched
+        sut.phaseDidBecomeActive()
         
         // THEN the state becomes 'activatedNotOnboarded'
         XCTAssertEqual(sut.state, .activatedNotOnboarded)
@@ -63,8 +68,10 @@ final class RootContainerViewModelTests: XCTestCase {
         // AND GIVEN that the Onboarding Vpn Profile is installed
         stubOnboardingVpnInstallation(finished: true)
         
-        // WHEN the RootContainer is created
         initializeSut()
+        
+        // WHEN the app is launched
+        sut.phaseDidBecomeActive()
         
         // THEN the state becomes 'activated'
         XCTAssertEqual(sut.state, .activated)
@@ -75,5 +82,6 @@ final class RootContainerViewModelTests: XCTestCase {
 extension RootContainerViewModelTests {
     private func stubOnboardingVpnInstallation(finished: Bool) {
         UserDefaults.standard.setValue(finished, forKey: .kOnboardingVpnProfileInstalled)
+        UserDefaults.standard.synchronize()
     }
 }
