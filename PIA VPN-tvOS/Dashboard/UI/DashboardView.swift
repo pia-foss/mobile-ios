@@ -30,7 +30,7 @@ struct DashboardView: View {
                 Button {
                     viewModel.logOut()
                 } label: {
-                    Text("LogOut")
+                    Text(L10n.Localizable.Menu.Logout.confirm)
                 }
 
             }

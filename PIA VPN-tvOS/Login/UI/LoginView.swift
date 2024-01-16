@@ -24,21 +24,20 @@ struct LoginView: View {
                 if viewModel.loginStatus == .isLogging {
                     ProgressView().progressViewStyle(.circular)
                 }
-                
                 VStack {
-                    Text("Sign in to your account")
+                    Text(L10n.Welcome.Login.title)
                         .font(.system(size: 36))
-                    TextField("Username(p1234567)", text: $userName)
-                    SecureField("Password", text: $password)
+                    TextField(L10n.Welcome.Login.Username.placeholder, text: $userName)
+                    SecureField(L10n.Welcome.Login.Password.placeholder, text: $password)
                     Button(action: {
                         viewModel.login(username: userName, password: password)
                     }, label: {
-                        Text("LOGIN")
+                        Text(L10n.Welcome.Purchase.Login.button)
                     })
                 }
             }
-        }.alert("Error", isPresented: $viewModel.shouldShowErrorMessage, actions: {
-            Button("OK") {}
+        }.alert(L10n.Localizable.Global.error, isPresented: $viewModel.shouldShowErrorMessage, actions: {
+            Button(L10n.Localizable.Global.ok) {}
         }, message: {
             if case .failed(let errorMessage, _) = viewModel.loginStatus, let errorMessage = errorMessage {
                 Text(errorMessage)
