@@ -26,8 +26,7 @@ class VPNConfigurationInstallingFactory {
         VPNConfigurationInstallingViewModel(installVPNConfiguration: 
                                                 makeInstallVPNConfigurationUseCase(), 
                                             errorMapper: VPNConfigurationInstallingErrorMapper(),
-                                            appRouter: AppRouter.shared,
-                                            successDestination: OnboardingDestinations.dashboard)
+                                            appRouter: AppRouter.shared, onSuccessAction: .goBackToRoot)
     }
     
     private static func makeInstallVPNConfigurationUseCase() -> InstallVPNConfigurationUseCaseType {

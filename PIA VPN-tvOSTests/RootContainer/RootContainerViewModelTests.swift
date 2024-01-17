@@ -9,6 +9,7 @@
 import XCTest
 import Combine
 @testable import PIA_VPN_tvOS
+import SwiftUI
 
 final class RootContainerViewModelTests: XCTestCase {
     
@@ -16,12 +17,12 @@ final class RootContainerViewModelTests: XCTestCase {
         let accountProvierMock = AccountProviderTypeMock()
         let notificationCenterMock = NotificationCenterMock()
         var vpnConfigurationAvailabilityMock = VPNConfigurationAvailabilityMock(value: false)
+        let appRouterSpy = AppRouterSpy()
         let bootstrapMock = BootstraperMock()
         
         func makeUserAuthenticationStatusMonitorMock(status: UserAuthenticationStatus) -> UserAuthenticationStatusMonitorMock {
             return UserAuthenticationStatusMonitorMock(status: status)
         }
-        
     }
 
     var fixture: Fixture!
@@ -38,11 +39,12 @@ final class RootContainerViewModelTests: XCTestCase {
     }
     
     private func initializeSut(bootStrapped: Bool = true) {
-        sut = RootContainerViewModel(accountProvider: fixture.accountProvierMock, 
+        sut = RootContainerViewModel(accountProvider: fixture.accountProvierMock,
                                      notificationCenter: fixture.notificationCenterMock,
                                      vpnConfigurationAvailability: fixture.vpnConfigurationAvailabilityMock, 
                                      bootstrap: fixture.bootstrapMock, 
-                                     userAuthenticationStatusMonitor: fixture.makeUserAuthenticationStatusMonitorMock(status: .loggedOut))
+                                     userAuthenticationStatusMonitor: fixture.makeUserAuthenticationStatusMonitorMock(status: .loggedOut),
+                                     appRouter: fixture.appRouterSpy)
         sut.isBootstrapped = bootStrapped
     }
     
@@ -57,6 +59,9 @@ final class RootContainerViewModelTests: XCTestCase {
         
         // THEN the state becomes 'notActivated'
         XCTAssertEqual(sut.state, .notActivated)
+        
+        // AND no navigation requests are sent to the router
+        XCTAssertEqual(fixture.appRouterSpy.requests, [])
     }
     
     func testState_WhenUserIsAuthenticatedAndVpnProfileNotInstalled() {
@@ -72,6 +77,9 @@ final class RootContainerViewModelTests: XCTestCase {
         
         // THEN the state becomes 'activatedNotOnboarded'
         XCTAssertEqual(sut.state, .activatedNotOnboarded)
+        
+        // AND the router is called to navigate to the Onboarding Install VPN profile
+        XCTAssertEqual(fixture.appRouterSpy.requests, [AppRouterSpy.Request.navigate(OnboardingDestinations.installVPNProfile)])
     }
     
     func testState_WhenUserIsAuthenticatedAndVpnProfileInstalled() {
@@ -87,6 +95,9 @@ final class RootContainerViewModelTests: XCTestCase {
         
         // THEN the state becomes 'activated'
         XCTAssertEqual(sut.state, .activated)
+        
+        // AND no navigation requests are sent to the router
+        XCTAssertEqual(fixture.appRouterSpy.requests, [])
     }
     
     func testBoostrapperIsCalled_WhenAppIsLaunched() {
@@ -112,7 +123,8 @@ final class RootContainerViewModelTests: XCTestCase {
                                      notificationCenter: fixture.notificationCenterMock,
                                      vpnConfigurationAvailability: fixture.vpnConfigurationAvailabilityMock,
                                      bootstrap: fixture.bootstrapMock,
-                                     userAuthenticationStatusMonitor: userAuthenticationStatusMonitor)
+                                     userAuthenticationStatusMonitor: userAuthenticationStatusMonitor, 
+                                     appRouter: fixture.appRouterSpy)
         
         // AND the app is launched
         sut.phaseDidBecomeActive()
@@ -138,7 +150,8 @@ final class RootContainerViewModelTests: XCTestCase {
                                      notificationCenter: fixture.notificationCenterMock,
                                      vpnConfigurationAvailability: fixture.vpnConfigurationAvailabilityMock,
                                      bootstrap: fixture.bootstrapMock,
-                                     userAuthenticationStatusMonitor: userAuthenticationStatusMonitor)
+                                     userAuthenticationStatusMonitor: userAuthenticationStatusMonitor,
+                                    appRouter: fixture.appRouterSpy)
         
         // AND the app is launched
         sut.phaseDidBecomeActive()

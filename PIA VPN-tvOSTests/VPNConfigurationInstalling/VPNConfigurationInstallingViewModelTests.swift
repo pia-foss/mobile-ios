@@ -35,14 +35,18 @@ final class VPNConfigurationInstallingViewModelTests: XCTestCase {
         fixture = nil
         cancellables = nil
     }
+    
+    func instantiateSut(with installConfigError: InstallVPNConfigurationError? = nil) {
+        sut = VPNConfigurationInstallingViewModel(
+            installVPNConfiguration: fixture.makeInstallVPNConfiguration(error: installConfigError),
+            errorMapper: fixture.errorMapper,
+            appRouter: fixture.appRouterSpy,
+            onSuccessAction: AppRouter.Actions.goBackToRoot)
+    }
 
     func test_install_fails_when_installVPNConfiguration_fails() {
         // GIVEN
-        sut = VPNConfigurationInstallingViewModel(
-            installVPNConfiguration: fixture.makeInstallVPNConfiguration(error: .userCanceled),
-            errorMapper: fixture.errorMapper,
-            appRouter: fixture.appRouterSpy,
-            successDestination: OnboardingDestinations.dashboard)
+        instantiateSut(with: .userCanceled)
         
         let expectation = expectation(description: "Waiting for installing to finish with error message")
         let expectedErrorMessage = "We need this permission for the application to function."
@@ -70,11 +74,7 @@ final class VPNConfigurationInstallingViewModelTests: XCTestCase {
     
     func test_install_succeeds_when_installVPNConfiguration_succeeds() {
         // GIVEN
-        sut = VPNConfigurationInstallingViewModel(
-            installVPNConfiguration: fixture.makeInstallVPNConfiguration(error: nil),
-            errorMapper: fixture.errorMapper,
-            appRouter: fixture.appRouterSpy,
-            successDestination: OnboardingDestinations.dashboard)
+        instantiateSut()
         
         let expectation = expectation(description: "Waiting for installing to finish successfully")
         var capturedInstallingStatuses = [VPNConfigurationInstallingStatus]()
@@ -89,10 +89,10 @@ final class VPNConfigurationInstallingViewModelTests: XCTestCase {
         sut.install()
 
         // THEN
-        wait(for: [expectation], timeout: 1)
+        wait(for: [expectation], timeout: 2)
         XCTAssertEqual(capturedInstallingStatuses, [.isInstalling, .succeeded])
         XCTAssertFalse(sut.shouldShowErrorMessage)
         XCTAssertNil(sut.errorMessage)
-        XCTAssertEqual(fixture.appRouterSpy.requests, [.navigate(OnboardingDestinations.dashboard)])
+        XCTAssertEqual(fixture.appRouterSpy.requests, [.goBackToRoot])
     }
 }

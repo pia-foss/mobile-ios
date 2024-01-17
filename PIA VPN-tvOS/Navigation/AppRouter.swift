@@ -9,7 +9,10 @@ protocol AppRouterType {
     func navigate(to destination: any Destinations)
     func pop()
     func goBackToRoot()
+    
+    func execute(action: AppRouter.Actions)
 }
+
 
 // AppRouter enables any component to navigate the user to any screen defined within Destinations
 class AppRouter: ObservableObject, AppRouterType {
@@ -38,14 +41,24 @@ class AppRouter: ObservableObject, AppRouterType {
     func goBackToRoot() {
         path.removeLast(path.count)
     }
-    
+    /*
+    func execute(action: AppRouter.Actions) {
+        switch action {
+        case .pop:
+            pop()
+        case .goBackToRoot:
+            goBackToRoot()
+        case .navigate(let destination):
+            navigate(to: destination)
+        }
+    }
+    */
 }
 
 
 extension AppRouter {
     
     enum Actions: Equatable {
-        
         case pop(router: AppRouterType)
         case goBackToRoot(router: AppRouterType)
         case navigate(router: AppRouterType, destination: any Destinations)
@@ -74,5 +87,4 @@ extension AppRouter {
         }
         
     }
-    
 }

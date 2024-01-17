@@ -25,11 +25,9 @@ struct RootContainerView: View {
                     LoginFactory.makeLoginView()
                         .withAuthenticationRoutes()
                         .withOnboardingRoutes()
-                case .activatedNotOnboarded:
-                    VPNConfigurationInstallingFactory.makeVPNConfigurationInstallingView()
-                        .withOnboardingRoutes()
-                case .activated:
+                case .activatedNotOnboarded, .activated:
                     UserActivatedContainerFactory.makeUSerActivatedContainerView()
+                        .withOnboardingRoutes()
                 }
         }.onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {

@@ -20,21 +20,19 @@ class RootContainerViewModel: ObservableObject {
     private let vpnConfigurationAvailability: VPNConfigurationAvailabilityType
     private let bootstrap: BootstraperType
     private let userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType
+    private let appRouter: AppRouterType
     private var cancellables = Set<AnyCancellable>()
     
-    init(accountProvider: AccountProviderType, notificationCenter: NotificationCenterType = NotificationCenter.default, vpnConfigurationAvailability: VPNConfigurationAvailabilityType, bootstrap: BootstraperType, userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType) {
+    init(accountProvider: AccountProviderType, notificationCenter: NotificationCenterType = NotificationCenter.default, vpnConfigurationAvailability: VPNConfigurationAvailabilityType, bootstrap: BootstraperType, userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType, appRouter: AppRouterType) {
         
         self.accountProvider = accountProvider
         self.notificationCenter = notificationCenter
         self.vpnConfigurationAvailability = vpnConfigurationAvailability
         self.bootstrap = bootstrap
         self.userAuthenticationStatusMonitor = userAuthenticationStatusMonitor
+        self.appRouter = appRouter
         updateState()
         subscribeToAccountUpdates()
-    }
-    
-    deinit {
-        notificationCenter.removeObserver(self)
     }
     
     func phaseDidBecomeActive() {
@@ -56,6 +54,7 @@ class RootContainerViewModel: ObservableObject {
             state = .activated
             // logged in, vpn profile not installed
         case (true, false):
+            appRouter.navigate(to: OnboardingDestinations.installVPNProfile)
             state = .activatedNotOnboarded
             // not logged in, any
         case (false, _):

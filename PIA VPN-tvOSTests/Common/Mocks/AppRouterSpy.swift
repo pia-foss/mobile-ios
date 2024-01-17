@@ -10,6 +10,7 @@ import Foundation
 @testable import PIA_VPN_tvOS
 
 class AppRouterSpy: AppRouterType {
+    
     enum Request: Equatable {
         static func == (lhs: AppRouterSpy.Request, rhs: AppRouterSpy.Request) -> Bool {
             switch (lhs, rhs) {
@@ -55,4 +56,13 @@ class AppRouterSpy: AppRouterType {
         requests.append(.goBackToRoot)
         didGetARequest?()
     }
+    
+    func execute(action: AppRouter.Actions) {
+        switch action {
+        case .pop: pop()
+        case .goBackToRoot: goBackToRoot()
+        case .navigate(let destination): navigate(to: destination)
+        }
+    }
+    
 }
