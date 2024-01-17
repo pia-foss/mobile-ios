@@ -18,10 +18,10 @@ struct VPNConfigurationInstallingView: View {
     var body: some View {
         VStack {
             VStack {
-                Text("PIA needs access to your VPN profiles to secure your traffic.")
+                Text(L10n.Localizable.VpnPermission.Body.title)
                     .font(.title2)
                     .bold().padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
-                Text("You’ll see a prompt for PIA VPN and need to allow access to VPN configurations.\nTo proceed tap on “OK”")
+                Text(L10n.Localizable.VpnPermission.Body.subtitle(L10n.Welcome.Purchase.continue))
                     .font(.headline)
                     .foregroundStyle(.gray)
             }.padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
@@ -30,14 +30,14 @@ struct VPNConfigurationInstallingView: View {
                 Button {
                     viewModel.install()
                 } label: {
-                    Text("Continue")
+                    Text(L10n.Welcome.Purchase.continue)
                 }
-                Text("We don’t monitor, filter or log any network activity.")
+                Text(L10n.Localizable.VpnPermission.Body.footer)
                     .font(.footnote)
                     .foregroundStyle(.gray)
             }
         }.alert("PIA", isPresented: $viewModel.shouldShowErrorMessage, actions: {
-            Button("OK") {
+            Button(L10n.Localizable.Global.ok) {
                 Task {
                     viewModel.install()
                 }

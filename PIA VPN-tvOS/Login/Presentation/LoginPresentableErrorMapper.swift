@@ -12,13 +12,13 @@ class LoginPresentableErrorMapper {
     func map(error: LoginError) -> String? {
         switch error {
             case .unauthorized:
-                return "Your username or password is incorrect."
+                return L10n.Welcome.Login.Error.unauthorized
             case .throttled(retryAfter: let retryAfter):
-                return "Too many failed login attempts with this username. Please try again after \(retryAfter) second(s)."
+                return L10n.Welcome.Login.Error.throttled(retryAfter)
             case .generic(message: let message):
                 return message
             case .usernameWrongFormat, .passwordWrongFormat:
-                return "You must enter a username and password."
+                return L10n.Welcome.Login.Error.validation
             default:
                 return nil
         }

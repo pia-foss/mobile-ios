@@ -553,6 +553,10 @@
 		E5217F732AEB055D00123442 /* Client+Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5217F712AEB055D00123442 /* Client+Storyboard.swift */; };
 		E52E68FE2B55E47600471913 /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E68FD2B55E47500471913 /* Routes.swift */; };
 		E52E69002B56ABE400471913 /* AppRouterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E68FF2B56ABE400471913 /* AppRouterSpy.swift */; };
+		E52E69012B56E22000471913 /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = E501CBBA2AE9806800515006 /* UI.strings */; };
+		E52E69022B56E22A00471913 /* Signup.strings in Resources */ = {isa = PBXBuildFile; fileRef = E501CBCE2AE9806800515006 /* Signup.strings */; };
+		E52E69032B56E22D00471913 /* Welcome.strings in Resources */ = {isa = PBXBuildFile; fileRef = E501CBD02AE9806800515006 /* Welcome.strings */; };
+		E52E69042B56E26700471913 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E7EC043209326E30029811E /* Localizable.strings */; };
 		E59E8F942AEA7A29009278F5 /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8F932AEA7A29009278F5 /* ActivityButton.swift */; };
 		E59E8F952AEA7A29009278F5 /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8F932AEA7A29009278F5 /* ActivityButton.swift */; };
 		E59E8F972AEA7A5A009278F5 /* AutolayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8F962AEA7A5A009278F5 /* AutolayoutViewController.swift */; };
@@ -3343,9 +3347,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				694AC74F2B17ADF9007E7B56 /* Images.xcassets in Resources */,
+				E52E69032B56E22D00471913 /* Welcome.strings in Resources */,
 				69F0534A2B1F1D2800AE0665 /* Colors.xcassets in Resources */,
 				E5C507812B0E145000200A6A /* Preview Assets.xcassets in Resources */,
 				E5C5077E2B0E145000200A6A /* Assets.xcassets in Resources */,
+				E52E69042B56E26700471913 /* Localizable.strings in Resources */,
+				E52E69022B56E22A00471913 /* Signup.strings in Resources */,
+				E52E69012B56E22000471913 /* UI.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

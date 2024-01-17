@@ -16,7 +16,7 @@ class VPNConfigurationInstallingErrorMapper {
         
         switch error {
             case .userCanceled:
-                return "We need this permission for the application to function."
+            return L10n.Localizable.VpnPermission.Disallow.Message.basic
             default:
                 return nil
         }
