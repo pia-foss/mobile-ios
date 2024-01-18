@@ -2,6 +2,7 @@
 import Foundation
 import SwiftUI
 import PIALibrary
+import Combine
 
 class RootContainerViewModel: ObservableObject {
     enum State {
@@ -17,12 +18,17 @@ class RootContainerViewModel: ObservableObject {
     private let accountProvider: AccountProviderType
     private let notificationCenter: NotificationCenterType
     private let vpnConfigurationAvailability: VPNConfigurationAvailabilityType
+    private let bootstrap: BootstraperType
+    private let userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType
+    private var cancellables = Set<AnyCancellable>()
     
-    init(accountProvider: AccountProviderType, notificationCenter: NotificationCenterType = NotificationCenter.default, vpnConfigurationAvailability: VPNConfigurationAvailabilityType) {
+    init(accountProvider: AccountProviderType, notificationCenter: NotificationCenterType = NotificationCenter.default, vpnConfigurationAvailability: VPNConfigurationAvailabilityType, bootstrap: BootstraperType, userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType) {
         
         self.accountProvider = accountProvider
         self.notificationCenter = notificationCenter
         self.vpnConfigurationAvailability = vpnConfigurationAvailability
+        self.bootstrap = bootstrap
+        self.userAuthenticationStatusMonitor = userAuthenticationStatusMonitor
         updateState()
         subscribeToAccountUpdates()
     }
@@ -32,9 +38,7 @@ class RootContainerViewModel: ObservableObject {
     }
     
     func phaseDidBecomeActive() {
-        // Bootstrap PIALibrary preferences and settings
-        // TODO: DI this object
-        Bootstrapper.shared.bootstrap()
+        bootstrap()
         isBootstrapped = true
         updateState()
     }
@@ -61,20 +65,12 @@ class RootContainerViewModel: ObservableObject {
 
 }
 
-// NotificationCenter subscriptions
+// Combine subscriptions
 
 extension RootContainerViewModel {
     private func subscribeToAccountUpdates() {
-        notificationCenter.addObserver(self, selector: #selector(handleAccountDidLogin), name: .PIAAccountDidLogin, object: nil)
-        
-        notificationCenter.addObserver(self, selector: #selector(handleAccountDidLogout), name: .PIAAccountDidLogout, object: nil)
-    }
-    
-    @objc func handleAccountDidLogin() {
-        updateState()
-    }
-    
-    @objc func handleAccountDidLogout() {
-        updateState()
+        userAuthenticationStatusMonitor.getStatus().sink { status in
+            self.updateState()
+        }.store(in: &cancellables)
     }
 }

@@ -30,3 +30,9 @@ protocol ServerProviderType {
 
 extension DefaultServerProvider: ServerProviderType {
 }
+
+protocol VPNStatusProviderType {
+    var vpnStatus: VPNStatus { get }
+}
+
+extension DefaultVPNProvider: VPNStatusProviderType {}

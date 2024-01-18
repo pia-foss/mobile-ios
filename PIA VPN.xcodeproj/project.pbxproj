@@ -180,7 +180,6 @@
 		692483202AB05F18002A0407 /* PIAConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6924831F2AB05F18002A0407 /* PIAConnectionView.swift */; };
 		692483222AB05F37002A0407 /* PIACircleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483212AB05F37002A0407 /* PIACircleIcon.swift */; };
 		692483262AB05F85002A0407 /* PIAConnectionActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483252AB05F85002A0407 /* PIAConnectionActivityWidget.swift */; };
-		693CA5AA2B3ED5F600D38378 /* Bootstrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E98BB6D1FD5BC6200B41D6B /* Bootstrapper.swift */; };
 		693CA5AB2B3ED67A00D38378 /* AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1DF1FE4A450007C0B9B /* AppPreferences.swift */; };
 		693CA5AC2B3ED69B00D38378 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1EB1FE4B9DC007C0B9B /* AppConstants.swift */; };
 		693CA5AD2B3ED74100D38378 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1EE1FE4B9E6007C0B9B /* AppConfiguration.swift */; };
@@ -562,6 +561,16 @@
 		E52E69022B56E22A00471913 /* Signup.strings in Resources */ = {isa = PBXBuildFile; fileRef = E501CBCE2AE9806800515006 /* Signup.strings */; };
 		E52E69032B56E22D00471913 /* Welcome.strings in Resources */ = {isa = PBXBuildFile; fileRef = E501CBD02AE9806800515006 /* Welcome.strings */; };
 		E52E69042B56E26700471913 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E7EC043209326E30029811E /* Localizable.strings */; };
+		E52E690A2B5BC0ED00471913 /* VPNStatusMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E69092B5BC0ED00471913 /* VPNStatusMonitor.swift */; };
+		E52E690C2B5BC19300471913 /* UserAuthenticationStatusMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E690B2B5BC19300471913 /* UserAuthenticationStatusMonitor.swift */; };
+		E52E690F2B5D695A00471913 /* VPNStatusMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E690E2B5D695A00471913 /* VPNStatusMonitorTests.swift */; };
+		E52E69112B5D696E00471913 /* UserAuthenticationStatusMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E69102B5D696E00471913 /* UserAuthenticationStatusMonitorTests.swift */; };
+		E52E69122B5DAE6100471913 /* Bootstrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E69062B59CCE600471913 /* Bootstrapper.swift */; };
+		E52E69152B5DB05600471913 /* BootstraperFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E69142B5DB05600471913 /* BootstraperFactory.swift */; };
+		E52E691A2B5DB86F00471913 /* BootstraperMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E69192B5DB86F00471913 /* BootstraperMock.swift */; };
+		E52E691D2B5DC2B200471913 /* StateMonitorsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E691C2B5DC2B200471913 /* StateMonitorsFactory.swift */; };
+		E52E691F2B5DCEA500471913 /* UserAuthenticationStatusMonitorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E691E2B5DCEA500471913 /* UserAuthenticationStatusMonitorMock.swift */; };
+		E52E69222B5DCF1F00471913 /* VPNStatusProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E69212B5DCF1F00471913 /* VPNStatusProviderMock.swift */; };
 		E59E8F942AEA7A29009278F5 /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8F932AEA7A29009278F5 /* ActivityButton.swift */; };
 		E59E8F952AEA7A29009278F5 /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8F932AEA7A29009278F5 /* ActivityButton.swift */; };
 		E59E8F972AEA7A5A009278F5 /* AutolayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8F962AEA7A5A009278F5 /* AutolayoutViewController.swift */; };
@@ -1244,6 +1253,16 @@
 		E5217F712AEB055D00123442 /* Client+Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+Storyboard.swift"; sourceTree = "<group>"; };
 		E52E68FD2B55E47500471913 /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
 		E52E68FF2B56ABE400471913 /* AppRouterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterSpy.swift; sourceTree = "<group>"; };
+		E52E69062B59CCE600471913 /* Bootstrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Bootstrapper.swift; path = ../Bootstrapper.swift; sourceTree = "<group>"; };
+		E52E69092B5BC0ED00471913 /* VPNStatusMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusMonitor.swift; sourceTree = "<group>"; };
+		E52E690B2B5BC19300471913 /* UserAuthenticationStatusMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationStatusMonitor.swift; sourceTree = "<group>"; };
+		E52E690E2B5D695A00471913 /* VPNStatusMonitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusMonitorTests.swift; sourceTree = "<group>"; };
+		E52E69102B5D696E00471913 /* UserAuthenticationStatusMonitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationStatusMonitorTests.swift; sourceTree = "<group>"; };
+		E52E69142B5DB05600471913 /* BootstraperFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootstraperFactory.swift; sourceTree = "<group>"; };
+		E52E69192B5DB86F00471913 /* BootstraperMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootstraperMock.swift; sourceTree = "<group>"; };
+		E52E691C2B5DC2B200471913 /* StateMonitorsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateMonitorsFactory.swift; sourceTree = "<group>"; };
+		E52E691E2B5DCEA500471913 /* UserAuthenticationStatusMonitorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationStatusMonitorMock.swift; sourceTree = "<group>"; };
+		E52E69212B5DCF1F00471913 /* VPNStatusProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusProviderMock.swift; sourceTree = "<group>"; };
 		E59E8F932AEA7A29009278F5 /* ActivityButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityButton.swift; sourceTree = "<group>"; };
 		E59E8F962AEA7A5A009278F5 /* AutolayoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutolayoutViewController.swift; sourceTree = "<group>"; };
 		E59E8F992AEA7A7F009278F5 /* SignupInternetUnreachableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupInternetUnreachableViewController.swift; sourceTree = "<group>"; };
@@ -1905,6 +1924,7 @@
 		696E8F0E2B31AC3C0080BB31 /* RootContainer */ = {
 			isa = PBXGroup;
 			children = (
+				E52E69182B5DB86100471913 /* Mocks */,
 				696E8F0F2B31AC690080BB31 /* RootContainerViewModelTests.swift */,
 			);
 			path = RootContainer;
@@ -2140,6 +2160,7 @@
 		69F053442B1E054900AE0665 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				E52E691B2B5DC29200471913 /* StateMonitors */,
 				69A226B62B3079D00065EDDB /* Utils */,
 				69F053452B1E055300AE0665 /* UI */,
 			);
@@ -2504,6 +2525,52 @@
 			path = iOS;
 			sourceTree = "<group>";
 		};
+		E52E690D2B5D694500471913 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				E52E69202B5DCF1800471913 /* Mocks */,
+				E52E690E2B5D695A00471913 /* VPNStatusMonitorTests.swift */,
+				E52E69102B5D696E00471913 /* UserAuthenticationStatusMonitorTests.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		E52E69132B5DB04400471913 /* Bootstraper */ = {
+			isa = PBXGroup;
+			children = (
+				E52E69142B5DB05600471913 /* BootstraperFactory.swift */,
+				E52E69062B59CCE600471913 /* Bootstrapper.swift */,
+			);
+			path = Bootstraper;
+			sourceTree = "<group>";
+		};
+		E52E69182B5DB86100471913 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				E52E69192B5DB86F00471913 /* BootstraperMock.swift */,
+				E52E691E2B5DCEA500471913 /* UserAuthenticationStatusMonitorMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		E52E691B2B5DC29200471913 /* StateMonitors */ = {
+			isa = PBXGroup;
+			children = (
+				E52E69092B5BC0ED00471913 /* VPNStatusMonitor.swift */,
+				E52E690B2B5BC19300471913 /* UserAuthenticationStatusMonitor.swift */,
+				E52E691C2B5DC2B200471913 /* StateMonitorsFactory.swift */,
+			);
+			path = StateMonitors;
+			sourceTree = "<group>";
+		};
+		E52E69202B5DCF1800471913 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				E52E69212B5DCF1F00471913 /* VPNStatusProviderMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		E5AB286D2B27975E00744E5F /* CompositionRoot */ = {
 			isa = PBXGroup;
 			children = (
@@ -2617,6 +2684,7 @@
 		E5C507782B0E144E00200A6A /* PIA VPN-tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				E52E69132B5DB04400471913 /* Bootstraper */,
 				693CA5AF2B3ED9E100D38378 /* PIA VPN-tvOS.entitlements */,
 				69A226B92B307C8A0065EDDB /* RootContainer */,
 				697A5F472B514D1A00661977 /* UserActivatedContainer */,
@@ -2646,6 +2714,7 @@
 			isa = PBXGroup;
 			children = (
 				69793D9E2B59B94A000CB845 /* RegionsList */,
+				E52E690D2B5D694500471913 /* Shared */,
 				E5AB28AF2B34E06000744E5F /* VPNConfigurationInstalling */,
 				696E8F132B31AF110080BB31 /* Common */,
 				696E8F0E2B31AC3C0080BB31 /* RootContainer */,
@@ -3910,6 +3979,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6913179F2B32E4D4009B4E85 /* PIALibrary+Protocols.swift in Sources */,
+				E52E690A2B5BC0ED00471913 /* VPNStatusMonitor.swift in Sources */,
 				69FF0B082B3AD3E60074AA04 /* SelectedServerViewModel.swift in Sources */,
 				69FF0B0B2B3AD4C70074AA04 /* SwiftGen+Strings.swift in Sources */,
 				69F675AA2B592ED6000E31D5 /* ClientPreferences+Protocols.swift in Sources */,
@@ -3940,6 +4010,7 @@
 				E5AB287D2B28E4E700744E5F /* UserAccountMapper.swift in Sources */,
 				697A5F512B514DC500661977 /* UserActivatedContainerFactory.swift in Sources */,
 				69FF0B0A2B3AD3F60074AA04 /* QuickConnectViewModel.swift in Sources */,
+				E52E690C2B5BC19300471913 /* UserAuthenticationStatusMonitor.swift in Sources */,
 				69E61DEC2B5564C600085648 /* RegionsSelectionFactory.swift in Sources */,
 				699311A02B31894D00D316C8 /* Foundation+Protocols.swift in Sources */,
 				E5AB28792B28B4B300744E5F /* AccountInfo.swift in Sources */,
@@ -3956,6 +4027,7 @@
 				69FF0B0D2B3AD57C0074AA04 /* SelectedServerUseCase.swift in Sources */,
 				69FF0B112B3AF1F00074AA04 /* QuickConnectButton.swift in Sources */,
 				E5AB28AD2B32339C00744E5F /* VPNConfigurationInstallingView.swift in Sources */,
+				E52E69152B5DB05600471913 /* BootstraperFactory.swift in Sources */,
 				E5AB28CB2B48AFA900744E5F /* VPNConfigurationAvailability.swift in Sources */,
 				E5AB28712B279B4000744E5F /* LoginProviderType.swift in Sources */,
 				693CA5B02B3EDB4900D38378 /* RegionFilter.swift in Sources */,
@@ -3963,7 +4035,6 @@
 				E52E68FE2B55E47600471913 /* Routes.swift in Sources */,
 				E5C5077C2B0E144E00200A6A /* ContentView.swift in Sources */,
 				69A226BE2B307D5F0065EDDB /* RootContainerView.swift in Sources */,
-				693CA5AA2B3ED5F600D38378 /* Bootstrapper.swift in Sources */,
 				694AC74E2B17AB9C007E7B56 /* DashboardView.swift in Sources */,
 				69F1C2932B2B10D400E924AE /* DashboardFactory.swift in Sources */,
 				E5AB28B62B361E6C00744E5F /* VPNConfigurationInstallingErrorMapper.swift in Sources */,
@@ -3975,10 +4046,12 @@
 				E5AB28A02B30C68A00744E5F /* VPNConfigurationInstallingViewModel.swift in Sources */,
 				69F1C2972B2B239000E924AE /* PIAConnectionButtonViewModel.swift in Sources */,
 				693CA5B12B3EDBEF00D38378 /* ThemeCode.swift in Sources */,
+				E52E691D2B5DC2B200471913 /* StateMonitorsFactory.swift in Sources */,
 				E5C507B32B17E5AD00200A6A /* LoginError.swift in Sources */,
 				E5AB28BB2B48815300744E5F /* VPNConfigurationInstallingStatus.swift in Sources */,
 				E5C507CA2B1FAC3600200A6A /* LoginDomainErrorMapper.swift in Sources */,
 				693CA5AC2B3ED69B00D38378 /* AppConstants.swift in Sources */,
+				E52E69122B5DAE6100471913 /* Bootstrapper.swift in Sources */,
 				69FF0B0F2B3AE8F60074AA04 /* PIAImages+SwiftUI.swift in Sources */,
 				E5AB28772B28B49A00744E5F /* UserAccount.swift in Sources */,
 				69A226C02B307DBF0065EDDB /* RootContainerFactory.swift in Sources */,
@@ -4001,10 +4074,14 @@
 				E5AB286C2B2796E700744E5F /* LoginProviderMock.swift in Sources */,
 				E5AB28872B2911C900744E5F /* AccountProviderMock.swift in Sources */,
 				696E8F102B31AC690080BB31 /* RootContainerViewModelTests.swift in Sources */,
+				E52E691F2B5DCEA500471913 /* UserAuthenticationStatusMonitorMock.swift in Sources */,
+				E52E690F2B5D695A00471913 /* VPNStatusMonitorTests.swift in Sources */,
 				698C3B4E2B2B3CBE0012D527 /* LoginIntegrationTests.swift in Sources */,
+				E52E69112B5D696E00471913 /* UserAuthenticationStatusMonitorTests.swift in Sources */,
 				E5AB28D12B4B39F000744E5F /* VPNConfigurationInstallingViewModelTests.swift in Sources */,
 				E5C5078B2B0E145100200A6A /* PIA_VPN_tvOSTests.swift in Sources */,
 				690FC4802B3C59AF00F6DCC8 /* QuickConnectButtonViewModelTests.swift in Sources */,
+				E52E691A2B5DB86F00471913 /* BootstraperMock.swift in Sources */,
 				698C3B4B2B2B34760012D527 /* PIAConnectionButtonViewModelTests.swift in Sources */,
 				690FC4862B3C5F7300F6DCC8 /* SelectedServerUseCaseMock.swift in Sources */,
 				E5AB28E02B4C107F00744E5F /* VPNConfigurationAvailabilityMock.swift in Sources */,
@@ -4022,6 +4099,7 @@
 				69793DA12B59B96B000CB845 /* RegionsListViewModelTests.swift in Sources */,
 				E5C507C02B1F700C00200A6A /* CheckLoginAvailabilityMock.swift in Sources */,
 				691317A12B32ED76009B4E85 /* AccountProviderTypeMock.swift in Sources */,
+				E52E69222B5DCF1F00471913 /* VPNStatusProviderMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
