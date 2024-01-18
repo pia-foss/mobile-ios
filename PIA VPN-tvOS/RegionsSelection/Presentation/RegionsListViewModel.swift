@@ -12,10 +12,12 @@ import PIALibrary
 class RegionsListViewModel: ObservableObject {
     
     private let useCase: RegionsListUseCaseType
+    private let onServerSelectedRouterAction: AppRouter.Actions
     @Published var servers: [ServerType] = []
     
-    init(useCase: RegionsListUseCaseType) {
+    init(useCase: RegionsListUseCaseType, onServerSelectedRouterAction: AppRouter.Actions) {
         self.useCase = useCase
+        self.onServerSelectedRouterAction = onServerSelectedRouterAction
         refreshRegionsList()
     }
     
@@ -26,6 +28,6 @@ class RegionsListViewModel: ObservableObject {
     
     func didSelectRegionServer(_ server: ServerType) {
         useCase.select(server: server)
-        // TODO: Navigate back to the Dashboard
+        onServerSelectedRouterAction.execute()
     }
 }

@@ -6,7 +6,6 @@ import SwiftUI
 
 protocol AppRouterType {
     var stackCount: Int { get }
-    
     func navigate(to destination: any Destinations)
     func pop()
     func goBackToRoot()
@@ -38,6 +37,42 @@ class AppRouter: ObservableObject, AppRouterType {
     
     func goBackToRoot() {
         path.removeLast(path.count)
+    }
+    
+}
+
+
+extension AppRouter {
+    
+    enum Actions: Equatable {
+        
+        case pop(router: AppRouterType)
+        case goBackToRoot(router: AppRouterType)
+        case navigate(router: AppRouterType, destination: any Destinations)
+        
+        func execute() {
+            switch self {
+            case .pop(let router):
+                router.pop()
+            case .goBackToRoot(let router):
+                router.goBackToRoot()
+            case .navigate(let router, let destination):
+                router.navigate(to: destination)
+            }
+        }
+        
+        static func == (lhs: AppRouter.Actions, rhs: AppRouter.Actions) -> Bool {
+            switch (lhs, rhs) {
+            case (.pop, .pop):
+                return true
+            case (.goBackToRoot, .goBackToRoot): return true
+            case (.navigate(_, destination: let lhsDestination), .navigate(_, destination: let rhsDestination)):
+                return lhsDestination.hashValue == rhsDestination.hashValue
+            default:
+                return false
+            }
+        }
+        
     }
     
 }

@@ -11,7 +11,7 @@ import PIALibrary
 
 class RegionsSelectionFactory {
     static func makeRegionsListViewModel() -> RegionsListViewModel {
-        return RegionsListViewModel(useCase: makeRegionsListUseCase())
+        return RegionsListViewModel(useCase: makeRegionsListUseCase(), onServerSelectedRouterAction: .pop(router: AppRouterFactory.makeAppRouter()))
     }
     
     static func makeRegionsListView() -> RegionsListView {
