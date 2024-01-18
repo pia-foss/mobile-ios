@@ -25,6 +25,7 @@ class RegionsListViewModel: ObservableObject {
     
     
     func didSelectRegionServer(_ server: ServerType) {
-        // TODO: Implement me: connect to the selected server
+        useCase.select(server: server)
+        // TODO: Navigate back to the Dashboard
     }
 }

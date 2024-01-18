@@ -13,12 +13,10 @@ class QuickConnectViewModel: ObservableObject {
          selectedServerUseCase: SelectedServerUseCaseType) {
         self.connectUseCase = connectUseCase
         self.selectedServerUseCase = selectedServerUseCase
-        
-        updateStatus()
     }
     
     func updateStatus() {
-        servers = selectedServerUseCase.getHistoricalServers()
+        servers = selectedServerUseCase.getHistoricalServers().reversed()
     }
     
 }

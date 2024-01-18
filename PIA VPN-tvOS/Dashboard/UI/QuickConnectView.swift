@@ -12,6 +12,8 @@ struct QuickConnectView: View {
                     DashboardFactory.makeQuickConnectButton(for: item, delegate: viewModel)
                 }
             }
+        }.onAppear {
+            viewModel.updateStatus()
         }
         
     }

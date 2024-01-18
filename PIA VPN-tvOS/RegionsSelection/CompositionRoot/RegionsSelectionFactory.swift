@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALibrary
 
 class RegionsSelectionFactory {
     static func makeRegionsListViewModel() -> RegionsListViewModel {
@@ -18,6 +19,6 @@ class RegionsSelectionFactory {
     }
     
     static func makeRegionsListUseCase() -> RegionsListUseCaseType {
-        return RegionsListUseCase(serverProvider: DashboardFactory.makeServerProvider())
+        return RegionsListUseCase(serverProvider: DashboardFactory.makeServerProvider(), clientPreferences: Client.preferences)
     }
 }
