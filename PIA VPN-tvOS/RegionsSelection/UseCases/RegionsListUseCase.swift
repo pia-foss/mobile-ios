@@ -32,5 +32,4 @@ class RegionsListUseCase: RegionsListUseCaseType {
         clientPreferences.selectedServer = server
     }
     
-    
 }

@@ -30,6 +30,7 @@ final class QuickConnectViewModelTests: XCTestCase {
         
         // WHEN showing the Quick Connect section
         initilizeSut()
+        sut.updateStatus()
         
         // THEN there are 2 Quick Connect buttons displayed
         XCTAssertEqual(sut.servers.count, 2)

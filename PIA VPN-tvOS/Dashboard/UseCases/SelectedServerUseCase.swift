@@ -23,11 +23,6 @@ class SelectedServerUseCase: SelectedServerUseCaseType {
     }
     
     func getHistoricalServers() -> [ServerType] {
-        // TODO: Remove this `guard` statement when we get
-        // the real historical servers
-//        guard !serverProvider.historicalServers.isEmpty else {
-//            return Self.generateDemoServers()
-//        }
         return serverProvider.historicalServers
     }
     

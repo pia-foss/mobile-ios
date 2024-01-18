@@ -196,6 +196,7 @@
 		695BF81F2AC410E000D1139C /* (null) in Sources */ = {isa = PBXBuildFile; };
 		696E8F0D2B31A8760080BB31 /* NotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696E8F0C2B31A8760080BB31 /* NotificationCenterMock.swift */; };
 		696E8F102B31AC690080BB31 /* RootContainerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696E8F0F2B31AC690080BB31 /* RootContainerViewModelTests.swift */; };
+		69793DA12B59B96B000CB845 /* RegionsListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69793DA02B59B96B000CB845 /* RegionsListViewModelTests.swift */; };
 		697A5F452B514B5700661977 /* AppRouterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A5F442B514B5700661977 /* AppRouterFactory.swift */; };
 		697A5F4D2B514D9600661977 /* UserActivatedContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A5F4C2B514D9600661977 /* UserActivatedContainerView.swift */; };
 		697A5F512B514DC500661977 /* UserActivatedContainerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A5F502B514DC500661977 /* UserActivatedContainerFactory.swift */; };
@@ -229,6 +230,7 @@
 		69B70ABF2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
 		69B70AC02ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
 		69C587FD2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C587FC2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift */; };
+		69CA26B22B59668700E78894 /* RegionsListUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CA26B12B59668700E78894 /* RegionsListUseCaseMock.swift */; };
 		69E61DE82B55643500085648 /* RegionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E61DE72B55643500085648 /* RegionsListView.swift */; };
 		69E61DEA2B55644900085648 /* RegionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E61DE92B55644900085648 /* RegionsListViewModel.swift */; };
 		69E61DEC2B5564C600085648 /* RegionsSelectionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E61DEB2B5564C600085648 /* RegionsSelectionFactory.swift */; };
@@ -978,6 +980,7 @@
 		694AC74D2B17AB9C007E7B56 /* DashboardView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		696E8F0C2B31A8760080BB31 /* NotificationCenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterMock.swift; sourceTree = "<group>"; };
 		696E8F0F2B31AC690080BB31 /* RootContainerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerViewModelTests.swift; sourceTree = "<group>"; };
+		69793DA02B59B96B000CB845 /* RegionsListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListViewModelTests.swift; sourceTree = "<group>"; };
 		697A5F442B514B5700661977 /* AppRouterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterFactory.swift; sourceTree = "<group>"; };
 		697A5F4C2B514D9600661977 /* UserActivatedContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivatedContainerView.swift; sourceTree = "<group>"; };
 		697A5F502B514DC500661977 /* UserActivatedContainerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivatedContainerFactory.swift; sourceTree = "<group>"; };
@@ -1004,6 +1007,7 @@
 		69B70AB42ACBF51C0072A09D /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityId.swift; sourceTree = "<group>"; };
 		69C587FC2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PIAExampleWithAuthenticatedAppTest.swift; sourceTree = "<group>"; tabWidth = 2; };
+		69CA26B12B59668700E78894 /* RegionsListUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListUseCaseMock.swift; sourceTree = "<group>"; };
 		69E61DE72B55643500085648 /* RegionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListView.swift; sourceTree = "<group>"; };
 		69E61DE92B55644900085648 /* RegionsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListViewModel.swift; sourceTree = "<group>"; };
 		69E61DEB2B5564C600085648 /* RegionsSelectionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsSelectionFactory.swift; sourceTree = "<group>"; };
@@ -1927,6 +1931,23 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		69793D9E2B59B94A000CB845 /* RegionsList */ = {
+			isa = PBXGroup;
+			children = (
+				69793D9F2B59B955000CB845 /* Mocks */,
+				69793DA02B59B96B000CB845 /* RegionsListViewModelTests.swift */,
+			);
+			path = RegionsList;
+			sourceTree = "<group>";
+		};
+		69793D9F2B59B955000CB845 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				69CA26B12B59668700E78894 /* RegionsListUseCaseMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		697A5F432B514B3D00661977 /* CompositionRoot */ = {
 			isa = PBXGroup;
 			children = (
@@ -2624,6 +2645,7 @@
 		E5C507892B0E145100200A6A /* PIA VPN-tvOSTests */ = {
 			isa = PBXGroup;
 			children = (
+				69793D9E2B59B94A000CB845 /* RegionsList */,
 				E5AB28AF2B34E06000744E5F /* VPNConfigurationInstalling */,
 				696E8F132B31AF110080BB31 /* Common */,
 				696E8F0E2B31AC3C0080BB31 /* RootContainer */,
@@ -3972,6 +3994,7 @@
 				E5AB28E22B4C107F00744E5F /* InstallVPNConfigurationUseCaseMock.swift in Sources */,
 				E5AB28D02B4B39F000744E5F /* InstallVpnConfigurationProviderTests.swift in Sources */,
 				698C3B492B2B33650012D527 /* VpnConnectionUseCaseMock.swift in Sources */,
+				69CA26B22B59668700E78894 /* RegionsListUseCaseMock.swift in Sources */,
 				E5C507CC2B1FACE000200A6A /* LoginWithCredentialsUseCaseTests.swift in Sources */,
 				696E8F0D2B31A8760080BB31 /* NotificationCenterMock.swift in Sources */,
 				E5C507A82B153E6B00200A6A /* LoginViewModelTests.swift in Sources */,
@@ -3996,6 +4019,7 @@
 				E52E69002B56ABE400471913 /* AppRouterSpy.swift in Sources */,
 				E5AB28E12B4C107F00744E5F /* VpnConfigurationProviderTypeMock.swift in Sources */,
 				E5C507C42B1F72E700200A6A /* CheckLoginAvailabilityTests.swift in Sources */,
+				69793DA12B59B96B000CB845 /* RegionsListViewModelTests.swift in Sources */,
 				E5C507C02B1F700C00200A6A /* CheckLoginAvailabilityMock.swift in Sources */,
 				691317A12B32ED76009B4E85 /* AccountProviderTypeMock.swift in Sources */,
 			);
