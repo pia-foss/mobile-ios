@@ -9,23 +9,20 @@ protocol SelectedServerUseCaseType {
 
 class SelectedServerUseCase: SelectedServerUseCaseType {
     
-    let serverProvider: ServerProviderType
+    private let serverProvider: ServerProviderType
+    private let clientPreferences: ClientPreferencesType
     
-    init(serverProvider: ServerProviderType) {
+    init(serverProvider: ServerProviderType, clientPreferences: ClientPreferencesType) {
         self.serverProvider = serverProvider
+        self.clientPreferences = clientPreferences
     }
     
     func getSelectedServer() -> ServerType {
-        // TODO: get real selected server
-        return automaticServer()
+        return clientPreferences.selectedServer
+
     }
     
     func getHistoricalServers() -> [ServerType] {
-        // TODO: Remove this `guard` statement when we get
-        // the real historical servers
-        guard !serverProvider.historicalServers.isEmpty else {
-            return Self.generateDemoServers()
-        }
         return serverProvider.historicalServers
     }
     

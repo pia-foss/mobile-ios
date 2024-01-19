@@ -196,6 +196,7 @@
 		695BF81F2AC410E000D1139C /* (null) in Sources */ = {isa = PBXBuildFile; };
 		696E8F0D2B31A8760080BB31 /* NotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696E8F0C2B31A8760080BB31 /* NotificationCenterMock.swift */; };
 		696E8F102B31AC690080BB31 /* RootContainerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696E8F0F2B31AC690080BB31 /* RootContainerViewModelTests.swift */; };
+		69793DA12B59B96B000CB845 /* RegionsListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69793DA02B59B96B000CB845 /* RegionsListViewModelTests.swift */; };
 		697A5F452B514B5700661977 /* AppRouterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A5F442B514B5700661977 /* AppRouterFactory.swift */; };
 		697A5F4D2B514D9600661977 /* UserActivatedContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A5F4C2B514D9600661977 /* UserActivatedContainerView.swift */; };
 		697A5F512B514DC500661977 /* UserActivatedContainerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A5F502B514DC500661977 /* UserActivatedContainerFactory.swift */; };
@@ -229,6 +230,7 @@
 		69B70ABF2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
 		69B70AC02ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
 		69C587FD2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C587FC2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift */; };
+		69CA26B22B59668700E78894 /* RegionsListUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CA26B12B59668700E78894 /* RegionsListUseCaseMock.swift */; };
 		69E61DE82B55643500085648 /* RegionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E61DE72B55643500085648 /* RegionsListView.swift */; };
 		69E61DEA2B55644900085648 /* RegionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E61DE92B55644900085648 /* RegionsListViewModel.swift */; };
 		69E61DEC2B5564C600085648 /* RegionsSelectionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E61DEB2B5564C600085648 /* RegionsSelectionFactory.swift */; };
@@ -241,6 +243,9 @@
 		69F1C2972B2B239000E924AE /* PIAConnectionButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F1C2962B2B239000E924AE /* PIAConnectionButtonViewModel.swift */; };
 		69F1C2992B2B28DA00E924AE /* PIAConnectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F1C2982B2B28DA00E924AE /* PIAConnectionButton.swift */; };
 		69F1C29C2B2B299300E924AE /* VpnConnectionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F1C29B2B2B299300E924AE /* VpnConnectionUseCase.swift */; };
+		69F675AA2B592ED6000E31D5 /* ClientPreferences+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F675A92B592ED6000E31D5 /* ClientPreferences+Protocols.swift */; };
+		69F675AB2B592FA0000E31D5 /* Server+Automatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1CB1FE35C9A007C0B9B /* Server+Automatic.swift */; };
+		69F675AD2B593437000E31D5 /* ServerProvider+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB966731FDF0D6E0086ABC2 /* ServerProvider+UI.swift */; };
 		69FF0B042B3AD1D40074AA04 /* SelectedServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FF0B032B3AD1D40074AA04 /* SelectedServerView.swift */; };
 		69FF0B062B3AD2860074AA04 /* QuickConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FF0B052B3AD2860074AA04 /* QuickConnectView.swift */; };
 		69FF0B082B3AD3E60074AA04 /* SelectedServerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FF0B072B3AD3E60074AA04 /* SelectedServerViewModel.swift */; };
@@ -975,6 +980,7 @@
 		694AC74D2B17AB9C007E7B56 /* DashboardView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		696E8F0C2B31A8760080BB31 /* NotificationCenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterMock.swift; sourceTree = "<group>"; };
 		696E8F0F2B31AC690080BB31 /* RootContainerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerViewModelTests.swift; sourceTree = "<group>"; };
+		69793DA02B59B96B000CB845 /* RegionsListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListViewModelTests.swift; sourceTree = "<group>"; };
 		697A5F442B514B5700661977 /* AppRouterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterFactory.swift; sourceTree = "<group>"; };
 		697A5F4C2B514D9600661977 /* UserActivatedContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivatedContainerView.swift; sourceTree = "<group>"; };
 		697A5F502B514DC500661977 /* UserActivatedContainerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivatedContainerFactory.swift; sourceTree = "<group>"; };
@@ -1001,6 +1007,7 @@
 		69B70AB42ACBF51C0072A09D /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityId.swift; sourceTree = "<group>"; };
 		69C587FC2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PIAExampleWithAuthenticatedAppTest.swift; sourceTree = "<group>"; tabWidth = 2; };
+		69CA26B12B59668700E78894 /* RegionsListUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListUseCaseMock.swift; sourceTree = "<group>"; };
 		69E61DE72B55643500085648 /* RegionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListView.swift; sourceTree = "<group>"; };
 		69E61DE92B55644900085648 /* RegionsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListViewModel.swift; sourceTree = "<group>"; };
 		69E61DEB2B5564C600085648 /* RegionsSelectionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsSelectionFactory.swift; sourceTree = "<group>"; };
@@ -1013,6 +1020,7 @@
 		69F1C2962B2B239000E924AE /* PIAConnectionButtonViewModel.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionButtonViewModel.swift; sourceTree = "<group>"; tabWidth = 4; };
 		69F1C2982B2B28DA00E924AE /* PIAConnectionButton.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionButton.swift; sourceTree = "<group>"; tabWidth = 4; };
 		69F1C29B2B2B299300E924AE /* VpnConnectionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VpnConnectionUseCase.swift; sourceTree = "<group>"; };
+		69F675A92B592ED6000E31D5 /* ClientPreferences+Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClientPreferences+Protocols.swift"; sourceTree = "<group>"; };
 		69FF0B032B3AD1D40074AA04 /* SelectedServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedServerView.swift; sourceTree = "<group>"; };
 		69FF0B052B3AD2860074AA04 /* QuickConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickConnectView.swift; sourceTree = "<group>"; };
 		69FF0B072B3AD3E60074AA04 /* SelectedServerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedServerViewModel.swift; sourceTree = "<group>"; };
@@ -1923,6 +1931,23 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		69793D9E2B59B94A000CB845 /* RegionsList */ = {
+			isa = PBXGroup;
+			children = (
+				69793D9F2B59B955000CB845 /* Mocks */,
+				69793DA02B59B96B000CB845 /* RegionsListViewModelTests.swift */,
+			);
+			path = RegionsList;
+			sourceTree = "<group>";
+		};
+		69793D9F2B59B955000CB845 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				69CA26B12B59668700E78894 /* RegionsListUseCaseMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		697A5F432B514B3D00661977 /* CompositionRoot */ = {
 			isa = PBXGroup;
 			children = (
@@ -2005,6 +2030,7 @@
 		69A226B62B3079D00065EDDB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				69F675A82B592EAF000E31D5 /* PIALibrary+Protocols */,
 				69A226B72B3079EA0065EDDB /* PIA+String.swift */,
 				6993119F2B31894D00D316C8 /* Foundation+Protocols.swift */,
 				6913179E2B32E4D4009B4E85 /* PIALibrary+Protocols.swift */,
@@ -2158,6 +2184,14 @@
 				69FF0B0C2B3AD57C0074AA04 /* SelectedServerUseCase.swift */,
 			);
 			path = UseCases;
+			sourceTree = "<group>";
+		};
+		69F675A82B592EAF000E31D5 /* PIALibrary+Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				69F675A92B592ED6000E31D5 /* ClientPreferences+Protocols.swift */,
+			);
+			path = "PIALibrary+Protocols";
 			sourceTree = "<group>";
 		};
 		82183D8425014F940033023F /* Menu */ = {
@@ -2611,6 +2645,7 @@
 		E5C507892B0E145100200A6A /* PIA VPN-tvOSTests */ = {
 			isa = PBXGroup;
 			children = (
+				69793D9E2B59B94A000CB845 /* RegionsList */,
 				E5AB28AF2B34E06000744E5F /* VPNConfigurationInstalling */,
 				696E8F132B31AF110080BB31 /* Common */,
 				696E8F0E2B31AC3C0080BB31 /* RootContainer */,
@@ -3877,6 +3912,7 @@
 				6913179F2B32E4D4009B4E85 /* PIALibrary+Protocols.swift in Sources */,
 				69FF0B082B3AD3E60074AA04 /* SelectedServerViewModel.swift in Sources */,
 				69FF0B0B2B3AD4C70074AA04 /* SwiftGen+Strings.swift in Sources */,
+				69F675AA2B592ED6000E31D5 /* ClientPreferences+Protocols.swift in Sources */,
 				69FF0B062B3AD2860074AA04 /* QuickConnectView.swift in Sources */,
 				E5AB28B42B35AA8C00744E5F /* VPNConfigurationInstallingFactory.swift in Sources */,
 				E5AB28A52B3224C300744E5F /* InstallVPNConfigurationUseCase.swift in Sources */,
@@ -3885,6 +3921,7 @@
 				E5AB28732B279B7000744E5F /* LoginProvider.swift in Sources */,
 				E5C507A52B153A2F00200A6A /* LoginViewModel.swift in Sources */,
 				693CA5AE2B3ED75500D38378 /* Flags.swift in Sources */,
+				69F675AB2B592FA0000E31D5 /* Server+Automatic.swift in Sources */,
 				E5C507B72B17E75B00200A6A /* CheckLoginAvailability.swift in Sources */,
 				E5AB288E2B2A489500744E5F /* LoginStatus.swift in Sources */,
 				69FF0B132B3AF2050074AA04 /* QuickConnectButtonViewModel.swift in Sources */,
@@ -3899,6 +3936,7 @@
 				E5C507A22B0FE40000200A6A /* LoginView.swift in Sources */,
 				693CA5AD2B3ED74100D38378 /* AppConfiguration.swift in Sources */,
 				69E61DE82B55643500085648 /* RegionsListView.swift in Sources */,
+				69F675AD2B593437000E31D5 /* ServerProvider+UI.swift in Sources */,
 				E5AB287D2B28E4E700744E5F /* UserAccountMapper.swift in Sources */,
 				697A5F512B514DC500661977 /* UserActivatedContainerFactory.swift in Sources */,
 				69FF0B0A2B3AD3F60074AA04 /* QuickConnectViewModel.swift in Sources */,
@@ -3956,6 +3994,7 @@
 				E5AB28E22B4C107F00744E5F /* InstallVPNConfigurationUseCaseMock.swift in Sources */,
 				E5AB28D02B4B39F000744E5F /* InstallVpnConfigurationProviderTests.swift in Sources */,
 				698C3B492B2B33650012D527 /* VpnConnectionUseCaseMock.swift in Sources */,
+				69CA26B22B59668700E78894 /* RegionsListUseCaseMock.swift in Sources */,
 				E5C507CC2B1FACE000200A6A /* LoginWithCredentialsUseCaseTests.swift in Sources */,
 				696E8F0D2B31A8760080BB31 /* NotificationCenterMock.swift in Sources */,
 				E5C507A82B153E6B00200A6A /* LoginViewModelTests.swift in Sources */,
@@ -3980,6 +4019,7 @@
 				E52E69002B56ABE400471913 /* AppRouterSpy.swift in Sources */,
 				E5AB28E12B4C107F00744E5F /* VpnConfigurationProviderTypeMock.swift in Sources */,
 				E5C507C42B1F72E700200A6A /* CheckLoginAvailabilityTests.swift in Sources */,
+				69793DA12B59B96B000CB845 /* RegionsListViewModelTests.swift in Sources */,
 				E5C507C02B1F700C00200A6A /* CheckLoginAvailabilityMock.swift in Sources */,
 				691317A12B32ED76009B4E85 /* AccountProviderTypeMock.swift in Sources */,
 			);

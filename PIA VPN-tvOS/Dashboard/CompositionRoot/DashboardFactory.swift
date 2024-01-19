@@ -37,7 +37,7 @@ extension DashboardFactory {
     }
     
     private static func makeSelectedServerUserCase() -> SelectedServerUseCaseType {
-        return SelectedServerUseCase(serverProvider: makeServerProvider())
+        return SelectedServerUseCase(serverProvider: makeServerProvider(), clientPreferences: Client.preferences)
     }
     
     private static func makeSelectedServerViewModel() -> SelectedServerViewModel {
