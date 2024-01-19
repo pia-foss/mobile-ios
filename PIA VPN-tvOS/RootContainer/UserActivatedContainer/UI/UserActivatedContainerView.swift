@@ -18,7 +18,7 @@ struct UserActivatedContainerView: View {
             .navigationDestination(for: RegionsDestinations.self) { destination in
                 switch destination {
                 case .serversList:
-                    RegionsSelectionFactory.makeRegionsListView()
+                    RegionsSelectionFactory.makeRegionsContainerView()
                 case .selectServer(let selectedServer):
                     VStack {
                         Text("Selected server: \(selectedServer.name)")

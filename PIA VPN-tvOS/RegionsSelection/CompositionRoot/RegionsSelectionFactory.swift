@@ -10,8 +10,17 @@ import Foundation
 import PIALibrary
 
 class RegionsSelectionFactory {
+    
+    static func makeRegionsContainerView() -> RegionsContainerView {
+        return RegionsContainerView(viewModel: makeRegionsContainerViewModel())
+    }
+    
+    static func makeRegionsContainerViewModel() -> RegionsContainerViewModel {
+        return RegionsContainerViewModel(onSearchSelectedAction: .navigate(router: AppRouterFactory.makeAppRouter(), destination: RegionSelectionDestinations.search))
+    }
+    
     static func makeRegionsListViewModel() -> RegionsListViewModel {
-        return RegionsListViewModel(useCase: makeRegionsListUseCase(), onServerSelectedRouterAction: .pop(router: AppRouterFactory.makeAppRouter()))
+        return RegionsListViewModel(useCase: makeRegionsListUseCase(), onServerSelectedRouterAction: .goBackToRoot(router: AppRouterFactory.makeAppRouter()))
     }
     
     static func makeRegionsListView() -> RegionsListView {

@@ -15,8 +15,13 @@ enum DashboardDestinations: Destinations {
     case home
 }
 
+enum RegionSelectionDestinations: Destinations {
+    case search
+}
+
 enum RegionsDestinations: Destinations {
     case serversList
+    // TODO: Consider removing this Destination (it seems it is not needed)
     case selectServer(_: ServerType)
     
     static func == (lhs: RegionsDestinations, rhs: RegionsDestinations) -> Bool {

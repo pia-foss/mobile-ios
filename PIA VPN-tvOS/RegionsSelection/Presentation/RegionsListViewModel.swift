@@ -8,17 +8,34 @@
 
 import Foundation
 import PIALibrary
+import Combine
 
 class RegionsListViewModel: ObservableObject {
     
     private let useCase: RegionsListUseCaseType
     private let onServerSelectedRouterAction: AppRouter.Actions
     @Published var servers: [ServerType] = []
+    @Published var search = ""
+    private var cancellables = Set<AnyCancellable>()
     
     init(useCase: RegionsListUseCaseType, onServerSelectedRouterAction: AppRouter.Actions) {
         self.useCase = useCase
         self.onServerSelectedRouterAction = onServerSelectedRouterAction
         refreshRegionsList()
+        subscribeToSearchUpdates()
+    }
+    
+    func subscribeToSearchUpdates() {
+        $search.sink { [weak self] searchTerm in
+            guard let self = self else { return }
+            guard !searchTerm.isEmpty else {
+                self.refreshRegionsList()
+                return
+            }
+            self.servers = self.useCase.getCurrentServers().filter({ server in
+                return server.name.lowercased().contains(searchTerm.lowercased())
+            })
+        }.store(in: &cancellables)
     }
     
     func refreshRegionsList() {
