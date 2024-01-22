@@ -2,6 +2,23 @@
 
 import Foundation
 import SwiftUI
+import PIALibrary
+import Combine
+
+extension VPNStatus {
+    func toConnectionButtonState() -> PIAConnectionButtonViewModel.State {
+        switch self {
+            case .connected:
+                return .connected
+            case .connecting:
+                return .connecting
+            case .disconnecting:
+                return .disconnecting
+            default:
+                return .disconnected
+        }
+    }
+}
 
 class PIAConnectionButtonViewModel: ObservableObject {
     enum State {
@@ -14,9 +31,20 @@ class PIAConnectionButtonViewModel: ObservableObject {
     @Published var state: State = .disconnected
     
     private let vpnConnectionUseCase: VpnConnectionUseCaseType
+    private let vpnStatusMonitor: VPNStatusMonitorType
+    private var cancellables = Set<AnyCancellable>()
     
-    init(useCase: VpnConnectionUseCaseType) {
+    init(useCase: VpnConnectionUseCaseType, vpnStatusMonitor: VPNStatusMonitorType) {
         self.vpnConnectionUseCase = useCase
+        self.vpnStatusMonitor = vpnStatusMonitor
+        
+        addObservers()
+    }
+    
+    private func addObservers() {
+        vpnStatusMonitor.getStatus().sink { [weak self] vpnStatus in
+            self?.state = vpnStatus.toConnectionButtonState()
+        }.store(in: &cancellables)
     }
     
     // Inner ring color and outer ring color
@@ -55,28 +83,11 @@ extension PIAConnectionButtonViewModel {
     }
     
     private func connect() {
-        // TODO: Take the state from the real VpnManager state monitor
-        state = .connecting
-        
         vpnConnectionUseCase.connect()
-        
-        // TODO: Take the state from the real VpnManager state monitor
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.2) { [weak self] in
-            self?.state = .connected
-        }
     }
     
     private func disconnect() {
-        // TODO: Take the state from the real VpnManager state monitor
-        state = .disconnecting
-        
         vpnConnectionUseCase.disconnect()
-        
-        // TODO: Take the state from the real VpnManager state monitor
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.2) { [weak self] in
-            self?.state = .disconnected
-        }
     }
-    
 }
 

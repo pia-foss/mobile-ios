@@ -23,6 +23,8 @@ class VPNStatusMonitor: VPNStatusMonitorType {
         self.vpnStatusProvider = vpnStatusProvider
         self.notificationCenter = notificationCenter
         self.status = CurrentValueSubject<VPNStatus, Never>(vpnStatusProvider.vpnStatus)
+        
+        addObservers()
     }
     
     private func addObservers() {
