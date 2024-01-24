@@ -571,6 +571,7 @@
 		E52E691D2B5DC2B200471913 /* StateMonitorsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E691C2B5DC2B200471913 /* StateMonitorsFactory.swift */; };
 		E52E691F2B5DCEA500471913 /* UserAuthenticationStatusMonitorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E691E2B5DCEA500471913 /* UserAuthenticationStatusMonitorMock.swift */; };
 		E52E69222B5DCF1F00471913 /* VPNStatusProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E69212B5DCF1F00471913 /* VPNStatusProviderMock.swift */; };
+		E52E69252B5E92CC00471913 /* VPNStatusMonitorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E69242B5E92CC00471913 /* VPNStatusMonitorMock.swift */; };
 		E59E8F942AEA7A29009278F5 /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8F932AEA7A29009278F5 /* ActivityButton.swift */; };
 		E59E8F952AEA7A29009278F5 /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8F932AEA7A29009278F5 /* ActivityButton.swift */; };
 		E59E8F972AEA7A5A009278F5 /* AutolayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8F962AEA7A5A009278F5 /* AutolayoutViewController.swift */; };
@@ -1263,6 +1264,7 @@
 		E52E691C2B5DC2B200471913 /* StateMonitorsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateMonitorsFactory.swift; sourceTree = "<group>"; };
 		E52E691E2B5DCEA500471913 /* UserAuthenticationStatusMonitorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationStatusMonitorMock.swift; sourceTree = "<group>"; };
 		E52E69212B5DCF1F00471913 /* VPNStatusProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusProviderMock.swift; sourceTree = "<group>"; };
+		E52E69242B5E92CC00471913 /* VPNStatusMonitorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusMonitorMock.swift; sourceTree = "<group>"; };
 		E59E8F932AEA7A29009278F5 /* ActivityButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityButton.swift; sourceTree = "<group>"; };
 		E59E8F962AEA7A5A009278F5 /* AutolayoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutolayoutViewController.swift; sourceTree = "<group>"; };
 		E59E8F992AEA7A7F009278F5 /* SignupInternetUnreachableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupInternetUnreachableViewController.swift; sourceTree = "<group>"; };
@@ -2567,6 +2569,7 @@
 			isa = PBXGroup;
 			children = (
 				E52E69212B5DCF1F00471913 /* VPNStatusProviderMock.swift */,
+				E52E69242B5E92CC00471913 /* VPNStatusMonitorMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -4069,6 +4072,7 @@
 				698C3B492B2B33650012D527 /* VpnConnectionUseCaseMock.swift in Sources */,
 				69CA26B22B59668700E78894 /* RegionsListUseCaseMock.swift in Sources */,
 				E5C507CC2B1FACE000200A6A /* LoginWithCredentialsUseCaseTests.swift in Sources */,
+				E52E69252B5E92CC00471913 /* VPNStatusMonitorMock.swift in Sources */,
 				696E8F0D2B31A8760080BB31 /* NotificationCenterMock.swift in Sources */,
 				E5C507A82B153E6B00200A6A /* LoginViewModelTests.swift in Sources */,
 				E5AB286C2B2796E700744E5F /* LoginProviderMock.swift in Sources */,

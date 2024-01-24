@@ -15,10 +15,14 @@ class VpnConnectionUseCaseMock: VpnConnectionUseCaseType {
     var connectCalledToServerAttempt: Int = 0
     var connectToServerCalledWithArgument: ServerType?
     
+    var connectionAction: (() -> Void)?
+    var disconnectionAction: (() -> Void)?
+    
     func connect(to server: ServerType) {
         connectToServerCalled = true
         connectCalledToServerAttempt += 1
         connectToServerCalledWithArgument = server
+        connectionAction?()
     }
     
     var connectCalled: Bool = false
@@ -27,6 +31,7 @@ class VpnConnectionUseCaseMock: VpnConnectionUseCaseType {
     func connect() {
         connectCalled = true
         connectCalledAttempt += 1
+        connectionAction?()
     }
     
     var disconnectCalled: Bool = false
@@ -35,6 +40,7 @@ class VpnConnectionUseCaseMock: VpnConnectionUseCaseType {
     func disconnect() {
         disconnectCalled = true
         disconnectCalledAttempt += 1
+        disconnectionAction?()
     }
     
     

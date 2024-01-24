@@ -29,7 +29,8 @@ class DashboardFactory {
 
 extension DashboardFactory {
     private static func makePIAConnectionButtonViewModel() -> PIAConnectionButtonViewModel {
-        return PIAConnectionButtonViewModel(useCase: makeVpnConnectionUseCase())
+        return PIAConnectionButtonViewModel(useCase: makeVpnConnectionUseCase(), 
+                                            vpnStatusMonitor: StateMonitorsFactory.makeVPNStatusMonitor())
     }
     
     private static func makeVpnConnectionUseCase() -> VpnConnectionUseCaseType {
