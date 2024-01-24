@@ -3262,6 +3262,7 @@
 				35950B2F2ADD2877006F3CD9 /* XCRemoteSwiftPackageReference "Quick" */,
 				35950B322ADD2EE5006F3CD9 /* XCRemoteSwiftPackageReference "Nimble" */,
 				E5C507662B0D609300200A6A /* XCRemoteSwiftPackageReference "mobile-ios-library" */,
+				35B69C4B2B60B7980051FC56 /* XCRemoteSwiftPackageReference "agent-swift-XCTest" */,
 			);
 			productRefGroup = 291C637D183EBC210039EC03 /* Products */;
 			projectDirPath = "";
@@ -5506,6 +5507,14 @@
 			requirement = {
 				kind = exactVersion;
 				version = 13.0.0;
+			};
+		};
+		35B69C4B2B60B7980051FC56 /* XCRemoteSwiftPackageReference "agent-swift-XCTest" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/reportportal/agent-swift-XCTest";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.0;
 			};
 		};
 		AA36CDB928A6622A00180A33 /* XCRemoteSwiftPackageReference "tweetnacl-swiftwrap" */ = {
