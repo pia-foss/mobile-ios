@@ -11,36 +11,47 @@ import SwiftUI
 struct RegionsListView: View {
     
     @ObservedObject var viewModel: RegionsListViewModel
-    let viewWidth = UIScreen.main.bounds.width
-    let viewHeight = UIScreen.main.bounds.height
     
     let columns = [
-        GridItem(.adaptive(minimum: 250, maximum: 250))
+        GridItem(.adaptive(minimum: 376, maximum: 376))
     ]
     
+    private func contextMenuItem(for server: ServerType) -> RegionsListItemButton.ContextMenuItem {
+        RegionsListItemButton.ContextMenuItem.item(
+            label: RegionsListItemButton.ContextMenuLabel(title: viewModel.favoriteContextMenuTitle(for: server), iconName: viewModel.favoriteIconName(for: server)),
+            action: {
+                viewModel.toggleFavorite(server: server)
+        })
+    }
+    
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 25) {
-                ForEach(viewModel.servers, id: \.identifier) { server in
-                    Button {
-                        viewModel.didSelectRegionServer(server)
-                    } label: {
-                        VStack {
-                            Image("flag-\(server.country.lowercased())")
-                                .padding()
-                            Text(server.name)
-                                .font(.subheadline)
-                        }
-                        
-                    }
-
-                }
+        VStack(alignment: .leading) {
+            if let title = viewModel.regionsListTitle {
+                Text(title)
+                    .font(.headline)
+                    .fontWeight(.regular)
+                    .foregroundColor(Color.pia_secondary_title)
             }
+            ScrollView {
+                LazyVGrid(columns: columns, alignment: .leading, spacing: 40) {
+                    ForEach(viewModel.servers, id: \.identifier) { server in
+                        RegionsListItemButton(
+                            onRegionItemSelected: {
+                            viewModel.didSelectRegionServer(server)
+                        },
+                            iconName: "flag-\(server.country.lowercased())",
+                            title: server.name,
+                            favoriteIconName: viewModel.favoriteIconName(for: server),
+                            contextMenuItem: contextMenuItem(for: server)
+                        )
+
+                    }
+                }
+                .padding(.top, 40)
+            }
+        }.onAppear {
+            viewModel.viewDidAppear()
         }
-        
     }
 }
 
-#Preview {
-    RegionsListView(viewModel: RegionsSelectionFactory.makeRegionsListViewModel())
-}

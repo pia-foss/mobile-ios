@@ -13,52 +13,101 @@ struct RegionsContainerView: View {
     let viewHeight = UIScreen.main.bounds.height
     
     @ObservedObject var viewModel: RegionsContainerViewModel
+    @FocusState var focusedFilter: RegionsContainerViewModel.RegionsNavigationItems?
     
-    var sideMenuButtons: some View {
-        VStack(alignment: .leading) {
-            ForEach(viewModel.sideMenuItems) { menuItem in
+    var regionsFilterButtons: some View {
+        List {
+            ForEach(viewModel.sideMenuItems, id: \.self) { menuItem in
                 Button {
                     viewModel.navigate(to: menuItem)
                 } label: {
-                    Text(menuItem.text)
+                    HStack {
+                        Text(menuItem.text)
+                            .font(.headline)
+                            .padding(.leading, 26)
+                            .padding(.vertical, 12)
+                        Spacer()
+                    }
+                    
                 }
+                .cornerRadius(4)
+                .buttonStyle(.plain)
+                .focused($focusedFilter, equals: menuItem)
+                
             }
         }
     }
-
+    
+    
+    var searchableRegionsList: some View {
+        let searchableRegions = RegionsSelectionFactory.makeSearchRegionsListView()
+        
+        return searchableRegions
+            .searchable(text: searchableRegions.$viewModel.search, prompt: viewModel.searchFieldPrompt)
+        
+    }
+    
+    var navigateToSearchScreenButton: some View {
+        Button {
+            viewModel.navigate(to: .search)
+        } label: {
+            HStack(alignment: .center) {
+                Spacer()
+                VStack {
+                    Spacer()
+                    Text(viewModel.searchButtonTitle)
+                        .padding(.horizontal, 60)
+                        .padding(.vertical, 18)
+                        .background(Color.pia_green)
+                        .cornerRadius(8)
+                    Spacer()
+                }.frame(height: 150)
+                
+                Spacer()
+                
+            }
+            .frame(height: 150)
+            .padding()
+            
+        }
+        .buttonStyle(.bordered)
+        .buttonBorderShape(ButtonBorderShape.roundedRectangle)
+    }
+    
     
     var body: some View {
-        VStack(alignment: .leading) {
-            switch viewModel.selectedSideMenuItem {
-            case .all:
-                HStack(alignment: .top) {
-                    sideMenuButtons
-                    VStack {
-                        RegionsSelectionFactory.makeRegionsListView()
+        VStack(alignment: .trailing) {
+            HStack(alignment: .top) {
+                regionsFilterButtons
+                VStack {
+                    switch viewModel.selectedSection {
+                    case .favorites:
+                        RegionsSelectionFactory.makeFavoriteRegionsListView()
+                    case .all:
+                        RegionsSelectionFactory.makeAllRegionsListView()
+                    case .search:
+                        VStack {
+                            navigateToSearchScreenButton
+                            RegionsSelectionFactory.makePreviouslySearchedRegionsListView()
+                                .padding(.top, 40)
+                        }
+                        
                     }
-                }
-            case .favourites:
-                HStack(alignment: .top) {
-                    sideMenuButtons
-                    VStack {
-                        RegionsSelectionFactory.makeRegionsListView()
-                    }
-                }
-            case .search:
-                EmptyView()
+                }.frame(width: viewWidth * 0.7)
             }
-            
-        }.navigationDestination(for: RegionSelectionDestinations.self) { route in
-            switch route {
-            case .search:
-                let regionsView = RegionsSelectionFactory.makeRegionsListView()
-                
-                regionsView
-                    .searchable(text: regionsView.$viewModel.search, placement: SearchFieldPlacement.automatic)
+            .onChange(of: focusedFilter) { _, newValue in
+                guard let focusedMenuItem = newValue else { return }
+                viewModel.selectedSection = focusedMenuItem
             }
         }
-        
-        
+        .frame(width: viewWidth, height: viewHeight)
+        .background(Color.app_background)
+        .navigationDestination(for: RegionSelectionDestinations.self) { route in
+            switch route {
+            case .search:
+                searchableRegionsList
+            }
+        }
     }
 }
 

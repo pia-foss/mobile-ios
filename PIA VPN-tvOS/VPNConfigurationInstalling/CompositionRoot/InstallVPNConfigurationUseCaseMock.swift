@@ -7,6 +7,7 @@
 //
 
 import Foundation
+@testable import PIA_VPN_tvOS
 
 class InstallVPNConfigurationUseCaseMock: InstallVPNConfigurationUseCaseType {
     private let error: InstallVPNConfigurationError?

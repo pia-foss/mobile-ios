@@ -10,10 +10,10 @@ import Foundation
 import SwiftUI
 
 class RegionsContainerViewModel: ObservableObject {
-    enum RegionSelectionSideMenuItems: CaseIterable, Identifiable {
+    enum RegionsNavigationItems: CaseIterable, Identifiable {
         case all
         case search
-        case favourites
+        case favorites
         
         var id: Self {
             return self
@@ -22,30 +22,38 @@ class RegionsContainerViewModel: ObservableObject {
         var text: String {
             switch self {
             case .all:
-                return L10n.Localizable.RegionsView.SplitMenu.AllItem.title
+                return L10n.Localizable.Regions.Filter.All.title
             case .search:
-                return L10n.Localizable.RegionsView.SplitMenu.SearchItem.title
-            case .favourites:
-                return L10n.Localizable.RegionsView.SplitMenu.FavoritesItem.title
+                return L10n.Localizable.Regions.Filter.Search.title
+            case .favorites:
+                return L10n.Localizable.Regions.Filter.Favorites.title
             }
         }
     }
     
-    @Published var sideMenuItems: [RegionSelectionSideMenuItems] = RegionSelectionSideMenuItems.allCases
+    @Published var sideMenuItems: [RegionsNavigationItems] = RegionsNavigationItems.allCases
     
-    @Published private(set) var selectedSideMenuItem: RegionSelectionSideMenuItems = .all
+    @Published var selectedSection: RegionsNavigationItems = .all
     
+    var searchButtonTitle: String {
+        L10n.Localizable.Region.Search.placeholder
+    }
+    
+    var searchFieldPrompt: String {
+        L10n.Localizable.Regions.Search.InputField.placeholder
+    }
+
     private let onSearchSelectedAction: AppRouter.Actions
     
     init(onSearchSelectedAction: AppRouter.Actions) {
         self.onSearchSelectedAction = onSearchSelectedAction
     }
     
-    func navigate(to route: RegionSelectionSideMenuItems) {
+    func navigate(to route: RegionsNavigationItems) {
+        selectedSection = route
+        
         if route == .search {
             onSearchSelectedAction()
-        } else {
-            selectedSideMenuItem = route
         }
         
     }
