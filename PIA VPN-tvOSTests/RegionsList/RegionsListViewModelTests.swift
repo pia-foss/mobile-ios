@@ -14,6 +14,14 @@ class RegionsListViewModelTests: XCTestCase {
     class Fixture {
         let regionsListUseCaseMock = RegionsListUseCaseMock()
         let appRouterSpy = AppRouterSpy()
+        
+        var allServers: [ServerMock] = [
+            ServerMock(name: "Toronto", identifier: "ca-server", regionIdentifier: "ca-region", country: "CA", geo: false),
+            ServerMock(name: "Montreal", identifier: "ca-server2", regionIdentifier: "ca-region2", country: "CA", geo: false),
+            ServerMock(name: "Barcelona-1", identifier: "es-server", regionIdentifier: "es-region", country: "ES", geo: false),
+            ServerMock(name: "Madrid", identifier: "es-server2", regionIdentifier: "es-region2", country: "ES", geo: false)
+            
+        ]
     }
     
     var fixture: Fixture!
@@ -59,6 +67,21 @@ class RegionsListViewModelTests: XCTestCase {
         // AND the AppRouter is called to pop the current view
         XCTAssertEqual(fixture.appRouterSpy.requests, [.pop])
         
+    }
+    
+    func test_regionsDidSearch() {
+        // GIVEN THAT we have 4 servers available (2 in CA and 2 in ES)
+        fixture.regionsListUseCaseMock.getCurrentServersResult = fixture.allServers
+        instantiateSut(with: .pop(router: fixture.appRouterSpy))
+        XCTAssertEqual(sut.servers.count, 4)
+        
+        // WHEN we search for 'Canada'
+        sut.search = "Canada"
+        
+        // THEN the displayed servers are only 2 (The ones in 'CA')
+        XCTAssertEqual(sut.servers.count, 2)
+        XCTAssertEqual(sut.servers.first!.country, "CA")
+        XCTAssertEqual(sut.servers.last!.country, "CA")
     }
     
 }

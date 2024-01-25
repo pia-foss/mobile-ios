@@ -30,7 +30,6 @@ class InstallVpnConfigurationProvider: InstallVPNConfigurationUseCaseType {
     func callAsFunction() async throws {
         return try await withCheckedThrowingContinuation { continuation in
             if isSimulator {
-                NSLog(">>> >>> Simulator")
                 continuation.resume()
                 vpnConfigurationAvailability.set(value: true)
             } else {

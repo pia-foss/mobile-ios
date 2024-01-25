@@ -21,7 +21,6 @@ enum RegionSelectionDestinations: Destinations {
 
 enum RegionsDestinations: Destinations {
     case serversList
-    // TODO: Consider removing this Destination (it seems it is not needed)
     case selectServer(_: ServerType)
     
     static func == (lhs: RegionsDestinations, rhs: RegionsDestinations) -> Bool {

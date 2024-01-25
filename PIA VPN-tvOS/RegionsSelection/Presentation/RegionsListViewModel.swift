@@ -33,7 +33,8 @@ class RegionsListViewModel: ObservableObject {
                 return
             }
             self.servers = self.useCase.getCurrentServers().filter({ server in
-                return server.name.lowercased().contains(searchTerm.lowercased())
+                return server.name.lowercased().contains(searchTerm.lowercased()) ||
+                searchTerm.lowercased().contains(server.country.lowercased())
             })
         }.store(in: &cancellables)
     }

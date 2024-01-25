@@ -25,39 +25,27 @@ struct RegionsContainerView: View {
             }
         }
     }
-    
-    var sideMenuNavLinks: some View {
-        VStack {
-            ForEach(viewModel.sideMenuItems) { item in
-                NavigationLink(value: item) {
-                    Text(item.text)
-                }
-            }
-        }
-    }
 
     
     var body: some View {
-        
         VStack(alignment: .leading) {
-            // TODO: Render either all or favorites
             switch viewModel.selectedSideMenuItem {
             case .all:
                 HStack(alignment: .top) {
                     sideMenuButtons
                     VStack {
                         RegionsSelectionFactory.makeRegionsListView()
-                    }.navigationTitle("All")
+                    }
                 }
-            case .search:
-                EmptyView()
             case .favourites:
                 HStack(alignment: .top) {
                     sideMenuButtons
                     VStack {
                         RegionsSelectionFactory.makeRegionsListView()
-                    }.navigationTitle("FAV")
+                    }
                 }
+            case .search:
+                EmptyView()
             }
             
         }.navigationDestination(for: RegionSelectionDestinations.self) { route in

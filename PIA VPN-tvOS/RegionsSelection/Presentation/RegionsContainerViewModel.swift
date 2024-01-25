@@ -35,9 +35,6 @@ class RegionsContainerViewModel: ObservableObject {
     
     @Published private(set) var selectedSideMenuItem: RegionSelectionSideMenuItems = .all
     
-    @Published var search = ""
-    @Published var searchIsActive = false
-    
     private let onSearchSelectedAction: AppRouter.Actions
     
     init(onSearchSelectedAction: AppRouter.Actions) {
