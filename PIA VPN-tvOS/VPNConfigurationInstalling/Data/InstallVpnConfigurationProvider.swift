@@ -18,33 +18,19 @@ class InstallVpnConfigurationProvider: InstallVPNConfigurationUseCaseType {
         self.vpnConfigurationAvailability = vpnConfigurationAvailability
     }
     
-    private var isSimulator: Bool {
-        #if targetEnvironment(simulator)
-            return true
-        #else
-            return false
-        #endif
-    }
-  
     
     func callAsFunction() async throws {
         return try await withCheckedThrowingContinuation { continuation in
-            if isSimulator {
+            vpnProvider.install(force: true) { [self] error in
+                if error != nil {
+                    continuation.resume(throwing: InstallVPNConfigurationError.userCanceled)
+                    return
+                }
+                
                 continuation.resume()
                 vpnConfigurationAvailability.set(value: true)
-            } else {
-                vpnProvider.install(force: true) { [self] error in
-                    if error != nil {
-                        continuation.resume(throwing: InstallVPNConfigurationError.userCanceled)
-                        return
-                    }
-                    
-                    continuation.resume()
-                    vpnConfigurationAvailability.set(value: true)
-                }
+                
             }
-            
-
         }
     }
 }
