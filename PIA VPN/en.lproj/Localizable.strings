@@ -438,3 +438,8 @@
 // PIA WIDGET
 "widget.liveActivity.region.title" = "Region";
 "widget.liveActivity.protocol.title" = "Protocol";
+
+// Regions Selection(tvOS)
+"regions_view.split_menu.all_item.title" = "All";
+"regions_view.split_menu.search_item.title" = "Search";
+"regions_view.split_menu.favorites_item.title" = "Favourite";

@@ -15,6 +15,10 @@ enum DashboardDestinations: Destinations {
     case home
 }
 
+enum RegionSelectionDestinations: Destinations {
+    case search
+}
+
 enum RegionsDestinations: Destinations {
     case serversList
     case selectServer(_: ServerType)

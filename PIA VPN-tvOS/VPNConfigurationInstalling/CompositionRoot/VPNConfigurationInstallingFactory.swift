@@ -10,6 +10,14 @@ import Foundation
 import PIALibrary
 
 class VPNConfigurationInstallingFactory {
+    private static var isSimulator: Bool {
+        #if targetEnvironment(simulator)
+            return true
+        #else
+            return false
+        #endif
+    }
+    
     static func makeVPNConfigurationInstallingView() -> VPNConfigurationInstallingView {
         VPNConfigurationInstallingView(viewModel: makeVPNConfigurationInstallingViewModel())
     }
@@ -23,11 +31,17 @@ class VPNConfigurationInstallingFactory {
     }
     
     private static func makeInstallVPNConfigurationUseCase() -> InstallVPNConfigurationUseCaseType {
-        InstallVpnConfigurationProvider(vpnProvider:  makeVpnConfigurationProvider(),
+        
+        guard !isSimulator else {
+            return InstallVPNConfigurationUseCaseMock(error: nil)
+        }
+        
+        return InstallVpnConfigurationProvider(vpnProvider:  makeVpnConfigurationProvider(),
                                         vpnConfigurationAvailability: VPNConfigurationAvailability())
     }
     
     private static func makeVpnConfigurationProvider() -> VpnConfigurationProviderType {
-        VpnConfigurationProvider(vpnProvider: Client.providers.vpnProvider)
+        return VpnConfigurationProvider(vpnProvider: Client.providers.vpnProvider)
+        
     }
 }

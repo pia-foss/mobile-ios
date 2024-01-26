@@ -18,6 +18,7 @@ class InstallVpnConfigurationProvider: InstallVPNConfigurationUseCaseType {
         self.vpnConfigurationAvailability = vpnConfigurationAvailability
     }
     
+    
     func callAsFunction() async throws {
         return try await withCheckedThrowingContinuation { continuation in
             vpnProvider.install(force: true) { [self] error in
@@ -28,6 +29,7 @@ class InstallVpnConfigurationProvider: InstallVPNConfigurationUseCaseType {
                 
                 continuation.resume()
                 vpnConfigurationAvailability.set(value: true)
+                
             }
         }
     }

@@ -728,6 +728,22 @@ internal enum L10n {
         internal static let placeholder = L10n.tr("Localizable", "region.search.placeholder", fallback: "Search for a region")
       }
     }
+    internal enum RegionsView {
+      internal enum SplitMenu {
+        internal enum AllItem {
+          /// All
+          internal static let title = L10n.tr("Localizable", "regions_view.split_menu.all_item.title", fallback: "All")
+        }
+        internal enum FavoritesItem {
+          /// Favourite
+          internal static let title = L10n.tr("Localizable", "regions_view.split_menu.favorites_item.title", fallback: "Favourite")
+        }
+        internal enum SearchItem {
+          /// Search
+          internal static let title = L10n.tr("Localizable", "regions_view.split_menu.search_item.title", fallback: "Search")
+        }
+      }
+    }
     internal enum Renewal {
       internal enum Failure {
         /// Your purchase receipt couldn't be submitted, please retry at a later time.

@@ -37,7 +37,6 @@ struct RegionsListView: View {
                 }
             }
         }
-        .frame(width: viewWidth - 50, height: viewHeight - 100)
         
     }
 }
