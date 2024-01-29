@@ -29,6 +29,10 @@ extension XCUIApplication {
         staticText(with: "SORT REGIONS BY")
     }
     
+    var emptyListScreen: XCUIElement {
+        image(with: "empty set background image")
+    }
+    
     func navigateToRegionSelection(){
         guard regionTileCell.waitForExistence(timeout: defaultTimeout) else { return }
         regionTileCell.tap()

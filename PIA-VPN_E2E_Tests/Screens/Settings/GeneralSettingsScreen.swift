@@ -41,4 +41,16 @@ extension XCUIApplication {
             generalSettingsButton.tap()
         }
     }
+    
+    func enableGeoLocatedRegionSwitch() {
+        if ((geoLocatedRegionsSwitch.value as! String) != "1") {
+            geoLocatedRegionsSwitch.tap()
+        }
+    }
+    
+    func disableGeoLocatedRegionSwitch() {
+        if ((geoLocatedRegionsSwitch.value as! String) != "0") {
+            geoLocatedRegionsSwitch.tap()
+        }
+    }
 }
