@@ -21,7 +21,7 @@ class SettingsTests : BaseTest {
                 it("should revert changes made on to default value after logging out and logging back in") {
                     //update general settings
                     app.navigateToGeneralSettings()
-                    app.geoLocatedRegionsSwitch.tap()
+                    app.disableGeoLocatedRegionSwitch()
                     
                   // This check is flaky in CI because the switch has a small animation and there is a small amount of delay when the value gets updated after tapping the switch.
                     // TODO: Enable this check when we disable the animations on E2E tests

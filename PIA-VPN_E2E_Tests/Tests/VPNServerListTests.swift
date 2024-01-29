@@ -12,7 +12,8 @@ class VPNServerListTests : BaseTest {
     override class func spec() {
         let regionKeyword = "australia"
         let characterKey = "au"
-        let favouriteRegionKeyword = "Philippines"
+        let favouriteRegionKeyword = "Singapore"
+        let geoLocatedRegionKeyword = "South Korea"
         
         super.spec()
         
@@ -81,6 +82,26 @@ class VPNServerListTests : BaseTest {
                     app.sortRegionsBy(sortType: "FAVORITES")
                     let firstRegion = app.getRegionList().allElementsBoundByIndex.prefix(2).filter({$0.label != "Automatic"}).first
                     expect(firstRegion?.label).to(contain(favouriteRegionKeyword))
+                }
+            }
+            
+            context("when the user updates the geolocation setting") {
+                it("should show geo-located regions when the setting is enabled") {
+                    app.navigateToGeneralSettings()
+                    app.enableGeoLocatedRegionSwitch()
+                    app.navigateToHomeFromSettings()
+                    app.navigateToRegionSelection()
+                    app.searchRegion(regionName: geoLocatedRegionKeyword)
+                    expect(app.emptyListScreen.exists).to(beFalse())
+                }
+                
+                it("should hide geo-located regions when the setting is disabled") {
+                    app.navigateToGeneralSettings()
+                    app.disableGeoLocatedRegionSwitch()
+                    app.navigateToHomeFromSettings()
+                    app.navigateToRegionSelection()
+                    app.searchRegion(regionName: geoLocatedRegionKeyword)
+                    expect(app.emptyListScreen.exists).to(beTrue())
                 }
             }
         }
