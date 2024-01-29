@@ -558,6 +558,9 @@ class DashboardViewController: AutolayoutViewController {
     @objc private func accountDidLogout(notification: Notification) {
         AppPreferences.shared.todayWidgetVpnStatus = nil
         AppPreferences.shared.todayWidgetButtonTitle = L10n.Localizable.Today.Widget.login
+        if #available(iOS 16.2, *) {
+            stopConnectionLiveActivity()
+        }
         presentLogin()
     }
     
@@ -1251,5 +1254,12 @@ extension DashboardViewController {
         let liveActivityManager = appDelegate.liveActivityManager else { return }
         let connState = makeLiveActivityStateForCurrentConnection()
         liveActivityManager.startLiveActivity(with: connState)
+    }
+
+    @available(iOS 16.2, *)
+    private func stopConnectionLiveActivity() {
+       guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+        let liveActivityManager = appDelegate.liveActivityManager else { return }
+        liveActivityManager.endLiveActivities()
     }
 }
