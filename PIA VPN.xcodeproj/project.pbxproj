@@ -195,9 +195,9 @@
 		693CA5BA2B3F268400D38378 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693CA5B92B3F268400D38378 /* PacketTunnelProvider.swift */; };
 		693CA5BF2B3F268400D38378 /* PIA-VPN-tvOS-NetworkExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 693CA5B62B3F268300D38378 /* PIA-VPN-tvOS-NetworkExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		694AC74E2B17AB9C007E7B56 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694AC74D2B17AB9C007E7B56 /* DashboardView.swift */; };
-		694AC74F2B17ADF9007E7B56 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 291C6397183EBC210039EC03 /* Images.xcassets */; };
 		695BF81D2AC30EFB00D1139C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E7EC043209326E30029811E /* Localizable.strings */; };
 		695BF81F2AC410E000D1139C /* (null) in Sources */ = {isa = PBXBuildFile; };
+		696346552B6CFF520051F8BC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 291C6397183EBC210039EC03 /* Images.xcassets */; };
 		696E8F0D2B31A8760080BB31 /* NotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696E8F0C2B31A8760080BB31 /* NotificationCenterMock.swift */; };
 		696E8F102B31AC690080BB31 /* RootContainerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696E8F0F2B31AC690080BB31 /* RootContainerViewModelTests.swift */; };
 		69793DA12B59B96B000CB845 /* RegionsListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69793DA02B59B96B000CB845 /* RegionsListViewModelTests.swift */; };
@@ -208,7 +208,6 @@
 		697A5F512B514DC500661977 /* UserActivatedContainerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A5F502B514DC500661977 /* UserActivatedContainerFactory.swift */; };
 		69816C3D2B4EBB3C00E3C86B /* Destinations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69816C3C2B4EBB3C00E3C86B /* Destinations.swift */; };
 		698615A72B62EA7C00A1EA54 /* InstallVPNConfigurationUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28DF2B4C107F00744E5F /* InstallVPNConfigurationUseCaseMock.swift */; };
-		698615A82B62EA7F00A1EA54 /* InstallVPNConfigurationUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28DF2B4C107F00744E5F /* InstallVPNConfigurationUseCaseMock.swift */; };
 		698615AA2B62F99700A1EA54 /* RegionsListItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698615A92B62F99700A1EA54 /* RegionsListItemButton.swift */; };
 		698C3B492B2B33650012D527 /* VpnConnectionUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C3B482B2B33650012D527 /* VpnConnectionUseCaseMock.swift */; };
 		698C3B4B2B2B34760012D527 /* PIAConnectionButtonViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C3B4A2B2B34760012D527 /* PIAConnectionButtonViewModelTests.swift */; };
@@ -3506,8 +3505,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				694AC74F2B17ADF9007E7B56 /* Images.xcassets in Resources */,
 				E52E69032B56E22D00471913 /* Welcome.strings in Resources */,
+				696346552B6CFF520051F8BC /* Images.xcassets in Resources */,
 				69F0534A2B1F1D2800AE0665 /* Colors.xcassets in Resources */,
 				E5C507812B0E145000200A6A /* Preview Assets.xcassets in Resources */,
 				E5C5077E2B0E145000200A6A /* Assets.xcassets in Resources */,
