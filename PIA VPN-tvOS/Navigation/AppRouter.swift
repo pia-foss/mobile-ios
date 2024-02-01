@@ -9,8 +9,6 @@ protocol AppRouterType {
     func navigate(to destination: any Destinations)
     func pop()
     func goBackToRoot()
-    
-    func execute(action: AppRouter.Actions)
 }
 
 
@@ -41,18 +39,6 @@ class AppRouter: ObservableObject, AppRouterType {
     func goBackToRoot() {
         path.removeLast(path.count)
     }
-    /*
-    func execute(action: AppRouter.Actions) {
-        switch action {
-        case .pop:
-            pop()
-        case .goBackToRoot:
-            goBackToRoot()
-        case .navigate(let destination):
-            navigate(to: destination)
-        }
-    }
-    */
 }
 
 
@@ -63,7 +49,7 @@ extension AppRouter {
         case goBackToRoot(router: AppRouterType)
         case navigate(router: AppRouterType, destination: any Destinations)
         
-        func execute() {
+        func callAsFunction() {
             switch self {
             case .pop(let router):
                 router.pop()
@@ -73,7 +59,7 @@ extension AppRouter {
                 router.navigate(to: destination)
             }
         }
-        
+      
         static func == (lhs: AppRouter.Actions, rhs: AppRouter.Actions) -> Bool {
             switch (lhs, rhs) {
             case (.pop, .pop):

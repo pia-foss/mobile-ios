@@ -27,12 +27,10 @@ struct RootContainerView: View {
                         .withOnboardingRoutes()
                 case .activatedNotOnboarded, .activated:
                     UserActivatedContainerFactory.makeUSerActivatedContainerView()
-                        .withOnboardingRoutes()
                 }
         }.onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {
                 NSLog(">>> Active")
-                viewModel.phaseDidBecomeActive()
             } else if newPhase == .inactive {
                 NSLog(">>> Inactive")
             } else if newPhase == .background {

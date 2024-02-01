@@ -27,9 +27,8 @@ class InstallVpnConfigurationProvider: InstallVPNConfigurationUseCaseType {
                     return
                 }
                 
-                continuation.resume()
                 vpnConfigurationAvailability.set(value: true)
-                
+                continuation.resume()
             }
         }
     }

@@ -13,21 +13,18 @@ class LoginViewModel: ObservableObject {
     private let checkLoginAvailability: CheckLoginAvailabilityType
     private let validateLoginCredentials: ValidateCredentialsFormatType
     private let errorHandler: LoginViewModelErrorHandlerType
-    private let appRouter: AppRouterType
-    
-    private let successDestination: any Destinations
+    private let onSuccessAction: AppRouter.Actions
     
     @Published var isAccountExpired = false
     @Published var shouldShowErrorMessage = false
     @Published var loginStatus: LoginStatus = .none
     
-    init(loginWithCredentialsUseCase: LoginWithCredentialsUseCaseType, checkLoginAvailability: CheckLoginAvailabilityType, validateLoginCredentials: ValidateCredentialsFormatType, errorHandler: LoginViewModelErrorHandlerType, appRouter: AppRouterType, successDestination: any Destinations) {
+    init(loginWithCredentialsUseCase: LoginWithCredentialsUseCaseType, checkLoginAvailability: CheckLoginAvailabilityType, validateLoginCredentials: ValidateCredentialsFormatType, errorHandler: LoginViewModelErrorHandlerType, onSuccessAction: AppRouter.Actions) {
         self.loginWithCredentialsUseCase = loginWithCredentialsUseCase
         self.checkLoginAvailability = checkLoginAvailability
         self.validateLoginCredentials = validateLoginCredentials
         self.errorHandler = errorHandler
-        self.appRouter = appRouter
-        self.successDestination = successDestination
+        self.onSuccessAction = onSuccessAction
     }
     
     func login(username: String, password: String) {
@@ -54,7 +51,7 @@ class LoginViewModel: ObservableObject {
                 case .success(let userAccount):
                     Task { @MainActor in
                         self.loginStatus = .succeeded(userAccount: userAccount)
-                        self.appRouter.navigate(to: self.successDestination)
+                        self.onSuccessAction()
                     }
                     
                 case .failure(let error):

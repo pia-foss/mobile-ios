@@ -56,13 +56,4 @@ class AppRouterSpy: AppRouterType {
         requests.append(.goBackToRoot)
         didGetARequest?()
     }
-    
-    func execute(action: AppRouter.Actions) {
-        switch action {
-        case .pop: pop()
-        case .goBackToRoot: goBackToRoot()
-        case .navigate(let destination): navigate(to: destination)
-        }
-    }
-    
 }

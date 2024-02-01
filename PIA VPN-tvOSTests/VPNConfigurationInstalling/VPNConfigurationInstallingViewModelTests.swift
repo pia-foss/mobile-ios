@@ -39,9 +39,7 @@ final class VPNConfigurationInstallingViewModelTests: XCTestCase {
     func instantiateSut(with installConfigError: InstallVPNConfigurationError? = nil) {
         sut = VPNConfigurationInstallingViewModel(
             installVPNConfiguration: fixture.makeInstallVPNConfiguration(error: installConfigError),
-            errorMapper: fixture.errorMapper,
-            appRouter: fixture.appRouterSpy,
-            onSuccessAction: AppRouter.Actions.goBackToRoot)
+            errorMapper: fixture.errorMapper) { AppRouter.Actions.goBackToRoot(router: self.fixture.appRouterSpy)() }
     }
 
     func test_install_fails_when_installVPNConfiguration_fails() {

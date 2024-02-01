@@ -52,10 +52,8 @@ final class RootContainerViewModelTests: XCTestCase {
         // GIVEN that the user is not logged in
         fixture.accountProvierMock.isLoggedIn = false
         
-        initializeSut()
-        
         // WHEN the app is launched
-        sut.phaseDidBecomeActive()
+        initializeSut()
         
         // THEN the state becomes 'notActivated'
         XCTAssertEqual(sut.state, .notActivated)
@@ -70,10 +68,8 @@ final class RootContainerViewModelTests: XCTestCase {
         // AND GIVEN that the Onboarding Vpn Profile is NOT installed
         stubOnboardingVpnInstallation(finished: false)
         
-        initializeSut()
-        
         // WHEN the app is launched
-        sut.phaseDidBecomeActive()
+        initializeSut()
         
         // THEN the state becomes 'activatedNotOnboarded'
         XCTAssertEqual(sut.state, .activatedNotOnboarded)
@@ -88,10 +84,8 @@ final class RootContainerViewModelTests: XCTestCase {
         // AND GIVEN that the Onboarding Vpn Profile is installed
         stubOnboardingVpnInstallation(finished: true)
         
-        initializeSut()
-        
         // WHEN the app is launched
-        sut.phaseDidBecomeActive()
+        initializeSut()
         
         // THEN the state becomes 'activated'
         XCTAssertEqual(sut.state, .activated)
@@ -102,10 +96,8 @@ final class RootContainerViewModelTests: XCTestCase {
     
     func testBoostrapperIsCalled_WhenAppIsLaunched() {
         // GIVEN sut is initialized
-        initializeSut()
-        
         // WHEN the app is launched
-        sut.phaseDidBecomeActive()
+        initializeSut()
         
         // THEN Boostrapper is called
         XCTAssertEqual(fixture.bootstrapMock.callAsFunctionTimesCalled, 1)
@@ -126,8 +118,6 @@ final class RootContainerViewModelTests: XCTestCase {
                                      userAuthenticationStatusMonitor: userAuthenticationStatusMonitor, 
                                      appRouter: fixture.appRouterSpy)
         
-        // AND the app is launched
-        sut.phaseDidBecomeActive()
         XCTAssertEqual(sut.state, .notActivated)
         fixture.accountProvierMock.isLoggedIn = true
         
@@ -153,8 +143,6 @@ final class RootContainerViewModelTests: XCTestCase {
                                      userAuthenticationStatusMonitor: userAuthenticationStatusMonitor,
                                     appRouter: fixture.appRouterSpy)
         
-        // AND the app is launched
-        sut.phaseDidBecomeActive()
         XCTAssertEqual(sut.state, .activated)
         fixture.accountProvierMock.isLoggedIn = false
         

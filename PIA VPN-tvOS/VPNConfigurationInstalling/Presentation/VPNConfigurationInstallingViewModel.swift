@@ -11,17 +11,15 @@ import Foundation
 class VPNConfigurationInstallingViewModel: ObservableObject {
     private let installVPNConfiguration: InstallVPNConfigurationUseCaseType
     private let errorMapper: VPNConfigurationInstallingErrorMapper
-    private let appRouter: AppRouterType
-    private let onSuccessAction: AppRouter.Actions
+    private let onSuccessAction: () -> Void
     
     @Published var shouldShowErrorMessage = false
     @Published var installingStatus: VPNConfigurationInstallingStatus = .none
     var errorMessage: String?
     
-    init(installVPNConfiguration: InstallVPNConfigurationUseCaseType, errorMapper: VPNConfigurationInstallingErrorMapper, appRouter: AppRouterType, onSuccessAction: AppRouter.Actions) {
+    init(installVPNConfiguration: InstallVPNConfigurationUseCaseType, errorMapper: VPNConfigurationInstallingErrorMapper, onSuccessAction: @escaping () -> Void) {
         self.installVPNConfiguration = installVPNConfiguration
         self.errorMapper = errorMapper
-        self.appRouter = appRouter
         self.onSuccessAction = onSuccessAction
     }
     
@@ -37,7 +35,7 @@ class VPNConfigurationInstallingViewModel: ObservableObject {
                 try await installVPNConfiguration()
                 Task { @MainActor in
                     installingStatus = .succeeded
-                    appRouter.execute(action: onSuccessAction)
+                    onSuccessAction()
                 }
             } catch {
                 errorMessage = errorMapper.map(error: error)

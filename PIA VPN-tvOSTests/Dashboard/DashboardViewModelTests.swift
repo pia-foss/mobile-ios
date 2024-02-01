@@ -14,7 +14,7 @@ import SwiftUI
 class DashboardViewModelTests: XCTestCase {
     class Fixture {
         let accountProviderMock = AccountProviderTypeMock()
-        let appRouter = AppRouter.shared
+        let appRouter = AppRouter(with: NavigationPath())
     }
     
     var fixture: Fixture!

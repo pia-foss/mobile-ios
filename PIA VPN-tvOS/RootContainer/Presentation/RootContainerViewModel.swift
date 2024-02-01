@@ -31,17 +31,18 @@ class RootContainerViewModel: ObservableObject {
         self.bootstrap = bootstrap
         self.userAuthenticationStatusMonitor = userAuthenticationStatusMonitor
         self.appRouter = appRouter
-        updateState()
+        
         subscribeToAccountUpdates()
+        setup()
     }
     
-    func phaseDidBecomeActive() {
+    private func setup() {
         bootstrap()
         isBootstrapped = true
         updateState()
     }
     
-    private func updateState() {
+    @objc private func updateState() {
         guard isBootstrapped else {
             return
         }
@@ -54,14 +55,17 @@ class RootContainerViewModel: ObservableObject {
             state = .activated
             // logged in, vpn profile not installed
         case (true, false):
-            appRouter.navigate(to: OnboardingDestinations.installVPNProfile)
             state = .activatedNotOnboarded
+            appRouter.navigate(to: OnboardingDestinations.installVPNProfile)
             // not logged in, any
         case (false, _):
             state = .notActivated
         }
     }
-
+    
+    deinit {
+        notificationCenter.removeObserver(self)
+    }
 }
 
 // Combine subscriptions
@@ -71,5 +75,10 @@ extension RootContainerViewModel {
         userAuthenticationStatusMonitor.getStatus().sink { status in
             self.updateState()
         }.store(in: &cancellables)
+        
+        notificationCenter.addObserver(self,
+                         selector: #selector(updateState),
+                         name: .DidInstallVPNProfile,
+                         object: nil)
     }
 }
