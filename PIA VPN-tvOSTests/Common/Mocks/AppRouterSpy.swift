@@ -10,6 +10,7 @@ import Foundation
 @testable import PIA_VPN_tvOS
 
 class AppRouterSpy: AppRouterType {
+    
     enum Request: Equatable {
         static func == (lhs: AppRouterSpy.Request, rhs: AppRouterSpy.Request) -> Bool {
             switch (lhs, rhs) {

@@ -46,6 +46,6 @@ class RegionsListViewModel: ObservableObject {
     
     func didSelectRegionServer(_ server: ServerType) {
         useCase.select(server: server)
-        onServerSelectedRouterAction.execute()
+        onServerSelectedRouterAction()
     }
 }

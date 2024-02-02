@@ -43,7 +43,7 @@ class RegionsContainerViewModel: ObservableObject {
     
     func navigate(to route: RegionSelectionSideMenuItems) {
         if route == .search {
-            onSearchSelectedAction.execute()
+            onSearchSelectedAction()
         } else {
             selectedSideMenuItem = route
         }

@@ -20,30 +20,29 @@ class RootContainerViewModel: ObservableObject {
     private let vpnConfigurationAvailability: VPNConfigurationAvailabilityType
     private let bootstrap: BootstraperType
     private let userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType
+    private let appRouter: AppRouterType
     private var cancellables = Set<AnyCancellable>()
     
-    init(accountProvider: AccountProviderType, notificationCenter: NotificationCenterType = NotificationCenter.default, vpnConfigurationAvailability: VPNConfigurationAvailabilityType, bootstrap: BootstraperType, userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType) {
+    init(accountProvider: AccountProviderType, notificationCenter: NotificationCenterType = NotificationCenter.default, vpnConfigurationAvailability: VPNConfigurationAvailabilityType, bootstrap: BootstraperType, userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType, appRouter: AppRouterType) {
         
         self.accountProvider = accountProvider
         self.notificationCenter = notificationCenter
         self.vpnConfigurationAvailability = vpnConfigurationAvailability
         self.bootstrap = bootstrap
         self.userAuthenticationStatusMonitor = userAuthenticationStatusMonitor
-        updateState()
+        self.appRouter = appRouter
+        
         subscribeToAccountUpdates()
+        setup()
     }
     
-    deinit {
-        notificationCenter.removeObserver(self)
-    }
-    
-    func phaseDidBecomeActive() {
+    private func setup() {
         bootstrap()
         isBootstrapped = true
         updateState()
     }
     
-    private func updateState() {
+    @objc private func updateState() {
         guard isBootstrapped else {
             return
         }
@@ -57,12 +56,16 @@ class RootContainerViewModel: ObservableObject {
             // logged in, vpn profile not installed
         case (true, false):
             state = .activatedNotOnboarded
+            appRouter.navigate(to: OnboardingDestinations.installVPNProfile)
             // not logged in, any
         case (false, _):
             state = .notActivated
         }
     }
-
+    
+    deinit {
+        notificationCenter.removeObserver(self)
+    }
 }
 
 // Combine subscriptions
@@ -72,5 +75,10 @@ extension RootContainerViewModel {
         userAuthenticationStatusMonitor.getStatus().sink { status in
             self.updateState()
         }.store(in: &cancellables)
+        
+        notificationCenter.addObserver(self,
+                         selector: #selector(updateState),
+                         name: .DidInstallVPNProfile,
+                         object: nil)
     }
 }

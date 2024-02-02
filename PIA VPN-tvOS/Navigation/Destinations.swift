@@ -10,7 +10,6 @@ import Foundation
 
 typealias Destinations = Hashable
 
-
 enum DashboardDestinations: Destinations {
     case home
 }

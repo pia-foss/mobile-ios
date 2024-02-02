@@ -203,7 +203,6 @@
 		697A5F512B514DC500661977 /* UserActivatedContainerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A5F502B514DC500661977 /* UserActivatedContainerFactory.swift */; };
 		69816C3D2B4EBB3C00E3C86B /* Destinations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69816C3C2B4EBB3C00E3C86B /* Destinations.swift */; };
 		698615A72B62EA7C00A1EA54 /* InstallVPNConfigurationUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28DF2B4C107F00744E5F /* InstallVPNConfigurationUseCaseMock.swift */; };
-		698615A82B62EA7F00A1EA54 /* InstallVPNConfigurationUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28DF2B4C107F00744E5F /* InstallVPNConfigurationUseCaseMock.swift */; };
 		698C3B492B2B33650012D527 /* VpnConnectionUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C3B482B2B33650012D527 /* VpnConnectionUseCaseMock.swift */; };
 		698C3B4B2B2B34760012D527 /* PIAConnectionButtonViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C3B4A2B2B34760012D527 /* PIAConnectionButtonViewModelTests.swift */; };
 		698C3B4E2B2B3CBE0012D527 /* LoginIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AB28742B279BB600744E5F /* LoginIntegrationTests.swift */; };
@@ -2669,6 +2668,7 @@
 			isa = PBXGroup;
 			children = (
 				E5AB28B32B35AA8C00744E5F /* VPNConfigurationInstallingFactory.swift */,
+				E5AB28DF2B4C107F00744E5F /* InstallVPNConfigurationUseCaseMock.swift */,
 			);
 			path = CompositionRoot;
 			sourceTree = "<group>";
@@ -2686,7 +2686,6 @@
 			children = (
 				E5AB28DD2B4C107F00744E5F /* VPNConfigurationAvailabilityMock.swift */,
 				E5AB28DE2B4C107F00744E5F /* VpnConfigurationProviderTypeMock.swift */,
-				E5AB28DF2B4C107F00744E5F /* InstallVPNConfigurationUseCaseMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -4087,7 +4086,6 @@
 				E5AB286C2B2796E700744E5F /* LoginProviderMock.swift in Sources */,
 				E5AB28872B2911C900744E5F /* AccountProviderMock.swift in Sources */,
 				696E8F102B31AC690080BB31 /* RootContainerViewModelTests.swift in Sources */,
-				698615A82B62EA7F00A1EA54 /* InstallVPNConfigurationUseCaseMock.swift in Sources */,
 				E52E691F2B5DCEA500471913 /* UserAuthenticationStatusMonitorMock.swift in Sources */,
 				E52E690F2B5D695A00471913 /* VPNStatusMonitorTests.swift in Sources */,
 				698C3B4E2B2B3CBE0012D527 /* LoginIntegrationTests.swift in Sources */,

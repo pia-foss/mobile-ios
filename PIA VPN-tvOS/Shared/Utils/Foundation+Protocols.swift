@@ -18,3 +18,7 @@ protocol NotificationCenterType {
 }
 
 extension NotificationCenter: NotificationCenterType {}
+
+extension Notification.Name {
+    public static let DidInstallVPNProfile = Notification.Name("DidInstallVPNProfile")
+}
