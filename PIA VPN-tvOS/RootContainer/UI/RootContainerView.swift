@@ -27,6 +27,7 @@ struct RootContainerView: View {
                         .withOnboardingRoutes()
                 case .activatedNotOnboarded, .activated:
                     UserActivatedContainerFactory.makeUSerActivatedContainerView()
+                        .withOnboardingRoutes()
                 }
         }.onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {
