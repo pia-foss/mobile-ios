@@ -34,7 +34,13 @@ class VPNConfigurationInstallingFactory {
     private static func makeInstallVPNConfigurationUseCase() -> InstallVPNConfigurationUseCaseType {
         
         guard !isSimulator else {
-            return InstallVPNConfigurationUseCaseMock(error: nil)
+            
+            let onSuccessAction = {
+                let vpnConfigurationAvailability = VPNConfigurationAvailability()
+                vpnConfigurationAvailability.set(value: true)
+            }
+            
+            return InstallVPNConfigurationUseCaseMock(error: nil, onSuccessAction: onSuccessAction)
         }
         
         return InstallVpnConfigurationProvider(vpnProvider:  makeVpnConfigurationProvider(),

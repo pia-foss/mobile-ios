@@ -10,13 +10,16 @@ import Foundation
 
 class InstallVPNConfigurationUseCaseMock: InstallVPNConfigurationUseCaseType {
     private let error: InstallVPNConfigurationError?
+    var onSuccessAction: (() -> Void)?
     
-    init(error: InstallVPNConfigurationError?) {
+    init(error: InstallVPNConfigurationError?, onSuccessAction: (() -> Void)? = nil) {
         self.error = error
+        self.onSuccessAction = onSuccessAction
     }
     
     func callAsFunction() async throws {
         guard let error = error else {
+            onSuccessAction?()
             return
         }
         
