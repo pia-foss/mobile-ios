@@ -440,6 +440,10 @@
 "widget.liveActivity.protocol.title" = "Protocol";
 
 // Regions Selection(tvOS)
-"regions_view.split_menu.all_item.title" = "All";
-"regions_view.split_menu.search_item.title" = "Search";
-"regions_view.split_menu.favorites_item.title" = "Favourite";
+"regions.filter.all.title" = "All";
+"regions.filter.search.title" = "Search";
+"regions.filter.favorites.title" = "Favourite";
+"regions.search.recommended_locations.title" = "Recommended Locations";
+"regions.search.results.title" = "Search Results";
+"regions.search.input_field.placeholder" = "Search for city or country";
+"regions.search.previous_results.title" = "Last Searched Locations";

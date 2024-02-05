@@ -728,19 +728,37 @@ internal enum L10n {
         internal static let placeholder = L10n.tr("Localizable", "region.search.placeholder", fallback: "Search for a region")
       }
     }
-    internal enum RegionsView {
-      internal enum SplitMenu {
-        internal enum AllItem {
+    internal enum Regions {
+      internal enum Filter {
+        internal enum All {
           /// All
-          internal static let title = L10n.tr("Localizable", "regions_view.split_menu.all_item.title", fallback: "All")
+          internal static let title = L10n.tr("Localizable", "regions.filter.all.title", fallback: "All")
         }
-        internal enum FavoritesItem {
+        internal enum Favorites {
           /// Favourite
-          internal static let title = L10n.tr("Localizable", "regions_view.split_menu.favorites_item.title", fallback: "Favourite")
+          internal static let title = L10n.tr("Localizable", "regions.filter.favorites.title", fallback: "Favourite")
         }
-        internal enum SearchItem {
+        internal enum Search {
           /// Search
-          internal static let title = L10n.tr("Localizable", "regions_view.split_menu.search_item.title", fallback: "Search")
+          internal static let title = L10n.tr("Localizable", "regions.filter.search.title", fallback: "Search")
+        }
+      }
+      internal enum Search {
+        internal enum InputField {
+          /// Search for city or country
+          internal static let placeholder = L10n.tr("Localizable", "regions.search.input_field.placeholder", fallback: "Search for city or country")
+        }
+        internal enum PreviousResults {
+          /// Last Searched Locations
+          internal static let title = L10n.tr("Localizable", "regions.search.previous_results.title", fallback: "Last Searched Locations")
+        }
+        internal enum RecommendedLocations {
+          /// Recommended Locations
+          internal static let title = L10n.tr("Localizable", "regions.search.recommended_locations.title", fallback: "Recommended Locations")
+        }
+        internal enum Results {
+          /// Search Results
+          internal static let title = L10n.tr("Localizable", "regions.search.results.title", fallback: "Search Results")
         }
       }
     }

@@ -10,5 +10,9 @@
 	<array>
 		<string>group.com.privateinternetaccess</string>
 	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)group.com.privateinternetaccess</string>
+	</array>
 </dict>
 </plist>

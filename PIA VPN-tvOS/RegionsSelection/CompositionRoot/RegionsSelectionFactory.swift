@@ -19,15 +19,48 @@ class RegionsSelectionFactory {
         return RegionsContainerViewModel(onSearchSelectedAction: .navigate(router: AppRouterFactory.makeAppRouter(), destination: RegionSelectionDestinations.search))
     }
     
-    static func makeRegionsListViewModel() -> RegionsListViewModel {
-        return RegionsListViewModel(useCase: makeRegionsListUseCase(), onServerSelectedRouterAction: .goBackToRoot(router: AppRouterFactory.makeAppRouter()))
+
+    static func makeRegionsListViewModel(with filter: RegionsListFilter) -> RegionsListViewModel {
+        return RegionsListViewModel(filter: filter, listUseCase: makeRegionsListUseCase(),
+                                    favoriteUseCase: makeFavoriteRegionUseCase(), regionsFilterUseCase: makeRegionsFilterUseCase(),
+                                    onServerSelectedRouterAction: .goBackToRoot(router: AppRouterFactory.makeAppRouter()))
     }
     
-    static func makeRegionsListView() -> RegionsListView {
-        return RegionsListView(viewModel: makeRegionsListViewModel())
+    static func makeRegionsFilterUseCase() -> RegionsFilterUseCaseType {
+        return RegionsFilterUseCase(serversUseCase: makeRegionsListUseCase(), favoritesUseCase: makeFavoriteRegionUseCase(), searchedRegionsAvailability: makeSearchedRegionsAvailability())
     }
+    
+    static func makeSearchedRegionsAvailability() -> SearchedRegionsAvailabilityType {
+        return SearchedRegionsAvailability(userDefaults: UserDefaults.standard)
+    }
+    
+    static func makeAllRegionsListView() -> RegionsListView {
+        return RegionsListView(viewModel: makeRegionsListViewModel(with: .all))
+    }
+    
+    static func makeFavoriteRegionsListView() -> RegionsListView {
+        return RegionsListView(viewModel: makeRegionsListViewModel(with: .favorites))
+    }
+    
+    static func makeSearchRegionsListView() -> RegionsListView {
+        return RegionsListView(viewModel: makeRegionsListViewModel(with: .searchResults("")))
+    }
+    
+    static func makeRecommendedRegionsListView() -> RegionsListView {
+        return RegionsListView(viewModel: makeRegionsListViewModel(with: .recommended))
+    }
+    
+    static func makePreviouslySearchedRegionsListView() -> RegionsListView {
+        return RegionsListView(viewModel: makeRegionsListViewModel(with: .previouslySearched))
+    }
+    
     
     static func makeRegionsListUseCase() -> RegionsListUseCaseType {
         return RegionsListUseCase(serverProvider: DashboardFactory.makeServerProvider(), clientPreferences: Client.preferences)
     }
+    
+    static func makeFavoriteRegionUseCase() -> FavoriteRegionUseCaseType {
+        return FavoriteRegionUseCase(keychain: KeychainFactory.makeKeychain())
+    }
+    
 }

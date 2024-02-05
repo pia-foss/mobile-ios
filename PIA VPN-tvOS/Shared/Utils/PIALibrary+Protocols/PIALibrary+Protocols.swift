@@ -16,6 +16,7 @@ protocol ServerType {
     var regionIdentifier: String { get }
     var country: String { get }
     var geo: Bool { get }
+    var pingTime: Int? { get }
 }
 
 extension Server: ServerType {}

@@ -3,6 +3,9 @@ import Foundation
 @testable import PIA_VPN_tvOS
 
 class ServerMock: ServerType {
+    
+    var pingTime: Int?
+    
     var name: String
     
     var identifier: String
@@ -13,12 +16,13 @@ class ServerMock: ServerType {
     
     var geo: Bool
     
-    init(name: String, identifier: String, regionIdentifier: String, country: String, geo: Bool) {
+    init(name: String, identifier: String, regionIdentifier: String, country: String, geo: Bool, pingTime: Int? = nil) {
         self.name = name
         self.identifier = identifier
         self.regionIdentifier = regionIdentifier
         self.country = country
         self.geo = geo
+        self.pingTime = pingTime
     }
     
     convenience init() {

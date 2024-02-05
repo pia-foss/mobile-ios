@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import PIALibrary
+
 
 protocol RegionsListUseCaseType {
     func getCurrentServers() -> [ServerType]
