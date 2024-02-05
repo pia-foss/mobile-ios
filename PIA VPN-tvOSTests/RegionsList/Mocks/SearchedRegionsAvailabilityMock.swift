@@ -23,9 +23,11 @@ class SearchedRegionsAvailabilityMock: SearchedRegionsAvailabilityType {
     
     var setCalled = false
     var setCalledAttepmt = 0
+    var setCalledWithArgument: [String]!
     func set(value: [String]) {
         setCalled = true
         setCalledAttepmt += 1
+        setCalledWithArgument = value
     }
     
     

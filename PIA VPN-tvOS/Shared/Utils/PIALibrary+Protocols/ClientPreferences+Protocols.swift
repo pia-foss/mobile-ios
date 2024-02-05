@@ -28,22 +28,3 @@ extension Client.Preferences: ClientPreferencesType {
     }
     
 }
-
-
-protocol ClientType {
-    func ping(servers: [ServerType])
-}
-
-class ClientTypeImpl: ClientType {
-    func ping(servers: [ServerType]) {
-        guard let castedServers = servers as? [Server] else { return }
-        Client.ping(servers: castedServers)
-    }
-}
-
-extension Client: ClientType {
-    func ping(servers: [ServerType]) {
-        guard let castedServers = servers as? [Server] else { return }
-        Client.ping(servers: castedServers)
-    }
-}

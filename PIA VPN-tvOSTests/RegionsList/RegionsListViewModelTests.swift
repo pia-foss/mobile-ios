@@ -14,7 +14,7 @@ class RegionsListViewModelTests: XCTestCase {
     class Fixture {
         let regionsListUseCaseMock = RegionsListUseCaseMock()
         let favoriteRegionsUseCaseMock = FavoriteRegionUseCaseMock()
-        let previouslySearchedRegionsAvailabilityMock = SearchedRegionsAvailabilityMock()
+        let regionsFilterUseCaseMock = RegionsFilterUseCaseMock()
         let appRouterSpy = AppRouterSpy()
         static let barcelona = ServerMock(name: "Barcelona-1", identifier: "es-server-barcelona", regionIdentifier: "es-region", country: "ES", geo: false, pingTime: 25)
         static let madrid = ServerMock(name: "Madrid", identifier: "es-server-madrid", regionIdentifier: "es-region2", country: "ES", geo: false, pingTime: 12)
@@ -27,14 +27,18 @@ class RegionsListViewModelTests: XCTestCase {
             barcelona,
             madrid
         ]
+        
+        func stubGetServers(for filter: RegionsListFilter, result: [ServerType]) {
+            regionsFilterUseCaseMock.getServersWithFilterResult[filter] = result
+        }
     }
     
     var fixture: Fixture!
     var sut: RegionsListViewModel!
     
-    func instantiateSut(with filter: RegionsListViewModel.Filter = RegionsListViewModel.Filter.all,  routerAction: AppRouter.Actions? = nil) {
+    func instantiateSut(with filter: RegionsListFilter = .all,  routerAction: AppRouter.Actions? = nil) {
         let routerAction = routerAction ?? AppRouter.Actions.pop(router: fixture.appRouterSpy)
-        sut = RegionsListViewModel(filter: filter, listUseCase: fixture.regionsListUseCaseMock, favoriteUseCase: fixture.favoriteRegionsUseCaseMock, onServerSelectedRouterAction: routerAction, previouslySearchedRegions: fixture.previouslySearchedRegionsAvailabilityMock)
+        sut = RegionsListViewModel(filter: filter, listUseCase: fixture.regionsListUseCaseMock, favoriteUseCase: fixture.favoriteRegionsUseCaseMock, regionsFilterUseCase: fixture.regionsFilterUseCaseMock, onServerSelectedRouterAction: routerAction)
     }
     
     override func setUp() {
@@ -48,11 +52,13 @@ class RegionsListViewModelTests: XCTestCase {
 
     func test_regionServer_didSelect() {
         // GIVEN that the Regions list is created
+        fixture.stubGetServers(for: .all, result: fixture.allServers)
         instantiateSut(routerAction: .pop(router: fixture.appRouterSpy))
         
-        // THEN the useCase is called once to fetch the current servers
-        XCTAssertTrue(fixture.regionsListUseCaseMock.getCurrentServersCalled)
-        XCTAssertEqual(fixture.regionsListUseCaseMock.getCurrentServersCalledAttempt, 1)
+        // THEN the regionsFilter is called once to fetch 'all' the servers
+        XCTAssertTrue(fixture.regionsFilterUseCaseMock.getServersWithFilterCalled)
+        XCTAssertEqual(fixture.regionsFilterUseCaseMock.getServersWithFilterCalledAttempt, 1)
+        XCTAssertEqual(fixture.regionsFilterUseCaseMock.getServersWithFilterArgument, .all)
         
         // AND the useCase is NOT called to select any server
         XCTAssertFalse(fixture.regionsListUseCaseMock.selectServerCalled)
@@ -78,9 +84,11 @@ class RegionsListViewModelTests: XCTestCase {
     func test_regionsDidSearch() {
         // GIVEN THAT we are in the Search screen
         // AND we have 4 servers available (2 in CA and 2 in ES)
-        fixture.regionsListUseCaseMock.getCurrentServersResult = fixture.allServers
-        instantiateSut(with: .searchResults)
-        XCTAssertEqual(fixture.regionsListUseCaseMock.getCurrentServersResult.count, 4)
+        fixture.stubGetServers(for: .all, result: fixture.allServers)
+        fixture.stubGetServers(for: .searchResults("Canada"), result: [Fixture.toronto, Fixture.montreal])
+        fixture.stubGetServers(for: .recommended, result: fixture.allServers)
+        instantiateSut(with: .searchResults(""))
+
         
         // WHEN we search for 'Canada'
         sut.performSearch(with: "Canada")
@@ -99,25 +107,21 @@ class RegionsListViewModelTests: XCTestCase {
         XCTAssertEqual(sut.regionsListTitle, "Recommended Locations")
     }
     
-    func test_sortServersByName() {
+    func test_filterByAllRegions() {
         // GIVEN that the selected filter for the regions is 'All'
-        fixture.regionsListUseCaseMock.getCurrentServersResult = fixture.allServers
-        instantiateSut(with: RegionsListViewModel.Filter.all)
+        fixture.stubGetServers(for: .all, result: fixture.allServers)
+        instantiateSut(with: .all)
         
-        // THEN the locations are displayed in the following order
+        // THEN all the locations are displayed
         XCTAssertEqual(sut.servers.count, 4)
-        XCTAssertEqual(sut.servers[0].name, "Barcelona-1")
-        XCTAssertEqual(sut.servers[1].name, "CA-Montreal")
-        XCTAssertEqual(sut.servers[2].name, "CA-Toronto")
-        XCTAssertEqual(sut.servers[3].name, "Madrid")
-        
     }
     
-    func test_sortServersByRecommended() {
+    func test_filterServersByRecommended() {
         // GIVEN that the selected filter for the regions is 'Recommended'
         // AND GIVEN that the servers with the least latency are Madrid and Barcelona
-        fixture.regionsListUseCaseMock.getCurrentServersResult = fixture.allServers
-        instantiateSut(with: RegionsListViewModel.Filter.recommended)
+        fixture.stubGetServers(for: .all, result: fixture.allServers)
+        fixture.stubGetServers(for: .recommended, result: [Fixture.madrid, Fixture.barcelona, Fixture.toronto, Fixture.montreal])
+        instantiateSut(with: .recommended)
         
         // THEN the recommended locations are displayed in the following order
         XCTAssertEqual(sut.regionsListTitle, "Recommended Locations")
@@ -131,9 +135,9 @@ class RegionsListViewModelTests: XCTestCase {
     func test_previouslySearchedRegions_whenEmpty() {
         // GIVEN that the selected filter for the regions is 'previouslySearched'
         // AND no previous search has been performed
-        fixture.regionsListUseCaseMock.getCurrentServersResult = fixture.allServers
-        fixture.previouslySearchedRegionsAvailabilityMock.getResult = []
-        instantiateSut(with: RegionsListViewModel.Filter.previouslySearched)
+        fixture.stubGetServers(for: .previouslySearched, result: [])
+        fixture.stubGetServers(for: .recommended, result: [Fixture.madrid, Fixture.barcelona, Fixture.toronto, Fixture.montreal])
+        instantiateSut(with: .previouslySearched)
         
         // THEN the 'Recommended' locations are displayed in the following order
         XCTAssertEqual(sut.regionsListTitle, "Recommended Locations")
@@ -147,9 +151,8 @@ class RegionsListViewModelTests: XCTestCase {
     func test_previouslySearchedRegions_whenNotEmpty() {
         // GIVEN that the selected filter for the regions is 'previouslySearched'
         // AND a previous search has been performed with 'Barcelona'
-        fixture.regionsListUseCaseMock.getCurrentServersResult = fixture.allServers
-        fixture.previouslySearchedRegionsAvailabilityMock.getResult = ["es-server-barcelona"]
-        instantiateSut(with: RegionsListViewModel.Filter.previouslySearched)
+        fixture.stubGetServers(for: .previouslySearched, result: [Fixture.barcelona])
+        instantiateSut(with: .previouslySearched)
         
         // THEN the 'Last Searched Locations' locations are displayed
         XCTAssertEqual(sut.regionsListTitle, "Last Searched Locations")
@@ -161,7 +164,8 @@ class RegionsListViewModelTests: XCTestCase {
     
     func test_toggleRecommendedRegions_whenPerformingNewSearch() {
         // GIVEN that the selected filter for the regions is 'Recommended'
-        fixture.regionsListUseCaseMock.getCurrentServersResult = fixture.allServers
+        fixture.stubGetServers(for: .recommended, result: fixture.allServers)
+        fixture.stubGetServers(for: .searchResults("Canada"), result: [Fixture.montreal, Fixture.toronto])
         instantiateSut(with: .recommended)
         
         // THEN the 'Recommended Locations' are displayed
@@ -169,13 +173,13 @@ class RegionsListViewModelTests: XCTestCase {
         XCTAssertEqual(sut.servers.count, 4)
         
         // AND the current filter on the regions list is 'recommended'
-        XCTAssertEqual(sut.filter, RegionsListViewModel.Filter.recommended)
+        XCTAssertEqual(sut.filter, .recommended)
         
         // AND WHEN a new search is performed
         sut.performSearch(with: "Canada")
         
         // THEN the regions list filter is updated to 'searchResults'
-        XCTAssertEqual(sut.filter, RegionsListViewModel.Filter.searchResults)
+        XCTAssertEqual(sut.filter, .searchResults("Canada"))
         
         // AND the list shows the "Searched Results"
         XCTAssertEqual(sut.regionsListTitle, "Search Results")
@@ -190,7 +194,8 @@ class RegionsListViewModelTests: XCTestCase {
         fixture.regionsListUseCaseMock.getCurrentServersResult = fixture.allServers
         // GIVEN that the selected filter for the regions is 'Favorites'
         // AND GIVEN that the favorites servers are "Madrid" and "Barcelona"
-        fixture.favoriteRegionsUseCaseMock.favoriteIdentifiers = ["es-server-madrid", "es-server-barcelona"]
+        fixture.stubGetServers(for: .favorites, result: [Fixture.barcelona, Fixture.madrid])
+
         instantiateSut(with: .favorites)
         
         // THEN the regions list only shows the Favorites servers

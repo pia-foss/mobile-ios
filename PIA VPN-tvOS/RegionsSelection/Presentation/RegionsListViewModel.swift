@@ -11,20 +11,12 @@ import PIALibrary
 import Combine
 
 class RegionsListViewModel: ObservableObject {
-    enum Filter: Equatable {
-        case favorites
-        case all
-        // TODO: Check if title param is required
-        case searchResults
-        case recommended
-        case previouslySearched
-    }
-    
+
     private let listUseCase: RegionsListUseCaseType
     private let favoriteUseCase: FavoriteRegionUseCaseType
+    private let regionsFilterUseCase: RegionsFilterUseCaseType
     private let onServerSelectedRouterAction: AppRouter.Actions
-    internal var filter: Filter
-    private let previouslySearchedRegions: SearchedRegionsAvailabilityType
+    internal var filter: RegionsListFilter
     
     @Published private(set) var servers: [ServerType] = []
     @Published private(set) var recommendedServers: [ServerType] = []
@@ -35,16 +27,17 @@ class RegionsListViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     internal var favoriteToggleError: Error? = nil
     
-    init(filter: Filter,
+    init(filter: RegionsListFilter,
          listUseCase: RegionsListUseCaseType,
          favoriteUseCase: FavoriteRegionUseCaseType,
-         onServerSelectedRouterAction: AppRouter.Actions,
-         previouslySearchedRegions: SearchedRegionsAvailabilityType) {
+         regionsFilterUseCase: RegionsFilterUseCaseType,
+         onServerSelectedRouterAction: AppRouter.Actions) {
         self.filter = filter
         self.listUseCase = listUseCase
         self.favoriteUseCase = favoriteUseCase
+        self.regionsFilterUseCase = regionsFilterUseCase
         self.onServerSelectedRouterAction = onServerSelectedRouterAction
-        self.previouslySearchedRegions = previouslySearchedRegions
+
         refreshRegionsList()
         subscribeToSearchUpdates()
     }
@@ -61,76 +54,54 @@ class RegionsListViewModel: ObservableObject {
     }
     
     private func refreshRegionsList() {
-        favorites = favoriteUseCase.favoriteIdentifiers
-        let allServers = listUseCase.getCurrentServers()
+        servers = regionsFilterUseCase.getServers(with: filter)
+        regionsListTitle = getRegionsListTitle(for: filter)
         
         switch filter {
-        case .favorites:
-            regionsListTitle = nil
-            
-            let favoriteServers = allServers.filter {
-                favorites.contains($0.identifier)
-            }
-            
-            servers = sortByName(favoriteServers)
-            
-        case .all:
-            regionsListTitle = nil
-            servers = sortByName(allServers)
-        case .recommended:
-            regionsListTitle = L10n.Localizable.Regions.Search.RecommendedLocations.title
-            servers = Array(sortByLatency(allServers).prefix(20))
-            
         case .searchResults:
-            regionsListTitle = L10n.Localizable.Regions.Search.Results.title
-            servers = filter(regions: allServers, with: search)
             if servers.isEmpty {
                 // TODO: Show the Empty List Image View
             }
             
         case .previouslySearched:
-            servers = mapPreviouslySearchedServers(with: allServers)
-
-            // If there is no previous searches that match any of the current servers
-            guard !servers.isEmpty else {
-                // Then show recommended servers
-                servers = sortByLatency(allServers)
-                regionsListTitle = L10n.Localizable.Regions.Search.RecommendedLocations.title
-                return
+            // Show recommended servers if there are no previous searches registered
+            if servers.isEmpty {
+                servers = regionsFilterUseCase.getServers(with: .recommended)
+                regionsListTitle = getRegionsListTitle(for: .recommended)
             }
             
-            regionsListTitle = L10n.Localizable.Regions.Search.PreviousResults.title
+        default:
+            break
             
         }
         
     }
     
+    private func getRegionsListTitle(for filter: RegionsListFilter) -> String? {
+        switch filter {
+        case .recommended:
+            return L10n.Localizable.Regions.Search.RecommendedLocations.title
+        case .searchResults(_):
+            return L10n.Localizable.Regions.Search.Results.title
+        case .previouslySearched:
+            return L10n.Localizable.Regions.Search.PreviousResults.title
+        default:
+            return nil
+        }
+    }
+    
 }
 
 
-// MARK: Search and Sort
+// MARK: Search
 
 extension RegionsListViewModel {
     func performSearch(with searchTerm: String) {
         search = searchTerm
-
+        
         self.updateSearchFilterIfNeeded()
         self.refreshRegionsList()
-        self.saveToPreviouslySearchedIfNeeded()
-    }
-    
-    func filter(regions: [ServerType], with searchTerm: String) -> [ServerType] {
-
-        let filteredServers = regions.filter({ server in
-            return server.name.lowercased().contains(searchTerm.lowercased()) ||
-            server.country.lowercased().contains(searchTerm.lowercased()) ||
-            server.identifier.lowercased()
-                .contains(searchTerm.lowercased()) ||
-            server.regionIdentifier.lowercased()
-                .contains(searchTerm.lowercased())
-        })
-        
-        return filteredServers
+        self.saveToPreviouslySearched()
     }
     
     private func subscribeToSearchUpdates() {
@@ -144,57 +115,19 @@ extension RegionsListViewModel {
     }
     
     private func updateSearchFilterIfNeeded() {
-        guard filter == .searchResults || filter == .recommended else { return }
+        guard filter.isSearchResultsWithAnySearchTerm || filter == .recommended else { return }
+        
         // If the search term is empty, then show the recommended locations
         if search.isEmpty {
             filter = .recommended
         } else {
             // else show the search results
-            filter = .searchResults
+            filter = .searchResults(search)
         }
     }
     
-    private func saveToPreviouslySearchedIfNeeded() {
-        func belongToTheSameCountry(_ servers:[ServerType]) -> Bool {
-            let countries = Set(servers.map { $0.country })
-            return countries.count == 1
-        }
-        
-        if servers.count <= 6 && belongToTheSameCountry(servers) {
-            let newSearchedRegions = servers.map{ $0.identifier }
-            let previousSearchedRegions = Array(previouslySearchedRegions.get().prefix(6))
-            var previouslySearchedWithoutDuplicates = previousSearchedRegions.filter {
-                !newSearchedRegions.contains($0)
-            }
-            
-            var regionsToSave = Array(newSearchedRegions)
-            regionsToSave.append(contentsOf: previouslySearchedWithoutDuplicates)
-
-            previouslySearchedRegions.set(value: regionsToSave)
-
-        }
-    }
-    
-    private func mapPreviouslySearchedServers(with servers: [ServerType]) -> [ServerType] {
-        let previousSearches = previouslySearchedRegions.get()
-        
-        return previousSearches.compactMap { prevSearch in
-            return servers.first { server in
-                server.identifier == prevSearch
-            }
-        }
-    }
-    
-    private func sortByName(_ servers: [ServerType]) -> [ServerType] {
-        servers.sorted(by: {
-            $0.name < $1.name
-        })
-    }
-    
-    private func sortByLatency(_ servers: [ServerType]) -> [ServerType] {
-       servers.sorted(by: {
-            $0.pingTime ?? 0 < $1.pingTime ?? 0
-        })
+    private func saveToPreviouslySearched() {
+        regionsFilterUseCase.saveToPreviouslySearched(servers: servers)
     }
 }
 

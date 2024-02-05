@@ -20,10 +20,14 @@ class RegionsSelectionFactory {
     }
     
 
-    static func makeRegionsListViewModel(with filter: RegionsListViewModel.Filter) -> RegionsListViewModel {
+    static func makeRegionsListViewModel(with filter: RegionsListFilter) -> RegionsListViewModel {
         return RegionsListViewModel(filter: filter, listUseCase: makeRegionsListUseCase(),
-                                    favoriteUseCase: makeFavoriteRegionUseCase(),
-                                    onServerSelectedRouterAction: .goBackToRoot(router: AppRouterFactory.makeAppRouter()), previouslySearchedRegions: makeSearchedRegionsAvailability())
+                                    favoriteUseCase: makeFavoriteRegionUseCase(), regionsFilterUseCase: makeRegionsFilterUseCase(),
+                                    onServerSelectedRouterAction: .goBackToRoot(router: AppRouterFactory.makeAppRouter()))
+    }
+    
+    static func makeRegionsFilterUseCase() -> RegionsFilterUseCaseType {
+        return RegionsFilterUseCase(serversUseCase: makeRegionsListUseCase(), favoritesUseCase: makeFavoriteRegionUseCase(), searchedRegionsAvailability: makeSearchedRegionsAvailability())
     }
     
     static func makeSearchedRegionsAvailability() -> SearchedRegionsAvailabilityType {
@@ -39,7 +43,7 @@ class RegionsSelectionFactory {
     }
     
     static func makeSearchRegionsListView() -> RegionsListView {
-        return RegionsListView(viewModel: makeRegionsListViewModel(with: .searchResults))
+        return RegionsListView(viewModel: makeRegionsListViewModel(with: .searchResults("")))
     }
     
     static func makeRecommendedRegionsListView() -> RegionsListView {
