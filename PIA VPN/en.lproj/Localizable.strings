@@ -447,3 +447,11 @@
 "regions.search.results.title" = "Search Results";
 "regions.search.input_field.placeholder" = "Search for city or country";
 "regions.search.previous_results.title" = "Last Searched Locations";
+"regions.context_menu.favorites.add.text" = "Add to Favorites";
+"regions.context_menu.favorites.remove.text" = "Remove from Favorites";
+
+// Top Navigation bar
+"top_navigation_bar.vpn_item.title" = "PIA VPN";
+"top_navigation_bar.location_item.title" = "Location";
+"top_navigation_bar.location_selection_screen.title" = "Location Selection";
+

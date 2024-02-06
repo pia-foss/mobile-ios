@@ -180,6 +180,8 @@
 		692483202AB05F18002A0407 /* PIAConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6924831F2AB05F18002A0407 /* PIAConnectionView.swift */; };
 		692483222AB05F37002A0407 /* PIACircleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483212AB05F37002A0407 /* PIACircleIcon.swift */; };
 		692483262AB05F85002A0407 /* PIAConnectionActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483252AB05F85002A0407 /* PIAConnectionActivityWidget.swift */; };
+		692DE7DA2B739AF8000A2F1A /* AppRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692DE7D92B739AF8000A2F1A /* AppRouterTests.swift */; };
+		692DE7DC2B73AE32000A2F1A /* TopNavigationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692DE7DB2B73AE32000A2F1A /* TopNavigationViewModelTests.swift */; };
 		693474C62B6B8ABA0061F788 /* FavoriteRegionUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693474C52B6B8ABA0061F788 /* FavoriteRegionUseCaseMock.swift */; };
 		693474C82B6B8BDD0061F788 /* KeychainTypeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693474C72B6B8BDD0061F788 /* KeychainTypeMock.swift */; };
 		693474CA2B6B8F710061F788 /* SearchedRegionsAvailabilityMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693474C92B6B8F710061F788 /* SearchedRegionsAvailabilityMock.swift */; };
@@ -245,6 +247,9 @@
 		69B70ABF2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
 		69B70AC02ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
 		69C587FD2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C587FC2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift */; };
+		69C5E7CC2B72945F00FE3126 /* TopNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C5E7CB2B72945F00FE3126 /* TopNavigationView.swift */; };
+		69C5E7CE2B72949000FE3126 /* TopNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C5E7CD2B72949000FE3126 /* TopNavigationViewModel.swift */; };
+		69C5E7D02B72962700FE3126 /* TopNavigationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C5E7CF2B72962700FE3126 /* TopNavigationFactory.swift */; };
 		69CA26B22B59668700E78894 /* RegionsListUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CA26B12B59668700E78894 /* RegionsListUseCaseMock.swift */; };
 		69E61DE82B55643500085648 /* RegionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E61DE72B55643500085648 /* RegionsListView.swift */; };
 		69E61DEA2B55644900085648 /* RegionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E61DE92B55644900085648 /* RegionsListViewModel.swift */; };
@@ -996,6 +1001,8 @@
 		6924831F2AB05F18002A0407 /* PIAConnectionView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		692483212AB05F37002A0407 /* PIACircleIcon.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIACircleIcon.swift; sourceTree = "<group>"; tabWidth = 4; };
 		692483252AB05F85002A0407 /* PIAConnectionActivityWidget.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionActivityWidget.swift; sourceTree = "<group>"; tabWidth = 4; };
+		692DE7D92B739AF8000A2F1A /* AppRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterTests.swift; sourceTree = "<group>"; };
+		692DE7DB2B73AE32000A2F1A /* TopNavigationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationViewModelTests.swift; sourceTree = "<group>"; };
 		693474C52B6B8ABA0061F788 /* FavoriteRegionUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRegionUseCaseMock.swift; sourceTree = "<group>"; };
 		693474C72B6B8BDD0061F788 /* KeychainTypeMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainTypeMock.swift; sourceTree = "<group>"; };
 		693474C92B6B8F710061F788 /* SearchedRegionsAvailabilityMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedRegionsAvailabilityMock.swift; sourceTree = "<group>"; };
@@ -1047,6 +1054,9 @@
 		69B70AB42ACBF51C0072A09D /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityId.swift; sourceTree = "<group>"; };
 		69C587FC2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PIAExampleWithAuthenticatedAppTest.swift; sourceTree = "<group>"; tabWidth = 2; };
+		69C5E7CB2B72945F00FE3126 /* TopNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationView.swift; sourceTree = "<group>"; };
+		69C5E7CD2B72949000FE3126 /* TopNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationViewModel.swift; sourceTree = "<group>"; };
+		69C5E7CF2B72962700FE3126 /* TopNavigationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationFactory.swift; sourceTree = "<group>"; };
 		69CA26B12B59668700E78894 /* RegionsListUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListUseCaseMock.swift; sourceTree = "<group>"; };
 		69E61DE72B55643500085648 /* RegionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListView.swift; sourceTree = "<group>"; };
 		69E61DE92B55644900085648 /* RegionsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListViewModel.swift; sourceTree = "<group>"; };
@@ -2017,6 +2027,7 @@
 			isa = PBXGroup;
 			children = (
 				697A5F442B514B5700661977 /* AppRouterFactory.swift */,
+				69C5E7CF2B72962700FE3126 /* TopNavigationFactory.swift */,
 			);
 			path = CompositionRoot;
 			sourceTree = "<group>";
@@ -2084,6 +2095,8 @@
 		69A226AF2B3074110065EDDB /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				69C5E7CA2B7293FE00FE3126 /* Presentation */,
+				69C5E7C92B7293F700FE3126 /* UI */,
 				697A5F432B514B3D00661977 /* CompositionRoot */,
 				69A226B22B3074D30065EDDB /* AppRouter.swift */,
 				69816C3C2B4EBB3C00E3C86B /* Destinations.swift */,
@@ -2156,6 +2169,22 @@
 				69D12D152ACC75140053A81B /* Util */,
 			);
 			path = "PIA-VPN_E2E_Tests";
+			sourceTree = "<group>";
+		};
+		69C5E7C92B7293F700FE3126 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				69C5E7CB2B72945F00FE3126 /* TopNavigationView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		69C5E7CA2B7293FE00FE3126 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				69C5E7CD2B72949000FE3126 /* TopNavigationViewModel.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		69D12D152ACC75140053A81B /* Util */ = {
@@ -2593,6 +2622,8 @@
 				E52E69202B5DCF1800471913 /* Mocks */,
 				E52E690E2B5D695A00471913 /* VPNStatusMonitorTests.swift */,
 				E52E69102B5D696E00471913 /* UserAuthenticationStatusMonitorTests.swift */,
+				692DE7D92B739AF8000A2F1A /* AppRouterTests.swift */,
+				692DE7DB2B73AE32000A2F1A /* TopNavigationViewModelTests.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -4088,6 +4119,7 @@
 				698615AA2B62F99700A1EA54 /* RegionsListItemButton.swift in Sources */,
 				E5C507B12B17E48900200A6A /* LoginWithCredentialsUseCase.swift in Sources */,
 				E5C507B92B17E7A400200A6A /* ValidateCredentialsFormat.swift in Sources */,
+				69C5E7CC2B72945F00FE3126 /* TopNavigationView.swift in Sources */,
 				E5AB28C92B48AF9000744E5F /* VPNConfigurationAvailabilityType.swift in Sources */,
 				69F1C2992B2B28DA00E924AE /* PIAConnectionButton.swift in Sources */,
 				69AB492E2B63CB6100C780CD /* AppConstants+Protocols.swift in Sources */,
@@ -4098,6 +4130,7 @@
 				69E61DEA2B55644900085648 /* RegionsListViewModel.swift in Sources */,
 				69816C3D2B4EBB3C00E3C86B /* Destinations.swift in Sources */,
 				69FF0B0D2B3AD57C0074AA04 /* SelectedServerUseCase.swift in Sources */,
+				69C5E7CE2B72949000FE3126 /* TopNavigationViewModel.swift in Sources */,
 				69FF0B112B3AF1F00074AA04 /* QuickConnectButton.swift in Sources */,
 				E5AB28AD2B32339C00744E5F /* VPNConfigurationInstallingView.swift in Sources */,
 				E52E69152B5DB05600471913 /* BootstraperFactory.swift in Sources */,
@@ -4108,6 +4141,7 @@
 				E52E68FE2B55E47600471913 /* Routes.swift in Sources */,
 				E5C5077C2B0E144E00200A6A /* ContentView.swift in Sources */,
 				69A226BE2B307D5F0065EDDB /* RootContainerView.swift in Sources */,
+				69C5E7D02B72962700FE3126 /* TopNavigationFactory.swift in Sources */,
 				694AC74E2B17AB9C007E7B56 /* DashboardView.swift in Sources */,
 				69F1C2932B2B10D400E924AE /* DashboardFactory.swift in Sources */,
 				E5AB28B62B361E6C00744E5F /* VPNConfigurationInstallingErrorMapper.swift in Sources */,
@@ -4176,7 +4210,9 @@
 				693474C62B6B8ABA0061F788 /* FavoriteRegionUseCaseMock.swift in Sources */,
 				E5AB28E12B4C107F00744E5F /* VpnConfigurationProviderTypeMock.swift in Sources */,
 				E5C507C42B1F72E700200A6A /* CheckLoginAvailabilityTests.swift in Sources */,
+				692DE7DC2B73AE32000A2F1A /* TopNavigationViewModelTests.swift in Sources */,
 				69793DA12B59B96B000CB845 /* RegionsListViewModelTests.swift in Sources */,
+				692DE7DA2B739AF8000A2F1A /* AppRouterTests.swift in Sources */,
 				E5C507C02B1F700C00200A6A /* CheckLoginAvailabilityMock.swift in Sources */,
 				691317A12B32ED76009B4E85 /* AccountProviderTypeMock.swift in Sources */,
 				E52E69222B5DCF1F00471913 /* VPNStatusProviderMock.swift in Sources */,

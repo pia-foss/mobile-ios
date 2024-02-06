@@ -2,7 +2,7 @@
 import Foundation
 
 import SwiftUI
-
+import Combine
 
 protocol AppRouterType {
     var stackCount: Int { get }
@@ -15,28 +15,44 @@ protocol AppRouterType {
 // AppRouter enables any component to navigate the user to any screen defined within Destinations
 class AppRouter: ObservableObject, AppRouterType {
     
-    static let shared: AppRouter = AppRouter(with: NavigationPath())
+    static let shared: AppRouter = AppRouter()
     
     @Published public var path: NavigationPath
+    
+    /// Returns the current Destinations. Useful to find out the exact current route
+    @Published private(set) var pathDestinations: [any Destinations] = []
+    
+    private var cancellables = Set<AnyCancellable>()
     
     /// Returns the amount of stacked views. Useful during unit test validation
     var stackCount: Int {
         path.count
     }
     
-    init(with path: NavigationPath) {
-        self.path = path
+    init(with destinations: [any Destinations] = []) {
+        self.pathDestinations = destinations
+        var pathWithDestinations = NavigationPath()
+        
+        for destination in destinations {
+            pathWithDestinations.append(destination)
+        }
+        self.path = pathWithDestinations
+        
+        subscribeToPathUpdates()
     }
     
     func navigate(to destination: any Destinations) {
+        pathDestinations.append(destination)
         path.append(destination)
     }
     
     func pop() {
+        pathDestinations.removeLast()
         path.removeLast()
     }
     
     func goBackToRoot() {
+        pathDestinations.removeAll()
         path.removeLast(path.count)
     }
 }
@@ -72,5 +88,19 @@ extension AppRouter {
             }
         }
         
+    }
+}
+
+// MARK: - Path updates subscription
+
+extension AppRouter {
+    private func subscribeToPathUpdates() {
+        $path.sink { newPath in
+            
+            // Update the current destinations when navigating back
+            if newPath.count < self.pathDestinations.count {
+                self.pathDestinations.removeLast()
+            }
+        }.store(in: &cancellables)
     }
 }

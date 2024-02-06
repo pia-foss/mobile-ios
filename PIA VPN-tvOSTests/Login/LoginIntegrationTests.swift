@@ -26,7 +26,7 @@ final class LoginIntegrationTests: XCTestCase {
         let loginWithCredentialsUseCase = LoginWithCredentialsUseCase(loginProvider: loginProvider,
                                                                       errorMapper: LoginDomainErrorMapper())
         
-        let appRouter = AppRouter(with: NavigationPath())
+        let appRouter = AppRouter()
         
         let sut = LoginViewModel(loginWithCredentialsUseCase: loginWithCredentialsUseCase,
                                  checkLoginAvailability: CheckLoginAvailability(),
@@ -98,7 +98,7 @@ final class LoginIntegrationTests: XCTestCase {
         let loginWithCredentialsUseCase = LoginWithCredentialsUseCase(loginProvider: loginProvider,
                                     errorMapper: LoginDomainErrorMapper())
         
-        let appRouter = AppRouter(with: NavigationPath())
+        let appRouter = AppRouter()
         
         let sut = LoginViewModel(loginWithCredentialsUseCase: loginWithCredentialsUseCase,
                                  checkLoginAvailability: CheckLoginAvailability(),

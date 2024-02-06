@@ -145,10 +145,9 @@ extension RegionsListViewModel {
     
     func favoriteContextMenuTitle(for server: ServerType) -> String {
         if isFavorite(server: server) {
-            // TODO: Localize
-            return "Remove from Favorites"
+            return L10n.Localizable.Regions.ContextMenu.Favorites.Remove.text
         } else {
-            return "Add to Favorites"
+            return L10n.Localizable.Regions.ContextMenu.Favorites.Add.text
         }
     }
     

@@ -39,14 +39,6 @@ struct RegionsContainerView: View {
     }
     
     
-    var searchableRegionsList: some View {
-        let searchableRegions = RegionsSelectionFactory.makeSearchRegionsListView()
-        
-        return searchableRegions
-            .searchable(text: searchableRegions.$viewModel.search, prompt: viewModel.searchFieldPrompt)
-        
-    }
-    
     var navigateToSearchScreenButton: some View {
         Button {
             viewModel.navigate(to: .search)
@@ -100,14 +92,8 @@ struct RegionsContainerView: View {
                 viewModel.selectedSection = focusedMenuItem
             }
         }
-        .frame(width: viewWidth, height: viewHeight)
+        .frame(width: viewWidth)
         .background(Color.app_background)
-        .navigationDestination(for: RegionSelectionDestinations.self) { route in
-            switch route {
-            case .search:
-                searchableRegionsList
-            }
-        }
     }
 }
 

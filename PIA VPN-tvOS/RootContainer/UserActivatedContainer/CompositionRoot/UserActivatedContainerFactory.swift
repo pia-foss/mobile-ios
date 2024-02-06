@@ -10,6 +10,6 @@ import Foundation
 
 class UserActivatedContainerFactory {
     static func makeUSerActivatedContainerView() -> UserActivatedContainerView {
-        return UserActivatedContainerView(router: AppRouterFactory.makeAppRouter())
+        return UserActivatedContainerView()
     }
 }

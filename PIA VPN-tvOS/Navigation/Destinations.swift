@@ -10,26 +10,22 @@ import Foundation
 
 typealias Destinations = Hashable
 
-enum DashboardDestinations: Destinations {
+enum DashboardDestinations: Destinations, Codable {
     case home
 }
 
-enum RegionSelectionDestinations: Destinations {
-    case search
-}
-
-enum RegionsDestinations: Destinations {
+enum RegionsDestinations: Destinations, Codable {
     case serversList
-    case selectServer(_: ServerType)
+    case search
     
     static func == (lhs: RegionsDestinations, rhs: RegionsDestinations) -> Bool {
         switch (lhs, rhs) {
         case(.serversList, .serversList):
             return true
-        case(.serversList, .selectServer): return false
-        case(.selectServer, .serversList): return false
-        case (.selectServer(let lhsServer), .selectServer(let rhsServer)):
-            return lhsServer.identifier == rhsServer.identifier
+        case(.search, .search):
+            return true
+        default:
+            return false
             
         }
     }
@@ -38,8 +34,8 @@ enum RegionsDestinations: Destinations {
         switch self {
         case .serversList:
             return hasher.combine("serversList")
-        case .selectServer(let server):
-            return hasher.combine("selectedServer\(server.identifier)")
+        case .search:
+            return hasher.combine("searchRegions")
         }
     }
 }
