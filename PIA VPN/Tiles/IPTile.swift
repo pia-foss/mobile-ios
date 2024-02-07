@@ -63,6 +63,7 @@ class IPTile: UIView, Tileable  {
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
 
         viewShouldRestyle()
+        self.accessibilityIdentifier = "IPTile"
         self.localIpTitle.text = "IP"
         self.vpnIpTitle.text = "VPN IP"
         self.localIpValue.text = Client.daemons.publicIP ?? emptyIPValue

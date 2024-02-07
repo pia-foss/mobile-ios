@@ -18,7 +18,7 @@ extension XCUIApplication {
     /// use the method `loginAndInstallVPNProfile(from test: XCTestCase)` from the `setUp` method of the `XCTestCase`
     func dismissAnyPermissionSystemAlert(from test: XCTestCase) {
         test.addUIInterruptionMonitor(withDescription: "Any system permission alert") { element in
-           
+            
             let allowButton = element.buttons["Allow"].firstMatch
             if element.elementType == .alert && allowButton.exists {
                 allowButton.tap()
@@ -27,5 +27,19 @@ extension XCUIApplication {
                 return false
             }
         }
+    }
+}
+
+extension XCUIElement {
+    func isElementHigher(than elementB: XCUIElement) -> Bool {
+        let frameA = self.frame
+        let frameB = elementB.frame
+        return frameA.origin.y < frameB.origin.y
+    }
+    
+    func isElementLower(than elementB: XCUIElement) -> Bool {
+        let frameA = self.frame
+        let frameB = elementB.frame
+        return frameA.origin.y > frameB.origin.y
     }
 }

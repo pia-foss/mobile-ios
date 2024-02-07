@@ -69,7 +69,7 @@ class RegionTile: UIView, Tileable {
     }
     
     private func setupView() {
-        
+        self.accessibilityIdentifier = "RegionTile"
         self.detailSegueIdentifier = StoryboardSegue.Main.selectRegionSegueIdentifier.rawValue
         
         let nc = NotificationCenter.default

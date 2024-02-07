@@ -53,7 +53,7 @@ extension XCUIApplication {
     func navigateToHomeFromSettings() {
         if settingsBackButton.waitForExistence(timeout: defaultTimeout) {
             settingsBackButton.tap()
-            navigateToHome()
+            navigateToHome(using: closeButton)
         }
     }
 }

@@ -34,8 +34,8 @@ extension XCUIApplication {
     }
     
     func navigateToRegionSelection(){
-        guard regionTileCell.waitForExistence(timeout: defaultTimeout) else { return }
-        regionTileCell.tap()
+        guard regionTileCollectionViewCell.waitForExistence(timeout: defaultTimeout) else { return }
+        regionTileCollectionViewCell.tap()
         WaitHelper.waitForElementToBeVisible(regionSelectionHeader, timeout: defaultTimeout,
                                              onSuccess:{print("successful navigation to region selection screen")}, onFailure:{error in print("regionSelectionHeader is not visible")})
     }
@@ -72,8 +72,8 @@ extension XCUIApplication {
         if(regionRemoveAsAFavouriteButton.waitForExistence(timeout: defaultTimeout)) {
             regionRemoveAsAFavouriteButton.tap()
         }
-        WaitHelper.waitForElementToBeVisible(regionAddAsAFavouriteButton, timeout: defaultTimeout, onSuccess: {}, onFailure: {error in print("regionRemoveAsAFavouriteButton is not visible")})
-        WaitHelper.waitForElementToNotBeVisible(regionRemoveAsAFavouriteButton, timeout: defaultTimeout, onSuccess: {}, onFailure: {error in print("regionAddAsAFavouriteButton is not visible")})
+        WaitHelper.waitForElementToBeVisible(regionAddAsAFavouriteButton, timeout: defaultTimeout, onSuccess: {}, onFailure: {error in print("regionAddAsAFavouriteButton is not visible")})
+        WaitHelper.waitForElementToNotBeVisible(regionRemoveAsAFavouriteButton, timeout: defaultTimeout, onSuccess: {}, onFailure: {error in print("regionRemoveAsAFavouriteButton is visible")})
 
     }
     

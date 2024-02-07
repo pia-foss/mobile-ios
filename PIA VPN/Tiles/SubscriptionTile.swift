@@ -55,6 +55,7 @@ class SubscriptionTile: UIView, Tileable  {
         nc.addObserver(self, selector: #selector(displayAccountInformation), name: .PIAAccountDidRefresh, object: nil)
 
         viewShouldRestyle()
+        self.accessibilityIdentifier = "SubscriptionTile"
         self.subscriptionTitle.text = L10n.Localizable.Tiles.Subscription.title.uppercased()
         displayAccountInformation()
     }

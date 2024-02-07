@@ -62,6 +62,7 @@ class FavoriteServersTile: UIView, Tileable {
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateFavoriteList), name: .PIAServerHasBeenUpdated, object: nil)
         
+        self.accessibilityIdentifier = "FavoriteServersTile"
         viewShouldRestyle()
         self.tileTitle.text = L10n.Localizable.Tiles.Favorite.Servers.title.uppercased()
         updateFavoriteList()

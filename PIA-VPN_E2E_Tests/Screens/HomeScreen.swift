@@ -57,7 +57,7 @@ extension XCUIApplication {
         button(with: "Disable VPN Kill Switch")
     }
     
-    var regionTileCell: XCUIElement {
+    var regionTileCollectionViewCell: XCUIElement {
         cell(with: "RegionTileCollectionViewCell")
     }
     
@@ -75,9 +75,9 @@ extension XCUIApplication {
         }
     }
     
-    func navigateToHome() {
-        closeButton.waitForExistence(timeout: defaultTimeout)
-        closeButton.tap()
+    func navigateToHome(using button: XCUIElement) {
+        button.waitForExistence(timeout: defaultTimeout)
+        button.tap()
         WaitHelper.waitForElementToBeVisible(dashboardMenuButton, timeout: defaultTimeout,
                                              onSuccess:{print("successful navigation to Home screen")}, onFailure:{error in print("dashboardMenuButton is not visible")})
     }
