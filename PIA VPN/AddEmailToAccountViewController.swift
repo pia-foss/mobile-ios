@@ -222,7 +222,7 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
         Client.providers.accountProvider.logout({ error in
             guard let _ = error else {
                 self.dismiss(animated: true) {
-                    AppPreferences.shared.clean()
+                    AppPreferences.shared.reset()
                 }
                 return
             }
