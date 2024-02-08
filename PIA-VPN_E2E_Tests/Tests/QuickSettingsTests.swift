@@ -22,7 +22,7 @@ class QuickSettingsTests : BaseTest {
                     app.enableVPNKillSwitchQuickSetting()
                     app.enableNetworkManagementQuickSetting()
                     
-                    app.navigateToHome()
+                    app.navigateToHome(using: app.closeButton)
                     
                     app.enableVPNKillSwitchOnHome()
                     expect(app.disableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
@@ -36,7 +36,7 @@ class QuickSettingsTests : BaseTest {
                     app.enableVPNKillSwitchQuickSetting()
                     app.enableNetworkManagementQuickSetting()
                     
-                    app.navigateToHome()
+                    app.navigateToHome(using: app.closeButton)
                     
                     app.disableVPNKillSwitchOnHome()
                     expect(app.enableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
@@ -51,7 +51,7 @@ class QuickSettingsTests : BaseTest {
                     app.enableVPNKillSwitchQuickSetting()
                     app.enableNetworkManagementQuickSetting()
                     
-                    app.navigateToHome()
+                    app.navigateToHome(using: app.closeButton)
                     
                     app.enableVPNKillSwitchOnHome()
                     app.disableVPNKillSwitchOnHome()
@@ -74,7 +74,7 @@ class QuickSettingsTests : BaseTest {
                     
                     app.disableVPNKillSwitchQuickSetting()
                     expect(app.vpnKillSwitchQuickSettings.value as! String == disabledValue).to(beTrue())
-                    app.navigateToHome()
+                    app.navigateToHome(using: app.closeButton)
                     expect{
                         let enableVPNKillSwitchButtonPresent = app.enableVPNKillSwitchButton.exists
                         let disableVPNKillSwitchButtonPresent = app.disableVPNKillSwitchButton.exists
@@ -86,7 +86,7 @@ class QuickSettingsTests : BaseTest {
                     expect(app.vpnKillSwitchQuickSettings.value as! String == enabledValue).to(beTrue())
                     app.disableNetworkManagementQuickSetting()
                     expect(app.networkManagementQuickSettings.value as! String == disabledValue).to(beTrue())
-                    app.navigateToHome()
+                    app.navigateToHome(using: app.closeButton)
                     expect{
                         let enableNetworkManagementButtonPresent = app.enableNetworkManagementButton.exists
                         let disableNetworkManagementButtonPresent = app.disableNetworkManagementButton.exists
@@ -96,7 +96,7 @@ class QuickSettingsTests : BaseTest {
                     app.navigateToQuickSettings()
                     app.disablePrivateBrowserQuickSetting()
                     expect(app.privateBrowserQuickSettings.value as! String == disabledValue).to(beTrue())
-                    app.navigateToHome()
+                    app.navigateToHome(using: app.closeButton)
                     expect(app.privateBrowserButton.exists).to(beFalse())
                     
                 }
@@ -113,7 +113,7 @@ class QuickSettingsTests : BaseTest {
                     app.enablePrivateBrowserQuickSetting()
                     expect(app.privateBrowserQuickSettings.value as! String == enabledValue).to(beTrue())
                     
-                    app.navigateToHome()
+                    app.navigateToHome(using: app.closeButton)
                     expect(app.privateBrowserButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     expect{
                         let enableVPNKillSwitchButtonPresent = app.enableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)

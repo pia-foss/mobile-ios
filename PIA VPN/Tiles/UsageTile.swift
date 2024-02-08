@@ -62,6 +62,7 @@ class UsageTile: UIView, Tileable  {
         self.usageTitle.text = L10n.Localizable.Tiles.Usage.title.uppercased()
         self.uploadTitle.text = L10n.Localizable.Tiles.Usage.upload
         self.downloadTitle.text = L10n.Localizable.Tiles.Usage.download
+        self.accessibilityIdentifier = "UsageTile"
         displayUsageInformation()
     }
     

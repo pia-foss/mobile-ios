@@ -19,7 +19,7 @@ class ServerConnectionTests : BaseTest {
                     app.navigateToLoginScreen()
                     app.logIn(with: CredentialsUtil.credentials(type: .valid))
                     app.acceptVPNPermission()
-                    expect(app.regionTileCell.staticTexts["Automatic"].waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.regionTileCollectionViewCell.staticTexts["Automatic"].waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
                 
                 it("should connect the user to vpn when the user taps the connect button") {
@@ -41,7 +41,7 @@ class ServerConnectionTests : BaseTest {
                     app.navigateToRegionSelection()
                     app.searchRegion(regionName: "Philippines").firstMatch.tap()
                     expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    expect(app.regionTileCell.staticTexts["Philippines"].waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.regionTileCollectionViewCell.staticTexts["Philippines"].waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
             }
             

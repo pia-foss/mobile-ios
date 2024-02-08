@@ -18,7 +18,7 @@ class DedicatedIPTests: BaseTest {
                 if(app.dedicatedIPList.waitForExistence(timeout: app.defaultTimeout)) {
                     app.deleteDedicatedIP()
                 }
-                app.navigateToHome()
+                app.navigateToHome(using: app.closeButton)
             }
             
             context("dedicated ip validation") {
@@ -45,13 +45,13 @@ class DedicatedIPTests: BaseTest {
                 it("should be able to connect successfully on a valid dedicated ip") {
                     app.navigateToDedicatedIPScreen()
                     app.activateDedicatedIP(with: DedicatedIPUtil.dedicatedIP(type: .valid))
-                    app.navigateToHome()
+                    app.navigateToHome(using: app.closeButton)
                     app.navigateToRegionSelection()
                     let firstRegion = app.getRegionList().staticTexts["DEDICATED IP"]
                     expect(firstRegion.staticTexts["DEDICATED IP"].waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     firstRegion.tap()
                     expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    expect(app.regionTileCell.staticTexts["DEDICATED IP"].waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.regionTileCollectionViewCell.staticTexts["DEDICATED IP"].waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
                 
                 it("should be able to successfully delete a listed dedicated ip") {
