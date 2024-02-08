@@ -49,6 +49,7 @@ struct RegionsListView: View {
                 }
                 .padding(.top, 40)
             }
+            
         }.onAppear {
             viewModel.viewDidAppear()
         }

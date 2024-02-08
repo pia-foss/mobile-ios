@@ -8,6 +8,7 @@
 
 import Foundation
 import PIALibrary
+import SwiftUI
 
 class RegionsSelectionFactory {
     
@@ -16,7 +17,7 @@ class RegionsSelectionFactory {
     }
     
     static func makeRegionsContainerViewModel() -> RegionsContainerViewModel {
-        return RegionsContainerViewModel(onSearchSelectedAction: .navigate(router: AppRouterFactory.makeAppRouter(), destination: RegionSelectionDestinations.search))
+        return RegionsContainerViewModel(onSearchSelectedAction: .navigate(router: AppRouterFactory.makeAppRouter(), destination: RegionsDestinations.search))
     }
     
 
@@ -42,8 +43,12 @@ class RegionsSelectionFactory {
         return RegionsListView(viewModel: makeRegionsListViewModel(with: .favorites))
     }
     
-    static func makeSearchRegionsListView() -> RegionsListView {
-        return RegionsListView(viewModel: makeRegionsListViewModel(with: .searchResults("")))
+    static func makeSearchRegionsListView() -> some View {
+        let viewModel = makeRegionsListViewModel(with: .searchResults(""))
+        let searchableRegions = RegionsListView(viewModel: viewModel)
+        
+        return searchableRegions.searchable(text: searchableRegions.$viewModel.search, prompt:  L10n.Localizable.Regions.Search.InputField.placeholder)
+            
     }
     
     static func makeRecommendedRegionsListView() -> RegionsListView {

@@ -16,5 +16,7 @@ extension Color {
     static var pia_primary_text = Color("pia_primary_text")
     static var pia_primary_title = Color("pia_primary_title")
     static var pia_secondary_title = Color("pia_secondary_title")
+    static var pia_selection_background = Color("pia_selection_background")
+    
     
 }

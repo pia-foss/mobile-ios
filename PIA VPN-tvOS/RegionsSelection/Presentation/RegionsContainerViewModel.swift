@@ -38,10 +38,6 @@ class RegionsContainerViewModel: ObservableObject {
     var searchButtonTitle: String {
         L10n.Localizable.Region.Search.placeholder
     }
-    
-    var searchFieldPrompt: String {
-        L10n.Localizable.Regions.Search.InputField.placeholder
-    }
 
     private let onSearchSelectedAction: AppRouter.Actions
     

@@ -14,7 +14,7 @@ import SwiftUI
 class DashboardViewModelTests: XCTestCase {
     class Fixture {
         let accountProviderMock = AccountProviderTypeMock()
-        let appRouter = AppRouter(with: NavigationPath())
+        let appRouter = AppRouter()
     }
     
     var fixture: Fixture!
@@ -48,7 +48,10 @@ class DashboardViewModelTests: XCTestCase {
         
         // THEN the app router navigates to the Regions list
         XCTAssertFalse(fixture.appRouter.path.isEmpty)
-        XCTAssertEqual(fixture.appRouter.path, regionsListNavigationPath)
+        XCTAssertEqual(fixture.appRouter.stackCount, 1)
+        XCTAssertEqual(fixture.appRouter.pathDestinations.count, 1)
+        XCTAssertTrue(fixture.appRouter.pathDestinations.last! is RegionsDestinations)
+        XCTAssertEqual(fixture.appRouter.pathDestinations.last! as! RegionsDestinations, .serversList)
         
     }
     

@@ -729,6 +729,18 @@ internal enum L10n {
       }
     }
     internal enum Regions {
+      internal enum ContextMenu {
+        internal enum Favorites {
+          internal enum Add {
+            /// Add to Favorites
+            internal static let text = L10n.tr("Localizable", "regions.context_menu.favorites.add.text", fallback: "Add to Favorites")
+          }
+          internal enum Remove {
+            /// Remove from Favorites
+            internal static let text = L10n.tr("Localizable", "regions.context_menu.favorites.remove.text", fallback: "Remove from Favorites")
+          }
+        }
+      }
       internal enum Filter {
         internal enum All {
           /// All
@@ -1302,6 +1314,20 @@ internal enum L10n {
       internal enum Widget {
         /// Login
         internal static let login = L10n.tr("Localizable", "today.widget.login", fallback: "Login")
+      }
+    }
+    internal enum TopNavigationBar {
+      internal enum LocationItem {
+        /// Location
+        internal static let title = L10n.tr("Localizable", "top_navigation_bar.location_item.title", fallback: "Location")
+      }
+      internal enum LocationSelectionScreen {
+        /// Location Selection
+        internal static let title = L10n.tr("Localizable", "top_navigation_bar.location_selection_screen.title", fallback: "Location Selection")
+      }
+      internal enum VpnItem {
+        /// PIA VPN
+        internal static let title = L10n.tr("Localizable", "top_navigation_bar.vpn_item.title", fallback: "PIA VPN")
       }
     }
     internal enum VpnPermission {

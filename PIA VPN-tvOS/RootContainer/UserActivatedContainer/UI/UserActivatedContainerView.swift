@@ -8,10 +8,11 @@
 
 import Foundation
 import SwiftUI
+import Combine
+
+
 
 struct UserActivatedContainerView: View {
-    
-    @ObservedObject var router: AppRouter
     
     var body: some View {
         DashboardFactory.makeDashboardView()
@@ -19,12 +20,18 @@ struct UserActivatedContainerView: View {
                 switch destination {
                 case .serversList:
                     RegionsSelectionFactory.makeRegionsContainerView()
-                case .selectServer(let selectedServer):
-                    VStack {
-                        Text("Selected server: \(selectedServer.name)")
-                    }
+                        .navigationBarItems(leading: TopNavigationFactory.makeLeadingSegmentedNavigationView())
+                        .navigationTitle(L10n.Localizable.TopNavigationBar.LocationSelectionScreen.title)
+                        .navigationBarItems(trailing: TopNavigationFactory.makeTrailingNavigationView())
+                case .search:
+                    RegionsSelectionFactory.makeSearchRegionsListView()
+                        .navigationBarHidden(true)
                 }
             }
+            .navigationBarItems(leading: TopNavigationFactory.makeLeadingSegmentedNavigationView())
+            .navigationBarItems(trailing: TopNavigationFactory.makeTrailingNavigationView())
+            .navigationTitle("") // TODO: Inject the VPN connection status here
+        
     }
     
 }

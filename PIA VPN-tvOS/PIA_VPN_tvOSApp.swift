@@ -13,6 +13,7 @@ struct PIA_VPN_tvOSApp: App {
     var body: some Scene {
         WindowGroup {
             RootContainerFactory.makeRootContainerView()
+                .preferredColorScheme(.dark)
         }
     }
 }
