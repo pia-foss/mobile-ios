@@ -131,19 +131,19 @@ class Bootstrapper {
         Client.configuration.enablesConnectivityUpdates = true
         Client.configuration.enablesServerUpdates = true
         Client.configuration.enablesServerPings = true
-        #if os(iOS)
+    #if os(iOS)
         Client.configuration.bundledServersJSON = bundledServersJSON
-        #endif
+    #endif
         Client.configuration.webTimeout = AppConfiguration.ClientConfiguration.webTimeout
         Client.configuration.vpnProfileName = AppConfiguration.VPN.profileName
     #if os(iOS)
+        Client.configuration.addVPNProfile(IKEv2Profile())
         Client.configuration.addVPNProfile(PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier))
         Client.configuration.addVPNProfile(PIAWGTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier))
     #endif
         let defaults = Client.preferences.defaults
         defaults.isPersistentConnection = true
         defaults.mace = false
-        defaults.vpnType = IKEv2Profile.vpnType
     #if os(iOS)
         defaults.vpnCustomConfigurations = [
             PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build(),
@@ -156,7 +156,7 @@ class Bootstrapper {
         } else {
             ServiceQualityManager.shared.stop()
         }
-        
+
         Client.providers.accountProvider.featureFlags({ _ in
             AppPreferences.shared.showsDedicatedIPView = Client.configuration.featureFlags.contains(Client.FeatureFlags.dedicatedIp)
             AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags.contains(Client.FeatureFlags.checkDipExpirationRequest)
@@ -229,6 +229,7 @@ class Bootstrapper {
         pref.commit()
         #if os(iOS)
         AppPreferences.shared.migrateOVPN()
+        AppPreferences.shared.migrateWireguard()
         
         // Business objects
         

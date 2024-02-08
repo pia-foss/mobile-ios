@@ -303,7 +303,7 @@ extension AccountViewController {
     class func logout(_ completion: ((Bool?) -> ())? = nil) {
         Client.providers.accountProvider.logout({ error in
             guard let _ = error else {
-                AppPreferences.shared.clean()
+                AppPreferences.shared.reset()
                 completion?(false)
                 return
             }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -393,6 +393,10 @@
 		AA36CDDB28A6860F00180A33 /* TweetNacl in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDDA28A6860F00180A33 /* TweetNacl */; };
 		AA36CDDE28A6878000180A33 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDDD28A6878000180A33 /* AlamofireImage */; };
 		AA52C59F28E5ECD400D025AF /* PIAWidgetVpnDetaislRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA52C59E28E5ECD400D025AF /* PIAWidgetVpnDetaislRow.swift */; };
+		AAA4707B2B737FC100F28590 /* IsWireguardMigrationPerformed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA4707A2B737FC100F28590 /* IsWireguardMigrationPerformed.swift */; };
+		AAA4707D2B737FDD00F28590 /* SetWireguardMigrationPerformed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA4707C2B737FDD00F28590 /* SetWireguardMigrationPerformed.swift */; };
+		AAA4707F2B73801600F28590 /* PerformWireguardMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA4707E2B73801600F28590 /* PerformWireguardMigration.swift */; };
+		AAA470812B7380EA00F28590 /* IsIkev2SelectedWithDefaultSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA470802B7380EA00F28590 /* IsIkev2SelectedWithDefaultSettings.swift */; };
 		AABF826D28AD185E00CDAC64 /* TweetNacl in Frameworks */ = {isa = PBXBuildFile; productRef = AABF826C28AD185E00CDAC64 /* TweetNacl */; };
 		AABF826F28AD187800CDAC64 /* Popover in Frameworks */ = {isa = PBXBuildFile; productRef = AABF826E28AD187800CDAC64 /* Popover */; };
 		AABF827128AD188700CDAC64 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = AABF827028AD188700CDAC64 /* AlamofireImage */; };
@@ -1144,6 +1148,10 @@
 		82E20B0D24F5666E0065EFE3 /* PIAAccount.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PIAAccount.framework; path = ../account/build/bin/iOS/PIAAccountReleaseFramework/PIAAccount.framework; sourceTree = "<group>"; };
 		82F41375264E8AC20098FF4B /* SettingOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingOptions.swift; sourceTree = "<group>"; };
 		AA52C59E28E5ECD400D025AF /* PIAWidgetVpnDetaislRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAWidgetVpnDetaislRow.swift; sourceTree = "<group>"; };
+		AAA4707A2B737FC100F28590 /* IsWireguardMigrationPerformed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsWireguardMigrationPerformed.swift; sourceTree = "<group>"; };
+		AAA4707C2B737FDD00F28590 /* SetWireguardMigrationPerformed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetWireguardMigrationPerformed.swift; sourceTree = "<group>"; };
+		AAA4707E2B73801600F28590 /* PerformWireguardMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformWireguardMigration.swift; sourceTree = "<group>"; };
+		AAA470802B7380EA00F28590 /* IsIkev2SelectedWithDefaultSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsIkev2SelectedWithDefaultSettings.swift; sourceTree = "<group>"; };
 		AAE8789B28E4679500557F26 /* WidgetPersistenceDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetPersistenceDatasource.swift; sourceTree = "<group>"; };
 		AAE8789E28E4696300557F26 /* PIAWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAWidgetProvider.swift; sourceTree = "<group>"; };
 		AAE878A028E46C1600557F26 /* PIAWidgetPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAWidgetPreview.swift; sourceTree = "<group>"; };
@@ -1649,6 +1657,7 @@
 		0E9160551DA6F7EC00A13AA7 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				AAA470772B737DAA00F28590 /* Protocols */,
 				82CAB878255AEA2800BB08EF /* Messages */,
 				DD3B503E24B756B80002F4B5 /* Cards */,
 				DD829EDD2449A14800E2EE55 /* Siri */,
@@ -2385,6 +2394,17 @@
 				8272C62926551F9B00D846A8 /* SettingPopoverSelectionView.swift */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		AAA470772B737DAA00F28590 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				AAA4707A2B737FC100F28590 /* IsWireguardMigrationPerformed.swift */,
+				AAA4707C2B737FDD00F28590 /* SetWireguardMigrationPerformed.swift */,
+				AAA4707E2B73801600F28590 /* PerformWireguardMigration.swift */,
+				AAA470802B7380EA00F28590 /* IsIkev2SelectedWithDefaultSettings.swift */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		AAE8789628E45C5D00557F26 /* Domain */ = {
@@ -3830,6 +3850,7 @@
 				DD125DC521E77046004ECCB6 /* QuickConnectTile.swift in Sources */,
 				82A1AD2624B86AF60003DD02 /* PIACardsViewController.swift in Sources */,
 				DD1AA4962180AD92005116D7 /* CustomDNSSettingsViewController.swift in Sources */,
+				AAA470812B7380EA00F28590 /* IsIkev2SelectedWithDefaultSettings.swift in Sources */,
 				0EFDC1EF1FE4B9E6007C0B9B /* AppConfiguration.swift in Sources */,
 				0E9452A21FDB568700891948 /* MenuItemCell.swift in Sources */,
 				829EB51125359DBB003E74DD /* DedicatedIpRowViewCell.swift in Sources */,
@@ -3870,6 +3891,7 @@
 				DD3B504924B75A1E0002F4B5 /* CardFactory.swift in Sources */,
 				DD829EDF2449A1EF00E2EE55 /* SiriShortcutsBuilder.swift in Sources */,
 				DDC8124C2176185000CB290C /* SwiftGen+SeguesStoryboards.swift in Sources */,
+				AAA4707D2B737FDD00F28590 /* SetWireguardMigrationPerformed.swift in Sources */,
 				E51693D82AFBE5680089FB8F /* CAGradientLayer+Image.swift in Sources */,
 				DDD271E121D6262100B6D20F /* PropertyStoring.swift in Sources */,
 				82A1AD2F24B87CF20003DD02 /* PIACard.swift in Sources */,
@@ -3887,6 +3909,7 @@
 				E59E8FAF2AEA7A81009278F5 /* MagicLinkLoginViewController.swift in Sources */,
 				8276DFE62608B63800BB7B40 /* ShowConnectionStatsViewController.swift in Sources */,
 				827570D424DAA317008F9800 /* NetworkRuleOptionView.swift in Sources */,
+				AAA4707F2B73801600F28590 /* PerformWireguardMigration.swift in Sources */,
 				0E9452A51FDB578400891948 /* RegionCell.swift in Sources */,
 				DD829EE22449A4A400E2EE55 /* SiriShortcutsManager.swift in Sources */,
 				E51693D12AFADCC20089FB8F /* SwiftGen+Strings.swift in Sources */,
@@ -3942,6 +3965,7 @@
 				DD1C138621E60BAE004004B3 /* IPTile.swift in Sources */,
 				0E9452961FDB4C5800891948 /* AboutComponentCell.swift in Sources */,
 				0E53A83B1FE5A156000C2A18 /* AccountProvider+Refresh.swift in Sources */,
+				AAA4707B2B737FC100F28590 /* IsWireguardMigrationPerformed.swift in Sources */,
 				82B7374B26527E330097FFF6 /* GeneralSettingsViewController.swift in Sources */,
 				0EFDC1E01FE4A450007C0B9B /* AppPreferences.swift in Sources */,
 				E51693D52AFBDB8A0089FB8F /* NavigationBar+Appearence..swift in Sources */,
@@ -5676,8 +5700,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pia-foss/mobile-ios-library.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = revision;
+				revision = b0e0707c83db9d5f2f697bac97f1554f901736b7;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

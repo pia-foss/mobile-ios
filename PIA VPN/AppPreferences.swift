@@ -611,8 +611,8 @@ class AppPreferences {
             Entries.useConnectSiriShortcuts: false,
             Entries.useDisconnectSiriShortcuts: false,
             Entries.todayWidgetButtonTitle: L10n.Localizable.Today.Widget.login,
-            Entries.todayWidgetVpnProtocol: IKEv2Profile.vpnType,
-            Entries.todayWidgetVpnPort: "500",
+            Entries.todayWidgetVpnProtocol: PIAWGTunnelProfile.vpnType,
+            Entries.todayWidgetVpnPort: "1337",
             Entries.todayWidgetVpnSocket: "UDP",
             Entries.todayWidgetTrustedNetwork: false,
             Entries.quickSettingThemeVisible: true,
@@ -705,6 +705,35 @@ class AppPreferences {
             pendingPreferences.commit()
         }
         
+    }
+
+    func migrateWireguard() {
+        let isWireguardMigrationPerformed = IsWireguardMigrationPerformed(
+            preferences: Client.preferences
+        )
+        let isIkev2SelectedWithDefaultSettings = IsIkev2SelectedWithDefaultSettings(
+            preferences: Client.preferences
+        )
+        let performWireguardMigration = PerformWireguardMigration(
+            preferences: Client.preferences
+        )
+        let setWireguardMigrationPerformed = SetWireguardMigrationPerformed(
+            preferences: Client.preferences
+        )
+
+        if (isWireguardMigrationPerformed()) {
+            log.debug("Wireguard migration already performed. Return")
+            return
+        }
+
+        setWireguardMigrationPerformed()
+
+        if (!isIkev2SelectedWithDefaultSettings()) {
+            log.debug("Wireguard migration aborted as the user is not on default settings. Return")
+            return
+        }
+
+        performWireguardMigration()
     }
     #endif
     
@@ -855,52 +884,12 @@ class AppPreferences {
         ikeV2UseSmallPackets = true
         usesCustomDNS = false
         wireGuardUseSmallPackets = true
-        todayWidgetVpnProtocol = IKEv2Profile.vpnType
-        todayWidgetVpnPort = "500"
-        todayWidgetVpnSocket = "UDP"
-        todayWidgetTrustedNetwork = false
-        Client.resetServers(completionBlock: {_ in })
-        successDisconnections = 0
-        successConnections = 0
-        failureConnections = 0
-        showGeoServers = true
-        showServiceMessages = false
-        dedicatedTokenIPReleation = [:]
-        appEnvironmentIsProduction = Client.environment == .production ? true : false
-        #if os(iOS)
-        MessagesManager.shared.reset()
-        #endif
-        userInteractedWithSurvey = false
-        successConnectionsUntilSurvey = nil
-        Client.preferences.lastKnownException = nil
-    }
-    
-    func clean() {
-        #if os(iOS)
-        piaHandshake = .rsa4096
-        piaSocketType = nil
-        favoriteServerIdentifiersGen4 = []
-        useConnectSiriShortcuts = false
-        useDisconnectSiriShortcuts = false
-        connectShortcut = nil
-        disconnectShortcut = nil
         todayWidgetVpnStatus = L10n.Localizable.Today.Widget.login
         todayWidgetButtonTitle = L10n.Localizable.Today.Widget.login
-        todayWidgetVpnProtocol = IKEv2Profile.vpnType
-        todayWidgetVpnPort = "500"
+        todayWidgetVpnProtocol = PIAWGTunnelProfile.vpnType
+        todayWidgetVpnPort = "1337"
         todayWidgetVpnSocket = "UDP"
         todayWidgetTrustedNetwork = false
-        #endif
-        quickSettingThemeVisible = true
-        quickSettingKillswitchVisible = true
-        quickSettingNetworkToolVisible = true
-        quickSettingPrivateBrowserVisible = true
-        useSmallPackets = false
-        ikeV2UseSmallPackets = true
-        usesCustomDNS = false
-        wireGuardUseSmallPackets = true
-        let preferences = Client.preferences.editable().reset()
-        preferences.commit()
         Client.resetServers(completionBlock: {_ in })
         successDisconnections = 0
         successConnections = 0
@@ -909,10 +898,10 @@ class AppPreferences {
         showServiceMessages = false
         dismissedMessages = []
         dedicatedTokenIPReleation = [:]
+        appEnvironmentIsProduction = Client.environment == .production ? true : false
         #if os(iOS)
         MessagesManager.shared.reset()
         #endif
-        appEnvironmentIsProduction = Client.environment == .production ? true : false
         userInteractedWithSurvey = false
         successConnectionsUntilSurvey = nil
         Client.preferences.lastKnownException = nil

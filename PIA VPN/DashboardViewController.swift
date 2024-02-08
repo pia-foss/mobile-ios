@@ -566,7 +566,7 @@ class DashboardViewController: AutolayoutViewController {
     
     @objc private func closeSession() {
         log.debug("Account: Logging out...")
-        AppPreferences.shared.clean()
+        AppPreferences.shared.reset()
         if let window = self.view.window,
             let rootViewController = window.rootViewController {
             rootViewController.dismiss(animated: false, completion: nil)
