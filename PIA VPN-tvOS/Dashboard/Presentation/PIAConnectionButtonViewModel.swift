@@ -53,9 +53,9 @@ class PIAConnectionButtonViewModel: ObservableObject {
         case .disconnected:
             return (.pia_red_dark, .pia_red_dark)
         case .connecting, .disconnecting:
-            return (.pia_yellow_dark, .pia_connect_button_grey)
+            return (.pia_yellow_dark, .pia_surface_container_secondary)
         case .connected:
-            return (.pia_green, .pia_green)
+            return (.pia_primary, .pia_primary)
         }
     }
     

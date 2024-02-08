@@ -30,7 +30,7 @@ struct RegionsListView: View {
                 Text(title)
                     .font(.headline)
                     .fontWeight(.regular)
-                    .foregroundColor(Color.pia_secondary_title)
+                    .foregroundColor(Color.pia_on_surface_container_secondary)
             }
             ScrollView {
                 LazyVGrid(columns: columns, alignment: .leading, spacing: 40) {

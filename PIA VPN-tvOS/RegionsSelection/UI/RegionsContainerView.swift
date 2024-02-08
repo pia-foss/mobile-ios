@@ -50,7 +50,7 @@ struct RegionsContainerView: View {
                     Text(viewModel.searchButtonTitle)
                         .padding(.horizontal, 60)
                         .padding(.vertical, 18)
-                        .background(Color.pia_green)
+                        .background(Color.pia_primary)
                         .cornerRadius(8)
                     Spacer()
                 }.frame(height: 150)
@@ -93,7 +93,7 @@ struct RegionsContainerView: View {
             }
         }
         .frame(width: viewWidth)
-        .background(Color.app_background)
+        .background(Color.pia_background)
     }
 }
 
