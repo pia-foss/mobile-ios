@@ -445,10 +445,12 @@
 "regions.filter.favorites.title" = "Favourite";
 "regions.search.recommended_locations.title" = "Recommended Locations";
 "regions.search.results.title" = "Search Results";
+"regions.search.button.title" = "Search for a Location";
 "regions.search.input_field.placeholder" = "Search for city or country";
 "regions.search.previous_results.title" = "Last Searched Locations";
 "regions.context_menu.favorites.add.text" = "Add to Favorites";
 "regions.context_menu.favorites.remove.text" = "Remove from Favorites";
+"regions.list_item.default.title" = "Default";
 
 // Top Navigation bar
 "top_navigation_bar.vpn_item.title" = "PIA VPN";

@@ -40,14 +40,15 @@ struct RegionsListView: View {
                             viewModel.didSelectRegionServer(server)
                         },
                             iconName: "flag-\(server.country.lowercased())",
-                            title: server.name,
+                            // TODO: substitute here
+                            title: viewModel.getDisplayName(for: server).title,
+                            subtitle: viewModel.getDisplayName(for: server).subtitle,
                             favoriteIconName: viewModel.favoriteIconName(for: server),
                             contextMenuItem: contextMenuItem(for: server)
                         )
 
                     }
                 }
-                .padding(.top, 40)
             }
             
         }.onAppear {

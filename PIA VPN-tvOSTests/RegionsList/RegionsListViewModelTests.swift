@@ -15,6 +15,7 @@ class RegionsListViewModelTests: XCTestCase {
         let regionsListUseCaseMock = RegionsListUseCaseMock()
         let favoriteRegionsUseCaseMock = FavoriteRegionUseCaseMock()
         let regionsFilterUseCaseMock = RegionsFilterUseCaseMock()
+        let regionsDisplayNameUseCaseMock = RegionsDisplayNameUseCaseMock()
         let appRouterSpy = AppRouterSpy()
         static let barcelona = ServerMock(name: "Barcelona-1", identifier: "es-server-barcelona", regionIdentifier: "es-region", country: "ES", geo: false, pingTime: 25)
         static let madrid = ServerMock(name: "Madrid", identifier: "es-server-madrid", regionIdentifier: "es-region2", country: "ES", geo: false, pingTime: 12)
@@ -38,7 +39,7 @@ class RegionsListViewModelTests: XCTestCase {
     
     func instantiateSut(with filter: RegionsListFilter = .all,  routerAction: AppRouter.Actions? = nil) {
         let routerAction = routerAction ?? AppRouter.Actions.pop(router: fixture.appRouterSpy)
-        sut = RegionsListViewModel(filter: filter, listUseCase: fixture.regionsListUseCaseMock, favoriteUseCase: fixture.favoriteRegionsUseCaseMock, regionsFilterUseCase: fixture.regionsFilterUseCaseMock, onServerSelectedRouterAction: routerAction)
+        sut = RegionsListViewModel(filter: filter, listUseCase: fixture.regionsListUseCaseMock, favoriteUseCase: fixture.favoriteRegionsUseCaseMock, regionsFilterUseCase: fixture.regionsFilterUseCaseMock, regionsDisplayNameUseCase: fixture.regionsDisplayNameUseCaseMock, onServerSelectedRouterAction: routerAction)
     }
     
     override func setUp() {
@@ -47,6 +48,20 @@ class RegionsListViewModelTests: XCTestCase {
     
     override func tearDown() {
         fixture = nil
+    }
+    
+    func test_displayName_forServer() {
+        // GIVEN that we have 4 servers (2 in ES and 2 in CA)
+        fixture.stubGetServers(for: .all, result: fixture.allServers)
+        // AND GIVEN that the regions display use case for Barcelona returns the country(as the title) and the server name(as the subtitle)
+        fixture.regionsDisplayNameUseCaseMock.getDisplayNameResult = (title: Fixture.barcelona.country, subtitle: Fixture.barcelona.name)
+        instantiateSut()
+        
+        // WHEN asking for the display name for the server Barcelona
+        let displayName = sut.getDisplayName(for: Fixture.barcelona)
+        // THEN the title of the display name is 'ES' (country) and the subtitle is 'Barcelona-1' (server name)
+        XCTAssertEqual(displayName.title, "ES")
+        XCTAssertEqual(displayName.subtitle, "Barcelona-1")
     }
     
 

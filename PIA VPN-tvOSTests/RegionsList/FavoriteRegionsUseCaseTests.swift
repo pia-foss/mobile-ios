@@ -43,7 +43,7 @@ class FavoriteRegionsUseCaseTests: XCTestCase {
         
         // WHEN adding a new item to the favorites list
         let newFavorites = try sut.addToFavorites("server-id-two")
-        // THEN the new item is added to the favorites list
+
         XCTAssertEqual(newFavorites.count, 2)
         XCTAssertEqual(["server-id-one", "server-id-two"], newFavorites)
         

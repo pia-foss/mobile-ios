@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 class RegionsContainerViewModel: ObservableObject {
     enum RegionsNavigationItems: CaseIterable, Identifiable {
@@ -31,18 +32,22 @@ class RegionsContainerViewModel: ObservableObject {
         }
     }
     
-    @Published var sideMenuItems: [RegionsNavigationItems] = RegionsNavigationItems.allCases
+    @Published var sideMenuItems: [RegionsNavigationItems] = [.all, .search]
     
     @Published var selectedSection: RegionsNavigationItems = .all
     
     var searchButtonTitle: String {
-        L10n.Localizable.Region.Search.placeholder
+        L10n.Localizable.Regions.Search.Button.title
     }
 
+    private let favoritesUseCase: FavoriteRegionUseCaseType
     private let onSearchSelectedAction: AppRouter.Actions
+    private var cancellables = Set<AnyCancellable>()
     
-    init(onSearchSelectedAction: AppRouter.Actions) {
+    init(favoritesUseCase: FavoriteRegionUseCaseType, onSearchSelectedAction: AppRouter.Actions) {
+        self.favoritesUseCase = favoritesUseCase
         self.onSearchSelectedAction = onSearchSelectedAction
+        subscribeToFavoritesUpdates()
     }
     
     func navigate(to route: RegionsNavigationItems) {
@@ -54,5 +59,20 @@ class RegionsContainerViewModel: ObservableObject {
         
     }
     
-    
+}
+
+// MARK: - Private
+
+extension RegionsContainerViewModel {
+    private func subscribeToFavoritesUpdates() {
+        favoritesUseCase.favoriteIdentifiersPublisher
+            .receive(on: RunLoop.main)
+            .sink { newFavorites in
+                if newFavorites.isEmpty {
+                    self.sideMenuItems = [.all, .search]
+                } else {
+                    self.sideMenuItems = [.favorites, .all, .search]
+                }
+            }.store(in: &cancellables)
+    }
 }

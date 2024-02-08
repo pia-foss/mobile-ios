@@ -39,9 +39,6 @@ struct DashboardView: View {
             
         }
         .frame(width: viewWidth, height: viewHeight)
-        .background(Color.pia_background)
-        
-        
     }
 }
 

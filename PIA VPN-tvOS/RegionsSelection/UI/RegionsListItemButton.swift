@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-struct RegionsListItemButton: View {
-    
-    typealias ButtonAction = () -> Void
+typealias ButtonAction = () -> Void
+
+struct RegionsListItemButton: View {    
     let onRegionItemSelected: ButtonAction
     @FocusState var buttonFocused: Bool
     
@@ -124,20 +124,23 @@ extension RegionsListItemButton {
     
     
     var detailsView: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 8) {
             Text(title)
                 .font(.system(size: 31, weight: .medium))
                 .multilineTextAlignment(.leading)
-                .foregroundColor(buttonFocused ? Color.black : Color.pia_on_surface_container_secondary)
+                .foregroundColor(buttonFocused ? Color.pia_on_primary : Color.pia_on_surface_container_primary)
                 .minimumScaleFactor(0.6)
                 .fixedSize(horizontal: false, vertical: true)
-                .lineLimit(2, reservesSpace: true)
+                .lineLimit(1)
             
             if let subtitle = subtitle {
                 Text(subtitle)
-                    .font(.caption2)
+                    .font(.system(size: 23, weight: .medium))
                     .italic()
+                    .foregroundColor(buttonFocused ? Color.pia_on_primary : Color.pia_on_surface_container_primary)
                     .multilineTextAlignment(.leading)
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(2)
             }
         }
     }

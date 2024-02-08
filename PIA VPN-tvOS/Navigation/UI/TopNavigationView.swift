@@ -45,11 +45,11 @@ struct LeadingSegmentedNavigationView: View {
                 ForEach(viewModel.leadingSections, id: \.self) { section in
                     button(for: section)
                         .padding(6)
+                        
                 }
             }
             .background(Capsule().fill(Color.pia_surface_container_secondary).shadow(radius: 3))
         }
-        .padding()
         .onChange(of: focusedSection) { _, newValue in
             viewModel.sectionDidUpdateFocus(to: newValue)
         }

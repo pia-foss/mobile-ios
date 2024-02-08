@@ -18,6 +18,8 @@ extension Color {
     static var pia_on_primary = Color("pia_on_primary")
     
     /// Other Greys
+    static var pia_surface = Color("pia_surface")
+    static var pia_surface_container_primary = Color("pia_surface_container_primary")
     static var pia_surface_container_secondary = Color("pia_surface_container_secondary")
     static var pia_on_surface = Color("pia_on_surface")
     static var pia_on_surface_container_secondary = Color("pia_on_surface_container_secondary")

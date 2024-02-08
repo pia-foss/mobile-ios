@@ -7,13 +7,17 @@
 //
 
 import Foundation
-
+import Combine
 @testable import PIA_VPN_tvOS
 
 class FavoriteRegionUseCaseMock: FavoriteRegionUseCaseType {
     
     
     var favoriteIdentifiers: [String] = []
+    @Published private var favorites: [String] = []
+    var favoriteIdentifiersPublisher: Published<[String]>.Publisher {
+        $favorites
+    }
     
     var addToFavoritesCalled = false
     var addToFavoritesCalledAttempt = 0

@@ -755,7 +755,17 @@ internal enum L10n {
           internal static let title = L10n.tr("Localizable", "regions.filter.search.title", fallback: "Search")
         }
       }
+      internal enum ListItem {
+        internal enum Default {
+          /// Default
+          internal static let title = L10n.tr("Localizable", "regions.list_item.default.title", fallback: "Default")
+        }
+      }
       internal enum Search {
+        internal enum Button {
+          /// Search for a Location
+          internal static let title = L10n.tr("Localizable", "regions.search.button.title", fallback: "Search for a Location")
+        }
         internal enum InputField {
           /// Search for city or country
           internal static let placeholder = L10n.tr("Localizable", "regions.search.input_field.placeholder", fallback: "Search for city or country")
