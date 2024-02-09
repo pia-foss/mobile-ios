@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-struct RegionsListItemButton: View {
-    
-    typealias ButtonAction = () -> Void
+typealias ButtonAction = () -> Void
+
+struct RegionsListItemButton: View {    
     let onRegionItemSelected: ButtonAction
     @FocusState var buttonFocused: Bool
     
@@ -37,12 +37,10 @@ struct RegionsListItemButton: View {
             .frame(height: 196)
             
         }
-        .background(Color.pia_region_tile_background)
+        .background(buttonFocused ? Color.pia_primary : Color.pia_surface_container_secondary)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .focused($buttonFocused)
         .buttonStyle(.borderless)
-        .overlay(RoundedRectangle(cornerRadius: 20).stroke( Color.pia_green, lineWidth: buttonFocused ? 4 : 0)
-        )
         .buttonBorderShape(.roundedRectangle(radius: 20))
         
         .contextMenu(menuItems: {
@@ -68,7 +66,7 @@ extension RegionsListItemButton {
                 Image(iconName)
                     .resizable()
                     .frame(width: 52, height: 52)
-                    .foregroundColor(Color.pia_primary_text)
+                    .foregroundColor(Color.pia_outline_variant_primary)
                 
             }
         }
@@ -100,8 +98,9 @@ extension RegionsListItemButton {
 extension RegionsListItemButton {
     var favoriteIconForegroundColor: Color {
         switch favoriteIconName {
-        case "favorite-filled-icon": return Color.pia_light_red
-        default: return Color.pia_primary_text
+        case "favorite-filled-icon": return Color.pia_error
+        default: return
+            buttonFocused ? Color.black : Color.pia_outline_variant_primary
         }
     }
     
@@ -125,21 +124,25 @@ extension RegionsListItemButton {
     
     
     var detailsView: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 8) {
             Text(title)
                 .font(.system(size: 31, weight: .medium))
                 .multilineTextAlignment(.leading)
-                .foregroundColor(Color.pia_secondary_title)
+                .foregroundColor(buttonFocused ? Color.pia_on_primary : Color.pia_on_surface_container_primary)
                 .minimumScaleFactor(0.6)
                 .fixedSize(horizontal: false, vertical: true)
-                .lineLimit(2, reservesSpace: true)
+                .lineLimit(1)
             
             if let subtitle = subtitle {
                 Text(subtitle)
-                    .font(.caption2)
+                    .font(.system(size: 23, weight: .medium))
                     .italic()
+                    .foregroundColor(buttonFocused ? Color.pia_on_primary : Color.pia_on_surface_container_primary)
                     .multilineTextAlignment(.leading)
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(2)
             }
         }
     }
 }
+

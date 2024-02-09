@@ -17,18 +17,18 @@ class RegionsSelectionFactory {
     }
     
     static func makeRegionsContainerViewModel() -> RegionsContainerViewModel {
-        return RegionsContainerViewModel(onSearchSelectedAction: .navigate(router: AppRouterFactory.makeAppRouter(), destination: RegionsDestinations.search))
+        return RegionsContainerViewModel(favoritesUseCase: makeFavoriteRegionUseCase, onSearchSelectedAction: .navigate(router: AppRouterFactory.makeAppRouter(), destination: RegionsDestinations.search))
     }
     
 
     static func makeRegionsListViewModel(with filter: RegionsListFilter) -> RegionsListViewModel {
         return RegionsListViewModel(filter: filter, listUseCase: makeRegionsListUseCase(),
-                                    favoriteUseCase: makeFavoriteRegionUseCase(), regionsFilterUseCase: makeRegionsFilterUseCase(),
+                                    favoriteUseCase: makeFavoriteRegionUseCase, regionsFilterUseCase: makeRegionsFilterUseCase(), regionsDisplayNameUseCase: RegionsDisplayNameUseCase(),
                                     onServerSelectedRouterAction: .goBackToRoot(router: AppRouterFactory.makeAppRouter()))
     }
     
     static func makeRegionsFilterUseCase() -> RegionsFilterUseCaseType {
-        return RegionsFilterUseCase(serversUseCase: makeRegionsListUseCase(), favoritesUseCase: makeFavoriteRegionUseCase(), searchedRegionsAvailability: makeSearchedRegionsAvailability())
+        return RegionsFilterUseCase(serversUseCase: makeRegionsListUseCase(), favoritesUseCase: makeFavoriteRegionUseCase, searchedRegionsAvailability: makeSearchedRegionsAvailability())
     }
     
     static func makeSearchedRegionsAvailability() -> SearchedRegionsAvailabilityType {
@@ -64,8 +64,10 @@ class RegionsSelectionFactory {
         return RegionsListUseCase(serverProvider: DashboardFactory.makeServerProvider(), clientPreferences: Client.preferences)
     }
     
-    static func makeFavoriteRegionUseCase() -> FavoriteRegionUseCaseType {
+    /// FavoritesUseCase is the same instance across the whole app
+    /// in order to be able to publish updates to the favorites collection
+    static var makeFavoriteRegionUseCase: FavoriteRegionUseCaseType = {
         return FavoriteRegionUseCase(keychain: KeychainFactory.makeKeychain())
-    }
+    }()
     
 }

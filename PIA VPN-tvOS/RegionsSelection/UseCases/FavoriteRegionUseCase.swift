@@ -7,9 +7,11 @@
 //
 
 import Foundation
+import Combine
 
 protocol FavoriteRegionUseCaseType {
     var favoriteIdentifiers: [String] { get }
+    var favoriteIdentifiersPublisher: Published<[String]>.Publisher { get }
     @discardableResult
     func addToFavorites(_ id: String) throws -> [String]
     @discardableResult
@@ -18,11 +20,14 @@ protocol FavoriteRegionUseCaseType {
 
 class FavoriteRegionUseCase: FavoriteRegionUseCaseType {
     
+    
     private let keychain: KeychainType
     
     init(keychain: KeychainType) {
         self.keychain = keychain
+        self.favorites = favoriteIdentifiers
     }
+    
     
     var favoriteIdentifiers: [String] {
         if let favorites = try? keychain.getFavorites() {
@@ -32,11 +37,18 @@ class FavoriteRegionUseCase: FavoriteRegionUseCaseType {
         return []
     }
     
+    @Published private var favorites: [String] = []
+    
+    var favoriteIdentifiersPublisher: Published<[String]>.Publisher {
+        $favorites
+    }
+    
     @discardableResult
     func addToFavorites(_ id: String) throws -> [String] {
         var newFavorites = favoriteIdentifiers
         newFavorites.append(id)
         try keychain.set(favorites: newFavorites)
+        favorites = newFavorites
         return newFavorites
     }
     
@@ -44,6 +56,7 @@ class FavoriteRegionUseCase: FavoriteRegionUseCaseType {
     func removeFromFavorites(_ id: String) throws -> [String] {
         var newFavorites = favoriteIdentifiers.filter { id != $0 }
         try keychain.set(favorites: newFavorites)
+        favorites = newFavorites
         return newFavorites
     }
     

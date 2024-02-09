@@ -187,6 +187,11 @@
 		693474CA2B6B8F710061F788 /* SearchedRegionsAvailabilityMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693474C92B6B8F710061F788 /* SearchedRegionsAvailabilityMock.swift */; };
 		693474CD2B6BC84C0061F788 /* FavoriteRegionsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693474CC2B6BC84C0061F788 /* FavoriteRegionsUseCaseTests.swift */; };
 		693622152B698B9200AE3C51 /* SearchedRegionsAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693622142B698B9200AE3C51 /* SearchedRegionsAvailability.swift */; };
+		693B9A3C2B754C0600757A41 /* PIAStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693B9A3B2B754C0600757A41 /* PIAStyles.swift */; };
+		693B9A3E2B75592D00757A41 /* RegionsDisplayNameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693B9A3D2B75592D00757A41 /* RegionsDisplayNameUseCase.swift */; };
+		693B9A402B7571ED00757A41 /* SearchControllerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693B9A3F2B7571ED00757A41 /* SearchControllerButton.swift */; };
+		693B9A422B7615C700757A41 /* RegionsDisplayNameUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693B9A412B7615C700757A41 /* RegionsDisplayNameUseCaseMock.swift */; };
+		693B9A442B7622B600757A41 /* RegionsDisplayNameUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693B9A432B7622B600757A41 /* RegionsDisplayNameUseCaseTests.swift */; };
 		693CA5AB2B3ED67A00D38378 /* AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1DF1FE4A450007C0B9B /* AppPreferences.swift */; };
 		693CA5AC2B3ED69B00D38378 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1EB1FE4B9DC007C0B9B /* AppConstants.swift */; };
 		693CA5AD2B3ED74100D38378 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1EE1FE4B9E6007C0B9B /* AppConfiguration.swift */; };
@@ -1012,6 +1017,11 @@
 		693474C92B6B8F710061F788 /* SearchedRegionsAvailabilityMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedRegionsAvailabilityMock.swift; sourceTree = "<group>"; };
 		693474CC2B6BC84C0061F788 /* FavoriteRegionsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRegionsUseCaseTests.swift; sourceTree = "<group>"; };
 		693622142B698B9200AE3C51 /* SearchedRegionsAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedRegionsAvailability.swift; sourceTree = "<group>"; };
+		693B9A3B2B754C0600757A41 /* PIAStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAStyles.swift; sourceTree = "<group>"; };
+		693B9A3D2B75592D00757A41 /* RegionsDisplayNameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsDisplayNameUseCase.swift; sourceTree = "<group>"; };
+		693B9A3F2B7571ED00757A41 /* SearchControllerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControllerButton.swift; sourceTree = "<group>"; };
+		693B9A412B7615C700757A41 /* RegionsDisplayNameUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsDisplayNameUseCaseMock.swift; sourceTree = "<group>"; };
+		693B9A432B7622B600757A41 /* RegionsDisplayNameUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsDisplayNameUseCaseTests.swift; sourceTree = "<group>"; };
 		693CA5AF2B3ED9E100D38378 /* PIA VPN-tvOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PIA VPN-tvOS.entitlements"; sourceTree = "<group>"; };
 		693CA5B62B3F268300D38378 /* PIA-VPN-tvOS-NetworkExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PIA-VPN-tvOS-NetworkExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		693CA5B92B3F268400D38378 /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
@@ -2017,6 +2027,7 @@
 				69793DA02B59B96B000CB845 /* RegionsListViewModelTests.swift */,
 				693474CC2B6BC84C0061F788 /* FavoriteRegionsUseCaseTests.swift */,
 				6963465C2B7109DA0051F8BC /* RegionsFilterUseCaseTests.swift */,
+				693B9A432B7622B600757A41 /* RegionsDisplayNameUseCaseTests.swift */,
 			);
 			path = RegionsList;
 			sourceTree = "<group>";
@@ -2028,6 +2039,7 @@
 				693474C52B6B8ABA0061F788 /* FavoriteRegionUseCaseMock.swift */,
 				693474C92B6B8F710061F788 /* SearchedRegionsAvailabilityMock.swift */,
 				6963465A2B70F6A80051F8BC /* RegionsFilterUseCaseMock.swift */,
+				693B9A412B7615C700757A41 /* RegionsDisplayNameUseCaseMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -2231,6 +2243,7 @@
 				69E61DE72B55643500085648 /* RegionsListView.swift */,
 				69793DA32B5A9B27000CB845 /* RegionsContainerView.swift */,
 				698615A92B62F99700A1EA54 /* RegionsListItemButton.swift */,
+				693B9A3F2B7571ED00757A41 /* SearchControllerButton.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2250,6 +2263,7 @@
 				696346562B6D0EDC0051F8BC /* RegionsFilterUseCase.swift */,
 				69E61DEE2B556FDA00085648 /* RegionsListUseCase.swift */,
 				69AB492B2B63C73000C780CD /* FavoriteRegionUseCase.swift */,
+				693B9A3D2B75592D00757A41 /* RegionsDisplayNameUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -2272,6 +2286,7 @@
 				69F053492B1F1D2800AE0665 /* Colors.xcassets */,
 				69F1C2942B2B216100E924AE /* PIA+Animation.swift */,
 				69FF0B0E2B3AE8F60074AA04 /* PIAImages+SwiftUI.swift */,
+				693B9A3B2B754C0600757A41 /* PIAStyles.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -4117,6 +4132,7 @@
 				696346572B6D0EDC0051F8BC /* RegionsFilterUseCase.swift in Sources */,
 				E5AB286F2B27977000744E5F /* LoginFactory.swift in Sources */,
 				699311A22B318F6B00D316C8 /* DashboardViewModel.swift in Sources */,
+				693B9A402B7571ED00757A41 /* SearchControllerButton.swift in Sources */,
 				69AB492C2B63C73000C780CD /* FavoriteRegionUseCase.swift in Sources */,
 				69FF0B042B3AD1D40074AA04 /* SelectedServerView.swift in Sources */,
 				69A226B82B3079EA0065EDDB /* PIA+String.swift in Sources */,
@@ -4160,6 +4176,7 @@
 				E52E69152B5DB05600471913 /* BootstraperFactory.swift in Sources */,
 				E5AB28CB2B48AFA900744E5F /* VPNConfigurationAvailability.swift in Sources */,
 				E5AB28712B279B4000744E5F /* LoginProviderType.swift in Sources */,
+				693B9A3E2B75592D00757A41 /* RegionsDisplayNameUseCase.swift in Sources */,
 				693CA5B02B3EDB4900D38378 /* RegionFilter.swift in Sources */,
 				E5AB287B2B28B4C400744E5F /* Credentials.swift in Sources */,
 				E52E68FE2B55E47600471913 /* Routes.swift in Sources */,
@@ -4179,6 +4196,7 @@
 				69F1C2972B2B239000E924AE /* PIAConnectionButtonViewModel.swift in Sources */,
 				693CA5B12B3EDBEF00D38378 /* ThemeCode.swift in Sources */,
 				E52E691D2B5DC2B200471913 /* StateMonitorsFactory.swift in Sources */,
+				693B9A3C2B754C0600757A41 /* PIAStyles.swift in Sources */,
 				E5C507B32B17E5AD00200A6A /* LoginError.swift in Sources */,
 				E5AB28BB2B48815300744E5F /* VPNConfigurationInstallingStatus.swift in Sources */,
 				E5C507CA2B1FAC3600200A6A /* LoginDomainErrorMapper.swift in Sources */,
@@ -4204,6 +4222,7 @@
 				E52E69252B5E92CC00471913 /* VPNStatusMonitorMock.swift in Sources */,
 				696E8F0D2B31A8760080BB31 /* NotificationCenterMock.swift in Sources */,
 				E5C507A82B153E6B00200A6A /* LoginViewModelTests.swift in Sources */,
+				693B9A422B7615C700757A41 /* RegionsDisplayNameUseCaseMock.swift in Sources */,
 				E5AB286C2B2796E700744E5F /* LoginProviderMock.swift in Sources */,
 				693474CD2B6BC84C0061F788 /* FavoriteRegionsUseCaseTests.swift in Sources */,
 				E5AB28872B2911C900744E5F /* AccountProviderMock.swift in Sources */,
@@ -4224,6 +4243,7 @@
 				690FC4822B3C5A4300F6DCC8 /* ServerMock.swift in Sources */,
 				690FC4842B3C5B0500F6DCC8 /* QuickConnectButtonViewModelDelegateMock.swift in Sources */,
 				693474C82B6B8BDD0061F788 /* KeychainTypeMock.swift in Sources */,
+				693B9A442B7622B600757A41 /* RegionsDisplayNameUseCaseTests.swift in Sources */,
 				E5AB287F2B28F6EF00744E5F /* Stubs.swift in Sources */,
 				69E61DF12B56990E00085648 /* DashboardViewModelTests.swift in Sources */,
 				E5AB28972B2C782C00744E5F /* Stubs+PIALibrary.swift in Sources */,

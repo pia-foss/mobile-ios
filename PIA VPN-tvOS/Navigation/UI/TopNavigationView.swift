@@ -27,9 +27,9 @@ struct LeadingSegmentedNavigationView: View {
                 .cornerRadius(32)
                 .foregroundColor(section == viewModel.highlightedSection ? Color.black : Color.white)
                 .background(Capsule().fill(
-                    section == viewModel.highlightedSection ? Color.pia_green :
+                    section == viewModel.highlightedSection ? Color.pia_primary :
                         section == viewModel.selectedSection ?
-                    Color.pia_selection_background : Color.clear
+                    Color.pia_on_primary : Color.clear
                 ).shadow(radius: 3))
         }
         .buttonBorderShape(.capsule)
@@ -44,11 +44,12 @@ struct LeadingSegmentedNavigationView: View {
             HStack(spacing: 2) {
                 ForEach(viewModel.leadingSections, id: \.self) { section in
                     button(for: section)
+                        .padding(6)
+                        
                 }
             }
-            .background(Capsule().fill(Color.pia_region_tile_background).shadow(radius: 3))
+            .background(Capsule().fill(Color.pia_surface_container_secondary).shadow(radius: 3))
         }
-        .padding()
         .onChange(of: focusedSection) { _, newValue in
             viewModel.sectionDidUpdateFocus(to: newValue)
         }
@@ -77,7 +78,7 @@ struct TrailingNavigationView: View {
                             .foregroundColor(section == viewModel.highlightedSection ? Color.black : Color.white)
                             .background(
                                 section == viewModel.highlightedSection 
-                                ? Color.pia_green : Color.pia_region_tile_background)
+                                ? Color.pia_primary : Color.pia_surface_container_secondary)
                             .clipShape(Circle())
                     }
                     .focused($focusedSection, equals: section)

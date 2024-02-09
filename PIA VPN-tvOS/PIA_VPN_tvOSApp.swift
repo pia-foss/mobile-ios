@@ -13,7 +13,8 @@ struct PIA_VPN_tvOSApp: App {
     var body: some Scene {
         WindowGroup {
             RootContainerFactory.makeRootContainerView()
-                .preferredColorScheme(.dark)
+                .background(Color.pia_background)
+                .preferredColorScheme(.dark) //Sets the UI to Dark Mode
         }
     }
 }

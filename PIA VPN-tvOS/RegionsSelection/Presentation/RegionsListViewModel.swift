@@ -15,6 +15,8 @@ class RegionsListViewModel: ObservableObject {
     private let listUseCase: RegionsListUseCaseType
     private let favoriteUseCase: FavoriteRegionUseCaseType
     private let regionsFilterUseCase: RegionsFilterUseCaseType
+    private let regionsDisplayNameUseCase: RegionsDisplayNameUseCaseType
+    
     private let onServerSelectedRouterAction: AppRouter.Actions
     internal var filter: RegionsListFilter
     
@@ -27,20 +29,30 @@ class RegionsListViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     internal var favoriteToggleError: Error? = nil
     
+    private var allServers: [ServerType] = []
+    
     init(filter: RegionsListFilter,
          listUseCase: RegionsListUseCaseType,
          favoriteUseCase: FavoriteRegionUseCaseType,
          regionsFilterUseCase: RegionsFilterUseCaseType,
+         regionsDisplayNameUseCase: RegionsDisplayNameUseCaseType,
          onServerSelectedRouterAction: AppRouter.Actions) {
         self.filter = filter
         self.listUseCase = listUseCase
         self.favoriteUseCase = favoriteUseCase
         self.regionsFilterUseCase = regionsFilterUseCase
+        self.regionsDisplayNameUseCase = regionsDisplayNameUseCase
         self.onServerSelectedRouterAction = onServerSelectedRouterAction
-
+       
+        allServers = listUseCase.getCurrentServers()
         refreshRegionsList()
         subscribeToSearchUpdates()
     }
+    
+    func getDisplayName(for server: ServerType) -> (title: String, subtitle: String) {
+        regionsDisplayNameUseCase.getDisplayName(for: server, amongst: allServers)
+    }
+    
     
     func didSelectRegionServer(_ server: ServerType) {
         listUseCase.select(server: server)

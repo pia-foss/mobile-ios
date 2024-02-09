@@ -20,6 +20,9 @@ struct UserActivatedContainerView: View {
                 switch destination {
                 case .serversList:
                     RegionsSelectionFactory.makeRegionsContainerView()
+                        .padding(.top, Spacing.screenTopPadding)
+                        // TODO: Check .toolbar() to add the navigation bar because
+                        // these APIs will be deprecated
                         .navigationBarItems(leading: TopNavigationFactory.makeLeadingSegmentedNavigationView())
                         .navigationTitle(L10n.Localizable.TopNavigationBar.LocationSelectionScreen.title)
                         .navigationBarItems(trailing: TopNavigationFactory.makeTrailingNavigationView())

@@ -23,54 +23,29 @@ struct RegionsContainerView: View {
                 } label: {
                     HStack {
                         Text(menuItem.text)
-                            .font(.headline)
-                            .padding(.leading, 26)
-                            .padding(.vertical, 12)
+                            .font(.system(size: 38, weight: .medium))
+                            .foregroundColor(.pia_on_surface)
+                            .padding(20)
                         Spacer()
                     }
+                    .background(focusedFilter == menuItem ? Color.pia_surface_container_primary : Color.clear)
+                    .cornerRadius(12)
                     
                 }
                 .cornerRadius(4)
-                .buttonStyle(.plain)
+                .buttonStyle(.borderless)
                 .focused($focusedFilter, equals: menuItem)
                 
             }
-        }
+        }.listStyle(.plain)
     }
     
-    
-    var navigateToSearchScreenButton: some View {
-        Button {
-            viewModel.navigate(to: .search)
-        } label: {
-            HStack(alignment: .center) {
-                Spacer()
-                VStack {
-                    Spacer()
-                    Text(viewModel.searchButtonTitle)
-                        .padding(.horizontal, 60)
-                        .padding(.vertical, 18)
-                        .background(Color.pia_green)
-                        .cornerRadius(8)
-                    Spacer()
-                }.frame(height: 150)
-                
-                Spacer()
-                
-            }
-            .frame(height: 150)
-            .padding()
-            
-        }
-        .buttonStyle(.bordered)
-        .buttonBorderShape(ButtonBorderShape.roundedRectangle)
-    }
-    
-    
+
     var body: some View {
         VStack(alignment: .trailing) {
             HStack(alignment: .top) {
                 regionsFilterButtons
+                    .frame(width: viewWidth * 0.23)
                 VStack {
                     switch viewModel.selectedSection {
                     case .favorites:
@@ -79,21 +54,24 @@ struct RegionsContainerView: View {
                         RegionsSelectionFactory.makeAllRegionsListView()
                     case .search:
                         VStack {
-                            navigateToSearchScreenButton
+                            SearchControllerButton(
+                                buttonAction: {
+                                viewModel.navigate(to: .search)
+                            }, 
+                                buttonTitle: viewModel.searchButtonTitle
+                            )
                             RegionsSelectionFactory.makePreviouslySearchedRegionsListView()
                                 .padding(.top, 40)
                         }
                         
                     }
-                }.frame(width: viewWidth * 0.7)
+                }
             }
             .onChange(of: focusedFilter) { _, newValue in
                 guard let focusedMenuItem = newValue else { return }
                 viewModel.selectedSection = focusedMenuItem
             }
         }
-        .frame(width: viewWidth)
-        .background(Color.app_background)
     }
 }
 
