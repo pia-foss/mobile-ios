@@ -600,7 +600,7 @@ class AppPreferences {
             fatalError("Unable to initialize app preferences")
         }
         self.defaults = defaults
-
+#if os(iOS)
         defaults.register(defaults: [
             Entries.version: AppPreferences.currentVersion,
             Entries.appVersion: "",
@@ -611,7 +611,9 @@ class AppPreferences {
             Entries.useConnectSiriShortcuts: false,
             Entries.useDisconnectSiriShortcuts: false,
             Entries.todayWidgetButtonTitle: L10n.Localizable.Today.Widget.login,
+            
             Entries.todayWidgetVpnProtocol: PIAWGTunnelProfile.vpnType,
+            
             Entries.todayWidgetVpnPort: "1337",
             Entries.todayWidgetVpnSocket: "UDP",
             Entries.todayWidgetTrustedNetwork: false,
@@ -637,7 +639,7 @@ class AppPreferences {
             Entries.stagingVersion: 0,
             Entries.appEnvironmentIsProduction: Client.environment == .production ? true : false,
         ])
-
+    #endif
         migrateDIP()
     }
 
@@ -884,9 +886,11 @@ class AppPreferences {
         ikeV2UseSmallPackets = true
         usesCustomDNS = false
         wireGuardUseSmallPackets = true
+        #if os(iOS)
         todayWidgetVpnStatus = L10n.Localizable.Today.Widget.login
         todayWidgetButtonTitle = L10n.Localizable.Today.Widget.login
         todayWidgetVpnProtocol = PIAWGTunnelProfile.vpnType
+        #endif
         todayWidgetVpnPort = "1337"
         todayWidgetVpnSocket = "UDP"
         todayWidgetTrustedNetwork = false
