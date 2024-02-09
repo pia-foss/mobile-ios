@@ -7,7 +7,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   build:
-    runs-on: macos-13
+    runs-on: macos-14
     env:
       TEST_RUNNER_PIA_TEST_USER: ${{ secrets.PIA_ACCOUNT_USERNAME}}
       TEST_RUNNER_PIA_TEST_PASSWORD: ${{ secrets.PIA_ACCOUNT_PASSWORD }}
@@ -28,10 +28,13 @@ jobs:
     - name: Install Fastlane
       run: gem install fastlane
 
-    - name: Run unit tests
+    - name: Run tvOS unit tests
+      run: bundle exec fastlane tvOStests
+
+    - name: Run iOS unit tests
       run: bundle exec fastlane tests
 
-    - name: Run e2e tests
+    - name: Run iOS e2e tests
       run: bundle exec fastlane e2e_tests
       timeout-minutes: 45
 
