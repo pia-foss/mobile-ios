@@ -17,6 +17,7 @@ final class RootContainerViewModelTests: XCTestCase {
         let accountProvierMock = AccountProviderTypeMock()
         let notificationCenterMock = NotificationCenterMock()
         var vpnConfigurationAvailabilityMock = VPNConfigurationAvailabilityMock(value: false)
+        var connectionStatsPermissonMock = ConnectionStatsPermissonMock(value: nil)
         let appRouterSpy = AppRouterSpy()
         let bootstrapMock = BootstraperMock()
         
@@ -35,14 +36,15 @@ final class RootContainerViewModelTests: XCTestCase {
     override func tearDown() {
         fixture = nil
         sut = nil
-        UserDefaults.standard.removeObject(forKey: .kOnboardingVpnProfileInstalled)
+        //UserDefaults.standard.removeObject(forKey: .kOnboardingVpnProfileInstalled)
     }
     
     private func initializeSut(bootStrapped: Bool = true) {
         sut = RootContainerViewModel(accountProvider: fixture.accountProvierMock,
                                      notificationCenter: fixture.notificationCenterMock,
                                      vpnConfigurationAvailability: fixture.vpnConfigurationAvailabilityMock, 
-                                     bootstrap: fixture.bootstrapMock, 
+                                     connectionStatsPermissonType: fixture.connectionStatsPermissonMock,
+                                     bootstrap: fixture.bootstrapMock,
                                      userAuthenticationStatusMonitor: fixture.makeUserAuthenticationStatusMonitorMock(status: .loggedOut),
                                      appRouter: fixture.appRouterSpy)
         sut.isBootstrapped = bootStrapped
@@ -62,9 +64,29 @@ final class RootContainerViewModelTests: XCTestCase {
         XCTAssertEqual(fixture.appRouterSpy.requests, [])
     }
     
+    func testState_WhenUserIsAuthenticatedAndConnectionStatsPermissonNotShown() {
+        // GIVEN that the user is logged in
+        fixture.accountProvierMock.isLoggedIn = true
+        
+        
+        // AND GIVEN that the Onboarding Vpn Profile is NOT installed
+        stubOnboardingVpnInstallation(finished: false)
+        
+        // WHEN the app is launched
+        initializeSut()
+        
+        // THEN the state becomes 'activatedNotOnboarded'
+        XCTAssertEqual(sut.state, .activatedNotOnboarded)
+        
+        // AND the router is called to navigate to the Onboarding Install VPN profile
+        XCTAssertEqual(fixture.appRouterSpy.requests, [AppRouterSpy.Request.navigate(OnboardingDestinations.connectionstats)])
+    }
+    
     func testState_WhenUserIsAuthenticatedAndVpnProfileNotInstalled() {
         // GIVEN that the user is logged in
         fixture.accountProvierMock.isLoggedIn = true
+        // AND GIVEN that Connection Stats Permisson was shown
+        stubConnectionStatsPermisson(value: true)
         // AND GIVEN that the Onboarding Vpn Profile is NOT installed
         stubOnboardingVpnInstallation(finished: false)
         
@@ -114,6 +136,7 @@ final class RootContainerViewModelTests: XCTestCase {
         sut = RootContainerViewModel(accountProvider: fixture.accountProvierMock,
                                      notificationCenter: fixture.notificationCenterMock,
                                      vpnConfigurationAvailability: fixture.vpnConfigurationAvailabilityMock,
+                                     connectionStatsPermissonType: fixture.connectionStatsPermissonMock,
                                      bootstrap: fixture.bootstrapMock,
                                      userAuthenticationStatusMonitor: userAuthenticationStatusMonitor, 
                                      appRouter: fixture.appRouterSpy)
@@ -138,7 +161,8 @@ final class RootContainerViewModelTests: XCTestCase {
         
         sut = RootContainerViewModel(accountProvider: fixture.accountProvierMock,
                                      notificationCenter: fixture.notificationCenterMock,
-                                     vpnConfigurationAvailability: fixture.vpnConfigurationAvailabilityMock,
+                                     vpnConfigurationAvailability: fixture.vpnConfigurationAvailabilityMock, 
+                                     connectionStatsPermissonType: fixture.connectionStatsPermissonMock,
                                      bootstrap: fixture.bootstrapMock,
                                      userAuthenticationStatusMonitor: userAuthenticationStatusMonitor,
                                     appRouter: fixture.appRouterSpy)
@@ -158,5 +182,9 @@ final class RootContainerViewModelTests: XCTestCase {
 extension RootContainerViewModelTests {
     private func stubOnboardingVpnInstallation(finished: Bool) {
         fixture.vpnConfigurationAvailabilityMock = VPNConfigurationAvailabilityMock(value: finished)
+    }
+    
+    private func stubConnectionStatsPermisson(value: Bool) {
+        fixture.connectionStatsPermissonMock = ConnectionStatsPermissonMock(value: value)
     }
 }

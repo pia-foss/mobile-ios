@@ -12,8 +12,9 @@ class RootContainerFactory {
             fatalError("Incorrect account provider type")
         }
         return RootContainerViewModel(accountProvider: defaultAccountProvider,
-                                      vpnConfigurationAvailability: VPNConfigurationAvailability(), 
-                                      bootstrap: BootstraperFactory.makeBootstrapper(), 
+                                      vpnConfigurationAvailability: VPNConfigurationAvailability(),
+                                      connectionStatsPermissonType: ConnectionStatsPermisson(),
+                                      bootstrap: BootstraperFactory.makeBootstrapper(),
                                       userAuthenticationStatusMonitor: StateMonitorsFactory.makeUserAuthenticationStatusMonitor(),
                                       appRouter: AppRouterFactory.makeAppRouter())
     }

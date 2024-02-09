@@ -14,6 +14,7 @@ enum AuthenticationDestinations: Destinations {
 }
 
 enum OnboardingDestinations: Destinations {
+    case connectionstats
     case installVPNProfile
 }
 
@@ -32,6 +33,8 @@ public extension View {
             switch destination {
                 case .installVPNProfile:
                     VPNConfigurationInstallingFactory.makeVPNConfigurationInstallingView()
+                case .connectionstats:
+                    OnboardingFactory.makeOnboardingConnectionStatsView()
             }
         }
     }

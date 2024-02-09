@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -602,6 +602,18 @@
 		E52E691F2B5DCEA500471913 /* UserAuthenticationStatusMonitorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E691E2B5DCEA500471913 /* UserAuthenticationStatusMonitorMock.swift */; };
 		E52E69222B5DCF1F00471913 /* VPNStatusProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E69212B5DCF1F00471913 /* VPNStatusProviderMock.swift */; };
 		E52E69252B5E92CC00471913 /* VPNStatusMonitorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E69242B5E92CC00471913 /* VPNStatusMonitorMock.swift */; };
+		E55EDCD22B755DB1007010DB /* OnboardingComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCD12B755DB1007010DB /* OnboardingComponentView.swift */; };
+		E55EDCD52B755E09007010DB /* OnboardingComponentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCD42B755E09007010DB /* OnboardingComponentViewModel.swift */; };
+		E55EDCDA2B755E6D007010DB /* OnboardingFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCD92B755E6C007010DB /* OnboardingFactory.swift */; };
+		E55EDCDC2B758BDF007010DB /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCDB2B758BDF007010DB /* SplashView.swift */; };
+		E55EDCE42B76087C007010DB /* WelcomeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCE32B76087C007010DB /* WelcomeFactory.swift */; };
+		E55EDCEA2B760D3E007010DB /* TextFieldStyleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCE92B760D3E007010DB /* TextFieldStyleModifier.swift */; };
+		E55EDCEC2B760DFD007010DB /* LoginLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCEB2B760DFD007010DB /* LoginLoadingView.swift */; };
+		E55EDCEE2B760E40007010DB /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCED2B760E40007010DB /* ActionButton.swift */; };
+		E55EDCF02B760EEB007010DB /* FormTextFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCEF2B760EEB007010DB /* FormTextFieldsView.swift */; };
+		E55EDCF32B762A75007010DB /* ConnectionStatsPermisson.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCF22B762A74007010DB /* ConnectionStatsPermisson.swift */; };
+		E55EDCF62B762C6E007010DB /* ConnectionStatsPermissonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCF52B762C6E007010DB /* ConnectionStatsPermissonType.swift */; };
+		E55EDCF82B769416007010DB /* ConnectionStatsPermissonMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCF72B769416007010DB /* ConnectionStatsPermissonMock.swift */; };
 		E59E8F942AEA7A29009278F5 /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8F932AEA7A29009278F5 /* ActivityButton.swift */; };
 		E59E8F952AEA7A29009278F5 /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8F932AEA7A29009278F5 /* ActivityButton.swift */; };
 		E59E8F972AEA7A5A009278F5 /* AutolayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8F962AEA7A5A009278F5 /* AutolayoutViewController.swift */; };
@@ -1323,6 +1335,19 @@
 		E52E691E2B5DCEA500471913 /* UserAuthenticationStatusMonitorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationStatusMonitorMock.swift; sourceTree = "<group>"; };
 		E52E69212B5DCF1F00471913 /* VPNStatusProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusProviderMock.swift; sourceTree = "<group>"; };
 		E52E69242B5E92CC00471913 /* VPNStatusMonitorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusMonitorMock.swift; sourceTree = "<group>"; };
+		E55EDCD12B755DB1007010DB /* OnboardingComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingComponentView.swift; sourceTree = "<group>"; };
+		E55EDCD42B755E09007010DB /* OnboardingComponentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingComponentViewModel.swift; sourceTree = "<group>"; };
+		E55EDCD92B755E6C007010DB /* OnboardingFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFactory.swift; sourceTree = "<group>"; };
+		E55EDCDB2B758BDF007010DB /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		E55EDCDD2B758D47007010DB /* PIA-VPN-tvOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "PIA-VPN-tvOS-Info.plist"; sourceTree = SOURCE_ROOT; };
+		E55EDCE32B76087C007010DB /* WelcomeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFactory.swift; sourceTree = "<group>"; };
+		E55EDCE92B760D3E007010DB /* TextFieldStyleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStyleModifier.swift; sourceTree = "<group>"; };
+		E55EDCEB2B760DFD007010DB /* LoginLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLoadingView.swift; sourceTree = "<group>"; };
+		E55EDCED2B760E40007010DB /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
+		E55EDCEF2B760EEB007010DB /* FormTextFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextFieldsView.swift; sourceTree = "<group>"; };
+		E55EDCF22B762A74007010DB /* ConnectionStatsPermisson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatsPermisson.swift; sourceTree = "<group>"; };
+		E55EDCF52B762C6E007010DB /* ConnectionStatsPermissonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatsPermissonType.swift; sourceTree = "<group>"; };
+		E55EDCF72B769416007010DB /* ConnectionStatsPermissonMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatsPermissonMock.swift; sourceTree = "<group>"; };
 		E59E8F932AEA7A29009278F5 /* ActivityButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityButton.swift; sourceTree = "<group>"; };
 		E59E8F962AEA7A5A009278F5 /* AutolayoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutolayoutViewController.swift; sourceTree = "<group>"; };
 		E59E8F992AEA7A7F009278F5 /* SignupInternetUnreachableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupInternetUnreachableViewController.swift; sourceTree = "<group>"; };
@@ -2159,6 +2184,7 @@
 			isa = PBXGroup;
 			children = (
 				69A226BD2B307D5F0065EDDB /* RootContainerView.swift */,
+				E55EDCDB2B758BDF007010DB /* SplashView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2282,6 +2308,8 @@
 		69F053452B1E055300AE0665 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				E55EDCE82B760D2E007010DB /* Modifiers */,
+				E55EDCD02B755DA5007010DB /* Views */,
 				69F053462B1E056400AE0665 /* PIAColors+SwitUI.swift */,
 				69F053492B1F1D2800AE0665 /* Colors.xcassets */,
 				69F1C2942B2B216100E924AE /* PIA+Animation.swift */,
@@ -2677,6 +2705,7 @@
 			children = (
 				E52E69192B5DB86F00471913 /* BootstraperMock.swift */,
 				E52E691E2B5DCEA500471913 /* UserAuthenticationStatusMonitorMock.swift */,
+				E55EDCF72B769416007010DB /* ConnectionStatsPermissonMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -2699,6 +2728,90 @@
 				693474C72B6B8BDD0061F788 /* KeychainTypeMock.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		E55EDCD02B755DA5007010DB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E55EDCED2B760E40007010DB /* ActionButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E55EDCD32B755DF0007010DB /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				E55EDCF42B762C5D007010DB /* Domain */,
+				E55EDCF12B7628B7007010DB /* Data */,
+				E55EDCD82B755E4F007010DB /* Presentation */,
+				E55EDCD72B755E4A007010DB /* UI */,
+				E55EDCD62B755E41007010DB /* CompositionRoot */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		E55EDCD62B755E41007010DB /* CompositionRoot */ = {
+			isa = PBXGroup;
+			children = (
+				E55EDCD92B755E6C007010DB /* OnboardingFactory.swift */,
+			);
+			path = CompositionRoot;
+			sourceTree = "<group>";
+		};
+		E55EDCD72B755E4A007010DB /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				E55EDCD12B755DB1007010DB /* OnboardingComponentView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		E55EDCD82B755E4F007010DB /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				E55EDCD42B755E09007010DB /* OnboardingComponentViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		E55EDCDE2B760666007010DB /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				E55EDCE22B76083A007010DB /* CompositionRoot */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		E55EDCE22B76083A007010DB /* CompositionRoot */ = {
+			isa = PBXGroup;
+			children = (
+				E55EDCE32B76087C007010DB /* WelcomeFactory.swift */,
+			);
+			path = CompositionRoot;
+			sourceTree = "<group>";
+		};
+		E55EDCE82B760D2E007010DB /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				E55EDCE92B760D3E007010DB /* TextFieldStyleModifier.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		E55EDCF12B7628B7007010DB /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E55EDCF22B762A74007010DB /* ConnectionStatsPermisson.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E55EDCF42B762C5D007010DB /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				E55EDCF52B762C6E007010DB /* ConnectionStatsPermissonType.swift */,
+			);
+			path = Domain;
 			sourceTree = "<group>";
 		};
 		E5AB286D2B27975E00744E5F /* CompositionRoot */ = {
@@ -2814,6 +2927,9 @@
 		E5C507782B0E144E00200A6A /* PIA VPN-tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				E55EDCDD2B758D47007010DB /* PIA-VPN-tvOS-Info.plist */,
+				E55EDCDE2B760666007010DB /* Welcome */,
+				E55EDCD32B755DF0007010DB /* Onboarding */,
 				E52E69132B5DB04400471913 /* Bootstraper */,
 				693CA5AF2B3ED9E100D38378 /* PIA VPN-tvOS.entitlements */,
 				69A226B92B307C8A0065EDDB /* RootContainer */,
@@ -2906,6 +3022,8 @@
 			isa = PBXGroup;
 			children = (
 				E5C507A12B0FE40000200A6A /* LoginView.swift */,
+				E55EDCEB2B760DFD007010DB /* LoginLoadingView.swift */,
+				E55EDCEF2B760EEB007010DB /* FormTextFieldsView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -4124,11 +4242,14 @@
 				69E61DEF2B556FDA00085648 /* RegionsListUseCase.swift in Sources */,
 				E5AB28732B279B7000744E5F /* LoginProvider.swift in Sources */,
 				E5C507A52B153A2F00200A6A /* LoginViewModel.swift in Sources */,
+				E55EDCF32B762A75007010DB /* ConnectionStatsPermisson.swift in Sources */,
 				693CA5AE2B3ED75500D38378 /* Flags.swift in Sources */,
 				69F675AB2B592FA0000E31D5 /* Server+Automatic.swift in Sources */,
 				E5C507B72B17E75B00200A6A /* CheckLoginAvailability.swift in Sources */,
 				E5AB288E2B2A489500744E5F /* LoginStatus.swift in Sources */,
 				69FF0B132B3AF2050074AA04 /* QuickConnectButtonViewModel.swift in Sources */,
+				E55EDCEC2B760DFD007010DB /* LoginLoadingView.swift in Sources */,
+				E55EDCDA2B755E6D007010DB /* OnboardingFactory.swift in Sources */,
 				696346572B6D0EDC0051F8BC /* RegionsFilterUseCase.swift in Sources */,
 				E5AB286F2B27977000744E5F /* LoginFactory.swift in Sources */,
 				699311A22B318F6B00D316C8 /* DashboardViewModel.swift in Sources */,
@@ -4143,6 +4264,7 @@
 				69AB49302B63CD8700C780CD /* Keychain+Protocols.swift in Sources */,
 				693CA5AB2B3ED67A00D38378 /* AppPreferences.swift in Sources */,
 				69AB49322B63D22400C780CD /* KeychainFactory.swift in Sources */,
+				E55EDCEA2B760D3E007010DB /* TextFieldStyleModifier.swift in Sources */,
 				69793DA62B5A9E1E000CB845 /* RegionsContainerViewModel.swift in Sources */,
 				E5AB288A2B29BDED00744E5F /* Foundation+PIA.swift in Sources */,
 				E5C507A22B0FE40000200A6A /* LoginView.swift in Sources */,
@@ -4169,6 +4291,7 @@
 				E5C507AE2B17E45800200A6A /* LoginPresentableErrorMapper.swift in Sources */,
 				69E61DEA2B55644900085648 /* RegionsListViewModel.swift in Sources */,
 				69816C3D2B4EBB3C00E3C86B /* Destinations.swift in Sources */,
+				E55EDCDC2B758BDF007010DB /* SplashView.swift in Sources */,
 				69FF0B0D2B3AD57C0074AA04 /* SelectedServerUseCase.swift in Sources */,
 				69C5E7CE2B72949000FE3126 /* TopNavigationViewModel.swift in Sources */,
 				69FF0B112B3AF1F00074AA04 /* QuickConnectButton.swift in Sources */,
@@ -4186,7 +4309,9 @@
 				694AC74E2B17AB9C007E7B56 /* DashboardView.swift in Sources */,
 				69F1C2932B2B10D400E924AE /* DashboardFactory.swift in Sources */,
 				E5AB28B62B361E6C00744E5F /* VPNConfigurationInstallingErrorMapper.swift in Sources */,
+				E55EDCD22B755DB1007010DB /* OnboardingComponentView.swift in Sources */,
 				69793DA42B5A9B27000CB845 /* RegionsContainerView.swift in Sources */,
+				E55EDCF02B760EEB007010DB /* FormTextFieldsView.swift in Sources */,
 				E5C5077A2B0E144E00200A6A /* PIA_VPN_tvOSApp.swift in Sources */,
 				69F1C2952B2B216100E924AE /* PIA+Animation.swift in Sources */,
 				69A226B52B3075AB0065EDDB /* RootContainerViewModel.swift in Sources */,
@@ -4195,6 +4320,7 @@
 				E5AB28A02B30C68A00744E5F /* VPNConfigurationInstallingViewModel.swift in Sources */,
 				69F1C2972B2B239000E924AE /* PIAConnectionButtonViewModel.swift in Sources */,
 				693CA5B12B3EDBEF00D38378 /* ThemeCode.swift in Sources */,
+				E55EDCE42B76087C007010DB /* WelcomeFactory.swift in Sources */,
 				E52E691D2B5DC2B200471913 /* StateMonitorsFactory.swift in Sources */,
 				693B9A3C2B754C0600757A41 /* PIAStyles.swift in Sources */,
 				E5C507B32B17E5AD00200A6A /* LoginError.swift in Sources */,
@@ -4207,6 +4333,9 @@
 				69A226C02B307DBF0065EDDB /* RootContainerFactory.swift in Sources */,
 				E5AB28B92B361E9200744E5F /* InstallVPNConfigurationError.swift in Sources */,
 				69F053472B1E056400AE0665 /* PIAColors+SwitUI.swift in Sources */,
+				E55EDCD52B755E09007010DB /* OnboardingComponentViewModel.swift in Sources */,
+				E55EDCF62B762C6E007010DB /* ConnectionStatsPermissonType.swift in Sources */,
+				E55EDCEE2B760E40007010DB /* ActionButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4234,6 +4363,7 @@
 				E52E69112B5D696E00471913 /* UserAuthenticationStatusMonitorTests.swift in Sources */,
 				E5AB28D12B4B39F000744E5F /* VPNConfigurationInstallingViewModelTests.swift in Sources */,
 				E5C5078B2B0E145100200A6A /* PIA_VPN_tvOSTests.swift in Sources */,
+				E55EDCF82B769416007010DB /* ConnectionStatsPermissonMock.swift in Sources */,
 				690FC4802B3C59AF00F6DCC8 /* QuickConnectButtonViewModelTests.swift in Sources */,
 				E52E691A2B5DB86F00471913 /* BootstraperMock.swift in Sources */,
 				693474CA2B6B8F710061F788 /* SearchedRegionsAvailabilityMock.swift in Sources */,
@@ -5313,7 +5443,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_FILE = "PIA-VPN-tvOS-Info.plist";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5361,7 +5491,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_FILE = "PIA-VPN-tvOS-Info.plist";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

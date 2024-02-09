@@ -19,7 +19,7 @@ class LoginFactory {
                        checkLoginAvailability: CheckLoginAvailability(),
                        validateLoginCredentials: ValidateCredentialsFormat(),
                        errorHandler: makeLoginViewModelErrorHandler(),
-                       onSuccessAction: .navigate(router: AppRouter.shared, destination: OnboardingDestinations.installVPNProfile))
+                       onSuccessAction: .navigate(router: AppRouter.shared, destination: OnboardingDestinations.connectionstats))
     }
     
     private static func makeLoginWithCredentialsUseCase() -> LoginWithCredentialsUseCaseType {

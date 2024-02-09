@@ -2,10 +2,6 @@
 import Foundation
 
 extension String {
-    static let kOnboardingVpnProfileInstalled = "kOnboardingVpnProfileInstalled"
-}
-
-extension String {
     var capitalizedSentence: String {
         // 1
         let firstLetter = self.prefix(1).capitalized

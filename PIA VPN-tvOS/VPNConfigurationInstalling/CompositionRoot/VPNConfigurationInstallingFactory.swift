@@ -8,6 +8,7 @@
 
 import Foundation
 import PIALibrary
+import SwiftUI
 
 class VPNConfigurationInstallingFactory {
     private static var isSimulator: Bool {
@@ -19,7 +20,15 @@ class VPNConfigurationInstallingFactory {
     }
     
     static func makeVPNConfigurationInstallingView() -> VPNConfigurationInstallingView {
-        VPNConfigurationInstallingView(viewModel: makeVPNConfigurationInstallingViewModel())
+        VPNConfigurationInstallingView(viewModel: makeVPNConfigurationInstallingViewModel(), 
+                                       style: makeVPNConfigurationInstallingViewStyle())
+    }
+    
+    private static func makeVPNConfigurationInstallingViewStyle() -> OnboardingComponentStytle {
+        OnboardingComponentStytle(headerImage: nil,
+                                  headerSpacing: 30,
+                                  backgroundImage: .onboarding_configure_robots, 
+                                  buttonsEdgeInsets: EdgeInsets(top: 40, leading: 30, bottom: 0, trailing: 0))
     }
     
     private static func makeVPNConfigurationInstallingViewModel() -> VPNConfigurationInstallingViewModel {
@@ -49,6 +58,5 @@ class VPNConfigurationInstallingFactory {
     
     private static func makeVpnConfigurationProvider() -> VpnConfigurationProviderType {
         return VpnConfigurationProvider(vpnProvider: Client.providers.vpnProvider)
-        
     }
 }

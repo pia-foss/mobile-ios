@@ -18,16 +18,18 @@ class RootContainerViewModel: ObservableObject {
     private let accountProvider: AccountProviderType
     private let notificationCenter: NotificationCenterType
     private let vpnConfigurationAvailability: VPNConfigurationAvailabilityType
+    private let connectionStatsPermissonType: ConnectionStatsPermissonType
     private let bootstrap: BootstraperType
     private let userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType
     private let appRouter: AppRouterType
     private var cancellables = Set<AnyCancellable>()
     
-    init(accountProvider: AccountProviderType, notificationCenter: NotificationCenterType = NotificationCenter.default, vpnConfigurationAvailability: VPNConfigurationAvailabilityType, bootstrap: BootstraperType, userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType, appRouter: AppRouterType) {
+    init(accountProvider: AccountProviderType, notificationCenter: NotificationCenterType = NotificationCenter.default, vpnConfigurationAvailability: VPNConfigurationAvailabilityType, connectionStatsPermissonType: ConnectionStatsPermissonType, bootstrap: BootstraperType, userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType, appRouter: AppRouterType) {
         
         self.accountProvider = accountProvider
         self.notificationCenter = notificationCenter
         self.vpnConfigurationAvailability = vpnConfigurationAvailability
+        self.connectionStatsPermissonType = connectionStatsPermissonType
         self.bootstrap = bootstrap
         self.userAuthenticationStatusMonitor = userAuthenticationStatusMonitor
         self.appRouter = appRouter
@@ -48,6 +50,7 @@ class RootContainerViewModel: ObservableObject {
         }
         
         let onBoardingVpnProfileInstalled = vpnConfigurationAvailability.get()
+        let shouldShowconnectionStatsPermisson = connectionStatsPermissonType.get() == nil
         
         switch (accountProvider.isLoggedIn, onBoardingVpnProfileInstalled) {
             // logged in, vpn profile installed
@@ -56,7 +59,11 @@ class RootContainerViewModel: ObservableObject {
             // logged in, vpn profile not installed
         case (true, false):
             state = .activatedNotOnboarded
-            appRouter.navigate(to: OnboardingDestinations.installVPNProfile)
+            if shouldShowconnectionStatsPermisson {
+                appRouter.navigate(to: OnboardingDestinations.connectionstats)
+            } else {
+                appRouter.navigate(to: OnboardingDestinations.installVPNProfile)
+            }
             // not logged in, any
         case (false, _):
             state = .notActivated

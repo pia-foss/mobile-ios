@@ -660,6 +660,23 @@ internal enum L10n {
         internal static let title = L10n.tr("Localizable", "notifications.disabled.title", fallback: "Notifications disabled")
       }
     }
+    internal enum Onboarding {
+      internal enum ConnectionStats {
+        /// To ensure our service's connection performance, you can anonymously share your connection stats with us. These reports do no include any personally identifiable information.
+        ///  Note that you can always control this from your settings.
+        internal static let subtitle = L10n.tr("Localizable", "onboarding.connection_stats.subtitle", fallback: "To ensure our service's connection performance, you can anonymously share your connection stats with us. These reports do no include any personally identifiable information. \n\nNote that you can always control this from your settings.")
+      }
+      internal enum VpnConfiguration {
+        /// Configure PIA
+        internal static let button = L10n.tr("Localizable", "onboarding.vpn_configuration.button", fallback: "Configure PIA")
+        /// When connecting for the first time, you will be asked to allow PIA to access VPN configurations. This is necessary in order to encrypt your traffic.
+        ///  Please remember that we don't monitor, filter, or log your online activity.
+        ///  To proceed click on the button below.
+        internal static let subtitle = L10n.tr("Localizable", "onboarding.vpn_configuration.subtitle", fallback: "When connecting for the first time, you will be asked to allow PIA to access VPN configurations. This is necessary in order to encrypt your traffic. \n\nPlease remember that we don't monitor, filter, or log your online activity. \n\nTo proceed click on the button below.")
+        /// Configure PIA
+        internal static let title = L10n.tr("Localizable", "onboarding.vpn_configuration.title", fallback: "Configure PIA")
+      }
+    }
     internal enum Rating {
       internal enum Alert {
         internal enum Button {
@@ -1340,6 +1357,28 @@ internal enum L10n {
         internal static let title = L10n.tr("Localizable", "top_navigation_bar.vpn_item.title", fallback: "PIA VPN")
       }
     }
+    internal enum Tvos {
+      internal enum Login {
+        /// Enter your PIA VPN account details
+        internal static let title = L10n.tr("Localizable", "tvos.login.title", fallback: "Enter your PIA VPN account details")
+        internal enum Placeholder {
+          /// Enter Password
+          internal static let password = L10n.tr("Localizable", "tvos.login.placeholder.password", fallback: "Enter Password")
+          /// Enter Username
+          internal static let username = L10n.tr("Localizable", "tvos.login.placeholder.username", fallback: "Enter Username")
+        }
+      }
+      internal enum Welcome {
+        /// Fast & Secure VPN for Streaming
+        internal static let title = L10n.tr("Localizable", "tvos.welcome.title", fallback: "Fast & Secure VPN for Streaming")
+        internal enum Button {
+          /// Log In
+          internal static let login = L10n.tr("Localizable", "tvos.welcome.button.login", fallback: "Log In")
+          /// Sign Up
+          internal static let signup = L10n.tr("Localizable", "tvos.welcome.button.signup", fallback: "Sign Up")
+        }
+      }
+    }
     internal enum VpnPermission {
       /// PIA
       internal static let title = L10n.tr("Localizable", "vpn_permission.title", fallback: "PIA")
@@ -1367,7 +1406,7 @@ internal enum L10n {
     }
     internal enum Widget {
       internal enum LiveActivity {
-        internal enum SelectedProtocol {
+        internal enum `Protocol` {
           /// Protocol
           internal static let title = L10n.tr("Localizable", "widget.liveActivity.protocol.title", fallback: "Protocol")
         }
