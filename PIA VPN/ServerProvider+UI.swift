@@ -42,16 +42,19 @@ extension Client.Preferences {
             } else {
                 ed.preferredServer = newValue
             }
+            
             let action = ed.requiredVPNAction()
             ed.commit()
 
             action?.execute { [weak self] (error) in
                 self?.connectToSelectedServerIfNeeded(shouldReconnect: true)
             }
+            
         }
     }
     
     private func connectToSelectedServerIfNeeded(shouldReconnect: Bool = false) {
+        #if os(iOS)
         let vpn = Client.providers.vpnProvider
         
         switch vpn.vpnStatus {
@@ -62,5 +65,6 @@ extension Client.Preferences {
                 vpn.reconnect(after: nil, forceDisconnect: true, nil)
             }
         }
+        #endif
     }
 }

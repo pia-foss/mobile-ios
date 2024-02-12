@@ -4,8 +4,6 @@ import SwiftUI
 import PIALibrary
 
 struct DashboardView: View {
-    let viewWidth = UIScreen.main.bounds.width
-    let viewHeight = UIScreen.main.bounds.height
     
     @ObservedObject var viewModel: DashboardViewModel
     
@@ -23,7 +21,7 @@ struct DashboardView: View {
                 Divider()
                 
                 QuickConnectSection()
-                    .frame(width: (viewWidth/2))
+//                    .frame(width: (viewWidth/2))
                 
                 Divider()
                 
@@ -36,13 +34,9 @@ struct DashboardView: View {
                 }
 
             }
-            .frame(maxWidth: (viewWidth/2))
+            .frame(width: Spacing.dashboardViewWidth)
             .padding()
             
-        }
-        .frame(width: viewWidth, height: viewHeight)
-        .onAppear {
-            print(">>> >>> Home screen on Appear... displayedServer: \(Client.preferences.displayedServer.name)")
         }
     }
 }

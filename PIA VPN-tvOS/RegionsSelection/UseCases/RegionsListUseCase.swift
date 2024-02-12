@@ -19,10 +19,12 @@ class RegionsListUseCase: RegionsListUseCaseType {
 
     private let serverProvider: ServerProviderType
     private var clientPreferences: ClientPreferencesType
+    private let vpnConnectionUseCase: VpnConnectionUseCaseType
     
-    init(serverProvider: ServerProviderType, clientPreferences: ClientPreferencesType) {
+    init(serverProvider: ServerProviderType, clientPreferences: ClientPreferencesType, vpnConnectionUseCase: VpnConnectionUseCaseType) {
         self.serverProvider = serverProvider
         self.clientPreferences = clientPreferences
+        self.vpnConnectionUseCase = vpnConnectionUseCase
     }
     
     func getCurrentServers() -> [ServerType] {
@@ -30,9 +32,18 @@ class RegionsListUseCase: RegionsListUseCaseType {
     }
     
     func select(server: ServerType) {
-        // This triggers a connection
-        // TODO: Refactor the logic inside the set selected Server so that on tvOS does not trigger the connection, we trigger it separately
         clientPreferences.selectedServer = server
+        Task {
+            do {
+                try await vpnConnectionUseCase.connect()
+            } catch {
+                // TODO: Handle error
+                NSLog("Connection error after selecting server: \(error)")
+            }
+            
+            
+        }
+        
     }
     
 }

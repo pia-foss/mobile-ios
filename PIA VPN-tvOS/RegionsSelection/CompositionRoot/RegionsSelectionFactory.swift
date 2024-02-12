@@ -60,7 +60,7 @@ class RegionsSelectionFactory {
     }
     
     static func makeRegionsListUseCase() -> RegionsListUseCaseType {
-        return RegionsListUseCase(serverProvider: DashboardFactory.makeServerProvider(), clientPreferences: makeClientPreferences)
+        return RegionsListUseCase(serverProvider: VpnConnectionFactory.makeServerProvider(), clientPreferences: makeClientPreferences, vpnConnectionUseCase: VpnConnectionFactory.makeVpnConnectionUseCase)
     }
     
     static var makeClientPreferences: ClientPreferencesType = {

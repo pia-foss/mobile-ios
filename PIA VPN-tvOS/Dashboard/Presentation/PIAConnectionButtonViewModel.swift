@@ -5,64 +5,69 @@ import SwiftUI
 import PIALibrary
 import Combine
 
-extension VPNStatus {
-    func toConnectionButtonState() -> PIAConnectionButtonViewModel.State {
-        switch self {
-            case .connected:
-                return .connected
-            case .connecting:
-                return .connecting
-            case .disconnecting:
-                return .disconnecting
-            default:
-                return .disconnected
-        }
-    }
-}
+
 
 class PIAConnectionButtonViewModel: ObservableObject {
-    enum State {
-        case disconnected
-        case connecting
-        case connected
-        case disconnecting
+
+    
+    @Published var state: ConnectionState = .disconnected
+    var animating: Bool {
+        state == .connecting || state == .disconnecting
     }
     
-    @Published var state: State = .disconnected
+    @Published var isShowingErrorAlert: Bool = false
     
     private let vpnConnectionUseCase: VpnConnectionUseCaseType
-    private let vpnStatusMonitor: VPNStatusMonitorType
+    private let connectionStateMonitor: ConnectionStateMonitorType
     private var cancellables = Set<AnyCancellable>()
     
-    init(useCase: VpnConnectionUseCaseType, vpnStatusMonitor: VPNStatusMonitorType) {
+    init(useCase: VpnConnectionUseCaseType, connectionStateMonitor: ConnectionStateMonitorType) {
         self.vpnConnectionUseCase = useCase
-        self.vpnStatusMonitor = vpnStatusMonitor
+        self.connectionStateMonitor = connectionStateMonitor
         
         addObservers()
     }
     
-    private func addObservers() {
-        vpnStatusMonitor.getStatus().sink { [weak self] vpnStatus in
-            self?.state = vpnStatus.toConnectionButtonState()
-        }.store(in: &cancellables)
+    var errorAlertTitle: String {
+        L10n.Localizable.ErrorAlert.ConnectionError.NoNetwork.title
     }
     
-    // Inner ring color and outer ring color
-    var tintColor: (Color, Color) {
+    var errorAlertMessage: String {
+        L10n.Localizable.ErrorAlert.ConnectionError.NoNetwork.message
+    }
+    
+    var errorAlertRetryActionTitle: String {
+        L10n.Localizable.ErrorAlert.ConnectionError.NoNetwork.RetryAction.title
+    }
+    
+    var errorAlertCloseActionTitle: String {
+        L10n.Localizable.Global.close
+    }
+    
+    
+    private func addObservers() {
+        connectionStateMonitor.connectionStatePublisher
+            .sink { newConnectionState in
+                self.state = newConnectionState
+            }.store(in: &cancellables)
+        
+    }
+    
+    var tintColor: Color {
         switch state {
         case .disconnected:
-            return (.pia_red_dark, .pia_red_dark)
+            return .pia_yellow_dark
         case .connecting, .disconnecting:
-            return (.pia_yellow_dark, .pia_surface_container_secondary)
+            return .pia_yellow_dark
         case .connected:
-            return (.pia_primary, .pia_primary)
+            return .pia_primary
+        case .error:
+            return .pia_red
+        default:
+            return .pia_yellow_dark
         }
     }
     
-    var animating: Bool {
-        state == .connecting ||
-        state == .disconnecting
-    }
 }
 
 // MARK: Connection
@@ -74,20 +79,33 @@ extension PIAConnectionButtonViewModel {
         case .disconnected:
             connect()
         case .connecting:
-            break
+            disconnect()
         case .connected:
             disconnect()
-        case .disconnecting:
+        case .disconnecting, .unkown:
             break
+        case .error:
+            connect()
         }
     }
     
     private func connect() {
-        vpnConnectionUseCase.connect()
+        Task {
+            do {
+               try await vpnConnectionUseCase.connect()
+            } catch {
+                DispatchQueue.main.async {
+                    self.isShowingErrorAlert = true
+                }
+            }
+        }
     }
     
     private func disconnect() {
-        vpnConnectionUseCase.disconnect()
+        Task {
+            try await vpnConnectionUseCase.disconnect()
+        }
+        
     }
 }
 

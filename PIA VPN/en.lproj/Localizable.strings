@@ -474,3 +474,12 @@
 "tvos.login.title" = "Enter your PIA VPN account details";
 "tvos.login.placeholder.username" = "Enter Username";
 "tvos.login.placeholder.password" = "Enter Password";
+
+//Connection error(tvOS)
+"error_alert.connection_error.no_network.title" = "Unable to connect";
+"error_alert.connection_error.no_network.message" = "Please check your internet connection and try again";
+"error_alert.connection_error.no_network.retry_action.title" = "Retry";
+
+//Dashboard screen (tvOS)
+"location_selection.optimal_location.title" = "Optimal Location";
+

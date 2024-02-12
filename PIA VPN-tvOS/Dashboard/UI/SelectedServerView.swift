@@ -3,6 +3,7 @@ import SwiftUI
 
 struct SelectedServerView: View {
     @Environment(\.colorScheme) var colorScheme
+    @FocusState var isButtonFocused: Bool
     
     @ObservedObject var viewModel: SelectedServerViewModel
     
@@ -26,8 +27,8 @@ struct SelectedServerView: View {
                         .blendMode(.hardLight)
                 }
                 
-                Image(systemName: "chevron.forward")
-                    .foregroundStyle(Color.gray)
+                Image(systemName: "ellipsis")
+                    .foregroundStyle(Color.pia_on_surface)
                     .frame(width: 50)
                 
             }

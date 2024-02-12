@@ -11,4 +11,5 @@ extension Image {
     static let loading_pia_brand = Image("loading-pia-brand")
     static let smart_location_icon = Image("icon-smart-location-highlighted")
     static let smart_location_icon_highlighted = Image("icon-smart-location")
+    static let connect_inner_button = Image("connect-inner-button")
 }

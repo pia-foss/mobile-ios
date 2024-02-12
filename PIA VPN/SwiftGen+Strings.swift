@@ -310,6 +310,20 @@ internal enum L10n {
         }
       }
     }
+    internal enum ErrorAlert {
+      internal enum ConnectionError {
+        internal enum NoNetwork {
+          /// Please check your internet connection and try again
+          internal static let message = L10n.tr("Localizable", "error_alert.connection_error.no_network.message", fallback: "Please check your internet connection and try again")
+          /// Unable to connect
+          internal static let title = L10n.tr("Localizable", "error_alert.connection_error.no_network.title", fallback: "Unable to connect")
+          internal enum RetryAction {
+            /// Retry
+            internal static let title = L10n.tr("Localizable", "error_alert.connection_error.no_network.retry_action.title", fallback: "Retry")
+          }
+        }
+      }
+    }
     internal enum Expiration {
       /// Your subscription expires soon. Renew to stay protected.
       internal static let message = L10n.tr("Localizable", "expiration.message", fallback: "Your subscription expires soon. Renew to stay protected.")
@@ -528,6 +542,12 @@ internal enum L10n {
         internal static func title(_ p1: Any) -> String {
           return L10n.tr("Localizable", "local_notification.non_compliant_wifi.title", String(describing: p1), fallback: "Unsecured Wi-Fi: %@")
         }
+      }
+    }
+    internal enum LocationSelection {
+      internal enum OptimalLocation {
+        /// Optimal Location
+        internal static let title = L10n.tr("Localizable", "location_selection.optimal_location.title", fallback: "Optimal Location")
       }
     }
     internal enum Menu {

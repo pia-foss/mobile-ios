@@ -7,7 +7,7 @@ struct RootContainerView: View {
     @Environment(\.scenePhase) var scenePhase
     
     @ObservedObject private var appRouter: AppRouter
-    
+    // TODO: inject in this VM the ConnectionStateMonitor so that we start monitoring asap
     init(viewModel: RootContainerViewModel, appRouter: AppRouter) {
         self.viewModel = viewModel
         self.appRouter = appRouter

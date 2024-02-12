@@ -8,15 +8,23 @@
 
 import Foundation
 @testable import PIA_VPN_tvOS
+import Combine
 
 class VpnConnectionUseCaseMock: VpnConnectionUseCaseType {
+    
+    var getConnectionIntentCalled = false
+    var getConnectionIntentCalledAttempt = 0
+    var getConnectionIntentResult = CurrentValueSubject<VpnConnectionIntent, Error>(VpnConnectionIntent.none)
+    func getConnectionIntent() -> AnyPublisher<PIA_VPN_tvOS.VpnConnectionIntent, Error> {
+        return getConnectionIntentResult.eraseToAnyPublisher()
+    }
+    
     
     var connectToServerCalled: Bool = false
     var connectCalledToServerAttempt: Int = 0
     var connectToServerCalledWithArgument: ServerType?
     
-    var connectionAction: (() -> Void)?
-    var disconnectionAction: (() -> Void)?
+    
     
     func connect(to server: ServerType) {
         connectToServerCalled = true
@@ -25,6 +33,7 @@ class VpnConnectionUseCaseMock: VpnConnectionUseCaseType {
         connectionAction?()
     }
     
+    var connectionAction: (() -> Void)?
     var connectCalled: Bool = false
     var connectCalledAttempt: Int = 0
     
@@ -36,6 +45,7 @@ class VpnConnectionUseCaseMock: VpnConnectionUseCaseType {
     
     var disconnectCalled: Bool = false
     var disconnectCalledAttempt: Int = 0
+    var disconnectionAction: (() -> Void)?
     
     func disconnect() {
         disconnectCalled = true
