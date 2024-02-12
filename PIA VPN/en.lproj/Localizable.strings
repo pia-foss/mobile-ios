@@ -437,7 +437,7 @@
 
 // PIA WIDGET
 "widget.liveActivity.region.title" = "Region";
-"widget.liveActivity.protocol.title" = "Protocol";
+"widget.liveActivity.selected_protocol.title" = "Protocol";
 
 // Regions Selection(tvOS)
 "regions.filter.all.title" = "All";

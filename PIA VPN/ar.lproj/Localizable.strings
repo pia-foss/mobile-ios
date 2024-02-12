@@ -437,4 +437,4 @@
 
 // PIA WIDGET
 "widget.liveActivity.region.title" = "المنطقة";
-"widget.liveActivity.protocol.title" = "البروتوكول";
+"widget.liveActivity.selected_protocol.title" = "البروتوكول";
