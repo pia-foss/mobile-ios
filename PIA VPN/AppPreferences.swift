@@ -602,6 +602,7 @@ class AppPreferences {
         self.defaults = defaults
 #if os(iOS)
         defaults.register(defaults: [
+            
             Entries.version: AppPreferences.currentVersion,
             Entries.appVersion: "",
             Entries.launched: false,

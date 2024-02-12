@@ -14,7 +14,9 @@ class SelectedServerViewModel: ObservableObject {
     }
     
     private func updateState() {
-        serverName = useCase.getSelectedServer().name
+        useCase.getSelectedServer()
+            .map { $0.name }
+            .assign(to: &$serverName)
     }
     
 }

@@ -1,9 +1,10 @@
 
 import Foundation
 import PIALibrary
+import Combine
 
 protocol SelectedServerUseCaseType {
-    func getSelectedServer() -> ServerType
+    func getSelectedServer() -> AnyPublisher<ServerType, Never>
     func getHistoricalServers() -> [ServerType]
 }
 
@@ -17,8 +18,8 @@ class SelectedServerUseCase: SelectedServerUseCaseType {
         self.clientPreferences = clientPreferences
     }
     
-    func getSelectedServer() -> ServerType {
-        return clientPreferences.selectedServer
+    func getSelectedServer() -> AnyPublisher<ServerType, Never> {
+        return clientPreferences.getSelectedServer()
 
     }
     

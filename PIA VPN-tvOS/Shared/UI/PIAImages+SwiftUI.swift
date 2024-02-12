@@ -9,4 +9,6 @@ extension Image {
     static let onboarding_configure_robots = Image("configure-robots")
     static let onboarding_stats_tv = Image("stats-tv")
     static let loading_pia_brand = Image("loading-pia-brand")
+    static let smart_location_icon = Image("icon-smart-location-highlighted")
+    static let smart_location_icon_highlighted = Image("icon-smart-location")
 }

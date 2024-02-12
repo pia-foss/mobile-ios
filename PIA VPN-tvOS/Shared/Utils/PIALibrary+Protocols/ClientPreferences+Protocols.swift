@@ -8,23 +8,42 @@
 
 import Foundation
 import PIALibrary
+import Combine
 
 protocol ClientPreferencesType {
     var selectedServer: ServerType { get set }
+    func getSelectedServer() -> AnyPublisher<ServerType, Never>
 }
 
-extension Client.Preferences: ClientPreferencesType {
+class ClientPreferences: ClientPreferencesType {
+    private let clientPrefs: Client.Preferences
+    
     var selectedServer: ServerType {
         get {
-            return displayedServer
+            return clientPrefs.displayedServer
         }
         set {
             guard let newServer = newValue as? Server else { return }
-            displayedServer = newServer
+            clientPrefs.displayedServer = newServer
+            
+            selectedServerPublisher.send(newServer)
+            
             // TODO: Verify whether this is necessary
-            let pendingPreferences = Client.preferences.editable()
+            let pendingPreferences = clientPrefs.editable()
             pendingPreferences.commit()
         }
     }
     
+    private var selectedServerPublisher: CurrentValueSubject<ServerType, Never>
+    
+    func getSelectedServer() -> AnyPublisher<ServerType, Never> {
+        return selectedServerPublisher.eraseToAnyPublisher()
+    }
+    
+    init(clientPrefs: Client.Preferences) {
+        self.clientPrefs = clientPrefs
+        self.selectedServerPublisher = CurrentValueSubject(clientPrefs.displayedServer)
+    }
+    
 }
+

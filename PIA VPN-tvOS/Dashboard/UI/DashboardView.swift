@@ -1,5 +1,7 @@
 
 import SwiftUI
+// TODO: Remove me
+import PIALibrary
 
 struct DashboardView: View {
     let viewWidth = UIScreen.main.bounds.width
@@ -39,6 +41,9 @@ struct DashboardView: View {
             
         }
         .frame(width: viewWidth, height: viewHeight)
+        .onAppear {
+            print(">>> >>> Home screen on Appear... displayedServer: \(Client.preferences.displayedServer.name)")
+        }
     }
 }
 

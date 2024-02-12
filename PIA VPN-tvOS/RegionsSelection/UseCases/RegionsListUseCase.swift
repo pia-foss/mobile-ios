@@ -31,6 +31,7 @@ class RegionsListUseCase: RegionsListUseCaseType {
     
     func select(server: ServerType) {
         // This triggers a connection
+        // TODO: Refactor the logic inside the set selected Server so that on tvOS does not trigger the connection, we trigger it separately
         clientPreferences.selectedServer = server
     }
     
