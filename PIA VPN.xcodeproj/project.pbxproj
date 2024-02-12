@@ -390,6 +390,10 @@
 		82CAB8FE255C115100BB08EF /* MessagesTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82CAB8FC255C115100BB08EF /* MessagesTile.xib */; };
 		82F41376264E8AC20098FF4B /* SettingOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F41375264E8AC20098FF4B /* SettingOptions.swift */; };
 		82F41377264E8AC20098FF4B /* SettingOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F41375264E8AC20098FF4B /* SettingOptions.swift */; };
+		AA330F1E2B7A08E400420259 /* IsWireguardMigrationPerformed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA4707A2B737FC100F28590 /* IsWireguardMigrationPerformed.swift */; };
+		AA330F1F2B7A08E800420259 /* SetWireguardMigrationPerformed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA4707C2B737FDD00F28590 /* SetWireguardMigrationPerformed.swift */; };
+		AA330F202B7A08EB00420259 /* PerformWireguardMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA4707E2B73801600F28590 /* PerformWireguardMigration.swift */; };
+		AA330F212B7A08ED00420259 /* IsIkev2SelectedWithDefaultSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA470802B7380EA00F28590 /* IsIkev2SelectedWithDefaultSettings.swift */; };
 		AA36CDBB28A6622A00180A33 /* TweetNacl in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDBA28A6622A00180A33 /* TweetNacl */; };
 		AA36CDC428A6711300180A33 /* Popover in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDC328A6711300180A33 /* Popover */; };
 		AA36CDC928A6733500180A33 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDC828A6733500180A33 /* DZNEmptyDataSet */; };
@@ -3828,6 +3832,10 @@
 				DD74695B217F07AC00B7BD73 /* DNSList.swift in Sources */,
 				0E9452AF1FDB5F7A00891948 /* PIAPageControl.swift in Sources */,
 				DDD271F121D6718F00B6D20F /* RegionFilter.swift in Sources */,
+				AA330F1E2B7A08E400420259 /* IsWireguardMigrationPerformed.swift in Sources */,
+				AA330F1F2B7A08E800420259 /* SetWireguardMigrationPerformed.swift in Sources */,
+				AA330F202B7A08EB00420259 /* PerformWireguardMigration.swift in Sources */,
+				AA330F212B7A08ED00420259 /* IsIkev2SelectedWithDefaultSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4654,9 +4662,11 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5357M5NW9W;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = 5357M5NW9W;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "PIA VPNTests/Info.plist";
@@ -4671,7 +4681,7 @@
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4688,10 +4698,12 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5357M5NW9W;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = 5357M5NW9W;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "PIA VPNTests/Info.plist";
@@ -4706,6 +4718,7 @@
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PIA VPN.app/PIA VPN";
