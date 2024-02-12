@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "pia-brand.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

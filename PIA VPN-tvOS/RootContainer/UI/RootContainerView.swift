@@ -18,11 +18,9 @@ struct RootContainerView: View {
                 // Add a root view here.
                 switch viewModel.state {
                 case .splash:
-                    VStack {
-                        // TODO: Add Splash screen here
-                    }
+                    SplashView()
                 case .notActivated:
-                    LoginFactory.makeLoginView()
+                    WelcomeFactory.makeWelcomeView()
                         .withAuthenticationRoutes()
                         .withOnboardingRoutes()
                 case .activatedNotOnboarded, .activated:

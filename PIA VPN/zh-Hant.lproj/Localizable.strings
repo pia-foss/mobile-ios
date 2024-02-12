@@ -437,4 +437,4 @@
 
 // PIA WIDGET
 "widget.liveActivity.region.title" = "區域";
-"widget.liveActivity.protocol.title" = "通訊協定";
+"widget.liveActivity.selected_protocol.title" = "通訊協定";

@@ -48,3 +48,11 @@ class VPNConfigurationInstallingViewModel: ObservableObject {
         }
     }
 }
+
+extension VPNConfigurationInstallingViewModel: OnboardingComponentViewModelType {
+    var title: String { L10n.Localizable.Onboarding.VpnConfiguration.title }
+    var subtitle: String? { L10n.Localizable.Onboarding.VpnConfiguration.subtitle }
+    var buttons: [OnboardingComponentButton] {
+        [OnboardingComponentButton(title: L10n.Localizable.Onboarding.VpnConfiguration.button, action: { [weak self] in self?.install() })]
+    }
+}

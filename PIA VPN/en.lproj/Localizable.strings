@@ -437,7 +437,7 @@
 
 // PIA WIDGET
 "widget.liveActivity.region.title" = "Region";
-"widget.liveActivity.protocol.title" = "Protocol";
+"widget.liveActivity.selected_protocol.title" = "Protocol";
 
 // Regions Selection(tvOS)
 "regions.filter.all.title" = "All";
@@ -457,3 +457,20 @@
 "top_navigation_bar.location_item.title" = "Location";
 "top_navigation_bar.location_selection_screen.title" = "Location Selection";
 
+//Onboarding - Connection Stats Permisson (tvOS)
+"onboarding.connection_stats.subtitle" = "To ensure our service's connection performance, you can anonymously share your connection stats with us. These reports do no include any personally identifiable information. \n\nNote that you can always control this from your settings.";
+
+//Onboarding - VPN Installing Profile (tvOS)
+"onboarding.vpn_configuration.title" = "Configure PIA";
+"onboarding.vpn_configuration.subtitle" = "When connecting for the first time, you will be asked to allow PIA to access VPN configurations. This is necessary in order to encrypt your traffic. \n\nPlease remember that we don't monitor, filter, or log your online activity. \n\nTo proceed click on the button below.";
+"onboarding.vpn_configuration.button" = "Configure PIA";
+
+//Welcome (tvOS)
+"tvos.welcome.title" = "Fast & Secure VPN for Streaming";
+"tvos.welcome.button.login" = "Log In";
+"tvos.welcome.button.signup" = "Sign Up";
+
+//Login (tvOS)
+"tvos.login.title" = "Enter your PIA VPN account details";
+"tvos.login.placeholder.username" = "Enter Username";
+"tvos.login.placeholder.password" = "Enter Password";

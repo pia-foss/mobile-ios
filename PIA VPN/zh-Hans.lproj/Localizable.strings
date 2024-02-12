@@ -437,4 +437,4 @@
 
 // PIA WIDGET
 "widget.liveActivity.region.title" = "地区";
-"widget.liveActivity.protocol.title" = "协议";
+"widget.liveActivity.selected_protocol.title" = "协议";

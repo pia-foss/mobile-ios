@@ -437,4 +437,4 @@
 
 // PIA WIDGET
 "widget.liveActivity.region.title" = "Région";
-"widget.liveActivity.protocol.title" = "Protocole";
+"widget.liveActivity.selected_protocol.title" = "Protocole";

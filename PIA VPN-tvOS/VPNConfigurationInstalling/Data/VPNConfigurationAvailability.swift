@@ -8,6 +8,10 @@
 
 import Foundation
 
+private extension String {
+    static let kOnboardingVpnProfileInstalled = "kOnboardingVpnProfileInstalled"
+}
+
 class VPNConfigurationAvailability: VPNConfigurationAvailabilityType {
     private let userDefautls: UserDefaults
     
