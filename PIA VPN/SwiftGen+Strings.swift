@@ -545,6 +545,10 @@ internal enum L10n {
       }
     }
     internal enum LocationSelection {
+      internal enum AnyOtherLocation {
+        /// Selected Location
+        internal static let title = L10n.tr("Localizable", "location_selection.any_other_location.title", fallback: "Selected Location")
+      }
       internal enum OptimalLocation {
         /// Optimal Location
         internal static let title = L10n.tr("Localizable", "location_selection.optimal_location.title", fallback: "Optimal Location")

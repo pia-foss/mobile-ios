@@ -482,4 +482,5 @@
 
 //Dashboard screen (tvOS)
 "location_selection.optimal_location.title" = "Optimal Location";
+"location_selection.any_other_location.title" = "Selected Location";
 

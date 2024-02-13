@@ -37,3 +37,4 @@ extension Server {
         return (identifier == Server.automatic.identifier)
     }
 }
+

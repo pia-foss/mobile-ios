@@ -7,33 +7,44 @@ struct SelectedServerView: View {
     
     @ObservedObject var viewModel: SelectedServerViewModel
     
-    var body: some View {
-    
-        HStack(alignment: .top) {
+    private func buttonView() -> some View {
+        HStack(alignment: .center, spacing: 10) {
+            Image(viewModel.iconImageNameFor(focused: isButtonFocused))
+                .resizable()
+                .frame(width: 80, height: 80)
             VStack(alignment: .leading) {
-                Text(viewModel.selectedSeverSectionTitle)
-                    .font(.callout)
-                Text(viewModel.serverName)
-                    .font(.caption)
+                Text(viewModel.selectedSeverTitle)
+                    .font(.system(size: 29, weight: .medium))
+                    .foregroundColor(isButtonFocused ? .pia_on_primary : .pia_on_surface_container_secondary)
+                Text(viewModel.selectedServerSubtitle)
+                    .font(.system(size: 31, weight: .bold))
+                    .foregroundColor(isButtonFocused ? .pia_on_primary : .pia_on_surface)
+                    .lineLimit(nil)
             }
+            .padding(.leading, 22)
             
             Spacer()
             
-            HStack(alignment: .center) {
-                if colorScheme == .light {
-                    Image.map
-                } else {
-                    Image.map
-                        .blendMode(.hardLight)
-                }
-                
-                Image(systemName: "ellipsis")
-                    .foregroundStyle(Color.pia_on_surface)
-                    .frame(width: 50)
-                
-            }
-            
+            Image(systemName: "ellipsis")
+                .foregroundColor(isButtonFocused ? .pia_on_primary : .pia_on_surface)
+                .frame(width: 52)
         }
+        .padding(.leading, 30)
+        .padding(.trailing, 15)
+    }
+    
+    var body: some View {
+        Button {
+            viewModel.selectedServerSectionWasTapped()
+        } label: {
+            buttonView()
+        }
+        .background(isButtonFocused ? Color.pia_primary : Color.pia_surface_container_primary)
+        .clipShape(RoundedRectangle(cornerSize: Spacing.tileCornerSize))
+        .buttonStyle(BasicButtonStyle())
+        .focused($isButtonFocused)
+        .buttonBorderShape(.roundedRectangle(radius: Spacing.tileBorderRadius))
+        
     }
 }
 

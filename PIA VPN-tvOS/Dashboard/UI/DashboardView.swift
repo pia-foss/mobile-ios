@@ -15,7 +15,7 @@ struct DashboardView: View {
                 
                 Divider()
                 
-                SelectedServerSection(onRegionSelectionSectionTapped: viewModel.regionSelectionSectionWasTapped)
+                DashboardFactory.makeSelectedServerView()
                     .padding()
                     
                 Divider()
@@ -53,20 +53,20 @@ fileprivate struct DashboardConnectionButtonSection: View {
     }
 }
 
-fileprivate struct SelectedServerSection: View {
-
-    var onRegionSelectionSectionTapped: () -> Void
-    
-    var body: some View {
-        Button {
-            onRegionSelectionSectionTapped()
-        } label: {
-            DashboardFactory.makeSelectedServerView()
-        }
-        .buttonStyle(.plain)
-        .buttonBorderShape(.roundedRectangle(radius: 4))
-    }
-}
+//fileprivate struct SelectedServerSection: View {
+//
+//    var onRegionSelectionSectionTapped: () -> Void
+//    
+//    var body: some View {
+//        Button {
+//            onRegionSelectionSectionTapped()
+//        } label: {
+//            DashboardFactory.makeSelectedServerView()
+//        }
+//        .buttonStyle(.plain)
+//        .buttonBorderShape(.roundedRectangle(radius: 4))
+//    }
+//}
 
 fileprivate struct QuickConnectSection: View {
     var body: some View {

@@ -17,6 +17,7 @@ protocol ServerType {
     var country: String { get }
     var geo: Bool { get }
     var pingTime: Int? { get }
+    var isAutomatic: Bool { get }
 }
 
 extension Server: ServerType {}

@@ -37,7 +37,7 @@ extension DashboardFactory {
     }
     
     private static func makeSelectedServerViewModel() -> SelectedServerViewModel {
-        return SelectedServerViewModel(useCase: makeSelectedServerUserCase())
+        return SelectedServerViewModel(useCase: makeSelectedServerUserCase(), routerAction: .navigate(router: AppRouterFactory.makeAppRouter(), destination: RegionsDestinations.serversList))
     }
     
     internal static func makeSelectedServerView() -> SelectedServerView {

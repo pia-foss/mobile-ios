@@ -14,4 +14,7 @@ struct Spacing {
     static let screenHeight = UIScreen.main.bounds.height
     static let screenTopPadding: CGFloat = 100
     static let dashboardViewWidth: CGFloat = 780
+    static let tileBorderRadius: CGFloat = 20
+    static let tileCornerSize: CGSize = CGSize(width: 20, height: 20)
 }
+
