@@ -24,7 +24,7 @@ class SelectedServerUseCase: SelectedServerUseCaseType {
     }
     
     func getHistoricalServers() -> [ServerType] {
-        return serverProvider.historicalServers
+        return serverProvider.historicalServersType
     }
     
     private func automaticServer() -> ServerType {

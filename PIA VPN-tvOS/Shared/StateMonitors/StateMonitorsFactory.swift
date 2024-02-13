@@ -27,4 +27,6 @@ class StateMonitorsFactory {
     static var makeConnectionStateMonitor: ConnectionStateMonitorType = {
         return ConnectionStateMonitor(vpnStatusMonitor: makeVPNStatusMonitor(), vpnConnectionUseCase: VpnConnectionFactory.makeVpnConnectionUseCase)
     }()
+    
 }
+

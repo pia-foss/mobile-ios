@@ -28,7 +28,7 @@ class RegionsListUseCase: RegionsListUseCaseType {
     }
     
     func getCurrentServers() -> [ServerType] {
-        return serverProvider.currentServers
+        return serverProvider.currentServersType
     }
     
     func select(server: ServerType) {

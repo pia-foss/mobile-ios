@@ -11,7 +11,7 @@ import PIALibrary
 
 class VpnConnectionFactory {
     static var makeVpnConnectionUseCase: VpnConnectionUseCaseType = {
-        return VpnConnectionUseCase(serverProvider: makeServerProvider())
+        return VpnConnectionUseCase(serverProvider: makeServerProvider(), vpnProvider: makeVpnProvider())
     }()
     
     static func makeServerProvider() -> ServerProviderType {
@@ -21,6 +21,15 @@ class VpnConnectionFactory {
         }
         
         return defaultServerProvider
+        
+    }
+    
+    static func makeVpnProvider() -> VPNStatusProviderType {
+        guard let defaultVpnProvider =  Client.providers.vpnProvider as? DefaultVPNProvider else {
+            fatalError("Incorrect VPNProvider type")
+        }
+        
+        return defaultVpnProvider
         
     }
 }

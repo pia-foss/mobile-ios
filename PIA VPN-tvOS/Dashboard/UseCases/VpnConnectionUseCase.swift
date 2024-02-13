@@ -13,31 +13,19 @@ enum VpnConnectionIntent: Equatable {
     case none
     case connect
     case disconnect
-    case reconnect
 }
 
 class VpnConnectionUseCase: VpnConnectionUseCaseType {
     
-    private var connectionIntent: CurrentValueSubject<VpnConnectionIntent, Error>
+    internal var connectionIntent: CurrentValueSubject<VpnConnectionIntent, Error>
     
     let serverProvider: ServerProviderType
+    let vpnProvider: VPNStatusProviderType
     
-    init(serverProvider: ServerProviderType) {
+    init(serverProvider: ServerProviderType, vpnProvider: VPNStatusProviderType) {
         self.serverProvider = serverProvider
+        self.vpnProvider = vpnProvider
         self.connectionIntent = CurrentValueSubject(.none)
-    }
-    
-
-    func vpnStatusWasUpdated(to vpnStatus: VPNStatus) {
-        let connectionIntent = connectionIntent.value
-        switch (connectionIntent, vpnStatus) {
-        case (.connect, .connected):
-            self.connectionIntent.send(.none)
-        case (.disconnect, .disconnected):
-            self.connectionIntent.send(.none)
-        default:
-            break
-        }
     }
     
     func connect() async throws {
@@ -45,8 +33,6 @@ class VpnConnectionUseCase: VpnConnectionUseCaseType {
         connectionIntent.send(.connect)
         
         return try await withCheckedThrowingContinuation { continuation in
-            // TODO: Inject VPNProvider object
-            let vpnProvider = Client.providers.vpnProvider
             vpnProvider.connect { error in
                 if let error = error {
                     self.connectionIntent.send(completion: .failure(error))
@@ -64,8 +50,6 @@ class VpnConnectionUseCase: VpnConnectionUseCaseType {
         connectionIntent.send(.disconnect)
         
         return try await withCheckedThrowingContinuation { continuation in
-            // TODO: Inject VPNProvider object
-            let vpnProvider = Client.providers.vpnProvider
             vpnProvider.disconnect { error in
                 if let error = error {
                     self.connectionIntent.send(completion: .failure(error))

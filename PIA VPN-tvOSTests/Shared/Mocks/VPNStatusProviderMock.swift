@@ -11,6 +11,7 @@ import PIALibrary
 @testable import PIA_VPN_tvOS
 
 class VPNStatusProviderMock: VPNStatusProviderType {
+
     var vpnStatus: VPNStatus
     
     init(vpnStatus: VPNStatus) {
@@ -20,4 +21,25 @@ class VPNStatusProviderMock: VPNStatusProviderType {
     func changeStatus(vpnStatus: VPNStatus) {
         self.vpnStatus = vpnStatus
     }
+    
+    var connectCalled = false
+    var connectCalledAttempt = 0
+    var connectCalledWithCallbackError: Error?
+    func connect(_ callback: SuccessLibraryCallback?) {
+        
+        connectCalled = true
+        connectCalledAttempt += 1
+        callback?(connectCalledWithCallbackError)
+    }
+    
+    var disconnectCalled = false
+    var disconnectCalledAttempt = 0
+    var disconnectCalledWithCallbackError: Error?
+    func disconnect(_ callback: SuccessLibraryCallback?) {
+        
+        disconnectCalled = true
+        disconnectCalledAttempt += 1
+        callback?(disconnectCalledWithCallbackError)
+    }
+    
 }

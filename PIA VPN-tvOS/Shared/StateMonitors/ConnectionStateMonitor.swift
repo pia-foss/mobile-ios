@@ -83,7 +83,6 @@ class ConnectionStateMonitor: ConnectionStateMonitorType {
     }
     
     private func calculateState(for connectionIntent: VpnConnectionIntent, vpnStatus: VPNStatus) {
-        
         switch (connectionIntent, vpnStatus) {
         case (_, .connected):
             self.connectionState = .connected
@@ -91,8 +90,6 @@ class ConnectionStateMonitor: ConnectionStateMonitorType {
             self.connectionState = .connecting
         case (_, .disconnected):
             self.connectionState = .disconnected
-        case (.reconnect, _):
-            self.connectionState = .connecting
         case (.disconnect, _):
             self.connectionState = .disconnecting
         default:
