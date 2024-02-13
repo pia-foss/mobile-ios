@@ -4,15 +4,15 @@ import SwiftUI
 struct QuickConnectView: View {
     @ObservedObject var viewModel: QuickConnectViewModel
     
-    let rows = [ GridItem(.adaptive(minimum: 80)) ]
+    let rows = [ GridItem(.adaptive(minimum: 160, maximum: 160)) ]
     var body: some View {
-        ScrollView(.horizontal) {
-            LazyHGrid(rows: rows) {
-                ForEach(viewModel.servers, id: \.regionIdentifier) { item in
-                    DashboardFactory.makeQuickConnectButton(for: item, delegate: viewModel)
-                }
+        
+        HStack(alignment: .top, spacing: 44) {
+            ForEach(viewModel.servers, id: \.regionIdentifier) { item in
+                DashboardFactory.makeQuickConnectButton(for: item, delegate: viewModel)
             }
-        }.onAppear {
+        }
+        .onAppear {
             viewModel.updateStatus()
         }
         

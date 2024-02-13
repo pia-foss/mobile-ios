@@ -30,21 +30,23 @@ struct SelectedServerView: View {
                 .frame(width: 52)
         }
         .padding(.leading, 30)
-        .padding(.trailing, 15)
     }
     
     var body: some View {
-        Button {
-            viewModel.selectedServerSectionWasTapped()
-        } label: {
-            buttonView()
+        VStack {
+            Button {
+                viewModel.selectedServerSectionWasTapped()
+            } label: {
+                buttonView()
+            }
+            .background(isButtonFocused ? Color.pia_primary : Color.pia_surface_container_primary)
+            .clipShape(RoundedRectangle(cornerSize: Spacing.tileCornerSize))
+            .buttonStyle(BasicButtonStyle())
+            .focused($isButtonFocused)
+            .buttonBorderShape(.roundedRectangle(radius: Spacing.tileBorderRadius))
+            
         }
-        .background(isButtonFocused ? Color.pia_primary : Color.pia_surface_container_primary)
-        .clipShape(RoundedRectangle(cornerSize: Spacing.tileCornerSize))
-        .buttonStyle(BasicButtonStyle())
-        .focused($isButtonFocused)
-        .buttonBorderShape(.roundedRectangle(radius: Spacing.tileBorderRadius))
-        
+     
     }
 }
 

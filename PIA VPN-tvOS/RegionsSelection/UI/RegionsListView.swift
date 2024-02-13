@@ -13,7 +13,7 @@ struct RegionsListView: View {
     @ObservedObject var viewModel: RegionsListViewModel
     
     let columns = [
-        GridItem(.adaptive(minimum: 376, maximum: 376))
+        GridItem(.adaptive(minimum: 376, maximum: 376), spacing: 40)
     ]
     
     private func contextMenuItem(for server: ServerType) -> RegionsListItemButton.ContextMenuItem {
@@ -32,7 +32,8 @@ struct RegionsListView: View {
                     .fontWeight(.regular)
                     .foregroundColor(Color.pia_on_surface_container_secondary)
             }
-            ScrollView {
+            ScrollView(.vertical) {
+                
                 LazyVGrid(columns: columns, alignment: .leading, spacing: 40) {
                     ForEach(viewModel.servers, id: \.identifier) { server in
                         RegionsListItemButton(
@@ -40,7 +41,6 @@ struct RegionsListView: View {
                             viewModel.didSelectRegionServer(server)
                         },
                             iconName: "flag-\(server.country.lowercased())",
-                            // TODO: substitute here
                             title: viewModel.getDisplayName(for: server).title,
                             subtitle: viewModel.getDisplayName(for: server).subtitle,
                             favoriteIconName: viewModel.favoriteIconName(for: server),

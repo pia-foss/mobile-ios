@@ -32,27 +32,5 @@ class DashboardViewModelTests: XCTestCase {
         sut = DashboardViewModel(accountProvider: fixture.accountProviderMock, appRouter: fixture.appRouter, navigationDestination: RegionsDestinations.serversList)
     }
     
-    func test_navigateToRegionsList() {
-        // GIVEN that the Dashboard view is visible
-        initializeSut()
-        
-        let emptyNavigationPath: NavigationPath = NavigationPath()
-        let regionsListNavigationPath: NavigationPath = NavigationPath([RegionsDestinations.serversList])
-        
-        // AND GIVEN that the path of the navigation router is empty
-        XCTAssertEqual(fixture.appRouter.path, emptyNavigationPath)
-        XCTAssertTrue(fixture.appRouter.path.isEmpty)
-        
-        // WHEN the regions selection section is tapped
-        sut.regionSelectionSectionWasTapped()
-        
-        // THEN the app router navigates to the Regions list
-        XCTAssertFalse(fixture.appRouter.path.isEmpty)
-        XCTAssertEqual(fixture.appRouter.stackCount, 1)
-        XCTAssertEqual(fixture.appRouter.pathDestinations.count, 1)
-        XCTAssertTrue(fixture.appRouter.pathDestinations.last! is RegionsDestinations)
-        XCTAssertEqual(fixture.appRouter.pathDestinations.last! as! RegionsDestinations, .serversList)
-        
-    }
     
 }

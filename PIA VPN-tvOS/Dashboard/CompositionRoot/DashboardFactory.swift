@@ -62,7 +62,7 @@ extension DashboardFactory {
     }
     
     static internal func makeQuickConnectViewModel() -> QuickConnectViewModel {
-        QuickConnectViewModel(connectUseCase: VpnConnectionFactory.makeVpnConnectionUseCase, selectedServerUseCase: makeSelectedServerUserCase())
+        QuickConnectViewModel(selectedServerUseCase: makeSelectedServerUserCase(), regionsUseCase: RegionsSelectionFactory.makeRegionsListUseCase())
     }
     
     static func makeQuickConnectView() -> QuickConnectView {

@@ -19,20 +19,6 @@ class VpnConnectionUseCaseMock: VpnConnectionUseCaseType {
         return getConnectionIntentResult.eraseToAnyPublisher()
     }
     
-    
-    var connectToServerCalled: Bool = false
-    var connectCalledToServerAttempt: Int = 0
-    var connectToServerCalledWithArgument: ServerType?
-    
-    
-    
-    func connect(to server: ServerType) {
-        connectToServerCalled = true
-        connectCalledToServerAttempt += 1
-        connectToServerCalledWithArgument = server
-        connectionAction?()
-    }
-    
     var connectionAction: (() -> Void)?
     var connectCalled: Bool = false
     var connectCalledAttempt: Int = 0

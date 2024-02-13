@@ -9,23 +9,28 @@ class QuickConnectButtonViewModel: ObservableObject {
     
     private let server: ServerType
     
-    @Published var flagName = ""
+    
+    var flagName: String {
+        "flag-\(server.country.lowercased())"
+    }
+    
+    var titleText: String {
+        server.country.uppercased()
+    }
     
     weak var delegate: QuickConnectButtonViewModelDelegate?
     
     init(server: ServerType, delegate: QuickConnectButtonViewModelDelegate?) {
         self.server = server
         self.delegate = delegate
-        updateStatus()
+        
     }
     
     func connectButtonDidTap() {
         delegate?.quickConnectButtonViewModel(didSelect: server)
     }
     
-    private func updateStatus() {
-        flagName = "flag-\(server.country.lowercased())"
-    }
+
     
     
 }

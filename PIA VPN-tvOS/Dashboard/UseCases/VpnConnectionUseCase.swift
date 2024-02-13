@@ -5,7 +5,6 @@ import Combine
 
 protocol VpnConnectionUseCaseType {
     func connect() async throws
-    func connect(to server: ServerType)
     func disconnect() async throws
     func getConnectionIntent() -> AnyPublisher<VpnConnectionIntent, Error>
 }
@@ -77,13 +76,7 @@ class VpnConnectionUseCase: VpnConnectionUseCaseType {
             }
         }
     }
-    
-    // TODO: This is a select server and connect (same as from regions list)
-    func connect(to server: ServerType) {
-        // TODO: Implement me
-        NSLog("VpnConnectionUseCase: connect to: \(server.name)")
-    }
-    
+  
     func getConnectionIntent() -> AnyPublisher<VpnConnectionIntent, Error> {
         return connectionIntent.eraseToAnyPublisher()
     }

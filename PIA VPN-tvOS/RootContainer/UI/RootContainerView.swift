@@ -28,13 +28,7 @@ struct RootContainerView: View {
                         .withOnboardingRoutes()
                 }
         }.onChange(of: scenePhase) { _, newPhase in
-            if newPhase == .active {
-                NSLog(">>> Active")
-            } else if newPhase == .inactive {
-                NSLog(">>> Inactive")
-            } else if newPhase == .background {
-                NSLog(">>> Background")
-            }
+            
         }
     }
 }

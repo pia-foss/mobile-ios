@@ -16,5 +16,6 @@ struct Spacing {
     static let dashboardViewWidth: CGFloat = 780
     static let tileBorderRadius: CGFloat = 20
     static let tileCornerSize: CGSize = CGSize(width: 20, height: 20)
+    static let regionsFilterSectionWidth: CGFloat = 470
 }
 

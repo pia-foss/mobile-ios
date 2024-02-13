@@ -9,8 +9,6 @@
 import SwiftUI
 
 struct RegionsContainerView: View {
-    let viewWidth = UIScreen.main.bounds.width
-    let viewHeight = UIScreen.main.bounds.height
     
     @ObservedObject var viewModel: RegionsContainerViewModel
     @FocusState var focusedFilter: RegionsContainerViewModel.RegionsNavigationItems?
@@ -24,29 +22,30 @@ struct RegionsContainerView: View {
                     HStack {
                         Text(menuItem.text)
                             .font(.system(size: 38, weight: .medium))
-                            .foregroundColor(.pia_on_surface)
+                            .foregroundColor(focusedFilter == menuItem ? .pia_on_primary : .pia_on_surface)
                             .padding(20)
                         Spacer()
                     }
-                    .background(focusedFilter == menuItem ? Color.pia_surface_container_primary : Color.clear)
+                    .background(focusedFilter == menuItem ? Color.pia_primary : Color.clear)
                     .cornerRadius(12)
                     
                 }
                 .cornerRadius(4)
-                .buttonStyle(.borderless)
+                .buttonStyle(BasicButtonStyle())
                 .focused($focusedFilter, equals: menuItem)
                 
             }
-        }.listStyle(.plain)
+        }
+        .listStyle(.plain)
     }
     
 
     var body: some View {
-        VStack(alignment: .trailing) {
-            HStack(alignment: .top) {
+        VStack(alignment: .leading) {
+            HStack(alignment: .top, spacing: 40) {
                 regionsFilterButtons
-                    .frame(width: viewWidth * 0.23)
-                VStack {
+                    .frame(width: Spacing.regionsFilterSectionWidth)
+                VStack(alignment: .trailing) {
                     switch viewModel.selectedSection {
                     case .favorites:
                         RegionsSelectionFactory.makeFavoriteRegionsListView()
@@ -65,7 +64,7 @@ struct RegionsContainerView: View {
                         }
                         
                     }
-                }
+                }.frame(minWidth: 1208)
             }
             .onChange(of: focusedFilter) { _, newValue in
                 guard let focusedMenuItem = newValue else { return }
