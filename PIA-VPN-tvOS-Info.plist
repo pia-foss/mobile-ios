@@ -9,5 +9,7 @@
 		<key>UIImageName</key>
 		<string>loading-pia-brand</string>
 	</dict>
+    <key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
 </dict>
 </plist>

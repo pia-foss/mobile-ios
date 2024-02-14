@@ -1,9 +1,9 @@
 //
 //  PacketTunnelProvider.swift
-//  PIA-VPN-tvOS-NetworkExtension
+//  PIA tvOS Tunnel
 //
-//  Created by Laura S on 12/29/23.
-//  Copyright © 2023 Private Internet Access Inc. All rights reserved.
+//  Created by Said Rehouni on 15/2/24.
+//  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
 import NetworkExtension
@@ -12,6 +12,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
 
     override func startTunnel(options: [String : NSObject]?, completionHandler: @escaping (Error?) -> Void) {
         // Add code here to start the process of connecting the tunnel.
+        completionHandler(nil)
     }
     
     override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {

@@ -198,9 +198,6 @@
 		693CA5AE2B3ED75500D38378 /* Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E492C661FE60907007F23DF /* Flags.swift */; };
 		693CA5B02B3EDB4900D38378 /* RegionFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD271EF21D6718F00B6D20F /* RegionFilter.swift */; };
 		693CA5B12B3EDBEF00D38378 /* ThemeCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF5C072017EBAD0047596C /* ThemeCode.swift */; };
-		693CA5B72B3F268400D38378 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
-		693CA5BA2B3F268400D38378 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693CA5B92B3F268400D38378 /* PacketTunnelProvider.swift */; };
-		693CA5BF2B3F268400D38378 /* PIA-VPN-tvOS-NetworkExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 693CA5B62B3F268300D38378 /* PIA-VPN-tvOS-NetworkExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		694AC74E2B17AB9C007E7B56 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694AC74D2B17AB9C007E7B56 /* DashboardView.swift */; };
 		695BF81D2AC30EFB00D1139C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E7EC043209326E30029811E /* Localizable.strings */; };
 		695BF81F2AC410E000D1139C /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -618,6 +615,9 @@
 		E55EDCF32B762A75007010DB /* ConnectionStatsPermisson.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCF22B762A74007010DB /* ConnectionStatsPermisson.swift */; };
 		E55EDCF62B762C6E007010DB /* ConnectionStatsPermissonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCF52B762C6E007010DB /* ConnectionStatsPermissonType.swift */; };
 		E55EDCF82B769416007010DB /* ConnectionStatsPermissonMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCF72B769416007010DB /* ConnectionStatsPermissonMock.swift */; };
+		E59D1A152B7E2D4B00A2FBFB /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
+		E59D1A182B7E2D4B00A2FBFB /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59D1A172B7E2D4B00A2FBFB /* PacketTunnelProvider.swift */; };
+		E59D1A1D2B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E59D1A142B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E59E8F942AEA7A29009278F5 /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8F932AEA7A29009278F5 /* ActivityButton.swift */; };
 		E59E8F952AEA7A29009278F5 /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8F932AEA7A29009278F5 /* ActivityButton.swift */; };
 		E59E8F972AEA7A5A009278F5 /* AutolayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E8F962AEA7A5A009278F5 /* AutolayoutViewController.swift */; };
@@ -762,13 +762,6 @@
 			remoteGlobalIDString = 0EFB606F203D7A2C0095398C;
 			remoteInfo = "PIA VPN AdBlocker";
 		};
-		693CA5BD2B3F268400D38378 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 291C6374183EBC210039EC03 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 693CA5B52B3F268300D38378;
-			remoteInfo = "PIA-VPN-tvOS-NetworkExtension";
-		};
 		69CB24A22B051CED00D83A52 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 291C6374183EBC210039EC03 /* Project object */;
@@ -803,6 +796,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = DDC8F5EB23EC106F005D19C6;
 			remoteInfo = "PIA VPN WG Tunnel";
+		};
+		E59D1A1B2B7E2D4B00A2FBFB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 291C6374183EBC210039EC03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E59D1A132B7E2D4B00A2FBFB;
+			remoteInfo = "PIA tvOS Tunnel";
 		};
 		E5C507872B0E145100200A6A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -865,7 +865,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				693CA5BF2B3F268400D38378 /* PIA-VPN-tvOS-NetworkExtension.appex in Embed Foundation Extensions */,
+				E59D1A1D2B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1039,10 +1039,6 @@
 		693B9A412B7615C700757A41 /* RegionsDisplayNameUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsDisplayNameUseCaseMock.swift; sourceTree = "<group>"; };
 		693B9A432B7622B600757A41 /* RegionsDisplayNameUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsDisplayNameUseCaseTests.swift; sourceTree = "<group>"; };
 		693CA5AF2B3ED9E100D38378 /* PIA VPN-tvOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PIA VPN-tvOS.entitlements"; sourceTree = "<group>"; };
-		693CA5B62B3F268300D38378 /* PIA-VPN-tvOS-NetworkExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PIA-VPN-tvOS-NetworkExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		693CA5B92B3F268400D38378 /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
-		693CA5BB2B3F268400D38378 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		693CA5BC2B3F268400D38378 /* PIA_VPN_tvOS_NetworkExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PIA_VPN_tvOS_NetworkExtension.entitlements; sourceTree = "<group>"; };
 		6947AADB2ACDC8AE001BCC66 /* PIA-VPN-e2e-simulator.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PIA-VPN-e2e-simulator.xctestplan"; sourceTree = "<group>"; };
 		694AC74D2B17AB9C007E7B56 /* DashboardView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		696346562B6D0EDC0051F8BC /* RegionsFilterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsFilterUseCase.swift; sourceTree = "<group>"; };
@@ -1352,6 +1348,10 @@
 		E55EDCF22B762A74007010DB /* ConnectionStatsPermisson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatsPermisson.swift; sourceTree = "<group>"; };
 		E55EDCF52B762C6E007010DB /* ConnectionStatsPermissonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatsPermissonType.swift; sourceTree = "<group>"; };
 		E55EDCF72B769416007010DB /* ConnectionStatsPermissonMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatsPermissonMock.swift; sourceTree = "<group>"; };
+		E59D1A142B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PIA tvOS Tunnel.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E59D1A172B7E2D4B00A2FBFB /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
+		E59D1A192B7E2D4B00A2FBFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E59D1A212B7E2D8F00A2FBFB /* PIA_tvOS_Tunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PIA_tvOS_Tunnel.entitlements; sourceTree = "<group>"; };
 		E59E8F932AEA7A29009278F5 /* ActivityButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityButton.swift; sourceTree = "<group>"; };
 		E59E8F962AEA7A5A009278F5 /* AutolayoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutolayoutViewController.swift; sourceTree = "<group>"; };
 		E59E8F992AEA7A7F009278F5 /* SignupInternetUnreachableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupInternetUnreachableViewController.swift; sourceTree = "<group>"; };
@@ -1501,14 +1501,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		693CA5B32B3F268300D38378 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				693CA5B72B3F268400D38378 /* NetworkExtension.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		69B70AAD2ACBF51C0072A09D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1534,6 +1526,14 @@
 				E5C5076E2B0D60B300200A6A /* PIALibrary in Frameworks */,
 				AA36CDDB28A6860F00180A33 /* TweetNacl in Frameworks */,
 				DDC8F5F923EC10E4005D19C6 /* NetworkExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E59D1A112B7E2D4B00A2FBFB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E59D1A152B7E2D4B00A2FBFB /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1778,7 +1778,7 @@
 				E5C507782B0E144E00200A6A /* PIA VPN-tvOS */,
 				E5C507892B0E145100200A6A /* PIA VPN-tvOSTests */,
 				E5C507932B0E145100200A6A /* PIA VPN-tvOSUITests */,
-				693CA5B82B3F268400D38378 /* PIA-VPN-tvOS-NetworkExtension */,
+				E59D1A162B7E2D4B00A2FBFB /* PIA tvOS Tunnel */,
 				291C637E183EBC210039EC03 /* Frameworks */,
 				291C637D183EBC210039EC03 /* Products */,
 			);
@@ -1798,7 +1798,7 @@
 				E5C507772B0E144D00200A6A /* PIA VPN-tvOS.app */,
 				E5C507862B0E145100200A6A /* PIA VPN-tvOSTests.xctest */,
 				E5C507902B0E145100200A6A /* PIA VPN-tvOSUITests.xctest */,
-				693CA5B62B3F268300D38378 /* PIA-VPN-tvOS-NetworkExtension.appex */,
+				E59D1A142B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1984,16 +1984,6 @@
 				693622142B698B9200AE3C51 /* SearchedRegionsAvailability.swift */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		693CA5B82B3F268400D38378 /* PIA-VPN-tvOS-NetworkExtension */ = {
-			isa = PBXGroup;
-			children = (
-				693CA5B92B3F268400D38378 /* PacketTunnelProvider.swift */,
-				693CA5BB2B3F268400D38378 /* Info.plist */,
-				693CA5BC2B3F268400D38378 /* PIA_VPN_tvOS_NetworkExtension.entitlements */,
-			);
-			path = "PIA-VPN-tvOS-NetworkExtension";
 			sourceTree = "<group>";
 		};
 		694AC74B2B17AB73007E7B56 /* Dashboard */ = {
@@ -2818,6 +2808,16 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
+		E59D1A162B7E2D4B00A2FBFB /* PIA tvOS Tunnel */ = {
+			isa = PBXGroup;
+			children = (
+				E59D1A212B7E2D8F00A2FBFB /* PIA_tvOS_Tunnel.entitlements */,
+				E59D1A172B7E2D4B00A2FBFB /* PacketTunnelProvider.swift */,
+				E59D1A192B7E2D4B00A2FBFB /* Info.plist */,
+			);
+			path = "PIA tvOS Tunnel";
+			sourceTree = "<group>";
+		};
 		E5AB286D2B27975E00744E5F /* CompositionRoot */ = {
 			isa = PBXGroup;
 			children = (
@@ -3236,23 +3236,6 @@
 			productReference = 291C637C183EBC210039EC03 /* PIA VPN.app */;
 			productType = "com.apple.product-type.application";
 		};
-		693CA5B52B3F268300D38378 /* PIA-VPN-tvOS-NetworkExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 693CA5C02B3F268400D38378 /* Build configuration list for PBXNativeTarget "PIA-VPN-tvOS-NetworkExtension" */;
-			buildPhases = (
-				693CA5B22B3F268300D38378 /* Sources */,
-				693CA5B32B3F268300D38378 /* Frameworks */,
-				693CA5B42B3F268300D38378 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "PIA-VPN-tvOS-NetworkExtension";
-			productName = "PIA-VPN-tvOS-NetworkExtension";
-			productReference = 693CA5B62B3F268300D38378 /* PIA-VPN-tvOS-NetworkExtension.appex */;
-			productType = "com.apple.product-type.tv-app-extension";
-		};
 		69B70AAF2ACBF51C0072A09D /* PIA-VPN_E2E_Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 69B70ABA2ACBF51C0072A09D /* Build configuration list for PBXNativeTarget "PIA-VPN_E2E_Tests" */;
@@ -3313,6 +3296,23 @@
 			productReference = DDC8F5EC23EC106F005D19C6 /* PIA VPN WG Tunnel.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		E59D1A132B7E2D4B00A2FBFB /* PIA tvOS Tunnel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E59D1A1E2B7E2D4B00A2FBFB /* Build configuration list for PBXNativeTarget "PIA tvOS Tunnel" */;
+			buildPhases = (
+				E59D1A102B7E2D4B00A2FBFB /* Sources */,
+				E59D1A112B7E2D4B00A2FBFB /* Frameworks */,
+				E59D1A122B7E2D4B00A2FBFB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PIA tvOS Tunnel";
+			productName = "PIA tvOS Tunnel";
+			productReference = E59D1A142B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		E5C507762B0E144D00200A6A /* PIA VPN-tvOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E5C5079E2B0E145100200A6A /* Build configuration list for PBXNativeTarget "PIA VPN-tvOS" */;
@@ -3325,7 +3325,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				693CA5BE2B3F268400D38378 /* PBXTargetDependency */,
+				E59D1A1C2B7E2D4B00A2FBFB /* PBXTargetDependency */,
 			);
 			name = "PIA VPN-tvOS";
 			packageProductDependencies = (
@@ -3378,7 +3378,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = PIA;
-				LastSwiftUpdateCheck = 1510;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Private Internet Access Inc.";
 				TargetAttributes = {
@@ -3448,9 +3448,6 @@
 							};
 						};
 					};
-					693CA5B52B3F268300D38378 = {
-						CreatedOnToolsVersion = 15.1;
-					};
 					69B70AAF2ACBF51C0072A09D = {
 						CreatedOnToolsVersion = 14.3.1;
 						TestTargetID = 291C637B183EBC210039EC03;
@@ -3464,6 +3461,9 @@
 						CreatedOnToolsVersion = 11.3.1;
 						DevelopmentTeam = 5357M5NW9W;
 						ProvisioningStyle = Manual;
+					};
+					E59D1A132B7E2D4B00A2FBFB = {
+						CreatedOnToolsVersion = 15.0.1;
 					};
 					E5C507762B0E144D00200A6A = {
 						CreatedOnToolsVersion = 15.0.1;
@@ -3528,9 +3528,9 @@
 				0EEE1BE61E4F6EF400397DE2 /* PIA VPNTests */,
 				69B70AAF2ACBF51C0072A09D /* PIA-VPN_E2E_Tests */,
 				E5C507762B0E144D00200A6A /* PIA VPN-tvOS */,
+				E59D1A132B7E2D4B00A2FBFB /* PIA tvOS Tunnel */,
 				E5C507852B0E145100200A6A /* PIA VPN-tvOSTests */,
 				E5C5078F2B0E145100200A6A /* PIA VPN-tvOSUITests */,
-				693CA5B52B3F268300D38378 /* PIA-VPN-tvOS-NetworkExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -3667,13 +3667,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		693CA5B42B3F268300D38378 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		69B70AAE2ACBF51C0072A09D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3692,6 +3685,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		DDC8F5EA23EC106F005D19C6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E59D1A122B7E2D4B00A2FBFB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -4151,14 +4151,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		693CA5B22B3F268300D38378 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				693CA5BA2B3F268400D38378 /* PacketTunnelProvider.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		69B70AAC2ACBF51C0072A09D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4231,6 +4223,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDC8F5EF23EC1070005D19C6 /* PacketTunnelProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E59D1A102B7E2D4B00A2FBFB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E59D1A182B7E2D4B00A2FBFB /* PacketTunnelProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4442,11 +4442,6 @@
 			target = 0EFB606F203D7A2C0095398C /* PIA VPN AdBlocker */;
 			targetProxy = 0EFB607E203D893E0095398C /* PBXContainerItemProxy */;
 		};
-		693CA5BE2B3F268400D38378 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 693CA5B52B3F268300D38378 /* PIA-VPN-tvOS-NetworkExtension */;
-			targetProxy = 693CA5BD2B3F268400D38378 /* PBXContainerItemProxy */;
-		};
 		69CB24A32B051CED00D83A52 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 291C637B183EBC210039EC03 /* PIA VPN */;
@@ -4471,6 +4466,11 @@
 			isa = PBXTargetDependency;
 			target = DDC8F5EB23EC106F005D19C6 /* PIA VPN WG Tunnel */;
 			targetProxy = DDC8F5F223EC1070005D19C6 /* PBXContainerItemProxy */;
+		};
+		E59D1A1C2B7E2D4B00A2FBFB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E59D1A132B7E2D4B00A2FBFB /* PIA tvOS Tunnel */;
+			targetProxy = E59D1A1B2B7E2D4B00A2FBFB /* PBXContainerItemProxy */;
 		};
 		E5C507882B0E145100200A6A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -5117,95 +5117,6 @@
 			};
 			name = Release;
 		};
-		693CA5C12B3F268400D38378 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "PIA-VPN-tvOS-NetworkExtension/PIA_VPN_tvOS_NetworkExtension.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 5357M5NW9W;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "PIA-VPN-tvOS-NetworkExtension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "PIA-VPN-tvOS-NetworkExtension";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Private Internet Access Inc. All rights reserved.";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN-tvOS.PacketTunnel";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 17.2;
-			};
-			name = Debug;
-		};
-		693CA5C22B3F268400D38378 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "PIA-VPN-tvOS-NetworkExtension/PIA_VPN_tvOS_NetworkExtension.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 5357M5NW9W;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "PIA-VPN-tvOS-NetworkExtension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "PIA-VPN-tvOS-NetworkExtension";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Private Internet Access Inc. All rights reserved.";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN-tvOS.PacketTunnel";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 17.2;
-			};
-			name = Release;
-		};
 		69B70AB82ACBF51C0072A09D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5431,10 +5342,109 @@
 			};
 			name = Release;
 		};
+		E59D1A1F2B7E2D4B00A2FBFB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "PIA tvOS Tunnel/PIA_tvOS_Tunnel.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 5357M5NW9W;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PIA tvOS Tunnel/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "PIA tvOS Tunnel";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Private Internet Access Inc. All rights reserved.";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PIA-tvOS-Tunnel";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+			};
+			name = Debug;
+		};
+		E59D1A202B7E2D4B00A2FBFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "PIA tvOS Tunnel/PIA_tvOS_Tunnel.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=appletvos*]" = 5357M5NW9W;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PIA tvOS Tunnel/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "PIA tvOS Tunnel";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Private Internet Access Inc. All rights reserved.";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PacketTunnel";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = "PIA tvOS Distribution PacketTunnel WG";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+			};
+			name = Release;
+		};
 		E5C507982B0E145100200A6A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -5447,7 +5457,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN-tvOS/PIA VPN-tvOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_ASSET_PATHS = "\"PIA VPN-tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 5357M5NW9W;
@@ -5457,6 +5467,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "PIA-VPN-tvOS-Info.plist";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5466,7 +5477,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
@@ -5482,6 +5493,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -5493,18 +5505,21 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "PIA VPN-tvOS/PIA VPN-tvOS.entitlements";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"PIA VPN-tvOS/Preview Content\"";
-				DEVELOPMENT_TEAM = 5357M5NW9W;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=appletvos*]" = 5357M5NW9W;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "PIA-VPN-tvOS-Info.plist";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5514,8 +5529,10 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN-TV.PIA-VPN-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = "PIA Distribution tvOS";
 				SDKROOT = appletvos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -5729,15 +5746,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		693CA5C02B3F268400D38378 /* Build configuration list for PBXNativeTarget "PIA-VPN-tvOS-NetworkExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				693CA5C12B3F268400D38378 /* Debug */,
-				693CA5C22B3F268400D38378 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		69B70ABA2ACBF51C0072A09D /* Build configuration list for PBXNativeTarget "PIA-VPN_E2E_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -5761,6 +5769,15 @@
 			buildConfigurations = (
 				DDC8F5F523EC1070005D19C6 /* Debug */,
 				DDC8F5F623EC1070005D19C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E59D1A1E2B7E2D4B00A2FBFB /* Build configuration list for PBXNativeTarget "PIA tvOS Tunnel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E59D1A1F2B7E2D4B00A2FBFB /* Debug */,
+				E59D1A202B7E2D4B00A2FBFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
