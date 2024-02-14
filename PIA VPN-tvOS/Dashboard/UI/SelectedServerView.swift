@@ -29,7 +29,9 @@ struct SelectedServerView: View {
                 .foregroundColor(isButtonFocused ? .pia_on_primary : .pia_on_surface)
                 .frame(width: 52)
         }
-        .padding(.leading, 30)
+        .padding(.horizontal, 40)
+        .padding(.vertical, 16)
+        
     }
     
     var body: some View {
@@ -37,10 +39,18 @@ struct SelectedServerView: View {
             Button {
                 viewModel.selectedServerSectionWasTapped()
             } label: {
-                buttonView()
+                HStack {
+                    Spacer()
+                    buttonView()
+                        .frame(width: Spacing.dashboardViewWidth)
+                        .background(isButtonFocused ? Color.pia_primary : Color.pia_surface_container_primary)
+                        .clipShape(RoundedRectangle(cornerSize: Spacing.tileCornerSize))
+                    Spacer()
+                }
+                .frame(width: Spacing.screenWidth)
+                
             }
-            .background(isButtonFocused ? Color.pia_primary : Color.pia_surface_container_primary)
-            .clipShape(RoundedRectangle(cornerSize: Spacing.tileCornerSize))
+            
             .buttonStyle(BasicButtonStyle())
             .focused($isButtonFocused)
             .buttonBorderShape(.roundedRectangle(radius: Spacing.tileBorderRadius))

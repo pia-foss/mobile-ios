@@ -483,4 +483,9 @@
 //Dashboard screen (tvOS)
 "location_selection.optimal_location.title" = "Optimal Location";
 "location_selection.any_other_location.title" = "Selected Location";
-
+"dashboard.connection_state.connected.title" = "Connected";
+"dashboard.connection_state.disconnected.title" = "Not Connected";
+"dashboard.connection_state.connecting.title" = "Connecting...";
+"dashboard.connection_state.reconnecting.title" = "Reconnecting...";
+"dashboard.connection_state.disconnecting.title" = "Disconnecting...";
+"dashboard.connection_state.error.title" = "Connection Error";

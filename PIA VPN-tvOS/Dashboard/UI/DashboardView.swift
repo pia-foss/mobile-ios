@@ -6,7 +6,9 @@ struct DashboardView: View {
     @ObservedObject var viewModel: DashboardViewModel
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack {
+            ConnectionStateBar(tintColor: viewModel.connectionTintColor.connectionBarTint)
+            
             DashboardConnectionButtonSection()
                 .padding(.bottom, 80)
             
@@ -14,10 +16,13 @@ struct DashboardView: View {
                 .padding(.bottom, 40)
             
             QuickConnectSection()
+                .frame(width: Spacing.dashboardViewWidth)
             
         }
-        .frame(width: Spacing.dashboardViewWidth)
-        
+        .withTopNavigationBarAndTitleView {
+            // View for the Title section of the Navigation bar
+            ConnectionStateTitle(title: viewModel.connectionTitle, tintColor: viewModel.connectionTintColor.titleTint)
+        }
     }
 }
 
@@ -25,11 +30,7 @@ struct DashboardView: View {
 
 fileprivate struct DashboardConnectionButtonSection: View {
     var body: some View {
-        HStack {
-            Spacer()
-            DashboardFactory.makePIAConnectionButton()
-            Spacer()
-        }
+        DashboardFactory.makePIAConnectionButton()
     }
 }
 
@@ -42,6 +43,28 @@ fileprivate struct SelectedServerSection: View {
 fileprivate struct QuickConnectSection: View {
     var body: some View {
         DashboardFactory.makeQuickConnectView()
+    }
+}
+
+fileprivate struct ConnectionStateTitle: View {
+    let title: String
+    let tintColor: Color
+    
+    var body: some View {
+        Text(title)
+            .font(.system(size: 57, weight: .bold))
+            .foregroundColor(tintColor)
+    }
+}
+
+
+fileprivate struct ConnectionStateBar: View {
+    let tintColor: Color
+    
+    var body: some View {
+        Rectangle().fill(tintColor)
+            .frame(width: Spacing.screenWidth, height: 10)
+            .edgesIgnoringSafeArea(.all)
     }
 }
 

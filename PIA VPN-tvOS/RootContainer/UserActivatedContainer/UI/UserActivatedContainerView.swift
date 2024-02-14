@@ -21,19 +21,12 @@ struct UserActivatedContainerView: View {
                 case .serversList:
                     RegionsSelectionFactory.makeRegionsContainerView()
                         .padding(.top, Spacing.screenTopPadding)
-                        // TODO: Check .toolbar() to add the navigation bar because
-                        // these APIs will be deprecated
-                        .navigationBarItems(leading: TopNavigationFactory.makeLeadingSegmentedNavigationView())
-                        .navigationTitle(L10n.Localizable.TopNavigationBar.LocationSelectionScreen.title)
-                        .navigationBarItems(trailing: TopNavigationFactory.makeTrailingNavigationView())
+                        .withTopNavigationBar(with: L10n.Localizable.TopNavigationBar.LocationSelectionScreen.title)
                 case .search:
                     RegionsSelectionFactory.makeSearchRegionsListView()
                         .navigationBarHidden(true)
                 }
             }
-            .navigationBarItems(leading: TopNavigationFactory.makeLeadingSegmentedNavigationView())
-            .navigationBarItems(trailing: TopNavigationFactory.makeTrailingNavigationView())
-            .navigationTitle("") // TODO: Inject the VPN connection status here
         
     }
     

@@ -181,6 +181,32 @@ internal enum L10n {
           internal static let unreachable = L10n.tr("Localizable", "dashboard.connection.ip.unreachable", fallback: "Internet unreachable")
         }
       }
+      internal enum ConnectionState {
+        internal enum Connected {
+          /// Connected
+          internal static let title = L10n.tr("Localizable", "dashboard.connection_state.connected.title", fallback: "Connected")
+        }
+        internal enum Connecting {
+          /// Connecting...
+          internal static let title = L10n.tr("Localizable", "dashboard.connection_state.connecting.title", fallback: "Connecting...")
+        }
+        internal enum Disconnected {
+          /// Not Connected
+          internal static let title = L10n.tr("Localizable", "dashboard.connection_state.disconnected.title", fallback: "Not Connected")
+        }
+        internal enum Disconnecting {
+          /// Disconnecting...
+          internal static let title = L10n.tr("Localizable", "dashboard.connection_state.disconnecting.title", fallback: "Disconnecting...")
+        }
+        internal enum Error {
+          /// Connection Error
+          internal static let title = L10n.tr("Localizable", "dashboard.connection_state.error.title", fallback: "Connection Error")
+        }
+        internal enum Reconnecting {
+          /// Reconnecting...
+          internal static let title = L10n.tr("Localizable", "dashboard.connection_state.reconnecting.title", fallback: "Reconnecting...")
+        }
+      }
       internal enum ContentBlocker {
         internal enum Intro {
           /// This version replaces MACE with our Safari Content Blocker.
