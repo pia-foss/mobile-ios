@@ -37,6 +37,23 @@ enum ConnectionState: Equatable {
             return false
         }
     }
+    
+    var title: String? {
+        switch self {
+        case .connected:
+            return L10n.Localizable.Dashboard.ConnectionState.Connected.title
+        case .disconnected:
+            return L10n.Localizable.Dashboard.ConnectionState.Disconnected.title
+        case .disconnecting:
+            return L10n.Localizable.Dashboard.ConnectionState.Disconnecting.title
+        case .connecting:
+            return L10n.Localizable.Dashboard.ConnectionState.Connecting.title
+        case .error(_):
+            return L10n.Localizable.Dashboard.ConnectionState.Error.title
+        default:
+            return nil
+        }
+    }
 }
 
 protocol ConnectionStateMonitorType {
@@ -66,20 +83,20 @@ class ConnectionStateMonitor: ConnectionStateMonitorType {
         cancellable = vpnStatusMonitor.getStatus()
             .setFailureType(to: Error.self)
             .combineLatest(vpnConnectionUseCase.getConnectionIntent()) { vpnStatus, connectionIntent in
-            return (status: vpnStatus, intent: connectionIntent)
-        }
-        .receive(on: RunLoop.main)
-        .sink(receiveCompletion: { completion in
-            switch completion {
-            case .finished:
-                break
-            case .failure(let failure):
-                self.connectionState = .error(failure)
+                return (status: vpnStatus, intent: connectionIntent)
             }
-        }, receiveValue: { result in
-            self.calculateState(for: result.intent, vpnStatus: result.status)
- 
-        })
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let failure):
+                    self.connectionState = .error(failure)
+                }
+            }, receiveValue: { result in
+                self.calculateState(for: result.intent, vpnStatus: result.status)
+                
+            })
     }
     
     private func calculateState(for connectionIntent: VpnConnectionIntent, vpnStatus: VPNStatus) {
@@ -103,14 +120,14 @@ class ConnectionStateMonitor: ConnectionStateMonitorType {
 extension VPNStatus {
     func toConnectionState() -> ConnectionState {
         switch self {
-            case .connected:
-                return .connected
-            case .connecting:
-                return .connecting
-            case .disconnecting:
-                return .disconnecting
-            default:
-                return .disconnected
+        case .connected:
+            return .connected
+        case .connecting:
+            return .connecting
+        case .disconnecting:
+            return .disconnecting
+        default:
+            return .disconnected
         }
     }
 }

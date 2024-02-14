@@ -17,7 +17,9 @@ class TopNavigationViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     let leadingSections: [Sections] = [.vpn, .locations]
-    let trailingSections: [Sections] = [.settings, .help]
+    
+    // TODO: Add 'help' section in the trailing sections when we implement it
+    let trailingSections: [Sections] = [.settings]
     
     enum Sections: Equatable, Hashable, Identifiable {
         var id: Self {
