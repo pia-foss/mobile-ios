@@ -5,18 +5,19 @@ class QuickConnectViewModel: ObservableObject {
     
     @Published private (set) var servers: [ServerType] = []
     
-    private let connectUseCase: VpnConnectionUseCaseType
     private let selectedServerUseCase: SelectedServerUseCaseType
+    private let regionsUseCase: RegionsListUseCaseType
     
     
-    init(connectUseCase: VpnConnectionUseCaseType,
-         selectedServerUseCase: SelectedServerUseCaseType) {
-        self.connectUseCase = connectUseCase
+    init(selectedServerUseCase: SelectedServerUseCaseType,
+         regionsUseCase: RegionsListUseCaseType) {
         self.selectedServerUseCase = selectedServerUseCase
+        self.regionsUseCase = regionsUseCase
     }
     
     func updateStatus() {
-        servers = selectedServerUseCase.getHistoricalServers().reversed()
+        let allHistoricalServers = selectedServerUseCase.getHistoricalServers().reversed().dropFirst()
+        servers = Array(allHistoricalServers.prefix(4))
     }
     
 }
@@ -24,7 +25,8 @@ class QuickConnectViewModel: ObservableObject {
 extension QuickConnectViewModel: QuickConnectButtonViewModelDelegate {
     
     func quickConnectButtonViewModel(didSelect server: ServerType) {
-        connectUseCase.connect(to: server)
+        regionsUseCase.select(server: server)
+        updateStatus()
     }
     
 }

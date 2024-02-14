@@ -59,10 +59,13 @@ class RegionsSelectionFactory {
         return RegionsListView(viewModel: makeRegionsListViewModel(with: .previouslySearched))
     }
     
-    
     static func makeRegionsListUseCase() -> RegionsListUseCaseType {
-        return RegionsListUseCase(serverProvider: DashboardFactory.makeServerProvider(), clientPreferences: Client.preferences)
+        return RegionsListUseCase(serverProvider: VpnConnectionFactory.makeServerProvider(), clientPreferences: makeClientPreferences, vpnConnectionUseCase: VpnConnectionFactory.makeVpnConnectionUseCase)
     }
+    
+    static var makeClientPreferences: ClientPreferencesType = {
+        return ClientPreferences(clientPrefs: Client.preferences)
+    }()
     
     /// FavoritesUseCase is the same instance across the whole app
     /// in order to be able to publish updates to the favorites collection

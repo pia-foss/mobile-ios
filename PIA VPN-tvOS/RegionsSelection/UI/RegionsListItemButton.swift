@@ -40,7 +40,7 @@ struct RegionsListItemButton: View {
         .background(buttonFocused ? Color.pia_primary : Color.pia_surface_container_secondary)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .focused($buttonFocused)
-        .buttonStyle(.borderless)
+        .buttonStyle(BasicButtonStyle())
         .buttonBorderShape(.roundedRectangle(radius: 20))
         
         .contextMenu(menuItems: {

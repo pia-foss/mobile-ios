@@ -4,8 +4,8 @@ import XCTest
 
 final class QuickConnectViewModelTests: XCTestCase {
     class Fixture {
-        let connectUseCaseMock = VpnConnectionUseCaseMock()
         let selectedServerUseCaseMock = SelectedServerUseCaseMock()
+        let regionsUseCaseMock = RegionsListUseCaseMock()
         let serverMock = ServerMock()
     }
     
@@ -21,19 +21,19 @@ final class QuickConnectViewModelTests: XCTestCase {
     }
     
     private func initilizeSut() {
-        sut = QuickConnectViewModel(connectUseCase: fixture.connectUseCaseMock, selectedServerUseCase: fixture.selectedServerUseCaseMock)
+        sut = QuickConnectViewModel(selectedServerUseCase: fixture.selectedServerUseCaseMock, regionsUseCase: fixture.regionsUseCaseMock)
     }
     
     func test_quickConnectServers_on_launch() {
-        // GIVEN that there are 2 historical servers
+        // GIVEN that there are 2 historical servers (the first one is the current selected server)
         fixture.selectedServerUseCaseMock.getHistoricalServersResult = [ServerMock(), ServerMock()]
         
         // WHEN showing the Quick Connect section
         initilizeSut()
         sut.updateStatus()
         
-        // THEN there are 2 Quick Connect buttons displayed
-        XCTAssertEqual(sut.servers.count, 2)
+        // THEN there is 1 Quick Connect button displayed
+        XCTAssertEqual(sut.servers.count, 1)
     }
     
     
@@ -47,10 +47,11 @@ final class QuickConnectViewModelTests: XCTestCase {
         // WHEN the sut is informed via `QuickConnectButtonViewModelDelegate` to connect
         sut.quickConnectButtonViewModel(didSelect: fixture.serverMock)
         
-        // THEN the vpn connect use case is called to connect to "Italy-Milano"
-        XCTAssertTrue(fixture.connectUseCaseMock.connectToServerCalled)
-        XCTAssertEqual(fixture.connectUseCaseMock.connectCalledToServerAttempt, 1)
-        XCTAssertEqual(fixture.connectUseCaseMock.connectToServerCalledWithArgument?.name, "Italy-Milano")
+        // THEN the regions use case is called to select the "Italy-Milano" server
+        XCTAssertTrue(fixture.regionsUseCaseMock.selectServerCalled)
+        XCTAssertEqual(fixture.regionsUseCaseMock.selectServerCalledWithArgument!.name, "Italy-Milano")
+  
+
     }
     
 }

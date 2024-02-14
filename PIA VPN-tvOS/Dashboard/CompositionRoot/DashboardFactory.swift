@@ -15,10 +15,8 @@ class DashboardFactory {
         return DashboardViewModel(accountProvider: defaultAccountProvider, appRouter: AppRouterFactory.makeAppRouter(), navigationDestination: RegionsDestinations.serversList)
     }
     
-    static func makePIAConnectionButton(size: CGFloat = 160, lineWidth: CGFloat = 6) -> PIAConnectionButton {
+    static func makePIAConnectionButton() -> PIAConnectionButton {
         return PIAConnectionButton(
-            size: size,
-            lineWidth: lineWidth,
             viewModel: makePIAConnectionButtonViewModel()
         )
     }
@@ -29,20 +27,17 @@ class DashboardFactory {
 
 extension DashboardFactory {
     private static func makePIAConnectionButtonViewModel() -> PIAConnectionButtonViewModel {
-        return PIAConnectionButtonViewModel(useCase: makeVpnConnectionUseCase(), 
-                                            vpnStatusMonitor: StateMonitorsFactory.makeVPNStatusMonitor())
+        return PIAConnectionButtonViewModel(useCase: VpnConnectionFactory.makeVpnConnectionUseCase, connectionStateMonitor: StateMonitorsFactory.makeConnectionStateMonitor)
     }
     
-    private static func makeVpnConnectionUseCase() -> VpnConnectionUseCaseType {
-        return VpnConnectionUseCase(serverProvider: makeServerProvider())
-    }
+
     
     private static func makeSelectedServerUserCase() -> SelectedServerUseCaseType {
-        return SelectedServerUseCase(serverProvider: makeServerProvider(), clientPreferences: Client.preferences)
+        return SelectedServerUseCase(serverProvider: VpnConnectionFactory.makeServerProvider(), clientPreferences: RegionsSelectionFactory.makeClientPreferences)
     }
     
     private static func makeSelectedServerViewModel() -> SelectedServerViewModel {
-        return SelectedServerViewModel(useCase: makeSelectedServerUserCase())
+        return SelectedServerViewModel(useCase: makeSelectedServerUserCase(), routerAction: .navigate(router: AppRouterFactory.makeAppRouter(), destination: RegionsDestinations.serversList))
     }
     
     internal static func makeSelectedServerView() -> SelectedServerView {
@@ -56,15 +51,7 @@ extension DashboardFactory {
 
 extension DashboardFactory {
     
-    static func makeServerProvider() -> ServerProviderType {
-        guard let defaultServerProvider: DefaultServerProvider =
-                Client.providers.serverProvider as? DefaultServerProvider else {
-            fatalError("Incorrect server provider type")
-        }
-        
-        return defaultServerProvider
-        
-    }
+
     
     static internal func makeQuickConnectButtonViewModel(for server: ServerType, delegate: QuickConnectButtonViewModelDelegate?) -> QuickConnectButtonViewModel {
         QuickConnectButtonViewModel(server: server, delegate: delegate)
@@ -75,7 +62,7 @@ extension DashboardFactory {
     }
     
     static internal func makeQuickConnectViewModel() -> QuickConnectViewModel {
-        QuickConnectViewModel(connectUseCase: makeVpnConnectionUseCase(), selectedServerUseCase: makeSelectedServerUserCase())
+        QuickConnectViewModel(selectedServerUseCase: makeSelectedServerUserCase(), regionsUseCase: RegionsSelectionFactory.makeRegionsListUseCase())
     }
     
     static func makeQuickConnectView() -> QuickConnectView {

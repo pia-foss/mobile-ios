@@ -1,43 +1,68 @@
 
 import Foundation
 import PIALibrary
+import Combine
 
 protocol VpnConnectionUseCaseType {
-    func connect()
-    func connect(to server: ServerType)
-    func disconnect()
+    func connect() async throws
+    func disconnect() async throws
+    func getConnectionIntent() -> AnyPublisher<VpnConnectionIntent, Error>
+}
+
+enum VpnConnectionIntent: Equatable {
+    case none
+    case connect
+    case disconnect
 }
 
 class VpnConnectionUseCase: VpnConnectionUseCaseType {
     
+    internal var connectionIntent: CurrentValueSubject<VpnConnectionIntent, Error>
+    
     let serverProvider: ServerProviderType
+    let vpnProvider: VPNStatusProviderType
     
-    init(serverProvider: ServerProviderType) {
+    init(serverProvider: ServerProviderType, vpnProvider: VPNStatusProviderType) {
         self.serverProvider = serverProvider
+        self.vpnProvider = vpnProvider
+        self.connectionIntent = CurrentValueSubject(.none)
     }
     
-    func connect() {
-        // TODO: Inject VPNProvider object
-        let vpnProvider = Client.providers.vpnProvider
-        vpnProvider.connect { error in
-            NSLog("Connection error: \(error)")
-        }
-    }
-    
-    func disconnect() {
-        // TODO: Inject VPNProvider object
-        let vpnProvider = Client.providers.vpnProvider
-        vpnProvider.disconnect { error in
-            NSLog("Disconnect error: \(error)")
-        }
+    func connect() async throws {
+       
+        connectionIntent.send(.connect)
         
+        return try await withCheckedThrowingContinuation { continuation in
+            vpnProvider.connect { error in
+                if let error = error {
+                    self.connectionIntent.send(completion: .failure(error))
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume(returning: ())
+                }
+            }
+        }
     }
     
-    func connect(to server: ServerType) {
-        // TODO: Implement me
-        print("VpnConnectionUseCase: connect to: \(server.name)")
+    
+    func disconnect() async throws {
+
+        connectionIntent.send(.disconnect)
+        
+        return try await withCheckedThrowingContinuation { continuation in
+            vpnProvider.disconnect { error in
+                if let error = error {
+                    self.connectionIntent.send(completion: .failure(error))
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume(returning: ())
+                }
+            }
+        }
     }
-    
-    
+  
+    func getConnectionIntent() -> AnyPublisher<VpnConnectionIntent, Error> {
+        return connectionIntent.eraseToAnyPublisher()
+    }
     
 }

@@ -14,20 +14,18 @@ final class PIAConnectionButtonViewModelTests: XCTestCase {
     
     final class Fixture {
         let vpnConnectionUseCaseMock = VpnConnectionUseCaseMock()
-        let vpnStatusMonitor = VPNStatusMonitorMock()
+        let connectionStateMonitorMock = ConnectionStateMonitorMock()
     }
     
     var fixture: Fixture!
     var sut: PIAConnectionButtonViewModel!
     var cancellables: Set<AnyCancellable>!
-    var capturedState: [PIAConnectionButtonViewModel.State]!
+    var capturedState: [ConnectionState]!
     
     override func setUp() {
         fixture = Fixture()
-        sut = PIAConnectionButtonViewModel(useCase: fixture.vpnConnectionUseCaseMock, 
-                                           vpnStatusMonitor: fixture.vpnStatusMonitor)
         cancellables = Set<AnyCancellable>()
-        capturedState = [PIAConnectionButtonViewModel.State]()
+        capturedState = [ConnectionState]()
     }
     
     override func tearDown() {
@@ -37,31 +35,34 @@ final class PIAConnectionButtonViewModelTests: XCTestCase {
         capturedState = nil
     }
     
+    private func instantiateSut() {
+        sut = PIAConnectionButtonViewModel(useCase: fixture.vpnConnectionUseCaseMock,
+                                           connectionStateMonitor: fixture.connectionStateMonitorMock)
+    }
+    
     func test_toggleConnection_when_disconnected() {
-        // GIVEN that the vpn state is disconnected
-        XCTAssertTrue(sut.state == .disconnected)
+        // GIVEN that the connection state is disconnected
+        fixture.connectionStateMonitorMock.connectionState = .disconnected
         
+        let connectExpectation = XCTestExpectation(description: "connection is called")
         fixture.vpnConnectionUseCaseMock.connectionAction = { [weak self] in
-            self?.fixture.vpnStatusMonitor.status.send(.connecting)
-            self?.fixture.vpnStatusMonitor.status.send(.connected)
+            self?.fixture.connectionStateMonitorMock.connectionState = .connecting
+            self?.fixture.connectionStateMonitorMock.connectionState = .connected
+            connectExpectation.fulfill()
         }
         
-        fixture.vpnConnectionUseCaseMock.disconnectionAction = { [weak self] in
-            self?.fixture.vpnStatusMonitor.status.send(.disconnecting)
-            self?.fixture.vpnStatusMonitor.status.send(.disconnected)
-        }
-        
-        capturedState = [PIAConnectionButtonViewModel.State]()
+        instantiateSut()
+        XCTAssertTrue(sut.state == .disconnected)
         
         sut.$state.sink { _ in
         } receiveValue: { state in
             self.capturedState.append(state)
         }.store(in: &cancellables)
          
-        
         // WHEN calling the toggle connection method
         sut.toggleConnection()
         
+        wait(for: [connectExpectation], timeout: 3)
         // THEN the vpnConnectionUseCase is called once to connect the vpn
         XCTAssertTrue(fixture.vpnConnectionUseCaseMock.connectCalled)
         XCTAssertTrue(fixture.vpnConnectionUseCaseMock.connectCalledAttempt == 1)
@@ -71,21 +72,20 @@ final class PIAConnectionButtonViewModelTests: XCTestCase {
     }
     
     func test_toggleConnection_when_connected() {
+        
         // GIVEN that the vpn state is connected
-        sut.state = .connected
+        fixture.connectionStateMonitorMock.connectionState = .connected
+        
+        let disconnectExpectation = XCTestExpectation(description: "Disconnect is called")
+        fixture.vpnConnectionUseCaseMock.disconnectionAction = { [weak self] in
+            self?.fixture.connectionStateMonitorMock.connectionState = .disconnecting
+            self?.fixture.connectionStateMonitorMock.connectionState = .disconnected
+            disconnectExpectation.fulfill()
+        }
+        
+        instantiateSut()
         XCTAssertTrue(sut.state == .connected)
         
-        fixture.vpnConnectionUseCaseMock.connectionAction = { [weak self] in
-            self?.fixture.vpnStatusMonitor.status.send(.connecting)
-            self?.fixture.vpnStatusMonitor.status.send(.connected)
-        }
-        
-        fixture.vpnConnectionUseCaseMock.disconnectionAction = { [weak self] in
-            self?.fixture.vpnStatusMonitor.status.send(.disconnecting)
-            self?.fixture.vpnStatusMonitor.status.send(.disconnected)
-        }
-        
-        capturedState = [PIAConnectionButtonViewModel.State]()
         
         sut.$state.sink { _ in
         } receiveValue: { state in
@@ -95,6 +95,8 @@ final class PIAConnectionButtonViewModelTests: XCTestCase {
         
         // WHEN calling the toggle connection method
         sut.toggleConnection()
+        
+        wait(for: [disconnectExpectation], timeout: 3)
         
         // THEN the vpnConnectionUseCase is called once to disconnect the vpn
         XCTAssertTrue(fixture.vpnConnectionUseCaseMock.disconnectCalled)

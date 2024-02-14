@@ -23,4 +23,10 @@ class StateMonitorsFactory {
         return VPNStatusMonitor(vpnStatusProvider: defaultVPNProvider,
                                 notificationCenter: NotificationCenter.default)
     }
+    
+    static var makeConnectionStateMonitor: ConnectionStateMonitorType = {
+        return ConnectionStateMonitor(vpnStatusMonitor: makeVPNStatusMonitor(), vpnConnectionUseCase: VpnConnectionFactory.makeVpnConnectionUseCase)
+    }()
+    
 }
+

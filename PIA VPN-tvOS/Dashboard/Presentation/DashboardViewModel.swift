@@ -14,10 +14,6 @@ class DashboardViewModel: ObservableObject {
         self.navigationDestination = navigationDestination
     }
     
-    func regionSelectionSectionWasTapped() {
-        appRouter.navigate(to: navigationDestination)
-    }
-    
     
     // TODO: Remove this functionality from Dashboard when we have it on the settings menu
     func logOut() {
