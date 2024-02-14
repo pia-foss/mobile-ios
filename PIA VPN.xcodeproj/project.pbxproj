@@ -278,6 +278,7 @@
 		69F675AA2B592ED6000E31D5 /* ClientPreferences+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F675A92B592ED6000E31D5 /* ClientPreferences+Protocols.swift */; };
 		69F675AB2B592FA0000E31D5 /* Server+Automatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1CB1FE35C9A007C0B9B /* Server+Automatic.swift */; };
 		69F675AD2B593437000E31D5 /* ServerProvider+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB966731FDF0D6E0086ABC2 /* ServerProvider+UI.swift */; };
+		69FA73D52B7D44CB002300B3 /* TopNavigationView+ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FA73D42B7D44CB002300B3 /* TopNavigationView+ViewModifier.swift */; };
 		69FF0B042B3AD1D40074AA04 /* SelectedServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FF0B032B3AD1D40074AA04 /* SelectedServerView.swift */; };
 		69FF0B062B3AD2860074AA04 /* QuickConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FF0B052B3AD2860074AA04 /* QuickConnectView.swift */; };
 		69FF0B082B3AD3E60074AA04 /* SelectedServerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FF0B072B3AD3E60074AA04 /* SelectedServerViewModel.swift */; };
@@ -1116,6 +1117,7 @@
 		69F1C2982B2B28DA00E924AE /* PIAConnectionButton.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionButton.swift; sourceTree = "<group>"; tabWidth = 4; };
 		69F1C29B2B2B299300E924AE /* VpnConnectionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VpnConnectionUseCase.swift; sourceTree = "<group>"; };
 		69F675A92B592ED6000E31D5 /* ClientPreferences+Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClientPreferences+Protocols.swift"; sourceTree = "<group>"; };
+		69FA73D42B7D44CB002300B3 /* TopNavigationView+ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopNavigationView+ViewModifier.swift"; sourceTree = "<group>"; };
 		69FF0B032B3AD1D40074AA04 /* SelectedServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedServerView.swift; sourceTree = "<group>"; };
 		69FF0B052B3AD2860074AA04 /* QuickConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickConnectView.swift; sourceTree = "<group>"; };
 		69FF0B072B3AD3E60074AA04 /* SelectedServerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedServerViewModel.swift; sourceTree = "<group>"; };
@@ -2245,6 +2247,7 @@
 			isa = PBXGroup;
 			children = (
 				69C5E7CB2B72945F00FE3126 /* TopNavigationView.swift */,
+				69FA73D42B7D44CB002300B3 /* TopNavigationView+ViewModifier.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -4284,6 +4287,7 @@
 				E55EDCDA2B755E6D007010DB /* OnboardingFactory.swift in Sources */,
 				696346572B6D0EDC0051F8BC /* RegionsFilterUseCase.swift in Sources */,
 				E5AB286F2B27977000744E5F /* LoginFactory.swift in Sources */,
+				69FA73D52B7D44CB002300B3 /* TopNavigationView+ViewModifier.swift in Sources */,
 				699311A22B318F6B00D316C8 /* DashboardViewModel.swift in Sources */,
 				693B9A402B7571ED00757A41 /* SearchControllerButton.swift in Sources */,
 				69AB492C2B63C73000C780CD /* FavoriteRegionUseCase.swift in Sources */,

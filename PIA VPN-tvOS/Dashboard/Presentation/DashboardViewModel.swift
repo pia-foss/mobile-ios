@@ -6,7 +6,7 @@ import SwiftUI
 
 class DashboardViewModel: ObservableObject {
     
-    @Published var connectionTitle: String?
+    @Published var connectionTitle: String = ""
     @Published var connectionTintColor = (titleTint: Color.clear, connectionBarTint: Color.clear)
     
     private let connectionStateMonitor: ConnectionStateMonitorType
@@ -21,7 +21,7 @@ class DashboardViewModel: ObservableObject {
         connectionStateMonitor.connectionStatePublisher
             .sink { [weak self] newConnectionState in
                 guard let self else { return }
-                self.connectionTitle = newConnectionState.title
+                self.connectionTitle = newConnectionState.title ?? ""
                 self.connectionTintColor = self.getTintColor(for: newConnectionState)
             }.store(in: &cancellables)
     }

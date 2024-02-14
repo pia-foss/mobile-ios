@@ -19,17 +19,10 @@ struct DashboardView: View {
                 .frame(width: Spacing.dashboardViewWidth)
             
         }
-        .toolbar {
-            if let connectionTitle = viewModel.connectionTitle {
-                ToolbarItem(placement: .principal) {
-                    ConnectionStateTitle(title: connectionTitle, tintColor: viewModel.connectionTintColor.titleTint)
-                }
-            }
-
+        .withTopNavigationBarAndTitleView {
+            // View for the Title section of the Navigation bar
+            ConnectionStateTitle(title: viewModel.connectionTitle, tintColor: viewModel.connectionTintColor.titleTint)
         }
-        .navigationBarItems(leading: TopNavigationFactory.makeLeadingSegmentedNavigationView())
-        .navigationBarItems(trailing: TopNavigationFactory.makeTrailingNavigationView())
-        
     }
 }
 
