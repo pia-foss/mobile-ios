@@ -6,7 +6,7 @@ struct DashboardView: View {
     @ObservedObject var viewModel: DashboardViewModel
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack {
             DashboardConnectionButtonSection()
                 .padding(.bottom, 80)
             
@@ -14,9 +14,9 @@ struct DashboardView: View {
                 .padding(.bottom, 40)
             
             QuickConnectSection()
+                .frame(width: Spacing.dashboardViewWidth)
             
         }
-        .frame(width: Spacing.dashboardViewWidth)
         
     }
 }
@@ -25,11 +25,7 @@ struct DashboardView: View {
 
 fileprivate struct DashboardConnectionButtonSection: View {
     var body: some View {
-        HStack {
-            Spacer()
-            DashboardFactory.makePIAConnectionButton()
-            Spacer()
-        }
+        DashboardFactory.makePIAConnectionButton()
     }
 }
 

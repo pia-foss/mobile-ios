@@ -18,20 +18,25 @@ struct PIAConnectionButton: View {
         Button {
             viewModel.toggleConnection()
         } label: {
-            ZStack {
-                animatedRing(with: viewModel.tintColor)
-                Circle()
-                    .fill(Color.pia_background)
-                    .frame(width: size - lineWidth)
-                
-                if !viewModel.animating {
-                    connectionStatusOuterRing()
+            HStack {
+                Spacer()
+                ZStack {
+                    animatedRing(with: viewModel.tintColor)
+                    Circle()
+                        .fill(Color.pia_background)
+                        .frame(width: size - lineWidth)
+                    
+                    if !viewModel.animating {
+                        connectionStatusOuterRing()
+                    }
+                    connectionStatusInnerImage()
                 }
-                connectionStatusInnerImage()
+                .frame(width: size + 40, height: size + 40)
+                .scaleEffect(isFocused  ? 1.15 : 1)
+                .animation(.easeOut, value: isFocused)
+                Spacer()
             }
-            .frame(width: size + 40, height: size + 40)
-            .scaleEffect(isFocused  ? 1.15 : 1)
-            .animation(.easeOut, value: isFocused)
+            .frame(width: Spacing.screenWidth)
             
         }
         .focused($isFocused)
