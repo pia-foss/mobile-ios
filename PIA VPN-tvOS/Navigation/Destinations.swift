@@ -39,4 +39,3 @@ enum RegionsDestinations: Destinations, Codable {
         }
     }
 }
-

@@ -78,7 +78,7 @@ class TopNavigationViewModel: ObservableObject {
         case .locations:
             appRouter.navigate(to: RegionsDestinations.serversList)
         case .settings:
-            // TODO: Implement me
+            appRouter.navigate(to: SettingsDestinations.availableSettings)
             break
         case .help:
             // TODO: Implement me
@@ -105,8 +105,10 @@ class TopNavigationViewModel: ObservableObject {
                 return .locations
             case .home as DashboardDestinations:
                  return .vpn
-            // TODO: Add settings and help destinations when implemented
-            default: 
+            case .availableSettings as SettingsDestinations:
+                return .settings
+            // TODO: add help destinations when implemented
+            default:
                 return .vpn
             }
         } else {

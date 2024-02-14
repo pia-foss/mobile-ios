@@ -12,9 +12,12 @@ extension Image {
     static let smart_location_icon = Image(.smart_location_icon_name)
     static let smart_location_icon_highlighted = Image(.smart_location_icon_highlighted_name)
     static let connect_inner_button = Image("connect-inner-button")
+    static let pia_settings_bg_image = Image(.pia_settings_bg_image)
 }
 
 extension String {
     static let smart_location_icon_name = "icon-smart-location"
     static let smart_location_icon_highlighted_name = "icon-smart-location-highlighted"
+    
+    static let pia_settings_bg_image = "settings-bg-image"
 }

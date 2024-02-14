@@ -27,6 +27,7 @@ struct UserActivatedContainerView: View {
                         .navigationBarHidden(true)
                 }
             }
+            .withSettingsRoutes()
         
     }
     
