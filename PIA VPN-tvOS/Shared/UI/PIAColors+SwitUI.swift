@@ -42,6 +42,5 @@ extension Color {
     static var pia_on_warning_container = Color("pia_on_warning_container")
     static var pia_on_info_container = Color("pia_on_info_container")
     static var pia_on_success_container = Color("pia_on_success_container")
-    
-    
+    static var pia_error20 = Color("pia_error20")
 }

@@ -20,9 +20,39 @@ protocol ServerType {
     var geo: Bool { get }
     var pingTime: Int? { get }
     var isAutomatic: Bool { get }
+    var dipToken: String? { get }
+    var dipIKEv2IP: String? { get }
+    var dipStatusString: String? { get }
 }
 
-extension Server: ServerType {}
+extension Server: ServerType {
+    var dipStatusString: String? {
+        dipStatus?.getStatus()
+    }
+    
+    var dipIKEv2IP: String? {
+        iKEv2AddressesForUDP?.first?.ip
+    }
+}
+protocol DedicatedIPStatusType {
+    func getStatus() -> String
+}
+
+extension DedicatedIPStatus: DedicatedIPStatusType {
+    func getStatus() -> String {
+        switch self {
+            case .invalid:
+                return L10n.Localizable.Settings.Dedicatedip.Status.invalid
+            case .expired:
+                return L10n.Localizable.Settings.Dedicatedip.Status.expired
+            case .error:
+                return L10n.Localizable.Settings.Dedicatedip.Status.error
+            default:
+                return L10n.Localizable.Settings.Dedicatedip.Status.active
+        }
+    }
+}
+
 
 protocol ServerProviderType {
     var historicalServersType: [ServerType] { get }

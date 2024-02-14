@@ -499,3 +499,27 @@
 "settings.account.log_out_alert.title" = "Are you sure?";
 "settings.account.log_out_alert.message" = "Logging out will terminate any active VPN connection and leave you unprotected.";
 "settings.account.subscription_expiry.title" = "Subscription expires on";
+
+// Dedicated IP
+"settings.dedicatedip.title1" = "Enter ";
+"settings.dedicatedip.title2" = "Dedicated IP";
+"settings.dedicatedip.subtitle" = "Activate your Dedicated IP by typing your token in the field \nbelow. If you've recently purchased a Dedicated IP, you can \ngenerate the token by visiting your PIA account";
+"settings.dedicatedip.placeholder" = "Enter Dedicated IP";
+"settings.dedicatedip.button" = "Activate";
+"settings.dedicatedip.alert.title" = "Something went wrong";
+"settings.dedicatedip.alert.message" = "Your token is either invalid or has expired.";
+"settings.dedicatedip.alert.message.empty" = "Your token can't be empty.";
+
+"settings.dedicatedip.stats.dedicatedip" = "Dedicated IP";
+"settings.dedicatedip.stats.ip" = "IP Address";
+"settings.dedicatedip.stats.location" = "Location";
+"settings.dedicatedip.stats.quickAction" = "Quick Action";
+"settings.dedicatedip.stats.delete.button" = "Delete Dedicated IP";
+"settings.dedicatedip.stats.delete.alert.title" = "Are you sure?";
+"settings.dedicatedip.stats.delete.alert.message" = "You are about to remove your Dedicated IP from your account.";
+"settings.dedicatedip.stats.delete.alert.delete" = "Yes, Delete";
+
+"settings.dedicatedip.status.active" = "Active";
+"settings.dedicatedip.status.invalid" = "Invalid";
+"settings.dedicatedip.status.expired" = "Expired";
+"settings.dedicatedip.status.error" = "Error";

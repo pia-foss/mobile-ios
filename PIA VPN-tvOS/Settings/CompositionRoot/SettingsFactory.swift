@@ -11,7 +11,8 @@ import PIALibrary
 
 class SettingsFactory {
     private static func makeAvailableSettingsViewModel() -> AvailableSettingsViewModel {
-        return AvailableSettingsViewModel(onAccountSelectedAction: AppRouter.navigateToAccountSettingsDestinationAction)
+        return AvailableSettingsViewModel(onAccountSelectedAction: AppRouter.navigateToAccountSettingsDestinationAction, 
+                                          onDedicatedIpSectionSelectedAction: AppRouter.navigateToDIPSettingsDestinationAction)
     }
     
     static func makeAvailableSettingsView() -> AvailableSettingsView {

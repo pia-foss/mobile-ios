@@ -1059,6 +1059,62 @@ internal enum L10n {
           internal static let title = L10n.tr("Localizable", "settings.content_blocker.state.title", fallback: "Current state")
         }
       }
+      internal enum Dedicatedip {
+        /// Activate
+        internal static let button = L10n.tr("Localizable", "settings.dedicatedip.button", fallback: "Activate")
+        /// Enter Dedicated IP
+        internal static let placeholder = L10n.tr("Localizable", "settings.dedicatedip.placeholder", fallback: "Enter Dedicated IP")
+        /// Activate your Dedicated IP by typing your token in the field 
+        /// below. If you've recently purchased a Dedicated IP, you can 
+        /// generate the token by visiting your PIA account
+        internal static let subtitle = L10n.tr("Localizable", "settings.dedicatedip.subtitle", fallback: "Activate your Dedicated IP by typing your token in the field \nbelow. If you've recently purchased a Dedicated IP, you can \ngenerate the token by visiting your PIA account")
+        /// Enter 
+        internal static let title1 = L10n.tr("Localizable", "settings.dedicatedip.title1", fallback: "Enter ")
+        /// Dedicated IP
+        internal static let title2 = L10n.tr("Localizable", "settings.dedicatedip.title2", fallback: "Dedicated IP")
+        internal enum Alert {
+          /// Your token is either invalid or has expired.
+          internal static let message = L10n.tr("Localizable", "settings.dedicatedip.alert.message", fallback: "Your token is either invalid or has expired.")
+          /// Something went wrong
+          internal static let title = L10n.tr("Localizable", "settings.dedicatedip.alert.title", fallback: "Something went wrong")
+          internal enum Message {
+            /// Your token can't be empty.
+            internal static let empty = L10n.tr("Localizable", "settings.dedicatedip.alert.message.empty", fallback: "Your token can't be empty.")
+          }
+        }
+        internal enum Stats {
+          /// Dedicated IP
+          internal static let dedicatedip = L10n.tr("Localizable", "settings.dedicatedip.stats.dedicatedip", fallback: "Dedicated IP")
+          /// IP Address
+          internal static let ip = L10n.tr("Localizable", "settings.dedicatedip.stats.ip", fallback: "IP Address")
+          /// Location
+          internal static let location = L10n.tr("Localizable", "settings.dedicatedip.stats.location", fallback: "Location")
+          /// Quick Action
+          internal static let quickAction = L10n.tr("Localizable", "settings.dedicatedip.stats.quickAction", fallback: "Quick Action")
+          internal enum Delete {
+            /// Delete Dedicated IP
+            internal static let button = L10n.tr("Localizable", "settings.dedicatedip.stats.delete.button", fallback: "Delete Dedicated IP")
+            internal enum Alert {
+              /// Yes, Delete
+              internal static let delete = L10n.tr("Localizable", "settings.dedicatedip.stats.delete.alert.delete", fallback: "Yes, Delete")
+              /// You are about to remove your Dedicated IP from your account.
+              internal static let message = L10n.tr("Localizable", "settings.dedicatedip.stats.delete.alert.message", fallback: "You are about to remove your Dedicated IP from your account.")
+              /// Are you sure?
+              internal static let title = L10n.tr("Localizable", "settings.dedicatedip.stats.delete.alert.title", fallback: "Are you sure?")
+            }
+          }
+        }
+        internal enum Status {
+          /// Active
+          internal static let active = L10n.tr("Localizable", "settings.dedicatedip.status.active", fallback: "Active")
+          /// Error
+          internal static let error = L10n.tr("Localizable", "settings.dedicatedip.status.error", fallback: "Error")
+          /// Expired
+          internal static let expired = L10n.tr("Localizable", "settings.dedicatedip.status.expired", fallback: "Expired")
+          /// Invalid
+          internal static let invalid = L10n.tr("Localizable", "settings.dedicatedip.status.invalid", fallback: "Invalid")
+        }
+      }
       internal enum Dns {
         /// Custom
         internal static let custom = L10n.tr("Localizable", "settings.dns.custom", fallback: "Custom")

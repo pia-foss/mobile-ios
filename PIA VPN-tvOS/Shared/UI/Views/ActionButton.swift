@@ -9,14 +9,25 @@
 import Foundation
 import SwiftUI
 
-struct ActionButton: View {
-    var title: String
-    var action: () -> Void
-    @FocusState private var isFocus: Bool
+struct ActionButtonStyle {
+    var focusedColor: Color = Color.pia_primary
+    var focusedTitleColor: Color = Color.pia_on_primary
+    var unfocusedColor: Color = Color.pia_surface_container_secondary
+    var unfocusedTitleColor: Color = Color.pia_on_surface
+    var titleAlignment: Alignment = .center
+    var titlePadding: EdgeInsets = EdgeInsets()
+}
 
-    init(title: String, action: @escaping () -> Void, isFocus: Bool = false) {
+struct ActionButton: View {
+    private let title: String
+    private let action: () -> Void
+    @FocusState private var isFocus: Bool
+    private let style: ActionButtonStyle
+
+    init(title: String, style: ActionButtonStyle = ActionButtonStyle(), action: @escaping () -> Void, isFocus: Bool = false) {
         self.title = title
         self.action = action
+        self.style = style
         self.isFocus = isFocus
     }
 
@@ -26,13 +37,14 @@ struct ActionButton: View {
             label: {
                 ZStack {
                     if isFocus {
-                        Color.pia_primary
+                        style.focusedColor
                     } else {
-                        Color.pia_surface_container_secondary
+                        style.unfocusedColor
                     }
                     Text(title)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                        .foregroundStyle(isFocus ? Color.pia_on_primary : Color.pia_on_surface)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: style.titleAlignment)
+                        .foregroundStyle(isFocus ? style.focusedTitleColor : style.unfocusedTitleColor)
+                        .padding(style.titlePadding)
                 }
             }
         )

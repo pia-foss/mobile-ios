@@ -30,23 +30,25 @@ class AvailableSettingsViewModel: ObservableObject {
         }
     }
     
-    var sections: [Sections] = [.account]
+    var sections: [Sections] = [.account, .dedicatedIp]
     
     private let onAccountSectionSelectedAction: AppRouter.Actions
+    private let onDedicatedIpSectionSelectedAction: AppRouter.Actions
     
-    init(onAccountSelectedAction: AppRouter.Actions) {
+    init(onAccountSelectedAction: AppRouter.Actions, onDedicatedIpSectionSelectedAction: AppRouter.Actions) {
         self.onAccountSectionSelectedAction = onAccountSelectedAction
+        self.onDedicatedIpSectionSelectedAction = onDedicatedIpSectionSelectedAction
     }
     
     func navigate(to section: Sections) {
         switch section {
         case .account:
-            onAccountSectionSelectedAction.callAsFunction()
+            onAccountSectionSelectedAction()
         case .general:
             // TODO: Implement me
             break
         case .dedicatedIp:
-            // TODO: Implement me
+            onDedicatedIpSectionSelectedAction()
             break
         }
     }

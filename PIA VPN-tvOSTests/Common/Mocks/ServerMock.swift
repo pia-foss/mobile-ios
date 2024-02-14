@@ -17,6 +17,12 @@ class ServerMock: ServerType {
     
     var geo: Bool
     
+    var dipToken: String?
+    
+    var dipIKEv2IP: String?
+    
+    var dipStatusString: String?
+    
     init(name: String, identifier: String, regionIdentifier: String, country: String, geo: Bool, pingTime: Int? = nil, isAutomatic: Bool = false) {
         self.name = name
         self.identifier = identifier
