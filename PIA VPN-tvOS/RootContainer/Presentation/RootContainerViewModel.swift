@@ -55,7 +55,6 @@ class RootContainerViewModel: ObservableObject {
         
         let onBoardingVpnProfileInstalled = vpnConfigurationAvailability.get()
         let shouldShowconnectionStatsPermisson = connectionStatsPermissonType.get() == nil
-        
         switch (accountProvider.isLoggedIn, onBoardingVpnProfileInstalled) {
             // logged in, vpn profile installed
         case (true, true):

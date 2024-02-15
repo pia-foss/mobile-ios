@@ -56,7 +56,7 @@ class VPNConfigurationInstallingFactory {
                                         vpnConfigurationAvailability: VPNConfigurationAvailability())
     }
     
-    private static func makeVpnConfigurationProvider() -> VpnConfigurationProviderType {
+    static func makeVpnConfigurationProvider() -> VpnConfigurationProviderType {
         return VpnConfigurationProvider(vpnProvider: Client.providers.vpnProvider)
     }
 }

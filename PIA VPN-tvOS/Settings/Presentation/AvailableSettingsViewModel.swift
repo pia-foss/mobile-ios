@@ -18,21 +18,37 @@ class AvailableSettingsViewModel: ObservableObject {
             return self
         }
         
-        // TODO: Localize
         var title: String {
             switch self {
             case .account:
-                return "Account"
+                return L10n.Localizable.Menu.Item.account
             case .general:
-                return "General Settings"
+                return L10n.Localizable.Global.General.settings
             case .dedicatedIp:
-                return "Dedicated IP"
+                return L10n.Localizable.Dedicated.Ip.title
             }
         }
     }
     
     var sections: [Sections] = [.account]
     
+    private let onAccountSectionSelectedAction: AppRouter.Actions
     
+    init(onAccountSelectedAction: AppRouter.Actions) {
+        self.onAccountSectionSelectedAction = onAccountSelectedAction
+    }
+    
+    func navigate(to section: Sections) {
+        switch section {
+        case .account:
+            onAccountSectionSelectedAction.callAsFunction()
+        case .general:
+            // TODO: Implement me
+            break
+        case .dedicatedIp:
+            // TODO: Implement me
+            break
+        }
+    }
     
 }

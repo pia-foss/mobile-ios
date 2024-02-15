@@ -217,6 +217,10 @@
 		6963465D2B7109DA0051F8BC /* RegionsFilterUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6963465C2B7109DA0051F8BC /* RegionsFilterUseCaseTests.swift */; };
 		696E8F0D2B31A8760080BB31 /* NotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696E8F0C2B31A8760080BB31 /* NotificationCenterMock.swift */; };
 		696E8F102B31AC690080BB31 /* RootContainerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696E8F0F2B31AC690080BB31 /* RootContainerViewModelTests.swift */; };
+		696ECB6D2B7E1806006276EA /* AccountSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696ECB6C2B7E1806006276EA /* AccountSettingsViewModel.swift */; };
+		696ECB6F2B7E1819006276EA /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696ECB6E2B7E1819006276EA /* AccountSettingsView.swift */; };
+		696ECB712B7E2573006276EA /* AppPreferences+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696ECB702B7E2573006276EA /* AppPreferences+Protocols.swift */; };
+		696ECB742B7E2748006276EA /* LogOutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696ECB732B7E2748006276EA /* LogOutUseCase.swift */; };
 		69793DA12B59B96B000CB845 /* RegionsListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69793DA02B59B96B000CB845 /* RegionsListViewModelTests.swift */; };
 		69793DA42B5A9B27000CB845 /* RegionsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69793DA32B5A9B27000CB845 /* RegionsContainerView.swift */; };
 		69793DA62B5A9E1E000CB845 /* RegionsContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69793DA52B5A9E1E000CB845 /* RegionsContainerViewModel.swift */; };
@@ -1070,6 +1074,10 @@
 		6963465C2B7109DA0051F8BC /* RegionsFilterUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsFilterUseCaseTests.swift; sourceTree = "<group>"; };
 		696E8F0C2B31A8760080BB31 /* NotificationCenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterMock.swift; sourceTree = "<group>"; };
 		696E8F0F2B31AC690080BB31 /* RootContainerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerViewModelTests.swift; sourceTree = "<group>"; };
+		696ECB6C2B7E1806006276EA /* AccountSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewModel.swift; sourceTree = "<group>"; };
+		696ECB6E2B7E1819006276EA /* AccountSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsView.swift; sourceTree = "<group>"; };
+		696ECB702B7E2573006276EA /* AppPreferences+Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppPreferences+Protocols.swift"; sourceTree = "<group>"; };
+		696ECB732B7E2748006276EA /* LogOutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutUseCase.swift; sourceTree = "<group>"; };
 		69793DA02B59B96B000CB845 /* RegionsListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListViewModelTests.swift; sourceTree = "<group>"; };
 		69793DA32B5A9B27000CB845 /* RegionsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsContainerView.swift; sourceTree = "<group>"; };
 		69793DA52B5A9E1E000CB845 /* RegionsContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsContainerViewModel.swift; sourceTree = "<group>"; };
@@ -2077,6 +2085,14 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		696ECB722B7E2734006276EA /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				696ECB732B7E2748006276EA /* LogOutUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
 		69793D9E2B59B94A000CB845 /* RegionsList */ = {
 			isa = PBXGroup;
 			children = (
@@ -2191,6 +2207,7 @@
 				69A226B72B3079EA0065EDDB /* PIA+String.swift */,
 				6993119F2B31894D00D316C8 /* Foundation+Protocols.swift */,
 				69AB492D2B63CB6100C780CD /* AppConstants+Protocols.swift */,
+				696ECB702B7E2573006276EA /* AppPreferences+Protocols.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2396,6 +2413,7 @@
 		69FA73D72B7D5073002300B3 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				696ECB722B7E2734006276EA /* UseCases */,
 				69FA73DE2B7D50BE002300B3 /* Presentation */,
 				69FA73D92B7D508C002300B3 /* UI */,
 				69FA73D82B7D507C002300B3 /* CompositionRoot */,
@@ -2415,6 +2433,7 @@
 			isa = PBXGroup;
 			children = (
 				69FA73DC2B7D50B2002300B3 /* AvailableSettingsView.swift */,
+				696ECB6E2B7E1819006276EA /* AccountSettingsView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2423,6 +2442,7 @@
 			isa = PBXGroup;
 			children = (
 				69FA73DF2B7D50D7002300B3 /* AvailableSettingsViewModel.swift */,
+				696ECB6C2B7E1806006276EA /* AccountSettingsViewModel.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -4351,6 +4371,7 @@
 				E5C507A22B0FE40000200A6A /* LoginView.swift in Sources */,
 				693CA5AD2B3ED74100D38378 /* AppConfiguration.swift in Sources */,
 				69E61DE82B55643500085648 /* RegionsListView.swift in Sources */,
+				696ECB712B7E2573006276EA /* AppPreferences+Protocols.swift in Sources */,
 				69F675AD2B593437000E31D5 /* ServerProvider+UI.swift in Sources */,
 				E5AB287D2B28E4E700744E5F /* UserAccountMapper.swift in Sources */,
 				697A5F512B514DC500661977 /* UserActivatedContainerFactory.swift in Sources */,
@@ -4374,6 +4395,7 @@
 				69E61DEA2B55644900085648 /* RegionsListViewModel.swift in Sources */,
 				69816C3D2B4EBB3C00E3C86B /* Destinations.swift in Sources */,
 				E55EDCDC2B758BDF007010DB /* SplashView.swift in Sources */,
+				696ECB6F2B7E1819006276EA /* AccountSettingsView.swift in Sources */,
 				69FF0B0D2B3AD57C0074AA04 /* SelectedServerUseCase.swift in Sources */,
 				69C5E7CE2B72949000FE3126 /* TopNavigationViewModel.swift in Sources */,
 				69FF0B112B3AF1F00074AA04 /* QuickConnectButton.swift in Sources */,
@@ -4397,6 +4419,7 @@
 				69793DA42B5A9B27000CB845 /* RegionsContainerView.swift in Sources */,
 				6953E54D2B7A907A00D685B4 /* View+Extensions.swift in Sources */,
 				E55EDCF02B760EEB007010DB /* FormTextFieldsView.swift in Sources */,
+				696ECB742B7E2748006276EA /* LogOutUseCase.swift in Sources */,
 				E5C5077A2B0E144E00200A6A /* PIA_VPN_tvOSApp.swift in Sources */,
 				69F1C2952B2B216100E924AE /* PIA+Animation.swift in Sources */,
 				69FA73DB2B7D509E002300B3 /* SettingsFactory.swift in Sources */,
@@ -4414,6 +4437,7 @@
 				E5C507CA2B1FAC3600200A6A /* LoginDomainErrorMapper.swift in Sources */,
 				693CA5AC2B3ED69B00D38378 /* AppConstants.swift in Sources */,
 				E52E69122B5DAE6100471913 /* Bootstrapper.swift in Sources */,
+				696ECB6D2B7E1806006276EA /* AccountSettingsViewModel.swift in Sources */,
 				69FF0B0F2B3AE8F60074AA04 /* PIAImages+SwiftUI.swift in Sources */,
 				E5AB28772B28B49A00744E5F /* UserAccount.swift in Sources */,
 				69A226C02B307DBF0065EDDB /* RootContainerFactory.swift in Sources */,

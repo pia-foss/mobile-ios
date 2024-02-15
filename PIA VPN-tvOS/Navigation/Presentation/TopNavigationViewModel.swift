@@ -107,6 +107,12 @@ class TopNavigationViewModel: ObservableObject {
                  return .vpn
             case .availableSettings as SettingsDestinations:
                 return .settings
+            case .account as SettingsDestinations:
+                return .settings
+            case .general as SettingsDestinations:
+                return .settings
+            case .dip as SettingsDestinations:
+                return .settings
             // TODO: add help destinations when implemented
             default:
                 return .vpn

@@ -903,6 +903,18 @@ internal enum L10n {
       }
     }
     internal enum Settings {
+      internal enum Account {
+        internal enum LogOutAlert {
+          /// Logging out will terminate any active VPN connection and leave you unprotected.
+          internal static let message = L10n.tr("Localizable", "settings.account.log_out_alert.message", fallback: "Logging out will terminate any active VPN connection and leave you unprotected.")
+          /// Are you sure?
+          internal static let title = L10n.tr("Localizable", "settings.account.log_out_alert.title", fallback: "Are you sure?")
+        }
+        internal enum LogOutButton {
+          /// Log Out
+          internal static let title = L10n.tr("Localizable", "settings.account.log_out_button.title", fallback: "Log Out")
+        }
+      }
       internal enum ApplicationInformation {
         /// APPLICATION INFORMATION
         internal static let title = L10n.tr("Localizable", "settings.application_information.title", fallback: "APPLICATION INFORMATION")

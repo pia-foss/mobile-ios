@@ -21,14 +21,13 @@ struct AvailableSettingsView: View {
                 .aspectRatio(contentMode: .fit)
         }
         .padding(.top, Spacing.screenTopPadding)
-            
     }
     
     var availableSettingsList: some View {
         List {
             ForEach(viewModel.sections, id: \.self) { section in
                 Button {
-                    // TODO: Implement
+                    viewModel.navigate(to: section)
                 } label: {
                     HStack {
                         Text(section.title)
@@ -45,10 +44,13 @@ struct AvailableSettingsView: View {
                 .focused($focusedSection, equals: section)
                 .buttonStyle(BasicButtonStyle())
                 .buttonBorderShape(.roundedRectangle)
-                .listRowBackground(focusedSection == section ? Color.pia_primary.clipShape(RoundedRectangle(cornerSize: Spacing.listItemCornerSize)) : Color.clear.clipShape(RoundedRectangle(cornerSize: Spacing.listItemCornerSize)))
-                
-                
-
+                .listRowBackground(
+                    focusedSection == section ?
+                    Color.pia_primary
+                        .clipShape(RoundedRectangle(cornerSize: Spacing.listItemCornerSize)) :
+                    Color.pia_surface_container_secondary
+                        .clipShape(RoundedRectangle(cornerSize: Spacing.listItemCornerSize))
+                )
                 
             }
         }

@@ -11,6 +11,8 @@ import PIALibrary
 
 protocol VpnConfigurationProviderType {
     func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?)
+    
+    func uninstall(_ callback: SuccessLibraryCallback?)
 }
 
 class VpnConfigurationProvider: VpnConfigurationProviderType {
@@ -22,5 +24,9 @@ class VpnConfigurationProvider: VpnConfigurationProviderType {
     
     func install(force forceInstall: Bool, _ callback: PIALibrary.SuccessLibraryCallback?) {
         vpnProvider.install(force: forceInstall, callback)
+    }
+    
+    func uninstall(_ callback: SuccessLibraryCallback?) {
+        self.vpnProvider.uninstall(callback)
     }
 }

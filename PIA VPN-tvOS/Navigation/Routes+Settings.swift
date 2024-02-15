@@ -17,6 +17,8 @@ enum SettingsDestinations {
 }
 
 
+
+
 extension View {
     func withSettingsRoutes() -> some View {
         self.navigationDestination(for: SettingsDestinations.self) { destination in
@@ -25,8 +27,8 @@ extension View {
                 SettingsFactory.makeAvailableSettingsView()
                     .withTopNavigationBar(with: "Settings")
             case .account:
-                // TODO: Implement me
-                EmptyView()
+                SettingsFactory.makeAccountSettingsView()
+                    .withTopNavigationBar(with: "Account")
             case .general:
                 // TODO: Implement me
                 EmptyView()
