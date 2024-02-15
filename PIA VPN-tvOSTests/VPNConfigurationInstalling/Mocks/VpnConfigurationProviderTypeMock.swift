@@ -11,6 +11,7 @@ import PIALibrary
 @testable import PIA_VPN_tvOS
 
 class VpnConfigurationProviderTypeMock: VpnConfigurationProviderType {
+    
     private let error: Error?
     
     init(error: Error?) {
@@ -20,4 +21,9 @@ class VpnConfigurationProviderTypeMock: VpnConfigurationProviderType {
     func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?) {
         callback?(error)
     }
+    
+    func uninstall(_ callback: PIALibrary.SuccessLibraryCallback?) {
+        callback?(error)
+    }
+    
 }

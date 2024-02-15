@@ -8,8 +8,13 @@
 
 import Foundation
 @testable import PIA_VPN_tvOS
+import PIALibrary
 
 class AccountProviderTypeMock: AccountProviderType {
+    var publicUsername: String? = nil
+    
+    var currentUser: PIALibrary.UserAccount? = nil
+    
     var isLoggedIn: Bool = false
     
     private(set) var logoutCalled = false
