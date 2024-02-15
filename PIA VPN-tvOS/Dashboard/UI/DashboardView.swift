@@ -6,9 +6,9 @@ struct DashboardView: View {
     @ObservedObject var viewModel: DashboardViewModel
     
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
             ConnectionStateBar(tintColor: viewModel.connectionTintColor.connectionBarTint)
-            
+            Spacer()
             DashboardConnectionButtonSection()
                 .padding(.bottom, 80)
             
@@ -17,7 +17,7 @@ struct DashboardView: View {
             
             QuickConnectSection()
                 .frame(width: Spacing.dashboardViewWidth)
-            
+            Spacer()
         }
         .withTopNavigationBarAndTitleView {
             // View for the Title section of the Navigation bar
