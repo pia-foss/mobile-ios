@@ -90,11 +90,14 @@ class BootstraperFactory {
     }
     
     private static func acceptDataSharing() {
-        if Client.preferences.shareServiceQualityData {
-            ServiceQualityManager.shared.start()
-        } else {
+        let connectionStatsPermisson = ConnectionStatsPermisson()
+        guard let permissionGranted = connectionStatsPermisson.get(),
+        permissionGranted else {
             ServiceQualityManager.shared.stop()
+            return
         }
+        
+        ServiceQualityManager.shared.start()
     }
     
     private static func setupExceptionHandler() {
