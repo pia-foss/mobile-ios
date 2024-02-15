@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class UserActivatedContainerFactory {
     static func makeUSerActivatedContainerView() -> UserActivatedContainerView {

@@ -16,16 +16,23 @@ class LogOutUseCase: LogOutUseCaseType {
     let accountProvider: AccountProviderType
     let appPreferences: AppPreferencesType
     let vpnConfigurationProvider: VpnConfigurationProviderType
+    let vpnConfigurationAvailability: VPNConfigurationAvailabilityType
+    let connectionStatsPermisson: ConnectionStatsPermissonType
     
-    init(accountProvider: AccountProviderType, appPreferences: AppPreferencesType, vpnConfigurationProvicer: VpnConfigurationProviderType) {
+    init(accountProvider: AccountProviderType, appPreferences: AppPreferencesType, vpnConfigurationProvicer: VpnConfigurationProviderType, vpnConfigurationAvailability: VPNConfigurationAvailabilityType,
+         connectionStatsPermisson: ConnectionStatsPermissonType) {
         self.accountProvider = accountProvider
         self.appPreferences = appPreferences
         self.vpnConfigurationProvider = vpnConfigurationProvicer
+        self.vpnConfigurationAvailability = vpnConfigurationAvailability
+        self.connectionStatsPermisson = connectionStatsPermisson
     }
     
     private func uninstallVpnConfiguration() async {
         return await withCheckedContinuation { continuation in
             vpnConfigurationProvider.uninstall { _ in
+                self.vpnConfigurationAvailability.set(value: false)
+                self.connectionStatsPermisson.set(value: nil)
                 continuation.resume()
             }
         }

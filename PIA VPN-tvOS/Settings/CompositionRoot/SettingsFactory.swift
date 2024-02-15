@@ -23,7 +23,11 @@ class SettingsFactory {
             fatalError("Incorrect account provider type")
         }
         
-        return LogOutUseCase(accountProvider: defaultAccountProvider, appPreferences: AppPreferences.shared, vpnConfigurationProvicer: VPNConfigurationInstallingFactory.makeVpnConfigurationProvider())
+        return LogOutUseCase(accountProvider: defaultAccountProvider, 
+                             appPreferences: AppPreferences.shared,
+                             vpnConfigurationProvicer: VPNConfigurationInstallingFactory.makeVpnConfigurationProvider(),
+                             vpnConfigurationAvailability: VPNConfigurationAvailability(),
+                             connectionStatsPermisson: ConnectionStatsPermisson())
     }
     
     private static func makeAccountSettingsViewModel() -> AccountSettingsViewModel {
