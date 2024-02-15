@@ -5,6 +5,8 @@ import PIALibrary
 
 protocol AccountProviderType {
     var isLoggedIn: Bool { get }
+    var publicUsername: String? { get }
+    var currentUser: PIALibrary.UserAccount? { get set }
     func logout(_ callback: ((Error?) -> Void)?)
 }
 

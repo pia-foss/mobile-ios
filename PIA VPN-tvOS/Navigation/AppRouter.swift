@@ -55,6 +55,7 @@ class AppRouter: ObservableObject, AppRouterType {
         pathDestinations.removeAll()
         path.removeLast(path.count)
     }
+    
 }
 
 
@@ -75,7 +76,7 @@ extension AppRouter {
                 router.navigate(to: destination)
             }
         }
-      
+        
         static func == (lhs: AppRouter.Actions, rhs: AppRouter.Actions) -> Bool {
             switch (lhs, rhs) {
             case (.pop, .pop):
@@ -103,4 +104,35 @@ extension AppRouter {
             }
         }.store(in: &cancellables)
     }
+}
+
+// MARK: - Destinations Navigations Actions
+
+extension AppRouter {
+    
+    private static func navigateRouterToDestinationAction(_ destination: any Destinations) -> AppRouter.Actions {
+        AppRouter.Actions.navigate(router: AppRouterFactory.makeAppRouter(), destination: destination)
+    }
+}
+
+// MARK: - Settings Navigation Actions
+
+extension AppRouter {
+    
+    static var navigateToAvailableSettingsDestinationAction: AppRouter.Actions {
+        navigateRouterToDestinationAction(SettingsDestinations.availableSettings)
+    }
+    
+    static var navigateToAccountSettingsDestinationAction: AppRouter.Actions {
+        navigateRouterToDestinationAction(SettingsDestinations.account)
+    }
+    
+    static var navigateToGeneralSettingsDestinationAction: AppRouter.Actions {
+        navigateRouterToDestinationAction(SettingsDestinations.general)
+    }
+    
+    static var navigateToDIPSettingsDestinationAction: AppRouter.Actions {
+        navigateRouterToDestinationAction(SettingsDestinations.dip)
+    }
+
 }

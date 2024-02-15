@@ -83,7 +83,7 @@ struct TrailingNavigationView: View {
                     }
                     .focused($focusedSection, equals: section)
                     .buttonBorderShape(.circle)
-                    .buttonStyle(BasicButtonStyle())
+                    .buttonStyle(.card)
                 }
             }
             

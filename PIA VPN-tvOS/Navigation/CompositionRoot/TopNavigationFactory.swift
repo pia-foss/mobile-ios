@@ -20,7 +20,7 @@ class TopNavigationFactory {
     }
     
     static func makeTopNavigationViewModel() -> TopNavigationViewModel {
-        return topNavigationViewModelShared
+        return  TopNavigationViewModel(appRouter: AppRouterFactory.makeAppRouter())
     }
     
     

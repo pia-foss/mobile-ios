@@ -52,7 +52,7 @@ protocol RegionsFilterUseCaseType {
 }
 
 class RegionsFilterUseCase: RegionsFilterUseCaseType {
-    
+    private let maxReccommendedServersCount = 12
     private let serversUseCase: RegionsListUseCaseType
     private let favoritesUseCase: FavoriteRegionUseCaseType
     private let previouslySearchedAvailability: SearchedRegionsAvailabilityType
@@ -129,9 +129,9 @@ extension RegionsFilterUseCase {
     }
     
     private func getRecommended(from servers: [ServerType]) -> [ServerType] {
-        servers.sorted(by: {
+        Array(servers.sorted(by: {
              $0.pingTime ?? 0 < $1.pingTime ?? 0
-         })
+        }).prefix(maxReccommendedServersCount))
     }
     
     private func getSearchResultsFrom(_ servers: [ServerType], with searchTerm: String) -> [ServerType] {
