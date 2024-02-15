@@ -48,4 +48,7 @@ jobs:
       
     - name: Upload version to TestFlight
       run: bundle exec fastlane testflight_build
+
+    - name: Upload tvOS version to TestFlight
+      run: bundle exec fastlane testflight_build_tvos
       
