@@ -458,7 +458,8 @@
 "top_navigation_bar.location_selection_screen.title" = "Location Selection";
 
 //Onboarding - Connection Stats Permisson (tvOS)
-"onboarding.connection_stats.subtitle" = "To ensure our service's connection performance, you can anonymously share your connection stats with us. These reports do no include any personally identifiable information. \n\nNote that you can always control this from your settings.";
+"onboarding.connection_stats.title" = "Help Improve PIA";
+"onboarding.connection_stats.subtitle" = "Help us improve by sharing VPN connection statistics. These report never contain personally identifiable information.";
 
 //Onboarding - VPN Installing Profile (tvOS)
 "onboarding.vpn_configuration.title" = "Configure PIA";

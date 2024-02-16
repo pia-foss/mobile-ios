@@ -23,7 +23,7 @@ class ConnectionStatsPermisson: ConnectionStatsPermissonType {
         return userDefautls.object(forKey: .kConnectionStatsPermisson) as? Bool
     }
     
-    func set(value: Bool) {
+    func set(value: Bool?) {
         userDefautls.set(value, forKey: .kConnectionStatsPermisson)
     }
 }

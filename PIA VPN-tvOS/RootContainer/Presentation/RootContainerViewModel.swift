@@ -45,17 +45,17 @@ class RootContainerViewModel: ObservableObject {
     private func setup() {
         bootstrap()
         isBootstrapped = true
-        updateState()
+        updateState(isLoggedIn: accountProvider.isLoggedIn)
     }
     
-    @objc private func updateState() {
+    private func updateState(isLoggedIn: Bool) {
         guard isBootstrapped else {
             return
         }
         
         let onBoardingVpnProfileInstalled = vpnConfigurationAvailability.get()
         let shouldShowconnectionStatsPermisson = connectionStatsPermissonType.get() == nil
-        switch (accountProvider.isLoggedIn, onBoardingVpnProfileInstalled) {
+        switch (isLoggedIn, onBoardingVpnProfileInstalled) {
             // logged in, vpn profile installed
         case (true, true):
             state = .activated
@@ -63,6 +63,7 @@ class RootContainerViewModel: ObservableObject {
         case (true, false):
             state = .activatedNotOnboarded
             if shouldShowconnectionStatsPermisson {
+                appRouter.goBackToRoot()
                 appRouter.navigate(to: OnboardingDestinations.connectionstats)
             } else {
                 appRouter.navigate(to: OnboardingDestinations.installVPNProfile)
@@ -70,6 +71,7 @@ class RootContainerViewModel: ObservableObject {
             // not logged in, any
         case (false, _):
             state = .notActivated
+            appRouter.goBackToRoot()
         }
     }
     
@@ -83,12 +85,16 @@ class RootContainerViewModel: ObservableObject {
 extension RootContainerViewModel {
     private func subscribeToAccountUpdates() {
         userAuthenticationStatusMonitor.getStatus().sink { status in
-            self.updateState()
+            self.updateState(isLoggedIn: status == .loggedIn)
         }.store(in: &cancellables)
         
         notificationCenter.addObserver(self,
-                         selector: #selector(updateState),
+                         selector: #selector(didInstallVPNProfile),
                          name: .DidInstallVPNProfile,
                          object: nil)
+    }
+    
+    @objc private func didInstallVPNProfile() {
+        updateState(isLoggedIn: accountProvider.isLoggedIn)
     }
 }

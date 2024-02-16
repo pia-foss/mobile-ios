@@ -30,7 +30,7 @@ class OnboardingFactory {
             AppRouter.Actions.navigate(router: AppRouter.shared, destination: OnboardingDestinations.installVPNProfile)()
         })
         
-        let title = L10n.Signup.Share.Data.Text.title
+        let title = L10n.Localizable.Onboarding.ConnectionStats.title
         let subtitle = L10n.Localizable.Onboarding.ConnectionStats.subtitle
         return OnboardingComponentViewModel(title: title,
                                             subtitle: subtitle,

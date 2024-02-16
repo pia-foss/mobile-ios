@@ -21,7 +21,9 @@ class ConnectionStatsPermissonMock: ConnectionStatsPermissonType {
         return value
     }
     
-    func set(value: Bool) {
-        settedValues.append(value)
+    func set(value: Bool?) {
+        if let value = value {
+            settedValues.append(value)
+        }
     }
 }

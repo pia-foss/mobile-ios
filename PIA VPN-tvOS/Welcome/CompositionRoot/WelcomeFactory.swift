@@ -24,7 +24,7 @@ class WelcomeFactory {
         
         return OnboardingComponentViewModel(title: L10n.Localizable.Tvos.Welcome.title,
                                             subtitle: nil,
-                                            buttons: [loginButton, signupButton])
+                                            buttons: [loginButton])
     }
     
     private static func makeWelcomeViewStyle() -> OnboardingComponentStytle {

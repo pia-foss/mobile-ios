@@ -10,5 +10,5 @@ import Foundation
 
 protocol ConnectionStatsPermissonType {
     func get() -> Bool?
-    func set(value: Bool)
+    func set(value: Bool?)
 }

@@ -712,10 +712,10 @@ internal enum L10n {
     }
     internal enum Onboarding {
       internal enum ConnectionStats {
-        /// To ensure our service's connection performance, you can anonymously share your connection stats with us. These reports do no include any personally identifiable information. 
-        /// 
-        /// Note that you can always control this from your settings.
-        internal static let subtitle = L10n.tr("Localizable", "onboarding.connection_stats.subtitle", fallback: "To ensure our service's connection performance, you can anonymously share your connection stats with us. These reports do no include any personally identifiable information. \n\nNote that you can always control this from your settings.")
+        /// Help us improve by sharing VPN connection statistics. These report never contain personally identifiable information.
+        internal static let subtitle = L10n.tr("Localizable", "onboarding.connection_stats.subtitle", fallback: "Help us improve by sharing VPN connection statistics. These report never contain personally identifiable information.")
+        /// Help Improve PIA
+        internal static let title = L10n.tr("Localizable", "onboarding.connection_stats.title", fallback: "Help Improve PIA")
       }
       internal enum VpnConfiguration {
         /// Configure PIA

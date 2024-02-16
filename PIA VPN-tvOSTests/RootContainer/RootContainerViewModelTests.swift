@@ -63,7 +63,7 @@ final class RootContainerViewModelTests: XCTestCase {
         XCTAssertEqual(sut.state, .notActivated)
         
         // AND no navigation requests are sent to the router
-        XCTAssertEqual(fixture.appRouterSpy.requests, [])
+        XCTAssertEqual(fixture.appRouterSpy.requests, [AppRouterSpy.Request.goBackToRoot])
     }
     
     func testState_WhenUserIsAuthenticatedAndConnectionStatsPermissonNotShown() {
@@ -81,7 +81,7 @@ final class RootContainerViewModelTests: XCTestCase {
         XCTAssertEqual(sut.state, .activatedNotOnboarded)
         
         // AND the router is called to navigate to the Onboarding Install VPN profile
-        XCTAssertEqual(fixture.appRouterSpy.requests, [AppRouterSpy.Request.navigate(OnboardingDestinations.connectionstats)])
+        XCTAssertEqual(fixture.appRouterSpy.requests, [AppRouterSpy.Request.goBackToRoot, AppRouterSpy.Request.navigate(OnboardingDestinations.connectionstats)])
     }
     
     func testState_WhenUserIsAuthenticatedAndVpnProfileNotInstalled() {
