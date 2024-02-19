@@ -18,12 +18,15 @@ class SettingsFactory {
         return AvailableSettingsView(viewModel: makeAvailableSettingsViewModel())
     }
     
-    static func makeLogOutUseCase() -> LogOutUseCaseType {
+    static func makeDefaultAccountProvider() -> AccountProviderType {
         guard let defaultAccountProvider = Client.providers.accountProvider as? DefaultAccountProvider else {
             fatalError("Incorrect account provider type")
         }
-        
-        return LogOutUseCase(accountProvider: defaultAccountProvider, 
+        return defaultAccountProvider
+    }
+    
+    static func makeLogOutUseCase() -> LogOutUseCaseType {
+        return LogOutUseCase(accountProvider: makeDefaultAccountProvider(),
                              appPreferences: AppPreferences.shared,
                              vpnConfigurationProvicer: VPNConfigurationInstallingFactory.makeVpnConfigurationProvider(),
                              vpnConfigurationAvailability: VPNConfigurationAvailability(),
@@ -31,7 +34,7 @@ class SettingsFactory {
     }
     
     private static func makeAccountSettingsViewModel() -> AccountSettingsViewModel {
-        return AccountSettingsViewModel(logOutUseCase: makeLogOutUseCase())
+        return AccountSettingsViewModel(accountProvider: makeDefaultAccountProvider(), logOutUseCase: makeLogOutUseCase())
     }
     
     static func makeAccountSettingsView() -> AccountSettingsView {

@@ -495,4 +495,4 @@
 "settings.account.log_out_button.title" = "Log Out";
 "settings.account.log_out_alert.title" = "Are you sure?";
 "settings.account.log_out_alert.message" = "Logging out will terminate any active VPN connection and leave you unprotected.";
-
+"settings.account.subscription_expiry.title" = "Subscription expires on";

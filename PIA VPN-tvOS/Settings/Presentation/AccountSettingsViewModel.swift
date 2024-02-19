@@ -10,37 +10,40 @@ import Foundation
 
 class AccountSettingsViewModel: ObservableObject {
     
-    var logOutButtonTitle: String {
-        L10n.Localizable.Settings.Account.LogOutButton.title
-    }
-
-    var logOutAlertTitle: String {
-        L10n.Localizable.Settings.Account.LogOutAlert.title
-    }
-    
-    var logOutAlertMesage: String {
-        L10n.Localizable.Settings.Account.LogOutAlert.message
-    }
-    
-    var logOutAlertCancelActionText: String {
-        L10n.Localizable.Global.cancel
-    }
-    
-    var logOutAlertConfirmActionText: String {
-        L10n.Localizable.Settings.Account.LogOutButton.title
-    }
-    
     @Published var isLogOutAlertVisible: Bool = false
     @Published var isLoading: Bool = false
-    
+
+    let accountProvider: AccountProviderType
     let logOutUseCase: LogOutUseCaseType
     
-    init(logOutUseCase: LogOutUseCaseType) {
+    internal var expiryState: ExipryState = .unknown
+    
+    internal enum ExipryState: Equatable {
+        case unknown
+        case expired
+        case notExpired
+    }
+    
+    init(accountProvider: AccountProviderType, logOutUseCase: LogOutUseCaseType) {
+        self.accountProvider = accountProvider
         self.logOutUseCase = logOutUseCase
+        self.expiryState = getCurrentExpirtyState()
     }
     
     func logOutButtonWasTapped() {
         isLogOutAlertVisible = true
+    }
+    
+    private func getCurrentExpirtyState() -> ExipryState {
+        guard let userInfo = accountProvider.currentUser?.info else {
+            return .unknown
+        }
+        
+        if userInfo.isExpired {
+            return .expired
+        } else {
+            return .notExpired
+        }
     }
     
     private func setLoading(to loading: Bool) {
@@ -59,6 +62,63 @@ class AccountSettingsViewModel: ObservableObject {
                 setLoading(to: false)
             }
         }
+    }
+    
+}
+
+// MARK: - Localization
+
+extension AccountSettingsViewModel {
+    var usernameTitle: String {
+        L10n.Localizable.Account.Username.caption
+    }
+    
+    var usernameValue: String {
+        guard let username = accountProvider.publicUsername else {
+            return ""
+        }
+        
+        return username
+    }
+    
+    var subscriptionTitle: String {
+        switch expiryState {
+        case .unknown:
+            return ""
+        case .expired:
+            return L10n.Localizable.Account.ExpiryDate.expired
+        case .notExpired:
+            return L10n.Localizable.Settings.Account.SubscriptionExpiry.title
+        }
+    }
+    
+    var subscriptionValue: String {
+        guard expiryState == .notExpired,
+            let userInfo = accountProvider.currentUser?.info else {
+            return ""
+        }
+        
+        return userInfo.humanReadableExpirationDate()
+    }
+    
+    var logOutButtonTitle: String {
+        L10n.Localizable.Settings.Account.LogOutButton.title
+    }
+
+    var logOutAlertTitle: String {
+        L10n.Localizable.Settings.Account.LogOutAlert.title
+    }
+    
+    var logOutAlertMesage: String {
+        L10n.Localizable.Settings.Account.LogOutAlert.message
+    }
+    
+    var logOutAlertCancelActionText: String {
+        L10n.Localizable.Global.cancel
+    }
+    
+    var logOutAlertConfirmActionText: String {
+        L10n.Localizable.Settings.Account.LogOutButton.title
     }
     
 }

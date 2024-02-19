@@ -914,6 +914,10 @@ internal enum L10n {
           /// Log Out
           internal static let title = L10n.tr("Localizable", "settings.account.log_out_button.title", fallback: "Log Out")
         }
+        internal enum SubscriptionExpiry {
+          /// Subscription expires on
+          internal static let title = L10n.tr("Localizable", "settings.account.subscription_expiry.title", fallback: "Subscription expires on")
+        }
       }
       internal enum ApplicationInformation {
         /// APPLICATION INFORMATION

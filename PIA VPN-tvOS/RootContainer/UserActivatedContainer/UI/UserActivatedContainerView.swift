@@ -13,7 +13,6 @@ import Combine
 
 
 struct UserActivatedContainerView: View {
-    
     var body: some View {
         DashboardFactory.makeDashboardView()
             .navigationDestination(for: RegionsDestinations.self) { destination in
@@ -21,7 +20,7 @@ struct UserActivatedContainerView: View {
                 case .serversList:
                     RegionsSelectionFactory.makeRegionsContainerView()
                         .padding(.top, Spacing.screenTopPadding)
-                        .withTopNavigationBar(with: L10n.Localizable.TopNavigationBar.LocationSelectionScreen.title)
+                        .withTopNavigationBar(title: L10n.Localizable.TopNavigationBar.LocationSelectionScreen.title)
                 case .search:
                     RegionsSelectionFactory.makeSearchRegionsListView()
                         .navigationBarHidden(true)

@@ -19,7 +19,7 @@ class TopNavigationViewModel: ObservableObject {
     let leadingSections: [Sections] = [.vpn, .locations]
     
     // TODO: Add 'help' section in the trailing sections when we implement it
-    let trailingSections: [Sections] = [.settings]
+    let trailingSections: [Sections] = [.settings()]
     
     enum Sections: Equatable, Hashable, Identifiable {
         var id: Self {
@@ -28,7 +28,7 @@ class TopNavigationViewModel: ObservableObject {
         
         case vpn
         case locations
-        case settings
+        case settings(SettingsPath = .root)
         case help
         
         var title: String {
@@ -57,6 +57,10 @@ class TopNavigationViewModel: ObservableObject {
             }
 
         }
+        
+        enum SettingsPath: Equatable {
+            case root, account, general, dedicatedIp
+        }
     }
     
     init(appRouter: AppRouter) {
@@ -76,15 +80,22 @@ class TopNavigationViewModel: ObservableObject {
         case .vpn:
             appRouter.goBackToRoot()
         case .locations:
+            // Empty the current navigation path before pushing the Regions root flow
+            appRouter.goBackToRoot()
             appRouter.navigate(to: RegionsDestinations.serversList)
         case .settings:
+            // Empty the current navigation path before pushing the settings root flow
+            appRouter.goBackToRoot()
             appRouter.navigate(to: SettingsDestinations.availableSettings)
             break
         case .help:
+            // Empty the current navigation path before pushing the help root flow
+            appRouter.goBackToRoot()
             // TODO: Implement me
             break
         }
     }
+    
     
     func sectionDidUpdateFocus(to section: Sections?) {
         highlightedSection = section
@@ -106,13 +117,13 @@ class TopNavigationViewModel: ObservableObject {
             case .home as DashboardDestinations:
                  return .vpn
             case .availableSettings as SettingsDestinations:
-                return .settings
+                return .settings(.root)
             case .account as SettingsDestinations:
-                return .settings
+                return .settings(.account)
             case .general as SettingsDestinations:
-                return .settings
+                return .settings(.general)
             case .dip as SettingsDestinations:
-                return .settings
+                return .settings(.dedicatedIp)
             // TODO: add help destinations when implemented
             default:
                 return .vpn

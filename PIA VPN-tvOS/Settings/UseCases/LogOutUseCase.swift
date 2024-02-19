@@ -12,6 +12,7 @@ protocol LogOutUseCaseType {
     func logOut() async throws
 }
 
+// TODO: Add Unit Tests
 class LogOutUseCase: LogOutUseCaseType {
     let accountProvider: AccountProviderType
     let appPreferences: AppPreferencesType
@@ -51,6 +52,7 @@ class LogOutUseCase: LogOutUseCaseType {
         appPreferences.reset()
         await logoutUser()
         DispatchQueue.main.async {
+            // TODO: DI AppRouter
             AppRouter.shared.goBackToRoot()
         }
         
