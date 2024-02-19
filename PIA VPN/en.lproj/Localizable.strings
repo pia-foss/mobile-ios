@@ -442,7 +442,7 @@
 // Regions Selection(tvOS)
 "regions.filter.all.title" = "All";
 "regions.filter.search.title" = "Search";
-"regions.filter.favorites.title" = "Favourite";
+"regions.filter.favorites.title" = "Favourite(s)";
 "regions.search.recommended_locations.title" = "Recommended Locations";
 "regions.search.results.title" = "Search Results";
 "regions.search.button.title" = "Search for a Location";
@@ -450,7 +450,7 @@
 "regions.search.previous_results.title" = "Last Searched Locations";
 "regions.context_menu.favorites.add.text" = "Add to Favorites";
 "regions.context_menu.favorites.remove.text" = "Remove from Favorites";
-"regions.list_item.default.title" = "Default";
+"regions.list_item.default.title" = "Default Location";
 
 // Top Navigation bar
 "top_navigation_bar.vpn_item.title" = "PIA VPN";

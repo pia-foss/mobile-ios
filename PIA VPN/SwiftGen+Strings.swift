@@ -817,8 +817,8 @@ internal enum L10n {
           internal static let title = L10n.tr("Localizable", "regions.filter.all.title", fallback: "All")
         }
         internal enum Favorites {
-          /// Favourite
-          internal static let title = L10n.tr("Localizable", "regions.filter.favorites.title", fallback: "Favourite")
+          /// Favourite(s)
+          internal static let title = L10n.tr("Localizable", "regions.filter.favorites.title", fallback: "Favourite(s)")
         }
         internal enum Search {
           /// Search
@@ -827,8 +827,8 @@ internal enum L10n {
       }
       internal enum ListItem {
         internal enum Default {
-          /// Default
-          internal static let title = L10n.tr("Localizable", "regions.list_item.default.title", fallback: "Default")
+          /// Default Location
+          internal static let title = L10n.tr("Localizable", "regions.list_item.default.title", fallback: "Default Location")
         }
       }
       internal enum Search {
