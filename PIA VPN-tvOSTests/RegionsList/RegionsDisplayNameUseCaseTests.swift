@@ -54,7 +54,7 @@ class RegionsDisplayNameUseCaseTests: XCTestCase {
         // THEN the title is the server name
         XCTAssertEqual(displayName.title, Fixture.france.name)
         // AND the subtitle is 'Default'
-        XCTAssertEqual(displayName.subtitle, "Default")
+        XCTAssertEqual(displayName.subtitle, "Default Location")
     }
     
     func test_displayNameForNonDefaultServer_containingCountryCodeInName() {
