@@ -8,10 +8,7 @@ class RootContainerFactory {
     }
     
     private static func makeRootContainerViewModel() -> RootContainerViewModel {
-        guard let defaultAccountProvider = Client.providers.accountProvider as? DefaultAccountProvider else {
-            fatalError("Incorrect account provider type")
-        }
-        return RootContainerViewModel(accountProvider: defaultAccountProvider,
+        return RootContainerViewModel(accountProvider: SettingsFactory.makeDefaultAccountProvider(),
                                       vpnConfigurationAvailability: VPNConfigurationAvailability(),
                                       connectionStatsPermissonType: ConnectionStatsPermisson(),
                                       bootstrap: BootstraperFactory.makeBootstrapper(),

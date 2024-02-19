@@ -12,6 +12,8 @@ struct AccountSettingsView: View {
     @ObservedObject var viewModel: AccountSettingsViewModel
     @FocusState var logoutButtonFocused: Bool
     
+    let sectionsVerticalSpacing: CGFloat = 20
+    
     var body: some View {
         if viewModel.isLoading {
             LoginLoadingView()
@@ -20,9 +22,35 @@ struct AccountSettingsView: View {
         }
     }
     
+    func accountInfoTextView(with text: String) -> some View {
+        Text(text)
+            .font(.system(size: 38, weight: .medium))
+            .foregroundColor(.pia_on_surface_container_primary)
+    }
+    
+    var accountInfoSection: some View {
+        VStack(spacing: sectionsVerticalSpacing) {
+            HStack {
+                accountInfoTextView(with: viewModel.usernameTitle)
+                Spacer()
+                accountInfoTextView(with:viewModel.usernameValue)
+            }
+            HStack {
+                accountInfoTextView(with:viewModel.subscriptionTitle)
+                Spacer()
+                accountInfoTextView(with:viewModel.subscriptionValue)
+            }
+        }
+    }
+    
     var accountSettingsSection: some View {
         HStack {
-            logOutButton
+            VStack(spacing: sectionsVerticalSpacing) {
+                accountInfoSection
+                logOutButton
+                    .padding(.top, sectionsVerticalSpacing)
+            }
+            
             Spacer()
             Image.pia_settings_bg_image
                 .frame(width: 840)
@@ -47,12 +75,10 @@ struct AccountSettingsView: View {
                 HStack {
                     Text("Log Out")
                         .font(.system(size: 38, weight: .medium))
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 4)
                         .foregroundColor(logoutButtonFocused ? .pia_on_primary : .pia_on_surface)
                     Spacer()
                 }
-               
+                
             }
             .focused($logoutButtonFocused)
             .buttonStyle(BasicButtonStyle())
@@ -61,11 +87,11 @@ struct AccountSettingsView: View {
                 logoutButtonFocused ?
                 Color.pia_primary
                     .clipShape(RoundedRectangle(cornerSize: Spacing.listItemCornerSize)) :
-                Color.pia_surface_container_secondary
+                    Color.pia_surface_container_secondary
                     .clipShape(RoundedRectangle(cornerSize: Spacing.listItemCornerSize))
             )
         }
-       
-
+        
+        
     }
 }

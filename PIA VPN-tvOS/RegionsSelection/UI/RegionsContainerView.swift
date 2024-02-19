@@ -23,10 +23,12 @@ struct RegionsContainerView: View {
                         Text(menuItem.text)
                             .font(.system(size: 38, weight: .medium))
                             .foregroundColor(focusedFilter == menuItem ? .pia_on_primary : .pia_on_surface)
-                            .padding(20)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 16)
                         Spacer()
                     }
-                    .background(focusedFilter == menuItem ? Color.pia_primary : Color.clear)
+                    .background(focusedFilter == menuItem ? Color.pia_primary :
+                                    viewModel.selectedSection == menuItem ? Color.pia_surface_container_primary :    Color.clear)
                     .cornerRadius(12)
                     
                 }
@@ -36,7 +38,6 @@ struct RegionsContainerView: View {
                 
             }
         }
-        .listStyle(.plain)
     }
     
 
@@ -45,6 +46,7 @@ struct RegionsContainerView: View {
             HStack(alignment: .top, spacing: 40) {
                 regionsFilterButtons
                     .frame(width: Spacing.regionsFilterSectionWidth)
+                    .padding(.top, -10)
                 VStack(alignment: .trailing) {
                     switch viewModel.selectedSection {
                     case .favorites:
@@ -64,16 +66,15 @@ struct RegionsContainerView: View {
                         }
                         
                     }
-                }.frame(minWidth: 1208)
+                }
+                .frame(minWidth: 1208)
             }
             .onChange(of: focusedFilter) { _, newValue in
                 guard let focusedMenuItem = newValue else { return }
                 viewModel.selectedSection = focusedMenuItem
             }
         }
+
     }
 }
 
-#Preview {
-    RegionsContainerView(viewModel: RegionsSelectionFactory.makeRegionsContainerViewModel())
-}

@@ -9,9 +9,6 @@ class DashboardFactory {
     }
     
     static func makeDashboardViewModel() -> DashboardViewModel {
-        guard let defaultAccountProvider = Client.providers.accountProvider as? DefaultAccountProvider else {
-            fatalError("Incorrect account provider type")
-        }
         return DashboardViewModel(connectionStateMonitor: StateMonitorsFactory.makeConnectionStateMonitor)
     }
     

@@ -50,9 +50,5 @@ class LogOutUseCase: LogOutUseCaseType {
         await uninstallVpnConfiguration()
         appPreferences.reset()
         await logoutUser()
-        DispatchQueue.main.async {
-            AppRouter.shared.goBackToRoot()
-        }
-        
     }
 }

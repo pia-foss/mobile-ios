@@ -21,6 +21,9 @@ struct AvailableSettingsView: View {
                 .aspectRatio(contentMode: .fit)
         }
         .padding(.top, Spacing.screenTopPadding)
+        .onAppear {
+            setFocusToDefault()
+        }
     }
     
     var availableSettingsList: some View {
@@ -58,3 +61,11 @@ struct AvailableSettingsView: View {
     }
 }
 
+
+// MARK: - Default focus
+
+extension AvailableSettingsView {
+    private func setFocusToDefault() {
+        focusedSection = .account
+    }
+}
