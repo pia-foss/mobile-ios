@@ -1,4 +1,4 @@
-name: testflight_deploy
+name: tvos_testflight_deploy
 on:
   push:
     branches: 
@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   build:
-    runs-on: macos-13
+    runs-on: macos-14
     env:
       CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
       KEYCHAIN_NAME: ${{ secrets.KEYCHAIN_NAME }}
@@ -25,9 +25,6 @@ jobs:
         git config --global url."https://${{ secrets.ORG_GITHUB_USERNAME }}:${{ secrets.ORG_GITHUB_TOKEN }}@github.com/".insteadOf "git@github.com:"
 
     - uses: actions/checkout@v3
-
-    - name: Select XCode version
-      run: sudo xcode-select -s /Applications/Xcode_14.3.1.app
     
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
@@ -40,14 +37,11 @@ jobs:
     - name: Decode Certificates
       run: echo "${{ secrets.IOS_CERTIFICATE }}" | base64 --decode > ./fastlane/Certificate.p12
 
-    - name: Run tests
-      run: bundle exec fastlane tests
+    - name: Run tvOS tests
+      run: bundle exec fastlane tvOStests
 
     - name: Set up certificates and profiles
-      run: bundle exec fastlane get_profiles > /dev/null 2>&1
-      
-    - name: Upload version to TestFlight
-      run: bundle exec fastlane testflight_build
+      run: bundle exec fastlane get_tvos_profiles > /dev/null 2>&1
 
     - name: Upload tvOS version to TestFlight
       run: bundle exec fastlane testflight_build_tvos

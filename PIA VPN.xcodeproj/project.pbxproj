@@ -5536,7 +5536,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PacketTunnel";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = "PIA tvOS Distribution PacketTunnel WG";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = "PIA Distribution tvOS PacketTunnel";
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;

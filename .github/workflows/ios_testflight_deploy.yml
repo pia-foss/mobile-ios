@@ -1,0 +1,51 @@
+name: ios_testflight_deploy
+on:
+  push:
+    branches: 
+      - master
+
+  workflow_dispatch:
+concurrency:
+  group: "${{ github.run_id }}"
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: macos-13
+    env:
+      CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+      KEYCHAIN_NAME: ${{ secrets.KEYCHAIN_NAME }}
+      KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+      APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+      APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+      APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
+
+    steps:
+    - name: Setup Git credentials
+      run: |
+        git config --global url."https://${{ secrets.ORG_GITHUB_USERNAME }}:${{ secrets.ORG_GITHUB_TOKEN }}@github.com/".insteadOf "git@github.com:"
+
+    - uses: actions/checkout@v3
+
+    - name: Select XCode version
+      run: sudo xcode-select -s /Applications/Xcode_14.3.1.app
+    
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.0.2
+
+    - name: Install Fastlane
+      run: gem install fastlane
+
+    - name: Decode Certificates
+      run: echo "${{ secrets.IOS_CERTIFICATE }}" | base64 --decode > ./fastlane/Certificate.p12
+
+    - name: Run iOS tests
+      run: bundle exec fastlane tests
+
+    - name: Set up certificates and profiles
+      run: bundle exec fastlane get_profiles > /dev/null 2>&1
+      
+    - name: Upload version to TestFlight
+      run: bundle exec fastlane testflight_build
+      

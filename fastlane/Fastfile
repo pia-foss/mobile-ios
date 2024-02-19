@@ -24,7 +24,7 @@ platform :ios do
     )
   end
 
-  desc "This line is for settin up the certificates and provisioning profiles"
+  desc "This line is for settin up the certificates and provisioning profiles for iOS"
   lane :get_profiles do |options|
     api_key = app_store_connect_api_key(
       key_id: key_id,
@@ -35,36 +35,79 @@ platform :ios do
     certificates
     development_profiles = options[:development] || false
 
+    prov_name_preffix = "match AppStore"
+    if development_profiles == true
+      prov_name_preffix = "match Development"
+    end
     get_provisioning_profile(
       development: development_profiles,
       api_key: api_key,
-      app_identifier: "com.privateinternetaccess.ios.PIA-VPN"
+      app_identifier: "com.privateinternetaccess.ios.PIA-VPN",
+      provisioning_name: "#{prov_name_preffix} com.privateinternetaccess.ios.PIA-VPN",
+      fail_on_name_taken: true
     )
 
     get_provisioning_profile(
       development: development_profiles,
       api_key: api_key,
-      app_identifier: "com.privateinternetaccess.ios.PIA-VPN.Tunnel"
+      app_identifier: "com.privateinternetaccess.ios.PIA-VPN.Tunnel",
+      provisioning_name: "#{prov_name_preffix} com.privateinternetaccess.ios.PIA-VPN.Tunnel",
+      fail_on_name_taken: true
+    )
+
+
+    get_provisioning_profile(
+      development: development_profiles,
+      api_key: api_key,
+      app_identifier: "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel",
+      provisioning_name: "#{prov_name_preffix} com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel",
+      fail_on_name_taken: true
     )
 
     get_provisioning_profile(
       development: development_profiles,
       api_key: api_key,
-      app_identifier: "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel"
+      app_identifier: "com.privateinternetaccess.ios.PIA-VPN.PIAWidget",
+      provisioning_name: "#{prov_name_preffix} com.privateinternetaccess.ios.PIA-VPN.PIAWidget",
+      fail_on_name_taken: true
     )
 
     get_provisioning_profile(
       development: development_profiles,
       api_key: api_key,
-      app_identifier: "com.privateinternetaccess.ios.PIA-VPN.PIAWidget"
+      app_identifier: "com.privateinternetaccess.ios.PIA-VPN.AdBlocker",
+      provisioning_name: "#{prov_name_preffix} com.privateinternetaccess.ios.PIA-VPN.AdBlocker",
+      fail_on_name_taken: true
+    )
+
+  end
+
+  desc "This line is for setting up the certificates and provisioning profiles for tvOS"
+  lane :get_tvos_profiles do
+
+    api_key = app_store_connect_api_key(
+      key_id: key_id,
+      issuer_id: issuer_id,
+      key_content: key_content
+    )
+
+    certificates
+
+    get_provisioning_profile(
+      api_key: api_key,
+      app_identifier: "com.privateinternetaccess.ios.PIA-VPN",
+      provisioning_name: "PIA Distribution tvOS",
+      platform: "tvos",
+      fail_on_name_taken: true
     )
 
     get_provisioning_profile(
-      development: development_profiles,
       api_key: api_key,
-      app_identifier: "com.privateinternetaccess.ios.PIA-VPN.AdBlocker"
+      app_identifier: "com.privateinternetaccess.ios.PIA-VPN.PacketTunnel",
+      provisioning_name: "PIA Distribution tvOS PacketTunnel",
+      platform: "tvos",
+      fail_on_name_taken: true
     )
-
   end
 
   desc "This line is for setting up the certificates and provisioning profiles for development builds"
@@ -153,28 +196,41 @@ end
 
 desc "This line is for creating testflight build for tvOS"
   lane :testflight_build_tvos do
+    
+    key_id = ENV['APP_STORE_CONNECT_KEY_ID']
+    issuer_id = ENV['APP_STORE_CONNECT_ISSUER_ID']
+    key_content = ENV['APP_STORE_CONNECT_KEY']
+
     api_key = app_store_connect_api_key(
       key_id: key_id,
       issuer_id: issuer_id,
       key_content: key_content
     )
 
-    increment_build_number_testflight
+    build_number = latest_testflight_build_number(
+      app_identifier: "com.privateinternetaccess.ios.PIA-VPN",
+      platform: "appletvos"
+    )
+    increment_build_number(
+      build_number: build_number + 1 
+    )
 
     build_app(scheme: "PIA VPN-tvOS",
       export_method: "app-store",
+      xcargs: "-destination 'platform=tvOS'",
       clean: true,
       export_options: {
         provisioningProfiles: { 
           "com.privateinternetaccess.ios.PIA-VPN" => "PIA Distribution tvOS",
-          "com.privateinternetaccess.ios.PIA-VPN.PacketTunnel" => "PIA tvOS Distribution PacketTunnel WG"
+          "com.privateinternetaccess.ios.PIA-VPN.PacketTunnel" => "PIA Distribution tvOS PacketTunnel"
         }
       }
     )
 
     pilot(
       api_key: api_key,
-      skip_waiting_for_build_processing: true
+      skip_waiting_for_build_processing: true,
+      app_platform: "appletvos"
     )
 
   end
