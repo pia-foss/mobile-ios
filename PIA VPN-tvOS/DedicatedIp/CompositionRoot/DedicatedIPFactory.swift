@@ -20,7 +20,7 @@ class DedicatedIPFactory {
                              removeDIPToken: makeRemoveDIPUseCase())
     }
     
-    private static func makeGetDedicatedIpUseCase() -> GetDedicatedIpUseCaseType {
+    static func makeGetDedicatedIpUseCase() -> GetDedicatedIpUseCaseType {
         GetDedicatedIpUseCase(serverProvider: makeDefaultServerProvider(),
                               dedicatedIpProvider: makeDedicatedIPProvider())
     }

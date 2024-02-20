@@ -17,6 +17,7 @@ class RegionsListViewModelTests: XCTestCase {
         let regionsFilterUseCaseMock = RegionsFilterUseCaseMock()
         let regionsDisplayNameUseCaseMock = RegionsDisplayNameUseCaseMock()
         let optimalLocationUseCaseMock = OptimalLocationUseCaseMock()
+        let getDedicatedIpUseCaseMock = GetDedicatedIpUseCaseMock(result: nil)
         let appRouterSpy = AppRouterSpy()
         static let barcelona = ServerMock(name: "Barcelona-1", identifier: "es-server-barcelona", regionIdentifier: "es-region", country: "ES", geo: false, pingTime: 25)
         static let madrid = ServerMock(name: "Madrid", identifier: "es-server-madrid", regionIdentifier: "es-region2", country: "ES", geo: false, pingTime: 12)
@@ -40,7 +41,8 @@ class RegionsListViewModelTests: XCTestCase {
     
     func instantiateSut(with filter: RegionsListFilter = .all,  routerAction: AppRouter.Actions? = nil) {
         let routerAction = routerAction ?? AppRouter.Actions.pop(router: fixture.appRouterSpy)
-        sut = RegionsListViewModel(filter: filter, listUseCase: fixture.regionsListUseCaseMock, favoriteUseCase: fixture.favoriteRegionsUseCaseMock, regionsFilterUseCase: fixture.regionsFilterUseCaseMock, regionsDisplayNameUseCase: fixture.regionsDisplayNameUseCaseMock, optimalLocationUseCase: fixture.optimalLocationUseCaseMock, onServerSelectedRouterAction: routerAction)
+        sut = RegionsListViewModel(filter: filter, listUseCase: fixture.regionsListUseCaseMock, favoriteUseCase: fixture.favoriteRegionsUseCaseMock, regionsFilterUseCase: fixture.regionsFilterUseCaseMock, regionsDisplayNameUseCase: fixture.regionsDisplayNameUseCaseMock, optimalLocationUseCase: fixture.optimalLocationUseCaseMock, 
+                                   getDedicatedIpUseCase: fixture.getDedicatedIpUseCaseMock, onServerSelectedRouterAction: routerAction)
     }
     
     override func setUp() {

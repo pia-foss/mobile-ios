@@ -17,6 +17,7 @@ class RegionsListViewModel: ObservableObject {
     private let regionsFilterUseCase: RegionsFilterUseCaseType
     private let regionsDisplayNameUseCase: RegionsDisplayNameUseCaseType
     private let optimalLocationUseCase: OptimalLocationUseCaseType
+    private let getDedicatedIpUseCase: GetDedicatedIpUseCaseType
     
     private let onServerSelectedRouterAction: AppRouter.Actions
     internal var filter: RegionsListFilter
@@ -41,6 +42,7 @@ class RegionsListViewModel: ObservableObject {
          regionsFilterUseCase: RegionsFilterUseCaseType,
          regionsDisplayNameUseCase: RegionsDisplayNameUseCaseType,
          optimalLocationUseCase: OptimalLocationUseCaseType,
+         getDedicatedIpUseCase: GetDedicatedIpUseCaseType,
          onServerSelectedRouterAction: AppRouter.Actions) {
         self.filter = filter
         self.listUseCase = listUseCase
@@ -48,6 +50,7 @@ class RegionsListViewModel: ObservableObject {
         self.regionsFilterUseCase = regionsFilterUseCase
         self.regionsDisplayNameUseCase = regionsDisplayNameUseCase
         self.optimalLocationUseCase = optimalLocationUseCase
+        self.getDedicatedIpUseCase = getDedicatedIpUseCase
         self.onServerSelectedRouterAction = onServerSelectedRouterAction
        
         allServers = listUseCase.getCurrentServers()
@@ -235,7 +238,11 @@ extension RegionsListViewModel {
         var servers: [ServerType] = []
         let optimalLocation = Server.automatic
         servers.append(optimalLocation)
-        // TODO: Retrieve the DIP server and append it to the list of servers after the optimal one
+        
+        if let dipServer = getDedicatedIpUseCase() {
+            servers.append(dipServer)
+        }
+        
         return servers
     }
     
@@ -243,8 +250,7 @@ extension RegionsListViewModel {
         // We only show the Optimal Location and DIP server if the list is 'All' servers
         guard filter == .all else { return nil }
         
-        // TODO: If the user has also a DIP server, then use the `L10n.Localizable.Regions.List.OptimalLocationWithDipLocation.title` instead
-        return L10n.Localizable.Regions.List.OptimalLocation.title
+        return L10n.Localizable.Regions.List.OptimalLocationWithDipLocation.title
         
     }
     
