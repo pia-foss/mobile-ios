@@ -872,13 +872,13 @@ class AppPreferences {
         useDisconnectSiriShortcuts = false
         connectShortcut = nil
         disconnectShortcut = nil
-        let preferences = Client.preferences.editable().reset()
-        preferences.commit()
         guard #available(iOS 13.0, *) else {
             transitionTheme(to: .light)
             return
         }
         #endif
+        let preferences = Client.preferences.editable().reset()
+        preferences.commit()
         quickSettingThemeVisible = true
         quickSettingKillswitchVisible = true
         quickSettingNetworkToolVisible = true

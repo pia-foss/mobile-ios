@@ -1,13 +1,18 @@
 
 import Foundation
+import PIALibrary
+import Combine
 
 
 class SelectedServerViewModel: ObservableObject {
 
+    private let useCase: SelectedServerUseCaseType
+    private let optimalLocationUseCase: OptimalLocationUseCaseType
+    private let regionsDisplayNameUseCase: RegionsDisplayNameUseCaseType
     
-    let useCase: SelectedServerUseCaseType
     let routerAction: AppRouter.Actions
     @Published var selectedServer: ServerType?
+    private var cancellables = Set<AnyCancellable>()
     
     var selectedSeverTitle: String  {
         let genericTitle = L10n.Localizable.LocationSelection.AnyOtherLocation.title
@@ -21,13 +26,13 @@ class SelectedServerViewModel: ObservableObject {
         }
     }
     
-    var selectedServerSubtitle: String {
-        guard let selectedServer else { return "" }
-        return selectedServer.name
-    }
+    @Published var selectedServerSubtitle = ""
     
-    init(useCase: SelectedServerUseCaseType, routerAction: AppRouter.Actions) {
+    init(useCase: SelectedServerUseCaseType, optimalLocationUseCase: OptimalLocationUseCaseType, regionsDisplayNameUseCase: RegionsDisplayNameUseCaseType,
+         routerAction: AppRouter.Actions) {
         self.useCase = useCase
+        self.optimalLocationUseCase = optimalLocationUseCase
+        self.regionsDisplayNameUseCase = regionsDisplayNameUseCase
         self.routerAction = routerAction
         updateState()
     }
@@ -56,8 +61,26 @@ class SelectedServerViewModel: ObservableObject {
     
     private func updateState() {
         useCase.getSelectedServer()
-            .map{ $0 }
-            .assign(to: &$selectedServer)
+            .combineLatest(optimalLocationUseCase.getTargetLocaionForOptimalLocation()) { (newSelectedServer, newTargetLocation) in
+            return (selectedServer: newSelectedServer, targetLocation: newTargetLocation)
+        }
+        .receive(on: RunLoop.main)
+        .sink { [weak self] result in
+            guard let self else { return }
+            self.selectedServer = result.selectedServer
+            self.updateSelectedServerSubtitle(for: result.selectedServer, targetLocation: result.targetLocation)
+        }.store(in: &cancellables)
+        
     }
+    
+    private func updateSelectedServerSubtitle(for selectedServer: ServerType, targetLocation: ServerType?) {
+        if selectedServer.isAutomatic {
+            let displayName = regionsDisplayNameUseCase.getDisplayNameForOptimalLocation(with: targetLocation)
+            selectedServerSubtitle = displayName.subtitle
+        } else {
+            self.selectedServerSubtitle = regionsDisplayNameUseCase.getDisplayName(for: selectedServer).subtitle
+        }
+    }
+    
     
 }

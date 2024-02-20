@@ -137,6 +137,7 @@ class TopNavigationViewModel: ObservableObject {
     
     private func subscribeToAppRouterDestinationsUpdates() {
         appRouter.$pathDestinations
+            .receive(on: RunLoop.main)
             .sink { [weak self] newPathDestinations in
                 guard let self = self else { return }
                 self.selectedSection = self.calculateSelectedSection(for: newPathDestinations)

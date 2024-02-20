@@ -48,7 +48,7 @@ class LogOutUseCase: LogOutUseCaseType {
     
     func logOut() async {
         await uninstallVpnConfiguration()
-        appPreferences.reset()
         await logoutUser()
+        appPreferences.reset()
     }
 }

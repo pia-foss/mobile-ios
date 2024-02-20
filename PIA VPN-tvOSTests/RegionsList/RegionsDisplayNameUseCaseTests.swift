@@ -81,4 +81,32 @@ class RegionsDisplayNameUseCaseTests: XCTestCase {
         XCTAssertEqual(displayName.subtitle, "Madrid")
     }
     
+    func test_displayNameForOptimalLocation_whenTargetLocationIsNil() {
+        instantiateSut()
+        
+        // GIVEN that the target server for the optimal location is nil
+        let targetServer: ServerType? = nil
+        
+        let displayName = sut.getDisplayNameForOptimalLocation(with: targetServer)
+        
+        // THEN the display name title is "Optimal Location"
+        XCTAssertEqual(displayName.title, "Optimal Location")
+        // AND the display name subtitle is "Automatic"
+        XCTAssertEqual(displayName.subtitle, "Automatic")
+    }
+    
+    func test_displayNameForOptimalLocation_whenTargetLocationIsBarcelona() {
+        instantiateSut()
+        
+        // GIVEN that the target server for the optimal location is Barcelona
+        let targetServer: ServerType = Fixture.barcelona
+        
+        let displayName = sut.getDisplayNameForOptimalLocation(with: targetServer)
+        
+        // THEN the display name title is "Optimal Location"
+        XCTAssertEqual(displayName.title, "Optimal Location")
+        // AND the display name subtitle is "Barcelona-1"
+        XCTAssertEqual(displayName.subtitle, "Barcelona-1")
+    }
+    
 }

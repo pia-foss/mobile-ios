@@ -28,13 +28,16 @@ extension DashboardFactory {
     }
     
 
-    
-    private static func makeSelectedServerUserCase() -> SelectedServerUseCaseType {
+    static func makeSelectedServerUserCase() -> SelectedServerUseCaseType {
         return SelectedServerUseCase(serverProvider: VpnConnectionFactory.makeServerProvider(), clientPreferences: RegionsSelectionFactory.makeClientPreferences)
     }
     
     private static func makeSelectedServerViewModel() -> SelectedServerViewModel {
-        return SelectedServerViewModel(useCase: makeSelectedServerUserCase(), routerAction: .navigate(router: AppRouterFactory.makeAppRouter(), destination: RegionsDestinations.serversList))
+        return SelectedServerViewModel(
+            useCase: makeSelectedServerUserCase(),
+            optimalLocationUseCase: RegionsSelectionFactory.makeOptimalLocationUseCase,
+            regionsDisplayNameUseCase: RegionsSelectionFactory.makeRegionsDisplayNameUseCase(),
+            routerAction: .navigate(router: AppRouterFactory.makeAppRouter(), destination: RegionsDestinations.serversList))
     }
     
     internal static func makeSelectedServerView() -> SelectedServerView {
@@ -47,9 +50,6 @@ extension DashboardFactory {
 // MARK: QuickConnect section
 
 extension DashboardFactory {
-    
-
-    
     static internal func makeQuickConnectButtonViewModel(for server: ServerType, delegate: QuickConnectButtonViewModelDelegate?) -> QuickConnectButtonViewModel {
         QuickConnectButtonViewModel(server: server, delegate: delegate)
     }
