@@ -443,6 +443,9 @@
 "regions.filter.all.title" = "All";
 "regions.filter.search.title" = "Search";
 "regions.filter.favorites.title" = "Favourite(s)";
+"regions.list.all_locations.title" = "All Locations";
+"regions.list.optimal_location.title" = "Optimal Location";
+"regions.list.optimal_location_with_dip_location.title" = "Optimal Location/Dedicated IP";
 "regions.search.recommended_locations.title" = "Recommended Locations";
 "regions.search.results.title" = "Search Results";
 "regions.search.button.title" = "Search for a Location";

@@ -26,6 +26,10 @@ struct RegionsListView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
+            if !viewModel.optimalAndDIPServers.isEmpty {
+                optimalLocationAndDIPLocationSection
+            }
+            
             if let title = viewModel.regionsListTitle {
                 Text(title)
                     .font(.headline)
@@ -40,7 +44,8 @@ struct RegionsListView: View {
                             onRegionItemSelected: {
                             viewModel.didSelectRegionServer(server)
                         },
-                            iconName: "flag-\(server.country.lowercased())",
+                            iconName: viewModel.getIconImageName(for: server).unfocused,
+                            highlightedIconName: viewModel.getIconImageName(for: server).focused,
                             title: viewModel.getDisplayName(for: server).title,
                             subtitle: viewModel.getDisplayName(for: server).subtitle,
                             favoriteIconName: viewModel.favoriteIconName(for: server),
@@ -57,3 +62,39 @@ struct RegionsListView: View {
     }
 }
 
+
+// MARK: - Optimal Location and DIP Locations
+
+extension RegionsListView {
+    
+    var optimalLocationAndDIPLocationSection: some View {
+        VStack(alignment: .leading) {
+            if let title = viewModel.optimalAndDIPServersSectionTitle {
+                Text(title)
+                    .font(.headline)
+                    .fontWeight(.regular)
+                    .foregroundColor(Color.pia_on_surface_container_secondary)
+            }
+            
+            LazyVGrid(columns: columns, alignment: .leading, spacing: 40) {
+                ForEach(viewModel.optimalAndDIPServers, id: \.identifier) { server in
+                    RegionsListItemButton(
+                        onRegionItemSelected: {
+                        viewModel.didSelectRegionServer(server)
+                    },
+                        iconName: .smart_location_icon_name,
+                        highlightedIconName: .smart_location_icon_highlighted_name,
+                        title: viewModel.getDisplayName(for: server).title,
+                        subtitle: viewModel.getDisplayName(for: server).subtitle,
+                        favoriteIconName: viewModel.favoriteIconName(for: server),
+                        contextMenuItem: contextMenuItem(for: server)
+                    )
+
+                }
+            }
+        }
+        
+
+    }
+    
+}

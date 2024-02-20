@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E5C507762B0E144D00200A6A"
-               BuildableName = "PIA VPN-tvOS.app"
+               BuildableName = "PIA VPN.app"
                BlueprintName = "PIA VPN-tvOS"
                ReferencedContainer = "container:PIA VPN.xcodeproj">
             </BuildableReference>
@@ -68,7 +68,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E5C507762B0E144D00200A6A"
-            BuildableName = "PIA VPN-tvOS.app"
+            BuildableName = "PIA VPN.app"
             BlueprintName = "PIA VPN-tvOS"
             ReferencedContainer = "container:PIA VPN.xcodeproj">
          </BuildableReference>
@@ -85,7 +85,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E5C507762B0E144D00200A6A"
-            BuildableName = "PIA VPN-tvOS.app"
+            BuildableName = "PIA VPN.app"
             BlueprintName = "PIA VPN-tvOS"
             ReferencedContainer = "container:PIA VPN.xcodeproj">
          </BuildableReference>

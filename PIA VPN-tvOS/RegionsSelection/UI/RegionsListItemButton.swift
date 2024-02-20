@@ -15,6 +15,7 @@ struct RegionsListItemButton: View {
     @FocusState var buttonFocused: Bool
     
     let iconName: String
+    var highlightedIconName: String?
     let title: String
     var subtitle: String?
     let favoriteIconName: String
@@ -27,7 +28,12 @@ struct RegionsListItemButton: View {
         } label: {
             VStack(alignment: .leading) {
                 HStack(alignment: .top) {
-                    flagIconImage
+                    if buttonFocused {
+                        highlightedFlagIconImage
+                    } else {
+                        flagIconImage
+                    }
+                    
                     Spacer()
                     favoriteIconImage
                 }
@@ -106,6 +112,17 @@ extension RegionsListItemButton {
     
     var flagIconImage: some View {
         Image(iconName)
+            .resizable()
+            .scaledToFill()
+            .frame(width: 75, height: 75)
+            .clipShape(Circle())
+            .overlay(
+                RoundedRectangle(cornerRadius: 40).stroke(Color.white, lineWidth: 2)
+            )
+    }
+    
+    var highlightedFlagIconImage: some View {
+        Image(highlightedIconName ?? iconName)
             .resizable()
             .scaledToFill()
             .frame(width: 75, height: 75)

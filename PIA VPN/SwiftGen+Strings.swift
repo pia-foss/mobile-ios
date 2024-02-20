@@ -825,6 +825,20 @@ internal enum L10n {
           internal static let title = L10n.tr("Localizable", "regions.filter.search.title", fallback: "Search")
         }
       }
+      internal enum List {
+        internal enum AllLocations {
+          /// All Locations
+          internal static let title = L10n.tr("Localizable", "regions.list.all_locations.title", fallback: "All Locations")
+        }
+        internal enum OptimalLocation {
+          /// Optimal Location
+          internal static let title = L10n.tr("Localizable", "regions.list.optimal_location.title", fallback: "Optimal Location")
+        }
+        internal enum OptimalLocationWithDipLocation {
+          /// Optimal Location/Dedicated IP
+          internal static let title = L10n.tr("Localizable", "regions.list.optimal_location_with_dip_location.title", fallback: "Optimal Location/Dedicated IP")
+        }
+      }
       internal enum ListItem {
         internal enum Default {
           /// Default Location

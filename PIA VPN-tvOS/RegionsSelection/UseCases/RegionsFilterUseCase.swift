@@ -121,11 +121,16 @@ extension RegionsFilterUseCase {
         
     }
     private func getFavorites(from servers: [ServerType]) -> [ServerType] {
+        let autoServer = SelectedServerUseCase.automaticServer()
         let favoritesIds = favoritesUseCase.favoriteIdentifiers
-        
-        return servers.filter {
+        var favoriteServers = servers.filter {
             favoritesIds.contains($0.identifier)
         }
+        if favoritesIds.contains(autoServer.identifier) {
+            favoriteServers.append(autoServer)
+        }
+        
+        return favoriteServers
     }
     
     private func getRecommended(from servers: [ServerType]) -> [ServerType] {

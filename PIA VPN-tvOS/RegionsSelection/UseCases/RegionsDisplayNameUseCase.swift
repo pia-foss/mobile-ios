@@ -9,7 +9,12 @@
 import Foundation
 
 protocol RegionsDisplayNameUseCaseType {
+    
+    func getDisplayName(for server: ServerType) -> (title: String, subtitle: String)
+    
     func getDisplayName(for server: ServerType, amongst servers: [ServerType]) -> (title: String, subtitle: String)
+    
+    func getDisplayNameForOptimalLocation(with targetLocation: ServerType?) -> (title: String, subtitle: String)
 }
 
 
@@ -17,12 +22,28 @@ class RegionsDisplayNameUseCase: RegionsDisplayNameUseCaseType {
     
     func getDisplayName(for server: ServerType, amongst servers: [ServerType]) -> (title: String, subtitle: String) {
 
+        guard !servers.isEmpty else {
+            return (title: server.country, subtitle: server.name)
+        }
+        
         if isTheDefaultServer(server, amongst: servers) {
-            // TODO: Localize "Default"
             return (title: server.name, subtitle: L10n.Localizable.Regions.ListItem.Default.title)
         } else {
             return (title: server.country, subtitle: getDisplaySubtitleForNonDefault(server: server))
         }
+    }
+    
+    func getDisplayName(for server: ServerType) -> (title: String, subtitle: String) {
+        return getDisplayName(for: server, amongst: [])
+    }
+    
+    func getDisplayNameForOptimalLocation(with targetLocation: ServerType?) -> (title: String, subtitle: String) {
+        if let targetLocation {
+            return (title: L10n.Localizable.LocationSelection.OptimalLocation.title, subtitle: targetLocation.name)
+        } else {
+            return (title: L10n.Localizable.LocationSelection.OptimalLocation.title, subtitle: L10n.Localizable.Global.automatic)
+        }
+        
     }
     
 }

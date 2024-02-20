@@ -20,11 +20,20 @@ class RegionsSelectionFactory {
         return RegionsContainerViewModel(favoritesUseCase: makeFavoriteRegionUseCase, onSearchSelectedAction: .navigate(router: AppRouterFactory.makeAppRouter(), destination: RegionsDestinations.search))
     }
     
+    static func makeRegionsDisplayNameUseCase() -> RegionsDisplayNameUseCaseType {
+        return RegionsDisplayNameUseCase()
+    }
+    
 
     static func makeRegionsListViewModel(with filter: RegionsListFilter) -> RegionsListViewModel {
-        return RegionsListViewModel(filter: filter, listUseCase: makeRegionsListUseCase(),
-                                    favoriteUseCase: makeFavoriteRegionUseCase, regionsFilterUseCase: makeRegionsFilterUseCase(), regionsDisplayNameUseCase: RegionsDisplayNameUseCase(),
-                                    onServerSelectedRouterAction: .goBackToRoot(router: AppRouterFactory.makeAppRouter()))
+        return RegionsListViewModel(
+            filter: filter,
+            listUseCase: makeRegionsListUseCase(),
+            favoriteUseCase: makeFavoriteRegionUseCase,
+            regionsFilterUseCase: makeRegionsFilterUseCase(),
+            regionsDisplayNameUseCase: makeRegionsDisplayNameUseCase(),
+            optimalLocationUseCase: makeOptimalLocationUseCase,
+            onServerSelectedRouterAction: .goBackToRoot(router: AppRouterFactory.makeAppRouter()))
     }
     
     static func makeRegionsFilterUseCase() -> RegionsFilterUseCaseType {
@@ -71,6 +80,10 @@ class RegionsSelectionFactory {
     /// in order to be able to publish updates to the favorites collection
     static var makeFavoriteRegionUseCase: FavoriteRegionUseCaseType = {
         return FavoriteRegionUseCase(keychain: KeychainFactory.makeKeychain())
+    }()
+    
+    static var makeOptimalLocationUseCase: OptimalLocationUseCaseType = {
+        return OptimalLocationUseCase(serverProvider: VpnConnectionFactory.makeServerProvider(), vpnStatusMonitor: StateMonitorsFactory.makeVPNStatusMonitor(), selectedServerUseCase: DashboardFactory.makeSelectedServerUserCase())
     }()
     
 }
