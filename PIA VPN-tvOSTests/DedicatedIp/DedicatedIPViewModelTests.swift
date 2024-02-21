@@ -96,7 +96,7 @@ final class DedicatedIPViewModelTests: XCTestCase {
         
         let expectation = expectation(description: "Wait for dedicatedIPStats to be updated")
         
-        sut.$dedicatedIPStats.dropFirst().sink(receiveValue: { stats in
+        sut.$showActivatedDialog.dropFirst().sink(receiveValue: { stats in
             expectation.fulfill()
         }).store(in: &cancellables)
         
@@ -106,6 +106,7 @@ final class DedicatedIPViewModelTests: XCTestCase {
         // THEN
         await fulfillment(of: [expectation], timeout: 1.0)
         XCTAssertFalse(sut.shouldShowErrorMessage)
+        XCTAssertTrue(sut.showActivatedDialog)
         XCTAssertEqual(sut.dedicatedIPStats, expectedStats)
     }
     
@@ -127,6 +128,7 @@ final class DedicatedIPViewModelTests: XCTestCase {
         // THEN
         await fulfillment(of: [expectation], timeout: 1.0)
         XCTAssertTrue(sut.shouldShowErrorMessage)
+        XCTAssertFalse(sut.showActivatedDialog)
         XCTAssertEqual(sut.dedicatedIPStats, [])
     }
     
