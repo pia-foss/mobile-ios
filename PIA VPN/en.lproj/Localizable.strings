@@ -501,14 +501,17 @@
 "settings.account.subscription_expiry.title" = "Subscription expires on";
 
 // Dedicated IP
-"settings.dedicatedip.title1" = "Enter ";
+"settings.dedicatedip.title1" = "Enter Dedicated IP";
 "settings.dedicatedip.title2" = "Dedicated IP";
-"settings.dedicatedip.subtitle" = "Activate your Dedicated IP by typing your token in the field \nbelow. If you've recently purchased a Dedicated IP, you can \ngenerate the token by visiting your PIA account";
-"settings.dedicatedip.placeholder" = "Enter Dedicated IP";
+"settings.dedicatedip.subtitle" = "Activate your dedicated IP by typing your token in the field \nbelow. You can purchase a dedicated IP from your Client \nControl Panel on the PIA website.";
+"settings.dedicatedip.placeholder" = "Enter Your Dedicated IP Token";
 "settings.dedicatedip.button" = "Activate";
-"settings.dedicatedip.alert.title" = "Something went wrong";
-"settings.dedicatedip.alert.message" = "Your token is either invalid or has expired.";
-"settings.dedicatedip.alert.message.empty" = "Your token can't be empty.";
+"settings.dedicatedip.alert.failure.title" = "Something went wrong";
+"settings.dedicatedip.alert.failure.message" = "Your token is either invalid or has expired.";
+"settings.dedicatedip.alert.failure.message.empty" = "Your token can't be empty.";
+"settings.dedicatedip.alert.success.title" = "You're all set";
+"settings.dedicatedip.alert.success.message" = "Your Dedicated IP it's now active.";
+"settings.dedicatedip.alert.success.button" = "Continue";
 
 "settings.dedicatedip.stats.dedicatedip" = "Dedicated IP";
 "settings.dedicatedip.stats.ip" = "IP Address";

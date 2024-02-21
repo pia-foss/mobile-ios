@@ -25,17 +25,13 @@ struct DedicatedIpActivateView: View {
                 VStack(spacing: 20) {
                     Text(L10n.Localizable.Settings.Dedicatedip.title1)
                         .font(.system(size: 76))
-                        .foregroundStyle(.piaSurfaceContainerSecondary)
-                        .bold()
-                    +
-                    Text(L10n.Localizable.Settings.Dedicatedip.title2)
-                        .font(.system(size: 76))
                         .foregroundStyle(.piaOnSurface)
                         .bold()
                     
                     Text(L10n.Localizable.Settings.Dedicatedip.subtitle)
                         .font(.system(size: 29))
-                        .foregroundStyle(.piaSurfaceContainerSecondary)
+                        .foregroundStyle(.piaOnSurfaceContainerSecondary)
+                        .multilineTextAlignment(.center)
                 }.padding(EdgeInsets(top: 80, leading: 0, bottom: 0, trailing: 0))
                 
                 TextField(
@@ -56,12 +52,12 @@ struct DedicatedIpActivateView: View {
             Spacer()
         }
         .frame(maxWidth: .infinity, alignment: .center)
-        .alert(L10n.Localizable.Settings.Dedicatedip.Alert.title, isPresented: shouldShowErrorMessage, actions: {
+        .alert(L10n.Localizable.Settings.Dedicatedip.Alert.Failure.title, isPresented: shouldShowErrorMessage, actions: {
                 Button(L10n.Localizable.Global.ok) {}
             }, message: {
                     Text(token.isEmpty 
-                         ? L10n.Localizable.Settings.Dedicatedip.Alert.Message.empty
-                         : L10n.Localizable.Settings.Dedicatedip.Alert.message)
+                         ? L10n.Localizable.Settings.Dedicatedip.Alert.Failure.Message.empty
+                         : L10n.Localizable.Settings.Dedicatedip.Alert.Failure.message)
         })
     }
 }

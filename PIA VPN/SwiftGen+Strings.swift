@@ -1062,24 +1062,34 @@ internal enum L10n {
       internal enum Dedicatedip {
         /// Activate
         internal static let button = L10n.tr("Localizable", "settings.dedicatedip.button", fallback: "Activate")
+        /// Enter Your Dedicated IP Token
+        internal static let placeholder = L10n.tr("Localizable", "settings.dedicatedip.placeholder", fallback: "Enter Your Dedicated IP Token")
+        /// Activate your dedicated IP by typing your token in the field 
+        /// below. You can purchase a dedicated IP from your Client 
+        /// Control Panel on the PIA website.
+        internal static let subtitle = L10n.tr("Localizable", "settings.dedicatedip.subtitle", fallback: "Activate your dedicated IP by typing your token in the field \nbelow. You can purchase a dedicated IP from your Client \nControl Panel on the PIA website.")
         /// Enter Dedicated IP
-        internal static let placeholder = L10n.tr("Localizable", "settings.dedicatedip.placeholder", fallback: "Enter Dedicated IP")
-        /// Activate your Dedicated IP by typing your token in the field 
-        /// below. If you've recently purchased a Dedicated IP, you can 
-        /// generate the token by visiting your PIA account
-        internal static let subtitle = L10n.tr("Localizable", "settings.dedicatedip.subtitle", fallback: "Activate your Dedicated IP by typing your token in the field \nbelow. If you've recently purchased a Dedicated IP, you can \ngenerate the token by visiting your PIA account")
-        /// Enter 
-        internal static let title1 = L10n.tr("Localizable", "settings.dedicatedip.title1", fallback: "Enter ")
+        internal static let title1 = L10n.tr("Localizable", "settings.dedicatedip.title1", fallback: "Enter Dedicated IP")
         /// Dedicated IP
         internal static let title2 = L10n.tr("Localizable", "settings.dedicatedip.title2", fallback: "Dedicated IP")
         internal enum Alert {
-          /// Your token is either invalid or has expired.
-          internal static let message = L10n.tr("Localizable", "settings.dedicatedip.alert.message", fallback: "Your token is either invalid or has expired.")
-          /// Something went wrong
-          internal static let title = L10n.tr("Localizable", "settings.dedicatedip.alert.title", fallback: "Something went wrong")
-          internal enum Message {
-            /// Your token can't be empty.
-            internal static let empty = L10n.tr("Localizable", "settings.dedicatedip.alert.message.empty", fallback: "Your token can't be empty.")
+          internal enum Failure {
+            /// Your token is either invalid or has expired.
+            internal static let message = L10n.tr("Localizable", "settings.dedicatedip.alert.failure.message", fallback: "Your token is either invalid or has expired.")
+            /// Something went wrong
+            internal static let title = L10n.tr("Localizable", "settings.dedicatedip.alert.failure.title", fallback: "Something went wrong")
+            internal enum Message {
+              /// Your token can't be empty.
+              internal static let empty = L10n.tr("Localizable", "settings.dedicatedip.alert.failure.message.empty", fallback: "Your token can't be empty.")
+            }
+          }
+          internal enum Success {
+            /// Continue
+            internal static let button = L10n.tr("Localizable", "settings.dedicatedip.alert.success.button", fallback: "Continue")
+            /// Your Dedicated IP it's now active.
+            internal static let message = L10n.tr("Localizable", "settings.dedicatedip.alert.success.message", fallback: "Your Dedicated IP it's now active.")
+            /// You're all set
+            internal static let title = L10n.tr("Localizable", "settings.dedicatedip.alert.success.title", fallback: "You're all set")
           }
         }
         internal enum Stats {

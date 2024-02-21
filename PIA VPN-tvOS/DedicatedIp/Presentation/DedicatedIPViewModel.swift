@@ -17,6 +17,7 @@ struct DedicatedIpData {
 class DedicatedIPViewModel: ObservableObject {
     @Published var dedicatedIPStats: [DedicatedIpData] = []
     @Published var shouldShowErrorMessage: Bool = false
+    @Published var showActivatedDialog: Bool = false
     
     private let getDedicatedIp: GetDedicatedIpUseCaseType
     private let activateDIPToken: ActivateDIPTokenUseCaseType
@@ -55,6 +56,9 @@ class DedicatedIPViewModel: ObservableObject {
         do {
             try await activateDIPToken(token: token)
             onAppear()
+            Task { @MainActor in
+                showActivatedDialog = true
+            }
         } catch {
             Task { @MainActor in
                 shouldShowErrorMessage = true

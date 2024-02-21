@@ -31,6 +31,10 @@ struct DedicatedIPView: View {
             }
         }.onAppear {
             viewModel.onAppear()
-        }
+        }.alert(L10n.Localizable.Settings.Dedicatedip.Alert.Success.title, isPresented: $viewModel.showActivatedDialog, actions: {
+            Button(L10n.Localizable.Settings.Dedicatedip.Alert.Success.button) {}
+        }, message: {
+            Text(L10n.Localizable.Settings.Dedicatedip.Alert.Success.message)
+    })
     }
 }
