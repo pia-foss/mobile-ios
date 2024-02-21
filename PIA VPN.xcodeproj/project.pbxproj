@@ -654,6 +654,7 @@
 		E574D9FE2B854A42000FADAF /* DedicatedIPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9D02B83F3A2000FADAF /* DedicatedIPProvider.swift */; };
 		E574D9FF2B854A4B000FADAF /* ActivateDIPTokenUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9FA2B853662000FADAF /* ActivateDIPTokenUseCaseMock.swift */; };
 		E574DA002B854A52000FADAF /* RemoveDIPUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9FC2B853677000FADAF /* RemoveDIPUseCaseMock.swift */; };
+		E574DA072B8610CF000FADAF /* Regions.json in Resources */ = {isa = PBXBuildFile; fileRef = E574DA062B8610CF000FADAF /* Regions.json */; };
 		E59D1A152B7E2D4B00A2FBFB /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
 		E59D1A182B7E2D4B00A2FBFB /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59D1A172B7E2D4B00A2FBFB /* PacketTunnelProvider.swift */; };
 		E59D1A1D2B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E59D1A142B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -1427,6 +1428,7 @@
 		E574D9F82B85364C000FADAF /* GetDedicatedIpUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDedicatedIpUseCaseMock.swift; sourceTree = "<group>"; };
 		E574D9FA2B853662000FADAF /* ActivateDIPTokenUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateDIPTokenUseCaseMock.swift; sourceTree = "<group>"; };
 		E574D9FC2B853677000FADAF /* RemoveDIPUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveDIPUseCaseMock.swift; sourceTree = "<group>"; };
+		E574DA062B8610CF000FADAF /* Regions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Regions.json; sourceTree = "<group>"; };
 		E59D1A142B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PIA tvOS Tunnel.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59D1A172B7E2D4B00A2FBFB /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		E59D1A192B7E2D4B00A2FBFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -3052,6 +3054,14 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
+		E574DA032B860E59000FADAF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E574DA062B8610CF000FADAF /* Regions.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		E59D1A162B7E2D4B00A2FBFB /* PIA tvOS Tunnel */ = {
 			isa = PBXGroup;
 			children = (
@@ -3175,6 +3185,7 @@
 		E5C507782B0E144E00200A6A /* PIA VPN-tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				E574DA032B860E59000FADAF /* Resources */,
 				E574D9CA2B83F3A2000FADAF /* DedicatedIp */,
 				69FA73D72B7D5073002300B3 /* Settings */,
 				E55EDCDD2B758D47007010DB /* PIA-VPN-tvOS-Info.plist */,
@@ -3952,6 +3963,7 @@
 				E52E69032B56E22D00471913 /* Welcome.strings in Resources */,
 				69F0534A2B1F1D2800AE0665 /* Colors.xcassets in Resources */,
 				E5C507812B0E145000200A6A /* Preview Assets.xcassets in Resources */,
+				E574DA072B8610CF000FADAF /* Regions.json in Resources */,
 				E5C5077E2B0E145000200A6A /* Assets.xcassets in Resources */,
 				E52E69042B56E26700471913 /* Localizable.strings in Resources */,
 				E52E69022B56E22A00471913 /* Signup.strings in Resources */,
