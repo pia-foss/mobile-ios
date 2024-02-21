@@ -33,8 +33,7 @@ extension View {
                 // TODO: Implement me
                 EmptyView()
             case .dip:
-                // TODO: Implement me
-                EmptyView()
+                DedicatedIPFactory.makeDedicatedIPView()
             }
         }
     }

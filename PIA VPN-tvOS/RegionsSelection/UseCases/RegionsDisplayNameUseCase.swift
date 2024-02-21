@@ -26,7 +26,9 @@ class RegionsDisplayNameUseCase: RegionsDisplayNameUseCaseType {
             return (title: server.country, subtitle: server.name)
         }
         
-        if isTheDefaultServer(server, amongst: servers) {
+        if server.dipToken != nil {
+            return (title: L10n.Localizable.Settings.Dedicatedip.Stats.dedicatedip, subtitle: server.name)
+        } else if isTheDefaultServer(server, amongst: servers) {
             return (title: server.name, subtitle: L10n.Localizable.Regions.ListItem.Default.title)
         } else {
             return (title: server.country, subtitle: getDisplaySubtitleForNonDefault(server: server))

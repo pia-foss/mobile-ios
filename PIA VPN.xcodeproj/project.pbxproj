@@ -634,6 +634,26 @@
 		E55EDCF32B762A75007010DB /* ConnectionStatsPermisson.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCF22B762A74007010DB /* ConnectionStatsPermisson.swift */; };
 		E55EDCF62B762C6E007010DB /* ConnectionStatsPermissonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCF52B762C6E007010DB /* ConnectionStatsPermissonType.swift */; };
 		E55EDCF82B769416007010DB /* ConnectionStatsPermissonMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCF72B769416007010DB /* ConnectionStatsPermissonMock.swift */; };
+		E574D9D92B83F3A2000FADAF /* DedicatedIpActivateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9CC2B83F3A2000FADAF /* DedicatedIpActivateView.swift */; };
+		E574D9DA2B83F3A2000FADAF /* DedicatedIPFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9CE2B83F3A2000FADAF /* DedicatedIPFactory.swift */; };
+		E574D9DC2B83F3A2000FADAF /* DipServerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9D12B83F3A2000FADAF /* DipServerProvider.swift */; };
+		E574D9DD2B83F3A2000FADAF /* ActivateDIPTokenUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9D42B83F3A2000FADAF /* ActivateDIPTokenUseCase.swift */; };
+		E574D9DE2B83F3A2000FADAF /* DedicatedIPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9D62B83F3A2000FADAF /* DedicatedIPError.swift */; };
+		E574D9DF2B83F3A2000FADAF /* DipServerProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9D82B83F3A2000FADAF /* DipServerProviderType.swift */; };
+		E574D9E62B83F3D2000FADAF /* DedicatedIPProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9E22B83F3D2000FADAF /* DedicatedIPProviderMock.swift */; };
+		E574D9E72B83F3D2000FADAF /* DipServerProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9E32B83F3D2000FADAF /* DipServerProviderMock.swift */; };
+		E574D9E82B83F3D2000FADAF /* DedicatedIPProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9E42B83F3D2000FADAF /* DedicatedIPProviderTests.swift */; };
+		E574D9E92B83F3D2000FADAF /* ActivateDIPTokenUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9E52B83F3D2000FADAF /* ActivateDIPTokenUseCaseTests.swift */; };
+		E574D9EB2B84042D000FADAF /* DedicatedIpDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9EA2B84042C000FADAF /* DedicatedIpDetailsView.swift */; };
+		E574D9ED2B846F45000FADAF /* DedicatedIPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9EC2B846F45000FADAF /* DedicatedIPView.swift */; };
+		E574D9F02B848603000FADAF /* DedicatedIPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9EF2B848603000FADAF /* DedicatedIPViewModel.swift */; };
+		E574D9F32B84862B000FADAF /* GetDedicatedIpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9F22B84862B000FADAF /* GetDedicatedIpUseCase.swift */; };
+		E574D9F52B84A7CC000FADAF /* RemoveDIPUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9F42B84A7CC000FADAF /* RemoveDIPUseCase.swift */; };
+		E574D9F72B851C16000FADAF /* DedicatedIPViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9F62B851C16000FADAF /* DedicatedIPViewModelTests.swift */; };
+		E574D9F92B85364C000FADAF /* GetDedicatedIpUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9F82B85364C000FADAF /* GetDedicatedIpUseCaseMock.swift */; };
+		E574D9FE2B854A42000FADAF /* DedicatedIPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9D02B83F3A2000FADAF /* DedicatedIPProvider.swift */; };
+		E574D9FF2B854A4B000FADAF /* ActivateDIPTokenUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9FA2B853662000FADAF /* ActivateDIPTokenUseCaseMock.swift */; };
+		E574DA002B854A52000FADAF /* RemoveDIPUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9FC2B853677000FADAF /* RemoveDIPUseCaseMock.swift */; };
 		E59D1A152B7E2D4B00A2FBFB /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
 		E59D1A182B7E2D4B00A2FBFB /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59D1A172B7E2D4B00A2FBFB /* PacketTunnelProvider.swift */; };
 		E59D1A1D2B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E59D1A142B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -1387,6 +1407,26 @@
 		E55EDCF22B762A74007010DB /* ConnectionStatsPermisson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatsPermisson.swift; sourceTree = "<group>"; };
 		E55EDCF52B762C6E007010DB /* ConnectionStatsPermissonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatsPermissonType.swift; sourceTree = "<group>"; };
 		E55EDCF72B769416007010DB /* ConnectionStatsPermissonMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatsPermissonMock.swift; sourceTree = "<group>"; };
+		E574D9CC2B83F3A2000FADAF /* DedicatedIpActivateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DedicatedIpActivateView.swift; sourceTree = "<group>"; };
+		E574D9CE2B83F3A2000FADAF /* DedicatedIPFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DedicatedIPFactory.swift; sourceTree = "<group>"; };
+		E574D9D02B83F3A2000FADAF /* DedicatedIPProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DedicatedIPProvider.swift; sourceTree = "<group>"; };
+		E574D9D12B83F3A2000FADAF /* DipServerProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DipServerProvider.swift; sourceTree = "<group>"; };
+		E574D9D42B83F3A2000FADAF /* ActivateDIPTokenUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivateDIPTokenUseCase.swift; sourceTree = "<group>"; };
+		E574D9D62B83F3A2000FADAF /* DedicatedIPError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DedicatedIPError.swift; sourceTree = "<group>"; };
+		E574D9D82B83F3A2000FADAF /* DipServerProviderType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DipServerProviderType.swift; sourceTree = "<group>"; };
+		E574D9E22B83F3D2000FADAF /* DedicatedIPProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DedicatedIPProviderMock.swift; sourceTree = "<group>"; };
+		E574D9E32B83F3D2000FADAF /* DipServerProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DipServerProviderMock.swift; sourceTree = "<group>"; };
+		E574D9E42B83F3D2000FADAF /* DedicatedIPProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DedicatedIPProviderTests.swift; sourceTree = "<group>"; };
+		E574D9E52B83F3D2000FADAF /* ActivateDIPTokenUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivateDIPTokenUseCaseTests.swift; sourceTree = "<group>"; };
+		E574D9EA2B84042C000FADAF /* DedicatedIpDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DedicatedIpDetailsView.swift; sourceTree = "<group>"; };
+		E574D9EC2B846F45000FADAF /* DedicatedIPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DedicatedIPView.swift; sourceTree = "<group>"; };
+		E574D9EF2B848603000FADAF /* DedicatedIPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DedicatedIPViewModel.swift; sourceTree = "<group>"; };
+		E574D9F22B84862B000FADAF /* GetDedicatedIpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDedicatedIpUseCase.swift; sourceTree = "<group>"; };
+		E574D9F42B84A7CC000FADAF /* RemoveDIPUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveDIPUseCase.swift; sourceTree = "<group>"; };
+		E574D9F62B851C16000FADAF /* DedicatedIPViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DedicatedIPViewModelTests.swift; sourceTree = "<group>"; };
+		E574D9F82B85364C000FADAF /* GetDedicatedIpUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDedicatedIpUseCaseMock.swift; sourceTree = "<group>"; };
+		E574D9FA2B853662000FADAF /* ActivateDIPTokenUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateDIPTokenUseCaseMock.swift; sourceTree = "<group>"; };
+		E574D9FC2B853677000FADAF /* RemoveDIPUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveDIPUseCaseMock.swift; sourceTree = "<group>"; };
 		E59D1A142B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PIA tvOS Tunnel.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59D1A172B7E2D4B00A2FBFB /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		E59D1A192B7E2D4B00A2FBFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2906,6 +2946,112 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
+		E574D9CA2B83F3A2000FADAF /* DedicatedIp */ = {
+			isa = PBXGroup;
+			children = (
+				E574D9EE2B8485F3000FADAF /* Presentation */,
+				E574D9CB2B83F3A2000FADAF /* UI */,
+				E574D9CD2B83F3A2000FADAF /* CompositionRoot */,
+				E574D9CF2B83F3A2000FADAF /* Data */,
+				E574D9D22B83F3A2000FADAF /* Domain */,
+			);
+			path = DedicatedIp;
+			sourceTree = "<group>";
+		};
+		E574D9CB2B83F3A2000FADAF /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				E574D9CC2B83F3A2000FADAF /* DedicatedIpActivateView.swift */,
+				E574D9EA2B84042C000FADAF /* DedicatedIpDetailsView.swift */,
+				E574D9EC2B846F45000FADAF /* DedicatedIPView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		E574D9CD2B83F3A2000FADAF /* CompositionRoot */ = {
+			isa = PBXGroup;
+			children = (
+				E574D9CE2B83F3A2000FADAF /* DedicatedIPFactory.swift */,
+			);
+			path = CompositionRoot;
+			sourceTree = "<group>";
+		};
+		E574D9CF2B83F3A2000FADAF /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E574D9D02B83F3A2000FADAF /* DedicatedIPProvider.swift */,
+				E574D9D12B83F3A2000FADAF /* DipServerProvider.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E574D9D22B83F3A2000FADAF /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				E574D9D32B83F3A2000FADAF /* Use cases */,
+				E574D9D52B83F3A2000FADAF /* Entities */,
+				E574D9D72B83F3A2000FADAF /* Interfaces */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		E574D9D32B83F3A2000FADAF /* Use cases */ = {
+			isa = PBXGroup;
+			children = (
+				E574D9D42B83F3A2000FADAF /* ActivateDIPTokenUseCase.swift */,
+				E574D9F22B84862B000FADAF /* GetDedicatedIpUseCase.swift */,
+				E574D9F42B84A7CC000FADAF /* RemoveDIPUseCase.swift */,
+			);
+			path = "Use cases";
+			sourceTree = "<group>";
+		};
+		E574D9D52B83F3A2000FADAF /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				E574D9D62B83F3A2000FADAF /* DedicatedIPError.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		E574D9D72B83F3A2000FADAF /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				E574D9D82B83F3A2000FADAF /* DipServerProviderType.swift */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		E574D9E02B83F3D2000FADAF /* DedicatedIp */ = {
+			isa = PBXGroup;
+			children = (
+				E574D9E12B83F3D2000FADAF /* Mocks */,
+				E574D9E42B83F3D2000FADAF /* DedicatedIPProviderTests.swift */,
+				E574D9E52B83F3D2000FADAF /* ActivateDIPTokenUseCaseTests.swift */,
+				E574D9F62B851C16000FADAF /* DedicatedIPViewModelTests.swift */,
+			);
+			path = DedicatedIp;
+			sourceTree = "<group>";
+		};
+		E574D9E12B83F3D2000FADAF /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				E574D9E22B83F3D2000FADAF /* DedicatedIPProviderMock.swift */,
+				E574D9E32B83F3D2000FADAF /* DipServerProviderMock.swift */,
+				E574D9F82B85364C000FADAF /* GetDedicatedIpUseCaseMock.swift */,
+				E574D9FA2B853662000FADAF /* ActivateDIPTokenUseCaseMock.swift */,
+				E574D9FC2B853677000FADAF /* RemoveDIPUseCaseMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		E574D9EE2B8485F3000FADAF /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				E574D9EF2B848603000FADAF /* DedicatedIPViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
 		E59D1A162B7E2D4B00A2FBFB /* PIA tvOS Tunnel */ = {
 			isa = PBXGroup;
 			children = (
@@ -3029,6 +3175,7 @@
 		E5C507782B0E144E00200A6A /* PIA VPN-tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				E574D9CA2B83F3A2000FADAF /* DedicatedIp */,
 				69FA73D72B7D5073002300B3 /* Settings */,
 				E55EDCDD2B758D47007010DB /* PIA-VPN-tvOS-Info.plist */,
 				E55EDCDE2B760666007010DB /* Welcome */,
@@ -3062,6 +3209,7 @@
 		E5C507892B0E145100200A6A /* PIA VPN-tvOSTests */ = {
 			isa = PBXGroup;
 			children = (
+				E574D9E02B83F3D2000FADAF /* DedicatedIp */,
 				69793D9E2B59B94A000CB845 /* RegionsList */,
 				E52E690D2B5D694500471913 /* Shared */,
 				E5AB28AF2B34E06000744E5F /* VPNConfigurationInstalling */,
@@ -4354,6 +4502,7 @@
 				693CA5AE2B3ED75500D38378 /* Flags.swift in Sources */,
 				69F675AB2B592FA0000E31D5 /* Server+Automatic.swift in Sources */,
 				E5C507B72B17E75B00200A6A /* CheckLoginAvailability.swift in Sources */,
+				E574D9DA2B83F3A2000FADAF /* DedicatedIPFactory.swift in Sources */,
 				E5AB288E2B2A489500744E5F /* LoginStatus.swift in Sources */,
 				69FF0B132B3AF2050074AA04 /* QuickConnectButtonViewModel.swift in Sources */,
 				E55EDCEC2B760DFD007010DB /* LoginLoadingView.swift in Sources */,
@@ -4362,6 +4511,7 @@
 				E5AB286F2B27977000744E5F /* LoginFactory.swift in Sources */,
 				69FA73D52B7D44CB002300B3 /* TopNavigationView+ViewModifier.swift in Sources */,
 				699311A22B318F6B00D316C8 /* DashboardViewModel.swift in Sources */,
+				E574D9ED2B846F45000FADAF /* DedicatedIPView.swift in Sources */,
 				693B9A402B7571ED00757A41 /* SearchControllerButton.swift in Sources */,
 				69AB492C2B63C73000C780CD /* FavoriteRegionUseCase.swift in Sources */,
 				69FF0B042B3AD1D40074AA04 /* SelectedServerView.swift in Sources */,
@@ -4387,6 +4537,7 @@
 				69FF0B0A2B3AD3F60074AA04 /* QuickConnectViewModel.swift in Sources */,
 				69FA73E22B7D5576002300B3 /* Routes+Settings.swift in Sources */,
 				E52E690C2B5BC19300471913 /* UserAuthenticationStatusMonitor.swift in Sources */,
+				E574D9DD2B83F3A2000FADAF /* ActivateDIPTokenUseCase.swift in Sources */,
 				69E61DEC2B5564C600085648 /* RegionsSelectionFactory.swift in Sources */,
 				699311A02B31894D00D316C8 /* Foundation+Protocols.swift in Sources */,
 				E5AB28792B28B4B300744E5F /* AccountInfo.swift in Sources */,
@@ -4397,9 +4548,13 @@
 				E5AB28C92B48AF9000744E5F /* VPNConfigurationAvailabilityType.swift in Sources */,
 				69F1C2992B2B28DA00E924AE /* PIAConnectionButton.swift in Sources */,
 				69AB492E2B63CB6100C780CD /* AppConstants+Protocols.swift in Sources */,
+				E574D9F02B848603000FADAF /* DedicatedIPViewModel.swift in Sources */,
 				E5AB28C22B4898D300744E5F /* VpnConfigurationProviderType.swift in Sources */,
 				697A5F452B514B5700661977 /* AppRouterFactory.swift in Sources */,
 				E5AB28A82B32317900744E5F /* InstallVpnConfigurationProvider.swift in Sources */,
+				E574D9DC2B83F3A2000FADAF /* DipServerProvider.swift in Sources */,
+				E574D9F52B84A7CC000FADAF /* RemoveDIPUseCase.swift in Sources */,
+				E574D9DE2B83F3A2000FADAF /* DedicatedIPError.swift in Sources */,
 				E5C507AE2B17E45800200A6A /* LoginPresentableErrorMapper.swift in Sources */,
 				69E61DEA2B55644900085648 /* RegionsListViewModel.swift in Sources */,
 				69816C3D2B4EBB3C00E3C86B /* Destinations.swift in Sources */,
@@ -4410,6 +4565,7 @@
 				69FF0B112B3AF1F00074AA04 /* QuickConnectButton.swift in Sources */,
 				E5AB28AD2B32339C00744E5F /* VPNConfigurationInstallingView.swift in Sources */,
 				E52E69152B5DB05600471913 /* BootstraperFactory.swift in Sources */,
+				E574D9EB2B84042D000FADAF /* DedicatedIpDetailsView.swift in Sources */,
 				E5AB28CB2B48AFA900744E5F /* VPNConfigurationAvailability.swift in Sources */,
 				69FA73E02B7D50D7002300B3 /* AvailableSettingsViewModel.swift in Sources */,
 				E5AB28712B279B4000744E5F /* LoginProviderType.swift in Sources */,
@@ -4419,6 +4575,7 @@
 				E5AB287B2B28B4C400744E5F /* Credentials.swift in Sources */,
 				E52E68FE2B55E47600471913 /* Routes+Onboarding.swift in Sources */,
 				E5C5077C2B0E144E00200A6A /* ContentView.swift in Sources */,
+				E574D9FE2B854A42000FADAF /* DedicatedIPProvider.swift in Sources */,
 				69A226BE2B307D5F0065EDDB /* RootContainerView.swift in Sources */,
 				69C5E7D02B72962700FE3126 /* TopNavigationFactory.swift in Sources */,
 				694AC74E2B17AB9C007E7B56 /* DashboardView.swift in Sources */,
@@ -4443,6 +4600,7 @@
 				693B9A3C2B754C0600757A41 /* PIAStyles.swift in Sources */,
 				E5C507B32B17E5AD00200A6A /* LoginError.swift in Sources */,
 				E5AB28BB2B48815300744E5F /* VPNConfigurationInstallingStatus.swift in Sources */,
+				E574D9D92B83F3A2000FADAF /* DedicatedIpActivateView.swift in Sources */,
 				E5C507CA2B1FAC3600200A6A /* LoginDomainErrorMapper.swift in Sources */,
 				693CA5AC2B3ED69B00D38378 /* AppConstants.swift in Sources */,
 				E52E69122B5DAE6100471913 /* Bootstrapper.swift in Sources */,
@@ -4450,6 +4608,8 @@
 				69FF0B0F2B3AE8F60074AA04 /* PIAImages+SwiftUI.swift in Sources */,
 				E5AB28772B28B49A00744E5F /* UserAccount.swift in Sources */,
 				69A226C02B307DBF0065EDDB /* RootContainerFactory.swift in Sources */,
+				E574D9DF2B83F3A2000FADAF /* DipServerProviderType.swift in Sources */,
+				E574D9F32B84862B000FADAF /* GetDedicatedIpUseCase.swift in Sources */,
 				E5AB28B92B361E9200744E5F /* InstallVPNConfigurationError.swift in Sources */,
 				69F053472B1E056400AE0665 /* PIAColors+SwitUI.swift in Sources */,
 				E55EDCD52B755E09007010DB /* OnboardingComponentViewModel.swift in Sources */,
@@ -4464,10 +4624,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5AB28D02B4B39F000744E5F /* InstallVpnConfigurationProviderTests.swift in Sources */,
+				E574DA002B854A52000FADAF /* RemoveDIPUseCaseMock.swift in Sources */,
 				698C3B492B2B33650012D527 /* VpnConnectionUseCaseMock.swift in Sources */,
 				69CA26B22B59668700E78894 /* RegionsListUseCaseMock.swift in Sources */,
 				6963465D2B7109DA0051F8BC /* RegionsFilterUseCaseTests.swift in Sources */,
 				E5C507CC2B1FACE000200A6A /* LoginWithCredentialsUseCaseTests.swift in Sources */,
+				E574D9E62B83F3D2000FADAF /* DedicatedIPProviderMock.swift in Sources */,
 				E52E69252B5E92CC00471913 /* VPNStatusMonitorMock.swift in Sources */,
 				696E8F0D2B31A8760080BB31 /* NotificationCenterMock.swift in Sources */,
 				E5C507A82B153E6B00200A6A /* LoginViewModelTests.swift in Sources */,
@@ -4484,6 +4646,7 @@
 				E52E69112B5D696E00471913 /* UserAuthenticationStatusMonitorTests.swift in Sources */,
 				E5AB28D12B4B39F000744E5F /* VPNConfigurationInstallingViewModelTests.swift in Sources */,
 				E5C5078B2B0E145100200A6A /* PIA_VPN_tvOSTests.swift in Sources */,
+				E574D9FF2B854A4B000FADAF /* ActivateDIPTokenUseCaseMock.swift in Sources */,
 				E55EDCF82B769416007010DB /* ConnectionStatsPermissonMock.swift in Sources */,
 				690FC4802B3C59AF00F6DCC8 /* QuickConnectButtonViewModelTests.swift in Sources */,
 				E52E691A2B5DB86F00471913 /* BootstraperMock.swift in Sources */,
@@ -4499,18 +4662,23 @@
 				693474C82B6B8BDD0061F788 /* KeychainTypeMock.swift in Sources */,
 				693B9A442B7622B600757A41 /* RegionsDisplayNameUseCaseTests.swift in Sources */,
 				E5AB287F2B28F6EF00744E5F /* Stubs.swift in Sources */,
+				E574D9F92B85364C000FADAF /* GetDedicatedIpUseCaseMock.swift in Sources */,
 				69E61DF12B56990E00085648 /* DashboardViewModelTests.swift in Sources */,
 				69194BBD2B7BEDF000691775 /* ServerProviderMock.swift in Sources */,
 				E5AB28972B2C782C00744E5F /* Stubs+PIALibrary.swift in Sources */,
 				690FC4882B3C60F500F6DCC8 /* QuickConnectViewModelTests.swift in Sources */,
 				E5AB28992B2C783600744E5F /* LoginProviderTests.swift in Sources */,
 				E5C507C22B1F702700200A6A /* LoginWithCredentialsUseCaseMock.swift in Sources */,
+				E574D9F72B851C16000FADAF /* DedicatedIPViewModelTests.swift in Sources */,
 				69194BBF2B7BFB2A00691775 /* ConnectionStateMonitorTests.swift in Sources */,
 				E52E69002B56ABE400471913 /* AppRouterSpy.swift in Sources */,
 				693474C62B6B8ABA0061F788 /* FavoriteRegionUseCaseMock.swift in Sources */,
+				E574D9E72B83F3D2000FADAF /* DipServerProviderMock.swift in Sources */,
+				E574D9E82B83F3D2000FADAF /* DedicatedIPProviderTests.swift in Sources */,
 				E5AB28E12B4C107F00744E5F /* VpnConfigurationProviderTypeMock.swift in Sources */,
 				E5C507C42B1F72E700200A6A /* CheckLoginAvailabilityTests.swift in Sources */,
 				692DE7DC2B73AE32000A2F1A /* TopNavigationViewModelTests.swift in Sources */,
+				E574D9E92B83F3D2000FADAF /* ActivateDIPTokenUseCaseTests.swift in Sources */,
 				69793DA12B59B96B000CB845 /* RegionsListViewModelTests.swift in Sources */,
 				692DE7DA2B739AF8000A2F1A /* AppRouterTests.swift in Sources */,
 				E5C507C02B1F700C00200A6A /* CheckLoginAvailabilityMock.swift in Sources */,

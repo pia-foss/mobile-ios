@@ -32,7 +32,8 @@ class RegionsSelectionFactory {
             favoriteUseCase: makeFavoriteRegionUseCase,
             regionsFilterUseCase: makeRegionsFilterUseCase(),
             regionsDisplayNameUseCase: makeRegionsDisplayNameUseCase(),
-            optimalLocationUseCase: makeOptimalLocationUseCase,
+            optimalLocationUseCase: makeOptimalLocationUseCase, 
+            getDedicatedIpUseCase: makeGetDedicatedIpUseCase(),
             onServerSelectedRouterAction: .goBackToRoot(router: AppRouterFactory.makeAppRouter()))
     }
     
@@ -86,4 +87,7 @@ class RegionsSelectionFactory {
         return OptimalLocationUseCase(serverProvider: VpnConnectionFactory.makeServerProvider(), vpnStatusMonitor: StateMonitorsFactory.makeVPNStatusMonitor(), selectedServerUseCase: DashboardFactory.makeSelectedServerUserCase())
     }()
     
+    static func makeGetDedicatedIpUseCase() -> GetDedicatedIpUseCaseType {
+        DedicatedIPFactory.makeGetDedicatedIpUseCase()
+    }
 }

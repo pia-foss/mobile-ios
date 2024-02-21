@@ -82,8 +82,8 @@ extension RegionsListView {
                         onRegionItemSelected: {
                         viewModel.didSelectRegionServer(server)
                     },
-                        iconName: .smart_location_icon_name,
-                        highlightedIconName: .smart_location_icon_highlighted_name,
+                        iconName: server.dipToken == nil ? .smart_location_icon_name : .icon_dip_location,
+                        highlightedIconName: server.dipToken == nil ? .smart_location_icon_highlighted_name : .icon_dip_location,
                         title: viewModel.getDisplayName(for: server).title,
                         subtitle: viewModel.getDisplayName(for: server).subtitle,
                         favoriteIconName: viewModel.favoriteIconName(for: server),
