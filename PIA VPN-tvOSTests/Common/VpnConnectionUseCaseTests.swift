@@ -40,14 +40,8 @@ class VpnConnectionUseCaseTests: XCTestCase {
     
     private func captureConnectionIntents(expectationToFulfill: XCTestExpectation, intentsCount: Int) {
         sut.connectionIntent
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    print(">>> Finished...")
-                    break
-                case .failure(_):
-                    break
-                }
+            .sink { _ in
+
             } receiveValue: { newIntent in
                 self.capturedConnectionIntents.append(newIntent)
                 if self.capturedConnectionIntents.count == intentsCount {

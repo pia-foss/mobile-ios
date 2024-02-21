@@ -21,7 +21,6 @@ enum UserAuthenticationStatus {
 class UserAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType {
     private var status: CurrentValueSubject<UserAuthenticationStatus, Never>
     private let notificationCenter: NotificationCenterType
-    private var cancellables = Set<AnyCancellable>()
     
     init(currentStatus: UserAuthenticationStatus, notificationCenter: NotificationCenterType) {
         self.notificationCenter = notificationCenter

@@ -54,7 +54,7 @@ extension OptimalLocationUseCase {
             .sink { [weak self] result in
                 guard let self else { return }
                 switch result.vpnStatus {
-                case .connected:
+                case .connecting, .connected:
                     if result.selectedServer.isAutomatic {
                         self.targetServerForOptimalLocation.send(self.serverProvider.targetServerType)
 

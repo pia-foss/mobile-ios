@@ -160,7 +160,7 @@ final class RootContainerViewModelTests: XCTestCase {
         // AND GIVEN that the Onboarding Vpn Profile not installed
         stubOnboardingVpnInstallation(finished: true)
         
-        let userAuthenticationStatusMonitor = fixture.makeUserAuthenticationStatusMonitorMock(status: .loggedOut)
+        let userAuthenticationStatusMonitor = fixture.makeUserAuthenticationStatusMonitorMock(status: .loggedIn)
         
         sut = RootContainerViewModel(accountProvider: fixture.accountProvierMock,
                                      notificationCenter: fixture.notificationCenterMock,
@@ -177,7 +177,7 @@ final class RootContainerViewModelTests: XCTestCase {
         // WHEN user logs out
         userAuthenticationStatusMonitor.status.send(.loggedOut)
         
-        // THEN the state becomes 'activated'
+        // THEN the state becomes 'NotActivated'
         XCTAssertEqual(sut.state, .notActivated)
     }
 }
