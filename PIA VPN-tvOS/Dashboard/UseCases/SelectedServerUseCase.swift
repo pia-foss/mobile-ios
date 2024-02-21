@@ -12,6 +12,7 @@ class SelectedServerUseCase: SelectedServerUseCaseType {
     
     private let serverProvider: ServerProviderType
     private let clientPreferences: ClientPreferencesType
+    private var cancellables = Set<AnyCancellable>()
     
     init(serverProvider: ServerProviderType, clientPreferences: ClientPreferencesType) {
         self.serverProvider = serverProvider

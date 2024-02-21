@@ -84,7 +84,7 @@ class RegionsSelectionFactory {
     }()
     
     static var makeOptimalLocationUseCase: OptimalLocationUseCaseType = {
-        return OptimalLocationUseCase(serverProvider: VpnConnectionFactory.makeServerProvider(), vpnStatusMonitor: StateMonitorsFactory.makeVPNStatusMonitor(), selectedServerUseCase: DashboardFactory.makeSelectedServerUserCase())
+        return OptimalLocationUseCase(serverProvider: VpnConnectionFactory.makeServerProvider(), vpnStatusMonitor: StateMonitorsFactory.makeVPNStatusMonitor, selectedServerUseCase: DashboardFactory.makeSelectedServerUserCase())
     }()
     
     static func makeGetDedicatedIpUseCase() -> GetDedicatedIpUseCaseType {

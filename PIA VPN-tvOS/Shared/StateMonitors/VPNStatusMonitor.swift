@@ -35,6 +35,7 @@ class VPNStatusMonitor: VPNStatusMonitorType {
     }
     
     @objc func vpnStatusDidChange(notification: Notification) {
+      
         if vpnStatusProvider.vpnStatus != status.value {
             status.send(vpnStatusProvider.vpnStatus)
         }

@@ -21,13 +21,16 @@ enum UserAuthenticationStatus {
 class UserAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType {
     private var status: CurrentValueSubject<UserAuthenticationStatus, Never>
     private let notificationCenter: NotificationCenterType
+    private var cancellables = Set<AnyCancellable>()
     
     init(currentStatus: UserAuthenticationStatus, notificationCenter: NotificationCenterType) {
         self.notificationCenter = notificationCenter
+        
         self.status = CurrentValueSubject<UserAuthenticationStatus, Never>(currentStatus)
         
         addObservers()
     }
+    
     
     private func addObservers() {
         notificationCenter.addObserver(self, selector: #selector(handleAccountDidLogin), name: .PIAAccountDidLogin, object: nil)
@@ -45,6 +48,7 @@ class UserAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType {
         if status.value != .loggedOut {
             status.send(.loggedOut)
         }
+        
     }
     
     func getStatus() -> AnyPublisher<UserAuthenticationStatus, Never> {

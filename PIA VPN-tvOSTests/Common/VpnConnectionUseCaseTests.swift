@@ -16,8 +16,10 @@ class VpnConnectionUseCaseTests: XCTestCase {
     class Fixture {
         let serverProviderMock = ServerProviderMock()
         let vpnProviderMock = VPNStatusProviderMock(vpnStatus: .disconnected)
+        let vpnStatusMonitorMock = VPNStatusMonitorMock()
     }
     private var subscriptions = Set<AnyCancellable>()
+    private var capturedConnectionIntents: [VpnConnectionIntent] = []
     var fixture: Fixture!
     var sut: VpnConnectionUseCase!
     
@@ -29,10 +31,30 @@ class VpnConnectionUseCaseTests: XCTestCase {
     override func tearDown() {
         fixture = nil
         sut = nil
+        capturedConnectionIntents = []
     }
     
     private func instantiateSut() {
-        sut = VpnConnectionUseCase(serverProvider: fixture.serverProviderMock , vpnProvider: fixture.vpnProviderMock)
+        sut = VpnConnectionUseCase(serverProvider: fixture.serverProviderMock , vpnProvider: fixture.vpnProviderMock, vpnStatusMonitor: fixture.vpnStatusMonitorMock)
+    }
+    
+    private func captureConnectionIntents(expectationToFulfill: XCTestExpectation, intentsCount: Int) {
+        sut.connectionIntent
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    print(">>> Finished...")
+                    break
+                case .failure(_):
+                    break
+                }
+            } receiveValue: { newIntent in
+                self.capturedConnectionIntents.append(newIntent)
+                if self.capturedConnectionIntents.count == intentsCount {
+                    expectationToFulfill.fulfill()
+                }
+            }.store(in: &subscriptions)
+
     }
     
     func test_connect() async throws {
@@ -40,6 +62,9 @@ class VpnConnectionUseCaseTests: XCTestCase {
         fixture.vpnProviderMock.connectCalledWithCallbackError = nil
         
         instantiateSut()
+        
+        let vpnConnectedExpectation = expectation(description: "The VPN status becomes Connected")
+        captureConnectionIntents(expectationToFulfill: vpnConnectedExpectation, intentsCount: 3)
 
         // The initial state of the connection intent is 'none'
         XCTAssertEqual(sut.connectionIntent.value, .none)
@@ -53,6 +78,17 @@ class VpnConnectionUseCaseTests: XCTestCase {
         // AND the vpn provider is called to connect once
         XCTAssertTrue(fixture.vpnProviderMock.connectCalled)
         XCTAssertEqual(fixture.vpnProviderMock.connectCalledAttempt, 1)
+        
+        // AND WHEN the connection succeeds
+        fixture.vpnStatusMonitorMock.status.send(.connected)
+        
+        wait(for: [vpnConnectedExpectation], timeout: 5)
+        
+        // THEN the connection intent is set back to 'none'
+        XCTAssertEqual(sut.connectionIntent.value, .none)
+        
+        
+        
     }
     
     func test_connect_when_vpnProvider_sendsError() async throws {
@@ -86,6 +122,10 @@ class VpnConnectionUseCaseTests: XCTestCase {
         fixture.vpnProviderMock.disconnectCalledWithCallbackError = nil
         
         instantiateSut()
+        
+        let vpnDisconnectedExpectation = expectation(description: "The VPN status becomes Disconnected")
+        captureConnectionIntents(expectationToFulfill: vpnDisconnectedExpectation, intentsCount: 3)
+        
         // The initial state of the connection intent is 'none'
         XCTAssertEqual(sut.connectionIntent.value, .none)
 
@@ -98,6 +138,14 @@ class VpnConnectionUseCaseTests: XCTestCase {
         // AND the vpn provider is called to disconnect once
         XCTAssertTrue(fixture.vpnProviderMock.disconnectCalled)
         XCTAssertEqual(fixture.vpnProviderMock.disconnectCalledAttempt, 1)
+        
+        // AND WHEN the disconnection succeeds
+        fixture.vpnStatusMonitorMock.status.send(.disconnected)
+        
+        wait(for: [vpnDisconnectedExpectation], timeout: 5)
+        
+        // THEN the connection intent is set back to 'none'
+        XCTAssertEqual(sut.connectionIntent.value, .none)
     }
     
     func test_disconnect_when_vpnProvider_sendsError() async throws {

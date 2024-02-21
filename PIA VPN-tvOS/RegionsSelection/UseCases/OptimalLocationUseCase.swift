@@ -33,7 +33,6 @@ class OptimalLocationUseCase: OptimalLocationUseCaseType {
         self.vpnStatusMonitor = vpnStatusMonitor
         self.selectedServerUseCase = selectedServerUseCase
         self.targetServerForOptimalLocation = CurrentValueSubject(nil)
-        
         subscribeToVpnStatusUpdate()
     }
     
@@ -55,7 +54,7 @@ extension OptimalLocationUseCase {
             .sink { [weak self] result in
                 guard let self else { return }
                 switch result.vpnStatus {
-                case .connecting, .connected:
+                case .connected:
                     if result.selectedServer.isAutomatic {
                         self.targetServerForOptimalLocation.send(self.serverProvider.targetServerType)
 

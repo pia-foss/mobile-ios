@@ -12,7 +12,7 @@ class RootContainerFactory {
                                       vpnConfigurationAvailability: VPNConfigurationAvailability(),
                                       connectionStatsPermissonType: ConnectionStatsPermisson(),
                                       bootstrap: BootstraperFactory.makeBootstrapper(),
-                                      userAuthenticationStatusMonitor: StateMonitorsFactory.makeUserAuthenticationStatusMonitor(),
+                                      userAuthenticationStatusMonitor: StateMonitorsFactory.makeUserAuthenticationStatusMonitor,
                                       connectionStateMonitor: StateMonitorsFactory.makeConnectionStateMonitor,
                                       appRouter: AppRouterFactory.makeAppRouter())
     }
