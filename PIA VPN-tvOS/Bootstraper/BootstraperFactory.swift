@@ -59,8 +59,6 @@ class BootstraperFactory {
     }
     
     private static func setupLatestRegionList() {
-        // TODO: Fix Build Phase script to download the latest Regions list on building
-        /*
         guard let bundledRegionsURL = AppConstants.RegionsGEN4.bundleURL else {
             fatalError("Could not find bundled regions file")
         }
@@ -71,7 +69,6 @@ class BootstraperFactory {
         } catch let e {
             fatalError("Could not parse bundled regions file: \(e)")
         }
-         */
     }
     
     private static func renewalDIPToken() {
