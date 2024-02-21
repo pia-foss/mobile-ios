@@ -31,7 +31,7 @@ class SettingsFactory {
                              appPreferences: AppPreferences.shared,
                              vpnConfigurationProvicer: VPNConfigurationInstallingFactory.makeVpnConfigurationProvider(),
                              vpnConfigurationAvailability: VPNConfigurationAvailability(),
-                             connectionStatsPermisson: ConnectionStatsPermisson())
+                             connectionStatsPermisson: ConnectionStatsPermisson(), clientPreferences: RegionsSelectionFactory.makeClientPreferences)
     }
     
     private static func makeAccountSettingsViewModel() -> AccountSettingsViewModel {

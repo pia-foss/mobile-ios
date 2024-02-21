@@ -10,22 +10,22 @@ import Foundation
 import PIALibrary
 
 class StateMonitorsFactory {
-    static func makeUserAuthenticationStatusMonitor() -> UserAuthenticationStatusMonitorType {
+    static var makeUserAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType = {
         UserAuthenticationStatusMonitor(currentStatus: Client.providers.accountProvider.isLoggedIn ? .loggedIn : .loggedOut,
                                         notificationCenter: NotificationCenter.default)
-    }
+    }()
     
-    static func makeVPNStatusMonitor() -> VPNStatusMonitorType {
+    static var makeVPNStatusMonitor: VPNStatusMonitorType = {
         guard let defaultVPNProvider = Client.providers.vpnProvider as? DefaultVPNProvider else {
             fatalError("Incorrect vpn provider type")
         }
         
         return VPNStatusMonitor(vpnStatusProvider: defaultVPNProvider,
                                 notificationCenter: NotificationCenter.default)
-    }
+    }()
     
     static var makeConnectionStateMonitor: ConnectionStateMonitorType = {
-        return ConnectionStateMonitor(vpnStatusMonitor: makeVPNStatusMonitor(), vpnConnectionUseCase: VpnConnectionFactory.makeVpnConnectionUseCase)
+        return ConnectionStateMonitor(vpnStatusMonitor: makeVPNStatusMonitor, vpnConnectionUseCase: VpnConnectionFactory.makeVpnConnectionUseCase)
     }()
     
 }

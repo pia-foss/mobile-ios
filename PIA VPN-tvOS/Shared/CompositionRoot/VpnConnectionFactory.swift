@@ -11,7 +11,7 @@ import PIALibrary
 
 class VpnConnectionFactory {
     static var makeVpnConnectionUseCase: VpnConnectionUseCaseType = {
-        return VpnConnectionUseCase(serverProvider: makeServerProvider(), vpnProvider: makeVpnProvider())
+        return VpnConnectionUseCase(serverProvider: makeServerProvider(), vpnProvider: makeVpnProvider(), vpnStatusMonitor: StateMonitorsFactory.makeVPNStatusMonitor)
     }()
     
     static func makeServerProvider() -> ServerProviderType {

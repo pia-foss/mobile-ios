@@ -21,11 +21,16 @@ class VpnConnectionUseCase: VpnConnectionUseCaseType {
     
     let serverProvider: ServerProviderType
     let vpnProvider: VPNStatusProviderType
+    let vpnStatusMonitor: VPNStatusMonitorType
+    private var cancellables = Set<AnyCancellable>()
     
-    init(serverProvider: ServerProviderType, vpnProvider: VPNStatusProviderType) {
+    init(serverProvider: ServerProviderType, vpnProvider: VPNStatusProviderType, vpnStatusMonitor: VPNStatusMonitorType) {
         self.serverProvider = serverProvider
         self.vpnProvider = vpnProvider
+        self.vpnStatusMonitor = vpnStatusMonitor
         self.connectionIntent = CurrentValueSubject(.none)
+        
+        subscribeToVpnStatusState()
     }
     
     func connect() async throws {
@@ -65,4 +70,32 @@ class VpnConnectionUseCase: VpnConnectionUseCaseType {
         return connectionIntent.eraseToAnyPublisher()
     }
     
+}
+
+
+// MARK: - VPN Status subscription
+
+extension VpnConnectionUseCase {
+    func subscribeToVpnStatusState() {
+        vpnStatusMonitor.getStatus()
+            .receive(on: RunLoop.main)
+            .sink { [weak self] newVpnStatus in
+                guard let self else { return }
+                var newConnectionIntent = VpnConnectionIntent.none
+                let currentConnectionIntent = self.connectionIntent.value
+                
+                switch (currentConnectionIntent, newVpnStatus) {
+                case (.connect, .connected):
+                    // The vpn connection has succeeded, then put back the connection intent to none
+                    self.connectionIntent.send(.none)
+                case (.disconnect, .disconnected):
+                    // The vpn disconnect has succeeded, then put back the connection intent to none
+                    self.connectionIntent.send(.none)
+                default:
+                    break
+
+                }
+            }.store(in: &cancellables)
+            
+    }
 }

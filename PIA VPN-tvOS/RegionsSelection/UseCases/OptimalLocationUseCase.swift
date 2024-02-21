@@ -33,7 +33,6 @@ class OptimalLocationUseCase: OptimalLocationUseCaseType {
         self.vpnStatusMonitor = vpnStatusMonitor
         self.selectedServerUseCase = selectedServerUseCase
         self.targetServerForOptimalLocation = CurrentValueSubject(nil)
-        
         subscribeToVpnStatusUpdate()
     }
     

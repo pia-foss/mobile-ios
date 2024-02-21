@@ -17,6 +17,8 @@ struct AccountSettingsView: View {
     var body: some View {
         if viewModel.isLoading {
             LoginLoadingView()
+                .navigationBarHidden(true)
+                .toolbar(.hidden)
         } else {
             accountSettingsSection
         }
