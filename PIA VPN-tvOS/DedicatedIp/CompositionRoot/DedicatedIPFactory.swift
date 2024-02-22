@@ -30,8 +30,11 @@ class DedicatedIPFactory {
     }
     
     private static func makeRemoveDIPUseCase() -> RemoveDIPUseCaseType {
-        RemoveDIPUseCase(serverProvider: makeDefaultServerProvider(),
-                         dedicatedIpProvider: makeDedicatedIPProvider())
+        RemoveDIPUseCase(dedicatedIpProvider: makeDedicatedIPProvider(),
+                         favoriteRegionsUseCase: RegionsSelectionFactory.makeFavoriteRegionUseCase,
+                         getDedicatedIP: makeGetDedicatedIpUseCase(), 
+                         vpnCpnnectionUseCase: VpnConnectionFactory.makeVpnConnectionUseCase,
+                         selectedServer: RegionsSelectionFactory.makeClientPreferences)
     }
     
     private static func makeDedicatedIPProvider() -> DedicatedIPProviderType {
