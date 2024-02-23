@@ -146,7 +146,7 @@ final class DedicatedIPViewModelTests: XCTestCase {
     }
 }
 
-private struct ServerTypeStub: ServerType {
+struct ServerTypeStub: ServerType {
     var name: String
     var identifier: String
     var regionIdentifier: String
@@ -173,7 +173,7 @@ private struct ServerTypeStub: ServerType {
     
     static func makeNonValidServerTypeStub() -> ServerType {
         ServerTypeStub(name: "name",
-                       identifier: "identifier",
+                       identifier: "identifier2",
                        regionIdentifier: "regionIdentifier",
                        country: "country",
                        geo: false,
