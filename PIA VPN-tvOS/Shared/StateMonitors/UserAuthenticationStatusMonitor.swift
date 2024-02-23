@@ -44,10 +44,7 @@ class UserAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType {
     }
     
     @objc func handleAccountDidLogout() {
-        if status.value != .loggedOut {
-            status.send(.loggedOut)
-        }
-        
+        status.send(.loggedOut)
     }
     
     func getStatus() -> AnyPublisher<UserAuthenticationStatus, Never> {
