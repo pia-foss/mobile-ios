@@ -12,10 +12,12 @@ import Combine
 
 protocol ClientPreferencesType {
     var selectedServer: ServerType { get set }
+    var lastConnectedServer: ServerType? { get set }
     func getSelectedServer() -> AnyPublisher<ServerType, Never>
 }
 
 class ClientPreferences: ClientPreferencesType {
+    
     private let clientPrefs: Client.Preferences
     
     var selectedServer: ServerType {
@@ -33,6 +35,18 @@ class ClientPreferences: ClientPreferencesType {
             pendingPreferences.commit()
         }
     }
+    
+    var lastConnectedServer: ServerType? {
+        get {
+            clientPrefs.lastConnectedRegion
+        }
+        set {
+            let ed = clientPrefs.editable()
+            ed.lastConnectedRegion = newValue as? Server
+            ed.commit()
+        }
+    }
+    
     
     private var selectedServerPublisher: CurrentValueSubject<ServerType, Never>
     

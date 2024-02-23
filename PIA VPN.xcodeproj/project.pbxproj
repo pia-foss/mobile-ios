@@ -262,6 +262,7 @@
 		69B70ABE2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
 		69B70ABF2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
 		69B70AC02ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
+		69C4C31A2B88D1B00019A8C6 /* ClientPreferencesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C4C3192B88D1B00019A8C6 /* ClientPreferencesMock.swift */; };
 		69C587FD2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C587FC2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift */; };
 		69C5E7CC2B72945F00FE3126 /* TopNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C5E7CB2B72945F00FE3126 /* TopNavigationView.swift */; };
 		69C5E7CE2B72949000FE3126 /* TopNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C5E7CD2B72949000FE3126 /* TopNavigationViewModel.swift */; };
@@ -1134,6 +1135,7 @@
 		69B70AB02ACBF51C0072A09D /* PIA-VPN_E2E_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA-VPN_E2E_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69B70AB42ACBF51C0072A09D /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityId.swift; sourceTree = "<group>"; };
+		69C4C3192B88D1B00019A8C6 /* ClientPreferencesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientPreferencesMock.swift; sourceTree = "<group>"; };
 		69C587FC2AD00C6300B95EF9 /* PIAExampleWithAuthenticatedAppTest.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PIAExampleWithAuthenticatedAppTest.swift; sourceTree = "<group>"; tabWidth = 2; };
 		69C5E7CB2B72945F00FE3126 /* TopNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationView.swift; sourceTree = "<group>"; };
 		69C5E7CD2B72949000FE3126 /* TopNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationViewModel.swift; sourceTree = "<group>"; };
@@ -2119,6 +2121,7 @@
 				690FC4852B3C5F7300F6DCC8 /* SelectedServerUseCaseMock.swift */,
 				E52E68FF2B56ABE400471913 /* AppRouterSpy.swift */,
 				6953E5522B7B748800D685B4 /* ConnectionStateMonitorMock.swift */,
+				69C4C3192B88D1B00019A8C6 /* ClientPreferencesMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -4648,6 +4651,7 @@
 				693B9A422B7615C700757A41 /* RegionsDisplayNameUseCaseMock.swift in Sources */,
 				E5AB286C2B2796E700744E5F /* LoginProviderMock.swift in Sources */,
 				6944B16C2B853505008E3B70 /* OptimalLocationUseCaseMock.swift in Sources */,
+				69C4C31A2B88D1B00019A8C6 /* ClientPreferencesMock.swift in Sources */,
 				693474CD2B6BC84C0061F788 /* FavoriteRegionsUseCaseTests.swift in Sources */,
 				E5AB28872B2911C900744E5F /* AccountProviderMock.swift in Sources */,
 				696E8F102B31AC690080BB31 /* RootContainerViewModelTests.swift in Sources */,

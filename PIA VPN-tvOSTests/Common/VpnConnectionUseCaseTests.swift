@@ -17,6 +17,9 @@ class VpnConnectionUseCaseTests: XCTestCase {
         let serverProviderMock = ServerProviderMock()
         let vpnProviderMock = VPNStatusProviderMock(vpnStatus: .disconnected)
         let vpnStatusMonitorMock = VPNStatusMonitorMock()
+        let clientPreferencesMock = ClientPreferencesMock()
+        static let barcelona = ServerMock(name: "Barcelona", identifier: "es-server-barcelona", regionIdentifier: "es-region", country: "ES", geo: false, pingTime: 25)
+        
     }
     private var subscriptions = Set<AnyCancellable>()
     private var capturedConnectionIntents: [VpnConnectionIntent] = []
@@ -35,7 +38,7 @@ class VpnConnectionUseCaseTests: XCTestCase {
     }
     
     private func instantiateSut() {
-        sut = VpnConnectionUseCase(serverProvider: fixture.serverProviderMock , vpnProvider: fixture.vpnProviderMock, vpnStatusMonitor: fixture.vpnStatusMonitorMock)
+        sut = VpnConnectionUseCase(serverProvider: fixture.serverProviderMock , vpnProvider: fixture.vpnProviderMock, vpnStatusMonitor: fixture.vpnStatusMonitorMock, clientPreferences: fixture.clientPreferencesMock)
     }
     
     private func captureConnectionIntents(expectationToFulfill: XCTestExpectation, intentsCount: Int) {
@@ -55,6 +58,9 @@ class VpnConnectionUseCaseTests: XCTestCase {
         // GIVEN that there is no error connecting the vpn provider
         fixture.vpnProviderMock.connectCalledWithCallbackError = nil
         
+        // AND GIVEN that the seleced region is Barcelona
+        fixture.serverProviderMock.targetServerTypeResult = Fixture.barcelona
+        
         instantiateSut()
         
         let vpnConnectedExpectation = expectation(description: "The VPN status becomes Connected")
@@ -62,6 +68,8 @@ class VpnConnectionUseCaseTests: XCTestCase {
 
         // The initial state of the connection intent is 'none'
         XCTAssertEqual(sut.connectionIntent.value, .none)
+        // There is no previoulsy connected region
+        XCTAssertNil(fixture.clientPreferencesMock.lastConnectedServer)
 
         // WHEN trying to connect
         try await sut.connect()
@@ -80,6 +88,8 @@ class VpnConnectionUseCaseTests: XCTestCase {
         
         // THEN the connection intent is set back to 'none'
         XCTAssertEqual(sut.connectionIntent.value, .none)
+        // AND Barcelona is registered as the last connected region on the client prefs
+        XCTAssertEqual(Fixture.barcelona.identifier, fixture.clientPreferencesMock.lastConnectedServer?.identifier)
         
         
         
