@@ -22,12 +22,14 @@ class VpnConnectionUseCase: VpnConnectionUseCaseType {
     let serverProvider: ServerProviderType
     let vpnProvider: VPNStatusProviderType
     let vpnStatusMonitor: VPNStatusMonitorType
+    private var clientPreferences: ClientPreferencesType
     private var cancellables = Set<AnyCancellable>()
     
-    init(serverProvider: ServerProviderType, vpnProvider: VPNStatusProviderType, vpnStatusMonitor: VPNStatusMonitorType) {
+    init(serverProvider: ServerProviderType, vpnProvider: VPNStatusProviderType, vpnStatusMonitor: VPNStatusMonitorType, clientPreferences: ClientPreferencesType) {
         self.serverProvider = serverProvider
         self.vpnProvider = vpnProvider
         self.vpnStatusMonitor = vpnStatusMonitor
+        self.clientPreferences = clientPreferences
         self.connectionIntent = CurrentValueSubject(.none)
         
         subscribeToVpnStatusState()
@@ -81,11 +83,14 @@ extension VpnConnectionUseCase {
             .receive(on: RunLoop.main)
             .sink { [weak self] newVpnStatus in
                 guard let self else { return }
-                var newConnectionIntent = VpnConnectionIntent.none
+    
                 let currentConnectionIntent = self.connectionIntent.value
-                
+    
                 switch (currentConnectionIntent, newVpnStatus) {
                 case (.connect, .connected):
+                    // Update the lastConnectedRegion when the connection has succeeded
+                    self.clientPreferences.lastConnectedServer = serverProvider.targetServerType
+                    
                     // The vpn connection has succeeded, then put back the connection intent to none
                     self.connectionIntent.send(.none)
                 case (.disconnect, .disconnected):
