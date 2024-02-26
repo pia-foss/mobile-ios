@@ -1517,6 +1517,18 @@ internal enum L10n {
           internal static let username = L10n.tr("Localizable", "tvos.login.placeholder.username", fallback: "Enter Username")
         }
       }
+      internal enum Signup {
+        /// Scan the QR Code
+        internal static let cta = L10n.tr("Localizable", "tvos.signup.cta", fallback: "Scan the QR Code")
+        /// VPN servers in 91 countries
+        internal static let item1 = L10n.tr("Localizable", "tvos.signup.item1", fallback: "VPN servers in 91 countries")
+        /// Blazing-fast speeds
+        internal static let item2 = L10n.tr("Localizable", "tvos.signup.item2", fallback: "Blazing-fast speeds")
+        /// 24/7 customer support
+        internal static let item3 = L10n.tr("Localizable", "tvos.signup.item3", fallback: "24/7 customer support")
+        /// Get Private Internet Access
+        internal static let title = L10n.tr("Localizable", "tvos.signup.title", fallback: "Get Private Internet Access")
+      }
       internal enum Welcome {
         /// Fast & Secure VPN for Streaming
         internal static let title = L10n.tr("Localizable", "tvos.welcome.title", fallback: "Fast & Secure VPN for Streaming")

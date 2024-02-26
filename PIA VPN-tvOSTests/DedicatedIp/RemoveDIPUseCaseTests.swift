@@ -23,7 +23,9 @@ final class RemoveDIPUseCaseTests: XCTestCase {
     
     func instantiateSut(result: ServerType?, selectedServer: ServerType) {
         fixture.getDedicatedIPUseCaseMock = GetDedicatedIpUseCaseMock(result: result)
-        fixture.clientPreferencesMock = ClientPreferencesMock(selectedServer: selectedServer)
+        fixture.clientPreferencesMock = ClientPreferencesMock()
+        fixture.clientPreferencesMock.selectedServer = selectedServer
+        //(selectedServer: selectedServer)
         sut = RemoveDIPUseCase(dedicatedIpProvider: fixture.dipServerProviderMock,
                                favoriteRegionsUseCase: fixture.favoriteRegionsUseCaseMock,
                                getDedicatedIP: fixture.getDedicatedIPUseCaseMock,

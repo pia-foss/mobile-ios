@@ -16,3 +16,14 @@ extension View {
             
     }
 }
+
+extension Image {
+    static func asQRCode(url: URL) -> Image {
+        guard let ciImage = url.asQRCode(),
+              let cgImage = CIContext().createCGImage(ciImage, from: ciImage.extent)
+        else {
+            return Image(uiImage: UIImage())
+        }
+        return Image(uiImage: UIImage(cgImage: cgImage))
+    }
+}
