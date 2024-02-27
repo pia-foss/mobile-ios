@@ -10,15 +10,14 @@ import Foundation
 import Combine
 import SwiftUI
 
-class TopNavigationViewModel: ObservableObject {
+
+class LeadingNavigationBarViewModel: ObservableObject {
     
     let appRouter: AppRouter
     
     private var cancellables = Set<AnyCancellable>()
     
-    let leadingSections: [Sections] = [.vpn, .locations]
-    
-    let trailingSections: [Sections] = [.settings(.root), .help(.root)]
+    let sections: [Sections] = [.vpn, .locations]
     
     enum Sections: Equatable, Hashable, Identifiable {
         var id: Self {
@@ -27,8 +26,6 @@ class TopNavigationViewModel: ObservableObject {
         
         case vpn
         case locations
-        case settings(SettingsPath = .root)
-        case help(HelpPath = .root)
         
         var title: String {
             switch self {
@@ -36,14 +33,91 @@ class TopNavigationViewModel: ObservableObject {
                 return L10n.Localizable.TopNavigationBar.VpnItem.title
             case .locations:
                 return L10n.Localizable.TopNavigationBar.LocationItem.title
-            case .settings:
-                // The settings section does not have title (just an icon image)
-                return ""
-            case .help:
-                // The help section does not have title (just an icon image)
-                return ""
             }
         }
+        
+    }
+    
+    init(appRouter: AppRouter) {
+        self.appRouter = appRouter
+        self.selectedSection = calculateSelectedSection(for: appRouter.pathDestinations)
+        subscribeToAppRouterDestinationsUpdates()
+    }
+    
+    @Published var selectedSection: Sections? = nil
+    @Published var highlightedSection: Sections? = nil
+    
+    func sectionDidUpdateSelection(to section: Sections) {
+        guard section != selectedSection else { return }
+        selectedSection = section
+        
+        switch section {
+        case .vpn:
+            appRouter.goBackToRoot()
+        case .locations:
+            // Empty the current navigation path before pushing the Regions root flow
+            appRouter.goBackToRoot()
+            appRouter.navigate(to: RegionsDestinations.serversList)
+        }
+    }
+    
+    
+    func sectionDidUpdateFocus(to section: Sections?) {
+        highlightedSection = section
+    }
+    
+    func viewDidAppear() {
+        // Remove the focus when the view appears
+        sectionDidUpdateFocus(to: nil)
+    }
+    
+    private func calculateSelectedSection(for pathDestinations: [any Destinations]) -> Sections? {
+        
+        if let currentPath = pathDestinations.last {
+            switch currentPath {
+            case .serversList as RegionsDestinations:
+                return .locations
+            case .search as RegionsDestinations:
+                return .locations
+            case .home as DashboardDestinations:
+                 return .vpn
+            default:
+                return nil
+            }
+        } else {
+            // The path is empty, so we are in the root of the NavigationStack (.vpn)
+             return .vpn
+        }
+        
+    }
+    
+    private func subscribeToAppRouterDestinationsUpdates() {
+        appRouter.$pathDestinations
+            .receive(on: RunLoop.main)
+            .sink { [weak self] newPathDestinations in
+                guard let self = self else { return }
+                self.selectedSection = self.calculateSelectedSection(for: newPathDestinations)
+            }.store(in: &cancellables)
+    }
+    
+}
+
+
+class TrailingNavigationBarViewModel: ObservableObject {
+    
+    let appRouter: AppRouter
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    let sections: [Sections] = [.settings(.root), .help(.root)]
+    
+    enum Sections: Equatable, Hashable, Identifiable {
+        var id: Self {
+            return self
+        }
+        
+        case settings(SettingsPath = .root)
+        case help(HelpPath = .root)
         
         var systemIconName: String {
             switch self {
@@ -51,8 +125,6 @@ class TopNavigationViewModel: ObservableObject {
                 return "questionmark.circle"
             case .settings:
                 return "gearshape"
-            default:
-                return ""
             }
 
         }
@@ -72,7 +144,7 @@ class TopNavigationViewModel: ObservableObject {
         subscribeToAppRouterDestinationsUpdates()
     }
     
-    @Published var selectedSection: Sections = .vpn
+    @Published var selectedSection: Sections? = nil
     @Published var highlightedSection: Sections? = nil
     
     func sectionDidUpdateSelection(to section: Sections) {
@@ -80,12 +152,6 @@ class TopNavigationViewModel: ObservableObject {
         selectedSection = section
         
         switch section {
-        case .vpn:
-            appRouter.goBackToRoot()
-        case .locations:
-            // Empty the current navigation path before pushing the Regions root flow
-            appRouter.goBackToRoot()
-            appRouter.navigate(to: RegionsDestinations.serversList)
         case .settings:
             // Empty the current navigation path before pushing the settings root flow
             appRouter.goBackToRoot()
@@ -107,16 +173,10 @@ class TopNavigationViewModel: ObservableObject {
         sectionDidUpdateFocus(to: nil)
     }
     
-    private func calculateSelectedSection(for pathDestinations: [any Destinations]) -> Sections {
+    private func calculateSelectedSection(for pathDestinations: [any Destinations]) -> Sections? {
         
         if let currentPath = pathDestinations.last {
             switch currentPath {
-            case .serversList as RegionsDestinations:
-                return .locations
-            case .search as RegionsDestinations:
-                return .locations
-            case .home as DashboardDestinations:
-                 return .vpn
             case .availableSettings as SettingsDestinations:
                 return .settings(.root)
             case .account as SettingsDestinations:
@@ -134,11 +194,10 @@ class TopNavigationViewModel: ObservableObject {
             case .privacyPolicy as HelpDestinations:
                 return .help(.privacyPolicy)
             default:
-                return .vpn
+                return nil
             }
         } else {
-            // The path is empty, so we are in the root of the NavigationStack (.vpn)
-             return .vpn
+             return nil
         }
         
     }

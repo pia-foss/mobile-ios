@@ -197,7 +197,7 @@
 		692483222AB05F37002A0407 /* PIACircleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483212AB05F37002A0407 /* PIACircleIcon.swift */; };
 		692483262AB05F85002A0407 /* PIAConnectionActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692483252AB05F85002A0407 /* PIAConnectionActivityWidget.swift */; };
 		692DE7DA2B739AF8000A2F1A /* AppRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692DE7D92B739AF8000A2F1A /* AppRouterTests.swift */; };
-		692DE7DC2B73AE32000A2F1A /* TopNavigationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692DE7DB2B73AE32000A2F1A /* TopNavigationViewModelTests.swift */; };
+		692DE7DC2B73AE32000A2F1A /* LeadingNavigationBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692DE7DB2B73AE32000A2F1A /* LeadingNavigationBarViewModel.swift */; };
 		693474C62B6B8ABA0061F788 /* FavoriteRegionUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693474C52B6B8ABA0061F788 /* FavoriteRegionUseCaseMock.swift */; };
 		693474C82B6B8BDD0061F788 /* KeychainTypeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693474C72B6B8BDD0061F788 /* KeychainTypeMock.swift */; };
 		693474CA2B6B8F710061F788 /* SearchedRegionsAvailabilityMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693474C92B6B8F710061F788 /* SearchedRegionsAvailabilityMock.swift */; };
@@ -1116,7 +1116,7 @@
 		692483212AB05F37002A0407 /* PIACircleIcon.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIACircleIcon.swift; sourceTree = "<group>"; tabWidth = 4; };
 		692483252AB05F85002A0407 /* PIAConnectionActivityWidget.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionActivityWidget.swift; sourceTree = "<group>"; tabWidth = 4; };
 		692DE7D92B739AF8000A2F1A /* AppRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterTests.swift; sourceTree = "<group>"; };
-		692DE7DB2B73AE32000A2F1A /* TopNavigationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationViewModelTests.swift; sourceTree = "<group>"; };
+		692DE7DB2B73AE32000A2F1A /* LeadingNavigationBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeadingNavigationBarViewModel.swift; sourceTree = "<group>"; };
 		693474C52B6B8ABA0061F788 /* FavoriteRegionUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRegionUseCaseMock.swift; sourceTree = "<group>"; };
 		693474C72B6B8BDD0061F788 /* KeychainTypeMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainTypeMock.swift; sourceTree = "<group>"; };
 		693474C92B6B8F710061F788 /* SearchedRegionsAvailabilityMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedRegionsAvailabilityMock.swift; sourceTree = "<group>"; };
@@ -2998,7 +2998,7 @@
 				E52E690E2B5D695A00471913 /* VPNStatusMonitorTests.swift */,
 				E52E69102B5D696E00471913 /* UserAuthenticationStatusMonitorTests.swift */,
 				692DE7D92B739AF8000A2F1A /* AppRouterTests.swift */,
-				692DE7DB2B73AE32000A2F1A /* TopNavigationViewModelTests.swift */,
+				692DE7DB2B73AE32000A2F1A /* LeadingNavigationBarViewModel.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -4968,7 +4968,7 @@
 				E574D9E82B83F3D2000FADAF /* DedicatedIPProviderTests.swift in Sources */,
 				E5AB28E12B4C107F00744E5F /* VpnConfigurationProviderTypeMock.swift in Sources */,
 				E5C507C42B1F72E700200A6A /* CheckLoginAvailabilityTests.swift in Sources */,
-				692DE7DC2B73AE32000A2F1A /* TopNavigationViewModelTests.swift in Sources */,
+				692DE7DC2B73AE32000A2F1A /* LeadingNavigationBarViewModel.swift in Sources */,
 				E574D9E92B83F3D2000FADAF /* ActivateDIPTokenUseCaseTests.swift in Sources */,
 				69793DA12B59B96B000CB845 /* RegionsListViewModelTests.swift in Sources */,
 				692DE7DA2B739AF8000A2F1A /* AppRouterTests.swift in Sources */,

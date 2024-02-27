@@ -1,5 +1,5 @@
 //
-//  TopNavigationViewModelTests.swift
+//  LeadingNavigationBarViewModel.swift
 //  PIA VPN-tvOSTests
 //
 //  Created by Laura S on 2/7/24.
@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import PIA_VPN_tvOS
 
-class TopNavigationViewModelTests: XCTestCase {
+class LeadingNavigationBarViewModelTests: XCTestCase {
     class Fixture {
         var appRouter: AppRouter = AppRouter()
         
@@ -20,10 +20,10 @@ class TopNavigationViewModelTests: XCTestCase {
     }
     
     var fixture: Fixture!
-    var sut: TopNavigationViewModel!
+    var sut: LeadingNavigationBarViewModel!
     
     func instantiateSut() {
-        sut = TopNavigationViewModel(appRouter: fixture.appRouter)
+        sut = LeadingNavigationBarViewModel(appRouter: fixture.appRouter)
     }
     
     override func setUp() {
@@ -41,7 +41,7 @@ class TopNavigationViewModelTests: XCTestCase {
         XCTAssertTrue(fixture.appRouter.pathDestinations.isEmpty)
         
         // THEN the selected section is vpn
-        XCTAssertEqual(sut.selectedSection, .vpn)
+        XCTAssertEqual(sut.selectedSection!, .vpn)
     }
     
     func test_selectedSectionForRegionsListDestination() {
@@ -50,7 +50,7 @@ class TopNavigationViewModelTests: XCTestCase {
         instantiateSut()
         
         // THEN the selected section is locations
-        XCTAssertEqual(sut.selectedSection, .locations)
+        XCTAssertEqual(sut.selectedSection!, .locations)
     }
     
     func test_selectedSectionForRegionsSearchDestination() {
@@ -59,13 +59,13 @@ class TopNavigationViewModelTests: XCTestCase {
         instantiateSut()
         
         // THEN the selected section is locations
-        XCTAssertEqual(sut.selectedSection, .locations)
+        XCTAssertEqual(sut.selectedSection!, .locations)
     }
     
     func test_updateSelectedSection() {
         // GIVEN that the selected section is vpn
         instantiateSut()
-        XCTAssertEqual(sut.selectedSection, .vpn)
+        XCTAssertEqual(sut.selectedSection!, .vpn)
         XCTAssertTrue(fixture.appRouter.pathDestinations.isEmpty)
         
         // WHEN updating the selected section to Locations

@@ -12,10 +12,10 @@ import SwiftUI
 /// View displayed in the Leading part of the Navigation top bar
 struct LeadingSegmentedNavigationView: View {
     
-    @ObservedObject var viewModel: TopNavigationViewModel
-    @FocusState var focusedSection: TopNavigationViewModel.Sections?
+    @ObservedObject var viewModel: LeadingNavigationBarViewModel
+    @FocusState var focusedSection: LeadingNavigationBarViewModel.Sections?
     
-    func button(for section: TopNavigationViewModel.Sections) -> some View {
+    func button(for section: LeadingNavigationBarViewModel.Sections) -> some View {
         Button {
             viewModel.sectionDidUpdateSelection(to: section)
 
@@ -42,7 +42,7 @@ struct LeadingSegmentedNavigationView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack(spacing: 2) {
-                ForEach(viewModel.leadingSections, id: \.self) { section in
+                ForEach(viewModel.sections, id: \.self) { section in
                     button(for: section)
                         .padding(6)
                         
@@ -63,13 +63,13 @@ struct LeadingSegmentedNavigationView: View {
 
 /// View displayed in the Trailing part of the Navigation top bar
 struct TrailingNavigationView: View {
-    @ObservedObject var viewModel: TopNavigationViewModel
-    @FocusState var focusedSection: TopNavigationViewModel.Sections?
+    @ObservedObject var viewModel: TrailingNavigationBarViewModel
+    @FocusState var focusedSection: TrailingNavigationBarViewModel.Sections?
     
     var body: some View {
         VStack(alignment: .trailing) {
             HStack(spacing: 16) {
-                ForEach(viewModel.trailingSections, id: \.self) { section in
+                ForEach(viewModel.sections, id: \.self) { section in
                     Button {
                         viewModel.sectionDidUpdateSelection(to: section)
                     } label: {

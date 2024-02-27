@@ -10,6 +10,8 @@ import SwiftUI
 
 struct AvailableSettingsView: View {
     @ObservedObject var viewModel: AvailableSettingsViewModel
+    
+    // TODO: check how to reset the default focus on appear. Atm this property is not used
     @FocusState var focusedSection: AvailableSettingsViewModel.Sections?
     
     var body: some View {
