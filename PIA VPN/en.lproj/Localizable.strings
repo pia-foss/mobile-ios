@@ -479,6 +479,17 @@
 "tvos.login.placeholder.username" = "Enter Username";
 "tvos.login.placeholder.password" = "Enter Password";
 
+"tvos.login.qr.title" = "Sign in using the PIA app";
+"tvos.login.qr.description" = "Scan the QR Code, and validate the login from the PIA iOS app.";
+"tvos.login.qr.timer" = "The code will expire in:";
+"tvos.login.qr.options" = "Other options:";
+"tvos.login.qr.button.login" = "Log In via Username";
+"tvos.login.qr.button.login" = "Restore Purchase";
+
+"tvos.login.qr.expired.title" = "QR Code has expired";
+"tvos.login.qr.expired.description" = "Generate a new one below";
+"tvos.login.qr.expired.button.generate" = "Generate QR";
+
 //Connection error(tvOS)
 "error_alert.connection_error.no_network.title" = "Unable to connect";
 "error_alert.connection_error.no_network.message" = "Please check your internet connection and try again";
@@ -529,13 +540,7 @@
 "settings.dedicatedip.status.expired" = "Expired";
 "settings.dedicatedip.status.error" = "Error";
 
-//SignUp (tvOS)
-"tvos.signup.title" = "Get Private Internet Access";
-"tvos.signup.item1" = "VPN servers in 91 countries";
-"tvos.signup.item2" = "Blazing-fast speeds";
-"tvos.signup.item3" = "24/7 customer support";
-"tvos.signup.cta" = "Scan the QR Code";
-
+// Help menu (tvOS)
 "help_menu.app_version_section.title" = "App Version";
 "help_menu.contact_support.qr_code.title" = "Contact Support";
 "help_menu.contact_support.qr_code.message" = "Scan the QR code to get in touch to our Support Team.";
@@ -552,4 +557,21 @@
 "help_menu.about_section.acknowledgments.copyright.title" = "COPYRIGHT 2014-2024 PRIVATE INTERNET ACCESS INC VPN";
 "help_menu.about_section.acknowledgments.copyright.description" = "Our Software as a Service (SaaS) platform may occasionally include third-party content, services, or integrations to enhance user experience and functionality. This content may include but is not limited to, APIs, widgets, plugins, or links to external websites. While we strive to ensure the quality and reliability of third-party content, we want to emphasize that such content is provided 'as is' and we do not endorse or guarantee the accuracy, reliability, or suitability of any third-party content.\n\nUsers should be aware that accessing or utilizing third-party content may subject them to the terms of use, privacy policies, and other agreements of those third-party providers. We encourage users to review such terms and policies before engaging with third-party content.";
 
+//SignUp (tvOS)
+"tvos.signup.title" = "Get Private Internet Access";
+"tvos.signup.item1" = "VPN servers in 91 countries";
+"tvos.signup.item2" = "Blazing-fast speeds";
+"tvos.signup.item3" = "24/7 customer support";
+"tvos.signup.cta" = "Scan the QR Code";
 
+//Sign in expired (tvOS)
+"tvos.signin.expired.title" = "Your subscription has expired";
+"tvos.signin.expired.subtitle" = "Renew and regain full VPN protection while streaming.";
+"tvos.signin.expired.qr.title1" = "Scan the QR code and choose your plan. Subscribing only takes a couple of minutes.";
+"tvos.signin.expired.qr.title2" = "Once done, return to your Apple TV and enjoy enhanced digital privacy with PIA!";
+"tvos.signin.expired.button.renewed" = "I've Already Renewed";
+"tvos.signin.expired.button.signout" = "Sign Out";
+
+//Sign in free trial expired (tvOS)
+"tvos.signin.expired.trial.title" = "Your free trial has expired";
+"tvos.signin.expired.trial.subtitle" = "If you enjoyed premium VPN protection, subscribe to PIA!";

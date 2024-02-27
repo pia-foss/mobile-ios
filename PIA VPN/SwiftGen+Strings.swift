@@ -1578,6 +1578,56 @@ internal enum L10n {
           /// Enter Username
           internal static let username = L10n.tr("Localizable", "tvos.login.placeholder.username", fallback: "Enter Username")
         }
+        internal enum Qr {
+          /// Scan the QR Code, and validate the login from the PIA iOS app.
+          internal static let description = L10n.tr("Localizable", "tvos.login.qr.description", fallback: "Scan the QR Code, and validate the login from the PIA iOS app.")
+          /// Other options:
+          internal static let options = L10n.tr("Localizable", "tvos.login.qr.options", fallback: "Other options:")
+          /// The code will expire in:
+          internal static let timer = L10n.tr("Localizable", "tvos.login.qr.timer", fallback: "The code will expire in:")
+          /// Sign in using the PIA app
+          internal static let title = L10n.tr("Localizable", "tvos.login.qr.title", fallback: "Sign in using the PIA app")
+          internal enum Button {
+            /// Restore Purchase
+            internal static let login = L10n.tr("Localizable", "tvos.login.qr.button.login", fallback: "Restore Purchase")
+          }
+          internal enum Expired {
+            /// Generate a new one below
+            internal static let description = L10n.tr("Localizable", "tvos.login.qr.expired.description", fallback: "Generate a new one below")
+            /// QR Code has expired
+            internal static let title = L10n.tr("Localizable", "tvos.login.qr.expired.title", fallback: "QR Code has expired")
+            internal enum Button {
+              /// Generate QR
+              internal static let generate = L10n.tr("Localizable", "tvos.login.qr.expired.button.generate", fallback: "Generate QR")
+            }
+          }
+        }
+      }
+      internal enum Signin {
+        internal enum Expired {
+          /// Renew and regain full VPN protection while streaming.
+          internal static let subtitle = L10n.tr("Localizable", "tvos.signin.expired.subtitle", fallback: "Renew and regain full VPN protection while streaming.")
+          /// Your subscription has expired
+          internal static let title = L10n.tr("Localizable", "tvos.signin.expired.title", fallback: "Your subscription has expired")
+          internal enum Button {
+            /// I've Already Renewed
+            internal static let renewed = L10n.tr("Localizable", "tvos.signin.expired.button.renewed", fallback: "I've Already Renewed")
+            /// Sign Out
+            internal static let signout = L10n.tr("Localizable", "tvos.signin.expired.button.signout", fallback: "Sign Out")
+          }
+          internal enum Qr {
+            /// Scan the QR code and choose your plan. Subscribing only takes a couple of minutes.
+            internal static let title1 = L10n.tr("Localizable", "tvos.signin.expired.qr.title1", fallback: "Scan the QR code and choose your plan. Subscribing only takes a couple of minutes.")
+            /// Once done, return to your Apple TV and enjoy enhanced digital privacy with PIA!
+            internal static let title2 = L10n.tr("Localizable", "tvos.signin.expired.qr.title2", fallback: "Once done, return to your Apple TV and enjoy enhanced digital privacy with PIA!")
+          }
+          internal enum Trial {
+            /// If you enjoyed premium VPN protection, subscribe to PIA!
+            internal static let subtitle = L10n.tr("Localizable", "tvos.signin.expired.trial.subtitle", fallback: "If you enjoyed premium VPN protection, subscribe to PIA!")
+            /// Your free trial has expired
+            internal static let title = L10n.tr("Localizable", "tvos.signin.expired.trial.title", fallback: "Your free trial has expired")
+          }
+        }
       }
       internal enum Signup {
         /// Scan the QR Code
