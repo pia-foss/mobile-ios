@@ -14,6 +14,7 @@ extension Image {
     static let smart_location_icon_highlighted = Image(.smart_location_icon_highlighted_name)
     static let connect_inner_button = Image("connect-inner-button")
     static let pia_settings_bg_image = Image(.pia_settings_bg_image)
+    static let signup_setup_screen = Image(.setup_screen)
 }
 
 extension String {
@@ -22,4 +23,5 @@ extension String {
     static let icon_dip_location = "icon-dip-location"
     
     static let pia_settings_bg_image = "settings-bg-image"
+    static let setup_screen = "setup-screen"
 }

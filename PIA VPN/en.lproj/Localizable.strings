@@ -526,3 +526,10 @@
 "settings.dedicatedip.status.invalid" = "Invalid";
 "settings.dedicatedip.status.expired" = "Expired";
 "settings.dedicatedip.status.error" = "Error";
+
+//SignUp (tvOS)
+"tvos.signup.title" = "Get Private Internet Access";
+"tvos.signup.item1" = "VPN servers in 91 countries";
+"tvos.signup.item2" = "Blazing-fast speeds";
+"tvos.signup.item3" = "24/7 customer support";
+"tvos.signup.cta" = "Scan the QR Code";

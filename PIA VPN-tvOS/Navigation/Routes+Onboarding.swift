@@ -11,6 +11,7 @@ import SwiftUI
 
 enum AuthenticationDestinations: Destinations {
     case loginCredentials
+    case signup
 }
 
 enum OnboardingDestinations: Destinations {
@@ -24,6 +25,8 @@ public extension View {
             switch destination {
                 case .loginCredentials:
                     LoginFactory.makeLoginView()
+                case .signup:
+                    SignUpFactory.makeSignupView()
             }
         }
     }

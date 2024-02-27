@@ -20,11 +20,13 @@ class WelcomeFactory {
             AppRouter.Actions.navigate(router: AppRouter.shared, destination: AuthenticationDestinations.loginCredentials)()
         }
         
-        let signupButton = OnboardingComponentButton(title: L10n.Localizable.Tvos.Welcome.Button.signup) {}
+        let signupButton = OnboardingComponentButton(title: L10n.Localizable.Tvos.Welcome.Button.signup) {
+            AppRouter.Actions.navigate(router: AppRouter.shared, destination: AuthenticationDestinations.signup)()
+        }
         
         return OnboardingComponentViewModel(title: L10n.Localizable.Tvos.Welcome.title,
                                             subtitle: nil,
-                                            buttons: [loginButton])
+                                            buttons: [loginButton, signupButton])
     }
     
     private static func makeWelcomeViewStyle() -> OnboardingComponentStytle {
