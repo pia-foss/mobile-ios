@@ -18,7 +18,6 @@ class TopNavigationViewModel: ObservableObject {
     
     let leadingSections: [Sections] = [.vpn, .locations]
     
-    // TODO: Add 'help' section in the trailing sections when we implement it
     let trailingSections: [Sections] = [.settings(.root), .help(.root)]
     
     enum Sections: Equatable, Hashable, Identifiable {

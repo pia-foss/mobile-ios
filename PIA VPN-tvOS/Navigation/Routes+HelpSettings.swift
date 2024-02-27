@@ -29,7 +29,9 @@ extension View {
             case .acknowledments:
                 EmptyView()
             case .privacyPolicy:
-                EmptyView()
+                HelpFactory.makePrivacyPolicyView()
+                    .withTopNavigationBar(title: L10n.Localizable.Settings.Section.help, subtitle: L10n.Localizable.HelpMenu.AboutOptions.PrivacyPolicy.title)
+                    
             }
         }
     }

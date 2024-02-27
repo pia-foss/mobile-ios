@@ -29,6 +29,12 @@ class HelpFactory {
             onPrivacyPolicyAction: .navigate(router: appRouter, destination: HelpDestinations.privacyPolicy))
     }
     
+    static func makePrivacyPolicyView() -> PrivacyPolicyView {
+        let privacyPolicyURL = URL(string: "https://www.privateinternetaccess.com/privacy-policy")!
+        
+        return PrivacyPolicyView(privacyPolicyURL: privacyPolicyURL)
+    }
+    
     
 }
 

@@ -21,5 +21,6 @@ struct Spacing {
     static let settingsButtonHeight: CGFloat = 66
     static let settingsButtonHorizontalPadding: CGFloat = 20
     static let settingsHorizontalBigPadding: CGFloat = settingsButtonHorizontalPadding * 2
+    static let contentViewMaxWidth: CGFloat = 861
 }
 

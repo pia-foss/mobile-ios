@@ -30,7 +30,8 @@ class AboutOptionsViewModel: ObservableObject {
     let onAcknowledgementsAction: AppRouter.Actions
     let onPrivacyPolicyAction: AppRouter.Actions
     
-    let sections: [Sections] = [.acknowledgements, .privacyPolicy]
+    // TODO: Add .acknowledgments section here when implemented
+    let sections: [Sections] = [.privacyPolicy]
     
     init(onAcknowledgementsAction: AppRouter.Actions, onPrivacyPolicyAction: AppRouter.Actions) {
         self.onAcknowledgementsAction = onAcknowledgementsAction

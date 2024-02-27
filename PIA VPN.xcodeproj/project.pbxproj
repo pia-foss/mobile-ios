@@ -282,6 +282,7 @@
 		69C5E7D02B72962700FE3126 /* TopNavigationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C5E7CF2B72962700FE3126 /* TopNavigationFactory.swift */; };
 		69CA26B22B59668700E78894 /* RegionsListUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CA26B12B59668700E78894 /* RegionsListUseCaseMock.swift */; };
 		69E192472B8E3E8700A97286 /* HelpOptionsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E192462B8E3E8700A97286 /* HelpOptionsViewModelTests.swift */; };
+		69E192492B8E4BCC00A97286 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E192482B8E4BCC00A97286 /* PrivacyPolicyView.swift */; };
 		69E61DE82B55643500085648 /* RegionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E61DE72B55643500085648 /* RegionsListView.swift */; };
 		69E61DEA2B55644900085648 /* RegionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E61DE92B55644900085648 /* RegionsListViewModel.swift */; };
 		69E61DEC2B5564C600085648 /* RegionsSelectionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E61DEB2B5564C600085648 /* RegionsSelectionFactory.swift */; };
@@ -1189,6 +1190,7 @@
 		69E192432B8E22FC00A97286 /* PIA-VPN_E2E_Tests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PIA-VPN_E2E_Tests.xctestplan"; sourceTree = "<group>"; };
 		69E192442B8E274500A97286 /* PIA VPN-tvOS_E2E_Tests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PIA VPN-tvOS_E2E_Tests.xctestplan"; sourceTree = "<group>"; };
 		69E192462B8E3E8700A97286 /* HelpOptionsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpOptionsViewModelTests.swift; sourceTree = "<group>"; };
+		69E192482B8E4BCC00A97286 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		69E61DE72B55643500085648 /* RegionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListView.swift; sourceTree = "<group>"; };
 		69E61DE92B55644900085648 /* RegionsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListViewModel.swift; sourceTree = "<group>"; };
 		69E61DEB2B5564C600085648 /* RegionsSelectionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsSelectionFactory.swift; sourceTree = "<group>"; };
@@ -2607,6 +2609,7 @@
 			children = (
 				69F2C3712B8CAFB2006255F9 /* AboutOptionsView.swift */,
 				69F2C3792B8CC58F006255F9 /* HelpOptionsView.swift */,
+				69E192482B8E4BCC00A97286 /* PrivacyPolicyView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -4806,6 +4809,7 @@
 				E5AB288A2B29BDED00744E5F /* Foundation+PIA.swift in Sources */,
 				E5C507A22B0FE40000200A6A /* LoginView.swift in Sources */,
 				693CA5AD2B3ED74100D38378 /* AppConfiguration.swift in Sources */,
+				69E192492B8E4BCC00A97286 /* PrivacyPolicyView.swift in Sources */,
 				69E61DE82B55643500085648 /* RegionsListView.swift in Sources */,
 				696ECB712B7E2573006276EA /* AppPreferences+Protocols.swift in Sources */,
 				69F675AD2B593437000E31D5 /* ServerProvider+UI.swift in Sources */,
