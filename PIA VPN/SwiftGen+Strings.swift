@@ -202,6 +202,14 @@ internal enum L10n {
           /// Connection Error
           internal static let title = L10n.tr("Localizable", "dashboard.connection_state.error.title", fallback: "Connection Error")
         }
+        internal enum NetworkErrorAlert {
+          /// Please check your internet connection and try again
+          internal static let message = L10n.tr("Localizable", "dashboard.connection_state.network_error_alert.message", fallback: "Please check your internet connection and try again")
+          internal enum PrimaryAction {
+            /// Retry
+            internal static let title = L10n.tr("Localizable", "dashboard.connection_state.network_error_alert.primary_action.title", fallback: "Retry")
+          }
+        }
         internal enum Reconnecting {
           /// Reconnecting...
           internal static let title = L10n.tr("Localizable", "dashboard.connection_state.reconnecting.title", fallback: "Reconnecting...")
@@ -536,6 +544,50 @@ internal enum L10n {
       internal enum Vpn {
         /// VPN Settings
         internal static let settings = L10n.tr("Localizable", "global.vpn.settings", fallback: "VPN Settings")
+      }
+    }
+    internal enum HelpMenu {
+      internal enum AboutOptions {
+        internal enum Acknowledgements {
+          /// Acknowledgements
+          internal static let title = L10n.tr("Localizable", "help_menu.about_options.acknowledgements.title", fallback: "Acknowledgements")
+        }
+        internal enum PrivacyPolicy {
+          /// Privacy Policy
+          internal static let title = L10n.tr("Localizable", "help_menu.about_options.privacy_policy.title", fallback: "Privacy Policy")
+        }
+      }
+      internal enum AboutSection {
+        internal enum PrivacyPolicy {
+          /// This privacy policy ('Privacy Policy' or 'Policy') explains the privacy practices of Private Internet Access, Inc., (collectively, 'We', 'Us', 'Data Controller', 'Company', or 'PIA') and applies to users ('User(s)' or 'You') of PIA's services, including, among other things, the PIA VPN service ('Service') and PIA website at www.privateinternetaccess.com ('Website').
+          internal static let description = L10n.tr("Localizable", "help_menu.about_section.privacy_policy.description", fallback: "This privacy policy ('Privacy Policy' or 'Policy') explains the privacy practices of Private Internet Access, Inc., (collectively, 'We', 'Us', 'Data Controller', 'Company', or 'PIA') and applies to users ('User(s)' or 'You') of PIA's services, including, among other things, the PIA VPN service ('Service') and PIA website at www.privateinternetaccess.com ('Website').")
+          internal enum QrCode {
+            /// Scan the QR code to access the full privacy policy on your device.
+            internal static let message = L10n.tr("Localizable", "help_menu.about_section.privacy_policy.qr_code.message", fallback: "Scan the QR code to access the full privacy policy on your device.")
+          }
+        }
+      }
+      internal enum AppVersionSection {
+        /// App Version
+        internal static let title = L10n.tr("Localizable", "help_menu.app_version_section.title", fallback: "App Version")
+      }
+      internal enum ContactSupport {
+        internal enum QrCode {
+          /// Scan the QR code to get in touch to our Support Team.
+          internal static let message = L10n.tr("Localizable", "help_menu.contact_support.qr_code.message", fallback: "Scan the QR code to get in touch to our Support Team.")
+          /// Contact Support
+          internal static let title = L10n.tr("Localizable", "help_menu.contact_support.qr_code.title", fallback: "Contact Support")
+        }
+      }
+      internal enum HelpImprove {
+        internal enum Disabled {
+          /// OFF
+          internal static let title = L10n.tr("Localizable", "help_menu.help_improve.disabled.title", fallback: "OFF")
+        }
+        internal enum Enabled {
+          /// ON
+          internal static let title = L10n.tr("Localizable", "help_menu.help_improve.enabled.title", fallback: "ON")
+        }
       }
     }
     internal enum Hotspothelper {

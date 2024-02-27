@@ -24,6 +24,10 @@ class AppRouterSpy: AppRouterType {
                         return lhsAuth == rhsAuth
                     }
                 
+                    if let lhsHelp = lhsRoute as? HelpDestinations,
+                       let rhsHelp = rhsRoute as? HelpDestinations {
+                        return lhsHelp == rhsHelp
+                    }
                     return false
                 case (.pop, .pop), (.goBackToRoot, .goBackToRoot):
                     return true

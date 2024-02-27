@@ -287,7 +287,7 @@
 "settings.nmt.optout.disconnect.alerts" = "Opt-out disconnect confirmation alert";
 "settings.nmt.optout.disconnect.alerts.description" = "Disables the warning alert when disconnecting from the VPN.";
 "settings.nmt.wireguard.warning" = "WireGuard® doesn't need to reconnect when you switch between different networks. It may be necessary to manually disconnect the VPN on trusted networks.";
-"settings.service.quality.share.title" = "Help improve PIA";
+"settings.service.quality.share.title" = "Help Improve PIA";
 "settings.service.quality.share.description" = "Help us improve by sharing VPN connection statistics. These reports never contain personally identifiable information.";
 "settings.service.quality.share.findoutmore" = "Find out more";
 "settings.service.quality.show.title" = "Connection stats";
@@ -493,6 +493,8 @@
 "dashboard.connection_state.reconnecting.title" = "Reconnecting...";
 "dashboard.connection_state.disconnecting.title" = "Disconnecting...";
 "dashboard.connection_state.error.title" = "Connection Error";
+"dashboard.connection_state.network_error_alert.message" = "Please check your internet connection and try again";
+"dashboard.connection_state.network_error_alert.primary_action.title" = "Retry";
 
 // Settings (tvOS)
 "settings.account.log_out_button.title" = "Log Out";
@@ -533,3 +535,18 @@
 "tvos.signup.item2" = "Blazing-fast speeds";
 "tvos.signup.item3" = "24/7 customer support";
 "tvos.signup.cta" = "Scan the QR Code";
+
+"help_menu.app_version_section.title" = "App Version";
+"help_menu.contact_support.qr_code.title" = "Contact Support";
+"help_menu.contact_support.qr_code.message" = "Scan the QR code to get in touch to our Support Team.";
+
+"help_menu.about_options.acknowledgements.title" = "Acknowledgements";
+"help_menu.about_options.privacy_policy.title" = "Privacy Policy";
+
+"help_menu.about_section.privacy_policy.description" = "This privacy policy ('Privacy Policy' or 'Policy') explains the privacy practices of Private Internet Access, Inc., (collectively, 'We', 'Us', 'Data Controller', 'Company', or 'PIA') and applies to users ('User(s)' or 'You') of PIA's services, including, among other things, the PIA VPN service ('Service') and PIA website at www.privateinternetaccess.com ('Website').";
+"help_menu.about_section.privacy_policy.qr_code.message" = "Scan the QR code to access the full privacy policy on your device.";
+
+"help_menu.help_improve.enabled.title" = "ON";
+"help_menu.help_improve.disabled.title" = "OFF";
+
+
