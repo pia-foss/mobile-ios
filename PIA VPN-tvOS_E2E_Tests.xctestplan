@@ -1,0 +1,37 @@
+{
+  "configurations" : [
+    {
+      "id" : "EC1EF781-61B8-484C-BB72-58B0B8656D3B",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "environmentVariableEntries" : [
+      {
+        "key" : "PIA_TEST_USER",
+        "value" : "xxx"
+      },
+      {
+        "key" : "PIA_TEST_DEDICATEDIP",
+        "value" : "xxx"
+      },
+      {
+        "key" : "PIA_TEST_PASSWORD",
+        "value" : "xxx"
+      }
+    ]
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:PIA VPN.xcodeproj",
+        "identifier" : "35E8E6572B870AD200A3A3DB",
+        "name" : "PIA-VPN_tvOS_E2E_Tests"
+      }
+    }
+  ],
+  "version" : 1
+}

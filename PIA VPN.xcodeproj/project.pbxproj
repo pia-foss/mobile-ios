@@ -1178,6 +1178,8 @@
 		69C5E7CF2B72962700FE3126 /* TopNavigationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationFactory.swift; sourceTree = "<group>"; };
 		69CA26B12B59668700E78894 /* RegionsListUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListUseCaseMock.swift; sourceTree = "<group>"; };
 		69E192422B8E14DF00A97286 /* PIA VPN-tvOS.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PIA VPN-tvOS.xctestplan"; sourceTree = "<group>"; };
+		69E192432B8E22FC00A97286 /* PIA-VPN_E2E_Tests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PIA-VPN_E2E_Tests.xctestplan"; sourceTree = "<group>"; };
+		69E192442B8E274500A97286 /* PIA VPN-tvOS_E2E_Tests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PIA VPN-tvOS_E2E_Tests.xctestplan"; sourceTree = "<group>"; };
 		69E61DE72B55643500085648 /* RegionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListView.swift; sourceTree = "<group>"; };
 		69E61DE92B55644900085648 /* RegionsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListViewModel.swift; sourceTree = "<group>"; };
 		69E61DEB2B5564C600085648 /* RegionsSelectionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsSelectionFactory.swift; sourceTree = "<group>"; };
@@ -1899,6 +1901,8 @@
 		291C6373183EBC210039EC03 = {
 			isa = PBXGroup;
 			children = (
+				69E192442B8E274500A97286 /* PIA VPN-tvOS_E2E_Tests.xctestplan */,
+				69E192432B8E22FC00A97286 /* PIA-VPN_E2E_Tests.xctestplan */,
 				69E192422B8E14DF00A97286 /* PIA VPN-tvOS.xctestplan */,
 				8269A6ED251CB5ED000B4DBF /* PIAWidgetExtension.entitlements */,
 				291C6385183EBC210039EC03 /* PIA VPN */,
