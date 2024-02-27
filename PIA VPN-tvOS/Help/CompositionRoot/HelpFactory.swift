@@ -35,6 +35,10 @@ class HelpFactory {
         return PrivacyPolicyView(privacyPolicyURL: privacyPolicyURL)
     }
     
+    static var makeLicensesUseCase: LicensesUseCaseType = {
+        return LicensesUseCase(urlSession: URLSession.shared)
+    }()
+    
     
 }
 

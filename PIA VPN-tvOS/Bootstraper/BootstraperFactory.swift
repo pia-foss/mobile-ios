@@ -12,17 +12,21 @@ import SwiftyBeaver
 
 class BootstraperFactory {
     static func makeBootstrapper() -> BootstraperType {
-        Bootstrapper(setupDebugginConsole: setupDebugginConsole,
-                     loadDataBase: loadDataBase,
-                     cleanCurrentAccount: cleanCurrentAccount,
-                     migrateNMT: migrateNMT,
-                     setupLatestRegionList: setupLatestRegionList,
-                     setupConfiguration: setupConfiguration,
-                     setupPreferences: setupPreferences,
-                     acceptDataSharing: acceptDataSharing,
-                     dependencyBootstrap: Client.bootstrap,
-                     renewalDIPToken: renewalDIPToken,
-                     setupExceptionHandler: setupExceptionHandler)
+        Bootstrapper(
+            setupDebugginConsole: setupDebugginConsole,
+            loadDataBase: loadDataBase,
+            cleanCurrentAccount: cleanCurrentAccount,
+            migrateNMT: migrateNMT,
+            setupLatestRegionList: setupLatestRegionList,
+            setupConfiguration: setupConfiguration,
+            setupPreferences: setupPreferences,
+            acceptDataSharing: acceptDataSharing,
+            dependencyBootstrap: Client.bootstrap,
+            renewalDIPToken: renewalDIPToken,
+            setupExceptionHandler: setupExceptionHandler,
+            startConnectionStateMonitor: startConnectionStateMonitor,
+            startCachingLicenses: startCachingLicenses
+        )
     }
     
     private static func setupDebugginConsole() {
@@ -102,4 +106,14 @@ class BootstraperFactory {
             Client.preferences.lastKnownException = "$exception,\n\(exception.callStackSymbols.joined(separator: "\n"))"
         }
     }
+    
+    
+    private static func startCachingLicenses() {
+        HelpFactory.makeLicensesUseCase()
+    }
+    
+    private static func startConnectionStateMonitor() {
+        StateMonitorsFactory.makeConnectionStateMonitor()
+    }
+    
 }

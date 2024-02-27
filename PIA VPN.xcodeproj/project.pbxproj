@@ -117,8 +117,6 @@
 		0EFDC1D81FE46177007C0B9B /* SensitiveOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1D61FE46177007C0B9B /* SensitiveOperation.swift */; };
 		0EFDC1DA1FE4640C007C0B9B /* DNSResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1D91FE4640C007C0B9B /* DNSResolver.swift */; };
 		0EFDC1DB1FE4640C007C0B9B /* DNSResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1D91FE4640C007C0B9B /* DNSResolver.swift */; };
-		0EFDC1E01FE4A450007C0B9B /* AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1DF1FE4A450007C0B9B /* AppPreferences.swift */; };
-		0EFDC1E11FE4A450007C0B9B /* AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1DF1FE4A450007C0B9B /* AppPreferences.swift */; };
 		0EFDC1E61FE4ABAA007C0B9B /* Notification+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1E51FE4ABAA007C0B9B /* Notification+App.swift */; };
 		0EFDC1E71FE4ABAA007C0B9B /* Notification+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1E51FE4ABAA007C0B9B /* Notification+App.swift */; };
 		0EFDC1EC1FE4B9DC007C0B9B /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1EB1FE4B9DC007C0B9B /* AppConstants.swift */; };
@@ -283,6 +281,11 @@
 		69CA26B22B59668700E78894 /* RegionsListUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CA26B12B59668700E78894 /* RegionsListUseCaseMock.swift */; };
 		69E192472B8E3E8700A97286 /* HelpOptionsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E192462B8E3E8700A97286 /* HelpOptionsViewModelTests.swift */; };
 		69E192492B8E4BCC00A97286 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E192482B8E4BCC00A97286 /* PrivacyPolicyView.swift */; };
+		69E1924B2B8E63DD00A97286 /* Licences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69E1924A2B8E63DD00A97286 /* Licences.plist */; };
+		69E1924C2B8E656000A97286 /* AboutComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AEA6120683FDF00B6E59A /* AboutComponent.swift */; };
+		69E1924E2B8E698000A97286 /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E1924D2B8E698000A97286 /* AcknowledgementsView.swift */; };
+		69E192502B8E699000A97286 /* AcknowledgementsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E1924F2B8E699000A97286 /* AcknowledgementsViewModel.swift */; };
+		69E192532B8E6A2D00A97286 /* LicensesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E192522B8E6A2D00A97286 /* LicensesUseCase.swift */; };
 		69E61DE82B55643500085648 /* RegionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E61DE72B55643500085648 /* RegionsListView.swift */; };
 		69E61DEA2B55644900085648 /* RegionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E61DE92B55644900085648 /* RegionsListViewModel.swift */; };
 		69E61DEC2B5564C600085648 /* RegionsSelectionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E61DEB2B5564C600085648 /* RegionsSelectionFactory.swift */; };
@@ -1191,6 +1194,10 @@
 		69E192442B8E274500A97286 /* PIA VPN-tvOS_E2E_Tests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PIA VPN-tvOS_E2E_Tests.xctestplan"; sourceTree = "<group>"; };
 		69E192462B8E3E8700A97286 /* HelpOptionsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpOptionsViewModelTests.swift; sourceTree = "<group>"; };
 		69E192482B8E4BCC00A97286 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
+		69E1924A2B8E63DD00A97286 /* Licences.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Licences.plist; path = "PIA VPN-tvOS/Resources/Licences.plist"; sourceTree = SOURCE_ROOT; };
+		69E1924D2B8E698000A97286 /* AcknowledgementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsView.swift; sourceTree = "<group>"; };
+		69E1924F2B8E699000A97286 /* AcknowledgementsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsViewModel.swift; sourceTree = "<group>"; };
+		69E192522B8E6A2D00A97286 /* LicensesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicensesUseCase.swift; sourceTree = "<group>"; };
 		69E61DE72B55643500085648 /* RegionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListView.swift; sourceTree = "<group>"; };
 		69E61DE92B55644900085648 /* RegionsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListViewModel.swift; sourceTree = "<group>"; };
 		69E61DEB2B5564C600085648 /* RegionsSelectionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsSelectionFactory.swift; sourceTree = "<group>"; };
@@ -2480,6 +2487,14 @@
 			path = HelpOptions;
 			sourceTree = "<group>";
 		};
+		69E192512B8E6A1F00A97286 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				69E192522B8E6A2D00A97286 /* LicensesUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
 		69E61DE32B5563C500085648 /* RegionsSelection */ = {
 			isa = PBXGroup;
 			children = (
@@ -2589,6 +2604,7 @@
 		69F2C36D2B8CABD5006255F9 /* Help */ = {
 			isa = PBXGroup;
 			children = (
+				69E192512B8E6A1F00A97286 /* UseCases */,
 				69F2C3702B8CABFF006255F9 /* Presentation */,
 				69F2C36F2B8CABF7006255F9 /* UI */,
 				69F2C36E2B8CABEB006255F9 /* CompositionRoot */,
@@ -2610,6 +2626,7 @@
 				69F2C3712B8CAFB2006255F9 /* AboutOptionsView.swift */,
 				69F2C3792B8CC58F006255F9 /* HelpOptionsView.swift */,
 				69E192482B8E4BCC00A97286 /* PrivacyPolicyView.swift */,
+				69E1924D2B8E698000A97286 /* AcknowledgementsView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2619,6 +2636,7 @@
 			children = (
 				69F2C3732B8CAFC3006255F9 /* AboutOptionsViewModel.swift */,
 				69F2C37B2B8CC5A5006255F9 /* HelpOptionsViewModel.swift */,
+				69E1924F2B8E699000A97286 /* AcknowledgementsViewModel.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -3242,6 +3260,7 @@
 		E574DA032B860E59000FADAF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				69E1924A2B8E63DD00A97286 /* Licences.plist */,
 				E574DA062B8610CF000FADAF /* Regions.json */,
 			);
 			path = Resources;
@@ -4209,6 +4228,7 @@
 			files = (
 				E52E69032B56E22D00471913 /* Welcome.strings in Resources */,
 				69F0534A2B1F1D2800AE0665 /* Colors.xcassets in Resources */,
+				69E1924B2B8E63DD00A97286 /* Licences.plist in Resources */,
 				E5C507812B0E145000200A6A /* Preview Assets.xcassets in Resources */,
 				E574DA072B8610CF000FADAF /* Regions.json in Resources */,
 				E5C5077E2B0E145000200A6A /* Assets.xcassets in Resources */,
@@ -4423,7 +4443,6 @@
 				0E9452971FDB4C5800891948 /* AboutComponentCell.swift in Sources */,
 				3524670C26B432BC00E3F0AC /* TrustedNetworkHelper.swift in Sources */,
 				0E53A83C1FE5A156000C2A18 /* AccountProvider+Refresh.swift in Sources */,
-				0EFDC1E11FE4A450007C0B9B /* AppPreferences.swift in Sources */,
 				0E441E272055AEDF007528D5 /* ThemeStrategy+App.swift in Sources */,
 				DDC8125021761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift in Sources */,
 				69B70ABF2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */,
@@ -4613,7 +4632,6 @@
 				0E53A83B1FE5A156000C2A18 /* AccountProvider+Refresh.swift in Sources */,
 				AAA4707B2B737FC100F28590 /* IsWireguardMigrationPerformed.swift in Sources */,
 				82B7374B26527E330097FFF6 /* GeneralSettingsViewController.swift in Sources */,
-				0EFDC1E01FE4A450007C0B9B /* AppPreferences.swift in Sources */,
 				E51693D52AFBDB8A0089FB8F /* NavigationBar+Appearence..swift in Sources */,
 				3524670B26B431B800E3F0AC /* TrustedNetworkHelper.swift in Sources */,
 				829EB54A2535BA40003E74DD /* DedicatedIPTitleHeaderViewCell.swift in Sources */,
@@ -4768,6 +4786,7 @@
 				6953E54F2B7AA69800D685B4 /* ConnectionStateMonitor.swift in Sources */,
 				69FF0B0B2B3AD4C70074AA04 /* SwiftGen+Strings.swift in Sources */,
 				69F675AA2B592ED6000E31D5 /* ClientPreferences+Protocols.swift in Sources */,
+				69E192502B8E699000A97286 /* AcknowledgementsViewModel.swift in Sources */,
 				69FF0B062B3AD2860074AA04 /* QuickConnectView.swift in Sources */,
 				69F2C3742B8CAFC3006255F9 /* AboutOptionsViewModel.swift in Sources */,
 				E5AB28B42B35AA8C00744E5F /* VPNConfigurationInstallingFactory.swift in Sources */,
@@ -4811,6 +4830,7 @@
 				693CA5AD2B3ED74100D38378 /* AppConfiguration.swift in Sources */,
 				69E192492B8E4BCC00A97286 /* PrivacyPolicyView.swift in Sources */,
 				69E61DE82B55643500085648 /* RegionsListView.swift in Sources */,
+				69E192532B8E6A2D00A97286 /* LicensesUseCase.swift in Sources */,
 				696ECB712B7E2573006276EA /* AppPreferences+Protocols.swift in Sources */,
 				69F675AD2B593437000E31D5 /* ServerProvider+UI.swift in Sources */,
 				E5AB287D2B28E4E700744E5F /* UserAccountMapper.swift in Sources */,
@@ -4838,6 +4858,7 @@
 				E574D9DC2B83F3A2000FADAF /* DipServerProvider.swift in Sources */,
 				E574D9F52B84A7CC000FADAF /* RemoveDIPUseCase.swift in Sources */,
 				E574D9DE2B83F3A2000FADAF /* DedicatedIPError.swift in Sources */,
+				69E1924C2B8E656000A97286 /* AboutComponent.swift in Sources */,
 				E5C507AE2B17E45800200A6A /* LoginPresentableErrorMapper.swift in Sources */,
 				69E61DEA2B55644900085648 /* RegionsListViewModel.swift in Sources */,
 				69816C3D2B4EBB3C00E3C86B /* Destinations.swift in Sources */,
@@ -4866,6 +4887,7 @@
 				69F2C3722B8CAFB2006255F9 /* AboutOptionsView.swift in Sources */,
 				69F1C2932B2B10D400E924AE /* DashboardFactory.swift in Sources */,
 				E5AB28B62B361E6C00744E5F /* VPNConfigurationInstallingErrorMapper.swift in Sources */,
+				69E1924E2B8E698000A97286 /* AcknowledgementsView.swift in Sources */,
 				E574DA152B8D41CB000FADAF /* QRImageView.swift in Sources */,
 				E55EDCD22B755DB1007010DB /* OnboardingComponentView.swift in Sources */,
 				69793DA42B5A9B27000CB845 /* RegionsContainerView.swift in Sources */,
