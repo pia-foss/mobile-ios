@@ -167,6 +167,7 @@
 		35E8E67D2B8C3CBA00A3A3DB /* CredentialsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E8E67C2B8C3CBA00A3A3DB /* CredentialsUtil.swift */; };
 		35E8E67F2B8C60F500A3A3DB /* DashboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E8E67E2B8C60F500A3A3DB /* DashboardScreen.swift */; };
 		35E8E6812B8C637D00A3A3DB /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E8E6802B8C637D00A3A3DB /* SettingsScreen.swift */; };
+		35E8E6832B8ED52300A3A3DB /* OnboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E8E6822B8ED52300A3A3DB /* OnboardingTests.swift */; };
 		35EDD6282ADE5D31007B9ACB /* BaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD6272ADE5D31007B9ACB /* BaseTest.swift */; };
 		35EDD62A2ADE5F08007B9ACB /* SignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD6292ADE5F08007B9ACB /* SignInTests.swift */; };
 		35EDD6332ADE7281007B9ACB /* OnboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD6322ADE7281007B9ACB /* OnboardingTests.swift */; };
@@ -1079,6 +1080,7 @@
 		35E8E67C2B8C3CBA00A3A3DB /* CredentialsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsUtil.swift; sourceTree = "<group>"; };
 		35E8E67E2B8C60F500A3A3DB /* DashboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardScreen.swift; sourceTree = "<group>"; };
 		35E8E6802B8C637D00A3A3DB /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+		35E8E6822B8ED52300A3A3DB /* OnboardingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTests.swift; sourceTree = "<group>"; };
 		35EDD6272ADE5D31007B9ACB /* BaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTest.swift; sourceTree = "<group>"; };
 		35EDD6292ADE5F08007B9ACB /* SignInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInTests.swift; sourceTree = "<group>"; };
 		35EDD6322ADE7281007B9ACB /* OnboardingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTests.swift; sourceTree = "<group>"; };
@@ -2099,6 +2101,7 @@
 			isa = PBXGroup;
 			children = (
 				35E8E6702B8C386B00A3A3DB /* SignInTests.swift */,
+				35E8E6822B8ED52300A3A3DB /* OnboardingTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -4593,6 +4596,7 @@
 				35E8E6742B8C388A00A3A3DB /* BaseTest.swift in Sources */,
 				35E8E6682B87178600A3A3DB /* KeyboardNavigator.swift in Sources */,
 				35E8E6812B8C637D00A3A3DB /* SettingsScreen.swift in Sources */,
+				35E8E6832B8ED52300A3A3DB /* OnboardingTests.swift in Sources */,
 				35E8E67D2B8C3CBA00A3A3DB /* CredentialsUtil.swift in Sources */,
 				35E8E67F2B8C60F500A3A3DB /* DashboardScreen.swift in Sources */,
 				35E8E66C2B8C384200A3A3DB /* SignInScreen.swift in Sources */,
