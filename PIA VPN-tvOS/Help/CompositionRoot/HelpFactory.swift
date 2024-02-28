@@ -40,5 +40,13 @@ class HelpFactory {
     }()
     
     
+    private static func makeAcknowledgementsViewModel() -> AcknowledgementsViewModel {
+        return AcknowledgementsViewModel(licencesUseCase: makeLicensesUseCase)
+    }
+    
+    static func makeAcknowledgementsView() -> AcknowledgementsView {
+        return AcknowledgementsView(viewModel: makeAcknowledgementsViewModel())
+    }
+    
 }
 

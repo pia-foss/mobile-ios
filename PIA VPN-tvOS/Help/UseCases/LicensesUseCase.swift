@@ -21,7 +21,7 @@ protocol URLSessionType {
 extension URLSession: URLSessionType {}
 
 class LicensesUseCase: LicensesUseCaseType {
-    private(set) var cachedLicenseContent: [String: String] = [:]
+    @MainActor internal var cachedLicenseContent: [String: String] = [:]
     
     private let licencesPath = Bundle.main.path(forResource: "Licences", ofType: "plist")
     
@@ -40,15 +40,16 @@ class LicensesUseCase: LicensesUseCaseType {
     }
     
     func getLicenseContent(for license: LicenseComponent) async -> String {
-        if let cachedContent = cachedLicenseContent[license.name] {
-            NSLog(">>> >>> Will return license from cache: \(cachedContent)")
+        if let cachedContent = await cachedLicenseContent[license.name] {
             return cachedContent
         }
         
         do {
             let (data, response) = try await urlSession.data(from: license.licenseURL)
             if let licenseContent = String(data: data, encoding: .ascii) {
-                cachedLicenseContent[license.name] = licenseContent
+                DispatchQueue.main.async {
+                    self.cachedLicenseContent[license.name] = licenseContent
+                }
                 return licenseContent
             } else {
                 return ""
@@ -65,8 +66,6 @@ class LicensesUseCase: LicensesUseCaseType {
         for license in getLicences() {
             Task {
                 let content = await getLicenseContent(for: license)
-                NSLog(">>> License FINAL content: \(content)")
-                
             }
             
         }

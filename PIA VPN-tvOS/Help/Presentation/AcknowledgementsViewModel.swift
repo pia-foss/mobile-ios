@@ -17,7 +17,13 @@ class AcknowledgementsViewModel: ObservableObject {
         self.licenses = licencesUseCase.getLicences()
     }
     
+    let copyright = (
+        title:  L10n.Localizable.HelpMenu.AboutSection.Acknowledgments.Copyright.title,
+        description:  L10n.Localizable.HelpMenu.AboutSection.Acknowledgments.Copyright.description
+    )
+    
     func getLicenseContent(for license: LicenseComponent) async -> String {
         await licencesUseCase.getLicenseContent(for: license)
     }
 }
+

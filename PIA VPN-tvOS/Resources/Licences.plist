@@ -6,6 +6,22 @@
 	<array>
 		<dict>
 			<key>Name</key>
+			<string>ReachabilitySwift</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2016 Ashley Mills</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/ashleymills/Reachability.swift/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Alamofire</string>
+			<key>Copyright</key>
+			<string>Copyright (c) 2014-2018 Alamofire Software Foundation (http://alamofire.org/)</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/Alamofire/Alamofire/master/LICENSE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
 			<string>TunnelKit</string>
 			<key>Copyright</key>
 			<string>Copyright (c) 2019 Davide De Rosa. All rights reserved.</string>
@@ -18,7 +34,7 @@
 			<key>Copyright</key>
 			<string>Copyright (c) 1998-2018 The OpenSSL Project. All rights reserved.</string>
 			<key>LicenseURL</key>
-			<string>https://www.openssl.org/source/license.txt</string>
+			<string>https://openssl.org/source/apache-license-2.0.txt</string>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -34,23 +50,7 @@
 			<key>Copyright</key>
 			<string>Copyright (c) 2017 Harlan Kellaway</string>
 			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/hkellaway/Gloss/develop/LICENSE</string>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>Alamofire</string>
-			<key>Copyright</key>
-			<string>Copyright (c) 2014-2018 Alamofire Software Foundation (http://alamofire.org/)</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/Alamofire/Alamofire/master/LICENSE</string>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>ReachabilitySwift</string>
-			<key>Copyright</key>
-			<string>Copyright (c) 2016 Ashley Mills</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/ashleymills/Reachability.swift/master/LICENSE</string>
+			<string>https://raw.githubusercontent.com/hkellaway/Gloss/main/LICENSE</string>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -59,14 +59,6 @@
 			<string>Copyright (c) 2017 fxm90</string>
 			<key>LicenseURL</key>
 			<string>https://raw.githubusercontent.com/fxm90/GradientProgressBar/master/LICENSE</string>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>TPKeyboardAvoiding</string>
-			<key>Copyright</key>
-			<string>Copyright (c) 2013 Michael Tyson</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/michaeltyson/TPKeyboardAvoiding/master/LICENSE.txt</string>
 		</dict>
 		<dict>
 			<key>Name</key>

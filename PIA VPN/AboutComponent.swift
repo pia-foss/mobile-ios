@@ -53,7 +53,7 @@ struct LicenseComponent: AboutComponent {
     
     let licenseURL: URL
     
-    fileprivate init(_ name: String, _ copyright: String, _ licenseURL: URL) {
+    internal init(_ name: String, _ copyright: String, _ licenseURL: URL) {
         self.name = name
         self.copyright = copyright
         self.licenseURL = licenseURL

@@ -47,7 +47,6 @@ final class RootContainerViewModelTests: XCTestCase {
                                      connectionStatsPermissonType: fixture.connectionStatsPermissonMock,
                                      bootstrap: fixture.bootstrapMock,
                                      userAuthenticationStatusMonitor: fixture.makeUserAuthenticationStatusMonitorMock(status: .loggedOut),
-                                     connectionStateMonitor: fixture.connectionStatusMonitorMock,
                                      appRouter: fixture.appRouterSpy)
         sut.isBootstrapped = bootStrapped
     }
@@ -141,7 +140,6 @@ final class RootContainerViewModelTests: XCTestCase {
                                      connectionStatsPermissonType: fixture.connectionStatsPermissonMock,
                                      bootstrap: fixture.bootstrapMock,
                                      userAuthenticationStatusMonitor: userAuthenticationStatusMonitor,
-                                     connectionStateMonitor: fixture.connectionStatusMonitorMock,
                                      appRouter: fixture.appRouterSpy)
         
         XCTAssertEqual(sut.state, .notActivated)
@@ -168,7 +166,6 @@ final class RootContainerViewModelTests: XCTestCase {
                                      connectionStatsPermissonType: fixture.connectionStatsPermissonMock,
                                      bootstrap: fixture.bootstrapMock,
                                      userAuthenticationStatusMonitor: userAuthenticationStatusMonitor,
-                                     connectionStateMonitor: fixture.connectionStatusMonitorMock,
                                     appRouter: fixture.appRouterSpy)
         
         XCTAssertEqual(sut.state, .activated)
