@@ -18,6 +18,20 @@ struct ActionButtonStyle {
     var titlePadding: EdgeInsets = EdgeInsets()
 }
 
+enum ActionButtonStyleType {
+    case centerAligned
+    case leadingAligned
+    
+    var style: ActionButtonStyle {
+        switch self {
+        case .centerAligned:
+            return ActionButtonStyle()
+        case .leadingAligned:
+            return ActionButtonStyle(titleAlignment: .leading, titlePadding: EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+        }
+    }
+}
+
 struct ActionButton: View {
     private let title: String
     private let action: () -> Void

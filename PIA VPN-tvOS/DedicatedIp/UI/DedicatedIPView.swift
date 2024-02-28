@@ -21,7 +21,7 @@ struct DedicatedIPView: View {
                 DedicatedIpDetailsView(dedicatedIPStats: viewModel.dedicatedIPStats) {
                     viewModel.removeDIP()
                 }
-                .withTopNavigationBar(title: "Settings", subtitle: L10n.Localizable.Settings.Dedicatedip.title2)
+                .withTopNavigationBar(title: L10n.Localizable.Menu.Item.settings, subtitle: L10n.Localizable.Settings.Dedicatedip.title2)
             } else {
                 DedicatedIpActivateView(shouldShowErrorMessage: $viewModel.shouldShowErrorMessage) { token in
                     Task {

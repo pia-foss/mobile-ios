@@ -43,4 +43,8 @@ class OnboardingFactory {
                                   backgroundImage: .onboarding_stats_tv, 
                                   buttonsEdgeInsets: EdgeInsets(top: 40, leading: 30, bottom: 0, trailing: 0))
     }
+    
+    static func makeConnectionStatsPermission() -> ConnectionStatsPermissonType {
+        ConnectionStatsPermisson()
+    }
 }

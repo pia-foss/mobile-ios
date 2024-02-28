@@ -18,8 +18,7 @@ class TopNavigationViewModel: ObservableObject {
     
     let leadingSections: [Sections] = [.vpn, .locations]
     
-    // TODO: Add 'help' section in the trailing sections when we implement it
-    let trailingSections: [Sections] = [.settings()]
+    let trailingSections: [Sections] = [.settings(.root), .help(.root)]
     
     enum Sections: Equatable, Hashable, Identifiable {
         var id: Self {
@@ -29,7 +28,7 @@ class TopNavigationViewModel: ObservableObject {
         case vpn
         case locations
         case settings(SettingsPath = .root)
-        case help
+        case help(HelpPath = .root)
         
         var title: String {
             switch self {
@@ -61,6 +60,10 @@ class TopNavigationViewModel: ObservableObject {
         enum SettingsPath: Equatable {
             case root, account, general, dedicatedIp
         }
+        
+        enum HelpPath: Equatable {
+            case root, about, acknowledgements, privacyPolicy
+        }
     }
     
     init(appRouter: AppRouter) {
@@ -87,12 +90,10 @@ class TopNavigationViewModel: ObservableObject {
             // Empty the current navigation path before pushing the settings root flow
             appRouter.goBackToRoot()
             appRouter.navigate(to: SettingsDestinations.availableSettings)
-            break
         case .help:
             // Empty the current navigation path before pushing the help root flow
             appRouter.goBackToRoot()
-            // TODO: Implement me
-            break
+            appRouter.navigate(to: HelpDestinations.root)
         }
     }
     
@@ -124,12 +125,19 @@ class TopNavigationViewModel: ObservableObject {
                 return .settings(.general)
             case .dip as SettingsDestinations:
                 return .settings(.dedicatedIp)
-            // TODO: add help destinations when implemented
+            case .root as HelpDestinations:
+                return .help(.root)
+            case .about as HelpDestinations:
+                return .help(.about)
+            case .acknowledments as HelpDestinations:
+                return .help(.acknowledgements)
+            case .privacyPolicy as HelpDestinations:
+                return .help(.privacyPolicy)
             default:
                 return .vpn
             }
         } else {
-            // The path is empty, so we are in the root
+            // The path is empty, so we are in the root of the NavigationStack (.vpn)
              return .vpn
         }
         

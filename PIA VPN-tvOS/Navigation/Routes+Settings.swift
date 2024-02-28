@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-enum SettingsDestinations {
+enum SettingsDestinations: Destinations {
     case availableSettings
     case account
     case general
@@ -25,10 +25,10 @@ extension View {
             switch destination {
             case .availableSettings:
                 SettingsFactory.makeAvailableSettingsView()
-                    .withTopNavigationBar(title: "Settings")
+                    .withTopNavigationBar(title: L10n.Localizable.Menu.Item.settings)
             case .account:
                 SettingsFactory.makeAccountSettingsView()
-                    .withTopNavigationBar(title: "Settings", subtitle: "Account")
+                    .withTopNavigationBar(title: L10n.Localizable.Menu.Item.settings, subtitle: L10n.Localizable.Menu.Item.account)
             case .general:
                 // TODO: Implement me
                 EmptyView()

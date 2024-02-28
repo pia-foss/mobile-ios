@@ -10,7 +10,6 @@ import SwiftUI
 
 struct AccountSettingsView: View {
     @ObservedObject var viewModel: AccountSettingsViewModel
-    @FocusState var logoutButtonFocused: Bool
     
     let sectionsVerticalSpacing: CGFloat = 20
     
@@ -49,8 +48,12 @@ struct AccountSettingsView: View {
         HStack {
             VStack(spacing: sectionsVerticalSpacing) {
                 accountInfoSection
-                logOutButton
-                    .padding(.top, sectionsVerticalSpacing)
+                ActionButton(title: viewModel.logOutButtonTitle, style: ActionButtonStyleType.leadingAligned.style) {
+                    viewModel.logOutButtonWasTapped()
+                }
+                .frame(height: 66)
+                .padding(.top, sectionsVerticalSpacing)
+                Spacer()
             }
             
             Spacer()
@@ -69,31 +72,4 @@ struct AccountSettingsView: View {
         }
     }
     
-    var logOutButton: some View {
-        List {
-            Button {
-                viewModel.logOutButtonWasTapped()
-            } label: {
-                HStack {
-                    Text("Log Out")
-                        .font(.system(size: 38, weight: .medium))
-                        .foregroundColor(logoutButtonFocused ? .pia_on_primary : .pia_on_surface)
-                    Spacer()
-                }
-                
-            }
-            .focused($logoutButtonFocused)
-            .buttonStyle(BasicButtonStyle())
-            .buttonBorderShape(.roundedRectangle)
-            .listRowBackground(
-                logoutButtonFocused ?
-                Color.pia_primary
-                    .clipShape(RoundedRectangle(cornerSize: Spacing.listItemCornerSize)) :
-                    Color.pia_surface_container_secondary
-                    .clipShape(RoundedRectangle(cornerSize: Spacing.listItemCornerSize))
-            )
-        }
-        
-        
-    }
 }

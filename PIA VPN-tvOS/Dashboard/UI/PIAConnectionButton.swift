@@ -46,13 +46,11 @@ struct PIAConnectionButton: View {
             Button(viewModel.errorAlertCloseActionTitle, role: .cancel) {
                 
             }
-            // TODO: Localize
-            Button("Retry", role: .none) {
+            Button(L10n.Localizable.Dashboard.ConnectionState.NetworkErrorAlert.PrimaryAction.title, role: .none) {
                 viewModel.toggleConnection()
             }
         } message: {
-            // TODO: Localize
-            Text("Please check your internet connection and try again")
+            Text(L10n.Localizable.Dashboard.ConnectionState.NetworkErrorAlert.message)
         }
     }
     
