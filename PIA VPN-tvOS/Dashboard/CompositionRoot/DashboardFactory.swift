@@ -36,7 +36,7 @@ extension DashboardFactory {
         return SelectedServerViewModel(
             useCase: makeSelectedServerUserCase,
             optimalLocationUseCase: RegionsSelectionFactory.makeOptimalLocationUseCase,
-            regionsDisplayNameUseCase: RegionsSelectionFactory.makeRegionsDisplayNameUseCase(),
+            regionsDisplayNameUseCase: RegionsSelectionFactory.makeRegionsDisplayNameUseCase(), getDedicatedIpUseCase: DedicatedIPFactory.makeGetDedicatedIpUseCase(),
             routerAction: .navigate(router: AppRouterFactory.makeAppRouter(), destination: RegionsDestinations.serversList))
     }
     

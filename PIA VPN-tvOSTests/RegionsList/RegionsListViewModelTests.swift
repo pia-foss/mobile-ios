@@ -17,12 +17,16 @@ class RegionsListViewModelTests: XCTestCase {
         let regionsFilterUseCaseMock = RegionsFilterUseCaseMock()
         let regionsDisplayNameUseCaseMock = RegionsDisplayNameUseCaseMock()
         let optimalLocationUseCaseMock = OptimalLocationUseCaseMock()
-        let getDedicatedIpUseCaseMock = GetDedicatedIpUseCaseMock(result: nil)
+        var getDedicatedIpUseCaseMock = GetDedicatedIpUseCaseMock(result: nil)
         let appRouterSpy = AppRouterSpy()
         static let barcelona = ServerMock(name: "Barcelona-1", identifier: "es-server-barcelona", regionIdentifier: "es-region", country: "ES", geo: false, pingTime: 25)
         static let madrid = ServerMock(name: "Madrid", identifier: "es-server-madrid", regionIdentifier: "es-region2", country: "ES", geo: false, pingTime: 12)
         static let toronto = ServerMock(name: "CA-Toronto", identifier: "ca-server", regionIdentifier: "canada", country: "CA", geo: false, pingTime: 30)
         static let montreal = ServerMock(name: "CA-Montreal", identifier: "ca-server2", regionIdentifier: "canada2", country: "CA", geo: false, pingTime: 42)
+        
+        static let optimaLocation = ServerMock(isAutomatic: true)
+        
+        static let dipServer = ServerMock(name: "US New York", identifier: "us-ny", regionIdentifier: "us", country: "us", geo: false)
         
         var allServers: [ServerMock] = [
             toronto,
@@ -31,8 +35,13 @@ class RegionsListViewModelTests: XCTestCase {
             madrid
         ]
         
+
         func stubGetServers(for filter: RegionsListFilter, result: [ServerType]) {
             regionsFilterUseCaseMock.getServersWithFilterResult[filter] = result
+        }
+        
+        func stubGetDedicatedIpServer(dipServer: ServerType) {
+            self.getDedicatedIpUseCaseMock = GetDedicatedIpUseCaseMock(result: dipServer)
         }
     }
     
@@ -125,12 +134,28 @@ class RegionsListViewModelTests: XCTestCase {
         XCTAssertEqual(sut.regionsListTitle, "Recommended Locations")
     }
     
-    func test_filterByAllRegions() {
+    func test_filterByAllRegionsWhenNoDipServerAvailable() {
         // GIVEN that the selected filter for the regions is 'All'
+        // AND the user does not have a DIP server
         fixture.stubGetServers(for: .all, result: fixture.allServers)
         instantiateSut(with: .all)
         
-        // THEN all the locations are displayed
+        // THEN the optimal location and dip server section is showing 1 server
+        XCTAssertEqual(sut.optimalAndDIPServers.count, 1)
+        // AND the All Servers section is showing 4 servers
+        XCTAssertEqual(sut.servers.count, 4)
+    }
+    
+    func test_filterByAllRegionsWhenDipServerAvailable() {
+        // GIVEN that the user has 1 dedicated server available
+        fixture.stubGetServers(for: .all, result: fixture.allServers)
+        fixture.stubGetDedicatedIpServer(dipServer: Fixture.dipServer)
+        // AND GIVEN that the selected filter for the regions is 'All'
+        instantiateSut(with: .all)
+        
+        // THEN the optimal location and dip server section is showing 2 servers
+        XCTAssertEqual(sut.optimalAndDIPServers.count, 2)
+        // AND the All Servers section is showing 4 servers
         XCTAssertEqual(sut.servers.count, 4)
     }
     
@@ -226,7 +251,7 @@ class RegionsListViewModelTests: XCTestCase {
     
     func test_addToFavorites() {
         // GIVEN that "Barcelona is not on the Favorites list"
-        fixture.favoriteRegionsUseCaseMock.favoriteIdentifiers = []
+        fixture.favoriteRegionsUseCaseMock.isFavoriteServerWithIdentifierResult = false
         instantiateSut()
         
         // WHEN calling the toggle method on the favorites list with Barcelona
@@ -235,7 +260,7 @@ class RegionsListViewModelTests: XCTestCase {
         // THEN the use case is called once to add Barcelona to the Favorites list
         XCTAssertTrue(fixture.favoriteRegionsUseCaseMock.addToFavoritesCalled)
         XCTAssertEqual(fixture.favoriteRegionsUseCaseMock.addToFavoritesCalledAttempt, 1)
-        XCTAssertEqual(fixture.favoriteRegionsUseCaseMock.addToFavoritesCalledWithArgument, Fixture.barcelona.identifier)
+        XCTAssertEqual(fixture.favoriteRegionsUseCaseMock.addToFavoritesCalledWithArguments.serverId, Fixture.barcelona.identifier)
         // AND no error is registered when toggling a region from the favorites
         XCTAssertNil(sut.favoriteToggleError)
         
@@ -245,7 +270,7 @@ class RegionsListViewModelTests: XCTestCase {
     
     func test_removeFromFavorites() {
         // GIVEN that "Barcelona is on the Favorites list"
-        fixture.favoriteRegionsUseCaseMock.favoriteIdentifiers = [Fixture.barcelona.identifier]
+        fixture.favoriteRegionsUseCaseMock.isFavoriteServerWithIdentifierResult = true
         instantiateSut()
         
         // WHEN calling the toggle method on the favorites list with Barcelona
@@ -254,12 +279,52 @@ class RegionsListViewModelTests: XCTestCase {
         // THEN the use case is called once to remove Barcelona from the Favorites list
         XCTAssertTrue(fixture.favoriteRegionsUseCaseMock.removeFromFavoritesCalled)
         XCTAssertEqual(fixture.favoriteRegionsUseCaseMock.removeFromFavoritesCalledAttempt, 1)
-        XCTAssertEqual(fixture.favoriteRegionsUseCaseMock.removeFromFavoritesCalledWithArgument, Fixture.barcelona.identifier)
+        XCTAssertEqual(fixture.favoriteRegionsUseCaseMock.removeFromFavoritesCalledWithArguments.serverId, Fixture.barcelona.identifier)
         // AND no error is registered when toggling a region from the favorites
         XCTAssertNil(sut.favoriteToggleError)
         
         // AND the use case is NOT called to add any server from the favorites list
         XCTAssertFalse(fixture.favoriteRegionsUseCaseMock.addToFavoritesCalled)
+    }
+    
+    func test_iconImageNameForNonDedicatedIpServer() {
+        instantiateSut()
+        
+        // GIVEN that 'Madrid' is not a DIP server
+        // WHEN getting the icon image name
+        let nonDipIconImageName = sut.getIconImageName(for: Fixture.madrid)
+        
+        // THEN the icon image name for both focused and unfocused states is
+        XCTAssertEqual(nonDipIconImageName.focused, "flag-es")
+        XCTAssertEqual(nonDipIconImageName.unfocused, "flag-es")
+    }
+    
+    
+    func test_iconImageNameForDedicatedIpServer() {
+        // GIVEN that 'Toronto' is a DIP server
+        fixture.stubGetDedicatedIpServer(dipServer: Fixture.toronto)
+        
+        instantiateSut()
+        
+        // WHEN getting the icon image name
+        let dipIconName = sut.getIconImageName(for: Fixture.toronto)
+        
+        // THEN the icon image name for both focused and unfocused states is
+        XCTAssertEqual(dipIconName.focused, .icon_dip_location)
+        XCTAssertEqual(dipIconName.unfocused, .icon_dip_location)
+    }
+    
+    
+    func test_iconImageNameForOptimalLocation() {
+        
+        instantiateSut()
+        
+        // WHEN getting the icon image name for the Optimal Location (Automatic)
+        let dipIconName = sut.getIconImageName(for: Fixture.optimaLocation)
+        
+        // THEN the icon image names for focused and unfocused states are
+        XCTAssertEqual(dipIconName.focused, .smart_location_icon_highlighted_name)
+        XCTAssertEqual(dipIconName.unfocused, .smart_location_icon_name)
     }
     
     

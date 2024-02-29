@@ -13,13 +13,15 @@ protocol FavoriteRegionUseCaseType {
     var favoriteIdentifiers: [String] { get }
     var favoriteIdentifiersPublisher: Published<[String]>.Publisher { get }
     @discardableResult
-    func addToFavorites(_ id: String) throws -> [String]
+    func addToFavorites(_ id: String, isDipServer: Bool) throws -> [String]
     @discardableResult
-    func removeFromFavorites(_ id: String) throws -> [String]
+    func removeFromFavorites(_ id: String, isDipServer: Bool) throws -> [String]
+    func getFavoriteDIPServerId() -> String?
+    func isFavoriteServerWith(identifier: String, isDipServer: Bool) -> Bool
 }
 
 class FavoriteRegionUseCase: FavoriteRegionUseCaseType {
-    
+    static let favDipIdPreffix = "favDIP:"
     
     private let keychain: KeychainType
     
@@ -44,21 +46,45 @@ class FavoriteRegionUseCase: FavoriteRegionUseCaseType {
     }
     
     @discardableResult
-    func addToFavorites(_ id: String) throws -> [String] {
+    func addToFavorites(_ id: String, isDipServer: Bool) throws -> [String] {
         var newFavorites = favoriteIdentifiers
-        newFavorites.append(id)
+        let newFavoriteId = isDipServer ? calculateServerIdForDipServer(id) : id
+        newFavorites.append(newFavoriteId)
         try keychain.set(favorites: newFavorites)
         favorites = newFavorites
         return newFavorites
     }
     
     @discardableResult
-    func removeFromFavorites(_ id: String) throws -> [String] {
-        var newFavorites = favoriteIdentifiers.filter { id != $0 }
+    func removeFromFavorites(_ id: String, isDipServer: Bool) throws -> [String] {
+        let storedFavoriteId = isDipServer ? calculateServerIdForDipServer(id) : id
+        let newFavorites = favoriteIdentifiers.filter { storedFavoriteId != $0 }
         try keychain.set(favorites: newFavorites)
         favorites = newFavorites
         return newFavorites
     }
     
+    private func calculateServerIdForDipServer(_ id: String) -> String {
+        return "\(Self.favDipIdPreffix)\(id)"
+    }
     
+    func getFavoriteDIPServerId() -> String? {
+        guard let storedFavIdWithPreffix = favoriteIdentifiers.filter { $0.hasPrefix(Self.favDipIdPreffix) }.first else {
+            return nil
+        }
+        
+        let dipServerIdWithoutPreffix = String(storedFavIdWithPreffix.dropFirst(Self.favDipIdPreffix.count))
+        
+        return dipServerIdWithoutPreffix
+    }
+    
+    func isFavoriteServerWith(identifier: String, isDipServer: Bool) -> Bool {
+        if isDipServer {
+            guard let savedFavoriteDipServerId = getFavoriteDIPServerId() else { return false }
+            return savedFavoriteDipServerId == identifier
+        } else {
+            return favoriteIdentifiers.contains(identifier)
+        }
+        
+    }
 }

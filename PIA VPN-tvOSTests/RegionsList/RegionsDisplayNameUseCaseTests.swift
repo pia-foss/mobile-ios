@@ -12,6 +12,8 @@ import XCTest
 
 class RegionsDisplayNameUseCaseTests: XCTestCase {
     class Fixture {
+        var getDedicatedIpUseCaseMock = GetDedicatedIpUseCaseMock(result: nil)
+        
         static let barcelona = ServerMock(name: "Barcelona-1", identifier: "es-server-barcelona", regionIdentifier: "es-region", country: "ES", geo: false, pingTime: 25)
         static let madrid = ServerMock(name: "Madrid", identifier: "es-server-madrid", regionIdentifier: "es-region2", country: "ES", geo: false, pingTime: 12)
         static let toronto = ServerMock(name: "CA Toronto", identifier: "ca-server", regionIdentifier: "canada", country: "CA", geo: false, pingTime: 30)
@@ -26,13 +28,17 @@ class RegionsDisplayNameUseCaseTests: XCTestCase {
             france
         ]
         
+        func stubGetDedicatedIpServer(with server: ServerType) {
+            self.getDedicatedIpUseCaseMock = GetDedicatedIpUseCaseMock(result: server)
+        }
+        
     }
     
     var fixture: Fixture!
     var sut: RegionsDisplayNameUseCase!
     
     func instantiateSut() {
-        sut = RegionsDisplayNameUseCase()
+        sut = RegionsDisplayNameUseCase(getDedicatedIpUseCase: fixture.getDedicatedIpUseCaseMock)
     }
     
     override func setUp() {
@@ -107,6 +113,22 @@ class RegionsDisplayNameUseCaseTests: XCTestCase {
         XCTAssertEqual(displayName.title, "Optimal Location")
         // AND the display name subtitle is "Barcelona-1"
         XCTAssertEqual(displayName.subtitle, "Barcelona-1")
+    }
+    
+    func test_displayNameForDipServer() {
+        // GIVEN that France is a DIP server
+        fixture.stubGetDedicatedIpServer(with: Fixture.france)
+        
+        instantiateSut()
+        
+        // WHEN getting the display name for France
+        let displayNameForFrance = sut.getDisplayName(for: Fixture.france)
+        
+        // THEN the display name title is "Dedicated IP"
+        XCTAssertEqual(displayNameForFrance.title, "Dedicated IP")
+        // AND the display name subtitle is "France"
+        XCTAssertEqual(displayNameForFrance.subtitle, "France")
+        
     }
     
 }

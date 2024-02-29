@@ -21,7 +21,7 @@ class RegionsSelectionFactory {
     }
     
     static func makeRegionsDisplayNameUseCase() -> RegionsDisplayNameUseCaseType {
-        return RegionsDisplayNameUseCase()
+        return RegionsDisplayNameUseCase(getDedicatedIpUseCase: DedicatedIPFactory.makeGetDedicatedIpUseCase())
     }
     
 
@@ -38,7 +38,7 @@ class RegionsSelectionFactory {
     }
     
     static func makeRegionsFilterUseCase() -> RegionsFilterUseCaseType {
-        return RegionsFilterUseCase(serversUseCase: makeRegionsListUseCase(), favoritesUseCase: makeFavoriteRegionUseCase, searchedRegionsAvailability: makeSearchedRegionsAvailability())
+        return RegionsFilterUseCase(serversUseCase: makeRegionsListUseCase(), favoritesUseCase: makeFavoriteRegionUseCase, searchedRegionsAvailability: makeSearchedRegionsAvailability(), getDedicatedIpUseCase: DedicatedIPFactory.makeGetDedicatedIpUseCase())
     }
     
     static func makeSearchedRegionsAvailability() -> SearchedRegionsAvailabilityType {

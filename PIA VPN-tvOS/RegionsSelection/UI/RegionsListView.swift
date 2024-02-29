@@ -21,29 +21,29 @@ struct RegionsListView: View {
             label: RegionsListItemButton.ContextMenuLabel(title: viewModel.favoriteContextMenuTitle(for: server), iconName: viewModel.favoriteIconName(for: server)),
             action: {
                 viewModel.toggleFavorite(server: server)
-        })
+            })
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            if !viewModel.optimalAndDIPServers.isEmpty {
-                optimalLocationAndDIPLocationSection
-            }
-            
-            if let title = viewModel.regionsListTitle {
-                Text(title)
-                    .font(.headline)
-                    .fontWeight(.regular)
-                    .foregroundColor(Color.pia_on_surface_container_secondary)
-            }
-            ScrollView(.vertical) {
+        ScrollView(.vertical) {
+            VStack(alignment: .leading) {
+                if !viewModel.optimalAndDIPServers.isEmpty {
+                    optimalLocationAndDIPLocationSection
+                }
+                
+                if let title = viewModel.regionsListTitle {
+                    Text(title)
+                        .font(.headline)
+                        .fontWeight(.regular)
+                        .foregroundColor(Color.pia_on_surface_container_secondary)
+                }
                 
                 LazyVGrid(columns: columns, alignment: .leading, spacing: 40) {
-                    ForEach(viewModel.servers, id: \.identifier) { server in
+                    ForEach(viewModel.servers, id: \.id) { server in
                         RegionsListItemButton(
                             onRegionItemSelected: {
-                            viewModel.didSelectRegionServer(server)
-                        },
+                                viewModel.didSelectRegionServer(server)
+                            },
                             iconName: viewModel.getIconImageName(for: server).unfocused,
                             highlightedIconName: viewModel.getIconImageName(for: server).focused,
                             title: viewModel.getDisplayName(for: server).title,
@@ -51,14 +51,16 @@ struct RegionsListView: View {
                             favoriteIconName: viewModel.favoriteIconName(for: server),
                             contextMenuItem: contextMenuItem(for: server)
                         )
-
+                        
                     }
                 }
+                
+            }.onAppear {
+                viewModel.viewDidAppear()
             }
             
-        }.onAppear {
-            viewModel.viewDidAppear()
         }
+        
     }
 }
 
@@ -80,8 +82,8 @@ extension RegionsListView {
                 ForEach(viewModel.optimalAndDIPServers, id: \.identifier) { server in
                     RegionsListItemButton(
                         onRegionItemSelected: {
-                        viewModel.didSelectRegionServer(server)
-                    },
+                            viewModel.didSelectRegionServer(server)
+                        },
                         iconName: server.dipToken == nil ? .smart_location_icon_name : .icon_dip_location,
                         highlightedIconName: server.dipToken == nil ? .smart_location_icon_highlighted_name : .icon_dip_location,
                         title: viewModel.getDisplayName(for: server).title,
@@ -89,12 +91,12 @@ extension RegionsListView {
                         favoriteIconName: viewModel.favoriteIconName(for: server),
                         contextMenuItem: contextMenuItem(for: server)
                     )
-
+                    
                 }
             }
         }
         
-
+        
     }
     
 }

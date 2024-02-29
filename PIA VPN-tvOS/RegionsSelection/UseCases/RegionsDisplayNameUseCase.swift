@@ -17,18 +17,24 @@ protocol RegionsDisplayNameUseCaseType {
     func getDisplayNameForOptimalLocation(with targetLocation: ServerType?) -> (title: String, subtitle: String)
 }
 
-
 class RegionsDisplayNameUseCase: RegionsDisplayNameUseCaseType {
+    let getDedicatedIpUseCase: GetDedicatedIpUseCaseType
+    
+    init(getDedicatedIpUseCase: GetDedicatedIpUseCaseType) {
+        self.getDedicatedIpUseCase = getDedicatedIpUseCase
+    }
     
     func getDisplayName(for server: ServerType, amongst servers: [ServerType]) -> (title: String, subtitle: String) {
-
-        guard !servers.isEmpty else {
-            return (title: server.country, subtitle: server.name)
+        
+        if getDedicatedIpUseCase.isDedicatedIp(server) {
+            return getDisplayNameForDedicatedIpServer(server)
         }
         
-        if server.dipToken != nil {
-            return (title: L10n.Localizable.Settings.Dedicatedip.Stats.dedicatedip, subtitle: server.name)
-        } else if isTheDefaultServer(server, amongst: servers) {
+        if servers.isEmpty {
+            return (title: server.country, subtitle: server.name)
+        }
+
+        if isTheDefaultServer(server, amongst: servers) {
             return (title: server.name, subtitle: L10n.Localizable.Regions.ListItem.Default.title)
         } else {
             return (title: server.country, subtitle: getDisplaySubtitleForNonDefault(server: server))
@@ -46,6 +52,10 @@ class RegionsDisplayNameUseCase: RegionsDisplayNameUseCaseType {
             return (title: L10n.Localizable.LocationSelection.OptimalLocation.title, subtitle: L10n.Localizable.Global.automatic)
         }
         
+    }
+    
+    private func getDisplayNameForDedicatedIpServer(_ server: ServerType) -> (title: String, subtitle: String) {
+        return (title: L10n.Localizable.Settings.Dedicatedip.Stats.dedicatedip, subtitle: server.name)
     }
     
 }

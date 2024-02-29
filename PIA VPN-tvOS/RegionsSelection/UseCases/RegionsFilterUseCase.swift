@@ -56,12 +56,14 @@ class RegionsFilterUseCase: RegionsFilterUseCaseType {
     private let serversUseCase: RegionsListUseCaseType
     private let favoritesUseCase: FavoriteRegionUseCaseType
     private let previouslySearchedAvailability: SearchedRegionsAvailabilityType
+    private let getDedicatedIpUseCase: GetDedicatedIpUseCaseType
     internal let maxPreviouslySearchedCount = 8
     
-    init(serversUseCase: RegionsListUseCaseType, favoritesUseCase: FavoriteRegionUseCaseType, searchedRegionsAvailability: SearchedRegionsAvailabilityType) {
+    init(serversUseCase: RegionsListUseCaseType, favoritesUseCase: FavoriteRegionUseCaseType, searchedRegionsAvailability: SearchedRegionsAvailabilityType, getDedicatedIpUseCase: GetDedicatedIpUseCaseType) {
         self.serversUseCase = serversUseCase
         self.favoritesUseCase = favoritesUseCase
         self.previouslySearchedAvailability = searchedRegionsAvailability
+        self.getDedicatedIpUseCase = getDedicatedIpUseCase
     }
     
     func getServers(with filter: RegionsListFilter) -> [ServerType] {
@@ -102,7 +104,8 @@ extension RegionsFilterUseCase {
         
         switch filter {
         case .all:
-            return sortedAlphabeticallyByName(allServers, with: sorting)
+            let serversWithoutDip = getServersWithoutDip(from: allServers)
+            return sortedAlphabeticallyByName(serversWithoutDip, with: sorting)
             
         case .favorites:
             let favorites = getFavorites(from: allServers)
@@ -120,16 +123,37 @@ extension RegionsFilterUseCase {
         }
         
     }
+    
+    private func getServersWithoutDip(from servers: [ServerType]) -> [ServerType] {
+        return servers.filter { self.getDedicatedIpUseCase.isDedicatedIp($0) == false }
+    }
+    
     private func getFavorites(from servers: [ServerType]) -> [ServerType] {
         let autoServer = SelectedServerUseCase.automaticServer()
         let favoritesIds = favoritesUseCase.favoriteIdentifiers
+        
         var favoriteServers = servers.filter {
-            favoritesIds.contains($0.identifier)
+            favoritesIds.contains($0.identifier) &&
+            $0.dipToken == nil
         }
+        
         if favoritesIds.contains(autoServer.identifier) {
             favoriteServers.append(autoServer)
         }
         
+        if let favoriteDipServerId = favoritesUseCase.getFavoriteDIPServerId(),
+           let favoriteDipServer = (
+            servers.filter {
+                $0.dipToken != nil &&
+                $0.identifier == favoriteDipServerId
+            }
+           ).first
+        {
+
+            favoriteServers.append(favoriteDipServer)
+            
+        }
+
         return favoriteServers
     }
     

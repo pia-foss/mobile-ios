@@ -12,7 +12,6 @@ import Combine
 
 class FavoriteRegionUseCaseMock: FavoriteRegionUseCaseType {
     
-    
     var favoriteIdentifiers: [String] = []
     @Published private var favorites: [String] = []
     var favoriteIdentifiersPublisher: Published<[String]>.Publisher {
@@ -21,12 +20,12 @@ class FavoriteRegionUseCaseMock: FavoriteRegionUseCaseType {
     
     var addToFavoritesCalled = false
     var addToFavoritesCalledAttempt = 0
-    var addToFavoritesCalledWithArgument: String = ""
+    var addToFavoritesCalledWithArguments: (serverId: String, isDipServer: Bool) = (serverId: "", isDipServer: false)
     var addToFavoritesCalledErrorThrown: Error?
-    func addToFavorites(_ id: String) throws -> [String] {
+    func addToFavorites(_ id: String, isDipServer: Bool) throws -> [String] {
         addToFavoritesCalled = true
         addToFavoritesCalledAttempt += 1
-        addToFavoritesCalledWithArgument = id
+        addToFavoritesCalledWithArguments = (serverId: id, isDipServer: isDipServer)
         if let error = addToFavoritesCalledErrorThrown {
             throw error
         } else {
@@ -36,12 +35,12 @@ class FavoriteRegionUseCaseMock: FavoriteRegionUseCaseType {
     
     var removeFromFavoritesCalled = false
     var removeFromFavoritesCalledAttempt = 0
-    var removeFromFavoritesCalledWithArgument = ""
+    var removeFromFavoritesCalledWithArguments: (serverId: String, isDipServer: Bool) = (serverId: "", isDipServer: false)
     var removeFromFavoritesCalledErrorThrown: Error?
-    func removeFromFavorites(_ id: String) throws -> [String] {
+    func removeFromFavorites(_ id: String, isDipServer: Bool) throws -> [String] {
         removeFromFavoritesCalled = true
         removeFromFavoritesCalledAttempt += 1
-        removeFromFavoritesCalledWithArgument = id
+        removeFromFavoritesCalledWithArguments = (serverId: id, isDipServer: isDipServer)
         
         if let error = removeFromFavoritesCalledErrorThrown {
             throw error
@@ -50,5 +49,25 @@ class FavoriteRegionUseCaseMock: FavoriteRegionUseCaseType {
         }
     }
     
+    
+    var getFavoriteDIPServerIdCalled = false
+    var getFavoriteDIPServerIdCalledAttempt = 0
+    var getFavoriteDIPServerIdResult: String?
+    func getFavoriteDIPServerId() -> String? {
+        getFavoriteDIPServerIdCalled = true
+        getFavoriteDIPServerIdCalledAttempt += 1
+        return getFavoriteDIPServerIdResult
+    }
+    
+    var isFavoriteServerWithCalled = false
+    var isFavoriteServerWithCalledAttepmt = 0
+    var isFavoriteServerWithArguments: (identifier: String, isDipServer: Bool)!
+    var isFavoriteServerWithIdentifierResult: Bool = false
+    func isFavoriteServerWith(identifier: String, isDipServer: Bool) -> Bool {
+        isFavoriteServerWithCalled = true
+        isFavoriteServerWithCalledAttepmt += 1
+        isFavoriteServerWithArguments = (identifier: identifier, isDipServer: isDipServer)
+        return isFavoriteServerWithIdentifierResult
+    }
     
 }
