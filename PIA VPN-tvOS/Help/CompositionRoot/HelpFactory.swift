@@ -35,6 +35,18 @@ class HelpFactory {
         return PrivacyPolicyView(privacyPolicyURL: privacyPolicyURL)
     }
     
+    static var makeLicensesUseCase: LicensesUseCaseType = {
+        return LicensesUseCase(urlSession: URLSession.shared)
+    }()
+    
+    
+    private static func makeAcknowledgementsViewModel() -> AcknowledgementsViewModel {
+        return AcknowledgementsViewModel(licencesUseCase: makeLicensesUseCase)
+    }
+    
+    static func makeAcknowledgementsView() -> AcknowledgementsView {
+        return AcknowledgementsView(viewModel: makeAcknowledgementsViewModel())
+    }
     
 }
 

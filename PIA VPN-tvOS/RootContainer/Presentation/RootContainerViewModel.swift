@@ -22,12 +22,10 @@ class RootContainerViewModel: ObservableObject {
     private let bootstrap: BootstraperType
     private let userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType
     
-    /// Inject here the connectionStateMonitor instance so we start monitoring the vpn status before creating the Dashboard view
-    private let conenctionStateMonitor: ConnectionStateMonitorType
     private let appRouter: AppRouterType
     private var cancellables = Set<AnyCancellable>()
     
-    init(accountProvider: AccountProviderType, notificationCenter: NotificationCenterType = NotificationCenter.default, vpnConfigurationAvailability: VPNConfigurationAvailabilityType, connectionStatsPermissonType: ConnectionStatsPermissonType, bootstrap: BootstraperType, userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType, connectionStateMonitor: ConnectionStateMonitorType, appRouter: AppRouterType) {
+    init(accountProvider: AccountProviderType, notificationCenter: NotificationCenterType = NotificationCenter.default, vpnConfigurationAvailability: VPNConfigurationAvailabilityType, connectionStatsPermissonType: ConnectionStatsPermissonType, bootstrap: BootstraperType, userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType, appRouter: AppRouterType) {
         
         self.accountProvider = accountProvider
         self.notificationCenter = notificationCenter
@@ -35,7 +33,6 @@ class RootContainerViewModel: ObservableObject {
         self.connectionStatsPermissonType = connectionStatsPermissonType
         self.bootstrap = bootstrap
         self.userAuthenticationStatusMonitor = userAuthenticationStatusMonitor
-        self.conenctionStateMonitor = connectionStateMonitor
         self.appRouter = appRouter
         
         subscribeToAccountUpdates()

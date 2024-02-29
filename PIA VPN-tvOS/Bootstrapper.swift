@@ -24,8 +24,12 @@ class Bootstrapper: BootstraperType {
     var dependencyBootstrap: (() -> Void)
     var renewalDIPToken: (() -> Void)
     var setupExceptionHandler: (() -> Void)
+    var startConnectionStateMonitor: (() -> Void)
+    var startCachingLicenses: (() -> Void)
     
-    init(setupDebugginConsole: @escaping () -> Void, loadDataBase: @escaping () -> Void, cleanCurrentAccount: @escaping () -> Void, migrateNMT: @escaping () -> Void, setupLatestRegionList: @escaping () -> Void, setupConfiguration: @escaping () -> Void, setupPreferences: @escaping () -> Void, acceptDataSharing: @escaping () -> Void, dependencyBootstrap: @escaping () -> Void, renewalDIPToken: @escaping () -> Void, setupExceptionHandler: @escaping () -> Void) {
+    init(setupDebugginConsole: @escaping () -> Void, loadDataBase: @escaping () -> Void, cleanCurrentAccount: @escaping () -> Void, migrateNMT: @escaping () -> Void, setupLatestRegionList: @escaping () -> Void, setupConfiguration: @escaping () -> Void, setupPreferences: @escaping () -> Void, acceptDataSharing: @escaping () -> Void, dependencyBootstrap: @escaping () -> Void, renewalDIPToken: @escaping () -> Void, setupExceptionHandler: @escaping () -> Void,
+         startConnectionStateMonitor: @escaping () -> Void,
+         startCachingLicenses: @escaping () -> Void) {
         self.setupDebugginConsole = setupDebugginConsole
         self.loadDataBase = loadDataBase
         self.cleanCurrentAccount = cleanCurrentAccount
@@ -37,6 +41,8 @@ class Bootstrapper: BootstraperType {
         self.dependencyBootstrap = dependencyBootstrap
         self.renewalDIPToken = renewalDIPToken
         self.setupExceptionHandler = setupExceptionHandler
+        self.startConnectionStateMonitor = startConnectionStateMonitor
+        self.startCachingLicenses = startCachingLicenses
     }
     
     func callAsFunction() {
@@ -51,5 +57,7 @@ class Bootstrapper: BootstraperType {
         dependencyBootstrap()
         renewalDIPToken()
         setupExceptionHandler()
+        startConnectionStateMonitor()
+        startCachingLicenses()
     }
 }

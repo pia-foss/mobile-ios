@@ -58,6 +58,7 @@ enum ConnectionState: Equatable {
 
 protocol ConnectionStateMonitorType {
     var connectionStatePublisher: Published<ConnectionState>.Publisher { get }
+    func callAsFunction()
 }
 
 class ConnectionStateMonitor: ConnectionStateMonitorType {
@@ -74,12 +75,9 @@ class ConnectionStateMonitor: ConnectionStateMonitorType {
     init(vpnStatusMonitor: VPNStatusMonitorType, vpnConnectionUseCase: VpnConnectionUseCaseType) {
         self.vpnStatusMonitor = vpnStatusMonitor
         self.vpnConnectionUseCase = vpnConnectionUseCase
-        
-        addObservers()
-        
     }
     
-    private func addObservers() {
+    func callAsFunction() {
         cancellable = vpnStatusMonitor.getStatus()
             .setFailureType(to: Error.self)
             .combineLatest(vpnConnectionUseCase.getConnectionIntent()) { vpnStatus, connectionIntent in

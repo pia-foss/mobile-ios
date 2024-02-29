@@ -27,7 +27,8 @@ extension View {
                 HelpFactory.makeAboutOptionsView()
                     .withTopNavigationBar(title: L10n.Localizable.Settings.Section.help, subtitle: L10n.Localizable.Menu.Item.about)
             case .acknowledments:
-                EmptyView()
+                HelpFactory.makeAcknowledgementsView()
+                    .withTopNavigationBar(title: L10n.Localizable.Settings.Section.help, subtitle: L10n.Localizable.HelpMenu.AboutOptions.Acknowledgements.title)
             case .privacyPolicy:
                 HelpFactory.makePrivacyPolicyView()
                     .withTopNavigationBar(title: L10n.Localizable.Settings.Section.help, subtitle: L10n.Localizable.HelpMenu.AboutOptions.PrivacyPolicy.title)

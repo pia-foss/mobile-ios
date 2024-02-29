@@ -558,6 +558,16 @@ internal enum L10n {
         }
       }
       internal enum AboutSection {
+        internal enum Acknowledgments {
+          internal enum Copyright {
+            /// Our Software as a Service (SaaS) platform may occasionally include third-party content, services, or integrations to enhance user experience and functionality. This content may include but is not limited to, APIs, widgets, plugins, or links to external websites. While we strive to ensure the quality and reliability of third-party content, we want to emphasize that such content is provided 'as is' and we do not endorse or guarantee the accuracy, reliability, or suitability of any third-party content.
+            /// 
+            /// Users should be aware that accessing or utilizing third-party content may subject them to the terms of use, privacy policies, and other agreements of those third-party providers. We encourage users to review such terms and policies before engaging with third-party content.
+            internal static let description = L10n.tr("Localizable", "help_menu.about_section.acknowledgments.copyright.description", fallback: "Our Software as a Service (SaaS) platform may occasionally include third-party content, services, or integrations to enhance user experience and functionality. This content may include but is not limited to, APIs, widgets, plugins, or links to external websites. While we strive to ensure the quality and reliability of third-party content, we want to emphasize that such content is provided 'as is' and we do not endorse or guarantee the accuracy, reliability, or suitability of any third-party content.\n\nUsers should be aware that accessing or utilizing third-party content may subject them to the terms of use, privacy policies, and other agreements of those third-party providers. We encourage users to review such terms and policies before engaging with third-party content.")
+            /// COPYRIGHT 2014-2024 PRIVATE INTERNET ACCESS INC VPN
+            internal static let title = L10n.tr("Localizable", "help_menu.about_section.acknowledgments.copyright.title", fallback: "COPYRIGHT 2014-2024 PRIVATE INTERNET ACCESS INC VPN")
+          }
+        }
         internal enum PrivacyPolicy {
           /// This privacy policy ('Privacy Policy' or 'Policy') explains the privacy practices of Private Internet Access, Inc., (collectively, 'We', 'Us', 'Data Controller', 'Company', or 'PIA') and applies to users ('User(s)' or 'You') of PIA's services, including, among other things, the PIA VPN service ('Service') and PIA website at www.privateinternetaccess.com ('Website').
           internal static let description = L10n.tr("Localizable", "help_menu.about_section.privacy_policy.description", fallback: "This privacy policy ('Privacy Policy' or 'Policy') explains the privacy practices of Private Internet Access, Inc., (collectively, 'We', 'Us', 'Data Controller', 'Company', or 'PIA') and applies to users ('User(s)' or 'You') of PIA's services, including, among other things, the PIA VPN service ('Service') and PIA website at www.privateinternetaccess.com ('Website').")
@@ -1368,8 +1378,8 @@ internal enum L10n {
             internal static let description = L10n.tr("Localizable", "settings.service.quality.share.description", fallback: "Help us improve by sharing VPN connection statistics. These reports never contain personally identifiable information.")
             /// Find out more
             internal static let findoutmore = L10n.tr("Localizable", "settings.service.quality.share.findoutmore", fallback: "Find out more")
-            /// Help improve PIA
-            internal static let title = L10n.tr("Localizable", "settings.service.quality.share.title", fallback: "Help improve PIA")
+            /// Help Improve PIA
+            internal static let title = L10n.tr("Localizable", "settings.service.quality.share.title", fallback: "Help Improve PIA")
           }
           internal enum Show {
             /// Connection stats

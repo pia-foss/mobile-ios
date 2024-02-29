@@ -19,23 +19,24 @@ class TopNavigationFactory {
         return trailingNavigationViewShared
     }
     
-    static func makeTopNavigationViewModel() -> TopNavigationViewModel {
-        return  TopNavigationViewModel(appRouter: AppRouterFactory.makeAppRouter())
-    }
-    
     
     // MARK: - Private
     
-    private static var topNavigationViewModelShared: TopNavigationViewModel = {
-        TopNavigationViewModel(appRouter: AppRouterFactory.makeAppRouter())
+    private static var leadingNavigationViewModelShared: LeadingNavigationBarViewModel = {
+        LeadingNavigationBarViewModel(appRouter: AppRouterFactory.makeAppRouter())
     }()
     
+    private static var trailingNavigationViewModelShared: TrailingNavigationBarViewModel = {
+        TrailingNavigationBarViewModel(appRouter: AppRouterFactory.makeAppRouter())
+    }()
+
+    
     private static var leadingNavigationViewShared: LeadingSegmentedNavigationView = {
-        LeadingSegmentedNavigationView(viewModel: makeTopNavigationViewModel())
+        LeadingSegmentedNavigationView(viewModel: leadingNavigationViewModelShared)
     }()
     
     private static var trailingNavigationViewShared: TrailingNavigationView = {
-        TrailingNavigationView(viewModel: makeTopNavigationViewModel())
+        TrailingNavigationView(viewModel: trailingNavigationViewModelShared)
     }()
     
 }

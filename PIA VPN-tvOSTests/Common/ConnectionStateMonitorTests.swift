@@ -26,6 +26,7 @@ class ConnectionStateMonitorTests: XCTestCase {
     
     private func instantiateSut() {
         sut = ConnectionStateMonitor(vpnStatusMonitor: fixture.vpnStatusMonitorMock, vpnConnectionUseCase: fixture.vpnConnectionUseCaseMock)
+        sut()
     }
     
     override func setUp() {
