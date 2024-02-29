@@ -10,6 +10,7 @@ import XCTest
 
 extension XCUIApplication{
     var settingsButton:XCUIElement {button(with: "gearshape")}
+    var connectButton:XCUIElement {button(with: "connect-inner-button")}
     
     func navigateToSettingsScreen(){
         guard settingsButton.waitForExistence(timeout: defaultTimeout) else {return}
