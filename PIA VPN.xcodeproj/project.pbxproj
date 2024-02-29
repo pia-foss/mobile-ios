@@ -611,6 +611,8 @@
 		E51693D62AFBDB8A0089FB8F /* NavigationBar+Appearence..swift in Sources */ = {isa = PBXBuildFile; fileRef = E51693D42AFBDB8A0089FB8F /* NavigationBar+Appearence..swift */; };
 		E51693D82AFBE5680089FB8F /* CAGradientLayer+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51693D72AFBE5680089FB8F /* CAGradientLayer+Image.swift */; };
 		E51693D92AFBE5680089FB8F /* CAGradientLayer+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51693D72AFBE5680089FB8F /* CAGradientLayer+Image.swift */; };
+		E520FCE82B90792500D06C03 /* AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1DF1FE4A450007C0B9B /* AppPreferences.swift */; };
+		E520FCE92B90792600D06C03 /* AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1DF1FE4A450007C0B9B /* AppPreferences.swift */; };
 		E5217F392AEA7B0E00123442 /* Macros+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5217F382AEA7B0E00123442 /* Macros+UI.swift */; };
 		E5217F3A2AEA7B0E00123442 /* Macros+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5217F382AEA7B0E00123442 /* Macros+UI.swift */; };
 		E5217F3C2AEA886000123442 /* BorderedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5217F3B2AEA886000123442 /* BorderedTextField.swift */; };
@@ -4393,6 +4395,7 @@
 				DD58F4C021B12CFE00D043F7 /* PIAConnectionButton.swift in Sources */,
 				827570DE24DABE88008F9800 /* AddCustomNetworksViewController.swift in Sources */,
 				E5217F732AEB055D00123442 /* Client+Storyboard.swift in Sources */,
+				E520FCE92B90792600D06C03 /* AppPreferences.swift in Sources */,
 				DD125DD221E7A694004ECCB6 /* ServerButton.swift in Sources */,
 				8272C62826540B2100D846A8 /* ProtocolSettingsViewController.swift in Sources */,
 				E59E8FAA2AEA7A81009278F5 /* SignupInternetUnreachableViewController.swift in Sources */,
@@ -4627,6 +4630,7 @@
 				0E2215CC2008BF8300F5FB4D /* SwiftGen+Assets.swift in Sources */,
 				DD3B504624B758330002F4B5 /* Collectable.swift in Sources */,
 				DD9706A4224262BF00630220 /* QuickSettingsTile.swift in Sources */,
+				E520FCE82B90792500D06C03 /* AppPreferences.swift in Sources */,
 				82183D7B2500FD460033023F /* String+Substrings.swift in Sources */,
 				DDFCFA9421E892130081F235 /* RegionTile.swift in Sources */,
 				0E7361A01FD86F8300706BFF /* AccountObserver.swift in Sources */,
