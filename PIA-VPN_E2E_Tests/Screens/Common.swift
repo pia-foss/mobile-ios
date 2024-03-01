@@ -42,4 +42,12 @@ extension XCUIElement {
         let frameB = elementB.frame
         return frameA.origin.y > frameB.origin.y
     }
+    
+    func customSortedList(_ regionList: [String]) -> [String] {
+        return regionList.sorted { (first, second) -> Bool in
+        let firstRegion = first.components(separatedBy: ",")[0]
+        let secondRegion = second.components(separatedBy: ",")[0]
+        return firstRegion < secondRegion
+        }
+    }
 }

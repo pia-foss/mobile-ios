@@ -45,15 +45,13 @@ extension XCUIApplication {
         guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else { return }
         dashboardMenuButton.tap()
         
-        if settingsButton.waitForExistence(timeout: defaultTimeout) {
-            settingsButton.tap()
-        }
+        guard settingsButton.waitForExistence(timeout: defaultTimeout) else {return}
+        settingsButton.tap()
     }
     
     func navigateToHomeFromSettings() {
-        if settingsBackButton.waitForExistence(timeout: defaultTimeout) {
-            settingsBackButton.tap()
-            navigateToHome(using: closeButton)
-        }
+        guard settingsBackButton.waitForExistence(timeout: defaultTimeout) else {return}
+        settingsBackButton.tap()
+        navigateToHome(using: closeButton)
     }
 }

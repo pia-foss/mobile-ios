@@ -25,13 +25,11 @@ extension XCUIApplication {
         guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else { return }
         dashboardMenuButton.tap()
         
-        if settingsButton.waitForExistence(timeout: defaultTimeout) {
-            settingsButton.tap()
-        }
+        guard settingsButton.waitForExistence(timeout: defaultTimeout) else {return}
+        settingsButton.tap()
         
-        if privacySettingsButton.waitForExistence(timeout: defaultTimeout) {
-            privacySettingsButton.tap()
-        }
+        guard privacySettingsButton.waitForExistence(timeout: defaultTimeout) else {return}
+        privacySettingsButton.tap()
     }
     
     func enableVPNKillSwitch(){

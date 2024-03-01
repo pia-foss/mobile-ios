@@ -19,7 +19,7 @@ extension XCUIApplication {
     }
     
     func logIn(with credentials: Credentials) {
-        loginUsernameTextField.waitForExistence(timeout: defaultTimeout) && loginPasswordTextField.waitForExistence(timeout: defaultTimeout)
+        guard (loginUsernameTextField.waitForExistence(timeout: defaultTimeout) && loginPasswordTextField.waitForExistence(timeout: defaultTimeout)) else {return}
         loginUsernameTextField.tap()
         loginUsernameTextField.typeText(credentials.username)
         loginPasswordTextField.tap()

@@ -56,7 +56,7 @@ class SettingsTests : BaseTest {
                     
                     app.navigateToHomeFromSettings()
                     app.navigateToProtocolSettings()
-                    expect(app.ipsec.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.wireguard.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     
                     app.navigateToHomeFromSettings()
                     app.navigateToPrivacySettings()
@@ -71,6 +71,7 @@ class SettingsTests : BaseTest {
                     it("should return 'Debug information submitted' when user clicks 'Send Debug Log to support'") {
                         app.navigateToHelpSettings()
                         app.sendDebugButton.tap()
+                        //active bug: this returns error in simulator
                         expect(app.successfulSendDebugMessage.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     }
                     

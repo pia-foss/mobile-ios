@@ -48,6 +48,7 @@ class DedicatedIPTests: BaseTest {
                     app.navigateToHome(using: app.closeButton)
                     app.navigateToRegionSelection()
                     let firstRegion = app.getRegionList().staticTexts["DEDICATED IP"]
+                    //active bug: https://polymoon.atlassian.net/browse/PIA-1107
                     expect(firstRegion.staticTexts["DEDICATED IP"].waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     firstRegion.tap()
                     expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
