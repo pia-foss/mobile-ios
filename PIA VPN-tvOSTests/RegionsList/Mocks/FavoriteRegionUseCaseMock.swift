@@ -12,6 +12,13 @@ import Combine
 
 class FavoriteRegionUseCaseMock: FavoriteRegionUseCaseType {
     
+    var eraseAllFavoritesCalled = false
+    var eraseAllFavoritesCalledAttempt = 0
+    func eraseAllFavorites() {
+        eraseAllFavoritesCalled = true
+        eraseAllFavoritesCalledAttempt += 1
+    }
+    
     var favoriteIdentifiers: [String] = []
     @Published private var favorites: [String] = []
     var favoriteIdentifiersPublisher: Published<[String]>.Publisher {

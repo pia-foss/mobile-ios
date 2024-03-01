@@ -275,4 +275,22 @@ class FavoriteRegionsUseCaseTests: XCTestCase {
         
     }
     
+    func test_removeAllFavorites_whenKeychainSucceeds() {
+        // GIVEN that there are some items stored in the favorites
+        fixture.keychainMock.getFavoritesResultSuccess = ["server-id-one", "server-id-two"]
+        // AND GIVEN that there is no error thrown in the Keychain
+        fixture.keychainMock.eraseAllFavoritesResultError = nil
+        
+        instantiateSut()
+        XCTAssertEqual(sut.favorites.count, 2)
+        
+        // WHEN removing all favorites
+        sut.eraseAllFavorites()
+        
+        // THEN the favorites list becomes empty
+        XCTAssertEqual(sut.favorites.count, 0)
+        
+        
+    }
+    
 }

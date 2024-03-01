@@ -11,6 +11,17 @@ import Foundation
 
 class KeychainTypeMock: KeychainType {
     
+    var eraseAllFavoritesCalled = false
+    var eraseAllFavoritesCalledAttempt = 0
+    var eraseAllFavoritesResultError: Error?
+    func eraseAllFavorites() throws {
+        eraseAllFavoritesCalled = true
+        eraseAllFavoritesCalledAttempt += 1
+        if let error = eraseAllFavoritesResultError {
+            throw error
+        }
+    }
+    
     var getFavoritesCalled = false
     var getFavoritesCalledAttempt = 0
     var getFavoritesResultError: Error?

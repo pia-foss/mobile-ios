@@ -16,6 +16,7 @@ protocol FavoriteRegionUseCaseType {
     func addToFavorites(_ id: String, isDipServer: Bool) throws -> [String]
     @discardableResult
     func removeFromFavorites(_ id: String, isDipServer: Bool) throws -> [String]
+    func eraseAllFavorites()
     func getFavoriteDIPServerId() -> String?
     func isFavoriteServerWith(identifier: String, isDipServer: Bool) -> Bool
 }
@@ -39,7 +40,7 @@ class FavoriteRegionUseCase: FavoriteRegionUseCaseType {
         return []
     }
     
-    @Published private var favorites: [String] = []
+    @Published internal var favorites: [String] = []
     
     var favoriteIdentifiersPublisher: Published<[String]>.Publisher {
         $favorites
@@ -62,6 +63,16 @@ class FavoriteRegionUseCase: FavoriteRegionUseCaseType {
         try keychain.set(favorites: newFavorites)
         favorites = newFavorites
         return newFavorites
+    }
+    
+    func eraseAllFavorites() {
+        do {
+            try keychain.eraseAllFavorites()
+            self.favorites = []
+        } catch {
+            // No op
+        }
+         
     }
     
     private func calculateServerIdForDipServer(_ id: String) -> String {
