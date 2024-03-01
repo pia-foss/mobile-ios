@@ -33,13 +33,11 @@ extension XCUIApplication {
         guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else { return }
         dashboardMenuButton.tap()
         
-        if settingsButton.waitForExistence(timeout: defaultTimeout) {
-            settingsButton.tap()
-        }
+        guard settingsButton.waitForExistence(timeout: defaultTimeout) else {return}
+        settingsButton.tap()
         
-        if generalSettingsButton.waitForExistence(timeout: defaultTimeout) {
-            generalSettingsButton.tap()
-        }
+        guard generalSettingsButton.waitForExistence(timeout: defaultTimeout) else {return}
+        generalSettingsButton.tap()
     }
     
     func enableGeoLocatedRegionSwitch() {

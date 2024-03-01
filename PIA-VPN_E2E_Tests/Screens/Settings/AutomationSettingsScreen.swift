@@ -17,12 +17,10 @@ extension XCUIApplication {
         guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else { return }
         dashboardMenuButton.tap()
         
-        if settingsButton.waitForExistence(timeout: defaultTimeout) {
-            settingsButton.tap()
-        }
+        guard settingsButton.waitForExistence(timeout: defaultTimeout) else {return}
+        settingsButton.tap()
         
-        if automationSettingsButton.waitForExistence(timeout: defaultTimeout) {
-            automationSettingsButton.tap()
-        }
+        guard automationSettingsButton.waitForExistence(timeout: defaultTimeout) else {return}
+        automationSettingsButton.tap()
     }
 }

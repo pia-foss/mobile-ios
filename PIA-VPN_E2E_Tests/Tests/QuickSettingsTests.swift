@@ -43,8 +43,9 @@ class QuickSettingsTests : BaseTest {
                     
                     app.enableVPNKillSwitchOnHome()
                     app.disableNetworkManagementOnHome()
-                    expect(app.disableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.enableNetworkManagementButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }
+                
                 
                 it("should display a notification message and not allow enabling the network management when vpn kill switch is disabled") {
                     app.navigateToQuickSettings()
@@ -63,6 +64,8 @@ class QuickSettingsTests : BaseTest {
                     
                     app.disableVPNKillSwitchOnHome()
                     app.staticText(with: "CLOSE").tap()
+                    
+                    //active bug: https://polymoon.atlassian.net/browse/PIA-938
                     expect(app.enableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     expect(app.enableNetworkManagementButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                 }

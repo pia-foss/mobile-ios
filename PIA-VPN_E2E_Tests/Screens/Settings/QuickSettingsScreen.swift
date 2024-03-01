@@ -22,6 +22,7 @@ extension XCUIApplication {
     }
     
     func navigateToQuickSettings() {
+        guard quickSettingsButton.waitForExistence(timeout: defaultTimeout) else {return}
         quickSettingsButton.staticTexts["QUICK SETTINGS"].tap()
     }
     

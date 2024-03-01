@@ -10,7 +10,7 @@ import Nimble
 
 class VPNServerListTests : BaseTest {
     override class func spec() {
-        let regionKeyword = "australia"
+        let regionKeyword = "belgium"
         let characterKey = "au"
         let favouriteRegionKeyword = "Singapore"
         let geoLocatedRegionKeyword = "South Korea"
@@ -61,7 +61,7 @@ class VPNServerListTests : BaseTest {
                     app.navigateToRegionSelection()
                     app.sortRegionsBy(sortType: "NAME")
                     let regionList = app.getRegionList().allElementsBoundByIndex.prefix(21).map{$0.label}.filter{$0 != "Automatic"}
-                    expect(regionList).to(equal(regionList.sorted(by: <)))
+                    expect(regionList).to(equal(app.customSortedList(regionList)))
                 }
                 
                 it("should sort the regions by latency, when 'latency' is selected") {

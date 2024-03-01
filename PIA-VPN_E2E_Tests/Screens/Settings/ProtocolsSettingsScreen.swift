@@ -66,19 +66,18 @@ extension XCUIApplication {
     }
     
     func navigateToProtocolSettings() {
-        guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else { return }
+        guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else {return}
         dashboardMenuButton.tap()
         
-        if settingsButton.waitForExistence(timeout: defaultTimeout) {
-            settingsButton.tap()
-        }
+        guard settingsButton.waitForExistence(timeout: defaultTimeout) else {return}
+        settingsButton.tap()
         
-        if protocolsSettingsButton.waitForExistence(timeout: defaultTimeout) {
-            protocolsSettingsButton.tap()
-        }
+        guard protocolsSettingsButton.waitForExistence(timeout: defaultTimeout) else {return}
+        protocolsSettingsButton.tap()
     }
     
     func selectProtocol(protocolName: String) {
+        guard protocolSelectionButton.waitForExistence(timeout: defaultTimeout) else {return}
         protocolSelectionButton.tap()
         guard protocolSelectionPopover.waitForExistence(timeout: defaultTimeout) else {return}
         protocolSelectionPopover.staticTexts[protocolName].tap()

@@ -69,9 +69,9 @@ extension XCUIApplication {
         let regionAddAsAFavouriteButton = region.buttons["Add a favorite region"]
         let regionRemoveAsAFavouriteButton = region.buttons["Remove a favorite region"]
         
-        if(regionRemoveAsAFavouriteButton.waitForExistence(timeout: defaultTimeout)) {
-            regionRemoveAsAFavouriteButton.tap()
-        }
+        guard (regionRemoveAsAFavouriteButton.waitForExistence(timeout: defaultTimeout)) else {return}
+        regionRemoveAsAFavouriteButton.tap()
+
         WaitHelper.waitForElementToBeVisible(regionAddAsAFavouriteButton, timeout: defaultTimeout, onSuccess: {}, onFailure: {error in print("regionAddAsAFavouriteButton is not visible")})
         WaitHelper.waitForElementToNotBeVisible(regionRemoveAsAFavouriteButton, timeout: defaultTimeout, onSuccess: {}, onFailure: {error in print("regionRemoveAsAFavouriteButton is visible")})
 

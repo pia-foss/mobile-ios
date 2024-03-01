@@ -54,7 +54,9 @@ extension XCUIApplication {
         dedicatedIPTextField.tap()
         dedicatedIPTextField.typeText(dedicatedIP.token)
         button(with:"Activate").tap()
-        dedicatedIPList.waitForExistence(timeout: defaultTimeout)
+        WaitHelper.waitForElementToBeVisible(dedicatedIPList, timeout: defaultTimeout,
+                                             onSuccess:{}, onFailure:{error in print("dedicatedIPList is not visible")})
+
     }
     
     func deleteDedicatedIP() {
@@ -66,6 +68,7 @@ extension XCUIApplication {
         sourceCoordinate.press(forDuration: pressDuration, thenDragTo: leftmostCoordinate)
         
         confirmDeleteButton.tap()
-        dedicatedIPTextField.waitForExistence(timeout: defaultTimeout)
+        WaitHelper.waitForElementToBeVisible(dedicatedIPTextField, timeout: defaultTimeout,
+                                             onSuccess:{}, onFailure:{error in print("dedicatedIPTextField is not visible")})
     }
 }

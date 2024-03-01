@@ -65,19 +65,17 @@ extension XCUIApplication {
         guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else { return }
         dashboardMenuButton.tap()
         
-        if logOutButton.waitForExistence(timeout: defaultTimeout) {
-            logOutButton.tap()
-            if confirmationDialogButton.waitForExistence(timeout: shortTimeout) {
-                confirmationDialogButton.tap()
-            }
-            WaitHelper.waitForElementToBeVisible(welcomeLoginButton, timeout: defaultTimeout,
+        guard logOutButton.waitForExistence(timeout: defaultTimeout) else {return}
+        logOutButton.tap()
+        guard confirmationDialogButton.waitForExistence(timeout: shortTimeout) else{return}
+        confirmationDialogButton.tap()
+        WaitHelper.waitForElementToBeVisible(welcomeLoginButton, timeout: defaultTimeout,
                                                  onSuccess:{print("successful logout")}, onFailure:{error in print("welcomeLoginButton is not visible")})
-        }
     }
     
-    func navigateToHome(using button: XCUIElement) {
-        button.waitForExistence(timeout: defaultTimeout)
-        button.tap()
+    func navigateToHome(using backToHomeButton: XCUIElement) {
+        guard backToHomeButton.waitForExistence(timeout: defaultTimeout) else {return}
+        backToHomeButton.tap()
         WaitHelper.waitForElementToBeVisible(dashboardMenuButton, timeout: defaultTimeout,
                                              onSuccess:{print("successful navigation to Home screen")}, onFailure:{error in print("dashboardMenuButton is not visible")})
     }

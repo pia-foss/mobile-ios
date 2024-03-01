@@ -41,13 +41,11 @@ extension XCUIApplication {
         guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else { return }
         dashboardMenuButton.tap()
         
-        if settingsButton.waitForExistence(timeout: defaultTimeout) {
-            settingsButton.tap()
-        }
+        guard settingsButton.waitForExistence(timeout: defaultTimeout) else {return}
+        settingsButton.tap()
         
-        if helpSettingsButton.waitForExistence(timeout: defaultTimeout) {
-            helpSettingsButton.tap()
-        }
+        guard helpSettingsButton.waitForExistence(timeout: defaultTimeout) else {return}
+        helpSettingsButton.tap()
     }
     
     func enableHelpImprovePIA() {
