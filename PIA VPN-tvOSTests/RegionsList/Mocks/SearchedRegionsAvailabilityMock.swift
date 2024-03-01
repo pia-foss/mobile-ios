@@ -11,6 +11,13 @@ import Foundation
 
 class SearchedRegionsAvailabilityMock: SearchedRegionsAvailabilityType {
     
+    var eraseAllCalled = false
+    var eraseAllCalledAttempt = 0
+    func eraseAll() {
+        eraseAllCalled = true
+        eraseAllCalledAttempt += 1
+    }
+    
     var getCalled = false
     var getCalledAttempt = 0
     var getResult:[String] = []

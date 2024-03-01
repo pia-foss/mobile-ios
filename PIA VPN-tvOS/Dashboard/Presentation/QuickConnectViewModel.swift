@@ -16,7 +16,14 @@ class QuickConnectViewModel: ObservableObject {
     }
     
     func updateStatus() {
-        let allHistoricalServers = selectedServerUseCase.getHistoricalServers().reversed().dropFirst()
+
+        var allHistoricalServers: [ServerType] = Array(selectedServerUseCase.getHistoricalServers().reversed())
+        
+        // When the selected server is not Automatic, then the first element of the historical servers is the selected one
+        if !selectedServerUseCase.selectedSever.isAutomatic && !allHistoricalServers.isEmpty {
+            allHistoricalServers.removeFirst()
+            
+        }
         servers = Array(allHistoricalServers.prefix(4))
     }
     

@@ -6,8 +6,9 @@ import XCTest
 final class QuickConnectButtonViewModelTests: XCTestCase {
 
     class Fixture {
-        var serverMock = ServerMock()
-        var spyDelegate = QuickConnectButtonViewModelDelegateMock()
+        let serverMock = ServerMock()
+        let getDedicatedIpUseCaseMock = GetDedicatedIpUseCaseMock(result: nil)
+        let spyDelegate = QuickConnectButtonViewModelDelegateMock()
     }
     
     var fixture: Fixture!
@@ -25,7 +26,7 @@ final class QuickConnectButtonViewModelTests: XCTestCase {
     
     
     private func initializeSut() {
-        sut = QuickConnectButtonViewModel(server: fixture.serverMock, delegate: fixture.spyDelegate)
+        sut = QuickConnectButtonViewModel(server: fixture.serverMock, getDedicatedIpUseCase: fixture.getDedicatedIpUseCaseMock, delegate: fixture.spyDelegate)
     }
     
     func test_displayedFlag_whenButtonCreated() {
