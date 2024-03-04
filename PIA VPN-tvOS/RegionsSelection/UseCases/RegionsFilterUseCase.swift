@@ -57,7 +57,7 @@ class RegionsFilterUseCase: RegionsFilterUseCaseType {
     private let favoritesUseCase: FavoriteRegionUseCaseType
     private let previouslySearchedAvailability: SearchedRegionsAvailabilityType
     private let getDedicatedIpUseCase: GetDedicatedIpUseCaseType
-    internal let maxPreviouslySearchedCount = 8
+    internal let maxPreviouslySearchedCount = 12
     
     init(serversUseCase: RegionsListUseCaseType, favoritesUseCase: FavoriteRegionUseCaseType, searchedRegionsAvailability: SearchedRegionsAvailabilityType, getDedicatedIpUseCase: GetDedicatedIpUseCaseType) {
         self.serversUseCase = serversUseCase
@@ -163,15 +163,32 @@ extension RegionsFilterUseCase {
         }).prefix(maxReccommendedServersCount))
     }
     
+    private func isMatchingAnyServerNameComponent(from server: ServerType, with searchTearm: String) -> Bool {
+        let serverNameComponents = server.name.split(separator: " ")
+        let searchTermComponets = searchTearm.split(separator: " ")
+       
+        if searchTermComponets.count > 1 {
+            // When the search term contains more than 1 word, look if the server name contains the search term
+            return server.name.lowercased().contains(searchTearm.lowercased())
+                
+        } else {
+            // When the search term only contains 1 word, then match the beggining of any word from the server name
+            let anyMatch = serverNameComponents.filter {
+                let searchTermWithoutWhitespaces = searchTearm.trimmingCharacters(in: .whitespaces)
+                return $0.lowercased().starts(with: searchTermWithoutWhitespaces.lowercased())
+            }
+            return !anyMatch.isEmpty
+        }
+        
+        
+    }
+    
     private func getSearchResultsFrom(_ servers: [ServerType], with searchTerm: String) -> [ServerType] {
         
         let filteredServers = servers.filter({ server in
-            return server.name.lowercased().contains(searchTerm.lowercased()) ||
-            server.country.lowercased().contains(searchTerm.lowercased()) ||
-            server.identifier.lowercased()
-                .contains(searchTerm.lowercased()) ||
-            server.regionIdentifier.lowercased()
-                .contains(searchTerm.lowercased())
+            return isMatchingAnyServerNameComponent(from: server, with: searchTerm) ||
+            server.country.lowercased() == searchTerm.lowercased() ||
+            server.regionIdentifier.lowercased().starts(with: searchTerm.lowercased())
         })
         
         return filteredServers

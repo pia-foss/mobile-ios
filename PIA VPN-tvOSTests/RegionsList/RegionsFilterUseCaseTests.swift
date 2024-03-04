@@ -131,9 +131,9 @@ class RegionsFilterUseCaseTests: XCTestCase {
         
     }
     
-    func test_getServers_withSearchResultsFilter() {
-        // GIVEN that we have 4 servers
-        fixture.serversUseCaseMock.getCurrentServersResult = fixture.allServers
+    func test_getServers_withSearchResultsFilter_whenSearchTermHasOneWord() {
+        // GIVEN that we have 5 servers
+        fixture.serversUseCaseMock.getCurrentServersResult = fixture.allServersWithDipServer
         instantiateSut()
         
         // WHEN getting the list of servers filtered by "Canada"
@@ -143,6 +143,20 @@ class RegionsFilterUseCaseTests: XCTestCase {
         XCTAssertEqual(servers.count, 2)
         XCTAssertEqual(servers[0].identifier, Fixture.montreal.identifier)
         XCTAssertEqual(servers[1].identifier, Fixture.toronto.identifier)
+    }
+    
+    func test_getServers_withSearchResultsFilter_whenSearchTermHasMoreThanOneWord() {
+        // GIVEN that we have 5 servers
+        fixture.serversUseCaseMock.getCurrentServersResult = fixture.allServersWithDipServer
+        instantiateSut()
+        
+        // WHEN getting the list of servers filtered by "New Yo"
+        let servers = sut.getServers(with: .searchResults("New Yo"))
+        
+        // THEN only server returned is the New York Server (the dip Server)
+        XCTAssertEqual(servers.count, 1)
+        XCTAssertEqual(servers[0].identifier, Fixture.dipServer.identifier)
+        XCTAssertEqual(servers[0].name, "US New York")
     }
     
     func test_getServers_withPreviouslySearchedFilter() {
