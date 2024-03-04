@@ -39,7 +39,7 @@ class RegionsContainerViewModel: ObservableObject {
     var searchButtonTitle: String {
         L10n.Localizable.Regions.Search.Button.title
     }
-
+    
     private let favoritesUseCase: FavoriteRegionUseCaseType
     private let onSearchSelectedAction: AppRouter.Actions
     private var cancellables = Set<AnyCancellable>()
@@ -55,6 +55,26 @@ class RegionsContainerViewModel: ObservableObject {
         
         if route == .search {
             onSearchSelectedAction()
+        }
+        
+    }
+    
+    /// When the focus moves back to the side menu buttons from the regions grid list
+    /// then we keep the focus on the current selected side menu in order to provide a better UX
+    func isRegionNavigationItemDisabled(_ item: RegionsNavigationItems, when focusedItem: RegionsNavigationItems?) -> Bool {
+        
+        let isSideMenuSectionOutOfFocus = focusedItem == nil
+        
+        switch (isSideMenuSectionOutOfFocus, item == selectedSection) {
+            /// Side buttons out of focus, the side menu item is the current selected section
+        case (true, true):
+            return false
+            /// Side buttons out of focus, the side menu item is not the current selected section
+        case (true, false):
+            return true
+            /// Side buttons are not out of focus, any side item selected
+        case(false, _):
+            return false
         }
         
     }

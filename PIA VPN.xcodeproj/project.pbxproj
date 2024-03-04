@@ -271,6 +271,7 @@
 		69AB492E2B63CB6100C780CD /* AppConstants+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AB492D2B63CB6100C780CD /* AppConstants+Protocols.swift */; };
 		69AB49302B63CD8700C780CD /* Keychain+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AB492F2B63CD8700C780CD /* Keychain+Protocols.swift */; };
 		69AB49322B63D22400C780CD /* KeychainFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AB49312B63D22400C780CD /* KeychainFactory.swift */; };
+		69B1C7AD2B96038D009A0629 /* RegionsContainerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B1C7AC2B96038D009A0629 /* RegionsContainerViewModelTests.swift */; };
 		69B70AB52ACBF51C0072A09D /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70AB42ACBF51C0072A09D /* LoginScreen.swift */; };
 		69B70ABC2ACBF8300072A09D /* CredentialsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */; };
 		69B70ABE2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */; };
@@ -1189,6 +1190,7 @@
 		69AB492D2B63CB6100C780CD /* AppConstants+Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppConstants+Protocols.swift"; sourceTree = "<group>"; };
 		69AB492F2B63CD8700C780CD /* Keychain+Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keychain+Protocols.swift"; sourceTree = "<group>"; };
 		69AB49312B63D22400C780CD /* KeychainFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainFactory.swift; sourceTree = "<group>"; };
+		69B1C7AC2B96038D009A0629 /* RegionsContainerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsContainerViewModelTests.swift; sourceTree = "<group>"; };
 		69B70AB02ACBF51C0072A09D /* PIA-VPN_E2E_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA-VPN_E2E_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69B70AB42ACBF51C0072A09D /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		69B70ABD2ACC2CFE0072A09D /* AccessibilityId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityId.swift; sourceTree = "<group>"; };
@@ -2294,6 +2296,7 @@
 				6963465C2B7109DA0051F8BC /* RegionsFilterUseCaseTests.swift */,
 				693B9A432B7622B600757A41 /* RegionsDisplayNameUseCaseTests.swift */,
 				6944B16D2B8536B8008E3B70 /* OptimalLocationUseCaseTests.swift */,
+				69B1C7AC2B96038D009A0629 /* RegionsContainerViewModelTests.swift */,
 			);
 			path = RegionsList;
 			sourceTree = "<group>";
@@ -4986,6 +4989,7 @@
 				690FC4862B3C5F7300F6DCC8 /* SelectedServerUseCaseMock.swift in Sources */,
 				E5AB28E02B4C107F00744E5F /* VPNConfigurationAvailabilityMock.swift in Sources */,
 				690FC4822B3C5A4300F6DCC8 /* ServerMock.swift in Sources */,
+				69B1C7AD2B96038D009A0629 /* RegionsContainerViewModelTests.swift in Sources */,
 				69194BBB2B7BE59600691775 /* VpnConnectionUseCaseTests.swift in Sources */,
 				6953E5532B7B748800D685B4 /* ConnectionStateMonitorMock.swift in Sources */,
 				690FC4842B3C5B0500F6DCC8 /* QuickConnectButtonViewModelDelegateMock.swift in Sources */,

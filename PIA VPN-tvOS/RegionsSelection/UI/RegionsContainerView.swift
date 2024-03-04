@@ -35,6 +35,7 @@ struct RegionsContainerView: View {
                 .cornerRadius(4)
                 .buttonStyle(BasicButtonStyle())
                 .focused($focusedFilter, equals: menuItem)
+                .disabled(viewModel.isRegionNavigationItemDisabled(menuItem, when: focusedFilter))
                 
             }
         }
