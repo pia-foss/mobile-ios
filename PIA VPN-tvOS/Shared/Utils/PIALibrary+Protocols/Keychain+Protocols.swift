@@ -10,11 +10,16 @@ import Foundation
 import PIALibrary
 
 protocol KeychainType {
-   func getFavorites() throws -> [String]
+    func getFavorites() throws -> [String]
     func set(favorites: [String]) throws
+    func eraseAllFavorites() throws
     
     // Add methods from `Keychain` class as needed
 }
 
 
-extension Keychain: KeychainType {}
+extension Keychain: KeychainType {
+    func eraseAllFavorites() throws {
+        try set(favorites: [])
+    }
+}

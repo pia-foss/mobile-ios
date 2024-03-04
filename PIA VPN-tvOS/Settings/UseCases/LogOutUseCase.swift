@@ -19,15 +19,19 @@ class LogOutUseCase: LogOutUseCaseType {
     let vpnConfigurationAvailability: VPNConfigurationAvailabilityType
     let connectionStatsPermisson: ConnectionStatsPermissonType
     var clientPreferences: ClientPreferencesType
+    let favoriteRegionsUseCase: FavoriteRegionUseCaseType
+    let searchedRegionsAvailability: SearchedRegionsAvailabilityType
     
     init(accountProvider: AccountProviderType, appPreferences: AppPreferencesType, vpnConfigurationProvicer: VpnConfigurationProviderType, vpnConfigurationAvailability: VPNConfigurationAvailabilityType,
-         connectionStatsPermisson: ConnectionStatsPermissonType, clientPreferences: ClientPreferencesType) {
+         connectionStatsPermisson: ConnectionStatsPermissonType, clientPreferences: ClientPreferencesType, favoriteRegionsUserCase: FavoriteRegionUseCaseType, searchedRegionsAvailability: SearchedRegionsAvailabilityType) {
         self.accountProvider = accountProvider
         self.appPreferences = appPreferences
         self.vpnConfigurationProvider = vpnConfigurationProvicer
         self.vpnConfigurationAvailability = vpnConfigurationAvailability
         self.connectionStatsPermisson = connectionStatsPermisson
         self.clientPreferences = clientPreferences
+        self.favoriteRegionsUseCase = favoriteRegionsUserCase
+        self.searchedRegionsAvailability = searchedRegionsAvailability
     }
     
     private func uninstallVpnConfiguration() async {
@@ -51,7 +55,10 @@ class LogOutUseCase: LogOutUseCaseType {
     func logOut() async {
         await uninstallVpnConfiguration()
         await logoutUser()
+        favoriteRegionsUseCase.eraseAllFavorites()
+        searchedRegionsAvailability.eraseAll()
         appPreferences.reset()
         clientPreferences.selectedServer = SelectedServerUseCase.automaticServer()
+        
     }
 }

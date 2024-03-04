@@ -16,11 +16,14 @@ class RegionsFilterUseCaseTests: XCTestCase {
         let serversUseCaseMock = RegionsListUseCaseMock()
         let favoritesUseCaseMock = FavoriteRegionUseCaseMock()
         let searchedRegionAvailabilityMock = SearchedRegionsAvailabilityMock()
+        var getDedicatedIpUseCaseMock = GetDedicatedIpUseCaseMock(result: nil)
         
         static let barcelona = ServerMock(name: "Barcelona-1", identifier: "es-server-barcelona", regionIdentifier: "es-region", country: "ES", geo: false, pingTime: 25)
         static let madrid = ServerMock(name: "Madrid", identifier: "es-server-madrid", regionIdentifier: "es-region2", country: "ES", geo: false, pingTime: 12)
         static let toronto = ServerMock(name: "Toronto", identifier: "ca-server", regionIdentifier: "canada", country: "CA", geo: false, pingTime: 30)
         static let montreal = ServerMock(name: "Montreal", identifier: "ca-server2", regionIdentifier: "canada2", country: "CA", geo: false, pingTime: 42)
+        
+        static let dipServer = ServerMock(name: "US New York", identifier: "us-ny", regionIdentifier: "us", country: "us", geo: false)
         
         var allServers: [ServerMock] = [
             toronto,
@@ -28,13 +31,25 @@ class RegionsFilterUseCaseTests: XCTestCase {
             barcelona,
             madrid
         ]
+        
+        var allServersWithDipServer: [ServerMock] = [
+            toronto,
+            montreal,
+            barcelona,
+            madrid,
+            dipServer
+        ]
+        
+        func stubGetDedicatedIpServer(_ server: ServerType) {
+            self.getDedicatedIpUseCaseMock = GetDedicatedIpUseCaseMock(result: server)
+        }
     }
     
     var fixture: Fixture!
     var sut: RegionsFilterUseCase!
     
     func instantiateSut() {
-        sut = RegionsFilterUseCase(serversUseCase: fixture.serversUseCaseMock, favoritesUseCase: fixture.favoritesUseCaseMock, searchedRegionsAvailability: fixture.searchedRegionAvailabilityMock)
+        sut = RegionsFilterUseCase(serversUseCase: fixture.serversUseCaseMock, favoritesUseCase: fixture.favoritesUseCaseMock, searchedRegionsAvailability: fixture.searchedRegionAvailabilityMock, getDedicatedIpUseCase: fixture.getDedicatedIpUseCaseMock)
     }
     
     override func setUp() {
@@ -46,7 +61,7 @@ class RegionsFilterUseCaseTests: XCTestCase {
         sut = nil
     }
     
-    func test_getServers_withAllFilter() {
+    func test_getServers_withAllFilter_WhenNoDipServer() {
         // GIVEN that we have 4 servers
         fixture.serversUseCaseMock.getCurrentServersResult = fixture.allServers
         instantiateSut()
@@ -55,6 +70,23 @@ class RegionsFilterUseCaseTests: XCTestCase {
         let servers = sut.getServers(with: .all)
         
         // THEN all the servers are returned sorted alphabetically by name
+        XCTAssertEqual(servers.count, 4)
+        XCTAssertEqual(servers[0].identifier, Fixture.barcelona.identifier)
+        XCTAssertEqual(servers[1].identifier, Fixture.madrid.identifier)
+        XCTAssertEqual(servers[2].identifier, Fixture.montreal.identifier)
+        XCTAssertEqual(servers[3].identifier, Fixture.toronto.identifier)
+    }
+    
+    func test_getServers_withAllFilter_whenThereIsADipServer() {
+        // GIVEN that we have 5 servers (4 Servers + 1 DIP server)
+        fixture.serversUseCaseMock.getCurrentServersResult = fixture.allServersWithDipServer
+        fixture.stubGetDedicatedIpServer(Fixture.dipServer)
+        instantiateSut()
+        
+        // WHEN getting the list of the servers filtered by 'all'
+        let servers = sut.getServers(with: .all)
+        
+        // THEN all the servers are returned sorted alphabetically by name except the DIP server
         XCTAssertEqual(servers.count, 4)
         XCTAssertEqual(servers[0].identifier, Fixture.barcelona.identifier)
         XCTAssertEqual(servers[1].identifier, Fixture.madrid.identifier)

@@ -36,7 +36,7 @@ extension DashboardFactory {
         return SelectedServerViewModel(
             useCase: makeSelectedServerUserCase,
             optimalLocationUseCase: RegionsSelectionFactory.makeOptimalLocationUseCase,
-            regionsDisplayNameUseCase: RegionsSelectionFactory.makeRegionsDisplayNameUseCase(),
+            regionsDisplayNameUseCase: RegionsSelectionFactory.makeRegionsDisplayNameUseCase(), getDedicatedIpUseCase: DedicatedIPFactory.makeGetDedicatedIpUseCase(),
             routerAction: .navigate(router: AppRouterFactory.makeAppRouter(), destination: RegionsDestinations.serversList))
     }
     
@@ -51,7 +51,7 @@ extension DashboardFactory {
 
 extension DashboardFactory {
     static internal func makeQuickConnectButtonViewModel(for server: ServerType, delegate: QuickConnectButtonViewModelDelegate?) -> QuickConnectButtonViewModel {
-        QuickConnectButtonViewModel(server: server, delegate: delegate)
+        QuickConnectButtonViewModel(server: server, getDedicatedIpUseCase: DedicatedIPFactory.makeGetDedicatedIpUseCase(), delegate: delegate)
     }
     
     static func makeQuickConnectButton(for server: ServerType, delegate: QuickConnectButtonViewModelDelegate?) -> QuickConnectButton {

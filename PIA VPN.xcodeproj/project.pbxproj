@@ -316,6 +316,7 @@
 		69FA73DD2B7D50B2002300B3 /* AvailableSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FA73DC2B7D50B2002300B3 /* AvailableSettingsView.swift */; };
 		69FA73E02B7D50D7002300B3 /* AvailableSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FA73DF2B7D50D7002300B3 /* AvailableSettingsViewModel.swift */; };
 		69FA73E22B7D5576002300B3 /* Routes+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FA73E12B7D5576002300B3 /* Routes+Settings.swift */; };
+		69FF063C2B91FAE6006063DF /* SelectedServerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FF063B2B91FAE6006063DF /* SelectedServerViewModelTests.swift */; };
 		69FF0B042B3AD1D40074AA04 /* SelectedServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FF0B032B3AD1D40074AA04 /* SelectedServerView.swift */; };
 		69FF0B062B3AD2860074AA04 /* QuickConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FF0B052B3AD2860074AA04 /* QuickConnectView.swift */; };
 		69FF0B082B3AD3E60074AA04 /* SelectedServerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FF0B072B3AD3E60074AA04 /* SelectedServerViewModel.swift */; };
@@ -1231,6 +1232,7 @@
 		69FA73DC2B7D50B2002300B3 /* AvailableSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableSettingsView.swift; sourceTree = "<group>"; };
 		69FA73DF2B7D50D7002300B3 /* AvailableSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableSettingsViewModel.swift; sourceTree = "<group>"; };
 		69FA73E12B7D5576002300B3 /* Routes+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Routes+Settings.swift"; sourceTree = "<group>"; };
+		69FF063B2B91FAE6006063DF /* SelectedServerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedServerViewModelTests.swift; sourceTree = "<group>"; };
 		69FF0B032B3AD1D40074AA04 /* SelectedServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedServerView.swift; sourceTree = "<group>"; };
 		69FF0B052B3AD2860074AA04 /* QuickConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickConnectView.swift; sourceTree = "<group>"; };
 		69FF0B072B3AD3E60074AA04 /* SelectedServerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedServerViewModel.swift; sourceTree = "<group>"; };
@@ -2352,6 +2354,7 @@
 				690FC47F2B3C59AF00F6DCC8 /* QuickConnectButtonViewModelTests.swift */,
 				690FC4872B3C60F500F6DCC8 /* QuickConnectViewModelTests.swift */,
 				69E61DF02B56990E00085648 /* DashboardViewModelTests.swift */,
+				69FF063B2B91FAE6006063DF /* SelectedServerViewModelTests.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -4972,6 +4975,7 @@
 				6963465B2B70F6A80051F8BC /* RegionsFilterUseCaseMock.swift in Sources */,
 				E52E69112B5D696E00471913 /* UserAuthenticationStatusMonitorTests.swift in Sources */,
 				E5AB28D12B4B39F000744E5F /* VPNConfigurationInstallingViewModelTests.swift in Sources */,
+				69FF063C2B91FAE6006063DF /* SelectedServerViewModelTests.swift in Sources */,
 				E5C5078B2B0E145100200A6A /* PIA_VPN_tvOSTests.swift in Sources */,
 				E574D9FF2B854A4B000FADAF /* ActivateDIPTokenUseCaseMock.swift in Sources */,
 				E55EDCF82B769416007010DB /* ConnectionStatsPermissonMock.swift in Sources */,

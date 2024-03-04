@@ -13,6 +13,7 @@ protocol AccountProviderType {
 extension DefaultAccountProvider: AccountProviderType { }
 
 protocol ServerType {
+    var id: ObjectIdentifier { get }
     var name: String { get }
     var identifier: String { get }
     var regionIdentifier: String { get }
@@ -26,6 +27,11 @@ protocol ServerType {
 }
 
 extension Server: ServerType {
+    
+    public var id: ObjectIdentifier {
+        return ObjectIdentifier(self)
+    }
+    
     var dipStatusString: String? {
         dipStatus?.getStatus()
     }

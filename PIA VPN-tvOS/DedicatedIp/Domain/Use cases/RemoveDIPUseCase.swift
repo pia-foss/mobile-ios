@@ -34,7 +34,7 @@ class RemoveDIPUseCase: RemoveDIPUseCaseType {
         }
         
         dedicatedIpProvider.removeDIPToken(dipToken)
-        _ = try? favoriteRegionsUseCase.removeFromFavorites(dedicatedIPServer.identifier)
+        _ = try? favoriteRegionsUseCase.removeFromFavorites(dedicatedIPServer.identifier, isDipServer: true)
         
         let selectedServer = selectedServer.selectedServer
         if selectedServer.identifier == dedicatedIPServer.identifier {

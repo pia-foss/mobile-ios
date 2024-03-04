@@ -147,6 +147,9 @@ final class DedicatedIPViewModelTests: XCTestCase {
 }
 
 struct ServerTypeStub: ServerType {
+    
+    var id: ObjectIdentifier { return ObjectIdentifier(ServerMock()) }
+    
     var name: String
     var identifier: String
     var regionIdentifier: String

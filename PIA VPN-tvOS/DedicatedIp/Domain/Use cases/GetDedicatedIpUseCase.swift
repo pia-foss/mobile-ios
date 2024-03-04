@@ -10,6 +10,7 @@ import Foundation
 
 protocol GetDedicatedIpUseCaseType {
     func callAsFunction() -> ServerType?
+    func isDedicatedIp(_ server: ServerType) -> Bool
 }
 
 class GetDedicatedIpUseCase: GetDedicatedIpUseCaseType {
@@ -26,5 +27,11 @@ class GetDedicatedIpUseCase: GetDedicatedIpUseCaseType {
         return serverProvider.currentServersType
             .filter({ $0.dipToken != nil && dipTokens.contains($0.dipToken!) })
             .first
+    }
+    
+    func isDedicatedIp(_ server: ServerType) -> Bool {
+        guard let currentDipServer = callAsFunction() else { return false }
+        return server.dipToken != nil &&
+        server.identifier == currentDipServer.identifier
     }
 }

@@ -9,6 +9,7 @@ class SelectedServerViewModel: ObservableObject {
     private let useCase: SelectedServerUseCaseType
     private let optimalLocationUseCase: OptimalLocationUseCaseType
     private let regionsDisplayNameUseCase: RegionsDisplayNameUseCaseType
+    private let getDedicatedIpUseCase: GetDedicatedIpUseCaseType
     
     let routerAction: AppRouter.Actions
     @Published var selectedServer: ServerType?
@@ -28,11 +29,12 @@ class SelectedServerViewModel: ObservableObject {
     
     @Published var selectedServerSubtitle = ""
     
-    init(useCase: SelectedServerUseCaseType, optimalLocationUseCase: OptimalLocationUseCaseType, regionsDisplayNameUseCase: RegionsDisplayNameUseCaseType,
+    init(useCase: SelectedServerUseCaseType, optimalLocationUseCase: OptimalLocationUseCaseType, regionsDisplayNameUseCase: RegionsDisplayNameUseCaseType, getDedicatedIpUseCase: GetDedicatedIpUseCaseType,
          routerAction: AppRouter.Actions) {
         self.useCase = useCase
         self.optimalLocationUseCase = optimalLocationUseCase
         self.regionsDisplayNameUseCase = regionsDisplayNameUseCase
+        self.getDedicatedIpUseCase = getDedicatedIpUseCase
         self.routerAction = routerAction
         updateState()
     }
@@ -47,6 +49,11 @@ class SelectedServerViewModel: ObservableObject {
     
     func iconImageNameFor(focused: Bool) -> String {
         guard let currentServer = selectedServer else { return "" }
+        
+        if getDedicatedIpUseCase.isDedicatedIp(currentServer) {
+            return .icon_dip_location
+        }
+        
         if currentServer.isAutomatic {
           let autoIcon =  focused ? focusedAutomaticServerIconName : unfocusedAutomaticServerIconName
             return autoIcon

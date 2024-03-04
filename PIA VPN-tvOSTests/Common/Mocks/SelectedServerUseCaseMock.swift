@@ -5,10 +5,12 @@ import Combine
 
 class SelectedServerUseCaseMock: SelectedServerUseCaseType {
     
+    var selectedSever: ServerType = ServerMock()
+    
     var getSelectedServerCalled = false
     var getSelectedServerAttempt = 0
     var getSelectedServerResult: CurrentValueSubject<ServerType, Never> = CurrentValueSubject(ServerMock())
-    func getSelectedServer() -> AnyPublisher<PIA_VPN_tvOS.ServerType, Never> {
+    func getSelectedServer() -> AnyPublisher<ServerType, Never> {
         getSelectedServerCalled = true
         getSelectedServerAttempt += 1
         return getSelectedServerResult.eraseToAnyPublisher()

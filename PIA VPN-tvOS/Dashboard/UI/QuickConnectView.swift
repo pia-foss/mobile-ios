@@ -8,7 +8,7 @@ struct QuickConnectView: View {
     var body: some View {
         VStack (alignment: .leading) {
             HStack(alignment: .top, spacing: 44) {
-                ForEach(viewModel.servers, id: \.regionIdentifier) { item in
+                ForEach(viewModel.servers, id: \.id) { item in
                     DashboardFactory.makeQuickConnectButton(for: item, delegate: viewModel)
                 }
                 

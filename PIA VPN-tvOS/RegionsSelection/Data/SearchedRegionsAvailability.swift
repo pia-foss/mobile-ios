@@ -11,6 +11,7 @@ import Foundation
 protocol SearchedRegionsAvailabilityType {
     func get() -> [String]
     func set(value: [String])
+    func eraseAll()
 }
 
 
@@ -27,6 +28,10 @@ class SearchedRegionsAvailability: SearchedRegionsAvailabilityType {
     
     func set(value: [String]) {
         userDefaults.set(value, forKey: .kSearchedRegionsIdentifiers)
+    }
+    
+    func eraseAll() {
+        userDefaults.removeObject(forKey: .kSearchedRegionsIdentifiers)
     }
 }
 

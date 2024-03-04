@@ -62,6 +62,12 @@ class RegionsListViewModel: ObservableObject {
     }
     
     func getIconImageName(for server: ServerType) -> (unfocused: String, focused: String) {
+        let isDedicatedIpServer = getDedicatedIpUseCase.isDedicatedIp(server)
+        
+        if isDedicatedIpServer {
+            return (unfocused: .icon_dip_location, focused: .icon_dip_location)
+        }
+        
         if server.isAutomatic {
             return (unfocused: .smart_location_icon_name, focused: .smart_location_icon_highlighted_name)
         } else {
@@ -200,14 +206,17 @@ extension RegionsListViewModel {
     }
     
     private func isFavorite(server: ServerType) -> Bool {
-        let favoritesIds = favoriteUseCase.favoriteIdentifiers
-        return favoritesIds.contains(server.identifier)
+        let isServerDipServer = getDedicatedIpUseCase.isDedicatedIp(server)
+        let isServerFavorite = favoriteUseCase.isFavoriteServerWith(identifier: server.identifier, isDipServer: isServerDipServer)
+        
+        return isServerFavorite
     }
     
     private func addToFavorites(_ server: ServerType) {
         favoriteToggleError = nil
+        let isDipServer = getDedicatedIpUseCase.isDedicatedIp(server)
         do {
-            try  favoriteUseCase.addToFavorites(server.identifier)
+            try favoriteUseCase.addToFavorites(server.identifier, isDipServer: isDipServer)
             refreshRegionsList()
             favoriteToggleError = nil
         } catch {
@@ -217,8 +226,9 @@ extension RegionsListViewModel {
     
     private func removeFromFavorites(_ server: ServerType) {
         favoriteToggleError = nil
+        let isDipServer = getDedicatedIpUseCase.isDedicatedIp(server)
         do {
-            try  favoriteUseCase.removeFromFavorites(server.identifier)
+            try favoriteUseCase.removeFromFavorites(server.identifier, isDipServer: isDipServer)
             refreshRegionsList()
             favoriteToggleError = nil
         } catch {

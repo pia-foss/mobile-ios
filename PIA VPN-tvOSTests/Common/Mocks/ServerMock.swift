@@ -3,6 +3,9 @@ import Foundation
 @testable import PIA_VPN_tvOS
 
 class ServerMock: ServerType {
+    
+    var id: ObjectIdentifier { return ObjectIdentifier(self) }
+    
     var isAutomatic: Bool
     
     var pingTime: Int?
@@ -23,7 +26,7 @@ class ServerMock: ServerType {
     
     var dipStatusString: String?
     
-    init(name: String, identifier: String, regionIdentifier: String, country: String, geo: Bool, pingTime: Int? = nil, isAutomatic: Bool = false) {
+    init(name: String = "", identifier: String = "" , regionIdentifier: String = "", country: String = "", geo: Bool = false, pingTime: Int? = nil, isAutomatic: Bool = false) {
         self.name = name
         self.identifier = identifier
         self.regionIdentifier = regionIdentifier
