@@ -8,6 +8,7 @@
 
 import Foundation
 import XCTest
+import Combine
 @testable import PIA_VPN_tvOS
 
 class RegionsContainerViewModelTests: XCTestCase {
@@ -24,18 +25,30 @@ class RegionsContainerViewModelTests: XCTestCase {
     
     var fixture: Fixture!
     var sut: RegionsContainerViewModel!
+    var cancellables: Set<AnyCancellable>!
     
     override func setUp() {
         fixture = Fixture()
+        cancellables = Set<AnyCancellable>()
     }
     
     override func tearDown() {
         fixture = nil
         sut = nil
+        cancellables = nil
     }
     
     private func instantiateSut() {
         sut = RegionsContainerViewModel(favoritesUseCase: fixture.favoritesUseCaseMock, onSearchSelectedAction: fixture.appRouterActionMock)
+    }
+    
+    private func subscribeToSideMenuUpdatesWithExpectation(_ expectation: XCTestExpectation, expectedItemsCount: Int) {
+        sut.$sideMenuItems
+            .sink { newItems in
+                if newItems.count == expectedItemsCount {
+                    expectation.fulfill()
+                }
+            }.store(in: &cancellables)
     }
     
     func test_sideMenuFiltersDisabled_whenSideMenuSectionIsOutOfFocus() {
@@ -76,5 +89,61 @@ class RegionsContainerViewModelTests: XCTestCase {
         XCTAssertFalse(isSearchDisabledWhenSideMenuOutIsOfFocus)
         
     }
+    
+    func test_sideMenuItemsWhenFavoritesStored() {
+        let sideMenuItemsUpdated = expectation(description: "Side menu items updated")
+        // GIVEN that an item is added to favorites
+        fixture.favoritesUseCaseMock.favorites = ["server-id-one"]
+        instantiateSut()
+        subscribeToSideMenuUpdatesWithExpectation(sideMenuItemsUpdated, expectedItemsCount: 3)
+        
+        wait(for: [sideMenuItemsUpdated], timeout:  3)
+        // THEN the sections shown on the left side are 3 (Favorites, All and Search)
+        XCTAssertEqual(sut.sideMenuItems.count, 3)
+        XCTAssertEqual(sut.sideMenuItems, [.favorites, .all, .search])
+    }
+    
+    func test_sideMenuItemsWhenNoFavoritesStored() {
+        let sideMenuItemsUpdated = expectation(description: "Side menu items updated")
+        // GIVEN that no items are added to favorites
+        fixture.favoritesUseCaseMock.favorites = []
+        instantiateSut()
+        subscribeToSideMenuUpdatesWithExpectation(sideMenuItemsUpdated, expectedItemsCount: 2)
+        
+        wait(for: [sideMenuItemsUpdated], timeout:  2)
+        // THEN the sections shown on the left side are 2 (All and Search)
+        XCTAssertEqual(sut.sideMenuItems.count, 2)
+        XCTAssertEqual(sut.sideMenuItems, [.all, .search])
+    }
+    
+    func test_selectedSectionWhenAllFavoritesDeleted() {
+        let sideMenuItemsUpdated = expectation(description: "Side menu items updated")
+        // GIVEN that an item is added to favorites
+        fixture.favoritesUseCaseMock.favorites = ["server-id-one"]
+        instantiateSut()
+        // AND GIVEN that the selected section is 'Favorites'
+        sut.selectedSection = .favorites
+        subscribeToSideMenuUpdatesWithExpectation(sideMenuItemsUpdated, expectedItemsCount: 3)
+        
+        wait(for: [sideMenuItemsUpdated], timeout:  3)
+        // THEN the sections shown on the left side are 3 (Favorites, All and Search)
+        XCTAssertEqual(sut.sideMenuItems.count, 3)
+        XCTAssertEqual(sut.sideMenuItems, [.favorites, .all, .search])
+        
+        // WHEN the item is removed from favorites and the favorites list becomes empty
+        fixture.favoritesUseCaseMock.favorites = []
+        
+        let sideMenuItemsUpdatedAgain = expectation(description: "Side menu items are updated again")
+        subscribeToSideMenuUpdatesWithExpectation(sideMenuItemsUpdatedAgain, expectedItemsCount: 2)
+        wait(for: [sideMenuItemsUpdatedAgain], timeout: 3)
+        
+        // THEN the side menu items become 2 (All and Search)
+        XCTAssertEqual(sut.sideMenuItems.count, 2)
+        XCTAssertEqual(sut.sideMenuItems, [.all, .search])
+        // AND the selected section becomes 'All'
+        XCTAssertEqual(sut.selectedSection, .all)
+        
+    }
+    
     
 }

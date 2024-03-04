@@ -20,7 +20,7 @@ class FavoriteRegionUseCaseMock: FavoriteRegionUseCaseType {
     }
     
     var favoriteIdentifiers: [String] = []
-    @Published private var favorites: [String] = []
+    @Published internal var favorites: [String] = []
     var favoriteIdentifiersPublisher: Published<[String]>.Publisher {
         $favorites
     }
