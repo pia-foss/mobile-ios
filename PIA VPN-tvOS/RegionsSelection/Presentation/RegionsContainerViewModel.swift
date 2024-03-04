@@ -87,9 +87,13 @@ extension RegionsContainerViewModel {
     private func subscribeToFavoritesUpdates() {
         favoritesUseCase.favoriteIdentifiersPublisher
             .receive(on: RunLoop.main)
-            .sink { newFavorites in
+            .sink {[weak self] newFavorites in
+                guard let self else { return }
                 if newFavorites.isEmpty {
                     self.sideMenuItems = [.all, .search]
+                    if selectedSection == .favorites {
+                        selectedSection = .all
+                    }
                 } else {
                     self.sideMenuItems = [.favorites, .all, .search]
                 }
