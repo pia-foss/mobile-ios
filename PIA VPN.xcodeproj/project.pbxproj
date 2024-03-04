@@ -643,7 +643,6 @@
 		E52E69012B56E22000471913 /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = E501CBBA2AE9806800515006 /* UI.strings */; };
 		E52E69022B56E22A00471913 /* Signup.strings in Resources */ = {isa = PBXBuildFile; fileRef = E501CBCE2AE9806800515006 /* Signup.strings */; };
 		E52E69032B56E22D00471913 /* Welcome.strings in Resources */ = {isa = PBXBuildFile; fileRef = E501CBD02AE9806800515006 /* Welcome.strings */; };
-		E52E69042B56E26700471913 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E7EC043209326E30029811E /* Localizable.strings */; };
 		E52E690A2B5BC0ED00471913 /* VPNStatusMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E69092B5BC0ED00471913 /* VPNStatusMonitor.swift */; };
 		E52E690C2B5BC19300471913 /* UserAuthenticationStatusMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E690B2B5BC19300471913 /* UserAuthenticationStatusMonitor.swift */; };
 		E52E690F2B5D695A00471913 /* VPNStatusMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52E690E2B5D695A00471913 /* VPNStatusMonitorTests.swift */; };
@@ -4249,7 +4248,6 @@
 				E5C507812B0E145000200A6A /* Preview Assets.xcassets in Resources */,
 				E574DA072B8610CF000FADAF /* Regions.json in Resources */,
 				E5C5077E2B0E145000200A6A /* Assets.xcassets in Resources */,
-				E52E69042B56E26700471913 /* Localizable.strings in Resources */,
 				E52E69022B56E22A00471913 /* Signup.strings in Resources */,
 				E52E69012B56E22000471913 /* UI.strings in Resources */,
 			);
