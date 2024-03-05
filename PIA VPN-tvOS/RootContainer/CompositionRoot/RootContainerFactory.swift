@@ -13,6 +13,6 @@ class RootContainerFactory {
                                       connectionStatsPermissonType: ConnectionStatsPermisson(),
                                       bootstrap: BootstraperFactory.makeBootstrapper(),
                                       userAuthenticationStatusMonitor: StateMonitorsFactory.makeUserAuthenticationStatusMonitor,
-                                      appRouter: AppRouterFactory.makeAppRouter())
+                                      appRouter: AppRouterFactory.makeAppRouter(), refreshLatencyUseCase: RefreshLatencyFactory.makeRefreshServersLatencyUseCase)
     }
 }

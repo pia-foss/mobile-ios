@@ -11,13 +11,14 @@ import PIALibrary
 import Combine
 
 class RegionsListViewModel: ObservableObject {
-
+    
     private let listUseCase: RegionsListUseCaseType
     private let favoriteUseCase: FavoriteRegionUseCaseType
     private let regionsFilterUseCase: RegionsFilterUseCaseType
     private let regionsDisplayNameUseCase: RegionsDisplayNameUseCaseType
     private let optimalLocationUseCase: OptimalLocationUseCaseType
     private let getDedicatedIpUseCase: GetDedicatedIpUseCaseType
+    private let refreshLatencyUseCase: RefreshServersLatencyUseCaseType
     
     private let onServerSelectedRouterAction: AppRouter.Actions
     internal var filter: RegionsListFilter
@@ -43,6 +44,7 @@ class RegionsListViewModel: ObservableObject {
          regionsDisplayNameUseCase: RegionsDisplayNameUseCaseType,
          optimalLocationUseCase: OptimalLocationUseCaseType,
          getDedicatedIpUseCase: GetDedicatedIpUseCaseType,
+         refreshLatencyUseCase: RefreshServersLatencyUseCaseType,
          onServerSelectedRouterAction: AppRouter.Actions) {
         self.filter = filter
         self.listUseCase = listUseCase
@@ -51,14 +53,16 @@ class RegionsListViewModel: ObservableObject {
         self.regionsDisplayNameUseCase = regionsDisplayNameUseCase
         self.optimalLocationUseCase = optimalLocationUseCase
         self.getDedicatedIpUseCase = getDedicatedIpUseCase
+        self.refreshLatencyUseCase = refreshLatencyUseCase
         self.onServerSelectedRouterAction = onServerSelectedRouterAction
-       
+        
         allServers = listUseCase.getCurrentServers()
         optimalAndDIPServers = getOptimalAndDIPServersIfNeeded()
         optimalAndDIPServersSectionTitle = getOptimalAndDIPServersSectionTitle()
         refreshRegionsList()
         subscribeToSearchUpdates()
         subscribeToOptimalLocationTargetServerIfNeeded()
+        subscribeToServersLatencyUpdates()
     }
     
     func getIconImageName(for server: ServerType) -> (unfocused: String, focused: String) {
@@ -276,5 +280,19 @@ extension RegionsListViewModel {
         
     }
     
-    
+}
+
+// MARK: - Servers latency updates subscription
+
+extension RegionsListViewModel {
+    func subscribeToServersLatencyUpdates() {
+        refreshLatencyUseCase.statePublisher
+            .removeDuplicates()
+            .receive(on: RunLoop.main)
+            .sink {[weak self] newValue in
+                if newValue == .updated {
+                    self?.refreshRegionsList()
+                }
+            }.store(in: &cancellables)
+    }
 }
