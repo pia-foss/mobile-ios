@@ -1,9 +1,9 @@
-name: build_and_test
+name: build_and_test_all_unit_tests
 on:
   pull_request:
   workflow_dispatch:
 concurrency:
-  group: "${{ github.ref }}"
+  group: "${{ github.run_id }}"
   cancel-in-progress: true
 jobs:
   build:
@@ -33,13 +33,5 @@ jobs:
 
     - name: Run iOS unit tests
       run: bundle exec fastlane tests
-    
-    - name: Run tvOS e2e tests
-      run: bundle exec fastlane tvos_e2e_tests
-      timeout-minutes: 45
-
-    - name: Run iOS e2e tests
-      run: bundle exec fastlane ios_e2e_tests
-      timeout-minutes: 45
 
       

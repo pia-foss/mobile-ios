@@ -15,22 +15,59 @@ platform :ios do
   end
 
   lane :ios_e2e_tests do
+    # build_app(
+    #   scheme: "PIA VPN dev", 
+    #   skip_archive: true,
+    #   configuration: "Debug",
+    #   export_method: "development",
+    #   skip_package_ipa: true,
+    #   skip_codesigning: true,
+    #   derived_data_path: "derived_data",
+    #   skip_package_dependencies_resolution: true
+    #   )
+    
+    scan(
+      scheme: "PIA VPN dev", 
+      skip_build: false,
+      build_for_testing: true,
+      derived_data_path: "derived_data"
+      )
     run_tests(
       scheme: "PIA VPN dev",
       testplan: "PIA-VPN-e2e-simulator",
       devices: ["iPhone 14"],
       prelaunch_simulator: true,
-      test_without_building: true
+      test_without_building: true,
+      derived_data_path: "derived_data"
     )
   end
 
   lane :tvos_e2e_tests do
+    # build_app(
+    #   scheme: "PIA VPN-tvOS", 
+    #   skip_archive: true,
+    #   skip_codesigning: true,
+    #   configuration: "Debug",
+    #   export_method: "development",
+    #   skip_package_ipa: true,
+    #   xcargs: "'platform=tvOS Simulator,name=Apple TV'",
+      
+    #   )
+
+    scan(
+      scheme: "PIA VPN-tvOS", 
+      skip_build: false,
+      build_for_testing: true,
+      derived_data_path: "derived_data"
+      )
+    
     run_tests(
       scheme: "PIA VPN-tvOS",
       testplan: "PIA VPN-tvOS_E2E_Tests",
       test_without_building: true,
       prelaunch_simulator: true,
-      device: "Apple TV"
+      device: "Apple TV",
+      derived_data_path: "derived_data"
     )
   end
 

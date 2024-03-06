@@ -1,0 +1,36 @@
+name: build_and_test_tvos_e2e
+on:
+  pull_request:
+  workflow_dispatch:
+concurrency:
+  group: "${{ github.run_id }}"
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: macos-14
+    env:
+      TEST_RUNNER_PIA_TEST_USER: ${{ secrets.PIA_ACCOUNT_USERNAME}}
+      TEST_RUNNER_PIA_TEST_PASSWORD: ${{ secrets.PIA_ACCOUNT_PASSWORD }}
+      TEST_RUNNER_PIA_TEST_DEDICATEDIP: ${{ secrets.PIA_TEST_DEDICATEDIP }}
+
+    steps:
+    - name: Setup Git credentials
+      run: |
+        git config --global url."https://${{ secrets.ORG_GITHUB_USERNAME }}:${{ secrets.ORG_GITHUB_TOKEN }}@github.com/".insteadOf "git@github.com:"
+
+    - uses: actions/checkout@v3
+    
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.0.2
+
+    - name: Install Fastlane
+      run: gem install fastlane
+    
+    - name: Run tvOS e2e tests
+      run: bundle exec fastlane tvos_e2e_tests
+      timeout-minutes: 40
+
+
+      
