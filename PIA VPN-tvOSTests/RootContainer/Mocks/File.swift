@@ -13,6 +13,7 @@ import Combine
 
 class RefreshServersLatencyUseCaseMock: RefreshServersLatencyUseCaseType {
     
+    
     @Published var state: RefreshServersLatencyUseCase.State = .none
     
     var statePublisher: Published<RefreshServersLatencyUseCase.State>.Publisher { $state }
@@ -25,5 +26,11 @@ class RefreshServersLatencyUseCaseMock: RefreshServersLatencyUseCaseType {
         callAsFunctionCalledAttempt += 1
     }
     
+    var stopCalled = false
+    var stopCalledAttempt = 0
+    func stop() {
+        stopCalled = true
+        stopCalledAttempt += 1
+    }
     
 }

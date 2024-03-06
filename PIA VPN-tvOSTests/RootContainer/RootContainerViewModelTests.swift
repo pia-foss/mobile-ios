@@ -28,14 +28,14 @@ final class RootContainerViewModelTests: XCTestCase {
             self.userAuthenticationStatusMonitorMock = UserAuthenticationStatusMonitorMock(status: status)
         }
     }
-
+    
     var fixture: Fixture!
     var sut: RootContainerViewModel!
     
     override func setUp() {
         fixture = Fixture()
     }
-
+    
     override func tearDown() {
         fixture = nil
         sut = nil
@@ -168,7 +168,7 @@ final class RootContainerViewModelTests: XCTestCase {
         XCTAssertEqual(sut.state, .notActivated)
     }
     
-    func test_sceneDidBecomeActive_when_authenticated() {
+    func test_sceneDidBecomeActive_when_authenticated() async {
         // GIVEN that the user is authenticated
         fixture.accountProvierMock.isLoggedIn = true
         fixture.stubUserAuthenticationStatusMonitor(status: .loggedIn)
@@ -179,15 +179,13 @@ final class RootContainerViewModelTests: XCTestCase {
         XCTAssertFalse(fixture.refreshLatencyUseCaseMock.callAsFunctionCalled)
         
         // WHEN the app scene becomes active
-        sut.sceneDidBecomeActive()
-        
+        await sut.sceneDidBecomeActive()
         // THEN the use case to refresh the servers latency is called once
         XCTAssertTrue(fixture.refreshLatencyUseCaseMock.callAsFunctionCalled)
         XCTAssertEqual(fixture.refreshLatencyUseCaseMock.callAsFunctionCalledAttempt, 1)
-        
     }
     
-    func test_sceneDidBecomeActive_when_authenticatedNotOnboarded() {
+    func test_sceneDidBecomeActive_when_authenticatedNotOnboarded() async {
         // GIVEN that the user is authenticated
         fixture.accountProvierMock.isLoggedIn = true
         fixture.stubUserAuthenticationStatusMonitor(status: .loggedIn)
@@ -198,7 +196,7 @@ final class RootContainerViewModelTests: XCTestCase {
         XCTAssertFalse(fixture.refreshLatencyUseCaseMock.callAsFunctionCalled)
         
         // WHEN the app scene becomes active
-        sut.sceneDidBecomeActive()
+        await sut.sceneDidBecomeActive()
         
         // THEN the use case to refresh the servers latency is called once
         XCTAssertTrue(fixture.refreshLatencyUseCaseMock.callAsFunctionCalled)
@@ -206,7 +204,7 @@ final class RootContainerViewModelTests: XCTestCase {
         
     }
     
-    func test_sceneDidBecomeActive_when_notAuthenticated() {
+    func test_sceneDidBecomeActive_when_notAuthenticated() async {
         // GIVEN that the user is NOT authenticated
         fixture.accountProvierMock.isLoggedIn = false
         fixture.stubUserAuthenticationStatusMonitor(status: .loggedOut)
@@ -217,12 +215,27 @@ final class RootContainerViewModelTests: XCTestCase {
         XCTAssertFalse(fixture.refreshLatencyUseCaseMock.callAsFunctionCalled)
         
         // WHEN the app scene becomes active
-        sut.sceneDidBecomeActive()
+        await sut.sceneDidBecomeActive()
         
         // THEN the use case to refresh the servers latency is NOT called
         XCTAssertFalse(fixture.refreshLatencyUseCaseMock.callAsFunctionCalled)
         XCTAssertEqual(fixture.refreshLatencyUseCaseMock.callAsFunctionCalledAttempt, 0)
         
+    }
+    
+    func test_sceneDidBecomeInactive() {
+        // GIVEN that the Onboarding Vpn Profile is installed
+        stubOnboardingVpnInstallation(finished: true)
+        
+        instantiateSut()
+        XCTAssertFalse(fixture.refreshLatencyUseCaseMock.stopCalled)
+        
+        // WHEN the app scene becomes inactive
+        sut.sceneDidBecomeInActive()
+        
+        // THEN the refresh latency use case is called to stop
+        XCTAssertTrue(fixture.refreshLatencyUseCaseMock.stopCalled)
+        XCTAssertEqual(fixture.refreshLatencyUseCaseMock.stopCalledAttempt, 1)
     }
 }
 
@@ -235,4 +248,6 @@ extension RootContainerViewModelTests {
     private func stubConnectionStatsPermisson(value: Bool) {
         fixture.connectionStatsPermissonMock = ConnectionStatsPermissonMock(value: value)
     }
+    
 }
+

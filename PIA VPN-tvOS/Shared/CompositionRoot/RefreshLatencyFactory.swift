@@ -14,6 +14,7 @@ class RefreshLatencyFactory {
     }()
     
     static var makeRefreshServersLatencyUseCase: RefreshServersLatencyUseCaseType = {
-        RefreshServersLatencyUseCase(client: makeClientAdapter, serverProvider: VpnConnectionFactory.makeServerProvider(), notificationCenter: NotificationCenter.default)
+        RefreshServersLatencyUseCase(client: makeClientAdapter, serverProvider: VpnConnectionFactory.makeServerProvider(), notificationCenter: NotificationCenter.default, connectionStateMonitor: StateMonitorsFactory.makeConnectionStateMonitor
+        )
     }()
 }

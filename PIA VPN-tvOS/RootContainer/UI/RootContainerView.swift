@@ -30,7 +30,11 @@ struct RootContainerView: View {
         }.onChange(of: scenePhase) { _, newPhase in
             switch newPhase {
             case .active:
-                viewModel.sceneDidBecomeActive()
+                Task {
+                    await viewModel.sceneDidBecomeActive()
+                }
+            case.inactive:
+                viewModel.sceneDidBecomeInActive()
             default:
                 break
             }

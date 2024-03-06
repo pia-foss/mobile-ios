@@ -11,11 +11,11 @@ import Foundation
 
 class ConnectionStateMonitorMock: ConnectionStateMonitorType {
     
-    
     @Published internal var connectionState: ConnectionState = .unkown
-    var connectionStatePublisher: Published<PIA_VPN_tvOS.ConnectionState>.Publisher {
+    var connectionStatePublisher: Published<ConnectionState>.Publisher {
         $connectionState
     }
+    var currentConnectionState: ConnectionState { connectionState }
     
     var callAsFunctionCalled = false
     var callAsFunctionCalledAttempt = 0

@@ -82,11 +82,17 @@ class RootContainerViewModel: ObservableObject {
 // MARK: - Scene Active
 
 extension RootContainerViewModel {
-    func sceneDidBecomeActive() {
+    func sceneDidBecomeActive() async {
         // Refresh the servers latency every time the app comes to the foreground
         // and the user is activated
         guard state == .activated || state == .activatedNotOnboarded else { return }
-        refreshLatencyUseCase()
+        // Wait 2s to let the Vpn Status notify its latest state
+        try? await Task.sleep(for: .seconds(2))
+        self.refreshLatencyUseCase()
+    }
+    
+    func sceneDidBecomeInActive() {
+        refreshLatencyUseCase.stop()
     }
 }
 

@@ -290,7 +290,7 @@ extension RegionsListViewModel {
             .removeDuplicates()
             .receive(on: RunLoop.main)
             .sink {[weak self] newValue in
-                if newValue == .updated {
+                if newValue.isUpdated {
                     self?.refreshRegionsList()
                 }
             }.store(in: &cancellables)

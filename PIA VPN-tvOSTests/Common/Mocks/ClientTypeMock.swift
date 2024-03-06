@@ -10,7 +10,7 @@ import Foundation
 @testable import PIA_VPN_tvOS
 
 class ClientTypeMock: ClientType {
-    
+
     var pingServersCalled = false
     var pingServersCalledAttempt = 0
     var pingServersCalledWithServers:[ServerType] = []
