@@ -562,7 +562,7 @@
 "tvos.signup.item1" = "VPN servers in 91 countries";
 "tvos.signup.item2" = "Blazing-fast speeds";
 "tvos.signup.item3" = "24/7 customer support";
-"tvos.signup.cta" = "Scan the QR Code";
+"tvos.signup.cta" = "Scan the QR Code and download the app to create a new account.";
 
 //Sign in expired (tvOS)
 "tvos.signin.expired.title" = "Your subscription has expired";
