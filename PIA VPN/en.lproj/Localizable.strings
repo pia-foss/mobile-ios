@@ -484,7 +484,7 @@
 "tvos.login.qr.timer" = "The code will expire in:";
 "tvos.login.qr.options" = "Other options:";
 "tvos.login.qr.button.login" = "Log In via Username";
-"tvos.login.qr.button.login" = "Restore Purchase";
+"tvos.login.qr.button.restore" = "Restore Purchase";
 
 "tvos.login.qr.expired.title" = "QR Code has expired";
 "tvos.login.qr.expired.description" = "Generate a new one below";
