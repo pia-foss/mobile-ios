@@ -10,7 +10,7 @@ import Foundation
 
 class SignUpFactory {
     static func makeSignupView() -> SignupView {
-        let url = URL(string: "https://www.privateinternetaccess.com/buy-vpn-online")!
+        let url = URL(string: "https://apps.apple.com/us/app/vpn-by-private-internet-access/id955626407")!
         return SignupView(signUpURL: url)
     }
 }

@@ -1630,8 +1630,8 @@ internal enum L10n {
         }
       }
       internal enum Signup {
-        /// Scan the QR Code
-        internal static let cta = L10n.tr("Localizable", "tvos.signup.cta", fallback: "Scan the QR Code")
+        /// Scan the QR Code and download the app to create a new account.
+        internal static let cta = L10n.tr("Localizable", "tvos.signup.cta", fallback: "Scan the QR Code and download the app to create a new account.")
         /// VPN servers in 91 countries
         internal static let item1 = L10n.tr("Localizable", "tvos.signup.item1", fallback: "VPN servers in 91 countries")
         /// Blazing-fast speeds
