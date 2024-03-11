@@ -615,6 +615,14 @@
 		E51693D92AFBE5680089FB8F /* CAGradientLayer+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51693D72AFBE5680089FB8F /* CAGradientLayer+Image.swift */; };
 		E520FCE82B90792500D06C03 /* AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1DF1FE4A450007C0B9B /* AppPreferences.swift */; };
 		E520FCE92B90792600D06C03 /* AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDC1DF1FE4A450007C0B9B /* AppPreferences.swift */; };
+		E520FCEC2B91086A00D06C03 /* LoginQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FCEB2B91086A00D06C03 /* LoginQRView.swift */; };
+		E520FCEE2B979FA900D06C03 /* LoginQRExpiredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FCED2B979FA900D06C03 /* LoginQRExpiredView.swift */; };
+		E520FCF12B97BC4300D06C03 /* LoginQRFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FCF02B97BC4300D06C03 /* LoginQRFactory.swift */; };
+		E520FCF52B9A631E00D06C03 /* ValidateLoginQRCodeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FCF42B9A631E00D06C03 /* ValidateLoginQRCodeUseCase.swift */; };
+		E520FCF72B9A633600D06C03 /* GenerateLoginQRCodeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FCF62B9A633600D06C03 /* GenerateLoginQRCodeUseCase.swift */; };
+		E520FCFB2B9A636400D06C03 /* LoginQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FCFA2B9A636400D06C03 /* LoginQRCode.swift */; };
+		E520FCFD2B9A637D00D06C03 /* LoginQRViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FCFC2B9A637D00D06C03 /* LoginQRViewModel.swift */; };
+		E520FCFF2B9A64C900D06C03 /* LoginQRContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FCFE2B9A64C900D06C03 /* LoginQRContainerView.swift */; };
 		E5217F392AEA7B0E00123442 /* Macros+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5217F382AEA7B0E00123442 /* Macros+UI.swift */; };
 		E5217F3A2AEA7B0E00123442 /* Macros+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5217F382AEA7B0E00123442 /* Macros+UI.swift */; };
 		E5217F3C2AEA886000123442 /* BorderedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5217F3B2AEA886000123442 /* BorderedTextField.swift */; };
@@ -1447,6 +1455,14 @@
 		E51693D02AFADCC20089FB8F /* SwiftGen+Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Strings.swift"; sourceTree = "<group>"; };
 		E51693D42AFBDB8A0089FB8F /* NavigationBar+Appearence..swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationBar+Appearence..swift"; sourceTree = "<group>"; };
 		E51693D72AFBE5680089FB8F /* CAGradientLayer+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+Image.swift"; sourceTree = "<group>"; };
+		E520FCEB2B91086A00D06C03 /* LoginQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginQRView.swift; sourceTree = "<group>"; };
+		E520FCED2B979FA900D06C03 /* LoginQRExpiredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginQRExpiredView.swift; sourceTree = "<group>"; };
+		E520FCF02B97BC4300D06C03 /* LoginQRFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginQRFactory.swift; sourceTree = "<group>"; };
+		E520FCF42B9A631E00D06C03 /* ValidateLoginQRCodeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateLoginQRCodeUseCase.swift; sourceTree = "<group>"; };
+		E520FCF62B9A633600D06C03 /* GenerateLoginQRCodeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateLoginQRCodeUseCase.swift; sourceTree = "<group>"; };
+		E520FCFA2B9A636400D06C03 /* LoginQRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginQRCode.swift; sourceTree = "<group>"; };
+		E520FCFC2B9A637D00D06C03 /* LoginQRViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginQRViewModel.swift; sourceTree = "<group>"; };
+		E520FCFE2B9A64C900D06C03 /* LoginQRContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginQRContainerView.swift; sourceTree = "<group>"; };
 		E5217F382AEA7B0E00123442 /* Macros+UI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Macros+UI.swift"; sourceTree = "<group>"; };
 		E5217F3B2AEA886000123442 /* BorderedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedTextField.swift; sourceTree = "<group>"; };
 		E5217F3E2AEAC7A900123442 /* Theme+LightPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Theme+LightPalette.swift"; sourceTree = "<group>"; };
@@ -3024,6 +3040,58 @@
 			path = iOS;
 			sourceTree = "<group>";
 		};
+		E520FCEA2B91085800D06C03 /* LoginQR */ = {
+			isa = PBXGroup;
+			children = (
+				E520FCEB2B91086A00D06C03 /* LoginQRView.swift */,
+				E520FCED2B979FA900D06C03 /* LoginQRExpiredView.swift */,
+				E520FCFE2B9A64C900D06C03 /* LoginQRContainerView.swift */,
+			);
+			path = LoginQR;
+			sourceTree = "<group>";
+		};
+		E520FCEF2B97BC2800D06C03 /* CompositionRoot */ = {
+			isa = PBXGroup;
+			children = (
+				E520FCF02B97BC4300D06C03 /* LoginQRFactory.swift */,
+			);
+			path = CompositionRoot;
+			sourceTree = "<group>";
+		};
+		E520FCF22B9A62EE00D06C03 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				E520FCFC2B9A637D00D06C03 /* LoginQRViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		E520FCF32B9A630D00D06C03 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				E520FCF92B9A635900D06C03 /* Entities */,
+				E520FCF82B9A634B00D06C03 /* Use cases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		E520FCF82B9A634B00D06C03 /* Use cases */ = {
+			isa = PBXGroup;
+			children = (
+				E520FCF42B9A631E00D06C03 /* ValidateLoginQRCodeUseCase.swift */,
+				E520FCF62B9A633600D06C03 /* GenerateLoginQRCodeUseCase.swift */,
+			);
+			path = "Use cases";
+			sourceTree = "<group>";
+		};
+		E520FCF92B9A635900D06C03 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				E520FCFA2B9A636400D06C03 /* LoginQRCode.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
 		E52E690D2B5D694500471913 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -3430,6 +3498,10 @@
 		E5C507782B0E144E00200A6A /* PIA VPN-tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				E520FCF32B9A630D00D06C03 /* Domain */,
+				E520FCF22B9A62EE00D06C03 /* Presentation */,
+				E520FCEF2B97BC2800D06C03 /* CompositionRoot */,
+				E520FCEA2B91085800D06C03 /* LoginQR */,
 				E574DA0C2B8D1A7B000FADAF /* Signup */,
 				E574DA032B860E59000FADAF /* Resources */,
 				E574D9CA2B83F3A2000FADAF /* DedicatedIp */,
@@ -4843,7 +4915,9 @@
 				69AB49322B63D22400C780CD /* KeychainFactory.swift in Sources */,
 				E55EDCEA2B760D3E007010DB /* TextFieldStyleModifier.swift in Sources */,
 				69793DA62B5A9E1E000CB845 /* RegionsContainerViewModel.swift in Sources */,
+				E520FCFB2B9A636400D06C03 /* LoginQRCode.swift in Sources */,
 				E5AB288A2B29BDED00744E5F /* Foundation+PIA.swift in Sources */,
+				E520FCEC2B91086A00D06C03 /* LoginQRView.swift in Sources */,
 				E5C507A22B0FE40000200A6A /* LoginView.swift in Sources */,
 				693CA5AD2B3ED74100D38378 /* AppConfiguration.swift in Sources */,
 				69E192492B8E4BCC00A97286 /* PrivacyPolicyView.swift in Sources */,
@@ -4854,11 +4928,13 @@
 				E5AB287D2B28E4E700744E5F /* UserAccountMapper.swift in Sources */,
 				697A5F512B514DC500661977 /* UserActivatedContainerFactory.swift in Sources */,
 				69FF0B0A2B3AD3F60074AA04 /* QuickConnectViewModel.swift in Sources */,
+				E520FCF52B9A631E00D06C03 /* ValidateLoginQRCodeUseCase.swift in Sources */,
 				69F2C3762B8CAFCF006255F9 /* HelpFactory.swift in Sources */,
 				69FA73E22B7D5576002300B3 /* Routes+Settings.swift in Sources */,
 				E52E690C2B5BC19300471913 /* UserAuthenticationStatusMonitor.swift in Sources */,
 				E574D9DD2B83F3A2000FADAF /* ActivateDIPTokenUseCase.swift in Sources */,
 				69E61DEC2B5564C600085648 /* RegionsSelectionFactory.swift in Sources */,
+				E520FCF12B97BC4300D06C03 /* LoginQRFactory.swift in Sources */,
 				699311A02B31894D00D316C8 /* Foundation+Protocols.swift in Sources */,
 				E5AB28792B28B4B300744E5F /* AccountInfo.swift in Sources */,
 				698615AA2B62F99700A1EA54 /* RegionsListItemButton.swift in Sources */,
@@ -4876,6 +4952,7 @@
 				E574D9DC2B83F3A2000FADAF /* DipServerProvider.swift in Sources */,
 				E574D9F52B84A7CC000FADAF /* RemoveDIPUseCase.swift in Sources */,
 				E574D9DE2B83F3A2000FADAF /* DedicatedIPError.swift in Sources */,
+				E520FCFD2B9A637D00D06C03 /* LoginQRViewModel.swift in Sources */,
 				69E1924C2B8E656000A97286 /* AboutComponent.swift in Sources */,
 				E5C507AE2B17E45800200A6A /* LoginPresentableErrorMapper.swift in Sources */,
 				69E61DEA2B55644900085648 /* RegionsListViewModel.swift in Sources */,
@@ -4898,9 +4975,11 @@
 				E5AB287B2B28B4C400744E5F /* Credentials.swift in Sources */,
 				E52E68FE2B55E47600471913 /* Routes+Onboarding.swift in Sources */,
 				E5C5077C2B0E144E00200A6A /* ContentView.swift in Sources */,
+				E520FCEE2B979FA900D06C03 /* LoginQRExpiredView.swift in Sources */,
 				E574D9FE2B854A42000FADAF /* DedicatedIPProvider.swift in Sources */,
 				69A226BE2B307D5F0065EDDB /* RootContainerView.swift in Sources */,
 				69C5E7D02B72962700FE3126 /* TopNavigationFactory.swift in Sources */,
+				E520FCF72B9A633600D06C03 /* GenerateLoginQRCodeUseCase.swift in Sources */,
 				694AC74E2B17AB9C007E7B56 /* DashboardView.swift in Sources */,
 				69F2C3722B8CAFB2006255F9 /* AboutOptionsView.swift in Sources */,
 				69F1C2932B2B10D400E924AE /* DashboardFactory.swift in Sources */,
@@ -4926,6 +5005,7 @@
 				E52E691D2B5DC2B200471913 /* StateMonitorsFactory.swift in Sources */,
 				693B9A3C2B754C0600757A41 /* PIAStyles.swift in Sources */,
 				E5C507B32B17E5AD00200A6A /* LoginError.swift in Sources */,
+				E520FCFF2B9A64C900D06C03 /* LoginQRContainerView.swift in Sources */,
 				E5AB28BB2B48815300744E5F /* VPNConfigurationInstallingStatus.swift in Sources */,
 				E574D9D92B83F3A2000FADAF /* DedicatedIpActivateView.swift in Sources */,
 				E5C507CA2B1FAC3600200A6A /* LoginDomainErrorMapper.swift in Sources */,

@@ -11,7 +11,7 @@ import SwiftUI
 
 class WelcomeFactory {
     static func makeWelcomeView() -> OnboardingComponentView {
-        OnboardingComponentView(viewModel: makeWelcomeViewModel(), 
+        OnboardingComponentView(viewModel: makeWelcomeViewModel(),
                                 style: makeWelcomeViewStyle())
     }
     

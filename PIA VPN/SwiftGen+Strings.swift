@@ -1588,8 +1588,10 @@ internal enum L10n {
           /// Sign in using the PIA app
           internal static let title = L10n.tr("Localizable", "tvos.login.qr.title", fallback: "Sign in using the PIA app")
           internal enum Button {
+            /// Log In via Username
+            internal static let login = L10n.tr("Localizable", "tvos.login.qr.button.login", fallback: "Log In via Username")
             /// Restore Purchase
-            internal static let login = L10n.tr("Localizable", "tvos.login.qr.button.login", fallback: "Restore Purchase")
+            internal static let restore = L10n.tr("Localizable", "tvos.login.qr.button.restore", fallback: "Restore Purchase")
           }
           internal enum Expired {
             /// Generate a new one below

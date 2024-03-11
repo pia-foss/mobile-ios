@@ -12,6 +12,7 @@ import SwiftUI
 enum AuthenticationDestinations: Destinations {
     case loginCredentials
     case signup
+    case loginQRCode
 }
 
 enum OnboardingDestinations: Destinations {
@@ -27,6 +28,8 @@ public extension View {
                     LoginFactory.makeLoginView()
                 case .signup:
                     SignUpFactory.makeSignupView()
+                case .loginQRCode:
+                    LoginQRFactory.makeLoginQRView()
             }
         }
     }
