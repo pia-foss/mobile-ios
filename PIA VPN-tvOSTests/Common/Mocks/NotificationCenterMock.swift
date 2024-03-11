@@ -1,8 +1,14 @@
 
 import Foundation
+import Combine
 @testable import PIA_VPN_tvOS
 
 class NotificationCenterMock: NotificationCenterType {
+    var notificationPublisher: NotificationCenter.Publisher!
+    func publisher(for name: Notification.Name, object: AnyObject?) -> NotificationCenter.Publisher {
+        notificationPublisher
+    }
+    
     private(set) var addObserverCalled = false
     private(set) var addObserverCalledAttempt = 0
     private(set) var addObserverCalledWithNotificationName: NSNotification.Name? = nil

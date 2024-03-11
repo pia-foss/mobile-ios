@@ -15,6 +15,8 @@ protocol NotificationCenterType {
     
     func removeObserver(_ observer: Any)
     
+    func publisher(for name: Notification.Name, object: AnyObject?) -> NotificationCenter.Publisher
+    
     // Add methods here from NSNotificationCenter as needed
 }
 

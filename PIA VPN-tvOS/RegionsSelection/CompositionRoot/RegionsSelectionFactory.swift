@@ -25,7 +25,8 @@ class RegionsSelectionFactory {
     }
     
 
-    static func makeRegionsListViewModel(with filter: RegionsListFilter) -> RegionsListViewModel {
+    private static func makeRegionsListViewModel(with filter: RegionsListFilter) -> RegionsListViewModel {
+        
         return RegionsListViewModel(
             filter: filter,
             listUseCase: makeRegionsListUseCase(),
@@ -33,7 +34,7 @@ class RegionsSelectionFactory {
             regionsFilterUseCase: makeRegionsFilterUseCase(),
             regionsDisplayNameUseCase: makeRegionsDisplayNameUseCase(),
             optimalLocationUseCase: makeOptimalLocationUseCase, 
-            getDedicatedIpUseCase: makeGetDedicatedIpUseCase(),
+            getDedicatedIpUseCase: makeGetDedicatedIpUseCase(), refreshLatencyUseCase: RefreshLatencyFactory.makeRefreshServersLatencyUseCase,
             onServerSelectedRouterAction: .goBackToRoot(router: AppRouterFactory.makeAppRouter()))
     }
     
@@ -56,7 +57,6 @@ class RegionsSelectionFactory {
     static func makeSearchRegionsListView() -> some View {
         let viewModel = makeRegionsListViewModel(with: .searchResults(""))
         let searchableRegions = RegionsListView(viewModel: viewModel)
-        
         return searchableRegions.searchable(text: searchableRegions.$viewModel.search, prompt:  L10n.Localizable.Regions.Search.InputField.placeholder)
             
     }

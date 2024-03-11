@@ -178,6 +178,12 @@
 		35EDD65A2B035B51007B9ACB /* SideMenuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD6592B035B51007B9ACB /* SideMenuScreen.swift */; };
 		35EDD65C2B047839007B9ACB /* QuickSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD65B2B047839007B9ACB /* QuickSettingsTests.swift */; };
 		35EDD65E2B048C68007B9ACB /* QuickSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD65D2B048C68007B9ACB /* QuickSettingsScreen.swift */; };
+		6900D3732B97290D00C87E2E /* RefreshServersLatencyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6900D3722B97290D00C87E2E /* RefreshServersLatencyUseCase.swift */; };
+		6900D3752B972ACE00C87E2E /* Client+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6900D3742B972ACE00C87E2E /* Client+Protocols.swift */; };
+		6900D3772B9731F900C87E2E /* RefreshLatencyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6900D3762B9731F900C87E2E /* RefreshLatencyFactory.swift */; };
+		6900D3792B97453A00C87E2E /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6900D3782B97453A00C87E2E /* File.swift */; };
+		6900D37B2B975E0700C87E2E /* RefreshServersLatencyUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6900D37A2B975E0700C87E2E /* RefreshServersLatencyUseCaseTests.swift */; };
+		6900D37D2B975E3C00C87E2E /* ClientTypeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6900D37C2B975E3C00C87E2E /* ClientTypeMock.swift */; };
 		690FC4802B3C59AF00F6DCC8 /* QuickConnectButtonViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690FC47F2B3C59AF00F6DCC8 /* QuickConnectButtonViewModelTests.swift */; };
 		690FC4822B3C5A4300F6DCC8 /* ServerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690FC4812B3C5A4300F6DCC8 /* ServerMock.swift */; };
 		690FC4842B3C5B0500F6DCC8 /* QuickConnectButtonViewModelDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690FC4832B3C5B0500F6DCC8 /* QuickConnectButtonViewModelDelegateMock.swift */; };
@@ -1118,6 +1124,12 @@
 		35EDD6592B035B51007B9ACB /* SideMenuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuScreen.swift; sourceTree = "<group>"; };
 		35EDD65B2B047839007B9ACB /* QuickSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSettingsTests.swift; sourceTree = "<group>"; };
 		35EDD65D2B048C68007B9ACB /* QuickSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSettingsScreen.swift; sourceTree = "<group>"; };
+		6900D3722B97290D00C87E2E /* RefreshServersLatencyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshServersLatencyUseCase.swift; sourceTree = "<group>"; };
+		6900D3742B972ACE00C87E2E /* Client+Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+Protocols.swift"; sourceTree = "<group>"; };
+		6900D3762B9731F900C87E2E /* RefreshLatencyFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshLatencyFactory.swift; sourceTree = "<group>"; };
+		6900D3782B97453A00C87E2E /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		6900D37A2B975E0700C87E2E /* RefreshServersLatencyUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshServersLatencyUseCaseTests.swift; sourceTree = "<group>"; };
+		6900D37C2B975E3C00C87E2E /* ClientTypeMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTypeMock.swift; sourceTree = "<group>"; };
 		690FC47F2B3C59AF00F6DCC8 /* QuickConnectButtonViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickConnectButtonViewModelTests.swift; sourceTree = "<group>"; };
 		690FC4812B3C5A4300F6DCC8 /* ServerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerMock.swift; sourceTree = "<group>"; };
 		690FC4832B3C5B0500F6DCC8 /* QuickConnectButtonViewModelDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickConnectButtonViewModelDelegateMock.swift; sourceTree = "<group>"; };
@@ -2229,6 +2241,14 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		6900D3712B9728E700C87E2E /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				6900D3722B97290D00C87E2E /* RefreshServersLatencyUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
 		693622132B698B6600AE3C51 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -2290,6 +2310,7 @@
 				E52E68FF2B56ABE400471913 /* AppRouterSpy.swift */,
 				6953E5522B7B748800D685B4 /* ConnectionStateMonitorMock.swift */,
 				69C4C3192B88D1B00019A8C6 /* ClientPreferencesMock.swift */,
+				6900D37C2B975E3C00C87E2E /* ClientTypeMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -2466,6 +2487,7 @@
 			children = (
 				69AB49312B63D22400C780CD /* KeychainFactory.swift */,
 				6953E5502B7AB15100D685B4 /* VpnConnectionFactory.swift */,
+				6900D3762B9731F900C87E2E /* RefreshLatencyFactory.swift */,
 			);
 			path = CompositionRoot;
 			sourceTree = "<group>";
@@ -2581,6 +2603,7 @@
 		69F053442B1E054900AE0665 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				6900D3712B9728E700C87E2E /* UseCases */,
 				E52E691B2B5DC29200471913 /* StateMonitors */,
 				69A226B62B3079D00065EDDB /* Utils */,
 				69F053452B1E055300AE0665 /* UI */,
@@ -2678,6 +2701,7 @@
 				6913179E2B32E4D4009B4E85 /* PIALibrary+Protocols.swift */,
 				69F675A92B592ED6000E31D5 /* ClientPreferences+Protocols.swift */,
 				69AB492F2B63CD8700C780CD /* Keychain+Protocols.swift */,
+				6900D3742B972ACE00C87E2E /* Client+Protocols.swift */,
 			);
 			path = "PIALibrary+Protocols";
 			sourceTree = "<group>";
@@ -3100,6 +3124,7 @@
 				E52E69102B5D696E00471913 /* UserAuthenticationStatusMonitorTests.swift */,
 				692DE7D92B739AF8000A2F1A /* AppRouterTests.swift */,
 				692DE7DB2B73AE32000A2F1A /* LeadingNavigationBarViewModel.swift */,
+				6900D37A2B975E0700C87E2E /* RefreshServersLatencyUseCaseTests.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -3119,6 +3144,7 @@
 				E52E69192B5DB86F00471913 /* BootstraperMock.swift */,
 				E52E691E2B5DCEA500471913 /* UserAuthenticationStatusMonitorMock.swift */,
 				E55EDCF72B769416007010DB /* ConnectionStatsPermissonMock.swift */,
+				6900D3782B97453A00C87E2E /* File.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -4940,6 +4966,7 @@
 				698615AA2B62F99700A1EA54 /* RegionsListItemButton.swift in Sources */,
 				E5C507B12B17E48900200A6A /* LoginWithCredentialsUseCase.swift in Sources */,
 				69F2C37A2B8CC58F006255F9 /* HelpOptionsView.swift in Sources */,
+				6900D3732B97290D00C87E2E /* RefreshServersLatencyUseCase.swift in Sources */,
 				E5C507B92B17E7A400200A6A /* ValidateCredentialsFormat.swift in Sources */,
 				69C5E7CC2B72945F00FE3126 /* TopNavigationView.swift in Sources */,
 				E5AB28C92B48AF9000744E5F /* VPNConfigurationAvailabilityType.swift in Sources */,
@@ -4962,6 +4989,7 @@
 				69FF0B0D2B3AD57C0074AA04 /* SelectedServerUseCase.swift in Sources */,
 				69C5E7CE2B72949000FE3126 /* TopNavigationViewModel.swift in Sources */,
 				69FF0B112B3AF1F00074AA04 /* QuickConnectButton.swift in Sources */,
+				6900D3772B9731F900C87E2E /* RefreshLatencyFactory.swift in Sources */,
 				E5AB28AD2B32339C00744E5F /* VPNConfigurationInstallingView.swift in Sources */,
 				E52E69152B5DB05600471913 /* BootstraperFactory.swift in Sources */,
 				E574D9EB2B84042D000FADAF /* DedicatedIpDetailsView.swift in Sources */,
@@ -5007,6 +5035,7 @@
 				E5C507B32B17E5AD00200A6A /* LoginError.swift in Sources */,
 				E520FCFF2B9A64C900D06C03 /* LoginQRContainerView.swift in Sources */,
 				E5AB28BB2B48815300744E5F /* VPNConfigurationInstallingStatus.swift in Sources */,
+				6900D3752B972ACE00C87E2E /* Client+Protocols.swift in Sources */,
 				E574D9D92B83F3A2000FADAF /* DedicatedIpActivateView.swift in Sources */,
 				E5C507CA2B1FAC3600200A6A /* LoginDomainErrorMapper.swift in Sources */,
 				693CA5AC2B3ED69B00D38378 /* AppConstants.swift in Sources */,
@@ -5061,6 +5090,7 @@
 				E574D9FF2B854A4B000FADAF /* ActivateDIPTokenUseCaseMock.swift in Sources */,
 				E55EDCF82B769416007010DB /* ConnectionStatsPermissonMock.swift in Sources */,
 				690FC4802B3C59AF00F6DCC8 /* QuickConnectButtonViewModelTests.swift in Sources */,
+				6900D37D2B975E3C00C87E2E /* ClientTypeMock.swift in Sources */,
 				E52E691A2B5DB86F00471913 /* BootstraperMock.swift in Sources */,
 				693474CA2B6B8F710061F788 /* SearchedRegionsAvailabilityMock.swift in Sources */,
 				698C3B4B2B2B34760012D527 /* PIAConnectionButtonViewModelTests.swift in Sources */,
@@ -5083,6 +5113,7 @@
 				690FC4882B3C60F500F6DCC8 /* QuickConnectViewModelTests.swift in Sources */,
 				E5AB28992B2C783600744E5F /* LoginProviderTests.swift in Sources */,
 				E5C507C22B1F702700200A6A /* LoginWithCredentialsUseCaseMock.swift in Sources */,
+				6900D3792B97453A00C87E2E /* File.swift in Sources */,
 				E574D9F72B851C16000FADAF /* DedicatedIPViewModelTests.swift in Sources */,
 				69194BBF2B7BFB2A00691775 /* ConnectionStateMonitorTests.swift in Sources */,
 				E52E69002B56ABE400471913 /* AppRouterSpy.swift in Sources */,
@@ -5091,6 +5122,7 @@
 				E574D9E82B83F3D2000FADAF /* DedicatedIPProviderTests.swift in Sources */,
 				E5AB28E12B4C107F00744E5F /* VpnConfigurationProviderTypeMock.swift in Sources */,
 				E5C507C42B1F72E700200A6A /* CheckLoginAvailabilityTests.swift in Sources */,
+				6900D37B2B975E0700C87E2E /* RefreshServersLatencyUseCaseTests.swift in Sources */,
 				692DE7DC2B73AE32000A2F1A /* LeadingNavigationBarViewModel.swift in Sources */,
 				E574D9E92B83F3D2000FADAF /* ActivateDIPTokenUseCaseTests.swift in Sources */,
 				69793DA12B59B96B000CB845 /* RegionsListViewModelTests.swift in Sources */,

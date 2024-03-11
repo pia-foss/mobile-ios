@@ -21,11 +21,12 @@ class RootContainerViewModel: ObservableObject {
     private let connectionStatsPermissonType: ConnectionStatsPermissonType
     private let bootstrap: BootstraperType
     private let userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType
+    private let refreshLatencyUseCase: RefreshServersLatencyUseCaseType
     
     private let appRouter: AppRouterType
     private var cancellables = Set<AnyCancellable>()
     
-    init(accountProvider: AccountProviderType, notificationCenter: NotificationCenterType = NotificationCenter.default, vpnConfigurationAvailability: VPNConfigurationAvailabilityType, connectionStatsPermissonType: ConnectionStatsPermissonType, bootstrap: BootstraperType, userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType, appRouter: AppRouterType) {
+    init(accountProvider: AccountProviderType, notificationCenter: NotificationCenterType = NotificationCenter.default, vpnConfigurationAvailability: VPNConfigurationAvailabilityType, connectionStatsPermissonType: ConnectionStatsPermissonType, bootstrap: BootstraperType, userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType, appRouter: AppRouterType, refreshLatencyUseCase: RefreshServersLatencyUseCaseType) {
         
         self.accountProvider = accountProvider
         self.notificationCenter = notificationCenter
@@ -34,6 +35,7 @@ class RootContainerViewModel: ObservableObject {
         self.bootstrap = bootstrap
         self.userAuthenticationStatusMonitor = userAuthenticationStatusMonitor
         self.appRouter = appRouter
+        self.refreshLatencyUseCase = refreshLatencyUseCase
         
         subscribeToAccountUpdates()
         setup()
@@ -74,6 +76,23 @@ class RootContainerViewModel: ObservableObject {
     
     deinit {
         notificationCenter.removeObserver(self)
+    }
+}
+
+// MARK: - Scene Active
+
+extension RootContainerViewModel {
+    func sceneDidBecomeActive() async {
+        // Refresh the servers latency every time the app comes to the foreground
+        // and the user is activated
+        guard state == .activated || state == .activatedNotOnboarded else { return }
+        // Wait 2s to let the Vpn Status notify its latest state
+        try? await Task.sleep(for: .seconds(2))
+        self.refreshLatencyUseCase()
+    }
+    
+    func sceneDidBecomeInActive() {
+        refreshLatencyUseCase.stop()
     }
 }
 

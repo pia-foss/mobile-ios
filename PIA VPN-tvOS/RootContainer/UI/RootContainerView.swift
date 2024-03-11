@@ -28,7 +28,16 @@ struct RootContainerView: View {
                     .withOnboardingRoutes()
             }
         }.onChange(of: scenePhase) { _, newPhase in
-            
+            switch newPhase {
+            case .active:
+                Task {
+                    await viewModel.sceneDidBecomeActive()
+                }
+            case.inactive:
+                viewModel.sceneDidBecomeInActive()
+            default:
+                break
+            }
         }
     }
 }

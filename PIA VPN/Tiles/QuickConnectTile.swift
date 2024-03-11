@@ -76,7 +76,7 @@ class QuickConnectTile: UIView, Tileable {
         Theme.current.applyPrincipalBackground(self)
     }
     
-    @objc private func updateQuickConnectList() {
+    @objc private func  updateQuickConnectList() {
         
         //Check changes on DIPs first
         historicalServers = Client.providers.serverProvider.historicalServers.filter({

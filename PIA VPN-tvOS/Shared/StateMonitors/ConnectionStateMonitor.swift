@@ -57,6 +57,7 @@ enum ConnectionState: Equatable {
 }
 
 protocol ConnectionStateMonitorType {
+    var currentConnectionState: ConnectionState { get }
     var connectionStatePublisher: Published<ConnectionState>.Publisher { get }
     func callAsFunction()
 }
@@ -71,6 +72,7 @@ class ConnectionStateMonitor: ConnectionStateMonitorType {
     var connectionStatePublisher: Published<ConnectionState>.Publisher {
         $connectionState
     }
+    var currentConnectionState: ConnectionState { connectionState }
     
     init(vpnStatusMonitor: VPNStatusMonitorType, vpnConnectionUseCase: VpnConnectionUseCaseType) {
         self.vpnStatusMonitor = vpnStatusMonitor
