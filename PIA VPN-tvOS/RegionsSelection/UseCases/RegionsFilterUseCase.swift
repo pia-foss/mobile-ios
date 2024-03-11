@@ -125,7 +125,10 @@ extension RegionsFilterUseCase {
     }
     
     private func getServersWithoutDip(from servers: [ServerType]) -> [ServerType] {
-        return servers.filter { self.getDedicatedIpUseCase.isDedicatedIp($0) == false }
+        return servers.filter {
+            self.getDedicatedIpUseCase.isDedicatedIp($0) == false
+            && $0.dipToken == nil
+        }
     }
     
     private func getFavorites(from servers: [ServerType]) -> [ServerType] {
