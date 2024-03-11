@@ -23,9 +23,10 @@ struct AcknowledgementsView: View {
                         .font(.system(size: 29, weight: .medium))
                         .foregroundColor(.pia_on_background)
                 }
+                .frame(width: Spacing.contentViewMaxWidth)
                 .focusable()
                 Divider()
-                    .frame(height: 1)
+                    .frame(width: Spacing.contentViewMaxWidth, height: 1)
                     .background(Color.pia_on_background)
                     .padding()
                 
@@ -43,7 +44,8 @@ struct AcknowledgementsView: View {
                         .padding()
                     
                 }
-            }.frame(width: Spacing.contentViewMaxWidth)
+                .frame(width: Spacing.contentViewMaxWidth)
+            }
             
         }
         .padding(.top, 80)
