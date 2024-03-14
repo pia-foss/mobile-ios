@@ -11,7 +11,7 @@ import PIALibrary
 
 class VpnConnectionFactory {
     static var makeVpnConnectionUseCase: VpnConnectionUseCaseType = {
-        return VpnConnectionUseCase(serverProvider: makeServerProvider(), vpnProvider: makeVpnProvider(), vpnStatusMonitor: StateMonitorsFactory.makeVPNStatusMonitor, clientPreferences: RegionsSelectionFactory.makeClientPreferences)
+        return VpnConnectionUseCase(serverProvider: makeServerProvider(), vpnProvider: makeVpnProvider, vpnStatusMonitor: StateMonitorsFactory.makeVPNStatusMonitor, clientPreferences: RegionsSelectionFactory.makeClientPreferences)
     }()
     
     static func makeServerProvider() -> ServerProviderType {
@@ -24,12 +24,24 @@ class VpnConnectionFactory {
         
     }
     
-    static func makeVpnProvider() -> VPNStatusProviderType {
-        guard let defaultVpnProvider =  Client.providers.vpnProvider as? DefaultVPNProvider else {
-            fatalError("Incorrect VPNProvider type")
+    private static var isSimulator: Bool {
+        #if targetEnvironment(simulator)
+            return true
+        #else
+            return false
+        #endif
+    }
+    
+    static var makeVpnProvider: VPNStatusProviderType = {
+        if isSimulator {
+            return MockVPNProvider()
+        } else {
+            guard let vpnProvider =  Client.providers.vpnProvider as? VPNStatusProviderType else {
+                fatalError("Incorrect VPNProvider type")
+            }
+            
+            return vpnProvider
         }
         
-        return defaultVpnProvider
-        
-    }
+    }()
 }

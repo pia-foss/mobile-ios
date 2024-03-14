@@ -91,3 +91,5 @@ protocol VPNStatusProviderType {
 }
 
 extension DefaultVPNProvider: VPNStatusProviderType {}
+
+extension MockVPNProvider: VPNStatusProviderType {}

@@ -16,11 +16,7 @@ class StateMonitorsFactory {
     }()
     
     static var makeVPNStatusMonitor: VPNStatusMonitorType = {
-        guard let defaultVPNProvider = Client.providers.vpnProvider as? DefaultVPNProvider else {
-            fatalError("Incorrect vpn provider type")
-        }
-        
-        return VPNStatusMonitor(vpnStatusProvider: defaultVPNProvider,
+        return VPNStatusMonitor(vpnStatusProvider: VpnConnectionFactory.makeVpnProvider,
                                 notificationCenter: NotificationCenter.default)
     }()
     
