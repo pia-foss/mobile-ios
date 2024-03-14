@@ -75,7 +75,7 @@ class SettingsTests : BaseTest {
                         expect(app.successfulSendDebugMessage.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     }
                     
-                    it("should when user clicks 'Latest News'") {
+                    it("should display 'try wireguard' news when user clicks 'Latest News'") {
                         app.navigateToHelpSettings()
                         app.latestNewsButton.tap()
                         expect(app.tryWireguardNowButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
@@ -85,7 +85,7 @@ class SettingsTests : BaseTest {
                         expect(app.wireguard.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     }
                     
-                    it("should when user clicks 'Help improve PIA'") {
+                    it("should display connection stats when user clicks 'Help improve PIA'") {
                         app.navigateToHelpSettings()
                         app.enableHelpImprovePIA()
                         expect(app.connectionStatsButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())

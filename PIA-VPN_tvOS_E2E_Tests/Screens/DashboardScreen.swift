@@ -11,22 +11,28 @@ import XCTest
 extension XCUIApplication{
     var settingsButton:XCUIElement {button(with: "gearshape")}
     var connectButton:XCUIElement {button(with: "connect-inner-button")}
+    var piaVPNButton:XCUIElement {button(with: "PIA VPN")}
     
     func navigateToSettingsScreen(){
-        guard settingsButton.waitForExistence(timeout: defaultTimeout) else {return}
-        moveFocus(to: settingsButton)
+        settingsButton.waitForElementToAppear()
+        moveFocus(to: settingsButton, startingDirection: .up)
         XCUIRemote.shared.press(.select)
     }
     
     func logout(){
-        if(settingsButton.waitForExistence(timeout: defaultTimeout)){
+        if(loginButton.waitForElementToAppear()){
+            return;
+        }
+        
+        if(settingsButton.waitForElementToAppear()){
             navigateToSettingsScreen()
             navigateToAccountSettings()
-            guard logoutButton.waitForExistence(timeout: defaultTimeout) else {return}
+            logoutButton.waitForElementToAppear()
             moveFocus(to: logoutButton)
             XCUIRemote.shared.press(.select)
             moveFocus(to: logoutAlertButton)
             XCUIRemote.shared.press(.select)
+            signinImage.waitForElementToAppear()
         }
     }
 }

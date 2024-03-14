@@ -35,7 +35,7 @@ extension XCUIApplication {
     func alert(with id: String) -> XCUIElement{
         return alerts[id]
     }
-
+    
     func otherElement(with id: String) -> XCUIElement {
         return otherElements[id]
     }
@@ -60,10 +60,14 @@ extension XCUIApplication {
         return switches[id]
     }
     
+    func group(with id: String) -> XCUIElement {
+        return groups[id]
+    }
+    
     func findElementWithPartialText(_ partialText: String) -> XCUIElement? {
         let predicate = NSPredicate(format: "label CONTAINS[c] %@", partialText)
         let matchingStaticTexts = staticTexts.matching(predicate)
-
+        
         return matchingStaticTexts.firstMatch
     }
 }

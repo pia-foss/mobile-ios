@@ -42,5 +42,8 @@ extension XCUIApplication {
         if ((vpnKillSwitch.value as! String) != "0") {
             vpnKillSwitch.tap()
         }
+        if(button(with: "CLOSE").exists) {
+            button(with: "CLOSE").tap()
+        }
     }
 }

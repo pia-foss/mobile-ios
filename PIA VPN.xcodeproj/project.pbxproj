@@ -152,6 +152,9 @@
 		35C8064C2B1075620078A2C6 /* ServerConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8064B2B1075620078A2C6 /* ServerConnectionTests.swift */; };
 		35DC7A5E2B0B325700502BED /* VPNServerListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DC7A5D2B0B325700502BED /* VPNServerListTests.swift */; };
 		35DC7A602B0B440200502BED /* RegionSelectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DC7A5F2B0B440200502BED /* RegionSelectionScreen.swift */; };
+		35DDA95B2B9AF8AA00EB17A3 /* LocationSelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DDA95A2B9AF8A900EB17A3 /* LocationSelectionTests.swift */; };
+		35DDA95D2B9EA53A00EB17A3 /* LocationSelectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DDA95C2B9EA53A00EB17A3 /* LocationSelectionScreen.swift */; };
+		35DDA95F2BA0381600EB17A3 /* WaitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DDA95E2BA0381600EB17A3 /* WaitHelper.swift */; };
 		35E8E6652B870C2700A3A3DB /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E8E6642B870C2700A3A3DB /* Common.swift */; };
 		35E8E6682B87178600A3A3DB /* KeyboardNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E8E6672B87178600A3A3DB /* KeyboardNavigator.swift */; };
 		35E8E66A2B8C37C900A3A3DB /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E8E6692B8C37C900A3A3DB /* WelcomeScreen.swift */; };
@@ -1085,6 +1088,9 @@
 		35C8064B2B1075620078A2C6 /* ServerConnectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnectionTests.swift; sourceTree = "<group>"; };
 		35DC7A5D2B0B325700502BED /* VPNServerListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNServerListTests.swift; sourceTree = "<group>"; };
 		35DC7A5F2B0B440200502BED /* RegionSelectionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionSelectionScreen.swift; sourceTree = "<group>"; };
+		35DDA95A2B9AF8A900EB17A3 /* LocationSelectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelectionTests.swift; sourceTree = "<group>"; };
+		35DDA95C2B9EA53A00EB17A3 /* LocationSelectionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelectionScreen.swift; sourceTree = "<group>"; };
+		35DDA95E2BA0381600EB17A3 /* WaitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitHelper.swift; sourceTree = "<group>"; };
 		35E8E6582B870AD200A3A3DB /* PIA-VPN_tvOS_E2E_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA-VPN_tvOS_E2E_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35E8E6642B870C2700A3A3DB /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		35E8E6672B87178600A3A3DB /* KeyboardNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardNavigator.swift; sourceTree = "<group>"; };
@@ -2124,6 +2130,7 @@
 				35E8E66D2B8C384D00A3A3DB /* OnboardingScreen.swift */,
 				35E8E67E2B8C60F500A3A3DB /* DashboardScreen.swift */,
 				35E8E6802B8C637D00A3A3DB /* SettingsScreen.swift */,
+				35DDA95C2B9EA53A00EB17A3 /* LocationSelectionScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -2133,6 +2140,7 @@
 			children = (
 				35E8E6672B87178600A3A3DB /* KeyboardNavigator.swift */,
 				35E8E6792B8C3B0500A3A3DB /* ElementHelper.swift */,
+				35DDA95E2BA0381600EB17A3 /* WaitHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2142,6 +2150,7 @@
 			children = (
 				35E8E6702B8C386B00A3A3DB /* SignInTests.swift */,
 				35E8E6822B8ED52300A3A3DB /* OnboardingTests.swift */,
+				35DDA95A2B9AF8A900EB17A3 /* LocationSelectionTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -4695,14 +4704,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35DDA95F2BA0381600EB17A3 /* WaitHelper.swift in Sources */,
 				35E8E6652B870C2700A3A3DB /* Common.swift in Sources */,
 				35E8E66A2B8C37C900A3A3DB /* WelcomeScreen.swift in Sources */,
 				35E8E66E2B8C384D00A3A3DB /* OnboardingScreen.swift in Sources */,
 				35E8E6742B8C388A00A3A3DB /* BaseTest.swift in Sources */,
+				35DDA95B2B9AF8AA00EB17A3 /* LocationSelectionTests.swift in Sources */,
 				35E8E6682B87178600A3A3DB /* KeyboardNavigator.swift in Sources */,
 				35E8E6812B8C637D00A3A3DB /* SettingsScreen.swift in Sources */,
 				35E8E6832B8ED52300A3A3DB /* OnboardingTests.swift in Sources */,
 				35E8E67D2B8C3CBA00A3A3DB /* CredentialsUtil.swift in Sources */,
+				35DDA95D2B9EA53A00EB17A3 /* LocationSelectionScreen.swift in Sources */,
 				35E8E67F2B8C60F500A3A3DB /* DashboardScreen.swift in Sources */,
 				35E8E66C2B8C384200A3A3DB /* SignInScreen.swift in Sources */,
 				35E8E67A2B8C3B0500A3A3DB /* ElementHelper.swift in Sources */,
