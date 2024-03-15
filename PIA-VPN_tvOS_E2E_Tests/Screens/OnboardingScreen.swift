@@ -15,13 +15,13 @@ extension XCUIApplication{
     var configurePIAButton: XCUIElement {button(with: "Configure PIA")}
     
     func acceptSharingVPNStats(){
-        guard helpImprovePIATitle.waitForExistence(timeout: defaultTimeout) else {return}
+        helpImprovePIATitle.waitForElementToAppear()
         moveFocus(to: acceptOnboardingButton)
         XCUIRemote.shared.press(.select)
     }
     
     func acceptVPNConfiguration(){
-        guard configurePIATitle.waitForExistence(timeout: defaultTimeout) else {return}
+        configurePIATitle.waitForElementToAppear()
         moveFocus(to: configurePIAButton)
         XCUIRemote.shared.press(.select)
     }

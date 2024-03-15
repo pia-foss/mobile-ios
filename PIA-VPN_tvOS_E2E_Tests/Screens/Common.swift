@@ -8,47 +8,81 @@
 
 import XCTest
 
-extension  XCUIApplication{
-    
-    func moveFocus(to element: XCUIElement) {
-         var direction: XCUIRemote.Button = .up // Start with a default direction
-         
-         while !element.hasFocus {
-             if element.hasFocus {
-                 return
-             }
-             
-             if endOfScreenReached(direction) {
-                 direction = nextDirection(direction)
-             }
-         }
-     }
+extension XCUIApplication{
+    func moveFocus(to element: XCUIElement, startingDirection: XCUIRemote.Button = .right) {
+        var direction: XCUIRemote.Button = startingDirection
+        var navigationCycle = NavigationCycle(startingDirection: startingDirection)
+        var cycle = 0 // Tracks the cycle to determine the direction sequence
+        var attempts = 0
+        let maxAttempts = 20
+        
+        while !element.hasFocus && attempts < maxAttempts {
+            XCUIRemote.shared.press(direction)
+            usleep(100000)
+            
+            if element.hasFocus {
+                break;
+            }
+            
+            if endOfScreenReached(direction) {
+                direction = navigationCycle.nextDirection(currentDirection: direction, cycle: cycle)
+                // Check if cycle needs to reset based on the navigation cycle
+                if direction == startingDirection {
+                    cycle += 1
+                }
+            }
+            attempts += 1
+        }
+        
+        if attempts >= maxAttempts {
+            print("Failed to focus on the element after \(maxAttempts) attempts.")
+        }
+    }
     
     func endOfScreenReached(_ direction: XCUIRemote.Button) -> Bool {
         let initialElements = windows.firstMatch.descendants(matching: .any)
         let initialCoordinates = initialElements.allElementsBoundByIndex.map { $0.frame.origin }
-
+        
         XCUIRemote.shared.press(direction)
-            
+        usleep(100000)
+        
         let finalElements = windows.firstMatch.descendants(matching: .any)
         let finalCoordinates = finalElements.allElementsBoundByIndex.map { $0.frame.origin }
-            
+        
         return initialCoordinates == finalCoordinates
-        }
+    }
+}
+
+struct NavigationCycle {
+    var currentCycle: [XCUIRemote.Button]
+    var alternateCycle: [XCUIRemote.Button]
     
-    func nextDirection(_ currentDirection: XCUIRemote.Button) -> XCUIRemote.Button {
-           switch currentDirection {
-           case .up:
-               return .right
-           case .right:
-               return .down
-           case .down:
-               return .left
-           case .left:
-               return .up
-           default:
-               return .up
-           }
-       }
-     
+    init(startingDirection: XCUIRemote.Button) {
+        switch startingDirection {
+        case .right:
+            currentCycle = [.right, .up, .left, .down]
+            alternateCycle = [.right, .down, .left, .up]
+        case .up:
+            currentCycle = [.up, .right, .down, .left]
+            alternateCycle = [.up, .left, .down, .right]
+        case .down:
+            currentCycle = [.down, .left, .up, .right]
+            alternateCycle = [.down, .right, .up, .left]
+        case .left:
+            currentCycle = [.left, .up, .right, .down]
+            alternateCycle = [.left, .down, .right, .up]
+        default:
+            currentCycle = [.right, .down, .left, .up]
+            alternateCycle = [.right, .up, .left, .down]
+        }
+    }
+    
+    mutating func nextDirection(currentDirection: XCUIRemote.Button, cycle: Int) -> XCUIRemote.Button {
+        let cycleArray = cycle % 2 == 0 ? currentCycle : alternateCycle
+        if let currentIndex = cycleArray.firstIndex(of: currentDirection), cycleArray.indices.contains(currentIndex + 1) {
+            return cycleArray[currentIndex + 1]
+        } else {
+            return cycleArray.first!
+        }
+    }
 }

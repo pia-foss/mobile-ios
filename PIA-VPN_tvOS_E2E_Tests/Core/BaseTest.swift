@@ -23,6 +23,14 @@ class BaseTest:QuickSpec {
                 app.acceptSharingVPNStats()
                 app.acceptVPNConfiguration()
             }
+            
+            if(!app.connectButton.exists){
+                app.signinImage.waitForElementToAppear()
+                app.navigateToSignInScreen()
+                app.login(with: CredentialsUtil.credentials(type: .valid))
+                app.acceptSharingVPNStats()
+                app.acceptVPNConfiguration()
+            }
         }
         
         beforeEach {

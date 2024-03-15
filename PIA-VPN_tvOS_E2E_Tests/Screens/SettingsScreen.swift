@@ -17,10 +17,10 @@ extension XCUIApplication{
     var logoutAlertButton:XCUIElement {alert(with: "Are you sure?").buttons["Log Out"].firstMatch}
     
     func navigateToAccountSettings(){
-        guard accountButton.waitForExistence(timeout: defaultTimeout) else {return}
-        moveFocus(to: accountButton)
+        accountButton.waitForElementToAppear()
+        moveFocus(to: accountButton, startingDirection: .down)
         XCUIRemote.shared.press(.select)
-        guard accountTitle.waitForExistence(timeout: defaultTimeout) else {return}
+        accountTitle.waitForElementToAppear()
     }
     
 

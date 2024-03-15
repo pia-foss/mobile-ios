@@ -18,7 +18,7 @@ extension XCUIApplication {
     }
     
     var helpImprovePIASwitch: XCUIElement {
-        switches(with: "Help improve PIA")
+        switches(with: "Help Improve PIA")
     }
     
     var connectionStatsButton: XCUIElement {
@@ -49,12 +49,14 @@ extension XCUIApplication {
     }
     
     func enableHelpImprovePIA() {
+        guard helpImprovePIASwitch.exists else {return}
         if (helpImprovePIASwitch.value as! String == "0") {
             helpImprovePIASwitch.tap()
         }
     }
     
     func disableHelpImprovePIA() {
+        guard helpImprovePIASwitch.exists else {return}
         if (helpImprovePIASwitch.value as! String == "1") {
             helpImprovePIASwitch.tap()
         }

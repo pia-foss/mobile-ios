@@ -13,16 +13,16 @@ extension XCUIApplication {
     var incorrectCredentialsErrorMessage: XCUIElement {staticText(with: "Your username or password is incorrect.")}
     
     func login(with credentials: Credentials) {
-        guard usernameTextField.waitForExistence(timeout: defaultTimeout) else {return}
+        usernameTextField.waitForElementToAppear()
         moveFocus(to: usernameTextField)
         XCUIRemote.shared.press(.select)
         
         let navigator = KeyboardNavigator()
         navigator.resetKeyboardPosition()
-        navigator.typeText(credentials.username)
+        navigator.typeText(credentials.username, keyboardType: .multiRow)
         navigator.clickNext()
         
-        navigator.typeText(credentials.password)
+        navigator.typeText(credentials.password, keyboardType: .multiRow)
         navigator.clickNext()
     }
 }

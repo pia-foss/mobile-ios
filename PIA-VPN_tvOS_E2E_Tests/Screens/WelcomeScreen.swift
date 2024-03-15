@@ -9,10 +9,12 @@
 import XCTest
 
 extension XCUIApplication {
+    var signinImage: XCUIElement {image(with: "signin-world")}
     var loginButton: XCUIElement {button(with: "Log In")}
     
     func navigateToSignInScreen(){
-        guard loginButton.waitForExistence(timeout: defaultTimeout) else {return}
+        signinImage.waitForElementToAppear()
+        loginButton.waitForElementToAppear()
         moveFocus(to: loginButton)
         XCUIRemote.shared.press(.select)
     }
