@@ -21,7 +21,7 @@ class RegionsListViewModel: ObservableObject {
     private let refreshLatencyUseCase: RefreshServersLatencyUseCaseType
     
     private let onServerSelectedRouterAction: AppRouter.Actions
-    internal var filter: RegionsListFilter
+    @Published internal var filter: RegionsListFilter
     
     @Published private(set) var servers: [ServerType] = []
     @Published private(set) var optimalAndDIPServers: [ServerType] = []
@@ -31,6 +31,11 @@ class RegionsListViewModel: ObservableObject {
     @Published private(set) var favorites: [String] = []
     @Published var regionsListTitle: String? = nil
     @Published var displayNameForOptimalLocation = (title: L10n.Localizable.LocationSelection.OptimalLocation.title, subtitle: L10n.Localizable.Global.automatic)
+    var isEmptySearchResultsVisible: Bool {
+        guard filter.isSearchResultsWithAnySearchTerm,
+              !search.isEmpty else { return false }
+        return servers.isEmpty
+    }
     
     private var cancellables = Set<AnyCancellable>()
     internal var favoriteToggleError: Error? = nil
@@ -108,11 +113,6 @@ class RegionsListViewModel: ObservableObject {
         switch filter {
         case .all:
             regionsListTitle = L10n.Localizable.Regions.List.AllLocations.title
-        case .searchResults:
-            if servers.isEmpty {
-                // TODO: Show the Empty List Image View
-            }
-            
         case .previouslySearched:
             // Show recommended servers if there are no previous searches registered
             if servers.isEmpty {
@@ -132,6 +132,9 @@ class RegionsListViewModel: ObservableObject {
         case .recommended:
             return L10n.Localizable.Regions.Search.RecommendedLocations.title
         case .searchResults(_):
+            guard !servers.isEmpty else {
+                return nil
+            }
             return L10n.Localizable.Regions.Search.Results.title
         case .previouslySearched:
             return L10n.Localizable.Regions.Search.PreviousResults.title

@@ -37,22 +37,13 @@ struct RegionsListView: View {
                         .fontWeight(.regular)
                         .foregroundColor(Color.pia_on_surface_container_secondary)
                 }
-                
-                LazyVGrid(columns: columns, alignment: .leading, spacing: 40) {
-                    ForEach(viewModel.servers, id: \.id) { server in
-                        RegionsListItemButton(
-                            onRegionItemSelected: {
-                                viewModel.didSelectRegionServer(server)
-                            },
-                            iconName: viewModel.getIconImageName(for: server).unfocused,
-                            highlightedIconName: viewModel.getIconImageName(for: server).focused,
-                            title: viewModel.getDisplayName(for: server).title,
-                            subtitle: viewModel.getDisplayName(for: server).subtitle,
-                            favoriteIconName: viewModel.favoriteIconName(for: server),
-                            contextMenuItem: contextMenuItem(for: server)
-                        )
-                        
-                    }
+                if viewModel.isEmptySearchResultsVisible {
+                    Image.empty_search_bg_image
+                        .scaledToFit()
+                        .frame(width: 1369, height: 738)
+                        .padding()
+                } else {
+                    regionsListView
                 }
                 
             }.onAppear {
@@ -61,6 +52,25 @@ struct RegionsListView: View {
             
         }
         
+    }
+    
+    var regionsListView: some View {
+        LazyVGrid(columns: columns, alignment: .leading, spacing: 40) {
+            ForEach(viewModel.servers, id: \.id) { server in
+                RegionsListItemButton(
+                    onRegionItemSelected: {
+                        viewModel.didSelectRegionServer(server)
+                    },
+                    iconName: viewModel.getIconImageName(for: server).unfocused,
+                    highlightedIconName: viewModel.getIconImageName(for: server).focused,
+                    title: viewModel.getDisplayName(for: server).title,
+                    subtitle: viewModel.getDisplayName(for: server).subtitle,
+                    favoriteIconName: viewModel.favoriteIconName(for: server),
+                    contextMenuItem: contextMenuItem(for: server)
+                )
+                
+            }
+        }
     }
 }
 

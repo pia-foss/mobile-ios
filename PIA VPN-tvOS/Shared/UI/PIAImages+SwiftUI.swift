@@ -16,6 +16,7 @@ extension Image {
     static let pia_settings_bg_image = Image(.pia_settings_bg_image)
     static let signup_setup_screen = Image(.setup_screen)
     static let pia_help_bg_image = Image(.pia_help_bg_image)
+    static let empty_search_bg_image = Image(.empty_search_bg_image)
 }
 
 extension String {
@@ -25,4 +26,6 @@ extension String {
     static let pia_settings_bg_image = "settings-bg-image"
     static let setup_screen = "setup-screen"
     static let pia_help_bg_image = "help-bg-image"
+    static let empty_search_bg_image = "empty-search-bg-image"
+    
 }
