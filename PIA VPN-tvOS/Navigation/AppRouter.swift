@@ -113,6 +113,23 @@ extension AppRouter {
     private static func navigateRouterToDestinationAction(_ destination: any Destinations) -> AppRouter.Actions {
         AppRouter.Actions.navigate(router: AppRouterFactory.makeAppRouter(), destination: destination)
     }
+    
+    static var navigateToRoot: AppRouter.Actions {
+        AppRouter.Actions.goBackToRoot(router: AppRouter.shared)
+    }
+}
+
+// MARK: - Onboarding Navigation Actions
+
+extension AppRouter {
+    
+    static var navigateToLoginWithCredentialsDestinationAction: AppRouter.Actions {
+        navigateRouterToDestinationAction(AuthenticationDestinations.loginCredentials)
+    }
+    
+    static var navigateToConnectionstatsDestinationAction: AppRouter.Actions {
+        navigateRouterToDestinationAction(OnboardingDestinations.connectionstats)
+    }
 }
 
 // MARK: - Settings Navigation Actions

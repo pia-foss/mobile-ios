@@ -9,11 +9,11 @@
 import SwiftUI
 
 struct LoginQRExpiredView: View {
-    private let qrImageURL: URL
+    private let qrImageURL: URL?
     private let generateQRCodeAction: () -> Void
     private let loginAction: () -> Void
     
-    init(qrImageURL: URL, generateQRCodeAction: @escaping () -> Void, loginAction: @escaping () -> Void) {
+    init(qrImageURL: URL?, generateQRCodeAction: @escaping () -> Void, loginAction: @escaping () -> Void) {
         self.qrImageURL = qrImageURL
         self.generateQRCodeAction = generateQRCodeAction
         self.loginAction = loginAction
@@ -35,8 +35,10 @@ struct LoginQRExpiredView: View {
                 }
                 
                 ZStack(alignment: .center) {
-                    QRImageView(qrImageURL: qrImageURL)
-                        .opacity(0.04)
+                    if let qrImageURL = qrImageURL {
+                        QRImageView(qrImageURL: qrImageURL)
+                            .opacity(0.04)
+                    }
                     
                     ActionButton(
                         title: L10n.Localizable.Tvos.Login.Qr.Expired.Button.generate,

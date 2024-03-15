@@ -19,10 +19,13 @@ class AccountProviderTypeMock: AccountProviderType {
     
     private(set) var logoutCalled = false
     private(set) var logoutCalledAttempt = 0
+    private(set) var loginWithTokenCalledAttempt = 0
     func logout(_ callback: ((Error?) -> Void)?) {
         logoutCalled = true
         logoutCalledAttempt += 1
     }
     
-    
+    func login(with linkToken: String, _ callback: ((PIALibrary.UserAccount?, Error?) -> Void)?) {
+        loginWithTokenCalledAttempt += 1
+    }
 }

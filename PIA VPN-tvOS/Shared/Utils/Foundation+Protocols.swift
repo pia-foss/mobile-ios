@@ -44,3 +44,13 @@ extension CustomStringConvertible {
         return scaledCIImage
     }
 }
+
+extension Date {
+    static func makeISO8601Date(string: String) -> Date? {
+        let dateFormatter = ISO8601DateFormatter()
+        
+        guard let date = dateFormatter.date(from: string) else { return nil }
+        
+        return date
+    }
+}
