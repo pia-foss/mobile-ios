@@ -125,6 +125,7 @@ class RegionsListViewModelTests: XCTestCase {
         fixture.stubGetServers(for: .searchResults("Canada"), result: [Fixture.toronto, Fixture.montreal])
         fixture.stubGetServers(for: .recommended, result: fixture.allServers)
         instantiateSut(with: .searchResults(""))
+        XCTAssertFalse(sut.isEmptySearchResultsVisible)
 
         
         // WHEN we search for 'Canada'
@@ -136,12 +137,43 @@ class RegionsListViewModelTests: XCTestCase {
         XCTAssertEqual(sut.servers.last?.country, "CA")
         // AND the regions list title shows the results
         XCTAssertEqual(sut.regionsListTitle, "Search Results")
+        // AND the empty results image is not visible
+        XCTAssertFalse(sut.isEmptySearchResultsVisible)
         
         // AND WHEN the search term becomes empty again
         sut.performSearch(with: "")
         // THEN the recommended locations are displayed
         XCTAssertEqual(sut.servers.count, 4)
         XCTAssertEqual(sut.regionsListTitle, "Recommended Locations")
+        // AND the empty results image is remains not visible
+        XCTAssertFalse(sut.isEmptySearchResultsVisible)
+    }
+    
+    func test_regionsDidSearchWithNoResults() {
+        // GIVEN THAT we are in the Search screen
+        // AND we have 4 servers available (2 in CA and 2 in ES)
+        fixture.stubGetServers(for: .all, result: fixture.allServers)
+        fixture.stubGetServers(for: .recommended, result: fixture.allServers)
+        instantiateSut(with: .searchResults(""))
+        XCTAssertFalse(sut.isEmptySearchResultsVisible)
+        
+        // WHEN we search for 'xyz'
+        sut.performSearch(with: "xyz")
+        
+        // THEN no servers are displayed
+        XCTAssertEqual(sut.servers.count, 0)
+        // AND the empty results image becomes visible
+        XCTAssertTrue(sut.isEmptySearchResultsVisible)
+        // AND the regions list title becomes nil
+        XCTAssertNil(sut.regionsListTitle)
+        
+        // AND WHEN the search term becomes empty again
+        sut.performSearch(with: "")
+        // THEN the recommended locations are displayed
+        XCTAssertEqual(sut.servers.count, 4)
+        XCTAssertEqual(sut.regionsListTitle, "Recommended Locations")
+        // AND the empty results image is remains not visible
+        XCTAssertFalse(sut.isEmptySearchResultsVisible)
     }
     
     func test_filterByAllRegionsWhenNoDipServerAvailable() {
