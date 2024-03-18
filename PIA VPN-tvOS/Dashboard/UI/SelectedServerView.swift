@@ -19,9 +19,11 @@ struct SelectedServerView: View {
                 Text(viewModel.selectedServerSubtitle)
                     .font(.system(size: 31, weight: .bold))
                     .foregroundColor(isButtonFocused ? .pia_on_primary : .pia_on_surface)
-                    .lineLimit(nil)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.9)
             }
             .padding(.leading, 22)
+            .fixedSize(horizontal: false, vertical: true) // it resizes vertically to allow more than 1 line on the name of the server
             
             Spacer()
             
@@ -39,7 +41,7 @@ struct SelectedServerView: View {
             Button {
                 viewModel.selectedServerSectionWasTapped()
             } label: {
-                HStack {
+                HStack(alignment: .top) {
                     Spacer()
                     buttonView()
                         .frame(width: Spacing.dashboardViewWidth)
