@@ -11,8 +11,8 @@ import SwiftUI
 struct AvailableSettingsView: View {
     @ObservedObject var viewModel: AvailableSettingsViewModel
     
-    // TODO: check how to reset the default focus on appear. Atm this property is not used
     @FocusState var focusedSection: AvailableSettingsViewModel.Sections?
+    
     
     var body: some View {
         HStack {
@@ -34,6 +34,7 @@ struct AvailableSettingsView: View {
                 SettingsButtonView(title: section.title, style: .rightChevron) {
                     viewModel.navigate(to: section)
                 }
+                .focused($focusedSection, equals: section)
             }
         }
         
