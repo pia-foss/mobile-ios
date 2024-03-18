@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LoginQRView: View {
     @Binding var expiresAt: String
-    var qrCodeURL: URL
+    var qrCodeURL: URL?
     let loginAction: () -> Void
     
     var body: some View {
@@ -25,7 +25,9 @@ struct LoginQRView: View {
                 }
                 
                 HStack(spacing: 30) {
-                    QRImageView(qrImageURL: qrCodeURL)
+                    if let qrCodeURL = qrCodeURL {
+                        QRImageView(qrImageURL: qrCodeURL)
+                    }
                     
                     VStack(alignment: .leading, spacing: 25) {
                         Text(L10n.Localizable.Tvos.Login.Qr.description)

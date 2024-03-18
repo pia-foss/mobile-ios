@@ -8,6 +8,7 @@
 
 import Foundation
 import PIALibrary
+@testable import PIA_VPN_tvOS
 
 class AccountProviderMock: AccountProvider {
     var planProducts: [PIALibrary.Plan : PIALibrary.InAppProduct]?
@@ -36,8 +37,11 @@ class AccountProviderMock: AccountProvider {
         callback?(userResult, errorResult)
     }
     
+    func login(with linkToken: String, _ callback: ((PIALibrary.UserAccount?, Error?) -> Void)?) {
+        callback?(userResult, errorResult)
+    }
+    
     func login(with receiptRequest: PIALibrary.LoginReceiptRequest, _ callback: PIALibrary.LibraryCallback<PIALibrary.UserAccount>?) {}
-    func login(with linkToken: String, _ callback: ((PIALibrary.UserAccount?, Error?) -> Void)?) {}
     func refreshAccountInfo(_ callback: PIALibrary.LibraryCallback<PIALibrary.AccountInfo>?) {}
     func accountInformation(_ callback: ((PIALibrary.AccountInfo?, Error?) -> Void)?) {}
     func update(with request: PIALibrary.UpdateAccountRequest, resetPassword reset: Bool, andPassword password: String, _ callback: PIALibrary.LibraryCallback<PIALibrary.AccountInfo>?) {}
@@ -55,3 +59,5 @@ class AccountProviderMock: AccountProvider {
     func subscriptionInformation(_ callback: PIALibrary.LibraryCallback<PIALibrary.AppStoreInformation>?) {}
     func renew(with request: PIALibrary.RenewRequest, _ callback: PIALibrary.LibraryCallback<PIALibrary.UserAccount>?) {}
 }
+
+extension AccountProviderMock: AccountProviderType {}

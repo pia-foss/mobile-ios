@@ -17,7 +17,7 @@ class LoginQRViewModel: ObservableObject {
     }
     
     @Published var state: LoginQRViewModel.State = .loading
-    @Published var qrCodeURL: URL!
+    @Published var qrCodeURL: URL?
     @Published var shouldShowErrorMessage = false
     @Published var expiresAt: String = ""
     private var timer: Publishers.Autoconnect<Timer.TimerPublisher>?
@@ -51,7 +51,7 @@ class LoginQRViewModel: ObservableObject {
                     state = .validating
                     startTimer()
                 }
-                await validateQRCode(expirationDate: qrCode.expiresAt)
+                await validateQRCode(loginQRCode: qrCode)
             } catch {
                 Task { @MainActor in
                     state = .validating
@@ -61,17 +61,26 @@ class LoginQRViewModel: ObservableObject {
         }
     }
     
+    private func map(loginQRToken: LoginQRTokenDTO) -> LoginQRCode? {
+        let dateString = loginQRToken.expiresAt
+        let dateFormatter = ISO8601DateFormatter()
+
+        guard let date = dateFormatter.date(from: dateString) else { return nil }
+        
+        return LoginQRCode(token: loginQRToken.token,
+                           expiresAt: date)
+    }
+    
     func navigateToRoute() {
         stopTimer()
         onNavigateAction()
     }
     
-    private func validateQRCode(expirationDate: Date) async {
+    private func validateQRCode(loginQRCode: LoginQRCode) async {
         do {
-            try await validateLoginQRCode(expirationDate: expirationDate)
+            try await validateLoginQRCode(qrCodeToken: loginQRCode)
             Task { @MainActor in
-                //onSuccessAction()
-                state = .expired
+                onSuccessAction()
             }
             
         } catch {

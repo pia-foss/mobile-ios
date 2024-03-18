@@ -13,11 +13,13 @@ protocol GenerateLoginQRCodeUseCaseType {
 }
 
 class GenerateLoginQRCodeUseCase: GenerateLoginQRCodeUseCaseType {
+    private let generateLoginQRCodeProvider: GenerateLoginQRCodeProviderType
+    
+    init(generateLoginQRCodeProvider: GenerateLoginQRCodeProviderType) {
+        self.generateLoginQRCodeProvider = generateLoginQRCodeProvider
+    }
+    
     func callAsFunction() async throws -> LoginQRCode {
-        let nanoseconds = UInt64(2 * 1_000_000_000)
-        try await Task.sleep(nanoseconds: nanoseconds)
-        
-        return LoginQRCode(url: URL(string: "https://www.google.com")!,
-                           expiresAt: Date.now.addingTimeInterval(10))
+        try await generateLoginQRCodeProvider.generateLoginQRCodeToken()
     }
 }

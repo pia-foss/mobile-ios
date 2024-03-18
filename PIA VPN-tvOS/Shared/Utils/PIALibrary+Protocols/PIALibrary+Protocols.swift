@@ -8,6 +8,7 @@ protocol AccountProviderType {
     var publicUsername: String? { get }
     var currentUser: PIALibrary.UserAccount? { get set }
     func logout(_ callback: ((Error?) -> Void)?)
+    func login(with linkToken: String, _ callback: ((PIALibrary.UserAccount?, Error?) -> Void)?)
 }
 
 extension DefaultAccountProvider: AccountProviderType { }
