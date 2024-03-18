@@ -65,6 +65,10 @@ class RefreshServersLatencyUseCase: RefreshServersLatencyUseCaseType {
     }
     
     func stop() {
+        cancellables.forEach { anyCancellable in
+            anyCancellable.cancel()
+        }
+        cancellables.removeAll()
         self.timer = nil
         self.state = .none
     }
