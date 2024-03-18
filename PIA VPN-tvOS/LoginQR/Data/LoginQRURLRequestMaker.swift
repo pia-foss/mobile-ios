@@ -17,11 +17,11 @@ class LoginQRURLRequestMaker {
     
     func makeValidateLoginQRURLRequest(loginQRToken: String) -> URLRequest {
         let headers = [
-            "Authorization" : "Bearer " + loginQRToken,
-            "application/json" : "accept"
+            Endpoint.Header.authorization.rawValue : "Bearer " + loginQRToken,
+            Endpoint.Header.application_json.rawValue : "accept"
         ]
         
-        let endpoint = Endpoint(path: "client/v5/login_token/auth",
+        let endpoint = Endpoint(path: Endpoint.Path.Authentication.validateLogin.rawValue,
                                 method: .POST,
                                 allHTTPHeaderFields: headers)
         
@@ -30,11 +30,11 @@ class LoginQRURLRequestMaker {
     
     func makeGenerateLoginQRURLRequest() -> URLRequest {
         let headers = [
-            "application/json" : "accept",
-            "user-agent" : "PIA VPN"
+            Endpoint.Header.application_json.rawValue : "accept",
+            Endpoint.Header.user_agent.rawValue : "PIA VPN"
         ]
         
-        let endpoint = Endpoint(path: "client/v5/login_token",
+        let endpoint = Endpoint(path: Endpoint.Path.Authentication.generateLoginQR.rawValue,
                                 method: .POST,
                                 allHTTPHeaderFields: headers)
         

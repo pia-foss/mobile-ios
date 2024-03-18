@@ -21,5 +21,7 @@ class URLSessionMock: URLSessionType {
         return (dataTaskResultData, dataTaskResultResponse)
     }
     
-    
+    func data(for request: URLRequest) async throws -> (Data, URLResponse) {
+        return (dataTaskResultData, dataTaskResultResponse)
+    }
 }

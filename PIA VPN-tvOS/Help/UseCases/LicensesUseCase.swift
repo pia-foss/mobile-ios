@@ -14,12 +14,6 @@ protocol LicensesUseCaseType {
     func callAsFunction()
 }
 
-protocol URLSessionType {
-    func data(from url: URL) async throws -> (Data, URLResponse)
-}
-
-extension URLSession: URLSessionType {}
-
 class LicensesUseCase: LicensesUseCaseType {
     @MainActor internal var cachedLicenseContent: [String: String] = [:]
     

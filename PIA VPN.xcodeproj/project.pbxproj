@@ -641,7 +641,6 @@
 		E520FD102BA3889600D06C03 /* LoginQRCodeDomainMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FD0F2BA3889600D06C03 /* LoginQRCodeDomainMapper.swift */; };
 		E520FD132BA388BD00D06C03 /* GenerateLoginQRCodeProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FD122BA388BD00D06C03 /* GenerateLoginQRCodeProviderType.swift */; };
 		E520FD152BA388D100D06C03 /* ValidateLoginQRCodeProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FD142BA388D100D06C03 /* ValidateLoginQRCodeProviderType.swift */; };
-		E520FD172BA3972F00D06C03 /* LoginQRProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FD162BA3972F00D06C03 /* LoginQRProviderType.swift */; };
 		E520FD192BA399F600D06C03 /* LoginQRTokenDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FD182BA399F600D06C03 /* LoginQRTokenDTO.swift */; };
 		E520FD1B2BA3A1A800D06C03 /* LoginQRErrorMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FD1A2BA3A1A800D06C03 /* LoginQRErrorMapper.swift */; };
 		E520FD1D2BA3A1C700D06C03 /* LoginQRCodeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FD1C2BA3A1C700D06C03 /* LoginQRCodeError.swift */; };
@@ -1512,7 +1511,6 @@
 		E520FD0F2BA3889600D06C03 /* LoginQRCodeDomainMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginQRCodeDomainMapper.swift; sourceTree = "<group>"; };
 		E520FD122BA388BD00D06C03 /* GenerateLoginQRCodeProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateLoginQRCodeProviderType.swift; sourceTree = "<group>"; };
 		E520FD142BA388D100D06C03 /* ValidateLoginQRCodeProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateLoginQRCodeProviderType.swift; sourceTree = "<group>"; };
-		E520FD162BA3972F00D06C03 /* LoginQRProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginQRProviderType.swift; sourceTree = "<group>"; };
 		E520FD182BA399F600D06C03 /* LoginQRTokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginQRTokenDTO.swift; sourceTree = "<group>"; };
 		E520FD1A2BA3A1A800D06C03 /* LoginQRErrorMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginQRErrorMapper.swift; sourceTree = "<group>"; };
 		E520FD1C2BA3A1C700D06C03 /* LoginQRCodeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginQRCodeError.swift; sourceTree = "<group>"; };
@@ -3210,7 +3208,6 @@
 			children = (
 				E520FD122BA388BD00D06C03 /* GenerateLoginQRCodeProviderType.swift */,
 				E520FD142BA388D100D06C03 /* ValidateLoginQRCodeProviderType.swift */,
-				E520FD162BA3972F00D06C03 /* LoginQRProviderType.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -5063,7 +5060,6 @@
 				693B9A402B7571ED00757A41 /* SearchControllerButton.swift in Sources */,
 				69AB492C2B63C73000C780CD /* FavoriteRegionUseCase.swift in Sources */,
 				69FF0B042B3AD1D40074AA04 /* SelectedServerView.swift in Sources */,
-				E520FD172BA3972F00D06C03 /* LoginQRProviderType.swift in Sources */,
 				69A226B82B3079EA0065EDDB /* PIA+String.swift in Sources */,
 				69F1C29C2B2B299300E924AE /* VpnConnectionUseCase.swift in Sources */,
 				693622152B698B9200AE3C51 /* SearchedRegionsAvailability.swift in Sources */,
