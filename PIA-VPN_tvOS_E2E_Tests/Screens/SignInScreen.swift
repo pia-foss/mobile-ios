@@ -11,8 +11,13 @@ import XCTest
 extension XCUIApplication {
     var usernameTextField: XCUIElement {textField(with: "Enter Username")}
     var incorrectCredentialsErrorMessage: XCUIElement {staticText(with: "Your username or password is incorrect.")}
+    var loginViaUsernameButton: XCUIElement {button(with: "Log In via Username")}
     
-    func login(with credentials: Credentials) {
+    func loginViaUsername(with credentials: Credentials) {
+        loginViaUsernameButton.waitForElementToAppear()
+        moveFocus(to: loginViaUsernameButton)
+        XCUIRemote.shared.press(.select)
+        
         usernameTextField.waitForElementToAppear()
         moveFocus(to: usernameTextField)
         XCUIRemote.shared.press(.select)

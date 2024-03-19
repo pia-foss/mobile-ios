@@ -17,6 +17,7 @@ extension XCUIApplication{
         settingsButton.waitForElementToAppear()
         moveFocus(to: settingsButton, startingDirection: .up)
         XCUIRemote.shared.press(.select)
+        XCTAssert(settingsTitle.waitForElementToAppear())
     }
     
     func logout(){
@@ -27,12 +28,13 @@ extension XCUIApplication{
         if(settingsButton.waitForElementToAppear()){
             navigateToSettingsScreen()
             navigateToAccountSettings()
-            logoutButton.waitForElementToAppear()
+            XCTAssert(logoutButton.waitForElementToAppear())
+            
             moveFocus(to: logoutButton)
             XCUIRemote.shared.press(.select)
             moveFocus(to: logoutAlertButton)
             XCUIRemote.shared.press(.select)
-            signinImage.waitForElementToAppear()
+            XCTAssert(signinImage.waitForElementToAppear())
         }
     }
 }

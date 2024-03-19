@@ -14,8 +14,10 @@ extension XCUIApplication {
     
     func navigateToSignInScreen(){
         signinImage.waitForElementToAppear()
-        loginButton.waitForElementToAppear()
+        XCTAssert(loginButton.waitForElementToAppear())
+        
         moveFocus(to: loginButton)
         XCUIRemote.shared.press(.select)
+        XCTAssert(loginViaUsernameButton.waitForElementToAppear())
     }
 }

@@ -24,24 +24,30 @@ enum ElementError: Error, CustomStringConvertible {
 
 class WaitHelper{
     static var app: XCUIApplication!
+}
+
+extension XCUIElement {
+    @discardableResult
+    func waitForElementToAppear(timeout: TimeInterval = 10) -> Bool {
+          let predicate = NSPredicate(format: "exists == true")
+          let expectation = XCTNSPredicateExpectation(predicate: predicate, object: self)
+
+          let result = XCTWaiter.wait(for: [expectation], timeout: timeout)
+          return result == .completed
+      }
     
-    static func waitForElementToBeVisible(_ element:XCUIElement,timeout: TimeInterval = app.defaultTimeout, onSuccess:() -> Void, onFailure:(ElementError) -> Void){
-        let predicate = NSPredicate(format:"exists == true")
-        let expectation = XCTNSPredicateExpectation(predicate: predicate, object: element)
-        let result = XCTWaiter.wait(for: [expectation], timeout: timeout)
-        
-        if result == .completed {
-            onSuccess()
-        }
-        
-        else {
-            onFailure(.visibilityTimeout)
-        }
-    }
+    @discardableResult
+    func waitForElementToBeHidden(timeout: TimeInterval = 10) -> Bool {
+          let predicate = NSPredicate(format: "exists == false")
+          let expectation = XCTNSPredicateExpectation(predicate: predicate, object: self)
+
+          let result = XCTWaiter.wait(for: [expectation], timeout: timeout)
+          return result == .completed
+      }
     
-    static func waitForElementToNotBeVisible(_ element:XCUIElement, timeout: TimeInterval = app.defaultTimeout, onSuccess:() -> Void, onFailure:(ElementError) -> Void){
+    func waitForElementToNotBeVisible(timeout: TimeInterval = 10, onSuccess:() -> Void, onFailure:(ElementError) -> Void){
         let predicate = NSPredicate(format:"exists == false")
-        let expectation = XCTNSPredicateExpectation(predicate: predicate, object: element)
+        let expectation = XCTNSPredicateExpectation(predicate: predicate, object: self)
         let result = XCTWaiter.wait(for: [expectation], timeout: timeout)
         
         if result == .completed {
@@ -50,6 +56,20 @@ class WaitHelper{
         
         else {
             onFailure(.invisibilityTimeout)
+        }
+    }
+    
+    func waitForElementToBeVisible(timeout: TimeInterval = 10, onSuccess:() -> Void, onFailure:(ElementError) -> Void){
+        let predicate = NSPredicate(format:"exists == true")
+        let expectation = XCTNSPredicateExpectation(predicate: predicate, object: self)
+        let result = XCTWaiter.wait(for: [expectation], timeout: timeout)
+        
+        if result == .completed {
+            onSuccess()
+        }
+        
+        else {
+            onFailure(.visibilityTimeout)
         }
     }
 }

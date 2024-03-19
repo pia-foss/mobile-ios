@@ -19,7 +19,8 @@ extension XCUIApplication {
     }
     
     func logIn(with credentials: Credentials) {
-        guard (loginUsernameTextField.waitForExistence(timeout: defaultTimeout) && loginPasswordTextField.waitForExistence(timeout: defaultTimeout)) else {return}
+        loginUsernameTextField.waitForElementToAppear()
+        loginPasswordTextField.waitForElementToAppear()
         loginUsernameTextField.tap()
         loginUsernameTextField.typeText(credentials.username)
         loginPasswordTextField.tap()
@@ -44,14 +45,13 @@ extension XCUIApplication {
         navigateToLoginScreen()
         logIn(with: CredentialsUtil.credentials(type: .valid))
         
-        guard vpnPermissionScreen.waitForExistence(timeout: defaultTimeout) else { return }
-        guard vpnPermissionButton.waitForExistence(timeout: defaultTimeout) else { return }
+        vpnPermissionScreen.waitForElementToAppear()
+        vpnPermissionButton.waitForElementToAppear()
         vpnPermissionButton.tap()
         
         swipeUp()
         
-        WaitHelper.waitForElementToBeVisible(connectionButton, timeout: defaultTimeout,
-                                             onSuccess:{}, onFailure:{error in print("connectionButton is not visible")})
+        XCTAssert(connectionButton.waitForElementToAppear())
 
     }
 }

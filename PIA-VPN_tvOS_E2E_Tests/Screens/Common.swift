@@ -12,7 +12,7 @@ extension XCUIApplication{
     func moveFocus(to element: XCUIElement, startingDirection: XCUIRemote.Button = .right) {
         var direction: XCUIRemote.Button = startingDirection
         var navigationCycle = NavigationCycle(startingDirection: startingDirection)
-        var cycle = 0 // Tracks the cycle to determine the direction sequence
+        var cycle = 0
         var attempts = 0
         let maxAttempts = 20
         

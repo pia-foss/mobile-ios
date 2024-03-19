@@ -16,7 +16,7 @@ class OnboardingTests:BaseTest {
                 it("should display the home screen after allowing vpn profile installation") {
                     app.logout()
                     app.navigateToSignInScreen()
-                    app.login(with: CredentialsUtil.credentials(type: .valid))
+                    app.loginViaUsername(with: CredentialsUtil.credentials(type: .valid))
                     app.acceptSharingVPNStats()
                     app.acceptVPNConfiguration()
                     expect(app.connectButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())

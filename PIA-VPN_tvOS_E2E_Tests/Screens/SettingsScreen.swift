@@ -9,6 +9,7 @@
 import XCTest
 
 extension XCUIApplication{
+    var settingsTitle:XCUIElement {staticText(with: "Settings")}
     var accountButton:XCUIElement {button(with: "Account")}
     var accountTitle:XCUIElement {staticText(with: "Account")}
     var dedicatedIPButton:XCUIElement {button(with: "Dedicated IP")}
@@ -20,7 +21,7 @@ extension XCUIApplication{
         accountButton.waitForElementToAppear()
         moveFocus(to: accountButton, startingDirection: .down)
         XCUIRemote.shared.press(.select)
-        accountTitle.waitForElementToAppear()
+        XCTAssert(accountTitle.waitForElementToAppear())
     }
     
 

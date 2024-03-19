@@ -38,37 +38,25 @@ extension XCUIApplication {
     }
     
     func navigateToDedicatedIPScreen() {
-        guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else {return}
-        dashboardMenuButton.tap()
-        
-        if dedicatedIPButton.waitForExistence(timeout: defaultTimeout) {
-            dedicatedIPButton.tap()
-        }
-        
-        WaitHelper.waitForElementToBeVisible(dedicatedIPHeader, timeout: defaultTimeout,
-                                             onSuccess:{print("successful navigation to dedicated ip screen")}, onFailure:{error in print("dedicatedIPHeader is not visible")})
+        selectSideMenu(menuName: "Dedicated IP")
+        XCTAssert(dedicatedIPHeader.waitForElementToAppear())
     }
     
     func activateDedicatedIP (with dedicatedIP:DedicatedIP) {
-        guard dedicatedIPTextField.waitForExistence(timeout: defaultTimeout) else {return}
+        dedicatedIPTextField.waitForElementToAppear()
         dedicatedIPTextField.tap()
         dedicatedIPTextField.typeText(dedicatedIP.token)
         button(with:"Activate").tap()
-        WaitHelper.waitForElementToBeVisible(dedicatedIPList, timeout: defaultTimeout,
-                                             onSuccess:{}, onFailure:{error in print("dedicatedIPList is not visible")})
-
     }
     
     func deleteDedicatedIP() {
-        guard dedicatedIPList.waitForExistence(timeout: defaultTimeout) else {return}
-    
+        dedicatedIPList.waitForElementToAppear()
         let pressDuration: TimeInterval = 1.0
         let sourceCoordinate = dedicatedIPList.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5))
         let leftmostCoordinate = coordinate(withNormalizedOffset: CGVector(dx: 0.01, dy: 0.5))
         sourceCoordinate.press(forDuration: pressDuration, thenDragTo: leftmostCoordinate)
         
         confirmDeleteButton.tap()
-        WaitHelper.waitForElementToBeVisible(dedicatedIPTextField, timeout: defaultTimeout,
-                                             onSuccess:{}, onFailure:{error in print("dedicatedIPTextField is not visible")})
+        XCTAssert(dedicatedIPTextField.waitForElementToAppear())
     }
 }

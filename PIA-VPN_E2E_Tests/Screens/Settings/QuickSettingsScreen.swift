@@ -27,38 +27,44 @@ extension XCUIApplication {
     }
     
     func enableVPNKillSwitchQuickSetting() {
-        if(vpnKillSwitchQuickSettings.value as! String == "0"){
-            vpnKillSwitchQuickSettings.tap()
+        if(vpnKillSwitchQuickSettings.value as! String == "1"){
+            return
         }
+        vpnKillSwitchQuickSettings.tap()
     }
     
     func disableVPNKillSwitchQuickSetting() {
-        if(vpnKillSwitchQuickSettings.value as! String == "1"){
-            vpnKillSwitchQuickSettings.tap()
+        if(vpnKillSwitchQuickSettings.value as! String == "0"){
+            return
         }
+        vpnKillSwitchQuickSettings.tap()
     }
     
     func enableNetworkManagementQuickSetting() {
-        if(networkManagementQuickSettings.value as! String == "0"){
-            networkManagementQuickSettings.tap()
+        if(networkManagementQuickSettings.value as! String == "1"){
+            return
         }
+        networkManagementQuickSettings.tap()
     }
     
     func disableNetworkManagementQuickSetting() {
-        if(networkManagementQuickSettings.value as! String == "1"){
-            networkManagementQuickSettings.tap()
+        if(networkManagementQuickSettings.value as! String == "0"){
+            return
         }
+        networkManagementQuickSettings.tap()
     }
     
     func enablePrivateBrowserQuickSetting() {
-        if(privateBrowserQuickSettings.value as! String == "0"){
-            privateBrowserQuickSettings.tap()
+        if(privateBrowserQuickSettings.value as! String == "1"){
+            return
         }
+        privateBrowserQuickSettings.tap()
     }
     
     func disablePrivateBrowserQuickSetting() {
-        if(privateBrowserQuickSettings.value as! String == "1"){
-            privateBrowserQuickSettings.tap()
+        if(privateBrowserQuickSettings.value as! String == "0"){
+            return
         }
+        privateBrowserQuickSettings.tap()
     }
 }

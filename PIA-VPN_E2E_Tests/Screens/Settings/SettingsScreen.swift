@@ -41,17 +41,19 @@ extension XCUIApplication {
         button(with: "Settings")
     }
     
+    var settingsHeader: XCUIElement {
+        staticText(with: "Settings")
+    }
+    
     func navigateToSettings() {
-        guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else { return }
-        dashboardMenuButton.tap()
-        
-        guard settingsButton.waitForExistence(timeout: defaultTimeout) else {return}
-        settingsButton.tap()
+        selectSideMenu(menuName: "Settings")
+        XCTAssert(settingsHeader.waitForElementToAppear())
     }
     
     func navigateToHomeFromSettings() {
-        guard settingsBackButton.waitForExistence(timeout: defaultTimeout) else {return}
+        settingsBackButton.waitForElementToAppear()
         settingsBackButton.tap()
         navigateToHome(using: closeButton)
+        XCTAssert(connectionButton.waitForElementToAppear())
     }
 }

@@ -34,10 +34,9 @@ extension XCUIApplication {
     }
     
     func navigateToRegionSelection(){
-        guard regionTileCollectionViewCell.waitForExistence(timeout: defaultTimeout) else { return }
+        regionTileCollectionViewCell.waitForElementToAppear()
         regionTileCollectionViewCell.tap()
-        WaitHelper.waitForElementToBeVisible(regionSelectionHeader, timeout: defaultTimeout,
-                                             onSuccess:{print("successful navigation to region selection screen")}, onFailure:{error in print("regionSelectionHeader is not visible")})
+        XCTAssert(regionSelectionHeader.waitForElementToAppear())
     }
     
     func searchRegion(regionName: String) -> XCUIElementQuery {
@@ -52,7 +51,7 @@ extension XCUIApplication {
     
     func cancelSearch() {
         cancelSearchButton.tap()
-        WaitHelper.waitForElementToBeVisible(sortButton, timeout: defaultTimeout, onSuccess: {}, onFailure: {error in print("sortButton is not displayed")})
+        XCTAssert(sortButton.waitForElementToAppear())
     }
     
     func getRegionList() -> XCUIElementQuery {
@@ -69,16 +68,15 @@ extension XCUIApplication {
         let regionAddAsAFavouriteButton = region.buttons["Add a favorite region"]
         let regionRemoveAsAFavouriteButton = region.buttons["Remove a favorite region"]
         
-        guard (regionRemoveAsAFavouriteButton.waitForExistence(timeout: defaultTimeout)) else {return}
+        if(regionAddAsAFavouriteButton.waitForElementToAppear()){
+            return
+        }
+        
+        regionRemoveAsAFavouriteButton.waitForElementToAppear()
         regionRemoveAsAFavouriteButton.tap()
 
-        WaitHelper.waitForElementToBeVisible(regionAddAsAFavouriteButton, timeout: defaultTimeout, onSuccess: {}, onFailure: {error in print("regionAddAsAFavouriteButton is not visible")})
-        WaitHelper.waitForElementToNotBeVisible(regionRemoveAsAFavouriteButton, timeout: defaultTimeout, onSuccess: {}, onFailure: {error in print("regionRemoveAsAFavouriteButton is visible")})
-
-    }
-    
-    func removeRegionAsFavourite(regionName: String) {
-        
+        XCTAssert(regionAddAsAFavouriteButton.waitForElementToAppear())
+        XCTAssert(regionRemoveAsAFavouriteButton.waitForElementToBeHidden())
     }
     
     func isRegionFavourite(regionName: String) -> Bool {
@@ -97,9 +95,10 @@ extension XCUIApplication {
     }
     
     func sortRegionsBy(sortType: String) {
-        guard sortButton.waitForExistence(timeout: defaultTimeout) else {return}
+        sortButton.waitForElementToAppear()
         sortButton.tap()
-        WaitHelper.waitForElementToBeVisible(sortPopUpHeader, timeout: defaultTimeout, onSuccess: {}, onFailure: {error in print("sortPopUpHeader is not visible")})
+        sortPopUpHeader.waitForElementToAppear()
         button(with: sortType).tap()
+        sortPopUpHeader.waitForElementToBeHidden()
     }
 }
