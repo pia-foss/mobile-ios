@@ -6984,8 +6984,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pia-foss/mobile-ios-library.git";
 			requirement = {
-				branch = "PIA-1544_integrate_deeplinking";
-				kind = branch;
+				kind = revision;
+				revision = 8b1fd35b527ff7331b079f64da46a98389dab9c9;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

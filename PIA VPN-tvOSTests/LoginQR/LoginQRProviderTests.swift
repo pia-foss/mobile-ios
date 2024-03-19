@@ -63,7 +63,7 @@ final class LoginQRProviderTests: XCTestCase {
         
         // THEN
         XCTAssertEqual(loginToken?.token, "f1ecc01aff18fe7")
-        XCTAssertEqual(loginToken?.url, URL(string: "PIA://token=f1ecc01aff18fe7"))
+        XCTAssertEqual(loginToken?.url, URL(string: "piavpn:loginqr?token=f1ecc01aff18fe7"))
         XCTAssertEqual(loginToken?.expiresAt, Date.makeISO8601Date(string: "2024-03-15T16:43:24Z"))
     }
     

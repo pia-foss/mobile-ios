@@ -21,7 +21,7 @@ final class LoginQRCodeDomainMapperTests: XCTestCase {
         
         // THEN
         XCTAssertEqual(domainModel?.token, "token")
-        XCTAssertEqual(domainModel?.url, URL(string: "PIA://token=token"))
+        XCTAssertEqual(domainModel?.url, URL(string: "piavpn:loginqr?token=token"))
         XCTAssertEqual(domainModel?.expiresAt, Date.makeISO8601Date(string: "2024-05-24T00:00:00Z"))
     }
     
