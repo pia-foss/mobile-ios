@@ -17,7 +17,7 @@ class WelcomeFactory {
     
     private static func makeWelcomeViewModel() -> OnboardingComponentViewModelType {
         let loginButton = OnboardingComponentButton(title: L10n.Localizable.Tvos.Welcome.Button.login) {
-            AppRouter.Actions.navigate(router: AppRouter.shared, destination: AuthenticationDestinations.loginCredentials)()
+            AppRouter.Actions.navigate(router: AppRouter.shared, destination: AuthenticationDestinations.loginQRCode)()
         }
         
         let signupButton = OnboardingComponentButton(title: L10n.Localizable.Tvos.Welcome.Button.signup) {

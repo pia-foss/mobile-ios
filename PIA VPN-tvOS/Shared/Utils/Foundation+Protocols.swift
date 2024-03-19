@@ -15,6 +15,7 @@ protocol NotificationCenterType {
     
     func removeObserver(_ observer: Any)
     
+    @available(iOS 13.0, *)
     func publisher(for name: Notification.Name, object: AnyObject?) -> NotificationCenter.Publisher
     
     // Add methods here from NSNotificationCenter as needed
@@ -56,8 +57,12 @@ extension Date {
 }
 
 protocol URLSessionType {
+    @available(iOS 13.0.0, *)
     func data(from url: URL) async throws -> (Data, URLResponse)
+    @available(iOS 13.0.0, *)
     func data(for request: URLRequest) async throws -> (Data, URLResponse)
+    
+    func dataTask(with request: URLRequest, completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
 }
 
 extension URLSession: URLSessionType {}

@@ -11,7 +11,7 @@ import Foundation
 public struct LoginQRCode {
     let token: String
     var url: URL? {
-        URL(string: "PIA://token=\(token)")
+        URL(string: "piavpn:loginqr?token=\(token)")
     }
     let expiresAt: Date
 }

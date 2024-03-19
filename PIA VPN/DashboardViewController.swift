@@ -132,7 +132,6 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(checkConnectToRFC1918VulnerableWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918VulnerableWifi, object: nil)
         
         self.viewContentHeight = self.viewContentHeightConstraint.constant
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -173,6 +172,8 @@ class DashboardViewController: AutolayoutViewController {
         if UserSurveyManager.shouldShowSurveyMessage() {
             MessagesManager.shared.showInAppSurveyMessage()
         }
+        
+        checkTVOSTokenToBind()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -193,6 +194,15 @@ class DashboardViewController: AutolayoutViewController {
         // check account email
         checkAccountEmail()
 
+    }
+    
+    private func checkTVOSTokenToBind() {
+        guard let apiToken = Client.providers.accountProvider.apiToken,
+        let token = Client.configuration.tvOSBindToken else { return }
+        
+        guard let viewController = ValidateQRLoginFactory.makeValidateQRLoginViewController(apiToken: apiToken, tvOSBindToken: token) else { return }
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
     }
     
     // MARK: Menu

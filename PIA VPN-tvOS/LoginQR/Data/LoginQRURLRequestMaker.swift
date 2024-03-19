@@ -8,8 +8,8 @@
 
 import Foundation
 
-class LoginQRURLRequestMaker {
-    private let hostName: String
+class LoginQRURLRequestMaker: URLRequestMaker {
+    let hostName: String
     
     init(hostName: String = "https://privateinternetaccess.com/api/") {
         self.hostName = hostName
@@ -23,7 +23,8 @@ class LoginQRURLRequestMaker {
         
         let endpoint = Endpoint(path: Endpoint.Path.Authentication.validateLogin.rawValue,
                                 method: .POST,
-                                allHTTPHeaderFields: headers)
+                                allHTTPHeaderFields: headers, 
+                                bodyParametrs: nil)
         
         return makeURLRequest(endpoint: endpoint)
     }
@@ -36,18 +37,9 @@ class LoginQRURLRequestMaker {
         
         let endpoint = Endpoint(path: Endpoint.Path.Authentication.generateLoginQR.rawValue,
                                 method: .POST,
-                                allHTTPHeaderFields: headers)
+                                allHTTPHeaderFields: headers, 
+                                bodyParametrs: nil)
         
         return makeURLRequest(endpoint: endpoint)
-    }
-    
-    private func makeURLRequest(endpoint: Endpoint) -> URLRequest {
-        let url = URL(string: hostName + endpoint.path)!
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = endpoint.method.rawValue
-        request.allHTTPHeaderFields = endpoint.allHTTPHeaderFields
-        
-        return request
     }
 }

@@ -195,6 +195,10 @@ struct AppConstants {
         static let view = "piavpn:view"
     }
     
+    struct QRSignin {
+        static let url = "piavpn:loginqr?token="
+    }
+    
     struct Survey {
         static let numberOfConnectionsUntilPrompt = 15
         static let formURL = URL(string: "https://privateinternetaccess.typeform.com/to/WTFcN77r")!
