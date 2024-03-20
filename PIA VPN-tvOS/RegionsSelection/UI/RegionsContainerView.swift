@@ -74,9 +74,19 @@ struct RegionsContainerView: View {
                 guard let focusedMenuItem = newValue else { return }
                 viewModel.selectedSection = focusedMenuItem
             }
+            .onAppear {
+                setFocusToDefault()
+            }
         }
 
     }
 }
 
 
+// MARK: - Default focus
+
+extension RegionsContainerView {
+    private func setFocusToDefault() {
+        focusedFilter = .all
+    }
+}

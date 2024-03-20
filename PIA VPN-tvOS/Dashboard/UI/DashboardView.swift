@@ -10,10 +10,10 @@ struct DashboardView: View {
             ConnectionStateBar(tintColor: viewModel.connectionTintColor.connectionBarTint)
             Spacer()
             DashboardConnectionButtonSection()
-                .padding(.bottom, 80)
+                .padding(.bottom, 60)
             
             SelectedServerSection()
-                .padding(.bottom, 40)
+                .frame(minHeight: Spacing.selectedServerViewMinHeight)
             
             QuickConnectSection()
                 .frame(width: Spacing.dashboardViewWidth)

@@ -10,6 +10,8 @@ import SwiftUI
 
 struct HelpOptionsView: View {
     @ObservedObject var viewModel: HelpOptionsViewModel
+    @FocusState var focusedSection: HelpOptionsViewModel.Sections?
+    
     var body: some View {
         HStack {
             VStack(spacing: 20) {
@@ -22,6 +24,9 @@ struct HelpOptionsView: View {
                 .aspectRatio(contentMode: .fit)
         }
         .padding(.top, Spacing.screenTopPadding)
+        .onAppear {
+            setFocusToDefault()
+        }
     }
     
     
@@ -44,6 +49,7 @@ struct HelpOptionsView: View {
             SettingsButtonView(title: viewModel.aboutSectionTitle, style: .rightChevron) {
                 viewModel.aboutOptionsButtonWasTapped()
             }
+            .focused($focusedSection, equals: .about)
             
             SettingsButtonView(
                 title: viewModel.helpImproveSectionContent.title ,
@@ -51,6 +57,7 @@ struct HelpOptionsView: View {
                 style: .rightText(content: viewModel.helpImproveSectionContent.value)) {
                 viewModel.toggleHelpImprove()
             }
+            .focused($focusedSection, equals: .helpImprove)
         }
     }
 
@@ -70,4 +77,12 @@ struct HelpOptionsView: View {
         }
     }
     
+}
+
+// MARK: - Default focus
+
+extension HelpOptionsView {
+    private func setFocusToDefault() {
+        focusedSection = .about
+    }
 }
