@@ -127,6 +127,14 @@ extension AppRouter {
         navigateRouterToDestinationAction(AuthenticationDestinations.loginCredentials)
     }
     
+    static var navigateToLoginQRCodeDestinationAction: AppRouter.Actions {
+        navigateRouterToDestinationAction(AuthenticationDestinations.loginQRCode)
+    }
+    
+    static var navigateToSignUpDestinationAction: AppRouter.Actions {
+        navigateRouterToDestinationAction(AuthenticationDestinations.signup)
+    }
+    
     static var navigateToConnectionstatsDestinationAction: AppRouter.Actions {
         navigateRouterToDestinationAction(OnboardingDestinations.connectionstats)
     }

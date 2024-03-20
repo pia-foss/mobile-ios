@@ -8,8 +8,8 @@
 
 import Foundation
 
-class LoginQRURLRequestMaker {
-    private let hostName: String
+class LoginQRURLRequestMaker: URLRequestMaker {
+    let hostName: String
     
     init(hostName: String = "https://privateinternetaccess.com/api/") {
         self.hostName = hostName
@@ -17,37 +17,29 @@ class LoginQRURLRequestMaker {
     
     func makeValidateLoginQRURLRequest(loginQRToken: String) -> URLRequest {
         let headers = [
-            "Authorization" : "Bearer " + loginQRToken,
-            "application/json" : "accept"
+            Endpoint.Header.authorization.rawValue : "Bearer " + loginQRToken,
+            Endpoint.Header.application_json.rawValue : "accept"
         ]
         
-        let endpoint = Endpoint(path: "client/v5/login_token/auth",
+        let endpoint = Endpoint(path: Endpoint.Path.Authentication.validateLogin.rawValue,
                                 method: .POST,
-                                allHTTPHeaderFields: headers)
+                                allHTTPHeaderFields: headers, 
+                                bodyParametrs: nil)
         
         return makeURLRequest(endpoint: endpoint)
     }
     
     func makeGenerateLoginQRURLRequest() -> URLRequest {
         let headers = [
-            "application/json" : "accept",
-            "user-agent" : "PIA VPN"
+            Endpoint.Header.application_json.rawValue : "accept",
+            Endpoint.Header.user_agent.rawValue : "PIA VPN"
         ]
         
-        let endpoint = Endpoint(path: "client/v5/login_token",
+        let endpoint = Endpoint(path: Endpoint.Path.Authentication.generateLoginQR.rawValue,
                                 method: .POST,
-                                allHTTPHeaderFields: headers)
+                                allHTTPHeaderFields: headers, 
+                                bodyParametrs: nil)
         
         return makeURLRequest(endpoint: endpoint)
-    }
-    
-    private func makeURLRequest(endpoint: Endpoint) -> URLRequest {
-        let url = URL(string: hostName + endpoint.path)!
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = endpoint.method.rawValue
-        request.allHTTPHeaderFields = endpoint.allHTTPHeaderFields
-        
-        return request
     }
 }

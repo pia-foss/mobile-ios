@@ -641,7 +641,6 @@
 		E520FD102BA3889600D06C03 /* LoginQRCodeDomainMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FD0F2BA3889600D06C03 /* LoginQRCodeDomainMapper.swift */; };
 		E520FD132BA388BD00D06C03 /* GenerateLoginQRCodeProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FD122BA388BD00D06C03 /* GenerateLoginQRCodeProviderType.swift */; };
 		E520FD152BA388D100D06C03 /* ValidateLoginQRCodeProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FD142BA388D100D06C03 /* ValidateLoginQRCodeProviderType.swift */; };
-		E520FD172BA3972F00D06C03 /* LoginQRProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FD162BA3972F00D06C03 /* LoginQRProviderType.swift */; };
 		E520FD192BA399F600D06C03 /* LoginQRTokenDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FD182BA399F600D06C03 /* LoginQRTokenDTO.swift */; };
 		E520FD1B2BA3A1A800D06C03 /* LoginQRErrorMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FD1A2BA3A1A800D06C03 /* LoginQRErrorMapper.swift */; };
 		E520FD1D2BA3A1C700D06C03 /* LoginQRCodeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FD1C2BA3A1C700D06C03 /* LoginQRCodeError.swift */; };
@@ -730,6 +729,29 @@
 		E58A45492BA4BE36002A0704 /* ValidateLoginQRCodeUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A45482BA4BE36002A0704 /* ValidateLoginQRCodeUseCaseTests.swift */; };
 		E58A454B2BA4BE5C002A0704 /* HTTPClientMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A454A2BA4BE5C002A0704 /* HTTPClientMock.swift */; };
 		E58A454D2BA4C849002A0704 /* ValidateLoginQRCodeProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A454C2BA4C849002A0704 /* ValidateLoginQRCodeProviderMock.swift */; };
+		E58A45502BA8CC72002A0704 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FD042BA3137300D06C03 /* HTTPClient.swift */; };
+		E58A45512BA8CC72002A0704 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FD042BA3137300D06C03 /* HTTPClient.swift */; };
+		E58A45522BA8CD8F002A0704 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FD022BA3132700D06C03 /* URLSessionHTTPClient.swift */; };
+		E58A45532BA8CD8F002A0704 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520FD022BA3132700D06C03 /* URLSessionHTTPClient.swift */; };
+		E58A45542BA8CDA9002A0704 /* Foundation+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6993119F2B31894D00D316C8 /* Foundation+Protocols.swift */; };
+		E58A45552BA8CDAA002A0704 /* Foundation+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6993119F2B31894D00D316C8 /* Foundation+Protocols.swift */; };
+		E58A45572BA8D05C002A0704 /* LoginURLRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A45562BA8D05C002A0704 /* LoginURLRequestMaker.swift */; };
+		E58A45582BA8D083002A0704 /* LoginURLRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A45562BA8D05C002A0704 /* LoginURLRequestMaker.swift */; };
+		E58A455D2BA8D1E8002A0704 /* URLRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A455C2BA8D1E8002A0704 /* URLRequestMaker.swift */; };
+		E58A455E2BA8D204002A0704 /* URLRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A455C2BA8D1E8002A0704 /* URLRequestMaker.swift */; };
+		E58A455F2BA8D206002A0704 /* URLRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A455C2BA8D1E8002A0704 /* URLRequestMaker.swift */; };
+		E58A45612BA8E371002A0704 /* LoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A45602BA8E371002A0704 /* LoginProvider.swift */; };
+		E58A45622BA8E373002A0704 /* LoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A45602BA8E371002A0704 /* LoginProvider.swift */; };
+		E58A45642BA8ECC6002A0704 /* ValidateQRLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A45632BA8ECC6002A0704 /* ValidateQRLoginViewController.swift */; };
+		E58A45652BA8ECC6002A0704 /* ValidateQRLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A45632BA8ECC6002A0704 /* ValidateQRLoginViewController.swift */; };
+		E58A456A2BA8EE9C002A0704 /* ValidateQRLoginView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E58A45692BA8EE9C002A0704 /* ValidateQRLoginView.storyboard */; };
+		E58A456B2BA8EE9C002A0704 /* ValidateQRLoginView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E58A45692BA8EE9C002A0704 /* ValidateQRLoginView.storyboard */; };
+		E58A45702BAA28AE002A0704 /* ValidateQRLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A456F2BAA28AE002A0704 /* ValidateQRLoginFactory.swift */; };
+		E58A45712BAA28AE002A0704 /* ValidateQRLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A456F2BAA28AE002A0704 /* ValidateQRLoginFactory.swift */; };
+		E58A45742BAA28D4002A0704 /* ValidateQRLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A45732BAA28D4002A0704 /* ValidateQRLoginUseCase.swift */; };
+		E58A45752BAA28D4002A0704 /* ValidateQRLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A45732BAA28D4002A0704 /* ValidateQRLoginUseCase.swift */; };
+		E58A45792BAA290F002A0704 /* TokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A45782BAA290F002A0704 /* TokenProvider.swift */; };
+		E58A457A2BAA290F002A0704 /* TokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A45782BAA290F002A0704 /* TokenProvider.swift */; };
 		E59D1A152B7E2D4B00A2FBFB /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
 		E59D1A182B7E2D4B00A2FBFB /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59D1A172B7E2D4B00A2FBFB /* PacketTunnelProvider.swift */; };
 		E59D1A1D2B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E59D1A142B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -1512,7 +1534,6 @@
 		E520FD0F2BA3889600D06C03 /* LoginQRCodeDomainMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginQRCodeDomainMapper.swift; sourceTree = "<group>"; };
 		E520FD122BA388BD00D06C03 /* GenerateLoginQRCodeProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateLoginQRCodeProviderType.swift; sourceTree = "<group>"; };
 		E520FD142BA388D100D06C03 /* ValidateLoginQRCodeProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateLoginQRCodeProviderType.swift; sourceTree = "<group>"; };
-		E520FD162BA3972F00D06C03 /* LoginQRProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginQRProviderType.swift; sourceTree = "<group>"; };
 		E520FD182BA399F600D06C03 /* LoginQRTokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginQRTokenDTO.swift; sourceTree = "<group>"; };
 		E520FD1A2BA3A1A800D06C03 /* LoginQRErrorMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginQRErrorMapper.swift; sourceTree = "<group>"; };
 		E520FD1C2BA3A1C700D06C03 /* LoginQRCodeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginQRCodeError.swift; sourceTree = "<group>"; };
@@ -1588,6 +1609,14 @@
 		E58A45482BA4BE36002A0704 /* ValidateLoginQRCodeUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateLoginQRCodeUseCaseTests.swift; sourceTree = "<group>"; };
 		E58A454A2BA4BE5C002A0704 /* HTTPClientMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientMock.swift; sourceTree = "<group>"; };
 		E58A454C2BA4C849002A0704 /* ValidateLoginQRCodeProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateLoginQRCodeProviderMock.swift; sourceTree = "<group>"; };
+		E58A45562BA8D05C002A0704 /* LoginURLRequestMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginURLRequestMaker.swift; sourceTree = "<group>"; };
+		E58A455C2BA8D1E8002A0704 /* URLRequestMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestMaker.swift; sourceTree = "<group>"; };
+		E58A45602BA8E371002A0704 /* LoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProvider.swift; sourceTree = "<group>"; };
+		E58A45632BA8ECC6002A0704 /* ValidateQRLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateQRLoginViewController.swift; sourceTree = "<group>"; };
+		E58A45692BA8EE9C002A0704 /* ValidateQRLoginView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ValidateQRLoginView.storyboard; sourceTree = "<group>"; };
+		E58A456F2BAA28AE002A0704 /* ValidateQRLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateQRLoginFactory.swift; sourceTree = "<group>"; };
+		E58A45732BAA28D4002A0704 /* ValidateQRLoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateQRLoginUseCase.swift; sourceTree = "<group>"; };
+		E58A45782BAA290F002A0704 /* TokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenProvider.swift; sourceTree = "<group>"; };
 		E59D1A142B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PIA tvOS Tunnel.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59D1A172B7E2D4B00A2FBFB /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		E59D1A192B7E2D4B00A2FBFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2015,6 +2044,7 @@
 		291C6373183EBC210039EC03 = {
 			isa = PBXGroup;
 			children = (
+				E58A45592BA8D1BD002A0704 /* PIA Common */,
 				69E192442B8E274500A97286 /* PIA VPN-tvOS_E2E_Tests.xctestplan */,
 				69E192432B8E22FC00A97286 /* PIA-VPN_E2E_Tests.xctestplan */,
 				69E192422B8E14DF00A97286 /* PIA VPN-tvOS.xctestplan */,
@@ -2084,6 +2114,7 @@
 		291C6385183EBC210039EC03 /* PIA VPN */ = {
 			isa = PBXGroup;
 			children = (
+				E58A456C2BAA285F002A0704 /* ValidateQRLogin */,
 				0E047DD81C6BDAF00026F9A7 /* Global */,
 				0E9160551DA6F7EC00A13AA7 /* Core */,
 				296BBFEE1840066A00944151 /* UI */,
@@ -3179,7 +3210,6 @@
 			isa = PBXGroup;
 			children = (
 				E520FD082BA387F400D06C03 /* Dtos */,
-				E520FD042BA3137300D06C03 /* HTTPClient.swift */,
 				E520FD062BA387BC00D06C03 /* LoginQRProvider.swift */,
 				E520FD0D2BA3886100D06C03 /* LoginQRURLRequestMaker.swift */,
 				E520FD0F2BA3889600D06C03 /* LoginQRCodeDomainMapper.swift */,
@@ -3210,7 +3240,6 @@
 			children = (
 				E520FD122BA388BD00D06C03 /* GenerateLoginQRCodeProviderType.swift */,
 				E520FD142BA388D100D06C03 /* ValidateLoginQRCodeProviderType.swift */,
-				E520FD162BA3972F00D06C03 /* LoginQRProviderType.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -3534,6 +3563,83 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		E58A45592BA8D1BD002A0704 /* PIA Common */ = {
+			isa = PBXGroup;
+			children = (
+				E58A455A2BA8D1D2002A0704 /* Data */,
+			);
+			path = "PIA Common";
+			sourceTree = "<group>";
+		};
+		E58A455A2BA8D1D2002A0704 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E58A455B2BA8D1DA002A0704 /* Networking */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E58A455B2BA8D1DA002A0704 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				E520FD042BA3137300D06C03 /* HTTPClient.swift */,
+				E58A455C2BA8D1E8002A0704 /* URLRequestMaker.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		E58A456C2BAA285F002A0704 /* ValidateQRLogin */ = {
+			isa = PBXGroup;
+			children = (
+				E58A45722BAA28C1002A0704 /* Domain */,
+				E58A456E2BAA289D002A0704 /* CompositionRoot */,
+				E58A456D2BAA2870002A0704 /* UI */,
+			);
+			name = ValidateQRLogin;
+			sourceTree = "<group>";
+		};
+		E58A456D2BAA2870002A0704 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				E58A45632BA8ECC6002A0704 /* ValidateQRLoginViewController.swift */,
+				E58A45692BA8EE9C002A0704 /* ValidateQRLoginView.storyboard */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		E58A456E2BAA289D002A0704 /* CompositionRoot */ = {
+			isa = PBXGroup;
+			children = (
+				E58A456F2BAA28AE002A0704 /* ValidateQRLoginFactory.swift */,
+			);
+			name = CompositionRoot;
+			sourceTree = "<group>";
+		};
+		E58A45722BAA28C1002A0704 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				E58A45772BAA2904002A0704 /* Interfaces */,
+				E58A45762BAA28FC002A0704 /* Use cases */,
+			);
+			name = Domain;
+			sourceTree = "<group>";
+		};
+		E58A45762BAA28FC002A0704 /* Use cases */ = {
+			isa = PBXGroup;
+			children = (
+				E58A45732BAA28D4002A0704 /* ValidateQRLoginUseCase.swift */,
+			);
+			name = "Use cases";
+			sourceTree = "<group>";
+		};
+		E58A45772BAA2904002A0704 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				E58A45782BAA290F002A0704 /* TokenProvider.swift */,
+			);
+			name = Interfaces;
+			sourceTree = "<group>";
+		};
 		E59D1A162B7E2D4B00A2FBFB /* PIA tvOS Tunnel */ = {
 			isa = PBXGroup;
 			children = (
@@ -3842,6 +3948,8 @@
 				E5F52A162A8A5D3800828883 /* Wifi */,
 				E5F52A1A2A8A5E1E00828883 /* IPv4Address.swift */,
 				E5F52A1E2A8A614900828883 /* NetworkMonitor.swift */,
+				E58A45562BA8D05C002A0704 /* LoginURLRequestMaker.swift */,
+				E58A45602BA8E371002A0704 /* LoginProvider.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -4349,6 +4457,7 @@
 				0EFDC1D51FE4607D007C0B9B /* Images.xcassets in Resources */,
 				0ED9841F1FC48C6500542EE6 /* Roboto-Light.ttf in Resources */,
 				0EE2206A1F4EF307002805AE /* Components.plist in Resources */,
+				E58A456B2BA8EE9C002A0704 /* ValidateQRLoginView.storyboard in Resources */,
 				829EB51425359DBB003E74DD /* DedicatedIpRowViewCell.xib in Resources */,
 				0ED984221FC48C6500542EE6 /* Roboto-Thin.ttf in Resources */,
 				824C531824C04796003DB740 /* ConnectionTileCollectionViewCell.xib in Resources */,
@@ -4387,6 +4496,7 @@
 				DDFCFA9721E8921F0081F235 /* RegionTile.xib in Resources */,
 				0ED9841B1FC48C6000542EE6 /* Roboto-Medium.ttf in Resources */,
 				DD76291321ECBD8B0092DF50 /* SubscriptionTileCollectionViewCell.xib in Resources */,
+				E58A456A2BA8EE9C002A0704 /* ValidateQRLoginView.storyboard in Resources */,
 				82CAB8F4255C0CD100BB08EF /* MessagesTileCollectionViewCell.xib in Resources */,
 				0ECB08201D61D2A900043852 /* Launch Screen.storyboard in Resources */,
 				82CAB8FD255C115100BB08EF /* MessagesTile.xib in Resources */,
@@ -4568,6 +4678,7 @@
 				DDD65314247E66AD00F0A897 /* CoordinatesFinder.swift in Sources */,
 				E5217F4C2AEAD29F00123442 /* PurchasePlanCell.swift in Sources */,
 				DDD271DF21D616AA00B6D20F /* Server+Favorite.swift in Sources */,
+				E58A45712BAA28AE002A0704 /* ValidateQRLoginFactory.swift in Sources */,
 				698F4F312ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift in Sources */,
 				DD125DC621E77046004ECCB6 /* QuickConnectTile.swift in Sources */,
 				82A1AD2724B86AF60003DD02 /* PIACardsViewController.swift in Sources */,
@@ -4631,15 +4742,19 @@
 				E520FCE92B90792600D06C03 /* AppPreferences.swift in Sources */,
 				DD125DD221E7A694004ECCB6 /* ServerButton.swift in Sources */,
 				8272C62826540B2100D846A8 /* ProtocolSettingsViewController.swift in Sources */,
+				E58A45652BA8ECC6002A0704 /* ValidateQRLoginViewController.swift in Sources */,
 				E59E8FAA2AEA7A81009278F5 /* SignupInternetUnreachableViewController.swift in Sources */,
 				824C530924C046CB003DB740 /* ConnectionTile.swift in Sources */,
 				827570D224DAA128008F9800 /* PIAHeaderCollectionViewCell.swift in Sources */,
 				82F41377264E8AC20098FF4B /* SettingOptions.swift in Sources */,
 				E5C507722B0DEC7400200A6A /* UIDevice+WIFI.swift in Sources */,
+				E58A455E2BA8D204002A0704 /* URLRequestMaker.swift in Sources */,
 				E59E8FBC2AEA7A81009278F5 /* GDPRViewController.swift in Sources */,
 				8272C63A2657F54400D846A8 /* DevelopmentSettingsViewController.swift in Sources */,
+				E58A457A2BAA290F002A0704 /* TokenProvider.swift in Sources */,
 				DD9329A3237AFD0A0025B6BC /* ShowQuickSettingsViewController.swift in Sources */,
 				DD606ABD21C904BB00E0781D /* PIAHotspotHelper.swift in Sources */,
+				E58A45532BA8CD8F002A0704 /* URLSessionHTTPClient.swift in Sources */,
 				827570D924DAB6E4008F9800 /* NetworkFooterCollectionViewCell.swift in Sources */,
 				0EFDC1C71FE35B78007C0B9B /* Macros+App.swift in Sources */,
 				0ECC1E421FDB45100039891D /* AboutViewController.swift in Sources */,
@@ -4669,6 +4784,7 @@
 				6924831B2AB045A5002A0407 /* PIAWidgetAttributes.swift in Sources */,
 				DD9706A5224262BF00630220 /* QuickSettingsTile.swift in Sources */,
 				E5217F672AEAF94C00123442 /* SwiftGen+Assets.swift in Sources */,
+				E58A45552BA8CDAA002A0704 /* Foundation+Protocols.swift in Sources */,
 				82CAB8E9255C0CB000BB08EF /* MessagesTile.swift in Sources */,
 				DD3B504424B7576F0002F4B5 /* Card.swift in Sources */,
 				82183D7C2500FD460033023F /* String+Substrings.swift in Sources */,
@@ -4678,6 +4794,7 @@
 				829EB51225359DBB003E74DD /* DedicatedIpRowViewCell.swift in Sources */,
 				DDFCFA9521E892130081F235 /* RegionTile.swift in Sources */,
 				0EFDC1E71FE4ABAA007C0B9B /* Notification+App.swift in Sources */,
+				E58A45512BA8CC72002A0704 /* HTTPClient.swift in Sources */,
 				E5F52A1C2A8A5E1E00828883 /* IPv4Address.swift in Sources */,
 				827570E224DAC2C6008F9800 /* CustomNetworkCollectionViewCell.swift in Sources */,
 				DD918577246BFA7F006B3A2B /* RatingManager.swift in Sources */,
@@ -4695,6 +4812,7 @@
 				0E492C681FE60907007F23DF /* Flags.swift in Sources */,
 				DD172A972254C35000071CFB /* FavoriteServersTile.swift in Sources */,
 				0EE14D191FF15812008D9AC2 /* ModalNavigationSegue.swift in Sources */,
+				E58A45582BA8D083002A0704 /* LoginURLRequestMaker.swift in Sources */,
 				E59E8FBA2AEA7A81009278F5 /* RestoreSignupViewController.swift in Sources */,
 				E5217F432AEAC7A900123442 /* Theme.swift in Sources */,
 				826BE8EF253861BE002339F3 /* DedicatedRegionCell.swift in Sources */,
@@ -4706,6 +4824,7 @@
 				E5C507702B0DEC2400200A6A /* AutolayoutViewController.swift in Sources */,
 				82CAB8F3255C0CD100BB08EF /* MessagesTileCollectionViewCell.swift in Sources */,
 				E5217F462AEACE0200123442 /* NavigationLogoView.swift in Sources */,
+				E58A45622BA8E373002A0704 /* LoginProvider.swift in Sources */,
 				E59E8FB02AEA7A81009278F5 /* MagicLinkLoginViewController.swift in Sources */,
 				0E3A352D1FD9CDC5000B0F99 /* Theme+App.swift in Sources */,
 				DD07AACD242CBFF3000EE1A3 /* AddEmailToAccountViewController.swift in Sources */,
@@ -4714,6 +4833,7 @@
 				DDB6B95421C95CD400DE8C5F /* EnumsBuilder.swift in Sources */,
 				0E9AEA6320683FDF00B6E59A /* AboutComponent.swift in Sources */,
 				821674F22678A1BE0028E4FD /* SettingsDelegate.swift in Sources */,
+				E58A45752BAA28D4002A0704 /* ValidateQRLoginUseCase.swift in Sources */,
 				82CAB8B1255B050000BB08EF /* MessagesCommands.swift in Sources */,
 				DD4E84582243BD1200929B39 /* DashboardCollectionViewUtil.swift in Sources */,
 				DD74695B217F07AC00B7BD73 /* DNSList.swift in Sources */,
@@ -4755,6 +4875,7 @@
 				0E441E262055AEDF007528D5 /* ThemeStrategy+App.swift in Sources */,
 				8272C62D2657B46100D846A8 /* NetworkSettingsViewController.swift in Sources */,
 				DD76292221ECCD5C0092DF50 /* UsageTile.swift in Sources */,
+				E58A45742BAA28D4002A0704 /* ValidateQRLoginUseCase.swift in Sources */,
 				DDD65313247E66AD00F0A897 /* CoordinatesFinder.swift in Sources */,
 				DDD271DE21D616AA00B6D20F /* Server+Favorite.swift in Sources */,
 				DD125DC521E77046004ECCB6 /* QuickConnectTile.swift in Sources */,
@@ -4770,9 +4891,11 @@
 				E5C5076F2B0D61B800200A6A /* PurchaseViewController.swift in Sources */,
 				0E7361E81FD98C3400706BFF /* AccountViewController.swift in Sources */,
 				DD1C13A421E6743F004004B3 /* TileFlowLayout.swift in Sources */,
+				E58A45612BA8E371002A0704 /* LoginProvider.swift in Sources */,
 				DD76291D21ECCD510092DF50 /* UsageTileCollectionViewCell.swift in Sources */,
 				E59E8FC52AEA7A81009278F5 /* TermsAndConditionsViewController.swift in Sources */,
 				E59E8FB52AEA7A81009278F5 /* GetStartedViewController.swift in Sources */,
+				E58A45542BA8CDA9002A0704 /* Foundation+Protocols.swift in Sources */,
 				E59E8F972AEA7A5A009278F5 /* AutolayoutViewController.swift in Sources */,
 				E5217F722AEB055D00123442 /* Client+Storyboard.swift in Sources */,
 				DD9706AB224262E000630220 /* QuickSettingsTileCollectionViewCell.swift in Sources */,
@@ -4785,6 +4908,7 @@
 				0EB9ED1A1FDA1C4D00D1214D /* SettingsViewController.swift in Sources */,
 				0EB966741FDF0D6E0086ABC2 /* ServerProvider+UI.swift in Sources */,
 				DD76291121ECBD8B0092DF50 /* SubscriptionTileCollectionViewCell.swift in Sources */,
+				E58A45502BA8CC72002A0704 /* HTTPClient.swift in Sources */,
 				8272C6332657EE4E00D846A8 /* AutomationSettingsViewController.swift in Sources */,
 				E59E8FBB2AEA7A81009278F5 /* GDPRViewController.swift in Sources */,
 				DDF7F755240D35BA00A671C7 /* CustomServerSettingsViewController.swift in Sources */,
@@ -4808,6 +4932,7 @@
 				8272C6392657F54400D846A8 /* DevelopmentSettingsViewController.swift in Sources */,
 				0EFB839020209CF200980F69 /* VPNPermissionViewController.swift in Sources */,
 				7ECBB8DD27B6C4F500C0C774 /* UserSurveyManager.swift in Sources */,
+				E58A45572BA8D05C002A0704 /* LoginURLRequestMaker.swift in Sources */,
 				821674F12678A1BE0028E4FD /* SettingsDelegate.swift in Sources */,
 				0EFDC1D71FE46177007C0B9B /* SensitiveOperation.swift in Sources */,
 				E59E8FAB2AEA7A81009278F5 /* SignupSuccessViewController.swift in Sources */,
@@ -4833,11 +4958,13 @@
 				824C530824C046CB003DB740 /* ConnectionTile.swift in Sources */,
 				827570D124DAA128008F9800 /* PIAHeaderCollectionViewCell.swift in Sources */,
 				E51693C62AFAD3550089FB8F /* UIDevice+WIFI.swift in Sources */,
+				E58A455D2BA8D1E8002A0704 /* URLRequestMaker.swift in Sources */,
 				DD125DD121E7A694004ECCB6 /* ServerButton.swift in Sources */,
 				DD9329A2237AFD0A0025B6BC /* ShowQuickSettingsViewController.swift in Sources */,
 				69B70ABE2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */,
 				827570D824DAB6E4008F9800 /* NetworkFooterCollectionViewCell.swift in Sources */,
 				E5217F6F2AEB042800123442 /* ClientError+Localization.swift in Sources */,
+				E58A45642BA8ECC6002A0704 /* ValidateQRLoginViewController.swift in Sources */,
 				E5F52A1F2A8A614900828883 /* NetworkMonitor.swift in Sources */,
 				E59E8FB12AEA7A81009278F5 /* LoginViewController.swift in Sources */,
 				DD3B504324B7576F0002F4B5 /* Card.swift in Sources */,
@@ -4892,6 +5019,8 @@
 				0E3A352C1FD9CDC5000B0F99 /* Theme+App.swift in Sources */,
 				82CAB8E8255C0CB000BB08EF /* MessagesTile.swift in Sources */,
 				8272C6362657F23400D846A8 /* HelpSettingsViewController.swift in Sources */,
+				E58A45792BAA290F002A0704 /* TokenProvider.swift in Sources */,
+				E58A45702BAA28AE002A0704 /* ValidateQRLoginFactory.swift in Sources */,
 				DD1C139E21E6623D004004B3 /* XIBSetup.swift in Sources */,
 				DD07AACC242CBFF2000EE1A3 /* AddEmailToAccountViewController.swift in Sources */,
 				8272C62726540B2100D846A8 /* ProtocolSettingsViewController.swift in Sources */,
@@ -4908,6 +5037,7 @@
 				E59E8FAD2AEA7A81009278F5 /* SignupInProgressViewController.swift in Sources */,
 				E5217F4B2AEAD29F00123442 /* PurchasePlanCell.swift in Sources */,
 				DD4E84572243BD1200929B39 /* DashboardCollectionViewUtil.swift in Sources */,
+				E58A45522BA8CD8F002A0704 /* URLSessionHTTPClient.swift in Sources */,
 				829EB507253598BD003E74DD /* DedicatedIpViewController.swift in Sources */,
 				DD74695A217F07AC00B7BD73 /* DNSList.swift in Sources */,
 				E59E8FBD2AEA7A81009278F5 /* SignupFailureViewController.swift in Sources */,
@@ -5063,7 +5193,6 @@
 				693B9A402B7571ED00757A41 /* SearchControllerButton.swift in Sources */,
 				69AB492C2B63C73000C780CD /* FavoriteRegionUseCase.swift in Sources */,
 				69FF0B042B3AD1D40074AA04 /* SelectedServerView.swift in Sources */,
-				E520FD172BA3972F00D06C03 /* LoginQRProviderType.swift in Sources */,
 				69A226B82B3079EA0065EDDB /* PIA+String.swift in Sources */,
 				69F1C29C2B2B299300E924AE /* VpnConnectionUseCase.swift in Sources */,
 				693622152B698B9200AE3C51 /* SearchedRegionsAvailability.swift in Sources */,
@@ -5166,6 +5295,7 @@
 				696ECB742B7E2748006276EA /* LogOutUseCase.swift in Sources */,
 				E5C5077A2B0E144E00200A6A /* PIA_VPN_tvOSApp.swift in Sources */,
 				69F1C2952B2B216100E924AE /* PIA+Animation.swift in Sources */,
+				E58A455F2BA8D206002A0704 /* URLRequestMaker.swift in Sources */,
 				69FA73DB2B7D509E002300B3 /* SettingsFactory.swift in Sources */,
 				69A226B52B3075AB0065EDDB /* RootContainerViewModel.swift in Sources */,
 				697A5F4D2B514D9600661977 /* UserActivatedContainerView.swift in Sources */,
@@ -6855,7 +6985,7 @@
 			repositoryURL = "https://github.com/pia-foss/mobile-ios-library.git";
 			requirement = {
 				kind = revision;
-				revision = b0e0707c83db9d5f2f697bac97f1554f901736b7;
+				revision = 8b1fd35b527ff7331b079f64da46a98389dab9c9;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

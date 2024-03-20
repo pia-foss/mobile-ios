@@ -166,6 +166,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             } else {
                 connectAfter(milliseconds: defaultMilliseconds)
             }
+        } else if url.absoluteString.starts(with: AppConstants.QRSignin.url) {
+            let token = url.absoluteString[AppConstants.QRSignin.url.count...]
+            Client.configuration.tvOSBindToken = token
+            
+            if let dashboardViewController = self.topViewControllerWithRootViewController(rootViewController: self.window?.rootViewController) as? DashboardViewController {
+                if let apiToken = Client.providers.accountProvider.apiToken,
+                    let viewController = ValidateQRLoginFactory.makeValidateQRLoginViewController(apiToken: apiToken, tvOSBindToken: token) {
+                    viewController.modalPresentationStyle = .fullScreen
+                    dashboardViewController.present(viewController, animated: true)
+                }
+            }
         }
         
         guard let host = url.host else {

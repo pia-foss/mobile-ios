@@ -21,5 +21,11 @@ class URLSessionMock: URLSessionType {
         return (dataTaskResultData, dataTaskResultResponse)
     }
     
+    func data(for request: URLRequest) async throws -> (Data, URLResponse) {
+        return (dataTaskResultData, dataTaskResultResponse)
+    }
     
+    func dataTask(with request: URLRequest, completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+        URLSession.shared.dataTask(with: request)
+    }
 }

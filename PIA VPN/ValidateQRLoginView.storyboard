@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--ValidateQR Login View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="ValidateQRLoginViewController" id="Y6W-OH-hqX" customClass="ValidateQRLoginViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav-logo" translatesAutoresizingMaskIntoConstraints="NO" id="4Ka-Vf-yXd">
+                                <rect key="frame" x="115.66666666666669" y="327.66666666666669" width="162" height="82"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="162" id="0D3-w2-UOD"/>
+                                    <constraint firstAttribute="height" constant="82" id="6eM-ea-ORc"/>
+                                </constraints>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="8Wl-ec-Wa0">
+                                <rect key="frame" x="186.66666666666666" y="416.66666666666669" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="4Ka-Vf-yXd" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="c0x-NO-ZkS"/>
+                            <constraint firstItem="8Wl-ec-Wa0" firstAttribute="top" secondItem="4Ka-Vf-yXd" secondAttribute="bottom" constant="7.3300000000000001" id="gUX-8Y-msN"/>
+                            <constraint firstItem="4Ka-Vf-yXd" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" constant="-70" id="otj-b9-sbc"/>
+                            <constraint firstItem="8Wl-ec-Wa0" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="qoD-y6-MHb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="loadingSpinner" destination="8Wl-ec-Wa0" id="giC-Lr-fmV"/>
+                        <outlet property="piaLogoImageView" destination="4Ka-Vf-yXd" id="adK-oN-VSk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="261.83206106870227" y="-40.140845070422536"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="nav-logo" width="422" height="128"/>
+    </resources>
+</document>

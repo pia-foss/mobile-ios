@@ -10,12 +10,13 @@ import Foundation
 import PIALibrary
 
 class URLSessionHTTPClient: HTTPClientType {
-    private let session: URLSession
+    private let session: URLSessionType
     
-    init(session: URLSession = .shared) {
+    init(session: URLSessionType = URLSession.shared) {
         self.session = session
     }
     
+    @available(iOS 13.0.0, *)
     func makeRequest(request: URLRequest) async throws -> Data {
         do {
             let (data, response) = try await session.data(for: request)
@@ -26,5 +27,27 @@ class URLSessionHTTPClient: HTTPClientType {
         } catch {
             throw error
         }
+    }
+    
+    func makeRequest(request: URLRequest, completion: @escaping (Result<(Data, URLResponse), ClientError>) -> Void ) {
+        session.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(ClientError.unsupported))
+                return
+            }
+            
+            guard let data = data, let response = response as? HTTPURLResponse else {
+                completion(.failure(ClientError.malformedResponseData))
+                return
+            }
+            
+            guard response.statusCode == 200 else {
+                completion(.failure(ClientError.invalidParameter))
+                return
+            }
+            
+            completion(.success((data, response)))
+            
+        }.resume()
     }
 }

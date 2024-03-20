@@ -25,4 +25,6 @@ class HTTPClientMock: HTTPClientType {
                 throw error
         }
     }
+    
+    func makeRequest(request: URLRequest, completion: @escaping (Result<(Data, URLResponse), ClientError>) -> Void) {}
 }
