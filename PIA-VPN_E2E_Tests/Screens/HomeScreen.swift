@@ -62,57 +62,66 @@ extension XCUIApplication {
     }
     
     func logOut() {
-        guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else { return }
-        dashboardMenuButton.tap()
+        if(welcomeLoginButton.waitForElementToAppear()) {
+            return
+        }
         
-        guard logOutButton.waitForExistence(timeout: defaultTimeout) else {return}
+        dashboardMenuButton.waitForElementToAppear()
+        dashboardMenuButton.tap()
+        logOutButton.waitForElementToAppear()
         logOutButton.tap()
-        guard confirmationDialogButton.waitForExistence(timeout: shortTimeout) else{return}
+        confirmationDialogButton.waitForElementToAppear()
         confirmationDialogButton.tap()
-        WaitHelper.waitForElementToBeVisible(welcomeLoginButton, timeout: defaultTimeout,
-                                                 onSuccess:{print("successful logout")}, onFailure:{error in print("welcomeLoginButton is not visible")})
+        XCTAssert(welcomeLoginButton.waitForElementToAppear())
     }
     
     func navigateToHome(using backToHomeButton: XCUIElement) {
-        guard backToHomeButton.waitForExistence(timeout: defaultTimeout) else {return}
+        backToHomeButton.waitForElementToAppear()
         backToHomeButton.tap()
-        WaitHelper.waitForElementToBeVisible(dashboardMenuButton, timeout: defaultTimeout,
-                                             onSuccess:{print("successful navigation to Home screen")}, onFailure:{error in print("dashboardMenuButton is not visible")})
+        XCTAssert(connectionButton.waitForElementToAppear())
     }
     
     func enableVPNKillSwitchOnHome() {
-        if(enableVPNKillSwitchButton.waitForExistence(timeout: defaultTimeout)) {
-            enableVPNKillSwitchButton.tap()
+        if(disableVPNKillSwitchButton.waitForElementToAppear()){
+            return
         }
+        enableVPNKillSwitchButton.tap()
     }
     
     func disableVPNKillSwitchOnHome() {
-        if(disableVPNKillSwitchButton.waitForExistence(timeout: defaultTimeout)) {
-            disableVPNKillSwitchButton.tap()
+        if(enableVPNKillSwitchButton.waitForElementToAppear()){
+            return
         }
+        disableVPNKillSwitchButton.tap()
     }
     
     func enableNetworkManagementOnHome() {
-        if(enableNetworkManagementButton.waitForExistence(timeout: defaultTimeout)) {
-            enableNetworkManagementButton.tap()
+        if(disableNetworkManagementButton.waitForElementToAppear()) {
+            return
         }
+        enableNetworkManagementButton.tap()
     }
     
     func disableNetworkManagementOnHome() {
-        if(disableNetworkManagementButton.waitForExistence(timeout: defaultTimeout)) {
-            disableNetworkManagementButton.tap()
+        if(enableNetworkManagementButton.waitForElementToAppear()) {
+            return
         }
+        disableNetworkManagementButton.tap()
     }
     
     func connectToVPN() {
-        if (disconnectedStatusLabel.waitForExistence(timeout: defaultTimeout)) {
-            connectionButton.tap()
+        if (connectedStatusLabel.waitForElementToAppear()) {
+            return
         }
+        connectionButton.tap()
+        XCTAssert(connectedStatusLabel.waitForElementToAppear())
     }
     
     func disconnectToVPN() {
-        if (connectedStatusLabel.waitForExistence(timeout: defaultTimeout)) {
-            connectionButton.tap()
+        if (disconnectedStatusLabel.waitForElementToAppear()) {
+            return
         }
+        connectionButton.tap()
+        XCTAssert(disconnectedStatusLabel.waitForElementToAppear())
     }
 }

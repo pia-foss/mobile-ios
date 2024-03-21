@@ -21,8 +21,8 @@ class OnboardingTests:BaseTest {
                     app.logIn(with: CredentialsUtil.credentials(type: .valid))
                     app.acceptVPNPermission()
                     
-                    app.vpnPermissionAlertText.waitForExistence(timeout: app.defaultTimeout)
-                    app.vpnAllowButton.waitForExistence(timeout: app.defaultTimeout)
+                    app.vpnPermissionAlertText.waitForElementToAppear()
+                    app.vpnAllowButton.waitForElementToAppear()
                     app.swipeUp()
                     
                     expect(app.dashboardMenuButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())

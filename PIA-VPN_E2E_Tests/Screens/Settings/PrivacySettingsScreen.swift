@@ -9,6 +9,10 @@
 import XCTest
 
 extension XCUIApplication {
+    var privacyHeader: XCUIElement{
+        staticText(with: "Privacy Features")
+    }
+    
     var vpnKillSwitch: XCUIElement {
         switches(with: "VPN Kill Switch")
     }
@@ -22,26 +26,25 @@ extension XCUIApplication {
     }
     
     func navigateToPrivacySettings() {
-        guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else { return }
-        dashboardMenuButton.tap()
-        
-        guard settingsButton.waitForExistence(timeout: defaultTimeout) else {return}
-        settingsButton.tap()
-        
-        guard privacySettingsButton.waitForExistence(timeout: defaultTimeout) else {return}
+        navigateToSettings()
+        privacySettingsButton.waitForElementToAppear()
         privacySettingsButton.tap()
+        XCTAssert(privacyHeader.waitForElementToAppear())
     }
     
     func enableVPNKillSwitch(){
-        if ((vpnKillSwitch.value as! String) != "1") {
-            vpnKillSwitch.tap()
+        if ((vpnKillSwitch.value as! String) == "1") {
+            return
         }
+        vpnKillSwitch.tap()
     }
     
     func disableVPNKillSwitch(){
-        if ((vpnKillSwitch.value as! String) != "0") {
-            vpnKillSwitch.tap()
+        if ((vpnKillSwitch.value as! String) == "0") {
+            return
         }
+        vpnKillSwitch.tap()
+        
         if(button(with: "CLOSE").exists) {
             button(with: "CLOSE").tap()
         }

@@ -9,6 +9,10 @@
 import XCTest
 
 extension XCUIApplication {
+    var helpHeader:XCUIElement {
+        staticText(with: "Help")
+    }
+    
     var sendDebugButton: XCUIElement {
         staticText(with: "Send Debug Log to support")
     }
@@ -38,27 +42,25 @@ extension XCUIApplication {
     }
     
     func navigateToHelpSettings() {
-        guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else { return }
-        dashboardMenuButton.tap()
-        
-        guard settingsButton.waitForExistence(timeout: defaultTimeout) else {return}
-        settingsButton.tap()
-        
-        guard helpSettingsButton.waitForExistence(timeout: defaultTimeout) else {return}
+        navigateToSettings()
+        helpSettingsButton.waitForElementToAppear()
         helpSettingsButton.tap()
+        XCTAssert(helpHeader.waitForElementToAppear())
     }
     
     func enableHelpImprovePIA() {
-        guard helpImprovePIASwitch.exists else {return}
-        if (helpImprovePIASwitch.value as! String == "0") {
-            helpImprovePIASwitch.tap()
+        helpImprovePIASwitch.waitForElementToAppear()
+        if (helpImprovePIASwitch.value as! String == "1") {
+            return
         }
+        helpImprovePIASwitch.tap()
     }
     
     func disableHelpImprovePIA() {
-        guard helpImprovePIASwitch.exists else {return}
-        if (helpImprovePIASwitch.value as! String == "1") {
-            helpImprovePIASwitch.tap()
+        helpImprovePIASwitch.waitForElementToAppear()
+        if (helpImprovePIASwitch.value as! String == "0") {
+            return
         }
+        helpImprovePIASwitch.tap()
     }
 }

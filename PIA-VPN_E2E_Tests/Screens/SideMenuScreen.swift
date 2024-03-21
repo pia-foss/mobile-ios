@@ -17,18 +17,12 @@ extension XCUIApplication {
         staticText(with: "Settings")
     }
   
-    var dedicatedIPButton: XCUIElement {
-        staticText(with: "Dedicated IP")
-    }
-  
     func selectSideMenu(menuName: String) {
-           guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else { return }
-           dashboardMenuButton.tap()
-           
-        guard staticText(with: menuName).waitForExistence(timeout: defaultTimeout) else {return}
+        dashboardMenuButton.waitForElementToAppear()
+        dashboardMenuButton.tap()
+        XCTAssert(staticText(with: menuName).waitForElementToAppear())
         staticText(with: menuName).tap()
-           
-           WaitHelper.waitForElementToBeVisible(staticText(with: menuName), timeout: defaultTimeout,
-                                                onSuccess:{print("successful navigation")}, onFailure:{error in print("side menu is not visible")})
-       }
+        
+        XCTAssert(staticText(with: menuName).waitForElementToAppear())
+    }
 }

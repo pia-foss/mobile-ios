@@ -9,6 +9,10 @@
 import XCTest
 
 extension XCUIApplication {
+    var generalHeader: XCUIElement{
+        staticText(with: "General")
+    }
+    
     var connectSiriButton: XCUIElement {
         staticText(with: "'Connect' Siri Shortcut")
     }
@@ -30,25 +34,23 @@ extension XCUIApplication {
     }
     
     func navigateToGeneralSettings() {
-        guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else { return }
-        dashboardMenuButton.tap()
-        
-        guard settingsButton.waitForExistence(timeout: defaultTimeout) else {return}
-        settingsButton.tap()
-        
-        guard generalSettingsButton.waitForExistence(timeout: defaultTimeout) else {return}
+        navigateToSettings()
+        generalSettingsButton.waitForElementToAppear()
         generalSettingsButton.tap()
+        XCTAssert(generalHeader.waitForElementToAppear())
     }
     
     func enableGeoLocatedRegionSwitch() {
-        if ((geoLocatedRegionsSwitch.value as! String) != "1") {
-            geoLocatedRegionsSwitch.tap()
+        if ((geoLocatedRegionsSwitch.value as! String) == "1") {
+            return
         }
+        geoLocatedRegionsSwitch.tap()
     }
     
     func disableGeoLocatedRegionSwitch() {
-        if ((geoLocatedRegionsSwitch.value as! String) != "0") {
-            geoLocatedRegionsSwitch.tap()
+        if ((geoLocatedRegionsSwitch.value as! String) == "0") {
+            return
         }
+        geoLocatedRegionsSwitch.tap()
     }
 }

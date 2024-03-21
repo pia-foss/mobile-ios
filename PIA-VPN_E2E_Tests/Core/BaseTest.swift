@@ -27,7 +27,11 @@ class BaseTest: QuickSpec {
         
         beforeEach {
             app.launch()
-            
+            if(!app.connectionButton.waitForExistence(timeout: app.defaultTimeout)) {
+                app.navigateToLoginScreen()
+                app.logIn(with: CredentialsUtil.credentials(type: .valid))
+                app.acceptVPNPermission()
+            }
         }
         
         afterEach {

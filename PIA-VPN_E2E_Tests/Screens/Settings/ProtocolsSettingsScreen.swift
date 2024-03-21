@@ -9,6 +9,10 @@
 import XCTest
 
 extension XCUIApplication {
+    var protocolsHeader: XCUIElement{
+        staticText(with: "Protocols")
+    }
+    
     var protocolSelectionButton: XCUIElement {
         staticText(with: "Protocol Selection")
     }
@@ -66,56 +70,59 @@ extension XCUIApplication {
     }
     
     func navigateToProtocolSettings() {
-        guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else {return}
-        dashboardMenuButton.tap()
-        
-        guard settingsButton.waitForExistence(timeout: defaultTimeout) else {return}
-        settingsButton.tap()
-        
-        guard protocolsSettingsButton.waitForExistence(timeout: defaultTimeout) else {return}
+        navigateToSettings()
+        protocolsSettingsButton.waitForElementToAppear()
         protocolsSettingsButton.tap()
+        XCTAssert(protocolsHeader.waitForElementToAppear())
     }
     
     func selectProtocol(protocolName: String) {
-        guard protocolSelectionButton.waitForExistence(timeout: defaultTimeout) else {return}
+        protocolSelectionButton.waitForElementToAppear()
         protocolSelectionButton.tap()
-        guard protocolSelectionPopover.waitForExistence(timeout: defaultTimeout) else {return}
+        protocolSelectionPopover.waitForElementToAppear()
         protocolSelectionPopover.staticTexts[protocolName].tap()
+        protocolSelectionPopover.waitForElementToBeHidden()
     }
     
     func selectDataEncryption(dataEncryption: String) {
         dataEncryptionButton.tap()
-        guard dataEncryptionPopover.waitForExistence(timeout: defaultTimeout) else {return}
+        dataEncryptionPopover.waitForElementToAppear()
         dataEncryptionPopover.staticTexts[dataEncryption].tap()
+        dataEncryptionPopover.waitForElementToBeHidden()
     }
     
     func selectHandshake(handshake: String) {
         handshakeButton.tap()
-        guard handshakePopover.waitForExistence(timeout: defaultTimeout) else {return}
+        handshakePopover.waitForElementToAppear()
         handshakePopover.staticTexts[handshake].tap()
+        handshakePopover.waitForElementToBeHidden()
     }
   
     func selectTransport(transport: String) {
         transportButton.tap()
-        guard transportPopover.waitForExistence(timeout: defaultTimeout) else {return}
+        transportPopover.waitForElementToAppear()
         transportPopover.staticTexts[transport].tap()
+        transportPopover.waitForElementToBeHidden()
     }
     
     func selectRemotePort(port: String) {
         remotePortButton.tap()
-        guard remotePortPopover.waitForExistence(timeout: defaultTimeout) else {return}
+        remotePortPopover.waitForElementToAppear()
         remotePortPopover.staticTexts[port].tap()
+        remotePortPopover.waitForElementToBeHidden()
     }
     
     func enableSmallPackets() {
-        if ((useSmallPacketsSwitch.value as! String) != "1") {
-            useSmallPacketsSwitch.tap()
+        if ((useSmallPacketsSwitch.value as! String) == "1") {
+            return
         }
+        useSmallPacketsSwitch.tap()
     }
     
     func disableSmallPackets() {
-        if ((useSmallPacketsSwitch.value as! String) != "0") {
-            useSmallPacketsSwitch.tap()
+        if ((useSmallPacketsSwitch.value as! String) == "0") {
+            return
         }
+        useSmallPacketsSwitch.tap()
     }
 }

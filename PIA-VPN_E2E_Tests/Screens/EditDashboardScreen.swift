@@ -38,37 +38,39 @@ extension XCUIApplication {
     }
     
     func navigateToEditDashboardScreen() {
-        guard dashboardEditButton.waitForExistence(timeout: defaultTimeout) else { return }
+        dashboardEditButton.waitForElementToAppear()
         dashboardEditButton.tap()
-        WaitHelper.waitForElementToNotBeVisible(regionTileCollectionViewCell, timeout: defaultTimeout, onSuccess: {}, onFailure: {error in print("RegionTileCollectionViewCell is not visible")})
+        XCTAssert(connectionButton.waitForElementToBeHidden())
     }
     
     func addTile(tileName: XCUIElement) {
         let addTileButton = tileName.buttons["Tap to add this tile to the dashboard"]
         let removeTileButton = tileName.buttons["Tap to remove this tile from the dashboard"]
         
-        if(addTileButton.waitForExistence(timeout: defaultTimeout)) {
-            addTileButton.tap()
+        if (removeTileButton.waitForElementToAppear()) {
+            return
         }
+        addTileButton.tap()
         
-        WaitHelper.waitForElementToBeVisible(removeTileButton, timeout: defaultTimeout, onSuccess: {}, onFailure: {error in print("removeTileButton is not visible")})
-        WaitHelper.waitForElementToNotBeVisible(addTileButton, timeout: defaultTimeout, onSuccess: {}, onFailure: {error in print("addTileButton is visible")})
+        XCTAssert(removeTileButton.waitForElementToAppear())
+        XCTAssert(addTileButton.waitForElementToBeHidden())
     }
     
     func removeTile(tileName: XCUIElement) {
         let addTileButton = tileName.buttons["Tap to add this tile to the dashboard"]
         let removeTileButton = tileName.buttons["Tap to remove this tile from the dashboard"]
         
-        if(removeTileButton.waitForExistence(timeout: defaultTimeout)) {
-            removeTileButton.tap()
+        if (addTileButton.waitForElementToAppear()) {
+            return
         }
+        removeTileButton.tap()
         
-        WaitHelper.waitForElementToBeVisible(addTileButton, timeout: defaultTimeout, onSuccess: {}, onFailure: {error in print("removeTileButton is not visible")})
-        WaitHelper.waitForElementToNotBeVisible(removeTileButton, timeout: defaultTimeout, onSuccess: {}, onFailure: {error in print("addTileButton is visible")})
+        XCTAssert(addTileButton.waitForElementToAppear())
+        XCTAssert(removeTileButton.waitForElementToBeHidden())
     }
     
     func moveTile(firstTileName: XCUIElement, secondTileName: XCUIElement) {
         let moveButton = firstTileName.images["drag-drop-indicator-light"]
-        moveButton.press(forDuration: 1.0, thenDragTo: secondTileName)
+        moveButton.press(forDuration: 2.0, thenDragTo: secondTileName)
     }
 }

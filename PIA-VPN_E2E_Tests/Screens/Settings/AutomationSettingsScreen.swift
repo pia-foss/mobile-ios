@@ -9,18 +9,18 @@
 import XCTest
 
 extension XCUIApplication {
+    var automationHeader: XCUIElement{
+        staticText(with: "Automation")
+    }
+
     var enableAutomationSwitch: XCUIElement{
         switches(with: "Enable Automation")
     }
     
     func navigateToAutomationSettings() {
-        guard dashboardMenuButton.waitForExistence(timeout: defaultTimeout) else { return }
-        dashboardMenuButton.tap()
-        
-        guard settingsButton.waitForExistence(timeout: defaultTimeout) else {return}
-        settingsButton.tap()
-        
-        guard automationSettingsButton.waitForExistence(timeout: defaultTimeout) else {return}
+        navigateToSettings()
+        automationSettingsButton.waitForElementToAppear()
         automationSettingsButton.tap()
+        XCTAssert(automationHeader.waitForElementToAppear())
     }
 }

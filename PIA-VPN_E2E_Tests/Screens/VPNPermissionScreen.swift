@@ -27,7 +27,8 @@ extension XCUIApplication {
     }
     
     func acceptVPNPermission() {
-        guard vpnPermissionButton.waitForExistence(timeout: defaultTimeout) else {return}
+        vpnPermissionButton.waitForElementToAppear()
         vpnPermissionButton.tap()
+        connectionButton.waitForElementToAppear()
     }
 }
