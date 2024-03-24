@@ -35,7 +35,14 @@ class LoginProvider: LoginProviderType {
                 return
             }
             
-            completion(.success(userAccountMapper.map(userAccount: userAccount)))
+            let user = userAccountMapper.map(userAccount: userAccount)
+            
+            guard userAccount.info?.isExpired == true else {
+                completion(.success(user))
+                return
+            }
+            
+            completion(.failure(ClientError.expired))
         }
     }
 }

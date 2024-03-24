@@ -27,7 +27,8 @@ final class LoginViewModelTests: XCTestCase {
                                  checkLoginAvailability: checkLoginAvailabilityMock,
                                  validateLoginCredentials: ValidateCredentialsFormat(),
                                  errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()),
-                                 onSuccessAction: .navigate(router: appRouterSpy, destination: OnboardingDestinations.installVPNProfile))
+                                 onSuccessAction: .navigate(router: appRouterSpy, destination: OnboardingDestinations.installVPNProfile),
+                                 onFailureAction: .navigate(router: AppRouter.shared, destination: AuthenticationDestinations.expired))
         
         var cancellables = Set<AnyCancellable>()
         let expectation = expectation(description: "Waiting for shouldShowErrorMessage property to be updated")
@@ -71,7 +72,8 @@ final class LoginViewModelTests: XCTestCase {
                                  checkLoginAvailability: checkLoginAvailabilityMock,
                                  validateLoginCredentials: ValidateCredentialsFormat(),
                                  errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()),
-                                 onSuccessAction: .navigate(router: appRouterSpy, destination: OnboardingDestinations.installVPNProfile))
+                                 onSuccessAction: .navigate(router: appRouterSpy, destination: OnboardingDestinations.installVPNProfile), 
+                                 onFailureAction: .navigate(router: AppRouter.shared, destination: AuthenticationDestinations.expired))
         
         var cancellables = Set<AnyCancellable>()
         let expectation = expectation(description: "Waiting for shouldShowErrorMessage property to be updated")
@@ -115,7 +117,8 @@ final class LoginViewModelTests: XCTestCase {
                                  checkLoginAvailability: checkLoginAvailabilityMock,
                                  validateLoginCredentials: ValidateCredentialsFormat(),
                                  errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()),
-                                 onSuccessAction: .navigate(router: appRouterSpy, destination: OnboardingDestinations.installVPNProfile))
+                                 onSuccessAction: .navigate(router: appRouterSpy, destination: OnboardingDestinations.installVPNProfile), 
+                                 onFailureAction: .navigate(router: AppRouter.shared, destination: AuthenticationDestinations.expired))
         
         var cancellables = Set<AnyCancellable>()
         let expectation = expectation(description: "Waiting for shouldShowErrorMessage property to be updated")
@@ -160,7 +163,8 @@ final class LoginViewModelTests: XCTestCase {
                                  checkLoginAvailability: checkLoginAvailabilityMock,
                                  validateLoginCredentials: ValidateCredentialsFormat(),
                                  errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()),
-                                 onSuccessAction: .navigate(router: appRouterSpy, destination: OnboardingDestinations.installVPNProfile))
+                                 onSuccessAction: .navigate(router: appRouterSpy, destination: OnboardingDestinations.installVPNProfile), 
+                                 onFailureAction: .navigate(router: AppRouter.shared, destination: AuthenticationDestinations.expired))
         
         var cancellables = Set<AnyCancellable>()
         let expectation = expectation(description: "Waiting for didLoginSuccessfully property to be updated")
@@ -201,7 +205,8 @@ final class LoginViewModelTests: XCTestCase {
                                  checkLoginAvailability: checkLoginAvailabilityMock,
                                  validateLoginCredentials: ValidateCredentialsFormat(),
                                  errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()),
-                                 onSuccessAction: .navigate(router: appRouterSpy, destination: OnboardingDestinations.installVPNProfile))
+                                 onSuccessAction: .navigate(router: appRouterSpy, destination: OnboardingDestinations.installVPNProfile), 
+                                 onFailureAction: .navigate(router: AppRouter.shared, destination: AuthenticationDestinations.expired))
         
         var cancellables = Set<AnyCancellable>()
         let expectation = expectation(description: "Waiting for isAccountExpired property to be updated")
@@ -244,7 +249,8 @@ final class LoginViewModelTests: XCTestCase {
                                  checkLoginAvailability: checkLoginAvailabilityMock,
                                  validateLoginCredentials: ValidateCredentialsFormat(),
                                  errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()),
-                                 onSuccessAction: .navigate(router: appRouterSpy, destination: OnboardingDestinations.installVPNProfile))
+                                 onSuccessAction: .navigate(router: appRouterSpy, destination: OnboardingDestinations.installVPNProfile), 
+                                 onFailureAction: .navigate(router: AppRouter.shared, destination: AuthenticationDestinations.expired))
         
         var cancellables = Set<AnyCancellable>()
         let expectation = expectation(description: "Waiting for shouldShowErrorMessage property to be updated")
