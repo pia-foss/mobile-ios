@@ -22,7 +22,10 @@
         "key" : "PIA_TEST_DEDICATEDIP",
         "value" : "xxx"
       }
-    ]
+    ],
+    "maximumTestRepetitions" : 2,
+    "repeatInNewRunnerProcess" : true,
+    "testRepetitionMode" : "retryOnFailure"
   },
   "testTargets" : [
     {

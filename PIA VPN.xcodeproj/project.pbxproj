@@ -1271,7 +1271,7 @@
 		69CA26B12B59668700E78894 /* RegionsListUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListUseCaseMock.swift; sourceTree = "<group>"; };
 		69E192422B8E14DF00A97286 /* PIA VPN-tvOS.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PIA VPN-tvOS.xctestplan"; sourceTree = "<group>"; };
 		69E192432B8E22FC00A97286 /* PIA-VPN_E2E_Tests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PIA-VPN_E2E_Tests.xctestplan"; sourceTree = "<group>"; };
-		69E192442B8E274500A97286 /* PIA VPN-tvOS_E2E_Tests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PIA VPN-tvOS_E2E_Tests.xctestplan"; sourceTree = "<group>"; };
+		69E192442B8E274500A97286 /* PIA-VPN_tvOS_E2E_Tests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PIA-VPN_tvOS_E2E_Tests.xctestplan"; sourceTree = "<group>"; };
 		69E192462B8E3E8700A97286 /* HelpOptionsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpOptionsViewModelTests.swift; sourceTree = "<group>"; };
 		69E192482B8E4BCC00A97286 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		69E1924A2B8E63DD00A97286 /* Licences.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Licences.plist; path = "PIA VPN-tvOS/Resources/Licences.plist"; sourceTree = SOURCE_ROOT; };
@@ -2045,7 +2045,7 @@
 			isa = PBXGroup;
 			children = (
 				E58A45592BA8D1BD002A0704 /* PIA Common */,
-				69E192442B8E274500A97286 /* PIA VPN-tvOS_E2E_Tests.xctestplan */,
+				69E192442B8E274500A97286 /* PIA-VPN_tvOS_E2E_Tests.xctestplan */,
 				69E192432B8E22FC00A97286 /* PIA-VPN_E2E_Tests.xctestplan */,
 				69E192422B8E14DF00A97286 /* PIA VPN-tvOS.xctestplan */,
 				8269A6ED251CB5ED000B4DBF /* PIAWidgetExtension.entitlements */,
