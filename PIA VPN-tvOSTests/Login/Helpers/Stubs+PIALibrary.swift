@@ -17,10 +17,38 @@ extension PIALibrary.UserAccount {
         return PIALibrary.UserAccount(credentials: credentials,
                                       info: AccountInfo.makeStub())
     }
+    
+    static func makeExpiredStub() -> PIALibrary.UserAccount {
+        let credentials = PIALibrary.Credentials(username: "username",
+                                                 password: "password")
+        return PIALibrary.UserAccount(credentials: credentials,
+                                      info: AccountInfo.makeExpiredStub())
+    }
 }
 
 extension PIALibrary.AccountInfo {
     static func makeStub() -> PIALibrary.AccountInfo {
+        
+        let account = AccountInformation(active: true,
+                                         canInvite: true,
+                                         canceled: true,
+                                         daysRemaining: 0,
+                                         email: "email",
+                                         expirationTime: Int32(Date(timeIntervalSinceNow: 800).timeIntervalSince1970),
+                                         expireAlert: false,
+                                         expired: false,
+                                         needsPayment: true,
+                                         plan: "monthly",
+                                         productId: "productId",
+                                         recurring: true,
+                                         renewUrl: "renewUrl",
+                                         renewable: true,
+                                         username: "username")
+        
+        return PIALibrary.AccountInfo(accountInformation: account)
+    }
+    
+    static func makeExpiredStub() -> PIALibrary.AccountInfo {
         
         let account = AccountInformation(active: true,
                                          canInvite: true,

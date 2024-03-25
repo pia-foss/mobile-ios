@@ -69,6 +69,20 @@ final class RootContainerViewModelTests: XCTestCase {
         XCTAssertEqual(fixture.appRouterSpy.requests, [AppRouterSpy.Request.goBackToRoot])
     }
     
+    func testState_WhenUserIsAuthenticatedAndAccountIsExpired() {
+        // GIVEN that the user is logged in
+        fixture.accountProvierMock.isLoggedIn = true
+        
+        // AND GIVEN user account is expired
+        fixture.accountProvierMock.isExpired = true
+        
+        // WHEN the app is launched
+        instantiateSut()
+        
+        // THEN the state becomes 'activatedNotOnboarded'
+        XCTAssertEqual(sut.state, .expired)
+    }
+    
     func testState_WhenUserIsAuthenticatedAndConnectionStatsPermissonNotShown() {
         // GIVEN that the user is logged in
         fixture.accountProvierMock.isLoggedIn = true
@@ -147,6 +161,48 @@ final class RootContainerViewModelTests: XCTestCase {
         
         // THEN the state becomes 'activated'
         XCTAssertEqual(sut.state, .activated)
+    }
+    
+    func testState_WhenUserIsNotAuthenticatedAndAuthenticatesAndAccountIsExpired() {
+        // GIVEN that the user is logged out
+        fixture.accountProvierMock.isLoggedIn = false
+        fixture.stubUserAuthenticationStatusMonitor(status: .loggedOut)
+        // AND GIVEN that the Onboarding Vpn Profile not installed
+        stubOnboardingVpnInstallation(finished: true)
+        
+        instantiateSut()
+        
+        XCTAssertEqual(sut.state, .notActivated)
+        fixture.accountProvierMock.isLoggedIn = true
+        
+        // WHEN account is expired
+        fixture.accountProvierMock.isExpired = true
+        // AND authenticates
+        fixture.userAuthenticationStatusMonitorMock.status.send(.loggedIn)
+        
+        // THEN the state becomes 'activated'
+        XCTAssertEqual(sut.state, .expired)
+    }
+    
+    func testState_WhenUserIsAuthenticatedAndAccountIsExpiredAndLogsOut() {
+        // GIVEN that the user is authenticated
+        fixture.accountProvierMock.isLoggedIn = true
+        fixture.stubUserAuthenticationStatusMonitor(status: .loggedIn)
+        // AND GIVEN that the Onboarding Vpn Profile is installed
+        stubOnboardingVpnInstallation(finished: true)
+        // AND GIVEN user account is expired
+        fixture.accountProvierMock.isExpired = true
+        
+        instantiateSut()
+        
+        XCTAssertEqual(sut.state, .expired)
+        fixture.accountProvierMock.isLoggedIn = false
+        
+        // WHEN user logs out
+        fixture.userAuthenticationStatusMonitorMock.status.send(.loggedOut)
+        
+        // THEN the state becomes 'NotActivated'
+        XCTAssertEqual(sut.state, .notActivated)
     }
     
     func testState_WhenUserIsAuthenticatedAndLogsOut() {

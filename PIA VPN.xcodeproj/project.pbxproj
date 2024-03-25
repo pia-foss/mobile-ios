@@ -752,6 +752,10 @@
 		E58A45752BAA28D4002A0704 /* ValidateQRLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A45732BAA28D4002A0704 /* ValidateQRLoginUseCase.swift */; };
 		E58A45792BAA290F002A0704 /* TokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A45782BAA290F002A0704 /* TokenProvider.swift */; };
 		E58A457A2BAA290F002A0704 /* TokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A45782BAA290F002A0704 /* TokenProvider.swift */; };
+		E58A457B2BAC246B002A0704 /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51693D02AFADCC20089FB8F /* SwiftGen+Strings.swift */; };
+		E58A457E2BACD0F0002A0704 /* ExpiredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A457D2BACD0F0002A0704 /* ExpiredAccountView.swift */; };
+		E58A45812BB09F4F002A0704 /* ExpiredAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A45802BB09F4F002A0704 /* ExpiredAccountViewModel.swift */; };
+		E58A45842BB09F7F002A0704 /* ExpiredAccountFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A45832BB09F7F002A0704 /* ExpiredAccountFactory.swift */; };
 		E59D1A152B7E2D4B00A2FBFB /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
 		E59D1A182B7E2D4B00A2FBFB /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59D1A172B7E2D4B00A2FBFB /* PacketTunnelProvider.swift */; };
 		E59D1A1D2B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E59D1A142B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -1617,6 +1621,9 @@
 		E58A456F2BAA28AE002A0704 /* ValidateQRLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateQRLoginFactory.swift; sourceTree = "<group>"; };
 		E58A45732BAA28D4002A0704 /* ValidateQRLoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateQRLoginUseCase.swift; sourceTree = "<group>"; };
 		E58A45782BAA290F002A0704 /* TokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenProvider.swift; sourceTree = "<group>"; };
+		E58A457D2BACD0F0002A0704 /* ExpiredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiredAccountView.swift; sourceTree = "<group>"; };
+		E58A45802BB09F4F002A0704 /* ExpiredAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiredAccountViewModel.swift; sourceTree = "<group>"; };
+		E58A45832BB09F7F002A0704 /* ExpiredAccountFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiredAccountFactory.swift; sourceTree = "<group>"; };
 		E59D1A142B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PIA tvOS Tunnel.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59D1A172B7E2D4B00A2FBFB /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		E59D1A192B7E2D4B00A2FBFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -3640,6 +3647,40 @@
 			name = Interfaces;
 			sourceTree = "<group>";
 		};
+		E58A457C2BACD0D7002A0704 /* ExpiredAccount */ = {
+			isa = PBXGroup;
+			children = (
+				E58A45852BB0A013002A0704 /* UI */,
+				E58A45822BB09F75002A0704 /* CompositionRoot */,
+				E58A457F2BB09F41002A0704 /* Presentation */,
+			);
+			path = ExpiredAccount;
+			sourceTree = "<group>";
+		};
+		E58A457F2BB09F41002A0704 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				E58A45802BB09F4F002A0704 /* ExpiredAccountViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		E58A45822BB09F75002A0704 /* CompositionRoot */ = {
+			isa = PBXGroup;
+			children = (
+				E58A45832BB09F7F002A0704 /* ExpiredAccountFactory.swift */,
+			);
+			path = CompositionRoot;
+			sourceTree = "<group>";
+		};
+		E58A45852BB0A013002A0704 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				E58A457D2BACD0F0002A0704 /* ExpiredAccountView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		E59D1A162B7E2D4B00A2FBFB /* PIA tvOS Tunnel */ = {
 			isa = PBXGroup;
 			children = (
@@ -3763,6 +3804,7 @@
 		E5C507782B0E144E00200A6A /* PIA VPN-tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				E58A457C2BACD0D7002A0704 /* ExpiredAccount */,
 				E520FCEA2B91085800D06C03 /* LoginQR */,
 				E574DA0C2B8D1A7B000FADAF /* Signup */,
 				E574DA032B860E59000FADAF /* Resources */,
@@ -5067,6 +5109,7 @@
 				35DDA95D2B9EA53A00EB17A3 /* LocationSelectionScreen.swift in Sources */,
 				35E8E67F2B8C60F500A3A3DB /* DashboardScreen.swift in Sources */,
 				35E8E66C2B8C384200A3A3DB /* SignInScreen.swift in Sources */,
+				E58A457B2BAC246B002A0704 /* SwiftGen+Strings.swift in Sources */,
 				35E8E67A2B8C3B0500A3A3DB /* ElementHelper.swift in Sources */,
 				35E8E6712B8C386B00A3A3DB /* SignInTests.swift in Sources */,
 			);
@@ -5172,6 +5215,7 @@
 				E5AB28B42B35AA8C00744E5F /* VPNConfigurationInstallingFactory.swift in Sources */,
 				E5AB28A52B3224C300744E5F /* InstallVPNConfigurationUseCase.swift in Sources */,
 				E5AB288C2B2A487A00744E5F /* LoginViewModelErrorHandler.swift in Sources */,
+				E58A45812BB09F4F002A0704 /* ExpiredAccountViewModel.swift in Sources */,
 				69E61DEF2B556FDA00085648 /* RegionsListUseCase.swift in Sources */,
 				E5AB28732B279B7000744E5F /* LoginProvider.swift in Sources */,
 				6953E54B2B7A8FDC00D685B4 /* ButtonStyleModifier.swift in Sources */,
@@ -5291,10 +5335,12 @@
 				E55EDCD22B755DB1007010DB /* OnboardingComponentView.swift in Sources */,
 				69793DA42B5A9B27000CB845 /* RegionsContainerView.swift in Sources */,
 				6953E54D2B7A907A00D685B4 /* View+Extensions.swift in Sources */,
+				E58A457E2BACD0F0002A0704 /* ExpiredAccountView.swift in Sources */,
 				E55EDCF02B760EEB007010DB /* FormTextFieldsView.swift in Sources */,
 				696ECB742B7E2748006276EA /* LogOutUseCase.swift in Sources */,
 				E5C5077A2B0E144E00200A6A /* PIA_VPN_tvOSApp.swift in Sources */,
 				69F1C2952B2B216100E924AE /* PIA+Animation.swift in Sources */,
+				E58A45842BB09F7F002A0704 /* ExpiredAccountFactory.swift in Sources */,
 				E58A455F2BA8D206002A0704 /* URLRequestMaker.swift in Sources */,
 				69FA73DB2B7D509E002300B3 /* SettingsFactory.swift in Sources */,
 				69A226B52B3075AB0065EDDB /* RootContainerViewModel.swift in Sources */,

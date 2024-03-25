@@ -5,13 +5,18 @@ import PIALibrary
 
 protocol AccountProviderType {
     var isLoggedIn: Bool { get }
+    var isExpired: Bool { get }
     var publicUsername: String? { get }
     var currentUser: PIALibrary.UserAccount? { get set }
     func logout(_ callback: ((Error?) -> Void)?)
     func login(with linkToken: String, _ callback: ((PIALibrary.UserAccount?, Error?) -> Void)?)
 }
 
-extension DefaultAccountProvider: AccountProviderType { }
+extension DefaultAccountProvider: AccountProviderType {
+    var isExpired: Bool {
+        currentUser?.info?.isExpired ?? false
+    }
+}
 
 protocol ServerType {
     var id: ObjectIdentifier { get }

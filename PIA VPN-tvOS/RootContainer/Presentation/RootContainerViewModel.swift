@@ -10,6 +10,7 @@ class RootContainerViewModel: ObservableObject {
         case notActivated
         case activatedNotOnboarded
         case activated
+        case expired
     }
     
     @Published var state: State = .splash
@@ -44,11 +45,25 @@ class RootContainerViewModel: ObservableObject {
     private func setup() {
         bootstrap()
         isBootstrapped = true
-        updateState(isLoggedIn: accountProvider.isLoggedIn)
+        updateState(isLoggedIn: accountProvider.isLoggedIn, isExpired: accountProvider.isExpired)
     }
     
-    private func updateState(isLoggedIn: Bool) {
+    private func handleExpiredState(isLoggedIn: Bool) {
+        if isLoggedIn {
+            appRouter.goBackToRoot()
+            state = .expired
+        } else {
+            state = .notActivated
+        }
+    }
+    
+    private func updateState(isLoggedIn: Bool, isExpired: Bool) {
         guard isBootstrapped else {
+            return
+        }
+        
+        guard !isExpired else {
+            handleExpiredState(isLoggedIn: isLoggedIn)
             return
         }
         
@@ -100,8 +115,8 @@ extension RootContainerViewModel {
 
 extension RootContainerViewModel {
     private func subscribeToAccountUpdates() {
-        userAuthenticationStatusMonitor.getStatus().sink { status in
-            self.updateState(isLoggedIn: status == .loggedIn)
+        userAuthenticationStatusMonitor.getStatus().sink { [self] status in
+            self.updateState(isLoggedIn: status == .loggedIn, isExpired: accountProvider.isExpired)
         }.store(in: &cancellables)
         
         notificationCenter.addObserver(self,
@@ -111,6 +126,6 @@ extension RootContainerViewModel {
     }
     
     @objc private func didInstallVPNProfile() {
-        updateState(isLoggedIn: accountProvider.isLoggedIn)
+        updateState(isLoggedIn: accountProvider.isLoggedIn, isExpired: accountProvider.isExpired)
     }
 }

@@ -135,6 +135,10 @@ extension AppRouter {
         navigateRouterToDestinationAction(AuthenticationDestinations.signup)
     }
     
+    static var navigateToExpiredDestinationAction: AppRouter.Actions {
+        navigateRouterToDestinationAction(AuthenticationDestinations.expired)
+    }
+    
     static var navigateToConnectionstatsDestinationAction: AppRouter.Actions {
         navigateRouterToDestinationAction(OnboardingDestinations.connectionstats)
     }

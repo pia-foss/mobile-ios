@@ -462,7 +462,7 @@
 
 //Onboarding - Connection Stats Permisson (tvOS)
 "onboarding.connection_stats.title" = "Help Improve PIA";
-"onboarding.connection_stats.subtitle" = "Help us improve by sharing VPN connection statistics. These report never contain personally identifiable information.";
+"onboarding.connection_stats.subtitle" = "Help us improve by sharing VPN connection statistics. These reports never contain personally identifiable information.";
 
 //Onboarding - VPN Installing Profile (tvOS)
 "onboarding.vpn_configuration.title" = "Configure PIA";
