@@ -33,7 +33,7 @@
             default = "YES">
          </TestPlanReference>
          <TestPlanReference
-            reference = "container:PIA VPN-tvOS_E2E_Tests.xctestplan">
+            reference = "container:PIA-VPN_tvOS_E2E_Tests.xctestplan">
          </TestPlanReference>
       </TestPlans>
       <Testables>

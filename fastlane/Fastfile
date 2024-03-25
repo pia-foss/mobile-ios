@@ -27,7 +27,7 @@ platform :ios do
   lane :tvos_e2e_tests do
     run_tests(
       scheme: "PIA VPN-tvOS",
-      testplan: "PIA VPN-tvOS_E2E_Tests",
+      testplan: "PIA-VPN_tvOS_E2E_Tests",
       test_without_building: true,
       prelaunch_simulator: true,
       device: "Apple TV"

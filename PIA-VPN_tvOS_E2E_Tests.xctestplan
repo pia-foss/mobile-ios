@@ -22,10 +22,14 @@
         "key" : "PIA_TEST_PASSWORD",
         "value" : "xxx"
       }
-    ]
+    ],
+    "maximumTestRepetitions" : 2,
+    "repeatInNewRunnerProcess" : true,
+    "testRepetitionMode" : "retryOnFailure"
   },
   "testTargets" : [
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:PIA VPN.xcodeproj",
         "identifier" : "35E8E6572B870AD200A3A3DB",
