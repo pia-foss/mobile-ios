@@ -32,8 +32,7 @@ final class LoginIntegrationTests: XCTestCase {
                                  checkLoginAvailability: CheckLoginAvailability(),
                                  validateLoginCredentials: ValidateCredentialsFormat(),
                                  errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()),
-                                 onSuccessAction: .navigate(router: appRouter, destination: OnboardingDestinations.installVPNProfile), 
-                                 onFailureAction: .navigate(router: AppRouter.shared, destination: AuthenticationDestinations.expired))
+                                 onSuccessAction: .navigate(router: appRouter, destination: OnboardingDestinations.installVPNProfile))
         
         var cancellables = Set<AnyCancellable>()
         let expectation = expectation(description: "Waiting for didLoginSuccessfully property to be updated")
@@ -105,8 +104,7 @@ final class LoginIntegrationTests: XCTestCase {
                                  checkLoginAvailability: CheckLoginAvailability(),
                                  validateLoginCredentials: ValidateCredentialsFormat(),
                                  errorHandler: LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper()), 
-                                 onSuccessAction: .navigate(router: appRouter, destination: OnboardingDestinations.installVPNProfile), 
-                                 onFailureAction: .navigate(router: AppRouter.shared, destination: AuthenticationDestinations.expired))
+                                 onSuccessAction: .navigate(router: appRouter, destination: OnboardingDestinations.installVPNProfile))
         
         var cancellables = Set<AnyCancellable>()
         let expectation = expectation(description: "Waiting for isAccountExpired property to be updated")

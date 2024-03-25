@@ -16,6 +16,7 @@ class AccountProviderTypeMock: AccountProviderType {
     var currentUser: PIALibrary.UserAccount? = nil
     
     var isLoggedIn: Bool = false
+    var isExpired: Bool = false
     
     private(set) var logoutCalled = false
     private(set) var logoutCalledAttempt = 0

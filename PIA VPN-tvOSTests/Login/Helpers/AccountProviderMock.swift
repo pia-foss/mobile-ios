@@ -27,6 +27,7 @@ class AccountProviderMock: AccountProvider {
     
     private let userResult: PIALibrary.UserAccount?
     private let errorResult: Error?
+    var isExpired: Bool = false
     
     init(userResult: PIALibrary.UserAccount?, errorResult: Error?) {
         self.userResult = userResult

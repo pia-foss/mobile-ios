@@ -28,8 +28,8 @@ final class LoginProviderTests: XCTestCase {
         
         // WHEN
         sut.login(with: credentials) { result in
-            expectation.fulfill()
             capturedResult = result
+            expectation.fulfill()
         }
         
         // THEN
@@ -78,8 +78,41 @@ final class LoginProviderTests: XCTestCase {
         
         // WHEN
         sut.login(with: credentials) { result in
-            expectation.fulfill()
             capturedResult = result
+            expectation.fulfill()
+        }
+        
+        // THEN
+        wait(for: [expectation], timeout: 1.0)
+        guard case .failure(let error) = capturedResult else {
+            XCTFail("Expected failure, got success")
+            return
+        }
+        
+        guard case ClientError.expired = error else {
+            XCTFail("Expected expired error, got \(error)")
+            return
+        }
+    }
+    
+    func test_login_fails_when_accountprovider_completes_with_expired_user() throws {
+        // GIVEN
+        let user = PIALibrary.UserAccount.makeExpiredStub()
+        let accountProviderMock = AccountProviderMock(userResult: user,
+                                                      errorResult: ClientError.expired)
+        
+        let sut = LoginProvider(accountProvider: accountProviderMock,
+                                userAccountMapper: UserAccountMapper())
+        
+        let credentials = PIA_VPN_tvOS.Credentials(username: "", password: "")
+        
+        var capturedResult: Result<PIA_VPN_tvOS.UserAccount, Error>?
+        let expectation = expectation(description: "Waiting for login to finish")
+        
+        // WHEN
+        sut.login(with: credentials) { result in
+            capturedResult = result
+            expectation.fulfill()
         }
         
         // THEN
@@ -110,8 +143,8 @@ final class LoginProviderTests: XCTestCase {
         
         // WHEN
         sut.login(with: credentials) { result in
-            expectation.fulfill()
             capturedResult = result
+            expectation.fulfill()
         }
         
         // THEN
@@ -142,8 +175,8 @@ final class LoginProviderTests: XCTestCase {
         
         // WHEN
         sut.login(with: credentials) { result in
-            expectation.fulfill()
             capturedResult = result
+            expectation.fulfill()
         }
         
         // THEN

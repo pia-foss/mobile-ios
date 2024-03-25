@@ -36,6 +36,12 @@ class LogOutUseCase: LogOutUseCaseType {
     
     private func uninstallVpnConfiguration() async {
         return await withCheckedContinuation { continuation in
+            guard self.vpnConfigurationAvailability.get() else {
+                self.connectionStatsPermisson.set(value: nil)
+                continuation.resume()
+                return
+            }
+            
             vpnConfigurationProvider.uninstall { _ in
                 self.vpnConfigurationAvailability.set(value: false)
                 self.connectionStatsPermisson.set(value: nil)

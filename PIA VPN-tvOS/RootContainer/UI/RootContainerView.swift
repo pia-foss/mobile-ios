@@ -26,6 +26,8 @@ struct RootContainerView: View {
             case .activatedNotOnboarded, .activated:
                 UserActivatedContainerFactory.makeUSerActivatedContainerView()
                     .withOnboardingRoutes()
+            case .expired:
+                ExpiredAccountFactory.makeExpiredAccountView()
             }
         }.onChange(of: scenePhase) { _, newPhase in
             switch newPhase {
