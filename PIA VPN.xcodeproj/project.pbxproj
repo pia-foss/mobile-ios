@@ -2122,7 +2122,6 @@
 		291C6385183EBC210039EC03 /* PIA VPN */ = {
 			isa = PBXGroup;
 			children = (
-				69C148842BB1A42500E84D59 /* Network */,
 				E58A456C2BAA285F002A0704 /* ValidateQRLogin */,
 				0E047DD81C6BDAF00026F9A7 /* Global */,
 				0E9160551DA6F7EC00A13AA7 /* Core */,
@@ -2598,32 +2597,6 @@
 			path = "PIA-VPN_E2E_Tests";
 			sourceTree = "<group>";
 		};
-		69C148842BB1A42500E84D59 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				69EB1F772BB2E05300365D29 /* NWConnection */,
-				69C148882BB1A48600E84D59 /* CompositionRoot */,
-				69C148872BB1A46D00E84D59 /* UseCases */,
-			);
-			name = Network;
-			sourceTree = "<group>";
-		};
-		69C148872BB1A46D00E84D59 /* UseCases */ = {
-			isa = PBXGroup;
-			children = (
-				69C148852BB1A46200E84D59 /* VPNServerStatusUseCase.swift */,
-			);
-			name = UseCases;
-			sourceTree = "<group>";
-		};
-		69C148882BB1A48600E84D59 /* CompositionRoot */ = {
-			isa = PBXGroup;
-			children = (
-				69C148892BB1A75600E84D59 /* NetworkFactory.swift */,
-			);
-			name = CompositionRoot;
-			sourceTree = "<group>";
-		};
 		69C5E7C92B7293F700FE3126 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -2639,6 +2612,17 @@
 				69C5E7CD2B72949000FE3126 /* TopNavigationViewModel.swift */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		69CB37C62BB33907002E1CE3 /* NWConnectionPOC */ = {
+			isa = PBXGroup;
+			children = (
+				69EB1F782BB2E0A100365D29 /* NWHttpConnection.swift */,
+				69EB1F7B2BB2FC1500365D29 /* CertificateValidation.swift */,
+				69C148892BB1A75600E84D59 /* NetworkFactory.swift */,
+				69C148852BB1A46200E84D59 /* VPNServerStatusUseCase.swift */,
+			);
+			path = NWConnectionPOC;
 			sourceTree = "<group>";
 		};
 		69D12D152ACC75140053A81B /* Util */ = {
@@ -2717,15 +2701,6 @@
 				6944B1692B85181E008E3B70 /* OptimalLocationUseCase.swift */,
 			);
 			path = UseCases;
-			sourceTree = "<group>";
-		};
-		69EB1F772BB2E05300365D29 /* NWConnection */ = {
-			isa = PBXGroup;
-			children = (
-				69EB1F782BB2E0A100365D29 /* NWHttpConnection.swift */,
-				69EB1F7B2BB2FC1500365D29 /* CertificateValidation.swift */,
-			);
-			name = NWConnection;
 			sourceTree = "<group>";
 		};
 		69F053442B1E054900AE0665 /* Shared */ = {
@@ -3610,6 +3585,7 @@
 		E58A45592BA8D1BD002A0704 /* PIA Common */ = {
 			isa = PBXGroup;
 			children = (
+				69CB37C62BB33907002E1CE3 /* NWConnectionPOC */,
 				E58A455A2BA8D1D2002A0704 /* Data */,
 			);
 			path = "PIA Common";
