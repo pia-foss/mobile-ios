@@ -294,6 +294,7 @@
 		69C5E7CE2B72949000FE3126 /* TopNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C5E7CD2B72949000FE3126 /* TopNavigationViewModel.swift */; };
 		69C5E7D02B72962700FE3126 /* TopNavigationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C5E7CF2B72962700FE3126 /* TopNavigationFactory.swift */; };
 		69CA26B22B59668700E78894 /* RegionsListUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CA26B12B59668700E78894 /* RegionsListUseCaseMock.swift */; };
+		69CB37C82BB34068002E1CE3 /* PIA.der in Resources */ = {isa = PBXBuildFile; fileRef = 69CB37C72BB33F91002E1CE3 /* PIA.der */; };
 		69E192472B8E3E8700A97286 /* HelpOptionsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E192462B8E3E8700A97286 /* HelpOptionsViewModelTests.swift */; };
 		69E192492B8E4BCC00A97286 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E192482B8E4BCC00A97286 /* PrivacyPolicyView.swift */; };
 		69E1924B2B8E63DD00A97286 /* Licences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69E1924A2B8E63DD00A97286 /* Licences.plist */; };
@@ -1275,6 +1276,7 @@
 		69C5E7CD2B72949000FE3126 /* TopNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationViewModel.swift; sourceTree = "<group>"; };
 		69C5E7CF2B72962700FE3126 /* TopNavigationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationFactory.swift; sourceTree = "<group>"; };
 		69CA26B12B59668700E78894 /* RegionsListUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsListUseCaseMock.swift; sourceTree = "<group>"; };
+		69CB37C72BB33F91002E1CE3 /* PIA.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = PIA.der; sourceTree = "<group>"; };
 		69E192422B8E14DF00A97286 /* PIA VPN-tvOS.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PIA VPN-tvOS.xctestplan"; sourceTree = "<group>"; };
 		69E192432B8E22FC00A97286 /* PIA-VPN_E2E_Tests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PIA-VPN_E2E_Tests.xctestplan"; sourceTree = "<group>"; };
 		69E192442B8E274500A97286 /* PIA VPN-tvOS_E2E_Tests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PIA VPN-tvOS_E2E_Tests.xctestplan"; sourceTree = "<group>"; };
@@ -2617,6 +2619,7 @@
 		69CB37C62BB33907002E1CE3 /* NWConnectionPOC */ = {
 			isa = PBXGroup;
 			children = (
+				69CB37C72BB33F91002E1CE3 /* PIA.der */,
 				69EB1F782BB2E0A100365D29 /* NWHttpConnection.swift */,
 				69EB1F7B2BB2FC1500365D29 /* CertificateValidation.swift */,
 				69C148892BB1A75600E84D59 /* NetworkFactory.swift */,
@@ -4551,6 +4554,7 @@
 				E501CBF52AE9806800515006 /* UI.strings in Resources */,
 				829EB54C2535BA40003E74DD /* DedicatedIPTitleHeaderViewCell.xib in Resources */,
 				824C531D24C04800003DB740 /* ConnectionTile.xib in Resources */,
+				69CB37C82BB34068002E1CE3 /* PIA.der in Resources */,
 				DD6DC5C221B6C27F00F9D538 /* pia-spinner.json in Resources */,
 				DD746957217F070700B7BD73 /* DNS.plist in Resources */,
 				DD1C139B21E65F90004004B3 /* IPTileCollectionViewCell.xib in Resources */,
@@ -6104,7 +6108,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = "PIA VPN/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6145,7 +6149,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = "PIA VPN/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

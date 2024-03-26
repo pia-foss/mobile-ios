@@ -29,7 +29,9 @@ class VPNServerStatusUseCase: VPNServerStatusUseCaseType {
         guard let url = APIRequest.vpnStatus.asURL else {
             return nil
         }
-        return NWHttpConnection(url: url, method: .get, certificateValidation: .pubKey)
+        
+        // TODO: For connections from the WG Servers, we need to pass the cn from `WGPacketTunnelProvider`
+        return NWHttpConnection(url: url, method: .get, certificateValidation: .anchorCert(cn: nil))
     }
     
     @available(iOS 13.0, *)
@@ -67,10 +69,9 @@ class VPNServerStatusUseCase: VPNServerStatusUseCaseType {
 
 extension VPNServerStatusUseCase {
     enum APIRequest: String {
-        case vpnStatus = "https://46.246.3.220/api/client/status"
-        //        95.181.167.33
-        //        46.246.3.220
-        
+        // TODO: Add server IP here
+        case vpnStatus = "https://xxxserverIP/api/client/status"
+
         var asURL: URL? {
             return URL(string: self.rawValue)
         }

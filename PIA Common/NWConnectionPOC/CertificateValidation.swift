@@ -10,6 +10,7 @@ import Foundation
 import CommonCrypto
 import CryptoKit
 
+
 struct PublicKeyHeader {
     /// ASN1 header for our public key to re-create the subject public key info
     static let rsa4096Asn1Header: [UInt8] = [
@@ -20,6 +21,7 @@ struct PublicKeyHeader {
 
 enum CertificateValidation {
     case pubKey
+    case anchorCert(cn: String?)
     
     /// PIA Public Key Hash
     static let trustedPublicKeyHashes = ["ZAs7C2OqZKde1JddKApDrhFM+V86LVQZ1Et4EfQdPJo="]
@@ -29,28 +31,31 @@ extension CertificateValidation {
     
     func validate(metadata: sec_protocol_metadata_t, trust: sec_trust_t, complete: @escaping sec_protocol_verify_complete_t) {
         switch self {
+        /// This type of Cert pinning, checks agains the hash of the public key of the certs under the trust object
         case .pubKey:
-            let serverPublicKeys = getPublicKeyHashes(from: trust)
-            var evaluatedKeys = [String]()
-            for key in serverPublicKeys {
-                if CertificateValidation.trustedPublicKeyHashes.contains(key) {
-                    evaluatedKeys.append(key)
+            if #available(iOS 13, *) {
+                let serverPublicKeys = getPublicKeyHashes(from: trust)
+                var evaluatedKeys = [String]()
+                for key in serverPublicKeys {
+                    if CertificateValidation.trustedPublicKeyHashes.contains(key) {
+                        evaluatedKeys.append(key)
+                    }
                 }
+                complete(!evaluatedKeys.isEmpty)
+            } else {
+                // TODO: add compatible pinning on iOS 12
             }
             
-            complete(!evaluatedKeys.isEmpty)
+            
+        /// This type of Cert pinning, creates a new trusted chain from our custom CA
+        case .anchorCert(let cn):
+            let evaluation = validateWithAnchorCert(for: trust, cn: cn)
+            complete(evaluation)
         }
     }
     
     
-    private func sha256(data : Data) -> Data {
-        var hash = [UInt8](repeating: 0,  count: Int(CC_SHA256_DIGEST_LENGTH))
-        data.withUnsafeBytes {
-            _ = CC_SHA256($0.baseAddress, CC_LONG(data.count), &hash)
-        }
-        return Data(hash)
-    }
-    
+    @available(iOS 13, *)
     private func hash(data: Data) -> String {
       // Add the missing ASN1 header for public keys to re-create the subject public key info
         var keyWithHeader = Data(PublicKeyHeader.rsa4096Asn1Header)
@@ -59,6 +64,7 @@ extension CertificateValidation {
       return Data(SHA256.hash(data: keyWithHeader)).base64EncodedString()
     }
 
+    @available(iOS 13, *)
     private func getPublicKeyHashes(from trust: sec_trust_t) -> [String] {
         let trust = sec_trust_copy_ref(trust).takeRetainedValue()
         let count = SecTrustGetCertificateCount(trust)
@@ -71,8 +77,11 @@ extension CertificateValidation {
             
             if let publicKey = SecCertificateCopyKey(cert),
                let publicKeyData = SecKeyCopyExternalRepresentation(publicKey, nil) {
+                
                 let pubKeyHash = hash(data: (publicKeyData as NSData) as Data)
                 result.append(pubKeyHash)
+                
+                
             }
             
         }
@@ -80,6 +89,45 @@ extension CertificateValidation {
         return result
     }
     
+    
+    private func validateWithAnchorCert(for trust: sec_trust_t, cn: String? = nil) -> Bool {
+        let serverTrust = sec_trust_copy_ref(trust).takeRetainedValue()
+        
+        //GET SERVER CERTIFICATE
+        let serverCertificate = SecTrustGetCertificateAtIndex(serverTrust, 0)
+        var serverCommonName: CFString!
+
+        let certData = SecCertificateCopyData(serverCertificate!)
+        SecCertificateCopyCommonName(serverCertificate!, &serverCommonName)
+    
+        if let cn {
+            if serverCommonName as String != cn {
+                return false
+            }
+        }
+        
+        let certURL = Bundle.main.url(forResource: "PIA", withExtension: "der")
+        
+        let certificateData = try? Data(contentsOf: certURL!) as CFData
+        let caRef = SecCertificateCreateWithData(nil, certificateData!)
+
+        //ARRAY OF CA CERTIFICATES
+        let caArray = [caRef] as CFArray
+        
+        //SET DEFAULT SSL POLICY
+        let policy = SecPolicyCreateSSL(true, nil)
+        var trust: SecTrust!
+        
+        //Creates a trust management object based on certificates and policies
+        _ = SecTrustCreateWithCertificates([serverCertificate!] as CFArray, policy, &trust)
+        
+
+        //SET CA and SET TRUST OBJECT BETWEEN THE CA AND THE TRUST OBJECT FROM THE SERVER CERTIFICATE
+        _ = SecTrustSetAnchorCertificates(trust, caArray)
+        var error: CFError?
+        let evaluation = SecTrustEvaluateWithError(trust, &error)
+        
+        return evaluation
+    }
+    
 }
-
-
