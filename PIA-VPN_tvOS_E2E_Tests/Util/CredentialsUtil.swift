@@ -22,7 +22,7 @@ public class CredentialsUtil {
     public static func credentials(type: CredentialsType) -> Credentials {
         switch type {
         case .invalid:
-            return Credentials(username: "fake", password: "fake")
+            return Credentials(username: "aaa", password: "Aaa")
         case .valid:
             let testUser = ProcessInfo.processInfo.environment["PIA_TEST_USER"] ?? "user-not-found"
             let testPassword = ProcessInfo.processInfo.environment["PIA_TEST_PASSWORD"] ?? "password-not-found"

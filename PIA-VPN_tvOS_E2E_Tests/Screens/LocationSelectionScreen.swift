@@ -26,26 +26,26 @@ extension XCUIApplication{
     var removeFromFavoritesButton: XCUIElement {button(with: "Remove from Favorites")}
     var favouritesTabButton:XCUIElement {button(with: "Favourite(s)")}
     
-    func navigateToLocationSelection() {
+    func navigateToLocationSelectionScreen() {
         locationButton.waitForElementToAppear()
         moveFocus(to: locationButton, startingDirection: .right)
         XCUIRemote.shared.press(.select)
         XCTAssert(locationSelectionTitle.waitForElementToAppear())
     }
     
-    func navigateToAllLocations() {
+    func navigateToAllLocationsScreen() {
         allTabButton.waitForElementToAppear()
         moveFocus(to: allTabButton, startingDirection: .down)
         XCTAssert(allLocationsTitle.waitForElementToAppear())
     }
     
-    func navigateToSearchLocation() {
+    func navigateToSearchLocationScreen() {
         searchTabButton.waitForElementToAppear()
         moveFocus(to: searchTabButton, startingDirection: .down)
         XCTAssert(searchForALocationButton.waitForElementToAppear())
     }
     
-    func navigateToFavouriteLocation() {
+    func navigateToFavouriteLocationScreen() {
         favouritesTabButton.waitForElementToAppear()
         moveFocus(to: favouritesTabButton, startingDirection: .up)
     }
@@ -115,7 +115,7 @@ extension XCUIApplication{
             return
         }
         
-        navigateToFavouriteLocation()
+        navigateToFavouriteLocationScreen()
         XCUIRemote.shared.press(.right)
         
         while(favouritesTabButton.exists){

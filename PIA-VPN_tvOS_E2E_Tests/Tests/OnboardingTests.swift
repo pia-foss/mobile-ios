@@ -19,7 +19,7 @@ class OnboardingTests:BaseTest {
                     app.loginViaUsername(with: CredentialsUtil.credentials(type: .valid))
                     app.acceptSharingVPNStats()
                     app.acceptVPNConfiguration()
-                    expect(app.connectButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.connectButton.waitForElementToAppear()).to(beTrue())
                 }
             }
         }

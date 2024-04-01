@@ -17,14 +17,14 @@ class SignInTests:BaseTest {
                     app.logout()
                     app.navigateToSignInScreen()
                     app.loginViaUsername(with: CredentialsUtil.credentials(type: .valid))
-                    expect(app.helpImprovePIATitle.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.helpImprovePIATitle.waitForElementToAppear()).to(beTrue())
                 }
                 
                 it("should display error mesages with invalid credentials"){
                     app.logout()
                     app.navigateToSignInScreen()
                     app.loginViaUsername(with: CredentialsUtil.credentials(type: .invalid))
-                    expect(app.incorrectCredentialsErrorMessage.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                    expect(app.incorrectCredentialsErrorMessage.waitForElementToAppear()).to(beTrue())
                 }
             }
         }
