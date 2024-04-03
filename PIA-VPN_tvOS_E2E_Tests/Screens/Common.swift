@@ -9,6 +9,8 @@
 import XCTest
 
 extension XCUIApplication{
+    var continueButton:XCUIElement {button(with: "Continue")}
+    
     func moveFocus(to element: XCUIElement, startingDirection: XCUIRemote.Button = .right) {
         var direction: XCUIRemote.Button = startingDirection
         var navigationCycle = NavigationCycle(startingDirection: startingDirection)

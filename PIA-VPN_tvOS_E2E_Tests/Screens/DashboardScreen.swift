@@ -27,7 +27,7 @@ extension XCUIApplication{
         
         if(settingsButton.waitForElementToAppear()){
             navigateToSettingsScreen()
-            navigateToAccountSettings()
+            navigateToAccountSettingsScreen()
             XCTAssert(logoutButton.waitForElementToAppear())
             
             moveFocus(to: logoutButton)

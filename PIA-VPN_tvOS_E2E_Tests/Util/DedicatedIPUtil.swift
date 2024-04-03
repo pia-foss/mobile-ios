@@ -1,8 +1,8 @@
 //
 //  DedicatedIPUtil.swift
-//  PIA-VPN_E2E_Tests
+//  PIA-VPN_tvOS_E2E_Tests
 //
-//  Created by Geneva Parayno on 2/1/24.
+//  Created by Geneva Parayno on 27/3/24.
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
