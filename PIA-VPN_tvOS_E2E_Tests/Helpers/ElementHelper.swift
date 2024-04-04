@@ -64,11 +64,11 @@ extension XCUIApplication {
         return groups[id]
     }
     
-    func findElementWithPartialText(_ partialText: String, elementType: XCUIElementQuery) -> XCUIElement? {
+    func findElementWithPartialText(_ partialText: String, elementType: XCUIElement.ElementType) -> XCUIElement? {
         let predicate = NSPredicate(format: "label CONTAINS[c] %@", partialText)
-        let element = elementType
-        let matchingStaticTexts = element.matching(predicate)
-        
-        return matchingStaticTexts.firstMatch
+        let query = descendants(matching: elementType).matching(predicate)
+        let firstMatchingElement = query.element(boundBy: 0)
+        firstMatchingElement.waitForElementToAppear()
+        return firstMatchingElement
     }
 }

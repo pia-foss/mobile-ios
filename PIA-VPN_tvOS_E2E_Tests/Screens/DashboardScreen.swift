@@ -12,6 +12,9 @@ extension XCUIApplication{
     var settingsButton:XCUIElement {button(with: "gearshape")}
     var connectButton:XCUIElement {button(with: "connect-inner-button")}
     var piaVPNButton:XCUIElement {button(with: "PIA VPN")}
+    var connectedStatus: XCUIElement {staticText(with: "Connected")}
+    var notConnectedStatus: XCUIElement {staticText(with: "Not Connected")}
+    var selectedLocationButton: XCUIElement {findElementWithPartialText("Selected Location", elementType: .button)!}
     
     func navigateToSettingsScreen(){
         settingsButton.waitForElementToAppear()
@@ -35,6 +38,30 @@ extension XCUIApplication{
             moveFocus(to: logoutAlertButton)
             XCUIRemote.shared.press(.select)
             XCTAssert(signinImage.waitForElementToAppear())
+        }
+    }
+    
+    func connect(){
+        if (connectedStatus.exists) {
+            return
+        }
+        
+        if (notConnectedStatus.exists){
+            moveFocus(to: connectButton)
+            XCUIRemote.shared.press(.select)
+            XCTAssert(connectedStatus.waitForElementToAppear())
+        }
+    }
+    
+    func disconnect(){
+        if (notConnectedStatus.exists) {
+            return
+        }
+        
+        if (connectedStatus.exists){
+            moveFocus(to: connectButton)
+            XCUIRemote.shared.press(.select)
+            XCTAssert(notConnectedStatus.waitForElementToAppear())
         }
     }
 }
