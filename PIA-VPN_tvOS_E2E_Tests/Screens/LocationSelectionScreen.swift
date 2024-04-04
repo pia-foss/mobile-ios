@@ -73,7 +73,7 @@ extension XCUIApplication{
     
     func addToFavorites(region: String) {
         searchLocation(keyword: region)
-        XCTAssert(findElementWithPartialText(region, elementType: buttons)!.waitForElementToAppear())
+        XCTAssert(findElementWithPartialText(region, elementType: .button)!.waitForElementToAppear())
         
         XCUIRemote.shared.press(.down)
         XCUIRemote.shared.press(.select,forDuration: 3)
@@ -93,7 +93,7 @@ extension XCUIApplication{
     
     func removeToFavorites(region: String) {
         searchLocation(keyword: region)
-        XCTAssert(findElementWithPartialText(region, elementType: buttons)!.waitForElementToAppear())
+        XCTAssert(findElementWithPartialText(region, elementType: .button)!.waitForElementToAppear())
         
         XCUIRemote.shared.press(.down)
         XCUIRemote.shared.press(.select,forDuration: 3)
@@ -127,5 +127,12 @@ extension XCUIApplication{
                 XCUIRemote.shared.press(.select)
             }
         }
+    }
+    
+    func connectTo(region: String) {
+        searchLocation(keyword: region)
+        XCUIRemote.shared.press(.down)
+        XCUIRemote.shared.press(.select)
+        XCTAssert(connectButton.waitForElementToAppear())
     }
 }
