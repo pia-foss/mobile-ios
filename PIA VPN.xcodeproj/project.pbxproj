@@ -185,6 +185,8 @@
 		35EDD65A2B035B51007B9ACB /* SideMenuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD6592B035B51007B9ACB /* SideMenuScreen.swift */; };
 		35EDD65C2B047839007B9ACB /* QuickSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD65B2B047839007B9ACB /* QuickSettingsTests.swift */; };
 		35EDD65E2B048C68007B9ACB /* QuickSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDD65D2B048C68007B9ACB /* QuickSettingsScreen.swift */; };
+		35FDFA482BC392CC00D42B33 /* HelpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FDFA472BC392CC00D42B33 /* HelpTests.swift */; };
+		35FDFA4A2BC39B3100D42B33 /* HelpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FDFA492BC39B3100D42B33 /* HelpScreen.swift */; };
 		6900D3732B97290D00C87E2E /* RefreshServersLatencyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6900D3722B97290D00C87E2E /* RefreshServersLatencyUseCase.swift */; };
 		6900D3752B972ACE00C87E2E /* Client+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6900D3742B972ACE00C87E2E /* Client+Protocols.swift */; };
 		6900D3772B9731F900C87E2E /* RefreshLatencyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6900D3762B9731F900C87E2E /* RefreshLatencyFactory.swift */; };
@@ -1186,6 +1188,8 @@
 		35EDD6592B035B51007B9ACB /* SideMenuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuScreen.swift; sourceTree = "<group>"; };
 		35EDD65B2B047839007B9ACB /* QuickSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSettingsTests.swift; sourceTree = "<group>"; };
 		35EDD65D2B048C68007B9ACB /* QuickSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSettingsScreen.swift; sourceTree = "<group>"; };
+		35FDFA472BC392CC00D42B33 /* HelpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpTests.swift; sourceTree = "<group>"; };
+		35FDFA492BC39B3100D42B33 /* HelpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpScreen.swift; sourceTree = "<group>"; };
 		6900D3722B97290D00C87E2E /* RefreshServersLatencyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshServersLatencyUseCase.swift; sourceTree = "<group>"; };
 		6900D3742B972ACE00C87E2E /* Client+Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+Protocols.swift"; sourceTree = "<group>"; };
 		6900D3762B9731F900C87E2E /* RefreshLatencyFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshLatencyFactory.swift; sourceTree = "<group>"; };
@@ -2250,6 +2254,7 @@
 				35E8E6802B8C637D00A3A3DB /* SettingsScreen.swift */,
 				35DDA95C2B9EA53A00EB17A3 /* LocationSelectionScreen.swift */,
 				3529EF102BB51AD9003FD26F /* DedicatedIPScreen.swift */,
+				35FDFA492BC39B3100D42B33 /* HelpScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -2272,6 +2277,7 @@
 				35DDA95A2B9AF8A900EB17A3 /* LocationSelectionTests.swift */,
 				3529EF0C2BB3C977003FD26F /* DedicatedIPTests.swift */,
 				35186D1C2BBCF47300E61E79 /* ConnectionTests.swift */,
+				35FDFA472BC392CC00D42B33 /* HelpTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -5110,6 +5116,7 @@
 			files = (
 				35DDA95F2BA0381600EB17A3 /* WaitHelper.swift in Sources */,
 				35E8E6652B870C2700A3A3DB /* Common.swift in Sources */,
+				35FDFA482BC392CC00D42B33 /* HelpTests.swift in Sources */,
 				35E8E66A2B8C37C900A3A3DB /* WelcomeScreen.swift in Sources */,
 				35E8E66E2B8C384D00A3A3DB /* OnboardingScreen.swift in Sources */,
 				3529EF0F2BB3FB69003FD26F /* DedicatedIPUtil.swift in Sources */,
@@ -5127,6 +5134,7 @@
 				E58A457B2BAC246B002A0704 /* SwiftGen+Strings.swift in Sources */,
 				35E8E67A2B8C3B0500A3A3DB /* ElementHelper.swift in Sources */,
 				3529EF0D2BB3C977003FD26F /* DedicatedIPTests.swift in Sources */,
+				35FDFA4A2BC39B3100D42B33 /* HelpScreen.swift in Sources */,
 				35E8E6712B8C386B00A3A3DB /* SignInTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

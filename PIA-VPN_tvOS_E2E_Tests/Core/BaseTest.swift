@@ -36,6 +36,10 @@ class BaseTest:QuickSpec {
         beforeEach {
             app.launch()
             
+            if(app.helpImprovePIATitle.exists){
+                app.acceptSharingVPNStats()
+                app.acceptVPNConfiguration()
+            }
         }
         
         afterEach {
