@@ -10,17 +10,25 @@ import XCTest
 
 extension XCUIApplication{
     var settingsButton:XCUIElement {button(with: "gearshape")}
+    var helpButton:XCUIElement {button(with: "questionmark.circle")}
     var connectButton:XCUIElement {button(with: "connect-inner-button")}
     var piaVPNButton:XCUIElement {button(with: "PIA VPN")}
     var connectedStatus: XCUIElement {staticText(with: "Connected")}
     var notConnectedStatus: XCUIElement {staticText(with: "Not Connected")}
-    var selectedLocationButton: XCUIElement {findElementWithPartialText("Selected Location", elementType: .button)!}
+    var selectedLocationButton: XCUIElement {findElementWithPartialText(partialText: "Selected Location", elementType: .button)!}
     
     func navigateToSettingsScreen(){
         settingsButton.waitForElementToAppear()
         moveFocus(to: settingsButton, startingDirection: .up)
         XCUIRemote.shared.press(.select)
         XCTAssert(settingsTitle.waitForElementToAppear())
+    }
+    
+    func navigateToHelpScreen(){
+        helpButton.waitForElementToAppear()
+        moveFocus(to: helpButton, startingDirection: .up)
+        XCUIRemote.shared.press(.select)
+        XCTAssert(helpTitle.waitForElementToAppear())
     }
     
     func logout(){
