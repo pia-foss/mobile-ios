@@ -43,4 +43,6 @@ extension Color {
     static var pia_on_info_container = Color("pia_on_info_container")
     static var pia_on_success_container = Color("pia_on_success_container")
     static var pia_error20 = Color("pia_error20")
+    static var pia_secondary_sunglow = Color("pia_secondary_sunglow")
+    static var pia_grey_grey20 = Color("pia_grey_grey20")
 }

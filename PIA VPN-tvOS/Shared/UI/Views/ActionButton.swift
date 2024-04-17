@@ -16,6 +16,7 @@ struct ActionButtonStyle {
     var unfocusedTitleColor: Color = Color.pia_on_surface
     var titleAlignment: Alignment = .center
     var titlePadding: EdgeInsets = EdgeInsets()
+    var titleFont: Font = .system(size: 38)
 }
 
 enum ActionButtonStyleType {
@@ -56,6 +57,7 @@ struct ActionButton: View {
                         style.unfocusedColor
                     }
                     Text(title)
+                        .font(style.titleFont)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: style.titleAlignment)
                         .foregroundStyle(isFocus ? style.focusedTitleColor : style.unfocusedTitleColor)
                         .padding(style.titlePadding)
