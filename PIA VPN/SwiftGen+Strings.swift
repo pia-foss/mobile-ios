@@ -774,8 +774,8 @@ internal enum L10n {
     }
     internal enum Onboarding {
       internal enum ConnectionStats {
-        /// Help us improve by sharing VPN connection statistics. These report never contain personally identifiable information.
-        internal static let subtitle = L10n.tr("Localizable", "onboarding.connection_stats.subtitle", fallback: "Help us improve by sharing VPN connection statistics. These report never contain personally identifiable information.")
+        /// Help us improve by sharing VPN connection statistics. These reports never contain personally identifiable information.
+        internal static let subtitle = L10n.tr("Localizable", "onboarding.connection_stats.subtitle", fallback: "Help us improve by sharing VPN connection statistics. These reports never contain personally identifiable information.")
         /// Help Improve PIA
         internal static let title = L10n.tr("Localizable", "onboarding.connection_stats.title", fallback: "Help Improve PIA")
       }
@@ -1642,6 +1642,34 @@ internal enum L10n {
         internal static let item3 = L10n.tr("Localizable", "tvos.signup.item3", fallback: "24/7 customer support")
         /// Get Private Internet Access
         internal static let title = L10n.tr("Localizable", "tvos.signup.title", fallback: "Get Private Internet Access")
+        internal enum Subscription {
+          /// Sign Up
+          internal static let title = L10n.tr("Localizable", "tvos.signup.subscription.title", fallback: "Sign Up")
+          internal enum Paywall {
+            /// Start your 7 days free trial then %@ per year.
+            internal static func subtitle(_ p1: Any) -> String {
+              return L10n.tr("Localizable", "tvos.signup.subscription.paywall.subtitle", String(describing: p1), fallback: "Start your 7 days free trial then %@ per year.")
+            }
+            /// Connect to any region easily
+            internal static let title = L10n.tr("Localizable", "tvos.signup.subscription.paywall.title", fallback: "Connect to any region easily")
+            internal enum Button {
+              /// Subscribe Now
+              internal static let subscribe = L10n.tr("Localizable", "tvos.signup.subscription.paywall.button.subscribe", fallback: "Subscribe Now")
+            }
+            internal enum Price {
+              /// per month
+              internal static let month = L10n.tr("Localizable", "tvos.signup.subscription.paywall.price.month", fallback: "per month")
+              /// BEST VALUE - FREE TRIAL
+              internal static let trial = L10n.tr("Localizable", "tvos.signup.subscription.paywall.price.trial", fallback: "BEST VALUE - FREE TRIAL")
+              /// per year
+              internal static let year = L10n.tr("Localizable", "tvos.signup.subscription.paywall.price.year", fallback: "per year")
+              internal enum Month {
+                /// /mo
+                internal static let simplified = L10n.tr("Localizable", "tvos.signup.subscription.paywall.price.month.simplified", fallback: "/mo")
+              }
+            }
+          }
+        }
       }
       internal enum Welcome {
         /// Fast & Secure VPN for Streaming

@@ -9,8 +9,20 @@
 import Foundation
 
 class SignUpFactory {
-    static func makeSignupView() -> SignupView {
+    static func makeSignupQRView() -> SignupQRView {
         let url = URL(string: "https://apps.apple.com/us/app/vpn-by-private-internet-access/id955626407")!
-        return SignupView(signUpURL: url)
+        return SignupQRView(signUpURL: url)
+    }
+    
+    static func makeSignUpView() -> SignupView {
+        let optionButtons = [
+            OnboardingComponentButton(title: L10n.Welcome.Agreement.Message.privacy, action: {}),
+            OnboardingComponentButton(title: L10n.Welcome.Agreement.Message.tos, action: {})
+        ]
+        
+        return SignupView(viewModel: SignupViewModel(optionButtons: optionButtons,
+                                                     getAvailableProducts: GetAvailableProductsUseCase(),
+                                                     purchaseProduct: PurchaseProductUseCase(),
+                                                     viewModelMapper: SubscriptionOptionViewModelMapper()))
     }
 }

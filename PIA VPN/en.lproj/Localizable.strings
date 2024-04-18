@@ -575,3 +575,13 @@
 //Sign in free trial expired (tvOS)
 "tvos.signin.expired.trial.title" = "Your free trial has expired";
 "tvos.signin.expired.trial.subtitle" = "If you enjoyed premium VPN protection, subscribe to PIA!";
+
+//SignUp with subscription (tvOS)
+"tvos.signup.subscription.title" = "Sign Up";
+"tvos.signup.subscription.paywall.title" = "Connect to any region easily";
+"tvos.signup.subscription.paywall.subtitle" = "Start your 7 days free trial then %@ per year.";
+"tvos.signup.subscription.paywall.price.year" = "per year";
+"tvos.signup.subscription.paywall.price.trial" = "BEST VALUE - FREE TRIAL";
+"tvos.signup.subscription.paywall.price.month" = "per month";
+"tvos.signup.subscription.paywall.price.month.simplified" = "/mo";
+"tvos.signup.subscription.paywall.button.subscribe" = "Subscribe Now";
