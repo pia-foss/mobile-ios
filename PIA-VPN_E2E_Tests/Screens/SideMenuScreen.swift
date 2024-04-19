@@ -9,13 +9,10 @@
 import XCTest
 
 extension XCUIApplication {
-    var logOutButton: XCUIElement {
-        staticText(with: "Log out")
-    }
-    
-    var settingsButton: XCUIElement {
-        staticText(with: "Settings")
-    }
+    var logOutString: String {getString(key: "menu.item.logout", comment: "Log out")}
+    var logOutButton: XCUIElement {staticText(with: logOutString)}
+    var settingsButtonString: String {getString(key: "menu.item.settings", comment: "Settings")}
+    var settingsButton: XCUIElement {staticText(with: settingsButtonString)}
   
     func selectSideMenu(menuName: String) {
         dashboardMenuButton.waitForElementToAppear()

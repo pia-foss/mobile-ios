@@ -28,6 +28,11 @@ extension XCUIApplication {
             }
         }
     }
+    
+    func getString(key:String, comment:String) -> String{
+        let localString = NSLocalizedString(key, bundle: BaseTest.bundle, comment: comment)
+        return localString
+    }
 }
 
 extension XCUIElement {

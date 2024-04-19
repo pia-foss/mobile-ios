@@ -53,6 +53,11 @@ extension XCUIApplication{
         
         return initialCoordinates == finalCoordinates
     }
+    
+    func getString(key:String, comment:String) -> String{
+        let localString = NSLocalizedString(key, bundle: BaseTest.bundle, comment: comment)
+        return localString
+    }
 }
 
 struct NavigationCycle {

@@ -151,6 +151,8 @@
 		3545E98226AADB2B00B812CC /* ServerSelectingTileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545E98126AADB2B00B812CC /* ServerSelectingTileCell.swift */; };
 		3545E98326AADC7C00B812CC /* ServerSelectingTileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545E98126AADB2B00B812CC /* ServerSelectingTileCell.swift */; };
 		3545E98426AADC7E00B812CC /* ServerSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545E97F26AAD60C00B812CC /* ServerSelectionDelegate.swift */; };
+		356796902BCE543B008949F7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E7EC043209326E30029811E /* Localizable.strings */; };
+		356796912BCE543E008949F7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E7EC043209326E30029811E /* Localizable.strings */; };
 		35950B312ADD2996006F3CD9 /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = 35950B302ADD2996006F3CD9 /* Quick */; };
 		35950B342ADD2EE5006F3CD9 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 35950B332ADD2EE5006F3CD9 /* Nimble */; };
 		35C8064C2B1075620078A2C6 /* ServerConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8064B2B1075620078A2C6 /* ServerConnectionTests.swift */; };
@@ -4662,6 +4664,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				356796912BCE543E008949F7 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4669,6 +4672,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				356796902BCE543B008949F7 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

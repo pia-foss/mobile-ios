@@ -13,6 +13,7 @@ import Foundation
 
 class BaseTest:QuickSpec {
     static var app: XCUIApplication!
+    static let bundle = Bundle(for: BaseTest.self)
     
     override class func spec() {
         beforeSuite {

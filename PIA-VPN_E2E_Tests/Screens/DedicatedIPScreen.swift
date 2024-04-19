@@ -9,33 +9,17 @@
 import XCTest
 
 extension XCUIApplication {
-    var dedicatedIPHeader: XCUIElement {
-        staticText(with: "Dedicated IP")
-    }
-    
-    var dedicatedIPTextField: XCUIElement {
-        textField(with: "The textfield to type the Dedicated IP token")
-    }
-    
-    var dedicatedIPList: XCUIElement {
-        cell(with: "DedicatedIpRowViewCell")
-    }
-    
-    var invalidTokenErrorMessage: XCUIElement {
-        staticText(with: "Your token is invalid. Please make sure you have entered the token correctly.")
-    }
-    
-    var emptyTokenErrorMessage: XCUIElement {
-        staticText(with: "Please make sure you have entered the token correctly")
-    }
-    
-    var deleteTokenButton: XCUIElement {
-        button(with: "Delete")
-    }
-    
-    var confirmDeleteButton: XCUIElement {
-        staticText(with: "OK")
-    }
+    var dedicatedIPTitleString: String {getString(key: "dedicated.ip.title", comment: "Enter Your Dedicated IP Token")}
+    var dedicatedIPHeader: XCUIElement {staticText(with: dedicatedIPTitleString)}
+    var dedicatedIPTextFieldString: String {getString(key: "dedicated.ip.token.textfield.accessibility", comment: "The textfield to type the Dedicated IP token")}
+    var dedicatedIPTextField: XCUIElement {textField(with: dedicatedIPTextFieldString)}
+    var dedicatedIPList: XCUIElement {cell(with: "DedicatedIpRowViewCell")}
+    var invalidTokenErrorString: String {getString(key: "dedicated.ip.message.invalid.token", comment: "Your token is invalid. Please make sure you have entered the token correctly.")}
+    var invalidTokenErrorMessage: XCUIElement {staticText(with: invalidTokenErrorString)}
+    var emptyTokenErrorString: String {getString(key: "dedicated.ip.message.incorrect.token", comment: "Please make sure you have entered the token correctly")}
+    var emptyTokenErrorMessage: XCUIElement {staticText(with: emptyTokenErrorString)}
+    var deleteTokenButton: XCUIElement {button(with: "Delete")}
+    var confirmDeleteButton: XCUIElement {staticText(with: "OK")}
     
     func navigateToDedicatedIPScreen() {
         selectSideMenu(menuName: "Dedicated IP")

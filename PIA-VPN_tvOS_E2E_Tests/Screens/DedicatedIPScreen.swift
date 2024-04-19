@@ -9,17 +9,24 @@
 import XCTest
 
 extension XCUIApplication{
-    var dIPTokenTextField:XCUIElement {textField(with: "Enter Your Dedicated IP Token")}
-    var activateButton: XCUIElement {button(with: "Activate")}
-    var emptyTokenErrorMessage: XCUIElement {staticText(with: "Your token can't be empty.")}
-    var invalidTokenErrorMessage: XCUIElement {staticText(with: "Your token is either invalid or has expired.")}
-    var activeDIPMessage: XCUIElement {staticText(with: "Your Dedicated IP it's now active.")}
-    var deleteDedicatedIPButton: XCUIElement {button(with: "Delete Dedicated IP")}
-    var activeDIPStatus: XCUIElement {staticText(with: "Active")}
-    var confirmDeleteButton: XCUIElement {button(with: "Yes, Delete")}
+    var dIPTokenTextFieldString: String {getString(key: "settings.dedicatedip.placeholder", comment: "Enter Your Dedicated IP Token")}
+    var dIPTokenTextField: XCUIElement {textField(with: dIPTokenTextFieldString)}
+    var activateDIPButtonString: String {getString(key: "settings.dedicatedip.button", comment: "Activate")}
+    var activateButton: XCUIElement {button(with: activateDIPButtonString)}
+    var emptyTokenErrorString: String {getString(key: "settings.dedicatedip.alert.failure.message.empty", comment: "Your token can't be empty.")}
+    var emptyTokenErrorMessage: XCUIElement {staticText(with: emptyTokenErrorString)}
+    var invalidTokenErrorString: String {getString(key: "settings.dedicatedip.alert.failure.message", comment: "Your token is either invalid or has expired.")}
+    var invalidTokenErrorMessage: XCUIElement {staticText(with: invalidTokenErrorString)}
+    var activeDIPString: String {getString(key: "settings.dedicatedip.alert.success.message", comment: "Your Dedicated IP it's now active.")}
+    var activeDIPMessage: XCUIElement {staticText(with: activeDIPString)}
+    var deleteDIPButtonString: String {getString(key: "settings.dedicatedip.stats.delete.button", comment: "Delete Dedicated IP")}
+    var deleteDedicatedIPButton: XCUIElement {button(with: deleteDIPButtonString)}
+    var activeDIPStatusString: String {getString(key: "settings.dedicatedip.status.active", comment: "Active")}
+    var activeDIPStatus: XCUIElement {staticText(with: activeDIPStatusString)}
+    var confirmDeleteButtonString: String {getString(key: "settings.dedicatedip.stats.delete.alert.delete", comment: "Yes, Delete")}
+    var confirmDeleteButton: XCUIElement {button(with: confirmDeleteButtonString)}
     
     func activateDIPToken(DIP: DedicatedIP){
-    
         dIPTokenTextField.waitForElementToAppear()
         moveFocus(to: dIPTokenTextField)
         XCUIRemote.shared.press(.select)

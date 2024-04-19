@@ -9,22 +9,35 @@
 import XCTest
 
 extension XCUIApplication{
-    var locationButton:XCUIElement {button(with: "Location")}
-    var locationSelectionTitle:XCUIElement {staticText(with: "Location Selection")}
-    var allTabButton:XCUIElement {button(with: "All")}
-    var allLocationsTitle:XCUIElement {staticText(with: "All Locations")}
-    var optimalLocationsTitle: XCUIElement {staticText(with: "Optimal Location/Dedicated IP")}
-    var searchTabButton:XCUIElement {button(with: "Search")}
-    var searchForALocationButton:XCUIElement {button(with: "Search for a Location")}
-    var recommendedLocationsTitle:XCUIElement {staticText(with: "Recommended Locations")}
-    var lastSearchedLocationsTitle:XCUIElement {staticText(with: "Last Searched Locations")}
-    var numbersButton:XCUIElement {button(with: "Numbers")}
-    var punctuationButton:XCUIElement {button(with: "Punctuation")}
-    var smallLettersButton:XCUIElement {button(with: "Small-Letters")}
-    var searchResultsTitle: XCUIElement {staticText(with: "Search Results")}
-    var addToFavoritesButton: XCUIElement {button(with: "Add to Favorites")}
-    var removeFromFavoritesButton: XCUIElement {button(with: "Remove from Favorites")}
-    var favouritesTabButton:XCUIElement {button(with: "Favourite(s)")}
+    var locationButtonString: String {getString(key: "settings.dedicatedip.stats.location", comment: "Location")}
+    var locationButton: XCUIElement {button(with: locationButtonString)}
+    var locationSelectionTitleString: String {getString(key: "top_navigation_bar.location_selection_screen.title", comment: "Location Selection")}
+    var locationSelectionTitle: XCUIElement {staticText(with: locationSelectionTitleString)}
+    var allTitleString: String {getString(key: "regions.filter.all.title", comment: "All")}
+    var allTabButton: XCUIElement {button(with: allTitleString)}
+    var allLocationsString: String {getString(key: "regions.list.all_locations.title", comment: "All Locations")}
+    var allLocationsTitle: XCUIElement {staticText(with: allLocationsString)}
+    var optimalWithDIPLocationsString: String {getString(key: "regions.list.optimal_location_with_dip_location.title", comment: "Optimal Location/Dedicated IP")}
+    var optimalLocationsTitle: XCUIElement {staticText(with: optimalWithDIPLocationsString)}
+    var searchTitleString: String {getString(key: "regions.filter.search.title", comment: "Search")}
+    var searchTabButton: XCUIElement {button(with: searchTitleString)}
+    var searchButtonString: String {getString(key: "regions.search.button.title", comment: "Search for a Location")}
+    var searchForALocationButton: XCUIElement {button(with: searchButtonString)}
+    var recommendedLocationsTitleString: String {getString(key: "regions.search.recommended_locations.title", comment: "Recommended Locations")}
+    var recommendedLocationsTitle: XCUIElement {staticText(with: recommendedLocationsTitleString)}
+    var lastSearchedLocationsTitleString: String {getString(key: "regions.search.previous_results.title", comment: "Last Searched Locations")}
+    var lastSearchedLocationsTitle: XCUIElement {staticText(with: lastSearchedLocationsTitleString)}
+    var numbersButton: XCUIElement {button(with: "Numbers")}
+    var punctuationButton: XCUIElement {button(with: "Punctuation")}
+    var smallLettersButton: XCUIElement {button(with: "Small-Letters")}
+    var searchResultsTitleString: String {getString(key: "regions.search.results.title", comment: "Search Results")}
+    var searchResultsTitle: XCUIElement {staticText(with: searchResultsTitleString)}
+    var addToFavoritesButtonString: String {getString(key: "regions.context_menu.favorites.add.text", comment: "Add to Favorites")}
+    var addToFavoritesButton: XCUIElement{button(with: addToFavoritesButtonString)}
+    var removeFromFavoritesButtonString: String {getString(key: "regions.context_menu.favorites.remove.text", comment: "Remove from Favorites")}
+    var removeFromFavoritesButton: XCUIElement {button(with: removeFromFavoritesButtonString)}
+    var favouritesTitleString: String {getString(key: "regions.filter.favorites.title", comment: "Favourite(s)")}
+    var favouritesTabButton: XCUIElement {button(with: favouritesTitleString)}
     
     func navigateToLocationSelectionScreen() {
         locationButton.waitForElementToAppear()

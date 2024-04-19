@@ -9,9 +9,12 @@
 import XCTest
 
 extension XCUIApplication {
-    var usernameTextField: XCUIElement {textField(with: "Enter Username")}
-    var incorrectCredentialsErrorMessage: XCUIElement {staticText(with: "Your username or password is incorrect.")}
-    var loginViaUsernameButton: XCUIElement {button(with: "Log In via Username")}
+    var usernameTextFieldString: String {getString(key: "tvos.login.placeholder.username", comment: "Enter Username")}
+    var usernameTextField: XCUIElement {textField(with: usernameTextFieldString)}
+    var unauthorizedErrorString: String {getString(key: "account.error.unauthorized", comment: "Your username or password is incorrect.")}
+    var incorrectCredentialsErrorMessage: XCUIElement {staticText(with: unauthorizedErrorString)}
+    var loginViaUsernameString: String {getString(key: "tvos.login.qr.button.login", comment: "Log In via Username")}
+    var loginViaUsernameButton: XCUIElement {button(with: loginViaUsernameString)}
     
     func loginViaUsername(with credentials: Credentials) {
         loginViaUsernameButton.waitForElementToAppear()

@@ -9,33 +9,13 @@
 import XCTest
 
 extension XCUIApplication {
-    var quickConnectTileCollectionViewCell: XCUIElement {
-        cell(with: "QuickConnectTileCollectionViewCell")
-    }
-    
-    var ipTileCollectionViewCell: XCUIElement {
-        cell(with: "IPTileCollectionViewCell")
-    }
-    
-    var subscriptionTileCollectionViewCell: XCUIElement {
-        cell(with: "SubscriptionTileCollectionViewCell")
-    }
-    
-    var usageTileCollectionViewCell: XCUIElement {
-        cell(with: "UsageTileCollectionViewCell")
-    }
-    
-    var favoriteServersTileCollectionViewCell: XCUIElement {
-        cell(with: "FavoriteServersTileCollectionViewCell")
-    }
-    
-    var connectionTileCollectionViewCell: XCUIElement {
-        cell(with: "ConnectionTileCollectionViewCell")
-    }
-    
-    var cancelButton: XCUIElement {
-        button(with: "Cancel")
-    }
+    var quickConnectTileCollectionViewCell: XCUIElement {cell(with: "QuickConnectTileCollectionViewCell")}
+    var ipTileCollectionViewCell: XCUIElement {cell(with: "IPTileCollectionViewCell")}
+    var subscriptionTileCollectionViewCell: XCUIElement {cell(with: "SubscriptionTileCollectionViewCell")}
+    var usageTileCollectionViewCell: XCUIElement {cell(with: "UsageTileCollectionViewCell")}
+    var favoriteServersTileCollectionViewCell: XCUIElement {cell(with: "FavoriteServersTileCollectionViewCell")}
+    var connectionTileCollectionViewCell: XCUIElement {cell(with: "ConnectionTileCollectionViewCell")}
+    var cancelButton: XCUIElement {button(with: "Cancel")}
     
     func navigateToEditDashboardScreen() {
         dashboardEditButton.waitForElementToAppear()
