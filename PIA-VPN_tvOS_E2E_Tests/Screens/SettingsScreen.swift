@@ -9,13 +9,19 @@
 import XCTest
 
 extension XCUIApplication{
-    var settingsTitle:XCUIElement {staticText(with: "Settings")}
-    var accountButton:XCUIElement {button(with: "Account")}
-    var accountTitle:XCUIElement {staticText(with: "Account")}
-    var dedicatedIPButton:XCUIElement {button(with: "Dedicated IP")}
-    var enterDedicatedIPTitle:XCUIElement {staticText(with: "Enter Dedicated IP")}
-    var logoutButton:XCUIElement {button(with: "Log Out")}
-    var logoutAlertButton:XCUIElement {alert(with: "Are you sure?").buttons["Log Out"].firstMatch}
+    var settingsTitleString: String {getString(key: "menu.item.settings", comment: "Settings")}
+    var settingsTitle: XCUIElement {staticText(with: settingsTitleString)}
+    var accountTitleString: String {getString(key: "menu.item.account", comment: "Account")}
+    var accountButton: XCUIElement {button(with: accountTitleString)}
+    var accountTitle: XCUIElement {staticText(with: accountTitleString)}
+    var dedicatedIPButtonString: String {getString(key: "dedicated.ip.title", comment: "Dedicated IP")}
+    var dedicatedIPButton: XCUIElement {button(with: dedicatedIPButtonString)}
+    var enterDedicatedIPButtonString: String {getString(key: "settings.dedicatedip.title1", comment: "Enter Dedicated IP")}
+    var enterDedicatedIPTitle: XCUIElement {staticText(with: enterDedicatedIPButtonString)}
+    var logoutButtonString: String {getString(key: "settings.account.log_out_button.title", comment: "Log Out")}
+    var logoutButton: XCUIElement {button(with: logoutButtonString)}
+    var logoutAlertButtonString: String {getString(key: "settings.account.log_out_alert.title", comment: "Are you sure?")}
+    var logoutAlertButton: XCUIElement {alert(with: logoutAlertButtonString).buttons[logoutButtonString].firstMatch}
     
     func navigateToAccountSettingsScreen(){
         accountButton.waitForElementToAppear()

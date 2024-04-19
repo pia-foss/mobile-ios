@@ -9,21 +9,12 @@
 import XCTest
 
 extension XCUIApplication {
-    var privacyHeader: XCUIElement{
-        staticText(with: "Privacy Features")
-    }
-    
-    var vpnKillSwitch: XCUIElement {
-        switches(with: "VPN Kill Switch")
-    }
-    
-    var safariContentBlockerSwitch: XCUIElement {
-        switches(with: "Safari Content Blocker state")
-    }
-    
-    var refreshBlockListButton: XCUIElement {
-        staticText(with: "Refresh block list")
-    }
+    var privacyHeader: XCUIElement{staticText(with: privacyFeaturesString)}
+    var vpnKillSwitch: XCUIElement {switches(with: vpnKillSwitchString)}
+    var safariContentBlockerTitleString: String {getString(key: "settings.content_blocker.title", comment: "Safari Content Blocker state")}
+    var safariContentBlockerSwitch: XCUIElement {switches(with: safariContentBlockerTitleString)}
+    var blockerRefreshTitleString: String {getString(key: "settings.content_blocker.refresh.title", comment: "Refresh block list")}
+    var refreshBlockListButton: XCUIElement {staticText(with: blockerRefreshTitleString)}
     
     func navigateToPrivacySettings() {
         navigateToSettings()

@@ -10,7 +10,8 @@ import XCTest
 
 extension XCUIApplication {
     var signinImage: XCUIElement {image(with: "signin-world")}
-    var loginButton: XCUIElement {button(with: "Log In")}
+    var loginButtonString: String {getString(key: "tvos.welcome.button.login", comment: "Log In")}
+    var loginButton: XCUIElement {button(with: loginButtonString)}
     
     func navigateToSignInScreen(){
         signinImage.waitForElementToAppear()

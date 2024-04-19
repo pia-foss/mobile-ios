@@ -9,29 +9,16 @@
 import XCTest
 
 extension XCUIApplication {
-    var regionSelectionHeader: XCUIElement {
-        staticText(with: "Region selection")
-    }
-    
-    var searchRegionField: XCUIElement {
-        searchField(with: "Search for a region")
-    }
-    
-    var cancelSearchButton: XCUIElement {
-        button(with: "Cancel")
-    }
-    
-    var sortButton: XCUIElement {
-        button(with: "Filter")
-    }
-    
-    var sortPopUpHeader: XCUIElement {
-        staticText(with: "SORT REGIONS BY")
-    }
-    
-    var emptyListScreen: XCUIElement {
-        image(with: "empty set background image")
-    }
+    var regionSelectionTitleString: String {getString(key: "menu.item.region", comment: "Region selection")}
+    var regionSelectionHeader: XCUIElement {staticText(with: regionSelectionTitleString)}
+    var searchRegionFieldString: String {getString(key: "region.search.placeholder", comment: "Search for a region")}
+    var searchRegionField: XCUIElement {searchField(with: searchRegionFieldString)}
+    var cancelSearchButton: XCUIElement {button(with: "Cancel")}
+    var filterButtonString: String {getString(key: "region.accessibility.filter", comment: "Filter")}
+    var sortButton: XCUIElement {button(with: filterButtonString)}
+    var sortByString: String {getString(key: "region.filter.sortby", comment: "Sort regions by")}
+    var sortPopUpHeader: XCUIElement {staticText(with: sortByString)}
+    var emptyListScreen: XCUIElement {image(with: "empty set background image")}
     
     func navigateToRegionSelection(){
         regionTileCollectionViewCell.waitForElementToAppear()

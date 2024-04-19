@@ -9,10 +9,13 @@
 import XCTest
 
 extension XCUIApplication{
-    var helpImprovePIATitle: XCUIElement {staticText(with: "Help Improve PIA")}
+    var helpImprovePIAString: String {getString(key: "settings.service.quality.share.title", comment: "Help Improve PIA")}
+    var helpImprovePIATitle: XCUIElement {staticText(with: helpImprovePIAString)}
     var acceptOnboardingButton: XCUIElement {button(with: "Accept")}
-    var configurePIATitle: XCUIElement {staticText(with: "Configure PIA")}
-    var configurePIAButton: XCUIElement {button(with: "Configure PIA")}
+    var configurePIATitleString: String {getString(key: "onboarding.vpn_configuration.title", comment: "Configure PIA")}
+    var configurePIATitle: XCUIElement {staticText(with: configurePIATitleString)}
+    var configurePIAButtonString: String {getString(key: "onboarding.vpn_configuration.button", comment: "Configure PIA")}
+    var configurePIAButton: XCUIElement {button(with: configurePIAButtonString)}
     
     func acceptSharingVPNStats(){
         helpImprovePIATitle.waitForElementToAppear()

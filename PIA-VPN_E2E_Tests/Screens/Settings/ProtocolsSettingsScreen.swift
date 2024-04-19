@@ -9,65 +9,27 @@
 import XCTest
 
 extension XCUIApplication {
-    var protocolsHeader: XCUIElement{
-        staticText(with: "Protocols")
-    }
-    
-    var protocolSelectionButton: XCUIElement {
-        staticText(with: "Protocol Selection")
-    }
-    
-    var protocolSelectionPopover: XCUIElement {
-        otherElement(with: "ProtocolPopoverSelectionView")
-    }
-    
-    var dataEncryptionButton: XCUIElement {
-        staticText(with: "Data Encryption")
-    }
-    
-    var dataEncryptionPopover: XCUIElement {
-        otherElement(with: "DataEncryptionPopoverSelectionView")
-    }
-    
-    var handshakeButton: XCUIElement {
-        staticText(with: "Handshake")
-    }
-    
-    var handshakePopover: XCUIElement {
-        otherElement(with: "HandshakePopoverSelectionView")
-    }
-    
-    var transportButton: XCUIElement {
-        staticText(with: "Transport")
-    }
-    
-    var transportPopover: XCUIElement {
-        otherElement(with: "TransportPopoverSelectionView")
-    }
-    
-    var remotePortButton: XCUIElement {
-        staticText(with: "Remote Port")
-    }
-    
-    var remotePortPopover: XCUIElement {
-        otherElement(with: "PortPopoverSelectionView")
-    }
-    
-    var useSmallPacketsSwitch: XCUIElement {
-        switches(with: "Use Small Packets")
-    }
-    
-    var openVPN: XCUIElement {
-        staticText(with: "OpenVPN")
-    }
-    
-    var ipsec: XCUIElement {
-        staticText(with: "IPSec (IKEv2)")
-    }
-    
-    var wireguard: XCUIElement {
-        staticText(with: "WireGuard®")
-    }
+    var protocolsHeader: XCUIElement {staticText(with: protocolsTitleString)}
+    var protocolsSelectionButtonString: String {getString(key: "settings.connection.vpn_protocol.title", comment: "Protocol Selection")}
+    var protocolSelectionButton: XCUIElement {staticText(with: protocolsSelectionButtonString)}
+    var protocolSelectionPopover: XCUIElement {otherElement(with: "ProtocolPopoverSelectionView")}
+    var dataEncryptionButtonString: String {getString(key: "settings.encryption.cipher.title", comment: "Data Encryption")}
+    var dataEncryptionButton: XCUIElement {staticText(with: dataEncryptionButtonString)}
+    var dataEncryptionPopover: XCUIElement {otherElement(with: "DataEncryptionPopoverSelectionView")}
+    var handshakeButtonString: String {getString(key: "settings.encryption.handshake.title", comment: "Handshake")}
+    var handshakeButton: XCUIElement {staticText(with: handshakeButtonString)}
+    var handshakePopover: XCUIElement {otherElement(with: "HandshakePopoverSelectionView")}
+    var transportButtonString: String {getString(key: "settings.connection.transport.title", comment: "Transport")}
+    var transportButton: XCUIElement {staticText(with: transportButtonString)}
+    var transportPopover: XCUIElement {otherElement(with: "TransportPopoverSelectionView")}
+    var remotePortButtonString: String {getString(key: "settings.connection.remote_port.title", comment: "Remote Port")}
+    var remotePortButton: XCUIElement {staticText(with: remotePortButtonString)}
+    var remotePortPopover: XCUIElement {otherElement(with: "PortPopoverSelectionView")}
+    var  useSmallPacketsString: String {getString(key: "settings.small.packets.title", comment: "Use Small Packets")}
+    var useSmallPacketsSwitch: XCUIElement {switches(with: useSmallPacketsString)}
+    var openVPN: XCUIElement {staticText(with: "OpenVPN")}
+    var ipsec: XCUIElement {staticText(with: "IPSec (IKEv2)")}
+    var wireguard: XCUIElement {staticText(with: "WireGuard®")}
     
     func navigateToProtocolSettings() {
         navigateToSettings()
