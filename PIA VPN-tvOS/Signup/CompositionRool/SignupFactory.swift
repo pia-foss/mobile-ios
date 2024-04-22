@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALibrary
 
 class SignUpFactory {
     static func makeSignupQRView() -> SignupQRView {
@@ -21,8 +22,23 @@ class SignUpFactory {
         ]
         
         return SignupView(viewModel: SignupViewModel(optionButtons: optionButtons,
-                                                     getAvailableProducts: GetAvailableProductsUseCase(),
+                                                     getAvailableProducts: makeGetAvailableProductsUseCase(),
                                                      purchaseProduct: PurchaseProductUseCase(),
                                                      viewModelMapper: SubscriptionOptionViewModelMapper()))
+    }
+    
+    private static func makeGetAvailableProductsUseCase() -> GetAvailableProductsUseCaseType {
+        return GetAvailableProductsUseCase(productsProvider: makeDecoratorProductsProvider())
+    }
+    
+    private static func makeDecoratorProductsProvider() -> ProductsProviderType {
+        guard let defaultAccountProvider = Client.providers.accountProvider as? DefaultAccountProvider else {
+            fatalError("Incorrect account provider type")
+        }
+        
+        return DecoratorProductsProvider(subscriptionInformationProvider: SubscriptionInformationProvider(accountProvider: defaultAccountProvider),
+                                  decoratee: defaultAccountProvider,
+                                  store: Client.store,
+                                  productConfiguration: Client.configuration)
     }
 }

@@ -54,7 +54,7 @@ final class LoginProviderTests: XCTestCase {
         let userPlan = try XCTUnwrap(user.info?.plan)
         
         switch (capturedPlan, userPlan) {
-            case (PIA_VPN_tvOS.Plan.monthly, PIALibrary.Plan.monthly), (PIA_VPN_tvOS.Plan.yearly, PIALibrary.Plan.yearly), (PIA_VPN_tvOS.Plan.trial, PIALibrary.Plan.trial), (PIA_VPN_tvOS.Plan.other, PIALibrary.Plan.other):
+            case (Plan.monthly, Plan.monthly), (Plan.yearly, Plan.yearly), (Plan.trial, PIALibrary.Plan.trial), (Plan.other, Plan.other):
                 XCTAssertTrue(true)
             default:
                 XCTFail("Expected the same plan, got \(capturedPlan) and \(userPlan)")

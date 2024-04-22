@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum SubscriptionOption {
+enum SubscriptionOption: Int {
     case yearly, monthly
 }
 

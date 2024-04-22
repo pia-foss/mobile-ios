@@ -7,19 +7,20 @@
 //
 
 import Foundation
+import PIALibrary
 @testable import PIA_VPN_tvOS
 
-extension UserAccount {
-    static func makeStub() -> UserAccount {
-        let credentials = Credentials(username: "username",
-                                      password: "password")
+extension PIA_VPN_tvOS.UserAccount {
+    static func makeStub() -> PIA_VPN_tvOS.UserAccount {
+        let credentials = PIA_VPN_tvOS.Credentials(username: "username",
+                                                   password: "password")
         return UserAccount(credentials: credentials,
                            info: AccountInfo.makeStub())
     }
 }
 
-extension AccountInfo {
-    static func makeStub() -> AccountInfo {
+extension PIA_VPN_tvOS.AccountInfo {
+    static func makeStub() -> PIA_VPN_tvOS.AccountInfo {
         return AccountInfo(email: "email",
                            username: "username",
                            plan: Plan.monthly,

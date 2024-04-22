@@ -14,10 +14,10 @@ class SubscriptionOptionViewModelMapper {
         let optionString = isYearlyPlan ? L10n.Localizable.Tiles.Subscription.yearly : L10n.Localizable.Tiles.Subscription.monthly
         
         let currency = "\(product.product.priceLocale.currencySymbol ?? "$")"
-        let price = product.product.price.stringValue + currency
+        let price = product.product.price.stringValue + currency  + " "
         + (isYearlyPlan ? L10n.Localizable.Tvos.Signup.Subscription.Paywall.Price.year
            : L10n.Localizable.Tvos.Signup.Subscription.Paywall.Price.month)
-        let monthlyPrice = "\(product.product.price.decimalValue / 12)" + currency + L10n.Localizable.Tvos.Signup.Subscription.Paywall.Price.Month.simplified
+        let monthlyPrice = (monthlyPrice(price: product.product.price.doubleValue) ?? "") + currency +  L10n.Localizable.Tvos.Signup.Subscription.Paywall.Price.Month.simplified
         
         return SubscriptionOptionViewModel(productId: product.product.identifier,
                                            option: product.type,
@@ -25,5 +25,15 @@ class SubscriptionOptionViewModelMapper {
                                            price: price,
                                            monthlyPrice: isYearlyPlan ? monthlyPrice : nil,
                                            freeTrial: isYearlyPlan ? L10n.Localizable.Tvos.Signup.Subscription.Paywall.Price.trial : nil)
+    }
+    
+    private func monthlyPrice(price: Double) -> String? {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = 2
+        formatter.roundingMode = .halfUp
+
+        return formatter.string(from: NSNumber(value: price / 12))
     }
 }

@@ -709,6 +709,24 @@
 		E56E75EB2BD06F1F0018E279 /* GetAvailableProductsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E75EA2BD06F1F0018E279 /* GetAvailableProductsUseCase.swift */; };
 		E56E75ED2BD06F420018E279 /* SubscriptionOptionViewModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E75EC2BD06F420018E279 /* SubscriptionOptionViewModelMapper.swift */; };
 		E56E75EF2BD0723C0018E279 /* PurchaseProductUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E75EE2BD0723C0018E279 /* PurchaseProductUseCase.swift */; };
+		E56E75F22BD2F67F0018E279 /* GetAvailableProductsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E75F12BD2F67F0018E279 /* GetAvailableProductsUseCaseTests.swift */; };
+		E56E75F52BD3B2940018E279 /* ProductsProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E75F42BD3B2940018E279 /* ProductsProviderMock.swift */; };
+		E56E75F72BD3B40F0018E279 /* InAppProductMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E75F62BD3B40F0018E279 /* InAppProductMock.swift */; };
+		E56E75FA2BD402100018E279 /* DecoratorProductsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E75F92BD402100018E279 /* DecoratorProductsProvider.swift */; };
+		E56E75FD2BD402440018E279 /* ProductsProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E75FC2BD402440018E279 /* ProductsProviderType.swift */; };
+		E56E75FF2BD402590018E279 /* SubscriptionInformationProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E75FE2BD402590018E279 /* SubscriptionInformationProviderType.swift */; };
+		E56E76012BD402690018E279 /* ProductConfigurationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E76002BD402690018E279 /* ProductConfigurationType.swift */; };
+		E56E76032BD402C80018E279 /* DecoratorProductsProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E76022BD402C80018E279 /* DecoratorProductsProviderTests.swift */; };
+		E56E76052BD43A3E0018E279 /* SubscriptionInformationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E76042BD43A3E0018E279 /* SubscriptionInformationProvider.swift */; };
+		E56E76072BD529370018E279 /* SubscriptionInformationProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E76062BD529370018E279 /* SubscriptionInformationProviderMock.swift */; };
+		E56E76092BD5296C0018E279 /* InAppProviderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E76082BD5296C0018E279 /* InAppProviderSpy.swift */; };
+		E56E760B2BD5298F0018E279 /* ProductConfigurationSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E760A2BD5298F0018E279 /* ProductConfigurationSpy.swift */; };
+		E56E760D2BD5566A0018E279 /* SignupViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E760C2BD5566A0018E279 /* SignupViewModelTests.swift */; };
+		E56E760F2BD6DE490018E279 /* GetAvailableProductsUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E760E2BD6DE490018E279 /* GetAvailableProductsUseCaseMock.swift */; };
+		E56E76112BD6DE750018E279 /* PurchaseProductUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E76102BD6DE750018E279 /* PurchaseProductUseCaseMock.swift */; };
+		E56E76132BD700C60018E279 /* SignupLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E76122BD700C60018E279 /* SignupLoadingView.swift */; };
+		E56E76152BD701C30018E279 /* AppStoreInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E76142BD701C30018E279 /* AppStoreInformation.swift */; };
+		E56E76172BD702900018E279 /* SubscriptionProductsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E76162BD702900018E279 /* SubscriptionProductsError.swift */; };
 		E574D9D92B83F3A2000FADAF /* DedicatedIpActivateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9CC2B83F3A2000FADAF /* DedicatedIpActivateView.swift */; };
 		E574D9DA2B83F3A2000FADAF /* DedicatedIPFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9CE2B83F3A2000FADAF /* DedicatedIPFactory.swift */; };
 		E574D9DC2B83F3A2000FADAF /* DipServerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574D9D12B83F3A2000FADAF /* DipServerProvider.swift */; };
@@ -1608,6 +1626,24 @@
 		E56E75EA2BD06F1F0018E279 /* GetAvailableProductsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAvailableProductsUseCase.swift; sourceTree = "<group>"; };
 		E56E75EC2BD06F420018E279 /* SubscriptionOptionViewModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionOptionViewModelMapper.swift; sourceTree = "<group>"; };
 		E56E75EE2BD0723C0018E279 /* PurchaseProductUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseProductUseCase.swift; sourceTree = "<group>"; };
+		E56E75F12BD2F67F0018E279 /* GetAvailableProductsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAvailableProductsUseCaseTests.swift; sourceTree = "<group>"; };
+		E56E75F42BD3B2940018E279 /* ProductsProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsProviderMock.swift; sourceTree = "<group>"; };
+		E56E75F62BD3B40F0018E279 /* InAppProductMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppProductMock.swift; sourceTree = "<group>"; };
+		E56E75F92BD402100018E279 /* DecoratorProductsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoratorProductsProvider.swift; sourceTree = "<group>"; };
+		E56E75FC2BD402440018E279 /* ProductsProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsProviderType.swift; sourceTree = "<group>"; };
+		E56E75FE2BD402590018E279 /* SubscriptionInformationProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInformationProviderType.swift; sourceTree = "<group>"; };
+		E56E76002BD402690018E279 /* ProductConfigurationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductConfigurationType.swift; sourceTree = "<group>"; };
+		E56E76022BD402C80018E279 /* DecoratorProductsProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoratorProductsProviderTests.swift; sourceTree = "<group>"; };
+		E56E76042BD43A3E0018E279 /* SubscriptionInformationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInformationProvider.swift; sourceTree = "<group>"; };
+		E56E76062BD529370018E279 /* SubscriptionInformationProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInformationProviderMock.swift; sourceTree = "<group>"; };
+		E56E76082BD5296C0018E279 /* InAppProviderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppProviderSpy.swift; sourceTree = "<group>"; };
+		E56E760A2BD5298F0018E279 /* ProductConfigurationSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductConfigurationSpy.swift; sourceTree = "<group>"; };
+		E56E760C2BD5566A0018E279 /* SignupViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModelTests.swift; sourceTree = "<group>"; };
+		E56E760E2BD6DE490018E279 /* GetAvailableProductsUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAvailableProductsUseCaseMock.swift; sourceTree = "<group>"; };
+		E56E76102BD6DE750018E279 /* PurchaseProductUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseProductUseCaseMock.swift; sourceTree = "<group>"; };
+		E56E76122BD700C60018E279 /* SignupLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupLoadingView.swift; sourceTree = "<group>"; };
+		E56E76142BD701C30018E279 /* AppStoreInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreInformation.swift; sourceTree = "<group>"; };
+		E56E76162BD702900018E279 /* SubscriptionProductsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionProductsError.swift; sourceTree = "<group>"; };
 		E574D9CC2B83F3A2000FADAF /* DedicatedIpActivateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DedicatedIpActivateView.swift; sourceTree = "<group>"; };
 		E574D9CE2B83F3A2000FADAF /* DedicatedIPFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DedicatedIPFactory.swift; sourceTree = "<group>"; };
 		E574D9D02B83F3A2000FADAF /* DedicatedIPProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DedicatedIPProvider.swift; sourceTree = "<group>"; };
@@ -3444,6 +3480,7 @@
 		E56E75E52BD06EEF0018E279 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				E56E75FB2BD402380018E279 /* Interfaces */,
 				E56E75E92BD06F130018E279 /* Use cases */,
 				E56E75E82BD06F0D0018E279 /* Entities */,
 			);
@@ -3454,6 +3491,8 @@
 			isa = PBXGroup;
 			children = (
 				E56E75E62BD06EFC0018E279 /* SubscriptionProduct.swift */,
+				E56E76142BD701C30018E279 /* AppStoreInformation.swift */,
+				E56E76162BD702900018E279 /* SubscriptionProductsError.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -3465,6 +3504,50 @@
 				E56E75EE2BD0723C0018E279 /* PurchaseProductUseCase.swift */,
 			);
 			path = "Use cases";
+			sourceTree = "<group>";
+		};
+		E56E75F02BD2F6630018E279 /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+				E56E75F32BD3B28A0018E279 /* Mocks */,
+				E56E75F12BD2F67F0018E279 /* GetAvailableProductsUseCaseTests.swift */,
+				E56E76022BD402C80018E279 /* DecoratorProductsProviderTests.swift */,
+				E56E760C2BD5566A0018E279 /* SignupViewModelTests.swift */,
+			);
+			path = Signup;
+			sourceTree = "<group>";
+		};
+		E56E75F32BD3B28A0018E279 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				E56E75F42BD3B2940018E279 /* ProductsProviderMock.swift */,
+				E56E75F62BD3B40F0018E279 /* InAppProductMock.swift */,
+				E56E76062BD529370018E279 /* SubscriptionInformationProviderMock.swift */,
+				E56E76082BD5296C0018E279 /* InAppProviderSpy.swift */,
+				E56E760A2BD5298F0018E279 /* ProductConfigurationSpy.swift */,
+				E56E760E2BD6DE490018E279 /* GetAvailableProductsUseCaseMock.swift */,
+				E56E76102BD6DE750018E279 /* PurchaseProductUseCaseMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		E56E75F82BD402070018E279 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E56E75F92BD402100018E279 /* DecoratorProductsProvider.swift */,
+				E56E76042BD43A3E0018E279 /* SubscriptionInformationProvider.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E56E75FB2BD402380018E279 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				E56E75FC2BD402440018E279 /* ProductsProviderType.swift */,
+				E56E75FE2BD402590018E279 /* SubscriptionInformationProviderType.swift */,
+				E56E76002BD402690018E279 /* ProductConfigurationType.swift */,
+			);
+			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		E574D9CA2B83F3A2000FADAF /* DedicatedIp */ = {
@@ -3586,6 +3669,7 @@
 		E574DA0C2B8D1A7B000FADAF /* Signup */ = {
 			isa = PBXGroup;
 			children = (
+				E56E75F82BD402070018E279 /* Data */,
 				E56E75E52BD06EEF0018E279 /* Domain */,
 				E56E75E02BCEE8090018E279 /* Presentation */,
 				E574DA132B8D41B1000FADAF /* UI */,
@@ -3609,6 +3693,7 @@
 				E5A387072BBDD351008B5752 /* SignupView.swift */,
 				E56E75DC2BCEE7970018E279 /* SignupSubscriptionView.swift */,
 				E56E75DE2BCEE7D90018E279 /* SubscriptionOptionView.swift */,
+				E56E76122BD700C60018E279 /* SignupLoadingView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -3920,6 +4005,7 @@
 		E5C507892B0E145100200A6A /* PIA VPN-tvOSTests */ = {
 			isa = PBXGroup;
 			children = (
+				E56E75F02BD2F6630018E279 /* Signup */,
 				E58A45392BA475F0002A0704 /* LoginQR */,
 				69E192452B8E3E7300A97286 /* HelpOptions */,
 				E574D9E02B83F3D2000FADAF /* DedicatedIp */,
@@ -5301,6 +5387,7 @@
 				E56E75DD2BCEE7970018E279 /* SignupSubscriptionView.swift in Sources */,
 				E58A45812BB09F4F002A0704 /* ExpiredAccountViewModel.swift in Sources */,
 				69E61DEF2B556FDA00085648 /* RegionsListUseCase.swift in Sources */,
+				E56E76152BD701C30018E279 /* AppStoreInformation.swift in Sources */,
 				E5AB28732B279B7000744E5F /* LoginProvider.swift in Sources */,
 				6953E54B2B7A8FDC00D685B4 /* ButtonStyleModifier.swift in Sources */,
 				E5C507A52B153A2F00200A6A /* LoginViewModel.swift in Sources */,
@@ -5329,6 +5416,7 @@
 				69F2C36C2B8C9DEF006255F9 /* Routes+HelpSettings.swift in Sources */,
 				698615A72B62EA7C00A1EA54 /* InstallVPNConfigurationUseCaseMock.swift in Sources */,
 				69FA73DD2B7D50B2002300B3 /* AvailableSettingsView.swift in Sources */,
+				E56E75FD2BD402440018E279 /* ProductsProviderType.swift in Sources */,
 				E520FD0C2BA3882800D06C03 /* UserToken.swift in Sources */,
 				69AB49302B63CD8700C780CD /* Keychain+Protocols.swift in Sources */,
 				693CA5AB2B3ED67A00D38378 /* AppPreferences.swift in Sources */,
@@ -5398,6 +5486,7 @@
 				E574D9EB2B84042D000FADAF /* DedicatedIpDetailsView.swift in Sources */,
 				E5AB28CB2B48AFA900744E5F /* VPNConfigurationAvailability.swift in Sources */,
 				69FA73E02B7D50D7002300B3 /* AvailableSettingsViewModel.swift in Sources */,
+				E56E76052BD43A3E0018E279 /* SubscriptionInformationProvider.swift in Sources */,
 				E5AB28712B279B4000744E5F /* LoginProviderType.swift in Sources */,
 				E56E75EF2BD0723C0018E279 /* PurchaseProductUseCase.swift in Sources */,
 				E574DA112B8D4050000FADAF /* SignupFactory.swift in Sources */,
@@ -5406,6 +5495,7 @@
 				E520FD0E2BA3886100D06C03 /* LoginQRURLRequestMaker.swift in Sources */,
 				6953E5512B7AB15100D685B4 /* VpnConnectionFactory.swift in Sources */,
 				E5AB287B2B28B4C400744E5F /* Credentials.swift in Sources */,
+				E56E76172BD702900018E279 /* SubscriptionProductsError.swift in Sources */,
 				E52E68FE2B55E47600471913 /* Routes+Onboarding.swift in Sources */,
 				E5C5077C2B0E144E00200A6A /* ContentView.swift in Sources */,
 				E520FCEE2B979FA900D06C03 /* LoginQRExpiredView.swift in Sources */,
@@ -5417,11 +5507,13 @@
 				69F2C3722B8CAFB2006255F9 /* AboutOptionsView.swift in Sources */,
 				E56E75E22BCEE8140018E279 /* SignupViewModel.swift in Sources */,
 				69F1C2932B2B10D400E924AE /* DashboardFactory.swift in Sources */,
+				E56E76132BD700C60018E279 /* SignupLoadingView.swift in Sources */,
 				E5AB28B62B361E6C00744E5F /* VPNConfigurationInstallingErrorMapper.swift in Sources */,
 				69E1924E2B8E698000A97286 /* AcknowledgementsView.swift in Sources */,
 				E56E75EB2BD06F1F0018E279 /* GetAvailableProductsUseCase.swift in Sources */,
 				E56E75E42BCEE8330018E279 /* SubscriptionOptionViewModel.swift in Sources */,
 				E574DA152B8D41CB000FADAF /* QRImageView.swift in Sources */,
+				E56E75FF2BD402590018E279 /* SubscriptionInformationProviderType.swift in Sources */,
 				E55EDCD22B755DB1007010DB /* OnboardingComponentView.swift in Sources */,
 				69793DA42B5A9B27000CB845 /* RegionsContainerView.swift in Sources */,
 				6953E54D2B7A907A00D685B4 /* View+Extensions.swift in Sources */,
@@ -5430,6 +5522,7 @@
 				696ECB742B7E2748006276EA /* LogOutUseCase.swift in Sources */,
 				E5C5077A2B0E144E00200A6A /* PIA_VPN_tvOSApp.swift in Sources */,
 				69F1C2952B2B216100E924AE /* PIA+Animation.swift in Sources */,
+				E56E76012BD402690018E279 /* ProductConfigurationType.swift in Sources */,
 				E58A45842BB09F7F002A0704 /* ExpiredAccountFactory.swift in Sources */,
 				E58A455F2BA8D206002A0704 /* URLRequestMaker.swift in Sources */,
 				69FA73DB2B7D509E002300B3 /* SettingsFactory.swift in Sources */,
@@ -5449,6 +5542,7 @@
 				E5AB28BB2B48815300744E5F /* VPNConfigurationInstallingStatus.swift in Sources */,
 				6900D3752B972ACE00C87E2E /* Client+Protocols.swift in Sources */,
 				E574D9D92B83F3A2000FADAF /* DedicatedIpActivateView.swift in Sources */,
+				E56E75FA2BD402100018E279 /* DecoratorProductsProvider.swift in Sources */,
 				E5C507CA2B1FAC3600200A6A /* LoginDomainErrorMapper.swift in Sources */,
 				E56E75E72BD06EFC0018E279 /* SubscriptionProduct.swift in Sources */,
 				693CA5AC2B3ED69B00D38378 /* AppConstants.swift in Sources */,
@@ -5477,6 +5571,7 @@
 			files = (
 				E5AB28D02B4B39F000744E5F /* InstallVpnConfigurationProviderTests.swift in Sources */,
 				E574DA002B854A52000FADAF /* RemoveDIPUseCaseMock.swift in Sources */,
+				E56E760D2BD5566A0018E279 /* SignupViewModelTests.swift in Sources */,
 				698C3B492B2B33650012D527 /* VpnConnectionUseCaseMock.swift in Sources */,
 				69CA26B22B59668700E78894 /* RegionsListUseCaseMock.swift in Sources */,
 				6963465D2B7109DA0051F8BC /* RegionsFilterUseCaseTests.swift in Sources */,
@@ -5489,11 +5584,14 @@
 				693B9A422B7615C700757A41 /* RegionsDisplayNameUseCaseMock.swift in Sources */,
 				E5AB286C2B2796E700744E5F /* LoginProviderMock.swift in Sources */,
 				6944B16C2B853505008E3B70 /* OptimalLocationUseCaseMock.swift in Sources */,
+				E56E760F2BD6DE490018E279 /* GetAvailableProductsUseCaseMock.swift in Sources */,
 				69C4C31A2B88D1B00019A8C6 /* ClientPreferencesMock.swift in Sources */,
 				69E192472B8E3E8700A97286 /* HelpOptionsViewModelTests.swift in Sources */,
 				693474CD2B6BC84C0061F788 /* FavoriteRegionsUseCaseTests.swift in Sources */,
+				E56E75F72BD3B40F0018E279 /* InAppProductMock.swift in Sources */,
 				E5AB28872B2911C900744E5F /* AccountProviderMock.swift in Sources */,
 				696E8F102B31AC690080BB31 /* RootContainerViewModelTests.swift in Sources */,
+				E56E76092BD5296C0018E279 /* InAppProviderSpy.swift in Sources */,
 				E52E691F2B5DCEA500471913 /* UserAuthenticationStatusMonitorMock.swift in Sources */,
 				E52E690F2B5D695A00471913 /* VPNStatusMonitorTests.swift in Sources */,
 				698C3B4E2B2B3CBE0012D527 /* LoginIntegrationTests.swift in Sources */,
@@ -5524,6 +5622,7 @@
 				E58A45472BA4A2CD002A0704 /* LoginQRProviderTests.swift in Sources */,
 				693474C82B6B8BDD0061F788 /* KeychainTypeMock.swift in Sources */,
 				693B9A442B7622B600757A41 /* RegionsDisplayNameUseCaseTests.swift in Sources */,
+				E56E760B2BD5298F0018E279 /* ProductConfigurationSpy.swift in Sources */,
 				E5AB287F2B28F6EF00744E5F /* Stubs.swift in Sources */,
 				E574D9F92B85364C000FADAF /* GetDedicatedIpUseCaseMock.swift in Sources */,
 				69E61DF12B56990E00085648 /* DashboardViewModelTests.swift in Sources */,
@@ -5541,11 +5640,14 @@
 				E52E69002B56ABE400471913 /* AppRouterSpy.swift in Sources */,
 				693474C62B6B8ABA0061F788 /* FavoriteRegionUseCaseMock.swift in Sources */,
 				E574D9E72B83F3D2000FADAF /* DipServerProviderMock.swift in Sources */,
+				E56E75F22BD2F67F0018E279 /* GetAvailableProductsUseCaseTests.swift in Sources */,
+				E56E76032BD402C80018E279 /* DecoratorProductsProviderTests.swift in Sources */,
 				E574D9E82B83F3D2000FADAF /* DedicatedIPProviderTests.swift in Sources */,
 				E5AB28E12B4C107F00744E5F /* VpnConfigurationProviderTypeMock.swift in Sources */,
 				E58A45432BA49D8D002A0704 /* LoginQRURLRequestMakerTests.swift in Sources */,
 				E5C507C42B1F72E700200A6A /* CheckLoginAvailabilityTests.swift in Sources */,
 				6900D37B2B975E0700C87E2E /* RefreshServersLatencyUseCaseTests.swift in Sources */,
+				E56E75F52BD3B2940018E279 /* ProductsProviderMock.swift in Sources */,
 				692DE7DC2B73AE32000A2F1A /* LeadingNavigationBarViewModel.swift in Sources */,
 				E58A45402BA49C43002A0704 /* ValidateLoginQRCodeMock.swift in Sources */,
 				E574D9E92B83F3D2000FADAF /* ActivateDIPTokenUseCaseTests.swift in Sources */,
@@ -5553,8 +5655,10 @@
 				69629AB22B8FAFE200C9C590 /* LicensesUseCaseTests.swift in Sources */,
 				692DE7DA2B739AF8000A2F1A /* AppRouterTests.swift in Sources */,
 				E5C507C02B1F700C00200A6A /* CheckLoginAvailabilityMock.swift in Sources */,
+				E56E76112BD6DE750018E279 /* PurchaseProductUseCaseMock.swift in Sources */,
 				691317A12B32ED76009B4E85 /* AccountProviderTypeMock.swift in Sources */,
 				E52E69222B5DCF1F00471913 /* VPNStatusProviderMock.swift in Sources */,
+				E56E76072BD529370018E279 /* SubscriptionInformationProviderMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
