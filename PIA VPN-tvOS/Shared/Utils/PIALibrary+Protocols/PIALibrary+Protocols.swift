@@ -99,3 +99,6 @@ protocol VPNStatusProviderType {
 extension DefaultVPNProvider: VPNStatusProviderType {}
 
 extension MockVPNProvider: VPNStatusProviderType {}
+
+extension DefaultAccountProvider: ProductsProviderType {}
+extension Client.Configuration: ProductConfigurationType {}

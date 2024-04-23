@@ -48,7 +48,7 @@ struct SubscriptionOptionView: View {
                         Spacer()
                     }
                     .frame(maxHeight: .infinity)
-                    .padding()
+                    .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0))
                 }
                 
             }.overlay(

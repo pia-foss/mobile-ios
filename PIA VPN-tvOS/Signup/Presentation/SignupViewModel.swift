@@ -34,7 +34,7 @@ class SignupViewModel: ObservableObject {
         Task {
             do {
                 let products = try await getAvailableProducts.getAllProducts()
-                let subscriptionOptionViewModels = products.map { viewModelMapper.map(product: $0) }
+                let subscriptionOptionViewModels = products.map { viewModelMapper.map(product: $0) }.sorted { $0.option.rawValue < $1.option.rawValue }
                 Task { @MainActor in
                     subscriptionOptions = subscriptionOptionViewModels
                     isLoading = false
@@ -42,6 +42,7 @@ class SignupViewModel: ObservableObject {
             } catch {
                 Task { @MainActor in
                     isLoading = false
+                    shouldShowErrorMessage = true
                 }
             }
         }

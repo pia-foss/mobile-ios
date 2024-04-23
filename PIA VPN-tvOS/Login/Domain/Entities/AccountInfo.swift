@@ -7,13 +7,7 @@
 //
 
 import Foundation
-
-enum Plan: String {
-    case monthly
-    case yearly
-    case trial
-    case other
-}
+import PIALibrary
 
 struct AccountInfo {
     let email: String?

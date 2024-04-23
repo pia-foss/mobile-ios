@@ -9,30 +9,38 @@
 import SwiftUI
 
 struct SignupView: View {
-    @ObservedObject var viewModel: SignupViewModel
+    @StateObject var viewModel: SignupViewModel
     
     var body: some View {
         HStack {
-            VStack(alignment: .center, spacing: 60) {
-                
-                Image.onboarding_pia_brand
-                
-                Text(L10n.Localizable.Tvos.Signup.Subscription.title)
-                    .font(.system(size: 76))
-                    .foregroundColor(.piaOnBackground)
+            if viewModel.isLoading {
+                SignupLoadingView()
+            } else {
+                VStack(alignment: .center, spacing: 60) {
                     
-                Spacer()
-                
-                VStack {
-                    Image.signup_screen.padding(EdgeInsets(top: 50, leading: 50, bottom: 50, trailing: 50))
+                    Image.onboarding_pia_brand
+                    
+                    Text(L10n.Localizable.Tvos.Signup.Subscription.title)
+                        .font(.system(size: 76))
+                        .foregroundColor(.piaOnBackground)
+                        
+                    Spacer()
+                    
+                    VStack {
+                        Image.signup_screen.padding(EdgeInsets(top: 50, leading: 50, bottom: 50, trailing: 50))
+                    }
+                    .background(Color.piaSurfaceContainerPrimary)
+                    .cornerRadius(20)
                 }
-                .background(Color.piaSurfaceContainerPrimary)
-                .cornerRadius(20)
+                
+                Divider()
+                
+                SignupSubscriptionView(viewModel: viewModel)
+                
+                
             }
-            
-            Divider()
-            
-            SignupSubscriptionView(viewModel: viewModel)
+        }.onAppear {
+            viewModel.getproducts()
         }
     }
 }

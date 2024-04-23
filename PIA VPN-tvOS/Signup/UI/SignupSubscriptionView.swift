@@ -46,8 +46,6 @@ struct SignupSubscriptionView: View {
                     }.buttonStyle(.plain)
                 }
             }.frame(maxWidth: .infinity)
-        }.onAppear {
-            viewModel.getproducts()
         }
     }
 }
