@@ -15,4 +15,11 @@ extension TimeInterval {
         let now = Date().timeIntervalSince1970
         return now > self ? nil : self - now
     }
+    
+    /// Returns time in seconds between now & the receiver
+    /// and a nil if the receiver has already gone ahead of now.
+    public func timeUntilNow() -> Double? {
+        let now = Date().timeIntervalSince1970
+        return now < self ? nil : now - self
+    }
 }

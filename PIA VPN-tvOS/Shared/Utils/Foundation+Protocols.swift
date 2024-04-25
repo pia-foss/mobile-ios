@@ -15,6 +15,8 @@ protocol NotificationCenterType {
     
     func removeObserver(_ observer: Any)
     
+    func post(name aName: NSNotification.Name, object anObject: Any?)
+    
     @available(iOS 13.0, *)
     func publisher(for name: Notification.Name, object: AnyObject?) -> NotificationCenter.Publisher
     

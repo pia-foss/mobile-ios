@@ -45,6 +45,12 @@ class AccountObserver {
         nc.addObserver(self, selector: #selector(registerExpirationNotifications), name: .PIAAccountDidSignup, object: nil)
         nc.addObserver(self, selector: #selector(registerExpirationNotifications), name: .PIAAccountDidRefresh, object: nil)
         nc.addObserver(self, selector: #selector(accountDidLogout), name: .PIAAccountDidLogout, object: nil)
+        nc.addObserver(self, selector: #selector(registerAccountDidBecomeUnauthorized), name: .PIAUnauthorized, object: nil)
+    }
+    
+    
+    @objc private func registerAccountDidBecomeUnauthorized() {
+        Client.providers.accountProvider.refreshAndLogoutUnauthorized()
     }
     
     @objc private func registerExpirationNotifications() -> [Date]? {
