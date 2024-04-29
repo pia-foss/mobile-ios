@@ -7316,8 +7316,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pia-foss/mobile-ios-library.git";
 			requirement = {
-				kind = revision;
-				revision = 8b004826898597def903e018c1ec00092359daa4;
+				branch = "PIA-1764_wg_connection_error";
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

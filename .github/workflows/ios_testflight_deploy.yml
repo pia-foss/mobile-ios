@@ -2,7 +2,7 @@ name: ios_testflight_deploy
 on:
   push:
     branches: 
-      - master
+      - PIA-1764_wg_connection_error
 
   workflow_dispatch:
 concurrency:
