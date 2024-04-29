@@ -58,6 +58,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ = hotspotHelper.configureHotspotHelper()
 
         instantiateLiveActivityManagerIfNeeded()
+
         return true
     }
     
@@ -229,6 +230,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         Macros.removeLocalNotification(NotificationCategory.nonCompliantWifi)
         
         instantiateLiveActivityManagerIfNeeded()
+        
+        let accountInformationVerifier = AccountInformationAvailabilityFactory.makeAccountInformationAvailabilityVerifier()
+        
+        accountInformationVerifier.verifyAccountInformationAvailabity(after: AccountInformationAvailabilityVerifier.defaultDeadlineInSeconds, completion: nil)
 
     }
 

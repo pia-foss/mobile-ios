@@ -42,3 +42,6 @@ class SignUpFactory {
                                   productConfiguration: Client.configuration)
     }
 }
+
+extension DefaultAccountProvider: ProductsProviderType {}
+extension Client.Configuration: ProductConfigurationType {}

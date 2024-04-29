@@ -427,6 +427,11 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     private func manuallyConnect() {
+        let accountInformationVerifier = AccountInformationAvailabilityFactory.makeAccountInformationAvailabilityVerifier()
+        let threeHoursInSeconds: TimeInterval = 10800
+        
+        accountInformationVerifier.verifyAccountInformationAvailabity(after: threeHoursInSeconds, completion: nil)
+        
         Client.providers.vpnProvider.connect({ [weak self] error in
             
             //User clicked the button, the connection of the VPN was manual
