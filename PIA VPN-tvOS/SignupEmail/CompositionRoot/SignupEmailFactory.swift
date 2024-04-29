@@ -33,8 +33,8 @@ class SignupEmailFactory {
         }
         
         return SignupProvider(accountProvider: defaultAccountProvider, 
-                              userAccountMapper: UserAccountMapper(), 
-                              store: Client.store, 
+                              userAccountMapper: UserAccountMapper(),
+                              store: Client.store,
                               errorMapper: SignupDomainErrorMapper())
     }
 }
