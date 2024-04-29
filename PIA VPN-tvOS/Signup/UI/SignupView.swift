@@ -45,6 +45,6 @@ struct SignupView: View {
             Button(L10n.Localizable.Global.ok) {}
         }, message: {
             Text(viewModel.errorMessage ?? L10n.Localizable.Tvos.Signup.Subscription.Error.Message.generic)
-    })
+        })
     }
 }
