@@ -142,6 +142,10 @@ extension AppRouter {
     static var navigateToConnectionstatsDestinationAction: AppRouter.Actions {
         navigateRouterToDestinationAction(OnboardingDestinations.connectionstats)
     }
+    
+    static var navigateToSignUpEmailDestinationAction: AppRouter.Actions {
+        navigateRouterToDestinationAction(AuthenticationDestinations.signupEmail)
+    }
 }
 
 // MARK: - Settings Navigation Actions

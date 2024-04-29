@@ -40,7 +40,6 @@ class DecoratorProductsProvider: ProductsProviderType {
                 }
             }
             
-            //self?.decoratee.listPlanProducts(nil)
             self?.store.startObservingTransactions()
             completion()
         }

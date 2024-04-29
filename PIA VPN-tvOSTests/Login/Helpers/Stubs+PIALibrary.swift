@@ -117,6 +117,14 @@ extension PIA_VPN_tvOS.Product {
     }
 }
 
+extension InAppTransactionMock {
+    static func makeStub() -> InAppTransactionMock {
+        InAppTransactionMock(identifier: "001",
+                             native: nil,
+                             description: "description")
+    }
+}
+
 extension PIALibrary.UserAccount: Equatable {
     public static func == (lhs: PIALibrary.UserAccount, rhs: PIALibrary.UserAccount) -> Bool {
         lhs.credentials == rhs.credentials

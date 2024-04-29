@@ -14,7 +14,8 @@ class SubscriptionOptionViewModelMapper {
         let optionString = isYearlyPlan ? L10n.Localizable.Tiles.Subscription.yearly : L10n.Localizable.Tiles.Subscription.monthly
         
         let currency = "\(product.product.priceLocale.currencySymbol ?? "$")"
-        let price = product.product.price.stringValue + currency  + " "
+        let rawPrice = product.product.price.stringValue + currency
+        let price = rawPrice + " "
         + (isYearlyPlan ? L10n.Localizable.Tvos.Signup.Subscription.Paywall.Price.year
            : L10n.Localizable.Tvos.Signup.Subscription.Paywall.Price.month)
         let monthlyPrice = (monthlyPrice(price: product.product.price.doubleValue) ?? "") + currency +  L10n.Localizable.Tvos.Signup.Subscription.Paywall.Price.Month.simplified
@@ -22,7 +23,8 @@ class SubscriptionOptionViewModelMapper {
         return SubscriptionOptionViewModel(productId: product.product.identifier,
                                            option: product.type,
                                            optionString: optionString,
-                                           price: price,
+                                           price: price, 
+                                           rawPrice: rawPrice,
                                            monthlyPrice: isYearlyPlan ? monthlyPrice : nil,
                                            freeTrial: isYearlyPlan ? L10n.Localizable.Tvos.Signup.Subscription.Paywall.Price.trial : nil)
     }

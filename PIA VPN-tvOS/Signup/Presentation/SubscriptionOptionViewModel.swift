@@ -17,6 +17,7 @@ struct SubscriptionOptionViewModel {
     let option: SubscriptionOption
     let optionString: String
     let price: String
+    let rawPrice: String
     let monthlyPrice: String?
     let freeTrial: String?
 }

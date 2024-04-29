@@ -7,11 +7,29 @@
 //
 
 import Foundation
+import PIALibrary
 
 protocol PurchaseProductUseCaseType {
-    func callAsFunction(productId: String) async throws
+    func callAsFunction(subscriptionOption: SubscriptionOption) async throws -> InAppTransaction
 }
 
 class PurchaseProductUseCase: PurchaseProductUseCaseType {
-    func callAsFunction(productId: String) async throws {}
+    private let purchaseProductsProvider: PurchaseProductsProviderType
+    
+    init(purchaseProductsProvider: PurchaseProductsProviderType) {
+        self.purchaseProductsProvider = purchaseProductsProvider
+    }
+    
+    func callAsFunction(subscriptionOption: SubscriptionOption) async throws -> InAppTransaction {
+        return try await withCheckedThrowingContinuation { continuation in
+            purchaseProductsProvider.purchase(subscriptionOption: subscriptionOption) { result in
+                switch result {
+                case .success(let transaction):
+                    continuation.resume(returning: transaction)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
 }

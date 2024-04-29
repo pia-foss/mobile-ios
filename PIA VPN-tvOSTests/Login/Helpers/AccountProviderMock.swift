@@ -27,11 +27,13 @@ class AccountProviderMock: AccountProvider {
     
     private let userResult: PIALibrary.UserAccount?
     private let errorResult: Error?
+    private let appStoreInformationResult: PIALibrary.AppStoreInformation?
     var isExpired: Bool = false
     
-    init(userResult: PIALibrary.UserAccount?, errorResult: Error?) {
+    init(userResult: PIALibrary.UserAccount?, errorResult: Error?, appStoreInformationResult: PIALibrary.AppStoreInformation? = nil) {
         self.userResult = userResult
         self.errorResult = errorResult
+        self.appStoreInformationResult = appStoreInformationResult
     }
     
     func login(with request: PIALibrary.LoginRequest, _ callback: PIALibrary.LibraryCallback<PIALibrary.UserAccount>?) {
@@ -40,6 +42,14 @@ class AccountProviderMock: AccountProvider {
     
     func login(with linkToken: String, _ callback: ((PIALibrary.UserAccount?, Error?) -> Void)?) {
         callback?(userResult, errorResult)
+    }
+    
+    func signup(with request: PIALibrary.SignupRequest, _ callback: PIALibrary.LibraryCallback<PIALibrary.UserAccount>?) {
+        callback?(userResult, errorResult)
+    }
+    
+    func subscriptionInformation(_ callback: PIALibrary.LibraryCallback<PIALibrary.AppStoreInformation>?) {
+        callback?(appStoreInformationResult, errorResult)
     }
     
     func login(with receiptRequest: PIALibrary.LoginReceiptRequest, _ callback: PIALibrary.LibraryCallback<PIALibrary.UserAccount>?) {}
@@ -55,9 +65,7 @@ class AccountProviderMock: AccountProvider {
     func isAPIEndpointAvailable(_ callback: PIALibrary.LibraryCallback<Bool>?) {}
     func restorePurchases(_ callback: PIALibrary.SuccessLibraryCallback?) {}
     func loginUsingMagicLink(withEmail email: String, _ callback: PIALibrary.SuccessLibraryCallback?) {}
-    func signup(with request: PIALibrary.SignupRequest, _ callback: PIALibrary.LibraryCallback<PIALibrary.UserAccount>?) {}
     func listRenewablePlans(_ callback: PIALibrary.LibraryCallback<[PIALibrary.Plan]>?) {}
-    func subscriptionInformation(_ callback: PIALibrary.LibraryCallback<PIALibrary.AppStoreInformation>?) {}
     func renew(with request: PIALibrary.RenewRequest, _ callback: PIALibrary.LibraryCallback<PIALibrary.UserAccount>?) {}
 }
 
