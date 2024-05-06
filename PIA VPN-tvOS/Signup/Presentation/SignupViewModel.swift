@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALibrary
 
 class SignupViewModel: ObservableObject {
     let title: String = L10n.Localizable.Tvos.Signup.Subscription.Paywall.title
@@ -17,16 +18,21 @@ class SignupViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var shouldShowErrorMessage = false
     @Published var subscriptionOptions: [SubscriptionOptionViewModel] = []
+    var errorMessage: String?
     
     private let getAvailableProducts: GetAvailableProductsUseCaseType
     private let purchaseProduct: PurchaseProductUseCaseType
     private let viewModelMapper: SubscriptionOptionViewModelMapper
+    private let signupPresentableMapper: SignupPresentableErrorMapper
+    private let onSuccessAction: (InAppTransaction?) -> Void
     
-    init(optionButtons: [OnboardingComponentButton], getAvailableProducts: GetAvailableProductsUseCaseType, purchaseProduct: PurchaseProductUseCaseType, viewModelMapper: SubscriptionOptionViewModelMapper) {
+    init(optionButtons: [OnboardingComponentButton], getAvailableProducts: GetAvailableProductsUseCaseType, purchaseProduct: PurchaseProductUseCaseType, viewModelMapper: SubscriptionOptionViewModelMapper, signupPresentableMapper: SignupPresentableErrorMapper, onSuccessAction: @escaping (InAppTransaction?) -> Void) {
         self.optionButtons = optionButtons
         self.getAvailableProducts = getAvailableProducts
         self.purchaseProduct = purchaseProduct
         self.viewModelMapper = viewModelMapper
+        self.signupPresentableMapper = signupPresentableMapper
+        self.onSuccessAction = onSuccessAction
     }
     
     func getproducts() {
@@ -37,6 +43,10 @@ class SignupViewModel: ObservableObject {
                 let subscriptionOptionViewModels = products.map { viewModelMapper.map(product: $0) }.sorted { $0.option.rawValue < $1.option.rawValue }
                 Task { @MainActor in
                     subscriptionOptions = subscriptionOptionViewModels
+                    if let price = subscriptionOptions.first(where: { $0.option == .yearly })?.rawPrice {
+                        subtitle = L10n.Localizable.Tvos.Signup.Subscription.Paywall.subtitle(price)
+                    }
+                    
                     isLoading = false
                 }
             } catch {
@@ -49,18 +59,18 @@ class SignupViewModel: ObservableObject {
     }
     
     func subscribe() {
+        isLoading = true
         Task {
             do {
-                guard let productId = subscriptionOptions.first(where: { $0.option == selectedSubscription })?.productId else {
-                    return
-                }
-                try await purchaseProduct(productId: productId)
+                let transaction = try await purchaseProduct(subscriptionOption: selectedSubscription)
                 Task { @MainActor in
                     isLoading = false
+                    onSuccessAction(transaction)
                 }
             } catch {
                 Task { @MainActor in
                     isLoading = false
+                    handleError(error: error)
                 }
             }
         }
@@ -68,5 +78,14 @@ class SignupViewModel: ObservableObject {
     
     func selectSubscription(_ subscription: SubscriptionOption) {
         selectedSubscription = subscription
+    }
+    
+    private func handleError(error: Error) {
+        errorMessage = signupPresentableMapper.map(error: error)
+        shouldShowErrorMessage = true
+        
+        if let purchaseProductsError = error as? PurchaseProductsError, purchaseProductsError == .uncreditedTransaction {
+            onSuccessAction(nil)
+        }
     }
 }

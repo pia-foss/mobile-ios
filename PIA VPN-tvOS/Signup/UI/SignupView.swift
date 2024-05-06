@@ -41,6 +41,10 @@ struct SignupView: View {
             }
         }.onAppear {
             viewModel.getproducts()
-        }
+        }.alert("", isPresented: $viewModel.shouldShowErrorMessage, actions: {
+            Button(L10n.Localizable.Global.ok) {}
+        }, message: {
+            Text(viewModel.errorMessage ?? "something wrong")
+    })
     }
 }

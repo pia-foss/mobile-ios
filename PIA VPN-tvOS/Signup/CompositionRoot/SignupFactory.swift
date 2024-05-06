@@ -23,12 +23,20 @@ class SignUpFactory {
         
         return SignupView(viewModel: SignupViewModel(optionButtons: optionButtons,
                                                      getAvailableProducts: makeGetAvailableProductsUseCase(),
-                                                     purchaseProduct: PurchaseProductUseCase(),
-                                                     viewModelMapper: SubscriptionOptionViewModelMapper()))
+                                                     purchaseProduct: makePurchaseProductUseCase(),
+                                                     viewModelMapper: SubscriptionOptionViewModelMapper(), signupPresentableMapper: SignupPresentableErrorMapper(), 
+                                                     onSuccessAction: { transaction in
+            SignupEmailFactory.transaction = transaction
+            AppRouter.navigateToSignUpEmailDestinationAction()
+        }))
     }
     
     private static func makeGetAvailableProductsUseCase() -> GetAvailableProductsUseCaseType {
         return GetAvailableProductsUseCase(productsProvider: makeDecoratorProductsProvider())
+    }
+    
+    private static func makePurchaseProductUseCase() -> PurchaseProductUseCaseType {
+        PurchaseProductUseCase(purchaseProductsProvider: makeDecoratorPurchaseProductsProvider())
     }
     
     private static func makeDecoratorProductsProvider() -> ProductsProviderType {
@@ -41,7 +49,18 @@ class SignUpFactory {
                                   store: Client.store,
                                   productConfiguration: Client.configuration)
     }
+    
+    private static func makeDecoratorPurchaseProductsProvider() -> PurchaseProductsProviderType {
+        guard let defaultAccountProvider = Client.providers.accountProvider as? DefaultAccountProvider else {
+            fatalError("Incorrect account provider type")
+        }
+        
+        return DecoratorPurchaseProductsProvider(purchaseProductsProvider: defaultAccountProvider,
+                                                 errorMapper: PurchaseProductDomainErrorMapper(), 
+                                                 store: Client.store)
+    }
 }
 
 extension DefaultAccountProvider: ProductsProviderType {}
 extension Client.Configuration: ProductConfigurationType {}
+extension DefaultAccountProvider: PurchaseProductsAccountProviderType {}

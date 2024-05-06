@@ -11,6 +11,7 @@ import PIALibrary
 
 class InAppProviderSpy: InAppProvider {
     var startObservingTransactionsCalledAttempt = 0
+    var refreshPaymentReceiptCalledAttempt = 0
     var availableProducts: [InAppProduct]?
     var paymentReceipt: Data?
     var hasUncreditedTransactions: Bool = false
@@ -24,5 +25,8 @@ class InAppProviderSpy: InAppProvider {
     func purchaseProduct(_ product: InAppProduct, _ callback: LibraryCallback<InAppTransaction>?) {}
     func uncreditedTransaction(for product: InAppProduct) -> InAppTransaction? { nil }
     func finishTransaction(_ transaction: InAppTransaction, success: Bool) {}
-    func refreshPaymentReceipt(_ callback: SuccessLibraryCallback?) {}
+    func refreshPaymentReceipt(_ callback: SuccessLibraryCallback?) {
+        refreshPaymentReceiptCalledAttempt += 1
+        callback?(nil)
+    }
 }
