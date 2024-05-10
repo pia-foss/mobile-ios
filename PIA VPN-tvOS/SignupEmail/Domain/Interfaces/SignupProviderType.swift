@@ -10,5 +10,5 @@ import Foundation
 import PIALibrary
 
 protocol SignupProviderType {
-    func signup(email: String, transaction: InAppTransaction?, _ callback: @escaping (Result<UserAccount, Error>) -> Void)
+    func signup(email: String, transaction: InAppTransaction?, _ callback: @escaping (Result<UserAccount, SignupError>) -> Void)
 }

@@ -31,6 +31,7 @@ class SignupEmailFactory {
         
         return SignupProvider(accountProvider: defaultAccountProvider, 
                               userAccountMapper: UserAccountMapper(), 
-                              store: Client.store)
+                              store: Client.store, 
+                              errorMapper: SignupDomainErrorMapper())
     }
 }

@@ -27,8 +27,7 @@ class SignupEmailViewModel: ObservableObject {
     func signup(email: String) {
         let cleanedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
         guard Validator.validate(email: cleanedEmail) else {
-            shouldShowErrorMessage = true
-            errorMessage = ""
+            handleError(error: nil)
             return
         }
         
@@ -43,10 +42,14 @@ class SignupEmailViewModel: ObservableObject {
             } catch {
                 Task { @MainActor in
                     isLoading = false
-                    shouldShowErrorMessage = true
-                    errorMessage = ""
+                    handleError(error: error)
                 }
             }
         }
+    }
+    
+    private func handleError(error: Error?) {
+        errorMessage = error != nil ? L10n.Localizable.Tvos.Signup.Email.Error.Message.generic : L10n.Welcome.Purchase.Error.validation
+        shouldShowErrorMessage = true
     }
 }

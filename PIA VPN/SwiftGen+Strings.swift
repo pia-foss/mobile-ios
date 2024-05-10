@@ -1642,9 +1642,27 @@ internal enum L10n {
         internal static let item3 = L10n.tr("Localizable", "tvos.signup.item3", fallback: "24/7 customer support")
         /// Get Private Internet Access
         internal static let title = L10n.tr("Localizable", "tvos.signup.title", fallback: "Get Private Internet Access")
+        internal enum Email {
+          internal enum Error {
+            internal enum Message {
+              /// We're unable to create an account at this time. Please try again later
+              internal static let generic = L10n.tr("Localizable", "tvos.signup.email.error.message.generic", fallback: "We're unable to create an account at this time. Please try again later")
+            }
+          }
+        }
         internal enum Subscription {
           /// Sign Up
           internal static let title = L10n.tr("Localizable", "tvos.signup.subscription.title", fallback: "Sign Up")
+          internal enum Error {
+            /// Error
+            internal static let title = L10n.tr("Localizable", "tvos.signup.subscription.error.title", fallback: "Error")
+            internal enum Message {
+              /// Something went wrong. Please try again.
+              internal static let generic = L10n.tr("Localizable", "tvos.signup.subscription.error.message.generic", fallback: "Something went wrong. Please try again.")
+              /// Payment was cancelled. Please try again.
+              internal static let paymentCancelled = L10n.tr("Localizable", "tvos.signup.subscription.error.message.paymentCancelled", fallback: "Payment was cancelled. Please try again.")
+            }
+          }
           internal enum Paywall {
             /// Start your 7 days free trial then %@ per year.
             internal static func subtitle(_ p1: Any) -> String {

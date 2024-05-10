@@ -585,3 +585,9 @@
 "tvos.signup.subscription.paywall.price.month" = "per month";
 "tvos.signup.subscription.paywall.price.month.simplified" = "/mo";
 "tvos.signup.subscription.paywall.button.subscribe" = "Subscribe Now";
+
+"tvos.signup.subscription.error.title" = "Error";
+"tvos.signup.subscription.error.message.generic" = "Something went wrong. Please try again.";
+"tvos.signup.subscription.error.message.paymentCancelled" = "Payment was cancelled. Please try again.";
+
+"tvos.signup.email.error.message.generic" = "We're unable to create an account at this time. Please try again later";
