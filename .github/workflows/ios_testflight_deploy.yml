@@ -46,11 +46,11 @@ jobs:
     - name: Set up certificates and profiles
       run: bundle exec fastlane get_profiles > /dev/null 2>&1
       
-    - name: Upload version to TestFlight
-      run: bundle exec fastlane testflight_build
-
     - name: Create artifacts dir
       run: mkdir artifacts
+    
+    - name: Upload version to TestFlight
+      run: bundle exec fastlane testflight_build
       
     - name: Upload production ipa file
       uses: actions/upload-artifact@v4
