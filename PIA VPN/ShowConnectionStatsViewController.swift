@@ -42,9 +42,12 @@ class ShowConnectionStatsViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
-
+        
+        if UserInterface.isIpad {
+            let nc = NotificationCenter.default
+            nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        }
+        
         ServiceQualityManager.shared.availableData { data in
             self.textData.text = data.joined(separator: "\n\n")
         }

@@ -59,7 +59,9 @@ class DedicatedIpViewController: AutolayoutViewController {
         title = L10n.Localizable.Dedicated.Ip.title
 
         let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        if UserInterface.isIpad {
+            nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        }
         nc.addObserver(self, selector: #selector(reloadTableView), name: .DedicatedIpReload, object: nil)
         nc.addObserver(self, selector: #selector(showLoadingAnimation), name: .DedicatedIpShowAnimation, object: nil)
         nc.addObserver(self, selector: #selector(hideLoadingAnimation), name: .DedicatedIpHideAnimation, object: nil)

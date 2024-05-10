@@ -86,8 +86,11 @@ class AccountViewController: AutolayoutViewController {
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(redisplayAccount), name: .PIAAccountDidRefresh, object: nil)
-        nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
-
+        
+        if UserInterface.isIpad {
+            nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        }
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(openManageSubscription))
         labelSubscriptions.addGestureRecognizer(tap)
 

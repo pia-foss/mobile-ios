@@ -67,10 +67,12 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         super.viewDidLoad()
         
         reloadSettings()
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(viewHasRotated),
-                                               name: UIDevice.orientationDidChangeNotification, object: nil)
+       
+        if UserInterface.isIpad {
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(viewHasRotated),
+                                                   name: UIDevice.orientationDidChangeNotification, object: nil)
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(refreshSettings),
                                                name: .RefreshSettings,

@@ -54,8 +54,10 @@ class AboutViewController: AutolayoutViewController {
         labelIntro.text = "Copyright © \(AppConfiguration.About.copyright) \(AppConfiguration.About.companyName)\n\(textApp) \(Macros.versionFullString()!)"
         tableView.scrollsToTop = true
         
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        if UserInterface.isIpad {
+            let nc = NotificationCenter.default
+            nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        }
 
     }
     
