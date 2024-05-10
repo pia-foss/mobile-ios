@@ -135,9 +135,18 @@ platform :ios do
 
     increment_build_number_testflight
 
+    current_branch = git_branch()
+    commit_hash = last_git_commit()
+    short_hash = commit_hash[:abbreviated_commit_hash]
+    archive_path = "PIA_VPN_iOS_production.#{current_branch}_#{short_hash}"
+    archive_zip_name = "#{archive_path}.zip"
+
     build_app(scheme: "PIA VPN",
       export_method: "app-store",
       clean: true,
+      configuration: "Release",
+      build_path: "build/#{archive_path}",
+      output_name: "#{archive_path}.ipa",
       export_options: {
         provisioningProfiles: { 
           "com.privateinternetaccess.ios.PIA-VPN" => "match AppStore com.privateinternetaccess.ios.PIA-VPN",
@@ -148,6 +157,9 @@ platform :ios do
         }
       }
     )
+
+    zip(output_path: archive_zip_name, path: "#{archive_path}.ipa")
+    sh "mv ../#{archive_zip_name} ../artifacts/#{archive_zip_name}"
 
     pilot(
       api_key: api_key,
@@ -224,7 +236,7 @@ desc "This line is for creating testflight build for tvOS"
     increment_build_number(
       build_number: build_number + 1 
     )
-
+    
     build_app(scheme: "PIA VPN-tvOS",
       export_method: "app-store",
       xcargs: "-destination 'platform=tvOS'",

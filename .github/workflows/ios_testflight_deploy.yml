@@ -48,4 +48,11 @@ jobs:
       
     - name: Upload version to TestFlight
       run: bundle exec fastlane testflight_build
+
+    - name: Create artifacts dir
+      run: mkdir artifacts
       
+    - name: Upload production ipa file
+      uses: actions/upload-artifact@v4
+      with:
+        path: artifacts/
