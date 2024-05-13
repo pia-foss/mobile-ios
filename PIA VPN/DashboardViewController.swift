@@ -124,7 +124,6 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(unauthorized), name: .Unauthorized, object: nil)
         nc.addObserver(self, selector: #selector(openSettings), name: .OpenSettings, object: nil)
         nc.addObserver(self, selector: #selector(openSettingsAndWireGuard), name: .OpenSettingsAndActivateWireGuard, object: nil)
-        nc.addObserver(self, selector: #selector(checkInternetConnection), name: .PIADaemonsDidUpdateConnectivity, object: nil)
         nc.addObserver(self, selector: #selector(checkVPNConnectingStatus(notification:)), name: .PIADaemonsConnectingVPNStatus, object: nil)
         
         nc.addObserver(self, selector: #selector(connectionVPNStatusDidChange(_:)), name: NSNotification.Name.NEVPNStatusDidChange, object: nil)
@@ -370,15 +369,6 @@ class DashboardViewController: AutolayoutViewController {
     
     @objc private func unauthorized() {
         self.isUnauthorized = true
-    }
-    
-    @objc private func checkInternetConnection() {
-        //If connecting and no internet, reconnect the VPN
-        if Client.providers.vpnProvider.vpnStatus == .connecting,
-            Client.daemons.isInternetReachable == false {
-            Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, { error in
-            })
-        }
     }
     
     @objc private func checkVPNConnectingStatus(notification: Notification) {
