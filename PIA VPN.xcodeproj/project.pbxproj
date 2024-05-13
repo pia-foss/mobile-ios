@@ -6183,7 +6183,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.24.2;
+				MARKETING_VERSION = 3.24.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.Tunnel";
 				PRODUCT_NAME = "PIA VPN Tunnel";
@@ -6218,7 +6218,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.24.2;
+				MARKETING_VERSION = 3.24.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.Tunnel";
 				PRODUCT_NAME = "PIA VPN Tunnel";
@@ -6260,7 +6260,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 3.24.2;
+				MARKETING_VERSION = 3.24.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN";
 				PRODUCT_MODULE_NAME = PIA_VPN_dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6304,7 +6304,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 3.24.2;
+				MARKETING_VERSION = 3.24.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN";
 				PRODUCT_MODULE_NAME = PIA_VPN_dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6411,7 +6411,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.24.2;
+				MARKETING_VERSION = 3.24.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.AdBlocker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6449,7 +6449,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.24.2;
+				MARKETING_VERSION = 3.24.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.AdBlocker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6599,7 +6599,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 3.24.2;
+				MARKETING_VERSION = 3.24.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.privateinternetaccess.ios.PIA-VPN";
@@ -6640,7 +6640,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 3.24.2;
+				MARKETING_VERSION = 3.24.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.privateinternetaccess.ios.PIA-VPN";
@@ -6814,7 +6814,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.24.2;
+				MARKETING_VERSION = 3.24.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PIAWidget";
@@ -6857,7 +6857,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.24.2;
+				MARKETING_VERSION = 3.24.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PIAWidget";
@@ -6894,7 +6894,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.24.2;
+				MARKETING_VERSION = 3.24.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel";
@@ -6934,7 +6934,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.24.2;
+				MARKETING_VERSION = 3.24.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel";
