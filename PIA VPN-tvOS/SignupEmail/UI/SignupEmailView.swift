@@ -51,7 +51,7 @@ struct SignupEmailView: View {
             .alert("", isPresented: $viewModel.shouldShowErrorMessage, actions: {
                     Button(L10n.Localizable.Global.ok) {}
                 }, message: {
-                    Text(viewModel.errorMessage ?? "something wrong")
+                    Text(viewModel.errorMessage ?? L10n.Localizable.Tvos.Signup.Email.Error.Message.generic)
             })
         }
     }

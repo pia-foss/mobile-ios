@@ -18,7 +18,7 @@ final class PurchaseProductUseCaseTests: XCTestCase {
     var fixture: Fixture!
     var sut: PurchaseProductUseCase!
     
-    func instantiateSut(purchaseProductsProviderResult: Result<InAppTransaction, Error>) {
+    func instantiateSut(purchaseProductsProviderResult: Result<InAppTransaction, PurchaseProductsError>) {
         fixture.purchaseProductsProviderMock = PurchaseProductsProviderMock(result: purchaseProductsProviderResult)
         sut = PurchaseProductUseCase(purchaseProductsProvider: fixture.purchaseProductsProviderMock)
     }
@@ -47,9 +47,9 @@ final class PurchaseProductUseCaseTests: XCTestCase {
     }
 
     func test_purchaseProduct_throws_an_error_when_purchaseProductsProvider_completes_with_an_error() async throws {
-        // GIVEN productsProvider completes with an error
+        // GIVEN productsProvider completes with an generic error
         let expectedError = NSError(domain: "any error", code: 0)
-        instantiateSut(purchaseProductsProviderResult: .failure(expectedError))
+        instantiateSut(purchaseProductsProviderResult: .failure(.generic))
         
         do {
             // WHEN signup is executed
@@ -57,7 +57,8 @@ final class PurchaseProductUseCaseTests: XCTestCase {
             XCTFail("Expected to throw an error")
         } catch {
             // THEN signup throws an generic error
-            XCTAssertEqual(error as NSError, expectedError)
+            let purchaseProductsError = try XCTUnwrap(error as? PurchaseProductsError)
+            XCTAssertEqual(purchaseProductsError, .generic)
         }
     }
 }

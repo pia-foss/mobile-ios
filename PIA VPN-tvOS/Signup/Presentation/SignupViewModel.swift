@@ -52,7 +52,7 @@ class SignupViewModel: ObservableObject {
             } catch {
                 Task { @MainActor in
                     isLoading = false
-                    shouldShowErrorMessage = true
+                    handleError(error: error)
                 }
             }
         }

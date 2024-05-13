@@ -178,13 +178,13 @@ final class SignupViewModelTests: XCTestCase {
         // WHEN subscribe is executed
         sut.subscribe()
         
-        // THEN error alert is presented with the text
+        // THEN error alert is presented with a generic error
         wait(for: [expectation], timeout: 1.0)
         XCTAssertNil(capturedTransaction)
         
         XCTAssertEqual(capturedLoadingState, [true, false])
         XCTAssertTrue(sut.shouldShowErrorMessage)
-        XCTAssertEqual(sut.errorMessage, "generic")
+        XCTAssertEqual(sut.errorMessage, L10n.Localizable.Tvos.Signup.Subscription.Error.Message.generic)
     }
     
     func test_subscribe_presents_an_error_alert_when_purchaseProductUseCase_throws_a_productNotFound_PurchaseProductsError() {
@@ -202,10 +202,10 @@ final class SignupViewModelTests: XCTestCase {
         // WHEN subscribe is executed
         sut.subscribe()
         
-        // THEN error alert is presented with the text
+        // THEN error alert is presented with a generic error
         wait(for: [expectation], timeout: 1.0)
         XCTAssertTrue(sut.shouldShowErrorMessage)
-        XCTAssertEqual(sut.errorMessage, "productNotFound")
+        XCTAssertEqual(sut.errorMessage, L10n.Localizable.Tvos.Signup.Subscription.Error.Message.generic)
     }
     
     func test_subscribe_presents_an_error_alert_when_purchaseProductUseCase_throws_an_uncreditedTransaction_PurchaseProductsError() {
@@ -226,10 +226,10 @@ final class SignupViewModelTests: XCTestCase {
         // WHEN subscribe is executed
         sut.subscribe()
         
-        // THEN error alert is presented with the text "" and onSuccessAction is executed
+        // THEN error alert is presented with an uncreditedTransactions error and onSuccessAction is executed
         wait(for: [expectation], timeout: 1.0)
         XCTAssertNil(capturedTransaction)
         XCTAssertTrue(sut.shouldShowErrorMessage)
-        XCTAssertEqual(sut.errorMessage, "uncreditedTransaction")
+        XCTAssertEqual(sut.errorMessage, L10n.Signup.Purchase.Uncredited.Alert.message)
     }
 }

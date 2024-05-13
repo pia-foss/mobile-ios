@@ -94,7 +94,7 @@ final class SignupEmailViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
         XCTAssertNil(capturedUserAccount)
         XCTAssertEqual(capturedLoadingState, [])
-        XCTAssertEqual(sut.errorMessage, "")
+        XCTAssertEqual(sut.errorMessage, L10n.Welcome.Purchase.Error.validation)
         XCTAssertTrue(sut.shouldShowErrorMessage)
     }
     
@@ -123,7 +123,7 @@ final class SignupEmailViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
         XCTAssertNil(capturedUserAccount)
         XCTAssertEqual(capturedLoadingState, [true, false])
-        XCTAssertEqual(sut.errorMessage, "")
+        XCTAssertEqual(sut.errorMessage, L10n.Localizable.Tvos.Signup.Email.Error.Message.generic)
         XCTAssertTrue(sut.shouldShowErrorMessage)
     }
 }

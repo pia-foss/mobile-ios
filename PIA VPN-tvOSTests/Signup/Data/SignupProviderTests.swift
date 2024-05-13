@@ -18,13 +18,14 @@ final class SignupProviderTests: XCTestCase {
     
     var fixture: Fixture!
     var sut: SignupProvider!
-    var capturedResult: Result<PIA_VPN_tvOS.UserAccount, Error>?
+    var capturedResult: Result<PIA_VPN_tvOS.UserAccount, SignupError>?
     
     func instantiateSut(accountProviderResult: (PIALibrary.UserAccount?, Error?)) {
         fixture.accountProviderMock = AccountProviderMock(userResult: accountProviderResult.0, errorResult: accountProviderResult.1)
         sut = SignupProvider(accountProvider: fixture.accountProviderMock,
                              userAccountMapper: UserAccountMapper(),
-                             store: fixture.storeSpy)
+                             store: fixture.storeSpy, 
+                             errorMapper: SignupDomainErrorMapper())
     }
     
     override func setUp() {
@@ -102,7 +103,7 @@ final class SignupProviderTests: XCTestCase {
             return
         }
         
-        XCTAssertEqual(error as NSError, expectedError)
+        XCTAssertEqual(error, .generic)
     }
     
     func test_signup_completes_with_failure_when_accoutProvider_completes_with_no_userAccount_and_no_error() throws {
@@ -126,8 +127,7 @@ final class SignupProviderTests: XCTestCase {
             return
         }
         
-        let clientError = try XCTUnwrap(error as? ClientError)
-        XCTAssertEqual(clientError, .unexpectedReply)
+        XCTAssertEqual(error, .generic)
     }
     
     func test_signup_completes_with_failure_when_accoutProvider_completes_with_an_userAccount_and_an_error() {
@@ -151,7 +151,7 @@ final class SignupProviderTests: XCTestCase {
             return
         }
         
-        XCTAssertEqual(error as NSError, expectedError)
+        XCTAssertEqual(error, .generic)
     }
     
     func test_signup_refreshes_payment_when_there_is_no_paymentReceipt() {

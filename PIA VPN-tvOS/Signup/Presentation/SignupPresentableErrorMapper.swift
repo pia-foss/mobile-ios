@@ -10,17 +10,23 @@ import Foundation
 
 class SignupPresentableErrorMapper {
     func map(error: Error) -> String? {
-        guard let purchaseProductsError = error as? PurchaseProductsError else {
-            return ""
+        if let purchaseProductsError = error as? PurchaseProductsError {
+            return mapPurchaseProductsError(error: purchaseProductsError)
         }
         
-        switch purchaseProductsError {
-            case .generic:
-                return "generic"
-            case .productNotFound:
-                return "productNotFound"
+        return L10n.Localizable.Tvos.Signup.Subscription.Error.Message.generic
+    }
+    
+    private func mapPurchaseProductsError(error: PurchaseProductsError) -> String? {
+        switch error {
             case .uncreditedTransaction:
-                return "uncreditedTransaction"
+                return L10n.Signup.Purchase.Uncredited.Alert.message
+            case .paymentCancelled:
+                return L10n.Localizable.Tvos.Signup.Subscription.Error.Message.paymentCancelled
+            case .other(message: let message):
+                return message
+            default:
+                return L10n.Localizable.Tvos.Signup.Subscription.Error.Message.generic
         }
     }
 }

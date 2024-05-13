@@ -16,9 +16,9 @@ final class SignupUseCaseTests: XCTestCase {
     
     var fixture: Fixture!
     var sut: SignupUseCase!
-    var capturedResult: Result<UserAccount, Error>?
+    var capturedResult: Result<UserAccount, SignupError>?
     
-    func instantiateSut(signupProviderResult: Result<UserAccount, Error>) {
+    func instantiateSut(signupProviderResult: Result<UserAccount, SignupError>) {
         fixture.signupProviderMock = SignupProviderMock(result: signupProviderResult)
         sut = SignupUseCase(signupProvider: fixture.signupProviderMock)
     }
@@ -46,9 +46,8 @@ final class SignupUseCaseTests: XCTestCase {
     }
 
     func test_signup_throws_an_error_when_signupProvider_completes_with_an_error() async throws {
-        // GIVEN productsProvider completes with an error
-        let expectedError = NSError(domain: "any error", code: 0)
-        instantiateSut(signupProviderResult: .failure(expectedError))
+        // GIVEN productsProvider completes with an generic error
+        instantiateSut(signupProviderResult: .failure(.generic))
         
         do {
             // WHEN signup is executed
@@ -56,7 +55,8 @@ final class SignupUseCaseTests: XCTestCase {
             XCTFail("Expected to throw an error")
         } catch {
             // THEN signup throws an generic error
-            XCTAssertEqual(error as NSError, expectedError)
+            let signupError = try XCTUnwrap(error as? SignupError)
+            XCTAssertEqual(signupError, .generic)
         }
     }
 }

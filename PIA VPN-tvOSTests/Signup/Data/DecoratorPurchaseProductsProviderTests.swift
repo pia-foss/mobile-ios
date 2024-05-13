@@ -18,6 +18,7 @@ final class DecoratorPurchaseProductsProviderTests: XCTestCase {
     
     var fixture: Fixture!
     var sut: DecoratorPurchaseProductsProvider!
+    var capturedResult: Result<InAppTransaction, PurchaseProductsError>!
     
     func instantiateSut(purchaseProductsAccountProviderResult: (InAppTransaction?, Error?)) {
         fixture.purchaseProductsAccountProviderMock = PurchaseProductsAccountProviderMock(result: purchaseProductsAccountProviderResult)
@@ -33,6 +34,7 @@ final class DecoratorPurchaseProductsProviderTests: XCTestCase {
     override func tearDown() {
         fixture = nil
         sut = nil
+        capturedResult = nil
     }
 
     func test_purchase_completes_with_uncreditedTransaction_error_when_store_has_uncredited_transactions() throws {
@@ -43,13 +45,11 @@ final class DecoratorPurchaseProductsProviderTests: XCTestCase {
         let error: Error? = nil
         
         instantiateSut(purchaseProductsAccountProviderResult: (transactionStub, error))
-
         let expectation = expectation(description: "Waiting for purchase to finish")
-        var capturedResult: Result<InAppTransaction, Error>?
         
         // WHEN purchase is executed
-        sut.purchase(subscriptionOption: .monthly) { result in
-            capturedResult = result
+        sut.purchase(subscriptionOption: .monthly) { [weak self] result in
+            self?.capturedResult = result
             expectation.fulfill()
         }
         
@@ -60,8 +60,7 @@ final class DecoratorPurchaseProductsProviderTests: XCTestCase {
             return
         }
         
-        let purchaseProductsError = try XCTUnwrap(capturedError as? PurchaseProductsError)
-        XCTAssertEqual(purchaseProductsError, .uncreditedTransaction)
+        XCTAssertEqual(capturedError, .uncreditedTransaction)
     }
     
     func test_purchase_completes_with_transaction_when_store_has_no_uncredited_transactions_and_purchaseProvider_completes_with_transaction_and_no_error() throws {
@@ -73,13 +72,11 @@ final class DecoratorPurchaseProductsProviderTests: XCTestCase {
         let error: Error? = nil
         
         instantiateSut(purchaseProductsAccountProviderResult: (transactionStub, error))
-
         let expectation = expectation(description: "Waiting for purchase to finish")
-        var capturedResult: Result<InAppTransaction, Error>?
         
         // WHEN purchase is executed
-        sut.purchase(subscriptionOption: .monthly) { result in
-            capturedResult = result
+        sut.purchase(subscriptionOption: .monthly) { [weak self] result in
+            self?.capturedResult = result
             expectation.fulfill()
         }
         
@@ -104,13 +101,11 @@ final class DecoratorPurchaseProductsProviderTests: XCTestCase {
         let error = NSError(domain: "anError", code: 0)
         
         instantiateSut(purchaseProductsAccountProviderResult: (transactionStub, error))
-
         let expectation = expectation(description: "Waiting for purchase to finish")
-        var capturedResult: Result<InAppTransaction, Error>?
         
         // WHEN purchase is executed
-        sut.purchase(subscriptionOption: .monthly) { result in
-            capturedResult = result
+        sut.purchase(subscriptionOption: .monthly) { [weak self] result in
+            self?.capturedResult = result
             expectation.fulfill()
         }
         
@@ -121,8 +116,7 @@ final class DecoratorPurchaseProductsProviderTests: XCTestCase {
             return
         }
         
-        let purchaseProductsError = try XCTUnwrap(capturedError as? PurchaseProductsError)
-        XCTAssertEqual(purchaseProductsError, .generic)
+        XCTAssertEqual(capturedError, .generic)
     }
     
     func test_purchase_completes_with_error_when_store_has_no_uncredited_transactions_and_purchaseProvider_completes_with_no_transaction_and_no_error() throws {
@@ -134,13 +128,11 @@ final class DecoratorPurchaseProductsProviderTests: XCTestCase {
         let error: Error? = nil
         
         instantiateSut(purchaseProductsAccountProviderResult: (transactionStub, error))
-
         let expectation = expectation(description: "Waiting for purchase to finish")
-        var capturedResult: Result<InAppTransaction, Error>?
         
         // WHEN purchase is executed
-        sut.purchase(subscriptionOption: .monthly) { result in
-            capturedResult = result
+        sut.purchase(subscriptionOption: .monthly) { [weak self] result in
+            self?.capturedResult = result
             expectation.fulfill()
         }
         
@@ -151,8 +143,7 @@ final class DecoratorPurchaseProductsProviderTests: XCTestCase {
             return
         }
         
-        let purchaseProductsError = try XCTUnwrap(capturedError as? PurchaseProductsError)
-        XCTAssertEqual(purchaseProductsError, .generic)
+        XCTAssertEqual(capturedError, .generic)
     }
     
     func test_purchase_completes_with_error_when_store_has_no_uncredited_transactions_and_purchaseProvider_completes_with_a_transaction_and_an_error() throws {
@@ -164,13 +155,11 @@ final class DecoratorPurchaseProductsProviderTests: XCTestCase {
         let error = NSError(domain: "anError", code: 0)
         
         instantiateSut(purchaseProductsAccountProviderResult: (transactionStub, error))
-
         let expectation = expectation(description: "Waiting for purchase to finish")
-        var capturedResult: Result<InAppTransaction, Error>?
         
         // WHEN purchase is executed
-        sut.purchase(subscriptionOption: .monthly) { result in
-            capturedResult = result
+        sut.purchase(subscriptionOption: .monthly) { [weak self] result in
+            self?.capturedResult = result
             expectation.fulfill()
         }
         
@@ -181,8 +170,6 @@ final class DecoratorPurchaseProductsProviderTests: XCTestCase {
             return
         }
         
-        let purchaseProductsError = try XCTUnwrap(capturedError as? PurchaseProductsError)
-        XCTAssertEqual(purchaseProductsError, .generic)
+        XCTAssertEqual(capturedError, .generic)
     }
-
 }
