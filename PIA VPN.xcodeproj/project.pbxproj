@@ -274,6 +274,8 @@
 		698F4F322ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F4F2F2ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift */; };
 		699311A02B31894D00D316C8 /* Foundation+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6993119F2B31894D00D316C8 /* Foundation+Protocols.swift */; };
 		699311A22B318F6B00D316C8 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699311A12B318F6B00D316C8 /* DashboardViewModel.swift */; };
+		699CA37D2BEE1DF000BE1672 /* UserInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CA37C2BEE1DF000BE1672 /* UserInterface.swift */; };
+		699CA37E2BEE1DF000BE1672 /* UserInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CA37C2BEE1DF000BE1672 /* UserInterface.swift */; };
 		699F23B22AFBA66000EBC5E6 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23AC2AFBA66000EBC5E6 /* SettingsScreen.swift */; };
 		699F23B32AFBA66000EBC5E6 /* HelpSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23AD2AFBA66000EBC5E6 /* HelpSettingsScreen.swift */; };
 		699F23B42AFBA66000EBC5E6 /* AutomationSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F23AE2AFBA66000EBC5E6 /* AutomationSettingsScreen.swift */; };
@@ -1330,6 +1332,7 @@
 		698F4F2F2ABA1DA10010B2B0 /* PIAConnectionLiveActivityManager.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PIAConnectionLiveActivityManager.swift; sourceTree = "<group>"; tabWidth = 4; };
 		6993119F2B31894D00D316C8 /* Foundation+Protocols.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "Foundation+Protocols.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		699311A12B318F6B00D316C8 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		699CA37C2BEE1DF000BE1672 /* UserInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInterface.swift; sourceTree = "<group>"; };
 		699F23AC2AFBA66000EBC5E6 /* SettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		699F23AD2AFBA66000EBC5E6 /* HelpSettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpSettingsScreen.swift; sourceTree = "<group>"; };
 		699F23AE2AFBA66000EBC5E6 /* AutomationSettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutomationSettingsScreen.swift; sourceTree = "<group>"; };
@@ -1993,6 +1996,7 @@
 				0EFDC1EE1FE4B9E6007C0B9B /* AppConfiguration.swift */,
 				0EFDC1EB1FE4B9DC007C0B9B /* AppConstants.swift */,
 				0EFDC1DF1FE4A450007C0B9B /* AppPreferences.swift */,
+				699CA37C2BEE1DF000BE1672 /* UserInterface.swift */,
 			);
 			name = Global;
 			sourceTree = "<group>";
@@ -5186,6 +5190,7 @@
 				824C531624C04796003DB740 /* ConnectionTileCollectionViewCell.swift in Sources */,
 				E51693D62AFBDB8A0089FB8F /* NavigationBar+Appearence..swift in Sources */,
 				DDC8124D2176185D00CB290C /* SwiftGen+SeguesStoryboards.swift in Sources */,
+				699CA37E2BEE1DF000BE1672 /* UserInterface.swift in Sources */,
 				E5217F552AEAD54600123442 /* WalkthroughPageView.swift in Sources */,
 				DDD271E221D6262100B6D20F /* PropertyStoring.swift in Sources */,
 				E59E8FB22AEA7A81009278F5 /* LoginViewController.swift in Sources */,
@@ -5501,6 +5506,7 @@
 				E58A45792BAA290F002A0704 /* TokenProvider.swift in Sources */,
 				E58A45702BAA28AE002A0704 /* ValidateQRLoginFactory.swift in Sources */,
 				DD1C139E21E6623D004004B3 /* XIBSetup.swift in Sources */,
+				699CA37D2BEE1DF000BE1672 /* UserInterface.swift in Sources */,
 				DD07AACC242CBFF2000EE1A3 /* AddEmailToAccountViewController.swift in Sources */,
 				8272C62726540B2100D846A8 /* ProtocolSettingsViewController.swift in Sources */,
 				E59E8F942AEA7A29009278F5 /* ActivityButton.swift in Sources */,

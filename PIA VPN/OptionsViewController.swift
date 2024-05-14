@@ -73,7 +73,10 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
         
         delegate?.optionsController(self, didLoad: tableView)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        if UserInterface.isIpad {
+            NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        }
+        
         
         viewShouldRestyle()
         
