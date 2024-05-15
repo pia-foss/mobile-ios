@@ -18,6 +18,7 @@ extension Image {
     static let pia_help_bg_image = Image(.pia_help_bg_image)
     static let empty_search_bg_image = Image(.empty_search_bg_image)
     static let signup_screen = Image(.signup_screen)
+    static let signup_credentials = Image(.signup_credentials)
 }
 
 extension String {
@@ -29,5 +30,6 @@ extension String {
     static let pia_help_bg_image = "help-bg-image"
     static let empty_search_bg_image = "empty-search-bg-image"
     static let signup_screen = "signup-screen"
+    static let signup_credentials = "signup-credentials"
     
 }

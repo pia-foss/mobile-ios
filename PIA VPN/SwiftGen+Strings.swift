@@ -1642,6 +1642,22 @@ internal enum L10n {
         internal static let item3 = L10n.tr("Localizable", "tvos.signup.item3", fallback: "24/7 customer support")
         /// Get Private Internet Access
         internal static let title = L10n.tr("Localizable", "tvos.signup.title", fallback: "Get Private Internet Access")
+        internal enum Credentials {
+          /// Success!
+          internal static let title = L10n.tr("Localizable", "tvos.signup.credentials.title", fallback: "Success!")
+          internal enum Details {
+            /// Get Started
+            internal static let button = L10n.tr("Localizable", "tvos.signup.credentials.details.button", fallback: "Get Started")
+            /// Password
+            internal static let password = L10n.tr("Localizable", "tvos.signup.credentials.details.password", fallback: "Password")
+            /// You will also receive an email shortly with your username and password.
+            internal static let subtitle = L10n.tr("Localizable", "tvos.signup.credentials.details.subtitle", fallback: "You will also receive an email shortly with your username and password.")
+            /// Card redeemed sucessfully
+            internal static let title = L10n.tr("Localizable", "tvos.signup.credentials.details.title", fallback: "Card redeemed sucessfully")
+            /// Username
+            internal static let username = L10n.tr("Localizable", "tvos.signup.credentials.details.username", fallback: "Username")
+          }
+        }
         internal enum Email {
           internal enum Error {
             internal enum Message {

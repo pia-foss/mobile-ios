@@ -591,3 +591,10 @@
 "tvos.signup.subscription.error.message.paymentCancelled" = "Payment was cancelled. Please try again.";
 
 "tvos.signup.email.error.message.generic" = "We're unable to create an account at this time. Please try again later";
+
+"tvos.signup.credentials.title" = "Success!";
+"tvos.signup.credentials.details.title" = "Card redeemed sucessfully";
+"tvos.signup.credentials.details.subtitle" = "You will also receive an email shortly with your username and password.";
+"tvos.signup.credentials.details.username" = "Username";
+"tvos.signup.credentials.details.password" = "Password";
+"tvos.signup.credentials.details.button" = "Get Started";

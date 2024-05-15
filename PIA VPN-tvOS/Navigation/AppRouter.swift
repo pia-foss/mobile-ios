@@ -146,6 +146,9 @@ extension AppRouter {
     static var navigateToSignUpEmailDestinationAction: AppRouter.Actions {
         navigateRouterToDestinationAction(AuthenticationDestinations.signupEmail)
     }
+    static var navigateToSignUpCredentialsDestinationAction: AppRouter.Actions {
+        navigateRouterToDestinationAction(AuthenticationDestinations.signupCredentials)
+    }
 }
 
 // MARK: - Settings Navigation Actions

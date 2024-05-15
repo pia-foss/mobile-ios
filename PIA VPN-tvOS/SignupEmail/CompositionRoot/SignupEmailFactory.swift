@@ -17,7 +17,10 @@ class SignupEmailFactory {
     }
     
     private static func makeSignupEmailViewModel(transaction: InAppTransaction?) -> SignupEmailViewModel {
-        SignupEmailViewModel(signupUseCase: makeSignupUseCase(), transaction: transaction, onSuccessAction: { userAccount in })
+        SignupEmailViewModel(signupUseCase: makeSignupUseCase(), transaction: transaction, onSuccessAction: { userAccount in
+            SignupCredentialsFactory.userAccount = userAccount
+            AppRouter.navigateToSignUpCredentialsDestinationAction()
+        })
     }
     
     private static func makeSignupUseCase() -> SignupUseCaseType {
