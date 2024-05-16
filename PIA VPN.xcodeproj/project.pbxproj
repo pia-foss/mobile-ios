@@ -716,6 +716,9 @@
 		E55216362BF1393C001A287F /* SignupEmailIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55216352BF1393C001A287F /* SignupEmailIntegrationTests.swift */; };
 		E55216382BF14A5B001A287F /* SignupDomainErrorMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55216372BF14A5B001A287F /* SignupDomainErrorMapper.swift */; };
 		E552163B2BF14A8B001A287F /* SignupError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E552163A2BF14A8B001A287F /* SignupError.swift */; };
+		E552163F2BF2226B001A287F /* SignupCredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E552163E2BF2226B001A287F /* SignupCredentialsView.swift */; };
+		E55216412BF48862001A287F /* SignupCredentialsFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55216402BF48862001A287F /* SignupCredentialsFieldView.swift */; };
+		E55216442BF48A9C001A287F /* SignupCredentialsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55216432BF48A9C001A287F /* SignupCredentialsFactory.swift */; };
 		E55EDCD22B755DB1007010DB /* OnboardingComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCD12B755DB1007010DB /* OnboardingComponentView.swift */; };
 		E55EDCD52B755E09007010DB /* OnboardingComponentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCD42B755E09007010DB /* OnboardingComponentViewModel.swift */; };
 		E55EDCDA2B755E6D007010DB /* OnboardingFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCD92B755E6C007010DB /* OnboardingFactory.swift */; };
@@ -1665,6 +1668,9 @@
 		E55216352BF1393C001A287F /* SignupEmailIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupEmailIntegrationTests.swift; sourceTree = "<group>"; };
 		E55216372BF14A5B001A287F /* SignupDomainErrorMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupDomainErrorMapper.swift; sourceTree = "<group>"; };
 		E552163A2BF14A8B001A287F /* SignupError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupError.swift; sourceTree = "<group>"; };
+		E552163E2BF2226B001A287F /* SignupCredentialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCredentialsView.swift; sourceTree = "<group>"; };
+		E55216402BF48862001A287F /* SignupCredentialsFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCredentialsFieldView.swift; sourceTree = "<group>"; };
+		E55216432BF48A9C001A287F /* SignupCredentialsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCredentialsFactory.swift; sourceTree = "<group>"; };
 		E55EDCD12B755DB1007010DB /* OnboardingComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingComponentView.swift; sourceTree = "<group>"; };
 		E55EDCD42B755E09007010DB /* OnboardingComponentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingComponentViewModel.swift; sourceTree = "<group>"; };
 		E55EDCD92B755E6C007010DB /* OnboardingFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFactory.swift; sourceTree = "<group>"; };
@@ -3527,6 +3533,32 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		E552163C2BF22237001A287F /* SignupCredentials */ = {
+			isa = PBXGroup;
+			children = (
+				E55216422BF48A8D001A287F /* CompositionRoot */,
+				E552163D2BF22257001A287F /* UI */,
+			);
+			path = SignupCredentials;
+			sourceTree = "<group>";
+		};
+		E552163D2BF22257001A287F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				E552163E2BF2226B001A287F /* SignupCredentialsView.swift */,
+				E55216402BF48862001A287F /* SignupCredentialsFieldView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		E55216422BF48A8D001A287F /* CompositionRoot */ = {
+			isa = PBXGroup;
+			children = (
+				E55216432BF48A9C001A287F /* SignupCredentialsFactory.swift */,
+			);
+			path = CompositionRoot;
+			sourceTree = "<group>";
+		};
 		E55EDCD02B755DA5007010DB /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -4126,6 +4158,7 @@
 		E5C507782B0E144E00200A6A /* PIA VPN-tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				E552163C2BF22237001A287F /* SignupCredentials */,
 				E5D7BB542BDC2F4300585909 /* SignupEmail */,
 				E58A457C2BACD0D7002A0704 /* ExpiredAccount */,
 				E520FCEA2B91085800D06C03 /* LoginQR */,
@@ -5656,6 +5689,7 @@
 				E53627352BE6CEB30064DEDF /* SignupPresentableErrorMapper.swift in Sources */,
 				E52E690A2B5BC0ED00471913 /* VPNStatusMonitor.swift in Sources */,
 				69FF0B082B3AD3E60074AA04 /* SelectedServerViewModel.swift in Sources */,
+				E55216442BF48A9C001A287F /* SignupCredentialsFactory.swift in Sources */,
 				6953E54F2B7AA69800D685B4 /* ConnectionStateMonitor.swift in Sources */,
 				69FF0B0B2B3AD4C70074AA04 /* SwiftGen+Strings.swift in Sources */,
 				69F675AA2B592ED6000E31D5 /* ClientPreferences+Protocols.swift in Sources */,
@@ -5678,6 +5712,7 @@
 				69F675AB2B592FA0000E31D5 /* Server+Automatic.swift in Sources */,
 				E5C507B72B17E75B00200A6A /* CheckLoginAvailability.swift in Sources */,
 				E574D9DA2B83F3A2000FADAF /* DedicatedIPFactory.swift in Sources */,
+				E552163F2BF2226B001A287F /* SignupCredentialsView.swift in Sources */,
 				E5AB288E2B2A489500744E5F /* LoginStatus.swift in Sources */,
 				69FF0B132B3AF2050074AA04 /* QuickConnectButtonViewModel.swift in Sources */,
 				E55EDCEC2B760DFD007010DB /* LoginLoadingView.swift in Sources */,
@@ -5703,6 +5738,7 @@
 				E520FD0C2BA3882800D06C03 /* UserToken.swift in Sources */,
 				69AB49302B63CD8700C780CD /* Keychain+Protocols.swift in Sources */,
 				693CA5AB2B3ED67A00D38378 /* AppPreferences.swift in Sources */,
+				E55216412BF48862001A287F /* SignupCredentialsFieldView.swift in Sources */,
 				69AB49322B63D22400C780CD /* KeychainFactory.swift in Sources */,
 				E5D7BB532BDAF45900585909 /* PurchaseProductsAccountProviderType.swift in Sources */,
 				E55EDCEA2B760D3E007010DB /* TextFieldStyleModifier.swift in Sources */,

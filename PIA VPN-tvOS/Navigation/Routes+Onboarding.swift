@@ -15,6 +15,7 @@ enum AuthenticationDestinations: Destinations {
     case loginQRCode
     case expired
     case signupEmail
+    case signupCredentials
 }
 
 enum OnboardingDestinations: Destinations {
@@ -36,6 +37,8 @@ public extension View {
                     ExpiredAccountFactory.makeExpiredAccountView()
                 case .signupEmail:
                     SignupEmailFactory.makeSignupEmailView()
+                case .signupCredentials:
+                    SignupCredentialsFactory.makeSignupCredentialsView()
             }
         }
     }
