@@ -598,3 +598,8 @@
 "tvos.signup.credentials.details.username" = "Username";
 "tvos.signup.credentials.details.password" = "Password";
 "tvos.signup.credentials.details.button" = "Get Started";
+
+"tvos.signup.terms_conditions.title" = "Terms and Conditions";
+
+"tvos.signup.terms_conditions.description" = "This Terms of Service Agreement ('Agreement') covers the scope of your use and access to the PIA Private Internet Access, Inc. ('PIA') website (“Site”) located at www.privateinternetaccess.com, virtual private networking ('VPN'), and PIA's services provided through the Site ('Service(s)'). By visiting the Site, purchasing a subscription, and/or using the Services, You ('You' or 'Subscriber') ('PIA' and 'Subscriber' collectively known as 'Parties') acknowledge that you have read the Agreement, fully understand the terms and agree to be bound by all of the terms of the Agreement.";
+"tvos.signup.terms_conditions.qr_code.message" = "Scan the QR code to access the full terms and conditions policy on your device.";

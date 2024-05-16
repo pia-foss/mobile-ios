@@ -16,6 +16,8 @@ enum AuthenticationDestinations: Destinations {
     case expired
     case signupEmail
     case signupCredentials
+    case signupPrivacy
+    case signupTerms
 }
 
 enum OnboardingDestinations: Destinations {
@@ -39,6 +41,10 @@ public extension View {
                     SignupEmailFactory.makeSignupEmailView()
                 case .signupCredentials:
                     SignupCredentialsFactory.makeSignupCredentialsView()
+                case .signupPrivacy:
+                    SignUpFactory.makePrivacySignupTermsView()
+                case .signupTerms:
+                    SignUpFactory.makeTermsConditionsSignupTermsView()
             }
         }
     }

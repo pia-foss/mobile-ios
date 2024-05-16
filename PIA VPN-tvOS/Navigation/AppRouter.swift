@@ -146,8 +146,17 @@ extension AppRouter {
     static var navigateToSignUpEmailDestinationAction: AppRouter.Actions {
         navigateRouterToDestinationAction(AuthenticationDestinations.signupEmail)
     }
+    
     static var navigateToSignUpCredentialsDestinationAction: AppRouter.Actions {
         navigateRouterToDestinationAction(AuthenticationDestinations.signupCredentials)
+    }
+    
+    static var navigateToPrivacyPolicyDestinationAction: AppRouter.Actions {
+        navigateRouterToDestinationAction(AuthenticationDestinations.signupPrivacy)
+    }
+    
+    static var navigateToTermsAndConditionsDestinationAction: AppRouter.Actions {
+        navigateRouterToDestinationAction(AuthenticationDestinations.signupTerms)
     }
 }
 

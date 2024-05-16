@@ -1704,6 +1704,16 @@ internal enum L10n {
             }
           }
         }
+        internal enum TermsConditions {
+          /// This Terms of Service Agreement ('Agreement') covers the scope of your use and access to the PIA Private Internet Access, Inc. ('PIA') website (“Site”) located at www.privateinternetaccess.com, virtual private networking ('VPN'), and PIA's services provided through the Site ('Service(s)'). By visiting the Site, purchasing a subscription, and/or using the Services, You ('You' or 'Subscriber') ('PIA' and 'Subscriber' collectively known as 'Parties') acknowledge that you have read the Agreement, fully understand the terms and agree to be bound by all of the terms of the Agreement.
+          internal static let description = L10n.tr("Localizable", "tvos.signup.terms_conditions.description", fallback: "This Terms of Service Agreement ('Agreement') covers the scope of your use and access to the PIA Private Internet Access, Inc. ('PIA') website (“Site”) located at www.privateinternetaccess.com, virtual private networking ('VPN'), and PIA's services provided through the Site ('Service(s)'). By visiting the Site, purchasing a subscription, and/or using the Services, You ('You' or 'Subscriber') ('PIA' and 'Subscriber' collectively known as 'Parties') acknowledge that you have read the Agreement, fully understand the terms and agree to be bound by all of the terms of the Agreement.")
+          /// Terms and Conditions
+          internal static let title = L10n.tr("Localizable", "tvos.signup.terms_conditions.title", fallback: "Terms and Conditions")
+          internal enum QrCode {
+            /// Scan the QR code to access the full terms and conditions policy on your device.
+            internal static let message = L10n.tr("Localizable", "tvos.signup.terms_conditions.qr_code.message", fallback: "Scan the QR code to access the full terms and conditions policy on your device.")
+          }
+        }
       }
       internal enum Welcome {
         /// Fast & Secure VPN for Streaming

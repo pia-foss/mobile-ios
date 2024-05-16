@@ -17,8 +17,12 @@ class SignUpFactory {
     
     static func makeSignUpView() -> SignupView {
         let optionButtons = [
-            OnboardingComponentButton(title: L10n.Welcome.Agreement.Message.privacy, action: {}),
-            OnboardingComponentButton(title: L10n.Welcome.Agreement.Message.tos, action: {})
+            OnboardingComponentButton(title: L10n.Welcome.Agreement.Message.privacy, action: {
+                AppRouter.navigateToPrivacyPolicyDestinationAction()
+            }),
+            OnboardingComponentButton(title: L10n.Welcome.Agreement.Message.tos, action: {
+                AppRouter.navigateToTermsAndConditionsDestinationAction()
+            })
         ]
         
         return SignupView(viewModel: SignupViewModel(optionButtons: optionButtons,
@@ -58,6 +62,20 @@ class SignUpFactory {
         return DecoratorPurchaseProductsProvider(purchaseProductsProvider: defaultAccountProvider,
                                                  errorMapper: PurchaseProductDomainErrorMapper(), 
                                                  store: Client.store)
+    }
+    
+    static func makePrivacySignupTermsView() -> SignupTermsView {
+        SignupTermsView(url: URL(string: "https://www.privateinternetaccess.com/privacy-policy")!,
+                        title: L10n.Localizable.HelpMenu.AboutOptions.PrivacyPolicy.title,
+                        description: L10n.Localizable.HelpMenu.AboutSection.PrivacyPolicy.description,
+                        qrCodeMessage: L10n.Localizable.HelpMenu.AboutSection.PrivacyPolicy.QrCode.message)
+    }
+    
+    static func makeTermsConditionsSignupTermsView() -> SignupTermsView {
+        SignupTermsView(url: URL(string: "https://www.privateinternetaccess.com/terms-of-service")!,
+                        title: L10n.Localizable.Tvos.Signup.TermsConditions.title,
+                        description: L10n.Localizable.Tvos.Signup.TermsConditions.description,
+                        qrCodeMessage: L10n.Localizable.Tvos.Signup.TermsConditions.QrCode.message)
     }
 }
 
