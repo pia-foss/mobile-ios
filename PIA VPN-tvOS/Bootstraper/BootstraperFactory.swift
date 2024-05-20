@@ -12,7 +12,20 @@ import SwiftyBeaver
 
 class BootstraperFactory {
     static func makeBootstrapper() -> BootstraperType {
-        Bootstrapper(
+        if let stagingUrl = AppConstants.Web.stagingEndpointURL {
+            if AppPreferences.shared.stagingVersion < 1 {
+                Client.environment = .staging
+                let stagingVersion = Int(stagingUrl.absoluteString.split(separator: "-")[1]) ?? 1
+                AppPreferences.shared.stagingVersion = stagingVersion
+            }
+                    
+            let url = stagingUrl.absoluteString.replacingOccurrences(of: "staging-[0-9]", with: "staging-\(AppPreferences.shared.stagingVersion)", options: .regularExpression)
+            Client.configuration.setBaseURL(url, for: .staging)
+
+        }
+                
+        Client.environment = .staging
+        return Bootstrapper(
             setupDebugginConsole: setupDebugginConsole,
             loadDataBase: loadDataBase,
             cleanCurrentAccount: cleanCurrentAccount,
