@@ -10,4 +10,5 @@ import Foundation
 
 protocol LoginProviderType {
     func login(with credentials: Credentials, completion: @escaping (Result<UserAccount, Error>) -> Void)
+    func login(with receipt: Data, completion: @escaping (Result<UserAccount, Error>) -> Void)
 }

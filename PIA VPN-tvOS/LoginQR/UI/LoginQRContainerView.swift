@@ -28,9 +28,11 @@ struct LoginQRContainerView: View {
                     }
                 }
             } else {
-                LoginQRView(expiresAt: $viewModel.expiresAt, qrCodeURL: viewModel.qrCodeURL) {
+                LoginQRView(expiresAt: $viewModel.expiresAt, qrCodeURL: viewModel.qrCodeURL, loginAction: {
                     viewModel.navigateToRoute()
-                }
+                }, restorePurchasesAction: {
+                    viewModel.recoverPurchases()
+                })
             }
         }.onAppear {
             viewModel.generateQRCode()

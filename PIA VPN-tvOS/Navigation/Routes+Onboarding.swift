@@ -32,7 +32,7 @@ public extension View {
                 case .loginCredentials:
                     LoginFactory.makeLoginView()
                 case .signup:
-                    SignUpFactory.makeSignUpView()
+                    SignUpFactory.makeSignupQRView()
                 case .loginQRCode:
                     LoginQRFactory.makeLoginQRView()
                 case .expired:

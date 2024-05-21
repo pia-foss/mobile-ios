@@ -19,4 +19,8 @@ class LoginProviderMock: LoginProviderType {
     func login(with credentials: Credentials, completion: @escaping (Result<UserAccount, Error>) -> Void) {
         completion(result)
     }
+    
+    func login(with receipt: Data, completion: @escaping (Result<UserAccount, any Error>) -> Void) {
+        completion(result)
+    }
 }
