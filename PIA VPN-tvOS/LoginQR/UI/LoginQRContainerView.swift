@@ -34,10 +34,10 @@ struct LoginQRContainerView: View {
             }
         }.onAppear {
             viewModel.generateQRCode()
-        }.alert(L10n.Localizable.Settings.Dedicatedip.Alert.Success.title, isPresented: $viewModel.shouldShowErrorMessage, actions: {
-            Button(L10n.Localizable.Settings.Dedicatedip.Alert.Success.button) {}
+        }.alert("", isPresented: $viewModel.shouldShowErrorMessage, actions: {
+            Button(L10n.Localizable.Global.ok) {}
         }, message: {
-            Text(L10n.Localizable.Settings.Dedicatedip.Alert.Success.message)
+            Text(L10n.Localizable.Tvos.Signup.Subscription.Error.Message.generic)
         })
     }
 }

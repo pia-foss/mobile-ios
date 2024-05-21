@@ -719,6 +719,7 @@
 		E552163F2BF2226B001A287F /* SignupCredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E552163E2BF2226B001A287F /* SignupCredentialsView.swift */; };
 		E55216412BF48862001A287F /* SignupCredentialsFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55216402BF48862001A287F /* SignupCredentialsFieldView.swift */; };
 		E55216442BF48A9C001A287F /* SignupCredentialsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55216432BF48A9C001A287F /* SignupCredentialsFactory.swift */; };
+		E55216462BF69D38001A287F /* SignupTermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55216452BF69D38001A287F /* SignupTermsView.swift */; };
 		E55EDCD22B755DB1007010DB /* OnboardingComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCD12B755DB1007010DB /* OnboardingComponentView.swift */; };
 		E55EDCD52B755E09007010DB /* OnboardingComponentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCD42B755E09007010DB /* OnboardingComponentViewModel.swift */; };
 		E55EDCDA2B755E6D007010DB /* OnboardingFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCD92B755E6C007010DB /* OnboardingFactory.swift */; };
@@ -1671,6 +1672,7 @@
 		E552163E2BF2226B001A287F /* SignupCredentialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCredentialsView.swift; sourceTree = "<group>"; };
 		E55216402BF48862001A287F /* SignupCredentialsFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCredentialsFieldView.swift; sourceTree = "<group>"; };
 		E55216432BF48A9C001A287F /* SignupCredentialsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCredentialsFactory.swift; sourceTree = "<group>"; };
+		E55216452BF69D38001A287F /* SignupTermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupTermsView.swift; sourceTree = "<group>"; };
 		E55EDCD12B755DB1007010DB /* OnboardingComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingComponentView.swift; sourceTree = "<group>"; };
 		E55EDCD42B755E09007010DB /* OnboardingComponentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingComponentViewModel.swift; sourceTree = "<group>"; };
 		E55EDCD92B755E6C007010DB /* OnboardingFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFactory.swift; sourceTree = "<group>"; };
@@ -3886,6 +3888,7 @@
 				E56E75DC2BCEE7970018E279 /* SignupSubscriptionView.swift */,
 				E56E75DE2BCEE7D90018E279 /* SubscriptionOptionView.swift */,
 				E56E76122BD700C60018E279 /* SignupLoadingView.swift */,
+				E55216452BF69D38001A287F /* SignupTermsView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -5833,6 +5836,7 @@
 				E520FCF72B9A633600D06C03 /* GenerateLoginQRCodeUseCase.swift in Sources */,
 				694AC74E2B17AB9C007E7B56 /* DashboardView.swift in Sources */,
 				69F2C3722B8CAFB2006255F9 /* AboutOptionsView.swift in Sources */,
+				E55216462BF69D38001A287F /* SignupTermsView.swift in Sources */,
 				E56E75E22BCEE8140018E279 /* SignupViewModel.swift in Sources */,
 				69F1C2932B2B10D400E924AE /* DashboardFactory.swift in Sources */,
 				E56E76132BD700C60018E279 /* SignupLoadingView.swift in Sources */,
