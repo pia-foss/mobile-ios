@@ -720,6 +720,12 @@
 		E55216412BF48862001A287F /* SignupCredentialsFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55216402BF48862001A287F /* SignupCredentialsFieldView.swift */; };
 		E55216442BF48A9C001A287F /* SignupCredentialsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55216432BF48A9C001A287F /* SignupCredentialsFactory.swift */; };
 		E55216462BF69D38001A287F /* SignupTermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55216452BF69D38001A287F /* SignupTermsView.swift */; };
+		E55216482BFD337D001A287F /* LoginWithReceiptUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55216472BFD337D001A287F /* LoginWithReceiptUseCase.swift */; };
+		E552164A2BFD3A71001A287F /* PaymentProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55216492BFD3A71001A287F /* PaymentProviderType.swift */; };
+		E552164C2BFD3CE5001A287F /* PaymentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E552164B2BFD3CE5001A287F /* PaymentProvider.swift */; };
+		E552164E2BFDB7F4001A287F /* LoginWithReceiptUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E552164D2BFDB7F4001A287F /* LoginWithReceiptUseCaseMock.swift */; };
+		E55216502BFDBB33001A287F /* LoginWithReceiptUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E552164F2BFDBB33001A287F /* LoginWithReceiptUseCaseTests.swift */; };
+		E55216522BFDBD69001A287F /* PaymentProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55216512BFDBD69001A287F /* PaymentProviderMock.swift */; };
 		E55EDCD22B755DB1007010DB /* OnboardingComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCD12B755DB1007010DB /* OnboardingComponentView.swift */; };
 		E55EDCD52B755E09007010DB /* OnboardingComponentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCD42B755E09007010DB /* OnboardingComponentViewModel.swift */; };
 		E55EDCDA2B755E6D007010DB /* OnboardingFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EDCD92B755E6C007010DB /* OnboardingFactory.swift */; };
@@ -1673,6 +1679,12 @@
 		E55216402BF48862001A287F /* SignupCredentialsFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCredentialsFieldView.swift; sourceTree = "<group>"; };
 		E55216432BF48A9C001A287F /* SignupCredentialsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCredentialsFactory.swift; sourceTree = "<group>"; };
 		E55216452BF69D38001A287F /* SignupTermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupTermsView.swift; sourceTree = "<group>"; };
+		E55216472BFD337D001A287F /* LoginWithReceiptUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithReceiptUseCase.swift; sourceTree = "<group>"; };
+		E55216492BFD3A71001A287F /* PaymentProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProviderType.swift; sourceTree = "<group>"; };
+		E552164B2BFD3CE5001A287F /* PaymentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProvider.swift; sourceTree = "<group>"; };
+		E552164D2BFDB7F4001A287F /* LoginWithReceiptUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithReceiptUseCaseMock.swift; sourceTree = "<group>"; };
+		E552164F2BFDBB33001A287F /* LoginWithReceiptUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithReceiptUseCaseTests.swift; sourceTree = "<group>"; };
+		E55216512BFDBD69001A287F /* PaymentProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProviderMock.swift; sourceTree = "<group>"; };
 		E55EDCD12B755DB1007010DB /* OnboardingComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingComponentView.swift; sourceTree = "<group>"; };
 		E55EDCD42B755E09007010DB /* OnboardingComponentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingComponentViewModel.swift; sourceTree = "<group>"; };
 		E55EDCD92B755E6C007010DB /* OnboardingFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFactory.swift; sourceTree = "<group>"; };
@@ -3410,6 +3422,7 @@
 			children = (
 				E520FCF42B9A631E00D06C03 /* ValidateLoginQRCodeUseCase.swift */,
 				E520FCF62B9A633600D06C03 /* GenerateLoginQRCodeUseCase.swift */,
+				E55216472BFD337D001A287F /* LoginWithReceiptUseCase.swift */,
 			);
 			path = "Use cases";
 			sourceTree = "<group>";
@@ -3432,6 +3445,7 @@
 				E520FD0D2BA3886100D06C03 /* LoginQRURLRequestMaker.swift */,
 				E520FD0F2BA3889600D06C03 /* LoginQRCodeDomainMapper.swift */,
 				E520FD1A2BA3A1A800D06C03 /* LoginQRErrorMapper.swift */,
+				E552164B2BFD3CE5001A287F /* PaymentProvider.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -3458,6 +3472,7 @@
 			children = (
 				E520FD122BA388BD00D06C03 /* GenerateLoginQRCodeProviderType.swift */,
 				E520FD142BA388D100D06C03 /* ValidateLoginQRCodeProviderType.swift */,
+				E55216492BFD3A71001A287F /* PaymentProviderType.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -3902,6 +3917,7 @@
 				E58A45442BA4A11A002A0704 /* LoginQRCodeDomainMapperTests.swift */,
 				E58A45462BA4A2CD002A0704 /* LoginQRProviderTests.swift */,
 				E58A45482BA4BE36002A0704 /* ValidateLoginQRCodeUseCaseTests.swift */,
+				E552164F2BFDBB33001A287F /* LoginWithReceiptUseCaseTests.swift */,
 			);
 			path = LoginQR;
 			sourceTree = "<group>";
@@ -3913,6 +3929,8 @@
 				E58A453F2BA49C43002A0704 /* ValidateLoginQRCodeMock.swift */,
 				E58A454A2BA4BE5C002A0704 /* HTTPClientMock.swift */,
 				E58A454C2BA4C849002A0704 /* ValidateLoginQRCodeProviderMock.swift */,
+				E552164D2BFDB7F4001A287F /* LoginWithReceiptUseCaseMock.swift */,
+				E55216512BFDBD69001A287F /* PaymentProviderMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -5830,6 +5848,7 @@
 				E52E68FE2B55E47600471913 /* Routes+Onboarding.swift in Sources */,
 				E5C5077C2B0E144E00200A6A /* ContentView.swift in Sources */,
 				E520FCEE2B979FA900D06C03 /* LoginQRExpiredView.swift in Sources */,
+				E55216482BFD337D001A287F /* LoginWithReceiptUseCase.swift in Sources */,
 				E574D9FE2B854A42000FADAF /* DedicatedIPProvider.swift in Sources */,
 				69A226BE2B307D5F0065EDDB /* RootContainerView.swift in Sources */,
 				69C5E7D02B72962700FE3126 /* TopNavigationFactory.swift in Sources */,
@@ -5842,6 +5861,7 @@
 				E56E76132BD700C60018E279 /* SignupLoadingView.swift in Sources */,
 				E5AB28B62B361E6C00744E5F /* VPNConfigurationInstallingErrorMapper.swift in Sources */,
 				69E1924E2B8E698000A97286 /* AcknowledgementsView.swift in Sources */,
+				E552164A2BFD3A71001A287F /* PaymentProviderType.swift in Sources */,
 				E56E75EB2BD06F1F0018E279 /* GetAvailableProductsUseCase.swift in Sources */,
 				E56E75E42BCEE8330018E279 /* SubscriptionOptionViewModel.swift in Sources */,
 				E574DA152B8D41CB000FADAF /* QRImageView.swift in Sources */,
@@ -5871,6 +5891,7 @@
 				E56E75DF2BCEE7D90018E279 /* SubscriptionOptionView.swift in Sources */,
 				E55216382BF14A5B001A287F /* SignupDomainErrorMapper.swift in Sources */,
 				E5C507B32B17E5AD00200A6A /* LoginError.swift in Sources */,
+				E552164C2BFD3CE5001A287F /* PaymentProvider.swift in Sources */,
 				E520FCFF2B9A64C900D06C03 /* LoginQRContainerView.swift in Sources */,
 				E5AB28BB2B48815300744E5F /* VPNConfigurationInstallingStatus.swift in Sources */,
 				6900D3752B972ACE00C87E2E /* Client+Protocols.swift in Sources */,
@@ -5906,6 +5927,7 @@
 				E5AB28D02B4B39F000744E5F /* InstallVpnConfigurationProviderTests.swift in Sources */,
 				E574DA002B854A52000FADAF /* RemoveDIPUseCaseMock.swift in Sources */,
 				E56E760D2BD5566A0018E279 /* SignupViewModelTests.swift in Sources */,
+				E55216522BFDBD69001A287F /* PaymentProviderMock.swift in Sources */,
 				698C3B492B2B33650012D527 /* VpnConnectionUseCaseMock.swift in Sources */,
 				69CA26B22B59668700E78894 /* RegionsListUseCaseMock.swift in Sources */,
 				6963465D2B7109DA0051F8BC /* RegionsFilterUseCaseTests.swift in Sources */,
@@ -5953,6 +5975,7 @@
 				698C3B4B2B2B34760012D527 /* PIAConnectionButtonViewModelTests.swift in Sources */,
 				690FC4862B3C5F7300F6DCC8 /* SelectedServerUseCaseMock.swift in Sources */,
 				E5AB28E02B4C107F00744E5F /* VPNConfigurationAvailabilityMock.swift in Sources */,
+				E55216502BFDBB33001A287F /* LoginWithReceiptUseCaseTests.swift in Sources */,
 				690FC4822B3C5A4300F6DCC8 /* ServerMock.swift in Sources */,
 				69B1C7AD2B96038D009A0629 /* RegionsContainerViewModelTests.swift in Sources */,
 				E58A454D2BA4C849002A0704 /* ValidateLoginQRCodeProviderMock.swift in Sources */,
@@ -5973,6 +5996,7 @@
 				E58A454B2BA4BE5C002A0704 /* HTTPClientMock.swift in Sources */,
 				E5D7BB6E2BE1681F00585909 /* InAppTransactionMock.swift in Sources */,
 				E58A453E2BA49C1D002A0704 /* GenerateLoginQRCodeUseCaseMock.swift in Sources */,
+				E552164E2BFDB7F4001A287F /* LoginWithReceiptUseCaseMock.swift in Sources */,
 				690FC4882B3C60F500F6DCC8 /* QuickConnectViewModelTests.swift in Sources */,
 				E55216362BF1393C001A287F /* SignupEmailIntegrationTests.swift in Sources */,
 				E5AB28992B2C783600744E5F /* LoginProviderTests.swift in Sources */,

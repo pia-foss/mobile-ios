@@ -26,12 +26,14 @@ class LoginQRViewModel: ObservableObject {
     
     private let generateLoginQRCode: GenerateLoginQRCodeUseCaseType
     private let validateLoginQRCode: ValidateLoginQRCodeUseCaseType
+    private let loginWithReceipt: LoginWithReceiptUseCaseType
     private let onSuccessAction: () -> Void
     private let onNavigateAction: () -> Void
     
-    init(generateLoginQRCode: GenerateLoginQRCodeUseCaseType, validateLoginQRCode: ValidateLoginQRCodeUseCaseType, onSuccessAction: @escaping () -> Void, onNavigateAction: @escaping () -> Void) {
+    init(generateLoginQRCode: GenerateLoginQRCodeUseCaseType, validateLoginQRCode: ValidateLoginQRCodeUseCaseType, loginWithReceipt: LoginWithReceiptUseCaseType, onSuccessAction: @escaping () -> Void, onNavigateAction: @escaping () -> Void) {
         self.generateLoginQRCode = generateLoginQRCode
         self.validateLoginQRCode = validateLoginQRCode
+        self.loginWithReceipt = loginWithReceipt
         self.onSuccessAction = onSuccessAction
         self.onNavigateAction = onNavigateAction
     }
@@ -52,6 +54,23 @@ class LoginQRViewModel: ObservableObject {
                     startTimer()
                 }
                 await validateQRCode(loginQRCode: qrCode)
+            } catch {
+                Task { @MainActor in
+                    state = .validating
+                    shouldShowErrorMessage = true
+                }
+            }
+        }
+    }
+    
+    func recoverPurchases() {
+        state = .loading
+        Task {
+            do {
+                let userAccount = try await loginWithReceipt()
+                Task { @MainActor in
+                    onSuccessAction()
+                }
             } catch {
                 Task { @MainActor in
                     state = .validating

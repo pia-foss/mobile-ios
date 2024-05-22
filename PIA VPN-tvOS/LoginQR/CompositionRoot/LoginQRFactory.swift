@@ -15,8 +15,9 @@ class LoginQRFactory {
     }
     
     private static func makeLoginQRViewModel() -> LoginQRViewModel {
-        LoginQRViewModel(generateLoginQRCode: generateLoginQRCodeUseCase(),
-                         validateLoginQRCode: validateLoginQRCodeUseCase(),
+        LoginQRViewModel(generateLoginQRCode: makeGenerateLoginQRCodeUseCase(),
+                         validateLoginQRCode: makeValidateLoginQRCodeUseCase(),
+                         loginWithReceipt: makeloginWithReceiptUseCase(),
                          onSuccessAction: {
             AppRouter.navigateToConnectionstatsDestinationAction()
         }, onNavigateAction: {
@@ -25,7 +26,7 @@ class LoginQRFactory {
         })
     }
     
-    private static func generateLoginQRCodeUseCase() -> GenerateLoginQRCodeUseCaseType {
+    private static func makeGenerateLoginQRCodeUseCase() -> GenerateLoginQRCodeUseCaseType {
         GenerateLoginQRCodeUseCase(generateLoginQRCodeProvider: makeLoginQRProvider())
     }
     
@@ -36,12 +37,22 @@ class LoginQRFactory {
                         errorMapper: LoginQRErrorMapper())
     }
     
-    private static func validateLoginQRCodeUseCase() -> ValidateLoginQRCodeUseCaseType {
+    private static func makeValidateLoginQRCodeUseCase() -> ValidateLoginQRCodeUseCaseType {
         guard let defaultAccountProvider = Client.providers.accountProvider as? DefaultAccountProvider else {
             fatalError("Incorrect account provider type")
         }
     
         return ValidateLoginQRCodeUseCase(accountProviderType: defaultAccountProvider,
                                           validateLoginQRCodeProvider: makeLoginQRProvider())
+    }
+    
+    private static func makeloginWithReceiptUseCase() -> LoginWithReceiptUseCaseType {
+        LoginWithReceiptUseCase(paymentProvider: makePaymentProvider(),
+                                loginProvider: LoginFactory.makeLoginProvider(),
+                                errorMapper: LoginDomainErrorMapper())
+    }
+    
+    private static func makePaymentProvider() -> PaymentProviderType {
+        PaymentProvider(store: Client.store)
     }
 }

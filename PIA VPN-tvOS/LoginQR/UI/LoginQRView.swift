@@ -12,6 +12,7 @@ struct LoginQRView: View {
     @Binding var expiresAt: String
     var qrCodeURL: URL?
     let loginAction: () -> Void
+    let restorePurchasesAction: () -> Void
     
     var body: some View {
         HStack {
@@ -49,6 +50,11 @@ struct LoginQRView: View {
                     ActionButton(
                         title: L10n.Localizable.Tvos.Login.Qr.Button.login,
                         action: { loginAction() }
+                    )
+                    .frame(width: 480, height: 66)
+                    ActionButton(
+                        title: L10n.Localizable.Tvos.Login.Qr.Button.restore,
+                        action: { restorePurchasesAction() }
                     )
                     .frame(width: 480, height: 66)
                 }

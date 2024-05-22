@@ -52,7 +52,10 @@ class AccountProviderMock: AccountProvider {
         callback?(appStoreInformationResult, errorResult)
     }
     
-    func login(with receiptRequest: PIALibrary.LoginReceiptRequest, _ callback: PIALibrary.LibraryCallback<PIALibrary.UserAccount>?) {}
+    func login(with receiptRequest: PIALibrary.LoginReceiptRequest, _ callback: PIALibrary.LibraryCallback<PIALibrary.UserAccount>?) {
+        callback?(userResult, errorResult)
+    }
+    
     func refreshAccountInfo(_ callback: PIALibrary.LibraryCallback<PIALibrary.AccountInfo>?) {}
     func accountInformation(_ callback: ((PIALibrary.AccountInfo?, Error?) -> Void)?) {}
     func update(with request: PIALibrary.UpdateAccountRequest, resetPassword reset: Bool, andPassword password: String, _ callback: PIALibrary.LibraryCallback<PIALibrary.AccountInfo>?) {}

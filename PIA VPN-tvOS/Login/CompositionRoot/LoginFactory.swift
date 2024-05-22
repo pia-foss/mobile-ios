@@ -27,7 +27,7 @@ class LoginFactory {
                                     errorMapper: LoginDomainErrorMapper())
     }
     
-    private static func makeLoginProvider() -> LoginProviderType {
+    static func makeLoginProvider() -> LoginProviderType {
         LoginProvider(accountProvider: Client.providers.accountProvider, 
                       userAccountMapper: UserAccountMapper())
     }
