@@ -40,7 +40,7 @@ class LoginWithReceiptUseCase: LoginWithReceiptUseCaseType {
     }
     
     private func login(with receipt: Data, continuation: CheckedContinuation<UserAccount, any Error>) {
-        loginProvider.login(with: Data()) { [weak self] result in
+        loginProvider.login(with: receipt) { [weak self] result in
             guard let self else { return }
             
             switch result {
