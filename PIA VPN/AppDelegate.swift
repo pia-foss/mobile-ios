@@ -189,11 +189,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
             // in case it's too early for notification delivery (vc not loaded)
             TransientState.shouldDisplayRegionPicker = true
-            
-        case VPNStatus.connected.rawValue:
-            if Client.providers.vpnProvider.isVPNConnected {
-                disconnectAfter(milliseconds: defaultMilliseconds)
-            }
+      
         case VPNStatus.disconnected.rawValue:
             if !Client.providers.vpnProvider.isVPNConnected {
                 connectAfter(milliseconds: defaultMilliseconds)
