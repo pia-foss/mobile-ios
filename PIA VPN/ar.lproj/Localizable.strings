@@ -438,3 +438,135 @@
 // PIA WIDGET
 "widget.liveActivity.region.title" = "المنطقة";
 "widget.liveActivity.selected_protocol.title" = "البروتوكول";
+
+// Regions Selection(tvOS)
+"regions.filter.all.title" = "كل المواقع";
+"regions.filter.search.title" = "بحث";
+"regions.filter.favorites.title" = "المواقع المفضلة";
+"regions.list.all_locations.title" = "جميع المواقع";
+"regions.list.optimal_location.title" = "الموقع الأمثل";
+"regions.list.optimal_location_with_dip_location.title" = "الموقع الأمثل/ عنوان IP مخصص";
+"regions.search.recommended_locations.title" = "المواقع المقترحة";
+"regions.search.results.title" = "نتائج البحث";
+"regions.search.button.title" = "البحث عن موقع";
+"regions.search.input_field.placeholder" = "البحث عن مدينة أو بلد";
+"regions.search.previous_results.title" = "آخر المواقع التي تم البحث عنها";
+"regions.context_menu.favorites.add.text" = "إضافة إلى المفضلة";
+"regions.context_menu.favorites.remove.text" = "حذف من المفضلة";
+"regions.list_item.default.title" = "الموقع الافتراضي";
+
+// Top Navigation bar
+"top_navigation_bar.vpn_item.title" = "PIA VPN";
+"top_navigation_bar.location_item.title" = "الموقع";
+"top_navigation_bar.location_selection_screen.title" = "اختيار الموقع";
+
+//Onboarding - Connection Stats Permisson (tvOS)
+"onboarding.connection_stats.title" = "ساعدنا في تحسين PIA";
+"onboarding.connection_stats.subtitle" = "ساعدنا في تحسين البرنامج من خلال مشاركة إحصائيات اتصالات VPN معنا. لا تحتوي هذه التقارير أبدا على معلومات محددة للهوية.";
+
+//Onboarding - VPN Installing Profile (tvOS)
+"onboarding.vpn_configuration.title" = "ضبط إعدادات PIA";
+"onboarding.vpn_configuration.subtitle" = "عند الاتصال أول مرة، سوف يطلب منك السماح لبرنامج PIA بالوصول إلى إعدادات VPN. ويعد هذا ضروريا لتشفير حركة الإنترنت. \n\nملاحظة: لا نقوم أبدا بمراقبة أو تقييد أو تسجيل نشاطك عبر الإنترنت. \n\nللمتابعة انقر على الزر أدناه.";
+"onboarding.vpn_configuration.button" = "ضبط إعدادات PIA";
+
+//Welcome (tvOS)
+"tvos.welcome.title" = "VPN سريع وآمن لبث الأفلام والمسلسلات";
+"tvos.welcome.button.login" = "تسجيل الدخول";
+"tvos.welcome.button.signup" = "إنشاء حساب";
+
+//Login (tvOS)
+"tvos.login.title" = "أدخل تفاصيل حساب PIA الخاص بك";
+"tvos.login.placeholder.username" = "أدخل اسم المستخدم";
+"tvos.login.placeholder.password" = "أدخل كلمة المرور";
+
+"tvos.login.qr.title" = "تسجيل الدخول عبر تطبيق PIA";
+"tvos.login.qr.description" = "مسح رمز QR والتحقق من تسجيل الدخول عبر تطبيق PIA لنظام iOS.";
+"tvos.login.qr.timer" = "ستنتهي صلاحية الرمز في:";
+"tvos.login.qr.options" = "الخيارات الأخرى:";
+"tvos.login.qr.button.login" = "تسجيل الدخول عبر اسم المستخدم";
+"tvos.login.qr.button.login" = "استعادة المشتريات";
+
+"tvos.login.qr.expired.title" = "انتهت صلاحية رمز QR";
+"tvos.login.qr.expired.description" = "إنشاء رمز QR جديد أدناه";
+"tvos.login.qr.expired.button.generate" = "إنشاء رمز QR";
+
+//Connection error(tvOS)
+"error_alert.connection_error.no_network.title" = "تعذر الاتصال";
+"error_alert.connection_error.no_network.message" = "يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى";
+"error_alert.connection_error.no_network.retry_action.title" = "إعادة المحاولة";
+
+//Dashboard screen (tvOS)
+"location_selection.optimal_location.title" = "الموقع الأمثل";
+"location_selection.any_other_location.title" = "الموقع المحدد";
+"dashboard.connection_state.connected.title" = "متصل";
+"dashboard.connection_state.disconnected.title" = "غير متصل";
+"dashboard.connection_state.connecting.title" = "جارٍ الاتصال...";
+"dashboard.connection_state.reconnecting.title" = "جار إعادة الاتصال…";
+"dashboard.connection_state.disconnecting.title" = "جارٍ قطع الاتصال...";
+"dashboard.connection_state.error.title" = "خطأ في الاتصال";
+"dashboard.connection_state.network_error_alert.message" = "يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى";
+"dashboard.connection_state.network_error_alert.primary_action.title" = "إعادة المحاولة";
+
+// Settings (tvOS)
+"settings.account.log_out_button.title" = "تسجيل الخروج";
+"settings.account.log_out_alert.title" = "هل أنت متأكد؟";
+"settings.account.log_out_alert.message" = "سيؤدي تسجيل الخروج إلى إنهاء أي اتصال VPN. ستفقد بعد ذلك حمايتك الرقمية.";
+"settings.account.subscription_expiry.title" = "ينتهي الاشتراك في";
+
+// Dedicated IP
+"settings.dedicatedip.title1" = "أدخل عنوان IP مخصص";
+"settings.dedicatedip.title2" = "عنوان IP مخصّص";
+"settings.dedicatedip.subtitle" = "نشّط عنوان IP المخصص عن طريق كتابة الرمز المميز الخاص بك أدناه. \nيمكنك شراء عنوان IP مخصص في إعدادات حسابك على موقع PIA.";
+"settings.dedicatedip.placeholder" = "أدخل رمز IP السري الخاص بك";
+"settings.dedicatedip.button" = "تنشيط";
+"settings.dedicatedip.alert.failure.title" = "حدث خطأ ما";
+"settings.dedicatedip.alert.failure.message" = "الرمز المميز إما غير صالح أو انتهت صلاحيته.";
+"settings.dedicatedip.alert.failure.message.empty" = "لا يمكن أن يكون الرمز المميز فارغا.";
+"settings.dedicatedip.alert.success.title" = "تمت العملية بنجاح";
+"settings.dedicatedip.alert.success.message" = "تم تنشيط عنوان IP المخصص.";
+"settings.dedicatedip.alert.success.button" = "متابعة";
+
+"settings.dedicatedip.stats.dedicatedip" = "عنوان IP مخصّص";
+"settings.dedicatedip.stats.ip" = "عنوان IP";
+"settings.dedicatedip.stats.location" = "الموقع";
+"settings.dedicatedip.stats.quickAction" = "الإجراءات السريعة";
+"settings.dedicatedip.stats.delete.button" = "حذف عنوان IP مخصص";
+"settings.dedicatedip.stats.delete.alert.title" = "هل أنت متأكد؟";
+"settings.dedicatedip.stats.delete.alert.message" = "أنت على وشك حذف عنوان IP مخصص من حسابك.";
+"settings.dedicatedip.stats.delete.alert.delete" = "نعم، حذف";
+
+"settings.dedicatedip.status.active" = "نشط";
+"settings.dedicatedip.status.invalid" = "غير صحيح";
+"settings.dedicatedip.status.expired" = "منتهي الصلاحية";
+"settings.dedicatedip.status.error" = "خطأ";
+
+// Help menu (tvOS)
+"help_menu.app_version_section.title" = "إصدار التطبيق";
+"help_menu.contact_support.qr_code.title" = "الاتصال بالدعم";
+"help_menu.contact_support.qr_code.message" = "امسح رمز QR للتواصل مع فريق الدعم.";
+
+"help_menu.about_options.acknowledgements.title" = "إقرارات";
+"help_menu.about_options.privacy_policy.title" = "سياسة الخصوصية";
+"help_menu.about_section.privacy_policy.description" = "تشرح سياسة الخصوصية ('سياسة الخصوصية' أو 'السياسة') ممارسات الخصوصية الخاصة بشركة Private Internet Access. (تتم الإشارة للشركة كالآتي: 'نحن' أو 'مسؤول البيانات' أو 'الشركة' أو 'PIA') وتنطبق على المستخدمين ('العملاء' أو 'أنت') لخدمات PIA، بما في ذلك خدمة PIA VPN ('الخدمة') وموقع PIA على شبكة الإنترنت عبر العنوان التالي: www. privateinternetaccess.com ('الموقع').";
+"help_menu.about_section.privacy_policy.qr_code.message" = "امسح رمز QR للاطلاع على سياسة الخصوصية الكاملة في جهازك.";
+"help_menu.help_improve.enabled.title" = "نعم";
+"help_menu.help_improve.disabled.title" = "لا";
+
+//SignUp (tvOS)
+"tvos.signup.title" = "احصل على Private Internet Access";
+"tvos.signup.item1" = "خوادم VPN في 91 دولة";
+"tvos.signup.item2" = "سرعات فائقة";
+"tvos.signup.item3" = "خدمة دعم العملاء 24/7";
+"tvos.signup.cta" = "مسح رمز QR";
+
+//Sign in expired (tvOS)
+"tvos.signin.expired.title" = "انتهت صلاحية الاشتراك";
+"tvos.signin.expired.subtitle" = "جدد اشتراكك من أجل استعادة حماية VPN كاملة أثناء البث.";
+"tvos.signin.expired.qr.title1" = "امسح رمز QR واختر خطة الاشتراك. يتم الاشتراك خلال بضع دقائق فقط.";
+"tvos.signin.expired.qr.title2" = "يمكنك العودة إلى Apple TV والاستمتاع بالخصوصية الرقمية مع PIA بمجرد الانتهاء من الاشتراك!";
+"tvos.signin.expired.button.renewed" = "لقد جددت اشتراكي";
+"tvos.signin.expired.button.signout" = "تسجيل الخروج";
+
+//Sign in free trial expired (tvOS)
+"tvos.signin.expired.trial.title" = "انتهت صلاحية التجربة المجانية";
+"tvos.signin.expired.trial.subtitle" = "هل استمتعت بحماية VPN مميزة؟ اشترك الآن في PIA!";

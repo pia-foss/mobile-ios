@@ -438,3 +438,135 @@
 // PIA WIDGET
 "widget.liveActivity.region.title" = "Fylke";
 "widget.liveActivity.selected_protocol.title" = "Protokoll";
+
+// Regions Selection(tvOS)
+"regions.filter.all.title" = "Allle";
+"regions.filter.search.title" = "Søk";
+"regions.filter.favorites.title" = "Favoritt(er)";
+"regions.list.all_locations.title" = "Alle servere";
+"regions.list.optimal_location.title" = "Optimal server";
+"regions.list.optimal_location_with_dip_location.title" = "Optimal server / dedikert IP";
+"regions.search.recommended_locations.title" = "Anbefalte servere";
+"regions.search.results.title" = "Søkeresultater";
+"regions.search.button.title" = "Søk etter en server";
+"regions.search.input_field.placeholder" = "Søk etter by eller land";
+"regions.search.previous_results.title" = "Siste søkte servere";
+"regions.context_menu.favorites.add.text" = "Legg til i favoritter";
+"regions.context_menu.favorites.remove.text" = "Fjern fra favoritter";
+"regions.list_item.default.title" = "Standard server";
+
+// Top Navigation bar
+"top_navigation_bar.vpn_item.title" = "PIA VPN";
+"top_navigation_bar.location_item.title" = "Server";
+"top_navigation_bar.location_selection_screen.title" = "Valg av server";
+
+//Onboarding - Connection Stats Permisson (tvOS)
+"onboarding.connection_stats.title" = "Hjelp med å forbedre PIA";
+"onboarding.connection_stats.subtitle" = "Hjelp oss med å forbedre oss ved å dele VPN-tilkoblingsstatistikk. Disse rapportene inneholder aldri personlig identifiserbar informasjon.";
+
+//Onboarding - VPN Installing Profile (tvOS)
+"onboarding.vpn_configuration.title" = "Konfigurer PIA";
+"onboarding.vpn_configuration.subtitle" = "Når du kobler til for første gang, vil du bli bedt om å gi PIA tilgang til VPN-konfigurasjoner. Dette er nødvendig for å kryptere trafikken din. \n\nHusk at vi ikke overvåker, filtrerer eller loggfører din nettaktivitet. \n\nFor å fortsette, klikk på knappen nedenfor.";
+"onboarding.vpn_configuration.button" = "Konfigurer PIA";
+
+//Welcome (tvOS)
+"tvos.welcome.title" = "Raskt og sikkert VPN for strømming";
+"tvos.welcome.button.login" = "Logg inn";
+"tvos.welcome.button.signup" = "Registrer deg";
+
+//Login (tvOS)
+"tvos.login.title" = "Skriv inn dine PIA VPN-kontoopplysninger";
+"tvos.login.placeholder.username" = "Skriv inn brukernavn";
+"tvos.login.placeholder.password" = "Skriv inn passord";
+
+"tvos.login.qr.title" = "Logg inn med PIA-appen";
+"tvos.login.qr.description" = "Skann QR-koden og bekreft innloggingen fra PIA iOS-appen.";
+"tvos.login.qr.timer" = "Koden utløper om:";
+"tvos.login.qr.options" = "Andre alternativer:";
+"tvos.login.qr.button.login" = "Logg inn med brukernavn";
+"tvos.login.qr.button.login" = "Gjenopprett kjøp";
+
+"tvos.login.qr.expired.title" = "QR-kode har utløpt";
+"tvos.login.qr.expired.description" = "Generer en ny nedenfor";
+"tvos.login.qr.expired.button.generate" = "Generer QR";
+
+//Connection error(tvOS)
+"error_alert.connection_error.no_network.title" = "Kan ikke koble til";
+"error_alert.connection_error.no_network.message" = "Sjekk internettforbindelsen din og prøv igjen";
+"error_alert.connection_error.no_network.retry_action.title" = "Prøv igjen";
+
+//Dashboard screen (tvOS)
+"location_selection.optimal_location.title" = "Optimal server";
+"location_selection.any_other_location.title" = "Valgt server";
+"dashboard.connection_state.connected.title" = "Tilkoblet";
+"dashboard.connection_state.disconnected.title" = "Frakoblet";
+"dashboard.connection_state.connecting.title" = "Kobler til …";
+"dashboard.connection_state.reconnecting.title" = "Kobler til på nytt …";
+"dashboard.connection_state.disconnecting.title" = "Kobler fra …";
+"dashboard.connection_state.error.title" = "Feil ved tilkobling";
+"dashboard.connection_state.network_error_alert.message" = "Sjekk internettforbindelsen din og prøv igjen";
+"dashboard.connection_state.network_error_alert.primary_action.title" = "Prøv igjen";
+
+// Settings (tvOS)
+"settings.account.log_out_button.title" = "Logg ut";
+"settings.account.log_out_alert.title" = "Er du sikker?";
+"settings.account.log_out_alert.message" = "Avlogging vil avslutte enhver aktiv VPN-tilkobling og etterlate deg ubeskyttet.";
+"settings.account.subscription_expiry.title" = "Abonnementet utløper den";
+
+// Dedicated IP
+"settings.dedicatedip.title1" = "Skriv inn dedikert IP";
+"settings.dedicatedip.title2" = "Dedikert IP";
+"settings.dedicatedip.subtitle" = "Aktiver din dedikerte IP ved å skrive inn token i feltet \nnedenfor. Du kan kjøpe en dedikert IP fra \nklientkontrollpanelet ditt på PIA-nettsiden.";
+"settings.dedicatedip.placeholder" = "Skriv inn token for din dedikerte IP";
+"settings.dedicatedip.button" = "Aktiver";
+"settings.dedicatedip.alert.failure.title" = "Noe gikk galt";
+"settings.dedicatedip.alert.failure.message" = "Token er enten ugyldig eller utløpt.";
+"settings.dedicatedip.alert.failure.message.empty" = "Token kan ikke være tom.";
+"settings.dedicatedip.alert.success.title" = "Du er klar";
+"settings.dedicatedip.alert.success.message" = "Din dedikerte IP er nå aktiv.";
+"settings.dedicatedip.alert.success.button" = "Fortsett";
+
+"settings.dedicatedip.stats.dedicatedip" = "Dedikert IP";
+"settings.dedicatedip.stats.ip" = "IP-adresse";
+"settings.dedicatedip.stats.location" = "Server";
+"settings.dedicatedip.stats.quickAction" = "Rask handling";
+"settings.dedicatedip.stats.delete.button" = "Slett dedikert IP";
+"settings.dedicatedip.stats.delete.alert.title" = "Er du sikker?";
+"settings.dedicatedip.stats.delete.alert.message" = "Du er i ferd med å fjerne din dedikerte IP fra kontoen din.";
+"settings.dedicatedip.stats.delete.alert.delete" = "Ja, slett";
+
+"settings.dedicatedip.status.active" = "Aktiv";
+"settings.dedicatedip.status.invalid" = "Ugyldig";
+"settings.dedicatedip.status.expired" = "Utløpt";
+"settings.dedicatedip.status.error" = "Feil";
+
+// Help menu (tvOS)
+"help_menu.app_version_section.title" = "App-versjon";
+"help_menu.contact_support.qr_code.title" = "Kontakt kundestøtte";
+"help_menu.contact_support.qr_code.message" = "Skann QR-koden for å komme i kontakt med vår kundestøtte.";
+
+"help_menu.about_options.acknowledgements.title" = "Anerkjennelser";
+"help_menu.about_options.privacy_policy.title" = "REntingslinjer om personvern";
+"help_menu.about_section.privacy_policy.description" = "Denne personvernerklæringen forklarer personvernspraksisen for Private Internet Access, Inc. (samlet vi, oss, datakontroller, selskap eller PIA) og gjelder brukere (bruker(e) eller du) av PIAs tjenester, medregnet blant annet PIA VPN-tjenesten (tjenesten) og PIA på www.privateinternetaccess.com (nettstedet).";
+"help_menu.about_section.privacy_policy.qr_code.message" = "Skann QR-koden for å få tilgang til hele personvernerklæringen på enheten din.";
+"help_menu.help_improve.enabled.title" = "PÅ";
+"help_menu.help_improve.disabled.title" = "AV";
+
+//SignUp (tvOS)
+"tvos.signup.title" = "Skaff deg Private Internet Access";
+"tvos.signup.item1" = "VPN-servere i 91 land";
+"tvos.signup.item2" = "Superhøye hastigheter";
+"tvos.signup.item3" = "Døgnåpen kundestøtte";
+"tvos.signup.cta" = "Skann QR-koden";
+
+//Sign in expired (tvOS)
+"tvos.signin.expired.title" = "Abonnementet ditt har utløpt";
+"tvos.signin.expired.subtitle" = "Forny og gjenopprett full VPN-beskyttelse mens du strømmer.";
+"tvos.signin.expired.qr.title1" = "Skann QR-koden og velg abonnementet ditt. Å tegne et abonnement tar kun et par minutter.";
+"tvos.signin.expired.qr.title2" = "Når du er ferdig, gå tilbake til Apple TV-en din og få forbedret digitalt personvern med PIA!";
+"tvos.signin.expired.button.renewed" = "Jeg har allerede fornyet";
+"tvos.signin.expired.button.signout" = "Logg ut";
+
+//Sign in free trial expired (tvOS)
+"tvos.signin.expired.trial.title" = "Din gratis prøveperiode har utløpt";
+"tvos.signin.expired.trial.subtitle" = "Hvis du likte premium VPN-beskyttelse, abonner på PIA!";

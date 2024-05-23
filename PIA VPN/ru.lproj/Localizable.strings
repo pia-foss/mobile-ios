@@ -438,3 +438,135 @@
 // PIA WIDGET
 "widget.liveActivity.region.title" = "Регион";
 "widget.liveActivity.selected_protocol.title" = "Протокол";
+
+// Regions Selection(tvOS)
+"regions.filter.all.title" = "Все";
+"regions.filter.search.title" = "Поиск";
+"regions.filter.favorites.title" = "Избранное";
+"regions.list.all_locations.title" = "Все локации";
+"regions.list.optimal_location.title" = "Лучшая локация";
+"regions.list.optimal_location_with_dip_location.title" = "Лучшая локация / Выделенный IP";
+"regions.search.recommended_locations.title" = "Рекомендуемые локации";
+"regions.search.results.title" = "Результаты поиска";
+"regions.search.button.title" = "Поиск локации";
+"regions.search.input_field.placeholder" = "Поиск города или страны";
+"regions.search.previous_results.title" = "Последний раз искали";
+"regions.context_menu.favorites.add.text" = "Добавить в избранное";
+"regions.context_menu.favorites.remove.text" = "Удалить из избранного";
+"regions.list_item.default.title" = "Локация по умолчанию";
+
+// Top Navigation bar
+"top_navigation_bar.vpn_item.title" = "PIA VPN";
+"top_navigation_bar.location_item.title" = "Локация";
+"top_navigation_bar.location_selection_screen.title" = "Выбор локации";
+
+//Onboarding - Connection Stats Permisson (tvOS)
+"onboarding.connection_stats.title" = "Помощь в улучшении PIA";
+"onboarding.connection_stats.subtitle" = "Помогите нам стать лучше, передавая статистику VPN-подключений. Эти отчеты не содержат персональных данных.";
+
+//Onboarding - VPN Installing Profile (tvOS)
+"onboarding.vpn_configuration.title" = "Настройка PIA";
+"onboarding.vpn_configuration.subtitle" = "При первом подключении появится запрос на то, чтобы разрешить PIA получить доступ к настройкам VPN. Это необходимо для шифрования вашего трафика. \n\nНапомним: мы не отслеживаем, не фильтруем и не регистрируем ваши действия в Сети. \n\nЧтобы продолжить, нажмите кнопку ниже.";
+"onboarding.vpn_configuration.button" = "Настроить PIA";
+
+//Welcome (tvOS)
+"tvos.welcome.title" = "Быстрая и надежная VPN для потоковых трансляций";
+"tvos.welcome.button.login" = "Войти";
+"tvos.welcome.button.signup" = "Зарегистрироваться";
+
+//Login (tvOS)
+"tvos.login.title" = "Введите учетные данные PIA VPN";
+"tvos.login.placeholder.username" = "Введите имя пользователя";
+"tvos.login.placeholder.password" = "Введите пароль";
+
+"tvos.login.qr.title" = "Вход с помощью приложения PIA";
+"tvos.login.qr.description" = "Отсканируйте QR-код и подтвердите вход из приложения PIA для iOS.";
+"tvos.login.qr.timer" = "Код станет недействительным через:";
+"tvos.login.qr.options" = "Другие варианты:";
+"tvos.login.qr.button.login" = "Войти с помощью имени пользователя";
+"tvos.login.qr.button.login" = "Продолжить покупку";
+
+"tvos.login.qr.expired.title" = "Срок действия QR-кода истек";
+"tvos.login.qr.expired.description" = "Сгенерируйте новый ниже";
+"tvos.login.qr.expired.button.generate" = "Сгенерировать QR";
+
+//Connection error(tvOS)
+"error_alert.connection_error.no_network.title" = "Не удается подключиться";
+"error_alert.connection_error.no_network.message" = "Проверьте подключение к Интернету и повторите попытку";
+"error_alert.connection_error.no_network.retry_action.title" = "Повторить";
+
+//Dashboard screen (tvOS)
+"location_selection.optimal_location.title" = "Лучшая локация";
+"location_selection.any_other_location.title" = "Выбранная локация";
+"dashboard.connection_state.connected.title" = "Подключено";
+"dashboard.connection_state.disconnected.title" = "Не подключено";
+"dashboard.connection_state.connecting.title" = "Подключение...";
+"dashboard.connection_state.reconnecting.title" = "Повторное подключение...";
+"dashboard.connection_state.disconnecting.title" = "Отключение...";
+"dashboard.connection_state.error.title" = "Ошибка подключения";
+"dashboard.connection_state.network_error_alert.message" = "Проверьте подключение к Интернету и повторите попытку";
+"dashboard.connection_state.network_error_alert.primary_action.title" = "Повторить";
+
+// Settings (tvOS)
+"settings.account.log_out_button.title" = "Выйти";
+"settings.account.log_out_alert.title" = "Вы уверены?";
+"settings.account.log_out_alert.message" = "Если вы выйдете из учетной записи, то все активные VPN-подключения прервутся, и вы останетесь без защиты.";
+"settings.account.subscription_expiry.title" = "Подписка истекает";
+
+// Dedicated IP
+"settings.dedicatedip.title1" = "Ввести выделенный IP";
+"settings.dedicatedip.title2" = "Выделенный IP-адрес";
+"settings.dedicatedip.subtitle" = "Активируйте выделенный IP, введя свой токен в поле ниже. Вы можете приобрести выделенный IP, войдя в свой аккаунт на сайте PIA.";
+"settings.dedicatedip.placeholder" = "Ввести токен для выделенного IP";
+"settings.dedicatedip.button" = "Активировать";
+"settings.dedicatedip.alert.failure.title" = "Что-то пошло не так";
+"settings.dedicatedip.alert.failure.message" = "Ваш токен недействителен или просрочен.";
+"settings.dedicatedip.alert.failure.message.empty" = "Поле с токеном не может быть пустым.";
+"settings.dedicatedip.alert.success.title" = "Все готово";
+"settings.dedicatedip.alert.success.message" = "Ваш выделенный IP теперь активен.";
+"settings.dedicatedip.alert.success.button" = "Продолжить";
+
+"settings.dedicatedip.stats.dedicatedip" = "Выделенный IP-адрес";
+"settings.dedicatedip.stats.ip" = "IP-адрес";
+"settings.dedicatedip.stats.location" = "Локация";
+"settings.dedicatedip.stats.quickAction" = "Быстрое действие";
+"settings.dedicatedip.stats.delete.button" = "Удалить выделенный IP";
+"settings.dedicatedip.stats.delete.alert.title" = "Вы уверены?";
+"settings.dedicatedip.stats.delete.alert.message" = "Вы собираетесь удалить выделенный IP из вашей учетной записи.";
+"settings.dedicatedip.stats.delete.alert.delete" = "Да, удалить";
+
+"settings.dedicatedip.status.active" = "Активный";
+"settings.dedicatedip.status.invalid" = "Недопустимый";
+"settings.dedicatedip.status.expired" = "Срок истек";
+"settings.dedicatedip.status.error" = "Ошибка";
+
+// Help menu (tvOS)
+"help_menu.app_version_section.title" = "Версия приложения";
+"help_menu.contact_support.qr_code.title" = "Связаться с нами";
+"help_menu.contact_support.qr_code.message" = "Отсканируйте QR-код, чтобы связаться с нашей службой поддержки.";
+
+"help_menu.about_options.acknowledgements.title" = "Уведомления";
+"help_menu.about_options.privacy_policy.title" = "Политика конфиденциальности";
+"help_menu.about_section.privacy_policy.description" = "Данная политика конфиденциальности («Политика конфиденциальности» или «Политика») разъясняет принципы защиты конфиденциальности Private Internet Access, Inc. (далее «Мы», «Нас», «Управляющий данными», «Компания» или PIA) и применяется к пользователям (далее «Пользователь(и)» или «Вы») PIA, включая VPN-сервис PIA (далее «Сервис») и веб-сайт PIA по адресу www.privateinternetaccess.com (далее «Веб-сайт»).";
+"help_menu.about_section.privacy_policy.qr_code.message" = "Отсканируйте QR-код для доступа к политике конфиденциальности на вашем устройстве.";
+"help_menu.help_improve.enabled.title" = "ВКЛ";
+"help_menu.help_improve.disabled.title" = "ВЫКЛ";
+
+//SignUp (tvOS)
+"tvos.signup.title" = "Установить Private Internet Access";
+"tvos.signup.item1" = "VPN-серверы в 91 стране";
+"tvos.signup.item2" = "Молниеносная скорость";
+"tvos.signup.item3" = "Служба поддержки 24/7";
+"tvos.signup.cta" = "Сканировать QR-код";
+
+//Sign in expired (tvOS)
+"tvos.signin.expired.title" = "Срок действия вашей подписки истек";
+"tvos.signin.expired.subtitle" = "Продлите подписку и восстановите полную VPN-защиту для потоковых трансляций.";
+"tvos.signin.expired.qr.title1" = "Отсканируйте QR-код и выберите тарифный план. Покупка подписки займет всего пару минут.";
+"tvos.signin.expired.qr.title2" = "После этого вернитесь к Apple TV и наслаждайтесь улучшенной цифровой конфиденциальностью с PIA!";
+"tvos.signin.expired.button.renewed" = "Подписка продлена";
+"tvos.signin.expired.button.signout" = "Выйти";
+
+//Sign in free trial expired (tvOS)
+"tvos.signin.expired.trial.title" = "Бесплатный пробный период истек";
+"tvos.signin.expired.trial.subtitle" = "Если вам понравилась наша первоклассная VPN-защита, купите подписку на PIA!";

@@ -438,3 +438,135 @@
 // PIA WIDGET
 "widget.liveActivity.region.title" = "ภูมิภาค";
 "widget.liveActivity.selected_protocol.title" = "โปรโตคอล";
+
+// Regions Selection(tvOS)
+"regions.filter.all.title" = "ทั้งหมด";
+"regions.filter.search.title" = "ค้นหา";
+"regions.filter.favorites.title" = "รายการโปรด";
+"regions.list.all_locations.title" = "ตำแหน่งทั้งหมด";
+"regions.list.optimal_location.title" = "ตำแหน่งที่เหมาะสมที่สุด";
+"regions.list.optimal_location_with_dip_location.title" = "ตำแหน่งที่เหมาะสมที่สุด/IP เฉพาะ";
+"regions.search.recommended_locations.title" = "ตำแหน่งที่แนะนำ";
+"regions.search.results.title" = "ผลการค้นหา";
+"regions.search.button.title" = "ค้นหาตำแหน่ง";
+"regions.search.input_field.placeholder" = "ค้นหาเมืองหรือประเทศ";
+"regions.search.previous_results.title" = "ตำแหน่งที่ค้นหาล่าสุด";
+"regions.context_menu.favorites.add.text" = "เพิ่มในรายการโปรด";
+"regions.context_menu.favorites.remove.text" = "ลบออกจากรายการโปรด";
+"regions.list_item.default.title" = "ตำแหน่งเริ่มต้น";
+
+// Top Navigation bar
+"top_navigation_bar.vpn_item.title" = "VPN PIA";
+"top_navigation_bar.location_item.title" = "ตำแหน่ง";
+"top_navigation_bar.location_selection_screen.title" = "การเลือกตำแหน่ง";
+
+//Onboarding - Connection Stats Permisson (tvOS)
+"onboarding.connection_stats.title" = "ช่วยปรับปรุง PIA";
+"onboarding.connection_stats.subtitle" = "ช่วยเราปรับปรุงด้วยการแชร์สถิติการเชื่อมต่อ VPN โดยที่รายงานเหล่านี้จะไม่มีข้อมูลส่วนบุคคลที่สามารถระบุตัวตนได้";
+
+//Onboarding - VPN Installing Profile (tvOS)
+"onboarding.vpn_configuration.title" = "กำหนดค่า PIA";
+"onboarding.vpn_configuration.subtitle" = "เมื่อเชื่อมต่อเป็นครั้งแรก คุณจะถูกขอให้อนุญาตให้ PIA เข้าถึงการกำหนดค่า VPN นี่เป็นสิ่งจำเป็นเพื่อเข้ารหัสการรับส่งข้อมูลของคุณ \n\nโปรดจำไว้ว่าเราไม่ตรวจสอบ กรอง หรือบันทึกกิจกรรมออนไลน์ของคุณ \n\nหากต้องการดำเนินการต่อ ให้คลิกที่ปุ่มด้านล่าง";
+"onboarding.vpn_configuration.button" = "กำหนดค่า PIA";
+
+//Welcome (tvOS)
+"tvos.welcome.title" = "VPN ที่รวดเร็วและปลอดภัยสำหรับการสตรีม";
+"tvos.welcome.button.login" = "เข้าสู่ระบบ";
+"tvos.welcome.button.signup" = "ลงชื่อเข้าใช้";
+
+//Login (tvOS)
+"tvos.login.title" = "ป้อนรายละเอียดบัญชี VPN PIA ของคุณ";
+"tvos.login.placeholder.username" = "กรอกชื่อผู้ใช้";
+"tvos.login.placeholder.password" = "กรอกรหัสผ่าน";
+
+"tvos.login.qr.title" = "ลงชื่อเข้าใช้ด้วยแอป PIA";
+"tvos.login.qr.description" = "สแกนรหัส QR และตรวจสอบข้อมูลการเข้าสู่ระบบจากแอป PIA iOS";
+"tvos.login.qr.timer" = "รหัสจะหมดอายุใน:";
+"tvos.login.qr.options" = "ตัวเลือกอื่น:";
+"tvos.login.qr.button.login" = "เข้าสู่ระบบผ่านชื่อผู้ใช้";
+"tvos.login.qr.button.login" = "คืนค่าการซื้อ";
+
+"tvos.login.qr.expired.title" = "รหัส QR หมดอายุแล้ว";
+"tvos.login.qr.expired.description" = "สร้างรหัสใหม่ด้านล่าง";
+"tvos.login.qr.expired.button.generate" = "สร้าง QR";
+
+//Connection error(tvOS)
+"error_alert.connection_error.no_network.title" = "ไม่สามารถเชื่อมต่อได้";
+"error_alert.connection_error.no_network.message" = "โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณแล้วลองอีกครั้ง";
+"error_alert.connection_error.no_network.retry_action.title" = "ลองอีกครั้ง";
+
+//Dashboard screen (tvOS)
+"location_selection.optimal_location.title" = "ตำแหน่งที่เหมาะสมที่สุด";
+"location_selection.any_other_location.title" = "ตำแหน่งที่เลือก";
+"dashboard.connection_state.connected.title" = "เชื่อมต่อ";
+"dashboard.connection_state.disconnected.title" = "ไม่ได้เชื่อมต่อ";
+"dashboard.connection_state.connecting.title" = "กำลังเชื่อมต่อ...";
+"dashboard.connection_state.reconnecting.title" = "เชื่อมต่ออีกครั้ง...";
+"dashboard.connection_state.disconnecting.title" = "กำลังยกเลิกการเชื่อมต่อ...";
+"dashboard.connection_state.error.title" = "การเชื่อมต่อล้มเหลว";
+"dashboard.connection_state.network_error_alert.message" = "โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณแล้วลองอีกครั้ง";
+"dashboard.connection_state.network_error_alert.primary_action.title" = "ลองอีกครั้ง";
+
+// Settings (tvOS)
+"settings.account.log_out_button.title" = "ออกจากระบบ";
+"settings.account.log_out_alert.title" = "คุณแน่ใจหรือไม่";
+"settings.account.log_out_alert.message" = "การออกจากระบบจะยุติการเชื่อมต่อ VPN ที่ใช้งานอยู่ และทำให้คุณไม่ได้รับการป้องกัน";
+"settings.account.subscription_expiry.title" = "การสมัครสมาชิกจะหมดอายุในวันที่";
+
+// Dedicated IP
+"settings.dedicatedip.title1" = "กรอก IP เฉพาะ";
+"settings.dedicatedip.title2" = "IP เฉพาะ";
+"settings.dedicatedip.subtitle" = "เปิดใช้งาน IP เฉพาะของคุณโดยพิมพ์โทเค็นของคุณในช่อง \n ด้านล่าง คุณสามารถซื้อ IP เฉพาะได้จาก \nแผงควบคุมไคลเอนต์ของคุณบนเว็บไซต์ PIA";
+"settings.dedicatedip.placeholder" = "กรอกโทเค็น IP เฉพาะของคุณ";
+"settings.dedicatedip.button" = "เปิดการใช้งาน";
+"settings.dedicatedip.alert.failure.title" = "มีบางอย่างผิดพลาด";
+"settings.dedicatedip.alert.failure.message" = "โทเค็นของคุณไม่ถูกต้องหรือหมดอายุแล้ว";
+"settings.dedicatedip.alert.failure.message.empty" = "โทเค็นของคุณไม่สามารถเว้นว่างได้";
+"settings.dedicatedip.alert.success.title" = "คุณตั้งค่าเรียบร้อยแล้ว";
+"settings.dedicatedip.alert.success.message" = "IP เฉพาะของคุณเปิดใช้งานแล้ว";
+"settings.dedicatedip.alert.success.button" = "ดำเนินการต่อ";
+
+"settings.dedicatedip.stats.dedicatedip" = "IP เฉพาะ";
+"settings.dedicatedip.stats.ip" = "ที่อยู่ IP";
+"settings.dedicatedip.stats.location" = "ตำแหน่ง";
+"settings.dedicatedip.stats.quickAction" = "การดำเนินการด่วน";
+"settings.dedicatedip.stats.delete.button" = "ลบ IP เฉพาะ";
+"settings.dedicatedip.stats.delete.alert.title" = "คุณแน่ใจหรือไม่";
+"settings.dedicatedip.stats.delete.alert.message" = "คุณกำลังจะลบ IP เฉพาะของคุณออกจากบัญชีของคุณ";
+"settings.dedicatedip.stats.delete.alert.delete" = "ใช่ ลบ";
+
+"settings.dedicatedip.status.active" = "เปิดการใช้งาน";
+"settings.dedicatedip.status.invalid" = "ไม่ถูกต้อง";
+"settings.dedicatedip.status.expired" = "หมดอายุ";
+"settings.dedicatedip.status.error" = "ข้อผิดพลาด";
+
+// Help menu (tvOS)
+"help_menu.app_version_section.title" = "เวอร์ชันของแอป";
+"help_menu.contact_support.qr_code.title" = "ติดต่อฝ่ายสนับสนุน";
+"help_menu.contact_support.qr_code.message" = "สแกนรหัส QR เพื่อติดต่อกับทีมสนับสนุนของเรา";
+
+"help_menu.about_options.acknowledgements.title" = "รับทราบ";
+"help_menu.about_options.privacy_policy.title" = "นโยบายความเป็นส่วนตัว";
+"help_menu.about_section.privacy_policy.description" = "นโยบายความเป็นส่วนตัวนี้ ('นโยบายความเป็นส่วนตัว' หรือ 'นโยบาย') อธิบายหลักปฏิบัติด้านความเป็นส่วนตัวของ Private Internet Access, Inc. (เรียกรวมกันว่า 'เรา', 'พวกเรา', 'ผู้ควบคุมข้อมูล', 'บริษัท' หรือ 'PIA') และนำไปใช้กับผู้ใช้ ('ผู้ใช้' หรือ 'คุณ') ของบริการของ PIA รวมถึงเหนือสิ่งอื่นใด บริการ VPN PIA ('บริการ') และเว็บไซต์ PIA ที่ www.privateinternetaccess.com ('เว็บไซต์')";
+"help_menu.about_section.privacy_policy.qr_code.message" = "สแกนรหัส QR เพื่อเข้าถึงนโยบายความเป็นส่วนตัวฉบับเต็มบนอุปกรณ์ของคุณ";
+"help_menu.help_improve.enabled.title" = "เปิด";
+"help_menu.help_improve.disabled.title" = "ปิด";
+
+//SignUp (tvOS)
+"tvos.signup.title" = "รับ Private Internet Access";
+"tvos.signup.item1" = "เซิร์ฟเวอร์ VPN ใน 91 ประเทศ";
+"tvos.signup.item2" = "ความเร็วอันรวดเร็วทันใจ";
+"tvos.signup.item3" = "การสนับสนุนลูกค้าตลอด 24 ชั่วโมงทุกวัน";
+"tvos.signup.cta" = "สแกนรหัส QR";
+
+//Sign in expired (tvOS)
+"tvos.signin.expired.title" = "การสมัครสมาชิกของคุณหมดอายุแล้ว";
+"tvos.signin.expired.subtitle" = "ต่ออายุและรับการป้องกัน VPN เต็มรูปแบบขณะสตรีมมิ่ง";
+"tvos.signin.expired.qr.title1" = "สแกนรหัส QR และเลือกแผนของคุณ การสมัครใช้เวลาเพียงไม่กี่นาที";
+"tvos.signin.expired.qr.title2" = "เมื่อเสร็จแล้ว กลับมาที่ Apple TV ของคุณและเพลิดเพลินกับความเป็นส่วนตัวดิจิทัลที่ได้รับการปรับปรุงด้วย PIA!";
+"tvos.signin.expired.button.renewed" = "ฉันต่ออายุแล้ว";
+"tvos.signin.expired.button.signout" = "ออกจากระบบ";
+
+//Sign in free trial expired (tvOS)
+"tvos.signin.expired.trial.title" = "การทดลองใช้ฟรีของคุณหมดอายุแล้ว";
+"tvos.signin.expired.trial.subtitle" = "หากคุณเพลิดเพลินกับการป้องกัน VPN ระดับพรีเมียม สมัครสมาชิก PIA!";
