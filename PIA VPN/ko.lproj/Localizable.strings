@@ -67,7 +67,7 @@
 "menu.item.account" = "계정";
 "menu.item.settings" = "설정";
 "menu.item.logout" = "로그아웃";
-"menu.item.web.privacy" = "개인정보 취급방침";
+"menu.item.web.privacy" = "개인 정보 보호 정책";
 "menu.item.web.home" = "홈페이지";
 "menu.item.web.support" = "지원";
 
@@ -438,3 +438,135 @@
 // PIA WIDGET
 "widget.liveActivity.region.title" = "지역";
 "widget.liveActivity.selected_protocol.title" = "프로토콜";
+
+// Regions Selection(tvOS)
+"regions.filter.all.title" = "모두";
+"regions.filter.search.title" = "검색";
+"regions.filter.favorites.title" = "즐겨찾기";
+"regions.list.all_locations.title" = "모든 위치";
+"regions.list.optimal_location.title" = "최적 위치";
+"regions.list.optimal_location_with_dip_location.title" = "최적 위치/전용 IP";
+"regions.search.recommended_locations.title" = "권장 위치";
+"regions.search.results.title" = "검색 결과";
+"regions.search.button.title" = "위치 검색";
+"regions.search.input_field.placeholder" = "도시 또는 국가 검색";
+"regions.search.previous_results.title" = "마지막 검색 위치";
+"regions.context_menu.favorites.add.text" = "즐겨찾기에 추가";
+"regions.context_menu.favorites.remove.text" = "즐겨찾기에서 제거";
+"regions.list_item.default.title" = "기본 위치";
+
+// Top Navigation bar
+"top_navigation_bar.vpn_item.title" = "PIA VPN";
+"top_navigation_bar.location_item.title" = "위치";
+"top_navigation_bar.location_selection_screen.title" = "위치 선택";
+
+//Onboarding - Connection Stats Permisson (tvOS)
+"onboarding.connection_stats.title" = "PIA 개선에 도움을 주세요";
+"onboarding.connection_stats.subtitle" = "VPN 연결 통계를 공유하여 저희 서비스를 개선할 수 있도록 도와 주세요. 이 보고서에는 개인 식별 정보가 절대로 포함되지 않습니다.";
+
+//Onboarding - VPN Installing Profile (tvOS)
+"onboarding.vpn_configuration.title" = "PIA 구성";
+"onboarding.vpn_configuration.subtitle" = "처음 연결 시 PIA에서 VPN 구성에 접근하도록 허용해 달라는 요청을 받게 됩니다. 트래픽을 암호화하기 위해서 필수적인 절차입니다.\n저희는 고객님의 온라인 활동을 모니터링, 필터링 또는 기록하지 않는다는 점을 기억하세요.\n계속 진행하려면 아래 버튼을 클릭하세요.";
+"onboarding.vpn_configuration.button" = "PIA 구성";
+
+//Welcome (tvOS)
+"tvos.welcome.title" = "스트리밍을 위한 고속 보안 VPN";
+"tvos.welcome.button.login" = "로그인";
+"tvos.welcome.button.signup" = "가입";
+
+//Login (tvOS)
+"tvos.login.title" = "PIA VPN 계정 정보를 입력하세요";
+"tvos.login.placeholder.username" = "사용자 이름 입력하기";
+"tvos.login.placeholder.password" = "비밀번호 입력하기";
+
+"tvos.login.qr.title" = "PIA 앱을 이용하여 로그인하세요";
+"tvos.login.qr.description" = "QR 코드를 스캔하고 PIA iOS 앱에서 로그인을 인증하세요.";
+"tvos.login.qr.timer" = "코드 만료까지 남은 시간:";
+"tvos.login.qr.options" = "기타 옵션:";
+"tvos.login.qr.button.login" = "사용자 이름으로 로그인";
+"tvos.login.qr.button.login" = "구매 복원";
+
+"tvos.login.qr.expired.title" = "QR 코드가 만료되었습니다";
+"tvos.login.qr.expired.description" = "아래에서 새로운 QR 코드를 생성하세요.";
+"tvos.login.qr.expired.button.generate" = "QR 생성";
+
+//Connection error(tvOS)
+"error_alert.connection_error.no_network.title" = "연결할 수 없음";
+"error_alert.connection_error.no_network.message" = "인터넷 연결 상태를 확인한 뒤 다시 시도하세요.";
+"error_alert.connection_error.no_network.retry_action.title" = "다시 시도하기";
+
+//Dashboard screen (tvOS)
+"location_selection.optimal_location.title" = "최적 위치";
+"location_selection.any_other_location.title" = "선택된 위치";
+"dashboard.connection_state.connected.title" = "연결됨";
+"dashboard.connection_state.disconnected.title" = "연결되지 않음";
+"dashboard.connection_state.connecting.title" = "연결 중...";
+"dashboard.connection_state.reconnecting.title" = "다시 연결 중...";
+"dashboard.connection_state.disconnecting.title" = "연결 해제 중...";
+"dashboard.connection_state.error.title" = "연결 오류";
+"dashboard.connection_state.network_error_alert.message" = "인터넷 연결 상태를 확인한 뒤 다시 시도하세요.";
+"dashboard.connection_state.network_error_alert.primary_action.title" = "다시 시도하기";
+
+// Settings (tvOS)
+"settings.account.log_out_button.title" = "로그아웃";
+"settings.account.log_out_alert.title" = "계속하시겠습니까?";
+"settings.account.log_out_alert.message" = "로그아웃하면 활성화된 VPN 연결이 해제되고 보호되지 않습니다.";
+"settings.account.subscription_expiry.title" = "구독 만료일";
+
+// Dedicated IP
+"settings.dedicatedip.title1" = "전용 IP 입력";
+"settings.dedicatedip.title2" = "전용 IP";
+"settings.dedicatedip.subtitle" = "아래의 입력란에 토큰을 입력하여 전용 IP를 활성화하세요.\nPIA 웹사이트의 클라이언트 제어판에서\n전용 IP를 구매할 수 있습니다.";
+"settings.dedicatedip.placeholder" = "전용 IP 토큰 입력";
+"settings.dedicatedip.button" = "활성화";
+"settings.dedicatedip.alert.failure.title" = "오류가 발생했습니다.";
+"settings.dedicatedip.alert.failure.message" = "토큰이 유효하지 않거나 만료되었습니다.";
+"settings.dedicatedip.alert.failure.message.empty" = "토큰을 비워 둘 수 없습니다.";
+"settings.dedicatedip.alert.success.title" = "모두 완료되었습니다";
+"settings.dedicatedip.alert.success.message" = "이제 전용 IP 주소가 활성화되었습니다.";
+"settings.dedicatedip.alert.success.button" = "계속";
+
+"settings.dedicatedip.stats.dedicatedip" = "전용 IP";
+"settings.dedicatedip.stats.ip" = "IP 주소";
+"settings.dedicatedip.stats.location" = "위치";
+"settings.dedicatedip.stats.quickAction" = "빠른 작업";
+"settings.dedicatedip.stats.delete.button" = "전용 IP 삭제";
+"settings.dedicatedip.stats.delete.alert.title" = "계속하시겠습니까?";
+"settings.dedicatedip.stats.delete.alert.message" = "계정에서 전용 IP를 제거하려고 합니다.";
+"settings.dedicatedip.stats.delete.alert.delete" = "제거하기";
+
+"settings.dedicatedip.status.active" = "활성화됨";
+"settings.dedicatedip.status.invalid" = "유효하지 않음";
+"settings.dedicatedip.status.expired" = "만료됨";
+"settings.dedicatedip.status.error" = "오류";
+
+// Help menu (tvOS)
+"help_menu.app_version_section.title" = "앱 버전";
+"help_menu.contact_support.qr_code.title" = "고객 지원팀에 문의하기";
+"help_menu.contact_support.qr_code.message" = "QR 코드를 스캔하여 고객 지원팀에 문의하세요.";
+
+"help_menu.about_options.acknowledgements.title" = "사용권 고지";
+"help_menu.about_options.privacy_policy.title" = "개인정보보호정책";
+"help_menu.about_section.privacy_policy.description" = "본 개인 정보 보호 정책(이하 '개인정보보호정책' 또는 '정책')은 Private Internet Access, Inc.(총칭하여 '당사는,' '당사를,' '데이터 제어기관,' '회사' 또는 'PIA')의 개인정보 보호 관행을 설명하며 그 중에서도 특히 PIA VPN service(이하 '서비스') 및 PIA 웹사이트인 www.privateinternetaccess.com(이하 '웹사이트')를 포함한 PIA 서비스의 사용자(이하 '사용자' 또는 '귀하')에게 적용됩니다.";
+"help_menu.about_section.privacy_policy.qr_code.message" = "QR 코드를 스캔하여 기기에서 전체 개인 정보 보호 정책을 확인하세요.";
+"help_menu.help_improve.enabled.title" = "켜짐";
+"help_menu.help_improve.disabled.title" = "꺼짐";
+
+//SignUp (tvOS)
+"tvos.signup.title" = "Private Internet Access 구독하기";
+"tvos.signup.item1" = "91개국에 위치한 VPN 서버";
+"tvos.signup.item2" = "놀라운 속도";
+"tvos.signup.item3" = "연중무휴 24시간 고객 지원";
+"tvos.signup.cta" = "QR 코드를 스캔하세요";
+
+//Sign in expired (tvOS)
+"tvos.signin.expired.title" = "구독이 만료되었습니다";
+"tvos.signin.expired.subtitle" = "구독을 갱신하고 스트리밍 중에 다시 VPN의 완전한 보호를 받으세요.";
+"tvos.signin.expired.qr.title1" = "QR 코드를 스캔하고 플랜을 선택하세요. 몇 분이면 구독이 완료됩니다.";
+"tvos.signin.expired.qr.title2" = "완료되면 Apple TV로 돌아가서 PIA로 개선된 디지털 프라이버시를 누리세요!";
+"tvos.signin.expired.button.renewed" = "이미 갱신함";
+"tvos.signin.expired.button.signout" = "로그아웃";
+
+//Sign in free trial expired (tvOS)
+"tvos.signin.expired.trial.title" = "무료 체험이 만료되었습니다";
+"tvos.signin.expired.trial.subtitle" = "프리미엄 VPN 보호 기능에 만족하셨다면 PIA를 구독하세요!";

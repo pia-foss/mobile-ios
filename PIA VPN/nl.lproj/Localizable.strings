@@ -438,3 +438,135 @@
 // PIA WIDGET
 "widget.liveActivity.region.title" = "Regio";
 "widget.liveActivity.selected_protocol.title" = "Protocol";
+
+// Regions Selection(tvOS)
+"regions.filter.all.title" = "Alle";
+"regions.filter.search.title" = "Zoeken";
+"regions.filter.favorites.title" = "Favoriet(en)";
+"regions.list.all_locations.title" = "Alle Locaties";
+"regions.list.optimal_location.title" = "Optimale Locatie";
+"regions.list.optimal_location_with_dip_location.title" = "Optimale Locatie/Dedicated IP";
+"regions.search.recommended_locations.title" = "Aanbevolen Locaties";
+"regions.search.results.title" = "Zoekresultaten";
+"regions.search.button.title" = "Zoek een locatie";
+"regions.search.input_field.placeholder" = "Zoeken op stad of land";
+"regions.search.previous_results.title" = "Laatst Gezochte Locaties";
+"regions.context_menu.favorites.add.text" = "Toevoegen aan Favorieten";
+"regions.context_menu.favorites.remove.text" = "Verwijderen uit Favorieten";
+"regions.list_item.default.title" = "Standaardlocatie";
+
+// Top Navigation bar
+"top_navigation_bar.vpn_item.title" = "PIA VPN";
+"top_navigation_bar.location_item.title" = "Locatie";
+"top_navigation_bar.location_selection_screen.title" = "Locatiekeuze";
+
+//Onboarding - Connection Stats Permisson (tvOS)
+"onboarding.connection_stats.title" = "Help PIA te verbeteren";
+"onboarding.connection_stats.subtitle" = "Help ons te verbeteren door VPN-verbindingsstatistieken te delen. Deze rapporten bevatten nooit persoonlijk identificeerbare informatie.";
+
+//Onboarding - VPN Installing Profile (tvOS)
+"onboarding.vpn_configuration.title" = "PIA configureren";
+"onboarding.vpn_configuration.subtitle" = "Wanneer je voor de eerste keer verbinding maakt, wordt je gevraagd om PIA toegang te geven tot VPN-configuraties. Dit is nodig om je verkeer te versleutelen. \n\nOnthoud dat we je online activiteiten niet controleren, filteren of vastleggen. \n\nKlik op onderstaande knop om verder te gaan.";
+"onboarding.vpn_configuration.button" = "PIA configureren";
+
+//Welcome (tvOS)
+"tvos.welcome.title" = "Snelle & veilige VPN voor streamen";
+"tvos.welcome.button.login" = "Inloggen";
+"tvos.welcome.button.signup" = "Aanmelden";
+
+//Login (tvOS)
+"tvos.login.title" = "Voer de accountgegevens van je PIA VPN in";
+"tvos.login.placeholder.username" = "Gebruikersnaam invoeren";
+"tvos.login.placeholder.password" = "Wachtwoord invoeren";
+
+"tvos.login.qr.title" = "Log in met de PIA-app";
+"tvos.login.qr.description" = "Scan de QR-code en bevestig de login in de PIA iOS-app.";
+"tvos.login.qr.timer" = "De code verloopt over:";
+"tvos.login.qr.options" = "Andere opties:";
+"tvos.login.qr.button.login" = "Inloggen via gebruikersnaam";
+"tvos.login.qr.button.login" = "Aankoop herstellen";
+
+"tvos.login.qr.expired.title" = "QR-code is verlopen";
+"tvos.login.qr.expired.description" = "Maak hieronder een nieuwe aan";
+"tvos.login.qr.expired.button.generate" = "QR aanmaken";
+
+//Connection error(tvOS)
+"error_alert.connection_error.no_network.title" = "Kan geen verbinding maken";
+"error_alert.connection_error.no_network.message" = "Controleer je internetverbinding en probeer het opnieuw";
+"error_alert.connection_error.no_network.retry_action.title" = "Opnieuw proberen";
+
+//Dashboard screen (tvOS)
+"location_selection.optimal_location.title" = "Optimale Locatie";
+"location_selection.any_other_location.title" = "Geselecteerde locatie";
+"dashboard.connection_state.connected.title" = "Verbonden";
+"dashboard.connection_state.disconnected.title" = "Niet verbonden";
+"dashboard.connection_state.connecting.title" = "Verbinden...";
+"dashboard.connection_state.reconnecting.title" = "Opnieuw verbinden...";
+"dashboard.connection_state.disconnecting.title" = "Verbinding verbreken...";
+"dashboard.connection_state.error.title" = "Fout bij verbinding";
+"dashboard.connection_state.network_error_alert.message" = "Controleer je internetverbinding en probeer het opnieuw";
+"dashboard.connection_state.network_error_alert.primary_action.title" = "Opnieuw proberen";
+
+// Settings (tvOS)
+"settings.account.log_out_button.title" = "Uitloggen";
+"settings.account.log_out_alert.title" = "Weet u het zeker?";
+"settings.account.log_out_alert.message" = "Uitloggen beëindigt elke actieve VPN-verbinding waarna je onbeschermd bent.";
+"settings.account.subscription_expiry.title" = "Abonnement verloopt op";
+
+// Dedicated IP
+"settings.dedicatedip.title1" = "Voer dedicated IP in";
+"settings.dedicatedip.title2" = "Toegewijde IP";
+"settings.dedicatedip.subtitle" = "Activeer je dedicated IP door je token in te voeren in het veld \nhieronder. Je kunt een dedicated IP kopen via je Client \nControl Panel op de PIA-website.";
+"settings.dedicatedip.placeholder" = "Voer je Dedicated IP-token in";
+"settings.dedicatedip.button" = "Activeren";
+"settings.dedicatedip.alert.failure.title" = "Er ging iets mis";
+"settings.dedicatedip.alert.failure.message" = "Je token is ongeldig of verlopen.";
+"settings.dedicatedip.alert.failure.message.empty" = "Je token kan niet leeg zijn.";
+"settings.dedicatedip.alert.success.title" = "Je bent klaar";
+"settings.dedicatedip.alert.success.message" = "Je Dedicated IP is nu actief.";
+"settings.dedicatedip.alert.success.button" = "Doorgaan";
+
+"settings.dedicatedip.stats.dedicatedip" = "Toegewijde IP";
+"settings.dedicatedip.stats.ip" = "IP-adres";
+"settings.dedicatedip.stats.location" = "Locatie";
+"settings.dedicatedip.stats.quickAction" = "Snelle actie";
+"settings.dedicatedip.stats.delete.button" = "Verwijder Dedicated IP";
+"settings.dedicatedip.stats.delete.alert.title" = "Weet u het zeker?";
+"settings.dedicatedip.stats.delete.alert.message" = "Je staat op het punt om je Dedicated IP van je account te verwijderen.";
+"settings.dedicatedip.stats.delete.alert.delete" = "Ja, verwijderen";
+
+"settings.dedicatedip.status.active" = "Actief";
+"settings.dedicatedip.status.invalid" = "Ongeldig";
+"settings.dedicatedip.status.expired" = "Verlopen";
+"settings.dedicatedip.status.error" = "Fout";
+
+// Help menu (tvOS)
+"help_menu.app_version_section.title" = "App versie";
+"help_menu.contact_support.qr_code.title" = "Contact opnemen met support team";
+"help_menu.contact_support.qr_code.message" = "Scan de QR-code om contact op te nemen met ons support team.";
+
+"help_menu.about_options.acknowledgements.title" = "Erkenningen";
+"help_menu.about_options.privacy_policy.title" = "Privacybeleid";
+"help_menu.about_section.privacy_policy.description" = "Dit privacybeleid ('Privacybeleid' of 'Beleid') legt de privacypraktijken uit van Private Internet Access, Inc, (gezamenlijk 'Wij', 'Ons', 'Gegevensbeheerder', 'Bedrijf' of 'PIA') en is van toepassing op gebruikers ('Gebruiker(s)' of 'Jij') van de diensten van PIA, waaronder, onder andere, de PIA VPN-service ('Service') en de PIA-website op www.privateinternetaccess.com ('Website').";
+"help_menu.about_section.privacy_policy.qr_code.message" = "Scan de QR-code om toegang te krijgen tot het volledige privacybeleid op je apparaat.";
+"help_menu.help_improve.enabled.title" = "AAN";
+"help_menu.help_improve.disabled.title" = "UIT";
+
+//SignUp (tvOS)
+"tvos.signup.title" = "Neem Private Internet Access";
+"tvos.signup.item1" = "VPN-servers in 91 landen";
+"tvos.signup.item2" = "Razendsnelle snelheden";
+"tvos.signup.item3" = "24/7 klantenservice";
+"tvos.signup.cta" = "Scan de QR-code";
+
+//Sign in expired (tvOS)
+"tvos.signin.expired.title" = "Je abonnement is verlopen";
+"tvos.signin.expired.subtitle" = "Vernieuw en krijg volledige VPN-bescherming tijdens het streamen.";
+"tvos.signin.expired.qr.title1" = "Scan de QR-code en kies je abonnement. Het inschrijven duurt maar een paar minuten.";
+"tvos.signin.expired.qr.title2" = "Zodra je klaar bent, ga je terug naar je Apple TV en geniet je van verbeterde digitale privacy met PIA!";
+"tvos.signin.expired.button.renewed" = "Ik heb al verlengd";
+"tvos.signin.expired.button.signout" = "Uitloggen";
+
+//Sign in free trial expired (tvOS)
+"tvos.signin.expired.trial.title" = "Je gratis proefperiode is verlopen";
+"tvos.signin.expired.trial.subtitle" = "Als je geniet van eersteklas VPN-bescherming, neem dan een abonnement op PIA!";

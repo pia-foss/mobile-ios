@@ -1,2 +1,4 @@
-"NSCameraUsageDescription" = "Bir hediye kartı kullanabilmeniz amacıyla QR kodlarını taramanızı sağlamak için kamera erişimi vermeniz gerekiyor.";
+/* Localized versions of Info.plist keys */
+
 "NSFaceIDUsageDescription" = "Ortaya çıkarmak için doğrulayın";
+"NSCameraUsageDescription" = "Bir hediye kartı kullanabilmeniz amacıyla QR kodlarını taramanızı sağlamak için kamera erişimi vermeniz gerekiyor.";

@@ -438,3 +438,135 @@
 // PIA WIDGET
 "widget.liveActivity.region.title" = "Région";
 "widget.liveActivity.selected_protocol.title" = "Protocole";
+
+// Regions Selection(tvOS)
+"regions.filter.all.title" = "Toutes";
+"regions.filter.search.title" = "Recherche";
+"regions.filter.favorites.title" = "Favori(s)";
+"regions.list.all_locations.title" = "Toutes les localisations";
+"regions.list.optimal_location.title" = "Localisation optimale";
+"regions.list.optimal_location_with_dip_location.title" = "Localisation optimale/IP dédiée";
+"regions.search.recommended_locations.title" = "Localisations recommandées";
+"regions.search.results.title" = "Résultats de recherche";
+"regions.search.button.title" = "Chercher une localisation";
+"regions.search.input_field.placeholder" = "Chercher une ville ou un pays";
+"regions.search.previous_results.title" = "Dernières localisations recherchées";
+"regions.context_menu.favorites.add.text" = "Ajouter aux Favoris";
+"regions.context_menu.favorites.remove.text" = "Supprimer des Favoris";
+"regions.list_item.default.title" = "Localisation par défaut";
+
+// Top Navigation bar
+"top_navigation_bar.vpn_item.title" = "PIA VPN";
+"top_navigation_bar.location_item.title" = "Localisation";
+"top_navigation_bar.location_selection_screen.title" = "Sélectionner une localisation";
+
+//Onboarding - Connection Stats Permisson (tvOS)
+"onboarding.connection_stats.title" = "Aidez-nous à améliorer PIA";
+"onboarding.connection_stats.subtitle" = "Participez à l'amélioration de nos services en autorisant la collecte de vos statistiques de connexion VPN. Ces rapports ne contiennent jamais d'informations personnelles identifiables.";
+
+//Onboarding - VPN Installing Profile (tvOS)
+"onboarding.vpn_configuration.title" = "Configuration de PIA";
+"onboarding.vpn_configuration.subtitle" = "Lors de votre première connexion, il vous sera demandé d'autoriser PIA à accéder aux paramètres VPN. Cette autorisation est nécessaire pour pouvoir sécuriser votre connexion. \n\nNous nous sommes engagés à ne pas surveiller, filtrer ou enregistrer vos activités en ligne. \n\nPour continuer, veuillez cliquer sur le bouton ci-dessous.";
+"onboarding.vpn_configuration.button" = "Configurer PIA";
+
+//Welcome (tvOS)
+"tvos.welcome.title" = "VPN rapide et sécurisé pour le streaming";
+"tvos.welcome.button.login" = "Connexion";
+"tvos.welcome.button.signup" = "S'inscrire";
+
+//Login (tvOS)
+"tvos.login.title" = "Saisissez vos identifiants PIA VPN";
+"tvos.login.placeholder.username" = "Nom d'utilisateur";
+"tvos.login.placeholder.password" = "Mot de passe";
+
+"tvos.login.qr.title" = "Connexion à l'aide de l'application PIA";
+"tvos.login.qr.description" = "Scannez le QR code et validez la connexion depuis l'application PIA pour iOS.";
+"tvos.login.qr.timer" = "Le code expirera dans :";
+"tvos.login.qr.options" = "Autres options :";
+"tvos.login.qr.button.login" = "Nom d'utilisateur";
+"tvos.login.qr.button.login" = "Restaurer l'achat";
+
+"tvos.login.qr.expired.title" = "QR code expiré";
+"tvos.login.qr.expired.description" = "Générez un nouveau QR code ci-dessous";
+"tvos.login.qr.expired.button.generate" = "Générer";
+
+//Connection error(tvOS)
+"error_alert.connection_error.no_network.title" = "Impossible de se connecter";
+"error_alert.connection_error.no_network.message" = "Veuillez vérifier votre connexion internet et réessayez";
+"error_alert.connection_error.no_network.retry_action.title" = "Réessayer";
+
+//Dashboard screen (tvOS)
+"location_selection.optimal_location.title" = "Localisation optimale";
+"location_selection.any_other_location.title" = "Localisation sélectionnée";
+"dashboard.connection_state.connected.title" = "Connecté";
+"dashboard.connection_state.disconnected.title" = "Déconnecté";
+"dashboard.connection_state.connecting.title" = "Connexion...";
+"dashboard.connection_state.reconnecting.title" = "Reconnexion…";
+"dashboard.connection_state.disconnecting.title" = "Déconnexion...";
+"dashboard.connection_state.error.title" = "Erreur de connexion";
+"dashboard.connection_state.network_error_alert.message" = "Veuillez vérifier votre connexion internet et réessayez";
+"dashboard.connection_state.network_error_alert.primary_action.title" = "Réessayer";
+
+// Settings (tvOS)
+"settings.account.log_out_button.title" = "Déconnexion";
+"settings.account.log_out_alert.title" = "Êtes-vous sûr ?";
+"settings.account.log_out_alert.message" = "La déconnexion interrompt toute connexion VPN et vous laisse sans protection.";
+"settings.account.subscription_expiry.title" = "L'abonnement expire le";
+
+// Dedicated IP
+"settings.dedicatedip.title1" = "Entrez l'IP dédiée";
+"settings.dedicatedip.title2" = "IP dédiée";
+"settings.dedicatedip.subtitle" = "Activez votre IP dédiée en saisissant votre jeton ci-dessous. \nVous pouvez souscrire une IP dédiée depuis votre \ncompte client sur le site web de PIA.";
+"settings.dedicatedip.placeholder" = "Saisissez votre jeton d'IP dédiée";
+"settings.dedicatedip.button" = "Activer";
+"settings.dedicatedip.alert.failure.title" = "Une erreur est survenue";
+"settings.dedicatedip.alert.failure.message" = "Votre jeton n'est pas valide ou est expiré.";
+"settings.dedicatedip.alert.failure.message.empty" = "Le jeton ne peut pas être vide.";
+"settings.dedicatedip.alert.success.title" = "Tout est prêt";
+"settings.dedicatedip.alert.success.message" = "Votre IP dédiée est activée.";
+"settings.dedicatedip.alert.success.button" = "Continuer";
+
+"settings.dedicatedip.stats.dedicatedip" = "IP dédiée";
+"settings.dedicatedip.stats.ip" = "Adresse IP";
+"settings.dedicatedip.stats.location" = "Localisation";
+"settings.dedicatedip.stats.quickAction" = "Actions rapides";
+"settings.dedicatedip.stats.delete.button" = "Supprimer l'adresse IP dédiée";
+"settings.dedicatedip.stats.delete.alert.title" = "Êtes-vous sûr ?";
+"settings.dedicatedip.stats.delete.alert.message" = "Vous êtes sur le point de supprimer votre adresse IP dédiée de votre compte.";
+"settings.dedicatedip.stats.delete.alert.delete" = "Oui, supprimer";
+
+"settings.dedicatedip.status.active" = "Active";
+"settings.dedicatedip.status.invalid" = "Invalide";
+"settings.dedicatedip.status.expired" = "Expirée";
+"settings.dedicatedip.status.error" = "Erreur";
+
+// Help menu (tvOS)
+"help_menu.app_version_section.title" = "Version de l'application";
+"help_menu.contact_support.qr_code.title" = "Contacter l'assistance";
+"help_menu.contact_support.qr_code.message" = "Scannez le QR code pour contacter notre équipe d'assistance.";
+
+"help_menu.about_options.acknowledgements.title" = "Mentions spéciales";
+"help_menu.about_options.privacy_policy.title" = "Politique de confidentialité";
+"help_menu.about_section.privacy_policy.description" = "La présente politique de confidentialité (politique de confidentialité ou politique) définit les pratiques de Private Internet Access, Inc. (nous, responsable du traitement des données, entreprise ou PIA) et s'applique aux utilisateurs (utilisateur(s) ou vous) des services de PIA, y compris, entre autres, le service PIA VPN (service) et le site internet de PIA www.privateinternetaccess.com (site internet).";
+"help_menu.about_section.privacy_policy.qr_code.message" = "Scannez le QR code pour accéder à la politique de confidentialité complète sur votre appareil.";
+"help_menu.help_improve.enabled.title" = "OUI";
+"help_menu.help_improve.disabled.title" = "NON";
+
+//SignUp (tvOS)
+"tvos.signup.title" = "Téléchargez Private Internet Access";
+"tvos.signup.item1" = "Serveurs VPN dans 91 pays";
+"tvos.signup.item2" = "Vitesses de connexion rapides";
+"tvos.signup.item3" = "Assistance 24h/24 et 7 j/7";
+"tvos.signup.cta" = "Scannez le QR code";
+
+//Sign in expired (tvOS)
+"tvos.signin.expired.title" = "Abonnement expiré";
+"tvos.signin.expired.subtitle" = "Renouvelez votre abonnement et bénéficiez d'une protection VPN complète pendant le streaming.";
+"tvos.signin.expired.qr.title1" = "Scannez le QR code et sélectionnez votre formule. Cela ne prend que quelques minutes.";
+"tvos.signin.expired.qr.title2" = "Accédez ensuite à votre Apple TV et bénéficiez d'une meilleure protection avec PIA !";
+"tvos.signin.expired.button.renewed" = "Abonnement déjà renouvelé";
+"tvos.signin.expired.button.signout" = "Déconnexion";
+
+//Sign in free trial expired (tvOS)
+"tvos.signin.expired.trial.title" = "Essai gratuit expiré";
+"tvos.signin.expired.trial.subtitle" = "Vous avez apprécié notre VPN premium ? Abonnez-vous à PIA !";

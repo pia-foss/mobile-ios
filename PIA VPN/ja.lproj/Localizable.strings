@@ -438,3 +438,136 @@
 // PIA WIDGET
 "widget.liveActivity.region.title" = "地域";
 "widget.liveActivity.selected_protocol.title" = "プロトコル";
+
+// Regions Selection(tvOS)
+"regions.filter.all.title" = "すべて";
+"regions.filter.search.title" = "検索";
+"regions.filter.favorites.title" = "お気に入り";
+"regions.list.all_locations.title" = "すべてのロケーション";
+"regions.list.optimal_location.title" = "最適なロケーション";
+"regions.list.optimal_location_with_dip_location.title" = "最適なロケーション/専用IP";
+"regions.search.recommended_locations.title" = "おすすめの場所";
+"regions.search.results.title" = "検索結果";
+"regions.search.button.title" = "ロケーション検索";
+"regions.search.input_field.placeholder" = "都市または国を検索";
+"regions.search.previous_results.title" = "前回検索したロケーション";
+"regions.context_menu.favorites.add.text" = "お気に入りに追加";
+"regions.context_menu.favorites.remove.text" = "お気に入りから削除";
+"regions.list_item.default.title" = "デフォルトのロケーション";
+
+// Top Navigation bar
+"top_navigation_bar.vpn_item.title" = "PIA VPN";
+"top_navigation_bar.location_item.title" = "ロケーション";
+"top_navigation_bar.location_selection_screen.title" = "ロケーション選択";
+
+//Onboarding - Connection Stats Permisson (tvOS)
+"onboarding.connection_stats.title" = "PIAの改善に協力する";
+"onboarding.connection_stats.subtitle" = "VPN接続データを共有することにより、改善にご協力ください。これらのレポートには、個人を特定できる情報は含まれません。";
+
+//Onboarding - VPN Installing Profile (tvOS)
+"onboarding.vpn_configuration.title" = "PIAの設定";
+"onboarding.vpn_configuration.subtitle" = "初めて接続する際に、PIAにVPN設定アクセスへの許可を与えるかどうかを尋ねられます。これは、ユーザートラフィックを暗号化するために必要です。\n\n弊社はユーザーのオンライン活動を監視、フィルタリング、記録しません。\n\n続行するには下のボタンをクリックしてください。";
+"onboarding.vpn_configuration.button" = "PIAの設定";
+
+//Welcome (tvOS)
+"tvos.welcome.title" = "ストリーミング向けの高速でセキュアなVPN";
+"tvos.welcome.button.login" = "ログイン";
+"tvos.welcome.button.signup" = "登録";
+
+//Login (tvOS)
+"tvos.login.title" = "PIA VPNアカウントの詳細を入力してください";
+"tvos.login.placeholder.username" = "ユーザー名を入力";
+"tvos.login.placeholder.password" = "パスワードを入力";
+
+"tvos.login.qr.title" = "PIA アプリを使用してサインイン";
+"tvos.login.qr.description" = "QRコードをスキャンし、PIA iOSアプリからログインを有効にしてください。";
+"tvos.login.qr.timer" = "コードの有効期限：";
+"tvos.login.qr.options" = "その他のオプション：";
+"tvos.login.qr.button.login" = "ユーザー名でログイン";
+"tvos.login.qr.button.login" = "購入を復元";
+
+"tvos.login.qr.expired.title" = "QRコードの期限が切れました";
+"tvos.login.qr.expired.description" = "下で新しいコードを生成";
+"tvos.login.qr.expired.button.generate" = "QRを生成";
+
+//Connection error(tvOS)
+"error_alert.connection_error.no_network.title" = "接続できません";
+"error_alert.connection_error.no_network.message" = "インターネット接続を確認し、もう一度やり直してください";
+"error_alert.connection_error.no_network.retry_action.title" = "再試行";
+
+//Dashboard screen (tvOS)
+"location_selection.optimal_location.title" = "最適なロケーション";
+"location_selection.any_other_location.title" = "選択したロケーション";
+"dashboard.connection_state.connected.title" = "接続済み";
+"dashboard.connection_state.disconnected.title" = "未接続";
+"dashboard.connection_state.connecting.title" = "接続中...";
+"dashboard.connection_state.reconnecting.title" = "再接続中...";
+"dashboard.connection_state.disconnecting.title" = "切断中...";
+"dashboard.connection_state.error.title" = "接続エラー";
+"dashboard.connection_state.network_error_alert.message" = "インターネット接続を確認し、もう一度やり直してください";
+"dashboard.connection_state.network_error_alert.primary_action.title" = "再試行";
+
+// Settings (tvOS)
+"settings.account.log_out_button.title" = "ログアウト";
+"settings.account.log_out_alert.title" = "本当によろしいですか？";
+"settings.account.log_out_alert.message" = "ログアウトすると有効なVPN接続が終了し、保護されていない状態になります。";
+"settings.account.subscription_expiry.title" = "サブスクリプションの有効期限：";
+
+// Dedicated IP
+"settings.dedicatedip.title1" = "専用IPを入力";
+"settings.dedicatedip.title2" = "専用IP";
+"settings.dedicatedip.subtitle" = "下でフィールドにお持ちのトークンを入力して専用IPを\n有効にします。PIAウェブサイトのクライアントコントロール\n
+パネルから専用IPを購入できます。";
+"settings.dedicatedip.placeholder" = "専用IPトークンを入力";
+"settings.dedicatedip.button" = "アクティベート";
+"settings.dedicatedip.alert.failure.title" = "問題が発生しました";
+"settings.dedicatedip.alert.failure.message" = "トークンは無効か期限切れです。";
+"settings.dedicatedip.alert.failure.message.empty" = "トークンは空にできません。";
+"settings.dedicatedip.alert.success.title" = "準備完了";
+"settings.dedicatedip.alert.success.message" = "専用IPがアクティブになりました。";
+"settings.dedicatedip.alert.success.button" = "続行";
+
+"settings.dedicatedip.stats.dedicatedip" = "専用IP";
+"settings.dedicatedip.stats.ip" = "IPアドレス";
+"settings.dedicatedip.stats.location" = "ロケーション";
+"settings.dedicatedip.stats.quickAction" = "クイック操作";
+"settings.dedicatedip.stats.delete.button" = "専用IPを削除";
+"settings.dedicatedip.stats.delete.alert.title" = "本当によろしいですか？";
+"settings.dedicatedip.stats.delete.alert.message" = "アカウントから専用IPを削除しようとしています。";
+"settings.dedicatedip.stats.delete.alert.delete" = "はい、削除します";
+
+"settings.dedicatedip.status.active" = "有効";
+"settings.dedicatedip.status.invalid" = "無効";
+"settings.dedicatedip.status.expired" = "期限切れ";
+"settings.dedicatedip.status.error" = "エラー";
+
+// Help menu (tvOS)
+"help_menu.app_version_section.title" = "アプリバージョン";
+"help_menu.contact_support.qr_code.title" = "サポートにお問い合わせ";
+"help_menu.contact_support.qr_code.message" = "QRコードをスキャンして、弊社サポートチームにご連絡ください";
+
+"help_menu.about_options.acknowledgements.title" = "確認事項";
+"help_menu.about_options.privacy_policy.title" = "プライバシーポリシー";
+"help_menu.about_section.privacy_policy.description" = "本プライバシーポリシー（「プライバシーポリシー」または「ポリシー」）は、Private Internet Access, Inc.（総称して「私たちは」、「私たちに・を」、「データ管理者」、「会社」、「PIA」）、のプライバシー慣行について説明しており、PIAのサービスを利用するユーザー（「ユーザー」または「あなた」）に適用されます。 これには、PIA VPNサービス（「サービス」)およびwww.privateinternetaccess.comのPIAウェブサイト（「ウェブサイト」）が含まれます。";
+"help_menu.about_section.privacy_policy.qr_code.message" = "QRコードをスキャンし、デバイスのプライバシーポリシーにアクセスしてください。";
+"help_menu.help_improve.enabled.title" = "オン";
+"help_menu.help_improve.disabled.title" = "オフ";
+
+//SignUp (tvOS)
+"tvos.signup.title" = "プライベートなインターネットアクセスを取得";
+"tvos.signup.item1" = "91カ国にあるVPNサーバー";
+"tvos.signup.item2" = "超高速";
+"tvos.signup.item3" = "24時間年中無休のカスタマーサポート";
+"tvos.signup.cta" = "QRコードをスキャン";
+
+//Sign in expired (tvOS)
+"tvos.signin.expired.title" = "サブスクリプションの有効期限が切れました";
+"tvos.signin.expired.subtitle" = "ストリーミング中に更新して、完全なVPN保護を取り戻しましょう。";
+"tvos.signin.expired.qr.title1" = "QRコードをスキャンしてプランを選択します。サブスクリプション購入には数分のみかかります。";
+"tvos.signin.expired.qr.title2" = "完了したらApple TVに戻り、PIAでデジタルプライバシーを強化しましょう！";
+"tvos.signin.expired.button.renewed" = "更新済みです";
+"tvos.signin.expired.button.signout" = "サインアウト";
+
+//Sign in free trial expired (tvOS)
+"tvos.signin.expired.trial.title" = "無料トライアルの有効期限が切れました";
+"tvos.signin.expired.trial.subtitle" = "プレミアムVPN保護をお楽しみいただけた場合は、PIAのサブスクリプションを購入しましょう！";

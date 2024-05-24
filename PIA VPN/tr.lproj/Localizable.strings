@@ -438,3 +438,135 @@
 // PIA WIDGET
 "widget.liveActivity.region.title" = "Bölge";
 "widget.liveActivity.selected_protocol.title" = "Protokol";
+
+// Regions Selection(tvOS)
+"regions.filter.all.title" = "Tümü";
+"regions.filter.search.title" = "Ara";
+"regions.filter.favorites.title" = "Favoriler";
+"regions.list.all_locations.title" = "Tüm Konumlar";
+"regions.list.optimal_location.title" = "Optimal Konum";
+"regions.list.optimal_location_with_dip_location.title" = "Optimal Konum/Dedicated IP";
+"regions.search.recommended_locations.title" = "Önerilen Konum";
+"regions.search.results.title" = "Arama Sonuçları";
+"regions.search.button.title" = "Bir Konum ara";
+"regions.search.input_field.placeholder" = "Bir şehir veya ülke ara";
+"regions.search.previous_results.title" = "Son Aranan Konumlar";
+"regions.context_menu.favorites.add.text" = "Favorilere Ekle";
+"regions.context_menu.favorites.remove.text" = "Favorilerden Çıkar";
+"regions.list_item.default.title" = "Varsayılan Konum";
+
+// Top Navigation bar
+"top_navigation_bar.vpn_item.title" = "PIA VPN";
+"top_navigation_bar.location_item.title" = "Konum";
+"top_navigation_bar.location_selection_screen.title" = "Konum Seçimi";
+
+//Onboarding - Connection Stats Permisson (tvOS)
+"onboarding.connection_stats.title" = "PIA'yı İyileştirilmeye Yardım Edin";
+"onboarding.connection_stats.subtitle" = "VPN bağlantı istatistiklerini bizimle paylaşarak uygulamamızı geliştirmemize yardımcı olun. Bu raporlar hiç bir şekilde kişisel olarak tanımlanabilir bilgiler içermez.";
+
+//Onboarding - VPN Installing Profile (tvOS)
+"onboarding.vpn_configuration.title" = "PIA'yı Yapılandır";
+"onboarding.vpn_configuration.subtitle" = "İlk kez bağlandığınızda PIA'nın VPN yapılandırmalarına erişmesine izin vermeniz istenecektir. Trafiğinizi şifrelemek için bu gereklidir. \n\nÇevrimiçi etkinliğinizi izlemediğimizi, filtrelemediğimizi veya günlüğe kaydetmediğimizi lütfen unutmayın. \n\nDevam etmek için aşağıdaki butona tıklayın.";
+"onboarding.vpn_configuration.button" = "PIA'yı Yapılandır";
+
+//Welcome (tvOS)
+"tvos.welcome.title" = "İzleme için Hızlı ve Güvenli VPN";
+"tvos.welcome.button.login" = "Giriş Yap";
+"tvos.welcome.button.signup" = "Kaydol";
+
+//Login (tvOS)
+"tvos.login.title" = "PIA VPN hesap bilgilerinizi girin";
+"tvos.login.placeholder.username" = "Kullanıcı Adı Girin";
+"tvos.login.placeholder.password" = "Şifre Girin";
+
+"tvos.login.qr.title" = "PIA uygulamasını kullanarak giriş yapın";
+"tvos.login.qr.description" = "QR Kodunu tarayın ve girişi PIA iOS uygulamasından doğrulayın.";
+"tvos.login.qr.timer" = "Kodun geçerlilik süresi:";
+"tvos.login.qr.options" = "Diğer seçenekler:";
+"tvos.login.qr.button.login" = "Kullanıcı Adıyla Giriş Yapın";
+"tvos.login.qr.button.login" = "Satın Alma İşlemini Geri Yükle";
+
+"tvos.login.qr.expired.title" = "QR Kodunun süresi doldu";
+"tvos.login.qr.expired.description" = "Aşağıda yenisini oluşturun";
+"tvos.login.qr.expired.button.generate" = "QR Oluştur";
+
+//Connection error(tvOS)
+"error_alert.connection_error.no_network.title" = "Bağlanılamıyor";
+"error_alert.connection_error.no_network.message" = "Lütfen internet bağlantınızı kontrol edin ve tekrar deneyin";
+"error_alert.connection_error.no_network.retry_action.title" = "Tekrar Dene";
+
+//Dashboard screen (tvOS)
+"location_selection.optimal_location.title" = "Optimal Konum";
+"location_selection.any_other_location.title" = "Seçilen Konum";
+"dashboard.connection_state.connected.title" = "Bağlı";
+"dashboard.connection_state.disconnected.title" = "Bağlı Değil";
+"dashboard.connection_state.connecting.title" = "Bağlanıyor...";
+"dashboard.connection_state.reconnecting.title" = "Yeniden bağlanıyor...";
+"dashboard.connection_state.disconnecting.title" = "Bağlantı kesiliyor...";
+"dashboard.connection_state.error.title" = "Bağlantı Hatası";
+"dashboard.connection_state.network_error_alert.message" = "Lütfen internet bağlantınızı kontrol edin ve tekrar deneyin";
+"dashboard.connection_state.network_error_alert.primary_action.title" = "Tekrar Dene";
+
+// Settings (tvOS)
+"settings.account.log_out_button.title" = "Çıkış Yap";
+"settings.account.log_out_alert.title" = "Emin misiniz?";
+"settings.account.log_out_alert.message" = "Oturumu kapatmak, tüm aktif VPN bağlantılarını sonlandıracak ve sizi korumasız bırakacaktır.";
+"settings.account.subscription_expiry.title" = "Aboneliğin sona erme süresi:";
+
+// Dedicated IP
+"settings.dedicatedip.title1" = "Dedicated IP Adresi Girin";
+"settings.dedicatedip.title2" = "Atanmış IP VPN";
+"settings.dedicatedip.subtitle" = "Tokeninizi aşağıdaki alana yazarak özel IP'nizi \netkinleştirin. PIA web sitesindeki Müşteri \nKontrol Panelinizden özel IP satın alabilirsiniz.";
+"settings.dedicatedip.placeholder" = "Özel IP Tokeninizi Girin";
+"settings.dedicatedip.button" = "Etkinleştir";
+"settings.dedicatedip.alert.failure.title" = "Bir şeyler yanlış gitti";
+"settings.dedicatedip.alert.failure.message" = "Tokeniniz ya geçersiz ya da süresi dolmuş.";
+"settings.dedicatedip.alert.failure.message.empty" = "Tokeniniz boş olamaz.";
+"settings.dedicatedip.alert.success.title" = "Hazırsınız";
+"settings.dedicatedip.alert.success.message" = "Özel IP'niz artık aktif.";
+"settings.dedicatedip.alert.success.button" = "Devam et";
+
+"settings.dedicatedip.stats.dedicatedip" = "Atanmış IP VPN";
+"settings.dedicatedip.stats.ip" = "IP Adresi";
+"settings.dedicatedip.stats.location" = "Konum";
+"settings.dedicatedip.stats.quickAction" = "Hızlı Eylem";
+"settings.dedicatedip.stats.delete.button" = "Özel IP Adresini Sil";
+"settings.dedicatedip.stats.delete.alert.title" = "Emin misiniz?";
+"settings.dedicatedip.stats.delete.alert.message" = "Özel IP'nizi hesabınızdan kaldırmak üzeresiniz.";
+"settings.dedicatedip.stats.delete.alert.delete" = "Evet, Sil";
+
+"settings.dedicatedip.status.active" = "Aktif";
+"settings.dedicatedip.status.invalid" = "Geçersiz";
+"settings.dedicatedip.status.expired" = "Sona Erdi";
+"settings.dedicatedip.status.error" = "Hata";
+
+// Help menu (tvOS)
+"help_menu.app_version_section.title" = "Uygulama Sürümü";
+"help_menu.contact_support.qr_code.title" = "Destek ile İletişime Geçin";
+"help_menu.contact_support.qr_code.message" = "Destek Ekibimizle iletişime geçmek için QR kodunu tarayın.";
+
+"help_menu.about_options.acknowledgements.title" = "Teşekkür";
+"help_menu.about_options.privacy_policy.title" = "Gizlilik Politikası";
+"help_menu.about_section.privacy_policy.description" = "Bu gizlilik politikası (\"Gizlilik Politikası\" veya \"Politika\") Private Internet Access, Inc.'nin ('Biz'', 'Veri Denetleyicisi', 'Şirket' veya 'PIA') gizlilik uygulamalarını açıklamaktadır ve diğer şeylerin yanı sıra PIA VPN hizmeti (\"Hizmet\") ve www.privateinternetaccess.com adresindeki PIA web sitesi (\"Web Sitesi\") dahil olmak üzere PIA hizmetlerinin kullanıcıları ('Kullanıcı(lar)' veya 'Siz') için geçerlidir.";
+"help_menu.about_section.privacy_policy.qr_code.message" = "Cihazınızdaki gizlilik politikasının tamamına erişmek için QR kodunu tarayın.";
+"help_menu.help_improve.enabled.title" = "AÇ";
+"help_menu.help_improve.disabled.title" = "KAPAT";
+
+//SignUp (tvOS)
+"tvos.signup.title" = "Private Internet Access Edinin";
+"tvos.signup.item1" = "91 ülkede VPN sunucuları";
+"tvos.signup.item2" = "Çok yüksek hızlar";
+"tvos.signup.item3" = "7/24 müşteri desteği";
+"tvos.signup.cta" = "QR kodu tarayın";
+
+//Sign in expired (tvOS)
+"tvos.signin.expired.title" = "Aboneliğinizin süresi doldu";
+"tvos.signin.expired.subtitle" = "Yenileyin ve izleme sırasında tam VPN korumasını yeniden kazanın.";
+"tvos.signin.expired.qr.title1" = "QR kodunu tarayın ve planınızı seçin. Abone olmak sadece birkaç dakikanızı alır.";
+"tvos.signin.expired.qr.title2" = "İşiniz bittiğinde Apple TV'nize dönün ve PIA ile gelişmiş dijital gizliliğin keyfini çıkarın!";
+"tvos.signin.expired.button.renewed" = "Zaten Yeniledim";
+"tvos.signin.expired.button.signout" = "Çıkış Yap";
+
+//Sign in free trial expired (tvOS)
+"tvos.signin.expired.trial.title" = "Ücretsiz deneme süreniz sona erdi";
+"tvos.signin.expired.trial.subtitle" = "Premium VPN korumasını sevdiyseniz PIA'ya abone olun!";

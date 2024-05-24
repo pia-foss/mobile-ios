@@ -438,3 +438,135 @@
 // PIA WIDGET
 "widget.liveActivity.region.title" = "區域";
 "widget.liveActivity.selected_protocol.title" = "通訊協定";
+
+// Regions Selection(tvOS)
+"regions.filter.all.title" = "全部";
+"regions.filter.search.title" = "檢索";
+"regions.filter.favorites.title" = "收藏";
+"regions.list.all_locations.title" = "全部位置";
+"regions.list.optimal_location.title" = "優選位置";
+"regions.list.optimal_location_with_dip_location.title" = "優選位置/專屬 IP";
+"regions.search.recommended_locations.title" = "推薦位置";
+"regions.search.results.title" = "檢索結果";
+"regions.search.button.title" = "檢索位置";
+"regions.search.input_field.placeholder" = "檢索國家或城市";
+"regions.search.previous_results.title" = "上次檢索位置";
+"regions.context_menu.favorites.add.text" = "添加至收藏";
+"regions.context_menu.favorites.remove.text" = "從收藏移除";
+"regions.list_item.default.title" = "默認位置";
+
+// Top Navigation bar
+"top_navigation_bar.vpn_item.title" = "PIA VPN";
+"top_navigation_bar.location_item.title" = "位置";
+"top_navigation_bar.location_selection_screen.title" = "位置選擇";
+
+//Onboarding - Connection Stats Permisson (tvOS)
+"onboarding.connection_stats.title" = "幫助改進 PIA";
+"onboarding.connection_stats.subtitle" = "請共享 VPN 連線統計資料，協助我們改善服務。這些報告絕不會包含任何個人識別資訊。";
+
+//Onboarding - VPN Installing Profile (tvOS)
+"onboarding.vpn_configuration.title" = "配置 PIA";
+"onboarding.vpn_configuration.subtitle" = "首次連線時，系統將請求您允許 PIA 訪問 VPN 配置。這對於加密流量是必須的。\n\n我們不會監測、篩選、紀錄您的線上活動。\n\n請點擊下方按鈕繼續。";
+"onboarding.vpn_configuration.button" = "配置 PIA";
+
+//Welcome (tvOS)
+"tvos.welcome.title" = "為使用流媒體提供保護的快速且安全的 VPN";
+"tvos.welcome.button.login" = "登入";
+"tvos.welcome.button.signup" = "註冊";
+
+//Login (tvOS)
+"tvos.login.title" = "輸入您的 PIA VPN 賬戶信息";
+"tvos.login.placeholder.username" = "輸入使用者名稱";
+"tvos.login.placeholder.password" = "輸入密碼";
+
+"tvos.login.qr.title" = "使用 PIA 應用程式登入";
+"tvos.login.qr.description" = "掃描二維碼，在您的 PIA iOS 應用程式上激活登入。";
+"tvos.login.qr.timer" = "二維碼有效時間：";
+"tvos.login.qr.options" = "其他選項：";
+"tvos.login.qr.button.login" = "採用使用者名稱登入";
+"tvos.login.qr.button.login" = "回復購買項目";
+
+"tvos.login.qr.expired.title" = "二維碼已失效";
+"tvos.login.qr.expired.description" = "在下方生成新的二維碼";
+"tvos.login.qr.expired.button.generate" = "生成二維碼";
+
+//Connection error(tvOS)
+"error_alert.connection_error.no_network.title" = "無法連線";
+"error_alert.connection_error.no_network.message" = "請檢查您的網路連線並重試";
+"error_alert.connection_error.no_network.retry_action.title" = "重試";
+
+//Dashboard screen (tvOS)
+"location_selection.optimal_location.title" = "優選位置";
+"location_selection.any_other_location.title" = "已選位置";
+"dashboard.connection_state.connected.title" = "已連線";
+"dashboard.connection_state.disconnected.title" = "未連線";
+"dashboard.connection_state.connecting.title" = "連線中…";
+"dashboard.connection_state.reconnecting.title" = "正在重新連接...";
+"dashboard.connection_state.disconnecting.title" = "正在解除連線…";
+"dashboard.connection_state.error.title" = "連線錯誤";
+"dashboard.connection_state.network_error_alert.message" = "請檢查您的網路連線並重試";
+"dashboard.connection_state.network_error_alert.primary_action.title" = "重試";
+
+// Settings (tvOS)
+"settings.account.log_out_button.title" = "登出";
+"settings.account.log_out_alert.title" = "是否確定？";
+"settings.account.log_out_alert.message" = "登出將終止所有活躍的 VPN 連線，讓您的數據失去保護。";
+"settings.account.subscription_expiry.title" = "您的訂閱有效期限還有";
+
+// Dedicated IP
+"settings.dedicatedip.title1" = "輸入您的專屬 IP";
+"settings.dedicatedip.title2" = "專屬 IP";
+"settings.dedicatedip.subtitle" = "在\n下方區塊鍵入您的權杖以激活專屬 IP。您可在 PIA 網站的客戶\n控制面板購買專屬 IP。";
+"settings.dedicatedip.placeholder" = "輸入您的專屬 IP 權杖";
+"settings.dedicatedip.button" = "啟用";
+"settings.dedicatedip.alert.failure.title" = "出現錯誤";
+"settings.dedicatedip.alert.failure.message" = "您的權杖無效，或是已過期。";
+"settings.dedicatedip.alert.failure.message.empty" = "您的權杖不可為空";
+"settings.dedicatedip.alert.success.title" = "一切就緒";
+"settings.dedicatedip.alert.success.message" = "您的專屬 IP 已啟用";
+"settings.dedicatedip.alert.success.button" = "繼續";
+
+"settings.dedicatedip.stats.dedicatedip" = "專屬 IP";
+"settings.dedicatedip.stats.ip" = "IP 地址";
+"settings.dedicatedip.stats.location" = "位置";
+"settings.dedicatedip.stats.quickAction" = "快速操作";
+"settings.dedicatedip.stats.delete.button" = "刪除專屬 IP";
+"settings.dedicatedip.stats.delete.alert.title" = "是否確定？";
+"settings.dedicatedip.stats.delete.alert.message" = "您即將從賬戶中移除專屬 IP。";
+"settings.dedicatedip.stats.delete.alert.delete" = "是，刪除";
+
+"settings.dedicatedip.status.active" = "已啟用";
+"settings.dedicatedip.status.invalid" = "無效";
+"settings.dedicatedip.status.expired" = "已過期";
+"settings.dedicatedip.status.error" = "錯誤";
+
+// Help menu (tvOS)
+"help_menu.app_version_section.title" = "應用程式版本";
+"help_menu.contact_support.qr_code.title" = "聯絡支援中心";
+"help_menu.contact_support.qr_code.message" = "掃描二維碼聯絡支援團隊";
+
+"help_menu.about_options.acknowledgements.title" = "聲明";
+"help_menu.about_options.privacy_policy.title" = "隱私權政策";
+"help_menu.about_section.privacy_policy.description" = "本《隱私權政策》（也稱“政策”）說明了Private Internet Access, Inc. (也稱“我們”、“數據控制方”、“公 司”或“PIA”)執行的隱私政策，將應用於使用 PIA 服務的用戶（也稱“您”），這些服務包括 PIA VPN服務（也稱“服務”）和 PIA 網站www.privateinternetaccess.com （也稱“網站”）在內的各項服務。";
+"help_menu.about_section.privacy_policy.qr_code.message" = "掃描二維碼，在您的設備上訪問完整版《隱私權政策》。";
+"help_menu.help_improve.enabled.title" = "開啟";
+"help_menu.help_improve.disabled.title" = "關閉";
+
+//SignUp (tvOS)
+"tvos.signup.title" = "獲取 PIA";
+"tvos.signup.item1" = "遍佈 91 個國家的 VPN 服務器";
+"tvos.signup.item2" = "速度快如閃電";
+"tvos.signup.item3" = "24/7 全時段客戶支援";
+"tvos.signup.cta" = "掃描二維碼";
+
+//Sign in expired (tvOS)
+"tvos.signin.expired.title" = "您的訂閱已過期";
+"tvos.signin.expired.subtitle" = "續訂以在使用流媒體服務時獲取全方位保護";
+"tvos.signin.expired.qr.title1" = "掃描二維碼，選擇訂閱計畫。訂閱僅需幾分鐘。";
+"tvos.signin.expired.qr.title2" = "完成後，請返回 Apple TV，盡享 PIA 提供的更強大的數據隱私保護。";
+"tvos.signin.expired.button.renewed" = "我已續訂";
+"tvos.signin.expired.button.signout" = "登出";
+
+//Sign in free trial expired (tvOS)
+"tvos.signin.expired.trial.title" = "您的免費試用已到期";
+"tvos.signin.expired.trial.subtitle" = "如果您喜歡我們的 VPN 保護，請訂閱 PIA！";
