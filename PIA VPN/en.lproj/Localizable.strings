@@ -577,16 +577,12 @@
 "tvos.signin.expired.trial.subtitle" = "If you enjoyed premium VPN protection, subscribe to PIA!";
 
 //SignUp with subscription (tvOS)
-"tvos.signup.subscription.title" = "Sign Up";
-"tvos.signup.subscription.paywall.title" = "Connect to any region easily";
 "tvos.signup.subscription.paywall.subtitle" = "Start your 7 days free trial then %@ per year.";
 "tvos.signup.subscription.paywall.price.year" = "per year";
 "tvos.signup.subscription.paywall.price.trial" = "BEST VALUE - FREE TRIAL";
-"tvos.signup.subscription.paywall.price.month" = "per month";
 "tvos.signup.subscription.paywall.price.month.simplified" = "/mo";
 "tvos.signup.subscription.paywall.button.subscribe" = "Subscribe Now";
 
-"tvos.signup.subscription.error.title" = "Error";
 "tvos.signup.subscription.error.message.generic" = "Something went wrong. Please try again.";
 "tvos.signup.subscription.error.message.paymentCancelled" = "Payment was cancelled. Please try again.";
 
@@ -595,8 +591,7 @@
 "tvos.signup.credentials.title" = "Success!";
 "tvos.signup.credentials.details.title" = "Card redeemed sucessfully";
 "tvos.signup.credentials.details.subtitle" = "You will also receive an email shortly with your username and password.";
-"tvos.signup.credentials.details.username" = "Username";
-"tvos.signup.credentials.details.password" = "Password";
+
 "tvos.signup.credentials.details.button" = "Get Started";
 
 "tvos.signup.terms_conditions.title" = "Terms and Conditions";

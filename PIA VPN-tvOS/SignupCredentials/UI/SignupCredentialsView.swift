@@ -48,10 +48,10 @@ struct SignupCredentialsView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 40) {
-                    SignupCredentialsFieldView(title: L10n.Localizable.Tvos.Signup.Credentials.Details.username,
+                    SignupCredentialsFieldView(title: L10n.Signup.Success.Username.caption,
                                                subtitle: credentials.username)
                     
-                    SignupCredentialsFieldView(title: L10n.Localizable.Tvos.Signup.Credentials.Details.password, 
+                    SignupCredentialsFieldView(title: L10n.Signup.Success.Password.caption,
                                                subtitle: credentials.password)
                 }
                 .frame(height: 250)

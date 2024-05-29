@@ -1648,14 +1648,10 @@ internal enum L10n {
           internal enum Details {
             /// Get Started
             internal static let button = L10n.tr("Localizable", "tvos.signup.credentials.details.button", fallback: "Get Started")
-            /// Password
-            internal static let password = L10n.tr("Localizable", "tvos.signup.credentials.details.password", fallback: "Password")
             /// You will also receive an email shortly with your username and password.
             internal static let subtitle = L10n.tr("Localizable", "tvos.signup.credentials.details.subtitle", fallback: "You will also receive an email shortly with your username and password.")
             /// Card redeemed sucessfully
             internal static let title = L10n.tr("Localizable", "tvos.signup.credentials.details.title", fallback: "Card redeemed sucessfully")
-            /// Username
-            internal static let username = L10n.tr("Localizable", "tvos.signup.credentials.details.username", fallback: "Username")
           }
         }
         internal enum Email {
@@ -1667,11 +1663,7 @@ internal enum L10n {
           }
         }
         internal enum Subscription {
-          /// Sign Up
-          internal static let title = L10n.tr("Localizable", "tvos.signup.subscription.title", fallback: "Sign Up")
           internal enum Error {
-            /// Error
-            internal static let title = L10n.tr("Localizable", "tvos.signup.subscription.error.title", fallback: "Error")
             internal enum Message {
               /// Something went wrong. Please try again.
               internal static let generic = L10n.tr("Localizable", "tvos.signup.subscription.error.message.generic", fallback: "Something went wrong. Please try again.")
@@ -1684,15 +1676,11 @@ internal enum L10n {
             internal static func subtitle(_ p1: Any) -> String {
               return L10n.tr("Localizable", "tvos.signup.subscription.paywall.subtitle", String(describing: p1), fallback: "Start your 7 days free trial then %@ per year.")
             }
-            /// Connect to any region easily
-            internal static let title = L10n.tr("Localizable", "tvos.signup.subscription.paywall.title", fallback: "Connect to any region easily")
             internal enum Button {
               /// Subscribe Now
               internal static let subscribe = L10n.tr("Localizable", "tvos.signup.subscription.paywall.button.subscribe", fallback: "Subscribe Now")
             }
             internal enum Price {
-              /// per month
-              internal static let month = L10n.tr("Localizable", "tvos.signup.subscription.paywall.price.month", fallback: "per month")
               /// BEST VALUE - FREE TRIAL
               internal static let trial = L10n.tr("Localizable", "tvos.signup.subscription.paywall.price.trial", fallback: "BEST VALUE - FREE TRIAL")
               /// per year
