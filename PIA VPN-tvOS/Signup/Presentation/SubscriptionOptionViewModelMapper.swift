@@ -17,7 +17,7 @@ class SubscriptionOptionViewModelMapper {
         let rawPrice = product.product.price.stringValue + currency
         let price = rawPrice + " "
         + (isYearlyPlan ? L10n.Localizable.Tvos.Signup.Subscription.Paywall.Price.year
-           : L10n.Localizable.Tvos.Signup.Subscription.Paywall.Price.month)
+           : L10n.Welcome.Plan.Accessibility.perMonth)
         let monthlyPrice = (monthlyPrice(price: product.product.price.doubleValue) ?? "") + currency +  L10n.Localizable.Tvos.Signup.Subscription.Paywall.Price.Month.simplified
         
         return SubscriptionOptionViewModel(productId: product.product.identifier,

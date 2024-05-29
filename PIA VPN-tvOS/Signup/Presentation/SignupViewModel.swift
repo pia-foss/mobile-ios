@@ -10,7 +10,7 @@ import Foundation
 import PIALibrary
 
 class SignupViewModel: ObservableObject {
-    let title: String = L10n.Localizable.Tvos.Signup.Subscription.Paywall.title
+    let title: String = L10n.Signup.Purchase.Trials.region
     let optionButtons: [OnboardingComponentButton]
     let subscribeButtonTitle = L10n.Localizable.Tvos.Signup.Subscription.Paywall.Button.subscribe
     @Published var subtitle: String = L10n.Localizable.Tvos.Signup.Subscription.Paywall.subtitle("")

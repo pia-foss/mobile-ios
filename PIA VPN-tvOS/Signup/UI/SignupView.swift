@@ -20,7 +20,7 @@ struct SignupView: View {
                     
                     Image.onboarding_pia_brand
                     
-                    Text(L10n.Localizable.Tvos.Signup.Subscription.title)
+                    Text(L10n.Localizable.Tvos.Welcome.Button.signup)
                         .font(.system(size: 76))
                         .foregroundColor(.piaOnBackground)
                         
