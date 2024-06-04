@@ -7,7 +7,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   build:
-    runs-on: macos-14
+    runs-on: macos-13
     env:
       TEST_RUNNER_PIA_TEST_USER: ${{ secrets.PIA_ACCOUNT_USERNAME}}
       TEST_RUNNER_PIA_TEST_PASSWORD: ${{ secrets.PIA_ACCOUNT_PASSWORD }}
