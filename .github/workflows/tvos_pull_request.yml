@@ -33,6 +33,9 @@ jobs:
 
     - name: Run tvOS unit tests
       run: bundle exec fastlane tvOStests
+
+    - name: Run tvOS snapshot tests
+      run: bundle exec fastlane tvos_snapshot_tests
     
     - name: Run tvOS e2e tests
       run: bundle exec fastlane tvos_e2e_tests
