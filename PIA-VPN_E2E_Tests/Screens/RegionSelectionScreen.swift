@@ -23,7 +23,7 @@ extension XCUIApplication {
     func navigateToRegionSelection(){
         regionTileCollectionViewCell.waitForElementToAppear()
         regionTileCollectionViewCell.tap()
-        XCTAssert(regionSelectionHeader.waitForElementToAppear())
+        XCTAssertTrue(regionSelectionHeader.waitForElementToAppear())
     }
     
     func searchRegion(regionName: String) -> XCUIElementQuery {
@@ -38,7 +38,7 @@ extension XCUIApplication {
     
     func cancelSearch() {
         cancelSearchButton.tap()
-        XCTAssert(sortButton.waitForElementToAppear())
+        XCTAssertTrue(sortButton.waitForElementToAppear())
     }
     
     func getRegionList() -> XCUIElementQuery {
@@ -62,8 +62,8 @@ extension XCUIApplication {
         regionRemoveAsAFavouriteButton.waitForElementToAppear()
         regionRemoveAsAFavouriteButton.tap()
 
-        XCTAssert(regionAddAsAFavouriteButton.waitForElementToAppear())
-        XCTAssert(regionRemoveAsAFavouriteButton.waitForElementToBeHidden())
+        XCTAssertTrue(regionAddAsAFavouriteButton.waitForElementToAppear())
+        XCTAssertTrue(regionRemoveAsAFavouriteButton.waitForElementToBeHidden())
     }
     
     func isRegionFavourite(regionName: String) -> Bool {

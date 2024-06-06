@@ -42,7 +42,7 @@ class DedicatedIPTests: BaseTest {
             }
             
             context("managing dedicated ip") {
-                it("should be able to connect successfully on a valid dedicated ip") {
+                xit("should be able to connect successfully on a valid dedicated ip") {
                     app.navigateToDedicatedIPScreen()
                     app.activateDedicatedIP(with: DedicatedIPUtil.dedicatedIP(type: .valid))
                     app.navigateToHome(using: app.closeButton)

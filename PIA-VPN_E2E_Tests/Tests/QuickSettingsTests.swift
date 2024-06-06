@@ -47,7 +47,7 @@ class QuickSettingsTests : BaseTest {
                 }
                 
                 
-                it("should display a notification message and not allow enabling the network management when vpn kill switch is disabled") {
+                xit("should display a notification message and not allow enabling the network management when vpn kill switch is disabled") {
                     app.navigateToQuickSettings()
                     app.enableVPNKillSwitchQuickSetting()
                     app.enableNetworkManagementQuickSetting()

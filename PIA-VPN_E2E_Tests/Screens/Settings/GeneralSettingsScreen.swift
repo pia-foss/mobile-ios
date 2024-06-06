@@ -25,7 +25,7 @@ extension XCUIApplication {
         navigateToSettings()
         generalSettingsButton.waitForElementToAppear()
         generalSettingsButton.tap()
-        XCTAssert(generalHeader.waitForElementToAppear())
+        XCTAssertTrue(generalHeader.waitForElementToAppear())
     }
     
     func enableGeoLocatedRegionSwitch() {

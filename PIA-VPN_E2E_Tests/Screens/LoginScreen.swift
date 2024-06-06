@@ -16,31 +16,4 @@ extension XCUIApplication {
         loginPasswordTextField.typeText(credentials.password)
         loginButton.tap()
     }
-    
-    /// This method authenticates the user and installs the VPN profile
-    /// Use this method when we are testing flows where the app has to be logged in already.
-    /// In such cases, it is recommended to call this method from the `setUp` of each `XCTestCase` class
-    /// NOTE: the app must be already in the Login Screen for this method to work
-    /// So before calling this method, make sure to navigate to the login screen
-    func loginAndInstallVPNProfile(from test: XCTestCase) {
-        // Listens to any interruption due to a system alert permission
-        // and presses the 'Allow' button
-        // (like the VPN Permission system alert)
-        dismissAnyPermissionSystemAlert(from: test)
-        
-        // Log out if needed
-        logOut()
-        
-        navigateToLoginScreen()
-        logIn(with: CredentialsUtil.credentials(type: .valid))
-        
-        vpnPermissionScreen.waitForElementToAppear()
-        vpnPermissionButton.waitForElementToAppear()
-        vpnPermissionButton.tap()
-        
-        swipeUp()
-        
-        XCTAssert(connectionButton.waitForElementToAppear())
-
-    }
 }

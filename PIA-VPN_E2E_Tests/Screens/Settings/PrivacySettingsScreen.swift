@@ -20,7 +20,7 @@ extension XCUIApplication {
         navigateToSettings()
         privacySettingsButton.waitForElementToAppear()
         privacySettingsButton.tap()
-        XCTAssert(privacyHeader.waitForElementToAppear())
+        XCTAssertTrue(privacyHeader.waitForElementToAppear())
     }
     
     func enableVPNKillSwitch(){

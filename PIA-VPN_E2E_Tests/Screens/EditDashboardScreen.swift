@@ -20,7 +20,7 @@ extension XCUIApplication {
     func navigateToEditDashboardScreen() {
         dashboardEditButton.waitForElementToAppear()
         dashboardEditButton.tap()
-        XCTAssert(connectionButton.waitForElementToBeHidden())
+        XCTAssertTrue(connectionButton.waitForElementToBeHidden())
     }
     
     func addTile(tileName: XCUIElement) {
@@ -32,8 +32,8 @@ extension XCUIApplication {
         }
         addTileButton.tap()
         
-        XCTAssert(removeTileButton.waitForElementToAppear())
-        XCTAssert(addTileButton.waitForElementToBeHidden())
+        XCTAssertTrue(removeTileButton.waitForElementToAppear())
+        XCTAssertTrue(addTileButton.waitForElementToBeHidden())
     }
     
     func removeTile(tileName: XCUIElement) {
@@ -45,8 +45,8 @@ extension XCUIApplication {
         }
         removeTileButton.tap()
         
-        XCTAssert(addTileButton.waitForElementToAppear())
-        XCTAssert(removeTileButton.waitForElementToBeHidden())
+        XCTAssertTrue(addTileButton.waitForElementToAppear())
+        XCTAssertTrue(removeTileButton.waitForElementToBeHidden())
     }
     
     func moveTile(firstTileName: XCUIElement, secondTileName: XCUIElement) {
