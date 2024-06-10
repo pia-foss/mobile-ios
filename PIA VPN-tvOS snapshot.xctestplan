@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "79A8DD15-E3E0-4CA4-BF11-034A12951361",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:PIA VPN.xcodeproj",
+      "identifier" : "E5C507762B0E144D00200A6A",
+      "name" : "PIA VPN-tvOS"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:PIA VPN.xcodeproj",
+        "identifier" : "E548E1F42C1238B5001E9874",
+        "name" : "PIA VPN-tvOS snapshot"
+      }
+    }
+  ],
+  "version" : 1
+}

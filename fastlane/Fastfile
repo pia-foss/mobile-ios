@@ -34,6 +34,16 @@ platform :ios do
     )
   end
 
+  lane :tvos_snapshot_tests do
+    run_tests(
+      scheme: "PIA VPN-tvOS",
+      testplan: "PIA VPN-tvOS snapshot",
+      test_without_building: true,
+      prelaunch_simulator: true,
+      device: "Apple TV"
+    )
+  end
+
   desc "This line is for settin up the certificates and provisioning profiles for iOS"
   lane :get_profiles do |options|
     api_key = app_store_connect_api_key(
