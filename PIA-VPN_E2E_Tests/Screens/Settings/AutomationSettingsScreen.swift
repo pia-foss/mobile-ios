@@ -17,6 +17,6 @@ extension XCUIApplication {
         navigateToSettings()
         automationSettingsButton.waitForElementToAppear()
         automationSettingsButton.tap()
-        XCTAssert(automationHeader.waitForElementToAppear())
+        XCTAssertTrue(automationHeader.waitForElementToAppear())
     }
 }

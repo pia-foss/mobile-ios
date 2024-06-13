@@ -35,7 +35,7 @@ extension XCUIApplication {
         navigateToSettings()
         protocolsSettingsButton.waitForElementToAppear()
         protocolsSettingsButton.tap()
-        XCTAssert(protocolsHeader.waitForElementToAppear())
+        XCTAssertTrue(protocolsHeader.waitForElementToAppear())
     }
     
     func selectProtocol(protocolName: String) {

@@ -16,7 +16,7 @@ class BaseTest: QuickSpec {
     static let bundle = Bundle(for: BaseTest.self)
     
     override class func spec() {
-        beforeSuite {
+        beforeEach {
             app = XCUIApplication()
             app.launch()
             if(!app.connectionButton.waitForExistence(timeout: app.defaultTimeout)) {
@@ -26,20 +26,7 @@ class BaseTest: QuickSpec {
             }
         }
         
-        beforeEach {
-            app.launch()
-            if(!app.connectionButton.waitForExistence(timeout: app.defaultTimeout)) {
-                app.navigateToLoginScreen()
-                app.logIn(with: CredentialsUtil.credentials(type: .valid))
-                app.acceptVPNPermission()
-            }
-        }
-        
         afterEach {
-            app.terminate()
-        }
-        
-        afterSuite {
             app.terminate()
         }
     }

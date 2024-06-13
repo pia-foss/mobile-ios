@@ -38,13 +38,13 @@ extension XCUIApplication {
         logOutButton.tap()
         confirmationDialogButton.waitForElementToAppear()
         confirmationDialogButton.tap()
-        XCTAssert(welcomeLoginButton.waitForElementToAppear())
+        XCTAssertTrue(welcomeLoginButton.waitForElementToAppear())
     }
     
     func navigateToHome(using backToHomeButton: XCUIElement) {
         backToHomeButton.waitForElementToAppear()
         backToHomeButton.tap()
-        XCTAssert(connectionButton.waitForElementToAppear())
+        XCTAssertTrue(connectionButton.waitForElementToAppear())
     }
     
     func enableVPNKillSwitchOnHome() {
@@ -80,7 +80,7 @@ extension XCUIApplication {
             return
         }
         connectionButton.tap()
-        XCTAssert(connectedStatusLabel.waitForElementToAppear())
+        XCTAssertTrue(connectedStatusLabel.waitForElementToAppear())
     }
     
     func disconnectToVPN() {
@@ -88,6 +88,6 @@ extension XCUIApplication {
             return
         }
         connectionButton.tap()
-        XCTAssert(disconnectedStatusLabel.waitForElementToAppear())
+        XCTAssertTrue(disconnectedStatusLabel.waitForElementToAppear())
     }
 }

@@ -23,7 +23,7 @@ extension XCUIApplication {
     
     func navigateToDedicatedIPScreen() {
         selectSideMenu(menuName: "Dedicated IP")
-        XCTAssert(dedicatedIPHeader.waitForElementToAppear())
+        XCTAssertTrue(dedicatedIPHeader.waitForElementToAppear())
     }
     
     func activateDedicatedIP (with dedicatedIP:DedicatedIP) {
@@ -41,6 +41,6 @@ extension XCUIApplication {
         sourceCoordinate.press(forDuration: pressDuration, thenDragTo: leftmostCoordinate)
         
         confirmDeleteButton.tap()
-        XCTAssert(dedicatedIPTextField.waitForElementToAppear())
+        XCTAssertTrue(dedicatedIPTextField.waitForElementToAppear())
     }
 }

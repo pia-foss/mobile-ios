@@ -17,9 +17,9 @@ extension XCUIApplication {
     func selectSideMenu(menuName: String) {
         dashboardMenuButton.waitForElementToAppear()
         dashboardMenuButton.tap()
-        XCTAssert(staticText(with: menuName).waitForElementToAppear())
+        XCTAssertTrue(staticText(with: menuName).waitForElementToAppear())
         staticText(with: menuName).tap()
         
-        XCTAssert(staticText(with: menuName).waitForElementToAppear())
+        XCTAssertTrue(staticText(with: menuName).waitForElementToAppear())
     }
 }

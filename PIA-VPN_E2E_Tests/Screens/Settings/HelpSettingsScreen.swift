@@ -29,7 +29,7 @@ extension XCUIApplication {
         navigateToSettings()
         helpSettingsButton.waitForElementToAppear()
         helpSettingsButton.tap()
-        XCTAssert(helpHeader.waitForElementToAppear())
+        XCTAssertTrue(helpHeader.waitForElementToAppear())
     }
     
     func enableHelpImprovePIA() {

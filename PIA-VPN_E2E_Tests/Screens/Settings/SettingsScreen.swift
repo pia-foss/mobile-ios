@@ -26,13 +26,13 @@ extension XCUIApplication {
     
     func navigateToSettings() {
         selectSideMenu(menuName: settingsButtonString)
-        XCTAssert(settingsHeader.waitForElementToAppear())
+        XCTAssertTrue(settingsHeader.waitForElementToAppear())
     }
     
     func navigateToHomeFromSettings() {
         settingsBackButton.waitForElementToAppear()
         settingsBackButton.tap()
         navigateToHome(using: closeButton)
-        XCTAssert(connectionButton.waitForElementToAppear())
+        XCTAssertTrue(connectionButton.waitForElementToAppear())
     }
 }

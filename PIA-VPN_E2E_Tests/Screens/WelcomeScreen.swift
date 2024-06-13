@@ -20,6 +20,6 @@ extension XCUIApplication {
             welcomeLoginButtonOldVersion.tap()
         }
         
-        XCTAssert(loginButton.waitForElementToAppear())
+        XCTAssertTrue(loginButton.waitForElementToAppear())
     }
 }
