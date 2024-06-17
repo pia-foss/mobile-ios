@@ -287,7 +287,7 @@
 "settings.nmt.optout.disconnect.alerts" = "Bağlantı sonlandırmayı doğrulama uyarısını alma";
 "settings.nmt.optout.disconnect.alerts.description" = "VPN bağlantısını sonlandırırken uyarı bildirimini devre dışı bırakır.";
 "settings.nmt.wireguard.warning" = "WireGuard®, farklı ağlara geçiş yaparken tekrar bağlanmanızı gerektirmez. Güvenilen ağlarda VPN'i manuel olarak sonlandırmanız gerekebilir.";
-"settings.service.quality.share.title" = "PIA'nın iyileştirilmesine yardım edin";
+"settings.service.quality.share.title" = "PIA'yı İyileştirilmeye Yardım Edin";
 "settings.service.quality.share.description" = "VPN bağlantı istatistiklerini bizimle paylaşarak uygulamamızı geliştirmemize yardımcı olun. Bu raporlar hiç bir şekilde kişisel olarak tanımlanabilir bilgiler içermez.";
 "settings.service.quality.share.findoutmore" = "Daha çok bilgi";
 "settings.service.quality.show.title" = "Bağlantı istatistikleri";
@@ -484,7 +484,7 @@
 "tvos.login.qr.timer" = "Kodun geçerlilik süresi:";
 "tvos.login.qr.options" = "Diğer seçenekler:";
 "tvos.login.qr.button.login" = "Kullanıcı Adıyla Giriş Yapın";
-"tvos.login.qr.button.login" = "Satın Alma İşlemini Geri Yükle";
+"tvos.login.qr.button.restore" = "Satın Alma İşlemini Geri Yükle";
 
 "tvos.login.qr.expired.title" = "QR Kodunun süresi doldu";
 "tvos.login.qr.expired.description" = "Aşağıda yenisini oluşturun";
@@ -547,17 +547,22 @@
 
 "help_menu.about_options.acknowledgements.title" = "Teşekkür";
 "help_menu.about_options.privacy_policy.title" = "Gizlilik Politikası";
+
 "help_menu.about_section.privacy_policy.description" = "Bu gizlilik politikası (\"Gizlilik Politikası\" veya \"Politika\") Private Internet Access, Inc.'nin ('Biz'', 'Veri Denetleyicisi', 'Şirket' veya 'PIA') gizlilik uygulamalarını açıklamaktadır ve diğer şeylerin yanı sıra PIA VPN hizmeti (\"Hizmet\") ve www.privateinternetaccess.com adresindeki PIA web sitesi (\"Web Sitesi\") dahil olmak üzere PIA hizmetlerinin kullanıcıları ('Kullanıcı(lar)' veya 'Siz') için geçerlidir.";
 "help_menu.about_section.privacy_policy.qr_code.message" = "Cihazınızdaki gizlilik politikasının tamamına erişmek için QR kodunu tarayın.";
+
 "help_menu.help_improve.enabled.title" = "AÇ";
 "help_menu.help_improve.disabled.title" = "KAPAT";
+
+"help_menu.about_section.acknowledgments.copyright.title" = "COPYRIGHT 2014-2024 PRIVATE INTERNET ACCESS INC VPN";
+"help_menu.about_section.acknowledgments.copyright.description" = "Our Software as a Service (SaaS) platform may occasionally include third-party content, services, or integrations to enhance user experience and functionality. This content may include but is not limited to, APIs, widgets, plugins, or links to external websites. While we strive to ensure the quality and reliability of third-party content, we want to emphasize that such content is provided 'as is' and we do not endorse or guarantee the accuracy, reliability, or suitability of any third-party content.\n\nUsers should be aware that accessing or utilizing third-party content may subject them to the terms of use, privacy policies, and other agreements of those third-party providers. We encourage users to review such terms and policies before engaging with third-party content.";
 
 //SignUp (tvOS)
 "tvos.signup.title" = "Private Internet Access Edinin";
 "tvos.signup.item1" = "91 ülkede VPN sunucuları";
 "tvos.signup.item2" = "Çok yüksek hızlar";
 "tvos.signup.item3" = "7/24 müşteri desteği";
-"tvos.signup.cta" = "QR kodu tarayın";
+"tvos.signup.cta" = "Scan the QR Code and download the app to create a new account.";
 
 //Sign in expired (tvOS)
 "tvos.signin.expired.title" = "Aboneliğinizin süresi doldu";
@@ -570,3 +575,26 @@
 //Sign in free trial expired (tvOS)
 "tvos.signin.expired.trial.title" = "Ücretsiz deneme süreniz sona erdi";
 "tvos.signin.expired.trial.subtitle" = "Premium VPN korumasını sevdiyseniz PIA'ya abone olun!";
+
+//SignUp with subscription (tvOS)
+"tvos.signup.subscription.paywall.subtitle" = "7 günlük ücretsiz denemenizi başlatın, ardından yılda %@.";
+"tvos.signup.subscription.paywall.price.year" = "yılda";
+"tvos.signup.subscription.paywall.price.trial" = "EN İYİ DEĞER - ÜCRETSİZ DENEME";
+"tvos.signup.subscription.paywall.price.month.simplified" = "/ay";
+"tvos.signup.subscription.paywall.button.subscribe" = "Hemen Abone Ol";
+
+"tvos.signup.subscription.error.message.generic" = "Bir sorun oluştu. Lütfen tekrar deneyin.";
+"tvos.signup.subscription.error.message.paymentCancelled" = "Ödeme iptal edildi. Lütfen tekrar deneyin.";
+
+"tvos.signup.email.error.message.generic" = "Şu anda bir hesap oluşturamıyoruz. Lütfen daha sonra tekrar deneyiniz";
+
+"tvos.signup.credentials.title" = "Başarılı!";
+"tvos.signup.credentials.details.title" = "Kart başarıyla kullanıldı";
+"tvos.signup.credentials.details.subtitle" = "Kısa süre içinde kullanıcı adınızı ve şifrenizi içeren bir e-posta alacaksınız.";
+
+"tvos.signup.credentials.details.button" = "Başlayın";
+
+"tvos.signup.terms_conditions.title" = "Hüküm ve Koşullar";
+
+"tvos.signup.terms_conditions.description" = "Bu Hizmet Şartları Sözleşmesi (\"Sözleşme\"), www.privateinternetaccess.com adresinde bulunan PIA Private Internet Access, Inc. (\"PIA\") web sitesine (\"Site\"), sanal özel ağa (VPN) ve Site aracılığıyla sağlanan PIA hizmetlerine (\"Hizmet(ler)\") erişiminizi ve kullanımınızı kapsar. Siteyi ziyaret ederek, bir abonelik satın alarak ve/veya Hizmetleri kullanarak, Siz ('Siz' veya 'Abone') ('PIA' ve 'Abone' toplu olarak 'Taraflar' olarak anılır) Sözleşmeyi tamamen okuduğunuzu, şartları anladığınızı ve Sözleşmenin tüm şartlarını onayladığınızı kabul edersiniz.";
+"tvos.signup.terms_conditions.qr_code.message" = "Cihazınızdaki hüküm ve koşullar politikasının tamamına erişmek için QR kodunu tarayın.";

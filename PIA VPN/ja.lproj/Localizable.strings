@@ -484,7 +484,7 @@
 "tvos.login.qr.timer" = "コードの有効期限：";
 "tvos.login.qr.options" = "その他のオプション：";
 "tvos.login.qr.button.login" = "ユーザー名でログイン";
-"tvos.login.qr.button.login" = "購入を復元";
+"tvos.login.qr.button.restore" = "購入を復元";
 
 "tvos.login.qr.expired.title" = "QRコードの期限が切れました";
 "tvos.login.qr.expired.description" = "下で新しいコードを生成";
@@ -548,17 +548,22 @@
 
 "help_menu.about_options.acknowledgements.title" = "確認事項";
 "help_menu.about_options.privacy_policy.title" = "プライバシーポリシー";
+
 "help_menu.about_section.privacy_policy.description" = "本プライバシーポリシー（「プライバシーポリシー」または「ポリシー」）は、Private Internet Access, Inc.（総称して「私たちは」、「私たちに・を」、「データ管理者」、「会社」、「PIA」）、のプライバシー慣行について説明しており、PIAのサービスを利用するユーザー（「ユーザー」または「あなた」）に適用されます。 これには、PIA VPNサービス（「サービス」)およびwww.privateinternetaccess.comのPIAウェブサイト（「ウェブサイト」）が含まれます。";
 "help_menu.about_section.privacy_policy.qr_code.message" = "QRコードをスキャンし、デバイスのプライバシーポリシーにアクセスしてください。";
+
 "help_menu.help_improve.enabled.title" = "オン";
 "help_menu.help_improve.disabled.title" = "オフ";
+
+"help_menu.about_section.acknowledgments.copyright.title" = "COPYRIGHT 2014-2024 PRIVATE INTERNET ACCESS INC VPN";
+"help_menu.about_section.acknowledgments.copyright.description" = "Our Software as a Service (SaaS) platform may occasionally include third-party content, services, or integrations to enhance user experience and functionality. This content may include but is not limited to, APIs, widgets, plugins, or links to external websites. While we strive to ensure the quality and reliability of third-party content, we want to emphasize that such content is provided 'as is' and we do not endorse or guarantee the accuracy, reliability, or suitability of any third-party content.\n\nUsers should be aware that accessing or utilizing third-party content may subject them to the terms of use, privacy policies, and other agreements of those third-party providers. We encourage users to review such terms and policies before engaging with third-party content.";
 
 //SignUp (tvOS)
 "tvos.signup.title" = "プライベートなインターネットアクセスを取得";
 "tvos.signup.item1" = "91カ国にあるVPNサーバー";
 "tvos.signup.item2" = "超高速";
 "tvos.signup.item3" = "24時間年中無休のカスタマーサポート";
-"tvos.signup.cta" = "QRコードをスキャン";
+"tvos.signup.cta" = "Scan the QR Code and download the app to create a new account.";
 
 //Sign in expired (tvOS)
 "tvos.signin.expired.title" = "サブスクリプションの有効期限が切れました";
@@ -571,3 +576,26 @@
 //Sign in free trial expired (tvOS)
 "tvos.signin.expired.trial.title" = "無料トライアルの有効期限が切れました";
 "tvos.signin.expired.trial.subtitle" = "プレミアムVPN保護をお楽しみいただけた場合は、PIAのサブスクリプションを購入しましょう！";
+
+//SignUp with subscription (tvOS)
+"tvos.signup.subscription.paywall.subtitle" = "7日間無料トライアルを利用後、年間%@をお支払いください。";
+"tvos.signup.subscription.paywall.price.year" = "/年";
+"tvos.signup.subscription.paywall.price.trial" = "お買い得 - 無料トライアル";
+"tvos.signup.subscription.paywall.price.month.simplified" = "/月";
+"tvos.signup.subscription.paywall.button.subscribe" = "今すぐ購入する";
+
+"tvos.signup.subscription.error.message.generic" = "問題が発生しました。再度お試しください。";
+"tvos.signup.subscription.error.message.paymentCancelled" = "お支払いがキャンセルされました。もう一度やり直してください。";
+
+"tvos.signup.email.error.message.generic" = "アカウントを作成できませんでした。後ほど再度お試しください";
+
+"tvos.signup.credentials.title" = "お支払いに成功しました";
+"tvos.signup.credentials.details.title" = "カード決済が正常に完了しました";
+"tvos.signup.credentials.details.subtitle" = "ユーザー名とパスワードが記載されたメールがまもなく届きます。";
+
+"tvos.signup.credentials.details.button" = "始める";
+
+"tvos.signup.terms_conditions.title" = "利用規約";
+
+"tvos.signup.terms_conditions.description" = "この利用規約（以下「本規約」）は、www.privateinternetaccess.com にあるPIA Private Internet Access, Inc.（以下「PIA」）のウェブサイト（以下「本サイト」）、仮想プライベートネットワーク（以下「VPN」）、および本サイトを通じて提供されるPIAのサービス（以下「本サービス」）の利用およびアクセスの範囲について定めるものです。利用者（「利用者」または「契約者」）（「PIA」および「契約者」を総称して「両当事者」）は、本サイトにアクセスし、サブスクリプションを購入し、および/または本サービスを利用することにより、本規約を読み、本規約の条項を完全に理解し、本規約のすべての条項に従うことに同意したものとみなされます。";
+"tvos.signup.terms_conditions.qr_code.message" = "QRコードをスキャンすると、お使いのデバイスで利用規約の全文にアクセスできます。";

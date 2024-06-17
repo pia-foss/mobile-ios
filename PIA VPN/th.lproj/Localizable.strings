@@ -484,7 +484,7 @@
 "tvos.login.qr.timer" = "รหัสจะหมดอายุใน:";
 "tvos.login.qr.options" = "ตัวเลือกอื่น:";
 "tvos.login.qr.button.login" = "เข้าสู่ระบบผ่านชื่อผู้ใช้";
-"tvos.login.qr.button.login" = "คืนค่าการซื้อ";
+"tvos.login.qr.button.restore" = "คืนค่าการซื้อ";
 
 "tvos.login.qr.expired.title" = "รหัส QR หมดอายุแล้ว";
 "tvos.login.qr.expired.description" = "สร้างรหัสใหม่ด้านล่าง";
@@ -547,17 +547,22 @@
 
 "help_menu.about_options.acknowledgements.title" = "รับทราบ";
 "help_menu.about_options.privacy_policy.title" = "นโยบายความเป็นส่วนตัว";
+
 "help_menu.about_section.privacy_policy.description" = "นโยบายความเป็นส่วนตัวนี้ ('นโยบายความเป็นส่วนตัว' หรือ 'นโยบาย') อธิบายหลักปฏิบัติด้านความเป็นส่วนตัวของ Private Internet Access, Inc. (เรียกรวมกันว่า 'เรา', 'พวกเรา', 'ผู้ควบคุมข้อมูล', 'บริษัท' หรือ 'PIA') และนำไปใช้กับผู้ใช้ ('ผู้ใช้' หรือ 'คุณ') ของบริการของ PIA รวมถึงเหนือสิ่งอื่นใด บริการ VPN PIA ('บริการ') และเว็บไซต์ PIA ที่ www.privateinternetaccess.com ('เว็บไซต์')";
 "help_menu.about_section.privacy_policy.qr_code.message" = "สแกนรหัส QR เพื่อเข้าถึงนโยบายความเป็นส่วนตัวฉบับเต็มบนอุปกรณ์ของคุณ";
+
 "help_menu.help_improve.enabled.title" = "เปิด";
 "help_menu.help_improve.disabled.title" = "ปิด";
+
+"help_menu.about_section.acknowledgments.copyright.title" = "ลิขสิทธิ์ของ 2014-2024 PRIVATE INTERNET ACCESS INC VPN";
+"help_menu.about_section.acknowledgments.copyright.description" = "Our Software as a Service (SaaS) platform may occasionally include third-party content, services, or integrations to enhance user experience and functionality. This content may include but is not limited to, APIs, widgets, plugins, or links to external websites. While we strive to ensure the quality and reliability of third-party content, we want to emphasize that such content is provided 'as is' and we do not endorse or guarantee the accuracy, reliability, or suitability of any third-party content.\n\nUsers should be aware that accessing or utilizing third-party content may subject them to the terms of use, privacy policies, and other agreements of those third-party providers. We encourage users to review such terms and policies before engaging with third-party content.";
 
 //SignUp (tvOS)
 "tvos.signup.title" = "รับ Private Internet Access";
 "tvos.signup.item1" = "เซิร์ฟเวอร์ VPN ใน 91 ประเทศ";
 "tvos.signup.item2" = "ความเร็วอันรวดเร็วทันใจ";
 "tvos.signup.item3" = "การสนับสนุนลูกค้าตลอด 24 ชั่วโมงทุกวัน";
-"tvos.signup.cta" = "สแกนรหัส QR";
+"tvos.signup.cta" = "Scan the QR Code and download the app to create a new account.";
 
 //Sign in expired (tvOS)
 "tvos.signin.expired.title" = "การสมัครสมาชิกของคุณหมดอายุแล้ว";
@@ -570,3 +575,26 @@
 //Sign in free trial expired (tvOS)
 "tvos.signin.expired.trial.title" = "การทดลองใช้ฟรีของคุณหมดอายุแล้ว";
 "tvos.signin.expired.trial.subtitle" = "หากคุณเพลิดเพลินกับการป้องกัน VPN ระดับพรีเมียม สมัครสมาชิก PIA!";
+
+//SignUp with subscription (tvOS)
+"tvos.signup.subscription.paywall.subtitle" = "เริ่มการทดลองใช้ฟรี 7 วันของคุณ จากนั้น %@ ต่อปี";
+"tvos.signup.subscription.paywall.price.year" = " ต่อปี";
+"tvos.signup.subscription.paywall.price.trial" = "คุ้มค่าที่สุด - ทดลองใช้ฟรี";
+"tvos.signup.subscription.paywall.price.month.simplified" = "/เดือน";
+"tvos.signup.subscription.paywall.button.subscribe" = "สมัครสมาชิกตอนนี้";
+
+"tvos.signup.subscription.error.message.generic" = "เกิดข้อผิดพลาด โปรดลองอีกครั้ง";
+"tvos.signup.subscription.error.message.paymentCancelled" = "การชำระเงินถูกยกเลิก กรุณาลองอีกครั้ง";
+
+"tvos.signup.email.error.message.generic" = "เราไม่สามารถสร้างบัญชีได้ในขณะนี้ กรุณาลองใหม่อีกครั้งในภายหลัง";
+
+"tvos.signup.credentials.title" = "สำเร็จ!";
+"tvos.signup.credentials.details.title" = "การใช้บัตรเสร็จสมบูรณ์";
+"tvos.signup.credentials.details.subtitle" = "คุณจะได้รับอีเมลในไม่ช้า พร้อมชื่อผู้ใช้และรหัสผ่านของคุณด้วย";
+
+"tvos.signup.credentials.details.button" = "เริ่มต้น";
+
+"tvos.signup.terms_conditions.title" = "ข้อกำหนดและเงื่อนไข";
+
+"tvos.signup.terms_conditions.description" = "ข้อตกลงเงื่อนไขการบริการนี้ ('ข้อตกลง') ครอบคลุมขอบเขตการใช้งานและการเข้าถึงเว็บไซต์ (“ไซต์”) PIA Private Internet Access, Inc. ('PIA') ซึ่งอยู่ที่ www.privateinternetaccess.com เครือข่ายส่วนตัวเสมือน ('VPN') และบริการของ PIA ที่ให้บริการผ่านไซต์ ('บริการ') โดยการเยี่ยมชมเว็บไซต์ การซื้อการสมัครสมาชิก และ/หรือการใช้บริการ คุณ ('คุณ' หรือ 'สมาชิก') ('PIA' และ 'สมาชิก' เรียกรวมกันว่า 'คู่สัญญา') รับทราบว่าคุณได้อ่านข้อตกลงโดยครบถ้วน เข้าใจข้อกำหนด และตกลงที่จะผูกพันตามข้อกำหนดทั้งหมดของข้อตกลง";
+"tvos.signup.terms_conditions.qr_code.message" = "สแกนรหัส QR เพื่อเข้าถึงนโยบายความเป็นส่วนตัวฉบับเต็มบนอุปกรณ์ของคุณ";

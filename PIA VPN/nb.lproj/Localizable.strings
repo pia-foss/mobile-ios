@@ -1,572 +1,600 @@
 // GLOBAL
 
 "global.ok" = "OK";
-"global.cancel" = "Avbryt";
-"global.close" = "Lukk";
-"global.error" = "Feil";
-"global.automatic" = "Automatisk";
-"global.required" = "Påkrevd";
-"global.optional" = "Valgfritt";
-"global.clear" = "Fjern";
-"global.update" = "Oppdater";
-"global.edit" = "Rediger";
-"global.unreachable" = "Ingen internettforbindelse. Kontroller at du er koblet til Internett.";
-"global.enabled" = "Aktivert";
-"global.disabled" = "Deaktivert";
-"global.enable" = "Aktiver";
-"global.disable" = "Deaktiver";
-"global.add" = "Legg til";
-"global.remove" = "Fjern";
-"global.empty" = "Tom";
-"global.copy" = "Kopier";
-"global.share" = "Del";
-"global.copied" = "Kopiert til utklippstavle";
+"global.cancel" = "Annuleren";
+"global.close" = "Sluiten";
+"global.error" = "Fout";
+"global.automatic" = "Automatisch";
+"global.required" = "Vereist";
+"global.optional" = "Optioneel";
+"global.clear" = "Wissen";
+"global.update" = "Updaten";
+"global.edit" = "Bewerken";
+"global.unreachable" = "Geen internetverbinding gevonden. Controleer uw internetverbinding.";
+"global.enabled" = "Ingeschakeld";
+"global.disabled" = "Uitgeschakeld";
+"global.enable" = "Inschakelen";
+"global.disable" = "Uitschakelen";
+"global.add" = "Toevoegen";
+"global.remove" = "Verwijderen";
+"global.empty" = "Leeg";
+"global.copy" = "Kopiëren";
+"global.share" = "Delen";
+"global.copied" = "Naar klembord gekopieerd";
 "global.yes" = "Ja";
-"global.no" = "Nei";
-"global.or" = "eller";
-"global.row.selection" = "Radvalg";
-"global.vpn.settings" = "VPN-innstillinger";
-"global.general.settings" = "Generelle innstillinger";
-"global.version" = "Versjon";
+"global.no" = "Nee";
+"global.or" = "of";
+"global.row.selection" = "Rijselectie";
+"global.vpn.settings" = "VPN-instellingen";
+"global.general.settings" = "Algemene instellingen";
+"global.version" = "Versie";
 
 // NOTIFICATIONS
 
-"notifications.disabled.title" = "Varsler deaktivert";
-"notifications.disabled.message" = "Aktiver varsler for å motta en påminnelse om å fornye abonnementet ditt før det utløper.";
-"notifications.disabled.settings" = "Innstillinger";
+"notifications.disabled.title" = "Meldingen uitgeschakeld";
+"notifications.disabled.message" = "Schakel meldingen in om een herinnering te ontvangen om uw abonnement te vernieuwen als het bijna is verlopen.";
+"notifications.disabled.settings" = "Instellingen";
 
-"expiration.title" = "Forny";
-"expiration.message" = "Abonnementet ditt utløper snart. Forny det for å forbli beskyttet.";
+"expiration.title" = "Vernieuwing";
+"expiration.message" = "Uw abonnement verloopt binnenkort. Vernieuw uw abonnement om beschermd te blijven.";
 
-"local_notification.non_compliant_wifi.title" = "Usikret WiFi:%@";
-"local_notification.non_compliant_wifi.text" = "Trykk her for å sikre enheten din";
+"local_notification.non_compliant_wifi.title" = "Onbeveiligde wifi: %@";
+"local_notification.non_compliant_wifi.text" = "Tik hier om je apparaat te beschermen";
 
 // SHORTCUTS
 
-"shortcuts.connect" = "Koble til";
-"shortcuts.disconnect" = "Koble fra";
-"shortcuts.select_region" = "Velg region";
+"shortcuts.connect" = "Verbinden";
+"shortcuts.disconnect" = "Verbinding verbreken";
+"shortcuts.select_region" = "Selecteer een regio";
 
 // RENEWAL
 
-"renewal.success.title" = "Takk";
-"renewal.success.message" = "Kontoen din ble fornyet.";
-"renewal.failure.message" = "Kunne ikke sende inn kvittering for kjøpet ditt, prøv igjen senere.";
+"renewal.success.title" = "Dank u wel";
+"renewal.success.message" = "Uw account is vernieuwd.";
+"renewal.failure.message" = "Uw aankoopbewijs kan niet worden verzonden. Probeer het later opnieuw.";
 
 // MENU
-"menu.accessibility.edit.tile" = "Rediger";
-"menu.accessibility.item" = "Meny";
-"menu.accessibility.logged_as" = "Logget på som %@";
-"menu.expiration.expires_in" = "Abonnementet ditt utløper om";
-"menu.expiration.days" = "%d dager";
-"menu.expiration.hours" = "%d timer";
-"menu.expiration.one_hour" = "én time";
-"menu.expiration.upgrade" = "OPPGRADER KONTO";
-"menu.item.region" = "Valg av region";
-"menu.item.about" = "Om";
-"menu.item.account" = "Konto";
-"menu.item.settings" = "Innstillinger";
-"menu.item.logout" = "Logg ut";
-"menu.item.web.privacy" = "Retningslinjer om personvern";
-"menu.item.web.home" = "Startside";
-"menu.item.web.support" = "Støtte";
+"menu.accessibility.edit.tile" = "Bewerken";
+"menu.accessibility.item" = "Menu";
+"menu.accessibility.logged_as" = "Ingelogd als %@";
+"menu.expiration.expires_in" = "Abonnement verloopt over";
+"menu.expiration.days" = "%d dagen";
+"menu.expiration.hours" = "%d uur";
+"menu.expiration.one_hour" = "één uur";
+"menu.expiration.upgrade" = "ACCOUNT UPGRADEN";
+"menu.item.region" = "Regioselectie";
+"menu.item.about" = "Over";
+"menu.item.account" = "Account";
+"menu.item.settings" = "Instellingen";
+"menu.item.logout" = "Uitloggen";
+"menu.item.web.privacy" = "Privacybeleid";
+"menu.item.web.home" = "Homepage";
+"menu.item.web.support" = "Ondersteuning";
 
-"menu.logout.title" = "Logg ut";
-"menu.logout.message" = "Hvis du logger ut deaktiveres VPN og du er ikke lenger beskyttet.";
-"menu.logout.confirm" = "Logg ut";
+"menu.logout.title" = "Uitloggen";
+"menu.logout.message" = "Als u uitlogt, wordt de VPN uitgeschakeld en bent u onbeschermd.";
+"menu.logout.confirm" = "Uitloggen";
 
-"menu.renewal.title" = "Forny";
-"menu.renewal.purchase" = "Kjøp";
-"menu.renewal.renew" = "Forny";
-"menu.renewal.message.trial" = "Prøvekontoer kan ikke fornyes. Du kan fortsette bruk av tjenesten ved å kjøpe en ny konto etter at prøvekontoen er gått ut.";
-"menu.renewal.message.website" = "Bruk nettstedet vårt til å fornye abonnementet.";
-"menu.renewal.message.unavailable" = "Apple-serverne er for øyeblikket ikke tilgjengelige. Prøv igjen senere.";
+"menu.renewal.title" = "Vernieuwing";
+"menu.renewal.purchase" = "Kopen";
+"menu.renewal.renew" = "Vernieuwen";
+"menu.renewal.message.trial" = "Proefaccounts kunnen niet worden verlengd. Koop een nieuw account als het proefaccount verloopt om van onze diensten gebruik te blijven maken.";
+"menu.renewal.message.website" = "Gebruik onze website om uw abonnement te vernieuwen.";
+"menu.renewal.message.unavailable" = "De Apple-servers zijn momenteel niet beschikbaar. Probeer het later opnieuw.";
 
 // ACCOUNT
 
-"account.email.caption" = "E-post";
-"account.email.placeholder" = "E-postadresse";
-"account.username.caption" = "Brukernavn";
-"account.other.footer" = "Få Private Internet Access-appen på de andre enhetene dine og bruk det ovenfornevnte brukernavnet og passordet for å logge inn og sikre tilkoblingen din.";
-"account.restore.title" = "Gjenopprett ukreditert kjøp";
-"account.restore.description" = "Hvis du fornyet abonnementet ditt, men kontoen fortsatt sier den snart utløper, kan du starte fornyelsen på nytt her. Du belastes ikke i denne prosessen.";
-"account.restore.button" = "Gjenopprett kjøp";
-"account.restore.failure.title" = "Gjenopprett kjøp";
-"account.restore.failure.message" = "Ingen innløsbare kjøp ble funnet for fornyelse.";
-"account.save.item" = "Oppdater e-post";
-"account.save.prompt" = "Autentifiser for å lagre endringene";
-"account.save.success" = "E-postadressen din er lagret.";
-"account.reveal.prompt" = "Autentiser for å vise";
-"account.expiry_date.information" = "Planen din utløper %@.";
-"account.expiry_date.expired" = "Planen din er utløpt.";
-"account.update.email.require.password.title" = "PIA-passord kreves";
-"account.update.email.require.password.message" = "Av sikkerhetsmessige årsaker trenger vi PIA-passordet ditt for å endre kontoen din. Skriv inn PIA-passordet for å fortsette.";
-"account.update.email.require.password.button" = "Send";
-"account.error.unauthorized" = "Brukernavnet eller passordet ditt er feil.";
-"account.subscriptions.message" = "Her kan du administrere abonnementet ditt.";
-"account.subscriptions.linkMessage" = "her.";
-"account.set.email.error" = "Kunne ikke legge til e-posten. Prøv igjen senere.";
-"account.subscriptions.short.message" = "Administrer abonnement";
-"account.subscriptions.short.linkMessage" = "Administrer abonnement";
-"account.subscriptions.yearly" = "Årlig plan";
-"account.subscriptions.monthly" = "Månedsplan";
-"account.subscriptions.trial" = "Prøveplan";
-"account.unauthorized" = "Noe gikk galt. Prøv å logge inn igjen.";
-"account.delete" = "Slett konto";
-"account.delete.alert.title" = "Er du sikker?";
-"account.delete.alert.message" = "Sletting av PIA-kontoen er permanent og kan ikke reverseres. Du vil ikke kunne hente PIA-legitimasjonen etter at denne handlingen er utført. Vær oppmerksom på at denne handlingen bare sletter PIA-kontoen fra databasen, og sletter IKKE abonnementet. Du må gå til Apple-kontoen og kansellere abonnementet på Private Internet Access derfra. Ellers blir du fortsatt belastet, selv om PIA-kontoen ikke lenger er aktiv.";
-"account.delete.alert.failureMessage" = "Noe gikk galt ved sletting av kontoen. Prøv på nytt senere.";
-"account.survey.message" = "Vil du bidra til å gjøre PIA bedre? Fortell oss hvordan vi kan forbedre oss!\nBesvar undersøkelsen";
-"account.survey.messageLink" = "Besvar undersøkelsen";
+"account.email.caption" = "E-mail";
+"account.email.placeholder" = "E-mailadres";
+"account.username.caption" = "Gebruikersnaam";
+"account.other.footer" = "Download de Private Internet Access-app voor uw andere apparaten en gebruik de gebruikersnaam en het wachtwoord hierboven om in te loggen en uw verbinding te beveiligen.";
+"account.restore.title" = "Niet-gecrediteerde aankoop herstellen";
+"account.restore.description" = "Als u uw abonnement heeft vernieuwd, maar uw account geeft nog steeds aan dat het bijna is verlopen, dan kunt u hier opnieuw beginnen. Er worden geen extra kosten in rekening gebracht tijdens dit proces.";
+"account.restore.button" = "Aankoop herstellen";
+"account.restore.failure.title" = "Aankoop herstellen";
+"account.restore.failure.message" = "Er is geen aankoop gevonden die kan worden hersteld.";
+"account.save.item" = "E-mail updaten";
+"account.save.prompt" = "Authenticeren om wijzigingen op te slaan";
+"account.save.success" = "Uw e-mailadres is opgeslagen.";
+"account.reveal.prompt" = "Authenticeren om te onthullen";
+"account.expiry_date.information" = "Uw plan verloopt op %@.";
+"account.expiry_date.expired" = "Uw abonnement is verlopen.";
+"account.update.email.require.password.title" = "PIA-wachtwoord vereist";
+"account.update.email.require.password.message" = "Om veiligheidsredenen hebben wij uw PIA-wachtwoord nodig om wijzigingen in uw account uit te voeren. Voer uw PIA-wachtwoord in om verder te gaan.";
+"account.update.email.require.password.button" = "Versturen";
+"account.error.unauthorized" = "Uw gebruikersnaam of wachtwoord is onjuist.";
+"account.subscriptions.message" = "U kunt uw abonnement hier beheren.";
+"account.subscriptions.linkMessage" = "hier.";
+"account.set.email.error" = "Er is een fout opgetreden bij het toevoegen van het e-mailadres. Probeer het later opnieuw.";
+"account.subscriptions.short.message" = "Abonnement beheren";
+"account.subscriptions.short.linkMessage" = "Abonnement beheren";
+"account.subscriptions.yearly" = "Jaarlijks abonnement";
+"account.subscriptions.monthly" = "Maandelijks abonnement";
+"account.subscriptions.trial" = "Proefabonnement";
+"account.unauthorized" = "Er is iets fout gegaan. Probeer opnieuw in te loggen.";
+"account.delete" = "Verwijder account";
+"account.delete.alert.title" = "Weet u het zeker?";
+"account.delete.alert.message" = "Het verwijderen van uw PIA-account is definitief en onomkeerbaar. U zult uw PIA-inloggegevens niet kunnen ophalen na het uitvoeren van deze actie. Houd ermee rekening dat deze actie alleen uw PIA-account verwijdert uit onze database, maar NIET uw abonnement. Hiervoor moet u naar uw Apple-account gaan en daar het Private Internet Access-abonnement annuleren. Anders worden u nog steeds kosten aangerekend, hoewel uw PIA-account niet langer actief is.";
+"account.delete.alert.failureMessage" = "Er ging iets fout bij het verwijderen van uw account. Probeer het later nog een keer.";
+"account.survey.message" = "Wil je helpen om PIA beter te maken? Laat ons weten hoe we kunnen verbeteren!\nVul de enquête in";
+"account.survey.messageLink" = "Vul de enquête in";
 
 // SETTINGS
 
-"settings.connection.title" = "TILKOBLING";
-"settings.connection.vpn_protocol.title" = "Protokollseksjon";
-"settings.connection.transport.title" = "Transporter";
+"settings.connection.title" = "VERBINDING";
+"settings.connection.vpn_protocol.title" = "Protocolselectie";
+"settings.connection.transport.title" = "Transport";
 "settings.connection.socket_protocol.title" = "Socket";
-"settings.connection.remote_port.title" = "Ekstern port";
+"settings.connection.remote_port.title" = "Externe poort";
 
-"settings.encryption.title" = "KRYPTERING";
-"settings.encryption.cipher.title" = "Datakryptering";
-"settings.encryption.digest.title" = "Dataverifisering";
-"settings.encryption.handshake.title" = "Håndtrykk";
+"settings.encryption.title" = "VERSLEUTELING";
+"settings.encryption.cipher.title" = "Gegevensversleuteling";
+"settings.encryption.digest.title" = "Gegevensauthenticatie";
+"settings.encryption.handshake.title" = "Handdruk";
 
-"settings.application_settings.title" = "APPINNSTILLINGER";
-"settings.application_settings.dark_theme.title" = "Mørkt tema";
-"settings.application_settings.active_theme.title" = "Aktivt tema";
-"settings.application_settings.kill_switch.title" = "Kill switch for VPN";
-"settings.application_settings.kill_switch.footer" = "Kill switch for VPN hindrer tilgang til Internett hvis VPN-tilkoblingen mister forbindelsen og prøver å koble til igjen. Dette ekskluderer manuell frakobling.";
-"settings.application_settings.leak_protection.title" = "Lekkasjebeskyttelse";
-"settings.application_settings.leak_protection.footer" = "iOS har funksjoner som er utviklet for å fungere utenfor VPN-et, for eksempel AirDrop, CarPlay, AirPlay og delt Internett. Ved å aktivere tilpasset lekkasjebeskyttelse kan du rute denne trafikken gjennom VPN-et, men det kan påvirke hvordan disse funksjonene fungerer. Mer informasjon";
-"settings.application_settings.leak_protection.more_info" = "Mer informasjon";
-"settings.application_settings.allow_local_network.title" = "Tillat tilgang til enheter på lokalnettverk";
-"settings.application_settings.allow_local_network.footer" = "Behold tilgang til lokale enheter som skrivere eller filservere mens du er koblet til VPN-et. (Tillat dette bare hvis du stoler på personene og enhetene på nettverket ditt.)";
+"settings.application_settings.title" = "TOEPASSINGSINSTELLINGEN";
+"settings.application_settings.dark_theme.title" = "Donker thema";
+"settings.application_settings.active_theme.title" = "Actief thema";
+"settings.application_settings.kill_switch.title" = "VPN-killswitch";
+"settings.application_settings.kill_switch.footer" = "De VPN kill switch voorkomt toegang tot internet als de VPN-verbinding opnieuw tot stand wordt gebracht. Dit geldt niet wanneer de verbinding handmatig wordt verbroken.";
+"settings.application_settings.leak_protection.title" = "Lekbescherming";
+"settings.application_settings.leak_protection.footer" = "iOS bevat functies die ontworpen zijn om standaard te werken buiten het VPN, zoals AirDrop, CarPlay, AirPlay en persoonlijke hotspots. Het inschakelen van aangepaste lekbescherming leidt dit verkeer om via het VPN, maar kan de werking van deze functies beïnvloeden. Meer info";
+"settings.application_settings.leak_protection.more_info" = "Meer info";
+"settings.application_settings.allow_local_network.title" = "Sta toegang toe tot apparaten op een lokaal netwerk";
+"settings.application_settings.allow_local_network.footer" = "Blijf verbonden met lokale apparaten, zoals printers of bestandsservers die verbonden zijn met het VPN. (Sta dit alleen toe als je de personen en apparaten op je netwerk vertrouwt.)";
 "settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.mace.footer" = "PIA MACE™ blokkerer reklamer, sporere og skadelig programvare når du er koblet til VPN-en.";
-"settings.application_settings.leak_protection.alert.title" = "Endringer i VPN-innstillingene vil tre i kraft ved neste tilkobling";
+"settings.application_settings.mace.footer" = "PIA MACE™ blokkeert advertenties, trackers en malware als u met de VPN bent verbonden.";
+"settings.application_settings.leak_protection.alert.title" = "Wijzigingen aan de VPN-instellingen worden van kracht bij de volgende verbinding";
 
-"settings.content_blocker.title" = "Safari Innholdsblokkerer – status";
-"settings.content_blocker.state.title" = "Gjeldene status";
-"settings.content_blocker.refresh.title" = "Oppdater utestengningslisten";
-"settings.content_blocker.footer" = "For å aktivere eller deaktivere innholdsblokkerer, kan du gå til Innstillinger > Safari > Innholdsblokkerere og slå på PIA VPN.";
+"settings.content_blocker.title" = "Status Safari Content Blocker";
+"settings.content_blocker.state.title" = "Huidige status";
+"settings.content_blocker.refresh.title" = "Zwarte lijst verversen";
+"settings.content_blocker.footer" = "Om Content Blocker in- of uit te schakelen, ga je naar Instellingen > Safari > Content Blockers en tik je op PIA VPN.";
 
-"settings.application_information.title" = "APPINFORMASJON";
-"settings.application_information.debug.title" = "Send feilsøkingslogg til kundestøtte";
-"settings.application_information.debug.failure.title" = "Feil ved innsending";
-"settings.application_information.debug.failure.message" = "Feilsøkinfo kunne ikke sendes inn.";
-"settings.application_information.debug.empty.title" = "Feilsøkinfo er tom";
-"settings.application_information.debug.empty.message" = "Feilsøkinfo er tom. Prøv å koble deg på igjen før du sender inn på nytt.";
-"settings.application_information.debug.success.title" = "Feilsøkinfo sendt inn";
-"settings.application_information.debug.success.message" = "Feilsøkinfo sendt. \nID: %@\nSkriv ned ID-en. Kundestøtte trenger den for å finne meldingen din.";
+"settings.application_information.title" = "APPLICATIE-INFORMATIE";
+"settings.application_information.debug.title" = "Debugbestand naar klantenservice sturen";
+"settings.application_information.debug.failure.title" = "Fout tijdens inzending";
+"settings.application_information.debug.failure.message" = "Debuginformatie kan niet worden verzonden.";
+"settings.application_information.debug.empty.title" = "Lege debuginformatie";
+"settings.application_information.debug.empty.message" = "Debuginformatie is leeg. Maak verbinding voordat u de informatie opnieuw verstuurt.";
+"settings.application_information.debug.success.title" = "Debuginformatie verzonden";
+"settings.application_information.debug.success.message" = "Debuginformatie verzonden.\nID: %@\nLet op: ons ondersteuningsteam heeft deze ID nodig om uw inzending te vinden.";
 
-"settings.commit.messages.must_disconnect" = "VPN-en må koble til igjen for at enkelte endringer skal tre i kraft.";
-"settings.commit.messages.should_reconnect" = "Koble til VPN-en igjen for å ta i bruk endringene.";
-"settings.commit.buttons.reconnect" = "Koble til igjen";
-"settings.commit.buttons.later" = "Senere";
+"settings.commit.messages.must_disconnect" = "De VPN moet opnieuw verbinding maken om de wijzigingen door te voeren.";
+"settings.commit.messages.should_reconnect" = "Laat de VPN opnieuw verbinding maken om de wijzigingen toe te passen.";
+"settings.commit.buttons.reconnect" = "Opnieuw verbinden";
+"settings.commit.buttons.later" = "Later";
 
-"settings.reset.title" = "TILBAKESTILL";
-"settings.reset.defaults.title" = "Tilbakestill til fabrikkinstillinger";
-"settings.reset.defaults.confirm.title" = "Innstillinger for tilbakestilling";
-"settings.reset.defaults.confirm.message" = "Dette bringer appen tilbake til fabrikkinnstillingene. Du mister alle endringer.";
-"settings.reset.defaults.confirm.button" = "Tilbakestill";
-"settings.reset.footer" = "Dette tilbakestiller alle innstillingene ovenfor til standard.";
+"settings.reset.title" = "RESETTEN";
+"settings.reset.defaults.title" = "Instellingen resetten naar standaard";
+"settings.reset.defaults.confirm.title" = "Instellingen resetten";
+"settings.reset.defaults.confirm.message" = "Hiermee zet u de standaardinstellingen van de app terug. Alle wijzigingen die u heeft gemaakt, gaan verloren.";
+"settings.reset.defaults.confirm.button" = "Resetten";
+"settings.reset.footer" = "Hiermee worden alle bovenstaande instellingen teruggezet naar de standaardwaarden.";
 
-"settings.small.packets.title" = "Bruk små pakker";
-"settings.small.packets.description" = "IP-pakkens størrelse vil bli noe mindre for å forbedre kompatibilitet med noen rutere og mobile nettverk.";
+"settings.small.packets.title" = "Kleine pakketten gebruiken";
+"settings.small.packets.description" = "Maakt het IP-pakket iets kleiner om de compatibiliteit met sommige routers en mobiele netwerken te verbeteren.";
 
-"settings.log.connected.error" = "VPN-tilkobling kreves. Koble til VPN og prøv på nytt.";
-"settings.log.information" = "Lagre feillogger, som kan sendes til teknisk kundestøtte for å feilsøke problemer.";
+"settings.log.connected.error" = "Een VPN-verbinding is vereist. Maak verbinding met de VPN en probeer het opnieuw.";
+"settings.log.information" = "Sla debuglogboeken op die kunnen worden verzonden naar de technische ondersteuning voor het oplossen van problemen.";
 
-"settings.preview.title" = "Forhåndsvisning";
-"settings.server.network.description" = "Neste generasjons nettverk";
-"settings.server.network.alert" = "VPN må kobles fra for å endre nettverkstjeneren.";
+"settings.preview.title" = "Voorbeeld";
+"settings.server.network.description" = "Volgende-generatienetwerk";
+"settings.server.network.alert" = "De VPN-verbinding moet worden verbroken om het servernetwerk te wijzigen.";
 
-"settings.geo.servers.description" = "Vis geolokaliserte regioner";
-"settings.cards.history.title" = "Siste nytt";
+"settings.geo.servers.description" = "Geolocatie-regio's weergeven";
+"settings.cards.history.title" = "Laatste nieuws";
 
-"settings.ovpn.migration.footer" = "Vi oppdaterer OpenVPN-implementeringen. Du får mer informasjon ved å klikke her";
-"settings.ovpn.migration.footer.link" = "her";
+"settings.ovpn.migration.footer" = "We werken onze OpenVPN-implementatie bij. Klik hier voor meer informatie.";
+"settings.ovpn.migration.footer.link" = "hier";
 
-"settings.section.general" = "Generelt";
-"settings.section.protocols" = "Protokoller";
-"settings.section.network" = "Nettverk";
-"settings.section.privacyFeatures" = "Personvernfunksjoner";
+"settings.section.general" = "Algemeen";
+"settings.section.protocols" = "Protocollen";
+"settings.section.network" = "Netwerk";
+"settings.section.privacyFeatures" = "Privacyfuncties";
 "settings.section.automation" = "Automatisering";
-"settings.section.help" = "Hjelp";
+"settings.section.help" = "Hulp";
 
 // CONTENT BLOCKER
 
-"content_blocker.title" = "Innholdsblokkerer for Safari";
-"content_blocker.body.subtitle" = "For å aktivere innholdsblokkereren (for Safari), kan du gå til Innstillinger > Safari, og under Generelt slår du på innholdsblokkerer for PIA VPN.";
-"content_blocker.body.footer" = "Merk: Du trenger ikke å være tilkoblet VPN-tjenesten for at innholdsblokkereren skal virke, men den virker bare når du surfer med Safari.";
+"content_blocker.title" = "Safari Content Blocker";
+"content_blocker.body.subtitle" = "Om onze Content blocker voor Safari in te schakelen ga je naar Instellingen > Safari en onder Algemeen raak je Content Blockers aan om PIA VPN in te schakelen.";
+"content_blocker.body.footer" = "Let op: Je hoeft niet verbonden te zijn met de VPN om deze Content blocker te laten werken, maar dan werkt het alleen als je Safari gebruikt.";
 
 // ABOUT
 
-"about.app" = "VPN fra Private Internet Access";
-"about.intro" = "Dette programmet bruker følgende komponenter:";
-"about.accessibility.component.expand" = "Trykk for å lese hele lisensen";
+"about.app" = "VPN door Private Internet Access";
+"about.intro" = "Dit programma gebruikt de volgende componenten:";
+"about.accessibility.component.expand" = "Tik om volledige licentie te lezen";
 
 // DASHBOARD
 
-"dashboard.content_blocker.intro.message" = "Denne versjonen erstatter MACE med vår Safari Content Blocker.\n\nTa en titt i «Innstillinger»-delen.";
+"dashboard.content_blocker.intro.message" = "Deze versie vervangt MACE met onze Content blocker voor Safari.\n\nGa voor meer informatie naar de 'Instellingen'.";
 
-"dashboard.connection.ip.unreachable" = "Får ikke kontakt med Internett";
+"dashboard.connection.ip.unreachable" = "Internet onbereikbaar";
 
-"dashboard.vpn.disconnected" = "Frakoblet";
-"dashboard.vpn.connecting" = "Kobler til …";
-"dashboard.vpn.connected" = "Koblet til VPN";
-"dashboard.vpn.on" = "VPN: PÅ";
-"dashboard.vpn.disconnecting" = "Kobler fra …";
-"dashboard.vpn.changing_region" = "Endrer region …";
-"dashboard.vpn.disconnect.untrusted" = "Dette nettverket er uklarert. Vil du virkelig koble fra VPN-en?";
-"dashboard.accessibility.vpn.button" = "VPN-tilkoblingsknapp";
-"dashboard.accessibility.vpn.button.isOn" = "VPN-tilkoblingsknapp. VPN-klienten er for øyeblikket tilkoblet";
-"dashboard.accessibility.vpn.button.isOff" = "VPN-tilkoblingsknapp. VPN-klienten er for øyeblikket frakoblet";
+"dashboard.vpn.disconnected" = "Verbinding verbroken";
+"dashboard.vpn.connecting" = "Verbinden...";
+"dashboard.vpn.connected" = "Verbonden met VPN";
+"dashboard.vpn.on" = "VPN: AAN";
+"dashboard.vpn.disconnecting" = "Verbinding verbreken...";
+"dashboard.vpn.changing_region" = "Regio wijzigen...";
+"dashboard.vpn.disconnect.untrusted" = "Dit is een niet-vertrouwd netwerk. Wilt u de verbinding met de VPN echt verbreken?";
+"dashboard.accessibility.vpn.button" = "VPN-verbindingsknop";
+"dashboard.accessibility.vpn.button.isOn" = "VPN-verbindingsknop. De VPN is verbonden";
+"dashboard.accessibility.vpn.button.isOff" = "VPN-verbindingsknop. De VPN is niet verbonden";
 
-"dashboard.vpn.leakprotection.alert.title" = "Usikret WiFi oppdaget";
-"dashboard.vpn.leakprotection.alert.message" = "For å hindre datalekkasjer trykker du på Deaktiver nå for å slå av \"Tillat tillat tilgang til enheter på lokalnettverk\" og automatisk koble til på nytt.";
-"dashboard.vpn.leakprotection.alert.cta1" = "Deaktiver nå";
-"dashboard.vpn.leakprotection.alert.cta2" = "Les mer";
-"dashboard.vpn.leakprotection.alert.cta3" = "Ignorer";
+"dashboard.vpn.leakprotection.alert.title" = "Onbeveiligde wifi gedetecteerd";
+"dashboard.vpn.leakprotection.alert.message" = "Om gegevenslekken te voorkomen, tik je op \"Schakel nu uit\" om \"Sta toegang toe tot apparaten op een lokaal netwerk\" uit te schakelen en automatisch opnieuw verbinding te maken.";
+"dashboard.vpn.leakprotection.alert.cta1" = "Schakel nu uit";
+"dashboard.vpn.leakprotection.alert.cta2" = "Meer informatie";
+"dashboard.vpn.leakprotection.alert.cta3" = "Negeer";
 
-"dashboard.vpn.leakprotection.ikev2.alert.message" = "For å hindre datalekkasjer trykker du på Bytt nå for å bytte til VPN-protokollen IKEv2 og automatisk koble til på nytt.";
-"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Bytt nå";
+"dashboard.vpn.leakprotection.ikev2.alert.message" = "Om gegevenslekken te voorkomen, tik je op \"Schakel nu\" om te wijzigen naar het IKEv2 VPN-protocol en automatisch opnieuw verbinding te maken.";
+"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Schakel nu";
 
 // VPN PERMISSION
 
 "vpn_permission.title" = "PIA";
-"vpn_permission.body.title" = "PIA trenger tilgang til VPN-konfigurasjonen din for å sikre trafikken din.";
-"vpn_permission.body.subtitle" = "Du vil se en ledetekst for PIA VPN og må gi tilgang til VPN-konfigurasjoner.\nTrykk «%@» for å fortsette.";
-"vpn_permission.body.footer" = "Vi overvåker, filtrerer eller logger ikke nettverksaktiviteten din.";
-"vpn_permission.disallow.message.basic" = "Vi trenger disse tillatelsene for at programmet skal fungere.";
-"vpn_permission.disallow.message.support" = "Du kan også ta kontakt med kundestøtten, hvis du trenger hjelp.";
-"vpn_permission.disallow.contact" = "Kontakt";
+"vpn_permission.body.title" = "PIA heeft toegang tot uw VPN-configuraties nodig om uw verkeer te beveiligen.";
+"vpn_permission.body.subtitle" = "U krijgt een melding te zien en u moet PIA VPN toegang geven tot uw VPN-configuraties. Tik op '%@' om door te gaan.";
+"vpn_permission.body.footer" = "We monitoren, filteren of registreren geen netwerkactiviteit.";
+"vpn_permission.disallow.message.basic" = "Deze toestemming is nodig om de applicatie te laten functioneren.";
+"vpn_permission.disallow.message.support" = "Als u hulp nodig heeft, kunt u contact opnemen met de klantenservice.";
+"vpn_permission.disallow.contact" = "Contact";
 
 // CUSTOM DNS
 
-"settings.dns.custom" = "Tilpass";
-"settings.dns.alert.create.message" = "Det å bruke en DNS som ikke er PIA kan utsette DNS-trafikken din for innsyn fra tredjeparter, noe som igjen kan skade personvernet ditt.";
-"settings.dns.alert.clear.title" = "Fjern DNS";
-"settings.dns.alert.clear.message" = "Dette fjerner din tilpassede DNS og bruker PIA DNS.";
-"settings.dns.custom.dns" = "Tilpass DNS";
-"settings.dns.primaryDNS" = "Primær DNS";
-"settings.dns.secondaryDNS" = "Sekunder DNS";
-"settings.dns.validation.primary.mandatory" = "Primær DNS er obligatorisk.";
-"settings.dns.validation.primary.invalid" = "Primær DNS er ikke gyldig";
-"settings.dns.validation.secondary.invalid" = "Sekundær DNS er ikke gyldig.";
+"settings.dns.custom" = "Aangepast";
+"settings.dns.alert.create.message" = "Als u DNS gebruikt die niet van PIA is, kunnen externe partijen uw DNS-verkeer bekijken en loopt uw privacy gevaar.";
+"settings.dns.alert.clear.title" = "DNS wissen";
+"settings.dns.alert.clear.message" = "Uw huidige DNS wordt gewist en ingesteld op DNS van PIA.";
+"settings.dns.custom.dns" = "Aangepaste DNS";
+"settings.dns.primaryDNS" = "Primaire DNS";
+"settings.dns.secondaryDNS" = "Secundaire DNS";
+"settings.dns.validation.primary.mandatory" = "Primaire DNS is vereist.";
+"settings.dns.validation.primary.invalid" = "Primaire DNS is niet geldig.";
+"settings.dns.validation.secondary.invalid" = "Secundaire DNS is niet geldig.";
 
 // HOTSPOT HELPER
 
-"settings.hotspothelper.title" = "Administrasjonsverktøy for nettverk";
-"settings.hotspothelper.description" = "Konfigurer PIAs atferd ved tilkobling til WiFi- eller mobilnettverk. Dette ekskluderer manuell frakobling.";
-"settings.hotspothelper.enable.description" = "Hvis alternativet er aktivert, aktiveres PIA automatisk når VPN-tilkoblingen er koblet til nettverk som ikke er pålitelige.";
-"settings.hotspothelper.all.title" = "Beskytt alle nettverk";
-"settings.hotspothelper.all.description" = "VPN WiFi-beskyttelse aktiveres på alle nettverk, inkludert pålitelige nettverk.";
-"settings.hotspothelper.available.help" = "Gå til iOS-innstillinger > WiFi for å legge til i listen.";
-"settings.hotspothelper.available.add.help" = "Trykk på + for å legge til pålitelige nettverk.";
-"settings.trusted.networks.sections.current" = "Nåværende nettverk";
-"settings.trusted.networks.sections.available" = "Tilgjengelige nettverk";
-"settings.trusted.networks.sections.trusted" = "Pålitelige nettverk";
-"settings.trusted.networks.message" = "PIA kobler ikke automatisk til disse nettverkene.";
-"settings.trusted.networks.connect.message" = "Vil du beskytte dette nettverket ved å koble til VPN?";
-"hotspothelper.display.name" = "🔒 Aktiver VPN WiFi-beskyttelse i PIAs innstillinger for å sikre denne tilkoblingen.";
-"hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi-beskyttelse er aktivert – vi beskytter deg.";
-"settings.hotspothelper.cellular.title" = "Beskytt over mobilnettverk";
-"settings.hotspothelper.wifi.trust.title" = "VPN WiFi-beskyttelse";
-"settings.hotspothelper.cellular.description" = "Hvis dette alternativet er aktivert, aktiverer PIA VPN-tilkoblingen automatisk ved tilkobling til mobile nettverk.";
-"settings.hotspothelper.cellular.networks" = "Mobilnettverk";
-"settings.hotspothelper.wifi.networks" = "WiFi-nettverk";
-"settings.trusted.networks.sections.untrusted" = "Upålitelige nettverk";
-"settings.hotspothelper.rules.title" = "Regler";
-"settings.trusted.networks.sections.trusted.rule.description" = "Aktiver denne funksjonen når VPN-avbruddsbryteren er aktivert for å tilpasse atferden til PIA på WiFi- og mobilnettverk. Vær oppmerksom på at funksjonaliteten til verktøyet for nettverksadministrering deaktiveres hvis du kobler fra manuelt.";
-"settings.trusted.networks.sections.trusted.rule.action" = "Koble fra PIA VPN";
-"tiles.quicksetting.nmt.title" = "Nettverksadministrering";
-"tiles.quicksetting.private.browser.title" = "Privat nettleser";
-"settings.nmt.killswitch.disabled" = "VPN-avbruddsbryteren er for øyeblikket deaktivert. For å sikre at verktøyet for nettverksadministrering fungerer og at du kan koble til på nytt når du bytter nettverk, må du aktivere VPN-avbruddsbryteren i innstillingene.";
-"settings.nmt.optout.disconnect.alerts" = "Slå av bekreftelse på frakobling";
-"settings.nmt.optout.disconnect.alerts.description" = "Deaktiverer advarselvarselet når du kobler fra VPN-en.";
-"settings.nmt.wireguard.warning" = "WireGuard® må ikke koble til igjen når du bytter mellom ulike nettverk. Det kan være nødvendig å manuelt koble fra VPN-en på pålitelige nettverk.";
-"settings.service.quality.share.title" = "Hjelp med å forbedre PIA";
-"settings.service.quality.share.description" = "Hjelp oss med å forbedre oss ved å dele VPN-tilkoblingsstatistikk. Disse rapportene inneholder aldri personlig identifiserbar informasjon.";
-"settings.service.quality.share.findoutmore" = "Finn ut mer";
-"settings.service.quality.show.title" = "Tilkoblingsstatistikk";
+"settings.hotspothelper.title" = "Netwerkbeheertool";
+"settings.hotspothelper.description" = "Configureer hoe PIA zich gedraagt bij verbinding met wifi of cellulaire netwerken. Dit geldt niet wanneer de verbinding handmatig wordt verbroken.";
+"settings.hotspothelper.enable.description" = "PIA schakelt de VPN automatisch in wanneer u verbinding maakt met niet-vertrouwde wifi-netwerken als deze optie is ingeschakeld.";
+"settings.hotspothelper.all.title" = "Bescherm alle netwerken";
+"settings.hotspothelper.all.description" = "VPN-wifibescherming wordt op alle netwerken geactiveerd, inclusief vertrouwde netwerken.";
+"settings.hotspothelper.available.help" = "Ga naar iOS-instellingen > wifi om deze lijst in te vullen.";
+"settings.hotspothelper.available.add.help" = "Tik op + om aan vertrouwde netwerken toe te voegen.";
+"settings.trusted.networks.sections.current" = "Huidig netwerk";
+"settings.trusted.networks.sections.available" = "Beschikbare netwerken";
+"settings.trusted.networks.sections.trusted" = "Vertrouwde netwerken";
+"settings.trusted.networks.message" = "PIA maakt niet automatisch verbinding op deze netwerken.";
+"settings.trusted.networks.connect.message" = "Dit netwerk beschermen door met VPN te verbinden?";
+"hotspothelper.display.name" = "🔒 Activeer VPN-wifibescherming via PIA-instellingen om deze verbinding te beveiligen.";
+"hotspothelper.display.protected.name" = "🔒 PIA VPN-wifibescherming ingeschakeld - Wij zorgen voor uw veiligheid.";
+"settings.hotspothelper.cellular.title" = "Cellulaire netwerken beschermen";
+"settings.hotspothelper.wifi.trust.title" = "VPN-wifibescherming";
+"settings.hotspothelper.cellular.description" = "PIA schakelt de VPN automatisch in wanneer u verbinding maakt met cellulaire netwerken als deze optie is ingeschakeld.";
+"settings.hotspothelper.cellular.networks" = "Cellulaire netwerken";
+"settings.hotspothelper.wifi.networks" = "Wifi-netwerken";
+"settings.trusted.networks.sections.untrusted" = "Niet-vertrouwde netwerken";
+"settings.hotspothelper.rules.title" = "Regels";
+"settings.trusted.networks.sections.trusted.rule.description" = "Schakel deze functie in, terwijl de VPN kill switch is ingeschakeld, om te configureren hoe PIA zich gedraagt bij verbinding met wifi of cellulaire netwerken. Houd er wel rekening mee dat de functies van de netwerkbeheertool worden uitgeschakeld als u de verbinding handmatig verbreekt.";
+"settings.trusted.networks.sections.trusted.rule.action" = "PIA VPN-verbinding verbreken";
+"tiles.quicksetting.nmt.title" = "Netwerkbeheer";
+"tiles.quicksetting.private.browser.title" = "Privébrowser";
+"settings.nmt.killswitch.disabled" = "De VPN kill switch is op dit moment uitgeschakeld. Schakel de VPN kill switch in via uw instellingen om ervoor te zorgen dat de netwerkbeheertool werkt en dat u verbinding kunt maken als u van netwerk wisselt.";
+"settings.nmt.optout.disconnect.alerts" = "Bevestigingsmelding voor verbreken verbinding uitschakelen";
+"settings.nmt.optout.disconnect.alerts.description" = "Schakelt de melding bij het verbreken van de verbinding met de VPN uit.";
+"settings.nmt.wireguard.warning" = "WireGuard® hoeft niet opnieuw verbinding te maken als u tussen verschillende netwerken schakelt. Het kan noodzakelijk zijn om de verbinding met de VPN op vertrouwde netwerken te verbreken.";
+"settings.service.quality.share.title" = "Help PIA te verbeteren";
+"settings.service.quality.share.description" = "Help ons onze service te verbeteren door VPN-verbindingsgegevens met ons te delen. Deze rapporten bevatten geen persoonlijk identificeerbare informatie.";
+"settings.service.quality.share.findoutmore" = "Meer informatie";
+"settings.service.quality.show.title" = "Verbindingsgegevens";
 
-"network.management.tool.open.wifi" = "Pålitelig WiFi";
-"network.management.tool.secure.wifi" = "Sikkert WiFi";
-"network.management.tool.mobile.data" = "Mobildata";
-"network.management.tool.always.connect" = "Alltid tilkoblet VPN";
-"network.management.tool.always.disconnect" = "Alltid frakoblet VPN";
-"network.management.tool.retain.state" = "Behold VPN-status";
-"network.management.tool.add.rule" = "Legg til en ny regel";
-"network.management.tool.choose.wifi" = "Velg et WiFi-nettverk for å legge til en ny regel. ";
-"network.management.tool.title" = "Administrer automatisering";
-"network.management.tool.alert" = "Automatiseringsinnstillingene dine er konfigurert til å holde VPN-tilkoblingen frakoblet under gjeldende nettverksbetingelser.";
-"network.management.tool.disable" = "Deaktiver automatisering";
-"network.management.tool.enable.automation" = "Aktiver automatisering";
+"network.management.tool.open.wifi" = "Wifi openen";
+"network.management.tool.secure.wifi" = "Veilige wifi";
+"network.management.tool.mobile.data" = "Mobiele gegevens";
+"network.management.tool.always.connect" = "Altijd verbinden met VPN";
+"network.management.tool.always.disconnect" = "VPN-verbinding altijd verbreken";
+"network.management.tool.retain.state" = "VPN-status behouden";
+"network.management.tool.add.rule" = "Nieuwe regel toevoegen";
+"network.management.tool.choose.wifi" = "Kies een wifi-netwerk om een nieuwe regel toe te voegen. ";
+"network.management.tool.title" = "Automatisering beheren";
+"network.management.tool.alert" = "Uw automatiseringsinstellingen zijn zo geconfigureerd dat de VPN onder de huidige netwerkomstandigheden uitgeschakeld blijft.";
+"network.management.tool.disable" = "Automatisering uitschakelen";
+"network.management.tool.enable.automation" = "Automatisering inschakelen";
 
 // REGION
 
-"region.search.placeholder" = "Søk etter en region";
-"region.accessibility.filter" = "Filtrer";
-"region.filter.sortby" = "Sorter regioner etter";
-"region.filter.name" = "Navn";
-"region.filter.latency" = "Ventetid";
-"region.filter.favorites" = "Favoritter";
-"region.accessibility.favorite" = "Legg til favorittområde";
-"region.accessibility.unfavorite" = "Fjern et favorittområde";
+"region.search.placeholder" = "Zoek een regio";
+"region.accessibility.filter" = "Sorteren";
+"region.filter.sortby" = "Sorteer regio's op";
+"region.filter.name" = "Naam";
+"region.filter.latency" = "Latentie";
+"region.filter.favorites" = "Favorieten";
+"region.accessibility.favorite" = "Een favoriete regio toevoegen";
+"region.accessibility.unfavorite" = "Een favoriete regio verwijderen";
 
 // TILES
-"tiles.quick.connect.title" = "Hurtigtilkobling";
-"tiles.favorite.servers.title" = "Favorittservere";
+"tiles.quick.connect.title" = "Snel verbinden";
+"tiles.favorite.servers.title" = "Favoriete servers";
 "tiles.region.title" = "VPN-server";
 "tiles.subscription.title" = "Abonnement";
-"tiles.subscription.trial" = "Prøveversjon";
-"tiles.subscription.monthly" = "Månedlig";
-"tiles.subscription.yearly" = "Årlig";
-"tiles.subscription.days.left" = "(%d dager igjen)";
-"tiles.usage.title" = "Bruk";
-"tiles.usage.ipsec.title" = "BRUK (ikke tilgjengelig på IKEv2)";
-"tiles.usage.upload" = "Last opp";
-"tiles.usage.download" = "Last ned";
-"tiles.nmt.cellular" = "Mobilnettverk";
-"tiles.nmt.accessibility.trusted" = "Klarert nettverk";
-"tiles.nmt.accessibility.untrusted" = "Uklarert nettverk";
-"tiles.quicksettings.title" = "Hurtiginnstillinger";
-"tiles.quicksettings.min.elements.message" = "Du burde ha minst ett element synlig i feltet Hurtiginnstillinger.";
-"tiles.accessibility.visible.tile.action" = "Trykk for å fjerne denne ruten fra instrumentbordet";
-"tiles.accessibility.invisible.tile.action" = "Trykk for å legge til denne ruten på instrumentbordet";
+"tiles.subscription.trial" = "Proefversie";
+"tiles.subscription.monthly" = "Maandelijks";
+"tiles.subscription.yearly" = "Jaarlijks";
+"tiles.subscription.days.left" = "(Nog %d dagen)";
+"tiles.usage.title" = "Gebruik";
+"tiles.usage.ipsec.title" = "GEBRUIK (niet beschikbaar op IKEv2)";
+"tiles.usage.upload" = "Uploaden";
+"tiles.usage.download" = "Downloaden";
+"tiles.nmt.cellular" = "Cellulair";
+"tiles.nmt.accessibility.trusted" = "Vertrouwd netwerk";
+"tiles.nmt.accessibility.untrusted" = "Niet-vertrouwd netwerk";
+"tiles.quicksettings.title" = "Snelle instellingen";
+"tiles.quicksettings.min.elements.message" = "Houd ten minste één element zichtbaar in de tegel Snelle instellingen";
+"tiles.accessibility.visible.tile.action" = "Tik om deze tegel van het dashboard te verwijderen";
+"tiles.accessibility.invisible.tile.action" = "Tik om deze tegel aan het dashboard toe te voegen";
 
 //SIRI SHORTCUTS
-"siri.shortcuts.connect.row.title" = "«Koble til»-snarvei for Siri";
-"siri.shortcuts.disconnect.row.title" = "«Koble fra»-snarvei for Siri";
-"siri.shortcuts.connect.title" = "Koble til PIA VPN";
-"siri.shortcuts.disconnect.title" = "Koble fra PIA VPN";
-"siri.shortcuts.add.error" = "Det oppstod en feil ved tilføring av Siri-snarveien. Prøv på nytt.";
+"siri.shortcuts.connect.row.title" = "'Verbinding maken' met Siri-opdracht";
+"siri.shortcuts.disconnect.row.title" = "'Verbinding verbreken' met Siri-opdracht";
+"siri.shortcuts.connect.title" = "Verbinding maken met PIA VPN";
+"siri.shortcuts.disconnect.title" = "Verbinding met PIA VPN verbreken";
+"siri.shortcuts.add.error" = "Er is een fout opgetreden bij het toevoegen van de Siri-opdracht. Probeer het opnieuw.";
 
 //TODAY WIDGET
-"today.widget.login" = "Logg på";
+"today.widget.login" = "Inloggen";
 
 //FRIEND REFERRALS
-"friend.referrals.email.validation" = "Ugyldig e-postadresse. Prøv på nytt.";
-"friend.referrals.title" = "Verv en venn";
-"friend.referrals.view.invites.sent" = "Vis sendte invitasjoner";
-"friend.referrals.pending.invites" = "%d ventende invitasjoner";
-"friend.referrals.signups.number" = "%d registreringer";
-"friend.referrals.fullName" = "Fullt navn";
-"friend.referrals.invitation.terms" = "Ved å sende denne inviasjonen samtykker jeg til alle vilkårene og betingelsene i verveprogrammet for venner og familie.";
-"friend.referrals.family.friends.program" = "Verveprogram for familie og venner";
-"friend.referrals.send.invite" = "Send invitasjon";
-"friend.referrals.invite.error" = "Kunne ikke sende invitasjon på nytt. Prøv igjen senere.";
-"friend.referrals.invite.success" = "Invitasjonen har blitt sendt";
-"friend.referrals.share.link" = "Del den unike vervekoblingen din";
-"friend.referrals.share.link.terms" = "Ved å dele denne koblingen samtykker du til alle vilkårene og betingelsene i verveprogrammet for familie og venner.";
-"friend.referrals.invites.sent.title" = "Sendte invitasjoner";
-"friend.referrals.pending.invites.title" = "Ventende invitasjoner";
-"friend.referrals.invites.number" = "Du har sendt %d invitasjoner";
-"friend.referrals.privacy.note" = "Merk at av hensyn til personvern slettes alle invitasjoner som er eldre nn 30 dager.";
-"friend.referrals.signedup" = "Registrert";
-"friend.referrals.reward.given" = "Belønning gitt";
-"friend.referrals.days.acquired" = "Gratis dager oppnådd";
-"friend.referrals.days.number" = "%d dager";
+"friend.referrals.email.validation" = "Ongeldig e-mailadres. Probeer het opnieuw.";
+"friend.referrals.title" = "Een vriend doorverwijzen";
+"friend.referrals.view.invites.sent" = "Verstuurde uitnodigingen bekijken";
+"friend.referrals.pending.invites" = "%d uitnodigingen in behandeling";
+"friend.referrals.signups.number" = "%d aanmeldingen";
+"friend.referrals.fullName" = "Volledige naam";
+"friend.referrals.invitation.terms" = "Door deze uitnodiging te versturen, ga ik akkoord met de algemene voorwaarden van het verwijzingsprogramma voor familie en vrienden.";
+"friend.referrals.family.friends.program" = "Verwijzingsprogramma voor familie en vrienden";
+"friend.referrals.send.invite" = "Uitnodiging versturen";
+"friend.referrals.invite.error" = "Kan uitnodiging niet versturen. Probeer het later opnieuw.";
+"friend.referrals.invite.success" = "Uitnodiging verstuurd";
+"friend.referrals.share.link" = "Deel uw unieke verwijzingslink";
+"friend.referrals.share.link.terms" = "Door deze link te delen, gaat u akkoord met de algemene voorwaarden van het verwijzingsprogramma voor familie en vrienden.";
+"friend.referrals.invites.sent.title" = "Uitnodigingen verstuurd";
+"friend.referrals.pending.invites.title" = "Uitnodigingen in behandeling";
+"friend.referrals.invites.number" = "U heeft %d uitnodigingen verstuurd";
+"friend.referrals.privacy.note" = "Let op: om privacyredenen worden alle uitnodigingen die ouder zijn dan 30 dagen verwijderd.";
+"friend.referrals.signedup" = "Aangemeld";
+"friend.referrals.reward.given" = "Beloning gegeven";
+"friend.referrals.days.acquired" = "Ontvangen gratis dagen";
+"friend.referrals.days.number" = "%d dagen";
 
-"friend.referrals.friends.family.title" = "Verv familie og venner. For hver registrering gir vi dere begge 30 dager gratis. ";
-"friend.referrals.description.short" = "VERV EN VENN. FÅ 30 DAGER GRATIS.";
+"friend.referrals.friends.family.title" = "Verwijs uw vrienden en familie door. Voor elke aanmelding krijgt u allebei 30 dagen gratis. ";
+"friend.referrals.description.short" = "VERWIJS EEN VRIEND DOOR. ONTVANG 30 DAGEN GRATIS.";
 
 // GDPR
-"gdpr.collect.data.title" = "Personopplysninger vi samler inn";
-"gdpr.collect.data.description" = "E-postadresse for kontoadministrering og beskyttelse mot misbruk.\n\nE-postadresse blir kun brukt for å sende ut informasjon om abonnementet, betalingsbekreftelser, kundekorrespondanse og tilbud om Private Internet Access.";
-"gdpr.accept.button.title" = "Godta og fortsett";
+"gdpr.collect.data.title" = "Persoonlijke informatie die we verzamelen";
+"gdpr.collect.data.description" = "E-mailadres wordt gebruikt voor accountbeheer en bescherming tegen misbruik.\n\nE-mailadres wordt alleen gebruikt voor het verzenden van abonnementsinformatie, betalingsbevestigingen, correspondentie met klanten en promotionele aanbiedingen van Private Internet Access.";
+"gdpr.accept.button.title" = "Akkoord en doorgaan";
 
 // SET EMAIL
-"set.email.form.email" = "Skriv inn e-postadressen din";
-"set.email.why" = "Vi trenger e-posten din for å sende deg brukernavnet og passordet ditt.";
-"set.email.success.message_format" = "Vi har sendt deg kontoens brukernavn og passord til e-postadressen %@";
-"set.email.password.caption" = "Passord";
-"set.email.error.validation" = "Du må angi en e-postadresse.";
+"set.email.form.email" = "Voer uw e-mailadres in";
+"set.email.why" = "We hebben uw e-mailadres nodig om uw gebruikersnaam en wachtwoord te versturen.";
+"set.email.success.message_format" = "We hebben de gebruikersnaam en het wachtwoord voor uw account naar het volgende e-mailadres gestuurd: %@";
+"set.email.password.caption" = "Wachtwoord";
+"set.email.error.validation" = "U moet een e-mailadres invoeren.";
 
 // RATING
-"rating.enjoy.question" = "Liker du PIA VPN?";
-"rating.enjoy.subtitle" = "Vi håper VPN-produktet svarer til forventningene dine";
-"rating.problems.question" = "Hva gikk galt?";
-"rating.problems.subtitle" = "Ønsker du å sende en tilbakemelding? Vi kan bidra til å forbedre opplevelsen din med PIA";
-"rating.review.question" = "Hva med en anmeldelse på AppStore?";
-"rating.rate.question" = "Hva med en vurdering i AppStore?";
-"rating.rate.subtitle" = "Vi setter pris på at du deler opplevelsen din";
-"rating.error.question" = "Tilkoblingen kunne ikke opprettes";
-"rating.error.subtitle" = "Du kan velge en annen region eller fortelle oss om det ved å åpne en støttesak.";
-"rating.error.button.send" = "Send tilbakemelding";
-"rating.alert.button.notreally" = "Ikke egentlig";
-"rating.alert.button.nothanks" = "Nei takk.";
-"rating.alert.button.oksure" = "Klart det!";
+"rating.enjoy.question" = "Geniet u van PIA VPN?";
+"rating.enjoy.subtitle" = "We hopen dat ons VPN-product aan uw verwachtingen voldoet";
+"rating.problems.question" = "Wat is er fout gegaan?";
+"rating.problems.subtitle" = "Wilt u feedback geven? We kunnen u helpen met het verbeteren van uw ervaring met PIA.";
+"rating.review.question" = "Waarom laat u geen beoordeling achter in de AppStore?";
+"rating.rate.question" = "Wilt u een waardering geven in de App Store?";
+"rating.rate.subtitle" = "We stellen het op prijs dat u uw ervaring deelt";
+"rating.error.question" = "De verbinding kan niet tot stand worden gebracht";
+"rating.error.subtitle" = "U kunt een andere regio selecteren of ons hiervan op de hoogte stellen door een supportticket te openen.";
+"rating.error.button.send" = "Feedback sturen";
+"rating.alert.button.notreally" = "Niet echt";
+"rating.alert.button.nothanks" = "Nee, bedankt.";
+"rating.alert.button.oksure" = "Graag!";
 
 // CALLING CARDS
-"card.wireguard.title" = "Prøv WireGuard® i dag!";
-"card.wireguard.description" = "Det er en ny mer effektiv VPN-protokoll som tilbyr bedre ytelse, lavere CPU-bruk og lengre batteritid.";
-"card.wireguard.cta.activate" = "Prøv WireGuard® nå";
-"card.wireguard.cta.settings" = "Åpne innstillinger";
-"card.wireguard.cta.learn" = "Finn ut mer";
+"card.wireguard.title" = "Probeer WireGuard® vandaag nog!";
+"card.wireguard.description" = "Het is een nieuw, efficiënter VPN-protocol met betere prestaties, een lager CPU-gebruik en een langere levensduur van de batterij.";
+"card.wireguard.cta.activate" = "Probeer WireGuard® nu";
+"card.wireguard.cta.settings" = "Instellingen openen";
+"card.wireguard.cta.learn" = "Meer informatie";
 
 // DEDICATED IP
-"dedicated.ip.title" = "Dedikert IP";
-"dedicated.ip.plural.title" = "Dine dedikerte IP-er";
-"dedicated.ip.activation.description" = "Aktiver din dedikerte IP ved å lime inn tokenet ditt i skjemaet nedenfor. Hvis du nylig har kjøpt en dedikert IP, kan du generere tokenet ved å gå til PIA-nettstedet.";
-"dedicated.ip.token.textfield.placeholder" = "Lim inn tokenet her";
-"dedicated.ip.token.textfield.accessibility" = "Tekstfeltet for å skrive inn dedikert IP-token";
-"dedicated.ip.activate.button.title" = "Aktiver";
-"dedicated.ip.message.incorrect.token" = "Kontroller at du har skrevet tokenet riktig";
-"dedicated.ip.message.invalid.token" = "Tokenet er ugyldig. Kontroller at du har skrevet tokenet riktig.";
-"dedicated.ip.message.valid.token" = "Den dedikerte IP-en din ble aktivert. Den blir tilgjengelig i regionvalg-listen.";
-"dedicated.ip.message.expired.token" = "Tokenet er utløpt. Generer et nytt et fra kontosiden din på nettstedet.";
-"dedicated.ip.message.error.token" = "Tokenet er utløpt. Generer et nytt et fra kontosiden din på nettstedet.";
-"dedicated.ip.message.error.retryafter" = "For mange mislykkede forespørsler om aktivering av token. Prøv på nytt etter %@ sekund(er).";
-"dedicated.ip.message.token.willexpire" = "Den dedikerte IP-en din utløper snart. Skaff deg en ny en";
-"dedicated.ip.message.token.willexpire.link" = "Skaff deg en ny en";
-"dedicated.ip.message.ip.updated" = "Den dedikerte IP-en din ble oppdatert";
-"dedicated.ip.country.flag.accessibility" = "Landsflagg for %@";
-"dedicated.ip.remove" = "Er du sikker på at du vil fjerne den valgte regionen?";
-"dedicated.ip.limit.title" = "Sikre de eksterne tilkoblingene dine til alle ressurser med en dedikert IP fra et valgfritt land. Under abonnementet ditt er denne IP-en din, og bare din, og den beskytter dataoverføringene dine med markedets sterkeste kryptering.";
+"dedicated.ip.title" = "Toegewijde IP";
+"dedicated.ip.plural.title" = "Uw dedicated IP's";
+"dedicated.ip.activation.description" = "Activeer uw dedicated IP door uw code in het formulier hieronder te plakken. Als u onlangs een dedicated IP hebt gekocht, kunt u de code op de PIA-website genereren.";
+"dedicated.ip.token.textfield.placeholder" = "Plak uw code hier";
+"dedicated.ip.token.textfield.accessibility" = "Het tekstveld om uw dedicated IP-code in te voeren";
+"dedicated.ip.activate.button.title" = "Activeren";
+"dedicated.ip.message.incorrect.token" = "Zorg ervoor dat u de code juist heeft ingevoerd";
+"dedicated.ip.message.invalid.token" = "Uw code is ongeldig. Zorg ervoor dat u de code juist heeft ingevoerd.";
+"dedicated.ip.message.valid.token" = "Uw dedicated IP is geactiveerd. Het is beschikbaar in uw regioselectielijst.";
+"dedicated.ip.message.expired.token" = "Uw code is verlopen. Genereer een nieuwe via uw accountpagina op de website.";
+"dedicated.ip.message.error.token" = "Uw code is verlopen. Genereer een nieuwe via uw accountpagina op de website.";
+"dedicated.ip.message.error.retryafter" = "Teveel mislukte aanvragen voor het activeren van tokens. Probeer het opnieuw na %@ seconde(n).";
+"dedicated.ip.message.token.willexpire" = "Uw dedicated IP verloopt binnenkort. Haal een nieuwe";
+"dedicated.ip.message.token.willexpire.link" = "Haal een nieuwe";
+"dedicated.ip.message.ip.updated" = "Uw dedicated IP is bijgewerkt";
+"dedicated.ip.country.flag.accessibility" = "Landsvlag voor %@";
+"dedicated.ip.remove" = "Weet u zeker dat u de geselecteerde regio wilt verwijderen?";
+"dedicated.ip.limit.title" = "Beveilig uw verbindingen op afstand met een speciaal IP-adres uit een land naar keuze. Tijdens uw abonnement is dit IP-adres alleen van u en wordt de overdracht van uw gegevens beschermd met de sterkste encryptie die er is.";
 
 // RECONNECTIONS
-"server.reconnection.please.wait" = "Vent litt …";
-"server.reconnection.still.connection" = "Prøver fortsatt å koble til …";
+"server.reconnection.please.wait" = "Even geduld...";
+"server.reconnection.still.connection" = "Nog steeds bezig met verbinding maken...";
 
 // INAPP MESSAGES
-"inapp.messages.toggle.title" = "Vis tjenestekommunikasjonsmeldinger";
-"inapp.messages.settings.updated" = "Innstillingene ble oppdatert";
+"inapp.messages.toggle.title" = "Service-communicatieberichten weergeven";
+"inapp.messages.settings.updated" = "De instellingen zijn bijgewerkt";
 
 // PIA WIDGET
-"widget.liveActivity.region.title" = "Fylke";
-"widget.liveActivity.selected_protocol.title" = "Protokoll";
+"widget.liveActivity.region.title" = "Regio";
+"widget.liveActivity.selected_protocol.title" = "Protocol";
 
 // Regions Selection(tvOS)
-"regions.filter.all.title" = "Allle";
-"regions.filter.search.title" = "Søk";
-"regions.filter.favorites.title" = "Favoritt(er)";
-"regions.list.all_locations.title" = "Alle servere";
-"regions.list.optimal_location.title" = "Optimal server";
-"regions.list.optimal_location_with_dip_location.title" = "Optimal server / dedikert IP";
-"regions.search.recommended_locations.title" = "Anbefalte servere";
-"regions.search.results.title" = "Søkeresultater";
-"regions.search.button.title" = "Søk etter en server";
-"regions.search.input_field.placeholder" = "Søk etter by eller land";
-"regions.search.previous_results.title" = "Siste søkte servere";
-"regions.context_menu.favorites.add.text" = "Legg til i favoritter";
-"regions.context_menu.favorites.remove.text" = "Fjern fra favoritter";
-"regions.list_item.default.title" = "Standard server";
+"regions.filter.all.title" = "Alle";
+"regions.filter.search.title" = "Zoeken";
+"regions.filter.favorites.title" = "Favoriet(en)";
+"regions.list.all_locations.title" = "Alle Locaties";
+"regions.list.optimal_location.title" = "Optimale Locatie";
+"regions.list.optimal_location_with_dip_location.title" = "Optimale Locatie/Dedicated IP";
+"regions.search.recommended_locations.title" = "Aanbevolen Locaties";
+"regions.search.results.title" = "Zoekresultaten";
+"regions.search.button.title" = "Zoek een locatie";
+"regions.search.input_field.placeholder" = "Zoeken op stad of land";
+"regions.search.previous_results.title" = "Laatst Gezochte Locaties";
+"regions.context_menu.favorites.add.text" = "Toevoegen aan Favorieten";
+"regions.context_menu.favorites.remove.text" = "Verwijderen uit Favorieten";
+"regions.list_item.default.title" = "Standaardlocatie";
 
 // Top Navigation bar
 "top_navigation_bar.vpn_item.title" = "PIA VPN";
-"top_navigation_bar.location_item.title" = "Server";
-"top_navigation_bar.location_selection_screen.title" = "Valg av server";
+"top_navigation_bar.location_item.title" = "Locatie";
+"top_navigation_bar.location_selection_screen.title" = "Locatiekeuze";
 
 //Onboarding - Connection Stats Permisson (tvOS)
-"onboarding.connection_stats.title" = "Hjelp med å forbedre PIA";
-"onboarding.connection_stats.subtitle" = "Hjelp oss med å forbedre oss ved å dele VPN-tilkoblingsstatistikk. Disse rapportene inneholder aldri personlig identifiserbar informasjon.";
+"onboarding.connection_stats.title" = "Help PIA te verbeteren";
+"onboarding.connection_stats.subtitle" = "Help ons te verbeteren door VPN-verbindingsstatistieken te delen. Deze rapporten bevatten nooit persoonlijk identificeerbare informatie.";
 
 //Onboarding - VPN Installing Profile (tvOS)
-"onboarding.vpn_configuration.title" = "Konfigurer PIA";
-"onboarding.vpn_configuration.subtitle" = "Når du kobler til for første gang, vil du bli bedt om å gi PIA tilgang til VPN-konfigurasjoner. Dette er nødvendig for å kryptere trafikken din. \n\nHusk at vi ikke overvåker, filtrerer eller loggfører din nettaktivitet. \n\nFor å fortsette, klikk på knappen nedenfor.";
-"onboarding.vpn_configuration.button" = "Konfigurer PIA";
+"onboarding.vpn_configuration.title" = "PIA configureren";
+"onboarding.vpn_configuration.subtitle" = "Wanneer je voor de eerste keer verbinding maakt, wordt je gevraagd om PIA toegang te geven tot VPN-configuraties. Dit is nodig om je verkeer te versleutelen. \n\nOnthoud dat we je online activiteiten niet controleren, filteren of vastleggen. \n\nKlik op onderstaande knop om verder te gaan.";
+"onboarding.vpn_configuration.button" = "PIA configureren";
 
 //Welcome (tvOS)
-"tvos.welcome.title" = "Raskt og sikkert VPN for strømming";
-"tvos.welcome.button.login" = "Logg inn";
-"tvos.welcome.button.signup" = "Registrer deg";
+"tvos.welcome.title" = "Snelle & veilige VPN voor streamen";
+"tvos.welcome.button.login" = "Inloggen";
+"tvos.welcome.button.signup" = "Aanmelden";
 
 //Login (tvOS)
-"tvos.login.title" = "Skriv inn dine PIA VPN-kontoopplysninger";
-"tvos.login.placeholder.username" = "Skriv inn brukernavn";
-"tvos.login.placeholder.password" = "Skriv inn passord";
+"tvos.login.title" = "Voer de accountgegevens van je PIA VPN in";
+"tvos.login.placeholder.username" = "Gebruikersnaam invoeren";
+"tvos.login.placeholder.password" = "Wachtwoord invoeren";
 
-"tvos.login.qr.title" = "Logg inn med PIA-appen";
-"tvos.login.qr.description" = "Skann QR-koden og bekreft innloggingen fra PIA iOS-appen.";
-"tvos.login.qr.timer" = "Koden utløper om:";
-"tvos.login.qr.options" = "Andre alternativer:";
-"tvos.login.qr.button.login" = "Logg inn med brukernavn";
-"tvos.login.qr.button.login" = "Gjenopprett kjøp";
+"tvos.login.qr.title" = "Log in met de PIA-app";
+"tvos.login.qr.description" = "Scan de QR-code en bevestig de login in de PIA iOS-app.";
+"tvos.login.qr.timer" = "De code verloopt over:";
+"tvos.login.qr.options" = "Andere opties:";
+"tvos.login.qr.button.login" = "Inloggen via gebruikersnaam";
+"tvos.login.qr.button.restore" = "Aankoop herstellen";
 
-"tvos.login.qr.expired.title" = "QR-kode har utløpt";
-"tvos.login.qr.expired.description" = "Generer en ny nedenfor";
-"tvos.login.qr.expired.button.generate" = "Generer QR";
+"tvos.login.qr.expired.title" = "QR-code is verlopen";
+"tvos.login.qr.expired.description" = "Maak hieronder een nieuwe aan";
+"tvos.login.qr.expired.button.generate" = "QR aanmaken";
 
 //Connection error(tvOS)
-"error_alert.connection_error.no_network.title" = "Kan ikke koble til";
-"error_alert.connection_error.no_network.message" = "Sjekk internettforbindelsen din og prøv igjen";
-"error_alert.connection_error.no_network.retry_action.title" = "Prøv igjen";
+"error_alert.connection_error.no_network.title" = "Kan geen verbinding maken";
+"error_alert.connection_error.no_network.message" = "Controleer je internetverbinding en probeer het opnieuw";
+"error_alert.connection_error.no_network.retry_action.title" = "Opnieuw proberen";
 
 //Dashboard screen (tvOS)
-"location_selection.optimal_location.title" = "Optimal server";
-"location_selection.any_other_location.title" = "Valgt server";
-"dashboard.connection_state.connected.title" = "Tilkoblet";
-"dashboard.connection_state.disconnected.title" = "Frakoblet";
-"dashboard.connection_state.connecting.title" = "Kobler til …";
-"dashboard.connection_state.reconnecting.title" = "Kobler til på nytt …";
-"dashboard.connection_state.disconnecting.title" = "Kobler fra …";
-"dashboard.connection_state.error.title" = "Feil ved tilkobling";
-"dashboard.connection_state.network_error_alert.message" = "Sjekk internettforbindelsen din og prøv igjen";
-"dashboard.connection_state.network_error_alert.primary_action.title" = "Prøv igjen";
+"location_selection.optimal_location.title" = "Optimale Locatie";
+"location_selection.any_other_location.title" = "Geselecteerde locatie";
+"dashboard.connection_state.connected.title" = "Verbonden";
+"dashboard.connection_state.disconnected.title" = "Niet verbonden";
+"dashboard.connection_state.connecting.title" = "Verbinden...";
+"dashboard.connection_state.reconnecting.title" = "Opnieuw verbinden...";
+"dashboard.connection_state.disconnecting.title" = "Verbinding verbreken...";
+"dashboard.connection_state.error.title" = "Fout bij verbinding";
+"dashboard.connection_state.network_error_alert.message" = "Controleer je internetverbinding en probeer het opnieuw";
+"dashboard.connection_state.network_error_alert.primary_action.title" = "Opnieuw proberen";
 
 // Settings (tvOS)
-"settings.account.log_out_button.title" = "Logg ut";
-"settings.account.log_out_alert.title" = "Er du sikker?";
-"settings.account.log_out_alert.message" = "Avlogging vil avslutte enhver aktiv VPN-tilkobling og etterlate deg ubeskyttet.";
-"settings.account.subscription_expiry.title" = "Abonnementet utløper den";
+"settings.account.log_out_button.title" = "Uitloggen";
+"settings.account.log_out_alert.title" = "Weet je het zeker?";
+"settings.account.log_out_alert.message" = "Uitloggen beëindigt elke actieve VPN-verbinding waarna je onbeschermd bent.";
+"settings.account.subscription_expiry.title" = "Abonnement verloopt op";
 
 // Dedicated IP
-"settings.dedicatedip.title1" = "Skriv inn dedikert IP";
-"settings.dedicatedip.title2" = "Dedikert IP";
-"settings.dedicatedip.subtitle" = "Aktiver din dedikerte IP ved å skrive inn token i feltet \nnedenfor. Du kan kjøpe en dedikert IP fra \nklientkontrollpanelet ditt på PIA-nettsiden.";
-"settings.dedicatedip.placeholder" = "Skriv inn token for din dedikerte IP";
-"settings.dedicatedip.button" = "Aktiver";
-"settings.dedicatedip.alert.failure.title" = "Noe gikk galt";
-"settings.dedicatedip.alert.failure.message" = "Token er enten ugyldig eller utløpt.";
-"settings.dedicatedip.alert.failure.message.empty" = "Token kan ikke være tom.";
-"settings.dedicatedip.alert.success.title" = "Du er klar";
-"settings.dedicatedip.alert.success.message" = "Din dedikerte IP er nå aktiv.";
-"settings.dedicatedip.alert.success.button" = "Fortsett";
+"settings.dedicatedip.title1" = "Voer dedicated IP in";
+"settings.dedicatedip.title2" = "Dedicated IP";
+"settings.dedicatedip.subtitle" = "Activeer je dedicated IP door je token in te voeren in het veld \nhieronder. Je kunt een dedicated IP kopen via je Client \nControl Panel op de PIA-website.";
+"settings.dedicatedip.placeholder" = "Voer je Dedicated IP-token in";
+"settings.dedicatedip.button" = "Activeren";
+"settings.dedicatedip.alert.failure.title" = "Er ging iets mis";
+"settings.dedicatedip.alert.failure.message" = "Je token is ongeldig of verlopen.";
+"settings.dedicatedip.alert.failure.message.empty" = "Je token kan niet leeg zijn.";
+"settings.dedicatedip.alert.success.title" = "Je bent klaar";
+"settings.dedicatedip.alert.success.message" = "Je Dedicated IP is nu actief.";
+"settings.dedicatedip.alert.success.button" = "Doorgaan";
 
-"settings.dedicatedip.stats.dedicatedip" = "Dedikert IP";
-"settings.dedicatedip.stats.ip" = "IP-adresse";
-"settings.dedicatedip.stats.location" = "Server";
-"settings.dedicatedip.stats.quickAction" = "Rask handling";
-"settings.dedicatedip.stats.delete.button" = "Slett dedikert IP";
-"settings.dedicatedip.stats.delete.alert.title" = "Er du sikker?";
-"settings.dedicatedip.stats.delete.alert.message" = "Du er i ferd med å fjerne din dedikerte IP fra kontoen din.";
-"settings.dedicatedip.stats.delete.alert.delete" = "Ja, slett";
+"settings.dedicatedip.stats.dedicatedip" = "Dedicated IP";
+"settings.dedicatedip.stats.ip" = "IP-adres";
+"settings.dedicatedip.stats.location" = "Locatie";
+"settings.dedicatedip.stats.quickAction" = "Snelle actie";
+"settings.dedicatedip.stats.delete.button" = "Verwijder Dedicated IP";
+"settings.dedicatedip.stats.delete.alert.title" = "Weet je het zeker?";
+"settings.dedicatedip.stats.delete.alert.message" = "Je staat op het punt om je Dedicated IP van je account te verwijderen.";
+"settings.dedicatedip.stats.delete.alert.delete" = "Ja, verwijderen";
 
-"settings.dedicatedip.status.active" = "Aktiv";
-"settings.dedicatedip.status.invalid" = "Ugyldig";
-"settings.dedicatedip.status.expired" = "Utløpt";
-"settings.dedicatedip.status.error" = "Feil";
+"settings.dedicatedip.status.active" = "Actief";
+"settings.dedicatedip.status.invalid" = "Ongeldig";
+"settings.dedicatedip.status.expired" = "Verlopen";
+"settings.dedicatedip.status.error" = "Fout";
 
 // Help menu (tvOS)
-"help_menu.app_version_section.title" = "App-versjon";
-"help_menu.contact_support.qr_code.title" = "Kontakt kundestøtte";
-"help_menu.contact_support.qr_code.message" = "Skann QR-koden for å komme i kontakt med vår kundestøtte.";
+"help_menu.app_version_section.title" = "App versie";
+"help_menu.contact_support.qr_code.title" = "Contact opnemen met support team";
+"help_menu.contact_support.qr_code.message" = "Scan de QR-code om contact op te nemen met ons support team.";
 
-"help_menu.about_options.acknowledgements.title" = "Anerkjennelser";
-"help_menu.about_options.privacy_policy.title" = "REntingslinjer om personvern";
-"help_menu.about_section.privacy_policy.description" = "Denne personvernerklæringen forklarer personvernspraksisen for Private Internet Access, Inc. (samlet vi, oss, datakontroller, selskap eller PIA) og gjelder brukere (bruker(e) eller du) av PIAs tjenester, medregnet blant annet PIA VPN-tjenesten (tjenesten) og PIA på www.privateinternetaccess.com (nettstedet).";
-"help_menu.about_section.privacy_policy.qr_code.message" = "Skann QR-koden for å få tilgang til hele personvernerklæringen på enheten din.";
-"help_menu.help_improve.enabled.title" = "PÅ";
-"help_menu.help_improve.disabled.title" = "AV";
+"help_menu.about_options.acknowledgements.title" = "Erkenningen";
+"help_menu.about_options.privacy_policy.title" = "Privacybeleid";
+
+"help_menu.about_section.privacy_policy.description" = "Dit privacybeleid ('Privacybeleid' of 'Beleid') legt de privacypraktijken uit van Private Internet Access, Inc, (gezamenlijk 'Wij', 'Ons', 'Gegevensbeheerder', 'Bedrijf' of 'PIA') en is van toepassing op gebruikers ('Gebruiker(s)' of 'Jij') van de diensten van PIA, waaronder, onder andere, de PIA VPN-service ('Service') en de PIA-website op www.privateinternetaccess.com ('Website').";
+"help_menu.about_section.privacy_policy.qr_code.message" = "Scan de QR-code om toegang te krijgen tot het volledige privacybeleid op je apparaat.";
+
+"help_menu.help_improve.enabled.title" = "AAN";
+"help_menu.help_improve.disabled.title" = "UIT";
+
+"help_menu.about_section.acknowledgments.copyright.title" = "COPYRIGHT 2014-2024 PRIVATE INTERNET ACCESS INC VPN";
+"help_menu.about_section.acknowledgments.copyright.description" = "Our Software as a Service (SaaS) platform may occasionally include third-party content, services, or integrations to enhance user experience and functionality. This content may include but is not limited to, APIs, widgets, plugins, or links to external websites. While we strive to ensure the quality and reliability of third-party content, we want to emphasize that such content is provided 'as is' and we do not endorse or guarantee the accuracy, reliability, or suitability of any third-party content.\n\nUsers should be aware that accessing or utilizing third-party content may subject them to the terms of use, privacy policies, and other agreements of those third-party providers. We encourage users to review such terms and policies before engaging with third-party content.";
 
 //SignUp (tvOS)
-"tvos.signup.title" = "Skaff deg Private Internet Access";
-"tvos.signup.item1" = "VPN-servere i 91 land";
-"tvos.signup.item2" = "Superhøye hastigheter";
-"tvos.signup.item3" = "Døgnåpen kundestøtte";
-"tvos.signup.cta" = "Skann QR-koden";
+"tvos.signup.title" = "Neem Private Internet Access";
+"tvos.signup.item1" = "VPN-servers in 91 landen";
+"tvos.signup.item2" = "Razendsnelle snelheden";
+"tvos.signup.item3" = "24/7 klantenservice";
+"tvos.signup.cta" = "Scan the QR Code and download the app to create a new account.";
 
 //Sign in expired (tvOS)
-"tvos.signin.expired.title" = "Abonnementet ditt har utløpt";
-"tvos.signin.expired.subtitle" = "Forny og gjenopprett full VPN-beskyttelse mens du strømmer.";
-"tvos.signin.expired.qr.title1" = "Skann QR-koden og velg abonnementet ditt. Å tegne et abonnement tar kun et par minutter.";
-"tvos.signin.expired.qr.title2" = "Når du er ferdig, gå tilbake til Apple TV-en din og få forbedret digitalt personvern med PIA!";
-"tvos.signin.expired.button.renewed" = "Jeg har allerede fornyet";
-"tvos.signin.expired.button.signout" = "Logg ut";
+"tvos.signin.expired.title" = "Je abonnement is verlopen";
+"tvos.signin.expired.subtitle" = "Vernieuw en krijg volledige VPN-bescherming tijdens het streamen.";
+"tvos.signin.expired.qr.title1" = "Scan de QR-code en kies je abonnement. Het inschrijven duurt maar een paar minuten.";
+"tvos.signin.expired.qr.title2" = "Zodra je klaar bent, ga je terug naar je Apple TV en geniet je van verbeterde digitale privacy met PIA!";
+"tvos.signin.expired.button.renewed" = "Ik heb al verlengd";
+"tvos.signin.expired.button.signout" = "Uitloggen";
 
 //Sign in free trial expired (tvOS)
-"tvos.signin.expired.trial.title" = "Din gratis prøveperiode har utløpt";
-"tvos.signin.expired.trial.subtitle" = "Hvis du likte premium VPN-beskyttelse, abonner på PIA!";
+"tvos.signin.expired.trial.title" = "Je gratis proefperiode is verlopen";
+"tvos.signin.expired.trial.subtitle" = "Als je geniet van eersteklas VPN-bescherming, neem dan een abonnement op PIA!";
+
+//SignUp with subscription (tvOS)
+"tvos.signup.subscription.paywall.subtitle" = "Start jouw 7 dagen gratis proefperiode en daarna %@ per jaar.";
+"tvos.signup.subscription.paywall.price.year" = "per jaar";
+"tvos.signup.subscription.paywall.price.trial" = "BESTE WAARDE — GRATIS PROEFPERIODE";
+"tvos.signup.subscription.paywall.price.month.simplified" = "/maand";
+"tvos.signup.subscription.paywall.button.subscribe" = "Nu abonneren";
+
+"tvos.signup.subscription.error.message.generic" = "Er is iets fout gegaan. Probeer het nog eens.";
+"tvos.signup.subscription.error.message.paymentCancelled" = "De betaling is geannuleerd. Probeer het nog eens.";
+
+"tvos.signup.email.error.message.generic" = "We kunnen op dit moment geen account aanmaken. Probeer het later nog eens";
+
+"tvos.signup.credentials.title" = "Gelukt!";
+"tvos.signup.credentials.details.title" = "Afschrijving gelukt";
+"tvos.signup.credentials.details.subtitle" = "Binnenkort ontvang je een e-mail met je gebruikersnaam en wachtwoord.";
+
+"tvos.signup.credentials.details.button" = "Aan de slag";
+
+"tvos.signup.terms_conditions.title" = "Algemene Voorwaarden";
+
+"tvos.signup.terms_conditions.description" = "Deze Gebruiksvoorwaardenovereenkomst ('Overeenkomst') betreft de reikwijdte van je gebruik van en toegang tot de PIA Private Internet Access, Inc. ('PIA') website (\"Site\") op www.privateinternetaccess.com, virtueel privé netwerk ('VPN') en PIA's diensten geleverd via de Site ('Dienst(en)'). Door de Site te bezoeken, een abonnement te kopen en/of de Diensten te gebruiken, erkennen Jij ('Jij' of 'Abonnee') ('PIA' en 'Abonnee' samen 'Partijen' genoemd) dat je de overeenkomst hebt gelezen, de voorwaarden helemaal begrijpt en akkoord gaat met alle bepalingen van de Overeenkomst.";
+"tvos.signup.terms_conditions.qr_code.message" = "Scan de QR-code om de complete Gebruiksvoorwaarden te lezen op je apparaat.";
