@@ -484,7 +484,7 @@
 "tvos.login.qr.timer" = "代码过期时间：";
 "tvos.login.qr.options" = "其他选项：";
 "tvos.login.qr.button.login" = "使用用户名登录";
-"tvos.login.qr.button.login" = "恢复购买";
+"tvos.login.qr.button.restore" = "恢复购买";
 
 "tvos.login.qr.expired.title" = "二维码已过期";
 "tvos.login.qr.expired.description" = "在下方生成新的二维码";
@@ -547,17 +547,22 @@
 
 "help_menu.about_options.acknowledgements.title" = "声明";
 "help_menu.about_options.privacy_policy.title" = "隐私政策";
+
 "help_menu.about_section.privacy_policy.description" = "此隐私政策（也称 “政策”）详细说明了 Private Internet Access, Inc.（也称“我们“”数据控制方“”公司“”PIA“）的隐私处理政策，适用于使用 PIA 服务的用户（也称为”您“）此类服务包括 PIA VPN 服务（也称”服务“），以及 PIA 网站 www.privateinternetaccess.com（也称“网站”）等在内的各项服务。";
 "help_menu.about_section.privacy_policy.qr_code.message" = "扫描二维码，在您的设备上查看完整的《隐私政策》。";
+
 "help_menu.help_improve.enabled.title" = "开启";
 "help_menu.help_improve.disabled.title" = "关闭";
+
+"help_menu.about_section.acknowledgments.copyright.title" = "COPYRIGHT 2014-2024 PRIVATE INTERNET ACCESS INC VPN";
+"help_menu.about_section.acknowledgments.copyright.description" = "Our Software as a Service (SaaS) platform may occasionally include third-party content, services, or integrations to enhance user experience and functionality. This content may include but is not limited to, APIs, widgets, plugins, or links to external websites. While we strive to ensure the quality and reliability of third-party content, we want to emphasize that such content is provided 'as is' and we do not endorse or guarantee the accuracy, reliability, or suitability of any third-party content.\n\nUsers should be aware that accessing or utilizing third-party content may subject them to the terms of use, privacy policies, and other agreements of those third-party providers. We encourage users to review such terms and policies before engaging with third-party content.";
 
 //SignUp (tvOS)
 "tvos.signup.title" = "获取 PIA";
 "tvos.signup.item1" = "遍布 91 个国家的 VPN 服务器";
 "tvos.signup.item2" = "快如闪电的速度";
 "tvos.signup.item3" = "24/7 全天候客户支持";
-"tvos.signup.cta" = "扫描二维码";
+"tvos.signup.cta" = "Scan the QR Code and download the app to create a new account.";
 
 //Sign in expired (tvOS)
 "tvos.signin.expired.title" = "您的订阅已过期";
@@ -570,3 +575,26 @@
 //Sign in free trial expired (tvOS)
 "tvos.signin.expired.trial.title" = "您的免费试用已过期";
 "tvos.signin.expired.trial.subtitle" = "如果您喜欢我们提供的 VPN 保护，请记得订阅 PIA！";
+
+//SignUp with subscription (tvOS)
+"tvos.signup.subscription.paywall.subtitle" = "开始 7 天免费试用，之后每年 %@。";
+"tvos.signup.subscription.paywall.price.year" = "每年";
+"tvos.signup.subscription.paywall.price.trial" = "最佳优惠——免费试用";
+"tvos.signup.subscription.paywall.price.month.simplified" = "/月";
+"tvos.signup.subscription.paywall.button.subscribe" = "立即订阅";
+
+"tvos.signup.subscription.error.message.generic" = "出错了。请再试一次。";
+"tvos.signup.subscription.error.message.paymentCancelled" = "付款已取消。请再试一次。";
+
+"tvos.signup.email.error.message.generic" = "我们现在无法创建帐户。请稍后再试";
+
+"tvos.signup.credentials.title" = "成功！";
+"tvos.signup.credentials.details.title" = "卡片兑换成功";
+"tvos.signup.credentials.details.subtitle" = "您还将很快收到包含您的用户名和密码的一封电子邮件。";
+
+"tvos.signup.credentials.details.button" = "开始";
+
+"tvos.signup.terms_conditions.title" = "条款和条件";
+
+"tvos.signup.terms_conditions.description" = "本《服务条款协议》（“协议”）涵盖您使用和访问网址为 www.privateinternetaccess.com 的 PIA Private Internet access, Inc.（“PIA”）网站（“网站”）、虚拟专用网络（“VPN”）以及通过网站提供的 PIA 服务（“服务”）的范围。访问网站、购买订阅和/或使用服务，即表示您（“您”或“订阅者”）（“PIA”和“订阅者”统称为“双方”）承认您已阅读本协议，完全理解本协议条款，并同意受本协议所有条款的约束。";
+"tvos.signup.terms_conditions.qr_code.message" = "扫描二维码在您的设备上查看完整的条款和条件政策。";

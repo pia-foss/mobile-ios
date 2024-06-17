@@ -287,7 +287,7 @@
 "settings.nmt.optout.disconnect.alerts" = "取消解除連線確認提示";
 "settings.nmt.optout.disconnect.alerts.description" = "解除 VPN 連線時不發出警告提示。";
 "settings.nmt.wireguard.warning" = "您切換至其他網路後，不需重新連接 WireGuard®。但您可能必須將 WireGuard® 與信任網路解除連線 。";
-"settings.service.quality.share.title" = "協助改善 PIA";
+"settings.service.quality.share.title" = "幫助改進 PIA";
 "settings.service.quality.share.description" = "請分享 VPN 連線統計資料，協助我們改善服務。這些報告絕不會包含任何個人識別資訊。";
 "settings.service.quality.share.findoutmore" = "了解詳情";
 "settings.service.quality.show.title" = "連線統計資料";
@@ -484,7 +484,7 @@
 "tvos.login.qr.timer" = "二維碼有效時間：";
 "tvos.login.qr.options" = "其他選項：";
 "tvos.login.qr.button.login" = "採用使用者名稱登入";
-"tvos.login.qr.button.login" = "回復購買項目";
+"tvos.login.qr.button.restore" = "回復購買項目";
 
 "tvos.login.qr.expired.title" = "二維碼已失效";
 "tvos.login.qr.expired.description" = "在下方生成新的二維碼";
@@ -547,17 +547,22 @@
 
 "help_menu.about_options.acknowledgements.title" = "聲明";
 "help_menu.about_options.privacy_policy.title" = "隱私權政策";
+
 "help_menu.about_section.privacy_policy.description" = "本《隱私權政策》（也稱“政策”）說明了Private Internet Access, Inc. (也稱“我們”、“數據控制方”、“公 司”或“PIA”)執行的隱私政策，將應用於使用 PIA 服務的用戶（也稱“您”），這些服務包括 PIA VPN服務（也稱“服務”）和 PIA 網站www.privateinternetaccess.com （也稱“網站”）在內的各項服務。";
 "help_menu.about_section.privacy_policy.qr_code.message" = "掃描二維碼，在您的設備上訪問完整版《隱私權政策》。";
+
 "help_menu.help_improve.enabled.title" = "開啟";
 "help_menu.help_improve.disabled.title" = "關閉";
+
+"help_menu.about_section.acknowledgments.copyright.title" = "COPYRIGHT 2014-2024 PRIVATE INTERNET ACCESS INC VPN";
+"help_menu.about_section.acknowledgments.copyright.description" = "Our Software as a Service (SaaS) platform may occasionally include third-party content, services, or integrations to enhance user experience and functionality. This content may include but is not limited to, APIs, widgets, plugins, or links to external websites. While we strive to ensure the quality and reliability of third-party content, we want to emphasize that such content is provided 'as is' and we do not endorse or guarantee the accuracy, reliability, or suitability of any third-party content.\n\nUsers should be aware that accessing or utilizing third-party content may subject them to the terms of use, privacy policies, and other agreements of those third-party providers. We encourage users to review such terms and policies before engaging with third-party content.";
 
 //SignUp (tvOS)
 "tvos.signup.title" = "獲取 PIA";
 "tvos.signup.item1" = "遍佈 91 個國家的 VPN 服務器";
 "tvos.signup.item2" = "速度快如閃電";
 "tvos.signup.item3" = "24/7 全時段客戶支援";
-"tvos.signup.cta" = "掃描二維碼";
+"tvos.signup.cta" = "Scan the QR Code and download the app to create a new account.";
 
 //Sign in expired (tvOS)
 "tvos.signin.expired.title" = "您的訂閱已過期";
@@ -570,3 +575,26 @@
 //Sign in free trial expired (tvOS)
 "tvos.signin.expired.trial.title" = "您的免費試用已到期";
 "tvos.signin.expired.trial.subtitle" = "如果您喜歡我們的 VPN 保護，請訂閱 PIA！";
+
+//SignUp with subscription (tvOS)
+"tvos.signup.subscription.paywall.subtitle" = "開始 7 天免費試用，之後每年 %@。";
+"tvos.signup.subscription.paywall.price.year" = "每年 ";
+"tvos.signup.subscription.paywall.price.trial" = "最佳優惠——免費試用";
+"tvos.signup.subscription.paywall.price.month.simplified" = "/月";
+"tvos.signup.subscription.paywall.button.subscribe" = "立即訂閱";
+
+"tvos.signup.subscription.error.message.generic" = "發生錯誤。請再試一次。";
+"tvos.signup.subscription.error.message.paymentCancelled" = "付款被取消。請再試一次。";
+
+"tvos.signup.email.error.message.generic" = "我們現在無法建立賬戶。請稍後再試一次";
+
+"tvos.signup.credentials.title" = "成功！";
+"tvos.signup.credentials.details.title" = "卡片兌換成功";
+"tvos.signup.credentials.details.subtitle" = "您還將很快收到附有您的使用者名稱和密碼的電子郵件。";
+
+"tvos.signup.credentials.details.button" = "開始";
+
+"tvos.signup.terms_conditions.title" = "條款及條件";
+
+"tvos.signup.terms_conditions.description" = "本《服務條款合約》（「合約」）涵蓋您使用和訪問網址為 www.privateinternetaccess.com 的 PIA Private Internet Access, Inc.（「PIA」）網站（「網站」）、虛擬私人網络（「VPN」）以及透過網站提供的 PIA 服務（「服務」）的範圍。 訪問網站、購買訂閱和/或使用服務，即表示您（「您」或「訂閱者」）（「PIA」和「訂閱者」統稱為「雙方」）承認您已閱讀本合約，完全理解本合約條款，並同意受本合約所有條款的約束。";
+"tvos.signup.terms_conditions.qr_code.message" = "掃描 QR 代碼，在您的裝置上訪問完整的條款及條件原則。";

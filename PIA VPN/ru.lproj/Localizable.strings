@@ -287,7 +287,7 @@
 "settings.nmt.optout.disconnect.alerts" = "Деактивировать оповещение с подтверждением отключения";
 "settings.nmt.optout.disconnect.alerts.description" = "Выключение оповещения при отключении от VPN.";
 "settings.nmt.wireguard.warning" = "При переключении между различными сетями необходимости в переподключении WireGuard® нет. Может понадобиться вручную отключить VPN в доверенных сетях.";
-"settings.service.quality.share.title" = "Помогать делать PIA лучше";
+"settings.service.quality.share.title" = "Помощь в улучшении PIA";
 "settings.service.quality.share.description" = "Помогите нам стать лучше, передавая статистику по VPN-соединению. Эти отчеты не содержат каких-либо персональных данных.";
 "settings.service.quality.share.findoutmore" = "Подробнее";
 "settings.service.quality.show.title" = "Статистика по соединению";
@@ -484,7 +484,7 @@
 "tvos.login.qr.timer" = "Код станет недействительным через:";
 "tvos.login.qr.options" = "Другие варианты:";
 "tvos.login.qr.button.login" = "Войти с помощью имени пользователя";
-"tvos.login.qr.button.login" = "Продолжить покупку";
+"tvos.login.qr.button.restore" = "Продолжить покупку";
 
 "tvos.login.qr.expired.title" = "Срок действия QR-кода истек";
 "tvos.login.qr.expired.description" = "Сгенерируйте новый ниже";
@@ -547,17 +547,22 @@
 
 "help_menu.about_options.acknowledgements.title" = "Уведомления";
 "help_menu.about_options.privacy_policy.title" = "Политика конфиденциальности";
+
 "help_menu.about_section.privacy_policy.description" = "Данная политика конфиденциальности («Политика конфиденциальности» или «Политика») разъясняет принципы защиты конфиденциальности Private Internet Access, Inc. (далее «Мы», «Нас», «Управляющий данными», «Компания» или PIA) и применяется к пользователям (далее «Пользователь(и)» или «Вы») PIA, включая VPN-сервис PIA (далее «Сервис») и веб-сайт PIA по адресу www.privateinternetaccess.com (далее «Веб-сайт»).";
 "help_menu.about_section.privacy_policy.qr_code.message" = "Отсканируйте QR-код для доступа к политике конфиденциальности на вашем устройстве.";
+
 "help_menu.help_improve.enabled.title" = "ВКЛ";
 "help_menu.help_improve.disabled.title" = "ВЫКЛ";
+
+"help_menu.about_section.acknowledgments.copyright.title" = "COPYRIGHT 2014-2024 PRIVATE INTERNET ACCESS INC VPN";
+"help_menu.about_section.acknowledgments.copyright.description" = "Our Software as a Service (SaaS) platform may occasionally include third-party content, services, or integrations to enhance user experience and functionality. This content may include but is not limited to, APIs, widgets, plugins, or links to external websites. While we strive to ensure the quality and reliability of third-party content, we want to emphasize that such content is provided 'as is' and we do not endorse or guarantee the accuracy, reliability, or suitability of any third-party content.\n\nUsers should be aware that accessing or utilizing third-party content may subject them to the terms of use, privacy policies, and other agreements of those third-party providers. We encourage users to review such terms and policies before engaging with third-party content.";
 
 //SignUp (tvOS)
 "tvos.signup.title" = "Установить Private Internet Access";
 "tvos.signup.item1" = "VPN-серверы в 91 стране";
 "tvos.signup.item2" = "Молниеносная скорость";
 "tvos.signup.item3" = "Служба поддержки 24/7";
-"tvos.signup.cta" = "Сканировать QR-код";
+"tvos.signup.cta" = "Scan the QR Code and download the app to create a new account.";
 
 //Sign in expired (tvOS)
 "tvos.signin.expired.title" = "Срок действия вашей подписки истек";
@@ -570,3 +575,26 @@
 //Sign in free trial expired (tvOS)
 "tvos.signin.expired.trial.title" = "Бесплатный пробный период истек";
 "tvos.signin.expired.trial.subtitle" = "Если вам понравилась наша первоклассная VPN-защита, купите подписку на PIA!";
+
+//SignUp with subscription (tvOS)
+"tvos.signup.subscription.paywall.subtitle" = "Начните 7-дн. пробный период, далее %@ в год.";
+"tvos.signup.subscription.paywall.price.year" = "в год";
+"tvos.signup.subscription.paywall.price.trial" = "ПРОБНЫЙ ПЕРИОД — ВЫГОДНЕЕ ВСЕГО";
+"tvos.signup.subscription.paywall.price.month.simplified" = "/мес.";
+"tvos.signup.subscription.paywall.button.subscribe" = "Оформить подписку";
+
+"tvos.signup.subscription.error.message.generic" = "Что-то пошло не так. Попробуйте еще раз.";
+"tvos.signup.subscription.error.message.paymentCancelled" = "Платеж отменен. Попробуйте еще раз.";
+
+"tvos.signup.email.error.message.generic" = "Не удалось создать учетную запись. Попробуйте еще раз позднее";
+
+"tvos.signup.credentials.title" = "Получилось!";
+"tvos.signup.credentials.details.title" = "Карта успешно использована";
+"tvos.signup.credentials.details.subtitle" = "Вскоре вы получите эл. письмо с именем пользователя и паролем.";
+
+"tvos.signup.credentials.details.button" = "Начать работу";
+
+"tvos.signup.terms_conditions.title" = "Условия использования";
+
+"tvos.signup.terms_conditions.description" = "Настоящее соглашение об условиях использования (далее — «Соглашение») касается использования и доступа к веб-сайту (далее — «Сайт») PIA Private Internet Access, Inc. (PIA), расположенному по адресу www.privateinternetaccess.com, виртуальной частной сети (VPN) и услугам PIA, предоставляемым через сайт (далее — «Услуги»). Посещая Сайт, покупая подписку и/или пользуясь Услугами, Вы (далее — «Вы» или «Подписчик») (PIA и «Подписчик» также известны как «Стороны») подтверждаете, что прочитали Соглашение, полностью понимаете указанные в нем условия и согласны их соблюдать в полной мере.";
+"tvos.signup.terms_conditions.qr_code.message" = "Отсканируйте QR-код, чтобы полностью открыть Условия использования на своем устройстве.";

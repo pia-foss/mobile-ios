@@ -287,7 +287,7 @@
 "settings.nmt.optout.disconnect.alerts" = "연결 해제 확인 알림 거부";
 "settings.nmt.optout.disconnect.alerts.description" = "VPN 연결이 해제될 때 발신되는 경고 알림을 비활성화합니다.";
 "settings.nmt.wireguard.warning" = "다른 네트워크 사이를 전환할 경우 WireGuard®를 다시 연결할 필요가 없습니다. 신뢰할 수 있는 네트워크에서는 VPN의 연결을 직접 해제할 필요가 있을 수 있습니다.";
-"settings.service.quality.share.title" = "PIA 개선 작업 지원하기";
+"settings.service.quality.share.title" = "PIA 개선에 도움을 주세요";
 "settings.service.quality.share.description" = "VPN 연결 통계를 공유하여 저희 서비스를 개선할 수 있도록 도와 주세요. 이 보고서에는 개인 식별 정보가 절대로 포함되지 않습니다.";
 "settings.service.quality.share.findoutmore" = "자세히 보기";
 "settings.service.quality.show.title" = "연결 통계";
@@ -484,7 +484,7 @@
 "tvos.login.qr.timer" = "코드 만료까지 남은 시간:";
 "tvos.login.qr.options" = "기타 옵션:";
 "tvos.login.qr.button.login" = "사용자 이름으로 로그인";
-"tvos.login.qr.button.login" = "구매 복원";
+"tvos.login.qr.button.restore" = "구매 복원";
 
 "tvos.login.qr.expired.title" = "QR 코드가 만료되었습니다";
 "tvos.login.qr.expired.description" = "아래에서 새로운 QR 코드를 생성하세요.";
@@ -547,17 +547,22 @@
 
 "help_menu.about_options.acknowledgements.title" = "사용권 고지";
 "help_menu.about_options.privacy_policy.title" = "개인정보보호정책";
+
 "help_menu.about_section.privacy_policy.description" = "본 개인 정보 보호 정책(이하 '개인정보보호정책' 또는 '정책')은 Private Internet Access, Inc.(총칭하여 '당사는,' '당사를,' '데이터 제어기관,' '회사' 또는 'PIA')의 개인정보 보호 관행을 설명하며 그 중에서도 특히 PIA VPN service(이하 '서비스') 및 PIA 웹사이트인 www.privateinternetaccess.com(이하 '웹사이트')를 포함한 PIA 서비스의 사용자(이하 '사용자' 또는 '귀하')에게 적용됩니다.";
 "help_menu.about_section.privacy_policy.qr_code.message" = "QR 코드를 스캔하여 기기에서 전체 개인 정보 보호 정책을 확인하세요.";
+
 "help_menu.help_improve.enabled.title" = "켜짐";
 "help_menu.help_improve.disabled.title" = "꺼짐";
+
+"help_menu.about_section.acknowledgments.copyright.title" = "COPYRIGHT 2014-2024 PRIVATE INTERNET ACCESS INC VPN";
+"help_menu.about_section.acknowledgments.copyright.description" = "Our Software as a Service (SaaS) platform may occasionally include third-party content, services, or integrations to enhance user experience and functionality. This content may include but is not limited to, APIs, widgets, plugins, or links to external websites. While we strive to ensure the quality and reliability of third-party content, we want to emphasize that such content is provided 'as is' and we do not endorse or guarantee the accuracy, reliability, or suitability of any third-party content.\n\nUsers should be aware that accessing or utilizing third-party content may subject them to the terms of use, privacy policies, and other agreements of those third-party providers. We encourage users to review such terms and policies before engaging with third-party content.";
 
 //SignUp (tvOS)
 "tvos.signup.title" = "Private Internet Access 구독하기";
 "tvos.signup.item1" = "91개국에 위치한 VPN 서버";
 "tvos.signup.item2" = "놀라운 속도";
 "tvos.signup.item3" = "연중무휴 24시간 고객 지원";
-"tvos.signup.cta" = "QR 코드를 스캔하세요";
+"tvos.signup.cta" = "Scan the QR Code and download the app to create a new account.";
 
 //Sign in expired (tvOS)
 "tvos.signin.expired.title" = "구독이 만료되었습니다";
@@ -570,3 +575,26 @@
 //Sign in free trial expired (tvOS)
 "tvos.signin.expired.trial.title" = "무료 체험이 만료되었습니다";
 "tvos.signin.expired.trial.subtitle" = "프리미엄 VPN 보호 기능에 만족하셨다면 PIA를 구독하세요!";
+
+//SignUp with subscription (tvOS)
+"tvos.signup.subscription.paywall.subtitle" = "7일 무료 체험 후 %@/년";
+"tvos.signup.subscription.paywall.price.year" = "/년";
+"tvos.signup.subscription.paywall.price.trial" = "최고 가성비 - 무료 체험";
+"tvos.signup.subscription.paywall.price.month.simplified" = "/월";
+"tvos.signup.subscription.paywall.button.subscribe" = "지금 구독";
+
+"tvos.signup.subscription.error.message.generic" = "문제가 발생했습니다. 다시 시도해 주세요.";
+"tvos.signup.subscription.error.message.paymentCancelled" = "결제가 취소되었습니다. 다시 시도해 주세요.";
+
+"tvos.signup.email.error.message.generic" = "지금은 계정을 생성할 수 없습니다. 나중에 다시 시도해 주세요.";
+
+"tvos.signup.credentials.title" = "성공!";
+"tvos.signup.credentials.details.title" = "카드 사용 성공";
+"tvos.signup.credentials.details.subtitle" = "사용자 이름 및 비밀번호가 담긴 이메일이 곧 전송됩니다.";
+
+"tvos.signup.credentials.details.button" = "사용 시작";
+
+"tvos.signup.terms_conditions.title" = "이용 약관";
+
+"tvos.signup.terms_conditions.description" = "본 서비스 약관('계약')은 www.privateinternetaccess.com에 위치한 PIA Private Internet Access, Inc.('PIA') 웹사이트('사이트'), 가상 사설망('VPN') 및 사이트를 통해 제공되는 PIA의 서비스('서비스')에 대한 귀하의 사용 및 접근 범위를 다룹니다. 귀하('귀하' 또는 '구독자')('PIA' 및 '구독자'를 통칭하여 '당사자')는 사이트를 방문하고 정액제를 구매하고 서비스를 이용함으로써 계약을 읽었으며 약관을 완전히 이해하고 계약의 모든 약관을 준수할 것에 동의하게 됩니다.";
+"tvos.signup.terms_conditions.qr_code.message" = "QR 코드를 스캔하여 기기에서 전체 이용 약관 정책을 확인하세요.";

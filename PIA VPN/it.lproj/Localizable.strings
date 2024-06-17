@@ -287,7 +287,7 @@
 "settings.nmt.optout.disconnect.alerts" = "Non ricevere avviso di conferma disconnessione";
 "settings.nmt.optout.disconnect.alerts.description" = "Disattiva gli avvisi d'emergenza in caso di disconnessione da VPN.";
 "settings.nmt.wireguard.warning" = "WireGuard® non ha bisogno di riconnettersi quando passi da una rete all'altra. Potrebbe essere necessaria la disconnessione manuale del VPN su reti affidabili.";
-"settings.service.quality.share.title" = "Aiuta a migliorare PIA";
+"settings.service.quality.share.title" = "Aiutaci a migliorare PIA";
 "settings.service.quality.share.description" = "Aiutaci a migliorare condividendo le statistiche di connessione al VPN. Questi rapporti non contengono mai informazioni d'identificazione personale.";
 "settings.service.quality.share.findoutmore" = "Scopri di più";
 "settings.service.quality.show.title" = "Statistiche di connessione";
@@ -484,7 +484,7 @@
 "tvos.login.qr.timer" = "Il codice scade tra:";
 "tvos.login.qr.options" = "Altre opzioni:";
 "tvos.login.qr.button.login" = "Accedi tramite nome utente";
-"tvos.login.qr.button.login" = "Ripristina acquisto";
+"tvos.login.qr.button.restore" = "Ripristina acquisto";
 
 "tvos.login.qr.expired.title" = "Il QR Code è scaduto";
 "tvos.login.qr.expired.description" = "Genera uno nuovo qui sotto";
@@ -547,17 +547,22 @@
 
 "help_menu.about_options.acknowledgements.title" = "Riconoscimenti";
 "help_menu.about_options.privacy_policy.title" = "Informativa sulla Privacy";
+
 "help_menu.about_section.privacy_policy.description" = "Questa informativa sulla privacy spiega le pratiche sulla privacy di Private Internet Access, Inc. (collettivamente, \"Noi\", \"Titolare\", \"Azienda\" o \"PIA\") e si applica agli utenti ('Utenti' o 'Tu') dei servizi di PIA, tra cui, tra l'altro, il servizio VPN PIA (\"Servizio\") e il sito web PIA su www. rivateinternetaccess.com (\"Sito Web\").";
 "help_menu.about_section.privacy_policy.qr_code.message" = "Scansiona il QR code per accedere all'informativa sulla privacy completa dal tuo dispositivo.";
+
 "help_menu.help_improve.enabled.title" = "ON";
 "help_menu.help_improve.disabled.title" = "OFF";
+
+"help_menu.about_section.acknowledgments.copyright.title" = "COPYRIGHT 2014-2024 PRIVATE INTERNET ACCESS INC VPN";
+"help_menu.about_section.acknowledgments.copyright.description" = "Our Software as a Service (SaaS) platform may occasionally include third-party content, services, or integrations to enhance user experience and functionality. This content may include but is not limited to, APIs, widgets, plugins, or links to external websites. While we strive to ensure the quality and reliability of third-party content, we want to emphasize that such content is provided 'as is' and we do not endorse or guarantee the accuracy, reliability, or suitability of any third-party content.\n\nUsers should be aware that accessing or utilizing third-party content may subject them to the terms of use, privacy policies, and other agreements of those third-party providers. We encourage users to review such terms and policies before engaging with third-party content.";
 
 //SignUp (tvOS)
 "tvos.signup.title" = "Ottieni Private Internet Access";
 "tvos.signup.item1" = "Server VPN in 91 paesi";
 "tvos.signup.item2" = "Velocità super";
 "tvos.signup.item3" = "Supporto clienti 24/7";
-"tvos.signup.cta" = "Scansiona il QR Code";
+"tvos.signup.cta" = "Scan the QR Code and download the app to create a new account.";
 
 //Sign in expired (tvOS)
 "tvos.signin.expired.title" = "Il tuo abbonamento è scaduto";
@@ -570,3 +575,26 @@
 //Sign in free trial expired (tvOS)
 "tvos.signin.expired.trial.title" = "La tua prova gratuita è scaduta";
 "tvos.signin.expired.trial.subtitle" = "Se ti è piaciuta la protezione VPN premium, abbonati a PIA!";
+
+//SignUp with subscription (tvOS)
+"tvos.signup.subscription.paywall.subtitle" = "Inizia la tua prova gratuita di 7 giorni poi %@ all'anno.";
+"tvos.signup.subscription.paywall.price.year" = "all'anno";
+"tvos.signup.subscription.paywall.price.trial" = "MIGLIOR RAPPORTO QUALITÀ-PREZZO - PROVA GRATUITA";
+"tvos.signup.subscription.paywall.price.month.simplified" = "al mese";
+"tvos.signup.subscription.paywall.button.subscribe" = "Abbonati ora";
+
+"tvos.signup.subscription.error.message.generic" = "Qualcosa è andato storto. Riprova.";
+"tvos.signup.subscription.error.message.paymentCancelled" = "Il pagamento è stato annullato. Riprova.";
+
+"tvos.signup.email.error.message.generic" = "Al momento non è possibile creare un account. Ti preghiamo di riprovare più tardi";
+
+"tvos.signup.credentials.title" = "Operazione andata a buon fine!";
+"tvos.signup.credentials.details.title" = "Carta riscattata con successo";
+"tvos.signup.credentials.details.subtitle" = "A breve riceverai anche un'email con nome utente e password.";
+
+"tvos.signup.credentials.details.button" = "Inizia";
+
+"tvos.signup.terms_conditions.title" = "Termini e condizioni";
+
+"tvos.signup.terms_conditions.description" = "Il presente contratto sui Termini di servizio (\"Contratto\") riguarda l'utilizzo e l'accesso al sito Web (\"Sito\") di PIA Private Internet Access, Inc. (\"PIA\") sotto l'indirizzo www.privateinternetaccess.com, alla rete privata virtuale (\"VPN\") e ai servizi di PIA forniti tramite il Sito (\"Servizi\"). Visitando il Sito, acquistando un abbonamento e/o utilizzando i Servizi, l'Utente (\"Utente\" o \"Abbonato\") (\"PIA\" e \"Abbonato\" collettivamente noti come \"Parti\") conferma di aver letto il Contratto, di averne compreso appieno i termini e di accettare di essere vincolato da tutti i termini del suddetto Contratto.";
+"tvos.signup.terms_conditions.qr_code.message" = "Scansiona il codice QR per accedere al documento completo su termini e condizioni sul tuo dispositivo.";

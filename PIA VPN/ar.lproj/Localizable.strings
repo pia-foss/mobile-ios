@@ -287,7 +287,7 @@
 "settings.nmt.optout.disconnect.alerts" = "إلغاء الاشتراك في تنبيه تأكيد قطع الاتصال";
 "settings.nmt.optout.disconnect.alerts.description" = "يعطّل تنبيه التحذير عند قطع الاتصال بشبكة VPN.";
 "settings.nmt.wireguard.warning" = "لا يحتاج ®WireGuard إلى إعادة الاتصال عند التبديل بين الشبكات المختلفة. قد يكون من الضروري قطع اتصال VPN يدويًا على الشبكات الموثوقة.";
-"settings.service.quality.share.title" = "المساعدة في تحسين PIA";
+"settings.service.quality.share.title" = "ساعدنا في تحسين PIA";
 "settings.service.quality.share.description" = "ساعدنا في التحسين من خلال مشاركة إحصائيات اتصال VPN. لا تحتوي هذه التقارير أبدًا على معلومات محددة للهوية.";
 "settings.service.quality.share.findoutmore" = "معرفة المزيد";
 "settings.service.quality.show.title" = "إحصائيات الاتصال";
@@ -484,7 +484,7 @@
 "tvos.login.qr.timer" = "ستنتهي صلاحية الرمز في:";
 "tvos.login.qr.options" = "الخيارات الأخرى:";
 "tvos.login.qr.button.login" = "تسجيل الدخول عبر اسم المستخدم";
-"tvos.login.qr.button.login" = "استعادة المشتريات";
+"tvos.login.qr.button.restore" = "استعادة المشتريات";
 
 "tvos.login.qr.expired.title" = "انتهت صلاحية رمز QR";
 "tvos.login.qr.expired.description" = "إنشاء رمز QR جديد أدناه";
@@ -547,17 +547,22 @@
 
 "help_menu.about_options.acknowledgements.title" = "إقرارات";
 "help_menu.about_options.privacy_policy.title" = "سياسة الخصوصية";
+
 "help_menu.about_section.privacy_policy.description" = "تشرح سياسة الخصوصية ('سياسة الخصوصية' أو 'السياسة') ممارسات الخصوصية الخاصة بشركة Private Internet Access. (تتم الإشارة للشركة كالآتي: 'نحن' أو 'مسؤول البيانات' أو 'الشركة' أو 'PIA') وتنطبق على المستخدمين ('العملاء' أو 'أنت') لخدمات PIA، بما في ذلك خدمة PIA VPN ('الخدمة') وموقع PIA على شبكة الإنترنت عبر العنوان التالي: www. privateinternetaccess.com ('الموقع').";
 "help_menu.about_section.privacy_policy.qr_code.message" = "امسح رمز QR للاطلاع على سياسة الخصوصية الكاملة في جهازك.";
+
 "help_menu.help_improve.enabled.title" = "نعم";
 "help_menu.help_improve.disabled.title" = "لا";
+
+"help_menu.about_section.acknowledgments.copyright.title" = "جميع الحقوق محفوظة 2014-2024 PRIVATE INTERNET ACCESS INC VPN";
+"help_menu.about_section.acknowledgments.copyright.description" = "منصة البرمجيات بوصفها خدمة (SaaS) قد تتضمن محتوى أو خدمات أو عمليات تكامل تابعة لجهات خارجية بهدف تحسين تجربة المستخدم وسهولة استخدام التطبيق. قد يتضمن هذا المحتوى، على سبيل المثال لا الحصر، واجهات برمجة التطبيقات أو الأدوات أو الإضافات أو الروابط لمواقع خارجية. وبينما نسعى جاهدين لضمان جودة وموثوقية محتوى الجهات الخارجية، نود التأكيد على أن هذا المحتوى يتم تقديمه \"كما هو\" دون تغيير ونحن لا نؤيد أو نضمن دقة أو موثوقية أو ملاءمة أي محتوى تابع لجهة خارجية.\n\nيجب العلم أن الوصول إلى محتوى الجهات الخارجية أو استخدامه قد يُخضع المستخدم لشروط الاستخدام وسياسات الخصوصية والاتفاقيات الأخرى لهذه الجهات الخارجية. نشجع المستخدمين على مراجعة هذه الشروط والسياسات قبل التعامل مع محتوى الجهات الخارجية.";
 
 //SignUp (tvOS)
 "tvos.signup.title" = "احصل على Private Internet Access";
 "tvos.signup.item1" = "خوادم VPN في 91 دولة";
 "tvos.signup.item2" = "سرعات فائقة";
 "tvos.signup.item3" = "خدمة دعم العملاء 24/7";
-"tvos.signup.cta" = "مسح رمز QR";
+"tvos.signup.cta" = "قم بمسح رمز QR وتنزيل التطبيق لإنشاء حساب جديد.";
 
 //Sign in expired (tvOS)
 "tvos.signin.expired.title" = "انتهت صلاحية الاشتراك";
@@ -570,3 +575,26 @@
 //Sign in free trial expired (tvOS)
 "tvos.signin.expired.trial.title" = "انتهت صلاحية التجربة المجانية";
 "tvos.signin.expired.trial.subtitle" = "هل استمتعت بحماية VPN مميزة؟ اشترك الآن في PIA!";
+
+//SignUp with subscription (tvOS)
+"tvos.signup.subscription.paywall.subtitle" = "ابدأ فترة التجربة المجانية لمدة 7 أيام ثم %@ سنويا.";
+"tvos.signup.subscription.paywall.price.year" = "سنويا";
+"tvos.signup.subscription.paywall.price.trial" = "أفضل عرض - فترة تجربة مجانية";
+"tvos.signup.subscription.paywall.price.month.simplified" = "/شهر";
+"tvos.signup.subscription.paywall.button.subscribe" = "اشترك الآن";
+
+"tvos.signup.subscription.error.message.generic" = "حدث خطأ. يرجى المحاولة مرة أخرى.";
+"tvos.signup.subscription.error.message.paymentCancelled" = "تم إلغاء الدفع. يرجى المحاولة مرة أخرى.";
+
+"tvos.signup.email.error.message.generic" = "لم يتم إنشاء حساب. يرجى المحاولة مرة أخرى في وقت لاحق";
+
+"tvos.signup.credentials.title" = "عملية ناجحة!";
+"tvos.signup.credentials.details.title" = "تم تفعيل الكارت بنجاح";
+"tvos.signup.credentials.details.subtitle" = "ستصلك رسالة عبر البريد الإلكتروني تتضمن اسم المستخدم وكلمة المرور.";
+
+"tvos.signup.credentials.details.button" = "ابدأ الآن";
+
+"tvos.signup.terms_conditions.title" = "الشروط والأحكام";
+
+"tvos.signup.terms_conditions.description" = "تغطي اتفاقية شروط الخدمة ('الاتفاقية') نطاق استخدامك ووصولك إلى موقع الويب (\"الموقع\") الخاص بشركة PIA Private Internet Access, Inc. ('PIA') عبر www.privateinternetaccess.com والشبكة الخاصة الافتراضية ( \"VPN\") وخدمات PIA المقدمة في الموقع (\"الخدمة (الخدمات)\"). من خلال زيارة الموقع والاشتراك و/أو استخدام الخدمات، فإنك (\"أنت\" أو \"المشترك\") (\"PIA\" و\"المشترك\" معروفان باسم \"الطرفين\") تقر بأنك قد قرأت الاتفاقية بالكامل وفهمت بنودها وتوافق على الالتزام بجميع الشروط والأحكام.";
+"tvos.signup.terms_conditions.qr_code.message" = "امسح رمز QR للاطلاع على سياسة الشروط والأحكام الكاملة على جهازك.";

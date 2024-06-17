@@ -484,7 +484,7 @@
 "tvos.login.qr.timer" = "Koden udløber om:";
 "tvos.login.qr.options" = "Andre muligheder:";
 "tvos.login.qr.button.login" = "Log på med brugernavn";
-"tvos.login.qr.button.login" = "Gendan køb";
+"tvos.login.qr.button.restore" = "Gendan køb";
 
 "tvos.login.qr.expired.title" = "QR-koden er udløbet";
 "tvos.login.qr.expired.description" = "Generér en ny nedenfor";
@@ -547,17 +547,22 @@
 
 "help_menu.about_options.acknowledgements.title" = "Anerkendelser";
 "help_menu.about_options.privacy_policy.title" = "Fortrolighedspolitik";
+
 "help_menu.about_section.privacy_policy.description" = "Denne privatlivspolitik (\"politikken\") beskriver, hvordan Private Internet Access, Inc. (\"vi\", \"os\" \"dataansvarlig\", \"virksomheden\", \"PIA\") håndterer personlige oplysninger. Politikken gælder for brugere (\"bruger\", \"du\", \"dig\") af PIA's tjenester, herunder bl.a. PIA VPN-tjenesten (\"tjenesten\") og PIA's hjemmeside https://www.privateinternetaccess.com (\"hjemmesiden\").";
 "help_menu.about_section.privacy_policy.qr_code.message" = "Scan QR-koden for at få adgang til den fulde privatlivspolitik på din enhed.";
+
 "help_menu.help_improve.enabled.title" = "TIL";
 "help_menu.help_improve.disabled.title" = "FRA";
+
+"help_menu.about_section.acknowledgments.copyright.title" = "COPYRIGHT 2014-2024 PRIVATE INTERNET ACCESS INC VPN";
+"help_menu.about_section.acknowledgments.copyright.description" = "Our Software as a Service (SaaS) platform may occasionally include third-party content, services, or integrations to enhance user experience and functionality. This content may include but is not limited to, APIs, widgets, plugins, or links to external websites. While we strive to ensure the quality and reliability of third-party content, we want to emphasize that such content is provided 'as is' and we do not endorse or guarantee the accuracy, reliability, or suitability of any third-party content.\n\nUsers should be aware that accessing or utilizing third-party content may subject them to the terms of use, privacy policies, and other agreements of those third-party providers. We encourage users to review such terms and policies before engaging with third-party content.";
 
 //SignUp (tvOS)
 "tvos.signup.title" = "Få Private Internet Access";
 "tvos.signup.item1" = "VPN-servere i 91 lande";
 "tvos.signup.item2" = "Superhurtige hastigheder";
 "tvos.signup.item3" = "Døgnåben kundesupport";
-"tvos.signup.cta" = "Skan QR-koden";
+"tvos.signup.cta" = "Scan the QR Code and download the app to create a new account.";
 
 //Sign in expired (tvOS)
 "tvos.signin.expired.title" = "Dit abonnement er udløbet";
@@ -570,3 +575,26 @@
 //Sign in free trial expired (tvOS)
 "tvos.signin.expired.trial.title" = "Din gratis prøveperiode er udløbet";
 "tvos.signin.expired.trial.subtitle" = "Tilmeld dig PIA, hvis du har nydt vores fantastiske VPN-beskyttelse!";
+
+//SignUp with subscription (tvOS)
+"tvos.signup.subscription.paywall.subtitle" = "Start din gratis prøveperiode på syv dage (derefter %@ om året).";
+"tvos.signup.subscription.paywall.price.year" = "pr. år";
+"tvos.signup.subscription.paywall.price.trial" = "BEDSTE VÆRDI – GRATIS PRØVEPERIODE";
+"tvos.signup.subscription.paywall.price.month.simplified" = "/md.";
+"tvos.signup.subscription.paywall.button.subscribe" = "Abonner nu";
+
+"tvos.signup.subscription.error.message.generic" = "Noget gik galt. Prøv igen.";
+"tvos.signup.subscription.error.message.paymentCancelled" = "Betalingen blev annulleret. Prøv igen.";
+
+"tvos.signup.email.error.message.generic" = "Vi kan ikke oprette en konto på nuværende tidspunkt. Prøv igen senere";
+
+"tvos.signup.credentials.title" = "Gennemført!";
+"tvos.signup.credentials.details.title" = "Kortet blev indløst";
+"tvos.signup.credentials.details.subtitle" = "Du vil også modtage en e-mail om kort tid med dit brugernavn og din adgangskode.";
+
+"tvos.signup.credentials.details.button" = "Kom i gang";
+
+"tvos.signup.terms_conditions.title" = "Vilkår og betingelser";
+
+"tvos.signup.terms_conditions.description" = "Denne serviceaftale (\"aftale\") dækker omfanget af din brug og adgang til hjemmesiden (\"hjemmeside\"), der er placeret på www.privateinternetaccess.com, det virtuelle private netværk (\"VPN\") og tjenesterne, der leveres via hjemmesiden (\"tjenesterne\") fra PIA Private Internet Access, Inc. (\"PIA\"). Ved at besøge hjemmesiden, købe et abonnement og/eller bruge tjenesterne anerkender du (\"du\" eller \"abonnent\") (\"PIA\" og \"abonnent\" samlet kendt som \"parter\"), at du har læst aftalen, forstår vilkårene og accepterer at være bundet af alle vilkårene i aftalen.";
+"tvos.signup.terms_conditions.qr_code.message" = "Scan QR-koden for at få adgang til de fulde vilkår og betingelser på din enhed.";
