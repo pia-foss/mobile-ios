@@ -10,6 +10,7 @@ import Nimble
 
 class DedicatedIPTests: BaseTest {
     override class func spec() {
+        shouldLogIn = true
         super.spec()
         
         describe("dedicated ip tests") {

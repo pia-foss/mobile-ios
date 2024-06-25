@@ -10,6 +10,7 @@ import Nimble
 
 class HelpTests: BaseTest {
     override class func spec() {
+        shouldLogIn = true
         super.spec()
         
         describe("help tests") {

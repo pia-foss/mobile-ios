@@ -11,6 +11,7 @@ import XCTest
 
 class LocationSelectionTests:BaseTest {
     override class func spec() {
+        shouldLogIn = true
         super.spec()
         
         describe("location selection tests") {
