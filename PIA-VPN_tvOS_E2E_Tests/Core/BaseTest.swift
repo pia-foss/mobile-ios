@@ -15,6 +15,8 @@ class BaseTest:QuickSpec {
     static var app: XCUIApplication!
     static let bundle = Bundle(for: BaseTest.self)
     
+    static var shouldLogIn = true
+    
     override class func spec() {
         beforeSuite {
             app = XCUIApplication()
@@ -25,7 +27,7 @@ class BaseTest:QuickSpec {
                 app.acceptVPNConfiguration()
             }
             
-            if(!app.connectButton.exists){
+            if(shouldLogIn && !app.connectButton.exists){
                 app.signinImage.waitForElementToAppear()
                 app.navigateToSignInScreen()
                 app.loginViaUsername(with: CredentialsUtil.credentials(type: .valid))
