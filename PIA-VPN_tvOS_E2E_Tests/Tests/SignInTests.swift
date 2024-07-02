@@ -10,6 +10,7 @@ import Nimble
 
 class SignInTests:BaseTest {
     override class func spec() {
+        shouldLogIn = false 
         super.spec()
         describe("sign in tests"){
             context("account validations"){

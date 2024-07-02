@@ -155,6 +155,8 @@
 		356796912BCE543E008949F7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E7EC043209326E30029811E /* Localizable.strings */; };
 		35950B312ADD2996006F3CD9 /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = 35950B302ADD2996006F3CD9 /* Quick */; };
 		35950B342ADD2EE5006F3CD9 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 35950B332ADD2EE5006F3CD9 /* Nimble */; };
+		35A78AE62C23FC3000C0CE26 /* SignUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A78AE52C23FC3000C0CE26 /* SignUpTests.swift */; };
+		35A78AEC2C2523B100C0CE26 /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A78AEB2C2523B100C0CE26 /* SignUpScreen.swift */; };
 		35C8064C2B1075620078A2C6 /* ServerConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8064B2B1075620078A2C6 /* ServerConnectionTests.swift */; };
 		35DC7A5E2B0B325700502BED /* VPNServerListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DC7A5D2B0B325700502BED /* VPNServerListTests.swift */; };
 		35DC7A602B0B440200502BED /* RegionSelectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DC7A5F2B0B440200502BED /* RegionSelectionScreen.swift */; };
@@ -1247,6 +1249,8 @@
 		3529EF102BB51AD9003FD26F /* DedicatedIPScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DedicatedIPScreen.swift; sourceTree = "<group>"; };
 		3545E97F26AAD60C00B812CC /* ServerSelectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSelectionDelegate.swift; sourceTree = "<group>"; };
 		3545E98126AADB2B00B812CC /* ServerSelectingTileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSelectingTileCell.swift; sourceTree = "<group>"; };
+		35A78AE52C23FC3000C0CE26 /* SignUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTests.swift; sourceTree = "<group>"; };
+		35A78AEB2C2523B100C0CE26 /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
 		35C8064B2B1075620078A2C6 /* ServerConnectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnectionTests.swift; sourceTree = "<group>"; };
 		35DC7A5D2B0B325700502BED /* VPNServerListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNServerListTests.swift; sourceTree = "<group>"; };
 		35DC7A5F2B0B440200502BED /* RegionSelectionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionSelectionScreen.swift; sourceTree = "<group>"; };
@@ -2432,6 +2436,7 @@
 				35DDA95C2B9EA53A00EB17A3 /* LocationSelectionScreen.swift */,
 				3529EF102BB51AD9003FD26F /* DedicatedIPScreen.swift */,
 				35FDFA492BC39B3100D42B33 /* HelpScreen.swift */,
+				35A78AEB2C2523B100C0CE26 /* SignUpScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -2455,6 +2460,7 @@
 				3529EF0C2BB3C977003FD26F /* DedicatedIPTests.swift */,
 				35186D1C2BBCF47300E61E79 /* ConnectionTests.swift */,
 				35FDFA472BC392CC00D42B33 /* HelpTests.swift */,
+				35A78AE52C23FC3000C0CE26 /* SignUpTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -5667,6 +5673,8 @@
 				35DDA95B2B9AF8AA00EB17A3 /* LocationSelectionTests.swift in Sources */,
 				35E8E6682B87178600A3A3DB /* KeyboardNavigator.swift in Sources */,
 				35E8E6812B8C637D00A3A3DB /* SettingsScreen.swift in Sources */,
+				35A78AE62C23FC3000C0CE26 /* SignUpTests.swift in Sources */,
+				35A78AEC2C2523B100C0CE26 /* SignUpScreen.swift in Sources */,
 				35E8E6832B8ED52300A3A3DB /* OnboardingTests.swift in Sources */,
 				35E8E67D2B8C3CBA00A3A3DB /* CredentialsUtil.swift in Sources */,
 				35186D1D2BBCF47300E61E79 /* ConnectionTests.swift in Sources */,

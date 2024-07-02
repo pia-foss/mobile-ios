@@ -9,6 +9,7 @@ import Nimble
 
 class OnboardingTests:BaseTest {
     override class func spec() {
+        shouldLogIn = false 
         super.spec()
         
         describe("onboarding tests") {

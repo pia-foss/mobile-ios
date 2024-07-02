@@ -10,6 +10,7 @@ import Nimble
 
 class ConnectionTests: BaseTest {
     override class func spec() {
+        shouldLogIn = true
         super.spec()
         
         describe("connection tests"){
