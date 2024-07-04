@@ -209,6 +209,32 @@ platform :ios do
       }
     )
 
+    desc "This line is for creating a developer build that can connect to staging env"
+    lane :staging_build do
+  
+      current_branch = git_branch()
+      commit_hash = last_git_commit()
+      short_hash = commit_hash[:abbreviated_commit_hash]
+      archive_path = "PIA_VPN_iOS.#{current_branch}_#{short_hash}"
+      archive_zip_name = "#{archive_path}.zip"
+  
+      build_app(scheme: "PIA VPN dev",
+        export_method: "development",
+        clean: true,
+        configuration: "Debug",
+        build_path: "build/#{archive_path}",
+        output_name: "#{archive_path}.ipa",
+        export_options: {
+          provisioningProfiles: { 
+            "com.privateinternetaccess.ios.PIA-VPN" => "match Development com.privateinternetaccess.ios.PIA-VPN",
+            "com.privateinternetaccess.ios.PIA-VPN.Tunnel" => "match Development com.privateinternetaccess.ios.PIA-VPN.Tunnel",
+            "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel" => "match Development com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel",
+            "com.privateinternetaccess.ios.PIA-VPN.PIAWidget" => "match Development com.privateinternetaccess.ios.PIA-VPN.PIAWidget",
+            "com.privateinternetaccess.ios.PIA-VPN.AdBlocker" => "match Development com.privateinternetaccess.ios.PIA-VPN.AdBlocker"
+          }
+        }
+      )
+
     zip(output_path: archive_zip_name, path: "#{archive_path}.ipa")
     sh "mv ../#{archive_zip_name} ../artifacts/#{archive_zip_name}"
 
