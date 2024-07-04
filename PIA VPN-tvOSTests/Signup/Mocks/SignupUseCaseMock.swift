@@ -10,7 +10,7 @@ import Foundation
 @testable import PIA_VPN_tvOS
 import PIALibrary
 
-class SignupUseCaseMock: SignupUseCaseType {
+class SignupUseCaseMock: PIA_VPN_tvOS.SignupUseCaseType {
     private let result: Result<PIA_VPN_tvOS.UserAccount, Error>
     
     init(result: Result<PIA_VPN_tvOS.UserAccount, Error>) {

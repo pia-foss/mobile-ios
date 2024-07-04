@@ -1,6 +1,5 @@
 name: development_build
 on:
-  pull_request:
   push:
     branches: 
       - master
