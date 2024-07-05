@@ -48,6 +48,9 @@ jobs:
       
     - name: Archive development build
       run: bundle exec fastlane development_build
+  
+    - name: Archive staging development build 
+      run: bundle exec fastlane staging_build
 
     - name: Upload development ipa file
       uses: actions/upload-artifact@v4
