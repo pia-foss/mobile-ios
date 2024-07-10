@@ -7770,8 +7770,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pia-foss/mobile-ios-library.git";
 			requirement = {
-				kind = revision;
-				revision = af6891d59f5b04c17e5482d8c87ac417b6e17ad4;
+				branch = "KM-4542_fix_crash_when_executing_logout";
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
