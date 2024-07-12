@@ -45,6 +45,7 @@ class BootstraperFactory {
     
     private static func loadDataBase() {
         Client.database = Client.Database(group: AppConstants.appGroup)
+        Client.providers.serverProvider = ServerProviderFactory.makeDefaultServerProvider()
     }
     
     private static func setupPreferences() {

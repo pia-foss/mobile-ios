@@ -7771,7 +7771,7 @@
 			repositoryURL = "https://github.com/pia-foss/mobile-ios-library.git";
 			requirement = {
 				kind = revision;
-				revision = e864a59d6d1aa2d820016dcac074bfc070a89aca;
+				revision = 40c1afb5f143bd061e322093a6d11e798739c10c;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

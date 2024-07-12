@@ -33,7 +33,9 @@ class DedicatedIPViewModel: ObservableObject {
         guard let server = getDedicatedIp(),
               let dipIKEv2IP = server.dipIKEv2IP,
               let dipStatusString = server.dipStatusString else {
-            dedicatedIPStats = []
+            Task { @MainActor in
+                dedicatedIPStats = []
+            }
             return
         }
         Task { @MainActor in
@@ -55,8 +57,8 @@ class DedicatedIPViewModel: ObservableObject {
         
         do {
             try await activateDIPToken(token: token)
-            onAppear()
             Task { @MainActor in
+                onAppear()
                 showActivatedDialog = true
             }
         } catch {
