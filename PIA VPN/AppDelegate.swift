@@ -146,7 +146,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 rootViewController.navigationController?.popToRootViewController(animated: false)
                 if let getStartedViewController = self.topViewControllerWithRootViewController(rootViewController: self.window?.rootViewController) as? GetStartedViewController {
                     getStartedViewController.navigateToLoginView()
-                    getStartedViewController.showLoadingAnimation()
+                    getStartedViewController.showExtendedLoadingAnimation()
                     Macros.dispatch(after: .milliseconds(1000)) { //TODO: Improve this, we are giving some time to push the view
                         let token = url.absoluteString[AppConstants.MagicLink.url.count...]
                         Client.providers.accountProvider.login(with: token) { (user, error) in
