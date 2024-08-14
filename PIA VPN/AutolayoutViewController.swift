@@ -267,7 +267,7 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
             data: ExtendedLoadingView.PageData(
                 title: "Loggin in now...",
                 detail: "Please wait a few moments.",
-                image: nil
+                image: UIImage(named: "rocket")
             )
         )
         
