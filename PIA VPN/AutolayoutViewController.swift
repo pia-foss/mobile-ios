@@ -261,6 +261,17 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
         }
     }
     
+    public func showExtendedLoadingAnimation() {
+        containerView = UIView(frame: UIScreen.main.bounds)
+        containerView?.backgroundColor = UIColor.red
+       
+        guard let containerView else { return }
+        
+        if let key = navigationController?.view {
+            key.addSubview(containerView)
+        }
+    }
+    
     @objc public func hideLoadingAnimation() {
         graphLoad?.stop()
         graphLoad?.removeFromSuperview()

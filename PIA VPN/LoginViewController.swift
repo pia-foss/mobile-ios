@@ -270,7 +270,7 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
     private func prepareLogin() {
         log.debug("Logging in...")
         enableInteractions(false)
-        showLoadingAnimation()
+        showExtendedLoadingAnimation()
     }
     
     private func handleLoginResult(user: UserAccount?, error: Error?, loginOption: LoginOption) {
