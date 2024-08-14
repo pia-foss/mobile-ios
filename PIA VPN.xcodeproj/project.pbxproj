@@ -471,6 +471,8 @@
 		82CAB8FE255C115100BB08EF /* MessagesTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82CAB8FC255C115100BB08EF /* MessagesTile.xib */; };
 		82F41376264E8AC20098FF4B /* SettingOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F41375264E8AC20098FF4B /* SettingOptions.swift */; };
 		82F41377264E8AC20098FF4B /* SettingOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F41375264E8AC20098FF4B /* SettingOptions.swift */; };
+		875D0E7F2C6CC61D0032FA33 /* ExtendedLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875D0E7E2C6CC61D0032FA33 /* ExtendedLoadingView.swift */; };
+		875D0E802C6CC75E0032FA33 /* ExtendedLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875D0E7E2C6CC61D0032FA33 /* ExtendedLoadingView.swift */; };
 		AA330F1E2B7A08E400420259 /* IsWireguardMigrationPerformed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA4707A2B737FC100F28590 /* IsWireguardMigrationPerformed.swift */; };
 		AA330F1F2B7A08E800420259 /* SetWireguardMigrationPerformed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA4707C2B737FDD00F28590 /* SetWireguardMigrationPerformed.swift */; };
 		AA330F202B7A08EB00420259 /* PerformWireguardMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA4707E2B73801600F28590 /* PerformWireguardMigration.swift */; };
@@ -1491,6 +1493,7 @@
 		82CAB8FC255C115100BB08EF /* MessagesTile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessagesTile.xib; sourceTree = "<group>"; };
 		82E20B0D24F5666E0065EFE3 /* PIAAccount.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PIAAccount.framework; path = ../account/build/bin/iOS/PIAAccountReleaseFramework/PIAAccount.framework; sourceTree = "<group>"; };
 		82F41375264E8AC20098FF4B /* SettingOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingOptions.swift; sourceTree = "<group>"; };
+		875D0E7E2C6CC61D0032FA33 /* ExtendedLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedLoadingView.swift; sourceTree = "<group>"; };
 		AA52C59E28E5ECD400D025AF /* PIAWidgetVpnDetaislRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIAWidgetVpnDetaislRow.swift; sourceTree = "<group>"; };
 		AAA4707A2B737FC100F28590 /* IsWireguardMigrationPerformed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsWireguardMigrationPerformed.swift; sourceTree = "<group>"; };
 		AAA4707C2B737FDD00F28590 /* SetWireguardMigrationPerformed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetWireguardMigrationPerformed.swift; sourceTree = "<group>"; };
@@ -2374,6 +2377,7 @@
 			isa = PBXGroup;
 			children = (
 				E5217F5C2AEAE01400123442 /* NotificationCategory.swift */,
+				875D0E7E2C6CC61D0032FA33 /* ExtendedLoadingView.swift */,
 				E5217F532AEAD54600123442 /* WalkthroughPageView.swift */,
 				E5217F4A2AEAD29F00123442 /* PurchasePlanCell.swift */,
 				E5217F472AEAD28000123442 /* UIViewLoading.swift */,
@@ -5433,6 +5437,7 @@
 				821674F22678A1BE0028E4FD /* SettingsDelegate.swift in Sources */,
 				E58A45752BAA28D4002A0704 /* ValidateQRLoginUseCase.swift in Sources */,
 				82CAB8B1255B050000BB08EF /* MessagesCommands.swift in Sources */,
+				875D0E802C6CC75E0032FA33 /* ExtendedLoadingView.swift in Sources */,
 				DD4E84582243BD1200929B39 /* DashboardCollectionViewUtil.swift in Sources */,
 				69B82EC12BDA6B97004A12DD /* Foundation+PIA.swift in Sources */,
 				DD74695B217F07AC00B7BD73 /* DNSList.swift in Sources */,
@@ -5500,6 +5505,7 @@
 				E59E8FC52AEA7A81009278F5 /* TermsAndConditionsViewController.swift in Sources */,
 				E59E8FB52AEA7A81009278F5 /* GetStartedViewController.swift in Sources */,
 				E58A45542BA8CDA9002A0704 /* Foundation+Protocols.swift in Sources */,
+				875D0E7F2C6CC61D0032FA33 /* ExtendedLoadingView.swift in Sources */,
 				E59E8F972AEA7A5A009278F5 /* AutolayoutViewController.swift in Sources */,
 				E5217F722AEB055D00123442 /* Client+Storyboard.swift in Sources */,
 				DD9706AB224262E000630220 /* QuickSettingsTileCollectionViewCell.swift in Sources */,

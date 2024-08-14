@@ -23,6 +23,7 @@
 import UIKit
 import Lottie
 import PIALibrary
+
 /// Declares a generic, dismissable modal controller.
 public protocol ModalController: class {
 
@@ -262,8 +263,15 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
     }
     
     public func showExtendedLoadingAnimation() {
-        containerView = UIView(frame: UIScreen.main.bounds)
-        containerView?.backgroundColor = UIColor.red
+        let view = ExtendedLoadingView(
+            data: ExtendedLoadingView.PageData(
+                title: "Loggin in now...",
+                detail: "Please wait a few moments.",
+                image: nil
+            )
+        )
+        
+        containerView = view
        
         guard let containerView else { return }
         
@@ -276,6 +284,10 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
         graphLoad?.stop()
         graphLoad?.removeFromSuperview()
         containerView?.removeFromSuperview()
+        containerView = UIView(frame: UIScreen.main.bounds)
+        containerView?.backgroundColor = Theme.current.palette.appearance == .dark ?
+            UIColor.black.withAlphaComponent(0.72) :
+            UIColor.piaGrey1.withAlphaComponent(0.75)
     }
     
     private func setLoadingConstraints() {

@@ -266,7 +266,6 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         self.status = .error(element: textField)
     }
     
-    
     private func prepareLogin() {
         log.debug("Logging in...")
         enableInteractions(false)
