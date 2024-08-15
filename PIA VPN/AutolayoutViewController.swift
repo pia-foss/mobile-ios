@@ -278,6 +278,8 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
         if let key = navigationController?.view {
             key.addSubview(containerView)
         }
+        
+        UIApplication.shared.isIdleTimerDisabled = true
     }
     
     @objc public func hideLoadingAnimation() {
@@ -288,6 +290,7 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
         containerView?.backgroundColor = Theme.current.palette.appearance == .dark ?
             UIColor.black.withAlphaComponent(0.72) :
             UIColor.piaGrey1.withAlphaComponent(0.75)
+        UIApplication.shared.isIdleTimerDisabled = false
     }
     
     private func setLoadingConstraints() {
