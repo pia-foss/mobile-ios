@@ -230,7 +230,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let accountInformationVerifier = AccountInformationAvailabilityFactory.makeAccountInformationAvailabilityVerifier()
         
         accountInformationVerifier.verifyAccountInformationAvailabity(after: AccountInformationAvailabilityVerifier.defaultDeadlineInSeconds, completion: nil)
-
+        
+        Client.providers.accountProvider.featureFlags({ _ in
+            if Client.configuration.featureFlags.contains("force_update") {
+                NotificationCenter.default.post(name: Notification.Name.__AppDidFetchForceUpdateFeatureFlag, object: nil)
+            }
+        })
     }
 
     private func refreshShortcutItems(in application: UIApplication) {
