@@ -133,6 +133,7 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(connectionVPNStatusDidChange(_:)), name: NSNotification.Name.NEVPNStatusDidChange, object: nil)
         nc.addObserver(self, selector: #selector(handleDidConnectToRFC1918CompliantWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918CompliantWifi, object: nil)
         nc.addObserver(self, selector: #selector(checkConnectToRFC1918VulnerableWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918VulnerableWifi, object: nil)
+        nc.addObserver(self, selector: #selector(presentForceUpdate), name: NSNotification.Name.__AppDidFetchForceUpdateFeatureFlag, object: nil)
         
         self.viewContentHeight = self.viewContentHeightConstraint.constant
     }
@@ -698,6 +699,14 @@ class DashboardViewController: AutolayoutViewController {
         DispatchQueue.main.async {
             self.presentNonCompliantWifiAlert()
             self.showNonCompliantWifiLocalNotification(currentRFC1918VulnerableWifiName: currentRFC1918VulnerableWifiName)
+        }
+    }
+    
+    @objc func presentForceUpdate() {
+        let forceUpdate = ForceUpdateViewController()
+        forceUpdate.modalPresentationStyle = .fullScreen
+        DispatchQueue.main.async { [weak self] in
+            self?.present(forceUpdate, animated: false)
         }
     }
     

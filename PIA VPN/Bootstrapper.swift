@@ -28,7 +28,11 @@ import TunnelKitOpenVPN
 import PIAWireguard
 #endif
 import SwiftyBeaver
+import UIKit
 
+extension NSNotification.Name {
+    public static let __AppDidFetchForceUpdateFeatureFlag = Notification.Name("__AppDidFetchForceUpdateFeatureFlag")
+}
 
 class Bootstrapper {
     
@@ -162,12 +166,13 @@ class Bootstrapper {
             AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags.contains(Client.FeatureFlags.checkDipExpirationRequest)
             AppPreferences.shared.disablesMultiDipTokens = Client.configuration.featureFlags.contains(Client.FeatureFlags.disableMultiDipTokens)
             AppPreferences.shared.showNewInitialScreen = Client.configuration.featureFlags.contains(Client.FeatureFlags.showNewInitialScreen)
-            
+
 
             /// Updates the feature flags values to the ones set on the server only on Release builds.
             /// (like Leak protection feature)
             self.updateFeatureFlagsForReleaseIfNeeded()
             
+            self.checkForceUpdateIfNeeded()
         })
 
         //FORCE THE MIGRATION TO GEN4
@@ -325,5 +330,13 @@ class Bootstrapper {
         Macros.displayStickyNote(withMessage: L10n.Localizable.Global.unreachable,
                                  andImage: Asset.Images.iconWarning.image)
         #endif
+    }
+}
+
+extension Bootstrapper {
+    func checkForceUpdateIfNeeded() {
+        if Client.configuration.featureFlags.contains("force_update") {
+            NotificationCenter.default.post(name: Notification.Name.__AppDidFetchForceUpdateFeatureFlag, object: nil)
+        }
     }
 }

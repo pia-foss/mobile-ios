@@ -83,6 +83,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         #if os(iOS)
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(inAppDidAddUncredited(notification:)), name: .__InAppDidAddUncredited, object: nil)
+        nc.addObserver(self, selector: #selector(presentForceUpdate(notification:)), name: .__AppDidFetchForceUpdateFeatureFlag, object: nil)
         #endif
 
     }
@@ -203,6 +204,14 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         tryRecoverSignupProcess()
     }
     #endif
+    
+    @objc func presentForceUpdate(notification: Notification) {
+        let forceUpdate = ForceUpdateViewController()
+        forceUpdate.modalPresentationStyle = .fullScreen
+        DispatchQueue.main.async { [weak self] in
+            self?.present(forceUpdate, animated: false)
+        }
+    }
     
     // MARK: Size classes
     
