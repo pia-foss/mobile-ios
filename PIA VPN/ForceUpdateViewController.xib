@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ForceUpdateViewController" customModule="PIA_VPN" customModuleProvider="target">
             <connections>
                 <outlet property="descriptionLabel" destination="ecX-Zr-LdC" id="6Bv-B0-uO8"/>
+                <outlet property="disconnectVPNLabel" destination="OvG-OT-WF0" id="NFl-RD-F4x"/>
                 <outlet property="titleLabel" destination="KbD-fS-iw2" id="zVZ-aP-q9i"/>
                 <outlet property="updateButton" destination="HLl-yh-l1E" id="goe-zj-ZRg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -61,6 +63,12 @@
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="Button"/>
                         </button>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tapping “Update Now” will disconnect the VPN." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OvG-OT-WF0">
+                            <rect key="frame" x="28.333333333333343" y="639" width="296.33333333333326" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                            <color key="textColor" name="pia_on_primary"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="HLl-yh-l1E" secondAttribute="trailing" id="d0Y-di-7gB"/>
@@ -86,5 +94,8 @@
     </objects>
     <resources>
         <image name="force_update_shield" width="146" height="138"/>
+        <namedColor name="pia_on_primary">
+            <color red="0.19607843137254902" green="0.21176470588235294" blue="0.25882352941176473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
