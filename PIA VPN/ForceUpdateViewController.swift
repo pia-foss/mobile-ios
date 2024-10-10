@@ -17,13 +17,13 @@ class ForceUpdateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
         styleUpdateButton()
+        titleLabel.text = L10n.Localizable.Forceupdate.Label.title
+        descriptionLabel.text = L10n.Localizable.Forceupdate.Label.subtitle
         
         updateButton.addTarget(self, action: #selector(updateButtonTapped), for: .touchUpInside)
-        updateButton.setTitle("Update Now", for: .normal)
+        updateButton.setTitle(L10n.Localizable.Forceupdate.Button.update, for: .normal)
     }
     
     @objc func updateButtonTapped() {
