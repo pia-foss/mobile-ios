@@ -706,7 +706,20 @@ class DashboardViewController: AutolayoutViewController {
         let forceUpdate = ForceUpdateViewController()
         forceUpdate.modalPresentationStyle = .fullScreen
         DispatchQueue.main.async { [weak self] in
-            self?.present(forceUpdate, animated: false)
+            var isOtherViewPresented = false
+            if let presented = self?.presentedViewController {
+                if !(presented is ForceUpdateViewController) {
+                    isOtherViewPresented = true
+                }
+            }
+            
+            if isOtherViewPresented {
+                self?.dismiss(animated: false, completion: {
+                    self?.present(forceUpdate, animated: false)
+                })
+            } else {
+                self?.present(forceUpdate, animated: false)
+            }
         }
     }
     
