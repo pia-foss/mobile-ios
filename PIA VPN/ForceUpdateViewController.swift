@@ -13,7 +13,7 @@ class ForceUpdateViewController: UIViewController {
     @IBOutlet weak var updateButton: PIAButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    
+    @IBOutlet weak var disconnectVPNLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +24,9 @@ class ForceUpdateViewController: UIViewController {
         
         updateButton.addTarget(self, action: #selector(updateButtonTapped), for: .touchUpInside)
         updateButton.setTitle(L10n.Localizable.Forceupdate.Button.update, for: .normal)
+        
+        disconnectVPNLabel.text = L10n.Localizable.Forceupdate.Label.Vpn.connected
+        disconnectVPNLabel.isHidden = !Client.providers.vpnProvider.isVPNConnected
     }
     
     @objc func updateButtonTapped() {

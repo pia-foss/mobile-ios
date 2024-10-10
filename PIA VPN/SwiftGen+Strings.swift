@@ -374,6 +374,10 @@ internal enum L10n {
         internal static let subtitle = L10n.tr("Localizable", "forceupdate.label.subtitle", fallback: "You’re using an older version of PIA. Update your app now to enjoy an enhanced experience with all the latest features.")
         /// Upgrade Your Experience
         internal static let title = L10n.tr("Localizable", "forceupdate.label.title", fallback: "Upgrade Your Experience")
+        internal enum Vpn {
+          /// Tapping “Update Now” will disconnect the VPN.
+          internal static let connected = L10n.tr("Localizable", "forceupdate.label.vpn.connected", fallback: "Tapping “Update Now” will disconnect the VPN.")
+        }
       }
     }
     internal enum Friend {

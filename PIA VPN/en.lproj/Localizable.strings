@@ -604,3 +604,4 @@
 "forceupdate.label.title" = "Upgrade Your Experience";
 "forceupdate.label.subtitle" = "You’re using an older version of PIA. Update your app now to enjoy an enhanced experience with all the latest features.";
 "forceupdate.button.update" = "Update Now";
+"forceupdate.label.vpn.connected" = "Tapping “Update Now” will disconnect the VPN.";
