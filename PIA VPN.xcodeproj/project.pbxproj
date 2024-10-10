@@ -715,6 +715,10 @@
 		E53627372BE802200064DEDF /* SignupUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53627362BE802200064DEDF /* SignupUseCaseMock.swift */; };
 		E548E1FF2C1238BD001E9874 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = E548E1FE2C1238BD001E9874 /* SnapshotTesting */; };
 		E548E2002C1238CD001E9874 /* WelcomeViewSnapshotTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548E1EC2C123782001E9874 /* WelcomeViewSnapshotTest.swift */; };
+		E55188932CB66BCA00E4C241 /* ForceUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55188912CB66BCA00E4C241 /* ForceUpdateViewController.swift */; };
+		E55188942CB66BCA00E4C241 /* ForceUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E55188922CB66BCA00E4C241 /* ForceUpdateViewController.xib */; };
+		E55188952CB66BCA00E4C241 /* ForceUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55188912CB66BCA00E4C241 /* ForceUpdateViewController.swift */; };
+		E55188962CB66BCA00E4C241 /* ForceUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E55188922CB66BCA00E4C241 /* ForceUpdateViewController.xib */; };
 		E55216342BEF63EA001A287F /* SignupIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55216332BEF63EA001A287F /* SignupIntegrationTests.swift */; };
 		E55216362BF1393C001A287F /* SignupEmailIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55216352BF1393C001A287F /* SignupEmailIntegrationTests.swift */; };
 		E55216382BF14A5B001A287F /* SignupDomainErrorMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55216372BF14A5B001A287F /* SignupDomainErrorMapper.swift */; };
@@ -1685,6 +1689,8 @@
 		E548E1EC2C123782001E9874 /* WelcomeViewSnapshotTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewSnapshotTest.swift; sourceTree = "<group>"; };
 		E548E1F52C1238B5001E9874 /* PIA VPN-tvOS snapshot.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA VPN-tvOS snapshot.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E548E2012C124AA0001E9874 /* PIA VPN-tvOS snapshot.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PIA VPN-tvOS snapshot.xctestplan"; sourceTree = "<group>"; };
+		E55188912CB66BCA00E4C241 /* ForceUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceUpdateViewController.swift; sourceTree = "<group>"; };
+		E55188922CB66BCA00E4C241 /* ForceUpdateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForceUpdateViewController.xib; sourceTree = "<group>"; };
 		E55216332BEF63EA001A287F /* SignupIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupIntegrationTests.swift; sourceTree = "<group>"; };
 		E55216352BF1393C001A287F /* SignupEmailIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupEmailIntegrationTests.swift; sourceTree = "<group>"; };
 		E55216372BF14A5B001A287F /* SignupDomainErrorMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupDomainErrorMapper.swift; sourceTree = "<group>"; };
@@ -2373,6 +2379,7 @@
 		296BBFEE1840066A00944151 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				E55188902CB66B7900E4C241 /* Force update */,
 				E5217F5C2AEAE01400123442 /* NotificationCategory.swift */,
 				E5217F532AEAD54600123442 /* WalkthroughPageView.swift */,
 				E5217F4A2AEAD29F00123442 /* PurchasePlanCell.swift */,
@@ -3565,6 +3572,15 @@
 				E548E1EC2C123782001E9874 /* WelcomeViewSnapshotTest.swift */,
 			);
 			path = "PIA VPNTests snapshot";
+			sourceTree = "<group>";
+		};
+		E55188902CB66B7900E4C241 /* Force update */ = {
+			isa = PBXGroup;
+			children = (
+				E55188912CB66BCA00E4C241 /* ForceUpdateViewController.swift */,
+				E55188922CB66BCA00E4C241 /* ForceUpdateViewController.xib */,
+			);
+			name = "Force update";
 			sourceTree = "<group>";
 		};
 		E55216322BEF63AD001A287F /* Integration */ = {
@@ -5007,6 +5023,7 @@
 				0ED66BD020A9918000333B35 /* staging.endpoint in Resources */,
 				DD76292021ECCD510092DF50 /* UsageTileCollectionViewCell.xib in Resources */,
 				E501CBB72AE97EC800515006 /* Welcome.storyboard in Resources */,
+				E55188962CB66BCA00E4C241 /* ForceUpdateViewController.xib in Resources */,
 				DD6DC5C321B6C27F00F9D538 /* pia-spinner.json in Resources */,
 				0E0715E7201CBB7100D6F666 /* Flags-dev.plist in Resources */,
 				DD1C138A21E60C63004004B3 /* IPTile.xib in Resources */,
@@ -5103,6 +5120,7 @@
 				291C6398183EBC210039EC03 /* Images.xcassets in Resources */,
 				82183D9625014FDC0033023F /* NetworkCollectionViewCell.xib in Resources */,
 				82183D9825014FDC0033023F /* CustomNetworkCollectionViewCell.xib in Resources */,
+				E55188942CB66BCA00E4C241 /* ForceUpdateViewController.xib in Resources */,
 				E501CBF72AE9806800515006 /* Signup.strings in Resources */,
 				0E0786DE1EFA7EAE00F77466 /* Components.plist in Resources */,
 				E501CBB32AE97EBA00515006 /* Signup.storyboard in Resources */,
@@ -5422,6 +5440,7 @@
 				E5C507702B0DEC2400200A6A /* AutolayoutViewController.swift in Sources */,
 				82CAB8F3255C0CD100BB08EF /* MessagesTileCollectionViewCell.swift in Sources */,
 				E5217F462AEACE0200123442 /* NavigationLogoView.swift in Sources */,
+				E55188952CB66BCA00E4C241 /* ForceUpdateViewController.swift in Sources */,
 				E58A45622BA8E373002A0704 /* LoginProvider.swift in Sources */,
 				E59E8FB02AEA7A81009278F5 /* MagicLinkLoginViewController.swift in Sources */,
 				0E3A352D1FD9CDC5000B0F99 /* Theme+App.swift in Sources */,
@@ -5516,6 +5535,7 @@
 				8272C6332657EE4E00D846A8 /* AutomationSettingsViewController.swift in Sources */,
 				E59E8FBB2AEA7A81009278F5 /* GDPRViewController.swift in Sources */,
 				DDF7F755240D35BA00A671C7 /* CustomServerSettingsViewController.swift in Sources */,
+				E55188932CB66BCA00E4C241 /* ForceUpdateViewController.swift in Sources */,
 				0ECF5C082017EBAD0047596C /* ThemeCode.swift in Sources */,
 				3545E98026AAD60C00B812CC /* ServerSelectionDelegate.swift in Sources */,
 				E5217F402AEAC7A900123442 /* Theme+LightPalette.swift in Sources */,

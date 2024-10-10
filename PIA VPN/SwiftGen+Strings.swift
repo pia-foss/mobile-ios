@@ -364,6 +364,18 @@ internal enum L10n {
       /// Renewal
       internal static let title = L10n.tr("Localizable", "expiration.title", fallback: "Renewal")
     }
+    internal enum Forceupdate {
+      internal enum Button {
+        /// Update Now
+        internal static let update = L10n.tr("Localizable", "forceupdate.button.update", fallback: "Update Now")
+      }
+      internal enum Label {
+        /// You’re using an older version of PIA. Update your app now to enjoy an enhanced experience with all the latest features.
+        internal static let subtitle = L10n.tr("Localizable", "forceupdate.label.subtitle", fallback: "You’re using an older version of PIA. Update your app now to enjoy an enhanced experience with all the latest features.")
+        /// Upgrade Your Experience
+        internal static let title = L10n.tr("Localizable", "forceupdate.label.title", fallback: "Upgrade Your Experience")
+      }
+    }
     internal enum Friend {
       internal enum Referrals {
         /// Full name

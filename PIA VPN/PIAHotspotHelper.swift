@@ -71,6 +71,9 @@ class PIAHotspotHelper {
         }
         return NEHotspotHelper.register(options: options,
                                         queue: DispatchQueue.main) { [weak self] (cmd: NEHotspotHelperCommand) in
+            
+            guard !Client.configuration.featureFlags.contains("force_update") else { return }
+            
             if let weakSelf = self {
                 if cmd.commandType == .filterScanList {
                     log.info("filtering ssid list")
