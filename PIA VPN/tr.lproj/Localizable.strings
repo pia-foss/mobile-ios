@@ -598,3 +598,11 @@
 
 "tvos.signup.terms_conditions.description" = "Bu Hizmet Şartları Sözleşmesi (\"Sözleşme\"), www.privateinternetaccess.com adresinde bulunan PIA Private Internet Access, Inc. (\"PIA\") web sitesine (\"Site\"), sanal özel ağa (VPN) ve Site aracılığıyla sağlanan PIA hizmetlerine (\"Hizmet(ler)\") erişiminizi ve kullanımınızı kapsar. Siteyi ziyaret ederek, bir abonelik satın alarak ve/veya Hizmetleri kullanarak, Siz ('Siz' veya 'Abone') ('PIA' ve 'Abone' toplu olarak 'Taraflar' olarak anılır) Sözleşmeyi tamamen okuduğunuzu, şartları anladığınızı ve Sözleşmenin tüm şartlarını onayladığınızı kabul edersiniz.";
 "tvos.signup.terms_conditions.qr_code.message" = "Cihazınızdaki hüküm ve koşullar politikasının tamamına erişmek için QR kodunu tarayın.";
+
+
+//Force update (iOS)
+"forceupdate.label.title" = "Deneyiminizi Artırın";
+"forceupdate.label.subtitle" = "PIA'nın eski bir sürümünü kullanıyorsunuz. En son özelliklerle gelişmiş bir deneyimin keyfini çıkarmak için uygulamanızı hemen güncelleyin.";
+"forceupdate.button.update" = "Hemen Güncelle";
+"forceupdate.label.vpn.connected" = "\"Hemen Güncelle\"ye dokunmak VPN bağlantısını keser.";
+

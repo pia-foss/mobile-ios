@@ -598,3 +598,11 @@
 
 "tvos.signup.terms_conditions.description" = "تغطي اتفاقية شروط الخدمة ('الاتفاقية') نطاق استخدامك ووصولك إلى موقع الويب (\"الموقع\") الخاص بشركة PIA Private Internet Access, Inc. ('PIA') عبر www.privateinternetaccess.com والشبكة الخاصة الافتراضية ( \"VPN\") وخدمات PIA المقدمة في الموقع (\"الخدمة (الخدمات)\"). من خلال زيارة الموقع والاشتراك و/أو استخدام الخدمات، فإنك (\"أنت\" أو \"المشترك\") (\"PIA\" و\"المشترك\" معروفان باسم \"الطرفين\") تقر بأنك قد قرأت الاتفاقية بالكامل وفهمت بنودها وتوافق على الالتزام بجميع الشروط والأحكام.";
 "tvos.signup.terms_conditions.qr_code.message" = "امسح رمز QR للاطلاع على سياسة الشروط والأحكام الكاملة على جهازك.";
+
+
+//Force update (iOS)
+"forceupdate.label.title" = "Upgrade Your Experience";
+"forceupdate.label.subtitle" = "You’re using an older version of PIA. Update your app now to enjoy an enhanced experience with all the latest features.";
+"forceupdate.button.update" = "Update Now";
+"forceupdate.label.vpn.connected" = "Tapping “Update Now” will disconnect the VPN.";
+

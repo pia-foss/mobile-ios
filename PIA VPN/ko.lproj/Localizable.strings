@@ -589,7 +589,7 @@
 "tvos.signup.email.error.message.generic" = "지금은 계정을 생성할 수 없습니다. 나중에 다시 시도해 주세요.";
 
 "tvos.signup.credentials.title" = "성공!";
-"tvos.signup.credentials.details.title" = "카드 사용 성공";
+"tvos.signup.credentials.details.title" = "카드가 성공적으로 사용되었습니다";
 "tvos.signup.credentials.details.subtitle" = "사용자 이름 및 비밀번호가 담긴 이메일이 곧 전송됩니다.";
 
 "tvos.signup.credentials.details.button" = "사용 시작";
@@ -598,3 +598,11 @@
 
 "tvos.signup.terms_conditions.description" = "본 서비스 약관('계약')은 www.privateinternetaccess.com에 위치한 PIA Private Internet Access, Inc.('PIA') 웹사이트('사이트'), 가상 사설망('VPN') 및 사이트를 통해 제공되는 PIA의 서비스('서비스')에 대한 귀하의 사용 및 접근 범위를 다룹니다. 귀하('귀하' 또는 '구독자')('PIA' 및 '구독자'를 통칭하여 '당사자')는 사이트를 방문하고 정액제를 구매하고 서비스를 이용함으로써 계약을 읽었으며 약관을 완전히 이해하고 계약의 모든 약관을 준수할 것에 동의하게 됩니다.";
 "tvos.signup.terms_conditions.qr_code.message" = "QR 코드를 스캔하여 기기에서 전체 이용 약관 정책을 확인하세요.";
+
+
+//Force update (iOS)
+"forceupdate.label.title" = "사용자 경험 업그레이드";
+"forceupdate.label.subtitle" = "고객님은 이전 버전의 PIA를 사용 중입니다. 지금 앱을 업데이트하여 모든 최신 기능을 통해 향상된 경험을 즐기세요.";
+"forceupdate.button.update" = "지금 업데이트";
+"forceupdate.label.vpn.connected" = "“지금 업데이트”를 탭하면 VPN 연결이 해제됩니다.";
+
