@@ -598,3 +598,11 @@
 
 "tvos.signup.terms_conditions.description" = "Denne serviceaftale (\"aftale\") dækker omfanget af din brug og adgang til hjemmesiden (\"hjemmeside\"), der er placeret på www.privateinternetaccess.com, det virtuelle private netværk (\"VPN\") og tjenesterne, der leveres via hjemmesiden (\"tjenesterne\") fra PIA Private Internet Access, Inc. (\"PIA\"). Ved at besøge hjemmesiden, købe et abonnement og/eller bruge tjenesterne anerkender du (\"du\" eller \"abonnent\") (\"PIA\" og \"abonnent\" samlet kendt som \"parter\"), at du har læst aftalen, forstår vilkårene og accepterer at være bundet af alle vilkårene i aftalen.";
 "tvos.signup.terms_conditions.qr_code.message" = "Scan QR-koden for at få adgang til de fulde vilkår og betingelser på din enhed.";
+
+
+//Force update (iOS)
+"forceupdate.label.title" = "Opgrader din oplevelse";
+"forceupdate.label.subtitle" = "Du bruger en ældre version af PIA. Opdater din app nu for at få en forbedret oplevelse med alle de nyeste funktioner.";
+"forceupdate.button.update" = "Opdater nu";
+"forceupdate.label.vpn.connected" = "Hvis vælger “Opdater nu”, afbrydes din VPN.";
+

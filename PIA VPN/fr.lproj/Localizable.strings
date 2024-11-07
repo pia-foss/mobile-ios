@@ -598,3 +598,11 @@
 
 "tvos.signup.terms_conditions.description" = "Les présentes conditions générales d'utilisation (les conditions générales) régissent l'utilisation et l'accès au site web (site) de PIA Private Internet Access, Inc. (PIA) à l'adresse www.privateinternetaccess.com, au réseau privé virtuel (VPN) et aux services de PIA fournis par le biais du site (le(s) service(s)). En visitant le site, en souscrivant un abonnement et/ou en utilisant les services, vous (vous, abonné) (PIA et l'abonné sont les parties) reconnaissez que vous avez lu le contrat, que vous en comprenez parfaitement les dispositions et que vous acceptez de vous conformer à l'ensemble des conditions générales.";
 "tvos.signup.terms_conditions.qr_code.message" = "Scannez le QR code pour accéder aux conditions générales sur votre appareil.";
+
+
+//Force update (iOS)
+"forceupdate.label.title" = "Améliorez votre expérience";
+"forceupdate.label.subtitle" = "Vous utilisez une ancienne version de PIA. Mettez votre application à jour maintenant pour bénéficier d'une meilleure expérience avec toutes les nouvelles fonctionnalités.";
+"forceupdate.button.update" = "Mise à jour";
+"forceupdate.label.vpn.connected" = "Le VPN se déconnectera lorsque vous appuierez sur “Mise à jour”.";
+

@@ -599,3 +599,11 @@
 
 "tvos.signup.terms_conditions.description" = "この利用規約（以下「本規約」）は、www.privateinternetaccess.com にあるPIA Private Internet Access, Inc.（以下「PIA」）のウェブサイト（以下「本サイト」）、仮想プライベートネットワーク（以下「VPN」）、および本サイトを通じて提供されるPIAのサービス（以下「本サービス」）の利用およびアクセスの範囲について定めるものです。利用者（「利用者」または「契約者」）（「PIA」および「契約者」を総称して「両当事者」）は、本サイトにアクセスし、サブスクリプションを購入し、および/または本サービスを利用することにより、本規約を読み、本規約の条項を完全に理解し、本規約のすべての条項に従うことに同意したものとみなされます。";
 "tvos.signup.terms_conditions.qr_code.message" = "QRコードをスキャンすると、お使いのデバイスで利用規約の全文にアクセスできます。";
+
+
+//Force update (iOS)
+"forceupdate.label.title" = "体験をアップグレードしよう";
+"forceupdate.label.subtitle" = "現在お使いのPIAは旧バージョンです。今すぐアプリをアップデートして、最新機能でより素晴らしい体験をお楽しみください。";
+"forceupdate.button.update" = "今すぐアップデート";
+"forceupdate.label.vpn.connected" = "「今すぐアップデート」をタップするとVPNが切断します。";
+

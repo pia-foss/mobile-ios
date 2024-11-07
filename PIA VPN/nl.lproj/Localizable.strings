@@ -287,7 +287,7 @@
 "settings.nmt.optout.disconnect.alerts" = "Bevestigingsmelding voor verbreken verbinding uitschakelen";
 "settings.nmt.optout.disconnect.alerts.description" = "Schakelt de melding bij het verbreken van de verbinding met de VPN uit.";
 "settings.nmt.wireguard.warning" = "WireGuard® hoeft niet opnieuw verbinding te maken als u tussen verschillende netwerken schakelt. Het kan noodzakelijk zijn om de verbinding met de VPN op vertrouwde netwerken te verbreken.";
-"settings.service.quality.share.title" = "PIA helpen verbeteren";
+"settings.service.quality.share.title" = "Help PIA te verbeteren";
 "settings.service.quality.share.description" = "Help ons onze service te verbeteren door VPN-verbindingsgegevens met ons te delen. Deze rapporten bevatten geen persoonlijk identificeerbare informatie.";
 "settings.service.quality.share.findoutmore" = "Meer informatie";
 "settings.service.quality.show.title" = "Verbindingsgegevens";
@@ -484,7 +484,7 @@
 "tvos.login.qr.timer" = "De code verloopt over:";
 "tvos.login.qr.options" = "Andere opties:";
 "tvos.login.qr.button.login" = "Inloggen via gebruikersnaam";
-"tvos.login.qr.button.login" = "Aankoop herstellen";
+"tvos.login.qr.button.restore" = "Aankoop herstellen";
 
 "tvos.login.qr.expired.title" = "QR-code is verlopen";
 "tvos.login.qr.expired.description" = "Maak hieronder een nieuwe aan";
@@ -509,13 +509,13 @@
 
 // Settings (tvOS)
 "settings.account.log_out_button.title" = "Uitloggen";
-"settings.account.log_out_alert.title" = "Weet u het zeker?";
+"settings.account.log_out_alert.title" = "Weet je het zeker?";
 "settings.account.log_out_alert.message" = "Uitloggen beëindigt elke actieve VPN-verbinding waarna je onbeschermd bent.";
 "settings.account.subscription_expiry.title" = "Abonnement verloopt op";
 
 // Dedicated IP
 "settings.dedicatedip.title1" = "Voer dedicated IP in";
-"settings.dedicatedip.title2" = "Toegewijde IP";
+"settings.dedicatedip.title2" = "Dedicated IP";
 "settings.dedicatedip.subtitle" = "Activeer je dedicated IP door je token in te voeren in het veld \nhieronder. Je kunt een dedicated IP kopen via je Client \nControl Panel op de PIA-website.";
 "settings.dedicatedip.placeholder" = "Voer je Dedicated IP-token in";
 "settings.dedicatedip.button" = "Activeren";
@@ -526,12 +526,12 @@
 "settings.dedicatedip.alert.success.message" = "Je Dedicated IP is nu actief.";
 "settings.dedicatedip.alert.success.button" = "Doorgaan";
 
-"settings.dedicatedip.stats.dedicatedip" = "Toegewijde IP";
+"settings.dedicatedip.stats.dedicatedip" = "Dedicated IP";
 "settings.dedicatedip.stats.ip" = "IP-adres";
 "settings.dedicatedip.stats.location" = "Locatie";
 "settings.dedicatedip.stats.quickAction" = "Snelle actie";
 "settings.dedicatedip.stats.delete.button" = "Verwijder Dedicated IP";
-"settings.dedicatedip.stats.delete.alert.title" = "Weet u het zeker?";
+"settings.dedicatedip.stats.delete.alert.title" = "Weet je het zeker?";
 "settings.dedicatedip.stats.delete.alert.message" = "Je staat op het punt om je Dedicated IP van je account te verwijderen.";
 "settings.dedicatedip.stats.delete.alert.delete" = "Ja, verwijderen";
 
@@ -547,17 +547,22 @@
 
 "help_menu.about_options.acknowledgements.title" = "Erkenningen";
 "help_menu.about_options.privacy_policy.title" = "Privacybeleid";
+
 "help_menu.about_section.privacy_policy.description" = "Dit privacybeleid ('Privacybeleid' of 'Beleid') legt de privacypraktijken uit van Private Internet Access, Inc, (gezamenlijk 'Wij', 'Ons', 'Gegevensbeheerder', 'Bedrijf' of 'PIA') en is van toepassing op gebruikers ('Gebruiker(s)' of 'Jij') van de diensten van PIA, waaronder, onder andere, de PIA VPN-service ('Service') en de PIA-website op www.privateinternetaccess.com ('Website').";
 "help_menu.about_section.privacy_policy.qr_code.message" = "Scan de QR-code om toegang te krijgen tot het volledige privacybeleid op je apparaat.";
+
 "help_menu.help_improve.enabled.title" = "AAN";
 "help_menu.help_improve.disabled.title" = "UIT";
+
+"help_menu.about_section.acknowledgments.copyright.title" = "COPYRIGHT 2014-2024 PRIVATE INTERNET ACCESS INC VPN";
+"help_menu.about_section.acknowledgments.copyright.description" = "Our Software as a Service (SaaS) platform may occasionally include third-party content, services, or integrations to enhance user experience and functionality. This content may include but is not limited to, APIs, widgets, plugins, or links to external websites. While we strive to ensure the quality and reliability of third-party content, we want to emphasize that such content is provided 'as is' and we do not endorse or guarantee the accuracy, reliability, or suitability of any third-party content.\n\nUsers should be aware that accessing or utilizing third-party content may subject them to the terms of use, privacy policies, and other agreements of those third-party providers. We encourage users to review such terms and policies before engaging with third-party content.";
 
 //SignUp (tvOS)
 "tvos.signup.title" = "Neem Private Internet Access";
 "tvos.signup.item1" = "VPN-servers in 91 landen";
 "tvos.signup.item2" = "Razendsnelle snelheden";
 "tvos.signup.item3" = "24/7 klantenservice";
-"tvos.signup.cta" = "Scan de QR-code";
+"tvos.signup.cta" = "Scan the QR Code and download the app to create a new account.";
 
 //Sign in expired (tvOS)
 "tvos.signin.expired.title" = "Je abonnement is verlopen";
@@ -570,3 +575,34 @@
 //Sign in free trial expired (tvOS)
 "tvos.signin.expired.trial.title" = "Je gratis proefperiode is verlopen";
 "tvos.signin.expired.trial.subtitle" = "Als je geniet van eersteklas VPN-bescherming, neem dan een abonnement op PIA!";
+
+//SignUp with subscription (tvOS)
+"tvos.signup.subscription.paywall.subtitle" = "Start jouw 7 dagen gratis proefperiode en daarna %@ per jaar.";
+"tvos.signup.subscription.paywall.price.year" = "per jaar";
+"tvos.signup.subscription.paywall.price.trial" = "BESTE WAARDE — GRATIS PROEFPERIODE";
+"tvos.signup.subscription.paywall.price.month.simplified" = "/maand";
+"tvos.signup.subscription.paywall.button.subscribe" = "Nu abonneren";
+
+"tvos.signup.subscription.error.message.generic" = "Er is iets fout gegaan. Probeer het nog eens.";
+"tvos.signup.subscription.error.message.paymentCancelled" = "De betaling is geannuleerd. Probeer het nog eens.";
+
+"tvos.signup.email.error.message.generic" = "We kunnen op dit moment geen account aanmaken. Probeer het later nog eens";
+
+"tvos.signup.credentials.title" = "Gelukt!";
+"tvos.signup.credentials.details.title" = "Afschrijving gelukt";
+"tvos.signup.credentials.details.subtitle" = "Binnenkort ontvang je een e-mail met je gebruikersnaam en wachtwoord.";
+
+"tvos.signup.credentials.details.button" = "Aan de slag";
+
+"tvos.signup.terms_conditions.title" = "Algemene Voorwaarden";
+
+"tvos.signup.terms_conditions.description" = "Deze Gebruiksvoorwaardenovereenkomst ('Overeenkomst') betreft de reikwijdte van je gebruik van en toegang tot de PIA Private Internet Access, Inc. ('PIA') website (\"Site\") op www.privateinternetaccess.com, virtueel privé netwerk ('VPN') en PIA's diensten geleverd via de Site ('Dienst(en)'). Door de Site te bezoeken, een abonnement te kopen en/of de Diensten te gebruiken, erkennen Jij ('Jij' of 'Abonnee') ('PIA' en 'Abonnee' samen 'Partijen' genoemd) dat je de overeenkomst hebt gelezen, de voorwaarden helemaal begrijpt en akkoord gaat met alle bepalingen van de Overeenkomst.";
+"tvos.signup.terms_conditions.qr_code.message" = "Scan de QR-code om de complete Gebruiksvoorwaarden te lezen op je apparaat.";
+
+
+//Force update (iOS)
+"forceupdate.label.title" = "Verbeter je ervaring";
+"forceupdate.label.subtitle" = "Je gebruikt een oudere versie van PIA. Werk je app nu bij om te profiteren van een verbeterde ervaring met alle nieuwste functies.";
+"forceupdate.button.update" = "Nu bijwerken";
+"forceupdate.label.vpn.connected" = "Tik op \"Nu updaten\" om de verbinding met de VPN te verbreken.";
+

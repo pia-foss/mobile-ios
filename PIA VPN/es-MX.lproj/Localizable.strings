@@ -598,3 +598,11 @@
 
 "tvos.signup.terms_conditions.description" = "Este Acuerdo de Términos de Servicio (\"Contrato\") cubre el alcance de tu uso y acceso al sitio web (“Sitio”) Private Internet Access Inc. de PIA. (\"PIA\") ubicado en www.privateinternetaccess.com, la red privada virtual ('VPN'), y los servicios de PIA ofrecidos a través del Sitio (\"Servicio(s)\"). Al visitar el Sitio, comprar una suscripción y/o utilizar los Servicios, tú (\"Tú\" o el \"Suscriptor\") (\"PIA\" y el \"Suscriptor\" colectivamente conocidos como las \"Partes\") reconocen que han leído el acuerdo, entienden perfectamente los términos y aceptan remitirse a todos los términos del acuerdo.";
 "tvos.signup.terms_conditions.qr_code.message" = "Escanea el código QR para acceder a la Política de Privacidad completa en tu dispositivo.";
+
+
+//Force update (iOS)
+"forceupdate.label.title" = "Mejora tu experiencia";
+"forceupdate.label.subtitle" = "Estás usando una versión anterior de PIA. Actualiza tu aplicación ahora para disfrutar de una experiencia mejorada con las últimas características.";
+"forceupdate.button.update" = "Actualizar ahora";
+"forceupdate.label.vpn.connected" = "Tocar \"Actualizar ahora\" desconectará la VPN.";
+
