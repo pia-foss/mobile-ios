@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   build:
-    runs-on: macos-14
+    runs-on: macos-15
     env:
       CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
       KEYCHAIN_NAME: ${{ secrets.KEYCHAIN_NAME }}
@@ -30,12 +30,12 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Select XCode version
-      run: sudo xcode-select -s /Applications/Xcode_15.0.1.app
+      run: sudo xcode-select -s /Applications/Xcode_16.2.0.app
     
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.0.2
+        ruby-version: 3.3.5
 
     - name: Install Fastlane
       run: gem install fastlane
