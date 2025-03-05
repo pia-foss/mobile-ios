@@ -18,19 +18,23 @@ final class LoginQRProviderTests: XCTestCase {
         let domainMapper = LoginQRCodeDomainMapper()
         let errorMapper = LoginQRErrorMapper()
         var generateQRLoginUseCaseMock: GenerateQRLoginUseCaseMock!
+        var accountProviderMock: AccountProviderMock!
     }
     
     var fixture: Fixture!
     var sut: LoginQRProvider!
     
-    func instantiateSut(result: Result<Data, ClientError>) {
+    func instantiateSut(result: Result<Data, ClientError>, apiToken: String? = nil, accountProviderErrorResult: Error? = nil) {
         fixture.httpClientMock = HTTPClientMock(result: result)
         fixture.generateQRLoginUseCaseMock = GenerateQRLoginUseCaseMock(result: result)
+        fixture.accountProviderMock = AccountProviderMock(userResult: nil, errorResult: accountProviderErrorResult)
+        fixture.accountProviderMock.apiToken = apiToken
         sut = LoginQRProvider(httpClient: fixture.httpClientMock,
                               urlRequestMaker: fixture.urlRequestMaker,
                               domainMapper: fixture.domainMapper,
                               errorMapper: fixture.errorMapper,
-                              generateQRLogin: fixture.generateQRLoginUseCaseMock)
+                              generateQRLogin: fixture.generateQRLoginUseCaseMock,
+                              accountProvider: fixture.accountProviderMock)
     }
     
     override func setUp() {
@@ -130,21 +134,19 @@ final class LoginQRProviderTests: XCTestCase {
         }
         """.data(using: .utf8)!
         
-        instantiateSut(result: .success(data))
-        var capturedUserToken: UserToken?
+        instantiateSut(result: .success(data), apiToken: "apiToken")
+        var capturedApiToken: String?
         let loginQRCode = LoginQRCode(token: "dasdqe", expiresAt: Date.makeISO8601Date(string: "2024-05-28T00:00:00Z")!)
         
         // WHEN
         do {
-            capturedUserToken = try await sut.validateLoginQRCodeToken(loginQRCode)
+            capturedApiToken = try await sut.validateLoginQRCodeToken(loginQRCode)
         } catch {
             XCTFail("Expected success, got error \(error)")
         }
         
         // THEN
-        XCTAssertEqual(capturedUserToken?.token, "29fa8b5ff37b7928357")
-        XCTAssertEqual(capturedUserToken?.expiresAt, Date.makeISO8601Date(string: "2024-05-28T00:00:00Z"))
-        XCTAssertEqual(capturedUserToken?.userId, "781187")
+        XCTAssertEqual(capturedApiToken, "apiToken")
     }
     
     func test_validateLoginQRCodeToken_succeeds_when_httpclient_returns_an_invalid_json() async throws {
@@ -161,12 +163,12 @@ final class LoginQRProviderTests: XCTestCase {
         instantiateSut(result: .success(data))
         
         let loginQRCode = LoginQRCode(token: "dasdqe", expiresAt: Date.makeISO8601Date(string: "2023-05-28T00:00:00Z")!)
-        var capturedUserToken: UserToken?
+        var capturedApiToken: String?
         var capturedError: Error?
         
         // WHEN
         do {
-            capturedUserToken = try await sut.validateLoginQRCodeToken(loginQRCode)
+            capturedApiToken = try await sut.validateLoginQRCodeToken(loginQRCode)
             XCTFail("Expected error, got success")
         } catch {
             capturedError = error
@@ -174,7 +176,7 @@ final class LoginQRProviderTests: XCTestCase {
         
         // THEN
         let error = try XCTUnwrap(capturedError as? LoginQRCodeError)
-        XCTAssertNil(capturedUserToken)
+        XCTAssertNil(capturedApiToken)
         XCTAssertEqual(error, LoginQRCodeError.expired)
     }
     
@@ -183,12 +185,12 @@ final class LoginQRProviderTests: XCTestCase {
         instantiateSut(result: .failure(ClientError.malformedResponseData))
         
         let loginQRCode = LoginQRCode(token: "dasdqe", expiresAt: Date.makeISO8601Date(string: "2023-05-28T00:00:00Z")!)
-        var capturedUserToken: UserToken?
+        var capturedApiToken: String?
         var capturedError: Error?
         
         // WHEN
         do {
-            capturedUserToken = try await sut.validateLoginQRCodeToken(loginQRCode)
+            capturedApiToken = try await sut.validateLoginQRCodeToken(loginQRCode)
             XCTFail("Expected error, got success")
         } catch {
             capturedError = error
@@ -196,7 +198,7 @@ final class LoginQRProviderTests: XCTestCase {
         
         // THEN
         let error = try XCTUnwrap(capturedError as? LoginQRCodeError)
-        XCTAssertNil(capturedUserToken)
+        XCTAssertNil(capturedApiToken)
         XCTAssertEqual(error, LoginQRCodeError.expired)
     }
 }

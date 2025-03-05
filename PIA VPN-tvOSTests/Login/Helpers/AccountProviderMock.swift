@@ -70,6 +70,10 @@ class AccountProviderMock: AccountProvider {
     func loginUsingMagicLink(withEmail email: String, _ callback: PIALibrary.SuccessLibraryCallback?) {}
     func listRenewablePlans(_ callback: PIALibrary.LibraryCallback<[PIALibrary.Plan]>?) {}
     func renew(with request: PIALibrary.RenewRequest, _ callback: PIALibrary.LibraryCallback<PIALibrary.UserAccount>?) {}
+    
+    func validateLoginQR(with qrToken: String, _ callback: ((String?, (any Error)?) -> Void)?) {
+        callback?(apiToken, errorResult)
+    }
 }
 
 extension AccountProviderMock: AccountProviderType {}
