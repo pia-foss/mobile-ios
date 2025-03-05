@@ -34,7 +34,8 @@ class LoginQRFactory {
         LoginQRProvider(httpClient: URLSessionHTTPClient(),
                         urlRequestMaker: LoginQRURLRequestMaker(),
                         domainMapper: LoginQRCodeDomainMapper(), 
-                        errorMapper: LoginQRErrorMapper())
+                        errorMapper: LoginQRErrorMapper(),
+                        generateQRLogin: AccountFactory.makeGenerateQRLoginUseCase())
     }
     
     private static func makeValidateLoginQRCodeUseCase() -> ValidateLoginQRCodeUseCaseType {

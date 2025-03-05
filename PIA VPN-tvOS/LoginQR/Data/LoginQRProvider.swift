@@ -17,12 +17,14 @@ class LoginQRProvider: ValidateLoginQRCodeProviderType {
     private let errorMapper: LoginQRErrorMapper
     private var timer: Publishers.Autoconnect<Timer.TimerPublisher>?
     private var cancellable: Cancellable?
+    private let generateQRLogin: GenerateQRLoginUseCaseType
     
-    init(httpClient: HTTPClientType, urlRequestMaker: LoginQRURLRequestMaker, domainMapper: LoginQRCodeDomainMapper, errorMapper: LoginQRErrorMapper) {
+    init(httpClient: HTTPClientType, urlRequestMaker: LoginQRURLRequestMaker, domainMapper: LoginQRCodeDomainMapper, errorMapper: LoginQRErrorMapper, generateQRLogin: GenerateQRLoginUseCaseType) {
         self.httpClient = httpClient
         self.urlRequestMaker = urlRequestMaker
         self.domainMapper = domainMapper
         self.errorMapper = errorMapper
+        self.generateQRLogin = generateQRLogin
     }
     
     func validateLoginQRCodeToken(_ qrCodeToken: LoginQRCode) async throws -> UserToken {
@@ -92,9 +94,17 @@ class LoginQRProvider: ValidateLoginQRCodeProviderType {
 
 extension LoginQRProvider: GenerateLoginQRCodeProviderType {
     func generateLoginQRCodeToken() async throws -> LoginQRCode {
-        let urlRequest = urlRequestMaker.makeGenerateLoginQRURLRequest()
         do {
-            let data = try await httpClient.makeRequest(request: urlRequest)
+            let data = try await withCheckedThrowingContinuation { continuation in
+                generateQRLogin { result in
+                    switch result {
+                        case let .success(data):
+                            continuation.resume(returning: data)
+                        case let .failure(error):
+                            continuation.resume(throwing: error)
+                    }
+                }
+            }
             
             guard let loginQRTokenDTO = try? JSONDecoder().decode(LoginQRTokenDTO.self, from: data),
                   let loginQRCode = self.domainMapper.map(dto: loginQRTokenDTO) else {
@@ -102,6 +112,7 @@ extension LoginQRProvider: GenerateLoginQRCodeProviderType {
             }
             
             return loginQRCode
+            
         } catch {
             throw error
         }

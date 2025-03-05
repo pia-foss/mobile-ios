@@ -17,6 +17,7 @@ final class LoginQRProviderTests: XCTestCase {
         let urlRequestMaker = LoginQRURLRequestMaker()
         let domainMapper = LoginQRCodeDomainMapper()
         let errorMapper = LoginQRErrorMapper()
+        var generateQRLoginUseCaseMock: GenerateQRLoginUseCaseMock!
     }
     
     var fixture: Fixture!
@@ -24,11 +25,12 @@ final class LoginQRProviderTests: XCTestCase {
     
     func instantiateSut(result: Result<Data, ClientError>) {
         fixture.httpClientMock = HTTPClientMock(result: result)
-        
+        fixture.generateQRLoginUseCaseMock = GenerateQRLoginUseCaseMock(result: result)
         sut = LoginQRProvider(httpClient: fixture.httpClientMock,
                               urlRequestMaker: fixture.urlRequestMaker,
                               domainMapper: fixture.domainMapper,
-                              errorMapper: fixture.errorMapper)
+                              errorMapper: fixture.errorMapper,
+                              generateQRLogin: fixture.generateQRLoginUseCaseMock)
     }
     
     override func setUp() {
