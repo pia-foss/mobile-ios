@@ -72,7 +72,7 @@ public class BorderedTextField: UITextField {
     public var highlightsWhileEditing = true
     
     /// When `true`, the text field can be edited.
-    public var isEditable = true
+    public var isEditableTextField = true
     
     /// :nodoc:
     public override var delegate: UITextFieldDelegate? {
@@ -117,12 +117,12 @@ public class BorderedTextField: UITextField {
     public override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         let allowed: Set<Selector>
         if isSecureTextEntry {
-            guard isEditable else {
+            guard isEditableTextField else {
                 return false
             }
             allowed = BorderedTextField.allowedSecureActions
         } else {
-            if isEditable {
+            if isEditableTextField {
                 allowed = BorderedTextField.allowedActions
             } else {
                 allowed = BorderedTextField.allowedReadonlyActions
@@ -169,7 +169,7 @@ extension BorderedTextField: UITextFieldDelegate {
     }
 
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let borderedTextField = textField as? BorderedTextField, borderedTextField.isEditable else {
+      guard let borderedTextField = textField as? BorderedTextField, borderedTextField.isEditableTextField else {
             return false
         }
         if let method = realDelegate?.textField(_:shouldChangeCharactersIn:replacementString:) {

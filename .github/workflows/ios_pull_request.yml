@@ -7,7 +7,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   build:
-    runs-on: macos-14
+    runs-on: macos-15
     env:
       TEST_RUNNER_PIA_TEST_USER: ${{ secrets.PIA_ACCOUNT_USERNAME}}
       TEST_RUNNER_PIA_TEST_PASSWORD: ${{ secrets.PIA_ACCOUNT_PASSWORD }}
@@ -21,12 +21,12 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Select XCode version
-      run: sudo xcode-select -s /Applications/Xcode_15.0.1.app
+      run: sudo xcode-select -s /Applications/Xcode_16.2.0.app
     
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.0.2
+        ruby-version: 3.3.5
 
     - name: Install Fastlane
       run: gem install fastlane
