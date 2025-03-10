@@ -9,5 +9,5 @@
 import Foundation
 
 protocol ValidateLoginQRCodeProviderType {
-    func validateLoginQRCodeToken(_ qrCodeToken: LoginQRCode) async throws -> UserToken
+    func validateLoginQRCodeToken(_ qrCodeToken: LoginQRCode) async throws -> String
 }

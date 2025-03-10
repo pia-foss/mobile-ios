@@ -17,15 +17,19 @@ class LoginQRProvider: ValidateLoginQRCodeProviderType {
     private let errorMapper: LoginQRErrorMapper
     private var timer: Publishers.Autoconnect<Timer.TimerPublisher>?
     private var cancellable: Cancellable?
+    private let generateQRLogin: GenerateQRLoginUseCaseType
+    private let accountProvider: AccountProvider
     
-    init(httpClient: HTTPClientType, urlRequestMaker: LoginQRURLRequestMaker, domainMapper: LoginQRCodeDomainMapper, errorMapper: LoginQRErrorMapper) {
+    init(httpClient: HTTPClientType, urlRequestMaker: LoginQRURLRequestMaker, domainMapper: LoginQRCodeDomainMapper, errorMapper: LoginQRErrorMapper, generateQRLogin: GenerateQRLoginUseCaseType, accountProvider: AccountProvider) {
         self.httpClient = httpClient
         self.urlRequestMaker = urlRequestMaker
         self.domainMapper = domainMapper
         self.errorMapper = errorMapper
+        self.generateQRLogin = generateQRLogin
+        self.accountProvider = accountProvider
     }
     
-    func validateLoginQRCodeToken(_ qrCodeToken: LoginQRCode) async throws -> UserToken {
+    func validateLoginQRCodeToken(_ qrCodeToken: LoginQRCode) async throws -> String {
         return try await withCheckedThrowingContinuation { continuation in
             validateLoginQRCodeToken(qrCodeToken) { [weak self] result in
                 guard let self = self else { return }
@@ -45,44 +49,33 @@ class LoginQRProvider: ValidateLoginQRCodeProviderType {
         timer = nil
     }
     
-    private func validateLoginQRCodeToken(_ qrCodeToken: LoginQRCode, completion: @escaping (Result<UserToken, ClientError>) -> Void) {
-        let urlRequest = urlRequestMaker.makeValidateLoginQRURLRequest(loginQRToken: qrCodeToken.token)
-
+    private func validateLoginQRCodeToken(_ qrCodeToken: LoginQRCode, completion: @escaping (Result<String, ClientError>) -> Void) {
+        var isValidating = false
+        
         timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
         cancellable = timer?.sink(receiveValue: { [weak self] _ in
             guard let self = self else { return }
-            Task {
-                do {
-                    let userTokenDTO = try await self.validateLoginQRCodeToken(urlRequest: urlRequest)
+            if isValidating { return }
+            isValidating = true
+            
+            accountProvider.validateLoginQR(with: qrCodeToken.token) { [weak self] apiToken, error in
+                guard let self = self else { return }
+                
+                if let apiToken {
                     self.stopTimer()
-                    
-                    guard let userToken = self.domainMapper.map(dto: userTokenDTO) else {
-                        completion(.failure(ClientError.malformedResponseData))
-                        return
-                    }
-                    
-                    completion(.success(userToken))
-                } catch {
+                    completion(.success(apiToken))
+                    return
+                } else {
                     if qrCodeToken.expiresAt.timeIntervalSinceNow <= 0 {
+                        if self.timer != nil {
+                            completion(.failure(ClientError.expired))
+                        }
                         self.stopTimer()
-                        completion(.failure(ClientError.expired))
                     }
                 }
+                isValidating = false
             }
         })
-    }
-    
-    private func validateLoginQRCodeToken(urlRequest: URLRequest) async throws -> UserTokenDTO {
-        do {
-            let data = try await httpClient.makeRequest(request: urlRequest)
-            guard let userTokenDTO = try? JSONDecoder().decode(UserTokenDTO.self, from: data) else {
-                throw ClientError.malformedResponseData
-            }
-            
-            return userTokenDTO
-        } catch {
-            throw error
-        }
     }
     
     deinit {
@@ -92,9 +85,17 @@ class LoginQRProvider: ValidateLoginQRCodeProviderType {
 
 extension LoginQRProvider: GenerateLoginQRCodeProviderType {
     func generateLoginQRCodeToken() async throws -> LoginQRCode {
-        let urlRequest = urlRequestMaker.makeGenerateLoginQRURLRequest()
         do {
-            let data = try await httpClient.makeRequest(request: urlRequest)
+            let data = try await withCheckedThrowingContinuation { continuation in
+                generateQRLogin { result in
+                    switch result {
+                        case let .success(data):
+                            continuation.resume(returning: data)
+                        case let .failure(error):
+                            continuation.resume(throwing: error)
+                    }
+                }
+            }
             
             guard let loginQRTokenDTO = try? JSONDecoder().decode(LoginQRTokenDTO.self, from: data),
                   let loginQRCode = self.domainMapper.map(dto: loginQRTokenDTO) else {
@@ -102,6 +103,7 @@ extension LoginQRProvider: GenerateLoginQRCodeProviderType {
             }
             
             return loginQRCode
+            
         } catch {
             throw error
         }

@@ -22,10 +22,10 @@ class ValidateLoginQRCodeUseCase: ValidateLoginQRCodeUseCaseType {
     }
     
     func callAsFunction(qrCodeToken: LoginQRCode) async throws {
-        let userToken = try await validateLoginQRCodeProvider.validateLoginQRCodeToken(qrCodeToken)
+        let apiToken = try await validateLoginQRCodeProvider.validateLoginQRCodeToken(qrCodeToken)
         
         return try await withCheckedThrowingContinuation { continuation in
-            accountProviderType.login(with: userToken.token) { _, error in
+            accountProviderType.login(with: apiToken) { _, error in
                 if let error = error {
                     continuation.resume(throwing: error)
                     return
