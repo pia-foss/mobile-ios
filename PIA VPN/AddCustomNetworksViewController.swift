@@ -134,8 +134,9 @@ extension AddCustomNetworksViewController: UICollectionViewDelegateFlowLayout, U
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
 
-        let indexPath = IndexPath(row: 0, section: section)
-        let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as! PIAHeaderCollectionViewCell
+        let nib = UINib(nibName: Cells.header, bundle: nil)
+        let headerView = nib.instantiate(withOwner: nil, options: nil).first as! PIAHeaderCollectionViewCell
+        headerView.setup(withTitle: L10n.Localizable.Network.Management.Tool.Add.rule, andSubtitle: L10n.Localizable.Network.Management.Tool.Choose.wifi + L10n.Localizable.Settings.Hotspothelper.Available.help)
 
         return headerView.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height),
                                                   withHorizontalFittingPriority: .defaultHigh,

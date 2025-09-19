@@ -231,19 +231,21 @@ extension TrustedNetworksViewController: UICollectionViewDelegateFlowLayout, UIC
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
 
-        let indexPath = IndexPath(row: 0, section: section)
-        let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as! PIAHeaderCollectionViewCell
+        let nib = UINib(nibName: Cells.header, bundle: nil)
+        let headerView = nib.instantiate(withOwner: nil, options: nil).first as! PIAHeaderCollectionViewCell
+        headerView.setup(withTitle: L10n.Localizable.Network.Management.Tool.title, andSubtitle: L10n.Localizable.Settings.Hotspothelper.description)
 
         return headerView.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height),
                                                   withHorizontalFittingPriority: .defaultHigh,
-                                                  verticalFittingPriority: .fittingSizeLevel) 
+                                                  verticalFittingPriority: .fittingSizeLevel)
 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
 
-        let indexPath = IndexPath(row: 0, section: section)
-        let footerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionFooter, at: indexPath) as! NetworkFooterCollectionViewCell
+        let nib = UINib(nibName: Cells.footer, bundle: nil)
+        let footerView = nib.instantiate(withOwner: nil, options: nil).first as! NetworkFooterCollectionViewCell
+        footerView.setup()
 
         return footerView.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height),
                                                   withHorizontalFittingPriority: .defaultHigh,
