@@ -3,6 +3,7 @@ on:
   push:
     branches: 
       - master
+      - release_tf
 
   workflow_dispatch:
 concurrency:
@@ -40,9 +41,6 @@ jobs:
     - name: Decode Certificates
       run: echo "${{ secrets.IOS_CERTIFICATE }}" | base64 --decode > ./fastlane/Certificate.p12
 
-    - name: Run iOS tests
-      run: bundle exec fastlane tests
-
     - name: Set up certificates and profiles
       run: bundle exec fastlane get_profiles > /dev/null 2>&1
       
@@ -56,3 +54,6 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         path: artifacts/
+        
+    - name: Run iOS tests
+      run: bundle exec fastlane tests
