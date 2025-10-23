@@ -1,0 +1,283 @@
+{
+  "originHash" : "c9fb57de6dae4f25e560809f45f3b69d989a5e0f55fb9ad3157422c16f1801f7",
+  "pins" : [
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "state" : {
+        "revision" : "cdb2f4a574c3f7ae9ac0b0913058d64ff6fa09ac",
+        "version" : "5.0.1"
+      }
+    },
+    {
+      "identity" : "alamofireimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/AlamofireImage.git",
+      "state" : {
+        "revision" : "62a37b377db3fb705b3e336f945cbf4d58f4ae06",
+        "version" : "4.0.0"
+      }
+    },
+    {
+      "identity" : "cwlcatchexception",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mattgallagher/CwlCatchException.git",
+      "state" : {
+        "revision" : "07b2ba21d361c223e25e3c1e924288742923f08c",
+        "version" : "2.2.1"
+      }
+    },
+    {
+      "identity" : "cwlpreconditiontesting",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mattgallagher/CwlPreconditionTesting.git",
+      "state" : {
+        "revision" : "0139c665ebb45e6a9fbdb68aabfd7c39f3fe0071",
+        "version" : "2.2.2"
+      }
+    },
+    {
+      "identity" : "dynamicblurview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/KyoheiG3/DynamicBlurView.git",
+      "state" : {
+        "revision" : "d69b09d70a689dc7b8ea6aa6de3e63f9e6c545ce",
+        "version" : "5.0.5"
+      }
+    },
+    {
+      "identity" : "dznemptydataset",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dzenbot/DZNEmptyDataSet.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "9bffa69a83a9fa58a14b3cf43cb6dd8a63774179"
+      }
+    },
+    {
+      "identity" : "gloss",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hkellaway/Gloss.git",
+      "state" : {
+        "revision" : "efd25964891ae8a9cfbe2345628ad02fcb9a105c",
+        "version" : "3.2.1"
+      }
+    },
+    {
+      "identity" : "gradientprogressbar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fxm90/GradientProgressBar.git",
+      "state" : {
+        "revision" : "de13a9c05f1946051f6db40016bbccdbca26a9be",
+        "version" : "2.0.3"
+      }
+    },
+    {
+      "identity" : "ios-openssl",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:pia-foss/ios-openssl.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ea32980bbd431cd2fd505538093c6258b0972099"
+      }
+    },
+    {
+      "identity" : "lightweightobservable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fxm90/LightweightObservable",
+      "state" : {
+        "revision" : "f7aeda3ab67922bd3ad252c5a311c58ee3e37bf5",
+        "version" : "2.2.2"
+      }
+    },
+    {
+      "identity" : "lottie-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-ios.git",
+      "state" : {
+        "revision" : "b4bd0604ded9574807f41b4004b57dd1226a30a4",
+        "version" : "3.5.0"
+      }
+    },
+    {
+      "identity" : "mobile-ios-library",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pia-foss/mobile-ios-library.git",
+      "state" : {
+        "revision" : "eb48a4e9f634ebb3306813a8d68e250141c10357"
+      }
+    },
+    {
+      "identity" : "mobile-ios-networking",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:pia-foss/mobile-ios-networking.git",
+      "state" : {
+        "revision" : "98812cae37d32ae3ef19dfd67f50be86858670fa",
+        "version" : "1.3.1"
+      }
+    },
+    {
+      "identity" : "mobile-ios-openvpn",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:pia-foss/mobile-ios-openvpn.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "ebf7b8c4eb270bbc1fe9fe6e50aa6de9e562364b"
+      }
+    },
+    {
+      "identity" : "mobile-ios-releases-account",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:pia-foss/mobile-ios-releases-account.git",
+      "state" : {
+        "revision" : "f0c4deb07cc6e7908a9a48f58aef2611eac8576e",
+        "version" : "1.4.5"
+      }
+    },
+    {
+      "identity" : "mobile-ios-releases-csi",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:pia-foss/mobile-ios-releases-csi.git",
+      "state" : {
+        "revision" : "c5e38d15881b40a7aa851d1af64ffc506af6ac40",
+        "version" : "1.3.3"
+      }
+    },
+    {
+      "identity" : "mobile-ios-releases-kpi",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:pia-foss/mobile-ios-releases-kpi.git",
+      "state" : {
+        "revision" : "09a9188a73ab5b703e1fbd10ee0070bb6d777e5c",
+        "version" : "1.2.3"
+      }
+    },
+    {
+      "identity" : "mobile-ios-releases-regions",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:pia-foss/mobile-ios-releases-regions.git",
+      "state" : {
+        "revision" : "ea7e5a59f9683924a3524c7611f56e7445295df1",
+        "version" : "1.6.3"
+      }
+    },
+    {
+      "identity" : "mobile-ios-wireguard",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:pia-foss/mobile-ios-wireguard.git",
+      "state" : {
+        "revision" : "bf7b4258d9c9279c6051bba0b7a73ca7d5f9547e"
+      }
+    },
+    {
+      "identity" : "nimble",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Quick/Nimble",
+      "state" : {
+        "revision" : "d616f15123bfb36db1b1075153f73cf40605b39d",
+        "version" : "13.0.0"
+      }
+    },
+    {
+      "identity" : "popover",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sarathsarah/Popover.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "3674e94551307502995f363681b6b51e93fcdf3e"
+      }
+    },
+    {
+      "identity" : "popupdialog",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Orderella/PopupDialog.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "d41ac7c7fa7b940c355490281ea8b2fc39c8f599"
+      }
+    },
+    {
+      "identity" : "quick",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Quick/Quick",
+      "state" : {
+        "revision" : "ef9aaf3f634b3a1ab6f54f1173fe2400b36e7cb8",
+        "version" : "7.3.0"
+      }
+    },
+    {
+      "identity" : "quicklayout",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/huri000/QuickLayout",
+      "state" : {
+        "revision" : "6be62decbe508d8fc8f9dbafc349d05bab03c38b",
+        "version" : "3.0.1"
+      }
+    },
+    {
+      "identity" : "reachability.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ashleymills/Reachability.swift.git",
+      "state" : {
+        "revision" : "6c8652a8ea35a64cf36367d07b3d6e5e6a24b272",
+        "version" : "4.3.1"
+      }
+    },
+    {
+      "identity" : "sidemenu",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jonkykong/SideMenu.git",
+      "state" : {
+        "revision" : "8bd4fd128923cf5494fa726839af8afe12908ad9",
+        "version" : "6.5.0"
+      }
+    },
+    {
+      "identity" : "swift-snapshot-testing",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-snapshot-testing",
+      "state" : {
+        "revision" : "625ccca8570773dd84a34ee51a81aa2bc5a4f97a",
+        "version" : "1.16.0"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-syntax",
+      "state" : {
+        "revision" : "2bc86522d115234d1f588efe2bcb4ce4be8f8b82",
+        "version" : "510.0.3"
+      }
+    },
+    {
+      "identity" : "swiftentrykit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/huri000/SwiftEntryKit.git",
+      "state" : {
+        "revision" : "c2d42574e4fe4e1f9719843f35add7922942a16b",
+        "version" : "1.2.7"
+      }
+    },
+    {
+      "identity" : "swiftybeaver",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwiftyBeaver/SwiftyBeaver",
+      "state" : {
+        "revision" : "2c039501d6eeb4d4cd4aec4a8d884ad28862e044",
+        "version" : "1.9.5"
+      }
+    },
+    {
+      "identity" : "tweetnacl-swiftwrap",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bitmark-inc/tweetnacl-swiftwrap.git",
+      "state" : {
+        "revision" : "f8fd111642bf2336b11ef9ea828510693106e954",
+        "version" : "1.1.0"
+      }
+    }
+  ],
+  "version" : 3
+}
