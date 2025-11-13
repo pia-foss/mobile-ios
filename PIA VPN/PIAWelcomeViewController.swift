@@ -225,18 +225,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
             }
         }
     }
-    
-    // MARK: Size classes
-    
-    // consider compact height in landscape
-    /// :nodoc:
-    public override var traitCollection: UITraitCollection {
-        if isLandscape {
-            return UITraitCollection(verticalSizeClass: .compact)
-        }
-        return super.traitCollection
-    }
-    
+
     // MARK: Restylable
     
     /// :nodoc:
