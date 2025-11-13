@@ -332,6 +332,7 @@ public class GetStartedViewController: PIAWelcomeViewController {
     }
     
     // MARK: Orientation
+    // TODO: This forces the iPad to run this screen in windowed mode on iOS 26. Replace with proper orientation handling.
     @objc func onlyPortrait() -> Void {}
     
     // MARK: Notifications
