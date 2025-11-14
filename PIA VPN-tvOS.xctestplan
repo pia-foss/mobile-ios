@@ -9,6 +9,7 @@
     }
   ],
   "defaultOptions" : {
+    "region" : "US",
     "targetForVariableExpansion" : {
       "containerPath" : "container:PIA VPN.xcodeproj",
       "identifier" : "E5C507762B0E144D00200A6A",
