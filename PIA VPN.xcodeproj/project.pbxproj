@@ -1710,7 +1710,7 @@
 		E55EDCD42B755E09007010DB /* OnboardingComponentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingComponentViewModel.swift; sourceTree = "<group>"; };
 		E55EDCD92B755E6C007010DB /* OnboardingFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFactory.swift; sourceTree = "<group>"; };
 		E55EDCDB2B758BDF007010DB /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
-		E55EDCDD2B758D47007010DB /* PIA-VPN-tvOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "PIA-VPN-tvOS-Info.plist"; sourceTree = SOURCE_ROOT; };
+		E55EDCDD2B758D47007010DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "PIA VPN-tvOS/Info.plist"; sourceTree = SOURCE_ROOT; };
 		E55EDCE32B76087C007010DB /* WelcomeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFactory.swift; sourceTree = "<group>"; };
 		E55EDCE92B760D3E007010DB /* TextFieldStyleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStyleModifier.swift; sourceTree = "<group>"; };
 		E55EDCEB2B760DFD007010DB /* LoginLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLoadingView.swift; sourceTree = "<group>"; };
@@ -4241,7 +4241,7 @@
 				E574D9CA2B83F3A2000FADAF /* DedicatedIp */,
 				69FA73D72B7D5073002300B3 /* Settings */,
 				69F2C36D2B8CABD5006255F9 /* Help */,
-				E55EDCDD2B758D47007010DB /* PIA-VPN-tvOS-Info.plist */,
+				E55EDCDD2B758D47007010DB /* Info.plist */,
 				E55EDCDE2B760666007010DB /* Welcome */,
 				E55EDCD32B755DF0007010DB /* Onboarding */,
 				E52E69132B5DB04400471913 /* Bootstraper */,
@@ -7354,7 +7354,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "PIA-VPN-tvOS-Info.plist";
+				INFOPLIST_FILE = "PIA VPN-tvOS/Info.plist";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -7406,7 +7406,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "PIA-VPN-tvOS-Info.plist";
+				INFOPLIST_FILE = "PIA VPN-tvOS/Info.plist";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
