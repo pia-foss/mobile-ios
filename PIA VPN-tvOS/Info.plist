@@ -31,6 +31,10 @@
 		<key>UIImageName</key>
 		<string>loading-pia-brand</string>
 	</dict>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>arm64</string>
+	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Automatic</string>
 </dict>
