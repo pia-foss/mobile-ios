@@ -87,8 +87,30 @@ class DashboardViewController: AutolayoutViewController {
     
     private var shouldReconnect = false
 
+    private var connectionTimer: Timer?
+
+    private var formattedConnectionTime: String? {
+        guard let startTime = Client.preferences.lastVPNConnectionSuccess else {
+            return nil
+        }
+
+        let connectionTime = Date().timeIntervalSince1970 - startTime
+
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.zeroFormattingBehavior = .pad
+
+        guard let timeString = formatter.string(from: connectionTime) else {
+            return nil
+        }
+
+        return L10n.Localizable.Dashboard.ConnectionState.Connected.title + " | " + timeString
+    }
+
     deinit {
         NotificationCenter.default.removeObserver(self)
+        stopConnectionTimer()
     }
     
     override func viewDidLoad() {
@@ -920,21 +942,23 @@ class DashboardViewController: AutolayoutViewController {
             toggleConnection.isWarning = false
             toggleConnection.stopButtonAnimation()
             AppPreferences.shared.lastVPNConnectionStatus = .connected
+
             let titleLabelView = UILabel(frame: CGRect.zero)
             titleLabelView.adjustsFontSizeToFitWidth = true
             titleLabelView.style(style: TextStyle.textStyle6)
-            
-            let effectiveServer = Client.preferences.displayedServer
-            let vpn = Client.providers.vpnProvider
-
-            titleLabelView.text = L10n.Localizable.Dashboard.Vpn.connected+": "+effectiveServer.name(forStatus: vpn.vpnStatus)
+            titleLabelView.textAlignment = .center
+            titleLabelView.text = formattedConnectionTime
             setNavBarTheme(.green, with: titleLabelView)
+
             AppPreferences.shared.todayWidgetVpnStatus = VPNStatus.connected.rawValue
             AppPreferences.shared.todayWidgetButtonTitle = L10n.Localizable.Shortcuts.disconnect
             Macros.removeStickyNote()
             connectingStatus = .none
+
+            startConnectionTimer()
             
         case .disconnected:
+            stopConnectionTimer()
             
             toggleConnection.isOn = false
             AppPreferences.shared.lastVPNConnectionStatus = .disconnected
@@ -964,6 +988,8 @@ class DashboardViewController: AutolayoutViewController {
             setNavBarTheme(.normal, with: titleLabelView)
 
         case .disconnecting:
+            stopConnectionTimer()
+
             toggleConnection.isOn = true
             toggleConnection.isWarning = false
             toggleConnection.isIndeterminate = true
@@ -1041,6 +1067,38 @@ class DashboardViewController: AutolayoutViewController {
             AppPreferences.shared.todayWidgetButtonTitle = L10n.Localizable.Shortcuts.connect
         }
     }
+
+    // MARK: - Connection Timer
+
+    private func startConnectionTimer() {
+        stopConnectionTimer()
+        let timer = Timer(
+            timeInterval: 1.0,
+            target: self,
+            selector: #selector(updateConnectionTime),
+            userInfo: nil,
+            repeats: true
+        )
+
+        RunLoop.current.add(timer, forMode: .common)
+        self.connectionTimer = timer
+
+        updateConnectionTime()
+    }
+
+    private func stopConnectionTimer() {
+        connectionTimer?.invalidate()
+        connectionTimer = nil
+    }
+
+    @objc private func updateConnectionTime() {
+        guard let titleLabel = self.navigationItem.titleView as? UILabel else {
+            return
+        }
+
+        titleLabel.text = formattedConnectionTime
+    }
+
     // MARK: Restylable
 
     override func viewShouldRestyle() {
