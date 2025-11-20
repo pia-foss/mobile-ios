@@ -945,7 +945,7 @@ class DashboardViewController: AutolayoutViewController {
 
             let titleLabelView = UILabel(frame: CGRect.zero)
             titleLabelView.adjustsFontSizeToFitWidth = true
-            titleLabelView.style(style: TextStyle.textStyle6)
+            titleLabelView.style(style: TextStyle.textStyleNavigationBarTitle)
             titleLabelView.textAlignment = .center
             titleLabelView.text = formattedConnectionTime
             setNavBarTheme(.green, with: titleLabelView)
@@ -963,6 +963,13 @@ class DashboardViewController: AutolayoutViewController {
             toggleConnection.isOn = false
             AppPreferences.shared.lastVPNConnectionStatus = .disconnected
 
+            let titleLabelView = UILabel(frame: CGRect.zero)
+            titleLabelView.style(style: TextStyle.textStyleNavigationBarTitle)
+            titleLabelView.textColor = Theme.current.palette.appearance == .dark ? .white : .piaGrey6
+            // TODO: Do proper localization
+            titleLabelView.text = "Not connected"
+            setNavBarTheme(.normal, with: titleLabelView)
+
             handleDisconnectedAndTrustedNetwork()
             toggleConnection.stopButtonAnimation()
             
@@ -974,16 +981,15 @@ class DashboardViewController: AutolayoutViewController {
             toggleConnection.startButtonAnimation()
             AppPreferences.shared.lastVPNConnectionStatus = .connecting
             let titleLabelView = UILabel(frame: CGRect.zero)
-            titleLabelView.style(style: Theme.current.palette.appearance == .dark ?
-                TextStyle.textStyle6 :
-                TextStyle.textStyle7)
+            titleLabelView.style(style: TextStyle.textStyleNavigationBarTitle)
+            titleLabelView.textColor = Theme.current.palette.appearance == .dark ? .white : .piaGrey6
             switch connectingStatus {
             case .pleaseWait:
-                titleLabelView.text = L10n.Localizable.Server.Reconnection.Please.wait.uppercased()
+                titleLabelView.text = L10n.Localizable.Server.Reconnection.Please.wait
             case .takingTime, .stillLoading:
-                titleLabelView.text = L10n.Localizable.Server.Reconnection.Still.connection.uppercased()
+                titleLabelView.text = L10n.Localizable.Server.Reconnection.Still.connection
             default:
-                titleLabelView.text = L10n.Localizable.Dashboard.Vpn.connecting.uppercased()
+                titleLabelView.text = L10n.Localizable.Dashboard.Vpn.connecting
             }
             setNavBarTheme(.normal, with: titleLabelView)
 
@@ -996,10 +1002,9 @@ class DashboardViewController: AutolayoutViewController {
             toggleConnection.startButtonAnimation()
             AppPreferences.shared.lastVPNConnectionStatus = .disconnecting
             let titleLabelView = UILabel(frame: CGRect.zero)
-            titleLabelView.style(style: Theme.current.palette.appearance == .dark ?
-                TextStyle.textStyle6 :
-                TextStyle.textStyle7)
-            titleLabelView.text = L10n.Localizable.Dashboard.Vpn.disconnecting.uppercased()
+            titleLabelView.style(style: TextStyle.textStyleNavigationBarTitle)
+            titleLabelView.textColor = Theme.current.palette.appearance == .dark ? .white : .piaGrey6
+            titleLabelView.text = L10n.Localizable.Dashboard.Vpn.disconnecting
             setNavBarTheme(.normal, with: titleLabelView)
 
         case .unknown:
@@ -1021,18 +1026,22 @@ class DashboardViewController: AutolayoutViewController {
             var tintColor: UIColor?
             var barTintColors: [UIColor]?
             switch theme {
+            case .normal:
+                tintColor = Theme.current.palette.appearance == .dark ? .white : .piaGrey6
             case .green:
-                tintColor = .white
+                tintColor = UIColor.piaGrey6
                 barTintColors = [UIColor.piaGreen, UIColor.piaGreenDark20]
             case .orange:
                 tintColor = .white
                 barTintColors = [UIColor.piaOrange, UIColor.piaOrange]
-            default:
-                break
             }
-            Theme.current.applyCustomNavigationBar(self.navigationController!.navigationBar,
-                                                   withTintColor: tintColor,
-                                                   andBarTintColors: barTintColors)
+
+            Theme.current.applyCustomNavigationBar(
+                self.navigationController!.navigationBar,
+                withTintColor: tintColor,
+                andBarTintColors: barTintColors
+            )
+
             self.setNavBarTitleView(titleView: titleView)
         }
     }
@@ -1062,7 +1071,6 @@ class DashboardViewController: AutolayoutViewController {
         } else {
             toggleConnection.isIndeterminate = false
             toggleConnection.isWarning = false
-            resetNavigationBar()
             AppPreferences.shared.todayWidgetVpnStatus = VPNStatus.disconnected.rawValue
             AppPreferences.shared.todayWidgetButtonTitle = L10n.Localizable.Shortcuts.connect
         }
@@ -1104,7 +1112,6 @@ class DashboardViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
 
-        navigationItem.titleView = NavigationLogoView()
         Theme.current.applyPrincipalBackground(view)
         Theme.current.applyPrincipalBackground(viewContainer!)
         Theme.current.applyPrincipalBackground(viewContent)
@@ -1116,18 +1123,6 @@ class DashboardViewController: AutolayoutViewController {
 
         collectionView.collectionViewLayout.invalidateLayout()
         collectionView.reloadData()
-    }
-    
-    private func resetNavigationBar() {
-        //First reset the green background
-        self.setNavBarTheme(.normal, with: NavigationLogoView())
-        DispatchQueue.main.async {
-            //Show the PIA logo
-            if let navController = self.navigationController {
-                //Apply the theme background color
-                Theme.current.applyLightNavigationBar(navController.navigationBar)
-            }
-        }
     }
 }
 
@@ -1171,7 +1166,6 @@ extension DashboardViewController: MenuViewControllerDelegate {
         case .about:
             openAbout()
         case .logout:
-            resetNavigationBar()
             presentLogin()
         case .version:
             break

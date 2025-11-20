@@ -169,11 +169,11 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
         switch currentStatus {
         case .connected:
             let titleLabelView = UILabel(frame: CGRect.zero)
-            titleLabelView.style(style: TextStyle.textStyle6)
+            titleLabelView.style(style: TextStyle.textStyleNavigationBarTitle)
             titleLabelView.text = title
             if let navController = navigationController {
                 Theme.current.applyCustomNavigationBar(navController.navigationBar,
-                                                       withTintColor: .white,
+                                                       withTintColor: .piaGrey6,
                                                        andBarTintColors: [UIColor.piaGreen,
                                                                           UIColor.piaGreenDark20])
             }
