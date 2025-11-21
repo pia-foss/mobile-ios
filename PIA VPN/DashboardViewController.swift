@@ -47,6 +47,7 @@ class DashboardViewController: AutolayoutViewController {
     enum NavBarTheme {
         case green
         case orange
+        case red
         case normal
     }
     
@@ -105,7 +106,8 @@ class DashboardViewController: AutolayoutViewController {
             return nil
         }
 
-        return L10n.Localizable.Dashboard.ConnectionState.Connected.title + " | " + timeString
+        // TODO: Do proper localization
+        return "Protected" + " | " + timeString
     }
 
     deinit {
@@ -944,9 +946,7 @@ class DashboardViewController: AutolayoutViewController {
             AppPreferences.shared.lastVPNConnectionStatus = .connected
 
             let titleLabelView = UILabel(frame: CGRect.zero)
-            titleLabelView.adjustsFontSizeToFitWidth = true
             titleLabelView.style(style: TextStyle.textStyleNavigationBarTitle)
-            titleLabelView.textAlignment = .center
             titleLabelView.text = formattedConnectionTime
             setNavBarTheme(.green, with: titleLabelView)
 
@@ -965,10 +965,10 @@ class DashboardViewController: AutolayoutViewController {
 
             let titleLabelView = UILabel(frame: CGRect.zero)
             titleLabelView.style(style: TextStyle.textStyleNavigationBarTitle)
-            titleLabelView.textColor = Theme.current.palette.appearance == .dark ? .white : .piaGrey6
+            titleLabelView.textColor = .white
             // TODO: Do proper localization
-            titleLabelView.text = "Not connected"
-            setNavBarTheme(.normal, with: titleLabelView)
+            titleLabelView.text = "Not Protected"
+            setNavBarTheme(.red, with: titleLabelView)
 
             handleDisconnectedAndTrustedNetwork()
             toggleConnection.stopButtonAnimation()
@@ -1030,7 +1030,10 @@ class DashboardViewController: AutolayoutViewController {
                 tintColor = Theme.current.palette.appearance == .dark ? .white : .piaGrey6
             case .green:
                 tintColor = UIColor.piaGrey6
-                barTintColors = [UIColor.piaGreen, UIColor.piaGreenDark20]
+                barTintColors = [UIColor.piaGreenDark20, UIColor.piaGreen]
+            case .red:
+                tintColor = UIColor.white
+                barTintColors = [UIColor.piaRedDark, UIColor.piaRed]
             case .orange:
                 tintColor = .white
                 barTintColors = [UIColor.piaOrange, UIColor.piaOrange]
