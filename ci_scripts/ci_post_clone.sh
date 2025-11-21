@@ -38,8 +38,7 @@ then
 else
     # Retrieve the version from git tags parents for this commit.
     # This should only be used in manual XCC runs for testing.
-    # version_number=$(git describe --tags --abbrev=0 | sed -E 's/([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+)-.*/\1/g')
-    version_number=$(git describe --tags $(git rev-list --tags --max-count=1) | sed -E 's/([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+)-.*/\1/g')
+    version_number=$(git describe --tags --abbrev=0 | sed -E 's/([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+)-.*/\1/g')
     echo "Version '$version_number' from git tag parents"
 fi
 
