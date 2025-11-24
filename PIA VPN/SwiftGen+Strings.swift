@@ -234,8 +234,12 @@ internal enum L10n {
         internal static let disconnected = L10n.tr("Localizable", "dashboard.vpn.disconnected", fallback: "Disconnected")
         /// Disconnecting...
         internal static let disconnecting = L10n.tr("Localizable", "dashboard.vpn.disconnecting", fallback: "Disconnecting...")
+        /// Not Protected
+        internal static let notProtected = L10n.tr("Localizable", "dashboard.vpn.not_protected", fallback: "Not Protected")
         /// VPN: ON
         internal static let on = L10n.tr("Localizable", "dashboard.vpn.on", fallback: "VPN: ON")
+        /// Protected
+        internal static let protected = L10n.tr("Localizable", "dashboard.vpn.protected", fallback: "Protected")
         internal enum Disconnect {
           /// This network is untrusted. Do you really want to disconnect the VPN?
           internal static let untrusted = L10n.tr("Localizable", "dashboard.vpn.disconnect.untrusted", fallback: "This network is untrusted. Do you really want to disconnect the VPN?")

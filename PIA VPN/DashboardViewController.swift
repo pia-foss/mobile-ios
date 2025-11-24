@@ -106,8 +106,8 @@ class DashboardViewController: AutolayoutViewController {
             return nil
         }
 
-        // TODO: Do proper localization
-        return "Protected" + " | " + timeString
+        // TODO: This string needs localization
+        return L10n.Localizable.Dashboard.Vpn.protected + " | " + timeString
     }
 
     deinit {
@@ -966,8 +966,8 @@ class DashboardViewController: AutolayoutViewController {
             let titleLabelView = UILabel(frame: CGRect.zero)
             titleLabelView.style(style: TextStyle.textStyleNavigationBarTitle)
             titleLabelView.textColor = .white
-            // TODO: Do proper localization
-            titleLabelView.text = "Not Protected"
+            // TODO: This string needs localization
+            titleLabelView.text = L10n.Localizable.Dashboard.Vpn.notProtected
             setNavBarTheme(.red, with: titleLabelView)
 
             handleDisconnectedAndTrustedNetwork()
