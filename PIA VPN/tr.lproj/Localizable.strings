@@ -216,6 +216,8 @@
 "dashboard.vpn.disconnected" = "Bağlantı Kesildi";
 "dashboard.vpn.connecting" = "Bağlanıyor...";
 "dashboard.vpn.connected" = "VPN'e bağlandı";
+"dashboard.vpn.protected" = "Korunuyor";
+"dashboard.vpn.not_protected" = "Korunmuyor";
 "dashboard.vpn.on" = "VPN: AÇIK";
 "dashboard.vpn.disconnecting" = "Bağlantı kesiliyor...";
 "dashboard.vpn.changing_region" = "Bölge değiştiriliyor...";
@@ -605,4 +607,3 @@
 "forceupdate.label.subtitle" = "PIA'nın eski bir sürümünü kullanıyorsunuz. En son özelliklerle gelişmiş bir deneyimin keyfini çıkarmak için uygulamanızı hemen güncelleyin.";
 "forceupdate.button.update" = "Hemen Güncelle";
 "forceupdate.label.vpn.connected" = "\"Hemen Güncelle\"ye dokunmak VPN bağlantısını keser.";
-
