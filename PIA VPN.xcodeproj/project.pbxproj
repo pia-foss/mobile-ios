@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -7789,7 +7789,7 @@
 			repositoryURL = "https://github.com/pia-foss/mobile-ios-library.git";
 			requirement = {
 				kind = revision;
-				revision = 3196628f38fda4980ed46de3bcc9411b7910a489;
+				revision = a77fb3e6c14a87a8345c3740bfdd1aacc09a0dc2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
