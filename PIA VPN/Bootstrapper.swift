@@ -306,9 +306,6 @@ class Bootstrapper {
         switch vpnStatus {
         case .connected:
             AppPreferences.shared.incrementSuccessConnections()
-        #if os(iOS)
-            UserSurveyManager.shared.handleConnectionSuccess()
-        #endif
         case .disconnected:
             AppPreferences.shared.incrementSuccessDisconnections()
         default:

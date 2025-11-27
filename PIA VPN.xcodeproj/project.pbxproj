@@ -371,8 +371,6 @@
 		69FF0B0F2B3AE8F60074AA04 /* PIAImages+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FF0B0E2B3AE8F60074AA04 /* PIAImages+SwiftUI.swift */; };
 		69FF0B112B3AF1F00074AA04 /* QuickConnectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FF0B102B3AF1F00074AA04 /* QuickConnectButton.swift */; };
 		69FF0B132B3AF2050074AA04 /* QuickConnectButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FF0B122B3AF2050074AA04 /* QuickConnectButtonViewModel.swift */; };
-		7ECBB8DD27B6C4F500C0C774 /* UserSurveyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */; };
-		7ECBB8DE27BA5FCE00C0C774 /* UserSurveyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */; };
 		821674F12678A1BE0028E4FD /* SettingsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821674F02678A1BE0028E4FD /* SettingsDelegate.swift */; };
 		821674F22678A1BE0028E4FD /* SettingsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821674F02678A1BE0028E4FD /* SettingsDelegate.swift */; };
 		82183D7B2500FD460033023F /* String+Substrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82183D7A2500FD460033023F /* String+Substrings.swift */; };
@@ -1448,7 +1446,6 @@
 		69FF0B102B3AF1F00074AA04 /* QuickConnectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickConnectButton.swift; sourceTree = "<group>"; };
 		69FF0B122B3AF2050074AA04 /* QuickConnectButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickConnectButtonViewModel.swift; sourceTree = "<group>"; };
 		7EC2972D27D8B8580061C56A /* CredentialsUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = CredentialsUtil.swift; sourceTree = "<group>"; tabWidth = 4; };
-		7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSurveyManager.swift; sourceTree = "<group>"; };
 		821674F02678A1BE0028E4FD /* SettingsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDelegate.swift; sourceTree = "<group>"; };
 		82183D7A2500FD460033023F /* String+Substrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Substrings.swift"; sourceTree = "<group>"; };
 		82183D9225014FDC0033023F /* NetworkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -2178,7 +2175,6 @@
 				DD51F8C32372E4C8009FEED3 /* PemUtil.swift */,
 				DD522D21237D74380072F555 /* BooleanUtil.swift */,
 				DD918575246BFA7F006B3A2B /* RatingManager.swift */,
-				7ECBB8DC27B6C4F500C0C774 /* UserSurveyManager.swift */,
 				DDD65312247E66AD00F0A897 /* CoordinatesFinder.swift */,
 				829EB51B2535A8FF003E74DD /* CollectionViewAutoSizeUtils.swift */,
 				3524670A26B431B800E3F0AC /* TrustedNetworkHelper.swift */,
@@ -5442,7 +5438,6 @@
 				0E441E272055AEDF007528D5 /* ThemeStrategy+App.swift in Sources */,
 				DDC8125021761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift in Sources */,
 				69B70ABF2ACC2CFE0072A09D /* AccessibilityId.swift in Sources */,
-				7ECBB8DE27BA5FCE00C0C774 /* UserSurveyManager.swift in Sources */,
 				0E492C681FE60907007F23DF /* Flags.swift in Sources */,
 				DD172A972254C35000071CFB /* FavoriteServersTile.swift in Sources */,
 				0EE14D191FF15812008D9AC2 /* ModalNavigationSegue.swift in Sources */,
@@ -5575,7 +5570,6 @@
 				82A1AD2F24B87CF20003DD02 /* PIACard.swift in Sources */,
 				8272C6392657F54400D846A8 /* DevelopmentSettingsViewController.swift in Sources */,
 				0EFB839020209CF200980F69 /* VPNPermissionViewController.swift in Sources */,
-				7ECBB8DD27B6C4F500C0C774 /* UserSurveyManager.swift in Sources */,
 				E58A45572BA8D05C002A0704 /* LoginURLRequestMaker.swift in Sources */,
 				821674F12678A1BE0028E4FD /* SettingsDelegate.swift in Sources */,
 				0EFDC1D71FE46177007C0B9B /* SensitiveOperation.swift in Sources */,
