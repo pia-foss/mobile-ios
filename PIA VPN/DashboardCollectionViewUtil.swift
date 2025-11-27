@@ -31,16 +31,19 @@ enum DashboardSections: Int {
 enum FixedCells: Int, EnumsBuilder {
     
     case messages = 0
+    case feedback
     
     var identifier: String {
         switch self {
-        case .messages: return "MessagesTileCell"
+        case .messages: "MessagesTileCell"
+        case .feedback: "FeedbackTileCell"
         }
     }
     
     var className: String {
         switch self {
-        case .messages: return "MessagesTileCollectionViewCell"
+        case .messages: "MessagesTileCollectionViewCell"
+        case .feedback: "FeedbackTileCollectionViewCell"
         }
     }
 
@@ -90,6 +93,9 @@ class DashboardCollectionViewUtil: NSObject {
         collectionView.register(UINib(nibName: FixedCells.messages.className,
                                       bundle: nil),
                                 forCellWithReuseIdentifier: FixedCells.messages.identifier)
+        collectionView.register(UINib(nibName: FixedCells.feedback.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: FixedCells.feedback.identifier)
         collectionView.register(UINib(nibName: Cells.ipTile.className,
                                       bundle: nil),
                                 forCellWithReuseIdentifier: Cells.ipTile.identifier)

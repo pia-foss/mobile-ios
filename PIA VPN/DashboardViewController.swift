@@ -40,7 +40,7 @@ enum DashboardVPNConnectingStatus: Int {
 class DashboardViewController: AutolayoutViewController {
     
     enum TileSize: CGFloat {
-        case standard = 89.0
+        case standard = 116.0
         case big = 150.0
     }
     
@@ -56,6 +56,7 @@ class DashboardViewController: AutolayoutViewController {
         static let afterDisconnect: TimeInterval = 1
     }
     
+    private let ratingManager: RatingManagerProtocol = RatingManager.shared
     private var viewContentHeight: CGFloat = 0
     @IBOutlet weak var viewContentHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewContentLandscapeHeightConstraint: NSLayoutConstraint!
@@ -195,11 +196,6 @@ class DashboardViewController: AutolayoutViewController {
         collectionView.reloadData()
         updateCurrentStatus()
         setupCallingCards()
-        
-        // Checks if survey needs to be shown
-        if UserSurveyManager.shouldShowSurveyMessage() {
-            MessagesManager.shared.showInAppSurveyMessage()
-        }
         
         checkTVOSTokenToBind()
     }
@@ -1230,8 +1226,14 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         
         var tileIndex = 0
         var identifier = FixedCells.objectIdentifyBy(index: tileIndex).identifier
-        
-        if indexPath.section == DashboardSections.tiles.rawValue {
+
+        if indexPath.section == DashboardSections.fixedTiles.rawValue {
+            if MessagesManager.shared.availableMessage() != nil {
+                identifier = FixedCells.messages.identifier
+            } else if ratingManager.shouldShowFeedbackCard() {
+                identifier = FixedCells.feedback.identifier
+            }
+        } else if indexPath.section == DashboardSections.tiles.rawValue {
             tileIndex = tileModeStatus == .normal ?
                 Client.providers.tileProvider.visibleTiles[indexPath.row].rawValue :
                 Client.providers.tileProvider.orderedTiles[indexPath.row].rawValue
@@ -1258,9 +1260,10 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             return 0
         }
         if section == DashboardSections.fixedTiles.rawValue {
-            return tileModeStatus == .normal && MessagesManager.shared.availableMessage() != nil ?
-                Client.providers.tileProvider.fixedTiles.count :
-                0
+            let hasAvailableMessage = MessagesManager.shared.availableMessage() != nil
+            let shouldShowFeedbackCard = ratingManager.shouldShowFeedbackCard()
+            let hasFixedTile = hasAvailableMessage || shouldShowFeedbackCard
+            return tileModeStatus == .normal && hasFixedTile ? 1 : 0
         } else {
             return tileModeStatus == .normal ?
                 Client.providers.tileProvider.visibleTiles.count :
