@@ -30,8 +30,8 @@ import StoreKit
 private let log = SwiftyBeaver.self
 
 protocol RatingManagerProtocol {
-    func shouldShowFeedbackCard() -> Bool
-    func dismissFeedbackCard()
+    func shouldShowFeedbackTile() -> Bool
+    func handleFeedbackDismiss()
     func handlePositiveRating()
     func handleNegativeRating()
     func handleConnectionStatusChanged()
@@ -41,56 +41,80 @@ final class RatingManager: RatingManagerProtocol {
     
     static let shared = RatingManager()
 
-    private var successDisconnectionsUntilPrompt: Int
-    private var successConnectionsUntilPrompt: Int
-    private var successConnectionsUntilPromptAgain: Int
-    private var timeIntervalUntilPromptAgain: Double
+    private var showAfterSuccessfulConnections: Int
+    private var cooldownDaysThumbsDown: Int
+    private var cooldownDaysThumbsUp: Int
+    private var cooldownDaysDismiss: Int
     private var errorInConnectionsUntilPrompt: Int
     
     private var targetConnectionsReachedForPrompt: Bool {
-        AppPreferences.shared.successConnections >= self.successConnectionsUntilPrompt
+        AppPreferences.shared.successConnections >= self.showAfterSuccessfulConnections
     }
     
     init() {
-        self.successDisconnectionsUntilPrompt = AppConfiguration.Rating.successDisconnectionsUntilPrompt
-        self.successConnectionsUntilPrompt = AppConfiguration.Rating.successConnectionsUntilPrompt
-        self.successConnectionsUntilPromptAgain = AppConfiguration.Rating.successConnectionsUntilPromptAgain
+        self.showAfterSuccessfulConnections = AppConfiguration.Rating.showAfterSuccessfulConnections
+        self.cooldownDaysThumbsDown = AppConfiguration.Rating.cooldownDaysThumbsDown
+        self.cooldownDaysThumbsUp = AppConfiguration.Rating.cooldownDaysThumbsUp
+        self.cooldownDaysDismiss = AppConfiguration.Rating.cooldownDaysDismiss
         self.errorInConnectionsUntilPrompt = AppConfiguration.Rating.errorInConnectionsUntilPrompt
-        self.timeIntervalUntilPromptAgain = AppConfiguration.Rating.timeIntervalUntilPromptAgain
     }
 
-    func shouldShowFeedbackCard() -> Bool {
-        guard
-            #available(iOS 15.0, *),
-            AppPreferences.shared.lastRatingSubmitted == nil,
-            AppPreferences.shared.lastRatingRejection == nil,
-            targetConnectionsReachedForPrompt
-        else {
+    func shouldShowFeedbackTile() -> Bool {
+        guard #available(iOS 15.0, *) else {
+            log.debug("Feedback tile is not supported below iOS 15")
             return false
         }
 
-        return true
+        guard targetConnectionsReachedForPrompt else {
+            return false
+        }
+
+        let lastPositive = AppPreferences.shared.lastPositiveRatingSubmitted
+        let lastNegative = AppPreferences.shared.lastNegativeRatingSubmitted
+        let lastDismiss = AppPreferences.shared.lastRatingRejection
+
+        let allDates = [lastPositive, lastNegative, lastDismiss].compactMap { $0 }
+
+        guard let mostRecentDate = allDates.max() else {
+            // User has never interacted with feedback tile
+            return true
+        }
+
+        if mostRecentDate == lastPositive {
+            return mostRecentDate.daysUntilNow() > cooldownDaysThumbsUp
+        }
+
+        if mostRecentDate == lastNegative {
+            return mostRecentDate.daysUntilNow() > cooldownDaysThumbsDown
+        }
+
+        if mostRecentDate == lastDismiss {
+            return mostRecentDate.daysUntilNow() > cooldownDaysDismiss
+        }
+
+        return false
     }
 
-    func dismissFeedbackCard() {
-        log.debug("Feedback card dismissed")
+    func handleFeedbackDismiss() {
+        AppPreferences.shared.lastRatingRejection = Date()
+        AppPreferences.shared.resetSuccessConnections()
 
-        AppPreferences.shared.canAskAgainForReview = true
-        if AppPreferences.shared.lastRatingRejection == nil {
-            AppPreferences.shared.lastRatingRejection = Date()
-            Macros.postNotification(.PIAUpdateFixedTiles)
-        }
+        Macros.postNotification(.PIAUpdateFixedTiles)
     }
 
     func handlePositiveRating() {
-        AppPreferences.shared.lastRatingSubmitted = Date()
+        AppPreferences.shared.lastPositiveRatingSubmitted = Date()
+        AppPreferences.shared.resetSuccessConnections()
+
         openRatingViewInAppstore()
 
         Macros.postNotification(.PIAUpdateFixedTiles)
     }
 
     func handleNegativeRating() {
-        AppPreferences.shared.lastRatingSubmitted = Date()
+        AppPreferences.shared.lastNegativeRatingSubmitted = Date()
+        AppPreferences.shared.resetSuccessConnections()
+
         openFeedbackWebsite()
 
         Macros.postNotification(.PIAUpdateFixedTiles)
@@ -98,8 +122,8 @@ final class RatingManager: RatingManagerProtocol {
 
     func handleConnectionStatusChanged() {
         guard
-            Client.providers.vpnProvider.vpnStatus == .disconnected,
-            shouldShowFeedbackCard()
+            Client.providers.vpnProvider.vpnStatus == .connected,
+            shouldShowFeedbackTile()
         else {
             return
         }

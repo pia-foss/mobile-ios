@@ -68,7 +68,7 @@ struct FeedbackTileView: View {
             
             // Close button
             VStack {
-                Button(action: ratingManager.dismissFeedbackCard) {
+                Button(action: ratingManager.handleFeedbackDismiss) {
                     SwiftUI.Image("icon-close")
                         .resizable()
                         .scaledToFit()

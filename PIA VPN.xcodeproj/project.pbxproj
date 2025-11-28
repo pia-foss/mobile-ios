@@ -201,6 +201,8 @@
 		3F0BFFB92ED47FE200ADB28D /* FeedbackTileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F0BFFB72ED47FE200ADB28D /* FeedbackTileCollectionViewCell.xib */; };
 		3F0BFFBB2ED488B800ADB28D /* FeedbackTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0BFFBA2ED488B800ADB28D /* FeedbackTileView.swift */; };
 		3F0BFFBC2ED488B800ADB28D /* FeedbackTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0BFFBA2ED488B800ADB28D /* FeedbackTileView.swift */; };
+		3F3491372ED9BEFF00798B79 /* Date+DaysDifference.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3491362ED9BEFD00798B79 /* Date+DaysDifference.swift.swift */; };
+		3F3491382ED9BEFF00798B79 /* Date+DaysDifference.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3491362ED9BEFD00798B79 /* Date+DaysDifference.swift.swift */; };
 		6900D3732B97290D00C87E2E /* RefreshServersLatencyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6900D3722B97290D00C87E2E /* RefreshServersLatencyUseCase.swift */; };
 		6900D3752B972ACE00C87E2E /* Client+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6900D3742B972ACE00C87E2E /* Client+Protocols.swift */; };
 		6900D3772B9731F900C87E2E /* RefreshLatencyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6900D3762B9731F900C87E2E /* RefreshLatencyFactory.swift */; };
@@ -1302,6 +1304,7 @@
 		3F0BFFB42ED47FDB00ADB28D /* FeedbackTile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedbackTile.xib; sourceTree = "<group>"; };
 		3F0BFFB72ED47FE200ADB28D /* FeedbackTileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedbackTileCollectionViewCell.xib; sourceTree = "<group>"; };
 		3F0BFFBA2ED488B800ADB28D /* FeedbackTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackTileView.swift; sourceTree = "<group>"; };
+		3F3491362ED9BEFD00798B79 /* Date+DaysDifference.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DaysDifference.swift.swift"; sourceTree = "<group>"; };
 		6900D3722B97290D00C87E2E /* RefreshServersLatencyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshServersLatencyUseCase.swift; sourceTree = "<group>"; };
 		6900D3742B972ACE00C87E2E /* Client+Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+Protocols.swift"; sourceTree = "<group>"; };
 		6900D3762B9731F900C87E2E /* RefreshLatencyFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshLatencyFactory.swift; sourceTree = "<group>"; };
@@ -2131,6 +2134,7 @@
 			isa = PBXGroup;
 			children = (
 				0E53A83A1FE5A156000C2A18 /* AccountProvider+Refresh.swift */,
+				3F3491362ED9BEFD00798B79 /* Date+DaysDifference.swift.swift */,
 				0EFDC1C51FE35B78007C0B9B /* Macros+App.swift */,
 				0EFDC1E51FE4ABAA007C0B9B /* Notification+App.swift */,
 				0EA660071FEC7A9500CB2B0D /* PIATunnelProvider+UI.swift */,
@@ -5297,6 +5301,7 @@
 				E5F52A202A8A614900828883 /* NetworkMonitor.swift in Sources */,
 				0EFDC1F01FE4B9E6007C0B9B /* AppConfiguration.swift in Sources */,
 				DD76292321ECCD5C0092DF50 /* UsageTile.swift in Sources */,
+				3F3491372ED9BEFF00798B79 /* Date+DaysDifference.swift.swift in Sources */,
 				DDD65314247E66AD00F0A897 /* CoordinatesFinder.swift in Sources */,
 				E5217F4C2AEAD29F00123442 /* PurchasePlanCell.swift in Sources */,
 				DDD271DF21D616AA00B6D20F /* Server+Favorite.swift in Sources */,
@@ -5650,6 +5655,7 @@
 				E51693D52AFBDB8A0089FB8F /* NavigationBar+Appearence..swift in Sources */,
 				3524670B26B431B800E3F0AC /* TrustedNetworkHelper.swift in Sources */,
 				829EB54A2535BA40003E74DD /* DedicatedIPTitleHeaderViewCell.swift in Sources */,
+				3F3491382ED9BEFF00798B79 /* Date+DaysDifference.swift.swift in Sources */,
 				82B7374F265280180097FFF6 /* PIABaseSettingsViewController.swift in Sources */,
 				DDC8124F21761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift in Sources */,
 				0E492C671FE60907007F23DF /* Flags.swift in Sources */,

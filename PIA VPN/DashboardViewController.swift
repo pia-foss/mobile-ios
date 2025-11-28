@@ -1230,7 +1230,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         if indexPath.section == DashboardSections.fixedTiles.rawValue {
             if MessagesManager.shared.availableMessage() != nil {
                 identifier = FixedCells.messages.identifier
-            } else if ratingManager.shouldShowFeedbackCard() {
+            } else if ratingManager.shouldShowFeedbackTile() {
                 identifier = FixedCells.feedback.identifier
             }
         } else if indexPath.section == DashboardSections.tiles.rawValue {
@@ -1261,7 +1261,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         }
         if section == DashboardSections.fixedTiles.rawValue {
             let hasAvailableMessage = MessagesManager.shared.availableMessage() != nil
-            let shouldShowFeedbackCard = ratingManager.shouldShowFeedbackCard()
+            let shouldShowFeedbackCard = ratingManager.shouldShowFeedbackTile()
             let hasFixedTile = hasAvailableMessage || shouldShowFeedbackCard
             return tileModeStatus == .normal && hasFixedTile ? 1 : 0
         } else {
