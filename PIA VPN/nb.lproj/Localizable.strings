@@ -216,6 +216,8 @@
 "dashboard.vpn.disconnected" = "Frakoblet";
 "dashboard.vpn.connecting" = "Kobler til …";
 "dashboard.vpn.connected" = "Koblet til VPN";
+"dashboard.vpn.protected" = "Beskyttet";
+"dashboard.vpn.not_protected" = "Ikke beskyttet";
 "dashboard.vpn.on" = "VPN: PÅ";
 "dashboard.vpn.disconnecting" = "Kobler fra …";
 "dashboard.vpn.changing_region" = "Endrer region …";
@@ -605,4 +607,3 @@
 "forceupdate.label.subtitle" = "Du bruker en eldre versjon av PIA. Oppdater appen din nå for å nyte en forbedret opplevelse med alle de nyeste funksjonene.";
 "forceupdate.button.update" = "Oppdater nå";
 "forceupdate.label.vpn.connected" = "Ved å trykke «Oppdater nå» frakobler du VPN.";
-

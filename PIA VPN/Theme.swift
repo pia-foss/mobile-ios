@@ -676,8 +676,7 @@ public class Theme {
     
     public func applyLightNavigationBar(_ navigationBar: UINavigationBar) {
         navigationBar.setBackgroundAppearenceColor(palette.principalBackground)
-        navigationBar.tintColor = UIColor.piaGrey4
-
+        navigationBar.tintColor = UIColor.piaGrey6
     }
     
     // MARK: Refresh control
@@ -704,7 +703,7 @@ public class Theme {
             if let tintColor = tintColor {
                 navigationBar.tintColor = tintColor
             } else {
-                navigationBar.tintColor = UIColor.piaGrey4
+                navigationBar.tintColor = Theme.current.palette.appearance == .dark ? UIColor.white : UIColor.piaGrey6
             }
             
             if let barTintColors = barTintColors,

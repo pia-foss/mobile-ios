@@ -216,6 +216,8 @@
 "dashboard.vpn.disconnected" = "Отключено";
 "dashboard.vpn.connecting" = "Подключение...";
 "dashboard.vpn.connected" = "Подключено к VPN";
+"dashboard.vpn.protected" = "Защищено";
+"dashboard.vpn.not_protected" = "Не защищено";
 "dashboard.vpn.on" = "VPN: ВКЛ.";
 "dashboard.vpn.disconnecting" = "Отключение...";
 "dashboard.vpn.changing_region" = "Изменение региона...";
@@ -605,4 +607,3 @@
 "forceupdate.label.subtitle" = "Вы используете старую версию PIA. Обновите приложение прямо сейчас, чтобы наслаждаться улучшенными возможностями со всеми последними функциями.";
 "forceupdate.button.update" = "Обновить";
 "forceupdate.label.vpn.connected" = "Нажав на кнопку «Обновить», вы отключитесь от VPN.";
-

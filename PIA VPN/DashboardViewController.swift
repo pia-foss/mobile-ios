@@ -47,6 +47,7 @@ class DashboardViewController: AutolayoutViewController {
     enum NavBarTheme {
         case green
         case orange
+        case red
         case normal
     }
     
@@ -87,8 +88,31 @@ class DashboardViewController: AutolayoutViewController {
     
     private var shouldReconnect = false
 
+    private var connectionTimer: Timer?
+
+    private var formattedConnectionTime: String? {
+        guard let startTime = Client.preferences.lastVPNConnectionSuccess else {
+            return nil
+        }
+
+        let connectionTime = Date().timeIntervalSince1970 - startTime
+
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.zeroFormattingBehavior = .pad
+
+        guard let timeString = formatter.string(from: connectionTime) else {
+            return nil
+        }
+
+        // TODO: This string needs localization
+        return L10n.Localizable.Dashboard.Vpn.protected + " | " + timeString
+    }
+
     deinit {
         NotificationCenter.default.removeObserver(self)
+        stopConnectionTimer()
     }
     
     override func viewDidLoad() {
@@ -920,24 +944,31 @@ class DashboardViewController: AutolayoutViewController {
             toggleConnection.isWarning = false
             toggleConnection.stopButtonAnimation()
             AppPreferences.shared.lastVPNConnectionStatus = .connected
-            let titleLabelView = UILabel(frame: CGRect.zero)
-            titleLabelView.adjustsFontSizeToFitWidth = true
-            titleLabelView.style(style: TextStyle.textStyle6)
-            
-            let effectiveServer = Client.preferences.displayedServer
-            let vpn = Client.providers.vpnProvider
 
-            titleLabelView.text = L10n.Localizable.Dashboard.Vpn.connected+": "+effectiveServer.name(forStatus: vpn.vpnStatus)
+            let titleLabelView = UILabel(frame: CGRect.zero)
+            titleLabelView.style(style: TextStyle.textStyleNavigationBarTitle)
+            titleLabelView.text = formattedConnectionTime
             setNavBarTheme(.green, with: titleLabelView)
+
             AppPreferences.shared.todayWidgetVpnStatus = VPNStatus.connected.rawValue
             AppPreferences.shared.todayWidgetButtonTitle = L10n.Localizable.Shortcuts.disconnect
             Macros.removeStickyNote()
             connectingStatus = .none
+
+            startConnectionTimer()
             
         case .disconnected:
+            stopConnectionTimer()
             
             toggleConnection.isOn = false
             AppPreferences.shared.lastVPNConnectionStatus = .disconnected
+
+            let titleLabelView = UILabel(frame: CGRect.zero)
+            titleLabelView.style(style: TextStyle.textStyleNavigationBarTitle)
+            titleLabelView.textColor = .white
+            // TODO: This string needs localization
+            titleLabelView.text = L10n.Localizable.Dashboard.Vpn.notProtected
+            setNavBarTheme(.red, with: titleLabelView)
 
             handleDisconnectedAndTrustedNetwork()
             toggleConnection.stopButtonAnimation()
@@ -950,30 +981,30 @@ class DashboardViewController: AutolayoutViewController {
             toggleConnection.startButtonAnimation()
             AppPreferences.shared.lastVPNConnectionStatus = .connecting
             let titleLabelView = UILabel(frame: CGRect.zero)
-            titleLabelView.style(style: Theme.current.palette.appearance == .dark ?
-                TextStyle.textStyle6 :
-                TextStyle.textStyle7)
+            titleLabelView.style(style: TextStyle.textStyleNavigationBarTitle)
+            titleLabelView.textColor = Theme.current.palette.appearance == .dark ? .white : .piaGrey6
             switch connectingStatus {
             case .pleaseWait:
-                titleLabelView.text = L10n.Localizable.Server.Reconnection.Please.wait.uppercased()
+                titleLabelView.text = L10n.Localizable.Server.Reconnection.Please.wait
             case .takingTime, .stillLoading:
-                titleLabelView.text = L10n.Localizable.Server.Reconnection.Still.connection.uppercased()
+                titleLabelView.text = L10n.Localizable.Server.Reconnection.Still.connection
             default:
-                titleLabelView.text = L10n.Localizable.Dashboard.Vpn.connecting.uppercased()
+                titleLabelView.text = L10n.Localizable.Dashboard.Vpn.connecting
             }
             setNavBarTheme(.normal, with: titleLabelView)
 
         case .disconnecting:
+            stopConnectionTimer()
+
             toggleConnection.isOn = true
             toggleConnection.isWarning = false
             toggleConnection.isIndeterminate = true
             toggleConnection.startButtonAnimation()
             AppPreferences.shared.lastVPNConnectionStatus = .disconnecting
             let titleLabelView = UILabel(frame: CGRect.zero)
-            titleLabelView.style(style: Theme.current.palette.appearance == .dark ?
-                TextStyle.textStyle6 :
-                TextStyle.textStyle7)
-            titleLabelView.text = L10n.Localizable.Dashboard.Vpn.disconnecting.uppercased()
+            titleLabelView.style(style: TextStyle.textStyleNavigationBarTitle)
+            titleLabelView.textColor = Theme.current.palette.appearance == .dark ? .white : .piaGrey6
+            titleLabelView.text = L10n.Localizable.Dashboard.Vpn.disconnecting
             setNavBarTheme(.normal, with: titleLabelView)
 
         case .unknown:
@@ -995,18 +1026,25 @@ class DashboardViewController: AutolayoutViewController {
             var tintColor: UIColor?
             var barTintColors: [UIColor]?
             switch theme {
+            case .normal:
+                tintColor = Theme.current.palette.appearance == .dark ? .white : .piaGrey6
             case .green:
-                tintColor = .white
-                barTintColors = [UIColor.piaGreen, UIColor.piaGreenDark20]
+                tintColor = UIColor.piaGrey6
+                barTintColors = [UIColor.piaGreenDark20, UIColor.piaGreen]
+            case .red:
+                tintColor = UIColor.white
+                barTintColors = [UIColor.piaRedDark, UIColor.piaRed]
             case .orange:
                 tintColor = .white
                 barTintColors = [UIColor.piaOrange, UIColor.piaOrange]
-            default:
-                break
             }
-            Theme.current.applyCustomNavigationBar(self.navigationController!.navigationBar,
-                                                   withTintColor: tintColor,
-                                                   andBarTintColors: barTintColors)
+
+            Theme.current.applyCustomNavigationBar(
+                self.navigationController!.navigationBar,
+                withTintColor: tintColor,
+                andBarTintColors: barTintColors
+            )
+
             self.setNavBarTitleView(titleView: titleView)
         }
     }
@@ -1036,17 +1074,47 @@ class DashboardViewController: AutolayoutViewController {
         } else {
             toggleConnection.isIndeterminate = false
             toggleConnection.isWarning = false
-            resetNavigationBar()
             AppPreferences.shared.todayWidgetVpnStatus = VPNStatus.disconnected.rawValue
             AppPreferences.shared.todayWidgetButtonTitle = L10n.Localizable.Shortcuts.connect
         }
     }
+
+    // MARK: - Connection Timer
+
+    private func startConnectionTimer() {
+        stopConnectionTimer()
+        let timer = Timer(
+            timeInterval: 1.0,
+            target: self,
+            selector: #selector(updateConnectionTime),
+            userInfo: nil,
+            repeats: true
+        )
+
+        RunLoop.current.add(timer, forMode: .common)
+        self.connectionTimer = timer
+
+        updateConnectionTime()
+    }
+
+    private func stopConnectionTimer() {
+        connectionTimer?.invalidate()
+        connectionTimer = nil
+    }
+
+    @objc private func updateConnectionTime() {
+        guard let titleLabel = self.navigationItem.titleView as? UILabel else {
+            return
+        }
+
+        titleLabel.text = formattedConnectionTime
+    }
+
     // MARK: Restylable
 
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
 
-        navigationItem.titleView = NavigationLogoView()
         Theme.current.applyPrincipalBackground(view)
         Theme.current.applyPrincipalBackground(viewContainer!)
         Theme.current.applyPrincipalBackground(viewContent)
@@ -1058,18 +1126,6 @@ class DashboardViewController: AutolayoutViewController {
 
         collectionView.collectionViewLayout.invalidateLayout()
         collectionView.reloadData()
-    }
-    
-    private func resetNavigationBar() {
-        //First reset the green background
-        self.setNavBarTheme(.normal, with: NavigationLogoView())
-        DispatchQueue.main.async {
-            //Show the PIA logo
-            if let navController = self.navigationController {
-                //Apply the theme background color
-                Theme.current.applyLightNavigationBar(navController.navigationBar)
-            }
-        }
     }
 }
 
@@ -1113,7 +1169,6 @@ extension DashboardViewController: MenuViewControllerDelegate {
         case .about:
             openAbout()
         case .logout:
-            resetNavigationBar()
             presentLogin()
         case .version:
             break

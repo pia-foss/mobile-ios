@@ -105,7 +105,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pia-foss/mobile-ios-library.git",
       "state" : {
-        "revision" : "90d192710007ec0f146c08458f508437f7855727"
+        "revision" : "3196628f38fda4980ed46de3bcc9411b7910a489"
       }
     },
     {

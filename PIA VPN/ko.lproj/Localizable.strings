@@ -216,6 +216,8 @@
 "dashboard.vpn.disconnected" = "연결 해제됨";
 "dashboard.vpn.connecting" = "연결 중...";
 "dashboard.vpn.connected" = "VPN에 연결됨";
+"dashboard.vpn.protected" = "보호 중";
+"dashboard.vpn.not_protected" = "보호되지 않음";
 "dashboard.vpn.on" = "VPN: 켬";
 "dashboard.vpn.disconnecting" = "연결 해제 중...";
 "dashboard.vpn.changing_region" = "지역 변경 중...";
@@ -605,4 +607,3 @@
 "forceupdate.label.subtitle" = "고객님은 이전 버전의 PIA를 사용 중입니다. 지금 앱을 업데이트하여 모든 최신 기능을 통해 향상된 경험을 즐기세요.";
 "forceupdate.button.update" = "지금 업데이트";
 "forceupdate.label.vpn.connected" = "“지금 업데이트”를 탭하면 VPN 연결이 해제됩니다.";
-

@@ -67,7 +67,7 @@
 "menu.item.account" = "Cuenta";
 "menu.item.settings" = "Configuración";
 "menu.item.logout" = "Cerrar sesión";
-"menu.item.web.privacy" = "Política de privacidad";
+"menu.item.web.privacy" = "Política de Privacidad";
 "menu.item.web.home" = "Página de inicio";
 "menu.item.web.support" = "Asistencia";
 
@@ -216,6 +216,8 @@
 "dashboard.vpn.disconnected" = "Desconectado";
 "dashboard.vpn.connecting" = "Conectando...";
 "dashboard.vpn.connected" = "Conectado a VPN";
+"dashboard.vpn.protected" = "Protegido";
+"dashboard.vpn.not_protected" = "No protegido";
 "dashboard.vpn.on" = "VPN: SÍ";
 "dashboard.vpn.disconnecting" = "Desconectando...";
 "dashboard.vpn.changing_region" = "Cambiando región...";
@@ -546,7 +548,7 @@
 "help_menu.contact_support.qr_code.message" = "Escanea el código QR para ponerte en contacto con nuestro equipo de asistencia técnica.";
 
 "help_menu.about_options.acknowledgements.title" = "Agradecimientos";
-"help_menu.about_options.privacy_policy.title" = "Política de privacidad";
+"help_menu.about_options.privacy_policy.title" = "Política de Privacidad";
 
 "help_menu.about_section.privacy_policy.description" = "Esta política de privacidad ('Política de Privacidad' o 'Política') explica las prácticas de privacidad de Private Internet Access, Inc. (denominado colectivamente 'Nosotros', 'Controlador de datos', 'Compañía', o 'PIA') y se aplica a los usuarios ('Usuarios' o 'Usted') de los servicios de PIA, incluyendo, entre otras cosas, el servicio VPN de PIA ('Servicio') y la página web de PIA en www. rivateinternetaccess.com ('Página Web').";
 "help_menu.about_section.privacy_policy.qr_code.message" = "Escanea el código QR para acceder a la Política de Privacidad completa en tu dispositivo.";
@@ -605,4 +607,3 @@
 "forceupdate.label.subtitle" = "Estás usando una versión anterior de PIA. Actualiza tu aplicación ahora para disfrutar de una experiencia mejorada con las últimas características.";
 "forceupdate.button.update" = "Actualizar ahora";
 "forceupdate.label.vpn.connected" = "Tocar \"Actualizar ahora\" desconectará la VPN.";
-
