@@ -203,6 +203,8 @@
 		3F0BFFBC2ED488B800ADB28D /* FeedbackTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0BFFBA2ED488B800ADB28D /* FeedbackTileView.swift */; };
 		3F3491372ED9BEFF00798B79 /* Date+DaysDifference.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3491362ED9BEFD00798B79 /* Date+DaysDifference.swift.swift */; };
 		3F3491382ED9BEFF00798B79 /* Date+DaysDifference.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3491362ED9BEFD00798B79 /* Date+DaysDifference.swift.swift */; };
+		3F34913A2EDD73E100798B79 /* TestFlightDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3491392EDD73DF00798B79 /* TestFlightDetector.swift */; };
+		3F34913B2EDD73E100798B79 /* TestFlightDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3491392EDD73DF00798B79 /* TestFlightDetector.swift */; };
 		6900D3732B97290D00C87E2E /* RefreshServersLatencyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6900D3722B97290D00C87E2E /* RefreshServersLatencyUseCase.swift */; };
 		6900D3752B972ACE00C87E2E /* Client+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6900D3742B972ACE00C87E2E /* Client+Protocols.swift */; };
 		6900D3772B9731F900C87E2E /* RefreshLatencyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6900D3762B9731F900C87E2E /* RefreshLatencyFactory.swift */; };
@@ -1305,6 +1307,7 @@
 		3F0BFFB72ED47FE200ADB28D /* FeedbackTileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedbackTileCollectionViewCell.xib; sourceTree = "<group>"; };
 		3F0BFFBA2ED488B800ADB28D /* FeedbackTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackTileView.swift; sourceTree = "<group>"; };
 		3F3491362ED9BEFD00798B79 /* Date+DaysDifference.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DaysDifference.swift.swift"; sourceTree = "<group>"; };
+		3F3491392EDD73DF00798B79 /* TestFlightDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFlightDetector.swift; sourceTree = "<group>"; };
 		6900D3722B97290D00C87E2E /* RefreshServersLatencyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshServersLatencyUseCase.swift; sourceTree = "<group>"; };
 		6900D3742B972ACE00C87E2E /* Client+Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+Protocols.swift"; sourceTree = "<group>"; };
 		6900D3762B9731F900C87E2E /* RefreshLatencyFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshLatencyFactory.swift; sourceTree = "<group>"; };
@@ -2166,6 +2169,7 @@
 		0E76AE201D35447A00421248 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				3F3491392EDD73DF00798B79 /* TestFlightDetector.swift */,
 				E5F52A1D2A8A613400828883 /* Network */,
 				0EB0A849204F0CE2008BCF1D /* DataCounter.h */,
 				0EB0A84A204F0CE2008BCF1D /* DataCounter.m */,
@@ -5471,6 +5475,7 @@
 				E58A45752BAA28D4002A0704 /* ValidateQRLoginUseCase.swift in Sources */,
 				82CAB8B1255B050000BB08EF /* MessagesCommands.swift in Sources */,
 				DD4E84582243BD1200929B39 /* DashboardCollectionViewUtil.swift in Sources */,
+				3F34913A2EDD73E100798B79 /* TestFlightDetector.swift in Sources */,
 				69B82EC12BDA6B97004A12DD /* Foundation+PIA.swift in Sources */,
 				DD74695B217F07AC00B7BD73 /* DNSList.swift in Sources */,
 				0E9452AF1FDB5F7A00891948 /* PIAPageControl.swift in Sources */,
@@ -5656,6 +5661,7 @@
 				3524670B26B431B800E3F0AC /* TrustedNetworkHelper.swift in Sources */,
 				829EB54A2535BA40003E74DD /* DedicatedIPTitleHeaderViewCell.swift in Sources */,
 				3F3491382ED9BEFF00798B79 /* Date+DaysDifference.swift.swift in Sources */,
+				3F34913B2EDD73E100798B79 /* TestFlightDetector.swift in Sources */,
 				82B7374F265280180097FFF6 /* PIABaseSettingsViewController.swift in Sources */,
 				DDC8124F21761B0B00CB290C /* SwiftGen+ScenesStoryboards.swift in Sources */,
 				0E492C671FE60907007F23DF /* Flags.swift in Sources */,

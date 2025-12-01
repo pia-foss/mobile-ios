@@ -38,30 +38,40 @@ protocol RatingManagerProtocol {
 }
 
 final class RatingManager: RatingManagerProtocol {
+
+    private enum Constants {
+      static let baseURL = "xv-client-json-configuration.s3.us-east-1.amazonaws.com"
+      static let stagingEnvironment = "staging"
+      static let productionEnvironment = "production"
+      static let version = "1.0.0"
+      static let globalRegion = "global"
+    }
     
     static let shared = RatingManager()
 
-    private var showAfterSuccessfulConnections: Int
-    private var cooldownDaysThumbsDown: Int
-    private var cooldownDaysThumbsUp: Int
-    private var cooldownDaysDismiss: Int
+    private var inAppRatingConfig: InAppRatingConfig?
     private var errorInConnectionsUntilPrompt: Int
     
     private var targetConnectionsReachedForPrompt: Bool {
-        AppPreferences.shared.successConnections >= self.showAfterSuccessfulConnections
+        guard let inAppRatingConfig else {
+            return false
+        }
+
+        return AppPreferences.shared.successConnections >= inAppRatingConfig.showAfterSuccessfulConnections
     }
     
     init() {
-        self.showAfterSuccessfulConnections = AppConfiguration.Rating.showAfterSuccessfulConnections
-        self.cooldownDaysThumbsDown = AppConfiguration.Rating.cooldownDaysThumbsDown
-        self.cooldownDaysThumbsUp = AppConfiguration.Rating.cooldownDaysThumbsUp
-        self.cooldownDaysDismiss = AppConfiguration.Rating.cooldownDaysDismiss
         self.errorInConnectionsUntilPrompt = AppConfiguration.Rating.errorInConnectionsUntilPrompt
     }
 
     func shouldShowFeedbackTile() -> Bool {
         guard #available(iOS 15.0, *) else {
             log.debug("Feedback tile is not supported below iOS 15")
+            return false
+        }
+
+        guard let inAppRatingConfig else {
+            log.debug("inAppRatingConfig is not loaded yet")
             return false
         }
 
@@ -81,15 +91,15 @@ final class RatingManager: RatingManagerProtocol {
         }
 
         if mostRecentDate == lastPositive {
-            return mostRecentDate.daysUntilNow() > cooldownDaysThumbsUp
+            return mostRecentDate.daysUntilNow() >= inAppRatingConfig.cooldownDaysThumbsUp
         }
 
         if mostRecentDate == lastNegative {
-            return mostRecentDate.daysUntilNow() > cooldownDaysThumbsDown
+            return mostRecentDate.daysUntilNow() >= inAppRatingConfig.cooldownDaysThumbsDown
         }
 
         if mostRecentDate == lastDismiss {
-            return mostRecentDate.daysUntilNow() > cooldownDaysDismiss
+            return mostRecentDate.daysUntilNow() >= inAppRatingConfig.cooldownDaysDismiss
         }
 
         return false
@@ -155,7 +165,57 @@ final class RatingManager: RatingManagerProtocol {
         guard let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
-    
+
+    // MARK: Configuration fetching
+
+    func loadInAppRatingConfig() {
+        guard #available(iOS 13.0, *) else {
+            self.inAppRatingConfig = .default
+            return
+        }
+        
+        let testFlightDetector = TestFlightDetector.shared
+        let isStaging = testFlightDetector.isTestFlight
+
+        Task {
+            let inAppRatingConfig: InAppRatingConfig? = await loadConfig(
+                file: "rating",
+                url: generateURL(file: "rating", isStaging: isStaging, localized: Constants.globalRegion),
+                fallbackUrl: generateURL(file: "rating", isStaging: isStaging, localized: Constants.globalRegion),
+                urlSession: URLSession.shared
+            )
+
+            self.inAppRatingConfig = inAppRatingConfig ?? .default
+            await MainActor.run {
+                Macros.postNotification(.PIAUpdateFixedTiles)
+            }
+        }
+        
+    }
+
+    private func generateURL(file: String, isStaging: Bool, localized: String) -> URL {
+        let environment = isStaging ? Constants.stagingEnvironment : Constants.productionEnvironment
+        let url = URL(string: "https://\(Constants.baseURL)/environment/\(environment)/platform/ios/version/\(Constants.version)/\(file)/\(file)_\(localized).json")!
+        return url
+    }
+
+    @available(iOS 13.0.0, *)
+    private func loadConfig<T: Codable>(file: String, url: URL, fallbackUrl: URL, urlSession: URLSessionType) async -> T? {
+        do {
+            let request = URLRequest(url: url)
+            let (data, _) = try await urlSession.data(for: request)
+            return try JSONDecoder().decode(T.self, from: data)
+        } catch {
+            do {
+                let request = URLRequest(url: fallbackUrl)
+                let (data, _) = try await urlSession.data(for: request)
+                return try JSONDecoder().decode(T.self, from: data)
+            } catch {
+                return nil
+            }
+        }
+    }
+
     // MARK: Custom Alerts
 
     private func askForConnectionIssuesFeedback() {
@@ -178,4 +238,32 @@ final class RatingManager: RatingManagerProtocol {
 
     }
 
+}
+
+// MARK: - InAppRatingConfig
+
+extension RatingManager {
+    struct InAppRatingConfig: Codable {
+        static let `default` = InAppRatingConfig(
+            showAfterSuccessfulConnections: 3,
+            successfulConnectionSeconds: 10,
+            cooldownDaysThumbsDown: 14,
+            cooldownDaysThumbsUp: 14,
+            cooldownDaysDismiss: 14
+        )
+
+        let showAfterSuccessfulConnections: Int
+        let successfulConnectionSeconds: Int
+        let cooldownDaysThumbsDown: Int
+        let cooldownDaysThumbsUp: Int
+        let cooldownDaysDismiss: Int
+
+        enum CodingKeys: String, CodingKey {
+            case showAfterSuccessfulConnections = "show_after_successful_connections"
+            case successfulConnectionSeconds = "successful_connection_seconds"
+            case cooldownDaysThumbsDown = "cooldown_days_thumbs_down"
+            case cooldownDaysThumbsUp = "cooldown_days_thumbs_up"
+            case cooldownDaysDismiss = "cooldown_days_dismiss"
+        }
+    }
 }

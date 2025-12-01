@@ -130,10 +130,6 @@ struct AppConfiguration {
     }
 
     struct Rating {
-        static let showAfterSuccessfulConnections = 3
-        static let cooldownDaysThumbsDown = 14
-        static let cooldownDaysThumbsUp = 14
-        static let cooldownDaysDismiss = 14
         static let errorInConnectionsUntilPrompt = 1
     }
 

@@ -221,6 +221,10 @@ class Bootstrapper {
         }
 
         Client.bootstrap()
+
+        // Configurations
+
+        RatingManager.shared.loadInAppRatingConfig()
         
         // Preferences
         
