@@ -338,6 +338,7 @@
 "tiles.quicksettings.min.elements.message" = "Houd ten minste één element zichtbaar in de tegel Snelle instellingen";
 "tiles.accessibility.visible.tile.action" = "Tik om deze tegel van het dashboard te verwijderen";
 "tiles.accessibility.invisible.tile.action" = "Tik om deze tegel aan het dashboard toe te voegen";
+"tiles.feedback.title" = "Hoe presteren we?";
 
 //SIRI SHORTCUTS
 "siri.shortcuts.connect.row.title" = "'Verbinding maken' met Siri-opdracht";

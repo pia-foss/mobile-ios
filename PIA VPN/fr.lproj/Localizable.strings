@@ -338,6 +338,7 @@
 "tiles.quicksettings.min.elements.message" = "Vous devriez garder au moins un élément visible dans la vignette Paramètres rapides";
 "tiles.accessibility.visible.tile.action" = "Touchez pour supprimer cette case du tableau de bord";
 "tiles.accessibility.invisible.tile.action" = "Touchez pour ajouter cette case dans le tableau de bord";
+"tiles.feedback.title" = "Satisfait de notre VPN ?";
 
 //SIRI SHORTCUTS
 "siri.shortcuts.connect.row.title" = "« Connecter » le raccourci de Siri";

@@ -338,6 +338,7 @@
 "tiles.quicksettings.min.elements.message" = "クイック設定タイルの少なくとも1つのエレメントを可視状態にしておくべきです";
 "tiles.accessibility.visible.tile.action" = "タップしてこのタイトルをダッシュボードから削除";
 "tiles.accessibility.invisible.tile.action" = "タップしてこのタイトルをダッシュボードに追加";
+"tiles.feedback.title" = "ご満足いただけましたか？";
 
 //SIRI SHORTCUTS
 "siri.shortcuts.connect.row.title" = "Siriショートカットを接続";

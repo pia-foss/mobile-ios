@@ -338,6 +338,7 @@
 "tiles.quicksettings.min.elements.message" = "Debes mantener como mínimo un elemento visible en la casilla de configuración rápida.";
 "tiles.accessibility.visible.tile.action" = "Toca para quitar este cuadro del panel de control";
 "tiles.accessibility.invisible.tile.action" = "Toca para agregar este cuadro al panel de control";
+"tiles.feedback.title" = "¿Cómo lo estamos haciendo?";
 
 //SIRI SHORTCUTS
 "siri.shortcuts.connect.row.title" = "Conectar acceso directo de Siri";

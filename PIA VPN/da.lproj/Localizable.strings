@@ -338,6 +338,7 @@
 "tiles.quicksettings.min.elements.message" = "Du skal holde mindst et element synligt i flisen Hurtig-indstillinger";
 "tiles.accessibility.visible.tile.action" = "Tryk for at fjerne denne flise fra instrumentbrættet";
 "tiles.accessibility.invisible.tile.action" = "Tryk for at tilføje denne flise til instrumentbrættet";
+"tiles.feedback.title" = "Hvordan klarer vi os?";
 
 //SIRI SHORTCUTS
 "siri.shortcuts.connect.row.title" = "'Connect' Siri-genvej";
