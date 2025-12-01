@@ -338,6 +338,7 @@
 "tiles.quicksettings.min.elements.message" = "Dovresti mantenere almeno un elemento visibile nel riquadro Impostazioni rapide";
 "tiles.accessibility.visible.tile.action" = "Tocca per eliminare questo riquadro dal dashboard";
 "tiles.accessibility.invisible.tile.action" = "Tocca per aggiungere questo riquadro al dashboard";
+"tiles.feedback.title" = "Come stiamo andando?";
 
 //SIRI SHORTCUTS
 "siri.shortcuts.connect.row.title" = "\"Connetti\" collegamento a Siri";

@@ -29,66 +29,116 @@ import StoreKit
 
 private let log = SwiftyBeaver.self
 
-class RatingManager {
+protocol RatingManagerProtocol {
+    func shouldShowFeedbackTile() -> Bool
+    func handleFeedbackDismiss()
+    func handlePositiveRating()
+    func handleNegativeRating()
+    func handleConnectionStatusChanged()
+}
+
+final class RatingManager: RatingManagerProtocol {
+
+    private enum Constants {
+      static let baseURL = "xv-client-json-configuration.s3.us-east-1.amazonaws.com"
+      static let stagingEnvironment = "staging"
+      static let productionEnvironment = "production"
+      static let version = "1.0.0"
+      static let globalRegion = "global"
+    }
     
     static let shared = RatingManager()
 
-    private var successDisconnectionsUntilPrompt: Int
-    private var successConnectionsUntilPrompt: Int
-    private var successConnectionsUntilPromptAgain: Int
-    private var timeIntervalUntilPromptAgain: Double
+    private var inAppRatingConfig: InAppRatingConfig?
     private var errorInConnectionsUntilPrompt: Int
     
-    private var isRatingFlagAvailable: Bool {
-        return Client.configuration.featureFlags.contains(Client.FeatureFlags.disableSystemRatingDialog)
-    }
-    
-    private var targetDisconnectionsReachedForPrompt: Bool {
-        guard AppPreferences.shared.successConnections < self.successConnectionsUntilPrompt else {
-            return false // We do not check this because alert was already shown
-        }
-        return AppPreferences.shared.successDisconnections == self.successDisconnectionsUntilPrompt
-    }
-    
     private var targetConnectionsReachedForPrompt: Bool {
-        return AppPreferences.shared.successConnections == self.successConnectionsUntilPrompt
+        guard let inAppRatingConfig else {
+            return false
+        }
+
+        return AppPreferences.shared.successConnections >= inAppRatingConfig.showAfterSuccessfulConnections
     }
     
     init() {
-        self.successDisconnectionsUntilPrompt = AppConfiguration.Rating.successDisconnectionsUntilPrompt
-        self.successConnectionsUntilPrompt = AppConfiguration.Rating.successConnectionsUntilPrompt
-        self.successConnectionsUntilPromptAgain = AppConfiguration.Rating.successConnectionsUntilPromptAgain
         self.errorInConnectionsUntilPrompt = AppConfiguration.Rating.errorInConnectionsUntilPrompt
-        self.timeIntervalUntilPromptAgain = AppConfiguration.Rating.timeIntervalUntilPromptAgain
     }
-    
-    func handleConnectionStatusChanged() {
-        // By default do not use custom alert
-        // and comparison should be: when vpn is disconnected
-        if Client.providers.vpnProvider.vpnStatus == (isRatingFlagAvailable ? .connected : .disconnected) {
-            showAppReviewWith(customPopup: isRatingFlagAvailable)
-        }
-    }
-    
-    private func showAppReviewWith(customPopup useCustomDialog: Bool) {
-        let shouldShowRatingAlert = useCustomDialog ? targetConnectionsReachedForPrompt : targetDisconnectionsReachedForPrompt
-        if shouldShowRatingAlert {
-            log.debug("Show rating")
-            if useCustomDialog {
-                showCustomAlertForReview()
-            } else {
-                showDefaultAlertForReview()
-            }
-        } else if AppPreferences.shared.canAskAgainForReview {
-            let now = Date()
 
-            if AppPreferences.shared.successConnections >= self.successConnectionsUntilPromptAgain,
-                let lastTime = AppPreferences.shared.lastRatingRejection,
-                lastTime.addingTimeInterval(self.timeIntervalUntilPromptAgain) < now {
-                log.debug("Show rating")
-                reviewAppWithoutPrompt()
-            }
+    func shouldShowFeedbackTile() -> Bool {
+        guard #available(iOS 15.0, *) else {
+            log.debug("Feedback tile is not supported below iOS 15")
+            return false
         }
+
+        guard let inAppRatingConfig else {
+            log.debug("inAppRatingConfig is not loaded yet")
+            return false
+        }
+
+        guard targetConnectionsReachedForPrompt else {
+            return false
+        }
+
+        let lastPositive = AppPreferences.shared.lastPositiveRatingSubmitted
+        let lastNegative = AppPreferences.shared.lastNegativeRatingSubmitted
+        let lastDismiss = AppPreferences.shared.lastRatingRejection
+
+        let allDates = [lastPositive, lastNegative, lastDismiss].compactMap { $0 }
+
+        guard let mostRecentDate = allDates.max() else {
+            // User has never interacted with feedback tile
+            return true
+        }
+
+        if mostRecentDate == lastPositive {
+            return mostRecentDate.daysUntilNow() >= inAppRatingConfig.cooldownDaysThumbsUp
+        }
+
+        if mostRecentDate == lastNegative {
+            return mostRecentDate.daysUntilNow() >= inAppRatingConfig.cooldownDaysThumbsDown
+        }
+
+        if mostRecentDate == lastDismiss {
+            return mostRecentDate.daysUntilNow() >= inAppRatingConfig.cooldownDaysDismiss
+        }
+
+        return false
+    }
+
+    func handleFeedbackDismiss() {
+        AppPreferences.shared.lastRatingRejection = Date()
+        AppPreferences.shared.resetSuccessConnections()
+
+        Macros.postNotification(.PIAUpdateFixedTiles)
+    }
+
+    func handlePositiveRating() {
+        AppPreferences.shared.lastPositiveRatingSubmitted = Date()
+        AppPreferences.shared.resetSuccessConnections()
+
+        openRatingViewInAppstore()
+
+        Macros.postNotification(.PIAUpdateFixedTiles)
+    }
+
+    func handleNegativeRating() {
+        AppPreferences.shared.lastNegativeRatingSubmitted = Date()
+        AppPreferences.shared.resetSuccessConnections()
+
+        openFeedbackWebsite()
+
+        Macros.postNotification(.PIAUpdateFixedTiles)
+    }
+
+    func handleConnectionStatusChanged() {
+        guard
+            Client.providers.vpnProvider.vpnStatus == .connected,
+            shouldShowFeedbackTile()
+        else {
+            return
+        }
+
+        Macros.postNotification(.PIAUpdateFixedTiles)
     }
     
     func handleConnectionError() {
@@ -98,14 +148,6 @@ class RatingManager {
                 AppPreferences.shared.failureConnections = 0
             }
             AppPreferences.shared.failureConnections += 1
-        }
-    }
-    
-    private func handleRatingAlertCancel() {
-        log.debug("No review but maybe we can try in the future")
-        AppPreferences.shared.canAskAgainForReview = true
-        if AppPreferences.shared.lastRatingRejection == nil {
-            AppPreferences.shared.lastRatingRejection = Date()
         }
     }
     
@@ -123,115 +165,58 @@ class RatingManager {
         guard let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
-    
-    private func reviewAppWithoutPrompt() {
-        SKStoreReviewController.requestReview()
-    }
-    
-    // MARK: Default Alerts
-    
-    private func showDefaultAlertForReview() {
-        guard let rootView = AppDelegate.getRootViewController() else {
+
+    // MARK: Configuration fetching
+
+    func loadInAppRatingConfig() {
+        guard #available(iOS 13.0, *) else {
+            self.inAppRatingConfig = .default
             return
         }
         
-        let sheet = Macros.alertController(L10n.Localizable.Rating.Enjoy.question, nil)
-        sheet.addAction(UIAlertAction(title: L10n.Localizable.Rating.Alert.Button.notreally, style: .default, handler: { action in
-            // Ask for feedback
-            let alert = self.createDefaultFeedbackDialog()
-            rootView.present(alert, animated: true, completion: nil)
-        }))
-        sheet.addAction(UIAlertAction(title: L10n.Localizable.Global.yes, style: .default, handler: { action in
-            let alert = self.createDefaultReviewAlert()
-            rootView.present(alert, animated: true, completion: nil)
-        }))
-        rootView.present(sheet, animated: true, completion: nil)
+        let testFlightDetector = TestFlightDetector.shared
+        let isStaging = testFlightDetector.isTestFlight
+
+        Task {
+            let inAppRatingConfig: InAppRatingConfig? = await loadConfig(
+                file: "rating",
+                url: generateURL(file: "rating", isStaging: isStaging, localized: Constants.globalRegion),
+                fallbackUrl: generateURL(file: "rating", isStaging: isStaging, localized: Constants.globalRegion),
+                urlSession: URLSession.shared
+            )
+
+            self.inAppRatingConfig = inAppRatingConfig ?? .default
+            await MainActor.run {
+                Macros.postNotification(.PIAUpdateFixedTiles)
+            }
+        }
+        
     }
-    
-    private func createDefaultFeedbackDialog() -> UIAlertController {
-        let sheet = Macros.alertController(L10n.Localizable.Rating.Problems.question, L10n.Localizable.Rating.Problems.subtitle)
-        sheet.addAction(UIAlertAction(title: L10n.Localizable.Global.no, style: .default, handler: { action in
-            log.debug("No feedback")
-        }))
-        sheet.addAction(UIAlertAction(title: L10n.Localizable.Global.yes, style: .default, handler: { action in
-            self.openFeedbackWebsite()
-        }))
-        return sheet
+
+    private func generateURL(file: String, isStaging: Bool, localized: String) -> URL {
+        let environment = isStaging ? Constants.stagingEnvironment : Constants.productionEnvironment
+        let url = URL(string: "https://\(Constants.baseURL)/environment/\(environment)/platform/ios/version/\(Constants.version)/\(file)/\(file)_\(localized).json")!
+        return url
     }
-    
-    private func createDefaultReviewAlert() -> UIAlertController {
-        let sheet = Macros.alertController(L10n.Localizable.Rating.Rate.question, nil)
-        sheet.addAction(UIAlertAction(title: L10n.Localizable.Rating.Alert.Button.nothanks, style: .default, handler: { action in
-            self.handleRatingAlertCancel()
-        }))
-        sheet.addAction(UIAlertAction(title: L10n.Localizable.Rating.Alert.Button.oksure, style: .default, handler: { action in
-            self.openRatingViewInAppstore()
-        }))
-        return sheet
+
+    @available(iOS 13.0.0, *)
+    private func loadConfig<T: Codable>(file: String, url: URL, fallbackUrl: URL, urlSession: URLSessionType) async -> T? {
+        do {
+            let request = URLRequest(url: url)
+            let (data, _) = try await urlSession.data(for: request)
+            return try JSONDecoder().decode(T.self, from: data)
+        } catch {
+            do {
+                let request = URLRequest(url: fallbackUrl)
+                let (data, _) = try await urlSession.data(for: request)
+                return try JSONDecoder().decode(T.self, from: data)
+            } catch {
+                return nil
+            }
+        }
     }
-    
+
     // MARK: Custom Alerts
-    
-    private func showCustomAlertForReview() {
-        
-        guard let rootView = AppDelegate.getRootViewController() else {
-            return
-        }
-        
-        let sheet = Macros.alert(
-            L10n.Localizable.Rating.Enjoy.question,
-            L10n.Localizable.Rating.Enjoy.subtitle
-        )
-        sheet.addCancelActionWithTitle(L10n.Localizable.Global.no, handler: {
-            // Ask for feedback
-            let alert = self.createCustomFeedbackDialog()
-            rootView.present(alert, animated: true, completion: nil)
-        })
-        
-        sheet.addActionWithTitle(L10n.Localizable.Global.yes) {
-            let alert = self.createCustomReviewDialog()
-            rootView.present(alert, animated: true, completion: nil)
-        }
-        
-        rootView.present(sheet, animated: true, completion: nil)
-
-    }
-    
-    private func createCustomFeedbackDialog() -> PopupDialog {
-        
-        let sheet = Macros.alert(
-            L10n.Localizable.Rating.Problems.question,
-            L10n.Localizable.Rating.Problems.subtitle
-        )
-        sheet.addCancelActionWithTitle(L10n.Localizable.Global.no, handler: {
-            log.debug("No feedback")
-        })
-        
-        sheet.addActionWithTitle(L10n.Localizable.Global.yes) {
-            self.openFeedbackWebsite()
-        }
-
-        return sheet
-
-    }
-    
-    private func createCustomReviewDialog() -> PopupDialog {
-        
-        let sheet = Macros.alert(
-            L10n.Localizable.Rating.Review.question,
-            L10n.Localizable.Rating.Rate.subtitle
-        )
-        sheet.addCancelActionWithTitle(L10n.Localizable.Global.no, handler: {
-            self.handleRatingAlertCancel()
-        })
-        
-        sheet.addActionWithTitle(L10n.Localizable.Global.yes) {
-            self.openRatingViewInAppstore()
-        }
-
-        return sheet
-
-    }
 
     private func askForConnectionIssuesFeedback() {
         
@@ -253,4 +238,32 @@ class RatingManager {
 
     }
 
+}
+
+// MARK: - InAppRatingConfig
+
+extension RatingManager {
+    struct InAppRatingConfig: Codable {
+        static let `default` = InAppRatingConfig(
+            showAfterSuccessfulConnections: 3,
+            successfulConnectionSeconds: 10,
+            cooldownDaysThumbsDown: 14,
+            cooldownDaysThumbsUp: 14,
+            cooldownDaysDismiss: 14
+        )
+
+        let showAfterSuccessfulConnections: Int
+        let successfulConnectionSeconds: Int
+        let cooldownDaysThumbsDown: Int
+        let cooldownDaysThumbsUp: Int
+        let cooldownDaysDismiss: Int
+
+        enum CodingKeys: String, CodingKey {
+            case showAfterSuccessfulConnections = "show_after_successful_connections"
+            case successfulConnectionSeconds = "successful_connection_seconds"
+            case cooldownDaysThumbsDown = "cooldown_days_thumbs_down"
+            case cooldownDaysThumbsUp = "cooldown_days_thumbs_up"
+            case cooldownDaysDismiss = "cooldown_days_dismiss"
+        }
+    }
 }

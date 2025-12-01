@@ -338,6 +338,7 @@
 "tiles.quicksettings.min.elements.message" = "Следует оставить как минимум один элемент на плитке «Быстрые настройки» видимым";
 "tiles.accessibility.visible.tile.action" = "Нажмите, чтобы удалить эту плитку с панели";
 "tiles.accessibility.invisible.tile.action" = "Нажмите, чтобы добавить эту плитку на панель";
+"tiles.feedback.title" = "Как мы справляемся?";
 
 //SIRI SHORTCUTS
 "siri.shortcuts.connect.row.title" = "Ярлык Siri «Подключить»";

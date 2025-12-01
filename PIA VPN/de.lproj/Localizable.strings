@@ -338,6 +338,7 @@
 "tiles.quicksettings.min.elements.message" = "Sie sollten mindestens ein Element in den Schnelleinstellungen sichtbar halten.";
 "tiles.accessibility.visible.tile.action" = "Tippen, um diese Kachel vom Dashboard zu entfernen";
 "tiles.accessibility.invisible.tile.action" = "Tippen, um diese Kachel dem Dashboard hinzuzufügen";
+"tiles.feedback.title" = "Gefällt dir unsere App?";
 
 //SIRI SHORTCUTS
 "siri.shortcuts.connect.row.title" = "Siri-Kurzbefehl „Verbinden“";

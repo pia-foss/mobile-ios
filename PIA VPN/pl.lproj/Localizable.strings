@@ -338,6 +338,7 @@
 "tiles.quicksettings.min.elements.message" = "Na kafelku Szybkich ustawień musisz zachować widoczny co najmniej jeden element.";
 "tiles.accessibility.visible.tile.action" = "Dotknij, aby usunąć tę płytkę z panelu sterowania";
 "tiles.accessibility.invisible.tile.action" = "Dotknij, aby dodać tę płytkę do panelu sterowania";
+"tiles.feedback.title" = "Jak nas oceniasz?";
 
 //SIRI SHORTCUTS
 "siri.shortcuts.connect.row.title" = "skrót 'Połącz' w Siri";

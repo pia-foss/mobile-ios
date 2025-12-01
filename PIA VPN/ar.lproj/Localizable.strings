@@ -338,6 +338,7 @@
 "tiles.quicksettings.min.elements.message" = "يجب أن تبقي عنصرًا واحدًا على الأقل مرئيًا في لوح الإعدادات السريعة";
 "tiles.accessibility.visible.tile.action" = "اضغط لإزالة هذا المربع من لوحة المعلومات";
 "tiles.accessibility.invisible.tile.action" = "اضغط لإضافة هذا المربع إلى لوحة المعلومات";
+"tiles.feedback.title" = "كيف أبلينا؟";
 
 //SIRI SHORTCUTS
 "siri.shortcuts.connect.row.title" = "اتصال اختصار Siri";

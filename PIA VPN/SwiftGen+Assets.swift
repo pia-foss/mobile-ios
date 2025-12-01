@@ -434,12 +434,15 @@ enum Asset {
     static let iconRegion = ImageAsset(name: "icon-region")
     static let iconRemove = ImageAsset(name: "icon-remove")
     static let iconSettings = ImageAsset(name: "icon-settings")
+    static let iconThumbsDown = ImageAsset(name: "icon-thumbs-down")
+    static let iconThumbsUp = ImageAsset(name: "icon-thumbs-up")
     static let iconTrashDark = ImageAsset(name: "icon-trash-dark")
     static let iconTrash = ImageAsset(name: "icon-trash")
     static let iconWarning = ImageAsset(name: "icon-warning")
     static let iconWifi = ImageAsset(name: "icon-wifi")
     static let iconmenuAbout = ImageAsset(name: "iconmenu-about")
     static let iconmenuPrivacy = ImageAsset(name: "iconmenu-privacy")
+    static let imageAccessCard = ImageAsset(name: "image-access-card")
     static let imageContentBlocker = ImageAsset(name: "image-content-blocker")
     static let imagePurchaseSuccess = ImageAsset(name: "image-purchase-success")
     static let imageRobot = ImageAsset(name: "image-robot")
@@ -817,12 +820,15 @@ enum Asset {
       iconRegion,
       iconRemove,
       iconSettings,
+      iconThumbsDown,
+      iconThumbsUp,
       iconTrashDark,
       iconTrash,
       iconWarning,
       iconWifi,
       iconmenuAbout,
       iconmenuPrivacy,
+      imageAccessCard,
       imageContentBlocker,
       imagePurchaseSuccess,
       imageRobot,

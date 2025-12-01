@@ -85,6 +85,8 @@ class AppPreferences {
         static let failureConnections = "failureConnections"
         static let canAskAgainForReview = "canAskAgainForReview"
         static let lastRatingRejection = "lastRatingRejection"
+        static let lastPositiveRatingSubmitted = "lastPositiveRatingSubmitted"
+        static let lastNegativeRatingSubmitted = "lastNegativeRatingSubmitted"
         static let successDisconnections = "successDisconnections"
 
         // GEO servers
@@ -448,6 +450,24 @@ class AppPreferences {
         }
         set {
             defaults.set(newValue, forKey: Entries.lastRatingRejection)
+        }
+    }
+
+    var lastPositiveRatingSubmitted: Date? {
+        get {
+            return defaults.object(forKey: Entries.lastPositiveRatingSubmitted) as? Date
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.lastPositiveRatingSubmitted)
+        }
+    }
+
+    var lastNegativeRatingSubmitted: Date? {
+        get {
+            return defaults.object(forKey: Entries.lastNegativeRatingSubmitted) as? Date
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.lastNegativeRatingSubmitted)
         }
     }
     
@@ -899,6 +919,9 @@ class AppPreferences {
         successDisconnections = 0
         successConnections = 0
         failureConnections = 0
+        lastRatingRejection = nil
+        lastPositiveRatingSubmitted = nil
+        lastNegativeRatingSubmitted = nil
         showGeoServers = true
         showServiceMessages = false
         dismissedMessages = []
@@ -957,6 +980,10 @@ class AppPreferences {
     // MARK: Connections
     func incrementSuccessConnections() {
         successConnections += 1
+    }
+
+    func resetSuccessConnections() {
+        successConnections = 1
     }
     
     func incrementSuccessDisconnections() {

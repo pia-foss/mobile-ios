@@ -338,6 +338,7 @@
 "tiles.quicksettings.min.elements.message" = "应该在“快速设置”图块中保持至少一个元素可见";
 "tiles.accessibility.visible.tile.action" = "点击以从仪表板中删除此图块";
 "tiles.accessibility.invisible.tile.action" = "点击以将此图块添加到仪表板";
+"tiles.feedback.title" = "用得还满意吗？";
 
 //SIRI SHORTCUTS
 "siri.shortcuts.connect.row.title" = "“连接”Siri 快捷键";
