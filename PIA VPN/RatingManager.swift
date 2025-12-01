@@ -50,6 +50,7 @@ final class RatingManager: RatingManagerProtocol {
     static let shared = RatingManager()
 
     private var inAppRatingConfig: InAppRatingConfig?
+    private var successfulActivityAccomplished: Bool = false
     private var errorInConnectionsUntilPrompt: Int
     
     private var targetConnectionsReachedForPrompt: Bool {
@@ -75,7 +76,10 @@ final class RatingManager: RatingManagerProtocol {
             return false
         }
 
-        guard targetConnectionsReachedForPrompt else {
+        guard
+            targetConnectionsReachedForPrompt,
+            successfulActivityAccomplished
+        else {
             return false
         }
 
@@ -131,14 +135,17 @@ final class RatingManager: RatingManagerProtocol {
     }
 
     func handleConnectionStatusChanged() {
-        guard
-            Client.providers.vpnProvider.vpnStatus == .connected,
-            shouldShowFeedbackTile()
-        else {
+        guard Client.providers.vpnProvider.vpnStatus == .connected else {
             return
         }
 
-        Macros.postNotification(.PIAUpdateFixedTiles)
+        // This enables the feedback tile to show up only after a successful activity
+        // In this case it is a connection triggered by the user that succeeds
+        successfulActivityAccomplished = true
+
+        if shouldShowFeedbackTile() {
+            Macros.postNotification(.PIAUpdateFixedTiles)
+        }
     }
     
     func handleConnectionError() {
