@@ -216,6 +216,8 @@
 "dashboard.vpn.disconnected" = "ขาดการเชื่อมต่อ";
 "dashboard.vpn.connecting" = "กำลังเชื่อมต่อ...";
 "dashboard.vpn.connected" = "เชื่อมต่อกับ VPN";
+"dashboard.vpn.protected" = "ป้องกันแล้ว";
+"dashboard.vpn.not_protected" = "ยังไม่ได้ป้องกัน";
 "dashboard.vpn.on" = "VPN : เปิด";
 "dashboard.vpn.disconnecting" = "กำลังยกเลิกการเชื่อมต่อ...";
 "dashboard.vpn.changing_region" = "กำลังเปลี่ยนภูมิภาค...";
@@ -605,4 +607,3 @@
 "forceupdate.label.subtitle" = "คุณกำลังใช้ PIA เวอร์ชันเก่า อัปเดตแอปของคุณตอนนี้เพื่อเพลิดเพลินกับประสบการณ์ที่ดียิ่งขึ้นด้วยฟีเจอร์ล่าสุดทั้งหมด";
 "forceupdate.button.update" = "อัปเดตทันที";
 "forceupdate.label.vpn.connected" = "การแตะ \"อัปเดตทันที\" จะยกเลิกการเชื่อมต่อ VPN";
-

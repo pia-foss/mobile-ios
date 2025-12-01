@@ -216,6 +216,8 @@
 "dashboard.vpn.disconnected" = "Nicht verbunden";
 "dashboard.vpn.connecting" = "Verbindung wird hergestellt...";
 "dashboard.vpn.connected" = "Verbunden mit VPN";
+"dashboard.vpn.protected" = "Geschützt";
+"dashboard.vpn.not_protected" = "Nicht geschützt";
 "dashboard.vpn.on" = "VPN: EIN";
 "dashboard.vpn.disconnecting" = "Verbindung wird unterbrochen...";
 "dashboard.vpn.changing_region" = "Region wird geändert…";
@@ -605,4 +607,3 @@
 "forceupdate.label.subtitle" = "Sie nutzen eine ältere PIA-Version. Aktualisieren Sie Ihre App jetzt, und genießen Sie mit unseren neuesten Funktionen ein noch besseres Erlebnis.";
 "forceupdate.button.update" = "Jetzt aktualisieren";
 "forceupdate.label.vpn.connected" = "Wenn Sie auf „Jetzt aktualisieren“ tippen, wird die Verbindung zum VPN getrennt.";
-

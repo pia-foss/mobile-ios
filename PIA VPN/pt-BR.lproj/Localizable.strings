@@ -216,6 +216,8 @@
 "dashboard.vpn.disconnected" = "Desconectado";
 "dashboard.vpn.connecting" = "Conectando...";
 "dashboard.vpn.connected" = "Conectado a VPN";
+"dashboard.vpn.protected" = "Protegido";
+"dashboard.vpn.not_protected" = "Não protegido";
 "dashboard.vpn.on" = "VPN: ATIVADA";
 "dashboard.vpn.disconnecting" = "Desconectando...";
 "dashboard.vpn.changing_region" = "Alterando a região...";
@@ -575,11 +577,11 @@
 "tvos.signin.expired.button.signout" = "Desconectar";
 
 //Sign in free trial expired (tvOS)
-"tvos.signin.expired.trial.title" = "A sua avaliação grátis expirou";
+"tvos.signin.expired.trial.title" = "Seu teste grátis expirou";
 "tvos.signin.expired.trial.subtitle" = "Se você gostou da proteção premium de VPN, assine a PIA!";
 
 //SignUp with subscription (tvOS)
-"tvos.signup.subscription.paywall.subtitle" = "Inicie sua avaliação grátis de 7 dias e depois %@ por ano.";
+"tvos.signup.subscription.paywall.subtitle" = "Inicie seu teste grátis de 7 dias e depois %@ por ano.";
 "tvos.signup.subscription.paywall.price.year" = "por ano";
 "tvos.signup.subscription.paywall.price.trial" = "MELHOR VALOR - TESTE GRÁTIS";
 "tvos.signup.subscription.paywall.price.month.simplified" = "/mês";
@@ -607,4 +609,3 @@
 "forceupdate.label.subtitle" = "Você está usando uma versão mais antiga da PIA. Atualize o seu aplicativo agora para desfrutar de uma experiência aprimorada com todos os recursos mais recentes.";
 "forceupdate.button.update" = "Atualizar agora";
 "forceupdate.label.vpn.connected" = "Tocar em \"Atualizar agora\" desconectará a VPN.";
-

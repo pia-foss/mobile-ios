@@ -216,6 +216,8 @@
 "dashboard.vpn.disconnected" = "Rozłączono";
 "dashboard.vpn.connecting" = "Łączenie";
 "dashboard.vpn.connected" = "Połączono z VPN";
+"dashboard.vpn.protected" = "Ochrona aktywna";
+"dashboard.vpn.not_protected" = "Ochrona nieaktywna";
 "dashboard.vpn.on" = "VPN: WŁ";
 "dashboard.vpn.disconnecting" = "Rozłączanie";
 "dashboard.vpn.changing_region" = "Zmieniamy region";
@@ -605,4 +607,3 @@
 "forceupdate.label.subtitle" = "Używasz starszej wersji PIA. Zaktualizuj swoją aplikację teraz, aby korzystać ze wszystkich najnowszych funkcji.";
 "forceupdate.button.update" = "Zaktualizuj teraz";
 "forceupdate.label.vpn.connected" = "Stuknięcie przycisku „Zaktualizuj teraz” spowoduje rozłączenie VPN.";
-

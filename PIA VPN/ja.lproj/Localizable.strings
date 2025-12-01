@@ -216,6 +216,8 @@
 "dashboard.vpn.disconnected" = "切断済み";
 "dashboard.vpn.connecting" = "接続中...";
 "dashboard.vpn.connected" = "VPN に接続済み";
+"dashboard.vpn.protected" = "保護中";
+"dashboard.vpn.not_protected" = "保護が無効";
 "dashboard.vpn.on" = "VPN: 有効";
 "dashboard.vpn.disconnecting" = "切断中...";
 "dashboard.vpn.changing_region" = "地域を変更中...";
@@ -606,4 +608,3 @@
 "forceupdate.label.subtitle" = "現在お使いのPIAは旧バージョンです。今すぐアプリをアップデートして、最新機能でより素晴らしい体験をお楽しみください。";
 "forceupdate.button.update" = "今すぐアップデート";
 "forceupdate.label.vpn.connected" = "「今すぐアップデート」をタップするとVPNが切断します。";
-
