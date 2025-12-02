@@ -1,26 +1,26 @@
 strings:
     inputs:
-        - PIA VPN/en.lproj/Localizable.strings
+        - PIA VPN/Resources/L10n/en.lproj/Localizable.strings
         - Resources/Resources/Shared/en.lproj/UI.strings
         - Resources/Resources/iOS/en.lproj/Signup.strings
         - Resources/Resources/iOS/en.lproj/Welcome.strings
     templateName: structured-swift4
-    output: PIA VPN/SwiftGen+Strings.swift
+    output: PIA VPN/Resources/L10n/SwiftGen+Strings.swift
 
 ib:
     inputs:
-        - Resources/UI/en.lproj/Main.storyboard
-        - Resources/UI/Welcome.storyboard
-        - Resources/UI/Signup.storyboard
+        - PIA VPN/UI/Storyboards/en.lproj/Main.storyboard
+        - PIA VPN/UI/Storyboards/Welcome.storyboard
+        - PIA VPN/UI/Storyboards/Signup.storyboard
     outputs:
         templateName: scenes-swift4
-        output: PIA VPN/SwiftGen+ScenesStoryboards.swift
+        output: PIA VPN/UI/Shared/SwiftGen+ScenesStoryboards.swift
     outputs.params:
         module: PIA_VPN
 
 xcassets:
     inputs:
-        - PIA VPN/Images.xcassets
-        - Resources/Resources/iOS/UI.xcassets
+        - PIA VPN/Resources/Images/Images.xcassets
+        - PIA VPN/Resources/Images/UI.xcassets
     templatePath: Resources/SwiftGen/xcassets/swift4.stencil
-    output: PIA VPN/SwiftGen+Assets.swift
+    output: PIA VPN/UI/Shared/SwiftGen+Assets.swift

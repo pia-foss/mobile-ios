@@ -288,15 +288,15 @@
 		3F0EF5CA2EDF25880013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				/Localized/Assets/L10n/Localizable.strings,
-				"Assets/L10n/SwiftGen+Strings.swift",
+				/Localized/Resources/L10n/Localizable.strings,
+				"Resources/L10n/SwiftGen+Strings.swift",
 			);
 			target = 8269A6D4251CB5E0000B4DBF /* PIAWidgetExtension */;
 		};
 		3F0EF5CB2EDF25880013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				/Localized/Assets/L10n/Localizable.strings,
+				/Localized/Resources/L10n/Localizable.strings,
 				UI/Shared/AccessibilityId.swift,
 			);
 			target = 69B70AAF2ACBF51C0072A09D /* PIA-VPN_E2E_Tests */;
@@ -304,7 +304,6 @@
 		3F0EF5CC2EDF25880013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"Assets/L10n/SwiftGen+Strings.swift",
 				"Core/Extensions/Server+Automatic.swift",
 				"Core/Extensions/ServerProvider+UI.swift",
 				Core/Models/AboutComponent.swift,
@@ -314,14 +313,15 @@
 				Global/AppConstants.swift,
 				Global/AppPreferences.swift,
 				Global/UserInterface.swift,
+				"Resources/L10n/SwiftGen+Strings.swift",
 			);
 			target = E5C507762B0E144D00200A6A /* PIA VPN-tvOS */;
 		};
 		3F0EF5CD2EDF25880013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				/Localized/Assets/L10n/Localizable.strings,
-				"Assets/L10n/SwiftGen+Strings.swift",
+				/Localized/Resources/L10n/Localizable.strings,
+				"Resources/L10n/SwiftGen+Strings.swift",
 			);
 			target = 35E8E6572B870AD200A3A3DB /* PIA-VPN_tvOS_E2E_Tests */;
 		};
@@ -403,6 +403,7 @@
 		3F0EF9EE2EDF28710013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				/Localized/Assets/L10n/PIAWidget.intentdefinition,
 				Domain/Widget/PIAConnectionLiveActivityManager.swift,
 				Domain/Widget/PIAWidgetAttributes.swift,
 			);
@@ -632,12 +633,12 @@
 			children = (
 				3F0EFBA02EDF2AAA0013E4FB /* Entitlements */,
 				3F0EFB942EDF29F20013E4FB /* TestPlans */,
+				3F0EFB2D2EDF29880013E4FB /* Resources */,
 				3F0EFB992EDF2A270013E4FB /* PIA Common */,
 				3F0EF43B2EDF25880013E4FB /* PIA VPN */,
 				3F0EF5D12EDF25970013E4FB /* PIA VPN AdBlocker */,
 				3F0EF5DA2EDF25DB0013E4FB /* PIA VPN Tunnel */,
 				3F0EF5EB2EDF26510013E4FB /* PIA VPNTests */,
-				3F0EFB2D2EDF29880013E4FB /* Resources */,
 				3F0EF5F62EDF26620013E4FB /* PIA VPN WG Tunnel */,
 				3F0EF9D42EDF28710013E4FB /* PIAWidget */,
 				3F0EF9682EDF27910013E4FB /* PIA-VPN_E2E_Tests */,
