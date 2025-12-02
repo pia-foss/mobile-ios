@@ -13,7 +13,7 @@
             buildForArchiving = "NO"
             buildForAnalyzing = "NO">
             <TestPlanReference
-               reference = "container:PIA-VPN_E2E_Tests.xctestplan">
+               reference = "container:TestPlans/PIA-VPN-E2E-Tests.xctestplan">
             </TestPlanReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -25,7 +25,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:PIA-VPN_E2E_Tests.xctestplan"
+            reference = "container:TestPlans/PIA-VPN-E2E-Tests.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
