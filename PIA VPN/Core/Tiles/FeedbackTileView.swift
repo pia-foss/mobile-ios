@@ -38,13 +38,15 @@ struct FeedbackTileView: View {
     }
 
     var body: some View {
-        HStack {
+        HStack(spacing: 16) {
+            leadingSpacerIfNeeded()
+            
             SwiftUI.Image(uiImage: Asset.Images.imageAccessCard.image)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 90, height: 100)
             
-            Spacer()
+            middleSpacerIfNeeded()
             
             VStack(alignment: .center, spacing: 12) {
                 Text(L10n.Localizable.Tiles.Feedback.title)
@@ -65,7 +67,7 @@ struct FeedbackTileView: View {
             }
             
             Spacer()
-            
+
             // Close button
             VStack {
                 Button(action: ratingManager.handleFeedbackDismiss) {
@@ -82,6 +84,20 @@ struct FeedbackTileView: View {
         .padding(.vertical, 8)
         .padding(.horizontal, 15)
         .background(Color(uiColor: cardBackgroungColor))
+    }
+
+    @ViewBuilder
+    private func leadingSpacerIfNeeded() -> some View {
+        if Macros.isDevicePad {
+            Spacer()
+        }
+    }
+
+    @ViewBuilder
+    private func middleSpacerIfNeeded() -> some View {
+        if !Macros.isDevicePad {
+            Spacer()
+        }
     }
 
     @ViewBuilder

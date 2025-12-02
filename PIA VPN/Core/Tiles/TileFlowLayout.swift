@@ -187,8 +187,8 @@ final class TileFlowLayout: UICollectionViewFlowLayout {
         guard let indexPath = draggingIndexPath else { return }
         guard let cv = collectionView else { return }
         guard let datasource = cv.dataSource else { return }
-        
-        let targetCenter = datasource.collectionView(cv, cellForItemAt: indexPath).center
+
+        let targetCenter = cv.cellForItem(at: indexPath)?.center ?? dragView.center
         
         let shadowFade = CABasicAnimation(keyPath: "shadowOpacity")
         shadowFade.fromValue = 0.8
