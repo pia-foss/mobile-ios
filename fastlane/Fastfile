@@ -158,7 +158,7 @@ platform :ios do
       build_path: "build/#{archive_path}",
       output_name: "#{archive_path}.ipa",
       export_options: {
-        provisioningProfiles: { 
+        provisioningProfiles: {
           "com.privateinternetaccess.ios.PIA-VPN" => "match AppStore com.privateinternetaccess.ios.PIA-VPN",
           "com.privateinternetaccess.ios.PIA-VPN.Tunnel" => "match AppStore com.privateinternetaccess.ios.PIA-VPN.Tunnel",
           "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel" => "match AppStore com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel",
@@ -199,7 +199,7 @@ platform :ios do
       build_path: "build/#{archive_path}",
       output_name: "#{archive_path}.ipa",
       export_options: {
-        provisioningProfiles: { 
+        provisioningProfiles: {
           "com.privateinternetaccess.ios.PIA-VPN" => "match Development com.privateinternetaccess.ios.PIA-VPN",
           "com.privateinternetaccess.ios.PIA-VPN.Tunnel" => "match Development com.privateinternetaccess.ios.PIA-VPN.Tunnel",
           "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel" => "match Development com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel",
@@ -230,7 +230,7 @@ platform :ios do
       build_path: "build/#{archive_path}",
       output_name: "#{archive_path}.ipa",
       export_options: {
-        provisioningProfiles: { 
+        provisioningProfiles: {
           "com.privateinternetaccess.ios.PIA-VPN" => "match Development com.privateinternetaccess.ios.PIA-VPN",
           "com.privateinternetaccess.ios.PIA-VPN.Tunnel" => "match Development com.privateinternetaccess.ios.PIA-VPN.Tunnel",
           "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel" => "match Development com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel",
@@ -255,45 +255,6 @@ platform :ios do
       build_number: build_number + 1
     )
   end
-
-  desc "Update What's New text for all languages"
-  desc "Usage: fastlane update_release_notes text:\"Your release notes here\""
-  lane :update_release_notes do |options|
-    api_key = app_store_connect_api_key(
-      key_id: key_id,
-      issuer_id: issuer_id,
-      key_content: key_content
-    )
-
-    release_notes_text = options[:text]
-
-    if release_notes_text.nil? || release_notes_text.empty?
-      UI.user_error!("Please provide release notes text using text:\"Your text here\"")
-    end
-
-    # Get all available languages for the app
-    languages = ["en-US", "de-DE", "es-ES", "fr-FR", "it-IT", "ja-JP", "ko-KR",
-                 "pt-BR", "ru-RU", "zh-Hans", "zh-Hant", "nl-NL", "tr-TR"]
-
-    # Create a hash with the same text for all languages
-    release_notes = {}
-    languages.each do |lang|
-      release_notes[lang] = release_notes_text
-    end
-
-    deliver(
-      api_key: api_key,
-      app_identifier: "com.privateinternetaccess.ios.PIA-VPN",
-      skip_binary_upload: true,
-      skip_screenshots: true,
-      skip_metadata: true,
-      release_notes: release_notes,
-      force: true,
-      precheck_include_in_app_purchases: false
-    )
-
-    UI.success("Successfully updated What's New text for all languages!")
-  end
 end
 
 desc "This line is for creating testflight build for tvOS"
@@ -314,7 +275,7 @@ desc "This line is for creating testflight build for tvOS"
       platform: "appletvos"
     )
     increment_build_number(
-      build_number: build_number + 1 
+      build_number: build_number + 1
     )
     
     build_app(scheme: "PIA VPN-tvOS",
@@ -322,7 +283,7 @@ desc "This line is for creating testflight build for tvOS"
       xcargs: "-destination 'platform=tvOS'",
       clean: true,
       export_options: {
-        provisioningProfiles: { 
+        provisioningProfiles: {
           "com.privateinternetaccess.ios.PIA-VPN" => "PIA Distribution tvOS",
           "com.privateinternetaccess.ios.PIA-VPN.PacketTunnel" => "PIA Distribution tvOS PacketTunnel"
         }
