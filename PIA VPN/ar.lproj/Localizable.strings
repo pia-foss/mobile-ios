@@ -235,6 +235,9 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "لمنع تسرب البيانات، اضغط على التبديل الآن للتغير إلى بروتوكول IKEv2 VPN وإعادة الاتصال تلقائيًا.";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "التبديل الآن";
 
+"dashboard.vpn.change_location.alert.title" = "تغيير الموقع";
+"dashboard.vpn.change_location.alert.message" = "سينقطع اتصال VPN مؤقتًا أثناء الاتصال بالموقع الجديد.";
+
 // VPN PERMISSION
 
 "vpn_permission.title" = "PIA";

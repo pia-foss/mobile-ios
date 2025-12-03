@@ -235,6 +235,9 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "Для предотвращения утечек данных, нажмите «Переключить сейчас», чтобы перейти на протокол IKEv2 VPN и автоматически переподключиться.";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Переключить сейчас";
 
+"dashboard.vpn.change_location.alert.title" = "Изменение местоположения";
+"dashboard.vpn.change_location.alert.message" = "Ваш VPN на короткое время отключится при подключении к новому местоположению.";
+
 // VPN PERMISSION
 
 "vpn_permission.title" = "PIA";

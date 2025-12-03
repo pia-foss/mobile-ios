@@ -235,6 +235,9 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "若要避免資料洩漏，請點一下「立即切換」，以便改成 IKEv2 VPN 通訊協定，然後自動重新連線。";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "立即切換";
 
+"dashboard.vpn.change_location.alert.title" = "變更位置";
+"dashboard.vpn.change_location.alert.message" = "連線到新位置時，您的VPN將短暫中斷連線。";
+
 // VPN PERMISSION
 
 "vpn_permission.title" = "PIA";

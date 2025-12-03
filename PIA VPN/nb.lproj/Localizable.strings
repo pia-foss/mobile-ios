@@ -235,6 +235,9 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "For å hindre datalekkasjer trykker du på Bytt nå for å bytte til VPN-protokollen IKEv2 og automatisk koble til på nytt.";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Bytt nå";
 
+"dashboard.vpn.change_location.alert.title" = "Endrer plassering";
+"dashboard.vpn.change_location.alert.message" = "VPN-en din kobles fra kort mens den kobler til den nye plasseringen.";
+
 // VPN PERMISSION
 
 "vpn_permission.title" = "PIA";
