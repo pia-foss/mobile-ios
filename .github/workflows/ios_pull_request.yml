@@ -20,7 +20,7 @@ jobs:
 
     - uses: actions/checkout@v4
 
-    - name: Select XCode version
+    - name: Select Xcode version
       run: sudo xcode-select -s /Applications/Xcode_16.4.0.app
     
     - name: Set up Ruby
