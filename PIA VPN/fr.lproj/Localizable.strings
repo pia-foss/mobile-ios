@@ -235,6 +235,9 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "Pour éviter les fuites de données, appuyez sur « Changer » afin de passer au protocole VPN IKEv2 et de permettre la reconnexion automatique.";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Changer";
 
+"dashboard.vpn.change_location.alert.title" = "Changement de localisation";
+"dashboard.vpn.change_location.alert.message" = "Votre VPN se déconnectera brièvement lors de la connexion au nouvel emplacement.";
+
 // VPN PERMISSION
 
 "vpn_permission.title" = "PIA";
