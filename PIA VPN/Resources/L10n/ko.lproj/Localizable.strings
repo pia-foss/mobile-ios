@@ -235,6 +235,9 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "데이터 누출을 방지하려면 지금 전환을 눌러서 IKEv2 VPN 프로토콜로 변경하고 자동으로 다시 연결하세요.";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "지금 전환";
 
+"dashboard.vpn.change_location.alert.title" = "위치 변경";
+"dashboard.vpn.change_location.alert.message" = "새 위치에 연결하는 동안 VPN이 잠시 연결 해제됩니다.";
+
 // VPN PERMISSION
 
 "vpn_permission.title" = "PIA";
