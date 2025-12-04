@@ -13,7 +13,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:PIA-VPN_tvOS_E2E_Tests.xctestplan"
+            reference = "container:TestPlans/PIA-VPN-tvOS-E2E-Tests.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>

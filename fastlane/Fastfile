@@ -158,7 +158,7 @@ platform :ios do
       build_path: "build/#{archive_path}",
       output_name: "#{archive_path}.ipa",
       export_options: {
-        provisioningProfiles: { 
+        provisioningProfiles: {
           "com.privateinternetaccess.ios.PIA-VPN" => "match AppStore com.privateinternetaccess.ios.PIA-VPN",
           "com.privateinternetaccess.ios.PIA-VPN.Tunnel" => "match AppStore com.privateinternetaccess.ios.PIA-VPN.Tunnel",
           "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel" => "match AppStore com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel",
@@ -199,7 +199,7 @@ platform :ios do
       build_path: "build/#{archive_path}",
       output_name: "#{archive_path}.ipa",
       export_options: {
-        provisioningProfiles: { 
+        provisioningProfiles: {
           "com.privateinternetaccess.ios.PIA-VPN" => "match Development com.privateinternetaccess.ios.PIA-VPN",
           "com.privateinternetaccess.ios.PIA-VPN.Tunnel" => "match Development com.privateinternetaccess.ios.PIA-VPN.Tunnel",
           "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel" => "match Development com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel",
@@ -230,7 +230,7 @@ platform :ios do
       build_path: "build/#{archive_path}",
       output_name: "#{archive_path}.ipa",
       export_options: {
-        provisioningProfiles: { 
+        provisioningProfiles: {
           "com.privateinternetaccess.ios.PIA-VPN" => "match Development com.privateinternetaccess.ios.PIA-VPN",
           "com.privateinternetaccess.ios.PIA-VPN.Tunnel" => "match Development com.privateinternetaccess.ios.PIA-VPN.Tunnel",
           "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel" => "match Development com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel",
@@ -247,12 +247,12 @@ platform :ios do
 
 
   desc "Increase build number for TestFlight"
-  private_lane :increment_build_number_testflight do 
+  private_lane :increment_build_number_testflight do
     build_number = latest_testflight_build_number(
       app_identifier: "com.privateinternetaccess.ios.PIA-VPN"
     )
     increment_build_number(
-      build_number: build_number + 1 
+      build_number: build_number + 1
     )
   end
 end
@@ -275,7 +275,7 @@ desc "This line is for creating testflight build for tvOS"
       platform: "appletvos"
     )
     increment_build_number(
-      build_number: build_number + 1 
+      build_number: build_number + 1
     )
     
     build_app(scheme: "PIA VPN-tvOS",
@@ -283,7 +283,7 @@ desc "This line is for creating testflight build for tvOS"
       xcargs: "-destination 'platform=tvOS'",
       clean: true,
       export_options: {
-        provisioningProfiles: { 
+        provisioningProfiles: {
           "com.privateinternetaccess.ios.PIA-VPN" => "PIA Distribution tvOS",
           "com.privateinternetaccess.ios.PIA-VPN.PacketTunnel" => "PIA Distribution tvOS PacketTunnel"
         }

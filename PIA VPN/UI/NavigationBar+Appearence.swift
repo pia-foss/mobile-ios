@@ -1,5 +1,5 @@
 //
-//  NavigationBar+Appearence..swift
+//  NavigationBar+Appearence.swift
 //  PIA VPN
 //
 //  Created by Said Rehouni on 8/11/23.

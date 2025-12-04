@@ -78,7 +78,7 @@
       </EnvironmentVariables>
       <TestPlans>
          <TestPlanReference
-            reference = "container:PIA-VPN_E2E_Tests/PIA-VPN-e2e-simulator.xctestplan"
+            reference = "container:TestPlans/PIA-VPN-e2e-simulator.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
