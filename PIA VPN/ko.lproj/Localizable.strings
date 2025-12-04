@@ -237,6 +237,7 @@
 
 "dashboard.vpn.change_location.alert.title" = "위치 변경";
 "dashboard.vpn.change_location.alert.message" = "새 위치에 연결하는 동안 VPN이 잠시 연결 해제됩니다.";
+"dashboard.vpn.change_location.alert.button.connect" = "연결";
 
 // VPN PERMISSION
 

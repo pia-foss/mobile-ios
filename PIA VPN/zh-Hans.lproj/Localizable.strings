@@ -237,6 +237,7 @@
 
 "dashboard.vpn.change_location.alert.title" = "更改位置";
 "dashboard.vpn.change_location.alert.message" = "连接到新位置时，您的VPN将短暂断开连接。";
+"dashboard.vpn.change_location.alert.button.connect" = "连接";
 
 // VPN PERMISSION
 
