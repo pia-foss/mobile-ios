@@ -25,6 +25,19 @@ struct PIAWidgetView : View {
     }
 
     var body: some View {
+        if #available(iOS 17.0, *) {
+            widgetBody()
+                .containerBackground(for: .widget) {
+                    Color("WidgetBackground")
+                }
+        } else {
+            widgetBody()
+                .background(Color("WidgetBackground"))
+        }
+    }
+
+    @ViewBuilder
+    private func widgetBody() -> some View {
         ZStack(alignment: .bottomTrailing) {
             let targetIconSize = widgetFamily == .systemMedium ? 100.0 : 50.0
             let targetPadding = widgetFamily == .systemMedium ? -25.0 : -9.0
@@ -46,7 +59,7 @@ struct PIAWidgetView : View {
                 }
             }
 
-        }.widgetURL(URL(string: widgetFamily == .systemMedium ? "piavpn:view" : "piavpn:connect"))
-        .background(Color("WidgetBackground"))
+        }
+        .widgetURL(URL(string: widgetFamily == .systemMedium ? "piavpn:view" : "piavpn:connect"))
     }
 }
