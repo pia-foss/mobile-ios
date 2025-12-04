@@ -172,7 +172,7 @@
 "settings.reset.defaults.confirm.button" = "Redefinir";
 "settings.reset.footer" = "Esta ação irá restaurar o padrão das configurações acima.";
 
-"settings.small.packets.title" = "Usar pacotes pequens";
+"settings.small.packets.title" = "Usar pacotes pequenos";
 "settings.small.packets.description" = "O tamanho do seu pacote de IP será diminuído um pouco para melhorar a compatibilidade com alguns roteadores e redes móveis.";
 
 "settings.log.connected.error" = "É necessária uma conexão VPN. Conecte-se à VPN e tente novamente.";
@@ -237,6 +237,7 @@
 
 "dashboard.vpn.change_location.alert.title" = "Alterando a localização";
 "dashboard.vpn.change_location.alert.message" = "Sua VPN se desconectará brevemente ao conectar à nova localização.";
+"dashboard.vpn.change_location.alert.button.connect" = "Conectar";
 
 // VPN PERMISSION
 

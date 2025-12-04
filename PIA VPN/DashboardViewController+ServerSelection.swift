@@ -25,7 +25,7 @@ extension DashboardViewController: ServerSelectionDelegate {
             )
 
             // reconnect -> reconnect VPN and close
-            alert.addActionWithTitle(L10n.Localizable.Settings.Commit.Buttons.reconnect) {
+            alert.addActionWithTitle(L10n.Localizable.Dashboard.Vpn.ChangeLocation.Alert.Button.connect) {
                 self.connect(to: server)
             }
 

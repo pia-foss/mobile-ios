@@ -237,6 +237,7 @@
 
 "dashboard.vpn.change_location.alert.title" = "場所を変更中";
 "dashboard.vpn.change_location.alert.message" = "新しい場所に接続する間、VPNが一時的に切断されます。";
+"dashboard.vpn.change_location.alert.button.connect" = "接続";
 
 // VPN PERMISSION
 
