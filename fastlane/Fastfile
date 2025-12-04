@@ -2,9 +2,14 @@ default_platform(:ios)
 import("./Certificates")
 
 platform :ios do
+  # App Store Connect API credentials
   key_id = ENV['APP_STORE_CONNECT_KEY_ID']
   issuer_id = ENV['APP_STORE_CONNECT_ISSUER_ID']
   key_content = ENV['APP_STORE_CONNECT_KEY']
+
+  # Claude API key for translations
+  anthropic_api_key = ENV['ANTHROPIC_API_KEY']
+  anthropic_model = "claude-sonnet-4-5"
 
   lane :tests do
     run_tests(scheme: "PIA VPN")
@@ -245,9 +250,140 @@ platform :ios do
 
   end
 
+  desc "Update What's New text for all languages from metadata folder"
+  desc "Usage: fastlane update_release_notes"
+  desc "Edit fastlane/metadata/{locale}/release_notes.txt files before running this lane"
+  lane :update_release_notes do
+    api_key = app_store_connect_api_key(
+      key_id: key_id,
+      issuer_id: issuer_id,
+      key_content: key_content
+    )
+
+    UI.message("Uploading release notes from fastlane/metadata/ folder...")
+
+    deliver(
+      api_key: api_key,
+      app_identifier: "com.privateinternetaccess.ios.PIA-VPN",
+      skip_binary_upload: true,
+      skip_screenshots: true,
+      skip_metadata: false,
+      force: true,
+      precheck_include_in_app_purchases: false
+    )
+
+    UI.success("Successfully updated What's New text for all languages!")
+  end
+
+  desc "Translate release notes from English to all supported languages using Claude"
+  desc "Usage: fastlane translate_release_notes"
+  desc "Reads fastlane/metadata/en-US/release_notes.txt and translates to all locales"
+  lane :translate_release_notes do
+    require 'net/http'
+    require 'json'
+    require 'uri'
+
+    if anthropic_api_key.nil? || anthropic_api_key.empty?
+      UI.user_error!("ANTHROPIC_API_KEY environment variable not set. Please set it before running this lane.")
+    end
+
+    # Read the English release notes
+    english_notes_path = "../fastlane/metadata/en-US/release_notes.txt"
+    unless File.exist?(english_notes_path)
+      UI.user_error!("English release notes not found at #{english_notes_path}")
+    end
+
+    english_text = File.read(english_notes_path).strip
+    UI.message("Source text (English): #{english_text}")
+
+    # Define all target languages with their locale codes and language names
+    languages = {
+      "zh-Hans" => "Simplified Chinese",
+      "zh-Hant" => "Traditional Chinese",
+      "da" => "Danish",
+      "nl-NL" => "Dutch",
+      "en-AU" => "English (keep the same as source)",
+      "en-CA" => "English (keep the same as source)",
+      "en-GB" => "English (keep the same as source)",
+      "fr-FR" => "French",
+      "de-DE" => "German",
+      "id" => "Indonesian",
+      "it" => "Italian",
+      "ja" => "Japanese",
+      "ko" => "Korean",
+      "no" => "Norwegian",
+      "pt-BR" => "Brazilian Portuguese",
+      "ru" => "Russian",
+      "es-MX" => "Mexican Spanish",
+      "th" => "Thai",
+      "tr" => "Turkish"
+    }
+
+    # Translate to each language
+    languages.each do |locale, language_name|
+      UI.message("Translating to #{language_name} (#{locale})...")
+
+      # For English variants, just copy the source text
+      if locale.start_with?("en-")
+        target_path = "../fastlane/metadata/#{locale}/release_notes.txt"
+        File.write(target_path, english_text)
+        UI.success("Copied to #{locale}")
+        next
+      end
+
+      # Call Claude API for translation
+      uri = URI('https://api.anthropic.com/v1/messages')
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      http.read_timeout = 60
+
+      request = Net::HTTP::Post.new(uri.path)
+      request['Content-Type'] = 'application/json'
+      request['x-api-key'] = anthropic_api_key
+      request['anthropic-version'] = '2023-06-01'
+
+      prompt = "Translate the following app release notes to #{language_name}. These are release notes for Private Internet Access (PIA) VPN, a privacy and security app. Keep the same tone and style, and use appropriate VPN/privacy terminology for the target language. Only return the translated text, nothing else:\n\n#{english_text}"
+
+      request.body = {
+        model: anthropic_model,
+        max_tokens: 1024,
+        messages: [
+          {
+            role: 'user',
+            content: prompt
+          }
+        ]
+      }.to_json
+
+      begin
+        response = http.request(request)
+
+        if response.code.to_i == 200
+          result = JSON.parse(response.body)
+          translated_text = result['content'][0]['text'].strip
+
+          # Write to the locale's release_notes.txt
+          target_path = "../fastlane/metadata/#{locale}/release_notes.txt"
+          File.write(target_path, translated_text)
+
+          UI.success("✓ #{locale}: #{translated_text[0..50]}...")
+        else
+          UI.error("Failed to translate to #{locale}: #{response.code} - #{response.body}")
+        end
+      rescue => e
+        UI.error("Error translating to #{locale}: #{e.message}")
+      end
+
+      # Small delay to avoid rate limiting
+      sleep(0.5)
+    end
+
+    UI.success("Translation complete! All release_notes.txt files have been updated.")
+  end
 
   desc "Increase build number for TestFlight"
-  private_lane :increment_build_number_testflight do 
+  private_lane :increment_build_number_testflight do
     build_number = latest_testflight_build_number(
       app_identifier: "com.privateinternetaccess.ios.PIA-VPN"
     )

@@ -1,0 +1,1 @@
+We added a connection timer so you can see how long your connection has been protected, and fixed crashes affecting login on iPad and reordering dashboard tiles.

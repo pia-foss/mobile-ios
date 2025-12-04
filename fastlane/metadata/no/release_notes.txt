@@ -1,0 +1,1 @@
+Vi har lagt til en tilkoblingstimer slik at du kan se hvor lenge tilkoblingen din har vært beskyttet, og fikset krasj som påvirket innlogging på iPad og omorganisering av dashbord-fliser.

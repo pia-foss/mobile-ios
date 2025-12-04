@@ -1,0 +1,1 @@
+Bağlantı sürenizin ne kadar süredir korunduğunu görebilmeniz için bir bağlantı zamanlayıcısı ekledik ve iPad'de oturum açmayı ve gösterge paneli kutucuklarını yeniden sıralamayı etkileyen çökmeleri düzelttik.
