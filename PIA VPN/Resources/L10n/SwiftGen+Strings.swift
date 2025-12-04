@@ -246,6 +246,10 @@ internal enum L10n {
             internal static let message = L10n.tr("Localizable", "dashboard.vpn.change_location.alert.message", fallback: "Your VPN will briefly disconnect while connecting to the new location.")
             /// Changing location
             internal static let title = L10n.tr("Localizable", "dashboard.vpn.change_location.alert.title", fallback: "Changing location")
+            internal enum Button {
+              /// Connect
+              internal static let connect = L10n.tr("Localizable", "dashboard.vpn.change_location.alert.button.connect", fallback: "Connect")
+            }
           }
         }
         internal enum Disconnect {

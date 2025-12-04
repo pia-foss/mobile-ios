@@ -237,6 +237,7 @@
 
 "dashboard.vpn.change_location.alert.title" = "Changement de localisation";
 "dashboard.vpn.change_location.alert.message" = "Votre VPN se déconnectera brièvement lors de la connexion au nouvel emplacement.";
+"dashboard.vpn.change_location.alert.button.connect" = "Se connecter";
 
 // VPN PERMISSION
 

@@ -237,6 +237,7 @@
 
 "dashboard.vpn.change_location.alert.title" = "Konum değiştiriliyor";
 "dashboard.vpn.change_location.alert.message" = "VPN'iniz yeni konuma bağlanırken kısa bir süre bağlantısı kesilecek.";
+"dashboard.vpn.change_location.alert.button.connect" = "Bağlan";
 
 // VPN PERMISSION
 

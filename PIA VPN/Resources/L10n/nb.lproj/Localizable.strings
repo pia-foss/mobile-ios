@@ -237,6 +237,7 @@
 
 "dashboard.vpn.change_location.alert.title" = "Endrer plassering";
 "dashboard.vpn.change_location.alert.message" = "VPN-en din kobles fra kort mens den kobler til den nye plasseringen.";
+"dashboard.vpn.change_location.alert.button.connect" = "Koble til";
 
 // VPN PERMISSION
 
