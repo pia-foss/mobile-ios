@@ -1,0 +1,1 @@
+Kami menambahkan penghitung waktu koneksi sehingga Anda dapat melihat berapa lama koneksi Anda telah terlindungi, dan memperbaiki crash yang memengaruhi login di iPad serta pengurutan ulang tile dashboard.

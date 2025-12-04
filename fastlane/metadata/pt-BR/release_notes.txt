@@ -1,0 +1,1 @@
+Adicionamos um cronômetro de conexão para que você possa ver há quanto tempo sua conexão está protegida e corrigimos travamentos que afetavam o login no iPad e a reordenação dos blocos do painel.

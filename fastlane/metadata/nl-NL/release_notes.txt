@@ -1,0 +1,1 @@
+We hebben een verbindingstimer toegevoegd zodat je kunt zien hoe lang je verbinding al beschermd is, en crashes verholpen die inloggen op iPad en het herschikken van dashboardtegels beïnvloedden.

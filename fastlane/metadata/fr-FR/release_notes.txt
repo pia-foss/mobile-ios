@@ -1,0 +1,1 @@
+Nous avons ajouté un chronomètre de connexion pour que vous puissiez voir depuis combien de temps votre connexion est protégée, et corrigé des plantages affectant la connexion sur iPad et la réorganisation des tuiles du tableau de bord.
