@@ -477,6 +477,7 @@
 		3F0EFB942EDF29F20013E4FB /* TestPlans */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TestPlans; sourceTree = "<group>"; };
 		3F0EFB992EDF2A270013E4FB /* PIA Common */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PIA Common"; sourceTree = "<group>"; };
 		3F0EFBA02EDF2AAA0013E4FB /* Entitlements */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Entitlements; sourceTree = "<group>"; };
+		3F7B4C892EE72EFB00EE1F4C /* LocalPackages */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = LocalPackages; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -634,6 +635,7 @@
 				3F0EFBA02EDF2AAA0013E4FB /* Entitlements */,
 				3F0EFB942EDF29F20013E4FB /* TestPlans */,
 				3F0EFB2D2EDF29880013E4FB /* Resources */,
+				3F7B4C892EE72EFB00EE1F4C /* LocalPackages */,
 				3F0EFB992EDF2A270013E4FB /* PIA Common */,
 				3F0EF43B2EDF25880013E4FB /* PIA VPN */,
 				3F0EF5D12EDF25970013E4FB /* PIA VPN AdBlocker */,
