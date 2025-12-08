@@ -33,6 +33,8 @@
 		35950B342ADD2EE5006F3CD9 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 35950B332ADD2EE5006F3CD9 /* Nimble */; };
 		35E8E6762B8C39A400A3A3DB /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = 35E8E6752B8C39A400A3A3DB /* Quick */; };
 		35E8E6782B8C39AA00A3A3DB /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 35E8E6772B8C39AA00A3A3DB /* Nimble */; };
+		3F7B4C8B2EE7332B00EE1F4C /* PIADesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7B4C8A2EE7332B00EE1F4C /* PIADesignSystem */; };
+		3F7B4C8D2EE7333300EE1F4C /* PIADesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7B4C8C2EE7333300EE1F4C /* PIADesignSystem */; };
 		695BF81F2AC410E000D1139C /* (null) in Sources */ = {isa = PBXBuildFile; };
 		698F4F2B2AB8A2080010B2B0 /* PIAWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8269A6D5251CB5E0000B4DBF /* PIAWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8269A6D6251CB5E0000B4DBF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8269A67C251CB4BA000B4DBF /* WidgetKit.framework */; };
@@ -493,6 +495,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F7B4C8D2EE7333300EE1F4C /* PIADesignSystem in Frameworks */,
 				AABF827128AD188700CDAC64 /* AlamofireImage in Frameworks */,
 				AABF827628AE302300CDAC64 /* NetworkExtension.framework in Frameworks */,
 				0EE220571F4EF307002805AE /* Security.framework in Frameworks */,
@@ -531,6 +534,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F7B4C8B2EE7332B00EE1F4C /* PIADesignSystem in Frameworks */,
 				AA36CDC428A6711300180A33 /* Popover in Frameworks */,
 				AA36CDCC28A673C900180A33 /* GradientProgressBar in Frameworks */,
 				AA36CDCF28A6746500180A33 /* SideMenu in Frameworks */,
@@ -757,6 +761,7 @@
 				AABF827428AE2FFE00CDAC64 /* SideMenu */,
 				AABF827728AE333200CDAC64 /* DZNEmptyDataSet */,
 				E5C507692B0D60A500200A6A /* PIALibrary */,
+				3F7B4C8C2EE7333300EE1F4C /* PIADesignSystem */,
 			);
 			productName = "PIA VPN";
 			productReference = 0EE2207A1F4EF307002805AE /* PIA VPN dev.app */;
@@ -833,6 +838,7 @@
 				AA36CDCE28A6746500180A33 /* SideMenu */,
 				AA36CDDD28A6878000180A33 /* AlamofireImage */,
 				E5C507672B0D609300200A6A /* PIALibrary */,
+				3F7B4C8A2EE7332B00EE1F4C /* PIADesignSystem */,
 			);
 			productName = "PIA VPN";
 			productReference = 291C637C183EBC210039EC03 /* PIA VPN.app */;
@@ -2956,6 +2962,14 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 35950B322ADD2EE5006F3CD9 /* XCRemoteSwiftPackageReference "Nimble" */;
 			productName = Nimble;
+		};
+		3F7B4C8A2EE7332B00EE1F4C /* PIADesignSystem */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIADesignSystem;
+		};
+		3F7B4C8C2EE7333300EE1F4C /* PIADesignSystem */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIADesignSystem;
 		};
 		AA36CDBA28A6622A00180A33 /* TweetNacl */ = {
 			isa = XCSwiftPackageProductDependency;
