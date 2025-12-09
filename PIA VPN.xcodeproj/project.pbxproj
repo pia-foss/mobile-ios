@@ -2929,7 +2929,7 @@
 			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
 			requirement = {
 				kind = exactVersion;
-				version = 1.16.0;
+				version = 1.18.7;
 			};
 		};
 		E5C507662B0D609300200A6A /* XCRemoteSwiftPackageReference "mobile-ios-library" */ = {

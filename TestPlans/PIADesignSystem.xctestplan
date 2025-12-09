@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "88AC39E1-AE35-41BB-B8A8-9FEB3B37909B",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "PIADesignSystemTests",
+        "name" : "PIADesignSystemTests"
+      }
+    }
+  ],
+  "version" : 1
+}
