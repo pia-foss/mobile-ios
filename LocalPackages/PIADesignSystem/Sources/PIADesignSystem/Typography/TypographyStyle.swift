@@ -114,6 +114,19 @@ extension TypographyStyle {
         }
     }
 
+    /// Font weight for this typography style (used for Dynamic Type scaling)
+    @available(iOS 13.0, *)
+    var fontWeight: Font.Weight {
+        switch self {
+        case .title1:
+            .bold
+        case .title2, .subtitle1, .subtitle2, .subtitle3:
+            .semibold
+        case .title3, .body1, .body2, .button1, .button2, .caption1, .caption2, .caption3:
+            .regular
+        }
+    }
+
     /// Line spacing (lineHeight - fontSize)
     var lineSpacing: CGFloat {
         lineHeight - fontSize
@@ -132,15 +145,9 @@ extension TypographyStyle {
     /// Returns the SwiftUI Font for this typography style
     @available(iOS 13.0, *)
     var font: Font {
-        switch self {
-        case .title1:
-            .sfProBold(size: fontSize)
-        case .title2:
-            .sfProSemibold(size: fontSize)
-        case .title3, .body1, .body2, .button1, .button2, .caption1, .caption2, .caption3:
-            .sfProRegular(size: fontSize)
-        case .subtitle1, .subtitle2, .subtitle3:
-            .sfProSemibold(size: fontSize)
-        }
+        .sfPro(
+            size: fontSize,
+            weight: fontWeight
+        )
     }
 }

@@ -24,37 +24,22 @@ import SwiftUI
 
 /// SF Pro font extensions for PIA VPN design system.
 ///
-/// Provides SF Pro font variants (Bold, Semibold, Regular) at custom sizes.
+/// Provides SF Pro font variants at custom sizes and weights.
 ///
 /// Example:
 /// ```swift
-/// Text("Bold Text").font(.sfProBold(size: 18))
-/// Text("Semibold Text").font(.sfProSemibold(size: 16))
-/// Text("Regular Text").font(.sfProRegular(size: 14))
+/// Text("Bold Text").font(.sfPro(size: 18, weight: .bold))
+/// Text("Semibold Text").font(.sfPro(size: 16, weight: .semibold))
+/// Text("Regular Text").font(.sfPro(size: 14, weight: .regular))
 /// ```
 @available(iOS 13.0, *)
 extension Font {
-    /// SF Pro Bold font
+    /// SF Pro font
     ///
     /// - Parameter size: The font size in points
-    /// - Returns: SF Pro Bold font at the specified size
-    static func sfProBold(size: CGFloat) -> Font {
-        .system(size: size, weight: .bold, design: .default)
-    }
-
-    /// SF Pro Semibold font
-    ///
-    /// - Parameter size: The font size in points
-    /// - Returns: SF Pro Semibold font at the specified size
-    static func sfProSemibold(size: CGFloat) -> Font {
-        .system(size: size, weight: .semibold, design: .default)
-    }
-
-    /// SF Pro Regular font
-    ///
-    /// - Parameter size: The font size in points
-    /// - Returns: SF Pro Regular font at the specified size
-    static func sfProRegular(size: CGFloat) -> Font {
-        .system(size: size, weight: .regular, design: .default)
+    /// - Parameter weight: The font weight
+    /// - Returns: SF Pro font at the specified size and weight
+    static func sfPro(size: CGFloat, weight: Weight) -> Font {
+        .system(size: size, weight: weight, design: .default)
     }
 }

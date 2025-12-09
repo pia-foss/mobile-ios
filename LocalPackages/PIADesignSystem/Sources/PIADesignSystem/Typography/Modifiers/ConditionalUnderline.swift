@@ -1,8 +1,8 @@
 //
-//  ColorSnapshotTests.swift
+//  ConditionalUnderline.swift
 //  PIADesignSystem
 //
-//  Created by snapshot testing on 08.12.25.
+//  Created by Diego Trevisan on 09.12.25.
 //  Copyright © 2025 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
@@ -20,41 +20,18 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Testing
 import SwiftUI
-import SnapshotTesting
-@testable import PIADesignSystem
 
-@Suite("Color Snapshots")
-@MainActor
-struct ColorSnapshotTests {
+/// Conditionally applies underline decoration
+@available(iOS 13.0, *)
+struct ConditionalUnderline: ViewModifier {
+    let enabled: Bool
 
-    @available(iOS 14.0, *)
-    @MainActor
-    @Test func colorPreviewLight() {
-        let view = ColorPreview()
-            .environment(\.colorScheme, .light)
-            .frame(width: 1024)
-            .fixedSize()
-
-        assertSnapshot(
-            of: view,
-            as: .image(traits: .init(displayScale: 1.0))
-        )
+    func body(content: Content) -> some View {
+        if enabled, #available(iOS 16.0, *) {
+            content.underline()
+        } else {
+            content
+        }
     }
-
-    @available(iOS 14.0, *)
-    @MainActor
-    @Test func colorPreviewDark() {
-        let view = ColorPreview()
-            .environment(\.colorScheme, .dark)
-            .frame(width: 1024)
-            .fixedSize()
-
-        assertSnapshot(
-            of: view,
-            as: .image(traits: .init(displayScale: 1.0))
-        )
-    }
-
 }

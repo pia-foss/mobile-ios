@@ -29,18 +29,198 @@ import SnapshotTesting
 @MainActor
 struct TypographySnapshotTests {
 
-    @available(iOS 13.0, *)
     @MainActor
     @Test func typographyPreview() {
         let view = TypographyPreview()
             .environment(\.colorScheme, .light)
-            .frame(width: 1024, height: 1350)
-            .preferredColorScheme(.light)
+            .frame(width: 1024)
+            .fixedSize()
 
         assertSnapshot(
             of: view,
-            as: .image
+            as: .image(traits: .init(displayScale: 1.0))
         )
     }
 
+    // MARK: - Accessibility Tests
+
+    @MainActor
+    @Test("Typography with Extra Small accessibility size")
+    func typographyAccessibilityExtraSmall() {
+        let view = TypographyPreview()
+            .environment(\.colorScheme, .light)
+            .environment(\.sizeCategory, .extraSmall)
+            .frame(width: 1024)
+            .fixedSize()
+
+        assertSnapshot(
+            of: view,
+            as: .image(traits: .init(displayScale: 1.0))
+        )
+    }
+
+    @MainActor
+    @Test("Typography with Small accessibility size")
+    func typographyAccessibilitySmall() {
+        let view = TypographyPreview()
+            .environment(\.colorScheme, .light)
+            .environment(\.sizeCategory, .small)
+            .frame(width: 1024)
+            .fixedSize()
+
+        assertSnapshot(
+            of: view,
+            as: .image(traits: .init(displayScale: 1.0))
+        )
+    }
+
+    @MainActor
+    @Test("Typography with Medium (default) accessibility size")
+    func typographyAccessibilityMedium() {
+        let view = TypographyPreview()
+            .environment(\.colorScheme, .light)
+            .environment(\.sizeCategory, .medium)
+            .frame(width: 1024)
+            .fixedSize()
+
+        assertSnapshot(
+            of: view,
+            as: .image(traits: .init(displayScale: 1.0))
+        )
+    }
+
+    @MainActor
+    @Test("Typography with Large accessibility size")
+    func typographyAccessibilityLarge() {
+        let view = TypographyPreview()
+            .environment(\.colorScheme, .light)
+            .environment(\.sizeCategory, .large)
+            .frame(width: 1024)
+            .fixedSize()
+
+        assertSnapshot(
+            of: view,
+            as: .image(traits: .init(displayScale: 1.0))
+        )
+    }
+
+    @MainActor
+    @Test("Typography with Extra Large accessibility size")
+    func typographyAccessibilityExtraLarge() {
+        let view = TypographyPreview()
+            .environment(\.colorScheme, .light)
+            .environment(\.sizeCategory, .extraLarge)
+            .frame(width: 1024)
+            .fixedSize()
+
+        assertSnapshot(
+            of: view,
+            as: .image(traits: .init(displayScale: 1.0))
+        )
+    }
+
+    @MainActor
+    @Test("Typography with Extra Extra Large accessibility size")
+    func typographyAccessibilityExtraExtraLarge() {
+        let view = TypographyPreview()
+            .environment(\.colorScheme, .light)
+            .environment(\.sizeCategory, .extraExtraLarge)
+            .frame(width: 1024)
+            .fixedSize()
+
+        assertSnapshot(
+            of: view,
+            as: .image(traits: .init(displayScale: 1.0))
+        )
+    }
+
+    @MainActor
+    @Test("Typography with Extra Extra Extra Large accessibility size")
+    func typographyAccessibilityExtraExtraExtraLarge() {
+        let view = TypographyPreview()
+            .environment(\.colorScheme, .light)
+            .environment(\.sizeCategory, .extraExtraExtraLarge)
+            .frame(width: 1024)
+            .fixedSize()
+
+        assertSnapshot(
+            of: view,
+            as: .image(traits: .init(displayScale: 1.0))
+        )
+    }
+
+    @MainActor
+    @Test("Typography with Accessibility Medium accessibility size")
+    func typographyAccessibilityMediumSize() {
+        let view = TypographyPreview()
+            .environment(\.colorScheme, .light)
+            .environment(\.sizeCategory, .accessibilityMedium)
+            .frame(width: 1024)
+            .fixedSize()
+
+        assertSnapshot(
+            of: view,
+            as: .image(traits: .init(displayScale: 1.0))
+        )
+    }
+
+    @MainActor
+    @Test("Typography with Accessibility Large accessibility size")
+    func typographyAccessibilityLargeSize() {
+        let view = TypographyPreview()
+            .environment(\.colorScheme, .light)
+            .environment(\.sizeCategory, .accessibilityLarge)
+            .frame(width: 1024)
+            .fixedSize()
+
+        assertSnapshot(
+            of: view,
+            as: .image(traits: .init(displayScale: 1.0))
+        )
+    }
+
+    @MainActor
+    @Test("Typography with Accessibility Extra Large accessibility size")
+    func typographyAccessibilityExtraLargeSize() {
+        let view = TypographyPreview()
+            .environment(\.colorScheme, .light)
+            .environment(\.sizeCategory, .accessibilityExtraLarge)
+            .frame(width: 1024)
+            .fixedSize()
+
+        assertSnapshot(
+            of: view,
+            as: .image(traits: .init(displayScale: 1.0))
+        )
+    }
+
+    @MainActor
+    @Test("Typography with Accessibility Extra Extra Large accessibility size")
+    func typographyAccessibilityExtraExtraLargeSize() {
+        let view = TypographyPreview()
+            .environment(\.colorScheme, .light)
+            .environment(\.sizeCategory, .accessibilityExtraExtraLarge)
+            .frame(width: 1024)
+            .fixedSize()
+
+        assertSnapshot(
+            of: view,
+            as: .image(traits: .init(displayScale: 1.0))
+        )
+    }
+
+    @MainActor
+    @Test("Typography with Accessibility Extra Extra Extra Large accessibility size")
+    func typographyAccessibilityExtraExtraExtraLargeSize() {
+        let view = TypographyPreview()
+            .environment(\.colorScheme, .light)
+            .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
+            .frame(width: 1024)
+            .fixedSize()
+
+        assertSnapshot(
+            of: view,
+            as: .image(traits: .init(displayScale: 1.0))
+        )
+    }
 }

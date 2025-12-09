@@ -27,7 +27,8 @@ import SwiftUI
 /// Typography modifier extensions for PIA VPN design system.
 ///
 /// Provides a convenient `.typography()` modifier for applying typography styles to Text views.
-/// This modifier applies both font and line height specifications.
+/// This modifier applies both font and line height specifications with Dynamic Type support
+/// for accessibility. Fonts and line heights automatically scale based on user preferences.
 ///
 /// Example:
 /// ```swift
@@ -38,13 +39,38 @@ import SwiftUI
 @available(iOS 13.0, *)
 public extension Text {
     /// Applies a typography style to the text, including font, line height, decorations, and optional color.
+    /// Supports Dynamic Type for accessibility - text scales automatically with user's text size preferences.
     ///
     /// - Parameters:
     ///   - style: The typography style to apply
     ///   - color: Optional color to apply to the text. If nil, no color is applied.
-    /// - Returns: A modified Text view with the typography style applied
+    /// - Returns: A modified Text view with the typography style applied and Dynamic Type support
+    @MainActor
     func typography(_ style: TypographyStyle, color: Color? = nil) -> some View {
-        self
+        if #available(iOS 14.0, *) {
+            return self
+                .modifier(AccessibleTypographyModifier(style: style, color: color))
+        } else {
+            return self
+                .modifier(TypographyModifier(style: style, color: color))
+        }
+    }
+}
+
+/// ViewModifier that applies typography
+@available(iOS 13.0, *)
+@available(*, deprecated, renamed: "AccessibleTypographyModifier", message: "Remove this modifier once the package minimum platform is raised to .v15")
+private struct TypographyModifier: ViewModifier {
+    let style: TypographyStyle
+    let color: Color?
+
+    init(style: TypographyStyle, color: Color?) {
+        self.style = style
+        self.color = color
+    }
+
+    func body(content: Content) -> some View {
+        content
             .font(style.font)
             .lineSpacing(style.lineSpacing)
             .modifier(ConditionalUnderline(enabled: style.hasUnderline))
@@ -52,32 +78,25 @@ public extension Text {
     }
 }
 
-// MARK: - Helper ViewModifiers
-
-/// Conditionally applies underline decoration
-@available(iOS 13.0, *)
-private struct ConditionalUnderline: ViewModifier {
-    let enabled: Bool
-
-    func body(content: Content) -> some View {
-        if enabled, #available(iOS 16.0, *) {
-            content.underline()
-        } else {
-            content
-        }
-    }
-}
-
-/// Conditionally applies foreground color
-@available(iOS 13.0, *)
-private struct ConditionalColor: ViewModifier {
+/// ViewModifier that applies typography with Dynamic Type support for accessibility
+@available(iOS 14.0, *)
+private struct AccessibleTypographyModifier: ViewModifier {
+    let style: TypographyStyle
     let color: Color?
 
+    @ScaledMetric private var lineSpacing: CGFloat
+
+    init(style: TypographyStyle, color: Color?) {
+        self.style = style
+        self.color = color
+        _lineSpacing = ScaledMetric(wrappedValue: style.lineSpacing)
+    }
+
     func body(content: Content) -> some View {
-        if let color = color {
-            content.foregroundColor(color)
-        } else {
-            content
-        }
+        content
+            .modifier(ScaledFontModifier(baseSize: style.fontSize, weight: style.fontWeight))
+            .lineSpacing(lineSpacing)
+            .modifier(ConditionalUnderline(enabled: style.hasUnderline))
+            .modifier(ConditionalColor(color: color))
     }
 }

@@ -1,8 +1,8 @@
 //
-//  ColorSnapshotTests.swift
+//  ScaledFontModifier.swift
 //  PIADesignSystem
 //
-//  Created by snapshot testing on 08.12.25.
+//  Created by Diego Trevisan on 09.12.25.
 //  Copyright © 2025 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
@@ -20,41 +20,26 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Testing
 import SwiftUI
-import SnapshotTesting
-@testable import PIADesignSystem
 
-@Suite("Color Snapshots")
-@MainActor
-struct ColorSnapshotTests {
+/// Applies scaled font based on typography style weight
+@available(iOS 14.0, *)
+struct ScaledFontModifier: ViewModifier {
+    let weight: Font.Weight
+    @ScaledMetric private var scaledSize: CGFloat
 
-    @available(iOS 14.0, *)
-    @MainActor
-    @Test func colorPreviewLight() {
-        let view = ColorPreview()
-            .environment(\.colorScheme, .light)
-            .frame(width: 1024)
-            .fixedSize()
-
-        assertSnapshot(
-            of: view,
-            as: .image(traits: .init(displayScale: 1.0))
-        )
+    init(baseSize: CGFloat, weight: Font.Weight) {
+        self.weight = weight
+        _scaledSize = ScaledMetric(wrappedValue: baseSize)
     }
 
-    @available(iOS 14.0, *)
-    @MainActor
-    @Test func colorPreviewDark() {
-        let view = ColorPreview()
-            .environment(\.colorScheme, .dark)
-            .frame(width: 1024)
-            .fixedSize()
-
-        assertSnapshot(
-            of: view,
-            as: .image(traits: .init(displayScale: 1.0))
+    func body(content: Content) -> some View {
+        content.font(
+            .system(
+                size: scaledSize,
+                weight: weight,
+                design: .default
+            )
         )
     }
-
 }
