@@ -55,7 +55,6 @@ struct ColorPreview: View {
                 ColorSection(title: "Fixed", colors: fixedColors)
                 
                 GradientSection(title: "Fixed Gradients", gradients: gradientColors)
-
             }
             .padding()
         }
@@ -63,21 +62,21 @@ struct ColorPreview: View {
         .background(Color.pia.background)
         .ignoresSafeArea()
     }
-    
+
     private var primaryColors: [ColorInfo] {
         [
             .init(name: "Primary", color: .pia.primary, lightHex: "#037900", darkHex: "#5DDF5A"),
             .init(name: "OnPrimary", color: .pia.onPrimary, lightHex: "#FFFFFF", darkHex: "#323642")
         ]
     }
-    
+
     private var backgroundColors: [ColorInfo] {
         [
             .init(name: "Background", color: .pia.background, lightHex: "#EEEEEE", darkHex: "#323642"),
             .init(name: "OnBackground", color: .pia.onBackground, lightHex: "#323642", darkHex: "#EEEEEE")
         ]
     }
-    
+
     private var surfaceColors: [ColorInfo] {
         [
             .init(name: "Surface", color: .pia.surface, lightHex: "#EEEEEE", darkHex: "#323642"),
@@ -89,28 +88,28 @@ struct ColorPreview: View {
             .init(name: "OnSurfaceContainerSecondary", color: .pia.onSurfaceContainerSecondary, lightHex: "#889099", darkHex: "#A8ADB3")
         ]
     }
-    
+
     private var inverseColors: [ColorInfo] {
         [
             .init(name: "InverseSurface", color: .pia.inverseSurface, lightHex: "#323642", darkHex: "#EEEEEE"),
             .init(name: "InverseOnSurface", color: .pia.inverseOnSurface, lightHex: "#EEEEEE", darkHex: "#323642")
         ]
     }
-    
+
     private var outlineColors: [ColorInfo] {
         [
             .init(name: "Outline", color: .pia.outline, lightHex: "#D7D8D9", darkHex: "#889099"),
             .init(name: "OutlineVariantPrimary", color: .pia.outlineVariantPrimary, lightHex: "#889099", darkHex: "#D7D8D9")
         ]
     }
-    
+
     private var errorColors: [ColorInfo] {
         [
             .init(name: "Error", color: .pia.error, lightHex: "#B0024C", darkHex: "#FF72A5"),
             .init(name: "OnError", color: .pia.onError, lightHex: "#FFFFFF", darkHex: "#FFFFFF")
         ]
     }
-    
+
     private var fixedColors: [ColorInfo] {
         [
             .init(name: "ErrorContainer", color: .pia.errorContainer, lightHex: "#FEF1F5", darkHex: "#FEF1F5"),
@@ -127,7 +126,7 @@ struct ColorPreview: View {
             .init(name: "OnSuccessContainer", color: .pia.onSuccessContainer, lightHex: "#037900", darkHex: "#037900")
         ]
     }
-    
+
     private var gradientColors: [GradientInfo] {
         [
             .init(name: "SurfaceStatusConnected", gradient: Color.pia.surfaceStatusConnected, startHex: "#4CB649", endHex: "#5DD5FA"),
@@ -159,15 +158,16 @@ struct GradientInfo: Identifiable {
 struct ColorSection: View {
     let title: String
     let colors: [ColorInfo]
-    
+
     private let columns = [
-        GridItem(.adaptive(minimum: 100))
+        GridItem(.adaptive(minimum: 220))
     ]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text(title)
                 .typography(.title2, color: .pia.onBackground)
+
             LazyVGrid(columns: columns, spacing: 20) {
                 ForEach(colors) { colorInfo in
                     ColorSwatch(
@@ -186,11 +186,11 @@ struct ColorSection: View {
 struct GradientSection: View {
     let title: String
     let gradients: [GradientInfo]
-    
+
     private let columns = [
-        GridItem(.adaptive(minimum: 100))
+        GridItem(.adaptive(minimum: 220))
     ]
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text(title)
@@ -225,7 +225,8 @@ struct ColorSwatch: View {
                 .shadow(radius: 5, y: 2)
 
             Text(name)
-                .typography(.subtitle2, color: .pia.onBackground)
+                .typography(.subtitle3, color: .pia.onBackground)
+                .lineLimit(1)
 
             VStack {
                 Text(lightHex)
@@ -234,6 +235,7 @@ struct ColorSwatch: View {
                     .typography(.caption1, color: .pia.onBackground)
             }
         }
+        .frame(width: 220)
     }
 }
 
@@ -247,12 +249,19 @@ struct GradientSwatch: View {
     var body: some View {
         VStack(spacing: 8) {
             Circle()
-                .fill(LinearGradient(gradient: Gradient(colors: [gradient.start, gradient.end]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                .fill(
+                    LinearGradient(
+                        gradient: Gradient(colors: [gradient.start, gradient.end]),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
                 .frame(width: 80, height: 80)
                 .shadow(radius: 5, y: 2)
 
             Text(name)
-                .typography(.subtitle2, color: .pia.onBackground)
+                .typography(.subtitle3, color: .pia.onBackground)
+                .lineLimit(1)
 
             VStack {
                 Text("Start: \(startHex)")
@@ -261,16 +270,15 @@ struct GradientSwatch: View {
                     .typography(.caption1, color: .pia.onBackground)
             }
         }
+        .frame(width: 220)
     }
 }
-
 
 @available(iOS 15.0, *)
 #Preview("Light Mode") {
     ColorPreview()
         .preferredColorScheme(.light)
 }
-
 
 @available(iOS 15.0, *)
 #Preview("Dark Mode") {

@@ -14,6 +14,9 @@ let package = Package(
             targets: ["PIADesignSystem"]
         )
     ],
+    dependencies: [
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", exact: "1.18.7")
+    ],
     targets: [
         .target(
             name: "PIADesignSystem",
@@ -23,7 +26,10 @@ let package = Package(
         ),
         .testTarget(
             name: "PIADesignSystemTests",
-            dependencies: ["PIADesignSystem"]
+            dependencies: [
+                "PIADesignSystem",
+                .product(name: "SnapshotTesting", package: "swift-snapshot-testing")
+            ]
         )
     ]
 )
