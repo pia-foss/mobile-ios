@@ -33,43 +33,43 @@ import SwiftUI
 /// Text("Section").typography(.title2)
 /// ```
 public enum TypographyStyle {
-    /// Large title for main headers and hero text (SF Pro Bold, 22pt, line height 28pt)
+    /// SF Pro Bold, 22pt, line height 28pt
     case title1
 
-    /// Medium title for section headers and prominent elements (SF Pro Semibold, 20pt, line height 25pt)
+    /// SF Pro Semibold, 20pt, line height 25pt
     case title2
 
-    /// Small title for card titles and subsection headers (SF Pro Regular, 20pt, line height 25pt)
+    /// SF Pro Regular, 20pt, line height 25pt
     case title3
 
-    /// Large subtitle (SF Pro Semibold, 17pt, line height 22pt)
+    /// SF Pro Semibold, 17pt, line height 22pt
     case subtitle1
 
-    /// Medium subtitle (SF Pro Semibold, 15pt, line height 20pt)
+    /// SF Pro Semibold, 15pt, line height 20pt
     case subtitle2
 
-    /// Small subtitle (SF Pro Semibold, 13pt, line height 18pt)
+    /// SF Pro Semibold, 13pt, line height 18pt
     case subtitle3
 
-    /// Large body text (SF Pro Regular, 17pt, line height 22pt)
+    /// SF Pro Regular, 17pt, line height 22pt
     case body1
 
-    /// Medium body text (SF Pro Regular, 15pt, line height 20pt)
+    /// SF Pro Regular, 15pt, line height 20pt
     case body2
 
-    /// Button text (SF Pro Regular, 17pt, line height 22pt)
+    /// SF Pro Regular, 17pt, line height 22pt
     case button1
 
-    /// Small button text (SF Pro Regular, 15pt, line height 20pt)
+    /// SF Pro Regular, 15pt, line height 20pt
     case button2
 
-    /// Caption text (SF Pro Regular, 12pt, line height 16pt)
+    /// SF Pro Regular, 12pt, line height 16pt
     case caption1
 
-    /// Small caption text (SF Pro Regular, 11pt, line height 13pt)
+    /// SF Pro Regular, 11pt, line height 13pt
     case caption2
 
-    /// Underlined caption text (SF Pro Regular, 12pt, line height 16pt)
+    /// SF Pro Regular, 12pt, line height 16pt (underlined)
     case caption3
 }
 
