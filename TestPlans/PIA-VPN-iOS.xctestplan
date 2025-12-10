@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "61132CC8-B9CF-4CA8-B224-836CECB873A6",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:LocalPackages\/PIADesignSystem",
+        "identifier" : "PIADesignSystemTests",
+        "name" : "PIADesignSystemTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:PIA VPN.xcodeproj",
+        "identifier" : "0EEE1BE61E4F6EF400397DE2",
+        "name" : "PIA VPNTests"
+      }
+    }
+  ],
+  "version" : 1
+}
