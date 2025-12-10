@@ -152,9 +152,9 @@ class RegionsViewController: AutolayoutViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = L10n.Localizable.Region.Search.placeholder
-        self.tableView.tableHeaderView = self.searchController.searchBar
-       
-        searchController.hidesNavigationBarDuringPresentation = false
+
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
