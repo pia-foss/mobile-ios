@@ -1,5 +1,4 @@
 {
-  "originHash" : "3aa81afad55721bc5a90c90e71945312a0a5c56e9fab738d10e1fe9ce9262ae9",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -98,14 +97,6 @@
       "state" : {
         "revision" : "b4bd0604ded9574807f41b4004b57dd1226a30a4",
         "version" : "3.5.0"
-      }
-    },
-    {
-      "identity" : "mobile-ios-library",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pia-foss/mobile-ios-library.git",
-      "state" : {
-        "revision" : "df0c9d997de7d85ecf2a73a4e688ef00e41327f2"
       }
     },
     {
@@ -297,5 +288,5 @@
       }
     }
   ],
-  "version" : 3
+  "version" : 2
 }
