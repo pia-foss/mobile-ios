@@ -909,9 +909,7 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     @objc private func updateFixedTileWithAnimation() {
-        self.collectionView.performBatchUpdates({
-            self.collectionView.reloadSections(IndexSet(0...0))
-        }, completion: nil)
+        collectionView.reloadSections(IndexSet(integer: 0))
     }
     
     @objc private func reloadTheme() {
