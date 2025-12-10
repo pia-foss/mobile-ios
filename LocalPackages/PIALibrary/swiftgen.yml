@@ -1,0 +1,26 @@
+strings:
+    paths:
+        - PIALibrary/Resources/UI/Shared/en.lproj/UI.strings
+        - PIALibrary/Resources/UI/iOS/en.lproj/Welcome.strings
+        - PIALibrary/Resources/UI/iOS/en.lproj/Signup.strings
+    templateName: structured-swift4
+    output: PIALibrary/Sources/UI/iOS/SwiftGen+Strings.swift
+    params:
+        module: PIALibrary
+
+ib:
+    paths:
+        - PIALibrary/Resources/UI/iOS/Welcome.storyboard
+        - PIALibrary/Resources/UI/iOS/Signup.storyboard
+    outputs:
+        templateName: scenes-swift4
+        output: PIALibrary/Sources/UI/iOS/SwiftGen+ScenesStoryboards.swift
+        templateName: segues-swift4
+        output: PIALibrary/Sources/UI/iOS/SwiftGen+SeguesStoryboards.swift
+    module: PIALibrary
+
+xcassets:
+    paths:
+        - PIALibrary/Resources/UI/iOS/UI.xcassets
+    templateName: swift4
+    output: PIALibrary/Sources/UI/iOS/SwiftGen+Assets.swift

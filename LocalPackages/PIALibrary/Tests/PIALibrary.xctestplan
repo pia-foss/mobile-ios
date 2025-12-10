@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "005BA9AC-E352-4B79-B975-5B326E621F19",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "skippedTests" : [
+        "AccountInfoTests",
+        "AccountTests",
+        "DIPTokenKeychainTests",
+        "EndpointManagerTests",
+        "ProductTests"
+      ],
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "PIALibraryTests",
+        "name" : "PIALibraryTests"
+      }
+    }
+  ],
+  "version" : 1
+}

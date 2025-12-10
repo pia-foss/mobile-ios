@@ -1,0 +1,9 @@
+module __PIALibraryNative {
+    header "../include/Pinger.h"
+    header "../include/NSData+Compression.h"
+    header "../include/NSString+URL.h"
+    header "../include/CMacros.h"
+    header "../include/FXPageControl.h"
+    export *
+}
+

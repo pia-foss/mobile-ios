@@ -35,6 +35,11 @@
 		35E8E6782B8C39AA00A3A3DB /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 35E8E6772B8C39AA00A3A3DB /* Nimble */; };
 		3F7B4C8B2EE7332B00EE1F4C /* PIADesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7B4C8A2EE7332B00EE1F4C /* PIADesignSystem */; };
 		3F7B4C8D2EE7333300EE1F4C /* PIADesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7B4C8C2EE7333300EE1F4C /* PIADesignSystem */; };
+		3F7BD9B82EE8A09800EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9B72EE8A09800EE1F4C /* PIALibrary */; };
+		3F7BD9BA2EE8A09C00EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9B92EE8A09C00EE1F4C /* PIALibrary */; };
+		3F7BD9BC2EE8A0A600EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BB2EE8A0A600EE1F4C /* PIALibrary */; };
+		3F7BD9BE2EE8A0AB00EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BD2EE8A0AB00EE1F4C /* PIALibrary */; };
+		3F7BD9C02EE8A0AF00EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BF2EE8A0AF00EE1F4C /* PIALibrary */; };
 		695BF81F2AC410E000D1139C /* (null) in Sources */ = {isa = PBXBuildFile; };
 		698F4F2B2AB8A2080010B2B0 /* PIAWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8269A6D5251CB5E0000B4DBF /* PIAWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8269A6D6251CB5E0000B4DBF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8269A67C251CB4BA000B4DBF /* WidgetKit.framework */; };
@@ -61,11 +66,6 @@
 		E548E1FF2C1238BD001E9874 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = E548E1FE2C1238BD001E9874 /* SnapshotTesting */; };
 		E59D1A152B7E2D4B00A2FBFB /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
 		E59D1A1D2B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E59D1A142B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		E5C507682B0D609300200A6A /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = E5C507672B0D609300200A6A /* PIALibrary */; };
-		E5C5076A2B0D60A500200A6A /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = E5C507692B0D60A500200A6A /* PIALibrary */; };
-		E5C5076C2B0D60AD00200A6A /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = E5C5076B2B0D60AD00200A6A /* PIALibrary */; };
-		E5C5076E2B0D60B300200A6A /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = E5C5076D2B0D60B300200A6A /* PIALibrary */; };
-		E5C507AA2B17E3F100200A6A /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = E5C507A92B17E3F100200A6A /* PIALibrary */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -487,7 +487,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5C5076C2B0D60AD00200A6A /* PIALibrary in Frameworks */,
+				3F7BD9BC2EE8A0A600EE1F4C /* PIALibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,9 +508,9 @@
 				0EE2205C1F4EF307002805AE /* CoreGraphics.framework in Frameworks */,
 				AABF826F28AD187800CDAC64 /* Popover in Frameworks */,
 				0EE2205F1F4EF307002805AE /* StoreKit.framework in Frameworks */,
-				E5C5076A2B0D60A500200A6A /* PIALibrary in Frameworks */,
 				0EE2205D1F4EF307002805AE /* UIKit.framework in Frameworks */,
 				0EE2205E1F4EF307002805AE /* Foundation.framework in Frameworks */,
+				3F7BD9BA2EE8A09C00EE1F4C /* PIALibrary in Frameworks */,
 				AABF826D28AD185E00CDAC64 /* TweetNacl in Frameworks */,
 				AABF827528AE2FFE00CDAC64 /* SideMenu in Frameworks */,
 			);
@@ -547,9 +547,9 @@
 				2985E5671856BD1200D70E28 /* QuartzCore.framework in Frameworks */,
 				291C6382183EBC210039EC03 /* CoreGraphics.framework in Frameworks */,
 				291C6384183EBC210039EC03 /* UIKit.framework in Frameworks */,
-				E5C507682B0D609300200A6A /* PIALibrary in Frameworks */,
 				DD606ABA21C7A17900E0781D /* NetworkExtension.framework in Frameworks */,
 				AA36CDC928A6733500180A33 /* DZNEmptyDataSet in Frameworks */,
+				3F7BD9B82EE8A09800EE1F4C /* PIALibrary in Frameworks */,
 				291C6380183EBC210039EC03 /* Foundation.framework in Frameworks */,
 				0E9785861DA82FF000711A24 /* StoreKit.framework in Frameworks */,
 			);
@@ -586,7 +586,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5C5076E2B0D60B300200A6A /* PIALibrary in Frameworks */,
+				3F7BD9BE2EE8A0AB00EE1F4C /* PIALibrary in Frameworks */,
 				AA36CDDB28A6860F00180A33 /* TweetNacl in Frameworks */,
 				DDC8F5F923EC10E4005D19C6 /* NetworkExtension.framework in Frameworks */,
 			);
@@ -612,7 +612,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5C507AA2B17E3F100200A6A /* PIALibrary in Frameworks */,
+				3F7BD9C02EE8A0AF00EE1F4C /* PIALibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,7 +721,7 @@
 			);
 			name = "PIA VPN Tunnel";
 			packageProductDependencies = (
-				E5C5076B2B0D60AD00200A6A /* PIALibrary */,
+				3F7BD9BB2EE8A0A600EE1F4C /* PIALibrary */,
 			);
 			productName = "PIA OpenVPN";
 			productReference = 0E67FC221E3F802D00EF9929 /* PIA VPN Tunnel.appex */;
@@ -760,8 +760,8 @@
 				AABF827228AE2FF500CDAC64 /* GradientProgressBar */,
 				AABF827428AE2FFE00CDAC64 /* SideMenu */,
 				AABF827728AE333200CDAC64 /* DZNEmptyDataSet */,
-				E5C507692B0D60A500200A6A /* PIALibrary */,
 				3F7B4C8C2EE7333300EE1F4C /* PIADesignSystem */,
+				3F7BD9B92EE8A09C00EE1F4C /* PIALibrary */,
 			);
 			productName = "PIA VPN";
 			productReference = 0EE2207A1F4EF307002805AE /* PIA VPN dev.app */;
@@ -837,8 +837,8 @@
 				AA36CDCB28A673C900180A33 /* GradientProgressBar */,
 				AA36CDCE28A6746500180A33 /* SideMenu */,
 				AA36CDDD28A6878000180A33 /* AlamofireImage */,
-				E5C507672B0D609300200A6A /* PIALibrary */,
 				3F7B4C8A2EE7332B00EE1F4C /* PIADesignSystem */,
+				3F7BD9B72EE8A09800EE1F4C /* PIALibrary */,
 			);
 			productName = "PIA VPN";
 			productReference = 291C637C183EBC210039EC03 /* PIA VPN.app */;
@@ -929,7 +929,7 @@
 			name = "PIA VPN WG Tunnel";
 			packageProductDependencies = (
 				AA36CDDA28A6860F00180A33 /* TweetNacl */,
-				E5C5076D2B0D60B300200A6A /* PIALibrary */,
+				3F7BD9BD2EE8A0AB00EE1F4C /* PIALibrary */,
 			);
 			productName = "PIA VPN WG Tunnel";
 			productReference = DDC8F5EC23EC106F005D19C6 /* PIA VPN WG Tunnel.appex */;
@@ -996,7 +996,7 @@
 			);
 			name = "PIA VPN-tvOS";
 			packageProductDependencies = (
-				E5C507A92B17E3F100200A6A /* PIALibrary */,
+				3F7BD9BF2EE8A0AF00EE1F4C /* PIALibrary */,
 			);
 			productName = "PIA VPN-tvOS";
 			productReference = E5C507772B0E144D00200A6A /* PIA VPN-tvOS.app */;
@@ -1183,7 +1183,6 @@
 				AA36CDDC28A6878000180A33 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				35950B2F2ADD2877006F3CD9 /* XCRemoteSwiftPackageReference "Quick" */,
 				35950B322ADD2EE5006F3CD9 /* XCRemoteSwiftPackageReference "Nimble" */,
-				E5C507662B0D609300200A6A /* XCRemoteSwiftPackageReference "mobile-ios-library" */,
 				E548E1EE2C12383E001E9874 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			preferredProjectObjectVersion = 46;
@@ -2932,14 +2931,6 @@
 				version = 1.18.7;
 			};
 		};
-		E5C507662B0D609300200A6A /* XCRemoteSwiftPackageReference "mobile-ios-library" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pia-foss/mobile-ios-library.git";
-			requirement = {
-				kind = revision;
-				revision = df0c9d997de7d85ecf2a73a4e688ef00e41327f2;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2970,6 +2961,26 @@
 		3F7B4C8C2EE7333300EE1F4C /* PIADesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIADesignSystem;
+		};
+		3F7BD9B72EE8A09800EE1F4C /* PIALibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIALibrary;
+		};
+		3F7BD9B92EE8A09C00EE1F4C /* PIALibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIALibrary;
+		};
+		3F7BD9BB2EE8A0A600EE1F4C /* PIALibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIALibrary;
+		};
+		3F7BD9BD2EE8A0AB00EE1F4C /* PIALibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIALibrary;
+		};
+		3F7BD9BF2EE8A0AF00EE1F4C /* PIALibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIALibrary;
 		};
 		AA36CDBA28A6622A00180A33 /* TweetNacl */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -3040,31 +3051,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E548E1EE2C12383E001E9874 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
 			productName = SnapshotTesting;
-		};
-		E5C507672B0D609300200A6A /* PIALibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E5C507662B0D609300200A6A /* XCRemoteSwiftPackageReference "mobile-ios-library" */;
-			productName = PIALibrary;
-		};
-		E5C507692B0D60A500200A6A /* PIALibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E5C507662B0D609300200A6A /* XCRemoteSwiftPackageReference "mobile-ios-library" */;
-			productName = PIALibrary;
-		};
-		E5C5076B2B0D60AD00200A6A /* PIALibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E5C507662B0D609300200A6A /* XCRemoteSwiftPackageReference "mobile-ios-library" */;
-			productName = PIALibrary;
-		};
-		E5C5076D2B0D60B300200A6A /* PIALibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E5C507662B0D609300200A6A /* XCRemoteSwiftPackageReference "mobile-ios-library" */;
-			productName = PIALibrary;
-		};
-		E5C507A92B17E3F100200A6A /* PIALibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E5C507662B0D609300200A6A /* XCRemoteSwiftPackageReference "mobile-ios-library" */;
-			productName = PIALibrary;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
