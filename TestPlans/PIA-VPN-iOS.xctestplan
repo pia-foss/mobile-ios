@@ -13,6 +13,38 @@
   },
   "testTargets" : [
     {
+      "skippedTests" : [
+        "AccountInfoTests",
+        "AccountInfoTests\/testExpirationDateDefaultLocale()",
+        "AccountInfoTests\/testExpirationDateUsingSpanishLocale()",
+        "AccountInfoTests\/testRenewableProduct()",
+        "AccountTests",
+        "AccountTests\/testAPIEndpointIsReachable()",
+        "AccountTests\/testMock()",
+        "AccountTests\/testMockLogin()",
+        "AccountTests\/testMockLogout()",
+        "AccountTests\/testMockUpdate()",
+        "DIPTokenKeychainTests",
+        "DIPTokenKeychainTests\/testAddDipToken()",
+        "DIPTokenKeychainTests\/testAddMultipleDipTokens()",
+        "DIPTokenKeychainTests\/testAddSameDipToken()",
+        "DIPTokenKeychainTests\/testRemoveAllTokens()",
+        "DIPTokenKeychainTests\/testRemoveSpecificTokens()",
+        "EndpointManagerTests",
+        "EndpointManagerTests\/testGEN4Endpoints()",
+        "ProductTests",
+        "ProductTests\/testMockProductIdentifiers()",
+        "ProductTests\/testMockTrialsUserEligible()",
+        "ProductTests\/testMockTrialsUserEligibleButTrialsDisabledOnBackend()",
+        "ProductTests\/testMockTrialsUserNotEligible()"
+      ],
+      "target" : {
+        "containerPath" : "container:LocalPackages\/PIALibrary",
+        "identifier" : "PIALibraryTests",
+        "name" : "PIALibraryTests"
+      }
+    },
+    {
       "target" : {
         "containerPath" : "container:LocalPackages\/PIADesignSystem",
         "identifier" : "PIADesignSystemTests",
