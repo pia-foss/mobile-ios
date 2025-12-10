@@ -72,8 +72,13 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard !preset.accountProvider.isLoggedIn else {
-            fatalError("You are already logged in, you might want to Client.database.truncate() to start clean")
+        if preset.accountProvider.isLoggedIn {
+            /// If the user is already logged in, this view controller should not have been presented.
+            /// This can happen due to a race condition.
+            /// We just dismiss it and it should trigger DashboardViewController's viewWillAppear,
+            /// which will evaluate isLoggedIn as true and take another path.
+            self.navigationController?.dismiss(animated: false)
+            return
         }
         
         buttonCancel.isHidden = true
