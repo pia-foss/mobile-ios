@@ -83,13 +83,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     // MARK: Orientations
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        if let rootViewController = self.topViewControllerWithRootViewController(rootViewController: window?.rootViewController) {
-            if (rootViewController.responds(to: Selector(("onlyPortrait")))) {
-                return .portrait
-            }
+        guard UserInterface.isPhone else {
+            return .all
         }
 
-        return .allButUpsideDown
+        let rootViewController = topViewControllerWithRootViewController(rootViewController: window?.rootViewController)
+        switch rootViewController {
+        case is GetStartedViewController, is PIACardsViewController:
+            return .portrait
+        default:
+            return .all
+        }
     }
     
     func topViewControllerWithRootViewController(rootViewController: UIViewController!) -> UIViewController? {

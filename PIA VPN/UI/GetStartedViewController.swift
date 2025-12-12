@@ -108,10 +108,6 @@ public class GetStartedViewController: PIAWelcomeViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
-    override public var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
     
     private func setupNavigationBarButtons() {
         
@@ -331,10 +327,6 @@ public class GetStartedViewController: PIAWelcomeViewController {
 
     }
     
-    // MARK: Orientation
-    // TODO: This forces the iPad to run this screen in windowed mode on iOS 26. Replace with proper orientation handling.
-    @objc func onlyPortrait() -> Void {}
-    
     // MARK: Notifications
     
     @objc private func productsDidFetch(notification: Notification) {
@@ -394,7 +386,7 @@ public class GetStartedViewController: PIAWelcomeViewController {
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBarButtons()
-        UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
+
         if let products = preset.accountProvider.planProducts {
             refreshPlans(products)
         } else {
@@ -686,8 +678,16 @@ extension GetStartedViewController: UICollectionViewDataSource, UICollectionView
 extension GetStartedViewController: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemWidth = collectionView.bounds.size.width
-        let itemHeight = (collectionView.bounds.size.height - 20) / 2.0
-        return CGSize(width: itemWidth,
-                      height: itemHeight)
+        var itemHeight = (collectionView.bounds.size.height - 20) / 2.0
+
+        // Avoids a crash when returning negative numbers in itemHeight
+        if itemHeight < 0 {
+            itemHeight = 0
+        }
+
+        return CGSize(
+            width: itemWidth,
+            height: itemHeight
+        )
     }
 }

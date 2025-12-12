@@ -135,11 +135,6 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(vpnDidInstall(notification:)), name: .PIAVPNDidInstall, object: nil)
         nc.addObserver(self, selector: #selector(applicationDidBecomeActive(notification:)), name: UIApplication.didBecomeActiveNotification, object: nil)
         nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
-        
-        if UserInterface.isIpad {
-            nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
-        }
-        
         nc.addObserver(self, selector: #selector(updateCurrentStatus), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateTiles), name: .PIATilesDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateFixedTileWithAnimation), name: .PIAUpdateFixedTiles, object: nil)
@@ -571,17 +566,6 @@ class DashboardViewController: AutolayoutViewController {
         perform(#selector(updateCurrentStatus))
         if Client.providers.accountProvider.isLoggedIn {
             Client.providers.accountProvider.refreshAccountInfo(nil)
-        }
-    }
-    
-    @objc private func viewHasRotated() {
-        if Client.providers.accountProvider.isLoggedIn {
-            if tileModeStatus == .edit,
-                let tileLayout = collectionView.collectionViewLayout as? TileFlowLayout {
-                tileLayout.removeDraggingViewFromSuperView()
-            }
-            updateCurrentStatus()
-            updateTileLayout()
         }
     }
 
