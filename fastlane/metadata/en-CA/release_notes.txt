@@ -1,1 +1,1 @@
-We added a connection timer so you can see how long your connection has been protected, and fixed crashes affecting login on iPad and reordering dashboard tiles.
+We’ve improved overall app reliability by fixing crashes and polishing the UI across iPhone, iPad, and widgets.

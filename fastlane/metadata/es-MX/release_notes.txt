@@ -1,1 +1,1 @@
-Agregamos un temporizador de conexión para que puedas ver cuánto tiempo ha estado protegida tu conexión, y corregimos fallos que afectaban el inicio de sesión en iPad y el reordenamiento de los mosaicos del panel de control.
+Hemos mejorado la confiabilidad general de la app corrigiendo cierres inesperados y puliendo la interfaz en iPhone, iPad y widgets.

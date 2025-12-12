@@ -1,1 +1,1 @@
-Vi har tilføjet en forbindelsestimer, så du kan se, hvor længe din forbindelse har været beskyttet, og rettet nedbrud der påvirkede login på iPad og omarrangering af dashboard-felter.
+Vi har forbedret appens overordnede stabilitet ved at rette nedbrud og finpudse brugergrænsefladen på tværs af iPhone, iPad og widgets.

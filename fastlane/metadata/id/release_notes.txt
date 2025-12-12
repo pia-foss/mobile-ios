@@ -1,1 +1,1 @@
-Kami menambahkan penghitung waktu koneksi sehingga Anda dapat melihat berapa lama koneksi Anda telah terlindungi, dan memperbaiki crash yang memengaruhi login di iPad serta pengurutan ulang tile dashboard.
+Kami telah meningkatkan keandalan aplikasi secara keseluruhan dengan memperbaiki crash dan menyempurnakan UI di iPhone, iPad, dan widget.
