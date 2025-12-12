@@ -21,7 +21,6 @@
 //
 
 import Foundation
-import Alamofire
 import Gloss
 import SwiftyBeaver
 import regions
@@ -534,62 +533,6 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                 callback?(nil, ClientError.malformedResponseData)
                 return
             }
-        }
-    }
-}
-
-typealias HandlerType<T> = (T?, Int?, Error?) -> Void
-
-private protocol RequestExecutor {
-    func execute(_ method: HTTPMethod, _ url: URL, _ request: DataRequest)
-}
-
-private class DataRequestExecutor: RequestExecutor {
-    let completionHandler: HandlerType<Data>
-    
-    init(_ completionHandler: @escaping HandlerType<Data>) {
-        self.completionHandler = completionHandler
-    }
-    
-    func execute(_ method: HTTPMethod, _ url: URL, _ request: DataRequest) {
-        request.responseData { (response) in
-            let status = response.response?.statusCode
-            if let error = response.error {
-                log.error("Request failed: \(method) \"\(url)\" -> \(error)")
-                self.completionHandler(nil, status, error)
-                return
-            }
-            guard let data = response.value else {
-                self.completionHandler(nil, status, ClientError.malformedResponseData)
-                return
-            }
-            log.debug("Response: \(data)")
-            self.completionHandler(data, status, nil)
-        }
-    }
-}
-
-private class JSONRequestExecutor: RequestExecutor {
-    let completionHandler: HandlerType<JSON>
-    
-    init(_ completionHandler: @escaping HandlerType<JSON>) {
-        self.completionHandler = completionHandler
-    }
-    
-    func execute(_ method: HTTPMethod, _ url: URL, _ request: DataRequest) {
-        request.validate(contentType: ["application/json"]).responseJSON { (response) in
-            let status = response.response?.statusCode
-            if let error = response.error {
-                log.error("Request failed: \(method) \"\(url)\" -> \(error)")
-                self.completionHandler(nil, status, error)
-                return
-            }
-            guard let json = response.value as? [String: Any] else {
-                self.completionHandler(nil, status, ClientError.malformedResponseData)
-                return
-            }
-            log.debug("Response: \(json)")
-            self.completionHandler(json, status, nil)
         }
     }
 }
