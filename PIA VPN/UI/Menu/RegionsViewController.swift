@@ -138,14 +138,14 @@ class RegionsViewController: AutolayoutViewController {
         navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Localizable.Region.Accessibility.filter
     }
     
-    override func dismissModal() {
+    override func dismissModal(completion: (() -> Void)? = nil) {
 
         if searchController.isActive {
             searchController.searchBar.text = ""
             searchController.dismiss(animated: false)
         }
 
-        super.dismissModal()
+        super.dismissModal(completion: completion)
     }
     
     private func setupSearchBarController() {
@@ -407,8 +407,9 @@ extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
             return
         }
         
-        self.dismissModal()
-        serverSelectionDelegate.didSelectServer(selectedServer)
+        dismissModal {
+            self.serverSelectionDelegate.didSelectServer(self.selectedServer)
+        }
 
     }
 }

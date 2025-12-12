@@ -24,15 +24,23 @@ import UIKit
 import Lottie
 import PIALibrary
 /// Declares a generic, dismissable modal controller.
-public protocol ModalController: class {
+public protocol ModalController: AnyObject {
 
     /**
      Dismisses the modal controller.
      */
     func dismissModal()
+
+    /**
+     Dismisses the modal controller with a completion handler.
+
+     - Parameter completion: An optional closure to execute after the modal is dismissed.
+                            The completion handler is called after the dismiss animation completes.
+     */
+    func dismissModal(completion: (() -> Void)?)
 }
 
-public protocol AnimatingLoadingDelegate: class {
+public protocol AnimatingLoadingDelegate: AnyObject {
     func showLoadingAnimation()
     func hideLoadingAnimation()
 }
@@ -121,6 +129,11 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
     /// :nodoc:
     @objc open func dismissModal() {
         dismiss(animated: true, completion: nil)
+    }
+
+    /// :nodoc:
+    @objc open func dismissModal(completion: (() -> Void)? = nil) {
+        dismiss(animated: true, completion: completion)
     }
     
     // MARK: Restylable
