@@ -438,7 +438,6 @@
 			membershipExceptions = (
 				custom.servers,
 				staging.endpoint,
-				SwiftGen/xcassets/swift4.stencil,
 			);
 			target = 291C637B183EBC210039EC03 /* PIA VPN */;
 		};
@@ -451,13 +450,6 @@
 				staging.endpoint,
 			);
 			target = E5C507762B0E144D00200A6A /* PIA VPN-tvOS */;
-		};
-		3F0EFB932EDF29950013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				SwiftGen/xcassets/swift4.stencil,
-			);
-			target = 0EE2200B1F4EF307002805AE /* PIA VPN dev */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -475,7 +467,7 @@
 		3F0EF9682EDF27910013E4FB /* PIA-VPN_E2E_Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PIA-VPN_E2E_Tests"; sourceTree = "<group>"; };
 		3F0EF9D42EDF28710013E4FB /* PIAWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3F0EF9EE2EDF28710013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 3F0EF9EF2EDF28710013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 3F0EF9F02EDF28710013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PIAWidget; sourceTree = "<group>"; };
 		3F0EF9F22EDF28B40013E4FB /* PIA VPNTests snapshot */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3F0EF9F82EDF28C30013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "PIA VPNTests snapshot"; sourceTree = "<group>"; };
-		3F0EFB2D2EDF29880013E4FB /* Resources */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3F0EFB8C2EDF29880013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 3F0EFB932EDF29950013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 3F0EFB8D2EDF29880013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Resources; sourceTree = "<group>"; };
+		3F0EFB2D2EDF29880013E4FB /* Resources */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3F0EFB8C2EDF29880013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 3F0EFB8D2EDF29880013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Resources; sourceTree = "<group>"; };
 		3F0EFB942EDF29F20013E4FB /* TestPlans */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TestPlans; sourceTree = "<group>"; };
 		3F0EFB992EDF2A270013E4FB /* PIA Common */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PIA Common"; sourceTree = "<group>"; };
 		3F0EFBA02EDF2AAA0013E4FB /* Entitlements */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Entitlements; sourceTree = "<group>"; };
