@@ -63,7 +63,6 @@ This project is licensed under the [MIT (Expat) license](https://choosealicense.
 ## Acknowledgements
 
 - SwiftyBeaver - © 2015 Sebastian Kreutzberger
-- Alamofire - © 2014-2018 Alamofire Software Foundation (http://alamofire.org/)
 - iRate - © 2011 Charcoal Design
 - TPKeyboardAvoiding - © 2013 Michael Tyson
 - SideMenu - © 2015 Jonathan Kent <contact@jonkent.me>

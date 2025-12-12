@@ -57,14 +57,6 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>Alamofire</string>
-			<key>Copyright</key>
-			<string>Copyright (c) 2014-2018 Alamofire Software Foundation (http://alamofire.org/)</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/Alamofire/Alamofire/master/LICENSE</string>
-		</dict>
-		<dict>
-			<key>Name</key>
 			<string>ReachabilitySwift</string>
 			<key>Copyright</key>
 			<string>Copyright (c) 2016 Ashley Mills</string>
@@ -159,14 +151,14 @@
 			<key>LicenseURL</key>
 			<string>https://raw.githubusercontent.com/nanopb/nanopb/master/LICENSE.txt</string>
 		</dict>
-        <dict>
-            <key>Name</key>
-            <string>Popover</string>
-            <key>Copyright</key>
-            <string>© 2020 corin8823</string>
-            <key>LicenseURL</key>
-            <string>https://raw.githubusercontent.com/corin8823/Popover/master/LICENSE</string>
-        </dict>
+		<dict>
+			<key>Name</key>
+			<string>Popover</string>
+			<key>Copyright</key>
+			<string>© 2020 corin8823</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/corin8823/Popover/master/LICENSE</string>
+		</dict>
 	</array>
 </dict>
 </plist>
