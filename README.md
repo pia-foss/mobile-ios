@@ -75,7 +75,7 @@ This project is licensed under the [MIT (Expat) license](https://choosealicense.
 
 © 2002-2018 OpenVPN Inc. - OpenVPN is a registered trademark of OpenVPN Inc.
 
-[pia-image]: https://www.privateinternetaccess.com/assets/PIALogo2x-0d1e1094ac909ea4c93df06e2da3db4ee8a73d8b2770f0f7d768a8603c62a82f.png
+[pia-image]: https://assets-cms.privateinternetaccess.com/img/frontend/pia_menu_logo_light.svg
 [pia-url]: https://www.privateinternetaccess.com/
 [pia-wiki]: https://en.wikipedia.org/wiki/Private_Internet_Access
 
