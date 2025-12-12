@@ -9,7 +9,6 @@ import Combine
 @testable import PIA_VPN
 #endif
 
-@available(iOS 13.0, *)
 class NotificationCenterMock: NotificationCenterType {
     var notificationPublisher: NotificationCenter.Publisher!
     func publisher(for name: Notification.Name, object: AnyObject?) -> NotificationCenter.Publisher {

@@ -2,7 +2,6 @@ import XCTest
 import PIALibrary
 @testable import PIA_VPN
 
-@available(iOS 13.0, *)
 class AccountInformationAvailabilityVerifierTests: XCTestCase {
     class Fixture {
         let accountProviderMock = AccountProviderTypeMock()
