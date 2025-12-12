@@ -72,24 +72,37 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
     }
 
     @IBAction private func signUp(_ sender: Any?) {
+        presentTermsAndConditionsAndUpdateEmail()
+    }
 
-        guard let email = textEmail.text?.trimmed(), Validator.validate(email: email) else {
-            signupEmail = nil
-            Macros.displayImageNote(withImage: Asset.Images.iconWarning.image,
-                                    message: L10n.Welcome.Purchase.Error.validation)
-            self.status = .error(element: textEmail)
-            return
-        }
-        
-        guard termsAndConditionsAgreed else {
+    private func presentTermsAndConditionsAndUpdateEmail() {
+        if termsAndConditionsAgreed {
+            updateAccountEmail()
+        } else {
             //present term and conditions
-            self.performSegue(withIdentifier: StoryboardSegue.Signup.presentGDPRTermsSegue.rawValue,
-                              sender: nil)
+            self.performSegue(
+                withIdentifier: StoryboardSegue.Signup.presentGDPRTermsSegue.rawValue,
+                sender: nil
+            )
+        }
+    }
+
+    private func updateAccountEmail() {
+        guard
+            let email = textEmail.text?.trimmed(),
+            Validator.validate(email: email)
+        else {
+            signupEmail = nil
+            Macros.displayImageNote(
+                withImage: Asset.Images.iconWarning.image,
+                message: L10n.Welcome.Purchase.Error.validation
+            )
+
+            self.status = .error(element: textEmail)
             return
         }
 
         self.status = .restore(element: textEmail)
-        
         self.showLoadingAnimation()
         self.disableInteractions()
         
@@ -106,34 +119,35 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
         if let currentPassword = metadata.user?.credentials.password {
             password = currentPassword
         }
-        
-        Client.providers.accountProvider.update(with: request,
-                                                resetPassword: false,
-                                                andPassword: password) { [weak self] (info, error) in
-                                                    self?.hideLoadingAnimation()
-                                                    self?.enableInteractions()
-                                                    
-                                                    guard let _ = info else {
-                                                        if let error = error {
-                                                            log.error("Account: Failed to modify account email (error: \(error))")
-                                                        } else {
-                                                            log.error("Account: Failed to modify account email")
-                                                        }
-                                                        
-                                                        self?.textEmail.text = ""
-                                                        
-                                                        let alert = Macros.alert(L10n.Signup.Unreachable.vcTitle, L10n.Welcome.Update.Account.Email.error)
-                                                        alert.addDefaultAction(L10n.Ui.Global.close)
-                                                        self?.present(alert, animated: true, completion: nil)
 
-                                                        return
-                                                    }
-                                                    
-                                                    log.debug("Account: Email successfully modified")
-                                                    self?.textEmail.endEditing(true)
-                                                    self?.perform(segue: StoryboardSegue.Signup.successShowCredentialsSegueIdentifier)
+        Client.providers.accountProvider.update(
+            with: request,
+            resetPassword: false,
+            andPassword: password
+        ) { [weak self] (info, error) in
+            self?.hideLoadingAnimation()
+            self?.enableInteractions()
+
+            guard let _ = info else {
+                if let error = error {
+                    log.error("Account: Failed to modify account email (error: \(error))")
+                } else {
+                    log.error("Account: Failed to modify account email")
+                }
+
+                self?.textEmail.text = ""
+
+                let alert = Macros.alert(L10n.Signup.Unreachable.vcTitle, L10n.Welcome.Update.Account.Email.error)
+                alert.addDefaultAction(L10n.Ui.Global.close)
+                self?.present(alert, animated: true, completion: nil)
+
+                return
+            }
+
+            log.debug("Account: Email successfully modified")
+            self?.textEmail.endEditing(true)
+            self?.perform(segue: StoryboardSegue.Signup.successShowCredentialsSegueIdentifier)
         }
-
     }
 
     private func disableInteractions() {
@@ -233,8 +247,8 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
 extension ConfirmVPNPlanViewController: GDPRDelegate {
     
     public func gdprViewWasAccepted() {
-        self.termsAndConditionsAgreed = true
-        self.signUp(nil)
+        termsAndConditionsAgreed = true
+        presentTermsAndConditionsAndUpdateEmail()
     }
     
     public func gdprViewWasRejected() {
@@ -255,7 +269,8 @@ extension ConfirmVPNPlanViewController: ASAuthorizationControllerPresentationCon
         } else {
             textEmail.text = Client.preferences.signInWithAppleFakeEmail
         }
-        self.signUp(nil)
+
+        presentTermsAndConditionsAndUpdateEmail()
     }
 }
 

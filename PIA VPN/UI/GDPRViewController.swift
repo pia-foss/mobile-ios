@@ -66,16 +66,14 @@ class GDPRViewController: AutolayoutViewController {
     }
     
     @IBAction func accept(_ sender: Any) {
-        if let delegate = delegate {
-            delegate.gdprViewWasAccepted()
-        }
+        acceptButton.isEnabled = false
+
+        delegate?.gdprViewWasAccepted()
         dismissModal()
     }
     
     @IBAction func reject(_ sender: Any) {
-        if let delegate = delegate {
-            delegate.gdprViewWasRejected()
-        }
+        delegate?.gdprViewWasRejected()
         dismissModal()
     }
     
