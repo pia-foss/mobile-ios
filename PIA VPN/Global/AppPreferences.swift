@@ -348,7 +348,6 @@ class AppPreferences {
         }
     }
 #if os(iOS)
-    @available(iOS 12.0, *)
     var connectShortcut: INVoiceShortcut? {
         get {
             if let data = defaults.object(forKey: Entries.connectShortcut) as? Data {
@@ -365,7 +364,6 @@ class AppPreferences {
         }
     }
     
-    @available(iOS 12.0, *)
     var disconnectShortcut: INVoiceShortcut? {
         get {
             if let data = defaults.object(forKey: Entries.disconnectShortcut) as? Data {
@@ -892,10 +890,6 @@ class AppPreferences {
         useDisconnectSiriShortcuts = false
         connectShortcut = nil
         disconnectShortcut = nil
-        guard #available(iOS 13.0, *) else {
-            transitionTheme(to: .light)
-            return
-        }
         #endif
         let preferences = Client.preferences.editable().reset()
         preferences.commit()
@@ -964,14 +958,12 @@ class AppPreferences {
     
     //MARK: Dark Mode
     public func reloadTheme(withAnimationDuration duration: Double = AppConfiguration.Animations.duration) {
-        if #available(iOS 13.0, *) {
-            DispatchQueue.main.async {
-              switch UITraitCollection.current.userInterfaceStyle {
-              case .dark:
-                  AppPreferences.shared.transitionTheme(to: .dark, withDuration: duration)
-              default:
-                  AppPreferences.shared.transitionTheme(to: .light, withDuration: duration)
-              }
+        DispatchQueue.main.async {
+            switch UITraitCollection.current.userInterfaceStyle {
+            case .dark:
+                AppPreferences.shared.transitionTheme(to: .dark, withDuration: duration)
+            default:
+                AppPreferences.shared.transitionTheme(to: .light, withDuration: duration)
             }
         }
     }

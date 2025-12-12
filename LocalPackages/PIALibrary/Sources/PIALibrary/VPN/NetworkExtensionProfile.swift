@@ -100,24 +100,22 @@ extension NetworkExtensionProfile {
             }
         }
         #if os(iOS)
-        if #available(iOS 14.2, *) {
-            let selectedProtocol = Client.preferences.vpnType
-            let isWireGuard = selectedProtocol == PIAWGTunnelProfile.vpnType
-            let isOpenVPN = selectedProtocol == PIATunnelProfile.vpnType
-            
-            // Do not apply Leak Protection settings on WireGuard and OpenVPN
-            if isWireGuard || isOpenVPN {
+        let selectedProtocol = Client.preferences.vpnType
+        let isWireGuard = selectedProtocol == PIAWGTunnelProfile.vpnType
+        let isOpenVPN = selectedProtocol == PIATunnelProfile.vpnType
+        
+        // Do not apply Leak Protection settings on WireGuard and OpenVPN
+        if isWireGuard || isOpenVPN {
+            vpn.protocolConfiguration?.includeAllNetworks = false
+            vpn.protocolConfiguration?.excludeLocalNetworks = true
+        } else {
+            // Apply Leak Protection settings when the Feature Flag is enabled
+            if Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtection) {
+                vpn.protocolConfiguration?.includeAllNetworks = configuration.leakProtection
+                vpn.protocolConfiguration?.excludeLocalNetworks = configuration.allowLocalDeviceAccess
+            } else {
                 vpn.protocolConfiguration?.includeAllNetworks = false
                 vpn.protocolConfiguration?.excludeLocalNetworks = true
-            } else {
-                // Apply Leak Protection settings when the Feature Flag is enabled
-                if Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtection) {
-                    vpn.protocolConfiguration?.includeAllNetworks = configuration.leakProtection
-                    vpn.protocolConfiguration?.excludeLocalNetworks = configuration.allowLocalDeviceAccess
-                } else {
-                    vpn.protocolConfiguration?.includeAllNetworks = false
-                    vpn.protocolConfiguration?.excludeLocalNetworks = true
-                }
             }
         }
         #endif

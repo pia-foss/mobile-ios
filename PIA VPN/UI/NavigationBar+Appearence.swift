@@ -11,7 +11,7 @@ import UIKit
 
 extension UINavigationBar {
     func setBackgroundAppearenceColor(_ color: UIColor?) {
-        if #available(iOS 13.0, *), color != nil {
+        if color != nil {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
             appearance.backgroundColor = color
@@ -24,7 +24,7 @@ extension UINavigationBar {
     }
     
     func setBackgroundAppearenceImage(_ image: UIImage?) {
-        if #available(iOS 13.0, *), image != nil {
+        if image != nil {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
             appearance.backgroundImage = image

@@ -38,7 +38,6 @@ struct Endpoint {
 }
 
 protocol HTTPClientType {
-    @available(iOS 13.0.0, *)
     func makeRequest(request: URLRequest) async throws -> Data
     func makeRequest(request: URLRequest, completion: @escaping (Result<(Data, URLResponse), ClientError>) -> Void)
 }

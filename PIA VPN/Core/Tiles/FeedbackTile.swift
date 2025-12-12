@@ -57,30 +57,28 @@ class FeedbackTile: UIView, Tileable {
     }
 
     private func setupView() {
-        if #available(iOS 15.0, *) {
-            let feedbackView = FeedbackTileView()
-            let hostingController = UIHostingController(rootView: feedbackView)
+        let feedbackView = FeedbackTileView()
+        let hostingController = UIHostingController(rootView: feedbackView)
 
-            guard let hostedView = hostingController.view else {
-                return
-            }
-
-            self.hostingController = hostingController
-
-            addSubview(hostedView)
-
-            hostedView.translatesAutoresizingMaskIntoConstraints = false
-            hostedView.backgroundColor = .clear
-
-            NSLayoutConstraint.activate([
-                hostedView.topAnchor.constraint(equalTo: topAnchor),
-                hostedView.leadingAnchor.constraint(equalTo: leadingAnchor),
-                hostedView.trailingAnchor.constraint(equalTo: trailingAnchor),
-                hostedView.bottomAnchor.constraint(equalTo: bottomAnchor)
-            ])
-
-            self.view = hostedView
+        guard let hostedView = hostingController.view else {
+            return
         }
+
+        self.hostingController = hostingController
+
+        addSubview(hostedView)
+
+        hostedView.translatesAutoresizingMaskIntoConstraints = false
+        hostedView.backgroundColor = .clear
+
+        NSLayoutConstraint.activate([
+            hostedView.topAnchor.constraint(equalTo: topAnchor),
+            hostedView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            hostedView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            hostedView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+
+        self.view = hostedView
 
         Theme.current.applyPrincipalBackground(self)
         self.accessibilityIdentifier = "FeedbackTile"

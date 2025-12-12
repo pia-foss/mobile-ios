@@ -29,9 +29,10 @@ import SnapshotTesting
 @MainActor
 struct ColorSnapshotTests {
 
-    @available(iOS 14.0, *)
     @MainActor
     @Test func colorPreviewLight() {
+        guard !SnapshotTestHelpers.isRunningOnXcodeCloud else { return }
+
         let view = ColorPreview()
             .environment(\.colorScheme, .light)
             .frame(width: 1024)
@@ -43,9 +44,10 @@ struct ColorSnapshotTests {
         )
     }
 
-    @available(iOS 14.0, *)
     @MainActor
     @Test func colorPreviewDark() {
+        guard !SnapshotTestHelpers.isRunningOnXcodeCloud else { return }
+
         let view = ColorPreview()
             .environment(\.colorScheme, .dark)
             .frame(width: 1024)

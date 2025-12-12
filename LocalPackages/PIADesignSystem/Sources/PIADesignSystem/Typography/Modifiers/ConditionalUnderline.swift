@@ -23,7 +23,6 @@
 import SwiftUI
 
 /// Conditionally applies underline decoration
-@available(iOS 13.0, *)
 struct ConditionalUnderline: ViewModifier {
     let enabled: Bool
 

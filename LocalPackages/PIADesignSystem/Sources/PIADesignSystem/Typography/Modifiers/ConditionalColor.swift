@@ -23,7 +23,6 @@
 import SwiftUI
 
 /// Conditionally applies foreground color
-@available(iOS 13.0, *)
 struct ConditionalColor: ViewModifier {
     let color: Color?
 

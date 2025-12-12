@@ -206,10 +206,8 @@ public class IKEv2Profile: NetworkExtensionProfile {
             cfg.childSecurityAssociationParameters.integrityAlgorithm = integrity.networkExtensionValue()
         }
         
-        if #available(iOS 14.0, *) {
-            if Client.preferences.ikeV2PacketSize != 0 {
-                cfg.mtu = Client.preferences.ikeV2PacketSize
-            }
+        if Client.preferences.ikeV2PacketSize != 0 {
+            cfg.mtu = Client.preferences.ikeV2PacketSize
         }
         
         log.debug("IKEv2 Configuration")

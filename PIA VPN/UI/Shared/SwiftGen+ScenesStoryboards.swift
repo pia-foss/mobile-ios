@@ -11,55 +11,53 @@ import UIKit
 
 // MARK: - Storyboard Scenes
 
-// swiftlint:disable explicit_type_interface identifier_name line_length prefer_self_in_static_references
-// swiftlint:disable type_body_length type_name
+// swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
 internal enum StoryboardScene {
   internal enum Main: StoryboardType {
     internal static let storyboardName = "Main"
 
-    internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Main.self)
+    internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Self.self)
 
-    internal static let confirmVPNPlanViewController = SceneType<AddEmailToAccountViewController>(storyboard: Main.self, identifier: "ConfirmVPNPlanViewController")
+    internal static let confirmVPNPlanViewController = SceneType<AddEmailToAccountViewController>(storyboard: Self.self, identifier: "ConfirmVPNPlanViewController")
 
-    internal static let piaCardsViewController = SceneType<PIACardsViewController>(storyboard: Main.self, identifier: "PIACardsViewController")
+    internal static let piaCardsViewController = SceneType<PIACardsViewController>(storyboard: Self.self, identifier: "PIACardsViewController")
 
-    internal static let sideMenuNavigationController = SceneType<SideMenu.SideMenuNavigationController>(storyboard: Main.self, identifier: "SideMenuNavigationController")
+    internal static let sideMenuNavigationController = SceneType<SideMenu.SideMenuNavigationController>(storyboard: Self.self, identifier: "SideMenuNavigationController")
 
-    internal static let vpnPermissionViewController = SceneType<VPNPermissionViewController>(storyboard: Main.self, identifier: "VPNPermissionViewController")
+    internal static let vpnPermissionViewController = SceneType<VPNPermissionViewController>(storyboard: Self.self, identifier: "VPNPermissionViewController")
   }
   internal enum Signup: StoryboardType {
     internal static let storyboardName = "Signup"
 
-    internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Signup.self)
+    internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Self.self)
 
-    internal static let confirmVPNPlanViewController = SceneType<ConfirmVPNPlanViewController>(storyboard: Signup.self, identifier: "ConfirmVPNPlanViewController")
+    internal static let confirmVPNPlanViewController = SceneType<ConfirmVPNPlanViewController>(storyboard: Self.self, identifier: "ConfirmVPNPlanViewController")
 
-    internal static let gdprViewController = SceneType<GDPRViewController>(storyboard: Signup.self, identifier: "GDPRViewController")
+    internal static let gdprViewController = SceneType<GDPRViewController>(storyboard: Self.self, identifier: "GDPRViewController")
 
-    internal static let shareDataInformationViewController = SceneType<ShareDataInformationViewController>(storyboard: Signup.self, identifier: "ShareDataInformationViewController")
+    internal static let shareDataInformationViewController = SceneType<ShareDataInformationViewController>(storyboard: Self.self, identifier: "ShareDataInformationViewController")
 
-    internal static let signupSuccessViewController = SceneType<SignupSuccessViewController>(storyboard: Signup.self, identifier: "SignupSuccessViewController")
+    internal static let signupSuccessViewController = SceneType<SignupSuccessViewController>(storyboard: Self.self, identifier: "SignupSuccessViewController")
   }
   internal enum Welcome: StoryboardType {
     internal static let storyboardName = "Welcome"
 
-    internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Welcome.self)
+    internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Self.self)
 
-    internal static let getStartedViewController = SceneType<GetStartedViewController>(storyboard: Welcome.self, identifier: "GetStartedViewController")
+    internal static let getStartedViewController = SceneType<GetStartedViewController>(storyboard: Self.self, identifier: "GetStartedViewController")
 
-    internal static let loginViewController = SceneType<LoginViewController>(storyboard: Welcome.self, identifier: "LoginViewController")
+    internal static let loginViewController = SceneType<LoginViewController>(storyboard: Self.self, identifier: "LoginViewController")
 
-    internal static let magicLinkLoginViewController = SceneType<MagicLinkLoginViewController>(storyboard: Welcome.self, identifier: "MagicLinkLoginViewController")
+    internal static let magicLinkLoginViewController = SceneType<MagicLinkLoginViewController>(storyboard: Self.self, identifier: "MagicLinkLoginViewController")
 
-    internal static let piaWelcomeViewController = SceneType<PIAWelcomeViewController>(storyboard: Welcome.self, identifier: "PIAWelcomeViewController")
+    internal static let piaWelcomeViewController = SceneType<PIAWelcomeViewController>(storyboard: Self.self, identifier: "PIAWelcomeViewController")
 
-    internal static let purchaseViewController = SceneType<PurchaseViewController>(storyboard: Welcome.self, identifier: "PurchaseViewController")
+    internal static let purchaseViewController = SceneType<PurchaseViewController>(storyboard: Self.self, identifier: "PurchaseViewController")
 
-    internal static let restoreSignupViewController = SceneType<RestoreSignupViewController>(storyboard: Welcome.self, identifier: "RestoreSignupViewController")
+    internal static let restoreSignupViewController = SceneType<RestoreSignupViewController>(storyboard: Self.self, identifier: "RestoreSignupViewController")
   }
 }
-// swiftlint:enable explicit_type_interface identifier_name line_length prefer_self_in_static_references
-// swiftlint:enable type_body_length type_name
+// swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
 
 // MARK: - Implementation Details
 

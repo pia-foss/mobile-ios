@@ -66,11 +66,6 @@ final class RatingManager: RatingManagerProtocol {
     }
 
     func shouldShowFeedbackTile() -> Bool {
-        guard #available(iOS 15.0, *) else {
-            log.debug("Feedback tile is not supported below iOS 15")
-            return false
-        }
-
         guard let inAppRatingConfig else {
             log.debug("inAppRatingConfig is not loaded yet")
             return false
@@ -176,11 +171,6 @@ final class RatingManager: RatingManagerProtocol {
     // MARK: Configuration fetching
 
     func loadInAppRatingConfig() {
-        guard #available(iOS 13.0, *) else {
-            self.inAppRatingConfig = .default
-            return
-        }
-        
         let testFlightDetector = TestFlightDetector.shared
         let isStaging = testFlightDetector.isTestFlight
 
@@ -206,7 +196,6 @@ final class RatingManager: RatingManagerProtocol {
         return url
     }
 
-    @available(iOS 13.0.0, *)
     private func loadConfig<T: Codable>(file: String, url: URL, fallbackUrl: URL, urlSession: URLSessionType) async -> T? {
         do {
             let request = URLRequest(url: url)

@@ -386,10 +386,8 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         AppPreferences.shared.todayWidgetVpnProtocol = Client.preferences.vpnType.vpnProtocol
         AppPreferences.shared.todayWidgetVpnSocket = Client.preferences.vpnType.port
         AppPreferences.shared.todayWidgetVpnPort = Client.preferences.vpnType.socket
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadTimelines(ofKind: "PIAWidget")
-        }
 
+        WidgetCenter.shared.reloadTimelines(ofKind: "PIAWidget")
     }
     
     private func commitPreferences() {

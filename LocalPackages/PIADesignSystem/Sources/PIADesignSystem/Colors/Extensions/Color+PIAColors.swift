@@ -23,7 +23,6 @@
 import SwiftUI
 
 /// Represents a gradient with a start and end color.
-@available(iOS 13.0, *)
 public struct PIAGradient: Sendable {
     /// The starting color of the gradient.
     public let start: Color
@@ -48,7 +47,6 @@ public struct PIAGradient: Sendable {
 /// Text("Get Started")
 ///     .typography(.title1, color: .pia.primary)
 /// ```
-@available(iOS 13.0, *)
 public extension Color {
     /// PIA Design System colors namespace
     enum PIA {
