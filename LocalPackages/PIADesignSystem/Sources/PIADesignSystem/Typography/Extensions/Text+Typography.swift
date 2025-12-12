@@ -36,7 +36,6 @@ import SwiftUI
 /// Text("Section Header").typography(.title2, color: .primary)
 /// Text("Card Title").typography(.title3, color: .white)
 /// ```
-@available(iOS 13.0, *)
 public extension Text {
     /// Applies a typography style to the text, including font, line height, decorations, and optional color.
     /// Supports Dynamic Type for accessibility - text scales automatically with user's text size preferences.
@@ -47,39 +46,12 @@ public extension Text {
     /// - Returns: A modified Text view with the typography style applied and Dynamic Type support
     @MainActor
     func typography(_ style: TypographyStyle, color: Color? = nil) -> some View {
-        if #available(iOS 14.0, *) {
-            return self
-                .modifier(AccessibleTypographyModifier(style: style, color: color))
-        } else {
-            return self
-                .modifier(TypographyModifier(style: style, color: color))
-        }
-    }
-}
-
-/// ViewModifier that applies typography
-@available(iOS 13.0, *)
-@available(*, deprecated, renamed: "AccessibleTypographyModifier", message: "Remove this modifier once the package minimum platform is raised to .v15")
-private struct TypographyModifier: ViewModifier {
-    let style: TypographyStyle
-    let color: Color?
-
-    init(style: TypographyStyle, color: Color?) {
-        self.style = style
-        self.color = color
-    }
-
-    func body(content: Content) -> some View {
-        content
-            .font(style.font)
-            .lineSpacing(style.lineSpacing)
-            .modifier(ConditionalUnderline(enabled: style.hasUnderline))
-            .modifier(ConditionalColor(color: color))
+        self
+            .modifier(AccessibleTypographyModifier(style: style, color: color))
     }
 }
 
 /// ViewModifier that applies typography with Dynamic Type support for accessibility
-@available(iOS 14.0, *)
 private struct AccessibleTypographyModifier: ViewModifier {
     let style: TypographyStyle
     let color: Color?

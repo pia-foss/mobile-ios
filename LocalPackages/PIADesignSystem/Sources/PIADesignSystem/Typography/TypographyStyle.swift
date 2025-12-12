@@ -115,7 +115,6 @@ extension TypographyStyle {
     }
 
     /// Font weight for this typography style (used for Dynamic Type scaling)
-    @available(iOS 13.0, *)
     var fontWeight: Font.Weight {
         switch self {
         case .title1:
@@ -143,7 +142,6 @@ extension TypographyStyle {
     }
 
     /// Returns the SwiftUI Font for this typography style
-    @available(iOS 13.0, *)
     var font: Font {
         .sfPro(
             size: fontSize,

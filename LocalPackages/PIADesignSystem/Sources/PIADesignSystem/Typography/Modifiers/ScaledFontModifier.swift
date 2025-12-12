@@ -23,7 +23,6 @@
 import SwiftUI
 
 /// Applies scaled font based on typography style weight
-@available(iOS 14.0, *)
 struct ScaledFontModifier: ViewModifier {
     let weight: Font.Weight
     @ScaledMetric private var scaledSize: CGFloat

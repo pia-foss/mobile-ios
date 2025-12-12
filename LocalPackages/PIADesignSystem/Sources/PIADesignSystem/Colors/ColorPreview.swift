@@ -30,7 +30,6 @@ import SwiftUI
 ///
 /// This is a runtime representation of the PIA iOS Color design system.
 /// Figma reference: https://www.figma.com/design/9fECLgfxfFunLz7eBSOYmg/-PIA--iOS---Components?node-id=1-37
-@available(iOS 14.0, *)
 struct ColorPreview: View {
     var body: some View {
         ScrollView {
@@ -136,7 +135,6 @@ struct ColorPreview: View {
     }
 }
 
-@available(iOS 13.0, *)
 struct ColorInfo: Identifiable {
     let id = UUID()
     let name: String
@@ -145,7 +143,6 @@ struct ColorInfo: Identifiable {
     let darkHex: String
 }
 
-@available(iOS 13.0, *)
 struct GradientInfo: Identifiable {
     let id = UUID()
     let name: String
@@ -154,7 +151,6 @@ struct GradientInfo: Identifiable {
     let endHex: String
 }
 
-@available(iOS 14.0, *)
 struct ColorSection: View {
     let title: String
     let colors: [ColorInfo]
@@ -182,7 +178,6 @@ struct ColorSection: View {
     }
 }
 
-@available(iOS 14.0, *)
 struct GradientSection: View {
     let title: String
     let gradients: [GradientInfo]
@@ -209,7 +204,6 @@ struct GradientSection: View {
     }
 }
 
-@available(iOS 14.0, *)
 struct ColorSwatch: View {
     let name: String
     let color: Color
@@ -239,7 +233,6 @@ struct ColorSwatch: View {
     }
 }
 
-@available(iOS 14.0, *)
 struct GradientSwatch: View {
     let name: String
     let gradient: PIAGradient
@@ -274,13 +267,11 @@ struct GradientSwatch: View {
     }
 }
 
-@available(iOS 15.0, *)
 #Preview("Light Mode") {
     ColorPreview()
         .preferredColorScheme(.light)
 }
 
-@available(iOS 15.0, *)
 #Preview("Dark Mode") {
     ColorPreview()
         .preferredColorScheme(.dark)

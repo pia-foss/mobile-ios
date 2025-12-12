@@ -29,7 +29,6 @@ import SnapshotTesting
 @MainActor
 struct ColorSnapshotTests {
 
-    @available(iOS 14.0, *)
     @MainActor
     @Test func colorPreviewLight() {
         let view = ColorPreview()
@@ -43,7 +42,6 @@ struct ColorSnapshotTests {
         )
     }
 
-    @available(iOS 14.0, *)
     @MainActor
     @Test func colorPreviewDark() {
         let view = ColorPreview()
