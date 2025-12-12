@@ -29,7 +29,6 @@ public class SiriShortcutsManager: NSObject {
 
     public static let shared = SiriShortcutsManager()
 
-    @available(iOS 12.0, *)
     func presentConnectShortcut(inViewController viewController: UIViewController) {
     
         if AppPreferences.shared.useConnectSiriShortcuts {
@@ -48,7 +47,6 @@ public class SiriShortcutsManager: NSObject {
 
     }
     
-    @available(iOS 12.0, *)
     func presentDisconnectShortcut(inViewController viewController: UIViewController) {
     
         if AppPreferences.shared.useDisconnectSiriShortcuts {
@@ -86,7 +84,6 @@ public class SiriShortcutsManager: NSObject {
     
 }
 
-@available(iOS 12.0, *)
 extension SiriShortcutsManager: INUIAddVoiceShortcutViewControllerDelegate {
     
     public func addVoiceShortcutViewController(
@@ -124,8 +121,6 @@ extension SiriShortcutsManager: INUIAddVoiceShortcutViewControllerDelegate {
     
 }
 
-
-@available(iOS 12.0, *)
 extension SiriShortcutsManager: INUIEditVoiceShortcutViewControllerDelegate {
     
     public func editVoiceShortcutViewController(_ controller: INUIEditVoiceShortcutViewController, didUpdate voiceShortcut: INVoiceShortcut?, error: Error?) {

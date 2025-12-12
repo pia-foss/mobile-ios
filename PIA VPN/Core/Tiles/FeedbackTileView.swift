@@ -23,7 +23,6 @@
 import SwiftUI
 import PIALibrary
 
-@available(iOS 15.0, *)
 struct FeedbackTileView: View {
     @Environment(\.colorScheme) var colorScheme
 
@@ -101,7 +100,6 @@ struct FeedbackTileView: View {
     }
 
     @ViewBuilder
-    @available(iOS 15.0, *)
     private func rateButton(
         image: SwiftUI.Image,
         action: @escaping () -> Void
@@ -119,7 +117,6 @@ struct FeedbackTileView: View {
     }
 }
 
-@available(iOS 15.0, *)
 #Preview {
     ScrollView {
         FeedbackTileView()

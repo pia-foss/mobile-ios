@@ -23,7 +23,6 @@
 import Foundation
 import Intents
 
-@available(iOS 12.0, *)
 protocol SiriShortcutBuilder {
     
     var activityType: String { get set }
@@ -34,7 +33,6 @@ protocol SiriShortcutBuilder {
     
 }
 
-@available(iOS 12.0, *)
 extension SiriShortcutBuilder {
     
     func build() -> INShortcut {
@@ -48,7 +46,6 @@ extension SiriShortcutBuilder {
     
 }
 
-@available(iOS 12.0, *)
 class SiriShortcutConnect: SiriShortcutBuilder {
     
     var activityType = AppConstants.SiriShortcuts.shortcutConnect
@@ -57,7 +54,6 @@ class SiriShortcutConnect: SiriShortcutBuilder {
 
 }
 
-@available(iOS 12.0, *)
 class SiriShortcutDisconnect: SiriShortcutBuilder {
     
     var activityType = AppConstants.SiriShortcuts.shortcutDisconnect

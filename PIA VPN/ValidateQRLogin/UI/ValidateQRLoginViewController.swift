@@ -19,9 +19,7 @@ class ValidateQRLoginViewController: AutolayoutViewController {
         super.viewDidLoad()
                 
         setImageforMode(isLightMode: traitCollection.userInterfaceStyle == .light)
-        if #available(iOS 13.0, *) {
-            loadingSpinner.style = .large
-        }
+        loadingSpinner.style = .large
         loadingSpinner.startAnimating()
         
         validateQRLogin? { result in
