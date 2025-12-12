@@ -1,1 +1,1 @@
-Wir haben einen Verbindungstimer hinzugefügt, damit du sehen kannst, wie lange deine Verbindung bereits geschützt ist, und Abstürze behoben, die die Anmeldung auf dem iPad und das Neuanordnen der Dashboard-Kacheln betrafen.
+Wir haben die allgemeine App-Zuverlässigkeit verbessert, indem wir Abstürze behoben und die Benutzeroberfläche auf iPhone, iPad und Widgets optimiert haben.

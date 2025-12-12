@@ -1,1 +1,1 @@
-Nous avons ajouté un chronomètre de connexion pour que vous puissiez voir depuis combien de temps votre connexion est protégée, et corrigé des plantages affectant la connexion sur iPad et la réorganisation des tuiles du tableau de bord.
+Nous avons amélioré la fiabilité générale de l'application en corrigeant les plantages et en peaufinant l'interface utilisateur sur iPhone, iPad et widgets.

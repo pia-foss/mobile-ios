@@ -1,1 +1,1 @@
-Bağlantı sürenizin ne kadar süredir korunduğunu görebilmeniz için bir bağlantı zamanlayıcısı ekledik ve iPad'de oturum açmayı ve gösterge paneli kutucuklarını yeniden sıralamayı etkileyen çökmeleri düzelttik.
+iPhone, iPad ve widget'larda çökmeleri düzelteip kullanıcı arayüzünü iyileştirerek uygulamanın genel güvenilirliğini artırdık.

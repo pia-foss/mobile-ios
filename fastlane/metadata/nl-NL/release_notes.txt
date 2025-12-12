@@ -1,1 +1,1 @@
-We hebben een verbindingstimer toegevoegd zodat je kunt zien hoe lang je verbinding al beschermd is, en crashes verholpen die inloggen op iPad en het herschikken van dashboardtegels beïnvloedden.
+We hebben de algehele betrouwbaarheid van de app verbeterd door crashes te verhelpen en de gebruikersinterface van iPhone, iPad en widgets aan te scherpen.

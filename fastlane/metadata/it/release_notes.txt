@@ -1,1 +1,1 @@
-Abbiamo aggiunto un timer di connessione per visualizzare da quanto tempo la tua connessione è protetta e risolto i crash che interessavano il login su iPad e il riordino dei riquadri della dashboard.
+Abbiamo migliorato l'affidabilità complessiva dell'app correggendo i crash e perfezionando l'interfaccia utente su iPhone, iPad e widget.
