@@ -21,7 +21,6 @@
 //
 
 import Foundation
-import Alamofire
 
 @available(tvOS 17.0, *)
 extension Client {
@@ -147,8 +146,6 @@ extension Client {
 
         public let maceDelay: Int
 
-        let sessionManager: Session
-
         // MARK: VPN
         
         private var availableVPNProfiles: [VPNProfile]
@@ -253,12 +250,6 @@ extension Client {
             macePort = 1111
             maceDelay = 5000
 
-            let urlscfg = URLSessionConfiguration.default
-            urlscfg.timeoutIntervalForRequest = Double(webTimeout) / 1000.0
-            urlscfg.timeoutIntervalForResource = Double(webTimeout) / 1000.0
-            urlscfg.urlCache = nil
-            sessionManager = Session(configuration: urlscfg)
-            
             #if os(iOS) || os(tvOS)
             inAppPlans = [:]
             eligibleForTrial = true
