@@ -25,6 +25,9 @@ jobs:
       with:
         xcode-version: latest-stable
     
+    - name: Download tvOS Platform
+      run: xcodebuild -downloadPlatform tvOS
+    
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:

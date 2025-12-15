@@ -31,6 +31,9 @@ jobs:
       with:
         xcode-version: latest-stable
     
+    - name: Download iOS Platform
+      run: xcodebuild -downloadPlatform iOS
+    
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
