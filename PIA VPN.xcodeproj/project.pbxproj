@@ -83,13 +83,6 @@
 			remoteGlobalIDString = 0E67FC211E3F802D00EF9929;
 			remoteInfo = "PIA VPN Tunnel";
 		};
-		0EE220871F4F02D7002805AE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 291C6374183EBC210039EC03 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0EE2200B1F4EF307002805AE;
-			remoteInfo = "PIA VPN dev";
-		};
 		0EEE1BEC1E4F6EF400397DE2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 291C6374183EBC210039EC03 /* Project object */;
@@ -779,7 +772,6 @@
 			);
 			dependencies = (
 				0EEE1BED1E4F6EF400397DE2 /* PBXTargetDependency */,
-				0EE220881F4F02D7002805AE /* PBXTargetDependency */,
 			);
 			name = "PIA VPNTests";
 			productName = "PIA VPNTests";
@@ -1466,11 +1458,6 @@
 			isa = PBXTargetDependency;
 			target = 0E67FC211E3F802D00EF9929 /* PIA VPN Tunnel */;
 			targetProxy = 0EE2200D1F4EF307002805AE /* PBXContainerItemProxy */;
-		};
-		0EE220881F4F02D7002805AE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0EE2200B1F4EF307002805AE /* PIA VPN dev */;
-			targetProxy = 0EE220871F4F02D7002805AE /* PBXContainerItemProxy */;
 		};
 		0EEE1BED1E4F6EF400397DE2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
