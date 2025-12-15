@@ -11,7 +11,7 @@ platform :ios do
   anthropic_api_key = ENV['ANTHROPIC_API_KEY']
   anthropic_model = "claude-sonnet-4-5"
 
-  lane :tests do
+  lane :iOStests do
     run_tests(scheme: "PIA VPN")
   end
 

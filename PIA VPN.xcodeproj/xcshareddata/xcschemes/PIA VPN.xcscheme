@@ -48,34 +48,6 @@
                ReferencedContainer = "container:PIA VPN.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "69B70AAF2ACBF51C0072A09D"
-               BuildableName = "PIA-VPN_E2E_Tests.xctest"
-               BlueprintName = "PIA-VPN_E2E_Tests"
-               ReferencedContainer = "container:PIA VPN.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E548E1F42C1238B5001E9874"
-               BuildableName = "PIA VPN-tvOS snapshot.xctest"
-               BlueprintName = "PIA VPN-tvOS snapshot"
-               ReferencedContainer = "container:PIA VPN.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

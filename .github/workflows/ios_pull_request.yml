@@ -37,5 +37,5 @@ jobs:
       run: gem install fastlane
 
     - name: Run iOS unit tests
-      run: bundle exec fastlane tests
+      run: bundle exec fastlane iOStests
 
